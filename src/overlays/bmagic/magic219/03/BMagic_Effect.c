@@ -105,7 +105,49 @@ MATCH void func_801EF068(void) {
     g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
-INCLUDE_ASM(func_801EF118);
+MATCH void func_801EF118(void) {
+    PartyMember* cell;
+    u8           timer;
+
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (timer == 0) {
+        cell           = D_8014637C;
+        g_Task->facing = cell->facing;
+        g_Task->unk_0C = 0x20000;
+        g_Task->unk_10 = 0;
+        func_801DD350(g_Task);
+        g_Task->pos.x.fixed  = cell->pos.x.fixed + g_Task->unk_0C;
+        g_Task->pos.y.fixed  = cell->pos.y.fixed + g_Task->unk_10;
+        g_Task->pos.z.fixed  = cell->pos.z.fixed + 0x800000;
+        MAGIC219_RING_RADIUS = (g_Task->param.unk_0B >> 3) * 16 + 32;
+        MAGIC219_ORBIT_ANGLE = (((g_Task->param.unk_0B & 7) * 2 + (g_Task->param.unk_0B >> 3)) & 0xF) << 8;
+        g_Task->unk_0C       = g_BattleEffectBattler->pos.x.fixed + rsin(MAGIC219_ORBIT_ANGLE) * MAGIC219_RING_RADIUS;
+        g_Task->unk_10       = g_BattleEffectBattler->pos.y.fixed + rcos(MAGIC219_ORBIT_ANGLE) * MAGIC219_RING_RADIUS;
+        g_Task->unk_14       = g_BattleEffectBattler->pos.z.fixed;
+        g_Task->unk_25       = 29;
+        g_Task->unk_26       = 0xC0;
+        g_Task->scale.x      = 0x10000;
+        g_Task->scale.y      = 0x10000;
+        g_Task->unk_48       = 0;
+        g_Task->unk_27       = 2;
+        g_Task->unk_28       = 1;
+        g_Task->unk_24       = 0;
+        g_Task->unk_5C       = 0;
+        g_Task->unk_5D       = 0;
+        g_Task->unk_5E       = 0;
+        g_Task->unk_5F       = 0;
+        g_Task->unk_2A       = 0;
+        g_Task->unk_29       = 4;
+        g_Task->unk_2C.half  = 0;
+        g_Task->unk_2B       = 0;
+        Actor_SelectScript(0);
+        g_Task->unk_18 = ratan2(g_Task->unk_0C - g_Task->pos.x.fixed, g_Task->unk_10 - g_Task->pos.y.fixed);
+        g_Task->unk_09 = 3;
+        g_Task->timer  = 4;
+        g_Task->header.step += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF3CC);
 
@@ -144,7 +186,39 @@ MATCH void func_801EF5DC(void) {
 
 #include "overlays/bmagic/Effect_SetActiveActorMatrix.h"
 
-INCLUDE_ASM(func_801EF71C);
+MATCH void func_801EF71C(void) {
+    POLY_G3* prim;
+    long     depth;
+    long     flag;
+    s32      i;
+    s32      tpage;
+
+    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x125 : 0x55;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(5, sizeof(DR_MODE));
+    MAGIC219_RING_RADIUS = g_Task->timer << 4;
+    D_1F800014[2].vx     = FIXED_MUL(rsin(0), MAGIC219_RING_RADIUS);
+    D_1F800014[2].vy     = FIXED_MUL(rcos(0), MAGIC219_RING_RADIUS);
+    D_1F800014[2].vz     = 0;
+    D_1F800014[1].vz     = 0;
+    D_1F800014[0].vz     = 0;
+    for (i = 1; i <= 16; i++) {
+        prim = (POLY_G3*)g_GfxPrimCursor;
+        SetPolyG3(prim);
+        SetSemiTrans(prim, 1);
+        D_1F800014[0].vx = 0;
+        D_1F800014[0].vy = 0;
+        D_1F800014[1].vx = D_1F800014[2].vx;
+        D_1F800014[1].vy = D_1F800014[2].vy;
+        D_1F800014[2].vx = FIXED_MUL(rsin(i << 8), MAGIC219_RING_RADIUS);
+        D_1F800014[2].vy = FIXED_MUL(rcos(i << 8), MAGIC219_RING_RADIUS);
+        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+        setRGB0(prim, 0x60, 0x60, 0x60);
+        setRGB1(prim, 1, 1, 1);
+        setRGB2(prim, 1, 1, 1);
+        GFX_AddPrim(5, sizeof(POLY_G3));
+    }
+}
 
 /* func_801EF934 */
 #include "overlays/bmagic/BMagic_AllocEffect.h"

@@ -13,4 +13,8 @@ typedef struct Magic017Steps {
 
 extern Magic017Steps D_801EEC10;
 
+/* The battle/battle/15 sprite-cell routines, called with a battler or the effect work record. */
+u32  func_800AFB48(PartyMember* record);
+void func_800AF8F0(PartyMember* record);
+
 #endif

@@ -8,7 +8,15 @@ MATCH void func_801EEC04(void) {
     BMagic_DispatchTaskPair(func_801EEC5C, func_801EEF38);
 }
 
-INCLUDE_ASM(func_801EEC5C);
+#include "overlays/bmagic/BMagic_SpawnAtTargets.h"
+
+MATCH void func_801EEC5C(void) {
+    u32          i;
+    u32          slot;
+    PartyMember* work;
+
+    BMAGIC_SPAWN_AT_TARGETS(20);
+}
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
@@ -47,7 +55,118 @@ INCLUDE_ASM(func_801EF1A4);
 
 #include "overlays/bmagic/Effect_SetActorMatrixRolled.h"
 
-INCLUDE_ASM(func_801EF5C4);
+/* Draws seventeen steps of four projected POLY_G4 bands, each step 0x40 deeper than the last: the bands sway with
+ * the effect ticker, their radius jitters by jitter_mask and their height by up to three; the shades follow the
+ * effect counter and the first step fades to black. */
+MATCH void func_801EF5C4(s16 band_height, u16 radius, u16 jitter_mask) {
+    POLY_G4* prim;
+    long     p;
+    long     flag;
+    s32      tpage;
+    s32      i;
+
+    D_1F800000.view.effect.params[0] = radius;
+    D_1F800000.view.effect.params[1] = (g_Task->param.unk_0B & 0xF) << 8;
+    D_1F800000.view.effect.params[2] = g_Task->timer * 15;
+    D_1F800000.view.effect.params[3] = g_Task->timer * 2;
+    D_1F800000.view.effect.params[6] = band_height - RANDOM_MASK(3);
+    D_1F800014[0].vy                 = FIXED_MUL(rsin(D_1F800000.view.effect.params[1]), D_1F800000.view.effect.params[0]);
+    D_1F800014[0].vz                 = 0;
+    if (GetGraphType() == 1 || GetGraphType() == 2) {
+        tpage = 0xA5;
+    } else {
+        tpage = 0x35;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    for (i = 1; i < 18; i++) {
+        D_1F800000.view.effect.params[1] = ((g_Task->param.unk_0B + i) & 0xF) << 8;
+        if RANDOM_MASK (1) {
+            D_1F800000.view.effect.params[0] = radius + (jitter_mask & rand());
+        } else {
+            D_1F800000.view.effect.params[0] = radius - (jitter_mask & rand());
+        }
+        D_1F800000.view.effect.params[5] = D_1F800000.view.effect.params[6];
+        D_1F800000.view.effect.params[6] = band_height - RANDOM_MASK(3);
+        D_1F800014[2].vx                 = 0;
+        D_1F800014[2].vy                 = D_1F800014[0].vy;
+        D_1F800014[2].vz                 = D_1F800014[0].vz;
+        D_1F800014[3].vx                 = 0;
+        D_1F800014[3].vy                 = D_1F800014[0].vy - D_1F800000.view.effect.params[5];
+        D_1F800014[3].vz                 = D_1F800014[0].vz;
+        D_1F800014[0].vx                 = 0;
+        D_1F800014[0].vy                 = FIXED_MUL(rsin(D_1F800000.view.effect.params[1]), D_1F800000.view.effect.params[0]);
+        D_1F800014[0].vz                 = -(i << 6);
+        D_1F800014[1].vx                 = 0;
+        D_1F800014[1].vy                 = D_1F800014[0].vy - D_1F800000.view.effect.params[6];
+        D_1F800014[1].vz                 = -(i << 6);
+        prim                             = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        setRGB0(prim, D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2]);
+        setRGB1(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[2]);
+        setRGB2(prim, D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2]);
+        setRGB3(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[2]);
+        if (i == 1) {
+            setRGB2(prim, 1, 1, 1);
+            setRGB3(prim, 1, 1, 1);
+        }
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p, &flag);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        D_1F800014[0].vy -= D_1F800000.view.effect.params[6];
+        D_1F800014[1].vy -= D_1F800000.view.effect.params[6] * 2;
+        D_1F800014[2].vy -= D_1F800000.view.effect.params[5];
+        D_1F800014[3].vy -= D_1F800000.view.effect.params[5] * 2;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        setRGB0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[2]);
+        setRGB1(prim, 1, 1, 1);
+        setRGB2(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[2]);
+        setRGB3(prim, 1, 1, 1);
+        if (i == 1) {
+            setRGB2(prim, 1, 1, 1);
+            setRGB3(prim, 1, 1, 1);
+        }
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p, &flag);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        D_1F800014[0].vy += D_1F800000.view.effect.params[6] * 2;
+        D_1F800014[1].vy += D_1F800000.view.effect.params[6] * 3;
+        D_1F800014[2].vy += D_1F800000.view.effect.params[5] * 2;
+        D_1F800014[3].vy += D_1F800000.view.effect.params[5] * 3;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        setRGB0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[2]);
+        setRGB1(prim, D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2]);
+        setRGB2(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[2]);
+        setRGB3(prim, D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2]);
+        if (i == 1) {
+            setRGB2(prim, 1, 1, 1);
+            setRGB3(prim, 1, 1, 1);
+        }
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p, &flag);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        D_1F800014[0].vy += D_1F800000.view.effect.params[6] * 2;
+        D_1F800014[1].vy += D_1F800000.view.effect.params[6];
+        D_1F800014[2].vy += D_1F800000.view.effect.params[5] * 2;
+        D_1F800014[3].vy += D_1F800000.view.effect.params[5];
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        setRGB0(prim, 1, 1, 1);
+        setRGB1(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[2]);
+        setRGB2(prim, 1, 1, 1);
+        setRGB3(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[2]);
+        if (i == 1) {
+            setRGB2(prim, 1, 1, 1);
+            setRGB3(prim, 1, 1, 1);
+        }
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p, &flag);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
+        D_1F800014[0].vy -= D_1F800000.view.effect.params[6] * 3;
+    }
+}
 
 INCLUDE_ASM(func_801EFE04);
 
@@ -109,4 +228,12 @@ MATCH void Effect_DrawBolt(void) {
     }
 }
 
-INCLUDE_ASM(func_801F083C);
+#include "overlays/bmagic/BMagic_DrawFlickerRing.h"
+
+MATCH void func_801F083C(void) {
+    POLY_G3* prim;
+    s32      i;
+    s32      tpage;
+
+    BMAGIC_DRAW_FLICKER_RING(12, 12, 10);
+}

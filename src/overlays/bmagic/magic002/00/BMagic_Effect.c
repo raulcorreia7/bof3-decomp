@@ -39,6 +39,34 @@ MATCH void func_801EEEBC(void) {
 
 INCLUDE_ASM(func_801EEF84);
 
-INCLUDE_ASM(func_801EF030);
+MATCH void func_801EF030(s32 x, s32 y, u16 radius, s32 phase) {
+    SVECTOR  points[6];
+    POLY_F3* prim;
+    s32      angle;
+    u16      tpage;
+    u8       i;
+
+    for (i = 0; i < 6; i++) {
+        angle        = (i << 12) / 6 + (u16)phase;
+        points[i].vx = x + ((rsin(angle) * radius) >> 12);
+        points[i].vy = y + ((rcos(angle) * radius) >> 12);
+    }
+    tpage = GetTPage(0x3C0, 0x100, 0, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    for (i = 0; i < 2; i++) {
+        prim = (POLY_F3*)g_GfxPrimCursor;
+        SetPolyF3(prim);
+        prim->x0 = points[i].vx;
+        prim->y0 = points[i].vy;
+        prim->x1 = points[i + 2].vx;
+        prim->y1 = points[i + 2].vy;
+        prim->x2 = points[i + 4].vx;
+        prim->y2 = points[i + 4].vy;
+        setRGB0(prim, 0xFF, 0xFF, 0);
+        SetSemiTrans(prim, 1);
+        GFX_AddPrim(1, sizeof(POLY_F3));
+    }
+}
 
 INCLUDE_ASM(func_801EF1FC);

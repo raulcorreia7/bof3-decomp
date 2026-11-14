@@ -53,7 +53,31 @@ MATCH void func_801EF058(void) {
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EF0B8);
+MATCH void func_801EF0B8(void) {
+    BattleEffect* slot;
+    PartyMember*  work;
+    u32           index;
+    u8            active;
+
+    g_Task->facing = g_BattleEffectBattler->facing;
+    WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0;
+    g_Task->header.mode += 1;
+    func_800AEF98(0xC, 2);
+    BMAGIC_ALLOC_BATTLER_EFFECT();
+    work                                             = g_Task;
+    g_BattleEffects[index & BYTE_MASK].header.mode   = 1;
+    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
+    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
+    g_BattleEffects[index & BYTE_MASK].handler_index = 31;
+    g_BattleEffects[index & BYTE_MASK].target.party  = work;
+    g_Task->unk_27                                   = func_800AFB48(g_BattleEffectBattler);
+    g_Task->unk_28                                   = g_BattleEffectBattler->unk_28;
+    g_Task->unk_24                                   = g_BattleEffectBattler->unk_24;
+    func_800AF8F0(g_Task);
+    func_800AFAB8(g_Task);
+}
 
 MATCH void func_801EF324(void) {
     u16* battle_flags;
@@ -74,7 +98,36 @@ MATCH void func_801EF384(void) {
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EF3F0);
+MATCH void func_801EF3F0(void) {
+    BattleEffect* slot;
+    PartyMember*  work;
+    u32           index;
+    u8            active;
+    u8            i;
+
+    g_Task->facing = g_BattleEffectBattler->facing;
+    WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0;
+    g_Task->header.mode += 1;
+    func_800AEF98(0xC, 2);
+    for (i = 0; i < 3; i++) {
+        BMAGIC_ALLOC_BATTLER_EFFECT();
+        work                                             = g_Task;
+        g_BattleEffects[index & BYTE_MASK].header.mode   = 3;
+        g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
+        g_BattleEffects[index & BYTE_MASK].header.step   = 0;
+        g_BattleEffects[index & BYTE_MASK].handler_index = 31;
+        g_BattleEffects[index & BYTE_MASK].unk_0B        = i;
+        g_BattleEffects[index & BYTE_MASK].target.party  = work;
+        g_Task->param.unk_0B++;
+    }
+    g_Task->unk_27 = func_800AFB48(g_BattleEffectBattler);
+    g_Task->unk_28 = g_BattleEffectBattler->unk_28;
+    g_Task->unk_24 = g_BattleEffectBattler->unk_24;
+    func_800AF8F0(g_Task);
+    g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+}
 
 #include "overlays/bmagic/Effect_RestorePaletteAndReleaseActive.h"
 
@@ -180,9 +233,79 @@ MATCH void func_801EFD30(void) {
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EFD90);
+MATCH void func_801EFD90(void) {
+    BattleEffect* slot;
+    PartyMember*  work;
+    u32           index;
+    u8            active;
+    u8            i;
+    u16*          dst;
+    u16*          src;
+    PartyMember*  actor;
 
-INCLUDE_ASM(func_801F0018);
+    g_Task->facing       = g_BattleEffectBattler->facing;
+    actor                = g_BattleEffectBattler;
+    work                 = g_Task;
+    work->pos.x.fixed    = actor->pos.x.fixed;
+    work->pos.y.fixed    = actor->pos.y.fixed;
+    work->pos.z.fixed    = actor->pos.z.fixed;
+    g_Task->unk_04       = func_801F0230();
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+    func_800AEF98(0xC, 2);
+    BMAGIC_ALLOC_BATTLER_EFFECT();
+    work                                             = g_Task;
+    g_BattleEffects[index & BYTE_MASK].header.mode   = 2;
+    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
+    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
+    g_BattleEffects[index & BYTE_MASK].handler_index = 31;
+    g_BattleEffects[index & BYTE_MASK].target.party  = work;
+    g_Task->param.unk_0B += 1;
+    g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+    i   = 0;
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    for (; i < 16; i++) {
+        dst[i]      = src[i];
+        dst[i + 16] = src[i + 16];
+    }
+    g_GfxPalettePending = 1;
+}
+
+MATCH void func_801F0018(void) {
+    PartyMember* actor;
+    PartyMember* work;
+    u8           slot;
+
+    if (g_Task->param.unk_0B != 0) {
+        return;
+    }
+    if (g_Task->unk_04 != 0xFF) {
+        actor               = g_Battle.selected_actor;
+        g_Task->pos.x.fixed = actor->pos.x.fixed;
+        g_Task->pos.y.fixed = actor->pos.y.fixed;
+        g_Task->pos.z.fixed = actor->pos.z.fixed;
+        if (func_800AED5C(D_800B6BF0[g_Task->unk_04 & 3], g_Battle.target_selector) & BYTE_MASK) {
+            slot                               = Battle_AllocEffect(1, 72);
+            g_BattleEffects[slot].target.party = g_Task;
+            g_BattleEffects[slot].unk_04       = g_Task->unk_04;
+            g_BattleEffects[slot].arg.unk_09   = 21;
+            g_BattleEffects[slot].unk_0A       = 8;
+            g_Task->param.unk_0B++;
+        } else {
+            slot                               = Battle_AllocEffect(1, 72) & BYTE_MASK;
+            work                               = g_Task;
+            g_BattleEffects[slot].unk_04       = 8;
+            g_BattleEffects[slot].arg.unk_09   = 21;
+            g_BattleEffects[slot].unk_0A       = 8;
+            g_BattleEffects[slot].target.party = work;
+            g_Task->param.unk_0B++;
+        }
+    }
+    func_800AEF98(4, 0);
+    g_BattleEffectBattler->header.flags &= 0xBF;
+    g_Task->header.mode++;
+}
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
@@ -508,7 +631,13 @@ MATCH void func_801F1400(void) {
     }
 }
 
-INCLUDE_ASM(func_801F1474);
+MATCH void func_801F1474(void) {
+    /* FAKE: retail reserves 16 bytes of frame that no statement uses; pure C differs only in that frame. */
+    FAKE_STACK_PADS(u8, 16);
+    u8 count;
+
+    MAGIC008_HIT_OR_ABORT(6);
+}
 
 MATCH void func_801F16E8(void) {
     func_801E5988();
@@ -550,7 +679,17 @@ MATCH void func_801F1880(void) {
     }
 }
 
-INCLUDE_ASM(func_801F18F4);
+MATCH void func_801F18F4(void) {
+    /* FAKE: retail reserves 16 bytes of frame that no statement uses; pure C differs only in that frame. */
+    FAKE_STACK_PADS(u8, 16);
+    u8 count;
+
+    MAGIC008_HIT_OR_ABORT(9);
+    if (g_Task->header.step != 9 && g_Battle.action_id == 11 && (rand() & 7) == 0) {
+        g_BattleEffectBattler->param.unk_0B = 0xFF;
+        g_Task->header.step                 = 9;
+    }
+}
 
 MATCH void func_801F1BCC(void) {
     func_801E5988();

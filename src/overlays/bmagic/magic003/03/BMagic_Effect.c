@@ -278,7 +278,35 @@ MATCH void func_801EF708(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF7A8);
+MATCH void func_801EF7A8(void) {
+    s32 x;
+    s32 y;
+    u32 z;
+    u8  timer;
+
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (!(timer & BYTE_MASK)) {
+        x               = g_Task->pos.x.fixed;
+        y               = g_Task->pos.y.fixed;
+        z               = g_Task->pos.z.fixed;
+        g_Task->unk_0C  = 0x2000;
+        g_Task->unk_14  = 0x300000;
+        g_Task->unk_10  = 0;
+        g_Task->unk_20  = -0x80000;
+        g_Task->unk_18  = x;
+        g_Task->unk_1C  = y;
+        g_Task->scale.y = z;
+        func_801DD350(g_Task);
+        g_Task->header.flags |= 0x20;
+        g_Task->unk_5C = 3;
+        g_Task->unk_5D = -(g_Task->param.unk_0B << 4);
+        g_Task->unk_5F = -(g_Task->param.unk_0B << 4);
+        g_Task->unk_5E = -(g_Task->param.unk_0B << 4);
+        GFX_AllocPaletteFade(g_Task, D_801F0A78[g_Task->param.unk_0B].red, D_801F0A78[g_Task->param.unk_0B].green, D_801F0A78[g_Task->param.unk_0B].blue, 1);
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF918(void) {
     g_Task->pos.x.fixed += g_Task->unk_0C;
@@ -381,7 +409,25 @@ MATCH void func_801EFD4C(void) {
     g_Task->param.unk_0B += 1;
 }
 
-INCLUDE_ASM(func_801EFEC8);
+MATCH void func_801EFEC8(void) {
+    BattleEffect* image;
+    u32           slot;
+    u8            i;
+
+    for (i = 0; i < 4; i++) {
+        slot = Battle_AllocEffect(1, 1);
+        Effect_CopyActiveBattlerToSlot(slot);
+        D_801EC3A4[slot & BYTE_MASK].target.party = g_Task;
+        image                                     = &g_BattleEffects[slot & BYTE_MASK];
+        image->unk_06                             = 1;
+        image->handler_index                      = 1;
+        image->header.mode                        = 1;
+        image->header.step                        = 0;
+        image->unk_0B                             = i;
+        image->arg.unk_09                         = (i + 1) * 4 + 1;
+        g_Task->param.unk_0B += 1;
+    }
+}
 
 MATCH void func_801F0078(void) {
     PartyMember* battler;
@@ -401,13 +447,136 @@ MATCH void func_801F0078(void) {
     }
 }
 
-INCLUDE_ASM(func_801F0164);
+MATCH void func_801F0164(s32 index) {
+    POLY_FT4* prim;
+    s32       tpage;
+    u16       x;
+    u16       y;
+    u8        i;
+    u8        glyph;
+    u8        length;
+    s32       u;
+    s32       v;
 
-INCLUDE_ASM(func_801F03F0);
+    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    length = D_801F0A9C[(u8)index];
+    x      = g_Task->unk_2E.half - ((length >> 1) * 12 + (length & 1) * 6);
+    y      = g_Task->unk_30.half;
+    for (i = 0; D_801F0AA0[(u8)index][i] != 0; i++) {
+        glyph = D_801F0AA0[(u8)index][i] - 0x3F;
+        if (D_801F0AA0[(u8)index][i] != 0xFF) {
+            prim = (POLY_FT4*)g_GfxPrimCursor;
+            SetPolyFT4(prim);
+            setXY4(prim, x, y, x + 12, y, x, y + 12, x + 12, y + 12);
+            prim->tpage = GetTPage(0, 0, 0x3C0, 0);
+            prim->clut  = GetClut(0, 0x1E0);
+            setRGB0(prim, 0x80, 0x80, 0x80);
+            u = (glyph % 21) * 12;
+            v = (glyph / 21) * 12;
+            setUV4(prim, u, v + 36, u + 12, v + 36, u, v + 48, u + 12, v + 48);
+            GFX_AddPrim(2, sizeof(POLY_FT4));
+        } else {
+            x -= 6;
+        }
+        x += 12;
+    }
+}
 
-INCLUDE_ASM(func_801F0550);
+MATCH void func_801F03F0(s32 dir) {
+    POLY_FT4* prim;
+    s32       tpage;
+    u16       x;
+    u16       y;
+    s32       u;
 
-INCLUDE_ASM(func_801F07B0);
+    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    prim = (POLY_FT4*)g_GfxPrimCursor;
+    x    = g_Task->unk_2E.half;
+    y    = g_Task->unk_30.half;
+    SetPolyFT4(prim);
+    setXY4(prim, x, y, x + 12, y, x, y + 12, x + 12, y + 12);
+    prim->tpage = GetTPage(0, 0, 0x3C0, 0);
+    prim->clut  = GetClut(D_801F0AD4[(u8)dir], 0x1E0);
+    u           = ((u8)dir + 15) * 12;
+    setUV4(prim, u, 0x30, u + 12, 0x30, u, 0x3C, u + 12, 0x3C);
+    setRGB0(prim, 0x80, 0x80, 0x80);
+    GFX_AddPrim(2, sizeof(POLY_FT4));
+}
+
+MATCH void func_801F0550(s32 value) {
+    POLY_FT4* prim;
+    s32       tpage;
+    u16       x;
+    u16       y;
+    u8        ones;
+    u8        tens;
+    s32       u;
+    u16       left;
+
+    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    tens = (u8)value / 10;
+    ones = (u8)value % 10;
+    prim = (POLY_FT4*)g_GfxPrimCursor;
+    x    = g_Task->unk_2E.half;
+    y    = g_Task->unk_30.half;
+    left = x - 66;
+    SetPolyFT4(prim);
+    setXY4(prim, left, y, x - 54, y, left, y + 12, x - 54, y + 12);
+    prim->tpage = GetTPage(0, 0, 0x3C0, 0);
+    prim->clut  = GetClut(0, 0x1E0);
+    u           = ones * 12;
+    setUV4(prim, u + 72, 24, u + 84, 24, u + 72, 36, u + 84, 36);
+    setRGB0(prim, 0x80, 0x80, 0x80);
+    GFX_AddPrim(2, sizeof(POLY_FT4));
+    left = x - 78;
+    if (tens != 0) {
+        prim = (POLY_FT4*)g_GfxPrimCursor;
+        SetPolyFT4(prim);
+        setXY4(prim, left, y, x - 66, y, left, y + 12, x - 66, y + 12);
+        prim->tpage = GetTPage(0, 0, 0x3C0, 0);
+        prim->clut  = GetClut(0, 0x1E0);
+        u           = tens * 12;
+        setUV4(prim, u + 72, 24, u + 84, 24, u + 72, 36, u + 84, 36);
+        setRGB0(prim, 0x80, 0x80, 0x80);
+        GFX_AddPrim(2, sizeof(POLY_FT4));
+    }
+}
+
+MATCH void func_801F07B0(s32 index) {
+    TILE* tile;
+    s32   tpage;
+
+    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x125 : 0x55;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    tile = (TILE*)g_GfxPrimCursor;
+    SetTile(tile);
+    SetSemiTrans(tile, 1);
+    tile->x0 = g_Task->unk_2E.half - (D_801F0B10[(u8)index].x + 4);
+    tile->y0 = g_Task->unk_30.half - (D_801F0B10[(u8)index].y + 4);
+    tile->w  = D_801F0B10[(u8)index].w + 8;
+    tile->h  = D_801F0B10[(u8)index].h + 8;
+    setRGB0(tile, 0x20, 0x20, 0x20);
+    GFX_AddPrim(2, sizeof(TILE));
+    tile = (TILE*)g_GfxPrimCursor;
+    SetTile(tile);
+    SetSemiTrans(tile, 1);
+    tile->x0 = g_Task->unk_2E.half - (D_801F0B10[(u8)index].x + 6);
+    tile->y0 = g_Task->unk_30.half - (D_801F0B10[(u8)index].y + 6);
+    tile->w  = D_801F0B10[(u8)index].w + 12;
+    tile->h  = D_801F0B10[(u8)index].h + 12;
+    setRGB0(tile, 0x20, 0x20, 0x20);
+    GFX_AddPrim(2, sizeof(TILE));
+    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+}
 
 /* func_801F09C4 */
 #include "overlays/bmagic/BMagic_AllocEffect.h"

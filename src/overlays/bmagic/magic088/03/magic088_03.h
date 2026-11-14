@@ -4,6 +4,10 @@
 /* The bmagic/magic088/03 overlay. Only this image includes the file. */
 
 #include "overlays/bmagic/bmagic.h"
+
+s32 func_801EF34C(void);
+
+extern SVECTOR D_1F800014[];
 #include "overlays/battle/battle/15/battle_15.h"
 
 extern Callback D_801EEC04[];
@@ -11,6 +15,8 @@ extern Callback D_801F0030[];
 void            func_801EF68C(void);
 
 extern s32      D_801F003C[];
+/* The red, green and blue weight of each of the six bands, one table per effect index (byte 0x04). */
+extern u8       D_801EFFE0[][6][3];
 extern Callback D_801F005C[];
 void            func_801EFAE8(void);
 void            func_801EFB34(void);

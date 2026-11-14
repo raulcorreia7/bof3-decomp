@@ -101,7 +101,26 @@ MATCH void func_801EF174(void) {
     func_801EF590(D_801F0B8C, 112, 172);
 }
 
-INCLUDE_ASM(func_801EF2DC);
+MATCH void func_801EF2DC(void) {
+    u8 slot;
+
+    slot = g_Battle.target_selector - BATTLE_PARTY_CHARACTERS_COUNT;
+    if (g_BattleEnemyBattlers[slot].unk_7F != 0) {
+        func_801EF924(g_BattleEnemyBattlers[slot].name, 112, 48);
+        func_801EFB00(g_BattleEnemyBattlers[slot].exp, 112, 100);
+        func_801EF590(D_801F0B6C, 176, 100);
+        func_801EFB00(g_BattleEnemyBattlers[slot].zenny, 112, 120);
+    } else {
+        func_801EF924(g_BattleEnemyBattlers[slot].name, 112, 48);
+        func_801EF590(D_801F0B88, 156, 100);
+        func_801EF590(D_801F0B6C, 176, 100);
+        func_801EF590(D_801F0B88, 156, 120);
+    }
+    func_801EF590(D_801F0B70, 176, 120);
+    func_801EF76C(D_801F0B74, 90, 138);
+    func_801EF470(g_BattleEnemyBattlers[slot].drops[0].item & BYTE_MASK, g_BattleEnemyBattlers[slot].drops[0].item >> 8, 152);
+    func_801EF470(g_BattleEnemyBattlers[slot].drops[1].item & BYTE_MASK, g_BattleEnemyBattlers[slot].drops[1].item >> 8, 172);
+}
 
 MATCH void func_801EF470(u8 item_id, u8 category, s32 y) {
     /* FAKE: the record pointer must stay in s0 through the switch; an unpinned local scales the table index in v1, and the best pure-C body differs in 11 instructions at the same 0x120-byte size. */
@@ -131,7 +150,25 @@ MATCH void func_801EF470(u8 item_id, u8 category, s32 y) {
 
 INCLUDE_ASM(func_801EF590);
 
-INCLUDE_ASM(func_801EF76C);
+MATCH void func_801EF76C(u8* text, s32 x, s32 y) {
+    POLY_FT4* prim;
+
+    GFX_AddDitheredDrawMode(2, getTPage(0, 0, 0x140, 0x100));
+    while (*text != 0) {
+        prim = GFX_CURSOR(POLY_FT4);
+        SetPolyFT4(prim);
+        setXY4(prim, x, y, x + 8, y, x, y + 8, x + 8, y + 8);
+        setRGB0(prim, 128, 128, 128);
+        setTPage(prim, 0, 1, 0x3C0, 0);
+        setClut(prim, 0, 0x1E0);
+        setUV4(prim, (*text - 0x40) * 8, 8, (*text - 0x40) * 8 + 8, 8, (*text - 0x40) * 8, 16, (*text - 0x40) * 8 + 8, 16);
+        if (*text != 0xFF) {
+            GFX_AddPrim(2, sizeof(POLY_FT4));
+        }
+        text++;
+        x += 8;
+    }
+}
 
 INCLUDE_ASM(func_801EF924);
 

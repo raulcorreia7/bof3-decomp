@@ -6,7 +6,41 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/func_801EEC18.h"
 
-INCLUDE_ASM(func_801EEC88);
+MATCH void func_801EEC88(void) {
+    PartyMember* actor;
+    PartyMember* work;
+    u32          slot;
+    u32          i;
+
+    actor               = g_Battle.selected_actor;
+    g_Task->facing      = actor->facing;
+    g_Task->pos.x.fixed = actor->pos.x.fixed;
+    g_Task->pos.y.fixed = actor->pos.y.fixed;
+    g_Task->pos.z.fixed = actor->pos.z.fixed;
+    GFX_FreePaletteFadeTarget(actor);
+    g_Task->timer                      = GFX_AllocPaletteFade(actor, 0, 0, 0, 1);
+    slot                               = Battle_AllocEffect(1, 12) & BYTE_MASK;
+    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].header.mode  = 0;
+    for (i = 0; i < 4; i++) {
+        slot                               = Battle_AllocEffect(1, 12) & BYTE_MASK;
+        work                               = g_Task;
+        g_BattleEffects[slot].unk_03       = i;
+        g_BattleEffects[slot].header.mode  = 1;
+        g_BattleEffects[slot].unk_0B       = i * 4;
+        g_BattleEffects[slot].target.party = work;
+    }
+    for (i = 0; i < 4; i++) {
+        slot                               = Battle_AllocEffect(1, 12) & BYTE_MASK;
+        g_BattleEffects[slot].target.party = g_Task;
+        g_BattleEffects[slot].unk_03       = i;
+        g_BattleEffects[slot].header.mode  = 2;
+    }
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    g_Task->unk_09       = 8;
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801EEE70(void) {
     g_PaletteFades[g_Task->timer].offset.red--;
@@ -264,4 +298,33 @@ MATCH void func_801F0314(void) {
 
 #include "overlays/bmagic/Effect_DrawBolt.h"
 
-INCLUDE_ASM(func_801F070C);
+MATCH void func_801F070C(void) {
+    POLY_G3* primitive;
+    s32*     radius;
+    s32      angle;
+    s32      i;
+
+    D_1F800000 = RANDOM_MASK(7) + g_Task->timer * 3;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
+    i      = 0;
+    radius = &D_1F800000;
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+
+    do {
+        primitive = GFX_BeginPolyG3(1);
+
+        setXY0(primitive, g_Task->unk_2E.half, g_Task->unk_30.half);
+        angle         = i << 9;
+        primitive->x1 = g_Task->unk_2E.half + FIXED_MUL(rsin(angle), *radius);
+        primitive->y1 = g_Task->unk_30.half + FIXED_MUL(rcos(angle), *radius);
+        i++;
+        angle         = i << 9;
+        primitive->x2 = g_Task->unk_2E.half + FIXED_MUL(rsin(angle), *radius);
+        primitive->y2 = g_Task->unk_30.half + FIXED_MUL(rcos(angle), *radius);
+        setRGB0(primitive, g_Task->timer * 14, g_Task->timer * 14, g_Task->timer * 12);
+        setRGB1(primitive, 1, 1, 1);
+        setRGB2(primitive, 1, 1, 1);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
+    } while (i < 8);
+}

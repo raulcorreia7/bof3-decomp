@@ -6,7 +6,44 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC28);
 
-INCLUDE_ASM(func_801EED48);
+MATCH void func_801EED48(void) {
+    PartyMember* actor;
+    PartyMember* owner;
+    u16          i;
+    u8           slot;
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
+    }
+    g_Task->unk_04       = func_801EF2E8();
+    actor                = g_Battle.selected_actor;
+    g_Task->facing       = actor->facing;
+    g_Task->pos.x.fixed  = actor->pos.x.fixed;
+    g_Task->pos.y.fixed  = actor->pos.y.fixed;
+    g_Task->pos.z.fixed  = actor->pos.z.fixed;
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 60;
+    g_Task->timer        = 0;
+    g_Task->header.mode += 1;
+    slot                               = Battle_AllocEffect(1, 98);
+    owner                              = g_Task;
+    g_BattleEffects[slot].header.mode  = 0;
+    g_BattleEffects[slot].arg.unk_09   = 1;
+    g_BattleEffects[slot].target.party = owner;
+    g_Task->param.unk_0B += 1;
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+    for (i = 0; i < 256; i++) {
+        MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW)[i] = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW)[i] | 0x8000;
+    }
+    for (i = 0; i < 16; i++) {
+        MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW)[i] = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00)[i] | 0x8000;
+    }
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = *MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW)  = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
+    g_GfxPalettePending                                      = 1;
+}
 
 /* func_801EEF5C */
 #include "overlays/bmagic/Effect_PreparePalette.h"
@@ -103,7 +140,39 @@ MATCH void func_801EF4A8(void) {
 
 #include "overlays/bmagic/Effect_TickOnTimerZero.h"
 
-INCLUDE_ASM(func_801EF698);
+MATCH void func_801EF698(void) {
+    POLY_FT4* prim;
+    s16       x;
+    s16       y;
+    s16       half_w;
+    s16       height;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, (GetGraphType() == 1 || GetGraphType() == 2) ? 0x2A5 : 0xB5, 0);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
+    if (g_Task->unk_04 != 0) {
+        height = 0x60;
+        half_w = 0x38;
+    } else {
+        height = 0x40;
+        half_w = 0x18;
+    }
+    prim                             = (POLY_FT4*)g_GfxPrimCursor;
+    D_1F800000.view.effect.params[3] = g_Task->unk_09 << 3;
+    x                                = g_Task->unk_2E.half;
+    y                                = g_Task->unk_30.half;
+    SetPolyFT4(prim);
+    SetSemiTrans(prim, 1);
+    setXY4(prim, x - half_w, y - height, x + half_w, y - height, x - half_w, y, x + half_w, y);
+    prim->tpage = GetTPage(1, 1, 0x340, 0x100);
+    prim->clut  = GetClut(0, 0x1FA);
+    if (g_Task->unk_04 != 0) {
+        setUV4(prim, 8, 8, 0x78, 8, 8, 0x68, 0x78, 0x68);
+    } else {
+        setUV4(prim, 0x78, 8, 0xA8, 8, 0x78, 0x48, 0xA8, 0x48);
+    }
+    setRGB0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
+}
 
 MATCH void func_801EF8A8(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 6), 1, g_Task);
@@ -111,7 +180,36 @@ MATCH void func_801EF8A8(void) {
 
 #include "overlays/bmagic/Effect_DrawRings.h"
 
-INCLUDE_ASM(func_801EFA60);
+MATCH void func_801EFA60(void) {
+    s16* angle;
+    s32  speed;
+    u8   count;
+    u8   phase;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
+        if (g_Task->param.unk_0B == 0) {
+            SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
+        }
+        g_Task->unk_0C      = 8;
+        angle               = &D_1F800000.view.effect.params[2];
+        phase               = g_Task->param.unk_0B & 0xF;
+        *angle              = phase << 8;
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin(phase << 8) * g_Task->unk_0C;
+        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos(*angle) * g_Task->unk_0C;
+        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x800000;
+        speed               = ((rand() & 3) << 20) + 0x200000;
+        g_Task->unk_14      = speed;
+        g_Task->unk_20      = speed / 16;
+        g_Task->unk_5D      = (RANDOM_MASK(7)) + 6;
+        g_Task->unk_5E      = (RANDOM_MASK(7)) + 6;
+        g_Task->unk_5F      = (RANDOM_MASK(7)) + 6;
+        g_Task->unk_09      = 0;
+        g_Task->timer       = 16;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EFC30(void) {
     s32  phase;

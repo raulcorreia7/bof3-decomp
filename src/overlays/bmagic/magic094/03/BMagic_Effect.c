@@ -124,4 +124,50 @@ MATCH void func_801EF654(void) {
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }
 
-INCLUDE_ASM(func_801EF710);
+MATCH void func_801EF710(void) {
+    POLY_G3* prim;
+    s32      tpage;
+    s32      i;
+    s32      angle;
+    s32      next;
+
+    switch (g_Task->header.mode) {
+        /* FAKE: retail compare tree needs a third case below 2 on the default body; the bytes do not say which mode. */
+        case 1:
+        default:
+            D_1F800000_WORD[0] = g_Task->unk_09 * 3 + 16;
+            break;
+        case 2:
+            D_1F800000_WORD[0] = 64;
+            break;
+        case 3:
+            D_1F800000_WORD[0] = 64 - g_Task->unk_09 * 2;
+            break;
+    }
+    i = 0;
+    do {
+        if (GetGraphType() == 1 || GetGraphType() == 2) {
+            tpage = 0xA5;
+        } else {
+            tpage = 0x35;
+        }
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+        prim = (POLY_G3*)g_GfxPrimCursor;
+        SetPolyG3(prim);
+        SetSemiTrans(prim, 1);
+        prim->x0 = g_BattleEffectBattler->unk_2E.half;
+        prim->y0 = g_BattleEffectBattler->unk_30.half;
+        angle    = i << 7;
+        prim->x1 = g_BattleEffectBattler->unk_2E.half + FIXED_MUL(rsin(angle), D_1F800000_WORD[0]);
+        prim->y1 = g_BattleEffectBattler->unk_30.half + FIXED_MUL(rcos(angle), D_1F800000_WORD[0]);
+        next     = (i + 1) << 7;
+        prim->x2 = g_BattleEffectBattler->unk_2E.half + FIXED_MUL(rsin(next), D_1F800000_WORD[0]);
+        prim->y2 = g_BattleEffectBattler->unk_30.half + FIXED_MUL(rcos(next), D_1F800000_WORD[0]);
+        setRGB0(prim, 0x20, 0x20, 0xC0);
+        setRGB1(prim, 1, 1, 1);
+        setRGB2(prim, 1, 1, 1);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
+        i++;
+    } while (i < 32);
+}

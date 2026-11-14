@@ -25,7 +25,54 @@ MATCH void func_801EEC10(void) {
     }
 }
 
-INCLUDE_ASM(func_801EED18);
+MATCH void func_801EED18(void) {
+    PartyMember* owner;
+    s32          i;
+    u8           slot;
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
+    }
+    Battle_CenterCamera();
+    Battle_ProjectRange();
+    if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
+        if (!BATTLER_IS_PLAYER(g_Battle.active_battler)) {
+            g_Task->facing = D_8014637C->facing;
+        } else {
+            g_Task->facing = D_8014637C->facing ^ 2;
+        }
+    } else {
+        if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
+            g_Task->facing = D_8014637C->facing;
+        } else {
+            g_Task->facing = D_8014637C->facing ^ 2;
+        }
+    }
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 16;
+    g_Task->header.mode += 1;
+    for (i = 0; i < 8; i++) {
+        slot                               = Battle_AllocEffect(1, 94);
+        owner                              = g_Task;
+        g_BattleEffects[slot].header.mode  = 0;
+        g_BattleEffects[slot].target.party = owner;
+        g_BattleEffects[slot].unk_04       = D_801F0548[i] >> 4;
+        g_BattleEffects[slot].unk_0B       = i;
+        g_BattleEffects[slot].arg.unk_09   = D_801F0548[i] + 1;
+        g_Task->param.unk_0B += 1;
+    }
+    for (i = 0; i < 256; i++) {
+        MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW)[i] = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW)[i] | 0x8000;
+    }
+    for (i = 0; i < 16; i++) {
+        MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW)[i] = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00)[i] | 0x8000;
+    }
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = *MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW)  = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
+    g_GfxPalettePending                                      = 1;
+}
 
 #include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
 
@@ -52,9 +99,96 @@ MATCH void func_801EF0A8(void) {
     g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
-INCLUDE_ASM(func_801EF174);
+MATCH void func_801EF174(void) {
+    PartyMember* work;
+    PartyMember* sprite;
+    s16*         angle;
+    u8           count;
 
-INCLUDE_ASM(func_801EF420);
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
+        angle                            = &D_1F800000.view.effect.params[2];
+        *angle                           = g_Task->param.unk_0B << 9;
+        D_1F800000.view.effect.params[0] = (rand() & 0x10) + 0x18;
+        g_Task->pos.x.fixed              = g_BattleEffectBattler->pos.x.fixed + rsin(*angle) * D_1F800000.view.effect.params[0];
+        g_Task->pos.y.fixed              = g_BattleEffectBattler->pos.y.fixed + rcos(*angle) * D_1F800000.view.effect.params[0];
+        g_Task->facing                   = g_BattleEffectBattler->facing;
+        g_Task->unk_0C                   = 0x20000;
+        g_Task->unk_10                   = 0;
+        g_Task->unk_14                   = TO_COORD(1536);
+        func_801DD350(g_Task);
+        g_Task->pos.x.fixed += g_Task->unk_0C;
+        g_Task->pos.y.fixed += g_Task->unk_10;
+        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + g_Task->unk_14;
+        g_Task->unk_0C      = -0x2000;
+        g_Task->unk_10      = 0;
+        g_Task->unk_20      = 0x600000;
+        func_801DD350(g_Task);
+        g_Task->unk_25      = 0x1D;
+        g_Task->unk_26      = 0;
+        g_Task->unk_27      = 0x1A;
+        g_Task->unk_28      = 1;
+        work                = g_Task;
+        work->unk_48        = 2;
+        work->scale.x       = 0x10000;
+        work->scale.y       = 0x10000;
+        g_Task->unk_5D      = 0;
+        g_Task->unk_5E      = 0;
+        g_Task->unk_5F      = 0;
+        g_Task->unk_5C      = 0;
+        g_Task->unk_2A      = 0;
+        g_Task->unk_29      = 4;
+        sprite              = g_Task;
+        sprite->unk_2B      = 1;
+        sprite->unk_2C.half = 0;
+        g_Task->unk_24      = 0;
+        Actor_SelectScript(0);
+        g_Task->param.unk_0B = 0;
+        g_Task->unk_09       = 16;
+        g_Task->timer        = 16;
+        g_Task->header.step += 1;
+    }
+}
+
+MATCH void func_801EF420(void) {
+    PartyMember* work;
+    PartyMember* owner;
+    u8           count;
+    u8           i;
+    u8           slot;
+
+    work = g_Task;
+    work->pos.x.fixed += work->unk_0C;
+    work->pos.y.fixed += work->unk_10;
+    work->unk_14 -= work->unk_20;
+    work->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + work->unk_14;
+    work->param.unk_0B += 8;
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (!(count & BYTE_MASK)) {
+        if (g_Task->unk_04 & 1) {
+            SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
+        } else {
+            SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+        }
+        g_Task->unk_04 = 0;
+        for (i = 0; i < 8; i++) {
+            slot = BMagic_AllocEffect();
+            if (slot != GAME_NONE) {
+                owner                                  = g_Task;
+                BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
+                BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;
+                BMAGIC_EFFECT_SLOTS[slot].target.party = owner;
+                g_Task->unk_04++;
+            }
+        }
+        Actor_SelectScript(1);
+        g_AreaCameraAngle.vx += 0x14;
+        g_Task->unk_09 = 4;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF5C0(void) {
     s16* state;

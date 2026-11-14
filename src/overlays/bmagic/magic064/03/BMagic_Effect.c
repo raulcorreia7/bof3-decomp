@@ -248,7 +248,28 @@ MATCH void func_801F007C(void) {
     func_801E5988();
 }
 
-INCLUDE_ASM(func_801F009C);
+/* Run the magic064 step, then draw every live ring under one draw mode. */
+MATCH void func_801F009C(void) {
+    Magic064RingSteps handlers;
+    s32               tpage;
+    u16               i;
+
+    handlers = D_801EEC5C;
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
+    if (GetGraphType() == 1 || GetGraphType() == 2) {
+        tpage = 0x8F;
+    } else {
+        tpage = 0x2F;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    for (i = 0; i < MAGIC064_RING_COUNT; i++) {
+        if (D_801F13B4[i].unk_00 != 0) {
+            D_801F28B4 = &D_801F13B4[i];
+            func_801F0448();
+        }
+    }
+}
 
 MATCH void func_801F01C4(void) {
     g_Task->param.unk_0B = 0;
@@ -329,12 +350,44 @@ MATCH void func_801F03D8(void) {
 MATCH void func_801F0448(void) {
     Callback table[2] = {func_801F04A0, func_801F05A4};
 
-    table[((u8*)D_801F28B4)[1]]();
+    table[D_801F28B4->mode]();
 }
 
-INCLUDE_ASM(func_801F04A0);
+/* Start the magic064 ring at the active battler: a random angle, both radii at the effect ticker,
+ * their speeds, and the centre at the battler screen point plus its facing offset. */
+MATCH void func_801F04A0(void) {
+    D_801F28B4->angle       = rand() & 0xFFF;
+    D_801F28B4->inner.fixed = TO_COORD(g_Task->param.unk_0B);
+    D_801F28B4->outer.fixed = TO_COORD(g_Task->param.unk_0B);
+    D_801F28B4->inner_speed = 0x32000;
+    D_801F28B4->outer_speed = 0x19800;
+    D_801F28B4->x           = BATTLE_ACTIVE_PARTY.unk_2E.signed_half + D_801F138C[BATTLE_ACTIVE_PARTY.facing][0];
+    D_801F28B4->y           = BATTLE_ACTIVE_PARTY.unk_30.signed_half + D_801F138C[BATTLE_ACTIVE_PARTY.facing][1];
+    D_801F28B4->mode += 1;
+}
 
-INCLUDE_ASM(func_801F05A4);
+/* Spread the magic064 ring: grow both radii by their speeds, raise the speeds by a quarter and
+ * draw five spokes between the radii; past an outer radius of 448 the ring ends. */
+MATCH void func_801F05A4(void) {
+    D_801F28B4->inner.fixed += D_801F28B4->inner_speed;
+    D_801F28B4->outer.fixed += D_801F28B4->outer_speed;
+    D_801F28B4->inner_speed = D_801F28B4->inner_speed * 5 / 4;
+    D_801F28B4->outer_speed = D_801F28B4->outer_speed * 5 / 4;
+    func_801F0B8C(D_801F28B4->x + FIXED_MUL(rcos(D_801F28B4->angle), D_801F28B4->inner.part.integer), D_801F28B4->y + FIXED_MUL(rsin(D_801F28B4->angle), D_801F28B4->inner.part.integer),
+                  D_801F28B4->x + FIXED_MUL(rcos(D_801F28B4->angle), D_801F28B4->outer.part.integer), D_801F28B4->y + FIXED_MUL(rsin(D_801F28B4->angle), D_801F28B4->outer.part.integer));
+    func_801F0B8C(D_801F28B4->x + FIXED_MUL(rcos(D_801F28B4->angle + 1), D_801F28B4->inner.part.integer), D_801F28B4->y + FIXED_MUL(rsin(D_801F28B4->angle + 1), D_801F28B4->inner.part.integer),
+                  D_801F28B4->x + FIXED_MUL(rcos(D_801F28B4->angle + 1), D_801F28B4->outer.part.integer), D_801F28B4->y + FIXED_MUL(rsin(D_801F28B4->angle + 1), D_801F28B4->outer.part.integer));
+    func_801F0B8C(D_801F28B4->x + FIXED_MUL(rcos(D_801F28B4->angle + 2), D_801F28B4->inner.part.integer), D_801F28B4->y + FIXED_MUL(rsin(D_801F28B4->angle + 2), D_801F28B4->inner.part.integer),
+                  D_801F28B4->x + FIXED_MUL(rcos(D_801F28B4->angle + 2), D_801F28B4->outer.part.integer), D_801F28B4->y + FIXED_MUL(rsin(D_801F28B4->angle + 2), D_801F28B4->outer.part.integer));
+    func_801F0B8C(D_801F28B4->x + FIXED_MUL(rcos(D_801F28B4->angle + 3), D_801F28B4->inner.part.integer), D_801F28B4->y + FIXED_MUL(rsin(D_801F28B4->angle + 3), D_801F28B4->inner.part.integer),
+                  D_801F28B4->x + FIXED_MUL(rcos(D_801F28B4->angle + 3), D_801F28B4->outer.part.integer), D_801F28B4->y + FIXED_MUL(rsin(D_801F28B4->angle + 3), D_801F28B4->outer.part.integer));
+    func_801F0B8C(D_801F28B4->x + FIXED_MUL(rcos(D_801F28B4->angle + 4), D_801F28B4->inner.part.integer), D_801F28B4->y + FIXED_MUL(rsin(D_801F28B4->angle + 4), D_801F28B4->inner.part.integer),
+                  D_801F28B4->x + FIXED_MUL(rcos(D_801F28B4->angle + 4), D_801F28B4->outer.part.integer), D_801F28B4->y + FIXED_MUL(rsin(D_801F28B4->angle + 4), D_801F28B4->outer.part.integer));
+    if (D_801F28B4->outer.part.integer > 0x1C0) {
+        D_801F28B4->unk_00 = 0;
+        D_801F28B4->mode   = 0;
+    }
+}
 
 MATCH void func_801F0B8C(s16 x0, s16 y0, s16 x1, s16 y1) {
     LINE_G2* primitive;
@@ -443,12 +496,67 @@ MATCH void func_801F0EEC(u32 sprite, s32 blend, s32 color) {
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(SPRT));
 }
 
-INCLUDE_ASM(func_801F103C);
+/* Rebuild the field map view around the scroll target: clear the cell links, place the camera,
+ * stream the cell rows the remainder has passed and project every cell of the grid. */
+MATCH void func_801F103C(void) {
+    AreaCell* cell;
+    u16*      order;
+    s32       row;
+    s32       col;
 
-/* Report the map cell the projected point lands on: out[0] and out[1] receive
+    for (row = 0; row < 0x400; row++) {
+        for (col = 0; col < 2; col++) {
+            g_AreaCellPrims[row][col].pad1 = 0;
+            g_AreaCellPrims[row][col].pad2 = 0;
+        }
+    }
+    g_AreaCameraX     = 0x7FFF - (g_AreaScrollTargetX >> 8);
+    g_AreaCameraY     = 0x8000 - (g_AreaScrollTargetY >> 8);
+    g_AreaTileOriginX = (g_AreaScrollTargetX >> 16) - 24;
+    g_AreaTileOriginY = (g_AreaScrollTargetY >> 16) + 3;
+    D_8014933D        = 0;
+    if (g_AreaMapBundle.scroll_1E != 0) {
+        g_AreaTileRemainderY = g_AreaMapBundle.scroll_1E;
+    } else {
+        g_AreaTileRemainderY = -g_AreaCameraHeight * 2;
+    }
+    D_80149336 = 0;
+    while ((s16)g_AreaTileRemainderY >= 0x200) {
+        Area_LoadCellRowsNext();
+        g_AreaTileRemainderY -= 0x200;
+    }
+    while ((s16)g_AreaTileRemainderY < -0x1FF) {
+        Area_LoadCellRowsPrev();
+        g_AreaTileRemainderY += 0x200;
+    }
+    g_AreaCameraStep          = 0;
+    g_AreaCameraHeightStep    = 0;
+    g_AreaHeightOffsetEnabled = 0;
+    g_AreaCameraRefreshCount  = 3;
+    for (row = 0; row < 56; row++) {
+        for (col = 0; col < 28; col++) {
+            cell          = &g_AreaCells[row][col];
+            cell->prim_id = 0;
+            BMagic_ProjectCell(row, col, cell);
+        }
+    }
+    row   = 0x3FF;
+    order = &g_AreaCellPrimFreeIds[0x3FF];
+    for (; row >= 0; row--) {
+        *order = row;
+        order--;
+    }
+    g_AreaCellPrimFreeIndex = 1;
+    g_AreaGridColCursor     = 0x1B;
+    g_AreaGridRowCursor     = 0x37;
+    func_80154438();
+    Area_RunBundleOpcodes();
+}
+
+/* Report the map cell the projected point lands on: out receives
  * the cell, or zero when the probe leaves the map or hits an empty cell. */
 /* func_801F12B8 */
-MATCH void BMagic_ProjectCell(s32 px, s32 py, u8* out) {
+MATCH void BMagic_ProjectCell(s32 px, s32 py, AreaCell* out) {
     u8* buffer;
     s32 width;
     s32 x2;
@@ -467,14 +575,14 @@ MATCH void BMagic_ProjectCell(s32 px, s32 py, u8* out) {
                 if (y < g_AreaMapBundle.height - 1) {
                     value = *(u16*)(buffer + ((g_AreaMapBundle.grid_off4_02 * 4) + (x2 = x * 2) + (y * width * 2)));
                     if (value != 0) {
-                        out[0] = x;
-                        out[1] = y;
+                        out->tile_x = x;
+                        out->tile_y = y;
                         return;
                     }
                 }
             }
         }
     }
-    out[0] = 0;
-    out[1] = 0;
+    out->tile_x = 0;
+    out->tile_y = 0;
 }

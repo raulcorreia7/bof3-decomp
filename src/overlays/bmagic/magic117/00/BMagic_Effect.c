@@ -19,7 +19,20 @@ MATCH void func_801EED2C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEE40);
+MATCH void func_801EEE40(void) {
+    g_PaletteFades[g_Task->param.unk_0B].offset.red--;
+    g_PaletteFades[g_Task->param.unk_0B].offset.green--;
+    g_PaletteFades[g_Task->param.unk_0B].offset.blue--;
+    if (--g_Task->unk_09 == 0) {
+        if (--g_Task->timer != 0) {
+            g_Task->header.mode--;
+        } else {
+            GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
+            func_800AF814(g_Battle.target_selector);
+            g_Task->header.mode++;
+        }
+    }
+}
 
 #include "shared/Effect_PlayOnce.h"
 

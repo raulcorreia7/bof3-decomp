@@ -24,7 +24,40 @@ MATCH void func_801EEC28(void) {
     }
 }
 
-INCLUDE_ASM(func_801EED28);
+MATCH void func_801EED28(void) {
+    PartyMember* task;
+    PartyMember* battler;
+    u8           i;
+    u8           slot;
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
+    }
+    g_Task->facing                     = g_BattleEffectBattler->facing;
+    battler                            = g_BattleEffectBattler;
+    task                               = g_Task;
+    task->pos.x.fixed                  = battler->pos.x.fixed;
+    task->pos.y.fixed                  = battler->pos.y.fixed;
+    task->pos.z.fixed                  = battler->pos.z.fixed;
+    slot                               = Battle_AllocEffect(1, 50);
+    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].header.mode  = 0;
+    if (g_Battle.encounter != 0 && g_BattleCurrentEnemy->unk_F0 == 0x29) {
+        slot                               = Battle_AllocEffect(1, 50);
+        g_BattleEffects[slot].target.party = g_Task;
+        g_BattleEffects[slot].header.mode  = 1;
+    }
+    g_GfxPalettePending = 1;
+    for (i = 0; i < 16; i++) {
+        MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW)[i] = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW)[i] | 0x8000;
+    }
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = *MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    g_Task->param.unk_0B = 1;
+    g_Task->header.mode += 1;
+}
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
 
@@ -90,7 +123,43 @@ MATCH void func_801EF324(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF3B8);
+MATCH void func_801EF3B8(void) {
+    PartyMember* work;
+    PartyMember* actor;
+    s32          angle;
+
+    Battle_CenterCamera();
+    angle          = ratan2(g_Task->pos.x.fixed - g_BattleEffectBattler->pos.x.fixed, g_Task->pos.y.fixed - g_BattleEffectBattler->pos.y.fixed);
+    g_Task->facing = g_BattleEffectBattler->facing;
+    switch (g_BattleEnemyBattlers[g_Battle.active_battler - 3].enemy_id.byte.kind) {
+        /* FAKE: retail compare tree needs a third case above 0x72 on the default body; the bytes keep no value for it. */
+        case 0x73:
+        default:
+            g_Task->unk_0C = 0x6000;
+            g_Task->unk_10 = 0;
+            g_Task->unk_14 = TO_COORD(64);
+            break;
+        case 0x10:
+            g_Task->unk_0C = 0x10000;
+            g_Task->unk_10 = 0;
+            g_Task->unk_14 = TO_COORD(128);
+            break;
+        case 0x72:
+            g_Task->unk_0C = 0x1C000;
+            g_Task->unk_10 = 0;
+            g_Task->unk_14 = TO_COORD(256);
+            break;
+    }
+    func_801DD350(g_Task);
+    work              = g_Task;
+    actor             = g_BattleEffectBattler;
+    work->pos.x.fixed = actor->pos.x.fixed + work->unk_0C;
+    work->pos.y.fixed = actor->pos.y.fixed + work->unk_10;
+    work->pos.z.fixed = actor->pos.z.fixed + work->unk_14;
+    work->unk_09      = 0;
+    work->unk_14      = angle & 0xFFF;
+    g_Task->header.step++;
+}
 
 MATCH void func_801EF540(void) {
     s32 angle;
@@ -138,7 +207,54 @@ MATCH void func_801EF660(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF7E8);
+/* Draw the magic046 glow quad around the effect: the radius grows with byte 0x09, the shade with
+ * the timer (byte 0x0A). */
+MATCH void func_801EF7E8(void) {
+    POLY_GT4* prim;
+    s32       tpage;
+
+    if (GetGraphType() == 1 || GetGraphType() == 2) {
+        tpage = 0xA5;
+    } else {
+        tpage = 0x35;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    prim = (POLY_GT4*)g_GfxPrimCursor;
+    SetPolyGT4(prim);
+    SetSemiTrans(prim, 1);
+    if (g_Task->unk_09 < 8) {
+        D_1F800000.view.effect.params[0] = (g_Task->unk_09 + 1) * 6;
+    } else {
+        D_1F800000.view.effect.params[0] = g_Task->unk_09 * 2 + 0x20;
+    }
+    D_1F800000.view.effect.params[4] = g_Task->timer * 20;
+    D_1F800000.view.effect.params[2] = g_Task->unk_2E.half;
+    D_1F800000.view.effect.params[3] = g_Task->unk_30.half;
+    prim->x0                         = D_1F800000.view.effect.params[2] + FIXED_MUL(rsin(0xC00), D_1F800000.view.effect.params[0]);
+    prim->y0                         = D_1F800000.view.effect.params[3] + FIXED_MUL(rcos(0xC00), D_1F800000.view.effect.params[0]);
+    prim->x1                         = D_1F800000.view.effect.params[2] + FIXED_MUL(rsin(0x800), D_1F800000.view.effect.params[0]);
+    prim->y1                         = D_1F800000.view.effect.params[3] + FIXED_MUL(rcos(0x800), D_1F800000.view.effect.params[0]);
+    prim->x2                         = D_1F800000.view.effect.params[2] + FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
+    prim->y2                         = D_1F800000.view.effect.params[3] + FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
+    prim->x3                         = D_1F800000.view.effect.params[2] + FIXED_MUL(rsin(0x400), D_1F800000.view.effect.params[0]);
+    prim->y3                         = D_1F800000.view.effect.params[3] + FIXED_MUL(rcos(0x400), D_1F800000.view.effect.params[0]);
+    prim->tpage                      = GetTPage(0, 1, 832, 256);
+    prim->clut                       = GetClut(0, 506);
+    prim->u0                         = 1;
+    prim->v0                         = 1;
+    prim->u1                         = 31;
+    prim->v1                         = 1;
+    prim->u2                         = 1;
+    prim->v2                         = 31;
+    prim->u3                         = 31;
+    prim->v3                         = 31;
+    setRGB0(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[4]);
+    setRGB1(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[4]);
+    setRGB2(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[4]);
+    setRGB3(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[4]);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_GT4));
+}
 
 MATCH void func_801EFB90(void) {
     SVECTOR pos;

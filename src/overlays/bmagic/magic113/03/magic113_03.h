@@ -3,13 +3,12 @@
 
 /* The bmagic/magic113/03 overlay. Only this image includes the file. */
 
-/* 0x1F800000 scratchpad */
-#define GAME_SCRATCH_BASE_WORD
-
 #include "overlays/bmagic/bmagic.h"
 
 /* The orbit radius the effect keeps in the scratchpad word; func_801EF944 scales its sin and cos by it. */
-#define s_Magic113OrbitRadius D_1F800000
+#define s_Magic113OrbitRadius D_1F800000.view.scenario.math_00
+/* The three corners func_801EF4F0 projects for each ring triangle. */
+extern SVECTOR D_1F800014[];
 
 /* Count the effect timer up and finish the effect at 12. */
 static inline void Effect_CountUpTimer(void) {
@@ -42,6 +41,9 @@ static inline void Effect_CountUpTimer(void) {
     COORD_INT(g_BattleEffects[slot].pos.z) = COORD_INT(g_Task->pos.z);             \
     g_Task->header.mode += 1
 
+void func_8015D104(s32 slot, s32 amount);
+void SND_StartVolumeSweep(s32 voice);
+
 #define MAGIC113_STEP_COUNT 8
 
 typedef struct Magic113Steps {
@@ -59,5 +61,8 @@ void            func_801EFDA0(void);
 extern Callback D_801F0BCC[];
 extern Callback D_801F0BD8[];
 void            func_801F02CC(void);
+
+/* The corner angles of the outline, in steps of 273 (a fifteenth of a turn). */
+extern s8 D_801F0BB8[];
 
 #endif

@@ -23,7 +23,48 @@ MATCH void func_801EEFA4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF010);
+MATCH void func_801EF010(void) {
+    u8 slot;
+    u8 count;
+    u8 battler;
+    u8 i;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        if (g_Battle.target_selector & 0x40) {
+            for (i = 0; i < 8; i++) {
+                battler = i + BATTLE_PARTY_CHARACTERS_COUNT;
+                if (!Battle_SlotIsBlocked(battler)) {
+                    slot                               = Battle_AllocEffect(1, 0x13);
+                    g_BattleEffects[slot].target.party = g_Task;
+                    g_BattleEffects[slot].header.mode  = 2;
+                    g_BattleEffects[slot].unk_03       = i;
+                    g_BattleEffects[slot].unk_04       = 5;
+                    g_BattleEffects[slot].pos.x.fixed  = g_BattleEnemyBattlers[i].pos.x.fixed;
+                    g_BattleEffects[slot].pos.y.fixed  = g_BattleEnemyBattlers[i].pos.y.fixed;
+                    g_BattleEffects[slot].pos.z.fixed  = g_BattleEnemyBattlers[i].pos.z.fixed;
+                    g_Task->param.unk_0B += 1;
+                }
+            }
+        } else {
+            for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
+                if (!Battle_SlotIsBlocked(i)) {
+                    slot                               = Battle_AllocEffect(1, 0x13);
+                    g_BattleEffects[slot].target.party = g_Task;
+                    g_BattleEffects[slot].header.mode  = 2;
+                    g_BattleEffects[slot].unk_04       = 5;
+                    g_BattleEffects[slot].unk_03       = i;
+                    g_BattleEffects[slot].pos.x.fixed  = g_Game.members[i].pos.x.fixed;
+                    g_BattleEffects[slot].pos.y.fixed  = g_Game.members[i].pos.y.fixed;
+                    g_BattleEffects[slot].pos.z.fixed  = g_Game.members[i].pos.z.fixed;
+                    g_Task->param.unk_0B += 1;
+                }
+            }
+        }
+        g_Task->header.mode += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
@@ -96,7 +137,29 @@ MATCH void func_801EFF24(void) {
 
 #include "overlays/bmagic/Effect_TickOnTimerZero.h"
 
-INCLUDE_ASM(func_801F00C4);
+MATCH void func_801F00C4(void) {
+    POLY_G4* prim;
+
+    GFX_AddDitheredDrawMode(2, getTPage(0, 1, 320, 256));
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    SetSemiTrans(prim, 1);
+    if (g_BattleEffectBattler->facing & 1) {
+        setXY4(prim, 0, 0, 319, 0, 0, 239, 319, 239);
+    } else {
+        setXY4(prim, 319, 0, 0, 0, 319, 239, 0, 239);
+    }
+    D_1F800000.view.effect.params[0] = g_Task->unk_09;
+    D_1F800000.view.effect.params[1] = g_Task->unk_09 * 8;
+    prim->r0 = prim->r3 = D_1F800000.view.effect.params[0];
+    prim->g0 = prim->g3 = D_1F800000.view.effect.params[0];
+    prim->b0 = prim->b3 = D_1F800000.view.effect.params[0];
+    prim->r1 = prim->r2 = D_1F800000.view.effect.params[1];
+    prim->g1 = prim->g2 = D_1F800000.view.effect.params[1];
+    prim->b1 = prim->b2 = D_1F800000.view.effect.params[1];
+    GFX_AddPrim(2, sizeof(POLY_G4));
+    GFX_AddDitheredDrawMode(2, getTPage(0, 0, 320, 256));
+}
 
 MATCH void func_801F02A0(void) {
     SYS_DISPATCH_TASK(g_BMagicEffectModes + 12, 2, g_Task);

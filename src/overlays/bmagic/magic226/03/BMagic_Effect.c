@@ -7,7 +7,54 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/Effect_RunSlots.h"
 
-INCLUDE_ASM(func_801EED18);
+MATCH void func_801EED18(void) {
+    u16* dst;
+    u16* src;
+    u32  slot;
+    s32  i;
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
+    }
+    Battle_CenterCamera();
+    Battle_ProjectRange();
+    if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
+        if (g_Battle.active_battler >= BATTLE_PARTY_CHARACTERS_COUNT) {
+            g_Task->facing = D_8014637C->facing;
+        } else {
+            g_Task->facing = D_8014637C->facing ^ 2;
+        }
+    } else if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
+        g_Task->facing = D_8014637C->facing;
+    } else {
+        g_Task->facing = D_8014637C->facing ^ 2;
+    }
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0x10;
+    g_Task->header.mode += 1;
+    slot                               = Battle_AllocEffect(1, 0x5F) & BYTE_MASK;
+    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].header.mode  = 0;
+    g_Task->param.unk_0B += 1;
+    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    i   = 0;
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    for (; i < 256; i++) {
+        *dst++ = *src++ | 0x8000;
+    }
+    i   = 0;
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW);
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
+    for (; i < 16; i++) {
+        *dst++ = *src++ | 0x8000;
+    }
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = *MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW)  = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
+    g_GfxPalettePending                                      = 1;
+}
 
 #include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
 
@@ -99,7 +146,45 @@ MATCH void func_801EF698(void) {
 
 #include "overlays/bmagic/Effect_SetActiveActorMatrix.h"
 
-INCLUDE_ASM(func_801EF814);
+MATCH void func_801EF814(void) {
+    POLY_G3* prim;
+    long     depth;
+    long     flag;
+    s32      i;
+    s32      tpage;
+
+    if (GetGraphType() == 1) {
+        tpage = 0x125;
+    } else if (GetGraphType() == 2) {
+        tpage = 0x125;
+    } else {
+        tpage = 0x55;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(5, sizeof(DR_MODE));
+    D_1F800000.view.effect.params[0] = g_Task->param.unk_0B;
+    D_1F800000.view.effect.params[5] = g_Task->timer << 2;
+    D_1F800014[2].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[2].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[2].vz                 = 0;
+    D_1F800014[1].vz                 = 0;
+    D_1F800014[0].vz                 = 0;
+
+    for (i = 1; i <= 64; i++) {
+        prim             = GFX_BeginPolyG3(1);
+        D_1F800014[0].vx = 0;
+        D_1F800014[0].vy = 0;
+        D_1F800014[1].vx = D_1F800014[2].vx;
+        D_1F800014[1].vy = D_1F800014[2].vy;
+        D_1F800014[2].vx = FIXED_MUL(rsin(i << 6), D_1F800000.view.effect.params[0]);
+        D_1F800014[2].vy = FIXED_MUL(rcos(i << 6), D_1F800000.view.effect.params[0]);
+        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+        setRGB0(prim, LOHU(D_1F800000.view.effect.params[5]), LOHU(D_1F800000.view.effect.params[5]), LOHU(D_1F800000.view.effect.params[5]));
+        setRGB1(prim, LOHU(D_1F800000.view.effect.params[5]), LOHU(D_1F800000.view.effect.params[5]), LOHU(D_1F800000.view.effect.params[5]));
+        setRGB2(prim, LOHU(D_1F800000.view.effect.params[5]), LOHU(D_1F800000.view.effect.params[5]), LOHU(D_1F800000.view.effect.params[5]));
+        GFX_AddPrim(5, sizeof(POLY_G3));
+    }
+}
 
 #include "overlays/bmagic/BMagic_DrawDarkRing.h"
 
@@ -251,7 +336,58 @@ MATCH void func_801F068C(void) {
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
-INCLUDE_ASM(func_801F07D4);
+MATCH void func_801F07D4(void) {
+    POLY_G4* prim;
+    long     depth;
+    long     flag;
+    s32      i;
+    s32      x;
+    s32      y;
+    s32      tpage;
+
+    D_1F800000.view.effect.params[0] = g_Task->unk_09 * 24;
+    D_1F800000.view.effect.params[1] = g_Task->unk_09 << 5;
+    D_1F800000.view.effect.params[5] = g_Task->timer * 12;
+    D_1F800000.view.effect.params[6] = g_Task->timer * 6;
+    D_1F800000.view.effect.params[7] = g_Task->timer * 6;
+    D_1F800014[0].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[1]);
+    D_1F800014[0].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[1]);
+    D_1F800014[1].vz                 = -64;
+    D_1F800014[0].vz                 = -64;
+    D_1F800014[2].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[2].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[3].vz                 = 0;
+    D_1F800014[2].vz                 = 0;
+    for (i = 1; i <= 32; i++) {
+        D_1F800014[1].vx = D_1F800014[0].vx;
+        D_1F800014[1].vy = D_1F800014[0].vy;
+        D_1F800014[0].vx = FIXED_MUL(rsin(i << 7), D_1F800000.view.effect.params[1]);
+        D_1F800014[0].vy = FIXED_MUL(rcos(i << 7), D_1F800000.view.effect.params[1]);
+        D_1F800014[3].vx = D_1F800014[2].vx;
+        D_1F800014[3].vy = D_1F800014[2].vy;
+        D_1F800014[2].vx = FIXED_MUL(rsin(i << 7), D_1F800000.view.effect.params[0]);
+        D_1F800014[2].vy = FIXED_MUL(rcos(i << 7), D_1F800000.view.effect.params[0]);
+        x                = (D_1F800014[2].vx << 9) + g_Task->pos.x.fixed;
+        y                = (D_1F800014[2].vy << 9) + g_Task->pos.y.fixed;
+        if (GetGraphType() == 1 || GetGraphType() == 2) {
+            tpage = 0xA5;
+        } else {
+            tpage = 0x35;
+        }
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+        Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        setRGB0(prim, 1, 1, 1);
+        setRGB1(prim, 1, 1, 1);
+        setRGB2(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
+        setRGB3(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
+        /* Retail advances the cursor 40 bytes, a POLY_FT4, past this 36-byte POLY_G4. */
+        Area_AddCellPrim(x, y, 0, sizeof(POLY_FT4));
+    }
+}
 
 /* func_801F0B8C */
 #include "overlays/bmagic/BMagic_AllocEffect.h"

@@ -6,7 +6,43 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
-INCLUDE_ASM(func_801EEC80);
+MATCH void func_801EEC80(void) {
+    PartyMember* battler;
+    PartyMember* work;
+    PartyMember* task;
+    PartyMember* owner;
+    u16*         dst;
+    u16*         src;
+    u8           slot;
+    u8           i;
+
+    g_Task->facing = g_BattleEffectBattler->facing;
+    battler        = g_BattleEffectBattler;
+    work           = g_Task;
+    WorldPos_Copy(&work->pos, &battler->pos);
+    work->param.unk_0B = 0;
+    g_Task->header.mode++;
+    slot                               = Battle_AllocEffect(1, 60);
+    task                               = g_Task;
+    g_BattleEffects[slot].header.mode  = 0;
+    g_BattleEffects[slot].target.party = task;
+    g_Task->param.unk_0B++;
+    slot                               = Battle_AllocEffect(1, 60);
+    owner                              = g_Task;
+    g_BattleEffects[slot].header.mode  = 1;
+    g_BattleEffects[slot].target.party = owner;
+    g_Task->param.unk_0B++;
+    i   = 0;
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    do {
+        dst[i]      = src[i];
+        dst[i + 16] = src[i + 16];
+        i++;
+    } while (i < 16);
+    g_GfxPalettePending = 1;
+    SND_QueueSelectionFx(0x100);
+}
 
 INCLUDE_ASM(func_801EEDFC);
 
@@ -83,10 +119,54 @@ MATCH void func_801EF388(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF430);
+#include "overlays/bmagic/Effect_OffsetByTargetPose.h"
 
-INCLUDE_ASM(func_801EF600);
+MATCH void func_801EF430(void* task) {
+    PartyMember* work;
+    u32          slot;
+    u8           kind;
 
-INCLUDE_ASM(func_801EF7FC);
+    EFFECT_OFFSET_BY_TARGET_POSE(D_801EFD24, D_801EFCCC, D_801EFC74);
+}
+
+MATCH void func_801EF600(u8 start, u16 radius) {
+    LINE_G2* line;
+    s32      tpage;
+    u8       i;
+
+    D_1F800000.view.effect.params[0] = g_Task->unk_2E.half;
+    D_1F800000.view.effect.params[1] = g_Task->unk_30.half;
+    tpage                            = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+    GFX_AddDitheredDrawMode(3, tpage);
+    for (i = start; i < start + 32; i += 8) {
+        line = (LINE_G2*)g_GfxPrimCursor;
+        SetLineG2(line);
+        SetSemiTrans(line, 1);
+        D_1F800000.view.effect.params[4] = (i & 0x1F) << 7;
+        line->x0                         = D_1F800000.view.effect.params[0];
+        line->y0                         = D_1F800000.view.effect.params[1];
+        line->x1                         = D_1F800000.view.effect.params[0] + ((rcos(D_1F800000.view.effect.params[4]) * radius) >> 12);
+        line->y1                         = D_1F800000.view.effect.params[1] + ((rsin(D_1F800000.view.effect.params[4]) * radius) >> 12);
+        line->r0                         = 0x80;
+        line->g0                         = 0x70;
+        line->b0                         = 0x60;
+        line->r1                         = 1;
+        line->g1                         = 1;
+        line->b1                         = 1;
+        GFX_AddPrim(3, sizeof(LINE_G2));
+    }
+    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    GFX_AddDitheredDrawMode(3, tpage);
+}
+
+#include "overlays/bmagic/Effect_DrawGlowFan.h"
+
+MATCH void func_801EF7FC(void) {
+    POLY_G3* poly;
+    s32      tpage;
+    s32      i;
+
+    EFFECT_DRAW_GLOW_FAN(g_Task->timer, 0x80);
+}
 
 INCLUDE_ASM(func_801EFA3C);

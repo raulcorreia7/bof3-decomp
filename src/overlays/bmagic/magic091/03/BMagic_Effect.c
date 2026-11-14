@@ -23,10 +23,23 @@ INCLUDE_ASM(func_801EECCC);
 
 #include "overlays/bmagic/func_801EF1B8.h"
 
-INCLUDE_ASM(func_801EF240);
+#include "overlays/bmagic/func_801EF240.h"
+
+MATCH void func_801EF240(void) {
+    POLY_GT4* prim;
+    long      depth;
+    long      flag;
+    s32       i;
+    s32       tpage;
+    s32       x;
+    s32       y;
+    s32       phase;
+
+    BMAGIC_DRAW_RING_BAND(0xA5, 0x35, 1);
+}
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
-INCLUDE_ASM(func_801EF7B0);
+#include "overlays/bmagic/func_801EF7B0.h"
 
 #include "overlays/bmagic/func_801EF9E4.h"

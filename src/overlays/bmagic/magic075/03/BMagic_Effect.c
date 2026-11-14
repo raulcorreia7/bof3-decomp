@@ -6,7 +6,41 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
-INCLUDE_ASM(func_801EEC70);
+MATCH void func_801EEC70(void) {
+    PartyMember* actor;
+    PartyMember* work;
+    u32          slot;
+    u8           i;
+    u16*         dst;
+    u16*         src;
+
+    actor                = g_Battle.selected_actor;
+    g_Task->pos.x.fixed  = actor->pos.x.fixed;
+    g_Task->pos.y.fixed  = actor->pos.y.fixed;
+    g_Task->pos.z.fixed  = actor->pos.z.fixed;
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+    i = 0;
+    do {
+        slot                               = Battle_AllocEffect(1, 37) & BYTE_MASK;
+        work                               = g_Task;
+        g_BattleEffects[slot].unk_0B       = i;
+        g_BattleEffects[slot].arg.unk_09   = i * 5 + 1;
+        g_BattleEffects[slot].header.mode  = 0;
+        g_BattleEffects[slot].target.party = work;
+        i++;
+    } while (i < 7);
+    GFX_FreePaletteFadeTarget(actor);
+    g_Task->timer = GFX_AllocPaletteFade(actor, 0, 0, 0, 1);
+    i             = 0;
+    dst           = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src           = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    for (; i < 16; i++) {
+        dst[i] = src[i];
+    }
+    g_GfxPalettePending = 1;
+    SND_QueueSelectionFx(0x100);
+}
 
 INCLUDE_ASM(func_801EEDE0);
 
@@ -68,6 +102,66 @@ MATCH void func_801EF2A8(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF2F4);
+MATCH void func_801EF2F4(s32 radius) {
+    POLY_G3* prim;
+    s32      i;
+    s32      tpage;
 
-INCLUDE_ASM(func_801EF500);
+    radius += g_FrameCount & 1;
+    for (i = 0; i < 16; i++) {
+        if (GetGraphType() == 1 || GetGraphType() == 2) {
+            tpage = 0xA5;
+        } else {
+            tpage = 0x35;
+        }
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
+        prim = (POLY_G3*)g_GfxPrimCursor;
+        SetPolyG3(prim);
+        SetSemiTrans(prim, 1);
+        prim->x0 = g_Task->unk_2E.half;
+        prim->y0 = g_Task->unk_30.half;
+        prim->x1 = g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), radius);
+        prim->y1 = g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), radius);
+        prim->x2 = g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), radius);
+        prim->y2 = g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), radius);
+        setRGB0(prim, 0x60, 0x60, 0x60);
+        setRGB1(prim, 0x20, 0x20, 0x40);
+        setRGB2(prim, 0x20, 0x20, 0x40);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_G3));
+    }
+}
+
+MATCH void func_801EF500(s32 outer, s32 inner) {
+    POLY_G4* prim;
+    s32      i;
+    s32      tpage;
+
+    outer += g_FrameCount & 1;
+    inner += g_FrameCount & 1;
+    for (i = 0; i < 16; i++) {
+        if (GetGraphType() == 1 || GetGraphType() == 2) {
+            tpage = 0xA5;
+        } else {
+            tpage = 0x35;
+        }
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        prim->x0 = g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), outer);
+        prim->y0 = g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), outer);
+        prim->x1 = g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), outer);
+        prim->y1 = g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), outer);
+        prim->x2 = g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), inner);
+        prim->y2 = g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), inner);
+        prim->x3 = g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), inner);
+        prim->y3 = g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), inner);
+        setRGB0(prim, 0x20, 0x20, 0x40);
+        setRGB1(prim, 0x20, 0x20, 0x40);
+        setRGB2(prim, 1, 1, 1);
+        setRGB3(prim, 1, 1, 1);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_G4));
+    }
+}

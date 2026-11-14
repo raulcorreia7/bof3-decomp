@@ -26,7 +26,35 @@ MATCH void func_801EEEE8(void) {
 
 INCLUDE_ASM(func_801EEF80);
 
-INCLUDE_ASM(func_801EF118);
+MATCH void func_801EF118(void) {
+    PartyMember** selected;
+    PartyMember*  work;
+    VECTOR        pos;
+    u16*          flags;
+
+    Actor_StepAnimLoop();
+    selected = &g_Battle.selected_actor;
+    pos.vx   = ((*selected)->pos.x.fixed >> 9) - 0x4000;
+    pos.vy   = ((*selected)->pos.y.fixed >> 9) - 0x4000;
+    pos.vz   = (COORD_INT((*selected)->pos.z) + 0xC0) >> 1;
+    func_800AF3A0(pos, 0x30);
+    if (func_800AF66C(*selected, 0x8000)) {
+        BATTLE_RAISE_STATE(BATTLE_STATE_DAMAGE_APPLIED);
+        Battle_MarkDamaged(g_Battle.target_selector);
+        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_AREA, 0x03));
+        g_Task->header.flags |= 0x20;
+        g_Task->unk_5C = 1;
+        g_Task->unk_5D = 0;
+        g_Task->unk_5E = 0;
+        g_Task->unk_5F = 0;
+        g_Task->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - g_Task->pos.x.fixed, g_BattleEffectBattler->pos.y.fixed - g_Task->pos.y.fixed);
+        work           = g_Task;
+        work->unk_14   = 0x40;
+        work->unk_09   = 16;
+        work->unk_20   = -8;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF2B0(void) {
     s32          angle;

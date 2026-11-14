@@ -8,7 +8,34 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 INCLUDE_ASM(func_801EEC88);
 
-INCLUDE_ASM(func_801EED60);
+MATCH void func_801EED60(void) {
+    PartyMember* saved;
+    u8           slot;
+
+    if ((g_FrameCount & 7) == 0) {
+        slot = Battle_AllocEffect(1, 0x56);
+        if (slot != 0xFF) {
+            g_BattleEffects[slot].header.mode = 0;
+            g_BattleEffects[slot].header.step = 0;
+            g_BattleEffects[slot].unk_2E      = 220;
+            g_BattleEffects[slot].unk_30      = 250;
+            if (g_Task->unk_09 & 1) {
+                g_BattleEffects[slot].unk_2E += 20;
+            }
+            g_BattleEffects[slot].unk_0A       = g_Task->unk_09;
+            g_BattleEffects[slot].target.party = g_Task;
+            g_Task->unk_09 += 1;
+            g_Task->param.unk_0B += 1;
+        }
+        if (g_Task->unk_09 == 6) {
+            g_Task->header.mode += 1;
+        }
+        saved  = g_Task;
+        g_Task = g_BattleEffectBattler;
+        Actor_StepAnimLoop();
+        g_Task = saved;
+    }
+}
 
 MATCH void func_801EEED8(void) {
     PartyMember* saved_work;
@@ -39,9 +66,83 @@ MATCH void func_801EEFA4(void) {
     g_ScriptTable = AREA_SCRIPT_TABLE;
 }
 
-INCLUDE_ASM(func_801EF04C);
+MATCH void func_801EF04C(void) {
+    s32 left;
 
-INCLUDE_ASM(func_801EF3A0);
+    if (g_Battle.active_battler < 3) {
+        if (g_BattleEffectBattler->unk_09 & 1) {
+            left           = g_Task->unk_2E.signed_half - 40;
+            g_Task->unk_0C = ((g_Game.members[g_Battle.active_battler].unk_2E.signed_half - left) << 4) / 8;
+            g_Task->unk_10 = ((g_Game.members[g_Battle.active_battler].unk_30.signed_half - g_Task->unk_30.signed_half) << 4) / 8;
+        } else {
+            left           = g_Task->unk_2E.signed_half - 20;
+            g_Task->unk_0C = ((g_Game.members[g_Battle.active_battler].unk_2E.signed_half - left) << 4) / 8;
+            g_Task->unk_10 = ((g_Game.members[g_Battle.active_battler].unk_30.signed_half - g_Task->unk_30.signed_half) << 4) / 8;
+        }
+    } else {
+        if (g_BattleEffectBattler->unk_09 & 1) {
+            left           = g_Task->unk_2E.signed_half - 40;
+            g_Task->unk_0C = ((g_BattleEnemyBattlers[g_Battle.active_battler - 3].unk_2E - left) << 4) / 8;
+            g_Task->unk_10 = ((g_BattleEnemyBattlers[g_Battle.active_battler - 3].unk_30 - g_Task->unk_30.signed_half) << 4) / 8;
+        } else {
+            left           = g_Task->unk_2E.signed_half - 20;
+            g_Task->unk_0C = ((g_BattleEnemyBattlers[g_Battle.active_battler - 3].unk_2E - left) << 4) / 8;
+            g_Task->unk_10 = ((g_BattleEnemyBattlers[g_Battle.active_battler - 3].unk_30 - g_Task->unk_30.signed_half) << 4) / 8;
+        }
+    }
+    g_Task->unk_18      = g_Task->unk_2E.signed_half << 4;
+    g_Task->unk_1C      = g_Task->unk_30.signed_half << 4;
+    g_Task->unk_25      = 30;
+    g_Task->unk_26      = 0;
+    g_Task->unk_48      = 1;
+    g_Task->unk_27      = 0xA0;
+    g_Task->unk_28      = 0;
+    g_Task->unk_24      = 0x84;
+    g_Task->unk_5D      = 0;
+    g_Task->unk_5E      = 0;
+    g_Task->unk_5F      = 0;
+    g_Task->unk_5C      = 0;
+    g_Task->unk_2A      = 0;
+    g_Task->unk_29      = 3;
+    g_Task->unk_2C.half = 0;
+    g_Task->unk_2B      = 0;
+    Actor_SelectScript((g_Battle.target_selector - 3) & 1);
+    g_Task->unk_09 = 3;
+    g_Task->header.step += 1;
+}
+
+MATCH void func_801EF3A0(void) {
+    u8 slot;
+
+    g_Task->unk_2E.half = g_Task->unk_18 >> 4;
+    g_Task->unk_30.half = g_Task->unk_1C >> 4;
+    g_Task->unk_18 += g_Task->unk_0C;
+    g_Task->unk_1C += g_Task->unk_10;
+    if (g_Battle.active_battler < 3) {
+        if (g_Task->unk_30.signed_half < g_Game.members[g_Battle.active_battler].unk_30.signed_half - 20) {
+            slot                               = Battle_AllocEffect(1, 0x56);
+            g_BattleEffects[slot].header.mode  = 1;
+            g_BattleEffects[slot].header.step  = 0;
+            g_BattleEffects[slot].unk_2E       = g_Task->unk_2E.half;
+            g_BattleEffects[slot].unk_30       = g_Task->unk_30.half;
+            g_BattleEffects[slot].unk_0A       = g_Task->timer;
+            g_BattleEffects[slot].target.party = g_BattleEffectBattler;
+            g_Task->header.step += 1;
+        }
+    } else {
+        if (g_Task->unk_30.signed_half < g_BattleEnemyBattlers[g_Battle.active_battler - 3].unk_30 - 40) {
+            slot                               = Battle_AllocEffect(1, 0x56);
+            g_BattleEffects[slot].header.mode  = 1;
+            g_BattleEffects[slot].header.step  = 0;
+            g_BattleEffects[slot].unk_2E       = g_Task->unk_2E.half;
+            g_BattleEffects[slot].unk_30       = g_Task->unk_30.half;
+            g_BattleEffects[slot].unk_0A       = g_Task->timer;
+            g_BattleEffects[slot].target.party = g_BattleEffectBattler;
+            g_Task->header.step += 1;
+        }
+    }
+    Actor_StepAnimLoop();
+}
 
 MATCH void func_801EF50C(void) {
     func_801E5988();

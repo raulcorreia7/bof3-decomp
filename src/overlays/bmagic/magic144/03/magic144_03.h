@@ -7,6 +7,7 @@
 #define MAGIC092_STEP_X 16
 #define MAGIC092_RISE_Y 12
 
+extern SVECTOR  D_1F800014[];
 extern Callback D_801F04D4[];
 extern Callback D_801F04FC[];
 

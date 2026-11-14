@@ -5,6 +5,9 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+/* The four diamond corners RotTransPers4 projects. */
+extern SVECTOR D_1F800014[];
+
 #define EFFECT_TICK_INCREMENT 8
 #define EFFECT_TICK_LIMIT     0x80
 

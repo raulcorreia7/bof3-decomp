@@ -96,9 +96,97 @@ MATCH void func_801EF31C(void) {
 
 #include "overlays/bmagic/Effect_TickOnTimerZero.h"
 
-INCLUDE_ASM(func_801EF4B0);
+MATCH void func_801EF4B0(void) {
+    POLY_G3* poly;
+    s32      tpage;
+    s32      i;
+    long     flag;
+    long     depth;
+    s32*     shade;
 
-INCLUDE_ASM(func_801EF708);
+    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+    GFX_AddDitheredDrawMode(5, tpage);
+    D_1F800014[2].vx = (rsin(0) * 3U) >> 6;
+    D_1F800014[2].vy = (rcos(0) * 3U) >> 6;
+    for (i = 1; i < 17; i++) {
+        D_1F800014[0].vx = 0;
+        D_1F800014[0].vy = 0;
+        D_1F800014[1].vx = D_1F800014[2].vx;
+        D_1F800014[1].vy = D_1F800014[2].vy;
+        D_1F800014[2].vx = (rsin(i << 8) * 3U) >> 6;
+        D_1F800014[2].vy = (rcos(i << 8) * 3U) >> 6;
+        D_1F800014[2].vz = 0;
+        D_1F800014[1].vz = 0;
+        D_1F800014[0].vz = 0;
+        poly             = (POLY_G3*)g_GfxPrimCursor;
+        SetPolyG3(poly);
+        SetSemiTrans(poly, 1);
+        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, &depth, &flag);
+        shade    = &D_1F800004;
+        poly->r0 = *shade;
+        poly->g0 = *shade;
+        poly->b0 = *shade;
+        poly->r1 = *shade;
+        poly->g1 = *shade / 2;
+        poly->b1 = 1;
+        poly->r2 = *shade;
+        poly->g2 = *shade / 2;
+        poly->b2 = 1;
+        GFX_AddPrim(5, sizeof(POLY_G3));
+    }
+    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    GFX_AddDitheredDrawMode(5, tpage);
+}
+
+MATCH void func_801EF708(void) {
+    POLY_G4* poly;
+    s32      tpage;
+    s32      i;
+    long     depth;
+    long     flag;
+    s32*     shade;
+
+    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+    GFX_AddDitheredDrawMode(5, tpage);
+    D_1F800014[1].vx = (rsin(0) * 3U) >> 6;
+    D_1F800014[1].vy = (rcos(0) * 3U) >> 6;
+    D_1F800014[3].vx = (u32)rsin(0) >> 4;
+    D_1F800014[3].vy = (u32)rcos(0) >> 4;
+    for (i = 1; i < 17; i++) {
+        D_1F800014[0].vx = D_1F800014[1].vx;
+        D_1F800014[0].vy = D_1F800014[1].vy;
+        D_1F800014[2].vx = D_1F800014[3].vx;
+        D_1F800014[2].vy = D_1F800014[3].vy;
+        D_1F800014[1].vx = (rsin(i << 8) * 3U) >> 6;
+        D_1F800014[1].vy = (rcos(i << 8) * 3U) >> 6;
+        D_1F800014[3].vx = (u32)rsin(i << 8) >> 4;
+        D_1F800014[3].vy = (u32)rcos(i << 8) >> 4;
+        D_1F800014[3].vz = 0;
+        D_1F800014[2].vz = 0;
+        D_1F800014[1].vz = 0;
+        D_1F800014[0].vz = 0;
+        poly             = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(poly);
+        SetSemiTrans(poly, 1);
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3, &depth, &flag);
+        shade    = &D_1F800004;
+        poly->r0 = *shade;
+        poly->g0 = *shade / 2;
+        poly->b0 = 1;
+        poly->r1 = *shade;
+        poly->g1 = *shade / 2;
+        poly->b1 = 1;
+        poly->r2 = 1;
+        poly->g2 = 1;
+        poly->b2 = 1;
+        poly->r3 = 1;
+        poly->g3 = 1;
+        poly->b3 = 1;
+        GFX_AddPrim(5, sizeof(POLY_G4));
+    }
+    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    GFX_AddDitheredDrawMode(5, tpage);
+}
 
 MATCH void func_801EF9B8(void) {
     SYS_DISPATCH_BYTE(D_801F08C4, g_Task->header.step);
@@ -162,4 +250,68 @@ MATCH void func_801EFBE4(void) {
 
 INCLUDE_ASM(func_801EFC44);
 
-INCLUDE_ASM(func_801F05C8);
+MATCH void func_801F05C8(s32 step) {
+    TILE_1*      primitive;
+    PartyMember* work;
+    s32*         angle;
+    s32*         shade;
+    s32          tpage;
+    s32          i;
+    s32          rise;
+    s32          height;
+    s32          turn;
+    s32          jitter;
+    s32          x;
+    s32          y;
+    long         p;
+    long         flag;
+
+    /* The angle word sits three scratch words after the radius word; the depth word lies between them. */
+    i     = 1;
+    angle = &D_1F80000C;
+    for (; i < 24; i += step) {
+        if (i >= g_Task->unk_09) {
+            break;
+        }
+        if (g_Task->header.step == 3) {
+            if (g_Task->timer + i >= 25) {
+                break;
+            }
+            jitter     = rand();
+            rise       = (g_Task->timer + i) * (step + 2);
+            D_1F800004 = 0x80 - (g_Task->timer + i) * 5;
+            height     = rise + (jitter & 3);
+        } else {
+            jitter     = rand();
+            rise       = i * (step + 2);
+            D_1F800004 = 0x80 - i * 5;
+            height     = rise + (jitter & 3);
+        }
+        work             = g_Task;
+        turn             = ((work->param.unk_0B - i) & 0x1F) << 7;
+        angle[0]         = turn;
+        angle[-3]        = 0xC0 - (work->unk_09 - i) * 2;
+        angle[-1]        = -((work->unk_09 - i) * 12);
+        D_1F800014[0].vx = FIXED_MUL(rsin(turn), angle[-3]);
+        D_1F800014[0].vy = FIXED_MUL(rcos(angle[0]), angle[-3]);
+        D_1F800014[0].vz = angle[-1] + height + 8;
+        if (D_1F800014[0].vz > 0) {
+            D_1F800014[0].vz = 0;
+        }
+        x     = (D_1F800014[0].vx << 9) + g_Task->pos.x.fixed;
+        y     = (D_1F800014[0].vy << 9) + g_Task->pos.y.fixed;
+        tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+        Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
+        primitive = (TILE_1*)g_GfxPrimCursor;
+        SetTile1(primitive);
+        SetSemiTrans(primitive, 1);
+        RotTransPers(D_1F800014, (long*)&primitive->x0, &p, &flag);
+        shade         = &D_1F800004;
+        primitive->r0 = *shade;
+        primitive->g0 = *shade;
+        primitive->b0 = *shade;
+        /* Retail advances the cell by 0x24 bytes here, more than the tile takes. */
+        Area_AddCellPrim(x, y, 0, 0x24);
+    }
+}

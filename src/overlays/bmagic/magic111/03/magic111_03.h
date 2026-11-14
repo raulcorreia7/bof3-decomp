@@ -7,6 +7,10 @@
 
 extern Callback D_801EFAA8[];
 
+/* The two colour angles of the full-screen glow, kept as scratch halfwords. */
+extern s16 D_1F800000_HALF[];
+extern s16 D_1F800002;
+
 #define MAGIC111_STEP_COUNT 3
 
 typedef struct Magic111Steps {
