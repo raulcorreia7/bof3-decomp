@@ -367,8 +367,6 @@
 {"function": "emi/world01/area049/14@0x801F3194", "tried": "hint: same lookup as area118 func_801F502C; retail hoists the heading byte address (lui a3) after the u8 masks of x and y, every pointer form hoists it first.", "first_diff": "", "score": null}
 {"function": "emi/world01/area052/13@0x801F3280", "tried": "two-cell column loop (Area_StoreHeight, Area_GetCellCode, Area_SetCellCode(x, y, 0x11) per row); retail keeps x, y, y+1, (y+1)<<16 and two counters in s-regs (frame 56); my loop is frame 64, 4 bytes long", "first_diff": "+0x0", "score": null}
 {"function": "emi/world01/area052/13@0x801F35A0", "tried": "two-row copy loops of the cell column at x 0x11 (Area_StoreHeight, func_801A4BC0, Area_GetCellCode); retail keeps eleven loop invariants in s0-s8 (frame 56); my loops are frame 32, 4 bytes short at +0x0 addiu sp.", "first_diff": "", "score": null}
-{"function": "emi/world01/area052/13@0x801F4290", "tried": "blocker: s16 return truncation", "first_diff": "sll v0,16 / sra v0,8 at 0x801F42F8.", "score": null}
-{"function": "emi/world01/area052/13@0x801F431C", "tried": "blocker: s16 return truncation", "first_diff": "+0x70 sll v0,v0,0x10 pair against sll 0x8.", "score": null}
 {"function": "emi/world01/area056/13@0x801F3200", "tried": "blocker: prologue and branch-slot scheduling", "first_diff": "+0x00 li v0,0xffff against addiu sp.", "score": null}
 {"function": "emi/world01/area060/13@0x801F3288", "tried": "blocker: cursor sum register", "first_diff": "addu v0,a3,a0 (retail) against addu t0,a3,a0 (candidate).", "score": null}
 {"function": "emi/world01/area067/14@0x801F2E48", "tried": "needs: Actor halfword members at +0x10 and +0x12", "first_diff": "the sh zero stores.", "score": null}
