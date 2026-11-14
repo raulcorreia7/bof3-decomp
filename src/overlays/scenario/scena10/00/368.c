@@ -84,7 +84,20 @@ INCLUDE_ASM(func_801F7AD4);
 
 INCLUDE_ASM(func_801F7C34);
 
-INCLUDE_ASM(func_801F7DDC);
+/* Draw the "Choose parts" window with its item list and cursor, then place and step the cursor actor. */
+MATCH void func_801F7DDC(void) {
+    UI_DrawWindow(D_801FE7CC[3].x, D_801FE7CC[3].y, D_801FE7CC[3].width, D_801FE7CC[3].height, 2, g_WindowStyle);
+    sprintf(g_UiFormatBuffer, D_801F6C04, D_801FE874);
+    UI_DrawText((u16)D_801FE7CC[3].x + 8, D_801FE7CC[3].y + 2, 0, 12, g_UiFormatBuffer);
+    func_801F7AD4();
+    Menu_DrawCursorSprite(D_801FE808[0], (u16)(D_801FE808[1] + (g_Task->header.step & 7) * 15), 0);
+    func_801F7C34();
+    g_Task->screen_x = D_801FE7CC[5].x + D_801FE804[0];
+    g_Task->screen_y = D_801FE7CC[5].y + D_801FE804[1];
+    func_80159B9C(D_801FE7CC[5].x, D_801FE7CC[5].y, (u8)D_801FE7CC[5].width, (u8)D_801FE7CC[5].height);
+    Actor_StepAnimLoop();
+    Area_AddActor();
+}
 
 MATCH void func_801F7F50(void) {
     SYS_DISPATCH_BYTE(D_801FE8F4, D_80146872);
