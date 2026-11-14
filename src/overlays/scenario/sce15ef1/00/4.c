@@ -434,7 +434,37 @@ INCLUDE_ASM(func_801D30AC);
 
 INCLUDE_ASM(func_801D32F4);
 
-INCLUDE_ASM(func_801D34F0);
+/* Step the dot trail: move and draw each live dot, then advance when the countdown ends. */
+MATCH void func_801D34F0(void) {
+    SceneDot* dot;
+    u16       i;
+    TILE_1*   tile;
+
+    ((Actor*)g_Task->unk_4C)->header.flags |= ACTOR_FLAG_HIDDEN;
+    dot = MEM_PTR(SceneDot, AREA_WORK + 0x5A00);
+    for (i = 0; i < D_801D40A8; dot++, i++) {
+        if (dot->active) {
+            if (dot->life != 0) {
+                dot->x -= dot->dx;
+                dot->y -= dot->dy;
+                dot->life--;
+            }
+            tile = (TILE_1*)g_GfxPrimCursor;
+            SetTile1(tile);
+            tile->x0 = dot->x;
+            tile->y0 = dot->y;
+            tile->r0 = (dot->color & 0x1F) << 3;
+            tile->g0 = (dot->color & 0x3E0) >> 2;
+            tile->b0 = (dot->color & 0x7C00) >> 7;
+            GFX_AddPrim(2, sizeof(TILE_1));
+        }
+        dot->active ^= 1;
+    }
+    if (--g_Task->timer == 0) {
+        g_ScriptVars[0] = 43;
+        g_Task->header.mode++;
+    }
+}
 
 MATCH void func_801D369C(void) {
     Actor_Clear();
