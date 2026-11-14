@@ -46,7 +46,9 @@ MATCH void func_801CEE08(void) {
     SYS_DISPATCH_TASK(D_801CFEFC, 2, g_Task);
 }
 
-INCLUDE_ASM(func_801CEE4C);
+MATCH void func_801CEE4C(void) {
+    CHAR_START_FREE_FACING;
+}
 
 #include "overlays/plchar/Char_ClaimLinkSlot.h"
 
