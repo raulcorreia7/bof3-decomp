@@ -199,7 +199,28 @@ MATCH s32 func_801D2750(s32 limit) {
     return roll;
 }
 
-INCLUDE_ASM(func_801D2794);
+MATCH void func_801D2794(s32 count, s32 shown, s32 chosen) {
+    s32 i;
+    s32 y;
+    u8  selected;
+
+    selected = chosen;
+    for (i = 0; i < (u8)count; i++) {
+        y = 0x6C;
+        if (i <= selected && selected != 0 && i != 0) {
+            if (D_801DB089[i] == 0) {
+                y = 0x64;
+            } else {
+                y = 0x74;
+            }
+        }
+        if (i < (u8)shown) {
+            func_801D2CF8((s16)(0x10 + i * 0x20), y, D_801DB080[i]);
+        } else {
+            func_801D2CF8((s16)(0x10 + i * 0x20), y, 0xFF);
+        }
+    }
+}
 
 MATCH void func_801D2870(void) {
     s32 i;
