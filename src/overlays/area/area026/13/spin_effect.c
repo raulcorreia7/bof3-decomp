@@ -238,9 +238,7 @@ MATCH void func_801F2C48(void) {
     work->timer  = 10;
     work2        = g_Task;
     work->unk_1C = 0;
-    work->vx     = v0;
-    work->vy     = v1;
-    work->vz     = v2;
+    setVector(work, v0, v1, v2);
     work2->header.mode++;
 }
 

@@ -4,9 +4,7 @@ MATCH void func_801F311C(s16 x0, s16 y0, s16 x1, s16 y1) {
     VECTOR   normal;
     POLY_G4* prim;
 
-    normal.vx = y0 - y1;
-    normal.vy = x1 - x0;
-    normal.vz = 0;
+    setVector(&normal, y0 - y1, x1 - x0, 0);
     VectorNormal(&normal, &normal);
     normal.vx = (normal.vx * 5) >> 12;
     normal.vy = (normal.vy * 5) >> 12;
