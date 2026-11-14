@@ -247,7 +247,20 @@ MATCH void func_801D2E60(s16 x, s16 y) {
     GFX_AddPrim(1, sizeof(LINE_F2));
 }
 
-INCLUDE_ASM(func_801D2EDC);
+/* Queues the 128-grey sprite whose source rectangle is entry index of the rectangle table. */
+MATCH void func_801D2EDC(s32 x, s32 y, s32 index) {
+    SPRT* sprt;
+
+    sprt = g_GfxPrimCursor;
+    SetSprt(sprt);
+    index = (u8)index * 4;
+    setXY0(sprt, x, y);
+    setWH(sprt, D_801DAC60[index + 2], D_801DAC60[index + 3]);
+    setRGB0(sprt, 128, 128, 128);
+    setUV0(sprt, D_801DAC60[index], D_801DAC60[index + 1]);
+    sprt->clut = 0x7887;
+    GFX_AddPrim(1, sizeof(SPRT));
+}
 
 INCLUDE_ASM(func_801D2FA4);
 
