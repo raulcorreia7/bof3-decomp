@@ -42,7 +42,14 @@ MATCH void func_801EEC70(void) {
     SND_QueueSelectionEffect(0x100);
 }
 
-INCLUDE_ASM(func_801EEDE0);
+MATCH void func_801EEDE0(void) {
+    g_PaletteFades[g_Task->timer].offset.red   = g_Task->param.unk_0B * 2;
+    g_PaletteFades[g_Task->timer].offset.green = g_Task->param.unk_0B * 2;
+    g_PaletteFades[g_Task->timer].offset.blue  = g_Task->param.unk_0B * 2;
+    if (g_Task->param.unk_0B == 7) {
+        g_Task->header.mode++;
+    }
+}
 
 INCLUDE_ASM(func_801EEEB0);
 
