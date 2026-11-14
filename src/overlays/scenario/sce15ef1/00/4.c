@@ -326,8 +326,8 @@ MATCH void func_801D23A0(void) {
     if (!(mode & BYTE_MASK)) {
         rect.x = 832;
         rect.y = 256;
-        rect.w = D_801D3940[D_801D40AC].w;
-        rect.h = D_801D3940[D_801D40AC].h;
+        rect.w = D_801D393C[D_801D40AC].w;
+        rect.h = D_801D393C[D_801D40AC].h;
         StoreImage(&rect, (u32*)AREA_WORK);
         D_801D40B0    = AREA_WORK;
         D_801D40B4    = AREA_WORK + 0x5A00;
@@ -406,7 +406,41 @@ MATCH void func_801D2DEC(void) {
     SYS_DISPATCH_TASK(D_801D397C, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801D2E30);
+/* At script value 0x29 spawn an actor from the current one's record and run its script, then advance the mode. */
+MATCH void func_801D2E30(void) {
+    u8            slot;
+    SpawnedActor* row;
+    Actor*        actor;
+    Actor*        parent;
+
+    if (g_ScriptVars[0] == 0x29) {
+        slot = Actor_FindFreeSpawned();
+        if (slot != GAME_NONE) {
+            D_801D40AC = 1;
+            row        = &g_SpawnedActors[slot];
+            GFX_ClearRect(0x340, 0x100, 0x80, 0x100);
+            *row                = *(SpawnedActor*)g_Task->unk_4C;
+            actor               = (Actor*)row;
+            actor->header.flags = 1;
+            actor->header.mode  = 2;
+            actor->header.step  = 0;
+            actor->unk_05       = 0x3A;
+            actor->screen_x     = D_801D393C[D_801D40AC].x;
+            actor->screen_y     = D_801D393C[D_801D40AC].y;
+            actor->unk_25       = GetTPage(0, 0, 0x340, 0x100);
+            actor->unk_26       = 0x80;
+            actor->active_flags |= 0x88;
+            parent = g_Task;
+            g_Task = actor;
+            Actor_SelectScript(7);
+            func_8014D290();
+            func_80196070();
+            g_Task        = parent;
+            parent->timer = 2;
+        }
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801D2FD8(void) {
     u8     mode;
@@ -419,8 +453,8 @@ MATCH void func_801D2FD8(void) {
     if (!(mode & BYTE_MASK)) {
         rect.x = 832;
         rect.y = 256;
-        rect.w = D_801D3940[D_801D40AC].w;
-        rect.h = D_801D3940[D_801D40AC].h;
+        rect.w = D_801D393C[D_801D40AC].w;
+        rect.h = D_801D393C[D_801D40AC].h;
         StoreImage(&rect, (u32*)AREA_WORK);
         D_801D40B0    = AREA_WORK;
         D_801D40B4    = AREA_WORK + 0x5A00;
