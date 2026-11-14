@@ -5,7 +5,7 @@ MATCH void func_800C2948(void) {
 
     scripts = D_800C1810;
     if (g_BattleEffectBattler->param.unk_0B != 0) {
-        Actor_SelectScript(scripts.byte[D_801463BE]);
+        Actor_SelectScript(scripts.byte[g_Battle.unk_DE]);
     }
     func_801E30F8();
     Area_AddActor();
