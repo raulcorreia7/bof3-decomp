@@ -7,6 +7,7 @@
 
 extern Callback D_801EEC04[];
 extern s8       D_801F065C[];
+extern Callback D_801F0654[];
 
 void func_801EF1FC(void);
 void func_801F012C(void);

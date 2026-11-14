@@ -977,7 +977,15 @@ MATCH void func_801D7EF0(s16 x, s16 y) {
 
 INCLUDE_ASM(func_801D8058);
 
-INCLUDE_ASM(func_801D812C);
+MATCH void func_801D812C(void) {
+    u16 index;
+
+    Menu_DrawHeaderBar(0x14, 0x10, 0x118, 0x13, g_WindowStyle);
+    index = D_801DB0C8;
+    if (index != 0xFFFF) {
+        UI_DrawText(0x1B, 0x13, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, index));
+    }
+}
 
 MATCH void func_801D81A4(s16 x, s16 y) {
     s32 i;

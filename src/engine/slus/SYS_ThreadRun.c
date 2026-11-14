@@ -1,38 +1,38 @@
 #include "engine/slus/slus.h"
 
 /*
- * initializes the callback cursor to the slot table, then walks all
- * four slots once: opens threads for slots marked open, counts down yield
- * timers, and switches into any slot whose timer expired or that requested a
- * forced switch.
+ * initializes the current thread to the thread table, then walks all
+ * four threads once: opens threads marked open, counts down yield
+ * timers, and switches into any thread whose timer expired or that requested
+ * a forced switch.
  */
 MATCH void SYS_ThreadRun(void) {
-    g_CallbackSlot = D_80143B40;
+    g_SysCurrentThread = g_SysThreads;
     {
         int idle_state = SYS_THREAD_IDLE;
 
         do {
-            switch (g_CallbackSlot->state) {
-                case CALLBACK_SLOT_OPEN:
+            switch (g_SysCurrentThread->state) {
+                case SYS_THREAD_OPEN:
                     EnterCriticalSection();
-                    g_CallbackSlot->thread_id = OpenTh((long (*)())g_CallbackSlot->callback, g_CallbackSlot->open_arg, g_CallbackSlot->open_arg_2);
+                    g_SysCurrentThread->thread_id = OpenTh((long (*)())g_SysCurrentThread->entry, g_SysCurrentThread->open_arg, g_SysCurrentThread->open_arg_2);
                     ExitCriticalSection();
-                    goto dispatch; /* a freshly opened slot switches in at once, like a forced switch */
+                    goto dispatch; /* a freshly opened thread switches in at once, like a forced switch */
 
-                case CALLBACK_SLOT_YIELD:
-                    if (--g_CallbackSlot->countdown != 0) {
+                case SYS_THREAD_YIELD:
+                    if (--g_SysCurrentThread->countdown != 0) {
                         break;
                     }
                     /* fall through */
 
                 case SYS_THREAD_SWITCH:
                 dispatch:
-                    g_CallbackSlot->state = idle_state;
-                    ChangeTh(g_CallbackSlot->thread_id);
+                    g_SysCurrentThread->state = idle_state;
+                    ChangeTh(g_SysCurrentThread->thread_id);
                     break;
             }
 
-            g_CallbackSlot++;
-        } while (g_CallbackSlot < (Thread*)&g_CallbackSlot);
+            g_SysCurrentThread++;
+        } while (g_SysCurrentThread < (Thread*)&g_SysCurrentThread);
     }
 }

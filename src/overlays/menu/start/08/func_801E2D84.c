@@ -1,7 +1,5 @@
 #include "start_08.h"
 
-extern void func_801E2E90(s32 x, s32 y, s32 row_index);
-
 MATCH void func_801E2D84(s16 x, s32 y) {
     u8   data[6];
     u16* flag_table;

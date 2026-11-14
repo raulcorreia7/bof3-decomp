@@ -1,7 +1,5 @@
 #include "start_08.h"
 
-extern void func_801E7608(void);
-
 MATCH void func_801E411C(void) {
     u16* flag_word;
     s32  packed;

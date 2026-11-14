@@ -117,7 +117,7 @@ void Area_ClearWorkColumn(void);
 /* Scene dispatch table indexed by the mode byte at D_80146872. */
 extern s8 D_80146872;
 /* Prototypes the images of this group share. */
-void      func_801D16DC();
+void      func_801D16DC(void);
 void      func_801F7180();
 void      func_801F78CC();
 u8*       func_801F8394();
