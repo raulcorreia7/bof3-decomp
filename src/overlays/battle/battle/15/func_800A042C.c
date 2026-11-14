@@ -31,10 +31,7 @@ MATCH void func_800A042C(void) {
                 LOHU(D_801EC30C) *= 2;
                 break;
         }
-    battler_index  = g_Battle.active_battler;
-    selection_kind = g_Battle.target;
-    /* FAKE: the barrier keeps the kind materialization out of the case exits
-     * so it lands last, in the jal delay slot as retail has it. */
-    FAKE_BARRIER();
+    battler_index                     = g_Battle.active_battler;
+    selection_kind                    = g_Battle.target;
     g_Battle.target_record->hp_change = Battle_CalcDamage(battler_index, selection_kind, 0xFFFFU);
 }
