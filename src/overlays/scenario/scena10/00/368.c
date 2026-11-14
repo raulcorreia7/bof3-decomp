@@ -28,7 +28,39 @@ MATCH void func_801F755C(void) {
     g_Task->header.step = 0;
 }
 
-INCLUDE_ASM(func_801F7590);
+/* Item panel step: move the cursor, switch panel, or move one of the selected item into the stock at D_80144908. */
+MATCH void func_801F7590(void) {
+    func_801F7DDC();
+    if (g_InputPressed & (PADLup | PADLdown)) {
+        if (g_InputPressed & PADLup) {
+            g_Task->header.step--;
+        } else {
+            g_Task->header.step++;
+        }
+        g_Task->header.step &= 7;
+        SND_PlayCue(0x206);
+        g_Task->unk_06 = (g_Task->header.step & 7) + 0x4E;
+        Actor_SelectScript(g_Task->unk_06 - 0x4E);
+    }
+    if (g_InputPressed & PADRleft) {
+        SND_PlayCue(0x209);
+        g_Task->unk_0A      = 20;
+        g_Task->header.mode = 2;
+    } else if (g_InputPressed & PADRup) {
+        SND_PlayCue(0x20C);
+        g_Task->header.mode = 3;
+    } else if (g_InputPressed & PADRdown) {
+        if (Item_Count(0, g_Task->unk_06, 0) & 0xFFFF) {
+            if (D_80144908[g_Task->header.step] < 100) {
+                D_80144908[g_Task->header.step]++;
+            }
+            Item_Remove(0, g_Task->unk_06, 1, 0);
+            SND_PlayCue(0x20A);
+        } else {
+            SND_PlayCue(0x20D);
+        }
+    }
+}
 
 MATCH void func_801F7758(void) {
     Scena10Rect* rect;
