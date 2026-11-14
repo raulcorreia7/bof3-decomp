@@ -24,8 +24,6 @@ extern Magic010SharedSteps D_801EEC04;
 /* The four field actor rows that follow g_Actors. */
 extern Actor D_80147A58[4];
 
-u8 func_801DB524(u8 slot);
-
 /* The caster's facing, the flag func_801EEC80 raises for encounters 0x1C, 0x23, 0x2F and 0x34, and the
  * target cell the effect starts from. */
 extern u8  D_801F0CBC;

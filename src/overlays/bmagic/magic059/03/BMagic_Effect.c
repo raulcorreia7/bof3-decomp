@@ -108,8 +108,8 @@ MATCH void func_801EF638(void) {
     g_Task->pos.x.fixed      = src->pos.x.fixed;
     g_Task->pos.y.fixed      = src->pos.y.fixed;
     COORD_INT(g_Task->pos.z) = COORD_INT(src->pos.z);
-    pos.vx                   = (g_Task->pos.x.fixed >> 9) - 0x4000;
-    pos.vy                   = (g_Task->pos.y.fixed >> 9) - 0x4000;
+    pos.vx                   = (g_Task->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
+    pos.vy                   = (g_Task->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
     pos.vz                   = -COORD_INT(g_Task->pos.z) / 2;
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);

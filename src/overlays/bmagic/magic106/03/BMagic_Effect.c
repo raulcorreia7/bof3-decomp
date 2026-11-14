@@ -120,9 +120,9 @@ MATCH void func_801EF52C(void) {
     rot.vx = 0;
     rot.vy = 0;
     off    = g_BMagicOrbitWork->angle + 0x800;
-    rot.vz = ((g_BMagicOrbitWork->unk_03 << 7) - off) & 0xFFF;
-    pos.vx = (g_BMagicOrbitWork->pos.x.fixed >> 9) - 0x4000;
-    pos.vy = (g_BMagicOrbitWork->pos.y.fixed >> 9) - 0x4000;
+    rot.vz = ((g_BMagicOrbitWork->unk_03 << 7) - off) & ANGLE_MASK;
+    pos.vx = (g_BMagicOrbitWork->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
+    pos.vy = (g_BMagicOrbitWork->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
     pos.vz = -COORD_INT(g_BMagicOrbitWork->pos.z) / 2;
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);

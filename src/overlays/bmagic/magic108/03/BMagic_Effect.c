@@ -72,8 +72,8 @@ MATCH void func_801EEF48(void) {
     s32 vec[4];
 
     g_Task->timer += 1;
-    vec[0] = (g_Task->unk_18 >> 9) - 0x4000;
-    vec[1] = (g_Task->unk_1C >> 9) - 0x4000;
+    vec[0] = (g_Task->unk_18 >> 9) - AREA_CELL_ORIGIN;
+    vec[1] = (g_Task->unk_1C >> 9) - AREA_CELL_ORIGIN;
     vec[2] = g_Task->unk_20 >> 0x11;
     /* The retail build passes the never-written slot after the vector. */
     func_800AF3A0(vec[0], vec[1], vec[2], vec[3], 0x20);

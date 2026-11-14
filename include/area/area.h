@@ -91,6 +91,8 @@
  * a cell's centre is half a cell past its corner. */
 #define AREA_CELL_ORIGIN           0x4000
 #define AREA_CELL_HALF             0x40
+#define AREA_CELL_GRID_ROWS        56          /* rows of the cell grids: g_AreaCellGrid and g_AreaCells */
+#define AREA_CELL_GRID_COLS        28          /* columns of the cell grids */
 #define MAP_BUNDLE_BASE            0x80104000u /* the map bundle */
 
 /* The payload-head id convention: an area program is 52 + area, an auxiliary
@@ -216,6 +218,27 @@ typedef struct AreaCellCorners {
 } AreaCellCorners;
 
 ASSERT_SIZE(AreaCellCorners, AREA_MAP_CELL_RECORD_SIZE);
+
+/* The g_AreaCellPrims row bits of AreaCell.prim_id. */
+#define AREA_CELL_PRIM_MASK 0xFFF
+
+/* One cell of the 56 x 28 screen grid: the tile it shows (the grid-wrapped panel position that
+ * Area_GetCell stores) and its row in g_AreaCellPrims (0 = none). */
+typedef struct AreaCell {
+    u8  tile_x;
+    u8  tile_y;
+    u16 prim_id; /* low 12 bits: the g_AreaCellPrims row; upper bits are flags */
+} AreaCell;
+
+extern AreaCell g_AreaCells[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
+/* Zero in the load image: 0x400 rows of one POLY_FT4 per display buffer
+ * (g_FrameBufferIndex). In a row's second record, pad1 and pad2 hold the rows of the two linked
+ * cells (0 = none); in its first, pad1 holds the pending upload request. */
+extern POLY_FT4 g_AreaCellPrims[][2];
+extern u16      g_AreaCellPrimFreeIds[0x400];
+extern u16      g_AreaCellPrimFreeIndex;
+extern s16      g_AreaGridColCursor;
+extern s16      g_AreaGridRowCursor;
 
 /* Four-byte tile table A rectangle. */
 typedef struct AreaTileRect {

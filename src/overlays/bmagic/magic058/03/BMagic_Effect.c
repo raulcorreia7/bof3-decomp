@@ -82,7 +82,7 @@ MATCH void func_801EF080(void) {
     g_Task->unk_0C += 32;
     D_1F800000_HALF = g_Task->unk_0C;
     for (i = 0; i < 8; i++) {
-        if (D_801F0FD4[i + 3] == 0 && !(func_801DB524(i + 3) & BYTE_MASK) && func_801EFDD4(&g_BattleEnemyBattlers[i]) && g_Battle.active_battler != i + 3) {
+        if (D_801F0FD4[i + 3] == 0 && !(Battle_SlotIsBlocked((u8)(i + 3)) & BYTE_MASK) && func_801EFDD4(&g_BattleEnemyBattlers[i]) && g_Battle.active_battler != i + 3) {
             D_801F0FD4[i + 3] = -1;
             for (j = 0; j < 2; j++) {
                 slot                                   = BMagic_AllocEffect();
@@ -95,7 +95,7 @@ MATCH void func_801EF080(void) {
         }
     }
     for (i = 0; i < 3; i++) {
-        if (D_801F0FD4[i] == 0 && !(func_801DB524(i) & BYTE_MASK) && func_801EFDD4(&g_Game.members[i]) && g_Battle.active_battler != i) {
+        if (D_801F0FD4[i] == 0 && !(Battle_SlotIsBlocked((u8)i) & BYTE_MASK) && func_801EFDD4(&g_Game.members[i]) && g_Battle.active_battler != i) {
             D_801F0FD4[i] = -1;
             for (j = 0; j < 2; j++) {
                 slot                                   = BMagic_AllocEffect();
