@@ -1099,7 +1099,7 @@ void                    Area_LoadCellRowsPrev(void);
 /* func_80152FB0 */
 void                    Area_LoadCellRowsNext(void);
 extern s32              func_801530D0(void);
-extern void             func_80153CC4(u32 unused);
+extern void             func_80153CC4(void);
 extern void             func_80153D34(void);
 extern void             Area_GetCell(s32 px, s32 py, AreaCell* out);
 extern s32              Area_UploadCell(s32 column, s32 row, POLY_FT4* context, s32 slot);
