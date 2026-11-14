@@ -372,7 +372,6 @@
 {"function": "emi/world01/area056/13@0x801F3200", "tried": "blocker: prologue and branch-slot scheduling", "first_diff": "+0x00 li v0,0xffff against addiu sp.", "score": null}
 {"function": "emi/world01/area060/13@0x801F3288", "tried": "blocker: cursor sum register", "first_diff": "addu v0,a3,a0 (retail) against addu t0,a3,a0 (candidate).", "score": null}
 {"function": "emi/world01/area067/14@0x801F2E48", "tried": "needs: Actor halfword members at +0x10 and +0x12", "first_diff": "the sh zero stores.", "score": null}
-{"function": "emi/world01/area071/13@0x801F2C04", "tried": "needs: byte tables D_80143FCD and D_80143FD3; the template fails on g_CurrentActor arithmetic.", "first_diff": "", "score": null}
 {"function": "emi/world02/area077/14@0x801F3CB8", "tried": "blocker: retail loads the three D_ globals before the prologue (addiu sp)", "first_diff": "addiu sp at 0x801F3CC8.", "score": null}
 {"function": "emi/world02/area077/14@0x801F41B4", "tried": "tried: raw pointer loops over 0x800E4800/0x800E4830 with fixed strides; didn't match", "first_diff": "", "score": null}
 {"function": "emi/world02/area079/13@0x801F2CB4", "tried": "blocker: jump table is in existing .data, not generated .rodata.", "first_diff": "", "score": null}
