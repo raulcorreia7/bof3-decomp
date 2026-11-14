@@ -9,7 +9,7 @@
 /* The resident game overlay's functions the other images call, in address order. */
 
 /* func_8019601C */
-u8    Actor_FindFreeSlot(void);
+u8    Actor_FindFreeSpawned(void);
 /* func_80196070 */
 void  Actor_Clear(void);
 /* func_801960C0 */
@@ -29,7 +29,7 @@ void  GFX_FreePaletteFadeTarget(void* owner);
 /* func_80196784 */
 u8    GFX_MarkPaletteCells(u8 mode, u8 value, u8 search);
 /* func_801968BC */
-u8    GFX_AllocPaletteCell(u8 mode);
+u8    GFX_FindFreePaletteCell(u8 mode);
 /* func_80196B20 */
 u8    GFX_FindPaletteCell(u8 value);
 /* func_80196B9C */
@@ -41,11 +41,11 @@ u8    GFX_StartPaletteAnimation(u8* owner, u8* source_table);
 /* func_80196D84 */
 void  GFX_StepPaletteAnimation(u8 palette_slot);
 /* func_80196F78 */
-void  Game_UpdateCampMenu(void);
+void  Game_RunCampMenu(void);
 /* func_80196FFC */
 void  Game_LoadCampMenu(void);
 /* func_80197068 */
-void  Game_UpdateMain(void);
+void  Game_RunMain(void);
 /* func_801970EC */
 void  Game_NewGame(void);
 /* func_80199440 */
@@ -163,7 +163,7 @@ void  Game_RewardZenny(s32 zenny);
 /* func_801B6610 */
 bool  func_801B6610(s16 map_x, s16 map_y);
 /* func_801BC400 */
-void  Area_ResetScene(void);
+void  Area_UpdateIdleActor(void);
 /* func_801BDAB8 */
 void  func_801BDAB8(void);
 /* func_801BDB7C */

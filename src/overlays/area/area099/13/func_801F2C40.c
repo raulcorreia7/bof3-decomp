@@ -10,7 +10,7 @@ MATCH void func_801F2C40(void) {
     ((void (*)(s32))SND_PlayCue)(g_Task->unk_2C + 0x100);
     Actor_RequestScript(((g_Task->direction_08 - 1) / 2) + 0x42);
     g_Game.current->u.field.flags_118 |= 0x40;
-    slot                     = Actor_FindFreeSlot();
+    slot                     = Actor_FindFreeSpawned();
     g_Task->param.actor_slot = slot;
     if (g_Task->param.actor_slot != GAME_NONE) {
         g_SpawnedActors[g_Task->param.actor_slot].header.flags = 1;

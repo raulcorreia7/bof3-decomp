@@ -7,7 +7,7 @@ MATCH void Area_NarrowActorOrClear(void) {
     Actor* work;
     Actor* check;
 
-    Actor_CenterOnScreen();
+    Actor_SetScreenOrigin();
 
     work = g_Task;
     work->timer -= 1;

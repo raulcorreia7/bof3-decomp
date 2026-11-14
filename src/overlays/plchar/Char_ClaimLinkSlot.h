@@ -2,7 +2,7 @@
 MATCH void Char_ClaimLinkSlot(void) {
     Actor_StepAnimLoop();
     if (g_Task->script_pc == CHAR_LAUNCH_SCRIPT_PC) {
-        g_Task->param.actor_slot = Actor_FindFreeSlot();
+        g_Task->param.actor_slot = Actor_FindFreeSpawned();
         if (g_Task->param.actor_slot != GAME_NONE) {
             g_SpawnedActors[g_Task->param.actor_slot].header.flags = 1;
             g_SpawnedActors[g_Task->param.actor_slot].type         = ACTOR_TYPE_FACING_PROBE;

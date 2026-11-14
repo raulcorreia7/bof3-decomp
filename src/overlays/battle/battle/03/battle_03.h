@@ -926,7 +926,7 @@ void               func_801E7818(void);
 extern void        func_801E7888(void);
 extern void        func_801E78F0(void);
 /* func_801E7948 */
-extern void        Battle_PickStreamSlot(void);
+extern void        Battle_StartCharacterLoad(void);
 u8                 func_801E7B34(void);
 void               func_801E7BA0(void);
 extern void        func_801E8558(void);

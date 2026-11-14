@@ -55,7 +55,7 @@ MATCH void func_801EEC5C(void) {
     SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
 }
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEE90 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"

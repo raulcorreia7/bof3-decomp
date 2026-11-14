@@ -11,7 +11,7 @@ MATCH void func_801F38D8(void) {
             break;
         case 1:
             if (g_ScriptVars[0] == 1) {
-                index = Actor_FindFreeSlot() & BYTE_MASK;
+                index = Actor_FindFreeSpawned() & BYTE_MASK;
                 if (index != 0xFF) {
                     slot               = &g_SpawnedActors[index];
                     slot->header.flags = ACTOR_FLAG_IN_USE;

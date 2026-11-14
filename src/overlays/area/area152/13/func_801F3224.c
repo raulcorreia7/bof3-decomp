@@ -4,7 +4,7 @@ MATCH void func_801F3224(void) {
     u8* scratch;
     u8* check;
 
-    Actor_CenterOnScreen();
+    Actor_SetScreenOrigin();
 
     scratch = (u8*)g_Task;
     scratch[0x09] -= 1;

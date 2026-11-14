@@ -13,7 +13,7 @@ MATCH void func_801F5A44(void) {
         D_80147A58[3].header.flags = 1;
     }
     if (D_80143F03 == 0) {
-        g_ScriptVars[3] = Actor_FindFreeSlot();
+        g_ScriptVars[3] = Actor_FindFreeSpawned();
         if (g_ScriptVars[3] != GAME_NONE) {
             g_SpawnedActors[g_ScriptVars[3]].header.flags = 1;
             g_SpawnedActors[g_ScriptVars[3]].type         = 0x53;

@@ -452,7 +452,7 @@ INCLUDE_ASM(func_801FA6BC);
 MATCH bool func_801FA854(u8 type, s16 angle_x, s16 angle_y, s16 angle_z, u8 layer, s32 scene_step) {
     u8 slot;
 
-    slot       = Actor_FindFreeSlot();
+    slot       = Actor_FindFreeSpawned();
     D_801FE748 = slot;
     if (slot != GAME_NONE) {
         g_SpawnedActors[slot].header.flags         = 1;
@@ -513,7 +513,7 @@ MATCH void func_801FDC10(s32 shift) {
 MATCH s32 func_801FDC6C(s32 x, s32 y, s32 unk_06, s32 unk_07, u8 link) {
     u8 slot;
 
-    slot = Actor_FindFreeSlot();
+    slot = Actor_FindFreeSpawned();
     if (slot != GAME_NONE) {
         g_SpawnedActors[slot].header.flags = 1;
         g_SpawnedActors[slot].pos.x.fixed  = x;

@@ -29,7 +29,7 @@ MATCH void func_801BEBB0(void) {
         }
         if (slot < g_Game.party_size) {
             if (g_Characters[g_CharSlot[g_PartyFieldOrder[slot]]].stats.surprise_chance >= random) {
-                id = Actor_FindFreeSlot();
+                id = Actor_FindFreeSpawned();
                 if (id != GAME_NONE) {
                     g_SpawnedActors[id].header.flags = one;
                     g_SpawnedActors[id].type         = 6;

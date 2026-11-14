@@ -23,7 +23,7 @@
 #define WORLD_SPRITE_CLUT         0x7B80
 
 /* How many palette cells a sprite owns (work byte 0x28): one 16-color cell, a whole 256-color row, or runs of 2, 4
- * and 8 cells. Area_BuildClut builds its CLUT word from it and GFX_AllocPaletteCell finds a free run of that size. */
+ * and 8 cells. Area_BuildClut builds its CLUT word from it and GFX_FindFreePaletteCell finds a free run of that size. */
 typedef enum PaletteType {
     PALETTE_TYPE_CELL    = 0,
     PALETTE_TYPE_ROW     = 1,

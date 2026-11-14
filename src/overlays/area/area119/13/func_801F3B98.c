@@ -11,7 +11,7 @@ MATCH void func_801F3B98(void) {
     if (g_Task->timer != 0) {
         return;
     }
-    index = Actor_FindFreeSlot();
+    index = Actor_FindFreeSpawned();
     if (index != GAME_NONE) {
         g_SpawnedActors[index].header.flags = 1;
         g_SpawnedActors[index].type         = 0x18;

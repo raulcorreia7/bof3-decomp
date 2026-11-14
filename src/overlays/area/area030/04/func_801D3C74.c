@@ -52,7 +52,7 @@ MATCH void func_801D3C74(void) {
                 queue->column_4A = 0U;
             }
             if (D_80144125 != 7) {
-                entry = Actor_FindFreeSlot();
+                entry = Actor_FindFreeSpawned();
                 if (entry != -1) {
                     g_SpawnedActors[entry].header.flags = 1;
                     g_SpawnedActors[entry].type         = 0xF;

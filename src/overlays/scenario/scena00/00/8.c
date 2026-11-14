@@ -1031,7 +1031,7 @@ MATCH void func_801F92DC(void) {
     if (selection == 1) {
         func_801BE1B0(0U);
         if (g_ScriptVars[2] == 0) {
-            slot        = Actor_FindFreeSlot();
+            slot        = Actor_FindFreeSpawned();
             *D_1F800000 = slot;
             actor_slot  = slot & BYTE_MASK;
             if (actor_slot != GAME_NONE) {
@@ -1117,7 +1117,7 @@ MATCH void func_801F9644(void) {
             Area_StartScrollRoute(0);
             timer       = &g_AreaCameraAngle.vx;
             *timer      = (*timer + 0xAA);
-            id          = Actor_FindFreeSlot();
+            id          = Actor_FindFreeSpawned();
             slot        = id & BYTE_MASK;
             *D_1F800000 = id;
             if (slot != GAME_NONE) {
@@ -1166,7 +1166,7 @@ MATCH void func_801F9868(void) {
                     g_AreaCameraAngle.vz = 848;
                     func_801BE1B0(0U);
                     Area_StartScrollRoute(0);
-                    free_slot   = Actor_FindFreeSlot();
+                    free_slot   = Actor_FindFreeSpawned();
                     slot        = free_slot & BYTE_MASK;
                     *D_1F800000 = free_slot;
                     if (slot != GAME_NONE) {
@@ -1311,7 +1311,7 @@ MATCH void func_801F9BE4(void) {
             if (g_ScriptVars[2] != 0x23) {
                 break;
             }
-            D_1F800000[0] = Actor_FindFreeSlot();
+            D_1F800000[0] = Actor_FindFreeSpawned();
             if ((D_1F800000[0] & BYTE_MASK) != GAME_NONE) {
                 g_SpawnedActors[D_1F800000[0]].header.flags   = 1;
                 g_SpawnedActors[D_1F800000[0]].type           = 0x13;
@@ -1346,7 +1346,7 @@ MATCH void func_801F9FB8(void) {
             if (g_ScriptVars[2] == 0x30) {
                 g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
                 UI_SetMode(UI_MODE_FADE_IN);
-                id            = Actor_FindFreeSlot();
+                id            = Actor_FindFreeSpawned();
                 D_1F800000[0] = id;
                 if ((id & BYTE_MASK) != GAME_NONE) {
                     g_SpawnedActors[id].header.flags              = 1;
@@ -1447,7 +1447,7 @@ MATCH void func_801FA27C(void) {
             if (g_ScriptVarsReq.byte != 5) {
                 break;
             }
-            id            = Actor_FindFreeSlot();
+            id            = Actor_FindFreeSpawned();
             D_1F800000[0] = id;
             if ((id & BYTE_MASK) != GAME_NONE) {
                 g_SpawnedActors[id].header.flags              = 1;
@@ -1464,7 +1464,7 @@ MATCH void func_801FA27C(void) {
             if (g_ScriptVarsReq.byte != 8) {
                 break;
             }
-            id            = Actor_FindFreeSlot();
+            id            = Actor_FindFreeSpawned();
             D_1F800000[0] = id;
             if ((id & BYTE_MASK) != GAME_NONE) {
                 g_SpawnedActors[id].header.flags              = 1;
@@ -1638,7 +1638,7 @@ MATCH void func_801FA7D8(void) {
                 (*counter)--;
                 return;
             }
-            id            = Actor_FindFreeSlot();
+            id            = Actor_FindFreeSpawned();
             D_1F800000[0] = id;
             if (id != 0xFFu) {
                 g_SpawnedActors[D_1F800000[0]].header.flags = 1;
@@ -1920,7 +1920,7 @@ MATCH void func_801FB204(void) {
                     Area_StartScrollRoute(2);
                     D_80143F84.raw = TO_COORD(1408);
                     Area_AdvanceScroll(D_80143F84.half[1]);
-                    slot          = Actor_FindFreeSlot();
+                    slot          = Actor_FindFreeSpawned();
                     D_1F800000[0] = slot;
                     if ((slot & BYTE_MASK) != GAME_NONE) {
                         g_SpawnedActors[slot].header.flags            = 1;

@@ -9,7 +9,7 @@ MATCH void func_801EEC28(void) {
     PartyMember* saved_battler;
     u8           i;
 
-    BMagic_DispatchTaskPair(func_801EED28, Effect_PlayOnZeroTick);
+    BMagic_DispatchTaskPair(func_801EED28, Effect_MarkDamagedOnZeroTick);
 
     for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
         if (D_801EFF3C[i].header.flags & BMAGIC_EFFECT_IN_USE) {
@@ -59,7 +59,7 @@ MATCH void func_801EED28(void) {
     g_Task->header.mode += 1;
 }
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEF70 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"

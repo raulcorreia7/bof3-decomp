@@ -278,7 +278,7 @@ MATCH void func_801F3920(void) {
 MATCH void func_801F3A78(void) {
     u8 index;
 
-    index                = Actor_FindFreeSlot();
+    index                = Actor_FindFreeSpawned();
     g_Task->param.unk_0B = index;
     if (g_Task->param.unk_0B == GAME_NONE) {
         return;
@@ -295,7 +295,7 @@ MATCH void func_801F3A78(void) {
 MATCH void func_801F3C18(void) {
     u8 value;
 
-    value                = Actor_FindFreeSlot();
+    value                = Actor_FindFreeSpawned();
     g_Task->param.unk_0B = value;
     if (g_Task->param.unk_0B != GAME_NONE) {
         g_SpawnedActors[g_Task->param.unk_0B].header.flags = 1;
@@ -307,7 +307,7 @@ MATCH void func_801F3C18(void) {
 MATCH void func_801F3D28(void) {
     u8 value;
 
-    value                = Actor_FindFreeSlot();
+    value                = Actor_FindFreeSpawned();
     g_Task->param.unk_0B = value;
     if (g_Task->param.unk_0B != GAME_NONE) {
         g_SpawnedActors[g_Task->param.unk_0B].header.flags = 1;
@@ -320,7 +320,7 @@ MATCH void func_801F3D28(void) {
 MATCH void func_801F3DCC(void) {
     u8 index;
 
-    index                = Actor_FindFreeSlot();
+    index                = Actor_FindFreeSpawned();
     g_Task->param.unk_0B = index;
     if (g_Task->param.unk_0B == GAME_NONE) {
         return;

@@ -48,7 +48,7 @@ MATCH void func_801F7554(void) {
     u8            slot;
 
     if ((SP_REF(Actor*, 0x44)->vx & 0xF) == 0) {
-        slot = Actor_FindFreeSlot();
+        slot = Actor_FindFreeSpawned();
         if (slot != GAME_NONE) {
             spawned               = &g_SpawnedActors[slot];
             spawned->header.flags = 1;
