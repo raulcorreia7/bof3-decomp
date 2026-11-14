@@ -213,7 +213,35 @@ MATCH void func_801F7CA8(void) {
     }
 }
 
-INCLUDE_ASM(func_801F7CF0);
+/* Draw one particle as a semi-transparent billboard quad at its projected position, shaded by its brightness. */
+MATCH void func_801F7CF0(SceneParticle* row) {
+    POLY_FT4* prim;
+    DVECTOR   screen;
+    DVECTOR   scale;
+    VECTOR    pos;
+    /* FAKE: retail reserves 32 bytes of frame that no statement uses. */
+    FAKE_STACK_PADS(u8, 32);
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 1, 704, 256) & HALF_MASK, 0);
+    Area_AddCellPrim(row->pos.vx, row->pos.vy, 1, sizeof(DR_MODE));
+    prim = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(prim);
+    SetSemiTrans(prim, 1);
+    screen.vx = (u32)row->unk_20 >> 6;
+    pos       = row->pos;
+    pos.vz <<= 8;
+    Game_ProjectWorldPoint(&pos, &screen, &scale);
+    Area_ProjectPoint((s32*)&pos, &screen);
+    prim->x0 = prim->x2 = screen.vx - scale.vx;
+    prim->x1 = prim->x3 = screen.vx + scale.vx;
+    prim->y0 = prim->y1 = screen.vy - scale.vx;
+    prim->y2 = prim->y3 = screen.vy + scale.vx;
+    setClut(prim, 160, STAGE_PALETTE_Y + 3);
+    prim->tpage = GetTPage(0, 1, 704, 256);
+    setUVWH(prim, 224, 48, 31, 31);
+    setRGB0(prim, row->unk_24, row->unk_24, row->unk_24);
+    Area_AddCellPrim(row->pos.vx, row->pos.vy, 1, sizeof(POLY_FT4));
+}
 
 MATCH void func_801F7EC0() {
     u8             camera[32];
@@ -226,13 +254,13 @@ MATCH void func_801F7EC0() {
     for (i = 0; i < 128; row++, i++) {
         if (row->life != 0) {
             func_801F7CF0(row);
-            row->x += row->vx;
-            row->y += row->vy;
-            row->z += row->vz;
-            height = Area_SampleHeight(row->x, row->y);
-            if (row->z < height) {
-                row->z  = height;
-                row->vz = 0;
+            row->pos.vx += row->vx;
+            row->pos.vy += row->vy;
+            row->pos.vz += row->vz;
+            height = Area_SampleHeight(row->pos.vx, row->pos.vy);
+            if (row->pos.vz < height) {
+                row->pos.vz = height;
+                row->vz     = 0;
                 VectorNormal(&row->vx, &row->vx);
             }
             row->unk_24--;
@@ -356,14 +384,53 @@ MATCH s32 func_801F9DAC(void) {
     return 0;
 }
 
-MATCH s32 func_801F9DB4(void) {
+MATCH s32 func_801F9DB4(s32 x, s32 y) {
     if (g_GameAreaId == AREA_ID_MOMO_TOWER_FIRST_FLOOR) {
-        return func_801F9DF4();
+        return func_801F9DF4(x, y);
     }
     return 0;
 }
 
-INCLUDE_ASM(func_801F9DF4);
+/* Momo Tower first floor: start the scripted event for the cell the party steps on, from its facing and the scene flags. */
+MATCH s8 func_801F9DF4(s32 x, s32 y) {
+    if (SYS_TestFlag(g_SceneFlags, 2) == 0) {
+        if (((x >> 16) - 0x57) < 4U && ((y >> 16) - 0x13) < 3U) {
+            D_1F800000.view.raw[0] = g_Game.members[0].facing;
+            if ((u8)(D_1F800000.view.raw[0] - 5) >= 2U && D_1F800000.view.raw[0] != 4) {
+                Game_SetScriptActive();
+                SYS_SetFlag(g_SceneFlags, 2);
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 4));
+                g_SceneState.timer_06 = 30;
+                g_SceneState.state_04 = 1;
+                g_SceneState.step_05  = 1;
+                return 1;
+            }
+        }
+        return 0;
+    }
+    if (SYS_TestFlag(g_SceneFlags, 3) == 0) {
+        if (((x >> 16) - 0x57) < 4U && ((y >> 16) - 0xB) < 6U) {
+            D_1F800000.view.raw[0] = g_Game.members[0].facing;
+            if ((u8)(D_1F800000.view.raw[0] - 5) >= 2U && D_1F800000.view.raw[0] != 4) {
+                g_SceneState.state_04 = 1;
+                g_SceneState.step_05  = 0;
+                return Scene_ShowMessage(2);
+            }
+        }
+        if (((y >> 16) - 0x18) < 2U && x == TO_COORD_HALF(77)) {
+            g_SceneState.state_04 = 1;
+            g_SceneState.step_05  = 0;
+            return Scene_ShowMessage(3);
+        }
+        return 0;
+    }
+    if (SYS_TestFlag(g_SceneFlags, 7) == 0 && ((x >> 16) - 0x1F) < 3U && y == TO_COORD_HALF(36)) {
+        g_SceneState.state_04 = 1;
+        g_SceneState.step_05  = 0;
+        return Scene_ShowMessage(0x26);
+    }
+    return 0;
+}
 
 #include "overlays/scenario/Scene_ShowMessage.h"
 

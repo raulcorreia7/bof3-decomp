@@ -52,7 +52,7 @@ typedef struct BattleScrollDelta {
 
 ASSERT_SIZE(BattleScrollDelta, 0x02);
 
-extern BattleScrollDelta            D_800B44C0[4];
+extern BattleScrollDelta            g_BattleScrollDeltas[4];
 /* D_800B6510 */
 extern u8                           g_BattleActionSelection[232];
 extern u8*                          D_800B6AB0[];

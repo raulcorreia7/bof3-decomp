@@ -7,13 +7,13 @@ from check_sources import images, layout_names, orphans
 IMAGES = {
     "overlays/plchar/plp278/00": (
         "config/emi/plchar/plp278/00/splat.yaml",
-        {"C", "D_801CE400"},
+        {"PlChar_FieldTask", "D_801CE400"},
     )
 }
 
 
 def test_a_named_source_passes() -> None:
-    assert orphans(["src/overlays/plchar/plp278/00/C.c"], IMAGES) == []
+    assert orphans(["src/overlays/plchar/plp278/00/PlChar_FieldTask.c"], IMAGES) == []
 
 
 def test_a_source_no_row_names_is_reported_with_its_layout() -> None:

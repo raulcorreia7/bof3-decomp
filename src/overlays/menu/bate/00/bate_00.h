@@ -42,7 +42,8 @@ extern s8            D_80148511;
 extern u8            D_80148656;
 extern s8            D_80148658;
 extern u8            D_8018E244;
-extern OverlayHeader D_801D0C00;
+/* g_EmiOverlayHeader */
+extern OverlayHeader g_EmiOverlayHeader;
 /* D_801D0D80 */
 extern u8            g_SaveSlotLevelFormat[];
 /* D_801D0D84 */
