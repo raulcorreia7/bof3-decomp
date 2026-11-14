@@ -247,7 +247,21 @@ MATCH void func_801EFA78(void) {
     GFX_AddPrim(5, sizeof(DR_MODE));
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING s32 func_801EFDD4(void* battler) {
+    Actor* actor = battler;
+    s32    dx;
+    s32    dy;
+    s32    ty;
+
+    dx = (actor->pos.x.fixed >> 9) - (g_Task->pos.x.fixed >> 9);
+    ty = g_Task->pos.y.fixed >> 9;
+    dy = (actor->pos.y.fixed >> 9) - ty;
+    return dx * dx + dy * dy <= SP_REF(s16, 0) * SP_REF(s16, 0);
+}
+#else
 INCLUDE_ASM(func_801EFDD4);
+#endif
 
 /* func_801EFE38 */
 #include "overlays/bmagic/BMagic_AllocEffect.h"
