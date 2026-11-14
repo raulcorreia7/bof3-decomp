@@ -28,7 +28,7 @@ extern Callback g_SceneEntityDispatch[];
 
 extern AreaSpawnSlot D_801D39A8[EFFECT_SLOT_COUNT];
 
-/* One 10-byte point of the dot trail at 0x800EA200. */
+/* One 10-byte point of the dot trail at AREA_WORK + 0x5A00. */
 typedef struct SceneDot {
     u8  active; /* +0x00 - flips every frame it is processed */
     u8  life;   /* +0x01 */
