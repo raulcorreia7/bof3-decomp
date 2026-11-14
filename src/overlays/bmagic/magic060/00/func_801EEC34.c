@@ -157,7 +157,7 @@ MATCH void func_801EF76C(u8* text, s32 x, s32 y) {
     while (*text != 0) {
         prim = GFX_CURSOR(POLY_FT4);
         SetPolyFT4(prim);
-        setXY4(prim, x, y, x + 8, y, x, y + 8, x + 8, y + 8);
+        setXYWH(prim, x, y, 8, 8);
         setRGB0(prim, 128, 128, 128);
         setTPage(prim, 0, 1, 0x3C0, 0);
         setClut(prim, 0, 0x1E0);

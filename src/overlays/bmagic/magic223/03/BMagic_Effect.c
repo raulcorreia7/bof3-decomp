@@ -45,36 +45,24 @@ MATCH void func_801EF1E8(void) {
     s32*     dark;
     s32      tpage;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
     if (g_BattleEffectBattler->facing & 1) {
-        setXY4(prim, 0, 0, 0x13F, 0, 0, 0xEF, 0x13F, 0xEF);
+        setXYWH(prim, 0, 0, 319, 239);
     } else {
         setXY4(prim, 0x13F, 0, 0, 0, 0x13F, 0xEF, 0, 0xEF);
     }
     dark       = &D_1F800008;
     *dark      = g_Task->unk_09;
     D_1F80000C = g_Task->unk_09 * 8;
-    prim->r0 = prim->r3 = D_1F80000C;
-    prim->g0 = prim->g3 = D_1F80000C;
-    prim->b0 = prim->b3 = D_1F80000C;
-    prim->r1 = prim->r2 = *dark;
-    prim->g1 = prim->g2 = *dark;
-    prim->b1 = prim->b2 = *dark;
+    setRGB0(prim, prim->r3 = D_1F80000C, prim->g3 = D_1F80000C, prim->b3 = D_1F80000C);
+    setRGB1(prim, prim->r2 = *dark, prim->g2 = *dark, prim->b2 = *dark);
     GFX_AddPrim(2, sizeof(POLY_G4));
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x25;
-    } else {
-        tpage = 0x15;
-    }
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
 }
@@ -151,11 +139,7 @@ MATCH void func_801EF7A8(void) {
     POLY_FT4* prim;
     s32       tpage;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x125;
-    } else {
-        tpage = 0x55;
-    }
+    tpage = getTPage(0, 2, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
     D_1F800000.view.scenario.math_00 = 0x4A;
@@ -164,8 +148,8 @@ MATCH void func_801EF7A8(void) {
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
     D_1F800000.view.scenario.math_04 = g_Task->unk_14 + 0xF78;
-    prim->x0                         = g_Task->unk_2E.half + FIXED_MUL(rsin(D_1F800000.view.scenario.math_04), D_1F800000.view.scenario.math_00);
-    prim->y0                         = g_Task->unk_30.half + FIXED_MUL(rcos(D_1F800000.view.scenario.math_04), D_1F800000.view.scenario.math_00);
+    setXY0(prim, g_Task->unk_2E.half + FIXED_MUL(rsin(D_1F800000.view.scenario.math_04), D_1F800000.view.scenario.math_00),
+           g_Task->unk_30.half + FIXED_MUL(rcos(D_1F800000.view.scenario.math_04), D_1F800000.view.scenario.math_00));
     D_1F800000.view.scenario.math_04 = g_Task->unk_14 + 0x888;
     prim->x1                         = g_Task->unk_2E.half + FIXED_MUL(rsin(D_1F800000.view.scenario.math_04), D_1F800000.view.scenario.math_00);
     prim->y1                         = g_Task->unk_30.half + FIXED_MUL(rcos(D_1F800000.view.scenario.math_04), D_1F800000.view.scenario.math_00);
@@ -177,17 +161,8 @@ MATCH void func_801EF7A8(void) {
     prim->y3                         = g_Task->unk_30.half + FIXED_MUL(rcos(D_1F800000.view.scenario.math_04), D_1F800000.view.scenario.math_00);
     prim->tpage                      = GetTPage(0, 1, 832, 256);
     prim->clut                       = GetClut(g_Task->param.unk_0B, 506);
-    prim->u0                         = 8;
-    prim->v0                         = (g_Task->unk_09 & 3) * 32 + 8;
-    prim->u1                         = 0x98;
-    prim->v1                         = (g_Task->unk_09 & 3) * 32 + 8;
-    prim->u2                         = 8;
-    prim->v2                         = (g_Task->unk_09 & 3) * 32 + 0x28;
-    prim->u3                         = 0x98;
-    prim->v3                         = (g_Task->unk_09 & 3) * 32 + 0x28;
-    prim->r0                         = D_1F800000.view.scenario.math_08;
-    prim->g0                         = D_1F800000.view.scenario.math_08;
-    prim->b0                         = D_1F800000.view.scenario.math_08;
+    setUV4(prim, 8, (g_Task->unk_09 & 3) * 32 + 8, 0x98, (g_Task->unk_09 & 3) * 32 + 8, 8, (g_Task->unk_09 & 3) * 32 + 0x28, 0x98, (g_Task->unk_09 & 3) * 32 + 0x28);
+    setRGB0(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08);
     GFX_AddPrim(3, sizeof(POLY_FT4));
 }
 

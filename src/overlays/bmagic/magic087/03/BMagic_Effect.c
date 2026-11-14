@@ -178,7 +178,7 @@ MATCH void func_801EF580(s32 phase) {
     s32       offset;
     s32       tpage;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.view.scenario.math_08 = 1;
@@ -196,43 +196,25 @@ MATCH void func_801EF580(s32 phase) {
         SetSemiTrans(prim, 1);
         D_1F800000.view.scenario.math_04 = ((g_Task->unk_04 + i + phase + 1) & 0x1F) << 7;
         offset                           = ((rsin(D_1F800000.view.scenario.math_04) * 8) >> 12) + 4;
-        prim->x0                         = g_Task->unk_2E.half - offset;
-        prim->y0                         = g_Task->unk_30.half - (i + 1) * 8;
-        prim->x1                         = prim->x0 + 8;
-        prim->y1                         = g_Task->unk_30.half - (i + 1) * 8;
+        setXY2(prim, g_Task->unk_2E.half - offset, g_Task->unk_30.half - (i + 1) * 8, prim->x0 + 8, g_Task->unk_30.half - (i + 1) * 8);
         D_1F800000.view.scenario.math_04 = ((g_Task->unk_04 + phase + i) & 0x1F) << 7;
         offset                           = ((rsin(D_1F800000.view.scenario.math_04) * 8) >> 12) + 4;
         prim->x2                         = g_Task->unk_2E.half - offset;
         prim->y2                         = g_Task->unk_30.half - i * 8;
         prim->x3                         = prim->x2 + 8;
         prim->y3                         = g_Task->unk_30.half - i * 8;
-        prim->r2                         = D_1F800000.view.scenario.math_08;
-        prim->g2                         = D_1F800000.view.scenario.math_08;
-        prim->b2                         = D_1F800000.view.scenario.math_08;
-        prim->r3                         = D_1F800000.view.scenario.math_08;
-        prim->g3                         = D_1F800000.view.scenario.math_08;
-        prim->b3                         = D_1F800000.view.scenario.math_08;
+        setRGB2(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08);
+        setRGB3(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08);
         if (i < 6) {
             D_1F800000.view.scenario.math_08 = (i + 1) * 16;
         } else {
             D_1F800000.view.scenario.math_08 = 0x61 - (i - 5) * 48;
         }
-        prim->r0    = D_1F800000.view.scenario.math_08;
-        prim->g0    = D_1F800000.view.scenario.math_08;
-        prim->b0    = D_1F800000.view.scenario.math_08;
-        prim->r1    = D_1F800000.view.scenario.math_08;
-        prim->g1    = D_1F800000.view.scenario.math_08;
-        prim->b1    = D_1F800000.view.scenario.math_08;
+        setRGB0(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08);
+        setRGB1(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08);
         prim->tpage = GetTPage(0, 1, 0x3C0, 0x100);
         prim->clut  = GetClut(0, 0x1FA);
-        prim->u0    = 0;
-        prim->v0    = (i * 8 + g_Task->unk_04 * 2) & 0x1F;
-        prim->u1    = 8;
-        prim->v1    = (i * 8 + g_Task->unk_04 * 2) & 0x1F;
-        prim->u2    = 0;
-        prim->v2    = ((i * 8 + g_Task->unk_04 * 2) & 0x1F) + 8;
-        prim->u3    = 8;
-        prim->v3    = ((i * 8 + g_Task->unk_04 * 2) & 0x1F) + 8;
+        setUV4(prim, 0, (i * 8 + g_Task->unk_04 * 2) & 0x1F, 8, (i * 8 + g_Task->unk_04 * 2) & 0x1F, 0, ((i * 8 + g_Task->unk_04 * 2) & 0x1F) + 8, 8, ((i * 8 + g_Task->unk_04 * 2) & 0x1F) + 8);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_GT4));
     }
 }
@@ -379,12 +361,8 @@ MATCH void func_801EFF50(void) {
 
     ;
     PushMatrix();
-    rot.vx = 0;
-    rot.vy = 0;
-    rot.vz = (g_Task->param.unk_0B & 0x3f) << 6;
-    pos.vx = (g_Task->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vy = (g_Task->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vz = -(COORD_INT(g_Task->pos.z) + 0x200) / 2;
+    setVector(&rot, 0, 0, (g_Task->param.unk_0B & 0x3f) << 6);
+    setVector(&pos, (g_Task->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (g_Task->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, -(COORD_INT(g_Task->pos.z) + 0x200) / 2);
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
 }
@@ -398,7 +376,7 @@ MATCH void func_801F0014(void) {
     long     depth;
     long     flag;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0xA5 : 0x35;
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
 
@@ -410,15 +388,9 @@ MATCH void func_801F0014(void) {
     } else {
         D_1F800000.view.scenario.math_00 = g_Task->unk_09 * 4 + 0x80;
     }
-    D_1F800014[0].vx = FIXED_MUL(rsin(0x200), D_1F800000.view.scenario.math_00);
-    D_1F800014[0].vy = FIXED_MUL(rcos(0x200), D_1F800000.view.scenario.math_00);
-    D_1F800014[0].vz = 0;
-    D_1F800014[1].vx = FIXED_MUL(rsin(0x600), D_1F800000.view.scenario.math_00);
-    D_1F800014[1].vy = FIXED_MUL(rcos(0x600), D_1F800000.view.scenario.math_00);
-    D_1F800014[1].vz = 0;
-    D_1F800014[2].vx = FIXED_MUL(rsin(0xA00), D_1F800000.view.scenario.math_00);
-    D_1F800014[2].vy = FIXED_MUL(rcos(0xA00), D_1F800000.view.scenario.math_00);
-    D_1F800014[2].vz = 0;
+    setVector(&D_1F800014[0], FIXED_MUL(rsin(0x200), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(0x200), D_1F800000.view.scenario.math_00), 0);
+    setVector(&D_1F800014[1], FIXED_MUL(rsin(0x600), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(0x600), D_1F800000.view.scenario.math_00), 0);
+    setVector(&D_1F800014[2], FIXED_MUL(rsin(0xA00), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(0xA00), D_1F800000.view.scenario.math_00), 0);
     RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
     D_1F800000.view.scenario.math_08 = g_Task->timer * D_801F0548[g_Task->unk_04];
     setRGB0(prim, D_1F800000.view.scenario.math_08, 1, D_1F800000.view.scenario.math_08);
@@ -429,15 +401,9 @@ MATCH void func_801F0014(void) {
     prim = GFX_CURSOR(LINE_G3);
     SetLineG3(prim);
     SetSemiTrans(prim, 1);
-    D_1F800014[0].vx = FIXED_MUL(rsin(0xA00), D_1F800000.view.scenario.math_00);
-    D_1F800014[0].vy = FIXED_MUL(rcos(0xA00), D_1F800000.view.scenario.math_00);
-    D_1F800014[0].vz = 0;
-    D_1F800014[1].vx = FIXED_MUL(rsin(0xE00), D_1F800000.view.scenario.math_00);
-    D_1F800014[1].vy = FIXED_MUL(rcos(0xE00), D_1F800000.view.scenario.math_00);
-    D_1F800014[1].vz = 0;
-    D_1F800014[2].vx = FIXED_MUL(rsin(0x200), D_1F800000.view.scenario.math_00);
-    D_1F800014[2].vy = FIXED_MUL(rcos(0x200), D_1F800000.view.scenario.math_00);
-    D_1F800014[2].vz = 0;
+    setVector(&D_1F800014[0], FIXED_MUL(rsin(0xA00), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(0xA00), D_1F800000.view.scenario.math_00), 0);
+    setVector(&D_1F800014[1], FIXED_MUL(rsin(0xE00), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(0xE00), D_1F800000.view.scenario.math_00), 0);
+    setVector(&D_1F800014[2], FIXED_MUL(rsin(0x200), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(0x200), D_1F800000.view.scenario.math_00), 0);
     RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
     setRGB0(prim, D_1F800000.view.scenario.math_08, 1, D_1F800000.view.scenario.math_08);
     setRGB1(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, 1);

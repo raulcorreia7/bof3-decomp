@@ -13,13 +13,7 @@ MATCH void func_801EEC24(void) {
 
     __builtin_memcpy(handlers, D_801EEC04, sizeof(handlers));
     SYS_DISPATCH_BYTE(handlers, g_Task->header.mode);
-    if (GetGraphType() == 1) {
-        tpage = 0x125;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x125;
-    } else {
-        tpage = 0x55;
-    }
+    tpage = getTPage(0, 2, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     for (i = 0; i < ARRAY_COUNT(D_801F1CA0); i++) {
@@ -31,13 +25,7 @@ MATCH void func_801EEC24(void) {
             g_BattleEffectBattler = saved_battler;
         }
     }
-    if (GetGraphType() == 1) {
-        tpage = 0x25;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x25;
-    } else {
-        tpage = 0x15;
-    }
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
 }
@@ -506,11 +494,7 @@ MATCH void func_801F0DF4(void) {
     s32       tpage;
     s32       u;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = ((g_Task->param.unk_0B & 3) << 7) | 0x25;
-    } else {
-        tpage = ((g_Task->param.unk_0B & 3) << 5) | 0x15;
-    }
+    tpage = getTPage(0, g_Task->param.unk_0B, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
     D_1F800000.view.effect.params[0] = g_Task->unk_14;
@@ -656,8 +640,7 @@ MATCH void func_801F1844(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0                         = D_1F800000.view.effect.params[6];
-        prim->y0                         = D_1F800000.view.effect.params[7];
+        setXY0(prim, D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
         D_1F800000.view.effect.params[3] = (i << 9) & ANGLE_MASK;
         prim->x1                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[0]);
         prim->y1                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[0]);

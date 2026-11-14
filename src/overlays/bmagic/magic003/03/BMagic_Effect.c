@@ -458,7 +458,7 @@ MATCH void func_801F0164(s32 index) {
     s32       u;
     s32       v;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     length = D_801F0A9C[(u8)index];
@@ -469,7 +469,7 @@ MATCH void func_801F0164(s32 index) {
         if (D_801F0AA0[(u8)index][i] != 0xFF) {
             prim = (POLY_FT4*)g_GfxPrimCursor;
             SetPolyFT4(prim);
-            setXY4(prim, x, y, x + 12, y, x, y + 12, x + 12, y + 12);
+            setXYWH(prim, x, y, 12, 12);
             prim->tpage = GetTPage(0, 0, 0x3C0, 0);
             prim->clut  = GetClut(0, 0x1E0);
             setRGB0(prim, 0x80, 0x80, 0x80);
@@ -491,14 +491,14 @@ MATCH void func_801F03F0(s32 dir) {
     u16       y;
     s32       u;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     prim = (POLY_FT4*)g_GfxPrimCursor;
     x    = g_Task->unk_2E.half;
     y    = g_Task->unk_30.half;
     SetPolyFT4(prim);
-    setXY4(prim, x, y, x + 12, y, x, y + 12, x + 12, y + 12);
+    setXYWH(prim, x, y, 12, 12);
     prim->tpage = GetTPage(0, 0, 0x3C0, 0);
     prim->clut  = GetClut(D_801F0AD4[(u8)dir], 0x1E0);
     u           = ((u8)dir + 15) * 12;
@@ -517,7 +517,7 @@ MATCH void func_801F0550(s32 value) {
     s32       u;
     u16       left;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     tens = (u8)value / 10;
@@ -552,28 +552,24 @@ MATCH void func_801F07B0(s32 index) {
     TILE* tile;
     s32   tpage;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x125 : 0x55;
+    tpage = getTPage(0, 2, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
-    tile->x0 = g_Task->unk_2E.half - (D_801F0B10[(u8)index].x + 4);
-    tile->y0 = g_Task->unk_30.half - (D_801F0B10[(u8)index].y + 4);
-    tile->w  = D_801F0B10[(u8)index].w + 8;
-    tile->h  = D_801F0B10[(u8)index].h + 8;
+    setXY0(tile, g_Task->unk_2E.half - (D_801F0B10[(u8)index].x + 4), g_Task->unk_30.half - (D_801F0B10[(u8)index].y + 4));
+    setWH(tile, D_801F0B10[(u8)index].w + 8, D_801F0B10[(u8)index].h + 8);
     setRGB0(tile, 0x20, 0x20, 0x20);
     GFX_AddPrim(2, sizeof(TILE));
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
-    tile->x0 = g_Task->unk_2E.half - (D_801F0B10[(u8)index].x + 6);
-    tile->y0 = g_Task->unk_30.half - (D_801F0B10[(u8)index].y + 6);
-    tile->w  = D_801F0B10[(u8)index].w + 12;
-    tile->h  = D_801F0B10[(u8)index].h + 12;
+    setXY0(tile, g_Task->unk_2E.half - (D_801F0B10[(u8)index].x + 6), g_Task->unk_30.half - (D_801F0B10[(u8)index].y + 6));
+    setWH(tile, D_801F0B10[(u8)index].w + 12, D_801F0B10[(u8)index].h + 12);
     setRGB0(tile, 0x20, 0x20, 0x20);
     GFX_AddPrim(2, sizeof(TILE));
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
 }

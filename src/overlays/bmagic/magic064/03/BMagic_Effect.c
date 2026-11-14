@@ -256,11 +256,7 @@ MATCH void func_801F009C(void) {
 
     handlers = D_801EEC5C;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x8F;
-    } else {
-        tpage = 0x2F;
-    }
+    tpage = getTPage(0, 1, 960, 0);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     for (i = 0; i < MAGIC064_RING_COUNT; i++) {

@@ -44,7 +44,7 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
    ([compiler wrapper](../../../../docs/toolchain.md#compiler-wrapper)).
 
 6. **Tactics.** The [tactics table](../../../../docs/matching.md#tactics-for-gcc-272) maps each
-   retail shape to the C that produces it. The five used most:
+   retail shape to the C that produces it. The six used most:
 
    - `andi` on an argument: parameter `s32`, cast at the use: `(u8)dir`.
    - an `andi` after a counter update, or an `sll`/`sra` pair: the local is `u8`, `u16` or `s16`;
@@ -52,6 +52,9 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
    - a store, then a reload of the member for the test: `g_Task->m = f(); if (g_Task->m != 0xFF)`.
    - a load, an add, a store, then a test of the old value: `val = *p; *p = val + 1; if (val < N)`.
    - a loop with no entry test: `i = 0; do { ...; i++; } while (i < N);`.
+   - primitive fields stored in order, or a `GetGraphType()` ladder picking a texture page: the
+     SDK macro (`setXY4`, `setRGB0`, `setUVWH`, `getTPage(tp, abr, x, y)`); measure it, and keep
+     plain assignments only where the macro's order differs from retail.
 
    On a miss, label the first hunk ([diagnose](../../../../docs/matching.md#diagnose)) and fix it
    by label. Helpers come after pure C fails, benign before harmful, each with its `FAKE:` note

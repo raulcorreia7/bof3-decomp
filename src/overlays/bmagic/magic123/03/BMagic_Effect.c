@@ -11,11 +11,7 @@ MATCH void func_801EEC04(void) {
     u8           i;
 
     BMagic_DispatchTaskPair(func_801EEDAC, Effect_PlayOnZeroTick);
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
 
@@ -31,11 +27,7 @@ MATCH void func_801EEC04(void) {
         }
     }
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x25;
-    } else {
-        tpage = 0x15;
-    }
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
 }
@@ -194,8 +186,7 @@ MATCH void func_801EF584(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0                         = D_1F800000.view.effect.params[3];
-        prim->y0                         = D_1F800000.view.effect.params[4];
+        setXY0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[4]);
         phase                            = (D_801EFD6C[i] + g_Task->unk_09) & 0x3F;
         D_1F800000.view.effect.params[2] = phase << 6;
         prim->x1                         = D_1F800000.view.effect.params[3] + FIXED_MUL(rsin(phase << 6), D_1F800000.view.effect.params[0]);

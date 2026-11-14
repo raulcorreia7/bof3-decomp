@@ -317,9 +317,7 @@ MATCH void func_801EFD88(void) {
     tile->x0     = 0;
     tile->h      = SCREEN_HEIGHT;
     SCREEN_SHADE = g_Task->unk_09 * 15;
-    tile->r0     = SCREEN_SHADE;
-    tile->g0     = SCREEN_SHADE;
-    tile->b0     = SCREEN_SHADE;
+    setRGB0(tile, SCREEN_SHADE, SCREEN_SHADE, SCREEN_SHADE);
     GFX_AddPrim(2, sizeof(TILE));
     GFX_AddDitheredDrawMode(2, getTPage(0, 0, 320, 256));
 }

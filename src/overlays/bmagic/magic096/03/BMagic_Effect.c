@@ -155,9 +155,7 @@ MATCH void func_801EF43C(void) {
     long    flags;
 
     PushMatrix();
-    rot.vx = g_Task->unk_18;
-    rot.vy = g_Task->unk_1C;
-    rot.vz = 0;
+    setVector(&rot, g_Task->unk_18, g_Task->unk_1C, 0);
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }
 
@@ -190,52 +188,32 @@ MATCH void func_801EF4FC(void) {
         D_1F800014[2].vz = -D_1F800000.view.effect.params[3];
         x                = (D_1F800014[1].vx << 9) + g_Task->pos.x.fixed;
         y                = (D_1F800014[1].vy << 9) + g_Task->pos.y.fixed;
-        tpage            = GetGraphType() == 1 || GetGraphType() == 2 ? 0x225 : 0x95;
+        tpage            = getTPage(1, 0, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
         tri = (POLY_FT3*)g_GfxPrimCursor;
         SetPolyFT3(tri);
         setTPage(tri, 1, 0, 832, 256);
         setClut(tri, 0, 506);
-        tri->u0 = j * 64 + 32;
-        tri->v0 = 64;
-        tri->u1 = j * 64;
-        tri->v1 = 96;
-        tri->u2 = (j + 1) * 64 - 1;
-        tri->v2 = 96;
+        setUV3(tri, j * 64 + 32, 64, j * 64, 96, (j + 1) * 64 - 1, 96);
         RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&tri->x0, (long*)&tri->x1, (long*)&tri->x2, &depth, &flag);
         D_1F800000.view.effect.params[7] = 128 - j * 16;
         setRGB0(tri, D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[7]);
         Area_AddCellPrim(x, y, 0, sizeof(POLY_FT3));
-        D_1F800014[0].vx = D_1F800014[1].vx;
-        D_1F800014[0].vy = D_1F800014[1].vy;
-        D_1F800014[0].vz = D_1F800014[1].vz;
-        D_1F800014[1].vx = D_1F800014[2].vx;
-        D_1F800014[1].vy = D_1F800014[2].vy;
-        D_1F800014[1].vz = D_1F800014[2].vz;
-        D_1F800014[2].vx = FIXED_MUL(rsin(j << 10), D_1F800000.view.effect.params[1]);
-        D_1F800014[2].vy = FIXED_MUL(rcos(j << 10), D_1F800000.view.effect.params[1]);
-        D_1F800014[2].vz = 0;
-        D_1F800014[3].vx = FIXED_MUL(rsin((j + 1) << 10), D_1F800000.view.effect.params[1]);
-        D_1F800014[3].vy = FIXED_MUL(rcos((j + 1) << 10), D_1F800000.view.effect.params[1]);
-        D_1F800014[3].vz = 0;
-        x                = (D_1F800014[2].vx << 9) + g_Task->pos.x.fixed;
-        y                = (D_1F800014[2].vy << 9) + g_Task->pos.y.fixed;
-        tpage            = GetGraphType() == 1 || GetGraphType() == 2 ? 0x225 : 0x95;
+        setVector(&D_1F800014[0], D_1F800014[1].vx, D_1F800014[1].vy, D_1F800014[1].vz);
+        setVector(&D_1F800014[1], D_1F800014[2].vx, D_1F800014[2].vy, D_1F800014[2].vz);
+        setVector(&D_1F800014[2], FIXED_MUL(rsin(j << 10), D_1F800000.view.effect.params[1]), FIXED_MUL(rcos(j << 10), D_1F800000.view.effect.params[1]), 0);
+        setVector(&D_1F800014[3], FIXED_MUL(rsin((j + 1) << 10), D_1F800000.view.effect.params[1]), FIXED_MUL(rcos((j + 1) << 10), D_1F800000.view.effect.params[1]), 0);
+        x     = (D_1F800014[2].vx << 9) + g_Task->pos.x.fixed;
+        y     = (D_1F800014[2].vy << 9) + g_Task->pos.y.fixed;
+        tpage = getTPage(1, 0, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
         quad = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(quad);
         setTPage(quad, 1, 0, 832, 256);
         setClut(quad, 0, 506);
-        quad->u0 = j * 64;
-        quad->v0 = 96;
-        quad->u1 = j * 64 + 152;
-        quad->v1 = 96;
-        quad->u2 = j * 64;
-        quad->v2 = 159;
-        quad->u3 = j * 64 + 152;
-        quad->v3 = 159;
+        setUV4(quad, j * 64, 96, j * 64 + 152, 96, j * 64, 159, j * 64 + 152, 159);
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&quad->x0, (long*)&quad->x1, (long*)&quad->x2, (long*)&quad->x3, &depth, &flag);
         setRGB0(quad, D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[7]);
         Area_AddCellPrim(x, y, 0, sizeof(POLY_FT4));
@@ -251,22 +229,16 @@ MATCH void func_801EFB3C(void) {
     s32      i;
     s32      tpage;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.view.effect.params[0] = g_Task->timer * 16 + 16;
     D_1F800000.view.effect.params[5] = g_Task->timer * 8;
     D_1F800000.view.effect.params[6] = g_Task->timer * 9;
     D_1F800000.view.effect.params[7] = g_Task->timer * 7;
-    D_1F800014[2].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[2].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[2].vz                 = 0;
-    D_1F800014[1].vz                 = 0;
-    D_1F800014[0].vz                 = 0;
+    setVector(&D_1F800014[2], FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]), 0);
+    D_1F800014[1].vz = 0;
+    D_1F800014[0].vz = 0;
     for (i = 1; i <= 8; i++) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
