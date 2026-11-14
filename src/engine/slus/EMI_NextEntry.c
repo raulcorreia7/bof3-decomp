@@ -22,9 +22,6 @@ MATCH s32 EMI_NextEntry(u8 slot) {
         /* FAKE: statement boundary keeps the retail register order and schedule; the plain form without barriers is 12
            bytes short. */
         FAKE_ORDER_LOCK(g_EmiEntryType = EMI_LOADER_STATE_ARCHIVE_HEADER);
-        /* FAKE: barrier holds the return constant after the loader stores.
-         */
-        FAKE_BARRIER();
         result             = 1;
         g_EmiStep          = result;
         g_EmiPayloadSector = first_sector;

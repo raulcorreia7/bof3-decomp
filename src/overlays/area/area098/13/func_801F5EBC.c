@@ -35,14 +35,9 @@ MATCH s32 func_801F5EBC(void) {
         step           = -(step + part);
         step >>= 3;
         D_80146867 = (s8)step;
-        /* FAKE: barrier keeps the g_SceneEventMode/g_SceneEventSelection stores in statement
-         * order after the row store. */
-        FAKE_BARRIER();
     FAKE_ORDER_LOCK_END;
-    step             = 9;
-    g_SceneEventMode = request;
-    /* FAKE: barrier keeps the g_SceneEventSelection store after the g_SceneEventMode store. */
-    FAKE_BARRIER();
+    step                  = 9;
+    g_SceneEventMode      = request;
     g_SceneEventSelection = step;
     return 0;
 }
