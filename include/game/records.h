@@ -124,7 +124,7 @@ typedef struct SpawnedActor {
     u8         pad_40[0x0A]; /* 0x40-0x49 */
     u8         unk_4A;       /* 0x4A */
     u8         pad_4B[0x19]; /* 0x4B-0x63 */
-    Point3l   camera_angle; /* 0x64 */
+    Point3l    camera_angle; /* 0x64 */
     u8         pad_70[4];    /* 0x70-0x73 */
 } SpawnedActor;
 

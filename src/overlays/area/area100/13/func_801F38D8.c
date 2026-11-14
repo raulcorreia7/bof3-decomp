@@ -2,7 +2,7 @@
 
 MATCH void func_801F38D8(void) {
     SpawnedActor* slot;
-    u8         index;
+    u8            index;
 
     switch (g_SceneEventStep) {
         case 0:

@@ -1,7 +1,7 @@
 #include "area121_14.h"
 
 MATCH void func_801F2DC0(void) {
-    s32        actor_slot;
+    s32           actor_slot;
     SpawnedActor* slot;
 
     actor_slot = Actor_FindFreeSlot() & BYTE_MASK;

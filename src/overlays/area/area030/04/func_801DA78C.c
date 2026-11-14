@@ -6,7 +6,7 @@
  * speed word, or releases the record once the direction is no longer held and
  * its 0x34 word leaves the accepted range; it then runs the shared refresh. */
 MATCH void func_801DA78C(void) {
-    SpawnedActor*    record;
+    SpawnedActor* record;
     FishingState* work;
     s32           direction;
     s32           speed;

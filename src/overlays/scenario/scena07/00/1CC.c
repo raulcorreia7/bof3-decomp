@@ -662,7 +662,7 @@ MATCH void func_801FD5A0(void) {
 
 MATCH SpawnedActor* func_801FD610(u8 mode) {
     SpawnedActor* slot;
-    s32        index;
+    s32           index;
 
     index = Actor_FindFreeSlot() & BYTE_MASK;
     slot  = &g_SpawnedActors[index];

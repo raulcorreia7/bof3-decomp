@@ -4,7 +4,7 @@
 MATCH void func_801F462C(s32* pos, s16 radius, u8 center_shade, u8 rim_shade) {
     DVECTOR  screen;
     Point2s  size;
-    Point2u projected;
+    Point2u  projected;
     POLY_G3* packet;
     u16      angle;
     u16      next;

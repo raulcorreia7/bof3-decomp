@@ -44,8 +44,8 @@ MATCH void func_801F7530(void) {
 
 MATCH void func_801F7554(void) {
     SpawnedActor* spawned;
-    Actor*     actor;
-    u8         slot;
+    Actor*        actor;
+    u8            slot;
 
     if ((SP_REF(Actor*, 0x44)->vx & 0xF) == 0) {
         slot = Actor_FindFreeSlot();

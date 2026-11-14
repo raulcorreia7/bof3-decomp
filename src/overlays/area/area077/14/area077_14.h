@@ -23,9 +23,9 @@ extern u8       D_800E5502;
 /* One of the 64 slots at AREA_WORK, 0x34 bytes each. */
 typedef struct AreaSlot {
     Point3l pos; /* 0x00 */
-    u8       unk_0C[0x24];
-    u16      unk_30; /* 0x30 */
-    u16      pad_32; /* 0x32 */
+    u8      unk_0C[0x24];
+    u16     unk_30; /* 0x30 */
+    u16     pad_32; /* 0x32 */
 } AreaSlot;
 
 ASSERT_SIZE(AreaSlot, 0x34);

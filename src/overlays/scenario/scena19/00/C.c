@@ -27,7 +27,7 @@ MATCH void func_801F6C68(void) {
 
 MATCH void func_801F6CA4(void) {
     SpawnedActor* slot;
-    s32        index;
+    s32           index;
 
     if (g_InputPressed & PADR1) {
         index = Actor_FindFreeSlot();

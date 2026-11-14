@@ -42,7 +42,7 @@ MATCH void Actor_SpawnFlock(void) {
         g_SpawnedActors[index].header.mode      = 1;
         g_SpawnedActors[index].unk_06           = (u8)i;
         g_SpawnedActors[index].unk_08           = (u8)(kind >> 4);
-        distance                             = Area_SampleHeight(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed) + 0x400;
+        distance                                = Area_SampleHeight(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed) + 0x400;
         COORD_INT(g_SpawnedActors[index].pos.z) = distance;
         i++;
     } while (i < count);

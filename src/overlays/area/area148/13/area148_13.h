@@ -22,7 +22,7 @@ void                       Area_Update(s32 arg);
 extern s32                 g_AreaFocusY;
 /* The facing routes the projection reads, one Point2l per spawn index. */
 /* D_80181AC0 */
-extern Point2l            g_FacingOffsets[];
+extern Point2l             g_FacingOffsets[];
 /* The state handler tables the dispatchers index. */
 extern u8                  D_801F4FC4[];
 extern Callback            D_801F5024[];

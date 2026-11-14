@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 MATCH void Actor_DispatchAll(void) {
-    s32        count;
+    s32           count;
     SpawnedActor* slot;
 
     count = 0;

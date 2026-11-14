@@ -3,8 +3,8 @@
 /* Spawns a copy of the g_Actors[2] row in a free actor slot and advances the current task's mode. */
 MATCH void func_801F2E28(void) {
     SpawnedActor* slot;
-    Actor*     previous;
-    u8         index;
+    Actor*        previous;
+    u8            index;
 
     index = Actor_FindFreeSlot();
     if (index != GAME_NONE) {

@@ -16,7 +16,7 @@ MATCH void Area_SpawnSpinEffect(void) {
     }
     i = 0;
     do {
-        slot                            = Actor_FindFreeSlot();
+        slot                               = Actor_FindFreeSlot();
         g_SpawnedActors[slot].header.flags = ACTOR_FLAG_IN_USE;
         g_SpawnedActors[slot].type         = 0x5C;
         g_SpawnedActors[slot].header.mode  = 3;

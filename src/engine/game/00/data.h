@@ -106,7 +106,7 @@ typedef u8 (*ActorActionFunc)(void* entity, u8 param, s32 phase);
 typedef void (*ActorWorkFunc)(s32 fallback_index, s32 index);
 
 /* D_801C7B74 */
-extern Offset2b            s_BattleScrollCellSteps[4];
+extern Offset2b             s_BattleScrollCellSteps[4];
 extern AreaHandler          D_801C7F5C[11];
 extern ActorActionFunc      D_801C83BC[7];
 extern ObjectFunc           D_801C83D8[11];
@@ -122,12 +122,12 @@ extern WorldMapBattlefields D_801CD224;
 #define WORLD_MAP_DESTINATION_COUNT 10
 extern WorldMapDestination D_801CD24C[WORLD_MAP_DESTINATION_COUNT];
 extern SlotSource          D_801CD4AC[5];
-extern Offset2b           s_CameraScrollDeltas[CAMERA_DIR_COUNT];
-extern Offset2b           s_EntitySpawnOffsets[ENTITY_SPAWN_OFFSET_COUNT];
+extern Offset2b            s_CameraScrollDeltas[CAMERA_DIR_COUNT];
+extern Offset2b            s_EntitySpawnOffsets[ENTITY_SPAWN_OFFSET_COUNT];
 /* D_801CD620 */
-extern Point2l            s_EncounterEnemyOffsets[36];
+extern Point2l             s_EncounterEnemyOffsets[36];
 /* D_801CD740 */
-extern Point2l            s_EncounterOriginNudges[6];
+extern Point2l             s_EncounterOriginNudges[6];
 extern Point2s             D_801CD778[5];
 extern PartySlot           D_801CD944[3];
 

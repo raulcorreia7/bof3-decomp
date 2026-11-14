@@ -24,7 +24,7 @@ typedef struct Sce15ef0Work {
     u16        origin_x; /* +0x2E */
     u16        origin_y; /* +0x30 */
     u8         pad_32[0x02];
-    Point3l   pos;
+    Point3l    pos;
     u8         pad_40[0x1D];
     u8         color_r; /* +0x5D */
     u8         color_g; /* +0x5E */

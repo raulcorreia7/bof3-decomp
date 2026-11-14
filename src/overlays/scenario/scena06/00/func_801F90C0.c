@@ -55,8 +55,8 @@ MATCH void func_801F90C0(void) {
                 g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
                 g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.z = 754;
                 g_SpawnedActors[D_1F800000.view.raw[0]].layer          = 0x14;
-                g_ScriptVars[0]                                     = 3;
-                g_SceneState.step_05                                = 6;
+                g_ScriptVars[0]                                        = 3;
+                g_SceneState.step_05                                   = 6;
             }
             break;
         case 6:
@@ -86,8 +86,8 @@ MATCH void func_801F90C0(void) {
                 g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
                 g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.z = 512;
                 g_SpawnedActors[D_1F800000.view.raw[0]].layer          = 0x1E;
-                g_SceneState.step_05                                = 8;
-                g_ScriptVars[3]                                     = D_1F800000.view.raw[0];
+                g_SceneState.step_05                                   = 8;
+                g_ScriptVars[3]                                        = D_1F800000.view.raw[0];
             }
             break;
         case 8:

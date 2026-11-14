@@ -364,11 +364,11 @@ ASSERT_OFFSET(AreaVertex, points, 0x02);
 
 typedef struct AreaTrail {
     Point3l pos;                     /* 0x00 - the head anchor */
-    s32      unk_0C;                  /* 0x0C */
-    s32      radius;                  /* 0x10 - the ring radius */
-    u16      angle;                   /* 0x14 - the rotation angle */
-    u16      pad_16;                  /* 0x16 */
-    DVECTOR  points[WORLD_TRAIL_MAX]; /* 0x18 - the trail points */
+    s32     unk_0C;                  /* 0x0C */
+    s32     radius;                  /* 0x10 - the ring radius */
+    u16     angle;                   /* 0x14 - the rotation angle */
+    u16     pad_16;                  /* 0x16 */
+    DVECTOR points[WORLD_TRAIL_MAX]; /* 0x18 - the trail points */
 } AreaTrail;
 
 ASSERT_SIZE(AreaTrail, WORLD_TRAIL_SIZE);
@@ -419,10 +419,10 @@ ASSERT_OFFSET(AreaRing, screen, 0x2C);
  * `0x800E4800` (`@0x801F2F5C`, `@0x801F3004`, `@0x801F3060` walk them with
  * that stride) and the ring projection reads the active one. */
 typedef struct AreaSlotWork {
-    u8                unk_00[4];
-    Point2s           offset;
-    s16               scale; /* 0x08 - the projection scale */
-    s16               unk_0A;
+    u8               unk_00[4];
+    Point2s          offset;
+    s16              scale; /* 0x08 - the projection scale */
+    s16              unk_0A;
     volatile Point2u screen;
 } AreaSlotWork;
 

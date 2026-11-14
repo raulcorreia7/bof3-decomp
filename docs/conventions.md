@@ -29,7 +29,7 @@ statements. A workaround stays only when the retail bytes need it, and its comme
 | A slot is a filled position (`party_slot`); a fixed table position is an index (`CharacterIndex`) | `CharacterSlot` for the record array's position               |
 | An id is the value the game stores to identify a thing (`item_id`, `character_id`)                | `slot_id`, `item_index` for the stored value                  |
 | A fixed array position is an index (`element_index`); never abbreviate it                         | `idx`, `slot_index`, `element_slot`                           |
-| A vector type names its element width: `Point3DL`, `UPoint2D`                                     | `Vec3i`, `Vec2us`                                             |
+| A vector type names its element width: `Point3l`, `Point2u`                                       | `Vec3i`, `Vec2us`                                             |
 | `mode`/`step`: state phase, `step++`; `timer` counts down; `frame` counts up per frame            | `frame--`, a `timer` that counts up, a per-frame `_step`      |
 | A per-frame amount is a `_delta` or `speed`: `vz_delta`                                           | `vz_step`                                                     |
 | Keep the address name until a caller proves the role                                              | Guess a name from a count, an offset or a tool's output       |
@@ -239,11 +239,11 @@ One definition per thing, in its owning header; local to an image only when one 
 second reader moves a type up ([lowest scope wins](layout.md#lowest-scope-wins)). A game type is shared only
 when two or more subsystems store the same layout.
 
-| Type                              | Holds                       |
-| --------------------------------- | --------------------------- |
-| `Point2D`, `UPoint2D`, `Point2DL` | 2-D vectors by member width |
-| `Point3D`, `Point3DL`             | 3-D vectors by member width |
-| `Coord`                           | a 16.16 coordinate          |
+| Type                            | Holds                       |
+| ------------------------------- | --------------------------- |
+| `Point2s`, `Point2u`, `Point2l` | 2-D vectors by member width |
+| `Point3s`, `Point3l`            | 3-D vectors by member width |
+| `Coord`                         | a 16.16 coordinate          |
 
 The shared fundamentals are defined once in `include/common/vector.h` and `include/common/fixed.h`. Local types with a proven
 matching layout use the shared type and member names. PsyQ types stay at SDK calls; PsyQ's padded

@@ -1,7 +1,7 @@
 #include "area188_13.h"
 
 MATCH void func_801F4B24(void) {
-    s32        slot;
+    s32           slot;
     SpawnedActor* row;
 
     slot = Actor_FindFreeSlot() & BYTE_MASK;

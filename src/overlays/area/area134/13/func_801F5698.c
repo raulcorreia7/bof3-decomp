@@ -2,8 +2,8 @@
 
 MATCH void func_801F5698(void) {
     SpawnedActor* slot;
-    Actor*     work;
-    u8         index;
+    Actor*        work;
+    u8            index;
 
     index = Actor_FindFreeSlot();
     if (index != GAME_NONE) {

@@ -2,7 +2,7 @@
 
 MATCH void func_801F3F00(void) {
     SpawnedActor* actor;
-    s32        slot;
+    s32           slot;
 
     slot = Actor_FindFreeSlot() & BYTE_MASK;
     if (slot != GAME_NONE) {

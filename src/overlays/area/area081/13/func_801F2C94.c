@@ -3,7 +3,7 @@
 
 MATCH void func_801F2C94(void) {
     SpawnedActor* slot;
-    u8         index;
+    u8            index;
 
     index = Actor_FindFreeSlot();
     if (index != GAME_NONE) {

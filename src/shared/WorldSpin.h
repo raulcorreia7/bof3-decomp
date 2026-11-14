@@ -5,7 +5,7 @@
 
 /* The spin-effect work record the overlay's sprite pass draws. */
 typedef struct WorldSpin {
-    Point3l           origin;
+    Point3l            origin;
     u8                 unk_0C[4];
     /* 0x10 */ SVECTOR vertex_a;   /* the first rotated vertex offset */
     /* 0x18 */ SVECTOR vertex_b;   /* the second rotated vertex offset */

@@ -687,7 +687,7 @@ MATCH void func_801F8360(void) {
  * func_8015B410 passes the three angles to RotMatrix. */
 typedef struct SceneRotation {
     Point3l angle;
-    s32      unk_0C; /* 0x0C */
+    s32     unk_0C; /* 0x0C */
 } SceneRotation;
 
 ASSERT_SIZE(SceneRotation, 0x10);
@@ -1645,7 +1645,7 @@ MATCH void func_801FA7D8(void) {
                 g_SpawnedActors[D_1F800000[0]].type         = 0x1Eu;
                 g_SpawnedActors[D_1F800000[0]].pos.x.fixed  = g_Game.members[0].pos.x.fixed;
                 g_SpawnedActors[D_1F800000[0]].pos.y.fixed  = g_Game.members[0].pos.y.fixed;
-                distance                                 = Area_SampleHeight(g_SpawnedActors[D_1F800000[0]].pos.x.fixed, g_SpawnedActors[D_1F800000[0]].pos.y.fixed) << 16;
+                distance                                    = Area_SampleHeight(g_SpawnedActors[D_1F800000[0]].pos.x.fixed, g_SpawnedActors[D_1F800000[0]].pos.y.fixed) << 16;
                 g_SpawnedActors[D_1F800000[0]].pos.z.fixed  = distance;
                 g_SpawnedActors[D_1F800000[0]].unk_29       = 0;
             }

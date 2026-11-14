@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 MATCH void func_8019AA44(void) {
-    Actor*    work;
+    Actor*   work;
     Point3l* angle;
 
     work = g_Task;

@@ -2,7 +2,7 @@
 
 MATCH void func_801F369C(void) {
     SpawnedActor* actor;
-    s32        slot;
+    s32           slot;
 
     g_AreaSceneMode = 1;
     Area_SetCellPalette(74, 47);

@@ -77,7 +77,7 @@ typedef struct SceneEffect {
     u8             pad_24[0x5];
     s8             ot_index;
     u8             pad_2A[0x4];
-    Point2u       origin;
+    Point2u        origin;
     u8             pad_32[0x2];
     SceneLinePoint pos; /* 0x34 */
     u8             pad_40[0x14];
@@ -87,7 +87,7 @@ typedef struct SceneEffect {
     u8             color_g;
     u8             color_b;
     /* 0x60 */ s32 projected; /* RotTransPers depth result */
-    Point3l       angle;
+    Point3l        angle;
 } SceneEffect;
 
 ASSERT_SIZE(SceneEffect, 0x70);

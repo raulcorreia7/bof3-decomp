@@ -19,7 +19,7 @@
 
 extern u16      D_801492DC;
 /* The eight-direction unit step table: the x and y words of the entry, 1/16 of a tile per unit. */
-extern Point2l D_801F6308[];
+extern Point2l  D_801F6308[];
 /* The per-buffer ordering-table heads, one 8-byte entry per slot. */
 extern u32*     D_80143534[][2];
 /* The key-state word and its mask partner (gameui.h names it g_InputPressed). */

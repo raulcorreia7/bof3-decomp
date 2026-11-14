@@ -39,9 +39,9 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
         if (FISHING_STATE->step_index_0A == 0) {
             scroll_pos = FISHING_STATE->step_14;
             if (scroll_pos == FISHING_STATE->step_limit_20) {
-                FISHING_STATE->step_timer_09             = 0U;
-                FISHING_STATE->counter_08                = 0U;
-                member                                   = Actor_FindFreeSlot() & BYTE_MASK;
+                FISHING_STATE->step_timer_09                = 0U;
+                FISHING_STATE->counter_08                   = 0U;
+                member                                      = Actor_FindFreeSlot() & BYTE_MASK;
                 g_SpawnedActors[member].header.flags        = 1;
                 g_SpawnedActors[member].type                = 0x1A;
                 g_SpawnedActors[member].header.mode         = 0x10;

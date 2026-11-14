@@ -2,7 +2,7 @@
 
 MATCH void func_801F2D08(void) {
     SpawnedActor* slot;
-    u8         i;
+    u8            i;
 
     slot = g_SpawnedActors;
     for (i = 0; i < ACTOR_SLOT_COUNT; i++) {

@@ -22,17 +22,17 @@ extern u16 D_80146876;
  * AreaSprite in AreaSprite.h is another view of the window, used by world00
  * to world02: it names +0x04 as its origin. */
 typedef struct AreaSprite {
-    u8       unk_00[3];
-    u8       flags_03;  /* the shade of the sprite */
-    u16      half_size; /* the projected half-size */
-    u8       unk_06[2];
+    u8      unk_00[3];
+    u8      flags_03;  /* the shade of the sprite */
+    u16     half_size; /* the projected half-size */
+    u8      unk_06[2];
     Point2l origin;
-    s32      unk_10;
-    s32      unk_14;
-    s32      unk_18;
-    s32      unk_1C;
-    s32      unk_20;
-    s32      unk_24;
+    s32     unk_10;
+    s32     unk_14;
+    s32     unk_18;
+    s32     unk_1C;
+    s32     unk_20;
+    s32     unk_24;
 } AreaSprite;
 
 ASSERT_SIZE(AreaSprite, 0x28);

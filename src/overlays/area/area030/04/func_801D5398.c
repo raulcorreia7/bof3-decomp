@@ -22,7 +22,7 @@ MATCH void func_801D5398(void) {
     func_801D72E4(39, (s16)(FISHING_STATE->step_timer_09 * 60 + 64));
 
     if (FISHING_STATE->step_timer_09 == 0) {
-        index                            = Actor_FindFreeSlot() & BYTE_MASK;
+        index                               = Actor_FindFreeSlot() & BYTE_MASK;
         g_SpawnedActors[index].header.flags = 1;
         g_SpawnedActors[index].type         = 0x1A;
         g_SpawnedActors[index].header.mode  = 0x10;

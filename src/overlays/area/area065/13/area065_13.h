@@ -18,7 +18,7 @@ extern u8       D_801F52A0[];
 extern u8       D_801F5320[];
 /* The signed spawn focus offsets, one (x, y) pair per spawn row. */
 /* D_801F532C */
-extern Point2u g_FlockVelocity[4];
+extern Point2u  g_FlockVelocity[4];
 /* The script id and tile-mode byte tables indexed by twice the spawn row. */
 /* D_801F533C */
 extern u8       g_FlockScript[4][2];

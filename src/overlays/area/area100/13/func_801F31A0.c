@@ -2,7 +2,7 @@
 
 MATCH void func_801F31A0(void) {
     Point3l pos;
-    Actor*   work = g_Task;
+    Actor*  work = g_Task;
 
     pos.x = work->pos.x.fixed;
     pos.y = work->pos.y.fixed;

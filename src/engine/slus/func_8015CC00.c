@@ -10,7 +10,7 @@ MATCH s32 func_8015CC00(u8 id, s32 step, s32 selection, s32 x, s32 y, s32 z) {
 
     actor_slot = Actor_FindFreeSlot() & BYTE_MASK;
     if (actor_slot != GAME_NONE) {
-        offset                                = actor_slot * 0x74u;
+        offset                                   = actor_slot * 0x74u;
         g_SpawnedActors[actor_slot].header.flags = 1;
         g_SpawnedActors[actor_slot].type         = 0x19;
         g_SpawnedActors[actor_slot].unk_06       = id;

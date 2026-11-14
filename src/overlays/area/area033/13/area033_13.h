@@ -48,7 +48,7 @@ extern void (*D_801F5010[])(void);
 extern Point2u g_FlockVelocity[4];
 /* The script id and tile-mode byte tables indexed by twice the spawn row. */
 /* D_801F502C */
-extern u8       g_FlockScript[4][2];
+extern u8      g_FlockScript[4][2];
 extern void (*D_801F5034[])(void);
 #define AREA_HUD_MASK_TABLE D_801F4FF8
 

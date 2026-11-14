@@ -2,9 +2,9 @@
 
 MATCH void func_801F3264(void) {
     Point3l pos;
-    s16      x;
-    s16      y;
-    u16      z;
+    s16     x;
+    s16     y;
+    u16     z;
 
     GFX_AddDitheredDrawMode(1, GetTPage(0, 1, 0x380, 0x100));
     pos.x = g_Task->pos.x.fixed;

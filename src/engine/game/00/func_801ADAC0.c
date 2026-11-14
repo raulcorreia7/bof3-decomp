@@ -12,7 +12,7 @@ MATCH void func_801ADAC0(s8 actor_slot) {
         g_SpawnedActors[g_Task->param.actor_slot].type         = 0x19;
         g_SpawnedActors[g_Task->param.actor_slot].unk_06       = actor_slot;
         g_SpawnedActors[g_Task->param.actor_slot].scene_step   = 0;
-        value                                               = func_801ADC98();
+        value                                                  = func_801ADC98();
         g_SpawnedActors[g_Task->param.actor_slot].selection    = value + 0x28;
         g_SpawnedActors[g_Task->param.actor_slot].pos.x.fixed  = g_Task->pos.x.fixed;
         g_SpawnedActors[g_Task->param.actor_slot].pos.y.fixed  = g_Task->pos.y.fixed;

@@ -429,7 +429,7 @@ MATCH void func_801F3338(void) {
  * arg-less to match. Table is the etc/game/00 SpawnedActor table. */
 
 MATCH void func_801F3360(void) {
-    s32        actor_slot;
+    s32           actor_slot;
     SpawnedActor* slot;
 
     actor_slot = Actor_FindFreeSlot() & BYTE_MASK;

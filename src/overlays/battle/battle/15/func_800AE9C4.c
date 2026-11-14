@@ -4,9 +4,9 @@
 /* The panel geometry the draw code reads: the origin x and y place the quad
  * on screen and the height is the quad's row count. */
 typedef struct BattlePanelGeometry {
-    u8       pad_00[0x0A];
-    u8       height;
-    u8       pad_0B[0x23];
+    u8      pad_00[0x0A];
+    u8      height;
+    u8      pad_0B[0x23];
     Point2u origin;
 } BattlePanelGeometry;
 

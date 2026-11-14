@@ -30,7 +30,7 @@ MATCH void Scene_EffectBegin(void) { /* func_801D0C70 */
 
     D_801D2744 = g_Task;
 
-    slot                            = Actor_FindFreeSlot();
+    slot                               = Actor_FindFreeSlot();
     g_SpawnedActors[slot].header.flags = 1;
     g_SpawnedActors[slot].type         = 0x69;
     g_SpawnedActors[slot].header.mode  = 2;
@@ -39,7 +39,7 @@ MATCH void Scene_EffectBegin(void) { /* func_801D0C70 */
 
     i = 0;
     do {
-        slot                      = Actor_FindFreeSlot();
+        slot                         = Actor_FindFreeSlot();
         g_SpawnedActors[slot].unk_04 = i;
         i++;
         g_SpawnedActors[slot].header.flags = 1;
@@ -51,7 +51,7 @@ MATCH void Scene_EffectBegin(void) { /* func_801D0C70 */
 
     i = 0;
     do {
-        slot                      = Actor_FindFreeSlot();
+        slot                         = Actor_FindFreeSlot();
         g_SpawnedActors[slot].unk_04 = i;
         i++;
         g_SpawnedActors[slot].header.flags = 1;

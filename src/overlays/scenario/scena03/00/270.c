@@ -223,10 +223,10 @@ MATCH void func_801F7E34(void) {
 MATCH void func_801F7E6C(void) {
     SpawnedActor** effects;
     SpawnedActor*  spawned;
-    Actor*      record;
-    Actor*      actor;
-    u8          i;
-    u8          slot;
+    Actor*         record;
+    Actor*         actor;
+    u8             i;
+    u8             slot;
 
     effects = (SpawnedActor**)&g_Task->vx;
     for (i = 0; i < 5; i++) {
@@ -253,7 +253,7 @@ MATCH void func_801F7E6C(void) {
 
 MATCH void func_801F7F84(void) {
     SpawnedActor** effects; /* the five effect slots spawned at +0x0C */
-    u8          i;
+    u8             i;
 
     effects = (SpawnedActor**)&g_Task->vx;
     for (i = 0; i < 5; i++) {
@@ -307,8 +307,8 @@ MATCH void func_801F8328(void) {
 
 MATCH void func_801F8370(void) {
     SpawnedActor* temp_v0;
-    s32        temp_v1;
-    u8         temp_v0_2;
+    s32           temp_v1;
+    u8            temp_v0_2;
 
     if (g_Task->timer & 0x4) {
         temp_v1 = func_8019601C() & BYTE_MASK;

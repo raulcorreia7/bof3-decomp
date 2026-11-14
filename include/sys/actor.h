@@ -190,7 +190,7 @@ typedef struct Actor {
     u8             direction_08;      /* 0x08 - commu00 calls it the cue resource */
     u8             timer;             /* 0x09 - counted up or down by the area step handlers */
     u8             unk_0A;            /* 0x0A */
-    ActorRole     param;             /* 0x0B */
+    ActorRole      param;             /* 0x0B */
     s32            vx;                /* 0x0C added to x each step */
     s32            vy;                /* 0x10 added to y each step */
     s32            vz;                /* 0x14 signed vertical speed */
@@ -245,7 +245,7 @@ typedef struct Actor {
     s32            walk_dest_x;       /* 0x80 - x the walk ends at */
     s32            walk_dest_y;       /* 0x84 - y the walk ends at */
     u32            unk_88;            /* 0x88 */
-    ActorTail       ext;               /* 0x8C - see ActorTail */
+    ActorTail      ext;               /* 0x8C - see ActorTail */
     u16            roll_90;           /* 0x90 */
     u8             facing_92;         /* 0x92 - the facing direction: the fishing code writes
                                 *        `rand() & 3` and turns the row by it

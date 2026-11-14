@@ -80,18 +80,18 @@
  * The x and y are the panel's screen position: the draw calls take x + 7 and
  * y + 7, and the panel animation slides x (MENU_ADVANCE_PANEL). */
 typedef struct MenuChoicePanel {
-    u8       active; /* 0x00: set while the panel is armed */
-    u8       pad_01[0x03];
+    u8      active; /* 0x00: set while the panel is armed */
+    u8      pad_01[0x03];
     Point2u pos;          /* 0x04 */
-    u8       kind;         /* 0x08: the panel's kind, the first argument of func_801AF494 */
-    u8       pad_09;       /* 0x09 */
-    u8       group;        /* 0x0A: the group the cursor walks */
-    u8       group_first;  /* 0x0B: the group's first entry, the page start */
-    u8       group_cursor; /* 0x0C: the cursor's entry */
-    u8       drawn_cursor; /* 0x0D: the drawn cursor, 0xFF when none */
-    u8       pad_0E[0x02];
-    u16      unk_10;       /* 0x10: 0x31 or 0x32 after a cursor move; role unknown */
-    s16      confirm_gate; /* 0x12: non-zero closes the confirm step */
+    u8      kind;         /* 0x08: the panel's kind, the first argument of func_801AF494 */
+    u8      pad_09;       /* 0x09 */
+    u8      group;        /* 0x0A: the group the cursor walks */
+    u8      group_first;  /* 0x0B: the group's first entry, the page start */
+    u8      group_cursor; /* 0x0C: the cursor's entry */
+    u8      drawn_cursor; /* 0x0D: the drawn cursor, 0xFF when none */
+    u8      pad_0E[0x02];
+    u16     unk_10;       /* 0x10: 0x31 or 0x32 after a cursor move; role unknown */
+    s16     confirm_gate; /* 0x12: non-zero closes the confirm step */
 } MenuChoicePanel;
 
 ASSERT_SIZE(MenuChoicePanel, MENU_CHOICE_PANEL_SIZE);
@@ -152,7 +152,7 @@ enum {
  * is unknown; 0x24, the names pointer, is the last known cell. */
 typedef struct MenuListPanel {
     u8             pad_00[4];
-    Point2u       pos;         /* 0x04 */
+    Point2u        pos;         /* 0x04 */
     u8             use_context; /* 0x08 the ability list passes it to func_801AF5B0: 1 outside battle, 2 in battle */
     u8             flags;       /* 0x09 bit 0 and bit 1 pick the cursor; the high nibble counts the frame down */
     MenuListSource source;      /* 0x0A */
@@ -216,22 +216,22 @@ typedef struct MenuPanelAddr {
  * item-table base. The battle overlays read the first 0x0C bytes through
  * BattlePanelTask (battle/records.h). */
 typedef struct MenuPanelTask {
-    u8       active;  /* set to open the panel, cleared to close it */
-    u8       handler; /* Menu_UpdatePanelTasks calls g_MenuPanels.handlers[handler] */
-    u8       mode;    /* the panel's own mode: g_MenuPanelModes[mode], the slide target choice, and the battle mode_00 */
-    u8       state;
+    u8      active;  /* set to open the panel, cleared to close it */
+    u8      handler; /* Menu_UpdatePanelTasks calls g_MenuPanels.handlers[handler] */
+    u8      mode;    /* the panel's own mode: g_MenuPanelModes[mode], the slide target choice, and the battle mode_00 */
+    u8      state;
     /* x and y are screen positions. Most readers load them with lhu; the slide
      * code compares them as s16 and stores signed constants through LOH, so the
      * field stays u16 and each slide keeps its s16 view. */
     Point2u pos;
-    u8       unk_08;
-    u8       unk_09;
-    u8       unk_0A; /* x 16 is the horizontal half-centre */
-    u8       unk_0B; /* x 16 is the vertical half-centre */
-    u8       unk_0C;
-    u8       flags; /* bit 0 tested before the box draw; battle reads it as its cursor */
-    u8       unk_0E;
-    u8       layer; /* panel layer, tested against the dispatch mode */
+    u8      unk_08;
+    u8      unk_09;
+    u8      unk_0A; /* x 16 is the horizontal half-centre */
+    u8      unk_0B; /* x 16 is the vertical half-centre */
+    u8      unk_0C;
+    u8      flags; /* bit 0 tested before the box draw; battle reads it as its cursor */
+    u8      unk_0E;
+    u8      layer; /* panel layer, tested against the dispatch mode */
 
     /* The cells 0x10..0x1F mean different things to each panel mode; each user
      * reads the view that names what the mode keeps there. */

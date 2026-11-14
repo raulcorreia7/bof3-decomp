@@ -2,7 +2,7 @@
 
 MATCH void func_801F360C(void) {
     SpawnedActor* actor_slot;
-    s32        actor_index;
+    s32           actor_index;
 
     if (g_Game.members[0].chr.character_id == CHAR_ID_MOMO) {
         actor_index = func_8019601C() & BYTE_MASK;

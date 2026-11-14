@@ -12,7 +12,7 @@ MATCH void func_801D36F8(void) {
         if (slot != -1) {
             g_SpawnedActors[slot].header.flags = 1;
             g_SpawnedActors[slot].type         = 0xF;
-            area                            = FISHING_STATE->cue_index_06;
+            area                               = FISHING_STATE->cue_index_06;
             g_SpawnedActors[slot].unk_4A       = 0;
             g_SpawnedActors[slot].link         = 0;
             g_SpawnedActors[slot].header.mode  = 8;
