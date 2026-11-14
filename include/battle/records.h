@@ -1018,7 +1018,8 @@ typedef struct BattleState {
     /* 0xC4 */ Callback      choose_ending_hook;
     /* 0xC8 */ Callback      end_hook;
     /* 0xCC */ BossEventFunc boss_event_hook;
-    /* 0xD0 */ u8            unk_D0[16];
+    /* 0xD0 */ u8            unk_D0[14];
+    /* 0xDE */ u16           unk_DE; /* boss055 reads the script index here; boss001 counts frames in it */
     /* 0xE0 */ u16           action_id;
     /* 0xE2 */ u8            unk_E2[2];
     /* 0xE4 */ u8            genes[3];
