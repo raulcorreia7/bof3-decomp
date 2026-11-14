@@ -277,7 +277,7 @@ MATCH void func_801F055C(void) {
         z                = src->pos.z.fixed;
         dst->unk_14      = 0x60000;
         dst->unk_09      = 8;
-        dst->pos.z.fixed = z - 0x03000000;
+        dst->pos.z.fixed = z - (3 << 24);
         g_Task->timer    = 16;
         g_Task->header.step++;
     }

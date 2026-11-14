@@ -1,5 +1,5 @@
 /* Draws the ring of eight Gouraud quads around the effect position, shaded by the work bytes 0x5D to 0x5F. */
-/* 0x801F00FC (magic076), 0x801F0090 (magic169) */
+/* magic076, magic169 */
 MATCH void BMagic_DrawRingQuads(void) {
     POLY_G4* prim;
     s16      i;

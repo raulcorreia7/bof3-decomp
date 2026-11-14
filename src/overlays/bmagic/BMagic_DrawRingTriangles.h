@@ -1,5 +1,5 @@
 /* Draws the ring of eight Gouraud triangles around the effect position, shaded by the work bytes 0x5D to 0x5F. */
-/* 0x801EFEA8 (magic076), 0x801EFE3C (magic169) */
+/* magic076, magic169 */
 MATCH void BMagic_DrawRingTriangles(void) {
     POLY_G3* prim;
     s16      i;
