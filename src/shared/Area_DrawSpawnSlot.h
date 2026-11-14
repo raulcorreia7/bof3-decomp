@@ -19,11 +19,8 @@ MATCH void Area_DrawSpawnSlot(AreaSpawnSlot* slot) {
     radius = scale[0] + (g_FrameCount & 1);
     angle  = 0;
     do {
-        primitive     = GFX_BeginPolyG3(1);
-        primitive->x0 = screen.vx;
-        primitive->y0 = screen.vy;
-        primitive->x1 = screen.vx + ((radius * rcos((u16)angle)) >> 0xC);
-        primitive->y1 = screen.vy + ((radius * rsin((u16)angle)) >> 0xC);
+        primitive = GFX_BeginPolyG3(1);
+        setXY2(primitive, screen.vx, screen.vy, screen.vx + ((radius * rcos((u16)angle)) >> 0xC), screen.vy + ((radius * rsin((u16)angle)) >> 0xC));
         angle += 128;
         primitive->x2 = screen.vx + ((radius * rcos((u16)angle)) >> 0xC);
         primitive->y2 = screen.vy + ((radius * rsin((u16)angle)) >> 0xC);

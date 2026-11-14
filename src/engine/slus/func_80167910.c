@@ -14,7 +14,7 @@ MATCH void func_80167910(void) {
     long      flag;
     long      sxy2;
     POLY_FT4* poly;
-    u8*       prim;
+    POLY_G3*  prim;
     s16       sy;
     s16       radius;
     s32       angle;
@@ -25,9 +25,7 @@ MATCH void func_80167910(void) {
     if (D_8014626C[0] & 0x40) {
         return;
     }
-    pos.vx           = (s16)((D_801462A0 >> 9) - 0x4000);
-    pos.vy           = (s16)((D_801462A4 >> 9) - 0x4000);
-    pos.vz           = (s16)(-(D_801462AA + 0x80) / 2);
+    setVector(&pos, (s16)((D_801462A0 >> 9) - 0x4000), (s16)((D_801462A4 >> 9) - 0x4000), (s16)(-(D_801462AA + 0x80) / 2));
     g_Task->unk_60   = RotTransPers(&pos, (long*)&sxy, &p, &flag);
     g_Task->screen_x = sxy.vx;
     g_Task->screen_y = sxy.vy;
@@ -63,21 +61,11 @@ MATCH void func_80167910(void) {
         GFX_AddPrim(3, sizeof(POLY_FT4));
     }
     PushMatrix();
-    axis.vx = 0;
-    axis.vy = 0;
-    axis.vz = 0;
-    rot.vx  = (s16)((g_Task->pos.x.fixed >> 9) - 0x4000);
-    rot.vy  = (s16)((g_Task->pos.y.fixed >> 9) - 0x4000);
-    rot.vz  = (s16)(-COORD_INT(g_Task->pos.z) / 2);
+    setVector(&axis, 0, 0, 0);
+    setVector(&rot, (s16)((g_Task->pos.x.fixed >> 9) - 0x4000), (s16)((g_Task->pos.y.fixed >> 9) - 0x4000), (s16)(-COORD_INT(g_Task->pos.z) / 2));
     RotTransMatrix(&rot, mtx, &flag);
     Camera_SetModelMatrix(&axis, &mtx);
-    if (GetGraphType() == 1) {
-        mode = 0x12E;
-    } else if (GetGraphType() == 2) {
-        mode = 0x12E;
-    } else {
-        mode = 0x5E;
-    }
+    mode = getTPage(0, 2, 896, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, mode, NULL);
     if (!(g_Task->param.unk_0B & 0x1)) {
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
@@ -100,20 +88,13 @@ MATCH void func_80167910(void) {
         D_1F800014[2].vx = (s16)FIXED_MUL(radius, rcos(angle + 128));
         D_1F800014[2].vy = (s16)FIXED_MUL(radius, rsin(angle + 128));
         D_1F800014[2].vz = 0;
-        prim             = g_GfxPrimCursor;
-        prim[3]          = 6;
-        prim[7]          = 0x30;
+        prim             = (POLY_G3*)g_GfxPrimCursor;
+        setPolyG3(prim);
         SetSemiTrans(prim, 1);
-        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)(prim + 8), (long*)(prim + 0x10), (long*)(prim + 0x18), &p, &sxy2);
-        prim[4]    = 0x80;
-        prim[5]    = 0x80;
-        prim[6]    = 0x80;
-        prim[0xC]  = 0;
-        prim[0xD]  = 0;
-        prim[0xE]  = 0;
-        prim[0x14] = 0;
-        prim[0x15] = 0;
-        prim[0x16] = 0;
+        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &p, &sxy2);
+        setRGB0(prim, 0x80, 0x80, 0x80);
+        setRGB1(prim, 0, 0, 0);
+        setRGB2(prim, 0, 0, 0);
         if (!(g_Task->param.unk_0B & 0x1)) {
             Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_G3));
         } else {

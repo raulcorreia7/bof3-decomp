@@ -33,9 +33,7 @@ MATCH void func_801F7424(Actor* actor) {
     poly->y1 = poly->y0 + D_801FE38C[actor->unk_04].dy1;
     poly->x2 = poly->x0 + D_801FE38C[actor->unk_04].dx2;
     poly->y2 = poly->y0 + D_801FE38C[actor->unk_04].dy2;
-    poly->r0 = 0;
-    poly->g0 = actor->unk_03;
-    poly->b0 = actor->unk_03;
+    setRGB0(poly, 0, actor->unk_03, actor->unk_03);
     Area_AddCellPrim(actor->unk_18, actor->unk_1C, -2, sizeof(POLY_F3));
 }
 

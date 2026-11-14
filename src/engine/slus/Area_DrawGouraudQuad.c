@@ -19,13 +19,7 @@ MATCH void Area_DrawGouraudQuad(u32* record) {
         packed  = *(u32*)src;
         if (((s32)x_limit >= (s32)(packed & BYTE_MASK)) && ((s32)y_limit >= (s32)((packed >> 8) & BYTE_MASK)) && ((s32)((packed >> 16) & BYTE_MASK) >= (s32)x_limit) &&
             ((s32)(packed >> 24) >= (s32)y_limit)) {
-            if (GetGraphType() == 1) {
-                tpage = 0x225;
-            } else if (GetGraphType() == 2) {
-                tpage = 0x225;
-            } else {
-                tpage = 0x95;
-            }
+            tpage = getTPage(1, 0, 320, 256);
             GFX_AddDitheredDrawMode(7, tpage);
             primitive = GFX_BeginPolyG4(0);
             setXY4(primitive, 0, 0, 320, 0, 0, 240, 320, 240);

@@ -128,6 +128,7 @@ void                   func_801AF800(s16 record_x, s32 record_y, u8 text_shade, 
 void                   func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 extern void            func_801D1D1C(void);
 extern void            func_801D1E34(void);
+void                   func_801D4158(s16 x, s16 y, u8 index, u8 flag);
 extern s32             func_801D2978(void);
 extern void            func_801D2ADC(void);
 extern void            func_801D2C0C(void);

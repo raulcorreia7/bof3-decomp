@@ -10,9 +10,7 @@ MATCH void func_8019D8C0(SpinQuad* quad, s16* out) {
     dst = out;
     PushMatrix();
     dst += 1;
-    quad->rotation.vx = (RANDOM_MASK(0xFC0));
-    quad->rotation.vy = (RANDOM_MASK(0xFC0));
-    quad->rotation.vz = (RANDOM_MASK(0xFC0));
+    setVector(&quad->rotation, (RANDOM_MASK(0xFC0)), (RANDOM_MASK(0xFC0)), (RANDOM_MASK(0xFC0)));
     RotMatrix(&quad->rotation, &rot);
     rot.t[0] = 0;
     rot.t[1] = 0;

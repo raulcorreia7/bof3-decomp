@@ -23,11 +23,8 @@
 #define AREA_DRAW_TRIANGLE_FAN(x, y, radius, angle, red, green, blue)                                \
     i = 0;                                                                                           \
     do {                                                                                             \
-        prim     = GFX_BeginPolyG3(1);                                                               \
-        prim->x0 = x;                                                                                \
-        prim->y0 = y;                                                                                \
-        prim->x1 = x + FIXED_MUL(radius, rcos(angle));                                               \
-        prim->y1 = y + FIXED_MUL(radius, rsin(angle));                                               \
+        prim = GFX_BeginPolyG3(1);                                                                   \
+        setXY2(prim, x, y, x + FIXED_MUL(radius, rcos(angle)), y + FIXED_MUL(radius, rsin(angle)));  \
         angle += AREA_RING_ANGLE_STEP;                                                               \
         prim->x2 = x + FIXED_MUL(radius, rcos(angle));                                               \
         prim->y2 = y + FIXED_MUL(radius, rsin(angle));                                               \

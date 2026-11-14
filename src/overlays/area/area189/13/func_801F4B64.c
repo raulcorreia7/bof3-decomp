@@ -8,11 +8,8 @@ MATCH void func_801F4B64(TILE_1* source) {
         tile = (TILE_1*)g_GfxPrimCursor;
         SetTile1(tile);
         SetSemiTrans(tile, 1);
-        tile->x0 = source->x0 + D_801F6284[i];
-        tile->y0 = source->y0 + D_801F6285[i];
-        tile->r0 = source->r0 >> 2;
-        tile->g0 = source->g0 >> 2;
-        tile->b0 = source->b0 >> 2;
+        setXY0(tile, source->x0 + D_801F6284[i], source->y0 + D_801F6285[i]);
+        setRGB0(tile, source->r0 >> 2, source->g0 >> 2, source->b0 >> 2);
         func_801F497C(sizeof(TILE_1));
     }
 }

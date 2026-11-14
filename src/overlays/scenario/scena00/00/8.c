@@ -110,9 +110,7 @@ MATCH void func_801F6E48(void) {
 
     func_801AC1DC(origin, work_cell->channel_1C);
 
-    projection.vx = ((origin[0] + SPAD_ROW->pos.x.fixed) >> 9) - 0x4000;
-    projection.vy = ((origin[1] + SPAD_ROW->pos.y.fixed) >> 9) - 0x4000;
-    projection.vz = -(origin[2] + COORD_INT(SPAD_ROW->pos.z)) / 2;
+    setVector(&projection, ((origin[0] + SPAD_ROW->pos.x.fixed) >> 9) - 0x4000, ((origin[1] + SPAD_ROW->pos.y.fixed) >> 9) - 0x4000, -(origin[2] + COORD_INT(SPAD_ROW->pos.z)) / 2);
 
     work_cell->projected = RotTransPers(&projection, (long*)&poly->x0, &depth, &flag);
 
@@ -633,28 +631,16 @@ MATCH void func_801F8360(void) {
     v2x = (u32)(size * rcos(angle)) >> 8;
     v2y = (u32)(size * rsin(angle)) >> 8;
 
-    v0.vx = 0;
-    v0.vy = 0;
-    v0.vz = 0;
-    v1.vx = size << 4;
-    v1.vy = 0;
-    v1.vz = 0;
-    v2.vx = v2x;
-    v2.vy = v2y;
-    v2.vz = 0;
+    setVector(&v0, 0, 0, 0);
+    setVector(&v1, size << 4, 0, 0);
+    setVector(&v2, v2x, v2y, 0);
 
     v2x = (u32)(size * rcos(172)) >> 8;
     v2y = (u32)(size * rsin(172)) >> 8;
 
-    v3.vx = 0;
-    v3.vy = 0;
-    v3.vz = 0;
-    v4.vx = size << 4;
-    v4.vy = 0;
-    v4.vz = 0;
-    v5.vx = v2x;
-    v5.vy = v2y;
-    v5.vz = 0;
+    setVector(&v3, 0, 0, 0);
+    setVector(&v4, size << 4, 0, 0);
+    setVector(&v5, v2x, v2y, 0);
 
     i = 0;
     do {
@@ -718,15 +704,9 @@ MATCH void Scene_DrawTriangle(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
 
     prim = (POLY_G3*)g_GfxPrimCursor;
 
-    v0.vx = 0;
-    v0.vy = 0;
-    v0.vz = 0;
-    v1.vx = size << 4;
-    v1.vy = 0;
-    v1.vz = 0;
-    v2.vx = v2x;
-    v2.vy = v2y;
-    v2.vz = 0;
+    setVector(&v0, 0, 0, 0);
+    setVector(&v1, size << 4, 0, 0);
+    setVector(&v2, v2x, v2y, 0);
 
     SetPolyG3(prim);
     PushMatrix();
@@ -932,9 +912,7 @@ MATCH void func_801F8D90(void) {
 
     func_801AC1DC(origin, work[0x10]);
 
-    projection.vx = ((origin[0] + SPAD_ROW->pos.x.fixed) >> 9) - 0x4000;
-    projection.vy = ((origin[1] + SPAD_ROW->pos.y.fixed) >> 9) - 0x4000;
-    projection.vz = -(origin[2] + COORD_INT(SPAD_ROW->pos.z)) / 2;
+    setVector(&projection, ((origin[0] + SPAD_ROW->pos.x.fixed) >> 9) - 0x4000, ((origin[1] + SPAD_ROW->pos.y.fixed) >> 9) - 0x4000, -(origin[2] + COORD_INT(SPAD_ROW->pos.z)) / 2);
 
     work_cell->projected = RotTransPers(&projection, (long*)&poly->x0, &depth, &flag);
 
@@ -946,9 +924,7 @@ MATCH void func_801F8D90(void) {
     TASK_SET(second);
     func_801AC1DC(origin, work[0x1C]);
 
-    projection.vx = ((origin[0] + SPAD_ROW->pos.x.fixed) >> 9) - 0x4000;
-    projection.vy = ((origin[1] + SPAD_ROW->pos.y.fixed) >> 9) - 0x4000;
-    projection.vz = -(origin[2] + COORD_INT(SPAD_ROW->pos.z)) / 2;
+    setVector(&projection, ((origin[0] + SPAD_ROW->pos.x.fixed) >> 9) - 0x4000, ((origin[1] + SPAD_ROW->pos.y.fixed) >> 9) - 0x4000, -(origin[2] + COORD_INT(SPAD_ROW->pos.z)) / 2);
 
     work_cell->projected = RotTransPers(&projection, (long*)&poly->x2, &depth, &flag);
 
