@@ -476,7 +476,47 @@ MATCH void func_801F9668(void) {
     Actor_Clear();
 }
 
-INCLUDE_ASM(func_801F9688);
+/* Draw the 16 semi-transparent segments of a screen-sized ellipse ring, dark at the inner edge and bright at the outer. */
+MATCH void func_801F9688(void) {
+    DVECTOR  inner;
+    DVECTOR  outer;
+    POLY_G4* prim;
+    s32      angle;
+    u8       i;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 2, 960, 256) & HALF_MASK, 0);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    inner.vx = 240;
+    inner.vy = 120;
+    outer.vx = 400;
+    outer.vy = 120;
+    angle    = 0;
+    i        = 0;
+    do {
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        prim->x0 = inner.vx;
+        prim->y0 = inner.vy;
+        prim->x1 = outer.vx;
+        prim->y1 = outer.vy;
+        angle += 0x100;
+        inner.vx = 160 + ((rcos((u16)angle) * 80) >> 12);
+        inner.vy = 120 + ((rsin((u16)angle) * 60) >> 12);
+        outer.vx = 160 + ((rcos((u16)angle) * 240) >> 12);
+        outer.vy = 120 + ((rsin((u16)angle) * 180) >> 12);
+        prim->x2 = inner.vx;
+        prim->y2 = inner.vy;
+        prim->x3 = outer.vx;
+        prim->y3 = outer.vy;
+        setRGB0(prim, 0, 0, 0);
+        setRGB1(prim, 255, 255, 255);
+        setRGB2(prim, 0, 0, 0);
+        setRGB3(prim, 255, 255, 255);
+        GFX_AddPrim(1, sizeof(POLY_G4));
+        i++;
+    } while (i < 16);
+}
 
 MATCH void func_801F986C(void) {
     SYS_DISPATCH_TASK(D_801FE910, 1, g_Task);
