@@ -631,6 +631,7 @@ extern const char                  D_80149F9C[];
 extern const char                  D_80149FAC[];
 extern const u32                   D_8014AAB8[4];
 extern u8                          D_8016432C;
+/* D_8017F44C */
 extern const char                  D_8017F44C[];
 extern const void* const           D_8017F470[];
 /* Retail data D_80170000-D_8017FFFF (one declaration each). */
@@ -659,7 +660,8 @@ extern const u16                   D_8017F972;
 extern const EncounterZone         g_AreaEncounterZones[MAP_ZONE_COUNT];
 /* D_80181164 */
 extern const EncounterZone* const  g_EncounterZones[MAP_ZONE_LIST_COUNT];
-extern const SceneFlagPair         D_80181484[SCENE_FLAG_COUNT];
+/* D_80181484 */
+extern const SceneFlagPair         g_SceneFlagPairs[SCENE_FLAG_COUNT];
 extern const ScriptRef             D_80181BDC[40];
 extern const ScriptRef* const      D_80181C7C[11];
 extern const BGMTrack              g_BGMTracks[BGM_TRACK_COUNT];
