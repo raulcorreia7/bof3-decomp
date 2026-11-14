@@ -66,8 +66,9 @@ MATCH void func_801CF42C(void) {
 
 #include "overlays/plchar/Char_WalkStep.h"
 
-INCLUDE_ASM(func_801CF7BC);
+#include "overlays/plchar/Char_RunFacingProbe.h"
 
+MATCH void func_801CF7BC(void){CHAR_RUN_FACING_PROBE()}
 #include "overlays/plchar/Char_AdvanceScript.h"
 
 #include "overlays/plchar/Char_ProbeCellSpawn.h"
