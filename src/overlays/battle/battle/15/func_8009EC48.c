@@ -24,9 +24,7 @@ MATCH void func_8009EC48(void) {
     FAKE_ORDER_LOCK(slot_arg = g_BattleActiveBattler);
     kind_arg                          = g_BattleTarget;
     g_Battle.target_record->hp_change = Battle_CalcDamage(slot_arg, kind_arg, BATTLE_ELEMENT_FROM_WEAPON);
-    /* FAKE: keeps the slot reload after the pointer store. */
-    FAKE_BARRIER();
-    slot = (*(u8*)&g_Battle.active_battler);
+    slot                              = (*(u8*)&g_Battle.active_battler);
     if (BATTLER_IS_PLAYER(slot)) {
         g_Game.members[slot].chr.status |= saved;
         return;

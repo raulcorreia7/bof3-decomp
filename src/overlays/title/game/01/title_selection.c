@@ -80,8 +80,6 @@ MATCH void UI_WaitTitleInput(void) { /* func_801D0F00 */
         UI_SetMode(UI_MODE_SLOW_FADE_OUT);
         sel  = g_SndBGMId;
         bank = D_80143F20;
-        /* FAKE: barrier stages args deferring a2 into slot. */
-        FAKE_BARRIER();
         SND_FadeOutBGM(sel, bank, 8);
         g_UiTitleState = g_UiTitleState + 1u;
     }

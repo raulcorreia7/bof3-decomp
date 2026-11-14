@@ -6,7 +6,7 @@ MATCH void func_800C1FBC(void) {
     ((PartyMember*)g_Task)->param.unk_0B = 0;
     count                                = ((PartyMember*)g_Task)->unk_09;
     if (count == 0) {
-        if ((D_801463BE == 3) || (D_801463BE == 5)) {
+        if ((g_Battle.unk_DE == 3) || (g_Battle.unk_DE == 5)) {
             SND_PlayCue(0x602U);
         }
         ((PartyMember*)g_Task)->header.step += 1;

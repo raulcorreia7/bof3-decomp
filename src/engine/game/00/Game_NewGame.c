@@ -10,11 +10,9 @@ MATCH void Game_NewGame(void) {
     g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
     g_AreaDrawMode  = 6u;
     Party_BuildBattlers(PARTY_ORDER_FIELD);
-    area_id      = g_SaveAreaId;
-    g_GameAreaId = 0xFFFFu;
-    world_flags  = g_AreaWalkFlags;
-    /* FAKE: retail keeps the flags load ahead of the context loads. */
-    FAKE_BARRIER();
+    area_id                  = g_SaveAreaId;
+    g_GameAreaId             = 0xFFFFu;
+    world_flags              = g_AreaWalkFlags;
     entry_x                  = g_SaveEntryX;
     entry_y                  = g_SaveEntryY;
     entry_facing             = g_SaveEntryFacing;

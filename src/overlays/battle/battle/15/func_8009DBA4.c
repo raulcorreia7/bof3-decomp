@@ -10,9 +10,7 @@ MATCH void func_8009DBA4(void) {
     s16 value;
 
     g_Battle.target_record->hp_change = Battle_CalcDamage(g_Battle.active_battler, g_Battle.target, ELEM_ELECTRIC);
-    /* FAKE: holds the selection-record store ahead of the index reload. */
-    FAKE_BARRIER();
-    index = (*(u8*)&g_Battle.target);
+    index                             = (*(u8*)&g_Battle.target);
     if (index < 3u) {
         base = g_Game.members[index].chr.hp;
     } else {
