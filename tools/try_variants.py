@@ -24,10 +24,10 @@ ROOT = Path(__file__).resolve().parent.parent
 
 def function_span(source, name):
     """Return the start and end of the line or definition to replace."""
-    found = re.search(r"INCLUDE_ASM\(%s\);\n" % name, source)
+    found = re.search(rf"INCLUDE_ASM\({name}\);\n", source)
     if not found:
         found = re.search(
-            r"^(?:MATCH|NON_MATCHING)[^\n]*\b%s\([^\n]*\{\n.*?^\}\n" % name,
+            rf"^(?:MATCH|NON_MATCHING)[^\n]*\b{name}\([^\n]*\{{\n.*?^\}}\n",
             source,
             re.S | re.M,
         )
@@ -52,6 +52,7 @@ def main():
             path.write_text(base[:start] + text.rstrip("\n") + "\n" + base[end:])
             lines = subprocess.run(
                 ["sh", str(ROOT / "tools/match.sh"), "--diff", args.function],
+                check=False,
                 cwd=ROOT,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,

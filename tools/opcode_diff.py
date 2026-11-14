@@ -27,6 +27,7 @@ def side_by_side(function):
     """Return the (retail, candidate) instruction lists of `match.sh --diff`."""
     output = subprocess.run(
         ["sh", str(ROOT / "tools/match.sh"), "--diff", function],
+        check=False,
         cwd=ROOT,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
@@ -63,9 +64,9 @@ def main():
             f" cand[{candidate[c1][0] if c1 < len(candidate) else 'end'}..]"
         )
         for row in retail[max(r1 - args.context, 0) : r2]:
-            print("  R %s %-6s %s" % row)
+            print("  R {} {:<6} {}".format(*row))
         for row in candidate[max(c1 - args.context, 0) : c2]:
-            print("  C %s %-6s %s" % row)
+            print("  C {} {:<6} {}".format(*row))
     print(f"hunks {hunks} retail {len(retail)} cand {len(candidate)}")
 
 

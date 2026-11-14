@@ -43,7 +43,7 @@ def dump_part(path, function):
 
 def first_setter(insns, register):
     """Return the start of the first insn that sets the pseudo-register."""
-    pattern = re.compile(r"\(set \(reg(/\w)*:\w+ %s\) (.*)" % register)
+    pattern = re.compile(r"\(set \(reg(/\w)*:\w+ " + register + r"\) (.*)")
     for insn in insns:
         found = pattern.search(" ".join(insn.split()))
         if found:
@@ -64,6 +64,7 @@ def report(args, out):
     """Compile with the dumps on and print the rows."""
     subprocess.run(
         ["sh", str(ROOT / "tools/rtl_dump.sh"), args.source, "lg"],
+        check=False,
         cwd=ROOT,
         env={**os.environ, "OUT": out},
         stdout=subprocess.DEVNULL,
