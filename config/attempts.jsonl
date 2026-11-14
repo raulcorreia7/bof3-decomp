@@ -333,7 +333,6 @@
 {"function": "emi/scenario/scena13/00@0x801F735C", "tried": "blocker: andi v1,a1,0xFF compare against 0x37", "first_diff": "andi omitted.", "score": null}
 {"function": "emi/scenario/scena13/00@0x801FBA34", "tried": "hint: the area-id and scene-flag chain with both u16 area compares is 8 bytes over (0x14C against 0x144)", "first_diff": "lui v0,0x8014 at +0x14, because the compiler adds andi 0xFFFF after each lhu of g_GameAreaId where retail compares the loaded value directly.", "score": null}
 {"function": "emi/scenario/scena14/00@0x801F7960", "tried": "blocker: color register", "first_diff": "+0x30 lhu a1,0(a2).", "score": null}
-{"function": "emi/scenario/scena14/00@0x801F7A18", "tried": "needs: D_801FC4C0 declaration.", "first_diff": "", "score": null}
 {"function": "emi/scenario/scena14/00@0x801FC130", "tried": "blocker: frame 0x20 against 0x18", "first_diff": "+0x0 addiu sp,sp,-32.", "score": null}
 {"function": "emi/scenario/scena17/00@0x801F8480", "tried": "blocker: sum register", "first_diff": "+0x18 addiu v0,v0,2 (candidate) against addiu a1,v0,2 (retail).", "score": null}
 {"function": "emi/scenario/scena17/00@0x801F8480", "tried": "u8 phase local; s32 local; direct globals; pointer local; score: size 0x70 vs 0x74", "first_diff": "pointer register v1 vs a0; branch args", "score": null}
