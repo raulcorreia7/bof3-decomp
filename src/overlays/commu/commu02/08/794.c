@@ -983,7 +983,7 @@ MATCH void func_801D812C(void) {
     Menu_DrawHeaderBar(0x14, 0x10, 0x118, 0x13, g_WindowStyle);
     index = D_801DB0C8;
     if (index != 0xFFFF) {
-        UI_DrawText(0x1B, 0x13, 0, 0xFF, (u8*)(*(u16*)(0x80010000 + index * 2) + 0x80010000));
+        UI_DrawText(0x1B, 0x13, 0, 0xFF, (u8*)(MEM(u16, 2147549184U + index * 2) + 2147549184U));
     }
 }
 
