@@ -115,6 +115,8 @@ u8*   UI_GetSpriteRect(u8 sprite_id, u8 flags);
 void  UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
 /* func_801AF390 */
 s32   func_801AF390(s16 x, s16 y, u8* table, s32 flags);
+/* func_801AF390 */
+void  UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 /* func_801AF5B0 */
 u8    func_801AF5B0(s32 item_category, s32 character_index, s32 ability_kind);
 /* func_801AFD10 */
@@ -162,6 +164,8 @@ s8    Game_GetPartySize(s32 pos_x, s32 pos_y, s32 range_mode);
 s32   func_801BE1B0(u32 index);
 /* func_801BFE34 */
 void  func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode);
+/* func_801C1254 */
+void  Party_LoadMemberSprite(s32 character_id, s32 party_slot);
 /* func_801C1400 */
 void  Party_BuildBattlers(u32 order);
 /* Party_LoadPalettes */

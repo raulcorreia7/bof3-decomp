@@ -6,6 +6,9 @@
 
 #include "overlays/area/world04.h"
 
+/* FAKE: the call passes the count as s32, the width the real prototype (u8) lacks. */
+#define Item_Add ((bool (*)(s32, s32, s32, s32))Item_Add)
+
 /* D_80143F1D */
 extern u8  g_GameRequestKind;
 /* The selection pairs at the payload start. */
@@ -18,9 +21,5 @@ extern u8  D_801F3A18[];
 extern u8  D_801F3A19[];
 
 /* The party item helpers the count-and-add path calls. */
-/* func_801650B4 */
-bool Item_Add(s32 category, s32 item_id, s32 count, s32 unused);
-/* func_8016628C */
-s32  Item_Count(u8 category, u8 item_id, u8 mode);
 
 #endif

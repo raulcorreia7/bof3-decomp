@@ -71,6 +71,8 @@ void         Actor_SwitchScript(u8 value, u8* dst, s32 size);
 void         Actor_StageScript(s32 script_index, s32 position, u8* staging, s32 size);
 /* func_8014D6B8 */
 void         Actor_SelectScript(u8 script_index);
+/* func_8014D6DC */
+void         Actor_BeginScript(s32 script_index, s32 position);
 /* func_8014D8D4 */
 u32          Actor_RequestScript(u8 script_index);
 /* func_8014D910 */
@@ -391,6 +393,8 @@ void         Menu_DrawCursorSprite(u16 x, u16 y, s32 unused);
 void         Char_RebuildStats(Character* record);
 /* func_80164D2C */
 void         Char_PreviewEquip(u8 character_id, u8 slot, u8 item_id, u8* flags, u16* values);
+/* func_801650B4 */
+bool         Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
 /* func_801651DC */
 s32          Char_AddAbility(s32 ability_id, s32 character_index, s32 to_stock, s32 mode);
 /* func_80165280 */
@@ -401,6 +405,8 @@ s32          Char_RestoreAP(s32 character_index, s32 amount, s32 use_battle_copy
 s32          Char_AddCappedStat(u16* value, s32 delta);
 /* func_801654B0 */
 s32          Char_AddWillpower(u8* value, u16 delta);
+/* func_801654F4 */
+s16          Char_AddStat(u16* value, s16 delta);
 /* func_80165570 */
 s16          Char_AddPoints(u16* value, u16 limit, s16 delta);
 /* func_80165694 */
@@ -426,6 +432,8 @@ void         Message_SetVariable(u8 slot, u8 length, const u8* text);
 /* formats a game-text buffer; PsyQ declares sprintf on char, the game keeps its text as u8 */
 #define TEXT_Format(dst, fmt, args...) sprintf((char*)(dst), (char*)(fmt), ##args)
 #define TEXT_FormatLiteral(dst, fmt)   sprintf((char*)(dst), (char*)(fmt))
+/* func_8016628C */
+s32  Item_Count(u8 category, u8 item_id, u8 mode);
 /* func_80166438 */
 u8   Item_CountHeld(u32 category);
 /* func_801664A0 */
@@ -438,6 +446,8 @@ bool Party_SpendZenny(u32 amount, s32 unused);
 s32  Party_AddZenny(s32 amount, s32 skip_earned);
 /* func_801666C8 */
 s32  Item_GetDescription(s32 category, s32 item_id);
+/* func_80166A10 */
+u8   Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode);
 /* func_80166AE4: kind table for (source slot, group, table kind) */
 u8*  Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode);
 /* func_80166B94 */
