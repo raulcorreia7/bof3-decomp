@@ -58,7 +58,7 @@ MATCH void func_801EED04(void) {
     g_Task->header.mode += 1;
 }
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EF0A8 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"

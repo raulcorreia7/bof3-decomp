@@ -21,7 +21,7 @@ MATCH void func_8019C794(void) {
         Actor_SelectScript(code);
         g_Task->header.mode += 1;
     } else if ((g_Task->unk_0A & 0x1) == 0) {
-        index = Actor_FindFreeSlot();
+        index = Actor_FindFreeSpawned();
         if (index != GAME_NONE) {
             g_SpawnedActors[index].header.flags = 1;
             g_SpawnedActors[index].type         = 0x1B;

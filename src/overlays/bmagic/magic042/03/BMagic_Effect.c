@@ -24,7 +24,7 @@ MATCH void func_801EEC70(void) {
     SND_QueueSelectionEffect(0x100);
 }
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEDA4 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"

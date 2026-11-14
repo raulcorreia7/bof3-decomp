@@ -7,12 +7,12 @@
     u8     cell4;                                                         \
     u32    cell3;                                                         \
     s16*   scratch;                                                       \
-    g_Task->unk_03 = Actor_FindFree();                                    \
+    g_Task->unk_03 = Actor_FindFreeField();                               \
     if (g_Task->unk_03 == GAME_NONE) {                                    \
         return;                                                           \
     }                                                                     \
     g_Actors[g_Task->unk_03].header.flags = 1;                            \
-    g_Task->unk_04                        = Actor_FindFree();             \
+    g_Task->unk_04                        = Actor_FindFreeField();        \
     if (g_Task->unk_04 == GAME_NONE) {                                    \
         g_Actors[g_Task->unk_03].header.flags = 0;                        \
         return;                                                           \

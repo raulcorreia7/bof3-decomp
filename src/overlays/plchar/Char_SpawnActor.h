@@ -11,7 +11,7 @@ MATCH void Char_SpawnActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y) {
     x    = spawn_x;
     y    = spawn_y;
     kind = spawn_kind;
-    slot = Actor_FindFreeSlot();
+    slot = Actor_FindFreeSpawned();
     if (slot != GAME_NONE) {
         g_SpawnedActors[slot].header.flags     = 1;
         g_SpawnedActors[slot].type             = 0x34;

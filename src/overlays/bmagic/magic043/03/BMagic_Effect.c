@@ -141,7 +141,7 @@ MATCH void func_801EF0B4(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EF360 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"

@@ -6,7 +6,7 @@ MATCH void Actor_ZoomIn(void) {
     u8* work2;
     u8  timer;
 
-    Actor_CenterOnScreen();
+    Actor_SetScreenOrigin();
 
     work    = (u8*)g_Task;
     timer   = work[9];

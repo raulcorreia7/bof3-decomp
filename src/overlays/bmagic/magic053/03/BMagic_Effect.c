@@ -76,7 +76,7 @@ MATCH void func_801EED18(void) {
 
 #include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EF064 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"

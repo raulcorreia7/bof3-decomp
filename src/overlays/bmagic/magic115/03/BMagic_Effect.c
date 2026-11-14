@@ -59,7 +59,7 @@ MATCH void func_801EEEB0(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EF054 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"

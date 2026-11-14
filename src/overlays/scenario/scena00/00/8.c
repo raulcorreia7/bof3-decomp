@@ -170,7 +170,7 @@ MATCH void func_801F7134(s32 chapter_id) {
     setUV0(prim, 0, 32);
     setWH(prim, 256, 1768);
     prim->clut = 0x7A80;
-    setRGB0(prim, g_Task->tint.bytes.unk_5D, g_Task->tint.bytes.unk_5E, g_Task->tint.bytes.unk_5F);
+    setRGB0(prim, g_Task->tint.bytes.rgb.red, g_Task->tint.bytes.rgb.green, g_Task->tint.bytes.rgb.blue);
     SetShadeTex(prim, 0);
     SetSemiTrans(prim, chapter_id & BYTE_MASK);
     GFX_AddPrim(g_Task->draw_layer, sizeof(SPRT));
@@ -198,12 +198,12 @@ MATCH void func_801F72A0(void) {
 
     func_801F7134(1);
 
-    g_Task->tint.bytes.unk_5D += 2;
-    g_Task->tint.bytes.unk_5E += 2;
-    g_Task->tint.bytes.unk_5F += 2;
+    g_Task->tint.bytes.rgb.red += 2;
+    g_Task->tint.bytes.rgb.green += 2;
+    g_Task->tint.bytes.rgb.blue += 2;
 
     work = SCN_EFFECT;
-    if (work->color_r == 0x80) {
+    if (work->color.red == 0x80) {
         g_ScriptVarsReq.byte = 0x14;
         work->step           = 2;
         g_Task->timer        = 255;
@@ -231,14 +231,14 @@ MATCH void func_801F73A8(void) {
     func_801F7134(1);
 
     work = SCN_EFFECT;
-    work->color_r -= 2;
+    work->color.red -= 2;
     work = SCN_EFFECT;
-    work->color_g -= 2;
+    work->color.green -= 2;
     work = SCN_EFFECT;
-    work->color_b -= 2;
+    work->color.blue -= 2;
 
     work = SCN_EFFECT;
-    if (work->color_r == 0) {
+    if (work->color.red == 0) {
         work->counter_09 = 0;
         Actor_Clear();
     }
@@ -344,9 +344,9 @@ MATCH void func_801F7670(void) {
     point.x              = TO_COORD(11);
     point.y              = TO_COORD(19) + COORD_HALF;
     point.z.part.integer = Area_SampleHeight(TO_COORD(11), TO_COORD(19) + COORD_HALF);
-    color.r              = 0x30;
-    color.g              = 0x30;
-    color.b              = 0x30;
+    color.red            = 0x30;
+    color.green          = 0x30;
+    color.blue           = 0x30;
     stop                 = 1;
     do {
         next.x = point.x;
@@ -396,7 +396,7 @@ MATCH void func_801F78EC(volatile SceneLinePoint to, volatile SceneLinePoint fro
     vec.vz  = (-point_z->part.integer / 2);
     RotTransPers(&vec, (long*)&prim->x1, &p, &flag);
 
-    setRGB0(prim, color.r, color.g, color.b);
+    setRGB0(prim, color.red, color.green, color.blue);
 
     GFX_AddPrim((u8)SCN_EFFECT->ot_index, sizeof(*prim));
 }
@@ -413,29 +413,29 @@ MATCH void func_801F7A5C(void) {
     SceneEffect* work_tail;
     SceneEffect* work_state;
 
-    work_pos                     = SCN_EFFECT;
-    work_pos->pos.x              = TO_COORD(99) + COORD_HALF;
-    work_pos->pos.y              = TO_COORD(13);
-    work_pos->pos.z.part.integer = 0x300;
-    work_pos->counter_09         = 0x78;
-    work_tail                    = SCN_EFFECT;
-    work_pos->angle.x            = 0;
-    work_pos->angle.y            = 0;
-    work_pos->angle.z            = 0;
-    *(s8*)&work_tail->color_b    = -1;
-    *(s8*)&work_tail->color_g    = -1;
-    *(s8*)&work_tail->color_r    = -1;
-    work_state                   = SCN_EFFECT;
-    work_state->counter_0C       = 1;
-    work_state->counter_10       = 0;
-    work_state->channel_20       = 0;
-    work_state->channel_1C       = 0;
-    work_state->channel_18       = 0;
-    work_state->channel_0A       = 0;
-    work_state->channel_0B       = 0;
-    work_state->channel_08       = 0;
-    work_state->channel_07       = 0;
-    work_state->channel_06       = 0;
+    work_pos                      = SCN_EFFECT;
+    work_pos->pos.x               = TO_COORD(99) + COORD_HALF;
+    work_pos->pos.y               = TO_COORD(13);
+    work_pos->pos.z.part.integer  = 0x300;
+    work_pos->counter_09          = 0x78;
+    work_tail                     = SCN_EFFECT;
+    work_pos->angle.x             = 0;
+    work_pos->angle.y             = 0;
+    work_pos->angle.z             = 0;
+    *(s8*)&work_tail->color.blue  = -1;
+    *(s8*)&work_tail->color.green = -1;
+    *(s8*)&work_tail->color.red   = -1;
+    work_state                    = SCN_EFFECT;
+    work_state->counter_0C        = 1;
+    work_state->counter_10        = 0;
+    work_state->channel_20        = 0;
+    work_state->channel_1C        = 0;
+    work_state->channel_18        = 0;
+    work_state->channel_0A        = 0;
+    work_state->channel_0B        = 0;
+    work_state->channel_08        = 0;
+    work_state->channel_07        = 0;
+    work_state->channel_06        = 0;
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 14));
     SCN_EFFECT->step = 1;
 }
@@ -669,7 +669,7 @@ MATCH void func_801F8360(void) {
             RotTransPers3(&v3, &v4, &v5, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
         }
         shade = -(g_Task->timer << 1);
-        setRGB0(prim, g_Task->tint.bytes.unk_5D, g_Task->tint.bytes.unk_5E, g_Task->tint.bytes.unk_5F);
+        setRGB0(prim, g_Task->tint.bytes.rgb.red, g_Task->tint.bytes.rgb.green, g_Task->tint.bytes.rgb.blue);
         setRGB1(prim, shade, shade, shade);
         setRGB2(prim, shade, shade, shade);
         SetSemiTrans(prim, 1);
@@ -752,15 +752,15 @@ MATCH void func_801F878C(void) {
     SceneEffect* tail;
     SceneEffect* late;
 
-    work                    = SCN_EFFECT;
-    FIELD(s16, work, 0x2Eu) = (D_80147A86 + D_801FC9E8);
-    work->origin.y          = (D_80147A88 + D_801FC9E9);
-    work->counter_09        = 0;
-    SCN_EFFECT->channel_06  = 0x20;
-    tail                    = SCN_EFFECT;
-    *(s8*)&tail->color_b    = -0x80;
-    *(s8*)&tail->color_g    = -0x80;
-    *(s8*)&tail->color_r    = -0x80;
+    work                     = SCN_EFFECT;
+    FIELD(s16, work, 0x2Eu)  = (D_80147A86 + D_801FC9E8);
+    work->origin.y           = (D_80147A88 + D_801FC9E9);
+    work->counter_09         = 0;
+    SCN_EFFECT->channel_06   = 0x20;
+    tail                     = SCN_EFFECT;
+    *(s8*)&tail->color.blue  = -0x80;
+    *(s8*)&tail->color.green = -0x80;
+    *(s8*)&tail->color.red   = -0x80;
     func_801F8BCC();
     late       = SCN_EFFECT;
     late->step = late->channel_07;
@@ -774,14 +774,14 @@ MATCH void func_801F882C(void) {
     work = SCN_EFFECT;
     work->origin.x -= 4;
     work->origin.y += D_801FC9EC[work->counter_09 >> 2];
-    shade = *(s8*)&work->color_r;
+    shade = *(s8*)&work->color.red;
 
     if (shade != 0) {
-        work->color_r = shade - 2;
-        tail          = SCN_EFFECT;
-        tail->color_b -= 2;
+        work->color.red = shade - 2;
+        tail            = SCN_EFFECT;
+        tail->color.blue -= 2;
         tail = SCN_EFFECT;
-        tail->color_g -= 2;
+        tail->color.green -= 2;
         tail = SCN_EFFECT;
         tail->counter_09 += 1;
         tail = SCN_EFFECT;
@@ -801,14 +801,14 @@ MATCH void func_801F8930(void) {
 
     work = SCN_EFFECT;
     work->origin.y -= 2;
-    shade = *(s8*)&work->color_r;
+    shade = *(s8*)&work->color.red;
 
     if (shade != 0) {
-        work->color_r = shade - 4;
-        tail          = SCN_EFFECT;
-        tail->color_b -= 4;
+        work->color.red = shade - 4;
+        tail            = SCN_EFFECT;
+        tail->color.blue -= 4;
         tail = SCN_EFFECT;
-        tail->color_g -= 4;
+        tail->color.green -= 4;
         tail = SCN_EFFECT;
         if ((tail->counter_09 & 0x7) == 0) {
             tail->channel_06 += 1;
@@ -858,14 +858,14 @@ MATCH void func_801F8AB8(void) {
     current                     = SCN_EFFECT;
     VOL(u16, current->origin.x) = (u16)screen->vx;
     current->origin.y           = SP_REF(u16, 0x36u);
-    shade                       = *(s8*)&current->color_r;
+    shade                       = *(s8*)&current->color.red;
 
     if (shade != 0) {
-        current->color_r = shade - 4;
-        tail             = SCN_EFFECT;
-        tail->color_b -= 4;
+        current->color.red = shade - 4;
+        tail               = SCN_EFFECT;
+        tail->color.blue -= 4;
         tail = SCN_EFFECT;
-        tail->color_g -= 4;
+        tail->color.green -= 4;
         tail = SCN_EFFECT;
         if ((tail->counter_09 & 0x7) == 0) {
             tail->channel_06 += 1;
@@ -885,7 +885,7 @@ MATCH void func_801F8BCC(void) {
     SetPolyFT4(prim);
     setXYWH(prim, SCN_EFFECT->origin.x - half, SCN_EFFECT->origin.y - half, SCN_EFFECT->channel_06, SCN_EFFECT->channel_06);
     setUVWH(prim, 0xE0, 0x30, 0x1F, 0x20);
-    setRGB0(prim, SCN_EFFECT->color_r, SCN_EFFECT->color_g, SCN_EFFECT->color_b);
+    setRGB0(prim, SCN_EFFECT->color.red, SCN_EFFECT->color.green, SCN_EFFECT->color.blue);
     setClut(prim, 160, STAGE_PALETTE_Y + 3);
     prim->tpage = GetTPage(0, 1, 704, 256);
     SetShadeTex(prim, 0);
@@ -1031,7 +1031,7 @@ MATCH void func_801F92DC(void) {
     if (selection == 1) {
         func_801BE1B0(0U);
         if (g_ScriptVars[2] == 0) {
-            slot        = Actor_FindFreeSlot();
+            slot        = Actor_FindFreeSpawned();
             *D_1F800000 = slot;
             actor_slot  = slot & BYTE_MASK;
             if (actor_slot != GAME_NONE) {
@@ -1117,7 +1117,7 @@ MATCH void func_801F9644(void) {
             Area_StartScrollRoute(0);
             timer       = &g_AreaCameraAngle.vx;
             *timer      = (*timer + 0xAA);
-            id          = Actor_FindFreeSlot();
+            id          = Actor_FindFreeSpawned();
             slot        = id & BYTE_MASK;
             *D_1F800000 = id;
             if (slot != GAME_NONE) {
@@ -1166,7 +1166,7 @@ MATCH void func_801F9868(void) {
                     g_AreaCameraAngle.vz = 848;
                     func_801BE1B0(0U);
                     Area_StartScrollRoute(0);
-                    free_slot   = Actor_FindFreeSlot();
+                    free_slot   = Actor_FindFreeSpawned();
                     slot        = free_slot & BYTE_MASK;
                     *D_1F800000 = free_slot;
                     if (slot != GAME_NONE) {
@@ -1311,7 +1311,7 @@ MATCH void func_801F9BE4(void) {
             if (g_ScriptVars[2] != 0x23) {
                 break;
             }
-            D_1F800000[0] = Actor_FindFreeSlot();
+            D_1F800000[0] = Actor_FindFreeSpawned();
             if ((D_1F800000[0] & BYTE_MASK) != GAME_NONE) {
                 g_SpawnedActors[D_1F800000[0]].header.flags   = 1;
                 g_SpawnedActors[D_1F800000[0]].type           = 0x13;
@@ -1346,7 +1346,7 @@ MATCH void func_801F9FB8(void) {
             if (g_ScriptVars[2] == 0x30) {
                 g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
                 UI_SetMode(UI_MODE_FADE_IN);
-                id            = Actor_FindFreeSlot();
+                id            = Actor_FindFreeSpawned();
                 D_1F800000[0] = id;
                 if ((id & BYTE_MASK) != GAME_NONE) {
                     g_SpawnedActors[id].header.flags              = 1;
@@ -1447,7 +1447,7 @@ MATCH void func_801FA27C(void) {
             if (g_ScriptVarsReq.byte != 5) {
                 break;
             }
-            id            = Actor_FindFreeSlot();
+            id            = Actor_FindFreeSpawned();
             D_1F800000[0] = id;
             if ((id & BYTE_MASK) != GAME_NONE) {
                 g_SpawnedActors[id].header.flags              = 1;
@@ -1464,7 +1464,7 @@ MATCH void func_801FA27C(void) {
             if (g_ScriptVarsReq.byte != 8) {
                 break;
             }
-            id            = Actor_FindFreeSlot();
+            id            = Actor_FindFreeSpawned();
             D_1F800000[0] = id;
             if ((id & BYTE_MASK) != GAME_NONE) {
                 g_SpawnedActors[id].header.flags              = 1;
@@ -1638,7 +1638,7 @@ MATCH void func_801FA7D8(void) {
                 (*counter)--;
                 return;
             }
-            id            = Actor_FindFreeSlot();
+            id            = Actor_FindFreeSpawned();
             D_1F800000[0] = id;
             if (id != 0xFFu) {
                 g_SpawnedActors[D_1F800000[0]].header.flags = 1;
@@ -1920,7 +1920,7 @@ MATCH void func_801FB204(void) {
                     Area_StartScrollRoute(2);
                     D_80143F84.raw = TO_COORD(1408);
                     Area_AdvanceScroll(D_80143F84.half[1]);
-                    slot          = Actor_FindFreeSlot();
+                    slot          = Actor_FindFreeSpawned();
                     D_1F800000[0] = slot;
                     if ((slot & BYTE_MASK) != GAME_NONE) {
                         g_SpawnedActors[slot].header.flags            = 1;

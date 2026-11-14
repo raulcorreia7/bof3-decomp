@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void Area_ResetScene(void) {
+MATCH void Area_UpdateIdleActor(void) {
     Actor* work;
 
     func_801C3828();

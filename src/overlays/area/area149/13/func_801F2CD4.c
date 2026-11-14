@@ -8,11 +8,11 @@ MATCH void func_801F2CD4(void) {
     g_Task->timer = value2;
     if (value2 & BYTE_MASK) {
         g_AreaCameraOffsetZ = g_AreaCameraOffsetZ - 0x2A;
-        value               = g_Task->tint.bytes.unk_5D;
+        value               = g_Task->tint.bytes.rgb.red;
         if (value != 0) {
-            g_Task->tint.bytes.unk_5D = value - 1;
-            g_Task->tint.bytes.unk_5E -= 1;
-            g_Task->tint.bytes.unk_5F -= 1;
+            g_Task->tint.bytes.rgb.red = value - 1;
+            g_Task->tint.bytes.rgb.green -= 1;
+            g_Task->tint.bytes.rgb.blue -= 1;
         }
     } else {
         g_AreaCameraOffsetZ = 0x400;

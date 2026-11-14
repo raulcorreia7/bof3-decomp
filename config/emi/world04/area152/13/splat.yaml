@@ -17,7 +17,7 @@ segments:
       - [0x4E8, c, Actor_ZoomIn]
       - [0x564, c, Area_RequestRestartOnContextChange]
       - [0x624, c, func_801F3224]
-      - [0x6C4, c, Actor_CenterOnScreen]
+      - [0x6C4, c, Actor_SetScreenOrigin]
       - [0x6E0, c, func_801F32E0]
       - [0x724, c, Actor_NextStep]
       - [0x764, c, func_801F3364]

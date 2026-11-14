@@ -77,9 +77,9 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
             CUR(sub) += 1;
             break;
         case 0xC6:
-            g_Task->tint.bytes.unk_5D += (code + CUR(sub))[1];
-            g_Task->tint.bytes.unk_5E += (code + CUR(sub))[2];
-            g_Task->tint.bytes.unk_5F += (code + CUR(sub))[3];
+            g_Task->tint.bytes.rgb.red += (code + CUR(sub))[1];
+            g_Task->tint.bytes.rgb.green += (code + CUR(sub))[2];
+            g_Task->tint.bytes.rgb.blue += (code + CUR(sub))[3];
             CUR(sub) += 3;
             break;
         case 0xC7:

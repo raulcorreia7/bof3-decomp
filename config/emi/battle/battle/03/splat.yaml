@@ -428,7 +428,7 @@ segments:
       - [0x16C18, c, func_801E7818]
       - [0x16C88, c, func_801E7888]
       - [0x16CF0, c, func_801E78F0]
-      - [0x16D48, c, Battle_PickStreamSlot]
+      - [0x16D48, c, Battle_StartCharacterLoad]
       - [0x16F34, c, func_801E7B34]
       - [0x16FA0, c, func_801E7BA0]
       - [0x17958, c, func_801E8558]

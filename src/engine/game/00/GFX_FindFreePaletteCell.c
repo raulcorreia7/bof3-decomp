@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH u8 GFX_AllocPaletteCell(u8 mode) {
+MATCH u8 GFX_FindFreePaletteCell(u8 mode) {
     u8  row;
     u8* map;
     u8  column;
