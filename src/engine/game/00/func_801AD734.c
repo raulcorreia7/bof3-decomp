@@ -47,9 +47,9 @@ MATCH void func_801AD734(void) {
         }
         g_Task->unk_04 = 1;
     }
-    value                   = -0x50;
-    work                    = g_Task;
-    work->tint.bytes.unk_5E = value;
-    work->tint.bytes.unk_5F = value;
-    work->tint.bytes.unk_5D = value;
+    value                      = -0x50;
+    work                       = g_Task;
+    work->tint.bytes.rgb.green = value;
+    work->tint.bytes.rgb.blue  = value;
+    work->tint.bytes.rgb.red   = value;
 }

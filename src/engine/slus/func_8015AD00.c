@@ -173,14 +173,14 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
 
             sort_list->work      = (u8*)g_Task;
             sort_list->primitive = p;
-            quad->ft4.r0         = g_Task->tint.bytes.unk_5D;
-            quad->ft4.g0         = g_Task->tint.bytes.unk_5E;
-            quad->ft4.b0         = g_Task->tint.bytes.unk_5F;
+            quad->ft4.r0         = g_Task->tint.bytes.rgb.red;
+            quad->ft4.g0         = g_Task->tint.bytes.rgb.green;
+            quad->ft4.b0         = g_Task->tint.bytes.rgb.blue;
             if ((g_Task->range_54.table[3] & 0x80) != 0) {
                 VectorNormalS(&normal, D_1F800014);
-                color.r  = g_Task->tint.bytes.unk_5D;
-                color.g  = g_Task->tint.bytes.unk_5E;
-                color.b  = g_Task->tint.bytes.unk_5F;
+                color.r  = g_Task->tint.bytes.rgb.red;
+                color.g  = g_Task->tint.bytes.rgb.green;
+                color.b  = g_Task->tint.bytes.rgb.blue;
                 color.cd = quad->ft4.code;
                 NormalColorCol(D_1F800014, &color, (CVECTOR*)&quad->ft4.r0);
             }

@@ -59,6 +59,27 @@ static inline void WorldPos_Copy(WorldPos* dst, WorldPos* src) {
 /* A sprite's horizontal and vertical size, 16.16; 0x10000 is full size. */
 typedef Point2l SpriteScale;
 
+/* One red, green and blue level a byte wide, without the SDK's fourth byte; CVECTOR is the padded form. */
+typedef struct ColorRGB8 {
+    u8 red;
+    u8 green;
+    u8 blue;
+} ColorRGB8;
+
+/* Signed per-channel colour shift of a palette fade; each channel is added to the colours it fades. */
+typedef struct ColorDelta8 {
+    s8 red;
+    s8 green;
+    s8 blue;
+} ColorDelta8;
+
+/* One red, green and blue level a halfword wide. */
+typedef struct ColorRGB16 {
+    u16 red;
+    u16 green;
+    u16 blue;
+} ColorRGB16;
+
 ASSERT_SIZE(Coord3, 0x0C);
 ASSERT_OFFSET(Coord3, x, 0x00);
 ASSERT_OFFSET(Coord3, y, 0x04);
@@ -75,5 +96,11 @@ ASSERT_SIZE(Point3s, 0x06);
 ASSERT_SIZE(Point3l, 0x0C);
 ASSERT_OFFSET(Point3l, y, 0x04);
 ASSERT_OFFSET(Point3l, z, 0x08);
+ASSERT_SIZE(ColorRGB8, 0x03);
+ASSERT_OFFSET(ColorRGB8, blue, 0x02);
+ASSERT_SIZE(ColorDelta8, 0x03);
+ASSERT_OFFSET(ColorDelta8, blue, 0x02);
+ASSERT_SIZE(ColorRGB16, 0x06);
+ASSERT_OFFSET(ColorRGB16, blue, 0x04);
 
 #endif
