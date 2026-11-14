@@ -428,7 +428,7 @@ MATCH void func_801F8478(SceneBurstRow* row) {
     radius      = ((rand() % 2) << 12) | (rand() & 0xFFF);
     row->x      = g_Task->pos.x.fixed + ((radius * FIXED_MUL(rsin(elevation), rcos(azimuth))) >> 8);
     row->y      = g_Task->pos.y.fixed + ((radius * FIXED_MUL(rsin(elevation), rsin(azimuth))) >> 8);
-    row->z      = g_Task->pos.z.fixed + radius * rcos(elevation) + 0x2000000;
+    row->z      = g_Task->pos.z.fixed + radius * rcos(elevation) + (2 << 24);
 }
 
 MATCH u8 func_801F85D8(void) {
