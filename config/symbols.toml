@@ -7315,6 +7315,7 @@ csqrt_1 = { addr = 0x80178468, type = "func", source = "LIBGTE.LIB 496 bytes" }
 csqrt = { addr = 0x801785BC, type = "func", source = "LIBGTE.LIB 496 bytes" }
 InitGeom = { addr = 0x80178660, type = "func", source = "LIBGTE.LIB 144 bytes" }
 SquareRoot0 = { addr = 0x801786E8, type = "func", source = "LIBGTE.LIB 144 bytes" }
+func_80178764 = { addr = 0x80178764, type = "func", source = "LIBGTE msc01.o SquareRoot0, the return-zero tail it branches to" }
 InvSquareRoot = { addr = 0x80178778, type = "func", source = "LIBGTE.LIB 672 bytes" }
 VectorNormalS = { addr = 0x80178804, type = "func", source = "Normalizes a vector." }
 VectorNormal = { addr = 0x80178818, type = "func", source = "LIBGTE.LIB 672 bytes" }

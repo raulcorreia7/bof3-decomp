@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from check_markers import check_hand_units, check_text
+from check_markers import check_hand_units, check_text, has_hand_asm
 
 
 def problems(text: str) -> list[str]:
@@ -131,3 +131,11 @@ def test_attempt_notes_are_rejected() -> None:
         "attempt note belongs in config/attempts.jsonl"
     ]
     assert problems('MATCH void f(void) { char *s = "First difference:"; }\n') == []
+
+
+def test_a_hand_asm_file_may_land_its_switch(tmp_path) -> None:
+    hand, draft = tmp_path / "h.c", tmp_path / "d.c"
+    hand.write_text(DRAFT)
+    draft.write_text(DRAFT.replace("HAND_ASM", "NON_MATCHING"))
+    assert has_hand_asm(str(hand))
+    assert not has_hand_asm(str(draft))
