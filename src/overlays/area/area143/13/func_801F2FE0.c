@@ -1,8 +1,8 @@
 #include "area143_13.h"
 
 MATCH void func_801F2FE0(void) {
-    u16        i;
-    AreaSpark* spark;
+    u16              i;
+    AreaGroundSpark* spark;
     /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
     FAKE_STACK_PADS(u8, 0x10);
 
