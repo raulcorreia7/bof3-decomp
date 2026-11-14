@@ -55,6 +55,10 @@ NON_MATCHING s32 func_801530D0(void) {
     u16 flags;
     u8  low;
     u32 word;
+    u32* head;
+    s32 cell2;
+    u8* low_min;
+    SVECTOR* vert;
 
     func_80153CC4();
     tilt       = g_AreaCameraAngle.vz - 0x200;
@@ -91,6 +95,8 @@ NON_MATCHING s32 func_801530D0(void) {
     map_width_ptr = MEM_PTR(u8, MAP_BUNDLE_BASE);
     row_depth_off = -0x30;
     sp10_row      = g_AreaGridRowCursor;
+    low_min       = PAD_AT(u8, 0);
+    vert          = D_1F800014;
     col_depth_off = 0;
     D_80149341    = PAD(s32, 0xC);
     do {
@@ -120,11 +126,11 @@ NON_MATCHING s32 func_801530D0(void) {
                     Area_RequestCellRows((AreaCell*)s0);
                     D_8014933A |= 1;
                 } else {
-                    D_1F800014[0].vx = (s0[0] << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
-                    D_1F800014[0].vy = (s0[1] << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
+                    vert->vx = (s0[0] << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
+                    vert->vy = (s0[1] << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
                     rec                         = (s8*)((MAP_BUNDLE_BASE + 0x30) + s0[1] * *map_width_ptr * 4 + s0[0] * 4);
                     D_1F800010              = rec;
-                    D_1F800014[0].vz = -(rec[0] * 0x10);
+                    vert->vz = -(rec[0] * 0x10);
                     gte_ldv0(&D_1F800014[0]);
                     gte_rtps();
                     gte_stsxy(&D_1F800034[0]);
@@ -177,33 +183,39 @@ NON_MATCHING s32 func_801530D0(void) {
                             pkt2 = (u8*)g_AreaCellPrims + tmp + s2 * 0x50;
                             gte_rtpt();
                             flags = *(u16*)(s0 + 2);
-                            tmp   = flags & 0x4000;
                             if (flags & 0x8000) {
                                 v = g_FrameBufferIndex * 8;
-                                if (tmp != 0) {
+                                if (flags & 0x4000) {
                                     cell = v;
                                     if (s6 != 0) {
                                         cell = v + row_depth_off;
                                     }
-                                    LINK_PACKET(cell, pkt);
+                                    head  = *(u32**)&D_80142CC4[cell];
+                                    *head = (*head & 0xFF000000) | ((u32)pkt & 0xFFFFFF);
+                                    cell2 = v;
+                                    if (s6 != 0) {
+                                        cell2 += row_depth_off;
+                                    }
+                                    *(u32*)&D_80142CC4[cell2] = (u32)pkt;
                                 } else {
-                                    LINK_PACKET((g_FrameBufferIndex + 2) * 8 + s5, pkt);
+                                    cell = (g_FrameBufferIndex + 2) * 8 + s5;
+                                    LINK_PACKET(cell, pkt);
                                 }
-                            } else if ((tmp != 0) && ((g_AreaDrawMode == 6) || ((g_AreaDrawMode == 4) && (depth_threshold < s6)))) {
+                            } else if ((flags & 0x4000) && ((g_AreaDrawMode == 6) || ((g_AreaDrawMode == 4) && (depth_threshold < s6)))) {
                                 word       = *(u32*)rec;
-                                PAD(u8, 0) = word ^ 0x80;
-                                if ((((word >> 8) & BYTE_MASK) ^ 0x80) < PAD(u8, 0)) {
-                                    PAD(u8, 0) = (word >> 8) ^ 0x80;
+                                *low_min = word ^ 0x80;
+                                if ((((word >> 8) & BYTE_MASK) ^ 0x80) < *low_min) {
+                                    *low_min = (word >> 8) ^ 0x80;
                                 }
-                                if ((((u8)rec[2]) ^ 0x80) < PAD(u8, 0)) {
-                                    PAD(u8, 0) = ((u8)rec[2]) ^ 0x80;
+                                if ((((u8)rec[2]) ^ 0x80) < *low_min) {
+                                    *low_min = ((u8)rec[2]) ^ 0x80;
                                 }
-                                if ((((u8)rec[3]) ^ 0x80) < PAD(u8, 0)) {
-                                    PAD(u8, 0) = ((u8)rec[3]) ^ 0x80;
+                                if ((((u8)rec[3]) ^ 0x80) < *low_min) {
+                                    *low_min = ((u8)rec[3]) ^ 0x80;
                                 }
                                 tmp = D_8014933D;
                                 D_8014933D += 1;
-                                D_80143740[tmp] = (s6 << 0x18) | (*(u16*)(s0 + 2) & 0xFFF) | (PAD(u8, 0) << 0x10);
+                                D_80143740[tmp] = (s6 << 0x18) | (*(u16*)(s0 + 2) & 0xFFF) | (*low_min << 0x10);
                             } else {
                                 LINK_PACKET(g_FrameBufferIndex * 8 + s5, s1 + g_FrameBufferIndex * 0x28);
                             }
@@ -214,14 +226,14 @@ NON_MATCHING s32 func_801530D0(void) {
                                 link                        = (u8*)g_AreaCellPrims + g_FrameBufferIndex * 0x28 + v16 * 0x50;
                                 *(u32*)(link + 8)           = *(u32*)(pkt2 + 0x20);
                                 *(u32*)(link + 0x10)        = *(u32*)(pkt2 + 0x10);
-                                D_1F800014[0].vx = (s0[0] << 7) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
-                                D_1F800014[0].vy = ((s0[1] - 0x80) << 7) - AREA_CELL_HALF;
+                                vert[0].vx = (s0[0] << 7) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
+                                vert[0].vy = ((s0[1] - 0x80) << 7) - AREA_CELL_HALF;
                                 rec                         = (s8*)((MAP_BUNDLE_BASE + 0x34) + s0[1] * g_AreaMapBundle.width * 4 + s0[0] * 4);
                                 D_1F800010              = rec;
-                                D_1F800014[1].vx = D_1F800014[0].vx;
-                                D_1F800014[1].vy = ((s0[1] - 0x80) << 7) + AREA_CELL_HALF;
-                                D_1F800014[0].vz = -(rec[0] * 0x10);
-                                D_1F800014[1].vz = -(rec[2] * 0x10);
+                                vert[1].vx = vert[0].vx;
+                                vert[1].vy = ((s0[1] - 0x80) << 7) + AREA_CELL_HALF;
+                                vert[0].vz = -(rec[0] * 0x10);
+                                vert[1].vz = -(rec[2] * 0x10);
                                 gte_ldv3c(&D_1F800014[0]);
                                 LINK_PACKET((g_FrameBufferIndex + (((*(u16*)(s0 + 2) >> 0xC) & 2) ^ 2)) * 8 + s5, link);
                                 gte_rtpt();
@@ -232,14 +244,14 @@ NON_MATCHING s32 func_801530D0(void) {
                                 link                        = (u8*)g_AreaCellPrims + g_FrameBufferIndex * 0x28 + v16 * 0x50;
                                 *(u32*)(link + 8)           = *(u32*)(pkt2 + 0x18);
                                 *(u32*)(link + 0x10)        = *(u32*)(pkt2 + 0x20);
-                                D_1F800014[0].vx = ((s0[0] - 0x80) << 7) - AREA_CELL_HALF;
-                                D_1F800014[0].vy = (s0[1] << 7) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
+                                vert[0].vx = ((s0[0] - 0x80) << 7) - AREA_CELL_HALF;
+                                vert[0].vy = (s0[1] << 7) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
                                 rec                         = (s8*)((MAP_BUNDLE_BASE + 0x30) + (s0[1] + 1) * g_AreaMapBundle.width * 4 + s0[0] * 4);
                                 D_1F800010              = rec;
-                                D_1F800014[1].vx = ((s0[0] - 0x80) << 7) + AREA_CELL_HALF;
-                                D_1F800014[1].vy = D_1F800014[0].vy;
-                                D_1F800014[0].vz = -(rec[0] * 0x10);
-                                D_1F800014[1].vz = -(rec[1] * 0x10);
+                                vert[1].vx = ((s0[0] - 0x80) << 7) + AREA_CELL_HALF;
+                                vert[1].vy = vert[0].vy;
+                                vert[0].vz = -(rec[0] * 0x10);
+                                vert[1].vz = -(rec[1] * 0x10);
                                 gte_ldv3c(&D_1F800014[0]);
                                 LINK_PACKET((g_FrameBufferIndex + (((*(u16*)(s0 + 2) >> 0xB) & 2) ^ 2)) * 8 + s5, link);
                                 gte_rtpt();
