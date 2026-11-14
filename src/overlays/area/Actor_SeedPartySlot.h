@@ -3,7 +3,8 @@
  * statement macro, not a function: the early return belongs to the caller's body. Every change
  * must verify every member. */
 /* func_801F2E9C, func_801F304C, func_801F31FC, func_801F33AC, func_801F355C, func_801F3708 and
- * func_801F38B4 (area092), and func_801FCECC (scena02) */
+ * func_801F38B4 (area092), func_801FCD14 and func_801FCECC (scena02), func_801FC8A0 (scena05) and
+ * func_801FCB80 (scena06) */
 #define ACTOR_SEED_PARTY_SLOT(member, table, actor_type, unk06)                                      \
     {                                                                                                \
         TASK_SET(&g_Game.members[member]);                                                           \
