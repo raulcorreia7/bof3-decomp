@@ -1,6 +1,6 @@
 #include "area098_13.h"
 
-MATCH void func_801F40D0(s32 arg0) {
+MATCH void func_801F40D0(s32 unused) {
     AreaStreakSlot* slot;
     s32             speed;
     u16             angle;
