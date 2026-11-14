@@ -283,7 +283,27 @@ INCLUDE_ASM(func_801D2908);
 
 INCLUDE_ASM(func_801D2AC4);
 
-INCLUDE_ASM(func_801D2CF8);
+MATCH void func_801D2CF8(s32 x, s32 y, s32 icon) {
+    SPRT* sprite;
+    u8    index;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 896, 256), NULL);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    sprite = (SPRT*)g_GfxPrimCursor;
+    SetSprt(sprite);
+    setXY0(sprite, x, y);
+    setWH(sprite, 32, 40);
+    setRGB0(sprite, 0x80, 0x80, 0x80);
+    index = icon;
+    if (index == 0xFF) {
+        setUV0(sprite, 0, 0);
+        sprite->clut = 0x7BC8;
+    } else {
+        setUV0(sprite, (icon & 7) * 32, (index / 8) * 40);
+        sprite->clut = 0x7BC9;
+    }
+    GFX_AddPrim(1, sizeof(SPRT));
+}
 
 MATCH void func_801D2E10(void) {
     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
