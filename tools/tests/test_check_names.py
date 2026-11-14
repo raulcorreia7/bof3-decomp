@@ -352,3 +352,14 @@ def test_a_renamed_file_that_gains_an_offset_access_fails(
     )
     assert check_names.main(["--diff", "HEAD~1"]) == 1
     assert "FIELD(): 1 new offset access" in capsys.readouterr().err
+
+
+def test_a_draft_body_does_not_count_its_offset_macros() -> None:
+    draft = (
+        "#ifdef NON_MATCHING\nNON_MATCHING void f(void) { x = FIELD(u8, b, 0x4u); }\n"
+        "#else\nINCLUDE_ASM(f);\n#endif\n"
+    )
+    assert check_names.macro_counts(draft) == {}
+    assert check_names.macro_counts("MATCH void f(void) { x = SP(0x4u); }\n") == {
+        "SP": 1
+    }

@@ -7,6 +7,8 @@ draft, which must sit under ``#ifdef NON_MATCHING`` with its ``INCLUDE_ASM`` in 
 ``HAND_ASM`` marks the C equivalent of a function the original programmer wrote in assembly. It
 sits under ``#ifdef NON_MATCHING`` like a draft, is required for every function in
 ``asm/*/hand/`` and is allowed nowhere else; ``--diff`` lets that switch land in a file that holds one.
+``--diff REF`` lets a new draft land when ``config/attempts.jsonl`` holds an object for its function
+(``<image>@0x<ADDR>``), so every unmatched function keeps its closest draft with its record.
 Status markers never take a ``FAKE:`` note.
 The one exception is a ``static inline`` helper in a header, which is not a lifted function. PsyQ
 stubs such as ``__main`` carry ``MATCH`` like any other definition.
@@ -21,13 +23,18 @@ Usage: python3 tools/check_markers.py [FILE...]    (default: every tracked src/*
 
 from __future__ import annotations
 
+import json
 import re
 import subprocess
 import sys
+import tomllib
 from dataclasses import dataclass
 from pathlib import Path
 
+from bof3.resolve.ids import asm_dir
 from check_names import added_lines
+
+ROOT = Path(__file__).resolve().parent.parent
 
 MARKERS = ("MATCH", "NON_MATCHING", "HAND_ASM")
 DRAFT_MARKERS = ("NON_MATCHING", "HAND_ASM")
@@ -283,6 +290,28 @@ def has_hand_asm(path: str) -> bool:
     return re.search(r"^HAND_ASM\s", text, re.M) is not None
 
 
+def draft_ref(path: str, text: str, root: Path | None = None) -> str | None:
+    """The attempts key ``<image>@0x<ADDR>`` of the draft that `text` starts, or None."""
+    root = root or ROOT
+    found = re.search(r"NON_MATCHING\s[^;{}()]*?\b(\w+)\s*\(", text)
+    folder = asm_dir(root / path, root)
+    if not found or not folder:
+        return None
+    name, image = found.group(1), folder.removeprefix("asm/")
+    if m := re.fullmatch(r"func_([0-9A-Fa-f]{8})", name):
+        return f"{image}@0x{m.group(1).upper()}"
+    symbols = tomllib.loads((root / "config/symbols.toml").read_text(encoding="utf-8"))
+    addr = symbols.get(image, {}).get(name, {}).get("addr")
+    return f"{image}@0x{addr:08X}" if addr is not None else None
+
+
+def attempted(root: Path | None = None) -> set[str]:
+    """The functions that `config/attempts.jsonl` holds an object for."""
+    path = (root or ROOT) / "config/attempts.jsonl"
+    rows = path.read_text(encoding="utf-8").splitlines() if path.exists() else []
+    return {json.loads(row)["function"] for row in rows if row.strip()}
+
+
 def main(argv: list[str]) -> int:
     if argv and argv[0] in ("-h", "--help"):
         print(__doc__.strip())
@@ -291,20 +320,26 @@ def main(argv: list[str]) -> int:
         if len(argv) != 2:
             print("usage: python3 tools/check_markers.py --diff REF", file=sys.stderr)
             return 2
-        bad = 0
+        bad, known = 0, attempted()
         for path, line, text in added_lines(argv[1]):
             if re.match(r"\s*#\s*if(?:def)?\s+NON_MATCHING\b", text):
                 if has_hand_asm(path):
                     continue
+                rest = "\n".join(Path(path).read_text().splitlines()[line:])
+                ref = draft_ref(path, rest)
+                if ref in known:
+                    continue
                 print(
-                    f"{path}:{line}: a draft lands; resolve it or leave it out of the PR",
+                    f"{path}:{line}: a draft needs its attempts object: add one with "
+                    f'"function": "{ref or "<image>@0x<ADDR>"}" to config/attempts.jsonl '
+                    "(the form reached and the first differing instruction)",
                     file=sys.stderr,
                 )
                 bad = 1
         if bad:
             print(f"check-markers: drafts landed against {argv[1]}", file=sys.stderr)
             return 1
-        print(f"check-markers: no drafts landed against {argv[1]}")
+        print(f"check-markers: every draft landed against {argv[1]} has attempts")
         return 0
     paths = argv or tracked_sources()
     problems: list[Violation] = []
