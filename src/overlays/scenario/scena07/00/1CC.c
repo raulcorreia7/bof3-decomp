@@ -483,7 +483,40 @@ INCLUDE_ASM(func_801F9330);
 
 INCLUDE_ASM(func_801F97E0);
 
-INCLUDE_ASM(func_801F9A80);
+MATCH s32 func_801F9A80(SceneEffectRow* row) {
+    POLY_F4* poly;
+    s32      point[3];
+    DVECTOR  screen;
+    s32      landed;
+
+    poly = (POLY_F4*)g_GfxPrimCursor;
+    SetPolyF4(poly);
+    SetSemiTrans(poly, 1);
+    point[0] = row->x;
+    point[1] = row->y;
+    point[2] = row->unk_C + (row->unk_14 << 8);
+    Area_ProjectPoint(point, &screen);
+    poly->x0 = screen.vx - 1;
+    poly->y0 = screen.vy;
+    poly->x1 = screen.vx + 1;
+    poly->y1 = screen.vy;
+    point[0] = row->x;
+    point[1] = row->y;
+    point[2] = row->unk_C - (row->unk_14 << 8);
+    landed   = 0;
+    if (point[2] < row->unk_1C) {
+        point[2] = row->unk_1C;
+        landed   = 1;
+    }
+    Area_ProjectPoint(point, &screen);
+    poly->x2 = screen.vx - 1;
+    poly->y2 = screen.vy;
+    poly->x3 = screen.vx + 1;
+    poly->y3 = screen.vy;
+    setRGB0(poly, 0x40, 0x40, 0x40);
+    GFX_AddPrim(1, sizeof(POLY_F4));
+    return landed;
+}
 
 INCLUDE_ASM(func_801F9BDC);
 
