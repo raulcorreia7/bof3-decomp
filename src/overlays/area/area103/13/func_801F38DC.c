@@ -1,3 +1,67 @@
 #include "area103_13.h"
+#include "overlays/area/Area_DrawRingColumn.h"
 
-INCLUDE_ASM(func_801F38DC);
+MATCH void func_801F38DC(void) {
+    VECTOR    org;
+    s32       pt[4];
+    DVECTOR   a;
+    DVECTOR   b;
+    u8        camera[32];
+    POLY_FT4* prim;
+    u16       angle;
+
+    Area_SetCameraMatrix(camera);
+    angle = (u16)g_Task->gravity;
+    org   = *(VECTOR*)&g_Task->vx;
+    pt[0] = org.vx + (rcos(angle) << 5);
+    pt[1] = org.vy + (rsin(angle) << 5);
+    pt[2] = org.vz - ((AreaRingDepthView*)g_Task)->depth;
+    if (pt[2] < g_Task->vz) {
+        pt[2] = g_Task->vz;
+    }
+    Area_ProjectPoint(pt, &a);
+    pt[2] = org.vz;
+    if (g_Task->unk_1C < pt[2]) {
+        pt[2] = g_Task->unk_1C;
+    }
+    Area_ProjectPoint(pt, &b);
+    while (org.vz < g_Task->unk_1C + TO_COORD(256)) {
+        prim = (POLY_FT4*)g_GfxPrimCursor;
+        SetPolyFT4(prim);
+        SetSemiTrans(prim, 0);
+        prim->x0 = a.vx;
+        prim->y0 = a.vy;
+        prim->x1 = b.vx;
+        prim->y1 = b.vy;
+        angle += ONE / 16;
+        org.vz += TO_COORD(16);
+        pt[0] = org.vx + (rcos(angle) << 5);
+        pt[1] = org.vy + (rsin(angle) << 5);
+        pt[2] = org.vz - ((AreaRingDepthView*)g_Task)->depth;
+        if (pt[2] < g_Task->vz) {
+            pt[2] = g_Task->vz;
+        }
+        Area_ProjectPoint(pt, &a);
+        pt[2] = org.vz;
+        if (g_Task->unk_1C < pt[2]) {
+            pt[2] = g_Task->unk_1C;
+        }
+        Area_ProjectPoint(pt, &b);
+        prim->x2 = a.vx;
+        prim->y2 = a.vy;
+        prim->x3 = b.vx;
+        prim->y3 = b.vy;
+        prim->u0 = 0x7F;
+        prim->v0 = 0xBF;
+        prim->u1 = 0x7F;
+        prim->v1 = 0xA0;
+        prim->u2 = 0x60;
+        prim->v2 = 0xBF;
+        prim->u3 = 0x60;
+        prim->v3 = 0xA0;
+        setRGB0(prim, 128, 128, 128);
+        prim->tpage = GetTPage(1, 0, 320, 256);
+        prim->clut  = GetClut(0, 487);
+        GFX_AddPrim(1, sizeof(POLY_FT4));
+    }
+}
