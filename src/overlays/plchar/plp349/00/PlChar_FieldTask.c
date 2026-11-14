@@ -57,6 +57,7 @@ MATCH s32 func_801CEC18(s16 x, s16 y) {
     CHAR_PROBE_CELL_CODE(Char_SpawnLinkedActor);
 }
 
+/* func_801CEE24 */
 #include "overlays/plchar/Char_SpawnLinkedActor.h"
 
 MATCH void func_801CEF10(void) {
