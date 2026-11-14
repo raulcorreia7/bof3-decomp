@@ -10,28 +10,28 @@ MATCH void func_801F390C(void) {
     spad = g_Task;
     spad->pos.x.fixed += spad->vx;
     spad->pos.y.fixed += spad->vy;
-    tintA = spad->tint.signed_bytes.unk_5D;
+    tintA = spad->tint.signed_bytes.delta.red;
     if (tintA < -0x40) {
-        spad->tint.signed_bytes.unk_5D = tintA + 4;
+        spad->tint.signed_bytes.delta.red = tintA + 4;
     }
     spad2 = g_Task;
-    tintB = spad2->tint.signed_bytes.unk_5E;
+    tintB = spad2->tint.signed_bytes.delta.green;
     if (tintB < -0x40) {
-        spad2->tint.signed_bytes.unk_5E = tintB + 4;
-        spad2                           = g_Task;
+        spad2->tint.signed_bytes.delta.green = tintB + 4;
+        spad2                                = g_Task;
     }
-    tintC = spad2->tint.signed_bytes.unk_5F;
+    tintC = spad2->tint.signed_bytes.delta.blue;
     if (tintC < -0x40) {
-        spad2->tint.signed_bytes.unk_5F = tintC + 4;
+        spad2->tint.signed_bytes.delta.blue = tintC + 4;
     }
     if ((g_Task->tint.word & 0xFFFFFF00) == 0xC0C0C000) {
         g_Task->header.flags &= ~0x20;
         g_Task->tint.bytes.flags = 0;
         {
-            Actor* spad             = g_Task;
-            spad->tint.bytes.unk_5F = 0;
-            spad->tint.bytes.unk_5E = 0;
-            spad->tint.bytes.unk_5D = 0;
+            Actor* spad                = g_Task;
+            spad->tint.bytes.rgb.blue  = 0;
+            spad->tint.bytes.rgb.green = 0;
+            spad->tint.bytes.rgb.red   = 0;
         }
         g_Task->unk_04 = 0;
     } else {

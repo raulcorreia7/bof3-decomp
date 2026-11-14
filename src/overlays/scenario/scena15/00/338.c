@@ -128,12 +128,12 @@ MATCH void func_801F783C(void) {
             i += 1;
         } while ((u32)(i & BYTE_MASK) < g_PartySize);
     }
-    g_Task                  = work;
-    tint                    = -0x80;
-    work->tint.bytes.unk_5F = tint;
-    work->tint.bytes.unk_5E = tint;
-    work->tint.bytes.unk_5D = tint;
-    g_Task->header.mode     = 1;
+    g_Task                     = work;
+    tint                       = -0x80;
+    work->tint.bytes.rgb.blue  = tint;
+    work->tint.bytes.rgb.green = tint;
+    work->tint.bytes.rgb.red   = tint;
+    g_Task->header.mode        = 1;
 }
 
 MATCH void func_801F7900(void) {
@@ -145,10 +145,10 @@ MATCH void func_801F7920(void) {
     u8*    counter;
 
     work = g_Task;
-    if (work->tint.signed_bytes.unk_5D != 0) {
-        work->tint.signed_bytes.unk_5D -= 2;
-        g_Task->tint.bytes.unk_5E -= 2;
-        g_Task->tint.bytes.unk_5F -= 2;
+    if (work->tint.signed_bytes.delta.red != 0) {
+        work->tint.signed_bytes.delta.red -= 2;
+        g_Task->tint.bytes.rgb.green -= 2;
+        g_Task->tint.bytes.rgb.blue -= 2;
     } else {
         counter           = &g_SceneState.step_05;
         *counter          = *counter + 1;
@@ -179,8 +179,8 @@ MATCH void func_801F7D1C(void) {
     } else {
         func_801F83AC(&pos);
         g_Task->timer += 8;
-        g_Task->tint.signed_bytes.unk_5D = rsin(g_Task->timer << 4) >> 7;
-        g_Task->tint.signed_bytes.unk_5E = rcos(g_Task->timer << 4) >> 7;
+        g_Task->tint.signed_bytes.delta.red   = rsin(g_Task->timer << 4) >> 7;
+        g_Task->tint.signed_bytes.delta.green = rcos(g_Task->timer << 4) >> 7;
         func_801F7FFC(pos.x, pos.y);
     }
 }
@@ -189,11 +189,11 @@ MATCH void func_801F7E2C(void) {
     Point2u pos;
 
     func_801F83AC(&pos);
-    if (g_Task->tint.signed_bytes.unk_5D < 0x70) {
-        g_Task->tint.signed_bytes.unk_5D += 2;
+    if (g_Task->tint.signed_bytes.delta.red < 0x70) {
+        g_Task->tint.signed_bytes.delta.red += 2;
     }
-    if (g_Task->tint.signed_bytes.unk_5E < 0x30) {
-        g_Task->tint.signed_bytes.unk_5E += 1;
+    if (g_Task->tint.signed_bytes.delta.green < 0x30) {
+        g_Task->tint.signed_bytes.delta.green += 1;
     }
     func_801F81D8(pos.x, pos.y);
     if (g_GameStateIndex == 3 || g_GameStateIndex == 1) {
@@ -210,11 +210,11 @@ MATCH void func_801F7F5C(void) {
     Point2u pos;
 
     func_801F83AC(&pos);
-    if (g_Task->tint.signed_bytes.unk_5D != 0) {
-        g_Task->tint.signed_bytes.unk_5D -= 2;
+    if (g_Task->tint.signed_bytes.delta.red != 0) {
+        g_Task->tint.signed_bytes.delta.red -= 2;
     }
-    if (g_Task->tint.signed_bytes.unk_5E != 0) {
-        g_Task->tint.signed_bytes.unk_5E -= 1;
+    if (g_Task->tint.signed_bytes.delta.green != 0) {
+        g_Task->tint.signed_bytes.delta.green -= 1;
     }
     func_801F81D8(pos.x, pos.y);
     if ((g_Task->tint.word & 0xFFFF00) == 0) {
@@ -253,11 +253,11 @@ MATCH void func_801F8488(void) {
     for (i = 0; i < g_PartySize; i++) { \
         g_Game.members[i].unk_29 = 3;   \
     }                                   \
-    g_Task                  = work;     \
-    work->tint.bytes.unk_5F = 0;        \
-    work->tint.bytes.unk_5E = 0;        \
-    work->tint.bytes.unk_5D = 0;        \
-    g_Task->header.mode     = 1
+    g_Task                     = work;  \
+    work->tint.bytes.rgb.blue  = 0;     \
+    work->tint.bytes.rgb.green = 0;     \
+    work->tint.bytes.rgb.red   = 0;     \
+    g_Task->header.mode        = 1
 
 MATCH void func_801F84CC(void) {
     Actor* work;
@@ -271,10 +271,10 @@ MATCH void func_801F8548(void) {
     u8*    counter;
 
     work = g_Task;
-    if (work->tint.signed_bytes.unk_5D < 0x7C) {
-        work->tint.signed_bytes.unk_5D += 4;
-        g_Task->tint.bytes.unk_5E += 4;
-        g_Task->tint.bytes.unk_5F += 4;
+    if (work->tint.signed_bytes.delta.red < 0x7C) {
+        work->tint.signed_bytes.delta.red += 4;
+        g_Task->tint.bytes.rgb.green += 4;
+        g_Task->tint.bytes.rgb.blue += 4;
     } else {
         counter           = g_ScriptVars;
         *counter          = *counter + 1;
@@ -298,7 +298,7 @@ MATCH void func_801F8704(void) {
     u8           i;
 
     actor = g_Task;
-    shade = -((s8)actor->tint.bytes.unk_5D / 2); /* kept: retail sign-extends the u8 load (lbu, sll, sra); signed_bytes emits lb. */
+    shade = -((s8)actor->tint.bytes.rgb.red / 2); /* kept: retail sign-extends the u8 load (lbu, sll, sra); signed_bytes emits lb. */
     for (i = 0; i < g_PartySize; i++) {
         if (g_Game.members[i].chr.character_id != CHAR_ID_RYU_ADULT) {
             member                   = &g_Game.members[i];
@@ -326,17 +326,17 @@ MATCH void func_801F8874(void) {
     u8*    counter;
 
     work = g_Task;
-    if (work->tint.bytes.unk_5D < 0xF8) {
-        work->tint.bytes.unk_5D += 8;
-        g_Task->tint.bytes.unk_5E += 8;
-        g_Task->tint.bytes.unk_5F += 8;
+    if (work->tint.bytes.rgb.red < 0xF8) {
+        work->tint.bytes.rgb.red += 8;
+        g_Task->tint.bytes.rgb.green += 8;
+        g_Task->tint.bytes.rgb.blue += 8;
     } else {
-        work->tint.signed_bytes.unk_5F = -1;
-        work->tint.signed_bytes.unk_5E = -1;
-        work->tint.signed_bytes.unk_5D = -1;
-        counter                        = &g_SceneState.step_05;
-        *counter                       = *counter + 1;
-        g_Task->header.mode            = 2;
+        work->tint.signed_bytes.delta.blue  = -1;
+        work->tint.signed_bytes.delta.green = -1;
+        work->tint.signed_bytes.delta.red   = -1;
+        counter                             = &g_SceneState.step_05;
+        *counter                            = *counter + 1;
+        g_Task->header.mode                 = 2;
     }
     func_801F79C4();
     func_801F8958();

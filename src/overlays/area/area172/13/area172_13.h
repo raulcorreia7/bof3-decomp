@@ -32,7 +32,7 @@ extern u8 D_80144EF8[];
 
 #define AREA_SPAWN_SLOT_LIFE        0x20
 #define AREA_SPAWN_SLOT_RADIUS      0x180
-#define AREA_SPAWN_SLOT_CORE_SHADE  g_Task->tint.bytes.unk_5D
+#define AREA_SPAWN_SLOT_CORE_SHADE  g_Task->tint.bytes.rgb.red
 #define AREA_SPAWN_SLOT_RADIUS_STEP 0xC
 
 void func_801F36C0(void* arg0, s32 arg1, s32 arg2);

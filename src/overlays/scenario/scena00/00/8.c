@@ -170,7 +170,7 @@ MATCH void func_801F7134(s32 chapter_id) {
     setUV0(prim, 0, 32);
     setWH(prim, 256, 1768);
     prim->clut = 0x7A80;
-    setRGB0(prim, g_Task->tint.bytes.unk_5D, g_Task->tint.bytes.unk_5E, g_Task->tint.bytes.unk_5F);
+    setRGB0(prim, g_Task->tint.bytes.rgb.red, g_Task->tint.bytes.rgb.green, g_Task->tint.bytes.rgb.blue);
     SetShadeTex(prim, 0);
     SetSemiTrans(prim, chapter_id & BYTE_MASK);
     GFX_AddPrim(g_Task->draw_layer, sizeof(SPRT));
@@ -198,9 +198,9 @@ MATCH void func_801F72A0(void) {
 
     func_801F7134(1);
 
-    g_Task->tint.bytes.unk_5D += 2;
-    g_Task->tint.bytes.unk_5E += 2;
-    g_Task->tint.bytes.unk_5F += 2;
+    g_Task->tint.bytes.rgb.red += 2;
+    g_Task->tint.bytes.rgb.green += 2;
+    g_Task->tint.bytes.rgb.blue += 2;
 
     work = SCN_EFFECT;
     if (work->color_r == 0x80) {
@@ -669,7 +669,7 @@ MATCH void func_801F8360(void) {
             RotTransPers3(&v3, &v4, &v5, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
         }
         shade = -(g_Task->timer << 1);
-        setRGB0(prim, g_Task->tint.bytes.unk_5D, g_Task->tint.bytes.unk_5E, g_Task->tint.bytes.unk_5F);
+        setRGB0(prim, g_Task->tint.bytes.rgb.red, g_Task->tint.bytes.rgb.green, g_Task->tint.bytes.rgb.blue);
         setRGB1(prim, shade, shade, shade);
         setRGB2(prim, shade, shade, shade);
         SetSemiTrans(prim, 1);

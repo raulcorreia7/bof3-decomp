@@ -94,11 +94,11 @@ phase2:
         } while (index < 32);
         off += BATTLE_PARTY_STRIDE;
         func_801C2438();
-        g_Task->param.unk_0B      = 0;
-        g_Task->tint.bytes.unk_5D = neg;
-        g_Task->tint.bytes.unk_5E = neg;
-        g_Task->tint.bytes.unk_5F = neg;
-        g_Task->tint.bytes.flags  = 1;
+        g_Task->param.unk_0B         = 0;
+        g_Task->tint.bytes.rgb.red   = neg;
+        g_Task->tint.bytes.rgb.green = neg;
+        g_Task->tint.bytes.rgb.blue  = neg;
+        g_Task->tint.bytes.flags     = 1;
         slot++;
     } while (slot < g_Game.party_size);
     return 1;
