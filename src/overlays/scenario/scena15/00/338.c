@@ -483,7 +483,22 @@ INCLUDE_ASM(func_801FAFA8);
 
 INCLUDE_ASM(func_801FB788);
 
-INCLUDE_ASM(func_801FC100);
+MATCH void func_801FC100(void) {
+    u8 i;
+
+    for (i = 0; i < 3; i++) {
+        SP_REF(s16, 0x0) = Actor_FindFreeField();
+        if (SP_REF(s16, 0x0) != 0xFF) {
+            func_801A4D54(&D_801FE694[i * 17]);
+        }
+    }
+    for (i = 0; i < 2; i++) {
+        SP_REF(s16, 0x0) = Actor_FindFreeField();
+        if (SP_REF(s16, 0x0) != 0xFF) {
+            func_801A65A0(&D_801FE6C8[i * 16]);
+        }
+    }
+}
 
 INCLUDE_ASM(func_801FC1D8);
 
