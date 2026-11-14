@@ -11,7 +11,7 @@
 #include "game.h"
 #include "sys/cd.h"
 #include "sys/exe.h"
-#include "sys/gameui.h"
+#include "menu/gameui.h"
 #include "sys/loader_tail.h"
 #include "sys/lz77.h"
 #include "sys/scene.h"
@@ -20,9 +20,9 @@
 #include "area/map.h"
 #include "menu/inventory.h"
 #include "menu/panel.h"
-#include "menu/party.h"
+#include "scenario/party.h"
 #include "menu/save.h"
-#include "slus/facing.h"
+#include "common/facing.h"
 #include "slus/part.h"
 #include "area/spad.h"
 #include "menu/save_data.h"
@@ -989,7 +989,6 @@ extern const MenuPanelFuncs  g_MenuPanels;
 
 void                    func_8014C47C(struct Vec3W* a, struct Vec3W* b);
 extern void             Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut);
-extern void             Actor_BeginScript(s32 script_index, s32 position);
 /* func_8014DB98 */
 extern void             Actor_StageAnimStep(void);
 /* Retail function prototypes (one declaration each). */
@@ -1184,7 +1183,6 @@ void                    func_80163230(void);
 void                    func_80163698(void);
 u8*                     func_801642F4(u8* dst, const u8* src, u32 count);
 void                    Char_ApplyMaster(u8* arg);
-extern s16              Char_AddStat(u16* value, s16 delta);
 /* Retail calls this executable makes into its own units and the overlays. */
 void                    Char_ApplyWeapon(void* character);
 void                    Char_ApplyArmor(void* character);
@@ -1198,8 +1196,6 @@ void                    SND_QuitSpu(void);
 extern const ObjectFunc g_BundleRecordOpcodes[]; /* interior of g_BundleOpcodes (index 3); a separate symbol keeps func_801584A4 matching */
 extern u8               D_8017F90D;
 void                    func_801A17A0(u8* entry_record);
-/* func_801C1254 */
-void                    Party_LoadMemberSprite(s32 character_id, s32 party_slot, s32 ignored);
 void                    func_801D0C04(void);
 extern s32              func_801F2C04(void);
 

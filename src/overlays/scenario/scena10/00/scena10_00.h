@@ -7,6 +7,9 @@
 #include "overlays/scenario/scenario.h"
 #include "area/spad.h"
 
+/* FAKE: the callers pass the arguments as s32, the width the real prototype (u8) lacks. */
+#define Item_Count ((s32 (*)(s32, s32, s32))Item_Count)
+
 extern u8  D_80144908[];
 extern u32 D_801F6C00;
 extern u8  D_80146875;
@@ -91,7 +94,5 @@ extern SceneFunc g_SceneActorDispatch[];
 
 void func_801F6FAC(void);
 void func_801F781C(u16 x, u16 y, u16 width, u16 height);
-
-s32 Item_Count(s32 category, s32 item_id, s32 mode);
 
 #endif

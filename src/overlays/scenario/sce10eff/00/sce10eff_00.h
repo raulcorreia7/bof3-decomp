@@ -5,7 +5,7 @@
 #define GAME_SCRATCH_BASE_WORD
 #include "common/vector.h"
 #include "overlays/scenario/scenario.h"
-#include "sys/gameui.h"
+#include "menu/gameui.h"
 
 /* rsin/rcos take 4096 (ONE) units per turn: the orbit counter wraps every 128
  * steps of 32 units. */

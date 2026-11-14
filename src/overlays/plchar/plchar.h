@@ -2,7 +2,7 @@
 #define PLCHAR_FAMILY_H
 
 #include "game.h"
-#include "slus/facing.h"
+#include "common/facing.h"
 #include "sys/exe.h"
 #include "common/util.h"
 

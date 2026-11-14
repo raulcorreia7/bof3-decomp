@@ -1,4 +1,4 @@
-#include "sys/gameui.h"
+#include "menu/gameui.h"
 
 /* func_801F386C, func_801F2C18 */
 MATCH void Fairy_AnswerWaitForNightfall(void) {

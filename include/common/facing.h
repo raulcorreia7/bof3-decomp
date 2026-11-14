@@ -1,5 +1,5 @@
-#ifndef SLUS_FACING_H
-#define SLUS_FACING_H
+#ifndef COMMON_FACING_H
+#define COMMON_FACING_H
 
 #include "common/vector.h"
 

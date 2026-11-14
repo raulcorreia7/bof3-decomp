@@ -24,7 +24,7 @@
 #include "game/enemy.h"
 #include "game/records.h"
 #include "psx/mem.h"
-#include "slus/facing.h"
+#include "common/facing.h"
 #include "types.h"
 #include "sys/task.h"
 

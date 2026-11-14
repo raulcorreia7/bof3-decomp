@@ -1,4 +1,4 @@
-#include "sys/gameui.h"
+#include "menu/gameui.h"
 
 /* func_801F39EC, func_801F2D98 */
 MATCH void FairyCasino_AnswerPlayGames(void) {

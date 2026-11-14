@@ -5,7 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/world03.h"
-#include "menu/party.h"
+#include "scenario/party.h"
 #include "area/spad.h"
 
 /* The per-scene y limit bytes the walk step reads, in 16.16 units. */

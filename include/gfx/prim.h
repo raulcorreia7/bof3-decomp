@@ -8,6 +8,15 @@
 /* The shared primitive cursor and color packing used by the menu, field and
  * effect drawers. */
 
+/* func_8014E564 */
+void GFX_ClearRect(s16 x, s16 y, s16 width, s16 height);
+/* func_8014E5A0 */
+void GFX_AddPrim(u32 ot_index, u32 primitive_size);
+/* func_8014E6D0 */
+void GFX_UpdateTransferQueue(void);
+/* func_8014F704 */
+s32  GFX_UpdateScreenFade(u16* level, s32 delta, char semi_trans, u32 order, u8 blend_mode);
+
 /* A sprite rectangle in texture bytes: origin u, v and size w, h. The sprite
  * drawers copy it into a SPRT. */
 typedef struct UvRect {

@@ -4,7 +4,6 @@
 #include "common/vector.h"
 #include "gfx/prim.h"
 #include "psx/psyq.h"
-#include "slus/exports.h"
 #include "types.h"
 
 /* The menu system: a screen is a set of panel task records animated into place,
@@ -255,7 +254,7 @@ ASSERT_SIZE(MenuPanelTask, MENU_PANEL_TASK_SIZE);
 
 /* The shop's choice panel is slot 7 of g_MenuPanelTasks (0x8014842C), built by
  * `emi/etc/shop/00@0x801D2828` and `@0x801D334C`. Its retail symbol is
- * declared in sys/gameui.h, because the same address holds a different byte
+ * declared in menu/gameui.h, because the same address holds a different byte
  * in the battle overlays (equal addresses in different targets are
  * unrelated); the shop overlay casts it to this record. */
 

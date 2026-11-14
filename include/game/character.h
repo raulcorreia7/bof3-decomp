@@ -106,7 +106,7 @@ typedef enum CharacterIndex {
 } CharacterIndex;
 
 /* Stored character id. The party-order arrays hold these values, not record
- * slots; menu/party.h owns the map that resolves one to a record slot.
+ * slots; scenario/party.h owns the map that resolves one to a record slot.
  * ID 10 appears in the save portrait table and in Whelp's record. */
 typedef enum CharacterId {
     CHAR_ID_RYU_YOUNG   = 0,

@@ -11,6 +11,9 @@
 #include "menu/draw.h"
 #include "menu/clock.h"
 
+/* FAKE: the callers pass the counter as volatile and the delta as s32, which the real prototype (u16*, s16) lacks. */
+#define Char_AddStat                   ((s16 (*)(volatile u16*, s32))Char_AddStat)
+
 /* retail addresses */
 
 #define BATTLE_SELECTION_SLOT_MASK     0x7F
@@ -833,10 +836,6 @@ void        func_800B2C90(MenuPanelTask* task);
 void        func_800B3324(u8, u16, u16, s32, s32, MenuPanelTask*);
 void        func_800B3AE8(MenuPanelTask* task);
 void        func_800B4220(s16 x, s16 y, u8 selected);
-/* func_801650B4 */
-bool        Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
-extern s16  Char_AddStat(volatile u16* arg0, s32 arg1);
-extern void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool        func_801AF494(u8 arg0, u8 arg1, u8 arg2, u8 arg3);
 void        func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
 void        func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);

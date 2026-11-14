@@ -545,7 +545,6 @@ void func_80117004(void);
 void func_80117610(void);
 void func_80117A30(void);
 void func_80117BF4(void);
-void Actor_BeginScript(u8 script_index, u8 position);
 void Area_ClearCell(s32 x, s32 y);
 void func_8015A7E8(void);
 s32  func_8015B870(u8 value);
@@ -554,9 +553,6 @@ s8   Actor_Run(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 lan
 s32  func_8015CC00(s32 id, s32 step, s32 selection, s32 x, s32 y, s32 z);
 void func_8015D820(u16 cue_id, u8 index);
 void func_80164020(u32 arg0, u32 arg1);
-bool Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
-s32  Item_Count(u8 category, u8 item_id, u8 mode);
-u8   Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode);
 void Party_ResetBattlers(void);
 void Party_ClearActiveBattlers(void);
 void func_80167910(void);
@@ -878,7 +874,6 @@ void    func_801ADCF4(u8 actor_slot);
 void    GFX_DrawLine(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b, s32 blend);
 /* func_801AF270 */
 u8*     UI_GetSpriteRect(u8 sprite_id, u8 flags);
-void    UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool    func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id);
 void    func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
 
@@ -1080,8 +1075,6 @@ void  func_801C0D34(void);
 void  func_801C0D54(void);
 s32   func_801C0E48(void);
 s32   func_801C0F9C(u8 source_row);
-/* func_801C1254 */
-void  Party_LoadMemberSprite(s32 character_id, s32 party_slot);
 /* func_801C16B8 */
 void  Char_RebuildPartyStats(void);
 void  func_801C1840(void);
