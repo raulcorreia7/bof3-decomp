@@ -14,12 +14,12 @@ MATCH void func_801F2CA0(void) {
     pair                     = entry * 2;
     work->direction_08       = work->pos.y.part.integer == 0;
     cell                     = g_Task;
-    cell->pos.x.part.integer = AREA_ENTRY_TABLE(D_801F4FC4, u8, 0x40, pair);
-    cell->pos.y.part.integer = AREA_ENTRY_TABLE(D_801F4FC4, u8, 0x41, pair);
-    cell->pos.z.part.integer = AREA_ENTRY_TABLE(D_801F4FC4, u16, 0x14, pair);
-    cell->gravity            = AREA_ENTRY_TABLE(D_801F4FC4, s32, 0x2C, entry * 4);
-    cell->screen_x           = AREA_ENTRY_TABLE(D_801F4FC4, u16, 0x20, pair);
-    cell->unk_32             = AREA_ENTRY_TABLE(D_801F4FC4, u8, 0x4C, entry);
+    cell->pos.x.part.integer = AREA_PAYLOAD_FIELD(D_801F4FC4, u8, 0x40, pair);
+    cell->pos.y.part.integer = AREA_PAYLOAD_FIELD(D_801F4FC4, u8, 0x41, pair);
+    cell->pos.z.part.integer = AREA_PAYLOAD_FIELD(D_801F4FC4, u16, 0x14, pair);
+    cell->gravity            = AREA_PAYLOAD_FIELD(D_801F4FC4, s32, 0x2C, entry * 4);
+    cell->screen_x           = AREA_PAYLOAD_FIELD(D_801F4FC4, u16, 0x20, pair);
+    cell->unk_32             = AREA_PAYLOAD_FIELD(D_801F4FC4, u8, 0x4C, entry);
     cell->header.step += 1;
     cell->screen_y = 0;
     AREA_ENTRY_CELL_AWAY_STEP(128, 1)

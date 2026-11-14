@@ -15,9 +15,9 @@ MATCH void func_801F2C48(void) {
     pair                     = entry * 2;
     g_Task->direction_08     = (g_Task->pos.y.part.integer ^ 1) & 1;
     cell                     = g_Task;
-    cell->pos.x.part.integer = AREA_ENTRY_TABLE(D_801F38CC, u8, 0x14, pair);
-    cell->pos.y.part.integer = AREA_ENTRY_TABLE(D_801F38CC, u8, 0x15, pair);
-    cell->pos.z.part.integer = AREA_ENTRY_TABLE(D_801F38CC, u16, 0x34, pair);
+    cell->pos.x.part.integer = AREA_PAYLOAD_FIELD(D_801F38CC, u8, 0x14, pair);
+    cell->pos.y.part.integer = AREA_PAYLOAD_FIELD(D_801F38CC, u8, 0x15, pair);
+    cell->pos.z.part.integer = AREA_PAYLOAD_FIELD(D_801F38CC, u16, 0x34, pair);
     cell->screen_y           = 0;
     cell->header.step += 1;
     AREA_ENTRY_CELL_AWAY_STEP(256, 1)
