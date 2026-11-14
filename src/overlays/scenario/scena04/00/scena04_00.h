@@ -94,6 +94,6 @@ void func_801F7FCC(void);
 
 u8* func_801F7FF8(void);
 
-s8 func_801F9DF4();
+s8 func_801F9DF4(s32 x, s32 y);
 
 #endif

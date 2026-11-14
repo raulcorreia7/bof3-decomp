@@ -384,14 +384,53 @@ MATCH s32 func_801F9DAC(void) {
     return 0;
 }
 
-MATCH s32 func_801F9DB4(void) {
+MATCH s32 func_801F9DB4(s32 x, s32 y) {
     if (g_GameAreaId == AREA_ID_MOMO_TOWER_FIRST_FLOOR) {
-        return func_801F9DF4();
+        return func_801F9DF4(x, y);
     }
     return 0;
 }
 
-INCLUDE_ASM(func_801F9DF4);
+/* Momo Tower first floor: start the scripted event for the cell the party steps on, from its facing and the scene flags. */
+MATCH s8 func_801F9DF4(s32 x, s32 y) {
+    if (SYS_TestFlag(g_SceneFlags, 2) == 0) {
+        if (((x >> 16) - 0x57) < 4U && ((y >> 16) - 0x13) < 3U) {
+            SP_REF(u8, 0x0u) = g_Game.members[0].facing;
+            if ((u8)(SP_REF(u8, 0x0u) - 5) >= 2U && SP_REF(u8, 0x0u) != 4) {
+                Game_SetScriptActive();
+                SYS_SetFlag(g_SceneFlags, 2);
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 4));
+                g_SceneState.timer_06 = 30;
+                g_SceneState.state_04 = 1;
+                g_SceneState.step_05  = 1;
+                return 1;
+            }
+        }
+        return 0;
+    }
+    if (SYS_TestFlag(g_SceneFlags, 3) == 0) {
+        if (((x >> 16) - 0x57) < 4U && ((y >> 16) - 0xB) < 6U) {
+            SP_REF(u8, 0x0u) = g_Game.members[0].facing;
+            if ((u8)(SP_REF(u8, 0x0u) - 5) >= 2U && SP_REF(u8, 0x0u) != 4) {
+                g_SceneState.state_04 = 1;
+                g_SceneState.step_05  = 0;
+                return Scene_ShowMessage(2);
+            }
+        }
+        if (((y >> 16) - 0x18) < 2U && x == TO_COORD_HALF(77)) {
+            g_SceneState.state_04 = 1;
+            g_SceneState.step_05  = 0;
+            return Scene_ShowMessage(3);
+        }
+        return 0;
+    }
+    if (SYS_TestFlag(g_SceneFlags, 7) == 0 && ((x >> 16) - 0x1F) < 3U && y == TO_COORD_HALF(36)) {
+        g_SceneState.state_04 = 1;
+        g_SceneState.step_05  = 0;
+        return Scene_ShowMessage(0x26);
+    }
+    return 0;
+}
 
 #include "overlays/scenario/Scene_ShowMessage.h"
 
