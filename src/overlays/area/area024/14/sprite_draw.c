@@ -292,14 +292,12 @@ MATCH void func_801F2FD4(void* sprite) {
     AreaSprite*              work;
     volatile Area024Scratch* scratch;
 
-    work            = (AreaSprite*)sprite;
-    scratch         = WORLD00_AREA024_SCRATCH_PTR;
-    work->origin.x  = scratch->pos.x;
-    work->origin.y  = scratch->pos.y;
-    work->origin.z  = scratch->pos.z;
-    work->normal.vx = RANDOM_MASK(0xFF) - 0x80;
-    work->normal.vy = RANDOM_MASK(0xFF) - 0x80;
-    work->normal.vz = RANDOM_MASK(0x7F);
+    work           = (AreaSprite*)sprite;
+    scratch        = WORLD00_AREA024_SCRATCH_PTR;
+    work->origin.x = scratch->pos.x;
+    work->origin.y = scratch->pos.y;
+    work->origin.z = scratch->pos.z;
+    setVector(&work->normal, RANDOM_MASK(0xFF) - 0x80, RANDOM_MASK(0xFF) - 0x80, RANDOM_MASK(0x7F));
     VectorNormal(&work->normal, &work->normal);
     work->flags     = 1u;
     work->flags_03  = 0x40u;
@@ -466,9 +464,7 @@ MATCH void func_801F3708(void* vertices, const void* rotated, s16* transform) {
     dst   = (AreaVertex*)rotated;
     state = (AreaTransform*)transform;
 
-    state->rotation.vx = RANDOM_MASK(0xFC0);
-    state->rotation.vy = RANDOM_MASK(0xFC0);
-    state->rotation.vz = RANDOM_MASK(0xFC0);
+    setVector(&state->rotation, RANDOM_MASK(0xFC0), RANDOM_MASK(0xFC0), RANDOM_MASK(0xFC0));
     RotMatrix(&state->rotation, &matrix);
     matrix.t[0] = 0;
     matrix.t[1] = 0;
@@ -479,33 +475,25 @@ MATCH void func_801F3708(void* vertices, const void* rotated, s16* transform) {
     o = &out;
     f = &flag;
 
-    vec.vx = VOL(u16, src->points[0].x);
-    vec.vy = VOL(u16, src->points[0].y);
-    vec.vz = VOL(u16, src->points[0].z);
+    setVector(&vec, VOL(u16, src->points[0].x), VOL(u16, src->points[0].y), VOL(u16, src->points[0].z));
     RotTrans(v, o, f);
     dst->points[0].x = (state->base_x + out.vx);
     dst->points[0].y = (state->base_y + out.vy);
     dst->points[0].z = (state->base_z + out.vz);
 
-    vec.vx = VOL(u16, src->points[1].x);
-    vec.vy = VOL(u16, src->points[1].y);
-    vec.vz = VOL(u16, src->points[1].z);
+    setVector(&vec, VOL(u16, src->points[1].x), VOL(u16, src->points[1].y), VOL(u16, src->points[1].z));
     RotTrans(v, o, f);
     dst->points[1].x = (state->base_x + out.vx);
     dst->points[1].y = (state->base_y + out.vy);
     dst->points[1].z = (state->base_z + out.vz);
 
-    vec.vx = VOL(u16, src->points[2].x);
-    vec.vy = VOL(u16, src->points[2].y);
-    vec.vz = VOL(u16, src->points[2].z);
+    setVector(&vec, VOL(u16, src->points[2].x), VOL(u16, src->points[2].y), VOL(u16, src->points[2].z));
     RotTrans(v, o, f);
     dst->points[2].x = (state->base_x + out.vx);
     dst->points[2].y = (state->base_y + out.vy);
     dst->points[2].z = (state->base_z + out.vz);
 
-    vec.vx = VOL(u16, src->points[3].x);
-    vec.vy = VOL(u16, src->points[3].y);
-    vec.vz = VOL(u16, src->points[3].z);
+    setVector(&vec, VOL(u16, src->points[3].x), VOL(u16, src->points[3].y), VOL(u16, src->points[3].z));
     RotTrans(v, o, f);
     dst->points[3].x = (state->base_x + out.vx);
     dst->points[3].y = (state->base_y + out.vy);
@@ -576,12 +564,8 @@ MATCH void func_801F3BE4(void* spin) {
     rot[1] = RANDOM_MASK(0x3FF);
     rot[2] = RANDOM_MASK(0xFFF);
 
-    work->vertex_a.vx = rcos(16);
-    work->vertex_a.vy = rsin(16);
-    work->vertex_a.vz = 0;
-    work->vertex_b.vx = rcos(-16);
-    work->vertex_b.vy = rsin(-16);
-    work->vertex_b.vz = 0;
+    setVector(&work->vertex_a, rcos(16), rsin(16), 0);
+    setVector(&work->vertex_b, rcos(-16), rsin(-16), 0);
 
     MATH_SetIdentity(&matrix);
     RotMatrixX(rot[0], &matrix);
@@ -681,18 +665,10 @@ MATCH s32 func_801F3E48(u8 shade) {
         SetSemiTrans(prim, 1);
         setRGB0(prim, shade, shade, shade);
 
-        verts[0].vx = *src++;
-        verts[0].vy = *src++;
-        verts[0].vz = *src++;
-        verts[1].vx = *src++;
-        verts[1].vy = *src++;
-        verts[1].vz = *src++;
-        verts[2].vx = *src++;
-        verts[2].vy = *src++;
-        verts[2].vz = *src++;
-        verts[3].vx = *src++;
-        verts[3].vy = *src++;
-        verts[3].vz = *src;
+        setVector(&verts[0], *src++, *src++, *src++);
+        setVector(&verts[1], *src++, *src++, *src++);
+        setVector(&verts[2], *src++, *src++, *src++);
+        setVector(&verts[3], *src++, *src++, *src);
         src += 8;
 
         RotTransPers(&verts[0], (long*)&prim->x0, &depth, &flag);

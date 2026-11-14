@@ -5,8 +5,6 @@ typedef struct BattleRecordHead {
     u8 bytes[32];
 } BattleRecordHead;
 
-extern u8 D_80145F20[];
-
 #ifdef NON_MATCHING
 NON_MATCHING u8 func_800AED5C(s32 arg0, u32 battler_index) {
     u8*         dst;

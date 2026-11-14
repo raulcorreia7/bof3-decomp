@@ -111,7 +111,44 @@ MATCH void func_801D13F4(void) {
     }
 }
 
-INCLUDE_ASM(func_801D147C);
+MATCH void func_801D147C(s32* pos, s16 origin, s32 flags) {
+    DVECTOR  screen;
+    DVECTOR  point;
+    DVECTOR  size;
+    DVECTOR  scale;
+    MATRIX   camera;
+    POLY_G3* primitive;
+    s32      angle;
+    s32      i;
+
+    GFX_AddDitheredDrawMode(2u, GetTPage(0, 1, 0x2C0, 0x100));
+    Area_SetCameraMatrix(&camera);
+    Area_ProjectPoint(pos, &screen);
+    size.vx = size.vy = origin;
+    Game_ProjectWorldPoint(pos, &size, &scale);
+    scale.vx += g_FrameCount & 1;
+    point.vx = screen.vx + scale.vx;
+    point.vy = screen.vy;
+    angle    = 0;
+    i        = 0;
+    do {
+        primitive     = GFX_BeginPolyG3(1);
+        primitive->x0 = screen.vx;
+        primitive->y0 = screen.vy;
+        primitive->x1 = point.vx;
+        primitive->y1 = point.vy;
+        angle += 128;
+        point.vx      = screen.vx + (((s16)scale.vx * rcos((u16)angle)) >> 0xC);
+        point.vy      = screen.vy + (((s16)scale.vx * rsin((u16)angle)) >> 0xC);
+        primitive->x2 = point.vx;
+        primitive->y2 = point.vy;
+        setRGB0(primitive, (flags & 4) << 5, (flags & 2) << 6, (flags & 1) << 7);
+        setRGB1(primitive, 0, 0, 0);
+        setRGB2(primitive, 0, 0, 0);
+        GFX_AddPrim(2u, sizeof(POLY_G3));
+        i += 1;
+    } while ((i & BYTE_MASK) < 32U);
+}
 
 INCLUDE_ASM(func_801D1678);
 
@@ -306,7 +343,24 @@ MATCH void func_801D2C00(void) {
 
 INCLUDE_ASM(func_801D2C94);
 
-INCLUDE_ASM(func_801D2D5C);
+MATCH void func_801D2D5C(void) {
+    Actor* work;
+    Actor* work2;
+    u8     timer;
+
+    work = g_Task;
+    func_801D36BC(&work->pos.x.fixed, work->vx, work->vy);
+    work2        = g_Task;
+    timer        = work2->timer - 1;
+    work2->timer = timer;
+    work2->vx += work2->unk_18;
+    work2->vy += work2->unk_1C;
+    work2->unk_18 -= 0x100;
+    work2->unk_1C -= 0x200;
+    if (timer == 0) {
+        Actor_Clear();
+    }
+}
 
 MATCH void func_801D2DEC(void) {
     SYS_DISPATCH_TASK(D_801D397C, 1, g_Task);

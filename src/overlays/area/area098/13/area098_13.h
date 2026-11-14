@@ -6,6 +6,7 @@
 
 #include "overlays/area/world02.h"
 #include "area/spad.h"
+#include "shared/CaptureSize.h"
 
 /* The work-window byte offset and row stride this overlay scans. */
 #define SCRATCH_ROW_OFFSET    0x00
@@ -29,13 +30,6 @@ extern Callback D_801F5F7C[];
 extern Callback D_801F5F88[];
 extern Callback D_801F5FAC[];
 extern void (*D_801F5FBC[])(void* slot);
-
-/* The screen-capture size for one table row. */
-typedef struct CaptureSize {
-    s16 w;
-    s16 h;
-    s16 unk_04[2];
-} CaptureSize;
 
 /* One of the 16 slots at AREA_WORK, 0x1C bytes each. */
 typedef struct AreaBurstSlot {

@@ -17,9 +17,7 @@ MATCH void func_801F4060(s16 level) {
     SetSemiTrans(tile, 1);
     tile->w = SCREEN_WIDTH;
     setXY0(tile, 0, 0);
-    tile->h  = SCREEN_HEIGHT;
-    tile->r0 = shade;
-    tile->g0 = shade;
-    tile->b0 = shade;
+    tile->h = SCREEN_HEIGHT;
+    setRGB0(tile, shade, shade, shade);
     GFX_AddPrim(1, sizeof(TILE));
 }

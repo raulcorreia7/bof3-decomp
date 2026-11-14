@@ -4,13 +4,7 @@ MATCH void func_801F3404(void) {
     POLY_F4* prim;
     s32      mode;
 
-    if (GetGraphType() == 1) {
-        mode = 0x2A5;
-    } else if (GetGraphType() == 2) {
-        mode = 0x2A5;
-    } else {
-        mode = 0xB5;
-    }
+    mode = getTPage(1, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, mode, 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
     prim = (POLY_F4*)g_GfxPrimCursor;

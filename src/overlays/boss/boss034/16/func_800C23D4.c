@@ -12,16 +12,12 @@ MATCH void func_800C23D4(s32 angle) {
     GFX_AddDrawMode(GetTPage(2, 0, 832, 256));
 
     PushMatrix();
-    lift   = 40;
-    vec.vx = 0;
-    vec.vy = 0;
-    vec.vz = (u16)angle * 16;
+    lift = 40;
+    setVector(&vec, 0, 0, (u16)angle * 16);
     RotMatrixYXZ(&vec, &matrix);
     SetRotMatrix(&matrix);
 
-    out.vx = 0;
-    out.vy = 0;
-    out.vz = 0;
+    setVector(&out, 0, 0, 0);
     TransMatrix(&matrix, &out);
     SetTransMatrix(&matrix);
 
@@ -32,8 +28,7 @@ MATCH void func_800C23D4(s32 angle) {
     vec.vx = -(g_Task->unk_0C / 2);
     vec.vy = -(g_Task->unk_10 / 2);
     RotTrans(&vec, &out, &flag);
-    poly->x0 = g_Task->unk_18 + out.vx;
-    poly->y0 = g_Task->unk_1C + (out.vy - lift);
+    setXY0(poly, g_Task->unk_18 + out.vx, g_Task->unk_1C + (out.vy - lift));
 
     vec.vx = g_Task->unk_0C / 2;
     vec.vy = -(g_Task->unk_10 / 2);

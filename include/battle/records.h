@@ -69,8 +69,27 @@ typedef struct BattleCommandSlot {
 
 ASSERT_SIZE(BattleCommandSlot, 0x04);
 
-/* Half of a 0x20-byte battler stat block. The retail copies each half with an
- * unaligned word pair, so the two halves stay one 16-byte type. */
+/* The 0x74 bytes of a battler's work record that a queued effect slot copies;
+ * GCC expands the copy into its 16-byte block-move loop. */
+typedef struct BattleWorkImage {
+    u32 words[29];
+} BattleWorkImage;
+
+ASSERT_SIZE(BattleWorkImage, 0x74);
+
+/* Four words, the copy unit of a battler's work record. */
+typedef struct WorkChunk {
+    s32 w0;
+    s32 w1;
+    s32 w2;
+    s32 w3;
+} WorkChunk;
+
+ASSERT_SIZE(WorkChunk, 0x10);
+
+/* Half of a Stats record: max_hp to unk_0C (+0x00) or willpower to
+ * critical_chance (+0x10). The retail copies each half with an unaligned word
+ * pair from a byte pointer, so the two halves stay one 16-byte type. */
 typedef struct BattleStatBlockPart {
     u8 bytes[0x10];
 } BattleStatBlockPart;

@@ -51,13 +51,10 @@ MATCH void func_80158830(void* obj) {
                 }
             }
         }
-        row     = (Start08Move*)((index << 2) + (u32)base);
-        x_part  = ((row->wide.flags & 0xF) << 7) + SCREEN_WIDTH;
-        rect.x  = row->bytes.x;
-        rect.x  = x_part + (rect.x >> 1);
-        rect.y  = row->bytes.y + 256;
-        rect.w  = row->bytes.w;
-        rect.h  = row->bytes.h + 1;
+        row    = (Start08Move*)((index << 2) + (u32)base);
+        x_part = ((row->wide.flags & 0xF) << 7) + SCREEN_WIDTH;
+        rect.x = row->bytes.x;
+        setRECT(&rect, x_part + (rect.x >> 1), row->bytes.y + 256, row->bytes.w, row->bytes.h + 1);
         control = row->control;
         SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, (((row->control >> 0xD) & 0x780) + SCREEN_WIDTH) + ((control >> 9) & 0x7F), (row->control & BYTE_MASK) | 0x100);
         GFX_AddPrim(6U, sizeof(DR_MOVE));

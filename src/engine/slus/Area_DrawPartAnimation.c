@@ -26,9 +26,7 @@ MATCH void Area_DrawPartAnimation(ScenePart* parts, s32 origin_x, s32 origin_y) 
             SetPolyFT4(prim);
             SetShadeTex(prim, 0);
             for (i = 0; i < 4; i++) {
-                verts[i].vx = origin_x + parts[n].vertex.x * 2;
-                verts[i].vy = origin_y + parts[n].vertex.y * 2;
-                verts[i].vz = parts[n].raw;
+                setVector(&verts[i], origin_x + parts[n].vertex.x * 2, origin_y + parts[n].vertex.y * 2, parts[n].raw);
                 n++;
             }
             RotTransPers4(&verts[1], &verts[2], &verts[3], &verts[0], (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, (long*)&prim->x0, &depth, &flag);

@@ -442,43 +442,43 @@ ASSERT_OFFSET(PartyMemberMessages, messages, 0x04);
  * tile fields (exe/slus_004_22@0x8014DD3C). */
 
 /* The area functions the resident tables and the area images call. */
-void Message_RunAreaMessage();
-void Actor_ClearVelocity();
+void Message_RunAreaMessage(void);
+void Actor_ClearVelocity(void);
 void func_801CF564();
 void func_801CFB40();
 void func_801CFF20();
 void func_801F2C14();
 void Fishing_ShowLocation();
-void func_801F2C3C();
-void func_801F32C0();
-void func_801F341C();
+void func_801F2C3C(void);
+void func_801F32C0(void);
+void func_801F341C(void);
 void func_801F34A0();
-void func_801F36D4();
+void func_801F36D4(void);
 void func_801F38C0();
-void func_801F3A8C();
-void func_801F3F80();
-void func_801F40AC();
-void func_801F418C();
-void func_801F41B0();
-void func_801F41D0();
-void func_801F4494();
+void func_801F3A8C(void);
+void func_801F3F80(void);
+void func_801F40AC(void);
+void func_801F418C(void);
+void func_801F41B0(void);
+void func_801F41D0(void);
+void func_801F4494(void);
 void func_801F4C84();
-void func_801F4D80();
-void func_801F512C();
-void func_801F52F8();
+void func_801F4D80(void);
+void func_801F512C(void);
+void func_801F52F8(void);
 
 /* The area functions the resident tables and the area images call. */
-void func_801F3224();
+void func_801F3224(void);
 void Actor_NextStep(void);
-void func_801F3608();
-void func_801F37B4();
-void func_801F3DCC();
+void func_801F3608(void);
+void func_801F37B4(void);
+void func_801F3DCC(void);
 void Actor_Fly(void);
-void func_801F45E4();
-void Area_DrawScreenTint();
-void Actor_FreePaletteFades();
-void Actor_Reveal();
-void Actor_TrackFocus();
+void func_801F45E4(void);
+void Area_DrawScreenTint(void);
+void Actor_FreePaletteFades(void);
+void Actor_Reveal(void);
+void Actor_TrackFocus(void);
 void GFX_DrawShadedDisc(s16, s16, s16, u8, u8);
 void Scene_ClearActor();
 

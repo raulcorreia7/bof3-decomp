@@ -13,12 +13,7 @@ MATCH void func_801F33DC(AreaRing* ring) {
             poly = (POLY_F3*)g_GfxPrimCursor;
             SetPolyF3(poly);
             SetSemiTrans(poly, 1);
-            poly->x0 = ring->screen_base.vx;
-            poly->y0 = ring->screen_base.vy;
-            poly->x1 = ring->screen[i].vx;
-            poly->y1 = ring->screen[i].vy;
-            poly->x2 = ring->screen[j].vx;
-            poly->y2 = ring->screen[j].vy;
+            setXY3(poly, ring->screen_base.vx, ring->screen_base.vy, ring->screen[i].vx, ring->screen[i].vy, ring->screen[j].vx, ring->screen[j].vy);
             shade    = ring->unk_22;
             poly->b0 = shade;
             poly->g0 = shade;
