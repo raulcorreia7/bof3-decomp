@@ -336,15 +336,15 @@ MATCH void func_801F844C(void) {
 MATCH void func_801F8490(void) {
     Scena03Work* work;
 
-    work              = SCN_LINE;
-    work->line.unk_00 = 0x600;
-    work->line.unk_06 = 0x100;
-    work->line.unk_08 = 0x100;
-    work->line.unk_02 = rand() & 0x700;
-    work->line.unk_04 = rand() & 0xF00;
-    work->line.color.blue   = 255;
-    work->line.color.green  = 255;
-    work->line.color.red    = 255;
+    work                   = SCN_LINE;
+    work->line.unk_00      = 0x600;
+    work->line.unk_06      = 0x100;
+    work->line.unk_08      = 0x100;
+    work->line.unk_02      = rand() & 0x700;
+    work->line.unk_04      = rand() & 0xF00;
+    work->line.color.blue  = 255;
+    work->line.color.green = 255;
+    work->line.color.red   = 255;
     if (rand() & 1) {
         work->line.color.red = 0;
     }
