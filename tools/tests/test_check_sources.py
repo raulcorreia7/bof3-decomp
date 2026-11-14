@@ -13,7 +13,7 @@ IMAGES = {
 
 
 def test_a_named_source_passes() -> None:
-    assert orphans(["src/overlays/plchar/plp278/00/C.c"], IMAGES) == []
+    assert orphans(["src/overlays/plchar/plp278/00/PlChar_FieldTask.c"], IMAGES) == []
 
 
 def test_a_source_no_row_names_is_reported_with_its_layout() -> None:
