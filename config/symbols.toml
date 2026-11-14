@@ -6882,7 +6882,7 @@ SND_FadeInSequence = { addr = 0x8015D49C, type = "func", source = "Pins the SsSe
 SND_StartDecrescendo = { addr = 0x8015D4F8, type = "func", source = "Starts a decrescendo on a sound sequence." }
 SND_FadeOutSequence = { addr = 0x8015D554, type = "func", source = "Fades out a sound sequence." }
 SND_StopAllSequences = { addr = 0x8015D5D8, type = "func", source = "Stops all four voices of every live selection effect." }
-SND_FindFreeEffectVoice = { addr = 0x8015D660, type = "func", source = "Scans the sep table for a voice whose four seq slots report end-of-sequence." }
+SND_TestEffectVoicesBusy = { addr = 0x8015D660, type = "func", source = "Returns 1 when no effect voice is free; otherwise returns 0 and writes the entry index and seq of the first voice of the sep table whose seq slot reports end-of-sequence." }
 SND_QueueSelectionEffect = { addr = 0x8015D71C, type = "func", source = "Marks the four effect voice slots free and queues the cue through SND_PlayCue." }
 SND_QueueCueVolume = { addr = 0x8015D7C8, type = "func", source = "Queues a sound cue with its volume." }
 SND_QueueProximityCue = { addr = 0x8015DC08, type = "func", source = "Plays the proximity cue of the area." }
@@ -6894,7 +6894,7 @@ SND_ReadCueBank3 = { addr = 0x8015FBE4, type = "func", source = "Reads a cue of 
 SND_ReadCueBank4 = { addr = 0x80160200, type = "func", source = "Reads a cue of sound bank 4 into voice slots (entry 4 of g_SndCueReaders)." }
 SND_ReadCueBank5 = { addr = 0x8016081C, type = "func", source = "Reads a cue of sound bank 5 into voice slots (entry 5 of g_SndCueReaders)." }
 SND_ReadCueBank6 = { addr = 0x80160E38, type = "func", source = "Reads a cue of sound bank 6 into voice slots (entry 6 of g_SndCueReaders)." }
-SND_SetBankLayout = { addr = 0x80161808, type = "func", source = "Sets the sound bank layout." }
+SND_SetBankLayout = { addr = 0x80161808, type = "func", source = "Lays the seven sound banks of the given layout row (header size, sequence size and SPU address each) end to end from 0x8011A000: stores each bank's header and sequence addresses in g_SndBankHeaders and g_SndBankSequences and its SPU address, header, sequence buffer and number in g_EmiBanks." }
 SND_StartBGM = { addr = 0x80161B24, type = "func", source = "Waits for the loader then starts the requested BGM's cue." }
 SND_RequestBGM = { addr = 0x80161BBC, type = "func", source = "Starts the background music if it changed." }
 SND_PlayBGM = { addr = 0x80161C20, type = "func", source = "Starts the background music cue." }

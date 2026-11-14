@@ -432,7 +432,7 @@ segments:
       - [0xC74F8, c, SND_StartDecrescendo]
       - [0xC7554, c, SND_FadeOutSequence]
       - [0xC75D8, c, SND_StopAllSequences]
-      - [0xC7660, c, SND_FindFreeEffectVoice]
+      - [0xC7660, c, SND_TestEffectVoicesBusy]
       - [0xC771C, c, SND_QueueSelectionEffect]
       - [0xC77C8, c, SND_QueueCueVolume]
       - [0xC7820, c, func_8015D820]

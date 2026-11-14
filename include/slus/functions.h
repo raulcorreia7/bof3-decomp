@@ -293,7 +293,7 @@ void         SND_FadeOutSequence(u32 effect_group, s32 effect_id, s32 cue_level,
 /* func_8015D5D8 */
 void         SND_StopAllSequences(void);
 /* func_8015D660 */
-bool         SND_FindFreeEffectVoice(u8* out_index, u8* out_seq);
+bool         SND_TestEffectVoicesBusy(u8* out_index, u8* out_seq);
 /* func_8015D71C */
 extern void  SND_QueueSelectionEffect(s32 cue_id);
 /* func_8015D7C8 */
@@ -482,7 +482,7 @@ void       Area_SyncScrollHeight(void);
 /* func_80167FDC */
 void       Char_AddHP(s32 amount, u8 char_id);
 /* func_8016813C */
-u16        Char_LoseHP(s32 mode, s32 index);
+u16        Char_LoseHP(s32 amount, s32 character_id);
 /* func_80168248 */
 s32        Char_SpendAP(s32 requested, s32 character_id);
 /* The libsnd internals have no header in this tree; s16 arguments as retail passes them. */
