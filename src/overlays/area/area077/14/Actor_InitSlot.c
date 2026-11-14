@@ -5,7 +5,7 @@ MATCH void Actor_InitSlot(s32 type) {
     SpawnedActor* record;
     u8            slot;
 
-    slot = Actor_FindFreeSlot();
+    slot = Actor_FindFreeSpawned();
     if (slot != GAME_NONE) {
         record               = &g_SpawnedActors[slot];
         record->header.flags = 1;

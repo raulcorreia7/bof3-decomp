@@ -17,7 +17,7 @@ INCLUDE_ASM(func_801EEC98);
 
 #include "shared/Effect_StartPlaying.h"
 
-#include "overlays/bmagic/Effect_CountDownAndPlay.h"
+#include "overlays/bmagic/Effect_CountDownAndMarkDamaged.h"
 
 /* func_801EF158 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"

@@ -80,7 +80,7 @@ INCLUDE_ASM(func_801F8C00);
 INCLUDE_ASM(func_801F95B8);
 
 MATCH void func_801F9FC4(void) {
-    D_1F800000.view.area.entity_counter = Actor_FindFree();
+    D_1F800000.view.area.entity_counter = Actor_FindFreeField();
     if (D_1F800000.view.area.entity_counter != 255) {
         func_801A4D54(D_801FE938);
     }
@@ -207,7 +207,7 @@ MATCH void func_801FD814(void) {
     u8 saved_slot;
 
     saved_slot               = g_Task->param.actor_slot;
-    g_Task->param.actor_slot = Actor_FindFreeSlot();
+    g_Task->param.actor_slot = Actor_FindFreeSpawned();
     if (g_Task->param.actor_slot != GAME_NONE) {
         g_SpawnedActors[g_Task->param.actor_slot].header.flags = 1;
         g_SpawnedActors[g_Task->param.actor_slot].type         = 0x5D;

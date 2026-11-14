@@ -4,7 +4,7 @@ MATCH void func_801F32D8(void) {
     Actor* scratch;
     u8     step;
 
-    Actor_CenterOnScreen();
+    Actor_SetScreenOrigin();
     if (g_GameEntryState != 1) {
         scratch = g_Task;
         step    = scratch->param.unk_0B;

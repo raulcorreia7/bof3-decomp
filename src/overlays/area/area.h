@@ -79,7 +79,7 @@ void            func_801F31EC(void);
 void            func_801F3244(void);
 void            func_801F3264(void);
 /* func_801F3400 */
-void            Actor_CenterOnScreen(void);
+void            Actor_SetScreenOrigin(void);
 /* func_801F3360 */
 void            Actor_ZoomOut(void);
 void            func_801F33A8(void);

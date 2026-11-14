@@ -15,13 +15,13 @@ MATCH void func_801F6EB4(void) {
     u32  cell3;
     s16* scratch;
 
-    g_Task->unk_03 = Actor_FindFree();
+    g_Task->unk_03 = Actor_FindFreeField();
     if (g_Task->unk_03 == GAME_NONE) {
         return;
     }
 
     g_Actors[g_Task->unk_03].header.flags = 1;
-    g_Task->unk_04                        = Actor_FindFree();
+    g_Task->unk_04                        = Actor_FindFreeField();
     if (g_Task->unk_04 == GAME_NONE) {
         g_Actors[g_Task->unk_03].header.flags = 0;
         return;
@@ -230,7 +230,7 @@ MATCH void func_801F7E6C(void) {
 
     effects = (SpawnedActor**)&g_Task->vx;
     for (i = 0; i < 5; i++) {
-        slot = Actor_FindFreeSlot();
+        slot = Actor_FindFreeSpawned();
         if (slot != GAME_NONE) {
             spawned                    = &g_SpawnedActors[slot];
             effects[i]                 = spawned;

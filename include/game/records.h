@@ -12,7 +12,7 @@
  * fairy. */
 
 /* The field slot table at 0x80143FC8: 20 rows of 0x74 bytes. A slot is claimed
- * by Actor_FindFreeSlot, filled by Actor_Create and Char_SpawnActor, and
+ * by Actor_FindFreeSpawned, filled by Actor_Create and Char_SpawnActor, and
  * cleared by Actor_Free(s). The frontend cues, the staged scene objects and
  * the area030 fishing actors all use the same rows. The position words are the
  * same 16.16 coordinates as the field actor's (sys/actor.h): the

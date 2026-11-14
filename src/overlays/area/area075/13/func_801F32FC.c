@@ -13,7 +13,7 @@ MATCH void func_801F32FC(void) {
     actor = (Actor*)g_Task;
     saved = g_CurrentActor;
     for (i = 0; i < 5; i++) {
-        slot = SP_REF(s16, 0x0u) = Actor_FindFree();
+        slot = SP_REF(s16, 0x0u) = Actor_FindFreeField();
         if (slot != 0xFF) {
             func_801A4D54(D_801F57B0[i]);
             work               = (Actor*)g_Task;

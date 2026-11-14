@@ -33,7 +33,7 @@ MATCH void Actor_SpawnFlock(void) {
         return;
     }
     do {
-        index = Actor_FindFreeSlot();
+        index = Actor_FindFreeSpawned();
         if (index == GAME_NONE) {
             break;
         }

@@ -6,7 +6,7 @@ MATCH void func_801F369C(void) {
 
     g_AreaSceneMode = 1;
     Area_SetCellPalette(74, 47);
-    slot = Actor_FindFreeSlot() & BYTE_MASK;
+    slot = Actor_FindFreeSpawned() & BYTE_MASK;
     if (slot != GAME_NONE) {
         actor               = &g_SpawnedActors[slot];
         actor->type         = 0x9B;

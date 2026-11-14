@@ -42,7 +42,7 @@ BattleEffect4Steps D_801D0F58 = {
 
 /* 0x801D0F6C */
 BattleSavedPreviewFuncs D_801D0F6C = {
-    (Callback)func_801E7888, (Callback)func_801E78F0, (Callback)Battle_PickStreamSlot,
+    (Callback)func_801E7888, (Callback)func_801E78F0, (Callback)Battle_StartCharacterLoad,
     (Callback)func_801E7BA0, (Callback)func_801E8558,
 };
 

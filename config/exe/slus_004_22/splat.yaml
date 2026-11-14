@@ -58,7 +58,7 @@ segments:
       - [0xB3F70, .rodata, Item_GetDescription]
       # Keep split: 4-byte alignment fill follows Item_GetDescription's bounded table; next table is 8-aligned.
       - {start: 0xB3F84, type: data, name: D_80149F84, linker_section_order: .rodata}
-      - [0xB3F88, .rodata, Char_TestAbilityRole]
+      - [0xB3F88, .rodata, Item_CanEquip]
       - [0xB3F9C, .rodata, data_80149F9C]
       # Keep split: these SPU diagnostic literals belong to SDK library units.
       - {start: 0xB3FC0, type: data, name: D_80149FC0, linker_section_order: .rodata}
@@ -378,7 +378,7 @@ segments:
       - [0xC573C, c, func_8015B73C]
       - [0xC5764, c, Game_TestEventFlag]
       - [0xC5798, c, Game_HasVitalItem]
-      - [0xC57C4, c, Game_IsScenarioAtLeast]
+      - [0xC57C4, c, Game_IsScenarioAtMost]
       - [0xC57F0, c, func_8015B7F0]
       - [0xC583C, c, func_8015B83C]
       - [0xC5870, c, func_8015B870]
@@ -411,7 +411,7 @@ segments:
       - [0xC6750, c, Actor_StepScroll]
       - [0xC6940, c, Actor_RiseToGround]
       - [0xC69CC, c, Actor_ApplyVelocity]
-      - [0xC6A48, c, Actor_FindFree]
+      - [0xC6A48, c, Actor_FindFreeField]
       - [0xC6A9C, c, Actor_ReadState]
       - [0xC6B18, c, Actor_ClaimSlot]
       - [0xC6C00, c, func_8015CC00]
@@ -432,7 +432,7 @@ segments:
       - [0xC74F8, c, SND_StartDecrescendo]
       - [0xC7554, c, SND_FadeOutSequence]
       - [0xC75D8, c, SND_StopAllSequences]
-      - [0xC7660, c, SND_FindFreeEffectVoice]
+      - [0xC7660, c, SND_TestEffectVoicesBusy]
       - [0xC771C, c, SND_QueueSelectionEffect]
       - [0xC77C8, c, SND_QueueCueVolume]
       - [0xC7820, c, func_8015D820]
@@ -551,7 +551,7 @@ segments:
       - [0xD066C, c, Party_AddZenny]
       - [0xD06C8, c, Item_GetDescription]
       - [0xD07A4, c, Party_AddMember]
-      - [0xD0904, c, Char_TestAbilityRole]
+      - [0xD0904, c, Item_CanEquip]
       - [0xD0A10, c, Char_GetAbilityCost]
       - [0xD0AE4, c, Party_GetAbilities]
       - [0xD0B94, c, Char_GetAbilities]

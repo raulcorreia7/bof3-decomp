@@ -1,10 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* scans the sep table for a claimable voice: the first entry with a
- * bound sep id whose four seq slots report end-of-sequence is written back as
- * (entry index, seq); returns 0 on a claim and 1 when none is free.
+/* returns 1 when no effect voice is free; otherwise returns 0 and writes the first entry with a
+ * bound sep id whose seq slot reports end-of-sequence back as (entry index, seq).
  */
-MATCH bool SND_FindFreeEffectVoice(u8* out_index, u8* out_seq) {
+MATCH bool SND_TestEffectVoicesBusy(u8* out_index, u8* out_seq) {
     s32 i;
     s32 j;
     s16 value;

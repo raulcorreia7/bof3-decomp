@@ -17,7 +17,7 @@
 MATCH void func_801F4424(void) {
     u8 actor_slot;
 
-    actor_slot    = Actor_FindFreeSlot();
+    actor_slot    = Actor_FindFreeSpawned();
     D_1F800000[0] = actor_slot;
     if (actor_slot == GAME_NONE) {
         return;

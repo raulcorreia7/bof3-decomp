@@ -6,7 +6,7 @@ MATCH void func_801F2E28(void) {
     Actor*        previous;
     u8            index;
 
-    index = Actor_FindFreeSlot();
+    index = Actor_FindFreeSpawned();
     if (index != GAME_NONE) {
         slot = &g_SpawnedActors[index];
         GFX_ClearRect(832, 256, 128, 256);

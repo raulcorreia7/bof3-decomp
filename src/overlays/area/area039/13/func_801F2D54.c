@@ -1,7 +1,7 @@
 #include "area039_13.h"
 
 MATCH void func_801F2D54(void) {
-    s32 slot = Actor_FindFreeSlot() & BYTE_MASK;
+    s32 slot = Actor_FindFreeSpawned() & BYTE_MASK;
 
     if (slot != GAME_NONE) {
         g_SpawnedActors[slot].header.flags = 1;

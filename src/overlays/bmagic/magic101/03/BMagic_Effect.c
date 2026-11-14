@@ -81,7 +81,7 @@ MATCH void func_801EEF20(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
