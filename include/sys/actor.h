@@ -49,10 +49,10 @@
 
 /* Clear the actor's three tint bytes: the row draws untinted. A bare statement
  * macro: use it as a whole statement, never under an unbraced `if`. */
-#define ACTOR_CLEAR_TINT()         \
-    g_Task->tint.bytes.unk_5D = 0; \
-    g_Task->tint.bytes.unk_5E = 0; \
-    g_Task->tint.bytes.unk_5F = 0
+#define ACTOR_CLEAR_TINT()            \
+    g_Task->tint.bytes.rgb.red   = 0; \
+    g_Task->tint.bytes.rgb.green = 0; \
+    g_Task->tint.bytes.rgb.blue  = 0
 
 /* `flags` bits. Bit 0 marks a row the update walks; bit 1 skips queuing the row's palette pair; bit 3 marks selection
  * voices queued on the row (@source: write:SND_QueueSelectionEffect@0x8015D71C, read:Area_AddActor@0x8014D4E0); bit 4 takes
@@ -115,17 +115,13 @@ typedef union ActorTint {
     s32 word;
 
     struct {
-        u8 flags;
-        u8 unk_5D;
-        u8 unk_5E;
-        u8 unk_5F;
+        u8        flags;
+        ColorRGB8 rgb; /* 0x5D */
     } bytes;
 
     struct {
-        s8 flags;
-        s8 unk_5D;
-        s8 unk_5E;
-        s8 unk_5F;
+        s8          flags;
+        ColorDelta8 delta; /* 0x5D */
     } signed_bytes;
 
     struct {

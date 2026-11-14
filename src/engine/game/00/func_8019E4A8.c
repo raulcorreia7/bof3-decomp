@@ -8,7 +8,7 @@ MATCH void func_8019E4A8(void) {
     work = g_Task;
     if (work->timer == 4) {
         work->timer = 0;
-        index       = Actor_FindFreeSlot();
+        index       = Actor_FindFreeSpawned();
         if (index != GAME_NONE) {
             g_SpawnedActors[index].header.flags = 1;
             g_SpawnedActors[index].type         = ACCESSORY_COUNT;

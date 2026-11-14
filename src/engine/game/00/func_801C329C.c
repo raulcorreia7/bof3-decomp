@@ -59,7 +59,7 @@ MATCH void func_801C329C(void) {
             }
         }
         if ((found & BYTE_MASK) != 0) {
-            slot = Actor_FindFreeSlot() & BYTE_MASK;
+            slot = Actor_FindFreeSpawned() & BYTE_MASK;
             if (slot != GAME_NONE) {
                 g_SpawnedActors[slot].header.flags     = 1;
                 g_SpawnedActors[slot].type             = 0x41;

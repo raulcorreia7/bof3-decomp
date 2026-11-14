@@ -19,7 +19,7 @@ MATCH void Effect_NextStep(void) {
 
 #include "overlays/bmagic/Effect_FadePaletteOut.h"
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 #include "overlays/bmagic/func_801EF338.h"
 

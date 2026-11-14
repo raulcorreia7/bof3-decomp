@@ -35,7 +35,7 @@ MATCH void func_801F4378(void) {
         case 2:
             if (g_AreaCameraMoving == 0) {
                 g_AreaCameraStep                 = 0;
-                g_SaveData.scene_event.selection = Actor_FindFreeSlot();
+                g_SaveData.scene_event.selection = Actor_FindFreeSpawned();
                 if (g_SaveData.scene_event.selection != 0xFF) {
                     g_SpawnedActors[g_SaveData.scene_event.selection].header.flags   = ACTOR_FLAG_IN_USE;
                     g_SpawnedActors[g_SaveData.scene_event.selection].type           = 0x13;
@@ -56,7 +56,7 @@ MATCH void func_801F4378(void) {
             break;
 
         case 4:
-            g_SaveData.scene_event.selection = Actor_FindFreeSlot();
+            g_SaveData.scene_event.selection = Actor_FindFreeSpawned();
             if (g_SaveData.scene_event.selection != 0xFF) {
                 g_SpawnedActors[g_SaveData.scene_event.selection].header.flags   = ACTOR_FLAG_IN_USE;
                 g_SpawnedActors[g_SaveData.scene_event.selection].type           = 0x13;

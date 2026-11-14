@@ -4,7 +4,7 @@ MATCH void func_801F431C(void) {
     SpawnedActor* slot;
     s32           index;
 
-    index = Actor_FindFreeSlot() & BYTE_MASK;
+    index = Actor_FindFreeSpawned() & BYTE_MASK;
     if (index != GAME_NONE) {
         slot               = &g_SpawnedActors[index];
         slot->header.flags = 1;

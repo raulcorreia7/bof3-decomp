@@ -72,7 +72,7 @@ MATCH void func_801D0F94(void) {
 
     work = g_Task;
     work->pos.z.fixed += 0x800000;
-    func_801D1D20(&work->pos, &work->vx, work->tint.bytes.unk_5D, work->tint.bytes.unk_5E);
+    func_801D1D20(&work->pos, &work->vx, work->tint.bytes.rgb.red, work->tint.bytes.rgb.green);
     if (g_ScriptVars[0] == 0xB) {
         g_Task->header.mode += 1;
     }

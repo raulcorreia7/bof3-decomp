@@ -5,7 +5,7 @@ MATCH void Actor_ZoomOut(void) {
     Actor* scratch;
     Actor* check;
 
-    Actor_CenterOnScreen();
+    Actor_SetScreenOrigin();
 
     scratch = g_Task;
     scratch->timer -= 1;

@@ -239,11 +239,12 @@ One definition per thing, in its owning header; local to an image only when one 
 second reader moves a type up ([lowest scope wins](layout.md#lowest-scope-wins)). A game type is shared only
 when two or more subsystems store the same layout.
 
-| Type                            | Holds                       |
-| ------------------------------- | --------------------------- |
-| `Point2s`, `Point2u`, `Point2l` | 2-D vectors by member width |
-| `Point3s`, `Point3l`            | 3-D vectors by member width |
-| `Coord`                         | a 16.16 coordinate          |
+| Type                                     | Holds                                            |
+| ---------------------------------------- | ------------------------------------------------ |
+| `Point2s`, `Point2u`, `Point2l`          | 2-D vectors by member width                      |
+| `Point3s`, `Point3l`                     | 3-D vectors by member width                      |
+| `ColorRGB8`, `ColorRGB16`, `ColorDelta8` | a colour by channel width; a signed colour shift |
+| `Coord`                                  | a 16.16 coordinate                               |
 
 The shared fundamentals are defined once in `include/common/vector.h` and `include/common/fixed.h`. Local types with a proven
 matching layout use the shared type and member names. PsyQ types stay at SDK calls; PsyQ's padded

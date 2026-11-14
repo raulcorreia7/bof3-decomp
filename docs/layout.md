@@ -51,6 +51,9 @@ A shared body sits at the lowest folder that holds every image that includes it:
 `overlays/<group>/Name.h`, then `shared/Name.h`.
 
 Groups: `area`, `battle`, `bmagic`, `boss`, `commu`, `menu`, `plchar`, `scenario`, `title`.
+Disc words in folders: `COMMU00` to `COMMU05` are `overlays/commu/commu00` to `commu05`; `BATE` and
+`SHISU` are `overlays/menu/bate/00` and `overlays/menu/shisu/00`; `PLP012` is `overlays/plchar/plp012/00`.
+The glosses are in [naming: disc words](naming.md#disc-words).
 Id to path: `emi/<family>/<archive>/<slot>` lives in `src/<root>/<archive>/<slot>`, where `<root>` is
 `overlays/<family>` unless the `source_folder` table in `tools/bof3/resolve/ids.py` names another;
 `exe/slus_004_22` is `src/engine/slus` and `exe/logo` is `src/logo`.
@@ -58,9 +61,48 @@ Id to path: `emi/<family>/<archive>/<slot>` lives in `src/<root>/<archive>/<slot
 
 The path tells the build which image a source belongs to; the build needs no source list.
 
+### Numbered leaves
+
+The last segment, `<slot>`, is the entry index of the image in its EMI archive. `emi/<family>/<archive>/<slot>`
+is entry `#<slot>` of `BIN/<FAMILY>/<ARCHIVE>.EMI` (`source_folder` and the `BIN/` spelling in
+`tools/bof3/resolve/ids.py`). It is the entry's position in the archive's table of contents. The
+[EMI page](https://raulcorreia7.github.io/bof3-wiki/formats/emi/#disc-slot-ids) calls that the entry
+slot; it calls the archive's position on the disc the slot id, which is not this number.
+
+The number alone names no role. The role follows the entry's load address, so the same number holds
+different code in different families:
+
+| Family (`src/` root)                     | Entry                  | Holds                                                                                                                                                                                          |
+| ---------------------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `overlays/area/areaNNN`                  | `13`                   | the area program at `0x801F2C00` in 185 areas, `area175` to `area185` included                                                                                                                 |
+| `overlays/area/areaNNN`                  | `14`                   | the area program in 10 areas (`area024`, `area049`, `area067`, `area077`, `area104`, `area108`, `area121`, `area135`, `area145`, `area173`); `area049` also has `13`, a module at `0x80117000` |
+| `overlays/area/areaNNN`                  | `03`                   | the area program in `area030`, `area089`, `area129`                                                                                                                                            |
+| `overlays/area/areaNNN`                  | `09`                   | the area program in `area002` and `area004`                                                                                                                                                    |
+| `overlays/area/area030`                  | `04`, `05`             | modules at `0x801D0C00` (fishing, `04`) and `0x800F5000` (`05`)                                                                                                                                |
+| `overlays/battle/battle`                 | `03`                   | the battle program: turn, damage and panel code (`Battle_ApplyDamage`, `Battle_DrawPanelRows`)                                                                                                 |
+| `overlays/battle/battle`                 | `15`                   | the `BATTLE2` archive's program: command menu and selection code (`Battle_OpenMenu`, `Battle_LoadSelectionEffect`)                                                                             |
+| `overlays/battle/batl_end`, `batl_ovr`   | `00`                   | the module: victory and game-over code (`Battle_DrawVictoryZenny`, `Battle_StartGameOver`)                                                                                                     |
+| `overlays/bmagic/magicNNN`               | `03`                   | the effect module at `0x801EEC00` in 112 archives                                                                                                                                              |
+| `overlays/bmagic/magicNNN`               | `00`                   | the same module at `0x801EEC00` in 12 archives; the wiki counts 13, not reconciled                                                                                                             |
+| `overlays/boss/bossNNN`                  | `13`                   | the boss module at `0x800C1800` in `boss001`, `boss004`, `boss022`, `boss025`, `boss031`                                                                                                       |
+| `overlays/boss/bossNNN`                  | `16`                   | the boss module at `0x800C1800` in 30 archives                                                                                                                                                 |
+| `overlays/scenario/scenaNN`, `sceNNefN`  | `00`                   | the scene controller: `scena00` to `scena19` at `0x801F6C00`; `sce10eff`, `sce15ef0` to `sce15ef3` at `0x801D0C00`                                                                             |
+| `overlays/plchar/plpNNN`                 | `00`                   | the character code at `0x801CE400`                                                                                                                                                             |
+| `overlays/menu/{bate,shisu,shop,sisyou}` | `00`                   | the menu program at `0x801D0C00`                                                                                                                                                               |
+| `overlays/menu/start`                    | `08`, `09`             | `08` the start menu at `0x801D0C00`; `09` memory card access at `0x801EEC00`                                                                                                                   |
+| `overlays/commu/commuNN`                 | `00`, `06`, `07`, `08` | `commu00/00` the Fairy Village program at `0x801EEC00`; `06` for `commu03` and `commu04`, `07` for `commu01` and `commu05`, `08` for `commu02` (all `0x801D0C00`)                              |
+| `overlays/title/game`                    | `01`                   | the title screen at `0x801D0C00`                                                                                                                                                               |
+| `engine/game/00`                         | `00`                   | the engine's game state and records at `0x80195800`, not an overlay                                                                                                                            |
+
+The `etc/bate/03` entry is a CLUT at `0x80033A00`, and `battle/batl_re2/01` is a CLUT bundle; both have a
+`config/emi` row and no source folder. Every row is read from the `vram` of each `config/emi/**/splat.yaml` and from the sources named
+in it.
+
 ### Files
 
-- One function per file until matching is done. The file is named for the function.
+- One function per file is the default: a function gets its own file once it is split out, and the
+  file is named for it. A `.c` file is one `c` row of its image's `splat.yaml`; it holds several
+  functions only where that row covers them ([multi-function units](#multi-function-units)).
 - A `.c` file is a matching unit, not a claimed original source file. Files merge into one claimed
   original unit only with evidence (rodata order, an SDK member object, a jump table), cited once
   where the merge is made.
@@ -74,6 +116,22 @@ The path tells the build which image a source belongs to; the build needs no sou
 - `src/` holds code and data that exist in a retail image, nothing else. A helper with no retail
   address is deleted once a byte-exact build proves no image needs it. A retail function that does
   the same job takes the good name, never an alias.
+
+### Multi-function units
+
+191 of 8,213 `.c` files hold more than one function: 3,791 of 10,066 definitions (38%), counted as
+`MATCH` and `INCLUDE_ASM` lines at the start of a line. Each of the 191 is one `c` row of its image's
+`splat.yaml`. The row, not the file, sets the unit; the tree does not record why a row is not split.
+[Matching](matching.md#a-function-in-a-file-with-other-functions) describes the split.
+
+| Kind                                                               | Files | Definitions | Example row                                                                   |
+| ------------------------------------------------------------------ | ----: | ----------: | ----------------------------------------------------------------------------- |
+| `BMagic_Effect.c`: the code of one magic module                    |   118 |       1,739 | `config/emi/bmagic/magic008/00/splat.yaml`: `[0xF0, c, BMagic_Effect]`        |
+| offset name (`348.c`, `794.c`, `C.c`): not yet named by function   |    55 |       1,818 | `config/emi/scenario/scena08/00/splat.yaml`: `[0x348, c, 348]`, 103 functions |
+| hand name (`title_draw.c`, `save_card.c`, `Scene_DispatchActor.c`) |    18 |         234 | `config/emi/etc/game/01/splat.yaml`: `[0x534, c, title_draw]`                 |
+
+By group, the 191 files are: bmagic 120, scenario 27, plchar 19, area 8, commu 6, menu 5, title 3,
+battle 1, logo 2.
 
 ### Definitions
 

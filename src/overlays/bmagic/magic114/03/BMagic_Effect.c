@@ -85,7 +85,7 @@ MATCH void func_801EF060(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountDownAndPlay.h"
+#include "overlays/bmagic/Effect_CountDownAndMarkDamaged.h"
 
 MATCH void func_801EF128(void) {
     s32 values[8];

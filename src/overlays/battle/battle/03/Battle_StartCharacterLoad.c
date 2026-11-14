@@ -1,14 +1,10 @@
 #include "battle_03.h"
 
-/* Slot tables selected by the battle work record's 0x08 byte; values are
- * stream-slot ids (u16). */
-
-/* picks the next stream slot for the battle overlay: with the 0x8000 flag the hint selects a 0xF/0xE/0xD/7
- * variant by the work record's unk_08 (offset by 0x1DB/0x1EE when the query fails), without it the hint indexes the
- * D_800B4A64/D_800B4A68 slot table; starts the slot and advances the step byte.
+/* starts the EMI load of the party sprite archive of g_EmiLoadedCharacterIndex, front or back by the facing of
+ * g_BattleEffectBattler, or one of the 513 to 520 variants while the party reloads, and advances the mode.
  */
 /* func_801E7948 */
-MATCH void Battle_PickStreamSlot(void) {
+MATCH void Battle_StartCharacterLoad(void) {
     u32 slot;
 
     if (g_Battle.state & BATTLE_STATE_RELOAD_PARTY) {

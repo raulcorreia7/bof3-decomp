@@ -146,7 +146,7 @@ MATCH void func_801F6F30(void) {
          * for x: the two views of g_AreaCameraAngle.vx are not interchangeable. */
         base          = (u16*)&g_AreaCameraAngle.vx;
         base[0]       = (base[0] + 0xAAu);
-        object_index  = Actor_FindFreeSlot();
+        object_index  = Actor_FindFreeSpawned();
         D_1F800000[0] = object_index;
 
         if (object_index != GAME_NONE) {
@@ -344,7 +344,7 @@ MATCH void func_801F7230(void) {
                 break;
             }
 
-            object_index  = Actor_FindFreeSlot();
+            object_index  = Actor_FindFreeSpawned();
             D_1F800000[0] = object_index;
 
             if (object_index != GAME_NONE) {
@@ -415,7 +415,7 @@ MATCH void func_801F7790(void) {
             UI_SetMode(UI_MODE_FADE_IN);
             g_ScriptVars[2] = 0x30u;
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
-            object_index    = Actor_FindFreeSlot();
+            object_index    = Actor_FindFreeSpawned();
             D_1F800000[0]   = object_index;
 
             if (object_index != GAME_NONE) {
@@ -603,7 +603,7 @@ MATCH void func_801F7CC4(void) {
             if (g_ScriptVars[0] != 5u) {
                 return;
             }
-            object_index  = Actor_FindFreeSlot();
+            object_index  = Actor_FindFreeSpawned();
             D_1F800000[0] = object_index;
             if (object_index != GAME_NONE) {
                 g_SpawnedActors[object_index].header.flags    = 1u;
@@ -621,7 +621,7 @@ MATCH void func_801F7CC4(void) {
             if (g_ScriptVars[0] != 8u) {
                 break;
             }
-            object_index  = Actor_FindFreeSlot();
+            object_index  = Actor_FindFreeSpawned();
             D_1F800000[0] = object_index;
             if (object_index != GAME_NONE) {
                 g_SpawnedActors[object_index].header.flags    = 1u;

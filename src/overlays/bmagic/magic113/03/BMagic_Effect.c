@@ -146,7 +146,7 @@ MATCH void func_801EF3A0(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountDownAndPlay.h"
+#include "overlays/bmagic/Effect_CountDownAndMarkDamaged.h"
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
