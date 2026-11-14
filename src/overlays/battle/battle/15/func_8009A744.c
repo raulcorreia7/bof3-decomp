@@ -1,7 +1,5 @@
 #include "battle_15.h"
 
-extern u8 D_80145F20[];
-
 /* Applies the battle selection: hands the six chosen slots to the sound queue, mirrors the battler work rows
  * and effect vectors, and resets the effect slots. */
 #ifdef NON_MATCHING

@@ -1,7 +1,5 @@
 #include "battle_15.h"
 
-extern u8 D_80145F20[];
-
 /* Advances the battle party: bumps the active battler's timer, copies
  * the character cells into the battle rows and drains the enemy rows.
  */

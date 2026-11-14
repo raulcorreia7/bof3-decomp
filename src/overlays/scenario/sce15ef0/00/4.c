@@ -108,11 +108,8 @@ MATCH void func_801D1540(s32 x, s32 y, s16 radius, u16 angle) {
 
     i = 0;
     do {
-        prim     = GFX_BeginPolyG3(1);
-        prim->x0 = x;
-        prim->y0 = y;
-        prim->x1 = x + FIXED_MUL(radius, rcos(angle));
-        prim->y1 = y + FIXED_MUL(radius, rsin(angle));
+        prim = GFX_BeginPolyG3(1);
+        setXY2(prim, x, y, x + FIXED_MUL(radius, rcos(angle)), y + FIXED_MUL(radius, rsin(angle)));
         angle += 0x100;
         prim->x2 = x + FIXED_MUL(radius, rcos(angle));
         i += 1;
@@ -130,32 +127,20 @@ MATCH void func_801D1914(s16 amount) {
     VECTOR start;
     VECTOR end;
 
-    start.vx = TO_COORD(48) + COORD_HALF;
-    start.vy = TO_COORD(113) + COORD_HALF;
-    start.vz = TO_COORD(-768);
-    end.vx   = TO_COORD(48) + COORD_HALF;
-    end.vy   = TO_COORD(113) + COORD_HALF;
-    end.vz   = TO_COORD(-512);
+    setVector(&start, TO_COORD(48) + COORD_HALF, TO_COORD(113) + COORD_HALF, TO_COORD(-768));
+    setVector(&end, TO_COORD(48) + COORD_HALF, TO_COORD(113) + COORD_HALF, TO_COORD(-512));
     func_801D1370(&start, &end, amount);
 
-    start.vx = TO_COORD(48);
-    start.vy = TO_COORD(113) + COORD_HALF;
-    start.vz = TO_COORD(-384);
+    setVector(&start, TO_COORD(48), TO_COORD(113) + COORD_HALF, TO_COORD(-384));
     func_801D1370(&start, &end, amount);
 
-    end.vx = TO_COORD(48);
-    end.vy = TO_COORD(113) + COORD_HALF;
-    end.vz = TO_COORD(-256);
+    setVector(&end, TO_COORD(48), TO_COORD(113) + COORD_HALF, TO_COORD(-256));
     func_801D1370(&start, &end, amount);
 
-    start.vx = TO_COORD(48) + COORD_HALF;
-    start.vy = TO_COORD(113) + COORD_HALF;
-    start.vz = TO_COORD(-128);
+    setVector(&start, TO_COORD(48) + COORD_HALF, TO_COORD(113) + COORD_HALF, TO_COORD(-128));
     func_801D1370(&start, &end, amount);
 
-    end.vx = TO_COORD(48) + COORD_HALF;
-    end.vy = TO_COORD(113) + COORD_HALF;
-    end.vz = 0;
+    setVector(&end, TO_COORD(48) + COORD_HALF, TO_COORD(113) + COORD_HALF, 0);
     func_801D1370(&start, &end, amount);
 }
 
@@ -180,11 +165,8 @@ MATCH void func_801D1A20(s32* pos, s16 origin, s32 flags) {
     angle    = 0;
     i        = 0;
     do {
-        primitive     = GFX_BeginPolyG3(1);
-        primitive->x0 = screen.vx;
-        primitive->y0 = screen.vy;
-        primitive->x1 = point.vx;
-        primitive->y1 = point.vy;
+        primitive = GFX_BeginPolyG3(1);
+        setXY2(primitive, screen.vx, screen.vy, point.vx, point.vy);
         angle += 128;
         point.vx      = screen.vx + (((s16)scale.vx * rcos((u16)angle)) >> 0xC);
         point.vy      = screen.vy + (((s16)scale.vx * rsin((u16)angle)) >> 0xC);

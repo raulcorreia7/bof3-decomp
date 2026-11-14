@@ -17,10 +17,8 @@ MATCH void func_801F4388(void) {
     /* FAKE: indexed stores across gravity and active_flags preserve the coordinate load order. */
     MEM_PTR(s16, work)[16] = 0;
     MEM_PTR(s32, work)[9]  = 0x1000000;
-    work->vx               = x;
-    work->vy               = y;
-    work->vz               = z;
-    work->unk_1C           = z;
+    setVector(work, x, y, z);
+    work->unk_1C = z;
     work2->header.mode++;
     SND_PlayCue(0x208);
 }

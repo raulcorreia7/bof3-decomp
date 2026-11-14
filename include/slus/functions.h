@@ -34,13 +34,13 @@ void         SYS_ThreadInit(void);
 /* func_8014B73C */
 void         SYS_ThreadRun(void);
 /* func_8014B854 */
-void         SYS_ThreadRegister(s32 callback_slot, Callback callback);
+void         SYS_ThreadRegister(s32 thread_index, Callback callback);
 /* func_8014B87C */
 void         SYS_ThreadWait(u16 countdown);
 /* func_8014B8B0 */
 void         SYS_ThreadExit(void);
 /* func_8014B900 */
-void         SYS_ThreadClose(s32 callback_slot);
+void         SYS_ThreadClose(s32 thread_index);
 /* func_8014B954 */
 extern void  SYS_ThreadReplace(Callback entry);
 void         func_8014BA04(void);
