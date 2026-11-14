@@ -7,7 +7,7 @@ MATCH u8 func_800C1DD0(void) {
     if (g_BattleCurrentEnemy->turn.command.type == BATTLE_COMMAND_ABILITY) {
         if (BATTLE_IS_SCRIPTED()) {
             if (func_801DDF50((g_BattleCurrentEnemy->unk_F0 + 0x20) & BYTE_MASK, D_801463CD) != 0) {
-                D_801463BE = 0;
+                g_Battle.unk_DE = 0;
             } else {
                 g_Task->unk_09 = 0x1E;
             }
