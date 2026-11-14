@@ -1115,6 +1115,7 @@ Effect_CountUpAndStepAt32 = { addr = 0x801EF9DC, type = "func", source = "Counts
 g_BMagicEffectModes = { addr = 0x801F0028, source = "Handlers of magic088 (Molasses, Tarbaby, Slow…), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic091/03"]
+g_BattleEffectPalette = { addr = 0x8003AC00, source = "the palette row the magic091 effect fills from g_BattlePalettes: entries 1 to 15 with the high bit set, entry 0 clear" }
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, alias = true, source = "Projects the battle range to the screen." }

@@ -30,13 +30,13 @@ MATCH void func_801EECCC(void) {
         anchor += 6;
     }
     i   = 1;
-    dst = MEM_PTR(u16, 0x8003AC02u);
-    src = MEM_PTR(u16, 0x80036C02u);
+    dst = BATTLE_EFFECT_PALETTE_ENTRY_1;
+    src = BATTLE_PALETTE_SOURCE_ENTRY_1;
     for (; i < 16; i++) {
         *dst++ = *src++ | 0x8000;
     }
-    *MEM_PTR(u16, 0x8003AC00u) = 0;
-    g_GfxPalettePending        = 1;
+    g_BattleEffectPalette[0] = 0;
+    g_GfxPalettePending      = 1;
     Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
     SND_QueueSelectionEffect(0x100);
     g_Task->unk_09 = 1;

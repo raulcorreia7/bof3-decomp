@@ -20,7 +20,7 @@ MATCH void Area_DrawMatrixLightPillar(s32* pos) {
     point[1] = pos[1] + ((rsin(0) * 0x200) >> 4);
     point[2] = pos[2];
     Area_ProjectPoint(point, &inner);
-    point[2] = pos[2] + 0x8000000;
+    point[2] = pos[2] + TO_COORD(2048);
     Area_ProjectPoint(point, &outer);
     shade = ((g_FrameCount & 1) << 2) | 0x20;
     for (i = 0; i < AREA_RING_POINTS; i++) {
@@ -31,7 +31,7 @@ MATCH void Area_DrawMatrixLightPillar(s32* pos) {
         point[1] = pos[1] + ((rsin((u16)angle) * 0x200) >> 4);
         point[2] = pos[2];
         Area_ProjectPoint(point, &inner);
-        point[2] = pos[2] + 0x8000000;
+        point[2] = pos[2] + TO_COORD(2048);
         Area_ProjectPoint(point, &outer);
 
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 960, 0), 0);
