@@ -1,7 +1,5 @@
 #include "battle_15.h"
 
-extern u8 D_80145F20[];
-
 /* The active battler index selects one of three rows. */
 #define BATTLE_ACTIVE_ROW_COUNT 3
 /* The timer counts up to this value before it stops. */
