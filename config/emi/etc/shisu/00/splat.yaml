@@ -19,7 +19,7 @@ segments:
     section_order: [.data, .text, .rodata, .bss]
     subsegments:
       - [0x164, .data, g_SaveSlotLevelFormat]
-      - [0x180, c, 180]
+      - [0x180, c, Menu_ShisuSteps]
   - name: data
     type: code
     start: 0x1EDC
