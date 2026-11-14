@@ -13,7 +13,7 @@ MATCH s16 Battle_CalcDamage(u8 attacker_slot, u8 target_slot, u16 element_id) {
     u8           flags;
     u16*         power;
 
-    spread = D_801D0C7C;
+    spread = g_BattleDamageSpread;
     if (element_id == BATTLE_ELEMENT_FROM_WEAPON) {
         if (BATTLER_IS_PLAYER(attacker_slot)) {
             *(u16*)D_1F800000 = g_Weapons[g_Game.members[attacker_slot].chr.equip.weapon].element;
