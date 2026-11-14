@@ -6,7 +6,8 @@ marker. ``MATCH`` marks a body that compiles in the default build. ``NON_MATCHIN
 draft, which must sit under ``#ifdef NON_MATCHING`` with its ``INCLUDE_ASM`` in the ``#else``.
 ``HAND_ASM`` marks the C equivalent of a function the original programmer wrote in assembly. It
 sits under ``#ifdef NON_MATCHING`` like a draft, is required for every function in
-``asm/*/hand/`` and is allowed nowhere else. Status markers never take a ``FAKE:`` note.
+``asm/*/hand/`` and is allowed nowhere else; ``--diff`` lets that switch land in a file that holds one.
+Status markers never take a ``FAKE:`` note.
 The one exception is a ``static inline`` helper in a header, which is not a lifted function. PsyQ
 stubs such as ``__main`` carry ``MATCH`` like any other definition.
 
@@ -273,6 +274,15 @@ def tracked_hand_files() -> list[str]:
     return out.split()
 
 
+def has_hand_asm(path: str) -> bool:
+    """True when the file defines a HAND_ASM function, whose model stays under the draft switch."""
+    try:
+        text = Path(path).read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return False
+    return re.search(r"^HAND_ASM\s", text, re.M) is not None
+
+
 def main(argv: list[str]) -> int:
     if argv and argv[0] in ("-h", "--help"):
         print(__doc__.strip())
@@ -284,6 +294,8 @@ def main(argv: list[str]) -> int:
         bad = 0
         for path, line, text in added_lines(argv[1]):
             if re.match(r"\s*#\s*if(?:def)?\s+NON_MATCHING\b", text):
+                if has_hand_asm(path):
+                    continue
                 print(
                     f"{path}:{line}: a draft lands; resolve it or leave it out of the PR",
                     file=sys.stderr,
