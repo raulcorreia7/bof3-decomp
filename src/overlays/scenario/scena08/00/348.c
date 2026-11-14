@@ -152,7 +152,7 @@ MATCH void func_801F774C(void) {
 }
 
 /* Draw a red-tinted billboard sprite of the given half size at the sprite's world position. */
-MATCH void func_801F77B4(AreaSprite* sprite) {
+MATCH void func_801F77B4(Scena08Billboard* sprite) {
     POLY_FT4* prim;
     DVECTOR   screen;
     DVECTOR   scale;
@@ -161,8 +161,8 @@ MATCH void func_801F77B4(AreaSprite* sprite) {
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
-    screen.vx = *(u32*)&sprite->half_size >> 6;
-    pos       = *(VECTOR*)&sprite->origin;
+    screen.vx = sprite->size >> 6;
+    pos       = sprite->pos;
     pos.vz <<= 8;
     Game_ProjectWorldPoint(&pos, &screen, &scale);
     Area_ProjectPoint((s32*)&pos, &screen);
@@ -173,7 +173,7 @@ MATCH void func_801F77B4(AreaSprite* sprite) {
     setClut(prim, 160, STAGE_PALETTE_Y + 3);
     prim->tpage = GetTPage(0, 1, 704, 256);
     setUVWH(prim, 224, 48, 31, 31);
-    setRGB0(prim, sprite->flags_03, 0, 0);
+    setRGB0(prim, sprite->shade, 0, 0);
     GFX_AddPrim(1, sizeof(POLY_FT4));
 }
 

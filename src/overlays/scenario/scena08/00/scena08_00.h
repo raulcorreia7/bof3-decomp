@@ -28,6 +28,18 @@ extern Callback D_801FE8D0[];
 extern Callback D_801FE8D8[];
 extern Callback D_801FE8E4[];
 
+/* A billboard row of the sprite work table: the world point it stands on, its shade and its size word. */
+typedef struct Scena08Billboard {
+    u8     unk_00[3];    /* +0x00 */
+    u8     shade;        /* +0x03 */
+    VECTOR pos;          /* +0x04 */
+    u8     unk_14[0x10]; /* +0x14 */
+    u32    size;         /* +0x24 */
+} Scena08Billboard;
+
+ASSERT_SIZE(Scena08Billboard, 0x28);
+ASSERT_OFFSET(Scena08Billboard, size, 0x24);
+
 /* One of the SCENA08_SPARK_COUNT falling sparks at AREA_WORK: kind selects the per-frame handler in D_801FE8FC. */
 #define SCENA08_SPARK_COUNT 8U
 
