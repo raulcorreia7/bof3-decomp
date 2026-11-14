@@ -622,7 +622,24 @@ MATCH void func_801FCFB4(void) {
     g_AreaCameraOffsetY      = g_AreaCameraOffsetY + ((cam << 24) >> 22);
 }
 
-INCLUDE_ASM(func_801FD000);
+MATCH void func_801FD000(void) {
+    u8 i;
+    u8 idx;
+
+    for (i = 0; i < 0xE; i++) {
+        MEM(s16, 0x1F800000) = Actor_FindFreeField();
+        if (MEM(s16, 0x1F800000) != 0xFF) {
+            idx = i;
+            func_801A4D54(&D_801FDE8C[idx * 17]);
+            g_Task->pos.z.part.integer = 0xA00;
+            if (D_801FDF7C[idx] != 0) {
+                g_CurrentActor->timer_75 = D_801FDF7C[idx];
+                g_Task->unk_03           = g_Task->header.mode;
+                g_Task->header.mode      = 5;
+            }
+        }
+    }
+}
 
 INCLUDE_ASM(func_801FD0DC);
 
