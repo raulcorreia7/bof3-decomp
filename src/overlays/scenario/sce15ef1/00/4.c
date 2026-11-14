@@ -92,9 +92,9 @@ MATCH void func_801D147C(void* arg0, s32 arg1, s32 arg2) {
     s16      origin;
     s32      flags;
 
-    pos = arg0;
+    pos    = arg0;
     origin = arg1;
-    flags = arg2;
+    flags  = arg2;
     GFX_AddDitheredDrawMode(2u, GetTPage(0, 1, 0x2C0, 0x100));
     Area_SetCameraMatrix(&camera);
     Area_ProjectPoint(pos, &screen);
