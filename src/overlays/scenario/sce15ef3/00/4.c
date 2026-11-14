@@ -233,7 +233,37 @@ INCLUDE_ASM(func_801D18CC);
 
 INCLUDE_ASM(func_801D19A0);
 
-INCLUDE_ASM(func_801D1A60);
+MATCH s32 func_801D1A60(void) {
+    u16                i;
+    u16                n;
+    s32                alive;
+    SceneSparkEmitter* emitter;
+    SceneSpark*        spark;
+
+    alive   = 0;
+    emitter = g_SparkEmitters;
+    for (i = 0; i < SPARK_EMITTER_COUNT; emitter++, i++) {
+        if (emitter->active != 0) {
+            alive = 1;
+            if (emitter->timer-- == 0) {
+                for (n = 0; n < 2; n++) {
+                    spark = (SceneSpark*)Area_FindFreeSpriteRow();
+                    if (spark != NULL) {
+                        spark->active = 1;
+                        spark->life   = (rand() & 0x1F) + 0x20;
+                        spark->x      = emitter->x + ((rand() & 0xFF) << 8) - 0x10000;
+                        spark->y      = emitter->y + ((rand() & 0xFF) << 8) - 0x10000;
+                        spark->z      = emitter->z;
+                        spark->unk_14 = 0;
+                        spark->unk_3  = rand() & 1;
+                    }
+                }
+                emitter->timer = rand() & 7;
+            }
+        }
+    }
+    return alive;
+}
 
 #include "overlays/scenario/Scene_DrawRedGradient.h"
 
