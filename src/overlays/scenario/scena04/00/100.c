@@ -182,7 +182,32 @@ MATCH void func_801F7CA8(void) {
 
 INCLUDE_ASM(func_801F7CF0);
 
-INCLUDE_ASM(func_801F7EC0);
+MATCH void func_801F7EC0() {
+    u8             camera[32];
+    SceneParticle* row;
+    u8             i;
+    s32            height;
+
+    Area_SetCameraMatrix(camera);
+    row = MEM_PTR(SceneParticle, AREA_WORK);
+    for (i = 0; i < 128; row++, i++) {
+        if (row->life != 0) {
+            func_801F7CF0(row);
+            row->x += row->vx;
+            row->y += row->vy;
+            row->z += row->vz;
+            height = Area_SampleHeight(row->x, row->y);
+            if (row->z < height) {
+                row->z  = height;
+                row->vz = 0;
+                VectorNormal(&row->vx, &row->vx);
+            }
+            row->unk_24--;
+            row->unk_20 += 4;
+            row->life--;
+        }
+    }
+}
 
 MATCH void func_801F7FCC(void) {
     s32   index;

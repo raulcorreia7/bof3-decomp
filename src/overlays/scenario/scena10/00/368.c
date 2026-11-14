@@ -64,7 +64,26 @@ MATCH void func_801F7F8C(void) {
 
 INCLUDE_ASM(func_801F7FA0);
 
-INCLUDE_ASM(func_801F8550);
+MATCH void func_801F8550(void) {
+    Game_SetScriptActive();
+    func_801BE1B0(0);
+    g_AreaScrollTargetX = 0x490000;
+    g_AreaScrollTargetY = 0x560000;
+    func_80153DE8();
+    g_AreaCameraAngle.vx = -0x23C;
+    D_801FE9D8           = Actor_FindFreeSpawned();
+    if (D_801FE9D8 != GAME_NONE) {
+        g_SpawnedActors[D_801FE9D8].header.flags   = 1;
+        g_SpawnedActors[D_801FE9D8].type           = 0x13;
+        g_SpawnedActors[D_801FE9D8].camera_angle.x = -0x2EC;
+        g_SpawnedActors[D_801FE9D8].camera_angle.y = g_AreaCameraAngle.vy;
+        g_SpawnedActors[D_801FE9D8].camera_angle.z = 0x31E;
+        g_SpawnedActors[D_801FE9D8].layer          = 0x80;
+    }
+    SND_RequestBGM(0x7A);
+    g_SceneState.state_04 = 1;
+    g_SceneState.step_05  = 0;
+}
 
 MATCH void func_801F8694(void) {
     SYS_DISPATCH_BYTE(D_801FE900, g_SceneState.state_04);

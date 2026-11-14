@@ -233,7 +233,37 @@ INCLUDE_ASM(func_801D18CC);
 
 INCLUDE_ASM(func_801D19A0);
 
-INCLUDE_ASM(func_801D1A60);
+MATCH s32 func_801D1A60(void) {
+    u16                i;
+    u16                n;
+    s32                alive;
+    SceneSparkEmitter* emitter;
+    SceneSpark*        spark;
+
+    alive   = 0;
+    emitter = g_SparkEmitters;
+    for (i = 0; i < SPARK_EMITTER_COUNT; emitter++, i++) {
+        if (emitter->active != 0) {
+            alive = 1;
+            if (emitter->timer-- == 0) {
+                for (n = 0; n < 2; n++) {
+                    spark = (SceneSpark*)Area_FindFreeSpriteRow();
+                    if (spark != NULL) {
+                        spark->active = 1;
+                        spark->life   = (rand() & 0x1F) + 0x20;
+                        spark->x      = emitter->x + ((rand() & 0xFF) << 8) - 0x10000;
+                        spark->y      = emitter->y + ((rand() & 0xFF) << 8) - 0x10000;
+                        spark->z      = emitter->z;
+                        spark->unk_14 = 0;
+                        spark->unk_3  = rand() & 1;
+                    }
+                }
+                emitter->timer = rand() & 7;
+            }
+        }
+    }
+    return alive;
+}
 
 #include "overlays/scenario/Scene_DrawRedGradient.h"
 
@@ -272,7 +302,47 @@ MATCH void Scene_DrawRedFade(u8 red) {
     GFX_AddPrim(1, sizeof(TILE));
 }
 
-INCLUDE_ASM(Scene_DrawScanBar);
+MATCH void Scene_DrawScanBar(ScanBar* bar) {
+    POLY_G4* poly;
+    u8       parity;
+    /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
+    FAKE_STACK_PADS(u8, 0x10);
+
+    parity = g_FrameCount & 1;
+    poly   = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(poly);
+    SetSemiTrans(poly, 0);
+    poly->x0 = 0;
+    poly->y0 = bar->y - bar->half_height - parity;
+    poly->x1 = 320;
+    poly->y1 = bar->y - bar->half_height - parity;
+    poly->x2 = 0;
+    poly->y2 = bar->y;
+    poly->x3 = 320;
+    poly->y3 = bar->y;
+    setRGB0(poly, 0, 0, 0);
+    setRGB1(poly, 0, 0, 0);
+    setRGB2(poly, 128, 0, 0);
+    setRGB3(poly, 128, 0, 0);
+    GFX_AddPrim(7, sizeof(POLY_G4));
+
+    poly = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(poly);
+    SetSemiTrans(poly, 0);
+    poly->x0 = 0;
+    poly->y0 = bar->y;
+    poly->x1 = 320;
+    poly->y1 = bar->y;
+    poly->x2 = 0;
+    poly->y2 = bar->y + (bar->half_height + parity);
+    poly->x3 = 320;
+    poly->y3 = bar->y + (bar->half_height + parity);
+    setRGB0(poly, 128, 0, 0);
+    setRGB1(poly, 128, 0, 0);
+    setRGB2(poly, 0, 0, 0);
+    setRGB3(poly, 0, 0, 0);
+    GFX_AddPrim(7, sizeof(POLY_G4));
+}
 
 #include "overlays/scenario/Scene_ClearScanBars.h"
 
