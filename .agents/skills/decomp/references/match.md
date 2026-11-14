@@ -90,6 +90,8 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
    pseudo-register with its uses, the insns it lives across and its hard register; `<file>.greg`
    gives the order the global allocator took them in, their conflicts and each spill. Change the
    source until those numbers put the registers where retail has them.
+   For a large function compare opcode sequences first (registers and offsets ignored) and fix the
+   structural hunks top-down before reading any register.
 
    Script the forms: write the body once with its variable parts as a table, build each with
    `tools/match.sh --diff`, and accept only a line that begins `match:`, then `check-<image>`.
