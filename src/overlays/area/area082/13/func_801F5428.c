@@ -1,43 +1,31 @@
 #include "area082_13.h"
 
-MATCH void func_801F5428(s32 arg0) {
-    POLY_G4* prim;
-    s32      mode;
-    u32      c = arg0;
-    u8       r0, g0, b0, r1, g1, b1;
+MATCH void func_801F5428(s32 colors) {
+    POLY_G4* polygon;
+    s32      texturePage;
+    u32      packedColors = colors;
+    u8       topRed, topGreen, topBlue, bottomRed, bottomGreen, bottomBlue;
 
-    if (GetGraphType() == 1) {
-        mode = 0x225;
-    } else if (GetGraphType() == 2) {
-        mode = 0x225;
-    } else {
-        mode = 0x95;
-    }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mode, 0);
+    texturePage = getTPage(1, 0, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, texturePage, 0);
     GFX_AddPrim(6, sizeof(DR_MODE));
-    prim = (POLY_G4*)g_GfxPrimCursor;
-    SetPolyG4(prim);
-    r0 = (c & 31) << 3;
-    g0 = (c >> 2) & 0xF8;
-    b0 = (c >> 7) & 0xF8;
-    r1 = (c >> 13) & 0xF8;
-    g1 = (c >> 18) & 0xF8;
-    b1 = (c >> 23) & 0xF8;
-    setXY4(prim, 0, 0, SCREEN_WIDTH, 0, 0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT);
-    prim->r0 = prim->r1 = r0;
-    prim->g0 = prim->g1 = g0;
-    prim->b0 = prim->b1 = b0;
-    prim->r2 = prim->r3 = r1;
-    prim->g2 = prim->g3 = g1;
-    prim->b2 = prim->b3 = b1;
+    polygon = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(polygon);
+    topRed      = (packedColors & 31) << 3;
+    topGreen    = (packedColors >> 2) & 0xF8;
+    topBlue     = (packedColors >> 7) & 0xF8;
+    bottomRed   = (packedColors >> 13) & 0xF8;
+    bottomGreen = (packedColors >> 18) & 0xF8;
+    bottomBlue  = (packedColors >> 23) & 0xF8;
+    setXY4(polygon, 0, 0, SCREEN_WIDTH, 0, 0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT);
+    polygon->r0 = polygon->r1 = topRed;
+    polygon->g0 = polygon->g1 = topGreen;
+    polygon->b0 = polygon->b1 = topBlue;
+    polygon->r2 = polygon->r3 = bottomRed;
+    polygon->g2 = polygon->g3 = bottomGreen;
+    polygon->b2 = polygon->b3 = bottomBlue;
     GFX_AddPrim(6, sizeof(POLY_G4));
-    if (GetGraphType() == 1) {
-        mode = 0x225;
-    } else if (GetGraphType() == 2) {
-        mode = 0x225;
-    } else {
-        mode = 0x95;
-    }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, mode, 0);
+    texturePage = getTPage(1, 0, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, texturePage, 0);
     GFX_AddPrim(6, sizeof(DR_MODE));
 }
