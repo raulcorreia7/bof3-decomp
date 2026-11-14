@@ -65,13 +65,7 @@ MATCH void func_80167910(void) {
     setVector(&rot, (s16)((g_Task->pos.x.fixed >> 9) - 0x4000), (s16)((g_Task->pos.y.fixed >> 9) - 0x4000), (s16)(-COORD_INT(g_Task->pos.z) / 2));
     RotTransMatrix(&rot, mtx, &flag);
     Camera_SetModelMatrix(&axis, &mtx);
-    if (GetGraphType() == 1) {
-        mode = 0x12E;
-    } else if (GetGraphType() == 2) {
-        mode = 0x12E;
-    } else {
-        mode = 0x5E;
-    }
+    mode = getTPage(0, 2, 896, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, mode, NULL);
     if (!(g_Task->param.unk_0B & 0x1)) {
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));

@@ -40,7 +40,7 @@ MATCH void func_801D0F50(s16 x, s16 y, u8 row) {
     SPRT* sprite;
     s32   tpage;
 
-    tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x2E : 0x1E;
+    tpage = getTPage(0, 0, 896, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
     GFX_AddPrim(1, sizeof(DR_MODE));
     sprite = GFX_CURSOR(SPRT);

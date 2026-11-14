@@ -129,25 +129,20 @@ MATCH void Area_DrawObjectSprite(void) {
                 prim->y0 = y;
                 prim->y2 = height + y;
             }
-            prim->y1 = prim->y0;
-            prim->y3 = prim->y2;
-            prim->v0 = g_Task->unk_26 + cell->v;
-            prim->v2 = prim->v0 + height - clip_y;
-            prim->v1 = prim->v0;
-            prim->v3 = prim->v2;
-            tint     = g_Task->tint.bytes.rgb.red - 0x80;
-            prim->r0 = tint;
-            tint     = g_Task->tint.bytes.rgb.green - 0x80;
-            prim->g0 = tint;
-            tint     = g_Task->tint.bytes.rgb.blue - 0x80;
-            prim->b0 = tint;
-            if (GetGraphType() == 1 || GetGraphType() == 2) {
-                page  = g_Task->unk_25 + page_offset;
-                tpage = GFX_TPAGE_GRAPH_TYPE_1_2(g_Task->unk_28 ? 1 : 0, g_Task->tint.bytes.flags, (page % 16) << 6, (page / 16) << 8);
-            } else {
-                page  = g_Task->unk_25 + page_offset;
-                tpage = GFX_TPAGE_STANDARD(g_Task->unk_28 ? 1 : 0, g_Task->tint.bytes.flags, (page % 16) << 6, (page / 16) << 8);
-            }
+            prim->y1    = prim->y0;
+            prim->y3    = prim->y2;
+            prim->v0    = g_Task->unk_26 + cell->v;
+            prim->v2    = prim->v0 + height - clip_y;
+            prim->v1    = prim->v0;
+            prim->v3    = prim->v2;
+            tint        = g_Task->tint.bytes.rgb.red - 0x80;
+            prim->r0    = tint;
+            tint        = g_Task->tint.bytes.rgb.green - 0x80;
+            prim->g0    = tint;
+            tint        = g_Task->tint.bytes.rgb.blue - 0x80;
+            prim->b0    = tint;
+            /* The page is assigned inside the macro: retail computes it once in each branch. */
+            tpage       = getTPage(g_Task->unk_28 ? 1 : 0, g_Task->tint.bytes.flags, (page % 16) << 6, ((page = g_Task->unk_25 + page_offset) / 16) << 8);
             prim->tpage = tpage;
             prim->clut  = clut;
             SetSemiTrans(prim, (g_Task->header.flags & ACTOR_FLAG_SEMI_TRANSPARENT) != 0);
