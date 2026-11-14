@@ -8,8 +8,7 @@ MATCH void func_801F4220(AreaStreakSlot* slot) {
     SetLineG2(prim);
     SetSemiTrans(prim, 1);
     Area_ProjectPoint(slot->head, &xy);
-    prim->x0 = xy.vx;
-    prim->y0 = xy.vy;
+    setXY0(prim, xy.vx, xy.vy);
     Area_ProjectPoint(slot->tail, &xy);
     prim->x1 = xy.vx;
     prim->y1 = xy.vy;

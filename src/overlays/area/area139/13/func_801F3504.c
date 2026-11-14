@@ -6,11 +6,8 @@ MATCH void func_801F3504(s32 x, s32 y, s16 radius, u16 angle) {
 
     i = 0;
     do {
-        prim     = GFX_BeginPolyG3(1);
-        prim->x0 = x;
-        prim->y0 = y;
-        prim->x1 = x + FIXED_MUL(radius, rcos(angle));
-        prim->y1 = y + FIXED_MUL(radius, rsin(angle));
+        prim = GFX_BeginPolyG3(1);
+        setXY2(prim, x, y, x + FIXED_MUL(radius, rcos(angle)), y + FIXED_MUL(radius, rsin(angle)));
         angle += 0x100;
         prim->x2 = x + FIXED_MUL(radius, rcos(angle));
         i += 1;

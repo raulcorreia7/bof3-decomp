@@ -647,8 +647,7 @@ MATCH void func_801FA19C(WorldPos* pos, s32* vx) {
     SetSemiTrans(prim, 1);
     Area_SetCameraMatrix(&camera);
     Area_ProjectPoint(&pos->x.fixed, &xy);
-    prim->x0 = xy.vx;
-    prim->y0 = xy.vy;
+    setXY0(prim, xy.vx, xy.vy);
     Area_ProjectPoint(vx, &xy);
     prim->x1 = xy.vx;
     prim->y1 = xy.vy;
