@@ -51,7 +51,7 @@ MATCH void func_801EEC94(void) {
 
 #include "overlays/bmagic/Effect_NextStepOnZeroTick.h"
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 MATCH s32 func_801EEF3C(void) {
     u16* id;

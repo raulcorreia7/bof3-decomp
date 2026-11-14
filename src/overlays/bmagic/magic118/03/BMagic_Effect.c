@@ -53,8 +53,9 @@ MATCH void BMagic_SpawnBurnFlames(void) {
     g_Task->header.mode += 1;
 }
 
+/* Counts the effect timer up; at 16 applies the damage flags 0x10 to the battlers of the target selector and advances the mode. */
 /* func_801EEE20 */
-MATCH void BMagic_SelectBurnTarget(void) {
+MATCH void BMagic_ApplyBurnDamage(void) {
     u8 timer;
 
     timer          = g_Task->unk_09 + 1;
@@ -69,7 +70,7 @@ MATCH void BMagic_SelectBurnTarget(void) {
 
 #include "overlays/bmagic/Effect_CountDownTimerNextStep.h"
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEF6C */
 MATCH void BMagic_UpdateBurnSprites(void) {

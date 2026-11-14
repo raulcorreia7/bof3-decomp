@@ -10,7 +10,7 @@ MATCH void func_801EEC04(void) {
     s32          tpage;
     u8           i;
 
-    BMagic_DispatchTaskPair(func_801EEDAC, Effect_PlayOnZeroTick);
+    BMagic_DispatchTaskPair(func_801EEDAC, Effect_MarkDamagedOnZeroTick);
     if (GetGraphType() == 1 || GetGraphType() == 2) {
         tpage = 0xA5;
     } else {
@@ -101,7 +101,7 @@ MATCH void func_801EEDAC(void) {
     g_Task->header.mode++;
 }
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EF0C4 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"

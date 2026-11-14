@@ -78,7 +78,7 @@ MATCH void func_801EEFF0(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 MATCH void func_801EF0B0(void) {
     POLY_G3* poly;

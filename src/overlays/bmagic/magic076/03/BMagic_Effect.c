@@ -65,7 +65,7 @@ MATCH void Effect_DarkenPalette(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 /* Whether the queued action is an ability other than Raise Dead (the spell or the skill). */
 MATCH u8 func_801EF2E8(void) {

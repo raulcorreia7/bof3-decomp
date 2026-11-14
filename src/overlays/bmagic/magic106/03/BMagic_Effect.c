@@ -9,7 +9,7 @@ MATCH void func_801EEC04(void) {
     PartyMember* swap;
     s32          count;
 
-    BMagic_DispatchTaskPair(func_801EECE4, Effect_PlayOnZeroTick);
+    BMagic_DispatchTaskPair(func_801EECE4, Effect_MarkDamagedOnZeroTick);
     count = 0;
     do {
         if (D_801EF9F8[(u8)count << 5] & 0x1) {
@@ -62,7 +62,7 @@ MATCH void func_801EECE4(void) {
     SND_QueueSelectionEffect(0x101);
 }
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 MATCH void func_801EEEE0(void) {
     BMagicOrbit* work;

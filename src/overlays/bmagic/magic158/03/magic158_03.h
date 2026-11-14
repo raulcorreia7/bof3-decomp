@@ -15,7 +15,7 @@ extern BattleEffect D_801EF794[];
 #define BMAGIC_EFFECT_SLOTS         D_801EF794
 #define BMAGIC_EFFECT_COUNT         64
 #define BMAGIC_EFFECT_SPAWN_COUNT   16
-#define BMAGIC_EFFECT_START_HANDLER Effect_PlayOnZeroTick
+#define BMAGIC_EFFECT_START_HANDLER Effect_MarkDamagedOnZeroTick
 void func_801EED04(void);
 #define BMAGIC_EFFECT_SLOT_STEP BMagic_DispatchEffectMode
 void func_801EF2F0(void);

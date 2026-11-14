@@ -10,7 +10,7 @@ INCLUDE_ASM(func_801EED18);
 
 #include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEF78 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"

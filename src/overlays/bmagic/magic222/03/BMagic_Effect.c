@@ -47,7 +47,7 @@ MATCH void func_801EEC70(void) {
 
 #include "overlays/bmagic/Effect_CountDownTimerQueueEffect.h"
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEEE0 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"

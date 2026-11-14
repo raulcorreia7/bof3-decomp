@@ -72,7 +72,7 @@ MATCH void func_801EF080(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
