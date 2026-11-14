@@ -3,6 +3,7 @@
 
 /* The bmagic/magic064/03 overlay. Only this image includes the file. */
 
+#include "area/area.h"
 #include "overlays/bmagic/bmagic.h"
 
 /* The twelve step callbacks at D_801EEC10, copied to the stack and indexed by the work state byte. */
@@ -77,20 +78,6 @@ void func_801F0B8C(s16 x0, s16 y0, s16 x1, s16 y1);
 void func_801F0EEC(u32 sprite, s32 blend, s32 color);
 void func_801F103C(void);
 
-/* The field map renderer state this image rebuilds, declared as the engine declares it in
- * src/engine/slus/slus.h. */
-typedef struct AreaCell {
-    u8  tile_x;
-    u8  tile_y;
-    u16 prim_id; /* low 12 bits: the g_AreaCellPrims row; upper bits are flags */
-} AreaCell;
-
-extern AreaCell g_AreaCells[56][28];
-extern POLY_FT4 g_AreaCellPrims[][2];
-extern u16      g_AreaCellPrimFreeIds[0x400];
-extern u16      g_AreaCellPrimFreeIndex;
-extern s16      g_AreaGridColCursor;
-extern s16      g_AreaGridRowCursor;
 extern u16      D_80149336;
 extern u8       D_8014933D;
 
