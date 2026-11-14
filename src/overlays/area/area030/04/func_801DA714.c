@@ -8,9 +8,9 @@ MATCH void func_801DA714(void) {
     Actor_StepAnimLoop();
     record = FISHING_STATE;
     if (record->flags_58 == 6) {
-        g_ActorSlots[0].header.mode = (g_ActorSlots[0].header.mode + 1);
-        record->saved_index_0B      = 0;
-        FISHING_STATE->counter_07   = 0;
-        FISHING_STATE->sub_index_03 = 3;
+        g_SpawnedActors[0].header.mode = (g_SpawnedActors[0].header.mode + 1);
+        record->saved_index_0B         = 0;
+        FISHING_STATE->counter_07      = 0;
+        FISHING_STATE->sub_index_03    = 3;
     }
 }

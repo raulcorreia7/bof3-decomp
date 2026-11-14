@@ -88,12 +88,12 @@
 #define LEVEL_STRIDE                   0x08
 #define LEVEL_GROWTH_CHARACTER_STRIDE  (LEVEL_GROWTH_LEVEL_COUNT * LEVEL_STRIDE)
 
-/* The ActorSlot.type values that have a named handler in g_ActorTypes. */
+/* The SpawnedActor.type values that have a named handler in g_ActorTypes. */
 typedef enum ActorType {
     ACTOR_TYPE_FACING_PROBE = 0x3A,
 } ActorType;
 
-typedef struct ActorSlot {
+typedef struct SpawnedActor {
     TaskHeader header;       /* 0x00 */
     u8         unk_03;       /* 0x03 */
     u8         unk_04;       /* 0x04 */
@@ -124,21 +124,21 @@ typedef struct ActorSlot {
     u8         pad_40[0x0A]; /* 0x40-0x49 */
     u8         unk_4A;       /* 0x4A */
     u8         pad_4B[0x19]; /* 0x4B-0x63 */
-    Point3DL   camera_angle; /* 0x64 */
+    Point3l    camera_angle; /* 0x64 */
     u8         pad_70[4];    /* 0x70-0x73 */
-} ActorSlot;
+} SpawnedActor;
 
-ASSERT_SIZE(ActorSlot, ACTOR_SLOT_SIZE);
-ASSERT_OFFSET(ActorSlot, header, 0x00);
-ASSERT_OFFSET(ActorSlot, type, 0x05);
-ASSERT_OFFSET(ActorSlot, layer, 0x09);
-ASSERT_OFFSET(ActorSlot, unk_2C, 0x2C);
-ASSERT_OFFSET(ActorSlot, scene_step, 0x0C);
-ASSERT_OFFSET(ActorSlot, selection, 0x10);
-ASSERT_OFFSET(ActorSlot, unk_20, 0x20);
-ASSERT_OFFSET(ActorSlot, pos, 0x34);
-ASSERT_OFFSET(ActorSlot, camera_angle, 0x64);
+ASSERT_SIZE(SpawnedActor, ACTOR_SLOT_SIZE);
+ASSERT_OFFSET(SpawnedActor, header, 0x00);
+ASSERT_OFFSET(SpawnedActor, type, 0x05);
+ASSERT_OFFSET(SpawnedActor, layer, 0x09);
+ASSERT_OFFSET(SpawnedActor, unk_2C, 0x2C);
+ASSERT_OFFSET(SpawnedActor, scene_step, 0x0C);
+ASSERT_OFFSET(SpawnedActor, selection, 0x10);
+ASSERT_OFFSET(SpawnedActor, unk_20, 0x20);
+ASSERT_OFFSET(SpawnedActor, pos, 0x34);
+ASSERT_OFFSET(SpawnedActor, camera_angle, 0x64);
 
-extern ActorSlot g_ActorSlots[ACTOR_SLOT_COUNT];
+extern SpawnedActor g_SpawnedActors[ACTOR_SLOT_COUNT];
 
 #endif

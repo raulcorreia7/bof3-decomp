@@ -243,10 +243,10 @@ INCLUDE_ASM(func_801D1FF8);
 
 /* func_801D230C */
 MATCH void Scene_SetXFixed(void) {
-    Point3DL pos;
-    s16      x;
-    s16      y;
-    u16      angle;
+    Point3l pos;
+    s16     x;
+    s16     y;
+    u16     angle;
 
     GFX_AddDitheredDrawMode(1, GetTPage(0, 1, 896, 256));
     pos.x = g_Task->pos.x.fixed;

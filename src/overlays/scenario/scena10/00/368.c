@@ -209,10 +209,10 @@ MATCH void func_801FD814(void) {
     saved_slot               = g_Task->param.actor_slot;
     g_Task->param.actor_slot = Actor_FindFreeSlot();
     if (g_Task->param.actor_slot != GAME_NONE) {
-        g_ActorSlots[g_Task->param.actor_slot].header.flags = 1;
-        g_ActorSlots[g_Task->param.actor_slot].type         = 0x5D;
-        g_ActorSlots[g_Task->param.actor_slot].unk_06       = saved_slot;
-        g_ActorSlots[g_Task->param.actor_slot].unk_07       = 0;
+        g_SpawnedActors[g_Task->param.actor_slot].header.flags = 1;
+        g_SpawnedActors[g_Task->param.actor_slot].type         = 0x5D;
+        g_SpawnedActors[g_Task->param.actor_slot].unk_06       = saved_slot;
+        g_SpawnedActors[g_Task->param.actor_slot].unk_07       = 0;
     } else {
         g_Task->param.actor_slot = saved_slot;
         g_ScriptState->cursor -= 2;

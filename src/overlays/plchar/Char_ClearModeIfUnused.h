@@ -4,7 +4,7 @@
 MATCH void Char_ClearModeIfUnused(void) {
     Actor* work = g_Task;
 
-    if ((g_ActorSlots[work->param.actor_slot].header.flags == 0 || g_ActorSlots[work->param.actor_slot].header.mode == 1) && g_AreaCameraMoving == 0) {
+    if ((g_SpawnedActors[work->param.actor_slot].header.flags == 0 || g_SpawnedActors[work->param.actor_slot].header.mode == 1) && g_AreaCameraMoving == 0) {
         work->unk_2B                              = 0;
         g_Game.current->u.field.mode_12B.s8_value = 0;
     }

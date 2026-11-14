@@ -221,18 +221,18 @@ MATCH void func_801F7E34(void) {
 }
 
 MATCH void func_801F7E6C(void) {
-    ActorSlot** effects;
-    ActorSlot*  spawned;
-    Actor*      record;
-    Actor*      actor;
-    u8          i;
-    u8          slot;
+    SpawnedActor** effects;
+    SpawnedActor*  spawned;
+    Actor*         record;
+    Actor*         actor;
+    u8             i;
+    u8             slot;
 
-    effects = (ActorSlot**)&g_Task->vx;
+    effects = (SpawnedActor**)&g_Task->vx;
     for (i = 0; i < 5; i++) {
         slot = Actor_FindFreeSlot();
         if (slot != GAME_NONE) {
-            spawned                    = &g_ActorSlots[slot];
+            spawned                    = &g_SpawnedActors[slot];
             effects[i]                 = spawned;
             spawned->header.flags      = 1;
             spawned->unk_06            = 0;
@@ -252,10 +252,10 @@ MATCH void func_801F7E6C(void) {
 }
 
 MATCH void func_801F7F84(void) {
-    ActorSlot** effects; /* the five effect slots spawned at +0x0C */
-    u8          i;
+    SpawnedActor** effects; /* the five effect slots spawned at +0x0C */
+    u8             i;
 
-    effects = (ActorSlot**)&g_Task->vx;
+    effects = (SpawnedActor**)&g_Task->vx;
     for (i = 0; i < 5; i++) {
         if (effects[i]->unk_06 == 0) {
             return;
@@ -306,14 +306,14 @@ MATCH void func_801F8328(void) {
 }
 
 MATCH void func_801F8370(void) {
-    ActorSlot* temp_v0;
-    s32        temp_v1;
-    u8         temp_v0_2;
+    SpawnedActor* temp_v0;
+    s32           temp_v1;
+    u8            temp_v0_2;
 
     if (g_Task->timer & 0x4) {
         temp_v1 = func_8019601C() & BYTE_MASK;
         if (temp_v1 != 0xFF) {
-            temp_v0               = &g_ActorSlots[temp_v1];
+            temp_v0               = &g_SpawnedActors[temp_v1];
             temp_v0->header.flags = 1;
             temp_v0->type         = 0x24;
         }

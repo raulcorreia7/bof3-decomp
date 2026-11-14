@@ -1,6 +1,6 @@
 /* Draws a fan of eight semi-transparent triangles from a point, the centre corner in the given shade. */
 /* GFX_DrawFan (scena07, scena08, area088) */
-MATCH void GFX_DrawFan(Point2D* point, s16 radius, u16 angle, u8 colour) {
+MATCH void GFX_DrawFan(Point2s* point, s16 radius, u16 angle, u8 colour) {
     POLY_G3* prim;
     u8       i;
 

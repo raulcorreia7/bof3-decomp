@@ -1,8 +1,8 @@
 #include "area100_13.h"
 
 MATCH void func_801F3108(void) {
-    Actor*   actor = g_Task;
-    Point3DL pos;
+    Actor*  actor = g_Task;
+    Point3l pos;
 
     actor->gravity += 0x100000;
     actor->vz += actor->gravity;

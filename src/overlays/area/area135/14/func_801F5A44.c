@@ -15,10 +15,10 @@ MATCH void func_801F5A44(void) {
     if (D_80143F03 == 0) {
         g_ScriptVars[3] = Actor_FindFreeSlot();
         if (g_ScriptVars[3] != GAME_NONE) {
-            g_ActorSlots[g_ScriptVars[3]].header.flags = 1;
-            g_ActorSlots[g_ScriptVars[3]].type         = 0x53;
-            g_ActorSlots[g_ScriptVars[3]].counter_18   = 0;
-            g_ActorSlots[g_ScriptVars[3]].counter_1C   = 6;
+            g_SpawnedActors[g_ScriptVars[3]].header.flags = 1;
+            g_SpawnedActors[g_ScriptVars[3]].type         = 0x53;
+            g_SpawnedActors[g_ScriptVars[3]].counter_18   = 0;
+            g_SpawnedActors[g_ScriptVars[3]].counter_1C   = 6;
         }
         g_ScriptVars[3] = 0;
     }

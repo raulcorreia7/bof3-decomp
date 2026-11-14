@@ -1,7 +1,7 @@
 #include "area103_13.h"
 
 MATCH void func_801F2E5C(void) {
-    Point3DL pos;
+    Point3l pos;
     /* FAKE: unused frame, 8 bytes between pos and matrix. */
     FAKE_STACK_PADS(s32, 2);
     MATRIX         matrix;

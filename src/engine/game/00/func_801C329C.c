@@ -3,17 +3,17 @@
 /* K&R call forwards a0 untouched as the mode argument. */
 
 MATCH void func_801C329C(void) {
-    s32        index;
-    Actor*     work;
-    s32        found;
-    u8         total;
-    u8         id;
-    u8         sel;
-    ActorSlot* record;
-    u16        value30;
-    u8         slot;
-    u32        scratch[4];
-    u32*       scratch_ptr;
+    s32           index;
+    Actor*        work;
+    s32           found;
+    u8            total;
+    u8            id;
+    u8            sel;
+    SpawnedActor* record;
+    u16           value30;
+    u8            slot;
+    u32           scratch[4];
+    u32*          scratch_ptr;
 
     scratch_ptr = scratch;
     found       = 0;
@@ -61,17 +61,17 @@ MATCH void func_801C329C(void) {
         if ((found & BYTE_MASK) != 0) {
             slot = Actor_FindFreeSlot() & BYTE_MASK;
             if (slot != GAME_NONE) {
-                g_ActorSlots[slot].header.flags     = 1;
-                g_ActorSlots[slot].type             = 0x41;
-                g_ActorSlots[slot].unk_08           = g_Task->direction_08;
-                COORD_INT(g_ActorSlots[slot].pos.x) = g_Task->screen_x;
-                value30                             = g_Task->screen_y;
-                g_ActorSlots[slot].unk_27           = 0;
-                g_ActorSlots[slot].unk_06           = 1;
-                record                              = g_ActorSlots;
-                work                                = g_Task;
-                COORD_INT(record[slot].pos.y)       = value30;
-                g_ActorSlots[slot].link             = work->unk_05;
+                g_SpawnedActors[slot].header.flags     = 1;
+                g_SpawnedActors[slot].type             = 0x41;
+                g_SpawnedActors[slot].unk_08           = g_Task->direction_08;
+                COORD_INT(g_SpawnedActors[slot].pos.x) = g_Task->screen_x;
+                value30                                = g_Task->screen_y;
+                g_SpawnedActors[slot].unk_27           = 0;
+                g_SpawnedActors[slot].unk_06           = 1;
+                record                                 = g_SpawnedActors;
+                work                                   = g_Task;
+                COORD_INT(record[slot].pos.y)          = value30;
+                g_SpawnedActors[slot].link             = work->unk_05;
             }
         }
     }

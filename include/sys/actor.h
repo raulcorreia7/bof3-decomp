@@ -150,7 +150,7 @@ ASSERT_SIZE(ActorStateWord, 0x04);
 /* The role tail at +0x8C. Area code that tests the player's distance reads the half extents
  * of the box (func_801A1A58, func_801A2C94, func_801A2DB4); the pond fish rows keep the
  * stamina gauge there (area030/04 func_801E026C), the maximum first. */
-typedef union ActorExt {
+typedef union ActorTail {
     struct {
         s16 half_width;
         s16 half_height;
@@ -160,22 +160,22 @@ typedef union ActorExt {
         s16 stamina_max;
         u16 stamina;
     } fishing;
-} ActorExt;
+} ActorTail;
 
-ASSERT_SIZE(ActorExt, 0x04);
+ASSERT_SIZE(ActorTail, 0x04);
 
-typedef union ActorParam {
+typedef union ActorRole {
     u8 unk_0B;
     u8 cloud_layer;     /* the world-map cloud layer; two less is its texture row */
-    u8 actor_slot;      /* the g_ActorSlots row a helper actor was spawned in */
+    u8 actor_slot;      /* the g_SpawnedActors row a helper actor was spawned in */
     u8 party_index;     /* the party row the actor follows */
     u8 scene_record_id; /* the scene record Area_SelectSceneRecord selects */
     u8 facing;
     u8 scene_event_flag;
     u8 turn_step;
-} ActorParam;
+} ActorRole;
 
-ASSERT_SIZE(ActorParam, 1);
+ASSERT_SIZE(ActorRole, 1);
 
 typedef struct Actor {
     TaskHeader     header;            /* 0x00 */
@@ -190,7 +190,7 @@ typedef struct Actor {
     u8             direction_08;      /* 0x08 - commu00 calls it the cue resource */
     u8             timer;             /* 0x09 - counted up or down by the area step handlers */
     u8             unk_0A;            /* 0x0A */
-    ActorParam     param;             /* 0x0B */
+    ActorRole      param;             /* 0x0B */
     s32            vx;                /* 0x0C added to x each step */
     s32            vy;                /* 0x10 added to y each step */
     s32            vz;                /* 0x14 signed vertical speed */
@@ -245,7 +245,7 @@ typedef struct Actor {
     s32            walk_dest_x;       /* 0x80 - x the walk ends at */
     s32            walk_dest_y;       /* 0x84 - y the walk ends at */
     u32            unk_88;            /* 0x88 */
-    ActorExt       ext;               /* 0x8C - see ActorExt */
+    ActorTail      ext;               /* 0x8C - see ActorTail */
     u16            roll_90;           /* 0x90 */
     u8             facing_92;         /* 0x92 - the facing direction: the fishing code writes
                                 *        `rand() & 3` and turns the row by it

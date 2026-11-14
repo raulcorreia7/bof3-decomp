@@ -5,40 +5,40 @@
 #include "types.h"
 
 /* Packed vectors used across images; PsyQ vectors retain their SDK padding. */
-typedef struct Point2D {
+typedef struct Point2s {
     s16 x;
     s16 y;
-} Point2D;
+} Point2s;
 
-typedef struct UPoint2D {
+typedef struct Point2u {
     u16 x;
     u16 y;
-} UPoint2D;
+} Point2u;
 
-typedef struct Point2DL {
+typedef struct Point2l {
     s32 x;
     s32 y;
-} Point2DL;
+} Point2l;
 
 /* A signed step on each axis, one byte wide. */
-typedef struct Offset2DB {
+typedef struct Offset2b {
     s8 dx;
     s8 dy;
-} Offset2DB;
+} Offset2b;
 
-typedef struct Point3D {
+typedef struct Point3s {
     s16 x;
     s16 y;
     s16 z;
-} Point3D;
+} Point3s;
 
 /* Three signed words: a position or an angle accumulator that the game stores
  * packed, without the SDK's pad word. */
-typedef struct Point3DL {
+typedef struct Point3l {
     s32 x;
     s32 y;
     s32 z;
-} Point3DL;
+} Point3l;
 
 typedef struct Coord3 {
     Coord x;
@@ -57,23 +57,23 @@ static inline void WorldPos_Copy(WorldPos* dst, WorldPos* src) {
 }
 
 /* A sprite's horizontal and vertical size, 16.16; 0x10000 is full size. */
-typedef Point2DL SpriteScale;
+typedef Point2l SpriteScale;
 
 ASSERT_SIZE(Coord3, 0x0C);
 ASSERT_OFFSET(Coord3, x, 0x00);
 ASSERT_OFFSET(Coord3, y, 0x04);
 ASSERT_OFFSET(Coord3, z, 0x08);
 
-ASSERT_SIZE(Point2D, 0x04);
-ASSERT_OFFSET(Point2D, y, 0x02);
-ASSERT_SIZE(UPoint2D, 0x04);
-ASSERT_OFFSET(UPoint2D, y, 0x02);
-ASSERT_SIZE(Point2DL, 0x08);
-ASSERT_OFFSET(Point2DL, y, 0x04);
-ASSERT_SIZE(Offset2DB, 0x02);
-ASSERT_SIZE(Point3D, 0x06);
-ASSERT_SIZE(Point3DL, 0x0C);
-ASSERT_OFFSET(Point3DL, y, 0x04);
-ASSERT_OFFSET(Point3DL, z, 0x08);
+ASSERT_SIZE(Point2s, 0x04);
+ASSERT_OFFSET(Point2s, y, 0x02);
+ASSERT_SIZE(Point2u, 0x04);
+ASSERT_OFFSET(Point2u, y, 0x02);
+ASSERT_SIZE(Point2l, 0x08);
+ASSERT_OFFSET(Point2l, y, 0x04);
+ASSERT_SIZE(Offset2b, 0x02);
+ASSERT_SIZE(Point3s, 0x06);
+ASSERT_SIZE(Point3l, 0x0C);
+ASSERT_OFFSET(Point3l, y, 0x04);
+ASSERT_OFFSET(Point3l, z, 0x08);
 
 #endif

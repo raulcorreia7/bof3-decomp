@@ -122,7 +122,7 @@ ASSERT_SIZE(BattleEffectTargetColumn, BATTLE_EFFECT_STRIDE);
     }
 
 /* One remembered position of an effect's trail. */
-typedef Point2D TrailPoint;
+typedef Point2s TrailPoint;
 
 #define BMAGIC_TRAIL_LENGTH 32
 

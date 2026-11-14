@@ -179,14 +179,14 @@
 
 /* The text, panel and cue handlers share this state block. */
 typedef struct MenuState {
-    UPoint2D text;
-    UPoint2D origin;
-    u8       step_id;         /* 0x08 */
-    u8       panel_index;     /* 0x09 */
-    s8       last_row;        /* 0x0A */
-    s8       selection_index; /* 0x0B */
-    s16      cue_counter;     /* 0x0C */
-    s16      cue_timer;       /* 0x0E */
+    Point2u text;
+    Point2u origin;
+    u8      step_id;         /* 0x08 */
+    u8      panel_index;     /* 0x09 */
+    s8      last_row;        /* 0x0A */
+    s8      selection_index; /* 0x0B */
+    s16     cue_counter;     /* 0x0C */
+    s16     cue_timer;       /* 0x0E */
 } MenuState;
 
 ASSERT_SIZE(MenuState, 0x10);

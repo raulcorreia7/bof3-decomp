@@ -54,13 +54,13 @@ MATCH u8 func_8019EEE4(void) {
             }
             index = (s8)Actor_FindFreeSlot();
             if (index != -1) {
-                g_ActorSlots[index].header.flags     = 1;
-                g_ActorSlots[index].type             = 0x34;
-                g_ActorSlots[index].header.mode      = 1;
-                g_ActorSlots[index].pos.x.fixed      = g_Task->pos.x.fixed;
-                g_ActorSlots[index].pos.y.fixed      = g_Task->pos.y.fixed;
-                COORD_INT(g_ActorSlots[index].pos.z) = Area_SampleHeight(g_ActorSlots[index].pos.x.fixed, g_ActorSlots[index].pos.y.fixed) + 0x100;
-                g_ActorSlots[index].link             = 0;
+                g_SpawnedActors[index].header.flags     = 1;
+                g_SpawnedActors[index].type             = 0x34;
+                g_SpawnedActors[index].header.mode      = 1;
+                g_SpawnedActors[index].pos.x.fixed      = g_Task->pos.x.fixed;
+                g_SpawnedActors[index].pos.y.fixed      = g_Task->pos.y.fixed;
+                COORD_INT(g_SpawnedActors[index].pos.z) = Area_SampleHeight(g_SpawnedActors[index].pos.x.fixed, g_SpawnedActors[index].pos.y.fixed) + 0x100;
+                g_SpawnedActors[index].link             = 0;
             }
             g_Game.members[0].unk_07 = 1;
         } else {

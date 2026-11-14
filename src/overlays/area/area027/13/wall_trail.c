@@ -316,13 +316,13 @@ MATCH void func_801F31CC(void) {
     point[0] = 0xE340u;
     point[1] = 0xE3C0u;
     point[2] = 0;
-    func_801F3480((const Point3D*)point, 0, 0x13500126u);
+    func_801F3480((const Point3s*)point, 0, 0x13500126u);
     Area_AddCellPrim(TO_COORD(70) + COORD_HALF, TO_COORD(71) + COORD_HALF, 0, 0x28);
 
     point[0] = 0xE340u;
     point[1] = 0xE4C0u;
     point[2] = 0;
-    func_801F3480((const Point3D*)point, ONE / 2, 0x13510125u);
+    func_801F3480((const Point3s*)point, ONE / 2, 0x13510125u);
     Area_AddCellPrim(TO_COORD(70) + COORD_HALF, TO_COORD(73) + COORD_HALF, -1, 0x28);
 }
 
@@ -338,13 +338,13 @@ MATCH void func_801F32B0(void) {
     point[0] = 0xE340u;
     point[1] = 0xE3C0u;
     point[2] = 0;
-    func_801F3480((const Point3D*)point, *(s16*)&g_Task->vx, 0x13500126u);
+    func_801F3480((const Point3s*)point, *(s16*)&g_Task->vx, 0x13500126u);
     Area_AddCellPrim(TO_COORD(70) + COORD_HALF, TO_COORD(71) + COORD_HALF, -1, 0x28);
 
     point[0] = 0xE340u;
     point[1] = 0xE4C0u;
     point[2] = 0;
-    func_801F3480((const Point3D*)point, (s16)(ONE / 2 - g_Task->vx), 0x13510125u);
+    func_801F3480((const Point3s*)point, (s16)(ONE / 2 - g_Task->vx), 0x13510125u);
     Area_AddCellPrim(TO_COORD(70) + COORD_HALF, TO_COORD(73) + COORD_HALF, -1, 0x28);
 }
 
@@ -360,11 +360,11 @@ MATCH void func_801F33A8(void) {
     point[0] = ((u >> 9) - 0x4000);
     point[1] = ((v >> 9) - 0x4000);
     point[2] = 0;
-    func_801F3480((const Point3D*)point, ONE / 4, 0x13500126u);
+    func_801F3480((const Point3s*)point, ONE / 4, 0x13500126u);
     Area_AddCellPrim(u, v, -1, 0x28);
 }
 
-MATCH POLY_FT4* func_801F3480(const Point3D* point, s32 angle, u32 texture) {
+MATCH POLY_FT4* func_801F3480(const Point3s* point, s32 angle, u32 texture) {
     SVECTOR   rotation;
     MATRIX    matrix;
     long      depth;
@@ -479,17 +479,17 @@ MATCH void func_801F36D0(void) {
 }
 
 /* Original sets no mode argument (etc/game/00 revision ignores it); declared
- * arg-less to match. Table is the etc/game/00 ActorSlot table. */
+ * arg-less to match. Table is the etc/game/00 SpawnedActor table. */
 
 MATCH void func_801F3710(void) {
-    s32        actor_slot;
-    ActorSlot* slot;
+    s32           actor_slot;
+    SpawnedActor* slot;
 
     actor_slot = Actor_FindFreeSlot() & BYTE_MASK;
     if (actor_slot == GAME_NONE) {
         return;
     }
-    slot               = &g_ActorSlots[actor_slot];
+    slot               = &g_SpawnedActors[actor_slot];
     slot->header.flags = 1;
     slot->type         = 0x2F;
 }

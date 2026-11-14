@@ -283,13 +283,13 @@ MATCH void func_801F3A78(void) {
     if (g_Task->param.unk_0B == GAME_NONE) {
         return;
     }
-    g_ActorSlots[g_Task->param.unk_0B].header.flags = 1;
-    g_ActorSlots[g_Task->param.unk_0B].type         = 0x50;
-    g_ActorSlots[g_Task->param.unk_0B].unk_06       = g_Task->direction_08;
-    g_ActorSlots[g_Task->param.unk_0B].pos.x.fixed  = g_Task->pos.x.fixed;
-    g_ActorSlots[g_Task->param.unk_0B].pos.y.fixed  = g_Task->pos.y.fixed + 0x4000;
-    g_ActorSlots[g_Task->param.unk_0B].pos.z.fixed  = g_Task->pos.z.fixed + 0x01000000;
-    g_ActorSlots[g_Task->param.unk_0B].layer        = 0x78;
+    g_SpawnedActors[g_Task->param.unk_0B].header.flags = 1;
+    g_SpawnedActors[g_Task->param.unk_0B].type         = 0x50;
+    g_SpawnedActors[g_Task->param.unk_0B].unk_06       = g_Task->direction_08;
+    g_SpawnedActors[g_Task->param.unk_0B].pos.x.fixed  = g_Task->pos.x.fixed;
+    g_SpawnedActors[g_Task->param.unk_0B].pos.y.fixed  = g_Task->pos.y.fixed + 0x4000;
+    g_SpawnedActors[g_Task->param.unk_0B].pos.z.fixed  = g_Task->pos.z.fixed + 0x01000000;
+    g_SpawnedActors[g_Task->param.unk_0B].layer        = 0x78;
 }
 
 MATCH void func_801F3C18(void) {
@@ -298,9 +298,9 @@ MATCH void func_801F3C18(void) {
     value                = Actor_FindFreeSlot();
     g_Task->param.unk_0B = value;
     if (g_Task->param.unk_0B != GAME_NONE) {
-        g_ActorSlots[g_Task->param.unk_0B].header.flags = 1;
-        g_ActorSlots[g_Task->param.unk_0B].type         = 0x4F;
-        g_ActorSlots[g_Task->param.unk_0B].link         = ((s32)(-(((s32)g_CurrentActor - (s32)g_Actors) * 0xD79435E5)) >> 3);
+        g_SpawnedActors[g_Task->param.unk_0B].header.flags = 1;
+        g_SpawnedActors[g_Task->param.unk_0B].type         = 0x4F;
+        g_SpawnedActors[g_Task->param.unk_0B].link         = ((s32)(-(((s32)g_CurrentActor - (s32)g_Actors) * 0xD79435E5)) >> 3);
     }
 }
 
@@ -310,8 +310,8 @@ MATCH void func_801F3D28(void) {
     value                = Actor_FindFreeSlot();
     g_Task->param.unk_0B = value;
     if (g_Task->param.unk_0B != GAME_NONE) {
-        g_ActorSlots[g_Task->param.unk_0B].header.flags = 1;
-        g_ActorSlots[g_Task->param.unk_0B].type         = 0x4E;
+        g_SpawnedActors[g_Task->param.unk_0B].header.flags = 1;
+        g_SpawnedActors[g_Task->param.unk_0B].type         = 0x4E;
     }
 }
 
@@ -325,11 +325,11 @@ MATCH void func_801F3DCC(void) {
     if (g_Task->param.unk_0B == GAME_NONE) {
         return;
     }
-    g_ActorSlots[g_Task->param.unk_0B].header.flags = 1;
-    g_ActorSlots[g_Task->param.unk_0B].type         = 0x50;
-    g_ActorSlots[g_Task->param.unk_0B].unk_06       = g_Task->direction_08;
-    g_ActorSlots[g_Task->param.unk_0B].pos.x.fixed  = g_Task->pos.x.fixed;
-    g_ActorSlots[g_Task->param.unk_0B].pos.y.fixed  = g_Task->pos.y.fixed + COORD_HALF;
-    g_ActorSlots[g_Task->param.unk_0B].pos.z.fixed  = g_Task->pos.z.fixed + 0x01000000;
-    g_ActorSlots[g_Task->param.unk_0B].layer        = 0x3C;
+    g_SpawnedActors[g_Task->param.unk_0B].header.flags = 1;
+    g_SpawnedActors[g_Task->param.unk_0B].type         = 0x50;
+    g_SpawnedActors[g_Task->param.unk_0B].unk_06       = g_Task->direction_08;
+    g_SpawnedActors[g_Task->param.unk_0B].pos.x.fixed  = g_Task->pos.x.fixed;
+    g_SpawnedActors[g_Task->param.unk_0B].pos.y.fixed  = g_Task->pos.y.fixed + COORD_HALF;
+    g_SpawnedActors[g_Task->param.unk_0B].pos.z.fixed  = g_Task->pos.z.fixed + 0x01000000;
+    g_SpawnedActors[g_Task->param.unk_0B].layer        = 0x3C;
 }

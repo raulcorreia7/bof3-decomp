@@ -76,7 +76,7 @@ extern Magic064RingSteps D_801EEC5C;
 extern s8 D_801F138C[][2];
 
 /* One sprite cell's texture coordinates: u and v of the cell in the effect's texture page. */
-typedef UPoint2D Magic064SpriteUv;
+typedef Point2u Magic064SpriteUv;
 
 extern Magic064SpriteUv D_801F13A4[];
 

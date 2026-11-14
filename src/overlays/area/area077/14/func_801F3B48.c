@@ -1,6 +1,6 @@
 #include "area077_14.h"
 
-MATCH void func_801F3B48(Point2D* pos, u8 shade) {
+MATCH void func_801F3B48(Point2s* pos, u8 shade) {
     TILE_1* tile = (TILE_1*)g_GfxPrimCursor;
 
     SetTile1(tile);

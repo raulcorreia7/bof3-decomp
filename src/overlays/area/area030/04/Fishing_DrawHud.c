@@ -14,11 +14,11 @@ MATCH void Fishing_DrawHud(s16 panel_x, s16 panel_y) {
     Fishing_DrawSprite(14, 3, panel_x, panel_y);
     Fishing_DrawSprite(15, 3, (panel_x + 256), panel_y);
 
-    if (g_ActorSlots[0].header.mode == 0) {
+    if (g_SpawnedActors[0].header.mode == 0) {
         value = 0;
     } else {
         /* FAKE: retail reads the low byte of the y integer half (lbu). */
-        value = 62 - *(u8*)&COORD_INT(g_ActorSlots[0].pos.y);
+        value = 62 - *(u8*)&COORD_INT(g_SpawnedActors[0].pos.y);
     }
 
     CLAMP_MIN(value, 0);

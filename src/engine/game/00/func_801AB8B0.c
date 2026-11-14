@@ -25,7 +25,7 @@ MATCH s32 func_801AB8B0(GameCursorState* state, u8* table, s32 value) {
             state->index_0A += 2;
             break;
         case 0x9F:
-            if (ACTOR_IN_USE(g_ActorSlots[g_Task->param.actor_slot])) {
+            if (ACTOR_IN_USE(g_SpawnedActors[g_Task->param.actor_slot])) {
                 state->index_0A -= 1;
             }
             break;

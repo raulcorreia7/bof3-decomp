@@ -37,19 +37,19 @@ MATCH void func_801F4378(void) {
                 g_AreaCameraStep                 = 0;
                 g_SaveData.scene_event.selection = Actor_FindFreeSlot();
                 if (g_SaveData.scene_event.selection != 0xFF) {
-                    g_ActorSlots[g_SaveData.scene_event.selection].header.flags   = ACTOR_FLAG_IN_USE;
-                    g_ActorSlots[g_SaveData.scene_event.selection].type           = 0x13;
-                    g_ActorSlots[g_SaveData.scene_event.selection].camera_angle.x = -0x302;
-                    g_ActorSlots[g_SaveData.scene_event.selection].camera_angle.y = g_AreaCameraAngle.vy;
-                    g_ActorSlots[g_SaveData.scene_event.selection].camera_angle.z = g_AreaCameraAngle.vz;
-                    g_ActorSlots[g_SaveData.scene_event.selection].layer          = 0x10;
+                    g_SpawnedActors[g_SaveData.scene_event.selection].header.flags   = ACTOR_FLAG_IN_USE;
+                    g_SpawnedActors[g_SaveData.scene_event.selection].type           = 0x13;
+                    g_SpawnedActors[g_SaveData.scene_event.selection].camera_angle.x = -0x302;
+                    g_SpawnedActors[g_SaveData.scene_event.selection].camera_angle.y = g_AreaCameraAngle.vy;
+                    g_SpawnedActors[g_SaveData.scene_event.selection].camera_angle.z = g_AreaCameraAngle.vz;
+                    g_SpawnedActors[g_SaveData.scene_event.selection].layer          = 0x10;
                 }
                 g_SceneEventStep = 3;
             }
             break;
 
         case 3:
-            if ((g_ActorSlots[g_SaveData.scene_event.selection].header.flags & ACTOR_FLAG_IN_USE) == 0) {
+            if ((g_SpawnedActors[g_SaveData.scene_event.selection].header.flags & ACTOR_FLAG_IN_USE) == 0) {
                 SYS_SetFlag(g_SaveData.scene_event_flags, 0x11);
                 g_SceneEventStep = 9;
             }
@@ -58,18 +58,18 @@ MATCH void func_801F4378(void) {
         case 4:
             g_SaveData.scene_event.selection = Actor_FindFreeSlot();
             if (g_SaveData.scene_event.selection != 0xFF) {
-                g_ActorSlots[g_SaveData.scene_event.selection].header.flags   = ACTOR_FLAG_IN_USE;
-                g_ActorSlots[g_SaveData.scene_event.selection].type           = 0x13;
-                g_ActorSlots[g_SaveData.scene_event.selection].camera_angle.x = -0x2AA;
-                g_ActorSlots[g_SaveData.scene_event.selection].camera_angle.y = g_AreaCameraAngle.vy;
-                g_ActorSlots[g_SaveData.scene_event.selection].camera_angle.z = g_AreaCameraAngle.vz;
-                g_ActorSlots[g_SaveData.scene_event.selection].layer          = 0x10;
+                g_SpawnedActors[g_SaveData.scene_event.selection].header.flags   = ACTOR_FLAG_IN_USE;
+                g_SpawnedActors[g_SaveData.scene_event.selection].type           = 0x13;
+                g_SpawnedActors[g_SaveData.scene_event.selection].camera_angle.x = -0x2AA;
+                g_SpawnedActors[g_SaveData.scene_event.selection].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[g_SaveData.scene_event.selection].camera_angle.z = g_AreaCameraAngle.vz;
+                g_SpawnedActors[g_SaveData.scene_event.selection].layer          = 0x10;
             }
             g_SceneEventStep = 5;
             break;
 
         case 5:
-            if ((g_ActorSlots[g_SaveData.scene_event.selection].header.flags & ACTOR_FLAG_IN_USE) == 0) {
+            if ((g_SpawnedActors[g_SaveData.scene_event.selection].header.flags & ACTOR_FLAG_IN_USE) == 0) {
                 g_AreaCameraStep    = 0x40;
                 g_SceneEventStep    = 6;
                 g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;

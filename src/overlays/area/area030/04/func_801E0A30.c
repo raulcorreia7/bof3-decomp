@@ -6,10 +6,10 @@ MATCH void func_801E0A30(void) {
     s32 i;
 
     for (i = 0; i < 7; i++) {
-        g_ActorSlots[i].header.mode = 0;
-        g_ActorSlots[i].header.step = 0;
-        g_ActorSlots[i].unk_03      = 0;
-        g_ActorSlots[i].unk_04      = 0;
+        g_SpawnedActors[i].header.mode = 0;
+        g_SpawnedActors[i].header.step = 0;
+        g_SpawnedActors[i].unk_03      = 0;
+        g_SpawnedActors[i].unk_04      = 0;
     }
     for (i = 7; i < 20; i++) {
         Actor_Free(i & BYTE_MASK);

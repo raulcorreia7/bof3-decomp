@@ -258,7 +258,7 @@ typedef struct Battler {
     /* 0x1C */ s16 hp;      /* 0 on KO */
     /* 0x1E */ s16 unk_1E;
     /* 0x20 */ u8  pad_20[4];
-    /* 0x24 */ Point2D coord;
+    /* 0x24 */ Point2s coord;
 } Battler;
 
 void Fairy_SetJob(u8 fairy_index, u8 job_type);
@@ -271,7 +271,7 @@ typedef struct Battler {
     s16 half_1C;            /* the width and offset, not the role */
     s16 hp2;                /* a guess with a number */
     u8  data[4];
-    Point2D pos_24;
+    Point2s pos_24;
 } Battler;
 
 void Fairy_SetJob(u8 job, u8 idx);   /* the thing acted on last; abbreviated */
@@ -348,7 +348,7 @@ shared type, with its comment, so the meaning stays when the layout is reused.
 
 ```c
 /* A point on the 320x240 screen, in pixels. */
-typedef UPoint2D ScreenPoint;
+typedef Point2u ScreenPoint;
 ```
 
 **Don't**
@@ -357,7 +357,7 @@ typedef UPoint2D ScreenPoint;
 typedef struct { u16 x; u16 y; } ScreenPointData;   /* a second layout, a filler word */
 ```
 
-A role that recurs gets one typedef over the shared block (`Point2D`, `Point3DL`, `Coord3D`, `SVECTOR`,
+A role that recurs gets one typedef over the shared block (`Point2s`, `Point3l`, `Coord3D`, `SVECTOR`,
 ...), in the header that owns its domain, and every member, parameter and global of that role uses it
 (`WorldPos`, `SpriteScale`, `CameraAngle`). A one-off keeps the block type and carries the role in its
 member name. Never one typedef per member, never a second layout.
