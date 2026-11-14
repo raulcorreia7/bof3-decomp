@@ -7,7 +7,7 @@ from check_sources import images, layout_names, orphans
 IMAGES = {
     "overlays/plchar/plp278/00": (
         "config/emi/plchar/plp278/00/splat.yaml",
-        {"C", "D_801CE400"},
+        {"PlChar_FieldTask", "D_801CE400"},
     )
 }
 
