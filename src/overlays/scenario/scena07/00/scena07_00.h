@@ -41,6 +41,10 @@ extern Callback        D_801FDE10[];
 extern Callback        D_801FDE1C[];
 extern SceneTimerSpawn D_801FDE40[12];
 extern u8              D_801FDE88[4];
+extern u8              D_801FDD9C[];
+extern u8              D_801FDDA4[];
+extern u8              D_801FDE8C[];
+extern u8              D_801FDF7C[];
 /* D_801FDF8C */
 extern SceneFunc       g_SceneActorDispatch[];
 extern u8              D_801FDFC4;
@@ -106,6 +110,7 @@ static inline void Scene_PlaceAtLead(void) {
 }
 
 void      func_801F83D0(u8* row);
+void      func_801F8478(u8* row);
 void      func_801F88B8(void* table);
 void      func_801F8BE8(void* table);
 void      func_801FA38C(void);

@@ -1,11 +1,14 @@
 #include "scena01_00.h"
 #include "area/map.h"
+#include "overlays/area/Area_DrawDimQuad.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801F71C0);
+MATCH void func_801F71C0(void) {
+    AREA_DRAW_DIM_QUAD(3);
+}
 
 MATCH void func_801F729C(void) {
     POLY_G4* prim;
