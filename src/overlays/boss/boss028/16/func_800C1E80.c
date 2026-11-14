@@ -1,8 +1,5 @@
 #include "boss028_16.h"
 
-/* The scratchpad work area is the party member this landing moves; each use reloads the cell. */
-#define BOSS028_PARTY ((PartyMember*)g_Task)
-
 MATCH void func_800C1E80(void) {
     COORD_INT(BOSS028_PARTY->pos.z) += BOSS028_PARTY->unk_14;
     BOSS028_PARTY->unk_14 += BOSS028_PARTY->unk_20;
