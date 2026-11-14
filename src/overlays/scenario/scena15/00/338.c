@@ -237,7 +237,7 @@ MATCH void func_801F7FFC(s16 x, s16 y) {
     setRGB1(prim, 0x90, 0x90, 0x90);
     setRGB2(prim, 0, red, 0);
     setRGB3(prim, 0, green, 0);
-    SCENA15_SPRITE_FINISH(prim);
+    SCENA15_SPRITE_END(prim);
 }
 
 /* Draw the 24 by 48 tinted sprite at the screen point, its texture window centred on the work record's screen position. */
@@ -255,7 +255,7 @@ MATCH void func_801F81D8(s16 x, s16 y) {
     setRGB1(prim, red, red, red);
     setRGB2(prim, green, green, green);
     setRGB3(prim, green, green, green);
-    SCENA15_SPRITE_FINISH(prim);
+    SCENA15_SPRITE_END(prim);
 }
 
 MATCH void func_801F83AC(Point2u* out) {
