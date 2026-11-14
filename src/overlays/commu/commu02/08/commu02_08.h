@@ -7,7 +7,8 @@
 #include "shared/etc.h"
 
 extern u8            D_801457E8[][5];
-extern OverlayHeader D_801D0C00;
+/* g_EmiOverlayHeader */
+extern OverlayHeader g_EmiOverlayHeader;
 extern u8            D_801DAAA8;
 /* Entries of the handler tables. */
 #define COMMU02_EVENT0_STEP_COUNT       3

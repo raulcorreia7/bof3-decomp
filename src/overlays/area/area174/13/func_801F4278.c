@@ -1,3 +1,5 @@
 #include "area174_13.h"
 
-INCLUDE_ASM(func_801F4278);
+MATCH void func_801F4278(void) {
+    AREA_SPAWN_AHEAD_ACTOR(0);
+}

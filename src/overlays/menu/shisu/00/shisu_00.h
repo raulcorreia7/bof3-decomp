@@ -15,7 +15,8 @@
 #define g_SceneState        (*(struct SceneState*)&g_SceneState)
 
 extern u8            D_80148656;
-extern OverlayHeader D_801D0C00;
+/* g_EmiOverlayHeader */
+extern OverlayHeader g_EmiOverlayHeader;
 extern char          g_MenuStatFormat[];
 extern char          g_MenuZennyFormat[];
 /* D_801D0C2C */

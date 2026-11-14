@@ -10,6 +10,11 @@
 #include "area/spad.h"
 #include <rand.h>
 
+/* The vertex rows and the per-row transform state the stage animates. */
+#define AREA108_VERTEX_DST   MEM_PTR(u8, AREA_WORK + 0x7A8)
+#define AREA108_STATE_BASE   MEM_PTR(u16, AREA_WORK + 0x280)
+#define AREA108_STATE_OFFSET MEM_PTR(u16, AREA_WORK + 0x284)
+
 extern u8* D_80147B40;
 /* The cell the party leader's choice commits and the bit the event sets. */
 extern s16 D_80147B26[];
