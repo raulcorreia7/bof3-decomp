@@ -31,7 +31,7 @@ MATCH void func_801E3C14(void) {
     *(s16*)((u8*)self + 0xF8)                = 0;
     *(s16*)((u32)g_Battle.target_record + 6) = 0;
     *((u8*)g_Battle.target_record + 8)       = 0;
-    D_801EC2E8                               = *(BattleStatBlock*)&g_BattleCurrentEnemy->stats;
+    D_801EC2E8                               = g_BattleCurrentEnemy->stats;
     switch (LOBU(g_Battle.action_type)) {
         case BATTLE_ACTION_ATTACK:
             g_Battle.target_record->hp_change = Battle_ApplyDamage(g_Battle.active_battler, LOBU(g_Battle.target_selector));

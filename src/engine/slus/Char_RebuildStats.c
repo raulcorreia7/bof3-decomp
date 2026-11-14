@@ -1,11 +1,5 @@
 #include "engine/slus/slus.h"
 
-/* Playable-character attributes copied from base stats at +0x3C to current stats at +0x1C.
- * Char_RebuildStats then applies fatigue and equipment; @source: wiki:data/records. */
-typedef struct {
-    u8 data[32];
-} CharacterAttributes;
-
 /* copies the base block over the live block, refreshes derived
  * state, then retunes per-slot values against the matching table entry.
  */
@@ -17,7 +11,8 @@ MATCH void Char_RebuildStats(Character* record) {
     u8  index;
     u8* entry;
 
-    *(CharacterAttributes*)&record->stats.max_hp = *(CharacterAttributes*)&record->base.max_hp;
+    /* @source: wiki:data/records */
+    record->stats = record->base;
 
     Char_ApplyWeapon((u8*)record);
     Char_ApplyArmor((u8*)record);

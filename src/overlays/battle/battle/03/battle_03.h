@@ -103,8 +103,8 @@ typedef struct {
     Callback handlers[4];
 } BattleEffectStages;
 
-/* The 0x20-byte stat block from max_hp on (Character +0x1C, local-work
- * row +0x90), copied with unaligned word pairs. */
+/* A Stats-sized copy from an odd address (+3 into the source row), so it is
+ * byte-aligned where Stats is halfword-aligned; func_801D43EC reads it. */
 typedef struct BattleStatBlock {
     u8 bytes[0x20];
 } BattleStatBlock;
@@ -490,8 +490,8 @@ extern u8               D_801EB6D0[];
 extern u8               D_801EBF04;
 extern s32              D_801EBFA0;
 extern BattleEffect* volatile D_801EC2E0;
-extern u8              D_801EC2E4;
-extern BattleStatBlock D_801EC2E8;
+extern u8    D_801EC2E4;
+extern Stats D_801EC2E8;
 
 /* func_8009BBE8 */
 void               func_8009BFC4(void);

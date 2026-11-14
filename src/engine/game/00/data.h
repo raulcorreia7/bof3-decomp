@@ -70,6 +70,8 @@ typedef struct SceneSlots {
     s8 (*entry_10)(s32, s32);
 } SceneSlots;
 
+ASSERT_SIZE(SceneSlots, 0x14);
+
 /* Four-byte battle party slot. Area_PlaceEncounterParty marks it active, stores its sort
  * key and orders the slots by that key. */
 typedef struct PartySlot {

@@ -5,6 +5,7 @@
  * includes the file. */
 
 #include "overlays/scenario/scenario.h"
+#include "shared/CaptureSize.h"
 #include "shared/WorldSpin.h"
 #include "area/spad.h"
 
@@ -26,15 +27,6 @@ extern Callback D_801D397C[];
 extern Callback g_SceneEntityDispatch[];
 
 extern AreaSpawnSlot D_801D39A8[EFFECT_SLOT_COUNT];
-
-/* The screen-capture size for one row of the scene's capture table. */
-typedef struct CaptureSize {
-    s16 w;
-    s16 h;
-    s16 unk_04[2];
-} CaptureSize;
-
-ASSERT_SIZE(CaptureSize, 8);
 
 extern CaptureSize D_801D3940[];
 extern u16         D_801D40A8;
