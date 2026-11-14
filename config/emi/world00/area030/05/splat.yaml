@@ -15,6 +15,6 @@ segments:
     align: 4
     section_order: [.text, .data, .rodata, .bss]
     subsegments:
-      - [0xC, c, C]
-      - [0x21F0, .data, C]
+      - [0xC, c, Fishing_Shop]
+      - [0x21F0, .data, Fishing_Shop]
   - [0x2250]
