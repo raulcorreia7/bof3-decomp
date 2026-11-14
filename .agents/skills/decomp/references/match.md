@@ -64,6 +64,36 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
    the same bytes. A `FAKE_REG` is not source either: measure the plain, `register`, width,
    declaration-order and inlined forms before keeping one.
 
+   **A near miss** (the same instructions, other registers or order) is a question about one
+   compiler pass. Name the pass, then change what that pass reads; do not permute spellings.
+
+   - *Which saved register a value gets*: the allocator ranks a value by its uses over the
+     length it lives. Count both for the two values that swap, then move a last use earlier, a
+     first use later, or route a use through a `u8` or `s16` local so it stops counting.
+   - *Where an instruction sits in a block*: the scheduler reorders stores, loads and constant
+     loads inside a block, and moves a value across a call only when that value already lives
+     across some call. The order of stores in the assembly is not the source order: test the
+     statement orders. An unfilled load-delay `nop` means something could not move: a scalar
+     load (`LOW(member)`) stays behind a global store, a struct member load does not.
+   - *A reload, or a reuse, of a global pointer*: reuse stops at a join. A `for` loop has one
+     after it (its entry test) while GCC decides; a `do`-`while` has none.
+   - *Two values derived from the loop counter*: they are set up in reverse statement order,
+     and a value assigned on every path merges with `i++`; assign them inside the `if`.
+   - *A register reused as a constant in a compare*: reuse does not cross widths; make the
+     flag `u8`.
+   - *One odd instruction after everything else matches*: read what the form implies about the
+     source (a raw `andi` beside an `andi 0xFF` copy is an `s32` parameter with a `u8` local),
+     then fix the registers it disturbs with the rules above.
+
+   Ask the compiler before guessing: GCC's own dumps say what it decided. Compile the file with
+   `-dl -dg` added to its flags from `build/meson/compile_commands.json`: `<file>.lreg` lists each
+   pseudo-register with its uses, the insns it lives across and its hard register; `<file>.greg`
+   gives the order the global allocator took them in, their conflicts and each spill. Change the
+   source until those numbers put the registers where retail has them.
+
+   Script the forms: write the body once with its variable parts as a table, build each with
+   `tools/match.sh --diff`, and accept only a line that begins `match:`, then `check-<image>`.
+
 7. **Accept.** Replace the draft with a plain `MATCH` definition, or `HAND_ASM` for authored
    assembly ([markers](../../../../docs/matching.md#markers-and-unmatched-bodies)), and name it
    from evidence or keep `func_<ADDR>` ([natural names](name.md#natural-names)). After three
