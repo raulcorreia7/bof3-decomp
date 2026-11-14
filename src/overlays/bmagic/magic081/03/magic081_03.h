@@ -19,6 +19,7 @@ typedef struct Magic081SecondSteps {
     Callback steps[MAGIC081_SECOND_STEP_COUNT];
 } Magic081SecondSteps;
 
+extern Magic010SharedSteps D_801EEC04;
 extern Magic081Steps       D_801EEC14;
 extern Magic081SecondSteps D_801EEC20;
 /* The effect slot table BMagic_AllocEffect scans. */
@@ -27,6 +28,7 @@ extern BattleEffect        D_801EFA8C[];
 #define BMAGIC_EFFECT_SLOTS D_801EFA8C
 #define BMAGIC_EFFECT_COUNT BATTLE_EFFECT_COUNT
 
+void func_801EF330(void);
 void func_801EF6A0(void);
 
 #endif
