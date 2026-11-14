@@ -264,7 +264,7 @@ MATCH void func_801F009C(void) {
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     for (i = 0; i < MAGIC064_RING_COUNT; i++) {
-        if (D_801F13B4[i].unk_00 != 0) {
+        if (D_801F13B4[i].active != 0) {
             D_801F28B4 = &D_801F13B4[i];
             func_801F0448();
         }
@@ -313,16 +313,14 @@ MATCH void func_801F0310(void) {
 
 MATCH void func_801F0364(void) {
     u16 i;
-    u32 off;
 
     i = 0;
     do {
-        off = (u16)i * 0x1C;
-        if (FIELD(u8, D_801F13B4, off) != 0) {
+        if (D_801F13B4[i].active != 0) {
             return;
         }
         i++;
-    } while (i < 0xC0);
+    } while (i < MAGIC064_RING_COUNT);
     g_BattleEffectBattler->param.unk_0B &= 0xFE;
     func_801E5988();
 }
@@ -330,21 +328,19 @@ MATCH void func_801F0364(void) {
 MATCH void func_801F03D8(void) {
     u16 count;
     u16 i;
-    u32 off;
 
     count = 0;
     i     = 0;
     do {
-        off = (u16)i * 0x1C;
-        if (FIELD(u8, D_801F13B4, off) == 0) {
-            FIELD(u8, D_801F13B4, off) = 1;
+        if (D_801F13B4[i].active == 0) {
+            D_801F13B4[i].active = 1;
             count++;
             if (count == 6) {
                 return;
             }
         }
         i++;
-    } while (i < 0xC0);
+    } while (i < MAGIC064_RING_COUNT);
 }
 
 MATCH void func_801F0448(void) {
@@ -384,7 +380,7 @@ MATCH void func_801F05A4(void) {
     func_801F0B8C(D_801F28B4->x + FIXED_MUL(rcos(D_801F28B4->angle + 4), D_801F28B4->inner.part.integer), D_801F28B4->y + FIXED_MUL(rsin(D_801F28B4->angle + 4), D_801F28B4->inner.part.integer),
                   D_801F28B4->x + FIXED_MUL(rcos(D_801F28B4->angle + 4), D_801F28B4->outer.part.integer), D_801F28B4->y + FIXED_MUL(rsin(D_801F28B4->angle + 4), D_801F28B4->outer.part.integer));
     if (D_801F28B4->outer.part.integer > 0x1C0) {
-        D_801F28B4->unk_00 = 0;
+        D_801F28B4->active = 0;
         D_801F28B4->mode   = 0;
     }
 }

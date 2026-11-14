@@ -8,7 +8,6 @@
 /* The orbit radius the effect keeps in the scratchpad word; func_801EF944 scales its sin and cos by it. */
 #define s_Magic113OrbitRadius D_1F800000.view.scenario.math_00
 /* The three corners func_801EF4F0 projects for each ring triangle. */
-extern SVECTOR D_1F800014[];
 
 /* Count the effect timer up and finish the effect at 12. */
 static inline void Effect_CountUpTimer(void) {

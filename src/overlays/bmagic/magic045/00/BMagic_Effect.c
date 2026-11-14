@@ -34,8 +34,8 @@ MATCH void func_801EF118(void) {
 
     Actor_StepAnimLoop();
     selected = &g_Battle.selected_actor;
-    pos.vx   = ((*selected)->pos.x.fixed >> 9) - 0x4000;
-    pos.vy   = ((*selected)->pos.y.fixed >> 9) - 0x4000;
+    pos.vx   = ((*selected)->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
+    pos.vy   = ((*selected)->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
     pos.vz   = (COORD_INT((*selected)->pos.z) + 0xC0) >> 1;
     func_800AF3A0(pos, 0x30);
     if (func_800AF66C(*selected, 0x8000)) {

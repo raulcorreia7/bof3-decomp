@@ -48,7 +48,7 @@ MATCH s32 func_801EEF3C(void) {
         battler             = g_BattleEffectBattler;
         work                = g_Task;
         WorldPos_Copy(&work->pos, &battler->pos);
-        g_Task->unk_20 = (ratan2(battler->pos.x.fixed - work->pos.x.fixed, battler->pos.y.fixed - work->pos.y.fixed) + 0x800) & 0xFFF;
+        g_Task->unk_20 = (ratan2(battler->pos.x.fixed - work->pos.x.fixed, battler->pos.y.fixed - work->pos.y.fixed) + 0x800) & ANGLE_MASK;
         if (g_Task->param.unk_0B & 1) {
             g_Task->unk_18 = -((rand() & 3) + 4);
         } else {
@@ -72,9 +72,9 @@ MATCH void func_801EF0D8(void) {
         battler = (PartyMember*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
     }
     if (g_Task->param.unk_0B & 0x1) {
-        g_Task->unk_20 = (g_Task->unk_20 + 0x200) & 0xFFF;
+        g_Task->unk_20 = (g_Task->unk_20 + 0x200) & ANGLE_MASK;
     } else {
-        g_Task->unk_20 = (g_Task->unk_20 - 0x200) & 0xFFF;
+        g_Task->unk_20 = (g_Task->unk_20 - 0x200) & ANGLE_MASK;
     }
     g_Task->unk_14 = func_800AF4A0(battler, 0xC000, g_Task->unk_18 << 6);
     timer          = g_Task->timer + 4;
@@ -95,14 +95,14 @@ MATCH void func_801EF1DC(void) {
         battler = (PartyMember*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
     }
     if (g_Task->param.unk_0B & 0x1) {
-        g_Task->unk_20 = (g_Task->unk_20 + 0x200) & 0xFFF;
+        g_Task->unk_20 = (g_Task->unk_20 + 0x200) & ANGLE_MASK;
     } else {
-        g_Task->unk_20 = (g_Task->unk_20 - 0x200) & 0xFFF;
+        g_Task->unk_20 = (g_Task->unk_20 - 0x200) & ANGLE_MASK;
     }
     g_Task->unk_10 = g_Task->unk_14;
     g_Task->unk_14 = func_800AF4A0(battler, 0xC000, g_Task->unk_18 << 6);
     if (func_800AF66C((BattleRange*)battler, 0xC000) == 0) {
-        g_Task->unk_10 = (g_Task->unk_10 & 0xFFF) - (g_Task->unk_14 & 0xFFF);
+        g_Task->unk_10 = (g_Task->unk_10 & ANGLE_MASK) - (g_Task->unk_14 & ANGLE_MASK);
         if (g_Task->unk_10 < 0) {
             g_Task->unk_10 = ~g_Task->unk_10 + 1;
         }
@@ -127,8 +127,8 @@ MATCH void func_801EF434(void) {
     rot.vx = 0;
     rot.vy = 0;
     rot.vz = 0;
-    pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
-    pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
+    pos.vx = (g_Task->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
+    pos.vy = (g_Task->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
     pos.vz = -(COORD_INT(g_Task->pos.z) + 0x100) / 2;
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
@@ -193,8 +193,8 @@ MATCH void func_801EF8E8(void) {
     rot.vx = 0;
     rot.vy = 0;
     rot.vz = 0;
-    pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
-    pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
+    pos.vx = (g_Task->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
+    pos.vy = (g_Task->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
     if (g_Task->header.step < 3) {
         pos.vz = -COORD_INT(g_Task->pos.z) / 2;
     } else {

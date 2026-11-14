@@ -137,53 +137,53 @@ MATCH void func_801EF3E0(void) {
 
 MATCH void func_801EF490(void) {
     switch (g_Battle.action_id) {
-        case 0x04:
+        case ABILITY_THUNDER_STRIKE:
             g_Task->unk_03 = 0;
             g_Task->unk_04 = 0;
             break;
-        case 0x05:
+        case ABILITY_FLAME_STRIKE:
             g_Task->unk_03 = 1;
             g_Task->unk_04 = 1;
             break;
-        case 0x07:
+        case ABILITY_MIND_FLAY:
             g_Task->unk_03 = 0;
             g_Task->unk_04 = 2;
             break;
-        case 0x1D:
+        case ABILITY_WIND_STRIKE:
             g_Task->unk_03 = 1;
             g_Task->unk_04 = 3;
             break;
-        case 0x31:
+        case ABILITY_FROST_STRIKE:
             g_Task->unk_03 = 0;
             g_Task->unk_04 = 4;
             break;
-        case 0x9B:
+        case ABILITY_PYROKINESIS:
             g_Task->unk_03 = 1;
             g_Task->unk_04 = 5;
             break;
-        case 0x9C:
+        case ABILITY_HOLY_STRIKE:
             g_Task->unk_03 = 0;
             g_Task->unk_04 = 6;
             break;
-        /* kept: retail bounds the tree above 0x9C, so one id there shares the default; 0x9D is the nearest. */
-        case 0x9D:
+        /* FAKE: retail bounds the compare tree above ABILITY_HOLY_STRIKE, so one id there shares the default body; the bytes do not say which id, ABILITY_DEMONBANE is the nearest. */
+        case ABILITY_DEMONBANE:
         default:
             g_Task->unk_03 = 0;
             g_Task->unk_04 = 7;
             break;
-        case 0x85:
+        case ABILITY_FLAME_CLAW:
             g_Task->unk_03 = 1;
             g_Task->unk_04 = 8;
             break;
-        case 0x86:
+        case ABILITY_FROST_CLAW:
             g_Task->unk_03 = 1;
             g_Task->unk_04 = 9;
             break;
-        case 0x87:
+        case ABILITY_THUNDER_CLAW:
             g_Task->unk_03 = 1;
             g_Task->unk_04 = 10;
             break;
-        case 0x88:
+        case ABILITY_SHINING_CLAW:
             g_Task->unk_03 = 1;
             g_Task->unk_04 = 11;
             break;

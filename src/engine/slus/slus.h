@@ -15,6 +15,7 @@
 #include "sys/loader_tail.h"
 #include "sys/lz77.h"
 #include "sys/scene.h"
+#include "area/area.h"
 #include "area/fishing.h"
 #include "area/map.h"
 #include "menu/inventory.h"
@@ -40,8 +41,6 @@
 #define AREA_CODE_BASE             0x800F5000u          /* the area code base (AreaHandlerRecord.code_base_0C) */
 #define WORD_SIGN_BIT              0x80000000u          /* the sign bit of a word */
 #define COPY_KERNEL_ENTRY          ((u32) & D_8016432C) /* resume entry of the stream copy kernel */
-#define AREA_CELL_GRID_ROWS        56                   /* rows of the cell grids: g_AreaCellGrid and g_AreaCells */
-#define AREA_CELL_GRID_COLS        28                   /* columns of the cell grids */
 #define MAP_ZONE_COUNT             666                  /* records in g_AreaEncounterZones */
 #define MAP_ZONE_LIST_COUNT        200                  /* lists in g_EncounterZones, one per map index */
 #define MAP_ZONE_SIZE              0x08
@@ -398,24 +397,7 @@ extern s32              D_80010004;
 extern EMIDecodeContext D_800327A0[];
 extern u8               D_800E3800;
 
-/* The g_AreaCellPrims row bits of AreaCell.prim_id. */
-#define AREA_CELL_PRIM_MASK 0xFFF
-
-/* One cell of the 56 x 28 screen grid: the tile it shows (the grid-wrapped panel position that
- * Area_GetCell stores) and its row in g_AreaCellPrims (0 = none). */
-typedef struct AreaCell {
-    u8  tile_x;
-    u8  tile_y;
-    u16 prim_id; /* low 12 bits: the g_AreaCellPrims row; upper bits are flags */
-} AreaCell;
-
-extern AreaCell                    g_AreaCells[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
-/* Zero in the load image: 0x400 rows of one POLY_FT4 per display buffer
- * (g_FrameBufferIndex). In a row's second record, pad1 and pad2 hold the rows of the two linked
- * cells (0 = none); in its first, pad1 holds the pending upload request. */
-extern POLY_FT4                    g_AreaCellPrims[][2];
 extern u16                         g_AreaCellGrid[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
-extern u16                         g_AreaCellPrimFreeIds[0x400];
 extern u8                          D_80142CC0[];
 extern u8                          D_80142CE0[];
 extern u32                         D_80143740[];
@@ -620,9 +602,6 @@ extern s16                         D_801492E4;
 extern s32                         D_801492FC;
 extern s32                         D_80149300;
 extern s32                         D_80149304;
-extern s16                         g_AreaGridColCursor;
-extern s16                         g_AreaGridRowCursor;
-extern u16                         g_AreaCellPrimFreeIndex;
 extern u16                         D_80149336;
 extern u8                          D_8014933D;
 /* D_80149340 */

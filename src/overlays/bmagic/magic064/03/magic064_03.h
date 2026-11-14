@@ -3,6 +3,7 @@
 
 /* The bmagic/magic064/03 overlay. Only this image includes the file. */
 
+#include "area/area.h"
 #include "overlays/bmagic/bmagic.h"
 
 /* The twelve step callbacks at D_801EEC10, copied to the stack and indexed by the work state byte. */
@@ -32,7 +33,7 @@ extern Magic064SecondSteps D_801EEC70;
 
 /* The record D_801F28B4 points at: a ring of line segments that spreads from its centre. */
 typedef struct Magic064Ring {
-    u8    unk_00;
+    u8    active;      /* +0x00 nonzero while the ring is live */
     u8    mode;        /* +0x01 the handler func_801F0448 runs */
     s16   angle;       /* +0x02 the angle of the first segment */
     s32   x;           /* +0x04 the centre */
@@ -42,6 +43,16 @@ typedef struct Magic064Ring {
     s32   inner_speed; /* +0x14 added to the inner radius each frame */
     s32   outer_speed; /* +0x18 added to the outer radius each frame */
 } Magic064Ring;
+
+ASSERT_SIZE(Magic064Ring, 0x1C);
+ASSERT_OFFSET(Magic064Ring, mode, 0x01);
+ASSERT_OFFSET(Magic064Ring, angle, 0x02);
+ASSERT_OFFSET(Magic064Ring, x, 0x04);
+ASSERT_OFFSET(Magic064Ring, y, 0x08);
+ASSERT_OFFSET(Magic064Ring, inner, 0x0C);
+ASSERT_OFFSET(Magic064Ring, outer, 0x10);
+ASSERT_OFFSET(Magic064Ring, inner_speed, 0x14);
+ASSERT_OFFSET(Magic064Ring, outer_speed, 0x18);
 
 extern Magic064Ring* D_801F28B4;
 
@@ -56,6 +67,8 @@ extern Magic064Ring D_801F13B4[MAGIC064_RING_COUNT];
 typedef struct Magic064RingSteps {
     Callback steps[MAGIC064_RING_STEP_COUNT];
 } Magic064RingSteps;
+
+ASSERT_SIZE(Magic064RingSteps, 0x14);
 
 extern Magic064RingSteps D_801EEC5C;
 
@@ -77,22 +90,8 @@ void func_801F0B8C(s16 x0, s16 y0, s16 x1, s16 y1);
 void func_801F0EEC(u32 sprite, s32 blend, s32 color);
 void func_801F103C(void);
 
-/* The field map renderer state this image rebuilds, declared as the engine declares it in
- * src/engine/slus/slus.h. */
-typedef struct AreaCell {
-    u8  tile_x;
-    u8  tile_y;
-    u16 prim_id; /* low 12 bits: the g_AreaCellPrims row; upper bits are flags */
-} AreaCell;
-
-extern AreaCell g_AreaCells[56][28];
-extern POLY_FT4 g_AreaCellPrims[][2];
-extern u16      g_AreaCellPrimFreeIds[0x400];
-extern u16      g_AreaCellPrimFreeIndex;
-extern s16      g_AreaGridColCursor;
-extern s16      g_AreaGridRowCursor;
-extern u16      D_80149336;
-extern u8       D_8014933D;
+extern u16 D_80149336;
+extern u8  D_8014933D;
 
 void Area_LoadCellRowsNext(void);
 void Area_LoadCellRowsPrev(void);

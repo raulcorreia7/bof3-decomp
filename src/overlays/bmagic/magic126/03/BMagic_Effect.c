@@ -378,7 +378,7 @@ MATCH void func_801F037C(void) {
         return;
     }
 
-    diff           = (g_Task->unk_10 & 0xFFF) - (g_Task->unk_0C & 0xFFF);
+    diff           = (g_Task->unk_10 & ANGLE_MASK) - (g_Task->unk_0C & ANGLE_MASK);
     g_Task->unk_10 = diff;
     if (diff < 0) {
         g_Task->unk_10 = ~diff + 1;
@@ -404,7 +404,7 @@ MATCH void func_801F0494(void) {
         g_BattleEffects[slot].arg.unk_09   = 46;
         g_BattleEffectBattler->param.unk_0B += 1;
         for (i = 0; i < 64; i++) {
-            slot                         = func_801F1110();
+            slot                         = BMagic_AllocEffect();
             D_801F12BC[slot].battler     = g_BattleEffectBattler;
             D_801F12BC[slot].header.mode = 0;
             D_801F12BC[slot].unk_04      = i;
@@ -530,17 +530,8 @@ MATCH void func_801F0DA4(void) {
 
 INCLUDE_ASM(func_801F0ED0);
 
-MATCH u32 func_801F1110(void) {
-    u8 index;
-
-    for (index = 0u; index < 128; index++) {
-        if ((D_801F12BC[index].header.flags & 0x1) == 0) {
-            D_801F12BC[index].header.flags |= 1;
-            return index;
-        }
-    }
-    return 0xFFu;
-}
+/* func_801F1110 */
+#include "overlays/bmagic/BMagic_AllocEffect.h"
 
 MATCH void func_801F116C(void) {
     D_801F22BC->header.flags = 0;
@@ -555,9 +546,9 @@ MATCH void func_801F11AC(void) {
     TILE_1*      primitive;
 
     work      = D_801F22BC;
-    vec[0]    = (work->unk_10 >> 9) - 0x4000;
+    vec[0]    = (work->unk_10 >> 9) - AREA_CELL_ORIGIN;
     primitive = (TILE_1*)g_GfxPrimCursor;
-    vec[1]    = (work->unk_14 >> 9) - 0x4000;
+    vec[1]    = (work->unk_14 >> 9) - AREA_CELL_ORIGIN;
     vec[2]    = -((s16)(*(u16*)((u8*)work + 0x1A)) / 2);
     SetTile1(primitive);
     RotTransPers((SVECTOR*)vec, (long*)&primitive->x0, (long*)vec, (long*)&vec[2]);

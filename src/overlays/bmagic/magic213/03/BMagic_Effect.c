@@ -24,7 +24,7 @@ MATCH void func_801EED04(void) {
     if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
         for (i = 0; i < 8; i++) {
             index = i + BATTLE_PARTY_CHARACTERS_COUNT;
-            if (!(func_801DB524(index) & BYTE_MASK)) {
+            if (!(Battle_SlotIsBlocked(index) & BYTE_MASK)) {
                 slot                               = Battle_AllocEffect(1, 0x6B) & BYTE_MASK;
                 work                               = g_Task;
                 g_BattleEffects[slot].header.mode  = 0;
@@ -36,7 +36,7 @@ MATCH void func_801EED04(void) {
         }
     } else {
         for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
-            if (!(func_801DB524(i) & BYTE_MASK)) {
+            if (!(Battle_SlotIsBlocked(i) & BYTE_MASK)) {
                 slot                               = Battle_AllocEffect(1, 0x6B) & BYTE_MASK;
                 work                               = g_Task;
                 g_BattleEffects[slot].header.mode  = 0;

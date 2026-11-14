@@ -11,7 +11,6 @@ extern u16                 D_801EFCA4[][3];
 /* The Foretell score bonus, indexed by the standing party count less the standing enemy count. */
 extern s8                  D_801EFC9F[];
 
-u8   func_801DB524(u8 slot);
 void func_801DE8C0(s8 index, s8 record_kind, u8* text);
 
 void func_801EF55C(void);

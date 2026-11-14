@@ -15,7 +15,7 @@ MATCH void func_801EEC18(void) {
         if (D_801F0454[(u8)count << 5] & 0x1) {
             saved                 = g_BattleEffectBattler;
             swap                  = FIELD(PartyMember*, D_801F0470, (u8)count << 5);
-            g_BMagicOrbit         = D_801F0454 + ((u8)count << 5);
+            g_BMagicOrbit     = D_801F0454 + ((u8)count << 5);
             g_BattleEffectBattler = swap;
             func_801EF340();
             g_BattleEffectBattler = saved;
@@ -181,9 +181,9 @@ MATCH void func_801EF994(void) {
     rot.vx = 0;
     rot.vy = 0;
     off    = g_BMagicOrbit->angle + 0x800;
-    rot.vz = ((g_BMagicOrbit->unk_03 << 7) - off) & 0xFFF;
-    pos.vx = (g_BMagicOrbit->pos.x.fixed >> 9) - 0x4000;
-    pos.vy = (g_BMagicOrbit->pos.y.fixed >> 9) - 0x4000;
+    rot.vz = ((g_BMagicOrbit->unk_03 << 7) - off) & ANGLE_MASK;
+    pos.vx = (g_BMagicOrbit->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
+    pos.vy = (g_BMagicOrbit->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
     pos.vz = -COORD_INT(g_BMagicOrbit->pos.z) / 2;
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
@@ -203,7 +203,7 @@ MATCH void func_801EFA5C(void) {
     D_1F800000.view.effect.params[5] = g_BMagicOrbit->timer_05 * g_BMagicOrbit->unk_09;
     D_1F800000.view.effect.params[6] = g_BMagicOrbit->timer_06 * g_BMagicOrbit->unk_09;
     D_1F800000.view.effect.params[7] = g_BMagicOrbit->timer_07 * g_BMagicOrbit->unk_09;
-    /* kept: the vector base in a local makes the centre vector the register base of the corner writes. */
+    /* FAKE: the vector base in a local makes the centre vector the register base of the corner writes. */
     vec                              = D_1F800014;
     D_1F800014[0].vz                 = 0;
     D_1F800014[0].vy                 = 0;
@@ -240,7 +240,7 @@ MATCH void func_801EFD7C(void) {
 INCLUDE_ASM(func_801EFE04);
 
 MATCH void func_801EFF18(void) {
-    g_BMagicOrbit->angle       = (g_BMagicOrbit->angle + 0x20) & 0xFFF;
+    g_BMagicOrbit->angle       = (g_BMagicOrbit->angle + 0x20) & ANGLE_MASK;
     g_BMagicOrbit->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + (rsin((s16)g_BMagicOrbit->angle) << 5);
     g_BMagicOrbit->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbit->angle) << 5);
     g_BMagicOrbit->unk_09 += 2;
@@ -251,7 +251,7 @@ MATCH void func_801EFF18(void) {
 }
 
 MATCH void func_801EFFE8(void) {
-    g_BMagicOrbit->angle       = (g_BMagicOrbit->angle + 0x20) & 0xFFF;
+    g_BMagicOrbit->angle       = (g_BMagicOrbit->angle + 0x20) & ANGLE_MASK;
     g_BMagicOrbit->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + (rsin(g_BMagicOrbit->angle) << 5);
     g_BMagicOrbit->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbit->angle) << 5);
     g_BMagicOrbit->unk_0B++;
@@ -268,10 +268,10 @@ MATCH void func_801EFFE8(void) {
 MATCH void func_801F00F0(void) {
     if (g_BattleEffectBattler->header.step == 3) {
         g_BMagicOrbit->unk_0B += 4;
-        g_BMagicOrbit->angle = (g_BMagicOrbit->angle + 0x40) & 0xFFF;
+        g_BMagicOrbit->angle = (g_BMagicOrbit->angle + 0x40) & ANGLE_MASK;
     } else {
         g_BMagicOrbit->unk_0B += 1;
-        g_BMagicOrbit->angle = (g_BMagicOrbit->angle + 0x20) & 0xFFF;
+        g_BMagicOrbit->angle = (g_BMagicOrbit->angle + 0x20) & ANGLE_MASK;
     }
     g_BMagicOrbit->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + (rsin((s16)g_BMagicOrbit->angle) << 5);
     g_BMagicOrbit->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbit->angle) << 5);
@@ -283,10 +283,10 @@ MATCH void func_801F00F0(void) {
 MATCH void func_801F0220(void) {
     if (g_BattleEffectBattler->header.step == 3) {
         g_BMagicOrbit->unk_0B += 2;
-        g_BMagicOrbit->angle = (g_BMagicOrbit->angle + 0x40) & 0xFFF;
+        g_BMagicOrbit->angle = (g_BMagicOrbit->angle + 0x40) & ANGLE_MASK;
     } else {
         g_BMagicOrbit->unk_0B += 1;
-        g_BMagicOrbit->angle = (g_BMagicOrbit->angle + 0x20) & 0xFFF;
+        g_BMagicOrbit->angle = (g_BMagicOrbit->angle + 0x20) & ANGLE_MASK;
     }
     g_BMagicOrbit->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + (rsin((s16)g_BMagicOrbit->angle) << 5);
     g_BMagicOrbit->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + (rcos((s16)g_BMagicOrbit->angle) << 5);

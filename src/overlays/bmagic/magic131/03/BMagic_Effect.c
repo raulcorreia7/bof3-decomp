@@ -189,7 +189,7 @@ MATCH void func_801EF488(void) {
                 if (g_Game.members[slot].chr.status & 0x800) {
                     Actor_SelectScript((g_Task->facing + 0x30) & BYTE_MASK);
                 }
-                if (func_801DB524(slot) & BYTE_MASK) {
+                if (Battle_SlotIsBlocked(slot) & BYTE_MASK) {
                     Actor_SelectScript((g_Task->facing + 0x1C) & BYTE_MASK);
                 }
                 i++;
@@ -658,10 +658,10 @@ MATCH void func_801F1844(void) {
         SetSemiTrans(prim, 1);
         prim->x0                         = D_1F800000.view.effect.params[6];
         prim->y0                         = D_1F800000.view.effect.params[7];
-        D_1F800000.view.effect.params[3] = (i << 9) & 0xFFF;
+        D_1F800000.view.effect.params[3] = (i << 9) & ANGLE_MASK;
         prim->x1                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[0]);
         prim->y1                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[0]);
-        D_1F800000.view.effect.params[3] = ((i + 1) << 9) & 0xFFF;
+        D_1F800000.view.effect.params[3] = ((i + 1) << 9) & ANGLE_MASK;
         prim->x2                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[0]);
         prim->y2                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[0]);
         setRGB0(prim, shade, shade, shade);
@@ -697,9 +697,9 @@ MATCH void func_801F1B14(void) {
     TILE_1*       primitive;
 
     work      = D_801F24E0;
-    vec[0]    = (work->pos.x.fixed >> 9) - 0x4000;
+    vec[0]    = (work->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
     primitive = (TILE_1*)g_GfxPrimCursor;
-    vec[1]    = (work->pos.y.fixed >> 9) - 0x4000;
+    vec[1]    = (work->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
     vec[2]    = -(COORD_INT(work->pos.z) / 2);
     SetTile1(primitive);
     RotTransPers((SVECTOR*)vec, (long*)&primitive->x0, (long*)vec, (long*)&vec[2]);

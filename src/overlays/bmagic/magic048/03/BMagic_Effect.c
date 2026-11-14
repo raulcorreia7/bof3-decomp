@@ -80,8 +80,8 @@ MATCH void func_801EF05C(void) {
     VECTOR pos;
 
     g_Task->unk_09 += 1;
-    pos.vx = (g_Task->unk_0C >> 9) - 0x4000;
-    pos.vy = (g_Task->unk_10 >> 9) - 0x4000;
+    pos.vx = (g_Task->unk_0C >> 9) - AREA_CELL_ORIGIN;
+    pos.vy = (g_Task->unk_10 >> 9) - AREA_CELL_ORIGIN;
     pos.vz = g_Task->unk_14 >> 1;
     func_800AF3A0(pos, 0x10);
     if (g_Task->timer != 16) {
@@ -96,8 +96,8 @@ MATCH void func_801EF158(void) {
     VECTOR pos;
     u8     count;
 
-    pos.vx = (g_Task->unk_0C >> 9) - 0x4000;
-    pos.vy = (g_Task->unk_10 >> 9) - 0x4000;
+    pos.vx = (g_Task->unk_0C >> 9) - AREA_CELL_ORIGIN;
+    pos.vy = (g_Task->unk_10 >> 9) - AREA_CELL_ORIGIN;
     pos.vz = g_Task->unk_14 >> 1;
     func_800AF3A0(pos, 0x10);
     g_Task->unk_09 = g_Task->unk_09 + 1;

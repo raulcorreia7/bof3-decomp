@@ -115,6 +115,7 @@ MATCH void func_801EF0E4(void) {
     prim = (LINE_G3*)g_GfxPrimCursor;
     SetLineG3(prim);
     SetSemiTrans(prim, 1);
+    /* FAKE: retail stores the vx words through D_1F800014 and the vy/vz words through the scratchpad view, and the shade through a pointer local; the one-view spellings and the direct D_1F80000C store change the base register. */
     D_1F800000.view.effect.vectors[0].vy = 0;
     D_1F800014[0].vx                     = 0;
     D_1F800000.view.effect.vectors[0].vz = 0;

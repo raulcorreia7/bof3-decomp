@@ -385,6 +385,12 @@ extern Callback      g_BMagicEffectModes[];
 extern BMagicEffect* D_801F17B0;
 extern BMagicEffect* D_801F17B4;
 
+/* The red and blue weight of one ring shade; the green follows the effect timer alone. */
+typedef struct BMagicRingShade {
+    u8 red;
+    u8 blue;
+} BMagicRingShade;
+
 /* The four scratch vectors the effect draws project their corners from; the flat name keeps the retail
  * bytes, the scratchpad view does not. */
 extern SVECTOR D_1F800014[];
@@ -430,6 +436,8 @@ void Effect_SetActorMatrixQuarterRoll(void);
 void Effect_DrawScreenFade(void);
 /* Defined in Effect_DrawSparkleDisc.h, which a member includes after its first call. */
 void Effect_DrawSparkleDisc(void);
+/* Defined in Effect_DrawShadedDisc.h, which a member includes after its first call. */
+void Effect_DrawShadedDisc(void);
 /* Defined in Effect_DrawTexturedQuad.h, which a member includes after its first call. */
 void Effect_DrawTexturedQuad(void);
 

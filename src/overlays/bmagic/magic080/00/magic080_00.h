@@ -11,6 +11,9 @@ typedef struct Magic080Cell {
     u16 v;
 } Magic080Cell;
 
+ASSERT_SIZE(Magic080Cell, 0x04);
+ASSERT_OFFSET(Magic080Cell, v, 0x02);
+
 extern Magic080Cell D_801EF124[];
 extern Magic080Cell D_801EF13C[];
 

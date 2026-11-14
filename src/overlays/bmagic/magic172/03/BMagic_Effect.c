@@ -52,6 +52,7 @@ MATCH void func_801EEE7C(void) {
     SYS_DISPATCH_BYTE(D_801F0B7C, g_Task->header.step);
     if (g_Task->header.flags != 0) {
         switch (g_Task->header.step) {
+            /* FAKE: retail compare tree needs a third case below 2 on the default body; the bytes do not say which step. */
             case 1:
             default:
                 Battle_ProjectRange();
@@ -111,14 +112,14 @@ MATCH void func_801EF210(void) {
         g_Task->unk_09 = count + 4;
     }
     actor  = g_Battle.selected_actor;
-    pos.vx = (actor->pos.x.fixed >> 9) - 0x4000;
-    pos.vy = (actor->pos.y.fixed >> 9) - 0x4000;
+    pos.vx = (actor->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
+    pos.vy = (actor->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
     pos.vz = (actor->pos.z.fixed + TO_COORD(256)) >> 17;
     func_800AF3A0(pos, 0x40);
     g_Task->unk_10 = g_Task->unk_0C;
     g_Task->unk_0C = ratan2(actor->pos.x.fixed - g_Task->pos.x.fixed, actor->pos.y.fixed - g_Task->pos.y.fixed);
     if (func_800AF66C((BattleRange*)actor, 0x8000) == 0) {
-        diff           = (g_Task->unk_10 & 0xFFF) - (g_Task->unk_0C & 0xFFF);
+        diff           = (g_Task->unk_10 & ANGLE_MASK) - (g_Task->unk_0C & ANGLE_MASK);
         g_Task->unk_10 = diff;
         if (diff < 0) {
             g_Task->unk_10 = ~diff + 1;
@@ -184,8 +185,8 @@ MATCH void func_801EF650(void) {
         g_Task->unk_09 += 4;
     }
     actor  = g_Battle.selected_actor;
-    pos.vx = (actor->pos.x.fixed >> 9) - 0x4000;
-    pos.vy = (actor->pos.y.fixed >> 9) - 0x4000;
+    pos.vx = (actor->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
+    pos.vy = (actor->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
     pos.vz = (actor->pos.z.fixed + TO_COORD(256)) >> 17;
     func_800AF3A0(pos, 0x40);
     g_Task->unk_10 = g_Task->unk_0C;

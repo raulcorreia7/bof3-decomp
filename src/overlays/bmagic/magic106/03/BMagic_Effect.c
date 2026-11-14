@@ -15,7 +15,7 @@ MATCH void func_801EEC04(void) {
         if (D_801EF9F8[(u8)count << 5] & 0x1) {
             saved                 = g_BattleEffectBattler;
             swap                  = FIELD(PartyMember*, D_801EFA14, (u8)count << 5);
-            g_BMagicOrbit         = D_801EF9F8 + ((u8)count << 5);
+            g_BMagicOrbit     = D_801EF9F8 + ((u8)count << 5);
             g_BattleEffectBattler = swap;
             func_801EEEE0();
             g_BattleEffectBattler = saved;
@@ -120,9 +120,9 @@ MATCH void func_801EF52C(void) {
     rot.vx = 0;
     rot.vy = 0;
     off    = g_BMagicOrbit->angle + 0x800;
-    rot.vz = ((g_BMagicOrbit->unk_03 << 7) - off) & 0xFFF;
-    pos.vx = (g_BMagicOrbit->pos.x.fixed >> 9) - 0x4000;
-    pos.vy = (g_BMagicOrbit->pos.y.fixed >> 9) - 0x4000;
+    rot.vz = ((g_BMagicOrbit->unk_03 << 7) - off) & ANGLE_MASK;
+    pos.vx = (g_BMagicOrbit->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
+    pos.vy = (g_BMagicOrbit->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
     pos.vz = -COORD_INT(g_BMagicOrbit->pos.z) / 2;
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);

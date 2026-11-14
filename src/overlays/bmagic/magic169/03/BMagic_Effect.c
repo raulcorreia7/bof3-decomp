@@ -239,7 +239,7 @@ MATCH void func_801EF688(void) {
 MATCH void func_801EF7D0(void) {
     if (g_Task->param.unk_0B == 0) {
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
-        if (func_801DB524(g_Task->unk_04) & BYTE_MASK) {
+        if (Battle_SlotIsBlocked(g_Task->unk_04) & BYTE_MASK) {
             Battle_MarkDamaged(g_Task->unk_04);
         }
         func_801E5988();

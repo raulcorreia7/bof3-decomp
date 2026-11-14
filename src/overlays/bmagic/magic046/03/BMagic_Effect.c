@@ -157,7 +157,7 @@ MATCH void func_801EF3B8(void) {
     work->pos.y.fixed = actor->pos.y.fixed + work->unk_10;
     work->pos.z.fixed = actor->pos.z.fixed + work->unk_14;
     work->unk_09      = 0;
-    work->unk_14      = angle & 0xFFF;
+    work->unk_14      = angle & ANGLE_MASK;
     g_Task->header.step++;
 }
 

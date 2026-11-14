@@ -151,14 +151,14 @@ MATCH u8 func_801F04A4(void) {
     count = 0;
     i     = 0;
     do {
-        if (!(func_801DB524((i + 3) & BYTE_MASK) & BYTE_MASK) && g_BattleEnemyBattlers[(i & BYTE_MASK) + 3].header.mode == 6) {
+        if (!(Battle_SlotIsBlocked((i + 3) & BYTE_MASK) & BYTE_MASK) && g_BattleEnemyBattlers[(i & BYTE_MASK) + 3].header.mode == 6) {
             count++;
         }
         i++;
     } while ((u32)(i & BYTE_MASK) < 8);
     i = 0;
     do {
-        if (!(func_801DB524(i & BYTE_MASK) & BYTE_MASK) && g_Game.members[i & BYTE_MASK].header.mode == 6) {
+        if (!(Battle_SlotIsBlocked(i & BYTE_MASK) & BYTE_MASK) && g_Game.members[i & BYTE_MASK].header.mode == 6) {
             count++;
         }
         i++;

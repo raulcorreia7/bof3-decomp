@@ -88,7 +88,7 @@ MATCH void func_801EEFB8(void) {
                 } else {
                     g_Task->unk_18 = (rand() & 0xFF) + 0x80;
                 }
-                g_Task->unk_1C = ((rand() & 0xFF) - 0x80) & 0xFFF;
+                g_Task->unk_1C = ((rand() & 0xFF) - 0x80) & ANGLE_MASK;
                 if (!(rand() & 0xF)) {
                     g_Task->unk_18 = (rand() & 0xFF) - 0x80;
                 }
@@ -99,7 +99,7 @@ MATCH void func_801EEFB8(void) {
                 } else {
                     g_Task->unk_1C = (rand() & 0xFF) + 0x80;
                 }
-                g_Task->unk_18 = ((rand() & 0xFF) - 0x80) & 0xFFF;
+                g_Task->unk_18 = ((rand() & 0xFF) - 0x80) & ANGLE_MASK;
                 if (!(rand() & 0xF)) {
                     g_Task->unk_1C = (rand() & 0xFF) - 0x80;
                 }
@@ -110,7 +110,7 @@ MATCH void func_801EEFB8(void) {
                 } else {
                     g_Task->unk_18 = (rand() & 0xFF) + 0x80;
                 }
-                g_Task->unk_1C = ((rand() & 0xFF) - 0x80) & 0xFFF;
+                g_Task->unk_1C = ((rand() & 0xFF) - 0x80) & ANGLE_MASK;
                 if (!(rand() & 0xF)) {
                     g_Task->unk_18 = (rand() & 0xFF) - 0x80;
                 }
@@ -121,7 +121,7 @@ MATCH void func_801EEFB8(void) {
                 } else {
                     g_Task->unk_1C = (rand() & 0xFF) + 0x80;
                 }
-                g_Task->unk_18 = ((rand() & 0xFF) - 0x80) & 0xFFF;
+                g_Task->unk_18 = ((rand() & 0xFF) - 0x80) & ANGLE_MASK;
                 if (!(rand() & 0xF)) {
                     g_Task->unk_1C = (rand() & 0xFF) - 0x80;
                 }
@@ -339,8 +339,8 @@ MATCH void func_801F0164(void) {
     if (g_Battle.target_selector & 0x40) {
         for (i = 0; i < 8; i++) {
             if (Battle_SlotIsBlocked((u8)(i + 3)) == 0) {
-                MAGIC096_SUM_X += (g_BattleEnemyBattlers[i].pos.x.fixed >> 9) - 0x4000;
-                MAGIC096_SUM_Y += (g_BattleEnemyBattlers[i].pos.y.fixed >> 9) - 0x4000;
+                MAGIC096_SUM_X += (g_BattleEnemyBattlers[i].pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
+                MAGIC096_SUM_Y += (g_BattleEnemyBattlers[i].pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
                 MAGIC096_SUM_Z += COORD_INT(g_BattleEnemyBattlers[i].pos.z);
                 MAGIC096_SUM_COUNT += 1;
             }
@@ -348,14 +348,14 @@ MATCH void func_801F0164(void) {
     } else {
         for (i = 0; i < 3; i++) {
             if (Battle_SlotIsBlocked(i) == 0) {
-                MAGIC096_SUM_X += (g_Game.members[i].pos.x.fixed >> 9) - 0x4000;
-                MAGIC096_SUM_Y += (g_Game.members[i].pos.y.fixed >> 9) - 0x4000;
+                MAGIC096_SUM_X += (g_Game.members[i].pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
+                MAGIC096_SUM_Y += (g_Game.members[i].pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
                 MAGIC096_SUM_Z += COORD_INT(g_Game.members[i].pos.z);
                 MAGIC096_SUM_COUNT += 1;
             }
         }
     }
-    g_Task->pos.x.fixed      = (MAGIC096_SUM_X / MAGIC096_SUM_COUNT + 0x4000) << 9;
-    g_Task->pos.y.fixed      = (MAGIC096_SUM_Y / MAGIC096_SUM_COUNT + 0x4000) << 9;
+    g_Task->pos.x.fixed      = (MAGIC096_SUM_X / MAGIC096_SUM_COUNT + AREA_CELL_ORIGIN) << 9;
+    g_Task->pos.y.fixed      = (MAGIC096_SUM_Y / MAGIC096_SUM_COUNT + AREA_CELL_ORIGIN) << 9;
     COORD_INT(g_Task->pos.z) = MAGIC096_SUM_Z / MAGIC096_SUM_COUNT;
 }
