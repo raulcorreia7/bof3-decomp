@@ -204,7 +204,7 @@ MATCH void func_801D1218(WorldPos* pos, s16 y, s32 mode) {
     } while ((i & BYTE_MASK) < 32U);
 }
 
-INCLUDE_ASM(Scene_DrawScanBar);
+#include "overlays/scenario/Scene_DrawScanBar.h"
 
 #include "overlays/scenario/Scene_ClearScanBars.h"
 

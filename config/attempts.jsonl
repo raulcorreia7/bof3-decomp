@@ -294,7 +294,6 @@
 {"function": "emi/scenario/sce15ef1/00@0x801D2BA8", "tried": "blocker: work pointer reload", "first_diff": "+0x08 lui v0,0x1f80.", "score": null}
 {"function": "emi/scenario/sce15ef1/00@0x801D2BA8", "tried": "spad generator (direct g_Task, TASK_VOLATILE unit-wide, one local Actor* after the call); score: local pointer 0x4C against retail 0x58", "first_diff": "+0x18 lui a0,0x1f80 reload before SND_PlayCue missing in the direct form; TASK_VOLATILE changes the neighbouring unit bytes; local pointer 0x4C against 0x58", "score": null}
 {"function": "emi/scenario/sce15ef1/00@0x801D2D5C", "tried": "blocker: statement order", "first_diff": "+0x2C lw v0,12(v1) (candidate) against lbu a1,9(v1) (retail).", "score": null}
-{"function": "emi/scenario/sce15ef2/00@0x801D1414", "tried": "blocker: stack frame", "first_diff": "+0x0 stack 0x28 against 0x38.", "score": null}
 {"function": "emi/scenario/sce15ef2/00@0x801D1624", "tried": "blocker: case constant 1 kept in v0", "first_diff": "+0x8C.", "score": null}
 {"function": "emi/scenario/sce15ef3/00@0x801D18CC", "tried": "blocker: 0x20000 hoisted into s4", "first_diff": "+0x10 sw ra,64(sp) against 68.", "score": null}
 {"function": "emi/scenario/sce15ef3/00@0x801D19A0", "tried": "blocker: retail reserves 16 bytes of locals", "first_diff": "+0x0 addiu sp,sp,-48.", "score": null}
