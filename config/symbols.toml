@@ -2638,7 +2638,7 @@ GFX_AllocPaletteFade = { addr = 0x8019651C, type = "func", source = "Claims the 
 GFX_FreePaletteFade = { addr = 0x80196670, type = "func", source = "Releases one g_PaletteFades entry: frees its palette cells and restores the saved byte of its target." }
 GFX_FreePaletteFadeTarget = { addr = 0x80196718, type = "func", source = "Releases every g_PaletteFades entry whose target is the given target." }
 GFX_MarkPaletteCells = { addr = 0x80196784, type = "func", source = "Marks the D_80145D54 palette cells a fade owns for a palette kind and a value, so no other fade uses them." }
-GFX_AllocPaletteCell = { addr = 0x801968BC, type = "func", source = "Returns the index of the first free palette cell of D_80145D54 for the requested palette kind." }
+GFX_FindFreePaletteCell = { addr = 0x801968BC, type = "func", source = "Returns the index of the first free palette cell run of D_80145D54 for the requested palette kind, or 0xFF; records its row and column for GFX_MarkPaletteCells, which claims it." }
 GFX_FindPaletteCell = { addr = 0x80196B20, type = "func", source = "Returns the index of the palette cell of D_80145D54 that holds the given value." }
 GFX_UploadPaletteRows = { addr = 0x80196B9C, type = "func", source = "Copies the palette rows of a PaletteFade entry into g_GraphicsPaletteDst, with the colour count, divisor and stride read from the s_PaletteFadeColorCounts, s_PaletteFadeRowDivisors and s_PaletteFadeStrides rows." }
 GFX_UpdatePaletteAnimations = { addr = 0x80196C8C, type = "func", source = "Steps every active palette animation slot of D_80145D94 through GFX_StepPaletteAnimation." }

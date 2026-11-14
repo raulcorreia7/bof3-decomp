@@ -29,7 +29,7 @@ void  GFX_FreePaletteFadeTarget(void* owner);
 /* func_80196784 */
 u8    GFX_MarkPaletteCells(u8 mode, u8 value, u8 search);
 /* func_801968BC */
-u8    GFX_AllocPaletteCell(u8 mode);
+u8    GFX_FindFreePaletteCell(u8 mode);
 /* func_80196B20 */
 u8    GFX_FindPaletteCell(u8 value);
 /* func_80196B9C */
