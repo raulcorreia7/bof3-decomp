@@ -194,8 +194,7 @@ MATCH void func_801EF584(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0                         = D_1F800000.view.effect.params[3];
-        prim->y0                         = D_1F800000.view.effect.params[4];
+        setXY0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[4]);
         phase                            = (D_801EFD6C[i] + g_Task->unk_09) & 0x3F;
         D_1F800000.view.effect.params[2] = phase << 6;
         prim->x1                         = D_1F800000.view.effect.params[3] + FIXED_MUL(rsin(phase << 6), D_1F800000.view.effect.params[0]);

@@ -656,8 +656,7 @@ MATCH void func_801F1844(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0                         = D_1F800000.view.effect.params[6];
-        prim->y0                         = D_1F800000.view.effect.params[7];
+        setXY0(prim, D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
         D_1F800000.view.effect.params[3] = (i << 9) & ANGLE_MASK;
         prim->x1                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[0]);
         prim->y1                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[0]);

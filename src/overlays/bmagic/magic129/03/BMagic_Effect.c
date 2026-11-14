@@ -208,8 +208,7 @@ MATCH void func_801EF54C(void) {
         sway     = (LOHU(D_1F800000.view.effect.params[3]) + 0x400) & ANGLE_MASK;
         prim->x3 = D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(sway), 8);
         prim->y3 = D_1F800000.view.effect.params[5] + FIXED_MUL(rcos(sway), 8);
-        prim->x0 = D_1F800000.view.effect.params[6];
-        prim->y0 = D_1F800000.view.effect.params[7];
+        setXY0(prim, D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
         prim->x2 = D_1F800000.view.effect.params[4];
         prim->y2 = D_1F800000.view.effect.params[5];
         setRGB0(prim, grey, grey, grey);
@@ -231,8 +230,7 @@ MATCH void func_801EF54C(void) {
         sway     = (LOHU(D_1F800000.view.effect.params[2]) + 0x400) & ANGLE_MASK;
         prim->x1 = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(sway), D_1F800000.view.effect.params[0]);
         prim->y1 = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(sway), D_1F800000.view.effect.params[0]);
-        prim->x0 = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(sway), 8);
-        prim->y0 = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(sway), 8);
+        setXY0(prim, D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(sway), 8), D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(sway), 8));
         sway     = (LOHU(D_1F800000.view.effect.params[3]) + 0x400) & ANGLE_MASK;
         prim->x3 = D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(sway), D_1F800000.view.effect.params[1]);
         prim->y3 = D_1F800000.view.effect.params[5] + FIXED_MUL(rcos(sway), D_1F800000.view.effect.params[1]);
@@ -254,9 +252,8 @@ MATCH void func_801EF54C(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        sway     = (LOHU(D_1F800000.view.effect.params[2]) - 0x400) & ANGLE_MASK;
-        prim->x0 = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(sway), 8);
-        prim->y0 = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(sway), 8);
+        sway = (LOHU(D_1F800000.view.effect.params[2]) - 0x400) & ANGLE_MASK;
+        setXY0(prim, D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(sway), 8), D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(sway), 8));
         sway     = (LOHU(D_1F800000.view.effect.params[3]) - 0x400) & ANGLE_MASK;
         prim->x2 = D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(sway), 8);
         prim->y2 = D_1F800000.view.effect.params[5] + FIXED_MUL(rcos(sway), 8);
@@ -280,11 +277,10 @@ MATCH void func_801EF54C(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        sway     = (LOHU(D_1F800000.view.effect.params[2]) - 0x400) & ANGLE_MASK;
-        prim->x0 = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(sway), D_1F800000.view.effect.params[0]);
-        prim->y0 = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(sway), D_1F800000.view.effect.params[0]);
-        prim->x1 = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(sway), 8);
-        prim->y1 = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(sway), 8);
+        sway = (LOHU(D_1F800000.view.effect.params[2]) - 0x400) & ANGLE_MASK;
+        setXY2(prim, D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(sway), D_1F800000.view.effect.params[0]),
+               D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(sway), D_1F800000.view.effect.params[0]), D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(sway), 8),
+               D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(sway), 8));
         sway     = (LOHU(D_1F800000.view.effect.params[3]) - 0x400) & ANGLE_MASK;
         prim->x2 = D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(sway), D_1F800000.view.effect.params[1]);
         prim->y2 = D_1F800000.view.effect.params[5] + FIXED_MUL(rcos(sway), D_1F800000.view.effect.params[1]);
@@ -413,12 +409,8 @@ MATCH void func_801F030C(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = g_Task->unk_2E.half;
-        prim->y0 = g_Task->unk_30.half;
-        prim->x1 = edge->vx;
-        prim->y1 = edge->vy;
-        prim->x2 = edge->vx = g_Task->unk_2E.half + ((rsin(i << 9) * radius) >> 12);
-        prim->y2 = edge->vy = g_Task->unk_30.half + ((rcos(i << 9) * radius) >> 12);
+        setXY3(prim, g_Task->unk_2E.half, g_Task->unk_30.half, edge->vx, edge->vy, edge->vx = g_Task->unk_2E.half + ((rsin(i << 9) * radius) >> 12),
+               edge->vy = g_Task->unk_30.half + ((rcos(i << 9) * radius) >> 12));
         setRGB0(prim, r, g, b);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);

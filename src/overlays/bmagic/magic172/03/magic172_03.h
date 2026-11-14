@@ -40,8 +40,8 @@ void            func_801F0908(void);
         prim = (LINE_G2*)g_GfxPrimCursor;                                                                                           \
         SetLineG2(prim);                                                                                                            \
         SetSemiTrans(prim, 1);                                                                                                      \
-        prim->x0                         = x + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]); \
-        prim->y0                         = y + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]); \
+        setXY0(prim, x + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]),                       \
+               y + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]));                            \
         D_1F800000.view.effect.params[1] = (i & 0x1F) << 7;                                                                         \
         sine                             = rsin(D_1F800000.view.effect.params[1]);                                                  \
         D_1F800000.view.effect.params[0] += FIXED_MUL(sine, rand() & (s16)SPREAD);                                                  \

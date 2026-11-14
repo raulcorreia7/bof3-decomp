@@ -114,12 +114,8 @@ MATCH void func_801EFC74(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = g_Task->unk_2E.half;
-        prim->y0 = g_Task->unk_30.half;
-        prim->x1 = g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), *radius);
-        prim->y1 = g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), *radius);
-        prim->x2 = g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 9), *radius);
-        prim->y2 = g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 9), *radius);
+        setXY3(prim, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), *radius), g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), *radius),
+               g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 9), *radius), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 9), *radius));
         prim->r0 = g_Task->timer * 8;
         prim->g0 = g_Task->timer * 8;
         prim->b0 = g_Task->timer * 6;

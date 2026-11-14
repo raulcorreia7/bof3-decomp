@@ -127,8 +127,7 @@ MATCH void func_801EF898(void) {
         prim = (TILE_1*)g_GfxPrimCursor;
         SetTile1(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), D_1F800000.view.scenario.math_00);
-        prim->y0 = g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), D_1F800000.view.scenario.math_00);
+        setXY0(prim, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), D_1F800000.view.scenario.math_00), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), D_1F800000.view.scenario.math_00));
         if (g_Battle.action_id == 50) {
             prim->r0 = D_1F800000.view.scenario.math_08;
             prim->g0 = D_1F800000.view.scenario.math_08;

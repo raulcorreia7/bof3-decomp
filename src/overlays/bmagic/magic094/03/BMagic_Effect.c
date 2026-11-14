@@ -156,8 +156,7 @@ MATCH void func_801EF710(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = g_BattleEffectBattler->unk_2E.half;
-        prim->y0 = g_BattleEffectBattler->unk_30.half;
+        setXY0(prim, g_BattleEffectBattler->unk_2E.half, g_BattleEffectBattler->unk_30.half);
         angle    = i << 7;
         prim->x1 = g_BattleEffectBattler->unk_2E.half + FIXED_MUL(rsin(angle), D_1F800000_WORD[0]);
         prim->y1 = g_BattleEffectBattler->unk_30.half + FIXED_MUL(rcos(angle), D_1F800000_WORD[0]);

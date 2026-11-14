@@ -95,12 +95,8 @@ MATCH void func_801EF0B0(void) {
         poly = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(poly);
         SetSemiTrans(poly, 1);
-        poly->x0 = g_Task->unk_2E.half;
-        poly->y0 = g_Task->unk_30.half;
-        poly->x1 = g_Task->unk_2E.half + ((rsin(i << 9) * radius) >> 12);
-        poly->y1 = g_Task->unk_30.half + ((rcos(i << 9) * radius) >> 12);
-        poly->x2 = g_Task->unk_2E.half + ((rsin((i + 1) << 9) * radius) >> 12);
-        poly->y2 = g_Task->unk_30.half + ((rcos((i + 1) << 9) * radius) >> 12);
+        setXY3(poly, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + ((rsin(i << 9) * radius) >> 12), g_Task->unk_30.half + ((rcos(i << 9) * radius) >> 12),
+               g_Task->unk_2E.half + ((rsin((i + 1) << 9) * radius) >> 12), g_Task->unk_30.half + ((rcos((i + 1) << 9) * radius) >> 12));
         poly->r0 = red;
         poly->g0 = green;
         poly->b0 = blue;
@@ -268,12 +264,8 @@ MATCH void func_801F03E0(void) {
         poly = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(poly);
         SetSemiTrans(poly, 1);
-        poly->x0 = g_Task->unk_2E.half;
-        poly->y0 = g_Task->unk_30.half;
-        poly->x1 = g_Task->unk_2E.half + ((rsin(i << 9) * radius) >> 12);
-        poly->y1 = g_Task->unk_30.half + ((rcos(i << 9) * radius) >> 12);
-        poly->x2 = g_Task->unk_2E.half + ((rsin((i + 1) << 9) * radius) >> 12);
-        poly->y2 = g_Task->unk_30.half + ((rcos((i + 1) << 9) * radius) >> 12);
+        setXY3(poly, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + ((rsin(i << 9) * radius) >> 12), g_Task->unk_30.half + ((rcos(i << 9) * radius) >> 12),
+               g_Task->unk_2E.half + ((rsin((i + 1) << 9) * radius) >> 12), g_Task->unk_30.half + ((rcos((i + 1) << 9) * radius) >> 12));
         poly->r0 = centre;
         poly->g0 = centre;
         poly->b0 = centre;
@@ -307,14 +299,9 @@ MATCH void func_801F05B4(void) {
         poly = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(poly);
         SetSemiTrans(poly, 1);
-        poly->x0 = g_Task->unk_2E.half + ((rsin(i << 9) * outer) >> 12);
-        poly->y0 = g_Task->unk_30.half + ((rcos(i << 9) * outer) >> 12);
-        poly->x1 = g_Task->unk_2E.half + ((rsin((i + 1) << 9) * outer) >> 12);
-        poly->y1 = g_Task->unk_30.half + ((rcos((i + 1) << 9) * outer) >> 12);
-        poly->x2 = g_Task->unk_2E.half + ((rsin(i << 9) * inner) >> 12);
-        poly->y2 = g_Task->unk_30.half + ((rcos(i << 9) * inner) >> 12);
-        poly->x3 = g_Task->unk_2E.half + ((rsin((i + 1) << 9) * inner) >> 12);
-        poly->y3 = g_Task->unk_30.half + ((rcos((i + 1) << 9) * inner) >> 12);
+        setXY4(poly, g_Task->unk_2E.half + ((rsin(i << 9) * outer) >> 12), g_Task->unk_30.half + ((rcos(i << 9) * outer) >> 12), g_Task->unk_2E.half + ((rsin((i + 1) << 9) * outer) >> 12),
+               g_Task->unk_30.half + ((rcos((i + 1) << 9) * outer) >> 12), g_Task->unk_2E.half + ((rsin(i << 9) * inner) >> 12), g_Task->unk_30.half + ((rcos(i << 9) * inner) >> 12),
+               g_Task->unk_2E.half + ((rsin((i + 1) << 9) * inner) >> 12), g_Task->unk_30.half + ((rcos((i + 1) << 9) * inner) >> 12));
         poly->r0 = 1;
         poly->g0 = 1;
         poly->b0 = 1;

@@ -164,8 +164,8 @@ MATCH void func_801EF7A8(void) {
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
     D_1F800000.view.scenario.math_04 = g_Task->unk_14 + 0xF78;
-    prim->x0                         = g_Task->unk_2E.half + FIXED_MUL(rsin(D_1F800000.view.scenario.math_04), D_1F800000.view.scenario.math_00);
-    prim->y0                         = g_Task->unk_30.half + FIXED_MUL(rcos(D_1F800000.view.scenario.math_04), D_1F800000.view.scenario.math_00);
+    setXY0(prim, g_Task->unk_2E.half + FIXED_MUL(rsin(D_1F800000.view.scenario.math_04), D_1F800000.view.scenario.math_00),
+           g_Task->unk_30.half + FIXED_MUL(rcos(D_1F800000.view.scenario.math_04), D_1F800000.view.scenario.math_00));
     D_1F800000.view.scenario.math_04 = g_Task->unk_14 + 0x888;
     prim->x1                         = g_Task->unk_2E.half + FIXED_MUL(rsin(D_1F800000.view.scenario.math_04), D_1F800000.view.scenario.math_00);
     prim->y1                         = g_Task->unk_30.half + FIXED_MUL(rcos(D_1F800000.view.scenario.math_04), D_1F800000.view.scenario.math_00);

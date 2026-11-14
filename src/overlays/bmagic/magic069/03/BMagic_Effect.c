@@ -300,14 +300,8 @@ MATCH void func_801EFA84(void) {
     GFX_AddPrim(2, sizeof(DR_MODE));
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
-    prim->x0 = g_Task->unk_2E.half;
-    prim->y0 = g_Task->unk_30.half;
-    prim->x1 = g_Task->unk_2E.half + 48;
-    prim->y1 = g_Task->unk_30.half;
-    prim->x2 = g_Task->unk_2E.half;
-    prim->y2 = g_Task->unk_30.half + g_Task->timer;
-    prim->x3 = g_Task->unk_2E.half + 48;
-    prim->y3 = g_Task->unk_30.half + g_Task->timer;
+    setXY4(prim, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + 48, g_Task->unk_30.half, g_Task->unk_2E.half, g_Task->unk_30.half + g_Task->timer, g_Task->unk_2E.half + 48,
+           g_Task->unk_30.half + g_Task->timer);
     setTPage(prim, 0, 0, 896, 256);
     setClut(prim, 32, 506);
     prim->u0 = 0;
@@ -345,8 +339,7 @@ MATCH void func_801EFC00(void) {
             prim = (POLY_G3*)g_GfxPrimCursor;
             SetPolyG3(prim);
             SetSemiTrans(prim, 1);
-            prim->x0                         = D_1F800000.view.effect.params[6];
-            prim->y0                         = D_1F800000.view.effect.params[7];
+            setXY0(prim, D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
             D_1F800000.view.effect.params[2] = ((D_801F0534[j] + i * 16) & 0x3F) << 6;
             prim->x1                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[1]);
             prim->y1                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[1]);
@@ -388,8 +381,8 @@ MATCH void func_801EFF14(void) {
             SetLineF2(prim);
             SetSemiTrans(prim, 1);
             D_1F800000.view.effect.params[2] = i << 6;
-            prim->x0                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-            prim->y0                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+            setXY0(prim, D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]),
+                   D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]));
             D_1F800000.view.effect.params[2] = (i + 1) << 6;
             prim->x1                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
             prim->y1                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);

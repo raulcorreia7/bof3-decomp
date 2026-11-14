@@ -419,8 +419,7 @@ MATCH void func_801F07A8(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = x;
-        prim->y0 = y + FIXED_MUL(rsin((i & BYTE_MASK) << 6), D_1F800000.view.effect.params[0]);
+        setXY0(prim, x, y + FIXED_MUL(rsin((i & BYTE_MASK) << 6), D_1F800000.view.effect.params[0]));
         prim->x2 = x;
         prim->y2 = y;
         prim->x1 = x + 16;
@@ -436,8 +435,7 @@ MATCH void func_801F07A8(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = x;
-        prim->y0 = y + FIXED_MUL(rsin((i & BYTE_MASK) << 6), D_1F800000.view.effect.params[1]);
+        setXY0(prim, x, y + FIXED_MUL(rsin((i & BYTE_MASK) << 6), D_1F800000.view.effect.params[1]));
         prim->x2 = x;
         prim->y2 = y + FIXED_MUL(rsin((i & BYTE_MASK) << 6), D_1F800000.view.effect.params[0]);
         prim->x1 = x + 16;
@@ -453,8 +451,7 @@ MATCH void func_801F07A8(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = x;
-        prim->y0 = y - FIXED_MUL(rsin((i & BYTE_MASK) << 6), D_1F800000.view.effect.params[0]);
+        setXY0(prim, x, y - FIXED_MUL(rsin((i & BYTE_MASK) << 6), D_1F800000.view.effect.params[0]));
         prim->x2 = x;
         prim->y2 = y;
         prim->x1 = x + 16;
@@ -470,8 +467,7 @@ MATCH void func_801F07A8(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = x;
-        prim->y0 = y - FIXED_MUL(rsin((i & BYTE_MASK) << 6), D_1F800000.view.effect.params[1]);
+        setXY0(prim, x, y - FIXED_MUL(rsin((i & BYTE_MASK) << 6), D_1F800000.view.effect.params[1]));
         prim->x2 = x;
         prim->y2 = y - FIXED_MUL(rsin((i & BYTE_MASK) << 6), D_1F800000.view.effect.params[0]);
         prim->x1 = x + 16;

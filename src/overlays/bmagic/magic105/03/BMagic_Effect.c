@@ -322,12 +322,10 @@ MATCH void func_801EFCF0(void) {
         shade      = g_Task->unk_5F - 0x80;
         prim->b0   = shade;
         if ((cell[0] & 0x80) && (work = g_Task, (u8)work->unk_2A != 0)) {
-            prim->x0 = work->unk_2E.half - (s8)cell[1] - prim->w;
-            prim->y0 = work->unk_30.half + (s8)cell[2];
+            setXY0(prim, work->unk_2E.half - (s8)cell[1] - prim->w, work->unk_30.half + (s8)cell[2]);
         } else {
-            task     = g_Task;
-            prim->x0 = task->unk_2E.half + (s8)cell[1];
-            prim->y0 = task->unk_30.half + (s8)cell[2];
+            task = g_Task;
+            setXY0(prim, task->unk_2E.half + (s8)cell[1], task->unk_30.half + (s8)cell[2]);
         }
         SetSemiTrans(prim, (g_Task->header.flags >> 5) & 1);
         GFX_AddPrim((u8)g_Task->unk_29, sizeof(SPRT));

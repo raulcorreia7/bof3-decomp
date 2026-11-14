@@ -143,16 +143,14 @@ MATCH void func_801EF600(u8 start, u16 radius) {
         SetLineG2(line);
         SetSemiTrans(line, 1);
         D_1F800000.view.effect.params[4] = (i & 0x1F) << 7;
-        line->x0                         = D_1F800000.view.effect.params[0];
-        line->y0                         = D_1F800000.view.effect.params[1];
-        line->x1                         = D_1F800000.view.effect.params[0] + ((rcos(D_1F800000.view.effect.params[4]) * radius) >> 12);
-        line->y1                         = D_1F800000.view.effect.params[1] + ((rsin(D_1F800000.view.effect.params[4]) * radius) >> 12);
-        line->r0                         = 0x80;
-        line->g0                         = 0x70;
-        line->b0                         = 0x60;
-        line->r1                         = 1;
-        line->g1                         = 1;
-        line->b1                         = 1;
+        setXY2(line, D_1F800000.view.effect.params[0], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[0] + ((rcos(D_1F800000.view.effect.params[4]) * radius) >> 12),
+               D_1F800000.view.effect.params[1] + ((rsin(D_1F800000.view.effect.params[4]) * radius) >> 12));
+        line->r0 = 0x80;
+        line->g0 = 0x70;
+        line->b0 = 0x60;
+        line->r1 = 1;
+        line->g1 = 1;
+        line->b1 = 1;
         GFX_AddPrim(3, sizeof(LINE_G2));
     }
     tpage = GetGraphType() == 1 || GetGraphType() == 2 ? 0x25 : 0x15;

@@ -163,8 +163,8 @@ MATCH void func_801EF4E0(void) {
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
         D_1F800000.view.effect.params[2] = (D_1F800000.view.effect.params[1] + 0x400) & ANGLE_MASK;
-        prim->x0                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-        prim->y0                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+        setXY0(prim, D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]),
+               D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]));
         D_1F800000.view.effect.params[2] = (D_1F800000.view.effect.params[1] - 0x400) & ANGLE_MASK;
         prim->x2                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
         prim->y2                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
@@ -219,8 +219,8 @@ MATCH void func_801EFA4C(void) {
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
         D_1F800000.view.effect.params[2] = (D_1F800000.view.effect.params[1] + 0x400) & ANGLE_MASK;
-        prim->x0                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-        prim->y0                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+        setXY0(prim, D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]),
+               D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]));
         prim->x2                         = D_1F800000.view.effect.params[6];
         prim->y2                         = D_1F800000.view.effect.params[7];
         D_1F800000.view.effect.params[1] = ratan2(D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[5] - D_1F800000.view.effect.params[7]);
@@ -257,8 +257,8 @@ MATCH void func_801EFA4C(void) {
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
         D_1F800000.view.effect.params[2] = (D_1F800000.view.effect.params[1] - 0x400) & ANGLE_MASK;
-        prim->x0                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-        prim->y0                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+        setXY0(prim, D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]),
+               D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]));
         prim->x2                         = D_1F800000.view.effect.params[6];
         prim->y2                         = D_1F800000.view.effect.params[7];
         D_1F800000.view.effect.params[1] = ratan2(D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[5] - D_1F800000.view.effect.params[7]);
@@ -325,14 +325,9 @@ MATCH void func_801F06D8(void) {
     QUAD_RADIUS = g_Task->unk_09 * 2;
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
-    prim->x0 = g_Task->unk_2E.half + FIXED_MUL(rcos(ANGLE_45), QUAD_RADIUS);
-    prim->y0 = g_Task->unk_30.half + FIXED_MUL(rsin(ANGLE_45), QUAD_RADIUS);
-    prim->x1 = g_Task->unk_2E.half + FIXED_MUL(rcos(1536), QUAD_RADIUS);
-    prim->y1 = g_Task->unk_30.half + FIXED_MUL(rsin(1536), QUAD_RADIUS);
-    prim->x2 = g_Task->unk_2E.half + FIXED_MUL(rcos(3584), QUAD_RADIUS);
-    prim->y2 = g_Task->unk_30.half + FIXED_MUL(rsin(3584), QUAD_RADIUS);
-    prim->x3 = g_Task->unk_2E.half + FIXED_MUL(rcos(2560), QUAD_RADIUS);
-    prim->y3 = g_Task->unk_30.half + FIXED_MUL(rsin(2560), QUAD_RADIUS);
+    setXY4(prim, g_Task->unk_2E.half + FIXED_MUL(rcos(ANGLE_45), QUAD_RADIUS), g_Task->unk_30.half + FIXED_MUL(rsin(ANGLE_45), QUAD_RADIUS), g_Task->unk_2E.half + FIXED_MUL(rcos(1536), QUAD_RADIUS),
+           g_Task->unk_30.half + FIXED_MUL(rsin(1536), QUAD_RADIUS), g_Task->unk_2E.half + FIXED_MUL(rcos(3584), QUAD_RADIUS), g_Task->unk_30.half + FIXED_MUL(rsin(3584), QUAD_RADIUS),
+           g_Task->unk_2E.half + FIXED_MUL(rcos(2560), QUAD_RADIUS), g_Task->unk_30.half + FIXED_MUL(rsin(2560), QUAD_RADIUS));
     setTPage(prim, 0, 2, 832, 256);
     setClut(prim, 32, 506);
     prim->u0   = 128;

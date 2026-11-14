@@ -327,24 +327,24 @@ MATCH void func_801EFE20(void) {
     D_1F800000.view.effect.params[5] = g_Task->timer * 4;
     D_1F800000.view.effect.params[6] = g_Task->unk_2E.half;
     D_1F800000.view.effect.params[7] = g_Task->unk_30.half;
-    prim->x0                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin((u8)(g_Task->unk_09 + 0x80) << 4), D_1F800000.view.effect.params[0]);
-    prim->y0                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos((u8)(g_Task->unk_09 + 0x80) << 4), D_1F800000.view.effect.params[0]);
-    prim->x1                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin((u8)(g_Task->unk_09 + 0x40) << 4), D_1F800000.view.effect.params[0]);
-    prim->y1                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos((u8)(g_Task->unk_09 + 0x40) << 4), D_1F800000.view.effect.params[0]);
-    prim->x2                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin((u8)(g_Task->unk_09 + 0xC0) << 4), D_1F800000.view.effect.params[0]);
-    prim->y2                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos((u8)(g_Task->unk_09 + 0xC0) << 4), D_1F800000.view.effect.params[0]);
-    prim->x3                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(g_Task->unk_09 << 4), D_1F800000.view.effect.params[0]);
-    prim->y3                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(g_Task->unk_09 << 4), D_1F800000.view.effect.params[0]);
-    prim->tpage                      = GetTPage(0, 1, 832, 256);
-    prim->clut                       = GetClut(16, 506);
-    prim->u0                         = 1;
-    prim->v0                         = 1;
-    prim->u1                         = 31;
-    prim->v1                         = 1;
-    prim->u2                         = 1;
-    prim->v2                         = 31;
-    prim->u3                         = 31;
-    prim->v3                         = 31;
+    setXY4(prim, D_1F800000.view.effect.params[6] + FIXED_MUL(rsin((u8)(g_Task->unk_09 + 0x80) << 4), D_1F800000.view.effect.params[0]),
+           D_1F800000.view.effect.params[7] + FIXED_MUL(rcos((u8)(g_Task->unk_09 + 0x80) << 4), D_1F800000.view.effect.params[0]),
+           D_1F800000.view.effect.params[6] + FIXED_MUL(rsin((u8)(g_Task->unk_09 + 0x40) << 4), D_1F800000.view.effect.params[0]),
+           D_1F800000.view.effect.params[7] + FIXED_MUL(rcos((u8)(g_Task->unk_09 + 0x40) << 4), D_1F800000.view.effect.params[0]),
+           D_1F800000.view.effect.params[6] + FIXED_MUL(rsin((u8)(g_Task->unk_09 + 0xC0) << 4), D_1F800000.view.effect.params[0]),
+           D_1F800000.view.effect.params[7] + FIXED_MUL(rcos((u8)(g_Task->unk_09 + 0xC0) << 4), D_1F800000.view.effect.params[0]),
+           D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(g_Task->unk_09 << 4), D_1F800000.view.effect.params[0]),
+           D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(g_Task->unk_09 << 4), D_1F800000.view.effect.params[0]));
+    prim->tpage = GetTPage(0, 1, 832, 256);
+    prim->clut  = GetClut(16, 506);
+    prim->u0    = 1;
+    prim->v0    = 1;
+    prim->u1    = 31;
+    prim->v1    = 1;
+    prim->u2    = 1;
+    prim->v2    = 31;
+    prim->u3    = 31;
+    prim->v3    = 31;
     setRGB0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5]);
     setRGB1(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5]);
     setRGB2(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5]);

@@ -111,14 +111,7 @@ MATCH void func_801EF070(void) {
     y      = g_Task->unk_30.half;
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
-    prim->x0    = x - 0x38;
-    prim->y0    = y - 0x60;
-    prim->x1    = x + 0x38;
-    prim->y1    = y - 0x60;
-    prim->x2    = x - 0x38;
-    prim->y2    = y;
-    prim->x3    = x + 0x38;
-    prim->y3    = y;
+    setXY4(prim, x - 0x38, y - 0x60, x + 0x38, y - 0x60, x - 0x38, y, x + 0x38, y);
     prim->tpage = GetTPage(1, 1, 832, 256);
     prim->clut  = GetClut(0, 506);
     prim->u0    = 8;
@@ -348,12 +341,8 @@ MATCH void BMagic_DrawRingTriangles(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = x;
-        prim->y0 = y;
-        prim->x1 = x + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]);
-        prim->y1 = y + FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]);
-        prim->x2 = x + FIXED_MUL(rsin((i + 1) << 9), D_1F800000.view.effect.params[0]);
-        prim->y2 = y + FIXED_MUL(rcos((i + 1) << 9), D_1F800000.view.effect.params[0]);
+        setXY3(prim, x, y, x + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]), y + FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]),
+               x + FIXED_MUL(rsin((i + 1) << 9), D_1F800000.view.effect.params[0]), y + FIXED_MUL(rcos((i + 1) << 9), D_1F800000.view.effect.params[0]));
         prim->r0 = D_1F800000.view.effect.params[3];
         prim->g0 = D_1F800000.view.effect.params[3];
         prim->b0 = D_1F800000.view.effect.params[3];
@@ -384,8 +373,7 @@ MATCH void BMagic_DrawRingQuads(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = x + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[1]);
-        prim->y0 = y + FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[1]);
+        setXY0(prim, x + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[1]), y + FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[1]));
         prim->x2 = x + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]);
         prim->y2 = y + FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]);
         prim->x1 = x + FIXED_MUL(rsin((i + 1) << 9), D_1F800000.view.effect.params[1]);

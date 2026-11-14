@@ -354,14 +354,10 @@ MATCH void func_801F01F0(void) {
     prim = (POLY_GT4*)g_GfxPrimCursor;
     SetPolyGT4(prim);
     SetSemiTrans(prim, 1);
-    prim->x0 = D_1F800000.view.effect.params[3] - D_1F800000.view.effect.params[7];
-    prim->y0 = D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6];
-    prim->x1 = D_1F800000.view.effect.params[3] + D_1F800000.view.effect.params[7];
-    prim->y1 = D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6];
-    prim->x2 = D_1F800000.view.effect.params[3] - D_1F800000.view.effect.params[7];
-    prim->y2 = D_1F800000.view.effect.params[4];
-    prim->x3 = D_1F800000.view.effect.params[3] + D_1F800000.view.effect.params[7];
-    prim->y3 = D_1F800000.view.effect.params[4];
+    setXY4(prim, D_1F800000.view.effect.params[3] - D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6],
+           D_1F800000.view.effect.params[3] + D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6],
+           D_1F800000.view.effect.params[3] - D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[3] + D_1F800000.view.effect.params[7],
+           D_1F800000.view.effect.params[4]);
     setRGB0(prim, shade, shade, shade);
     setRGB1(prim, shade, shade, shade);
     setRGB2(prim, shade, shade, shade);
@@ -374,14 +370,10 @@ MATCH void func_801F01F0(void) {
     prim = (POLY_GT4*)g_GfxPrimCursor;
     SetPolyGT4(prim);
     SetSemiTrans(prim, 1);
-    prim->x0 = D_1F800000.view.effect.params[3] - D_1F800000.view.effect.params[7];
-    prim->y0 = D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6] - 16;
-    prim->x1 = D_1F800000.view.effect.params[3] + D_1F800000.view.effect.params[7];
-    prim->y1 = D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6] - 16;
-    prim->x2 = D_1F800000.view.effect.params[3] - D_1F800000.view.effect.params[7];
-    prim->y2 = D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6];
-    prim->x3 = D_1F800000.view.effect.params[3] + D_1F800000.view.effect.params[7];
-    prim->y3 = D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6];
+    setXY4(prim, D_1F800000.view.effect.params[3] - D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6] - 16,
+           D_1F800000.view.effect.params[3] + D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6] - 16,
+           D_1F800000.view.effect.params[3] - D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6],
+           D_1F800000.view.effect.params[3] + D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[4] - D_1F800000.view.effect.params[6]);
     setRGB0(prim, 1, 1, 1);
     setRGB1(prim, 1, 1, 1);
     setRGB2(prim, shade, shade, shade);

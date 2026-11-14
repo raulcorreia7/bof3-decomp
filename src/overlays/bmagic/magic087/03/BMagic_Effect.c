@@ -196,10 +196,7 @@ MATCH void func_801EF580(s32 phase) {
         SetSemiTrans(prim, 1);
         D_1F800000.view.scenario.math_04 = ((g_Task->unk_04 + i + phase + 1) & 0x1F) << 7;
         offset                           = ((rsin(D_1F800000.view.scenario.math_04) * 8) >> 12) + 4;
-        prim->x0                         = g_Task->unk_2E.half - offset;
-        prim->y0                         = g_Task->unk_30.half - (i + 1) * 8;
-        prim->x1                         = prim->x0 + 8;
-        prim->y1                         = g_Task->unk_30.half - (i + 1) * 8;
+        setXY2(prim, g_Task->unk_2E.half - offset, g_Task->unk_30.half - (i + 1) * 8, prim->x0 + 8, g_Task->unk_30.half - (i + 1) * 8);
         D_1F800000.view.scenario.math_04 = ((g_Task->unk_04 + phase + i) & 0x1F) << 7;
         offset                           = ((rsin(D_1F800000.view.scenario.math_04) * 8) >> 12) + 4;
         prim->x2                         = g_Task->unk_2E.half - offset;

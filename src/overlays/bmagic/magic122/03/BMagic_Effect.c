@@ -181,8 +181,7 @@ MATCH void func_801EF324(void) {
         D_1F800000.view.effect.params[0] = D_1F800000.view.effect.params[0] / g_Task->param.unk_0B + 1;
         prim->x3                         = D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
         prim->y3                         = D_1F800000.view.effect.params[5] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-        prim->x0                         = D_1F800000.view.effect.params[6];
-        prim->y0                         = D_1F800000.view.effect.params[7];
+        setXY0(prim, D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
         prim->x2                         = D_1F800000.view.effect.params[4];
         prim->y2                         = D_1F800000.view.effect.params[5];
         prim->clut                       = GetClut(0, 0x1FA);
@@ -209,8 +208,8 @@ MATCH void func_801EF324(void) {
         swing                            = FIXED_MUL(rsin(inner), 2) + 4;
         D_1F800000.view.effect.params[0] = (i - 1) * 9 + swing;
         D_1F800000.view.effect.params[0] = D_1F800000.view.effect.params[0] / g_Task->param.unk_0B + 1;
-        prim->x0                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-        prim->y0                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+        setXY0(prim, D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]),
+               D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]));
         swing                            = FIXED_MUL(rsin(outer), 2) + 4;
         D_1F800000.view.effect.params[0] = i * 9 + swing;
         D_1F800000.view.effect.params[0] = D_1F800000.view.effect.params[0] / g_Task->param.unk_0B + 1;

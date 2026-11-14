@@ -480,12 +480,9 @@ MATCH void BMagic_SetXFixed(s32 radius) {
         poly = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(poly);
         SetSemiTrans(poly, 1);
-        poly->x0 = g_Task->unk_2E.half;
-        poly->y0 = g_Task->unk_30.half;
-        poly->x1 = g_Task->unk_2E.half + ((rsin(i << 9) * D_1F800000.view.effect.params[0]) >> 12);
-        poly->y1 = g_Task->unk_30.half + ((rcos(i << 9) * D_1F800000.view.effect.params[0]) >> 12);
-        poly->x2 = g_Task->unk_2E.half + ((rsin((i + 1) << 9) * D_1F800000.view.effect.params[0]) >> 12);
-        poly->y2 = g_Task->unk_30.half + ((rcos((i + 1) << 9) * D_1F800000.view.effect.params[0]) >> 12);
+        setXY3(poly, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + ((rsin(i << 9) * D_1F800000.view.effect.params[0]) >> 12),
+               g_Task->unk_30.half + ((rcos(i << 9) * D_1F800000.view.effect.params[0]) >> 12), g_Task->unk_2E.half + ((rsin((i + 1) << 9) * D_1F800000.view.effect.params[0]) >> 12),
+               g_Task->unk_30.half + ((rcos((i + 1) << 9) * D_1F800000.view.effect.params[0]) >> 12));
         poly->r0 = 0x80;
         poly->g0 = 0x80;
         poly->b0 = 0x80;

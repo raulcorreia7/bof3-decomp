@@ -263,8 +263,7 @@ MATCH void func_801EF55C(void) {
         if ((g_Task->param.unk_0B >> i) & 1) {
             prim = (TILE*)g_GfxPrimCursor;
             SetTile(prim);
-            prim->x0 = D_1F800000.view.scenario.math_00;
-            prim->y0 = D_1F800000.view.scenario.math_04;
+            setXY0(prim, D_1F800000.view.scenario.math_00, D_1F800000.view.scenario.math_04);
             D_1F800000.view.scenario.math_00 += 10;
             prim->w  = 8;
             prim->h  = 12;
@@ -277,10 +276,9 @@ MATCH void func_801EF55C(void) {
     if (g_Task->param.unk_0B == 0) {
         prim = (TILE*)g_GfxPrimCursor;
         SetTile(prim);
-        prim->x0 = D_1F800000.view.scenario.math_00;
-        prim->y0 = D_1F800000.view.scenario.math_04;
-        prim->w  = 8;
-        prim->h  = 12;
+        setXY0(prim, D_1F800000.view.scenario.math_00, D_1F800000.view.scenario.math_04);
+        prim->w = 8;
+        prim->h = 12;
         setRGB0(prim, 0x60, 0x60, 0x60);
         GFX_AddPrim(0, sizeof(TILE));
     }
@@ -349,14 +347,8 @@ MATCH void func_801EFA48(void) {
     GFX_AddPrim(2, sizeof(DR_MODE));
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
-    prim->x0 = g_Task->unk_2E.half - 12;
-    prim->y0 = g_Task->unk_30.half - 12;
-    prim->x1 = g_Task->unk_2E.half + 12;
-    prim->y1 = g_Task->unk_30.half - 12;
-    prim->x2 = g_Task->unk_2E.half - 12;
-    prim->y2 = g_Task->unk_30.half + 12;
-    prim->x3 = g_Task->unk_2E.half + 12;
-    prim->y3 = g_Task->unk_30.half + 12;
+    setXY4(prim, g_Task->unk_2E.half - 12, g_Task->unk_30.half - 12, g_Task->unk_2E.half + 12, g_Task->unk_30.half - 12, g_Task->unk_2E.half - 12, g_Task->unk_30.half + 12, g_Task->unk_2E.half + 12,
+           g_Task->unk_30.half + 12);
     setRGB0(prim, 128, 128, 128);
     prim->tpage = GetTPage(0, 0, 960, 0);
     prim->clut  = GetClut(0, 480);

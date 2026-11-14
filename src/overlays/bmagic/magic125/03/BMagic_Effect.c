@@ -327,10 +327,7 @@ MATCH void func_801EFFC8(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0         = g_Task->unk_2E.half;
-        prim->y0         = g_Task->unk_30.half;
-        prim->x1         = D_1F800014[0].vx;
-        prim->y1         = D_1F800014[0].vy;
+        setXY2(prim, g_Task->unk_2E.half, g_Task->unk_30.half, D_1F800014[0].vx, D_1F800014[0].vy);
         D_1F800014[0].vx = g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]);
         prim->x2         = D_1F800014[0].vx;
         D_1F800014[0].vy = g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]);
@@ -356,8 +353,7 @@ MATCH void func_801F020C(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        prim->x0         = D_1F800014[0].vx;
-        prim->y0         = D_1F800014[0].vy;
+        setXY0(prim, D_1F800014[0].vx, D_1F800014[0].vy);
         prim->x2         = D_1F800014[1].vx;
         prim->y2         = D_1F800014[1].vy;
         D_1F800014[0].vx = g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[1]);
