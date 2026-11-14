@@ -567,6 +567,7 @@ MATCH u8* func_801F9DD4(void) {
     return NULL;
 }
 
+/* Starts a burst row at a random distance and angle around the actor, on the ground. */
 MATCH void func_801F9E10(SceneEffectRow* row) {
     s32 radius;
     s32 angle;
