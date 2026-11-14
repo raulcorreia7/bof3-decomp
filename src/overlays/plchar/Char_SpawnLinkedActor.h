@@ -1,3 +1,4 @@
+/* Spawns and links a field actor; verify changes in plp016, plp026, plp034, plp056, plp267, plp349, plp467, plp567 and plp678. */
 MATCH void Char_SpawnLinkedActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y, s32 cell_code) {
     /* FAKE: plain C was 0xE4; retail keeps x in s3. */
     FAKE_REG(s32, x, "s3");
