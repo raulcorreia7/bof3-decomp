@@ -25,9 +25,7 @@ MATCH void func_80167910(void) {
     if (D_8014626C[0] & 0x40) {
         return;
     }
-    pos.vx           = (s16)((D_801462A0 >> 9) - 0x4000);
-    pos.vy           = (s16)((D_801462A4 >> 9) - 0x4000);
-    pos.vz           = (s16)(-(D_801462AA + 0x80) / 2);
+    setVector(&pos, (s16)((D_801462A0 >> 9) - 0x4000), (s16)((D_801462A4 >> 9) - 0x4000), (s16)(-(D_801462AA + 0x80) / 2));
     g_Task->unk_60   = RotTransPers(&pos, (long*)&sxy, &p, &flag);
     g_Task->screen_x = sxy.vx;
     g_Task->screen_y = sxy.vy;
@@ -63,12 +61,8 @@ MATCH void func_80167910(void) {
         GFX_AddPrim(3, sizeof(POLY_FT4));
     }
     PushMatrix();
-    axis.vx = 0;
-    axis.vy = 0;
-    axis.vz = 0;
-    rot.vx  = (s16)((g_Task->pos.x.fixed >> 9) - 0x4000);
-    rot.vy  = (s16)((g_Task->pos.y.fixed >> 9) - 0x4000);
-    rot.vz  = (s16)(-COORD_INT(g_Task->pos.z) / 2);
+    setVector(&axis, 0, 0, 0);
+    setVector(&rot, (s16)((g_Task->pos.x.fixed >> 9) - 0x4000), (s16)((g_Task->pos.y.fixed >> 9) - 0x4000), (s16)(-COORD_INT(g_Task->pos.z) / 2));
     RotTransMatrix(&rot, mtx, &flag);
     Camera_SetModelMatrix(&axis, &mtx);
     if (GetGraphType() == 1) {

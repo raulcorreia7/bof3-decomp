@@ -131,9 +131,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             SP_REF(u16, 0x30u) = vv;
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            normal.vx        = piece->n[0];
-            normal.vy        = piece->n[1];
-            normal.vz        = piece->n[2];
+            setVector(&normal, piece->n[0], piece->n[1], piece->n[2]);
             quad->halves.uv0 = piece->uv[0];
             quad->halves.uv1 = piece->uv[1];
             quad->halves.uv2 = piece->uv[2];

@@ -197,16 +197,12 @@ MATCH void func_801EFEB8(void) {
     long         flags;
 
     PushMatrix();
-    work   = g_Task;
-    rot.vx = 0;
-    rot.vy = 0;
-    rot.vz = 0;
+    work = g_Task;
+    setVector(&rot, 0, 0, 0);
     if (work->slot == 13) {
         rot.vz = work->unk_0C;
     }
-    pos.vx = (work->pos.x.fixed >> 9) - 0x4000;
-    pos.vy = (work->pos.y.fixed >> 9) - 0x4000;
-    pos.vz = -COORD_INT(work->pos.z) / 2;
+    setVector(&pos, (work->pos.x.fixed >> 9) - 0x4000, (work->pos.y.fixed >> 9) - 0x4000, -COORD_INT(work->pos.z) / 2);
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
 }
