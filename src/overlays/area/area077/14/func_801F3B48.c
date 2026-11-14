@@ -6,8 +6,6 @@ MATCH void func_801F3B48(Point2s* pos, u8 shade) {
     SetTile1(tile);
     SetSemiTrans(tile, 1);
     setXY0(tile, pos->x, pos->y);
-    tile->r0 = shade;
-    tile->g0 = shade;
-    tile->b0 = shade;
+    setRGB0(tile, shade, shade, shade);
     GFX_AddPrim(1, 12);
 }

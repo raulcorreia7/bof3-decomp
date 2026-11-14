@@ -5,9 +5,7 @@ MATCH void func_801F52D8(void) {
 
     SetPolyF4(poly);
     setXY4(poly, 0, 0, 320, 0, 0, 240, 320, 240);
-    poly->r0 = 0xFF;
-    poly->g0 = 0xFF;
-    poly->b0 = 0xFF;
+    setRGB0(poly, 0xFF, 0xFF, 0xFF);
     GFX_AddPrim(4, 24);
     SND_PlayCue(0x202);
     D_8014933A = 1;
