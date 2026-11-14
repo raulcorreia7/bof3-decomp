@@ -30,7 +30,7 @@ extern u8                 D_801F0198[];
 extern u8                 D_801F01A0[];
 /* The shortest rise of each kind. */
 extern u8                 D_801F01A8[];
-extern BMagicEffectWork   D_801F01B4[EFFECT_SPARKLE_COUNT];
+extern BMagicEffect       D_801F01B4[EFFECT_SPARKLE_COUNT];
 
 void func_801EF33C(void);
 u8   func_801F0000(void);

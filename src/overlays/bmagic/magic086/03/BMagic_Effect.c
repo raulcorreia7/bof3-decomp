@@ -33,7 +33,7 @@ MATCH void func_801EEC94(void) {
     g_BattleEffects[slot].pos.x            = g_Task->pos.x;
     g_BattleEffects[slot].pos.y            = g_Task->pos.y;
     COORD_INT(g_BattleEffects[slot].pos.z) = COORD_INT(g_Task->pos.z);
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;
     g_Task->header.mode += 1;

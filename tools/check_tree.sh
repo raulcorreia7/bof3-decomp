@@ -53,8 +53,21 @@ base=${1:-}
 if [ -n "$base" ]; then
 	bad=0
 	added=$(git diff -U0 "$base...HEAD" -- src include | grep -E '^\+[^+]' || true)
+	# A literal that the same file's removed lines already hold is moved or renamed, not new.
+	diff_file=$(mktemp)
+	git diff -U0 "$base...HEAD" -- src include >"$diff_file"
+	fresh=$(awk '
+		function lits(s, out,   n) { n = 0; while (match(s, /0x[0-9A-Fa-f]{7,8}/)) { out[++n] = substr(s, RSTART, RLENGTH); s = substr(s, RSTART + RLENGTH) } return n }
+		NR == FNR { if ($0 ~ /^\+\+\+ /) f = $0; else if ($0 ~ /^-[^-]/) { n = lits($0, a); for (i = 1; i <= n; i++) pool[f SUBSEP a[i]]++ } next }
+		$0 ~ /^\+\+\+ / { f = $0; next }
+		$0 ~ /^\+[^+]/ { n = lits($0, a); keep = 0
+			for (i = 1; i <= n; i++) if (pool[f SUBSEP a[i]] > 0) pool[f SUBSEP a[i]]--; else keep = 1
+			if (keep) print }
+	' "$diff_file" "$diff_file" || true)
+	rm -f "$diff_file"
 	rule() {
-		printf '%s\n' "$added" | grep -nE "$1" | head -n 5 | while IFS= read -r l; do
+		case $2 in "raw address") src=$fresh ;; *) src=$added ;; esac
+		printf '%s\n' "$src" | grep -nE "$1" | head -n 5 | while IFS= read -r l; do
 			echo "check-tree: $2: $l"
 		done
 	}

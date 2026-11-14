@@ -7,11 +7,11 @@ MATCH void EMI_LoadPartyArchives(u8 member_a, u8 member_b, u8 member_c, u8 famil
     if (family == 0) {
         EMI_LoadPartyCode(member_a, member_b, member_c);
         while (EMI_IsReady() == 0) {
-            CallbackWait(1u);
+            SYS_ThreadWait(1u);
         }
     }
-    EMI_LoadPartyData(member_a, member_b, member_c, family);
+    EMI_LoadParty(member_a, member_b, member_c, family);
     while (EMI_IsReady() == 0) {
-        CallbackWait(1u);
+        SYS_ThreadWait(1u);
     }
 }

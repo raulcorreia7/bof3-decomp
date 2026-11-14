@@ -37,7 +37,7 @@ MATCH void func_801EECCC(void) {
     }
     *MEM_PTR(u16, 0x8003AC00u) = 0;
     g_GfxPalettePending        = 1;
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionEffect(0x100);
     Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
     g_Task->unk_09 = 1;
     g_Task->timer  = 1;

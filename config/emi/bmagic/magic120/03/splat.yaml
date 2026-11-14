@@ -18,7 +18,7 @@ segments:
     subsegments:
       - [0x20A8, bin, D_801F0CA8]
       - [0x20B0, bin, D_801F0CB0]
-      - [0x20C4, bin, BMagic_StepTable]
+      - [0x20C4, bin, BMagic_Steps]
       - [0x20E4, bin, D_801F0CE4]
       - [0x20E8, bin, D_801F0CE8]
       - [0x20EC, bin, D_801F0CEC]

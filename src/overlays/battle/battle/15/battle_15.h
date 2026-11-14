@@ -35,7 +35,7 @@
 #define BATTLE_ENTRY_STRIDE            0x98
 #define BATTLE_ENTRY_COUNT             30
 /* The kind byte of a live entry; the other kinds are unproven. */
-#define BATTLE_ENTRY_KIND              7
+#define BATTLE_ENTRY_TYPE              7
 
 /* The hit-chance formula's quantities, in percentage points: the threshold is
  * the seeded roll's fifth over the base, capped at the max; the rate is the
@@ -101,18 +101,18 @@ typedef volatile struct BattleSelectionPlayer {
  * func_800AFB48: +0x24 bit 2 selects the second 0x80037800 cell bank, +0x27 is
  * the quotient/remainder source and +0x28 indexes D_800B6C28/D_800B6C30/
  * D_800B6C38. */
-typedef struct BattleSpriteCellRecord {
+typedef struct BattleSpriteCell {
     u8 pad_00[0x24]; /* +0x00 .. +0x23 */
     u8 flags_24;     /* +0x24 bit 2 selects the +0x10 bank */
     u8 pad_25[2];    /* +0x25 .. +0x26 */
     u8 cell_value;   /* +0x27 quotient/remainder source */
     u8 bank_index;   /* +0x28 cell-table index */
-} BattleSpriteCellRecord;
+} BattleSpriteCell;
 
-ASSERT_OFFSET(BattleSpriteCellRecord, flags_24, 0x24);
-ASSERT_OFFSET(BattleSpriteCellRecord, cell_value, 0x27);
-ASSERT_OFFSET(BattleSpriteCellRecord, bank_index, 0x28);
-ASSERT_SIZE(BattleSpriteCellRecord, 0x29);
+ASSERT_OFFSET(BattleSpriteCell, flags_24, 0x24);
+ASSERT_OFFSET(BattleSpriteCell, cell_value, 0x27);
+ASSERT_OFFSET(BattleSpriteCell, bank_index, 0x28);
+ASSERT_SIZE(BattleSpriteCell, 0x29);
 
 typedef struct BattleWork {
     u8  unk_00[0x08];
@@ -310,9 +310,9 @@ typedef struct BattleTemplateStats {
 } BattleTemplateStats;
 
 /* Enemy battler records (stride 0x118), one per battler slot. */
-typedef struct BattleEnemyRecord {
+typedef struct BattleEnemy {
     u8 unk_00[0x118];
-} BattleEnemyRecord;
+} BattleEnemy;
 
 /* The same cell read without the reload is g_BattleWorkCell: func_800A36F0's
  * save/restore keeps the plain word. A second name is the only form that keeps
@@ -939,11 +939,11 @@ static inline void Battle_DispatchEffect(BattleEffectSteps* table) {
     BattleEffectSteps handlers;
     PartyMember*      work;
 
-    handlers      = *table;
-    work          = (PartyMember*)g_Task;
-    g_ScriptTable = BATTLE_SCRIPT_TABLE;
+    handlers  = *table;
+    work      = (PartyMember*)g_Task;
+    g_Scripts = BATTLE_SCRIPT_TABLE;
     ((Callback*)&handlers)[work->header.mode]();
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 /* Reset the three selection bytes once the lock at -0x7A8D is clear, then run

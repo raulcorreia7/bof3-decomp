@@ -161,3 +161,22 @@ def test_renamed_file_gaining_a_local_fails(tmp_path: Path) -> None:
     output = result.stdout + result.stderr
     assert result.returncode == 1, output
     assert "decompiler local" in output and "var_s1" in output, output
+
+
+def test_renamed_identifier_on_a_line_with_an_address_passes(tmp_path: Path) -> None:
+    result = run_tree(
+        tmp_path,
+        {"src/overlays/test/arc/00/a.c": "u32 x = FOO(0x801D933C);\n"},
+        {"src/overlays/test/arc/00/a.c": "u32   x = BAR(0x801D933C);\n"},
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+
+
+def test_new_address_beside_a_renamed_one_still_fails(tmp_path: Path) -> None:
+    result = run_tree(
+        tmp_path,
+        {"src/overlays/test/arc/00/a.c": "u32 x = FOO(0x801D933C);\n"},
+        {"src/overlays/test/arc/00/a.c": "u32 x = BAR(0x801D933C, 0x801D9340);\n"},
+    )
+    assert result.returncode == 1, result.stdout + result.stderr
+    assert "raw address" in result.stdout + result.stderr

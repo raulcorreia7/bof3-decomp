@@ -16,7 +16,7 @@ extern Callback D_800C1804[];
 /* D_800C1DB0 */
 extern u8       g_BossEnemyScript[];
 /* D_800C1DBC */
-extern u16      g_BossEnemyActionTable[];
+extern u16      g_BossEnemyActions[];
 extern Callback D_800C1DC4[];
 extern Callback D_800C1DF4[];
 extern Callback D_800C1DFC[];

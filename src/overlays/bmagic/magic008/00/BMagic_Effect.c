@@ -31,7 +31,7 @@ MATCH void func_801EED5C(void) {
     g_BattleEffects[index & BYTE_MASK].handler_index = 31;
     g_BattleEffects[index & BYTE_MASK].target.party  = work;
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionEffect(0x100);
 }
 
 MATCH void func_801EEF6C(void) {
@@ -363,7 +363,7 @@ MATCH void func_801F03FC(void) {
 
 MATCH void func_801F047C(void) {
     if (Actor_StepAnimOnce() & BYTE_MASK) {
-        SND_QueueSelectionFx(0x101);
+        SND_QueueSelectionEffect(0x101);
         g_Task->unk_09 = 0xF;
         g_Task->header.step += 1;
     }
@@ -430,7 +430,7 @@ MATCH void func_801F07D4(void) {
 
 MATCH void func_801F0864(void) {
     if (Actor_StepAnimOnce() & BYTE_MASK) {
-        SND_QueueSelectionFx(0x101);
+        SND_QueueSelectionEffect(0x101);
         g_Task->unk_09 = 0x20;
         g_Task->header.step += 1;
     }

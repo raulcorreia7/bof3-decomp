@@ -24,6 +24,6 @@ MATCH void Fishing_DrawCautionBox(s32 x, s32 y) {
         Fishing_DrawSprite(49, 1, (sx + 8 + i * 8), (sy + 64));
     }
     Fishing_DrawSprite(50, 1, (sx + 176), (sy + 64));
-    UI_DrawText((sx + 62), (sy + 6), 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MSG_CAUTION));
-    UI_DrawText((sx + 6), (sy + 25), 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MSG_TOO_MANY_ITEMS));
+    UI_DrawText((sx + 62), (sy + 6), 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_CAUTION));
+    UI_DrawText((sx + 6), (sy + 25), 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_TOO_MANY_ITEMS));
 }

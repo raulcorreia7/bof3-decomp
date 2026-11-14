@@ -51,7 +51,7 @@ NON_MATCHING void func_801E206C(void) {
         g_InputMasks[INPUT_SLOT_CONFIRM] |= PADL2 | PADR2;
     }
     bits = g_InputPressed;
-    keys = PAD_GetRepeatedButtons(bits & INPUT_DIRECTIONAL);
+    keys = INPUT_GetRepeatedButtons(bits & INPUT_DIRECTIONAL);
     if (keys & PADLup) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
         D_80148655 = D_80148655 - 1;

@@ -47,7 +47,7 @@ MATCH void func_801EEC70(void) {
     }
     *MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW) = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
     g_GfxPalettePending                                     = 1;
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
 }
 
 MATCH void func_801EEE14(void) {
@@ -56,7 +56,7 @@ MATCH void func_801EEE14(void) {
     PartyMember* work;
 
     if (g_Task->param.unk_0B == 0) {
-        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 1));
         if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
             for (i = 0; i < 8; i++) {
                 if (!Battle_SlotIsBlocked((u8)(i + BATTLE_PARTY_CHARACTERS_COUNT))) {
@@ -98,12 +98,12 @@ MATCH void func_801EEE14(void) {
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF114(void) {
-    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801EF9A8 + 1, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
     }
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801EF1AC(void) {

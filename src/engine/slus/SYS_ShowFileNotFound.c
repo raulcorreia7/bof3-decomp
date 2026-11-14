@@ -8,6 +8,6 @@ MATCH void SYS_ShowFileNotFound(void) {
         UI_DrawGlyphString(160, 100, 0, (const u8*)D_80149F9C);
         TEXT_Format(g_UiFormatBuffer, D_80149FAC, D_1F800000[0], D_1F800000[1], D_1F800000[2]);
         UI_DrawGlyphString(160, 116, 0, (const u8*)g_UiFormatBuffer);
-        CallbackWait(1);
+        SYS_ThreadWait(1);
     }
 }

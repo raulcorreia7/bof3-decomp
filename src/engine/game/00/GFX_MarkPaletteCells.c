@@ -15,7 +15,7 @@ MATCH u8 GFX_MarkPaletteCells(u8 mode, u8 value, u8 search) {
     row    = ((u8*)&D_1F800000)[0];
     column = ((u8*)&D_1F800000)[1];
     switch (mode) {
-        case PALETTE_KIND_ROW:
+        case PALETTE_TYPE_ROW:
             D_80145D54[row][column + 0xF] = value;
             D_80145D54[row][column + 0xE] = value;
             D_80145D54[row][column + 0xD] = value;
@@ -25,20 +25,20 @@ MATCH u8 GFX_MarkPaletteCells(u8 mode, u8 value, u8 search) {
             D_80145D54[row][column + 0x9] = value;
             D_80145D54[row][column + 0x8] = value;
             /* fallthrough */
-        case PALETTE_KIND_CELLS_8:
+        case PALETTE_TYPE_CELLS_8:
             D_80145D54[row][column + 0x7] = value;
             D_80145D54[row][column + 0x6] = value;
             D_80145D54[row][column + 0x5] = value;
             D_80145D54[row][column + 0x4] = value;
             /* fallthrough */
-        case PALETTE_KIND_CELLS_4:
+        case PALETTE_TYPE_CELLS_4:
             D_80145D54[row][column + 0x3] = value;
             D_80145D54[row][column + 0x2] = value;
             /* fallthrough */
         case PALETTE_KIND_CELLS_2:
             D_80145D54[row][column + 0x1] = value;
             /* fallthrough */
-        case PALETTE_KIND_CELL:
+        case PALETTE_TYPE_CELL:
             D_80145D54[row][column] = value;
             break;
         default:

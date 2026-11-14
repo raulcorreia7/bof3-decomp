@@ -71,7 +71,7 @@ MATCH void func_801EED04(void) {
         *dst++ = *src++ | 0x8000;
     }
     g_GfxPalettePending = 1;
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
 }
 
 /* Starts the effect once bytes 0x09 and 0x0B of the work record are both zero. */
@@ -288,7 +288,7 @@ MATCH void func_801EFEDC(void) {
                     id = EMI_CUE_ID(SND_BANK_COMMON, 0x03);
                     break;
             }
-            SND_QueueSelectionFx(id);
+            SND_QueueSelectionEffect(id);
         }
         g_Task->param.unk_0B = 0x10;
         g_Task->unk_09       = 0;

@@ -1,9 +1,9 @@
 /* Sets the step kind from the cell under the lead party member's next position (1, 2 or 3 for cell codes 0xA1, 0xA0 or 0xAE, 4 for a walk transition, else 0), then runs the handler of the current mode. */
-/* AREA_RUN_CELL_KIND_STEP (area065 0x801F2F24, area087 0x801F2F20, area088 0x801F3A50, area115 0x801F2EF0, area121
+/* AREA_RUN_CELL_TYPE_STEP (area065 0x801F2F24, area087 0x801F2F20, area088 0x801F3A50, area115 0x801F2EF0, area121
  * 0x801F2F04) */
 /* The step stores after the cell test re-read the work cell: the compiler must assume a call may have changed it.
  * A statement macro: the inline form moves bytes. */
-#define AREA_RUN_CELL_KIND_STEP(HANDLERS)                                                                    \
+#define AREA_RUN_CELL_TYPE_STEP(HANDLERS)                                                                    \
     s32    x;                                                                                                \
     s32    y;                                                                                                \
     s32    scaled;                                                                                           \

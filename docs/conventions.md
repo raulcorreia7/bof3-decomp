@@ -600,7 +600,7 @@ a `static inline` function, a macro. Measured inline behavior:
 ### Least indirection
 
 A use site is at most two steps from the real thing: a helper may build on one other helper
-(`INPUT_REPEATED` on `PAD_GetRepeatedButtons`, an accessor on `FIELD`), never on a third. A macro or helper
+(`INPUT_REPEATED` on `INPUT_GetRepeatedButtons`, an accessor on `FIELD`), never on a third. A macro or helper
 earns its place when it is reused or when its name says something the raw form does not; one that
 only renames or forwards goes.
 
@@ -620,9 +620,9 @@ evidence goes back to the address.
 **Do**
 
 ```c
-/* The repeatable buttons of a pad mask: PAD_GetRepeatedButtons sees the held keys
+/* The repeatable buttons of a pad mask: INPUT_GetRepeatedButtons sees the held keys
  * filtered to the buttons that repeat. */
-#define INPUT_REPEATED(pressed, buttons) (PAD_GetRepeatedButtons((pressed) & (buttons)))
+#define INPUT_REPEATED(pressed, buttons) (INPUT_GetRepeatedButtons((pressed) & (buttons)))
 
 trigger = INPUT_REPEATED(held, INPUT_DIRECTIONAL);
 Battle_AllocEffect();

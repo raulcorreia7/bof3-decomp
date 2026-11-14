@@ -54,7 +54,7 @@ MATCH void func_801EED04(void) {
         dst[i] = src[i];
     }
     g_GfxPalettePending = 1;
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
 }
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
@@ -125,12 +125,12 @@ MATCH void func_801EF4E0(void) {
 }
 
 MATCH void func_801EF524(void) {
-    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801EF8B4 + 1, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
     }
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801EF5BC(void) {

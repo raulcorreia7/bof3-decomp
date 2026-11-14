@@ -120,7 +120,7 @@ NON_MATCHING void func_801D9BDC(void) {
             g_GameEntrySubstate += 1;
         }
     }
-    tmp0 = PAD_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
+    tmp0 = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
     if (tmp0 & PADLup) {
         val1 = -1;
     }
@@ -140,7 +140,7 @@ NON_MATCHING void func_801D9BDC(void) {
     } while (*(((s8)D_801ED66C * 3) + D_801ED680 + D_801ED668) == 0);
     val4 = 0 << 0x18;
     if (D_801ED678 != 0) {
-        tmp1 = PAD_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
+        tmp1 = INPUT_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
         if (tmp1 & PADLleft) {
             val2 = -1;
         }

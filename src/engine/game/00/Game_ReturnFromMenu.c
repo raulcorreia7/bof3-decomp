@@ -9,29 +9,29 @@ MATCH void Game_ReturnFromMenu(void) {
     Game_UpdateMenuFrame();
     UI_SetMode(2u);
     func_80198C38(0u);
-    CallbackWait(1u);
+    SYS_ThreadWait(1u);
     if (D_80148661 != 0u) {
         EMI_LoadPartyArchives(g_PartyFieldOrder[0], g_PartyFieldOrder[1], g_PartyFieldOrder[2], 0u);
         while (EMI_IsReady() == 0) {
-            CallbackWait(1u);
+            SYS_ThreadWait(1u);
         }
         D_80148661 = 0u;
     }
     g_EmiStreamFlags = 0x20;
     EMI_GetArchiveId(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
     while (EMI_IsReady() == 0) {
-        CallbackWait(1u);
+        SYS_ThreadWait(1u);
     }
     if (g_GameRequestFlags & AREA_LOAD_FLAG_FAIRY_VILLAGE) {
         EMI_LoadArchive(EMI_SLOT_COMMU00);
         while (EMI_IsReady() == 0) {
-            CallbackWait(1u);
+            SYS_ThreadWait(1u);
         }
         func_801F03D0();
     }
     UI_SetMode(3u);
     func_80198BC4(1u);
-    if ((D_80143F20 == 0x6Eu) && !(SND_FindFreeFxVoice(&sep_index, &seq_index) & BYTE_MASK)) {
+    if ((D_80143F20 == 0x6Eu) && !(SND_FindFreeEffectVoice(&sep_index, &seq_index) & BYTE_MASK)) {
         SND_FadeInSequence(sep_index, seq_index, 0x14, 0x10);
     }
     request = &D_8014869C;

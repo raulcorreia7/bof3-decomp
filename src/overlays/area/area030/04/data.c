@@ -163,7 +163,7 @@ Callback g_FishingPromptStates[13] = {
     (Callback)func_801D3A54, (Callback)func_801D3C74, (Callback)func_801D3F40,
     (Callback)func_801D41E4,
 };
-Callback g_FishingDataStates[17] = {
+Callback g_FishingStates[17] = {
     (Callback)func_801D0C90, (Callback)func_801D42E4, (Callback)func_801D4378,
     (Callback)func_801D4570, (Callback)func_801D45F8, (Callback)func_801D4680,
     (Callback)Fishing_CatchPageNext, (Callback)func_801D4984, (Callback)func_801D4B60,

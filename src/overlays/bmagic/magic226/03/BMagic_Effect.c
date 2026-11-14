@@ -38,7 +38,7 @@ MATCH void func_801EED18(void) {
     g_BattleEffects[slot].target.party = g_Task;
     g_BattleEffects[slot].header.mode  = 0;
     g_Task->param.unk_0B += 1;
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
     i   = 0;
     dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
     src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
@@ -64,7 +64,7 @@ MATCH void func_801EED18(void) {
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF048(void) {
-    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0C44, g_Task->header.step);
     if ((g_Task->header.flags & BMAGIC_EFFECT_IN_USE) != 0 && g_Task->header.step != 0) {
         Battle_ProjectRange();
@@ -74,7 +74,7 @@ MATCH void func_801EF048(void) {
         BMagic_DrawDarkRing();
         PopMatrix();
     }
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 /* Starts the meteor above the battler: copies its pose, rotates the unk_0C/unk_10 pair by the

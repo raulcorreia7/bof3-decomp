@@ -40,7 +40,7 @@ MATCH void func_801EEC5C(void) {
         g_Task->param.unk_0B += 1;
         i++;
     } while (i < 8);
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
 }
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"
@@ -129,7 +129,7 @@ MATCH void func_801EF210(void) {
         }
     }
     Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
-    SND_QueueSelectionFx(0x101);
+    SND_QueueSelectionEffect(0x101);
     g_Task->unk_09 = 16;
     g_Task->header.step += 1;
 }
@@ -157,7 +157,7 @@ MATCH void func_801EF430(void) {
     timer_next    = g_Task->timer - 2;
     g_Task->timer = timer_next;
     if (!(timer_next & BYTE_MASK)) {
-        SND_QueueSelectionFx(0x102);
+        SND_QueueSelectionEffect(0x102);
         g_Task->unk_09 = 0x10;
         g_Task->header.step += 1;
     }

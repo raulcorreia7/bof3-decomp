@@ -57,7 +57,7 @@ MATCH void Game_StartSelectedGame(void) { /* func_801D0E54 */
         g_PlayClock.hours      = 0u;
         g_AreaDrawFlags        = 0u;
         Scene_Start(16);
-        CallbackRegister(0, Game_UpdateMain);
+        SYS_ThreadRegister(0, Game_UpdateMain);
         g_UiTitleState = g_UiTitleState + 1u;
     }
 }
@@ -112,6 +112,6 @@ MATCH void Game_LeaveTitle(void) { /* func_801D1000 */
 
     SND_StopSelectionEffect();
     SND_SetBankLayout(0u);
-    CallbackRegister(0, Game_UpdateCampMenu);
-    CallbackExit();
+    SYS_ThreadRegister(0, Game_UpdateCampMenu);
+    SYS_ThreadExit();
 }

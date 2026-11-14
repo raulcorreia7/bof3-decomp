@@ -11,7 +11,7 @@ MATCH void SYS_Main(void) {
     SYS_InitRuntime();
     SYS_StartLogo();
     DrawSyncCallback(SYS_CaptureDrawTime);
-    CallbackRegister(0, SYS_StartFrontend);
+    SYS_ThreadRegister(0, SYS_StartFrontend);
 
     for (;;) {
         VSync(2);
@@ -35,8 +35,8 @@ MATCH void SYS_Main(void) {
                 if (EMI_IsReady() != 0) {
                     g_SysResetHoldFrames = 0;
                     SND_Exit();
-                    CallbackStopAll();
-                    CallbackRegister(0, SYS_StartFrontend);
+                    SYS_ThreadStopAll();
+                    SYS_ThreadRegister(0, SYS_StartFrontend);
                 }
             } else {
                 g_SysResetHoldFrames++;
@@ -45,7 +45,7 @@ MATCH void SYS_Main(void) {
             g_SysResetHoldFrames = 0;
         }
 
-        CallbackRun();
+        SYS_ThreadRun();
         EMI_Update();
         g_SysLastVSync = VSync(1);
         DrawSync(0);

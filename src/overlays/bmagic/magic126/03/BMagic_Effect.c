@@ -46,7 +46,7 @@ MATCH void func_801EECE4(void) {
         g_BattleEffects[slot].arg.unk_09   = i + 1;
         g_Task->param.unk_0B += 1;
     }
-    SND_QueueSelectionFx(0x102);
+    SND_QueueSelectionEffect(0x102);
     for (i = 0; i < 256; i++) {
         MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW)[i] = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW)[i] | 0x8000;
     }
@@ -226,7 +226,7 @@ MATCH void func_801EFB74(void) {
 
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        SND_QueueSelectionFx(0x100);
+        SND_QueueSelectionEffect(0x100);
         work               = g_Task;
         actor              = g_BattleEffectBattler;
         work->pos.x.fixed  = actor->pos.x.fixed;
@@ -393,7 +393,7 @@ MATCH void func_801F0494(void) {
     u8 i;
 
     if (g_Task->param.unk_0B == 0) {
-        SND_QueueSelectionFx(0x101);
+        SND_QueueSelectionEffect(0x101);
         slot                               = Battle_AllocEffect(1, 78);
         g_BattleEffects[slot].target.party = g_BattleEffectBattler;
         g_BattleEffects[slot].header.mode  = 0;

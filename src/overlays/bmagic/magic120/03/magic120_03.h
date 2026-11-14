@@ -26,6 +26,6 @@ void func_801F08AC(void);
 void func_801F0974(void);
 
 /* D_801F0CC4 */
-extern Callback BMagic_StepTable[];
+extern Callback BMagic_Steps[];
 
 #endif

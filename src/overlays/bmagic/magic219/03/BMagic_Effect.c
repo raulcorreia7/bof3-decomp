@@ -54,7 +54,7 @@ MATCH void func_801EED28(void) {
     *MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW)  = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
     *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = *MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
     g_GfxPalettePending                                      = 1;
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
 }
 
 MATCH void func_801EEE50(void) {
@@ -82,7 +82,7 @@ MATCH void func_801EEF54(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        SND_QueueSelectionFx(0x101);
+        SND_QueueSelectionEffect(0x101);
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
         g_Task->header.mode = g_Task->header.mode + 1;
     }
@@ -94,7 +94,7 @@ MATCH void func_801EEF54(void) {
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF068(void) {
-    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801EFA04, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
@@ -102,7 +102,7 @@ MATCH void func_801EF068(void) {
         func_801EF71C();
         PopMatrix();
     }
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801EF118(void) {

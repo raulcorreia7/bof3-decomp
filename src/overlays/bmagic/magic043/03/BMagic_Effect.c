@@ -65,7 +65,7 @@ MATCH void func_801EED30(void) {
         dst[i + 16] = src[i + 16];
     }
     g_GfxPalettePending = 1;
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
 }
 
 MATCH void func_801EEEF0(void) {

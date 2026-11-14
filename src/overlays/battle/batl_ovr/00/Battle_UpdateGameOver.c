@@ -24,6 +24,6 @@ MATCH void Battle_UpdateGameOver(void) {
         func_800ACF80();
         func_801E5A38();
         SND_Exit();
-        CallbackReplace(SYS_StartFrontend);
+        SYS_ThreadReplace(SYS_StartFrontend);
     }
 }

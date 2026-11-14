@@ -67,7 +67,7 @@ MATCH void func_801EEF44(void) {
         return;
     }
     g_Task->header.mode += 1;
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
     slot                               = Battle_AllocEffect(1, 7) & BYTE_MASK;
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].unk_08       = g_BattleEffectBattler->facing;
@@ -542,9 +542,9 @@ MATCH void func_801F093C(void) {
 }
 
 MATCH void func_801F0D08(void) {
-    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F1230 + 3, g_Task->header.step);
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801F0D6C(void) {

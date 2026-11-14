@@ -4,7 +4,7 @@ MATCH s32 Scene_DispatchByPosition(s32 x, s32 y) {
     s8  index;
     s32 result;
 
-    index = func_801A7AD8(&g_ScenePositionTable, 1, x, y);
+    index = func_801A7AD8(&g_ScenePositions, 1, x, y);
     if (index >= 0) {
         SYS_DISPATCH_BYTE(g_ScenePositionDispatch, index);
         result = 1;

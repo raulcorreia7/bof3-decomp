@@ -32,7 +32,7 @@ MATCH void func_801E0F0C(void) {
         spad2                              = g_Task;
         g_BattleEffects[slot].target.party = spad;
         Actor_SelectScript((spad2->facing + 4) & BYTE_MASK);
-        SND_QueueSelectionFx(0x206);
+        SND_QueueSelectionEffect(0x206);
         if (g_Battle.outcome.event_flags == 0) {
             Battle_OpenPanel();
             Battle_SetTextPartyName(g_Task->slot);

@@ -1,7 +1,7 @@
 /* Handles Garr's actor or queues an interaction; verify every image after a change. */
 
 s8  PlChar_FindGarrActorSlot(void);
-s32 Plchar_FollowerInReach(u8 index);
+s32 PlChar_FollowerInReach(u8 index);
 
 #define PLCHAR_RUN_GARR_FIELD_TASK(check_actor)                                                                    \
     u8  actor_slot;                                                                                                \
@@ -10,7 +10,7 @@ s32 Plchar_FollowerInReach(u8 index);
     s32 pos_y;                                                                                                     \
     actor_slot = (u8)PlChar_FindGarrActorSlot();                                                                   \
     if (actor_slot != 0xFF) {                                                                                      \
-        if ((Plchar_FollowerInReach(actor_slot) & BYTE_MASK) == 0 && (check_actor(actor_slot) & BYTE_MASK) == 0) { \
+        if ((PlChar_FollowerInReach(actor_slot) & BYTE_MASK) == 0 && (check_actor(actor_slot) & BYTE_MASK) == 0) { \
             g_ActorSlots[actor_slot].link = 1;                                                                     \
             /* FAKE: retail reads SND_PlayCue as void(s32). */                                                     \
             ((void (*)(s32))SND_PlayCue)(g_Task->unk_2C + 0x100);                                                  \

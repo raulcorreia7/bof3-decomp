@@ -82,7 +82,7 @@ MATCH void func_801EED18(void) {
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF0A8(void) {
-    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0554, g_Task->header.step);
     if (g_Task->header.flags & 0x1) {
         if (g_Task->header.step != 0) {
@@ -96,7 +96,7 @@ MATCH void func_801EF0A8(void) {
             }
         }
     }
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801EF174(void) {
@@ -168,9 +168,9 @@ MATCH void func_801EF420(void) {
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
         if (g_Task->unk_04 & 1) {
-            SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
+            SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
         } else {
-            SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+            SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
         }
         g_Task->unk_04 = 0;
         for (i = 0; i < 8; i++) {

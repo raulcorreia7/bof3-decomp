@@ -262,7 +262,7 @@ typedef struct SoundSequence {
     u8  pad_84[0x28]; /* +0x84 */
 } SoundSequence;
 
-/* Stack snapshots of the fixed dispatch tables the step handlers copy to the frame and index: Message_DispatchState/func_801510DC copy the eight-entry tables at g_MessageStates/D_80149A7C, func_80151538/Message_DispatchChoiceMode the six-entry tables at D_80149A9C/g_MessageChoiceModes, func_8015196C/func_80151A98 build the two-entry tables on the stack, and g_MessageStepTable is the sixteen-entry handler table Message_DispatchTableStep copies. */
+/* Stack snapshots of the fixed dispatch tables the step handlers copy to the frame and index: Message_DispatchState/func_801510DC copy the eight-entry tables at g_MessageStates/D_80149A7C, func_80151538/Message_DispatchChoiceMode the six-entry tables at D_80149A9C/g_MessageChoiceModes, func_8015196C/func_80151A98 build the two-entry tables on the stack, and g_MessageSteps is the sixteen-entry handler table Message_DispatchTableStep copies. */
 typedef struct {
     Callback handlers[8];
 } Table8;
@@ -403,7 +403,7 @@ extern u8                          D_80142CE0[];
 extern u32                         D_80143740[];
 /* SLUS-only state: overlays declare these addresses with their own views, so
  * the registry does not emit them. */
-extern CallbackSlot                D_80143B40[]; /* four slots, 0x80 bytes each */
+extern Thread                      D_80143B40[]; /* four slots, 0x80 bytes each */
 extern u8                          D_80143D75;
 extern u8                          D_80143D76;
 extern u8                          D_80143D77;
@@ -618,7 +618,7 @@ extern const Table6                g_MessageChoiceModes;
  * handlers that follow Message_DispatchTableStep): the shared step byte's indices at and
  * above 0x80 dispatch through it. */
 /* D_80149ACC */
-extern const HandlerTable          g_MessageStepTable;
+extern const HandlerTable          g_MessageSteps;
 extern const struct CallbackTable3 D_80149B30;
 extern const struct CallbackTable5 D_80149B3C;
 extern const struct CallbackTable5 D_80149B50;
@@ -1189,7 +1189,7 @@ void                    Char_ApplyWeapon(void* character);
 void                    Char_ApplyArmor(void* character);
 void                    Char_ApplyAccessories(void* param);
 void                    EMI_LoadPartyCode(u8 member_a, u8 member_b, u8 member_c);
-void                    EMI_LoadPartyData(u8 member_a, u8 member_b, u8 member_c, u8 family);
+void                    EMI_LoadParty(u8 member_a, u8 member_b, u8 member_c, u8 family);
 u8                      EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c);
 extern void             func_80167428(void);
 /* func_8016BA04 */
@@ -1205,7 +1205,7 @@ extern s32              func_801F2C04(void);
 /* Pause or replay the sequence player for the selected sound entry. */
 static inline void Snd_ToggleSequencePlayer(void (*action)(short, short), s32 cue_id) {
     if ((cue_id & BYTE_MASK) != 0xFF) {
-        action(g_SelectionFxVoices[g_SelectionCues[(cue_id & BYTE_MASK) * 4]], g_SelectionSequences[(cue_id & BYTE_MASK) * 4]);
+        action(g_SelectionEffectVoices[g_SelectionCues[(cue_id & BYTE_MASK) * 4]], g_SelectionSequences[(cue_id & BYTE_MASK) * 4]);
     }
 }
 

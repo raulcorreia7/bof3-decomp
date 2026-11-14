@@ -26,23 +26,23 @@ void         SYS_CaptureDrawTime(void);
 /* func_8014B1A4 */
 extern void  SYS_InitCard(void);
 /* func_8014B33C */
-void         CallbackStopAll(void);
+void         SYS_ThreadStopAll(void);
 /* func_8014B3C4 */
 extern void  SYS_ShowException(void);
 /* func_8014B6B4 */
-void         CallbackInitThreads(void);
+void         SYS_ThreadInit(void);
 /* func_8014B73C */
-void         CallbackRun(void);
+void         SYS_ThreadRun(void);
 /* func_8014B854 */
-void         CallbackRegister(s32 callback_slot, Callback callback);
+void         SYS_ThreadRegister(s32 callback_slot, Callback callback);
 /* func_8014B87C */
-void         CallbackWait(u16 countdown);
+void         SYS_ThreadWait(u16 countdown);
 /* func_8014B8B0 */
-void         CallbackExit(void);
+void         SYS_ThreadExit(void);
 /* func_8014B900 */
-void         CallbackCloseThread(s32 callback_slot);
+void         SYS_ThreadClose(s32 callback_slot);
 /* func_8014B954 */
-extern void  CallbackReplace(Callback entry);
+extern void  SYS_ThreadReplace(Callback entry);
 void         func_8014BA04(void);
 /* func_8014BA54 */
 extern void  Area_DrawScene(void);
@@ -100,7 +100,7 @@ void         GFX_ClearRect(s16 x, s16 y, s16 width, s16 height);
 /* func_8014E5A0 */
 void         GFX_AddPrim(u32 ot_index, u32 primitive_size);
 /* func_8014E640 */
-s32          PAD_GetRepeatedButtons(s32 button_mask);
+s32          INPUT_GetRepeatedButtons(s32 button_mask);
 /* func_8014E6D0 */
 void         GFX_UpdateTransferQueue(void);
 /* func_8014EA80 */
@@ -293,9 +293,9 @@ void         SND_FadeOutSequence(u32 effect_group, s32 effect_id, s32 cue_level,
 /* func_8015D5D8 */
 void         SND_StopAllSequences(void);
 /* func_8015D660 */
-bool         SND_FindFreeFxVoice(u8* out_index, u8* out_seq);
+bool         SND_FindFreeEffectVoice(u8* out_index, u8* out_seq);
 /* func_8015D71C */
-extern void  SND_QueueSelectionFx(s32 cue_id);
+extern void  SND_QueueSelectionEffect(s32 cue_id);
 /* func_8015D7C8 */
 void         SND_QueueCueVolume(s32 cue_id, s32 left_index, s32 right_index);
 /* func_8015DF18 */
@@ -329,7 +329,7 @@ void         EMI_CdOnSync(s32 status, u8* result);
 /* func_80162230 */
 void         EMI_CdOnReady(u8 status, u8* result);
 /* func_80162C14 */
-void         EMI_CopySectorData(void);
+void         EMI_CopySector(void);
 /* func_80162CD8 */
 void         EMI_EndArchive(void);
 /* func_80162D00 */

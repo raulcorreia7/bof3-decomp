@@ -12,29 +12,29 @@ MATCH void Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 item_ki
     character = &g_Characters[character_index];
     clut      = 0;
     switch (item_kind) {
-        case ITEM_KIND_ITEM:
-        case ITEM_KIND_UNUSED:
+        case ITEM_TYPE_ITEM:
+        case ITEM_TYPE_UNUSED:
         default:
             category = ITEM_CAT_ITEM;
             break;
-        case ITEM_KIND_WEAPON:
+        case ITEM_TYPE_WEAPON:
             category = ITEM_CAT_WEAPON;
             break;
-        case ITEM_KIND_SHIELD:
-        case ITEM_KIND_HELMET:
-        case ITEM_KIND_ARMOR:
+        case ITEM_TYPE_SHIELD:
+        case ITEM_TYPE_HELMET:
+        case ITEM_TYPE_ARMOR:
             category = ITEM_CAT_ARMOR;
             break;
-        case ITEM_KIND_ACCESSORY:
-        case ITEM_KIND_FISHING_LURE:
-        case ITEM_KIND_FISHING_ROD:
+        case ITEM_TYPE_ACCESSORY:
+        case ITEM_TYPE_FISHING_LURE:
+        case ITEM_TYPE_FISHING_ROD:
             category = ITEM_CAT_ACCESSORY;
             break;
     }
     shaded = ((Item_GetEquipability(category, item_id) >> character_index) ^ 1) & 1;
     UI_DrawWindow((x + MENU_EQUIP_STAT_INSET) & HALF_MASK, (y + MENU_EQUIP_STAT_INSET) & HALF_MASK, MENU_EQUIP_STAT_WINDOW_WIDTH, MENU_EQUIP_STAT_WINDOW_HEIGHT, shaded, g_WindowStyle);
     if (shaded == 0) {
-        Char_PreviewEquip(character_index, EQUIP_SLOT_OF_KIND(item_kind), item_id, flags, values);
+        Char_PreviewEquip(character_index, EQUIP_SLOT_OF_TYPE(item_kind), item_id, flags, values);
         /* The agility row takes the place of the intellect entry. */
         values[EQUIP_STAT_ROW_AGILITY] = values[EQUIP_PREVIEW_AGILITY];
         flags[EQUIP_STAT_ROW_AGILITY]  = flags[EQUIP_PREVIEW_AGILITY];

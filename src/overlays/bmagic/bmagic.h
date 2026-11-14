@@ -280,7 +280,7 @@ extern BMagicStepHandlers BMagic_EffectSteps;
 /* The effect work record D_801F17B4 points to: func_801F006C clears bytes 0-4,
  * func_801EF33C dispatches on mode. magic070-072 keep a pool of them, one
  * record per sparkle; magic131 keeps a pool of 48. */
-typedef struct BMagicEffectWork {
+typedef struct BMagicEffect {
     /* 0x00 */ TaskHeader   header;
     /* 0x03 */ u8           unk_03;
     /* 0x04 */ u8           unk_04;
@@ -297,29 +297,29 @@ typedef struct BMagicEffectWork {
     /* 0x24 */ u8           pad_24[2];
     /* 0x26 */ s16          unk_26;
     /* 0x28 */ PartyMember* battler;
-} BMagicEffectWork;
+} BMagicEffect;
 
-/* header.flags bit of a BMagicEffectWork slot that is running. */
+/* header.flags bit of a BMagicEffect slot that is running. */
 #define BMAGIC_EFFECT_IN_USE 0x01
 
-ASSERT_SIZE(BMagicEffectWork, 0x2C);
+ASSERT_SIZE(BMagicEffect, 0x2C);
 
-ASSERT_OFFSET(BMagicEffectWork, unk_03, 0x03);
-ASSERT_OFFSET(BMagicEffectWork, unk_04, 0x04);
-ASSERT_OFFSET(BMagicEffectWork, timer_05, 0x05);
-ASSERT_OFFSET(BMagicEffectWork, unk_06, 0x06);
-ASSERT_OFFSET(BMagicEffectWork, unk_07, 0x07);
-ASSERT_OFFSET(BMagicEffectWork, unk_08, 0x08);
-ASSERT_OFFSET(BMagicEffectWork, unk_0A, 0x0A);
-ASSERT_OFFSET(BMagicEffectWork, phase_0C, 0x0C);
-ASSERT_OFFSET(BMagicEffectWork, pos, 0x14);
-ASSERT_OFFSET(BMagicEffectWork, unk_20, 0x20);
-ASSERT_OFFSET(BMagicEffectWork, unk_22, 0x22);
-ASSERT_OFFSET(BMagicEffectWork, unk_26, 0x26);
-ASSERT_OFFSET(BMagicEffectWork, battler, 0x28);
+ASSERT_OFFSET(BMagicEffect, unk_03, 0x03);
+ASSERT_OFFSET(BMagicEffect, unk_04, 0x04);
+ASSERT_OFFSET(BMagicEffect, timer_05, 0x05);
+ASSERT_OFFSET(BMagicEffect, unk_06, 0x06);
+ASSERT_OFFSET(BMagicEffect, unk_07, 0x07);
+ASSERT_OFFSET(BMagicEffect, unk_08, 0x08);
+ASSERT_OFFSET(BMagicEffect, unk_0A, 0x0A);
+ASSERT_OFFSET(BMagicEffect, phase_0C, 0x0C);
+ASSERT_OFFSET(BMagicEffect, pos, 0x14);
+ASSERT_OFFSET(BMagicEffect, unk_20, 0x20);
+ASSERT_OFFSET(BMagicEffect, unk_22, 0x22);
+ASSERT_OFFSET(BMagicEffect, unk_26, 0x26);
+ASSERT_OFFSET(BMagicEffect, battler, 0x28);
 
 /* The record of an effect that orbits its battler: the angle advances every frame and the radius scales sin and cos. */
-typedef struct BMagicOrbitWork {
+typedef struct BMagicOrbit {
     /* 0x00 */ TaskHeader header;
     /* 0x03 */ u8         unk_03;
     /* 0x04 */ u8         unk_04;
@@ -333,34 +333,34 @@ typedef struct BMagicOrbitWork {
     /* 0x0C */ s16        radius;
     /* 0x0E */ u16        angle;
     /* 0x10 */ WorldPos   pos;
-} BMagicOrbitWork;
+} BMagicOrbit;
 
-ASSERT_SIZE(BMagicOrbitWork, 0x1C);
+ASSERT_SIZE(BMagicOrbit, 0x1C);
 
-ASSERT_OFFSET(BMagicOrbitWork, radius, 0x0C);
-ASSERT_OFFSET(BMagicOrbitWork, angle, 0x0E);
-ASSERT_OFFSET(BMagicOrbitWork, pos, 0x10);
+ASSERT_OFFSET(BMagicOrbit, radius, 0x0C);
+ASSERT_OFFSET(BMagicOrbit, angle, 0x0E);
+ASSERT_OFFSET(BMagicOrbit, pos, 0x10);
 
 /* D_801F05F8 (magic106), D_801F1054 (magic063) */
-extern BMagicOrbitWork* g_BMagicOrbitWork;
+extern BMagicOrbit* g_BMagicOrbit;
 
 /* Steps the orbit work around its battler: the angle advances and the position follows it at the work's radius, the
  * vertical span grows by unk_0A, and every other frame the effect timer drops; at zero the battler's ticker drops and
  * CLEAR runs. A statement macro. */
-#define BMAGIC_ORBIT_BATTLER_AND_CLEAR(CLEAR)                                                                                              \
-    g_BMagicOrbitWork->angle       = (g_BMagicOrbitWork->angle + 0x40) & 0xFFF;                                                            \
-    g_BMagicOrbitWork->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin(g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius;      \
-    g_BMagicOrbitWork->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos((s16)g_BMagicOrbitWork->angle) * g_BMagicOrbitWork->radius; \
-    COORD_INT(g_BMagicOrbitWork->pos.z) += g_BMagicOrbitWork->unk_0A;                                                                      \
-    g_BMagicOrbitWork->unk_0B++;                                                                                                           \
-    if (g_FrameCount & 0x1) {                                                                                                              \
-        if (--g_BMagicOrbitWork->unk_09 == 0) {                                                                                            \
-            g_BattleEffectBattler->param.unk_0B--;                                                                                         \
-            CLEAR();                                                                                                                       \
-        }                                                                                                                                  \
+#define BMAGIC_ORBIT_BATTLER_AND_CLEAR(CLEAR)                                                                                  \
+    g_BMagicOrbit->angle       = (g_BMagicOrbit->angle + 0x40) & 0xFFF;                                                        \
+    g_BMagicOrbit->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin(g_BMagicOrbit->angle) * g_BMagicOrbit->radius;      \
+    g_BMagicOrbit->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos((s16)g_BMagicOrbit->angle) * g_BMagicOrbit->radius; \
+    COORD_INT(g_BMagicOrbit->pos.z) += g_BMagicOrbit->unk_0A;                                                                  \
+    g_BMagicOrbit->unk_0B++;                                                                                                   \
+    if (g_FrameCount & 0x1) {                                                                                                  \
+        if (--g_BMagicOrbit->unk_09 == 0) {                                                                                    \
+            g_BattleEffectBattler->param.unk_0B--;                                                                             \
+            CLEAR();                                                                                                           \
+        }                                                                                                                      \
     }
 
-extern MagicModule       D_801EEC00;
+extern MagicModule   D_801EEC00;
 /* D_801EF3E8 (magic161), D_801EF414 (magic145), D_801EF420 (magic159), D_801EF510 (magic065), D_801EF658 (magic054),
    D_801EF6CC (magic154), D_801EF718 (magic166), D_801EF72C (magic138), D_801EF770 (magic218), D_801EF784 (magic158),
    D_801EF7A0 (magic075), D_801EF818 (magic048), D_801EF89C (magic009), D_801EF8A0 (magic213), D_801EF8BC (magic115),
@@ -381,9 +381,9 @@ extern MagicModule       D_801EEC00;
    D_801F0BB0 (magic060), D_801F0C10 (magic062), D_801F0C38 (magic121), D_801F0C40 (magic226), D_801F0CA8 (magic120),
    D_801F0D14 (magic082), D_801F0D54 (magic222), D_801F0EEC (magic083), D_801F121C (magic114), D_801F125C (magic126),
    D_801F1394 (magic064), D_801F1630 (magic015), D_801F1BC4 (magic131), D_801F1BEC (magic008), D_801F24A4 (magic151) */
-extern Callback          g_BMagicEffectModes[];
-extern BMagicEffectWork* D_801F17B0;
-extern BMagicEffectWork* D_801F17B4;
+extern Callback      g_BMagicEffectModes[];
+extern BMagicEffect* D_801F17B0;
+extern BMagicEffect* D_801F17B4;
 
 /* The red and blue weight of one ring shade; the green follows the effect timer alone. */
 typedef struct BMagicRingShade {

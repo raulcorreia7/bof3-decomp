@@ -24,12 +24,12 @@
 
 /* How many palette cells a sprite owns (work byte 0x28): one 16-color cell, a whole 256-color row, or runs of 2, 4
  * and 8 cells. Area_BuildClut builds its CLUT word from it and GFX_AllocPaletteCell finds a free run of that size. */
-typedef enum PaletteKind {
-    PALETTE_KIND_CELL    = 0,
-    PALETTE_KIND_ROW     = 1,
+typedef enum PaletteType {
+    PALETTE_TYPE_CELL    = 0,
+    PALETTE_TYPE_ROW     = 1,
     PALETTE_KIND_CELLS_2 = 2,
-    PALETTE_KIND_CELLS_4 = 3,
-    PALETTE_KIND_CELLS_8 = 4,
-} PaletteKind;
+    PALETTE_TYPE_CELLS_4 = 3,
+    PALETTE_TYPE_CELLS_8 = 4,
+} PaletteType;
 
 #endif

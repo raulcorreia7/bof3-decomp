@@ -134,7 +134,7 @@ MATCH void func_801EF12C(void) {
     func_801EFEC8();
     g_Task->unk_04 = g_Task->param.unk_0B;
     g_BattleEffectBattler->header.flags |= ACTOR_FLAG_HIDDEN;
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionEffect(0x100);
 }
 
 MATCH void func_801EF1FC(void) {
@@ -146,7 +146,7 @@ MATCH void func_801EF1FC(void) {
 }
 
 MATCH void func_801EF268(void) {
-    SND_QueueSelectionFx(258);
+    SND_QueueSelectionEffect(258);
     D_801463D6 = g_Task->timer;
     Battle_MarkDamaged(g_BattleTargetSelector);
     g_BattleState = g_Battle.state | BATTLE_STATE_EFFECT_PLAYING;
@@ -205,7 +205,7 @@ MATCH void func_801EF478(void) {
             g_Task->unk_09 = value2 - 1;
         }
     } else {
-        SND_QueueSelectionFx(0x101);
+        SND_QueueSelectionEffect(0x101);
         func_800AFC98(2, 0);
         func_801F0078();
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
@@ -232,7 +232,7 @@ MATCH void func_801EF578(void) {
             g_Task->unk_09 = value2 - 1;
         }
     } else {
-        SND_QueueSelectionFx(0x101);
+        SND_QueueSelectionEffect(0x101);
         func_800AFC98(2, 0);
         func_801F0078();
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);

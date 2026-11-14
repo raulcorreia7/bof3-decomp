@@ -14,7 +14,7 @@ NON_MATCHING void func_801D4564(void) {
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y =
         (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + (((g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C - g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 0xD) + 0x1A);
-    tmp0 = PAD_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown | PADL1 | PADR1));
+    tmp0 = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown | PADL1 | PADR1));
     if (tmp0 & PADLup) {
         if (g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C != 0) {
             g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C -= 1;

@@ -39,4 +39,4 @@
             }                                                                                      \
         }                                                                                          \
     }                                                                                              \
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));

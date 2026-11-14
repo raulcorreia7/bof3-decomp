@@ -61,7 +61,7 @@ MATCH void func_801EED1C(void) {
     }
     *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = 0;
     g_GfxPalettePending                                      = 1;
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
     g_Task->header.mode++;
 }
 
@@ -215,10 +215,10 @@ MATCH void func_801EF880(void) {
 }
 
 MATCH void func_801EF8C4(void) {
-    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0078, g_Task->header.step);
     Battle_ProjectRange();
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801EF930(void) {

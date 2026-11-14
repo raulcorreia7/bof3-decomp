@@ -24,7 +24,7 @@ MATCH void func_801EEC5C(void) {
     g_BattleEffects[slot].pos.y.fixed  = src->pos.y.fixed;
     g_BattleEffects[slot].pos.z.fixed  = src->pos.z.fixed;
     g_Task->param.unk_0B               = 1;
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionEffect(0x100);
     g_Task->header.mode += 1;
 }
 

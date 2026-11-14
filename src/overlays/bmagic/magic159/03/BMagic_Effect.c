@@ -33,7 +33,7 @@ MATCH void func_801EEC5C(void) {
     BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
     g_GfxPalettePending = 1;
     Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
 }
 
 #include "overlays/bmagic/Effect_PlayOnZeroTick.h"

@@ -14,9 +14,9 @@ MATCH u8 GFX_AllocPaletteCell(u8 mode) {
                 SP_REF(u8, 0x00u) = row;
                 SP_REF(u8, 0x01u) = column;
                 switch (mode) {
-                    case PALETTE_KIND_CELL:
+                    case PALETTE_TYPE_CELL:
                         return (column + row * 16u - 0x40u);
-                    case PALETTE_KIND_ROW:
+                    case PALETTE_TYPE_ROW:
                         if (column != 0u) {
                             break;
                         }
@@ -47,7 +47,7 @@ MATCH u8 GFX_AllocPaletteCell(u8 mode) {
                             return (row * 8u + (column >> 1) - 0x20u);
                         }
                         break;
-                    case PALETTE_KIND_CELLS_4:
+                    case PALETTE_TYPE_CELLS_4:
                         if ((column & 0x3u) != 0u) {
                             break;
                         }
@@ -62,7 +62,7 @@ MATCH u8 GFX_AllocPaletteCell(u8 mode) {
                             return (row * 4u + (column >> 2) + 0x70u);
                         }
                         break;
-                    case PALETTE_KIND_CELLS_8:
+                    case PALETTE_TYPE_CELLS_8:
                         if ((column & 0x7u) != 0u) {
                             break;
                         }

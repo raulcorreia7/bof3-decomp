@@ -94,7 +94,7 @@ MATCH void func_801EF130(void) {
     }
     g_Task->header.step++;
     if (g_Task->unk_04 == 0) {
-        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
 }
 
@@ -114,7 +114,7 @@ MATCH void func_801EF324(void) {
     u8           timer;
 
     if (g_Task->unk_04 == 0) {
-        SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
+        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
     }
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;

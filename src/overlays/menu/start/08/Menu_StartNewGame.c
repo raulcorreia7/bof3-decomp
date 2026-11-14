@@ -21,7 +21,7 @@ MATCH void Menu_StartNewGame(void) {
             *p = 0;
             p -= 2;
         }
-        CallbackReplace(Game_UpdateMain);
+        SYS_ThreadReplace(Game_UpdateMain);
     }
     if (WINDOW_EFFECT_BUSY()) {
         Menu_DrawClutStrip(D_80144953);

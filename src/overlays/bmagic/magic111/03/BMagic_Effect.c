@@ -37,8 +37,8 @@ MATCH void func_801EEC7C(void) {
     g_BattleEffects[index].header.mode  = 2;
     g_BattleEffects[index].target.party = owner;
     g_Task->param.unk_0B++;
-    SND_QueueSelectionFx(0x100);
-    SND_QueueSelectionFx(0x101);
+    SND_QueueSelectionEffect(0x100);
+    SND_QueueSelectionEffect(0x101);
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
 }
 

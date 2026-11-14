@@ -35,7 +35,7 @@ NON_MATCHING void func_801E4744(void) {
     func_801E7000();
     val0  = D_801ECDBC;
     val0  = D_801ECDBC;
-    val2  = PAD_GetRepeatedButtons(g_InputPressed & (INPUT_DIRECTIONAL | PADL1 | PADL2 | PADR1 | PADR2));
+    val2  = INPUT_GetRepeatedButtons(g_InputPressed & (INPUT_DIRECTIONAL | PADL1 | PADL2 | PADR1 | PADR2));
     val10 = (D_801ED7E8 * 0x60) + (((s8)D_801ED7E4 * 0xC) + D_801ECDBC) + (s8)D_801ED7E0;
     if (val2 & PADLup) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));

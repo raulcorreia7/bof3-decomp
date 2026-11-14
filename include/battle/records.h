@@ -271,10 +271,10 @@ ASSERT_OFFSET(BattleTurn, action_flags, 0x10);
  * unsigned, battle/battle/15 reads it signed because the panels slide to
  * negative screen positions (Actor names +0x2E/+0x30 screen_x and
  * screen_y). */
-typedef union BattleScreenCoord {
+typedef union ScreenCoord {
     u16 half;
     s16 signed_half;
-} BattleScreenCoord;
+} ScreenCoord;
 
 /* The cell at +0x90 of a local work record: battle/battle/03 reads the halfword, and
  * battle/battle/15 reads the low byte of it. */
@@ -321,8 +321,8 @@ ASSERT_OFFSET(BattlePanelByteCells, rows, 0x14);
 typedef struct BattlePanelTask {
     u8                unk_00[3]; /* +0x00 */
     u8                state;     /* +0x03 short-menu state word */
-    BattleScreenCoord x;         /* +0x04 the panel x; battle/battle/15 reads it signed */
-    BattleScreenCoord y;         /* +0x06 the panel y; battle/battle/15 reads it signed */
+    ScreenCoord       x;         /* +0x04 the panel x; battle/battle/15 reads it signed */
+    ScreenCoord       y;         /* +0x06 the panel y; battle/battle/15 reads it signed */
     u8                unk_08;
     u8                unk_09;
     BattlePanelCell0A cell_0A; /* +0x0A the selected battler slot, or the slide mode */
@@ -461,12 +461,12 @@ static inline void EnemyBattler_SetScript(EnemyBattler* enemy, u8* script, ModeF
 /* The kind walk: `D_8014833A[i]` is the owner table's record `i` seen at +0x07
  * (0x8014833A = 0x80148333 + 7, stride 0x24). Kept as its own name because the
  * units index it as an array; battle/battle/03 (func_801DA69C) names both walks. */
-typedef struct BattleOwnerKind {
+typedef struct BattleOwner {
     u8 kind_00;      /* 0x00 - record +0x07 of the owner table */
     u8 pad_01[0x23]; /* 0x01-0x23 */
-} BattleOwnerKind;
+} BattleOwner;
 
-ASSERT_SIZE(BattleOwnerKind, 0x24);
+ASSERT_SIZE(BattleOwner, 0x24);
 
 /* Ability category records at 0x801CA719 have a 0x14-byte stride: the ability byte at
  * +0x00, the rest unnamed. Char_GetAbilities reads the low two bits. */
@@ -497,7 +497,7 @@ typedef union PanelCounter {
 
 /* The field's view of the 0x14 bytes where a battle row keeps its queued turn: the menu and scene code reuse them
  * as panel and mode counters while no battle runs. */
-typedef struct FieldModeWork {
+typedef struct FieldMode {
     u8           flags_118;     /* 0x00 bit 0x80 restores the saved word */
     u8           countdown_119; /* 0x01 frame countdown, reloaded with 0x28 or 0x0A */
     u8           pad_02[2];
@@ -511,22 +511,22 @@ typedef struct FieldModeWork {
     u8           pad_10[2];
     PanelCounter step_12A; /* 0x12 */
     PanelCounter mode_12B; /* 0x13 panel mode */
-} FieldModeWork;
+} FieldMode;
 
-ASSERT_SIZE(FieldModeWork, 0x14);
-ASSERT_OFFSET(FieldModeWork, counter_11C, 0x04);
-ASSERT_OFFSET(FieldModeWork, value_120, 0x08);
-ASSERT_OFFSET(FieldModeWork, index_124, 0x0C);
-ASSERT_OFFSET(FieldModeWork, mode_12B, 0x13);
+ASSERT_SIZE(FieldMode, 0x14);
+ASSERT_OFFSET(FieldMode, counter_11C, 0x04);
+ASSERT_OFFSET(FieldMode, value_120, 0x08);
+ASSERT_OFFSET(FieldMode, index_124, 0x0C);
+ASSERT_OFFSET(FieldMode, mode_12B, 0x13);
 
 /* The field's view of the eight cells after the turn: the flags that gate the entry check and the entity slot. */
-typedef struct FieldEntryWork {
+typedef struct FieldEntry {
     PanelCounter flags_12C; /* 0x00 bit 0x01/0x08 gate the entry check */
     u8           slot_12D;  /* 0x01 entity slot index */
     u8           pad_02[6];
-} FieldEntryWork;
+} FieldEntry;
 
-ASSERT_SIZE(FieldEntryWork, 0x08);
+ASSERT_SIZE(FieldEntry, 0x08);
 
 /* One party member's live work record: the task header, a copy of the member's Character and the state the field and
  * the battle keep in it. */
@@ -555,9 +555,9 @@ typedef struct PartyMember {
     s8                  unk_29; /* +0x29 the byte both overlays read */
     s8                  unk_2A; /* +0x2A the byte both overlays read */
     s8                  unk_2B; /* +0x2B the byte both overlays read */
-    BattleScreenCoord   unk_2C; /* +0x2C the halfword both overlays read */
-    BattleScreenCoord   unk_2E; /* +0x2E the field overlays read it signed */
-    BattleScreenCoord   unk_30; /* +0x30 the field overlays read it signed */
+    ScreenCoord         unk_2C; /* +0x2C the halfword both overlays read */
+    ScreenCoord         unk_2E; /* +0x2E the field overlays read it signed */
+    ScreenCoord         unk_30; /* +0x30 the field overlays read it signed */
     u16                 depth;  /* +0x32 depth halfword; func_800AB910 calls it off_z */
     WorldPos            pos;
     SpriteScale         scale;  /* +0x40 16.16, 0x10000 at setup */
@@ -585,14 +585,14 @@ typedef struct PartyMember {
 
     /* +0x118 battle keeps the action the player has queued and its outcome; the field reuses the bytes as counters */
     union {
-        BattleTurn    turn;
-        FieldModeWork field;
+        BattleTurn turn;
+        FieldMode  field;
     } u;
 
     /* +0x12C battle clears all eight cells when the battler falls; the field names two of them */
     union {
-        u8             unk_12C[8];
-        FieldEntryWork field;
+        u8         unk_12C[8];
+        FieldEntry field;
     } status;
 
     u16 unk_134;
@@ -724,14 +724,14 @@ extern GameState g_Game;
 
 /* FAKE: the members of g_Game as globals of their own. A function that touches one of them beside other globals
  * matches only when the compiler sees a separate symbol for it, and some sites read it through another width. */
-extern PartyMember*    g_GameState;
-extern PartyMember     g_BattlePartyBattlers[3];
-extern u8              g_PartySize;
-extern u16             g_GameFlags;
-extern u16             g_AreaWalkFlags;
+extern PartyMember* g_GameState;
+extern PartyMember  g_BattlePartyBattlers[3];
+extern u8           g_PartySize;
+extern u16          g_GameFlags;
+extern u16          g_AreaWalkFlags;
 /* The mode byte of each 0x24-byte owner record; the kind byte sits at +0x07. */
-extern u8              D_80148333[];
-extern BattleOwnerKind D_8014833A[];
+extern u8           D_80148333[];
+extern BattleOwner  D_8014833A[];
 
 typedef struct BattleRange {
     u8  unk_00[0x34];
@@ -779,7 +779,7 @@ ASSERT_SIZE(BattleRange, 0x40);
 #define BATTLE_ENEMY_STRIDE               0x118
 #define BATTLE_EFFECT_STRIDE              0x78
 #define BATTLE_RING_STRIDE                0x08
-#define BATTLE_KIND_STRIDE                0x14
+#define BATTLE_TYPE_STRIDE                0x14
 
 #define ENEMY_COMBATANT_BASE              0x801EB630u
 #define BATTLE_EFFECT_BASE                0x801EC330u
@@ -927,7 +927,7 @@ typedef enum BattleResultFlags {
 extern s32          D_801459E8;
 /* Pointer to the active animation-stream bank (area, battle or battle magic). */
 /* D_801459F0 */
-extern volatile u32 g_ScriptTable;
+extern volatile u32 g_Scripts;
 extern u8           D_80145A00;
 extern s32          D_80145A04;
 extern u8           D_80146229;

@@ -6,7 +6,7 @@
 #include "overlays/bmagic/bmagic.h"
 
 extern BMagicEffectFuncs D_801EEC04;
-extern BMagicEffectWork* D_801F21F0;
+extern BMagicEffect*     D_801F21F0;
 
 void func_801EED18(void);
 void func_801EEF50(void);
@@ -14,7 +14,7 @@ void func_801EEF50(void);
 u8 func_801F04A4(void);
 
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
-extern BMagicEffectWork D_801F0670[];
+extern BMagicEffect D_801F0670[];
 #define BMAGIC_EFFECT_SLOTS D_801F0670
 #define BMAGIC_EFFECT_COUNT 160
 

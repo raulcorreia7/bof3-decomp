@@ -10,7 +10,7 @@ MATCH void Game_UpdateCampMenu(void) {
 
     while (1) {
         callbacks = g_GameCampMenuLoad;
-        CallbackWait(1u);
+        SYS_ThreadWait(1u);
         callbacks[g_GameEntryState]();
         Menu_UpdatePanelTasks();
     }

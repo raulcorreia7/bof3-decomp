@@ -5,7 +5,7 @@
 
 /* In-overlay dispatch targets (split assembly units). */
 
-BattleIconColors D_801D0C64 = {
+BattleIconPalette D_801D0C64 = {
     0x08, 0x09, 0x08, 0x09, 0x08, 0x08, 0x08,
 };
 

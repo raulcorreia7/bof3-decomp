@@ -23,10 +23,10 @@ void            func_801F0D44(void);
  * scroll direction picks the row's first or second pointer and g_EmiLoadedCharacterIndex picks the id. */
 extern u16* D_800B499C[][2];
 
-extern Callback          D_801F1C48[];
-extern Callback          D_801F1C94[];
-extern BMagicEffectWork* D_801F24E0;
-extern BMagicEffectWork  D_801F1CA0[48];
+extern Callback      D_801F1C48[];
+extern Callback      D_801F1C94[];
+extern BMagicEffect* D_801F24E0;
+extern BMagicEffect  D_801F1CA0[48];
 
 /* Places the orbit point of a KaiserBreath ring: the angle TABLE[unk_07]
  * shifted SHIFT goes to the scratchpad cell, and the point follows the area

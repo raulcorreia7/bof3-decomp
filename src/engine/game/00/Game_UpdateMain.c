@@ -20,6 +20,6 @@ MATCH void Game_UpdateMain(void) {
         callbacks = g_GameStates;
         callbacks[GAME_SEL_STATE->state]();
         Game_UpdateClock();
-        CallbackWait(1u);
+        SYS_ThreadWait(1u);
     }
 }

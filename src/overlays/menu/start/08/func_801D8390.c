@@ -27,7 +27,7 @@ NON_MATCHING void func_801D8390(void) {
     D_801485E2                                             = g_MenuPanelTasks[4].pos.y + g_MenuPanelTasks[16].unk_0A * 0x36;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x        = g_MenuPanelTasks[16].pos.x + 0x2A;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y        = g_MenuPanelTasks[16].pos.y + 7;
-    pad                                                    = PAD_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
+    pad                                                    = INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
     g_MenuPanelTasks[16].flags                             = 0xFF;
     count                                                  = Party_CountOrder(PARTY_ORDER_FIELD);
     if (pad & PADLup) {

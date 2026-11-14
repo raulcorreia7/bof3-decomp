@@ -11,7 +11,7 @@ MATCH void SYS_InitRuntime(void) {
     work = g_GfxDisplayFrames;
     SYS_ResetDisplayFrame(work);
     SYS_ResetDisplayFrame(work + 0x90);
-    CallbackInitThreads();
+    SYS_ThreadInit();
     g_FrameBufferIndex       = 0;
     g_GfxCurrentDisplayFrame = work;
     GFX_ClearRect(0, 0, 1024, 512);

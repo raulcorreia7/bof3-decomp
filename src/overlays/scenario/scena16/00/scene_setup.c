@@ -64,7 +64,7 @@ MATCH void func_801F6CCC(void) {
     SND_RequestBGM(6u);
 
     while (!EMI_IsReady()) {
-        CallbackWait(1u);
+        SYS_ThreadWait(1u);
     }
 
     g_ScriptVarsReq.word = 0u;
@@ -202,7 +202,7 @@ MATCH void func_801F7188(void) {
         }
 
         SsSetMVol(0x7F, 0x7F);
-        CallbackExit();
+        SYS_ThreadExit();
     }
 }
 

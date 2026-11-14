@@ -40,14 +40,14 @@ typedef struct Point3DL {
     s32 z;
 } Point3DL;
 
-typedef struct Coord3D {
+typedef struct Coord3 {
     Coord x;
     Coord y;
     Coord z;
-} Coord3D;
+} Coord3;
 
 /* Where an actor or effect stands: x, y and z in 16.16 world units. */
-typedef Coord3D WorldPos;
+typedef Coord3 WorldPos;
 
 /* Move `dst` to where `src` stands, one axis at a time. */
 static inline void WorldPos_Copy(WorldPos* dst, WorldPos* src) {
@@ -59,10 +59,10 @@ static inline void WorldPos_Copy(WorldPos* dst, WorldPos* src) {
 /* A sprite's horizontal and vertical size, 16.16; 0x10000 is full size. */
 typedef Point2DL SpriteScale;
 
-ASSERT_SIZE(Coord3D, 0x0C);
-ASSERT_OFFSET(Coord3D, x, 0x00);
-ASSERT_OFFSET(Coord3D, y, 0x04);
-ASSERT_OFFSET(Coord3D, z, 0x08);
+ASSERT_SIZE(Coord3, 0x0C);
+ASSERT_OFFSET(Coord3, x, 0x00);
+ASSERT_OFFSET(Coord3, y, 0x04);
+ASSERT_OFFSET(Coord3, z, 0x08);
 
 ASSERT_SIZE(Point2D, 0x04);
 ASSERT_OFFSET(Point2D, y, 0x02);

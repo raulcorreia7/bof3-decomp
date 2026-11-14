@@ -64,7 +64,7 @@ MATCH void func_801EEF24(void) {
         if (g_Game.members[g_Battle.target_selector].chr.character_id == CHAR_ID_RYU_YOUNG) {
             cue = EMI_CUE_ID(SND_BANK_COMMON, 0x00);
         }
-        SND_QueueSelectionFx(cue);
+        SND_QueueSelectionEffect(cue);
     }
     saved  = g_Task;
     g_Task = &g_Game.members[g_Battle.active_battler];
@@ -202,7 +202,7 @@ MATCH void func_801EFAAC(void) {
     g_BattleEffects[slot].arg.unk_09   = 1;
     g_BattleEffects[slot].target.party = work;
     g_Task->param.unk_0B += 1;
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
 }
 
 MATCH void func_801EFBAC(void) {
@@ -235,7 +235,7 @@ MATCH void func_801EFC68(void) {
         task                               = g_Task;
         g_BattleEffects[slot].target.party = work;
         task->param.unk_0B += 1;
-        SND_QueueSelectionFx(0x103);
+        SND_QueueSelectionEffect(0x103);
         g_Task->unk_09 = 20;
         g_Task->header.step += 1;
     }

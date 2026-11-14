@@ -16,7 +16,7 @@ INCLUDE_ASM(func_801EED18);
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEFBC(void) {
-    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F06E0, g_Task->header.step);
     if ((g_Task->header.flags & BMAGIC_EFFECT_IN_USE) != 0 && g_Task->header.step != 0) {
         func_8014D290();
@@ -25,7 +25,7 @@ MATCH void func_801EEFBC(void) {
         BMagic_DrawDarkRing();
         PopMatrix();
     }
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 INCLUDE_ASM(func_801EF078);
@@ -63,9 +63,9 @@ MATCH void func_801EF294(void) {
                 }
             }
             if (g_Task->timer == 2) {
-                SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 1));
+                SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 1));
             }
-            SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 2));
+            SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 2));
             work         = g_Task;
             work->unk_09 = 4;
             work->unk_0C = 0x800;

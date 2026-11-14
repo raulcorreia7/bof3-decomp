@@ -83,7 +83,7 @@ MATCH void func_801D1044(void) {
     D_801483C0 = 1;
     D_801483C4 = D_80148358 + 6;
     D_801483C6 = D_8014835A + (D_8014835E * 13 + 0x57);
-    pressed    = PAD_GetRepeatedButtons(g_InputPressed & 0xF000) & 0x5000;
+    pressed    = INPUT_GetRepeatedButtons(g_InputPressed & 0xF000) & 0x5000;
     D_8014835F = 0xFF;
     D_80148361 = 1;
     if (pressed != 0) {

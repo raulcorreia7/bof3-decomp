@@ -21,7 +21,7 @@ extern u8            D_801EFE34[];
 extern u16           D_801EFE40[];
 
 /* D_801EFE60 */
-extern Callback BMagic_StepTable[];
+extern Callback BMagic_Steps[];
 
 void func_801EF490(void);
 

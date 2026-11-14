@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void func_801BE710(GameResetRecord* record) {
+MATCH void func_801BE710(GameReset* record) {
     record->unk_0A = 0;
     record->unk_07 = 0;
     record->unk_02 = 0;

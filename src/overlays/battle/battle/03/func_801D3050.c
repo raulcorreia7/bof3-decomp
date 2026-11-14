@@ -19,7 +19,7 @@ MATCH void func_801D3050(void) {
             i++;
         } while (i < 8);
         Battle_OpenPanel();
-        Battle_QueueEvent(2, 0, 0, 45, Message_GetText(CALLBACK_SLOT_IDLE));
+        Battle_QueueEvent(2, 0, 0, 45, Message_GetText(SYS_THREAD_IDLE));
     }
     g_Battle.phase.mode     = BATTLE_MODE_TURNS;
     g_Battle.phase.step     = 0;

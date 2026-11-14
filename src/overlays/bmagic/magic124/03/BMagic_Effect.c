@@ -61,7 +61,7 @@ MATCH void func_801EEDD8(void) {
         BMAGIC_EFFECT_SLOTS[slot].target.party = task;
         g_Task->param.unk_0B++;
     }
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionEffect(0x100);
 }
 
 #include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
