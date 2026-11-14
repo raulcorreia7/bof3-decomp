@@ -79,7 +79,50 @@ MATCH void func_801D13F4(void) {
     }
 }
 
-INCLUDE_ASM(func_801D147C);
+MATCH void func_801D147C(void* arg0, s32 arg1, s32 arg2) {
+    DVECTOR  screen;
+    DVECTOR  point;
+    DVECTOR  size;
+    DVECTOR  scale;
+    MATRIX   camera;
+    POLY_G3* primitive;
+    s32      angle;
+    s32      i;
+    void*    pos;
+    s16      origin;
+    s32      flags;
+
+    pos = arg0;
+    origin = arg1;
+    flags = arg2;
+    GFX_AddDitheredDrawMode(2u, GetTPage(0, 1, 0x2C0, 0x100));
+    Area_SetCameraMatrix(&camera);
+    Area_ProjectPoint(pos, &screen);
+    size.vx = size.vy = origin;
+    Game_ProjectWorldPoint(pos, &size, &scale);
+    scale.vx += g_FrameCount & 1;
+    point.vx = screen.vx + scale.vx;
+    point.vy = screen.vy;
+    angle    = 0;
+    i        = 0;
+    do {
+        primitive     = GFX_BeginPolyG3(1);
+        primitive->x0 = screen.vx;
+        primitive->y0 = screen.vy;
+        primitive->x1 = point.vx;
+        primitive->y1 = point.vy;
+        angle += 128;
+        point.vx      = screen.vx + (((s16)scale.vx * rcos((u16)angle)) >> 0xC);
+        point.vy      = screen.vy + (((s16)scale.vx * rsin((u16)angle)) >> 0xC);
+        primitive->x2 = point.vx;
+        primitive->y2 = point.vy;
+        setRGB0(primitive, (flags & 4) << 5, (flags & 2) << 6, (flags & 1) << 7);
+        setRGB1(primitive, 0, 0, 0);
+        setRGB2(primitive, 0, 0, 0);
+        GFX_AddPrim(2u, sizeof(POLY_G3));
+        i += 1;
+    } while ((i & BYTE_MASK) < 32U);
+}
 
 INCLUDE_ASM(func_801D1678);
 
