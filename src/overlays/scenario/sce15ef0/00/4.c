@@ -54,7 +54,7 @@ MATCH void func_801D0E5C(void) {
     }
     func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
     func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
-    if (--g_Task->timer == 0) {
+    if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->timer = 4;
         g_Task->header.mode += 1;
     }
