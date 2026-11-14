@@ -3,13 +3,13 @@
 MATCH void func_801F2D00(void) {
     u32* p;
 
-    if (SYS_TestFlag(D_80144EF8, 0x13) == 0) {
+    if (SYS_TestFlag(D_80144EF8, 19) == 0) {
         return;
     }
-    if (SYS_TestFlag(D_80144EF8, 0x14) != 0) {
+    if (SYS_TestFlag(D_80144EF8, 20) != 0) {
         return;
     }
-    p = (u32*)(0x80104000 + (MEM(u16, 0x80104022) << 2));
+    p = (u32*)(MAP_BUNDLE_BASE + (((AreaMapBundle*)MAP_BUNDLE_BASE)->list_base_22 << 2));
     if (*p == 0) {
         return;
     }
@@ -17,8 +17,8 @@ MATCH void func_801F2D00(void) {
         u32 v = *p;
         if ((v & 0xFF000000) == 0x81000000) {
             p += 2;
-            p[1] = 0x04214E73;
-            p[0] = 0x04214E73;
+            p[1] = AREA051_RECORD_81_WORD;
+            p[0] = AREA051_RECORD_81_WORD;
             return;
         }
         p = (u32*)((u8*)p + ((v >> 14) & 0x3FC));
