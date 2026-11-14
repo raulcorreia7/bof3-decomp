@@ -214,14 +214,7 @@ MATCH void func_801EF580(s32 phase) {
         setRGB1(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08);
         prim->tpage = GetTPage(0, 1, 0x3C0, 0x100);
         prim->clut  = GetClut(0, 0x1FA);
-        prim->u0    = 0;
-        prim->v0    = (i * 8 + g_Task->unk_04 * 2) & 0x1F;
-        prim->u1    = 8;
-        prim->v1    = (i * 8 + g_Task->unk_04 * 2) & 0x1F;
-        prim->u2    = 0;
-        prim->v2    = ((i * 8 + g_Task->unk_04 * 2) & 0x1F) + 8;
-        prim->u3    = 8;
-        prim->v3    = ((i * 8 + g_Task->unk_04 * 2) & 0x1F) + 8;
+        setUV4(prim, 0, (i * 8 + g_Task->unk_04 * 2) & 0x1F, 8, (i * 8 + g_Task->unk_04 * 2) & 0x1F, 0, ((i * 8 + g_Task->unk_04 * 2) & 0x1F) + 8, 8, ((i * 8 + g_Task->unk_04 * 2) & 0x1F) + 8);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_GT4));
     }
 }

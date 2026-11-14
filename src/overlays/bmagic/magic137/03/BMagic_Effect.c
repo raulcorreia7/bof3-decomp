@@ -144,14 +144,7 @@ MATCH void func_801EF4C4(void) {
         if (D_1F800000.view.effect.params[7] == 252) {
             D_1F800000.view.effect.params[7] = 251;
         }
-        prim->u0 = 0;
-        prim->v0 = D_1F800000.view.effect.params[7];
-        prim->u1 = 255;
-        prim->v1 = D_1F800000.view.effect.params[7];
-        prim->u2 = 0;
-        prim->v2 = D_1F800000.view.effect.params[7] + 4;
-        prim->u3 = 255;
-        prim->v3 = D_1F800000.view.effect.params[7] + 4;
+        setUV4(prim, 0, D_1F800000.view.effect.params[7], 255, D_1F800000.view.effect.params[7], 0, D_1F800000.view.effect.params[7] + 4, 255, D_1F800000.view.effect.params[7] + 4);
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         GFX_AddPrim(2, sizeof(POLY_GT4));
     }

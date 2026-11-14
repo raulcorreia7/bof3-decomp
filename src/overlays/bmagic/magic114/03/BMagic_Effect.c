@@ -352,14 +352,7 @@ MATCH void func_801F0004(void) {
         prim->tpage                      = GetTPage(1, 1, 832, 256);
         prim->clut                       = GetClut(0, 482);
         D_1F800000.view.effect.params[0] = (u32)(g_Task->unk_20 + i * 4) % 188 + 64;
-        prim->u0                         = 64;
-        prim->v0                         = D_1F800000.view.effect.params[0];
-        prim->u1                         = 192;
-        prim->v1                         = D_1F800000.view.effect.params[0];
-        prim->u2                         = 64;
-        prim->v2                         = D_1F800000.view.effect.params[0] + 3;
-        prim->u3                         = 192;
-        prim->v3                         = D_1F800000.view.effect.params[0] + 3;
+        setUV4(prim, 64, D_1F800000.view.effect.params[0], 192, D_1F800000.view.effect.params[0], 64, D_1F800000.view.effect.params[0] + 3, 192, D_1F800000.view.effect.params[0] + 3);
         RotAverage4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         if (g_Task->header.step < 2) {
             D_1F800000.view.effect.params[1] = (rsin(((g_FrameCount + i) & 0x3F) << 6) * 32 >> 12) + 160;
@@ -449,14 +442,7 @@ MATCH void func_801F04D4(s32 semi) {
         prim->tpage                      = GetTPage(1, trans, 832, 256);
         prim->clut                       = GetClut(0, 482);
         D_1F800000.view.effect.params[0] = (i & 0xF) * 12 + 64;
-        prim->u0                         = 0;
-        prim->v0                         = D_1F800000.view.effect.params[0];
-        prim->u1                         = 196;
-        prim->v1                         = D_1F800000.view.effect.params[0];
-        prim->u2                         = 0;
-        prim->v2                         = D_1F800000.view.effect.params[0] + 11;
-        prim->u3                         = 196;
-        prim->v3                         = D_1F800000.view.effect.params[0] + 11;
+        setUV4(prim, 0, D_1F800000.view.effect.params[0], 196, D_1F800000.view.effect.params[0], 0, D_1F800000.view.effect.params[0] + 11, 196, D_1F800000.view.effect.params[0] + 11);
         RotAverage4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         D_1F800000.view.effect.params[1] = g_Task->unk_09 << 3;
         setRGB0(prim, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);

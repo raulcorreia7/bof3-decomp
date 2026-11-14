@@ -173,14 +173,7 @@ MATCH void func_801EF7A8(void) {
     prim->y3                         = g_Task->unk_30.half + FIXED_MUL(rcos(D_1F800000.view.scenario.math_04), D_1F800000.view.scenario.math_00);
     prim->tpage                      = GetTPage(0, 1, 832, 256);
     prim->clut                       = GetClut(g_Task->param.unk_0B, 506);
-    prim->u0                         = 8;
-    prim->v0                         = (g_Task->unk_09 & 3) * 32 + 8;
-    prim->u1                         = 0x98;
-    prim->v1                         = (g_Task->unk_09 & 3) * 32 + 8;
-    prim->u2                         = 8;
-    prim->v2                         = (g_Task->unk_09 & 3) * 32 + 0x28;
-    prim->u3                         = 0x98;
-    prim->v3                         = (g_Task->unk_09 & 3) * 32 + 0x28;
+    setUV4(prim, 8, (g_Task->unk_09 & 3) * 32 + 8, 0x98, (g_Task->unk_09 & 3) * 32 + 8, 8, (g_Task->unk_09 & 3) * 32 + 0x28, 0x98, (g_Task->unk_09 & 3) * 32 + 0x28);
     setRGB0(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08);
     GFX_AddPrim(3, sizeof(POLY_FT4));
 }

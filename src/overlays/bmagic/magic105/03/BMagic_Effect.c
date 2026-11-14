@@ -310,10 +310,9 @@ MATCH void func_801EFCF0(void) {
         GFX_AddPrim((u8)g_Task->unk_29, sizeof(DR_MODE));
         prim = (SPRT*)g_GfxPrimCursor;
         SetSprt(prim);
-        prim->w    = D_801F0080[cell[0] & 0xF][0];
-        prim->h    = D_801F0080[cell[0] & 0xF][1];
-        prim->u0   = cell[3];
-        prim->v0   = g_Task->unk_26 + cell[4];
+        prim->w = D_801F0080[cell[0] & 0xF][0];
+        prim->h = D_801F0080[cell[0] & 0xF][1];
+        setUV0(prim, cell[3], g_Task->unk_26 + cell[4]);
         prim->clut = clut;
         shade      = g_Task->unk_5D - 0x80;
         prim->r0   = shade;

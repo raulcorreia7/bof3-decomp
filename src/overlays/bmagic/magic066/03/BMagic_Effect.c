@@ -176,14 +176,7 @@ MATCH void func_801EF158(void) {
         poly->tpage                      = GetTPage(1, 1, 0x340, 0x100);
         poly->clut                       = GetClut(0, 0x1FA);
         D_1F800000.view.effect.params[4] = 0xE0 - (((g_Task->param.unk_0B + i) & 7) << 4);
-        poly->u0                         = 0;
-        poly->v0                         = D_1F800000.view.effect.params[4];
-        poly->u1                         = 0xF8;
-        poly->v1                         = D_1F800000.view.effect.params[4];
-        poly->u2                         = 0;
-        poly->v2                         = D_1F800000.view.effect.params[4] + 0x10;
-        poly->u3                         = 0xF8;
-        poly->v3                         = D_1F800000.view.effect.params[4] + 0x10;
+        setUV4(poly, 0, D_1F800000.view.effect.params[4], 0xF8, D_1F800000.view.effect.params[4], 0, D_1F800000.view.effect.params[4] + 0x10, 0xF8, D_1F800000.view.effect.params[4] + 0x10);
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3, &depth, &flag);
         GFX_AddPrim(2, sizeof(POLY_FT4));
     }
@@ -299,14 +292,7 @@ MATCH void func_801EFCC8(void) {
             D_1F800014[3].vz                 = -D_1F800000.view.effect.params[2];
             poly->tpage                      = GetTPage(0, 1, 0x340, 0x100);
             poly->clut                       = GetClut(0, 0x1E2);
-            poly->u0                         = 0;
-            poly->v0                         = 0;
-            poly->u1                         = 0x20;
-            poly->v1                         = 0;
-            poly->u2                         = 0;
-            poly->v2                         = 0x20;
-            poly->u3                         = 0x20;
-            poly->v3                         = 0x20;
+            setUV4(poly, 0, 0, 0x20, 0, 0, 0x20, 0x20, 0x20);
             D_1F800000.view.effect.params[1] = 0x41 - (D_801F00B0[i] >> 1) * 4;
             setRGB0(poly, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
             RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3, &depth, &flag);

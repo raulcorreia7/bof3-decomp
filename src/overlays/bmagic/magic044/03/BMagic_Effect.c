@@ -330,14 +330,7 @@ MATCH void func_801F06D8(void) {
            g_Task->unk_2E.half + FIXED_MUL(rcos(2560), QUAD_RADIUS), g_Task->unk_30.half + FIXED_MUL(rsin(2560), QUAD_RADIUS));
     setTPage(prim, 0, 2, 832, 256);
     setClut(prim, 32, 506);
-    prim->u0   = 128;
-    prim->v0   = 32;
-    prim->u1   = 160;
-    prim->v1   = 32;
-    prim->u2   = 128;
-    prim->v2   = 64;
-    prim->u3   = 160;
-    prim->v3   = 64;
+    setUV4(prim, 128, 32, 160, 32, 128, 64, 160, 64);
     QUAD_RED   = g_Task->timer * (s8)g_Task->unk_5D;
     QUAD_GREEN = g_Task->timer * (s8)g_Task->unk_5E;
     QUAD_BLUE  = g_Task->timer * (s8)g_Task->unk_5F;

@@ -202,14 +202,7 @@ MATCH void func_801EF79C(u8 unused, s32 semi) {
     prim->y3                         = g_Task->unk_30.half + FIXED_MUL(rsin(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00);
     prim->tpage                      = GetTPage(1, trans, 832, 256);
     prim->clut                       = GetClut(0, 506);
-    prim->u0                         = g_Task->param.unk_0B << 5;
-    prim->v0                         = 0;
-    prim->u1                         = (g_Task->param.unk_0B << 5) + 31;
-    prim->v1                         = 0;
-    prim->u2                         = g_Task->param.unk_0B << 5;
-    prim->v2                         = 64;
-    prim->u3                         = (g_Task->param.unk_0B << 5) + 31;
-    prim->v3                         = 64;
+    setUV4(prim, g_Task->param.unk_0B << 5, 0, (g_Task->param.unk_0B << 5) + 31, 0, g_Task->param.unk_0B << 5, 64, (g_Task->param.unk_0B << 5) + 31, 64);
     setRGB0(prim, D_1F800000.view.scenario.math_04, D_1F800000.view.scenario.math_04, D_1F800000.view.scenario.math_04);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_FT4));
 }

@@ -164,14 +164,8 @@ MATCH void func_801EF1D8(void) {
             RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
             prim->tpage = GetTPage(0, 1, 0x340, 0x100);
             prim->clut  = GetClut(0, 0x1FA);
-            prim->u0    = i * 8;
-            prim->v0    = (band - 16) * 8 + 32 + g_Task->timer * 4;
-            prim->u1    = i * 8 + 8;
-            prim->v1    = (band - 16) * 8 + 32 + g_Task->timer * 4;
-            prim->u2    = i * 8;
-            prim->v2    = g_Task->timer * 4 + (band - 16) * 8 + 0x28;
-            prim->u3    = i * 8 + 8;
-            prim->v3    = g_Task->timer * 4 + (band - 16) * 8 + 0x28;
+            setUV4(prim, i * 8, (band - 16) * 8 + 32 + g_Task->timer * 4, i * 8 + 8, (band - 16) * 8 + 32 + g_Task->timer * 4, i * 8, g_Task->timer * 4 + (band - 16) * 8 + 0x28, i * 8 + 8,
+                   g_Task->timer * 4 + (band - 16) * 8 + 0x28);
             setRGB0(prim, LOHU(D_1F800000.view.effect.params[4]), LOHU(D_1F800000.view.effect.params[4]), LOHU(D_1F800000.view.effect.params[4]));
             setRGB1(prim, LOHU(D_1F800000.view.effect.params[4]), LOHU(D_1F800000.view.effect.params[4]), LOHU(D_1F800000.view.effect.params[4]));
             setRGB2(prim, LOHU(D_1F800000.view.effect.params[3]), LOHU(D_1F800000.view.effect.params[3]), LOHU(D_1F800000.view.effect.params[3]));
@@ -337,14 +331,7 @@ MATCH void func_801EFE20(void) {
            D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(g_Task->unk_09 << 4), D_1F800000.view.effect.params[0]));
     prim->tpage = GetTPage(0, 1, 832, 256);
     prim->clut  = GetClut(16, 506);
-    prim->u0    = 1;
-    prim->v0    = 1;
-    prim->u1    = 31;
-    prim->v1    = 1;
-    prim->u2    = 1;
-    prim->v2    = 31;
-    prim->u3    = 31;
-    prim->v3    = 31;
+    setUV4(prim, 1, 1, 31, 1, 1, 31, 31, 31);
     setRGB0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5]);
     setRGB1(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5]);
     setRGB2(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5]);

@@ -226,14 +226,7 @@ MATCH void func_801EF5B0(void) {
         prim->tpage                      = GetTPage(1, 1, 832, 256);
         prim->clut                       = GetClut(0, 506);
         D_1F800000.view.effect.params[3] = ((g_Task->timer + i) % 14) * 16 + 8;
-        prim->u0                         = 8;
-        prim->v0                         = D_1F800000.view.effect.params[3];
-        prim->u1                         = 248;
-        prim->v1                         = D_1F800000.view.effect.params[3];
-        prim->u2                         = 8;
-        prim->v2                         = D_1F800000.view.effect.params[3] + 16;
-        prim->u3                         = 248;
-        prim->v3                         = D_1F800000.view.effect.params[3] + 16;
+        setUV4(prim, 8, D_1F800000.view.effect.params[3], 248, D_1F800000.view.effect.params[3], 8, D_1F800000.view.effect.params[3] + 16, 248, D_1F800000.view.effect.params[3] + 16);
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         GFX_AddPrim(2, sizeof(POLY_FT4));
     }

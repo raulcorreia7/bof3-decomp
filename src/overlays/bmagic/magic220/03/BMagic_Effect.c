@@ -275,14 +275,7 @@ MATCH void func_801F0334(void) {
     D_1F800014[3].vz                 = 0;
     prim->tpage                      = GetTPage(0, 1, 832, 256);
     prim->clut                       = GetClut(0, 482);
-    prim->u0                         = 0;
-    prim->v0                         = 128;
-    prim->u1                         = 32;
-    prim->v1                         = 128;
-    prim->u2                         = 0;
-    prim->v2                         = 160;
-    prim->u3                         = 32;
-    prim->v3                         = 160;
+    setUV4(prim, 0, 128, 32, 128, 0, 160, 32, 160);
     setRGB0(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[5]);
     RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_FT4));

@@ -304,14 +304,7 @@ MATCH void func_801EFA84(void) {
            g_Task->unk_30.half + g_Task->timer);
     setTPage(prim, 0, 0, 896, 256);
     setClut(prim, 32, 506);
-    prim->u0 = 0;
-    prim->v0 = 32;
-    prim->u1 = 64;
-    prim->v1 = 32;
-    prim->u2 = 0;
-    prim->v2 = g_Task->timer + 32;
-    prim->u3 = 64;
-    prim->v3 = g_Task->timer + 32;
+    setUV4(prim, 0, 32, 64, 32, 0, g_Task->timer + 32, 64, g_Task->timer + 32);
     setRGB0(prim, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     GFX_AddPrim(2, sizeof(POLY_FT4));
 }

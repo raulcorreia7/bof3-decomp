@@ -178,14 +178,7 @@ MATCH void func_801EF6A0(void) {
            D_1F800000.view.effect.params[3] + FIXED_MUL(rcos(0x400), D_1F800000.view.effect.params[0]));
     prim->tpage = GetTPage(0, 2, 832, 256);
     prim->clut  = GetClut(0, 506);
-    prim->u0    = 1;
-    prim->v0    = 1;
-    prim->u1    = 31;
-    prim->v1    = 1;
-    prim->u2    = 1;
-    prim->v2    = 31;
-    prim->u3    = 31;
-    prim->v3    = 31;
+    setUV4(prim, 1, 1, 31, 1, 1, 31, 31, 31);
     setRGB0(prim, *shade, *shade, *shade);
     setRGB1(prim, *shade, *shade, *shade);
     setRGB2(prim, *shade, *shade, *shade);
