@@ -3418,6 +3418,7 @@ g_MenuListTab2OnSprites = { addr = 0x801EC76C, source = "the sprite run of the l
 g_MenuInventoryTab1OnSprites = { addr = 0x801EC778, source = "the sprite run of the inventory panel's first tab while its flag is set" }
 g_MenuListTab1OffSprites = { addr = 0x801EC784, source = "the sprite run of the list panel's first tab while its flag is clear" }
 g_MenuListTab1OnSprites = { addr = 0x801EC790, source = "the sprite run of the list panel's first tab while its flag is set" }
+g_MenuExperienceSprites = { addr = 0x801EC79C, source = "Sprite run drawn over the experience window by the experience window draw." }
 g_MenuEquipStatSprites = { addr = 0x801EC7F8, source = "Sprite run of the equip stat window frame that Menu_DrawEquipStatWindow draws over the window." }
 g_SaveSlotFrameSprites = { addr = 0x801EC854, source = "Sprite run of a save slot row frame." }
 g_MenuLabelPower = { addr = 0x801EC940, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
