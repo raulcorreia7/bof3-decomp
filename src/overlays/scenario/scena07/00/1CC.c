@@ -547,7 +547,7 @@ MATCH void func_801FC094(void) {
         if (D_801FDE40[i].timer != g_SceneState.timer_06) {
             continue;
         }
-        slot_index = Actor_FindFreeSlot();
+        slot_index = Actor_FindFreeSpawned();
         if (slot_index == GAME_NONE) {
             break;
         }
@@ -664,7 +664,7 @@ MATCH SpawnedActor* func_801FD610(u8 mode) {
     SpawnedActor* slot;
     s32           index;
 
-    index = Actor_FindFreeSlot() & BYTE_MASK;
+    index = Actor_FindFreeSpawned() & BYTE_MASK;
     slot  = &g_SpawnedActors[index];
     if (index != GAME_NONE) {
         slot->header.flags = 1;

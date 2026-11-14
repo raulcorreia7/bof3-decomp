@@ -5,7 +5,7 @@
 MATCH void Actor_Create(u8* request) {
     u8 slot;
 
-    slot = Actor_FindFreeSlot() & BYTE_MASK;
+    slot = Actor_FindFreeSpawned() & BYTE_MASK;
     if (slot != GAME_NONE) {
         g_SpawnedActors[slot].header.flags      = 1;
         g_SpawnedActors[slot].type              = request[1];

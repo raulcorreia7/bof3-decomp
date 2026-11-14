@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* claims the free record slot reported by Actor_FindFreeSlot and fills its
+/* claims the free record slot reported by Actor_FindFreeSpawned and fills its
  * header, the two signed words, the id byte and the two halfword fields.
  */
 /* The head stays unprototyped: retail callers pass whole words and the callee narrows them itself. */
@@ -16,7 +16,7 @@ u16       y;
     s16 half_value;
     s32 slot;
 
-    slot       = Actor_FindFreeSlot() & BYTE_MASK;
+    slot       = Actor_FindFreeSpawned() & BYTE_MASK;
     byte_value = id;
     half_value = x;
     if (slot != GAME_NONE) {

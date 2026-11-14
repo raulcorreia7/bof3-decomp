@@ -725,13 +725,13 @@ MATCH void func_801FD07C(void) {
     s32  first;
     s32  second;
 
-    first      = Actor_FindFree();
+    first      = Actor_FindFreeField();
     D_801FEA74 = first;
     if (first == GAME_NONE) {
         return;
     }
     g_Actors[first].header.flags = 1;
-    second                       = Actor_FindFree();
+    second                       = Actor_FindFreeField();
     D_801FEA78                   = second;
     if (second == GAME_NONE) {
         g_Actors[D_801FEA74].header.flags = 0;

@@ -27,7 +27,7 @@ MATCH void Fishing_LureFloat(void) {
         } else {
             FISHING_STATE->step_14       = 0x40000;
             FISHING_STATE->step_limit_20 = -0x8000;
-            slot                         = Actor_FindFreeSlot() & BYTE_MASK;
+            slot                         = Actor_FindFreeSpawned() & BYTE_MASK;
             if (slot != GAME_NONE) {
                 g_SpawnedActors[slot].header.flags = 1;
                 g_SpawnedActors[slot].type         = 0xA;

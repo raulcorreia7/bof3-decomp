@@ -269,7 +269,7 @@ s32          Actor_RiseToGround(s32 entry, s32 dir_x, s32 dir_y, s32 vz_start, s
 /* func_8015C9CC */
 void         Actor_ApplyVelocity(void);
 /* func_8015CA48 */
-s32          Actor_FindFree(void);
+s32          Actor_FindFreeField(void);
 /* func_8015CA9C */
 u16          Actor_ReadState(void);
 /* func_8015CD00 */

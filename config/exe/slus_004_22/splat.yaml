@@ -411,7 +411,7 @@ segments:
       - [0xC6750, c, Actor_StepScroll]
       - [0xC6940, c, Actor_RiseToGround]
       - [0xC69CC, c, Actor_ApplyVelocity]
-      - [0xC6A48, c, Actor_FindFree]
+      - [0xC6A48, c, Actor_FindFreeField]
       - [0xC6A9C, c, Actor_ReadState]
       - [0xC6B18, c, Actor_ClaimSlot]
       - [0xC6C00, c, func_8015CC00]

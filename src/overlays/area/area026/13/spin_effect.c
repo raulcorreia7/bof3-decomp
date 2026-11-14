@@ -432,7 +432,7 @@ MATCH void func_801F3360(void) {
     s32           actor_slot;
     SpawnedActor* slot;
 
-    actor_slot = Actor_FindFreeSlot() & BYTE_MASK;
+    actor_slot = Actor_FindFreeSpawned() & BYTE_MASK;
     if (actor_slot == GAME_NONE) {
         return;
     }

@@ -2629,7 +2629,7 @@ jtbl_80195F7C = { addr = 0x80195F7C, type = "Callback", source = "The switch tab
 jtbl_80195F9C = { addr = 0x80195F9C, type = "Callback", source = "The switch table of func_801B0E44: the jump targets of its jr dispatch." }
 jtbl_80195FC0 = { addr = 0x80195FC0, type = "Callback", source = "The switch table of func_801BC4D0: the jump targets of its jr dispatch." }
 s_FairyConstructionThresholds = { addr = 0x80195FE0, source = "Row of s8 thresholds func_801C2018 indexes by bit_index - 0xF6 to decide when the fairy village construction stage is reached." }
-Actor_FindFreeSlot = { addr = 0x8019601C, type = "func", source = "Returns the index of the first g_SpawnedActors entry whose header.flags is 0, or 0xFF when all ACTOR_SLOT_COUNT are in use." }
+Actor_FindFreeSpawned = { addr = 0x8019601C, type = "func", source = "Returns the index of the first g_SpawnedActors entry whose header.flags is 0, or 0xFF when all ACTOR_SLOT_COUNT are in use (the other array is searched by Actor_FindFreeField)." }
 Actor_Clear = { addr = 0x80196070, type = "func", source = "Frees the current g_Task actor: clears header.flags, header.mode (byte 0x01), the step (byte 0x02) and bytes 0x03 and 0x04." }
 Actor_Free = { addr = 0x801960C0, type = "func", source = "Frees g_SpawnedActors[record_index]: clears header.flags, header.mode (byte 0x01), the step (byte 0x02) and bytes 0x03 and 0x04." }
 Actor_ClearAll = { addr = 0x8019611C, type = "func", source = "Frees every one of the ACTOR_SLOT_COUNT g_SpawnedActors entries; Game_StartSelectedGame calls it before the next game." }
@@ -6864,7 +6864,7 @@ Actor_StepMovement = { addr = 0x8015C540, type = "func", source = "Moves the act
 Actor_StepScroll = { addr = 0x8015C750, type = "func", source = "Steps the actor scroll." }
 Actor_RiseToGround = { addr = 0x8015C940, type = "func", source = "Advances the speed accumulator and raises the distance counter to the measured distance." }
 Actor_ApplyVelocity = { addr = 0x8015C9CC, type = "func", source = "Moves an actor by its velocity." }
-Actor_FindFree = { addr = 0x8015CA48, type = "func", source = "Returns the first free field actor." }
+Actor_FindFreeField = { addr = 0x8015CA48, type = "func", source = "Returns the index of the first g_Actors entry whose first byte is 0, or 0xFF when all ACTOR_COUNT are in use." }
 Actor_ReadState = { addr = 0x8015CA9C, type = "func", source = "Reads the script state of an actor." }
 Actor_ClaimSlot = { addr = 0x8015CB18, type = "func", source = "claims the free record slot, fills its header, id, step and halfword fields; comment says the same" }
 SND_Init = { addr = 0x8015CD00, type = "func", source = "Initializes the sound system." }

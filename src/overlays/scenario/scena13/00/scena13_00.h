@@ -38,11 +38,11 @@ extern SceneFunc g_SceneActorDispatch[];
         s32 first_index;                                             \
         s32 second_index;                                            \
                                                                      \
-        first       = Actor_FindFree();                              \
+        first       = Actor_FindFreeField();                              \
         first_index = first & BYTE_MASK;                             \
         if (first_index != GAME_NONE) {                              \
             g_Actors[first_index].header.flags = 1;                  \
-            second                             = Actor_FindFree();   \
+            second                             = Actor_FindFreeField();   \
             second_index                       = second & BYTE_MASK; \
             if (second_index == GAME_NONE) {                         \
                 g_Actors[first_index].header.flags = 0;              \
