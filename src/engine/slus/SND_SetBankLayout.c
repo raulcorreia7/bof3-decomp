@@ -1,7 +1,7 @@
 #include "engine/slus/slus.h"
 
 /* lays out the seven sound banks of one layout row (0x1C bytes: header size, sequence size and SPU address per bank):
- * the banks follow one another from 0x8011A000; each header and sequence address goes to g_SndBankHeaders and
+ * the banks follow one another from the sound heap base; each header and sequence address goes to g_SndBankHeaders and
  * g_SndBankSequences, the SPU address, header, sequence buffer and bank number to the g_EmiBanks records.
  */
 MATCH void SND_SetBankLayout(u32 layout) {
