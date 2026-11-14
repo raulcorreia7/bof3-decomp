@@ -22,6 +22,11 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Find a template for an assembly function | `tools/template_diff.py <target>@<func>`                                 | [template diff](#templates)                               |
 | Try the closest template for one function | `tools/template_try.py <target>@<func>`                                 | [template diff](#templates)                               |
 | Try templates in batch                   | `tools/template_try.py rows.jsonl`                                       | same                                                      |
+| Compare one function by opcode, registers ignored | `tools/opcode_diff.py <target>@0x<ADDR> [context]`                | [match tools](#match-tools)                               |
+| Show GCC's register-allocation dumps     | `tools/rtl_dump.sh <file.c> [letters] [func]`                            | same                                                      |
+| Rank the values that live across a call  | `tools/alloc_priority.py <file.c> <func>`                                | same                                                      |
+| Try several full bodies, stop at a match | `tools/try_variants.py <target>@0x<ADDR> <file.c> variants.py`           | same                                                      |
+| Print assembly, attempts and C file      | `tools/match_context.sh <target>@0x<ADDR>`                               | same                                                      |
 | Try one C body for an assembly function  | `tools/try_body.py <target>@<func> body.c`                               | [try body](#try-body)                                     |
 | Draft open functions with m2c, keep exact | `tools/m2c_sweep.py --sample 200`, `tools/m2c_sweep.py --image <image>` | [m2c sweep](#m2c-sweep)                                   |
 | Write the seed bundle of one function    | `tools/seed.py <target>@<func>`                                          | [m2c sweep](#m2c-sweep)                                   |
@@ -95,6 +100,27 @@ tools/try_body.py --batch rows.tsv              # rows: <target>@<func> <TAB> bo
 A line `@decl <declaration>` in the body file (an `extern`, a prototype or a `#define`) is removed from
 the body and added to the image header, the first include of the C file, unless an include of that
 file already declares the name. Output: `EXACT`, `FAIL` with the first difference, or `SKIP`.
+
+## Match tools
+
+Helpers for one function against the retail bytes; each prints its usage with `--help`.
+
+- `opcode_diff.py` runs `match.sh --diff` and aligns the two sides on opcodes only, so a hunk is a
+  structural difference; the last line is `hunks N retail R cand C`.
+- `rtl_dump.sh` compiles one C file with `-DNON_MATCHING` (a draft body builds) and GCC's `-d`
+  letters, and prints the function's part of each dump. Its flags copy the image build's and need
+  updating with it.
+- `alloc_priority.py` reads the `lg` dumps and lists each value that lives across a call with its
+  allocator priority (`floor(log2(uses)) * uses * 10000 / live length`), its register or `STACK`,
+  and the insn that first sets it.
+- `try_variants.py` builds each full body of a `variants.py` (`NAME` and a dict `V` of tag to
+  function text) in place of the function, stops at the first `match:` and otherwise restores the file.
+- `match_context.sh` prints the assembly, the last three rows of `config/attempts.jsonl` and the C file.
+
+```sh
+tools/opcode_diff.py exe/slus_004_22@0x801530D0 2
+tools/alloc_priority.py src/engine/slus/func_801530D0.c func_801530D0
+```
 
 ## m2c sweep
 
