@@ -164,6 +164,8 @@ extern Callback D_801CF90C[];
    func_801D05D0 (plp567), func_801D07CC (plp267) */
 s32 func_801B2D00(s32 selector);
 s32 Char_ProbeFacingCell(void);
+s32 Char_ProbeCellSpawn(s16 x, s16 y);
+s32 Char_ProbeCellSpawn(s16 x, s16 y);
 
 /* Probes the cell one facing step (doubled) from the indexed route record for a party member. */
 #define PLCHAR_PROBE_FACING_FOLLOWER(index)                                                                                \

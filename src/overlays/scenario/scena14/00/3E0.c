@@ -229,7 +229,22 @@ MATCH void func_801FC0C8(void) {
     Party_LoadPalettes();
 }
 
-INCLUDE_ASM(func_801FC130);
+MATCH void func_801FC130(void) {
+    u8 slot;
+    /* FAKE: the retail frame holds 8 bytes no statement explains. */
+    FAKE_STACK_PADS(u8, 8);
+
+    for (slot = 0; slot < 3; slot++) {
+        D_80144908[slot] = g_Game.members[slot].chr.character_id;
+    }
+    for (slot = 0; slot < 3; slot++) {
+        Party_RemoveMember(D_80144908[slot]);
+    }
+    EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_REI, 0);
+    g_Game.party_size = 0;
+    Party_JoinMember(CHAR_ID_RYU_ADULT);
+    Party_LoadPalettes();
+}
 
 MATCH void func_801FC1E8(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_PECO, 0);
