@@ -203,7 +203,7 @@ MATCH void func_801EFA5C(void) {
     D_1F800000.view.effect.params[5] = g_BMagicOrbitWork->timer_05 * g_BMagicOrbitWork->unk_09;
     D_1F800000.view.effect.params[6] = g_BMagicOrbitWork->timer_06 * g_BMagicOrbitWork->unk_09;
     D_1F800000.view.effect.params[7] = g_BMagicOrbitWork->timer_07 * g_BMagicOrbitWork->unk_09;
-    /* kept: the vector base in a local makes the centre vector the register base of the corner writes. */
+    /* FAKE: the vector base in a local makes the centre vector the register base of the corner writes. */
     vec                              = D_1F800014;
     D_1F800014[0].vz                 = 0;
     D_1F800014[0].vy                 = 0;

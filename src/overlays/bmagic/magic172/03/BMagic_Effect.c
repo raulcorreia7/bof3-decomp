@@ -52,6 +52,7 @@ MATCH void func_801EEE7C(void) {
     SYS_DISPATCH_BYTE(D_801F0B7C, g_Task->header.step);
     if (g_Task->header.flags != 0) {
         switch (g_Task->header.step) {
+            /* FAKE: retail compare tree needs a third case below 2 on the default body; the bytes do not say which step. */
             case 1:
             default:
                 Battle_ProjectRange();
