@@ -10,6 +10,26 @@
 #define SCRATCH_ROW_STRIDE 0x28
 #define SCRATCH_ROW_OFFSET 0x25
 
+/* One 0x28-byte row of the particle table at AREA_WORK; a row is free while life is 0. */
+typedef struct SceneParticle {
+    s32 x;      /* +0x00 */
+    s32 y;      /* +0x04 */
+    s32 z;      /* +0x08 */
+    s32 unk_C;  /* +0x0C */
+    s32 vx;     /* +0x10 */
+    s32 vy;     /* +0x14 */
+    s32 vz;     /* +0x18 */
+    s32 unk_1C; /* +0x1C */
+    s32 unk_20; /* +0x20 */
+    u8  unk_24; /* +0x24 */
+    u8  life;   /* +0x25 */
+    u8  pad[2]; /* +0x26 */
+} SceneParticle;
+
+ASSERT_SIZE(SceneParticle, 0x28);
+ASSERT_OFFSET(SceneParticle, vx, 0x10);
+ASSERT_OFFSET(SceneParticle, life, 0x25);
+
 /* One point of the path func_801F77EC builds in the area work memory. */
 typedef struct ScenePathPoint {
     s32 x;   /* 0x00 */
@@ -70,6 +90,8 @@ extern u8        g_ScenePositions;
 extern Callback  g_ScenePositionDispatch[];
 
 void func_801F7EC0();
+
+void func_801F7CF0(SceneParticle* row);
 
 void func_801F7FCC(void);
 
