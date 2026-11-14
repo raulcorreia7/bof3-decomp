@@ -30,6 +30,10 @@ NON_MATCHING void func_8014BC70(void) {
     u32  word;
     s8   var_s0;
     s32  first;
+    u32  layer_index;
+    u32  object_index;
+    u32  packet_index;
+    u32  packet;
     s8   rows;
     s8   row;
     s8   other;
@@ -70,17 +74,17 @@ NON_MATCHING void func_8014BC70(void) {
         } while ((var_s7 & BYTE_MASK) < (count - 1));
     }
     tpage  = getTPage(1, 0, 320, 256);
-    var_s7 = 0;
-    var_s4 = 0;
-    var_fp = 0;
+    layer_index = 0;
+    object_index = 0;
+    packet_index = 0;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, NULL);
     GFX_AddPrim(6U, sizeof(DR_MODE));
     do {
         if (g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) {
-            Area_DrawCellLayer(var_s7 & BYTE_MASK);
+            Area_DrawCellLayer(layer_index & BYTE_MASK);
         }
         if (g_AreaDrawFlags & AREA_DRAW_APPEND_AREA_PRIMITIVES) {
-            tmp  = ((g_FrameBufferIndex + 4) * 8) + ((var_s7 & BYTE_MASK) * 0x30);
+            tmp  = ((g_FrameBufferIndex + 4) * 8) + ((layer_index & BYTE_MASK) * 0x30);
             word = *(u32*)(D_80142CC0 + tmp);
             if (word != 0) {
                 u32** slot = &D_801459D0[g_AreaDrawMode];
@@ -89,37 +93,38 @@ NON_MATCHING void func_8014BC70(void) {
                 *slot = *(u32**)(D_80142CC4 + tmp);
             }
         }
-        layer = var_s7 & BYTE_MASK;
-        while ((((OBJ_KEY(var_s4 & BYTE_MASK) >> 8) == layer) && ((var_s4 & BYTE_MASK) < D_8014832D)) ||
-               (((D_80143740[var_fp & BYTE_MASK] >> 0x18) == layer) && ((var_fp & BYTE_MASK) < D_8014933D))) {
-            word = D_80143740[var_fp & BYTE_MASK];
-            if ((((word >> 0x18) == layer) && ((var_fp & BYTE_MASK) < D_8014933D) && (OBJ_KEY(var_s4 & BYTE_MASK) >= (word >> 0x10))) ||
-                ((var_s4 & BYTE_MASK) == D_8014832D)) {
+        layer = layer_index & BYTE_MASK;
+        while ((((OBJ_KEY(object_index & BYTE_MASK) >> 8) == layer) && ((object_index & BYTE_MASK) < D_8014832D)) ||
+               (((D_80143740[packet_index & BYTE_MASK] >> 0x18) == layer) && ((packet_index & BYTE_MASK) < D_8014933D))) {
+            word = D_80143740[packet_index & BYTE_MASK];
+            if ((((word >> 0x18) == layer) && ((packet_index & BYTE_MASK) < D_8014933D) && (OBJ_KEY(object_index & BYTE_MASK) >= (word >> 0x10))) ||
+                ((object_index & BYTE_MASK) == D_8014832D)) {
                 if (g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) {
-                    var_s0 = var_fp & BYTE_MASK;
-                    CatPrim(D_801459D0[g_AreaDrawMode], &g_AreaCellPrims[D_80143740[var_s0] & 0xFFF][g_FrameBufferIndex]);
-                    D_801459D0[g_AreaDrawMode] = (u32*)&g_AreaCellPrims[D_80143740[var_s0] & 0xFFF][g_FrameBufferIndex];
+                    packet = packet_index & BYTE_MASK;
+                    CatPrim(D_801459D0[g_AreaDrawMode], &g_AreaCellPrims[D_80143740[packet] & 0xFFF][g_FrameBufferIndex]);
+                    D_801459D0[g_AreaDrawMode] = (u32*)&g_AreaCellPrims[D_80143740[packet] & 0xFFF][g_FrameBufferIndex];
                 }
-                var_fp += 1;
+                packet_index += 1;
             }
-            var_s0 = var_fp & BYTE_MASK;
-            var_s3 = &D_80143740[var_s0];
-            var_s2 = OBJ_KEY(var_s4 & BYTE_MASK);
+            packet = packet_index & BYTE_MASK;
+            var_s3 = &D_80143740[packet];
+            var_s2 = OBJ_KEY(object_index & BYTE_MASK);
             rows   = 0;
-            while ((OBJ_KEY(var_s4 & BYTE_MASK) < *(u16*)((u8*)var_s3 + 2)) || (var_s0 == D_8014933D)) {
-                obj = OBJ(var_s4 & BYTE_MASK);
-                key = (s16) * (u16*)(obj + 0x32);
+            merged = var_s2 < *(u16*)((u8*)var_s3 + 2);
+            while (merged || (packet == D_8014933D)) {
+                obj = OBJ(object_index & BYTE_MASK);
+                key = *(u16*)(obj + 0x32);
                 if ((((u32)(key << 0x10)) >> 0x18) != layer) {
                     break;
                 }
-                if (!((var_s4 & BYTE_MASK) < D_8014832D)) {
+                if (!((object_index & BYTE_MASK) < D_8014832D)) {
                     break;
                 }
                 if (g_AreaDrawMode != 6) {
                     if (g_AreaDrawMode != 4) {
                         break;
                     }
-                    if ((s16)var_s2 != key) {
+                    if ((s16)var_s2 != (s16)key) {
                         break;
                     }
                 }
@@ -130,7 +135,8 @@ NON_MATCHING void func_8014BC70(void) {
                     D_80147D08[rows].primitive = obj;
                     D_80147D0C[rows++].depth   = *(s32*)(obj + 0x60) | WORD_SIGN_BIT;
                 }
-                var_s4 += 1;
+                object_index += 1;
+                merged = OBJ_KEY(object_index & BYTE_MASK) < *(u16*)((u8*)var_s3 + 2);
             }
             if ((rows - 1) > 0) {
                 for (row = 0; row < (rows - 1); row++) {
@@ -155,10 +161,10 @@ NON_MATCHING void func_8014BC70(void) {
             }
         }
         if (g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) {
-            Area_AddScenePrim(var_s7 & BYTE_MASK);
+            Area_AddScenePrim(layer_index & BYTE_MASK);
         }
-        var_s7 += 1;
-    } while ((var_s7 & BYTE_MASK) < 0x37U);
+        layer_index += 1;
+    } while ((layer_index & BYTE_MASK) < 0x37U);
 }
 #else
 INCLUDE_ASM(func_8014BC70);
