@@ -12,7 +12,7 @@ typedef struct AreaSprite {
     Point3l origin;
     u8      unk_10[4];
     VECTOR  normal;
-    u32     half_size;
+    u16     half_size;
 } AreaSprite;
 
 ASSERT_SIZE(AreaSprite, 0x28);
