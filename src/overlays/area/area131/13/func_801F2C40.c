@@ -12,6 +12,6 @@ MATCH void func_801F2C40(void) {
         *(u16*)((u8*)g_ScriptWorkRecord + 0x7E) = 0;
         g_MessageRequest                        = 0xC;
     } else {
-        g_MessageRequest = 0xFFFF;
+        g_MessageRequest = MESSAGE_NONE;
     }
 }

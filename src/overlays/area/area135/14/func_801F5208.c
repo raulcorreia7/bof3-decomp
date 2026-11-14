@@ -1,12 +1,10 @@
 #include "area135_14.h"
 
-s32 func_801F603C(s32 x, s32 y);
-
 MATCH s32 func_801F5208(s32 x, s32 y) {
-    u8 v;
+    u8 state;
 
-    v = D_80143F03;
-    if (v != 4 && (u8)(v - 6) >= 2) {
+    state = D_80143F03;
+    if (state != 4 && (u8)(state - 6) >= 2) {
         return 0;
     }
     if (SYS_TestFlag(g_SceneEventFlags, 0xC) == 0) {
