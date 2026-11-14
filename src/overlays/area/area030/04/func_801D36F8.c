@@ -8,7 +8,7 @@ MATCH void func_801D36F8(void) {
 
     record = FISHING_STATE;
     if (g_FishingPromptSets[record->cue_index_06][3] != 0) {
-        slot = Actor_FindFreeSlot();
+        slot = Actor_FindFreeSpawned();
         if (slot != -1) {
             g_SpawnedActors[slot].header.flags = 1;
             g_SpawnedActors[slot].type         = 0xF;

@@ -26,7 +26,7 @@ MATCH void func_801F8188(void) {
             if (g_ScriptVars[0] != 3) {
                 break;
             }
-            slot                   = Actor_FindFreeSlot();
+            slot                   = Actor_FindFreeSpawned();
             D_1F800000.view.raw[0] = slot;
             if ((slot & BYTE_MASK) != GAME_NONE) {
                 g_SpawnedActors[slot].header.flags                     = 1;
@@ -51,7 +51,7 @@ MATCH void func_801F8188(void) {
             if (g_ScriptVars[0] != 0xA) {
                 break;
             }
-            slot                   = Actor_FindFreeSlot();
+            slot                   = Actor_FindFreeSpawned();
             D_1F800000.view.raw[0] = slot;
             if ((slot & BYTE_MASK) != GAME_NONE) {
                 g_SpawnedActors[slot].header.flags                     = 1;
@@ -81,7 +81,7 @@ MATCH void func_801F8188(void) {
             if (g_ScriptVars[0] != 0xD) {
                 break;
             }
-            slot                   = Actor_FindFreeSlot();
+            slot                   = Actor_FindFreeSpawned();
             D_1F800000.view.raw[0] = slot;
             if ((slot & BYTE_MASK) != GAME_NONE) {
                 g_SpawnedActors[slot].header.flags                     = 1;
@@ -104,7 +104,7 @@ MATCH void func_801F8188(void) {
             break;
         case 11:
             Area_StartScrollRoute(0);
-            slot                   = Actor_FindFreeSlot();
+            slot                   = Actor_FindFreeSpawned();
             D_1F800000.view.raw[0] = slot;
             if ((slot & BYTE_MASK) != GAME_NONE) {
                 g_SpawnedActors[slot].header.flags                     = 1;
@@ -120,7 +120,7 @@ MATCH void func_801F8188(void) {
             if (g_ScriptVars[0] != 1) {
                 break;
             }
-            slot                   = Actor_FindFreeSlot();
+            slot                   = Actor_FindFreeSpawned();
             D_1F800000.view.raw[0] = slot;
             if ((slot & BYTE_MASK) != GAME_NONE) {
                 g_SpawnedActors[slot].header.flags                     = 1;

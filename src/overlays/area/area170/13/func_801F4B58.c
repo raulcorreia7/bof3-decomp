@@ -88,7 +88,7 @@ MATCH void func_801F4B58(void) {
             }
             break;
         case 40:
-            slot = Actor_FindFreeSlot();
+            slot = Actor_FindFreeSpawned();
             if (slot != GAME_NONE) {
                 g_SpawnedActors[slot].header.flags = 1;
                 g_SpawnedActors[slot].type         = 0x7D;
@@ -106,7 +106,7 @@ MATCH void func_801F4B58(void) {
                 g_AreaScrollTargetX    = TO_COORD(26);
                 g_AreaScrollTargetY    = TO_COORD(145);
                 g_AreaCameraStep       = g_RouteSpeedScale[2] << 3;
-                D_1F800000.view.raw[0] = Actor_FindFreeSlot();
+                D_1F800000.view.raw[0] = Actor_FindFreeSpawned();
                 if (D_1F800000.view.raw[0] != GAME_NONE) {
                     g_SpawnedActors[D_1F800000.view.raw[0]].header.flags   = 1;
                     g_SpawnedActors[D_1F800000.view.raw[0]].type           = 0x13;
@@ -140,7 +140,7 @@ MATCH void func_801F4B58(void) {
                 g_AreaCameraStep       = g_RouteSpeedScale[3] << 3;
                 g_AreaScrollTargetX    = g_Game.members[0].pos.x.fixed;
                 g_AreaScrollTargetY    = g_Game.members[0].pos.y.fixed;
-                D_1F800000.view.raw[0] = Actor_FindFreeSlot();
+                D_1F800000.view.raw[0] = Actor_FindFreeSpawned();
                 if (D_1F800000.view.raw[0] != GAME_NONE) {
                     g_SpawnedActors[D_1F800000.view.raw[0]].header.flags   = 1;
                     g_SpawnedActors[D_1F800000.view.raw[0]].type           = 0x13;

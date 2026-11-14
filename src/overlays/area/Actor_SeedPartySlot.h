@@ -7,7 +7,7 @@
 #define ACTOR_SEED_PARTY_SLOT(member, table, unk06)                                                  \
     {                                                                                                \
         TASK_SET(&g_Game.members[member]);                                                           \
-        g_Task->param.actor_slot = Actor_FindFreeSlot();                                             \
+        g_Task->param.actor_slot = Actor_FindFreeSpawned();                                          \
         if (g_Task->param.actor_slot == GAME_NONE) {                                                 \
             return;                                                                                  \
         }                                                                                            \

@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-MATCH bool Char_TestAbilityRole(s32 bit, s32 role, ItemCategory category, s32 item_id) {
+MATCH bool Item_CanEquip(s32 bit, s32 role, ItemCategory category, s32 item_id) {
     s32 equip_slot;
 
     switch (Item_GetIcon(category & BYTE_MASK, item_id & BYTE_MASK) & BYTE_MASK) {

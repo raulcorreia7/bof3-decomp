@@ -16,9 +16,9 @@ MATCH void func_801F30F8(void) {
             value += 0x2C;
         } while ((i & BYTE_MASK) < 0x20U);
         PopMatrix();
-        g_Task->unk_06            = 0;
-        g_Task->tint.bytes.unk_5D = 8;
-        g_Task->timer             = 120;
+        g_Task->unk_06             = 0;
+        g_Task->tint.bytes.rgb.red = 8;
+        g_Task->timer              = 120;
         g_Task->header.mode += 1;
     }
 }

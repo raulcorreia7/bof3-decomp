@@ -16,10 +16,10 @@ MATCH void func_801B207C(void) {
         g_Task = work;
         awake  = 3;
         limit  = -(frames << 5);
-        if (work->header.mode == awake && limit < (s8)work->tint.bytes.unk_5D) {
-            work->tint.bytes.unk_5D   = limit;
-            g_Task->tint.bytes.unk_5E = g_Task->tint.bytes.unk_5D;
-            g_Task->tint.bytes.unk_5F = g_Task->tint.bytes.unk_5D;
+        if (work->header.mode == awake && limit < (s8)work->tint.bytes.rgb.red) {
+            work->tint.bytes.rgb.red     = limit;
+            g_Task->tint.bytes.rgb.green = g_Task->tint.bytes.rgb.red;
+            g_Task->tint.bytes.rgb.blue  = g_Task->tint.bytes.rgb.red;
         }
     }
     TASK_SET(g_Game.members);

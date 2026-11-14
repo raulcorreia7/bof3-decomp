@@ -5,7 +5,7 @@ MATCH void Area_RequestRestartOnContextChange(void) {
     u8* scratch;
     u8  step;
 
-    Actor_CenterOnScreen();
+    Actor_SetScreenOrigin();
     if (g_GameEntryState != 1) {
         scratch = (u8*)g_Task;
         step    = scratch[0x0B];

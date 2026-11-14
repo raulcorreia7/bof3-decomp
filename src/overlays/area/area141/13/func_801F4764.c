@@ -3,7 +3,7 @@
 MATCH void func_801F4764(void) {
     u8 slot;
 
-    slot = Actor_FindFree();
+    slot = Actor_FindFreeField();
     if (slot != GAME_NONE) {
         g_Actors[slot].header.flags = 1;
         SP_REF(u16, 0x00)           = slot;

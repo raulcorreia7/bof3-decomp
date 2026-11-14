@@ -10,7 +10,7 @@ MATCH void func_801EEC04(void) {
     s32          tpage;
     u8           i;
 
-    BMagic_DispatchTaskPair(func_801EEDAC, Effect_PlayOnZeroTick);
+    BMagic_DispatchTaskPair(func_801EEDAC, Effect_MarkDamagedOnZeroTick);
     tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
@@ -93,7 +93,7 @@ MATCH void func_801EEDAC(void) {
     g_Task->header.mode++;
 }
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EF0C4 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"

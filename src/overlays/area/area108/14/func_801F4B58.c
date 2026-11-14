@@ -10,11 +10,11 @@ MATCH void func_801F4B58(void) {
     flags_set->header.flags |= 0x20;
     flags_clear = g_Task;
     flags_clear->header.flags &= ~ACTOR_FLAG_HIDDEN;
-    g_Task->tint.bytes.flags       = 1;
-    tint                           = g_Task;
-    tint->tint.signed_bytes.unk_5F = -0x80;
-    tint->tint.signed_bytes.unk_5E = -0x80;
-    tint->tint.signed_bytes.unk_5D = -0x80;
-    g_Task->unk_04                 = 1;
-    g_CurrentActor->unk_7E         = (g_CurrentActor->unk_7E - 2);
+    g_Task->tint.bytes.flags            = 1;
+    tint                                = g_Task;
+    tint->tint.signed_bytes.delta.blue  = -0x80;
+    tint->tint.signed_bytes.delta.green = -0x80;
+    tint->tint.signed_bytes.delta.red   = -0x80;
+    g_Task->unk_04                      = 1;
+    g_CurrentActor->unk_7E              = (g_CurrentActor->unk_7E - 2);
 }

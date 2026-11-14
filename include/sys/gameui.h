@@ -219,7 +219,7 @@ typedef enum GameRequest {
     GAME_REQUEST_SCENE_CAMERA = 9, /* state 11 */
 } GameRequest;
 
-/* The rows of g_GameStates, the full-screen modes Game_UpdateMain runs. */
+/* The rows of g_GameStates, the full-screen modes Game_RunMain runs. */
 typedef enum GameEntryState {
     GAME_STATE_NEW_GAME     = 0,
     GAME_STATE_AREA_LOAD    = 1,

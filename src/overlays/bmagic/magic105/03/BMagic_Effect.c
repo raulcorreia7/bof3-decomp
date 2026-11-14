@@ -10,7 +10,7 @@ MATCH void func_801EEC14(void) {
     PartyMember* swap;
     s32          count;
 
-    BMagic_DispatchTaskPair(func_801EED1C, Effect_PlayOnZeroTick);
+    BMagic_DispatchTaskPair(func_801EED1C, Effect_MarkDamagedOnZeroTick);
     count = 0;
     do {
         if (BMAGIC_EFFECT_SLOTS[(u8)count].header.flags & 0x1) {
@@ -65,7 +65,7 @@ MATCH void func_801EED1C(void) {
     g_Task->header.mode++;
 }
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEF78 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"

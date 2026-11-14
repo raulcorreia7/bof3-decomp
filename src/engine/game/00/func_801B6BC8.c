@@ -44,10 +44,10 @@ MATCH void func_801B6BC8(void) {
         if (flags & 0x2) {
             g_Task->direction_08 = sel;
             func_801C2438();
-            g_Task->tint.signed_bytes.unk_5D = -0x40;
-            g_Task->tint.signed_bytes.unk_5E = -0x40;
-            g_Task->tint.signed_bytes.unk_5F = -0x40;
-            g_Task->tint.bytes.flags         = 1;
+            g_Task->tint.signed_bytes.delta.red   = -0x40;
+            g_Task->tint.signed_bytes.delta.green = -0x40;
+            g_Task->tint.signed_bytes.delta.blue  = -0x40;
+            g_Task->tint.bytes.flags              = 1;
             Actor_RequestScript(g_Task->direction_08);
             g_Task->unk_03 = 4;
             return;

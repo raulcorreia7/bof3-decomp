@@ -4,7 +4,7 @@ MATCH void func_801F3D78(void) {
     u8  actor_slot;
     s32 link;
 
-    actor_slot = Actor_FindFreeSlot();
+    actor_slot = Actor_FindFreeSpawned();
     if (actor_slot != GAME_NONE) {
         g_SpawnedActors[actor_slot].header.flags = 1;
         g_SpawnedActors[actor_slot].type         = 0x9D;

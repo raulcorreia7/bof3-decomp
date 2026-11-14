@@ -1,9 +1,9 @@
 #include "engine/slus/slus.h"
 
 /* returns the index of the first empty record at g_Actors, or 0xFF
- * when all 0x1E records are occupied.
+ * when all 0x1E records are occupied (Actor_FindFreeSpawned searches g_SpawnedActors).
  */
-MATCH s32 Actor_FindFree(void) {
+MATCH s32 Actor_FindFreeField(void) {
     s32 index;
     s32 offset;
 

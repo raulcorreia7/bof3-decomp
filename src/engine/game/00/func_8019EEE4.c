@@ -52,7 +52,7 @@ MATCH u8 func_8019EEE4(void) {
             } else {
                 Game_RewardZenny(5);
             }
-            index = (s8)Actor_FindFreeSlot();
+            index = (s8)Actor_FindFreeSpawned();
             if (index != -1) {
                 g_SpawnedActors[index].header.flags     = 1;
                 g_SpawnedActors[index].type             = 0x34;

@@ -2,7 +2,7 @@
 
 /* func_801F4D60 */
 MATCH void Area_ReserveActorSlot(void) {
-    g_Task->param.actor_slot = Actor_FindFreeSlot();
+    g_Task->param.actor_slot = Actor_FindFreeSpawned();
     if (g_Task->param.actor_slot == GAME_NONE) {
         g_ScriptState->cursor -= 2;
     }
