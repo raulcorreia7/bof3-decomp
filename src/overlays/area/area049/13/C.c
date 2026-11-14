@@ -142,7 +142,40 @@ MATCH void func_80117864(void* arg0) {
 
 #include "overlays/area/Area_FindFreeWorkRow.h"
 
-INCLUDE_ASM(func_80117900);
+MATCH u8 func_80117900(void) {
+    u8          scratch[32];
+    u8          i;
+    u8          count;
+    s32         result;
+    AreaSprite* work;
+
+    Area_SetCameraMatrix(scratch);
+    GFX_SET_DRAW_MODE(GetTPage(0, 1, 960, 0));
+    GFX_AddPrim(2, 12);
+
+    result     = 0;
+    D_801181DC = MEM_PTR(AreaSprite, AREA_WORK);
+    i          = 0;
+
+    do {
+        work = D_801181DC;
+        if (work->flags != 0) {
+            work->origin.z += work->normal.vz;
+            work->flags_03 -= 6;
+            work->half_size += 8;
+            count = --D_801181DC->flags_02;
+            if (!(count & BYTE_MASK)) {
+                D_801181DC->flags = 0;
+            }
+            func_801170D8(D_801181DC);
+            result = 1;
+        }
+        D_801181DC++;
+        i++;
+    } while (i < 16);
+
+    return result;
+}
 
 MATCH void func_80117A30(void) {
     SYS_DISPATCH_BYTE(D_801181AC, g_Task->header.step);
