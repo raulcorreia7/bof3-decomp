@@ -707,6 +707,7 @@ extern u32                         g_XaStates[55];
 extern u32                         D_80183A1C[17];
 extern u32                         D_80183A60[4];
 extern u16                         D_80183A70[];
+extern u32                         g_SysStartupReturn; /* start of the BSS stup2 clears */
 extern u8                          D_8018B2F4;
 extern s16                         D_8018B308;
 extern s16                         D_8018B30C;
@@ -777,9 +778,10 @@ extern u8                          D_8018B4AC;
 extern u32                         D_8018B4B0;
 extern void (*D_8018E7D4)(s16 voice);
 extern void (*D_8018E988)(s16 voice);
-extern s8 D_8018E98C;
-extern u8 D_801C839C[];
-extern u8 D_801C839D[];
+extern s8  D_8018E98C;
+extern u32 D_80190C60; /* end of the BSS stup2 clears */
+extern u8  D_801C839C[];
+extern u8  D_801C839D[];
 extern void (*D_801C83D8[])(u8*);
 extern u8*                   D_801C893C[];
 extern u8*                   D_801C8950[];
