@@ -1,7 +1,5 @@
 #include "battle_15.h"
 
-extern u8 D_80145F20[];
-
 /* Ends the battle selection: hands the chosen slot to the sound request, clears it, then copies the battler
  * work rows and resets the effect slots. */
 #ifdef NON_MATCHING
