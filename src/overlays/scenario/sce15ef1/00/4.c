@@ -46,7 +46,39 @@ MATCH void func_801D0D54(void) {
     }
 }
 
-INCLUDE_ASM(func_801D0DD8);
+MATCH void func_801D0DD8(void) {
+    WorldSpin* spin;
+    u8         timer;
+    u8         i;
+
+    g_Task->unk_6C += TO_COORD(12);
+    g_Task->screen_x -= 6;
+    func_801D147C(&g_Task->unk_64, (s16)g_Task->screen_x, 6);
+    timer         = g_Task->timer - 1;
+    g_Task->timer = timer;
+    if ((timer & BYTE_MASK) == 0) {
+        g_Task->timer  = 32;
+        g_Task->unk_06 = 0;
+        g_Task->header.mode++;
+        func_801D199C();
+        g_Task->pos.x.fixed = g_Task->unk_64;
+        g_Task->pos.y.fixed = g_Task->unk_68;
+        g_Task->pos.z.fixed = g_Task->unk_6C;
+        spin                = g_WorldSpins;
+        i                   = 0;
+        do {
+            Area_InitSpin(spin);
+            i++;
+            spin++;
+        } while (i < 16);
+        while (i < 32) {
+            spin->scale = 0;
+            spin->fade  = 0;
+            spin++;
+            i++;
+        }
+    }
+}
 
 INCLUDE_ASM(func_801D0F10);
 

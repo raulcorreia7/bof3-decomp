@@ -606,7 +606,31 @@ MATCH void func_801FDFEC(void* entity) {
     actor->unk_7E = actor->unk_7E + 1;
 }
 
-INCLUDE_ASM(func_801FE024);
+MATCH s32 func_801FE024(s32 x, s32 y) {
+    if (g_GameAreaId == AREA_ID_MYRIA_STATION_AFTER_SAMPLES) {
+        if (D_80143F03 == 1) {
+            if (SYS_TestFlag(g_SceneFlags, 1) == 0 && y > TO_COORD(71)) {
+                Game_SetScriptActive();
+                g_SceneState.state_04 = 3;
+                g_SceneState.step_05  = 15;
+            }
+        }
+        if (D_80143F03 == 2) {
+            if (SYS_TestFlag(g_SceneEventFlags, 0x81) == 0 && (x >> 16) >= 45 && (u32)((y >> 16) - 120) < 8) {
+                Game_SetScriptActive();
+                g_SceneState.state_04 = 3;
+                g_SceneState.step_05  = 0;
+            }
+        }
+    }
+    if (g_GameAreaId == AREA_ID_MYRIA_STATION_MYRIA_ROOM && D_80143F03 == 0 && x == TO_COORD(65) + COORD_HALF && (u32)((y >> 16) - 34) < 3) {
+        Game_SetScriptActive();
+        g_SceneState.state_04 = 4;
+        g_SceneState.step_05  = 0;
+        return 1;
+    }
+    return 0;
+}
 
 MATCH s32 func_801FE18C(s32 x, s32 y) {
     if (g_GameAreaId == 0xAE) {
