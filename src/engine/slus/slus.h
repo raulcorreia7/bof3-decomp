@@ -388,6 +388,14 @@ struct Vec3W {
 /* Retail data D_80180000-D_801DFFFF and scratchpad (one declaration each). */
 extern u8               D_1F800004;
 extern u32              D_1F80000C;
+/* One list of the cell ordering table: the last packet linked. */
+typedef struct AreaCellPacketList {
+    P_TAG* tail;
+    s32    unk_04;
+} AreaCellPacketList;
+
+/* D_80142CC4 as lists: six per grid row. */
+extern AreaCellPacketList g_AreaCellPacketLists[][6];
 extern SVECTOR          D_1F800014[];
 extern SVECTOR          D_1F80001C;
 extern SVECTOR          D_1F800024;

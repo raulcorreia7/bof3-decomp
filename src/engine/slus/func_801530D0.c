@@ -5,15 +5,8 @@
 #define PAD_AT(type, off) ((type*)((u8*)&D_1F800000 + (off)))
 #define PAD(type, off)    (*PAD_AT(type, off))
 
-/* The ordering-table tail kept at byte offset off of D_80142CC4. */
-#define SLOT(off) (*(P_TAG**)&D_80142CC4[off])
-
-/* Appends the packet to the list whose tail sits at byte offset off. */
-#define LINK_PACKET(off, pkt)      \
-    do {                           \
-        setaddr(SLOT(off), pkt);   \
-        SLOT(off) = (P_TAG*)(pkt); \
-    } while (0)
+/* Appends the packet to a list of the cell ordering table. */
+#define LINK_PACKET(row, list, pkt) (setaddr(g_AreaCellPacketLists[row][list].tail, pkt), g_AreaCellPacketLists[row][list].tail = (P_TAG*)(pkt))
 
 /* Draws the visible window of the 0x37 by 0x1C tile ring: each cell is projected through the GTE, culled against the
  * screen box, given a packet pair (plus linked rows at +0x46/+0x4E) and linked into the ordering table by depth.
@@ -34,8 +27,6 @@ NON_MATCHING s32 func_801530D0(void) {
     s32 origin_y;
     s32 depth_threshold;
     u8* map_width_ptr;
-    s32 row_depth_off;
-    s32 col_depth_off;
     s8* rec;
     s32 width;
     s32 v;
@@ -44,7 +35,6 @@ NON_MATCHING s32 func_801530D0(void) {
     s32 col;
     s32 col_count;
     s32 fp;
-    s32 s5;
     s32 s6;
     s32 s2;
     u16 v16;
@@ -55,8 +45,6 @@ NON_MATCHING s32 func_801530D0(void) {
     POLY_FT4* pkt;
     POLY_FT4* pkt2;
     POLY_FT4* link;
-    s32 slot;
-    s32 slot2;
     s32 x;
     u16 ux;
     u16 uy;
@@ -100,9 +88,7 @@ NON_MATCHING s32 func_801530D0(void) {
         PAD(s32, 0xC) = 0;
     }
     map_width_ptr = MEM_PTR(u8, MAP_BUNDLE_BASE);
-    row_depth_off = -0x30;
     sp10_row      = g_AreaGridRowCursor;
-    col_depth_off = 0;
     D_80149341    = PAD(s32, 0xC);
     low_min       = PAD_AT(u8, 0);
     vert          = D_1F800014;
@@ -121,7 +107,6 @@ NON_MATCHING s32 func_801530D0(void) {
         col = wrapped;
         fp  = 0;
         if ((0x1C - (window * 2)) > 0) {
-            s5 = col_depth_off;
             do {
                 next_col = 0;
                 if (col != 27) {
@@ -195,21 +180,10 @@ NON_MATCHING s32 func_801530D0(void) {
                             pkt2 = &g_AreaCellPrims[s2][g_FrameBufferIndex];
                             gte_rtpt();
                             if (cell->prim_id & 0x8000) {
-                                v = g_FrameBufferIndex * 8;
                                 if (cell->prim_id & 0x4000) {
-                                    slot = v;
-                                    if (s6 != 0) {
-                                        slot = v + row_depth_off;
-                                    }
-                                    setaddr(SLOT(slot), pkt);
-                                    slot2 = v;
-                                    if (s6 != 0) {
-                                        slot2 += row_depth_off;
-                                    }
-                                    SLOT(slot2) = (P_TAG*)pkt;
+                                    LINK_PACKET((s6 != 0) ? s6 - 1 : 0, g_FrameBufferIndex, pkt);
                                 } else {
-                                    slot = (g_FrameBufferIndex + 2) * 8 + s5;
-                                    LINK_PACKET(slot, pkt);
+                                    LINK_PACKET(s6, g_FrameBufferIndex + 2, pkt);
                                 }
                             } else if ((cell->prim_id & 0x4000) && ((g_AreaDrawMode == 6) || ((g_AreaDrawMode == 4) && (depth_threshold < s6)))) {
                                 *low_min = *(u32*)rec ^ 0x80;
@@ -230,8 +204,7 @@ NON_MATCHING s32 func_801530D0(void) {
                                 D_8014933D += 1;
                                 D_80143740[tmp] = (s6 << 0x18) | (cell->prim_id & AREA_CELL_PRIM_MASK) | (*low_min << 0x10);
                             } else {
-                                slot = g_FrameBufferIndex * 8 + s5;
-                                LINK_PACKET(slot, &prim[g_FrameBufferIndex]);
+                                LINK_PACKET(s6, g_FrameBufferIndex, &prim[g_FrameBufferIndex]);
                             }
                             gte_stsxy3((s32*)&prim[g_FrameBufferIndex].x1, (s32*)&prim[g_FrameBufferIndex].x2, (s32*)&prim[g_FrameBufferIndex].x3);
                             v16 = g_AreaCellPrims[s2][1].pad1;
@@ -250,11 +223,8 @@ NON_MATCHING s32 func_801530D0(void) {
                                 vert[0].vz       = -(rec[0] * 0x10);
                                 vert[1].vz       = -((s8) * (u16*)(rec + 2) * 0x10);
                                 gte_ldv3c(&D_1F800014[0]);
-                                slot = (g_FrameBufferIndex + (((cell->prim_id >> 0xC) & 2) ^ 2)) * 8 + s5;
-                                setaddr(SLOT(slot), link);
+                                LINK_PACKET(s6, g_FrameBufferIndex + (((cell->prim_id >> 0xC) & 2) ^ 2), link);
                                 gte_rtpt();
-                                slot2       = (g_FrameBufferIndex + (((cell->prim_id >> 0xC) & 2) ^ 2)) * 8 + s5;
-                                SLOT(slot2) = (P_TAG*)link;
                                 gte_stsxy3((s32*)&link->x3, (s32*)&link->x2, (s32*)D_1F800034);
                             }
                             v16 = g_AreaCellPrims[s2][1].pad2;
@@ -273,11 +243,8 @@ NON_MATCHING s32 func_801530D0(void) {
                                 vert[0].vz       = -(rec[0] * 0x10);
                                 D_1F80001C.vz    = -(((*(s32*)rec << 0x10) >> 0x18) * 0x10);
                                 gte_ldv3c(&D_1F800014[0]);
-                                slot = (g_FrameBufferIndex + (((cell->prim_id >> 0xB) & 2) ^ 2)) * 8 + s5;
-                                setaddr(SLOT(slot), link);
+                                LINK_PACKET(s6, g_FrameBufferIndex + (((cell->prim_id >> 0xB) & 2) ^ 2), link);
                                 gte_rtpt();
-                                slot2       = (g_FrameBufferIndex + (((cell->prim_id >> 0xB) & 2) ^ 2)) * 8 + s5;
-                                SLOT(slot2) = (P_TAG*)link;
                                 gte_stsxy3((s32*)&link->x2, (s32*)&link->x3, (s32*)D_1F800034);
                             }
                         }
@@ -287,8 +254,6 @@ NON_MATCHING s32 func_801530D0(void) {
             } while (fp < (0x1C - (PAD(s32, 0xC) * 2)));
         }
         s6 += 1;
-        row_depth_off += 0x30;
-        col_depth_off += 0x30;
     } while (s6 < 0x37);
     func_80153D34();
 }
