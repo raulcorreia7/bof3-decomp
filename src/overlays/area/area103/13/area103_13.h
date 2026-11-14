@@ -12,7 +12,7 @@ void func_801F482C(void);
 void func_801F49A0(s32 arg);
 void func_801F4E70(s32 frame);
 /* The word the effect start stores over the actor's active_flags byte and the three bytes after it. */
-#define AREA_EFFECT_ACTIVE_WORD 0x1000000
+#define AREA_EFFECT_ACTIVE_WORD 16777216
 
 extern u8 D_801F5934[];
 extern u8 D_801F5948[];
