@@ -2725,8 +2725,8 @@ Game_RewardZenny = { addr = 0x801B5E58, type = "func", source = "Plays common cu
 Game_RequestPersonalAction = { addr = 0x801B5EBC, type = "func", source = "Starts the lead character's personal action when FIELD_INPUT_PERSONAL_ACTION is pressed outside the world map, except for Garr, Rei, Ryu in pajamas and Whelp: sets FIELD_TASK_MODE_PERSONAL_ACTION, whose handler is picked from g_PersonalActions" }
 Game_RequestRockKick = { addr = 0x801B5F68, type = "func", source = "Starts the Teepo or Peco personal action when the leader runs (walk speed index 4) into a rock actor (a type 0x17 actor) on the facing cell: records its actor slot in the work byte +0x0B and sets FIELD_TASK_MODE_PERSONAL_ACTION at step 1 (Teepo Kick, Peco Bump)" }
 Game_RequestGarrPush = { addr = 0x801B6044, type = "func", source = "Starts Garr's personal action when the leader is Garr and has walked 16 frames against an object facing a cardinal direction: counts the frames in the work byte +0x0B, then sets FIELD_TASK_MODE_PERSONAL_ACTION at step 0 (Garr Push)" }
-Area_StepSceneTimer = { addr = 0x801BC3B8, type = "func", source = "Counts the scene timer down each frame and calls Area_ResetScene when it expires." }
-Area_ResetScene = { addr = 0x801BC400, type = "func", source = "Clears the scene scroll counters and the work words at +0x0C to +0x14." }
+Area_StepSceneTimer = { addr = 0x801BC3B8, type = "func", source = "Counts the scene timer down each frame and calls Area_UpdateIdleActor when it expires." }
+Area_UpdateIdleActor = { addr = 0x801BC400, type = "func", source = "Per-frame upkeep of the idle field actor, run when the scene timer expires: applies the regen and confusion upkeep and the cell-hit checks and, when none fires, stops the actor, sets byte 0x11C of the mode work area to 3, runs func_801BC000 and returns an actor at rest in mode 1 to step 0." }
 Party_CountOrder = { addr = 0x801BDB7C, type = "func", source = "Returns the number of leading entries of the field order (mode 0) or battle order (mode 1), three bytes each at D_80144F5A, that are not 0xFF." }
 Actor_FindInRange = { addr = 0x801BDE14, type = "func", source = "walks the g_Actors rows and returns the first actor the range test accepts, else -1" }
 Area_GetActorFacingStepX = { addr = 0x801BDF08, type = "func", source = "the body returns g_FacingSteps[work->direction_08].x" }
@@ -7012,7 +7012,7 @@ Area_DispatchScene = { addr = 0x80167344, type = "func", source = "Dispatches th
 Area_InitScene = { addr = 0x801673AC, type = "func", source = "Sets up the area scene." }
 Area_StepSceneTimer = { addr = 0x80167800, type = "func", source = "Ticks the scene timer and runs Area_ResetScene on expiry." }
 Area_SyncScrollHeight = { addr = 0x80167848, type = "func", source = "Syncs the scroll height with the actor." }
-Area_ResetScene = { addr = 0x8016788C, type = "func", source = "Resets the area scene." }
+Area_ResetScene = { addr = 0x8016788C, type = "func", source = "Resets the mode work record: clears the camera step counters and the actor velocity, sets byte 0x11C of the mode work area to 3, then runs func_80167428 when a directional input is held or sets mode 1." }
 Char_AddHP = { addr = 0x80167FDC, type = "func", source = "Heals HP of a character." }
 Char_AddAP = { addr = 0x801680CC, type = "func", source = "Adds to current_ap clamped at max_ap." }
 Char_LoseHP = { addr = 0x8016813C, type = "func", source = "Damages HP of a character." }

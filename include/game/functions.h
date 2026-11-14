@@ -163,7 +163,7 @@ void  Game_RewardZenny(s32 zenny);
 /* func_801B6610 */
 bool  func_801B6610(s16 map_x, s16 map_y);
 /* func_801BC400 */
-void  Area_ResetScene(void);
+void  Area_UpdateIdleActor(void);
 /* func_801BDAB8 */
 void  func_801BDAB8(void);
 /* func_801BDB7C */

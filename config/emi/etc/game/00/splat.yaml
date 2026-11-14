@@ -731,7 +731,7 @@ segments:
       - [0x267B4, c, func_801BBFB4]
       - [0x26800, c, func_801BC000]
       - [0x26BB8, c, Area_StepSceneTimer]
-      - [0x26C00, c, Area_ResetScene]
+      - [0x26C00, c, Area_UpdateIdleActor]
       - [0x26CD0, c, func_801BC4D0]
       - [0x26F60, c, func_801BC760]
       - [0x27560, c, func_801BCD60]
