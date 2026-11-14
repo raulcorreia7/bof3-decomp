@@ -1,7 +1,8 @@
 #include "boss013_16.h"
 
 MATCH void func_800C1B4C(void) {
-    u8 flags;
+    u8           flags;
+    volatile u8* live;
 
     if (g_Battle.encounter == 16) {
         flags = g_Battle.boss_flags;
@@ -11,7 +12,8 @@ MATCH void func_800C1B4C(void) {
                 g_MenuPanelMode      = 2;
                 Message_StartAreaMessage(37);
                 g_Battle.boss_flags |= 4;
-                flags = *(volatile u8*)&g_Battle.boss_flags;
+                live  = &g_Battle.boss_flags;
+                flags = *live;
             }
             if (flags & 8) {
                 if (!(flags & 0x10)) {
