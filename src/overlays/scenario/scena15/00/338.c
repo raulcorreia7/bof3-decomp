@@ -224,7 +224,27 @@ MATCH void func_801F7F5C(void) {
 
 INCLUDE_ASM(func_801F7FFC);
 
-INCLUDE_ASM(func_801F81D8);
+/* Draw the 24 by 48 tinted sprite at the screen point, its texture window centred on the work record's screen position. */
+MATCH void func_801F81D8(s16 x, s16 y) {
+    POLY_GT4* prim;
+    u8        red;
+    u8        green;
+
+    prim  = (POLY_GT4*)g_GfxPrimCursor;
+    red   = g_Task->tint.bytes.rgb.red;
+    green = g_Task->tint.bytes.rgb.green;
+    SetPolyGT4(prim);
+    setXY4(prim, x, y, x + 24, y, x, y + 48, x + 24, y + 48);
+    setUV4(prim, (u8)g_Task->screen_x - 12, (u8)g_Task->screen_y - 37, (u8)g_Task->screen_x + 12, (u8)g_Task->screen_y - 37, (u8)g_Task->screen_x - 12, (u8)g_Task->screen_y + 11,
+           (u8)g_Task->screen_x + 12, (u8)g_Task->screen_y + 11);
+    setRGB0(prim, red, red, red);
+    setRGB1(prim, red, red, red);
+    setRGB2(prim, green, green, green);
+    setRGB3(prim, green, green, green);
+    prim->tpage = GetTPage(2, 1, 0x340, 0x100);
+    SetSemiTrans(prim, 1);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_GT4));
+}
 
 MATCH void func_801F83AC(Point2u* out) {
     SVECTOR vec;
