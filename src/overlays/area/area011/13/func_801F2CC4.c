@@ -9,13 +9,13 @@ MATCH void func_801F2CC4(void) {
     if (SYS_TestFlag(D_80144EF8, 20) != 0) {
         return;
     }
-    p = (u32*)(0x80104000 + (MEM(u16, 0x80104022) << 2));
+    p = (u32*)(MAP_BUNDLE_BASE + (((AreaMapBundle*)MAP_BUNDLE_BASE)->list_base_22 << 2));
     if (*p == 0) {
         return;
     }
     while (*p != 0) {
         u32 v = *p;
-        if ((v & 0xFF000000) == 0x81000000) {
+        if ((v & AREA_RECORD_TYPE_MASK) == AREA_RECORD_TYPE_81) {
             p += 2;
             p[1] = 0x21080000;
             p[0] = 0x21080000;

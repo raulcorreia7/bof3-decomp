@@ -162,6 +162,9 @@ typedef struct AreaMapBundle {
 } AreaMapBundle;
 
 ASSERT_SIZE(AreaMapBundle, AREA_MAP_BUNDLE_SIZE);
+/* A bundle record's first word carries its type in the top byte. */
+#define AREA_RECORD_TYPE_MASK (0xFFu << 24)
+#define AREA_RECORD_TYPE_81   (0x81u << 24)
 ASSERT_OFFSET(AreaMapBundle, width, 0x00);
 ASSERT_OFFSET(AreaMapBundle, height, 0x01);
 ASSERT_OFFSET(AreaMapBundle, grid_off4_02, 0x02);
