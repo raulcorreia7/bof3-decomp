@@ -1,5 +1,12 @@
 #include "engine/slus/slus.h"
 
+/* One map cell: four height bytes, read as a word, as its upper half or by byte. */
+typedef union MapCellHeights {
+    s32 word;
+    u16 halves[2];
+    u8  bytes[4];
+} MapCellHeights;
+
 /* The four signed height bytes of a map cell word. */
 #define CELL_H0(word) (((word) << 24) >> 24)
 #define CELL_H1(word) (((word) << 16) >> 24)
@@ -8,19 +15,19 @@
 
 /* Draws the wall quads between a map cell and its left or upper neighbour; the record's byte 3 picks one side or both. */
 MATCH void func_80157CE4(u8* record, s32 cell_x, s32 cell_y) {
-    SVECTOR v0;
-    SVECTOR v1;
-    SVECTOR v2;
-    SVECTOR v3;
-    s32     p;
-    s32     flag;
-    s32*    cell;
-    s32*    other;
-    s32*    row;
-    u8*     prim;
-    s32     count;
-    s32     side;
-    s32     kind;
+    SVECTOR         v0;
+    SVECTOR         v1;
+    SVECTOR         v2;
+    SVECTOR         v3;
+    s32             p;
+    s32             flag;
+    MapCellHeights* cell;
+    MapCellHeights* other;
+    MapCellHeights* row;
+    u8*             prim;
+    s32             count;
+    s32             side;
+    s32             kind;
 
     kind = (u32)(record[3] - 63) >> 1;
     if (kind < 4) {
@@ -30,8 +37,8 @@ MATCH void func_80157CE4(u8* record, s32 cell_x, s32 cell_y) {
         count = 2;
         side  = (kind - 4) * 2;
     }
-    row    = (s32*)(MAP_BUNDLE_BASE + 0x30) + cell_y * g_AreaMapBundle.width;
-    cell   = (s32*)(cell_x * 4 + (u32)row);
+    row    = (MapCellHeights*)(MAP_BUNDLE_BASE + 0x30) + cell_y * g_AreaMapBundle.width;
+    cell   = (MapCellHeights*)(cell_x * 4 + (u32)row);
     cell_x = ((cell_x - 128) << 7) - 64;
     v0.vx = v2.vx = cell_x;
     cell_y        = ((cell_y - 128) << 7) - 64;
@@ -43,21 +50,21 @@ MATCH void func_80157CE4(u8* record, s32 cell_x, s32 cell_y) {
         v1.vx = v3.vx = (side & 1) ? cell_x : cell_x + 128;
         v1.vy = v3.vy = cell_y + ((side & 1) << 7);
         if (side & 1) {
-            if ((CELL_H0(cell[0]) < CELL_H1(cell[-1])) || (CELL_H3(cell[-1]) > CELL_H2(cell[0]))) {
-                v2.vz = -(CELL_H1(cell[-1]) << 4);
-                v3.vz = -(CELL_H3(cell[-1]) << 4);
+            if ((CELL_H0(cell[0].word) < CELL_H1(cell[-1].word)) || (CELL_H3(cell[-1].word) > CELL_H2(cell[0].word))) {
+                v2.vz = -(CELL_H1(cell[-1].word) << 4);
+                v3.vz = -(CELL_H3(cell[-1].word) << 4);
             } else {
-                v2.vz = -(CELL_H0(cell[0]) << 4);
-                v3.vz = -((s8)((u16*)cell)[1] << 4);
+                v2.vz = -(CELL_H0(cell[0].word) << 4);
+                v3.vz = -((s8)cell->halves[1] << 4);
             }
         } else {
             other = cell - g_AreaMapBundle.width;
-            if ((CELL_H0(cell[0]) < CELL_H2(other[0])) || (CELL_H3(other[0]) > CELL_H1(cell[0]))) {
-                v2.vz = -(CELL_H2(other[0]) << 4);
-                v3.vz = -((s8)((u8*)other)[3] << 4);
+            if ((CELL_H0(cell[0].word) < CELL_H2(other[0].word)) || (CELL_H3(other[0].word) > CELL_H1(cell[0].word))) {
+                v2.vz = -(CELL_H2(other[0].word) << 4);
+                v3.vz = -((s8)other->bytes[3] << 4);
             } else {
-                v2.vz = -(CELL_H0(cell[0]) << 4);
-                v3.vz = -(CELL_H1(cell[0]) << 4);
+                v2.vz = -(CELL_H0(cell[0].word) << 4);
+                v3.vz = -(CELL_H1(cell[0].word) << 4);
             }
         }
         v0.vz = v2.vz - 128;
