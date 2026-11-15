@@ -38,9 +38,7 @@ typedef struct Thread {
     u32      open_arg;
     u8       pad_14[0x30];
     u32      open_arg_2;
-    u8       pad_48[0x18];
-    u16      unk_60[8];    /* cleared by func_8014BA04 */
-    u8       unk_70[0x10]; /* cleared by func_8014BA04 */
+    u8       pad_48[0x38];
 } Thread;
 
 ASSERT_SIZE(Thread, SYS_THREAD_SIZE);
