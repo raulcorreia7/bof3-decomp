@@ -292,9 +292,9 @@ MATCH void Scene_StartEndingXa(void) {
     u8* step;
 
     SND_StartXAStream(8, 1);
-    step       = &D_80146874;
-    D_801F9DD0 = 0;
-    D_801F9DD4 = 0;
+    step               = &D_80146874;
+    g_EndingRollLine   = 0;
+    g_EndingRollScroll = 0;
     *step += 1;
 }
 
@@ -303,7 +303,7 @@ MATCH void Scene_WaitEndingXa(void) {
     u8  ready;
     u8* step;
 
-    ready = func_801F938C();
+    ready = Scene_UpdateEndingRoll();
     if ((u8)SND_IsXAIdle() && ready) {
         UI_SetMode(UI_MODE_LONG_FADE_OUT);
         step  = &D_80146874;
@@ -319,7 +319,7 @@ MATCH void func_801F8170(void) {
         D_80146874 = 0;
         *stage     = *stage + 1;
     } else {
-        func_801F938C();
+        Scene_UpdateEndingRoll();
     }
 }
 
@@ -672,7 +672,8 @@ MATCH void func_801F9160(s16 x, s16 y) {
     GFX_AddPrim(1, sizeof(SPRT));
 }
 
-MATCH void func_801F91F0(s16 x, s16 y, u8* text) {
+/* func_801F91F0 */
+MATCH void Scene_DrawEndingRollLine(s16 x, s16 y, u8* text) {
     u8  color;
     u8  glyph;
     s32 tpage;
@@ -700,7 +701,7 @@ MATCH void func_801F91F0(s16 x, s16 y, u8* text) {
                 idx   = *text + 4;
                 glyph = idx;
                 func_801F90BC(x, y, color, glyph);
-                x += D_801F97DC[glyph];
+                x += g_EndingGlyphWidth[glyph];
                 break;
             case ' ':
                 x += 12;
@@ -718,28 +719,29 @@ MATCH void func_801F91F0(s16 x, s16 y, u8* text) {
                 }
                 glyph = idx;
                 func_801F90BC(x, y, color, glyph);
-                x += D_801F97DC[glyph];
+                x += g_EndingGlyphWidth[glyph];
                 break;
         }
         text++;
     }
 }
 
-MATCH bool func_801F938C(void) {
+/* func_801F938C */
+MATCH bool Scene_UpdateEndingRoll(void) {
     s32 i;
     u8* text;
 
     for (i = 0; i < 16; i++) {
-        text = D_801F981C[D_801F9DD0 + i];
+        text = g_EndingRollText[g_EndingRollLine + i];
         if (text != (u8*)-1 && text != NULL) {
-            func_801F91F0(16, i * 22 - D_801F9DD4, text);
+            Scene_DrawEndingRollLine(16, i * 22 - g_EndingRollScroll, text);
         }
     }
-    if (D_801F981C[D_801F9DD0] != (u8*)-1) {
-        D_801F9DD4 += 1;
-        if (D_801F9DD4 == 22) {
-            D_801F9DD4 = 0;
-            D_801F9DD0 += 1;
+    if (g_EndingRollText[g_EndingRollLine] != (u8*)-1) {
+        g_EndingRollScroll += 1;
+        if (g_EndingRollScroll == 22) {
+            g_EndingRollScroll = 0;
+            g_EndingRollLine += 1;
         }
         return 0;
     }
