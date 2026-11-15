@@ -14,7 +14,7 @@ MATCH bool Battle_EndRound(void) {
                 count++;
                 g_Game.members[slot].header.mode         = 6;
                 g_Game.members[slot].header.step         = 5;
-                g_Game.members[slot].u.turn.target_flags = 0x11;
+                g_Game.members[slot].u.turn.target_flags = BATTLE_HIT_HP | BATTLE_HIT_HP_LANDED;
                 g_Game.members[slot].counter_136         = 0;
                 g_Game.members[slot].unk_04              = 0;
                 g_Game.members[slot].unk_03              = 0;
@@ -30,7 +30,7 @@ MATCH bool Battle_EndRound(void) {
                 count++;
                 ENEMY_COMBATANT(slot).header.mode       = 6;
                 ENEMY_COMBATANT(slot).header.step       = 5;
-                ENEMY_COMBATANT(slot).turn.target_flags = 0x11;
+                ENEMY_COMBATANT(slot).turn.target_flags = BATTLE_HIT_HP | BATTLE_HIT_HP_LANDED;
                 ENEMY_COMBATANT(slot).unk_112           = 0;
                 ENEMY_COMBATANT(slot).unk_04            = 0;
                 ENEMY_COMBATANT(slot).unk_03            = 0;

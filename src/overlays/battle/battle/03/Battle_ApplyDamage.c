@@ -5,9 +5,9 @@ MATCH u32 Battle_ApplyDamage(u8 attacker_slot, u8 target_slot) {
     s32 damage;
 
     if (BATTLER_IS_PLAYER(target_slot)) {
-        g_Game.members[target_slot].u.turn.target_flags = 0x11;
+        g_Game.members[target_slot].u.turn.target_flags = BATTLE_HIT_HP | BATTLE_HIT_HP_LANDED;
     } else {
-        ENEMY_COMBATANT(target_slot).turn.target_flags = 0x11;
+        ENEMY_COMBATANT(target_slot).turn.target_flags = BATTLE_HIT_HP | BATTLE_HIT_HP_LANDED;
     }
     damage = Battle_CalcDamage(attacker_slot, target_slot, BATTLE_ELEMENT_FROM_WEAPON);
     if (BATTLER_IS_PLAYER(target_slot)) {
