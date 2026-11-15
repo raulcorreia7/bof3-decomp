@@ -462,7 +462,55 @@ MATCH void func_801F88DC(void) {
     Actor_Clear();
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F88FC(Scena03Line* line) {
+    LINE_G2* primitive;
+    s32*     center;
+    VECTOR   point;
+    VECTOR   direction;
+    VECTOR   previous;
+    MATRIX   camera;
+    s16      scale;
+    s8       index;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 960, 0) & 0xFFFF, 0);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    direction.vx = (rsin(line->unk_02) * rcos(line->unk_04)) >> 8;
+    direction.vy = (rsin(line->unk_02) * rsin(line->unk_04)) >> 8;
+    center       = &g_Game.members[0].pos.x.fixed;
+    direction.vz = rcos(line->unk_02) << 4;
+    Area_SetCameraMatrix(&camera);
+
+    index = 0;
+    do {
+        primitive = (LINE_G2*)g_GfxPrimCursor;
+        SetLineG2(primitive);
+        SetSemiTrans(primitive, 1);
+
+        scale    = (line->unk_00 * line->unk_06) >> 8;
+        point.vx = center[0] + ((scale * direction.vx) >> 8);
+        point.vy = center[1] + ((scale * direction.vy) >> 8);
+        point.vz = center[2] + (scale * direction.vz);
+        Area_ProjectPoint(&point.vx, (DVECTOR*)&primitive->x0);
+        setRGB0(primitive, (line->unk_06 * line->color.red) >> 8, (line->unk_06 * line->color.green) >> 8, (line->unk_06 * line->color.blue) >> 8);
+
+        scale    = (line->unk_00 * line->unk_08) >> 8;
+        point.vx = center[0] + ((scale * direction.vx) >> 8);
+        point.vy = center[1] + ((scale * direction.vy) >> 8);
+        point.vz = center[2] + (scale * direction.vz);
+        Area_ProjectPoint(&point.vx, (DVECTOR*)&primitive->x1);
+        setRGB1(primitive, (line->unk_08 * line->color.red) >> 8, (line->unk_08 * line->color.green) >> 8, (line->unk_08 * line->color.blue) >> 8);
+        GFX_AddPrim(1, sizeof(LINE_G2));
+
+        previous     = direction;
+        direction.vx = -previous.vy;
+        direction.vy = previous.vx;
+        index++;
+    } while (index < 4);
+}
+#else
 INCLUDE_ASM(func_801F88FC);
+#endif
 
 #include "shared/GFX_DrawShadedDisc.h"
 
