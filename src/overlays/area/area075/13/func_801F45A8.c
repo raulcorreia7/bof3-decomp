@@ -1,7 +1,5 @@
 #include "area075_13.h"
 
-s32 rand(void);
-
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F45A8(void) {
     Actor* actor;
@@ -10,8 +8,8 @@ NON_MATCHING void func_801F45A8(void) {
     u16    timer;
 
     timer     = D_801F58C4;
-    table_row = &D_801F58A0[D_801F58C9 * 15];
-    column    = (u16)((u32)timer % 15U);
+    table_row = D_801F58A0[D_801F58C9];
+    column    = timer % 15;
     if (table_row[column] != 0) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
         D_801F58CC -= rand() % 2 + 4;
