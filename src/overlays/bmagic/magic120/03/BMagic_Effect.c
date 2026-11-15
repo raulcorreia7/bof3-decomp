@@ -156,7 +156,92 @@ MATCH void func_801EF270(void) {
 
 #include "overlays/bmagic/Effect_CountUpAndFinishAt136.h"
 
-INCLUDE_ASM(BMagic_DrawWhelpBreath);
+MATCH void BMagic_DrawWhelpBreath(void) {
+    POLY_GT4* prim;
+    s32       tpage;
+    s32       i;
+    s32       inner;
+    s32       outer;
+    s32       swing;
+    s32       prev;
+
+    tpage = getTPage(0, 1, 320, 256);
+    GFX_AddDitheredDrawMode(3, tpage);
+    D_1F800000.view.effect.params[4] = g_Task->unk_2E.half;
+    D_1F800000.view.effect.params[5] = g_Task->unk_30.half;
+    D_1F800000.view.effect.params[1] = g_Task->unk_14;
+    for (i = 1; i < g_Task->timer + 1; i++) {
+        D_1F800000.view.effect.params[6] = D_1F800000.view.effect.params[4];
+        D_1F800000.view.effect.params[7] = D_1F800000.view.effect.params[5];
+        D_1F800000.view.effect.params[2] = (D_1F800000.view.effect.params[1] + FIXED_MUL(rsin(((i + g_Task->unk_09) << 6) & 0xFC0), 352)) & ANGLE_MASK;
+        D_1F800000.view.effect.params[4] += FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), 16);
+        D_1F800000.view.effect.params[5] += FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), 16);
+        prim  = (POLY_GT4*)g_GfxPrimCursor;
+        inner = ((i - 1 - g_Task->unk_09) & 0x3F) << 6;
+        outer = ((i - g_Task->unk_09) & 0x3F) << 6;
+        SetPolyGT4(prim);
+        SetSemiTrans(prim, 1);
+        D_1F800000.view.effect.params[2] = (D_1F800000.view.effect.params[1] + 0x400) & ANGLE_MASK;
+        prev                             = i - 1;
+        swing                            = rsin(inner) * 2;
+        swing                            = FIXED_MUL(swing, prev) + 4;
+        D_1F800000.view.effect.params[0] = prev * 4 + swing;
+        D_1F800000.view.effect.params[0] = D_1F800000.view.effect.params[0] / g_Task->param.unk_0B + 1;
+        prim->x1                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+        prim->y1                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+        swing                            = rsin(outer) * 2;
+        swing                            = FIXED_MUL(swing, i) + 4;
+        D_1F800000.view.effect.params[0] = i * 4 + swing;
+        D_1F800000.view.effect.params[0] = D_1F800000.view.effect.params[0] / g_Task->param.unk_0B + 1;
+        prim->x3                         = D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+        prim->y3                         = D_1F800000.view.effect.params[5] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+        setXY0(prim, D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
+        prim->x2    = D_1F800000.view.effect.params[4];
+        prim->y2    = D_1F800000.view.effect.params[5];
+        prim->clut  = GetClut(0, 0x1FA);
+        prim->tpage = GetTPage(0, 1, 0x380, 0x100);
+        setUV4(prim, 0x40, i * 8 - g_Task->unk_09 * 16, 0x80, i * 8 - g_Task->unk_09 * 16, 0x40, i * 8 - g_Task->unk_09 * 16 + 8, 0x80, i * 8 - g_Task->unk_09 * 16 + 8);
+        D_1F800000.view.effect.params[3] = g_Task->unk_04 * 12;
+        setRGB0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
+        setRGB2(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
+        D_1F800000.view.effect.params[3] = g_Task->unk_04;
+        setRGB1(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
+        setRGB3(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
+        GFX_AddPrim(3, sizeof(POLY_GT4));
+        prim = (POLY_GT4*)g_GfxPrimCursor;
+        SetPolyGT4(prim);
+        SetSemiTrans(prim, 1);
+        D_1F800000.view.effect.params[2] = (D_1F800000.view.effect.params[1] - 0x400) & ANGLE_MASK;
+        swing                            = rsin(inner) * 2;
+        swing                            = FIXED_MUL(swing, prev) + 4;
+        D_1F800000.view.effect.params[0] = prev * 4 + swing;
+        D_1F800000.view.effect.params[0] = D_1F800000.view.effect.params[0] / g_Task->param.unk_0B + 1;
+        setXY0(prim, D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]),
+               D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]));
+        swing                            = rsin(outer) * 2;
+        swing                            = FIXED_MUL(swing, i) + 4;
+        D_1F800000.view.effect.params[0] = i * 4 + swing;
+        D_1F800000.view.effect.params[0] = D_1F800000.view.effect.params[0] / g_Task->param.unk_0B + 1;
+        prim->x2                         = D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+        prim->y2                         = D_1F800000.view.effect.params[5] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+        prim->x1                         = D_1F800000.view.effect.params[6];
+        prim->y1                         = D_1F800000.view.effect.params[7];
+        prim->x3                         = D_1F800000.view.effect.params[4];
+        prim->y3                         = D_1F800000.view.effect.params[5];
+        prim->clut                       = GetClut(0, 0x1FA);
+        prim->tpage                      = GetTPage(0, 1, 0x380, 0x100);
+        setUV4(prim, 0, i * 8 - g_Task->unk_09 * 16, 0x40, i * 8 - g_Task->unk_09 * 16, 0, i * 8 - g_Task->unk_09 * 16 + 8, 0x40, i * 8 - g_Task->unk_09 * 16 + 8);
+        D_1F800000.view.effect.params[3] = g_Task->unk_04 * 12;
+        setRGB1(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
+        setRGB3(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
+        D_1F800000.view.effect.params[3] = g_Task->unk_04;
+        setRGB0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
+        setRGB2(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
+        GFX_AddPrim(3, sizeof(POLY_GT4));
+    }
+    tpage = getTPage(0, 0, 320, 256);
+    GFX_AddDitheredDrawMode(3, tpage);
+}
 
 #include "overlays/bmagic/BMagic_RunStep.h"
 

@@ -2,7 +2,7 @@
 
 /* TODO
  */
-MATCH void func_80153CC4(u32 unused) {
+MATCH void func_80153CC4(void) {
     u32 base_t0;
     u32 level_t1;
     s32 count_a3;
@@ -31,5 +31,4 @@ MATCH void func_80153CC4(u32 unused) {
         count_a3++;
         offset_a2 += 0x30;
     } while (count_a3 < 56);
-    (void)unused;
 }

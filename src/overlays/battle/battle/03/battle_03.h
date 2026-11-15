@@ -227,13 +227,15 @@ extern volatile u8       D_801CA718[][20];
 extern BattlePhases      g_BattlePhases;
 /* D_801D0C1C */
 extern BattleEntrances   g_BattleEntrances;
-extern BattleIconPalette D_801D0C64;
+/* g_BattleIconPalette */
+extern BattleIconPalette g_BattleIconPalette;
 /* The overlay head keeps these in .data, so their definitions are non-const. */
 extern char              D_801D0C6C[];
 extern char              D_801D0C70[];
 extern char              D_801D0C74[];
 extern s8                D_801D0C78[];
-extern DamageSpread      D_801D0C7C;
+/* g_BattleDamageSpread */
+extern DamageSpread      g_BattleDamageSpread;
 
 /* D_801D0C84 */
 #define BATTLE_EVENT_STEP_COUNT 5

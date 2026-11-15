@@ -222,9 +222,41 @@ MATCH void func_801F7F5C(void) {
     }
 }
 
-INCLUDE_ASM(func_801F7FFC);
+/* Draw the sprite quad in a fixed grey with the tint's red and green lifted into the lower vertices. */
+MATCH void func_801F7FFC(s16 x, s16 y) {
+    POLY_GT4* prim;
+    u8        red;
+    u8        green;
 
-INCLUDE_ASM(func_801F81D8);
+    prim  = (POLY_GT4*)g_GfxPrimCursor;
+    red   = g_Task->tint.bytes.rgb.red + 0x20;
+    green = g_Task->tint.bytes.rgb.green + 0x20;
+    SetPolyGT4(prim);
+    SCENA15_SPRITE_GEOMETRY(prim, x, y);
+    setRGB0(prim, 0x90, 0x90, 0x90);
+    setRGB1(prim, 0x90, 0x90, 0x90);
+    setRGB2(prim, 0, red, 0);
+    setRGB3(prim, 0, green, 0);
+    SCENA15_SPRITE_END(prim);
+}
+
+/* Draw the 24 by 48 tinted sprite at the screen point, its texture window centred on the work record's screen position. */
+MATCH void func_801F81D8(s16 x, s16 y) {
+    POLY_GT4* prim;
+    u8        red;
+    u8        green;
+
+    prim  = (POLY_GT4*)g_GfxPrimCursor;
+    red   = g_Task->tint.bytes.rgb.red;
+    green = g_Task->tint.bytes.rgb.green;
+    SetPolyGT4(prim);
+    SCENA15_SPRITE_GEOMETRY(prim, x, y);
+    setRGB0(prim, red, red, red);
+    setRGB1(prim, red, red, red);
+    setRGB2(prim, green, green, green);
+    setRGB3(prim, green, green, green);
+    SCENA15_SPRITE_END(prim);
+}
 
 MATCH void func_801F83AC(Point2u* out) {
     SVECTOR vec;

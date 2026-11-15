@@ -5,7 +5,7 @@
 
 /* In-overlay dispatch targets (split assembly units). */
 
-BattleIconPalette D_801D0C64 = {
+BattleIconPalette g_BattleIconPalette = {
     0x08, 0x09, 0x08, 0x09, 0x08, 0x08, 0x08,
 };
 
@@ -17,15 +17,14 @@ char D_801D0C74[] = "%4d";
 
 s8 D_801D0C78[] = "%3d";
 
-DamageSpread D_801D0C7C = {
+DamageSpread g_BattleDamageSpread = {
     {50, 50, 50, 50, 60, 60, 60, 70},
 };
 
 /* 0x801D0C84 */
 /* D_801D0C84 */
 BattleEventSteps g_BattleEvents = {
-    (Callback)func_801DE690, (Callback)func_801DE698, (Callback)func_801DE754,
-    (Callback)func_801DE690, (Callback)func_801DE7FC,
+    (Callback)func_801DE690, (Callback)func_801DE698, (Callback)func_801DE754, (Callback)func_801DE690, (Callback)func_801DE7FC,
 };
 
 /* D_801D0C98 */

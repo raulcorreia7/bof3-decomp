@@ -127,8 +127,8 @@ in it.
 | Kind                                                               | Files | Definitions | Example row                                                                   |
 | ------------------------------------------------------------------ | ----: | ----------: | ----------------------------------------------------------------------------- |
 | `BMagic_Effect.c`: the code of one magic module                    |   118 |       1,739 | `config/emi/bmagic/magic008/00/splat.yaml`: `[0xF0, c, BMagic_Effect]`        |
-| offset name (`348.c`, `794.c`, `C.c`): not yet named by function   |    55 |       1,818 | `config/emi/scenario/scena08/00/splat.yaml`: `[0x348, c, 348]`, 103 functions |
-| hand name (`title_draw.c`, `save_card.c`, `Scene_DispatchActor.c`) |    18 |         234 | `config/emi/etc/game/01/splat.yaml`: `[0x534, c, title_draw]`                 |
+| offset name (`348.c`, `794.c`, `C.c`): not yet named by function   |    28 |       1,385 | `config/emi/scenario/scena08/00/splat.yaml`: `[0x348, c, 348]`, 103 functions |
+| hand name (`title_draw.c`, `save_card.c`, `Scene_DispatchActor.c`) |    45 |         667 | `config/emi/etc/game/01/splat.yaml`: `[0x534, c, title_draw]`                 |
 
 By group, the 191 files are: bmagic 120, scenario 27, plchar 19, area 8, commu 6, menu 5, title 3,
 battle 1, logo 2.

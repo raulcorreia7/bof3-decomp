@@ -12,18 +12,15 @@
 
 /* One 0x28-byte row of the particle table at AREA_WORK; a row is free while life is 0. */
 typedef struct SceneParticle {
-    s32 x;      /* +0x00 */
-    s32 y;      /* +0x04 */
-    s32 z;      /* +0x08 */
-    s32 unk_C;  /* +0x0C */
-    s32 vx;     /* +0x10 */
-    s32 vy;     /* +0x14 */
-    s32 vz;     /* +0x18 */
-    s32 unk_1C; /* +0x1C */
-    s32 unk_20; /* +0x20 */
-    u8  unk_24; /* +0x24 */
-    u8  life;   /* +0x25 */
-    u8  pad[2]; /* +0x26 */
+    VECTOR pos;    /* +0x00 */
+    s32    vx;     /* +0x10 */
+    s32    vy;     /* +0x14 */
+    s32    vz;     /* +0x18 */
+    s32    unk_1C; /* +0x1C */
+    s32    unk_20; /* +0x20 */
+    u8     unk_24; /* +0x24 */
+    u8     life;   /* +0x25 */
+    u8     pad[2]; /* +0x26 */
 } SceneParticle;
 
 ASSERT_SIZE(SceneParticle, 0x28);
@@ -97,6 +94,6 @@ void func_801F7FCC(void);
 
 u8* func_801F7FF8(void);
 
-s8 func_801F9DF4();
+s8 func_801F9DF4(s32 x, s32 y);
 
 #endif

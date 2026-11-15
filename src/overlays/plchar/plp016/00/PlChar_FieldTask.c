@@ -1,4 +1,4 @@
-#include "plp026_00.h"
+#include "plp016_00.h"
 #include "engine/game/00/game_00.h"
 
 #if BOF3_USE_ASM
@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801CE404(void) {
-    D_801D0A54[g_Task->header.step]();
+    D_801D0630[g_Task->header.step]();
 }
 
 #include "overlays/plchar/func_801CE448.h"
@@ -14,7 +14,7 @@ MATCH void func_801CE404(void) {
 #include "overlays/plchar/func_801CE628.h"
 
 MATCH void func_801CE72C(void) {
-    SYS_DISPATCH_TASK(D_801D0A60, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801D063C, 2, g_Task);
 }
 
 #include "overlays/plchar/func_801CE770.h"
@@ -31,55 +31,47 @@ MATCH void func_801CEA94(void){CHAR_RUN_FACING_PROBE()}
 #include "overlays/plchar/Char_ProbeFacingCell.h"
 
 MATCH void func_801CF12C(void) {
-    SYS_DISPATCH_TASK(D_801D0A6C, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801D0648, 2, g_Task);
 }
 
 #include "overlays/plchar/Char_StartTurn.h"
 
-#include "overlays/plchar/Char_RunStepScriptGarr.h"
+#include "overlays/plchar/Char_RunStepScript.h"
 
 MATCH void func_801CF338(void) {
-    SYS_DISPATCH_TASK(D_801D0A78, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801D0654, 2, g_Task);
 }
 
-/* func_801CF37C */
-#include "overlays/plchar/PlChar_RunGarrFieldTask.h"
+#include "overlays/plchar/Char_ClaimHelperSlotStep.h"
 
-MATCH void PlChar_RunGarrFieldTask(void) {
-    PLCHAR_RUN_GARR_FIELD_TASK(func_801CF808);
+MATCH void func_801CF37C(void) {
+    Char_ClaimHelperSlotStep();
 }
 
-#include "overlays/plchar/func_801CF564.h"
+#include "overlays/plchar/Char_ClearModeIfSlotFree.h"
 
-/* func_801CF5D4 */
-#include "overlays/plchar/PlChar_FindGarrActorSlot.h"
-
-#include "overlays/plchar/PlChar_FollowerInReach.h"
-
-#include "overlays/plchar/PlChar_ProbeFacingFollower.h"
-
-MATCH void func_801CF924(void) {
-    SYS_DISPATCH_TASK(D_801D0A80, 2, g_Task);
+MATCH void func_801CF500(void) {
+    SYS_DISPATCH_TASK(D_801D065C, 2, g_Task);
 }
 
 #include "overlays/plchar/Char_StartTurnPeco.h"
 
-#include "overlays/plchar/Char_RunStepScript.h"
+#include "overlays/plchar/Char_RunStepScriptPeco.h"
 
-MATCH void func_801CFB30(void) {
+MATCH void func_801CF70C(void) {
     Actor_StepAnimLoop();
 }
 
-MATCH void func_801CFB50(void) {
-    SYS_DISPATCH_TASK(D_801D0A8C, 2, g_Task);
+MATCH void func_801CF72C(void) {
+    SYS_DISPATCH_TASK(D_801D0668, 2, g_Task);
 }
 
-MATCH void func_801CFB94(void) {
-    SYS_DISPATCH_TASK(D_801D0A94, 3, g_Task);
+MATCH void func_801CF770(void) {
+    SYS_DISPATCH_TASK(D_801D0670, 3, g_Task);
 }
 
 MATCH void Char_FaceFreeDirection(void) {
-    CHAR_FACE_FREE_DIRECTION(func_801D06C4, func_801D0868);
+    CHAR_FACE_FREE_DIRECTION(func_801D02A0, func_801D0444);
 }
 
 #include "overlays/plchar/Char_RunPersonalAction.h"
@@ -90,21 +82,22 @@ MATCH void Char_FaceFreeDirection(void) {
 
 #include "overlays/plchar/Char_ClearSlotRefIfUnused.h"
 
-MATCH s32 func_801D0148(s16 x, s16 y) {
+MATCH s32 func_801CFD24(s16 x, s16 y) {
     CHAR_PROBE_CELL_CODE(Char_SpawnLinkedActor);
 }
 
-INCLUDE_ASM(Char_SpawnLinkedActor);
+/* func_801CFF30 */
+#include "overlays/plchar/Char_SpawnLinkedActor.h"
 
-MATCH void func_801D0440(void) {
-    SYS_DISPATCH_TASK(D_801D0AA8, 3, g_Task);
+MATCH void func_801D001C(void) {
+    SYS_DISPATCH_TASK(D_801D0684, 3, g_Task);
 }
 
-MATCH void func_801D0484(void) {
-    CHAR_START_FACING_TURN(func_801D0868);
+MATCH void func_801D0060(void) {
+    CHAR_START_FACING_TURN(func_801D0444);
 }
 
-MATCH void func_801D04F0(void) {
+MATCH void func_801D00CC(void) {
     if (Actor_StepAnimOnce() & BYTE_MASK) {
         Actor_RequestScript(g_Task->direction_08);
         g_Task->unk_03 = 2;
@@ -127,9 +120,10 @@ MATCH void func_801D04F0(void) {
 
 #include "overlays/plchar/Char_ClearModeIfUnused.h"
 
-INCLUDE_ASM(func_801D06C4);
+#include "overlays/plchar/Char_ProbeFacingBlocked.h"
+CHAR_DEFINE_PROBE_FACING_BLOCKED(func_801D02A0);
 
-MATCH void func_801D0868(void) {
+MATCH void func_801D0444(void) {
     s16 dist;
     s32 x;
     s32 y;
@@ -137,10 +131,10 @@ MATCH void func_801D0868(void) {
     CHAR_PROBE_FACING_CLEARANCE(dist, x, y)
 }
 
-MATCH void func_801D09CC(void) {
-    D_801D0AB4[g_Task->unk_2C]();
+MATCH void func_801D05A8(void) {
+    D_801D0690[g_Task->unk_2C]();
 }
 
-MATCH void func_801D0A10(void) {
-    D_801D0AC0[g_Task->unk_2C]();
+MATCH void func_801D05EC(void) {
+    D_801D069C[g_Task->unk_2C]();
 }

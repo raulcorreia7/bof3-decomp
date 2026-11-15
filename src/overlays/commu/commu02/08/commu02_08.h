@@ -7,7 +7,8 @@
 #include "shared/etc.h"
 
 extern u8            D_801457E8[][5];
-extern OverlayHeader D_801D0C00;
+/* g_EmiOverlayHeader */
+extern OverlayHeader g_EmiOverlayHeader;
 extern u8            D_801DAAA8;
 /* Entries of the handler tables. */
 #define COMMU02_EVENT0_STEP_COUNT       3
@@ -108,7 +109,7 @@ void func_801DA8E8(void);
 void func_801D2794(s32 count, s32 shown, s32 chosen);
 void func_801D2870(void);
 void func_801D2AC4(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_801D2CF8(s32 arg0, s32 arg1, s32 arg2);
+void func_801D2CF8(s32 x, s32 y, s32 icon);
 void func_801D3184(s32 arg0, s32 arg1);
 void func_801D4AE0(s32 arg0, s32 arg1, s32 arg2);
 void func_801D4F88(s32 x, s32 y, s32 show_values);

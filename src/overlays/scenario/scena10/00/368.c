@@ -76,7 +76,37 @@ MATCH void func_801F7758(void) {
     }
 }
 
-INCLUDE_ASM(func_801F781C);
+/* Draw the item panel background at (x, y) and, on each of the eight rows, the glyph for each owned item up to three. */
+MATCH void func_801F781C(u16 x, u16 y, u16 width, u16 height) {
+    POLY_FT4* prim;
+    u8        i;
+    u8        j;
+    u8        count;
+    u8        glyph;
+
+    prim = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(prim);
+    prim->tpage = GetTPage(0, 0, 704, 256);
+    setClut(prim, 64, 483);
+    setRGB0(prim, 0x80, 0x80, 0x80);
+    setXY4(prim, x, y, x + width, y, x, y + height, x + width, y + height);
+    setUV4(prim, 0, 0x98, 0x80, 0x98, 0, 0xFF, 0x80, 0xFF);
+    GFX_AddPrim(1, sizeof(POLY_FT4));
+    i = 0;
+    do {
+        count = D_80144908[i];
+        if (count > 3) {
+            count = 3;
+        }
+        for (j = 0; j < count; j++) {
+            glyph = D_801FE830[i][j];
+            if (glyph != 10) {
+                func_801F79E8(D_801FE848[glyph].x + x, D_801FE848[glyph].y + y);
+            }
+        }
+        i++;
+    } while (i < 8);
+}
 
 INCLUDE_ASM(func_801F79E8);
 
@@ -84,7 +114,20 @@ INCLUDE_ASM(func_801F7AD4);
 
 INCLUDE_ASM(func_801F7C34);
 
-INCLUDE_ASM(func_801F7DDC);
+/* Draw the "Choose parts" window with its item list and cursor, then place and step the cursor actor. */
+MATCH void func_801F7DDC(void) {
+    UI_DrawWindow(D_801FE7CC[3].x, D_801FE7CC[3].y, D_801FE7CC[3].width, D_801FE7CC[3].height, 2, g_WindowStyle);
+    sprintf(g_UiFormatBuffer, D_801F6C04, D_801FE874);
+    UI_DrawText((u16)D_801FE7CC[3].x + 8, D_801FE7CC[3].y + 2, 0, 12, g_UiFormatBuffer);
+    func_801F7AD4();
+    Menu_DrawCursorSprite(D_801FE808[0], (u16)(D_801FE808[1] + (g_Task->header.step & 7) * 15), 0);
+    func_801F7C34();
+    g_Task->screen_x = D_801FE7CC[5].x + D_801FE804[0];
+    g_Task->screen_y = D_801FE7CC[5].y + D_801FE804[1];
+    func_80159B9C(D_801FE7CC[5].x, D_801FE7CC[5].y, (u8)D_801FE7CC[5].width, (u8)D_801FE7CC[5].height);
+    Actor_StepAnimLoop();
+    Area_AddActor();
+}
 
 MATCH void func_801F7F50(void) {
     SYS_DISPATCH_BYTE(D_801FE8F4, D_80146872);

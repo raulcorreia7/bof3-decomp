@@ -22,7 +22,8 @@ ASSERT_OFFSET(CommuCellFrame, points, 0x00);
 ASSERT_SIZE(CommuCellFrame, 0xC);
 
 extern u8             D_801455C9[];
-extern OverlayHeader  D_801D0C00;
+/* g_EmiOverlayHeader */
+extern OverlayHeader  g_EmiOverlayHeader;
 /* D_801D4BCC */
 extern Callback       g_Commu01States[COMMU01_STEP_COUNT];
 /* D_801D4BD8 */

@@ -220,3 +220,20 @@ def test_an_address_name_moved_to_another_image_is_exempt() -> None:
         "src/b/x.c": "MATCH void func_801EF688(void) { a = D_80123456; b = unk_04; c = 2; }\n",
     }
     assert quality.ratchet(old, new, {"src/a/x.c", "src/b/x.c"}) == []
+
+
+def test_a_draft_body_does_not_count() -> None:
+    draft = (
+        "#ifdef NON_MATCHING\n"
+        "NON_MATCHING void func_801EEC10(void) {\n"
+        "    *(u8 *)D_801EF000 = unk_1C;\n"
+        "}\n"
+        "#else\nINCLUDE_ASM(func_801EEC10);\n#endif\n"
+    )
+    found = row(draft)
+    assert (found["funcs"], found["addr"], found["names"], found["casts"]) == (
+        0,
+        0,
+        0,
+        0,
+    )
