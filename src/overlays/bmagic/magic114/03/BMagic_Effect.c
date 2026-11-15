@@ -118,7 +118,107 @@ MATCH void func_801EF128(void) {
     PopMatrix();
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF280(s32* values) {
+    POLY_G3* prim;
+    long     p;
+    long     flag;
+    u32      frame_count;
+    u32      phase;
+    u8       state;
+
+    prim = (POLY_G3*)g_GfxPrimCursor;
+    SetPolyG3(prim);
+
+    D_1F800014[0].vx = g_Task->pos.x.fixed >> 9;
+    D_1F800014[0].vy = g_Task->pos.y.fixed >> 9;
+    D_1F800014[0].vz = 0;
+    D_1F800014[1].vx = g_Task->unk_0C >> 9;
+    D_1F800014[1].vy = g_Task->unk_10 >> 9;
+    D_1F800014[1].vz = 0;
+    D_1F800014[2].vx = 0;
+    D_1F800014[2].vy = 0;
+    if (g_Task->param.unk_0B < 4) {
+        D_1F800014[2].vz = g_Task->timer * 3;
+    } else {
+        D_1F800014[2].vz = -(g_Task->timer * 6) / 2;
+    }
+
+    values[g_Task->param.unk_0B] = RotAverage3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &p, &flag);
+
+    switch (g_Task->param.unk_0B) {
+        case 0:
+        case 2:
+            setRGB0(prim, 0x36, 0x36, 0xB0);
+            setRGB1(prim, 0x36, 0x36, 0xB0);
+            setRGB2(prim, 0x36, 0x36, 0xC0);
+            break;
+        case 1:
+        case 3:
+            setRGB0(prim, 0x40, 0x40, 0xC0);
+            setRGB1(prim, 0x40, 0x40, 0xC0);
+            setRGB2(prim, 0x40, 0x40, 0xC0);
+            break;
+        case 4:
+        case 6:
+            setRGB0(prim, 0x46, 0x46, 0xB0);
+            setRGB1(prim, 0x46, 0x46, 0xB0);
+            setRGB2(prim, 0x46, 0x46, 0xC0);
+            break;
+        case 5:
+        case 7:
+            setRGB0(prim, 0x50, 0x50, 0xC0);
+            setRGB1(prim, 0x50, 0x50, 0xC0);
+            setRGB2(prim, 0x50, 0x50, 0xC0);
+            break;
+    }
+
+    if (g_Task->header.mode == 2) {
+        frame_count = g_FrameCount;
+        if ((frame_count & 0x18) == 0) {
+            state = g_Task->param.unk_0B;
+            if (state >= 4) {
+                phase = frame_count & 6;
+                state &= 3;
+                if (state == (phase >> 1)) {
+                    setRGB0(prim, 0x80, 0x80, 0xC0);
+                    setRGB1(prim, 0x80, 0x80, 0xC0);
+                    setRGB2(prim, 0x80, 0x80, 0xC0);
+                }
+            }
+        }
+    }
+
+    if (g_Task->header.mode == 3 || g_Task->header.mode == 4) {
+        switch (g_Task->param.unk_0B) {
+            case 1:
+                prim->r1 = g_Task->unk_09 * 5 + 0x40;
+                prim->g1 = g_Task->unk_09 * 4 + 0x40;
+                prim->b1 = -0x40 - g_Task->unk_09 * 2;
+                break;
+            case 2:
+                prim->r0 = g_Task->unk_09 * 5 + 0x36;
+                prim->g0 = g_Task->unk_09 * 4 + 0x36;
+                prim->b0 = 0xB0 - g_Task->unk_09;
+                break;
+            case 5:
+                prim->r1 = g_Task->unk_09 * 4 + 0x50;
+                prim->g1 = g_Task->unk_09 * 3 + 0x50;
+                prim->b1 = -0x40 - g_Task->unk_09 * 2;
+                break;
+            case 6:
+                prim->r0 = g_Task->unk_09 * 4 + 0x46;
+                prim->g0 = g_Task->unk_09 * 3 + 0x46;
+                prim->b0 = 0xB0 - g_Task->unk_09;
+                break;
+        }
+    }
+
+    g_GfxPrimCursor += sizeof(POLY_G3);
+}
+#else
 INCLUDE_ASM(func_801EF280);
+#endif
 
 MATCH void func_801EF6A8(void) {
     PartyMember* src;
