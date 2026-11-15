@@ -7,7 +7,7 @@ MATCH u8 Item_Remove(s32 category, u8 item_id, s32 count, s32 unused) {
     u8* qtys;
     u32 index;
     u8  qty;
-    if (item_id == 0)
+    if (item_id == ITEM_NOTHING)
         return false;
     if ((count & BYTE_MASK) == 0)
         return false;

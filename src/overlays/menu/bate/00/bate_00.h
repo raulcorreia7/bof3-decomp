@@ -37,6 +37,8 @@ extern u8            D_80144DF6;
 extern u8            D_80144DF7;
 /* The item category of each equipment slot. */
 extern u8            D_801D875C[];
+extern u8*           D_801D8744[4];
+extern u16           D_801D8ECC[];
 extern u8            D_80148338;
 extern s8            D_80148511;
 extern u8            D_80148656;
