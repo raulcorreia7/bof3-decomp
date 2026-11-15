@@ -28,18 +28,16 @@ NON_MATCHING void Battle_SetPartyCount(s32 x, s32 y) {
     u8  temp_a2_160;
     u8  temp_v0_153;
 
-    var_s2 = x;
-    var_s3 = y;
     GFX_AddDrawMode(GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
-    var_s0 = var_s2 << 0x10;
-    var_s0 = (s16)var_s2;
-    func_801D9AB4(var_s0, (s16)var_s3, ((g_Battle.party_count * 2) + 0xA) & 0xFE, 1);
-    func_801D9AB4(var_s0, (s16)(var_s3 + 0x18), ((g_Battle.party_count * 2) + 0xB) & BYTE_MASK, 1);
-    Battle_DrawWindowTile(var_s0, (s16)(var_s3 + 2), (g_Battle.party_count + 0xD) & BYTE_MASK, 1U);
-    var_s4     = var_s2;
+    var_s0 = x << 0x10;
+    var_s0 = (s16)x;
+    func_801D9AB4(var_s0, (s16)y, ((g_Battle.party_count * 2) + 0xA) & 0xFE, 1);
+    func_801D9AB4(var_s0, (s16)(y + 0x18), ((g_Battle.party_count * 2) + 0xB) & BYTE_MASK, 1);
+    Battle_DrawWindowTile(var_s0, (s16)(y + 2), (g_Battle.party_count + 0xD) & BYTE_MASK, 1U);
+    var_s4     = x;
     var_s5     = 0;
     temp_v0_81 = *(((g_WindowStyle << 6) | 0x20) + &D_80033A08);
-    var_s6     = var_s3;
+    var_s6     = y;
     temp_v0_85 = temp_v0_81 & HALF_MASK;
     if (g_Battle.party_count != 0) {
         var_s3 += 0xE;

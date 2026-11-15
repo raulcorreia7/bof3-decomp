@@ -5,8 +5,8 @@
  */
 #ifdef NON_MATCHING
 NON_MATCHING void func_800A0EC4(void) {
-    Character* cell;
-    Character* dest;
+    Character* character;
+    Character* row;
     s32        cell_offset;
     s32        record_index;
     s32        row_offset;
@@ -19,45 +19,38 @@ NON_MATCHING void func_800A0EC4(void) {
 
     state = &g_Battle.active_battler;
     if (*state < 3U) {
-        record_index = (&g_Game.members[0].character_index)[(*state * BATTLE_PARTY_STRIDE)];
+        record_index = g_Game.members[*state].character_index;
         timer        = g_Characters[record_index].fatigue;
         if (timer < 5U) {
             g_Characters[record_index].fatigue = timer + 1;
             row_offset                         = *state * BATTLE_PARTY_STRIDE;
             D_80145F1E[row_offset]             = D_80145F1E[row_offset] + 1;
         }
-        Char_RebuildStats(((&g_Game.members[0].character_index)[(*state * BATTLE_PARTY_STRIDE)] * 0xA4) + (u8*)&g_Characters);
+        Char_RebuildStats((g_Game.members[*state].character_index * PARTY_RECORD_STRIDE) + (u8*)&g_Characters);
         index = 0;
         if (g_Battle.party_count != 0) {
             do {
-                row_offset                 = index * BATTLE_PARTY_STRIDE;
-                cell                       = (Character*)(((&g_Game.members[0].character_index)[row_offset] * 0xA4) + (u8*)&g_Characters);
-                dest                       = (Character*)(row_offset + D_80145F04);
-                dest->equip.weapon         = cell->equip.weapon;
-                dest->equip.shield         = cell->equip.shield;
-                dest->equip.helmet         = cell->equip.helmet;
-                dest->equip.armor          = cell->equip.armor;
-                dest->equip.accessories[0] = cell->equip.accessories[0];
+                row_offset                = index * BATTLE_PARTY_STRIDE;
+                character                 = &g_Characters[g_Game.members[index].character_index];
+                row                       = &g_Game.members[index].chr;
+                row->equip.weapon         = character->equip.weapon;
+                row->equip.shield         = character->equip.shield;
+                row->equip.helmet         = character->equip.helmet;
+                row->equip.armor          = character->equip.armor;
+                row->equip.accessories[0] = character->equip.accessories[0];
+                row->equip.accessories[1] = character->equip.accessories[1];
                 index++;
-                dest->equip.accessories[1]    = cell->equip.accessories[1];
-                ((s32*)&dest->base.max_hp)[0] = ((s32*)&cell->stats.max_hp)[0];
-                ((s32*)&dest->base.max_hp)[1] = ((s32*)&cell->stats.max_hp)[1];
-                ((s32*)&dest->base.max_hp)[2] = ((s32*)&cell->stats.max_hp)[2];
-                ((s32*)&dest->base.max_hp)[3] = ((s32*)&cell->stats.max_hp)[3];
-                ((s32*)&dest->base.max_hp)[4] = ((s32*)&cell->stats.max_hp)[4];
-                ((s32*)&dest->base.max_hp)[5] = ((s32*)&cell->stats.max_hp)[5];
-                ((s32*)&dest->base.max_hp)[6] = ((s32*)&cell->stats.max_hp)[6];
-                ((s32*)&dest->base.max_hp)[7] = ((s32*)&cell->stats.max_hp)[7];
+                __builtin_memcpy(&row->base, &character->stats, sizeof(Stats));
             } while ((u32)(index & BYTE_MASK) < (u8)g_Battle.party_count);
         }
         index = 0;
         Battle_ApplyFormationStats();
         if (g_Battle.party_count != 0) {
             do {
-                row_offset                           = index * BATTLE_PARTY_STRIDE;
-                dest                                 = (Character*)(row_offset + D_80145F20);
-                *(BattleStatBlockPart*)(dest + 0)    = *(BattleStatBlockPart*)(row_offset + (D_80145F20 + 0x20));
-                *(BattleStatBlockPart*)(dest + 0x10) = *(BattleStatBlockPart*)(row_offset + (D_80145F20 + 0x30));
+                row_offset = index * BATTLE_PARTY_STRIDE;
+                dest       = (u8*)D_80145F20 + row_offset;
+                __builtin_memcpy(dest, dest + 0x20, sizeof(BattleStatBlockPart));
+                __builtin_memcpy(dest + 0x10, dest + 0x30, sizeof(BattleStatBlockPart));
                 index++;
             } while ((u32)(index & BYTE_MASK) < (u8)g_Battle.party_count);
         }

@@ -431,14 +431,15 @@ INCLUDE_ASM(func_801D26BC);
 MATCH void func_801D2934(void) {
     Actor*    actor;
     SceneDot* dot;
-    u16       i;
     TILE_1*   tile;
+    u16       i;
+    u8        timer;
 
     actor = (Actor*)g_Task->unk_4C;
     actor->header.flags |= ACTOR_FLAG_HIDDEN;
     dot = MEM_PTR(SceneDot, AREA_WORK + 0x5A00);
     for (i = 0; i < D_801D40A8; dot++, i++) {
-        if (dot->active) {
+        if (dot->active != 0) {
             if (g_Task->unk_06 == 0) {
                 if (dot->life != 0) {
                     dot->x += dot->dx;
@@ -462,7 +463,9 @@ MATCH void func_801D2934(void) {
         }
         dot->active ^= 1;
     }
-    if (--g_Task->timer == 0) {
+    timer         = g_Task->timer - 1;
+    g_Task->timer = timer;
+    if (timer == 0) {
         g_Task->header.mode++;
     }
 }
