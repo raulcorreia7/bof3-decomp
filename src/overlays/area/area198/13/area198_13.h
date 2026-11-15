@@ -39,6 +39,6 @@ extern Callback D_801F43EC[];
 
 /* The state update's fallback handler. */
 /* The image's setup pass. */
-void func_801F2D28(s32 arg0);
+void func_801F2D28(s32 scale);
 
 #endif

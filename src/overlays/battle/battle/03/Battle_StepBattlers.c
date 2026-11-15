@@ -40,7 +40,7 @@ MATCH s32 Battle_StepBattlers(void) {
                         g_Game.members[index].header.mode         = 6;
                         g_Game.members[index].unk_04              = 0;
                         g_Game.members[index].unk_03              = 0;
-                        g_Game.members[index].u.turn.target_flags = 2;
+                        g_Game.members[index].u.turn.target_flags = BATTLE_HIT_AP;
                         Battle_SetSlotPending(index);
                         count += 1;
                     }

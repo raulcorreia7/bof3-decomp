@@ -31,7 +31,9 @@ s32  func_801F4C28(s32 x, s32 y);
 void func_801F2EC0(void);
 void func_801F41F0(s32 page, s32 column);
 
-void func_801F302C(void* arg0, void* arg1, void* arg2);
+void func_801F302C(s32* first, s32* second, Actor* task);
+void func_801F3274(s32 x, s32 y, s16 radius, u16 angle);
+void func_801F3434(s16 x1, s16 y1, s16 radius1, u16 angle1, s16 x2, s16 y2, s16 radius2, u16 angle2);
 void func_801F4258(s32 arg0);
 
 /* Start the scripted move off the ledge: face `facing`, then take the high-ledge

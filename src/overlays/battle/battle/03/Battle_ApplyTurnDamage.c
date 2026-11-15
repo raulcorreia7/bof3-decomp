@@ -58,7 +58,7 @@ MATCH u8 Battle_ApplyTurnDamage(void) {
                 g_Game.members[slot].header.step         = 5;
                 g_Game.members[slot].unk_04              = 0;
                 g_Game.members[slot].unk_03              = 0;
-                g_Game.members[slot].u.turn.target_flags = 0x11;
+                g_Game.members[slot].u.turn.target_flags = BATTLE_HIT_HP | BATTLE_HIT_HP_LANDED;
                 Battle_SetSlotPending(slot);
             }
         }
@@ -70,7 +70,7 @@ MATCH u8 Battle_ApplyTurnDamage(void) {
                 ENEMY_COMBATANT(slot).header.step       = 5;
                 ENEMY_COMBATANT(slot).unk_04            = 0;
                 ENEMY_COMBATANT(slot).unk_03            = 0;
-                ENEMY_COMBATANT(slot).turn.target_flags = 0x11;
+                ENEMY_COMBATANT(slot).turn.target_flags = BATTLE_HIT_HP | BATTLE_HIT_HP_LANDED;
                 ENEMY_COMBATANT(slot).turn.hp_change    = -(ENEMY_COMBATANT(slot).stats.max_hp >> 1);
                 Battle_SetSlotPending(slot);
             }

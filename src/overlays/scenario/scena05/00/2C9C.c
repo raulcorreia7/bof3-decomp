@@ -11,9 +11,6 @@ MATCH void func_801F989C(void) {
 
 INCLUDE_ASM(func_801F98A4);
 
-void func_8015D104(s32 slot, s32 amount);
-void SND_StartVolumeSweep(s32 voice);
-
 #ifdef NON_MATCHING
 NON_MATCHING void func_801FB66C(void) {
     u8*  mode;
@@ -57,12 +54,8 @@ NON_MATCHING void func_801FB66C(void) {
             break;
         case 5:
             Game_ClearScriptActive();
-            g_ScriptVars[0]       = 0;
-            g_ScriptVars[1]       = 0;
-            g_ScriptVars[2]       = 0;
-            g_ScriptVars[3]       = 0;
-            g_SceneState.step_05  = 0;
-            g_SceneState.state_04 = 0;
+            g_ScriptVars[0] = 0;
+            Scene_ClearScriptState(&g_SceneState.step_05);
             break;
         case 6:
             g_ScriptVars[0]      = 5;
@@ -204,11 +197,11 @@ NON_MATCHING void func_801FB66C(void) {
             g_SceneState.step_05 = 27;
             switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {
                 case 1:
-                    Game_RequestAreaChange(0x51, TO_COORD(52), TO_COORD(9), 0x8A);
+                    Game_RequestAreaChange(0x51, TO_COORD(52), TO_COORD(9), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_UP_RIGHT);
                     g_GamePrevSelection = 0x4E;
                     break;
                 case 2:
-                    Game_RequestAreaChange(0x51, TO_COORD(52), TO_COORD(9), 0x89);
+                    Game_RequestAreaChange(0x51, TO_COORD(52), TO_COORD(9), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_UP);
                     g_GamePrevSelection = 0x4E;
                     break;
             }
@@ -237,10 +230,10 @@ NON_MATCHING void func_801FB66C(void) {
             SYS_SetFlag(g_SceneFlags, 0x2B);
             switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {
                 case 1:
-                    Game_RequestAreaChange(0x51, TO_COORD(52), TO_COORD(7), 0x8C);
+                    Game_RequestAreaChange(0x51, TO_COORD(52), TO_COORD(7), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_DOWN_RIGHT);
                     break;
                 case 2:
-                    Game_RequestAreaChange(0x51, TO_COORD(52), TO_COORD(7), 0x8B);
+                    Game_RequestAreaChange(0x51, TO_COORD(52), TO_COORD(7), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_RIGHT);
                     break;
             }
             break;
@@ -249,11 +242,7 @@ NON_MATCHING void func_801FB66C(void) {
                 break;
             }
             Game_ClearScriptActive();
-            g_ScriptVars[1]       = 0;
-            g_ScriptVars[2]       = 0;
-            g_ScriptVars[3]       = 0;
-            g_SceneState.step_05  = 0;
-            g_SceneState.state_04 = 0;
+            Scene_ClearScriptState(&g_SceneState.step_05);
             break;
     }
 }
@@ -272,12 +261,8 @@ NON_MATCHING void func_801FBDBC(void) {
                 g_SceneState.step_05 = 1;
             } else {
                 Game_ClearScriptActive();
-                g_ScriptVars[0]       = 0;
-                g_ScriptVars[1]       = 0;
-                g_ScriptVars[2]       = 0;
-                g_ScriptVars[3]       = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                g_ScriptVars[0] = 0;
+                Scene_ClearScriptState(&g_SceneState.step_05);
             }
             break;
         case 1:
@@ -291,7 +276,7 @@ NON_MATCHING void func_801FBDBC(void) {
             g_ScriptVars[0]      = 0;
             g_SceneState.step_05 = 3;
             SYS_SetFlag(g_SceneFlags, 0x2D);
-            Game_RequestAreaChange(0x50, TO_COORD(32), TO_COORD(10), 0x8E);
+            Game_RequestAreaChange(0x50, TO_COORD(32), TO_COORD(10), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_DOWN_LEFT);
             g_GamePrevSelection = 0x4F;
             break;
         case 3:
@@ -420,11 +405,7 @@ NON_MATCHING void func_801FBDBC(void) {
             g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
             SYS_SetFlag(g_SceneFlags, 0x3D);
             Game_ClearScriptActive();
-            g_ScriptVars[1]       = 0;
-            g_ScriptVars[2]       = 0;
-            g_ScriptVars[3]       = 0;
-            g_SceneState.step_05  = 0;
-            g_SceneState.state_04 = 0;
+            Scene_ClearScriptState(&g_SceneState.step_05);
             break;
     }
 }
@@ -463,10 +444,10 @@ NON_MATCHING void func_801FC380(void) {
             g_SceneState.step_05 = 2;
             switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {
                 case 1:
-                    Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(37), TO_COORD(174), 0x8A);
+                    Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(37), TO_COORD(174), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_UP_RIGHT);
                     break;
                 case 2:
-                    Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(37), TO_COORD(174), 0x89);
+                    Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(37), TO_COORD(174), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_UP);
                     break;
             }
             break;
@@ -477,10 +458,10 @@ NON_MATCHING void func_801FC380(void) {
                 g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
                 switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {
                     case 1:
-                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(39), TO_COORD(173), 0x8C);
+                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(39), TO_COORD(173), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_DOWN_RIGHT);
                         break;
                     case 2:
-                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(39), TO_COORD(173), 0x8B);
+                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(39), TO_COORD(173), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_RIGHT);
                         break;
                 }
             }
@@ -492,10 +473,10 @@ NON_MATCHING void func_801FC380(void) {
                 g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
                 switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {
                     case 1:
-                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(34), TO_COORD(114), 0x8E);
+                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(34), TO_COORD(114), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_DOWN_LEFT);
                         break;
                     case 2:
-                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(34), TO_COORD(114), 0x8D);
+                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(34), TO_COORD(114), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_DOWN);
                         break;
                 }
             }
@@ -503,9 +484,9 @@ NON_MATCHING void func_801FC380(void) {
         case 4:
             if (g_ScriptVars[0] == 0x4) {
                 g_SceneState.step_05 = 5;
-                g_Characters[1].unk_07 |= 1;
-                g_Characters[5].unk_07 |= 1;
-                g_Characters[6].unk_07 |= 1;
+                g_Characters[CHAR_INDEX_NINA].unk_07 |= 1;
+                g_Characters[CHAR_INDEX_MOMO].unk_07 |= 1;
+                g_Characters[CHAR_INDEX_PECO].unk_07 |= 1;
                 switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {
                     case 1:
                         Scene_RunScenario(3);
@@ -526,11 +507,7 @@ NON_MATCHING void func_801FC380(void) {
             if (g_ScriptVars[0] == 0x5) {
                 SYS_SetFlag(g_SceneFlags, 0x32);
                 Game_ClearScriptActive();
-                g_ScriptVars[1]       = 0;
-                g_ScriptVars[2]       = 0;
-                g_ScriptVars[3]       = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                Scene_ClearScriptState(&g_SceneState.step_05);
             }
             break;
     }
