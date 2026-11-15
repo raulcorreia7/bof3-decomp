@@ -5,7 +5,9 @@ NON_MATCHING void func_801F529C(void) {
     u8*  game_state;
     u8*  selection;
     u8*  flags;
-    u8   value;
+    u8   xa_idle;
+    u8   at_cell;
+    u8   flag_bits;
     u16  countdown;
     u16* timer;
 
@@ -22,17 +24,17 @@ NON_MATCHING void func_801F529C(void) {
             }
             break;
         case 1:
-            value = SND_IsXAIdle();
-            if (value != 0 && g_GameStateIndex != GAME_REQUEST_MESSAGE) {
+            xa_idle = SND_IsXAIdle();
+            if (xa_idle != 0 && g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 SND_ResumeBGM(g_SndBGMId);
                 Game_ClearScriptActive();
-                g_SceneEventMode = 0;
+                g_SceneEventMode = SCENE_EVENT_NONE;
                 g_SceneEventStep = 0;
             }
             break;
         case 5:
-            value = func_801F60E0();
-            if (value != 0) {
+            at_cell = func_801F60E0();
+            if (at_cell != 0) {
                 Message_StartAreaMessage(135);
                 goto message_request;
             } else {
@@ -43,11 +45,11 @@ NON_MATCHING void func_801F529C(void) {
             }
             break;
         case 6:
-            timer     = &LOHU(D_801448EE);
+            timer     = &D_801448EE;
             countdown = *timer;
             if (countdown == 0) {
                 Game_ClearScriptActive();
-                g_SceneEventMode = 0;
+                g_SceneEventMode = SCENE_EVENT_NONE;
                 g_SceneEventStep = 0;
             } else {
                 *timer = countdown - 1;
@@ -68,7 +70,7 @@ NON_MATCHING void func_801F529C(void) {
         case 11:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                g_SceneEventMode = 0;
+                g_SceneEventMode = SCENE_EVENT_NONE;
                 g_SceneEventStep = 0;
             }
             break;
@@ -145,9 +147,9 @@ NON_MATCHING void func_801F529C(void) {
         case 28:
             if (g_ScriptVars[3] == 17) {
                 flags            = &D_801F69AF;
-                value            = *flags;
+                flag_bits        = *flags;
                 g_SceneEventStep = 29;
-                *flags           = value | 0x10;
+                *flags           = flag_bits | 0x10;
             }
             break;
         case 29:
@@ -177,7 +179,7 @@ NON_MATCHING void func_801F529C(void) {
             if (g_AreaCameraMoving == 0) {
                 Game_ClearScriptActive();
                 g_ScriptVars[3]       = 0;
-                g_SceneEventMode      = 0;
+                g_SceneEventMode      = SCENE_EVENT_NONE;
                 g_SceneEventStep      = 0;
                 g_SceneEventSelection = 0;
             }
