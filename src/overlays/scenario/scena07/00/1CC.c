@@ -479,7 +479,7 @@ MATCH void func_801F8764(FallingSpark* spark) {
     s32 speed;
 
     if (D_801FDFC8 == 0) {
-        if (TASK_BYTES[6] == 0) {
+        if (g_Task->unk_06 == 0) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 1));
         }
         D_801FDFC8 = 1;
