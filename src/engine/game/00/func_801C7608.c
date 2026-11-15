@@ -48,7 +48,6 @@ MATCH bool func_801C7608(s16 x0, s16 y0, s16 x1, s16 y1) {
         probe_a = Area_GetWidth(x0, y0);
         probe_b = Area_GetWidth(x0, y1) & BYTE_MASK;
         if (probe_b >= 4) {
-            /* kept: shares the return-1 exit; plain returns score 94.07% */
             goto pass;
         }
         class_a = probe_a & BYTE_MASK;

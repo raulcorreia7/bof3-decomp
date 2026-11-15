@@ -14,7 +14,7 @@ MATCH void func_8019CCB8(void) {
     if (g_GameEntryState != GAME_STATE_AREA_LOAD) {
         if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {
             func_8019D4BC();
-            goto block_9; /* shared tail */
+            goto block_9;
         }
         if (g_Task->param.unk_0B != 0) {
             g_Task->direction_08 = g_Game.members[0].facing;
@@ -44,13 +44,13 @@ MATCH void func_8019CCB8(void) {
                 func_8019D9C0();
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 14));
                 g_Task->header.mode = 3;
-                goto block_9; /* shared tail */ /* shared tail */
+                goto block_9;
             }
             func_8019CEDC();
             g_Task->header.mode += 1;
             return;
         }
-        goto block_9; /* shared tail */
+        goto block_9;
     }
 block_9:
     if (g_GameStateIndex != GAME_REQUEST_BATTLE) {

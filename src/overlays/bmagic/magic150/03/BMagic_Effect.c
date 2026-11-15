@@ -208,7 +208,22 @@ MATCH void func_801EF6B0(void) {
     } while (i < 8);
 }
 
-INCLUDE_ASM(func_801EF6F8);
+MATCH void func_801EF6F8(void) {
+    u8 i;
+    D_801EFAF4 = D_801EFA9C.sparks;
+    i          = 0;
+    do {
+        if (D_801EFAF4->active == 0) {
+            D_801EFAF4->active = 1;
+            D_801EFAF4->offset = 0x300;
+            D_801EFAF4->angle  = (rand() & BYTE_MASK) << 4;
+            D_801EFAF4->life   = 8;
+            break;
+        }
+        D_801EFAF4 += 1;
+        i++;
+    } while (i < 8);
+}
 
 MATCH void func_801EF790(s32 x, s32 y, s16 radius, u8 colour, u8 alpha) {
     POLY_G3* prim;

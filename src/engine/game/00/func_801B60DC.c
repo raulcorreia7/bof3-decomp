@@ -11,7 +11,6 @@ MATCH void func_801B60DC(s32 actor_index) {
         g_GameFlags |= GAME_FLAG_SCRIPT_ACTIVE;
         return;
     }
-    /* NOTE: a non-volatile first read keeps the 1 in the delay slot. */
     if ((*(u8*)&g_GameRequestFlags & (AREA_LOAD_FLAG_NO_ACTOR_SCRIPT | AREA_LOAD_FLAG_WORLD_MAP)) != 1) {
         if (!(g_GameRequestFlags & AREA_LOAD_FLAG_NO_ACTOR_SCRIPT)) {
             if (s_RouteSlotAlternates[g_Game.current->chr.character_id] != 0) {
