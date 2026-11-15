@@ -838,24 +838,24 @@ NON_MATCHING void func_801D3C30(void) {
     if (buttons != 0) {
         SND_PlayCue(0x100);
         k = (u8)(D_801DB0B8 + (s8)D_801DB0B4 * 5 + 3);
-        if (buttons & 0x4000) {
+        if (buttons & PADLdown) {
             val           = D_801DB080[k] - 1;
             D_801DB080[k] = val;
             if ((s8)val <= 0) {
                 D_801DB080[k] = 9;
             }
-        } else if (buttons & 0x1000) {
+        } else if (buttons & PADLup) {
             val           = D_801DB080[k] + 1;
             D_801DB080[k] = val;
             if (val >= 10) {
                 D_801DB080[k] = 1;
             }
-        } else if (buttons & 0x2000) {
+        } else if (buttons & PADLright) {
             D_801DB0B8 += 1;
             if (D_801DB0B8 >= 3) {
                 D_801DB0B8 = 0;
             }
-        } else if (buttons & 0x8000) {
+        } else if (buttons & PADLleft) {
             D_801DB0B8 -= 1;
             if (D_801DB0B8 < 0) {
                 D_801DB0B8 = 2;
@@ -1416,12 +1416,12 @@ MATCH void func_801D5F7C(void) {
         if (pressed & HALF_MASK) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
         }
-        if (pressed & 0x8000) {
+        if (pressed & PADLleft) {
             D_801DB0B4 -= 1;
             if ((s8)D_801DB0B4 < 0) {
                 D_801DB0B4 = Fairy_CountFairies() - 1;
             }
-        } else if (pressed & 0x2000) {
+        } else if (pressed & PADLright) {
             D_801DB0B4 += 1;
             if ((s8)D_801DB0B4 >= (Fairy_CountFairies() & BYTE_MASK)) {
                 D_801DB0B4 = 0;

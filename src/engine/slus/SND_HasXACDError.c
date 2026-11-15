@@ -4,7 +4,7 @@
  */
 
 MATCH bool SND_HasXACDError(void) {
-    if ((D_80146824[0] & 0x10) == 0)
+    if ((D_80146824[0] & CdlStatShellOpen) == 0)
         return false;
     return true;
 }

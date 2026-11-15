@@ -59,7 +59,7 @@ MATCH void func_80098450(void) {
         if (panel->group_first + 7 <= panel->group_cursor) {
             panel->confirm_gate = 0x10;
         }
-    } else if ((trigger & 0x4) != 0) {
+    } else if ((trigger & PADL1) != 0) {
         if (panel->group_first == 0u) {
             panel->group_cursor = 0u;
         } else if (panel->group_first < 7u) {
@@ -69,7 +69,7 @@ MATCH void func_80098450(void) {
             panel->group_cursor = (old_cursor - 7);
             panel->group_first -= 7;
         }
-    } else if ((trigger & 0x8) != 0) {
+    } else if ((trigger & PADR1) != 0) {
         if (panel->group_first == 0x79u) {
             panel->group_cursor = 0x7Fu;
         } else if (panel->group_first >= 0x73u) {
