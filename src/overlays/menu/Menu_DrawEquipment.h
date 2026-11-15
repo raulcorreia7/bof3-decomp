@@ -12,7 +12,7 @@ MATCH void Menu_DrawEquipment(s32 origin_x, s32 origin_y, s32 index, s32 selecti
     x            = origin_x;
     y            = origin_y;
     selected     = selection & BYTE_MASK;
-    palette      = selected ? 7 : 0;
+    palette      = selected ? MENU_SHADE_DIM : MENU_SHADE_NORMAL;
     record_index = index;
     UI_DrawWindowOutline((s16)(x + 2), (s16)(y + 0x44), 0x87, 0x58, 0xF1);
     icon_x = (s16)(x + 0xF);
