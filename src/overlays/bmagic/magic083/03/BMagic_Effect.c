@@ -77,7 +77,7 @@ MATCH void func_801EED04(void) {
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
 MATCH s32 func_801EF0CC(void) {
-    if (*((u8*)&g_Battle.action_type) != BATTLE_ACTION_ABILITY && *((u16*)&g_Battle.action_id) == 0x136) {
+    if (g_Battle.action_type != BATTLE_ACTION_ABILITY && g_Battle.action_id == 0x136) {
         g_Battle.action_id = ABILITY_SHIELD;
     }
     return 0;

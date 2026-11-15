@@ -2,11 +2,9 @@
 
 /* Returns the index of the first active live pond record with fish id 0x0A inside the player's reach, or -1.
  */
-#ifdef NON_MATCHING
-NON_MATCHING s8 func_8014DE78(void) {
+MATCH s8 func_8014DE78(void) {
     Actor* self;
     s32    range;
-    s32    dist;
     s8     i;
 
     i    = 0;
@@ -28,25 +26,15 @@ NON_MATCHING s8 func_8014DE78(void) {
             continue;
         }
         range = (s8)g_Actors[i].range_54.table[2] << 15;
-        dist  = self->pos.x.fixed - g_Actors[i].pos.x.fixed;
-        dist  = ABS(dist);
-        if (range < dist) {
+        if (range < abs(self->pos.x.fixed - g_Actors[i].pos.x.fixed)) {
             continue;
         }
-        dist = self->pos.y.fixed - g_Actors[i].pos.y.fixed;
-        dist = ABS(dist);
-        if (range < dist) {
+        if (range < abs(self->pos.y.fixed - g_Actors[i].pos.y.fixed)) {
             continue;
         }
-        range = COORD_INT(self->pos.z);
-        dist  = range - COORD_INT(g_Actors[i].pos.z);
-        dist  = ABS(dist);
-        if (dist < 769) {
+        if (abs(COORD_INT(self->pos.z) - COORD_INT(g_Actors[i].pos.z)) < 769) {
             return i;
         }
     }
     return -1;
 }
-#else
-INCLUDE_ASM(func_8014DE78);
-#endif

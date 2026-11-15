@@ -1,7 +1,7 @@
 #include "batl_end_00.h"
 
 #ifdef NON_MATCHING
-NON_MATCHING u16 func_801EF928(u8 id, u8 flag) {
+NON_MATCHING u16 func_801EF928(s32 id, s32 flag) {
     u8  level;
     u8  new_level;
     u8  i;

@@ -23,6 +23,10 @@ extern Callback g_Commu03Step1Funcs[COMMU03_STEP1_COUNT];
 /* D_801D18E4 */
 extern Callback g_Commu03Step2Funcs[COMMU03_STEP2_COUNT];
 extern u8       D_801D1944;
+extern u8       D_801D18F4[];
+extern u8       D_801D18F8[];
+extern u8*      D_801D190C;
+extern u16      D_800104E2;
 extern u8       D_801D1948;
 extern s16      D_801D1940;
 extern u8       D_801D1918[];

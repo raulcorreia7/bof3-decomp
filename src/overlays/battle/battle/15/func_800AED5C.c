@@ -6,7 +6,7 @@ typedef struct BattleRecordHead {
 } BattleRecordHead;
 
 #ifdef NON_MATCHING
-NON_MATCHING u8 func_800AED5C(s32 arg0, u32 battler_index) {
+NON_MATCHING u8 func_800AED5C(s32 selector, s32 battler_index) {
     u8*         dst;
     u8*         src;
     u32         index;
@@ -30,7 +30,7 @@ NON_MATCHING u8 func_800AED5C(s32 arg0, u32 battler_index) {
     }
     dst                     = D_801EC2E8;
     *(BattleRecordHead*)dst = *(BattleRecordHead*)src;
-    if (func_800A40D0(arg0 & BYTE_MASK) != 0) {
+    if (func_800A40D0(selector & BYTE_MASK) != 0) {
         result = 0;
     } else {
         result = 1;
