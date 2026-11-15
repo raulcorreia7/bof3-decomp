@@ -74,11 +74,7 @@ MATCH void func_801F9BD0(void) {
             break;
         case 10:
             Game_ClearScriptActive();
-            g_ScriptVars[1]       = 0;
-            g_ScriptVars[2]       = 0;
-            g_ScriptVars[3]       = 0;
-            g_SceneState.step_05  = 0;
-            g_SceneState.state_04 = 0;
+            Scene_ClearScriptState(&g_SceneState.step_05);
             break;
     }
 }
