@@ -26,6 +26,9 @@ typedef struct SpriteSpark {
     s32 unk_14; /* +0x14 */
 } SpriteSpark;
 
+/* The sprite work table at AREA_WORK holds this many SpriteSpark rows. */
+#define SPRITE_SPARK_COUNT 256
+
 ASSERT_SIZE(SparkEmitter, 0x14);
 ASSERT_SIZE(SpriteSpark, 0x18);
 ASSERT_OFFSET(SparkEmitter, timer, 0x03);
