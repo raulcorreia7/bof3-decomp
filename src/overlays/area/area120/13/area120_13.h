@@ -52,6 +52,29 @@ ASSERT_OFFSET(AreaRow, z, 0x10);
 ASSERT_OFFSET(AreaRow, y, 0x14);
 ASSERT_SIZE(AreaRow, AREA_ROW_STRIDE);
 
+/* One rising tile in the area work window: a screen position, a growth step clipped by
+ * the height table, and an RGB555 colour the state nibble brightens. */
+typedef struct AreaRiseTile {
+    u8  flags; /* 0x00 bit 0 active, bits 4-7 state */
+    u8  timer; /* 0x01 counts down to the next state */
+    u16 color; /* 0x02 RGB555 */
+    u16 x;     /* 0x04 */
+    u16 y;     /* 0x06 */
+    u16 step;  /* 0x08 grows by 2 each frame */
+    s16 limit; /* 0x0A index into D_801F4F34 */
+} AreaRiseTile;
+
+ASSERT_SIZE(AreaRiseTile, 0x0C);
+ASSERT_OFFSET(AreaRiseTile, timer, 0x01);
+ASSERT_OFFSET(AreaRiseTile, color, 0x02);
+ASSERT_OFFSET(AreaRiseTile, x, 0x04);
+ASSERT_OFFSET(AreaRiseTile, y, 0x06);
+ASSERT_OFFSET(AreaRiseTile, step, 0x08);
+ASSERT_OFFSET(AreaRiseTile, limit, 0x0A);
+
+/* The height limit of each rising tile, by the row's limit index. */
+extern s16 D_801F4F34[];
+
 /* Queues the row's sprite at its 16.16 position. */
 void func_801F3468(AreaRow* row);
 
