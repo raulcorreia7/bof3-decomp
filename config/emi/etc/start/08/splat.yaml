@@ -8,6 +8,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x0, .data, D_801D0C00]
+      - [0x4, .rodata, func_801D5A28]
       - [0x1C, .rodata, func_801D639C]
       - [0x34, .rodata, func_801D9274]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.

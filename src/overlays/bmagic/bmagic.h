@@ -391,7 +391,6 @@ extern SVECTOR D_1F800014[];
  * the row's column and g_EmiLoadedCharacterIndex picks the id. */
 extern u16* D_800B499C[][2];
 
-void Battle_ApplyDamageFlags(u8 target_mask, u16 damage_flags);
 /* Per-image effect entry points whose name is a different symbol in another
  * overlay; battle/battle/03 keeps its own view. */
 void func_800AFC54(void);
