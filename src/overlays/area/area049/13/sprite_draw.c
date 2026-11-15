@@ -170,9 +170,44 @@ MATCH void func_8011765C(void) {
     ((Actor*)g_Task)->header.mode += 1;
 }
 
-INCLUDE_ASM(func_801176B8);
+MATCH void func_801176B8(void) {
+    u8     timer;
+    Actor* task;
 
-INCLUDE_ASM(func_80117768);
+    if (!(g_FrameCount & 3)) {
+        D_801181DC = (AreaSprite*)Area_FindFreeWorkRow();
+        if (D_801181DC != 0) {
+            func_80117864(D_801181DC);
+            D_801181DC->normal.vz = TO_COORD(32);
+        }
+    }
+    timer                   = ((Actor*)g_Task)->timer - 1;
+    ((Actor*)g_Task)->timer = timer;
+    if (timer == 0) {
+        task        = (Actor*)g_Task;
+        task->timer = 0x40;
+        task->vx    = TO_COORD(32);
+        ((Actor*)g_Task)->header.mode += 1;
+    }
+}
+
+MATCH void func_80117768(void) {
+    u8 timer;
+
+    if (!(g_FrameCount & 3)) {
+        D_801181DC = (AreaSprite*)Area_FindFreeWorkRow();
+        if (D_801181DC != 0) {
+            func_80117864(D_801181DC);
+            ((Actor*)g_Task)->vx -= TO_COORD(1);
+            D_801181DC->normal.vz = ((Actor*)g_Task)->vx;
+        }
+    }
+    timer                   = ((Actor*)g_Task)->timer - 1;
+    ((Actor*)g_Task)->timer = timer;
+    if (timer == 0) {
+        ((Actor*)g_Task)->header.mode += 1;
+    }
+}
 
 MATCH void func_80117818(void) {
     if (func_80117900() == 0) {
@@ -272,7 +307,27 @@ MATCH void func_80117ACC(void) {
     }
 }
 
-INCLUDE_ASM(func_80117B60);
+MATCH void func_80117B60(s32 scale) {
+    u32  color;
+    s32  red;
+    s32  green;
+    s32  blue;
+    u16* dst;
+    s32  i;
+
+    i   = 0;
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 0x740u);
+    do {
+        color = dst[-0x2000];
+        red   = ((s32)(color & 0x1F) * scale) / 0x80;
+        green = (color & 0xFFFF) >> 5 & 0x1F;
+        blue  = ((s32)((color & 0xFFFF) >> 10 & 0x1F) * scale) / 0x80;
+        *dst  = (u16)((color & 0x8000) | (blue << 10) | (green << 5) | red);
+        dst++;
+        i++;
+    } while (i < 0x10);
+    g_GfxPalettePending = 1;
+}
 
 MATCH void func_80117BF4(void) {
     SYS_DISPATCH_BYTE(D_801181B4, g_Task->header.step);
@@ -282,13 +337,12 @@ MATCH void func_80117C38(void) {
     Scene_AdvanceActorStep();
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_80117C58(void) {
-    u8 slot;
+MATCH void func_80117C58(void) {
+    u32 slot;
 
     if (SYS_TestFlag(D_80144ED0, D_801181D0[COORD_INT(g_Task->pos.x)]) != 0) {
         SND_PlayCue(0x20A);
-        slot = Actor_FindFreeSpawned();
+        slot = Actor_FindFreeSpawned() & BYTE_MASK;
         if (slot != GAME_NONE) {
             g_SpawnedActors[slot].header.flags = ACTOR_FLAG_IN_USE;
             g_SpawnedActors[slot].type         = 0x6E;
@@ -296,7 +350,7 @@ NON_MATCHING void func_80117C58(void) {
             g_SpawnedActors[slot].pos.y.fixed  = D_801181C0[COORD_INT(g_Task->pos.x)].y;
             g_SpawnedActors[slot].pos.z.fixed  = TO_COORD(1920);
         }
-        slot = Actor_FindFreeSpawned();
+        slot = Actor_FindFreeSpawned() & BYTE_MASK;
         if (slot != GAME_NONE) {
             g_SpawnedActors[slot].header.flags = ACTOR_FLAG_IN_USE;
             g_SpawnedActors[slot].type         = 0x6D;
@@ -307,9 +361,6 @@ NON_MATCHING void func_80117C58(void) {
     }
     func_80117E78(0x80, 0);
 }
-#else
-INCLUDE_ASM(func_80117C58);
-#endif
 
 MATCH void func_80117DF0(void) {
     if (!(g_FrameCount & 0x1)) {
