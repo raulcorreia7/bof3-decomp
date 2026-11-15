@@ -142,16 +142,10 @@ NON_MATCHING void func_8014BC70(void) {
             if ((rows - 1) > 0) {
                 last = rows - 1;
                 do {
-                    other = last;
-                    first = row + 1;
-                    if (last >= first) {
-                        lowest = first;
-                        do {
-                            if ((s16)D_80147D08[other - 1].z < (s16)D_80147D08[other].z) {
-                                func_8014C47C((struct Vec3W*)&D_80147D08[other], (struct Vec3W*)&D_80147CFC[other]);
-                            }
-                            other--;
-                        } while (other >= lowest);
+                    for (other = last; other >= (row + 1); other--) {
+                        if ((s16)D_80147D08[other - 1].z < (s16)D_80147D08[other].z) {
+                            func_8014C47C((struct Vec3W*)&D_80147D08[other], (struct Vec3W*)&D_80147CFC[other]);
+                        }
                     }
                     row++;
                 } while (row < (rows - 1));
