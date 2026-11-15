@@ -106,7 +106,7 @@ typedef struct PaletteBank {
 ASSERT_SIZE(PaletteBank, AREA_PALETTE_ROWS* AREA_PALETTE_ROW);
 
 #define g_AreaPaletteArena         MEM_PTR(PaletteBank, AREA_PALETTE_ARENA)
-#define g_AreaPaletteWork          MEM_PTR(PaletteBank, AREA_PALETTE_WORK)
+#define g_AreaPaletteCopy          MEM_PTR(PaletteBank, AREA_PALETTE_WORK)
 
 /* The area view space: a cell is 0x80 units wide and cell 128 sits on the origin;
  * a cell's centre is half a cell past its corner. */

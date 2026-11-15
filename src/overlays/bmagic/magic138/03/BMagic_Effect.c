@@ -17,7 +17,7 @@ MATCH void func_801EEC88(void) {
     work->unk_2E.half = 0xF0;
     work->unk_30.half = 0xFA;
     i                 = 0;
-    dst               = g_AreaPaletteWork->rows[26].colors;
+    dst               = g_AreaPaletteCopy->rows[26].colors;
     src               = g_AreaPaletteArena->rows[26].colors;
     for (; i < 16; i++) {
         dst[i] = src[i];

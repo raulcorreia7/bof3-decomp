@@ -31,9 +31,9 @@ MATCH void func_801EEDA0(void) {
     u32          i;
 
     i       = 0;
-    dst     = g_AreaPaletteWork->rows[26].colors;
+    dst     = g_AreaPaletteCopy->rows[26].colors;
     src     = g_AreaPaletteArena->rows[26].colors;
-    row_dst = g_AreaPaletteWork->rows[2].colors;
+    row_dst = g_AreaPaletteCopy->rows[2].colors;
     row_src = g_AreaPaletteArena->rows[2].colors;
     for (; i < AREA_PALETTE_COLORS; i++) {
         *row_dst = *row_src++ | 0x8000;
