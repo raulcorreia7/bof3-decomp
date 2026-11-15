@@ -141,7 +141,38 @@ MATCH void func_801EF43C(void) {
 
 #include "overlays/bmagic/Effect_CountDownTimerStep.h"
 
-INCLUDE_ASM(func_801EF528);
+MATCH void func_801EF528(void) {
+    PartyMember* work;
+    PartyMember* next;
+
+    work              = g_Task;
+    work->unk_2E.half = 0xA0;
+    work->unk_25      = 0x1D;
+    next              = g_Task;
+    work->unk_30.half = 0x12C;
+    next->unk_26      = 0;
+    g_Task->unk_27    = 0x1A;
+    g_Task->unk_28    = 1;
+    g_Task->unk_24    = 0x80;
+    {
+        PartyMember* task;
+
+        task          = g_Task;
+        task->unk_48  = 2;
+        task->scale.x = 0x30000;
+        task->scale.y = 0xC000;
+    }
+    g_Task->unk_5D      = 0;
+    g_Task->unk_5E      = 0;
+    g_Task->unk_5F      = 0;
+    g_Task->unk_5C      = 0;
+    g_Task->unk_2A      = 0;
+    g_Task->unk_29      = 2;
+    g_Task->unk_2C.half = 0;
+    g_Task->unk_2B      = 1;
+    Actor_SelectScript(0);
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EF648(void) {
     PartyMember* work;
