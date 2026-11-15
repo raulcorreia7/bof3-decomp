@@ -24,17 +24,14 @@ NON_MATCHING void func_800B0B0C(s16 base_x, s16 base_y) {
         if (selection_byte & 0x80u) {
             active_slot = selection_byte & 0x7Fu;
             if (slot == active_slot) {
-                UI_DrawText((s16)(base_x + slot_offset + 4), cursor_y, 0u, 0x10u,
-                            &D_800B6D30[slot_times_3 * 2]);
+                UI_DrawText((s16)(base_x + slot_offset + 4), cursor_y, 0u, 0x10u, &D_800B6D30[slot_times_3 * 2]);
                 palette = D_800B6D28;
             } else {
-                UI_DrawText((s16)(base_x + slot_offset + 4), cursor_y, 7u, 0x10u,
-                            &D_800B6D30[slot_times_3 * 2]);
+                UI_DrawText((s16)(base_x + slot_offset + 4), cursor_y, 7u, 0x10u, &D_800B6D30[slot_times_3 * 2]);
                 palette = D_800B6D20;
             }
         } else {
-            UI_DrawText((s16)(base_x + slot_offset + 4), cursor_y, 0u, 0x10u,
-                        &D_800B6D30[slot_times_3 * 2]);
+            UI_DrawText((s16)(base_x + slot_offset + 4), cursor_y, 0u, 0x10u, &D_800B6D30[slot_times_3 * 2]);
             palette = D_800B6D20;
         }
         func_801AF390((s16)(base_x + slot_offset), (s16)base_y, palette, 1);
