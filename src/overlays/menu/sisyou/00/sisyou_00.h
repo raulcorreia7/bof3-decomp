@@ -198,7 +198,7 @@ static inline void MasterMenuRunActivePanelMessage(u8* state) {
         return;
     }
     Message_StartAreaMessage((s16)(g_MenuMasterMessageIds[g_SceneEventSelection] + MASTER_MESSAGE_FAREWELL));
-    *state           = 2;
+    *state           = GAME_REQUEST_MESSAGE;
     g_MenuMasterStep = 6;
 }
 
