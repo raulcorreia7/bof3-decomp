@@ -26,7 +26,24 @@ MATCH void func_801F6D44(void) {
     g_Task->header.mode += 1;
 }
 
-INCLUDE_ASM(func_801F6DD4);
+MATCH void func_801F6DD4(void) {
+    Actor* work;
+    s32*   step;
+    s32    fraction;
+
+    work     = g_Task;
+    fraction = (0x10 - work->timer * 2) & 0xFE;
+    FIELD(s32, work, 0x24) += 0x10000;
+    work->pos.x.fixed += 0x2000;
+    work->pos.y.fixed += 0x220000;
+    step = &work->vx;
+    func_801F75BC(fraction, 0xFF);
+    func_801F7084(step);
+    if (--g_Task->timer == 0) {
+        g_Task->timer = 0x40;
+        g_Task->header.mode++;
+    }
+}
 
 MATCH void func_801F6EA4(void) {
     Actor* work;
@@ -62,11 +79,96 @@ MATCH void func_801F7064(void) {
     Actor_Clear();
 }
 
-INCLUDE_ASM(func_801F7084);
+/* Fill the eight vertex records of the box at step: each corner point and its two half-extents. */
+MATCH void func_801F7084(s32* step) {
+    s32* vertex;
+    s32* scratch;
+    u16  tpage;
+
+    tpage = GetTPage(0, 1, 0x3C0, 0);
+    GFX_AddDitheredDrawMode(1, tpage);
+    vertex     = D_801FA240;
+    *vertex    = FIELD(s32, step, 0x00);
+    D_801FA244 = FIELD(s32, step, 0x04) + FIELD(s32, step, 0x10);
+    D_801FA248 = FIELD(s32, step, 0x08) + FIELD(s32, step, 0x14);
+    vertex += 4;
+    *vertex    = FIELD(s32, step, 0x00);
+    D_801FA254 = FIELD(s32, step, 0x04) - FIELD(s32, step, 0x10);
+    D_801FA258 = FIELD(s32, step, 0x08) + FIELD(s32, step, 0x14);
+    vertex += 4;
+    *vertex    = FIELD(s32, step, 0x00);
+    D_801FA264 = FIELD(s32, step, 0x04) + FIELD(s32, step, 0x10);
+    D_801FA268 = FIELD(s32, step, 0x08);
+    vertex += 4;
+    *vertex    = FIELD(s32, step, 0x00);
+    D_801FA274 = FIELD(s32, step, 0x04) - FIELD(s32, step, 0x10);
+    D_801FA278 = FIELD(s32, step, 0x08);
+    vertex += 4;
+    *vertex    = FIELD(s32, step, 0x18);
+    D_801FA284 = FIELD(s32, step, 0x1C) + FIELD(s32, step, 0x28);
+    D_801FA288 = FIELD(s32, step, 0x20) + FIELD(s32, step, 0x2C);
+    vertex += 4;
+    *vertex    = FIELD(s32, step, 0x18);
+    D_801FA294 = FIELD(s32, step, 0x1C) - FIELD(s32, step, 0x28);
+    D_801FA298 = FIELD(s32, step, 0x20) + FIELD(s32, step, 0x2C);
+    vertex += 4;
+    *vertex    = FIELD(s32, step, 0x18);
+    D_801FA2A4 = FIELD(s32, step, 0x1C) + FIELD(s32, step, 0x28);
+    D_801FA2A8 = FIELD(s32, step, 0x20);
+    scratch    = vertex;
+    vertex += 4;
+    *vertex    = FIELD(s32, step, 0x18);
+    D_801FA2B4 = FIELD(s32, step, 0x1C) - FIELD(s32, step, 0x28);
+    D_801FA2B8 = FIELD(s32, step, 0x20);
+    Area_SetCameraMatrix(scratch);
+    func_801F732C(0, 1, 2, 3, 1, 1);
+    func_801F732C(0, 1, 4, 5, 1, 0);
+    func_801F732C(2, 0, 6, 4, 1, 0);
+    func_801F732C(1, 3, 5, 7, 1, 0);
+    func_801F732C(2, 3, 6, 7, 1, 0);
+}
 
 INCLUDE_ASM(func_801F732C);
 
-INCLUDE_ASM(func_801F747C);
+MATCH void func_801F747C(void) {
+    s32* key;
+
+    key        = D_801FA2C0;
+    *key       = 0x568000;
+    D_801FA2C4 = 0x118000;
+    D_801FA2C8 = 0x3000000;
+    D_801FA2D0 = 0x5E8000;
+    D_801FA2D4 = 0xF0000;
+    D_801FA2D8 = 0x4000000;
+    key += 8;
+    *key       = 0x568000;
+    D_801FA2E4 = 0x118000;
+    D_801FA2E8 = 0x2400000;
+    D_801FA2F0 = 0x5E8000;
+    D_801FA2F4 = 0xF0000;
+    D_801FA2F8 = 0x2400000;
+    key += 8;
+    *key       = 0x568000;
+    D_801FA304 = 0x138000;
+    D_801FA308 = 0x3000000;
+    D_801FA310 = 0x5E8000;
+    D_801FA314 = 0x158000;
+    D_801FA318 = 0x4000000;
+    key += 8;
+    *key       = 0x568000;
+    D_801FA324 = 0x138000;
+    D_801FA328 = 0x2800000;
+    D_801FA330 = 0x5E8000;
+    D_801FA334 = 0x160000;
+    D_801FA338 = 0x2C00000;
+    key += 8;
+    *key       = 0x568000;
+    D_801FA344 = 0x138000;
+    D_801FA348 = 0x1200000;
+    D_801FA350 = 0x5E8000;
+    D_801FA354 = 0x160000;
+    D_801FA358 = 0x1200000;
+}
 
 INCLUDE_ASM(func_801F75BC);
 
@@ -353,7 +455,104 @@ MATCH void func_801F8160(void) {
     D_80144EA8 = 0;
 }
 
-INCLUDE_ASM(func_801F817C);
+/* Momo Tower First Floor: run the scene hand-over for area 0x28, then the area 0x2A, 0x30, 0x36 and 0x41 tail. */
+MATCH void func_801F817C(void) {
+    u8  index;
+    u8* slot;
+    u8* pad_flag;
+
+    if (g_GameAreaId == AREA_ID_MOMO_TOWER_FIRST_FLOOR) {
+        if (D_80143F03 == 7) {
+            if (SYS_TestFlag(g_SceneFlags, 3) == 0) {
+                SYS_SetFlag(g_SceneFlags, 3);
+                g_ScriptVarsWord = 0;
+                SND_FadeOutBGM(g_SndBGMId, 0x64, 8);
+                SND_PlayBGM(0x3F, 0x64, 8);
+                Game_SetScriptActive();
+                D_80146874 = 1;
+                D_80146875 = 7;
+                Scene_RunScenario(1);
+                func_801BE1B0(1);
+            }
+        }
+        if (SYS_TestFlag(g_SceneFlags, 4) != 0) {
+            if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
+                switch (D_80146865) {
+                    case 0:
+                        g_AreaDrawFlags = 0x1F;
+                        break;
+                    case 1:
+                        Area_StartScrollRoute(1);
+                    case 2:
+                    default:
+                        Party_HideBattlers();
+                        break;
+                }
+            }
+        }
+    }
+    if (g_GameAreaId == AREA_ID_MOMO_TOWER_OUTSIDE) {
+        if (SYS_TestFlag(g_SceneFlags, 1) == 0) {
+            SYS_SetFlag(g_SceneFlags, 1);
+            g_ScriptVarsWord = 0;
+            Scene_RunScenario(0);
+            func_801BE1B0(0);
+        }
+        if (SYS_TestFlag(g_SceneFlags, 3) != 0) {
+            if (SYS_TestFlag(g_SceneFlags, 4) == 0) {
+                Party_HideBattlers();
+                g_AreaDrawFlags = 0x1F;
+            }
+        }
+    }
+    if (g_GameAreaId == AREA_ID_MOMO_TOWER_TOP) {
+        if (D_80143F03 == 3) {
+            g_ScriptVarsWord = 0;
+            if (SYS_TestFlag(g_SceneFlags, 6) == 0) {
+                SYS_SetFlag(g_SceneFlags, 6);
+                D_80143F1D = 5;
+                func_801BE1B0(3);
+            }
+            if (SYS_TestFlag(g_SceneFlags, 7) == 0) {
+                Area_SetCellCode(0x83, 6, 0x51);
+                Area_SetCellCode(0x84, 6, 0x51);
+            }
+        }
+    }
+    if (g_GameAreaId == AREA_ID_ROCKET_LANDING) {
+        g_ScriptVarsWord = 0;
+    }
+    if (g_GameAreaId == AREA_ID_MOMO_TOWER_WORLD_MAP) {
+        if (SYS_TestFlag(g_SceneFlags, 7) != 0) {
+            if (SYS_TestFlag(g_SceneFlags, 0xC) == 0) {
+                g_ScriptVarsWord = 0;
+                Area_StartScrollRoute(0);
+                pad_flag = &D_80145EB4;
+                *pad_flag &= 0xDF;
+                D_80145FF4 &= 0xDF;
+                D_80146134 &= 0xDF;
+                slot  = (u8*)&D_1F800000;
+                index = Actor_FindFreeSpawned();
+                *slot = index;
+                if (index != 0xFF) {
+                    D_80143FC8[*slot * 0x74u]             = 1;
+                    D_80143FCD[*slot * 0x74u]             = 0x13;
+                    FIELD(s32, D_8014402C, *slot * 0x74u) = -0xC6;
+                    FIELD(s32, D_80144030, *slot * 0x74u) = D_801492DA;
+                    FIELD(s32, D_80144034, *slot * 0x74u) = D_801492DC;
+                    D_80143FD1[*slot * 0x74u]             = 0x40;
+                }
+                index = Actor_FindFreeSpawned();
+                *slot = index;
+                if (index != 0xFF) {
+                    D_80143FC8[*slot * 0x74u] = 1;
+                    D_80143FCD[*slot * 0x74u] = 0x2E;
+                }
+            }
+        }
+    }
+    D_80146872 = 2;
+}
 
 MATCH void func_801F863C(void) {
     SYS_DISPATCH_BYTE(D_801FA210, g_SceneState.state_04);

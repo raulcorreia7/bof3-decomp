@@ -50,12 +50,81 @@ ASSERT_OFFSET(ScenePathPoint, z, 0x08);
 ASSERT_SIZE(ScenePathWork, 0x90);
 ASSERT_OFFSET(ScenePathWork, points, 0x10);
 
-extern s8  D_80144EA8;
-extern u8  g_PartyFieldOrder;
-extern u8  D_80144F5B;
-extern u8  D_80144F5C;
-extern u8  D_80144F5E;
-extern u8  D_80144F5F;
+/* The eight 16-byte vertex records func_801F7084 stamps and func_801F732C draws: an x, y and z
+ * word and a spare word each. Its x words go through D_801FA240, the rest through these cells. */
+extern s32 D_801FA240[];
+extern s32 D_801FA244;
+extern s32 D_801FA248;
+extern s32 D_801FA254;
+extern s32 D_801FA258;
+extern s32 D_801FA264;
+extern s32 D_801FA268;
+extern s32 D_801FA274;
+extern s32 D_801FA278;
+extern s32 D_801FA284;
+extern s32 D_801FA288;
+extern s32 D_801FA294;
+extern s32 D_801FA298;
+extern s32 D_801FA2A4;
+extern s32 D_801FA2A8;
+extern s32 D_801FA2B4;
+extern s32 D_801FA2B8;
+
+/* The five 0x20-byte segment keys func_801F75BC draws: a start and an end 16.16 point with a spare
+ * word after each. func_801F747C seeds the start x through D_801FA2C0 and the rest here. */
+extern s32 D_801FA2C0[];
+extern s32 D_801FA2C4;
+extern s32 D_801FA2C8;
+extern s32 D_801FA2D0;
+extern s32 D_801FA2D4;
+extern s32 D_801FA2D8;
+extern s32 D_801FA2E4;
+extern s32 D_801FA2E8;
+extern s32 D_801FA2F0;
+extern s32 D_801FA2F4;
+extern s32 D_801FA2F8;
+extern s32 D_801FA304;
+extern s32 D_801FA308;
+extern s32 D_801FA310;
+extern s32 D_801FA314;
+extern s32 D_801FA318;
+extern s32 D_801FA324;
+extern s32 D_801FA328;
+extern s32 D_801FA330;
+extern s32 D_801FA334;
+extern s32 D_801FA338;
+extern s32 D_801FA344;
+extern s32 D_801FA348;
+extern s32 D_801FA350;
+extern s32 D_801FA354;
+extern s32 D_801FA358;
+
+extern s8 D_80144EA8;
+extern u8 g_PartyFieldOrder;
+extern u8 D_80144F5B;
+extern u8 D_80144F5C;
+extern u8 D_80144F5E;
+extern u8 D_80144F5F;
+/* The four script-variable bytes as one word; the byte view makes a store reload the area id. */
+#define g_ScriptVarsWord (*(s32*)&g_ScriptVars)
+
+extern u8  D_80143F1D;
+extern u8  D_80145EB4;
+extern u8  D_80145FF4;
+extern u8  D_80146134;
+extern u8  D_80146865;
+extern u8  D_80146874;
+extern u8  D_80146875;
+extern s16 D_801492DA;
+extern s16 D_801492DC;
+/* The spawned-actor row fields func_801F817C stamps: the flag byte, the type byte, the camera
+ * angle and the layer, one record each 0x74 bytes apart. */
+extern u8  D_80143FC8[];
+extern u8  D_80143FCD[];
+extern u8  D_8014402C[];
+extern u8  D_80144030[];
+extern u8  D_80144034[];
+extern u8  D_80143FD1[];
 extern s32 D_80146954;
 extern s32 D_80146958;
 
@@ -72,6 +141,7 @@ extern s32      D_801FA1C4[];
 void            func_80196070(void);
 s8              func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
 void            func_801F7084(s32* step);
+void            func_801F732C(u8 first, u8 second, u8 third, u8 fourth, s32 level0, s32 level1);
 void            func_801F747C(void);
 void            func_801F75BC(s32 arg0, s32 arg1);
 
