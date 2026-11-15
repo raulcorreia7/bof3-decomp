@@ -9,14 +9,15 @@ NON_MATCHING void func_8015642C(u8* obj, s32 x, s32 y) {
     s32       flag;
     s32       order;
     s32       index;
+    s32       tpage;
     s32       part;
     s32       j;
     s32       z;
     s16*      screen;
     POLY_FT4* prim;
     POLY_FT4* p;
-    const u8* top;
-    const u8* bottom;
+    u8*       top;
+    u8*       bottom;
 
     if ((*(u32*)obj >> 28) != 0) {
         order = 6;
@@ -36,9 +37,9 @@ NON_MATCHING void func_8015642C(u8* obj, s32 x, s32 y) {
     RotTransPers3(&D_1F800014[2], &D_1F800014[3], &D_1F800014[0], (s32*)screen, (s32*)(screen + 2), (s32*)(screen + 4), &depth, &flag);
     if (((u16)(screen[0] + 0x50) < 0x1E1U) && (D_1F800034[3] >= -0x14) && (D_1F800034[1] < 0x105)) {
         for (part = 0; part < g_SpriteCellPartCounts[index]; part++) {
-            bottom = &g_SpriteCellBottomV[index * 2];
+            bottom = &((u8*)g_SpriteCellBottomV)[index * 2];
             prim   = (POLY_FT4*)g_GfxPrimCursor;
-            top    = &g_SpriteCellTopV[index * 2];
+            top    = &((u8*)g_SpriteCellTopV)[index * 2];
             p      = prim;
             for (j = 0; j < 2; j++) {
                 SetPolyFT4(p);
@@ -47,14 +48,15 @@ NON_MATCHING void func_8015642C(u8* obj, s32 x, s32 y) {
                 p->y2 = screen[1];
                 p->x3 = screen[2];
                 p->y3 = screen[3];
-                p->u0 = p->u2 = g_SpriteCellLeftU[index];
-                p->u1 = p->u3 = g_SpriteCellRightU[index];
+                p->u0 = p->u2 = ((u8*)g_SpriteCellLeftU)[index];
+                p->u1 = p->u3 = ((u8*)g_SpriteCellRightU)[index];
                 p->v0 = p->v1 = *top;
                 p->r0 = p->g0 = p->b0 = GFX_COLOR_NEUTRAL;
                 p->v2 = p->v3 = *bottom;
-                p->clut  = (g_SpriteCellCluts[index] >> 4) | 0x78C0;
-                p->tpage = getTPage(0, 0, 704, 256);
-                GFX_AddPrim(order, sizeof(POLY_FT4));
+                p->clut  = (((u8*)g_SpriteCellCluts)[index] >> 4) | 0x78C0;
+                tpage    = getTPage(0, 0, 704, 256);
+                p->tpage = tpage;
+                GFX_AddPrim((u8)order, sizeof(POLY_FT4));
                 p++;
                 bottom++;
                 top++;
