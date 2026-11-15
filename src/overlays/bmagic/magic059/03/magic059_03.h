@@ -5,6 +5,9 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+/* The orbit angle cell the effect path keeps in the scratchpad. */
+extern volatile s16 D_1F80000E;
+
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
 extern BattleEffect D_801F0694[];
 #define BMAGIC_EFFECT_SLOTS D_801F0694
