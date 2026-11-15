@@ -37,7 +37,7 @@ MATCH void func_801F6EB4(void) {
     *scratch = work[4];
     func_801A65A0(data);
     Actor_BeginScript(0x61, 0xC);
-    SP_REF(u8*, 0x44) = work;
+    TASK_SET(work);
 
     g_Actors[work[3]].pos.x.fixed += ONE;
     g_Actors[work[3]].pos.y.fixed -= ONE;
