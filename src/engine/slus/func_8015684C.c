@@ -12,6 +12,7 @@ typedef struct {
 #ifdef NON_MATCHING
 NON_MATCHING void func_8015684C(u8* record, s32 cell_x, s32 cell_y) {
     MapCell* cell;
+    MapCell* row;
     u8*      prim;
     SVECTOR  v0;
     SVECTOR  v1;
@@ -19,45 +20,34 @@ NON_MATCHING void func_8015684C(u8* record, s32 cell_x, s32 cell_y) {
     SVECTOR  v3;
     s32      p;
     s32      flag;
-    s32      t1;
-    s32      t2;
-    s32      z0;
-    s32      z1;
+    s32      x;
+    s32      y;
+    s32      z;
+    s32      edge;
     u8       state;
-    s32      ay;
-    s32      x0;
-    s32      x1;
-    s32      y0;
-    s32      y1;
 
-    ay = cell_y;
     if ((*(u32*)record >> 0x1C) != 0) {
         state = 6;
     } else {
         state = g_AreaDrawMode;
     }
-    t1    = (cell_x - 0x80) << 7;
-    x0    = t1 - 0x40;
-    v2.vx = x0;
-    v0.vx = x0;
-    prim  = g_GfxPrimCursor;
-    t2    = (ay - 0x80) << 7;
-    y1    = t2 - 0x40;
-    y0    = t2 | 0x40;
-    v2.vy = y0;
-    v0.vy = y0;
-    cell  = (MapCell*)((cell_x * 4) + ((ay * g_AreaMapBundle.width * 4) + (MAP_BUNDLE_BASE + 0x30)));
-    x1    = t1 | 0x40;
-    v3.vx = x1;
-    v1.vx = x1;
-    v3.vy = y1;
-    v1.vy = y1;
-    z0    = -((cell->unk_00 & BYTE_MASK) << 4);
-    v2.vz = z0;
-    v0.vz = z0 - 0x80;
-    z1    = -(cell->unk_01 << 4);
-    v3.vz = z1;
-    v1.vz = z1 - 0x80;
+    row   = (MapCell*)(MAP_BUNDLE_BASE + 0x30) + cell_y * g_AreaMapBundle.width;
+    cell  = (MapCell*)(cell_x * 4 + (u32)row);
+    x     = (cell_x - 128) << 7;
+    v0.vx = v2.vx = x - 64;
+    prim          = g_GfxPrimCursor;
+    y             = (cell_y - 128) << 7;
+    cell_y        = y - 64;
+    v0.vy = v2.vy = y | 64;
+    z             = cell->unk_02;
+    v1.vx = v3.vx = x | 64;
+    v1.vy = v3.vy = cell_y;
+    z             = -((z & BYTE_MASK) << 4);
+    v2.vz         = z;
+    v0.vz         = z - 128;
+    z             = -(cell->unk_01 << 4);
+    v3.vz         = z;
+    v1.vz         = z - 128;
     SetPolyFT4((POLY_FT4*)prim);
     SetShadeTex(prim, 0);
     RotTransPers4(&v0, &v1, &v2, &v3, (s32*)(prim + 8), (s32*)(prim + 0x10), (s32*)(prim + 0x18), (s32*)(prim + 0x20), &p, &flag);
