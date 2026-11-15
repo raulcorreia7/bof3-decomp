@@ -6,7 +6,39 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
-INCLUDE_ASM(func_801EEC70);
+MATCH void func_801EEC70(void) {
+    PartyMember* work;
+    PartyMember* counter;
+    u8           slot;
+    u8           count;
+    u32          i;
+    u32          odd;
+
+    g_Task->facing       = g_BattleEffectBattler->facing;
+    g_Task->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
+    g_Task->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
+    g_Task->pos.z.fixed  = g_Battle.selected_actor->pos.z.fixed;
+    g_Task->unk_09       = 0;
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+    i   = 0;
+    odd = 1;
+    do {
+        slot                              = Battle_AllocEffect(1, 10) & BYTE_MASK;
+        work                              = g_Task;
+        g_BattleEffects[slot].header.mode = 0;
+        g_BattleEffects[slot].unk_0B      = i;
+        g_BattleEffects[slot].arg.unk_09  = odd;
+        counter                           = g_Task;
+        /* FAKE: the target link stays before the loop counter update. */
+        FAKE_ORDER_LOCK(g_BattleEffects[slot].target.party = work);
+        count = counter->param.unk_0B;
+        i += 1;
+        counter->param.unk_0B = count + 1;
+        odd += 2;
+    } while (i < 8);
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
+}
 
 MATCH void func_801EED9C(void) {
     if (g_Task->unk_09 != 0) {
