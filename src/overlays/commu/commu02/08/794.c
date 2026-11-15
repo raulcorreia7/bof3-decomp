@@ -33,8 +33,8 @@ MATCH void func_801D150C(void) {
     s32 i;
     s8* ptr;
 
-    func_801D3184(0x26, 0x10);
-    func_801D32A0(0xA8, 0x10, 0);
+    func_801D3184(38, 16);
+    func_801D32A0(168, 16, 0);
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         i   = 9;
         ptr = &D_801DB093;
@@ -51,7 +51,55 @@ MATCH void func_801D150C(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D15A4(void) {
+    s32 i;
+    s32 x;
+    s32 choice;
+    u8  remaining;
+    u32 mask;
+
+    func_801D3184(0x26, 0x10);
+    func_801D32A0(0xA8, 0x10, 0);
+    D_801DB0C4 -= 1;
+    for (i = 0, x = TO_COORD(16); i < (s8)D_801DB0B4; i++) {
+        func_801D2CF8(FIX_INT(x), 108, GAME_NONE);
+        x += TO_COORD(32);
+    }
+    func_801D2CF8(((s8)D_801DB0B4 << 5) - ((u8)D_801DB0C4 << 4) + 16, 108, GAME_NONE);
+
+    if (D_801DB0C4 == 0) {
+        D_801DB0B4 += 1;
+        if ((s8)D_801DB0B4 == 9) {
+            D_801DB0B8 = 0;
+            if ((rand() & 3) == 0) {
+                choice = rand() & 0xF;
+                if (choice < 8) {
+                    remaining = 1;
+                } else if (choice < 14) {
+                    remaining = 3;
+                } else {
+                    remaining = 2;
+                }
+                while (remaining != 0) {
+                    choice = rand() & 7;
+                    mask   = 1 << choice;
+                    if (((D_801DB0B8 >> choice) & 1) == 0) {
+                        D_801DB0B8 |= mask;
+                        remaining -= 1;
+                    }
+                }
+            }
+            D_801F294E += 1;
+        } else {
+            SND_PlayCue(0x102);
+            D_801DB0C4 = 2;
+        }
+    }
+}
+#else
 INCLUDE_ASM(func_801D15A4);
+#endif
 
 MATCH void func_801D1774(void) {
     s32 i;
