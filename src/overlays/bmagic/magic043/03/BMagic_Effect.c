@@ -115,7 +115,7 @@ MATCH void func_801EF0B4(void) {
         GFX_FreePaletteFade(g_Task->timer);
         selector = (u8*)&g_Battle.target_selector;
         func_800AF814(*selector);
-        if (g_Battle.action_id == 0x2B) {
+        if (g_Battle.action_id == ABILITY_WARDOFLIGHT) {
             if (func_800AED5C(1, *selector) & BYTE_MASK) {
                 slot                               = Battle_AllocEffect(1, 72);
                 work                               = g_Task;
