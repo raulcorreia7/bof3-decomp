@@ -1,15 +1,16 @@
 #include "start_08.h"
 
-extern u8 D_80148656;
-
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D55B0(void) {
     s32 pressed;
     u8  count;
     u8  old;
     u8  i;
+    u8* party_cursor;
     u8* sel;
 
+    /* The save-data party cursor, two bytes past D_80148654. */
+    party_cursor = &D_80148654 + 2;
     Menu_DrawClutStrip(D_80144953);
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].active = 1;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].pos.x  = g_MenuPanelTasks[4].pos.x;
@@ -66,7 +67,7 @@ NON_MATCHING void func_801D55B0(void) {
             g_MenuPanelTasks[14].flags                             = 0;
             g_MenuPanelTasks[14].unk_09                            = 0;
             g_MenuPanelTasks[14].u.addr.unk_10                     = 0;
-            D_80148656                                             = *sel;
+            *party_cursor                                          = *sel;
             D_80148654                                             = 5;
             g_MenuStep.sub_step += 1;
             g_MenuPanelTasks[14].unk_0A = s_SkillOrderGroups[*sel][0];
@@ -82,7 +83,7 @@ NON_MATCHING void func_801D55B0(void) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].active = 0;
         D_80148654                                             = 0;
-        D_80148663                                             = D_80148656;
+        D_80148663                                             = *party_cursor;
         g_MenuStep.sub_step -= 1;
     }
 }
