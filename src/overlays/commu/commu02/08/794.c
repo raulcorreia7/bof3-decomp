@@ -826,8 +826,7 @@ MATCH void func_801D3B98(void) {
     func_801D32A0(0xCC, 0x3C, 0);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D3C30(void) {
+MATCH void func_801D3C30(void) {
     u16  buttons;
     s32  k;
     u8   val;
@@ -837,18 +836,19 @@ NON_MATCHING void func_801D3C30(void) {
     buttons = INPUT_GetRepeatedButtons(*pad & 0xF000);
     if (buttons != 0) {
         SND_PlayCue(0x100);
-        k = (u8)(D_801DB0B8 + (s8)D_801DB0B4 * 5 + 3);
+        k = (s8)D_801DB0B4 * 5 + 3;
+        k += (u8)D_801DB0B8;
         if (buttons & PADLdown) {
-            val           = D_801DB080[k] - 1;
-            D_801DB080[k] = val;
+            val               = D_801DB080[(u8)k] - 1;
+            D_801DB080[(u8)k] = val;
             if ((s8)val <= 0) {
-                D_801DB080[k] = 9;
+                D_801DB080[(u8)k] = 9;
             }
         } else if (buttons & PADLup) {
-            val           = D_801DB080[k] + 1;
-            D_801DB080[k] = val;
+            val               = D_801DB080[(u8)k] + 1;
+            D_801DB080[(u8)k] = val;
             if (val >= 10) {
-                D_801DB080[k] = 1;
+                D_801DB080[(u8)k] = 1;
             }
         } else if (buttons & PADLright) {
             D_801DB0B8 += 1;
@@ -871,9 +871,6 @@ NON_MATCHING void func_801D3C30(void) {
     func_801D3184(0xCC, 0x10);
     func_801D32A0(0xCC, 0x3C, 0);
 }
-#else
-INCLUDE_ASM(func_801D3C30);
-#endif
 
 INCLUDE_ASM(func_801D3E44);
 
