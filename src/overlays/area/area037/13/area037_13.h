@@ -9,6 +9,7 @@
 
 /* The cell tables the actor placement reads: the x and y byte cells and the z
  * value, indexed by the actor param byte. */
+extern u8  g_GameRequestKind;
 extern u8  D_801F3B34[];
 extern u8  D_801F3B38[];
 extern s16 D_801F3B3C[];
