@@ -126,7 +126,9 @@ NON_MATCHING void func_801EF280(s32* values) {
     u32      frame_count;
     u32      phase;
     u8       state;
+    u8       mode;
 
+    mode = g_Task->param.unk_0B;
     prim = (POLY_G3*)g_GfxPrimCursor;
     SetPolyG3(prim);
 
@@ -138,15 +140,15 @@ NON_MATCHING void func_801EF280(s32* values) {
     D_1F800014[1].vz = 0;
     D_1F800014[2].vx = 0;
     D_1F800014[2].vy = 0;
-    if (g_Task->param.unk_0B < 4) {
+    if (mode < 4) {
         D_1F800014[2].vz = g_Task->timer * 3;
     } else {
         D_1F800014[2].vz = -(g_Task->timer * 6) / 2;
     }
 
-    values[g_Task->param.unk_0B] = RotAverage3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &p, &flag);
+    values[mode] = RotAverage3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &p, &flag);
 
-    switch (g_Task->param.unk_0B) {
+    switch (mode) {
         case 0:
         case 2:
             setRGB0(prim, 0x36, 0x36, 0xB0);
@@ -176,7 +178,7 @@ NON_MATCHING void func_801EF280(s32* values) {
     if (g_Task->header.mode == 2) {
         frame_count = g_FrameCount;
         if ((frame_count & 0x18) == 0) {
-            state = g_Task->param.unk_0B;
+            state = mode;
             if (state >= 4) {
                 phase = frame_count & 6;
                 state &= 3;
@@ -190,7 +192,7 @@ NON_MATCHING void func_801EF280(s32* values) {
     }
 
     if (g_Task->header.mode == 3 || g_Task->header.mode == 4) {
-        switch (g_Task->param.unk_0B) {
+        switch (mode) {
             case 1:
                 prim->r1 = g_Task->unk_09 * 5 + 0x40;
                 prim->g1 = g_Task->unk_09 * 4 + 0x40;
