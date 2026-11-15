@@ -46,14 +46,14 @@ MATCH void func_801EEC80(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EEDFC(void) {
-    u8           slot;
     PartyMember* work;
-    u32          type;
+    u32          slot;
+    u8           type;
 
     if (g_Task->param.unk_0B != 0) {
         return;
     }
-    if (func_800AED5C(3, g_Battle.target_selector) & BYTE_MASK) {
+    if ((func_800AED5C(3, g_Battle.target_selector) & BYTE_MASK) != 0) {
         slot = Battle_AllocEffect(1, 72) & BYTE_MASK;
         work = g_Task;
         type = 3;
@@ -62,10 +62,10 @@ NON_MATCHING void func_801EEDFC(void) {
         work = g_Task;
         type = 8;
     }
-    D_801EC334[slot].value        = type;
-    D_801EC339[slot].value        = 1;
-    D_801EC33A[slot].value        = 0;
-    D_801EC3A4[slot].target.party = work;
+    g_BattleEffects[slot].unk_04       = type;
+    g_BattleEffects[slot].arg.unk_09   = 1;
+    g_BattleEffects[slot].unk_0A       = 0;
+    g_BattleEffects[slot].target.party = work;
     g_Task->param.unk_0B += 1;
     g_Task->header.mode += 1;
 }

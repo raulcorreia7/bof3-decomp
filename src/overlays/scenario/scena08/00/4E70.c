@@ -12,7 +12,7 @@ MATCH void func_801FBA70(void) {
     switch (g_SceneState.step_05) {
         case 0:
             Game_RequestAreaChange(AREA_ID_DAUNA_MINE_WORKER, TO_COORD(78), TO_COORD(52), AREA_ENTRY_MAP_LOADING | FACING_DOWN);
-            g_GamePrevSelection  = 0xFF;
+            g_GamePrevSelection  = GAME_NONE;
             g_SceneState.step_05 = 100;
             break;
         case 100:
@@ -30,7 +30,7 @@ MATCH void func_801FBA70(void) {
             if (g_ScriptVars[0] == 0x1) {
                 Game_RequestAreaChange(AREA_ID_CAMP_BEFORE_ANGEL_TOWER, TO_COORD_HALF(61), TO_COORD_HALF(13), AREA_ENTRY_MAP_LOADING | FACING_RIGHT);
                 g_GameRequestKind    = 0xFF;
-                g_GamePrevSelection  = 0xFF;
+                g_GamePrevSelection  = GAME_NONE;
                 g_SceneState.step_05 = 2;
             }
             /* fallthrough */
