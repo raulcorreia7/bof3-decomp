@@ -8,7 +8,7 @@ MATCH void func_801F4108(void) {
 
     /* g_GameEntryState and the entry substate, read as one word. */
     state = (u32*)&g_GameEntryState;
-    if (*state == 0x50005 && (*(u16*)D_801EB6B2 & 0x4000) != 0) {
+    if (*state == 0x50005 && (*FIELD_PTR(u16, D_801EB6B2, 0) & 0x4000) != 0) {
         g_Task->header.step++;
     }
     if (g_Task->timer == 15) {
