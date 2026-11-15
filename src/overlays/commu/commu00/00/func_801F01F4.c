@@ -7,8 +7,8 @@ MATCH void func_801F01F4(void) {
 
     flag  = 0;
     index = RANDOM_MASK(0x3F);
-    if (index >= 60) {
-        index -= 0x3C;
+    if (index >= FAIRY_VILLAGE_COUNT) {
+        index -= FAIRY_VILLAGE_COUNT;
     }
     start = index;
     for (;;) {
@@ -21,7 +21,7 @@ MATCH void func_801F01F4(void) {
             }
         }
         index = index + 1;
-        if (index >= 60) {
+        if (index >= FAIRY_VILLAGE_COUNT) {
             index = 0;
         }
         if (index != start) {
