@@ -1,7 +1,6 @@
 #include "area135_14.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F529C(void) {
+MATCH void func_801F529C(void) {
     u8*  game_state;
     u8*  selection;
     u8*  flags;
@@ -132,11 +131,15 @@ NON_MATCHING void func_801F529C(void) {
             if (g_ScriptVars[3] == 16) {
                 selection = &g_SceneEventSelection;
                 if (*selection != GAME_NONE) {
+                    /* FAKE: each actor write reloads the selection byte; plain C measures 474 of 490 instructions. */
                     g_Actors[*selection].header.mode = 7;
-                    g_Actors[*selection].unk_18      = 0;
-                    g_Actors[*selection].unk_1C      = 5;
-                    g_Actors[*selection].active_flags &= ~0x20;
+                    FAKE_BARRIER();
+                    g_Actors[*selection].unk_18 = 0;
+                    FAKE_BARRIER();
+                    g_Actors[*selection].unk_1C = 5;
+                    FAKE_BARRIER();
                     g_Actors[*selection].unk_7E += 3;
+                    FAKE_BARRIER();
                     g_SceneEventStep = 28;
                 } else {
                     func_801F61A8(143);
@@ -159,8 +162,11 @@ NON_MATCHING void func_801F529C(void) {
                 g_Actors[*selection].header.mode = 4;
                 g_Actors[*selection].active_flags &= ~0x20;
                 g_Actors[*selection].unk_7E += 1;
-                flags = &D_801F69AF;
-                *flags &= ~0x10;
+                {
+                    u8* flag_byte = &D_801F69AF;
+
+                    *flag_byte &= ~0x10;
+                }
                 func_801F61A8(143);
                 g_SceneEventStep = 30;
             }
@@ -186,6 +192,3 @@ NON_MATCHING void func_801F529C(void) {
             break;
     }
 }
-#else
-INCLUDE_ASM(func_801F529C);
-#endif
