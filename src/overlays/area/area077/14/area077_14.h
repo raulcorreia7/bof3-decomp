@@ -14,6 +14,9 @@
 #define AREA_SPIN_SCALE_MASK 0xf
 #define AREA_SPIN_SCALE_BASE 1
 #define AREA_SPIN_FADE       0
+/* The spin quad's sprite word: func_80155560 reads tile 0x33 in selector 2's
+ * table A, the 0x80 neutral colour byte and clut row 0x1E4. */
+#define AREA_SPIN_QUAD_WORD  ((0x2180u << 16) | 0x0133u)
 
 /* The four corner vectors RotTransPers4 projects; D_1F800014 forwards. */
 extern SVECTOR  D_1F800014[];

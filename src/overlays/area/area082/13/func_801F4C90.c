@@ -6,7 +6,7 @@ MATCH void func_801F4C90(void) {
     u32 color;
 
     level      = g_Task->timer;
-    color      = 0x10000000u | ((u32)(level / 5 + 6) << 10) | ((u32)(level / 5) << 5) | (u32)(5 - (u8)((u32)level / 24));
+    color      = (u32)1 << 28 | ((u32)(level / 5 + 6) << 10) | ((u32)(level / 5) << 5) | (u32)(5 - (u8)((u32)level / 24));
     D_8014933A = 0;
     func_801F5428((s32)color);
     g_Task->timer++;

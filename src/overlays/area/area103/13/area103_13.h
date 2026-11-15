@@ -14,7 +14,8 @@ void func_801F4E70(s32 frame);
 /* The word the effect start stores over the actor's active_flags byte and the three bytes after it. */
 #define AREA_EFFECT_ACTIVE_WORD 16777216
 
-/* The bit-flag word at 0x801EB7CA the fifth-frame band watches. */
+/* The bit-flag word the area step reads: bit 0x4000 lets it advance the task's
+ * step. */
 extern u16 D_801EB7CA;
 
 extern u8 D_801F5934[];

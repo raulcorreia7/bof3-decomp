@@ -117,8 +117,8 @@ MATCH void func_801EF5BC(void) {
 
 MATCH void func_801EF620(void) {
     Callback     handlers[2] = {func_801EF7A0, func_801EF7E0};
-    PartyMember* phaseWork;
-    PartyMember* tailWork;
+    PartyMember* phase_record;
+    PartyMember* tail_record;
     PartyMember* work;
     u8           stage;
     s32          ramp;
@@ -138,11 +138,11 @@ MATCH void func_801EF620(void) {
         }
     }
     if ((g_BattleEffectBattler->header.flags & 1) == 0) {
-        tailWork = g_Task;
-        tailWork->header.step += 1;
-        tailWork->unk_10  = 0;
-        phaseWork         = g_Task;
-        phaseWork->unk_03 = 0;
+        tail_record = g_Task;
+        tail_record->header.step += 1;
+        tail_record->unk_10  = 0;
+        phase_record         = g_Task;
+        phase_record->unk_03 = 0;
     }
     ramp                     = g_Task->unk_10;
     g_AreaCameraRefreshCount = 2;
