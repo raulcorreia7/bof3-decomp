@@ -238,12 +238,14 @@ INCLUDE_ASM(func_801D1A50);
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D1D68(void) {
     s32 i;
+    u8  cnt;
 
     func_801D3184(0x26, 0x10);
     func_801D32A0(0xA8, 0x10, 0);
     func_801D2794((u8)(D_801DB0B4 + 1), 1, D_801DB0B4);
-    D_801DB0C4 += 1;
-    i = (s8)D_801DB0B4 + 1;
+    cnt        = D_801DB0C4 + 1;
+    i          = (s8)D_801DB0B4 + 1;
+    D_801DB0C4 = cnt;
     for (; i < 9; i++) {
         func_801D2CF8(((i << 21) + 0x100000) >> 16, D_801DB0C4 * 40 + 0x6C, 0xFF);
     }
@@ -882,8 +884,6 @@ NON_MATCHING void func_801D4158(void) {
     u8* state;
     u8* src_base;
     u8* dst_base;
-    u8* src;
-    u8* dst;
     u8* src_item;
     u8* dst_item;
     u8  value;
@@ -899,10 +899,8 @@ NON_MATCHING void func_801D4158(void) {
             i        = 0;
             do {
                 offset   = (s8)D_801DB0B4 * 5;
-                dst      = offset + dst_base;
-                src      = offset + src_base;
-                dst_item = dst + i;
-                src_item = src + i;
+                dst_item = offset + dst_base + i;
+                src_item = offset + src_base + i;
                 value    = *src_item;
                 i++;
                 *dst_item = value;
@@ -927,7 +925,31 @@ NON_MATCHING void func_801D4158(void) {
 INCLUDE_ASM(func_801D4158);
 #endif
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D42B4(void) {
+    u8* state;
+    s32 selected;
+
+    state = &g_GameStateIndex;
+    if (*state != 2) {
+        Message_StartAreaMessage(0x86);
+        *state     = 2;
+        D_801F294D = 8;
+    }
+    func_801D4AE0(0x10, 0x18, 1);
+    func_801D4F88(0x68, 0x40, 1);
+    selected = (s8)D_801DB0B4;
+    if (selected == 8) {
+        func_801D4EA4(0x68, 0x78, 7, 0);
+    } else {
+        func_801D4EA4(0x68, 0x78, (u8)selected, 0);
+    }
+    func_801D3184(0xCC, 0x10);
+    func_801D32A0(0xCC, 0x3C, 0);
+}
+#else
 INCLUDE_ASM(func_801D42B4);
+#endif
 
 MATCH void func_801D437C(void) {
     u8* state;
