@@ -11,7 +11,53 @@ MATCH void func_801EEC24(void) {
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EEC94(void) {
+    u32  slot;
+    u16* src;
+    u16* dst;
+    u32  i;
+
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0x18;
+    g_Task->header.mode += 1;
+    slot                               = Battle_AllocEffect(1, 0x13) & BYTE_MASK;
+    g_BattleEffects[slot].target.party = (PartyMember*)g_Task;
+    g_BattleEffects[slot].header.mode  = 0;
+    g_BattleEffects[slot].unk_08       = g_BattleEffectBattler->facing;
+    g_Task->param.unk_0B += 1;
+    slot                               = Battle_AllocEffect(1, 0x13) & BYTE_MASK;
+    i                                  = 0;
+    dst                                = MEM_PTR(u16, 0x80037C00u);
+    src                                = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
+    g_BattleEffects[slot].header.mode  = 1;
+    g_BattleEffects[slot].target.party = (PartyMember*)g_Task;
+    g_Task->param.unk_0B += 1;
+    for (; i < 0x100; i++) {
+        *dst++ = *src++ | 0x8000;
+    }
+    dst = MEM_PTR(u16, 0x8003AC00u);
+    src = MEM_PTR(u16, 0x80036C00u);
+    for (i = 0; i < 0x10; i++) {
+        dst[0]    = src[0];
+        dst[0x10] = src[0x10];
+        dst++;
+        src++;
+    }
+    g_GfxPalettePending = 1;
+    if (g_Battle.encounter != 0 && g_BattleEnemyBattlers[g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT].unk_F0 == 0x29) {
+        slot = Battle_AllocEffect(1, 0x13) & BYTE_MASK;
+        memcpy(&g_BattleEffects[slot], &g_BattleEnemyBattlers[g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT], 0x74);
+        g_BattleEffects[slot].header.mode   = 3;
+        g_BattleEffects[slot].unk_06        = 1;
+        g_BattleEffects[slot].header.step   = 0;
+        g_BattleEffects[slot].handler_index = 0x13;
+        g_BattleEffects[slot].arg.unk_09    = 0;
+    }
+}
+#else
 INCLUDE_ASM(func_801EEC94);
+#endif
 
 #include "overlays/bmagic/Effect_CountDownTimerCallSelector.h"
 
@@ -91,11 +137,11 @@ MATCH void func_801EF38C(void) {
     LOW(g_Task->pos.x.fixed) = g_AreaScrollTargetX + g_Task->unk_0C;
     g_Task->pos.y.fixed      = g_AreaScrollTargetY + g_Task->unk_10;
     SND_PlayCue(0x100);
-    work                 = g_Task;
-    work->param.unk_0B   = 0x34;
-    work->unk_14         = 0x2FFF;
-    g_Task->unk_09       = 0;
-    g_Task->timer        = 0x10;
+    work               = g_Task;
+    work->param.unk_0B = 0x34;
+    work->unk_14       = 0x2FFF;
+    g_Task->unk_09     = 0;
+    g_Task->timer      = 0x10;
     g_Task->header.step += 1;
 }
 
