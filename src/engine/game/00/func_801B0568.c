@@ -37,31 +37,31 @@ MATCH void func_801B0568(void) {
         }
         tmp0 = func_801B0E44() & BYTE_MASK;
         if (tmp0 == 3) {
-            goto case_3; /* retail branch layout: the case bodies sit after the compare chain */
+            goto case_3;
         }
         if (tmp0 < 4) {
             if (tmp0 == 1) {
-                goto case_1; /* retail branch layout: the case bodies sit after the compare chain */
+                goto case_1;
             }
             if (tmp0 >= 2) {
-                goto case_2; /* retail branch layout: the case bodies sit after the compare chain */
+                goto case_2;
             }
             if (tmp0 == 0) {
-                goto case_0; /* retail branch layout: the case bodies sit after the compare chain */
+                goto case_0;
             }
             return;
         }
         if (tmp0 == 5) {
-            goto case_5; /* retail branch layout: the case bodies sit after the compare chain */
+            goto case_5;
         }
         if (tmp0 < 5) {
             return;
         }
         if (tmp0 == 6) {
-            goto case_6; /* retail branch layout: the case bodies sit after the compare chain */
+            goto case_6;
         }
         if (tmp0 == GAME_NONE) {
-            goto case_255; /* retail branch layout: the case bodies sit after the compare chain */
+            goto case_255;
         }
         return;
         {

@@ -8,7 +8,17 @@ MATCH void func_801EEC04(void) {
     ACTOR_RUN_MODE_HANDLER(func_801EEC5C, func_801EECE4);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EEC5C(void) {
+    g_Task->pos.x.fixed        = g_AreaScrollTargetX;
+    g_Task->pos.z.part.integer = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed = g_AreaScrollTargetY);
+    g_Task->param.unk_0B       = rand() & 0x3F;
+    g_Task->unk_09             = 0x30;
+    g_Task->header.mode += 1;
+}
+#else
 INCLUDE_ASM(func_801EEC5C);
+#endif
 
 /* The two handlers read the variant byte already loaded in a0, so the calls pass no argument: a
  * call with an argument adds a zero-extension the retail code folds away. */

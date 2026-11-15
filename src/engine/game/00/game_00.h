@@ -771,11 +771,13 @@ u8      func_801A2DB4(Actor* entity);
 u8      func_801A2ED4(Actor* entity, u8 route_step);
 void    func_801A3080(Actor* actor, s32 facing);
 void    func_801A3410(void* work_index);
-void    func_801A3594(void);
+/* func_801A3594 */
+void    Game_DispatchFadeWhite(void);
 /* func_801A35D8 */
 void    Game_StartFadeWhite(void);
 void    func_801A3648(void);
-void    func_801A37D4(void);
+/* func_801A37D4 */
+void    Game_DispatchFadeBlack(void);
 /* func_801A3818 */
 void    Game_StartFadeBlack(void);
 void    func_801A386C(void);
@@ -896,8 +898,10 @@ void  func_801B26E0(void);
 /* func_801B2950 */
 void  Game_EndLeaderSwitch(void);
 void  func_801B29BC(void);
-void  func_801B2A00(void);
-void  func_801B2A20(void);
+/* func_801B2A00 */
+void  Game_RequestMenu(void);
+/* func_801B2A20 */
+void  Game_WaitMenuClose(void);
 void  func_801B2A70(void);
 void  func_801B2AB4(void);
 void  func_801B2B6C(void);

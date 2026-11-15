@@ -3,55 +3,48 @@
 /* Advances the active enemy battler's AI state: rolls the next state from its behavior row, gates it on
  * health and flags, then dispatches the state update and records it.
  */
-#ifdef NON_MATCHING
-NON_MATCHING void func_801E25E0(u8 battler) {
+MATCH void func_801E25E0(u8 battler) {
     EnemyBattler* enemy;
 
-    g_Battle.action_type = ((s32)D_800B51F8[g_BattleEnemyBattlers[battler].choice_ai] >> ((RANDOM_MASK(3)) * 2)) & 3;
-    if ((g_Battle.state & BATTLE_STATE_OVER) && (g_BattleEnemyBattlers[battler].stats.intellect < 2U)) {
+    g_Battle.action_type = (D_800B51F8[g_BattleEnemyBattlers[battler].choice_ai] >> ((rand() & 3) * 2)) & 3;
+    if ((g_Battle.state & BATTLE_STATE_OVER) && g_BattleEnemyBattlers[battler].stats.intellect < 2) {
         g_Battle.action_type = 0;
     }
-    if (g_Battle.action_type != 1) {
-        if ((s32)g_Battle.action_type < 2) {
-            if (g_Battle.action_type != 0) {
+    switch (g_Battle.action_type) {
+        case 0:
+            g_Battle.action_type = 1;
+            break;
+        case 1:
+            if (g_BattleEnemyBattlers[battler].event_flags & 0x80) {
+                g_Battle.action_type = 2;
+                g_BattleEnemyBattlers[battler].turn.damage_flags.value |= 2;
             } else {
-                goto block_17; /* shared state fallback */
+                g_Battle.action_type = 1;
             }
-        } else if (g_Battle.action_type != 2) {
-            if (g_Battle.action_type != 3) {
-            } else {
-                if (g_BattleEnemyBattlers[battler].event_flags & 0x20) {
-                    g_Battle.action_type                           = 4;
-                    g_BattleEnemyBattlers[battler].turn.command.id = g_BattleEnemyBattlers[battler].skills[RANDOM_MASK(7)];
-                } else {
-                    goto block_16; /* shared state fallback */
-                }
-            }
-        } else {
+            break;
+        case 2:
             if (g_BattleEnemyBattlers[battler].event_flags & 0x40) {
                 g_Battle.action_type = 3;
             } else {
-                goto block_16; /* shared state fallback */
+                g_Battle.action_type = 1;
             }
-            goto block_18; /* shared state fallback */
-        }
-    } else {
-        if (g_BattleEnemyBattlers[battler].event_flags & 0x80) {
-            g_Battle.action_type = 2;
-            g_BattleEnemyBattlers[battler].turn.damage_flags.value |= 2;
-        } else {
-        block_16:
-        block_17:
-            g_Battle.action_type = 1;
-        block_18:
-        }
+            break;
+        case 3:
+            if (g_BattleEnemyBattlers[battler].event_flags & 0x20) {
+                g_Battle.action_type                           = 4;
+                g_BattleEnemyBattlers[battler].turn.command.id = g_BattleEnemyBattlers[battler].skills[rand() & 7];
+            } else {
+                g_Battle.action_type = 1;
+            }
+            break;
     }
     if ((g_BattleEnemyBattlers[battler].status & 0x20) || (g_BattleEnemyBattlers[battler].turn.action_flags.value & COMBATANT_FLAG_CHARGING)) {
         g_Battle.action_type = 1;
-        if (func_800A9304((battler + 3) & BYTE_MASK) & BYTE_MASK) {
-            func_801E2948((s8)battler);
+        if (func_800A9304(battler + 3)) {
+            /* FAKE: retail passes the masked slot, which the s8 prototype would sign-extend. */
+            ((void (*)(u8))func_801E2948)(battler);
         }
-    } else if (func_800A9304((battler + 3) & BYTE_MASK) & BYTE_MASK) {
+    } else if (func_800A9304(battler + 3)) {
         g_Battle.target_selector = Battle_PickEnemyTarget(battler);
     }
     if (BATTLE_IS_SCRIPTED()) {
@@ -63,10 +56,7 @@ NON_MATCHING void func_801E25E0(u8 battler) {
     if (g_Battle.target_selector == GAME_NONE) {
         g_Battle.action_type                             = 0;
         g_BattleEnemyBattlers[battler].turn.command.type = 0;
-        return;
+    } else {
+        g_BattleEnemyBattlers[battler].turn.command.type = g_Battle.action_type;
     }
-    g_BattleEnemyBattlers[battler].turn.command.type = g_Battle.action_type;
 }
-#else
-INCLUDE_ASM(func_801E25E0);
-#endif

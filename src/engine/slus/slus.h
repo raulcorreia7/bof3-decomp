@@ -225,7 +225,7 @@ typedef struct SpriteCell {
 } SpriteCell;
 
 /* The 0xC-byte panel sort rows at 0x80147CFC: func_8015AD00 fills one row per
- * quad, func_8014BC70 walks the list, and func_8014C47C swaps two rows. The
+ * quad, func_8014BC70 walks the list, and MATH_SwapVectors swaps two rows. The
  * list's second row starts at 0x80147D08 and the depth word at 0x80147D0C, so
  * those addresses are interior views of the same rows. */
 typedef struct PanelSortItem {
@@ -1011,7 +1011,8 @@ extern u8                    D_801F6A68;
 extern u8                    D_801F6AD0;
 extern const MenuPanelFuncs  g_MenuPanels;
 
-void                    func_8014C47C(struct Vec3W* a, struct Vec3W* b);
+/* func_8014C47C */
+void                    MATH_SwapVectors(struct Vec3W* a, struct Vec3W* b);
 extern void             Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut);
 /* func_8014DB98 */
 extern void             Actor_StageAnimStep(void);
@@ -1176,7 +1177,8 @@ s32                     Game_TestSceneFlag(u8** cursor);
 s32                     func_8015B6A8(u8** cursor);
 s32                     func_8015B6D0(u8** cursor);
 s32                     func_8015B6F8(u8** cursor);
-s32                     func_8015B73C(u8** cursor);
+/* func_8015B73C */
+s32                     Game_IsLeaderEqual(u8** cursor);
 s32                     Game_TestEventFlag(u8** cursor);
 s32                     Game_HasVitalItem(u8** cursor);
 s32                     Game_IsScenarioAtMost(u8** cursor);

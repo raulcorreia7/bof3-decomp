@@ -302,9 +302,41 @@ MATCH void func_801F04F0(void) {
     g_Task->header.step += 1;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F05AC(void) {
+    PartyMember* work;
+    rand();
+    g_Task->unk_2E.half -= 1;
+    g_Task->unk_09 += 4;
+    work = g_Task;
+    work->unk_30.half -= 1;
+    if (g_Task->unk_09 == 16) {
+        g_Task->header.step++;
+    }
+}
+#else
 INCLUDE_ASM(func_801F05AC);
+#endif
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F0638(void) {
+    PartyMember* work;
+    u8           timer;
+    work = g_Task;
+    work->unk_30.half -= 2;
+    work->unk_09 += 1;
+    rand();
+    g_Task->unk_2E.half -= 1;
+    timer         = g_Task->timer - 1;
+    g_Task->timer = timer;
+    if (timer == 0) {
+        g_BattleEffectBattler->param.unk_0B -= 1;
+        func_801E5988();
+    }
+}
+#else
 INCLUDE_ASM(func_801F0638);
+#endif
 
 /* The textured quad scratch: the corner radius and the colour channels, ahead of the quad corners. */
 #define QUAD_RADIUS D_1F800000.view.effect.params[0]

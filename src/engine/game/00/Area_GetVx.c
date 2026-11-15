@@ -20,7 +20,7 @@ MATCH s32 Area_GetVx(s32 x, s32 y) {
     }
     if (g_Task->vx != 0) {
         if ((x & HALF_MASK) == 0) {
-            goto fail; /* miss: return 0 */
+            goto fail;
         }
         pos = (xh << 16) | 0x8000;
         Area_GetHeight(pos, y, g_Task->direction_08);
@@ -30,13 +30,13 @@ MATCH s32 Area_GetVx(s32 x, s32 y) {
             }
         }
         if (g_Task->vx <= 0) {
-            goto fail; /* miss: return 0 */
+            goto fail;
         }
         next_x = (s16)((x >> 16) + 1);
         next_y = y >> 16;
     } else {
         if ((y & HALF_MASK) == 0) {
-            goto fail; /* miss: return 0 */
+            goto fail;
         }
         pos = (yh << 16) | 0x8000;
         Area_GetHeight(x, pos, g_Task->direction_08);
@@ -46,7 +46,7 @@ MATCH s32 Area_GetVx(s32 x, s32 y) {
             }
         }
         if (g_Task->vy <= 0) {
-            goto fail; /* miss: return 0 */
+            goto fail;
         }
         next_x = x >> 16;
         next_y = (s16)((y >> 16) + 1);

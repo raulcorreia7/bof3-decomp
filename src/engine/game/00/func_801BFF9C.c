@@ -48,11 +48,11 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
         if (LOBU(g_GameRequestFlags) & 0x1) {
             if (g_Characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_YOUNG) {
                 id = 0x52;
-                goto set_mode; /* shared mode dispatch */
+                goto set_mode;
             }
             if (g_Characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_PAJAMAS) {
                 id = 0xCB;
-                goto set_mode; /* shared mode dispatch */
+                goto set_mode;
             }
             id = 0x27A;
             if (g_Characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_ADULT) {

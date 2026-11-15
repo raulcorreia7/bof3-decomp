@@ -5,7 +5,7 @@
  * front-end state block.
  */
 /* func_80150284 */
-MATCH void Message_Request(s32 request_id) { /* func_80150284 */
+MATCH void Message_Request(s32 request_id) {
     u8* handle;
 
     handle           = Message_GetText(request_id & HALF_MASK);

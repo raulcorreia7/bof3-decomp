@@ -37,7 +37,7 @@ MATCH void func_801F6EB4(void) {
     *scratch = work[4];
     func_801A65A0(data);
     Actor_BeginScript(0x61, 0xC);
-    SP_REF(u8*, 0x44) = work;
+    TASK_SET(work);
 
     g_Actors[work[3]].pos.x.fixed += ONE;
     g_Actors[work[3]].pos.y.fixed -= ONE;
@@ -515,13 +515,15 @@ INCLUDE_ASM(func_801FB268);
 
 INCLUDE_ASM(func_801FB8A4);
 
-#ifdef NON_MATCHING
-NON_MATCHING s32 func_801FC1D0(s32 member_index) {
+MATCH s32 func_801FC1D0(s32 member_index) {
     s32    actor_index;
     s16    height;
     u8     option_flags;
     Actor* actor;
     Actor* task;
+    Actor* task2;
+    Actor* task3;
+    Actor* task4;
 
     actor_index = Actor_FindFreeField() & BYTE_MASK;
     if (actor_index == GAME_NONE) {
@@ -536,16 +538,16 @@ NON_MATCHING s32 func_801FC1D0(s32 member_index) {
     g_Task->header.flags = 1;
 
     task                              = g_Task;
-    task->pos.x.fixed                 = g_Game.members[(u8)member_index].pos.x.fixed + COORD_HALF;
+    task->pos.x.fixed                 = COORD_HALF + g_Game.members[(u8)member_index].pos.x.fixed;
     g_Actors[actor_index].walk_dest_x = task->pos.x.fixed;
     task->pos.y.fixed                 = g_Game.members[(u8)member_index].pos.y.fixed;
     g_Actors[actor_index].walk_dest_y = task->pos.y.fixed;
     g_Actors[actor_index].unk_88      = 0;
 
     height                        = Area_SampleHeight(task->pos.x.fixed, task->pos.y.fixed);
-    task                          = g_Task;
-    task->header.mode             = 4;
-    task->pos.z.part.integer      = height;
+    task2                         = g_Task;
+    task2->header.mode            = 4;
+    task2->pos.z.part.integer     = height;
     g_Task->header.step           = 0;
     g_Task->direction_08          = 0;
     g_Task->unk_06                = 0;
@@ -553,23 +555,20 @@ NON_MATCHING s32 func_801FC1D0(s32 member_index) {
     g_Actors[actor_index].unk_77  = 2;
     g_Actors[actor_index].unk_78  = 2;
 
-    option_flags                 = 0x88;
-    actor->ext.bounds.half_width = 0;
-    g_Actors[actor_index].unk_7C = 0;
+    g_Actors[actor_index].ext.bounds.half_width = 0;
+    g_Actors[actor_index].unk_7C                = 0;
+    option_flags                                = 0x88;
     Actor_SetOptionFlags(&option_flags);
     g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    task                       = g_Task;
-    task->tint.bytes.rgb.blue  = 0;
-    task->tint.bytes.rgb.green = 0;
-    task->tint.bytes.rgb.red   = 0;
-    task                       = g_Task;
-    task->tint.bytes.flags     = 1;
+    task3                       = g_Task;
+    task3->tint.bytes.rgb.blue  = 0;
+    task3->tint.bytes.rgb.green = 0;
+    task3->tint.bytes.rgb.red   = 0;
+    task4                       = g_Task;
+    task4->tint.bytes.flags     = 1;
     func_801A4914();
     return 1;
 }
-#else
-INCLUDE_ASM(func_801FC1D0);
-#endif
 
 MATCH void func_801FC3B4(void) {
     SCENA03_NUDGE_SCROLL(D_801FD004, 3);
