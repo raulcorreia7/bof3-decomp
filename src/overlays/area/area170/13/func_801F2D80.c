@@ -1,7 +1,6 @@
 #include "area170_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F2D80(void) {
+MATCH void func_801F2D80(void) {
     Actor* work;
     u8     old;
 
@@ -36,6 +35,3 @@ NON_MATCHING void func_801F2D80(void) {
 
     func_801F31DC((s16)g_Task->screen_x, (s16)g_Task->screen_y);
 }
-#else
-INCLUDE_ASM(func_801F2D80);
-#endif
