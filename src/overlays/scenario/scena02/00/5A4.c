@@ -7,7 +7,6 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-
 MATCH void func_801F71A4(void) {
     /* Retail takes the handler index from the entry $v0; the uninitialised local reads it. */
     u32 index;

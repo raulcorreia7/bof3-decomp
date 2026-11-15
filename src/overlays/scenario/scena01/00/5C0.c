@@ -7,7 +7,6 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-
 MATCH void func_801F71C0(void) {
     AREA_DRAW_DIM_QUAD(3);
 }
