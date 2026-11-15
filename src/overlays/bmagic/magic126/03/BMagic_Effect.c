@@ -429,7 +429,7 @@ MATCH void func_801F0960(void) {
     SYS_DISPATCH_BYTE(D_801F12AC, D_801F22BC->header.step);
     if (D_801F22BC->header.flags != 0 && D_801F22BC->header.step != 0) {
         func_801F11AC();
-        func_801F0ED0();
+        BMagic_DrawMote();
     }
 }
 
@@ -525,7 +525,7 @@ MATCH void func_801F0DA4(void) {
     }
 }
 
-MATCH void func_801F0ED0(void) {
+MATCH void BMagic_DrawMote(void) {
     POLY_FT4* prim;
 
     D_1F800000.view.effect.params[0] = MAGIC126_MOTE->unk_05;

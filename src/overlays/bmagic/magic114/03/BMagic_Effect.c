@@ -24,22 +24,22 @@ MATCH void func_801EEC44(void) {
 MATCH void func_801EEDA0(void) {
     PartyMember* work;
     PartyMember* battler;
-    u16*         src_a;
-    u16*         dst_a;
-    u16*         src_b;
-    u16*         dst_b;
+    u16*         dst;
+    u16*         src;
+    u16*         row_dst;
+    u16*         row_src;
     u32          i;
 
-    i     = 0;
-    dst_b = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
-    src_b = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
-    dst_a = MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW);
-    src_a = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
-    for (; i < 256; i++) {
-        *dst_a = *src_a++ | 0x8000;
-        *dst_b = *src_b++;
-        dst_a += 1;
-        dst_b += 1;
+    i       = 0;
+    dst     = g_AreaPaletteWork->rows[26].colors;
+    src     = g_AreaPaletteArena->rows[26].colors;
+    row_dst = g_AreaPaletteWork->rows[2].colors;
+    row_src = g_AreaPaletteArena->rows[2].colors;
+    for (; i < AREA_PALETTE_COLORS; i++) {
+        *row_dst = *row_src++ | 0x8000;
+        *dst     = *src++;
+        row_dst += 1;
+        dst += 1;
     }
     g_GfxPalettePending = 1;
     SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
