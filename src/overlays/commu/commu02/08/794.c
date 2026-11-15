@@ -1888,7 +1888,7 @@ MATCH u8 Fairy_FindActiveJob(u8 arg) {
     s32 i;
 
     active_count = 0;
-    for (i = 0; i < 0x3C; i++) {
+    for (i = 0; i < FAIRY_JOB_COUNT; i++) {
         if (g_FairyJobs[i].active != 0) {
             if ((active_count & BYTE_MASK) == arg) {
                 return (u8)i;
