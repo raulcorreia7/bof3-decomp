@@ -11,32 +11,32 @@ MATCH void Well_ReadSwishInput(void) {
         g_WellSwishButtons = *input;
         SND_PlayCue(WELL_CUE_SWISH);
         switch (*input) {
-            case 0x1000:
-            case 0x3000:
+            case PADLup:
+            case (PADLup | PADLright):
                 work        = g_Task;
                 g_GameState = g_Game.members;
                 TASK_SET(g_Game.members);
                 g_Game.members[0].pos.y.fixed -= 0x800;
                 g_Task = work;
                 break;
-            case 0x2000:
-            case 0x6000:
+            case PADLright:
+            case (PADLdown | PADLright):
                 work        = g_Task;
                 g_GameState = g_Game.members;
                 TASK_SET(g_Game.members);
                 g_Game.members[0].pos.x.fixed += 0x800;
                 g_Task = work;
                 break;
-            case 0x4000:
-            case 0xC000:
+            case PADLdown:
+            case (PADLleft | PADLdown):
                 work        = g_Task;
                 g_GameState = g_Game.members;
                 TASK_SET(g_Game.members);
                 g_Game.members[0].pos.y.fixed += 0x800;
                 g_Task = work;
                 break;
-            case 0x8000:
-            case 0x9000:
+            case PADLleft:
+            case (PADLleft | PADLup):
                 work        = g_Task;
                 g_GameState = g_Game.members;
                 TASK_SET(g_Game.members);

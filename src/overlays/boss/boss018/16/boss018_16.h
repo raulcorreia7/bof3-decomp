@@ -71,7 +71,7 @@ void func_800C2AA4(void);
 /* Runs one battle event of the three boss sets: a restart begin raises the result bits the three
  * enemy status words select, and the restart end runs func_800C2AA4. Kept as a statement macro:
  * the inline form picks a different address form for the first result store. Every change must
- * verify Boss_HandleBattleEvent, Boss_HandleBattleEvent2 and Boss_HandleBattleEvent3. */
+ * verify Boss_RunBattleEvent, Boss_RunBattleEvent2 and Boss_RunBattleEvent3. */
 #define BOSS_RUN_BATTLE_EVENT_BODY(mode)                          \
     switch ((mode) & BYTE_MASK) {                                 \
         case BOSS_EVENT_RESTART_BEGIN:                            \

@@ -63,7 +63,7 @@ MATCH void func_800A5AE4(void) {
                 cursor->index = cursor_index - 1;
             }
         }
-    } else if (input & 0x4) {
+    } else if (input & PADL1) {
         if (cursor_page >= CURSOR_PAGE_STEP) {
             cursor->page = cursor_page - CURSOR_PAGE_STEP;
         } else if (cursor_page == 0) {
@@ -80,7 +80,7 @@ MATCH void func_800A5AE4(void) {
                 cursor->index = cursor_index + 1;
             }
         }
-    } else if (input & 0x8) {
+    } else if (input & PADR1) {
         if (cursor_page == CURSOR_PAGE_MAX) {
             cursor->index = CURSOR_INDEX_MAX;
         } else if (cursor_page + cursor_index + CURSOR_PAGE_STEP < CURSOR_TOTAL_MAX) {

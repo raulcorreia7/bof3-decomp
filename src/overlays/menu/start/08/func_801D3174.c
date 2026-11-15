@@ -80,7 +80,7 @@ MATCH void func_801D3174(void) {
         if (D_80148510 >= g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B + 9) {
             g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.scroll = 0x10;
         }
-    } else if (trigger & 0x4) {
+    } else if (trigger & PADL1) {
         u8 group = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
         if (group == 0) {
             D_80148510 = 0;
@@ -91,7 +91,7 @@ MATCH void func_801D3174(void) {
             D_80148510 = old_cursor - 9;
             D_8014850F = group - 9;
         }
-    } else if (trigger & 0x8) {
+    } else if (trigger & PADR1) {
         u8 group = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
         if (group == 0x77) {
             D_80148510 = 0x7F;

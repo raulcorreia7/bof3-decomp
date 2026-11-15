@@ -23,8 +23,8 @@ extern Callback D_800C2794[];
 /* The enemy-work mode dispatch each installer publishes at unk_E4. */
 void func_800C1BBC(s32 mode);
 
-/* Handles one battle event of the boss004 sets (Boss_HandleBattleEvent, Boss_HandleBattleEvent2 and
- * Boss_HandleBattleEvent3): a whelp-breath start weakens both enemies and drops the dragon form, a
+/* Handles one battle event of the boss004 sets (Boss_RunBattleEvent, Boss_RunBattleEvent2 and
+ * Boss_RunBattleEvent3): a whelp-breath start weakens both enemies and drops the dragon form, a
  * restart arms the whelp-breath command, a reset restores the form and a tick drops it once Ryu has
  * fallen. Every change must verify every member. */
 #define BOSS_RUN_BATTLE_EVENT_BODY(mode)                                                               \

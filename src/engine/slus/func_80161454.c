@@ -93,7 +93,7 @@ MATCH void func_80161454(u32 index) {
         q    = ((s32)g_Task->state_70.word >> val4) & 0x1F;
         tmp4 = q;
         if (q != 0x1F) {
-            val8 = 1 << tmp4;
+            val8 = SPU_KEYCH(tmp4);
             if (SpuGetKeyStatus(val8) == SPU_OFF) {
                 g_Task->state_70.word |= 0x1F << val4;
             } else {

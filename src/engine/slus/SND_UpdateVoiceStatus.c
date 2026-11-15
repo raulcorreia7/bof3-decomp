@@ -7,6 +7,6 @@ MATCH void SND_UpdateVoiceStatus(void) {
     u8 i;
 
     for (i = 0; i < 24; i++) {
-        g_SndVoiceStatus[i] = SpuGetKeyStatus(1 << i);
+        g_SndVoiceStatus[i] = SpuGetKeyStatus(SPU_KEYCH(i));
     }
 }

@@ -16,7 +16,7 @@ MATCH void Game_RunTitle(void) { /* func_801D0C04 */
 
     for (;;) {
         SYS_ThreadWait(1);
-        UI_HandleStartButton();
+        UI_UpdateStartButton();
         s_TitleStates[g_UiTitleState]();
         UI_UpdateBannerFade();
         UI_UpdateWindowFade();
