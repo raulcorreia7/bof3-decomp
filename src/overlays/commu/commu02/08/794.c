@@ -674,7 +674,7 @@ NON_MATCHING void func_801D448C(void) {
                     D_801F294D = 0;
                     D_801F294E = 0;
                 } else {
-                    SND_PlayCue(0x102);
+                    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
                     D_801DB0C4 = 0;
                     D_801F294E = 2;
                 }
