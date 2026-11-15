@@ -1,108 +1,66 @@
 #include "battle_03.h"
 
-/* One command-list entry: the row's action value and the row index. */
-#define BATTLE_COMMAND_ENTRY_SIZE 4
-
-typedef struct BattleCommand {
-    s16 value;
-    s16 index;
-} BattleCommand;
-
-ASSERT_SIZE(BattleCommand, BATTLE_COMMAND_ENTRY_SIZE);
-
-/* The number of command-list rows a battle can hold. */
+/* The number of party rows the command list holds. */
 #define BATTLE_COMMAND_MAX 3
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DA7D4(void) {
-    BattleCommand  entries[BATTLE_COMMAND_MAX];
-    BattleCommand* entry;
-    BattleCommand* other;
-    BattleCommand  temp;
-    s32            scan;
-    u32            count;
-    u8             sum;
-    u32            max;
-    u16            value;
-    u32            scan_index;
-    u8             i;
-    u8             total;
-    s8*            cursor;
+    BattleRank entries[BATTLE_COMMAND_MAX];
+    BattleRank temp;
+    u8         total;
+    u8         maximum;
+    u16        agility;
+    u8         index;
+    u8         left;
+    u8         right;
 
-    max = 0;
-    sum = 0;
-    i   = 3;
-    do {
-        if ((D_801463BA == 0) || (ENEMY_COMBATANT(i).turn.action_flags.value & COMBATANT_FLAG_PREEMPTIVE_TURN)) {
-            if (func_801DB9E4(i) & BYTE_MASK) {
-                value = ENEMY_COMBATANT(i).stats.agility;
-                if (max < (u32)value) {
-                    sum += value;
-                    max = value;
+    total   = 0;
+    maximum = 0;
+    for (index = 3; index < 11; index++) {
+        if (D_801463BA == 0 || (g_BattleEnemyBattlers[index - 3].turn.action_flags.value & COMBATANT_FLAG_PREEMPTIVE_TURN)) {
+            if (func_801DB9E4(index)) {
+                agility = g_BattleEnemyBattlers[index - 3].stats.agility;
+                total += agility;
+                if (maximum < agility) {
+                    maximum = agility;
                 }
             }
-        }
-        i++;
-    } while ((u32)i < 11);
-    sum = 0;
-    i   = 0;
-    do {
-        if ((D_801463BA == 0) || (g_Game.members[i].u.turn.action_flags.volatile_value & COMBATANT_FLAG_PREEMPTIVE_TURN)) {
-            if (func_801DB844(i) & BYTE_MASK) {
-                total        = sum;
-                entry        = &entries[total];
-                entry->index = (s16)i;
-                entry->value = g_Game.members[i].chr.stats.agility;
-                sum++;
-            }
-        }
-        i++;
-    } while ((u32)i < BATTLE_COMMAND_MAX);
-    max   = sum;
-    count = sum & BYTE_MASK;
-    if (count >= 2) {
-        sum = 0;
-        if ((count - 1) > 0) {
-            i = 1;
-            do {
-                if ((u32)i < count) {
-                    entry      = &entries[sum];
-                    scan       = i * 4;
-                    scan_index = (u32)i;
-                    do {
-                        other = &entries[i];
-                        if (entry->value < other->value) {
-                            temp   = *entry;
-                            *entry = *other;
-                            *other = temp;
-                        }
-                        i++;
-                        scan       = i * 4;
-                        scan_index = (u32)i;
-                    } while (scan_index < (u32)max);
-                }
-                sum++;
-                count = max & BYTE_MASK;
-                i     = sum + 1;
-            } while (sum < (count - 1));
         }
     }
-    i = 0;
-    do {
-        D_801462F6[i] = 0xFF;
-        i++;
-    } while ((u32)i < BATTLE_COMMAND_MAX);
-    cursor  = &g_Battle.command_count;
-    *cursor = 0;
-    i       = 0;
-    if (max & BYTE_MASK) {
-        do {
-            if (func_801DB844((u8)entries[i].index) & BYTE_MASK) {
-                D_801462F6[*cursor] = (u8)entries[i].index;
-                *cursor             = (s8)(*cursor + 1);
+
+    total = 0;
+    for (index = 0; index < BATTLE_COMMAND_MAX; index++) {
+        if (D_801463BA == 0 || (g_Game.members[index].u.turn.action_flags.volatile_value & COMBATANT_FLAG_PREEMPTIVE_TURN)) {
+            if (func_801DB844(index)) {
+                entries[total].index = index;
+                entries[total].value = g_Game.members[index].chr.stats.agility;
+                total++;
             }
-            i++;
-        } while ((u32)i < (u32)(max & BYTE_MASK));
+        }
+    }
+
+    maximum = total;
+    if (maximum >= 2) {
+        for (left = 0; left < maximum - 1; left++) {
+            for (right = left + 1; right < maximum; right++) {
+                if (entries[left].value < entries[right].value) {
+                    temp           = entries[left];
+                    entries[left]  = entries[right];
+                    entries[right] = temp;
+                }
+            }
+        }
+    }
+
+    for (index = 0; index < BATTLE_COMMAND_MAX; index++) {
+        D_801462F6[index] = 0xFF;
+    }
+    g_Battle.command_count = 0;
+    for (index = 0; index < maximum; index++) {
+        if (func_801DB844((u8)entries[index].index)) {
+            D_801462F6[g_Battle.command_count] = entries[index].index;
+            g_Battle.command_count++;
+        }
     }
 }
 #else

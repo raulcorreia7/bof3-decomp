@@ -1,22 +1,17 @@
 #include "battle_03.h"
 
-/* Restarts the battle: clears the pending step, swaps the battle
- * state with the saved one and refreshes the actors' status rows.
+/* Restarts the round step; for a pending reprisal, swaps the acting and saved
+ * battler blocks, copies the actor's stats and queues its message.
  */
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D43EC(void) {
-    volatile s32 saved0;
-    volatile s32 saved1;
-    volatile s32 saved2;
-    volatile s32 saved3;
-    s32          index;
-    s32          flags;
-    u16*         battle_flags;
-    s32*         block74;
-    s32*         block84;
+MATCH void func_801D43EC(void) {
+    WorkChunk saved;
+    u16*      battle_flags;
+    u8        index;
+    s32       flags;
+    s32       slot;
 
     battle_flags = &g_Battle.state;
-    if ((*battle_flags & 4) && (D_801463C2 == 0)) {
+    if ((*battle_flags & 4) && D_801463C2 == 0) {
         *battle_flags &= 0xD7FB;
         g_Battle.phase.step     = 0;
         g_Battle.phase.sub_step = 0;
@@ -33,35 +28,20 @@ NON_MATCHING void func_801D43EC(void) {
             *battle_flags &= ~BATTLE_STATE_REPRISAL_DONE;
         }
         if (*battle_flags & BATTLE_STATE_REPRISAL_PENDING) {
-            block74              = (s32*)&g_Battle.active_battler;
-            block84              = (s32*)&g_Battle.target_selector;
-            saved0               = block74[0];
-            saved1               = block74[1];
-            saved2               = block74[2];
-            saved3               = block74[3];
-            block74[0]           = block84[0];
-            block74[1]           = block84[1];
-            block74[2]           = block84[2];
-            block74[3]           = block84[3];
-            block84[0]           = saved0;
-            block84[1]           = saved1;
-            block84[2]           = saved2;
-            block84[3]           = saved3;
-            g_Battle.action_type = BATTLE_ACTION_ATTACK;
-            index                = g_Battle.active_battler;
-            if ((u8)index < 3U) {
-                *(BattleStatBlock*)D_801EC308 = *(BattleStatBlock*)(D_80145F20 + index * 0x140 + 3);
-                flags                         = g_Game.members[index].u.turn.damage_flags.value & COMBATANT_FLAG_REPRISAL;
+            saved                                  = *(WorkChunk*)&g_Battle.active_battler;
+            *(WorkChunk*)&g_Battle.active_battler  = *(WorkChunk*)&g_Battle.target_selector;
+            *(WorkChunk*)&g_Battle.target_selector = saved;
+            g_Battle.action_type                   = BATTLE_ACTION_ATTACK;
+            index                                  = g_Battle.active_battler;
+            if (index < 3) {
+                flags                         = g_Game.members[index].u.turn.damage_flags.value;
+                *(BattleStatBlock*)D_801EC308 = *(BattleStatBlock*)&g_Game.members[index].chr.stats;
             } else {
-                /* The party side reads the same block three bytes in; one address keeps both reads alike. */
-                *(BattleStatBlock*)D_801EC308 = *(BattleStatBlock*)(D_801EB6D0 + 3);
-                flags                         = ENEMY_COMBATANT(index).turn.damage_flags.value & COMBATANT_FLAG_REPRISAL;
+                slot                          = index - 3;
+                flags                         = g_BattleEnemyBattlers[slot].turn.damage_flags.value;
+                *(BattleStatBlock*)D_801EC308 = *(BattleStatBlock*)&g_BattleEnemyBattlers[slot].stats;
             }
-            if (flags != 0) {
-                Battle_QueueEvent(1, 0, 0, 0xF, (u8*)&D_801EB08F);
-            } else {
-                Battle_QueueEvent(1, 0, 0, 0xF, (u8*)&D_801EB04E);
-            }
+            Battle_QueueEvent(1, 0, 0, 0xF, (flags & COMBATANT_FLAG_REPRISAL) ? (u8*)&D_801EB08F : (u8*)&D_801EB04E);
             g_BattleMessageState    = 1;
             g_Battle.phase.step     = 0;
             g_Battle.phase.sub_step = 1;
@@ -71,6 +51,3 @@ NON_MATCHING void func_801D43EC(void) {
         }
     }
 }
-#else
-INCLUDE_ASM(func_801D43EC);
-#endif

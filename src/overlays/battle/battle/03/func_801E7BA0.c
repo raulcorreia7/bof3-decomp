@@ -1,141 +1,88 @@
 #include "battle_03.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801E7BA0(void) {
-    PartyMember* temp_a0_288;
-    PartyMember* temp_a0_409;
-    PartyMember* temp_a1_349;
-    PartyMember* temp_a1_458;
-    PartyMember* var_s1;
-    s32          temp_a0_392;
-    s32          temp_a0_435;
-    s32          temp_a0_92;
-    s32          temp_v0_339;
-    s32          temp_v0_494;
-    s32          temp_v1_165;
-    s32          temp_v1_302;
-    u8           var_s0;
-    s32          var_v0_49;
-    u16          temp_a0_154;
-    u32          temp_v0_176;
-    u8           temp_v0_76;
-    u8           temp_a0_460;
-    u8           temp_a0_475;
-    u8           temp_a1_490;
-    u8           temp_a1_528;
-    u8           temp_v0_311;
-    u8           temp_v0_323;
-    u8           temp_v1_135;
-    u8           temp_v1_191;
-    u8           temp_v1_366;
+/* Once the loader is ready, rebuilds the acting party battler from its template and refreshes its panel and palette. */
+MATCH void func_801E7BA0(void) {
+    PartyMember* saved;
+    u8           slot;
+    u8           facing;
+    u8           i;
+    u8*          cells;
 
-    if (EMI_IsReady() != 0) {
-        GFX_FreePaletteFadeTarget(&g_Game.members[g_BattleEffectBattler->slot]);
-        if (g_Battle.state & BATTLE_STATE_RELOAD_PARTY) {
-            g_Battle.living_party_count = 0;
-            g_Battle.party_count        = D_801463CF;
-            var_s0                      = 0;
-            if (D_801463CF != 0) {
-                var_v0_49 = 0;
-                do {
-                    if (!(*(&D_801EBFA0 + (var_v0_49 * BATTLE_PARTY_STRIDE)) & 0x4000)) {
-                        g_Battle.living_party_count += 1;
-                    }
-                    var_s0 += 1;
-                    var_v0_49 = var_s0;
-                } while (var_s0 < g_Battle.party_count);
-            }
-            D_8014835E = g_Battle.party_count;
-            temp_v0_76 = g_Battle.party_count;
-            D_80148358 = (s16) * (&D_801EB4BF + temp_v0_76);
-            var_s0     = 1;
-            if (temp_v0_76 > 1U) {
-                do {
-                    temp_a0_92 = var_s0;
-                    var_s0 += 1;
-                    g_BattleEffects[Battle_AllocEffect(0U, 0x11U) & BYTE_MASK].target.party = &g_Game.members[temp_a0_92];
-                } while (var_s0 < g_Battle.party_count);
-            }
-        }
-        var_s1 = g_Task;
-        TASK_SET(g_BattleEffectBattler);
-        g_Game.current = &g_Game.members[g_BattleEffectBattler->slot];
-        temp_v1_135    = g_Game.members[g_BattleEffectBattler->slot].chr.level;
-        if ((temp_v1_135 == 7) || (temp_v1_135 == 0)) {
-            D_801EB4C8  = g_Game.members[g_BattleEffectBattler->slot].chr.ap;
-            temp_a0_154 = g_Game.members[g_BattleEffectBattler->slot].chr.status;
-            D_801EB4CC  = temp_a0_154;
-            temp_v1_165 = *(&D_80145FB4 + (g_BattleEffectBattler->slot * BATTLE_PARTY_STRIDE));
-            D_801EB4D0  = temp_v1_165;
-            temp_v0_176 = g_Game.members[g_BattleEffectBattler->slot].u.turn.action_flags.volatile_value;
-            D_801EB4CC  = temp_a0_154 & 0xBFFF;
-            D_801EB4D0  = temp_v1_165 & 0xFFFE7FFF;
-            D_801EB4D4  = temp_v0_176;
-            D_801EB4D4  = temp_v0_176 & 0xFFF884FD;
-        }
-        temp_v1_191                                    = g_Task->slot;
-        g_Game.members[temp_v1_191]                    = s_BattleBattlerTemplates[temp_v1_191];
-        *(D_80145E91 + ((g_Task)->slot * 0x140))       = 6;
-        *(D_80145E92 + ((g_Task)->slot * 0x140))       = 4;
-        *(D_80145E93 + ((g_Task)->slot * 0x140))       = 4;
-        *(D_80145E94 + ((g_Task)->slot * 0x140))       = 1;
-        g_Game.members[(g_Task)->slot].facing          = g_Game.members[temp_v1_191].facing;
-        *(&D_80145ED8 + ((g_Task)->slot * 0x140))      = 2;
-        temp_a0_288                                    = g_Task;
-        *(&D_80145ED0 + (temp_a0_288->slot * 0x140))   = 0;
-        temp_v1_302                                    = temp_a0_288->slot * BATTLE_PARTY_STRIDE;
-        *(&D_80145FB4 + temp_v1_302)                   = *(&D_80145FB4 + temp_v1_302) | 0x2000;
-        temp_v0_311                                    = temp_a0_288->slot;
-        g_BattleEffects[temp_v0_311].pos.x             = g_EncounterParty[temp_v0_311].x;
-        temp_v0_323                                    = temp_a0_288->slot;
-        g_BattleEffects[temp_v0_323].pos.y             = g_EncounterParty[temp_v0_323].y;
-        temp_v0_339                                    = temp_a0_288->slot;
-        temp_a1_349                                    = g_Task;
-        g_BattleEffects[temp_a1_349->slot].pos.z.fixed = Area_SampleHeight(g_BattleEffects[temp_v0_339].pos.x.fixed, g_BattleEffects[temp_v0_339].pos.y.fixed) << 0x10;
-        temp_v1_366                                    = g_Game.members[temp_a1_349->slot].chr.level;
-        if ((temp_v1_366 == 7) || (temp_v1_366 == 0)) {
-            g_Game.members[temp_a1_349->slot].chr.ap                             = D_801EB4C8;
-            g_Game.members[temp_a1_349->slot].chr.status                         = D_801EB4CC;
-            temp_a0_392                                                          = temp_a1_349->slot * BATTLE_PARTY_STRIDE;
-            g_Game.members[temp_a1_349->slot].chr.fatigue                        = g_Characters[(&g_Game.members[0].character_index)[temp_a0_392]].fatigue;
-            temp_a0_409                                                          = g_Task;
-            var_s0                                                               = 0;
-            *(&D_80145FB4 + (temp_a0_409->slot * 0x140))                         = D_801EB4D0;
-            g_Game.members[temp_a0_409->slot].u.turn.action_flags.volatile_value = D_801EB4D4;
-            do {
-                temp_a0_435 = var_s0;
-                var_s0 += 1;
-                *(((g_Task)->slot * 0x140) + &D_80145FBC + temp_a0_435) = 0;
-            } while (var_s0 < 8);
-            func_801E0B64();
-        }
-        Battle_RescaleStats((g_Task)->slot);
-        temp_a1_458                                   = g_Task;
-        temp_a0_460                                   = temp_a1_458->slot;
-        *(&D_80148344 + ((temp_a0_460 + 0xD) * 0x24)) = g_Game.members[temp_a0_460].chr.hp;
-        temp_a0_475                                   = temp_a1_458->slot;
-        *(&D_80148346 + ((temp_a0_475 + 0xD) * 0x24)) = g_Game.members[temp_a0_475].chr.ap;
-        temp_a1_490                                   = temp_a1_458->slot;
-        temp_v0_494                                   = temp_a1_490 * BATTLE_PARTY_STRIDE;
-        *(&D_8014833B + ((temp_a1_490 + 0xD) * 0x24)) = (s8)((s32)(g_Game.members[temp_a1_490].chr.hp * 0x37) / (s32)g_Game.members[temp_a1_490].chr.stats.max_hp);
-        temp_a1_528                                   = (g_Task)->slot;
-        g_MenuPanelTasks[temp_a1_528 + 0xD].unk_0C    = (u8)((s32)(g_Game.members[temp_a1_528].chr.ap * 0x37) / (s32)g_Game.members[temp_a1_528].chr.stats.max_ap);
-        Actor_SelectScript(((g_Task)->facing + 4) & BYTE_MASK);
-        GFX_LoadPalette((u8*)BATTLE_ACTION_BLOCK_TABLE + (g_Task->slot << 6), 0);
-        func_801DDAB4((u32) * (D_80145F10 + ((g_Task)->slot * BATTLE_PARTY_STRIDE)));
-        GFX_UploadPaletteRows();
-        if (g_Battle.state & BATTLE_STATE_RELOAD_PARTY) {
-            *D_801454F5 = D_801463D4;
-            *D_801454F6 = D_801463D5;
-        } else {
-            *(D_801454F5 + ((g_Task)->slot * 3)) = D_801463D4;
-            *(D_801454F6 + ((g_Task)->slot * 3)) = D_801463D5;
-        }
-        g_Task = var_s1;
-        g_Battle.state &= ~BATTLE_STATE_RELOAD_PARTY;
-        var_s1->header.mode += 1;
+    if (!EMI_IsReady()) {
+        return;
     }
+    GFX_FreePaletteFadeTarget(&g_Game.members[g_BattleEffectBattler->slot]);
+    if (g_Battle.state & BATTLE_STATE_RELOAD_PARTY) {
+        g_Battle.living_party_count = 0;
+        g_Battle.party_count        = D_801463CF;
+        for (i = 0; i < g_Battle.party_count; i++) {
+            if (!(s_BattleBattlerTemplates[i].chr.status & 0x4000)) {
+                g_Battle.living_party_count++;
+            }
+        }
+        D_8014835E = g_Battle.party_count;
+        D_80148358 = s_BattleBattlerStepIds[g_Battle.party_count + 0x2B];
+        for (i = 1; i < g_Battle.party_count; i++) {
+            g_BattleEffects[(u8)Battle_AllocEffect(0, 0x11)].target.party = &g_Game.members[i];
+        }
+    }
+
+    saved       = g_Task;
+    g_Task      = g_BattleEffectBattler;
+    g_GameState = &g_Game.members[g_Task->slot];
+    if (g_Game.members[g_Task->slot].chr.character_id == 7 || g_Game.members[g_Task->slot].chr.character_id == 0) {
+        D_801EB4C8 = g_Game.members[g_Task->slot].chr.ap;
+        D_801EB4CC = g_Game.members[g_Task->slot].chr.status;
+        D_801EB4D0 = g_Game.members[g_Task->slot].u.turn.damage_flags.value;
+        D_801EB4D4 = g_Game.members[g_Task->slot].u.turn.action_flags.value;
+        D_801EB4CC &= ~0x4000;
+        D_801EB4D0 &= 0xFFFE7FFF;
+        D_801EB4D4 &= 0xFFF884FD;
+    }
+
+    slot                                     = g_Task->slot;
+    facing                                   = g_Game.members[slot].facing;
+    g_Game.members[slot]                     = s_BattleBattlerTemplates[slot];
+    g_Game.members[g_Task->slot].header.mode = 6;
+    g_Game.members[g_Task->slot].header.step = 4;
+    g_Game.members[g_Task->slot].unk_03      = 4;
+    g_Game.members[g_Task->slot].unk_04      = 1;
+    g_Game.members[g_Task->slot].facing      = facing;
+    g_Game.members[g_Task->slot].unk_48      = 2;
+    g_Game.members[g_Task->slot].scale.x     = 0;
+    g_Game.members[g_Task->slot].u.turn.damage_flags.value |= 0x2000;
+    g_BattleEffects[g_Task->slot].pos.x.fixed = g_EncounterParty[g_Task->slot].x.fixed;
+    g_BattleEffects[g_Task->slot].pos.y.fixed = g_EncounterParty[g_Task->slot].y.fixed;
+    g_BattleEffects[g_Task->slot].pos.z.fixed = Area_SampleHeight(g_BattleEffects[g_Task->slot].pos.x.fixed, g_BattleEffects[g_Task->slot].pos.y.fixed) << 16;
+    if (g_Game.members[g_Task->slot].chr.character_id == 7 || g_Game.members[g_Task->slot].chr.character_id == 0) {
+        g_Game.members[g_Task->slot].chr.ap                    = D_801EB4C8;
+        g_Game.members[g_Task->slot].chr.status                = D_801EB4CC;
+        g_Game.members[g_Task->slot].chr.fatigue               = g_Characters[g_Game.members[g_Task->slot].character_index].fatigue;
+        g_Game.members[g_Task->slot].u.turn.damage_flags.value = D_801EB4D0;
+        g_Game.members[g_Task->slot].u.turn.action_flags.value = D_801EB4D4;
+        for (i = 0; i < 8; i++) {
+            cells    = (u8*)&g_Game.members[g_Task->slot].status;
+            cells[i] = 0;
+        }
+        func_801E0B64();
+    }
+    Battle_RescaleStats(g_Task->slot);
+    g_MenuPanelTasks[g_Task->slot + 13].u.battle.hp = g_Game.members[g_Task->slot].chr.hp;
+    g_MenuPanelTasks[g_Task->slot + 13].u.battle.ap = g_Game.members[g_Task->slot].chr.ap;
+    g_MenuPanelTasks[g_Task->slot + 13].unk_0B      = g_Game.members[g_Task->slot].chr.hp * 55 / g_Game.members[g_Task->slot].chr.stats.max_hp;
+    g_MenuPanelTasks[g_Task->slot + 13].unk_0C      = g_Game.members[g_Task->slot].chr.ap * 55 / g_Game.members[g_Task->slot].chr.stats.max_ap;
+    Actor_SelectScript(g_Task->facing + 4);
+    GFX_LoadPalette((u8*)(BATTLE_ACTION_BLOCK_TABLE + (g_Task->slot << 6)), 0);
+    func_801DDAB4(g_Game.members[g_Task->slot].chr.status);
+    GFX_UploadPaletteRows();
+    if (g_Battle.state & BATTLE_STATE_RELOAD_PARTY) {
+        D_801454F5[0] = D_801463D4;
+        D_801454F6[0] = D_801463D5;
+    } else {
+        D_801454F5[g_Task->slot * 3] = D_801463D4;
+        D_801454F6[g_Task->slot * 3] = D_801463D5;
+    }
+    g_Task = saved;
+    g_Battle.state &= ~BATTLE_STATE_RELOAD_PARTY;
+    saved->header.mode++;
 }
-#else
-INCLUDE_ASM(func_801E7BA0);
-#endif
