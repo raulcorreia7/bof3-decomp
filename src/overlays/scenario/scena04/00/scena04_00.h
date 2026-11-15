@@ -73,7 +73,7 @@ void            func_80196070(void);
 s8              func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
 void            func_801F7084(s32* step);
 void            func_801F747C(void);
-void            func_801F75BC(s32 arg0, s32 arg1);
+void            func_801F75BC(s32 arg0, u8 arg1);
 
 extern Callback  D_801FA1E4[];
 extern Callback  D_801FA204[];

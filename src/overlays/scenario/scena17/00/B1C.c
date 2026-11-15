@@ -626,7 +626,21 @@ MATCH void func_801F8FAC(s32 x, s32 y, s32 color, u8 semi_trans) {
     GFX_AddPrim(2, sizeof(SPRT));
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F90BC(s16 x, s16 y, u32 clut, u32 uv) {
+    SPRT_16* prim;
+
+    prim = (SPRT_16*)g_GfxPrimCursor;
+    SetSprt16(prim);
+    setRGB0(prim, 0x80, 0x80, 0x80);
+    setXY0(prim, x, y);
+    prim->clut = (clut & 0x3F) | 0x7B80;
+    setUV0(prim, (uv & 0xF) << 4, uv & 0xF0);
+    GFX_AddPrim(1, sizeof(SPRT_16));
+}
+#else
 INCLUDE_ASM(func_801F90BC);
+#endif
 
 MATCH void func_801F9160(s16 x, s16 y) {
     SPRT* prim;

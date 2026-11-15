@@ -45,7 +45,29 @@ MATCH void func_801F6EA4(void) {
     }
 }
 
-INCLUDE_ASM(func_801F6F2C);
+/* Advances the scene's entrance: raises the actor's unk_1C, steps the focus one cell, moves it
+ * through func_801F7084 and sets the shade that fades with the timer, then counts the timer down
+ * and hands the step back after eight. */
+MATCH void func_801F6F2C(void) {
+    Actor* work;
+    Actor* actor;
+    u8     mode;
+    u8     level;
+
+    work              = g_Task;
+    work->unk_1C      = work->unk_1C + 0x4000;
+    work->pos.x.fixed = work->pos.x.fixed + TO_COORD(1);
+    func_801F7084(&work->vx);
+    level = g_Task->timer;
+    func_801F75BC(0x10, (level == 8) ? 0xFF : level << 5);
+    actor        = g_Task;
+    mode         = actor->timer - 1;
+    actor->timer = mode;
+    if (mode == 0) {
+        g_Task->timer = 32;
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801F6FF8(void) {
     Actor* work;
