@@ -6,7 +6,8 @@
 /* Selection-kind flag table: the power byte at +0 of each 0x14-byte record. */
 extern u8 D_801CA71B[];
 
-MATCH s32 func_800A30E8(u8 unused, u8 battler_index) {
+/* func_800A30E8 */
+MATCH s32 Battle_CalcHeal(u8 unused, u8 battler_index) {
     u8  power;
     u8  resistance;
     u32 rate;

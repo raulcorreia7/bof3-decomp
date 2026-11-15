@@ -809,7 +809,7 @@ extern void        func_801E2120(void);
 void               Battle_UpdateEnemies(void);
 /* func_801E2284 */
 void               Battle_UpdateEnemyActors(void);
-void               func_801E25E0(u8 arg0);
+void               func_801E25E0(u8 battler);
 void               func_801E2948(s8 enemy_index);
 u8                 Battle_PickEnemyTarget(u8 enemy_index);
 /* func_801E2CA4 */
