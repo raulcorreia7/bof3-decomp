@@ -1,7 +1,7 @@
 #include "area077_14.h"
 
-/* func_801F3D24 */
-MATCH void func_801F3D24(void) {
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F3D24(void) {
     Actor* task;
 
     PushMatrix();
@@ -16,9 +16,12 @@ MATCH void func_801F3D24(void) {
     }
     func_801F4220();
     func_801F43C8();
-    func_801F462C(MEM_PTR(s32, 0x800E4800u), 0x80, 0x80, 0);
+    func_801F462C(&D_800E4800, 0x80, 0x80, 0);
     PopMatrix();
     if (--g_Task->vx == 0) {
         func_80196070();
     }
 }
+#else
+INCLUDE_ASM(func_801F3D24);
+#endif
