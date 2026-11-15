@@ -110,10 +110,7 @@ MATCH void func_801EF008(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EF0F8(s32 offset) {
-    s16          move_x;
-    s16          move_y;
-    s16          move_width;
-    s16          move_height;
+    RECT         move;
     s32          ring_angle;
     s32          outer_ring;
     Point2l*     spiral_point;
@@ -181,13 +178,12 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
             D_801EFAF8[vertex].y = FIXED_MUL(rcos(mesh_angle), row * (g_Task->unk_09 >> 3));
         }
     }
-    mesh_task   = g_Task;
-    move_x      = mesh_task->unk_2E.half - mesh_task->unk_09;
-    move_y      = (mesh_task->unk_30.half - mesh_task->unk_09) + (g_FrameBufferIndex * 0xF0);
-    diameter    = mesh_task->unk_09 * 2;
-    move_width  = diameter;
-    move_height = diameter;
-    SetDrawMove((DR_MOVE*)g_GfxPrimCursor, (RECT*)&move_x, 0x340, 0x100);
+    mesh_task = g_Task;
+    move.x    = mesh_task->unk_2E.half - mesh_task->unk_09;
+    move.y    = (mesh_task->unk_30.half - mesh_task->unk_09) + (g_FrameBufferIndex * 0xF0);
+    diameter  = mesh_task->unk_09 * 2;
+    move.h = move.w = diameter;
+    SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &move, 0x340, 0x100);
     GFX_AddPrim(3U, 0x18U);
     draw_tpage = 0x42D;
     if (GetGraphType() != 1) {
