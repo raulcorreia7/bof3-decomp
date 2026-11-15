@@ -1,8 +1,6 @@
 #include "area037_13.h"
 
 #ifdef NON_MATCHING
-#include "engine/game/00/game_00.h"
-
 NON_MATCHING void func_801F38DC(void) {
     s8* state;
 
