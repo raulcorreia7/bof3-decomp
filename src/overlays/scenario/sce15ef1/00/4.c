@@ -543,7 +543,53 @@ MATCH void func_801D2FD8(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D30AC(void) {
+    s32       point[3];
+    DVECTOR   screen;
+    MATRIX    matrix;
+    SceneDot* dot;
+    u16*      color;
+    s32       radius;
+    s32       row;
+    u8        column;
+    u8        slot;
+
+    Area_SetCameraMatrix(&matrix);
+    point[0] = ((Actor*)g_Task->unk_4C)->pos.x.fixed;
+    point[1] = ((Actor*)g_Task->unk_4C)->pos.y.fixed;
+    point[2] = ((Actor*)g_Task->unk_4C)->pos.z.fixed;
+    Area_ProjectPoint(point, &screen);
+    slot   = D_801D40AC;
+    radius = D_801D393C[slot].h >> 1;
+    row    = radius * g_Task->timer;
+    if ((u8)row < radius * (g_Task->timer + 1)) {
+        do {
+            column = 0;
+            while (column < D_801D393C[slot].w) {
+                color = MEM_PTR(u16, D_801D40B0);
+                if (*color != 0) {
+                    dot        = MEM_PTR(SceneDot, D_801D40B4);
+                    dot->color = *color;
+                    D_801D40A8 += 1;
+                    dot->x = screen.vx - (u16)D_801D393C[slot].x + column;
+                    dot->y = screen.vy - (u16)D_801D393C[slot].y + (u8)row;
+                    D_801D40B4 += sizeof(SceneDot);
+                }
+                D_801D40B0 += sizeof(u16);
+                column++;
+            }
+            row++;
+        } while ((u8)row < (D_801D393C[D_801D40AC].h >> 1) * (g_Task->timer + 1));
+    }
+    g_Task->timer += 1;
+    if (g_Task->timer == 2) {
+        g_Task->header.mode += 1;
+    }
+}
+#else
 INCLUDE_ASM(func_801D30AC);
+#endif
 
 INCLUDE_ASM(func_801D32F4);
 
