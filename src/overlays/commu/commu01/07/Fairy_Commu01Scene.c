@@ -134,11 +134,186 @@ MATCH void func_801D1630(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D1778(void) {
+    u16 x;
+    s16 y;
+    s32 buttons;
+    u8  old_cursor;
+    s32 room_offset;
+    u8* selection;
+    s32 index;
+
+    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        func_801D49C4();
+        D_801F294D = 0;
+    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        if (D_801D4C04[(s8)D_801D4E28] == 0xFF) {
+            func_801D4B58();
+        } else {
+            room_offset = ((s32)g_SceneEventSelection - 1) * 8;
+            if ((s8)D_801D4E28 == (s32)g_FairyRooms[room_offset] - 4) {
+                D_801D4E2C = g_FairyRooms[room_offset + 9];
+            } else {
+                D_801D4E2C = 0;
+            }
+            D_801D4E1C = D_801D4C04[(s8)D_801D4E28];
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
+            D_801F294D++;
+            D_801D4E0C = D_801D4C10[D_801D4E1C];
+        }
+    } else {
+        buttons    = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
+        old_cursor = D_801D4E28;
+        if (buttons & PADLup) {
+            D_801D4E28--;
+            if ((s8)D_801D4E28 < 0) {
+                D_801D4E28 = D_801455C3 - 1;
+            }
+        } else if (buttons & PADLdown) {
+            D_801D4E28++;
+            if ((s8)D_801D4E28 >= D_801455C3) {
+                D_801D4E28 = 0;
+            }
+        }
+        if (old_cursor != D_801D4E28) {
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        }
+        D_801D4E0C = D_801D4BB8[(s8)D_801D4E28];
+    }
+
+    func_801D3038();
+    selection = &g_SceneEventSelection;
+    func_801D36FC(*selection, 1);
+    func_801D4694(&x, &y, *selection, 0);
+    func_801D3984((s16)x, y, 1);
+    y = func_801D4474();
+
+    index = Commu01_RoomColumn(*selection);
+    func_801D4178((s16)(index * 52 + 66), y, 0);
+
+    index = Commu01_RoomColumn(*selection);
+    Menu_DrawCursorSprite((index * 52 + 68) & 0xFFFC, y + 4 + (s8)D_801D4E28 * 16, 0);
+}
+#else
 INCLUDE_ASM(func_801D1778);
+#endif
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D1A94(void) {
+    u16 x;
+    s16 y;
+    s32 buttons;
+    u8  old_row;
+    s32 room_offset;
+    u8* selection;
+    s32 index;
+
+    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        D_801D4E1C = 0xFF;
+        D_801F294D--;
+    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        if (D_801D4C18[D_801D4E1C].value == 0xFF) {
+            func_801D4B58();
+        } else {
+            room_offset = ((s32)g_SceneEventSelection - 1) * 8;
+            if ((s8)D_801D4E28 == (s32)g_FairyRooms[room_offset] - 4) {
+                D_801D4E30 = g_FairyRooms[room_offset + 10];
+            } else {
+                D_801D4E30 = 0;
+            }
+            D_801D4E20 = D_801D4C18[D_801D4E1C].value;
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
+            D_801D4E0C = 70;
+            D_801F294D++;
+        }
+    } else {
+        buttons = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
+        old_row = D_801D4E2C;
+        if (buttons & PADLup) {
+            D_801D4E2C--;
+            if ((s8)D_801D4E2C < 0) {
+                D_801D4E2C = D_801D4C18[D_801D4E1C].count - 1;
+            }
+        } else if (buttons & PADLdown) {
+            D_801D4E2C++;
+            if ((s8)D_801D4E2C >= D_801D4C18[D_801D4E1C].count) {
+                D_801D4E2C = 0;
+            }
+        }
+        if (old_row != D_801D4E2C) {
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        }
+    }
+
+    func_801D3038();
+    selection = &g_SceneEventSelection;
+    func_801D36FC(*selection, 1);
+    func_801D4694(&x, &y, *selection, 0);
+    func_801D3984((s16)x, y, 1);
+    y = func_801D4474();
+
+    index = Commu01_RoomColumn(*selection);
+    func_801D4178((s16)(index * 52 + 66), y, 1);
+    if (D_801D4E1C != 0xFF) {
+        y     = (u16)y + 12 + (s8)D_801D4E28 * 16;
+        index = Commu01_RoomColumn(*selection);
+        y     = func_801D44E0((s16)(index * 52 + 74), y, D_801D4E1C, 0);
+
+        index = Commu01_RoomColumn(*selection);
+        Menu_DrawCursorSprite((index * 52 + 76) & 0xFFFC, y + 4 + (s8)D_801D4E2C * 16, 0);
+    }
+}
+#else
 INCLUDE_ASM(func_801D1A94);
+#endif
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D1E48(void) {
+    u16 x;
+    s16 y;
+    u8* selection;
+    s32 index;
+
+    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        D_801D4E0C = 69;
+        D_801D4E20 = 0xFF;
+        D_801F294D--;
+    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        func_801D4B58();
+    } else if (INPUT_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft)) & (PADLright | PADLleft)) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        D_801D4E30 ^= 1;
+    }
+
+    func_801D3038();
+    selection = &g_SceneEventSelection;
+    func_801D36FC(*selection, 1);
+    func_801D4694(&x, &y, *selection, 0);
+    func_801D3984((s16)x, y, 1);
+    y = func_801D4474();
+
+    index = Commu01_RoomColumn(*selection);
+    func_801D4178((s16)(index * 52 + 66), y, 1);
+
+    y     = y + 12 + ((s8)D_801D4E28 << 4);
+    index = Commu01_RoomColumn(*selection);
+    y     = func_801D44E0((s16)(index * 52 + 74), y, D_801D4E1C, 1);
+    if (D_801D4E20 != 0xFF) {
+        y     = y + 12 + ((s8)D_801D4E28 << 4);
+        index = Commu01_RoomColumn(*selection);
+        y     = func_801D44E0((s16)(index * 52 + 82), y, D_801D4E20, 0);
+
+        index = Commu01_RoomColumn(*selection);
+        Menu_DrawCursorSprite((index * 52 + 84) & 0xFFFC, (u16)(y + 4 + ((s8)D_801D4E30 << 4)), 0);
+    }
+}
+#else
 INCLUDE_ASM(func_801D1E48);
+#endif
 
 INCLUDE_ASM(func_801D2110);
 
