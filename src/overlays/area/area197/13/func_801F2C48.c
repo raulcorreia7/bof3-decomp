@@ -1,7 +1,6 @@
 #include "area197_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F2C48(void) {
+MATCH void func_801F2C48(void) {
     Point3l from;
     Point3l to;
 
@@ -39,6 +38,3 @@ NON_MATCHING void func_801F2C48(void) {
     g_Task->header.step = 0;
     g_Task->header.mode++;
 }
-#else
-INCLUDE_ASM(func_801F2C48);
-#endif
