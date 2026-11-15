@@ -6,13 +6,11 @@
  */
 /* Deferred coordinate initialization leaves the saved-register difference at +0x04; pinned arguments change the frame size. */
 #ifdef NON_MATCHING
-NON_MATCHING void func_80159B9C(s32 x, s32 y, s32 w, s32 h) {
-    s16       left;
-    s16       top;
-    s32       edge_x;
-    s32       edge_y;
-    s32       right;
-    s32       bottom;
+NON_MATCHING void func_80159B9C(s16 x, s16 y, u8 w, u8 h) {
+    s16       edge_x;
+    s16       edge_y;
+    s16       right;
+    s16       bottom;
     s32       tile_w;
     s32       tile_h;
     u16       width;
@@ -22,16 +20,14 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, s32 w, s32 h) {
     LINE_F4*  line;
     RECT*     rect;
 
-    left = x;
-    top  = y;
     GFX_AddDrawMode(getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
-    width  = w & BYTE_MASK;
-    tile_w = width + 1;
-    setXY0(tile, left, top);
-    height  = h & BYTE_MASK;
-    tile_h  = height + 1;
+    width  = w;
+    tile_w = (s16)width + 1;
+    setXY0(tile, x, y);
+    height  = h;
+    tile_h  = (s16)height + 1;
     tile->w = tile_w;
     tile->h = tile_h;
     setRGB0(tile, 0, 0, 0);
@@ -54,7 +50,7 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, s32 w, s32 h) {
     setRGB1(poly, 255, 255, 255);
     setRGB2(poly, 255, 255, 255);
     setRGB3(poly, 255, 255, 255);
-    setXY4(poly, left, top, x + tile_w, top, left, y + tile_h, x + tile_w, y + tile_h);
+    setXY4(poly, x, y, x + tile_w, y, x, y + tile_h, x + tile_w, y + tile_h);
     setUV4(poly, 0, 0, w, 0, 0, h, w, h);
     SetSemiTrans(poly, 1);
     GFX_AddPrim(1, sizeof(POLY_GT4));
