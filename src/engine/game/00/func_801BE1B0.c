@@ -1,68 +1,66 @@
 #include "game_00.h"
 
+#define SP_VALUES ((u8*)&D_1F800004 - 4)
+#define SP_SLOTS  ((u8*)&D_1F800004)
+#define SP_TAKEN  ((u8*)&D_1F800008)
+
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801BE1B0(u32 index) {
-    Actor* row;
-    u8**   lists;
-    u8*    ids;
-    u8*    cursor;
-    u8*    values;
-    u8*    slots;
-    u8*    taken;
-    u32    command;
-    u32    kind;
-    u32    count;
-    u32    flags;
-    u32    slot;
-    s32    i;
-    s32    j;
-    /* FAKE: unused frame, 16 bytes. */
-    FAKE_STACK_PADS(u8, 16);
+    u8** lists;
+    u8*  ids;
+    u8   command;
+    s32  cmds;
+    u32  kind;
+    s32  count;
+    s32  size;
+    s32  i;
+    s32  j;
 
-    lists   = FIELD_PTR(u8*, GAME_TILE_RUN(g_GameAreaId), 0x14);
-    ids     = lists[index & BYTE_MASK];
-    command = *ids++;
+    lists   = FIELD(u8*, GAME_TILE_RUN(g_GameAreaId), 0x14);
+    ids     = lists[(u8)index];
+    cmds    = *ids++;
+    command = cmds;
     kind    = command & 0xC0;
-    count   = command & 0xF;
+    count   = cmds & 0xF;
     if (kind == 0) {
-        if (g_Game.party_size != count)
+        size = g_Game.party_size;
+        if (size != count)
             return 1;
-        values = SP_PTR(u8, 0x00);
-        slots  = SP_PTR(u8, 0x04);
-        taken  = SP_PTR(u8, 0x08);
-        for (i = 0; i < g_Game.party_size; i++)
-            taken[i] = g_PartyFieldOrder[i];
+        for (i = 0; i < size; i++)
+            SP_TAKEN[i] = g_PartyFieldOrder[i];
         for (i = 0; i < count; i++) {
-            if (ids[i] == 0x80) {
-                for (j = 0; j < g_Game.party_size && taken[j] == GAME_NONE; j++) {
-                }
-                if (j == g_Game.party_size)
-                    continue;
-            } else {
-                for (j = 0; j < g_Game.party_size; j++) {
-                    row = (Actor*)((u8*)g_Game.members + j * BATTLE_PARTY_STRIDE);
-                    if (row->unk_79 == ids[i])
+            if (ids[i] != 0x80) {
+                size = g_Game.party_size;
+                for (j = 0; j < size; j++) {
+                    if (g_Game.members[j].chr.character_id == ids[i]) {
+                        SP_VALUES[i] = (u8)g_Game.members[j].unk_2C.half;
+                        SP_SLOTS[i]  = j;
+                        SP_TAKEN[j]  = 0xFF;
                         break;
+                    }
                 }
                 if (j == g_Game.party_size)
                     return 1;
+            } else {
+                size = g_Game.party_size;
+                for (j = 0; j < size; j++) {
+                    if (SP_TAKEN[j] != GAME_NONE) {
+                        SP_VALUES[i] = (u8)g_Game.members[j].unk_2C.half;
+                        SP_SLOTS[i]  = j;
+                        SP_TAKEN[j]  = 0xFF;
+                        break;
+                    }
+                }
             }
-            row       = (Actor*)((u8*)g_Game.members + j * BATTLE_PARTY_STRIDE);
-            values[i] = (u8)row->unk_2C;
-            slots[i]  = (u8)j;
-            taken[j]  = 0xFF;
         }
-        for (i = 0; i < count; i++) {
-            row                  = (Actor*)((u8*)g_Game.members + slots[i] * BATTLE_PARTY_STRIDE);
-            g_PartyFieldOrder[i] = row->unk_79;
-        }
-        for (i = 0; i + 1 < count; i++) {
-            slot = slots[i];
-            if (i != slot) {
-                Party_SwapMembers(i, slot, 0);
-                for (j = i; j < count; j++) {
-                    if (slots[j] == i) {
-                        slots[j] = (u8)slot;
+        for (i = 0; i < (u8)count; i++)
+            g_PartyFieldOrder[i] = g_Game.members[SP_SLOTS[i]].chr.character_id;
+        for (i = 0; i < (u8)count - 1; i++) {
+            if (i != SP_SLOTS[i]) {
+                Party_SwapMembers((u8)i, SP_SLOTS[i], 0);
+                for (j = i; j < (u8)count; j++) {
+                    if (i == SP_SLOTS[j]) {
+                        SP_SLOTS[j] = SP_SLOTS[i];
                         break;
                     }
                 }
@@ -70,16 +68,15 @@ NON_MATCHING s32 func_801BE1B0(u32 index) {
         }
         ids += count;
     } else if (kind == 0x80) {
-        if (g_Game.party_size < count)
+        if (g_Game.party_size < (u32)count)
             return 1;
     }
-    cursor = ids;
+    func_801BE574(g_Game.party_size, ids);
     ids += count;
-    func_801BE574(g_Game.party_size, cursor);
-    flags = command & 0x30;
-    if (flags & 0x20)
+    command &= 0x30;
+    if (command & 0x20)
         g_Game.flags |= GAME_FLAG_SCROLL_LOCK;
-    if (flags == 0x30)
+    if (command == 0x30)
         Area_StartScrollRoute(*ids);
     g_Game.flags |= GAME_FLAG_SCRIPT_ACTIVE;
     g_Game.walk_flags |= AREA_WALK_MAP_LOADING;
