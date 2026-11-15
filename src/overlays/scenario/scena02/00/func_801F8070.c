@@ -1,7 +1,5 @@
 #include "scena02_00.h"
 #include "area/map.h"
-#include "area/spad.h"
-#include "overlays/area/Actor_SeedPartySlot.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -11,7 +9,7 @@ MATCH void func_801F8070(void) {
     switch (g_SceneState.step_05) {
         case 0:
             g_SceneState.step_05 = 1;
-            Game_RequestAreaChange(15, 0x2C0000, 0x430000, AREA_ENTRY_MAP_LOADING);
+            Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR_AREA, TO_COORD(44), TO_COORD(67), AREA_ENTRY_MAP_LOADING);
             break;
         case 1:
             if (g_ScriptVars[0] == 8) {
@@ -38,7 +36,7 @@ MATCH void func_801F8070(void) {
                 SYS_SetFlag(g_SceneFlags, 5);
                 SYS_SetFlag(g_SceneFlags, 6);
                 g_GameFlags ^= 0x80;
-                Game_RequestAreaChange(26, 0x310000, 0x4B0000, AREA_ENTRY_MAP_LOADING | FACING_DOWN);
+                Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR_COURTYARD, TO_COORD(49), TO_COORD(75), AREA_ENTRY_MAP_LOADING | FACING_DOWN);
                 g_GameRequestKind = 1;
             }
             break;
@@ -56,7 +54,7 @@ MATCH void func_801F8070(void) {
                 SYS_SetFlag(g_SceneFlags, 5);
                 SYS_SetFlag(g_SceneFlags, 6);
                 g_GameFlags ^= 0x80;
-                Game_RequestAreaChange(26, 0x310000, 0x4B0000, AREA_ENTRY_MAP_LOADING | FACING_DOWN);
+                Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR_COURTYARD, TO_COORD(49), TO_COORD(75), AREA_ENTRY_MAP_LOADING | FACING_DOWN);
                 g_GameRequestKind = 1;
             }
             break;

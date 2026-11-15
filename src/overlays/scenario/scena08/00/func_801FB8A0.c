@@ -47,7 +47,7 @@ MATCH void func_801FB8A0(void) {
                 g_SceneState.state_04 = 0;
                 g_SceneState.step_05  = 0;
                 Game_ClearScriptActive();
-                Game_RequestAreaChange(1, 0x2C0000, 0xE8000, 3);
+                Game_RequestAreaChange(AREA_ID_DAUNA_MINE_ADULT, TO_COORD(44), TO_COORD(14) + COORD_HALF, FACING_RIGHT);
                 g_GameFlags &= ~GAME_FLAG_SCROLL_LOCK;
             }
             break;

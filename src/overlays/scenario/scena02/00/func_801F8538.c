@@ -1,7 +1,5 @@
 #include "scena02_00.h"
 #include "area/map.h"
-#include "area/spad.h"
-#include "overlays/area/Actor_SeedPartySlot.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -33,7 +31,7 @@ MATCH void func_801F8538(void) {
                 D_80146866           = 0;
                 g_ScriptVars[0]      = 0;
                 g_SceneState.step_05 = 4;
-                Game_RequestAreaChange(15, 0x260000, 0x190000, AREA_ENTRY_MAP_LOADING | FACING_DOWN_LEFT);
+                Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR_AREA, TO_COORD(38), TO_COORD(25), AREA_ENTRY_MAP_LOADING | FACING_DOWN_LEFT);
                 g_GamePrevSelection = 0x11;
                 g_GameFlags |= 0x80;
             }

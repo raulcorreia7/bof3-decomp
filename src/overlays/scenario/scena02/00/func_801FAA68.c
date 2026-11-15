@@ -1,7 +1,5 @@
 #include "scena02_00.h"
 #include "area/map.h"
-#include "area/spad.h"
-#include "overlays/area/Actor_SeedPartySlot.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -34,7 +32,7 @@ MATCH void func_801FAA68(void) {
             g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
             SND_StopSequence(0, 0);
             D_80146866 = 1;
-            Game_RequestAreaChange(13, 0x60000, 0x540000, AREA_ENTRY_MAP_LOADING | FACING_RIGHT);
+            Game_RequestAreaChange(AREA_ID_FARM, TO_COORD(6), TO_COORD(84), AREA_ENTRY_MAP_LOADING | FACING_RIGHT);
             break;
         case 6:
             if (g_ScriptVars[0] == 0x11) {
