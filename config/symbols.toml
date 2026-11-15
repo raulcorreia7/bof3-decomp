@@ -6710,7 +6710,7 @@ g_AreaTileRemainderY = { addr = 0x80149338, type = "s16", source = "Y remainder 
 g_AreaSceneMode = { addr = 0x8014933B, type = "u8", source = "Mode of the area scene." }
 g_AreaDrawMode = { addr = 0x8014933E, type = "u8", source = "Draw mode of the area." }
 g_AreaHeightOffsetEnabled = { addr = 0x80149340, source = "Enables the height offset of the area." }
-s__LOGO_LOGO_EXE_1_80149800 = { addr = 0x80149800, size = 0x14, source = "SYS_StartLogo passes this LOGO executable path to SYS_LoadExec" }
+g_LogoExePath = { addr = 0x80149800, size = 0x14, source = "SYS_StartLogo passes this LOGO executable path to SYS_LoadExec" }
 D_80149814 = { addr = 0x80149814, size = 0x184, source = "The 51 name cells of the executable's export strings, starting at 0x80149814; D_8017F470 holds their pointers." }
 jtbl_80149998 = { addr = 0x80149998, type = "Callback", source = "The switch table of Area_BuildClut: the jump targets of its jr dispatch." }
 D_80149998 = { addr = 0x80149998, size = 0x178, alias = true, source = "View of a record member; the row names the address the link reads, not a second object." }
@@ -7620,8 +7620,8 @@ SysDeqIntRP = { addr = 0x8017F3AC, type = "func", source = "LIBAPI.LIB 16 bytes"
 EnablePAD = { addr = 0x8017F3BC, type = "func", size = 0x14, source = "LIBAPI patch.o EnablePAD - tail-dispatches the saved BIOS PAD entry" }
 DesablePAD = { addr = 0x8017F3D0, type = "func", source = "LIBAPI patch.o DesablePAD, words equal retail" }
 _patch_pad = { addr = 0x8017F3E4, type = "func", size = 0x90, source = "PsyQ LIBAPI library routine." }
-PTR_s_EXCEPTION_8017f504 = { addr = 0x8017F504, source = "The EXCEPTION text pointer SYS_ShowException draws as its header." }
-PTR_s_INTERRRUPT_8017f508 = { addr = 0x8017F508, source = "The INTERRRUPT text cells SYS_ShowException indexes by the exception code." }
+g_ExceptionTitle = { addr = 0x8017F504, source = "The EXCEPTION text pointer SYS_ShowException draws as its header." }
+g_ExceptionCauseNames = { addr = 0x8017F508, source = "The INTERRRUPT text cells SYS_ShowException indexes by the exception code." }
 g_SpriteSizes = { addr = 0x8017F53C, source = "Sprite cell sizes by shape." }
 g_SpriteCellRotations = { addr = 0x8017F55C, source = "Sprite cell rotations by shape." }
 g_NumberRowShades = { addr = 0x8017F580, source = "Shades of the number font rows." }
