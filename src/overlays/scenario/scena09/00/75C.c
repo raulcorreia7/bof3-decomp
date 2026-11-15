@@ -79,42 +79,7 @@ MATCH s32 func_801F75BC(void) {
     return alive;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F76D0(void) {
-    SceneSpark* row;
-    SceneSpark* spark;
-    u8          i;
-    FAKE_STACK_PADS(u8, 32); /* FAKE: retail reserves 32 unused stack bytes. */
-
-    row = (SceneSpark*)(MEM_PTR(u8, AREA_WORK + 0x800) + g_Task->unk_06 * 0x500);
-    for (spark = row, i = 0; i < SCENE_SPARK_COUNT; i++, row++, spark++) {
-        if (g_Task->unk_06 == 0) {
-            spark->pos.x = TO_COORD(18) + ((rand() & 0x1FF) << 8);
-            spark->pos.y = TO_COORD_HALF(46) + ((rand() & 0x1FF) << 8);
-            spark->pos.z = TO_COORD(2112) - ((spark->pos.x - TO_COORD(18)) << 7);
-            spark->vx    = (spark->pos.x - TO_COORD(19)) >> 4;
-            spark->vy    = (spark->pos.y - TO_COORD_HALF(47)) >> 4;
-            spark->vz    = -(rand() & 0xFF) << 5;
-            spark->vx -= 0x800;
-        } else {
-            spark->pos.x = TO_COORD_HALF(7) + ((rand() & 0x1FF) << 8);
-            spark->pos.y = TO_COORD_HALF(49) + ((rand() & 0x1FF) << 8);
-            spark->pos.z = TO_COORD(2112) - ((spark->pos.y - TO_COORD_HALF(49)) << 7);
-            spark->vx    = (spark->pos.x - TO_COORD_HALF(8)) >> 4;
-            spark->vy    = (spark->pos.y - TO_COORD_HALF(50)) >> 4;
-            spark->vz    = -(rand() & 0xFF) << 5;
-            spark->vy    = -0x800;
-        }
-        spark->active = 1;
-        spark->unk_01 = 0;
-        spark->life   = 0x18;
-        spark->shade  = 0x60;
-        spark->frame  = rand() & 7;
-    }
-}
-#else
 INCLUDE_ASM(func_801F76D0);
-#endif
 
 MATCH void func_801F78D0(void) {
     SYS_DISPATCH_BYTE(D_801FE3E0, D_80146872);
