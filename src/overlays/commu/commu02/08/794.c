@@ -925,6 +925,8 @@ MATCH void func_801D4158(void) {
 NON_MATCHING void func_801D42B4(void) {
     u8* state;
     s32 selected;
+    /* FAKE: the retail frame has 8 bytes that nothing in the body uses. */
+    FAKE_STACK_PADS(u8, 8);
 
     state = &g_GameStateIndex;
     if (*state != 2) {
@@ -2007,12 +2009,12 @@ INCLUDE_ASM(func_801D830C);
 
 INCLUDE_ASM(func_801D851C);
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D875C(s16 x, s16 y, s32 index) {
+MATCH void func_801D875C(s16 x, s16 y, s32 index) {
     s32   tpage;
     SPRT* sprt;
     u8    slot;
 
+    slot = index;
     if (GetGraphType() == 1 || GetGraphType() == 2) {
         tpage = 0x2E;
     } else {
@@ -2022,22 +2024,18 @@ NON_MATCHING void func_801D875C(s16 x, s16 y, s32 index) {
     GFX_AddPrim(1, sizeof(DR_MODE));
     sprt = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprt);
-    slot       = index;
     sprt->x0   = x;
     sprt->y0   = y;
     sprt->u0   = D_801DAE88[slot][0];
     sprt->v0   = D_801DAE88[slot][1];
     sprt->w    = D_801DAE88[slot][2];
     sprt->h    = D_801DAE88[slot][3];
+    sprt->clut = ((D_801DAE88[slot][5] + 0x1E0) << 6) | (D_801DAE88[slot][4] >> 4);
     sprt->r0   = 0x80;
     sprt->g0   = 0x80;
     sprt->b0   = 0x80;
-    sprt->clut = (D_801DAE88[slot][4] >> 4) | ((D_801DAE88[slot][5] + 0x1E0) << 6);
     GFX_AddPrim(1, sizeof(SPRT));
 }
-#else
-INCLUDE_ASM(func_801D875C);
-#endif
 
 MATCH void func_801D88A4(s32 x, s32 y, s32 bright) {
     POLY_F3* poly;
