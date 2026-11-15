@@ -1,6 +1,6 @@
 #include "slus.h"
 
-const char s__LOGO_LOGO_EXE_1_80149800[0x14] = "\\LOGO\\LOGO.EXE;1\0\0\0\0";
+const char g_LogoExePath[0x14] = "\\LOGO\\LOGO.EXE;1\0\0\0\0";
 
 /* Exception monitor labels and diagnostics. */
 const char D_80149814[0x184] =
