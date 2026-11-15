@@ -398,7 +398,28 @@ MATCH void func_801F0568(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F05FC(void) {
+    g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    g_Task->unk_5C      = 1;
+    g_Task->unk_2B      = 1;
+    g_Task->unk_5D      = -0x80;
+    g_Task->unk_5E      = -0x80;
+    g_Task->unk_5F      = -0x80;
+    g_Task->pos.x.fixed = g_AreaScrollTargetX;
+    g_Task->pos.y.fixed = g_AreaScrollTargetY;
+    g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+    g_Task->unk_48      = 2;
+    g_Task->scale.x     = 0x18000;
+    g_Task->scale.y     = 0x28000;
+    g_Task->unk_27      = g_BattleEffectBattler->unk_27;
+    SND_QueueSelectionEffect(0x100);
+    g_Task->unk_09 = 0x20;
+    g_Task->header.step += 1;
+}
+#else
 INCLUDE_ASM(func_801F05FC);
+#endif
 
 MATCH void func_801F0710(void) {
     u8 count;

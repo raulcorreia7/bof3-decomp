@@ -44,7 +44,34 @@ MATCH void func_801EEC80(void) {
     SND_QueueSelectionEffect(0x100);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EEDFC(void) {
+    u8           slot;
+    PartyMember* work;
+    u32          type;
+
+    if (g_Task->param.unk_0B != 0) {
+        return;
+    }
+    if (func_800AED5C(3, g_Battle.target_selector) & BYTE_MASK) {
+        slot = Battle_AllocEffect(1, 72) & BYTE_MASK;
+        work = g_Task;
+        type = 3;
+    } else {
+        slot = Battle_AllocEffect(1, 72) & BYTE_MASK;
+        work = g_Task;
+        type = 8;
+    }
+    D_801EC334[slot].value        = type;
+    D_801EC339[slot].value        = 1;
+    D_801EC33A[slot].value        = 0;
+    D_801EC3A4[slot].target.party = work;
+    g_Task->param.unk_0B += 1;
+    g_Task->header.mode += 1;
+}
+#else
 INCLUDE_ASM(func_801EEDFC);
+#endif
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
