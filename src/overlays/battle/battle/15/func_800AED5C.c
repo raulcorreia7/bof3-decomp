@@ -6,7 +6,7 @@ typedef struct BattleRecordHead {
 } BattleRecordHead;
 
 #ifdef NON_MATCHING
-NON_MATCHING u8 func_800AED5C(s32 arg0, u32 battler_index) {
+NON_MATCHING u8 func_800AED5C(s32 arg0, s32 battler_index) {
     u8*         dst;
     u8*         src;
     u32         index;
