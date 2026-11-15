@@ -146,8 +146,7 @@ MATCH void func_801EF1DC(void) {
     g_Task->header.step++;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF358(void) {
+MATCH void func_801EF358(void) {
     PartyMember* setup_task;
     PartyMember* position_task;
     PartyMember* timer_task;
@@ -169,18 +168,16 @@ NON_MATCHING void func_801EF358(void) {
         angle = position_task->unk_20 - ANGLE_45;
     }
     position_task->unk_20 = angle & ANGLE_MASK;
-    timer_task            = g_Task;
-    timer                 = timer_task->timer - 1;
-    timer_task->timer     = timer;
+    FAKE_BARRIER(); /* FAKE: keeps the timer load after the angle store. */
+    timer_task        = g_Task;
+    timer             = timer_task->timer - 1;
+    timer_task->timer = timer;
     if (timer == 0) {
         battler = g_BattleEffectBattler;
         battler->param.unk_0B -= 1;
         func_801E5988();
     }
 }
-#else
-INCLUDE_ASM(func_801EF358);
-#endif
 
 MATCH void func_801EF434(void) {
     SVECTOR pos;

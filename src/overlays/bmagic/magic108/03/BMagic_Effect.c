@@ -116,46 +116,53 @@ MATCH void func_801EF130(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF180(void) {
+MATCH void func_801EF180(void) {
     SVECTOR pos;
     SVECTOR rot;
     MATRIX  matrix;
     long    flags;
-    u8      timer;
 
     PushMatrix();
     switch (g_Task->facing) {
-        case 0:
+        case 0: {
+            u8 timer;
+
             timer  = g_Task->timer;
             rot.vy = 0;
             rot.vz = 0x800;
             rot.vx = (~timer & 0x1F) << 7;
             break;
-        case 1:
+        }
+        case 1: {
+            u8 timer;
+
             rot.vx = 0;
             timer  = g_Task->timer;
             rot.vz = 0xC00;
             rot.vy = (~timer & 0x1F) << 7;
             break;
-        case 2:
+        }
+        case 2: {
+            u8 timer;
+
             timer  = g_Task->timer;
             rot.vy = 0;
             rot.vz = 0;
             rot.vx = (~timer & 0x1F) << 7;
             break;
-        case 3:
+        }
+        case 3: {
+            u8 timer;
+
             rot.vx = 0;
             timer  = g_Task->timer;
             rot.vz = 0x400;
             rot.vy = (~timer & 0x1F) << 7;
             break;
+        }
     }
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }
-#else
-INCLUDE_ASM(func_801EF180);
-#endif
 
 /* Draws a fan of projected LINE_F2 rays, one per count up to the effect counter 0x09: each ray swings by an
  * thirty-second of a turn more and its x falls with the timer; in mode 5 the rays turn semi-transparent and fade. */
