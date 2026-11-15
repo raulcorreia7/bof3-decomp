@@ -4110,6 +4110,7 @@ Scene_RemoveMomoPeco = { addr = 0x801FE38C, type = "func", source = "removes Mom
 g_SceneActorDispatch = { addr = 0x801FE42C, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena07/00"]
+D_800E4C24 = { addr = 0x800E4C24, type = "Scena07BurstBuffer", size = 0x520, source = "The burst buffer the burst actors draw and turn." }
 jtbl_801F6C04 = { addr = 0x801F6C04, type = "Callback", source = "The switch table of func_801FABD8: the jump targets of its jr dispatch." }
 jtbl_801F6C7C = { addr = 0x801F6C7C, type = "Callback", source = "The switch table of func_801FB6DC: the jump targets of its jr dispatch." }
 jtbl_801F6C9C = { addr = 0x801F6C9C, type = "Callback", source = "The switch table of func_801FB914: the jump targets of its jr dispatch." }
@@ -4153,6 +4154,7 @@ Scene_SetPartyRyuAdultGarrNinaAdult = { addr = 0x801FE7AC, type = "func", source
 Party_RemoveGarr = { addr = 0x801FE874, type = "func", source = "Removes Garr from the party." }
 g_SceneEntityDispatch = { addr = 0x801FE894, source = "scenario entity dispatch table" }
 g_SceneActorDispatch = { addr = 0x801FE9C0, source = "scenario actor dispatch table" }
+D_801FEA6C = { addr = 0x801FEA6C, type = "u8", size = 0x1, source = "A byte the scene handlers store and reload." }
 
 ["emi/scenario/scena09/00"]
 jtbl_801F6C04 = { addr = 0x801F6C04, type = "Callback", source = "The switch table of func_801F7920: the jump targets of its jr dispatch." }
@@ -4309,6 +4311,7 @@ Scene_JoinRei = { addr = 0x801FBE98, type = "func", source = "joins Rei to the p
 Scene_JoinGarr = { addr = 0x801FBEC0, type = "func", source = "joins Garr to the party and restages the party palettes" }
 g_SceneEntityDispatch = { addr = 0x801FBEF0, source = "scenario entity dispatch table" }
 g_SceneActorDispatch = { addr = 0x801FBFB8, source = "scenario actor dispatch table" }
+D_801FBFEC = { addr = 0x801FBFEC, type = "u8", size = 0x1, source = "A byte the scene handlers store and reload." }
 
 ["emi/scenario/scena14/00"]
 jtbl_801F6C04 = { addr = 0x801F6C04, type = "Callback", source = "The switch table of func_801F7BA0: the jump targets of its jr dispatch." }

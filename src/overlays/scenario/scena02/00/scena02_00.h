@@ -24,6 +24,8 @@ extern u8        D_801FE26C[];
 extern Callback  D_801FE288[];
 extern Callback  D_801FE294[];
 extern SceneFunc D_801FE304[66];
+extern Callback  jtbl_801F704C[18];
+extern Callback  jtbl_801F6CF4[6];
 
 /* The party-in-range triggers of 5A4.c: while D_80143F03 is 0, start func_801FCB54 when the party position (g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed) lies inside a window around g_Actors[actor_id]. Each macro is one window shape; the members differ only in the distances. */
 
