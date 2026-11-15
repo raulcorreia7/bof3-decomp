@@ -37,7 +37,7 @@ MATCH void func_801EEC70(void) {
         counter->param.unk_0B = count + 1;
         odd += 2;
     } while (i < 8);
-    SND_QueueSelectionEffect(0x100);
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
 }
 
 MATCH void func_801EED9C(void) {
