@@ -74,6 +74,10 @@ ASSERT_OFFSET(ScenePathPoint, z, 0x08);
 ASSERT_SIZE(ScenePathWork, 0x90);
 ASSERT_OFFSET(ScenePathWork, points, 0x10);
 
+/* The eight 16-byte path points the scene's quad draws from: func_801F7084 stamps the box's eight
+ * corners into D_801FA240 and func_801F732C draws them. */
+extern ScenePathPoint D_801FA240[];
+
 /* The five 0x20-byte segment keys func_801F75BC draws: a start and an end 16.16 point with a spare
  * word after each. func_801F747C seeds the start x through the D_801FA2C0 pointer and every other
  * word through its own absolute name; retail does the same, so a record view would not reproduce

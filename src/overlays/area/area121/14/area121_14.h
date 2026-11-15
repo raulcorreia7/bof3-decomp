@@ -35,6 +35,9 @@ extern u8       g_FlockScript[4][2];
 extern Callback D_801F6894[];
 extern Callback D_801F689C[];
 
+/* The two 2-byte cells of the torch gauge bar texture. */
+extern TorchGaugeCells D_801F2C04;
+
 /* func_801F35D0 */
 void Area_Update(void);
 void func_801F5380(void);

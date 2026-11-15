@@ -18,9 +18,9 @@ extern u16 D_80146876;
 
 /* One 0x28-byte row of the area work window as the world03 sprites read it:
  * area125 writes the size at +0x04 and the projected origin at +0x08
- * (func_801F31B0), area134 draws the same cells (func_801F46EC). The
- * AreaSprite in AreaSprite.h is another view of the window, used by world00
- * to world02: it names +0x04 as its origin. */
+ * (func_801F31B0), area134 claims a free row (func_801F48B0) and draws the
+ * same cells (func_801F46EC). The AreaSprite in AreaSprite.h is another view
+ * of the window, used by world00 to world02: it names +0x04 as its origin. */
 typedef struct AreaQuadSprite {
     u8      unk_00[3];
     u8      flags_03;  /* the shade of the sprite */

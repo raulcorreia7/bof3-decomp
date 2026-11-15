@@ -1,14 +1,12 @@
 #include "shop_00.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801E032C(void) {
+MATCH void func_801E032C(void) {
     s32 input;
     s32 row;
     u8* cell;
     u8* entry;
     u8* cursor;
     u8* index;
-    u8* step;
     u8  previous;
     s8  next;
 
@@ -45,10 +43,12 @@ NON_MATCHING void func_801E032C(void) {
     D_801483A8 = 0xFF;
     cell       = (u8*)&g_Characters[D_801483A6] + DECOMP_OFFSETOF(Character, abilities.skill) + *index;
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        u8* step;
+
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
-        step       = &D_80148652;
         D_801483A8 = *index;
-        *step += 1;
+        step       = &D_80148652;
+        (*step)++;
         return;
     }
     if (g_InputPressed & PADRleft) {
@@ -62,15 +62,15 @@ NON_MATCHING void func_801E032C(void) {
         return;
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+        u8* step;
+
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         D_8014837B           = 2;
         D_8014839F           = 4;
         D_801483A8           = 0xFF;
         g_BattleMessageState = 1;
-        D_80148652 -= 1;
+        step                 = &D_80148652;
+        (*step)--;
     }
 }
-#else
-INCLUDE_ASM(func_801E032C);
-#endif

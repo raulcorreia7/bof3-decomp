@@ -21,6 +21,6 @@ void Scene_ClaimScanBar(void);
 u8   Scene_UpdateScanBars(s32 y);
 
 void func_801D1218(WorldPos* pos, s16 y, s32 mode);
-void func_801D17A0(s32 x, s32 y, s32 mode);
+void func_801D17A0(s16 half_width, s16 half_height, u8 shade);
 
 #endif
