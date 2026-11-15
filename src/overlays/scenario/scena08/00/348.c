@@ -580,7 +580,84 @@ MATCH void func_801F8D4C(FallingSpark* spark) {
     }
 }
 
+typedef struct ChainNode {
+    s32 pos[3];
+    u8  pad_0C[4];
+    s16 screen[2];
+    s16 angle;
+    s16 size;
+} ChainNode;
+
+typedef struct Chain {
+    ChainNode node[32];
+    u16       dir[31];
+    u16       size;
+} Chain;
+
+u32 MATH_AverageAngle(u16 a, u16 b);
+
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F8D98(void* table) {
+    Chain* chain;
+    s8     i;
+    s8     j;
+    s32    prev;
+    u16    size[2];
+    u16    scale[2];
+    MATRIX camera;
+
+    chain = table;
+    for (i = 30; i >= 0; i--) {
+        chain->node[i + 1] = chain->node[i];
+    }
+    chain->node[0].pos[0] = g_Task->pos.x.fixed;
+    chain->node[0].pos[1] = g_Task->pos.y.fixed;
+    chain->node[0].pos[2] = g_Task->pos.z.fixed;
+    Area_SetCameraMatrix(&camera);
+    for (i = 0; i < 32; i++) {
+        Area_ProjectPoint(chain->node[i].pos, (DVECTOR*)chain->node[i].screen);
+        size[0] = size[1] = chain->size;
+        Game_ProjectWorldPoint(&chain->node[i], size, scale);
+        chain->node[i].size = scale[0];
+    }
+    for (i = 0; i < 31; i++) {
+        scale[0] = chain->node[i].screen[0] - chain->node[i + 1].screen[0];
+        scale[1] = chain->node[i].screen[1] - chain->node[i + 1].screen[1];
+        if ((s16)scale[0] != 0 || (s16)scale[1] != 0) {
+            chain->dir[i] = ratan2((s16)scale[1], (s16)scale[0]);
+        } else {
+            chain->dir[i] = 0x1000;
+        }
+    }
+    for (i = 0; i < 31; i++) {
+        if (chain->dir[i] != 0x1000) {
+            continue;
+        }
+        for (j = i + 1; j < 31; j++) {
+            if (chain->dir[j] != 0x1000) {
+                chain->dir[i] = chain->dir[j];
+                goto next;
+            }
+        }
+        for (j = 0; j < i; j++) {
+            if (chain->dir[j] != 0x1000) {
+                chain->dir[i] = chain->dir[j];
+                goto next;
+            }
+        }
+        chain->dir[j] = 0;
+    next:;
+    }
+    chain->node[0].angle = chain->dir[0];
+    for (i = 1; i < 31; i++) {
+        prev                 = i - 1;
+        chain->node[i].angle = MATH_AverageAngle(chain->dir[prev], chain->dir[i]);
+    }
+    chain->node[31].angle = chain->dir[30];
+}
+#else
 INCLUDE_ASM(func_801F8D98);
+#endif
 
 INCLUDE_ASM(func_801F90C8);
 
