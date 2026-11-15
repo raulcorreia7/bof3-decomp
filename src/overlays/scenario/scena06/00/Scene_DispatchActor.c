@@ -171,7 +171,7 @@ MATCH s8 func_801FD3BC(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta
     s32 absY;
     u8  span;
 
-    size = g_RouteSpeedScale[((u8*)entry)[4]];
+    size = g_RouteSpeedScale[((Actor*)entry)->unk_04];
     if (size == 0) {
         return 0;
     }
