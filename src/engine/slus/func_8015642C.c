@@ -46,10 +46,10 @@ NON_MATCHING void func_8015642C(u8* obj, s32 x, s32 y) {
                 p = &prim[j];
                 SetPolyFT4(p);
                 SetShadeTex(p, 0);
-                p->x2 = screen[0];
-                p->y2 = screen[1];
-                p->x3 = screen[2];
-                p->y3 = screen[3];
+                p->x2 = D_1F800034[0];
+                p->y2 = D_1F800034[1];
+                p->x3 = D_1F800034[2];
+                p->y3 = D_1F800034[3];
                 value = ((u8*)g_SpriteCellLeftU)[index];
                 p->u0 = p->u2 = value;
                 value = ((u8*)g_SpriteCellRightU)[index];
