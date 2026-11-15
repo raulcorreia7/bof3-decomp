@@ -5,7 +5,61 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801FBA70);
+MATCH void func_801FBA70(void) {
+    u8            index;
+    SpawnedActor* actor;
+
+    switch (g_SceneState.step_05) {
+        case 0:
+            Game_RequestAreaChange(AREA_ID_DAUNA_MINE_WORKER, TO_COORD(0x4E), TO_COORD(0x34), AREA_ENTRY_MAP_LOADING | FACING_DOWN);
+            g_GamePrevSelection  = 0xFF;
+            g_SceneState.step_05 = 100;
+            break;
+        case 100:
+            if (g_GameAreaId == AREA_ID_DAUNA_MINE_WORKER) {
+                index = func_8019601C();
+                if (index != 0xFF) {
+                    actor               = &g_SpawnedActors[index];
+                    actor->header.flags = 1;
+                    actor->type         = 0x57;
+                }
+                g_SceneState.step_05 = 1;
+            }
+            break;
+        case 1:
+            if (g_ScriptVars[0] == 0x1) {
+                Game_RequestAreaChange(AREA_ID_CAMP_BEFORE_ANGEL_TOWER, TO_COORD_HALF(0x3D), TO_COORD_HALF(0x0D), AREA_ENTRY_MAP_LOADING | FACING_RIGHT);
+                g_GameRequestKind    = 0xFF;
+                g_GamePrevSelection  = 0xFF;
+                g_SceneState.step_05 = 2;
+            }
+            /* fallthrough */
+        case 2:
+            if (g_ScriptVars[0] == 0x2) {
+                Game_RequestAreaChange(AREA_ID_CAMP_BEFORE_ANGEL_TOWER, TO_COORD_HALF(0x13), TO_COORD(0x18), AREA_ENTRY_MAP_LOADING | FACING_DOWN_RIGHT);
+                g_SceneState.step_05 = 3;
+            }
+            break;
+        case 3:
+            if (g_ScriptVars[0] == 0x6) {
+                g_AreaSceneMode      = 1;
+                g_SceneState.step_05 = 4;
+            }
+            break;
+        case 4:
+            if (g_ScriptVars[0] == 0x8) {
+                func_801C16B8();
+                SYS_SetFlag(g_SceneFlags, 7);
+                Game_RequestAreaChange(AREA_ID_DAUNA_WORLD_MAP, TO_COORD(0x1B), TO_COORD(0x21), FACING_RIGHT);
+                g_GameFlags &= ~GAME_FLAG_SCROLL_LOCK;
+                Game_ClearScriptActive();
+                g_ScriptVars[0]       = 0;
+                g_SceneState.state_04 = 0;
+                g_SceneState.step_05  = 0;
+            }
+            break;
+    }
+}
 
 INCLUDE_ASM(func_801FBCA4);
 
