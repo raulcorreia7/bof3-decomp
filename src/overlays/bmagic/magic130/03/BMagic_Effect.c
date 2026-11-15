@@ -59,7 +59,45 @@ MATCH void func_801EEF18(void) {
     g_Scripts = AREA_SCRIPT_TABLE;
 }
 
-INCLUDE_ASM(func_801EEFB4);
+MATCH void func_801EEFB4(void) {
+    PartyMember* work;
+    PartyMember* next;
+    u8           flag;
+    s8           shade;
+
+    flag              = 1;
+    shade             = -0x80;
+    work              = g_Task;
+    work->unk_2E.half = 0xDC;
+    work->unk_25      = 0x1D;
+    next              = g_Task;
+    work->unk_30.half = 0x6E;
+    next->unk_26      = 0;
+    g_Task->unk_27    = 0x1A;
+    g_Task->unk_28    = flag;
+    g_Task->unk_24    = 0x80;
+    {
+        PartyMember* task;
+
+        task          = g_Task;
+        task->unk_48  = 0;
+        task->scale.x = 0x10000;
+        task->scale.y = 0x10000;
+    }
+    g_Task->header.flags |= 0x20;
+    g_Task->unk_5C      = flag;
+    g_Task->unk_5D      = shade;
+    g_Task->unk_5E      = shade;
+    g_Task->unk_5F      = shade;
+    g_Task->unk_2A      = 0;
+    g_Task->unk_29      = 3;
+    g_Task->unk_2C.half = 0;
+    g_Task->unk_2B      = flag;
+    Actor_SelectScript(0);
+    g_Task->unk_09 = 0x3C;
+    g_Task->timer  = 0xFF;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EF10C(void) {
     g_Task->unk_5D += 8;
