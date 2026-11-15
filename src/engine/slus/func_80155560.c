@@ -1,151 +1,141 @@
 #include "engine/slus/slus.h"
 
-/* Lifted draft; semantics are unverified. */
+/* One texture corner of a drawn quad: the u and v to store, or the whole pair to swap. Retail
+ * keeps four of them eight bytes apart at sp+0x18, one cell above the array it declares. */
+typedef union AreaTileCorner {
+    s32 word;
+
+    struct {
+        u16 u;
+        u16 v;
+    } at;
+
+    RECT rect;
+} AreaTileCorner;
+
+/* The bytes of a tile table rectangle (include/area/area.h describes the record as AreaTileRect):
+ * the size pair first, then the page corner as the low byte and a signed high byte. Retail reads
+ * the halfword with `lh` before masking it, so v is a signed 16-bit view here. */
+typedef union AreaTileRectWord {
+    struct {
+        u8  height;
+        u8  width;
+        s16 v;
+    } box;
+
+    struct {
+        u8 pad_00[3];
+        s8 u;
+    } corner;
+} AreaTileRectWord;
+
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_80155560(u32 part_word, void* prim, s32 mode) {
-    s16       u0, v0, u1, v1, u2, v2, u3, v3;
-    s16       tmp0;
-    s16       tmp1;
-    s16       tmp2;
-    s16       val0;
-    s16       val1;
-    s32       tmp3;
-    s32       tmp4;
-    s32       tmp5;
-    s32       tmp6;
-    s32       tmp7;
-    s32       tmp8;
-    s32       valid;
-    s32       val3;
-    s32       val4;
-    s32       val5;
-    s32       val6;
-    s8        tmp9;
-    s8        val7;
-    u16       tmp10;
-    u16       tmp11;
-    u16       tmp12;
-    u16       tmp13;
-    u32       val8;
-    s32       val9;
-    void*     val10;
-    s32       val11;
-    void*     tmp14;
-    void*     tmp15;
-    void*     tmp16;
-    POLY_FT4* poly;
+    AreaTileCorner    uv[5];
+    AreaTileRectWord* rect;
+    POLY_FT4*         poly;
+    s32               word = part_word;
+    s32               flag;
+    s32               sel;
+    s32               pal;
+    s32               clut;
+    s32               tpage;
+    s32               swap;
+    s32               i;
+    s32               u;
+    s32               v;
+    u8                lum;
 
-    val8  = part_word;
-    val10 = prim;
-    val11 = mode;
-    valid = (s32)val8 >> 0x1F;
-    valid = valid == 0;
-    val9  = ((s32)val8 >> 0x1C) & 3;
-    if (val8 & 0xF00) {
-        if (val8 & 0x800) {
-            tmp14 = (*((val9 * 4) + &g_AreaMapBundle.tile_table_offsets_04[0][1]) * 4) + (((val8 & 0x7FF) * 8) + (MAP_BUNDLE_BASE + 0x00));
-            u0    = FIELD(s8, tmp14, 0x3u);
-            v0    = FIELD(s16, tmp14, 0x2u) & BYTE_MASK;
-            u1    = FIELD(u8, tmp14, 0x1u);
-            tmp15 = tmp14 + 4;
-            v1    = (u16) * (u8*)(tmp14);
-            u2    = FIELD(s8, tmp15, 0x3u);
-            v2    = FIELD(s16, tmp15, 0x2u) & BYTE_MASK;
-            u3    = FIELD(u8, tmp15, 0x1u);
-            v3    = FIELD(u8, tmp14, 0x4u);
+    flag = !(word >> 31);
+    sel  = (word >> 28) & 3;
+    if (word & 0xF00) {
+        if (word & 0x800) {
+            rect       = (AreaTileRectWord*)((word & 0x7FF) * 8 + MAP_BUNDLE_BASE);
+            rect       = (AreaTileRectWord*)(g_AreaMapBundle.tile_table_offsets_04[sel][1] * 4 + (u32)rect);
+            u          = rect->corner.u;
+            v          = rect->box.v & 0xFF;
+            uv[1].at.u = u;
+            uv[1].at.v = v;
+            uv[2].at.u = rect->box.width;
+            uv[2].at.v = rect->box.height;
+            rect++;
+            u          = rect->corner.u;
+            v          = rect->box.v & 0xFF;
+            uv[3].at.u = u;
+            uv[3].at.v = v;
+            uv[4].at.u = rect->box.width;
+            uv[4].at.v = rect->box.height;
         } else {
-            tmp16 = (*((val9 * 4) + &g_AreaMapBundle.tile_table_offsets_04[0][0]) * 4) + (((val8 & BYTE_MASK) * 4) + (MAP_BUNDLE_BASE + 0x00));
-            tmp9  = FIELD(s8, tmp16, 0x3u);
-            u2    = (s16)tmp9;
-            u0    = (s16)tmp9;
-            tmp12 = FIELD(s16, tmp16, 0x2u) & BYTE_MASK;
-            v1    = tmp12;
-            v0    = tmp12;
-            tmp1  = tmp9 + FIELD(u8, tmp16, 0x1u);
-            u3    = tmp1;
-            u1    = tmp1;
-            tmp11 = tmp12 + *(u8*)(tmp16);
-            v3    = tmp11;
-            v2    = tmp11;
+            rect       = (AreaTileRectWord*)((word & 0xFF) * 4 + MAP_BUNDLE_BASE);
+            rect       = (AreaTileRectWord*)(g_AreaMapBundle.tile_table_offsets_04[sel][0] * 4 + (u32)rect);
+            u          = rect->corner.u;
+            v          = rect->box.v & 0xFF;
+            uv[1].at.u = u;
+            uv[3].at.u = u;
+            uv[1].at.v = v;
+            uv[2].at.v = v;
+            uv[2].at.u = u + rect->box.width;
+            uv[4].at.u = u + rect->box.width;
+            uv[3].at.v = v + rect->box.height;
+            uv[4].at.v = v + rect->box.height;
         }
     } else {
-        tmp2  = (val8 & 0xF) * 0x10;
-        tmp0  = tmp2 | 0xF;
-        tmp13 = val8 & 0xF0;
-        tmp10 = tmp13 | 0xF;
-        u2    = tmp2;
-        u0    = tmp2;
-        v1    = tmp13;
-        v0    = tmp13;
-        u3    = tmp0;
-        u1    = tmp0;
-        v3    = tmp10;
-        v2    = tmp10;
+        u          = (word & 0xF) << 4;
+        v          = word & 0xF0;
+        uv[1].at.u = u;
+        uv[3].at.u = u;
+        uv[1].at.v = v;
+        uv[2].at.v = v;
+        uv[2].at.u = u | 0xF;
+        uv[4].at.u = u | 0xF;
+        uv[3].at.v = v | 0xF;
+        uv[4].at.v = v | 0xF;
     }
-    if (val8 & 0x40000) {
-        tmp3 = (s32)u0;
-        u0   = (s32)u2;
-        u2   = (s32)u3;
-        u3   = (s32)u1;
-        u1   = tmp3;
+    if (word & 0x40000) {
+        swap       = uv[3].word;
+        uv[3].word = uv[4].word;
+        uv[4].word = uv[2].word;
+        uv[2].word = uv[1].word;
+        uv[1].word = swap;
     }
-    if (val8 & 0x10000) {
-        tmp6 = u1;
-        u1   = u0;
-        tmp4 = u2;
-        u0   = tmp6;
-        u2   = u3;
-        u3   = tmp4;
+    if (word & 0x10000) {
+        swap       = uv[1].word;
+        uv[1].word = uv[2].word;
+        uv[2].word = swap;
+        swap       = uv[3].word;
+        uv[3].word = uv[4].word;
+        uv[4].word = swap;
     }
-    val3 = (s32)val8 >> 0x18;
-    if (val8 & 0x20000) {
-        tmp7 = u2;
-        u2   = u0;
-        tmp5 = u1;
-        u0   = tmp7;
-        u1   = u3;
-        u3   = tmp5;
-        val3 = (s32)val8 >> 0x18;
+    if (word & 0x20000) {
+        swap       = uv[1].word;
+        uv[1].word = uv[3].word;
+        uv[3].word = swap;
+        swap       = uv[2].word;
+        uv[2].word = uv[4].word;
+        uv[4].word = swap;
     }
-    tmp8 = val3 & 0xF;
-    val1 = ((tmp8 * valid) + 0x1E3) << 6;
-    val7 = ((s32)val8 >> 0x10) & 0xF8;
-    if (valid == 0) {
-        val1 |= tmp8;
+    pal  = (word >> 24) & 0xF;
+    clut = (pal * flag + 0x1E3) << 6;
+    if (!flag) {
+        clut |= pal;
     }
-    val5 = valid & 3;
-    if ((GetGraphType() == 1) || (val5 = valid & 3, (GetGraphType() == 2))) {
-        val6 = (val5 << 9) | (((s32)val8 >> 5) & 0x180);
-        val4 = ((s32)((val9 << 7) + SCREEN_WIDTH) >> 6) | 0x20;
-    } else {
-        val6 = (val5 << 7) | (((s32)val8 >> 7) & 0x60);
-        val4 = ((s32)((val9 << 7) + SCREEN_WIDTH) >> 6) | 0x10;
+    lum   = (word >> 16) & 0xF8;
+    tpage = getTPage(flag, word >> 12, (sel << 7) + SCREEN_WIDTH, 256);
+    poly  = prim;
+    for (i = 0; i < mode; i++, poly++) {
+        SetSemiTrans(poly, (word >> 15) & 1);
+        poly->r0 = poly->g0 = poly->b0 = lum;
+        poly->clut                     = clut;
+        poly->tpage                    = tpage;
+        poly->u0                       = uv[1].at.u;
+        poly->v0                       = uv[1].at.v;
+        poly->u1                       = uv[2].at.u;
+        poly->v1                       = uv[2].at.v;
+        poly->u2                       = uv[3].at.u;
+        poly->v2                       = uv[3].at.v;
+        poly->u3                       = uv[4].at.u;
+        poly->v3                       = uv[4].at.v;
     }
-    val0 = val6 | val4;
-    val9 = 0;
-    if (val11 > 0) {
-        poly = (POLY_FT4*)val10;
-        do {
-            SetSemiTrans(poly, ((s32)val8 >> 0xF) & 1);
-            poly->b0    = val7;
-            poly->g0    = val7;
-            poly->r0    = val7;
-            poly->clut  = val1;
-            poly->tpage = val0;
-            poly->u0    = (u8)u0;
-            poly->v0    = (u8)v0;
-            poly->u1    = (u8)u1;
-            poly->v1    = (u8)v1;
-            poly->u2    = (u8)u2;
-            poly->v2    = (u8)v2;
-            poly->u3    = (u8)u3;
-            val9 += 1;
-            poly->v3 = (u8)v3;
-            val4     = val9 < val11;
-            poly++;
-        } while (val4 != 0);
-    }
-    return val4;
 }
 #else
 INCLUDE_ASM(func_80155560);

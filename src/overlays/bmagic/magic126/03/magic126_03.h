@@ -54,7 +54,7 @@ void                func_801EFD5C(void);
 void                func_801F06AC(void);
 void                func_801F091C(void);
 
-void                func_801F0ED0(void);
+void                BMagic_DrawMote(void);
 void                func_801F116C(void);
 void                func_801F11AC(void);
 extern PartyMember* D_801F22BC;

@@ -28,6 +28,7 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Try several full bodies, stop at a match | `tools/try_variants.py <target>@0x<ADDR> <file.c> variants.py`           | same                                                      |
 | Print assembly, attempts and C file      | `tools/match_context.sh <target>@0x<ADDR>`                               | same                                                      |
 | Try one C body for an assembly function  | `tools/try_body.py <target>@<func> body.c`                               | [try body](#try-body)                                     |
+| Put a body in a function's draft block   | `tools/draft_swap.py <target>@0x<ADDR> body.c`                           | [try body](#try-body)                                     |
 | Draft open functions with m2c, keep exact | `tools/m2c_sweep.py --sample 200`, `tools/m2c_sweep.py --image <image>` | [m2c sweep](#m2c-sweep)                                   |
 | Write the seed bundle of one function    | `tools/seed.py <target>@<func>`                                          | [m2c sweep](#m2c-sweep)                                   |
 | Measure shapes, write bodies for them | `tools/gen_body.py shapes`, `tools/gen_body.py call-seq`                  | [body generators](#body-generators)                       |
@@ -101,6 +102,18 @@ A line `@decl <declaration>` in the body file (an `extern`, a prototype or a `#d
 the body and added to the image header, the first include of the C file, unless an include of that
 file already declares the name. Output: `EXACT`, `FAIL` with the first difference, or `SKIP`.
 
+`draft_swap.py` puts a body in the function's draft block without compiling it:
+
+```sh
+tools/draft_swap.py <target>@0x<ADDR> body.c
+```
+
+It replaces everything between `#ifdef NON_MATCHING` and that block's `#else`, which keeps
+`INCLUDE_ASM(<func>);` in the open build; a function still held by a bare `INCLUDE_ASM` gets the
+block around it. The old body is saved under `work/<image>/<ADDR>/before.c` (`before-2.c` and so
+on when the name is taken) and its path prints; the rest of the file does not change. The new body
+carries its status marker like any draft (`include/match/match.h`, `tools/check_markers.py`).
+
 ## Match tools
 
 Helpers for one function against the retail bytes; each prints its usage with `--help`.
@@ -115,7 +128,9 @@ Helpers for one function against the retail bytes; each prints its usage with `-
   and the insn that first sets it.
 - `try_variants.py` builds each full body of a `variants.py` (`NAME` and a dict `V` of tag to
   function text) in place of the function, stops at the first `match:` and otherwise restores the file.
-- `match_context.sh` prints the assembly, the last three rows of `config/attempts.jsonl` and the C file.
+- `match_context.sh` prints the assembly, the last three rows of `config/attempts.jsonl` and the C file
+  that holds the function's `INCLUDE_ASM`. It finds a split file by its name (`func_<ADDR>.s`) or, for
+  a file named after a symbol, by the address its first instruction comment carries.
 
 ```sh
 tools/opcode_diff.py exe/slus_004_22@0x801530D0 2

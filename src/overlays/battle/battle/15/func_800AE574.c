@@ -28,7 +28,7 @@ MATCH void func_800AE574(void) {
     /* FAKE: holds the work store ahead of the field reloads. */
     FAKE_BARRIER();
     height = FIELD(u16, third, 0x2E);
-    next   = FIELD(u8, third, 0xA);
+    next   = ((PartyMember*)third)->timer;
     /* FAKE: holds the drop-byte load ahead of the base-halfword load. */
     FAKE_BARRIER();
     base     = FIELD(u16, third, 0x30);
