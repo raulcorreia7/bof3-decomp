@@ -65,7 +65,7 @@ MATCH void func_801FB014(void) {
             SYS_SetFlag(g_SceneEventFlags, 47);
             SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 1));
             SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 4));
-            SND_PlayBGM(91, 100, 8);
+            SND_PlayBGM(91, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             func_801BE1B0(2);
             SYS_ClearFlag(g_SceneFlags, 37);
             g_SceneState.step_05 = 8;
