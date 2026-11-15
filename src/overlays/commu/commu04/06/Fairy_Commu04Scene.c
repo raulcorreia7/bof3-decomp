@@ -20,9 +20,9 @@ MATCH void func_801D0C5C(void) {
 MATCH void func_801D0C98(void) {
     u8* state = &g_GameStateIndex;
 
-    if (*state != 2) {
+    if (*state != GAME_REQUEST_MESSAGE) {
         Message_StartAreaMessage(0x60);
-        *state = 2;
+        *state = GAME_REQUEST_MESSAGE;
         D_801F294D += 1;
     }
 }
@@ -119,9 +119,9 @@ MATCH void func_801D1568(void) {
 MATCH void func_801D1628(void) {
     u8* state = &g_GameStateIndex;
 
-    if (*state != 2) {
+    if (*state != GAME_REQUEST_MESSAGE) {
         Message_StartAreaMessage(0x63);
-        *state = 2;
+        *state = GAME_REQUEST_MESSAGE;
     }
 }
 
