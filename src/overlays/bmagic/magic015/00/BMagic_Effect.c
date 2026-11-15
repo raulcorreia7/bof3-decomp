@@ -193,7 +193,23 @@ MATCH void func_801EFB90(void) {
 
 INCLUDE_ASM(func_801EFBD8);
 
-INCLUDE_ASM(func_801EFCC4);
+MATCH void func_801EFCC4(void) {
+    PartyMember* work;
+    s32          dz;
+    u8           timer;
+
+    g_Task->pos.x.fixed += FIXED_MUL(rsin(g_Task->unk_0C), 0x2000);
+    g_Task->pos.y.fixed += FIXED_MUL(rcos(g_Task->unk_0C), 0x2000);
+    work                     = g_Task;
+    dz                       = work->unk_14 + work->unk_20;
+    timer                    = work->unk_09 - 1;
+    work->unk_09             = timer;
+    work->unk_14             = dz;
+    work->pos.z.part.integer = (u16)work->pos.z.part.integer + dz;
+    if (timer == 0) {
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EFD7C(void) {
     if (g_BattleEffectBattler->param.unk_0B == 1) {
@@ -280,7 +296,21 @@ MATCH void func_801F014C(void) {
     }
 }
 
-INCLUDE_ASM(func_801F0194);
+MATCH void func_801F0194(void) {
+    PartyMember** selected;
+    PartyMember*  work;
+
+    selected = &g_Battle.selected_actor;
+    func_800AF2B4((BattleRange*)*selected, 0x60);
+    if (func_800AF66C((BattleRange*)*selected, 0xC000) != 0) {
+        g_Task->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - g_Task->pos.x.fixed, g_BattleEffectBattler->pos.y.fixed - g_Task->pos.y.fixed);
+        work           = g_Task;
+        work->unk_14   = 0x40;
+        work->unk_09   = 0x10;
+        work->unk_20   = -8;
+        g_Task->header.step += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F0248);
 
@@ -335,7 +365,30 @@ MATCH void func_801F045C(void) {
     }
 }
 
-INCLUDE_ASM(func_801F0570);
+MATCH void func_801F0570(void) {
+    PartyMember** selected;
+    PartyMember*  work;
+    s32           dz;
+    u8            timer;
+
+    selected = &g_Battle.selected_actor;
+    func_800AF4A0((BattleRange*)*selected, 0x1800, 0);
+    work                     = g_Task;
+    timer                    = work->unk_09 - 1;
+    dz                       = work->unk_14 + work->unk_20;
+    work->unk_14             = dz;
+    work->pos.z.part.integer = (u16)work->pos.z.part.integer + dz;
+    work->scale.x            = work->scale.x - 0x800;
+    work->scale.y            = work->scale.y + 0x1000;
+    work->unk_09             = timer;
+    if (timer == 0) {
+        g_Task->pos.x.fixed        = (*selected)->pos.x.fixed;
+        g_Task->pos.y.fixed        = (*selected)->pos.y.fixed;
+        g_Task->pos.z.part.integer = (u16)(*selected)->pos.z.part.integer + 0xC00;
+        func_800AF4A0((BattleRange*)g_BattleEffectBattler, 0x20000, 0);
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801F0654(void) {
     PartyMember* task;
@@ -461,7 +514,27 @@ MATCH void func_801F0DB4(void) {
     }
 }
 
-INCLUDE_ASM(func_801F0E54);
+MATCH void func_801F0E54(void) {
+    PartyMember** selected;
+    u8            count;
+
+    selected = &g_Battle.selected_actor;
+    func_800AF2B4((BattleRange*)*selected, 0x60);
+    count = g_Task->unk_09;
+    if (count < 20) {
+        g_Task->unk_09 = count + 1;
+    }
+    if (func_800AF5FC((BattleRange*)*selected, 0xC000) != 0) {
+        g_Task->unk_14 = 0x48;
+        g_Task->unk_20 = -8;
+        func_800A9820(g_Battle.target_selector);
+        if (g_Battle.active_battler < 3) {
+            func_800AFC98(2, 0);
+        }
+        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_AREA, 0x03));
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801F0F2C(void) {
     s32 speed;

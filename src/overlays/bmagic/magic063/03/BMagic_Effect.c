@@ -234,7 +234,24 @@ MATCH void func_801EFD7C(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EFE04(void) {
+    g_BMagicOrbit->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + (rsin(0) << 5);
+    g_BMagicOrbit->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + (rcos(0) << 5);
+    g_BMagicOrbit->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+    g_BMagicOrbit->timer_05    = (rand() & 7) + 5;
+    g_BMagicOrbit->timer_06    = (rand() & 7) + 5;
+    g_BMagicOrbit->timer_07    = (rand() & 7) + 5;
+    g_BMagicOrbit->unk_03      = 7;
+    g_BMagicOrbit->unk_09      = 0;
+    g_BMagicOrbit->angle       = 0;
+    g_BMagicOrbit->unk_0A      = 0x40;
+    g_BMagicOrbit->unk_0B      = rand();
+    g_BMagicOrbit->header.step += 1;
+}
+#else
 INCLUDE_ASM(func_801EFE04);
+#endif
 
 MATCH void func_801EFF18(void) {
     g_BMagicOrbit->angle       = (g_BMagicOrbit->angle + 0x20) & ANGLE_MASK;

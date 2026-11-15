@@ -9,8 +9,8 @@ MATCH void func_801E1DD4(void) {
     g_Task->unk_04      = 0;
     Battle_ClearSlotPending(g_Task->slot);
     work = g_Game.current;
-    BATTLE_LOCAL_WORD_124(work) &= ~0x200u;
+    work->u.turn.damage_flags.volatile_value &= ~0x200u;
     if ((g_Battle.state & BATTLE_STATE_REPRISAL_PENDING) == 0u) {
-        BATTLE_LOCAL_BYTE_119(work) = 0;
+        work->u.turn.command.type = 0;
     }
 }

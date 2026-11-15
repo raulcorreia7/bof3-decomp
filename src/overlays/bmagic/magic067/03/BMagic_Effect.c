@@ -80,7 +80,31 @@ MATCH void func_801EF314(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF38C(void) {
+    PartyMember* work;
+    s32          x;
+    s32          y;
+
+    func_800AFD9C();
+    g_Task->unk_0C = -0x40000;
+    g_Task->unk_10 = 0;
+    func_801DD350(g_Task);
+    x                   = g_AreaScrollTargetX + g_Task->unk_0C;
+    g_Task->pos.x.fixed = x;
+    y                   = g_AreaScrollTargetY + g_Task->unk_10;
+    g_Task->pos.y.fixed = y;
+    SND_PlayCue(0x100);
+    work               = g_Task;
+    work->param.unk_0B = 0x34;
+    work->unk_14       = 0x2FFF;
+    g_Task->unk_09     = 0;
+    g_Task->timer      = 0x10;
+    g_Task->header.step += 1;
+}
+#else
 INCLUDE_ASM(func_801EF38C);
+#endif
 
 MATCH void func_801EF44C(void) {
     s32 count;

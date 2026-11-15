@@ -11,7 +11,26 @@ MATCH void func_801EEC34(void) {
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EECA4(void) {
+    PartyMember* work;
+    u32          slot;
+
+    slot                               = Battle_AllocEffect(1, 18) & BYTE_MASK;
+    work                               = g_Task;
+    g_BattleEffects[slot].header.mode  = 0;
+    g_BattleEffects[slot].target.party = work;
+    slot                               = Battle_AllocEffect(1, 18) & BYTE_MASK;
+    work                               = g_Task;
+    g_BattleEffects[slot].header.mode  = 1;
+    g_BattleEffects[slot].target.party = work;
+    func_801EEF50();
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+}
+#else
 INCLUDE_ASM(func_801EECA4);
+#endif
 
 MATCH void func_801EED68(void) {
     u32          slot;

@@ -5,14 +5,14 @@ MATCH void func_800AD808(void) {
     Callback funcs[2] = {func_800AD8D8, func_800AD930};
 
     work = TASK_BYTES;
-    funcs[work[0x02]]();
+    funcs[((PartyMember*)work)->header.step]();
     work = TASK_BYTES;
-    if (!(work[0x00] & 0x1)) {
+    if (!(((PartyMember*)work)->header.flags & 0x1)) {
         return;
     }
     if (!(D_80148624 & 0x1)) {
-        work[0x01]               = 2;
-        BATTLE_WORK->header.step = 0;
+        ((PartyMember*)work)->header.mode = 2;
+        BATTLE_WORK->header.step          = 0;
         return;
     }
     *(u16*)(work + 0x2E) = D_80148628 + 0x14;
