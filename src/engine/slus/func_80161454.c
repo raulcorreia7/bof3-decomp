@@ -17,7 +17,6 @@ NON_MATCHING void func_80161454(u32 index) {
     s16    val0;
     s16    val1;
     s32    a1;
-    s32    val2;
     s32    val3;
     s32    q;
     s32    tmp2;
@@ -27,7 +26,7 @@ NON_MATCHING void func_80161454(u32 index) {
     s32    val5;
     s32    val6;
     u32    tmp5;
-    u32    val7;
+    u8     pan;
     u32    val8;
     Actor* work;
 
@@ -45,26 +44,21 @@ NON_MATCHING void func_80161454(u32 index) {
         val1 = val0;
         if (g_SndMono == 0) {
             tmp1 = (s16)work->screen_x;
-            q    = tmp1 + 0x28;
-            val7 = (u32)q >> 2;
-            if (q < 0) {
-                val7 = (u32)(tmp1 + 0x2B) >> 2;
+            pan = (tmp1 + 40) / 4;
+            if (tmp1 < -40) {
+                pan = 0;
             }
-            if (tmp1 < -0x28) {
-                val7 = 0;
+            if (tmp1 >= 361) {
+                pan = 100;
             }
-            if (tmp1 >= 0x169) {
-                val7 = 0x64;
-            }
-            val7 &= BYTE_MASK;
-            val1 = (val1 * val7) / 100;
-            val0 = (val0 * (0x64 - val7)) / 100;
+            val1 = (val1 * pan) / 100;
+            val0 = (val0 * (100 - pan)) / 100;
         }
     } else {
         work = g_Task;
         tmp2 = (s32)(work->pos.x.fixed - g_AreaScrollTargetX) >> 0xC;
         tmp3 = (s32)(work->pos.y.fixed - g_AreaScrollTargetY) >> 0xC;
-        tmp5 = (csqrt((tmp2 * tmp2) + (tmp3 * tmp3)) >> 4) * 0xA;
+        tmp5 = ((u32)csqrt((tmp2 * tmp2) + (tmp3 * tmp3)) >> 4) * 0xA;
         if (tmp5 >= 0x37FFU) {
             val1 = 0;
             val0 = 0;
@@ -79,8 +73,7 @@ NON_MATCHING void func_80161454(u32 index) {
                 q = (a1 * (s16)val1) / 480;
                 q = ABS(q);
                 if (q < (s16)val1) {
-                    a1   = ABS(a1);
-                    val1 = val1 - (a1 * (s16)val1) / 480;
+                    val1 = val1 - (ABS(a1) * (s16)val1) / 480;
                 } else {
                     val1 = 0;
                 }
@@ -102,7 +95,6 @@ NON_MATCHING void func_80161454(u32 index) {
         work->state_70.word &= 0xF00000FF;
         return;
     }
-    val2 = 0x1F;
     do {
         val5 = val4 & BYTE_MASK;
         tmp4 = ((s32)g_Task->state_70.word >> val5) & 0x1F;
