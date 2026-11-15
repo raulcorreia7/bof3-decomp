@@ -2,7 +2,8 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F50F0(void) {
-    volatile SceneSampleRecord* rec;
+    /* Kept volatile: the track loop's stores leave retail order without it. */
+    volatile SceneSampleTrack* track;
     u8                          i;
     u8                          index;
 
@@ -20,7 +21,8 @@ NON_MATCHING void func_801F50F0(void) {
                 s8* step;
 
                 step = &g_SceneEventStep;
-                func_801C601C((u8)(D_80147B67 - 1));
+                /* Retail passes the masked byte, the owner declares the argument s8. */
+                ((void (*)(u8))Area_StartScrollRoute)((u8)(D_80147B67 - 1));
                 D_80143FC0      = 4;
                 g_ScriptVars[3] = 1;
                 *step           = (u8)*step + 1;
@@ -75,25 +77,25 @@ NON_MATCHING void func_801F50F0(void) {
             u16* timer;
 
             timer = &LOHU(D_801448EE);
-            if (!(--*timer == 0)) {
+            if (--*timer != 0) {
                 i   = 0;
-                rec = D_801F629C;
+                track = D_801F629C;
                 if (D_801F6298 > 0) {
                     do {
-                        rec->sample[0] += (s8)(rec->weight[0] >> 8);
-                        rec->sample[1] += (s8)(rec->weight[1] >> 8);
-                        rec->sample[2] += (s8)(rec->weight[2] >> 8);
-                        rec->sample[3] += (s8)(rec->weight[0] >> 8);
-                        rec->sample[4] += (s8)(rec->weight[1] >> 8);
-                        rec->sample[5] += (s8)(rec->weight[2] >> 8);
-                        rec->sample[6] += (s8)(rec->weight[0] >> 8);
-                        rec->sample[7] += (s8)(rec->weight[1] >> 8);
-                        rec->sample[8] += (s8)(rec->weight[2] >> 8);
-                        rec->sample[9] += (s8)(rec->weight[0] >> 8);
-                        rec->sample[10] += (s8)(rec->weight[1] >> 8);
-                        rec->sample[11] += (s8)(rec->weight[2] >> 8);
+                        track->sample[0] += (s8)(track->weight[0] >> 8);
+                        track->sample[1] += (s8)(track->weight[1] >> 8);
+                        track->sample[2] += (s8)(track->weight[2] >> 8);
+                        track->sample[3] += (s8)(track->weight[0] >> 8);
+                        track->sample[4] += (s8)(track->weight[1] >> 8);
+                        track->sample[5] += (s8)(track->weight[2] >> 8);
+                        track->sample[6] += (s8)(track->weight[0] >> 8);
+                        track->sample[7] += (s8)(track->weight[1] >> 8);
+                        track->sample[8] += (s8)(track->weight[2] >> 8);
+                        track->sample[9] += (s8)(track->weight[0] >> 8);
+                        track->sample[10] += (s8)(track->weight[1] >> 8);
+                        track->sample[11] += (s8)(track->weight[2] >> 8);
                         i++;
-                        rec++;
+                        track++;
                     } while (i < D_801F6298);
                 }
                 D_80147A58[0].tint.bytes.rgb.red -= 4;

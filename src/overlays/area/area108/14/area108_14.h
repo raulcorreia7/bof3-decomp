@@ -96,23 +96,21 @@ extern AreaPosEntry D_801F637C[];
 extern AreaPosEntry D_801F63A0[];
 
 /* One row of the sample track the stage event steps: the twelve samples and the three weights
- * that add to them, 0x28 bytes apart. */
-typedef struct SceneSampleRecord {
+ * that add to them. */
+typedef struct SceneSampleTrack {
     u8  unk_00[2];
     u16 sample[12];
     u16 weight[3];
     u8  unk_20[8];
-} SceneSampleRecord;
+} SceneSampleTrack;
 
-ASSERT_SIZE(SceneSampleRecord, 0x28);
-ASSERT_OFFSET(SceneSampleRecord, sample, 0x02);
+ASSERT_OFFSET(SceneSampleTrack, sample, 0x02);
+ASSERT_SIZE(SceneSampleTrack, 0x28);
 
 /* The track's row count, the event flag byte beside it and the track the samples walk. */
-extern s8                 D_801F6298;
-extern u8                 D_801F629B;
-extern SceneSampleRecord* D_801F629C;
-
-void func_801C601C(u8 stage);
+extern s8                D_801F6298;
+extern u8                D_801F629B;
+extern SceneSampleTrack* D_801F629C;
 
 /* The staged actor rows: the event scrolls to row 1 and tints row 0. */
 extern Actor D_80147A58[];
