@@ -21,8 +21,8 @@ NON_MATCHING void func_80161454(u32 index) {
     s32    q;
     s32    tmp2;
     s32    tmp3;
-    s32    tmp4;
-    s32    val4;
+    u8    tmp4;
+    u8     val4;
     s32    val5;
     s32    val6;
     u32    tmp5;
@@ -96,19 +96,18 @@ NON_MATCHING void func_80161454(u32 index) {
         return;
     }
     do {
-        val5 = val4 & BYTE_MASK;
-        tmp4 = ((s32)g_Task->state_70.word >> val5) & 0x1F;
+        tmp4 = ((s32)g_Task->state_70.word >> val4) & 0x1F;
         if (tmp4 != 0x1F) {
             val8 = 1 << tmp4;
             if (SpuGetKeyStatus(val8) == SPU_OFF) {
                 work = g_Task;
-                work->state_70.word |= 0x1F << val5;
+                work->state_70.word |= 0x1F << val4;
             } else {
                 val3 |= val8;
             }
         }
         val4 += 5;
-    } while ((u32)(val4 & BYTE_MASK) < 0x18U);
+    } while (val4 < 0x18U);
     voice.mask   = val3;
     voice.attr   = SPU_VOICE_VOLL | SPU_VOICE_VOLR;
     voice.volume = val0;
