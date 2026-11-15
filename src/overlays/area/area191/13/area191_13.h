@@ -19,6 +19,10 @@ extern u8 D_801F3C54[];
 extern u8 D_801F41D0[];
 extern u8 D_801F41D1[];
 
+extern u8  D_801F41E8[];
+extern u8  D_801F4218[];
+extern u8  D_801F4248[];
+extern u8  D_801F4250[];
 extern u8  D_801F4260[];
 /* The neighbour tables the cell lookup reads. */
 extern u8  D_801F4290[];
