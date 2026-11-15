@@ -133,7 +133,63 @@ MATCH void func_801EF108(void) {
     }
 }
 
-INCLUDE_ASM(BMagic_DrawBurnSprites);
+/* Draws the flame's ring of 32 textured quads around the effect cell, its texture row scrolling with the frame count. */
+MATCH void BMagic_DrawBurnSprites(void) {
+    POLY_GT4* prim;
+    long      depth;
+    long      flag;
+    s32       i;
+    s32       tpage;
+    s32       x;
+    s32       y;
+
+    D_1F800000.view.effect.params[5] = g_Task->param.unk_0B * 8;
+    D_1F800000.view.effect.params[0] = g_Task->unk_09 * 4;
+    D_1F800000.view.effect.params[3] = g_Task->unk_14 + 0x20;
+    D_1F800000.view.effect.params[4] = (g_FrameCount & 0xF) << 8;
+    D_1F800014[1].vx                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[1].vy                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[1].vz                 = -(D_1F800000.view.effect.params[3] + FIXED_MUL(rsin(0), 0x20));
+    D_1F800014[3].vx                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[3].vy                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[3].vz                 = 0;
+    for (i = 1; i <= 32; i++) {
+        D_1F800000.view.effect.params[4] = ((i + g_FrameCount) & 0xF) << 8;
+        D_1F800014[0].vx                 = D_1F800014[1].vx;
+        D_1F800014[0].vy                 = D_1F800014[1].vy;
+        D_1F800014[0].vz                 = D_1F800014[1].vz;
+        D_1F800014[1].vx                 = FIXED_MUL(rcos(i << 7), D_1F800000.view.effect.params[0]);
+        D_1F800014[1].vy                 = FIXED_MUL(rsin(i << 7), D_1F800000.view.effect.params[0]);
+        D_1F800014[1].vz                 = -(D_1F800000.view.effect.params[3] + FIXED_MUL(rsin(D_1F800000.view.effect.params[4]), 0x20));
+        D_1F800014[2].vx                 = D_1F800014[3].vx;
+        D_1F800014[2].vy                 = D_1F800014[3].vy;
+        D_1F800014[2].vz                 = 0;
+        D_1F800014[3].vx                 = FIXED_MUL(rcos(i << 7), D_1F800000.view.effect.params[0]);
+        D_1F800014[3].vy                 = FIXED_MUL(rsin(i << 7), D_1F800000.view.effect.params[0]);
+        D_1F800014[3].vz                 = 0;
+        x                                = (D_1F800014[1].vx << 9) + g_Task->pos.x.fixed;
+        y                                = (D_1F800014[1].vx << 9) + g_Task->pos.y.fixed;
+        if (GetGraphType() == 1 || GetGraphType() == 2) {
+            tpage = 0xA5;
+        } else {
+            tpage = 0x35;
+        }
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+        Area_AddCellPrim(x, y, 2, sizeof(DR_MODE));
+        prim = (POLY_GT4*)g_GfxPrimCursor;
+        SetPolyGT4(prim);
+        SetSemiTrans(prim, 1);
+        setRGB0(prim, 1, 1, 1);
+        setRGB1(prim, 1, 1, 1);
+        setRGB2(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[5]);
+        setRGB3(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[5]);
+        prim->tpage = GetTPage(0, 1, 0x340, 0x100);
+        prim->clut  = GetClut(0, 0x1FA);
+        setUV4(prim, i << 3, g_Task->timer * 4 + 0x20, (i << 3) + 8, g_Task->timer * 4 + 0x20, i << 3, g_Task->timer * 4 + 0x28, (i << 3) + 8, g_Task->timer * 4 + 0x28);
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        Area_AddCellPrim(x, y, 2, sizeof(POLY_GT4));
+    }
+}
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 

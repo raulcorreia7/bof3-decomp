@@ -124,8 +124,8 @@ MATCH void func_801F757C(void) {
 
 /* Draws the sprite at its projected position, advances the animation, and ends
  * the effect when its frame timer runs out. */
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F75E4(void) {
+MATCH void func_801F75E4(void) {
+    u16 count;
     u16 timer;
 
     func_801F85F0((s16)g_Task->screen_x, (s16)g_Task->screen_y, (s16)g_Task->unk_32);
@@ -133,16 +133,14 @@ NON_MATCHING void func_801F75E4(void) {
     if ((g_Task->unk_5A & 0x3) == 0) {
         g_Task->unk_2C -= 1;
     }
-    g_Task->unk_32 -= 1;
+    count          = g_Task->unk_32 - 1;
     timer          = g_Task->unk_5A - 1;
+    g_Task->unk_32 = count;
     g_Task->unk_5A = timer;
     if (timer == 0) {
         func_80196070();
     }
 }
-#else
-INCLUDE_ASM(func_801F75E4);
-#endif
 
 MATCH void func_801F7688(void) {
     s32     pos[3];
