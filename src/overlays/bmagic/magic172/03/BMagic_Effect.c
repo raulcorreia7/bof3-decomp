@@ -99,7 +99,23 @@ MATCH void func_801EEE7C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF158);
+MATCH void func_801EF158(void) {
+    PartyMember* actor;
+    PartyMember* work;
+    s32          angle;
+
+    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+    g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x800000;
+    actor               = g_Battle.selected_actor;
+    angle               = ratan2(actor->pos.x.fixed - g_Task->pos.x.fixed, actor->pos.y.fixed - g_Task->pos.y.fixed);
+    work                = g_Task;
+    work->param.unk_0B  = 0;
+    work->unk_0C        = angle;
+    g_Task->unk_09      = 0;
+    g_Task->timer       = 0;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EF210(void) {
     VECTOR       pos;
@@ -171,7 +187,23 @@ MATCH void func_801EF518(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF590);
+MATCH void func_801EF590(void) {
+    PartyMember* actor;
+    PartyMember* work;
+    s32          angle;
+
+    if (--g_Task->unk_09 == 0) {
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x800000;
+        actor               = g_Battle.selected_actor;
+        angle               = ratan2(actor->pos.x.fixed - g_Task->pos.x.fixed, actor->pos.y.fixed - g_Task->pos.y.fixed);
+        work                = g_Task;
+        work->unk_09        = 0;
+        work->unk_0C        = angle;
+        g_Task->header.step += 1;
+    }
+}
 
 /* Aims the effect at the selected actor, projects its screen point as the effect's range, and advances once the
  * effect record's step is two. */

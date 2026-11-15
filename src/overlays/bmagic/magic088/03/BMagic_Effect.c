@@ -80,7 +80,24 @@ MATCH void func_801EEFA0(void) {
 
 #include "overlays/bmagic/Effect_Pause.h"
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF0A8(void) {
+    PartyMember* actor;
+
+    actor = g_Battle.selected_actor;
+    g_PaletteFades[g_Task->timer].offset.red += 1;
+    g_PaletteFades[g_Task->timer].offset.green += 1;
+    if (g_PaletteFades[g_Task->timer].offset.red != 0) {
+        return;
+    }
+    actor->unk_5C = 0;
+    func_80196718(actor);
+    func_800AF814(g_Battle.target_selector);
+    g_Task->header.mode += 1;
+}
+#else
 INCLUDE_ASM(func_801EF0A8);
+#endif
 
 MATCH void func_801EF1AC(void) {
     u32 slot;
