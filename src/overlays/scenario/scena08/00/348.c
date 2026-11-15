@@ -322,7 +322,75 @@ MATCH void func_801F7DE8(void) {
     } while ((index & BYTE_MASK) < 0x40U);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING s32 func_801F7E14(void) {
+    u8*          slot;
+    u8*          data;
+    volatile s32 snapshot[4];
+    MATRIX       camera;
+    s32          drawn;
+    s32          step;
+    u8           i;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 1, 0x2C0, 0x100) & 0xFFFF, 0);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    Area_SetCameraMatrix(&camera);
+    drawn = 1;
+    step  = 8;
+    slot  = MEM_PTR(u8, AREA_WORK);
+    data  = MEM_PTR(u8, AREA_WORK + 1);
+    i     = 0;
+    do {
+        if (slot[0] != 0) {
+            if (data[1] != 1) {
+                drawn = 0;
+            }
+            if (data[1] == 1) {
+                data[2] += step;
+                if (data[0] == 0) {
+                    data[0] = 0x10;
+                    data[1]++;
+                }
+            } else if (data[1] < 2) {
+                if (data[1] == 0) {
+                    data[0]                       = step;
+                    data[2]                       = 0;
+                    *(volatile s32*)(data + 0x23) = 0;
+                    data[1]++;
+                }
+            } else if (data[1] == 2) {
+                if (data[0] == 0) {
+                    data[0] = step;
+                    data[1]++;
+                }
+            } else if (data[1] == 3) {
+                data[2] -= step;
+                if (data[0] == 0) {
+                    slot[0] = 0;
+                }
+            }
+            snapshot[0] = *(volatile s32*)(data + 0x03);
+            snapshot[1] = *(volatile s32*)(data + 0x07);
+            snapshot[2] = *(volatile s32*)(data + 0x0B);
+            snapshot[3] = *(volatile s32*)(data + 0x0F);
+            snapshot[2] <<= 8;
+            func_801F77B4((Scena08Billboard*)slot);
+            *(volatile s32*)(data + 0x03) += *(volatile s32*)(data + 0x13);
+            *(volatile s32*)(data + 0x07) += *(volatile s32*)(data + 0x17);
+            data[0]--;
+            *(volatile s32*)(data + 0x0B) += *(volatile s32*)(data + 0x1B);
+            *(volatile s32*)(data + 0x1B) += 0x200;
+            *(volatile s32*)(data + 0x23) += 0x200;
+        }
+        data += 0x28;
+        slot += 0x28;
+        i++;
+    } while (i < 0x40);
+    return drawn;
+}
+#else
 INCLUDE_ASM(func_801F7E14);
+#endif
 
 MATCH void func_801F802C(void) {
     AreaSprite* work;
@@ -347,7 +415,30 @@ MATCH void func_801F802C(void) {
     }
 }
 
-INCLUDE_ASM(func_801F8108);
+MATCH void func_801F8108(s32 x, s32 y) {
+    RECT rect;
+    s32  width;
+    s32  height;
+    s32  frame_y;
+
+    width   = 64;
+    height  = 128;
+    rect.x  = x - 64;
+    frame_y = g_FrameBufferIndex * 240 - 64;
+    rect.y  = y + frame_y;
+    rect.w  = width;
+    rect.h  = height;
+    SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, 832, 256);
+    GFX_AddPrim(2, sizeof(DR_MOVE));
+
+    rect.x  = x;
+    frame_y = g_FrameBufferIndex * 240 - 64;
+    rect.y  = y + frame_y;
+    rect.w  = width;
+    rect.h  = height;
+    SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, 832, 384);
+    GFX_AddPrim(2, sizeof(DR_MOVE));
+}
 
 MATCH void func_801F81F4(u16 value) {
     s32 count;
@@ -476,7 +567,47 @@ MATCH void func_801F9668(void) {
     Actor_Clear();
 }
 
-INCLUDE_ASM(func_801F9688);
+/* Draw the 16 semi-transparent segments of a screen-sized ellipse ring, dark at the inner edge and bright at the outer. */
+MATCH void func_801F9688(void) {
+    DVECTOR  inner;
+    DVECTOR  outer;
+    POLY_G4* prim;
+    s32      angle;
+    u8       i;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 2, 960, 256) & HALF_MASK, 0);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    inner.vx = 240;
+    inner.vy = 120;
+    outer.vx = 400;
+    outer.vy = 120;
+    angle    = 0;
+    i        = 0;
+    do {
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        prim->x0 = inner.vx;
+        prim->y0 = inner.vy;
+        prim->x1 = outer.vx;
+        prim->y1 = outer.vy;
+        angle += 0x100;
+        inner.vx = 160 + ((rcos((u16)angle) * 80) >> 12);
+        inner.vy = 120 + ((rsin((u16)angle) * 60) >> 12);
+        outer.vx = 160 + ((rcos((u16)angle) * 240) >> 12);
+        outer.vy = 120 + ((rsin((u16)angle) * 180) >> 12);
+        prim->x2 = inner.vx;
+        prim->y2 = inner.vy;
+        prim->x3 = outer.vx;
+        prim->y3 = outer.vy;
+        setRGB0(prim, 0, 0, 0);
+        setRGB1(prim, 255, 255, 255);
+        setRGB2(prim, 0, 0, 0);
+        setRGB3(prim, 255, 255, 255);
+        GFX_AddPrim(1, sizeof(POLY_G4));
+        i++;
+    } while (i < 16);
+}
 
 MATCH void func_801F986C(void) {
     SYS_DISPATCH_TASK(D_801FE910, 1, g_Task);
@@ -639,7 +770,54 @@ MATCH void func_801F9F6C(void) {
     Actor_Clear();
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F9F8C(WorldPos* pos, s32 unused, s32 jitter, s32 layer) {
+    LINE_F2* line;
+    DVECTOR  screen;
+    DVECTOR  size;
+    DVECTOR  scale;
+    MATRIX   camera;
+    s32      angle;
+    s16      i;
+    s32      depth;
+    s32      root;
+
+    FAKE_STACK_PADS(u8, 0x28); /* FAKE: retail reserves 40 unused stack bytes. */
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 0x3C0, 0x100) & 0xFFFF, 0);
+    Area_AddCellPrim(pos->x.fixed, pos->y.fixed, (s8)layer, 12);
+    Area_SetCameraMatrix(&camera);
+    Area_ProjectPoint(&pos->x.fixed, &screen);
+    size.vx = size.vy = 0x50;
+    Game_ProjectWorldPoint(pos, &size, &scale);
+    angle = rand() & 0xFFF;
+    depth = layer;
+    i     = -scale.vx;
+    if (scale.vx >= -scale.vx) {
+        do {
+            s32 offset;
+
+            root = SquareRoot0((scale.vx * scale.vx) - (i * i));
+            line = (LINE_F2*)g_GfxPrimCursor;
+            SetLineF2(line);
+            SetSemiTrans(line, 1);
+            offset   = (rsin((u16)angle) * 16) >> 12;
+            line->x0 = screen.vx + offset + jitter - root;
+            offset   = (rsin((u16)angle) * 16) >> 12;
+            line->x1 = screen.vx + offset + jitter + root;
+            line->y0 = screen.vy + i;
+            line->y1 = screen.vy + i;
+            setRGB0(line, 0, 0, 0);
+            Area_AddCellPrim(pos->x.fixed, pos->y.fixed, (s8)depth, sizeof(LINE_F2));
+            jitter = -jitter;
+            angle += rand() & 0xFF;
+            i++;
+        } while (i <= scale.vx);
+    }
+}
+#else
 INCLUDE_ASM(func_801F9F8C);
+#endif
 
 MATCH void func_801FA19C(WorldPos* pos, s32* vx) {
     LINE_G2* prim;

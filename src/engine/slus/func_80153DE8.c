@@ -22,14 +22,12 @@ NON_MATCHING void func_80153DE8(void) {
     SetGeomScreen(1000);
     SetGeomOffset(160, 120);
     SetBackColor(120, 120, 120);
-    prim_base = (u8*)g_AreaCellPrims;
-    for (row_offset = 0, row = 0; row_offset < 1024; row_offset++, row += 0x50) {
-        for (i = 0, primitive_row_offset = row, primitive_offset = row, prim = prim_base; i < 2; primitive_offset += 0x28, i++, prim += 0x28) {
-            poly = (POLY_FT4*)(prim + primitive_row_offset);
-            SetPolyFT4(poly);
-            SetShadeTex(poly, 0);
-            *(u16*)(((u8*)g_AreaCellPrims + 0x1E) + primitive_offset) = 0;
-            *(u16*)(((u8*)g_AreaCellPrims + 0x26) + primitive_offset) = 0;
+    for (row = 0; row < 1024; row++) {
+        for (i = 0; i < 2; i++) {
+            SetPolyFT4(&g_AreaCellPrims[row][i]);
+            SetShadeTex(&g_AreaCellPrims[row][i], 0);
+            g_AreaCellPrims[row][i].pad1 = 0;
+            g_AreaCellPrims[row][i].pad2 = 0;
         }
     }
     *(s16*)(&g_AreaCameraAngle.vx) = -682;

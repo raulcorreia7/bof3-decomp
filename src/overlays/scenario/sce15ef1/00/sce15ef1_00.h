@@ -5,7 +5,6 @@
  * includes the file. */
 
 #include "overlays/scenario/scenario.h"
-#include "shared/CaptureSize.h"
 #include "shared/WorldSpin.h"
 #include "area/spad.h"
 
@@ -41,11 +40,21 @@ typedef struct SceneDot {
 
 ASSERT_SIZE(SceneDot, 10);
 
-extern CaptureSize D_801D3940[];
-extern u16         D_801D40A8;
-extern u8          D_801D40AC;
-extern u32         D_801D40B0;
-extern u32         D_801D40B4;
+/* One capture of the screen: where it sits and how large it is. */
+typedef struct SceneCapture {
+    s16 x;
+    s16 y;
+    s16 w;
+    s16 h;
+} SceneCapture;
+
+ASSERT_SIZE(SceneCapture, 8);
+
+extern SceneCapture D_801D393C[];
+extern u16          D_801D40A8;
+extern u8           D_801D40AC;
+extern u32          D_801D40B0;
+extern u32          D_801D40B4;
 
 extern WorldSpin g_WorldSpins[];
 

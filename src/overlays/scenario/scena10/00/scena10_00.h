@@ -10,9 +10,10 @@
 /* FAKE: the callers pass the arguments as s32, the width the real prototype (u8) lacks. */
 #define Item_Count ((s32 (*)(s32, s32, s32))Item_Count)
 
-extern u8  D_80144908[];
-extern u32 D_801F6C00;
-extern u8  D_80146875;
+extern u8   D_80144908[];
+extern u32  D_801F6C00;
+extern char D_801F6C04[];
+extern u8   D_80146875;
 
 /* A scene rectangle the panel draws: position and size. */
 typedef struct Scena10Rect {
@@ -30,6 +31,11 @@ ASSERT_OFFSET(Scena10Rect, height, 0x06);
 
 /* The panel draws entry 2. */
 extern Scena10Rect D_801FE7CC[];
+extern u8          D_801FE804[2];
+extern u8          D_801FE830[8][3];
+extern Point2s     D_801FE848[];
+extern u8          D_801FE808[2];
+extern u8          D_801FE874[];
 
 /* The g_SceneFlags bit the scene trigger row flags count from. */
 #define SCENE_TRIGGER_FLAG_BASE 0x20
@@ -95,5 +101,6 @@ extern SceneFunc g_SceneActorDispatch[];
 
 void func_801F6FAC(void);
 void func_801F781C(u16 x, u16 y, u16 width, u16 height);
+void func_801F79E8(u16 x, u16 y);
 
 #endif

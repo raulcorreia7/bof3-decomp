@@ -3,7 +3,7 @@
  * word 0x00FFFFFF is a GTE placeholder pattern, so it is stored as
  * halfwords.
  * DecDCTvlcSize is hand assembly (an addi overflow trap and a branch into the
- * next function), so it stays an asm segment and has no C source. */
+ * next function), so it is a HAND_ASM unit. */
 
 #include "logo.h"
 

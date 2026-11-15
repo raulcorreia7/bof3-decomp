@@ -26,7 +26,7 @@ NON_MATCHING u8 Battle_PickEnemyTarget(u8 enemy_index) {
             }
             return Battle_PickFormationTarget();
         case 4:
-            targeting_flags = D_801CA718[g_BattleEnemyBattlers[index].turn.command.id][0];
+            targeting_flags = g_Abilities[g_BattleEnemyBattlers[index].turn.command.id].targeting_flags;
             flags           = g_BattleEnemyBattlers[index].event_flags;
             if (flags & 1) {
                 if (targeting_flags & ABILITY_TARGET_ALL) {

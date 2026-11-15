@@ -15,7 +15,7 @@ MATCH void func_801F2D00(void) {
     }
     while (*p != 0) {
         u32 v = *p;
-        if ((v & (0xFFu << 24)) == (0x81u << 24)) { /* the 0x81 record */
+        if ((v & AREA_RECORD_TYPE_MASK) == AREA_RECORD_TYPE_81) {
             p += 2;
             p[1] = AREA051_RECORD_81_WORD;
             p[0] = AREA051_RECORD_81_WORD;

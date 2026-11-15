@@ -386,207 +386,227 @@ struct Vec3W {
 /* Data. */
 
 /* Retail data D_80180000-D_801DFFFF and scratchpad (one declaration each). */
-extern u8               D_1F800004;
-extern u32              D_1F80000C;
-extern SVECTOR          D_1F800014[];
-extern u8               D_8000005A;
-extern u8               D_80000307;
-extern u8               D_800013B5;
-/* Retail data below D_80145000 (one declaration each). */
-extern s32              D_80010004;
-extern EMIDecodeContext D_800327A0[];
-extern u8               D_800E3800;
+extern u8  D_1F800004;
+extern u32 D_1F80000C;
 
-extern u16                         g_AreaCellGrid[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
-extern u8                          D_80142CC0[];
-extern u8                          D_80142CE0[];
-extern u32                         D_80143740[];
+/* One list of the cell ordering table: its first and its last packet. */
+typedef struct AreaCellPacketList {
+    P_TAG* head;
+    P_TAG* tail;
+} AreaCellPacketList;
+
+/* D_80142CC0 as lists: six per grid row. */
+extern AreaCellPacketList g_AreaCellPacketLists[][6];
+extern SVECTOR            D_1F800014[];
+extern SVECTOR            D_1F80001C;
+extern SVECTOR            D_1F800024;
+extern SVECTOR            D_1F80002C;
+extern u8                 D_8000005A;
+extern u8                 D_80000307;
+extern u8                 D_800013B5;
+/* Retail data below D_80145000 (one declaration each). */
+extern s32                D_80010004;
+extern EMIDecodeContext   D_800327A0[];
+extern u8                 D_800E3800;
+
+extern u16                   g_AreaCellGrid[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
+extern u8                    D_80142CC0[];
+extern u8                    D_80142CE0[];
+extern u32                   D_80143740[];
 /* SLUS-only state: overlays declare these addresses with their own views, so
  * the registry does not emit them, except g_SysThreads. */
 /* D_80143B40 */
-extern Thread                      g_SysThreads[]; /* four threads, 0x80 bytes each */
-extern u8                          D_80143D75;
-extern u8                          D_80143D76;
-extern u8                          D_80143D77;
-extern u_long                      D_80143DB8;
-extern u8                          D_80143E05;
-extern u8                          D_80143E06;
-extern u8                          D_80143E07;
-extern u32                         D_80143E70[];
-extern s32                         D_80143E8C;
-extern u32                         D_80143EA0;
-extern u32                         D_80143EA4;
-extern u8                          D_80143F48[];
-extern s16                         g_ScrollHeight[]; /* low half (+2) of the big-endian 0x80143F84 scroll word */
-extern volatile u8                 g_SndMono;
-extern s32                         D_80144967;
+extern Thread                g_SysThreads[]; /* four threads, 0x80 bytes each */
+extern u8                    D_80143D75;
+extern u8                    D_80143D76;
+extern u8                    D_80143D77;
+extern u_long                D_80143DB8;
+extern u8                    D_80143E05;
+extern u8                    D_80143E06;
+extern u8                    D_80143E07;
+extern u32                   D_80143E70[];
+extern s32                   D_80143E8C;
+extern u32                   D_80143EA0;
+extern u32                   D_80143EA4;
+extern u8                    D_80143F48[];
+extern s16                   g_ScrollHeight[]; /* low half (+2) of the big-endian 0x80143F84 scroll word */
+extern volatile u8           g_SndMono;
+extern s32                   D_80144967;
 /* Retail data D_80145000-D_80146FFF (one declaration each). */
-extern s32                         D_80145030;
-extern u8                          D_80145990[];
-extern u32*                        D_801459D0[];
-extern void*                       D_801459F8;
-extern u32                         D_801459FC;
-extern u16                         D_80145A54[];
-extern u16                         D_80145AA6;
-extern u16                         D_80145AAE;
+extern s32                   D_80145030;
+extern u8                    D_80145990[];
+extern u32*                  D_801459D0[];
+extern void*                 D_801459F8;
+extern u32                   D_801459FC;
+extern u16                   D_80145A54[];
+extern u16                   D_80145AA6;
+extern u16                   D_80145AAE;
 /* Pad repeat decoder state words; shop also reads them (func_801D5D98). */
 /* Text cursor cells: the draw-text entry seeds them and the line printer
  * computes with them. */
-extern u16                         D_80145ACA;
-extern u16                         D_80145ACC;
-extern s32                         D_80145DA0;
-extern u8                          D_80145E9B[];
-extern s32                         D_80145EC4;
-extern u8                          D_80145F03;
-extern u8                          D_8014626C[];
-extern volatile u32                g_EmiPayloadSector;
-extern volatile u32                g_EmiBytesLeft;
-extern volatile u32                g_EmiLoadArg;
-extern volatile u32                g_EmiFirstWord;
-extern volatile u16                g_EmiEntryType;
-extern volatile u32                g_EmiRingBase;
-extern u32                         g_EmiStep;
-extern s32                         D_80146474;
-extern volatile u32                D_80146478;
-extern volatile u8                 g_EmiReadStatus;
-extern volatile u8                 g_EmiNextSlot;
-extern u8                          D_80146482;
-extern u8                          D_80146483;
-extern volatile u8                 D_80146484;
-extern volatile u8                 D_80146485;
-extern volatile u8                 D_80146486;
-extern s8                          D_80146488;
-extern s8                          g_EmiRingSlot;
-extern s8                          D_8014648A;
-extern s8                          D_8014648B;
-extern s32                         D_8014648C;
-extern u16                         g_EmiStreamIdleFrames;
-extern u16                         D_80146492;
-extern u8                          g_EmiStreamState;
-extern u8                          D_80146498[];
-extern volatile u8                 g_EmiRingStates[];
-extern s32                         D_80146518[];
-extern u32                         g_EmiSlotSectors[];
-extern EMIBank                     g_EmiBanks[7];
-extern volatile EMIAudioLink       D_80146780[];
+extern u16                   D_80145ACA;
+extern u16                   D_80145ACC;
+extern s32                   D_80145DA0;
+extern u8                    D_80145E9B[];
+extern s32                   D_80145EC4;
+extern u8                    D_80145F03;
+extern u8                    D_8014626C[];
+extern volatile u32          g_EmiPayloadSector;
+extern volatile u32          g_EmiBytesLeft;
+extern volatile u32          g_EmiLoadArg;
+extern volatile u32          g_EmiFirstWord;
+extern volatile u16          g_EmiEntryType;
+extern volatile u32          g_EmiRingBase;
+extern u32                   g_EmiStep;
+extern s32                   D_80146474;
+extern volatile u32          D_80146478;
+extern volatile u8           g_EmiReadStatus;
+extern volatile u8           g_EmiNextSlot;
+extern u8                    D_80146482;
+extern u8                    D_80146483;
+extern volatile u8           D_80146484;
+extern volatile u8           D_80146485;
+extern volatile u8           D_80146486;
+extern s8                    D_80146488;
+extern s8                    g_EmiRingSlot;
+extern s8                    D_8014648A;
+extern s8                    D_8014648B;
+extern s32                   D_8014648C;
+extern u16                   g_EmiStreamIdleFrames;
+extern u16                   D_80146492;
+extern u8                    g_EmiStreamState;
+extern u8                    D_80146498[];
+extern volatile u8           g_EmiRingStates[];
+extern s32                   D_80146518[];
+extern u32                   g_EmiSlotSectors[];
+extern EMIBank               g_EmiBanks[7];
+extern volatile EMIAudioLink D_80146780[];
 /* FAKE: SND_SetBankLayout stores the bank records, headers and cue tables through their own symbols;
  * the g_EmiBanks, g_SndBankHeaders and g_SndBankCues views share one base register and shrink it. */
-extern u8*                         D_80146784;
-extern u32                         D_80146788[];
-extern s16                         D_8014678C;
-extern s32                         D_80146790;
-extern s32                         D_80146794;
-extern u8*                         D_80146798;
-extern s32                         D_8014679C;
-extern u16                         D_801467A0;
-extern s32                         D_801467A4;
-extern s32                         D_801467A8;
-extern u8*                         D_801467AC;
-extern s32                         D_801467B0;
-extern u16                         D_801467B4;
-extern s32                         D_801467B8;
-extern s32                         D_801467BC;
-extern u8*                         D_801467C0;
-extern s32                         D_801467C4;
-extern u16                         D_801467C8;
-extern s32                         D_801467CC;
-extern s32                         D_801467D0;
-extern u8*                         D_801467D4;
-extern s32                         D_801467D8;
-extern u16                         D_801467DC;
-extern s32                         D_801467E0;
-extern s32                         D_801467E4;
-extern u8*                         D_801467E8;
-extern s32                         D_801467EC;
-extern u16                         D_801467F0;
-extern s32                         D_801467F4;
-extern s32                         D_801467F8;
-extern u8*                         D_801467FC;
-extern s32                         D_80146800;
-extern u16                         D_80146804;
-extern u8                          D_801486A0[];
-extern u8                          D_8014871C[];
-extern u8                          D_80148798[];
-extern u8                          D_80148814[];
-extern u8                          D_80148890[];
-extern u8                          D_8014890C[];
-extern u8                          D_80148988[];
-extern s32                         D_80148A18;
-extern s32                         D_80148A1C;
-extern s32                         D_80148A20;
-extern s32                         D_80148A24;
-extern s32                         D_80148A28;
-extern s32                         D_80148A2C;
-extern s32                         D_80148A30;
-extern s32                         D_80148A34;
-extern s32                         D_80148A38;
-extern s32                         D_80148A3C;
-extern s32                         D_80148A40;
-extern s32                         D_80148A44;
-extern s32                         D_80148A48;
-extern s32                         D_80148A4C;
-extern volatile u32                g_EmiSectorCursor;
-extern s32                         D_8014680C;
-extern s32                         D_80146810;
-extern s32                         D_80146814;
-extern s16                         D_80146818;
-extern u16                         D_8014681A;
-extern u16                         D_8014681C;
-extern u16                         D_8014681E;
-extern u16                         D_80146820;
-extern u8                          D_80146824[];
-extern s8                          D_8014682C;
-extern s8                          D_8014682E;
-extern s8                          D_8014682F;
-extern u8                          g_SndCDVolume;
-extern s8                          D_80146832;
-extern u8                          D_80146834;
-extern u8                          D_80146835;
-extern CdlATV                      g_SndCDMix;
-extern u8                          g_EmiServiceMode;
-extern OverlaySlotCursor           D_80146844;
-extern u32*                        D_80146848;
-extern s16                         D_8014684E;
-extern s16                         D_80146850[];
-extern s16                         D_80146852;
-extern u8                          D_80146855;
-extern u8                          D_80146856;
-extern volatile u32                D_80146858;
-extern volatile u32                D_8014685C;
+extern u8*                   D_80146784;
+extern u32                   D_80146788[];
+extern s16                   D_8014678C;
+extern s32                   D_80146790;
+extern s32                   D_80146794;
+extern u8*                   D_80146798;
+extern s32                   D_8014679C;
+extern u16                   D_801467A0;
+extern s32                   D_801467A4;
+extern s32                   D_801467A8;
+extern u8*                   D_801467AC;
+extern s32                   D_801467B0;
+extern u16                   D_801467B4;
+extern s32                   D_801467B8;
+extern s32                   D_801467BC;
+extern u8*                   D_801467C0;
+extern s32                   D_801467C4;
+extern u16                   D_801467C8;
+extern s32                   D_801467CC;
+extern s32                   D_801467D0;
+extern u8*                   D_801467D4;
+extern s32                   D_801467D8;
+extern u16                   D_801467DC;
+extern s32                   D_801467E0;
+extern s32                   D_801467E4;
+extern u8*                   D_801467E8;
+extern s32                   D_801467EC;
+extern u16                   D_801467F0;
+extern s32                   D_801467F4;
+extern s32                   D_801467F8;
+extern u8*                   D_801467FC;
+extern s32                   D_80146800;
+extern u16                   D_80146804;
+extern u8                    D_801486A0[];
+extern u8                    D_8014871C[];
+extern u8                    D_80148798[];
+extern u8                    D_80148814[];
+extern u8                    D_80148890[];
+extern u8                    D_8014890C[];
+extern u8                    D_80148988[];
+extern s32                   D_80148A18;
+extern s32                   D_80148A1C;
+extern s32                   D_80148A20;
+extern s32                   D_80148A24;
+extern s32                   D_80148A28;
+extern s32                   D_80148A2C;
+extern s32                   D_80148A30;
+extern s32                   D_80148A34;
+extern s32                   D_80148A38;
+extern s32                   D_80148A3C;
+extern s32                   D_80148A40;
+extern s32                   D_80148A44;
+extern s32                   D_80148A48;
+extern s32                   D_80148A4C;
+extern volatile u32          g_EmiSectorCursor;
+extern s32                   D_8014680C;
+extern s32                   D_80146810;
+extern s32                   D_80146814;
+extern s16                   D_80146818;
+extern u16                   D_8014681A;
+extern u16                   D_8014681C;
+extern u16                   D_8014681E;
+extern u16                   D_80146820;
+extern u8                    D_80146824[];
+extern s8                    D_8014682C;
+extern s8                    D_8014682E;
+extern s8                    D_8014682F;
+extern u8                    g_SndCDVolume;
+extern s8                    D_80146832;
+extern u8                    D_80146834;
+extern u8                    D_80146835;
+extern CdlATV                g_SndCDMix;
+extern u8                    g_EmiServiceMode;
+extern OverlaySlotCursor     D_80146844;
+extern u32*                  D_80146848;
+extern s16                   D_8014684E;
+extern s16                   D_80146850[];
+extern s16                   D_80146852;
+extern u8                    D_80146855;
+extern u8                    D_80146856;
+extern volatile u32          D_80146858;
+extern volatile u32          D_8014685C;
 /* Retail data D_80147000-D_8014FFFF (one declaration each). */
-extern u8                          D_80147A58[];
-extern u8                          D_80147ACC[];
-extern PanelSortItem               D_80147CFC[];
-extern PanelSortItem               D_80147D08[]; /* == &D_80147CFC[1] */
-extern PanelSortDepth              D_80147D0C[]; /* == &D_80147CFC[1].depth */
-extern MATRIX                      D_801481B8;
-extern CameraAngle                 D_801481D8;
-extern u16                         D_801481E0;
-extern s32                         D_801481F0;
-extern s32                         D_801481F4;
-extern s32                         D_80148200;
-extern u8                          D_8014820C;
+extern u8                    D_80147A58[];
+extern u8                    D_80147ACC[];
+extern PanelSortItem         D_80147CFC[];
+extern PanelSortItem         D_80147D08[]; /* == &D_80147CFC[1] */
+extern PanelSortDepth        D_80147D0C[]; /* == &D_80147CFC[1].depth */
+extern MATRIX                D_801481B8;
+extern CameraAngle           D_801481D8;
+extern u16                   D_801481E0;
+extern s32                   D_801481F0;
+extern s32                   D_801481F4;
+extern s32                   D_80148200;
+extern u8                    D_8014820C;
 /* The work-record table: func_8014D4E0 appends g_Task, func_8014BB20 sorts it by the s16 at +0x3E. */
-extern Actor*                      D_80148214[];
-extern s32                         D_8014828C[];
-extern u8                          D_80148331[];
-extern u8                          D_80148332[];
-extern u8                          D_8014865B;
-extern u8                          g_SndBankCues[7][124];
-extern u16                         D_80148A04;
-extern u16                         D_80148A06;
-extern u16                         D_80148A0C;
-extern u16                         D_80148A0E;
-extern s32                         g_SndBankHeaders[7];
-extern s32                         g_SndBankSequences[7];
-extern u16                         D_80149010[];
-extern u16                         D_80149040[];
-extern u16                         D_80149070[];
+extern Actor*                D_80148214[];
+extern s32                   D_8014828C[];
+extern u8                    D_80148331[];
+extern u8                    D_80148332[];
+extern u8                    D_8014865B;
+extern u8                    g_SndBankCues[7][124];
+extern u16                   D_80148A04;
+extern u16                   D_80148A06;
+extern u16                   D_80148A0C;
+extern u16                   D_80148A0E;
+extern s32                   g_SndBankHeaders[7];
+extern s32                   g_SndBankSequences[7];
+extern u16                   D_80149010[];
+extern u16                   D_80149040[];
+extern u16                   D_80149070[];
 /* D_801490A3 */
-extern u8                          g_MessageChoiceStep;
+extern u8                    g_MessageChoiceStep;
 /* D_801490AC */
-extern u32                         g_MessageScript;
-extern u8*                         D_801490B0;
+extern u32                   g_MessageScript;
+extern u8*                   D_801490B0;
+
+/* The message window with the byte ahead of it: UI_DrawGlyph reads both through this one block. */
+typedef struct MessageWindowBlock {
+    u8        row_offset_index; /* 0x00 - row of g_TextRowOffsets the glyph height uses */
+    u8        pad_01[3];        /* 0x01-0x03 */
+    MenuState window;           /* 0x04 - g_MessageWindow */
+} MessageWindowBlock;
+
 extern u8                          D_801490B8[]; /* base form: UI_DrawGlyph takes its address and reads [0] */
 extern u8                          D_801490B9;
 extern s8                          D_801490BA[];
@@ -631,6 +651,7 @@ extern const char                  D_80149F9C[];
 extern const char                  D_80149FAC[];
 extern const u32                   D_8014AAB8[4];
 extern u8                          D_8016432C;
+/* D_8017F44C */
 extern const char                  D_8017F44C[];
 extern const void* const           D_8017F470[];
 /* Retail data D_80170000-D_8017FFFF (one declaration each). */
@@ -659,7 +680,8 @@ extern const u16                   D_8017F972;
 extern const EncounterZone         g_AreaEncounterZones[MAP_ZONE_COUNT];
 /* D_80181164 */
 extern const EncounterZone* const  g_EncounterZones[MAP_ZONE_LIST_COUNT];
-extern const SceneFlagPair         D_80181484[SCENE_FLAG_COUNT];
+/* D_80181484 */
+extern const SceneFlagPair         g_SceneFlagPairs[SCENE_FLAG_COUNT];
 extern const ScriptRef             D_80181BDC[40];
 extern const ScriptRef* const      D_80181C7C[11];
 extern const BGMTrack              g_BGMTracks[BGM_TRACK_COUNT];
@@ -705,6 +727,7 @@ extern u32                         g_XaStates[55];
 extern u32                         D_80183A1C[17];
 extern u32                         D_80183A60[4];
 extern u16                         D_80183A70[];
+extern u32                         g_SysStartupReturn; /* start of the BSS stup2 clears */
 extern u8                          D_8018B2F4;
 extern s16                         D_8018B308;
 extern s16                         D_8018B30C;
@@ -775,9 +798,10 @@ extern u8                          D_8018B4AC;
 extern u32                         D_8018B4B0;
 extern void (*D_8018E7D4)(s16 voice);
 extern void (*D_8018E988)(s16 voice);
-extern s8 D_8018E98C;
-extern u8 D_801C839C[];
-extern u8 D_801C839D[];
+extern s8  D_8018E98C;
+extern u32 D_80190C60; /* end of the BSS stup2 clears */
+extern u8  D_801C839C[];
+extern u8  D_801C839D[];
 extern void (*D_801C83D8[])(u8*);
 extern u8*                   D_801C893C[];
 extern u8*                   D_801C8950[];
@@ -1095,7 +1119,9 @@ void                    Area_LoadCellRowsPrev(void);
 /* func_80152FB0 */
 void                    Area_LoadCellRowsNext(void);
 extern s32              func_801530D0(void);
-extern void             func_80153CC4(u32 unused);
+extern void             func_80153CC4(void);
+/* The cell record the tile-ring draw is working on. */
+extern s8*              D_1F800010;
 extern void             func_80153D34(void);
 extern void             Area_GetCell(s32 px, s32 py, AreaCell* out);
 extern s32              Area_UploadCell(s32 column, s32 row, POLY_FT4* context, s32 slot);
@@ -1131,7 +1157,7 @@ void                    func_80159A00(void);
 void                    func_80159A20(void);
 void                    func_80159A90(void);
 void                    func_80159B38(void);
-extern void             func_80159B9C(s32 x, s32 y, u16 w, u16 h);
+extern void             func_80159B9C(s16 x, s16 y, u8 w, u8 h);
 void                    func_80159FA0(s32 x, s32 y, u8 width, u8 height);
 extern void             func_8015A098(void);
 extern void             func_8015A170(void);

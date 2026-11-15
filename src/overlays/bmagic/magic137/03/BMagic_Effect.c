@@ -31,7 +31,23 @@ MATCH void func_801EF018(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF090);
+MATCH void func_801EF090(void) {
+    PartyMember* work;
+
+    g_Task->unk_0C = -TO_COORD_HALF(2);
+    g_Task->unk_10 = 0;
+    func_801DD350(g_Task);
+    g_Task->pos.x.fixed        = VOL(s32, g_AreaScrollTargetX) + g_Task->unk_0C;
+    g_Task->pos.y.fixed        = VOL(s32, g_AreaScrollTargetY) + g_Task->unk_10;
+    g_Task->pos.z.part.integer = Area_SampleHeight(VOL(s32, g_AreaScrollTargetX), VOL(s32, g_AreaScrollTargetY)) + 0x200;
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    work               = g_Task;
+    work->param.unk_0B = 0x34;
+    work->unk_14       = 0x2FFF;
+    g_Task->unk_09     = 0;
+    g_Task->timer      = 0x10;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EF174(void) {
     PartyMember* work = g_Task;

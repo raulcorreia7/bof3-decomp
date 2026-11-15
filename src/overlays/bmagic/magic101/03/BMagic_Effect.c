@@ -159,7 +159,34 @@ MATCH void func_801EF3DC(void) {
 
 INCLUDE_ASM(func_801EF4DC);
 
-INCLUDE_ASM(func_801EF580);
+MATCH void func_801EF580(void) {
+    PartyMember* effect;
+    PartyMember* effectForFacing;
+    PartyMember* effectForSetup;
+    s32          wave;
+    u8           ticksRemaining;
+
+    g_Task->param.unk_0B += 8;
+    wave                       = ((rsin((g_FrameCount & 0x1F) << 7) << 5) >> 12) + 384;
+    effect                     = g_Task;
+    effect->pos.z.part.integer = (u16)g_BattleEffectBattler->pos.z.part.integer + wave;
+    ticksRemaining             = effect->unk_09 - 1;
+    effect->unk_09             = ticksRemaining;
+    if (ticksRemaining != 0) {
+        return;
+    }
+    if (g_Task->unk_04 == 0) {
+        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 1));
+    }
+    effectForFacing               = g_Task;
+    effectForFacing->param.unk_0B = D_801EFCE0[effectForFacing->facing];
+    effectForSetup                = g_Task;
+    effectForSetup->unk_10        = 128;
+    effectForSetup->unk_14        = 128;
+    effectForSetup->unk_09        = 16;
+    effectForSetup->unk_1C        = 24;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EF690(void) {
     u8           counter;

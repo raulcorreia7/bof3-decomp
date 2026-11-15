@@ -76,7 +76,37 @@ MATCH void func_801F7758(void) {
     }
 }
 
-INCLUDE_ASM(func_801F781C);
+/* Draw the item panel background at (x, y) and, on each of the eight rows, the glyph for each owned item up to three. */
+MATCH void func_801F781C(u16 x, u16 y, u16 width, u16 height) {
+    POLY_FT4* prim;
+    u8        i;
+    u8        j;
+    u8        count;
+    u8        glyph;
+
+    prim = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(prim);
+    prim->tpage = GetTPage(0, 0, 704, 256);
+    setClut(prim, 64, 483);
+    setRGB0(prim, 0x80, 0x80, 0x80);
+    setXY4(prim, x, y, x + width, y, x, y + height, x + width, y + height);
+    setUV4(prim, 0, 0x98, 0x80, 0x98, 0, 0xFF, 0x80, 0xFF);
+    GFX_AddPrim(1, sizeof(POLY_FT4));
+    i = 0;
+    do {
+        count = D_80144908[i];
+        if (count > 3) {
+            count = 3;
+        }
+        for (j = 0; j < count; j++) {
+            glyph = D_801FE830[i][j];
+            if (glyph != 10) {
+                func_801F79E8(D_801FE848[glyph].x + x, D_801FE848[glyph].y + y);
+            }
+        }
+        i++;
+    } while (i < 8);
+}
 
 INCLUDE_ASM(func_801F79E8);
 
@@ -84,7 +114,20 @@ INCLUDE_ASM(func_801F7AD4);
 
 INCLUDE_ASM(func_801F7C34);
 
-INCLUDE_ASM(func_801F7DDC);
+/* Draw the "Choose parts" window with its item list and cursor, then place and step the cursor actor. */
+MATCH void func_801F7DDC(void) {
+    UI_DrawWindow(D_801FE7CC[3].x, D_801FE7CC[3].y, D_801FE7CC[3].width, D_801FE7CC[3].height, 2, g_WindowStyle);
+    sprintf(g_UiFormatBuffer, D_801F6C04, D_801FE874);
+    UI_DrawText((u16)D_801FE7CC[3].x + 8, D_801FE7CC[3].y + 2, 0, 12, g_UiFormatBuffer);
+    func_801F7AD4();
+    Menu_DrawCursorSprite(D_801FE808[0], (u16)(D_801FE808[1] + (g_Task->header.step & 7) * 15), 0);
+    func_801F7C34();
+    g_Task->screen_x = D_801FE7CC[5].x + D_801FE804[0];
+    g_Task->screen_y = D_801FE7CC[5].y + D_801FE804[1];
+    func_80159B9C(D_801FE7CC[5].x, D_801FE7CC[5].y, (u8)D_801FE7CC[5].width, (u8)D_801FE7CC[5].height);
+    Actor_StepAnimLoop();
+    Area_AddActor();
+}
 
 MATCH void func_801F7F50(void) {
     SYS_DISPATCH_BYTE(D_801FE8F4, D_80146872);
@@ -333,7 +376,43 @@ MATCH void func_801FDAD4(void) {
 
 INCLUDE_ASM(func_801FDB14);
 
-INCLUDE_ASM(func_801FE00C);
+MATCH s32 func_801FE00C(s32 x, s32 y) {
+    if (g_GameAreaId == AREA_ID_JUNK_TOWN) {
+        if (SYS_TestFlag(g_SceneFlags, 8) && SYS_TestFlag(g_SceneFlags, 9) == 0 && y >= TO_COORD(48) && (u32)((x >> 16) - 28) < 5) {
+            Game_SetScriptActive();
+            SYS_SetFlag(g_SceneFlags, 9);
+            SYS_SetFlag(g_SceneEventFlags, 67);
+            g_ScriptVars[0] = 10;
+            return 1;
+        }
+    }
+    if (g_GameAreaId == AREA_ID_TIDAL_CAVES_OUTSIDE && D_80143F03 == 0 && SYS_TestFlag(g_SceneFlags, 53) == 0 && (y >> 16) >= 29) {
+        Game_SetScriptActive();
+        g_SceneState.state_04 = 12;
+        g_SceneState.step_05  = 0;
+        return 1;
+    }
+    if (g_GameAreaId == AREA_ID_CLIFF_GAIST && D_80143F03 == 5 && SYS_TestFlag(g_SceneFlags, 59) && SYS_TestFlag(g_SceneFlags, 60) == 0 && y == TO_COORD(116) + COORD_HALF && x == TO_COORD(37)) {
+        Game_SetScriptActive();
+        g_SceneState.state_04 = 13;
+        g_SceneState.step_05  = 15;
+    }
+    if (g_GameAreaId == AREA_ID_MACHINE_GUILD_DOCK) {
+        if (SYS_TestFlag(g_SceneFlags, 10) == 0 && y > TO_COORD(42) - 1 && (u32)((x >> 16) - 32) < 5) {
+            Game_SetScriptActive();
+            g_SceneState.state_04 = 3;
+            g_SceneState.step_05  = 0;
+            return 1;
+        }
+        if (SYS_TestFlag(g_SceneFlags, 11) && SYS_TestFlag(g_SceneFlags, 13) == 0 && y <= TO_COORD(55) && (u32)((x >> 16) - 31) < 2) {
+            Game_SetScriptActive();
+            g_SceneState.state_04 = 4;
+            g_SceneState.step_05  = 10;
+            return 1;
+        }
+    }
+    return 0;
+}
 
 MATCH bool func_801FE2B0(void) {
     u8 i;
