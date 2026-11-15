@@ -67,7 +67,7 @@ MATCH void func_801EEFBC(void) {
 MATCH void func_801EF078(void) {
     g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
     g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
-    g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x1600000;
+    g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + TO_COORD(0x160);
     g_Task->unk_25      = 0x1D;
     g_Task->unk_26      = 0;
     g_Task->unk_27      = 0x1A;
