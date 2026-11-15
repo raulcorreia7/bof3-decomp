@@ -6,6 +6,8 @@ typedef struct {
     u16 unk_02;
 } MapCell;
 
+ASSERT_SIZE(MapCell, 0x04);
+
 /* builds the projected quad for one map cell's texture entry, stages
  * the primitive, and appends it to the ordering table.
  */
@@ -52,7 +54,7 @@ NON_MATCHING void func_8015684C(u8* record, s32 cell_x, s32 cell_y) {
     v1.vx = x1;
     v3.vy = y1;
     v1.vy = y1;
-    z0    = -((cell->unk_00 & BYTE_MASK) << 4);
+    z0    = -((cell->unk_02 & BYTE_MASK) << 4);
     v2.vz = z0;
     v0.vz = z0 - 0x80;
     z1    = -(cell->unk_01 << 4);
