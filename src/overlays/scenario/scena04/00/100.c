@@ -45,7 +45,27 @@ MATCH void func_801F6EA4(void) {
     }
 }
 
-INCLUDE_ASM(func_801F6F2C);
+/* Steps the scene's entrance focus one cell and fades out the shade as the timer runs down. */
+MATCH void func_801F6F2C(void) {
+    Actor* work;
+    Actor* actor;
+    u8     mode;
+    u8     level;
+
+    work              = g_Task;
+    work->unk_1C      = work->unk_1C + 0x4000;
+    work->pos.x.fixed = work->pos.x.fixed + TO_COORD(1);
+    func_801F7084(&work->vx);
+    level = g_Task->timer;
+    func_801F75BC(0x10, (level == 8) ? 0xFF : level << 5);
+    actor        = g_Task;
+    mode         = actor->timer - 1;
+    actor->timer = mode;
+    if (mode == 0) {
+        g_Task->timer = 32;
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801F6FF8(void) {
     Actor* work;
@@ -64,7 +84,25 @@ MATCH void func_801F7064(void) {
 
 INCLUDE_ASM(func_801F7084);
 
-INCLUDE_ASM(func_801F732C);
+/* Draws a Gouraud quad through four path points, two corners per shade, flickering with the frame parity. */
+MATCH void func_801F732C(u8 v0, u8 v1, u8 v2, u8 v3, s32 shade0, s32 shade1) {
+    POLY_G4* primitive;
+    u8       color0;
+    u8       color1;
+
+    primitive = GFX_BeginPolyG4(1);
+    Area_ProjectPoint((s32*)&D_801FA240[v0], (DVECTOR*)&primitive->x0);
+    Area_ProjectPoint((s32*)&D_801FA240[v1], (DVECTOR*)&primitive->x1);
+    Area_ProjectPoint((s32*)&D_801FA240[v2], (DVECTOR*)&primitive->x2);
+    Area_ProjectPoint((s32*)&D_801FA240[v3], (DVECTOR*)&primitive->x3);
+    color0 = (shade0 << 7) | ((g_FrameCount & 1) << 2);
+    color1 = (shade1 << 7) | ((g_FrameCount & 1) << 2);
+    setRGB0(primitive, color0, color0, color0 >> 1);
+    setRGB1(primitive, color0, color0, color0 >> 1);
+    setRGB2(primitive, color1, color1, color1 >> 1);
+    setRGB3(primitive, color1, color1, color1 >> 1);
+    GFX_AddPrim(1, sizeof(POLY_G4));
+}
 
 INCLUDE_ASM(func_801F747C);
 
