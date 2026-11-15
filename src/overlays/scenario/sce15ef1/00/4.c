@@ -385,12 +385,12 @@ INCLUDE_ASM(func_801D26BC);
 MATCH void func_801D2934(void) {
     SceneDot* dot;
     TILE_1*   tile;
-    u16       i;
+    u16       dot_index;
     u8        timer;
 
     ((Actor*)g_Task->unk_4C)->header.flags |= ACTOR_FLAG_HIDDEN;
     dot = MEM_PTR(SceneDot, AREA_WORK + 0x5A00);
-    for (i = 0; i < D_801D40A8; dot++, i++) {
+    for (dot_index = 0; dot_index < D_801D40A8; dot++, dot_index++) {
         if (dot->active != 0) {
             if (g_Task->unk_06 == 0) {
                 if (dot->life != 0) {
