@@ -17,7 +17,7 @@ extern PartyMemberMessages g_PartyMemberMessages[2];
 
 /* The image's step passes. */
 /* func_801F3030 */
-void Game_SetCurrentActor(s32 arg0);
+void Game_SetCurrentActor(s32 tint);
 void func_801F3850(void);
 
 #endif
