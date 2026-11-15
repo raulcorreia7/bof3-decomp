@@ -39,11 +39,11 @@ NON_MATCHING void func_801E7BA0(void) {
                 var_v0_49 = 0;
                 do {
                     if (!(*(&D_801EBFA0 + (var_v0_49 * BATTLE_PARTY_STRIDE)) & 0x4000)) {
-                        FIELD(u8, (&g_Battle.state), 0x9u) = (u8)(FIELD(u8, (&g_Battle.state), 0x9u) + 1);
+                        g_Battle.living_party_count += 1;
                     }
                     var_s0 += 1;
                     var_v0_49 = var_s0;
-                } while (var_s0 < FIELD(u8, (&g_Battle.state), 0x8u));
+                } while (var_s0 < g_Battle.party_count);
             }
             D_8014835E = g_Battle.party_count;
             temp_v0_76 = g_Battle.party_count;
