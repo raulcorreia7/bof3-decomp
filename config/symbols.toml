@@ -226,13 +226,25 @@ Menu_DrawPanelIcon = { addr = 0x800B326C, type = "func", source = "Draws one Men
 Menu_DrawEquipChoiceWindow = { addr = 0x800B3AE8, type = "func", source = "Draws the equip list: gathers the inventory rows of the equipment slot's category (unk_09) that the party member can equip, armor only of the slot's type, into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts, then draws them with the category title, the choice count and the scroll bar." }
 g_BattleScrollDeltas = { addr = 0x800B44C0, source = "The camera scroll step of each scroll direction; the battle scroll routines add one entry indexed by g_Battle.scroll_dir." }
 g_BattleEscapeThresholds = { addr = 0x800B44F0, source = "Escape chances by party and enemy agility difference." }
+D_800B45E0 = { addr = 0x800B45E0, size = 0x60, source = "One of the four byte tables D_800B470C points to; each byte selects a handler in D_800B471C." }
+D_800B4640 = { addr = 0x800B4640, size = 0x5C, source = "One of the four byte tables D_800B470C points to; each byte selects a handler in D_800B471C." }
+D_800B469C = { addr = 0x800B469C, size = 0x48, source = "One of the four byte tables D_800B470C points to; each byte selects a handler in D_800B471C." }
+D_800B46E4 = { addr = 0x800B46E4, size = 0x28, source = "One of the four byte tables D_800B470C points to; each byte selects a handler in D_800B471C." }
+D_800B470C = { addr = 0x800B470C, size = 0x10, source = "The four byte tables that select a handler in D_800B471C." }
+D_800B471C = { addr = 0x800B471C, size = 0x208, source = "Handlers selected by the bytes of the tables D_800B470C points to." }
+D_800B4D7C = { addr = 0x800B4D7C, size = 0xFC, source = "Rows of 14 bytes added to the 14 bytes at D_800B6F60." }
+D_800B4E78 = { addr = 0x800B4E78, size = 0x19, source = "Five rows of five bytes." }
 s_BattleAffinityLevelBonus = { addr = 0x800B4E94, source = "Affinity bonus by affinity level." }
+D_800B4EE0 = { addr = 0x800B4EE0, size = 0x126, source = "Rows of 14 bytes, one per form." }
+D_800B5008 = { addr = 0x800B5008, size = 0xA8, source = "Rows of eight bytes, one per form." }
 D_800B50B0 = { addr = 0x800B50B0, size = 0x1C, source = "Mode handlers of queued battle effect handler 0x0F: select the facing script, close on the target, hop until the vertical speed reaches -0x40, then restore the battler." }
 D_800B50CC = { addr = 0x800B50CC, size = 0x8, source = "Mode handlers of queued battle effect handler 0x10: select the facing script, then run the active effect until its mode 5 releases it." }
 D_800B50D4 = { addr = 0x800B50D4, source = "Mode handlers of queued battle effect handler 0x12: a semi-transparent tint set from the parameter, then Effect_ShakeScreen." }
 D_800B50DC = { addr = 0x800B50DC, size = 0x8, source = "func_800AA5F4 rolls rand() % entry == 0 with the entry the ability high nibble selects (D_800B50E4 for char 6); needs: what the roll decides" }
+D_800B51E8 = { addr = 0x800B51E8, size = 0x10, source = "Four pairs of halfwords." }
 g_BattleActionSelection = { addr = 0x800B6510, type = "u8", size = 0xE8, source = "Battle action row selector: the action id (the ability index, low byte of g_BattleActionId) picks a row of g_BattleSelections." }
 g_BattleSelections = { addr = 0x800B65F8, source = "Battle selection rows." }
+D_800B6BF0 = { addr = 0x800B6BF0, size = 0x4, source = "Four bytes the effects index by selector." }
 g_BattlePanelUV = { addr = 0x800B6C04, type = "BattlePanelTexture", source = "Texture coordinates of the battle panel quads." }
 s_BattleCellRowCount = { addr = 0x800B6C28, source = "func_800AF8F0, func_800AF9D4 and func_800AFB48 bound the sprite-cell row copy at this byte times 16" }
 s_BattleCellRowDivisor = { addr = 0x800B6C30, source = "func_800AF8F0, func_800AF9D4, func_800AFAB8 and func_800AFB48 divide the sprite cell value by this byte" }
@@ -277,8 +289,11 @@ D_801C893C = { addr = 0x801C893C, size = 0x14, source = "Pointers to the five it
 g_BattleEnemies = { addr = 0x801EB2E8, source = "The enemy battlers." }
 g_BattleActorTurn = { addr = 0x801EB4D8, source = "the acting party battler's BattleTurn; the emi/battle/battle/15 target-selection handlers read it for command.target and the action and damage flags (set by emi/battle/battle/03)" }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEnemyBattlers = { addr = 0x801EB630, alias = true }
 D_801EB6DA = { addr = 0x801EB6DA, size = 0x2, source = "Halfword cell written by Battle_RescaleStats and read by func_8009F010" }
 D_801EB72C_rows = { addr = 0x801EB72C, alias = true, source = "enemy battler rows read through EnemyBattler fields since #495" }
+s_BattleBattlerTemplates = { addr = 0x801EBF20, alias = true }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
 g_BattleTemplateStats = { addr = 0x801EC364, source = "Template stat rows of the battlers." }
 
 ["emi/bmagic/magic001/00"]
@@ -1293,6 +1308,7 @@ g_BattleEnemyBattlers = { addr = 0x801EB630, alias = true }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_DrawShadedQuads = { addr = 0x801F016C, type = "func", source = "Draws the effect's Gouraud-shaded quads with a depth offset." }
 Area_DrawGroundSceneSprite = { addr = 0x801F0778, type = "func", source = "Draws one sprite of a scene record as an FT4 primitive like Area_DrawSceneSprite, with its depth from Area_SampleHeight under its origin, so the sprite stands on the ground." }
+D_801F0C94 = { addr = 0x801F0C94, size = 0x8, source = "Eight bytes." }
 
 ["emi/bmagic/magic103/03"]
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
@@ -1363,6 +1379,9 @@ Effect_AdvanceOnTick = { addr = 0x801EF090, type = "func", source = "Raises the 
 ["emi/bmagic/magic109/03"]
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+D_801EF9F8 = { addr = 0x801EF9F8, type = "Point2l", size = 0x80, source = "Sixteen points of the effect." }
+D_801EFA78 = { addr = 0x801EFA78, type = "Point2l", size = 0x80, source = "Sixteen points of the effect." }
+D_801EFAF8 = { addr = 0x801EFAF8, type = "Point2l", size = 0x80, source = "Sixteen points of the effect." }
 
 ["emi/bmagic/magic110/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
@@ -1380,6 +1399,7 @@ Effect_SetActorMatrix = { addr = 0x801EF998, type = "func", source = "Sets the a
 BMagic_DrawDarkRing = { addr = 0x801EFC98, type = "func", source = "draws 64 subtractive POLY_G4 quads in a flat ring; the inner edge subtracts four times the shade byte, the outer edge nothing" }
 Effect_SetActorMatrix2 = { addr = 0x801F0138, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic110 (Ragnarok)." }
 g_BMagicEffectModes = { addr = 0x801F046C, source = "Handlers of magic110 (Ragnarok), run by header.mode (byte 0x01)." }
+D_801F04A4 = { addr = 0x801F04A4, type = "Point2l", size = 0x30, source = "Six points." }
 
 ["emi/bmagic/magic111/03"]
 D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true, source = "The scratchpad base 0x1F800000 as signed halfwords; the magic effects read and set its first halfword as a vertical offset." }
@@ -1415,6 +1435,10 @@ D_801F0BC0 = { addr = 0x801F0BC0, source = "Step handlers of the bmagic/magic113
 D_801F0BCC = { addr = 0x801F0BCC, source = "Step handlers of the bmagic/magic113/03 effect, run by header.step from func_801F0140." }
 
 ["emi/bmagic/magic114/03"]
+D_80033C00 = { addr = 0x80033C00, type = "u16", size = 0x200, source = "Row 2 of the palette arena." }
+D_80036C00 = { addr = 0x80036C00, type = "u16", size = 0x200, source = "Row 26 of the palette arena." }
+D_80037C00 = { addr = 0x80037C00, type = "u16", size = 0x200, source = "Row 2 of the working copy of the palette banks." }
+g_BattleEffectPalette = { addr = 0x8003AC00, type = "u16", size = 0x200, source = "Row 26 of the working copy of the palette banks." }
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
@@ -1669,6 +1693,8 @@ Effect_AddActor = { addr = 0x801F007C, type = "func", source = "Adds the effect'
 g_BMagicEffectModes = { addr = 0x801F00F8, source = "Handlers of magic137 (Corona), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic138/03"]
+D_80036C00 = { addr = 0x80036C00, type = "u16", size = 0x200, source = "Row 26 of the palette arena." }
+g_BattleEffectPalette = { addr = 0x8003AC00, type = "u16", size = 0x200, source = "Row 26 of the working copy of the palette banks." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -6405,6 +6431,7 @@ D_1F800024 = { addr = 0x1F800024, type = "SVECTOR", source = "The third corner v
 D_1F80002C = { addr = 0x1F80002C, type = "SVECTOR", source = "The fourth corner vector of the RotTransPers4 block at 0x1F800014, written on its own by the tile-ring draw (func_801530D0)." }
 g_Task = { addr = 0x1F800044, size = 0x4, source = "The current task work record." }
 jtbl_800327B0 = { addr = 0x800327B0, type = "Callback", source = "The switch table of LZ77_DecodeStep: the jump targets of its jr dispatch." }
+D_80033A08 = { addr = 0x80033A08, type = "u16", source = "Window colors, 0x40 bytes per window style." }
 g_AreaMapBundle = { addr = 0x80104000, type = "AreaMapBundle", size = 0x30, source = "Header of the area map bundle." }
 g_AreaCells = { addr = 0x8012C000, size = 0x1880, source = "The area cells." }
 g_AreaCellPrims = { addr = 0x8012D880, size = 0x14000, source = "The primitives of the area cells." }
@@ -6637,7 +6664,7 @@ g_MessageChoiceTimer = { addr = 0x801490AA, source = "Timer of the message choic
 g_MessageScript = { addr = 0x801490AC, source = "The message script being shown." }
 g_MessageWindow = { addr = 0x801490BC, source = "MenuState block the text, panel and cue handlers share: text_x/text_y cursor, origin_x/origin_y window origin, selection_index choice; UI_DrawGlyph draws at its text_x/text_y" }
 g_MessageChoice = { addr = 0x801490C7, source = "The player's choice in the message window." }
-g_TextVariables = { addr = 0x801490D8, type = "u8", source = "Text variables." }
+g_TextVariables = { addr = 0x801490D8, type = "u8", size = 0x200, source = "Text variables." }
 g_AreaCameraAngle = { addr = 0x801492D8, size = 0x8, source = "Angle of the area camera." }
 D_801492E0 = { addr = 0x801492E0, type = "SVECTOR", source = "The camera angle of the previous frame: Area_UpdateCamera copies g_AreaCameraAngle here when the angle changes and counts three refreshes." }
 g_CameraMatrix = { addr = 0x801492E8, type = "MATRIX", source = "View matrix of the camera." }
@@ -7724,11 +7751,13 @@ Scene_ClearEventState = { addr = 0x801F2F1C, type = "func", source = "Clears the
 
 ["emi/battle/batl_end/00"]
 jtbl_801EEC0C = { addr = 0x801EEC0C, type = "Callback", size = 0x1C, source = "The switch table of func_801EF928: 7 jump targets of its jr dispatch." }
+D_801EEC40 = { addr = 0x801EEC40, size = 0x4, source = "The decimal number format." }
 Battle_WaitVictoryLoad = { addr = 0x801EEFCC, type = "func", source = "Last substate of ui_step 0 of the battle victory overlay (D_801F0CA4): waits for EMI_IsReady after func_801EECD0 requested the member archive, then resets the row cursor and ui_state and advances ui_step." }
 Battle_GrantQueuedItems = { addr = 0x801EF870, type = "func", source = "Gives the items queued in the battle." }
 Battle_DrawVictoryZenny = { addr = 0x801F09F4, type = "func", source = "Draws the zenny reward of the battle victory screen: formats g_Zenny with TEXT_Format and draws the amount and its caption; the second entry of the table in func_801F097C." }
 Char_GetExpToNextLevel = { addr = 0x801F0BB0, type = "func", source = "Returns the experience a party member still needs for its next level; 0 once its exp already covers it." }
 
 ["emi/battle/batl_ovr/00"]
+g_BattleEffectPalette = { addr = 0x8003AC00, type = "u16", size = 0x200, source = "Row 26 of the working copy of the palette banks." }
 Battle_StartGameOver = { addr = 0x801EEC40, type = "func", source = "Step 0 of the BATL_OVR (battle defeat) step table that ends in Battle_UpdateGameOver: sets UI mode 0x13, copies palette 0x1A and advances ui_step." }
 Battle_UpdateGameOver = { addr = 0x801EF0A8, type = "func", source = "Runs the game over screen." }

@@ -453,8 +453,9 @@ u8*  Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode);
 /* func_80166B94 */
 u8*  Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode);
 /* 0x40-byte palette staging entries; GFX_LoadPalette copies them out, the second copy lands 0x4000 above. */
-#define GAME_PALETTE_STAGE  MEM_PTR(u8, 0x80035600u)
-#define GAME_PALETTE_MIRROR MEM_PTR(u8, 0x80039600u)
+#define GAME_PALETTE_STAGE      MEM_PTR(u8, 0x80035600u)
+#define GAME_PALETTE_MIRROR     MEM_PTR(u8, 0x80039600u)
+#define GAME_PALETTE_MIRROR_U16 ((u16*)GAME_PALETTE_MIRROR)
 /* func_80166CB0 */
 s32        Area_GetCellCode(s32 x, s32 y);
 /* func_80166CEC */
