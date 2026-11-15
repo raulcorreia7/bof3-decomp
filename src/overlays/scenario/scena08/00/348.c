@@ -79,6 +79,7 @@ MATCH void func_801F7268(void) {
 }
 
 MATCH void func_801F7320(void) {
+    u16 count;
     u16 timer;
 
     func_801F85F0((s16)g_Task->screen_x, (s16)g_Task->screen_y, (s16)g_Task->unk_32);
