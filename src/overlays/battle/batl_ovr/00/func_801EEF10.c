@@ -5,20 +5,16 @@ NON_MATCHING void func_801EEF10(void) {
     u16  i;
     u32  gray;
     u16  color;
-    u16  value;
-    u16* timer;
     u16* mirror;
 
     func_801EF318();
     func_801EF180(128);
     func_801EF3B4(128);
 
-    timer = &D_801463B0;
-    value = *timer;
-    if (value < 244) {
-        *timer = value + 4;
+    if (D_801463B0 < 244) {
+        D_801463B0 += 4;
     }
-    func_801EF47C(*timer);
+    func_801EF47C(D_801463B0);
 
     if (g_InputHeld != 0) {
         for (i = 0; i < 256; i++) {
