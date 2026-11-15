@@ -80,7 +80,34 @@ MATCH void func_801D0DD8(void) {
     }
 }
 
-INCLUDE_ASM(func_801D0F10);
+MATCH void func_801D0F10(void) {
+    s32 origin_x;
+    s32 origin_y;
+    s32 origin_z;
+    u8  mode;
+
+    if ((g_Task->unk_06++ & 0x3) == 0) {
+        func_801D19C8();
+    }
+    func_801D2088();
+    func_801D1A60();
+    if (g_ScriptVars[0] == 0x14) {
+        origin_x            = g_Task->unk_64;
+        origin_y            = g_Task->unk_68;
+        origin_z            = g_Task->unk_6C;
+        mode                = g_Task->header.mode + 1;
+        g_Task->vx          = 0;
+        g_Task->vy          = 0;
+        g_Task->vz          = 0;
+        g_Task->unk_18      = origin_x;
+        g_Task->unk_1C      = origin_y;
+        g_Task->gravity     = origin_z;
+        g_Task->unk_64      = (0x2F8000 - g_Task->unk_64) >> 7;
+        g_Task->unk_68      = (0x278000 - g_Task->unk_68) >> 7;
+        g_Task->unk_6C      = (0x0F000000 - g_Task->unk_6C) >> 7;
+        g_Task->header.mode = mode;
+    }
+}
 
 MATCH void func_801D0FEC(void) {
     if ((g_Task->unk_06++ & 0x3) == 0) {
@@ -216,7 +243,72 @@ MATCH void func_801D147C(s32* pos, s16 origin, s32 flags) {
     } while ((i & BYTE_MASK) < 32U);
 }
 
-INCLUDE_ASM(func_801D1678);
+MATCH void func_801D1678(s32* from, s32* to, u8 intensity) {
+    POLY_G4* prim;
+    TILE*    segment;
+    VECTOR   current;
+    VECTOR   step;
+    DVECTOR  projected;
+    s32      phase;
+
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    SetSemiTrans(prim, 1);
+    Area_ProjectPoint(from, &projected);
+    prim->x0 = projected.vx + 1;
+    prim->y0 = projected.vy - 1;
+    prim->x1 = projected.vx;
+    prim->y1 = projected.vy;
+    Area_ProjectPoint(to, &projected);
+    prim->x2 = projected.vx + 1;
+    prim->y2 = projected.vy - 1;
+    prim->x3 = projected.vx;
+    prim->y3 = projected.vy;
+    setRGB0(prim, 0, 0, 0);
+    setRGB1(prim, intensity, intensity, 0);
+    setRGB2(prim, 0, 0, 0);
+    setRGB3(prim, intensity, intensity, 0);
+    GFX_AddPrim(2, sizeof(POLY_G4));
+
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    SetSemiTrans(prim, 1);
+    Area_ProjectPoint(from, &projected);
+    prim->x0 = projected.vx;
+    prim->y0 = projected.vy;
+    prim->x1 = projected.vx - 1;
+    prim->y1 = projected.vy + 1;
+    Area_ProjectPoint(to, &projected);
+    prim->x2 = projected.vx;
+    prim->y2 = projected.vy;
+    prim->x3 = projected.vx - 1;
+    prim->y3 = projected.vy + 1;
+    setRGB0(prim, intensity, intensity, 0);
+    setRGB1(prim, 0, 0, 0);
+    setRGB2(prim, intensity, intensity, 0);
+    setRGB3(prim, 0, 0, 0);
+    GFX_AddPrim(2, sizeof(POLY_G4));
+
+    step.vx    = g_Task->unk_64;
+    step.vy    = g_Task->unk_68;
+    step.vz    = g_Task->unk_6C;
+    phase      = g_FrameCount & 0xF;
+    current.vx = to[0] + step.vx * phase;
+    current.vy = to[1] + step.vy * phase;
+    current.vz = to[2] + step.vz * phase;
+    while (from[0] < current.vx) {
+        Area_ProjectPoint(&current.vx, &projected);
+        segment = (TILE*)g_GfxPrimCursor;
+        SetTile1(segment);
+        SetSemiTrans(segment, 1);
+        setXY0(segment, projected.vx, projected.vy);
+        setRGB0(segment, intensity, intensity, 0);
+        GFX_AddPrim(2, 12);
+        current.vx += g_Task->unk_64 << 4;
+        current.vy += g_Task->unk_68 << 4;
+        current.vz += g_Task->unk_6C << 4;
+    }
+}
 
 MATCH void func_801D199C(void) {
     u8             i;
@@ -508,7 +600,35 @@ MATCH void func_801D2C00(void) {
     }
 }
 
-INCLUDE_ASM(func_801D2C94);
+MATCH void func_801D2C94(void) {
+    Actor* work;
+    Actor* step;
+    Actor* arm;
+    Actor* state;
+    s32*   pairs;
+    u8     i;
+
+    work         = g_Task;
+    work->vx     = 0;
+    work->vy     = 0;
+    work->unk_18 = 0;
+    work->unk_1C = 0;
+    step         = work;
+    for (i = 0; i < 20; i++) {
+        step->unk_18 += 0x100;
+        step->unk_1C += 0x200;
+        step->vx += step->unk_18;
+        step->vy += step->unk_1C;
+    }
+    arm        = g_Task;
+    arm->timer = 20;
+    pairs      = &arm->vx;
+    pairs[0]   = -pairs[0];
+    pairs[1]   = -pairs[1];
+    state      = g_Task;
+    state->header.mode++;
+    SND_PlayCue(0x208);
+}
 
 MATCH void func_801D2D5C(void) {
     Actor* work;
@@ -686,4 +806,52 @@ MATCH void func_801D369C(void) {
     Actor_Clear();
 }
 
-INCLUDE_ASM(func_801D36BC);
+MATCH void func_801D36BC(s32* point, s32 orange_radius, s32 black_radius) {
+    VECTOR   vertex;
+    DVECTOR  inner;
+    DVECTOR  outer;
+    MATRIX   camera;
+    POLY_G4* prim;
+    u16      tpage;
+    s32      turn;
+    u16      angle;
+    u8       i;
+
+    tpage = GetTPage(0, 1, 0x2C0, 0x100);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    Area_SetCameraMatrix(&camera);
+    vertex.vx = point[0] + (orange_radius << 4);
+    vertex.vy = point[1];
+    vertex.vz = point[2];
+    Area_ProjectPoint(&vertex.vx, &inner);
+    vertex.vx = point[0] + (black_radius << 4);
+    Area_ProjectPoint(&vertex.vx, &outer);
+    turn = 0;
+    i    = 0;
+    do {
+        prim     = GFX_BeginPolyG4(1);
+        prim->x0 = inner.vx;
+        prim->y0 = inner.vy;
+        prim->x1 = outer.vx;
+        prim->y1 = outer.vy;
+        turn += 0x80;
+        angle     = turn;
+        vertex.vx = point[0] + ((orange_radius * rcos(angle)) >> 8);
+        vertex.vy = point[1] + ((orange_radius * rsin(angle)) >> 8);
+        Area_ProjectPoint(&vertex.vx, &inner);
+        vertex.vx = point[0] + ((black_radius * rcos(angle)) >> 8);
+        vertex.vy = point[1] + ((black_radius * rsin(angle)) >> 8);
+        Area_ProjectPoint(&vertex.vx, &outer);
+        prim->x2 = inner.vx;
+        prim->y2 = inner.vy;
+        prim->x3 = outer.vx;
+        prim->y3 = outer.vy;
+        setRGB0(prim, 0xFF, 0x7F, 0);
+        setRGB1(prim, 0, 0, 0);
+        setRGB2(prim, 0xFF, 0x7F, 0);
+        setRGB3(prim, 0, 0, 0);
+        GFX_AddPrim(2, sizeof(POLY_G4));
+        i++;
+    } while (i < 32);
+}

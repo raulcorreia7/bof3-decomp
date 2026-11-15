@@ -18,7 +18,52 @@ MATCH void func_801D0C68(void) {
     D_801F294C++;
 }
 
-INCLUDE_ASM(func_801D0CAC);
+/* Confirms the commu entry request of the selected row, or moves the row. */
+MATCH void func_801D0CAC(void) {
+    u16 pad;
+    u8  mode;
+
+    pad = g_InputPressed;
+    if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
+        D_801D4E0C = 0xFFFF;
+        ((u8*)&g_SceneEventStep)[0]++;
+    } else if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        D_801F294D = 0;
+        D_801D4E24 = 0;
+        D_801D4E00 = D_801D4DF4;
+        D_801D4E04 = D_801D4DF8;
+        mode       = D_801D4DFC;
+        D_801D4E08 = mode;
+        switch (mode) {
+            case 0:
+            case 2:
+                if (Fairy_GetJobActive(g_SceneEventSelection) != 0) {
+                    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
+                    func_801D49C4();
+                    D_801F294C++;
+                } else {
+                    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
+                }
+                break;
+            case 1:
+                if (D_801F286D[g_GameAreaId] < g_SceneEventSelection) {
+                    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
+                } else {
+                    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
+                    func_801D49C4();
+                    D_801F294C++;
+                }
+                break;
+            default:
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
+                break;
+        }
+    } else {
+        func_801D3B0C(&g_SceneEventSelection);
+    }
+    func_801D3038();
+    func_801D36FC(g_SceneEventSelection, 0);
+}
 
 MATCH void func_801D0E44(void) {
     SYS_DISPATCH_BYTE(g_Commu01Step2Funcs, D_801D4E08);
@@ -28,9 +73,113 @@ MATCH void func_801D0E80(void) {
     SYS_DISPATCH_BYTE(D_801D4BE4, D_801F294D);
 }
 
-INCLUDE_ASM(func_801D0EBC);
+/* Moves the ordinal of the selected record kind and draws its cell. */
+MATCH void func_801D0EBC(void) {
+    u16  pad;
+    u16* pad_word;
+    s32  direction;
+    u8   count;
+    u8   ordinal;
+    u8*  row;
+    s32  x;
+    s32  y;
+    s32  offset;
+    s8   col;
+    s8   line;
 
-INCLUDE_ASM(func_801D1158);
+    pad_word = &g_InputPressed;
+    pad      = *pad_word;
+    if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        D_801D4E0C = 0xB5;
+        D_801F294C--;
+    } else if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
+        D_801D4E0C = 0x44;
+        D_801D4E28 = g_SceneEventSelection;
+        D_801F294D++;
+    } else {
+        count     = Fairy_GetJobActive(g_SceneEventSelection);
+        direction = INPUT_REPEATED(*pad_word, (PADLleft | PADLright));
+        ordinal   = D_801D4E24;
+        if (direction & PADLright) {
+            D_801D4E24 = ordinal + 1;
+            if ((s8)(ordinal + 1) == count) {
+                D_801D4E24 = 0;
+            }
+        } else if (direction & PADLleft) {
+            D_801D4E24 = ordinal - 1;
+            if ((s8)(ordinal - 1) < 0) {
+                D_801D4E24 = count - 1;
+            }
+        }
+        if (ordinal != D_801D4E24) {
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        }
+    }
+    func_801D3038();
+    row = &g_SceneEventSelection;
+    func_801D36FC(*row, 1);
+    if (*row == 0) {
+        ordinal = D_801D4E24;
+        /* Eight pixels a row, sign extended before the scale. */
+        offset  = ((s32)ordinal << 24) >> 21;
+        func_801D3984(offset + 0x28, 0x39, 0);
+        func_801D28A4(offset + 0x30, 0x42, func_801D3AA0(*row, D_801D4E24), 0);
+    } else {
+        col  = (s8)D_801D4E24 % 5;
+        line = (s8)D_801D4E24 / 5;
+        x    = col * 8;
+        y    = (*row - 9) * 54 + line * 7;
+        func_801D3984(x + 0xFA, (s16)(y + 0x44), 0);
+        func_801D28A4(x + 0xA8, (s16)(y + 0x4C), func_801D3AA0(*row, D_801D4E24), 0);
+    }
+}
+
+/* Commits the request row or moves it, then draws the row and its cell. */
+MATCH void func_801D1158(void) {
+    u16 pad;
+    s32 committed;
+    u8* row;
+    s32 y;
+    s8  col;
+    s8  line;
+    s32 line_inset;
+
+    pad       = g_InputPressed;
+    committed = 0;
+    if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        func_801D49C4();
+        func_801D47C4();
+    } else if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        committed = func_801D482C(0);
+        if (committed & BYTE_MASK) {
+            D_801D4E0C = 0xB5;
+        }
+    } else {
+        row = &D_801D4E28;
+        func_801D3B0C(row);
+        func_801D4AAC(row);
+    }
+    func_801D3038();
+    row = &g_SceneEventSelection;
+    func_801D36FC(*row, 1);
+    func_801D36FC(D_801D4E28, 0);
+    if ((committed & BYTE_MASK) == 0) {
+        if (*row == 0) {
+            func_801D3984((s8)D_801D4E24 * 8 + 0x28, 0x39, 1);
+        } else {
+            /* The inset stays a value of its own: folded, it lands one slot early. */
+            line_inset = 0x44;
+            col        = (s8)D_801D4E24 % 5;
+            line       = (s8)D_801D4E24 / 5;
+            y          = (*row - 9) * 54 + (line * 7 + line_inset);
+            func_801D3984(col * 8 + 0xFA, (s16)y, 1);
+        }
+        func_801D28A4(0xA0, 0x3E, func_801D3AA0(g_SceneEventSelection, D_801D4E24), 1);
+    }
+}
 
 MATCH void func_801D1328(void) {
     SYS_DISPATCH_BYTE(g_Commu01Step2Sub1Funcs, D_801F294D);
@@ -38,7 +187,7 @@ MATCH void func_801D1328(void) {
 
 /* Reads the fairy room list input and draws the selected room. */
 MATCH void func_801D1364(void) {
-    u16 x;
+    s16 x;
     s16 y;
     u8* selection;
     u8  old_row;
@@ -134,11 +283,179 @@ MATCH void func_801D1630(void) {
     }
 }
 
-INCLUDE_ASM(func_801D1778);
+/* Moves the request row between kinds and draws the chosen kind. */
+MATCH void func_801D1778(void) {
+    u16 pad;
+    s32 direction;
+    u8  row;
+    u8* cursor;
+    u8  kind;
+    u8  next;
+    s32 rooms_offset;
+    s8  srow;
+    s16 x;
+    s16 y;
 
-INCLUDE_ASM(func_801D1A94);
+    pad = g_InputPressed;
+    if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        func_801D49C4();
+        D_801F294D = 0;
+    } else if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        srow = D_801D4E28;
+        kind = D_801D4C04[srow];
+        if (kind == 0xFF) {
+            func_801D4B58();
+        } else {
+            rooms_offset = (g_SceneEventSelection - 1) * 8;
+            if (srow == g_FairyRooms[rooms_offset] - 4) {
+                D_801D4E2C = g_FairyRooms[rooms_offset + 1];
+            } else {
+                D_801D4E2C = 0;
+            }
+            srow       = D_801D4E28;
+            D_801D4E1C = D_801D4C04[srow];
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
+            D_801D4E0C = D_801D4C10[D_801D4E1C];
+            D_801F294D++;
+        }
+    } else {
+        direction = INPUT_REPEATED(pad, (PADLup | PADLdown));
+        row       = D_801D4E28;
+        if (direction & PADLup) {
+            next       = D_801D4E28 - 1;
+            D_801D4E28 = next;
+            if ((s8)next < 0) {
+                D_801D4E28 = D_801455C3 - 1;
+            }
+        } else if (direction & PADLdown) {
+            next       = D_801D4E28 + 1;
+            D_801D4E28 = next;
+            if ((s8)next >= D_801455C3) {
+                D_801D4E28 = 0;
+            }
+        }
+        if (row != D_801D4E28) {
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        }
+        srow       = D_801D4E28;
+        D_801D4E0C = D_801D4BB8[srow];
+    }
+    func_801D3038();
+    cursor = &g_SceneEventSelection;
+    func_801D36FC(*cursor, 1);
+    func_801D4694(&x, &y, *cursor, 0);
+    func_801D3984(x, y, 1);
+    y = func_801D4474();
+    func_801D4178((s16)(52 * ((*cursor - 1) % 4) + 0x42), y, 0);
+    Menu_DrawCursorSprite((u16)((52 * ((*cursor - 1) % 4) + 0x44) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E28 * 16), 0);
+}
 
-INCLUDE_ASM(func_801D1E48);
+/* Moves the request line inside the chosen kind and draws its grid. */
+MATCH void func_801D1A94(void) {
+    u16 pad;
+    s32 direction;
+    u8* cursor;
+    u8  next;
+    s32 rooms_offset;
+    s8  srow;
+    u8  line;
+    s16 x;
+    s16 y;
+
+    pad = g_InputPressed;
+    if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        D_801D4E1C = 0xFF;
+        D_801F294D--;
+    } else if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        if (D_801D4C18[D_801D4E1C][1] == 0xFF) {
+            func_801D4B58();
+        } else {
+            srow         = D_801D4E28;
+            rooms_offset = (g_SceneEventSelection - 1) * 8;
+            if (srow == g_FairyRooms[rooms_offset] - 4) {
+                D_801D4E30 = g_FairyRooms[rooms_offset + 2];
+            } else {
+                D_801D4E30 = 0;
+            }
+            D_801D4E20 = D_801D4C18[D_801D4E1C][1];
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
+            D_801D4E0C = 0x46;
+            D_801F294D++;
+        }
+    } else {
+        direction = INPUT_REPEATED(pad, (PADLup | PADLdown));
+        line      = D_801D4E2C;
+        if (direction & PADLup) {
+            next       = D_801D4E2C - 1;
+            D_801D4E2C = next;
+            if ((s8)next < 0) {
+                D_801D4E2C = D_801D4C18[D_801D4E1C][0] - 1;
+            }
+        } else if (direction & PADLdown) {
+            next       = D_801D4E2C + 1;
+            D_801D4E2C = next;
+            if ((s8)next >= D_801D4C18[D_801D4E1C][0]) {
+                D_801D4E2C = 0;
+            }
+        }
+        if (line != D_801D4E2C) {
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        }
+    }
+    func_801D3038();
+    cursor = &g_SceneEventSelection;
+    func_801D36FC(*cursor, 1);
+    func_801D4694(&x, &y, *cursor, 0);
+    func_801D3984(x, y, 1);
+    y = func_801D4474();
+    func_801D4178((s16)(52 * ((*cursor - 1) % 4) + 0x42), y, 1);
+    if (D_801D4E1C != 0xFF) {
+        y = y + (12 + 16 * (s8)D_801D4E28);
+        y = func_801D44E0((s16)(52 * ((*cursor - 1) % 4) + 0x4A), y, D_801D4E1C, 0);
+        Menu_DrawCursorSprite((u16)((52 * ((*cursor - 1) % 4) + 0x4C) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E2C * 16), 0);
+    }
+}
+
+/* Toggles the request pair and draws both kind grids. */
+MATCH void func_801D1E48(void) {
+    u16 pad;
+    s32 direction;
+    u8* row;
+    s16 x;
+    s16 y;
+
+    pad = g_InputPressed;
+    if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        D_801D4E0C = 0x45;
+        D_801D4E20 = 0xFF;
+        D_801F294D--;
+    } else if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        func_801D4B58();
+    } else {
+        direction = INPUT_REPEATED(pad, (PADLup | PADLdown));
+        if (direction & (PADLup | PADLdown)) {
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+            D_801D4E30 ^= 1;
+        }
+    }
+    func_801D3038();
+    row = &g_SceneEventSelection;
+    func_801D36FC(*row, 1);
+    func_801D4694(&x, &y, *row, 0);
+    func_801D3984(x, y, 1);
+    y = func_801D4474();
+    func_801D4178((s16)(52 * ((*row - 1) % 4) + 0x42), y, 1);
+    y = y + (12 + 16 * (s8)D_801D4E28);
+    y = func_801D44E0((s16)(52 * ((*row - 1) % 4) + 0x4A), y, D_801D4E1C, 1);
+    if (D_801D4E20 != 0xFF) {
+        y = y + (12 + 16 * (s8)D_801D4E2C);
+        y = func_801D44E0((s16)(52 * ((*row - 1) % 4) + 0x52), y, D_801D4E20, 0);
+        Menu_DrawCursorSprite((u16)((52 * ((*row - 1) % 4) + 0x54) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E30 * 16), 0);
+    }
+}
 
 INCLUDE_ASM(func_801D2110);
 
