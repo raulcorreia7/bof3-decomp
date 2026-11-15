@@ -34,7 +34,7 @@ MATCH void func_801C2018(void) {
             if (((s32 (*)(void*, s32))SYS_TestFlag)(&g_SceneEventFlags, bit_index) == 0) {
                 kind_10_count         = 0;
                 selected_record_count = 0;
-                for (record_byte_offset = 0; record_byte_offset < 480; record_byte_offset += 8) {
+                for (record_byte_offset = 0; record_byte_offset < FAIRY_JOB_COUNT * FAIRY_JOB_STRIDE; record_byte_offset += FAIRY_JOB_STRIDE) {
                     if (((u8*)g_FairyJobs)[record_byte_offset] != 0) {
                         record_kind = ((u8*)g_FairyJobs)[record_byte_offset + 1];
                         if (record_kind == record_kind_10) {
