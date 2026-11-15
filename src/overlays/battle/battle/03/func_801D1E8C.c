@@ -8,18 +8,12 @@ NON_MATCHING void func_801D1E8C(void) {
     s32          temp_v1_80;
     s32          var_s0;
     s32          var_s1;
-    s32          var_v0_199;
-    s32          var_v0_210;
     s8           temp_a0_239;
     s8           temp_v0_50;
     u16*         var_s5;
     u16          temp_v1_206;
-    u8*          var_s2;
     u8*          var_s3;
-    u8*          var_s4;
     u8*          var_s6;
-    u8           var_v0_215;
-
     state = &g_Battle.row_cursor;
     pad   = &g_InputPressed;
     if (*state != 0) {
@@ -33,7 +27,7 @@ NON_MATCHING void func_801D1E8C(void) {
         temp_v0_66              = &g_Game.members[D_801462F6[temp_v0_50]];
         g_BattleMessageSlot     = &temp_v0_66->header.flags;
         temp_v0_66->header.mode = 2;
-        temp_v0_66->turn.action_flags.value &= ~COMBATANT_FLAG_ABILITY_ALT_POSE;
+        temp_v0_66->u.turn.action_flags.value &= ~COMBATANT_FLAG_ABILITY_ALT_POSE;
         if (FIELD(u8, g_BattleMessageSlot, 0x119u) == 5) {
             temp_v1_80 = FIELD(s32, g_BattleMessageSlot, 0x124u);
             if (!(temp_v1_80 & 0x4000)) {
@@ -71,59 +65,36 @@ NON_MATCHING void func_801D1E8C(void) {
     }
     var_s0 = 5;
     if (g_InputHeld & (INPUT_DIRECTIONAL | PADL1 | PADR1)) {
-        var_s5     = pad - 4;
-        var_s6     = &D_8014837B;
-        var_s6     = &D_8014837B;
-        var_s3     = &g_Battle.cursor.panel_entry;
-        var_s3     = &g_Battle.cursor.panel_entry;
-        var_s2     = &g_Battle.cursor.panel_entry - 5;
-        var_s4     = &g_Battle.cursor.panel_entry - 1;
-        var_v0_199 = 5 << 0x18;
-    loop_18:
-        var_s1      = var_v0_199 >> 0x18;
-        temp_v1_206 = *(&D_801EABCC + (var_s1 * 2));
-        var_v0_210  = var_s0 - 1;
-        if (temp_v1_206 & var_s5[2]) {
-            var_v0_215 = var_s0 + 1;
-            if (temp_v1_206 & FIELD(u16, var_s5, 0x4u)) {
+        var_s5 = pad - 4;
+        var_s6 = &D_8014837B;
+        var_s3 = &g_Battle.cursor.panel_entry;
+        while (var_s0 >= 0) {
+            var_s1      = var_s0;
+            temp_v1_206 = *(&D_801EABCC + (var_s1 * 2));
+            if ((temp_v1_206 & var_s5[2]) && (temp_v1_206 & FIELD(u16, var_s5, 0x4u))) {
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
-                if (*(u8*)(&g_Battle.cursor.panel_entry) == (var_s1 + 1)) {
-                    if (*(u8*)((u8*)(&g_Battle.cursor.panel_entry) + -1) != 0) {
-                        if (((u32)((var_s0 - 1) & BYTE_MASK) >= 2U) || !(g_BattleActorTurn->action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
-                            temp_a0_239                                             = var_s0 + 1;
-                            FIELD(s8, (&D_8014837B), 0x24u)                         = 2;
-                            *(u8*)(&D_8014837B)                                     = 2;
-                            FIELD(s8, (&(&g_Battle.cursor.panel_entry)[-5]), 0x13u) = temp_a0_239;
-                            FIELD(s8, (&(&g_Battle.cursor.panel_entry)[-5]), 0x1u)  = temp_a0_239;
-                            FIELD(s8, (&(&g_Battle.cursor.panel_entry)[-5]), 0x4u)  = 0;
-                            FIELD(s8, (&(&g_Battle.cursor.panel_entry)[-5]), 0x5u)  = 0;
-                            *(u8*)((u8*)(&g_Battle.cursor.panel_entry) + -5)        = (u8)(*(u8*)((u8*)(&g_Battle.cursor.panel_entry) + -5) + 2);
-                            return;
-                        }
-                        *(u8*)((u8*)(&g_Battle.cursor.panel_entry) + -1) = 0U;
-                        *(u8*)(&g_Battle.cursor.panel_entry)             = 0;
+                if ((var_s3[0] == (var_s1 + 1)) && (var_s3[-1] != 0)) {
+                    if (((u32)((var_s0 - 1) & BYTE_MASK) >= 2U) || !(g_BattleActorTurn->action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
+                        temp_a0_239                  = var_s0 + 1;
+                        var_s6[0x24]                 = 2;
+                        var_s6[0]                    = 2;
+                        FIELD(s8, var_s3 - 5, 0x13u) = temp_a0_239;
+                        FIELD(s8, var_s3 - 5, 0x1u)  = temp_a0_239;
+                        FIELD(s8, var_s3 - 5, 0x4u)  = 0;
+                        FIELD(s8, var_s3 - 5, 0x5u)  = 0;
+                        var_s3[-5]                   = (u8)(var_s3[-5] + 2);
                         return;
                     }
-                    goto block_26;
+                    var_s3[-1] = 0U;
+                    var_s3[0]  = 0;
+                    return;
                 }
-            block_26:
-                *(u8*)((u8*)(&g_Battle.cursor.panel_entry) + -1) = 8U;
-                *(u8*)(&g_Battle.cursor.panel_entry)             = var_s0 + 1;
-                var_v0_215                                       = var_s0 + 1;
-                goto block_27;
+                var_s3[-1]          = 8U;
+                var_s3[0]           = var_s0 + 1;
+                g_Battle.panel_slot = var_s0 + 1;
             }
-        block_27:
-            g_Battle.panel_slot = var_v0_215;
-            var_v0_210          = var_s0 - 1;
-            goto block_28;
+            var_s0 -= 1;
         }
-    block_28:
-        var_s0     = var_v0_210;
-        var_v0_199 = var_s0 << 0x18;
-        if (var_v0_210 & 0x80) {
-            return;
-        }
-        goto loop_18;
     }
     if (g_Battle.panel_slot != 0) {
         g_Battle.panel_slot = 0;
