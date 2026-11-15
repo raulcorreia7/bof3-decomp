@@ -31,50 +31,60 @@ NON_MATCHING u16 func_801EF928(u8 id, u8 flag) {
         case 1:
             modifier = g_Characters[id].level_up_modifiers[0];
             for (i = level; i < new_level; i++) {
-                delta += g_LevelGrowth[id][i].hp;
-                delta += (s8)modifier;
+                delta = delta + g_LevelGrowth[id][i].hp + (s8)modifier;
             }
-            break;
+            if ((s16)delta < 0) {
+                return 0;
+            }
+            return delta & 0xFFFF;
         case 2:
             modifier = g_Characters[id].level_up_modifiers[1];
             for (i = level; i < new_level; i++) {
-                delta += g_LevelGrowth[id][i].ap;
-                delta += (s8)modifier;
+                delta = delta + g_LevelGrowth[id][i].ap + (s8)modifier;
             }
-            break;
+            if ((s16)delta < 0) {
+                return 0;
+            }
+            return delta & 0xFFFF;
         case 3:
             modifier = g_Characters[id].level_up_modifiers[2];
             for (i = level; i < new_level; i++) {
-                delta += g_LevelGrowth[id][i].power_defense >> 4;
-                delta += (s8)modifier;
+                delta = delta + (g_LevelGrowth[id][i].power_defense >> 4) + (s8)modifier;
             }
-            break;
+            if ((s16)delta < 0) {
+                return 0;
+            }
+            return delta & 0xFFFF;
         case 4:
             modifier = g_Characters[id].level_up_modifiers[3];
             for (i = level; i < new_level; i++) {
-                delta += g_LevelGrowth[id][i].power_defense & 0xF;
-                delta += (s8)modifier;
+                delta = delta + (g_LevelGrowth[id][i].power_defense & 0xF) + (s8)modifier;
             }
-            break;
+            if ((s16)delta < 0) {
+                return 0;
+            }
+            return delta & 0xFFFF;
         case 5:
             modifier = g_Characters[id].level_up_modifiers[4];
             for (i = level; i < new_level; i++) {
-                delta += g_LevelGrowth[id][i].agility_intellect >> 4;
-                delta += (s8)modifier;
+                delta = delta + (g_LevelGrowth[id][i].agility_intellect >> 4) + (s8)modifier;
             }
-            break;
+            if ((s16)delta < 0) {
+                return 0;
+            }
+            return delta & 0xFFFF;
         case 6:
             modifier = g_Characters[id].level_up_modifiers[5];
             for (i = level; i < new_level; i++) {
-                delta += g_LevelGrowth[id][i].agility_intellect & 0xF;
-                delta += (s8)modifier;
+                delta = delta + (g_LevelGrowth[id][i].agility_intellect & 0xF) + (s8)modifier;
             }
-            break;
+            if ((s16)delta < 0) {
+                return 0;
+            }
+            return delta & 0xFFFF;
+        default:
+            return delta & 0xFFFF;
     }
-    if ((s16)delta < 0) {
-        return 0;
-    }
-    return delta & 0xFFFF;
 }
 
 #else
