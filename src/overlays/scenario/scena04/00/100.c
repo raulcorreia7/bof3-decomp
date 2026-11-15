@@ -8,37 +8,39 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/scenario/Scene_DispatchEntity.h"
 
 MATCH void func_801F6D44(void) {
-    Actor* work;
+    SceneBox* box;
+    Actor*    work;
 
-    work                   = g_Task;
-    work->vz               = 0x1000000;
-    FIELD(s32, work, 0x2C) = 0x1000000;
-    work->vx               = 5668864;
-    work->vy               = 1212416;
-    work->unk_1C           = 0;
-    work->gravity          = 0x2200000;
-    FIELD(s32, work, 0x24) = 0x568000;
-    FIELD(s32, work, 0x28) = 0x128000;
-    work->pos.x.fixed      = 0x4000;
-    work->pos.y.fixed      = 0x2200000;
+    work              = g_Task;
+    box               = (SceneBox*)&work->vx;
+    work->vz          = 0x1000000;
+    box->far.z        = 0x1000000;
+    work->vx          = 5668864;
+    work->vy          = 1212416;
+    work->unk_1C      = 0;
+    work->gravity     = 0x2200000;
+    box->far.x        = 5668864;
+    box->far.y        = 1212416;
+    work->pos.x.fixed = 0x4000;
+    work->pos.y.fixed = 0x2200000;
     func_801F747C();
     g_Task->timer = 8;
     g_Task->header.mode += 1;
 }
 
 MATCH void func_801F6DD4(void) {
-    Actor* work;
-    s32*   step;
-    s32    fraction;
+    Actor*    work;
+    SceneBox* box;
+    s32       fraction;
 
     work     = g_Task;
+    box      = (SceneBox*)&work->vx;
     fraction = (0x10 - work->timer * 2) & 0xFE;
-    FIELD(s32, work, 0x24) += 0x10000;
+    box->far.x += 0x10000;
     work->pos.x.fixed += 0x2000;
     work->pos.y.fixed += 0x220000;
-    step = &work->vx;
     func_801F75BC(fraction, 0xFF);
-    func_801F7084(step);
+    func_801F7084(box);
     if (--g_Task->timer == 0) {
         g_Task->timer = 0x40;
         g_Task->header.mode++;
@@ -51,7 +53,7 @@ MATCH void func_801F6EA4(void) {
     u8     mode;
 
     work = g_Task;
-    func_801F7084(&work->vx);
+    func_801F7084((SceneBox*)&work->vx);
     func_801F75BC(0x10, 0xFF);
     actor        = g_Task;
     mode         = actor->timer - 1;
@@ -67,7 +69,7 @@ INCLUDE_ASM(func_801F6F2C);
 MATCH void func_801F6FF8(void) {
     Actor* work;
 
-    func_801F7084(&g_Task->vx);
+    func_801F7084((SceneBox*)&g_Task->vx);
     work = g_Task;
     work->timer--;
     if (work->timer == 0) {
@@ -79,47 +81,47 @@ MATCH void func_801F7064(void) {
     Actor_Clear();
 }
 
-/* Fill the eight vertex records of the box at step: each corner point and its two half-extents. */
-MATCH void func_801F7084(s32* step) {
-    s32* vertex;
-    s32* scratch;
-    u16  tpage;
+/* Fill the eight vertex records of the box: each cross-section's corner point and its two half extents. */
+MATCH void func_801F7084(SceneBox* box) {
+    SceneBoxVertex* vertex;
+    s32*            scratch;
+    u16             tpage;
 
     tpage = GetTPage(0, 1, 0x3C0, 0);
     GFX_AddDitheredDrawMode(1, tpage);
-    vertex     = D_801FA240;
-    *vertex    = FIELD(s32, step, 0x00);
-    D_801FA244 = FIELD(s32, step, 0x04) + FIELD(s32, step, 0x10);
-    D_801FA248 = FIELD(s32, step, 0x08) + FIELD(s32, step, 0x14);
-    vertex += 4;
-    *vertex    = FIELD(s32, step, 0x00);
-    D_801FA254 = FIELD(s32, step, 0x04) - FIELD(s32, step, 0x10);
-    D_801FA258 = FIELD(s32, step, 0x08) + FIELD(s32, step, 0x14);
-    vertex += 4;
-    *vertex    = FIELD(s32, step, 0x00);
-    D_801FA264 = FIELD(s32, step, 0x04) + FIELD(s32, step, 0x10);
-    D_801FA268 = FIELD(s32, step, 0x08);
-    vertex += 4;
-    *vertex    = FIELD(s32, step, 0x00);
-    D_801FA274 = FIELD(s32, step, 0x04) - FIELD(s32, step, 0x10);
-    D_801FA278 = FIELD(s32, step, 0x08);
-    vertex += 4;
-    *vertex    = FIELD(s32, step, 0x18);
-    D_801FA284 = FIELD(s32, step, 0x1C) + FIELD(s32, step, 0x28);
-    D_801FA288 = FIELD(s32, step, 0x20) + FIELD(s32, step, 0x2C);
-    vertex += 4;
-    *vertex    = FIELD(s32, step, 0x18);
-    D_801FA294 = FIELD(s32, step, 0x1C) - FIELD(s32, step, 0x28);
-    D_801FA298 = FIELD(s32, step, 0x20) + FIELD(s32, step, 0x2C);
-    vertex += 4;
-    *vertex    = FIELD(s32, step, 0x18);
-    D_801FA2A4 = FIELD(s32, step, 0x1C) + FIELD(s32, step, 0x28);
-    D_801FA2A8 = FIELD(s32, step, 0x20);
-    scratch    = vertex;
-    vertex += 4;
-    *vertex    = FIELD(s32, step, 0x18);
-    D_801FA2B4 = FIELD(s32, step, 0x1C) - FIELD(s32, step, 0x28);
-    D_801FA2B8 = FIELD(s32, step, 0x20);
+    vertex    = D_801FA240;
+    vertex->x = box->near.x;
+    vertex->y = box->near.y + box->near.half_y;
+    vertex->z = box->near.z + box->near.half_z;
+    vertex++;
+    vertex->x = box->near.x;
+    vertex->y = box->near.y - box->near.half_y;
+    vertex->z = box->near.z + box->near.half_z;
+    vertex++;
+    vertex->x = box->near.x;
+    vertex->y = box->near.y + box->near.half_y;
+    vertex->z = box->near.z;
+    vertex++;
+    vertex->x = box->near.x;
+    vertex->y = box->near.y - box->near.half_y;
+    vertex->z = box->near.z;
+    vertex++;
+    vertex->x = box->far.x;
+    vertex->y = box->far.y + box->far.half_y;
+    vertex->z = box->far.z + box->far.half_z;
+    vertex++;
+    vertex->x = box->far.x;
+    vertex->y = box->far.y - box->far.half_y;
+    vertex->z = box->far.z + box->far.half_z;
+    vertex++;
+    vertex->x = box->far.x;
+    vertex->y = box->far.y + box->far.half_y;
+    vertex->z = box->far.z;
+    scratch   = &vertex->x;
+    vertex++;
+    vertex->x = box->far.x;
+    vertex->y = box->far.y - box->far.half_y;
+    vertex->z = box->far.z;
     Area_SetCameraMatrix(scratch);
     func_801F732C(0, 1, 2, 3, 1, 1);
     func_801F732C(0, 1, 4, 5, 1, 0);

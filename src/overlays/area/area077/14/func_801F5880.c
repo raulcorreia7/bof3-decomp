@@ -1,8 +1,8 @@
 #include "area077_14.h"
 
-/* Matches the two word arguments and the scene mode against the payload's two trigger
+/* Matches the two cell coordinates and the scene mode against the payload's two trigger
  * records, sets the matched record's flag on the scene event bank and queues cue 0x201. */
-MATCH s32 func_801F5880(s32 arg0, s32 arg1) {
+MATCH s32 func_801F5880(s32 x, s32 y) {
     s32 i;
     s32 off;
     u32 id0;
@@ -13,8 +13,8 @@ MATCH s32 func_801F5880(s32 arg0, s32 arg1) {
         return 0;
     }
     i    = 0;
-    id0  = arg0 & 0xFF;
-    id1  = arg1 & 0xFF;
+    id0  = x & 0xFF;
+    id1  = y & 0xFF;
     mode = &D_80145E98;
     off  = 0;
     for (; i < 2; i++, off += 4) {

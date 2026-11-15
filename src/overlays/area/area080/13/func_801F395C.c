@@ -17,7 +17,7 @@ MATCH void func_801F395C(void) {
     }
     D_801F44A4->origin.x.fixed = g_Task->pos.x.fixed;
     D_801F44A4->origin.y.fixed = g_Task->pos.y.fixed;
-    D_801F44A4->origin.z.fixed = g_Task->pos.z.fixed + 0x06000000;
+    D_801F44A4->origin.z.fixed = g_Task->pos.z.fixed + TO_COORD(1536);
 
     angle  = rand() & 0xFFF;
     spread = (rand() & 0x1FF) - 0x100;

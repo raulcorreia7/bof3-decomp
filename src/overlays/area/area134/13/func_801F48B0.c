@@ -1,13 +1,13 @@
 #include "area134_13.h"
 
 MATCH void func_801F48B0(void) {
-    AreaWorkRecord* record;
+    AreaSlotRecord* record;
 
-    record = (AreaWorkRecord*)func_801F4938();
+    record = (AreaSlotRecord*)func_801F4938();
     if (record == NULL) {
         return;
     }
-    record->active      = TASK_BYTES[6];
+    record->active      = g_Task->unk_06;
     record->unk_01      = 0;
     record->unk_02      = 0;
     record->unk_03      = 0x80;

@@ -14,7 +14,7 @@ MATCH void func_801EEC18(void) {
     do {
         if (D_801F0454[(u8)count << 5] & 0x1) {
             saved                 = g_BattleEffectBattler;
-            swap                  = FIELD(PartyMember*, D_801F0470, (u8)count << 5);
+            swap                  = Magic063ClaimTask((u8)count << 5);
             g_BMagicOrbit         = D_801F0454 + ((u8)count << 5);
             g_BattleEffectBattler = swap;
             func_801EF340();
@@ -91,7 +91,7 @@ MATCH void func_801EEFE4(void) {
     target               = g_Task;
     target->pos.x.fixed  = record->pos.x.fixed;
     target->pos.y.fixed  = record->pos.y.fixed;
-    target->pos.z.fixed  = record->pos.z.fixed + 0x2000000;
+    target->pos.z.fixed  = record->pos.z.fixed + TO_COORD(512);
     random               = RANDOM_MASK(0xF);
     g_Task->unk_09       = random + 1;
     g_Task->param.unk_0B = 0;

@@ -15,6 +15,8 @@
 #define AREA_SPIN_SCALE_BASE 1
 #define AREA_SPIN_FADE       0
 
+/* The four corner vectors RotTransPers4 projects; D_1F800014 forwards. */
+extern SVECTOR  D_1F800014[];
 extern s16      D_800E4800;
 extern WorldPos D_80146954;
 extern u16      D_800E5500;
@@ -39,9 +41,10 @@ ASSERT_SIZE(AreaSlot, 0x34);
 extern u8  D_801F6250[];
 extern u8  D_801F6278[];
 extern u8  D_801F627D[];
+extern u8  D_801F62A0[];
 extern u8  D_801F62EC[];
-/* The two 4-byte trigger records, one byte array per field so each read keeps its
- * own address pair: arg0, arg1, the scene mode byte and the flag id to toggle. */
+/* The two 4-byte trigger records, one byte view per field so each read keeps its
+ * own address pair: the cell x and y, the scene mode byte and the flag id to toggle. */
 extern u8  D_801F6B14[];
 extern u8  D_801F6B15[];
 extern u8  D_801F6B16[];
@@ -58,7 +61,8 @@ extern u8  D_801F6B6C;
 extern u8  D_801F6B70;
 extern u8  D_801F6B74;
 
-void       func_801F3778(s32 arg0, void* dst, RECT* rect);
+void       func_801F3778(u8 count, Point2s* current, RECT* rect);
+void       func_801F3898(Point2s first, Point2s second, u8 shade);
 /* The two sprite tables the step draws index by the timer's low two bits. */
 extern s32 D_801F62CC[];
 extern s32 D_801F62DC[];

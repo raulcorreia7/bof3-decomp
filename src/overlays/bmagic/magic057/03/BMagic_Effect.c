@@ -115,7 +115,39 @@ MATCH void func_801EF5BC(void) {
     g_Task->header.step++;
 }
 
-INCLUDE_ASM(func_801EF620);
+MATCH void func_801EF620(void) {
+    Callback     handlers[2] = {func_801EF7A0, func_801EF7E0};
+    PartyMember* phaseWork;
+    PartyMember* tailWork;
+    PartyMember* work;
+    u8           stage;
+    s32          ramp;
+
+    handlers[g_Task->unk_03]();
+    if (g_Task->timer != 0xFF && --g_Task->timer == 0) {
+        work         = g_Task;
+        stage        = work->unk_09 + 1;
+        work->unk_09 = stage;
+        work->timer  = D_801EFADC[stage];
+        SND_QueueSelectionEffect(256);
+        if (g_Task->unk_09 == 3) {
+            g_BattleEffectBattler->header.step++;
+            g_Task->timer = 0xFF;
+        } else {
+            g_Task->unk_03 = 0;
+        }
+    }
+    if ((g_BattleEffectBattler->header.flags & 1) == 0) {
+        tailWork = g_Task;
+        tailWork->header.step += 1;
+        tailWork->unk_10  = 0;
+        phaseWork         = g_Task;
+        phaseWork->unk_03 = 0;
+    }
+    ramp                     = g_Task->unk_10;
+    g_AreaCameraRefreshCount = 2;
+    g_AreaCameraOffsetY      = ramp << 1;
+}
 
 MATCH void func_801EF7A0(void) {
     PartyMember* work;

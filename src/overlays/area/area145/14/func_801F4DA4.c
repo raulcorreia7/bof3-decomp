@@ -1,6 +1,6 @@
 #include "area145_14.h"
 
-MATCH u8 func_801F4DA4(u32 arg0) {
+MATCH u8 func_801F4DA4(u32 frame) {
     s32 elapsed;
     u16 t;
     u32 off;
@@ -12,7 +12,7 @@ MATCH u8 func_801F4DA4(u32 arg0) {
     s32 x;
     s32 y;
 
-    elapsed = (s32)arg0 - 5;
+    elapsed = (s32)frame - 5;
     t       = elapsed;
     off     = ((s32)D_80147AC4 >> 7) & 0xC;
     limit   = D_801F5CDD[off];

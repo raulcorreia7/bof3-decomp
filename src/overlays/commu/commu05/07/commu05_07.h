@@ -25,4 +25,18 @@ extern OverlayHeader g_EmiOverlayHeader;
 /* D_801D1950 */
 extern Callback      g_Commu05States[COMMU05_STEP_COUNT];
 
+/* The entry rows of the shared executable's fairy list and the 5-byte icon
+ * cells each row byte selects, at 0x80145E48 and 0x801457E8. */
+extern u8 D_80145E48[];
+extern u8 D_801457E8[][5];
+
+/* The background panel's cell origins at 0x801D199C, 0x801D19BC and 0x801D19DC:
+ * a u and a v byte per tile. */
+extern u8 D_801D0C0C[];
+extern u8 D_801D196C[];
+extern u8 D_801D1974[];
+extern u8 D_801D199C[][2];
+extern u8 D_801D19BC[][2];
+extern u8 D_801D19DC[][2];
+
 #endif

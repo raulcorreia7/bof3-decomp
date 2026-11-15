@@ -72,7 +72,7 @@ extern u8  D_801F5CDC[];
 extern u8  D_801F5CDD[];
 extern u8  D_801F5CDE[];
 
-u8 func_801F4DA4(u32 arg0);
+u8 func_801F4DA4(u32 frame);
 u8 func_801F4EDC(u16 t, u8 stage);
 
 #endif

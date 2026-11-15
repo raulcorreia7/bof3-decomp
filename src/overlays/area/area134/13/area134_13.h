@@ -11,10 +11,10 @@
 /* The row count this overlay clears. */
 #define SCRATCH_COLUMN_COUNT 32
 
-/* A work record of the `0x800E4800` table: the claim flag the scan
- * (func_801F4938) tests, the work object's step stamp, its position and the
- * row's scale word. */
-typedef struct AreaWorkRecord {
+/* A 0x28-byte slot of the area work memory: the claim flag the scan
+ * (func_801F4938) tests, the task's step stamp, its position and the row's
+ * scale word. */
+typedef struct AreaSlotRecord {
     u8       active; /* 0x00 */
     u8       unk_01;
     u8       unk_02;
@@ -27,10 +27,10 @@ typedef struct AreaWorkRecord {
     s32      unk_1C;
     s32      unk_20;
     s32      unk_24;
-} AreaWorkRecord;
+} AreaSlotRecord;
 
-ASSERT_OFFSET(AreaWorkRecord, pos, 0x08);
-ASSERT_SIZE(AreaWorkRecord, 0x28);
+ASSERT_OFFSET(AreaSlotRecord, pos, 0x08);
+ASSERT_SIZE(AreaSlotRecord, 0x28);
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 

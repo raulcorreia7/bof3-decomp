@@ -27,6 +27,30 @@ ASSERT_SIZE(SceneParticle, 0x28);
 ASSERT_OFFSET(SceneParticle, vx, 0x10);
 ASSERT_OFFSET(SceneParticle, life, 0x25);
 
+/* One 0x18-byte cross-section of the vertical box the scene's step draws: its corner point, a
+ * spare word, then the two half extents the four corners add to the point's y and z. */
+typedef struct SceneBoxEdge {
+    s32 x;      /* 0x00 */
+    s32 y;      /* 0x04 */
+    s32 z;      /* 0x08 */
+    s32 unk_0C; /* 0x0C */
+    s32 half_y; /* 0x10 */
+    s32 half_z; /* 0x14 */
+} SceneBoxEdge;
+
+/* The box func_801F7084 stamps the eight corners of: one cross-section at the actor's velocity
+ * words and one at the actor's words from 0x24. */
+typedef struct SceneBox {
+    SceneBoxEdge near; /* 0x00 */
+    SceneBoxEdge far;  /* 0x18 */
+} SceneBox;
+
+ASSERT_SIZE(SceneBoxEdge, 0x18);
+ASSERT_OFFSET(SceneBoxEdge, half_y, 0x10);
+ASSERT_OFFSET(SceneBoxEdge, half_z, 0x14);
+ASSERT_SIZE(SceneBox, 0x30);
+ASSERT_OFFSET(SceneBox, far, 0x18);
+
 /* One point of the path func_801F77EC builds in the area work memory. */
 typedef struct ScenePathPoint {
     s32 x;   /* 0x00 */
@@ -50,25 +74,20 @@ ASSERT_OFFSET(ScenePathPoint, z, 0x08);
 ASSERT_SIZE(ScenePathWork, 0x90);
 ASSERT_OFFSET(ScenePathWork, points, 0x10);
 
-/* The eight 16-byte vertex records func_801F7084 stamps and func_801F732C draws: an x, y and z
- * word and a spare word each. Its x words go through D_801FA240, the rest through these cells. */
-extern s32 D_801FA240[];
-extern s32 D_801FA244;
-extern s32 D_801FA248;
-extern s32 D_801FA254;
-extern s32 D_801FA258;
-extern s32 D_801FA264;
-extern s32 D_801FA268;
-extern s32 D_801FA274;
-extern s32 D_801FA278;
-extern s32 D_801FA284;
-extern s32 D_801FA288;
-extern s32 D_801FA294;
-extern s32 D_801FA298;
-extern s32 D_801FA2A4;
-extern s32 D_801FA2A8;
-extern s32 D_801FA2B4;
-extern s32 D_801FA2B8;
+/* One 16-byte vertex of the box: an x, y and z word and a spare word. func_801F7084 stamps the
+ * box's eight corners into D_801FA240 and func_801F732C draws them. */
+typedef struct SceneBoxVertex {
+    s32 x;   /* 0x00 */
+    s32 y;   /* 0x04 */
+    s32 z;   /* 0x08 */
+    s32 pad; /* 0x0C */
+} SceneBoxVertex;
+
+ASSERT_SIZE(SceneBoxVertex, 0x10);
+ASSERT_OFFSET(SceneBoxVertex, y, 0x04);
+ASSERT_OFFSET(SceneBoxVertex, z, 0x08);
+
+extern SceneBoxVertex D_801FA240[];
 
 /* The five 0x20-byte segment keys func_801F75BC draws: a start and an end 16.16 point with a spare
  * word after each. func_801F747C seeds the start x through D_801FA2C0 and the rest here. */
@@ -140,7 +159,7 @@ extern s32      D_801FA1A4[];
 extern s32      D_801FA1C4[];
 void            func_80196070(void);
 s8              func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
-void            func_801F7084(s32* step);
+void            func_801F7084(SceneBox* box);
 void            func_801F732C(u8 first, u8 second, u8 third, u8 fourth, s32 level0, s32 level1);
 void            func_801F747C(void);
 void            func_801F75BC(s32 arg0, s32 arg1);

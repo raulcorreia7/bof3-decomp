@@ -267,16 +267,16 @@ MATCH s32 func_801EFDD4(void* battler) {
     s32    dz;
     s32    horizontal;
     s32    radius;
-    s32    work_y;
+    s32    record_y;
 
     actor      = battler;
     dx         = (actor->pos.x.fixed >> 9) - (g_Task->pos.x.fixed >> 9);
-    work_y     = g_Task->pos.y.fixed >> 9;
-    dz         = (actor->pos.y.fixed >> 9) - work_y;
+    record_y   = g_Task->pos.y.fixed >> 9;
+    dz         = (actor->pos.y.fixed >> 9) - record_y;
     horizontal = dx * dx + dz * dz;
     radius     = D_1F800000_HALF;
-    work_y     = radius * radius;
-    return horizontal <= work_y;
+    record_y   = radius * radius;
+    return horizontal <= record_y;
 }
 
 /* func_801EFE38 */

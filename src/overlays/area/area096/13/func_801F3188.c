@@ -9,7 +9,7 @@ MATCH void func_801F3188(void) {
         D_80143FCD[index].value = 0x37;
         D_80143FFC[index].value = 0x410000;
         D_80144000[index].value = 0x3C8000;
-        D_80144004[index].value = 0x2000000;
+        D_80144004[index].value = TO_COORD(512);
         D_80143FF4[index].value = 0x58;
         D_80143FCF[index].value = 0x12;
         D_80143FD1[index].value = 1;

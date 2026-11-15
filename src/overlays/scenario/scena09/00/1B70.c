@@ -548,7 +548,22 @@ MATCH s32 func_801FDC1C(void) {
     return -1;
 }
 
-INCLUDE_ASM(func_801FDC70);
+MATCH s32 func_801FDC70(void) {
+    if (SYS_TestFlag(g_SceneFlags, 0x33) != 0) {
+        return -1;
+    }
+    if (D_80145F09 != 4) {
+        Game_SetScriptActive();
+        D_80146875 = 0x34;
+        D_80146874 = 0x0F;
+        return 1;
+    }
+    *g_ScriptVars = 0;
+    Game_SetScriptActive();
+    D_80146875 = 0x32;
+    D_80146874 = 0x0F;
+    return 1;
+}
 
 /* func_801FDCF4 */
 MATCH void Scene_JoinAdultNinaWithGarr(void) {
