@@ -1,15 +1,13 @@
 #include "engine/slus/slus.h"
 
-/* returns 1 when record[1] equals the table entry selected by record[0],
- * and -1 otherwise.
- */
-MATCH s32 Game_IsScriptVarEqual(u8* record) {
-    u8 first;
-    u8 second;
+/* 1 when the operand's value equals its selected script variable, else -1. */
+MATCH s32 Game_IsScriptVarEqual(u8* operand) {
+    u8 selector;
+    u8 value;
 
-    first  = record[0];
-    second = record[1];
-    if (g_ScriptVars[(first & 0xC) >> 2] == second) {
+    selector = operand[0];
+    value    = operand[1];
+    if (g_ScriptVars[(selector & SCRIPT_VAR_MASK) >> SCRIPT_VAR_SHIFT] == value) {
         return 1;
     }
     return -1;
