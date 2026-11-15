@@ -1,7 +1,6 @@
 #include "area040_13.h"
 
-extern u8 D_801F4960;
-s32       func_801F30B8(s32 x, s32 y);
+s32 func_801F30B8(s32 x, s32 y);
 
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801F3570(void) {

@@ -15,6 +15,7 @@ s32       func_801F2E78(void);
 
 extern u8 D_80146875;
 
+extern u8 D_801F4960;
 extern u8 D_801F4970[];
 
 void func_801A4BC0(s32 x, s32 y, s32 value);

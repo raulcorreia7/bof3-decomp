@@ -1,8 +1,6 @@
 #include "area075_13.h"
 
-extern u8 D_801F58A0[];
-extern u8 D_801F58C9;
-s32       rand(void);
+s32 rand(void);
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F45A8(void) {
