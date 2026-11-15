@@ -9,6 +9,10 @@
 #include "area/spad.h"
 #include "scenario/party.h"
 
+extern s16 D_801448EE;
+extern u8  D_801F69AF;
+extern u8  D_801F6BC0;
+
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
 /* The shared flag word the close path clears a bit of. */
@@ -54,6 +58,7 @@ extern u8   D_80147C97;
 
 /* The camera and view steps the handlers enter. */
 void func_801F32A0(s32 value);
+bool func_801F60E0(void);
 
 extern Callback D_801F6218[];
 
