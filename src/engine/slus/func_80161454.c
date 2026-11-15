@@ -19,7 +19,7 @@ MATCH void func_80161454(u32 index) {
     s32 tmp2;
     s32 tmp3;
     u8  tmp4;
-    /* FAKE: The plain-C loop allocator swaps s1 and s2; it matches 227/233 instructions. */
+    /* FAKE: Plain C swaps s1 and s2; the best variant matches 227/233 instructions. */
     FAKE_REG(u8, val4, "s1");
     s32    val5;
     s32    val6;
