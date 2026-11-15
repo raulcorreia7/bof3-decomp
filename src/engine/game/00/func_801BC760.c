@@ -125,7 +125,7 @@ NON_MATCHING s32 func_801BC760(void) {
                 g_Game.current->status.field.flags_12C.s8_value &= 0xFE;
                 g_Game.current->status.field.flags_12C.s8_value |= (D_80145FBC & 1);
                 COORD_INT(g_Task->pos.z) = Area_ReadHeight(near_a, near_b);
-                g_Task->unk_29           = g_Game.members[0].unk_29;
+                g_Task->draw_layer       = g_Game.members[0].unk_29;
                 FIELD(s8, g_Task, 0x1u)  = 2;
                 FIELD(s8, g_Task, 0x2u)  = 2;
                 return 0xFF;
