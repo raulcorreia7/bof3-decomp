@@ -16,6 +16,7 @@ NON_MATCHING void func_800A0EC4(void) {
     u16        value;
     u32        rate;
     u8*        state;
+    u8*        dest;
 
     state = &g_Battle.active_battler;
     if (*state < 3U) {

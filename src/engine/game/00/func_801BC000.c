@@ -22,7 +22,7 @@ MATCH void func_801BC000(void) {
     tmp5 = g_Task;
     if (g_GameStateIndex == GAME_REQUEST_SCENE_CAMERA) {
         tmp5->header.mode = 0xE;
-        goto block_26; /* retail branch */
+        goto block_26;
     }
     if (g_Game.walk_flags & AREA_WALK_TRANSITION) {
         tmp5->header.mode   = 5;
@@ -46,7 +46,7 @@ MATCH void func_801BC000(void) {
                 if (*D_80145E91 == 0xA) {
                     Actor_RequestScript(g_Task->direction_08);
                     g_Task->header.mode = 7;
-                    goto block_26; /* retail branch */
+                    goto block_26;
                 }
                 if ((func_801BD938() & BYTE_MASK) == 0) {
                     tmp2 = func_801BC760() & BYTE_MASK;
@@ -70,7 +70,7 @@ MATCH void func_801BC000(void) {
                 case_a:
                     if ((Area_GetActorFacingStepX() << 0x18) != 0) {
                         Actor_RequestScript(g_Task->direction_08);
-                        goto block_26; /* retail branch */
+                        goto block_26;
                     }
                     if (!(g_Characters[g_Game.current->character_index].status & STATUS_CONFUSED)) {
                         g_Game.current->u.field.step_12A.s8_value = 0;

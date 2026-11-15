@@ -77,14 +77,14 @@ loop_18:
             D_801CD8C4 -= 1;
         }
         fields += 0xC;
-        goto block_2; /* the scan reached its end */
+        goto block_2;
     }
     fields += 0xC;
 block_2:
     i += 1;
     entry++;
     if ((u32)(i & BYTE_MASK) < 8U) {
-        goto loop_18; /* the scan reached its end */
+        goto loop_18;
     }
     if (D_801CD8C4 != 0) {
         PopMatrix();

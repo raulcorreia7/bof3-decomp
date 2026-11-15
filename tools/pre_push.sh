@@ -3,7 +3,7 @@
 #
 #   tools/pre_push.sh [BASE_REF]          or    meson compile -C build/meson pre-push
 #
-# Checks: check (only with a disc), check-plain (only with the compiler), check-headers, check-tree, externs, include-asm, markers, names, addrs, kept, format-check,
+# Checks: check (only with a disc), check-plain (only with the compiler), check-headers, check-tree, externs, include-asm, markers, drafts, names, addrs, kept, format-check,
 # meson test, typeloss, quality (no touched file gets worse), subsystems (writes the debt table to build/subsystems.md; never fails). BASE_REF is what the work is compared with; it defaults to the newest of
 # public/main, origin/main and main; comparisons use the merge base with HEAD. Each log is
 # build/pre-push/<check>.log. Format first with `meson compile -C build/meson format`.
@@ -79,6 +79,7 @@ start format-check tools/format.sh --check
 start test meson test -C "$bld" --no-rebuild --print-errorlogs
 start typeloss python3 tools/typeloss.py "$base" HEAD
 start markers python3 tools/check_markers.py --diff "$ref"
+start drafts python3 tools/check_drafts.py "$ref"
 start names python3 tools/check_names.py --diff "$ref"
 start addrs python3 tools/check_addrs.py "$ref" HEAD
 start kept python3 tools/check_kept.py "$ref" HEAD
