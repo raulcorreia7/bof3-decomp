@@ -39,8 +39,9 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
    `tools/match.sh --diff <target>@<func>` prints the function side by side, `!` on differing rows;
    the rows are positional, so an inserted instruction marks everything after it. After a new
    `hand/` file, a header or a marker, run `meson setup --reconfigure build/meson` once
-   ([reconfigure](../../../../docs/toolchain.md#reconfigure)). A function with a jump table, a
-   string or data of its own needs the `cc` wrapper
+   ([reconfigure](../../../../docs/toolchain.md#reconfigure)). A function that reads
+   its unit's own `.rodata` (a jump table or a string) is measured too. One that reads the unit's
+   own `.data` or `.bss`, or the gp, needs the `cc` wrapper
    ([compiler wrapper](../../../../docs/toolchain.md#compiler-wrapper)).
 
 6. **Tactics.** The [tactics table](../../../../docs/matching.md#tactics-for-gcc-272) maps each
