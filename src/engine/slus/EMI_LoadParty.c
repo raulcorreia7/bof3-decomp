@@ -12,7 +12,7 @@ MATCH void EMI_LoadParty(u8 member_a, u8 member_b, u8 member_c, u8 family) {
     hint = g_EmiLoadedCharacterIndex;
     if (family != 0u) {
         if (hint != slot) {
-            goto rearm; /* retail shares one re-arm call between both families */
+            goto rearm;
         }
         return;
     }
