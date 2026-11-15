@@ -92,7 +92,7 @@ MATCH void func_801F76D0(void) {
         if (g_Task->unk_06 == 0) {
             spark->pos.x = ((rand() & 0x1FF) << 8) + 0x120000;
             spark->pos.y = ((rand() & 0x1FF) << 8) + 0x2E8000;
-            spark->pos.z = 0x08400000 - ((spark->pos.x - 0x120000) << 7);
+            spark->pos.z = TO_COORD(2112) - ((spark->pos.x - 0x120000) << 7);
             spark->vx    = (spark->pos.x - 0x130000) >> 4;
             spark->vy    = (spark->pos.y - 0x2F8000) >> 4;
             spark->vz    = (-(rand() & 0xFF)) << 5;
@@ -100,7 +100,7 @@ MATCH void func_801F76D0(void) {
         } else {
             spark->pos.x = ((rand() & 0x1FF) << 8) + 0x78000;
             spark->pos.y = ((rand() & 0x1FF) << 8) + 0x318000;
-            spark->pos.z = 0x08400000 - ((spark->pos.y - 0x318000) << 7);
+            spark->pos.z = TO_COORD(2112) - ((spark->pos.y - 0x318000) << 7);
             spark->vx    = (spark->pos.x - 0x88000) >> 4;
             spark->vy    = (spark->pos.y - 0x328000) >> 4;
             spark->vz    = (-(rand() & 0xFF)) << 5;
