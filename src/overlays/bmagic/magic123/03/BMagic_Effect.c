@@ -265,7 +265,6 @@ NON_MATCHING void func_801EF9E0(void) {
 
     i         = 0;
     params    = D_1F800000.view.effect.params;
-    params[0] = (g_Task->param.unk_0B << 1) + 4;
     params[7] = g_Task->unk_09;
     shade     = 0x20;
     for (; i < 8; i++) {
