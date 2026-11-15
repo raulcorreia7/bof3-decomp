@@ -494,7 +494,75 @@ MATCH void func_801F8534(void) {
     func_801F823C((s16)g_Task->screen_x, (s16)g_Task->screen_y, (s16)g_Task->unk_32, (s16)g_Task->unk_2C);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F85F0(s32 x_arg, s32 y_arg, s32 radius_arg) {
+    POLY_GT4* prim;
+    s16       radius;
+    s16       x;
+    s16       y;
+    u16       angle;
+    s32       a;
+    s32       b;
+    u8        count;
+
+    radius = radius_arg;
+    x      = x_arg;
+    y      = y_arg;
+    count  = 0;
+    angle  = 0xFC00;
+    do {
+        prim = (POLY_GT4*)g_GfxPrimCursor;
+        SetPolyGT4(prim);
+        SetSemiTrans(prim, 0);
+        a        = angle;
+        prim->x0 = x - ((radius * rcos(a)) >> 12);
+        prim->x1 = x;
+        angle += 128;
+        b        = angle;
+        prim->y0 = prim->y1 = y + ((radius * rsin(a)) >> 12);
+        prim->x2            = x - ((radius * rcos(b)) >> 12);
+        prim->x3            = x;
+        prim->y2 = prim->y3 = y + ((radius * rsin(b)) >> 12);
+        prim->u0            = 63 - ((rcos(a) << 5) >> 12);
+        prim->u1            = 63;
+        prim->v0 = prim->v1 = 64 + ((rsin(a) << 5) >> 12);
+        prim->u2            = 63 - ((rcos(b) << 5) >> 12);
+        prim->u3            = 63;
+        prim->v2 = prim->v3 = 64 + ((rsin(b) << 5) >> 12);
+        setRGB0(prim, 0x40, 0x40, 0x80);
+        setRGB1(prim, 0x60, 0x60, 0x60);
+        setRGB2(prim, 0x40, 0x40, 0x80);
+        setRGB3(prim, 0x60, 0x60, 0x60);
+        prim->tpage = GetTPage(2, 0, 0x340, 0x100);
+        GFX_AddPrim(2, sizeof(POLY_GT4));
+
+        prim = (POLY_GT4*)g_GfxPrimCursor;
+        SetPolyGT4(prim);
+        SetSemiTrans(prim, 0);
+        prim->x0 = x;
+        prim->x1 = x + ((radius * rcos(a)) >> 12);
+        prim->y0 = prim->y1 = y + ((radius * rsin(a)) >> 12);
+        prim->x2            = x;
+        prim->x3            = x + ((radius * rcos(b)) >> 12);
+        prim->y2 = prim->y3 = y + ((radius * rsin(b)) >> 12);
+        count += 1;
+        prim->u0            = 0;
+        prim->u1            = (rcos(a) << 5) >> 12;
+        prim->v0 = prim->v1 = ((rsin(a) << 5) >> 12) - 64;
+        prim->u2            = 0;
+        prim->u3            = (rcos(b) << 5) >> 12;
+        prim->v2 = prim->v3 = ((rsin(b) << 5) >> 12) - 64;
+        setRGB0(prim, 0x60, 0x60, 0x60);
+        setRGB1(prim, 0x80, 0x40, 0x40);
+        setRGB2(prim, 0x60, 0x60, 0x60);
+        setRGB3(prim, 0x80, 0x40, 0x40);
+        prim->tpage = GetTPage(2, 0, 0x340, 0x100);
+        GFX_AddPrim(2, sizeof(POLY_GT4));
+    } while (count < 16);
+}
+#else
 INCLUDE_ASM(func_801F85F0);
+#endif
 
 #include "shared/GFX_DrawProjectedDisc.h"
 
