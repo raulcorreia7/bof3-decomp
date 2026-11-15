@@ -116,7 +116,7 @@ MATCH void func_801D106C(void) {
     if (work->unk_18 <= 0x2F7FFF) {
         work->unk_18  = 0x2F8000;
         work->unk_1C  = 0x278000;
-        work->gravity = 0xF000000;
+        work->gravity = TO_COORD(3840);
     }
 
     g_Task->unk_03 -= 4;

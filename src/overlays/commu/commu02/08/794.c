@@ -6,8 +6,8 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-void func_801D4EA4(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_801D8058(s32 arg0, s32 arg1);
+void func_801D4EA4(s32 left, s32 top, s32 icon_row, s32 raised);
+void func_801D8058(s32 left, s32 top);
 void func_801D2908(s32 x, s32 y, s32 mode);
 void Menu_DrawPanelIcon(s16 x, s16 y, s32 u, s32 v, u16 clut, u8 color);
 
@@ -615,7 +615,7 @@ INCLUDE_ASM(func_801D4910);
 INCLUDE_ASM(func_801D4AE0);
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801D4EA4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+NON_MATCHING void func_801D4EA4(s32 left, s32 top, s32 icon_row, s32 raised) {
     s32 i;
     s32 x;
     s32 draw_y;
@@ -623,15 +623,15 @@ NON_MATCHING void func_801D4EA4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     u8  icon;
     u8* icons;
 
-    icon  = (u8)arg2 * 5 + 3;
-    up_y  = (arg1 - 8) << 16;
+    icon  = (u8)icon_row * 5 + 3;
+    up_y  = (top - 8) << 16;
     icons = D_801DB080;
-    x     = arg0;
+    x     = left;
     for (i = 0; i < 3; i++) {
-        if (D_801DB0B8 == i && (u8)arg3 != 0) {
+        if (D_801DB0B8 == i && (u8)raised != 0) {
             draw_y = up_y >> 16;
         } else {
-            draw_y = arg1;
+            draw_y = top;
         }
         func_801D2CF8((s16)x, (s16)draw_y, icons[icon]);
         icon++;
@@ -1295,20 +1295,20 @@ MATCH void func_801D7EF0(s16 x, s16 y) {
 }
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801D8058(s32 arg0, s32 arg1) {
+NON_MATCHING void func_801D8058(s32 left, s32 top) {
     s32 i;
     s32 count;
     s32 x;
     s32 base_x;
     s32 y_fixed;
 
-    x      = arg0;
+    x      = left;
     base_x = x;
-    UI_DrawWindow(x, arg1, 172, 26, 0x80, g_WindowStyle);
-    func_801D7EF0((s16)x, (s16)arg1);
+    UI_DrawWindow(x, top, 172, 26, 0x80, g_WindowStyle);
+    func_801D7EF0((s16)x, (s16)top);
     count = Fairy_CountFairies() & BYTE_MASK;
     if (count > 0) {
-        y_fixed = (arg1 + 9) << 16;
+        y_fixed = (top + 9) << 16;
         x       = 7;
         i       = 0;
         while (i < count) {
@@ -1649,27 +1649,29 @@ MATCH u8 func_801D92F4(u8 arg) {
 INCLUDE_ASM(func_801D9348);
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801D94D0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    u8  tags[20];
-    u8* cell;
-    u16 x;
-    u16 y;
-    u16 row;
-    u16 col;
-    u16 cursor_x;
-    u16 cursor_y;
-    u8  cursor_col;
-    u8  cursor_row;
-    u8  code;
+NON_MATCHING void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg, s32 cursor_row_arg) {
+    extern u8 D_801D0C3C[];
+    extern u8 D_801DAAAC[];
+    u8        tags[20];
+    u8*       cell;
+    u16       x;
+    u16       y;
+    u16       row;
+    u16       col;
+    u16       cursor_x;
+    u16       cursor_y;
+    u8        cursor_col;
+    u8        cursor_row;
+    u8        code;
 
     /* FAKE: retail reserves eight bytes outside the active locals. */
     FAKE_STACK_PADS(u8, 8);
-    memcpy(tags, (u8*)0x801D0C3C, 20);
-    UI_DrawWindow(arg1, arg2, 0x110, 123, 0, g_WindowStyle);
-    cell = (u8*)(0x801DAAAC + ((u8)arg0 * 96));
-    y    = arg2 + 6;
+    memcpy(tags, D_801D0C3C, 20);
+    UI_DrawWindow(left, top, 0x110, 123, 0, g_WindowStyle);
+    cell = D_801DAAAC + ((u8)page * 96);
+    y    = top + 6;
     for (row = 0; row < 8; row++) {
-        x = arg1 + 4;
+        x = left + 4;
         for (col = 0; col < 12; col++) {
             if (col == 10 && row >= 3) {
                 code = *cell;
@@ -1698,9 +1700,9 @@ NON_MATCHING void func_801D94D0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4
         }
         y += 14;
     }
-    cursor_col = arg3;
-    cursor_row = arg4;
-    cursor_x   = arg1 + 6 + cursor_col * 20;
+    cursor_col = cursor_col_arg;
+    cursor_row = cursor_row_arg;
+    cursor_x   = left + 6 + cursor_col * 20;
     if (cursor_col >= 5) {
         cursor_x += 8;
     }
@@ -1710,7 +1712,7 @@ NON_MATCHING void func_801D94D0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4
     if (cursor_col == 11 && cursor_row >= 3) {
         cursor_x -= 20;
     }
-    cursor_y = arg2 + 8 + cursor_row * 14;
+    cursor_y = top + 8 + cursor_row * 14;
     Menu_DrawCursorSprite(cursor_x, cursor_y, 0);
 }
 #else
@@ -1718,7 +1720,7 @@ INCLUDE_ASM(func_801D94D0);
 #endif
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801D97C8(s32 arg0, s32 x, s32 y) {
+NON_MATCHING void func_801D97C8(s32 unused, s32 x, s32 y) {
     extern const u8* D_801DB038[];
     extern const u8* volatile D_801DB054;
     const u8* const* labels;

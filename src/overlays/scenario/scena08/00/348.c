@@ -337,8 +337,8 @@ NON_MATCHING s32 func_801F7E14(void) {
     Area_SetCameraMatrix(&camera);
     drawn = 1;
     step  = 8;
-    slot  = MEM_PTR(u8, 0x800E4800u);
-    data  = MEM_PTR(u8, 0x800E4801u);
+    slot  = MEM_PTR(u8, AREA_WORK);
+    data  = MEM_PTR(u8, AREA_WORK + 1);
     i     = 0;
     do {
         if (slot[0] != 0) {
@@ -771,7 +771,7 @@ MATCH void func_801F9F6C(void) {
 }
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801F9F8C(WorldPos* pos, s32 arg1, s32 arg2, s32 arg3) {
+NON_MATCHING void func_801F9F8C(WorldPos* pos, s32 unused, s32 jitter, s32 layer) {
     LINE_F2* line;
     DVECTOR  screen;
     DVECTOR  size;
@@ -785,13 +785,13 @@ NON_MATCHING void func_801F9F8C(WorldPos* pos, s32 arg1, s32 arg2, s32 arg3) {
     FAKE_STACK_PADS(u8, 0x28); /* FAKE: retail reserves 40 unused stack bytes. */
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 0x3C0, 0x100) & 0xFFFF, 0);
-    Area_AddCellPrim(pos->x.fixed, pos->y.fixed, (s8)arg3, 12);
+    Area_AddCellPrim(pos->x.fixed, pos->y.fixed, (s8)layer, 12);
     Area_SetCameraMatrix(&camera);
     Area_ProjectPoint(&pos->x.fixed, &screen);
     size.vx = size.vy = 0x50;
     Game_ProjectWorldPoint(pos, &size, &scale);
     angle = rand() & 0xFFF;
-    depth = arg3;
+    depth = layer;
     i     = -scale.vx;
     if (scale.vx >= -scale.vx) {
         do {
@@ -802,14 +802,14 @@ NON_MATCHING void func_801F9F8C(WorldPos* pos, s32 arg1, s32 arg2, s32 arg3) {
             SetLineF2(line);
             SetSemiTrans(line, 1);
             offset   = (rsin((u16)angle) * 16) >> 12;
-            line->x0 = screen.vx + offset + arg2 - root;
+            line->x0 = screen.vx + offset + jitter - root;
             offset   = (rsin((u16)angle) * 16) >> 12;
-            line->x1 = screen.vx + offset + arg2 + root;
+            line->x1 = screen.vx + offset + jitter + root;
             line->y0 = screen.vy + i;
             line->y1 = screen.vy + i;
             setRGB0(line, 0, 0, 0);
             Area_AddCellPrim(pos->x.fixed, pos->y.fixed, (s8)depth, sizeof(LINE_F2));
-            arg2 = -arg2;
+            jitter = -jitter;
             angle += rand() & 0xFF;
             i++;
         } while (i <= scale.vx);
