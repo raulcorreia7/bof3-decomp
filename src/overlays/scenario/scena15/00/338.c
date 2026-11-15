@@ -714,50 +714,7 @@ MATCH void func_801F9CE8(void) {
 
 INCLUDE_ASM(func_801F9CFC);
 
-typedef struct ScrollPoint {
-    s16 unk_00;
-    s16 unk_02;
-    s16 unk_04;
-    s16 unk_06;
-    u8  unk_08;
-    u8  unk_09;
-} ScrollPoint;
-
-extern ScrollPoint D_801FE608[];
-
-#ifdef NON_MATCHING
-NON_MATCHING void func_801FA6BC(s32 point) {
-    u8  slot;
-    u32 i;
-    s32 x;
-    s32 y;
-
-    Game_SetScriptActive();
-    g_ScriptVars[0] = 1;
-    slot            = Actor_FindFreeSpawned();
-    D_801FE748      = slot;
-    if (slot != GAME_NONE) {
-        g_SpawnedActors[slot].header.flags = 1;
-        g_SpawnedActors[D_801FE748].type   = 0x89;
-        g_SpawnedActors[D_801FE748].link   = point;
-    }
-    i                   = (u8)point;
-    g_AreaScrollTargetX = D_801FE608[i].unk_00 << 8;
-    g_AreaScrollTargetY = D_801FE608[i].unk_02 << 8;
-    func_80153DE8();
-    g_Game.unk_3CE[2] = 0;
-    func_801BE1B0(0);
-    x = D_801FE608[i].unk_04 << 8;
-    y = D_801FE608[i].unk_06 << 8;
-    g_Game.walk_flags &= 0xFFEF;
-    func_801BFE34(x, y, D_801FE608[i].unk_09);
-    g_AreaDrawMode        = 4;
-    g_SceneState.state_04 = 2;
-    g_SceneState.step_05  = 0;
-}
-#else
 INCLUDE_ASM(func_801FA6BC);
-#endif
 
 #include "overlays/scenario/Scene_SpawnActor.h"
 
