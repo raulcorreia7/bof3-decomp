@@ -5,7 +5,8 @@
 #
 # Letters are GCC's -d flags (default lg): l local allocation (.lreg: each pseudo's uses, live
 # length and hard register), g global allocation and reload (.greg: allocation order, conflicts,
-# spills), L loop, S scheduling, c combine, s cse, j jump. With a function name it prints that
+# spills), L loop (.loop: what moves out of each loop and why, induction values), S scheduling,
+# c combine, s cse, j jump. With a function name it prints that
 # function's part of each dump; the dump files stay in $OUT (default a fresh folder under $TMPDIR).
 # The flags below copy the image build's (build/meson/compile_commands.json) plus -DNON_MATCHING,
 # so a draft body compiles; update them with the build.
@@ -30,7 +31,7 @@ if [ -n "$fn" ]; then
 		case $dump in *.s) continue ;; esac
 		echo "==== ${dump##*.}"
 		awk -v fn="$fn" '$0 ~ "^;; Function " fn "$" {on=1} on && /^;; Function / && $0 !~ fn "$" {exit} on' "$dump" |
-			grep -E '^;; |^Register [0-9]+ used|^Basic block|Spilling| now in ' | head -n 80
+			grep -E '^;; |^Register [0-9]+ used|^Basic block|Spilling| now in |^Loop from |^Insn [0-9]+: |^Biv |giv at |[Gg]iv reg ' | head -n 120
 	done
 fi
 echo "rtl: dumps in $OUT"
