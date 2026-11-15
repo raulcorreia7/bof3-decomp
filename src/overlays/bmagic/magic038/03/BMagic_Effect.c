@@ -193,7 +193,25 @@ MATCH void func_801EF590(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF710);
+MATCH void func_801EF710(void) {
+    PartyMember* work;
+    s8           tint = -0x80;
+
+    g_Task->unk_5D -= 4;
+    g_Task->unk_5E -= 4;
+    g_Task->unk_5F -= 4;
+    Actor_StepAnimLoop();
+    work                             = g_Task;
+    D_1F800000.view.scenario.math_00 = (++work->unk_0C & 0x7F) << 5;
+    g_Task->pos.x.fixed              = g_BattleEffectBattler->pos.x.fixed + FIXED_MUL(rsin(D_1F800000.view.scenario.math_00), 0x20000);
+    g_Task->pos.y.fixed              = g_BattleEffectBattler->pos.y.fixed + FIXED_MUL(rcos(D_1F800000.view.scenario.math_00), 0x20000);
+    work                             = g_Task;
+    D_1F800000.view.scenario.math_00 = (++work->unk_14 & 0x3F) << 6;
+    D_1F800000.view.scenario.math_04 = 0x800;
+    g_Task->pos.z.fixed              = g_BattleEffectBattler->pos.z.fixed + rsin(D_1F800000.view.scenario.math_00) * D_1F800000.view.scenario.math_04;
+    g_Task->unk_5D                   = tint;
+    g_Task->header.step += 1;
+}
 
 #include "overlays/bmagic/Effect_TickDownAndClear.h"
 
