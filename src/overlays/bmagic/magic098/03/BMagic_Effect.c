@@ -46,7 +46,29 @@ MATCH void func_801EEFC8(void) {
 
 #include "overlays/bmagic/Effect_CountDownAndPickRandom.h"
 
-INCLUDE_ASM(func_801EF1B4);
+/* Counts up and, at sixteen, swaps the target battler's palette fade for a
+ * black one. */
+MATCH void func_801EF1B4(void) {
+    PartyMember* battler;
+
+    g_Task->timer = g_Task->timer + 4;
+    g_Task->param.unk_0B += 1;
+    if (g_Task->timer == 16) {
+        if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
+            battler = (PartyMember*)&g_BattleEnemyBattlers[g_Task->unk_03];
+            GFX_FreePaletteFadeTarget(battler);
+            GFX_AllocPaletteFade(battler, -8, -8, -8, 1);
+            func_800A9610((u8)(g_Task->unk_03 + 3), 0x10);
+        } else {
+            battler = &g_Game.members[g_Task->unk_03];
+            GFX_FreePaletteFadeTarget(battler);
+            GFX_AllocPaletteFade(battler, -8, -8, -8, 1);
+            func_800A9610(g_Task->unk_03, 0x10);
+        }
+        g_Task->unk_09 = 8;
+        g_Task->header.step += 1;
+    }
+}
 
 /* func_801EF334 */
 #include "overlays/bmagic/Effect_ReleaseTarget.h"
