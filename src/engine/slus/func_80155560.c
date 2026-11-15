@@ -3,7 +3,7 @@
 /* Lifted draft; semantics are unverified. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_80155560(u32 part_word, void* prim, s32 mode) {
-    s16       uv[4][4];
+    s16       u0, v0, u1, v1, u2, v2, u3, v3;
     s16       tmp0;
     s16       tmp1;
     s16       tmp2;
@@ -44,67 +44,67 @@ NON_MATCHING s32 func_80155560(u32 part_word, void* prim, s32 mode) {
     if (val8 & 0xF00) {
         if (val8 & 0x800) {
             tmp14    = (*((val9 * 4) + &g_AreaMapBundle.tile_table_offsets_04[0][1]) * 4) + (((val8 & 0x7FF) * 8) + (MAP_BUNDLE_BASE + 0x00));
-            uv[0][0] = FIELD(s8, tmp14, 0x3u);
-            uv[0][1] = FIELD(s16, tmp14, 0x2u) & BYTE_MASK;
-            uv[1][0] = FIELD(u8, tmp14, 0x1u);
+            u0 = FIELD(s8, tmp14, 0x3u);
+            v0 = FIELD(s16, tmp14, 0x2u) & BYTE_MASK;
+            u1 = FIELD(u8, tmp14, 0x1u);
             tmp15    = tmp14 + 4;
-            uv[1][1] = (u16) * (u8*)(tmp14);
-            uv[2][0] = FIELD(s8, tmp15, 0x3u);
-            uv[2][1] = FIELD(s16, tmp15, 0x2u) & BYTE_MASK;
-            uv[3][0] = FIELD(u8, tmp15, 0x1u);
-            uv[3][1] = FIELD(u8, tmp14, 0x4u);
+            v1 = (u16) * (u8*)(tmp14);
+            u2 = FIELD(s8, tmp15, 0x3u);
+            v2 = FIELD(s16, tmp15, 0x2u) & BYTE_MASK;
+            u3 = FIELD(u8, tmp15, 0x1u);
+            v3 = FIELD(u8, tmp14, 0x4u);
         } else {
             tmp16    = (*((val9 * 4) + &g_AreaMapBundle.tile_table_offsets_04[0][0]) * 4) + (((val8 & BYTE_MASK) * 4) + (MAP_BUNDLE_BASE + 0x00));
             tmp9     = FIELD(s8, tmp16, 0x3u);
-            uv[2][0] = (s16)tmp9;
-            uv[0][0] = (s16)tmp9;
+            u2 = (s16)tmp9;
+            u0 = (s16)tmp9;
             tmp12    = FIELD(s16, tmp16, 0x2u) & BYTE_MASK;
-            uv[1][1] = tmp12;
-            uv[0][1] = tmp12;
+            v1 = tmp12;
+            v0 = tmp12;
             tmp1     = tmp9 + FIELD(u8, tmp16, 0x1u);
-            uv[3][0] = tmp1;
-            uv[1][0] = tmp1;
+            u3 = tmp1;
+            u1 = tmp1;
             tmp11    = tmp12 + *(u8*)(tmp16);
-            uv[3][1] = tmp11;
-            uv[2][1] = tmp11;
+            v3 = tmp11;
+            v2 = tmp11;
         }
     } else {
         tmp2     = (val8 & 0xF) * 0x10;
         tmp0     = tmp2 | 0xF;
         tmp13    = val8 & 0xF0;
         tmp10    = tmp13 | 0xF;
-        uv[2][0] = tmp2;
-        uv[0][0] = tmp2;
-        uv[1][1] = tmp13;
-        uv[0][1] = tmp13;
-        uv[3][0] = tmp0;
-        uv[1][0] = tmp0;
-        uv[3][1] = tmp10;
-        uv[2][1] = tmp10;
+        u2 = tmp2;
+        u0 = tmp2;
+        v1 = tmp13;
+        v0 = tmp13;
+        u3 = tmp0;
+        u1 = tmp0;
+        v3 = tmp10;
+        v2 = tmp10;
     }
     if (val8 & 0x40000) {
-        tmp3     = (s32)uv[0][0];
-        uv[0][0] = (s32)uv[2][0];
-        uv[2][0] = (s32)uv[3][0];
-        uv[3][0] = (s32)uv[1][0];
-        uv[1][0] = tmp3;
+        tmp3     = (s32)u0;
+        u0 = (s32)u2;
+        u2 = (s32)u3;
+        u3 = (s32)u1;
+        u1 = tmp3;
     }
     if (val8 & 0x10000) {
-        tmp6     = uv[1][0];
-        uv[1][0] = uv[0][0];
-        tmp4     = uv[2][0];
-        uv[0][0] = tmp6;
-        uv[2][0] = uv[3][0];
-        uv[3][0] = tmp4;
+        tmp6     = u1;
+        u1 = u0;
+        tmp4     = u2;
+        u0 = tmp6;
+        u2 = u3;
+        u3 = tmp4;
     }
     val3 = (s32)val8 >> 0x18;
     if (val8 & 0x20000) {
-        tmp7     = uv[2][0];
-        uv[2][0] = uv[0][0];
-        tmp5     = uv[1][0];
-        uv[0][0] = tmp7;
-        uv[1][0] = uv[3][0];
-        uv[3][0] = tmp5;
+        tmp7     = u2;
+        u2 = u0;
+        tmp5     = u1;
+        u0 = tmp7;
+        u1 = u3;
+        u3 = tmp5;
         val3     = (s32)val8 >> 0x18;
     }
     tmp8 = val3 & 0xF;
@@ -132,15 +132,15 @@ NON_MATCHING s32 func_80155560(u32 part_word, void* prim, s32 mode) {
             poly->r0    = val7;
             poly->clut  = val1;
             poly->tpage = val0;
-            poly->u0    = (u8)uv[0][0];
-            poly->v0    = (u8)uv[0][1];
-            poly->u1    = (u8)uv[1][0];
-            poly->v1    = (u8)uv[1][1];
-            poly->u2    = (u8)uv[2][0];
-            poly->v2    = (u8)uv[2][1];
-            poly->u3    = (u8)uv[3][0];
+            poly->u0    = (u8)u0;
+            poly->v0    = (u8)v0;
+            poly->u1    = (u8)u1;
+            poly->v1    = (u8)v1;
+            poly->u2    = (u8)u2;
+            poly->v2    = (u8)v2;
+            poly->u3    = (u8)u3;
             val9 += 1;
-            poly->v3 = (u8)uv[3][1];
+            poly->v3 = (u8)v3;
             val4     = val9 < val11;
             poly++;
         } while (val4 != 0);
