@@ -220,4 +220,28 @@ MATCH void func_801F01A4(void) {
 /* func_801F04F4 */
 #include "overlays/bmagic/Actor_Clear.h"
 
-INCLUDE_ASM(func_801F0544);
+/* Sets the effect height to the mean z of the unblocked battlers on the side opposite the active battler. */
+MATCH void func_801F0544(void) {
+    s32 count;
+    s32 sum;
+    s32 i;
+
+    count = 0;
+    sum   = 0;
+    if (g_Battle.active_battler < 3) {
+        for (i = 0; i < 8; i++) {
+            if (!Battle_SlotIsBlocked((u8)(i + 3))) {
+                sum += g_BattleEnemyBattlers[i].pos.z.part.integer;
+                count++;
+            }
+        }
+    } else {
+        for (i = 0; i < 3; i++) {
+            if (!Battle_SlotIsBlocked((u8)i)) {
+                sum += g_Game.members[i].pos.z.part.integer;
+                count++;
+            }
+        }
+    }
+    g_Task->pos.z.part.integer = sum / count;
+}
