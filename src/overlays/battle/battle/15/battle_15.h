@@ -674,8 +674,10 @@ void        func_8009E224(void);
 void        func_8009E248(void);
 void        func_8009E7C4(void);
 void        func_8009E7E4(void);
-void        func_8009E804(void);
-void        func_8009E824(void);
+/* func_8009E804 */
+void        Battle_InflictSleep(void);
+/* func_8009E824 */
+void        Battle_InflictConfusion(void);
 void        func_8009E844(void);
 void        func_8009E98C(void);
 void        func_8009EA30(void);
@@ -691,7 +693,8 @@ void        func_8009EFB8(void);
 void        func_8009F010(void);
 void        func_8009F0A4(void);
 void        func_8009F1BC(void);
-void        func_8009F258(void);
+/* func_8009F258 */
+void        Battle_InflictSilence(void);
 void        func_8009F278(void);
 void        func_8009F2B0(void);
 void        func_8009F2E8(void);
@@ -713,10 +716,13 @@ void        func_8009F758(void);
 void        func_8009F7EC(void);
 void        func_8009F814(void);
 void        func_8009F83C(void);
-void        func_8009F864(void);
+/* func_8009F864 */
+void        Battle_InflictParalysis(void);
 void        func_8009F884(void);
-void        func_8009F978(void);
-void        func_8009F998(void);
+/* func_8009F978 */
+void        Battle_InflictBlindness(void);
+/* func_8009F998 */
+void        Battle_InflictPoison(void);
 void        func_8009F9B8(void);
 void        func_8009F9E0(void);
 void        func_8009FA20(void);
@@ -837,7 +843,8 @@ u8          Battle_PickAbility(u8 battler_index, u8 selection_kind);
 u8          func_800A3C9C(u8 battler_index, u8 selection_kind);
 void        Battle_MarkDamageApplied(void);
 u8          func_800A403C(u8 battler_index);
-u8          func_800A41D8(s32 input_mask);
+/* func_800A41D8 */
+u8          Battle_InflictStatus(s32 status_mask);
 u8          func_800A4238(s32 input_mask);
 s16         func_800A4294(s32 input_kind);
 void        func_800A46C4(void);
