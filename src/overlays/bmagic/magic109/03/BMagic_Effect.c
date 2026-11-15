@@ -184,7 +184,7 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
     diameter  = mesh_task->unk_09 * 2;
     move.h = move.w = diameter;
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &move, 0x340, 0x100);
-    GFX_AddPrim(3U, 0x18U);
+    GFX_AddPrim(3U, sizeof(DR_MOVE));
     draw_tpage = 0x42D;
     if (GetGraphType() != 1) {
         draw_tpage = 0x11D;
@@ -193,7 +193,7 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
         }
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, draw_tpage, NULL);
-    GFX_AddPrim(3U, 0xCU);
+    GFX_AddPrim(3U, sizeof(DR_MODE));
     for (segment = 0; segment < 16; segment++) {
         rim_angle             = segment << 8;
         D_801EF9F8[segment].x = FIXED_MUL(rsin(rim_angle), g_Task->unk_09);
@@ -218,7 +218,7 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
             poly_f4->r0 = 0;
             poly_f4->g0 = 0;
             poly_f4->b0 = 0;
-            poly_gt4    = (POLY_GT4*)(g_GfxPrimCursor + 0x18);
+            poly_gt4    = (POLY_GT4*)(g_GfxPrimCursor + sizeof(POLY_F4));
             SetPolyGT4((POLY_GT4*)poly_gt4);
             quad_tpage = 0x42D;
             if (GetGraphType() != 1) {
@@ -330,8 +330,8 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
                 poly_gt4->u2               = (s8)((g_Task)->unk_09 + D_801EFAF8[inner_next_vertex_reversed].x);
                 poly_gt4->v2               = (s8)((g_Task)->unk_09 + D_801EFAF8[inner_next_vertex_reversed].y);
             }
-            GFX_AddPrim(3U, 0x18U);
-            GFX_AddPrim(3U, 0x34U);
+            GFX_AddPrim(3U, sizeof(POLY_F4));
+            GFX_AddPrim(3U, sizeof(POLY_GT4));
         }
         for (entry = 0; entry < 16; entry++) {
             D_801EF9F8[entry].x = D_801EFA78[entry].x;
