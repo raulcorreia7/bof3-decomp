@@ -13,13 +13,13 @@ MATCH void func_801DE944(void) {
     u8   mode;
     s32  i;
     u8*  step;
-    s32  src;
-    s32  dst;
     s32  row;
     s32* scroll;
     s32  scroll_x;
     s32  scroll_y;
     s32  count;
+    /* FAKE: the member reads need no spill slots; retail reserves 8 bytes. */
+    FAKE_STACK_PADS(u8, 8);
 
     func_801DF90C();
     party = g_PartyFieldOrder;
@@ -34,7 +34,7 @@ MATCH void func_801DE944(void) {
             row = 0;
             do {
                 TASK_SET(((u8*)g_Game.members + row));
-                Party_LoadMemberSprite(FIELD(u8, &g_Game.members[0].chr.character_id, row), (u8)i);
+                Party_LoadMemberSprite(((PartyMember*)((u8*)&g_Game.members[0] + row))->chr.character_id, (u8)i);
                 Actor_SelectScript(g_Task->direction_08);
                 if (D_8014504A != 0) {
                     ACTOR_SET_MODE(0);
@@ -47,8 +47,8 @@ MATCH void func_801DE944(void) {
             } while (i < g_PartySize);
         }
         if (mode != CHAR_ID_GARR && g_Game.members[0].chr.character_id == 2) {
-            g_Game.members[0].pos.x.fixed += FIELD(s16, g_ShopFacingSteps, g_Game.members[0].facing * 4) << 15;
-            g_Game.members[0].pos.y.fixed += FIELD(s16, g_ShopFacingSteps, g_Game.members[0].facing * 4 + 2) << 15;
+            g_Game.members[0].pos.x.fixed += g_ShopFacingSteps[g_Game.members[0].facing].x << 15;
+            g_Game.members[0].pos.y.fixed += g_ShopFacingSteps[g_Game.members[0].facing].y << 15;
         }
         if (!(g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE)) {
             g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;
@@ -72,14 +72,10 @@ MATCH void func_801DE944(void) {
         i = 0;
         if (i < g_PartySize) {
             count = g_PartySize;
-            src   = 0;
-            dst   = 0;
             for (; i < count; i++) {
-                FIELD(s32, &g_Game.members[0].pos.x.fixed, dst) = FIELD(s32, &g_ShopBoatPartyPositions[0].x, src);
-                FIELD(s32, &g_Game.members[0].pos.y.fixed, dst) = FIELD(s32, &g_ShopBoatPartyPositions[0].y, src);
-                FIELD(s32, &g_Game.members[0].pos.z.fixed, dst) = FIELD(s32, &g_ShopBoatPartyPositions[0].z, src);
-                src += 0x10;
-                dst += BATTLE_PARTY_STRIDE;
+                g_Game.members[i].pos.x.fixed = g_ShopBoatPartyPositions[i].x;
+                g_Game.members[i].pos.y.fixed = g_ShopBoatPartyPositions[i].y;
+                g_Game.members[i].pos.z.fixed = g_ShopBoatPartyPositions[i].z;
             }
         }
         if (!(g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE)) {
@@ -93,14 +89,11 @@ MATCH void func_801DE944(void) {
             scroll_x = 25 << 16;
             scroll_y = 60 << 16;
             scroll   = &D_80145EC4;
-            row      = 0;
             do {
-                dst                                             = row;
-                FIELD(s32, &g_Game.members[0].pos.x.fixed, dst) = scroll_x;
-                FIELD(s32, &g_Game.members[0].pos.y.fixed, dst) = scroll_y;
-                FIELD(s32, &g_Game.members[0].pos.z.fixed, dst) = Area_SampleHeight(scroll[0], scroll[1]) << 16;
+                g_Game.members[i].pos.x.fixed = scroll_x;
+                g_Game.members[i].pos.y.fixed = scroll_y;
+                g_Game.members[i].pos.z.fixed = Area_SampleHeight(scroll[0], scroll[1]) << 16;
                 i++;
-                row += BATTLE_PARTY_STRIDE;
             } while (i < g_Game.party_size);
         }
         g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;

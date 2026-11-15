@@ -11,7 +11,7 @@ MATCH void func_801DF8AC(void) {
     if ((battle_work->u.turn.action_flags.volatile_value & COMBATANT_FLAG_DRAGON_FORM_QUEUED) != 0u) {
         handler = D_801EB188[0];
     } else {
-        handler = D_801EB15C[BATTLE_LOCAL_BYTE_79(battle_work)];
+        handler = D_801EB15C[battle_work->chr.character_id];
     }
 
     handler();

@@ -433,8 +433,13 @@ MATCH void func_801F0960(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F09E0(void) {
+/* The effect record with the word at +0x08 as a member. */
+typedef struct EffectWords {
+    u8  pad_00[8];
+    s32 unk_08;
+} EffectWords;
+
+MATCH void func_801F09E0(void) {
     s16* angle_cell;
     u8   timer;
     s32  angle;
@@ -444,22 +449,18 @@ NON_MATCHING void func_801F09E0(void) {
     if (timer != 0) {
         return;
     }
-    angle_cell                       = &D_1F800004;
-    angle                            = D_801F22BC->unk_04 & 0xF;
-    *angle_cell                      = angle << 8;
-    D_1F800000.view.effect.params[0] = ((D_801F22BC->unk_04 >> 4) + 1) << 3;
-    D_801F22BC->unk_10               = g_BattleEffectBattler->pos.x.fixed + rsin(angle << 8) * D_1F800000.view.effect.params[0];
-    D_801F22BC->unk_14               = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * D_1F800000.view.effect.params[0];
-    D_801F22BC->unk_18               = g_BattleEffectBattler->pos.z.fixed + 0x800000;
-    D_801F22BC->slot                 = 0;
-    PARTY_MEMBER_WORD_08(D_801F22BC) = 0;
-    D_801F22BC->pad_06               = 0;
-    D_801F22BC->unk_07               = (u16)D_1F800000.view.effect.params[0];
+    angle_cell                         = &D_1F800004;
+    angle                              = D_801F22BC->unk_04 & 0xF;
+    *angle_cell                        = angle << 8;
+    D_1F800000_HALF                    = ((D_801F22BC->unk_04 >> 4) + 1) << 3;
+    D_801F22BC->unk_10                 = g_BattleEffectBattler->pos.x.fixed + rsin(*angle_cell) * D_1F800000_HALF;
+    D_801F22BC->unk_14                 = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * D_1F800000_HALF;
+    D_801F22BC->unk_18                 = g_BattleEffectBattler->pos.z.fixed + 0x800000;
+    ((EffectWords*)D_801F22BC)->unk_08 = D_801F22BC->slot = 0;
+    D_801F22BC->pad_06                                    = 0;
+    D_801F22BC->unk_07                                    = (u16)D_1F800000_HALF;
     D_801F22BC->header.step += 1;
 }
-#else
-INCLUDE_ASM(func_801F09E0);
-#endif
 
 MATCH void func_801F0B34(void) {
     s16* angle_cell;
@@ -524,7 +525,33 @@ MATCH void func_801F0DA4(void) {
     }
 }
 
-INCLUDE_ASM(func_801F0ED0);
+/* The mote's quad: the screen point at unk_0C/unk_0E, half-width unk_05, height unk_05*4, coloured by unk_06*6,
+ * blitted from the 0x340/0x100 page. */
+MATCH void func_801F0ED0(void) {
+    POLY_FT4* prim;
+    s32       tpage;
+
+    D_1F800000.view.effect.params[0] = ((Magic126Mote*)D_801F22BC)->unk_05;
+    D_1F800000.view.effect.params[1] = ((Magic126Mote*)D_801F22BC)->unk_05 * 4;
+    D_1F800000.view.effect.params[2] = ((Magic126Mote*)D_801F22BC)->unk_06 * 6;
+    D_1F800000.view.effect.params[6] = ((Magic126Mote*)D_801F22BC)->unk_0C;
+    D_1F800000.view.effect.params[7] = ((Magic126Mote*)D_801F22BC)->unk_0E;
+    tpage                            = getTPage(1, 1, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    Area_AddCellPrim(((Magic126Mote*)D_801F22BC)->unk_10, ((Magic126Mote*)D_801F22BC)->unk_14, 2, sizeof(DR_MODE));
+    prim = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(prim);
+    SetSemiTrans(prim, 1);
+    setXY4(prim, D_1F800000.view.effect.params[6] - D_1F800000.view.effect.params[0], D_1F800000.view.effect.params[7] - D_1F800000.view.effect.params[1],
+           D_1F800000.view.effect.params[6] + D_1F800000.view.effect.params[0], D_1F800000.view.effect.params[7] - D_1F800000.view.effect.params[1],
+           D_1F800000.view.effect.params[6] - D_1F800000.view.effect.params[0], D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[6] + D_1F800000.view.effect.params[0],
+           D_1F800000.view.effect.params[7]);
+    setTPage(prim, 0, 1, 0x340, 0x100);
+    setClut(prim, 0, 0x1FA);
+    setUV4(prim, 0x58, 8, 0x68, 8, 0x58, 0x48, 0x68, 0x48);
+    setRGB0(prim, D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2]);
+    Area_AddCellPrim(((Magic126Mote*)D_801F22BC)->unk_10, ((Magic126Mote*)D_801F22BC)->unk_14, 2, sizeof(POLY_FT4));
+}
 
 /* func_801F1110 */
 #include "overlays/bmagic/BMagic_AllocEffect.h"

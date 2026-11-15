@@ -38,7 +38,9 @@ extern u8          g_AutoRun;
 extern u8          g_SceneEventFlags[];
 /* D_80144F58 */
 extern u8          g_PartyFormation;
-/* D_80144F59 */
+/* D_80144F59. Bits 3, 4 and 5 (1 << CharacterIndex of Teepo, Rei, Momo): the first reward of that
+ * character's special master was given. The master menu sets them, the start menu arms a choice
+ * panel for each and the shop enables item classes 11, 13 and 14 from them. */
 extern u8          g_PartyMenuFlags;
 extern u8          g_PartyBattleOrder[];
 /* One bit per ability id: set once a party member has learned the ability, from a master or by watching an enemy. */
