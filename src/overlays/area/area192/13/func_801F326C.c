@@ -7,17 +7,17 @@ MATCH u16 func_801F326C(u8 character_id) {
     u8  row;
     s32 base;
 
-    for (row = 0; row < 5; row++) {
+    for (row = 0; row < CAMP_MESSAGE_CHARACTER_COUNT; row++) {
         if (D_801F3878[row] == character_id) {
             break;
         }
     }
     /* FAKE: retail forms the flags address from the area byte's address. */
     area = D_80144EF8[0x5E];
-    base = row * 9;
+    base = row * CAMP_MESSAGE_ROW_SIZE;
     row  = base;
-    if (area >= 9) {
-        area = 8;
+    if (area >= CAMP_MESSAGE_ROW_SIZE) {
+        area = CAMP_MESSAGE_AREA_LAST;
     }
     slot    = g_CharSlot[character_id];
     fatigue = g_Characters[slot].fatigue;
@@ -31,7 +31,7 @@ MATCH u16 func_801F326C(u8 character_id) {
             row = row + D_801F3880[area];
         }
     } else {
-        row = base + 8;
+        row = base + CAMP_MESSAGE_AREA_LAST;
     }
     if (SYS_TestFlag(g_SceneFlags, 2) != 0) {
         return D_801F3848[row];
