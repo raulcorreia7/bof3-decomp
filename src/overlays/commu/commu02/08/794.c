@@ -166,24 +166,23 @@ MATCH void func_801D1938(void) {
 NON_MATCHING void func_801D1A50(void) {
     u16* input;
     u16  repeated;
-    u8   selection;
+    s32  selection;
+    s32  slot;
 
     input    = &g_InputPressed;
     repeated = INPUT_GetRepeatedButtons(*input & 0xA000);
     if (repeated != 0) {
         if ((s8)D_801DB0B4 < 8) {
             SND_PlayCue(0x100);
-            if ((s8)D_801DB0B4 != 0) {
+            if (LOB(D_801DB0B4) != 0) {
                 if (repeated & 0x8000) {
-                    selection  = (u8)D_801DB0B8 - 1;
-                    D_801DB0B8 = selection;
-                    if ((s8)selection < 0) {
+                    D_801DB0B8 = (u8)D_801DB0B8 - 1;
+                    if (D_801DB0B8 < 0) {
                         D_801DB0B8 = 2;
                     }
                 } else if (repeated & 0x2000) {
-                    selection  = (u8)D_801DB0B8 + 1;
-                    D_801DB0B8 = selection;
-                    if ((s8)selection >= 3) {
+                    D_801DB0B8 = (u8)D_801DB0B8 + 1;
+                    if (D_801DB0B8 >= 3) {
                         D_801DB0B8 = 0;
                     }
                 }
@@ -191,23 +190,23 @@ NON_MATCHING void func_801D1A50(void) {
                 D_801DB0B8 ^= 1;
             }
         }
-    } else if (*input & g_InputMasks[INPUT_SLOT_MOVE]) {
+    } else if (*input & g_InputMasks[MENU_INPUT_CONFIRM]) {
         selection = D_801DB0B8;
         if (selection == 2) {
             SND_PlayCue(0x104);
             SND_PlayCue(0x102);
-            D_801DB0B4 = 0;
+            D_801DB0C4 = 0;
             D_801F294D++;
-        } else if ((s8)D_801DB0B4 < 8) {
-            D_801DB080[10 + (u8)D_801DB0B4] = selection;
+        } else if ((slot = LOB(D_801DB0B4)) < 8) {
+            D_801DB080[10 + slot] = selection;
             D_801DB0B4++;
             SND_PlayCue(0x103);
             if (D_801DB0B4 == 8) {
                 D_801DB0B8 = 2;
             }
         }
-    } else if (*input & g_InputMasks[INPUT_SLOT_MENU]) {
-        if ((s8)D_801DB0B4 > 0) {
+    } else if (*input & g_InputMasks[MENU_INPUT_CANCEL]) {
+        if (LOB(D_801DB0B4) != 0) {
             SND_PlayCue(0x106);
             D_801DB0B4--;
             if ((s8)D_801DB0B4 == 0 && D_801DB0B8 == 2) {
@@ -218,7 +217,7 @@ NON_MATCHING void func_801D1A50(void) {
 
     if ((s8)D_801DB0B4 <= 0) {
         func_801D2908(0x58, 0x44, 2);
-    } else if ((s8)D_801DB0B4 < 8) {
+    } else if ((s8)D_801DB0B4 >= 8) {
         func_801D2908(0x58, 0x44, 3);
     } else {
         func_801D2908(0x58, 0x44, 0xFF);
@@ -260,41 +259,38 @@ NON_MATCHING void func_801D1D68(void) {
 INCLUDE_ASM(func_801D1D68);
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D1E98(void) {
+MATCH void func_801D1E98(void) {
     s32 idx;
-    s32 old;
-    s32 step;
+    u8  old;
+    s32 lt;
 
     func_801D3184(0x26, 0x10);
     func_801D32A0(0xA8, 0x10, 0);
     D_801DB0C4 -= 1;
     if (D_801DB0C4 == 0) {
         idx = (s8)D_801DB0BC;
-        if (D_801DB080[idx + 9] != ((D_801DB080[idx - 1] < D_801DB080[idx]) ^ 1)) {
-            SND_PlayCue(0x107);
-            D_801DB0C0 = 1;
-        } else {
+        lt  = D_801DB080[idx - 1] < D_801DB080[idx];
+        if (D_801DB080[idx + 9] == (lt ^ 1)) {
             SND_PlayCue(0x104);
             old        = D_801DB0BC;
             D_801DB0BC = old + 1;
-            if ((s8)D_801DB0BC != (s8)D_801DB0B4 + 1) {
+            if ((s8)D_801DB0BC == (s8)D_801DB0B4 + 1) {
+                D_801DB0BC = old;
+                D_801DB0C0 = 0;
+                D_801DB0C4 = 0x3C;
+                D_801F294D += 1;
+            } else {
                 D_801DB0C4 = 0x1E;
-                goto done;
             }
-            D_801DB0BC = old;
-            D_801DB0C0 = 0;
+        } else {
+            SND_PlayCue(0x107);
+            D_801DB0C0 = 1;
+            D_801DB0C4 = 0x3C;
+            D_801F294D += 1;
         }
-        step       = 0x3C;
-        D_801DB0C4 = step;
-        D_801F294D += 1;
     }
-done:
     func_801D2794((u8)(D_801DB0B4 + 1), (u8)D_801DB0BC, D_801DB0B4);
 }
-#else
-INCLUDE_ASM(func_801D1E98);
-#endif
 
 MATCH void func_801D1FE4(void) {
     s32 index;
@@ -828,8 +824,7 @@ MATCH void func_801D3B98(void) {
     func_801D32A0(0xCC, 0x3C, 0);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D3C30(void) {
+MATCH void func_801D3C30(void) {
     u16  buttons;
     s32  k;
     u8   val;
@@ -839,18 +834,19 @@ NON_MATCHING void func_801D3C30(void) {
     buttons = INPUT_GetRepeatedButtons(*pad & 0xF000);
     if (buttons != 0) {
         SND_PlayCue(0x100);
-        k = (u8)(D_801DB0B8 + (s8)D_801DB0B4 * 5 + 3);
+        k = (s8)D_801DB0B4 * 5 + 3;
+        k += (u8)D_801DB0B8;
         if (buttons & PADLdown) {
-            val           = D_801DB080[k] - 1;
-            D_801DB080[k] = val;
+            val               = D_801DB080[(u8)k] - 1;
+            D_801DB080[(u8)k] = val;
             if ((s8)val <= 0) {
-                D_801DB080[k] = 9;
+                D_801DB080[(u8)k] = 9;
             }
         } else if (buttons & PADLup) {
-            val           = D_801DB080[k] + 1;
-            D_801DB080[k] = val;
+            val               = D_801DB080[(u8)k] + 1;
+            D_801DB080[(u8)k] = val;
             if (val >= 10) {
-                D_801DB080[k] = 1;
+                D_801DB080[(u8)k] = 1;
             }
         } else if (buttons & PADLright) {
             D_801DB0B8 += 1;
@@ -873,9 +869,6 @@ NON_MATCHING void func_801D3C30(void) {
     func_801D3184(0xCC, 0x10);
     func_801D32A0(0xCC, 0x3C, 0);
 }
-#else
-INCLUDE_ASM(func_801D3C30);
-#endif
 
 INCLUDE_ASM(func_801D3E44);
 
