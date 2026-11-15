@@ -122,7 +122,6 @@ MATCH void func_801D02F4(void) {
 
 #include "overlays/plchar/Char_ClearModeIfUnused.h"
 
-/* Returns nonzero when a record, rock, or blocking cell occupies the current facing. */
 MATCH s32 func_801D04C8(void) {
     /* FAKE: pure C is 0x1A0 vs 0x1A4; retail loads the work pointer before the frame. */
     FAKE_REG(Actor*, task, "a1");
