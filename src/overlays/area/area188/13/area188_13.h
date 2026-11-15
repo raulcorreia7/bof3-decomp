@@ -20,7 +20,9 @@ extern u8 D_801F6898[];
 
 /* The party position in 16.16 fixed point: x, y and the ground height. */
 
-/* The shared record table as its byte view. */
+/* The image payload as its byte view; its leading bytes are the fade ramp the
+ * transition step walks. */
+extern u8 D_801F4DF0[];
 
 /* The scrolling halfword and the selection byte the store paths write. */
 
@@ -29,8 +31,8 @@ extern u8 D_801F6898[];
 extern Callback D_801F4DF4[];
 extern Callback D_801F4DFC[];
 extern Callback D_801F4E04[];
+/* The fade ramp index and the fade colour it selects. */
 extern u8       D_801F689C;
-/* The image's two sticky state bytes. */
 extern u8       D_801F68A0;
 
 /* The game-overlay state bytes the cancel path resets. */
@@ -48,7 +50,32 @@ void func_801F38E0(void* arg0, s32 arg1, s32 arg2);
 void func_801F3ADC(void* arg0, void* arg1, s32 arg2);
 void func_801F40F4(s32 arg0);
 
-/* Restarts the area task at mode 1 and clears the two sticky state bytes. */
+/* Draws the screen fade: advances the timer, takes the next fade colour when the
+ * timer reaches its threshold and resets it, then covers the screen with one
+ * semi-transparent quad.
+ * func_801F2F6C and func_801F3148 draw it; every change must verify both. */
+static inline void Area_DrawFadeQuad(void) {
+    POLY_G4* prim;
+
+    if (g_Task->timer++ >= 16) {
+        D_801F68A0    = D_801F4DF0[D_801F689C];
+        g_Task->timer = 0;
+        if (D_801F689C++ != 0) {
+            D_801F689C = 0;
+        }
+    }
+
+    GFX_AddDitheredDrawMode(6U, GetTPage(2, 2, 320, 320) & HALF_MASK);
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    setRGB0(prim, prim->r1 = D_801F68A0, prim->g1 = 0, prim->b1 = 0);
+    setRGB2(prim, prim->r3 = D_801F68A0, prim->g3 = 0, prim->b3 = 0);
+    setXY4(prim, 0, 0, SCREEN_WIDTH, 0, 0, 320, SCREEN_WIDTH, 320);
+    SetSemiTrans((POLY_G4*)g_GfxPrimCursor, 1);
+    GFX_AddPrim(2U, sizeof(POLY_G4));
+}
+
+/* Restarts the area task at mode 1 and resets the fade colour and its ramp index. */
 #define AREA_RESET_TASK_TO_MODE1() \
     g_Task->timer       = 0;       \
     g_Task->header.mode = 1;       \

@@ -1,3 +1,8 @@
 #include "area188_13.h"
 
-INCLUDE_ASM(func_801F3148);
+MATCH void func_801F3148(void) {
+    Area_DrawFadeQuad();
+    if (g_ScriptVars[0] == 4) {
+        Actor_Clear();
+    }
+}
