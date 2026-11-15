@@ -389,13 +389,13 @@ struct Vec3W {
 extern u8  D_1F800004;
 extern u32 D_1F80000C;
 
-/* One list of the cell ordering table: the last packet linked. */
+/* One list of the cell ordering table: its first and its last packet. */
 typedef struct AreaCellPacketList {
+    P_TAG* head;
     P_TAG* tail;
-    s32    unk_04;
 } AreaCellPacketList;
 
-/* D_80142CC4 as lists: six per grid row. */
+/* D_80142CC0 as lists: six per grid row. */
 extern AreaCellPacketList g_AreaCellPacketLists[][6];
 extern SVECTOR            D_1F800014[];
 extern SVECTOR            D_1F80001C;
