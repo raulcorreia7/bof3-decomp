@@ -459,7 +459,95 @@ MATCH void func_801D1E48(void) {
     }
 }
 
-INCLUDE_ASM(func_801D2110);
+/* Commits the request pair the pad input selects, then redraws both kind grids. */
+MATCH void func_801D2110(void) {
+    u16 pad;
+    u32 anchor;
+    s32 direction;
+    s32 index;
+    s32 i;
+    u8  stale;
+    u8* rec;
+    u8* sel;
+    u8* cursor;
+    u8* row;
+    s16 x;
+    s16 y;
+
+    pad   = g_InputPressed;
+    stale = 0;
+    if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        if (D_801D4E18 != 0) {
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+            D_801D4E0C = D_801D4E14;
+            D_801F294D = D_801D4E10;
+        } else {
+            index = g_SceneEventSelection - 1;
+            if (g_FairyRooms[index * 8] != (s8)D_801D4E28 + 4 || D_801457A9[index][0] != (s8)D_801D4E2C || D_801457AA[index][0] != (s8)D_801D4E30) {
+                stale = 1;
+            }
+            if (stale) {
+                rec = &g_SceneEventSelection;
+                for (i = 0; i < FAIRY_JOB_COUNT; i++) {
+                    if (g_FairyJobs[i].type == *rec) {
+                        anchor                         = COMMU_REQUEST_ANCHOR(rec);
+                        g_FairyJobs[i].record_state    = 0;
+                        g_FairyJobs[i].unk_03          = 0;
+                        g_FairyJobs[i].progress_anchor = anchor;
+                    }
+                }
+                sel                      = &g_SceneEventSelection;
+                index                    = *sel - 1;
+                D_801457AB[index][0]     = 0;
+                index                    = *sel - 1;
+                (&D_801457AC)[index * 2] = g_BattleCount;
+            }
+            cursor                      = &g_SceneEventSelection;
+            /* The room-type byte leads the row the grid-line column starts. */
+            D_801457A9[*cursor - 1][-1] = D_801D4E28 + 4;
+            D_801457A9[*cursor - 1][0]  = D_801D4E2C;
+            D_801457AA[*cursor - 1][0]  = D_801D4E30;
+            D_801D4DF4                  = D_801D4E00;
+            D_801D4DF8                  = D_801D4E04;
+            D_801D4DFC                  = D_801D4E08;
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
+            D_801D4E0C = 0xB5;
+            D_801F294C = D_801F294C - 1;
+        }
+    } else if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        D_801D4E0C = D_801D4E14;
+        D_801F294D = D_801D4E10;
+    } else {
+        direction = INPUT_REPEATED(pad, (PADLleft | PADLright));
+        if (direction & (PADLleft | PADLright)) {
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+            D_801D4E18 ^= 1;
+        }
+    }
+    func_801D3038();
+    row = &g_SceneEventSelection;
+    func_801D36FC(*row, 1);
+    func_801D4694(&x, &y, *row, 0);
+    func_801D3984(x, y, 1);
+    y = func_801D4474();
+    if (D_801D4E1C == 0xFF) {
+        func_801D4178((s16)(52 * ((*row - 1) % 4) + 0x42), y, 0);
+        Menu_DrawCursorSprite((u16)((52 * ((*row - 1) % 4) + 0x44) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E28 * 16), 0);
+    } else {
+        func_801D4178((s16)(52 * ((*row - 1) % 4) + 0x42), y, 1);
+        y = y + (12 + 16 * (s8)D_801D4E28);
+        if (D_801D4E20 == 0xFF) {
+            y = func_801D44E0((s16)(52 * ((*row - 1) % 4) + 0x4A), y, D_801D4E1C, 0);
+            Menu_DrawCursorSprite((u16)((52 * ((*row - 1) % 4) + 0x4C) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E2C * 16), 0);
+        } else {
+            y = func_801D44E0((s16)(52 * ((*row - 1) % 4) + 0x4A), y, D_801D4E1C, 1);
+            y = y + (12 + 16 * (s8)D_801D4E2C);
+            y = func_801D44E0((s16)(52 * ((*row - 1) % 4) + 0x52), y, D_801D4E20, 0);
+            Menu_DrawCursorSprite((u16)((52 * ((*row - 1) % 4) + 0x54) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E30 * 16), 0);
+        }
+    }
+}
 
 #include "overlays/commu/Commu_CellGrid.h"
 
@@ -470,7 +558,73 @@ MATCH void func_801D273C(s16 x, s16 y) {
     COMMU_DRAW_CELL_GRID(func_801D4030, 0x22, 7, 4, 6);
 }
 
-INCLUDE_ASM(func_801D28A4);
+/* Draws the channel box of one commu record slot. */
+MATCH void func_801D28A4(s16 x, s16 y, u8 slot, s32 selected) {
+    TILE* prim;
+    u8*   block;
+    u8*   names;
+    u32   offset;
+    s8    row;
+    s32   index;
+    u8    sel;
+    u8    kind;
+
+    /* The window style leads the shared block; the five-byte name rows sit 0xE96 above it. */
+    block = &g_WindowStyle;
+    func_801AE3F0((u16)(x + 4), (u16)(y + 4), 0x48, 0x28, 0x81, block[0]);
+    func_801AE3F0((u16)x, (u16)y, 0x48, 0x26, 0x80, block[0]);
+    func_801D273C(x, y);
+    offset = slot * 5;
+    names  = block + 0xE96;
+    func_8014F800((s16)(x + 6), (s16)(y + 4), 0, 5, (u32)&names[offset]);
+    prim = GFX_CURSOR(TILE);
+    SetTile(prim);
+    prim->x0 = x + 6;
+    prim->y0 = y + 0x12;
+    prim->w  = 0x3C;
+    prim->h  = 0x10;
+    prim->r0 = 0;
+    prim->g0 = 0;
+    prim->b0 = 0;
+    GFX_AddPrim(1, sizeof(TILE));
+    sel = selected;
+    if (sel == 0) {
+        func_801D2D98((s16)(x + 6), (s16)(y + 0x12), g_Fairies[slot][5] * 12, 0, 0);
+        func_801D2D98((s16)(x + 6), (s16)(y + 0x16), g_Fairies[slot][6] * 12, 1, 0);
+        func_801D2D98((s16)(x + 6), (s16)(y + 0x1A), g_Fairies[slot][7] * 12, 2, 0);
+        func_801D2D98((s16)(x + 6), (s16)(y + 0x1E), g_Fairies[slot][8] * 12, 3, 0);
+    } else {
+        row = D_801D4E28;
+        if (row == 0) {
+            kind = 0;
+        } else if (row > 8) {
+            kind = row - 8;
+        } else {
+            index = row - 1;
+            kind  = g_FairyRooms[index * 8];
+        }
+        if (D_801D4C20[kind] == 0) {
+            func_801D2D98((s16)(x + 6), (s16)(y + 0x12), g_Fairies[slot][5] * 12, 0, 1);
+        } else {
+            func_801D2D98((s16)(x + 6), (s16)(y + 0x12), g_Fairies[slot][5] * 12, 0, 0);
+        }
+        if (D_801D4C20[kind] == 1) {
+            func_801D2D98((s16)(x + 6), (s16)(y + 0x16), g_Fairies[slot][6] * 12, 1, 1);
+        } else {
+            func_801D2D98((s16)(x + 6), (s16)(y + 0x16), g_Fairies[slot][6] * 12, 1, 0);
+        }
+        if (D_801D4C20[kind] == 2) {
+            func_801D2D98((s16)(x + 6), (s16)(y + 0x1A), g_Fairies[slot][7] * 12, 2, 1);
+        } else {
+            func_801D2D98((s16)(x + 6), (s16)(y + 0x1A), g_Fairies[slot][7] * 12, 2, 0);
+        }
+        if (D_801D4C20[kind] == 3) {
+            func_801D2D98((s16)(x + 6), (s16)(y + 0x1E), g_Fairies[slot][8] * 12, 3, 1);
+        } else {
+            func_801D2D98((s16)(x + 6), (s16)(y + 0x1E), g_Fairies[slot][8] * 12, 3, 0);
+        }
+    }
+}
 
 INCLUDE_ASM(func_801D2D98);
 
@@ -815,7 +969,35 @@ MATCH s32 func_801D4474(void) {
     return (s16)val;
 }
 
-INCLUDE_ASM(func_801D44E0);
+/* Draws the panel of one commu kind and returns its top. */
+MATCH s16 func_801D44E0(s16 x, s16 y, u8 kind, u8 mode) {
+    s32 i;
+    s32 height;
+    s32 bottom;
+    u16 span;
+    u8  rows;
+
+    rows   = D_801D4DD4[kind].count;
+    height = rows << 4;
+    span   = height;
+    bottom = span + 4;
+    if (y + bottom >= 0xD9) {
+        y = 0xD4 - height;
+    }
+    if (mode == 0) {
+        UI_DrawWindow((u16)(x + 4), (u16)(y + 6), 0x30, span, 0x81, g_WindowStyle);
+    }
+    UI_DrawWindow((u16)x, (u16)y, 0x50, height | 1, 0x80, g_WindowStyle);
+    func_801D42DC((s16)x, (s16)(y - 1), span & 0xF0);
+    i = 0;
+    if (i < D_801D4DD4[kind].count) {
+        do {
+            UI_DrawText((s16)(x + 8), (s16)(y + 2 + i * 16), (mode * 7) & BYTE_MASK, 8, &D_801D4D34[0x50 + (D_801D4DD4[kind].first + i) * 8]);
+            i++;
+        } while (i < D_801D4DD4[kind].count);
+    }
+    return y;
+}
 
 /* Writes the screen origin of one entry-grid slot through the two pointers. */
 MATCH void func_801D4694(s16* out_x, s16* out_y, s32 kind, s32 ordinal) {

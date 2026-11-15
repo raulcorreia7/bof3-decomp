@@ -199,14 +199,29 @@ extern u8              D_801DA04E;
 extern s32             D_801DA084;
 extern s32             D_801DA088;
 extern s32             D_801DA0FC;
-extern u8              D_801DA0C0;
-extern u8              D_801DA0C6;
-extern u32             D_801DA100;
+extern u8              D_801DA090;
+extern s32             D_801DA07C;
+extern s32             D_801DA080;
+extern s32             D_801DA098;
+extern u8*             D_801F501C;
+extern u8* volatile D_801DA09C;
+extern u8* volatile D_801DA114;
+extern s32 D_801DA0AC;
+extern s32 D_801DA0B0;
+extern s32 D_801DA0F4;
+extern s32 D_801DA0F8;
+extern u8  D_801DA108;
+extern s32 D_801DA110;
+extern s32 D_801DA124;
+extern s32 D_801DA128;
+extern u8  D_801DA0C0;
+extern u8  D_801DA0C6;
+extern u32 D_801DA100;
 /* kept: the tint bytes stay separate globals; one array shares their base register and leaves
    func_801D2ADC eight bytes short. */
-extern u8              D_801DA11D;
-extern u8              D_801DA11E;
-extern u8              D_801DA11F;
+extern u8  D_801DA11D;
+extern u8  D_801DA11E;
+extern u8  D_801DA11F;
 
 /* The clut strip tables of this overlay, bound in config/symbols.toml. */
 extern UvRect g_MenuClutStripCells[];

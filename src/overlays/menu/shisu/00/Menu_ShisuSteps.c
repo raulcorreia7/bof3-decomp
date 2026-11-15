@@ -277,6 +277,47 @@ INCLUDE_ASM(func_801D1EE8);
 
 INCLUDE_ASM(func_801D2308);
 
-INCLUDE_ASM(func_801D27BC);
+MATCH void func_801D27BC(void) {
+    s32* px;
+    s32* py;
+    u8** pp;
+    s32  field;
+    s8   shade;
+
+    px         = &g_AreaScrollTargetX;
+    py         = &g_AreaScrollTargetY;
+    pp         = &D_801F501C;
+    D_801DA09C = *pp;
+    field      = *(s32*)(D_801DA09C + 4);
+    D_801DA049 = 0;
+    D_801DA090 = 0;
+    D_801DA088 = 0x1000;
+    D_801DA0AC = 0;
+    D_801DA0B0 = 0;
+    D_801DA0B4 = 0;
+    shade      = -0x80;
+    D_801DA0A5 = shade;
+    D_801DA0A6 = shade;
+    D_801DA0A7 = shade;
+    D_801DA07C = *px;
+    D_801DA080 = *py;
+    D_801DA098 = field;
+    D_801DA084 = (Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16) - MENU_STATUS_HEIGHT_BIAS;
+    D_801DA114 = *pp + 8;
+    field      = *(s32*)(D_801DA114 + 4);
+    D_801DA0C1 = 0;
+    D_801DA108 = 0;
+    D_801DA100 = 0x1000;
+    D_801DA124 = 0;
+    D_801DA128 = 0;
+    D_801DA12C = 0;
+    D_801DA11D = shade;
+    D_801DA11E = shade;
+    D_801DA11F = shade;
+    D_801DA0F4 = *px;
+    D_801DA0F8 = *py;
+    D_801DA110 = field;
+    D_801DA0FC = (Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16) + MENU_STATUS_HEIGHT_BIAS;
+}
 
 INCLUDE_ASM(func_801D2978);
