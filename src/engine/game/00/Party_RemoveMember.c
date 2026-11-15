@@ -5,6 +5,7 @@
 NON_MATCHING void Party_RemoveMember(s32 character_id) {
     s32  slot;
     s32  limit;
+    s32  size;
     s32  key;
     s32  off;
     s32  code;
@@ -22,9 +23,10 @@ NON_MATCHING void Party_RemoveMember(s32 character_id) {
 
     func_801C1840();
     slot = 0;
-    if ((s32)g_Game.party_size > 0) {
+    size = g_Game.party_size;
+    if (size > 0) {
         key   = character_id & BYTE_MASK;
-        limit = g_Game.party_size;
+        limit = size;
     search1:
         if (g_PartyBattleOrder[slot] == key)
             goto found1;
@@ -48,9 +50,10 @@ NON_MATCHING void Party_RemoveMember(s32 character_id) {
         } while (slot < (s32)g_Game.party_size - 1);
     }
     slot = 0;
-    if ((s32)g_Game.party_size > 0) {
+    size = g_Game.party_size;
+    if (size > 0) {
         key   = character_id & BYTE_MASK;
-        limit = g_Game.party_size;
+        limit = size;
     search2:
         if (g_PartyFieldOrder[slot] == key)
             goto found2;
