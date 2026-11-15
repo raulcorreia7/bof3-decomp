@@ -29,8 +29,8 @@ void func_801F3768(s32 arg0, s32 arg1);
 void func_801F30E4(void);
 void func_801F3474(void);
 void func_801F3110(u16 start, u16 end, Point3l* from, Point3l* to);
-/* include/area/area.h declares func_801F34A0 without a parameter list; it
- * takes the same four arguments. */
+/* include/area/area.h declares func_801F34A0 without a parameter list, so its
+ * definition keeps the same form; it takes the same four arguments. */
 
 s32 func_801F2FC4(void);
 s32 func_801F3368(void);
