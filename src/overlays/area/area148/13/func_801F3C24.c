@@ -27,15 +27,16 @@ MATCH void func_801F3C24(void) {
             *selection = slot;
             if (slot != GAME_NONE) {
                 g_SpawnedActors[*selection].header.flags = ACTOR_FLAG_IN_USE;
-                FAKE_BARRIER(); /* FAKE: Preserve retail's slot reload; plain C measured 260/313 instructions. */
+                /* FAKE: every slot store reloads the cell; plain C measured 260 of 313 instructions. */
+                FAKE_BARRIER();
                 g_SpawnedActors[*selection].type = 19;
-                FAKE_BARRIER(); /* FAKE: Preserve retail's slot reload; plain C measured 260/313 instructions. */
+                FAKE_BARRIER();
                 g_SpawnedActors[*selection].camera_angle.x = -922;
-                FAKE_BARRIER(); /* FAKE: Preserve retail's slot reload; plain C measured 260/313 instructions. */
+                FAKE_BARRIER();
                 g_SpawnedActors[*selection].camera_angle.y = g_AreaCameraAngle.vy;
-                FAKE_BARRIER(); /* FAKE: Preserve retail's slot reload; plain C measured 260/313 instructions. */
+                FAKE_BARRIER();
                 g_SpawnedActors[*selection].camera_angle.z = 400;
-                FAKE_BARRIER(); /* FAKE: Preserve retail's slot reload; plain C measured 260/313 instructions. */
+                FAKE_BARRIER();
                 g_SpawnedActors[*selection].layer = 48;
                 g_SceneEventStep                  = 11;
             }
@@ -63,15 +64,15 @@ MATCH void func_801F3C24(void) {
                 g_SceneEventSelection = slot;
                 if (slot != GAME_NONE) {
                     g_SpawnedActors[slot].header.flags = ACTOR_FLAG_IN_USE;
-                    FAKE_BARRIER(); /* FAKE: Preserve retail's slot reload; plain C measured 260/313 instructions. */
+                    FAKE_BARRIER();
                     g_SpawnedActors[g_SceneEventSelection].type = 19;
-                    FAKE_BARRIER(); /* FAKE: Preserve retail's slot reload; plain C measured 260/313 instructions. */
+                    FAKE_BARRIER();
                     g_SpawnedActors[g_SceneEventSelection].camera_angle.x = -682;
-                    FAKE_BARRIER(); /* FAKE: Preserve retail's slot reload; plain C measured 260/313 instructions. */
+                    FAKE_BARRIER();
                     g_SpawnedActors[g_SceneEventSelection].camera_angle.y = g_AreaCameraAngle.vy;
-                    FAKE_BARRIER(); /* FAKE: Preserve retail's slot reload; plain C measured 260/313 instructions. */
+                    FAKE_BARRIER();
                     g_SpawnedActors[g_SceneEventSelection].camera_angle.z = 512;
-                    FAKE_BARRIER(); /* FAKE: Preserve retail's slot reload; plain C measured 260/313 instructions. */
+                    FAKE_BARRIER();
                     g_SpawnedActors[g_SceneEventSelection].layer = 32;
                     g_SceneEventStep                             = 14;
                 }
