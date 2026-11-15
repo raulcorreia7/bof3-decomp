@@ -4071,6 +4071,7 @@ jtbl_801F7114 = { addr = 0x801F7114, type = "Callback", source = "The switch tab
 jtbl_801F7134 = { addr = 0x801F7134, type = "Callback", source = "The switch table of func_801FBC6C: the jump targets of its jr dispatch." }
 Party_JoinRei = { addr = 0x801FE178, type = "func", source = "Adds Rei to the party." }
 Scene_RemoveRei = { addr = 0x801FE198, type = "func", source = "Removes character 4 (CHAR_ID_REI) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
+Scene_RemoveReiTeepo = { addr = 0x801FE1C0, type = "func", source = "Removes Rei and Teepo from the party and restages the party palettes." }
 
 ["emi/scenario/scena03/00"]
 jtbl_801F6C04 = { addr = 0x801F6C04, type = "Callback", source = "The switch table of func_801F9338: the jump targets of its jr dispatch." }
