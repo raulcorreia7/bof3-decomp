@@ -46,7 +46,27 @@ MATCH void func_801EEFC8(void) {
 
 #include "overlays/bmagic/Effect_CountDownAndPickRandom.h"
 
-INCLUDE_ASM(func_801EF1A4);
+MATCH void func_801EF1A4(void) {
+    void* battler;
+
+    g_Task->param.unk_0B += 1;
+    g_Task->timer += 4;
+    if (g_Task->timer == 0x10) {
+        if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
+            battler = &g_BattleEnemyBattlers[g_Task->unk_03];
+            GFX_FreePaletteFadeTarget(battler);
+            GFX_AllocPaletteFade(battler, -8, -8, -8, 1);
+            Battle_ApplyDamageFlags((g_Task->unk_03 + 3) & BYTE_MASK, 0x10);
+        } else {
+            battler = &g_Game.members[g_Task->unk_03];
+            GFX_FreePaletteFadeTarget(battler);
+            GFX_AllocPaletteFade(battler, -8, -8, -8, 1);
+            Battle_ApplyDamageFlags(g_Task->unk_03, 0x10);
+        }
+        g_Task->unk_09 = 8;
+        g_Task->header.step += 1;
+    }
+}
 
 /* func_801EF324 */
 #include "overlays/bmagic/Effect_ReleaseTarget.h"
