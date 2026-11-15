@@ -25,6 +25,10 @@ extern s32                 g_AreaFocusY;
 extern Point2l             g_FacingOffsets[];
 /* The state handler tables the dispatchers index. */
 extern u8                  D_801F4FC4[];
+/* The three colour bytes func_801F4DF0 reads for each task row. */
+extern u8                  D_801F6138[];
+extern u8                  D_801F6139[];
+extern u8                  D_801F613A[];
 extern Callback            D_801F5024[];
 /* D_801F6144 */
 extern PartyMemberMessages g_PartyMemberMessages[2];
