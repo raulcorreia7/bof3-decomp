@@ -232,7 +232,7 @@ u8           Area_StepCameraY(s16 target, s8 step);
 /* func_8015BE10 */
 u8           Area_StepCameraZ(s16 target, s8 step);
 /* func_8015BEA0 */
-bool         Area_StepCameraAngle(s32 degrees, s8 duration);
+bool         Area_StepCameraAngle(s16 degrees, s8 duration);
 /* func_8015C058 */
 void         Game_ClearScriptActive(void);
 /* func_8015C088; int with no value returned (see its definition) */
@@ -453,8 +453,9 @@ u8*  Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode);
 /* func_80166B94 */
 u8*  Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode);
 /* 0x40-byte palette staging entries; GFX_LoadPalette copies them out, the second copy lands 0x4000 above. */
-#define GAME_PALETTE_STAGE  MEM_PTR(u8, 0x80035600u)
-#define GAME_PALETTE_MIRROR MEM_PTR(u8, 0x80039600u)
+#define GAME_PALETTE_STAGE      MEM_PTR(u8, 0x80035600u)
+#define GAME_PALETTE_MIRROR     MEM_PTR(u8, 0x80039600u)
+#define GAME_PALETTE_MIRROR_U16 ((u16*)GAME_PALETTE_MIRROR)
 /* func_80166CB0 */
 s32        Area_GetCellCode(s32 x, s32 y);
 /* func_80166CEC */

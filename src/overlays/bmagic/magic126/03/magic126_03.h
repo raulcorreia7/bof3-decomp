@@ -27,12 +27,22 @@ typedef struct Magic126Mote {
     u8           unk_03;
     u8           unk_04; /* +0x04 spawn index; the angle is its low four bits */
     u8           unk_05;
-    u8           pad_06[0x16];
+    u8           unk_06;
+    u8           pad_07[5];
+    u16          unk_0C;
+    u16          unk_0E;
+    s32          unk_10;
+    s32          unk_14;
+    u8           pad_18[4];
     PartyMember* battler; /* +0x1C */
 } Magic126Mote;
 
 ASSERT_SIZE(Magic126Mote, 0x20);
 ASSERT_OFFSET(Magic126Mote, unk_04, 0x04);
+ASSERT_OFFSET(Magic126Mote, unk_0C, 0x0C);
+ASSERT_OFFSET(Magic126Mote, unk_0E, 0x0E);
+ASSERT_OFFSET(Magic126Mote, unk_10, 0x10);
+ASSERT_OFFSET(Magic126Mote, unk_14, 0x14);
 ASSERT_OFFSET(Magic126Mote, battler, 0x1C);
 
 #define BMAGIC_EFFECT_SLOTS D_801F12BC
@@ -47,6 +57,8 @@ void                func_801F0ED0(void);
 void                func_801F116C(void);
 void                func_801F11AC(void);
 extern PartyMember* D_801F22BC;
+/* The current record as a mote: D_801F22BC points into D_801F12BC. */
+#define MAGIC126_MOTE ((Magic126Mote*)D_801F22BC)
 
 void BMagic_DrawGlowRingInner(void);
 

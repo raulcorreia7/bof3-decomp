@@ -63,7 +63,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
             g_GameFlags |= 0x1000;
         } else if (LOBU(g_GameRequestFlags) & 0x8) {
             id = 0x1FD;
-            if (g_Game.members[CHAR_ID_RYU_YOUNG].chr.character_id == 0) {
+            if (g_Game.members[CHAR_INDEX_RYU].chr.character_id == CHAR_ID_RYU_YOUNG) {
                 id = 0x47;
             }
             Area_SelectSceneRecord(id);

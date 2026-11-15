@@ -54,14 +54,11 @@ MATCH void func_801EEC94(void) {
 #include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 MATCH s32 func_801EEF3C(void) {
-    u16* id;
-
-    id = (u16*)&g_Battle.action_id;
-    switch (*id) {
-        case 0x27:
+    switch (g_Battle.action_id) {
+        case ABILITY_FOCUS:
         default:
             return 2;
-        case 0xA3:
+        case ABILITY_MEDITATION:
             return 3;
     }
 }
