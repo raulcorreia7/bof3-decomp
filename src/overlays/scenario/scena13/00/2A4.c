@@ -196,7 +196,20 @@ MATCH void func_801F7958(void) {
     }
 }
 
-INCLUDE_ASM(func_801F7A1C);
+MATCH void func_801F7A1C(void) {
+    if (g_Task->timer != 0) {
+        g_Actors[g_Task->unk_03].tint.bytes.rgb.red += 8;
+        g_Actors[g_Task->unk_03].tint.bytes.rgb.green += 8;
+        g_Actors[g_Task->unk_03].tint.bytes.rgb.blue += 8;
+        g_Actors[g_Task->unk_04].tint.bytes.rgb.red += 8;
+        g_Actors[g_Task->unk_04].tint.bytes.rgb.green += 8;
+        g_Actors[g_Task->unk_04].tint.bytes.rgb.blue += 8;
+        g_Task->timer--;
+    } else {
+        g_ScriptVars[0]++;
+        g_Task->header.mode = 3;
+    }
+}
 
 /* func_801F7C24 */
 MATCH void Scene_ReleaseActors(void) {

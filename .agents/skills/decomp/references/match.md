@@ -39,8 +39,9 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
    `tools/match.sh --diff <target>@<func>` prints the function side by side, `!` on differing rows;
    the rows are positional, so an inserted instruction marks everything after it. After a new
    `hand/` file, a header or a marker, run `meson setup --reconfigure build/meson` once
-   ([reconfigure](../../../../docs/toolchain.md#reconfigure)). A function with a jump table, a
-   string or data of its own needs the `cc` wrapper
+   ([reconfigure](../../../../docs/toolchain.md#reconfigure)). A function that reads
+   its unit's own `.rodata` (a jump table or a string) is measured too. One that reads the unit's
+   own `.data` or `.bss`, or the gp, needs the `cc` wrapper
    ([compiler wrapper](../../../../docs/toolchain.md#compiler-wrapper)).
 
 6. **Tactics.** The [tactics table](../../../../docs/matching.md#tactics-for-gcc-272) maps each
@@ -85,20 +86,26 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
      source (a raw `andi` beside an `andi 0xFF` copy is an `s32` parameter with a `u8` local),
      then fix the registers it disturbs with the rules above.
 
-   Ask the compiler before guessing: GCC's own dumps say what it decided. Compile the file with
-   `-dl -dg` added to its flags from `build/meson/compile_commands.json`: `<file>.lreg` lists each
-   pseudo-register with its uses, the insns it lives across and its hard register; `<file>.greg`
-   gives the order the global allocator took them in, their conflicts and each spill. Change the
+   Ask the compiler before guessing: GCC's own dumps say what it decided.
+   `tools/rtl_dump.sh <file.c> [letters] [function]` compiles the file with the build's flags and
+   prints the function's part of each dump (`l` local, `g` global allocation, `L` loop, `S`
+   schedule, `c` combine, `s` cse, `j` jump): `.lreg` lists each pseudo-register with its uses,
+   the insns it lives across and its hard register; `.greg` gives the order the global allocator
+   took them in, their conflicts and each spill. `tools/alloc_priority.py <file.c> <func>` ranks
+   the values that live across a call by allocator priority with the register each got. Change the
    source until those numbers put the registers where retail has them.
-   For a large function compare opcode sequences first (registers and offsets ignored) and fix the
-   structural hunks top-down before reading any register.
-   `-dL` prints what the loop pass moved out of each loop and why: a value moves when
-   `threshold * uses * life >= loop size`, and each move lowers the threshold by 3 for the values
-   after it. A register that holds a constant in the draft and a counter in retail is usually one
-   move too many or too few earlier in the loop.
+   For a large function run `tools/opcode_diff.py <target>@0x<ADDR>` first: it compares opcode
+   sequences (registers and offsets ignored), and the structural hunks are fixed top-down before
+   any register is read. `tools/match_context.sh <target>@0x<ADDR>` prints the assembly, the
+   recorded attempts and the C file in one go.
+   `tools/rtl_dump.sh <file.c> L <function>` prints what the loop pass moved out of each loop and
+   why: a value moves when `threshold * uses * life >= loop size`, and each move lowers the
+   threshold by 3 for the values after it. A register that holds a constant in the draft and a
+   counter in retail is usually one move too many or too few earlier in the loop.
 
    Script the forms: write the body once with its variable parts as a table, build each with
    `tools/match.sh --diff`, and accept only a line that begins `match:`, then `check-<image>`.
+   `tools/try_variants.py <target>@0x<ADDR> <file.c> variants.py` does it for full bodies.
 
 7. **Accept.** Replace the draft with a plain `MATCH` definition, or `HAND_ASM` for authored
    assembly ([markers](../../../../docs/matching.md#markers-and-unmatched-bodies)), and name it

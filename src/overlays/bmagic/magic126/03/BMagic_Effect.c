@@ -433,7 +433,33 @@ MATCH void func_801F0960(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F09E0(void) {
+    s16* angle_cell;
+    u8   timer;
+    s32  angle;
+
+    timer            = D_801F22BC->slot - 1;
+    D_801F22BC->slot = timer;
+    if (timer != 0) {
+        return;
+    }
+    angle_cell                       = &D_1F800004;
+    angle                            = D_801F22BC->unk_04 & 0xF;
+    *angle_cell                      = angle << 8;
+    D_1F800000.view.effect.params[0] = ((D_801F22BC->unk_04 >> 4) + 1) << 3;
+    D_801F22BC->unk_10               = g_BattleEffectBattler->pos.x.fixed + rsin(angle << 8) * D_1F800000.view.effect.params[0];
+    D_801F22BC->unk_14               = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * D_1F800000.view.effect.params[0];
+    D_801F22BC->unk_18               = g_BattleEffectBattler->pos.z.fixed + 0x800000;
+    D_801F22BC->slot                 = 0;
+    PARTY_MEMBER_WORD_08(D_801F22BC) = 0;
+    D_801F22BC->pad_06               = 0;
+    D_801F22BC->unk_07               = (u16)D_1F800000.view.effect.params[0];
+    D_801F22BC->header.step += 1;
+}
+#else
 INCLUDE_ASM(func_801F09E0);
+#endif
 
 MATCH void func_801F0B34(void) {
     s16* angle_cell;

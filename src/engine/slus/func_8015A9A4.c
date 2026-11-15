@@ -1,3 +1,4 @@
+#define TASK_VOLATILE
 #include "engine/slus/slus.h"
 #include <inline_c.h>
 
@@ -7,78 +8,75 @@
 /* Reordered coordinate assignments leave the origin load difference at +0x0C; volatile reads and a barrier alter the prologue. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_8015A9A4(void) {
-    s16   vec_x;
-    s16   vec_y;
-    s16   vec_z;
-    s16   vec_pad;
-    s16   sxy[2];
-    s16   temp_a2_146;
-    s32   temp_a0_142;
-    s32   var_v0_28;
-    s32   x_part;
-    s32   var_v0_66;
-    u16   temp_a0_51;
-    u16   temp_v1_31;
-    u16   var_v0_38;
-    u32   temp_a0_192;
-    void* temp_a1_132;
-    void* temp_a1_42;
-    void* temp_a2_15;
-    void* temp_v1_177;
-    void* temp_v1_96;
+    SVECTOR vec;
+    s16     sxy[2];
+    Actor*  task;
+    Actor*  actor;
+    s32     dx;
+    s32     dy;
+    s32     sum;
+    s32     key;
+    s32     low;
+    s32     x;
+    s32     y;
+    s32     pad;
+    u8      count;
+    u16     sy;
+    u8      step;
+    s8      sstep;
 
-    temp_a2_15 = g_Task;
-    x_part     = FIELD(s16, temp_a2_15, 0x36u) - g_AreaTileOriginX;
-    var_v0_28  = FIELD(s16, temp_a2_15, 0x3Au) - g_AreaTileOriginY;
-    if (FIELD(u16, temp_a2_15, 0x34u) != 0) {
-        var_v0_28 += 1;
+    task = g_Task;
+    dx   = COORD_INT(task->pos.x) - g_AreaTileOriginX;
+    dy   = COORD_INT(task->pos.y) - g_AreaTileOriginY;
+    if (COORD_FRAC(task->pos.x) != 0) {
+        dy += 1;
     }
-    temp_v1_31 = x_part + var_v0_28;
-    var_v0_38  = temp_v1_31 + 1;
+    sum = dx + dy;
+    key = sum + 1;
     if (COORD_FRAC(g_Task->pos.y) == 0) {
-        var_v0_38 = temp_v1_31;
+        key = sum;
     }
-    temp_a1_42                    = g_Task;
-    FIELD(u16, temp_a2_15, 0x32u) = var_v0_38;
-    temp_a0_51                    = (FIELD(u16, temp_a1_42, 0x32u) + (s8)FIELD(u8, (*(void**)((u8*)(temp_a1_42) + 0x54)), 0x1u)) << 8;
-    FIELD(u16, temp_a1_42, 0x32u) = temp_a0_51;
+    actor         = g_Task;
+    task->unk_32  = key;
+    key           = (actor->unk_32 + ((((u8*)actor->range_54.table)[1] << 24) >> 24)) << 8;
+    actor->unk_32 = key;
     if (g_AreaDrawMode == 4) {
         if (D_8014933F != 0) {
-            var_v0_66 = ((s32)FIELD(u16, temp_a1_42, 0x34u) >> 0xF) & BYTE_MASK;
+            low = actor->pos.x.fixed >> 15;
         } else {
-            var_v0_66 = ((s32)FIELD(u16, temp_a1_42, 0x38u) >> 0xF) & BYTE_MASK;
+            low = actor->pos.y.fixed >> 15;
         }
+        low &= BYTE_MASK;
     } else {
-        var_v0_66 = (((u16)FIELD(u16, temp_a1_42, 0x3Eu) >> 5) & BYTE_MASK) ^ 0x80;
+        low = (((u16)COORD_INT(actor->pos.z) >> 5) & BYTE_MASK) ^ 0x80;
     }
-    FIELD(u16, temp_a1_42, 0x32u) = (u16)(temp_a0_51 | var_v0_66);
-    if (!(FIELD(u8, (*(void**)((u8*)(g_Task) + 0x54)), 0x3u) & 0x10)) {
+    actor->unk_32 = key | low;
+    if (!(((u8*)g_Task->range_54.table)[3] & 0x10)) {
         Actor_ReadValue();
     }
-    temp_v1_96 = g_Task;
-    vec_x      = ((s32)FIELD(u16, temp_v1_96, 0x34u) >> 9) - 0x4000;
-    vec_y      = ((s32)FIELD(u16, temp_v1_96, 0x38u) >> 9) - 0x4000;
-    vec_z      = (s16)((s16) - (s16)FIELD(u16, temp_v1_96, 0x3Eu) / 2);
-    gte_ldv0(&vec_x);
+    actor  = g_Task;
+    vec.vx = (actor->pos.x.fixed >> 9) - 0x4000;
+    vec.vy = (actor->pos.y.fixed >> 9) - 0x4000;
+    vec.vz = -COORD_INT(actor->pos.z) / 2;
+    gte_ldv0(&vec);
     gte_rtps();
     gte_stsxy(sxy);
     gte_stszotz(&g_Task->unk_60);
-    temp_a1_132                    = g_Task;
-    FIELD(u16, temp_a1_132, 0x2Eu) = sxy[0];
-    FIELD(u16, temp_a1_132, 0x30u) = sxy[1];
-    temp_a0_142                    = ((u8)FIELD(u8, (*(void**)((u8*)(temp_a1_132) + 0x54)), 0x3u) >> 1) & 4;
-    temp_a2_146                    = (s16)FIELD(u16, temp_a1_132, 0x2Eu);
-    if ((((&D_80182174)[temp_a0_142] + 0x140) < temp_a2_146) || (temp_a2_146 < -(s32)(&D_80182175)[temp_a0_142]) || (((&D_80182176)[temp_a0_142] + 0xF0) < sxy[1]) ||
-        (sxy[1] < -(s32)(&D_80182177)[temp_a0_142])) {
-        temp_v1_177         = g_Task;
-        *(u8*)(temp_v1_177) = (u8)(*(u8*)(temp_v1_177) | 0x80);
+    actor           = g_Task;
+    actor->screen_x = sxy[0];
+    sy              = sxy[1];
+    actor->screen_y = sy;
+    pad             = (((u8*)actor->range_54.table)[3] >> 1) & 4;
+    x               = (s16)actor->screen_x;
+    if ((((&D_80182174)[pad] + 320) < x) || (x < -(s32)(&D_80182175)[pad]) || (((&D_80182176)[pad] + 240) < (s16)sy) || ((s16)sy < -(s32)(&D_80182177)[pad])) {
+        g_Task->header.flags |= 0x80;
         return;
     }
-    *(u8*)(temp_a1_132) = (u8)(*(u8*)(temp_a1_132) & 0x7F);
-    temp_a0_192         = D_8014832D & BYTE_MASK;
-    if (temp_a0_192 < 0x28U) {
-        D_8014832D += 1;
-        D_8014828C[temp_a0_192] = (s32)g_Task;
+    actor->header.flags &= 0x7F;
+    count = D_8014832D;
+    if (count < 40) {
+        D_8014832D        = count + 1;
+        D_8014828C[count] = (s32)g_Task;
     }
 }
 #else

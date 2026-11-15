@@ -6407,7 +6407,8 @@ g_AreaCells = { addr = 0x8012C000, size = 0x1880, source = "The area cells." }
 g_AreaCellPrims = { addr = 0x8012D880, size = 0x14000, source = "The primitives of the area cells." }
 g_AreaCellGrid = { addr = 0x80141880, type = "u16", size = 0xC40, source = "The grid of area cells." }
 g_AreaCellPrimFreeIds = { addr = 0x801424C0, type = "u16", size = 0x800, source = "Free primitive row ids of the area cells." }
-g_AreaCellPacketLists = { addr = 0x80142CC4, type = "AreaCellPacketList", alias = true, source = "D_80142CC4 as the cell ordering lists: per grid row, six lists of 8 bytes whose first word is the last packet linked (func_801530D0 appends to them)." }
+g_AreaCellPacketLists = { addr = 0x80142CC0, type = "AreaCellPacketList", alias = true, source = "D_80142CC0 as the cell ordering lists: per grid row, six lists of a first and a last packet. func_801530D0 appends to them by the last packet; func_8014BC70 splices a whole list in by its first and last." }
+D_80142CC4 = { addr = 0x80142CC4, alias = true, source = "The last-packet word of the first cell ordering list (g_AreaCellPacketLists[0][0].tail), which the cell draws index by byte offset." }
 g_SysThreads = { addr = 0x80143B40, type = "Thread", source = "The scheduler's thread records, indexed by thread index." }
 g_GameEntryState = { addr = 0x80143B90, source = "Game state the main loop runs next: Game_NewGame sets it to 1, Game_LoadShopOverlay to 2 and Game_UpdateAreaLoad to 8." }
 g_GameEntrySubstate = { addr = 0x80143B92, source = "Stage within the current game state; the state handlers read it to pick their stage and add 1 as they advance." }

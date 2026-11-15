@@ -4,7 +4,7 @@
 NON_MATCHING void func_801E5E2C(void) {
     BattleEffect* slot;
     PartyMember*  source;
-    s32           digits;
+    u8            digits;
     s32           divisor;
     u8            kind;
     s8            offset;
@@ -17,9 +17,12 @@ NON_MATCHING void func_801E5E2C(void) {
         source                 = slot->target.party;
         offset                 = (g_BattlePanelOffsets + 1)[(source->facing * 2) + (source->unk_2C.half * 8)];
     } else {
-        COORD_INT(slot->pos.x) = source->unk_2E.half + ENEMY_COMBATANT(kind).panel_offset_x;
+        kind -= 3;
+        COORD_INT(slot->pos.x) = source->unk_2E.half + g_BattleEnemyBattlers[kind].panel_offset_x;
         source                 = slot->target.party;
-        offset                 = ENEMY_COMBATANT(source->slot).panel_offset_y;
+        kind                   = source->slot;
+        kind -= 3;
+        offset = g_BattleEnemyBattlers[kind].panel_offset_y;
     }
     COORD_INT(slot->pos.y) = source->unk_30.half + offset;
     divisor                = 0x64;
@@ -38,13 +41,13 @@ loop:
     }
     kind = slot->target.party->slot;
     if (kind < 3) {
-        g_Game.members[kind].turn.damage_flags.value |= COMBATANT_FLAG_DAMAGE_NUMBER;
+        g_Game.members[kind].u.turn.damage_flags.value |= COMBATANT_FLAG_DAMAGE_NUMBER;
     } else {
         ENEMY_COMBATANT(kind).turn.damage_flags.value |= 0x80;
     }
-    slot->unk_0A = digits;
-    slot->unk_09 = 8;
-    slot->unk_32 = 0;
+    slot->unk_0A     = digits;
+    slot->arg.unk_09 = 8;
+    slot->unk_32     = 0;
     slot->header.mode += 1;
 }
 #else
