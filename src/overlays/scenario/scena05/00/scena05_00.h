@@ -10,6 +10,9 @@
 
 extern u8 D_80146874;
 
+void func_8015D104(s32 slot, s32 amount);
+void SND_StartVolumeSweep(s32 voice);
+
 extern u8  D_80146875;
 extern u16 D_80146876;
 

@@ -38,6 +38,6 @@ void Scene_DrawRedFade(u8 red);
 
 void func_801D19A0(void);
 
-void func_801D1D20(WorldPos* pos, s32* step, u8 arg2, u8 arg3);
+void func_801D1D20(WorldPos* pos, s32* step, u8 red, u8 green);
 
 #endif
