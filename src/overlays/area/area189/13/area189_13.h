@@ -8,10 +8,13 @@
 #include "area/spad.h"
 
 /* The scratchpad work row the entry paths read. */
+extern SVECTOR D_1F800014[];
 
 /* The character work record, viewed as bytes here. */
 
 /* The area-flag bit store and the global flag byte. */
+extern u8  D_80144EF8[];
+extern u16 D_80146876;
 
 /* The party row table and the row field the drain pass reads. */
 
