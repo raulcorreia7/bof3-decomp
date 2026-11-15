@@ -1650,19 +1650,17 @@ INCLUDE_ASM(func_801D9348);
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg, s32 cursor_row_arg) {
-    extern u8 D_801D0C3C[];
-    extern u8 D_801DAAAC[];
-    u8        tags[20];
-    u8*       cell;
-    u16       x;
-    u16       y;
-    u16       row;
-    u16       col;
-    u16       cursor_x;
-    u16       cursor_y;
-    u8        cursor_col;
-    u8        cursor_row;
-    u8        code;
+    u8  tags[20];
+    u8* cell;
+    u16 x;
+    u16 y;
+    u16 row;
+    u16 col;
+    u16 cursor_x;
+    u16 cursor_y;
+    u8  cursor_col;
+    u8  cursor_row;
+    u8  code;
 
     /* FAKE: retail reserves eight bytes outside the active locals. */
     FAKE_STACK_PADS(u8, 8);
@@ -1721,8 +1719,6 @@ INCLUDE_ASM(func_801D94D0);
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D97C8(s32 unused, s32 x, s32 y) {
-    extern const u8* D_801DB038[];
-    extern const u8* volatile D_801DB054;
     const u8* const* labels;
     const u8*        dots;
     u16              row;

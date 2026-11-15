@@ -2,14 +2,12 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D759C(void) {
-    extern s8 D_80148656;
-    extern u8 D_801485E7;
-    u8*       panel;
-    u8*       panel_state;
-    u8*       battle_message;
-    s32       count;
-    s32       input;
-    s32       previous;
+    u8* panel;
+    u8* panel_state;
+    u8* battle_message;
+    s32 count;
+    s32 input;
+    s32 previous;
 
     panel       = g_BattleChoicePanel;
     panel_state = &D_80148578;
