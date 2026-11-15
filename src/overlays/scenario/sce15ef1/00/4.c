@@ -239,7 +239,72 @@ MATCH void func_801D147C(s32* pos, s16 origin, s32 flags) {
     } while ((i & BYTE_MASK) < 32U);
 }
 
-INCLUDE_ASM(func_801D1678);
+MATCH void func_801D1678(s32* from, s32* to, u8 shade) {
+    s32      cur[3];
+    s32      step[3];
+    DVECTOR  screen;
+    POLY_G4* poly;
+    TILE_1*  tile;
+    s32      frame;
+
+    poly = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(poly);
+    SetSemiTrans(poly, 1);
+    Area_ProjectPoint(from, &screen);
+    poly->x0 = screen.vx + 1;
+    poly->y0 = screen.vy - 1;
+    poly->x1 = screen.vx;
+    poly->y1 = screen.vy;
+    Area_ProjectPoint(to, &screen);
+    poly->x2 = screen.vx + 1;
+    poly->y2 = screen.vy - 1;
+    poly->x3 = screen.vx;
+    poly->y3 = screen.vy;
+    setRGB0(poly, 0, 0, 0);
+    setRGB1(poly, shade, shade, 0);
+    setRGB2(poly, 0, 0, 0);
+    setRGB3(poly, shade, shade, 0);
+    GFX_AddPrim(2, sizeof(POLY_G4));
+
+    poly = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(poly);
+    SetSemiTrans(poly, 1);
+    Area_ProjectPoint(from, &screen);
+    poly->x0 = screen.vx;
+    poly->y0 = screen.vy;
+    poly->x1 = screen.vx - 1;
+    poly->y1 = screen.vy + 1;
+    Area_ProjectPoint(to, &screen);
+    poly->x2 = screen.vx;
+    poly->y2 = screen.vy;
+    poly->x3 = screen.vx - 1;
+    poly->y3 = screen.vy + 1;
+    setRGB0(poly, shade, shade, 0);
+    setRGB1(poly, 0, 0, 0);
+    setRGB2(poly, shade, shade, 0);
+    setRGB3(poly, 0, 0, 0);
+    GFX_AddPrim(2, sizeof(POLY_G4));
+
+    frame   = g_FrameCount & 0xF;
+    step[0] = g_Task->unk_64;
+    step[1] = g_Task->unk_68;
+    step[2] = g_Task->unk_6C;
+    cur[0]  = to[0] + step[0] * frame;
+    cur[1]  = to[1] + step[1] * frame;
+    cur[2]  = to[2] + step[2] * frame;
+    while (from[0] < cur[0]) {
+        Area_ProjectPoint(cur, &screen);
+        tile = (TILE_1*)g_GfxPrimCursor;
+        SetTile1(tile);
+        SetSemiTrans(tile, 1);
+        setXY0(tile, screen.vx, screen.vy);
+        setRGB0(tile, shade, shade, 0);
+        GFX_AddPrim(2, sizeof(TILE_1));
+        cur[0] += g_Task->unk_64 << 4;
+        cur[1] += g_Task->unk_68 << 4;
+        cur[2] += g_Task->unk_6C << 4;
+    }
+}
 
 MATCH void func_801D199C(void) {
     u8             i;
@@ -447,9 +512,101 @@ MATCH void func_801D23A0(void) {
     }
 }
 
-INCLUDE_ASM(func_801D2474);
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D2474(void) {
+    s32       pos[3];
+    DVECTOR   screen;
+    MATRIX    matrix;
+    SceneDot* dot;
+    u8        row;
+    u8        col;
+    u8        step;
 
-INCLUDE_ASM(func_801D26BC);
+    Area_SetCameraMatrix(&matrix);
+    pos[0] = ((Actor*)g_Task->unk_4C)->pos.x.fixed;
+    pos[1] = ((Actor*)g_Task->unk_4C)->pos.y.fixed;
+    pos[2] = ((Actor*)g_Task->unk_4C)->pos.z.fixed;
+    Area_ProjectPoint(pos, &screen);
+    for (row = (D_801D393C[D_801D40AC].h >> 1) * g_Task->timer; row < (D_801D393C[D_801D40AC].h >> 1) * (g_Task->timer + 1); row++) {
+        for (col = 0; col < D_801D393C[D_801D40AC].w; col++) {
+            if (*(u16*)D_801D40B0 != 0) {
+                dot        = (SceneDot*)D_801D40B4;
+                dot->color = *(u16*)D_801D40B0;
+                D_801D40A8 += 1;
+                dot->x     = screen.vx - D_801D393C[D_801D40AC].x + col;
+                D_801D40B4 = (u32)(dot + 1);
+                dot->y     = screen.vy - D_801D393C[D_801D40AC].y + row;
+            }
+            D_801D40B0 += 2;
+        }
+    }
+    step          = g_Task->timer + 1;
+    g_Task->timer = step;
+    if (step == 2) {
+        g_Task->header.mode += 1;
+    }
+}
+#else
+INCLUDE_ASM(func_801D2474);
+#endif
+
+MATCH void func_801D26BC(void) {
+    u8        order[16];
+    u16       i;
+    u16       j;
+    u8        a;
+    u8        b;
+    u8        tmp;
+    SceneDot* dot;
+
+    for (i = 0; i < 16; i++) {
+        order[i] = i & 1;
+    }
+
+    dot = MEM_PTR(SceneDot, AREA_WORK + 0x5A00);
+    j   = 0;
+    for (i = 0; i < D_801D40A8; i++) {
+        if ((i & 0xF) == 0) {
+            j = 0;
+            do {
+                a = rand() & 0xF;
+                j++;
+                b        = rand() & 0xF;
+                tmp      = order[b];
+                order[b] = order[a];
+                order[a] = tmp;
+            } while (j < 16);
+            j = 0;
+        }
+
+        dot->active = order[j++];
+        if (g_Task->param.unk_0B == 0) {
+            dot->dx = (rand() & 0x1F) - 16;
+            dot->dy = (rand() & 0x1F) - 16;
+        } else {
+            dot->dx = rand() & 0xF;
+            dot->dy = rand() & 0xF;
+            if (dot->dx < dot->dy) {
+                dot->dx ^= dot->dy;
+                dot->dy ^= dot->dx;
+                dot->dx ^= dot->dy;
+            }
+            dot->dy = -dot->dy;
+        }
+        if (g_Task->unk_06 == 0) {
+            dot->life = (rand() & 0x1E) + 10;
+            dot->x -= dot->dx * dot->life;
+            dot->y -= dot->dy * dot->life;
+        } else {
+            dot->life = 40 - (rand() & 0x1E);
+        }
+        dot++;
+    }
+
+    g_Task->timer = 80;
+    g_Task->header.mode++;
+    SND_PlayCue(0x20C);
+}
 
 MATCH void func_801D2934(void) {
     Actor*    actor;

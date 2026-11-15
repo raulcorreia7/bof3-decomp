@@ -7,13 +7,16 @@
 #include "overlays/scenario/scenario.h"
 #include "area/spad.h"
 
-extern u8  D_80146865;
-extern u8  D_80146866;
-extern u8  D_80146867;
-extern u8  D_80146874;
-extern u8  D_80146875;
-extern u32 D_801F6C00;
-extern s32 g_AreaFocusY[];
+extern u8           D_80146865;
+extern u8           D_80146866;
+extern u8           D_80146867;
+extern u8           D_80146874;
+extern u8           D_80146875;
+extern u32          D_801F6C00;
+extern s32          D_80147B24[];
+extern volatile s32 D_80147B28;
+extern volatile s32 D_80147B2C;
+extern s32          g_AreaFocusY[];
 
 /* D_801FD178 */
 extern Callback  g_SceneEntityDispatch[];
@@ -34,6 +37,7 @@ extern char D_801F6C04[];
 
 void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
 void func_801F75EC(void);
+void func_801F7E34(s32* pos_a, s32* pos_b, u8 shade);
 
 extern u8 D_801FD228;
 extern s8 (*D_801FD23C[])(void);

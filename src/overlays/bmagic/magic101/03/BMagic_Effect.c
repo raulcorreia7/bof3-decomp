@@ -150,7 +150,21 @@ MATCH void func_801EF3DC(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF4DC);
+MATCH void func_801EF4DC(void) {
+    PartyMember* effect;
+    s32          wave;
+    u8           timer;
+
+    g_Task->param.unk_0B += 8;
+    wave                       = ((rsin((g_FrameCount & 0x1F) << 7) << 5) >> 12) + 384;
+    effect                     = g_Task;
+    effect->pos.z.part.integer = (u16)g_BattleEffectBattler->pos.z.part.integer + wave;
+    timer                      = effect->timer + 2;
+    effect->timer              = timer;
+    if (timer == 16) {
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF580(void) {
     PartyMember* effect;
