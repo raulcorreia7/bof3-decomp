@@ -137,7 +137,9 @@ esac
 # Records the partial link script; objcopy writes the zero word that equals the retail bytes.
 LD = '#!/bin/sh\nwhile [ $# -gt 0 ]; do [ "$1" != -T ] || cp "$2" linkscript.ld; shift; done\n'
 OBJCOPY = "#!/bin/sh\nfor a; do out=$a; done\nprintf '\\0\\0\\0\\0' >\"$out\"\n"
-PYTHON = '#!/bin/sh\nwhile [ $# -gt 0 ]; do [ "$1" != --output ] || : >"$2"; shift; done\n'
+PYTHON = (
+    '#!/bin/sh\nwhile [ $# -gt 0 ]; do [ "$1" != --output ] || : >"$2"; shift; done\n'
+)
 
 
 def rodata_repo(tmp_path: Path) -> Path:
@@ -145,7 +147,9 @@ def rodata_repo(tmp_path: Path) -> Path:
     (repo / "config" / TARGET / "splat.yaml").write_text(SPLAT)
     (repo / "build" / "ld" / "emi+test+00.ld").write_text(LINK_SCRIPT)
     binutils = repo / "bin" / "internal" / "binutils"
-    write_exe(binutils / "nm", "#!/bin/sh\nprintf '00000000 00000004 T func_80000000\\n'\n")
+    write_exe(
+        binutils / "nm", "#!/bin/sh\nprintf '00000000 00000004 T func_80000000\\n'\n"
+    )
     write_exe(binutils / "objdump", OBJDUMP)
     write_exe(binutils / "ld", LD)
     write_exe(binutils / "objcopy", OBJCOPY)
@@ -156,7 +160,9 @@ def rodata_repo(tmp_path: Path) -> Path:
 
 def run_with(repo: Path, reloc_target: str) -> subprocess.CompletedProcess:
     env = dict(
-        os.environ, PATH=f"{repo / 'fakebin'}:{os.environ['PATH']}", RELOC_TARGET=reloc_target
+        os.environ,
+        PATH=f"{repo / 'fakebin'}:{os.environ['PATH']}",
+        RELOC_TARGET=reloc_target,
     )
     return subprocess.run(
         ["sh", "tools/match.sh", f"{TARGET}@0x{ADDRESS}"],
@@ -172,12 +178,19 @@ def test_the_units_own_rodata_links_at_its_retail_address(tmp_path: Path) -> Non
     repo = rodata_repo(tmp_path)
     result = run_with(repo, ".rodata")
     assert result.returncode == 0, result.stderr
-    assert ".rodata 0x80000040 (NOLOAD) : SUBALIGN(4)" in (repo / "linkscript.ld").read_text()
+    assert (
+        ".rodata 0x80000040 (NOLOAD) : SUBALIGN(4)"
+        in (repo / "linkscript.ld").read_text()
+    )
 
 
-def test_a_unit_without_a_rodata_row_links_its_rodata_at_a_sentinel(tmp_path: Path) -> None:
+def test_a_unit_without_a_rodata_row_links_its_rodata_at_a_sentinel(
+    tmp_path: Path,
+) -> None:
     repo = rodata_repo(tmp_path)
-    (repo / "config" / TARGET / "splat.yaml").write_text(SPLAT.replace(".rodata, C", ".rodata, X"))
+    (repo / "config" / TARGET / "splat.yaml").write_text(
+        SPLAT.replace(".rodata, C", ".rodata, X")
+    )
     assert run_with(repo, ".rodata").returncode == 0
     assert ".rodata 0x10 " in (repo / "linkscript.ld").read_text()
 
