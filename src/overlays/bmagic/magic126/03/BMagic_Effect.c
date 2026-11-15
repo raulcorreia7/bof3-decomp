@@ -429,7 +429,7 @@ MATCH void func_801F0960(void) {
     SYS_DISPATCH_BYTE(D_801F12AC, D_801F22BC->header.step);
     if (D_801F22BC->header.flags != 0 && D_801F22BC->header.step != 0) {
         func_801F11AC();
-        func_801F0ED0();
+        BMagic_DrawMote();
     }
 }
 
@@ -527,18 +527,16 @@ MATCH void func_801F0DA4(void) {
 
 /* The mote's quad: the screen point at unk_0C/unk_0E, half-width unk_05, height unk_05*4, coloured by unk_06*6,
  * blitted from the 0x340/0x100 page. */
-MATCH void func_801F0ED0(void) {
+MATCH void BMagic_DrawMote(void) {
     POLY_FT4* prim;
-    s32       tpage;
 
-    D_1F800000.view.effect.params[0] = ((Magic126Mote*)D_801F22BC)->unk_05;
-    D_1F800000.view.effect.params[1] = ((Magic126Mote*)D_801F22BC)->unk_05 * 4;
-    D_1F800000.view.effect.params[2] = ((Magic126Mote*)D_801F22BC)->unk_06 * 6;
-    D_1F800000.view.effect.params[6] = ((Magic126Mote*)D_801F22BC)->unk_0C;
-    D_1F800000.view.effect.params[7] = ((Magic126Mote*)D_801F22BC)->unk_0E;
-    tpage                            = getTPage(1, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    Area_AddCellPrim(((Magic126Mote*)D_801F22BC)->unk_10, ((Magic126Mote*)D_801F22BC)->unk_14, 2, sizeof(DR_MODE));
+    D_1F800000.view.effect.params[0] = MAGIC126_MOTE->unk_05;
+    D_1F800000.view.effect.params[1] = MAGIC126_MOTE->unk_05 * 4;
+    D_1F800000.view.effect.params[2] = MAGIC126_MOTE->unk_06 * 6;
+    D_1F800000.view.effect.params[6] = MAGIC126_MOTE->unk_0C;
+    D_1F800000.view.effect.params[7] = MAGIC126_MOTE->unk_0E;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(1, 1, 320, 256), 0);
+    Area_AddCellPrim(MAGIC126_MOTE->unk_10, MAGIC126_MOTE->unk_14, 2, sizeof(DR_MODE));
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
@@ -546,11 +544,11 @@ MATCH void func_801F0ED0(void) {
            D_1F800000.view.effect.params[6] + D_1F800000.view.effect.params[0], D_1F800000.view.effect.params[7] - D_1F800000.view.effect.params[1],
            D_1F800000.view.effect.params[6] - D_1F800000.view.effect.params[0], D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[6] + D_1F800000.view.effect.params[0],
            D_1F800000.view.effect.params[7]);
-    setTPage(prim, 0, 1, 0x340, 0x100);
-    setClut(prim, 0, 0x1FA);
-    setUV4(prim, 0x58, 8, 0x68, 8, 0x58, 0x48, 0x68, 0x48);
+    setTPage(prim, 0, 1, 832, 256);
+    setClut(prim, 0, 506);
+    setUVWH(prim, 88, 8, 16, 64);
     setRGB0(prim, D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2]);
-    Area_AddCellPrim(((Magic126Mote*)D_801F22BC)->unk_10, ((Magic126Mote*)D_801F22BC)->unk_14, 2, sizeof(POLY_FT4));
+    Area_AddCellPrim(MAGIC126_MOTE->unk_10, MAGIC126_MOTE->unk_14, 2, sizeof(POLY_FT4));
 }
 
 /* func_801F1110 */
