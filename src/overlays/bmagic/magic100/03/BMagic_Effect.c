@@ -30,7 +30,7 @@ MATCH void func_801EEC70(void) {
         g_BattleEffects[slot].unk_0B      = i;
         g_BattleEffects[slot].arg.unk_09  = odd;
         counter                           = g_Task;
-        /* FAKE: the target link stays before the loop counter update; pure C leaves 19 differing rows. */
+        /* FAKE: the target link stays before the loop counter update. */
         FAKE_ORDER_LOCK(g_BattleEffects[slot].target.party = work);
         count = counter->param.unk_0B;
         i += 1;
