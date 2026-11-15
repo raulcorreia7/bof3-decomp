@@ -4,7 +4,7 @@
  * keeps the resolver result as a full word, so the call keeps its local view. */
 
 MATCH s32 func_801BB86C(s16 from_x0, s16 from_x1, s16 from_y0, s16 from_y1, u8 probe_mode) {
-    /* NOTE: retail's 16-byte frame slot; touching the array changes codegen. */
+    /* 16-byte frame slot the body never reads; a smaller one changes the bytes. */
     s32 work[4];
     s32 value;
     /* FAKE: result pinned to v0. */

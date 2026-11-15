@@ -2,7 +2,7 @@
 
 MATCH void func_80197F48(void) {
     u8  changed;
-    u8* flags; /* pointer form keeps the flags byte in s0 */
+    u8* flags;
     u8* sel;
     u32 i;
 
@@ -21,7 +21,6 @@ MATCH void func_80197F48(void) {
                 D_80148A50[i] = D_8018E268[i];
             }
             sel = &g_SndBGMId;
-            /* NOTE: '<< 2' in place of '* 4' keeps cc1 from reserving 32 unused frame bytes. */
             SsSepReplay(g_SelectionEffectVoices[g_SelectionCues[*sel << 2]], g_SelectionSequences[*sel << 2]);
             SND_SetSequenceVolume((u16)(s8)(u8)g_SelectionEffectVoices[g_SelectionCues[*sel << 2]], g_SelectionSequences[*sel << 2], 0, 0);
             SND_FadeInSequence((u16)(s8)(u8)g_SelectionEffectVoices[g_SelectionCues[*sel << 2]], g_SelectionSequences[*sel << 2], 0x64, 8);
