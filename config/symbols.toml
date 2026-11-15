@@ -2721,7 +2721,9 @@ Game_GetAreaMapPoints = { addr = 0x8019A1D4, type = "func", source = "Returns ma
 Area_GetVx = { addr = 0x8019C344, type = "func", source = "the body returns g_Task->vx" }
 Game_RequestAreaChange = { addr = 0x8019FA28, type = "func", source = "Requests an area change: stores the entry seed and position in g_GameContextSeed, g_GameEntryPosX and g_GameEntryPosY and sets g_GameStateIndex to 5." }
 Area_SetXFixed = { addr = 0x801A253C, type = "func", source = "the body stores into g_Task->pos.x.fixed" }
+Game_DispatchFadeWhite = { addr = 0x801A3594, type = "func", source = "calls the fade-to-white step selected by the step byte" }
 Game_StartFadeWhite = { addr = 0x801A35D8, type = "func", source = "Step 0 of the D_801C8434 table, followed by func_801A3648: starts a white palette fade (GFX_AllocPaletteFade 0x1F, 0x1F, 0x1F) on the running task and clears ACTOR_FLAG_HIDDEN." }
+Game_DispatchFadeBlack = { addr = 0x801A37D4, type = "func", source = "calls the fade-to-black step selected by the step byte" }
 Game_StartFadeBlack = { addr = 0x801A3818, type = "func", source = "Step 0 of the D_801C843C table, followed by func_801A386C: starts a black palette fade (GFX_AllocPaletteFade 0, 0, 0) on the running task." }
 Area_RunSetupStream = { addr = 0x801A3E50, type = "func", source = "Runs the area setup stream of an AreaLoad handler: clears the four D_80147A58 rows, runs Area_SetScenarioId over the stream and clears the unused g_Actors entries." }
 Area_SetScenarioId = { addr = 0x801A3F3C, type = "func", source = "the body stores into g_SceneState.scenario_id" }
@@ -2758,6 +2760,8 @@ Game_ProjectWorldPoint = { addr = 0x801AFFD8, type = "func", source = "projects 
 Actor_UpdateMovement = { addr = 0x801B0DFC, type = "func", source = "moves and animates the current actor rows, called by every area and scene timer" }
 Game_RunLeaderSwitch = { addr = 0x801B1AE8, type = "func", source = "Field task mode FIELD_TASK_MODE_LEADER_SWITCH (slot 3 of D_801CD0AC): runs the leader-switch step table D_801CD0FC, which Game_RequestLeaderSwitch starts" }
 Game_EndLeaderSwitch = { addr = 0x801B2950, type = "func", source = "Finishes the camera scroll when movement stops and returns to the default mode." }
+Game_RequestMenu = { addr = 0x801B2A00, type = "func", source = "asks the game state for the menu and advances the step" }
+Game_WaitMenuClose = { addr = 0x801B2A20, type = "func", source = "when the menu request ends, clears the menu-active walk flag and resumes the actor" }
 Actor_GetTurnStep = { addr = 0x801B2D00, type = "func", source = "Returns -1 when the target facing lies 1 to 4 steps past the current selector, else 1; the caller adds it to direction_08 each step." }
 Area_Climb = { addr = 0x801B3260, type = "func", source = "runs g_AreaClimbSteps[header.step] in field task mode 8 (FIELD_TASK_MODE_CLIMB, entered from cell code 6 by func_801B0568 and func_801BC000); in that mode the up and down pad move the actor 16 units and Interact turns it round and drops it to mode 2, the field ladder" }
 Area_ClimbMount = { addr = 0x801B32D0, type = "func", source = "runs g_AreaClimbMountSteps[unk_03], the approach to the ladder; its last step hands over to step 2 of g_AreaClimbSteps" }
@@ -2789,6 +2793,7 @@ Char_RebuildPartyStats = { addr = 0x801C16B8, type = "func", source = "reads g_C
 Party_JoinMember = { addr = 0x801C187C, type = "func", source = "Appends char_id to the party order at D_80144F5A and D_80144F5D at index g_Game.party_size and fills its g_Game.members row; with a full party it sets g_GameStateIndex to 6 and returns 1." }
 Party_RemoveMember = { addr = 0x801C1ABC, type = "func", source = "Scene_RemoveGarr/Peco/Nina/Rei and scena08 pass a CHAR_ID_* to it; the body clears the id from the walking and battle orders, compacts the battler rows and shrinks g_Game.party_size" }
 Scene_RunScenario = { addr = 0x801C1DF0, type = "func", source = "indexes D_801CD4C0 by g_SceneState.scenario_id and calls the handler at the requested index" }
+Game_DispatchScenario = { addr = 0x801C1E3C, type = "func", source = "calls the scenario handler selected by scenario id and index" }
 Char_SetCharacterId = { addr = 0x801C2E34, type = "func", source = "the body stores into g_Game.current->chr.character_id" }
 Actor_ClearVelocity = { addr = 0x801C5798, type = "func", source = "Zeroes the velocity members of the current g_Task (+0x0C, +0x10 and vz) that Actor_ApplyVelocity integrates into x and y." }
 Actor_Move = { addr = 0x801C57B4, type = "func", source = "Adds the running task's velocity (vx, vy, vz) to its position; the field actor step bodies call it every frame." }
@@ -3417,7 +3422,16 @@ Menu_ExitCamp = { addr = 0x801E62A8, type = "func", source = "Camp menu step 4: 
 Menu_DrawNameEntryGrid = { addr = 0x801E6490, type = "func", source = "Draws the name entry window: the 8 by 12 character grid of the page in D_801ED7E8 from D_801ECDBC, the Next, Back, Quit and Start labels and the cursor at D_801ED7E0 and D_801ED7E4." }
 Menu_DrawNameEntryControls = { addr = 0x801E6784, type = "func", source = "draws the name entry screen's command window: the OK, Del, Next and Back labels with the button icon beside each, the footer icons and the dot grid, framed by g_NameEntryControlsFrame" }
 SAVE_DrawSlots = { addr = 0x801E6C68, type = "func", source = "Draws the visible rows of the save file list and the panel header." }
+Item_CurePoison = { addr = 0x801E81A0, type = "func", source = "clears the poisoned status of one character" }
+Item_CureBlind = { addr = 0x801E81D4, type = "func", source = "clears the blind status of one character" }
 Item_Revive = { addr = 0x801E8270, type = "func", source = "Item effect that revives a character: sets the field or party record's HP to 1 and clears status 0x4000 through Char_ClearStatus; returns 3 when Char_ClearStatus returns 0, else 0." }
+Item_AddMaxHP = { addr = 0x801E83AC, type = "func", source = "raises max HP by 1 in both character records" }
+Item_AddMaxAP = { addr = 0x801E8448, type = "func", source = "raises max AP by 1 in both character records" }
+Item_AddPower = { addr = 0x801E84E4, type = "func", source = "raises power by 1 in both character records" }
+Item_AddDefense = { addr = 0x801E8580, type = "func", source = "raises defense by 1 in both character records" }
+Item_AddAgility = { addr = 0x801E861C, type = "func", source = "raises agility by 1 in both character records" }
+Item_AddIntellect = { addr = 0x801E86B8, type = "func", source = "raises intellect by 1 in both character records" }
+Item_AddWillpower = { addr = 0x801E8754, type = "func", source = "raises willpower by 1 in both character records" }
 Item_CurePoisonParty = { addr = 0x801E8A70, type = "func", source = "clears poison status from all field party members in the start menu item effects" }
 Menu_CharacterPanel = { addr = 0x801E8D60, type = "func", source = "panel mode 0 of the start menu: the character window with its portrait" }
 Menu_DrawCharacterPanel = { addr = 0x801E8DB4, type = "func", source = "Draws the character window and its icon." }
@@ -6753,6 +6767,7 @@ Area_DrawScene = { addr = 0x8014BA54, type = "func", source = "Draws the area sc
 Area_SwapObjects = { addr = 0x8014BAB8, type = "func", source = "Swaps two objects of the draw list." }
 Area_SwapActors = { addr = 0x8014BAEC, type = "func", source = "Swaps two actors of the draw list." }
 Area_DrawActors = { addr = 0x8014BB20, type = "func", source = "Sorts and draws the area actors." }
+MATH_SwapVectors = { addr = 0x8014C47C, type = "func", source = "swaps two 3-word vectors" }
 Area_DrawObjectSprite = { addr = 0x8014C4D4, type = "func", source = "Draws the sprite cells of an actor." }
 Area_RoundSpriteCoordinate = { addr = 0x8014CE48, type = "func", source = "Returns pair >> 16, rounded up by 1 when step is not negative and the low halfword of pair is nonzero." }
 Area_BuildClut = { addr = 0x8014CE78, type = "func", source = "Builds the CLUT of an actor sprite." }
@@ -6901,6 +6916,7 @@ UI_DrawLine = { addr = 0x8015A2B0, type = "func", source = "Draws a line." }
 UI_DrawTextAt = { addr = 0x8015A344, type = "func", source = "Draws message text at a position." }
 Area_UpdateParty = { addr = 0x8015A758, type = "func", source = "Runs the party in the area." }
 SYS_InitScratchpad = { addr = 0x8015AC8C, type = "func", source = "comment: initializes the scratch work record for a new panel: marks it active, sets the mode (+0x24) and state (+0x48) bytes, seeds the +0x40/+0x44 scroll pair " }
+Area_ApplyCameraMatrix = { addr = 0x8015B4B0, type = "func", source = "composes a matrix with the camera matrix and loads it into the GTE" }
 Actor_FindScriptSlot = { addr = 0x8015B4F4, type = "func", source = "Resolves a script's actor reference to a slot: without bit 0x80 the low six bits plus 30, with it the code-th actor record whose first byte is 10. Called by Actor_ReadValue." }
 SYS_SetFlag = { addr = 0x8015B580, type = "func", source = "Sets a flag bit." }
 SYS_ClearFlag = { addr = 0x8015B5A8, type = "func", source = "Clears a flag bit." }
@@ -6909,6 +6925,7 @@ SYS_ToggleFlag = { addr = 0x8015B5F4, type = "func", source = "Toggles a flag bi
 Game_IsScenarioEqual = { addr = 0x8015B61C, type = "func", source = "Tests whether the scenario equals a value." }
 Game_IsAreaEqual = { addr = 0x8015B644, type = "func", source = "Tests whether the area equals a value." }
 Game_TestSceneFlag = { addr = 0x8015B66C, type = "func", source = "Tests a scene flag." }
+Game_IsLeaderEqual = { addr = 0x8015B73C, type = "func", source = "script test: the record byte equals the party leader's character id" }
 Game_TestEventFlag = { addr = 0x8015B764, type = "func", source = "Tests a scene event flag." }
 Game_HasVitalItem = { addr = 0x8015B798, type = "func", source = "Tests whether a vital item is held." }
 Game_IsScenarioAtMost = { addr = 0x8015B7C4, type = "func", source = "Tests whether the scenario is at least a value." }

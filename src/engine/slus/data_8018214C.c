@@ -27,7 +27,7 @@ const ScriptFunc g_AreaScriptTests[21] = {
     (ScriptFunc)func_8015B6D0,
     (ScriptFunc)func_8015B6F8,
     0,
-    (ScriptFunc)func_8015B73C,
+    (ScriptFunc)Game_IsLeaderEqual,
     (ScriptFunc)Game_TestEventFlag,
     (ScriptFunc)Game_HasVitalItem,
     (ScriptFunc)Game_IsScenarioAtMost,
