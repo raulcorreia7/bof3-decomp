@@ -436,7 +436,7 @@ extern Callback                          D_800B5108[];
 /* D_800B65F8 */
 extern BattleSelection                   g_BattleSelections[];
 extern BattleSelectionAction             D_800B65FC[];
-extern u8                                D_800B6BF0[];
+extern u8                                D_800B6BF0[4];
 extern Callback                          D_800B6BF4[];
 /* D_800B6C04 */
 extern u8                                g_BattlePanelUV[];
