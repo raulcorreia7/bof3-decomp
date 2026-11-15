@@ -25,7 +25,36 @@ MATCH void func_801EEC28(void) {
     }
 }
 
-INCLUDE_ASM(func_801EED30);
+MATCH void func_801EED30(void) {
+    PartyMember* work;
+    PartyMember* actor;
+    s32          z;
+    u32          slot;
+    u8           i;
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
+    }
+    for (i = 0; i < 11; i++) {
+        D_801F0FD4[i] = 0;
+    }
+    g_Task->facing     = g_BattleEffectBattler->facing;
+    work               = g_Task;
+    actor              = g_BattleEffectBattler;
+    work->pos.x.fixed  = actor->pos.x.fixed;
+    work->pos.y.fixed  = actor->pos.y.fixed;
+    z                  = actor->pos.z.fixed;
+    work->param.unk_0B = 0;
+    work->pos.z.fixed  = z;
+    g_Task->header.mode += 1;
+    slot                                           = Battle_AllocEffect(1, 0x3F);
+    g_BattleEffects[slot & BYTE_MASK].target.party = g_Task;
+    g_BattleEffects[slot & BYTE_MASK].header.mode  = 0;
+    g_Task->param.unk_0B += 1;
+    SND_QueueSelectionEffect(0x100);
+}
 
 MATCH void func_801EEE78(void) {
     if (g_Task->param.unk_0B == 0) {

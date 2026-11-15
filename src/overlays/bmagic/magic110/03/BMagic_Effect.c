@@ -307,7 +307,23 @@ MATCH void func_801EFFB8(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F0040(void) {
+    PartyMember* work;
+
+    work              = g_Task;
+    work->pos.x.fixed = D_801F04A4[work->param.unk_0B].x + g_AreaScrollTargetX;
+    work->pos.y.fixed = g_AreaScrollTargetY + D_801F04A4[work->param.unk_0B].y;
+    work->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+    work->unk_09      = 0x60;
+    work              = g_Task;
+    work->timer       = 0x40;
+    work              = g_Task;
+    work->header.step += 1;
+}
+#else
 INCLUDE_ASM(func_801F0040);
+#endif
 
 MATCH void func_801F00D8(void) {
     PartyMember* work;

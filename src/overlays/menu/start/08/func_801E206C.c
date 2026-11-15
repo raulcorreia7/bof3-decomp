@@ -2,6 +2,7 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E206C(void) {
+    u8* cursor;
     u16 sel;
     u16 bits;
     s32 i;
@@ -10,9 +11,10 @@ NON_MATCHING void func_801E206C(void) {
     Menu_DrawClutStrip(D_80144953);
     Menu_DrawHeaderBar(MENU_HEADER_X, 0x10, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     func_801E26A8(0x1C, 0x40);
-    func_801E2668(D_80148655, 0x70, 0x26);
-    if ((s8)D_80148655 != 9) {
-        WinDrawCueText(28, 19, ((s8)D_80148655 + 0xBC) & HALF_MASK);
+    cursor = &D_80148655;
+    func_801E2668(*cursor, 0x70, 0x26);
+    if ((s8)*cursor != 9) {
+        WinDrawCueText(28, 19, ((s8)*cursor + 0xBC) & HALF_MASK);
     } else if (g_AutoRun != 0) {
         WinDrawCueText(28, 19, 0xCA);
     } else {
@@ -68,12 +70,12 @@ NON_MATCHING void func_801E206C(void) {
         }
     } else if (bits & (PADLright | PADLleft)) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
-        D_80148655       = 7;
-        g_MenuStep.state = g_MenuStep.state - 1;
+        D_80148655 = 7;
+        D_80148652 = D_80148652 - 1;
     } else if (bits & PADstart) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
-        D_80148655       = 0;
-        g_MenuStep.state = g_MenuStep.state - 2;
+        D_80148655 = 0;
+        D_80148652 = D_80148652 - 2;
     }
 }
 #else

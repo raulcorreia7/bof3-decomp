@@ -191,7 +191,25 @@ MATCH void func_801EFB90(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EFBD8(void) {
+    func_800AF2B4((BattleRange*)g_Battle.selected_actor, 0x60);
+    if (func_800AF66C((BattleRange*)g_Battle.selected_actor, 0xC000) != 0) {
+        if (g_Battle.active_battler < 3) {
+            func_800AFC98(2, 0);
+        }
+        SND_QueueSelectionEffect(0x203);
+        func_800A9820(g_Battle.target_selector);
+        g_Task->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - g_Task->pos.x.fixed, g_BattleEffectBattler->pos.y.fixed - g_Task->pos.y.fixed);
+        g_Task->unk_14 = 0x40;
+        g_Task->unk_09 = 0x10;
+        g_Task->unk_20 = -8;
+        g_Task->header.step += 1;
+    }
+}
+#else
 INCLUDE_ASM(func_801EFBD8);
+#endif
 
 MATCH void func_801EFCC4(void) {
     PartyMember* work;
@@ -312,7 +330,19 @@ MATCH void func_801F0194(void) {
     }
 }
 
-INCLUDE_ASM(func_801F0248);
+MATCH void func_801F0248(void) {
+    u8 timer;
+
+    g_Task->pos.x.fixed += FIXED_MUL(rsin(g_Task->unk_0C), 0x2000);
+    g_Task->pos.y.fixed += FIXED_MUL(rcos(g_Task->unk_0C), 0x2000);
+    g_Task->unk_14 += g_Task->unk_20;
+    g_Task->pos.z.part.integer = (u16)g_Task->pos.z.part.integer + g_Task->unk_14;
+    timer                      = g_Task->unk_09 - 1;
+    g_Task->unk_09             = timer;
+    if (timer == 0) {
+        g_Task->header.step += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_TickDownAndClear.h"
 
