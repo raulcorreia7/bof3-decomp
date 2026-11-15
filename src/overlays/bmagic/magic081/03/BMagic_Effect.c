@@ -25,7 +25,40 @@ MATCH void BMagic_UpdateRottenBreath(void) {
     }
 }
 
-INCLUDE_ASM(func_801EED44);
+MATCH void func_801EED44(void) {
+    PartyMember*  actor;
+    PartyMember*  work;
+    BattleEffect* effect;
+    PartyMember*  saved;
+    u8            index;
+    u16           pose;
+
+    for (index = 0; index < BMAGIC_EFFECT_COUNT; index++) {
+        BMAGIC_EFFECT_SLOTS[index].header.flags = 0;
+        BMAGIC_EFFECT_SLOTS[index].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[index].header.step  = 0;
+    }
+
+    actor                    = g_BattleEffectBattler;
+    work                     = g_Task;
+    work->pos.x.fixed        = actor->pos.x.fixed;
+    work->pos.y.fixed        = actor->pos.y.fixed;
+    pose                     = actor->pos.z.part.integer;
+    g_GfxPalettePending      = 1;
+    work->pos.z.part.integer = pose;
+
+    for (index = 0; index < 16; index++) {
+        MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW)[index] = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW)[index] | 0x8000;
+    }
+
+    effect                                                     = D_801EC2E0;
+    saved                                                      = g_Task;
+    MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW)[0] = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW)[0];
+    g_Task                                                     = BattleEffect_GetTarget(effect);
+    Actor_SelectScript(1);
+    g_Task = saved;
+    saved->header.mode++;
+}
 
 MATCH void func_801EEE74(void) {
     PartyMember* saved;
@@ -38,24 +71,22 @@ MATCH void func_801EEE74(void) {
     g_Task = saved;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EEEDC(void) {
+MATCH void func_801EEEDC(void) {
+    PartyMember* published;
     PartyMember* saved;
-    u32          slot;
+    u8           index;
 
-    slot                               = Battle_AllocEffect(1, 66) & BYTE_MASK;
-    g_BattleEffects[slot].header.mode  = 0;
-    g_BattleEffects[slot].target.party = g_Task;
-    saved                              = g_Task;
-    g_Task                             = D_801EC2E0->target.party;
+    index                               = Battle_AllocEffect(1, 0x42);
+    published                           = g_Task;
+    g_BattleEffects[index].header.mode  = 0;
+    saved                               = g_Task;
+    g_BattleEffects[index].target.party = published;
+    g_Task                              = D_801EC2E0->target.party;
     Actor_StepAnimOnce();
-    g_Task               = saved;
-    g_Task->param.unk_0B = 1;
-    g_Task->header.mode += 1;
+    g_Task              = saved;
+    saved->param.unk_0B = 1;
+    g_Task->header.mode++;
 }
-#else
-INCLUDE_ASM(func_801EEEDC);
-#endif
 
 MATCH void func_801EEF88(void) {
     PartyMember* saved_work;

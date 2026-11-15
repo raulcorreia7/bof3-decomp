@@ -302,41 +302,45 @@ MATCH void func_801F04F0(void) {
     g_Task->header.step += 1;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F05AC(void) {
+MATCH void func_801F05AC(void) {
     PartyMember* work;
+    PartyMember* next;
+    PartyMember* state;
+
     rand();
-    g_Task->unk_2E.half -= 1;
-    g_Task->unk_09 += 4;
     work = g_Task;
-    work->unk_30.half -= 1;
-    if (g_Task->unk_09 == 16) {
-        g_Task->header.step++;
+    work->unk_2E.half -= 1;
+    FAKE_BARRIER(); /* FAKE: reloads the g_Task cell after the store, as retail does; plain C caches it (0x78 vs 0x8C), TASK_VOLATILE re-reads each use (0x84) and moves seven other functions. */
+    next = g_Task;
+    next->unk_09 += 4;
+    next->unk_30.half -= 1;
+    state = g_Task;
+    if (state->unk_09 == 0x10) {
+        state->header.step++;
     }
 }
-#else
-INCLUDE_ASM(func_801F05AC);
-#endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F0638(void) {
+MATCH void func_801F0638(void) {
     PartyMember* work;
+    PartyMember* next;
+    PartyMember* state;
     u8           timer;
+
     work = g_Task;
     work->unk_30.half -= 2;
     work->unk_09 += 1;
     rand();
-    g_Task->unk_2E.half -= 1;
-    timer         = g_Task->timer - 1;
-    g_Task->timer = timer;
+    next = g_Task;
+    next->unk_2E.half -= 1;
+    FAKE_BARRIER(); /* FAKE: reloads the g_Task cell before the timer, as retail does; plain C caches it (0x88 vs 0xA0), TASK_VOLATILE re-reads each use (0x98) and moves seven other functions. */
+    state        = g_Task;
+    timer        = state->timer - 1;
+    state->timer = timer;
     if (timer == 0) {
-        g_BattleEffectBattler->param.unk_0B -= 1;
+        BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         func_801E5988();
     }
 }
-#else
-INCLUDE_ASM(func_801F0638);
-#endif
 
 /* The textured quad scratch: the corner radius and the colour channels, ahead of the quad corners. */
 #define QUAD_RADIUS D_1F800000.view.effect.params[0]

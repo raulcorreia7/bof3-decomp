@@ -82,7 +82,45 @@ MATCH void func_801EEF04(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEF50);
+MATCH void func_801EEF50(void) {
+    s32 value;
+    s32 threshold;
+    u8  identified;
+
+    value     = g_Game.members[g_Battle.active_battler].chr.level - ENEMY_COMBATANT(g_Battle.target_selector).level;
+    threshold = 16;
+    if (value < 15) {
+        threshold = 14;
+    }
+    if (value < 10) {
+        threshold = 12;
+    }
+    if (value < 5) {
+        threshold = 10;
+    }
+    if (value < 0) {
+        threshold = 8;
+    }
+    if (value < -5) {
+        threshold = 6;
+    }
+    if (value < -10) {
+        threshold = 4;
+    }
+    if (value < -15) {
+        threshold = 2;
+    }
+    value      = threshold > (rand() & 0xF);
+    identified = Effect_TargetIsIdentified();
+    if (identified != 0) {
+        g_Task->unk_04 = 1;
+    } else if (value != 0 && ENEMY_COMBATANT(g_Battle.target_selector).unk_7F != 0) {
+        Effect_MarkTargetIdentified();
+        g_Task->unk_04 = 1;
+    } else {
+        g_Task->unk_04 = 0;
+    }
+}
 
 /* Sets the bit of the targeted enemy's id in g_IdentifiedEnemies. */
 MATCH void Effect_MarkTargetIdentified(void) {
