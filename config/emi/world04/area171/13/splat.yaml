@@ -10,7 +10,7 @@ segments:
       - [0x0, .data, D_801F2C00]
       - [0x4, .rodata, func_801F3B4C]
       - [0x5C, c, func_801F2C5C]
-      - [0xA0, c, func_801F2CA0]
+      - [0xA0, c, Area_StartEntryCell]
       - [0x21C, c, func_801F2E1C]
       - [0x300, c, func_801F2F00]
       - [0x35C, c, func_801F2F5C]
