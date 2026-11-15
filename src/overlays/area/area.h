@@ -55,6 +55,23 @@ typedef struct WorldMapKey {
 
 ASSERT_SIZE(WorldMapKey, 4);
 
+/* One 2-byte cell of the torch gauge's bar texture: the clut byte and the texture column of the
+ * cell. Area104 indexes the arrow cells of its two states and area121 the bar's two states. */
+typedef struct TorchGaugeCell {
+    u8 clut; /* 0x00 */
+    u8 u;    /* 0x01 */
+} TorchGaugeCell;
+
+/* The torch gauge cells, one per gauge state. */
+typedef struct TorchGaugeCells {
+    TorchGaugeCell rows[2]; /* 0x00 */
+} TorchGaugeCells;
+
+ASSERT_SIZE(TorchGaugeCell, 0x02);
+ASSERT_OFFSET(TorchGaugeCell, u, 0x01);
+ASSERT_SIZE(TorchGaugeCells, 0x04);
+ASSERT_OFFSET(TorchGaugeCells, rows, 0x00);
+
 extern u8       D_80143F06;
 extern s16      D_801448EE;
 extern u8       D_80146867;

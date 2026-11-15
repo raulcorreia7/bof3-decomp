@@ -275,7 +275,22 @@ MATCH void func_801EF7B8(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 3), 2, g_Task);
 }
 
-INCLUDE_ASM(func_801EF7FC);
+MATCH void func_801EF7FC(void) {
+    PartyMember* work;
+
+    func_800AFD9C();
+    g_Task->unk_14 = g_Task->pos.z.part.integer;
+    g_Task->unk_0C = D_801F11F4[2][0] * 32;
+    g_Task->unk_10 = D_801F11F4[2][1] * 32;
+    func_801DD350(g_Task);
+    g_Task->pos.x.fixed      = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
+    g_Task->pos.y.fixed      = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_10;
+    work                     = g_Task;
+    work->pos.z.part.integer = g_BattleEffectBattler->pos.z.part.integer + 0x200;
+    work->timer              = 0;
+    work->unk_09             = 0;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EF8C0(void) {
     u8 slot;

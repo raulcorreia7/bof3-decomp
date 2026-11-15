@@ -59,7 +59,57 @@ MATCH void func_801EEE44(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEEFC);
+MATCH void func_801EEEFC(void) {
+    PartyMember* source;
+    PartyMember* record;
+    PartyMember* work;
+    s32          heading;
+
+    source         = g_BattleSelectedActor;
+    g_Task->facing = g_BattleEffectBattler->facing;
+    if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
+        g_Task->unk_0C = 0x4000;
+        g_Task->unk_10 = 0;
+        g_Task->unk_14 = TO_COORD(0x100);
+    } else {
+        switch (ENEMY_COMBATANT(g_Battle.active_battler).enemy_id.byte.kind) {
+            case 0x99:
+            default:
+                g_Task->unk_0C = 0x2000;
+                g_Task->unk_10 = 0;
+                g_Task->unk_14 = TO_COORD(0x1C0);
+                break;
+            case 0x9A:
+                g_Task->unk_0C = 0x10000;
+                g_Task->unk_10 = 0;
+                g_Task->unk_14 = TO_COORD(0x200);
+                break;
+            case 0xB5:
+                g_Task->unk_0C = -0xE000;
+                g_Task->unk_10 = 0;
+                g_Task->unk_14 = TO_COORD(0x380);
+                break;
+        }
+    }
+    func_801DD350(g_Task);
+    record            = g_BattleEffectBattler;
+    work              = g_Task;
+    work->pos.x.fixed = record->pos.x.fixed + work->unk_0C;
+    work->pos.y.fixed = record->pos.y.fixed + work->unk_10;
+    work->pos.z.fixed = record->pos.z.fixed + work->unk_14;
+    heading           = ratan2(source->pos.x.fixed - work->pos.x.fixed, source->pos.y.fixed - work->pos.y.fixed);
+    g_Task->unk_0C    = heading;
+    g_Task->unk_10    = 0;
+    Battle_ProjectRange();
+    BMagic_Trail[g_Task->unk_04][0].x = g_Task->unk_2E.half;
+    BMagic_Trail[g_Task->unk_04][0].y = g_Task->unk_30.half;
+    BMagic_Trail[g_Task->unk_04][1].x = g_Task->unk_2E.half;
+    BMagic_Trail[g_Task->unk_04][1].y = g_Task->unk_30.half;
+    g_Task->param.unk_0B              = 0;
+    g_Task->unk_09                    = 0x10;
+    g_Task->timer                     = 1;
+    g_Task->header.step++;
+}
 
 MATCH void func_801EF138(void) {
     VECTOR       pos;

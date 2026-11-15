@@ -92,7 +92,126 @@ MATCH void func_801FA08C(void) {
 
 INCLUDE_ASM(func_801FA1F0);
 
-INCLUDE_ASM(func_801FA8B8);
+MATCH void func_801FA8B8(void) {
+    u8 slot;
+
+    switch (D_80146875) {
+        case 0:
+            if (D_8014623B == 3) {
+                break;
+            }
+            D_80146258 |= 8;
+            func_801BE1B0(5);
+            func_801C601C(1);
+            D_80146875 = 1;
+            break;
+        case 1:
+            if (*g_ScriptVars != 2) {
+                break;
+            }
+            func_801BE1B0(6);
+            D_80146875 = 2;
+            break;
+        case 2:
+            if (*g_ScriptVars != 0x25) {
+                break;
+            }
+            slot                   = Actor_FindFreeSpawned();
+            D_1F800000.view.raw[0] = slot;
+            if (slot != GAME_NONE) {
+                g_SpawnedActors[D_1F800000.view.raw[0]].header.flags = 1;
+                g_SpawnedActors[D_1F800000.view.raw[0]].type         = 0x9A;
+            }
+            D_80146875 = 3;
+            break;
+        case 3:
+            if (*g_ScriptVars != 0x28) {
+                break;
+            }
+            func_801BFE34(0xE8000, 0xE8000, 0x36);
+            func_801C7A54(0x36);
+            D_80146875 = 4;
+            break;
+        case 4:
+            if (*g_ScriptVars != 0x32) {
+                break;
+            }
+            *g_ScriptVars = 0;
+            func_801BE1B0(9);
+            UI_SetMode(4);
+            D_80146875 = 5;
+            break;
+        case 5:
+            if (g_UiWindowEffectBusy) {
+                break;
+            }
+            g_AreaDrawFlags = 0;
+            D_80146875      = 6;
+            SYS_SetFlag(g_SceneFlags, 0x1E);
+            func_8019FA28(0x77, 0xA8000, 0xB0000, 0x87);
+            g_GamePrevSelection = 0x61;
+            break;
+        case 6:
+            if (*g_ScriptVars != 1) {
+                break;
+            }
+            UI_SetMode(5);
+            g_AreaDrawFlags = 0x1F;
+            SND_PlayCue(0x20C);
+            D_80146875 = 7;
+            break;
+        case 7:
+            if (g_UiWindowEffectBusy) {
+                break;
+            }
+            *g_ScriptVars = 2;
+            D_80146875    = 8;
+            break;
+        case 8:
+            if (*g_ScriptVars != 0x0E) {
+                break;
+            }
+            D_80146258 ^= 8;
+            goto clear_script_state;
+        case 20:
+            Message_StartAreaMessage(0x4B);
+            g_GameStateIndex = GAME_REQUEST_MESSAGE;
+            D_80146875       = 0x15;
+            break;
+        case 21:
+            if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
+                break;
+            }
+            if (*g_ScriptVars != 0x0A) {
+                goto clear_script_state;
+            }
+            func_801BE1B0(8);
+            D_80146875 = 0x16;
+            break;
+        case 22:
+            if (*g_ScriptVars != 0x19) {
+                break;
+            }
+            SYS_SetFlag(g_SceneFlags, 0x2C);
+            goto clear_script_state;
+        case 30:
+            Message_StartAreaMessage(0x4C);
+            g_GameStateIndex = GAME_REQUEST_MESSAGE;
+            D_80146875       = 0x1F;
+            break;
+        case 31:
+            if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
+                break;
+            }
+            goto clear_script_state;
+    }
+    return;
+
+clear_script_state:
+    Game_ClearScriptActive();
+    D_80146875 = 0;
+    D_80146874 = 0;
+}
 
 MATCH void func_801FAC88(void) {
     switch (g_SceneState.step_05) {

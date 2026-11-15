@@ -465,7 +465,23 @@ MATCH void func_801F0B44(void) {
     }
 }
 
-INCLUDE_ASM(func_801F0BCC);
+MATCH void func_801F0BCC(void) {
+    PartyMember* work;
+    PartyMember* source;
+
+    work              = g_Task;
+    source            = g_BattleEffectBattler;
+    work->pos.x.fixed = g_AreaScrollTargetX;
+    /* FAKE: Keep the Y load after the X store; the scheduler hoists it (without it 0x7C vs 0x80 bytes). */
+    FAKE_BARRIER();
+    work->pos.y.fixed  = g_AreaScrollTargetY;
+    work->pos.z.fixed  = source->pos.z.fixed;
+    work->unk_14       = 0x40;
+    work->param.unk_0B = 0;
+    g_Task->unk_09     = 0x10;
+    g_Task->timer      = 1;
+    g_Task->header.step++;
+}
 
 MATCH void func_801F0C4C(void) {
     s32 value;
