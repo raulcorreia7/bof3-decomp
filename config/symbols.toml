@@ -1155,6 +1155,7 @@ Effect_SetActorMatrix = { addr = 0x801EF700, type = "func", source = "Sets the a
 D_801EFC64 = { addr = 0x801EFC64, source = "Mode handlers of the magic091 effect, run by header.mode (byte 0x01) from func_801EEF74." }
 
 ["emi/bmagic/magic092/03"]
+Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
@@ -1178,6 +1179,7 @@ D_801F07C0 = { addr = 0x801F07C0, source = "First step handlers of the magic092 
 D_801F07D8 = { addr = 0x801F07D8, source = "Second step handlers of the magic092 effect, run by header.step (byte 0x02) from func_801EF840." }
 
 ["emi/bmagic/magic093/03"]
+Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
@@ -1235,6 +1237,7 @@ g_BMagicEffectModes = { addr = 0x801F04A8, source = "Handlers of magic096 (Blizz
 ["emi/bmagic/magic097/03"]
 D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true, source = "The scratchpad base 0x1F800000 as signed halfwords; the magic effects read and set its first halfword as a vertical offset." }
 D_1F800014_HALF = { addr = 0x1F800014, type = "s16", alias = true, source = "The four projected SVECTORs at 0x1F800014 (D_1F800014) read as signed halfwords; RotTransPers4 writes the vertices." }
+Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }

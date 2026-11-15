@@ -91,7 +91,27 @@ MATCH void func_801EF0C4(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 2, g_Task);
 }
 
-INCLUDE_ASM(func_801EF108);
+MATCH void func_801EF108(void) {
+    void* battler;
+    u8    count;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
+            battler = &g_BattleEnemyBattlers[g_Task->unk_03];
+            GFX_FreePaletteFadeTarget(battler);
+            GFX_AllocPaletteFade(battler, -8, -8, -8, 1);
+            Battle_ApplyDamageFlags((g_Task->unk_03 + 3) & BYTE_MASK, 0x10);
+        } else {
+            battler = &g_Game.members[g_Task->unk_03];
+            GFX_FreePaletteFadeTarget(battler);
+            GFX_AllocPaletteFade(battler, -8, -8, -8, 1);
+            Battle_ApplyDamageFlags(g_Task->unk_03, 0x10);
+        }
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF264(void) {
     if (g_BattleEffectBattler->param.unk_0B < 8U) {
