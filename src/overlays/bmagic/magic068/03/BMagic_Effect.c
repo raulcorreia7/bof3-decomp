@@ -308,7 +308,19 @@ MATCH void func_801EF884(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF908);
+MATCH void func_801EF908(void) {
+    if (--g_Task->unk_09 == 0) {
+        g_Task->unk_09 = 0xF;
+        if (--g_Task->timer != 0) {
+            SND_QueueSelectionEffect(0x100);
+            g_Task->header.step -= 1;
+        } else {
+            SND_QueueSelectionEffect(0x101);
+            g_Task->param.unk_0B = 0xC;
+            g_Task->header.step += 1;
+        }
+    }
+}
 
 MATCH void func_801EF9D0(void) {
     u8 timer;

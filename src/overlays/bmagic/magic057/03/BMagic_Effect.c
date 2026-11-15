@@ -206,7 +206,41 @@ MATCH void func_801EF5BC(void) {
     g_Task->header.step++;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF620(void) {
+    Callback     handlers[2] = {func_801EF7A0, func_801EF7E0};
+    PartyMember* work;
+    u8           step;
+
+    SYS_DISPATCH_TASK(handlers, 3, g_Task);
+
+    if (g_Task->timer != 0xFF) {
+        if (--g_Task->timer == 0) {
+            work         = g_Task;
+            step         = work->unk_09 + 1;
+            work->unk_09 = step;
+            work->timer  = D_801EFADC[step];
+            SND_QueueSelectionEffect(0x100);
+            if (g_Task->unk_09 == 3) {
+                g_BattleEffectBattler->header.step += 1;
+                g_Task->timer = 0xFF;
+            } else {
+                g_Task->unk_03 = 0;
+            }
+        }
+    }
+    if (!(g_BattleEffectBattler->header.flags & 0x1)) {
+        work = g_Task;
+        work->header.step += 1;
+        work->unk_10   = 0;
+        g_Task->unk_03 = 0;
+    }
+    g_AreaCameraRefreshCount = 2;
+    g_AreaCameraOffsetY      = g_Task->unk_10 * 2;
+}
+#else
 INCLUDE_ASM(func_801EF620);
+#endif
 
 MATCH void func_801EF7A0(void) {
     PartyMember* work;
