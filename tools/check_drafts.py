@@ -143,6 +143,11 @@ def main(argv: list[str]) -> int:
         print("skip  drafts (no toolchains/gcc-2.7.2-psx or build/meson)")
         return 0
     commands = draft_commands()
+    if (
+        not commands
+    ):  # a build graph with no draft targets (CI has no disc): nothing to compile with
+        print("skip  drafts (the build graph has no draft targets)")
+        return 0
     jobs = []
     failed = 0
     with ThreadPoolExecutor(max_workers=8) as pool:
