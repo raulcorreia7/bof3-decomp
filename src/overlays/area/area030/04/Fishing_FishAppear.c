@@ -27,10 +27,10 @@ NON_MATCHING void Fishing_FishAppear(void) {
     coord                           = TO_COORD(20);
     FISHING_STATE->motion_34.unk_34 = coord - (RANDOM_MASK(0xF) << 0x10);
     coord                           = TO_COORD(62);
-    coord                          -= FISHING_ROW->facing_92 * TO_COORD(12);
-    coord                          -= RANDOM_MASK(0xF) << 0x10;
-    FISHING_STATE->y_38.pos_y       = coord;
-    coord                           = -(D_801E2AD2[FISHING_STATE->cue_index_06 * sizeof(FishingSceneCue)] << 0x18);
+    coord -= FISHING_ROW->facing_92 * TO_COORD(12);
+    coord -= RANDOM_MASK(0xF) << 0x10;
+    FISHING_STATE->y_38.pos_y            = coord;
+    coord                                = -(D_801E2AD2[FISHING_STATE->cue_index_06 * sizeof(FishingSceneCue)] << 0x18);
     FISHING_STATE->bounce_3C.half.key_3E = (s16)((coord >> 0x10) - (RANDOM_MASK(7) << 5));
     limit                                = Area_SampleHeight(FISHING_STATE->motion_34.unk_34, FISHING_STATE->y_38.pos_y);
     if (FISHING_STATE->bounce_3C.half.key_3E == 0) {
