@@ -1,14 +1,9 @@
 #include "engine/slus/slus.h"
 #include "game/character.h"
 
-/* draws a translucent textured quad and its outline at the given
- * screen position, then four corner bars around it.
- */
-/* Deferred coordinate initialization leaves the saved-register difference at +0x04; pinned arguments change the frame size. */
-#ifdef NON_MATCHING
-NON_MATCHING void func_80159B9C(s16 x, s16 y, u8 w, u8 h) {
-    s16       edge_x;
-    s16       edge_y;
+/* Draws a window panel: a dark translucent tile, the window texture in the current style over it, a
+ * grey outline, and a darker line outside each edge. */
+MATCH void func_80159B9C(s16 x, s16 y, u8 w, u8 h) {
     s16       right;
     s16       bottom;
     s32       tile_w;
@@ -65,20 +60,15 @@ NON_MATCHING void func_80159B9C(s16 x, s16 y, u8 w, u8 h) {
 
     line = (LINE_F4*)g_GfxPrimCursor;
     SetLineF4(line);
-    edge_x = x - 1;
-    edge_y = y - 1;
     setRGB0(line, 200, 200, 200);
     right  = x + width;
     bottom = y + height;
-    setXY4(line, edge_x, edge_y, right + 1, edge_y, right + 1, bottom + 1, edge_x, bottom + 1);
+    setXY4(line, x - 1, y - 1, right + 1, y - 1, right + 1, bottom + 1, x - 1, bottom + 1);
     GFX_AddPrim(1, sizeof(LINE_F4));
 
-    UI_DrawLine((s16)edge_x, (s16)edge_y, (s16)edge_x, (s16)(bottom + 1), 200);
-    UI_DrawLine((s16)(x - 2), (s16)y, (s16)(x - 2), (s16)bottom, 140);
-    UI_DrawLine((s16)(right + 2), (s16)y, (s16)(right + 2), (s16)bottom, 140);
-    UI_DrawLine((s16)x, (s16)(y - 2), (s16)right, (s16)(y - 2), 140);
-    UI_DrawLine((s16)x, (s16)(bottom + 2), (s16)right, (s16)(bottom + 2), 140);
+    UI_DrawLine(x - 1, y - 1, x - 1, bottom + 1, 200);
+    UI_DrawLine(x - 2, y, x - 2, bottom, 140);
+    UI_DrawLine(right + 2, y, right + 2, bottom, 140);
+    UI_DrawLine(x, y - 2, right, y - 2, 140);
+    UI_DrawLine(x, bottom + 2, right, bottom + 2, 140);
 }
-#else
-INCLUDE_ASM(func_80159B9C);
-#endif
