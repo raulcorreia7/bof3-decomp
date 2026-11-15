@@ -84,7 +84,17 @@ MATCH void func_801EF164(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF1CC);
+MATCH void func_801EF1CC(void) {
+    g_Task->unk_14 += g_Task->unk_20;
+    g_Task->pos.z.part.integer += g_Task->unk_14;
+    if (g_Task->unk_14 == 0) {
+        g_Task->pos.x.fixed = g_Battle.selected_actor->pos.x.fixed;
+        g_Task->pos.y.fixed = g_Battle.selected_actor->pos.y.fixed;
+        g_Task->pos.z.fixed -= g_BattleEffectBattler->pos.z.fixed - g_Battle.selected_actor->pos.z.fixed;
+        g_Task->unk_09 = 0x1F;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF280(void) {
     PartyMember* work;
@@ -284,7 +294,20 @@ MATCH void func_801EFBEC(void) {
     g_Task->header.step += 1;
 }
 
-INCLUDE_ASM(func_801EFC54);
+MATCH void func_801EFC54(void) {
+    g_Task->unk_14 += g_Task->unk_20;
+    g_Task->pos.z.part.integer += g_Task->unk_14;
+    if (g_Task->timer != 0) {
+        g_Task->timer -= 1;
+    }
+    if (g_Task->unk_14 == 0) {
+        g_Task->pos.x.fixed = g_Battle.selected_actor->pos.x.fixed;
+        g_Task->pos.y.fixed = g_Battle.selected_actor->pos.y.fixed;
+        g_Task->pos.z.fixed -= g_BattleEffectBattler->pos.z.fixed - g_Battle.selected_actor->pos.z.fixed;
+        g_Task->unk_09 = 0x0F;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EFD28(void) {
     s32 value;
