@@ -1770,7 +1770,97 @@ MATCH void Menu_DrawPanelIcon(s16 x, s16 y, s32 u, s32 v, u16 clut, u8 color) {
     MenuDrawPanelIcon(x, y, u, v, clut, color);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
+    RECT  window;
+    SPRT* sprite;
+    s32   columns;
+    s32   rows;
+
+    window.x = 112;
+    window.y = 152;
+    window.w = 8;
+    window.h = 8;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 832, 256), &window);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    sprite = (SPRT*)g_GfxPrimCursor;
+    SetSprt(sprite);
+    setXY0(sprite, x + 16, y);
+    setUV0(sprite, 0, 0);
+    setWH(sprite, ((u8)width - 4) * 8, 8);
+    setClut(sprite, 176, STAGE_PALETTE_Y + 1);
+    setRGB0(sprite, 0x80, 0x80, 0x80);
+    GFX_AddPrim(1, sizeof(SPRT));
+
+    window.x = 152;
+    window.y = 160;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 832, 256), &window);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    sprite = (SPRT*)g_GfxPrimCursor;
+    SetSprt(sprite);
+    setXY0(sprite, x + 16, y + ((u8)height - 1) * 8);
+    setUV0(sprite, 0, 0);
+    setWH(sprite, ((u8)width - 4) * 8, 8);
+    setClut(sprite, 176, STAGE_PALETTE_Y + 1);
+    setRGB0(sprite, 0x80, 0x80, 0x80);
+    GFX_AddPrim(1, sizeof(SPRT));
+
+    window.x = 176;
+    window.y = 152;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 832, 256), &window);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    sprite = (SPRT*)g_GfxPrimCursor;
+    SetSprt(sprite);
+    setXY0(sprite, x, y + 16);
+    setUV0(sprite, 0, 0);
+    setWH(sprite, 8, ((u8)height - 4) * 8);
+    setClut(sprite, 176, STAGE_PALETTE_Y + 1);
+    setRGB0(sprite, 0x80, 0x80, 0x80);
+    GFX_AddPrim(1, sizeof(SPRT));
+
+    window.x = 176;
+    window.y = 160;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 832, 256), &window);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    sprite = (SPRT*)g_GfxPrimCursor;
+    SetSprt(sprite);
+    setXY0(sprite, x + ((u8)width - 1) * 8, y + 16);
+    setUV0(sprite, 0, 0);
+    setWH(sprite, 8, ((u8)height - 4) * 8);
+    setClut(sprite, 176, STAGE_PALETTE_Y + 1);
+    setRGB0(sprite, 0x80, 0x80, 0x80);
+    GFX_AddPrim(1, sizeof(SPRT));
+
+    window.x = 112;
+    window.y = 160;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 832, 256), &window);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    sprite = (SPRT*)g_GfxPrimCursor;
+    SetSprt(sprite);
+    setXY0(sprite, x + 8, y + 8);
+    setUV0(sprite, 0, 0);
+    setWH(sprite, ((u8)width - 2) * 8, ((u8)height - 2) * 8);
+    setClut(sprite, 176, STAGE_PALETTE_Y + 1);
+    setRGB0(sprite, 0x80, 0x80, 0x80);
+    GFX_AddPrim(1, sizeof(SPRT));
+
+    window.x = 0;
+    window.y = 0;
+    window.w = 256;
+    window.h = 256;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 832, 256), &window);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+
+    UI_DrawSprite((s16)x, (s16)y, 0x23, 1);
+    columns = (u8)width - 2;
+    UI_DrawSprite((s16)(x + columns * 8), (s16)y, 0x26, 1);
+    rows = (u8)height - 2;
+    UI_DrawSprite((s16)x, (s16)(y + rows * 8), 0x27, 1);
+    UI_DrawSprite((s16)(x + columns * 8), (s16)(y + rows * 8), 0x29, 1);
+}
+#else
 INCLUDE_ASM(func_801D9B80);
+#endif
 
 INCLUDE_ASM(func_801DA114);
 
