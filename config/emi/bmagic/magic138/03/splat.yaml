@@ -16,5 +16,5 @@ segments:
     vram: 0x801EF72C
     align: 4
     subsegments:
-      - [0xB2C, bin, D_801EF72C]
+      - [0xB2C, bin, g_BMagicEffectModes]
   - [0xB34]

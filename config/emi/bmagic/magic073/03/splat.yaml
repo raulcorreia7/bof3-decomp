@@ -21,7 +21,7 @@ segments:
       - [0x1A5C, bin, D_801F065C]
       - [0x1A60, bin, D_801F0660]
       - [0x1A64, bin, D_801F0664]
-      - [0x1A68, bin, D_801F0668]
+      - [0x1A68, bin, g_BMagicEffectModes]
       - [0x1A6C, bin, D_801F066C]
       - [0x1A70, bin, D_801F0673]
       - [0x1A74, bin, D_801F0677]
