@@ -64,11 +64,16 @@ extern Callback D_801F6218[];
 
 /* The sprite menu's screen-rect and texture-cell tables: 8-byte and 4-byte entries. */
 typedef struct SpriteCell {
-    s16 x;
-    s16 y;
-    s16 w;
-    s16 h;
+    s16 x; /* 0x00 */
+    s16 y; /* 0x02 */
+    s16 w; /* 0x04 */
+    s16 h; /* 0x06 */
 } SpriteCell;
+
+ASSERT_SIZE(SpriteCell, 0x8);
+ASSERT_OFFSET(SpriteCell, y, 0x02);
+ASSERT_OFFSET(SpriteCell, w, 0x04);
+ASSERT_OFFSET(SpriteCell, h, 0x06);
 
 extern SpriteCell D_801F6230[];
 extern u8         D_801F6248[][4];
