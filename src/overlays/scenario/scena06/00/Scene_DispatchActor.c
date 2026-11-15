@@ -165,7 +165,40 @@ MATCH s8 func_801FD34C(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta
     return D_801FE46C[((Actor*)g_Task)->unk_04](entry, dir_x, dir_y, vz_start, vz_delta, landing_script, flags);
 }
 
-INCLUDE_ASM(func_801FD3BC);
+MATCH s8 func_801FD3BC(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags) {
+    u8  size;
+    s32 absX;
+    s32 absY;
+    u8  span;
+
+    size = g_RouteSpeedScale[((Actor*)entry)->unk_04];
+    if (size == 0) {
+        return 0;
+    }
+    absY          = abs(dir_y);
+    g_Task->timer = 0;
+    span          = absY;
+    absX          = abs(dir_x);
+    if (absX >= absY) {
+        span = absX;
+    }
+    if (span != 0) {
+        g_Task->param.unk_0B = span - 1;
+    } else {
+        g_Task->param.unk_0B = 0;
+    }
+    g_Task->unk_0A = 16 / size;
+    g_Task->vz     = vz_start << 8;
+    if (span != 0) {
+        g_Task->vx = (dir_x << 15) / (g_Task->unk_0A * span);
+        g_Task->vy = (dir_y << 15) / (g_Task->unk_0A * span);
+    } else {
+        g_Task->vy = 0;
+        g_Task->vx = 0;
+    }
+    g_Task->unk_04 = 1;
+    return 1;
+}
 
 MATCH s8 func_801FD568(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags) {
     Actor* work;
