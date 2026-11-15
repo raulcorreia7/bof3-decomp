@@ -54,7 +54,7 @@ MATCH void func_801FB014(void) {
             }
             SYS_SetFlag(g_SceneFlags, 39);
             SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 4));
-            SND_PlayBGM(91, 100, 8);
+            SND_PlayBGM(91, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             goto clear_script_state;
         case 6:
             Area_SetCellCode(93, 46, 81);
