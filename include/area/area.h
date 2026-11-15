@@ -255,6 +255,7 @@ typedef struct AreaCell {
 } AreaCell;
 
 extern AreaCell g_AreaCells[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
+extern u16      g_AreaCellGrid[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
 /* Zero in the load image: 0x400 rows of one POLY_FT4 per display buffer
  * (g_FrameBufferIndex). In a row's second record, pad1 and pad2 hold the rows of the two linked
  * cells (0 = none); in its first, pad1 holds the pending upload request. */
