@@ -2,9 +2,6 @@
 #include "area/spad.h"
 #include "area/map.h"
 
-/* UI-owner row field behind the scratchpad row pointer. */
-#define SPAD_ROW(type, offset) FIELD(type, g_Task, offset)
-
 MATCH void func_801D62DC(void) {
     s32 offset;
     s32 base;
@@ -49,10 +46,10 @@ MATCH void func_801D62DC(void) {
                 ((ShopSelection*)g_Task)->unk_34 = FIELD(s32, &D_801E537C, offset);
                 ((ShopSelection*)g_Task)->unk_38 = FIELD(s32, &D_801E5380, offset);
                 ((ShopSelection*)g_Task)->unk_3C = FIELD(s32, &D_801E5384, offset);
-                SPAD_ROW(u8, 0x1u)               = 0;
-                SPAD_ROW(u8, 0x2u)               = 0;
-                SPAD_ROW(u8, 0x3u)               = 0;
-                SPAD_ROW(u8, 0x4u)               = 0;
+                g_Task->header.mode              = 0;
+                g_Task->header.step              = 0;
+                g_Task->unk_03                   = 0;
+                g_Task->unk_04                   = 0;
                 i++;
             } while (i < g_PartySize);
         }
