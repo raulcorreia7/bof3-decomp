@@ -19,6 +19,10 @@ extern s16      D_800E4800;
 extern WorldPos D_80146954;
 extern u16      D_800E5500;
 extern u8       D_800E5502;
+/* Main-RAM flag bank whose bit 0x2C gates the trigger search, and the scene mode byte
+ * the trigger records are matched against. */
+extern u8       D_80144EB8[];
+extern u8       D_80145E98;
 
 /* One of the 64 slots at AREA_WORK, 0x34 bytes each. */
 typedef struct AreaSlot {
@@ -36,6 +40,12 @@ extern u8  D_801F6250[];
 extern u8  D_801F6278[];
 extern u8  D_801F627D[];
 extern u8  D_801F62EC[];
+/* The two 4-byte trigger records, one byte array per field so each read keeps its
+ * own address pair: arg0, arg1, the scene mode byte and the flag id to toggle. */
+extern u8  D_801F6B14[];
+extern u8  D_801F6B15[];
+extern u8  D_801F6B16[];
+extern u8  D_801F6B17[];
 extern u16 D_801F6B1C[];
 extern u8  D_801F6B28[];
 extern u8  D_801F6B30[];
