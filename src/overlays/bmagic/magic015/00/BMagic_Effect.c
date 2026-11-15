@@ -191,7 +191,30 @@ MATCH void func_801EFB90(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFBD8);
+MATCH void func_801EFBD8(void) {
+    PartyMember** actor_cell;
+    PartyMember*  record;
+    PartyMember*  work;
+    s32           heading;
+
+    actor_cell = &g_Battle.selected_actor;
+    func_800AF2B4((BattleRange*)*actor_cell, 0x60);
+    if (func_800AF66C((BattleRange*)*actor_cell, 0xC000) != 0) {
+        if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
+            func_800AFC98(2, 0);
+        }
+        SND_QueueSelectionEffect(0x203);
+        Battle_MarkDamaged(g_Battle.target_selector);
+        record       = g_Task;
+        heading      = ratan2(g_BattleEffectBattler->pos.x.fixed - record->pos.x.fixed, g_BattleEffectBattler->pos.y.fixed - record->pos.y.fixed);
+        work         = g_Task;
+        work->unk_0C = heading;
+        work->unk_14 = 0x40;
+        work->unk_09 = 0x10;
+        work->unk_20 = -8;
+        g_Task->header.step++;
+    }
+}
 
 INCLUDE_ASM(func_801EFCC4);
 
@@ -364,7 +387,35 @@ MATCH void func_801F0654(void) {
     }
 }
 
-INCLUDE_ASM(func_801F0770);
+MATCH void func_801F0770(void) {
+    PartyMember* work;
+    PartyMember* object;
+    PartyMember* flag;
+    u8           countdown;
+
+    func_800AF4A0((BattleRange*)g_Battle.selected_actor, 0x2000, 0);
+    work                     = g_Task;
+    countdown                = work->unk_09 + 1;
+    work->unk_09             = countdown;
+    work->pos.z.part.integer = (u16)work->pos.z.part.integer - 0xC0;
+    if (countdown == 0x14) {
+        object          = g_Task;
+        object->unk_48  = 0;
+        flag            = g_Task;
+        object->unk_14  = 0x48;
+        object->unk_20  = -8;
+        object->scale.x = 0x10000;
+        object->scale.y = 0x10000;
+        if (flag->param.unk_0B == 0) {
+            Battle_MarkDamaged(g_Battle.target_selector);
+            if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
+                func_800AFC98(2, 0);
+            }
+            SND_QueueSelectionEffect(0x203);
+        }
+        g_Task->header.step++;
+    }
+}
 
 MATCH void func_801F0864(void) {
     s32 speed;

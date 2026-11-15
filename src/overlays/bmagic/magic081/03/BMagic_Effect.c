@@ -25,7 +25,41 @@ MATCH void BMagic_UpdateRottenBreath(void) {
     }
 }
 
-INCLUDE_ASM(func_801EED44);
+MATCH void func_801EED44(void) {
+    PartyMember*  actor;
+    PartyMember*  work;
+    BattleEffect* effect;
+    PartyMember*  saved;
+    u8            index;
+    u16           pose;
+
+    for (index = 0; index < BMAGIC_EFFECT_COUNT; index++) {
+        BMAGIC_EFFECT_SLOTS[index].header.flags = 0;
+        BMAGIC_EFFECT_SLOTS[index].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[index].header.step  = 0;
+    }
+
+    actor                    = g_BattleEffectBattler;
+    work                     = g_Task;
+    work->pos.x.fixed        = actor->pos.x.fixed;
+    work->pos.y.fixed        = actor->pos.y.fixed;
+    pose                     = actor->pos.z.part.integer;
+    g_GfxPalettePending      = 1;
+    work->pos.z.part.integer = pose;
+
+    for (index = 0; index < 16; index++) {
+        MEM_PTR(u16, 0x8003AC00u)[index] = MEM_PTR(u16, 0x80036C00u)[index] | 0x8000;
+    }
+
+    effect                       = D_801EC2E0;
+    saved                        = g_Task;
+    MEM_PTR(u16, 0x8003AC00u)[0] = MEM_PTR(u16, 0x80036C00u)[0];
+    /* The member form moves the cell load after the palette loop; retail keeps it before. */
+    g_Task                       = FIELD(PartyMember*, effect, 0x74u);
+    Actor_SelectScript(1);
+    g_Task = saved;
+    saved->header.mode++;
+}
 
 MATCH void func_801EEE74(void) {
     PartyMember* saved;
@@ -38,7 +72,22 @@ MATCH void func_801EEE74(void) {
     g_Task = saved;
 }
 
-INCLUDE_ASM(func_801EEEDC);
+MATCH void func_801EEEDC(void) {
+    PartyMember* published;
+    PartyMember* saved;
+    u8           index;
+
+    index                               = Battle_AllocEffect(1, 0x42);
+    published                           = g_Task;
+    g_BattleEffects[index].header.mode  = 0;
+    saved                               = g_Task;
+    g_BattleEffects[index].target.party = published;
+    g_Task                              = D_801EC2E0->target.party;
+    Actor_StepAnimOnce();
+    g_Task              = saved;
+    saved->param.unk_0B = 1;
+    g_Task->header.mode++;
+}
 
 MATCH void func_801EEF88(void) {
     PartyMember* saved_work;

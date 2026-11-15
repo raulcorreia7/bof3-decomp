@@ -238,7 +238,20 @@ MATCH void func_801EF7B4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF844);
+MATCH void func_801EF844(void) {
+    PartyMember* work;
+
+    work         = g_Task;
+    work->unk_0C = 0x60000;
+    work->unk_10 = 0x60000;
+    FAKE_BARRIER(); /* FAKE: retail issues the two shared loads after both constant stores. */
+    work->pos.x.fixed = g_AreaScrollTargetX + work->unk_0C;
+    work->pos.y.fixed = g_AreaScrollTargetY + work->unk_10;
+    work->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+    work->unk_09      = 0x10;
+    work->unk_14      = 0x100;
+    g_Task->header.step++;
+}
 
 MATCH void func_801EF8C0(void) {
     PartyMember* work;
