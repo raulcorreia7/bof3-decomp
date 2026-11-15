@@ -15,6 +15,8 @@ NON_MATCHING void func_8015642C(u8* obj, s32 x, s32 y) {
     s16*      screen;
     POLY_FT4* prim;
     POLY_FT4* p;
+    const u8* top;
+    const u8* bottom;
 
     if ((*(u32*)obj >> 28) != 0) {
         order = 6;
@@ -34,8 +36,10 @@ NON_MATCHING void func_8015642C(u8* obj, s32 x, s32 y) {
     RotTransPers3(&D_1F800014[2], &D_1F800014[3], &D_1F800014[0], (s32*)screen, (s32*)(screen + 2), (s32*)(screen + 4), &depth, &flag);
     if (((u16)(screen[0] + 0x50) < 0x1E1U) && (D_1F800034[3] >= -0x14) && (D_1F800034[1] < 0x105)) {
         for (part = 0; part < g_SpriteCellPartCounts[index]; part++) {
-            prim = (POLY_FT4*)g_GfxPrimCursor;
-            p    = prim;
+            bottom = &g_SpriteCellBottomV[index * 2];
+            prim   = (POLY_FT4*)g_GfxPrimCursor;
+            top    = &g_SpriteCellTopV[index * 2];
+            p      = prim;
             for (j = 0; j < 2; j++) {
                 SetPolyFT4(p);
                 SetShadeTex(p, 0);
@@ -45,13 +49,15 @@ NON_MATCHING void func_8015642C(u8* obj, s32 x, s32 y) {
                 p->y3 = screen[3];
                 p->u0 = p->u2 = g_SpriteCellLeftU[index];
                 p->u1 = p->u3 = g_SpriteCellRightU[index];
-                p->v0 = p->v1 = g_SpriteCellTopV[index * 2 + j];
+                p->v0 = p->v1 = *top;
                 p->r0 = p->g0 = p->b0 = GFX_COLOR_NEUTRAL;
-                p->v2 = p->v3 = g_SpriteCellBottomV[index * 2 + j];
+                p->v2 = p->v3 = *bottom;
                 p->clut  = (g_SpriteCellCluts[index] >> 4) | 0x78C0;
                 p->tpage = getTPage(0, 0, 704, 256);
                 GFX_AddPrim(order, sizeof(POLY_FT4));
                 p++;
+                bottom++;
+                top++;
             }
             for (j = 0; j < 4; j++) {
                 D_1F800014[j].vx = D_8017F7A8[index * 6 + part * 2 + (j >> 1)] + *(s32*)(D_1F800000);
