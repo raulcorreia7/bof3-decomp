@@ -41,7 +41,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
         g_Game.party_size                              = 1;
         g_Game.members[0].slot                         = 0;
         g_BattlePartyBattlers[0].chr                   = g_Characters[0];
-        g_Game.members[CHAR_INDEX_RYU].character_index = 0;
+        g_Game.members[CHAR_INDEX_RYU].character_index = CHAR_INDEX_RYU;
         /* D_80145FBC stays an address symbol: VOL takes a plain lvalue and the member view changes the code. */
         VOL(u8, D_80145FBC) &= 0xFE;
         g_Task->unk_48 = 0;

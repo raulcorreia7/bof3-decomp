@@ -6,7 +6,18 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/func_801EEC20.h"
 
-INCLUDE_ASM(func_801EECA4);
+MATCH void func_801EECA4(void) {
+    D_801EFA9C.origin[0] = D_801EC2E0->target.party->pos.x.fixed + 0x14000;
+    D_801EFA9C.origin[1] = D_801EC2E0->target.party->pos.y.fixed;
+    D_801EFA9C.origin[2] = D_801EC2E0->target.party->pos.z.fixed + (0x2C0 << 16);
+    D_801EFA9C.radius    = 0;
+    D_801EFA9C.offset    = 0;
+    D_801EFA9C.angle     = 0;
+    func_801EF6B0();
+    g_Task->unk_09 = 0x3C;
+    g_Task->header.mode += 1;
+    SND_PlayCue(0x100);
+}
 
 MATCH void func_801EED60(void) {
     u8 timer;

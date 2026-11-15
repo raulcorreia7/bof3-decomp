@@ -7,7 +7,7 @@ MATCH void SYS_StartLogo(void) {
     u_long* ordering_table;
     u32*    exec_state;
 
-    SYS_LoadExec(s__LOGO_LOGO_EXE_1_80149800);
+    SYS_LoadExec(g_LogoExePath);
 
     exec_state  = &D_80143EA0;
     *exec_state = 0x801FF000;

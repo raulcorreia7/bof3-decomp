@@ -156,4 +156,9 @@ void func_801D97C8(s32 arg0, s32 arg1, s32 arg2);
 void func_801D9B80(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_801DA7A4(void);
 
+/* The cell the cursor points at: one 0x60-byte page of eight rows, twelve one-byte cells each. */
+static inline u8* Commu02_CursorCell(void) {
+    return D_801DAAAC + (D_801DAAA8 * 0x60) + ((s8)D_801DB0D8 * 0xC) + (s8)D_801DB0D4;
+}
+
 #endif

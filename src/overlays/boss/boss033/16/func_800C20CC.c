@@ -32,16 +32,14 @@ MATCH void func_800C20CC(void) {
         if (func_800AF5FC(&g_Game.members[*kind], 0x10000) != 0) {
             Actor_SelectScript(5);
             Battle_MarkDamaged(*kind);
-            work = TASK_BYTES;
-            work[2]++;
+            ((PartyMember*)g_Task)->header.step++;
         }
     } else {
         func_800AF2B4(&g_BattleEnemies[*kind * 0x118], 0x50);
         if (func_800AF5FC(&g_BattleEnemies[*kind * 0x118], 0x10000) != 0) {
             Actor_SelectScript(5);
             Battle_MarkDamaged(*kind);
-            work = TASK_BYTES;
-            work[2]++;
+            ((PartyMember*)g_Task)->header.step++;
         }
     }
     Actor_StepAnimOnce();

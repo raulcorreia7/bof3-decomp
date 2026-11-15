@@ -1,51 +1,34 @@
 #include "engine/slus/slus.h"
 
-/* 51.52%; branch@+0x000C: pointer setup and the 3-byte search loop diverge. */
-#ifdef NON_MATCHING
-NON_MATCHING u8 EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c) {
+MATCH u8 EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c) {
     s32       i;
-    u8        c;
-    u8*       q;
-    u8*       hp;
-    const u8* p;
     s32       j;
-    s32       val0;
-    s32       val1;
-    s32       val2;
-    s32       val3;
-    s32       val4;
-    s32       val5;
-    s32       val6;
-    s32       val7;
-    s32       val8;
-    s32       val9;
-    s32       val10;
-    s32       val11;
-    s32       val12;
-    s32       val13;
-    u8*       val14;
-    u8*       val15;
-    u8*       val16;
-    const u8* val17;
-    const u8* val18;
-    u8        tmp0;
-    u8        tmp1;
-    u8        tmp2;
-    const u8* val19;
-    const u8* val20;
+    s32       count;
+    s32       first;
+    s32       last;
+    s32       slot;
+    s32       found;
+    u8        member;
+    u8        result;
+    u8*       party;
+    u8*       loaded;
+    u8*       swap;
+    u8*       current;
+    const u8* archive;
 
-    hp              = &g_EmiLoadedCharacterIndex;
-    q               = D_1F800000;
-    *q              = member_a;
-    SP_REF(s8, 0x1) = member_b;
-    SP_REF(s8, 0x2) = member_c;
-    if (*hp != GAME_NONE) {
-        for (i = 0; i < 3; i++, q++) {
-            c = *q;
-            if (c != GAME_NONE) {
-                p = D_80181B34[0] + (*hp & 0x7F) * 3;
-                for (j = 0; j < 3; j++, p++) {
-                    if (c == *p) {
+    loaded        = &g_EmiLoadedCharacterIndex;
+    party         = D_1F800000;
+    *party        = member_a;
+    D_1F800000[1] = member_b;
+    D_1F800000[2] = member_c;
+    if (*loaded != GAME_NONE) {
+        for (i = 0; i < 3; i++, party++) {
+            member = *party;
+            if (member != GAME_NONE) {
+                current = &g_EmiLoadedCharacterIndex;
+                archive = D_80181B34[*current & EMI_LOADED_INDEX_MASK];
+                for (j = 0; j < 3; j++, archive++) {
+                    if (member == *archive) {
                         break;
                     }
                 }
@@ -58,90 +41,53 @@ NON_MATCHING u8 EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c) {
             return g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK;
         }
     }
-    val4 = 0;
-    val8 = 0;
+    i     = 0;
+    count = 0;
     do {
-        if (D_1F800000[val4] != GAME_NONE) {
-            val8 += 1;
+        if (D_1F800000[i] != GAME_NONE) {
+            count++;
         }
-        val4 += 1;
-    } while (val4 < 3);
-    val5  = 0;
-    val16 = D_1F800000;
+        i++;
+    } while (i < 3);
+    swap = &D_1F800000[4];
+    for (i = 0; i < 2; i++) {
+        for (j = i + 1; j < 3; j++) {
+            if (D_1F800000[j] < D_1F800000[i]) {
+                *swap         = D_1F800000[i];
+                D_1F800000[i] = D_1F800000[j];
+                D_1F800000[j] = *swap;
+            }
+        }
+    }
+    first = 0;
+    last  = 19;
+    slot  = 0;
+    found = GAME_NONE;
+    i     = 0;
     do {
-        val2 = val5 + 1;
-        if (val2 < 3) {
-            val14 = &D_1F800000[val5 + 1];
-            do {
-                tmp2 = *val16;
-                if ((u8)*val14 < tmp2) {
-                    D_1F800004 = tmp2;
-                    *val16     = *val14;
-                    *val14     = D_1F800004;
+        for (j = (u8)first; j < (u8)last; j++) {
+            if (D_1F800000[slot] == D_80181B34[j][i]) {
+                if (slot == (u8)count - 1) {
+                    found = j;
+                    break;
                 }
-                val2 += 1;
-                val14 += 1;
-            } while (val2 < 3);
-        }
-        val5 += 1;
-        val16 += 1;
-    } while (val5 < 2);
-    val11 = 0;
-    val7  = 0x13;
-    val9  = 0;
-    val10 = 0xFF;
-    val3  = 0;
-    val0  = 0 & BYTE_MASK;
-loop_24:
-    val6 = val10 & BYTE_MASK;
-    if (val0 < (val7 & BYTE_MASK)) {
-        val17 = &D_1F800000[val9];
-        val19 = (val0 * 3) + D_80181B34[0];
-    loop_26:
-        tmp1 = *val17;
-        if (tmp1 == *(val19 + val3)) {
-            if (val9 == ((val8 & BYTE_MASK) - 1)) {
-                val10 = val0;
-            } else {
-                val11 = val0;
-                if (val0 < 0x13) {
-                    val20 = (val0 * 3) + D_80181B34[0];
-                loop_31:
-                    if (tmp1 == *(val20 + val3)) {
-                        val20 += 3;
-                        val0 += 1;
-                        val19 += 3;
-                        if (val0 < 0x13) {
-                            goto loop_31; /* retail branch */
-                        }
+                first = j;
+                for (; j < 19; j++) {
+                    if (D_1F800000[slot] != D_80181B34[j][i]) {
+                        break;
                     }
                 }
-                val7 = val0;
-                val17 += 1;
-                val9 += 1;
-                goto block_34; /* retail branch */
-            }
-        } else {
-        block_34:
-            val0 += 1;
-            val19 += 3;
-            if (val0 < (val7 & BYTE_MASK)) {
-                goto loop_26; /* retail branch */
+                last = j;
+                slot++;
             }
         }
-        val6 = val10 & BYTE_MASK;
-    }
-    val3 += 1;
-    if (val6 == GAME_NONE) {
-        val0 = val11 & BYTE_MASK;
-        if (val3 >= 3) {
-            SYS_ShowFileNotFound();
-        } else {
-            goto loop_24; /* retail branch */
+        result = found;
+        i++;
+        if (result != GAME_NONE) {
+            goto done;
         }
-    }
-    return val6;
+    } while (i < 3);
+    SYS_ShowFileNotFound();
+done:
+    return result;
 }
-#else
-INCLUDE_ASM(EMI_FindPartyArchive);
-#endif

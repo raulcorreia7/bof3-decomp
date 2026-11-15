@@ -11,6 +11,11 @@ extern SVECTOR D_1F800014[];
 extern Actor   D_80147A58[];
 extern u8      D_801F4890[];
 extern u8      D_801F489C[];
+/* The facing step bytes the cell walk advances by: x and y, one byte per facing. */
+extern s8      D_80181B00[];
+extern s8      D_80181B01[];
+/* The cell grid's nibble table: four bytes per row, one nibble per cell. */
+extern u8      D_801F5C18[];
 /* g_SceneEventStep read unsigned: func_801F3EE8 switches on a byte load. */
 extern u8      g_SceneEventStep_u8[];
 
