@@ -29,6 +29,9 @@ extern u8 D_801FBF78[];
 extern u8        D_801FBF98[];
 /* D_801FBFB8 */
 extern SceneFunc g_SceneActorDispatch[];
+/* A byte the scene handlers store and reload. */
+extern u8        D_801FBFEC;
+extern Callback  jtbl_801F6E74[12];
 
 /* Reserve two actor slots and start the same pair of scripts on them; the second script sits 0x10 bytes after the first. */
 #define SCENE_START_SCRIPT_PAIR(script)                                 \

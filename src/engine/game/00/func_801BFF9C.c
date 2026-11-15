@@ -41,18 +41,18 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
         g_Game.party_size                              = 1;
         g_Game.members[0].slot                         = 0;
         g_BattlePartyBattlers[0].chr                   = g_Characters[0];
-        g_Game.members[CHAR_INDEX_RYU].character_index = 0;
+        g_Game.members[CHAR_INDEX_RYU].character_index = CHAR_INDEX_RYU;
         /* D_80145FBC stays an address symbol: VOL takes a plain lvalue and the member view changes the code. */
         VOL(u8, D_80145FBC) &= 0xFE;
         g_Task->unk_48 = 0;
         if (LOBU(g_GameRequestFlags) & 0x1) {
             if (g_Characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_YOUNG) {
                 id = 0x52;
-                goto set_mode; /* shared mode dispatch */
+                goto set_mode;
             }
             if (g_Characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_PAJAMAS) {
                 id = 0xCB;
-                goto set_mode; /* shared mode dispatch */
+                goto set_mode;
             }
             id = 0x27A;
             if (g_Characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_ADULT) {
@@ -63,7 +63,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
             g_GameFlags |= 0x1000;
         } else if (LOBU(g_GameRequestFlags) & 0x8) {
             id = 0x1FD;
-            if (g_Game.members[CHAR_ID_RYU_YOUNG].chr.character_id == 0) {
+            if (g_Game.members[CHAR_INDEX_RYU].chr.character_id == CHAR_ID_RYU_YOUNG) {
                 id = 0x47;
             }
             Area_SelectSceneRecord(id);

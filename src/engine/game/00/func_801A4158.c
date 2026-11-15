@@ -17,10 +17,10 @@ MATCH void func_801A4158(u8* cursor) {
                 cursor = func_801A4374(cursor, (s8*)&flag, &count);
             }
             if (count != 0) {
-                goto loop_forward; /* the stepper reported more steps */
+                goto loop_forward;
             }
             if (cursor[0] != 0xFE) {
-                goto loop_forward; /* the stream did not reach its terminator */
+                goto loop_forward;
             }
         }
     } else {
@@ -34,10 +34,10 @@ MATCH void func_801A4158(u8* cursor) {
                 cursor = func_801A4374(cursor, (s8*)&flag, &count);
             }
             if (count != 0) {
-                goto loop_backward; /* the stepper reported more steps */
+                goto loop_backward;
             }
             if (cursor[0] != 0xFE) {
-                goto loop_backward; /* the stream did not reach its terminator */
+                goto loop_backward;
             }
         }
     }

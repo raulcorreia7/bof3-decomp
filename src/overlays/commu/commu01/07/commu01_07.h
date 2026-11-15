@@ -31,6 +31,12 @@ ASSERT_OFFSET(CommuSelectionPair, value, 0x1);
 ASSERT_SIZE(CommuSelectionPair, 0x2);
 
 extern u8                 D_801455C9[];
+extern s8                 D_801455C2;
+extern u16                D_80010000[];
+extern u8                 D_801D0C04[12];
+extern char               D_801D0C10[];
+extern char               D_801D0C14[];
+extern u16                D_801D0C18[9];
 /* g_EmiOverlayHeader */
 extern OverlayHeader      g_EmiOverlayHeader;
 extern u16                D_801D4BB8[10];

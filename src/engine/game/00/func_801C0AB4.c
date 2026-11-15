@@ -1,7 +1,5 @@
 #include "game_00.h"
 
-/* The etc/game/00 units each declare the shared row base locally; no header owns it yet. */
-
 MATCH void func_801C0AB4(void) {
     u8*  counter;
     u8*  count;
@@ -16,7 +14,6 @@ MATCH void func_801C0AB4(void) {
     if (*counter == 0) {
         ((u8*)g_Game.members)[0] &= 0xBF;
         Party_ClearBattlerState(CHAR_INDEX_RYU);
-        /* Retail reads the counter before the flag update and stores it after (*counter += 1: 93.48%). */
         count_next = *counter + 1;
         g_Game.members[0].status.field.flags_12C.u8_value &= 0xFD;
         *counter = count_next;
@@ -27,7 +24,6 @@ MATCH void func_801C0AB4(void) {
             index = 1;
             if (index < g_Game.party_size) {
                 off   = BATTLE_PARTY_STRIDE;
-                /* The loop works through its own copy of the counter pointer (direct use: 81.88%). */
                 count = counter;
                 do {
                     if (((g_GameFlags >> *count) & 0x1) == 0) {

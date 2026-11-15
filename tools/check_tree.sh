@@ -48,11 +48,11 @@ local_locals() {
 	rm -f "$tmp" "$tmp2"
 }
 
-# Source rules on the lines a change adds, against the base ref.
+# Source rules on the lines a change adds, against the base ref. A line the formatter only re-aligns is not added.
 base=${1:-}
 if [ -n "$base" ]; then
 	bad=0
-	added=$(git diff -U0 "$base...HEAD" -- src include | grep -E '^\+[^+]' || true)
+	added=$(git diff -w -U0 "$base...HEAD" -- src include | grep -E '^\+[^+]' || true)
 	# A literal that the same file's removed lines already hold is moved or renamed, not new.
 	diff_file=$(mktemp)
 	git diff -U0 "$base...HEAD" -- src include >"$diff_file"
@@ -74,7 +74,7 @@ if [ -n "$base" ]; then
 	for spec in 'asm\("\$|register pin' 'goto L[0-9A-Fa-f]{4,}|decompiler label' \
 		'\bsp[0-9][0-9A-F]*\b|stack-offset name' '\bTASK_BYTES\b|\(\(u8 ?\*\) ?g_Task\)|task read by offset' \
 		'\bM2C_|m2c macro' '0x[0-9A-Fa-f]{7,8}|raw address'; do
-		out=$(rule "${spec%|*}" "${spec#*|}")
+		out=$(rule "${spec%|*}" "${spec##*|}")
 		if [ -n "$out" ]; then
 			printf '%s\n' "$out"
 			bad=1

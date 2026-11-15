@@ -26,13 +26,13 @@ MATCH s32 func_801C7518(s32 pos_x, s32 pos_y, s32 reach) {
         return 0;
     }
     if (tile >= index + 4) {
-        goto accept; /* a tile past the four neighbours is accepted */
+        goto accept;
     }
     if (px & HALF_MASK) {
-        goto px_case; /* frac_x != 0 */
+        goto px_case;
     }
     if (py & HALF_MASK) {
-        goto py_case; /* frac_x == 0, frac_y != 0 */
+        goto py_case;
     }
     if (tile != index) {
         return 0;
@@ -45,7 +45,7 @@ px_case:
         return 0;
     }
     if (tile == index + 1) {
-        goto accept; /* one column over */
+        goto accept;
     }
     if (tile != index + 3) {
         return 0;
@@ -54,10 +54,10 @@ px_case:
     return 1;
 py_case:
     if (tile == index + 2) {
-        goto accept; /* one row down */
+        goto accept;
     }
     if (tile == index + 3) {
-        goto accept; /* one row down, one column over */
+        goto accept;
     }
     return 0;
 }

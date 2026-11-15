@@ -1,10 +1,7 @@
 #include "battle_03.h"
 
-#if BOF3_USE_ASM
-INCLUDE_ASM(func_801D8DF8);
-#else
-
-MATCH void func_801D8DF8(s32 panel_x, s32 panel_y, u32 index) {
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D8DF8(s32 panel_x, s32 panel_y, u32 index) {
     s16 bar_border_y;
     s16 shadow_component;
     s32 status_text_y;
@@ -114,4 +111,6 @@ MATCH void func_801D8DF8(s32 panel_x, s32 panel_y, u32 index) {
     Battle_DrawLine(panel_right_x, (panel_y + 2), panel_right_x, panel_bottom_y, color_r, shadow_green, shadow_blue);
     Battle_DrawLine((panel_x + 2), panel_bottom_y, panel_right_x, panel_bottom_y, color_r, shadow_green, shadow_blue);
 }
+#else
+INCLUDE_ASM(func_801D8DF8);
 #endif

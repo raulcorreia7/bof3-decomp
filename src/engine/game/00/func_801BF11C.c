@@ -41,7 +41,6 @@ MATCH bool func_801BF11C(void) {
             }
         } else if (g_Task->param.unk_0B == 1) {
             if (func_801C2894(8) & BYTE_MASK) {
-                /* CLEANUP: typed palette indexing reverses the source addition operands. */
                 actor = g_Task;
                 for (j = 0; j < 32; j++) {
                     clut_offset    = actor->unk_05 << 6;

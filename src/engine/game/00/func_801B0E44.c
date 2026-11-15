@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 #ifdef NON_MATCHING
-NON_MATCHING s32 func_801B0E44(void) {
+NON_MATCHING u8 func_801B0E44(void) {
     u8   saved_dir;
     s32  diff;
     u8   divisor;

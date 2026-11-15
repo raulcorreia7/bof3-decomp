@@ -25,78 +25,45 @@ typedef struct SceneSlot {
  * kind-10 step, or looks its scene up in the loaded scene table and D_80183A70 and runs the kind step only on a
  * listed scene.
  */
+#define TASK_SLOT   ((EntitySlot*)g_Task)
+#define SCENE_SLOTS ((SceneSlot*)D_801459F4)
+
 #ifdef NON_MATCHING
 NON_MATCHING void func_80167E00(void) {
-    EntitySlot* entity;
-    u16*        list;
-    s32         index;
-    s32         slot;
-    u8          found;
-    u8          i;
-    s32         four;
-    u16         scene_id;
-    u32         next;
+    u8 i;
+    u8 slot;
+    u8 j;
 
-    index = 0;
-    four  = 4;
-    list  = D_80183A70;
-    do {
-        slot   = index & BYTE_MASK;
-        entity = (EntitySlot*)((u8*)g_Actors + slot * ACTOR_SIZE);
-        g_Task = entity;
-        if (entity->flags & ACTOR_FLAG_IN_USE) {
-            if (entity->unk_06 != 9) {
-                if (entity->flags_24 & 0x10) {
-                    entity->unk_29 = four;
-                } else {
-                    entity->unk_29 = g_AreaDrawMode;
-                }
-                goto block_7; /* retail branch */
-            }
-            if (g_AreaDrawMode == four) {
-                goto block_10; /* retail branch */
-            }
-        block_7:
-            entity = g_Task;
-            if (entity->unk_06 == 0xA) {
-                index += 1;
-                func_8015A944();
-                next = index & BYTE_MASK;
-            } else {
-                u16 end = 0xFFFF;
-
-                found = 0;
-                if (D_800E3800 != 0) {
-                    scene_id = entity->unk_2C;
-                    while ((u32)found < (u32)D_800E3800) {
-                        if (D_801459F4[found * 8 + 7] == scene_id) {
-                            break;
-                        }
-                        found += 1;
-                    }
-                }
-                if (list[0] != end) {
-                    scene_id = *(u16*)(D_801459F4 + found * 8);
-                    i        = 0;
-                    do {
-                        if (scene_id == list[i]) {
-                            index += 1;
-                            func_8014D290();
-                            next = index & BYTE_MASK;
-                            goto next_slot; /* retail branch */
-                        }
-                        i += 1;
-                    } while (list[i] != end);
-                }
-            block_10:
-                index += 1;
-                next = index & BYTE_MASK;
-            }
-        } else {
-            goto block_10; /* retail branch */
+    for (i = 0; i < 30; i++) {
+        g_Task = (Actor*)&g_Actors[i];
+        if (!(TASK_SLOT->flags & ACTOR_FLAG_IN_USE)) {
+            continue;
         }
-    next_slot:;
-    } while (next < 0x1E);
+        if (TASK_SLOT->unk_06 != 9) {
+            if (TASK_SLOT->flags_24 & 0x10) {
+                TASK_SLOT->unk_29 = 4;
+            } else {
+                TASK_SLOT->unk_29 = g_AreaDrawMode;
+            }
+        } else if (g_AreaDrawMode == 4) {
+            continue;
+        }
+        if (TASK_SLOT->unk_06 == 10) {
+            func_8015A944();
+            continue;
+        }
+        for (slot = 0; slot < D_800E3800; slot++) {
+            if (SCENE_SLOTS[slot].scene == TASK_SLOT->unk_2C) {
+                break;
+            }
+        }
+        for (j = 0; D_80183A70[j] != 0xFFFF; j++) {
+            if (SCENE_SLOTS[slot].id == D_80183A70[j]) {
+                func_8014D290();
+                break;
+            }
+        }
+    }
 }
 #else
 INCLUDE_ASM(func_80167E00);

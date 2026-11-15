@@ -444,7 +444,22 @@ MATCH void func_801F0D48(void) {
     g_Task->header.step += 1;
 }
 
-INCLUDE_ASM(func_801F0DB4);
+MATCH void func_801F0DB4(void) {
+    PartyMember* work;
+    s32          dz;
+    u8           timer;
+    func_800AF4A0((BattleRange*)g_BattleSelectedActor, 0x3800, 0);
+    work = g_Task;
+    dz   = work->unk_14 + work->unk_20;
+    work->unk_09 -= 1;
+    work->unk_14             = dz;
+    work->pos.z.part.integer = (u16)work->pos.z.part.integer + dz;
+    timer                    = g_Task->timer - 1;
+    g_Task->timer            = timer;
+    if (timer == 0) {
+        g_Task->header.step += 1;
+    }
+}
 
 INCLUDE_ASM(func_801F0E54);
 

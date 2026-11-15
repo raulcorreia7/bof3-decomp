@@ -19,7 +19,6 @@ MATCH u8 func_801C48FC(s32 pos_x, s32 pos_y, u8 wanted_code, u8 mask_cells) {
         }
     }
     if ((cells[0] == wanted_code) || (cells[1] == wanted_code) || (cells[2] == wanted_code) || (cells[3] == wanted_code)) {
-        /* @matching single failure exit keeps the four compares ahead of the tail. */
         goto fail;
     }
     if ((pos_x & HALF_MASK) == 0) {
@@ -37,7 +36,6 @@ MATCH u8 func_801C48FC(s32 pos_x, s32 pos_y, u8 wanted_code, u8 mask_cells) {
             }
         }
         if ((cells[0] == wanted_code) || (cells[1] == wanted_code)) {
-            /* @matching single failure exit. */
             goto fail;
         }
     }
@@ -56,7 +54,6 @@ MATCH u8 func_801C48FC(s32 pos_x, s32 pos_y, u8 wanted_code, u8 mask_cells) {
             }
         }
         if ((cells[0] == wanted_code) || (cells[1] == wanted_code)) {
-            /* @matching single failure exit. */
             goto fail;
         }
     }
@@ -68,7 +65,6 @@ MATCH u8 func_801C48FC(s32 pos_x, s32 pos_y, u8 wanted_code, u8 mask_cells) {
         cells[0] &= 0xF0;
     }
     if (cells[0] != wanted_code) {
-        /* @matching tail: the corner value selects the shared success exit. */
         goto found;
     }
 fail:

@@ -1,3 +1,78 @@
 #include "area140_13.h"
 
-INCLUDE_ASM(func_801F40C0);
+MATCH void func_801F40C0(void) {
+    s32  active;
+    u16  flags;
+    u16* held;
+    u16  input;
+    u16  low_buttons;
+    u8   button_index;
+
+    switch (g_SceneEventStep) {
+        case 0:
+            active = 1;
+            Game_ClearScriptActive();
+            func_801BE1B0(0);
+            flags                    = g_GameFlags;
+            g_Game.members[0].unk_48 = active;
+            g_GameFlags              = flags | 0x1270;
+            SYS_SetFlag(g_SceneEventFlags, 102);
+            g_SceneEventStep = active;
+            break;
+        case 1:
+            if (g_AreaCameraOffsetZ != 1664) {
+                g_AreaCameraOffsetZ += 64;
+            } else {
+                g_SceneEventStep = 2;
+            }
+            g_AreaCameraRefreshCount = 2;
+            break;
+        case 2:
+            if (g_GameStateIndex == GAME_REQUEST_IDLE) {
+                held                                          = &g_InputHeld;
+                input                                         = *held;
+                low_buttons                                   = input & 0x0FFF;
+                ((Area140InputSnapshot*)&D_1F800000)->buttons = input;
+                button_index                                  = input >> 12;
+                *held                                         = low_buttons;
+                low_buttons |= D_801F47C4[0x2B0 + button_index] << 12;
+                *held = low_buttons;
+            }
+            break;
+        case 5:
+            g_ScriptVars[3]  = 1;
+            g_SceneEventStep = 6;
+            break;
+        case 6:
+            if (g_AreaCameraOffsetZ != 0) {
+                g_AreaCameraOffsetZ -= 64;
+            } else {
+                g_SceneEventStep = 7;
+            }
+            Game_SetScriptActive();
+            g_AreaCameraRefreshCount = 2;
+            break;
+        case 7:
+            Game_ClearScriptActive();
+            flags                    = g_GameFlags;
+            g_Game.members[0].unk_48 = 0;
+            g_GameFlags              = flags & 0xED8F;
+            SYS_ClearFlag(g_SceneEventFlags, 102);
+            func_801B3CCC(0);
+            g_SceneEventMode = SCENE_EVENT_NONE;
+            g_SceneEventStep = 0;
+            break;
+        case 10:
+            Message_StartAreaMessage(1);
+            g_GameStateIndex = GAME_REQUEST_MESSAGE;
+            g_SceneEventStep = 11;
+            break;
+        case 11:
+            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
+                Game_ClearScriptActive();
+                g_SceneEventMode = SCENE_EVENT_NONE;
+                g_SceneEventStep = 0;
+            }
+            break;
+    }
+}

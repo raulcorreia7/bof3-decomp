@@ -1,3 +1,53 @@
 #include "batl_ovr_00.h"
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF180(s32 shade) {
+    SPRT* sprt;
+    s16   y;
+    s16   x;
+
+    y = 60;
+    x = 272;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(1, 0, 832, 256), 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+
+    sprt       = (SPRT*)g_GfxPrimCursor;
+    sprt->clut = GetClut(0, 0x1FA);
+    sprt->x0   = 16;
+    sprt->v0   = 96;
+    sprt->w    = 256;
+    sprt->y0   = y;
+    setRGB0(sprt, shade, shade, shade);
+    sprt->u0 = 0;
+    sprt->h  = 160;
+    SetSprt(sprt);
+    GFX_AddPrim(2, sizeof(SPRT));
+
+    sprt       = (SPRT*)g_GfxPrimCursor;
+    sprt->clut = GetClut(0, 0x1FA);
+    sprt->y0   = y;
+    sprt->u0   = 192;
+    setRGB0(sprt, shade, shade, shade);
+    sprt->x0 = x;
+    sprt->v0 = 0;
+    sprt->w  = 32;
+    sprt->h  = 96;
+    SetSprt(sprt);
+    GFX_AddPrim(2, sizeof(SPRT));
+
+    sprt       = (SPRT*)g_GfxPrimCursor;
+    sprt->clut = GetClut(0, 0x1FA);
+    sprt->y0   = 156;
+    sprt->u0   = 224;
+    setRGB0(sprt, shade, shade, shade);
+    sprt->x0 = x;
+    sprt->v0 = 0;
+    sprt->w  = 32;
+    sprt->h  = 64;
+    SetSprt(sprt);
+    GFX_AddPrim(2, sizeof(SPRT));
+}
+#else
 INCLUDE_ASM(func_801EF180);
+#endif

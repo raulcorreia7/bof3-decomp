@@ -433,8 +433,13 @@ MATCH void func_801F0960(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F09E0(void) {
+/* The effect record with the word at +0x08 as a member. */
+typedef struct EffectWords {
+    u8  pad_00[8];
+    s32 unk_08;
+} EffectWords;
+
+MATCH void func_801F09E0(void) {
     s16* angle_cell;
     u8   timer;
     s32  angle;
@@ -444,22 +449,18 @@ NON_MATCHING void func_801F09E0(void) {
     if (timer != 0) {
         return;
     }
-    angle_cell                       = &D_1F800004;
-    angle                            = D_801F22BC->unk_04 & 0xF;
-    *angle_cell                      = angle << 8;
-    D_1F800000.view.effect.params[0] = ((D_801F22BC->unk_04 >> 4) + 1) << 3;
-    D_801F22BC->unk_10               = g_BattleEffectBattler->pos.x.fixed + rsin(angle << 8) * D_1F800000.view.effect.params[0];
-    D_801F22BC->unk_14               = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * D_1F800000.view.effect.params[0];
-    D_801F22BC->unk_18               = g_BattleEffectBattler->pos.z.fixed + 0x800000;
-    D_801F22BC->slot                 = 0;
-    PARTY_MEMBER_WORD_08(D_801F22BC) = 0;
-    D_801F22BC->pad_06               = 0;
-    D_801F22BC->unk_07               = (u16)D_1F800000.view.effect.params[0];
+    angle_cell                         = &D_1F800004;
+    angle                              = D_801F22BC->unk_04 & 0xF;
+    *angle_cell                        = angle << 8;
+    D_1F800000_HALF                    = ((D_801F22BC->unk_04 >> 4) + 1) << 3;
+    D_801F22BC->unk_10                 = g_BattleEffectBattler->pos.x.fixed + rsin(*angle_cell) * D_1F800000_HALF;
+    D_801F22BC->unk_14                 = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * D_1F800000_HALF;
+    D_801F22BC->unk_18                 = g_BattleEffectBattler->pos.z.fixed + 0x800000;
+    ((EffectWords*)D_801F22BC)->unk_08 = D_801F22BC->slot = 0;
+    D_801F22BC->pad_06                                    = 0;
+    D_801F22BC->unk_07                                    = (u16)D_1F800000_HALF;
     D_801F22BC->header.step += 1;
 }
-#else
-INCLUDE_ASM(func_801F09E0);
-#endif
 
 MATCH void func_801F0B34(void) {
     s16* angle_cell;

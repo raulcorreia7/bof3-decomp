@@ -1,7 +1,6 @@
 #include "start_08.h"
 
 MATCH void func_801DB67C(void) {
-    s32 off;
     u8  i;
     u8  value;
     s16 offset;
@@ -11,9 +10,8 @@ MATCH void func_801DB67C(void) {
     value  = 4;
     offset = -0x96;
     for (; i < Party_CountOrder(PARTY_ORDER_FIELD); i++) {
-        off                             = (i + 4) * 0x24;
-        D_80148333[off]                 = value;
-        *(s16*)((u8*)&D_80148334 + off) = offset;
+        g_MenuPanelTasks[i + 4].state = value;
+        g_MenuPanelTasks[i + 4].pos.x = offset;
     }
     g_MenuPanelTasks[7].state  = 2;
     g_MenuPanelTasks[8].state  = 2;

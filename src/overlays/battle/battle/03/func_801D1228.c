@@ -9,25 +9,27 @@ NON_MATCHING void func_801D1228(void) {
     u8* work_row;
     u8* src;
     u8* dest;
-    s32 slot;
+    u8* living_count;
+    u8  slot;
     s32 index;
     s32 count;
     s32 row_offset;
     s16 flags;
 
     func_801DE804();
-    slot                        = 0;
-    g_Battle.living_party_count = 0;
+    slot          = 0;
+    living_count  = &g_Battle.living_party_count;
+    *living_count = 0;
     if (g_Battle.party_count != 0) {
         do {
             if (!(Battle_SlotIsBlocked(slot & BYTE_MASK) & BYTE_MASK)) {
-                g_Battle.living_party_count += 1;
+                *living_count += 1;
             }
             slot += 1;
         } while ((u32)(slot & BYTE_MASK) < (u8)g_Battle.party_count);
     }
-    work_row                      = (u8*)g_Game.members;
     *g_Battle.panel_widths        = 8;
+    work_row                      = (u8*)g_Game.members;
     g_BattleMessageSlot           = work_row;
     g_Battle.row_cursor           = 0;
     g_Battle.cursor.panel_entry   = 0;
@@ -70,19 +72,19 @@ NON_MATCHING void func_801D1228(void) {
             } else {
                 flags = (s16)(*(u16*)(D_80145F10 + row_offset) & 0xDFFF);
             }
-            *(u16*)(D_80145F10 + row_offset)                       = flags;
-            count                                                  = 0;
-            index                                                  = slot & BYTE_MASK;
-            src                                                    = work_row + 0x90 + index * BATTLE_PARTY_STRIDE;
-            g_Game.members[index].turn.damage_flags.value          = 0;
-            g_Game.members[index].turn.action_flags.volatile_value = 0;
-            g_Game.members[index].turn.command.type                = 0;
-            *(u8*)(&D_80145FB1 + index * 0x140)                    = 0;
-            *(u8*)(&D_80145FC6 + index * 0x140)                    = 0;
-            *(u8*)(&D_80145FC7 + index * 0x140)                    = 0;
-            *(u8*)(&D_80145FC8 + index * 0x140)                    = 0;
-            *(u8*)(&D_80145FC9 + index * 0x140)                    = 0;
-            count                                                  = 0;
+            *(u16*)(D_80145F10 + row_offset)                         = flags;
+            count                                                    = 0;
+            index                                                    = slot & BYTE_MASK;
+            src                                                      = work_row + 0x90 + index * BATTLE_PARTY_STRIDE;
+            g_Game.members[index].u.turn.damage_flags.value          = 0;
+            g_Game.members[index].u.turn.action_flags.volatile_value = 0;
+            g_Game.members[index].u.turn.command.type                = 0;
+            *(u8*)(&D_80145FB1 + index * 0x140)                      = 0;
+            *(u8*)(&D_80145FC6 + index * 0x140)                      = 0;
+            *(u8*)(&D_80145FC7 + index * 0x140)                      = 0;
+            *(u8*)(&D_80145FC8 + index * 0x140)                      = 0;
+            *(u8*)(&D_80145FC9 + index * 0x140)                      = 0;
+            count                                                    = 0;
             do {
                 *(work_row + 0x12C + index * 0x140 + count) = 0;
                 count += 1;

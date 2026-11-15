@@ -40,6 +40,9 @@ typedef struct SceneDot {
 
 ASSERT_SIZE(SceneDot, 10);
 
+/* The dot trail: D_801D40A8 points of 10 bytes at AREA_WORK + 0x5A00. */
+#define SCENE_DOT_TRAIL MEM_PTR(SceneDot, AREA_WORK + 0x5A00)
+
 /* One capture of the screen: where it sits and how large it is. */
 typedef struct SceneCapture {
     s16 x;
