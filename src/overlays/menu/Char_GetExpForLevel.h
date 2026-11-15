@@ -19,7 +19,7 @@ MATCH s32 Char_GetExpForLevel(s32 character, s32 level) {
     }
     base = (character & BYTE_MASK) * 0x318;
 again:
-    total += (s32) * (u16*)((u8*)&g_LevelGrowth + (base + ((count & BYTE_MASK) * 8)));
+    total += ((LevelGrowth*)((u8*)&g_LevelGrowth + base))[count & BYTE_MASK].exp;
     count += 1;
     if ((u32)(count & BYTE_MASK) < temp) {
         goto again;

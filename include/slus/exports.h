@@ -115,10 +115,6 @@ extern u8           g_SavedScriptVars[4];
 extern u8           D_80144955;
 /* D_80144E98 */
 extern u8           g_Scenario2Flags[];
-/* Per-character bits (1 << CharacterIndex): the first reward of the character's
- * special master was given (set in the master menu's completion step; the
- * start-menu layout arms a choice panel for each character whose bit is set). */
-extern u8           g_MasterRewardFlags;
 /* 0x80145xxx: pad state, shared text buffer and field words. */
 extern u16          D_80145048;
 extern u8           D_801454F2;
@@ -234,12 +230,12 @@ extern u16            g_AreaTileRemainderY;
 /* D_8014933E */
 extern u8             g_AreaDrawMode;
 extern u8             D_8014933F;
-extern const char     s__LOGO_LOGO_EXE_1_80149800[];
+extern const char     g_LogoExePath[];
 extern const char     D_80149814[];
 /* D_8017F504 */
-extern const void*    PTR_s_EXCEPTION_8017f504; /* 0x8017F504 */
+extern const void*    g_ExceptionTitle; /* 0x8017F504 */
 /* D_8017F508 */
-extern const void*    PTR_s_INTERRRUPT_8017f508[]; /* 0x8017F508 */
+extern const void*    g_ExceptionCauseNames[]; /* 0x8017F508 */
 /* D_8017F53C */
 extern const u8       g_SpriteSizes[16][2];
 /* D_8017F55C */

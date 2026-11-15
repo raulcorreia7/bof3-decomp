@@ -118,7 +118,110 @@ MATCH void func_801EF128(void) {
     PopMatrix();
 }
 
+#ifdef NON_MATCHING
+/* A segment's shade: the red, green and blue its first two vertices take, the
+ * blue of its third, and the steps the mode-3 and mode-4 flash adds to it. */
+typedef struct Magic114Shade {
+    u8 red;
+    u8 green;
+    u8 blue;
+    u8 tip_blue;
+    s8 red_step;
+    s8 green_step;
+    s8 blue_step;
+} Magic114Shade;
+
+/* The four shades by segment mode: bit 0 picks the brighter row of a pair and
+ * bit 2 the pair. */
+static const Magic114Shade shades[4] = {
+    {0x36, 0x36, 0xB0, 0xC0, 5, 4, -1}, /* modes 0 and 2 */
+    {0x40, 0x40, 0xC0, 0xC0, 5, 4, -2}, /* modes 1 and 3 */
+    {0x46, 0x46, 0xB0, 0xC0, 4, 3, -1}, /* modes 4 and 6 */
+    {0x50, 0x50, 0xC0, 0xC0, 4, 3, -2}, /* modes 5 and 7 */
+};
+
+NON_MATCHING void func_801EF280(s32* values) {
+    const Magic114Shade* shade;
+    POLY_G3*             prim;
+    long                 p;
+    long                 flag;
+    u32                  frame_count;
+    u32                  phase;
+    u8                   state;
+    u8                   mode;
+
+    mode = g_Task->param.unk_0B;
+    prim = (POLY_G3*)g_GfxPrimCursor;
+    SetPolyG3(prim);
+
+    D_1F800014[0].vx = g_Task->pos.x.fixed >> 9;
+    D_1F800014[0].vy = g_Task->pos.y.fixed >> 9;
+    D_1F800014[0].vz = 0;
+    D_1F800014[1].vx = g_Task->unk_0C >> 9;
+    D_1F800014[1].vy = g_Task->unk_10 >> 9;
+    D_1F800014[1].vz = 0;
+    D_1F800014[2].vx = 0;
+    D_1F800014[2].vy = 0;
+    if (mode < 4) {
+        D_1F800014[2].vz = g_Task->timer * 3;
+    } else {
+        D_1F800014[2].vz = -(g_Task->timer * 6) / 2;
+    }
+
+    values[mode] = RotAverage3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &p, &flag);
+
+    shade    = &shades[(mode & 1) | ((mode & 4) >> 1)];
+    prim->r0 = shade->red;
+    prim->g0 = shade->green;
+    prim->b0 = shade->blue;
+    prim->r1 = shade->red;
+    prim->g1 = shade->green;
+    prim->b1 = shade->blue;
+    prim->r2 = shade->red;
+    prim->g2 = shade->green;
+    prim->b2 = shade->tip_blue;
+
+    if (g_Task->header.mode == 2) {
+        frame_count = g_FrameCount;
+        if ((frame_count & 0x18) == 0) {
+            state = mode;
+            if (state >= 4) {
+                phase = frame_count & 6;
+                state &= 3;
+                if (state == (phase >> 1)) {
+                    setRGB0(prim, 0x80, 0x80, 0xC0);
+                    setRGB1(prim, 0x80, 0x80, 0xC0);
+                    setRGB2(prim, 0x80, 0x80, 0xC0);
+                }
+            }
+        }
+    }
+
+    if (g_Task->header.mode == 3 || g_Task->header.mode == 4) {
+        switch (mode) {
+            case 1:
+            case 2:
+            case 5:
+            case 6:
+                shade = &shades[(mode & 1) | ((mode & 4) >> 1)];
+                if ((mode & 1) != 0) {
+                    prim->r1 = shade->red + shade->red_step * g_Task->unk_09;
+                    prim->g1 = shade->green + shade->green_step * g_Task->unk_09;
+                    prim->b1 = shade->blue + shade->blue_step * g_Task->unk_09;
+                } else {
+                    prim->r0 = shade->red + shade->red_step * g_Task->unk_09;
+                    prim->g0 = shade->green + shade->green_step * g_Task->unk_09;
+                    prim->b0 = shade->blue + shade->blue_step * g_Task->unk_09;
+                }
+                break;
+        }
+    }
+
+    g_GfxPrimCursor += sizeof(POLY_G3);
+}
+#else
 INCLUDE_ASM(func_801EF280);
+#endif
 
 MATCH void func_801EF6A8(void) {
     PartyMember* src;

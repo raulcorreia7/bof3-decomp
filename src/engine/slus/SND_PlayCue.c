@@ -71,14 +71,14 @@ MATCH void SND_PlayCue(u16 cue_id) {
 
     if (D_8018232A == 0) {
         if (D_8018B3E4 == 1) {
-            goto initial_mode1; /* key modes 1..0 */
+            goto initial_mode1;
         } else if (D_8018B3E4 < 2) {
             if (D_8018B3E4 == 0) {
-                goto initial_mode0; /* key mode 0 */
+                goto initial_mode0;
             }
             return;
         } else if (D_8018B3E4 == 2) {
-            goto initial_mode2; /* key modes 2..0 */
+            goto initial_mode2;
         } else if (D_8018B3E4 != 3) {
             return;
         }
@@ -106,29 +106,29 @@ MATCH void SND_PlayCue(u16 cue_id) {
         D_8018232A = -1;
         D_8018B3F0 = D_8018B318;
         D_8018B3EC = D_8018B3E8;
-        goto queue_done; /* shared return */
+        goto queue_done;
     } else {
         if (D_8018B3F0 != D_8018B318) {
             if (D_8018B3E4 == 1) {
-                goto queue_standard1; /* key modes 1..0 */
+                goto queue_standard1;
             }
             if (D_8018B3E4 < 2) {
-                goto queue_standard_low; /* key mode 0 */
+                goto queue_standard_low;
             }
-            goto queue_standard23; /* key modes 2..3 */
+            goto queue_standard23;
         }
         if (D_8018B3EC > D_8018B3E8) {
             goto queue_array_guard; /* once per active cue */
         }
         switch (D_8018B3E4) {
             case 3:
-                goto queue_special3; /* key mode 3 */
+                goto queue_special3;
             case 2:
-                goto queue_special2; /* key modes 2..0 */
+                goto queue_special2;
             case 1:
-                goto queue_special1; /* key modes 1..0 */
+                goto queue_special1;
             case 0:
-                goto queue_special0; /* key mode 0 */
+                goto queue_special0;
             default:
                 return;
         }
@@ -161,29 +161,26 @@ queue_array_guard:
         return;
     }
     if (D_8018B3E4 == 1) {
-        goto queue_standard1; /* key modes 1..0 */
+        goto queue_standard1;
     }
     if (D_8018B3E4 >= 2) {
-        goto queue_standard23; /* key modes 2..3 */
+        goto queue_standard23;
     }
     if (D_8018B3E4 == 0) {
-        goto queue_standard0; /* key mode 0 */
+        goto queue_standard0;
     }
     return;
 
-/* NOTE: duplicate of the array-guard mode-0 tail above. GCC merges the two
- * blocks and keeps the array-guard copy; deleting it moves the shared tail and
- * breaks the byte match.
- */
+/* A duplicate of the array-guard mode-0 tail: deleting it moves the shared tail and breaks the match. */
 queue_standard_low:
     if (D_8018B3E4 == 0) {
-        goto queue_standard0; /* key mode 0 */
+        goto queue_standard0;
     }
     return;
 
 queue_standard23:
     if (D_8018B3E4 == 2) {
-        goto queue_standard2; /* key modes 2..0 */
+        goto queue_standard2;
     }
     if (D_8018B3E4 != 3) {
         return;

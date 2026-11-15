@@ -1,6 +1,7 @@
 #include "start_08.h"
 
-MATCH s32 func_801E8754(s32 character_index, s32 record_index) {
+/* func_801E8754 */
+MATCH s32 Item_AddWillpower(s32 character_index, s32 record_index) {
     Character* rec;
     u8         a;
     u8         b;

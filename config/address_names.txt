@@ -1,12 +1,12 @@
 # Identifiers that still carry an address (file, name). check_names.py only lets this shrink.
-include/slus/exports.h	PTR_s_EXCEPTION_8017f504
-include/slus/exports.h	PTR_s_INTERRRUPT_8017f508
-include/slus/exports.h	s__LOGO_LOGO_EXE_1_80149800
+include/slus/exports.h	g_ExceptionTitle
+include/slus/exports.h	g_ExceptionCauseNames
+include/slus/exports.h	g_LogoExePath
 include/sys/loader_tail.h	Rec8_80181E40
-src/engine/slus/SYS_ShowException.c	PTR_s_EXCEPTION_8017f504
-src/engine/slus/SYS_ShowException.c	PTR_s_INTERRRUPT_8017f508
-src/engine/slus/SYS_StartLogo.c	s__LOGO_LOGO_EXE_1_80149800
-src/engine/slus/data_80149800.c	s__LOGO_LOGO_EXE_1_80149800
+src/engine/slus/SYS_ShowException.c	g_ExceptionTitle
+src/engine/slus/SYS_ShowException.c	g_ExceptionCauseNames
+src/engine/slus/SYS_StartLogo.c	g_LogoExePath
+src/engine/slus/data_80149800.c	g_LogoExePath
 src/engine/slus/data_8017F53C.c	Rec_8017F5B4
 src/engine/slus/data_80181CA8.c	Rec8_80181E40
 src/engine/slus/slus.h	Rec_8017F5B4
