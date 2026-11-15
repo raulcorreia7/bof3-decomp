@@ -713,9 +713,12 @@ void        func_8009F644(void);
 void        func_8009F67C(void);
 void        func_8009F6B4(void);
 void        func_8009F758(void);
-void        func_8009F7EC(void);
-void        func_8009F814(void);
-void        func_8009F83C(void);
+/* func_8009F7EC */
+void        Battle_ThirdHpDamage(void);
+/* func_8009F814 */
+void        Battle_FullHpDamage(void);
+/* func_8009F83C */
+void        Battle_HalfHpDamage(void);
 /* func_8009F864 */
 void        Battle_InflictParalysis(void);
 void        func_8009F884(void);
@@ -846,7 +849,8 @@ u8          func_800A403C(u8 battler_index);
 /* func_800A41D8 */
 u8          Battle_InflictStatus(s32 status_mask);
 u8          func_800A4238(s32 input_mask);
-s16         func_800A4294(s32 input_kind);
+/* func_800A4294 */
+s16         Battle_RollHpDamage(s32 divisor);
 void        func_800A46C4(void);
 /* func_800A4700 */
 void        Battle_LoadDraArchive(void);
@@ -1152,10 +1156,10 @@ static inline void BattleSelectionDelta(s32 mode) {
 
     ctx = (BattleSelectionContext*)&g_Battle.target;
     if (ctx->sel < 3u) {
-        value                                                        = func_800A4294(mode);
+        value                                                        = Battle_RollHpDamage(mode);
         (*(volatile BattleTurn**)&g_Battle.target_record)->hp_change = (s16)(value - g_Game.members[ctx->sel].chr.stats.defense);
     } else {
-        value                                                        = func_800A4294(mode);
+        value                                                        = Battle_RollHpDamage(mode);
         (*(volatile BattleTurn**)&g_Battle.target_record)->hp_change = (s16)(value - ENEMY_COMBATANT(ctx->sel).stats.defense);
     }
 
