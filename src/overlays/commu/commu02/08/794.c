@@ -1882,18 +1882,18 @@ NON_MATCHING s8 func_801DA114(void) {
         switch (*cell) {
             case 1:
                 if (D_801DB0D0 < 4) {
-                    SND_PlayCue(0x103);
+                    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
                     D_801DB0D0 += 1;
                 } else {
-                    SND_PlayCue(0x107);
+                    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
                 }
                 break;
             case 2:
                 if (D_801DB0D0 != 0) {
-                    SND_PlayCue(0x103);
+                    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
                     D_801DB0D0 -= 1;
                 } else {
-                    SND_PlayCue(0x107);
+                    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
                 }
                 break;
             case 3:
@@ -1903,7 +1903,7 @@ NON_MATCHING s8 func_801DA114(void) {
                 g_InputPressed |= 0x800;
                 break;
             default:
-                SND_PlayCue(0x103);
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
                 D_801DB080[D_801DB0D0] = *cell;
                 if (D_801DB0D0 < 4) {
                     D_801DB0D0 += 1;
@@ -1914,14 +1914,14 @@ NON_MATCHING s8 func_801DA114(void) {
 
     if ((g_InputPressed & 0x20) || (repeated & 0xA)) {
         if (D_801DB0D0 < 4) {
-            SND_PlayCue(0x101);
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
             D_801DB0D0 += 1;
         }
         return 0;
     }
     if ((g_InputPressed & 0x80) || (repeated & 0x5)) {
         if (D_801DB0D0 != 0) {
-            SND_PlayCue(0x101);
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
             D_801DB0D0 -= 1;
         }
         return 0;
@@ -1930,7 +1930,7 @@ NON_MATCHING s8 func_801DA114(void) {
         return 0;
     }
 
-    SND_PlayCue(0x104);
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
     count = 5;
     for (i = 4; i >= 0 && D_801DB080[i] == 0xFF; i--) {
         count -= 1;
