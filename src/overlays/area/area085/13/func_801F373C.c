@@ -2,7 +2,7 @@
 
 MATCH void func_801F373C(void) {
     g_ScriptState->unk_07 = ((s32)(g_Task->pos.x.fixed + TO_COORD(-22)) >> 0xF);
-    func_801C5DFC(7);
+    Area_SetFacingOffsetX(7);
     g_AreaCameraHeightStep = 0;
     g_Task->vz             = 0;
     g_ScriptState->flag_00 |= 0x40;

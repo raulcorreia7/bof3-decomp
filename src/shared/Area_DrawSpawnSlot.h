@@ -14,16 +14,13 @@ MATCH void Area_DrawSpawnSlot(AreaSpawnSlot* slot) {
 
     GFX_AddDitheredDrawMode(2u, GetTPage(0, 1, 0x3C0, 0));
     size[0] = slot->radius_14;
-    func_801AFFD8(&slot->pos, size, scale);
+    Game_ProjectWorldPoint(&slot->pos, size, scale);
     Area_ProjectPoint(&slot->pos.x.fixed, &screen);
     radius = scale[0] + (g_FrameCount & 1);
     angle  = 0;
     do {
-        primitive     = GFX_BeginPolyG3(1);
-        primitive->x0 = screen.vx;
-        primitive->y0 = screen.vy;
-        primitive->x1 = screen.vx + ((radius * rcos((u16)angle)) >> 0xC);
-        primitive->y1 = screen.vy + ((radius * rsin((u16)angle)) >> 0xC);
+        primitive = GFX_BeginPolyG3(1);
+        setXY2(primitive, screen.vx, screen.vy, screen.vx + ((radius * rcos((u16)angle)) >> 0xC), screen.vy + ((radius * rsin((u16)angle)) >> 0xC));
         angle += 128;
         primitive->x2 = screen.vx + ((radius * rcos((u16)angle)) >> 0xC);
         primitive->y2 = screen.vy + ((radius * rsin((u16)angle)) >> 0xC);

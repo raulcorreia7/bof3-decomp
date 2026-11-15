@@ -43,5 +43,5 @@ MATCH s32 func_8019C244(void) {
             }
             break;
     }
-    return func_8019C344(x, y) & BYTE_MASK;
+    return Area_GetVx(x, y) & BYTE_MASK;
 }

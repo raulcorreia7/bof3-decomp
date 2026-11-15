@@ -1,5 +1,5 @@
 #include "area007_13.h"
 
 MATCH s32 func_801F2C04(void) {
-    func_801C601C(0);
+    Area_StartScrollRoute(0);
 }

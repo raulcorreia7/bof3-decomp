@@ -5,7 +5,7 @@ MATCH void func_801AD218(void) {
     volatile Actor* area;
 
     work = g_Task;
-    if (ACTOR_IN_USE(g_ActorSlots[work->param.actor_slot])) {
+    if (ACTOR_IN_USE(g_SpawnedActors[work->param.actor_slot])) {
         return;
     }
     if ((work->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {

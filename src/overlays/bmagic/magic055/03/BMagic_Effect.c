@@ -37,7 +37,7 @@ MATCH void func_801EECCC(void) {
     }
     *MEM_PTR(u16, 0x8003AC00u) = 0;
     g_GfxPalettePending        = 1;
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionEffect(0x100);
     Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
     g_Task->unk_09 = 1;
     g_Task->timer  = 1;
@@ -59,10 +59,23 @@ MATCH void func_801EECCC(void) {
 
 #include "overlays/bmagic/func_801EF1B8.h"
 
-INCLUDE_ASM(func_801EF240);
+#include "overlays/bmagic/func_801EF240.h"
+
+MATCH void func_801EF240(void) {
+    POLY_GT4* prim;
+    long      depth;
+    long      flag;
+    s32       i;
+    s32       tpage;
+    s32       x;
+    s32       y;
+    s32       phase;
+
+    BMAGIC_DRAW_RING_BAND(2);
+}
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
-INCLUDE_ASM(func_801EF7B0);
+#include "overlays/bmagic/func_801EF7B0.h"
 
 #include "overlays/bmagic/func_801EF9E4.h"

@@ -6,7 +6,43 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/Effect_DrawActor.h"
 
-INCLUDE_ASM(func_801EECCC);
+MATCH void func_801EECCC(void) {
+    u32          i;
+    u8           slot;
+    s8           anchor;
+    PartyMember* actor;
+    PartyMember* task;
+    PartyMember* work;
+    u16*         src;
+    u16*         dst;
+
+    actor          = g_Battle.selected_actor;
+    g_Task->facing = actor->facing;
+    task           = g_Task;
+    WorldPos_Copy(&task->pos, &actor->pos);
+    task->param.unk_0B = 0;
+    for (i = 0, anchor = 1; i < 6; i++) {
+        slot                               = Battle_AllocEffect(1, 22);
+        work                               = g_Task;
+        g_BattleEffects[slot].arg.unk_09   = anchor;
+        g_BattleEffects[slot].target.party = work;
+        g_Task->param.unk_0B += 1;
+        anchor += 6;
+    }
+    i   = 1;
+    dst = BATTLE_EFFECT_PALETTE_ENTRY_1;
+    src = BATTLE_PALETTE_SOURCE_ENTRY_1;
+    for (; i < 16; i++) {
+        *dst++ = *src++ | 0x8000;
+    }
+    g_BattleEffectPalette[0] = 0;
+    g_GfxPalettePending      = 1;
+    Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
+    SND_QueueSelectionEffect(0x100);
+    g_Task->unk_09 = 1;
+    g_Task->timer  = 1;
+    g_Task->header.mode += 1;
+}
 
 #include "overlays/bmagic/func_801EEE3C.h"
 
@@ -23,10 +59,23 @@ INCLUDE_ASM(func_801EECCC);
 
 #include "overlays/bmagic/func_801EF1B8.h"
 
-INCLUDE_ASM(func_801EF240);
+#include "overlays/bmagic/func_801EF240.h"
+
+MATCH void func_801EF240(void) {
+    POLY_GT4* prim;
+    long      depth;
+    long      flag;
+    s32       i;
+    s32       tpage;
+    s32       x;
+    s32       y;
+    s32       phase;
+
+    BMAGIC_DRAW_RING_BAND(1);
+}
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
-INCLUDE_ASM(func_801EF7B0);
+#include "overlays/bmagic/func_801EF7B0.h"
 
 #include "overlays/bmagic/func_801EF9E4.h"

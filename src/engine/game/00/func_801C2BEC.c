@@ -32,7 +32,7 @@ MATCH void func_801C2BEC(void) {
         }
     }
     if (index != GAME_NONE) {
-        func_801C2E34(index);
+        Char_SetCharacterId(index);
         func_801C308C(table.cells[index]);
     }
 }

@@ -55,14 +55,14 @@ MATCH void Shop_DrawItems(MenuListPanel* panel) {
         if (index == panel->unk_0C) {
             if (color == 0) {
                 func_801AEA80((u16)(panel->pos.x + SHOP_ITEM_LIST_ICON_X), (u16)(y + SHOP_ITEM_LIST_TEXT_DY), D_801E5E0C[(u8)icon], SHOP_ITEM_ICON_DIMMED);
-                UI_DrawText(panel->pos.x + SHOP_ITEM_LIST_NAME_X, y, MENU_SHADE_DIM, (u8)func_801AF20C(resource), resource);
+                UI_DrawText(panel->pos.x + SHOP_ITEM_LIST_NAME_X, y, MENU_SHADE_DIM, (u8)Game_ReadCommand(resource), resource);
                 UI_DrawGlyphString(panel->pos.x + SHOP_ITEM_LIST_PRICE_X, y + SHOP_ITEM_LIST_TEXT_DY, MENU_SHADE_DIM, g_UiFormatBuffer);
             }
             y -= SHOP_ITEM_LIST_SELECTED_RISE;
         }
 
         func_801AEA80((u16)(panel->pos.x + SHOP_ITEM_LIST_ICON_X), (u16)(y + SHOP_ITEM_LIST_TEXT_DY), D_801E5E0C[(u8)icon], dim);
-        UI_DrawText(panel->pos.x + SHOP_ITEM_LIST_NAME_X, y, color, (u8)func_801AF20C(resource), resource);
+        UI_DrawText(panel->pos.x + SHOP_ITEM_LIST_NAME_X, y, color, (u8)Game_ReadCommand(resource), resource);
         UI_DrawGlyphString(panel->pos.x + SHOP_ITEM_LIST_PRICE_X, y + SHOP_ITEM_LIST_TEXT_DY, color, g_UiFormatBuffer);
         if (index == panel->unk_0C) {
             y += SHOP_ITEM_LIST_SELECTED_RISE;

@@ -17,5 +17,5 @@ MATCH void func_801E4C7C(void) {
     } else {
         work->unk_09 = count - 1;
     }
-    func_801E3160();
+    Battle_IsEnemyBlockedOnce();
 }

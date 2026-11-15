@@ -43,7 +43,7 @@ extern LineEndpoints D_801F4B44[];
 /* Draws a line between two world points. */
 void func_801F2E10(s32* first, s32* second);
 
-#define AREA168_ENTRY_TABLE(type, offset, index) WORLD04_ENTRY_TABLE(D_801F4B2C, type, offset, index)
+#define AREA168_ENTRY_TABLE(type, offset, index) AREA_PAYLOAD_FIELD(D_801F4B2C, type, offset, index)
 /* The payload's data after the last function; the per-state handler tables
  * start at 0xC. */
 extern u8 D_801F4B2C[];

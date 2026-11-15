@@ -17,10 +17,18 @@ extern Callback      D_801F040C[];
 extern Callback D_801F0440[];
 extern u8       D_801F0454[];
 extern u8       D_801F0470[];
-void            func_801EECF8(void);
-void            func_801EF340(void);
-void            func_801EF994(void);
-void            func_801EFA5C(void);
-void            func_801F03B0(void);
+
+/* The four sparkle wedges of func_801EFA5C: the radius and angle of their two outer corners. */
+extern s16 D_801F041C[];
+extern s16 D_801F0424[];
+extern s16 D_801F042C[];
+extern s16 D_801F0434[];
+/* The phase each wedge adds to the effect tick. */
+extern u8  D_801F043C[];
+void       func_801EECF8(void);
+void       func_801EF340(void);
+void       func_801EF994(void);
+void       func_801EFA5C(void);
+void       func_801F03B0(void);
 
 #endif

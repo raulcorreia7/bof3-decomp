@@ -60,6 +60,8 @@ typedef struct Magic150SpanPair {
 
 ASSERT_SIZE(Magic150SpanPair, 0x38);
 ASSERT_OFFSET(Magic150SpanPair, current, 0x1C);
+/* The beam segment the beam draw walks along its path. */
+extern Magic150SpanPair D_801EFAF8;
 
 void func_801EF254(void);
 u8   func_801EF8EC(void);

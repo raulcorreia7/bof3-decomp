@@ -49,7 +49,7 @@ NON_MATCHING void Battle_DrawTitledFrame(s32 x, s16 y, s32 unused_a, s32 unused_
     style_text = s_BattleFrameTitles[style];
     y16 += 7;
     y16 <<= 0x10;
-    UI_DrawText((s16)(x16 - (((func_801AF20C(style_text) & BYTE_MASK) * 4) - 70)), (s16)(y16 >> 16), 0, 0x10U, style_text);
+    UI_DrawText((s16)(x16 - (((Game_ReadCommand(style_text) & BYTE_MASK) * 4) - 70)), (s16)(y16 >> 16), 0, 0x10U, style_text);
     x16 <<= 0x10;
     x16  = x16 >> 0x10;
     temp = y_word >> 0x10;

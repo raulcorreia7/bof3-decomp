@@ -9,7 +9,7 @@ MATCH void func_800A15DC(void) {
     volatile u8* battlerPtr;
     u32          battler;
 
-    func_800A3F28();
+    Battle_MarkDamageApplied();
     battlerPtr = &g_Battle.active_battler;
     if ((battler = LOBU(*battlerPtr)) < 3U) {
         g_Game.members[battler].u.turn.action_flags.value |= COMBATANT_FLAG_MEDITATION;

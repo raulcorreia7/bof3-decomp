@@ -76,7 +76,7 @@ loop_6:
     UI_DrawWindow((val0->pos.x + 3) & HALF_MASK, (val0->pos.y + 3) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_TOP_HEIGHT, 0, (s32)*flags);
     UI_DrawWindow((val0->pos.x + 3) & HALF_MASK, (val0->pos.y + 146) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_BOTTOM_HEIGHT, 0, (s32)*flags);
     level = &D_801ED608;
-    UI_DrawText((s16)(val0->pos.x - (((func_801AF20C(level) & BYTE_MASK) * 4) - 78)), (s16)(val0->pos.y + 7), 0, 0x10U, level);
+    UI_DrawText((s16)(val0->pos.x - (((Game_ReadCommand(level) & BYTE_MASK) * 4) - 78)), (s16)(val0->pos.y + 7), 0, 0x10U, level);
     UI_DrawSpriteRun((s16)val0->pos.x, (s16)val0->pos.y, &D_801ED5F0, 1);
     UI_DrawSpriteRun((s16)val0->pos.x, (s16)val0->pos.y, &D_801ED5FC, 1);
     do {

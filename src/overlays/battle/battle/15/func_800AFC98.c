@@ -29,6 +29,6 @@ MATCH void func_800AFC98(s32 effect_0, s32 effect_1) {
     } else if (BATTLE_IS_SCRIPTED()) {
         Battle_PlayEnemyCue(*ENEMY_COMBATANT(kind).unk_E8);
     } else {
-        SND_QueueSelectionFx((ENEMY_COMBATANT(kind).kind * 2u) | 0x600u);
+        SND_QueueSelectionEffect((ENEMY_COMBATANT(kind).kind * 2u) | 0x600u);
     }
 }

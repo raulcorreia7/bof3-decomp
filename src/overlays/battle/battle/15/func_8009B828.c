@@ -11,17 +11,11 @@ MATCH void func_8009B828(void) {
     if (g_AreaCameraMoving == 0) {
         func_801DAAE4();
         i = 0;
-        /* FAKE: keeps i = 0 beside the call so it fills the jal delay slot;
-         * pure-C best 91.25%, without this barrier 97.47%. */
-        FAKE_BARRIER();
         while (i < g_Battle.party_count) {
             if (!Battle_SlotIsBlocked(i)) {
                 flags                         = g_Game.members[i].facing;
                 g_Game.members[i].header.mode = 2;
                 g_Game.members[i].facing      = flags ^ 0x2;
-                /* FAKE: keeps the slot argument move in the jal delay slot;
-                 * pure-C best 91.25%, without this barrier 93.75%. */
-                FAKE_BARRIER();
                 func_801DDFEC(i);
                 func_801DD14C(i);
             }

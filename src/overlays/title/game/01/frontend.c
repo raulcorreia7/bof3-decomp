@@ -15,7 +15,7 @@ MATCH void Game_RunTitle(void) { /* func_801D0C04 */
     func_8014BA04();
 
     for (;;) {
-        CallbackWait(1);
+        SYS_ThreadWait(1);
         UI_HandleStartButton();
         s_TitleStates[g_UiTitleState]();
         UI_UpdateBannerFade();
@@ -33,7 +33,7 @@ MATCH void Game_BeginTitle(void) { /* func_801D0C90 */
     EMI_LoadArchive(EMI_SLOT_DEMO);
 
     while (!EMI_IsReady()) {
-        CallbackWait(1u);
+        SYS_ThreadWait(1u);
     }
 
     GFX_ResetPalette();

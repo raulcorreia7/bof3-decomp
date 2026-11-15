@@ -32,9 +32,9 @@ MATCH void func_801E72F4(void) {
 
     func_8014D290();
     if (!ACTOR_IN_USE(*g_BattleEffectBattler)) {
-        func_801E5988();
+        Effect_Reset();
     }
     if (g_Battle.phase.mode != BATTLE_MODE_COMMANDS) {
-        func_801E5988();
+        Effect_Reset();
     }
 }

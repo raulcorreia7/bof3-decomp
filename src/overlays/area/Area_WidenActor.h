@@ -8,7 +8,7 @@ MATCH void Area_WidenActor(void) {
     Actor* reload;
     u8     timer;
 
-    Actor_CenterOnScreen();
+    Actor_SetScreenOrigin();
 
     work        = g_Task;
     timer       = work->timer;

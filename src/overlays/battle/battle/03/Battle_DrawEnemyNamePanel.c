@@ -19,7 +19,7 @@ MATCH void Battle_DrawEnemyNamePanel(s32 x, s32 y, s32 slot) {
     r       = PSX_COLOR_R(color) << 3;
     g       = PSX_COLOR_G(color) << 3;
     b       = PSX_COLOR_B(color) << 3;
-    func_801D9C80(x, new_var, 8, 1);
+    Battle_DrawWindowTile(x, new_var, 8, 1);
     func_801D9DBC((x + 6), ((new_var = y) + 0xB), 9, 0, 0);
     func_801D9AB4(x, y, 2, 1);
     func_801D9AB4(x, (y + 0x13), 3, 1);

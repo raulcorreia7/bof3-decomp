@@ -5,11 +5,13 @@
 #include "area/map.h"
 #include "sys/actor.h"
 #include "psx/psyq.h"
+#include "gfx/palette.h"
+#include "gfx/prim.h"
 
 /* The resident game overlay's functions the other images call, in address order. */
 
 /* func_8019601C */
-u8    Actor_FindFreeSlot(void);
+u8    Actor_FindFreeSpawned(void);
 /* func_80196070 */
 void  Actor_Clear(void);
 /* func_801960C0 */
@@ -20,32 +22,12 @@ void  Actor_ClearAll(void);
 void  Actor_Create(u8* request);
 /* func_8019625C */
 void  func_8019625C(void);
-/* func_8019651C */
-s32   GFX_AllocPaletteFade(void* owner, s32 red, s32 green, s32 blue, s32 fade_flags);
-/* func_80196670 */
-void  GFX_FreePaletteFade(u8 index);
-/* func_80196718 */
-void  GFX_FreePaletteFadeTarget(void* owner);
-/* func_80196784 */
-u8    GFX_MarkPaletteCells(u8 mode, u8 value, u8 search);
-/* func_801968BC */
-u8    GFX_AllocPaletteCell(u8 mode);
-/* func_80196B20 */
-u8    GFX_FindPaletteCell(u8 value);
-/* func_80196B9C */
-void  GFX_UploadPaletteRows(void);
-/* func_80196C8C */
-void  GFX_UpdatePaletteAnimations(void);
-/* func_80196CF0 */
-u8    GFX_StartPaletteAnimation(u8* owner, u8* source_table);
-/* func_80196D84 */
-void  GFX_StepPaletteAnimation(u8 palette_slot);
 /* func_80196F78 */
-void  Game_UpdateCampMenu(void);
+void  Game_RunCampMenu(void);
 /* func_80196FFC */
 void  Game_LoadCampMenu(void);
 /* func_80197068 */
-void  Game_UpdateMain(void);
+void  Game_RunMain(void);
 /* func_801970EC */
 void  Game_NewGame(void);
 /* func_80199440 */
@@ -57,7 +39,7 @@ void  Menu_SlidePanelLeft(void);
 /* func_8019A0E4 */
 void  Actor_DispatchAll(void);
 /* func_8019A194 */
-u8    Game_FindAreaHandler(void);
+u8    Game_FindArea(void);
 /* func_8019ABB0 */
 void  func_8019ABB0(s32 mode);
 /* func_8019F75C */
@@ -99,7 +81,7 @@ void  Game_DispatchScenarioRecord(void* object);
 /* func_801A78F8 */
 void  Scene_RequestChapterAdvance(void);
 /* func_801A7A34 */
-s8    Game_CallScenarioHandler(u16 handler_arg0, u16 handler_arg1);
+s8    Game_CallScenario(u16 handler_arg0, u16 handler_arg1);
 /* func_801A7BF0 */
 void  Game_UpdateScene(void);
 /* func_801A7C2C */
@@ -108,8 +90,9 @@ void  Scene_ResetEventState(void);
 void  Scene_UpdateEvent(void);
 /* func_801A86D4 */
 void  Scene_DispatchObject(void* record);
+/* Area_MoveActorRoute */
 /* func_801ABBA8 */
-void  func_801ABBA8(void* sub, s32 route);
+void  Area_MoveActorRoute(void* sub, s32 route);
 /* func_801AC1DC */
 void  func_801AC1DC(s32* out, u8 selector);
 /* func_801AE214 */
@@ -122,8 +105,9 @@ void  func_801AEA80(s32 sprite_x, s32 sprite_y, s32 texture_index, s32 shade_mod
 void  func_801AEBA0(s16 frame_x, s16 frame_y, s16 frame_width, s16 frame_height, s32 mode_pair_flag);
 /* func_801AED54 */
 void  UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
+/* Game_ReadCommand */
 /* func_801AF20C */
-s32   func_801AF20C(u8* command_stream);
+s32   Game_ReadCommand(u8* command_stream);
 /* UI_GetSpriteRect */
 /* func_801AF270 */
 u8*   UI_GetSpriteRect(u8 sprite_id, u8 flags);
@@ -131,6 +115,8 @@ u8*   UI_GetSpriteRect(u8 sprite_id, u8 flags);
 void  UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
 /* func_801AF390 */
 s32   func_801AF390(s16 x, s16 y, u8* table, s32 flags);
+/* func_801AF390 */
+void  UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 /* func_801AF5B0 */
 u8    func_801AF5B0(s32 item_category, s32 character_index, s32 ability_kind);
 /* func_801AFD10 */
@@ -140,39 +126,46 @@ void* Area_SetCameraMatrix(void* out_matrix);
 /* func_801AFF04 */
 void  Area_ProjectPoint(s32* pos, DVECTOR* screen_xy);
 /* func_801AFF64 */
-void  Matrix_SetIdentity(MATRIX* matrix);
+void  MATH_SetIdentity(MATRIX* matrix);
 /* func_801AFF90 */
-s16   func_801AFF90(Point2D* origin, Point2D* first_point, Point2D* second_point);
+s16   func_801AFF90(Point2s* origin, Point2s* first_point, Point2s* second_point);
+/* Game_ProjectWorldPoint */
 /* func_801AFFD8 */
-void  func_801AFFD8(const void* world_position, void* screen_xy, void* projection);
+void  Game_ProjectWorldPoint(const void* world_position, void* screen_xy, void* projection);
+/* Actor_UpdateMovement */
 /* func_801B0DFC */
-void  func_801B0DFC(void);
+void  Actor_UpdateMovement(void);
 /* func_801B0E44 */
 u8    func_801B0E44(void);
 /* func_801B2D00 */
 s32   Actor_GetTurnStep(s32 target_facing);
+/* Game_GetInput */
 /* func_801B59B4 */
-bool  func_801B59B4(void);
+bool  Game_GetInput(void);
 /* func_801B5E58 */
 void  Game_RewardZenny(s32 zenny);
 /* func_801B6610 */
 bool  func_801B6610(s16 map_x, s16 map_y);
 /* func_801BC400 */
-void  Area_ResetScene(void);
+void  Area_UpdateIdleActor(void);
 /* func_801BDAB8 */
 void  func_801BDAB8(void);
 /* func_801BDB7C */
 u8    Party_CountOrder(u8 order);
 /* func_801BDD58 */
 u8    func_801BDD58(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* record);
+/* Actor_FindInRange */
 /* func_801BDE14 */
-s8    func_801BDE14(s32 pos_x, s32 pos_y, s32 range_mode);
+s8    Actor_FindInRange(s32 pos_x, s32 pos_y, s32 range_mode);
+/* Game_GetPartySize */
 /* func_801BE0C0 */
-s8    func_801BE0C0(s32 pos_x, s32 pos_y, s32 range_mode);
+s8    Game_GetPartySize(s32 pos_x, s32 pos_y, s32 range_mode);
 /* func_801BE1B0 */
 s32   func_801BE1B0(u32 index);
 /* func_801BFE34 */
 void  func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode);
+/* func_801C1254 */
+void  Party_LoadMemberSprite(s32 character_id, s32 party_slot);
 /* func_801C1400 */
 void  Party_BuildBattlers(u32 order);
 /* Party_LoadPalettes */
@@ -183,8 +176,9 @@ s32   Party_JoinMember(s32 char_id);
 /* Party_RemoveMember */
 /* func_801C1ABC */
 void  Party_RemoveMember(s32 character_id);
+/* Scene_RunScenario */
 /* func_801C1DF0 */
-void  func_801C1DF0(s32 handler_index);
+void  Scene_RunScenario(s32 handler_index);
 /* func_801C1E3C */
 void  func_801C1E3C(s32 handler_index);
 /* func_801C2438 */
@@ -201,10 +195,12 @@ void  func_801C329C(void);
 void  func_801C3598(void);
 /* func_801C4C48 */
 void  func_801C4C48(void);
+/* Area_SetFacingOffsetX */
 /* func_801C5DFC */
-void  func_801C5DFC(u8 route_index);
+void  Area_SetFacingOffsetX(u8 route_index);
+/* Area_StartScrollRoute */
 /* func_801C601C */
-void  func_801C601C(s8 route_index);
+void  Area_StartScrollRoute(s8 route_index);
 /* func_801C7A54 */
 void  Battle_StartScripted(u8 mode_byte);
 

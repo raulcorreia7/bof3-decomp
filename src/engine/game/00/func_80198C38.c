@@ -2,9 +2,9 @@
 
 MATCH void func_80198C38(u8 wait_steps) {
     do {
-        CallbackWait(1);
+        SYS_ThreadWait(1);
         if (WINDOW_EFFECT_IDLE() && wait_steps == 0) {
-            CallbackWait(1);
+            SYS_ThreadWait(1);
             break;
         }
         Game_UpdateMenuFrame();

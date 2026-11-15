@@ -168,9 +168,43 @@ MATCH void func_801D11A4(void) {
     SCENE_RED_GRADIENT_FADE(timer, 0x10, 4);
 }
 
-INCLUDE_ASM(func_801D1218);
+MATCH void func_801D1218(WorldPos* pos, s16 y, s32 mode) {
+    DVECTOR  screen;
+    DVECTOR  point;
+    DVECTOR  size;
+    DVECTOR  scale;
+    MATRIX   camera;
+    POLY_G3* primitive;
+    s32      angle;
+    s32      i;
 
-INCLUDE_ASM(Scene_DrawScanBar);
+    GFX_AddDitheredDrawMode(7u, GetTPage(0, 1, 0x2C0, 0x100));
+    Area_SetCameraMatrix(&camera);
+    Area_ProjectPoint((s32*)pos, &screen);
+    size.vx = size.vy = y;
+    Game_ProjectWorldPoint((s32*)pos, &size, &scale);
+    scale.vx += g_FrameCount & 1;
+    point.vx = screen.vx + scale.vx;
+    point.vy = screen.vy;
+    angle    = 0;
+    i        = 0;
+    do {
+        primitive = GFX_BeginPolyG3(0);
+        setXY2(primitive, screen.vx, screen.vy, point.vx, point.vy);
+        angle += 128;
+        point.vx      = screen.vx + (((s16)scale.vx * rcos((u16)angle)) >> 12);
+        point.vy      = screen.vy + (((s16)scale.vx * rsin((u16)angle)) >> 12);
+        primitive->x2 = point.vx;
+        primitive->y2 = point.vy;
+        setRGB0(primitive, (mode & 4) << 5, (mode & 2) << 6, (mode & 1) << 7);
+        setRGB1(primitive, 0, 0, 0);
+        setRGB2(primitive, 0, 0, 0);
+        GFX_AddPrim(7u, sizeof(POLY_G3));
+        i++;
+    } while ((i & BYTE_MASK) < 32U);
+}
+
+#include "overlays/scenario/Scene_DrawScanBar.h"
 
 #include "overlays/scenario/Scene_ClearScanBars.h"
 
@@ -178,6 +212,47 @@ INCLUDE_ASM(Scene_DrawScanBar);
 
 INCLUDE_ASM(Scene_UpdateScanBars);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D17A0(s32 x, s32 y, s32 mode) {
+    POLY_G3* primitive;
+    s16      point_x;
+    s16      point_y;
+    s32      angle;
+    s32      frame_offset;
+    u8       color;
+    u8       i;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 0x380, 0x100), 0);
+    GFX_AddPrim(7u, sizeof(DR_MODE));
+
+    frame_offset = (g_FrameCount & 1) << 2;
+    angle        = 0x800;
+    point_x      = 0xA0 + frame_offset + (((s16)x * rcos((u16)angle)) >> 12);
+    point_y      = 0xF0 + frame_offset + (((s16)y * rsin((u16)angle)) >> 12);
+    color        = mode >> 2;
+    i            = 0;
+    do {
+        primitive = (POLY_G3*)g_GfxPrimCursor;
+        SetPolyG3(primitive);
+        SetSemiTrans(primitive, 1);
+        primitive->x0 = 0xA0;
+        primitive->y0 = 0xF0;
+        primitive->x1 = point_x;
+        primitive->y1 = point_y;
+        angle += 0x40;
+        point_x       = 0xA0 + frame_offset + (((s16)x * rcos((u16)angle)) >> 12);
+        point_y       = 0xF0 + frame_offset + (((s16)y * rsin((u16)angle)) >> 12);
+        primitive->x2 = point_x;
+        primitive->y2 = point_y;
+        setRGB0(primitive, mode, color, color);
+        setRGB1(primitive, 0, 0, 0);
+        setRGB2(primitive, 0, 0, 0);
+        GFX_AddPrim(7u, sizeof(POLY_G3));
+        i++;
+    } while ((i & BYTE_MASK) < 32U);
+}
+#else
 INCLUDE_ASM(func_801D17A0);
+#endif
 
 #include "overlays/scenario/Scene_DrawRedGradient.h"

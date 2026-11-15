@@ -37,6 +37,6 @@ MATCH void Shop_DrawEquipment(s16 x, s16 y, u8 record_index) {
     for (row = 0; row < MENU_EQUIPMENT_ROW_COUNT; row++) {
         row_y = (u16)(y + (row * MENU_EQUIPMENT_ROW_HEIGHT + MENU_EQUIPMENT_FIRST_ROW_Y));
         func_801AEA80((s32)(u16)(x + MENU_EQUIPMENT_ROW_ICON_X), (s32)(u16)(row_y + MENU_EQUIPMENT_ROW_ICON_DY), g_MenuEquipRowIcons[row], 0);
-        UI_DrawText((s16)(x + MENU_EQUIPMENT_ROW_NAME_X), (s16)row_y, 0, func_801AF20C((u8*)objects[row]) & BYTE_MASK, (u8*)objects[row]);
+        UI_DrawText((s16)(x + MENU_EQUIPMENT_ROW_NAME_X), (s16)row_y, 0, Game_ReadCommand((u8*)objects[row]) & BYTE_MASK, (u8*)objects[row]);
     }
 }

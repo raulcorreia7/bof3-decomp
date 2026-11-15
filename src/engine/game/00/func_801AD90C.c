@@ -5,7 +5,7 @@ MATCH void func_801AD90C(void) {
     Actor* spad;
 
     spad = g_Task;
-    if (!ACTOR_IN_USE(g_ActorSlots[spad->param.actor_slot])) {
+    if (!ACTOR_IN_USE(g_SpawnedActors[spad->param.actor_slot])) {
         msgId = s_SceneMessages[spad->unk_04];
         if (msgId != 0) {
             TEXT_Format(&g_TextVariables[0], D_80195F0C, msgId);

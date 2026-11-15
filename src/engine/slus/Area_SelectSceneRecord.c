@@ -34,8 +34,8 @@ MATCH bool Area_SelectSceneRecord(s32 wanted_id) {
                 g_Task->unk_2C = D_801459F4[i * 8 + 7];
                 g_Task->state_70.word &= mask;
                 /* FAKE: non-const byte view of the flag table; a const read lets the address loads fold. */
-                g_Task->state_70.word = ((u8*)D_80181484)[palette_offset];
-                g_Task->unk_2B        = ((u8*)D_80181484)[palette_offset + 1];
+                g_Task->state_70.word = ((u8*)g_SceneFlagPairs)[palette_offset];
+                g_Task->unk_2B        = ((u8*)g_SceneFlagPairs)[palette_offset + 1];
                 return false;
             }
             i++;

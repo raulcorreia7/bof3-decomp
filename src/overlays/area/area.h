@@ -11,14 +11,18 @@
 #include "sys/actor.h"
 #include "menu/inventory.h"
 #include "menu/panel.h"
-#include "menu/party.h"
-#include "slus/facing.h"
+#include "scenario/party.h"
+#include "common/facing.h"
 #include "scenario/runtime.h"
 #include "common/util.h"
 
+/* One cell of a payload's data tables: `offset` is the table's byte offset and
+ * `index` the byte offset of the row. */
+#define AREA_PAYLOAD_FIELD(payload, type, offset, index) (*(type*)&(payload)[(offset) + (index)])
+
 /* The first payload word of a world area overlay, at its load address: the module id the
  * loader checks against the archive TOC (@source: wiki:formats/emi#code-overlays). */
-#define AREA_MODULE_ID(area) (52 + (area))
+#define AREA_MODULE_ID(area)                             (52 + (area))
 
 /* One panel marker row selected by a controller mask: the mask, the panel
  * step it selects and an unused byte. */
@@ -79,7 +83,7 @@ void            func_801F31EC(void);
 void            func_801F3244(void);
 void            func_801F3264(void);
 /* func_801F3400 */
-void            Actor_CenterOnScreen(void);
+void            Actor_SetScreenOrigin(void);
 /* func_801F3360 */
 void            Actor_ZoomOut(void);
 void            func_801F33A8(void);
@@ -115,7 +119,7 @@ extern u8       D_801F5364[];
 
 extern Callback D_801F5804[];
 
-/* Ask func_8015CB18 what the party battler in `slot` finds at its position: aim the task at the battler, look the party slot's selection up in `table`, run the probe of `kind`, and store a found result in the battler's unk_0B. */
+/* Ask Actor_ClaimSlot what the party battler in `slot` finds at its position: aim the task at the battler, look the party slot's selection up in `table`, run the probe of `kind`, and store a found result in the battler's unk_0B. */
 static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
     PartyMember* battler;
     u8           index;
@@ -129,7 +133,7 @@ static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
     y         = g_Game.members[slot].unk_30.signed_half;
     x         = g_Game.members[slot].unk_2E.signed_half;
     selection = table[index];
-    result    = func_8015CB18(kind, 0, selection, x, y);
+    result    = Actor_ClaimSlot(kind, 0, selection, x, y);
     if ((u8)result != GAME_NONE) {
         battler               = (PartyMember*)g_Task;
         battler->param.unk_0B = (u8)result;

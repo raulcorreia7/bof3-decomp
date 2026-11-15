@@ -10,11 +10,11 @@ MATCH void func_800B0410(void) {
             panel->x.signed_half += 0x20;
             return;
         }
-        func_80158E20();
+        Menu_ClearPanel();
         return;
     }
     if (panel->x.signed_half < -0xBD) {
-        func_80158E20();
+        Menu_ClearPanel();
         return;
     }
     panel->x.signed_half -= 0x20;

@@ -24,7 +24,7 @@ MATCH void func_801B744C(void) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
         g_Task->timer -= 1;
         g_Task->vz += g_Task->gravity;
-        func_801B0DFC();
+        Actor_UpdateMovement();
         g_Task->unk_03 = 2;
     }
 }

@@ -8,7 +8,7 @@ MATCH void Area_RequestRestartOnContextChange(void) {
     Actor* work;
     u8     step;
 
-    Actor_CenterOnScreen();
+    Actor_SetScreenOrigin();
     if (g_GameEntryState != 1) {
         work = g_Task;
         step = work->param.unk_0B;

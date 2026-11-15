@@ -60,11 +60,62 @@ MATCH void func_801EEEC4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEF80);
+MATCH void func_801EEF80(void) {
+    s16* radius;
+    u8   timer;
+
+    radius = &D_801EFA9C.radius;
+    *radius -= 0x40;
+    D_801EFA9C.offset -= 96;
+    func_801EF254();
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (timer == 0) {
+        g_Task->header.mode += 1;
+    }
+}
 
 #include "shared/Effect_StartPlaying.h"
 
-INCLUDE_ASM(func_801EF040);
+MATCH void func_801EF040(void) {
+    POLY_F4* prim;
+    DVECTOR  screen;
+    s32      pos[3];
+    u16      angle;
+    u8       i;
+
+    angle = 0;
+    for (i = 0; i < 16; i++) {
+        prim = (POLY_F4*)g_GfxPrimCursor;
+        SetPolyF4(prim);
+        SetSemiTrans(prim, 1);
+        pos[0] = D_801EFA9C.origin[0];
+        pos[1] = D_801EFA9C.origin[1] + ((D_801EFA9C.radius * rcos(angle)) >> 4);
+        pos[2] = D_801EFA9C.origin[2] + ((D_801EFA9C.radius * rsin(angle)) << 4);
+        Area_ProjectPoint(pos, &screen);
+        setXY0(prim, screen.vx, screen.vy);
+        pos[0] = D_801EFA9C.origin[0] + TO_COORD(16);
+        Area_ProjectPoint(pos, &screen);
+        prim->x1 = screen.vx;
+        prim->y1 = screen.vy;
+        angle += 0x100;
+        pos[0] = D_801EFA9C.origin[0];
+        pos[1] = D_801EFA9C.origin[1] + ((D_801EFA9C.radius * rcos(angle)) >> 4);
+        pos[2] = D_801EFA9C.origin[2] + ((D_801EFA9C.radius * rsin(angle)) << 4);
+        Area_ProjectPoint(pos, &screen);
+        prim->x2 = screen.vx;
+        prim->y2 = screen.vy;
+        pos[0]   = D_801EFA9C.origin[0] + TO_COORD(16);
+        Area_ProjectPoint(pos, &screen);
+        prim->x3 = screen.vx;
+        prim->y3 = screen.vy;
+        setRGB0(prim, 128, 0, 0);
+        /* FAKE: retail tests the whole return register, as for a call with no prototype; the shared s16 prototype adds a sign extension. */
+        if (((s32 (*)(Point2s*, Point2s*, Point2s*))func_801AFF90)((Point2s*)&prim->x0, (Point2s*)&prim->x1, (Point2s*)&prim->x2) < 0) {
+            GFX_AddPrim(1, sizeof(POLY_F4));
+        }
+    }
+}
 
 MATCH void func_801EF254(void) {
     GFX_AddDrawMode(GetTPage(0, 1, 0x2C0, 0x100) & HALF_MASK);
@@ -89,15 +140,9 @@ MATCH void func_801EF324(Magic150SpanPair* pair) {
     POLY_G4* quad;
     LINE_F2* line;
 
-    quad     = GFX_BeginPolyG4(1);
-    quad->x0 = pair->previous.screen[1].vx;
-    quad->y0 = pair->previous.screen[1].vy;
-    quad->x1 = pair->previous.screen[0].vx;
-    quad->y1 = pair->previous.screen[0].vy;
-    quad->x2 = pair->current.screen[1].vx;
-    quad->y2 = pair->current.screen[1].vy;
-    quad->x3 = pair->current.screen[0].vx;
-    quad->y3 = pair->current.screen[0].vy;
+    quad = GFX_BeginPolyG4(1);
+    setXY4(quad, pair->previous.screen[1].vx, pair->previous.screen[1].vy, pair->previous.screen[0].vx, pair->previous.screen[0].vy, pair->current.screen[1].vx, pair->current.screen[1].vy,
+           pair->current.screen[0].vx, pair->current.screen[0].vy);
     setRGB0(quad, 64, 64, 0);
     setRGB1(quad, 0, 0, 0);
     setRGB2(quad, 64, 64, 0);
@@ -115,15 +160,41 @@ MATCH void func_801EF324(Magic150SpanPair* pair) {
     line = GFX_CURSOR(LINE_F2);
     SetLineF2(line);
     SetSemiTrans(line, 1);
-    line->x0 = pair->previous.screen[1].vx;
-    line->y0 = pair->previous.screen[1].vy;
-    line->x1 = pair->current.screen[1].vx;
-    line->y1 = pair->current.screen[1].vy;
+    setXY2(line, pair->previous.screen[1].vx, pair->previous.screen[1].vy, pair->current.screen[1].vx, pair->current.screen[1].vy);
     setRGB0(line, 32, 32, 0);
     GFX_AddPrim(1, sizeof(LINE_F2));
 }
 
-INCLUDE_ASM(func_801EF4E0);
+/* Draws the beam along its path: 128 segments, each 1/32 turn further round the path
+ * angle and a jittered step further along x. */
+MATCH void func_801EF4E0(void) {
+    s32 x;
+    s32 step;
+    u16 angle;
+    u16 i;
+
+    func_801AFE18();
+    angle                     = D_801EFA9C.angle;
+    x                         = D_801EFA9C.origin[0];
+    D_801EFAF8.current.pos[0] = x;
+    D_801EFAF8.current.pos[1] = D_801EFA9C.origin[1] + ((D_801EFA9C.offset * rcos(angle)) >> 4);
+    D_801EFAF8.current.pos[2] = D_801EFA9C.origin[2] + ((D_801EFA9C.offset * rsin(angle)) << 4);
+    BMagic_ProjectSpan(&D_801EFAF8.current);
+    step = 0x1000;
+    i    = 0;
+    do {
+        D_801EFAF8.previous = D_801EFAF8.current;
+        angle += 0x80;
+        x += step;
+        D_801EFAF8.current.pos[0] = x + (rand() & 0xFFF) * 16 - 0x8000;
+        D_801EFAF8.current.pos[1] = D_801EFA9C.origin[1] + ((D_801EFA9C.offset * rcos(angle)) >> 4);
+        D_801EFAF8.current.pos[2] = D_801EFA9C.origin[2] + ((D_801EFA9C.offset * rsin(angle)) << 4);
+        step += 0x40;
+        i++;
+        BMagic_ProjectSpan(&D_801EFAF8.current);
+        func_801EF324(&D_801EFAF8);
+    } while (i < 0x80);
+}
 
 MATCH void func_801EF6B0(void) {
     u8 i;
@@ -145,11 +216,8 @@ MATCH void func_801EF790(s32 x, s32 y, s16 radius, u8 colour, u8 alpha) {
     u16      next;
 
     for (angle = 0; angle < ONE; angle += 0x100) {
-        prim     = GFX_BeginPolyG3(1);
-        prim->x0 = x;
-        prim->y0 = y;
-        prim->x1 = x + FIXED_MUL(radius, rcos(angle));
-        prim->y1 = y + FIXED_MUL(radius, rsin(angle));
+        prim = GFX_BeginPolyG3(1);
+        setXY2(prim, x, y, x + FIXED_MUL(radius, rcos(angle)), y + FIXED_MUL(radius, rsin(angle)));
         next     = angle + 0x100;
         prim->x2 = x + FIXED_MUL(radius, rcos(next));
         prim->y2 = y + FIXED_MUL(radius, rsin(next));

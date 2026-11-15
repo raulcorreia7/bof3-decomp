@@ -32,7 +32,8 @@ MATCH void Actor_BeginScript(s32 script_index, s32 position) {
         flags = g_Task->active_flags;
         if (flags & 0x2) {
             flags &= 0xFC;
-            Party_LoadMemberSprite((u8)g_Task->unk_64, (g_Task->unk_68 / 80) & BYTE_MASK, script_index);
+            /* FAKE: the retail call passes script_index as a third argument the real prototype lacks. */
+            ((void (*)(s32, s32, s32))Party_LoadMemberSprite)((u8)g_Task->unk_64, (g_Task->unk_68 / 80) & BYTE_MASK, script_index);
             g_Task->active_flags = g_Task->active_flags | flags;
         }
         g_Task->unk_4B = selector;
@@ -40,7 +41,7 @@ MATCH void Actor_BeginScript(s32 script_index, s32 position) {
     if (g_Task->active_flags & 0x1) {
         Actor_SelectSprite(g_Task->unk_4B);
     } else {
-        table = (u8*)g_ScriptTable;
+        table = (u8*)g_Scripts;
         table += ((s32*)table)[g_Task->unk_2C];
         g_Task->script = table + ((u16*)table)[g_Task->unk_4B];
     }

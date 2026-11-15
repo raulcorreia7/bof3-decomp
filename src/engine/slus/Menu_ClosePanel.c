@@ -6,6 +6,6 @@
 MATCH void Menu_ClosePanel(void) {
     if ((UI_UpdateLayout() & BYTE_MASK) == 0) {
         g_MenuPanelMode = 0;
-        func_80158E20();
+        Menu_ClearPanel();
     }
 }

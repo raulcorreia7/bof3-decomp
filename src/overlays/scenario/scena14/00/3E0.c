@@ -22,7 +22,9 @@ INCLUDE_ASM(func_801F7028);
 
 INCLUDE_ASM(func_801F7960);
 
-INCLUDE_ASM(func_801F7A18);
+#include "overlays/scenario/Scene_SpawnActor.h"
+
+MATCH bool Scene_SpawnActor(u8 type, s16 angle_x, s16 angle_y, s16 angle_z, u8 layer, s32 scene_step){SCENE_SPAWN_ACTOR(D_801FC4C0)}
 
 MATCH void func_801F7B5C(void) {
     SYS_DISPATCH_BYTE(D_801FC424, g_SceneState.state_04);
@@ -170,7 +172,47 @@ MATCH void func_801FB5F8(void* entity) {
     actor->unk_7E = actor->unk_7E + 1;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING s32 func_801FB648(s32 x, s32 y) {
+    s32 map_x;
+    s32 map_y;
+    u8  cell_count;
+
+    if (g_GameAreaId == 0x94 && D_80143F03 == 4 && !SYS_TestFlag(g_SceneFlags, 0x10) && x == 0x738000) {
+        map_y = y >> 16;
+        if ((u32)(map_y - 0x36) < 2) {
+            Game_SetScriptActive();
+            D_80146874 = 4;
+            D_80146875 = 0;
+            return 1;
+        }
+    }
+
+    if (g_GameAreaId == 0xBF && SYS_TestFlag(g_SceneFlags, 5)) {
+        map_x      = x >> 16;
+        map_y      = y >> 16;
+        cell_count = Area_GetCellCode(map_x, map_y) == 0xA6;
+        if ((u16)x != 0 && Area_GetCellCode((s16)(map_x + 1), map_y) == 0xA6) {
+            cell_count++;
+        }
+        if ((u16)y != 0 && Area_GetCellCode(map_x, (s16)(map_y + 1)) == 0xA6) {
+            cell_count++;
+        }
+        if ((u16)x != 0 && (u16)y != 0 && Area_GetCellCode((s16)(map_x + 1), (s16)(map_y + 1)) == 0xA6) {
+            cell_count++;
+        }
+        if (cell_count != 0) {
+            Game_SetScriptActive();
+            D_80146874 = 2;
+            D_80146875 = 20;
+            return 1;
+        }
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM(func_801FB648);
+#endif
 
 INCLUDE_ASM(func_801FB84C);
 
@@ -190,7 +232,24 @@ MATCH void Scene_SetPartyRyuAdultMomoPeco(void) {
     SCENE_SET_PARTY_NO_RESTAGE(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_PECO);
 }
 
-INCLUDE_ASM(func_801FBE10);
+MATCH void func_801FBE10(void) {
+    u8 ids[3];
+    u8 slot;
+
+    for (slot = 0; slot < 3; slot++) {
+        if (g_Game.members[slot].chr.character_id != CHAR_ID_RYU_ADULT && g_Game.members[slot].chr.character_id != CHAR_ID_REI) {
+            D_80144908[0] = g_Game.members[slot].chr.character_id;
+        }
+        ids[slot] = g_Game.members[slot].chr.character_id;
+    }
+    for (slot = 0; slot < 3; slot++) {
+        Party_RemoveMember(ids[slot]);
+    }
+    EMI_LoadPartyArchives(CHAR_ID_WHELP, CHAR_ID_BLANK, CHAR_ID_BLANK, 0);
+    g_Game.party_size = 0;
+    Party_JoinMember(CHAR_ID_WHELP);
+    Party_LoadPalettes();
+}
 
 MATCH void func_801FBF18(void) {
     g_Characters[g_CharSlot[10]].unk_07 &= 0xFE;
@@ -229,7 +288,22 @@ MATCH void func_801FC0C8(void) {
     Party_LoadPalettes();
 }
 
-INCLUDE_ASM(func_801FC130);
+MATCH void func_801FC130(void) {
+    u8 slot;
+    /* FAKE: the retail frame holds 8 bytes no statement explains. */
+    FAKE_STACK_PADS(u8, 8);
+
+    for (slot = 0; slot < 3; slot++) {
+        D_80144908[slot] = g_Game.members[slot].chr.character_id;
+    }
+    for (slot = 0; slot < 3; slot++) {
+        Party_RemoveMember(D_80144908[slot]);
+    }
+    EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_REI, 0);
+    g_Game.party_size = 0;
+    Party_JoinMember(CHAR_ID_RYU_ADULT);
+    Party_LoadPalettes();
+}
 
 MATCH void func_801FC1E8(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_PECO, 0);

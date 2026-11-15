@@ -23,7 +23,7 @@ MATCH void func_8014F024(void) {
 
     do {
         GFX_UpdateScreenFade(&level, -0x400, 1, 0U, 2U);
-        CallbackWait(1U);
+        SYS_ThreadWait(1U);
         iterations++;
     } while (iterations < 5);
 
@@ -49,12 +49,12 @@ MATCH void func_8014F024(void) {
         if ((s16)countdown == 0x5DC) {
             break;
         }
-        CallbackWait(1U);
+        SYS_ThreadWait(1U);
         masked_status = status & BYTE_MASK;
     } while (1);
 
     *(s16*)coordinates       = -0x2AA;
     *second_coordinate       = 0x200;
     g_AreaCameraRefreshCount = 2;
-    CallbackExit();
+    SYS_ThreadExit();
 }

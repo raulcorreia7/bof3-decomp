@@ -4,7 +4,7 @@ MATCH void func_800A22CC(void) {
     volatile u8* battler_index_cell;
     u32          battler_index;
 
-    func_800A3F28();
+    Battle_MarkDamageApplied();
     battler_index_cell = &g_Battle.active_battler;
     battler_index      = LOBU(*battler_index_cell);
     if (BATTLER_IS_PLAYER(battler_index)) {

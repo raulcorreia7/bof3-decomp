@@ -13,7 +13,7 @@ MATCH void func_801F30C8(void) {
     y         = g_Game.members[0].unk_30.signed_half;
     x         = g_Game.members[0].unk_2E.signed_half;
     selection = D_801F3424[0xCu + index];
-    result    = func_8015CB18(1, 0, selection, x, y);
+    result    = Actor_ClaimSlot(1, 0, selection, x, y);
     if ((u8)result != 0xFF) {
         work      = g_Task;
         work[0xB] = result;

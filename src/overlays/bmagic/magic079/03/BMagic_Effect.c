@@ -23,11 +23,11 @@ MATCH void func_801EEC5C(void) {
         g_BattleEffects[slot].target.party = work;
         g_Task->param.unk_0B               = g_Task->param.unk_0B + 1;
     }
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionEffect(0x100);
     g_Task->header.mode = g_Task->header.mode + 1;
 }
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EED98 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
@@ -299,13 +299,7 @@ MATCH void func_801F002C(void) {
     s32      tpage;
     s32      shade;
 
-    if (GetGraphType() == 1) {
-        tpage = 0x125;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x125;
-    } else {
-        tpage = 0x55;
-    }
+    tpage = getTPage(0, 2, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
     D_1F800000.view.effect.params[0] = g_Task->unk_09 << 4;
@@ -318,9 +312,7 @@ MATCH void func_801F002C(void) {
         D_1F800014[0].vy = 0;
         D_1F800014[1].vx = D_1F800014[2].vx;
         D_1F800014[1].vy = D_1F800014[2].vy;
-        D_1F800014[2].vx = FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]);
-        D_1F800014[2].vy = FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]);
-        D_1F800014[2].vz = 0;
+        setVector(&D_1F800014[2], FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]), 0);
         D_1F800014[1].vz = 0;
         D_1F800014[0].vz = 0;
         RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
@@ -332,13 +324,7 @@ MATCH void func_801F002C(void) {
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
 
-    if (GetGraphType() == 1) {
-        tpage = 0x25;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x25;
-    } else {
-        tpage = 0x15;
-    }
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
 }

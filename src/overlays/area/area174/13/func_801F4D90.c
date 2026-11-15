@@ -1,3 +1,5 @@
 #include "area174_13.h"
 
-INCLUDE_ASM(func_801F4D90);
+MATCH void func_801F4D90(void) {
+    AREA_SPAWN_LINKED_ACTOR(0xA3);
+}

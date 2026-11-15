@@ -6,7 +6,7 @@
 MATCH void Battle_GrantReprisal(void) {
     u32 battler;
 
-    func_800A3F28();
+    Battle_MarkDamageApplied();
     battler = LOBU(g_Battle.active_battler);
     if (BATTLER_IS_PLAYER(battler)) {
         g_Game.members[battler].u.turn.damage_flags.value |= COMBATANT_FLAG_REPRISAL;

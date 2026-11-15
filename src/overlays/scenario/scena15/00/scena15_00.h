@@ -9,7 +9,20 @@
 #include "battle/records.h"
 #include "shared/AreaSpark.h"
 
+/* The sprite quad func_801F7FFC and func_801F81D8 draw: a 24 by 48 quad at (x, y) whose texture window is centred
+ * on the work record's screen position. They differ only in the vertex colours. */
+#define SCENA15_SPRITE_GEOMETRY(prim, x, y)                                                                                                                                        \
+    setXY4(prim, x, y, (x) + 24, y, x, (y) + 48, (x) + 24, (y) + 48);                                                                                                              \
+    setUV4(prim, (u8)g_Task->screen_x - 12, (u8)g_Task->screen_y - 37, (u8)g_Task->screen_x + 12, (u8)g_Task->screen_y - 37, (u8)g_Task->screen_x - 12, (u8)g_Task->screen_y + 11, \
+           (u8)g_Task->screen_x + 12, (u8)g_Task->screen_y + 11)
+
+#define SCENA15_SPRITE_END(prim)                                                    \
+    (prim)->tpage = GetTPage(2, 1, 0x340, 0x100);                                   \
+    SetSemiTrans(prim, 1);                                                          \
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_GT4))
+
 extern u32      D_801F6C00;
+extern s32      D_801FE740;
 /* D_801FE57C */
 extern Callback g_SceneEntityDispatch[];
 extern Callback D_801FE590[];
@@ -21,8 +34,12 @@ void             func_801F71B0(u8 arg);
 void             func_801F752C(AreaSpark* spark);
 /* func_801F75D8 */
 void             Area_AddSpark(void);
-bool             func_801F7748(void);
+/* func_801F7748 */
+bool             Scene_GetZFixed(void);
 void             func_801F79C4(void);
+void             func_801F9500(WorldPos* pos, s32* vx);
+void             func_801F97CC(WorldPos* pos, s32* arg);
+void             func_801F9A20(WorldPos* pos, s32* vx);
 void             func_801F7FFC(s16 x, s16 y);
 void             func_801F81D8(s16 x, s16 y);
 extern Callback  D_801FE5CC[];
@@ -31,17 +48,19 @@ extern Callback  D_801FE678[];
 extern s8        D_801FE6E8[];
 /* D_801FE6EC */
 extern SceneFunc g_SceneActorDispatch[];
-void             func_801F83AC(UPoint2D* out);
+void             func_801F83AC(Point2u* out);
 void             func_801F8704(void);
 extern u8        D_801FE71C[];
 /* The scene band's velocity. */
-extern Point3DL  D_801FE738;
+extern Point3l   D_801FE738;
 extern u8        D_801FE748;
 extern u8        D_801FE74C;
 void             func_801F8958(void);
 void             func_801F9020(Coord* position, s32* step);
 void             func_801F92F0(Coord* position, s32* step);
 
+extern u8 D_801FE694[];
+extern u8 D_801FE6C8[];
 extern u8 D_801FE750;
 
 #endif

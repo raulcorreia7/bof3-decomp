@@ -37,7 +37,7 @@ MATCH void Battle_LoadEndOverlay(void) {
                 }
                 func_800A36F0(i, g_Game.members[i].chr.status & STATUS_CURE_MASK);
                 GFX_FreePaletteFadeTarget(work);
-                func_801DDFEC(i);
+                Battle_GetTurnCursor(i);
                 i += 1u;
             } while (i < g_Battle.party_count);
         }

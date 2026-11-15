@@ -22,9 +22,9 @@ MATCH void func_80197F48(void) {
             }
             sel = &g_SndBGMId;
             /* NOTE: '<< 2' in place of '* 4' keeps cc1 from reserving 32 unused frame bytes. */
-            SsSepReplay(g_SelectionFxVoices[g_SelectionCues[*sel << 2]], g_SelectionSequences[*sel << 2]);
-            SND_SetSequenceVolume((u16)(s8)(u8)g_SelectionFxVoices[g_SelectionCues[*sel << 2]], g_SelectionSequences[*sel << 2], 0, 0);
-            SND_FadeInSequence((u16)(s8)(u8)g_SelectionFxVoices[g_SelectionCues[*sel << 2]], g_SelectionSequences[*sel << 2], 0x64, 8);
+            SsSepReplay(g_SelectionEffectVoices[g_SelectionCues[*sel << 2]], g_SelectionSequences[*sel << 2]);
+            SND_SetSequenceVolume((u16)(s8)(u8)g_SelectionEffectVoices[g_SelectionCues[*sel << 2]], g_SelectionSequences[*sel << 2], 0, 0);
+            SND_FadeInSequence((u16)(s8)(u8)g_SelectionEffectVoices[g_SelectionCues[*sel << 2]], g_SelectionSequences[*sel << 2], 0x64, 8);
         }
         g_Battle.outcome.options = 0;
         g_Battle.encounter       = 0;

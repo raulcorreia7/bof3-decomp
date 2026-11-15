@@ -10,7 +10,7 @@ MATCH void func_801F4610(void) {
         Actor_Clear();
         return;
     }
-    Game_FindAreaHandler();
+    Game_FindArea();
     Area_SelectSceneRecord(0x205);
 
     g_Task->unk_48       = 0;

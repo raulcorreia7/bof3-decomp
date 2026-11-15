@@ -30,7 +30,7 @@ segments:
       - [0x1188, c, func_801F3D88]
       - [0x1204, c, func_801F3E04]
       - [0x12C4, c, func_801F3EC4]
-      - [0x1364, c, Actor_CenterOnScreen]
+      - [0x1364, c, Actor_SetScreenOrigin]
       - [0x1380, c, func_801F3F80]
       - [0x13C4, c, Actor_NextStep]
       - [0x1404, c, func_801F4004]

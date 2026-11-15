@@ -6,7 +6,7 @@ MATCH void func_801F4F18(void) {
     s16    slot;
 
     g_ScriptState->cursor -= 2;
-    slot             = Actor_FindFree();
+    slot             = Actor_FindFreeField();
     SP_REF(s16, 0x0) = slot;
     if (slot == GAME_NONE) {
         return;

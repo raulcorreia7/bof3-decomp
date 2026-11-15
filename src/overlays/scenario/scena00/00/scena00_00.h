@@ -24,25 +24,25 @@
  * pointer also move bytes). */
 extern u8 D_80146866;
 
-#define g_AreaScrollTargetY   ((u32*)&g_AreaScrollTargetY)
-#define g_AreaLoads           ((void**)g_AreaLoads)
+#define g_AreaScrollTargetY       ((u32*)&g_AreaScrollTargetY)
+#define g_AreaLoads               ((void**)g_AreaLoads)
 
-#define SCENE_FX_SLOT_COUNT   30
-#define SCENE_FX_CELL_COUNT   12
-#define SCENE_FX_WEIGHT_COUNT 3
+#define SCENE_EFFECT_SLOT_COUNT   30
+#define SCENE_EFFECT_CELL_COUNT   12
+#define SCENE_EFFECT_WEIGHT_COUNT 3
 
 /* One row of the sample table at D_80147BD8: twelve sample offsets and three
  * weights per 0x28-byte record. */
 
-/* The stride is a retail read: func_801FC01C walks the table as `(SceneSampleRecord *)(i * 0x28 + base)`. Twelve s16 samples sit at +0x02..+0x18 and the shifted weight halfwords at +0x1A..+0x1E; only the halfwords read here are named, the rest stays unresolved padding. */
-typedef struct SceneSampleRecord {
+/* The stride is a retail read: func_801FC01C walks the table as `(SceneSample *)(i * 0x28 + base)`. Twelve s16 samples sit at +0x02..+0x18 and the shifted weight halfwords at +0x1A..+0x1E; only the halfwords read here are named, the rest stays unresolved padding. */
+typedef struct SceneSample {
     u8  unk_00[2];
-    s16 sample[SCENE_FX_CELL_COUNT];
-    s16 weight[SCENE_FX_WEIGHT_COUNT];
+    s16 sample[SCENE_EFFECT_CELL_COUNT];
+    s16 weight[SCENE_EFFECT_WEIGHT_COUNT];
     u8  unk_20[8];
-} SceneSampleRecord;
+} SceneSample;
 
-ASSERT_SIZE(SceneSampleRecord, 0x28);
+ASSERT_SIZE(SceneSample, 0x28);
 
 /* Field-space endpoints passed by value to func_801F78EC. */
 typedef struct SceneLinePoint {
@@ -77,17 +77,15 @@ typedef struct SceneEffect {
     u8             pad_24[0x5];
     s8             ot_index;
     u8             pad_2A[0x4];
-    UPoint2D       origin;
+    Point2u        origin;
     u8             pad_32[0x2];
     SceneLinePoint pos; /* 0x34 */
     u8             pad_40[0x14];
     u32            unk_54;
     u8             pad_58[0x5];
-    u8             color_r; /* +0x5D..0x5F: setRGB0 source, func_801F7134 and func_801F8BCC */
-    u8             color_g;
-    u8             color_b;
+    ColorRGB8      color;     /* +0x5D..0x5F: setRGB0 source, func_801F7134 and func_801F8BCC */
     /* 0x60 */ s32 projected; /* RotTransPers depth result */
-    Point3DL       angle;
+    Point3l        angle;
 } SceneEffect;
 
 ASSERT_SIZE(SceneEffect, 0x70);
@@ -96,7 +94,7 @@ ASSERT_OFFSET(SceneEffect, channel_18, 0x18);
 ASSERT_OFFSET(SceneEffect, pos, 0x34);
 STATIC_ASSERT(SceneEffect_pos_z, DECOMP_OFFSETOF(SceneEffect, pos.z) == 0x3C);
 ASSERT_OFFSET(SceneEffect, unk_54, 0x54);
-ASSERT_OFFSET(SceneEffect, color_r, 0x5D);
+ASSERT_OFFSET(SceneEffect, color, 0x5D);
 ASSERT_OFFSET(SceneEffect, projected, 0x60);
 ASSERT_OFFSET(SceneEffect, angle, 0x64);
 
@@ -123,18 +121,8 @@ ASSERT_SIZE(Scene00Head, 8);
 ASSERT_OFFSET(Scene00Head, overlay, 0x00);
 ASSERT_OFFSET(Scene00Head, unk_04, 0x04);
 
-/* The three scenario line-color bytes copied from D_801F6C04 and passed to
- * func_801F78EC as one three-byte argument. */
-typedef struct SceneLineColor {
-    s8 r;
-    s8 g;
-    s8 b;
-} SceneLineColor;
-
-ASSERT_SIZE(SceneLineColor, 3);
-ASSERT_OFFSET(SceneLineColor, r, 0);
-ASSERT_OFFSET(SceneLineColor, g, 1);
-ASSERT_OFFSET(SceneLineColor, b, 2);
+/* The scenario line colour, copied from D_801F6C04 and passed to func_801F78EC by value. */
+typedef ColorRGB8 SceneLineColor;
 
 /* The shared table block at 0x801FC980..0x801FCA84, read through several
  * overlapping views: D_801FC980 and its sub-tables at +0x08, +0x1C, +0x2C
@@ -161,24 +149,24 @@ typedef struct Scene00Tables {
 ASSERT_SIZE(Scene00Tables, 0x104);
 
 /* The twelve s32 cells of one effect slot. */
-typedef struct SceneFxSlot {
-    s32 cell[SCENE_FX_CELL_COUNT];
-} SceneFxSlot;
+typedef struct SceneEffectSlot {
+    s32 cell[SCENE_EFFECT_CELL_COUNT];
+} SceneEffectSlot;
 
-ASSERT_SIZE(SceneFxSlot, 0x30);
+ASSERT_SIZE(SceneEffectSlot, 0x30);
 
 /* Cell `k` of the slot at byte offset `slot` in a SceneFx table. Retail addresses each
  * cell from the slot offset; indexing the table by slot number reorders the frame setup. */
-#define SCENE_FX_CELL(table, slot, k) (((SceneFxSlot*)((u8*)(table) + (slot)))->cell[k])
+#define SCENE_EFFECT_CELL(table, slot, k) (((SceneEffectSlot*)((u8*)(table) + (slot)))->cell[k])
 
 /* The per-slot sample effect: func_801FC01C seeds it from the sample table at
  * D_80147BD8 and func_801FC3A0 steps it every frame. `accum` is the 16.16 sample,
  * `delta` its per-frame step and `life_step` the amount taken off the cell's
  * lifetime. */
 typedef struct SceneFx {
-    SceneFxSlot delta[SCENE_FX_SLOT_COUNT];
-    SceneFxSlot accum[SCENE_FX_SLOT_COUNT];
-    SceneFxSlot life_step[SCENE_FX_SLOT_COUNT];
+    SceneEffectSlot delta[SCENE_EFFECT_SLOT_COUNT];
+    SceneEffectSlot accum[SCENE_EFFECT_SLOT_COUNT];
+    SceneEffectSlot life_step[SCENE_EFFECT_SLOT_COUNT];
 } SceneFx;
 
 ASSERT_SIZE(SceneFx, 0x10E0);
@@ -234,7 +222,7 @@ extern u8             D_801FCA5C[];
 extern u8             D_801FCA64[];
 extern u8             D_801FCA65[];
 /* D_801FCA90 */
-extern SceneFx        g_SceneFx;
+extern SceneFx        g_SceneEffect;
 
 void func_80164020(u32 arg0, u32 arg1);
 void func_801F6E04(void);

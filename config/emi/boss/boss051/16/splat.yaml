@@ -39,7 +39,7 @@ segments:
     align: 4
     subsegments:
       - [0x5B0, bin, g_BossEnemyScript]
-      - [0x5BC, bin, g_BossEnemyActionTable]
+      - [0x5BC, bin, g_BossEnemyActions]
       - [0x5C4, bin, D_800C1DC4]
       - [0x5F4, bin, D_800C1DF4]
       - [0x5FC, bin, D_800C1DFC]

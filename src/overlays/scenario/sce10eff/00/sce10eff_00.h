@@ -5,7 +5,7 @@
 #define GAME_SCRATCH_BASE_WORD
 #include "common/vector.h"
 #include "overlays/scenario/scenario.h"
-#include "sys/gameui.h"
+#include "menu/gameui.h"
 
 /* rsin/rcos take 4096 (ONE) units per turn: the orbit counter wraps every 128
  * steps of 32 units. */
@@ -56,9 +56,9 @@ typedef struct SceneBandEffect {
     /* 0x0B */ u8  ticker;        /* a random nibble that is bumped */
     /* 0x0C */ s32 orbit_counter; /* the orbit counter */
     u8             pad_10[0x1E];
-    UPoint2D       origin;
+    Point2u        origin;
     u8             pad_32[0x02];
-    Point2DL       proj;
+    Point2l        proj;
     u8             pad_3c[0x02];
     /* 0x3E */ s16 proj_z; /* the projected z; the GTE vertex takes it halved */
 } SceneBandEffect;

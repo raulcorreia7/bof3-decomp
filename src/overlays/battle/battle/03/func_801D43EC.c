@@ -5,15 +5,15 @@
  */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D43EC(void) {
-    s32  saved0;
-    s32  saved1;
-    s32  saved2;
-    s32  saved3;
-    s32  index;
-    s32  flags;
-    u16* battle_flags;
-    s32* block74;
-    s32* block84;
+    volatile s32 saved0;
+    volatile s32 saved1;
+    volatile s32 saved2;
+    volatile s32 saved3;
+    s32          index;
+    s32          flags;
+    u16*         battle_flags;
+    s32*         block74;
+    s32*         block84;
 
     battle_flags = &g_Battle.state;
     if ((*battle_flags & 4) && (D_801463C2 == 0)) {
@@ -51,16 +51,16 @@ NON_MATCHING void func_801D43EC(void) {
             index                = g_Battle.active_battler;
             if ((u8)index < 3U) {
                 *(BattleStatBlock*)D_801EC308 = *(BattleStatBlock*)(D_80145F20 + index * 0x140 + 3);
-                flags                         = g_Game.members[index].turn.damage_flags.value & COMBATANT_FLAG_REPRISAL;
+                flags                         = g_Game.members[index].u.turn.damage_flags.value & COMBATANT_FLAG_REPRISAL;
             } else {
                 /* The party side reads the same block three bytes in; one address keeps both reads alike. */
                 *(BattleStatBlock*)D_801EC308 = *(BattleStatBlock*)(D_801EB6D0 + 3);
                 flags                         = ENEMY_COMBATANT(index).turn.damage_flags.value & COMBATANT_FLAG_REPRISAL;
             }
             if (flags != 0) {
-                func_801DE560(1, 0, 0, 0xF, (u8*)&D_801EB08F);
+                Battle_QueueEvent(1, 0, 0, 0xF, (u8*)&D_801EB08F);
             } else {
-                func_801DE560(1, 0, 0, 0xF, (u8*)&D_801EB04E);
+                Battle_QueueEvent(1, 0, 0, 0xF, (u8*)&D_801EB04E);
             }
             g_BattleMessageState    = 1;
             g_Battle.phase.step     = 0;

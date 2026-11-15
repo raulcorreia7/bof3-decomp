@@ -27,7 +27,7 @@ MATCH void func_801F6E90(void) {
     if ((g_Task->vx & 0x7) == 0) {
         row = func_801F8394();
         if (row != NULL) {
-            func_801F83D0(row);
+            Scene_InitSpark((FallingSpark*)row);
         }
     }
     func_801F85D8();
@@ -148,7 +148,27 @@ MATCH void func_801F7408(void) {
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 5));
 }
 
-INCLUDE_ASM(func_801F7480);
+MATCH void func_801F7480(void) {
+    u8  i;
+    u8* row;
+
+    if ((g_Task->vx & D_801FDD7C[g_Task->timer]) == 0) {
+        D_801FDFBC->unk_10 += D_801FDD84[g_Task->timer];
+        for (i = 0; i < D_801FDD84[g_Task->timer]; i++) {
+            row = func_801F9DD4();
+            if (row != NULL) {
+                func_801F9E10(row);
+            }
+        }
+    }
+    if ((g_Task->vx & 0xF) == 0) {
+        g_Task->timer++;
+    }
+    func_801F9EFC();
+    if (--g_Task->vx == 0) {
+        g_Task->header.step++;
+    }
+}
 
 MATCH void func_801F75C0(void) {
     if (!(func_801F9EFC() & BYTE_MASK)) {
@@ -181,7 +201,19 @@ MATCH void func_801F7638(void) {
     g_Task->header.step++;
 }
 
-INCLUDE_ASM(func_801F76D0);
+MATCH void func_801F76D0(void) {
+    if ((g_Task->vx & D_801FDD9C[g_Task->timer]) == 0) {
+        D_801FDFBC->unk_10 += D_801FDDA4[g_Task->timer];
+    }
+    if ((g_Task->vx & 0xF) == 0) {
+        g_Task->timer++;
+    }
+    func_801F97E0(D_801FDFBC);
+    if (--g_Task->vx == 0) {
+        g_Task->vx = 0x10;
+        g_Task->header.step++;
+    }
+}
 
 MATCH void func_801F77AC(void) {
     D_801FDFBC->unk_10 += 4;
@@ -226,7 +258,21 @@ MATCH void func_801F7A30(void) {
     g_Task->header.step += 1;
 }
 
-INCLUDE_ASM(func_801F7AB0);
+MATCH void func_801F7AB0(void) {
+    u8* row;
+
+    func_801F9330(D_801FDFC0);
+    if (g_Task->vx >= 9) {
+        row = func_801F8394();
+        if (((g_Task->vx & 3) == 0) && (row != NULL)) {
+            func_801F8478(row);
+        }
+    }
+    func_801F85D8();
+    if (--g_Task->vx == 0) {
+        g_Task->header.step++;
+    }
+}
 
 MATCH void func_801F7B68(void) {
     if (!(func_801F85D8() & BYTE_MASK)) {
@@ -364,9 +410,29 @@ MATCH u8* func_801F8394(void) {
     return NULL;
 }
 
-INCLUDE_ASM(func_801F83D0);
+#include "overlays/scenario/Scene_InitSpark.h"
 
-INCLUDE_ASM(func_801F8478);
+/* Starts a spark row at a random point of a sphere around the actor, raised 512 units. */
+MATCH void func_801F8478(u8* row) {
+    s32* cell;
+    u16  yaw;
+    u16  pitch;
+    s16  radius;
+
+    cell    = (s32*)row;
+    row[0]  = 1;
+    row[1]  = 0;
+    row[2]  = 8;
+    row[3]  = 0;
+    cell[2] = 0;
+    row[4]  = 1;
+    yaw     = rand() & 0x7FF;
+    pitch   = rand() & 0xFFF;
+    radius  = ((rand() % 2) << 12) | (rand() & 0xFFF);
+    cell[3] = g_Task->pos.x.fixed + ((radius * ((rsin(yaw) * rcos(pitch)) >> 12)) >> 8);
+    cell[4] = g_Task->pos.y.fixed + ((radius * ((rsin(yaw) * rsin(pitch)) >> 12)) >> 8);
+    cell[5] = g_Task->pos.z.fixed + radius * rcos(yaw) + TO_COORD(512);
+}
 
 MATCH u8 func_801F85D8(void) {
     u8     active;
@@ -437,9 +503,82 @@ INCLUDE_ASM(func_801F9330);
 
 INCLUDE_ASM(func_801F97E0);
 
-INCLUDE_ASM(func_801F9A80);
+MATCH s32 func_801F9A80(SceneEffectRow* row) {
+    POLY_F4* poly;
+    s32      point[3];
+    DVECTOR  screen;
+    s32      landed;
 
-INCLUDE_ASM(func_801F9BDC);
+    poly = (POLY_F4*)g_GfxPrimCursor;
+    SetPolyF4(poly);
+    SetSemiTrans(poly, 1);
+    point[0] = row->x;
+    point[1] = row->y;
+    point[2] = row->unk_C + (row->unk_14 << 8);
+    Area_ProjectPoint(point, &screen);
+    poly->x0 = screen.vx - 1;
+    poly->y0 = screen.vy;
+    poly->x1 = screen.vx + 1;
+    poly->y1 = screen.vy;
+    point[0] = row->x;
+    point[1] = row->y;
+    point[2] = row->unk_C - (row->unk_14 << 8);
+    landed   = 0;
+    if (point[2] < row->unk_1C) {
+        point[2] = row->unk_1C;
+        landed   = 1;
+    }
+    Area_ProjectPoint(point, &screen);
+    poly->x2 = screen.vx - 1;
+    poly->y2 = screen.vy;
+    poly->x3 = screen.vx + 1;
+    poly->y3 = screen.vy;
+    setRGB0(poly, 0x40, 0x40, 0x40);
+    GFX_AddPrim(1, sizeof(POLY_F4));
+    return landed;
+}
+
+/* Draw a ring of 16 translucent triangles around the row, on the ground below it. */
+MATCH void func_801F9BDC(SceneEffectRow* row) {
+    DVECTOR  center;
+    DVECTOR  edge;
+    s32      pos[3];
+    POLY_G3* prim;
+    u8       i;
+    u16      angle;
+
+    pos[0] = row->x;
+    pos[1] = row->y;
+    pos[2] = Area_SampleHeight(row->x, row->y) << 16;
+    Area_ProjectPoint(pos, &center);
+    angle  = 0;
+    i      = 0;
+    pos[0] = row->x + (rcos(0) << 2);
+    pos[1] = row->y + (rsin(0) << 2);
+    pos[2] = Area_SampleHeight(row->x, row->y) << 16;
+    Area_ProjectPoint(pos, &edge);
+    do {
+        prim = (POLY_G3*)g_GfxPrimCursor;
+        SetPolyG3(prim);
+        SetSemiTrans(prim, 1);
+        prim->x0 = center.vx;
+        prim->y0 = center.vy;
+        angle += 256;
+        prim->x1 = edge.vx;
+        prim->y1 = edge.vy;
+        pos[0]   = row->x + (rcos(angle) << 2);
+        pos[1]   = row->y + (rsin(angle) << 2);
+        i++;
+        pos[2] = Area_SampleHeight(row->x, row->y) << 16;
+        Area_ProjectPoint(pos, &edge);
+        prim->x2 = edge.vx;
+        prim->y2 = edge.vy;
+        setRGB0(prim, 64, 64, 64);
+        setRGB1(prim, 0, 0, 0);
+        setRGB2(prim, 0, 0, 0);
+        GFX_AddPrim(1, sizeof(POLY_G3));
+    } while (i < 16);
+}
 
 MATCH void func_801F9DA8(void) {
     s32 index;
@@ -468,7 +607,27 @@ MATCH u8* func_801F9DD4(void) {
     return NULL;
 }
 
-INCLUDE_ASM(func_801F9E10);
+/* Starts a burst row at a random distance and angle around the actor, on the ground. */
+MATCH void func_801F9E10(u8* row) {
+    s32  radius;
+    u32  angle;
+    s32* cell;
+    /* FAKE: the retail frame holds 16 bytes no statement explains. */
+    FAKE_STACK_PADS(u8, 16);
+
+    cell    = (s32*)row;
+    row[0]  = 1;
+    row[1]  = 0;
+    row[2]  = 16;
+    cell[6] = 0;
+    cell[5] = 0;
+    radius  = ((rand() % 2) << 16) | ((rand() & BYTE_MASK) << 8);
+    angle   = rand() & 0xFC0;
+    cell[1] = g_Task->pos.x.fixed + ((radius * rcos(angle)) >> 12);
+    cell[2] = g_Task->pos.y.fixed + ((radius * rsin(angle)) >> 12);
+    cell[7] = Area_SampleHeight(cell[1], cell[2]) << 16;
+    cell[3] = cell[7];
+}
 
 INCLUDE_ASM(func_801F9EFC);
 
@@ -547,15 +706,15 @@ MATCH void func_801FC094(void) {
         if (D_801FDE40[i].timer != g_SceneState.timer_06) {
             continue;
         }
-        slot_index = Actor_FindFreeSlot();
+        slot_index = Actor_FindFreeSpawned();
         if (slot_index == GAME_NONE) {
             break;
         }
-        g_ActorSlots[slot_index].header.flags     = 1;
-        g_ActorSlots[slot_index].type             = 0x18;
-        g_ActorSlots[slot_index].link             = 0x18;
-        COORD_INT(g_ActorSlots[slot_index].pos.x) = D_801FDE40[i].x;
-        COORD_INT(g_ActorSlots[slot_index].pos.y) = D_801FDE40[i].y;
+        g_SpawnedActors[slot_index].header.flags     = 1;
+        g_SpawnedActors[slot_index].type             = 0x18;
+        g_SpawnedActors[slot_index].link             = 0x18;
+        COORD_INT(g_SpawnedActors[slot_index].pos.x) = D_801FDE40[i].x;
+        COORD_INT(g_SpawnedActors[slot_index].pos.y) = D_801FDE40[i].y;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2) + i % 3);
     }
 }
@@ -596,7 +755,24 @@ MATCH void func_801FCFB4(void) {
     g_AreaCameraOffsetY      = g_AreaCameraOffsetY + ((cam << 24) >> 22);
 }
 
-INCLUDE_ASM(func_801FD000);
+MATCH void func_801FD000(void) {
+    u8 i;
+    u8 idx;
+
+    for (i = 0; i < 0xE; i++) {
+        D_1F800000.view.area.entity_counter = Actor_FindFreeField();
+        if (D_1F800000.view.area.entity_counter != GAME_NONE) {
+            idx = i;
+            func_801A4D54(&D_801FDE8C[idx * 17]);
+            g_Task->pos.z.part.integer = 0xA00;
+            if (D_801FDF7C[idx] != 0) {
+                g_CurrentActor->timer_75 = D_801FDF7C[idx];
+                g_Task->unk_03           = g_Task->header.mode;
+                g_Task->header.mode      = 5;
+            }
+        }
+    }
+}
 
 INCLUDE_ASM(func_801FD0DC);
 
@@ -660,12 +836,12 @@ MATCH void func_801FD5A0(void) {
     D_80146874 = 7;
 }
 
-MATCH ActorSlot* func_801FD610(u8 mode) {
-    ActorSlot* slot;
-    s32        index;
+MATCH SpawnedActor* func_801FD610(u8 mode) {
+    SpawnedActor* slot;
+    s32           index;
 
-    index = Actor_FindFreeSlot() & BYTE_MASK;
-    slot  = &g_ActorSlots[index];
+    index = Actor_FindFreeSpawned() & BYTE_MASK;
+    slot  = &g_SpawnedActors[index];
     if (index != GAME_NONE) {
         slot->header.flags = 1;
         slot->type         = 0x49;

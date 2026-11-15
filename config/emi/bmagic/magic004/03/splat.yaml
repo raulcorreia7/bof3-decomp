@@ -20,5 +20,5 @@ segments:
       - [0x1234, bin, D_801EFE34]
       - [0x1240, bin, D_801EFE40]
       - [0x1258, bin, D_801EFE58]
-      - [0x1260, bin, BMagic_StepTable]
+      - [0x1260, bin, BMagic_Steps]
   - [0x126C]

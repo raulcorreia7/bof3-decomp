@@ -32,5 +32,8 @@ void            func_801F0428(void);
 void func_801EF2DC(void);
 void func_801EF590(u8* text, s32 x, s32 y);
 void func_801EF76C(u8* text, s32 x, s32 y);
+void func_801EF924(u8* text, s32 x, s32 y);
+void func_801EFB00(u16 value, s32 x, s32 y);
+void func_801EF470(u8 item_id, u8 category, s32 y);
 
 #endif

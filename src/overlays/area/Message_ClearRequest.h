@@ -1,4 +1,4 @@
-#include "sys/gameui.h"
+#include "menu/gameui.h"
 
 /* Clear the area request slot and, when the selection byte is clear, reset the game-overlay state bytes. Each overlay's image header names its reset variant in AREA_RESET_VARIANT. */
 /* func_801F2C48 (area001), func_801F2C48 (area023), func_801F3034 (area040), func_801F3634 (area166), func_801F3B08

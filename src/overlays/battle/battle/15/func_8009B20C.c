@@ -11,6 +11,6 @@ MATCH void func_8009B20C(void) {
         ptr                = (u8*)(i * 0x24u + (u32)base);
         g_MenuCurrentPanel = (MenuPanelTask*)ptr;
         i += 1;
-        func_80158E20();
+        Menu_ClearPanel();
     } while (i < 20);
 }

@@ -31,7 +31,7 @@ typedef struct PaletteOwner {
     u8 flags; /* +0x24 bit 2 is cleared when a fade that flagged its row with 0x80 frees */
     u8 pad_25[0x2];
     u8 saved_byte;   /* +0x27 restored from PaletteFade.saved_byte when the fade frees */
-    u8 palette_kind; /* +0x28 a PaletteKind: how many palette cells the owner's fade covers */
+    u8 palette_kind; /* +0x28 a PaletteType: how many palette cells the owner's fade covers */
 } PaletteOwner;
 
 ASSERT_OFFSET(PaletteOwner, palette_kind, 0x28);
@@ -41,18 +41,11 @@ ASSERT_OFFSET(PaletteOwner, palette_kind, 0x28);
 /* Largest value of one 5-bit colour channel of a palette cell. */
 #define COLOR_CHANNEL_MAX     31
 
-/* Signed per-channel colour shift of a palette fade; each channel is added to the colours it fades. */
-typedef struct ColorOffset {
-    s8 red;
-    s8 green;
-    s8 blue;
-} ColorOffset;
-
 /* One 0xC-byte row of the palette fade table g_PaletteFades. */
 typedef struct PaletteFade {
     u8            flags;      /* PaletteFadeFlags */
     u8            saved_byte; /* the target byte at +0x27, restored on free */
-    ColorOffset   offset;
+    ColorDelta8   offset;
     u8            table_index;
     u8            step;
     u8            unk_07;

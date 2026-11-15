@@ -45,11 +45,11 @@ MATCH void func_801A65A0(u8* script) {
         FIELD(u8, &D_801468FF, *counter * ACTOR_SIZE)  = script[0xE];
         FIELD(u8, D_80146900, *counter * ACTOR_SIZE)   = script[9];
         FIELD(u8, D_8014691C, *counter * ACTOR_SIZE)   = 0x7F;
-        func_801A4990((u8*)script + 0xB);
-        g_Task->tint.bytes.unk_5D = 0;
-        g_Task->tint.bytes.unk_5F = 0;
-        g_Task->tint.bytes.unk_5E = 0;
-        g_Task->tint.bytes.flags  = 2;
+        Actor_SetOptionFlags((u8*)script + 0xB);
+        g_Task->tint.bytes.rgb.red   = 0;
+        g_Task->tint.bytes.rgb.blue  = 0;
+        g_Task->tint.bytes.rgb.green = 0;
+        g_Task->tint.bytes.flags     = 2;
         func_801A4914();
         *counter = (u16)(*counter + 1);
     }

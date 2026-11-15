@@ -23,5 +23,5 @@ MATCH void func_801E65F8(void) {
         slot->arg.unk_09 = count - 1;
         return;
     }
-    func_801E5988();
+    Effect_Reset();
 }

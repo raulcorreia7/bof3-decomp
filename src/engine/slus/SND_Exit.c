@@ -12,26 +12,26 @@ MATCH void SND_Exit(void) {
     SsVabClose(g_SndVabIds[4]);
     SsVabClose(g_SndVabIds[5]);
     SsVabClose(g_SndVabIds[6]);
-    if (g_SelectionFxVoices[0] != -1) {
-        SsSepClose(g_SelectionFxVoices[0]);
+    if (g_SelectionEffectVoices[0] != -1) {
+        SsSepClose(g_SelectionEffectVoices[0]);
     }
-    if (g_SelectionFxVoices[1] != -1) {
-        SsSepClose(g_SelectionFxVoices[1]);
+    if (g_SelectionEffectVoices[1] != -1) {
+        SsSepClose(g_SelectionEffectVoices[1]);
     }
-    if (g_SelectionFxVoices[2] != -1) {
-        SsSepClose(g_SelectionFxVoices[2]);
+    if (g_SelectionEffectVoices[2] != -1) {
+        SsSepClose(g_SelectionEffectVoices[2]);
     }
-    if (g_SelectionFxVoices[3] != -1) {
-        SsSepClose(g_SelectionFxVoices[3]);
+    if (g_SelectionEffectVoices[3] != -1) {
+        SsSepClose(g_SelectionEffectVoices[3]);
     }
-    if (g_SelectionFxVoices[4] != -1) {
-        SsSepClose(g_SelectionFxVoices[4]);
+    if (g_SelectionEffectVoices[4] != -1) {
+        SsSepClose(g_SelectionEffectVoices[4]);
     }
-    if (g_SelectionFxVoices[5] != -1) {
-        SsSepClose(g_SelectionFxVoices[5]);
+    if (g_SelectionEffectVoices[5] != -1) {
+        SsSepClose(g_SelectionEffectVoices[5]);
     }
-    if (g_SelectionFxVoices[6] != -1) {
-        SsSepClose(g_SelectionFxVoices[6]);
+    if (g_SelectionEffectVoices[6] != -1) {
+        SsSepClose(g_SelectionEffectVoices[6]);
     }
     SsUtReverbOff();
     SsUtSetReverbType(SS_REV_TYPE_OFF);

@@ -6,7 +6,7 @@
 #include "overlays/bmagic/bmagic.h"
 
 extern BMagicEffectFuncs D_801EEC04;
-extern BMagicEffectWork* D_801F21F0;
+extern BMagicEffect*     D_801F21F0;
 
 void func_801EED18(void);
 void func_801EEF50(void);
@@ -14,7 +14,7 @@ void func_801EEF50(void);
 u8 func_801F04A4(void);
 
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
-extern BMagicEffectWork D_801F0670[];
+extern BMagicEffect D_801F0670[];
 #define BMAGIC_EFFECT_SLOTS D_801F0670
 #define BMAGIC_EFFECT_COUNT 160
 
@@ -30,8 +30,13 @@ extern Magic073Steps D_801EEC1C;
 #define EFFECT_SPARKLE_TASK    D_801F21F0
 #define EFFECT_SPARKLE_OFFSETS D_801F05A4
 #define EFFECT_SPARKLE_RISE    D_801F0664
-extern Point2D D_801F05A4[];
+extern Point2s D_801F05A4[];
 extern u8      D_801F0664[];
+/* The sparkle count of each kind, and the launch delay step between its groups of four. */
+#define EFFECT_SPARKLE_COUNTS D_801F065C
+#define EFFECT_SPARKLE_DELAYS D_801F0660
+extern u8 D_801F065C[];
+extern u8 D_801F0660[];
 /* The colour rows of each kind. */
 #define EFFECT_SPARKLE_COLORS D_801F0644
 extern u8 D_801F0644[][4][3];

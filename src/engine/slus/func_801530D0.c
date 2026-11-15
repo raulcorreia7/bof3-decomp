@@ -2,241 +2,258 @@
 
 #include <inline_c.h>
 
-/* Links the packet at pkt into the ordering table slot at byte offset off, as the table's new head. */
-#define LINK_PACKET(off, pkt)                                                          \
-    do {                                                                               \
-        u32* head_                  = *(u32**)(D_80142CC4 + (off));                    \
-        *head_                      = (*head_ & 0xFF000000) | ((u32)(pkt) & 0xFFFFFF); \
-        *(u32*)(D_80142CC4 + (off)) = (u32)(pkt);                                      \
-    } while (0)
+#define SCRATCH_AT(type, off)       ((type*)((u8*)&D_1F800000 + (off)))
+#define SCRATCH(type, off)          (*SCRATCH_AT(type, off))
+
+/* Appends the packet to a list of the cell ordering table. */
+#define LINK_PACKET(row, list, pkt) (setaddr(g_AreaCellPacketLists[row][list].tail, pkt), g_AreaCellPacketLists[row][list].tail = (P_TAG*)(pkt))
 
 /* Draws the visible window of the 0x37 by 0x1C tile ring: each cell is projected through the GTE, culled against the
  * screen box, given a packet pair (plus linked rows at +0x46/+0x4E) and linked into the ordering table by depth.
- * The scratch words behind D_1F80000C hold the window half-width.
+ * The scratch words behind SCRATCH(s32, 0xC) hold the window half-width.
  */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801530D0(void) {
-    s32 sp10_row;
-    s32 depth_threshold;
-    u8* map_width_ptr;
-    s32 row_depth_off;
-    s32 col_depth_off;
-    s8* rec;
-    s32 width;
-    s32 v;
-    s32 tmp;
-    s32 row;
-    s32 col;
-    s32 col_count;
-    s32 cell;
-    s32 fp;
-    s32 s5;
-    s32 s6;
-    s32 s2;
-    u8* s0;
-    u8* s1;
-    u8* pkt;
-    u8* pkt2;
-    u8* link;
-    u16 v16;
-    u16 flags;
-    u8  low;
-    u32 word;
+    s32       sp10_row;
+    s32       origin_x;
+    s32       next_row;
+    s32       next_col;
+    s32       window;
+    s32       wrapped;
+    s32       tilt;
+    s32       ring;
+    s32       inner;
+    s32       outer;
+    s32       origin_y;
+    s32       depth_threshold;
+    u8*       map_width_ptr;
+    s8*       rec;
+    s32       width;
+    s32       v;
+    s32       tmp;
+    s32       row;
+    s32       col;
+    s32       col_count;
+    s32       fp;
+    s32       s6;
+    s32       s2;
+    u16       v16;
+    u8        low;
+    u32       word;
+    AreaCell* cell;
+    POLY_FT4* prim;
+    POLY_FT4* pkt;
+    POLY_FT4* pkt2;
+    POLY_FT4* link;
+    s32       x;
+    u16       ux;
+    u16       uy;
+    s32       y;
+    s32       ring_cell;
+    s32       sword;
+    s8*       below;
+    u8*       low_min;
+    SVECTOR*  vert;
 
-    func_80153CC4(0);
-    v          = g_AreaCameraAngle.vz - 0x200;
-    v          = ABS(v);
+    func_80153CC4();
+    tilt       = g_AreaCameraAngle.vz - 0x200;
+    tilt       = ABS(tilt);
+    origin_x   = g_AreaTileOriginX;
+    origin_y   = g_AreaTileOriginY;
     D_8014933D = 0;
     D_8014933A &= 0xFE;
-    tmp             = (0x160 - v) / 50;
-    D_1F80000C      = tmp;
-    depth_threshold = (g_AreaTargetCellX - g_AreaTileOriginX) + (g_AreaTargetCellY - g_AreaTileOriginY) + 8;
-    width           = 0;
-    if (tmp > 0) {
-        width = tmp - 1;
+    ring              = (0x160 - tilt) / 50;
+    SCRATCH(s32, 0xC) = ring;
+    depth_threshold   = (g_AreaTargetCellX - origin_x) + (g_AreaTargetCellY - origin_y) + 8;
+    width             = 0;
+    if (ring > 0) {
+        width = ring - 1;
     }
-    D_1F80000C = width;
-    cell       = g_AreaCameraOffsetZ / 650;
-    tmp        = 0;
-    if (width >= (s16)cell) {
-        tmp = width - (s16)cell;
+    SCRATCH(s32, 0xC) = width;
+    ring_cell         = (s16)g_AreaCameraOffsetZ / 650;
+    inner             = 0;
+    if (width >= (s16)ring_cell) {
+        inner = width - (s16)ring_cell;
     }
-    D_1F80000C = tmp;
+    SCRATCH(s32, 0xC) = inner;
     if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) {
-        v = 0;
-        if (tmp >= 2) {
-            v = tmp - 2;
+        outer = 0;
+        if (inner >= 2) {
+            outer = inner - 2;
         }
-        D_1F80000C = v;
+        SCRATCH(s32, 0xC) = outer;
     }
     s6 = 0;
     if (g_AreaSceneMode == 0x23) {
-        D_1F80000C = 0;
+        SCRATCH(s32, 0xC) = 0;
     }
-    map_width_ptr = &g_AreaMapBundle.width;
-    row_depth_off = -0x30;
+    map_width_ptr = MEM_PTR(u8, MAP_BUNDLE_BASE);
     sp10_row      = g_AreaGridRowCursor;
-    col_depth_off = 0;
-    D_80149341    = D_1F80000C;
+    D_80149341    = SCRATCH(s32, 0xC);
+    low_min       = SCRATCH_AT(u8, 0);
+    vert          = D_1F800014;
     do {
-        v = 0;
+        next_row = 0;
         if (sp10_row != 0x37) {
-            v = sp10_row + 1;
+            next_row = sp10_row + 1;
         }
-        tmp      = D_1F80000C;
-        sp10_row = v;
-        col      = g_AreaGridColCursor + tmp;
+        window   = SCRATCH(s32, 0xC);
+        sp10_row = next_row;
+        col      = g_AreaGridColCursor + window;
+        wrapped  = col;
         if (col >= 28) {
-            col -= 0x1C;
+            wrapped = col - 28;
         }
-        fp = 0;
-        if ((0x1C - (tmp * 2)) > 0) {
-            s5 = col_depth_off;
+        col = wrapped;
+        fp  = 0;
+        if ((0x1C - (window * 2)) > 0) {
             do {
-                v = 0;
+                next_col = 0;
                 if (col != 27) {
-                    v = col + 1;
+                    next_col = col + 1;
                 }
-                col = v;
-                s0  = (u8*)g_AreaCells + sp10_row * 0x70 + col * 4;
-                if ((s0[0] == 0) || (s0[1] == 0)) {
-                    Area_RequestCellRows((AreaCell*)s0);
+                col  = next_col;
+                cell = &g_AreaCells[sp10_row][col];
+                if ((cell->tile_x == 0) || (cell->tile_y == 0)) {
+                    Area_RequestCellRows(cell);
                     D_8014933A |= 1;
                 } else {
-                    D_1F800014[0].vx           = (s0[0] << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
-                    D_1F800014[0].vy           = (s0[1] << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
-                    rec                        = (s8*)((MAP_BUNDLE_BASE + 0x30) + s0[1] * *map_width_ptr * 4 + s0[0] * 4);
-                    *(s8**)(D_1F800000 + 0x10) = rec;
-                    D_1F800014[0].vz           = -(rec[0] * 0x10);
+                    vert->vx   = (cell->tile_x << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
+                    vert->vy   = (cell->tile_y << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
+                    rec        = (s8*)((MAP_BUNDLE_BASE + 0x30) + cell->tile_y * *map_width_ptr * 4 + cell->tile_x * 4);
+                    D_1F800010 = rec;
+                    vert->vz   = -(rec[0] * 0x10);
                     gte_ldv0(&D_1F800014[0]);
                     gte_rtps();
                     gte_stsxy(&D_1F800034[0]);
                     if (((u16)(D_1F800034[0] + 0x32) >= 0x1A5U) || ((u16)(D_1F800034[1] + 0xC8) >= 0x1EBU)) {
-                        Area_RequestCellRows((AreaCell*)s0);
+                        Area_RequestCellRows(cell);
                     } else {
-                        s2 = *(u16*)(s0 + 2) & 0xFFF;
+                        s2 = cell->prim_id & AREA_CELL_PRIM_MASK;
                         if (s2 != 0) {
-                            s1  = (u8*)g_AreaCellPrims + s2 * 0x50;
-                            v16 = *(u16*)(s1 + 0x1E);
+                            prim = g_AreaCellPrims[s2];
+                            v16  = prim[0].pad1;
                             if (v16 != 0) {
-                                Area_UploadCell(s0[0], s0[1], s1, v16 - 1);
-                                *(u16*)(s1 + 0x1E) = 0;
+                                Area_UploadCell(cell->tile_x, cell->tile_y, prim, v16 - 1);
+                                prim[0].pad1 = 0;
                             }
                             goto block_38;
                         }
-                        v16             = Area_AllocCellPrimRow();
-                        s2              = v16;
-                        *(u16*)(s0 + 2) = v16;
+                        v16           = Area_AllocCellPrimRow();
+                        s2            = v16;
+                        cell->prim_id = v16;
                         if (s2 != 0) {
-                            rec  = *(s8**)(D_1F800000 + 0x10);
-                            s1   = (u8*)g_AreaCellPrims + s2 * 0x50;
-                            word = *(u32*)rec;
-                            if (((rec[4] < ((s32)(word << 0x10) >> 0x18)) | (rec[6] < (s32)(word >> 0x18))) != 0) {
-                                *(u16*)(s1 + 0x46) = Area_AllocCellPrimRow();
+                            rec   = D_1F800010;
+                            prim  = g_AreaCellPrims[s2];
+                            sword = *(s32*)rec;
+                            if (((rec[4] < ((sword << 0x10) >> 0x18)) | (rec[6] < (sword >> 0x18))) != 0) {
+                                prim[1].pad1 = Area_AllocCellPrimRow();
                             }
-                            rec  = *(s8**)(D_1F800000 + 0x10);
-                            word = *(u32*)rec;
-                            low  = rec[*map_width_ptr * 4];
-                            if (((*(s8*)(rec + *map_width_ptr * 4) < ((s32)(word << 8) >> 0x18)) | (((s32)((s32)low << 0x10) >> 0x18) < (s32)(word >> 0x18))) != 0) {
-                                *(u16*)(s1 + 0x4E) = Area_AllocCellPrimRow();
+                            rec   = D_1F800010;
+                            sword = *(s32*)rec;
+                            below = rec + *map_width_ptr * 4;
+                            if (((below[0] < ((sword << 8) >> 0x18)) | (((*(s32*)below << 0x10) >> 0x18) < (sword >> 0x18))) != 0) {
+                                prim[1].pad2 = Area_AllocCellPrimRow();
                             }
-                            *(u16*)(s0 + 2) |= Area_UploadCell(s0[0], s0[1], s1, g_FrameBufferIndex);
-                            *(s16*)(s1 + 0x1E) = (g_FrameBufferIndex == 0) ? 2 : 1;
+                            cell->prim_id |= Area_UploadCell(cell->tile_x, cell->tile_y, prim, g_FrameBufferIndex);
+                            v = 1;
+                            if (g_FrameBufferIndex == 0) {
+                                v = 2;
+                            }
+                            prim[0].pad1 = v;
                         block_38:
-                            tmp              = g_FrameBufferIndex * 0x28;
-                            pkt              = tmp + s1;
-                            *(u32*)(pkt + 8) = *(u32*)D_1F800034;
-                            rec              = *(s8**)(D_1F800000 + 0x10);
-                            D_1F800014[1].vx = D_1F800014[0].vx + 0x80;
-                            D_1F800014[1].vy = D_1F800014[0].vy;
-                            D_1F800014[2].vx = D_1F800014[0].vx;
-                            D_1F800014[2].vy = D_1F800014[0].vy + 0x80;
-                            D_1F800014[1].vz = -(rec[1] * 0x10);
-                            D_1F800014[3].vx = D_1F800014[0].vx + 0x80;
-                            D_1F800014[3].vy = D_1F800014[0].vy + 0x80;
-                            D_1F800014[2].vz = -(rec[2] * 0x10);
-                            D_1F800014[3].vz = -(rec[3] * 0x10);
-                            gte_ldv3c(&D_1F800014[0]);
-                            pkt2 = (u8*)g_AreaCellPrims + tmp + s2 * 0x50;
+                            pkt             = &prim[g_FrameBufferIndex];
+                            *(u32*)&pkt->x0 = *(u32*)D_1F800034;
+                            ux              = D_1F800014[0].vx;
+                            uy              = D_1F800014[0].vy;
+                            rec             = D_1F800010;
+                            D_1F80001C.vx   = ux + 0x80;
+                            D_1F800024.vx   = ux;
+                            D_1F80002C.vx   = ux + 0x80;
+                            D_1F80002C.vy   = uy + 0x80;
+                            D_1F80002C.vz   = -(rec[3] * 0x10);
+                            D_1F80001C.vy   = uy;
+                            D_1F800024.vy   = uy + 0x80;
+                            D_1F80001C.vz   = -(((*(s32*)rec << 0x10) >> 0x18) * 0x10);
+                            D_1F800024.vz   = -(rec[2] * 0x10);
+                            gte_ldv3c(&D_1F80001C);
+                            pkt2 = &g_AreaCellPrims[s2][g_FrameBufferIndex];
                             gte_rtpt();
-                            flags = *(u16*)(s0 + 2);
-                            tmp   = flags & 0x4000;
-                            if (flags & 0x8000) {
-                                v = g_FrameBufferIndex * 8;
-                                if (tmp != 0) {
-                                    cell = v;
-                                    if (s6 != 0) {
-                                        cell = v + row_depth_off;
-                                    }
-                                    LINK_PACKET(cell, pkt);
+                            if (cell->prim_id & 0x8000) {
+                                if (cell->prim_id & 0x4000) {
+                                    LINK_PACKET((s6 != 0) ? s6 - 1 : 0, g_FrameBufferIndex, pkt);
                                 } else {
-                                    LINK_PACKET((g_FrameBufferIndex + 2) * 8 + s5, pkt);
+                                    LINK_PACKET(s6, g_FrameBufferIndex + 2, pkt);
                                 }
-                            } else if ((tmp != 0) && ((g_AreaDrawMode == 6) || ((g_AreaDrawMode == 4) && (depth_threshold < s6)))) {
-                                word          = *(u32*)rec;
-                                D_1F800000[0] = word ^ 0x80;
-                                if ((((word >> 8) & BYTE_MASK) ^ 0x80) < D_1F800000[0]) {
-                                    D_1F800000[0] = (word >> 8) ^ 0x80;
+                            } else if ((cell->prim_id & 0x4000) && ((g_AreaDrawMode == 6) || ((g_AreaDrawMode == 4) && (depth_threshold < s6)))) {
+                                *low_min = *(u32*)rec ^ 0x80;
+                                word     = *(u32*)rec >> 8;
+                                if (((word & BYTE_MASK) ^ 0x80) < *low_min) {
+                                    *low_min = word ^ 0x80;
                                 }
-                                if ((((u8)rec[2]) ^ 0x80) < D_1F800000[0]) {
-                                    D_1F800000[0] = ((u8)rec[2]) ^ 0x80;
+                                rec = D_1F800010;
+                                v16 = *(u16*)(rec + 2);
+                                if (((v16 & BYTE_MASK) ^ 0x80) < *low_min) {
+                                    *low_min = v16 ^ 0x80;
                                 }
-                                if ((((u8)rec[3]) ^ 0x80) < D_1F800000[0]) {
-                                    D_1F800000[0] = ((u8)rec[3]) ^ 0x80;
+                                low = rec[3];
+                                if ((low ^ 0x80) < *low_min) {
+                                    *low_min = low ^ 0x80;
                                 }
                                 tmp = D_8014933D;
                                 D_8014933D += 1;
-                                D_80143740[tmp] = (s6 << 0x18) | (*(u16*)(s0 + 2) & 0xFFF) | (D_1F800000[0] << 0x10);
+                                D_80143740[tmp] = (s6 << 0x18) | (cell->prim_id & AREA_CELL_PRIM_MASK) | (*low_min << 0x10);
                             } else {
-                                LINK_PACKET(g_FrameBufferIndex * 8 + s5, s1 + g_FrameBufferIndex * 0x28);
+                                LINK_PACKET(s6, g_FrameBufferIndex, &prim[g_FrameBufferIndex]);
                             }
-                            gte_stsxy3((s32*)(pkt + 0x10), (s32*)(pkt + 0x18), (s32*)(pkt + 0x20));
-                            tmp = s2 * 0x50;
-                            v16 = *(u16*)(((u8*)g_AreaCellPrims + 0x46) + tmp);
+                            gte_stsxy3((s32*)&prim[g_FrameBufferIndex].x1, (s32*)&prim[g_FrameBufferIndex].x2, (s32*)&prim[g_FrameBufferIndex].x3);
+                            v16 = g_AreaCellPrims[s2][1].pad1;
                             if (v16 != 0) {
-                                link                       = (u8*)g_AreaCellPrims + g_FrameBufferIndex * 0x28 + v16 * 0x50;
-                                *(u32*)(link + 8)          = *(u32*)(pkt2 + 0x20);
-                                *(u32*)(link + 0x10)       = *(u32*)(pkt2 + 0x10);
-                                D_1F800014[0].vx           = (s0[0] << 7) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
-                                D_1F800014[0].vy           = ((s0[1] - 0x80) << 7) - AREA_CELL_HALF;
-                                rec                        = (s8*)((MAP_BUNDLE_BASE + 0x34) + s0[1] * g_AreaMapBundle.width * 4 + s0[0] * 4);
-                                *(s8**)(D_1F800000 + 0x10) = rec;
-                                D_1F800014[1].vx           = D_1F800014[0].vx;
-                                D_1F800014[1].vy           = ((s0[1] - 0x80) << 7) + AREA_CELL_HALF;
-                                D_1F800014[0].vz           = -(rec[0] * 0x10);
-                                D_1F800014[1].vz           = -(rec[2] * 0x10);
+                                link             = &g_AreaCellPrims[v16][g_FrameBufferIndex];
+                                *(u32*)&link->x0 = *(u32*)&pkt2->x3;
+                                *(u32*)&link->x1 = *(u32*)&pkt2->x1;
+                                x                = (cell->tile_x << 7) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
+                                vert[0].vx       = x;
+                                y                = (cell->tile_y - 0x80) << 7;
+                                vert[0].vy       = y - AREA_CELL_HALF;
+                                rec              = (s8*)((MAP_BUNDLE_BASE + 0x34) + cell->tile_y * g_AreaMapBundle.width * 4 + cell->tile_x * 4);
+                                D_1F800010       = rec;
+                                vert[1].vx       = x;
+                                vert[1].vy       = y + AREA_CELL_HALF;
+                                vert[0].vz       = -(rec[0] * 0x10);
+                                vert[1].vz       = -((s8) * (u16*)(rec + 2) * 0x10);
                                 gte_ldv3c(&D_1F800014[0]);
-                                LINK_PACKET((g_FrameBufferIndex + (((*(u16*)(s0 + 2) >> 0xC) & 2) ^ 2)) * 8 + s5, link);
+                                LINK_PACKET(s6, g_FrameBufferIndex + (((cell->prim_id >> 0xC) & 2) ^ 2), link);
                                 gte_rtpt();
-                                gte_stsxy3((s32*)(link + 0x20), (s32*)(link + 0x18), (s32*)D_1F800034);
+                                gte_stsxy3((s32*)&link->x3, (s32*)&link->x2, (s32*)D_1F800034);
                             }
-                            v16 = *(u16*)(((u8*)g_AreaCellPrims + 0x4E) + tmp);
+                            v16 = g_AreaCellPrims[s2][1].pad2;
                             if (v16 != 0) {
-                                link                       = (u8*)g_AreaCellPrims + g_FrameBufferIndex * 0x28 + v16 * 0x50;
-                                *(u32*)(link + 8)          = *(u32*)(pkt2 + 0x18);
-                                *(u32*)(link + 0x10)       = *(u32*)(pkt2 + 0x20);
-                                D_1F800014[0].vx           = ((s0[0] - 0x80) << 7) - AREA_CELL_HALF;
-                                D_1F800014[0].vy           = (s0[1] << 7) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
-                                rec                        = (s8*)((MAP_BUNDLE_BASE + 0x30) + (s0[1] + 1) * g_AreaMapBundle.width * 4 + s0[0] * 4);
-                                *(s8**)(D_1F800000 + 0x10) = rec;
-                                D_1F800014[1].vx           = ((s0[0] - 0x80) << 7) + AREA_CELL_HALF;
-                                D_1F800014[1].vy           = D_1F800014[0].vy;
-                                D_1F800014[0].vz           = -(rec[0] * 0x10);
-                                D_1F800014[1].vz           = -(rec[1] * 0x10);
+                                link             = &g_AreaCellPrims[v16][g_FrameBufferIndex];
+                                *(u32*)&link->x0 = *(u32*)&pkt2->x2;
+                                *(u32*)&link->x1 = *(u32*)&pkt2->x3;
+                                x                = (cell->tile_x - 0x80) << 7;
+                                vert[0].vx       = x - AREA_CELL_HALF;
+                                y                = (cell->tile_y << 7) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
+                                vert[0].vy       = y;
+                                rec              = (s8*)((MAP_BUNDLE_BASE + 0x30) + (cell->tile_y + 1) * g_AreaMapBundle.width * 4 + cell->tile_x * 4);
+                                D_1F800010       = rec;
+                                vert[1].vx       = x + AREA_CELL_HALF;
+                                D_1F80001C.vy    = y;
+                                vert[0].vz       = -(rec[0] * 0x10);
+                                D_1F80001C.vz    = -(((*(s32*)rec << 0x10) >> 0x18) * 0x10);
                                 gte_ldv3c(&D_1F800014[0]);
-                                LINK_PACKET((g_FrameBufferIndex + (((*(u16*)(s0 + 2) >> 0xB) & 2) ^ 2)) * 8 + s5, link);
+                                LINK_PACKET(s6, g_FrameBufferIndex + (((cell->prim_id >> 0xB) & 2) ^ 2), link);
                                 gte_rtpt();
-                                gte_stsxy3((s32*)(link + 0x18), (s32*)(link + 0x20), (s32*)D_1F800034);
+                                gte_stsxy3((s32*)&link->x2, (s32*)&link->x3, (s32*)D_1F800034);
                             }
                         }
                     }
                 }
                 fp += 1;
-            } while (fp < (0x1C - (D_1F80000C * 2)));
+            } while (fp < (0x1C - (SCRATCH(s32, 0xC) * 2)));
         }
         s6 += 1;
-        row_depth_off += 0x30;
-        col_depth_off += 0x30;
     } while (s6 < 0x37);
     func_80153D34();
 }

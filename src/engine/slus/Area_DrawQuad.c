@@ -21,10 +21,8 @@ MATCH void Area_DrawQuad(ScenePart* parts, s32 origin_x, s32 origin_y) {
     n        = 1;
     if (parts->head.count != 1) {
         do {
-            rec         = &parts[n];
-            verts[0].vx = origin_x + rec[0].vertex.x * 2;
-            verts[0].vy = origin_y + rec[0].vertex.y * 2;
-            verts[0].vz = rec[0].raw;
+            rec = &parts[n];
+            setVector(&verts[0], origin_x + rec[0].vertex.x * 2, origin_y + rec[0].vertex.y * 2, rec[0].raw);
             gte_ldv0(&verts[0]);
             gte_rtps();
             prim = (POLY_FT4*)g_GfxPrimCursor;
@@ -33,9 +31,7 @@ MATCH void Area_DrawQuad(ScenePart* parts, s32 origin_x, s32 origin_y) {
                 SetPolyFT4(prim);
                 SetShadeTex(prim, 0);
                 for (i = 1; i < 4; i++) {
-                    verts[i].vx = origin_x + rec[i].vertex.x * 2;
-                    verts[i].vy = origin_y + rec[i].vertex.y * 2;
-                    verts[i].vz = rec[i].raw;
+                    setVector(&verts[i], origin_x + rec[i].vertex.x * 2, origin_y + rec[i].vertex.y * 2, rec[i].raw);
                 }
                 gte_ldv3c(&verts[1]);
                 func_80155560(rec[4].raw, prim, 1);

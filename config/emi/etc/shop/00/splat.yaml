@@ -157,7 +157,7 @@ segments:
       - [0x616C, c, func_801D6D6C]
       - [0x6294, c, func_801D6E94]
       - [0x6300, c, func_801D6F00]
-      - [0x6480, c, SAVE_FormatSlotInfo]
+      - [0x6480, c, SAVE_FormatSlot]
       - [0x6608, c, func_801D7208]
       - [0x6744, c, func_801D7344]
       - [0x6780, c, func_801D7380]

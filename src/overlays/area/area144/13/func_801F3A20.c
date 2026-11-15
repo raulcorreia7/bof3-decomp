@@ -11,6 +11,6 @@ MATCH void func_801F3A20(void) {
         } else {
             g_Task->direction_08 = FACING_DOWN;
         }
-        func_801ABBA8(g_ScriptState, g_Task->direction_08);
+        Area_MoveActorRoute(g_ScriptState, g_Task->direction_08);
     }
 }

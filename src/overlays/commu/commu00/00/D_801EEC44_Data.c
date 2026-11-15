@@ -1,6 +1,6 @@
 #include "commu00_00.h"
 
-FairyVillageHeaderData D_801EEC44_Data = {
+FairyVillageHeader D_801EEC44_Data = {
     "%d",
     {
         {1, ITEM_HEALING_HERB, ITEM_CAT_ITEM},

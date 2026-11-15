@@ -17,16 +17,7 @@ extern u8      D_8014496D;
 /* The tile map scan: four byte records per work row, the map offset and code. */
 extern u8      D_801F4CB0[];
 
-/* One row of the world map message table: the context seed it answers, over the
- * message the scenario id selects. */
-typedef union WorldMapMessageRow {
-    u16 seed;
-    s16 messages[16];
-} WorldMapMessageRow;
-
-ASSERT_SIZE(WorldMapMessageRow, 0x20);
-ASSERT_OFFSET(WorldMapMessageRow, seed, 0x00);
-ASSERT_OFFSET(WorldMapMessageRow, messages, 0x00);
+#include "overlays/area/WorldMapMessage.h"
 
 #define WORLD_MAP_MESSAGE_ROWS 6
 extern WorldMapMessageRow D_801F4EA4[WORLD_MAP_MESSAGE_ROWS];
@@ -45,10 +36,10 @@ extern u8             D_801F4FA3[];
 extern WorldMapMarker D_801F4FF8[6];
 extern void (*D_801F5010[])(void);
 /* D_801F501C */
-extern UPoint2D g_FlockVelocity[4];
+extern Point2u g_FlockVelocity[4];
 /* The script id and tile-mode byte tables indexed by twice the spawn row. */
 /* D_801F502C */
-extern u8       g_FlockScript[4][2];
+extern u8      g_FlockScript[4][2];
 extern void (*D_801F5034[])(void);
 #define AREA_HUD_MASK_TABLE D_801F4FF8
 

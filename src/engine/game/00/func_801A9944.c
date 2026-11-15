@@ -88,8 +88,8 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
             return 0xFFU;
         case 0xE9:
             target_entry_e9 = target_bytes + state->cursor;
-            if ((Actor_RunHandler(state, ((s8*)target_entry_e9)[1], ((s8*)target_entry_e9)[2], ((target_entry_e9[3] << 8) | target_entry_e9[4]),
-                                  (s32)(s16)(target_entry_e9[6] | (target_entry_e9[5] << 8)), (target_bytes + state->cursor)[7], (target_bytes + state->cursor)[8])
+            if ((Actor_Run(state, ((s8*)target_entry_e9)[1], ((s8*)target_entry_e9)[2], ((target_entry_e9[3] << 8) | target_entry_e9[4]), (s32)(s16)(target_entry_e9[6] | (target_entry_e9[5] << 8)),
+                           (target_bytes + state->cursor)[7], (target_bytes + state->cursor)[8])
                  << 0x18) != 0) {
                 state->cursor = (state->cursor - 1);
                 result        = 0xFF;
@@ -140,9 +140,9 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
                 target_entry_ea = target_bytes + state->cursor;
                 GFX_AllocPaletteFade((u8*)spad_work_ea, target_entry_ea[1], target_entry_ea[2], target_entry_ea[3], target_entry_ea[4]);
             } else {
-                spad_work_ea->tint.bytes.unk_5D = (target_bytes + state->cursor)[1];
-                g_Task->tint.bytes.unk_5E       = (target_bytes + state->cursor)[2];
-                g_Task->tint.bytes.unk_5F       = (target_bytes + state->cursor)[3];
+                spad_work_ea->tint.bytes.rgb.red = (target_bytes + state->cursor)[1];
+                g_Task->tint.bytes.rgb.green     = (target_bytes + state->cursor)[2];
+                g_Task->tint.bytes.rgb.blue      = (target_bytes + state->cursor)[3];
             }
             next_cursor = state->cursor + 4;
         block_28:

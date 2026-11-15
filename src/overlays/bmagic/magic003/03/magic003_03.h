@@ -42,8 +42,30 @@ extern u8                       D_801F0B04[];
 /* The target column of g_BattleEffects: each store forms its own slot base. */
 extern BattleEffectTargetColumn D_801EC3A4[];
 void                            func_801F03F0(s32 dir);
+extern u8                       D_801F0AD4[];
+
+/* A palette fade colour per row: the signed red, green and blue steps. */
+extern ColorDelta8 D_801F0A78[];
+
+/* A screen rectangle: the corner and the size. */
+typedef struct Magic003Rect {
+    u16 x;
+    u16 y;
+    u16 w;
+    u16 h;
+} Magic003Rect;
+
+ASSERT_SIZE(Magic003Rect, 0x08);
+ASSERT_OFFSET(Magic003Rect, y, 0x02);
+ASSERT_OFFSET(Magic003Rect, w, 0x04);
+ASSERT_OFFSET(Magic003Rect, h, 0x06);
+
+extern Magic003Rect D_801F0B10[];
+/* The length of each label and its glyph codes, 0 at the end and 0xFF for a space. */
+extern u8           D_801F0A9C[];
+extern u8           D_801F0AA0[][13];
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
-extern BattleEffect             D_801F0B38[];
+extern BattleEffect D_801F0B38[];
 #define BMAGIC_EFFECT_SLOTS D_801F0B38
 #define BMAGIC_EFFECT_COUNT 32
 

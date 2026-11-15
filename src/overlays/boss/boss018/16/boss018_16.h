@@ -45,10 +45,14 @@ ASSERT_OFFSET(Boss018MapCell, row, 0x01);
 
 extern Boss018MapCell D_800C2DC4[];
 extern u32            D_800C2DC8[];
+extern s32            D_801EB664;
+extern s32            D_801EB668;
+extern s16            D_801EB66E;
 extern u16            D_801EB6C4;
 extern u16            D_801EB6C6;
 extern u16            D_801EB7DC;
 extern u16            D_801EB8F4;
+extern s32            D_801EBF5C;
 extern u16            D_801FD6FC;
 extern u16            D_801FD6FE;
 /* Frame-state word owned by the main executable; the boss018 step reads bit 0. */

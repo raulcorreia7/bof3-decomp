@@ -33,9 +33,7 @@ MATCH void func_801F7424(Actor* actor) {
     poly->y1 = poly->y0 + D_801FE38C[actor->unk_04].dy1;
     poly->x2 = poly->x0 + D_801FE38C[actor->unk_04].dx2;
     poly->y2 = poly->y0 + D_801FE38C[actor->unk_04].dy2;
-    poly->r0 = 0;
-    poly->g0 = actor->unk_03;
-    poly->b0 = actor->unk_03;
+    setRGB0(poly, 0, actor->unk_03, actor->unk_03);
     Area_AddCellPrim(actor->unk_18, actor->unk_1C, -2, sizeof(POLY_F3));
 }
 
@@ -81,7 +79,42 @@ MATCH s32 func_801F75BC(void) {
     return alive;
 }
 
-INCLUDE_ASM(func_801F76D0);
+MATCH void func_801F76D0(void) {
+    SceneSpark* spark;
+    u8          mode;
+    u8          i;
+
+    FAKE_STACK_PADS(u8, 0x20); /* FAKE: retail reserves 32 unused stack bytes. */
+    mode  = g_Task->unk_06;
+    spark = MEM_PTR(SceneSpark, AREA_WORK + 0x800 + mode * 0x500);
+    i     = 0;
+    do {
+        if (g_Task->unk_06 == 0) {
+            spark->pos.x = ((rand() & 0x1FF) << 8) + 0x120000;
+            spark->pos.y = ((rand() & 0x1FF) << 8) + 0x2E8000;
+            spark->pos.z = TO_COORD(2112) - ((spark->pos.x - 0x120000) << 7);
+            spark->vx    = (spark->pos.x - 0x130000) >> 4;
+            spark->vy    = (spark->pos.y - 0x2F8000) >> 4;
+            spark->vz    = (-(rand() & 0xFF)) << 5;
+            spark->vx -= 0x800;
+        } else {
+            spark->pos.x = ((rand() & 0x1FF) << 8) + 0x78000;
+            spark->pos.y = ((rand() & 0x1FF) << 8) + 0x318000;
+            spark->pos.z = TO_COORD(2112) - ((spark->pos.y - 0x318000) << 7);
+            spark->vx    = (spark->pos.x - 0x88000) >> 4;
+            spark->vy    = (spark->pos.y - 0x328000) >> 4;
+            spark->vz    = (-(rand() & 0xFF)) << 5;
+            spark->vy    = -0x800;
+        }
+        spark->active = 1;
+        spark->life   = 0x18;
+        spark->unk_01 = 0;
+        spark->shade  = 0x60;
+        spark->frame  = rand() & 7;
+        spark++;
+        i++;
+    } while (i < 32);
+}
 
 MATCH void func_801F78D0(void) {
     SYS_DISPATCH_BYTE(D_801FE3E0, D_80146872);
@@ -225,7 +258,7 @@ MATCH void func_801FAC88(void) {
         case 1:
             if (g_ScriptVars[0] == 0x0F) {
                 UI_SetMode(UI_MODE_LONG_FADE_OUT);
-                func_801C16B8();
+                Char_RebuildPartyStats();
                 SND_StartXAStream(0, 1);
                 g_SceneState.step_05 = 2;
             }
@@ -247,7 +280,7 @@ MATCH void func_801FAC88(void) {
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             g_GameFlags ^= 0x0E;
             Game_ClearScriptActive();
-            g_ScriptVars[0] = 0;
+            *g_ScriptVars = 0;
             Scene_ClearScriptState(&g_SceneState.step_05);
             break;
         case 14:
@@ -482,7 +515,42 @@ MATCH s32 func_801FD498(void) {
     }
 }
 
-INCLUDE_ASM(func_801FD5A8);
+MATCH s32 func_801FD5A8(void) {
+    if (D_80145F09 == 5) {
+        if (SYS_TestFlag(g_SceneFlags, 0x10) == 0) {
+            Game_SetScriptActive();
+            D_80146875 = 2;
+            D_80146874 = 6;
+            return 1;
+        } else if (SYS_TestFlag(g_SceneFlags, 0x12) == 0) {
+            Game_SetScriptActive();
+            D_80146875 = 3;
+            D_80146874 = 6;
+            return 1;
+        } else if (SYS_TestFlag(g_SceneFlags, 0x1D) == 0) {
+            Game_SetScriptActive();
+            D_80146875    = 50;
+            *g_ScriptVars = 0;
+            D_80146874    = 6;
+            return 1;
+        } else if (SYS_TestFlag(g_SceneFlags, 0x11) == 0) {
+            Game_SetScriptActive();
+            D_80146875 = 7;
+            D_80146874 = 6;
+            return 1;
+        } else {
+            Game_SetScriptActive();
+            D_80146875 = 5;
+            D_80146874 = 6;
+            return 1;
+        }
+    } else {
+        Game_SetScriptActive();
+        D_80146875 = 0;
+        D_80146874 = 6;
+        return 1;
+    }
+}
 
 MATCH s32 func_801FD6F8(void) {
     if (D_80145F09 == 5) {

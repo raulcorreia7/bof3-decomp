@@ -110,9 +110,7 @@ MATCH void func_801F6E48(void) {
 
     func_801AC1DC(origin, work_cell->channel_1C);
 
-    projection.vx = ((origin[0] + SPAD_ROW->pos.x.fixed) >> 9) - 0x4000;
-    projection.vy = ((origin[1] + SPAD_ROW->pos.y.fixed) >> 9) - 0x4000;
-    projection.vz = -(origin[2] + COORD_INT(SPAD_ROW->pos.z)) / 2;
+    setVector(&projection, ((origin[0] + SPAD_ROW->pos.x.fixed) >> 9) - 0x4000, ((origin[1] + SPAD_ROW->pos.y.fixed) >> 9) - 0x4000, -(origin[2] + COORD_INT(SPAD_ROW->pos.z)) / 2);
 
     work_cell->projected = RotTransPers(&projection, (long*)&poly->x0, &depth, &flag);
 
@@ -170,7 +168,7 @@ MATCH void func_801F7134(s32 chapter_id) {
     setUV0(prim, 0, 32);
     setWH(prim, 256, 1768);
     prim->clut = 0x7A80;
-    setRGB0(prim, g_Task->tint.bytes.unk_5D, g_Task->tint.bytes.unk_5E, g_Task->tint.bytes.unk_5F);
+    setRGB0(prim, g_Task->tint.bytes.rgb.red, g_Task->tint.bytes.rgb.green, g_Task->tint.bytes.rgb.blue);
     SetShadeTex(prim, 0);
     SetSemiTrans(prim, chapter_id & BYTE_MASK);
     GFX_AddPrim(g_Task->draw_layer, sizeof(SPRT));
@@ -198,12 +196,12 @@ MATCH void func_801F72A0(void) {
 
     func_801F7134(1);
 
-    g_Task->tint.bytes.unk_5D += 2;
-    g_Task->tint.bytes.unk_5E += 2;
-    g_Task->tint.bytes.unk_5F += 2;
+    g_Task->tint.bytes.rgb.red += 2;
+    g_Task->tint.bytes.rgb.green += 2;
+    g_Task->tint.bytes.rgb.blue += 2;
 
     work = SCN_EFFECT;
-    if (work->color_r == 0x80) {
+    if (work->color.red == 0x80) {
         g_ScriptVarsReq.byte = 0x14;
         work->step           = 2;
         g_Task->timer        = 255;
@@ -231,14 +229,14 @@ MATCH void func_801F73A8(void) {
     func_801F7134(1);
 
     work = SCN_EFFECT;
-    work->color_r -= 2;
+    work->color.red -= 2;
     work = SCN_EFFECT;
-    work->color_g -= 2;
+    work->color.green -= 2;
     work = SCN_EFFECT;
-    work->color_b -= 2;
+    work->color.blue -= 2;
 
     work = SCN_EFFECT;
-    if (work->color_r == 0) {
+    if (work->color.red == 0) {
         work->counter_09 = 0;
         Actor_Clear();
     }
@@ -344,9 +342,9 @@ MATCH void func_801F7670(void) {
     point.x              = TO_COORD(11);
     point.y              = TO_COORD(19) + COORD_HALF;
     point.z.part.integer = Area_SampleHeight(TO_COORD(11), TO_COORD(19) + COORD_HALF);
-    color.r              = 0x30;
-    color.g              = 0x30;
-    color.b              = 0x30;
+    color.red            = 0x30;
+    color.green          = 0x30;
+    color.blue           = 0x30;
     stop                 = 1;
     do {
         next.x = point.x;
@@ -396,7 +394,7 @@ MATCH void func_801F78EC(volatile SceneLinePoint to, volatile SceneLinePoint fro
     vec.vz  = (-point_z->part.integer / 2);
     RotTransPers(&vec, (long*)&prim->x1, &p, &flag);
 
-    setRGB0(prim, color.r, color.g, color.b);
+    setRGB0(prim, color.red, color.green, color.blue);
 
     GFX_AddPrim((u8)SCN_EFFECT->ot_index, sizeof(*prim));
 }
@@ -413,29 +411,29 @@ MATCH void func_801F7A5C(void) {
     SceneEffect* work_tail;
     SceneEffect* work_state;
 
-    work_pos                     = SCN_EFFECT;
-    work_pos->pos.x              = TO_COORD(99) + COORD_HALF;
-    work_pos->pos.y              = TO_COORD(13);
-    work_pos->pos.z.part.integer = 0x300;
-    work_pos->counter_09         = 0x78;
-    work_tail                    = SCN_EFFECT;
-    work_pos->angle.x            = 0;
-    work_pos->angle.y            = 0;
-    work_pos->angle.z            = 0;
-    *(s8*)&work_tail->color_b    = -1;
-    *(s8*)&work_tail->color_g    = -1;
-    *(s8*)&work_tail->color_r    = -1;
-    work_state                   = SCN_EFFECT;
-    work_state->counter_0C       = 1;
-    work_state->counter_10       = 0;
-    work_state->channel_20       = 0;
-    work_state->channel_1C       = 0;
-    work_state->channel_18       = 0;
-    work_state->channel_0A       = 0;
-    work_state->channel_0B       = 0;
-    work_state->channel_08       = 0;
-    work_state->channel_07       = 0;
-    work_state->channel_06       = 0;
+    work_pos                      = SCN_EFFECT;
+    work_pos->pos.x               = TO_COORD(99) + COORD_HALF;
+    work_pos->pos.y               = TO_COORD(13);
+    work_pos->pos.z.part.integer  = 0x300;
+    work_pos->counter_09          = 0x78;
+    work_tail                     = SCN_EFFECT;
+    work_pos->angle.x             = 0;
+    work_pos->angle.y             = 0;
+    work_pos->angle.z             = 0;
+    *(s8*)&work_tail->color.blue  = -1;
+    *(s8*)&work_tail->color.green = -1;
+    *(s8*)&work_tail->color.red   = -1;
+    work_state                    = SCN_EFFECT;
+    work_state->counter_0C        = 1;
+    work_state->counter_10        = 0;
+    work_state->channel_20        = 0;
+    work_state->channel_1C        = 0;
+    work_state->channel_18        = 0;
+    work_state->channel_0A        = 0;
+    work_state->channel_0B        = 0;
+    work_state->channel_08        = 0;
+    work_state->channel_07        = 0;
+    work_state->channel_06        = 0;
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 14));
     SCN_EFFECT->step = 1;
 }
@@ -633,28 +631,16 @@ MATCH void func_801F8360(void) {
     v2x = (u32)(size * rcos(angle)) >> 8;
     v2y = (u32)(size * rsin(angle)) >> 8;
 
-    v0.vx = 0;
-    v0.vy = 0;
-    v0.vz = 0;
-    v1.vx = size << 4;
-    v1.vy = 0;
-    v1.vz = 0;
-    v2.vx = v2x;
-    v2.vy = v2y;
-    v2.vz = 0;
+    setVector(&v0, 0, 0, 0);
+    setVector(&v1, size << 4, 0, 0);
+    setVector(&v2, v2x, v2y, 0);
 
     v2x = (u32)(size * rcos(172)) >> 8;
     v2y = (u32)(size * rsin(172)) >> 8;
 
-    v3.vx = 0;
-    v3.vy = 0;
-    v3.vz = 0;
-    v4.vx = size << 4;
-    v4.vy = 0;
-    v4.vz = 0;
-    v5.vx = v2x;
-    v5.vy = v2y;
-    v5.vz = 0;
+    setVector(&v3, 0, 0, 0);
+    setVector(&v4, size << 4, 0, 0);
+    setVector(&v5, v2x, v2y, 0);
 
     i = 0;
     do {
@@ -669,7 +655,7 @@ MATCH void func_801F8360(void) {
             RotTransPers3(&v3, &v4, &v5, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
         }
         shade = -(g_Task->timer << 1);
-        setRGB0(prim, g_Task->tint.bytes.unk_5D, g_Task->tint.bytes.unk_5E, g_Task->tint.bytes.unk_5F);
+        setRGB0(prim, g_Task->tint.bytes.rgb.red, g_Task->tint.bytes.rgb.green, g_Task->tint.bytes.rgb.blue);
         setRGB1(prim, shade, shade, shade);
         setRGB2(prim, shade, shade, shade);
         SetSemiTrans(prim, 1);
@@ -686,8 +672,8 @@ MATCH void func_801F8360(void) {
 /* Scene_DrawTriangle saves the active effect's rotation across a triangle draw;
  * func_8015B410 passes the three angles to RotMatrix. */
 typedef struct SceneRotation {
-    Point3DL angle;
-    s32      unk_0C; /* 0x0C */
+    Point3l angle;
+    s32     unk_0C; /* 0x0C */
 } SceneRotation;
 
 ASSERT_SIZE(SceneRotation, 0x10);
@@ -718,15 +704,9 @@ MATCH void Scene_DrawTriangle(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
 
     prim = (POLY_G3*)g_GfxPrimCursor;
 
-    v0.vx = 0;
-    v0.vy = 0;
-    v0.vz = 0;
-    v1.vx = size << 4;
-    v1.vy = 0;
-    v1.vz = 0;
-    v2.vx = v2x;
-    v2.vy = v2y;
-    v2.vz = 0;
+    setVector(&v0, 0, 0, 0);
+    setVector(&v1, size << 4, 0, 0);
+    setVector(&v2, v2x, v2y, 0);
 
     SetPolyG3(prim);
     PushMatrix();
@@ -752,15 +732,15 @@ MATCH void func_801F878C(void) {
     SceneEffect* tail;
     SceneEffect* late;
 
-    work                    = SCN_EFFECT;
-    FIELD(s16, work, 0x2Eu) = (D_80147A86 + D_801FC9E8);
-    work->origin.y          = (D_80147A88 + D_801FC9E9);
-    work->counter_09        = 0;
-    SCN_EFFECT->channel_06  = 0x20;
-    tail                    = SCN_EFFECT;
-    *(s8*)&tail->color_b    = -0x80;
-    *(s8*)&tail->color_g    = -0x80;
-    *(s8*)&tail->color_r    = -0x80;
+    work                     = SCN_EFFECT;
+    FIELD(s16, work, 0x2Eu)  = (D_80147A86 + D_801FC9E8);
+    work->origin.y           = (D_80147A88 + D_801FC9E9);
+    work->counter_09         = 0;
+    SCN_EFFECT->channel_06   = 0x20;
+    tail                     = SCN_EFFECT;
+    *(s8*)&tail->color.blue  = -0x80;
+    *(s8*)&tail->color.green = -0x80;
+    *(s8*)&tail->color.red   = -0x80;
     func_801F8BCC();
     late       = SCN_EFFECT;
     late->step = late->channel_07;
@@ -774,14 +754,14 @@ MATCH void func_801F882C(void) {
     work = SCN_EFFECT;
     work->origin.x -= 4;
     work->origin.y += D_801FC9EC[work->counter_09 >> 2];
-    shade = *(s8*)&work->color_r;
+    shade = *(s8*)&work->color.red;
 
     if (shade != 0) {
-        work->color_r = shade - 2;
-        tail          = SCN_EFFECT;
-        tail->color_b -= 2;
+        work->color.red = shade - 2;
+        tail            = SCN_EFFECT;
+        tail->color.blue -= 2;
         tail = SCN_EFFECT;
-        tail->color_g -= 2;
+        tail->color.green -= 2;
         tail = SCN_EFFECT;
         tail->counter_09 += 1;
         tail = SCN_EFFECT;
@@ -801,14 +781,14 @@ MATCH void func_801F8930(void) {
 
     work = SCN_EFFECT;
     work->origin.y -= 2;
-    shade = *(s8*)&work->color_r;
+    shade = *(s8*)&work->color.red;
 
     if (shade != 0) {
-        work->color_r = shade - 4;
-        tail          = SCN_EFFECT;
-        tail->color_b -= 4;
+        work->color.red = shade - 4;
+        tail            = SCN_EFFECT;
+        tail->color.blue -= 4;
         tail = SCN_EFFECT;
-        tail->color_g -= 4;
+        tail->color.green -= 4;
         tail = SCN_EFFECT;
         if ((tail->counter_09 & 0x7) == 0) {
             tail->channel_06 += 1;
@@ -858,14 +838,14 @@ MATCH void func_801F8AB8(void) {
     current                     = SCN_EFFECT;
     VOL(u16, current->origin.x) = (u16)screen->vx;
     current->origin.y           = SP_REF(u16, 0x36u);
-    shade                       = *(s8*)&current->color_r;
+    shade                       = *(s8*)&current->color.red;
 
     if (shade != 0) {
-        current->color_r = shade - 4;
-        tail             = SCN_EFFECT;
-        tail->color_b -= 4;
+        current->color.red = shade - 4;
+        tail               = SCN_EFFECT;
+        tail->color.blue -= 4;
         tail = SCN_EFFECT;
-        tail->color_g -= 4;
+        tail->color.green -= 4;
         tail = SCN_EFFECT;
         if ((tail->counter_09 & 0x7) == 0) {
             tail->channel_06 += 1;
@@ -885,7 +865,7 @@ MATCH void func_801F8BCC(void) {
     SetPolyFT4(prim);
     setXYWH(prim, SCN_EFFECT->origin.x - half, SCN_EFFECT->origin.y - half, SCN_EFFECT->channel_06, SCN_EFFECT->channel_06);
     setUVWH(prim, 0xE0, 0x30, 0x1F, 0x20);
-    setRGB0(prim, SCN_EFFECT->color_r, SCN_EFFECT->color_g, SCN_EFFECT->color_b);
+    setRGB0(prim, SCN_EFFECT->color.red, SCN_EFFECT->color.green, SCN_EFFECT->color.blue);
     setClut(prim, 160, STAGE_PALETTE_Y + 3);
     prim->tpage = GetTPage(0, 1, 704, 256);
     SetShadeTex(prim, 0);
@@ -932,9 +912,7 @@ MATCH void func_801F8D90(void) {
 
     func_801AC1DC(origin, work[0x10]);
 
-    projection.vx = ((origin[0] + SPAD_ROW->pos.x.fixed) >> 9) - 0x4000;
-    projection.vy = ((origin[1] + SPAD_ROW->pos.y.fixed) >> 9) - 0x4000;
-    projection.vz = -(origin[2] + COORD_INT(SPAD_ROW->pos.z)) / 2;
+    setVector(&projection, ((origin[0] + SPAD_ROW->pos.x.fixed) >> 9) - 0x4000, ((origin[1] + SPAD_ROW->pos.y.fixed) >> 9) - 0x4000, -(origin[2] + COORD_INT(SPAD_ROW->pos.z)) / 2);
 
     work_cell->projected = RotTransPers(&projection, (long*)&poly->x0, &depth, &flag);
 
@@ -946,9 +924,7 @@ MATCH void func_801F8D90(void) {
     TASK_SET(second);
     func_801AC1DC(origin, work[0x1C]);
 
-    projection.vx = ((origin[0] + SPAD_ROW->pos.x.fixed) >> 9) - 0x4000;
-    projection.vy = ((origin[1] + SPAD_ROW->pos.y.fixed) >> 9) - 0x4000;
-    projection.vz = -(origin[2] + COORD_INT(SPAD_ROW->pos.z)) / 2;
+    setVector(&projection, ((origin[0] + SPAD_ROW->pos.x.fixed) >> 9) - 0x4000, ((origin[1] + SPAD_ROW->pos.y.fixed) >> 9) - 0x4000, -(origin[2] + COORD_INT(SPAD_ROW->pos.z)) / 2);
 
     work_cell->projected = RotTransPers(&projection, (long*)&poly->x2, &depth, &flag);
 
@@ -989,7 +965,7 @@ MATCH void func_801F9178(void) {
     u8 i;
     u8 j;
 
-    func_801C1DF0(0);
+    Scene_RunScenario(0);
     Game_RequestAreaChange(AREA_ID_DAUNA_MINE_WHELP, TO_COORD(99), TO_COORD(12), FACING_RIGHT);
     /* FAKE: place loop init early. */
     i                     = 0;
@@ -1013,7 +989,7 @@ MATCH void func_801F9178(void) {
     }
     g_GameFlags |= GAME_FLAG_MENU_LOCK;
     while (EMI_IsReady() == 0) {
-        CallbackWait(1U);
+        SYS_ThreadWait(1U);
     }
     g_ScriptVarsReq.word = 0;
     D_80146872           = 1;
@@ -1031,16 +1007,16 @@ MATCH void func_801F92DC(void) {
     if (selection == 1) {
         func_801BE1B0(0U);
         if (g_ScriptVars[2] == 0) {
-            slot        = Actor_FindFreeSlot();
+            slot        = Actor_FindFreeSpawned();
             *D_1F800000 = slot;
             actor_slot  = slot & BYTE_MASK;
             if (actor_slot != GAME_NONE) {
-                g_ActorSlots[actor_slot].header.flags = 1;
-                g_ActorSlots[*D_1F800000].type        = 0x10;
-                g_ActorSlots[*D_1F800000].counter_18  = 2;
-                g_ActorSlots[*D_1F800000].counter_1C  = 2;
-                g_ActorSlots[*D_1F800000].scene_step  = 3;
-                g_ActorSlots[*D_1F800000].selection   = selection;
+                g_SpawnedActors[actor_slot].header.flags = 1;
+                g_SpawnedActors[*D_1F800000].type        = 0x10;
+                g_SpawnedActors[*D_1F800000].counter_18  = 2;
+                g_SpawnedActors[*D_1F800000].counter_1C  = 2;
+                g_SpawnedActors[*D_1F800000].scene_step  = 3;
+                g_SpawnedActors[*D_1F800000].selection   = selection;
             }
             state0  = &g_AreaCameraAngle.vz;
             *state0 = *state0 - 0x155;
@@ -1114,19 +1090,19 @@ MATCH void func_801F9644(void) {
         if (SYS_TestFlag(g_SceneFlags, 2) == 0) {
             g_ScriptVarsReq.word = 0;
             Area_AdvanceScroll(768);
-            func_801C601C(0);
+            Area_StartScrollRoute(0);
             timer       = &g_AreaCameraAngle.vx;
             *timer      = (*timer + 0xAA);
-            id          = Actor_FindFreeSlot();
+            id          = Actor_FindFreeSpawned();
             slot        = id & BYTE_MASK;
             *D_1F800000 = id;
             if (slot != GAME_NONE) {
-                g_ActorSlots[slot].header.flags            = 1;
-                g_ActorSlots[D_1F800000[0]].type           = 0x13;
-                g_ActorSlots[D_1F800000[0]].camera_angle.x = *timer - 170;
-                g_ActorSlots[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                g_ActorSlots[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
-                g_ActorSlots[D_1F800000[0]].layer          = 0x40;
+                g_SpawnedActors[slot].header.flags            = 1;
+                g_SpawnedActors[D_1F800000[0]].type           = 0x13;
+                g_SpawnedActors[D_1F800000[0]].camera_angle.x = *timer - 170;
+                g_SpawnedActors[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_SpawnedActors[D_1F800000[0]].layer          = 0x40;
             }
             Party_HideBattlers();
             g_Game.members[0].pos.x.fixed = TO_COORD(51);
@@ -1155,7 +1131,7 @@ MATCH void func_801F9868(void) {
                     SND_RequestBGM(3);
                 loop_10:
                     if (EMI_IsReady() == 0) {
-                        CallbackWait(1U);
+                        SYS_ThreadWait(1U);
                         goto loop_10;
                     }
                     g_AreaDrawFlags      = AREA_DRAW_ALL_FLAGS;
@@ -1165,17 +1141,17 @@ MATCH void func_801F9868(void) {
                     g_AreaCameraOffsetZ  = 0x480;
                     g_AreaCameraAngle.vz = 848;
                     func_801BE1B0(0U);
-                    func_801C601C(0);
-                    free_slot   = Actor_FindFreeSlot();
+                    Area_StartScrollRoute(0);
+                    free_slot   = Actor_FindFreeSpawned();
                     slot        = free_slot & BYTE_MASK;
                     *D_1F800000 = free_slot;
                     if (slot != GAME_NONE) {
-                        g_ActorSlots[slot].header.flags            = 1;
-                        g_ActorSlots[D_1F800000[0]].type           = 0x13;
-                        g_ActorSlots[D_1F800000[0]].camera_angle.x = g_AreaCameraAngle.vx;
-                        g_ActorSlots[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                        g_ActorSlots[D_1F800000[0]].camera_angle.z = 512;
-                        g_ActorSlots[D_1F800000[0]].layer          = 0x90;
+                        g_SpawnedActors[slot].header.flags            = 1;
+                        g_SpawnedActors[D_1F800000[0]].type           = 0x13;
+                        g_SpawnedActors[D_1F800000[0]].camera_angle.x = g_AreaCameraAngle.vx;
+                        g_SpawnedActors[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                        g_SpawnedActors[D_1F800000[0]].camera_angle.z = 512;
+                        g_SpawnedActors[D_1F800000[0]].layer          = 0x90;
                         return;
                     }
                 } else {
@@ -1311,14 +1287,14 @@ MATCH void func_801F9BE4(void) {
             if (g_ScriptVars[2] != 0x23) {
                 break;
             }
-            D_1F800000[0] = Actor_FindFreeSlot();
+            D_1F800000[0] = Actor_FindFreeSpawned();
             if ((D_1F800000[0] & BYTE_MASK) != GAME_NONE) {
-                g_ActorSlots[D_1F800000[0]].header.flags   = 1;
-                g_ActorSlots[D_1F800000[0]].type           = 0x13;
-                g_ActorSlots[D_1F800000[0]].camera_angle.x = g_AreaCameraAngle.vx + 384;
-                g_ActorSlots[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                g_ActorSlots[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
-                g_ActorSlots[D_1F800000[0]].layer          = 0x60;
+                g_SpawnedActors[D_1F800000[0]].header.flags   = 1;
+                g_SpawnedActors[D_1F800000[0]].type           = 0x13;
+                g_SpawnedActors[D_1F800000[0]].camera_angle.x = g_AreaCameraAngle.vx + 384;
+                g_SpawnedActors[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_SpawnedActors[D_1F800000[0]].layer          = 0x60;
             }
             g_SceneState.step_05 = 7;
             break;
@@ -1346,15 +1322,15 @@ MATCH void func_801F9FB8(void) {
             if (g_ScriptVars[2] == 0x30) {
                 g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
                 UI_SetMode(UI_MODE_FADE_IN);
-                id            = Actor_FindFreeSlot();
+                id            = Actor_FindFreeSpawned();
                 D_1F800000[0] = id;
                 if ((id & BYTE_MASK) != GAME_NONE) {
-                    g_ActorSlots[id].header.flags              = 1;
-                    g_ActorSlots[D_1F800000[0]].type           = 0x13;
-                    g_ActorSlots[D_1F800000[0]].camera_angle.x = g_AreaCameraAngle.vx + 448;
-                    g_ActorSlots[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                    g_ActorSlots[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
-                    g_ActorSlots[D_1F800000[0]].layer          = 0xFF;
+                    g_SpawnedActors[id].header.flags              = 1;
+                    g_SpawnedActors[D_1F800000[0]].type           = 0x13;
+                    g_SpawnedActors[D_1F800000[0]].camera_angle.x = g_AreaCameraAngle.vx + 448;
+                    g_SpawnedActors[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                    g_SpawnedActors[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                    g_SpawnedActors[D_1F800000[0]].layer          = 0xFF;
                 }
                 *state = 1;
             }
@@ -1447,15 +1423,15 @@ MATCH void func_801FA27C(void) {
             if (g_ScriptVarsReq.byte != 5) {
                 break;
             }
-            id            = Actor_FindFreeSlot();
+            id            = Actor_FindFreeSpawned();
             D_1F800000[0] = id;
             if ((id & BYTE_MASK) != GAME_NONE) {
-                g_ActorSlots[id].header.flags              = 1;
-                g_ActorSlots[D_1F800000[0]].type           = 0x13;
-                g_ActorSlots[D_1F800000[0]].camera_angle.x = -842;
-                g_ActorSlots[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                g_ActorSlots[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
-                g_ActorSlots[D_1F800000[0]].layer          = 0x60;
+                g_SpawnedActors[id].header.flags              = 1;
+                g_SpawnedActors[D_1F800000[0]].type           = 0x13;
+                g_SpawnedActors[D_1F800000[0]].camera_angle.x = -842;
+                g_SpawnedActors[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_SpawnedActors[D_1F800000[0]].layer          = 0x60;
             }
             g_SceneState.step_05 = 6;
             break;
@@ -1464,15 +1440,15 @@ MATCH void func_801FA27C(void) {
             if (g_ScriptVarsReq.byte != 8) {
                 break;
             }
-            id            = Actor_FindFreeSlot();
+            id            = Actor_FindFreeSpawned();
             D_1F800000[0] = id;
             if ((id & BYTE_MASK) != GAME_NONE) {
-                g_ActorSlots[id].header.flags              = 1;
-                g_ActorSlots[D_1F800000[0]].type           = 0x13;
-                g_ActorSlots[D_1F800000[0]].camera_angle.x = -684;
-                g_ActorSlots[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                g_ActorSlots[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
-                g_ActorSlots[D_1F800000[0]].layer          = 0x20;
+                g_SpawnedActors[id].header.flags              = 1;
+                g_SpawnedActors[D_1F800000[0]].type           = 0x13;
+                g_SpawnedActors[D_1F800000[0]].camera_angle.x = -684;
+                g_SpawnedActors[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_SpawnedActors[D_1F800000[0]].layer          = 0x20;
             }
             g_SceneState.timer_06 = 512;
             g_SceneState.step_05  = 7;
@@ -1638,16 +1614,16 @@ MATCH void func_801FA7D8(void) {
                 (*counter)--;
                 return;
             }
-            id            = Actor_FindFreeSlot();
+            id            = Actor_FindFreeSpawned();
             D_1F800000[0] = id;
             if (id != 0xFFu) {
-                g_ActorSlots[D_1F800000[0]].header.flags = 1;
-                g_ActorSlots[D_1F800000[0]].type         = 0x1Eu;
-                g_ActorSlots[D_1F800000[0]].pos.x.fixed  = g_Game.members[0].pos.x.fixed;
-                g_ActorSlots[D_1F800000[0]].pos.y.fixed  = g_Game.members[0].pos.y.fixed;
-                distance                                 = Area_SampleHeight(g_ActorSlots[D_1F800000[0]].pos.x.fixed, g_ActorSlots[D_1F800000[0]].pos.y.fixed) << 16;
-                g_ActorSlots[D_1F800000[0]].pos.z.fixed  = distance;
-                g_ActorSlots[D_1F800000[0]].unk_29       = 0;
+                g_SpawnedActors[D_1F800000[0]].header.flags = 1;
+                g_SpawnedActors[D_1F800000[0]].type         = 0x1Eu;
+                g_SpawnedActors[D_1F800000[0]].pos.x.fixed  = g_Game.members[0].pos.x.fixed;
+                g_SpawnedActors[D_1F800000[0]].pos.y.fixed  = g_Game.members[0].pos.y.fixed;
+                distance                                    = Area_SampleHeight(g_SpawnedActors[D_1F800000[0]].pos.x.fixed, g_SpawnedActors[D_1F800000[0]].pos.y.fixed) << 16;
+                g_SpawnedActors[D_1F800000[0]].pos.z.fixed  = distance;
+                g_SpawnedActors[D_1F800000[0]].unk_29       = 0;
             }
             *counter             = 0x84u;
             g_SceneState.step_05 = 7u;
@@ -1869,7 +1845,7 @@ MATCH void func_801FB204(void) {
         case 0:
             g_ScriptVarsReq.byte = 0xA;
             func_801BE1B0(1);
-            func_801C601C(1);
+            Area_StartScrollRoute(1);
             g_SceneState.step_05 = 1;
             break;
 
@@ -1917,18 +1893,18 @@ MATCH void func_801FB204(void) {
             if (WINDOW_EFFECT_IDLE()) {
                 countdown = &g_SceneState.timer_06;
                 if (TIMER_EXPIRED(*countdown)) {
-                    func_801C601C(2);
+                    Area_StartScrollRoute(2);
                     D_80143F84.raw = TO_COORD(1408);
                     Area_AdvanceScroll(D_80143F84.half[1]);
-                    slot          = Actor_FindFreeSlot();
+                    slot          = Actor_FindFreeSpawned();
                     D_1F800000[0] = slot;
                     if ((slot & BYTE_MASK) != GAME_NONE) {
-                        g_ActorSlots[slot].header.flags            = 1;
-                        g_ActorSlots[D_1F800000[0]].type           = 0x13;
-                        g_ActorSlots[D_1F800000[0]].camera_angle.x = -682;
-                        g_ActorSlots[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                        g_ActorSlots[D_1F800000[0]].camera_angle.z = 512;
-                        g_ActorSlots[D_1F800000[0]].layer          = 0x20;
+                        g_SpawnedActors[slot].header.flags            = 1;
+                        g_SpawnedActors[D_1F800000[0]].type           = 0x13;
+                        g_SpawnedActors[D_1F800000[0]].camera_angle.x = -682;
+                        g_SpawnedActors[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                        g_SpawnedActors[D_1F800000[0]].camera_angle.z = 512;
+                        g_SpawnedActors[D_1F800000[0]].layer          = 0x20;
                     }
                     *countdown           = 0x20;
                     g_SceneState.step_05 = 6;
@@ -2256,121 +2232,121 @@ MATCH void func_801FBE88(void) {
 }
 
 MATCH void func_801FC01C(void) {
-    SceneSampleRecord* rec;
-    u8*                base;
-    s8                 i;
-    s32                shift;
-    s32                lifetime;
-    s32                slot;
+    SceneSample* rec;
+    u8*          base;
+    s8           i;
+    s32          shift;
+    s32          lifetime;
+    s32          slot;
 
     base = D_80147BD8;
     i    = 0;
     if (*D_80147BDC > 0) {
         do {
-            shift                                    = 0xB - RANDOM_MASK(3);
-            slot                                     = i * sizeof(SceneFxSlot);
-            rec                                      = (SceneSampleRecord*)(i * sizeof(SceneSampleRecord) + (s32)base);
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 0)  = rec->sample[0] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 0)  = rec->weight[0] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 1)  = rec->sample[1] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 1)  = rec->weight[1] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 2)  = rec->sample[2] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 2)  = rec->weight[2] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 3)  = rec->sample[3] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 3)  = rec->weight[0] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 4)  = rec->sample[4] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 4)  = rec->weight[1] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 5)  = rec->sample[5] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 5)  = rec->weight[2] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 6)  = rec->sample[6] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 6)  = rec->weight[0] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 7)  = rec->sample[7] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 7)  = rec->weight[1] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 8)  = rec->sample[8] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 8)  = rec->weight[2] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 9)  = rec->sample[9] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 9)  = rec->weight[0] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 10) = rec->sample[10] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 10) = rec->weight[1] << shift;
-            SCENE_FX_CELL(g_SceneFx.accum, slot, 11) = rec->sample[11] << 16;
-            SCENE_FX_CELL(g_SceneFx.delta, slot, 11) = rec->weight[2] << shift;
+            shift                                            = 0xB - RANDOM_MASK(3);
+            slot                                             = i * sizeof(SceneEffectSlot);
+            rec                                              = (SceneSample*)(i * sizeof(SceneSample) + (s32)base);
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 0)  = rec->sample[0] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 0)  = rec->weight[0] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 1)  = rec->sample[1] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 1)  = rec->weight[1] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 2)  = rec->sample[2] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 2)  = rec->weight[2] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 3)  = rec->sample[3] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 3)  = rec->weight[0] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 4)  = rec->sample[4] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 4)  = rec->weight[1] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 5)  = rec->sample[5] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 5)  = rec->weight[2] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 6)  = rec->sample[6] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 6)  = rec->weight[0] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 7)  = rec->sample[7] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 7)  = rec->weight[1] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 8)  = rec->sample[8] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 8)  = rec->weight[2] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 9)  = rec->sample[9] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 9)  = rec->weight[0] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 10) = rec->sample[10] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 10) = rec->weight[1] << shift;
+            SCENE_EFFECT_CELL(g_SceneEffect.accum, slot, 11) = rec->sample[11] << 16;
+            SCENE_EFFECT_CELL(g_SceneEffect.delta, slot, 11) = rec->weight[2] << shift;
 
-            lifetime                                     = RANDOM_MASK(7) + 1;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 0)  = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 1)  = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 2)  = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 3)  = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 4)  = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 5)  = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 6)  = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 7)  = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 8)  = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 9)  = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 10) = lifetime;
-            SCENE_FX_CELL(g_SceneFx.life_step, slot, 11) = lifetime;
+            lifetime                                             = RANDOM_MASK(7) + 1;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 0)  = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 1)  = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 2)  = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 3)  = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 4)  = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 5)  = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 6)  = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 7)  = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 8)  = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 9)  = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 10) = lifetime;
+            SCENE_EFFECT_CELL(g_SceneEffect.life_step, slot, 11) = lifetime;
             i++;
         } while (i < *D_80147BDC);
     }
 }
 
-typedef struct SceneLifeRecord {
+typedef struct SceneLife {
     u8  unk_00[2];
-    u16 lifetime[SCENE_FX_CELL_COUNT];
+    u16 lifetime[SCENE_EFFECT_CELL_COUNT];
     u8  unk_1A[0x0E];
-} SceneLifeRecord;
+} SceneLife;
 
 MATCH void func_801FC3A0(void) {
-    SceneSampleRecord* rec;
-    SceneLifeRecord*   dst;
-    u8*                src_base;
-    u8*                dst_base;
-    s8                 i;
+    SceneSample* rec;
+    SceneLife*   dst;
+    u8*          src_base;
+    u8*          dst_base;
+    s8           i;
 
     src_base = D_80147BD8;
     dst_base = D_80147AA8;
     i        = 0;
     if ((*D_80147BDC) > 0) {
         do {
-            rec = (SceneSampleRecord*)(i * sizeof(SceneSampleRecord) + ((s32)src_base));
-            dst = (SceneLifeRecord*)(i * sizeof(SceneLifeRecord) + ((s32)dst_base));
+            rec = (SceneSample*)(i * sizeof(SceneSample) + ((s32)src_base));
+            dst = (SceneLife*)(i * sizeof(SceneLife) + ((s32)dst_base));
 
-            g_SceneFx.accum[i].cell[0] += g_SceneFx.delta[i].cell[0];
-            rec->sample[0] = g_SceneFx.accum[i].cell[0] >> 16;
-            g_SceneFx.accum[i].cell[1] += g_SceneFx.delta[i].cell[1];
-            rec->sample[1] = g_SceneFx.accum[i].cell[1] >> 16;
-            g_SceneFx.accum[i].cell[2] += g_SceneFx.delta[i].cell[2];
-            rec->sample[2] = g_SceneFx.accum[i].cell[2] >> 16;
-            g_SceneFx.accum[i].cell[3] += g_SceneFx.delta[i].cell[3];
-            rec->sample[3] = g_SceneFx.accum[i].cell[3] >> 16;
-            g_SceneFx.accum[i].cell[4] += g_SceneFx.delta[i].cell[4];
-            rec->sample[4] = g_SceneFx.accum[i].cell[4] >> 16;
-            g_SceneFx.accum[i].cell[5] += g_SceneFx.delta[i].cell[5];
-            rec->sample[5] = g_SceneFx.accum[i].cell[5] >> 16;
-            g_SceneFx.accum[i].cell[6] += g_SceneFx.delta[i].cell[6];
-            rec->sample[6] = g_SceneFx.accum[i].cell[6] >> 16;
-            g_SceneFx.accum[i].cell[7] += g_SceneFx.delta[i].cell[7];
-            rec->sample[7] = g_SceneFx.accum[i].cell[7] >> 16;
-            g_SceneFx.accum[i].cell[8] += g_SceneFx.delta[i].cell[8];
-            rec->sample[8] = g_SceneFx.accum[i].cell[8] >> 16;
-            g_SceneFx.accum[i].cell[9] += g_SceneFx.delta[i].cell[9];
-            rec->sample[9] = g_SceneFx.accum[i].cell[9] >> 16;
-            g_SceneFx.accum[i].cell[10] += g_SceneFx.delta[i].cell[10];
-            rec->sample[10] = g_SceneFx.accum[i].cell[10] >> 16;
-            g_SceneFx.accum[i].cell[11] += g_SceneFx.delta[i].cell[11];
-            rec->sample[11] = g_SceneFx.accum[i].cell[11] >> 16;
+            g_SceneEffect.accum[i].cell[0] += g_SceneEffect.delta[i].cell[0];
+            rec->sample[0] = g_SceneEffect.accum[i].cell[0] >> 16;
+            g_SceneEffect.accum[i].cell[1] += g_SceneEffect.delta[i].cell[1];
+            rec->sample[1] = g_SceneEffect.accum[i].cell[1] >> 16;
+            g_SceneEffect.accum[i].cell[2] += g_SceneEffect.delta[i].cell[2];
+            rec->sample[2] = g_SceneEffect.accum[i].cell[2] >> 16;
+            g_SceneEffect.accum[i].cell[3] += g_SceneEffect.delta[i].cell[3];
+            rec->sample[3] = g_SceneEffect.accum[i].cell[3] >> 16;
+            g_SceneEffect.accum[i].cell[4] += g_SceneEffect.delta[i].cell[4];
+            rec->sample[4] = g_SceneEffect.accum[i].cell[4] >> 16;
+            g_SceneEffect.accum[i].cell[5] += g_SceneEffect.delta[i].cell[5];
+            rec->sample[5] = g_SceneEffect.accum[i].cell[5] >> 16;
+            g_SceneEffect.accum[i].cell[6] += g_SceneEffect.delta[i].cell[6];
+            rec->sample[6] = g_SceneEffect.accum[i].cell[6] >> 16;
+            g_SceneEffect.accum[i].cell[7] += g_SceneEffect.delta[i].cell[7];
+            rec->sample[7] = g_SceneEffect.accum[i].cell[7] >> 16;
+            g_SceneEffect.accum[i].cell[8] += g_SceneEffect.delta[i].cell[8];
+            rec->sample[8] = g_SceneEffect.accum[i].cell[8] >> 16;
+            g_SceneEffect.accum[i].cell[9] += g_SceneEffect.delta[i].cell[9];
+            rec->sample[9] = g_SceneEffect.accum[i].cell[9] >> 16;
+            g_SceneEffect.accum[i].cell[10] += g_SceneEffect.delta[i].cell[10];
+            rec->sample[10] = g_SceneEffect.accum[i].cell[10] >> 16;
+            g_SceneEffect.accum[i].cell[11] += g_SceneEffect.delta[i].cell[11];
+            rec->sample[11] = g_SceneEffect.accum[i].cell[11] >> 16;
 
-            dst->lifetime[0] -= g_SceneFx.life_step[i].cell[0];
-            dst->lifetime[1] -= g_SceneFx.life_step[i].cell[1];
-            dst->lifetime[2] -= g_SceneFx.life_step[i].cell[2];
-            dst->lifetime[3] -= g_SceneFx.life_step[i].cell[3];
-            dst->lifetime[4] -= g_SceneFx.life_step[i].cell[4];
-            dst->lifetime[5] -= g_SceneFx.life_step[i].cell[5];
-            dst->lifetime[6] -= g_SceneFx.life_step[i].cell[6];
-            dst->lifetime[7] -= g_SceneFx.life_step[i].cell[7];
-            dst->lifetime[8] -= g_SceneFx.life_step[i].cell[8];
-            dst->lifetime[9] -= g_SceneFx.life_step[i].cell[9];
-            dst->lifetime[10] -= g_SceneFx.life_step[i].cell[10];
-            dst->lifetime[11] -= g_SceneFx.life_step[i].cell[11];
+            dst->lifetime[0] -= g_SceneEffect.life_step[i].cell[0];
+            dst->lifetime[1] -= g_SceneEffect.life_step[i].cell[1];
+            dst->lifetime[2] -= g_SceneEffect.life_step[i].cell[2];
+            dst->lifetime[3] -= g_SceneEffect.life_step[i].cell[3];
+            dst->lifetime[4] -= g_SceneEffect.life_step[i].cell[4];
+            dst->lifetime[5] -= g_SceneEffect.life_step[i].cell[5];
+            dst->lifetime[6] -= g_SceneEffect.life_step[i].cell[6];
+            dst->lifetime[7] -= g_SceneEffect.life_step[i].cell[7];
+            dst->lifetime[8] -= g_SceneEffect.life_step[i].cell[8];
+            dst->lifetime[9] -= g_SceneEffect.life_step[i].cell[9];
+            dst->lifetime[10] -= g_SceneEffect.life_step[i].cell[10];
+            dst->lifetime[11] -= g_SceneEffect.life_step[i].cell[11];
             i++;
         } while (i < (*D_80147BDC));
     }

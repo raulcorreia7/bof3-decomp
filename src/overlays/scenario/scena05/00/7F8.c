@@ -1,4 +1,6 @@
 #include "scena05_00.h"
+#include "area/map.h"
+#include "overlays/area/Actor_SeedPartySlot.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -43,14 +45,14 @@ MATCH void func_801F7530(void) {
 }
 
 MATCH void func_801F7554(void) {
-    ActorSlot* spawned;
-    Actor*     actor;
-    u8         slot;
+    SpawnedActor* spawned;
+    Actor*        actor;
+    u8            slot;
 
     if ((SP_REF(Actor*, 0x44)->vx & 0xF) == 0) {
-        slot = Actor_FindFreeSlot();
+        slot = Actor_FindFreeSpawned();
         if (slot != GAME_NONE) {
-            spawned               = &g_ActorSlots[slot];
+            spawned               = &g_SpawnedActors[slot];
             spawned->header.flags = 1;
             spawned->type         = 0x26;
             actor                 = g_Task;
@@ -282,7 +284,7 @@ MATCH void func_801FC6A8(void) {
             g_ScriptVars[0] = next;
             SYS_SetFlag(g_SceneFlags, 0x3A);
             func_801BE1B0(3);
-            func_801C601C(0);
+            Area_StartScrollRoute(0);
             *state = next;
             break;
         case 1:
@@ -319,8 +321,8 @@ MATCH void func_801FC778(void) {
 
 INCLUDE_ASM(func_801FC808);
 
-INCLUDE_ASM(func_801FC8A0);
-
+/* Give the lead party member a field actor of type 6: claim a free slot and seed its row from the member. */
+MATCH void func_801FC8A0(s32 variant){ACTOR_SEED_PARTY_SLOT(0, D_801FD5C0, 6, variant + 112)}
 #include "overlays/scenario/Scene_DispatchActor.h"
 
 MATCH void func_801FCA98(void) {

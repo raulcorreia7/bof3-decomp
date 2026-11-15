@@ -6,6 +6,11 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
+void func_801D4EA4(s32 left, s32 top, s32 icon_row, s32 raised);
+void func_801D8058(s32 left, s32 top);
+void func_801D2908(s32 x, s32 y, s32 mode);
+void Menu_DrawPanelIcon(s16 x, s16 y, s32 u, s32 v, u16 clut, u8 color);
+
 INCLUDE_ASM(func_801D1394);
 
 MATCH void func_801D143C(void) {
@@ -48,9 +53,47 @@ MATCH void func_801D150C(void) {
 
 INCLUDE_ASM(func_801D15A4);
 
-INCLUDE_ASM(func_801D1774);
+MATCH void func_801D1774(void) {
+    s32 i;
+    s32 j;
+    s32 x;
 
-INCLUDE_ASM(func_801D184C);
+    func_801D2794(9, 1, 0);
+    for (i = 0; i < 8; i++) {
+        if ((D_801DB0B8 >> i) & 1) {
+            j = i + 1;
+            x = (s16)(0x30 + i * 0x20);
+            func_801D2CF8(x, 0x6C, D_801DB080[j]);
+        }
+    }
+    func_801D3184(0x26, 0x10);
+    func_801D32A0(0xA8, 0x10, 0);
+    Message_StartAreaMessage(0x73);
+    g_GameStateIndex = GAME_REQUEST_MESSAGE;
+    D_801F294E += 1;
+}
+
+MATCH void func_801D184C(void) {
+    s32 i;
+    s32 j;
+    s32 x;
+
+    func_801D2794(9, 1, 0);
+    for (i = 0; i < 8; i++) {
+        if ((D_801DB0B8 >> i) & 1) {
+            j = i + 1;
+            x = (s16)(0x30 + i * 0x20);
+            func_801D2CF8(x, 0x6C, D_801DB080[j]);
+        }
+    }
+    func_801D3184(0x26, 0x10);
+    func_801D32A0(0xA8, 0x10, 0);
+    if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x102));
+        D_801DB0C4 = 4;
+        D_801F294E += 1;
+    }
+}
 
 MATCH void func_801D1938(void) {
     s8 count;
@@ -73,7 +116,78 @@ MATCH void func_801D1938(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D1A50(void) {
+    u16* input;
+    u16  repeated;
+    u8   selection;
+
+    input    = &g_InputPressed;
+    repeated = INPUT_GetRepeatedButtons(*input & 0xA000);
+    if (repeated != 0) {
+        if ((s8)D_801DB0B4 < 8) {
+            SND_PlayCue(0x100);
+            if ((s8)D_801DB0B4 != 0) {
+                if (repeated & 0x8000) {
+                    selection  = (u8)D_801DB0B8 - 1;
+                    D_801DB0B8 = selection;
+                    if ((s8)selection < 0) {
+                        D_801DB0B8 = 2;
+                    }
+                } else if (repeated & 0x2000) {
+                    selection  = (u8)D_801DB0B8 + 1;
+                    D_801DB0B8 = selection;
+                    if ((s8)selection >= 3) {
+                        D_801DB0B8 = 0;
+                    }
+                }
+            } else {
+                D_801DB0B8 ^= 1;
+            }
+        }
+    } else if (*input & g_InputMasks[INPUT_SLOT_MOVE]) {
+        selection = D_801DB0B8;
+        if (selection == 2) {
+            SND_PlayCue(0x104);
+            SND_PlayCue(0x102);
+            D_801DB0B4 = 0;
+            D_801F294D++;
+        } else if ((s8)D_801DB0B4 < 8) {
+            D_801DB080[10 + (u8)D_801DB0B4] = selection;
+            D_801DB0B4++;
+            SND_PlayCue(0x103);
+            if (D_801DB0B4 == 8) {
+                D_801DB0B8 = 2;
+            }
+        }
+    } else if (*input & g_InputMasks[INPUT_SLOT_MENU]) {
+        if ((s8)D_801DB0B4 > 0) {
+            SND_PlayCue(0x106);
+            D_801DB0B4--;
+            if ((s8)D_801DB0B4 == 0 && D_801DB0B8 == 2) {
+                D_801DB0B8 = 0;
+            }
+        }
+    }
+
+    if ((s8)D_801DB0B4 <= 0) {
+        func_801D2908(0x58, 0x44, 2);
+    } else if ((s8)D_801DB0B4 < 8) {
+        func_801D2908(0x58, 0x44, 3);
+    } else {
+        func_801D2908(0x58, 0x44, 0xFF);
+    }
+    func_801D3184(0x26, 0x10);
+    func_801D32A0(0xA8, 0x10, 0);
+    func_801D2794(9, 1, D_801DB0B4);
+    if ((s8)D_801DB0B4 < 8) {
+        func_801D269C(((s8)D_801DB0B4 << 5) + 0x40, 0x6E);
+    }
+    Menu_DrawCursorSprite(((D_801DB0B8 * 3) << 4) + 0x5E & 0xFFFE, 0x4A, 0);
+}
+#else
 INCLUDE_ASM(func_801D1A50);
+#endif
 
 INCLUDE_ASM(func_801D1D68);
 
@@ -174,7 +288,21 @@ MATCH void func_801D25CC(void) {
     }
 }
 
-INCLUDE_ASM(func_801D269C);
+MATCH void func_801D269C(s32 x, s32 y) {
+    POLY_F3* poly;
+    u8       colour;
+
+    if ((g_FrameCount & 8) != 0) {
+        colour = ((g_FrameCount & 6) << 5) | 0x3F;
+    } else {
+        colour = ((~g_FrameCount & 6) << 5) | 0x3F;
+    }
+    poly = g_GfxPrimCursor;
+    SetPolyF3(poly);
+    setXY3(poly, x, y, x - 6, y - 6, x + 6, y - 6);
+    setRGB0(poly, 0, colour, 0);
+    GFX_AddPrim(1, sizeof(POLY_F3));
+}
 
 MATCH s32 func_801D2750(s32 limit) {
     s32 roll;
@@ -185,7 +313,28 @@ MATCH s32 func_801D2750(s32 limit) {
     return roll;
 }
 
-INCLUDE_ASM(func_801D2794);
+MATCH void func_801D2794(s32 count, s32 shown, s32 chosen) {
+    s32 i;
+    s32 y;
+    u8  selected;
+
+    selected = chosen;
+    for (i = 0; i < (u8)count; i++) {
+        y = 0x6C;
+        if (i <= selected && selected != 0 && i != 0) {
+            if (D_801DB089[i] == 0) {
+                y = 0x64;
+            } else {
+                y = 0x74;
+            }
+        }
+        if (i < (u8)shown) {
+            func_801D2CF8((s16)(0x10 + i * 0x20), y, D_801DB080[i]);
+        } else {
+            func_801D2CF8((s16)(0x10 + i * 0x20), y, 0xFF);
+        }
+    }
+}
 
 MATCH void func_801D2870(void) {
     s32 i;
@@ -210,7 +359,27 @@ INCLUDE_ASM(func_801D2908);
 
 INCLUDE_ASM(func_801D2AC4);
 
-INCLUDE_ASM(func_801D2CF8);
+MATCH void func_801D2CF8(s32 x, s32 y, s32 icon) {
+    SPRT* sprite;
+    u8    index;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 896, 256), NULL);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    sprite = (SPRT*)g_GfxPrimCursor;
+    SetSprt(sprite);
+    setXY0(sprite, x, y);
+    setWH(sprite, 32, 40);
+    setRGB0(sprite, 0x80, 0x80, 0x80);
+    index = icon;
+    if (index == 0xFF) {
+        setUV0(sprite, 0, 0);
+        sprite->clut = 0x7BC8;
+    } else {
+        setUV0(sprite, (icon & 7) * 32, (index / 8) * 40);
+        sprite->clut = 0x7BC9;
+    }
+    GFX_AddPrim(1, sizeof(SPRT));
+}
 
 MATCH void func_801D2E10(void) {
     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
@@ -233,7 +402,20 @@ MATCH void func_801D2E60(s16 x, s16 y) {
     GFX_AddPrim(1, sizeof(LINE_F2));
 }
 
-INCLUDE_ASM(func_801D2EDC);
+/* Queues the 128-grey sprite whose source rectangle is entry index of the rectangle table. */
+MATCH void func_801D2EDC(s32 x, s32 y, s32 index) {
+    SPRT* sprt;
+
+    sprt = g_GfxPrimCursor;
+    SetSprt(sprt);
+    index = (u8)index * 4;
+    setXY0(sprt, x, y);
+    setWH(sprt, D_801DAC60[index + 2], D_801DAC60[index + 3]);
+    setRGB0(sprt, 128, 128, 128);
+    setUV0(sprt, D_801DAC60[index], D_801DAC60[index + 1]);
+    sprt->clut = 0x7887;
+    GFX_AddPrim(1, sizeof(SPRT));
+}
 
 INCLUDE_ASM(func_801D2FA4);
 
@@ -354,7 +536,55 @@ INCLUDE_ASM(func_801D3C30);
 
 INCLUDE_ASM(func_801D3E44);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D4158(void) {
+    u8* state;
+    u8* src_base;
+    u8* dst_base;
+    u8* src;
+    u8* dst;
+    u8* src_item;
+    u8* dst_item;
+    u8  value;
+    s32 i;
+    s32 offset;
+
+    state = &g_GameStateIndex;
+    if (*state != 2) {
+        D_801DB0B4 += 1;
+        if ((s8)D_801DB0B4 < 8) {
+            dst_base = &D_801DB080[3];
+            src_base = dst_base - 5;
+            i        = 0;
+            do {
+                offset   = (s8)D_801DB0B4 * 5;
+                dst      = offset + dst_base;
+                src      = offset + src_base;
+                dst_item = dst + i;
+                src_item = src + i;
+                value    = *src_item;
+                i++;
+                *dst_item = value;
+            } while (i < 3);
+            D_801F294D = 1;
+        } else {
+            Message_StartAreaMessage(0x85);
+            *state = 2;
+            D_801F294D += 1;
+        }
+        func_801D4AE0(16, 24, 0);
+        func_801D4EA4(104, 120, (u8)(D_801DB0B4 - 1), 0);
+    } else {
+        func_801D4AE0(16, 24, 1);
+        func_801D4EA4(104, 120, D_801DB0B4, 0);
+    }
+    func_801D4F88(104, 64, 0);
+    func_801D3184(204, 16);
+    func_801D32A0(204, 60, 0);
+}
+#else
 INCLUDE_ASM(func_801D4158);
+#endif
 
 INCLUDE_ASM(func_801D42B4);
 
@@ -384,7 +614,33 @@ INCLUDE_ASM(func_801D4910);
 
 INCLUDE_ASM(func_801D4AE0);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D4EA4(s32 left, s32 top, s32 icon_row, s32 raised) {
+    s32 i;
+    s32 x;
+    s32 draw_y;
+    s32 up_y;
+    u8  icon;
+    u8* icons;
+
+    icon  = (u8)icon_row * 5 + 3;
+    up_y  = (top - 8) << 16;
+    icons = D_801DB080;
+    x     = left;
+    for (i = 0; i < 3; i++) {
+        if (D_801DB0B8 == i && (u8)raised != 0) {
+            draw_y = up_y >> 16;
+        } else {
+            draw_y = top;
+        }
+        func_801D2CF8((s16)x, (s16)draw_y, icons[icon]);
+        icon++;
+        x += 32;
+    }
+}
+#else
 INCLUDE_ASM(func_801D4EA4);
+#endif
 
 MATCH void func_801D4F88(s32 x, s32 y, s32 show_values) {
     s32 i;
@@ -452,7 +708,7 @@ MATCH void func_801D5978(void) {
         SND_RequestBGM(D_801DB0CC);
     loop_2:
         if (EMI_IsReady() == 0) {
-            CallbackWait(1U);
+            SYS_ThreadWait(1U);
             goto loop_2;
         }
         SND_PlayBGM(D_801DB0CC, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
@@ -537,7 +793,8 @@ MATCH void func_801D5D5C(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event3States, D_801F294C);
 }
 
-MATCH void func_801D5D98(void) {
+/* func_801D5D98 */
+MATCH void Menu_StartFairyEventMessage(void) {
     u8* state = &g_GameStateIndex;
 
     if (*state != 2) {
@@ -551,7 +808,8 @@ MATCH void func_801D5DF4(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event3Step1Funcs, D_801F294D);
 }
 
-MATCH void func_801D5E30(void) {
+/* func_801D5E30 */
+MATCH void Menu_ConfirmFairy(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
         D_801DB0C4 = 4;
@@ -568,7 +826,7 @@ MATCH void func_801D5E94(void) {
     count      = D_801DB0C4 - 1;
     D_801DB0C4 = count;
     Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - ((count & BYTE_MASK) * 8)) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
-    func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 0);
     func_801D8058(0x4A, 0x64 - ((u8)D_801DB0C4 * 0x1E));
     check = D_801DB0C4;
     if (check == 0) {
@@ -588,7 +846,7 @@ MATCH void func_801D5F7C(void) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x06));
         D_801F294D = 8;
     } else {
-        pressed = PAD_GetRepeatedButtons(g_InputPressed & 0xA000);
+        pressed = INPUT_GetRepeatedButtons(g_InputPressed & 0xA000);
         if (pressed & HALF_MASK) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
         }
@@ -605,7 +863,7 @@ MATCH void func_801D5F7C(void) {
         }
     }
     func_801D812C();
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 0);
     func_801D8058(0x4A, 0x64);
     func_801D88A4(((s8)D_801DB0B4 * 8) + 0x55, 0x6D, 0);
 }
@@ -629,7 +887,7 @@ MATCH void func_801D6124(void) {
         D_801DB0C8 = 0xF0;
         SND_PlayCue(cue);
         D_801F294D -= 1;
-    } else if (PAD_GetRepeatedButtons(g_InputPressed & 0xA000) & HALF_MASK) {
+    } else if (INPUT_GetRepeatedButtons(g_InputPressed & 0xA000) & HALF_MASK) {
         D_801DB0B8 ^= 1;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
     }
@@ -641,7 +899,7 @@ MATCH void func_801D6124(void) {
         func_801D8058(0x4A, 0x64);
         func_801D88A4(((s8)D_801DB0B4 * 8) + 0x55, 0x6D, 1);
     }
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 0);
 }
 
 MATCH void func_801D62C8(void) {
@@ -651,7 +909,7 @@ MATCH void func_801D62C8(void) {
     D_801DB0C4 = step;
     Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - ((step & BYTE_MASK) * 8)) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     func_801D8058(0x4A, ((u8)D_801DB0C4 * 0x28) + 0x64);
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 0);
     if ((u8)D_801DB0C4 == 4) {
         D_801DB0C4 = 5;
         D_801F294D = 7;
@@ -670,7 +928,7 @@ MATCH void func_801D6390(void) {
         }
         D_801F294D = value;
     }
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 0);
 }
 
 MATCH void func_801D640C(void) {
@@ -687,7 +945,7 @@ MATCH void func_801D6448(void) {
     Message_StartAreaMessage(0xF3);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
     D_801F294E++;
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 0);
 }
 
 MATCH void func_801D64E0(void) {
@@ -700,12 +958,12 @@ MATCH void func_801D64E0(void) {
             D_801F294E = 0;
         }
     }
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 0);
 }
 
 MATCH void func_801D6574(void) {
     D_801DB0C4 = D_801DB0C4 + 1;
-    func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 0);
     if ((u8)D_801DB0C4 == 4) {
         func_801DA8E8();
     }
@@ -718,7 +976,7 @@ MATCH void func_801D65F8(void) {
 INCLUDE_ASM(func_801D6634);
 
 MATCH void func_801D67F0(void) {
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 1);
+    func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 1);
     func_801AE214((D_801DB0D0 * 8) + 0x4A, 0x42, 8, 0);
     func_801D97C8(D_801DAAA8, 0xB0, 0x2B);
     func_801D9B80(0x12, 0x61, 0x24, 0x11);
@@ -731,9 +989,9 @@ MATCH void func_801D68AC(void) {
 
     D_801DB0C4 = D_801DB0C4 + 1;
     if (D_801DB0DC != 0) {
-        func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 1);
+        func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 1);
     } else {
-        func_801D830C(0x44 - (D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 1);
+        func_801D830C(0x44 - (D_801DB0C4 * 0x1E), 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 1);
     }
     func_801D97C8(D_801DAAA8, (D_801DB0C4 * 0x1E) + 0xB0, 0x2B);
     func_801D9B80(0x12, (D_801DB0C4 * 0x1E) + 0x61, 0x24, 0x11);
@@ -742,7 +1000,7 @@ MATCH void func_801D68AC(void) {
         if (D_801DB0DC != 0) {
             if (D_801DB080[0] == 0) {
                 for (i = 0; i < 5; i++) {
-                    D_801DB080[i] = g_Fairies[func_801D7EA0(D_801DB0B4) & BYTE_MASK][i];
+                    D_801DB080[i] = g_Fairies[Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK][i];
                 }
             }
             Message_StartAreaMessage(244);
@@ -758,7 +1016,7 @@ MATCH void func_801D68AC(void) {
 }
 
 MATCH void func_801D6AC8(void) {
-    func_801D830C(0x44, 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 1);
+    func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 1);
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         if (D_801F2945 == 0) {
             D_801DB0C4 = 0;
@@ -772,7 +1030,7 @@ MATCH void func_801D6AC8(void) {
 
 MATCH void func_801D6B60(void) {
     D_801DB0C4 = D_801DB0C4 + 1;
-    func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 1);
+    func_801D830C(0x44 - ((u8)D_801DB0C4 * 0x1E), 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 1);
     if ((u8)D_801DB0C4 == 4) {
         func_801DA8E8();
     }
@@ -784,7 +1042,7 @@ MATCH void func_801D6BE4(void) {
     step       = D_801DB0C4 + 1;
     D_801DB0C4 = step;
     Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - ((step & BYTE_MASK) * 8)) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
-    func_801D830C(0x20 - ((u8)D_801DB0C4 * 0x1E), 0x32, func_801D7EA0(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D830C(0x20 - ((u8)D_801DB0C4 * 0x1E), 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 0);
     func_801D8058(0x4A, 0x64 - ((u8)D_801DB0C4 * 0x1E));
     if ((u8)D_801DB0C4 == 4) {
         Message_StartAreaMessage(0xF7);
@@ -821,7 +1079,7 @@ MATCH void func_801D708C(void) {
         D_801DB0C8 = 0xF0;
         SND_PlayCue(cue);
         D_801F294D -= 1;
-    } else if (PAD_GetRepeatedButtons(g_InputPressed & 0xA000) & HALF_MASK) {
+    } else if (INPUT_GetRepeatedButtons(g_InputPressed & 0xA000) & HALF_MASK) {
         D_801DB0B8 ^= 1;
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
     }
@@ -905,7 +1163,36 @@ MATCH void func_801D7878(void) {
     D_801DB0DC = func_801DA114();
 }
 
-INCLUDE_ASM(func_801D7934);
+MATCH void func_801D7934(void) {
+    s32 i;
+
+    D_801DB0C4 = D_801DB0C4 + 1;
+    if (D_801DB0DC != 0) {
+        func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 1);
+    } else {
+        func_801D90D8(0x20 - (D_801DB0C4 * 0x1E), 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 1);
+    }
+    func_801D97C8(D_801DAAA8, (D_801DB0C4 * 0x1E) + 0xB0, 0x2B);
+    func_801D9B80(0x12, (D_801DB0C4 * 0x1E) + 0x61, 0x24, 0x11);
+    func_801D94D0(D_801DAAA8, 0x18, (D_801DB0C4 * 0x1E) + 0x67, D_801DB0D4, D_801DB0D8);
+    if (D_801DB0C4 == 4) {
+        if (D_801DB0DC != 0) {
+            if (D_801DB080[0] == 0) {
+                for (i = 0; i < 5; i++) {
+                    D_801DB080[i] = D_801DB058[func_801D92F4(D_801DB0B4) & BYTE_MASK][i];
+                }
+            }
+            Message_StartAreaMessage(244);
+            g_GameStateIndex = GAME_REQUEST_MESSAGE;
+            D_801F294E += 1;
+        } else {
+            Message_StartAreaMessage(247);
+            g_GameStateIndex = GAME_REQUEST_MESSAGE;
+            D_801F294C       = 4;
+            D_801F294D       = 0;
+        }
+    }
+}
 
 MATCH void func_801D7B50(void) {
     func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 1);
@@ -928,9 +1215,44 @@ MATCH void func_801D7BE8(void) {
     }
 }
 
-INCLUDE_ASM(func_801D7C6C);
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D7C6C(void) {
+    s32 drawn;
+    s32 i;
+    s32 offset;
+    s32 x;
+    s32 y;
+    u8  step;
 
-MATCH void func_801D7DD4(void) {
+    drawn      = 0;
+    step       = D_801DB0C4 + 1;
+    D_801DB0C4 = step;
+    Menu_DrawHeaderBar(0x14, (0x10 - ((step & BYTE_MASK) * 8)) & 0xFFF8, 0x118, 0x13, g_WindowStyle);
+    i      = 0;
+    offset = 0;
+    do {
+        if (((u8*)g_Characters)[offset + 7] & 1) {
+            y = (((drawn & BYTE_MASK) >> 1) * 0x38) + 0x30;
+            x = (((drawn & 1) == 0) ? 0x18 : 0xA8) - ((u8)D_801DB0C4 * 0x28);
+            func_801D90D8(x, y, D_801DB0C4 & BYTE_MASK, 0);
+            drawn++;
+        }
+        i++;
+        offset += sizeof(Character);
+    } while (i < 7);
+    if (D_801DB0C4 == 4) {
+        Message_StartAreaMessage(0xF7);
+        g_GameStateIndex = GAME_REQUEST_MESSAGE;
+        D_801F294C       = 4;
+        D_801F294D       = 0;
+    }
+}
+#else
+INCLUDE_ASM(func_801D7C6C);
+#endif
+
+/* func_801D7DD4 */
+MATCH void Menu_StartFairyEndMessage(void) {
     u8* state = &g_GameStateIndex;
 
     if (*state != 2 && D_801F294D == 0) {
@@ -946,7 +1268,8 @@ MATCH void Fairy_EndCommuSceneEvent3(void) {
 
 #include "overlays/commu/Fairy_CountFairies.h"
 
-MATCH u8 func_801D7EA0(u8 arg) {
+/* func_801D7EA0 */
+MATCH u8 Fairy_FindActiveJob(u8 arg) {
     s32 active_count;
     s32 i;
 
@@ -971,9 +1294,43 @@ MATCH void func_801D7EF0(s16 x, s16 y) {
     COMMU_DRAW_CELL_GRID(func_801D875C, 0x16, 20, 2, 6);
 }
 
-INCLUDE_ASM(func_801D8058);
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D8058(s32 left, s32 top) {
+    s32 i;
+    s32 count;
+    s32 x;
+    s32 base_x;
+    s32 y_fixed;
 
-INCLUDE_ASM(func_801D812C);
+    x      = left;
+    base_x = x;
+    UI_DrawWindow(x, top, 172, 26, 0x80, g_WindowStyle);
+    func_801D7EF0((s16)x, (s16)top);
+    count = Fairy_CountFairies() & BYTE_MASK;
+    if (count > 0) {
+        y_fixed = (top + 9) << 16;
+        x       = 7;
+        i       = 0;
+        while (i < count) {
+            func_801D875C((s16)(base_x + x), (s16)(y_fixed >> 16), 1);
+            i++;
+            x += 8;
+        }
+    }
+}
+#else
+INCLUDE_ASM(func_801D8058);
+#endif
+
+MATCH void func_801D812C(void) {
+    u16 index;
+
+    Menu_DrawHeaderBar(0x14, 0x10, 0x118, 0x13, g_WindowStyle);
+    index = D_801DB0C8;
+    if (index != 0xFFFF) {
+        UI_DrawText(0x1B, 0x13, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, index));
+    }
+}
 
 MATCH void func_801D81A4(s16 x, s16 y) {
     s32 i;
@@ -1039,7 +1396,210 @@ MATCH void Fairy_GenerateName(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, s32 window_style) {
+    s32 stack_18;
+    u8  early;
+    s32 stack_20;
+    s32 stack_28;
+    s32 stack_30;
+    u16 stack_38;
+    s32 stack_40;
+    s32 stack_48;
+    s32 tmp0;
+    s32 val0;
+    s32 val1;
+    s8  tmp1;
+    u16 tmp2;
+    u16 tmp3;
+    u16 tmp4;
+    u16 tmp5;
+    u16 tmp6;
+    u16 val2;
+    u16 val3;
+    u16 val4;
+    u16 val5;
+    u16 val6;
+    u8* val7;
+    u8  tmp7;
+    u8  val8;
+
+    val7                   = g_GfxPrimCursor;
+    val8                   = window_style;
+    early                  = window_style;
+    stack_18               = x;
+    stack_20               = y;
+    stack_28               = width;
+    stack_30               = height;
+    g_GfxPrimCursor        = val7 + 8;
+    FIELD(s16, val7, 0x2u) = 0xF0;
+    *(s16*)(val7)          = 0;
+    FIELD(s16, val7, 0x4u) = 0x10;
+    FIELD(s16, val7, 0x6u) = 0x10;
+    if (GetGraphType() != 1) {
+        GetGraphType();
+    }
+    val3 = (u16)stack_18;
+    val6 = (u16)stack_20;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, 0xF, (RECT*)val7);
+    GFX_AddPrim(1U, sizeof(DR_MODE));
+    val7 = g_GfxPrimCursor;
+    SetPolyFT4((POLY_FT4*)val7);
+    SetSemiTrans(val7, 1);
+    val1                    = (val8 << 5) + 0x10;
+    FIELD(u16, val7, 0x8u)  = val3;
+    FIELD(u16, val7, 0xAu)  = val6;
+    FIELD(u16, val7, 0x12u) = val6;
+    FIELD(u16, val7, 0x18u) = val3;
+    val2                    = stack_18 + 2;
+    FIELD(u16, val7, 0x10u) = val2;
+    val0                    = 0xAC;
+    FIELD(u16, val7, 0x20u) = val2;
+    FIELD(s8, val7, 0xCu)   = 0;
+    FIELD(u8, val7, 0xDu)   = 0U;
+    FIELD(u8, val7, 0x15u)  = 0U;
+    FIELD(s8, val7, 0x1Cu)  = 0;
+    FIELD(s16, val7, 0x4u)  = 0xAC;
+    FIELD(s8, val7, 0x5u)   = 0xAC;
+    FIELD(s16, val7, 0x6u)  = 0xAC;
+    tmp7                    = stack_30 + 1;
+    val4                    = stack_20 + tmp7;
+    val8                    = tmp7;
+    FIELD(u16, val7, 0x1Au) = val4;
+    FIELD(u16, val7, 0x22u) = val4;
+    FIELD(s8, val7, 0x14u)  = 2;
+    FIELD(u8, val7, 0x1Du)  = val8;
+    FIELD(s8, val7, 0x24u)  = 2;
+    FIELD(u8, val7, 0x25u)  = val8;
+    FIELD(u16, val7, 0xAu)  = (u16)(FIELD(u16, val7, 0xAu) + 2);
+    FIELD(u16, val7, 0x1Au) = (u16)(FIELD(u16, val7, 0x1Au) - 3);
+    FIELD(u8, val7, 0xDu)   = (u8)(FIELD(u8, val7, 0xDu) + 2);
+    FIELD(u8, val7, 0x1Du)  = (u8)(FIELD(u8, val7, 0x1Du) - 3);
+    FIELD(u16, val7, 0xEu)  = GetClut(val1, STAGE_PALETTE_Y + 1);
+    stack_40                = stack_28 + 1;
+    val3                    = (u16)stack_40;
+    if (GetGraphType() != 1) {
+        GetGraphType();
+    }
+    FIELD(s16, val7, 0x16u) = 0xF;
+    GFX_AddPrim(1U, sizeof(POLY_FT4));
+    val3     = (u16)((s32)((val3 & HALF_MASK) - 4) >> 1);
+    val7     = g_GfxPrimCursor;
+    stack_48 = (stack_28 - 3) & 1;
+    SetPolyFT4((POLY_FT4*)val7);
+    SetSemiTrans(val7, 1);
+    tmp3                    = val3 + val2;
+    val5                    = val3;
+    FIELD(u16, val7, 0x8u)  = val2;
+    FIELD(u16, val7, 0xAu)  = val6;
+    FIELD(u16, val7, 0x10u) = tmp3;
+    FIELD(u16, val7, 0x12u) = val6;
+    FIELD(u16, val7, 0x18u) = val2;
+    FIELD(u16, val7, 0x1Au) = val4;
+    FIELD(u16, val7, 0x20u) = tmp3;
+    FIELD(u16, val7, 0x22u) = val4;
+    FIELD(s8, val7, 0xCu)   = 0;
+    FIELD(u8, val7, 0xDu)   = 0U;
+    FIELD(s8, val7, 0x14u)  = (s8)val5;
+    FIELD(u8, val7, 0x15u)  = 0U;
+    FIELD(s8, val7, 0x1Cu)  = 0;
+    FIELD(u8, val7, 0x1Du)  = val8;
+    FIELD(s8, val7, 0x24u)  = (s8)val5;
+    FIELD(u8, val7, 0x25u)  = val8;
+    FIELD(s16, val7, 0x4u)  = 0xAC;
+    FIELD(s8, val7, 0x5u)   = 0xAC;
+    FIELD(s16, val7, 0x6u)  = 0xAC;
+    FIELD(u16, val7, 0xEu)  = GetClut(val1, STAGE_PALETTE_Y + 1);
+    stack_38                = (u16)stack_48;
+    if (GetGraphType() != 1) {
+        GetGraphType();
+    }
+    FIELD(s16, val7, 0x16u) = 0xF;
+    GFX_AddPrim(1U, sizeof(POLY_FT4));
+    val7 = g_GfxPrimCursor;
+    SetPolyFT4((POLY_FT4*)val7);
+    SetSemiTrans(val7, 1);
+    FIELD(u16, val7, 0xAu)  = val6;
+    tmp0                    = stack_18 + val3;
+    tmp2                    = tmp0 + 2;
+    FIELD(u16, val7, 0x8u)  = tmp2;
+    tmp5                    = tmp0 + (val3 + stack_48 + 2);
+    FIELD(u16, val7, 0x10u) = tmp5;
+    FIELD(u16, val7, 0x12u) = val6;
+    FIELD(u16, val7, 0x18u) = tmp2;
+    FIELD(u16, val7, 0x1Au) = val4;
+    FIELD(u16, val7, 0x20u) = tmp5;
+    FIELD(u16, val7, 0x22u) = val4;
+    FIELD(s8, val7, 0xCu)   = 0;
+    FIELD(u8, val7, 0xDu)   = 0U;
+    tmp1                    = val5 + stack_38;
+    FIELD(s8, val7, 0x14u)  = tmp1;
+    FIELD(u8, val7, 0x15u)  = 0U;
+    FIELD(s8, val7, 0x1Cu)  = 0;
+    FIELD(u8, val7, 0x1Du)  = val8;
+    FIELD(s8, val7, 0x24u)  = tmp1;
+    FIELD(u8, val7, 0x25u)  = val8;
+    FIELD(s16, val7, 0x4u)  = 0xAC;
+    FIELD(s8, val7, 0x5u)   = 0xAC;
+    FIELD(s16, val7, 0x6u)  = 0xAC;
+    FIELD(u16, val7, 0xEu)  = GetClut(val1, STAGE_PALETTE_Y + 1);
+    if (GetGraphType() != 1) {
+        GetGraphType();
+    }
+    FIELD(s16, val7, 0x16u) = 0xF;
+    GFX_AddPrim(1U, sizeof(POLY_FT4));
+    val7 = g_GfxPrimCursor;
+    SetPolyFT4((POLY_FT4*)val7);
+    SetSemiTrans(val7, 1);
+    tmp4                    = stack_18 + stack_40;
+    FIELD(u16, val7, 0x1Au) = val4;
+    tmp6                    = tmp4 - 2;
+    FIELD(u8, val7, 0x1Du)  = val8;
+    FIELD(u16, val7, 0x10u) = tmp4;
+    FIELD(u16, val7, 0x12u) = val6;
+    FIELD(u16, val7, 0x20u) = tmp4;
+    FIELD(u16, val7, 0x8u)  = tmp6;
+    FIELD(u16, val7, 0x18u) = tmp6;
+    FIELD(u16, val7, 0x22u) = val4;
+    FIELD(u16, val7, 0xAu)  = val6;
+    FIELD(s8, val7, 0xCu)   = 0;
+    FIELD(u8, val7, 0xDu)   = 0U;
+    FIELD(s8, val7, 0x14u)  = 2;
+    FIELD(u8, val7, 0x15u)  = 0U;
+    FIELD(s8, val7, 0x1Cu)  = 0;
+    FIELD(s8, val7, 0x24u)  = 2;
+    FIELD(u8, val7, 0x25u)  = val8;
+    FIELD(s16, val7, 0x4u)  = 0xAC;
+    FIELD(s8, val7, 0x5u)   = 0xAC;
+    FIELD(s16, val7, 0x6u)  = 0xAC;
+    FIELD(u16, val7, 0x12u) = (u16)(FIELD(u16, val7, 0x12u) + 2);
+    FIELD(u16, val7, 0x22u) = (u16)(FIELD(u16, val7, 0x22u) - 3);
+    FIELD(u16, val7, 0x1Au) = (u16)(FIELD(u16, val7, 0x1Au) - 1);
+    FIELD(u8, val7, 0x15u)  = (u8)(FIELD(u8, val7, 0x15u) + 2);
+    FIELD(u8, val7, 0x1Du)  = (u8)(FIELD(u8, val7, 0x1Du) - 1);
+    FIELD(u8, val7, 0x25u)  = (u8)(FIELD(u8, val7, 0x25u) - 3);
+    FIELD(u16, val7, 0xEu)  = GetClut(val1, STAGE_PALETTE_Y + 1);
+    if (GetGraphType() != 1) {
+        GetGraphType();
+    }
+    FIELD(s16, val7, 0x16u) = 0xF;
+    GFX_AddPrim(1U, sizeof(POLY_FT4));
+    val7                   = g_GfxPrimCursor;
+    g_GfxPrimCursor        = val7 + 8;
+    *(s16*)(val7)          = 0;
+    FIELD(s16, val7, 0x2u) = 0;
+    FIELD(s16, val7, 0x4u) = 0x100;
+    FIELD(s16, val7, 0x6u) = 0x100;
+    if (GetGraphType() != 1) {
+        GetGraphType();
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, 0xF, (RECT*)val7);
+    GFX_AddPrim(1U, sizeof(DR_MODE));
+    func_801AEBA0((s16)val2, (s16)(stack_20 + 2), (s16)(stack_28 - 4), (s16)(stack_30 - 4), 0);
+}
+#else
 INCLUDE_ASM(Menu_DrawHeaderBar);
+#endif
 
 #include "shared/Menu_DrawPortrait.h"
 
@@ -1088,9 +1648,123 @@ MATCH u8 func_801D92F4(u8 arg) {
 
 INCLUDE_ASM(func_801D9348);
 
-INCLUDE_ASM(func_801D94D0);
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg, s32 cursor_row_arg) {
+    u8  tags[20];
+    u8* cell;
+    u16 x;
+    u16 y;
+    u16 row;
+    u16 col;
+    u16 cursor_x;
+    u16 cursor_y;
+    u8  cursor_col;
+    u8  cursor_row;
+    u8  code;
 
+    /* FAKE: retail reserves eight bytes outside the active locals. */
+    FAKE_STACK_PADS(u8, 8);
+    memcpy(tags, D_801D0C3C, 20);
+    UI_DrawWindow(left, top, 0x110, 123, 0, g_WindowStyle);
+    cell = D_801DAAAC + ((u8)page * 96);
+    y    = top + 6;
+    for (row = 0; row < 8; row++) {
+        x = left + 4;
+        for (col = 0; col < 12; col++) {
+            if (col == 10 && row >= 3) {
+                code = *cell;
+                switch (code) {
+                    case 1:
+                        UI_DrawText((s16)x, (s16)y, 4, 5, tags);
+                        break;
+                    case 2:
+                        UI_DrawText((s16)x, (s16)y, 4, 5, tags + 5);
+                        break;
+                    case 3:
+                        UI_DrawText((s16)x, (s16)y, 2, 5, tags + 10);
+                        break;
+                    case 4:
+                        UI_DrawText((s16)x, (s16)y, 2, 5, tags + 15);
+                        break;
+                    default:
+                        UI_DrawText((s16)x, (s16)y, 0, 1, cell);
+                        break;
+                }
+            } else {
+                UI_DrawText((s16)x, (s16)y, 0, 1, cell);
+            }
+            x += (col == 4 || col == 9) ? 28 : 20;
+            cell++;
+        }
+        y += 14;
+    }
+    cursor_col = cursor_col_arg;
+    cursor_row = cursor_row_arg;
+    cursor_x   = left + 6 + cursor_col * 20;
+    if (cursor_col >= 5) {
+        cursor_x += 8;
+    }
+    if (cursor_col >= 10) {
+        cursor_x += 8;
+    }
+    if (cursor_col == 11 && cursor_row >= 3) {
+        cursor_x -= 20;
+    }
+    cursor_y = top + 8 + cursor_row * 14;
+    Menu_DrawCursorSprite(cursor_x, cursor_y, 0);
+}
+#else
+INCLUDE_ASM(func_801D94D0);
+#endif
+
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D97C8(s32 unused, s32 x, s32 y) {
+    const u8* const* labels;
+    const u8*        dots;
+    u16              row;
+    u16              column;
+    u16              clut;
+    s32              tpage;
+    s32              left;
+
+    left   = x;
+    labels = D_801DB038;
+    UI_DrawWindow((u16)(x + 3), (u16)(y + 3), 0x4D, 0x2F, 0, g_WindowStyle);
+    for (row = 0; row < 5; row++) {
+        UI_DrawTextString((s16)(x + 0x2A), (s16)(y + (row * 8) + 6), 0, 0x10, labels[row]);
+    }
+    for (row = 0; row < 5; row++) {
+        for (column = 0; column < 3; column++) {
+            dots = D_801DB054;
+            UI_DrawTextString((s16)(left + (column * 4) + 0x1A), (s16)(y + (row * 8) + 6), 0, 1, dots);
+        }
+    }
+
+    if (GetGraphType() == 1 || GetGraphType() == 2) {
+        tpage = 0x8F;
+    } else {
+        tpage = 0x2F;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+
+    clut = GetClut(0x30, 0x1E0);
+    Menu_DrawPanelIcon((s16)(left + 0x0E), (s16)(y + 6), 0x1D, 0, clut, 0x7F);
+    clut = GetClut(0x30, 0x1E0);
+    Menu_DrawPanelIcon((s16)(left + 0x0E), (s16)(y + 0x0E), 0x1C, 0, clut, 0x7F);
+    clut = GetClut(0x30, 0x1E0);
+    Menu_DrawPanelIcon((s16)(left + 0x0E), (s16)(y + 0x16), 0x1B, 0, clut, 0x7F);
+    clut = GetClut(0x30, 0x1E0);
+    Menu_DrawPanelIcon((s16)(left + 0x0E), (s16)(y + 0x1E), 0x1E, 0, clut, 0x7F);
+    clut = GetClut(0, 0x1E0);
+    Menu_DrawPanelIcon((s16)(left + 0x0A), (s16)(y + 0x26), 4, 2, clut, 0x7F);
+    clut = GetClut(0, 0x1E0);
+    Menu_DrawPanelIcon((s16)(left + 0x12), (s16)(y + 0x26), 5, 2, clut, 0x7F);
+    func_801AF390((s16)left, (s16)y, g_MenuPortraitAtlas + 0xC8, 0);
+}
+#else
 INCLUDE_ASM(func_801D97C8);
+#endif
 
 MATCH void Menu_DrawPanelIcon(s16 x, s16 y, s32 u, s32 v, u16 clut, u8 color) {
     MenuDrawPanelIcon(x, y, u, v, clut, color);

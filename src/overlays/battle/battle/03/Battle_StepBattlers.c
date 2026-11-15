@@ -15,7 +15,7 @@ MATCH s32 Battle_StepBattlers(void) {
     count = 0;
     index = 0;
     do {
-        if (!(func_801D64C4(index) & BYTE_MASK)) {
+        if (!(Battle_GetActionLock(index) & BYTE_MASK)) {
             flags = g_Game.members[index].u.turn.action_flags.volatile_value;
             if (flags & 0x2) {
                 if (flags & 0x20) {

@@ -7,6 +7,9 @@
 
 extern BMagicEffectFuncs D_801EEC04;
 
+/* The scratch shade the screen fade draws with. */
+extern s16 D_1F800004;
+
 extern Callback D_801F0478[];
 extern Callback D_801F048C[];
 

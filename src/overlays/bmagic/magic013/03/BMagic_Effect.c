@@ -114,9 +114,60 @@ MATCH void func_801EF0A4(void) {
 
 #include "overlays/bmagic/Effect_CountUpWorkByteAndStep.h"
 
-INCLUDE_ASM(func_801EF1F0);
+MATCH void func_801EF1F0(void) {
+    s32 i;
+    u8  slot;
+    u8  timer;
 
-INCLUDE_ASM(func_801EF36C);
+    g_Task->pos.x.fixed += g_Task->unk_0C;
+    g_Task->pos.y.fixed += g_Task->unk_10;
+    timer          = g_Task->unk_09 - 4;
+    g_Task->unk_09 = timer;
+    if (timer == 0) {
+        for (i = 0; i < 32; i++) {
+            slot = BMagic_AllocEffect();
+            if (slot != 0xFF) {
+                BMAGIC_EFFECT_SLOTS[slot].target.party = g_Task;
+                BMAGIC_EFFECT_SLOTS[slot].header.flags |= 0x41;
+                BMAGIC_EFFECT_SLOTS[slot].unk_0B     = i;
+                BMAGIC_EFFECT_SLOTS[slot].arg.unk_09 = (rand() & 7) + 1;
+                g_Task->param.unk_0B += 1;
+            }
+        }
+        if (g_Task->timer == 4) {
+            Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
+        }
+        g_Task->unk_0C = 0x3000;
+        g_Task->unk_10 = 0;
+        func_801DD350(g_Task);
+        SND_QueueSelectionEffect(0x100);
+        g_Task->header.step += 1;
+    }
+}
+
+MATCH void func_801EF36C(void) {
+    s32 limit;
+    u8  count;
+
+    g_Task->pos.x.fixed += g_Task->unk_0C;
+    g_Task->pos.y.fixed += g_Task->unk_10;
+    limit          = g_Task->timer == 1 ? 12 : 16;
+    count          = g_Task->unk_09 + 2;
+    g_Task->unk_09 = count;
+    if (count == limit) {
+        if (--g_Task->timer == 0) {
+            Battle_MarkDamaged(g_Battle.target_selector);
+            SND_QueueSelectionEffect(0x201);
+            g_BattleEffectBattler->param.unk_0B -= 1;
+            g_Task->header.step += 1;
+        } else {
+            g_Task->unk_0C = -0x6000;
+            g_Task->unk_10 = 0;
+            func_801DD350(g_Task);
+            g_Task->header.step -= 1;
+        }
+    }
+}
 
 MATCH void func_801EF484(void) {
     PartyMember* work;
@@ -159,9 +210,7 @@ MATCH void func_801EF4F0(void) {
             break;
     }
     rot.vz = 0;
-    pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
-    pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
-    pos.vz = -(COORD_INT(g_Task->pos.z) + 0x20) / 2;
+    setVector(&pos, (g_Task->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (g_Task->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, -(COORD_INT(g_Task->pos.z) + 0x20) / 2);
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
 }
@@ -195,9 +244,25 @@ MATCH void func_801EF648(void) {
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }
 
-INCLUDE_ASM(func_801EF79C);
+MATCH void func_801EF79C(void) {
+    POLY_G4* prim;
+    long     depth;
+    long     flag;
+    s32      i;
+    s32      tpage;
 
-INCLUDE_ASM(func_801EFAA8);
+    MAGIC013_DRAW_WAVE_BAND(-80);
+}
+
+MATCH void func_801EFAA8(void) {
+    POLY_G4* prim;
+    long     depth;
+    long     flag;
+    s32      i;
+    s32      tpage;
+
+    MAGIC013_DRAW_WAVE_BAND(80);
+}
 
 MATCH void func_801EFDB4(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 7), 1, g_Task);
@@ -235,7 +300,24 @@ MATCH void func_801EFE80(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFF88);
+MATCH void func_801EFF88(void) {
+    s32* angle_cell;
+
+    angle_cell  = &D_1F800004;
+    *angle_cell = g_Task->param.unk_0B << 7;
+    g_Task->pos.x.fixed += (rsin(*angle_cell) * 0x400) >> 9;
+    g_Task->pos.y.fixed += (rcos(*angle_cell) * 0x400) >> 9;
+    g_Task->unk_14 += g_Task->unk_20;
+    COORD_INT(g_Task->pos.z) += g_Task->unk_14;
+    if (--g_Task->unk_09 == 0) {
+        g_BattleEffectBattler->param.unk_0B -= 1;
+        g_Task->header.flags = 0;
+        g_Task->header.mode  = 0;
+        g_Task->header.step  = 0;
+        g_Task->unk_03       = 0;
+        g_Task->unk_04       = 0;
+    }
+}
 
 MATCH void func_801F00A8(void) {
     SVECTOR pos;
@@ -244,9 +326,7 @@ MATCH void func_801F00A8(void) {
     long    flags;
 
     PushMatrix();
-    rot.vx = 0;
-    rot.vy = 0;
-    rot.vz = BMAGIC_PHASE_ANGLE(g_Task->unk_09);
+    setVector(&rot, 0, 0, BMAGIC_PHASE_ANGLE(g_Task->unk_09));
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }
 
@@ -260,19 +340,11 @@ MATCH void func_801F0164(void) {
     prim = (POLY_F3*)g_GfxPrimCursor;
     SetPolyF3(prim);
     SetSemiTrans(prim, 1);
-    D_1F800014[0].vx = (u32)rsin(0) >> 8;
-    D_1F800014[0].vy = (u32)rcos(0) >> 8;
-    D_1F800014[0].vz = 0;
-    D_1F800014[1].vx = (u32)rsin(DEG(120)) >> 8;
-    D_1F800014[1].vy = (u32)rcos(DEG(120)) >> 8;
-    D_1F800014[1].vz = 0;
-    D_1F800014[2].vx = (u32)rsin(DEG(240)) >> 8;
-    D_1F800014[2].vy = (u32)rcos(DEG(240)) >> 8;
-    D_1F800014[2].vz = 0;
+    setVector(&D_1F800014[0], (u32)rsin(0) >> 8, (u32)rcos(0) >> 8, 0);
+    setVector(&D_1F800014[1], (u32)rsin(DEG(120)) >> 8, (u32)rcos(DEG(120)) >> 8, 0);
+    setVector(&D_1F800014[2], (u32)rsin(DEG(240)) >> 8, (u32)rcos(DEG(240)) >> 8, 0);
     RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
-    prim->r0 = (rand() & 0xF) * g_Task->unk_09;
-    prim->g0 = (rand() & 0xF) * g_Task->unk_09;
-    prim->b0 = (rand() & 0xF) * g_Task->unk_09;
+    setRGB0(prim, (rand() & 0xF) * g_Task->unk_09, (rand() & 0xF) * g_Task->unk_09, (rand() & 0xF) * g_Task->unk_09);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_F3));
 }
 

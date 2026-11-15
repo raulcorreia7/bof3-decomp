@@ -7,7 +7,8 @@
 #include "shared/etc.h"
 
 extern u8            D_801457E8[][5];
-extern OverlayHeader D_801D0C00;
+/* g_EmiOverlayHeader */
+extern OverlayHeader g_EmiOverlayHeader;
 extern u8            D_801DAAA8;
 /* Entries of the handler tables. */
 #define COMMU02_EVENT0_STEP_COUNT       3
@@ -69,28 +70,36 @@ extern Callback g_Commu02Event3Step2Sub6Funcs[COMMU02_EVENT3_STEP2_SUB6_COUNT];
 extern u8       g_MenuPortraitAtlas[];
 
 /* D_801DAE74 */
-extern Callback g_Commu02Event3Step2Sub7Funcs[COMMU02_EVENT3_STEP2_SUB7_COUNT];
-extern s32      D_801DB07C;
-extern u8       D_801DB080[];
+extern Callback  g_Commu02Event3Step2Sub7Funcs[COMMU02_EVENT3_STEP2_SUB7_COUNT];
+extern s32       D_801DB07C;
+extern u8        D_801DB058[][5];
+extern u8        D_801DB080[];
+extern u8        D_801DB089[];
 /* The overlay's state byte the guarded step advances. */
-extern s8       D_801DB093;
-extern u8       D_801DB0AD;
-extern u8       D_801DB0AE;
-extern u8       D_801DB0B4;
-extern s8       D_801DB0B8;
-extern u8       D_801DB0C4;
-extern u16      D_801DB0C8;
-extern u8       D_801DB0CC;
-extern u8       D_801DB0D0;
-extern u8       D_801DB0D4;
-extern u8       D_801DB0D8;
-extern u8       D_801DB0DC;
-extern u8       D_801F2944;
-extern u8       D_801F2945;
+extern s8        D_801DB093;
+extern u8        D_801DB0AD;
+extern u8        D_801DB0AE;
+extern u8        D_801DB0B4;
+extern s8        D_801DB0B8;
+extern u8        D_801DB0C4;
+extern u8        D_801DAC60[];
+extern u16       D_801DB0C8;
+extern u8        D_801DB0CC;
+extern u8        D_801DB0D0;
+extern u8        D_801DB0D4;
+extern u8        D_801DB0D8;
+extern u8        D_801DB0DC;
+extern u8        D_801F2944;
+extern u8        D_801F2945;
+extern u8        D_801D0C3C[];
+extern u8        D_801DAAAC[];
+extern const u8* D_801DB038[];
+extern const u8* volatile D_801DB054;
 
 void func_801D2E10(void);
 void func_801D2E60(s16 x, s16 y);
-u8   func_801D7EA0(u8);
+/* func_801D7EA0 */
+u8   Fairy_FindActiveJob(u8);
 
 u8 func_801D92F4(u8);
 
@@ -101,10 +110,10 @@ void func_801D32A0(s32 arg0, s32 arg1, s32 arg2);
 void func_801D4EA4(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void func_801DA8E8(void);
 
-void func_801D2794(s32 arg0, s32 arg1, s32 arg2);
+void func_801D2794(s32 count, s32 shown, s32 chosen);
 void func_801D2870(void);
 void func_801D2AC4(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_801D2CF8(s32 arg0, s32 arg1, s32 arg2);
+void func_801D2CF8(s32 x, s32 y, s32 icon);
 void func_801D3184(s32 arg0, s32 arg1);
 void func_801D4AE0(s32 arg0, s32 arg1, s32 arg2);
 void func_801D4F88(s32 x, s32 y, s32 show_values);

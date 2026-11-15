@@ -40,10 +40,10 @@ static inline void Area_StartScriptedMove(u8 facing) {
     g_ScriptState->unk_07 = D_8014686B * 4;
     if (g_ScriptState->unk_07 != 0) {
         if (Actor_GetOwner() != 2) {
-            func_801ABBA8(g_ScriptState, g_Task->direction_08);
+            Area_MoveActorRoute(g_ScriptState, g_Task->direction_08);
             g_ScriptState->flag_00 |= 0x80;
         } else {
-            func_801C5DFC(g_Task->direction_08);
+            Area_SetFacingOffsetX(g_Task->direction_08);
             g_AreaCameraHeightStep = 0;
             g_ScriptState->flag_00 |= 0x40;
         }

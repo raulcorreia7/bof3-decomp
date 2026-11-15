@@ -16,7 +16,7 @@ MATCH void func_801E1A14(void) {
     if ((D_801CA71C[g_Battle.action_id].mask & 0x800u) != 0u) {
         g_Task->header.step += 1;
     } else {
-        func_801DEE4C();
+        Battle_IsPartyMemberBlocked();
         g_Task->header.step = 4;
     }
 }

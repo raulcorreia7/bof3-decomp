@@ -19,6 +19,6 @@ extern s32 g_AreaFocusY;
 /* The payload includes per-state handler tables. */
 extern u8  D_801F4A68[];
 
-#define AREA167_ENTRY_TABLE(type, offset, index) WORLD04_ENTRY_TABLE(D_801F4A68, type, offset, index)
+#define AREA167_ENTRY_TABLE(type, offset, index) AREA_PAYLOAD_FIELD(D_801F4A68, type, offset, index)
 
 #endif

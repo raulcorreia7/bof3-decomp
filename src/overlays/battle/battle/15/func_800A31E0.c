@@ -81,7 +81,7 @@ MATCH void func_800A31E0(u8 selection_kind, u16 input_mask) {
         merged                          = merged | g_Battle.pending_status;
         g_Game.members[slot].chr.status = merged;
     } else {
-        GFX_FreePaletteFadeTarget(((volatile BattleEnemyRecord*)g_BattleEnemies)[slot].unk_00);
+        GFX_FreePaletteFadeTarget(((volatile BattleEnemy*)g_BattleEnemies)[slot].unk_00);
         merged                       = ENEMY_COMBATANT(slot).status | g_Battle.pending_status;
         ENEMY_COMBATANT(slot).status = merged;
     }

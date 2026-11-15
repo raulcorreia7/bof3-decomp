@@ -25,7 +25,47 @@ MATCH void func_801EEC28(void) {
     }
 }
 
-INCLUDE_ASM(func_801EED30);
+MATCH void func_801EED30(void) {
+    BattleEffect* slot;
+    PartyMember*  work;
+    u32           index;
+    u8            active;
+    u32           i;
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
+    }
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+    func_800AEF98(0xC, 2);
+    index  = Battle_AllocEffect(1, 9) & BYTE_MASK;
+    active = g_Battle.active_battler;
+    if (BATTLER_IS_PLAYER(active)) {
+        BattleWorkImage* row;
+
+        row                     = (BattleWorkImage*)&g_Game.members[active];
+        slot                    = &g_BattleEffects[index];
+        *(BattleWorkImage*)slot = *row;
+    } else {
+        BattleWorkImage* row;
+        u32              enemy;
+
+        slot                    = &g_BattleEffects[index];
+        enemy                   = active - BATTLE_PARTY_CHARACTERS_COUNT;
+        row                     = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
+        *(BattleWorkImage*)slot = *row;
+    }
+    work                                 = g_Task;
+    g_BattleEffects[index].unk_06        = 1;
+    g_BattleEffects[index].header.mode   = 0;
+    g_BattleEffects[index].header.step   = 0;
+    g_BattleEffects[index].handler_index = 9;
+    g_BattleEffects[index].target.party  = work;
+    g_Task->param.unk_0B += 1;
+    g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+}
 
 #include "overlays/bmagic/Effect_ReleaseActiveBattlerOnTickerZero.h"
 
@@ -58,7 +98,7 @@ MATCH void func_801EF104(void) {
     if (timer != 0) {
         return;
     }
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
     g_Task->unk_09       = 0;
     g_Task->param.unk_0B = 0;
     for (i = 0; i < 12; i++) {
@@ -159,7 +199,49 @@ MATCH void func_801EF7A0(void) {
 
 INCLUDE_ASM(func_801EF7FC);
 
-INCLUDE_ASM(func_801EFA48);
+/* Draw the magic021 ring as sixteen shaded quads between two radii around the effect,
+ * tinted on the inner edge by the timer and dark on the outer one. */
+MATCH void func_801EFA48(void) {
+    POLY_G4* prim;
+    s32      tpage;
+    s32      i;
+    u8       red;
+    u8       green;
+    u8       blue;
+
+    tpage = getTPage(0, 1, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    i = 0;
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    D_1F800000.view.effect.params[2] = 0;
+    red                              = g_Task->timer * 12;
+    green                            = g_Task->timer * 6;
+    blue                             = g_Task->timer * 4;
+    D_1F800000.view.effect.params[0] = g_Task->unk_09 * 2;
+    D_1F800000.view.effect.params[1] = g_Task->unk_09 * 3;
+    D_1F800000.view.effect.params[4] = g_Task->unk_2E.half;
+    D_1F800000.view.effect.params[5] = g_Task->unk_30.half;
+    do {
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        setXY0(prim, D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]),
+               D_1F800000.view.effect.params[5] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]));
+        prim->x2                         = D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[1]);
+        prim->y2                         = D_1F800000.view.effect.params[5] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[1]);
+        D_1F800000.view.effect.params[2] = (i + 1) << 8;
+        prim->x1                         = D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+        prim->y1                         = D_1F800000.view.effect.params[5] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+        prim->x3                         = D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[1]);
+        prim->y3                         = D_1F800000.view.effect.params[5] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[1]);
+        setRGB0(prim, red, green, blue);
+        setRGB1(prim, red, green, blue);
+        setRGB2(prim, 1, 1, 1);
+        setRGB3(prim, 1, 1, 1);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
+        i++;
+    } while (i < 16);
+}
 
 /* func_801EFD4C */
 #include "overlays/bmagic/BMagic_AllocEffect.h"

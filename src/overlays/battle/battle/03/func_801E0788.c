@@ -8,7 +8,7 @@ MATCH void func_801E0788(void) {
     u16*         half;
     u16*         half2;
 
-    func_801DDFEC(g_Task->slot);
+    Battle_GetTurnCursor(g_Task->slot);
     Battle_CancelTurn(g_Task->slot);
     w = g_Game.current;
     if (w->u.turn.damage_flags.value & COMBATANT_FLAG_WILLPOWER_SURVIVED) {

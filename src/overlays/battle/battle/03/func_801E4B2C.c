@@ -25,6 +25,6 @@ MATCH void func_801E4B2C(void) {
         } else {
             g_Task->header.mode = (g_Task->header.mode + 1);
         }
-        func_801E3160();
+        Battle_IsEnemyBlockedOnce();
     }
 }

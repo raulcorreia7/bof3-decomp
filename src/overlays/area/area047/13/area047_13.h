@@ -15,6 +15,8 @@ extern u8  D_801F39C8[];
 #define AREA_ROW_STRIDE      0x18
 #define AREA_ROW_FLAG_OFFSET 0x14
 
+void func_801F2DB4(s32* pos, s16 radius, u8 center_shade, u8 rim_shade);
+
 void func_801F31F4(s16 scale);
 
 void func_801F32C4(void);

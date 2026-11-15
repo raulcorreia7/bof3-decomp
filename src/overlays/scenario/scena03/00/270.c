@@ -15,13 +15,13 @@ MATCH void func_801F6EB4(void) {
     u32  cell3;
     s16* scratch;
 
-    g_Task->unk_03 = Actor_FindFree();
+    g_Task->unk_03 = Actor_FindFreeField();
     if (g_Task->unk_03 == GAME_NONE) {
         return;
     }
 
     g_Actors[g_Task->unk_03].header.flags = 1;
-    g_Task->unk_04                        = Actor_FindFree();
+    g_Task->unk_04                        = Actor_FindFreeField();
     if (g_Task->unk_04 == GAME_NONE) {
         g_Actors[g_Task->unk_03].header.flags = 0;
         return;
@@ -129,7 +129,7 @@ MATCH void func_801F7B10(void) {
 
     actor = g_Task;
     ptr   = &actor->vx;
-    func_801F7FFC(ptr);
+    func_801F7FFC((Scena03Quad*)ptr);
     func_801F8170(ptr);
     actor->tint.halves.unk_5E += 1;
     value         = g_Task->timer - 1;
@@ -147,7 +147,7 @@ MATCH void func_801F7BB0(void) {
 
     actor = g_Task;
     ptr   = &actor->vx;
-    func_801F7FFC(ptr);
+    func_801F7FFC((Scena03Quad*)ptr);
     func_801F8170(ptr);
     actor->script_pc += 4;
     value         = g_Task->timer - 1;
@@ -163,7 +163,7 @@ MATCH void func_801F7C50(void) {
     u8   temp_v0;
 
     temp_s0 = &g_Task->vx;
-    func_801F7FFC(temp_s0);
+    func_801F7FFC((Scena03Quad*)temp_s0);
     func_801F8170(temp_s0);
     temp_v0       = g_Task->timer - 1;
     g_Task->timer = temp_v0;
@@ -180,7 +180,7 @@ MATCH void func_801F7CE0(void) {
 
     work = g_Task;
     pos  = &work->vx;
-    func_801F7FFC(pos);
+    func_801F7FFC((Scena03Quad*)pos);
     func_801F8170(pos);
     work->unk_5A -= 8;
     work->tint.halves.unk_5C -= 0x40;
@@ -198,7 +198,7 @@ MATCH void func_801F7D80(void) {
 
     work = g_Task;
     pos  = &work->vx;
-    func_801F7FFC(pos);
+    func_801F7FFC((Scena03Quad*)pos);
     func_801F8170(pos);
     step            = work->script_pc - 8;
     work->script_pc = step;
@@ -221,18 +221,18 @@ MATCH void func_801F7E34(void) {
 }
 
 MATCH void func_801F7E6C(void) {
-    ActorSlot** effects;
-    ActorSlot*  spawned;
-    Actor*      record;
-    Actor*      actor;
-    u8          i;
-    u8          slot;
+    SpawnedActor** effects;
+    SpawnedActor*  spawned;
+    Actor*         record;
+    Actor*         actor;
+    u8             i;
+    u8             slot;
 
-    effects = (ActorSlot**)&g_Task->vx;
+    effects = (SpawnedActor**)&g_Task->vx;
     for (i = 0; i < 5; i++) {
-        slot = Actor_FindFreeSlot();
+        slot = Actor_FindFreeSpawned();
         if (slot != GAME_NONE) {
-            spawned                    = &g_ActorSlots[slot];
+            spawned                    = &g_SpawnedActors[slot];
             effects[i]                 = spawned;
             spawned->header.flags      = 1;
             spawned->unk_06            = 0;
@@ -252,10 +252,10 @@ MATCH void func_801F7E6C(void) {
 }
 
 MATCH void func_801F7F84(void) {
-    ActorSlot** effects; /* the five effect slots spawned at +0x0C */
-    u8          i;
+    SpawnedActor** effects; /* the five effect slots spawned at +0x0C */
+    u8             i;
 
-    effects = (ActorSlot**)&g_Task->vx;
+    effects = (SpawnedActor**)&g_Task->vx;
     for (i = 0; i < 5; i++) {
         if (effects[i]->unk_06 == 0) {
             return;
@@ -265,7 +265,49 @@ MATCH void func_801F7F84(void) {
     Actor_Clear();
 }
 
-INCLUDE_ASM(func_801F7FFC);
+MATCH void func_801F7FFC(Scena03Quad* quad) {
+    MATRIX mat;
+    VECTOR in;
+    VECTOR out;
+    s32    dx;
+    s32    dy;
+    u8     i;
+
+    i  = 0;
+    dx = (quad->length * rcos(quad->angle)) << 4;
+    dy = (quad->length * rsin(quad->angle)) << 4;
+    MATH_SetIdentity(&mat);
+    RotMatrixY(quad->rotation_y, &mat);
+    RotMatrixZ(quad->rotation_z, &mat);
+    /* Retail applies the matrix once to the uninitialised vector before the loop. */
+    ApplyMatrixLV(&mat, &in, &out);
+    in.vz = 0;
+    do {
+        switch (i) {
+            case 0:
+                in.vx = 0;
+                in.vy = 0;
+                break;
+            case 1:
+                in.vx = dx;
+                in.vy = dy;
+                break;
+            case 2:
+                in.vx = dx;
+                in.vy = 0;
+                break;
+            default:
+                in.vx = dx;
+                in.vy = -dy;
+                break;
+        }
+        ApplyMatrixLV(&mat, &in, &out);
+        quad->corner[i].x = quad->x + out.vx;
+        quad->corner[i].y = quad->y + out.vy;
+        quad->corner[i].z = quad->z + (out.vz << 8);
+        i++;
+    } while (i < 4);
+}
 
 MATCH void func_801F8170(s32* vertices) {
     MATRIX camera;
@@ -306,14 +348,14 @@ MATCH void func_801F8328(void) {
 }
 
 MATCH void func_801F8370(void) {
-    ActorSlot* temp_v0;
-    s32        temp_v1;
-    u8         temp_v0_2;
+    SpawnedActor* temp_v0;
+    s32           temp_v1;
+    u8            temp_v0_2;
 
     if (g_Task->timer & 0x4) {
         temp_v1 = func_8019601C() & BYTE_MASK;
         if (temp_v1 != 0xFF) {
-            temp_v0               = &g_ActorSlots[temp_v1];
+            temp_v0               = &g_SpawnedActors[temp_v1];
             temp_v0->header.flags = 1;
             temp_v0->type         = 0x24;
         }
@@ -333,7 +375,26 @@ MATCH void func_801F844C(void) {
     SYS_DISPATCH_TASK(D_801FCFA0, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801F8490);
+MATCH void func_801F8490(void) {
+    Scena03Work* work;
+
+    work                   = SCN_LINE;
+    work->line.unk_00      = 0x600;
+    work->line.unk_06      = 0x100;
+    work->line.unk_08      = 0x100;
+    work->line.unk_02      = rand() & 0x700;
+    work->line.unk_04      = rand() & 0xF00;
+    work->line.color.blue  = 255;
+    work->line.color.green = 255;
+    work->line.color.red   = 255;
+    if (rand() & 1) {
+        work->line.color.red = 0;
+    }
+    if (rand() & 1) {
+        work->line.color.blue = 0;
+    }
+    g_Task->header.mode++;
+}
 
 MATCH void func_801F853C(void) {
     Scena03Work* work;
@@ -454,7 +515,61 @@ INCLUDE_ASM(func_801FB268);
 
 INCLUDE_ASM(func_801FB8A4);
 
+#ifdef NON_MATCHING
+NON_MATCHING s32 func_801FC1D0(s32 member_index) {
+    s32    actor_index;
+    s16    height;
+    u8     option_flags;
+    Actor* actor;
+    Actor* task;
+
+    actor_index = Actor_FindFreeField() & BYTE_MASK;
+    if (actor_index == GAME_NONE) {
+        return 0;
+    }
+
+    actor                 = &g_Actors[actor_index];
+    SP_REF(Actor*, 0x44u) = actor;
+    g_CurrentActor        = actor;
+    func_801A4AA8();
+    Area_SelectSceneRecord(0x67);
+    g_Task->header.flags = 1;
+
+    task                              = g_Task;
+    task->pos.x.fixed                 = g_Game.members[(u8)member_index].pos.x.fixed + COORD_HALF;
+    g_Actors[actor_index].walk_dest_x = task->pos.x.fixed;
+    task->pos.y.fixed                 = g_Game.members[(u8)member_index].pos.y.fixed;
+    g_Actors[actor_index].walk_dest_y = task->pos.y.fixed;
+    g_Actors[actor_index].unk_88      = 0;
+
+    height                        = Area_SampleHeight(task->pos.x.fixed, task->pos.y.fixed);
+    task                          = g_Task;
+    task->header.mode             = 4;
+    task->pos.z.part.integer      = height;
+    g_Task->header.step           = 0;
+    g_Task->direction_08          = 0;
+    g_Task->unk_06                = 0;
+    actor->ext.bounds.half_height = 0;
+    g_Actors[actor_index].unk_77  = 2;
+    g_Actors[actor_index].unk_78  = 2;
+
+    option_flags                 = 0x88;
+    actor->ext.bounds.half_width = 0;
+    g_Actors[actor_index].unk_7C = 0;
+    Actor_SetOptionFlags(&option_flags);
+    g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    task                       = g_Task;
+    task->tint.bytes.rgb.blue  = 0;
+    task->tint.bytes.rgb.green = 0;
+    task->tint.bytes.rgb.red   = 0;
+    task                       = g_Task;
+    task->tint.bytes.flags     = 1;
+    func_801A4914();
+    return 1;
+}
+#else
 INCLUDE_ASM(func_801FC1D0);
+#endif
 
 MATCH void func_801FC3B4(void) {
     SCENA03_NUDGE_SCROLL(D_801FD004, 3);
@@ -507,7 +622,7 @@ MATCH void func_801FC5FC(void) {
     SND_StartXAStream(2, 1);
     while (!(SND_IsXAIdle() & BYTE_MASK)) {
         func_801992B8();
-        CallbackWait(1U);
+        SYS_ThreadWait(1U);
     }
     SND_ResumeBGM(g_SndBGMId);
 }

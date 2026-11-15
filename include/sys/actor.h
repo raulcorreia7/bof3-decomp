@@ -23,7 +23,7 @@
 #include "common/handler.h"
 #include "psx/mem.h"
 #include "common/vector.h"
-#include "slus/facing.h"
+#include "common/facing.h"
 #include "types.h"
 #include "sys/task.h"
 
@@ -49,19 +49,19 @@
 
 /* Clear the actor's three tint bytes: the row draws untinted. A bare statement
  * macro: use it as a whole statement, never under an unbraced `if`. */
-#define ACTOR_CLEAR_TINT()         \
-    g_Task->tint.bytes.unk_5D = 0; \
-    g_Task->tint.bytes.unk_5E = 0; \
-    g_Task->tint.bytes.unk_5F = 0
+#define ACTOR_CLEAR_TINT()            \
+    g_Task->tint.bytes.rgb.red   = 0; \
+    g_Task->tint.bytes.rgb.green = 0; \
+    g_Task->tint.bytes.rgb.blue  = 0
 
 /* `flags` bits. Bit 0 marks a row the update walks; bit 1 skips queuing the row's palette pair; bit 3 marks selection
- * voices queued on the row (@source: write:SND_QueueSelectionFx@0x8015D71C, read:Area_AddActor@0x8014D4E0); bit 4 takes
+ * voices queued on the row (@source: write:SND_QueueSelectionEffect@0x8015D71C, read:Area_AddActor@0x8014D4E0); bit 4 takes
  * the advance-stream tail after the step deltas; bit 5 makes the row's primitives semi-transparent; bit 6 hides the row
  * from the draw, walkability and entity-lookup paths; bit 7 marks a row culled outside the window. */
 typedef enum ActorFlags {
     ACTOR_FLAG_IN_USE             = 1 << 0,
     ACTOR_FLAG_SKIP_PALETTE_STAGE = 1 << 1,
-    ACTOR_FLAG_SELECTION_FX       = 1 << 3,
+    ACTOR_FLAG_SELECTION_EFFECT   = 1 << 3,
     ACTOR_FLAG_STEP_MOVE          = 1 << 4,
     ACTOR_FLAG_SEMI_TRANSPARENT   = 1 << 5,
     ACTOR_FLAG_HIDDEN             = 1 << 6,
@@ -115,17 +115,13 @@ typedef union ActorTint {
     s32 word;
 
     struct {
-        u8 flags;
-        u8 unk_5D;
-        u8 unk_5E;
-        u8 unk_5F;
+        u8        flags;
+        ColorRGB8 rgb; /* 0x5D */
     } bytes;
 
     struct {
-        s8 flags;
-        s8 unk_5D;
-        s8 unk_5E;
-        s8 unk_5F;
+        s8          flags;
+        ColorDelta8 delta; /* 0x5D */
     } signed_bytes;
 
     struct {
@@ -137,9 +133,9 @@ typedef union ActorTint {
 ASSERT_SIZE(ActorTint, 0x04);
 
 /* The word at +0x70: the scene flag-table byte alone, or the whole word. The word
- * packs voice numbers above the byte (SND_QueueSelectionFx ORs them in,
+ * packs voice numbers above the byte (SND_QueueSelectionEffect ORs them in,
  * Area_SelectSceneRecord masks and loads it); area code clears it or passes it
- * whole as the range mode of func_801BE0C0. */
+ * whole as the range mode of Game_GetPartySize. */
 typedef union ActorStateWord {
     u32 word;
     u8  byte;
@@ -150,7 +146,7 @@ ASSERT_SIZE(ActorStateWord, 0x04);
 /* The role tail at +0x8C. Area code that tests the player's distance reads the half extents
  * of the box (func_801A1A58, func_801A2C94, func_801A2DB4); the pond fish rows keep the
  * stamina gauge there (area030/04 func_801E026C), the maximum first. */
-typedef union ActorExt {
+typedef union ActorTail {
     struct {
         s16 half_width;
         s16 half_height;
@@ -160,22 +156,22 @@ typedef union ActorExt {
         s16 stamina_max;
         u16 stamina;
     } fishing;
-} ActorExt;
+} ActorTail;
 
-ASSERT_SIZE(ActorExt, 0x04);
+ASSERT_SIZE(ActorTail, 0x04);
 
-typedef union ActorParam {
+typedef union ActorRole {
     u8 unk_0B;
     u8 cloud_layer;     /* the world-map cloud layer; two less is its texture row */
-    u8 actor_slot;      /* the g_ActorSlots row a helper actor was spawned in */
+    u8 actor_slot;      /* the g_SpawnedActors row a helper actor was spawned in */
     u8 party_index;     /* the party row the actor follows */
     u8 scene_record_id; /* the scene record Area_SelectSceneRecord selects */
     u8 facing;
     u8 scene_event_flag;
     u8 turn_step;
-} ActorParam;
+} ActorRole;
 
-ASSERT_SIZE(ActorParam, 1);
+ASSERT_SIZE(ActorRole, 1);
 
 typedef struct Actor {
     TaskHeader     header;            /* 0x00 */
@@ -190,7 +186,7 @@ typedef struct Actor {
     u8             direction_08;      /* 0x08 - commu00 calls it the cue resource */
     u8             timer;             /* 0x09 - counted up or down by the area step handlers */
     u8             unk_0A;            /* 0x0A */
-    ActorParam     param;             /* 0x0B */
+    ActorRole      param;             /* 0x0B */
     s32            vx;                /* 0x0C added to x each step */
     s32            vy;                /* 0x10 added to y each step */
     s32            vz;                /* 0x14 signed vertical speed */
@@ -245,7 +241,7 @@ typedef struct Actor {
     s32            walk_dest_x;       /* 0x80 - x the walk ends at */
     s32            walk_dest_y;       /* 0x84 - y the walk ends at */
     u32            unk_88;            /* 0x88 */
-    ActorExt       ext;               /* 0x8C - see ActorExt */
+    ActorTail      ext;               /* 0x8C - see ActorTail */
     u16            roll_90;           /* 0x90 */
     u8             facing_92;         /* 0x92 - the facing direction: the fishing code writes
                                 *        `rand() & 3` and turns the row by it

@@ -6,7 +6,40 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/func_801EEC14.h"
 
-INCLUDE_ASM(func_801EEC80);
+MATCH void func_801EEC80(void) {
+    RECT         rect;
+    PartyMember* work;
+
+    if (g_Battle.target_selector == 0x80 && g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
+        g_Task->header.mode = 1;
+    }
+    if (g_Battle.target_selector == 0x40 && !(g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT)) {
+        g_Task->header.mode = 1;
+    }
+    if (g_Task->header.mode != 0) {
+        Battle_MarkDamaged(g_Battle.target_selector);
+        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+        func_801E5988();
+        return;
+    }
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    g_Task->unk_09 = 2;
+    work           = g_Task;
+    rect.x         = work->unk_2E.half - work->unk_09;
+    rect.y         = work->unk_30.half - work->unk_09 + g_FrameBufferIndex * 240;
+    rect.h = rect.w = work->unk_09 * 2;
+    SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, 0x340, 0x100);
+    GFX_AddPrim(3, sizeof(DR_MOVE));
+    if (g_Battle.target_selector & 0x40) {
+        g_Task->unk_2E.half = D_801EF9D8[g_Battle.scroll_dir].x;
+        g_Task->unk_30.half = D_801EF9D8[g_Battle.scroll_dir].y;
+    } else {
+        g_Task->unk_2E.half = D_801EF9D8[g_Battle.scroll_dir ^ 2].x;
+        g_Task->unk_30.half = D_801EF9D8[g_Battle.scroll_dir ^ 2].y;
+    }
+    g_Task->unk_64 = 0;
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801EEEAC(void) {
     u8 count;

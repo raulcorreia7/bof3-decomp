@@ -18,19 +18,19 @@
 /* The fishing messages: indexes into the message table the pond loads at
  * AREA_MESSAGE_TABLE (the AREA030, AREA089 and AREA129 payload). */
 typedef enum FishingMessageId {
-    FISHING_MSG_CAUTION          = 60,
-    FISHING_MSG_FISH             = 61,
-    FISHING_MSG_RETRY            = 62,
-    FISHING_MSG_EXIT             = 63,
-    FISHING_MSG_QUIT_PROMPT      = 64,
-    FISHING_MSG_TOO_MANY_ITEMS   = 65,
-    FISHING_MSG_EQUIP_ROD_LURE   = 80,
-    FISHING_MSG_EQUIP_ROD        = 81,
-    FISHING_MSG_EQUIP_LURE       = 82,
-    FISHING_MSG_DATA_TITLE       = 96,
-    FISHING_MSG_DATA_PAGE_HINT   = 97,
-    FISHING_MSG_HOW_TO_FISH      = 111,
-    FISHING_MSG_HOW_TO_PAGE_HINT = 112,
+    FISHING_MESSAGE_CAUTION          = 60,
+    FISHING_MESSAGE_FISH             = 61,
+    FISHING_MESSAGE_RETRY            = 62,
+    FISHING_MESSAGE_EXIT             = 63,
+    FISHING_MESSAGE_QUIT_PROMPT      = 64,
+    FISHING_MESSAGE_TOO_MANY_ITEMS   = 65,
+    FISHING_MESSAGE_EQUIP_ROD_LURE   = 80,
+    FISHING_MESSAGE_EQUIP_ROD        = 81,
+    FISHING_MESSAGE_EQUIP_LURE       = 82,
+    FISHING_MSG_DATA_TITLE           = 96,
+    FISHING_MSG_DATA_PAGE_HINT       = 97,
+    FISHING_MESSAGE_HOW_TO_FISH      = 111,
+    FISHING_MESSAGE_HOW_TO_PAGE_HINT = 112,
 } FishingMessageId;
 
 #define g_CurrentActor            ((u8*)g_CurrentActor)
@@ -309,9 +309,9 @@ typedef struct FishingIconData {
     FishingIcon records[13];
 } FishingIconData;
 
-typedef struct FishingThresholdData {
+typedef struct FishingThreshold {
     u16 thresholds[13];
-} FishingThresholdData;
+} FishingThreshold;
 
 extern s16                   D_800396C0;
 extern s16                   D_800396FE;
@@ -357,7 +357,7 @@ extern s32                   D_80146898;
 extern FishingSelectionState D_801468A4[];
 extern u8                    D_80146918[];
 /* D_80181AC0 */
-extern Point2DL              g_FacingOffsets[];
+extern Point2l               g_FacingOffsets[];
 extern char                  D_801D0C04[];
 extern char                  D_801D0C08[];
 extern char                  D_801D0C10[];
@@ -366,7 +366,7 @@ extern FishingAnchors        D_801D0C30;
 extern char                  D_801D0C38[];
 /* D_801D0C3C */
 extern FishingIconData       g_FishingRankIcons;
-extern FishingThresholdData  D_801D0C70;
+extern FishingThreshold      D_801D0C70;
 extern u8                    D_801D0C8C[];
 extern Callback              D_801E1CD4[];
 extern Callback              D_801E1CE8[];
@@ -396,7 +396,7 @@ extern u8                    g_FishingPromptSets[][4];
 /* D_801E1F44 */
 extern Callback              g_FishingPromptStates[];
 /* D_801E1F78 */
-extern Callback              g_FishingDataStates[];
+extern Callback              g_FishingStates[];
 extern Callback              D_801E1FBC[];
 extern Callback              D_801E1FD4[];
 extern u8                    D_801E1FE8[];
@@ -496,10 +496,6 @@ extern u8                    g_FishingNewRecord;
 
 /* func_800F7094 */
 s32  Fishing_ShopDrawItemIcon(s32 x, s32 y, s32 item_id, s32 category, u8 selected);
-/* func_8014D6DC */
-void Actor_BeginScript(s32 script_index, s32 position);
-/* func_801650B4 */
-bool Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
 void func_801D0C90(void);
 void func_801D0CDC(void);
 void func_801D0DDC(void);

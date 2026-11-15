@@ -11,8 +11,8 @@ MATCH void func_801F9DF4(void) {
 
     switch (g_SceneState.step_05) {
         case 0:
-            func_801C16B8();
-            func_801C601C(1);
+            Char_RebuildPartyStats();
+            Area_StartScrollRoute(1);
             for (i = 0; i < PARTY_SLOT_COUNT - 1; i++) {
                 for (j = i + 1; j < PARTY_SLOT_COUNT; j++) {
                     if (g_Game.members[i].chr.character_id > g_Game.members[j].chr.character_id) {
@@ -41,7 +41,7 @@ MATCH void func_801F9DF4(void) {
             g_SceneState.step_05 = 3;
             break;
         case 4:
-            func_801C16B8();
+            Char_RebuildPartyStats();
             g_ScriptVars[2]      = 2;
             g_SceneState.step_05 = 5;
             Game_RequestAreaChange(AREA_ID_BEYD_TRAINING, TO_COORD(25), TO_COORD(60), AREA_ENTRY_MAP_LOADING | FACING_DOWN);
@@ -58,7 +58,7 @@ MATCH void func_801F9DF4(void) {
                 break;
             }
             func_801BE1B0(6);
-            func_801C601C(2);
+            Area_StartScrollRoute(2);
             g_SceneState.step_05 = 11;
             break;
         case 11:
@@ -107,7 +107,7 @@ MATCH void func_801F9DF4(void) {
                 break;
             }
             g_SceneState.step_05 = 18;
-            func_801C16B8();
+            Char_RebuildPartyStats();
             g_SceneState.flags_01 ^= 0x01;
             SYS_SetFlag(g_SceneFlags, 28);
             Game_RequestAreaChange(AREA_ID_RHAPALA_WORLD_MAP, TO_COORD(49), TO_COORD(45), FACING_DOWN_RIGHT);
@@ -181,7 +181,7 @@ MATCH void func_801F9DF4(void) {
                 break;
             }
             g_SceneState.step_05 = 41;
-            func_801C16B8();
+            Char_RebuildPartyStats();
             g_SceneState.flags_01 ^= 0x01;
             Game_RequestAreaChange(AREA_ID_RHAPALA_WORLD_MAP, TO_COORD(49), TO_COORD(45), FACING_DOWN_RIGHT);
             break;

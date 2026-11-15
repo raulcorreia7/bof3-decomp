@@ -11,5 +11,5 @@ MATCH void SND_SetSequenceVolume(s32 group, s16 sequence, s16 left_volume, s16 r
     vB         = D_80148A06;
     D_8018B418 = vA;
     D_8018B41A = vB;
-    SsSepSetVol(g_SelectionFxVoices[group & HALF_MASK], sequence, left_volume, right_volume);
+    SsSepSetVol(g_SelectionEffectVoices[group & HALF_MASK], sequence, left_volume, right_volume);
 }

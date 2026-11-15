@@ -14,7 +14,7 @@ NON_MATCHING void func_8009FB38(void) {
     s32          row_offset;
     u8           battler;
     u8           template_index;
-    func_800A3F28();
+    Battle_MarkDamageApplied();
     selected_battler_address = (u8*)(&g_Battle.target);
     battler                  = *selected_battler_address;
     if (battler < 3U) {

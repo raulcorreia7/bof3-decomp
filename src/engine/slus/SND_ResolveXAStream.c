@@ -51,9 +51,7 @@ MATCH void SND_ResolveXAStream(s32 stream_id) {
     extra                = flag[1];
     bound                = base + (((*entry & 0x7FFF) * scale) + extra);
     *(s32*)(flag - 0x28) = bound;
-    /* FAKE: hold the second entry read after the first bound store. */
-    FAKE_BARRIER();
-    second_offset = (((entry[1] & 0x7FFF) * scale) + extra);
+    second_offset        = (((entry[1] & 0x7FFF) * scale) + extra);
     base -= 0x96;
     *(s32*)(flag - 0x20) = bound;
     D_80146810           = base + second_offset;

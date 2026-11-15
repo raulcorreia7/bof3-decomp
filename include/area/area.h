@@ -22,8 +22,8 @@
  *
  * - `AreaMapBundle` and its cell rows: map bundle.
  * - `AreaActorDef`, `AreaActorDefs`: scene/step table.
- * - `AreaScriptTable`, `AreaScriptSection`: area script table.
- * - `AreaTrail`, `AreaSlotWork`, `UPoint2D`: neighboring buffers; the
+ * - `AreaScripts`, `AreaScriptSection`: area script table.
+ * - `AreaTrail`, `AreaSlotWork`, `Point2u`: neighboring buffers; the
  *   area program owns them.
  *
  * The format sections are in @source: wiki:formats/area.
@@ -80,7 +80,7 @@
 /* The working copy of the palette banks (g_GraphicsPaletteDst): palette animations and fades write it, and the pending
  * flag g_GfxPalettePending asks the next frame to upload it. */
 #define AREA_PALETTE_WORK          0x80037800u
-/* The script tables g_ScriptTable alternates between: the field's, the battle's and the battle magic's. */
+/* The script tables g_Scripts alternates between: the field's, the battle's and the battle magic's. */
 #define AREA_SCRIPT_TABLE          0x800D3800u
 #define BATTLE_SCRIPT_TABLE        0x800F0800u
 #define BMAGIC_SCRIPT_TABLE        0x800C3800u
@@ -91,6 +91,8 @@
  * a cell's centre is half a cell past its corner. */
 #define AREA_CELL_ORIGIN           0x4000
 #define AREA_CELL_HALF             0x40
+#define AREA_CELL_GRID_ROWS        56          /* rows of the cell grids: g_AreaCellGrid and g_AreaCells */
+#define AREA_CELL_GRID_COLS        28          /* columns of the cell grids */
 #define MAP_BUNDLE_BASE            0x80104000u /* the map bundle */
 
 /* The payload-head id convention: an area program is 52 + area, an auxiliary
@@ -160,6 +162,9 @@ typedef struct AreaMapBundle {
 } AreaMapBundle;
 
 ASSERT_SIZE(AreaMapBundle, AREA_MAP_BUNDLE_SIZE);
+/* A bundle record's first word carries its type in the top byte. */
+#define AREA_RECORD_TYPE_MASK (0xFFu << 24)
+#define AREA_RECORD_TYPE_81   (0x81u << 24)
 ASSERT_OFFSET(AreaMapBundle, width, 0x00);
 ASSERT_OFFSET(AreaMapBundle, height, 0x01);
 ASSERT_OFFSET(AreaMapBundle, grid_off4_02, 0x02);
@@ -217,6 +222,27 @@ typedef struct AreaCellCorners {
 
 ASSERT_SIZE(AreaCellCorners, AREA_MAP_CELL_RECORD_SIZE);
 
+/* The g_AreaCellPrims row bits of AreaCell.prim_id. */
+#define AREA_CELL_PRIM_MASK 0xFFF
+
+/* One cell of the 56 x 28 screen grid: the tile it shows (the grid-wrapped panel position that
+ * Area_GetCell stores) and its row in g_AreaCellPrims (0 = none). */
+typedef struct AreaCell {
+    u8  tile_x;
+    u8  tile_y;
+    u16 prim_id; /* low 12 bits: the g_AreaCellPrims row; upper bits are flags */
+} AreaCell;
+
+extern AreaCell g_AreaCells[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
+/* Zero in the load image: 0x400 rows of one POLY_FT4 per display buffer
+ * (g_FrameBufferIndex). In a row's second record, pad1 and pad2 hold the rows of the two linked
+ * cells (0 = none); in its first, pad1 holds the pending upload request. */
+extern POLY_FT4 g_AreaCellPrims[][2];
+extern u16      g_AreaCellPrimFreeIds[0x400];
+extern u16      g_AreaCellPrimFreeIndex;
+extern s16      g_AreaGridColCursor;
+extern s16      g_AreaGridRowCursor;
+
 /* Four-byte tile table A rectangle. */
 typedef struct AreaTileRect {
     u8 dv_00;
@@ -235,13 +261,13 @@ typedef struct AreaTileQuad {
 ASSERT_SIZE(AreaTileQuad, AREA_TILE_QUAD_SIZE);
 
 /* +0x20/+0x22 list entry header; the body follows as u32 words. */
-typedef struct AreaMapListRecordHeader {
+typedef struct AreaMapListHeader {
     u8 operand_00[2];
     u8 word_count_02; /* includes this 4-byte header */
     u8 opcode_03;
-} AreaMapListRecordHeader;
+} AreaMapListHeader;
 
-ASSERT_SIZE(AreaMapListRecordHeader, AREA_MAP_LIST_RECORD_HEADER_SIZE);
+ASSERT_SIZE(AreaMapListHeader, AREA_MAP_LIST_RECORD_HEADER_SIZE);
 
 /* +0x24 cell header; words_02 includes this header and its record chain. */
 typedef struct AreaMapCellHeader {
@@ -266,14 +292,14 @@ ASSERT_SIZE(AreaMapObjectHeader, AREA_MAP_OBJECT_HEADER_SIZE);
  * directory's own size, not an entry count: read as a count it overruns the
  * payload (`WORLD00/AREA016.EMI` slot 4: `u32[0] = 28`, `u32[29] = 0x240018` in
  * 2,708 bytes). The only reader is `exe/slus_004_22@0x8014D6DC`, which reaches
- * the block through `g_ScriptTable`: `section = u32[table + 4*lhu(work+0x2C)]`,
+ * the block through `g_Scripts`: `section = u32[table + 4*lhu(work+0x2C)]`,
  * `record = table + section + u16[table + section + 2*lbu(work+0x4B)]`, stored to
  * `work+0x50`. The battle overlays swap `BATTLE_SCRIPT_TABLE` in for the duration of a
  * battle handler. */
-typedef struct AreaScriptTable {
+typedef struct AreaScripts {
     u32 dir_bytes;      /* 0x00 - == 4 * L, the directory's own size */
     u32 section_off[1]; /* 0x04 - L-1 entries, block-relative, strictly increasing */
-} AreaScriptTable;
+} AreaScripts;
 
 /* One section: `slots_bytes == 2 * M`, and the distinct `record_off` values
  * increase strictly and tile the section, one stream each. The last section
@@ -315,7 +341,7 @@ typedef struct AreaActorDefs {
 } AreaActorDefs;
 
 /* `0x801459F0` - the four pointers the loader publishes together. Each word has
- * its own name in the tree (`g_ScriptTable` the script table, `D_801459F4` the scene
+ * its own name in the tree (`g_Scripts` the script table, `D_801459F4` the scene
  * records); this type is what a reader casts the address to when it wants all
  * four, so the words keep their own declarations. */
 typedef struct AreaWorkPointers {
@@ -332,7 +358,7 @@ ASSERT_SIZE(AreaWorkPointers, AREA_WORK_POINTERS_SIZE);
  * buffers by 0x28 (`@0x801F362C`). */
 typedef struct AreaVertex {
     u16     unk_00;
-    Point3D points[4]; /* 0x02 */
+    Point3s points[4]; /* 0x02 */
     u8      unk_1A[0x0E];
 } AreaVertex;
 
@@ -340,12 +366,12 @@ ASSERT_SIZE(AreaVertex, WORLD_VERTEX_RECORD_SIZE);
 ASSERT_OFFSET(AreaVertex, points, 0x02);
 
 typedef struct AreaTrail {
-    Point3DL pos;                     /* 0x00 - the head anchor */
-    s32      unk_0C;                  /* 0x0C */
-    s32      radius;                  /* 0x10 - the ring radius */
-    u16      angle;                   /* 0x14 - the rotation angle */
-    u16      pad_16;                  /* 0x16 */
-    DVECTOR  points[WORLD_TRAIL_MAX]; /* 0x18 - the trail points */
+    Point3l pos;                     /* 0x00 - the head anchor */
+    s32     unk_0C;                  /* 0x0C */
+    s32     radius;                  /* 0x10 - the ring radius */
+    u16     angle;                   /* 0x14 - the rotation angle */
+    u16     pad_16;                  /* 0x16 */
+    DVECTOR points[WORLD_TRAIL_MAX]; /* 0x18 - the trail points */
 } AreaTrail;
 
 ASSERT_SIZE(AreaTrail, WORLD_TRAIL_SIZE);
@@ -396,11 +422,11 @@ ASSERT_OFFSET(AreaRing, screen, 0x2C);
  * `0x800E4800` (`@0x801F2F5C`, `@0x801F3004`, `@0x801F3060` walk them with
  * that stride) and the ring projection reads the active one. */
 typedef struct AreaSlotWork {
-    u8                unk_00[4];
-    Point2D           offset;
-    s16               scale; /* 0x08 - the projection scale */
-    s16               unk_0A;
-    volatile UPoint2D screen;
+    u8               unk_00[4];
+    Point2s          offset;
+    s16              scale; /* 0x08 - the projection scale */
+    s16              unk_0A;
+    volatile Point2u screen;
 } AreaSlotWork;
 
 ASSERT_SIZE(AreaSlotWork, WORLD_SLOT_WORK_SIZE);
@@ -419,43 +445,43 @@ ASSERT_OFFSET(PartyMemberMessages, messages, 0x04);
  * tile fields (exe/slus_004_22@0x8014DD3C). */
 
 /* The area functions the resident tables and the area images call. */
-void Message_RunAreaMessage();
-void Actor_ClearVelocity();
+void Message_RunAreaMessage(void);
+void Actor_ClearVelocity(void);
 void func_801CF564();
 void func_801CFB40();
 void func_801CFF20();
 void func_801F2C14();
 void Fishing_ShowLocation();
-void func_801F2C3C();
-void func_801F32C0();
-void func_801F341C();
+void func_801F2C3C(void);
+void func_801F32C0(void);
+void func_801F341C(void);
 void func_801F34A0();
-void func_801F36D4();
+void func_801F36D4(void);
 void func_801F38C0();
-void func_801F3A8C();
-void func_801F3F80();
-void func_801F40AC();
-void func_801F418C();
-void func_801F41B0();
-void func_801F41D0();
-void func_801F4494();
+void func_801F3A8C(void);
+void func_801F3F80(void);
+void func_801F40AC(void);
+void func_801F418C(void);
+void func_801F41B0(void);
+void func_801F41D0(void);
+void func_801F4494(void);
 void func_801F4C84();
-void func_801F4D80();
-void func_801F512C();
-void func_801F52F8();
+void func_801F4D80(void);
+void func_801F512C(void);
+void func_801F52F8(void);
 
 /* The area functions the resident tables and the area images call. */
-void func_801F3224();
+void func_801F3224(void);
 void Actor_NextStep(void);
-void func_801F3608();
-void func_801F37B4();
-void func_801F3DCC();
+void func_801F3608(void);
+void func_801F37B4(void);
+void func_801F3DCC(void);
 void Actor_Fly(void);
-void func_801F45E4();
-void Area_DrawScreenTint();
-void Actor_FreePaletteFades();
-void Actor_Reveal();
-void Actor_TrackFocus();
+void func_801F45E4(void);
+void Area_DrawScreenTint(void);
+void Actor_FreePaletteFades(void);
+void Actor_Reveal(void);
+void Actor_TrackFocus(void);
 void GFX_DrawShadedDisc(s16, s16, s16, u8, u8);
 void Scene_ClearActor();
 

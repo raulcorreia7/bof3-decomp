@@ -15,7 +15,7 @@ extern Callback  D_801FAEFC[];
 /* D_801FAF24 */
 extern SceneFunc g_SceneActorDispatch[];
 
-extern Point3DL D_801481E8;
-extern Point3DL D_801481F8;
+extern Point3l D_801481E8;
+extern Point3l D_801481F8;
 
 #endif

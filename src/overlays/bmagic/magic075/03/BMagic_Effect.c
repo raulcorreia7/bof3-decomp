@@ -6,22 +6,75 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
-INCLUDE_ASM(func_801EEC70);
+MATCH void func_801EEC70(void) {
+    PartyMember* actor;
+    PartyMember* work;
+    u32          slot;
+    u8           i;
+    u16*         dst;
+    u16*         src;
 
-INCLUDE_ASM(func_801EEDE0);
+    actor                = g_Battle.selected_actor;
+    g_Task->pos.x.fixed  = actor->pos.x.fixed;
+    g_Task->pos.y.fixed  = actor->pos.y.fixed;
+    g_Task->pos.z.fixed  = actor->pos.z.fixed;
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode += 1;
+    i = 0;
+    do {
+        slot                               = Battle_AllocEffect(1, 37) & BYTE_MASK;
+        work                               = g_Task;
+        g_BattleEffects[slot].unk_0B       = i;
+        g_BattleEffects[slot].arg.unk_09   = i * 5 + 1;
+        g_BattleEffects[slot].header.mode  = 0;
+        g_BattleEffects[slot].target.party = work;
+        i++;
+    } while (i < 7);
+    GFX_FreePaletteFadeTarget(actor);
+    g_Task->timer = GFX_AllocPaletteFade(actor, 0, 0, 0, 1);
+    i             = 0;
+    dst           = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src           = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    for (; i < 16; i++) {
+        dst[i] = src[i];
+    }
+    g_GfxPalettePending = 1;
+    SND_QueueSelectionEffect(0x100);
+}
 
-INCLUDE_ASM(func_801EEEB0);
+MATCH void func_801EEDE0(void) {
+    g_PaletteFades[g_Task->timer].offset.red   = g_Task->param.unk_0B * 2;
+    g_PaletteFades[g_Task->timer].offset.green = g_Task->param.unk_0B * 2;
+    g_PaletteFades[g_Task->timer].offset.blue  = g_Task->param.unk_0B * 2;
+    if (g_Task->param.unk_0B == 7) {
+        g_Task->header.mode++;
+    }
+}
+
+MATCH void func_801EEEB0(void) {
+    u16* flags;
+
+    g_PaletteFades[g_Task->timer].offset.red -= 2;
+    g_PaletteFades[g_Task->timer].offset.green -= 2;
+    g_PaletteFades[g_Task->timer].offset.blue -= 2;
+    if (g_PaletteFades[g_Task->timer].offset.red == 0) {
+        GFX_FreePaletteFade(g_Task->timer);
+        Battle_MarkDamaged(g_Battle.target_selector);
+        BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING);
+        func_801E5988();
+    }
+}
 
 /* func_801EEFF4 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF038(void) {
-    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801EF7A0 + 1, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
     }
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801EF0D0(void) {
@@ -68,6 +121,49 @@ MATCH void func_801EF2A8(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF2F4);
+MATCH void func_801EF2F4(s32 radius) {
+    POLY_G3* prim;
+    s32      i;
+    s32      tpage;
 
-INCLUDE_ASM(func_801EF500);
+    radius += g_FrameCount & 1;
+    for (i = 0; i < 16; i++) {
+        tpage = getTPage(0, 1, 320, 256);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
+        prim = (POLY_G3*)g_GfxPrimCursor;
+        SetPolyG3(prim);
+        SetSemiTrans(prim, 1);
+        setXY3(prim, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), radius), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), radius),
+               g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), radius), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), radius));
+        setRGB0(prim, 0x60, 0x60, 0x60);
+        setRGB1(prim, 0x20, 0x20, 0x40);
+        setRGB2(prim, 0x20, 0x20, 0x40);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_G3));
+    }
+}
+
+MATCH void func_801EF500(s32 outer, s32 inner) {
+    POLY_G4* prim;
+    s32      i;
+    s32      tpage;
+
+    outer += g_FrameCount & 1;
+    inner += g_FrameCount & 1;
+    for (i = 0; i < 16; i++) {
+        tpage = getTPage(0, 1, 320, 256);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        setXY4(prim, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), outer), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), outer), g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), outer),
+               g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), outer), g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), inner), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), inner),
+               g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), inner), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), inner));
+        setRGB0(prim, 0x20, 0x20, 0x40);
+        setRGB1(prim, 0x20, 0x20, 0x40);
+        setRGB2(prim, 1, 1, 1);
+        setRGB3(prim, 1, 1, 1);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_G4));
+    }
+}

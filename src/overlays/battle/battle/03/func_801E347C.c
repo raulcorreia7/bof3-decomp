@@ -15,7 +15,7 @@ MATCH void func_801E347C(void) {
     g_Task->unk_18 = old34;
     work           = g_Task;
     work->unk_1C   = old38;
-    func_801DD350(work);
+    Effect_RotatePosition(work);
     {
         s32 dx;
         s32 dy;
@@ -31,7 +31,7 @@ MATCH void func_801E347C(void) {
         depth -= dy;
         work              = g_Task;
         work->pos.x.fixed = depth;
-        func_801DD350(work);
+        Effect_RotatePosition(work);
     }
     work              = g_Task;
     work->header.step = work->header.step + 1;

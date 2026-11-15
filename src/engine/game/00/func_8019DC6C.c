@@ -6,7 +6,7 @@ typedef struct GameSpawnState {
     s16 offset_02;
 } GameSpawnState;
 
-typedef struct GameSpawnRecord {
+typedef struct GameSpawn {
     s32 x_00;
     s32 y_04;
     s32 z_08;
@@ -15,17 +15,17 @@ typedef struct GameSpawnRecord {
     s32 vy_14;
     s32 vz_18;
     s32 pad_1C;
-} GameSpawnRecord;
+} GameSpawn;
 
 MATCH void func_8019DC6C(void) {
-    u8               scratch[32];
-    GameSpawnRecord* rec;
-    GameSpawnState*  state;
-    s32              i;
+    u8              scratch[32];
+    GameSpawn*      rec;
+    GameSpawnState* state;
+    s32             i;
 
     Area_SetCameraMatrix(scratch);
     state = MEM_PTR(GameSpawnState, 0x800E4D40u);
-    rec   = MEM_PTR(GameSpawnRecord, 0x800E4D44u);
+    rec   = MEM_PTR(GameSpawn, 0x800E4D44u);
     i     = 0;
     do {
         func_8019DAA0((s32*)rec, state->offset_02, state->count_00);

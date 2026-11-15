@@ -23,7 +23,7 @@ MATCH void UI_HandleChoiceInput(void) {
         *step = *step + 2;
         return;
     }
-    action = PAD_GetRepeatedButtons(g_InputPressed);
+    action = INPUT_GetRepeatedButtons(g_InputPressed);
     if ((action & PADLup) != 0) {
         u8* index;
 

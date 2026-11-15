@@ -1,7 +1,7 @@
 #include "area067_14.h"
 
 MATCH void func_801F2E48(void) {
-    Point2D* vy = (Point2D*)&g_Task->vy;
+    Point2s* vy = (Point2s*)&g_Task->vy;
 
     g_Task->timer = 90;
     /* FAKE: retail clears vy as two halfword stores. */

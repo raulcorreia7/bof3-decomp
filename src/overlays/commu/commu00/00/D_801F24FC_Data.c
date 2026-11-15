@@ -4,7 +4,7 @@
  * the mode byte selects mode 0/state 1 (set) or mode 6/state 0 (clear). Variant rows hold three
  * {x seed, y seed, resource id} cells. */
 // clang-format off
-FairyVillageData D_801F24FC_Data = {
+FairyVillage D_801F24FC_Data = {
     {391, 392, 732, 733, 734, 735},
     {0x04, 0x05, 0x05, 0x04, 0x05, 0x05, 0x04, 0x05, 0x05, 0x05, 0x00, 0x00},
     {15, 18, 21, 24, 27, 30, 40},

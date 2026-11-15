@@ -3,7 +3,7 @@
 
 #include "game/game.h"
 #include "slus/exports.h"
-#include "sys/gameui.h"
+#include "menu/gameui.h"
 
 /* Updates the torch gauge while the area draw flag is set. */
 /* func_801F564C (area104), func_801F5B90 (area121) */

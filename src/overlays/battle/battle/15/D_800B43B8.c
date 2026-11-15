@@ -4,7 +4,7 @@ static u8 s_gap_800B43B8[28] = {
     0xB0, 0x6A, 0x09, 0x80, 0xE8, 0x6A, 0x09, 0x80, 0x24, 0x6B, 0x09, 0x80, 0x7C, 0x6B, 0x09, 0x80,
     0xC8, 0x6C, 0x09, 0x80, 0x14, 0x6E, 0x09, 0x80, 0x90, 0x6E, 0x09, 0x80,
 };
-Callback D_800B43D4[17] = {func_80096F3C, func_8009704C, func_800975D4, func_8009761C, func_8009773C, func_80097D1C, func_80096F78, func_80096FBC, func_80097778, func_80097844, func_800979E4, func_80097C0C, func_80097CBC, func_80097D58, func_80097DC0, func_80097C0C, func_80097CBC};
+Callback D_800B43D4[17] = {func_80096F3C, Battle_GetPanelPosX, func_800975D4, func_8009761C, func_8009773C, func_80097D1C, func_80096F78, Battle_SetCommandType, Battle_SetCommandId, func_80097844, func_800979E4, Battle_ResetSelectionLatch, Battle_SetPhaseStep, func_80097D58, func_80097DC0, Battle_ResetSelectionLatch, Battle_SetPhaseStep};
 Callback D_800B4418[4] = {func_800980E4, func_80098144, func_80098254, func_800982E4};
 Callback D_800B4428[12] = {func_80098388, func_80098450, func_800989B4, func_800989FC, func_80098B08, func_80099178, func_80099328, func_80099E80, func_80099F90, func_8009A590, func_800983C4, func_80098408};
 Callback D_800B4458[5] = {func_80098B44, func_80098C18, func_80098DC4, func_80098FD4, func_80099114};
@@ -15,7 +15,7 @@ static u8 s_gap_800B44A0[32] = {
     0xCC, 0xA5, 0x09, 0x80, 0x64, 0xA6, 0x09, 0x80, 0x68, 0xA4, 0x09, 0x80, 0x18, 0xA5, 0x09, 0x80,
     0x01, 0x02, 0x02, 0x02, 0x03, 0x03, 0x00, 0x00, 0x01, 0x02, 0x02, 0x02, 0x03, 0x03, 0x00, 0x00,
 };
-BattleScrollDelta D_800B44C0[4] = {{-4, 0}, {0, -4}, {4, 0}, {0, 4}};
+BattleScrollDelta g_BattleScrollDeltas[4] = {{-4, 0}, {0, -4}, {4, 0}, {0, 4}};
 Callback D_800B44C8[3] = {func_8009B2B0, func_8009B44C, func_8009B964};
 Callback D_800B44D4[4] = {func_8009B488, func_8009B700, func_8009B794, func_8009B828};
 static u8 s_gap_800B44E4[1096] = {

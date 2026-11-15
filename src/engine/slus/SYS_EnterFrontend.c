@@ -6,7 +6,7 @@
 MATCH void SYS_EnterFrontend(void) {
     EMI_LoadArchive(EMI_SLOT_GAME);
     while (EMI_IsReady() == 0) {
-        CallbackWait(1);
+        SYS_ThreadWait(1);
     }
     func_801D0C04(); /* GAME.EMI entry */
 }

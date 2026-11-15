@@ -45,8 +45,8 @@ NON_MATCHING void EMI_UploadVabBody(void) {
 
     index = D_80146482;
     if (*(u16*)(vab + 6 + index * 0x14) & 2) {
-        result                     = SsSepOpenJ(*(u32*)(vab + index * 0x14), *(s16*)(vab + 4 + index * 0x14), 4);
-        g_SelectionFxVoices[index] = (u8)result;
+        result                         = SsSepOpenJ(*(u32*)(vab + index * 0x14), *(s16*)(vab + 4 + index * 0x14), 4);
+        g_SelectionEffectVoices[index] = (u8)result;
         if ((s8)result == -1) {
             g_EmiReadStatus = 2;
             return;

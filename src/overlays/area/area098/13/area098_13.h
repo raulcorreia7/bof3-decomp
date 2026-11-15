@@ -6,6 +6,7 @@
 
 #include "overlays/area/world02.h"
 #include "area/spad.h"
+#include "shared/CaptureSize.h"
 
 /* The work-window byte offset and row stride this overlay scans. */
 #define SCRATCH_ROW_OFFSET    0x00
@@ -29,13 +30,6 @@ extern Callback D_801F5F7C[];
 extern Callback D_801F5F88[];
 extern Callback D_801F5FAC[];
 extern void (*D_801F5FBC[])(void* slot);
-
-/* The screen-capture size for one table row. */
-typedef struct CaptureSize {
-    s16 w;
-    s16 h;
-    s16 unk_04[2];
-} CaptureSize;
 
 /* One of the 16 slots at AREA_WORK, 0x1C bytes each. */
 typedef struct AreaBurstSlot {
@@ -65,7 +59,9 @@ typedef struct AreaStreakSlot {
     s32 head[3]; /* 0x08 */
     s32 unk_14;
     s32 tail[3]; /* 0x18 */
-    u8  unk_24[0x14];
+    s32 unk_24;
+    s32 vel[3]; /* 0x28 */
+    s32 unk_34;
 } AreaStreakSlot;
 
 ASSERT_SIZE(AreaStreakSlot, 0x38);
@@ -89,13 +85,13 @@ extern u8 D_8014554C[];
 extern u8 D_80146865;
 extern u8 D_80146875;
 
-void func_801F40D0(s32 arg0);
+void func_801F40D0(s32 unused);
 void func_801F4220(AreaStreakSlot* slot);
 u8   func_801F42E8(void);
 void func_801F4490(WorldPos* pos, s32 vx, s32 vy);
 
 void func_801F40A4(void);
-void func_801F46EC(void* arg0, s32 arg1, s32 arg2);
+void GFX_DrawColorFan(s32* pos, s16 origin, s32 flags);
 s32  func_801F4E7C(void);
 
 void func_801F48E8(void* arg0, void* arg1, s32 arg2);

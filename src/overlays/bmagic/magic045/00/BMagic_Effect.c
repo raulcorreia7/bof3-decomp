@@ -16,17 +16,43 @@ INCLUDE_ASM(func_801EEC5C);
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEEE8(void) {
-    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801EF8DC + 1, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
     }
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 INCLUDE_ASM(func_801EEF80);
 
-INCLUDE_ASM(func_801EF118);
+MATCH void func_801EF118(void) {
+    PartyMember** selected;
+    PartyMember*  work;
+    VECTOR        pos;
+    u16*          flags;
+
+    Actor_StepAnimLoop();
+    selected = &g_Battle.selected_actor;
+    setVector(&pos, ((*selected)->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, ((*selected)->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, (COORD_INT((*selected)->pos.z) + 0xC0) >> 1);
+    func_800AF3A0(pos, 0x30);
+    if (func_800AF66C(*selected, 0x8000)) {
+        BATTLE_RAISE_STATE(BATTLE_STATE_DAMAGE_APPLIED);
+        Battle_MarkDamaged(g_Battle.target_selector);
+        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_AREA, 0x03));
+        g_Task->header.flags |= 0x20;
+        g_Task->unk_5C = 1;
+        g_Task->unk_5D = 0;
+        g_Task->unk_5E = 0;
+        g_Task->unk_5F = 0;
+        g_Task->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - g_Task->pos.x.fixed, g_BattleEffectBattler->pos.y.fixed - g_Task->pos.y.fixed);
+        work           = g_Task;
+        work->unk_14   = 0x40;
+        work->unk_09   = 16;
+        work->unk_20   = -8;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF2B0(void) {
     s32          angle;
@@ -57,12 +83,12 @@ MATCH void func_801EF2B0(void) {
 #include "overlays/bmagic/Effect_TickDownAndClear.h"
 
 MATCH void func_801EF40C(void) {
-    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801EF8EC + 1, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_8014D290();
     }
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801EF4A4(void) {

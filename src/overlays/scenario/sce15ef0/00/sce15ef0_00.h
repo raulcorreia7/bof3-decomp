@@ -5,7 +5,7 @@
  * includes the file. */
 
 #include "common/vector.h"
-#include "sys/gameui.h"
+#include "menu/gameui.h"
 #include "overlays/scenario/scenario.h"
 
 #define g_Task ((Sce15ef0Work*)g_Task)
@@ -24,7 +24,7 @@ typedef struct Sce15ef0Work {
     u16        origin_x; /* +0x2E */
     u16        origin_y; /* +0x30 */
     u8         pad_32[0x02];
-    Point3DL   pos;
+    Point3l    pos;
     u8         pad_40[0x1D];
     u8         color_r; /* +0x5D */
     u8         color_g; /* +0x5E */
@@ -41,7 +41,8 @@ extern u32      D_801D0C00;
 extern Callback g_SceneEntityDispatch[];
 
 void func_801D1220(s32 value);
+void func_801D1690(s16 x1, s16 y1, s16 radius1, u16 angle1, s16 x2, s16 y2, s16 radius2, u16 angle2);
 void func_801D1914(s16 amount);
-void func_801D1A20(s32* pos, s16 origin, s32 flags);
+void GFX_DrawColorFan(s32* pos, s16 origin, s32 flags);
 void func_801D1C1C(s32* pos, s32* counter, u8 channel);
 #endif

@@ -3,7 +3,7 @@
 MATCH void func_801E1D1C(void) {
     if (EMI_IsReady() != 0) {
         Actor_RequestScript(g_Task->facing + 0x24u);
-        func_801DEE4C();
+        Battle_IsPartyMemberBlocked();
         g_Task->header.step += 1;
     }
 }

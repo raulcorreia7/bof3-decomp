@@ -1,12 +1,5 @@
 #include "battle_03.h"
 
-typedef struct WorkChunk {
-    s32 w0;
-    s32 w1;
-    s32 w2;
-    s32 w3;
-} WorkChunk;
-
 MATCH void func_801E1EC0(void) {
     u32                   effect_slot;
     WorkChunk*            src;

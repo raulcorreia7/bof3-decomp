@@ -16,7 +16,7 @@ MATCH void func_801EF348(void) {
     }
     for (i = 0; i < g_Battle.party_count; i++) {
         if (func_801EF928(func_801DD7AC(g_Game.members[i].chr.character_id), 0) != 0) {
-            func_801ADDD4(func_801DD7AC(g_Game.members[i].chr.character_id));
+            Char_GetExp(func_801DD7AC(g_Game.members[i].chr.character_id));
         }
     }
     if ((u8)func_801EF6C0() != 0) {

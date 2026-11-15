@@ -15,7 +15,7 @@ MATCH s32 func_801E0770(void) {
     FAKE_REG(s32, result, "v0");
 
     result = 0;
-    if (4 != g_ActorSlots[0].header.mode) {
+    if (4 != g_SpawnedActors[0].header.mode) {
         return result;
     }
     if (0xFF != g_FishingHookedFish) {
@@ -29,7 +29,7 @@ MATCH s32 func_801E0770(void) {
         return result;
     }
     work = FISHING_STATE;
-    d    = -g_ActorSlots[0].pos.x.fixed + work->motion_34.unk_34;
+    d    = -g_SpawnedActors[0].pos.x.fixed + work->motion_34.unk_34;
     if (d < 0) {
         d = -d;
     }
@@ -37,14 +37,14 @@ MATCH s32 func_801E0770(void) {
         return result;
     }
     d      = work->y_38.pos_y;
-    anchor = g_ActorSlots[0].pos.y.fixed;
+    anchor = g_SpawnedActors[0].pos.y.fixed;
     d      = d - anchor;
     d      = ABS(d);
     if (d > limit) {
         return result;
     }
     dz = work->bounce_3C.half.key_3E;
-    dz = dz - COORD_INT(g_ActorSlots[0].pos.z);
+    dz = dz - COORD_INT(g_SpawnedActors[0].pos.z);
     dz = ABS(dz);
     return dz < 0x400;
 }

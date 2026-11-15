@@ -190,7 +190,8 @@ MATCH void func_801D31CC(void) {
     Menu_SlidePanelUp();
 }
 
-MATCH void func_801D320C(void) {
+/* func_801D320C */
+MATCH void Menu_SetPosY(void) {
     u16 next_pos;
 
     next_pos                  = g_MenuCurrentPanel->pos.y + 0x10;
@@ -217,7 +218,8 @@ MATCH void func_801D32A0(void) {
     }
 }
 
-MATCH void func_801D32E0(void) {
+/* func_801D32E0 */
+MATCH void Menu_SetPosX(void) {
     u16 next_pos;
 
     next_pos                  = g_MenuCurrentPanel->pos.x + 0x20;
@@ -236,7 +238,33 @@ INCLUDE_ASM(Menu_DrawCharacterWindow);
 
 #include "overlays/menu/Shop_DrawEquipment.h"
 
-INCLUDE_ASM(func_801D4158);
+MATCH void func_801D4158(s16 x, s16 y, u8 index, u8 flag) {
+    Character* character;
+    s16        label_x;
+    s32        text_x;
+    s32        exp_value;
+    /* FAKE: retail reserves 24 frame bytes between the outgoing arguments and
+     * the saved registers that no statement in the body uses. */
+    FAKE_STACK_PADS(u8, 24);
+
+    UI_DrawWindow((u16)(x + 3), (u16)(y + 3), 0x65, 0x25, 0, CHARACTER_BLOCK->window_style);
+    character = (Character*)CHARACTER_BLOCK->records[index];
+    text_x    = x;
+    label_x   = text_x + 0x26;
+    UI_DrawText((flag == 0) ? text_x + 0x2C : label_x, (s16)(y + 7), 0, 0xFF, (flag == 0) ? (u8*)&g_MenuLabelEquip[8] : (u8*)&g_MenuLabelEquip[0xC]);
+    if (flag == 0) {
+        exp_value = character->exp;
+    } else {
+        exp_value = Char_GetExpForLevel(index, (character->level + 1) & 0xFF);
+    }
+    if (exp_value != -1) {
+        sprintf(g_UiFormatBuffer, &g_MenuStatFormat[0x14], exp_value);
+    } else {
+        sprintf(g_UiFormatBuffer, &g_MenuStatFormat[0x18]);
+    }
+    UI_DrawAsciiString((s16)(x + 0x15), (s16)(y + 0x1A), 0, g_UiFormatBuffer);
+    UI_DrawSpriteRun(x, y, &g_MenuInventoryTab1OnSprites[0x24], 1);
+}
 
 #include "overlays/menu/Menu_DrawCursorFrame.h"
 
@@ -275,7 +303,141 @@ MATCH void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color) {
 
 #include "overlays/menu/Char_GetExpProgress.h"
 
+#ifdef NON_MATCHING
+NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style) {
+    RECT*     texture_window;
+    POLY_FT4* primitive;
+    s16       bottom_y;
+    u8        bottom_v;
+    s32       clut_x;
+    s16       odd_h;
+    s32       width_plus_1;
+    s32       odd_width;
+
+    u16 base_x;
+    s32 r_s1;
+    u16 r_s4;
+    s32 r_s8;
+
+    texture_window    = (RECT*)g_GfxPrimCursor;
+    g_GfxPrimCursor   = (u8*)(texture_window + 1);
+    texture_window->y = 240;
+    texture_window->x = 0;
+    setWH(texture_window, 16, 16);
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
+    GFX_AddPrim(1u, sizeof(DR_MODE));
+
+    primitive = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(primitive);
+    SetSemiTrans(primitive, 1);
+    base_x = (u16)x;
+    r_s8   = (s16)(x + 2);
+    clut_x = ((s32)window_style << 5) + 0x10;
+    setXY0(primitive, (s16)base_x, (s16)(u16)y);
+    primitive->y1 = (s16)(u16)y;
+    primitive->x2 = (s16)base_x;
+    primitive->x1 = (s16)r_s8;
+    primitive->x3 = (s16)r_s8;
+    setUV0(primitive, 0u, 0u);
+    primitive->v1 = 0u;
+    primitive->u2 = 0u;
+    setRGB0(primitive, 172, 172, 172);
+    bottom_v      = (u8)(height + 1);
+    bottom_y      = (s16)((s32)(u16)y + bottom_v);
+    primitive->y2 = bottom_y;
+    primitive->y3 = bottom_y;
+    primitive->u1 = 2u;
+    primitive->v2 = bottom_v;
+    primitive->u3 = 2u;
+    primitive->v3 = bottom_v;
+    primitive->y0 += 2;
+    primitive->y2 -= 3;
+    primitive->v0 += 2;
+    primitive->v2 -= 3;
+    primitive->clut = GetClut(clut_x, STAGE_PALETTE_Y + 1);
+    width_plus_1    = (s32)(width + 1);
+
+    primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
+    GFX_AddPrim(1u, sizeof(POLY_FT4));
+
+    r_s1 = (s32)(u16)width_plus_1;
+    r_s1 = ((s32)(u16)r_s1 - 4) >> 1;
+    r_s4 = r_s1;
+
+    primitive = (POLY_FT4*)g_GfxPrimCursor;
+    odd_width = (width - 3) & 1;
+    odd_h     = (s16)odd_width;
+    SetPolyFT4(primitive);
+    SetSemiTrans(primitive, 1);
+    setXY4(primitive, (s16)r_s8, (s16)(u16)y, (s16)(r_s1 + r_s8), (s16)(u16)y, (s16)r_s8, bottom_y, (s16)(r_s1 + r_s8), bottom_y);
+    setUV4(primitive, 0u, 0u, (u8)r_s4, 0u, 0u, bottom_v, (u8)r_s4, bottom_v);
+    setRGB0(primitive, 172, 172, 172);
+    primitive->clut = GetClut(clut_x, STAGE_PALETTE_Y + 1);
+
+    primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
+    GFX_AddPrim(1u, sizeof(POLY_FT4));
+
+    primitive = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(primitive);
+    SetSemiTrans(primitive, 1);
+    primitive->y0 = (s16)(u16)y;
+    primitive->x0 = (s16)((s32)base_x + r_s1 + 2);
+    primitive->x1 = (s16)(((s32)base_x + r_s1) + (r_s1 + odd_width + 2));
+    primitive->y1 = (s16)(u16)y;
+    primitive->x2 = (s16)((s32)base_x + r_s1 + 2);
+    primitive->y2 = bottom_y;
+    primitive->x3 = (s16)(((s32)base_x + r_s1) + (r_s1 + odd_width + 2));
+    primitive->y3 = bottom_y;
+    setUV4(primitive, 0u, 0u, (u8)(r_s4 + odd_h), 0u, 0u, bottom_v, (u8)(r_s4 + odd_h), bottom_v);
+    setRGB0(primitive, 172, 172, 172);
+    primitive->clut = GetClut(clut_x, STAGE_PALETTE_Y + 1);
+
+    primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
+    GFX_AddPrim(1u, sizeof(POLY_FT4));
+
+    primitive = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(primitive);
+    SetSemiTrans(primitive, 1);
+    primitive->y2 = bottom_y;
+    primitive->v2 = bottom_v;
+    primitive->x1 = (s16)((s32)base_x + width_plus_1);
+    primitive->y1 = (s16)(u16)y;
+    primitive->x3 = (s16)((s32)base_x + width_plus_1);
+    setXY0(primitive, (s16)((s32)base_x + width_plus_1 - 2), (s16)(u16)y);
+    primitive->x2 = (s16)((s32)base_x + width_plus_1 - 2);
+    primitive->y3 = bottom_y;
+    setUV0(primitive, 0u, 0u);
+    primitive->u1 = 2u;
+    primitive->v1 = 0u;
+    primitive->u2 = 0u;
+    primitive->u3 = 2u;
+    primitive->v3 = bottom_v;
+    setRGB0(primitive, 172, 172, 172);
+    primitive->y1 += 2;
+    primitive->y3 -= 3;
+    primitive->y2 -= 1;
+    primitive->v1 += 2;
+    primitive->v2 -= 1;
+    primitive->v3 -= 3;
+    primitive->clut = GetClut(clut_x, STAGE_PALETTE_Y + 1);
+
+    primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
+    GFX_AddPrim(1u, sizeof(POLY_FT4));
+
+    texture_window    = (RECT*)g_GfxPrimCursor;
+    g_GfxPrimCursor   = (u8*)(texture_window + 1);
+    texture_window->x = 0;
+    texture_window->y = 0;
+    setWH(texture_window, 256, 256);
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
+    GFX_AddPrim(1u, sizeof(DR_MODE));
+    func_801AEBA0((s16)r_s8, (s16)((s32)(u16)y + 2), (s16)(width - 4), (s16)(height - 4), 0);
+}
+#else
 INCLUDE_ASM(Menu_DrawHeaderBar);
+#endif
 
 #include "overlays/menu/Menu_DrawEquipCompareWindow.h"
 

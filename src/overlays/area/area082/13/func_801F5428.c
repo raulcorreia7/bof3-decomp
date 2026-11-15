@@ -1,3 +1,31 @@
 #include "area082_13.h"
 
-INCLUDE_ASM(func_801F5428);
+MATCH void func_801F5428(s32 colors) {
+    POLY_G4* polygon;
+    s32      texturePage;
+    u32      packedColors = colors;
+    u8       topRed, topGreen, topBlue, bottomRed, bottomGreen, bottomBlue;
+
+    texturePage = getTPage(1, 0, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, texturePage, 0);
+    GFX_AddPrim(6, sizeof(DR_MODE));
+    polygon = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(polygon);
+    topRed      = (packedColors & 31) << 3;
+    topGreen    = (packedColors >> 2) & 0xF8;
+    topBlue     = (packedColors >> 7) & 0xF8;
+    bottomRed   = (packedColors >> 13) & 0xF8;
+    bottomGreen = (packedColors >> 18) & 0xF8;
+    bottomBlue  = (packedColors >> 23) & 0xF8;
+    setXY4(polygon, 0, 0, SCREEN_WIDTH, 0, 0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT);
+    polygon->r0 = polygon->r1 = topRed;
+    polygon->g0 = polygon->g1 = topGreen;
+    polygon->b0 = polygon->b1 = topBlue;
+    polygon->r2 = polygon->r3 = bottomRed;
+    polygon->g2 = polygon->g3 = bottomGreen;
+    polygon->b2 = polygon->b3 = bottomBlue;
+    GFX_AddPrim(6, sizeof(POLY_G4));
+    texturePage = getTPage(1, 0, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, texturePage, 0);
+    GFX_AddPrim(6, sizeof(DR_MODE));
+}

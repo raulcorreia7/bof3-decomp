@@ -33,6 +33,16 @@ MATCH void func_801EECE4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EED94);
+MATCH void func_801EED94(void) {
+    POLY_FT4* prim;
+    s32       i;
 
-INCLUDE_ASM(func_801EEF5C);
+    MAGIC080_DRAW_CELLS(6, D_801EF124, 0x100);
+}
+
+MATCH void func_801EEF5C(void) {
+    POLY_FT4* prim;
+    s32       i;
+
+    MAGIC080_DRAW_CELLS(7, D_801EF13C, 0);
+}

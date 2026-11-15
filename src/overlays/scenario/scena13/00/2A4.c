@@ -26,9 +26,9 @@ MATCH void func_801F6EE8(void) {
 MATCH void func_801F6F24(void) {
     g_Task->timer -= 1;
     if (g_Task->timer != 0) {
-        g_Task->tint.bytes.unk_5D += 7;
-        g_Task->tint.bytes.unk_5E += 7;
-        g_Task->tint.bytes.unk_5F += 7;
+        g_Task->tint.bytes.rgb.red += 7;
+        g_Task->tint.bytes.rgb.green += 7;
+        g_Task->tint.bytes.rgb.blue += 7;
     } else {
         g_Task->header.mode = 2;
     }
@@ -73,11 +73,11 @@ MATCH void func_801F7198(void) {
 MATCH void func_801F71DC(void) {
     Actor* work;
 
-    work                    = g_Task;
-    work->tint.bytes.unk_5F = 0;
-    work->tint.bytes.unk_5E = 0;
-    work->tint.bytes.unk_5D = 0;
-    g_Task->param.unk_0B    = 0x33;
+    work                       = g_Task;
+    work->tint.bytes.rgb.blue  = 0;
+    work->tint.bytes.rgb.green = 0;
+    work->tint.bytes.rgb.red   = 0;
+    g_Task->param.unk_0B       = 0x33;
     Message_StartAreaMessage(g_Task->param.unk_0B);
     g_GameStateIndex    = GAME_REQUEST_MESSAGE;
     g_Task->header.mode = 1;
@@ -95,9 +95,9 @@ MATCH void func_801F7248(void) {
 MATCH void func_801F72A0(void) {
     g_Task->timer -= 1;
     if (g_Task->timer != 0) {
-        g_Task->tint.bytes.unk_5D += 2;
-        g_Task->tint.bytes.unk_5E += 2;
-        g_Task->tint.bytes.unk_5F += 2;
+        g_Task->tint.bytes.rgb.red += 2;
+        g_Task->tint.bytes.rgb.green += 2;
+        g_Task->tint.bytes.rgb.blue += 2;
     } else {
         g_Task->timer       = 30;
         g_Task->header.mode = 3;
@@ -148,13 +148,13 @@ MATCH void func_801F763C(void) {
     u32  cell3;
     s16* scratch;
 
-    g_Task->unk_03 = Actor_FindFree();
+    g_Task->unk_03 = Actor_FindFreeField();
     if (g_Task->unk_03 == GAME_NONE) {
         return;
     }
 
     g_Actors[g_Task->unk_03].header.flags = 1;
-    g_Task->unk_04                        = Actor_FindFree();
+    g_Task->unk_04                        = Actor_FindFreeField();
     if (g_Task->unk_04 == GAME_NONE) {
         g_Actors[g_Task->unk_03].header.flags = 0;
         return;
@@ -196,7 +196,20 @@ MATCH void func_801F7958(void) {
     }
 }
 
-INCLUDE_ASM(func_801F7A1C);
+MATCH void func_801F7A1C(void) {
+    if (g_Task->timer != 0) {
+        g_Actors[g_Task->unk_03].tint.bytes.rgb.red += 8;
+        g_Actors[g_Task->unk_03].tint.bytes.rgb.green += 8;
+        g_Actors[g_Task->unk_03].tint.bytes.rgb.blue += 8;
+        g_Actors[g_Task->unk_04].tint.bytes.rgb.red += 8;
+        g_Actors[g_Task->unk_04].tint.bytes.rgb.green += 8;
+        g_Actors[g_Task->unk_04].tint.bytes.rgb.blue += 8;
+        g_Task->timer--;
+    } else {
+        g_ScriptVars[0]++;
+        g_Task->header.mode = 3;
+    }
+}
 
 /* func_801F7C24 */
 MATCH void Scene_ReleaseActors(void) {
@@ -214,8 +227,8 @@ MATCH void func_801F7D14(void) {
 MATCH void func_801F7D50(void) {
     Game_SetScriptActive();
     g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
-    func_801C16B8();
-    func_801C1DF0(0);
+    Char_RebuildPartyStats();
+    Scene_RunScenario(0);
     SYS_SetFlag(g_SceneEventFlags, 67);
     SYS_ClearFlag(g_SceneEventFlags, 66);
     D_80146872 = 1;

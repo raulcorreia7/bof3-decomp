@@ -4,7 +4,7 @@
 /* func_801F336C (area095 0x801F336C), func_801F32FC (area096 0x801F32FC) */
 #define AREA_STEP_TO_GROUND()                                 \
     g_ScriptState->unk_07 = 1;                                \
-    func_801ABBA8(g_ScriptState, 5);                          \
+    Area_MoveActorRoute(g_ScriptState, 5);                    \
     steps         = g_Task->timer;                            \
     x             = g_Task->pos.x.fixed + g_Task->vx * steps; \
     y             = g_Task->pos.y.fixed + g_Task->vy * steps; \

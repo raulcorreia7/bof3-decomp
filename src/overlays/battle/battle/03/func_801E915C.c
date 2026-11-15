@@ -12,5 +12,5 @@ MATCH void func_801E915C(void) {
     } else {
         panel->pos.y = (value - 4);
     }
-    func_801D750C((s16)g_MenuCurrentPanel->pos.x, (s16)g_MenuCurrentPanel->pos.y);
+    Battle_SetPartyCount((s16)g_MenuCurrentPanel->pos.x, (s16)g_MenuCurrentPanel->pos.y);
 }

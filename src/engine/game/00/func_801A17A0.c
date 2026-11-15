@@ -16,7 +16,7 @@ MATCH s32 func_801A17A0(u8* entry_record) {
     if (flags & 0x8000) {
         entry = g_AreaLoads[g_GameAreaId];
         list  = FIELD(s32*, entry, 0x4u);
-        func_801A3F3C((u8*)list[flags & 0xFFF]);
+        Area_SetScenarioId((u8*)list[flags & 0xFFF]);
         if (FIELD(u16, entry_record, 0x8u) & 0x8000) {
             /* the entry keeps its 0x8000 state: skip the selection step */
             goto stored;

@@ -1,19 +1,19 @@
 #include "area100_13.h"
 
 MATCH void func_801F38D8(void) {
-    ActorSlot* slot;
-    u8         index;
+    SpawnedActor* slot;
+    u8            index;
 
     switch (g_SceneEventStep) {
         case 0:
-            func_801C601C(0);
+            Area_StartScrollRoute(0);
             g_SceneEventStep = 1;
             break;
         case 1:
             if (g_ScriptVars[0] == 1) {
-                index = Actor_FindFreeSlot() & BYTE_MASK;
+                index = Actor_FindFreeSpawned() & BYTE_MASK;
                 if (index != 0xFF) {
-                    slot               = &g_ActorSlots[index];
+                    slot               = &g_SpawnedActors[index];
                     slot->header.flags = ACTOR_FLAG_IN_USE;
                     slot->type         = 0x9B;
                     slot->pos.x.fixed  = 0x460000;

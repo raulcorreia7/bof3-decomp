@@ -9,6 +9,6 @@ MATCH void func_801F4DE0(void) {
         func_801F4E3C();
     } else {
         g_Task->timer = count - 1;
-        func_801B0DFC();
+        Actor_UpdateMovement();
     }
 }

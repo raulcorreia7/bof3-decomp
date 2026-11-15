@@ -17,7 +17,7 @@
 #include "menu/shop.h"
 #include "scenario/effect.h"
 #include "scenario/runtime.h"
-#include "slus/facing.h"
+#include "common/facing.h"
 #include <abs.h>
 #include <strings.h>
 

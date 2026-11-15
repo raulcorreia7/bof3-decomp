@@ -2,7 +2,7 @@
 #define AREA_MAP_H
 
 #include "common/handler.h"
-#include "slus/facing.h"
+#include "common/facing.h"
 #include "types.h"
 
 typedef enum AreaId {

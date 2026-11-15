@@ -22,10 +22,10 @@ extern u8       D_800E5502;
 
 /* One of the 64 slots at AREA_WORK, 0x34 bytes each. */
 typedef struct AreaSlot {
-    Point3DL pos; /* 0x00 */
-    u8       unk_0C[0x24];
-    u16      unk_30; /* 0x30 */
-    u16      pad_32; /* 0x32 */
+    Point3l pos; /* 0x00 */
+    u8      unk_0C[0x24];
+    u16     unk_30; /* 0x30 */
+    u16     pad_32; /* 0x32 */
 } AreaSlot;
 
 ASSERT_SIZE(AreaSlot, 0x34);
@@ -57,7 +57,7 @@ extern s32 D_801F62DC[];
 void       func_801F35E0(s32 arg0, s32 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5);
 void       func_801F3CB8(void);
 void       func_801F41B4(void);
-void       func_801F3B48(Point2D* pos, u8 shade);
+void       func_801F3B48(Point2s* pos, u8 shade);
 void       func_801F30E8(s16 x0, s16 y0, s16 x1, s16 y1);
 void       func_801F3BC4(s16 x, s16 y, s16 w, s16 h);
 

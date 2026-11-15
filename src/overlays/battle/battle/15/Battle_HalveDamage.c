@@ -6,7 +6,7 @@
  */
 /* func_8009F320 */
 MATCH void Battle_HalveDamage(void) {
-    func_800A3F28();
+    Battle_MarkDamageApplied();
 
     if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
         g_Game.members[g_Battle.target].u.turn.action_flags.value |= COMBATANT_FLAG_DAMAGE_HALVED;

@@ -22,7 +22,7 @@ MATCH void func_801E4FA8(void) {
     g_Task->unk_5E     = 0;
     g_Task->unk_5F     = 0;
     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
-    func_801E30F8();
+    Battle_IsEnemyBlocked();
     work              = g_Task;
     work->header.step = work->header.step + 1;
 }

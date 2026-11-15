@@ -131,9 +131,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             SP_REF(u16, 0x30u) = vv;
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            normal.vx        = piece->n[0];
-            normal.vy        = piece->n[1];
-            normal.vz        = piece->n[2];
+            setVector(&normal, piece->n[0], piece->n[1], piece->n[2]);
             quad->halves.uv0 = piece->uv[0];
             quad->halves.uv1 = piece->uv[1];
             quad->halves.uv2 = piece->uv[2];
@@ -173,14 +171,12 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
 
             sort_list->work      = (u8*)g_Task;
             sort_list->primitive = p;
-            quad->ft4.r0         = g_Task->tint.bytes.unk_5D;
-            quad->ft4.g0         = g_Task->tint.bytes.unk_5E;
-            quad->ft4.b0         = g_Task->tint.bytes.unk_5F;
+            setRGB0(&quad->ft4, g_Task->tint.bytes.rgb.red, g_Task->tint.bytes.rgb.green, g_Task->tint.bytes.rgb.blue);
             if ((g_Task->range_54.table[3] & 0x80) != 0) {
                 VectorNormalS(&normal, D_1F800014);
-                color.r  = g_Task->tint.bytes.unk_5D;
-                color.g  = g_Task->tint.bytes.unk_5E;
-                color.b  = g_Task->tint.bytes.unk_5F;
+                color.r  = g_Task->tint.bytes.rgb.red;
+                color.g  = g_Task->tint.bytes.rgb.green;
+                color.b  = g_Task->tint.bytes.rgb.blue;
                 color.cd = quad->ft4.code;
                 NormalColorCol(D_1F800014, &color, (CVECTOR*)&quad->ft4.r0);
             }

@@ -10,7 +10,7 @@
 MATCH void func_801E020C(void) {
     PartyMember* work;
 
-    func_801DEE4C();
+    Battle_IsPartyMemberBlocked();
     work = g_Task;
     if ((work->header.step != 3) && (HAS_STATUS(*g_Game.current, STATUS_KO))) {
         /* FAKE: half pointer; the direct global scores 97.37%. */

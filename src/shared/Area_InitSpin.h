@@ -15,14 +15,10 @@ MATCH void Area_InitSpin(void* spin) {
     rot[1] = AREA_SPIN_PITCH;
     rot[2] = RANDOM_MASK(0xFFF);
 
-    work->vertex_a.vx = rcos(AREA_SPIN_RADIUS);
-    work->vertex_a.vy = rsin(AREA_SPIN_RADIUS);
-    work->vertex_a.vz = 0;
-    work->vertex_b.vx = rcos(-AREA_SPIN_RADIUS);
-    work->vertex_b.vy = rsin(-AREA_SPIN_RADIUS);
-    work->vertex_b.vz = 0;
+    setVector(&work->vertex_a, rcos(AREA_SPIN_RADIUS), rsin(AREA_SPIN_RADIUS), 0);
+    setVector(&work->vertex_b, rcos(-AREA_SPIN_RADIUS), rsin(-AREA_SPIN_RADIUS), 0);
 
-    Matrix_SetIdentity(&matrix);
+    MATH_SetIdentity(&matrix);
     RotMatrixX(rot[0], &matrix);
     RotMatrixY(-rot[1], &matrix);
     RotMatrixZ(rot[2], &matrix);

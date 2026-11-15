@@ -16,7 +16,7 @@ MATCH void func_801E6FB0(void) {
     if (g_Task->timer == 0) {
         id = func_801E8FA8();
         if (id == GAME_NONE) {
-            func_801E5988();
+            Effect_Reset();
             return;
         }
         g_Task->unk_27 = 0xFF;

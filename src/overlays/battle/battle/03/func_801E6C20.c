@@ -12,6 +12,6 @@ MATCH void func_801E6C20(void) {
         gate        = &g_Battle.state;
         half        = (*gate | 0x20u);
         *(u16*)gate = half;
-        func_801E5988();
+        Effect_Reset();
     }
 }

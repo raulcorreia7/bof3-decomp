@@ -39,12 +39,13 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
    `tools/match.sh --diff <target>@<func>` prints the function side by side, `!` on differing rows;
    the rows are positional, so an inserted instruction marks everything after it. After a new
    `hand/` file, a header or a marker, run `meson setup --reconfigure build/meson` once
-   ([reconfigure](../../../../docs/toolchain.md#reconfigure)). A function with a jump table, a
-   string or data of its own needs the `cc` wrapper
+   ([reconfigure](../../../../docs/toolchain.md#reconfigure)). A function that reads
+   its unit's own `.rodata` (a jump table or a string) is measured too. One that reads the unit's
+   own `.data` or `.bss`, or the gp, needs the `cc` wrapper
    ([compiler wrapper](../../../../docs/toolchain.md#compiler-wrapper)).
 
 6. **Tactics.** The [tactics table](../../../../docs/matching.md#tactics-for-gcc-272) maps each
-   retail shape to the C that produces it. The five used most:
+   retail shape to the C that produces it. The six used most:
 
    - `andi` on an argument: parameter `s32`, cast at the use: `(u8)dir`.
    - an `andi` after a counter update, or an `sll`/`sra` pair: the local is `u8`, `u16` or `s16`;
@@ -52,6 +53,9 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
    - a store, then a reload of the member for the test: `g_Task->m = f(); if (g_Task->m != 0xFF)`.
    - a load, an add, a store, then a test of the old value: `val = *p; *p = val + 1; if (val < N)`.
    - a loop with no entry test: `i = 0; do { ...; i++; } while (i < N);`.
+   - primitive fields stored in order, or a `GetGraphType()` ladder picking a texture page: the
+     SDK macro (`setXY4`, `setRGB0`, `setUVWH`, `getTPage(tp, abr, x, y)`); measure it, and keep
+     plain assignments only where the macro's order differs from retail.
 
    On a miss, label the first hunk ([diagnose](../../../../docs/matching.md#diagnose)) and fix it
    by label. Helpers come after pure C fails, benign before harmful, each with its `FAKE:` note
@@ -61,9 +65,53 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
    the same bytes. A `FAKE_REG` is not source either: measure the plain, `register`, width,
    declaration-order and inlined forms before keeping one.
 
+   **A near miss** (the same instructions, other registers or order) is a question about one
+   compiler pass. Name the pass, then change what that pass reads; do not permute spellings.
+
+   - *Which saved register a value gets*: the allocator ranks a value by its uses over the
+     length it lives. Count both for the two values that swap, then move a last use earlier, a
+     first use later, or route a use through a `u8` or `s16` local so it stops counting.
+   - *Where an instruction sits in a block*: the scheduler reorders stores, loads and constant
+     loads inside a block, and moves a value across a call only when that value already lives
+     across some call. The order of stores in the assembly is not the source order: test the
+     statement orders. An unfilled load-delay `nop` means something could not move: a scalar
+     load (`LOW(member)`) stays behind a global store, a struct member load does not.
+   - *A reload, or a reuse, of a global pointer*: reuse stops at a join. A `for` loop has one
+     after it (its entry test) while GCC decides; a `do`-`while` has none.
+   - *Two values derived from the loop counter*: they are set up in reverse statement order,
+     and a value assigned on every path merges with `i++`; assign them inside the `if`.
+   - *A register reused as a constant in a compare*: reuse does not cross widths; make the
+     flag `u8`.
+   - *One odd instruction after everything else matches*: read what the form implies about the
+     source (a raw `andi` beside an `andi 0xFF` copy is an `s32` parameter with a `u8` local),
+     then fix the registers it disturbs with the rules above.
+
+   Ask the compiler before guessing: GCC's own dumps say what it decided.
+   `tools/rtl_dump.sh <file.c> [letters] [function]` compiles the file with the build's flags and
+   prints the function's part of each dump (`l` local, `g` global allocation, `L` loop, `S`
+   schedule, `c` combine, `s` cse, `j` jump): `.lreg` lists each pseudo-register with its uses,
+   the insns it lives across and its hard register; `.greg` gives the order the global allocator
+   took them in, their conflicts and each spill. `tools/alloc_priority.py <file.c> <func>` ranks
+   the values that live across a call by allocator priority with the register each got. Change the
+   source until those numbers put the registers where retail has them.
+   For a large function run `tools/opcode_diff.py <target>@0x<ADDR>` first: it compares opcode
+   sequences (registers and offsets ignored), and the structural hunks are fixed top-down before
+   any register is read. `tools/match_context.sh <target>@0x<ADDR>` prints the assembly, the
+   recorded attempts and the C file in one go.
+   `tools/rtl_dump.sh <file.c> L <function>` prints what the loop pass moved out of each loop and
+   why: a value moves when `threshold * uses * life >= loop size`, and each move lowers the
+   threshold by 3 for the values after it. A register that holds a constant in the draft and a
+   counter in retail is usually one move too many or too few earlier in the loop.
+
+   Script the forms: write the body once with its variable parts as a table, build each with
+   `tools/match.sh --diff`, and accept only a line that begins `match:`, then `check-<image>`.
+   `tools/try_variants.py <target>@0x<ADDR> <file.c> variants.py` does it for full bodies.
+
 7. **Accept.** Replace the draft with a plain `MATCH` definition, or `HAND_ASM` for authored
    assembly ([markers](../../../../docs/matching.md#markers-and-unmatched-bodies)), and name it
    from evidence or keep `func_<ADDR>` ([natural names](name.md#natural-names)). After three
-   structurally different tries, delete the draft, keep the bare `INCLUDE_ASM` and record the first
-   difference where the run keeps records. Then `format` and `pre-push` decide
+   structurally different tries, keep the closest draft under `NON_MATCHING` (it must compile with
+   `-DNON_MATCHING`) and add an object to `config/attempts.jsonl` with the form reached and the
+   first differing instruction; `check-markers` refuses a new draft without one. A later pass
+   starts from that draft and replaces it only with a closer one. Then `format` and `pre-push` decide
    ([gates](../SKILL.md#rules-for-every-job)).

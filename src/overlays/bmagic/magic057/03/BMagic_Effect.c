@@ -27,8 +27,8 @@ MATCH void func_801EED98(void) {
     PartyMember* work;
     s32          slot;
 
-    SND_QueueSelectionFx(0x101);
-    SND_QueueSelectionFx(0x102);
+    SND_QueueSelectionEffect(0x101);
+    SND_QueueSelectionEffect(0x102);
     work   = g_Task;
     g_Task = D_801EC2E0->target.party;
     Actor_SelectScript(3U);
@@ -79,13 +79,13 @@ MATCH void func_801EF02C(void) {
 MATCH void func_801EF08C(void) {
     Magic057SecondSteps handlers;
 
-    handlers      = D_801EEC2C;
-    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    handlers  = D_801EEC2C;
+    g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if (g_Task->header.flags & 0x1) {
         func_8014D290();
     }
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 INCLUDE_ASM(func_801EF134);
@@ -110,7 +110,7 @@ MATCH void func_801EF55C(void) {
 MATCH void func_801EF5BC(void) {
     g_Task->unk_09 = 0;
     g_Task->timer  = D_801EFADC[g_Task->unk_09];
-    SND_QueueSelectionFx(256);
+    SND_QueueSelectionEffect(256);
     g_Task->unk_10 = 0;
     g_Task->header.step++;
 }
@@ -146,13 +146,13 @@ MATCH void func_801EF81C(void) {
 MATCH void func_801EF83C(void) {
     Magic057SecondSteps handlers;
 
-    handlers      = D_801EEC44;
-    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    handlers  = D_801EEC44;
+    g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if ((g_Task->header.flags & 0x1) && (g_BattleEffectBattler->timer == 0)) {
         func_8014D290();
     }
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 MATCH void func_801EF900(void) {

@@ -11,7 +11,7 @@
     }                                                                               \
     x    = g_Task->pos.x.fixed + g_FacingSteps[g_Task->direction_08].x * 2;         \
     y    = g_Task->pos.y.fixed + g_FacingStepY[g_Task->direction_08 * 2] * 2;       \
-    slot = func_801BDE14(x, y, 1);                                                  \
+    slot = Actor_FindInRange(x, y, 1);                                              \
     if (g_InputHeld & g_InputMasks[FIELD_INPUT_RUN]) {                              \
         if (g_Task->direction_08 == (g_Actors[(u8)slot].direction_08 & 0x7)) {      \
             g_Actors[(u8)slot].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING; \
@@ -23,6 +23,6 @@
     }                                                                               \
     func_801C24D0();                                                                \
     g_Task->timer -= 1;                                                             \
-    func_801B0DFC();                                                                \
+    Actor_UpdateMovement();                                                         \
     g_Game.current->u.field.mode_12B.s8_value = 1;                                  \
     g_Task->header.step                       = 1;

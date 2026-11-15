@@ -7,7 +7,7 @@ MATCH s32 Char_ProbeFacingCell(void) {
 
     cx    = g_Task->pos.x.fixed + g_FacingSteps[g_Task->direction_08].x * 2;
     cy    = g_Task->pos.y.fixed + g_FacingSteps[g_Task->direction_08].y * 2;
-    found = func_801BDE14(cx, cy, 0) != -1;
+    found = Actor_FindInRange(cx, cy, 0) != -1;
     hit   = found;
     /* FAKE: retail writes the flag to $v0 and copies it to $s1; keeping the
      * probe result live stops gcc-2.7.2 from coalescing the copy. */

@@ -80,7 +80,7 @@ NON_MATCHING s32 func_801BE1B0(u32 index) {
     if (flags & 0x20)
         g_Game.flags |= GAME_FLAG_SCROLL_LOCK;
     if (flags == 0x30)
-        func_801C601C(*ids);
+        Area_StartScrollRoute(*ids);
     g_Game.flags |= GAME_FLAG_SCRIPT_ACTIVE;
     g_Game.walk_flags |= AREA_WALK_MAP_LOADING;
     return 0;

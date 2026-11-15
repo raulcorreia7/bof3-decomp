@@ -1,4 +1,6 @@
 #include "magic073_03.h"
+#include "overlays/bmagic/Effect_LaunchSparkleBurst.h"
+#include "overlays/bmagic/Effect_SpawnTargetFades.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -21,7 +23,14 @@ MATCH void func_801EEC28(void) {
     }
 }
 
-INCLUDE_ASM(func_801EED18);
+MATCH void func_801EED18(void) {
+    u32 slot;
+    u8  i;
+    u8  battler;
+    u8  count;
+
+    EFFECT_SPAWN_TARGET_FADES(0x26, 0);
+}
 
 MATCH void func_801EEF50(void) {
     u16* flags;
@@ -41,7 +50,15 @@ MATCH void func_801EEFF4(void) {
     BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC04, header.step);
 }
 
-INCLUDE_ASM(func_801EF06C);
+MATCH void func_801EF06C(void) {
+    PartyMember* battler;
+    u8           slot;
+    u8           index;
+    u8           count;
+    u8           i;
+
+    EFFECT_LAUNCH_SPARKLE_BURST();
+}
 
 #include "overlays/bmagic/Effect_ReplaceSlotPaletteFade.h"
 
@@ -134,14 +151,14 @@ MATCH u8 func_801F04A4(void) {
     count = 0;
     i     = 0;
     do {
-        if (!(func_801DB524((i + 3) & BYTE_MASK) & BYTE_MASK) && g_BattleEnemyBattlers[(i & BYTE_MASK) + 3].header.mode == 6) {
+        if (!(Battle_SlotIsBlocked((i + 3) & BYTE_MASK) & BYTE_MASK) && g_BattleEnemyBattlers[(i & BYTE_MASK) + 3].header.mode == 6) {
             count++;
         }
         i++;
     } while ((u32)(i & BYTE_MASK) < 8);
     i = 0;
     do {
-        if (!(func_801DB524(i & BYTE_MASK) & BYTE_MASK) && g_Game.members[i & BYTE_MASK].header.mode == 6) {
+        if (!(Battle_SlotIsBlocked(i & BYTE_MASK) & BYTE_MASK) && g_Game.members[i & BYTE_MASK].header.mode == 6) {
             count++;
         }
         i++;

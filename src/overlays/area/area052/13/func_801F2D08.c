@@ -1,10 +1,10 @@
 #include "area052_13.h"
 
 MATCH void func_801F2D08(void) {
-    ActorSlot* slot;
-    u8         i;
+    SpawnedActor* slot;
+    u8            i;
 
-    slot = g_ActorSlots;
+    slot = g_SpawnedActors;
     for (i = 0; i < ACTOR_SLOT_COUNT; i++) {
         if (slot->header.flags != 0 && slot->type == 0x48 && (void*)slot != (void*)g_Task) {
             Actor_Clear();

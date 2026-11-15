@@ -44,7 +44,7 @@ MATCH void func_801EED8C(void) {
     BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
     MEM(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = MEM(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
     g_GfxPalettePending                                 = 1;
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
     g_Task->unk_09       = 0;
     g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
@@ -90,7 +90,30 @@ MATCH void func_801EEFE0(void) {
 
 #include "shared/Effect_StartPlaying.h"
 
-INCLUDE_ASM(func_801EF070);
+MATCH void func_801EF070(void) {
+    POLY_FT4* prim;
+    s16*      shade;
+    s32       tpage;
+    s16       x;
+    s16       y;
+
+    tpage = getTPage(1, 1, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
+    shade  = &D_1F800006;
+    prim   = (POLY_FT4*)g_GfxPrimCursor;
+    *shade = g_Task->unk_09 * 8;
+    x      = g_Task->unk_2E.half;
+    y      = g_Task->unk_30.half;
+    SetPolyFT4(prim);
+    SetSemiTrans(prim, 1);
+    setXY4(prim, x - 0x38, y - 0x60, x + 0x38, y - 0x60, x - 0x38, y, x + 0x38, y);
+    prim->tpage = GetTPage(1, 1, 832, 256);
+    prim->clut  = GetClut(0, 506);
+    setUVWH(prim, 8, 8, 112, 96);
+    setRGB0(prim, *shade, *shade, *shade);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
+}
 
 /* func_801EF210 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
@@ -162,7 +185,7 @@ MATCH void func_801EF4FC(void) {
         if (g_Task->unk_04 & 0x1) {
             cue = EMI_CUE_ID(SND_BANK_COMMON, 0x01);
         }
-        SND_QueueSelectionFx(cue);
+        SND_QueueSelectionEffect(cue);
         g_Task->header.step++;
     }
 }
@@ -196,7 +219,7 @@ MATCH void func_801EF688(void) {
 MATCH void func_801EF7D0(void) {
     if (g_Task->param.unk_0B == 0) {
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
-        if (func_801DB524(g_Task->unk_04) & BYTE_MASK) {
+        if (Battle_SlotIsBlocked(g_Task->unk_04) & BYTE_MASK) {
             Battle_MarkDamaged(g_Task->unk_04);
         }
         func_801E5988();
@@ -288,9 +311,9 @@ MATCH void func_801EFCF4(void) {
     }
 }
 
-INCLUDE_ASM(BMagic_DrawRingTriangles);
+#include "overlays/bmagic/BMagic_DrawRingTriangles.h"
 
-INCLUDE_ASM(BMagic_DrawRingQuads);
+#include "overlays/bmagic/BMagic_DrawRingQuads.h"
 
 /* func_801F0368 */
 #include "overlays/bmagic/BMagic_AllocEffect.h"

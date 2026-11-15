@@ -27,7 +27,7 @@ typedef struct Area024Scratch {
     u8            unk_02[0x07];
     /* 0x09 */ u8 step_count; /* the step counter */
     u8            unk_0A[0x2A];
-    Point3DL      pos;
+    Point3l       pos;
 } Area024Scratch;
 
 ASSERT_SIZE(Area024Scratch, 0x40);

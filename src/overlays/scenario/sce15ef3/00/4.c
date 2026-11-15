@@ -25,7 +25,7 @@ MATCH void func_801D0CC4(void) {
     if (g_AreaDrawFlags == 0) {
         g_Task->header.mode = g_Task->header.mode + 1;
     } else {
-        func_801D1A60();
+        Area_StepSparkEmitters();
         func_801D18CC();
     }
 }
@@ -72,7 +72,7 @@ MATCH void func_801D0F94(void) {
 
     work = g_Task;
     work->pos.z.fixed += 0x800000;
-    func_801D1D20(&work->pos, &work->vx, work->tint.bytes.unk_5D, work->tint.bytes.unk_5E);
+    func_801D1D20(&work->pos, &work->vx, work->tint.bytes.rgb.red, work->tint.bytes.rgb.green);
     if (g_ScriptVars[0] == 0xB) {
         g_Task->header.mode += 1;
     }
@@ -98,7 +98,7 @@ INCLUDE_ASM(func_801D10AC);
 
 MATCH void func_801D11C8(void) {
     g_Task->pos.z.fixed += 0xFF000000;
-    func_801D230C();
+    Scene_SetXFixed();
     if (--g_Task->timer == 0) {
         g_Task->timer = 4;
         g_Task->header.mode += 1;
@@ -110,7 +110,7 @@ MATCH void func_801D1250(void) {
 
     g_Task->screen_x += 64;
     g_Task->screen_y -= 64;
-    func_801D230C();
+    Scene_SetXFixed();
     timer         = g_Task->timer - 1;
     g_Task->timer = timer;
     if (timer == 0) {
@@ -124,7 +124,7 @@ MATCH void func_801D12E0(void) {
 
     g_Task->screen_x -= 64;
     g_Task->screen_y += 64;
-    func_801D230C();
+    Scene_SetXFixed();
     timer         = g_Task->timer - 1;
     g_Task->timer = timer;
     if (timer == 0) {
@@ -140,7 +140,7 @@ MATCH void func_801D1370(void) {
     work           = g_Task;
     work->screen_x = work->screen_x - 0x10;
     work->screen_y = work->screen_y - 0x10;
-    func_801D230C();
+    Scene_SetXFixed();
     timer         = g_Task->timer - 1;
     g_Task->timer = timer;
     if (timer == 0) {
@@ -227,13 +227,49 @@ MATCH void func_801D16DC(void) {
 
 #include "shared/Area_FindFreeSpriteRow.h"
 
-INCLUDE_ASM(func_801D1758);
+/* Draw a spark as a lit dot with a dim box behind it; the flag picks grey or red. */
+MATCH void func_801D1758(SpriteSpark* spark) {
+    TILE_1* dot;
+    TILE*   box;
+    DVECTOR xy;
+    /* FAKE: retail reserves 48 bytes of unused stack. */
+    FAKE_STACK_PADS(u8, 48);
+
+    GFX_SET_DRAW_MODE(GetTPage(0, 1, 960, 0));
+    Area_AddCellPrim(spark->x, spark->y, 0, sizeof(DR_MODE));
+    Area_ProjectPoint(&spark->x, &xy);
+    dot = (TILE_1*)g_GfxPrimCursor;
+    SetTile1(dot);
+    SetSemiTrans(dot, 1);
+    setXY0(dot, xy.vx, xy.vy);
+    if (spark->unk_3 != 0) {
+        setRGB0(dot, 128, 128, 128);
+    } else {
+        setRGB0(dot, 128, 0, 0);
+    }
+    Area_AddCellPrim(spark->x, spark->y, 0, sizeof(TILE_1));
+    box = (TILE*)g_GfxPrimCursor;
+    SetTile(box);
+    SetSemiTrans(box, 1);
+    setXY0(box, xy.vx - 1, xy.vy - 1);
+    box->w = 3;
+    box->h = 3;
+    if (spark->unk_3 != 0) {
+        setRGB0(box, 32, 32, 32);
+    } else {
+        setRGB0(box, 32, 0, 0);
+    }
+    Area_AddCellPrim(spark->x, spark->y, 0, sizeof(TILE));
+}
 
 INCLUDE_ASM(func_801D18CC);
 
-INCLUDE_ASM(func_801D19A0);
+#include "shared/Area_SeedSparkEmitters.h"
 
-INCLUDE_ASM(func_801D1A60);
+MATCH void func_801D19A0(void){AREA_SEED_SPARK_EMITTERS(D_801D27B0)}
+
+/* func_801D1A60 */
+#include "shared/Area_StepSparkEmitters.h"
 
 #include "overlays/scenario/Scene_DrawRedGradient.h"
 
@@ -241,11 +277,12 @@ INCLUDE_ASM(func_801D1D20);
 
 INCLUDE_ASM(func_801D1FF8);
 
-MATCH void func_801D230C(void) {
-    Point3DL pos;
-    s16      x;
-    s16      y;
-    u16      angle;
+/* func_801D230C */
+MATCH void Scene_SetXFixed(void) {
+    Point3l pos;
+    s16     x;
+    s16     y;
+    u16     angle;
 
     GFX_AddDitheredDrawMode(1, GetTPage(0, 1, 896, 256));
     pos.x = g_Task->pos.x.fixed;
@@ -271,7 +308,7 @@ MATCH void Scene_DrawRedFade(u8 red) {
     GFX_AddPrim(1, sizeof(TILE));
 }
 
-INCLUDE_ASM(Scene_DrawScanBar);
+#include "overlays/scenario/Scene_DrawScanBar.h"
 
 #include "overlays/scenario/Scene_ClearScanBars.h"
 

@@ -20,7 +20,7 @@ MATCH void func_800A5E98(void) {
         i = i + 1;
     } while ((i & BYTE_MASK) < 3U);
 
-    func_800A82F8();
+    Battle_SetGeneCount();
     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
     D_801485DF = 2;
     BATTLE_ACTIVE_ROW->u.turn.action_flags.volatile_value |= COMBATANT_FLAG_ABILITY_ALT_POSE;

@@ -16,7 +16,7 @@ MATCH void func_800A14B4(void) {
     u32          next;
     u32          enemy_index;
 
-    func_800A3F28();
+    Battle_MarkDamageApplied();
     p    = &g_Battle.active_battler;
     slot = LOBU(p[0]);
     if (BATTLER_IS_PLAYER(slot)) {

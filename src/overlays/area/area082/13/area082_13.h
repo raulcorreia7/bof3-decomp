@@ -18,7 +18,7 @@ extern u8       D_801F5734[];
 extern Callback D_801F576C[];
 
 void func_801F3500(void);
-u8   func_801F3AAC(void);
+u8   Area_StepSparks(void);
 void func_801F4430(void);
 void func_801F5388(s32 arg0);
 
@@ -30,7 +30,7 @@ extern u8 D_80145EED[3];
 
 /* func_801F393C */
 void Area_AddSpark(void);
-void func_801F2F50(Point3DL* pos, s16 a, s16 b, u16 c, s32 d, s32 e);
+void func_801F2F50(Point3l* pos, s16 a, s16 b, u16 c, s32 d, s32 e);
 void func_801F46C8(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 
 #endif

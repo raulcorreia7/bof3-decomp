@@ -20,7 +20,7 @@ typedef struct WorldMapDestination {
     u16 area_id;
     u16 map_id;
 
-    UPoint2D pos;
+    Point2u pos;
 } WorldMapDestination;
 
 /* One of five source slots; func_801C0F9C reads the four bytes. */
@@ -31,7 +31,7 @@ typedef struct SlotSource {
     u8 unk_03;
 } SlotSource;
 
-/* Eight-byte map hook: the map id byte and the handler at +4. Game_CallAreaHandler
+/* Eight-byte map hook: the map id byte and the handler at +4. Game_CallArea
  * scans the rows by byte offset, because the retail loop keeps a running
  * offset instead of an index. */
 typedef struct AreaHook {
@@ -70,6 +70,8 @@ typedef struct SceneSlots {
     s8 (*entry_10)(s32, s32);
 } SceneSlots;
 
+ASSERT_SIZE(SceneSlots, 0x14);
+
 /* Four-byte battle party slot. Area_PlaceEncounterParty marks it active, stores its sort
  * key and orders the slots by that key. */
 typedef struct PartySlot {
@@ -83,7 +85,7 @@ ASSERT_SIZE(PartySlot, 0x4);
 ASSERT_OFFSET(PartySlot, active, 0x0);
 ASSERT_OFFSET(PartySlot, key, 0x1);
 
-/* 0x1C-byte front-end handler row. Game_FindAreaHandler returns the row whose key
+/* 0x1C-byte front-end handler row. Game_FindArea returns the row whose key
  * byte at +0x18 matches the current world state; the handlers sit at +0, +4,
  * +8, +0x0C and +0x10, and +0x14 points to the area's map points, four-byte rows (x, y,
  * context seed, context kind) that func_801B690C searches for the actor cell; Fishing_ShowLocation walks the same
@@ -106,7 +108,7 @@ typedef u8 (*ActorActionFunc)(void* entity, u8 param, s32 phase);
 typedef void (*ActorWorkFunc)(s32 fallback_index, s32 index);
 
 /* D_801C7B74 */
-extern Offset2DB            s_BattleScrollCellSteps[4];
+extern Offset2b             s_BattleScrollCellSteps[4];
 extern AreaHandler          D_801C7F5C[11];
 extern ActorActionFunc      D_801C83BC[7];
 extern ObjectFunc           D_801C83D8[11];
@@ -122,13 +124,13 @@ extern WorldMapBattlefields D_801CD224;
 #define WORLD_MAP_DESTINATION_COUNT 10
 extern WorldMapDestination D_801CD24C[WORLD_MAP_DESTINATION_COUNT];
 extern SlotSource          D_801CD4AC[5];
-extern Offset2DB           s_CameraScrollDeltas[CAMERA_DIR_COUNT];
-extern Offset2DB           s_EntitySpawnOffsets[ENTITY_SPAWN_OFFSET_COUNT];
+extern Offset2b            s_CameraScrollDeltas[CAMERA_DIR_COUNT];
+extern Offset2b            s_EntitySpawnOffsets[ENTITY_SPAWN_OFFSET_COUNT];
 /* D_801CD620 */
-extern Point2DL            s_EncounterEnemyOffsets[36];
+extern Point2l             s_EncounterEnemyOffsets[36];
 /* D_801CD740 */
-extern Point2DL            s_EncounterOriginNudges[6];
-extern Point2D             D_801CD778[5];
+extern Point2l             s_EncounterOriginNudges[6];
+extern Point2s             D_801CD778[5];
 extern PartySlot           D_801CD944[3];
 
 #endif

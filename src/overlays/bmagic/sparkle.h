@@ -21,7 +21,7 @@
 extern BMagicEffectFuncs  D_801EEC04;
 extern SparkleEffectSteps D_801EEC1C;
 /* The launch offset of each sparkle row from the screen point of the battler. */
-extern Point2D            D_801F00BC[];
+extern Point2s            D_801F00BC[];
 /* The four colour rows of each kind. */
 extern u8                 D_801F015C[][4][3];
 /* The number of sparkles each kind spawns. */
@@ -30,7 +30,7 @@ extern u8                 D_801F0198[];
 extern u8                 D_801F01A0[];
 /* The shortest rise of each kind. */
 extern u8                 D_801F01A8[];
-extern BMagicEffectWork   D_801F01B4[EFFECT_SPARKLE_COUNT];
+extern BMagicEffect       D_801F01B4[EFFECT_SPARKLE_COUNT];
 
 void func_801EF33C(void);
 u8   func_801F0000(void);

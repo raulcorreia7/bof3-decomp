@@ -47,9 +47,9 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
             state->unk_07 = next;
             if (next != 0) {
                 if (Actor_GetOwner() != 2)
-                    func_801ABBA8(state, value);
+                    Area_MoveActorRoute(state, value);
                 else
-                    func_801C5DFC(value);
+                    Area_SetFacingOffsetX(value);
             }
             state->index_0A += 2;
             break;
@@ -65,7 +65,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
                     Actor* work;
                     s32    den;
 
-                    func_801ABBA8(state, value);
+                    Area_MoveActorRoute(state, value);
                     work     = g_Task;
                     den      = work->timer * state->unk_07;
                     work->vz = ((s16)((*(table + state->index_0A + 3) << 8) | *(table + state->index_0A + 4)) - (s16)COORD_INT(work->pos.z)) / den;
@@ -77,7 +77,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
                     counter    = (s16*)&D_1F800000;
                     *counter   = COORD_INT(g_Task->pos.z);
                     D_1F800002 = (s16)((*(table + state->index_0A + 3) << 8) | *(table + state->index_0A + 4));
-                    func_801C5DFC(value);
+                    Area_SetFacingOffsetX(value);
                     step       = (0x80 / g_AreaCameraStep) * D_80143FC3;
                     D_80143F5C = ((SP_REF(s16, 0x2u) - *counter) << 16) / step;
                     state->flags |= 0x40;
@@ -124,10 +124,10 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
             state->unk_07 = next;
             if (next != 0) {
                 if (Actor_GetOwner() != 2) {
-                    func_801ABBA8(state, value);
+                    Area_MoveActorRoute(state, value);
                     state->flags |= GAME_CURSOR_FLAG_MOVING;
                 } else {
-                    func_801C5DFC(value);
+                    Area_SetFacingOffsetX(value);
                     g_AreaCameraHeightStep = 0;
                     state->flags |= 0x40;
                 }

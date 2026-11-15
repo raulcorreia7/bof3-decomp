@@ -25,7 +25,7 @@ MATCH void func_801F6FCC(void) {
     if (g_FrameCount & 0x1) {
         Area_AddSpark();
     }
-    func_801F7748();
+    Scene_GetZFixed();
     g_Task->timer = (g_Task)->timer + 4;
     if (g_Task->timer == 0) {
         g_Task->timer       = 32;
@@ -38,7 +38,7 @@ MATCH void func_801F7078(void) {
     if (g_FrameCount & 0x1) {
         Area_AddSpark();
     }
-    func_801F7748();
+    Scene_GetZFixed();
     if (g_ScriptVars[0] == 0x1F) {
         g_Task->timer       = 252;
         g_Task->header.mode = (g_Task)->header.mode + 1;
@@ -47,7 +47,7 @@ MATCH void func_801F7078(void) {
 
 MATCH void func_801F7100(void) {
     func_801F71B0(g_Task->timer);
-    func_801F7748();
+    Scene_GetZFixed();
     g_Task->timer = (g_Task)->timer - 4;
     if (g_Task->timer == 0) {
         g_Task->header.mode = (g_Task)->header.mode + 1;
@@ -55,7 +55,7 @@ MATCH void func_801F7100(void) {
 }
 
 MATCH void func_801F717C(void) {
-    if (!(func_801F7748() & BYTE_MASK)) {
+    if (!(Scene_GetZFixed() & BYTE_MASK)) {
         Actor_Clear();
     }
 }
@@ -83,7 +83,8 @@ MATCH void func_801F752C(AreaSpark* spark) {
 
 #include "shared/Area_AddSpark.h"
 
-MATCH bool func_801F7748(void) {
+/* func_801F7748 */
+MATCH bool Scene_GetZFixed(void) {
     AreaSpark* spark;
     u8         i;
     bool       alive;
@@ -127,12 +128,12 @@ MATCH void func_801F783C(void) {
             i += 1;
         } while ((u32)(i & BYTE_MASK) < g_PartySize);
     }
-    g_Task                  = work;
-    tint                    = -0x80;
-    work->tint.bytes.unk_5F = tint;
-    work->tint.bytes.unk_5E = tint;
-    work->tint.bytes.unk_5D = tint;
-    g_Task->header.mode     = 1;
+    g_Task                     = work;
+    tint                       = -0x80;
+    work->tint.bytes.rgb.blue  = tint;
+    work->tint.bytes.rgb.green = tint;
+    work->tint.bytes.rgb.red   = tint;
+    g_Task->header.mode        = 1;
 }
 
 MATCH void func_801F7900(void) {
@@ -144,10 +145,10 @@ MATCH void func_801F7920(void) {
     u8*    counter;
 
     work = g_Task;
-    if (work->tint.signed_bytes.unk_5D != 0) {
-        work->tint.signed_bytes.unk_5D -= 2;
-        g_Task->tint.bytes.unk_5E -= 2;
-        g_Task->tint.bytes.unk_5F -= 2;
+    if (work->tint.signed_bytes.delta.red != 0) {
+        work->tint.signed_bytes.delta.red -= 2;
+        g_Task->tint.bytes.rgb.green -= 2;
+        g_Task->tint.bytes.rgb.blue -= 2;
     } else {
         counter           = &g_SceneState.step_05;
         *counter          = *counter + 1;
@@ -167,10 +168,81 @@ MATCH void func_801F7AA8(void) {
     SYS_DISPATCH_TASK(D_801FE5A0, 1, g_Task);
 }
 
+void func_801F7D1C(void);
+
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F7AEC(void) {
+    TILE* tile;
+    u8*   cursor;
+    u32   actor_offset;
+
+    if (g_GameStateIndex == 3 || g_GameStateIndex == 1) {
+        return;
+    }
+
+    actor_offset = g_Task->param.unk_0B * sizeof(Actor);
+    *((u8*)&g_Actors[0].active_flags + actor_offset) |= 8;
+    {
+        Actor* task;
+        s32    actor_pos_x;
+
+        task                                                        = g_Task;
+        actor_pos_x                                                 = *((s32*)&g_Actors[0].pos.x.fixed + actor_offset / sizeof(s32));
+        *((u16*)&g_Actors[0].screen_x + actor_offset / sizeof(u16)) = task->screen_x;
+        *((u16*)&g_Actors[0].screen_y + actor_offset / sizeof(u16)) = task->screen_y;
+        task->pos.x.fixed                                           = actor_pos_x;
+        task->pos.y.fixed                                           = *((s32*)&g_Actors[0].pos.y.fixed + actor_offset / sizeof(s32));
+        actor_pos_x                                                 = *((s32*)&g_Actors[0].pos.z.fixed + actor_offset / sizeof(s32));
+        task->tint.bytes.rgb.blue                                   = 0;
+        task->tint.bytes.rgb.green                                  = 0;
+        task->tint.bytes.rgb.red                                    = 0;
+        task->pos.z.fixed                                           = actor_pos_x;
+    }
+
+    cursor             = g_GfxPrimCursor;
+    ((RECT*)cursor)->x = 0x340;
+    ((RECT*)cursor)->y = 0x100;
+    ((RECT*)cursor)->w = 0xC0;
+    ((RECT*)cursor)->h = 0x100;
+    g_GfxPrimCursor    = cursor + sizeof(RECT);
+    SetDrawArea((DR_AREA*)(cursor + sizeof(RECT)), (RECT*)cursor);
+    GFX_AddPrim(7, sizeof(DR_AREA));
+
+    tile = (TILE*)g_GfxPrimCursor;
+    SetTile(tile);
+    {
+        Actor* task;
+
+        task     = g_Task;
+        tile->x0 = task->screen_x + 0x334;
+        tile->y0 = task->screen_y + ((g_FrameBufferIndex ^ 1) * 0xF0) - 0x15;
+    }
+    tile->w  = 0x18;
+    tile->h  = 0x30;
+    tile->r0 = 0;
+    tile->g0 = 0;
+    tile->b0 = 0;
+    GFX_AddPrim(7, sizeof(TILE));
+
+    cursor = g_GfxPrimCursor;
+    memcpy(cursor, g_GfxCurrentDisplayFrame + 0x14, sizeof(RECT));
+    g_GfxPrimCursor = cursor + sizeof(RECT);
+    SetDrawArea((DR_AREA*)(cursor + sizeof(RECT)), (RECT*)cursor);
+    GFX_AddPrim(7, sizeof(DR_AREA));
+
+    if (g_Task->unk_06 == 0) {
+        func_801F7D1C();
+        g_Task->header.mode = 1;
+    } else {
+        g_Task->header.mode = 2;
+    }
+}
+#else
 INCLUDE_ASM(func_801F7AEC);
+#endif
 
 MATCH void func_801F7D1C(void) {
-    UPoint2D pos;
+    Point2u pos;
 
     if (g_GameStateIndex == 3 || g_GameStateIndex == 1) {
         g_Actors[g_Task->param.actor_slot].active_flags &= 0xF7;
@@ -178,21 +250,21 @@ MATCH void func_801F7D1C(void) {
     } else {
         func_801F83AC(&pos);
         g_Task->timer += 8;
-        g_Task->tint.signed_bytes.unk_5D = rsin(g_Task->timer << 4) >> 7;
-        g_Task->tint.signed_bytes.unk_5E = rcos(g_Task->timer << 4) >> 7;
+        g_Task->tint.signed_bytes.delta.red   = rsin(g_Task->timer << 4) >> 7;
+        g_Task->tint.signed_bytes.delta.green = rcos(g_Task->timer << 4) >> 7;
         func_801F7FFC(pos.x, pos.y);
     }
 }
 
 MATCH void func_801F7E2C(void) {
-    UPoint2D pos;
+    Point2u pos;
 
     func_801F83AC(&pos);
-    if (g_Task->tint.signed_bytes.unk_5D < 0x70) {
-        g_Task->tint.signed_bytes.unk_5D += 2;
+    if (g_Task->tint.signed_bytes.delta.red < 0x70) {
+        g_Task->tint.signed_bytes.delta.red += 2;
     }
-    if (g_Task->tint.signed_bytes.unk_5E < 0x30) {
-        g_Task->tint.signed_bytes.unk_5E += 1;
+    if (g_Task->tint.signed_bytes.delta.green < 0x30) {
+        g_Task->tint.signed_bytes.delta.green += 1;
     }
     func_801F81D8(pos.x, pos.y);
     if (g_GameStateIndex == 3 || g_GameStateIndex == 1) {
@@ -206,14 +278,14 @@ MATCH void func_801F7E2C(void) {
 }
 
 MATCH void func_801F7F5C(void) {
-    UPoint2D pos;
+    Point2u pos;
 
     func_801F83AC(&pos);
-    if (g_Task->tint.signed_bytes.unk_5D != 0) {
-        g_Task->tint.signed_bytes.unk_5D -= 2;
+    if (g_Task->tint.signed_bytes.delta.red != 0) {
+        g_Task->tint.signed_bytes.delta.red -= 2;
     }
-    if (g_Task->tint.signed_bytes.unk_5E != 0) {
-        g_Task->tint.signed_bytes.unk_5E -= 1;
+    if (g_Task->tint.signed_bytes.delta.green != 0) {
+        g_Task->tint.signed_bytes.delta.green -= 1;
     }
     func_801F81D8(pos.x, pos.y);
     if ((g_Task->tint.word & 0xFFFF00) == 0) {
@@ -221,11 +293,43 @@ MATCH void func_801F7F5C(void) {
     }
 }
 
-INCLUDE_ASM(func_801F7FFC);
+/* Draw the sprite quad in a fixed grey with the tint's red and green lifted into the lower vertices. */
+MATCH void func_801F7FFC(s16 x, s16 y) {
+    POLY_GT4* prim;
+    u8        red;
+    u8        green;
 
-INCLUDE_ASM(func_801F81D8);
+    prim  = (POLY_GT4*)g_GfxPrimCursor;
+    red   = g_Task->tint.bytes.rgb.red + 0x20;
+    green = g_Task->tint.bytes.rgb.green + 0x20;
+    SetPolyGT4(prim);
+    SCENA15_SPRITE_GEOMETRY(prim, x, y);
+    setRGB0(prim, 0x90, 0x90, 0x90);
+    setRGB1(prim, 0x90, 0x90, 0x90);
+    setRGB2(prim, 0, red, 0);
+    setRGB3(prim, 0, green, 0);
+    SCENA15_SPRITE_END(prim);
+}
 
-MATCH void func_801F83AC(UPoint2D* out) {
+/* Draw the 24 by 48 tinted sprite at the screen point, its texture window centred on the work record's screen position. */
+MATCH void func_801F81D8(s16 x, s16 y) {
+    POLY_GT4* prim;
+    u8        red;
+    u8        green;
+
+    prim  = (POLY_GT4*)g_GfxPrimCursor;
+    red   = g_Task->tint.bytes.rgb.red;
+    green = g_Task->tint.bytes.rgb.green;
+    SetPolyGT4(prim);
+    SCENA15_SPRITE_GEOMETRY(prim, x, y);
+    setRGB0(prim, red, red, red);
+    setRGB1(prim, red, red, red);
+    setRGB2(prim, green, green, green);
+    setRGB3(prim, green, green, green);
+    SCENA15_SPRITE_END(prim);
+}
+
+MATCH void func_801F83AC(Point2u* out) {
     SVECTOR vec;
     long    depth;
     long    flag;
@@ -234,10 +338,8 @@ MATCH void func_801F83AC(UPoint2D* out) {
     slot                    = g_Task->param.actor_slot;
     g_Actors[slot].screen_x = g_Task->screen_x;
     g_Actors[slot].screen_y = g_Task->screen_y;
-    vec.vx                  = (g_Task->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
-    vec.vy                  = (g_Task->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
-    vec.vz                  = -COORD_INT(g_Task->pos.z) / 2;
-    g_Task->unk_60          = RotTransPers(&vec, (long*)out, &depth, &flag);
+    setVector(&vec, (g_Task->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (g_Task->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
+    g_Task->unk_60 = RotTransPers(&vec, (long*)out, &depth, &flag);
     out->x -= 12;
     out->y -= 37;
 }
@@ -252,11 +354,11 @@ MATCH void func_801F8488(void) {
     for (i = 0; i < g_PartySize; i++) { \
         g_Game.members[i].unk_29 = 3;   \
     }                                   \
-    g_Task                  = work;     \
-    work->tint.bytes.unk_5F = 0;        \
-    work->tint.bytes.unk_5E = 0;        \
-    work->tint.bytes.unk_5D = 0;        \
-    g_Task->header.mode     = 1
+    g_Task                     = work;  \
+    work->tint.bytes.rgb.blue  = 0;     \
+    work->tint.bytes.rgb.green = 0;     \
+    work->tint.bytes.rgb.red   = 0;     \
+    g_Task->header.mode        = 1
 
 MATCH void func_801F84CC(void) {
     Actor* work;
@@ -270,10 +372,10 @@ MATCH void func_801F8548(void) {
     u8*    counter;
 
     work = g_Task;
-    if (work->tint.signed_bytes.unk_5D < 0x7C) {
-        work->tint.signed_bytes.unk_5D += 4;
-        g_Task->tint.bytes.unk_5E += 4;
-        g_Task->tint.bytes.unk_5F += 4;
+    if (work->tint.signed_bytes.delta.red < 0x7C) {
+        work->tint.signed_bytes.delta.red += 4;
+        g_Task->tint.bytes.rgb.green += 4;
+        g_Task->tint.bytes.rgb.blue += 4;
     } else {
         counter           = g_ScriptVars;
         *counter          = *counter + 1;
@@ -297,7 +399,7 @@ MATCH void func_801F8704(void) {
     u8           i;
 
     actor = g_Task;
-    shade = -((s8)actor->tint.bytes.unk_5D / 2); /* kept: retail sign-extends the u8 load (lbu, sll, sra); signed_bytes emits lb. */
+    shade = -((s8)actor->tint.bytes.rgb.red / 2); /* kept: retail sign-extends the u8 load (lbu, sll, sra); signed_bytes emits lb. */
     for (i = 0; i < g_PartySize; i++) {
         if (g_Game.members[i].chr.character_id != CHAR_ID_RYU_ADULT) {
             member                   = &g_Game.members[i];
@@ -325,17 +427,17 @@ MATCH void func_801F8874(void) {
     u8*    counter;
 
     work = g_Task;
-    if (work->tint.bytes.unk_5D < 0xF8) {
-        work->tint.bytes.unk_5D += 8;
-        g_Task->tint.bytes.unk_5E += 8;
-        g_Task->tint.bytes.unk_5F += 8;
+    if (work->tint.bytes.rgb.red < 0xF8) {
+        work->tint.bytes.rgb.red += 8;
+        g_Task->tint.bytes.rgb.green += 8;
+        g_Task->tint.bytes.rgb.blue += 8;
     } else {
-        work->tint.signed_bytes.unk_5F = -1;
-        work->tint.signed_bytes.unk_5E = -1;
-        work->tint.signed_bytes.unk_5D = -1;
-        counter                        = &g_SceneState.step_05;
-        *counter                       = *counter + 1;
-        g_Task->header.mode            = 2;
+        work->tint.signed_bytes.delta.blue  = -1;
+        work->tint.signed_bytes.delta.green = -1;
+        work->tint.signed_bytes.delta.red   = -1;
+        counter                             = &g_SceneState.step_05;
+        *counter                            = *counter + 1;
+        g_Task->header.mode                 = 2;
     }
     func_801F79C4();
     func_801F8958();
@@ -373,7 +475,37 @@ MATCH void func_801F8A5C(void) {
     SYS_DISPATCH_TASK(D_801FE5CC, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801F8AA0);
+MATCH void func_801F8AA0(void) {
+    s32 cue;
+
+    g_Task->vx = 0;
+    g_Task->vy = 0;
+    g_Task->vz = 0;
+    if (!(g_Task->unk_06 & 0x1)) {
+        g_Task->unk_18 = 0x3000;
+        g_Task->unk_1C = 0;
+    } else {
+        g_Task->unk_18 = 0;
+        g_Task->unk_1C = 0x3000;
+    }
+    g_Task->gravity = 0x200000;
+    if (g_Task->unk_06 & 0x8) {
+        g_Task->vx += g_Task->unk_18 << 3;
+        g_Task->vy += g_Task->unk_1C << 3;
+        g_Task->vz += g_Task->gravity << 3;
+        g_Task->header.mode += 3;
+    } else {
+        g_Task->timer       = 8;
+        g_Task->header.mode = g_Task->header.mode + 1;
+    }
+    if (!(g_Task->param.unk_0B & 0x1)) {
+        cue = 0x202;
+        if (!(g_Task->unk_06 & 0x4)) {
+            cue = 0x207;
+        }
+        SND_PlayCue(cue);
+    }
+}
 
 #include "overlays/scenario/Scene_AdvanceBandMotion.h"
 
@@ -396,7 +528,37 @@ MATCH void func_801F8C78(void) {
     g_Task->header.mode++;
 }
 
-INCLUDE_ASM(func_801F8D30);
+/* Spin the actor's sweep value, shift its position on alternate frames, and advance when the script variable equals its option. */
+MATCH void func_801F8D30(void) {
+    MATRIX camera;
+    s32*   cell;
+
+    cell = &D_801FE740;
+    *cell += g_Task->gravity >> 1;
+    if (*cell == g_Task->vz) {
+        *cell = -*cell;
+    }
+    Area_SetCameraMatrix(&camera);
+    if (g_FrameCount & 1) {
+        func_801F9A20(&g_Task->pos, &g_Task->vx);
+        if (!(g_Task->unk_06 & 1)) {
+            g_Task->pos.x.fixed += 0x4000;
+        } else {
+            g_Task->pos.y.fixed += 0x4000;
+        }
+        func_801F9500(&g_Task->pos, &g_Task->vx);
+        if (!(g_Task->unk_06 & 1)) {
+            g_Task->pos.x.fixed -= 0x4000;
+        } else {
+            g_Task->pos.y.fixed -= 0x4000;
+        }
+    } else {
+        func_801F97CC(&g_Task->pos, cell - 2);
+    }
+    if (g_ScriptVarsReq.byte == g_Task->option_flags) {
+        g_Task->header.mode++;
+    }
+}
 
 MATCH void func_801F8EA8(void) {
     MATRIX matrix;
@@ -428,7 +590,52 @@ MATCH void Scene_ClearActor(void) {
 
 INCLUDE_ASM(func_801F9020);
 
-INCLUDE_ASM(func_801F92F0);
+MATCH void func_801F92F0(Coord* position, s32* step) {
+    POLY_F4* poly;
+    s32*     delta;
+    Coord*   origin;
+    s32      point[4];
+
+    FAKE_STACK_PADS(u8, 0xC); /* FAKE: retail keeps the point row aligned in a 64-byte frame. */
+
+    poly   = (POLY_F4*)g_GfxPrimCursor;
+    delta  = step;
+    origin = position;
+    SetPolyF4(poly);
+    SetSemiTrans(poly, 0);
+
+    point[0] = origin[0].fixed + delta[0];
+    point[1] = origin[1].fixed + delta[1];
+    point[2] = origin[2].fixed + delta[2];
+    Area_ProjectPoint(point, (DVECTOR*)&poly->x0);
+    if (!(g_Task->unk_06 & 1)) {
+        point[0] = origin[0].fixed - delta[0];
+        point[1] = origin[1].fixed + delta[1];
+    } else {
+        point[0] = origin[0].fixed + delta[0];
+        point[1] = origin[1].fixed - delta[1];
+    }
+    point[2] = origin[2].fixed + delta[2];
+    FAKE_BARRIER(); /* FAKE: keep the second projected point stores before its call setup. */
+    Area_ProjectPoint(point, (DVECTOR*)&poly->x1);
+    if (!(g_Task->unk_06 & 1)) {
+        point[0] = origin[0].fixed + delta[0];
+        point[1] = origin[1].fixed - delta[1];
+    } else {
+        point[0] = origin[0].fixed - delta[0];
+        point[1] = origin[1].fixed + delta[1];
+    }
+    point[2] = origin[2].fixed - delta[2];
+    FAKE_BARRIER(); /* FAKE: keep the third projected point stores before its call setup. */
+    Area_ProjectPoint(point, (DVECTOR*)&poly->x2);
+
+    point[0] = origin[0].fixed - delta[0];
+    point[1] = origin[1].fixed - delta[1];
+    point[2] = origin[2].fixed - delta[2];
+    Area_ProjectPoint(point, (DVECTOR*)&poly->x3);
+    setRGB0(poly, 255, 255, 255);
+    Area_AddCellPrim(origin[0].fixed, origin[1].fixed, 0, sizeof(POLY_F4));
+}
 
 INCLUDE_ASM(func_801F9500);
 
@@ -448,24 +655,9 @@ INCLUDE_ASM(func_801F9CFC);
 
 INCLUDE_ASM(func_801FA6BC);
 
-MATCH bool func_801FA854(u8 type, s16 angle_x, s16 angle_y, s16 angle_z, u8 layer, s32 scene_step) {
-    u8 slot;
+#include "overlays/scenario/Scene_SpawnActor.h"
 
-    slot       = Actor_FindFreeSlot();
-    D_801FE748 = slot;
-    if (slot != GAME_NONE) {
-        g_ActorSlots[slot].header.flags         = 1;
-        g_ActorSlots[D_801FE748].type           = type;
-        g_ActorSlots[D_801FE748].camera_angle.x = angle_x;
-        g_ActorSlots[D_801FE748].camera_angle.y = angle_y;
-        g_ActorSlots[D_801FE748].camera_angle.z = angle_z;
-        g_ActorSlots[D_801FE748].scene_step     = scene_step;
-        g_ActorSlots[D_801FE748].layer          = layer;
-    } else {
-        return false;
-    }
-    return true;
-}
+MATCH bool Scene_SpawnActor(u8 type, s16 angle_x, s16 angle_y, s16 angle_z, u8 layer, s32 scene_step){SCENE_SPAWN_ACTOR(D_801FE748)}
 
 MATCH void func_801FA998(void) {
     SYS_DISPATCH_BYTE(D_801FE678, g_SceneState.state_04);
@@ -482,7 +674,22 @@ INCLUDE_ASM(func_801FAFA8);
 
 INCLUDE_ASM(func_801FB788);
 
-INCLUDE_ASM(func_801FC100);
+MATCH void func_801FC100(void) {
+    u8 i;
+
+    for (i = 0; i < 3; i++) {
+        D_1F800000.view.area.entity_counter = Actor_FindFreeField();
+        if (D_1F800000.view.area.entity_counter != GAME_NONE) {
+            func_801A4D54(&D_801FE694[i * 17]);
+        }
+    }
+    for (i = 0; i < 2; i++) {
+        D_1F800000.view.area.entity_counter = Actor_FindFreeField();
+        if (D_1F800000.view.area.entity_counter != GAME_NONE) {
+            func_801A65A0(&D_801FE6C8[i * 16]);
+        }
+    }
+}
 
 INCLUDE_ASM(func_801FC1D8);
 
@@ -512,16 +719,16 @@ MATCH void func_801FDC10(s32 shift) {
 MATCH s32 func_801FDC6C(s32 x, s32 y, s32 unk_06, s32 unk_07, u8 link) {
     u8 slot;
 
-    slot = Actor_FindFreeSlot();
+    slot = Actor_FindFreeSpawned();
     if (slot != GAME_NONE) {
-        g_ActorSlots[slot].header.flags = 1;
-        g_ActorSlots[slot].pos.x.fixed  = x;
-        g_ActorSlots[slot].type         = 0x9E;
-        g_ActorSlots[slot].pos.y.fixed  = y;
-        g_ActorSlots[slot].pos.z.fixed  = (Area_SampleHeight(g_ActorSlots[slot].pos.x.fixed, y) << 16) + TO_COORD(512);
-        g_ActorSlots[slot].unk_06       = unk_06;
-        g_ActorSlots[slot].unk_07       = unk_07;
-        g_ActorSlots[slot].link         = link;
+        g_SpawnedActors[slot].header.flags = 1;
+        g_SpawnedActors[slot].pos.x.fixed  = x;
+        g_SpawnedActors[slot].type         = 0x9E;
+        g_SpawnedActors[slot].pos.y.fixed  = y;
+        g_SpawnedActors[slot].pos.z.fixed  = (Area_SampleHeight(g_SpawnedActors[slot].pos.x.fixed, y) << 16) + TO_COORD(512);
+        g_SpawnedActors[slot].unk_06       = unk_06;
+        g_SpawnedActors[slot].unk_07       = unk_07;
+        g_SpawnedActors[slot].link         = link;
         return 1;
     }
     return 0;
@@ -605,7 +812,31 @@ MATCH void func_801FDFEC(void* entity) {
     actor->unk_7E = actor->unk_7E + 1;
 }
 
-INCLUDE_ASM(func_801FE024);
+MATCH s32 func_801FE024(s32 x, s32 y) {
+    if (g_GameAreaId == AREA_ID_MYRIA_STATION_AFTER_SAMPLES) {
+        if (D_80143F03 == 1) {
+            if (SYS_TestFlag(g_SceneFlags, 1) == 0 && y > TO_COORD(71)) {
+                Game_SetScriptActive();
+                g_SceneState.state_04 = 3;
+                g_SceneState.step_05  = 15;
+            }
+        }
+        if (D_80143F03 == 2) {
+            if (SYS_TestFlag(g_SceneEventFlags, 0x81) == 0 && (x >> 16) >= 45 && (u32)((y >> 16) - 120) < 8) {
+                Game_SetScriptActive();
+                g_SceneState.state_04 = 3;
+                g_SceneState.step_05  = 0;
+            }
+        }
+    }
+    if (g_GameAreaId == AREA_ID_MYRIA_STATION_MYRIA_ROOM && D_80143F03 == 0 && x == TO_COORD(65) + COORD_HALF && (u32)((y >> 16) - 34) < 3) {
+        Game_SetScriptActive();
+        g_SceneState.state_04 = 4;
+        g_SceneState.step_05  = 0;
+        return 1;
+    }
+    return 0;
+}
 
 MATCH s32 func_801FE18C(s32 x, s32 y) {
     if (g_GameAreaId == 0xAE) {

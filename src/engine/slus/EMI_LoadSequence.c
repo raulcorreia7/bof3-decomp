@@ -12,6 +12,6 @@ MATCH void EMI_LoadSequence(void) {
         *(u16*)((u8*)&g_EmiBanks[0].flags + entry_offset) |= 2;
     }
 
-    EMI_CopySectorData();
+    EMI_CopySector();
     EMI_LOADER_STEP += 1;
 }

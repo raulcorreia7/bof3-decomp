@@ -71,7 +71,7 @@ NON_MATCHING void func_8019B704(void) {
         COORD_INT(g_Task->pos.z) = (u16)dist;
     }
     if ((func_8019C028() & 0xFF) == 0) {
-        if ((func_8019C344(g_Task->pos.x.fixed, g_Task->pos.y.fixed) & 0xFF) != 0) {
+        if ((Area_GetVx(g_Task->pos.x.fixed, g_Task->pos.y.fixed) & 0xFF) != 0) {
             g_Task->unk_06       = 1;
             g_Task->option_flags = 2;
         } else if ((func_8019C1E4() & 0xFF) != 0) {

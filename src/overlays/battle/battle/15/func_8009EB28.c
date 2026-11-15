@@ -39,7 +39,7 @@ MATCH void func_8009EB28(void) {
     *scaledp                          = scaled + shifted;
     value                             = Battle_CalcDamage(battler_check, selection, BATTLE_ELEMENT_FROM_WEAPON);
     g_Battle.target_record->hp_change = value;
-    if (value != 0 && (func_800A3A10(*battlerp, g_Battle.target) & BYTE_MASK) == 0) {
+    if (value != 0 && (Battle_PickAbility(*battlerp, g_Battle.target) & BYTE_MASK) == 0) {
         func_801DDFEC(g_Battle.target);
         func_801DD14C(g_Battle.target);
     }

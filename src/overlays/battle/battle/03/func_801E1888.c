@@ -18,5 +18,5 @@ MATCH void func_801E1888(void) {
     } else {
         g_Task->unk_09 = count - 1;
     }
-    func_801DEE4C();
+    Battle_IsPartyMemberBlocked();
 }

@@ -13,6 +13,6 @@ MATCH void func_801E1C78(void) {
     if ((flags & 0x10u) != 0u) {
         func_801DEDE4();
     } else if ((flags & 0x20u) != 0u) {
-        func_801DEE4C();
+        Battle_IsPartyMemberBlocked();
     }
 }

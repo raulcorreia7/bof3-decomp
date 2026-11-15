@@ -12,7 +12,7 @@ MATCH void func_801B036C(void) {
         }
         if (!(func_801B6674() & BYTE_MASK) && !(func_801B6258() & BYTE_MASK) && !(Game_RequestLeaderSwitch() & BYTE_MASK) && !(func_801B5758() & BYTE_MASK) &&
             !(Game_RequestPersonalAction() & BYTE_MASK) && !(func_801B5884() & BYTE_MASK) && !(func_801B5910() & BYTE_MASK) && (g_Game.input != 0)) {
-            func_801B59B4();
+            Game_GetInput();
             g_Task->option_flags = 0;
             g_Task->unk_0A       = 2;
             g_Task->param.unk_0B = 0;

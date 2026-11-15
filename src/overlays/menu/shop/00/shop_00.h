@@ -6,11 +6,14 @@
  * image includes the file. */
 
 #include "game/character.h"
-#include "menu/party.h"
+#include "scenario/party.h"
 #include "shared/etc.h"
 #include "menu/save_data.h"
 #include <string.h>
 #include <stdio.h>
+
+/* FAKE: the callers read the cost as s32, the width the real prototype (u8) lacks. */
+#define Char_GetAbilityCost           ((s32 (*)(u8, u8, u8))Char_GetAbilityCost)
 
 /* Antique IDs: GAME.EMI item table, @source: wiki:data/records#gameemi-fixed-tables. */
 #define SHOP_ANTIQUE_FIRST            ITEM_CLAY_VASE
@@ -334,7 +337,7 @@ typedef struct BoatPartyPos {
 } BoatPartyPos;
 
 extern BoatPartyPos g_ShopBoatPartyPositions[PARTY_SLOT_COUNT];
-extern Point2D      g_ShopFacingSteps[8];
+extern Point2s      g_ShopFacingSteps[8];
 extern u8           D_801E5C68[];
 extern u8           D_801E5C70[];
 extern u8           D_801E5C78[];
@@ -453,11 +456,6 @@ extern u8                 D_801E625C;
 extern volatile u8        D_801E6260;
 extern u8                 D_801E6264[];
 
-bool Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
-s32  Item_Count(u8 category, u8 item_id, u8 mode);
-s32  Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode);
-void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
-
 extern FormationLayout g_MenuFormations[FORMATION_COUNT];
 extern FormationOrder  g_MenuFormationOrder;
 extern s32             g_MenuFormationArrow[3][2];
@@ -471,8 +469,6 @@ bool                   func_801AF494(u8 test, u8 character_id, u8 category, u8 i
 void                   func_801AF930(s16 x, s16 y, u8 palette_index, u8 icon_index, volatile Ability* ability, u8 stat_value, u8 sprite_flag);
 void                   func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
 void                   func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
-/* func_801C1254 */
-void                   Party_LoadMemberSprite(u8 character_id, u8 party_slot);
 void                   Shop_DispatchStep(void);
 void                   func_801D0EDC(void);
 void                   func_801D1000(void);
@@ -563,7 +559,7 @@ void                   func_801D6D6C(s32 strip_x, s32 strip_y);
 void                   func_801D6E94(void);
 void                   func_801D6F00(void);
 /* func_801D7080 */
-void                   SAVE_FormatSlotInfo(void);
+void                   SAVE_FormatSlot(void);
 void                   func_801D7208(void);
 void                   func_801D7344(void);
 void                   func_801D7380(void);

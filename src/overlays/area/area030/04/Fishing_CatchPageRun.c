@@ -4,5 +4,5 @@
  * jump table. */
 /* func_801D42A0 */
 MATCH void Fishing_CatchPageRun(void) {
-    g_FishingDataStates[FISHING_STATE->handler_index_01]();
+    g_FishingStates[FISHING_STATE->handler_index_01]();
 }

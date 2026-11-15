@@ -19,11 +19,11 @@ MATCH void func_801F332C(s32* first, s32* second) {
     angle   = ratan2(screen[1].vy - screen[0].vy, screen[1].vx - screen[0].vx);
     size[0] = 0x10;
     size[1] = 0;
-    func_801AFFD8(first, size, scale);
+    Game_ProjectWorldPoint(first, size, scale);
     angle1  = angle + ANGLE_90;
     radius1 = scale[0] + (g_FrameCount & 1);
     func_801F34C8(screen[0].vx, screen[0].vy, radius1, angle1);
-    func_801AFFD8(second, size, scale);
+    Game_ProjectWorldPoint(second, size, scale);
     radius2 = scale[0] + (g_FrameCount & 1);
     angle2  = angle + ANGLE_270;
     func_801F34C8(screen[1].vx, screen[1].vy, radius2, angle2);

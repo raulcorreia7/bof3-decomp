@@ -1,0 +1,33 @@
+/* Draws the ring of eight Gouraud quads around the effect position, shaded by the work bytes 0x5D to 0x5F. */
+/* magic076, magic169 */
+MATCH void BMagic_DrawRingQuads(void) {
+    POLY_G4* prim;
+    s16      i;
+    s16      x;
+    s16      y;
+
+    x                                = g_Task->unk_2E.half;
+    y                                = g_Task->unk_30.half;
+    D_1F800000.view.effect.params[0] = 8;
+    D_1F800000.view.effect.params[1] = 20;
+    D_1F800000.view.effect.params[4] = (s8)g_Task->unk_5D * g_Task->unk_09;
+    D_1F800000.view.effect.params[5] = (s8)g_Task->unk_5E * g_Task->unk_09;
+    D_1F800000.view.effect.params[6] = (s8)g_Task->unk_5F * g_Task->unk_09;
+    for (i = 0; i < 8; i++) {
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        setXY0(prim, x + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[1]), y + FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[1]));
+        prim->x2 = x + FIXED_MUL(rsin(i << 9), D_1F800000.view.effect.params[0]);
+        prim->y2 = y + FIXED_MUL(rcos(i << 9), D_1F800000.view.effect.params[0]);
+        prim->x1 = x + FIXED_MUL(rsin((i + 1) << 9), D_1F800000.view.effect.params[1]);
+        prim->y1 = y + FIXED_MUL(rcos((i + 1) << 9), D_1F800000.view.effect.params[1]);
+        prim->x3 = x + FIXED_MUL(rsin((i + 1) << 9), D_1F800000.view.effect.params[0]);
+        prim->y3 = y + FIXED_MUL(rcos((i + 1) << 9), D_1F800000.view.effect.params[0]);
+        setRGB0(prim, 1, 1, 1);
+        setRGB1(prim, 1, 1, 1);
+        setRGB2(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
+        setRGB3(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
+    }
+}

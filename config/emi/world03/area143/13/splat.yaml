@@ -17,7 +17,7 @@ segments:
       - [0x1B8, c, func_801F2DB8]
       - [0x2F0, c, func_801F2EF0]
       - [0x3E0, c, func_801F2FE0]
-      - [0x4A0, c, func_801F30A0]
+      - [0x4A0, c, Area_StepSparkEmitters]
       - [0x5EC, c, func_801F31EC]
       - [0x630, c, func_801F3230]
       - [0x678, c, func_801F3278]

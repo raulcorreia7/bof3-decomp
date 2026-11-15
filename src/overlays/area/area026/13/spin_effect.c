@@ -238,9 +238,7 @@ MATCH void func_801F2C48(void) {
     work->timer  = 10;
     work2        = g_Task;
     work->unk_1C = 0;
-    work->vx     = v0;
-    work->vy     = v1;
-    work->vz     = v2;
+    setVector(work, v0, v1, v2);
     work2->header.mode++;
 }
 
@@ -414,7 +412,7 @@ MATCH void func_801F32B8(void) {
     y         = g_Game.members[0].unk_30.signed_half;
     x         = g_Game.members[0].unk_2E.signed_half;
     selection = D_801F4CE0[index];
-    result    = func_8015CB18(1, 0, selection, x, y);
+    result    = Actor_ClaimSlot(1, 0, selection, x, y);
     if ((u8)result != GAME_NONE) {
         work               = g_Task;
         work->param.unk_0B = result;
@@ -426,17 +424,17 @@ MATCH void func_801F3338(void) {
 }
 
 /* Original sets no mode argument (etc/game/00 revision ignores it); declared
- * arg-less to match. Table is the etc/game/00 ActorSlot table. */
+ * arg-less to match. Table is the etc/game/00 SpawnedActor table. */
 
 MATCH void func_801F3360(void) {
-    s32        actor_slot;
-    ActorSlot* slot;
+    s32           actor_slot;
+    SpawnedActor* slot;
 
-    actor_slot = Actor_FindFreeSlot() & BYTE_MASK;
+    actor_slot = Actor_FindFreeSpawned() & BYTE_MASK;
     if (actor_slot == GAME_NONE) {
         return;
     }
-    slot               = &g_ActorSlots[actor_slot];
+    slot               = &g_SpawnedActors[actor_slot];
     slot->header.flags = 1;
     slot->type         = 0x33;
     slot->pos.x.fixed  = TO_COORD(7);

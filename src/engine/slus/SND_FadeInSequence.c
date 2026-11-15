@@ -10,5 +10,5 @@ MATCH void SND_FadeInSequence(s32 group, s16 sequence, s16 volume, s32 time) {
     }
     D_8018B418 = 0x7FF;
     D_8018B41A = 0x7FF;
-    SsSepSetCrescendo(g_SelectionFxVoices[group & HALF_MASK], sequence, volume, time);
+    SsSepSetCrescendo(g_SelectionEffectVoices[group & HALF_MASK], sequence, volume, time);
 }

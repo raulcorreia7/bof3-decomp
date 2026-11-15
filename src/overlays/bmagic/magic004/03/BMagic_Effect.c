@@ -6,7 +6,53 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/func_801EEC28.h"
 
-INCLUDE_ASM(func_801EEC98);
+#include "overlays/bmagic/Effect_CopyActiveBattlerToSlot.h"
+
+MATCH void func_801EEC98(void) {
+    PartyMember* battler;
+    PartyMember* task;
+    PartyMember* owner;
+    PartyMember* parent;
+    u16*         dst;
+    u16*         src;
+    u32          slot;
+    s32          i;
+
+    g_Task->facing = g_BattleEffectBattler->facing;
+    battler        = g_BattleEffectBattler;
+    task           = g_Task;
+    WorldPos_Copy(&task->pos, &battler->pos);
+    task->param.unk_0B = 0;
+    g_Task->unk_09     = 0;
+    g_Task->header.mode++;
+    func_800AEF98(12, 2);
+    func_801EF490();
+    slot = Battle_AllocEffect(1, 70) & BYTE_MASK;
+    Effect_CopyActiveBattlerToSlot(slot);
+    owner                               = g_Task;
+    g_BattleEffects[slot].header.mode   = 0;
+    g_BattleEffects[slot].header.step   = 0;
+    g_BattleEffects[slot].unk_06        = 1;
+    g_BattleEffects[slot].handler_index = 70;
+    g_BattleEffects[slot].target.party  = owner;
+    g_Task->param.unk_0B++;
+    slot                               = Battle_AllocEffect(1, 70) & BYTE_MASK;
+    parent                             = g_Task;
+    g_BattleEffects[slot].header.mode  = 1;
+    g_BattleEffects[slot].target.party = parent;
+    g_BattleEffects[slot].unk_03       = g_Task->unk_03;
+    g_BattleEffects[slot].unk_04       = g_Task->unk_04;
+    g_Task->param.unk_0B++;
+    g_BattleEffectBattler->header.flags |= ACTOR_FLAG_HIDDEN;
+    g_Battle.state |= BATTLE_STATE_DAMAGE_APPLIED;
+    i   = 0;
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    for (; i < 256; i++) {
+        *dst++ = *src++;
+    }
+    g_GfxPalettePending = 1;
+}
 
 MATCH void func_801EEF8C(void) {
     PartyMember* battler;
@@ -22,9 +68,9 @@ MATCH void func_801EEF8C(void) {
         func_800AEF98(4, 0);
         g_BattleEffectBattler->header.flags &= ~ACTOR_FLAG_HIDDEN;
         Battle_ApplyDamageFlags(LOBU(g_Battle.target_selector), 0x20);
-        SND_QueueSelectionFx(0x100);
+        SND_QueueSelectionEffect(0x100);
         if ((u32)(g_Battle.action_id - 0x85) < 4) {
-            SND_QueueSelectionFx(0x101);
+            SND_QueueSelectionEffect(0x101);
         }
         g_Task->header.mode += 1;
     }
@@ -36,7 +82,7 @@ MATCH void func_801EF158(void) {
     if (g_Task->param.unk_0B == 0) {
         cue = D_801EFE40[g_Task->unk_04];
         if (cue != 0) {
-            SND_QueueSelectionFx(cue);
+            SND_QueueSelectionEffect(cue);
         }
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Task->unk_09 = 0;
@@ -44,7 +90,33 @@ MATCH void func_801EF158(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF1F0);
+MATCH void func_801EF1F0(void) {
+    PartyMember* battler;
+    u8           selector;
+
+    if (g_Task->unk_09 < 12) {
+        Effect_DrawScreenFade();
+        g_Task->unk_09 += 4;
+    }
+    if ((s8)g_Task->unk_5D != 0) {
+        g_Task->unk_5D -= 2;
+    }
+    if ((s8)g_Task->unk_5E != 0) {
+        g_Task->unk_5E -= 2;
+    }
+    if ((s8)g_Task->unk_5F != 0) {
+        g_Task->unk_5F -= 2;
+    }
+    g_PaletteFades[g_Task->timer].offset.red   = g_Task->unk_5D;
+    g_PaletteFades[g_Task->timer].offset.green = g_Task->unk_5E;
+    g_PaletteFades[g_Task->timer].offset.blue  = g_Task->unk_5F;
+    if ((LOWU(g_Task->unk_5C) & ~0xFF) == 0) {
+        BMAGIC_SELECT_TARGET_BATTLER();
+        GFX_FreePaletteFadeTarget(battler);
+        func_800AF814(g_Battle.target_selector);
+        g_Task->header.mode++;
+    }
+}
 
 MATCH void func_801EF3E0(void) {
     u8           slot;
@@ -63,7 +135,60 @@ MATCH void func_801EF3E0(void) {
     func_801E5988();
 }
 
-INCLUDE_ASM(func_801EF490);
+MATCH void func_801EF490(void) {
+    switch (g_Battle.action_id) {
+        case ABILITY_THUNDER_STRIKE:
+            g_Task->unk_03 = 0;
+            g_Task->unk_04 = 0;
+            break;
+        case ABILITY_FLAME_STRIKE:
+            g_Task->unk_03 = 1;
+            g_Task->unk_04 = 1;
+            break;
+        case ABILITY_MIND_FLAY:
+            g_Task->unk_03 = 0;
+            g_Task->unk_04 = 2;
+            break;
+        case ABILITY_WIND_STRIKE:
+            g_Task->unk_03 = 1;
+            g_Task->unk_04 = 3;
+            break;
+        case ABILITY_FROST_STRIKE:
+            g_Task->unk_03 = 0;
+            g_Task->unk_04 = 4;
+            break;
+        case ABILITY_PYROKINESIS:
+            g_Task->unk_03 = 1;
+            g_Task->unk_04 = 5;
+            break;
+        case ABILITY_HOLY_STRIKE:
+            g_Task->unk_03 = 0;
+            g_Task->unk_04 = 6;
+            break;
+        /* FAKE: retail bounds the compare tree above ABILITY_HOLY_STRIKE, so one id there shares the default body; the bytes do not say which id, ABILITY_DEMONBANE is the nearest. */
+        case ABILITY_DEMONBANE:
+        default:
+            g_Task->unk_03 = 0;
+            g_Task->unk_04 = 7;
+            break;
+        case ABILITY_FLAME_CLAW:
+            g_Task->unk_03 = 1;
+            g_Task->unk_04 = 8;
+            break;
+        case ABILITY_FROST_CLAW:
+            g_Task->unk_03 = 1;
+            g_Task->unk_04 = 9;
+            break;
+        case ABILITY_THUNDER_CLAW:
+            g_Task->unk_03 = 1;
+            g_Task->unk_04 = 10;
+            break;
+        case ABILITY_SHINING_CLAW:
+            g_Task->unk_03 = 1;
+            g_Task->unk_04 = 11;
+            break;
+    }
+}
 
 /* func_801EF6E0 */
 #include "overlays/bmagic/Effect_DrawScreenFade.h"
@@ -83,7 +208,21 @@ MATCH void func_801EF910(void) {
 
 #include "overlays/bmagic/Effect_SetDuration.h"
 
-INCLUDE_ASM(func_801EF9E8);
+MATCH void func_801EF9E8(void) {
+    u8 counter;
+
+    Actor_StepAnimOnce();
+    counter        = g_Task->unk_09 - 1;
+    g_Task->unk_09 = counter;
+    if (!(counter & BYTE_MASK)) {
+        if (g_Battle.action_id > 0x84) {
+            func_800AFC98(2, 4);
+        } else {
+            func_800AFC98(0, 4);
+        }
+        g_Task->header.step += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_LowerTickerStepOnReady.h"
 
@@ -135,7 +274,7 @@ MATCH void func_801EFD84(void) {
         count -= 1;
         g_Task->unk_09 = count;
         if (!(count & BYTE_MASK)) {
-            SND_QueueSelectionFx(0x101);
+            SND_QueueSelectionEffect(0x101);
         }
     }
     if (Actor_StepAnimOnce() & BYTE_MASK) {

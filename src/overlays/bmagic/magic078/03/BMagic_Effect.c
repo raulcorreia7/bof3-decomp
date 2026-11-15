@@ -8,25 +8,13 @@ MATCH void func_801EEC04(void) {
     Callback handlers[2] = {func_801EECFC, Effect_PlayOnIdleTick};
     s32      tpage;
 
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(4, 0xC);
 
     SYS_DISPATCH_BYTE(handlers, g_Task->header.mode);
 
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(4, 0xC);
 }
@@ -56,7 +44,7 @@ MATCH void func_801EECFC(void) {
     g_BattleEffects[slot].pos.x.fixed   = actor->pos.x.fixed;
     g_BattleEffects[slot].pos.y.fixed   = actor->pos.y.fixed;
     g_BattleEffects[slot].pos.z.fixed   = actor->pos.z.fixed + TO_COORD(256);
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
     g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
 }
@@ -69,13 +57,7 @@ MATCH void func_801EECFC(void) {
 MATCH void func_801EEF28(void) {
     s32 tpage;
 
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(4, 0xC);
 
@@ -95,13 +77,7 @@ MATCH void func_801EEF28(void) {
         PopMatrix();
     }
 
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(4, 0xC);
 }
@@ -197,16 +173,12 @@ MATCH void func_801EFEB8(void) {
     long         flags;
 
     PushMatrix();
-    work   = g_Task;
-    rot.vx = 0;
-    rot.vy = 0;
-    rot.vz = 0;
+    work = g_Task;
+    setVector(&rot, 0, 0, 0);
     if (work->slot == 13) {
         rot.vz = work->unk_0C;
     }
-    pos.vx = (work->pos.x.fixed >> 9) - 0x4000;
-    pos.vy = (work->pos.y.fixed >> 9) - 0x4000;
-    pos.vz = -COORD_INT(work->pos.z) / 2;
+    setVector(&pos, (work->pos.x.fixed >> 9) - 0x4000, (work->pos.y.fixed >> 9) - 0x4000, -COORD_INT(work->pos.z) / 2);
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);
 }
@@ -214,13 +186,7 @@ MATCH void func_801EFEB8(void) {
 MATCH void func_801EFF84(void) {
     s32 tpage;
 
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(4, 0xC);
 
@@ -232,13 +198,7 @@ MATCH void func_801EFF84(void) {
 
     SYS_DISPATCH_BYTE(D_801F08C4, g_Task->header.step);
 
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(4, 0xC);
 }
@@ -256,7 +216,7 @@ MATCH void Effect_PlayCueAtTick(void) {
 
     count = g_Task->unk_09;
     if ((count & BYTE_MASK) == 8) {
-        SND_QueueSelectionFx(0x101);
+        SND_QueueSelectionEffect(0x101);
         g_Task->header.step += 1;
         return;
     }
@@ -279,7 +239,7 @@ MATCH void Effect_PlayCueOnTimeout(void) {
     work        = g_Task;
     work->timer = work->timer - 1;
     if (work->timer == 0) {
-        SND_QueueSelectionFx(0x102);
+        SND_QueueSelectionEffect(0x102);
         g_Task->header.step = g_Task->header.step + 1;
     }
 }

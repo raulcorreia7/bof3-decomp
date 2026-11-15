@@ -26,7 +26,7 @@ MATCH void func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category,
     func_801AEA80(ux, row & HALF_MASK, s_ItemSpriteIds[icon], flag);
     entry = Item_GetRecord(item_category, item_id_byte);
     text_color &= BYTE_MASK;
-    UI_DrawText(x + 10, record_y, text_color, func_801AF20C(entry) & BYTE_MASK, entry);
+    UI_DrawText(x + 10, record_y, text_color, Game_ReadCommand(entry) & BYTE_MASK, entry);
     count = quantity_byte & BYTE_MASK;
     if (count >= 2U) {
         buffer = (char*)g_UiFormatBuffer;

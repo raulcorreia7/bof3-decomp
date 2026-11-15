@@ -32,14 +32,14 @@ MATCH void func_801E10C8(void) {
         work                               = g_Task;
         g_BattleEffects[slot].target.party = owner;
         Actor_SelectScript((work->facing + 4) & BYTE_MASK);
-        SND_QueueSelectionFx(0x206);
+        SND_QueueSelectionEffect(0x206);
         if (g_Battle.outcome.event_flags == 0) {
-            func_801D9484();
+            Battle_OpenPanel();
             cue = 0x3B;
             if (g_Task->unk_03 == 5) {
                 cue = 0x2E;
             }
-            func_801DE560(2, 0, 0, 45, Message_GetText(cue));
+            Battle_QueueEvent(2, 0, 0, 45, Message_GetText(cue));
         }
         g_Task->unk_03 = 2;
         func_801DEDE4();

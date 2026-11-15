@@ -39,7 +39,7 @@
 /* FAKE: the game images call Area_GetCellCode as s32(s16, s16) and truncate at the call; the area images pass
  * s32 coordinates untruncated, so one prototype cannot serve both (an s16 prototype changes 11 area images). */
 #define AREA_CELL_CODE_S16     ((s32 (*)(s16, s16))Area_GetCellCode)
-#define GAME_TILE_RUN(index)   ((TileRunSet*)g_AreaLoads[(index)])
+#define GAME_TILE_RUN(index)   ((TileRuns*)g_AreaLoads[(index)])
 #define g_AreaLoads            ((void**)g_AreaLoads)
 #define g_RouteSpeedScale      ((u8*)g_RouteSpeedScale)
 
@@ -52,14 +52,14 @@
     if (WINDOW_EFFECT_BUSY()) {                   \
         do {                                      \
             func_801992B8();                      \
-            CallbackWait(1u);                     \
+            SYS_ThreadWait(1u);                   \
         } while (WINDOW_EFFECT_BUSY());           \
     }                                             \
-    CallbackWait(1u);                             \
-    CallbackWait(1u);                             \
+    SYS_ThreadWait(1u);                           \
+    SYS_ThreadWait(1u);                           \
     EMI_LoadArchive(slot);                        \
     while (EMI_IsReady() == 0) {                  \
-        CallbackWait(1u);                         \
+        SYS_ThreadWait(1u);                       \
     }                                             \
     GFX_CopyPalette(1u);                          \
     GFX_CopyPalette(2u);                          \
@@ -119,7 +119,7 @@ typedef enum GameCursorFlags {
     GAME_CURSOR_FLAG_MOVING = 1 << 7,
 } GameCursorFlags;
 
-typedef struct GameResetRecord {
+typedef struct GameReset {
     u8  unk_00;
     u8  unk_01;
     u8  unk_02;
@@ -130,7 +130,7 @@ typedef struct GameResetRecord {
     u8  unk_07;
     u8  unk_08[2];
     s16 unk_0A;
-} GameResetRecord;
+} GameReset;
 
 typedef struct {
     u8  cx;    /* 0x00 */
@@ -165,15 +165,15 @@ typedef struct TileRun {
 
 ASSERT_SIZE(TileRun, TILE_RUN_SIZE);
 
-typedef struct TileRunSet {
+typedef struct TileRuns {
     u8       pad_00[0x2C];
     TileRun* runs; /* 0x2C */
     u8       pad_30;
     u8       last_run; /* 0x31 */
-} TileRunSet;
+} TileRuns;
 
-ASSERT_OFFSET(TileRunSet, runs, 0x2C);
-ASSERT_OFFSET(TileRunSet, last_run, 0x31);
+ASSERT_OFFSET(TileRuns, runs, 0x2C);
+ASSERT_OFFSET(TileRuns, last_run, 0x31);
 
 /* A field search spot: a one-time random zenny find, flagged in the actor so it pays once. The
  * Alt table differs only in the reaction effect its roll starts. */
@@ -212,7 +212,7 @@ typedef struct FieldSearchSpotFadeStates {
 /* A spinning quad at 0x800E4800 + n * 0x38: a centre, a random rotation and four corner offsets that
  * func_8019D8C0 rotates and writes out as screen vertices. */
 typedef struct SpinQuad {
-    Point3D pos;
+    Point3s pos;
     u8      unk_06[0x0A];
     SVECTOR rotation; /* 0x10 */
     SVECTOR corners[4];
@@ -380,15 +380,15 @@ extern s32                       D_80147CBC[];
 extern s32                       D_80147CC0[];
 extern s32                       D_80147CC4[];
 extern u16                       D_801481D8;
-extern Point3DL                  D_801481E8;   /* scene angle, 16.16 fixed point */
-extern Point3DL                  D_801481F8;   /* per-frame step of D_801481E8 */
+extern Point3l                   D_801481E8;   /* scene angle, 16.16 fixed point */
+extern Point3l                   D_801481F8;   /* per-frame step of D_801481E8 */
 extern s16                       D_8014820C;   /* 0x8014820C */
 extern s8                        D_80148654;   /* 0x80148654 */
 extern s8                        D_80148656;   /* 0x80148656 */
 extern s8                        D_801490E0;   /* 0x801490E0 */
 extern u8                        D_801581E0[]; /* 0x801581E0 */
 extern u8*                       g_EncounterZones[];
-extern Point2DL                  g_FacingOffsets[]; /* 0x80181AC0 */
+extern Point2l                   g_FacingOffsets[]; /* 0x80181AC0 */
 extern s8                        D_80181B00[];
 extern s8                        D_80181B01[];
 extern u8                        D_80181B1C[];   /* 0x80181B1C */
@@ -545,18 +545,14 @@ void func_80117004(void);
 void func_80117610(void);
 void func_80117A30(void);
 void func_80117BF4(void);
-void Actor_BeginScript(u8 script_index, u8 position);
 void Area_ClearCell(s32 x, s32 y);
 void func_8015A7E8(void);
 s32  func_8015B870(u8 value);
 void Party_ShowBattlers(void);
-s8   Actor_RunHandler(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 landing_flags);
+s8   Actor_Run(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 landing_flags);
 s32  func_8015CC00(s32 id, s32 step, s32 selection, s32 x, s32 y, s32 z);
 void func_8015D820(u16 cue_id, u8 index);
 void func_80164020(u32 arg0, u32 arg1);
-bool Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
-s32  Item_Count(u8 category, u8 item_id, u8 mode);
-u8   Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode);
 void Party_ResetBattlers(void);
 void Party_ClearActiveBattlers(void);
 void func_80167910(void);
@@ -675,7 +671,8 @@ void    func_8019BFD4(void);
 bool    func_8019C028(void);
 void    func_8019C124(s32 step_byte);
 s32     func_8019C1E4(void);
-s32     func_8019C344(s32 x, s32 y);
+/* func_8019C344 */
+s32     Area_GetVx(s32 x, s32 y);
 s32     func_8019C4F0();
 void    func_8019C620(void);
 void    func_8019C664(void);
@@ -758,10 +755,11 @@ s32     func_801A225C(s32 unused, s32 divisor, s32 flag_bits);
 s32     func_801A22CC(Actor* value_a, s32 value_b, u8 flag_bits);
 s32     func_801A239C(Actor* value_a, s32 value_b, u8 flag_bits);
 s32     func_801A246C(s32 value_a, s32 value_b, s32 flag_bits);
-void    func_801A253C(Actor* entity);
+/* func_801A253C */
+void    Area_SetXFixed(Actor* entity);
 void    func_801A271C(void* record);
 /* Kept (): retail callers load $a0 in the jal delay slot (`addiu a0,s0,116`) and the callee never reads it; with (void)
- * that instruction is dropped (func_801A253C) or the frame shrinks by 8 bytes (func_801A1384). */
+ * that instruction is dropped (Area_SetXFixed) or the frame shrinks by 8 bytes (func_801A1384). */
 void    func_801A275C(void* unused);
 void    func_801A2788(s32 handler_index);
 void    func_801A27C4(Actor* entity);
@@ -783,7 +781,8 @@ void    Game_StartFadeBlack(void);
 void    func_801A386C(void);
 bool    func_801A3AC8(Actor* record);
 void    func_801A3B7C(Actor* entity);
-void    func_801A3F3C(u8* script);
+/* func_801A3F3C */
+void    Area_SetScenarioId(u8* script);
 void    func_801A3FC0(u8* cursor);
 void    func_801A4158(u8* cursor);
 u8*     func_801A42F0(u8* cursor, s8* flag, u8* counter);
@@ -796,7 +795,8 @@ u8*     func_801A46E8(u8* cursor);
 u8*     func_801A4798(u8* script);
 u8*     func_801A4844(u8* script);
 void    func_801A4914(void);
-void    func_801A4990(u8* script);
+/* func_801A4990 */
+void    Actor_SetOptionFlags(u8* script);
 void    func_801A4AA8(void);
 void    func_801A4B80(s32 index);
 u8*     func_801A4BF8(u8* script);
@@ -826,7 +826,7 @@ s8      func_801A8728(s32 entry_x, s32 entry_y);
 bool    func_801A8A98(s32 candidate_x, s32 candidate_y);
 s8      func_801A8B84(s32 handler_x, s32 handler_y);
 /* func_801A8CB4 */
-s8      Game_CallAreaHandler(s32 handler_x, s32 handler_y);
+s8      Game_CallArea(s32 handler_x, s32 handler_y);
 u8      func_801A8D38(void* sub, s32 target);
 u8      func_801A8F94(ScriptState* state, u8* base, s32 seed);
 void    func_801A96E4(ScriptState* state, u8* base);
@@ -874,7 +874,6 @@ void    func_801ADCF4(u8 actor_slot);
 void    GFX_DrawLine(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b, s32 blend);
 /* func_801AF270 */
 u8*     UI_GetSpriteRect(u8 sprite_id, u8 flags);
-void    UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool    func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id);
 void    func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
 
@@ -1047,9 +1046,10 @@ void  func_801BD83C(void);
 bool  func_801BD938(void);
 void  func_801BDBC4(void);
 s16   func_801BDCF8(s32 x, s32 y);
-s32   func_801BDF08(void);
+/* func_801BDF08 */
+s32   Area_GetActorFacingStepX(void);
 void  func_801BE574(s32 count, u8* ids);
-void  func_801BE710(GameResetRecord* record);
+void  func_801BE710(GameReset* record);
 void  Party_SwapMembers(u32 slot_a, u32 slot_b, u32 skip_state);
 void  Party_SwapBattlerRows(s32 slot_a, s32 slot_b, s32 skip_state);
 void  func_801BEBB0(void);
@@ -1075,9 +1075,8 @@ void  func_801C0D34(void);
 void  func_801C0D54(void);
 s32   func_801C0E48(void);
 s32   func_801C0F9C(u8 source_row);
-/* func_801C1254 */
-void  Party_LoadMemberSprite(s32 character_id, s32 party_slot);
-void  func_801C16B8(void);
+/* func_801C16B8 */
+void  Char_RebuildPartyStats(void);
 void  func_801C1840(void);
 void  func_801C1E88(s32 key, s32* counter);
 void  func_801C1F4C(s32 key);
@@ -1089,7 +1088,8 @@ bool  func_801C27E0(s8 tuning_delta);
 bool  func_801C2894(s8 tuning_delta);
 s32   func_801C2AAC(void);
 s32   func_801C2B4C(void);
-void  func_801C2E34(u8 index);
+/* func_801C2E34 */
+void  Char_SetCharacterId(u8 index);
 void  func_801C308C(s32 arg);
 void  func_801C3154(void);
 void  func_801C3204(void);
@@ -1144,7 +1144,8 @@ s32   Area_RollEncounterEnemies(s32 candidate_id);
 bool  Area_PlaceEncounterEnemies(void);
 bool  func_801C6DCC(void);
 bool  func_801C6EE0(s32 entry_count, s32 pos_x, s32 pos_y, s32 reach);
-u32   func_801C6FD4(s32 map_column, s32 map_row);
+/* func_801C6FD4 */
+u32   Area_GetWidth(s32 map_column, s32 map_row);
 bool  func_801C7064(s32 x, s32 y, s32 reach, s32 height);
 s16   func_801C7188(s16 value);
 s32   func_801C71AC(s32 delta);
@@ -1527,18 +1528,18 @@ void  func_801F9DBC(void);
 /* Run the overlay map-load handshake: wait for the loader, switch the window
  * to mode 3, drain the effect loop and run the world/front update slice. */
 static inline void GameRunMapLoadHandshake(void) {
-    CallbackWait(1U);
-    CallbackWait(1U);
+    SYS_ThreadWait(1U);
+    SYS_ThreadWait(1U);
     g_EmiStreamFlags = 0x20;
     EMI_GetArchiveId(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
     while (EMI_IsReady() == 0) {
-        CallbackWait(1U);
+        SYS_ThreadWait(1U);
     }
     UI_SetMode(3U);
     if (WINDOW_EFFECT_BUSY()) {
         do {
             func_801992B8();
-            CallbackWait(1U);
+            SYS_ThreadWait(1U);
         } while (WINDOW_EFFECT_BUSY());
     }
     g_GameEntryState    = 2;

@@ -9,7 +9,7 @@ MATCH void func_801EEC04(void) {
     PartyMember* saved_battler;
     u8           i;
 
-    BMagic_DispatchTaskPair(func_801EED04, Effect_PlayOnZeroTick);
+    BMagic_DispatchTaskPair(func_801EED04, Effect_MarkDamagedOnZeroTick);
 
     for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
         if (D_801EF724[i].header.flags & BMAGIC_EFFECT_IN_USE) {
@@ -26,7 +26,7 @@ MATCH void func_801EEC04(void) {
 
 #include "overlays/bmagic/func_801EED04.h"
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEEF0 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
@@ -40,7 +40,34 @@ MATCH void func_801EEF34(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEFBC);
+/* At the ticker's zero, places the effect on the battler offset by the angle byte 0x0B and starts its fall from a random tint row. */
+MATCH void func_801EEFBC(void) {
+    u8   count;
+    s32  phase;
+    s32  entry;
+    s16* angle_cell;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count == 0) {
+        angle_cell          = &D_1F800004;
+        phase               = g_Task->param.unk_0B & 0xF;
+        *angle_cell         = phase << 8;
+        /* kept: (s16) types the rsin angle; without it GCC folds the two shifts. */
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + ((rsin((s16)(phase << 8)) * 0x8000) >> 12);
+        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + ((rcos(*angle_cell) * 0x8000) >> 12);
+        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+        entry               = RANDOM_MASK(7) * 3;
+        g_Task->unk_5D      = D_801EF700[entry];
+        g_Task->unk_5E      = D_801EF700[entry + 1];
+        g_Task->unk_5F      = D_801EF700[entry + 2];
+        g_Task->unk_14      = 0x80;
+        g_Task->unk_20      = -8;
+        g_Task->unk_09      = 1;
+        g_Task->timer       = 16;
+        g_Task->header.step += 1;
+    }
+}
 
 INCLUDE_ASM(func_801EF138);
 
@@ -50,7 +77,47 @@ MATCH void func_801EF284(void) {
     BMAGIC_SETUP_EFFECT_MATRIX();
 }
 
-INCLUDE_ASM(func_801EF380);
+/* Draw the magic166 star as five flat quads round the effect, each from the centre out to a
+ * point on the outer radius between two on the inner one, tinted by the work tint and the timer. */
+MATCH void func_801EF380(void) {
+    POLY_F4* prim;
+    long     depth;
+    long     flag;
+    s32      i;
+    s32      tpage;
+
+    tpage = getTPage(0, 1, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    D_1F800000.view.effect.params[0] = g_Task->unk_09 * 2;
+    D_1F800000.view.effect.params[1] = g_Task->unk_09 * 4;
+    D_1F800000.view.effect.params[3] = (s8)g_Task->unk_5D * g_Task->timer;
+    D_1F800000.view.effect.params[4] = (s8)g_Task->unk_5E * g_Task->timer;
+    D_1F800000.view.effect.params[5] = (s8)g_Task->unk_5F * g_Task->timer;
+    for (i = 0; i < 10; i += 2) {
+        prim = (POLY_F4*)g_GfxPrimCursor;
+        SetPolyF4(prim);
+        SetSemiTrans(prim, 1);
+        D_1F800014[0].vx = FIXED_MUL(rsin((i + 1) * 409), D_1F800000.view.effect.params[1]);
+        D_1F800014[0].vy = FIXED_MUL(rcos((i + 1) * 409), D_1F800000.view.effect.params[1]);
+        D_1F800014[0].vz = 0;
+        D_1F800014[1].vx = FIXED_MUL(rsin(i * 409), D_1F800000.view.effect.params[0]);
+        D_1F800014[1].vy = FIXED_MUL(rcos(i * 409), D_1F800000.view.effect.params[0]);
+        D_1F800014[1].vz = 0;
+        if (i == 8) {
+            D_1F800000.view.effect.params[2] = 0;
+        } else {
+            D_1F800000.view.effect.params[2] = (i + 2) * 409;
+        }
+        D_1F800014[2].vx = FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+        D_1F800014[2].vy = FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+        D_1F800014[2].vz = 0;
+        setVector(&D_1F800014[3], 0, 0, 0);
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        setRGB0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5]);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_F4));
+    }
+}
 
 /* func_801EF69C */
 #include "overlays/bmagic/BMagic_AllocEffect.h"

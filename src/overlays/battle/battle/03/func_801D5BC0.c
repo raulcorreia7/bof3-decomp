@@ -9,7 +9,7 @@ MATCH u8 func_801D5BC0(void) {
 
     count = 0u;
     for (index = 0u; index < BATTLE_PARTY_CHARACTERS_COUNT; index++) {
-        if ((func_801D64C4(index) == 0u) && (HAS_STATUS(g_Game.members[index], STATUS_POISONED))) {
+        if ((Battle_GetActionLock(index) == 0u) && (HAS_STATUS(g_Game.members[index], STATUS_POISONED))) {
             g_Game.members[index].u.turn.ap_change = 0u;
             g_Game.members[index].u.turn.hp_change = 0u;
             func_801DCEF8(index);
@@ -24,7 +24,7 @@ MATCH u8 func_801D5BC0(void) {
     }
 
     for (index = 3u; index < 11u; index++) {
-        if ((func_801D64C4(index) == 0u) && ((ENEMY_COMBATANT(index).status & STATUS_POISONED) != 0u)) {
+        if ((Battle_GetActionLock(index) == 0u) && ((ENEMY_COMBATANT(index).status & STATUS_POISONED) != 0u)) {
             ENEMY_COMBATANT(index).turn.ap_change = 0u;
             ENEMY_COMBATANT(index).turn.hp_change = 0u;
             func_801DCEF8(index);
@@ -39,8 +39,8 @@ MATCH u8 func_801D5BC0(void) {
     }
 
     if (count != 0u) {
-        func_801D9484();
-        func_801DE560(2u, 0u, 0u, 45u, Message_GetText(0x18u));
+        Battle_OpenPanel();
+        Battle_QueueEvent(2u, 0u, 0u, 45u, Message_GetText(0x18u));
         return true;
     }
 

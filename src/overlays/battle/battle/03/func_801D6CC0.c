@@ -14,7 +14,7 @@ MATCH void func_801D6CC0(void) {
         SND_StopAllSequences();
         SND_PlaySequence(0, 1, 0x64, 0x64);
     }
-    func_801D9484();
+    Battle_OpenPanel();
     func_801DEAE0();
     g_Battle.phase.sub_step += 1u;
 }

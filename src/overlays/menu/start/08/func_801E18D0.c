@@ -13,7 +13,7 @@ MATCH void func_801E18D0(void) {
     func_801E26A8(0x1C, 0x40);
     func_801E2668(0xFF, 0x70, 0x26);
     Menu_DrawCursorSprite((((s8)D_80148655 * 0x30) + 0x76) & 0xFFFE, 42, 0);
-    pressed = PAD_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
+    pressed = INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
     if (pressed & (PADLright | PADLleft)) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         /* Retail reads this byte signed for the toggle test. */

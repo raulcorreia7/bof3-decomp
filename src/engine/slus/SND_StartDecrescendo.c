@@ -10,5 +10,5 @@ MATCH void SND_StartDecrescendo(s32 group, s16 sequence, s16 volume, s32 time) {
     }
     D_8018B418 = 0x3FF;
     D_8018B41A = 0x3FF;
-    SsSepSetDecrescendo(g_SelectionFxVoices[group & HALF_MASK], sequence, volume, time);
+    SsSepSetDecrescendo(g_SelectionEffectVoices[group & HALF_MASK], sequence, volume, time);
 }

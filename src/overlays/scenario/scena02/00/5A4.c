@@ -1,5 +1,7 @@
 #include "scena02_00.h"
 #include "area/map.h"
+#include "area/spad.h"
+#include "overlays/area/Actor_SeedPartySlot.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -107,7 +109,7 @@ MATCH void func_801F9678(void) {
         case 0:
             g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
             func_801BE1B0(26);
-            func_801C601C(1);
+            Area_StartScrollRoute(1);
             g_SceneState.step_05 = 1;
             break;
         case 1:
@@ -359,9 +361,11 @@ MATCH void func_801FCBDC(s32 delta) {
     }
 }
 
-INCLUDE_ASM(func_801FCD14);
+/* Give the lead party member a field actor of type 6: claim a free slot and seed its row from the member. */
+MATCH void func_801FCD14(s32 variant){ACTOR_SEED_PARTY_SLOT(0, D_801FE26C, 6, variant + 112)}
 
-INCLUDE_ASM(func_801FCECC);
+/* Give the lead party member a field actor of type 25: claim a free slot and seed its row from the member. */
+MATCH void func_801FCECC(s32 variant){ACTOR_SEED_PARTY_SLOT(0, D_801FE26C, 25, variant + 104)}
 
 MATCH void func_801FD084(void* record) {
     D_801FE304[((Actor*)record)->callback_index](record, &g_Scenario2Flags);

@@ -24,7 +24,7 @@ MATCH void func_801EEC5C(void) {
     g_BattleEffects[slot].pos.y.fixed  = src->pos.y.fixed;
     g_BattleEffects[slot].pos.z.fixed  = src->pos.z.fixed;
     g_Task->param.unk_0B               = 1;
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionEffect(0x100);
     g_Task->header.mode += 1;
 }
 
@@ -100,4 +100,25 @@ INCLUDE_ASM(func_801EF23C);
 
 #include "overlays/bmagic/Effect_DrawBolt.h"
 
-INCLUDE_ASM(func_801EFC74);
+MATCH void func_801EFC74(void) {
+    POLY_G3* prim;
+    s32*     radius;
+    s32      i;
+
+    D_1F800000 = (rand() & 7) + g_Task->timer * 4;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    i      = 0;
+    radius = &D_1F800000;
+    for (; i < 8; i++) {
+        prim = (POLY_G3*)g_GfxPrimCursor;
+        SetPolyG3(prim);
+        SetSemiTrans(prim, 1);
+        setXY3(prim, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), *radius), g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), *radius),
+               g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 9), *radius), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 9), *radius));
+        setRGB0(prim, g_Task->timer * 8, g_Task->timer * 8, g_Task->timer * 6);
+        setRGB1(prim, 1, 1, 1);
+        setRGB2(prim, 1, 1, 1);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
+    }
+}

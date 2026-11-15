@@ -11,7 +11,7 @@ NON_MATCHING void Battle_AddEnemy(s32 encounter_index, s32 enemy_slot, s32 enemy
     u32*         words_out;
     u32*         words_end;
 
-    source = func_800AC754(encounter_index & BYTE_MASK);
+    source = Battle_FindActorEntry(encounter_index & BYTE_MASK);
     if (source != NULL) {
         words_out = (u32*)&g_BattleEnemyBattlers[enemy_slot & BYTE_MASK];
         words_in  = (u32*)source;

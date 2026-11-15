@@ -74,7 +74,43 @@ MATCH void func_801EF008(void) {
     g_Task->header.step += 1;
 }
 
-INCLUDE_ASM(func_801EF080);
+MATCH void func_801EF080(void) {
+    u8 i;
+    u8 j;
+    u8 slot;
+
+    g_Task->unk_0C += 32;
+    D_1F800000_HALF = g_Task->unk_0C;
+    for (i = 0; i < 8; i++) {
+        if (D_801F0FD4[i + 3] == 0 && !(Battle_SlotIsBlocked((u8)(i + 3)) & BYTE_MASK) && func_801EFDD4(&g_BattleEnemyBattlers[i]) && g_Battle.active_battler != i + 3) {
+            D_801F0FD4[i + 3] = -1;
+            for (j = 0; j < 2; j++) {
+                slot                                   = BMagic_AllocEffect();
+                BMAGIC_EFFECT_SLOTS[slot].target.party = g_BattleEffectBattler;
+                BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
+                BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i + 3;
+                BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = j * 12 + 1;
+                g_BattleEffectBattler->param.unk_0B += 1;
+            }
+        }
+    }
+    for (i = 0; i < 3; i++) {
+        if (D_801F0FD4[i] == 0 && !(Battle_SlotIsBlocked((u8)i) & BYTE_MASK) && func_801EFDD4(&g_Game.members[i]) && g_Battle.active_battler != i) {
+            D_801F0FD4[i] = -1;
+            for (j = 0; j < 2; j++) {
+                slot                                   = BMagic_AllocEffect();
+                BMAGIC_EFFECT_SLOTS[slot].target.party = g_BattleEffectBattler;
+                BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
+                BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;
+                BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = j * 12 + 1;
+                g_BattleEffectBattler->param.unk_0B += 1;
+            }
+        }
+    }
+    if (g_Task->unk_0C > 0x600) {
+        g_Task->header.step += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_TickDownAndClear.h"
 
@@ -134,11 +170,98 @@ INCLUDE_ASM(func_801EF61C);
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
-INCLUDE_ASM(func_801EF74C);
+MATCH void func_801EF74C(void) {
+    POLY_G4* prim;
+    long     depth;
+    long     flag;
+    s32      i;
+    s32      tpage;
 
-INCLUDE_ASM(func_801EFA78);
+    D_1F800000.view.effect.params[0] = g_Task->unk_0C + 0x80;
+    D_1F800000.view.effect.params[1] = g_Task->unk_0C;
+    D_1F800014[1].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[1].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[3].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[1]);
+    D_1F800014[3].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[1]);
+    tpage                            = getTPage(0, 1, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(5, sizeof(DR_MODE));
 
+    for (i = 1; i <= 64; i++) {
+        prim             = GFX_BeginPolyG4(1);
+        D_1F800014[0].vx = D_1F800014[1].vx;
+        D_1F800014[0].vy = D_1F800014[1].vy;
+        D_1F800014[0].vz = 0;
+        setVector(&D_1F800014[1], FIXED_MUL(rsin(i << 6), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(i << 6), D_1F800000.view.effect.params[0]), 0);
+        setVector(&D_1F800014[2], D_1F800014[3].vx, D_1F800014[3].vy, 0);
+        setVector(&D_1F800014[3], FIXED_MUL(rsin(i << 6), D_1F800000.view.effect.params[1]), FIXED_MUL(rcos(i << 6), D_1F800000.view.effect.params[1]), 0);
+        setRGB0(prim, 0x60, 0x60, 0x60);
+        setRGB1(prim, 0x60, 0x60, 0x60);
+        setRGB2(prim, 1, 1, 1);
+        setRGB3(prim, 1, 1, 1);
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        GFX_AddPrim(5, sizeof(POLY_G4));
+    }
+
+    tpage = getTPage(0, 0, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(5, sizeof(DR_MODE));
+}
+
+MATCH void func_801EFA78(void) {
+    POLY_G4* prim;
+    long     depth;
+    long     flag;
+    s32      i;
+    s32      tpage;
+
+    D_1F800000.view.effect.params[2] = g_Task->timer * 6;
+    D_1F800000.view.effect.params[0] = g_Task->unk_0C + 0x40;
+    D_1F800000.view.effect.params[1] = g_Task->unk_0C;
+    D_1F800014[1].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[1].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[3].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[1]);
+    D_1F800014[3].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[1]);
+    tpage                            = getTPage(0, 1, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(5, sizeof(DR_MODE));
+
+    for (i = 1; i <= 16; i++) {
+        prim             = GFX_BeginPolyG4(1);
+        D_1F800014[0].vx = D_1F800014[1].vx;
+        D_1F800014[0].vy = D_1F800014[1].vy;
+        D_1F800014[0].vz = 0;
+        setVector(&D_1F800014[1], FIXED_MUL(rsin(i << 8), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(i << 8), D_1F800000.view.effect.params[0]), 0);
+        setVector(&D_1F800014[2], D_1F800014[3].vx, D_1F800014[3].vy, 0);
+        setVector(&D_1F800014[3], FIXED_MUL(rsin(i << 8), D_1F800000.view.effect.params[1]), FIXED_MUL(rcos(i << 8), D_1F800000.view.effect.params[1]), 0);
+        setRGB0(prim, D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2]);
+        setRGB1(prim, D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2]);
+        setRGB2(prim, 1, 1, 1);
+        setRGB3(prim, 1, 1, 1);
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        GFX_AddPrim(5, sizeof(POLY_G4));
+    }
+
+    tpage = getTPage(0, 0, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(5, sizeof(DR_MODE));
+}
+
+#ifdef NON_MATCHING
+NON_MATCHING s32 func_801EFDD4(void* battler) {
+    Actor* actor = battler;
+    s32    dx;
+    s32    dy;
+    s32    ty;
+
+    dx = (actor->pos.x.fixed >> 9) - (g_Task->pos.x.fixed >> 9);
+    ty = g_Task->pos.y.fixed >> 9;
+    dy = (actor->pos.y.fixed >> 9) - ty;
+    return dx * dx + dy * dy <= SP_REF(s16, 0) * SP_REF(s16, 0);
+}
+#else
 INCLUDE_ASM(func_801EFDD4);
+#endif
 
 /* func_801EFE38 */
 #include "overlays/bmagic/BMagic_AllocEffect.h"

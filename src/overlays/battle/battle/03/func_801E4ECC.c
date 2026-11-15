@@ -2,7 +2,7 @@
 
 MATCH void func_801E4ECC(void) {
     if ((D_801CA71C[g_Battle.action_id].mask & 0x800u) == 0u) {
-        func_801E3160();
+        Battle_IsEnemyBlockedOnce();
     }
     g_Task->unk_09 += 1u;
 }

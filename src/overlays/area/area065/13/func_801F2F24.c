@@ -3,5 +3,5 @@
 #include "overlays/area/Area_RunCellKindStep.h"
 
 MATCH void func_801F2F24(void) {
-    AREA_RUN_CELL_KIND_STEP(D_801F5274);
+    AREA_RUN_CELL_TYPE_STEP(D_801F5274);
 }

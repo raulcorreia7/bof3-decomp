@@ -14,7 +14,7 @@ that no longer occurs, so the list only shrinks. Rename the identifier, then del
 vocabulary rejects where another word is decided ([vocabulary](../docs/naming.md#vocabulary)),
 and a parameter must be named. An identifier that already exists at ``REF`` is not a new name:
 this check only stops new debt, the rename map clears the old. A file that changes must not gain a
-``FIELD``/``SP_REF``/``SP`` use either: the member of the record or of the scratchpad view is the
+``FIELD``/``SP_REF``/``SP`` use either, outside a draft body (a draft keeps the best form reached): the member of the record or of the scratchpad view is the
 form to write, so those uses can only shrink (plan section AY). A rebuild that moves an existing
 use changes no count, so it passes.
 
@@ -170,10 +170,21 @@ def offset_macros(text: str) -> set[str]:
     return {m.group(1) for m in OFFSET_MACRO.finditer(SKIP.sub(" ", text))}
 
 
+DRAFT_BRANCH = re.compile(
+    r"^[ \t]*#[ \t]*ifdef[ \t]+NON_MATCHING\b.*?(?=^[ \t]*#[ \t]*(?:else|endif))",
+    re.S | re.M,
+)
+
+
+def without_drafts(text: str) -> str:
+    """``text`` with each draft body (the first branch of ``#ifdef NON_MATCHING``) blank."""
+    return DRAFT_BRANCH.sub(lambda m: "\n" * m.group().count("\n"), text)
+
+
 def macro_counts(text: str) -> dict[str, int]:
     """``FIELD``/``SP_REF``/``SP`` uses in code, per macro name."""
     counts: dict[str, int] = {}
-    for match in OFFSET_MACRO.finditer(SKIP.sub(" ", text)):
+    for match in OFFSET_MACRO.finditer(SKIP.sub(" ", without_drafts(text))):
         counts[match.group(1)] = counts.get(match.group(1), 0) + 1
     return counts
 
@@ -195,6 +206,22 @@ def changed_paths(ref: str) -> list[str]:
         text=True,
     ).stdout
     return [path for path in out.split() if path]
+
+
+def renamed_from(ref: str) -> dict[str, str]:
+    """Maps each path under include/ or src/ that a change renames to its path at ``ref``."""
+    out = subprocess.run(
+        ["git", "diff", "--name-status", "-M", f"{ref}...HEAD", "--", *ROOTS],
+        check=False,
+        capture_output=True,
+        text=True,
+    ).stdout
+    moved: dict[str, str] = {}
+    for line in out.splitlines():
+        fields = line.split("\t")
+        if fields[0].startswith("R") and len(fields) == 3:
+            moved[fields[2]] = fields[1]
+    return moved
 
 
 def base_text(ref: str, path: str) -> str:
@@ -299,9 +326,12 @@ def main(argv: list[str]) -> int:
                     file=sys.stderr,
                 )
                 bad = 1
+        moved = renamed_from(argv[1])
         for path in changed_paths(argv[1]):
-            before = macro_counts(base_text(argv[1], path))
-            after_text = Path(path).read_text(encoding="utf-8", errors="replace")
+            before = macro_counts(base_text(argv[1], moved.get(path, path)))
+            after_text = without_drafts(
+                Path(path).read_text(encoding="utf-8", errors="replace")
+            )
             after = macro_counts(after_text)
             grown = {name: after[name] - before.get(name, 0) for name in after}
             for name, extra in sorted(grown.items()):

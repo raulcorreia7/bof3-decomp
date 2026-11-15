@@ -4,7 +4,26 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(SAVE_AccessFile);
+MATCH void BMagic_UpdateRottenBreath(void) {
+    Magic010SharedSteps handlers = D_801EEC04;
+    PartyMember*        saved_task;
+    PartyMember*        saved_battler;
+    u8                  i;
+
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        if (BMAGIC_EFFECT_SLOTS[i].header.flags & BMAGIC_EFFECT_IN_USE) {
+            saved_task            = g_Task;
+            saved_battler         = g_BattleEffectBattler;
+            g_Task                = (PartyMember*)&BMAGIC_EFFECT_SLOTS[i];
+            g_BattleEffectBattler = BMAGIC_EFFECT_SLOTS[i].target.party;
+            func_801EF330();
+            g_BattleEffectBattler = saved_battler;
+            g_Task                = saved_task;
+        }
+    }
+}
 
 INCLUDE_ASM(func_801EED44);
 
@@ -59,7 +78,7 @@ MATCH void func_801EF0B8(void) {
     g_BattleEffects[effect_index].header.mode  = 1;
     g_BattleEffects[effect_index].target.party = task;
     g_Task->timer                              = slot;
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionEffect(0x100);
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;
     g_Task->header.step += 1;
@@ -151,7 +170,41 @@ MATCH void func_801EF614(void) {
     g_Task->unk_04       = 0;
 }
 
-INCLUDE_ASM(func_801EF6A0);
+/* Draws the effect glow as one textured quad around its screen point; the radius grows with the timer up to 0x40. */
+MATCH void func_801EF6A0(void) {
+    POLY_GT4* prim;
+    s16*      shade;
+    s32       tpage;
+
+    tpage = getTPage(0, 2, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    prim = (POLY_GT4*)g_GfxPrimCursor;
+    SetPolyGT4(prim);
+    if (g_Task->unk_09 < 8) {
+        D_1F800000.view.effect.params[0] = (g_Task->unk_09 + 1) * 8;
+    } else {
+        D_1F800000.view.effect.params[0] = 0x40;
+    }
+    shade                            = &D_1F800000.view.effect.params[4];
+    *shade                           = 0x80;
+    D_1F800000.view.effect.params[2] = g_Task->unk_2E.half;
+    D_1F800000.view.effect.params[3] = g_Task->unk_30.half;
+    setXY4(prim, D_1F800000.view.effect.params[2] + FIXED_MUL(rsin(0xC00), D_1F800000.view.effect.params[0]),
+           D_1F800000.view.effect.params[3] + FIXED_MUL(rcos(0xC00), D_1F800000.view.effect.params[0]), D_1F800000.view.effect.params[2] + FIXED_MUL(rsin(0x800), D_1F800000.view.effect.params[0]),
+           D_1F800000.view.effect.params[3] + FIXED_MUL(rcos(0x800), D_1F800000.view.effect.params[0]), D_1F800000.view.effect.params[2] + FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]),
+           D_1F800000.view.effect.params[3] + FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]), D_1F800000.view.effect.params[2] + FIXED_MUL(rsin(0x400), D_1F800000.view.effect.params[0]),
+           D_1F800000.view.effect.params[3] + FIXED_MUL(rcos(0x400), D_1F800000.view.effect.params[0]));
+    prim->tpage = GetTPage(0, 2, 832, 256);
+    prim->clut  = GetClut(0, 506);
+    setUVWH(prim, 1, 1, 30, 30);
+    setRGB0(prim, *shade, *shade, *shade);
+    setRGB1(prim, *shade, *shade, *shade);
+    setRGB2(prim, *shade, *shade, *shade);
+    setRGB3(prim, *shade, *shade, *shade);
+    SetSemiTrans(prim, 1);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_GT4));
+}
 
 /* func_801EFA20 */
 #include "overlays/bmagic/BMagic_AllocEffect.h"

@@ -8,6 +8,6 @@ MATCH void EMI_LoadSoundCues(void) {
         g_EmiLoadArg = g_EmiBanks[D_80146483].cue_table;
     }
 
-    EMI_CopySectorData();
+    EMI_CopySector();
     EMI_LOADER_STEP += 1;
 }

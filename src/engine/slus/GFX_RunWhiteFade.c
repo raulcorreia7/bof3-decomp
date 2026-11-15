@@ -30,7 +30,7 @@ MATCH void GFX_RunWhiteFade(s32 delta, s32 semi_trans, s32 order) {
     step       = delta16;
     blend_mode = 1;
     while ((GFX_UpdateScreenFade(&level, step, semi_trans_copy & BYTE_MASK, order_copy & BYTE_MASK, blend_mode) & BYTE_MASK) == 0) {
-        CallbackWait(1);
+        SYS_ThreadWait(1);
     }
     if (step > 0) {
         D_80143E07 = 0xFF;
@@ -40,5 +40,5 @@ MATCH void GFX_RunWhiteFade(s32 delta, s32 semi_trans, s32 order) {
         D_80143D76 = 0xFF;
         D_80143D75 = 0xFF;
     }
-    CallbackExit();
+    SYS_ThreadExit();
 }

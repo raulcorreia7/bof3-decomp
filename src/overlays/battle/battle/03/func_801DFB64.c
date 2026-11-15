@@ -4,7 +4,7 @@ MATCH void func_801DFB64(void) {
     volatile u16* gate;
     u16           half;
 
-    if (func_801DEE4C() != 0u) {
+    if (Battle_IsPartyMemberBlocked() != 0u) {
         gate = &g_Battle.state;
         if ((*gate & BATTLE_STATE_CRITICAL) != 0u) {
             Battle_AllocEffect(0, 2);

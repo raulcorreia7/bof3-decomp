@@ -6,6 +6,8 @@
 #include "overlays/bmagic/bmagic.h"
 
 extern BMagicEffectFuncs D_801EEC04;
+/* The first scratchpad word: the ring radius func_801EF424 stages. */
+extern s32               D_1F800000_WORD[];
 extern Callback          D_801F0360[];
 
 void func_801EF424(void);

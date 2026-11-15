@@ -10,9 +10,9 @@ MATCH void func_801E44D4(void) {
     BATTLE_CURRENT_ENEMY_PTR->turn.hp_change = 0;
     work->unk_0C                             = -0x2000;
     work->unk_10                             = 0;
-    func_801DD350(work);
+    Effect_RotatePosition(work);
     g_Task->timer = 4;
-    func_801E30F8();
+    Battle_IsEnemyBlocked();
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 5));
     g_Task->unk_03 += 1;
 }

@@ -9,7 +9,7 @@ MATCH void func_801F4C18(void) {
         g_Task->direction_08 ^= 4;
         g_ScriptState->unk_07 = -g_ScriptState->unk_07;
     }
-    func_801ABBA8(g_ScriptState, g_Task->direction_08);
+    Area_MoveActorRoute(g_ScriptState, g_Task->direction_08);
     work = g_Task;
     work->unk_04 += 1;
     work->vz = 0;

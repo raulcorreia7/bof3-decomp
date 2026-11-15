@@ -15,5 +15,5 @@ MATCH void Fishing_QuitSlideIn(void) {
     }
     Fishing_DrawDimScreen();
     Fishing_DrawWindowFrame(MENU_HEADER_X, (MENU_HEADER_Y - (FISHING_STATE->step_timer_09 * 8)) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0U);
-    UI_DrawText(29, 21 - (FISHING_STATE->step_timer_09 * 8), 0, 255U, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MSG_QUIT_PROMPT));
+    UI_DrawText(29, 21 - (FISHING_STATE->step_timer_09 * 8), 0, 255U, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_QUIT_PROMPT));
 }

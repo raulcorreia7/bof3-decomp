@@ -6,6 +6,6 @@ MATCH void func_800C2FA4(void) {
     } else {
         func_801E30F8();
         Area_AddActor();
-        func_800C3284();
+        Boss_CopyEffectTransform();
     }
 }

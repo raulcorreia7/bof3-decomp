@@ -1,3 +1,7 @@
 #include "area172_13.h"
 
-INCLUDE_ASM(func_801F36C0);
+#include "overlays/area/Area_DrawRadialLight.h"
+
+MATCH void func_801F36C0(void* position, s32 radius, s32 colors) {
+    Area_DrawRadialLight(position, radius, colors, 4);
+}

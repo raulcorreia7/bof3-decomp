@@ -13,5 +13,5 @@ MATCH void func_8009FAE4(void) {
     *flags     = value | 0x4000;
     D_801463CA = a;
     D_801463CB = b;
-    func_800A3F28();
+    Battle_MarkDamageApplied();
 }

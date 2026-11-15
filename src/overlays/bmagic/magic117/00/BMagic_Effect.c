@@ -6,7 +6,16 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/func_801EEC24.h"
 
-INCLUDE_ASM(func_801EEC90);
+MATCH void func_801EEC90(void) {
+    PartyMember** actor;
+
+    actor = &g_Battle.selected_actor;
+    GFX_FreePaletteFadeTarget(*actor);
+    g_Task->param.unk_0B = GFX_AllocPaletteFade(*actor, 0, 0, 0, 1);
+    g_Task->unk_09       = 0;
+    g_Task->timer        = 2;
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801EED2C(void) {
     /* kept: a helper taking the step shares func_801EF0F8's body but drops retail's 16-byte frame here, 4 bytes
@@ -19,7 +28,20 @@ MATCH void func_801EED2C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEE40);
+MATCH void func_801EEE40(void) {
+    g_PaletteFades[g_Task->param.unk_0B].offset.red--;
+    g_PaletteFades[g_Task->param.unk_0B].offset.green--;
+    g_PaletteFades[g_Task->param.unk_0B].offset.blue--;
+    if (--g_Task->unk_09 == 0) {
+        if (--g_Task->timer != 0) {
+            g_Task->header.mode--;
+        } else {
+            GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
+            func_800AF814(g_Battle.target_selector);
+            g_Task->header.mode++;
+        }
+    }
+}
 
 #include "shared/Effect_PlayOnce.h"
 

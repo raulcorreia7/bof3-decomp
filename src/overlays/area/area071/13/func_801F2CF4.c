@@ -4,10 +4,10 @@
 MATCH void func_801F2CF4(void) {
     u8 index;
 
-    index                  = Actor_FindFreeSlot();
+    index                  = Actor_FindFreeSpawned();
     D_1F800000.view.raw[0] = index;
     if (index != GAME_NONE) {
-        g_ActorSlots[index].header.flags          = 1;
-        g_ActorSlots[D_1F800000.view.raw[0]].type = 0x25;
+        g_SpawnedActors[index].header.flags          = 1;
+        g_SpawnedActors[D_1F800000.view.raw[0]].type = 0x25;
     }
 }

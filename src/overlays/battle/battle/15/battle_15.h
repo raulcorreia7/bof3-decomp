@@ -11,6 +11,9 @@
 #include "menu/draw.h"
 #include "menu/clock.h"
 
+/* FAKE: the callers pass the counter as volatile and the delta as s32, which the real prototype (u16*, s16) lacks. */
+#define Char_AddStat                   ((s16 (*)(volatile u16*, s32))Char_AddStat)
+
 /* retail addresses */
 
 #define BATTLE_SELECTION_SLOT_MASK     0x7F
@@ -31,11 +34,11 @@
 
 /* Entry table at D_8014688E with its parallel id byte table at D_8014691A:
  * thirty records of stride 0x98, kind 7 marks a live entry
- * (func_800AC754, func_800AC7D0). */
+ * (Battle_FindActorEntry, func_800AC7D0). */
 #define BATTLE_ENTRY_STRIDE            0x98
 #define BATTLE_ENTRY_COUNT             30
 /* The kind byte of a live entry; the other kinds are unproven. */
-#define BATTLE_ENTRY_KIND              7
+#define BATTLE_ENTRY_TYPE              7
 
 /* The hit-chance formula's quantities, in percentage points: the threshold is
  * the seeded roll's fifth over the base, capped at the max; the rate is the
@@ -101,18 +104,18 @@ typedef volatile struct BattleSelectionPlayer {
  * func_800AFB48: +0x24 bit 2 selects the second 0x80037800 cell bank, +0x27 is
  * the quotient/remainder source and +0x28 indexes D_800B6C28/D_800B6C30/
  * D_800B6C38. */
-typedef struct BattleSpriteCellRecord {
+typedef struct BattleSpriteCell {
     u8 pad_00[0x24]; /* +0x00 .. +0x23 */
     u8 flags_24;     /* +0x24 bit 2 selects the +0x10 bank */
     u8 pad_25[2];    /* +0x25 .. +0x26 */
     u8 cell_value;   /* +0x27 quotient/remainder source */
     u8 bank_index;   /* +0x28 cell-table index */
-} BattleSpriteCellRecord;
+} BattleSpriteCell;
 
-ASSERT_OFFSET(BattleSpriteCellRecord, flags_24, 0x24);
-ASSERT_OFFSET(BattleSpriteCellRecord, cell_value, 0x27);
-ASSERT_OFFSET(BattleSpriteCellRecord, bank_index, 0x28);
-ASSERT_SIZE(BattleSpriteCellRecord, 0x29);
+ASSERT_OFFSET(BattleSpriteCell, flags_24, 0x24);
+ASSERT_OFFSET(BattleSpriteCell, cell_value, 0x27);
+ASSERT_OFFSET(BattleSpriteCell, bank_index, 0x28);
+ASSERT_SIZE(BattleSpriteCell, 0x29);
 
 typedef struct BattleWork {
     u8  unk_00[0x08];
@@ -146,7 +149,7 @@ ASSERT_SIZE(BattleStatDisplayTemplate, 0x18);
  * are the g_Task stores in func_800ADD44 (retail asm byte/half/word
  * widths, matching its exact twin func_800ADA4C). +0x120/+0x124/+0x128 alias
  * D_80145FB0 (u8), D_80145FB4[i].flags (u32) and D_80145FB8[i].flags
- * (u32); 0x9F..0xA3 is the element-slot byte run func_800A2AE0 reads. */
+ * (u32); 0x9F..0xA3 is the element-slot byte run Battle_GetFireResistance reads. */
 typedef struct BattlePlayerDamageStatus {
     volatile u32 flags;
     volatile u32 flags_04;
@@ -310,9 +313,9 @@ typedef struct BattleTemplateStats {
 } BattleTemplateStats;
 
 /* Enemy battler records (stride 0x118), one per battler slot. */
-typedef struct BattleEnemyRecord {
+typedef struct BattleEnemy {
     u8 unk_00[0x118];
-} BattleEnemyRecord;
+} BattleEnemy;
 
 /* The same cell read without the reload is g_BattleWorkCell: func_800A36F0's
  * save/restore keeps the plain word. A second name is the only form that keeps
@@ -578,6 +581,9 @@ extern u8                   D_80148656;
 extern volatile u8          D_80150000[];
 extern u8*                  D_801C893C[];
 extern u8*                  D_801C8950[];
+extern u8*                  g_MenuEquipTitles[5];
+extern u8                   g_MenuEquipChoiceIds[];
+extern u8                   g_MenuEquipChoiceCounts[];
 extern u8*                  g_MenuInventoryTitles[5];
 extern char                 g_MenuInventoryCountFormat[];
 extern u8                   D_801C90ED[];
@@ -614,15 +620,15 @@ extern BattleTemplateStats  g_BattleTemplateStats[]; /* 0x801EC364 */
 /* The battle program's handler tables call these functions. */
 void        func_80096F3C(void);
 void        func_80096F78(void);
-void        func_80096FBC(void);
-void        func_8009704C(void);
+void        Battle_SetCommandType(void);
+void        Battle_GetPanelPosX(void);
 void        func_8009761C(void);
 void        func_8009773C(void);
-void        func_80097778(void);
+void        Battle_SetCommandId(void);
 void        func_80097844(void);
 void        func_800979E4(void);
-void        func_80097C0C(void);
-void        func_80097CBC(void);
+void        Battle_ResetSelectionLatch(void);
+void        Battle_SetPhaseStep(void);
 void        func_80097D1C(void);
 void        func_80097D58(void);
 void        func_80097DC0(void);
@@ -675,7 +681,7 @@ void        Battle_ScaleEnemyStat(void* battler, s32 rate_type, s32 rate_percent
 void        func_8009CF80(u8* record, s32 index, s32 new_value);
 /* func_8009CFEC */
 void        Battle_MergeEnemyPanels(void);
-void        func_8009DCC8(void);
+void        Battle_ApplyAbilityDamage(void);
 extern void func_8009DE18(void);
 void        func_8009DE8C(void);
 extern void func_8009E500(void);
@@ -683,18 +689,18 @@ extern void func_8009E500(void);
 void        Battle_HalveDamage(void);
 void        func_8009F6EC(void);
 extern void func_800A0378(void);
-s16         func_800A2880(u8 unused, u8 battler_index, u16 base_value, u8 element_flag);
-s16         func_800A2AE0(u8 battler_index, u16 element_mask);
+s16         Battle_GetActionId(u8 unused, u8 battler_index, u16 base_value, u8 element_flag);
+s16         Battle_GetFireResistance(u8 battler_index, u16 element_mask);
 s16         func_800A2EF0(u8 battler_index, u16 element_mask);
 s32         func_800A30E8(u8 unused, u8 battler_index);
 void        func_800A31E0(u8 selection_kind, u16 input_mask);
 bool        func_800A3638(s32 battler_index, s32 compare_value);
 u8          func_800A36BC(s32 battler_index, s32 compare_value);
 u16         func_800A36F0(u8 battler_index, u16 flags);
-extern void func_800A39B4(s16 delta, u8 battler_index);
-u8          func_800A3A10(u8 battler_index, u8 selection_kind);
+extern void Battle_SetTarget(s16 delta, u8 battler_index);
+u8          Battle_PickAbility(u8 battler_index, u8 selection_kind);
 u8          func_800A3C9C(u8 battler_index, u8 selection_kind);
-void        func_800A3F28(void);
+void        Battle_MarkDamageApplied(void);
 u8          func_800A403C(u8 battler_index);
 u8          func_800A41D8(s32 input_mask);
 u8          func_800A4238(s32 input_mask);
@@ -741,7 +747,7 @@ u8          func_800A6D84(void);
 void        func_800A6E14(u8 value);
 void        func_800A7C14(u8 slot);
 extern u8   func_800A805C(void);
-extern void func_800A82F8(void);
+extern void Battle_SetGeneCount(void);
 void        func_800A83F8(void);
 void        func_800A8450(void);
 void        func_800A84FC(void);
@@ -831,12 +837,9 @@ void        func_800B258C(void);
 void        Menu_DrawInventoryWindow(MenuPanelTask* task);
 void        func_800B2C90(MenuPanelTask* task);
 void        func_800B3324(u8, u16, u16, s32, s32, MenuPanelTask*);
-void        func_800B3AE8(MenuPanelTask* task);
+/* func_800B3AE8 */
+void        Menu_DrawEquipChoiceWindow(MenuPanelTask* task);
 void        func_800B4220(s16 x, s16 y, u8 selected);
-/* func_801650B4 */
-bool        Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
-extern s16  Char_AddStat(volatile u16* arg0, s32 arg1);
-extern void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool        func_801AF494(u8 arg0, u8 arg1, u8 arg2, u8 arg3);
 void        func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
 void        func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
@@ -891,6 +894,7 @@ extern u32  Battle_IsEnemyDefeated(u32 bit_index);
 extern void func_800B1DAC(s16 x, s16 y, u8 sprite_arg);
 s32         func_801DDE7C(u8 index, u16 packed_value);
 extern u8   g_BattleUIStep_nv;
+extern u8   D_80145F20[];
 
 /* Store half the calculated damage and queue its animation. */
 static inline void BattleApplyHalfDamage(s32 anim) {
@@ -939,11 +943,11 @@ static inline void Battle_DispatchEffect(BattleEffectSteps* table) {
     BattleEffectSteps handlers;
     PartyMember*      work;
 
-    handlers      = *table;
-    work          = (PartyMember*)g_Task;
-    g_ScriptTable = BATTLE_SCRIPT_TABLE;
+    handlers  = *table;
+    work      = (PartyMember*)g_Task;
+    g_Scripts = BATTLE_SCRIPT_TABLE;
     ((Callback*)&handlers)[work->header.mode]();
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 /* Reset the three selection bytes once the lock at -0x7A8D is clear, then run
@@ -1026,7 +1030,7 @@ static inline void BattleSetSelectionFlag(u32 flag) {
     BattleTurn* record;
     u8          one;
 
-    if (func_800A3A10(g_Battle.active_battler, g_Battle.target) == 0) {
+    if (Battle_PickAbility(g_Battle.active_battler, g_Battle.target) == 0) {
         mode = *(u8*)&g_Battle.target;
         if (mode < 3u) {
             g_Game.members[mode].u.turn.action_flags.value |= flag;
@@ -1042,7 +1046,7 @@ static inline void BattleSetSelectionFlag(u32 flag) {
         record->target_flags = one;
         Battle_QueueAction(0, g_Battle.target);
     }
-    func_800A3F28();
+    Battle_MarkDamageApplied();
 }
 
 /* Run the handler-quad row at offset with the spad step. */
@@ -1069,6 +1073,10 @@ static inline void Battle_SeedQueuedSlotPanel(u8 unk14, u8 unk08) {
 u8 func_800A40D0(u8 battler_index);
 
 u8 func_800AED5C(s32 arg0, u32 battler_index);
+
+volatile u8* Battle_FindActorEntry(u8 entry_id);
+void         Battle_MoveRangeToward(BattleRange* target, s32 step);
+u8           Battle_SelectStepRule(void);
 
 /* Add the queued text message and advance the battle UI state. The member declares temp. */
 #define BATTLE_ADD_MESSAGE_AND_STEP() \

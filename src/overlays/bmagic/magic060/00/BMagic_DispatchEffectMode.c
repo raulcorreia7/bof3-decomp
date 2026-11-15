@@ -38,7 +38,25 @@ MATCH void func_801F0090(void) {
 
 #include "overlays/bmagic/Effect_TickOnTimerZero.h"
 
-INCLUDE_ASM(func_801F012C);
+/* The shade the screen tile fades to. */
+#define SCREEN_SHADE D_1F800000.view.scenario.math_04
+
+MATCH void func_801F012C(void) {
+    TILE* tile;
+
+    GFX_AddDitheredDrawMode(3, getTPage(0, 2, 320, 256));
+    tile = (TILE*)g_GfxPrimCursor;
+    SetTile(tile);
+    SetSemiTrans(tile, 1);
+    tile->w      = SCREEN_WIDTH;
+    tile->y0     = 0;
+    tile->x0     = 0;
+    tile->h      = SCREEN_HEIGHT;
+    SCREEN_SHADE = g_Task->unk_09;
+    setRGB0(tile, SCREEN_SHADE, SCREEN_SHADE, SCREEN_SHADE);
+    GFX_AddPrim(3, sizeof(TILE));
+    GFX_AddDitheredDrawMode(3, getTPage(0, 0, 320, 256));
+}
 
 MATCH void func_801F0254(void) {
     SYS_DISPATCH_BYTE(D_801F0BCC, g_Task->header.step);
@@ -85,7 +103,35 @@ MATCH void func_801F03BC(void) {
     }
 }
 
-INCLUDE_ASM(func_801F0428);
+/* Draws the turning grey square at the screen centre: four corners a quarter turn apart
+ * on a circle that grows with byte 0x09, shaded by a third of it. */
+MATCH void func_801F0428(void) {
+    POLY_G4* prim;
+    u8       shade;
+
+    GFX_AddDitheredDrawMode(3, getTPage(0, 2, 320, 256));
+    prim                             = GFX_BeginPolyG4(1);
+    D_1F800000.view.scenario.math_00 = g_Task->unk_09 * 3 + 18;
+    D_1F800000.view.scenario.math_08 = ((g_Task->unk_09 + 6) & 0x1F) << 7;
+    setXY0(prim, FIXED_MUL(rsin(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00) + 160, FIXED_MUL(rcos(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00) + 120);
+    D_1F800000.view.scenario.math_08 = ((g_Task->unk_09 + 14) & 0x1F) << 7;
+    prim->x1                         = FIXED_MUL(rsin(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00) + 160;
+    prim->y1                         = FIXED_MUL(rcos(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00) + 120;
+    D_1F800000.view.scenario.math_08 = ((g_Task->unk_09 + 30) & 0x1F) << 7;
+    prim->x2                         = FIXED_MUL(rsin(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00) + 160;
+    prim->y2                         = FIXED_MUL(rcos(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00) + 120;
+    D_1F800000.view.scenario.math_08 = ((g_Task->unk_09 + 22) & 0x1F) << 7;
+    prim->x3                         = FIXED_MUL(rsin(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00) + 160;
+    prim->y3                         = FIXED_MUL(rcos(D_1F800000.view.scenario.math_08), D_1F800000.view.scenario.math_00) + 120;
+    shade                            = g_Task->unk_09 / 3;
+    D_1F800000.view.scenario.math_04 = shade * 6;
+    setRGB0(prim, D_1F800000.view.scenario.math_04, D_1F800000.view.scenario.math_04, D_1F800000.view.scenario.math_04);
+    setRGB1(prim, D_1F800000.view.scenario.math_04, D_1F800000.view.scenario.math_04, D_1F800000.view.scenario.math_04);
+    setRGB2(prim, D_1F800000.view.scenario.math_04, D_1F800000.view.scenario.math_04, D_1F800000.view.scenario.math_04);
+    setRGB3(prim, D_1F800000.view.scenario.math_04, D_1F800000.view.scenario.math_04, D_1F800000.view.scenario.math_04);
+    GFX_AddPrim(3, sizeof(POLY_G4));
+    GFX_AddDitheredDrawMode(3, getTPage(0, 0, 320, 256));
+}
 
 MATCH void func_801F07E8(void) {
     SYS_DISPATCH_TASK(g_BMagicEffectModes + 11, 2, g_Task);

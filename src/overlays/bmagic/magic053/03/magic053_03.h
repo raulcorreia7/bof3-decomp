@@ -3,6 +3,8 @@
 
 /* The bmagic/magic053/03 overlay. Only this image includes the file. */
 
+/* The acting battler cell is read as its record. */
+#define BATTLE_PARTY_CELL_RECORD
 #include "overlays/bmagic/bmagic.h"
 #include "sys/scene.h"
 
@@ -26,5 +28,7 @@ typedef struct Magic053Steps {
 extern Magic053Steps D_801EEC04;
 
 extern Callback D_801F0554[];
+/* Per spark: the start byte; its high nibble picks the spark kind. */
+extern u8       D_801F0548[];
 
 #endif

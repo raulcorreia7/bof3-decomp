@@ -1,6 +1,6 @@
 #include "area100_13.h"
 
-MATCH void func_801F31E8(Point3DL* pos, s32 height) {
+MATCH void func_801F31E8(Point3l* pos, s32 height) {
     DVECTOR  last_inner;
     DVECTOR  last_outer;
     DVECTOR  inner;

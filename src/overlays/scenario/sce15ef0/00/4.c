@@ -25,7 +25,7 @@ MATCH void func_801D0CEC(void) {
     work->color_r += 8;
     work->origin_x += 0x10;
     func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
-    func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
+    GFX_DrawColorFan(&g_Task->pos.x, g_Task->origin_x, 2);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->timer = 60;
@@ -36,7 +36,7 @@ MATCH void func_801D0CEC(void) {
 
 MATCH void func_801D0DB0(void) {
     func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
-    func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
+    GFX_DrawColorFan(&g_Task->pos.x, g_Task->origin_x, 2);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->color_g = 0;
@@ -45,13 +45,26 @@ MATCH void func_801D0DB0(void) {
     }
 }
 
-INCLUDE_ASM(func_801D0E5C);
+MATCH void func_801D0E5C(void) {
+    g_Task->color_g += 0x40;
+    if ((s8)g_Task->color_g != 0) {
+        func_801D1220((u8)g_Task->color_g);
+    } else {
+        func_801D1220(0xFF);
+    }
+    func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
+    GFX_DrawColorFan(&g_Task->pos.x, g_Task->origin_x, 2);
+    if (TIMER_EXPIRED(g_Task->timer)) {
+        g_Task->timer = 4;
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801D0F44(void) {
     g_Task->color_g -= 0x40;
     func_801D1220(g_Task->color_g);
     func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
-    func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
+    GFX_DrawColorFan(&g_Task->pos.x, g_Task->origin_x, 2);
     func_801D1914(64);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
@@ -62,7 +75,7 @@ MATCH void func_801D0F44(void) {
 
 MATCH void func_801D101C(void) {
     func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
-    func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
+    GFX_DrawColorFan(&g_Task->pos.x, g_Task->origin_x, 2);
     func_801D1914(64);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
@@ -80,7 +93,7 @@ MATCH void func_801D10C4(void) {
         g_Task->color_r -= 8;
     }
     func_801D1C1C(&g_Task->pos.x, &g_Task->counter_0C, g_Task->color_r);
-    func_801D1A20(&g_Task->pos.x, g_Task->origin_x, 2);
+    GFX_DrawColorFan(&g_Task->pos.x, g_Task->origin_x, 2);
     func_801D1914(64);
 
     if (TIMER_EXPIRED(g_Task->timer)) {
@@ -100,7 +113,39 @@ MATCH void func_801D11B4(void) {
 
 INCLUDE_ASM(func_801D1220);
 
-INCLUDE_ASM(func_801D1370);
+/* Draw a red line between two points with a fan at each end. */
+MATCH void func_801D1370(s32* first, s32* second, s16 width) {
+    LINE_F2* line;
+    u16      size[2];
+    u16      scale[2];
+    MATRIX   camera;
+    s32      angle;
+    u16      angle1;
+    u16      angle2;
+    s16      radius1;
+    s16      radius2;
+
+    GFX_AddDitheredDrawMode(3, GetTPage(0, 1, 960, 0));
+    Area_SetCameraMatrix(&camera);
+    line = (LINE_F2*)g_GfxPrimCursor;
+    SetLineF2(line);
+    SetSemiTrans(line, 0);
+    Area_ProjectPoint(first, (DVECTOR*)&line->x0);
+    Area_ProjectPoint(second, (DVECTOR*)&line->x1);
+    setRGB0(line, 64, 0, 0);
+    GFX_AddPrim(3, sizeof(LINE_F2));
+    angle   = ratan2(line->y1 - line->y0, line->x1 - line->x0);
+    size[0] = size[1] = width;
+    Game_ProjectWorldPoint(first, size, scale);
+    angle1  = angle + ANGLE_90;
+    radius1 = scale[0] + (g_FrameCount & 1);
+    func_801D1540(line->x0, line->y0, radius1, angle1);
+    Game_ProjectWorldPoint(second, size, scale);
+    angle2  = angle + ANGLE_270;
+    radius2 = scale[0] + (g_FrameCount & 1);
+    func_801D1540(line->x1, line->y1, radius2, angle2);
+    func_801D1690(line->x0, line->y0, radius1, angle1, line->x1, line->y1, radius2, angle2);
+}
 
 MATCH void func_801D1540(s32 x, s32 y, s16 radius, u16 angle) {
     POLY_G3* prim;
@@ -108,11 +153,8 @@ MATCH void func_801D1540(s32 x, s32 y, s16 radius, u16 angle) {
 
     i = 0;
     do {
-        prim     = GFX_BeginPolyG3(1);
-        prim->x0 = x;
-        prim->y0 = y;
-        prim->x1 = x + FIXED_MUL(radius, rcos(angle));
-        prim->y1 = y + FIXED_MUL(radius, rsin(angle));
+        prim = GFX_BeginPolyG3(1);
+        setXY2(prim, x, y, x + FIXED_MUL(radius, rcos(angle)), y + FIXED_MUL(radius, rsin(angle)));
         angle += 0x100;
         prim->x2 = x + FIXED_MUL(radius, rcos(angle));
         i += 1;
@@ -124,78 +166,50 @@ MATCH void func_801D1540(s32 x, s32 y, s16 radius, u16 angle) {
     } while (i < 8);
 }
 
-INCLUDE_ASM(func_801D1690);
+MATCH void func_801D1690(s16 x1, s16 y1, s16 radius1, u16 angle1, s16 x2, s16 y2, s16 radius2, u16 angle2) {
+    POLY_G4* poly;
+    poly = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(poly);
+    SetSemiTrans(poly, 1);
+    setXY4(poly, x1, y1, x2, y2, x1 + FIXED_MUL(radius1, rcos(angle1)), y1 + FIXED_MUL(radius1, rsin(angle1)), x2 + FIXED_MUL(radius2, rcos(angle2 + ANGLE_180)),
+           y2 + FIXED_MUL(radius2, rsin(angle2 + ANGLE_180)));
+    setRGB0(poly, 64, 0, 0);
+    setRGB1(poly, 64, 0, 0);
+    setRGB2(poly, 0, 0, 0);
+    setRGB3(poly, 0, 0, 0);
+    GFX_AddPrim(3, sizeof(POLY_G4));
+
+    poly++;
+    memcpy(poly, poly - 1, sizeof(POLY_G4));
+    poly->x2 = x1 + FIXED_MUL(radius1, rcos(angle1 + ANGLE_180));
+    poly->y2 = y1 + FIXED_MUL(radius1, rsin(angle1 + ANGLE_180));
+    poly->x3 = x2 + FIXED_MUL(radius2, rcos(angle2));
+    poly->y3 = y2 + FIXED_MUL(radius2, rsin(angle2));
+    GFX_AddPrim(3, sizeof(POLY_G4));
+}
 
 MATCH void func_801D1914(s16 amount) {
     VECTOR start;
     VECTOR end;
 
-    start.vx = TO_COORD(48) + COORD_HALF;
-    start.vy = TO_COORD(113) + COORD_HALF;
-    start.vz = TO_COORD(-768);
-    end.vx   = TO_COORD(48) + COORD_HALF;
-    end.vy   = TO_COORD(113) + COORD_HALF;
-    end.vz   = TO_COORD(-512);
+    setVector(&start, TO_COORD(48) + COORD_HALF, TO_COORD(113) + COORD_HALF, TO_COORD(-768));
+    setVector(&end, TO_COORD(48) + COORD_HALF, TO_COORD(113) + COORD_HALF, TO_COORD(-512));
     func_801D1370(&start, &end, amount);
 
-    start.vx = TO_COORD(48);
-    start.vy = TO_COORD(113) + COORD_HALF;
-    start.vz = TO_COORD(-384);
+    setVector(&start, TO_COORD(48), TO_COORD(113) + COORD_HALF, TO_COORD(-384));
     func_801D1370(&start, &end, amount);
 
-    end.vx = TO_COORD(48);
-    end.vy = TO_COORD(113) + COORD_HALF;
-    end.vz = TO_COORD(-256);
+    setVector(&end, TO_COORD(48), TO_COORD(113) + COORD_HALF, TO_COORD(-256));
     func_801D1370(&start, &end, amount);
 
-    start.vx = TO_COORD(48) + COORD_HALF;
-    start.vy = TO_COORD(113) + COORD_HALF;
-    start.vz = TO_COORD(-128);
+    setVector(&start, TO_COORD(48) + COORD_HALF, TO_COORD(113) + COORD_HALF, TO_COORD(-128));
     func_801D1370(&start, &end, amount);
 
-    end.vx = TO_COORD(48) + COORD_HALF;
-    end.vy = TO_COORD(113) + COORD_HALF;
-    end.vz = 0;
+    setVector(&end, TO_COORD(48) + COORD_HALF, TO_COORD(113) + COORD_HALF, 0);
     func_801D1370(&start, &end, amount);
 }
 
-MATCH void func_801D1A20(s32* pos, s16 origin, s32 flags) {
-    DVECTOR  screen;
-    DVECTOR  point;
-    DVECTOR  size;
-    DVECTOR  scale;
-    MATRIX   camera;
-    POLY_G3* primitive;
-    s32      angle;
-    s32      i;
-
-    GFX_AddDitheredDrawMode(2u, GetTPage(0, 1, 0x2C0, 0x100));
-    Area_SetCameraMatrix(&camera);
-    Area_ProjectPoint(pos, &screen);
-    size.vx = size.vy = origin;
-    func_801AFFD8(pos, &size, &scale);
-    scale.vx += g_FrameCount & 1;
-    point.vx = screen.vx + scale.vx;
-    point.vy = screen.vy;
-    angle    = 0;
-    i        = 0;
-    do {
-        primitive     = GFX_BeginPolyG3(1);
-        primitive->x0 = screen.vx;
-        primitive->y0 = screen.vy;
-        primitive->x1 = point.vx;
-        primitive->y1 = point.vy;
-        angle += 128;
-        point.vx      = screen.vx + (((s16)scale.vx * rcos((u16)angle)) >> 0xC);
-        point.vy      = screen.vy + (((s16)scale.vx * rsin((u16)angle)) >> 0xC);
-        primitive->x2 = point.vx;
-        primitive->y2 = point.vy;
-        setRGB0(primitive, (flags & 4) << 5, (flags & 2) << 6, (flags & 1) << 7);
-        setRGB1(primitive, 0, 0, 0);
-        setRGB2(primitive, 0, 0, 0);
-        GFX_AddPrim(2u, sizeof(POLY_G3));
-        i += 1;
-    } while ((i & BYTE_MASK) < 32U);
-}
+/* func_801D1A20 */
+#include "shared/GFX_DrawColorFan.h"
 
 INCLUDE_ASM(func_801D1C1C);

@@ -7,6 +7,6 @@ MATCH void func_801F2CEC(void) {
     work->direction_08    = diff >= 0 ? 3 : 7;
     g_ScriptState->unk_07 = abs(diff) / 0x8000;
     if (g_ScriptState->unk_07 != 0) {
-        func_801ABBA8(g_ScriptState, g_Task->direction_08);
+        Area_MoveActorRoute(g_ScriptState, g_Task->direction_08);
     }
 }

@@ -1,5 +1,5 @@
 #include "battle_15.h"
 
 MATCH void func_8009DA94(void) {
-    func_800A3F28();
+    Battle_MarkDamageApplied();
 }

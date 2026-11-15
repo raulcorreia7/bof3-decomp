@@ -1,7 +1,7 @@
 #ifndef WORLD04_FAMILY_H
 #define WORLD04_FAMILY_H
 
-#include "sys/gameui.h"
+#include "menu/gameui.h"
 #include "overlays/area/area.h"
 #include "overlays/area/Message_ShowParty.h"
 #include "overlays/area/WorldAreaRequest.h"
@@ -69,7 +69,8 @@ extern u8  D_801F3418[];
 /* The scenario state byte the request writes. */
 
 /* Restores the party after a battle and copies it in field order into the battle records. */
-void func_801C16B8(void);
+/* func_801C16B8 */
+void Char_RebuildPartyStats(void);
 void Fairy_InitVillage(void);
 /* The overlay's frame update; the bounds checks and origin step run it. */
 /* func_801F30D4 (area158), func_801F30D4 (area160), func_801F30D4 (area161), func_801F30D4 (area162), func_801F30D4
@@ -87,10 +88,6 @@ static inline void World04_StoreAnswerChoice(u8* target) {
     MESSAGE_REQUEST_CLEAR();
     *target = g_MessageChoice;
 }
-
-/* One cell of a payload's data tables: `offset` is the table's byte offset and
- * `index` the byte offset of the row. */
-#define WORLD04_ENTRY_TABLE(payload, type, offset, index) (*(type*)&(payload)[(offset) + (index)])
 
 /* A trigger rectangle in tile units. */
 typedef struct TriggerBox {

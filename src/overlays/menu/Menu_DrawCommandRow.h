@@ -27,7 +27,7 @@ MATCH void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused) {
             color = 7;
         }
         label       = g_MenuCommandLabels[g_MenuCommandRows[row][1 + i]];
-        label_width = func_801AF20C(label);
+        label_width = Game_ReadCommand(label);
         col         = i * 0x30;
         offset      = (4 - (label_width & BYTE_MASK)) * 4 + 6;
         UI_DrawText((s16)(x + col + offset), (s16)(y + 3), color, 0x10, label);

@@ -49,5 +49,5 @@ MATCH void func_801E05EC(void) {
         work->pos.y.fixed = position_y;
         work->timer       = countdown;
     }
-    func_801DEE4C();
+    Battle_IsPartyMemberBlocked();
 }

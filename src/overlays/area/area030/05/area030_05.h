@@ -12,16 +12,16 @@
 /* The fishing shop messages: indexes into the message table the pond loads at
  * AREA_MESSAGE_TABLE (the AREA030, AREA089 and AREA129 payload). */
 typedef enum FishingShopMessageId {
-    FISHING_SHOP_MSG_CONFIRM_ALL      = 69,
-    FISHING_SHOP_MSG_CONFIRM_ITEM     = 70,
-    FISHING_SHOP_MSG_TRADE_ITEM_LABEL = 71,
-    FISHING_SHOP_MSG_NEEDED_LABEL     = 72,
-    FISHING_SHOP_MSG_OWNED_LABEL      = 73,
-    FISHING_SHOP_MSG_YES_NO           = 74,
-    FISHING_SHOP_MSG_NONE_OWNED       = 75,
-    FISHING_SHOP_MSG_NONE_EQUIPPED    = 76,
-    FISHING_SHOP_MSG_TOO_GREEDY       = 77,
-    FISHING_SHOP_MSG_QUANTITY_PROMPT  = 78,
+    FISHING_SHOP_MESSAGE_CONFIRM_ALL      = 69,
+    FISHING_SHOP_MESSAGE_CONFIRM_ITEM     = 70,
+    FISHING_SHOP_MESSAGE_TRADE_ITEM_LABEL = 71,
+    FISHING_SHOP_MESSAGE_NEEDED_LABEL     = 72,
+    FISHING_SHOP_MESSAGE_OWNED_LABEL      = 73,
+    FISHING_SHOP_MESSAGE_YES_NO           = 74,
+    FISHING_SHOP_MESSAGE_NONE_OWNED       = 75,
+    FISHING_SHOP_MESSAGE_NONE_EQUIPPED    = 76,
+    FISHING_SHOP_MESSAGE_TOO_GREEDY       = 77,
+    FISHING_SHOP_MESSAGE_COUNT_PROMPT     = 78,
 } FishingShopMessageId;
 
 /* Work-cost row: two cost bytes followed by two three-byte runs. */
@@ -92,10 +92,6 @@ void Fishing_ShopDrawQuantityWindow(u16 x, u16 y);
 void Fishing_ShopDrawItemIcon(s32 x, s32 y, s32 kind, s32 value, u8 selected);
 /* func_800F7100 */
 void Fishing_ShopTakeTradeItems(void);
-/* func_801650B4 */
-bool Item_Add(s32 category, u8 item_id, u8 count, s32 unused);
-/* func_8016628C */
-s32  Item_Count(u8 category, u8 item_id, u8 mode);
 /* func_801D799C */
 void Fishing_DrawWindowFill(s16 x, s16 y, u8 height, u8 style);
 /* func_801D9534 */

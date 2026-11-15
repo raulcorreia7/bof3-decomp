@@ -8,4 +8,6 @@
 extern Callback D_801EF8DC[];
 extern Callback D_801EF8EC[];
 
+void func_800AF3A0(VECTOR pos, s16 step);
+
 #endif

@@ -18,7 +18,7 @@ MATCH void func_801D3D00(void) {
     span                                                        = (D_80148510 - g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 0xD + 0x1A;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + span;
     panel                                                       = &D_80148504;
-    pressed                                                     = PAD_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown | PADL1 | PADR1));
+    pressed                                                     = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown | PADL1 | PADR1));
     cursor                                                      = D_80148510;
     if (pressed & PADLup) {
         if (cursor != 0) {

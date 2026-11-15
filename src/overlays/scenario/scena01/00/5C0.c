@@ -1,13 +1,41 @@
 #include "scena01_00.h"
 #include "area/map.h"
+#include "overlays/area/Area_DrawDimQuad.h"
+#include "overlays/area/Actor_SeedPartySlot.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801F71C0);
+MATCH void func_801F71C0(void) {
+    AREA_DRAW_DIM_QUAD(3);
+}
 
-INCLUDE_ASM(func_801F729C);
+MATCH void func_801F729C(void) {
+    POLY_G4* prim;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(1, 2, 0x140, 0) & 0xFFFF, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    SetSemiTrans(prim, 1);
+    setXY4(prim, 0, 0, SCREEN_WIDTH, 0, 0, 100, SCREEN_WIDTH, 100);
+    prim->r1 = 0xC8;
+    prim->r0 = 0xC8;
+    prim->g1 = 0xC8;
+    prim->g0 = 0xC8;
+    prim->b1 = 0xC8;
+    prim->b0 = 0xC8;
+    prim->r3 = 0;
+    prim->r2 = 0;
+    prim->g3 = 0;
+    prim->g2 = 0;
+    prim->b3 = 0;
+    prim->b2 = 0;
+    GFX_AddPrim(2, sizeof(POLY_G4));
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(2, 3, 0x140, 0x140) & 0xFFFF, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+}
 
 MATCH void func_801F73B8(void) {
     SYS_DISPATCH_TASK(D_801FE26C, 1, g_Task);
@@ -38,7 +66,7 @@ MATCH void func_801F7480(void) {
     if ((g_FrameCount & 0x1) == 0) {
         Area_AddSpark();
     }
-    func_801F7C54();
+    Area_StepSparks();
     g_Task->timer = (g_Task)->timer + 4;
     if (g_Task->timer == 0) {
         g_Task->timer       = 32;
@@ -51,7 +79,7 @@ MATCH void func_801F752C(void) {
     if ((g_FrameCount & 0x1) == 0) {
         Area_AddSpark();
     }
-    func_801F7C54();
+    Area_StepSparks();
     if (--g_Task->timer == 0) {
         g_Task->timer = 252;
         g_Task->header.mode += 1;
@@ -60,7 +88,7 @@ MATCH void func_801F752C(void) {
 
 MATCH void func_801F75C8(void) {
     func_801F7678(g_Task->timer);
-    func_801F7C54();
+    Area_StepSparks();
     g_Task->timer = (g_Task)->timer - 4;
     if (g_Task->timer == 0) {
         g_Task->header.mode = (g_Task)->header.mode + 1;
@@ -68,7 +96,7 @@ MATCH void func_801F75C8(void) {
 }
 
 MATCH void func_801F7644(void) {
-    if (!(func_801F7C54() & BYTE_MASK)) {
+    if (!(Area_StepSparks() & BYTE_MASK)) {
         Actor_Clear();
     }
 }
@@ -81,7 +109,7 @@ INCLUDE_ASM(func_801F7678);
 
 #include "shared/Area_AddSpark.h"
 
-INCLUDE_ASM(func_801F7C54);
+#include "shared/Area_StepSparks.h"
 
 MATCH void func_801F7D04(void) {
     s16 screen_x;
@@ -137,7 +165,7 @@ MATCH void func_801F7FC4(void) {
 
 /* func_801F8000 */
 MATCH void Scene_EnterCedarWoods(void) {
-    func_801C1DF0(0);
+    Scene_RunScenario(0);
     Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_BEFORE_NUE, TO_COORD(87), TO_COORD(4), FACING_LEFT);
     *D_80144E90          = 0;
     g_ScriptVarsReq.word = 0;
@@ -165,7 +193,7 @@ MATCH void func_801F8AE4(void) {
             break;
         case 1:
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
-            func_801C601C(0);
+            Area_StartScrollRoute(0);
             g_SceneState.step_05 = 2;
             break;
         case 2:
@@ -306,7 +334,8 @@ MATCH void func_801FCE30(void) {
 
 INCLUDE_ASM(func_801FCEC0);
 
-INCLUDE_ASM(func_801FD28C);
+/* Give the lead party member a field actor of type 6: claim a free slot and seed its row from the member. */
+MATCH void func_801FD28C(s32 variant){ACTOR_SEED_PARTY_SLOT(0, D_801FE280, 6, variant + 112)}
 
 MATCH void func_801FD444(void* record) {
     D_801FE308[((Actor*)record)->callback_index](record, &D_80144E90);

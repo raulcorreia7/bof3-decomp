@@ -258,7 +258,7 @@ typedef struct Battler {
     /* 0x1C */ s16 hp;      /* 0 on KO */
     /* 0x1E */ s16 unk_1E;
     /* 0x20 */ u8  pad_20[4];
-    /* 0x24 */ Point2D coord;
+    /* 0x24 */ Point2s coord;
 } Battler;
 
 void Fairy_SetJob(u8 fairy_index, u8 job_type);
@@ -271,7 +271,7 @@ typedef struct Battler {
     s16 half_1C;            /* the width and offset, not the role */
     s16 hp2;                /* a guess with a number */
     u8  data[4];
-    Point2D pos_24;
+    Point2s pos_24;
 } Battler;
 
 void Fairy_SetJob(u8 job, u8 idx);   /* the thing acted on last; abbreviated */
@@ -348,7 +348,7 @@ shared type, with its comment, so the meaning stays when the layout is reused.
 
 ```c
 /* A point on the 320x240 screen, in pixels. */
-typedef UPoint2D ScreenPoint;
+typedef Point2u ScreenPoint;
 ```
 
 **Don't**
@@ -357,7 +357,7 @@ typedef UPoint2D ScreenPoint;
 typedef struct { u16 x; u16 y; } ScreenPointData;   /* a second layout, a filler word */
 ```
 
-A role that recurs gets one typedef over the shared block (`Point2D`, `Point3DL`, `Coord3D`, `SVECTOR`,
+A role that recurs gets one typedef over the shared block (`Point2s`, `Point3l`, `Coord3D`, `SVECTOR`,
 ...), in the header that owns its domain, and every member, parameter and global of that role uses it
 (`WorldPos`, `SpriteScale`, `CameraAngle`). A one-off keeps the block type and carries the role in its
 member name. Never one typedef per member, never a second layout.
@@ -440,20 +440,24 @@ two systems have their own thing under one noun. `B` in a disc label marks the b
 
 ### Disc words
 
-| Disc label                  | Game term                      |
-| --------------------------- | ------------------------------ |
-| `BATTLE`                    | battle program                 |
-| `BENEMY`                    | `Enemy`                        |
-| `BMAGIC`, `MAGIC#`          | magic (`BMagic_` in battle)    |
-| `PLCHAR`, `BPLCHAR`, `PLP*` | character code overlay         |
-| `SISYOU` (師匠)             | `Master` menu                  |
-| `SHOP`                      | shop program                   |
-| `START`                     | start menu                     |
-| `GAME` (slot 0 / slot 1)    | engine `game`; `title` screen  |
-| `SCENA##`, `SCE##EF*`       | scene controller, scene effect |
-| `WORLD##/AREA###`           | area code                      |
-| `SLUS_004.22`               | main executable                |
-| `LOGO/LOGO.EXE`             | logo player                    |
+| Disc label               | Game term                                                                                     |
+| ------------------------ | --------------------------------------------------------------------------------------------- |
+| `BATTLE`                 | battle program                                                                                |
+| `BENEMY`                 | `Enemy`                                                                                       |
+| `BMAGIC`, `MAGIC#`       | magic (`BMagic_` in battle)                                                                   |
+| `PLCHAR`, `BPLCHAR`      | character archive                                                                             |
+| `PLP###`                 | code of one party: the three digits name its characters (`PLP012`: Ryu, Nina, Garr)           |
+| `COMMU00` to `COMMU05`   | Fairy Village: the village program (`COMMU00`) and its event scripts (`COMMU01` to `COMMU05`) |
+| `BATE`                   | ability menu (`Game_LoadAbilityMenu` loads it)                                                |
+| `SHISU`                  | status menu (`Game_LoadStatusMenu` loads it)                                                  |
+| `SISYOU` (師匠)          | `Master` menu                                                                                 |
+| `SHOP`                   | shop program                                                                                  |
+| `START`                  | start menu                                                                                    |
+| `GAME` (slot 0 / slot 1) | engine `game`; `title` screen                                                                 |
+| `SCENA##`, `SCE##EF*`    | scene controller, scene effect                                                                |
+| `WORLD##/AREA###`        | area code                                                                                     |
+| `SLUS_004.22`            | main executable                                                                               |
+| `LOGO/LOGO.EXE`          | logo player                                                                                   |
 
 Archive families (`BGM`, `BENEMY`, `BOSS`, `BMAGIC`, `BPLCHAR`, `PLCHAR`, `ETC`, `SCENARIO`) name
 shipped containers, not code folders. Where each disc label lives in the tree: [tree](layout.md#tree).

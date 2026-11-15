@@ -10,8 +10,8 @@ static inline void Char_ClaimHelperSlotStep(void) {
     slot                     = func_8019601C();
     g_Task->param.actor_slot = slot;
     if (g_Task->param.actor_slot != 0xFF) {
-        g_ActorSlots[g_Task->param.actor_slot].header.flags = 1;
-        g_ActorSlots[g_Task->param.actor_slot].type         = 0x1B;
+        g_SpawnedActors[g_Task->param.actor_slot].header.flags = 1;
+        g_SpawnedActors[g_Task->param.actor_slot].type         = 0x1B;
     }
     Actor_RequestScript((g_Task->direction_08 >> 1) + 0x42);
     /* FAKE: retail reads SND_PlayCue as void(s32). */

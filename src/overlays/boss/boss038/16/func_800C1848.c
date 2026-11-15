@@ -4,7 +4,7 @@
 MATCH void func_800C1848(void) {
     g_BattleCurrentEnemy->script = g_BossEnemyScript;
     g_BattleCurrentEnemy->unk_E4 = func_800C18EC;
-    g_BattleCurrentEnemy->unk_E8 = g_BossEnemyActionTable;
+    g_BattleCurrentEnemy->unk_E8 = g_BossEnemyActions;
     g_BattleCurrentEnemy->turn.action_flags.value |= COMBATANT_FLAG_MODE_HANDLER_ACTION;
     g_Task->header.mode = 2;
     Actor_StepAnimLoop();

@@ -5,7 +5,7 @@ MATCH void func_801CF564(void) {
         g_GameFlags &= ~0x1000;
     } else {
         g_Task->timer--;
-        func_801B0DFC();
+        Actor_UpdateMovement();
     }
     Actor_StepAnimLoop();
 }

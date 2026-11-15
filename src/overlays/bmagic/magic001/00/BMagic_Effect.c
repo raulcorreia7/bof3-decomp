@@ -6,7 +6,46 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
-INCLUDE_ASM(func_801EECC4);
+MATCH void func_801EECC4(void) {
+    BattleEffect* slot;
+    PartyMember*  work;
+    u32           index;
+    u8            active;
+
+    g_Task->facing = g_BattleEffectBattler->facing;
+    WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
+    g_Task->param.unk_0B = 1;
+    index                = Battle_AllocEffect(1, 73);
+    active               = g_Battle.active_battler;
+    if (BATTLER_IS_PLAYER(active)) {
+        BattleWorkImage* row;
+
+        row                     = (BattleWorkImage*)&g_Game.members[active];
+        slot                    = &g_BattleEffects[index & BYTE_MASK];
+        *(BattleWorkImage*)slot = *row;
+    } else {
+        BattleWorkImage* row;
+        u32              enemy;
+
+        slot                    = &g_BattleEffects[index & BYTE_MASK];
+        enemy                   = active - BATTLE_PARTY_CHARACTERS_COUNT;
+        row                     = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
+        *(BattleWorkImage*)slot = *row;
+    }
+    work                                             = g_Task;
+    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
+    g_BattleEffects[index & BYTE_MASK].header.mode   = 0;
+    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
+    g_BattleEffects[index & BYTE_MASK].handler_index = 73;
+    g_BattleEffects[index & BYTE_MASK].arg.unk_09    = 0;
+    g_BattleEffects[index & BYTE_MASK].target.party  = work;
+    g_Task->unk_27                                   = func_800AFB48(g_BattleEffectBattler);
+    g_Task->unk_28                                   = g_BattleEffectBattler->unk_28;
+    g_Task->unk_24                                   = g_BattleEffectBattler->unk_24;
+    func_800AF8F0(g_Task);
+    g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801EEF34(void) {
     BMagic_ClearWorkFlagsAndStep();
@@ -57,7 +96,7 @@ MATCH void func_801EF280(void) {
     work->unk_14 += work->unk_20;
     COORD_INT(work->pos.z) += work->unk_14;
     if (timer == 0) {
-        SND_QueueSelectionFx(0x203);
+        SND_QueueSelectionEffect(0x203);
         func_801E257C(g_Battle.active_battler, 12);
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
         g_Task->unk_09 = 3;
@@ -106,7 +145,7 @@ MATCH void func_801EF468(void) {
     Actor_StepAnimOnce();
     Actor_StepAnimOnce();
     if (Actor_StepAnimOnce() & BYTE_MASK) {
-        SND_QueueSelectionFx(0x203);
+        SND_QueueSelectionEffect(0x203);
         func_801E257C(g_Battle.active_battler, 12);
         timer          = g_Task->unk_09 - 1;
         g_Task->unk_09 = timer;
@@ -130,7 +169,24 @@ MATCH void func_801EF518(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF5CC);
+MATCH void func_801EF5CC(void) {
+    PartyMember* work;
+    PartyMember* source;
+    s8           count;
+
+    count = g_Task->unk_5D;
+    if (count != -0x80) {
+        g_Task->unk_5D = count - 0x10;
+        g_Task->unk_5E -= 16;
+        g_Task->unk_5F -= 16;
+    }
+    if ((s8)g_Task->unk_5D == -128) {
+        work   = g_Task;
+        source = BATTLE_ACTIVE_WORK;
+        WorldPos_Copy(&work->pos, &source->pos);
+        work->header.step += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_RampTintAndFinish.h"
 
@@ -145,7 +201,50 @@ MATCH void func_801EF72C(void) {
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801EF78C);
+/* Copy the active battler into a new effect as func_801EECC4 does, then take the battler sprite
+ * cell and pass it to func_800AF8F0 and func_800AFAB8. */
+MATCH void func_801EF78C(void) {
+    BattleEffect* slot;
+    PartyMember*  work;
+    u32           index;
+    u8            active;
+
+    g_Task->facing = g_BattleEffectBattler->facing;
+    WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
+    g_Task->param.unk_0B = 1;
+    func_800AEF98(8, 0);
+    index  = Battle_AllocEffect(1, 79);
+    active = g_Battle.active_battler;
+    if (BATTLER_IS_PLAYER(active)) {
+        BattleWorkImage* row;
+
+        row                     = (BattleWorkImage*)&g_Game.members[active];
+        slot                    = &g_BattleEffects[index & BYTE_MASK];
+        *(BattleWorkImage*)slot = *row;
+    } else {
+        BattleWorkImage* row;
+        u32              enemy;
+
+        slot                    = &g_BattleEffects[index & BYTE_MASK];
+        enemy                   = active - BATTLE_PARTY_CHARACTERS_COUNT;
+        row                     = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
+        *(BattleWorkImage*)slot = *row;
+    }
+    work                                             = g_Task;
+    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
+    g_BattleEffects[index & BYTE_MASK].header.mode   = 0;
+    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
+    g_BattleEffects[index & BYTE_MASK].handler_index = 79;
+    g_BattleEffects[index & BYTE_MASK].arg.unk_09    = 0;
+    g_BattleEffects[index & BYTE_MASK].target.party  = work;
+    g_Task->unk_27                                   = func_800AFB48(g_BattleEffectBattler);
+    g_Task->unk_28                                   = g_BattleEffectBattler->unk_28;
+    g_Task->unk_24                                   = g_BattleEffectBattler->unk_24;
+    func_800AF8F0(g_Task);
+    func_800AFAB8(g_Task);
+    g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801EFA14(void) {
     BMagic_ClearWorkFlagsAndStep();
@@ -203,12 +302,10 @@ MATCH void func_801EFD28(void) {
     g_Task->unk_09 = next;
     if (!(next & BYTE_MASK)) {
         func_800AFC98(2, 0);
-        SND_QueueSelectionFx(0x203);
+        SND_QueueSelectionEffect(0x203);
         g_Task->unk_14 = 0x40;
         g_Task->unk_20 = -8;
         g_Task->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - g_Task->pos.x.fixed, g_BattleEffectBattler->pos.y.fixed - g_Task->pos.y.fixed);
-        /* FAKE: Without the barrier, the scheduler sinks the angle store into the call's delay slot. */
-        FAKE_BARRIER();
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Task->unk_09 = 0x10;
         g_Task->header.step += 1;
@@ -277,13 +374,7 @@ MATCH void func_801F0238(void) {
     s32      i;
     s32      tpage;
 
-    if (GetGraphType() == 1) {
-        tpage = 0x125;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x125;
-    } else {
-        tpage = 0x55;
-    }
+    tpage = getTPage(0, 2, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
     D_1F800000.view.effect.params[1] = g_Task->timer << 3;
@@ -297,9 +388,7 @@ MATCH void func_801F0238(void) {
         D_1F800014[0].vy = 0;
         D_1F800014[1].vx = D_1F800014[2].vx;
         D_1F800014[1].vy = D_1F800014[2].vy;
-        D_1F800014[2].vx = FIXED_MUL(rsin(i << 8), D_1F800000.view.effect.params[0]);
-        D_1F800014[2].vy = FIXED_MUL(rcos(i << 8), D_1F800000.view.effect.params[0]);
-        D_1F800014[2].vz = 0;
+        setVector(&D_1F800014[2], FIXED_MUL(rsin(i << 8), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(i << 8), D_1F800000.view.effect.params[0]), 0);
         D_1F800014[1].vz = 0;
         D_1F800014[0].vz = 0;
         RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
@@ -309,13 +398,7 @@ MATCH void func_801F0238(void) {
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
 
-    if (GetGraphType() == 1) {
-        tpage = 0x25;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x25;
-    } else {
-        tpage = 0x15;
-    }
+    tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
 }

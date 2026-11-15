@@ -23,7 +23,7 @@ s32       offset;
     g_SaveCardStatus = CARD_EVENT_PENDING;
     do {
         tries--;
-        SAVE_PollCardInfo();
+        SAVE_PollCard();
         SAVE_PollSoftwareEvents();
         if (tries == 0) {
             return -1;
@@ -159,7 +159,7 @@ MATCH void SAVE_PollHardwareEvents(void) { /* func_801EEFF8 */
 
 /* Polls card info for up to 60 frames and stores its event result. */
 /* func_801EF040 */
-MATCH void SAVE_PollCardInfo(void) { /* func_801EF040 */
+MATCH void SAVE_PollCard(void) { /* func_801EF040 */
     s32 count;
     s32 status;
 
@@ -241,7 +241,7 @@ MATCH s32 SAVE_FormatCard(void) { /* func_801EF200 */
     if (format(name) == 1) {
         return 0;
     }
-    SAVE_PollCardInfo();
+    SAVE_PollCard();
     return -1;
 }
 
@@ -309,7 +309,7 @@ MATCH s32 SAVE_OpenFile(u8 port, char* name, s32 mode) { /* func_801EF96C */
         VSync(1);
         retries++;
     } while ((retries & BYTE_MASK) < 120U);
-    SAVE_PollCardInfo();
+    SAVE_PollCard();
     SAVE_PollSoftwareEvents();
     if (g_SaveCardStatus != CARD_EVENT_OK) {
         g_SaveCardStatus = CARD_EVENT_TIMEOUT;
@@ -380,7 +380,7 @@ write_path:
     goto retry; /* a failed write polls the card again */
 
 retry:
-    SAVE_PollCardInfo();
+    SAVE_PollCard();
     if (g_SaveCardStatus == one) {
         close(fd);
         return -1;

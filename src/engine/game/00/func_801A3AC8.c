@@ -14,8 +14,8 @@ MATCH bool func_801A3AC8(Actor* record) {
     x     = pos_x;
     pos_y = rec->pos.y.fixed + g_FacingStepY[route * 2];
     y     = pos_y;
-    if (func_801BDE14(x, y, g_Task->state_70.byte) == -1) {
-        return func_801BE0C0(x, y, g_Task->state_70.byte) != -1;
+    if (Actor_FindInRange(x, y, g_Task->state_70.byte) == -1) {
+        return Game_GetPartySize(x, y, g_Task->state_70.byte) != -1;
     }
     return 1;
 }

@@ -4,8 +4,8 @@ MATCH void func_800A0898(void) {
     BattleTurn* record;
 
     ((volatile BattleTurn*)g_Battle.target_record)->hp_change = 0;
-    if (func_800A3A10(g_Battle.active_battler, g_Battle.target) == 0) {
-        func_800A3F28();
+    if (Battle_PickAbility(g_Battle.active_battler, g_Battle.target) == 0) {
+        Battle_MarkDamageApplied();
         func_801DDFEC(g_Battle.target);
         func_801DD14C(g_Battle.target);
         return;

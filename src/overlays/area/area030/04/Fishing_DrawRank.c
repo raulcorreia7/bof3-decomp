@@ -3,12 +3,12 @@
 /* Draws the roster panel and count caption. */
 /* func_801E1320 */
 MATCH void Fishing_DrawRank(s16 x, s16 y) {
-    FishingIconData      icons;
-    FishingThresholdData thresholds;
-    u32                  value;
-    u32                  index;
-    FishingIcon*         record;
-    s32                  i;
+    FishingIconData  icons;
+    FishingThreshold thresholds;
+    u32              value;
+    u32              index;
+    FishingIcon*     record;
+    s32              i;
 
     icons      = g_FishingRankIcons;
     thresholds = D_801D0C70;

@@ -27,18 +27,51 @@ if [ -n "$relative" ]; then
 	echo "check-tree: include from the source root (\"overlays/area/X.h\") and import as bof3.<module>"
 	exit 1
 fi
+# Lists the decompiler locals (temp_, var_, phi_, saved_reg_) that a file has at HEAD and lacks at the base.
+local_locals() {
+	tmp=$(mktemp)
+	tmp2=$(mktemp)
+	git diff -M --name-status "$base...HEAD" -- src include | while IFS='	' read -r st a b; do
+		case $st in
+		A) old='' new=$a ;;
+		D) continue ;;
+		R*) old=$a new=$b ;;
+		*) old=$a new=$a ;;
+		esac
+		if [ -n "$old" ]; then git show "$base:$old" >"$tmp" 2>/dev/null || : >"$tmp"; else : >"$tmp"; fi
+		git show "HEAD:$new" >"$tmp2" 2>/dev/null || : >"$tmp2"
+		awk -v f="$new" -v re='(temp|var|phi|saved_reg)_[a-z0-9]+' '
+			FILENAME == ARGV[1] { s = $0; while (match(s, re)) { known[substr(s, RSTART, RLENGTH)] = 1; s = substr(s, RSTART + RLENGTH) }; next }
+			{ s = $0; while (match(s, re)) { if (!(substr(s, RSTART, RLENGTH) in known)) { print f ":" FNR ": " $0; break }; s = substr(s, RSTART + RLENGTH) } }
+		' "$tmp" "$tmp2"
+	done
+	rm -f "$tmp" "$tmp2"
+}
+
 # Source rules on the lines a change adds, against the base ref.
 base=${1:-}
 if [ -n "$base" ]; then
 	bad=0
 	added=$(git diff -U0 "$base...HEAD" -- src include | grep -E '^\+[^+]' || true)
+	# A literal that the same file's removed lines already hold is moved or renamed, not new.
+	diff_file=$(mktemp)
+	git diff -U0 "$base...HEAD" -- src include >"$diff_file"
+	fresh=$(awk '
+		function lits(s, out,   n) { n = 0; while (match(s, /0x[0-9A-Fa-f]{7,8}/)) { out[++n] = substr(s, RSTART, RLENGTH); s = substr(s, RSTART + RLENGTH) } return n }
+		NR == FNR { if ($0 ~ /^\+\+\+ /) f = $0; else if ($0 ~ /^-[^-]/) { n = lits($0, a); for (i = 1; i <= n; i++) pool[f SUBSEP a[i]]++ } next }
+		$0 ~ /^\+\+\+ / { f = $0; next }
+		$0 ~ /^\+[^+]/ { n = lits($0, a); keep = 0
+			for (i = 1; i <= n; i++) if (pool[f SUBSEP a[i]] > 0) pool[f SUBSEP a[i]]--; else keep = 1
+			if (keep) print }
+	' "$diff_file" "$diff_file" || true)
+	rm -f "$diff_file"
 	rule() {
-		printf '%s\n' "$added" | grep -nE "$1" | head -n 5 | while IFS= read -r l; do
+		case $2 in "raw address") src=$fresh ;; *) src=$added ;; esac
+		printf '%s\n' "$src" | grep -nE "$1" | head -n 5 | while IFS= read -r l; do
 			echo "check-tree: $2: $l"
 		done
 	}
 	for spec in 'asm\("\$|register pin' 'goto L[0-9A-Fa-f]{4,}|decompiler label' \
-		'\b(temp|var|phi|saved_reg)_[a-z0-9]|decompiler local' \
 		'\bsp[0-9][0-9A-F]*\b|stack-offset name' '\bTASK_BYTES\b|\(\(u8 ?\*\) ?g_Task\)|task read by offset' \
 		'\bM2C_|m2c macro' '0x[0-9A-Fa-f]{7,8}|raw address'; do
 		out=$(rule "${spec%|*}" "${spec#*|}")
@@ -47,6 +80,12 @@ if [ -n "$base" ]; then
 			bad=1
 		fi
 	done
+	# A decompiler local is new to its file when the base copy of the file (following renames) lacks it.
+	locals=$(local_locals)
+	if [ -n "$locals" ]; then
+		printf '%s\n' "$locals" | sed 's/^/check-tree: decompiler local: /'
+		bad=1
+	fi
 	# A prototype added to a header must be the only declaration of that name in a visible header.
 	dups=$(git diff -U0 "$base...HEAD" -- include src | awk '
 		/^\+\+\+ b\// { f = substr($0, 7); next }

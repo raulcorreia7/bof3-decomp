@@ -19,6 +19,6 @@ MATCH void func_801E61F0(void) {
         } else {
             ENEMY_COMBATANT(index).turn.damage_flags.value &= ~COMBATANT_FLAG_DAMAGE_NUMBER;
         }
-        func_801E5988();
+        Effect_Reset();
     }
 }

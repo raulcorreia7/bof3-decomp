@@ -12,7 +12,7 @@ MATCH void func_800A2668(void) {
     FAKE_ORDER_LOCK(selection_kind = g_BattleTarget);
     half                              = Battle_CalcDamage(battler_index, selection_kind, BATTLE_ELEMENT_FROM_WEAPON) / 2;
     g_Battle.target_record->hp_change = half;
-    if (half != 0 && func_800A3A10(*battler, g_Battle.target) == 0) {
+    if (half != 0 && Battle_PickAbility(*battler, g_Battle.target) == 0) {
         func_800A4238(4);
     }
 }

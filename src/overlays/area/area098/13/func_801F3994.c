@@ -7,7 +7,7 @@ MATCH void func_801F3994(void) {
 
     g_Task->unk_6C += 0xC0000;
     g_Task->screen_x -= 6;
-    func_801F46EC(&g_Task->unk_64, (s16)g_Task->screen_x, 6);
+    GFX_DrawColorFan(&g_Task->unk_64, (s16)g_Task->screen_x, 6);
     timer         = g_Task->timer - 1;
     g_Task->timer = timer;
     if ((timer & BYTE_MASK) == 0) {

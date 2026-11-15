@@ -18,8 +18,7 @@ MATCH void func_800C1C08(s32 mode) {
     y1       = task->unk_1C;
     y2       = task->gravity - 0x3C;
     sprt->w  = 0x68;
-    sprt->u0 = 0;
-    sprt->v0 = mode;
+    setUV0(sprt, 0, mode);
     sprt->h  = 0x56;
     sprt->y0 = y1 + y2;
     SetSprt(sprt);

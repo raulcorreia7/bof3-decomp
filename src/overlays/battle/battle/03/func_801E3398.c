@@ -18,5 +18,5 @@ MATCH void func_801E3398(void) {
         g_Task->header.step = 0;
         g_Task->unk_03      = 0;
     }
-    func_801E30F8();
+    Battle_IsEnemyBlocked();
 }

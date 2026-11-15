@@ -22,7 +22,7 @@ MATCH void func_801B0568(void) {
             tmp9->unk_0A = (tmp4 - 1);
             return;
         }
-        if (!(func_801B59B4() & BYTE_MASK)) {
+        if (!(Game_GetInput() & BYTE_MASK)) {
             func_801B5BDC(g_Task->direction_08);
             g_Game.current->u.field.counter_11C.u8_value = 3U;
             g_Game.current->u.field.mode_12B.s8_value    = 0;
@@ -66,7 +66,7 @@ MATCH void func_801B0568(void) {
         return;
         {
         case_0:
-            if ((func_801BDF08() << 0x18) != 0) {
+            if ((Area_GetActorFacingStepX() << 0x18) != 0) {
                 g_Game.current->u.field.mode_12B.s8_value = 0;
                 func_801B5BDC(g_Task->direction_08);
                 goto block_35; /* shares the state-1 tail */
@@ -100,7 +100,7 @@ MATCH void func_801B0568(void) {
             func_801B5BDC((g_Task->direction_08 + 8) & BYTE_MASK);
             tmp6        = g_Task;
             tmp6->timer = (tmp6->timer - 1);
-            func_801B0DFC();
+            Actor_UpdateMovement();
             g_Game.current->u.field.mode_12B.s8_value = 1;
             g_Task->header.step                       = 2;
             return;

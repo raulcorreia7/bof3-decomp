@@ -48,13 +48,14 @@ MATCH void BMagic_SpawnBurnFlames(void) {
     *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW)        = 0;
     *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW + 0x20) = 0;
     g_GfxPalettePending                                             = 1;
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionEffect(0x100);
     g_Task->unk_09 = 0;
     g_Task->header.mode += 1;
 }
 
+/* Counts the effect timer up; at 16 applies the damage flags 0x10 to the battlers of the target selector and advances the mode. */
 /* func_801EEE20 */
-MATCH void BMagic_SelectBurnTarget(void) {
+MATCH void BMagic_ApplyBurnDamage(void) {
     u8 timer;
 
     timer          = g_Task->unk_09 + 1;
@@ -69,7 +70,7 @@ MATCH void BMagic_SelectBurnTarget(void) {
 
 #include "overlays/bmagic/Effect_CountDownTimerNextStep.h"
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEF6C */
 MATCH void BMagic_UpdateBurnSprites(void) {
@@ -81,7 +82,26 @@ MATCH void BMagic_UpdateBurnSprites(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEFF4);
+MATCH void func_801EEFF4(void) {
+    PartyMember* src;
+    PartyMember* dst;
+    s32          z;
+
+    if (--g_Task->unk_09 == 0) {
+        src                  = BATTLE_ACTIVE_WORK;
+        dst                  = g_Task;
+        dst->pos.x.fixed     = src->pos.x.fixed;
+        dst->pos.y.fixed     = src->pos.y.fixed;
+        z                    = src->pos.z.fixed;
+        dst->unk_20          = 8;
+        dst->timer           = 2;
+        dst->pos.z.fixed     = z;
+        dst->unk_14          = 0;
+        g_Task->param.unk_0B = 0x10;
+        g_Task->unk_09       = 0x20;
+        g_Task->header.mode++;
+    }
+}
 
 MATCH void func_801EF0A4(void) {
     PartyMember* work;
@@ -137,9 +157,7 @@ MATCH void BMagic_DrawBurnFlameQuads(void) {
     DARK_RING_SHADE  = g_Task->unk_09 * 6;
     D_1F800014[1].vx = FIXED_MUL(rsin(0), DARK_RING_OUTER);
     D_1F800014[1].vy = FIXED_MUL(rcos(0), DARK_RING_OUTER);
-    D_1F800014[3].vx = FIXED_MUL(rsin(0), DARK_RING_INNER);
-    D_1F800014[3].vy = FIXED_MUL(rcos(0), DARK_RING_INNER);
-    D_1F800014[3].vz = 0;
+    setVector(&D_1F800014[3], FIXED_MUL(rsin(0), DARK_RING_INNER), FIXED_MUL(rcos(0), DARK_RING_INNER), 0);
     D_1F800014[2].vz = 0;
     D_1F800014[1].vz = 0;
     D_1F800014[0].vz = 0;
@@ -163,4 +181,39 @@ MATCH void BMagic_DrawBurnFlameQuads(void) {
     GFX_AddDitheredDrawMode(5, getTPage(0, 0, 320, 256));
 }
 
-INCLUDE_ASM(BMagic_DrawBurnFlameTris);
+MATCH void BMagic_DrawBurnFlameTris(void) {
+    POLY_G3* prim;
+    long     depth;
+    long     flag;
+    s32      i;
+    s32      tpage;
+
+    tpage = getTPage(0, 2, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(5, sizeof(DR_MODE));
+    D_1F800000.view.effect.params[0] = 0x80;
+    D_1F800000.view.effect.params[5] = g_Task->unk_09 * 4;
+    D_1F800000.view.effect.params[6] = g_Task->unk_09 * 6;
+    setVector(&D_1F800014[2], FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]), 0);
+    D_1F800014[1].vz = 0;
+    D_1F800014[0].vz = 0;
+
+    for (i = 1; i <= 32; i++) {
+        prim             = GFX_BeginPolyG3(1);
+        D_1F800014[0].vx = 0;
+        D_1F800014[0].vy = 0;
+        D_1F800014[1].vx = D_1F800014[2].vx;
+        D_1F800014[1].vy = D_1F800014[2].vy;
+        D_1F800014[2].vx = FIXED_MUL(rsin(i << 7), D_1F800000.view.effect.params[0]);
+        D_1F800014[2].vy = FIXED_MUL(rcos(i << 7), D_1F800000.view.effect.params[0]);
+        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+        setRGB0(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
+        setRGB1(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[6]);
+        setRGB2(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[6]);
+        GFX_AddPrim(5, sizeof(POLY_G3));
+    }
+
+    tpage = getTPage(0, 0, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(5, sizeof(DR_MODE));
+}

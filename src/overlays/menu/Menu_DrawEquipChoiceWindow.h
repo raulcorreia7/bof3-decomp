@@ -73,7 +73,7 @@ MATCH void Menu_DrawEquipChoiceWindow(MenuPanelTask* task) {
     UI_DrawWindow(task->pos.x + 3, task->pos.y + 3, 153, 20, 0, CHARACTER_BLOCK->window_style);
     UI_DrawWindow(task->pos.x + 3, task->pos.y + 146, 153, 8, 0, CHARACTER_BLOCK->window_style);
     title   = &g_MenuEquipTitles[task->unk_08];
-    length  = func_801AF20C(*title);
+    length  = Game_ReadCommand(*title);
     title_x = length * 4 - 78;
     UI_DrawText(task->pos.x - title_x, task->pos.y + 7, MENU_SHADE_NORMAL, 16, *title);
     sprintf(g_UiFormatBuffer, g_MenuInventoryCountFormat, choices, INV_SLOTS_PER_CATEGORY);

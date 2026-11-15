@@ -4,15 +4,19 @@
 /* The etc/shisu/00 overlay's local declarations. Only this image
  * includes the file. */
 
-#include "menu/party.h"
+#include "scenario/party.h"
 #include "shared/etc.h"
 #include <stdio.h>
-#include "menu/party.h"
+#include "scenario/party.h"
 
-#define g_SceneState (*(struct SceneState*)&g_SceneState)
+/* FAKE: the callers pass and read the cost as s32, the width the real prototype (u8) lacks. */
+#define Char_GetAbilityCost ((s32 (*)(s32, s32, s32))Char_GetAbilityCost)
+
+#define g_SceneState        (*(struct SceneState*)&g_SceneState)
 
 extern u8            D_80148656;
-extern OverlayHeader D_801D0C00;
+/* g_EmiOverlayHeader */
+extern OverlayHeader g_EmiOverlayHeader;
 extern char          g_MenuStatFormat[];
 extern char          g_MenuZennyFormat[];
 /* D_801D0C2C */
@@ -110,8 +114,6 @@ extern s32      D_801DA12C;
 
 extern const char g_MenuInventoryCountFormat[];
 
-void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
-
 extern FormationLayout g_MenuFormations[FORMATION_COUNT];
 extern FormationOrder  g_MenuFormationOrder;
 extern s32             g_MenuFormationArrow[3][2];
@@ -128,6 +130,7 @@ void                   func_801AF800(s16 record_x, s32 record_y, u8 text_shade, 
 void                   func_801AFA1C(u8* arg0, u8 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 extern void            func_801D1D1C(void);
 extern void            func_801D1E34(void);
+void                   func_801D4158(s16 x, s16 y, u8 index, u8 flag);
 extern s32             func_801D2978(void);
 extern void            func_801D2ADC(void);
 extern void            func_801D2C0C(void);
@@ -149,8 +152,6 @@ static inline void Menu_SlidePanelUp(void) {
         task->state      = 0;
     }
 }
-
-s32 Item_Count(u8 category, u8 item_id, u8 mode);
 
 void func_801D3320(MenuPanelTask* task);
 s32  Char_GetExpForLevel(s32 character, s32 level);
@@ -193,8 +194,6 @@ extern u32             D_801DA100;
 extern u8              D_801DA11D;
 extern u8              D_801DA11E;
 extern u8              D_801DA11F;
-
-s32 Char_GetAbilityCost(s32 character_index, s32 ability_kind, s32 mode);
 
 /* The clut strip tables of this overlay, bound in config/symbols.toml. */
 extern UvRect g_MenuClutStripCells[];

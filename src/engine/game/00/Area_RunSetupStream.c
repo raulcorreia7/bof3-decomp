@@ -11,7 +11,7 @@ MATCH void Area_RunSetupStream(u8* cursor) {
         index                                                         = (s16)D_1F800000.view.area.entry_data + 1;
         D_1F800000.view.area.entry_data                               = index;
     } while (index < 4);
-    func_801A3F3C(cursor);
+    Area_SetScenarioId(cursor);
     if (D_1F800000.view.area.entity_counter < ENTITY_MAX) {
         do {
             g_Actors[D_1F800000.view.area.entity_counter].header.flags = 0;

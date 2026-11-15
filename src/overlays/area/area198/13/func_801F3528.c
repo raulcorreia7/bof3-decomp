@@ -7,6 +7,6 @@ MATCH void func_801F3528(void) {
     if (diff != 0) {
         g_ScriptState->unk_07 = abs(diff);
         g_Task->direction_08  = FACING_RIGHT;
-        func_801ABBA8(g_ScriptState, g_Task->direction_08);
+        Area_MoveActorRoute(g_ScriptState, g_Task->direction_08);
     }
 }

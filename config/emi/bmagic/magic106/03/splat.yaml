@@ -27,5 +27,5 @@ segments:
       - [0xDFC, bin, D_801EF9FC]
       - [0xE00, bin, D_801EFA02]
       - [0xE14, bin, D_801EFA14]
-      - [0x19F8, bin, g_BMagicOrbitWork]
+      - [0x19F8, bin, g_BMagicOrbit]
   - [0x19FC]

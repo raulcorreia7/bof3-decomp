@@ -7,7 +7,5 @@ MATCH void Actor_StopMoving(void) {
     work                                         = g_Task;
     g_AreaCameraStep                             = 0;
     g_AreaCameraHeightStep                       = 0;
-    work->vx                                     = 0;
-    work->vy                                     = 0;
-    work->vz                                     = 0;
+    setVector(work, 0, 0, 0);
 }

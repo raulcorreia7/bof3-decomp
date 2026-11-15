@@ -9,7 +9,7 @@ MATCH bool Battle_EndRound(void) {
 
     count = 0;
     for (slot = 0; slot < BATTLE_PARTY_CHARACTERS_COUNT; slot++) {
-        if (func_801D64C4(slot) == 0) {
+        if (Battle_GetActionLock(slot) == 0) {
             if ((g_Game.members[slot].u.turn.action_flags.value & COMBATANT_FLAG_CHARGING) && (g_Game.members[slot].counter_136 == 3)) {
                 count++;
                 g_Game.members[slot].header.mode         = 6;
@@ -25,7 +25,7 @@ MATCH bool Battle_EndRound(void) {
         }
     }
     for (slot = 3; slot < 11; slot++) {
-        if (func_801D64C4(slot) == 0) {
+        if (Battle_GetActionLock(slot) == 0) {
             if ((ENEMY_COMBATANT(slot).turn.action_flags.value & COMBATANT_FLAG_CHARGING) && (g_Game.members[slot].counter_136 == 3)) {
                 count++;
                 ENEMY_COMBATANT(slot).header.mode       = 6;
@@ -41,8 +41,8 @@ MATCH bool Battle_EndRound(void) {
         }
     }
     if (count & BYTE_MASK) {
-        func_801D9484();
-        func_801DE560(2, 0, 0, 45, Message_GetText(0x2D));
+        Battle_OpenPanel();
+        Battle_QueueEvent(2, 0, 0, 45, Message_GetText(0x2D));
         return true;
     }
     return false;

@@ -61,16 +61,16 @@ MATCH void func_801A57F0(u8* script) {
     FIELD(u8, &D_801468FF, *counter * ACTOR_SIZE) = script[0x10];
     D_8014691C[*counter][0]                       = 0x7F;
 
-    func_801A4990(script + 0xD);
+    Actor_SetOptionFlags(script + 0xD);
 
     if (script[3] & 0x80) {
         g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     }
 
-    g_Task->tint.bytes.unk_5D = 0;
-    g_Task->tint.bytes.unk_5F = 0;
-    g_Task->tint.bytes.unk_5E = 0;
-    g_Task->tint.bytes.flags  = script[3] & 0xF;
+    g_Task->tint.bytes.rgb.red   = 0;
+    g_Task->tint.bytes.rgb.blue  = 0;
+    g_Task->tint.bytes.rgb.green = 0;
+    g_Task->tint.bytes.flags     = script[3] & 0xF;
 
     func_801A4914();
 

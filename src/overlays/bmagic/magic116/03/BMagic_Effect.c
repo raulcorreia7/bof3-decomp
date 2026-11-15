@@ -34,7 +34,19 @@ MATCH void func_801EED2C(void) {
     g_Task = saved;
 }
 
-INCLUDE_ASM(func_801EEDB0);
+MATCH void func_801EEDB0(void) {
+    u8 timer;
+
+    func_801EF258();
+    func_801EF118();
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (timer == 0) {
+        g_Task->header.mode = g_Task->header.mode + 1;
+        func_800A9820(g_Battle.target_selector);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
+    }
+}
 
 MATCH void func_801EEE34(void) {
     u16* flags;
@@ -66,12 +78,8 @@ MATCH void func_801EEE7C(BMagicStreakSegment* segment) {
     Area_ProjectPoint(point, POLY_XY(prim, 2));
     point[0] = segment->tail.x - 0x1000;
     Area_ProjectPoint(point, POLY_XY(prim, 3));
-    prim->r0 = prim->r1 = segment->head_red;
-    prim->g0 = prim->g1 = segment->head_green;
-    prim->b0 = prim->b1 = segment->head_blue;
-    prim->r2 = prim->r3 = segment->tail_red;
-    prim->g2 = prim->g3 = segment->tail_green;
-    prim->b2 = prim->b3 = segment->tail_blue;
+    setRGB0(prim, prim->r1 = segment->head_red, prim->g1 = segment->head_green, prim->b1 = segment->head_blue);
+    setRGB2(prim, prim->r3 = segment->tail_red, prim->g3 = segment->tail_green, prim->b3 = segment->tail_blue);
     GFX_AddPrim(3, sizeof(POLY_G4));
 }
 
@@ -125,7 +133,32 @@ MATCH void func_801EF020(BMagicStreakSegment* record) {
     record->tail_blue  = 0;
 }
 
-INCLUDE_ASM(func_801EF118);
+MATCH u8 func_801EF118(void) {
+    BMagicStreakSegment* record;
+    u8                   i;
+    u8                   drawn;
+
+    drawn = 0;
+    GFX_SET_DRAW_MODE(GetTPage(0, 1, 0x2C0, 0x100) & HALF_MASK);
+    GFX_AddPrim(3, sizeof(DR_MODE));
+    func_801AFE18();
+    for (record = D_801EF2A8, i = 0; i < 128; record++, i++) {
+        if (record->active != 0) {
+            func_801EEE7C(record);
+            drawn = 1;
+            record->head.x += record->velocity.x;
+            record->head.y += record->velocity.y;
+            record->head.z += record->velocity.z;
+            record->tail.x += record->velocity.x;
+            record->tail.y += record->velocity.y;
+            record->tail.z += record->velocity.z;
+            if (--record->life == 0) {
+                record->active = 0;
+            }
+        }
+    }
+    return drawn;
+}
 
 MATCH void func_801EF258(void) {
     BMagicStreakSegment* record;

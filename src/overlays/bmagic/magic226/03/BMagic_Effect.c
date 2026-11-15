@@ -7,27 +7,74 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/Effect_RunSlots.h"
 
-INCLUDE_ASM(func_801EED18);
+MATCH void func_801EED18(void) {
+    u16* dst;
+    u16* src;
+    u32  slot;
+    s32  i;
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
+    }
+    Battle_CenterCamera();
+    Battle_ProjectRange();
+    if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
+        if (g_Battle.active_battler >= BATTLE_PARTY_CHARACTERS_COUNT) {
+            g_Task->facing = D_8014637C->facing;
+        } else {
+            g_Task->facing = D_8014637C->facing ^ 2;
+        }
+    } else if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
+        g_Task->facing = D_8014637C->facing;
+    } else {
+        g_Task->facing = D_8014637C->facing ^ 2;
+    }
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0x10;
+    g_Task->header.mode += 1;
+    slot                               = Battle_AllocEffect(1, 0x5F) & BYTE_MASK;
+    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].header.mode  = 0;
+    g_Task->param.unk_0B += 1;
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    i   = 0;
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    for (; i < 256; i++) {
+        *dst++ = *src++ | 0x8000;
+    }
+    i   = 0;
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW);
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
+    for (; i < 16; i++) {
+        *dst++ = *src++ | 0x8000;
+    }
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = *MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW)  = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
+    g_GfxPalettePending                                      = 1;
+}
 
 #include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
 
-#include "overlays/bmagic/Effect_PlayOnZeroTick.h"
+#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EF004 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF048(void) {
-    g_ScriptTable = BMAGIC_SCRIPT_TABLE;
+    g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0C44, g_Task->header.step);
     if ((g_Task->header.flags & BMAGIC_EFFECT_IN_USE) != 0 && g_Task->header.step != 0) {
         Battle_ProjectRange();
         func_8014D290();
         Effect_SetActiveActorMatrix();
-        func_801EF814();
+        Effect_DrawShadedDisc();
         BMagic_DrawDarkRing();
         PopMatrix();
     }
-    g_ScriptTable = AREA_SCRIPT_TABLE;
+    g_Scripts = AREA_SCRIPT_TABLE;
 }
 
 /* Starts the meteor above the battler: copies its pose, rotates the unk_0C/unk_10 pair by the
@@ -99,7 +146,8 @@ MATCH void func_801EF698(void) {
 
 #include "overlays/bmagic/Effect_SetActiveActorMatrix.h"
 
-INCLUDE_ASM(func_801EF814);
+/* func_801EF814 */
+#include "overlays/bmagic/Effect_DrawShadedDisc.h"
 
 #include "overlays/bmagic/BMagic_DrawDarkRing.h"
 
@@ -195,27 +243,14 @@ MATCH void func_801F01B8(void) {
     prim                             = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
-    prim->x0    = g_Task->unk_2E.half + FIXED_MUL(rcos(512), D_1F800000.view.effect.params[0]);
-    prim->y0    = g_Task->unk_30.half + FIXED_MUL(rsin(512), D_1F800000.view.effect.params[0]);
-    prim->x1    = g_Task->unk_2E.half + FIXED_MUL(rcos(1536), D_1F800000.view.effect.params[0]);
-    prim->y1    = g_Task->unk_30.half + FIXED_MUL(rsin(1536), D_1F800000.view.effect.params[0]);
-    prim->x2    = g_Task->unk_2E.half + FIXED_MUL(rcos(3584), D_1F800000.view.effect.params[0]);
-    prim->y2    = g_Task->unk_30.half + FIXED_MUL(rsin(3584), D_1F800000.view.effect.params[0]);
-    prim->x3    = g_Task->unk_2E.half + FIXED_MUL(rcos(2560), D_1F800000.view.effect.params[0]);
-    prim->y3    = g_Task->unk_30.half + FIXED_MUL(rsin(2560), D_1F800000.view.effect.params[0]);
+    setXY4(prim, g_Task->unk_2E.half + FIXED_MUL(rcos(512), D_1F800000.view.effect.params[0]), g_Task->unk_30.half + FIXED_MUL(rsin(512), D_1F800000.view.effect.params[0]),
+           g_Task->unk_2E.half + FIXED_MUL(rcos(1536), D_1F800000.view.effect.params[0]), g_Task->unk_30.half + FIXED_MUL(rsin(1536), D_1F800000.view.effect.params[0]),
+           g_Task->unk_2E.half + FIXED_MUL(rcos(3584), D_1F800000.view.effect.params[0]), g_Task->unk_30.half + FIXED_MUL(rsin(3584), D_1F800000.view.effect.params[0]),
+           g_Task->unk_2E.half + FIXED_MUL(rcos(2560), D_1F800000.view.effect.params[0]), g_Task->unk_30.half + FIXED_MUL(rsin(2560), D_1F800000.view.effect.params[0]));
     prim->tpage = GetTPage(0, 1, 832, 256);
     prim->clut  = GetClut(0, 482);
-    prim->u0    = 0;
-    prim->v0    = 128;
-    prim->u1    = 32;
-    prim->v1    = 128;
-    prim->u2    = 0;
-    prim->v2    = 160;
-    prim->u3    = 32;
-    prim->v3    = 160;
-    prim->r0    = g_Task->unk_5D + D_1F800000.view.effect.params[5];
-    prim->g0    = D_1F800000.view.effect.params[5];
-    prim->b0    = D_1F800000.view.effect.params[5];
+    setUVWH(prim, 0, 128, 32, 32);
+    setRGB0(prim, g_Task->unk_5D + D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[5]);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_FT4));
 }
 
@@ -228,7 +263,25 @@ MATCH void func_801F04D4(void) {
     }
 }
 
-INCLUDE_ASM(func_801F055C);
+MATCH void func_801F055C(void) {
+    PartyMember* src;
+    PartyMember* dst;
+    s32          z;
+
+    if (--g_Task->unk_09 == 0) {
+        g_Task->facing   = BATTLE_ACTIVE_WORK->facing;
+        src              = BATTLE_ACTIVE_WORK;
+        dst              = g_Task;
+        dst->pos.x.fixed = src->pos.x.fixed;
+        dst->pos.y.fixed = src->pos.y.fixed;
+        z                = src->pos.z.fixed;
+        dst->unk_14      = 0x60000;
+        dst->unk_09      = 8;
+        dst->pos.z.fixed = z - (3 << 24);
+        g_Task->timer    = 16;
+        g_Task->header.step++;
+    }
+}
 
 INCLUDE_ASM(func_801F061C);
 
@@ -251,7 +304,54 @@ MATCH void func_801F068C(void) {
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
-INCLUDE_ASM(func_801F07D4);
+MATCH void func_801F07D4(void) {
+    POLY_G4* prim;
+    long     depth;
+    long     flag;
+    s32      i;
+    s32      x;
+    s32      y;
+    s32      tpage;
+
+    D_1F800000.view.effect.params[0] = g_Task->unk_09 * 24;
+    D_1F800000.view.effect.params[1] = g_Task->unk_09 << 5;
+    D_1F800000.view.effect.params[5] = g_Task->timer * 12;
+    D_1F800000.view.effect.params[6] = g_Task->timer * 6;
+    D_1F800000.view.effect.params[7] = g_Task->timer * 6;
+    D_1F800014[0].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[1]);
+    D_1F800014[0].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[1]);
+    D_1F800014[1].vz                 = -64;
+    D_1F800014[0].vz                 = -64;
+    D_1F800014[2].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[2].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[3].vz                 = 0;
+    D_1F800014[2].vz                 = 0;
+    for (i = 1; i <= 32; i++) {
+        D_1F800014[1].vx = D_1F800014[0].vx;
+        D_1F800014[1].vy = D_1F800014[0].vy;
+        D_1F800014[0].vx = FIXED_MUL(rsin(i << 7), D_1F800000.view.effect.params[1]);
+        D_1F800014[0].vy = FIXED_MUL(rcos(i << 7), D_1F800000.view.effect.params[1]);
+        D_1F800014[3].vx = D_1F800014[2].vx;
+        D_1F800014[3].vy = D_1F800014[2].vy;
+        D_1F800014[2].vx = FIXED_MUL(rsin(i << 7), D_1F800000.view.effect.params[0]);
+        D_1F800014[2].vy = FIXED_MUL(rcos(i << 7), D_1F800000.view.effect.params[0]);
+        x                = (D_1F800014[2].vx << 9) + g_Task->pos.x.fixed;
+        y                = (D_1F800014[2].vy << 9) + g_Task->pos.y.fixed;
+        tpage            = getTPage(0, 1, 320, 256);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+        Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        setRGB0(prim, 1, 1, 1);
+        setRGB1(prim, 1, 1, 1);
+        setRGB2(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
+        setRGB3(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
+        /* Retail advances the cursor 40 bytes, a POLY_FT4, past this 36-byte POLY_G4. */
+        Area_AddCellPrim(x, y, 0, sizeof(POLY_FT4));
+    }
+}
 
 /* func_801F0B8C */
 #include "overlays/bmagic/BMagic_AllocEffect.h"

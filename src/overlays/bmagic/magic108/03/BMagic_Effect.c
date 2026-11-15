@@ -51,8 +51,7 @@ MATCH void func_801EEE0C(void) {
     g_Task->unk_18           = g_Task->pos.x.fixed;
     g_Task->unk_1C           = g_Task->pos.y.fixed;
     g_Task->unk_20           = g_Task->pos.z.fixed;
-    FAKE_BARRIER(); /* FAKE: keeps the g_Battle.active_battler read below the coord copy stores */
-    slot = g_Battle.active_battler;
+    slot                     = g_Battle.active_battler;
     if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
         battler = &g_Game.members[slot];
     } else {
@@ -65,15 +64,15 @@ MATCH void func_801EEE0C(void) {
     g_Task->unk_09       = 0;
     g_Task->timer        = 0;
     g_Task->header.mode += 1;
-    SND_QueueSelectionFx(0x100);
+    SND_QueueSelectionEffect(0x100);
 }
 
 MATCH void func_801EEF48(void) {
     s32 vec[4];
 
     g_Task->timer += 1;
-    vec[0] = (g_Task->unk_18 >> 9) - 0x4000;
-    vec[1] = (g_Task->unk_1C >> 9) - 0x4000;
+    vec[0] = (g_Task->unk_18 >> 9) - AREA_CELL_ORIGIN;
+    vec[1] = (g_Task->unk_1C >> 9) - AREA_CELL_ORIGIN;
     vec[2] = g_Task->unk_20 >> 0x11;
     /* The retail build passes the never-written slot after the vector. */
     func_800AF3A0(vec[0], vec[1], vec[2], vec[3], 0x20);
@@ -88,7 +87,7 @@ MATCH void func_801EF020(void) {
     temp_v0       = g_Task->timer + 1;
     g_Task->timer = temp_v0;
     if (!(temp_v0 & 0x1F)) {
-        SND_QueueSelectionFx(0x101);
+        SND_QueueSelectionEffect(0x101);
         g_Task->timer = 0;
         g_Task->header.mode += 1;
     }
@@ -117,48 +116,94 @@ MATCH void func_801EF130(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF180(void) {
+MATCH void func_801EF180(void) {
     SVECTOR pos;
     SVECTOR rot;
     MATRIX  matrix;
     long    flags;
-    u8      timer;
 
     PushMatrix();
     switch (g_Task->facing) {
-        case 0:
+        case 0: {
+            u8 timer;
+
             timer  = g_Task->timer;
             rot.vy = 0;
             rot.vz = 0x800;
             rot.vx = (~timer & 0x1F) << 7;
             break;
-        case 1:
+        }
+        case 1: {
+            u8 timer;
+
             rot.vx = 0;
             timer  = g_Task->timer;
             rot.vz = 0xC00;
             rot.vy = (~timer & 0x1F) << 7;
             break;
-        case 2:
+        }
+        case 2: {
+            u8 timer;
+
             timer  = g_Task->timer;
             rot.vy = 0;
             rot.vz = 0;
             rot.vx = (~timer & 0x1F) << 7;
             break;
-        case 3:
+        }
+        case 3: {
+            u8 timer;
+
             rot.vx = 0;
             timer  = g_Task->timer;
             rot.vz = 0x400;
             rot.vy = (~timer & 0x1F) << 7;
             break;
+        }
     }
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }
-#else
-INCLUDE_ASM(func_801EF180);
-#endif
 
-INCLUDE_ASM(func_801EF2D4);
+/* Draws a fan of projected LINE_F2 rays, one per count up to the effect counter 0x09: each ray swings by an
+ * thirty-second of a turn more and its x falls with the timer; in mode 5 the rays turn semi-transparent and fade. */
+MATCH void func_801EF2D4(void) {
+    LINE_F2* prim;
+    long     p;
+    long     flag;
+    s32      semi;
+    s32      tpage;
+    s32      i;
+
+    semi                             = g_Task->header.mode == 5;
+    D_1F800000.view.scenario.math_00 = 0;
+    setVector(&D_1F800014[0], g_Task->timer, FIXED_MUL(rcos(0), D_1F800000.view.scenario.math_00), FIXED_MUL(rsin(0), D_1F800000.view.scenario.math_00));
+    for (i = 1; D_1F800000.view.scenario.math_00 < g_Task->unk_09; i++) {
+        tpage = getTPage(0, semi, 320, 256);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
+        prim = (LINE_F2*)g_GfxPrimCursor;
+        SetLineF2(prim);
+        SetSemiTrans(prim, semi);
+        RotTransPers(&D_1F800014[0], (long*)&prim->x0, &p, &flag);
+        if (i < g_Task->timer) {
+            D_1F800014[0].vx = g_Task->timer - i;
+        } else {
+            D_1F800014[0].vx = 0;
+        }
+        D_1F800014[0].vy = FIXED_MUL(rcos(i << 7), D_1F800000.view.scenario.math_00);
+        D_1F800014[0].vz = FIXED_MUL(rsin(i << 7), D_1F800000.view.scenario.math_00);
+        RotTransPers(&D_1F800014[0], (long*)&prim->x1, &p, &flag);
+        if (g_Task->header.mode == 5) {
+            D_1F800000.view.scenario.math_04 = 0x60 - (g_Task->timer - 0x60) * 3;
+            D_1F800000.view.scenario.math_0C = 0x40 - (g_Task->timer - 0x60) * 2;
+            setRGB0(prim, D_1F800000.view.scenario.math_0C, D_1F800000.view.scenario.math_04, D_1F800000.view.scenario.math_0C);
+        } else {
+            setRGB0(prim, 0x80, 0xC0, 0x80);
+        }
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(LINE_F2));
+        D_1F800000.view.scenario.math_00++;
+    }
+}
 
 MATCH void func_801EF5C0(void) {
     SVECTOR pos;
@@ -174,12 +219,63 @@ MATCH void func_801EF5C0(void) {
         rot.vy = (s16)(angle << 7);
         rot.vz = 1024;
     } else {
-        angle  = g_Task->timer & 0x1F;
-        rot.vx = (s16)(angle << 7);
-        rot.vy = 0;
-        rot.vz = 0;
+        angle = g_Task->timer & 0x1F;
+        setVector(&rot, (s16)(angle << 7), 0, 0);
     }
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }
 
-INCLUDE_ASM(func_801EF6C0);
+/* Draws two semi-transparent diamonds as projected POLY_G4 quads, the second turned an eighth of a turn from the
+ * first: the radius grows with the timer in mode 1 up to 0xC0, and the shade fades with the timer in mode 5. */
+MATCH void func_801EF6C0(void) {
+    POLY_G4* prim;
+    long     p;
+    long     flag;
+    s32      tpage;
+
+    tpage = getTPage(0, 1, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    SetSemiTrans(prim, 1);
+    if (g_Task->header.mode == 1) {
+        D_1F800000.view.scenario.math_00 = g_Task->timer * 8;
+        if (D_1F800000.view.scenario.math_00 > 0xC0) {
+            D_1F800000.view.scenario.math_00 = 0xC0;
+        }
+    } else {
+        D_1F800000.view.scenario.math_00 = 0xC0;
+    }
+    setVector(&D_1F800014[0], 0, FIXED_MUL(rcos(0x200), D_1F800000.view.scenario.math_00), FIXED_MUL(rsin(0x200), D_1F800000.view.scenario.math_00));
+    setVector(&D_1F800014[1], 0, FIXED_MUL(rcos(0x600), D_1F800000.view.scenario.math_00), FIXED_MUL(rsin(0x600), D_1F800000.view.scenario.math_00));
+    setVector(&D_1F800014[2], 0, FIXED_MUL(rcos(0xE00), D_1F800000.view.scenario.math_00), FIXED_MUL(rsin(0xE00), D_1F800000.view.scenario.math_00));
+    setVector(&D_1F800014[3], 0, FIXED_MUL(rcos(0xA00), D_1F800000.view.scenario.math_00), FIXED_MUL(rsin(0xA00), D_1F800000.view.scenario.math_00));
+    RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p, &flag);
+    if (g_Task->header.mode == 5) {
+        D_1F800000.view.scenario.math_04 = 0x60 - (g_Task->timer - 0x60) * 3;
+    } else {
+        D_1F800000.view.scenario.math_04 = 0x60;
+    }
+    setRGB0(prim, D_1F800000.view.scenario.math_04, 1, D_1F800000.view.scenario.math_04);
+    setRGB1(prim, D_1F800000.view.scenario.math_04, D_1F800000.view.scenario.math_04, 1);
+    setRGB2(prim, D_1F800000.view.scenario.math_04, 1, D_1F800000.view.scenario.math_04);
+    setRGB3(prim, D_1F800000.view.scenario.math_04, 1, 1);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_G4));
+    tpage = getTPage(0, 1, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    SetSemiTrans(prim, 1);
+    setVector(&D_1F800014[0], 0, FIXED_MUL(rcos(0), D_1F800000.view.scenario.math_00), FIXED_MUL(rsin(0), D_1F800000.view.scenario.math_00));
+    setVector(&D_1F800014[1], 0, FIXED_MUL(rcos(0x400), D_1F800000.view.scenario.math_00), FIXED_MUL(rsin(0x400), D_1F800000.view.scenario.math_00));
+    setVector(&D_1F800014[2], 0, FIXED_MUL(rcos(0xC00), D_1F800000.view.scenario.math_00), FIXED_MUL(rsin(0xC00), D_1F800000.view.scenario.math_00));
+    setVector(&D_1F800014[3], 0, FIXED_MUL(rcos(0x800), D_1F800000.view.scenario.math_00), FIXED_MUL(rsin(0x800), D_1F800000.view.scenario.math_00));
+    RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p, &flag);
+    setRGB0(prim, D_1F800000.view.scenario.math_04, 1, D_1F800000.view.scenario.math_04);
+    setRGB1(prim, D_1F800000.view.scenario.math_04, D_1F800000.view.scenario.math_04, 1);
+    setRGB2(prim, D_1F800000.view.scenario.math_04, 1, D_1F800000.view.scenario.math_04);
+    setRGB3(prim, D_1F800000.view.scenario.math_04, 1, 1);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_G4));
+}

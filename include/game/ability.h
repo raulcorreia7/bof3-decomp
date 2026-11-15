@@ -129,7 +129,7 @@ ASSERT_SIZE(Ability, ABILITY_STRIDE);
 /* Ability ids, the record index in the GAME.EMI ability table; the names are the
  * record names. Ids 174-215 repeat the spells of 70-115 as AbilityType SKILL
  * records (the _SKILL suffix); the "Noting" placeholders carry their id.
- * func_801ADDD4 passes these ids to the character ability list.
+ * Char_GetExp passes these ids to the character ability list.
  */
 typedef enum AbilityId {
     ABILITY_NONE              = 0,

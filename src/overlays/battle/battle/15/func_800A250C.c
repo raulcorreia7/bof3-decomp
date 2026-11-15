@@ -4,7 +4,7 @@ MATCH void func_800A250C(void) {
     u8 battler_index;
     u8 selection_kind;
 
-    func_800A3F28();
+    Battle_MarkDamageApplied();
     battler_index = g_BattleActiveBattler;
     /* FAKE: statement boundary keeps the retail register order and schedule. */
     FAKE_ORDER_LOCK(selection_kind = g_BattleTarget);

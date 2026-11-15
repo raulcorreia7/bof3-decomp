@@ -202,7 +202,7 @@ extern s32  func_801EEEC8(void);
 extern s32  SAVE_TestHardwareEvents(void);
 extern void SAVE_PollSoftwareEvents(void);
 extern void SAVE_PollHardwareEvents(void);
-extern void SAVE_PollCardInfo(void);
+extern void SAVE_PollCard(void);
 extern void SAVE_PollCardLoad(void);
 extern void func_801EF148(void);
 extern s32  SAVE_OpenFile(u8 port, char* name, s32 mode);

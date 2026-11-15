@@ -12,9 +12,9 @@ MATCH s8 Game_FindRockAhead(s32 route_index, s32 route_flags) {
     pos_x = g_Task->pos.x.fixed + g_FacingSteps[route].x;
     pos_y = g_Task->pos.y.fixed + g_FacingSteps[route].y;
     do {
-        if (g_ActorSlots[index].header.flags != 0 && g_ActorSlots[index].type == 0x17) {
+        if (g_SpawnedActors[index].header.flags != 0 && g_SpawnedActors[index].type == 0x17) {
             /* FAKE: func_801BDD58 reads the row through the field actor layout. */
-            if (func_801BDD58(pos_x, pos_y, COORD_INT(g_Task->pos.z), 0, (Actor*)&g_ActorSlots[index]) & BYTE_MASK) {
+            if (func_801BDD58(pos_x, pos_y, COORD_INT(g_Task->pos.z), 0, (Actor*)&g_SpawnedActors[index]) & BYTE_MASK) {
                 return index;
             }
         }

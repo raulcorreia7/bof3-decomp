@@ -7,7 +7,7 @@
 #include "sys/actor.h"
 #include "overlays/area/world03.h"
 #include "area/spad.h"
-#include "menu/party.h"
+#include "scenario/party.h"
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
@@ -70,12 +70,14 @@ extern Callback D_801F6B40[];
 void            func_801F37C4(void);
 void            func_801F3830(s32 arg0, s32 arg1);
 void            func_801F3CA8(void);
+s32             func_801F5208(s32 x, s32 y);
 s32             func_801F5BCC(s16 arg0);
 u8              func_801F5C60(s32 x, s32 y);
 u8              func_801F5D1C(void);
 /* The overlay's companion steps the wrappers enter. */
 void            func_801F5D98(void);
 void            func_801F5F28(void);
+s32             func_801F603C(s32 x, s32 y);
 
 extern Callback D_801F6B48[];
 extern Callback D_801F6B6C[];

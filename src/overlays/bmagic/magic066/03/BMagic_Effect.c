@@ -54,8 +54,6 @@ MATCH void func_801EEDB8(void) {
         work                               = g_Task;
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].target.party = work;
-        /* FAKE: keeps the target selector read after the slot stores, as retail orders it. */
-        FAKE_BARRIER();
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x20);
         g_Task->header.mode = g_Task->header.mode + 1;
     }
@@ -131,7 +129,99 @@ MATCH void func_801EF108(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF158);
+MATCH void func_801EF158(void) {
+    POLY_FT4* poly;
+    POLY_G4*  prim;
+    long      depth;
+    long      flag;
+    s32       tpage;
+    s32       i;
+    s16       angle;
+
+    tpage = getTPage(1, 1, 320, 256);
+    GFX_AddDitheredDrawMode(2, tpage);
+    D_1F800000.view.effect.params[0] = g_Task->unk_14;
+    angle                            = g_Task->param.unk_0B;
+    D_1F800014[0].vx                 = 0;
+    D_1F800014[0].vy                 = 0;
+    angle &= 0x1F;
+    D_1F800000.view.effect.params[3] = angle << 7;
+    D_1F800014[0].vz                 = FIXED_MUL(rsin(angle << 7), D_1F800000.view.effect.params[0]);
+    for (i = 1; i < 128; i++) {
+        poly = (POLY_FT4*)g_GfxPrimCursor;
+        SetPolyFT4(poly);
+        SetSemiTrans(poly, 1);
+        D_1F800014[2].vx                 = 0;
+        D_1F800014[2].vy                 = D_1F800014[0].vy;
+        D_1F800014[2].vz                 = D_1F800014[0].vz;
+        D_1F800014[3].vx                 = 0x1000;
+        D_1F800014[3].vy                 = D_1F800014[0].vy;
+        D_1F800014[3].vz                 = D_1F800014[0].vz;
+        angle                            = (g_Task->param.unk_0B + i) & 0x1F;
+        D_1F800014[0].vx                 = 0;
+        D_1F800000.view.effect.params[3] = angle << 7;
+        D_1F800014[0].vy                 = -(i * 128 + (g_Task->unk_10 >> 1) * i);
+        D_1F800014[0].vz                 = FIXED_MUL(rsin(angle << 7), D_1F800000.view.effect.params[0]);
+        D_1F800014[1].vx                 = 0x1000;
+        D_1F800014[1].vy                 = D_1F800014[0].vy;
+        D_1F800014[1].vz                 = D_1F800014[0].vz;
+        if (g_Task->header.step == 4) {
+            D_1F800000.view.effect.params[1] = (g_Task->unk_10 / 2) * 8;
+        } else {
+            D_1F800000.view.effect.params[1] = 0x80;
+        }
+        setRGB0(poly, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
+        poly->tpage                      = GetTPage(1, 1, 0x340, 0x100);
+        poly->clut                       = GetClut(0, 0x1FA);
+        D_1F800000.view.effect.params[4] = 0xE0 - (((g_Task->param.unk_0B + i) & 7) << 4);
+        setUV4(poly, 0, D_1F800000.view.effect.params[4], 0xF8, D_1F800000.view.effect.params[4], 0, D_1F800000.view.effect.params[4] + 0x10, 0xF8, D_1F800000.view.effect.params[4] + 0x10);
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3, &depth, &flag);
+        GFX_AddPrim(2, sizeof(POLY_FT4));
+    }
+    i -= 2;
+    angle                            = (g_Task->param.unk_0B + i) & 0x1F;
+    D_1F800014[0].vx                 = 0;
+    D_1F800000.view.effect.params[3] = angle << 7;
+    D_1F800014[0].vy                 = -(i * 128 + (g_Task->unk_10 >> 1) * i);
+    D_1F800014[0].vz                 = FIXED_MUL(rsin(angle << 7), D_1F800000.view.effect.params[0]);
+    for (i++; i < 129; i++) {
+        prim                             = GFX_BeginPolyG4(1);
+        D_1F800014[2].vx                 = 0;
+        D_1F800014[2].vy                 = D_1F800014[0].vy;
+        D_1F800014[2].vz                 = D_1F800014[0].vz;
+        D_1F800014[3].vx                 = 0x1000;
+        D_1F800014[3].vy                 = D_1F800014[0].vy;
+        D_1F800014[3].vz                 = D_1F800014[0].vz;
+        angle                            = (g_Task->param.unk_0B + i) & 0x1F;
+        D_1F800014[0].vx                 = 0;
+        D_1F800000.view.effect.params[3] = angle << 7;
+        D_1F800014[0].vy                 = -(i * 128 + (g_Task->unk_10 >> 1) * i);
+        D_1F800014[0].vz                 = FIXED_MUL(rsin(angle << 7), D_1F800000.view.effect.params[0]);
+        D_1F800014[1].vx                 = 0x1000;
+        D_1F800014[1].vy                 = D_1F800014[0].vy;
+        D_1F800014[1].vz                 = D_1F800014[0].vz;
+        if (g_Task->header.step == 4) {
+            D_1F800000.view.effect.params[1] = (g_Task->unk_10 / 2) * 12;
+        } else {
+            D_1F800000.view.effect.params[1] = 0xC0;
+        }
+        if (i == 128) {
+            setRGB0(prim, 1, 1, 1);
+            setRGB1(prim, 1, 1, 1);
+            setRGB2(prim, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
+            setRGB3(prim, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
+        } else {
+            setRGB0(prim, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
+            setRGB1(prim, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
+            setRGB2(prim, 1, 1, 1);
+            setRGB3(prim, 1, 1, 1);
+        }
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        GFX_AddPrim(2, sizeof(POLY_G4));
+    }
+    tpage = getTPage(1, 0, 320, 256);
+    GFX_AddDitheredDrawMode(2, tpage);
+}
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
@@ -173,7 +263,35 @@ MATCH void func_801EF930(void) {
 
 INCLUDE_ASM(func_801EF984);
 
-INCLUDE_ASM(func_801EFCC8);
+MATCH void func_801EFCC8(void) {
+    POLY_FT4* poly;
+    long      depth;
+    long      flag;
+    s32       i;
+
+    for (i = 0; i < 4; i++) {
+        if (i * 3 < g_Task->unk_09 && D_801F00B0[i] < 16) {
+            poly = (POLY_FT4*)g_GfxPrimCursor;
+            SetPolyFT4(poly);
+            SetSemiTrans(poly, 1);
+            D_1F800000.view.effect.params[0] = D_801F00B0[i] * 4 + 50;
+            D_1F800000.view.effect.params[2] = D_801F00B0[i] * 15;
+            D_1F800014[0].vx                 = (rcos(0x200) * D_1F800000.view.effect.params[0]) >> 12;
+            D_1F800014[0].vy                 = (rsin(0x200) * D_1F800000.view.effect.params[0]) >> 12;
+            D_1F800014[0].vz                 = -D_1F800000.view.effect.params[2];
+            setVector(&D_1F800014[1], (rcos(0x600) * D_1F800000.view.effect.params[0]) >> 12, (rsin(0x600) * D_1F800000.view.effect.params[0]) >> 12, -D_1F800000.view.effect.params[2]);
+            setVector(&D_1F800014[2], (rcos(0xE00) * D_1F800000.view.effect.params[0]) >> 12, (rsin(0xE00) * D_1F800000.view.effect.params[0]) >> 12, -D_1F800000.view.effect.params[2]);
+            setVector(&D_1F800014[3], (rcos(0xA00) * D_1F800000.view.effect.params[0]) >> 12, (rsin(0xA00) * D_1F800000.view.effect.params[0]) >> 12, -D_1F800000.view.effect.params[2]);
+            poly->tpage = GetTPage(0, 1, 0x340, 0x100);
+            poly->clut  = GetClut(0, 0x1E2);
+            setUVWH(poly, 0, 0, 32, 32);
+            D_1F800000.view.effect.params[1] = 0x41 - (D_801F00B0[i] >> 1) * 4;
+            setRGB0(poly, D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1], D_1F800000.view.effect.params[1]);
+            RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3, &depth, &flag);
+            GFX_AddPrim(3, sizeof(POLY_FT4));
+        }
+    }
+}
 
 MATCH void func_801EFFB0(void) {
     SVECTOR pos;
@@ -182,8 +300,6 @@ MATCH void func_801EFFB0(void) {
     long    flags;
 
     PushMatrix();
-    rot.vx = 3072;
-    rot.vy = 0;
-    rot.vz = 0;
+    setVector(&rot, 3072, 0, 0);
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }

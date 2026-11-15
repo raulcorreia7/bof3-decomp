@@ -5,7 +5,30 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801EEC24);
+MATCH void func_801EEC24(void) {
+    Callback     handlers[8];
+    PartyMember* saved_battler;
+    s32          tpage;
+    u8           i;
+
+    __builtin_memcpy(handlers, D_801EEC04, sizeof(handlers));
+    SYS_DISPATCH_BYTE(handlers, g_Task->header.mode);
+    tpage = getTPage(0, 2, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    for (i = 0; i < ARRAY_COUNT(D_801F1CA0); i++) {
+        if (D_801F1CA0[i].header.flags & BMAGIC_EFFECT_IN_USE) {
+            saved_battler         = g_BattleEffectBattler;
+            D_801F24E0            = &D_801F1CA0[i];
+            g_BattleEffectBattler = D_801F1CA0[i].battler;
+            func_801F10F4();
+            g_BattleEffectBattler = saved_battler;
+        }
+    }
+    tpage = getTPage(0, 0, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+}
 
 MATCH void func_801EEDEC(void) {
     PartyMember* target;
@@ -32,7 +55,7 @@ MATCH void func_801EEDEC(void) {
     g_Task->param.unk_0B += 1;
     BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
     g_GfxPalettePending = 1;
-    SND_QueueSelectionFx(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
 }
 
 INCLUDE_ASM(func_801EEF64);
@@ -77,7 +100,48 @@ MATCH void func_801EF110(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF1C0);
+MATCH void func_801EF1C0(void) {
+    u8 count;
+    u8 found;
+    u8 i;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    found          = 0;
+    if (count != 0) {
+        return;
+    }
+    for (i = 0; i < g_Game.party_size; i++) {
+        if (g_Game.members[i].chr.character_id == CHAR_ID_REI && (g_Game.members[i].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM_QUEUED)) {
+            found = 1;
+        }
+    }
+    if (found) {
+        if (g_EmiLoadedCharacterIndex == 7) {
+            EMI_LoadArchive((g_Battle.scroll_dir & 0x2) ? 0x205 : 0x201);
+        }
+        if (g_EmiLoadedCharacterIndex == 0xD) {
+            EMI_LoadArchive((g_Battle.scroll_dir & 0x2) ? 0x206 : 0x202);
+        }
+        if (g_EmiLoadedCharacterIndex == 0xE) {
+            EMI_LoadArchive((g_Battle.scroll_dir & 0x2) ? 0x207 : 0x203);
+        }
+        if (g_EmiLoadedCharacterIndex == 0xF) {
+            if (g_Battle.scroll_dir & 0x2) {
+                EMI_LoadArchive(0x208);
+            } else {
+                EMI_LoadArchive(0x204);
+            }
+        }
+    } else {
+        if (g_Battle.scroll_dir & 0x2) {
+            EMI_GetArchiveId(g_EmiLoadedCharacterIndex & 0x7F, 2);
+        } else {
+            EMI_GetArchiveId(g_EmiLoadedCharacterIndex & 0x7F, 1);
+        }
+    }
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801EF3D0(void) {
     if (!EMI_IsReady()) {
@@ -113,7 +177,7 @@ MATCH void func_801EF488(void) {
                 if (g_Game.members[slot].chr.status & 0x800) {
                     Actor_SelectScript((g_Task->facing + 0x30) & BYTE_MASK);
                 }
-                if (func_801DB524(slot) & BYTE_MASK) {
+                if (Battle_SlotIsBlocked(slot) & BYTE_MASK) {
                     Actor_SelectScript((g_Task->facing + 0x1C) & BYTE_MASK);
                 }
                 i++;
@@ -131,7 +195,67 @@ MATCH void func_801EF488(void) {
 
 INCLUDE_ASM(func_801EF6AC);
 
-INCLUDE_ASM(func_801EF7FC);
+MATCH void func_801EF7FC(void) {
+    PartyMember* work;
+    PartyMember* task;
+    PartyMember* actor;
+    u8           count;
+    u8           i;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count != 0) {
+        return;
+    }
+    if (g_Battle.scroll_dir == 0 || g_Battle.scroll_dir == 3) {
+        g_Task->unk_2E.half = 0x3D;
+        g_Task->unk_30.half = 0x46;
+        g_Task->unk_0C      = -4;
+        g_Task->unk_10      = -4;
+        g_Task->unk_18      = -1;
+        g_Task->unk_1C      = -1;
+        g_Task->unk_2A      = 1;
+    } else {
+        g_Task->unk_2E.half = 0x103;
+        g_Task->unk_30.half = 0x46;
+        g_Task->unk_0C      = 4;
+        g_Task->unk_10      = -4;
+        g_Task->unk_18      = 1;
+        g_Task->unk_1C      = -1;
+        g_Task->unk_2A      = 0;
+    }
+    work = g_Task;
+    for (i = 0; i < 16; i++) {
+        work->unk_0C += work->unk_18;
+        work->unk_10 += work->unk_1C;
+        work->unk_2E.half += work->unk_0C;
+        work->unk_30.half += work->unk_10;
+    }
+    task           = g_Task;
+    task->unk_0C   = ~task->unk_0C + 1;
+    task->unk_25   = 5;
+    task->unk_10   = ~task->unk_10 + 1;
+    g_Task->unk_26 = 0;
+    g_Task->unk_27 = 2;
+    g_Task->unk_28 = 1;
+    g_Task->unk_24 = 0x80;
+    actor          = g_Task;
+    actor->unk_48  = 0;
+    actor->scale.x = 0x10000;
+    actor->scale.y = 0x10000;
+    g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    g_Task->unk_5C      = 0;
+    g_Task->unk_5D      = 0;
+    g_Task->unk_5E      = 0;
+    g_Task->unk_5F      = 0;
+    g_Task->unk_29      = 2;
+    g_Task->unk_2C.half = 0;
+    g_Task->unk_2B      = 0;
+    Actor_SelectScript(0);
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
+    g_Task->unk_09 = 0x10;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EFA68(void) {
     u8 count;
@@ -286,7 +410,26 @@ MATCH void func_801F0438(void) {
     }
 }
 
-INCLUDE_ASM(func_801F04C0);
+MATCH void func_801F04C0(void) {
+    PartyMember* work;
+    PartyMember* active;
+    s32          x;
+    s32          z;
+
+    work              = g_Task;
+    x                 = g_AreaScrollTargetX;
+    active            = g_BattleEffectBattler;
+    work->pos.x.fixed = x;
+    /* FAKE: Preserve the X write before the Y read. */
+    FAKE_BARRIER();
+    work->pos.y.fixed   = g_AreaScrollTargetY;
+    z                   = active->pos.z.fixed;
+    work->unk_5D        = 16;
+    work->pos.z.fixed   = z;
+    g_Task->unk_09      = 32;
+    g_Task->timer       = 8;
+    g_Task->header.step = g_Task->header.step + 1;
+}
 
 MATCH void func_801F053C(void) {
     EFFECT_ADVANCE_AT_COUNT(4, 0x40);
@@ -362,7 +505,50 @@ MATCH void Effect_SetActorMatrix4(void) {
     BMAGIC_SET_ACTOR_MATRIX();
 }
 
-INCLUDE_ASM(func_801F0DF4);
+MATCH void func_801F0DF4(void) {
+    POLY_FT4* prim;
+    long      depth;
+    long      flag;
+    s32       i;
+    s32       tpage;
+    s32       u;
+
+    tpage = getTPage(0, g_Task->param.unk_0B, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(3, sizeof(DR_MODE));
+    D_1F800000.view.effect.params[0] = g_Task->unk_14;
+    D_1F800000.view.effect.params[4] = g_Task->unk_09 << 3;
+    D_1F800000.view.effect.params[5] = g_Task->unk_09 << 3;
+    D_1F800000.view.effect.params[6] = g_Task->unk_09 << 3;
+    D_1F800014[1].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
+    D_1F800014[1].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
+    for (i = 1; i <= 16; i++) {
+        D_1F800014[0].vx = D_1F800014[1].vx;
+        D_1F800014[0].vy = D_1F800014[1].vy;
+        D_1F800014[0].vz = -1024;
+        D_1F800014[2].vx = D_1F800014[1].vx;
+        D_1F800014[2].vy = D_1F800014[1].vy;
+        D_1F800014[2].vz = 0;
+        D_1F800014[1].vx = FIXED_MUL(rsin(i << 8), D_1F800000.view.effect.params[0]);
+        D_1F800014[1].vy = FIXED_MUL(rcos(i << 8), D_1F800000.view.effect.params[0]);
+        D_1F800014[1].vz = -1024;
+        D_1F800014[3].vx = D_1F800014[1].vx;
+        D_1F800014[3].vy = D_1F800014[1].vy;
+        D_1F800014[3].vz = 0;
+        prim             = (POLY_FT4*)g_GfxPrimCursor;
+        SetPolyFT4(prim);
+        SetSemiTrans(prim, g_Task->param.unk_0B);
+        prim->tpage = GetTPage(1, g_Task->param.unk_0B, 832, 256);
+        prim->clut  = GetClut(0, 506);
+        u           = (i & 1) << 6;
+        setUV4(prim, u, 0, u + 63, 0, u, 191, u + 63, 191);
+        setRGB0(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
+        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        if (i < 7 || i > 14) {
+            GFX_AddPrim(3, sizeof(POLY_FT4));
+        }
+    }
+}
 
 MATCH void func_801F10F4(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 27), 1, D_801F24E0);
@@ -456,7 +642,36 @@ MATCH void func_801F1748(void) {
     MAGIC131_ORBIT_CLOSE(D_801F1C54, 6);
 }
 
-INCLUDE_ASM(func_801F1844);
+MATCH void func_801F1844(void) {
+    POLY_G3* prim;
+    s32      shade;
+    u8       i;
+
+    D_1F800000.view.effect.params[0] = D_801F24E0->unk_06 + (rand() & 3);
+    if (D_801F24E0->header.mode != 0) {
+        shade = ((rand() & 3) + 4) * D_801F24E0->timer_05;
+    } else {
+        shade = D_801F24E0->timer_05 * 14;
+    }
+    D_1F800000.view.effect.params[6] = D_801F24E0->unk_20;
+    D_1F800000.view.effect.params[7] = D_801F24E0->unk_22;
+    for (i = 0; i < 8; i++) {
+        prim = (POLY_G3*)g_GfxPrimCursor;
+        SetPolyG3(prim);
+        SetSemiTrans(prim, 1);
+        setXY0(prim, D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
+        D_1F800000.view.effect.params[3] = (i << 9) & ANGLE_MASK;
+        prim->x1                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[0]);
+        prim->y1                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[0]);
+        D_1F800000.view.effect.params[3] = ((i + 1) << 9) & ANGLE_MASK;
+        prim->x2                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[0]);
+        prim->y2                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[0]);
+        setRGB0(prim, shade, shade, shade);
+        setRGB1(prim, 1, 1, 1);
+        setRGB2(prim, 1, 1, 1);
+        GFX_AddPrim(2, sizeof(POLY_G3));
+    }
+}
 
 MATCH u8 func_801F1A58(void) {
     u8 i;
@@ -479,14 +694,14 @@ MATCH void func_801F1AC4(void) {
 }
 
 MATCH void func_801F1B14(void) {
-    BMagicEffectWork* work;
-    s16               vec[3];
-    TILE_1*           primitive;
+    BMagicEffect* work;
+    s16           vec[3];
+    TILE_1*       primitive;
 
     work      = D_801F24E0;
-    vec[0]    = (work->pos.x.fixed >> 9) - 0x4000;
+    vec[0]    = (work->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
     primitive = (TILE_1*)g_GfxPrimCursor;
-    vec[1]    = (work->pos.y.fixed >> 9) - 0x4000;
+    vec[1]    = (work->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
     vec[2]    = -(COORD_INT(work->pos.z) / 2);
     SetTile1(primitive);
     RotTransPers((SVECTOR*)vec, (long*)&primitive->x0, (long*)vec, (long*)&vec[2]);

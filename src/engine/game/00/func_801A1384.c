@@ -73,11 +73,11 @@ MATCH void func_801A1384(void* entity) {
         }
         g_Task->unk_0A = (0x10 / rate);
         rec[0x7B]--;
-        func_801ABBA8(rec + 0x74, g_Task->direction_08 & 0x7);
+        Area_MoveActorRoute(rec + 0x74, g_Task->direction_08 & 0x7);
         g_Task->direction_08 |= 8;
         rec[0x74] |= ACTOR_FLAG_MOVING;
     }
     func_801A2AE4((Actor*)rec, savedRoute);
 only_update:
-    func_801A253C((Actor*)rec);
+    Area_SetXFixed((Actor*)rec);
 }

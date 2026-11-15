@@ -17,6 +17,7 @@ extern u_long         D_801D8BB0; /* CAPCOM30.STR base LBA used by the LOGO.EXE 
 extern u32            D_801EB424;
 extern void*          D_801EB428;
 extern void*          D_801EB42C;
+extern u32            jtbl_801EB430; /* start of the BSS __SN_ENTRY_POINT clears */
 extern u8             D_801EB440;
 extern u_long*        D_801EB444;
 extern s32            D_801EB448;
@@ -39,6 +40,7 @@ extern s8             D_801EB4AC;
 extern s32            D_801EB650;
 extern InterruptHooks D_801EB654;
 extern s32            D_801EB678;
+extern u32            D_801ECEC0; /* end of the BSS __SN_ENTRY_POINT clears */
 
 /* Functions, in address order. */
 void Logo_Init(s32 work_base, u_long disc_lba);

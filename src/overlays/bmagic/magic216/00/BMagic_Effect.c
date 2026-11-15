@@ -22,7 +22,67 @@ MATCH void func_801EEC70(void) {
     g_Task->header.mode += 1;
 }
 
-INCLUDE_ASM(func_801EECDC);
+/* Rolls the steal: the chance is the drop rate entry of the target enemy scaled by
+ * the agility lead of the acting battler; a hit adds the item and clears the drop. */
+MATCH void func_801EECDC(void) {
+    s32 value;
+    s32 active;
+    s32 slot;
+    s32 scale;
+    s32 category;
+
+    active = g_BattleActiveBattler;
+    slot   = g_BattleTargetSelector;
+    value  = g_Game.members[active].chr.stats.agility - g_BattleEnemyBattlers[slot - 3].stats.agility;
+    scale  = 12;
+    if (value < 49) {
+        scale = 11;
+    }
+    if (value < 29) {
+        scale = 10;
+    }
+    if (value < 19) {
+        scale = 9;
+    }
+    if (value < 9) {
+        scale = 8;
+    }
+    if (value < -10) {
+        scale = 7;
+    }
+    if (value < -20) {
+        scale = 6;
+    }
+    if (value < -30) {
+        scale = 5;
+    }
+    if (value < -50) {
+        scale = 4;
+    }
+    value = g_BattleEnemyBattlers[slot - 3].drops[0].rate;
+    value = D_801EF078[value] * scale;
+    if ((rand() & 0xFF) < value) {
+        value = g_BattleEnemyBattlers[g_BattleTargetSelector - 3].drops[0].item;
+        if (value != 0) {
+            category = value >> 8;
+            if (Item_Add(category, value & 0xFF, 1, 0)) {
+                func_801EEF98(value & 0xFF, category & 0xFF);
+                func_801DE8C0(1, 0xFF, Message_GetText(0x38));
+                g_BattleEnemyBattlers[g_BattleTargetSelector - 3].drops[0].rate = 0;
+                g_BattleEnemyBattlers[g_BattleTargetSelector - 3].drops[0].item = 0;
+            } else {
+                func_801DE8C0(1, 0xFF, Message_GetText(0x39));
+            }
+        } else {
+            func_801DE8C0(1, 0xFF, Message_GetText(0x3A));
+        }
+    } else if (g_BattleEnemyBattlers[g_BattleTargetSelector - 3].drops[0].rate != 0) {
+        func_801DE8C0(1, 0xFF, Message_GetText(0x39));
+    } else {
+        func_801DE8C0(1, 0xFF, Message_GetText(0x3A));
+    }
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801EEF58(void) {
     u16* flags;
