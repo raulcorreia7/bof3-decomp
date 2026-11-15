@@ -3,7 +3,8 @@
 /* composes the caller's matrix with the shared matrix g_CameraMatrix in
  * place and loads the result as the GTE rotation and translation matrix.
  */
-MATCH void func_8015B4B0(void* matrix) {
+/* func_8015B4B0 */
+MATCH void Area_ApplyCameraMatrix(void* matrix) {
     MulMatrix2(&g_CameraMatrix, matrix);
     SetRotMatrix(matrix);
     SetTransMatrix(matrix);
