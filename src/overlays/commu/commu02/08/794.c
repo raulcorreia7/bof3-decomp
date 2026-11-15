@@ -166,24 +166,23 @@ MATCH void func_801D1938(void) {
 NON_MATCHING void func_801D1A50(void) {
     u16* input;
     u16  repeated;
-    u8   selection;
+    s32  selection;
+    s32  slot;
 
     input    = &g_InputPressed;
     repeated = INPUT_GetRepeatedButtons(*input & 0xA000);
     if (repeated != 0) {
         if ((s8)D_801DB0B4 < 8) {
             SND_PlayCue(0x100);
-            if ((s8)D_801DB0B4 != 0) {
+            if (LOB(D_801DB0B4) != 0) {
                 if (repeated & 0x8000) {
-                    selection  = (u8)D_801DB0B8 - 1;
-                    D_801DB0B8 = selection;
-                    if ((s8)selection < 0) {
+                    D_801DB0B8 = (u8)D_801DB0B8 - 1;
+                    if (D_801DB0B8 < 0) {
                         D_801DB0B8 = 2;
                     }
                 } else if (repeated & 0x2000) {
-                    selection  = (u8)D_801DB0B8 + 1;
-                    D_801DB0B8 = selection;
-                    if ((s8)selection >= 3) {
+                    D_801DB0B8 = (u8)D_801DB0B8 + 1;
+                    if (D_801DB0B8 >= 3) {
                         D_801DB0B8 = 0;
                     }
                 }
@@ -191,23 +190,23 @@ NON_MATCHING void func_801D1A50(void) {
                 D_801DB0B8 ^= 1;
             }
         }
-    } else if (*input & g_InputMasks[INPUT_SLOT_MOVE]) {
+    } else if (*input & g_InputMasks[MENU_INPUT_CONFIRM]) {
         selection = D_801DB0B8;
         if (selection == 2) {
             SND_PlayCue(0x104);
             SND_PlayCue(0x102);
-            D_801DB0B4 = 0;
+            D_801DB0C4 = 0;
             D_801F294D++;
-        } else if ((s8)D_801DB0B4 < 8) {
-            D_801DB080[10 + (u8)D_801DB0B4] = selection;
+        } else if ((slot = LOB(D_801DB0B4)) < 8) {
+            D_801DB080[10 + slot] = selection;
             D_801DB0B4++;
             SND_PlayCue(0x103);
             if (D_801DB0B4 == 8) {
                 D_801DB0B8 = 2;
             }
         }
-    } else if (*input & g_InputMasks[INPUT_SLOT_MENU]) {
-        if ((s8)D_801DB0B4 > 0) {
+    } else if (*input & g_InputMasks[MENU_INPUT_CANCEL]) {
+        if (LOB(D_801DB0B4) != 0) {
             SND_PlayCue(0x106);
             D_801DB0B4--;
             if ((s8)D_801DB0B4 == 0 && D_801DB0B8 == 2) {
@@ -218,7 +217,7 @@ NON_MATCHING void func_801D1A50(void) {
 
     if ((s8)D_801DB0B4 <= 0) {
         func_801D2908(0x58, 0x44, 2);
-    } else if ((s8)D_801DB0B4 < 8) {
+    } else if ((s8)D_801DB0B4 >= 8) {
         func_801D2908(0x58, 0x44, 3);
     } else {
         func_801D2908(0x58, 0x44, 0xFF);
