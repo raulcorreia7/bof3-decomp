@@ -170,8 +170,7 @@ MATCH void func_801F7AA8(void) {
 
 void func_801F7D1C(void);
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F7AEC(void) {
+MATCH void func_801F7AEC(void) {
     TILE* tile;
     u8*   cursor;
     u32   actor_offset;
@@ -181,31 +180,32 @@ NON_MATCHING void func_801F7AEC(void) {
     }
 
     actor_offset = g_Task->param.unk_0B * sizeof(Actor);
-    *((u8*)&g_Actors[0].active_flags + actor_offset) |= 8;
+    *((u8*)g_Actors + actor_offset + 0x24) |= 8;
     {
         Actor* task;
-        s32    actor_pos_x;
+        s32    px;
+        s32    pz;
 
-        task                                                        = g_Task;
-        actor_pos_x                                                 = *((s32*)&g_Actors[0].pos.x.fixed + actor_offset / sizeof(s32));
-        *((u16*)&g_Actors[0].screen_x + actor_offset / sizeof(u16)) = task->screen_x;
-        *((u16*)&g_Actors[0].screen_y + actor_offset / sizeof(u16)) = task->screen_y;
-        task->pos.x.fixed                                           = actor_pos_x;
-        task->pos.y.fixed                                           = *((s32*)&g_Actors[0].pos.y.fixed + actor_offset / sizeof(s32));
-        actor_pos_x                                                 = *((s32*)&g_Actors[0].pos.z.fixed + actor_offset / sizeof(s32));
-        task->tint.bytes.rgb.blue                                   = 0;
-        task->tint.bytes.rgb.green                                  = 0;
-        task->tint.bytes.rgb.red                                    = 0;
-        task->pos.z.fixed                                           = actor_pos_x;
+        task                                         = g_Task;
+        px                                           = *(s32*)((u8*)g_Actors + actor_offset + 0x34);
+        *(u16*)((u8*)g_Actors + actor_offset + 0x2E) = task->screen_x;
+        *(u16*)((u8*)g_Actors + actor_offset + 0x30) = task->screen_y;
+        task->pos.x.fixed                            = px;
+        task->pos.y.fixed                            = *(s32*)((u8*)g_Actors + actor_offset + 0x38);
+        pz                                           = *(s32*)((u8*)g_Actors + actor_offset + 0x3C);
+        task->tint.bytes.rgb.blue                    = 0;
+        task->tint.bytes.rgb.green                   = 0;
+        task->tint.bytes.rgb.red                     = 0;
+        task->pos.z.fixed                            = pz;
     }
 
     cursor             = g_GfxPrimCursor;
+    g_GfxPrimCursor    = cursor + sizeof(RECT);
     ((RECT*)cursor)->x = 0x340;
     ((RECT*)cursor)->y = 0x100;
     ((RECT*)cursor)->w = 0xC0;
     ((RECT*)cursor)->h = 0x100;
-    g_GfxPrimCursor    = cursor + sizeof(RECT);
-    SetDrawArea((DR_AREA*)(cursor + sizeof(RECT)), (RECT*)cursor);
+    SetDrawArea((DR_AREA*)g_GfxPrimCursor, (RECT*)cursor);
     GFX_AddPrim(7, sizeof(DR_AREA));
 
     tile = (TILE*)g_GfxPrimCursor;
@@ -215,7 +215,7 @@ NON_MATCHING void func_801F7AEC(void) {
 
         task     = g_Task;
         tile->x0 = task->screen_x + 0x334;
-        tile->y0 = task->screen_y + ((g_FrameBufferIndex ^ 1) * 0xF0) - 0x15;
+        tile->y0 = (u16)(task->screen_y + (((g_FrameBufferIndex ^ 1) * 0xF0) - 0x15));
     }
     tile->w  = 0x18;
     tile->h  = 0x30;
@@ -224,10 +224,10 @@ NON_MATCHING void func_801F7AEC(void) {
     tile->b0 = 0;
     GFX_AddPrim(7, sizeof(TILE));
 
-    cursor = g_GfxPrimCursor;
-    memcpy(cursor, g_GfxCurrentDisplayFrame + 0x14, sizeof(RECT));
+    cursor          = g_GfxPrimCursor;
     g_GfxPrimCursor = cursor + sizeof(RECT);
-    SetDrawArea((DR_AREA*)(cursor + sizeof(RECT)), (RECT*)cursor);
+    memcpy(cursor, g_GfxCurrentDisplayFrame + 0x14, sizeof(RECT));
+    SetDrawArea((DR_AREA*)g_GfxPrimCursor, (RECT*)cursor);
     GFX_AddPrim(7, sizeof(DR_AREA));
 
     if (g_Task->unk_06 == 0) {
@@ -237,9 +237,6 @@ NON_MATCHING void func_801F7AEC(void) {
         g_Task->header.mode = 2;
     }
 }
-#else
-INCLUDE_ASM(func_801F7AEC);
-#endif
 
 MATCH void func_801F7D1C(void) {
     Point2u pos;
