@@ -672,7 +672,58 @@ MATCH void func_801F9160(s16 x, s16 y) {
     GFX_AddPrim(1, sizeof(SPRT));
 }
 
-INCLUDE_ASM(func_801F91F0);
+MATCH void func_801F91F0(s16 x, s16 y, u8* text) {
+    u8  color;
+    u8  glyph;
+    s32 tpage;
+    s32 idx;
+    s32 t;
+
+    color = 0;
+    if (GetGraphType() == 1) {
+        tpage = 0xAF;
+    } else if (GetGraphType() == 2) {
+        tpage = 0xAF;
+    } else {
+        tpage = 0x3F;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    while (*text != 0) {
+        switch (*text) {
+            case '!':
+                text++;
+                color = *text - '0';
+                break;
+            case '#':
+                text++;
+                idx   = *text + 4;
+                glyph = idx;
+                func_801F90BC(x, y, color, glyph);
+                x += D_801F97DC[glyph];
+                break;
+            case ' ':
+                x += 12;
+                break;
+            case '@':
+                func_801F9160(x, y);
+                x += 0x58;
+                break;
+            default:
+                t = *text - 0x41;
+                if ((u8)t < 26) {
+                    idx = t;
+                } else {
+                    idx = *text - 0x47;
+                }
+                glyph = idx;
+                func_801F90BC(x, y, color, glyph);
+                x += D_801F97DC[glyph];
+                break;
+        }
+        text++;
+    }
+}
 
 MATCH bool func_801F938C(void) {
     s32 i;

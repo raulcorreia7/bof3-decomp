@@ -25,6 +25,7 @@ void            func_801F8FAC(s32 x, s32 y, s32 color, u8 semi_trans);
 void            func_801F91F0(s16 x, s16 y, u8* text);
 bool            func_801F938C(void);
 extern u8*      D_801F981C[];
+extern u8       D_801F97DC[];
 /* func_801F9490 */
 void            Scene_RunSaveMenu(void);
 extern Callback D_801F9758[];
