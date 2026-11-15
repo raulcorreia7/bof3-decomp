@@ -65,7 +65,18 @@ MATCH void func_801D0EAC(void) {
     SYS_DISPATCH_TASK(D_801D27D8, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801D0EF0);
+MATCH void func_801D0EF0(void) {
+    g_Task->pos.x.fixed                   = g_Game.members[2].pos.x.fixed;
+    g_Task->pos.y.fixed                   = g_Game.members[2].pos.y.fixed;
+    g_Task->pos.z.fixed                   = TO_COORD(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
+    g_Task->vx                            = g_Task->pos.x.fixed;
+    g_Task->vy                            = g_Task->pos.y.fixed;
+    g_Task->vz                            = g_Task->pos.z.fixed;
+    g_Task->tint.signed_bytes.delta.red   = 0;
+    g_Task->tint.signed_bytes.delta.green = -0x80;
+    g_Task->timer                         = 0x20;
+    g_Task->header.mode++;
+}
 
 MATCH void func_801D0F94(void) {
     Actor* work;

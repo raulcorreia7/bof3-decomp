@@ -7,14 +7,20 @@
 #include "overlays/area/world04.h"
 
 /* The selection record and its two step tables. */
-extern u8  D_801F380C[];
-extern u8  D_801F380D[];
-extern u8  D_801F3890[];
+extern u8 D_801F380C[];
+extern u8 D_801F380D[];
+extern u8 D_801F3890[];
 /* The neighbour tables the cell lookup reads. */
-extern u8  D_801F38C0[];
+extern u8 D_801F38C0[];
 /* The area counter and the area flag store the selection pass reads. */
-extern u8  D_80144F56;
-extern u8  D_80144EF8[];
+extern u8 D_80144F56;
+extern u8 D_80144EF8[];
+/* func_801F326C: the table of character ids has five entries; each message table
+ * holds a row of nine entries per character, one per area column 0 to 8. */
+#define CAMP_MESSAGE_CHARACTER_COUNT 5
+#define CAMP_MESSAGE_ROW_SIZE        9
+#define CAMP_MESSAGE_AREA_LAST       (CAMP_MESSAGE_ROW_SIZE - 1)
+
 /* The five character ids, the per-area row offsets and the two result rows
  * func_801F326C picks between. */
 extern u8  D_801F3878[];

@@ -1,4 +1,10 @@
 [[matching.section_placements]]
+function = 0x801D5A28
+section = ".rodata"
+address = 0x801D0C04
+size = 0x18
+
+[[matching.section_placements]]
 function = 0x801D639C
 section = ".rodata"
 address = 0x801D0C1C

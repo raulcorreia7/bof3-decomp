@@ -35,7 +35,7 @@ extern u8 D_80144EF8[];
 #define AREA_SPAWN_SLOT_CORE_SHADE  g_Task->tint.bytes.rgb.red
 #define AREA_SPAWN_SLOT_RADIUS_STEP 0xC
 
-void func_801F36C0(void* arg0, s32 arg1, s32 arg2);
+void func_801F36C0(void* position, s32 radius, s32 colors);
 void func_801F3BFC(const void* spin);
 void func_801F3FAC(void);
 
