@@ -128,7 +128,7 @@ MATCH s32 func_801D04C8(void) {
     FAKE_REG(Actor*, task, "a1");
     /* FAKE: pure C is 0x1A0 vs 0x1A4; retail keeps the facing index in v1. */
     FAKE_REG(u8, direction, "v1");
-    /* FAKE: pure C is 0x1A0 vs 0x1A4; retail reuses v0 for the steps and probe flag. */
+    /* FAKE: pure C is 0x1A0 vs 0x1A4; retail reuses v0 for steps, actor flag, and rock index. */
     FAKE_REG(s32, value, "v0");
     /* FAKE: pure C is 0x1A0 vs 0x1A4; retail keeps the x coordinate in s1. */
     FAKE_REG(s32, x, "s1");
