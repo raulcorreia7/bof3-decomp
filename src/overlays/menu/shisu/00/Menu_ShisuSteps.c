@@ -278,17 +278,19 @@ INCLUDE_ASM(func_801D1EE8);
 INCLUDE_ASM(func_801D2308);
 
 MATCH void func_801D27BC(void) {
-    s32* px;
-    s32* py;
-    u8** pp;
-    s32  field;
-    s8   shade;
+    s32*                 px;
+    s32*                 py;
+    MenuScrollEndpoint** pp;
+    s32                  field;
+    s8                   shade;
 
     px         = &g_AreaScrollTargetX;
     py         = &g_AreaScrollTargetY;
     pp         = &D_801F501C;
     D_801DA09C = *pp;
-    field      = *(s32*)(D_801DA09C + 4);
+    /* kept: the member form D_801DA09C->height_04 reorders the stores below; the typed field at
+       the site keeps the retail schedule. */
+    field      = FIELD(s32, D_801DA09C, 4);
     D_801DA049 = 0;
     D_801DA090 = 0;
     D_801DA088 = 0x1000;
@@ -303,8 +305,8 @@ MATCH void func_801D27BC(void) {
     D_801DA080 = *py;
     D_801DA098 = field;
     D_801DA084 = (Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16) - MENU_STATUS_HEIGHT_BIAS;
-    D_801DA114 = *pp + 8;
-    field      = *(s32*)(D_801DA114 + 4);
+    D_801DA114 = *pp + 1;
+    field      = FIELD(s32, D_801DA114, 4);
     D_801DA0C1 = 0;
     D_801DA108 = 0;
     D_801DA100 = 0x1000;

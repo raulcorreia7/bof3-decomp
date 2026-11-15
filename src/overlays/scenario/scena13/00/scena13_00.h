@@ -5,7 +5,6 @@
  * includes the file. */
 
 #define GRAPHICS_PALETTE_PENDING_VOLATILE
-#define GAME_SCRATCH_BASE_SCALAR
 #include "overlays/scenario/scenario.h"
 #include "engine/game/00/game_00.h"
 
@@ -58,10 +57,10 @@ extern u8        D_801FBFEC;
                 g_Actors[first_index].header.flags = 0;                 \
                 return;                                                 \
             }                                                           \
-            g_Actors[second_index].header.flags = 1;                    \
-            *(s16*)D_1F800000                   = (u8)first;            \
+            g_Actors[second_index].header.flags   = 1;                  \
+            LOH(D_1F800000.view.scenario.math_00) = (u8)first;          \
             func_801A65A0(script);                                      \
-            *(s16*)D_1F800000 = (u8)second;                             \
+            LOH(D_1F800000.view.scenario.math_00) = (u8)second;         \
             func_801A65A0((script) + 0x10);                             \
         }                                                               \
     } while (0)

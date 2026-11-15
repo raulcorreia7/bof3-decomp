@@ -203,9 +203,20 @@ extern u8              D_801DA090;
 extern s32             D_801DA07C;
 extern s32             D_801DA080;
 extern s32             D_801DA098;
-extern u8*             D_801F501C;
-extern u8* volatile D_801DA09C;
-extern u8* volatile D_801DA114;
+
+/* The two 8-byte records D_801F501C points at: the status screen keeps the word at +4 of each as
+ * the height it scrolls to (D_801DA098 and D_801DA110). */
+typedef struct MenuScrollEndpoint {
+    u8  pad_00[4];
+    s32 height_04;
+} MenuScrollEndpoint;
+
+ASSERT_OFFSET(MenuScrollEndpoint, height_04, 0x04);
+ASSERT_SIZE(MenuScrollEndpoint, 8);
+
+extern MenuScrollEndpoint* D_801F501C;
+extern MenuScrollEndpoint* volatile D_801DA09C;
+extern MenuScrollEndpoint* volatile D_801DA114;
 extern s32 D_801DA0AC;
 extern s32 D_801DA0B0;
 extern s32 D_801DA0F4;
