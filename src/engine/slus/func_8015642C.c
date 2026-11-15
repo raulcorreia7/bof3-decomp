@@ -40,8 +40,8 @@ NON_MATCHING void func_8015642C(u8* obj, s32 x, s32 y) {
             bottom = &((u8*)g_SpriteCellBottomV)[index * 2];
             prim   = (POLY_FT4*)g_GfxPrimCursor;
             top    = &((u8*)g_SpriteCellTopV)[index * 2];
-            p      = prim;
             for (j = 0; j < 2; j++) {
+                p = &prim[j];
                 SetPolyFT4(p);
                 SetShadeTex(p, 0);
                 p->x2 = screen[0];
@@ -57,7 +57,6 @@ NON_MATCHING void func_8015642C(u8* obj, s32 x, s32 y) {
                 tpage    = getTPage(0, 0, 704, 256);
                 p->tpage = tpage;
                 GFX_AddPrim((u8)order, sizeof(POLY_FT4));
-                p++;
                 bottom++;
                 top++;
             }
