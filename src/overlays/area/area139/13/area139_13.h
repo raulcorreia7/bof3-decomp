@@ -19,10 +19,8 @@ extern u8       D_801F442E[];
 extern Callback D_801F4430[];
 extern Callback D_801F4448[];
 
-/* The step tables func_801F3AD0 indexes by twice the row's x cell: a pair of
- * cell offsets per entry, and the z and screen-x words. */
-extern u8 D_801F4464[];
-extern u8 D_801F445C[];
-extern u8 D_801F4460[];
+/* The payload func_801F3AD0 steps by: cell offsets at 0x38 and 0x39, the z
+ * and screen-x words at 0x30 and 0x34, indexed by twice the row's x cell. */
+extern u8 D_801F442C[];
 
 #endif
