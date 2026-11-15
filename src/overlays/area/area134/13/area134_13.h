@@ -11,6 +11,27 @@
 /* The row count this overlay clears. */
 #define SCRATCH_COLUMN_COUNT 32
 
+/* A 0x28-byte slot of the area work memory: the claim flag the scan
+ * (func_801F4938) tests, the task's step stamp, its position and the row's
+ * scale word. */
+typedef struct AreaSlotRecord {
+    u8       active; /* 0x00 */
+    u8       unk_01;
+    u8       unk_02;
+    u8       unk_03;
+    u16      unk_04;
+    u16      unk_06;
+    WorldPos pos; /* 0x08 */
+    s32      unk_14;
+    s32      unk_18;
+    s32      unk_1C;
+    s32      unk_20;
+    s32      unk_24;
+} AreaSlotRecord;
+
+ASSERT_OFFSET(AreaSlotRecord, pos, 0x08);
+ASSERT_SIZE(AreaSlotRecord, 0x28);
+
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
 /* The game-overlay state bytes the area request paths write. */

@@ -28,6 +28,12 @@ extern BattleEffect        D_801EFA8C[];
 #define BMAGIC_EFFECT_SLOTS D_801EFA8C
 #define BMAGIC_EFFECT_COUNT BATTLE_EFFECT_COUNT
 
+/* Retail orders the target load after the palette store; the plain member form
+ * lets the compiler move it up, so the address goes through its own type. */
+static inline PartyMember* BattleEffect_GetTarget(BattleEffect* effect) {
+    return *(PartyMember**)&effect->target.party;
+}
+
 void func_801EF6A0(void);
 
 #endif

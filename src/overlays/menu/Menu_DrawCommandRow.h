@@ -16,15 +16,15 @@ MATCH void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused) {
     }
     do {
         UI_DrawWindow((s32)(u16)(x + i * 48), (s32)(u16)y, 45, 20, 0, g_WindowStyle);
-        color = 0;
+        color = MENU_SHADE_NORMAL;
         if (selected < g_MenuCommandRows[row][0]) {
-            color = (i != selected) ? 7 : 0;
+            color = (i != selected) ? MENU_SHADE_DIM : MENU_SHADE_NORMAL;
         }
         if (g_MenuCommandRows[row][1 + i] == 0x12 && (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) == 0) {
-            color = 7;
+            color = MENU_SHADE_DIM;
         }
         if (g_MenuCommandRows[row][1 + i] == 8 && (u8)Item_VitalHas(VITAL_ITEM_FOUNTAIN_PEN) == 0 && (Item_Count(ITEM_CAT_ITEM, ITEM_SKILL_INK, 0) & HALF_MASK) == 0) {
-            color = 7;
+            color = MENU_SHADE_DIM;
         }
         label       = g_MenuCommandLabels[g_MenuCommandRows[row][1 + i]];
         label_width = Game_ReadCommand(label);

@@ -14,7 +14,7 @@ MATCH void func_801EEC18(void) {
     do {
         if (D_801F0454[(u8)count << 5] & 0x1) {
             saved                 = g_BattleEffectBattler;
-            swap                  = FIELD(PartyMember*, D_801F0470, (u8)count << 5);
+            swap                  = Magic063ClaimTask((u8)count << 5);
             g_BMagicOrbit         = D_801F0454 + ((u8)count << 5);
             g_BattleEffectBattler = swap;
             func_801EF340();
@@ -72,7 +72,40 @@ MATCH void func_801EEF74(void) {
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
 }
 
-INCLUDE_ASM(func_801EEFE4);
+MATCH void func_801EEFE4(void) {
+    PartyMember* record;
+    PartyMember* target;
+    PartyMember* claims;
+    PartyMember* count;
+    u8           index;
+    u8           claimed;
+    s32          offset;
+    u32          random;
+
+    index = g_Task->unk_04;
+    if (index < BATTLE_PARTY_CHARACTERS_COUNT) {
+        record = &g_Game.members[index];
+    } else {
+        record = (PartyMember*)&g_BattleEnemies[index * BATTLE_ENEMY_STRIDE];
+    }
+    target               = g_Task;
+    target->pos.x.fixed  = record->pos.x.fixed;
+    target->pos.y.fixed  = record->pos.y.fixed;
+    target->pos.z.fixed  = record->pos.z.fixed + TO_COORD(512);
+    random               = RANDOM_MASK(0xF);
+    g_Task->unk_09       = random + 1;
+    g_Task->param.unk_0B = 0;
+    g_Task->header.step += 1;
+    claimed = func_801F0354();
+    if (claimed != GAME_NONE) {
+        offset                                  = claimed << 5;
+        claims                                  = g_Task;
+        D_801F0454[offset + 1]                  = 1;
+        count                                   = g_Task;
+        FIELD(PartyMember*, D_801F0470, offset) = claims;
+        count->param.unk_0B++;
+    }
+}
 
 MATCH void func_801EF110(void) {
     u8 timer;

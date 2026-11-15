@@ -8,25 +8,44 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/scenario/Scene_DispatchEntity.h"
 
 MATCH void func_801F6D44(void) {
-    Actor* work;
+    SceneBox* box;
+    Actor*    work;
 
-    work                   = g_Task;
-    work->vz               = 0x1000000;
-    FIELD(s32, work, 0x2C) = 0x1000000;
-    work->vx               = 5668864;
-    work->vy               = 1212416;
-    work->unk_1C           = 0;
-    work->gravity          = 0x2200000;
-    FIELD(s32, work, 0x24) = 0x568000;
-    FIELD(s32, work, 0x28) = 0x128000;
-    work->pos.x.fixed      = 0x4000;
-    work->pos.y.fixed      = 0x2200000;
+    work              = g_Task;
+    box               = (SceneBox*)&work->vx;
+    work->vz          = TO_COORD(256);
+    box->far.z        = TO_COORD(256);
+    work->vx          = 5668864;
+    work->vy          = 1212416;
+    work->unk_1C      = 0;
+    work->gravity     = TO_COORD(544);
+    box->far.x        = 5668864;
+    box->far.y        = 1212416;
+    work->pos.x.fixed = 0x4000;
+    work->pos.y.fixed = TO_COORD(544);
     func_801F747C();
     g_Task->timer = 8;
     g_Task->header.mode += 1;
 }
 
-INCLUDE_ASM(func_801F6DD4);
+MATCH void func_801F6DD4(void) {
+    Actor*    work;
+    SceneBox* box;
+    s32       fraction;
+
+    work     = g_Task;
+    box      = (SceneBox*)&work->vx;
+    fraction = (0x10 - work->timer * 2) & 0xFE;
+    box->far.x += 0x10000;
+    work->pos.x.fixed += 0x2000;
+    work->pos.y.fixed += 0x220000;
+    func_801F75BC(fraction, 0xFF);
+    func_801F7084(box);
+    if (--g_Task->timer == 0) {
+        g_Task->timer = 0x40;
+        g_Task->header.mode++;
+    }
+}
 
 MATCH void func_801F6EA4(void) {
     Actor* work;
@@ -34,7 +53,7 @@ MATCH void func_801F6EA4(void) {
     u8     mode;
 
     work = g_Task;
-    func_801F7084(&work->vx);
+    func_801F7084((SceneBox*)&work->vx);
     func_801F75BC(0x10, 0xFF);
     actor        = g_Task;
     mode         = actor->timer - 1;
@@ -70,7 +89,7 @@ MATCH void func_801F6F2C(void) {
 MATCH void func_801F6FF8(void) {
     Actor* work;
 
-    func_801F7084(&g_Task->vx);
+    func_801F7084((SceneBox*)&g_Task->vx);
     work = g_Task;
     work->timer--;
     if (work->timer == 0) {
@@ -82,7 +101,54 @@ MATCH void func_801F7064(void) {
     Actor_Clear();
 }
 
-INCLUDE_ASM(func_801F7084);
+/* Fill the eight vertex records of the box: each cross-section's corner point and its two half extents. */
+MATCH void func_801F7084(SceneBox* box) {
+    ScenePathPoint* vertex;
+    s32*            scratch;
+    u16             tpage;
+
+    tpage = GetTPage(0, 1, 0x3C0, 0);
+    GFX_AddDitheredDrawMode(1, tpage);
+    vertex    = D_801FA240;
+    vertex->x = box->near.x;
+    vertex->y = box->near.y + box->near.half_y;
+    vertex->z = box->near.z + box->near.half_z;
+    vertex++;
+    vertex->x = box->near.x;
+    vertex->y = box->near.y - box->near.half_y;
+    vertex->z = box->near.z + box->near.half_z;
+    vertex++;
+    vertex->x = box->near.x;
+    vertex->y = box->near.y + box->near.half_y;
+    vertex->z = box->near.z;
+    vertex++;
+    vertex->x = box->near.x;
+    vertex->y = box->near.y - box->near.half_y;
+    vertex->z = box->near.z;
+    vertex++;
+    vertex->x = box->far.x;
+    vertex->y = box->far.y + box->far.half_y;
+    vertex->z = box->far.z + box->far.half_z;
+    vertex++;
+    vertex->x = box->far.x;
+    vertex->y = box->far.y - box->far.half_y;
+    vertex->z = box->far.z + box->far.half_z;
+    vertex++;
+    vertex->x = box->far.x;
+    vertex->y = box->far.y + box->far.half_y;
+    vertex->z = box->far.z;
+    scratch   = &vertex->x;
+    vertex++;
+    vertex->x = box->far.x;
+    vertex->y = box->far.y - box->far.half_y;
+    vertex->z = box->far.z;
+    Area_SetCameraMatrix(scratch);
+    func_801F732C(0, 1, 2, 3, 1, 1);
+    func_801F732C(0, 1, 4, 5, 1, 0);
+    func_801F732C(2, 0, 6, 4, 1, 0);
+    func_801F732C(1, 3, 5, 7, 1, 0);
+    func_801F732C(2, 3, 6, 7, 1, 0);
+}
 
 /* Draws a Gouraud quad through four path points, two corners per shade, flickering with the frame parity. */
 MATCH void func_801F732C(u8 v0, u8 v1, u8 v2, u8 v3, s32 shade0, s32 shade1) {
@@ -104,7 +170,45 @@ MATCH void func_801F732C(u8 v0, u8 v1, u8 v2, u8 v3, s32 shade0, s32 shade1) {
     GFX_AddPrim(1, sizeof(POLY_G4));
 }
 
-INCLUDE_ASM(func_801F747C);
+MATCH void func_801F747C(void) {
+    s32* key;
+
+    key        = D_801FA2C0;
+    *key       = 0x568000;
+    D_801FA2C4 = 0x118000;
+    D_801FA2C8 = TO_COORD(768);
+    D_801FA2D0 = 0x5E8000;
+    D_801FA2D4 = 0xF0000;
+    D_801FA2D8 = TO_COORD(1024);
+    key += 8;
+    *key       = 0x568000;
+    D_801FA2E4 = 0x118000;
+    D_801FA2E8 = TO_COORD(576);
+    D_801FA2F0 = 0x5E8000;
+    D_801FA2F4 = 0xF0000;
+    D_801FA2F8 = TO_COORD(576);
+    key += 8;
+    *key       = 0x568000;
+    D_801FA304 = 0x138000;
+    D_801FA308 = TO_COORD(768);
+    D_801FA310 = 0x5E8000;
+    D_801FA314 = 0x158000;
+    D_801FA318 = TO_COORD(1024);
+    key += 8;
+    *key       = 0x568000;
+    D_801FA324 = 0x138000;
+    D_801FA328 = TO_COORD(640);
+    D_801FA330 = 0x5E8000;
+    D_801FA334 = 0x160000;
+    D_801FA338 = TO_COORD(704);
+    key += 8;
+    *key       = 0x568000;
+    D_801FA344 = 0x138000;
+    D_801FA348 = TO_COORD(288);
+    D_801FA350 = 0x5E8000;
+    D_801FA354 = 0x160000;
+    D_801FA358 = TO_COORD(288);
+}
 
 INCLUDE_ASM(func_801F75BC);
 
@@ -391,7 +495,107 @@ MATCH void func_801F8160(void) {
     D_80144EA8 = 0;
 }
 
-INCLUDE_ASM(func_801F817C);
+/* Momo Tower First Floor: run the scene hand-over for area 0x28, then the area 0x2A, 0x30, 0x36 and 0x41 tail. */
+MATCH void func_801F817C(void) {
+    u8  index;
+    u8* slot;
+    u8* pad_flag;
+
+    if (g_GameAreaId == AREA_ID_MOMO_TOWER_FIRST_FLOOR) {
+        if (D_80143F03 == 7) {
+            if (SYS_TestFlag(g_SceneFlags, 3) == 0) {
+                SYS_SetFlag(g_SceneFlags, 3);
+                g_ScriptVarsWord = 0;
+                SND_FadeOutBGM(g_SndBGMId, 0x64, 8);
+                SND_PlayBGM(0x3F, 0x64, 8);
+                Game_SetScriptActive();
+                D_80146874 = 1;
+                D_80146875 = 7;
+                Scene_RunScenario(1);
+                func_801BE1B0(1);
+            }
+        }
+        if (SYS_TestFlag(g_SceneFlags, 4) != 0) {
+            if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
+                switch (D_80146865) {
+                    case 0:
+                        g_AreaDrawFlags = 0x1F;
+                        break;
+                    case 1:
+                        Area_StartScrollRoute(1);
+                    case 2:
+                    default:
+                        Party_HideBattlers();
+                        break;
+                }
+            }
+        }
+    }
+    if (g_GameAreaId == AREA_ID_MOMO_TOWER_OUTSIDE) {
+        if (SYS_TestFlag(g_SceneFlags, 1) == 0) {
+            SYS_SetFlag(g_SceneFlags, 1);
+            g_ScriptVarsWord = 0;
+            Scene_RunScenario(0);
+            func_801BE1B0(0);
+        }
+        if (SYS_TestFlag(g_SceneFlags, 3) != 0) {
+            if (SYS_TestFlag(g_SceneFlags, 4) == 0) {
+                Party_HideBattlers();
+                g_AreaDrawFlags = 0x1F;
+            }
+        }
+    }
+    if (g_GameAreaId == AREA_ID_MOMO_TOWER_TOP) {
+        if (D_80143F03 == 3) {
+            g_ScriptVarsWord = 0;
+            if (SYS_TestFlag(g_SceneFlags, 6) == 0) {
+                SYS_SetFlag(g_SceneFlags, 6);
+                D_80143F1D = 5;
+                func_801BE1B0(3);
+            }
+            if (SYS_TestFlag(g_SceneFlags, 7) == 0) {
+                Area_SetCellCode(0x83, 6, 0x51);
+                Area_SetCellCode(0x84, 6, 0x51);
+            }
+        }
+    }
+    if (g_GameAreaId == AREA_ID_ROCKET_LANDING) {
+        g_ScriptVarsWord = 0;
+    }
+    if (g_GameAreaId == AREA_ID_MOMO_TOWER_WORLD_MAP) {
+        if (SYS_TestFlag(g_SceneFlags, 7) != 0) {
+            if (SYS_TestFlag(g_SceneFlags, 0xC) == 0) {
+                g_ScriptVarsWord = 0;
+                Area_StartScrollRoute(0);
+                pad_flag = &D_80145EB4;
+                *pad_flag &= 0xDF;
+                D_80145FF4 &= 0xDF;
+                D_80146134 &= 0xDF;
+                /* kept: the slot index round-trips through the scratch word so
+                 * each row address re-reads it; a local index drops 0xA8 bytes
+                 * (0x418 vs 0x4C0) and typed g_SpawnedActors rows drop 0xC0. */
+                slot  = (u8*)&D_1F800000;
+                index = Actor_FindFreeSpawned();
+                *slot = index;
+                if (index != 0xFF) {
+                    D_80143FC8[*slot * 0x74u]             = 1;
+                    D_80143FCD[*slot * 0x74u]             = 0x13;
+                    FIELD(s32, D_8014402C, *slot * 0x74u) = -0xC6;
+                    FIELD(s32, D_80144030, *slot * 0x74u) = D_801492DA;
+                    FIELD(s32, D_80144034, *slot * 0x74u) = D_801492DC;
+                    D_80143FD1[*slot * 0x74u]             = 0x40;
+                }
+                index = Actor_FindFreeSpawned();
+                *slot = index;
+                if (index != 0xFF) {
+                    D_80143FC8[*slot * 0x74u] = 1;
+                    D_80143FCD[*slot * 0x74u] = 0x2E;
+                }
+            }
+        }
+    }
+    D_80146872 = 2;
+}
 
 MATCH void func_801F863C(void) {
     SYS_DISPATCH_BYTE(D_801FA210, g_SceneState.state_04);

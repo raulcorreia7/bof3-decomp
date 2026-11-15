@@ -10,9 +10,7 @@ NON_MATCHING void func_801F3A14(s32 x, s32 y) {
     Area_StoreHeight(column, row, 0);
     Area_SetCellCode(column, row, (u8)g_Task->unk_18);
     Area_StoreHeight(column, row + 1, 0);
-    /* FAKE: retail passes the widened row untruncated, while the owner body proves s16
-     * parameters; a caller-side s32 view of Area_SetCellCode is the missing declaration. */
-    ((void (*)(s32, s32, u8))Area_SetCellCode)(column, row + 1, (u8)g_Task->unk_1C);
+    Area_SetCellCode(column, row + 1, (u8)g_Task->unk_1C);
     column += 2;
     g_Task->unk_18 >>= 8;
     g_Task->unk_1C >>= 8;

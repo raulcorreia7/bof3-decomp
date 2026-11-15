@@ -24,7 +24,7 @@ MATCH void Menu_DrawStatPanel(u16 panel_x, u16 panel_y, u8 palette_index) {
      * `+0x16` in its own statement, so the constant lands on the base pointer's
      * register instead of folding onto the index register; `base` is dead after
      * this point, so base16 reuses it. */
-    index_off = palette_index * 0xA4;
+    index_off = palette_index * PARTY_RECORD_STRIDE;
     base16    = base + 0x16;
     entryp    = index_off + base16;
     UI_DrawText(xb, y8, 0, TEXT_LENGTH_MAX, g_MenuLabelPower);
