@@ -19,13 +19,13 @@ NON_MATCHING void func_801EEF10(void) {
     if (g_InputHeld != 0) {
         for (i = 0; i < 256; i++) {
             color                    = g_BattleEffectPalette[i];
-            gray                     = ((color & 0x1F) + ((color >> 5) & 0x1F) + ((color >> 10) & 0x1F)) / 3U;
+            gray                     = (PSX_COLOR_R(color) + PSX_COLOR_G(color) + PSX_COLOR_B(color)) / 3U;
             g_BattleEffectPalette[i] = (color & 0x8000) | (gray << 10) | (gray << 5) | gray;
         }
         mirror = (u16*)GAME_PALETTE_MIRROR;
         for (i = 0; i < 256; i++) {
             color     = mirror[i];
-            gray      = ((color & 0x1F) + ((color >> 5) & 0x1F) + ((color >> 10) & 0x1F)) / 3U;
+            gray      = (PSX_COLOR_R(color) + PSX_COLOR_G(color) + PSX_COLOR_B(color)) / 3U;
             mirror[i] = (color & 0x8000) | (gray << 10) | (gray << 5) | gray;
         }
         g_GfxPalettePending = 1;
