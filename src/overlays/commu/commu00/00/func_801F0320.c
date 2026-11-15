@@ -21,7 +21,7 @@ MATCH void func_801F0320(void) {
     new_var2   = sum_11;
     D_801455C6 = 0;
 
-    for (i = 0; i < 60; i++) {
+    for (i = 0; i < FAIRY_VILLAGE_COUNT; i++) {
         if (g_FairyJobs[i].active != 0) {
             kind = g_FairyJobs[i].type;
             if (kind == kind_10) {

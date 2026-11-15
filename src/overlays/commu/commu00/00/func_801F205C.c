@@ -36,7 +36,7 @@ MATCH void func_801F205C(void) {
         if (Item_Add(g_FairyJobs[*edp].unk_03 & 0xF, g_FairyJobs[*edp].record_state,
                      /* The pending count's low byte: retail loads one byte. */
                      ((u8*)D_801F26CC)[entry_index * 6 + 4], 0) &
-            0xFF) {
+            BYTE_MASK) {
             g_FairyJobs[*edp].record_state = 0;
             g_FairyJobs[*edp].unk_03       = 0;
             message_id                     = D_801F26CC[entry_index].message_id;

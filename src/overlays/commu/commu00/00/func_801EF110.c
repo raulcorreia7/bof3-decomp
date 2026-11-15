@@ -27,7 +27,7 @@ MATCH void func_801EF110(s32 battle_count) {
             }
             i += 1;
             j += 9;
-        } while (i < 60);
+        } while (i < FAIRY_VILLAGE_COUNT);
 
         value = D_801455C2 + ((s16)total - doubled_battle_count) * (u16)dec;
         if (value >= 0) {

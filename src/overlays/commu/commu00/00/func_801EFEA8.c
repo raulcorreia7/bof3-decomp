@@ -62,7 +62,7 @@ MATCH s32 func_801EFEA8(void) {
                         if (((u8*)g_FairyJobs)[queue_scan_offset] == 0 || ((u8*)g_FairyJobs)[queue_scan_offset + 1] != queue_group_number) {
                             queue_record_index += 1;
                             queue_scan_offset += 8;
-                            if (queue_record_index < 60) {
+                            if (queue_record_index < FAIRY_VILLAGE_COUNT) {
                                 /* Continue until this group's active record is found. */
                                 goto scan_queue;
                             }

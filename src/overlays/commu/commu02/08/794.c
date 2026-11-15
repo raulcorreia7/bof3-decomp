@@ -524,7 +524,7 @@ MATCH void func_801D2CF8(s32 x, s32 y, s32 icon) {
     setWH(sprite, 32, 40);
     setRGB0(sprite, 0x80, 0x80, 0x80);
     index = icon;
-    if (index == 0xFF) {
+    if (index == GAME_NONE) {
         setUV0(sprite, 0, 0);
         sprite->clut = 0x7BC8;
     } else {
@@ -1888,9 +1888,9 @@ MATCH u8 Fairy_FindActiveJob(u8 arg) {
     s32 i;
 
     active_count = 0;
-    for (i = 0; i < 0x3C; i++) {
+    for (i = 0; i < FAIRY_JOB_COUNT; i++) {
         if (g_FairyJobs[i].active != 0) {
-            if ((active_count & 0xFF) == arg) {
+            if ((active_count & BYTE_MASK) == arg) {
                 return (u8)i;
             }
             active_count++;
@@ -2281,7 +2281,7 @@ MATCH u8 func_801D92F4(u8 arg) {
     active_count = 0;
     for (i = 0; i < 7; i++) {
         if (g_Characters[i].unk_07 & 1) {
-            if ((active_count & 0xFF) == arg) {
+            if ((active_count & BYTE_MASK) == arg) {
                 return (u8)i;
             }
             active_count++;
