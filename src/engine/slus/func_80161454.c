@@ -9,7 +9,7 @@ NON_MATCHING void func_80161454(u32 index) {
         s32 attr;
         s16 volume;
         s16 pan;
-        u8  pad[0x34];
+        u8  pad[0x44];
     } voice;
 
     s16    tmp0;
@@ -55,9 +55,8 @@ NON_MATCHING void func_80161454(u32 index) {
             val0 = (val0 * (100 - pan)) / 100;
         }
     } else {
-        work = g_Task;
-        tmp2 = (s32)(work->pos.x.fixed - g_AreaScrollTargetX) >> 0xC;
-        tmp3 = (s32)(work->pos.y.fixed - g_AreaScrollTargetY) >> 0xC;
+        tmp2 = (s32)(g_Task->pos.x.fixed - g_AreaScrollTargetX) >> 0xC;
+        tmp3 = (s32)(g_Task->pos.y.fixed - g_AreaScrollTargetY) >> 0xC;
         tmp5 = ((u32)csqrt((tmp2 * tmp2) + (tmp3 * tmp3)) >> 4) * 0xA;
         if (tmp5 >= 0x37FFU) {
             val1 = 0;
@@ -67,8 +66,7 @@ NON_MATCHING void func_80161454(u32 index) {
             val0 = val1;
         }
         if (g_SndMono == 0) {
-            work = g_Task;
-            a1   = (s16)work->screen_x - 0xA0;
+            a1 = (s16)g_Task->screen_x - 0xA0;
             if (a1 < 0) {
                 q = (a1 * (s16)val1) / 480;
                 q = ABS(q);
@@ -87,12 +85,10 @@ NON_MATCHING void func_80161454(u32 index) {
             }
         }
     }
-    work = g_Task;
     val4 = 8;
-    if (((s32)work->state_70.word & 0x0FFFFF00) == 0x0FFFFF00) {
-        work->header.flags = work->header.flags & 0xF7;
-        work               = g_Task;
-        work->state_70.word &= 0xF00000FF;
+    if (((s32)g_Task->state_70.word & 0x0FFFFF00) == 0x0FFFFF00) {
+        g_Task->header.flags &= 0xF7;
+        g_Task->state_70.word &= 0xF00000FF;
         return;
     }
     do {
@@ -100,8 +96,7 @@ NON_MATCHING void func_80161454(u32 index) {
         if (tmp4 != 0x1F) {
             val8 = 1 << tmp4;
             if (SpuGetKeyStatus(val8) == SPU_OFF) {
-                work = g_Task;
-                work->state_70.word |= 0x1F << val4;
+                g_Task->state_70.word |= 0x1F << val4;
             } else {
                 val3 |= val8;
             }
