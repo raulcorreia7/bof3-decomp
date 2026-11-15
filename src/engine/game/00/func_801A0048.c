@@ -1,9 +1,5 @@
 #include "game_00.h"
 
-/* Standalone TU: game_00.h still declares this function as void(s16, s16),
- * which contradicts the observed s32 0/1 return, so shared decls stay local
- * until the header is corrected by its owner. */
-
 #ifdef NON_MATCHING
 NON_MATCHING bool func_801A0048(s32 cell_x, s32 cell_y) {
     GameLocaleBank** banks;
@@ -27,14 +23,17 @@ NON_MATCHING bool func_801A0048(s32 cell_x, s32 cell_y) {
     u8               kind;
     u8               reread;
 
-    banks = g_AreaLoads;
-    left  = banks[g_GameAreaId]->outer;
+    /* FAKE: retail reserves eight bytes in this frame. */
+    FAKE_STACK_PADS(u8, 8);
+
+    left = ((GameLocaleBank**)g_AreaLoads)[g_GameAreaId]->outer;
     if (left < 0)
         return true;
-    x    = cell_x & BYTE_MASK;
-    y    = cell_y & BYTE_MASK;
-    tab  = g_SceneFlagWords;
-    mask = 0xFF8000;
+    banks = (GameLocaleBank**)g_AreaLoads;
+    x     = cell_x & BYTE_MASK;
+    y     = cell_y & BYTE_MASK;
+    tab   = g_SceneFlagWords;
+    mask  = 0xFF8000;
     do {
         entry = &banks[g_GameAreaId]->entries[left];
         span  = (s32)entry->span - 1;
@@ -42,18 +41,20 @@ NON_MATCHING bool func_801A0048(s32 cell_x, s32 cell_y) {
             do {
                 if (entry->mode != 0) {
                     if (x == entry->cx) {
-                        span -= 1;
                         if (y == (s32)entry->cy + span)
                             goto found;
+                        span -= 1;
                     } else {
                         span -= 1;
                     }
-                } else if (x == (s32)entry->cx + span) {
-                    span -= 1;
-                    if (y == entry->cy)
-                        goto found;
                 } else {
-                    span -= 1;
+                    if ((x == (s32)entry->cx + span)) {
+                        if (y == entry->cy)
+                            goto found;
+                        span -= 1;
+                    } else {
+                        span -= 1;
+                    }
                 }
             } while (span >= 0);
         }

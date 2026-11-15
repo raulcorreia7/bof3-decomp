@@ -172,7 +172,47 @@ MATCH void func_801FB5F8(void* entity) {
     actor->unk_7E = actor->unk_7E + 1;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING s32 func_801FB648(s32 x, s32 y) {
+    s32 map_x;
+    s32 map_y;
+    u8  cell_count;
+
+    if (g_GameAreaId == 0x94 && D_80143F03 == 4 && !SYS_TestFlag(g_SceneFlags, 0x10) && x == 0x738000) {
+        map_y = y >> 16;
+        if ((u32)(map_y - 0x36) < 2) {
+            Game_SetScriptActive();
+            D_80146874 = 4;
+            D_80146875 = 0;
+            return 1;
+        }
+    }
+
+    if (g_GameAreaId == 0xBF && SYS_TestFlag(g_SceneFlags, 5)) {
+        map_x      = x >> 16;
+        map_y      = y >> 16;
+        cell_count = Area_GetCellCode(map_x, map_y) == 0xA6;
+        if ((u16)x != 0 && Area_GetCellCode((s16)(map_x + 1), map_y) == 0xA6) {
+            cell_count++;
+        }
+        if ((u16)y != 0 && Area_GetCellCode(map_x, (s16)(map_y + 1)) == 0xA6) {
+            cell_count++;
+        }
+        if ((u16)x != 0 && (u16)y != 0 && Area_GetCellCode((s16)(map_x + 1), (s16)(map_y + 1)) == 0xA6) {
+            cell_count++;
+        }
+        if (cell_count != 0) {
+            Game_SetScriptActive();
+            D_80146874 = 2;
+            D_80146875 = 20;
+            return 1;
+        }
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM(func_801FB648);
+#endif
 
 INCLUDE_ASM(func_801FB84C);
 

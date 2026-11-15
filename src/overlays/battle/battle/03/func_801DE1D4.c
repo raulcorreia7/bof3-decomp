@@ -13,7 +13,7 @@ NON_MATCHING void func_801DE1D4(void) {
             if (!ACTOR_IN_USE(g_Game.members[index])) {
                 continue;
             }
-            if (g_Game.members[index].turn.action_flags.value & COMBATANT_FLAG_MODE_HANDLER_ACTION) {
+            if (g_Game.members[index].u.turn.action_flags.value & COMBATANT_FLAG_MODE_HANDLER_ACTION) {
                 continue;
             }
             slot = Battle_AllocEffect(0, 7);

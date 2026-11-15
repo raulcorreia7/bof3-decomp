@@ -168,7 +168,78 @@ MATCH void func_801F7AA8(void) {
     SYS_DISPATCH_TASK(D_801FE5A0, 1, g_Task);
 }
 
+void func_801F7D1C(void);
+
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F7AEC(void) {
+    TILE* tile;
+    u8*   cursor;
+    u32   actor_offset;
+
+    if (g_GameStateIndex == 3 || g_GameStateIndex == 1) {
+        return;
+    }
+
+    actor_offset = g_Task->param.unk_0B * sizeof(Actor);
+    *((u8*)&g_Actors[0].active_flags + actor_offset) |= 8;
+    {
+        Actor* task;
+        s32    actor_pos_x;
+
+        task                                                        = g_Task;
+        actor_pos_x                                                 = *((s32*)&g_Actors[0].pos.x.fixed + actor_offset / sizeof(s32));
+        *((u16*)&g_Actors[0].screen_x + actor_offset / sizeof(u16)) = task->screen_x;
+        *((u16*)&g_Actors[0].screen_y + actor_offset / sizeof(u16)) = task->screen_y;
+        task->pos.x.fixed                                           = actor_pos_x;
+        task->pos.y.fixed                                           = *((s32*)&g_Actors[0].pos.y.fixed + actor_offset / sizeof(s32));
+        actor_pos_x                                                 = *((s32*)&g_Actors[0].pos.z.fixed + actor_offset / sizeof(s32));
+        task->tint.bytes.rgb.blue                                   = 0;
+        task->tint.bytes.rgb.green                                  = 0;
+        task->tint.bytes.rgb.red                                    = 0;
+        task->pos.z.fixed                                           = actor_pos_x;
+    }
+
+    cursor             = g_GfxPrimCursor;
+    ((RECT*)cursor)->x = 0x340;
+    ((RECT*)cursor)->y = 0x100;
+    ((RECT*)cursor)->w = 0xC0;
+    ((RECT*)cursor)->h = 0x100;
+    g_GfxPrimCursor    = cursor + sizeof(RECT);
+    SetDrawArea((DR_AREA*)(cursor + sizeof(RECT)), (RECT*)cursor);
+    GFX_AddPrim(7, sizeof(DR_AREA));
+
+    tile = (TILE*)g_GfxPrimCursor;
+    SetTile(tile);
+    {
+        Actor* task;
+
+        task     = g_Task;
+        tile->x0 = task->screen_x + 0x334;
+        tile->y0 = task->screen_y + ((g_FrameBufferIndex ^ 1) * 0xF0) - 0x15;
+    }
+    tile->w  = 0x18;
+    tile->h  = 0x30;
+    tile->r0 = 0;
+    tile->g0 = 0;
+    tile->b0 = 0;
+    GFX_AddPrim(7, sizeof(TILE));
+
+    cursor = g_GfxPrimCursor;
+    memcpy(cursor, g_GfxCurrentDisplayFrame + 0x14, sizeof(RECT));
+    g_GfxPrimCursor = cursor + sizeof(RECT);
+    SetDrawArea((DR_AREA*)(cursor + sizeof(RECT)), (RECT*)cursor);
+    GFX_AddPrim(7, sizeof(DR_AREA));
+
+    if (g_Task->unk_06 == 0) {
+        func_801F7D1C();
+        g_Task->header.mode = 1;
+    } else {
+        g_Task->header.mode = 2;
+    }
+}
+#else
 INCLUDE_ASM(func_801F7AEC);
+#endif
 
 MATCH void func_801F7D1C(void) {
     Point2u pos;
@@ -519,7 +590,52 @@ MATCH void Scene_ClearActor(void) {
 
 INCLUDE_ASM(func_801F9020);
 
-INCLUDE_ASM(func_801F92F0);
+MATCH void func_801F92F0(Coord* position, s32* step) {
+    POLY_F4* poly;
+    s32*     delta;
+    Coord*   origin;
+    s32      point[4];
+
+    FAKE_STACK_PADS(u8, 0xC); /* FAKE: retail keeps the point row aligned in a 64-byte frame. */
+
+    poly   = (POLY_F4*)g_GfxPrimCursor;
+    delta  = step;
+    origin = position;
+    SetPolyF4(poly);
+    SetSemiTrans(poly, 0);
+
+    point[0] = origin[0].fixed + delta[0];
+    point[1] = origin[1].fixed + delta[1];
+    point[2] = origin[2].fixed + delta[2];
+    Area_ProjectPoint(point, (DVECTOR*)&poly->x0);
+    if (!(g_Task->unk_06 & 1)) {
+        point[0] = origin[0].fixed - delta[0];
+        point[1] = origin[1].fixed + delta[1];
+    } else {
+        point[0] = origin[0].fixed + delta[0];
+        point[1] = origin[1].fixed - delta[1];
+    }
+    point[2] = origin[2].fixed + delta[2];
+    FAKE_BARRIER(); /* FAKE: keep the second projected point stores before its call setup. */
+    Area_ProjectPoint(point, (DVECTOR*)&poly->x1);
+    if (!(g_Task->unk_06 & 1)) {
+        point[0] = origin[0].fixed + delta[0];
+        point[1] = origin[1].fixed - delta[1];
+    } else {
+        point[0] = origin[0].fixed - delta[0];
+        point[1] = origin[1].fixed + delta[1];
+    }
+    point[2] = origin[2].fixed - delta[2];
+    FAKE_BARRIER(); /* FAKE: keep the third projected point stores before its call setup. */
+    Area_ProjectPoint(point, (DVECTOR*)&poly->x2);
+
+    point[0] = origin[0].fixed - delta[0];
+    point[1] = origin[1].fixed - delta[1];
+    point[2] = origin[2].fixed - delta[2];
+    Area_ProjectPoint(point, (DVECTOR*)&poly->x3);
+    setRGB0(poly, 255, 255, 255);
+    Area_AddCellPrim(origin[0].fixed, origin[1].fixed, 0, sizeof(POLY_F4));
+}
 
 INCLUDE_ASM(func_801F9500);
 
