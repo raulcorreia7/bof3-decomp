@@ -23,6 +23,11 @@ extern Callback    D_801181AC[];
 extern Callback    D_801181B4[];
 extern AreaSprite* D_801181DC;
 
+/* The fixed x/y pair and the flag bit a scene spawns its helper actors with,
+ * both indexed by the task's cell column. */
+extern Point2l D_801181C0[];
+extern u8      D_801181D0[];
+
 void func_801170D8(AreaSprite* sprite);
 u8   func_80117410(void);
 u8   func_80117900(void);

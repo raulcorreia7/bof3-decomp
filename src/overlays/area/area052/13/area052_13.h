@@ -19,7 +19,7 @@ extern s8 D_801F5071;
 typedef struct AreaEffectRow {
     WorldPos pos;    /* 0x00 */
     s32      unk_0C; /* 0x0C */
-    s32      unk_10; /* 0x10 */
+    u32      unk_10; /* 0x10 */
     u8       unk_14; /* 0x14 */
     u8       active; /* 0x15 nonzero while the row is in use */
     u8       unk_16; /* 0x16 */

@@ -4,6 +4,7 @@
 /* The world01/area040/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
+#include "game/spawn.h"
 #include "overlays/area/world01.h"
 #include "area/spad.h"
 
@@ -11,6 +12,7 @@
 
 extern u8 D_80144EA8[];
 extern u8 D_80144EA9;
+extern u8 D_80143F06;
 s32       func_801F2E78(void);
 
 extern u8 D_80146875;
@@ -19,6 +21,10 @@ extern u8 D_80146875;
 extern u8 D_801F4960[4][4];
 extern u8 D_801F4970[];
 
+/* The event's lookup table of pad-direction overrides, indexed by the held pad's top nibble. */
+extern u8 D_801F4984[];
+
+void func_801F37D4(void);
 void func_801A4BC0(s32 x, s32 y, s32 value);
 s32  func_801F30B8(s32 x, s32 y);
 
