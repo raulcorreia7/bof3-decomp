@@ -10,12 +10,12 @@ MATCH void func_801F3110(u16 start, u16 end, Point3l* from, Point3l* to) {
         row->pos.z  = ((RANDOM_MASK(0xFFF) << 16) % (to->z - from->z)) + from->z;
         row->pos.y  = from->y;
         row->vx     = 0;
-        row->vy     = RANDOM_MASK(0xFFF) * 4 + 0x1000;
+        row->vy     = RANDOM_MASK(0xFFF) * 4 + AREA_SPARK_SPEED;
         row->vz     = 0;
         row->active = 1;
         row->unk_01 = 0;
-        row->life   = RANDOM_MASK(0x7) + 0x18;
-        row->shade  = 0x48;
+        row->life   = RANDOM_MASK(0x7) + AREA_SPARK_LIFE_BASE;
+        row->shade  = AREA_SPARK_SHADE;
         row->frame  = RANDOM_MASK(0x7);
         row++;
     }

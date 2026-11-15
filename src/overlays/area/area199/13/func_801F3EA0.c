@@ -15,5 +15,5 @@ MATCH void func_801F3EA0(s32 x, s32 y, s32 radius, u8 shade) {
         setRGB2(prim, 0, 0, 0);
         GFX_AddPrim(4, sizeof(POLY_G3));
         i++;
-    } while (i < 64);
+    } while (i < AREA_SHADE_FAN_SEGMENTS);
 }

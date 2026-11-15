@@ -7,6 +7,9 @@
 #include "overlays/area/world04.h"
 #include "area/spad.h"
 
+/* The shade fan's triangle count: one triangle per 64-unit angle step. */
+#define AREA_SHADE_FAN_SEGMENTS 64
+
 /* The scratchpad work row the update passes read. */
 
 /* The map-click frame word the scroll step subtracts from. */

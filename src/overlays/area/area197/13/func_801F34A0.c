@@ -1,5 +1,6 @@
 #include "area197_13.h"
 
+/* kept: area.h declares this with an empty parameter list, so the definition keeps the promoted form. */
 MATCH void func_801F34A0(start, end, from, to) u16 start;
 u16        end;
 Point3l*   from;
@@ -14,12 +15,12 @@ Point3l*   to;
         row->pos.z  = ((RANDOM_MASK(0xFFF) << 16) % (to->z - from->z)) + from->z;
         row->pos.y  = from->y;
         row->vx     = 0;
-        row->vy     = RANDOM_MASK(0xFFF) * 4 + 0x2000;
+        row->vy     = RANDOM_MASK(0xFFF) * 4 + AREA_DROP_SPEED;
         row->vz     = 0;
         row->active = 1;
-        row->pad_01 = 0;
-        row->life   = RANDOM_MASK(0x7) + 0x18;
-        row->shade  = 0x48;
+        row->unk_01 = 0;
+        row->life   = RANDOM_MASK(0x7) + AREA_SPARK_LIFE_BASE;
+        row->shade  = AREA_SPARK_SHADE;
         row++;
     }
 }
