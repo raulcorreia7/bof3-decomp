@@ -106,7 +106,30 @@ MATCH void func_801F72A0(void) {
     func_801F7568();
 }
 
-INCLUDE_ASM(func_801F735C);
+MATCH void func_801F735C(void) {
+    Actor* work;
+    s16    message_id;
+
+    g_Task->timer -= 1;
+    if (g_Task->timer == 0) {
+        g_Task->param.unk_0B += 1;
+        work       = g_Task;
+        message_id = work->param.unk_0B;
+        if ((u8)message_id == 0x37) {
+            work->tint.signed_bytes.delta.blue  = -1;
+            work->tint.signed_bytes.delta.green = -1;
+            work->tint.signed_bytes.delta.red   = -1;
+            g_Task->header.mode                 = 4;
+            g_ScriptVars[0] += 1;
+        } else {
+            Message_StartAreaMessage(message_id);
+            g_GameStateIndex    = GAME_REQUEST_MESSAGE;
+            g_Task->header.mode = 1;
+        }
+    }
+    Scene_DrawScreenTint();
+    func_801F7568();
+}
 
 MATCH void func_801F7444(void) {
     if (g_ScriptVars[0] == 0x35) {
