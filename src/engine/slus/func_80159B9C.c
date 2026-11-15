@@ -1,4 +1,5 @@
 #include "engine/slus/slus.h"
+#include "game/character.h"
 
 /* draws a translucent textured quad and its outline at the given
  * screen position, then four corner bars around it.
@@ -41,14 +42,14 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, s32 w, s32 h) {
     g_GfxPrimCursor += 8;
     rect->y = 240;
     rect->x = 0;
-    setWH(rect, 16, 16);
+    rect->w = rect->h = 16;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), rect);
     GFX_AddPrim(1, sizeof(DR_MODE));
 
     poly = (POLY_GT4*)g_GfxPrimCursor;
     SetPolyGT4(poly);
     poly->tpage = GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
-    poly->clut  = GetClut(((s8)g_WindowStyle << 5) | 0x10, STAGE_PALETTE_Y + 1);
+    poly->clut  = GetClut(((s8)CHARACTER_BLOCK->window_style << 5) | 0x10, STAGE_PALETTE_Y + 1);
     setRGB0(poly, 255, 255, 255);
     setRGB1(poly, 255, 255, 255);
     setRGB2(poly, 255, 255, 255);
@@ -62,7 +63,7 @@ NON_MATCHING void func_80159B9C(s32 x, s32 y, s32 w, s32 h) {
     g_GfxPrimCursor += 8;
     rect->y = 0;
     rect->x = 0;
-    setWH(rect, 256, 256);
+    rect->w = rect->h = 256;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 320, 0), rect);
     GFX_AddPrim(1, sizeof(DR_MODE));
 
