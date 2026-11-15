@@ -224,37 +224,37 @@ MATCH void func_801EFDD8(void) {
 }
 
 MATCH void func_801EFE70(void) {
-    PartyMember* timer_work;
-    PartyMember* position_work;
-    PartyMember* clear_work;
+    PartyMember* timer_task;
+    PartyMember* position_task;
+    PartyMember* clear_task;
     u8           timer;
     s32          x;
     s32          x_offset;
     s32          y;
     s32          y_offset;
 
-    timer_work         = g_Task;
-    timer              = timer_work->unk_09 - 1;
-    timer_work->unk_09 = timer;
+    timer_task         = g_Task;
+    timer              = timer_task->unk_09 - 1;
+    timer_task->unk_09 = timer;
     if (timer == 0) {
         SND_QueueSelectionEffect(0x102);
-        position_work              = g_Task;
+        position_task              = g_Task;
         x                          = g_AreaScrollTargetX;
-        x_offset                   = position_work->unk_0C;
-        position_work->pos.x.fixed = x + x_offset;
+        x_offset                   = position_task->unk_0C;
+        position_task->pos.x.fixed = x + x_offset;
         /* FAKE: Preserve the X write before the Y reads. */
         FAKE_BARRIER();
         y        = g_AreaScrollTargetY;
-        y_offset = position_work->unk_10;
+        y_offset = position_task->unk_10;
         /* FAKE: Preserve the Y reads before clearing the field. */
         FAKE_BARRIER();
-        position_work->param.unk_0B = 0;
-        position_work->pos.y.fixed  = y + y_offset;
+        position_task->param.unk_0B = 0;
+        position_task->pos.y.fixed  = y + y_offset;
         g_Task->unk_09              = 16;
-        clear_work                  = g_Task;
-        clear_work->unk_14          = 0;
-        clear_work->unk_20          = 0;
-        clear_work->header.step     = clear_work->header.step + 1;
+        clear_task                  = g_Task;
+        clear_task->unk_14          = 0;
+        clear_task->unk_20          = 0;
+        clear_task->header.step     = clear_task->header.step + 1;
     }
 }
 
