@@ -473,7 +473,72 @@ MATCH void func_801F81F4(u16 value) {
     D_801FE9EC[0] = value;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F823C(s32 x_arg, s32 y_arg, s32 half_height, s32 half_width) {
+    POLY_GT4* prim;
+    s16       x;
+    s16       y;
+    s16       height;
+    s16       width;
+    s16       row;
+    s32       half;
+    s32       skew;
+    s32       top;
+    s32       v;
+    u8        i;
+
+    x      = x_arg;
+    y      = y_arg;
+    height = half_height;
+    width  = half_width;
+    row    = height - 1;
+    for (i = 0; i < height * 2; i++) {
+        half = SquareRoot0(height * height - row * row);
+        skew = (width * rsin(D_801FE9EC[i])) >> 12;
+        prim = (POLY_GT4*)g_GfxPrimCursor;
+        row -= 1;
+        SetPolyGT4(prim);
+        SetSemiTrans(prim, 0);
+        prim->x0 = prim->x2 = x - half + skew;
+        top                 = i + (y - height);
+        prim->y0 = prim->y1 = top;
+        prim->x1 = prim->x3 = x - half + skew + half;
+        prim->y2 = prim->y3 = top + 1;
+        prim->u0 = prim->u2 = 0x40 - half;
+        prim->u1 = prim->u3 = 0x40;
+        v                   = i + 0x40 - (u8)height;
+        prim->v0 = prim->v1 = i - ((u8)height - 0x40);
+        prim->v2 = prim->v3 = v + 1;
+        prim->tpage         = GetTPage(2, 0, 0x340, 0x100);
+        setRGB0(prim, 0x40, 0x40, 0x80);
+        setRGB1(prim, 0x60, 0x60, 0x60);
+        setRGB2(prim, 0x40, 0x40, 0x80);
+        setRGB3(prim, 0x60, 0x60, 0x60);
+        GFX_AddPrim(2, sizeof(POLY_GT4));
+
+        prim = (POLY_GT4*)g_GfxPrimCursor;
+        SetPolyGT4(prim);
+        SetSemiTrans(prim, 0);
+        prim->y0 = prim->y1 = top;
+        prim->y2 = prim->y3 = top + 1;
+        prim->u0 = prim->u2 = 0;
+        skew                = x + skew;
+        prim->x0 = prim->x2 = skew;
+        prim->x1 = prim->x3 = skew + half;
+        prim->v0 = prim->v1 = v - 0x80;
+        prim->u1 = prim->u3 = half;
+        prim->v2 = prim->v3 = v - 0x7F;
+        prim->tpage         = GetTPage(2, 0, 0x340, 0x100);
+        setRGB0(prim, 0x60, 0x60, 0x60);
+        setRGB1(prim, 0x80, 0x40, 0x40);
+        setRGB2(prim, 0x60, 0x60, 0x60);
+        setRGB3(prim, 0x80, 0x40, 0x40);
+        GFX_AddPrim(2, sizeof(POLY_GT4));
+    }
+}
+#else
 INCLUDE_ASM(func_801F823C);
+#endif
 
 MATCH void func_801F8534(void) {
     s32     point[3];
