@@ -29,7 +29,7 @@ MATCH void func_801B2DDC(void) {
                 Message_StartAreaMessage(value & 0xFFF);
                 break;
             case 2:
-                rec.callback_index = 0xFF;
+                rec.callback_index = GAME_NONE;
                 base               = g_AreaLoads[LOHU(g_GameAreaId)];
                 list               = FIELD(u32*, base, 0x4u);
                 entry              = list[FIELD(u16, sel, 0x4u) & 0xFFF];
