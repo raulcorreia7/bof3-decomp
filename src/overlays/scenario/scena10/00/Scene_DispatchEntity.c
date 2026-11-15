@@ -6,7 +6,21 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/scenario/Scene_DispatchEntity.h"
 
-INCLUDE_ASM(func_801F6FAC);
+MATCH void func_801F6FAC(void) {
+    Actor* work;
+
+    Area_SelectSceneRecord(0x1EA);
+    work                     = g_Task;
+    work->unk_48             = 0;
+    work->pos.z.part.integer = 0x64;
+    g_Task->active_flags     = 0;
+    g_Task->unk_2A           = 0;
+    g_Task->timer            = 0;
+    g_Task->unk_0A           = 0x1E;
+    g_Task->draw_layer       = 1;
+    Actor_SelectScript((u8)(g_Task->unk_06 - 0x4E));
+    g_Task->header.mode = 1;
+}
 
 INCLUDE_ASM(func_801F7068);
 
@@ -108,7 +122,18 @@ MATCH void func_801F781C(u16 x, u16 y, u16 width, u16 height) {
     } while (i < 8);
 }
 
-INCLUDE_ASM(func_801F79E8);
+MATCH void func_801F79E8(u16 x, u16 y) {
+    POLY_FT4* prim;
+
+    prim = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(prim);
+    prim->tpage = GetTPage(0, 0, 704, 256);
+    setClut(prim, 48, 483);
+    setRGB0(prim, 0x80, 0x80, 0x80);
+    setXY4(prim, x, y, x + 16, y, x, y + 16, x + 16, y + 16);
+    setUV4(prim, 0xB0, 0x50, 0xC0, 0x50, 0xB0, 0x60, 0xC0, 0x60);
+    GFX_AddPrim(1, sizeof(POLY_FT4));
+}
 
 INCLUDE_ASM(func_801F7AD4);
 
