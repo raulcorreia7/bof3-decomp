@@ -46,10 +46,10 @@ NON_MATCHING void func_801FC380(void) {
             g_SceneState.step_05 = 2;
             switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {
                 case 1:
-                    Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(0x25), TO_COORD(0xAE), 0x8A);
+                    Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(37), TO_COORD(174), 0x8A);
                     break;
                 case 2:
-                    Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(0x25), TO_COORD(0xAE), 0x89);
+                    Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(37), TO_COORD(174), 0x89);
                     break;
             }
             break;
@@ -60,10 +60,10 @@ NON_MATCHING void func_801FC380(void) {
                 g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
                 switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {
                     case 1:
-                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(0x27), TO_COORD(0xAD), 0x8C);
+                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(39), TO_COORD(173), 0x8C);
                         break;
                     case 2:
-                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(0x27), TO_COORD(0xAD), 0x8B);
+                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(39), TO_COORD(173), 0x8B);
                         break;
                 }
             }
@@ -75,10 +75,10 @@ NON_MATCHING void func_801FC380(void) {
                 g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
                 switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {
                     case 1:
-                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(0x22), TO_COORD(0x72), 0x8E);
+                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(34), TO_COORD(114), 0x8E);
                         break;
                     case 2:
-                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(0x22), TO_COORD(0x72), 0x8D);
+                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(34), TO_COORD(114), 0x8D);
                         break;
                 }
             }

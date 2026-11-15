@@ -23,7 +23,7 @@ MATCH void func_801FD400(void) {
                 g_SpawnedActors[D_1F800000.view.raw[0]].type           = 0x13;
                 g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.x = -748;
                 g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.z = 0xB6;
+                g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.z = 182;
                 g_SpawnedActors[D_1F800000.view.raw[0]].layer          = 0x20;
                 g_SceneState.step_05                                   = 0xB;
             }

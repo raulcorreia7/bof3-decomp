@@ -28,7 +28,7 @@ MATCH void func_801F9BD0(void) {
         case 3:
             if (g_ScriptVars[0] == 0x42) {
                 SYS_SetFlag(g_SceneFlags, 0x17);
-                func_801BFE34(TO_COORD(0x3B), TO_COORD_HALF(0x48), 0xB);
+                func_801BFE34(TO_COORD(59), TO_COORD_HALF(72), 0xB);
                 g_SceneState.step_05 = 4;
             }
             break;
@@ -49,9 +49,9 @@ MATCH void func_801F9BD0(void) {
                 g_ScriptVars[2]      = 1;
                 g_SceneState.step_05 = 7;
                 if (g_PartyFieldOrder[0] == 0) {
-                    Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(0x3B), TO_COORD(0x1A), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_UP_RIGHT);
+                    Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(59), TO_COORD(26), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_UP_RIGHT);
                 } else {
-                    Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(0x3B), TO_COORD(0x1A), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_RIGHT);
+                    Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(59), TO_COORD(26), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_RIGHT);
                 }
                 g_GamePrevSelection = 0x22;
             }
@@ -66,9 +66,9 @@ MATCH void func_801F9BD0(void) {
                 g_ScriptVars[2]      = 1;
                 g_SceneState.step_05 = 10;
                 if (g_PartyFieldOrder[0] == 0) {
-                    Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(0x3C), TO_COORD(0x48), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_UP_RIGHT);
+                    Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(60), TO_COORD(72), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_UP_RIGHT);
                 } else {
-                    Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(0x3C), TO_COORD(0x48), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_RIGHT);
+                    Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(60), TO_COORD(72), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_RIGHT);
                 }
             }
             break;

@@ -11,7 +11,7 @@ MATCH void func_801FBA70(void) {
 
     switch (g_SceneState.step_05) {
         case 0:
-            Game_RequestAreaChange(AREA_ID_DAUNA_MINE_WORKER, TO_COORD(0x4E), TO_COORD(0x34), AREA_ENTRY_MAP_LOADING | FACING_DOWN);
+            Game_RequestAreaChange(AREA_ID_DAUNA_MINE_WORKER, TO_COORD(78), TO_COORD(52), AREA_ENTRY_MAP_LOADING | FACING_DOWN);
             g_GamePrevSelection  = 0xFF;
             g_SceneState.step_05 = 100;
             break;
@@ -28,7 +28,7 @@ MATCH void func_801FBA70(void) {
             break;
         case 1:
             if (g_ScriptVars[0] == 0x1) {
-                Game_RequestAreaChange(AREA_ID_CAMP_BEFORE_ANGEL_TOWER, TO_COORD_HALF(0x3D), TO_COORD_HALF(0x0D), AREA_ENTRY_MAP_LOADING | FACING_RIGHT);
+                Game_RequestAreaChange(AREA_ID_CAMP_BEFORE_ANGEL_TOWER, TO_COORD_HALF(61), TO_COORD_HALF(13), AREA_ENTRY_MAP_LOADING | FACING_RIGHT);
                 g_GameRequestKind    = 0xFF;
                 g_GamePrevSelection  = 0xFF;
                 g_SceneState.step_05 = 2;
@@ -36,7 +36,7 @@ MATCH void func_801FBA70(void) {
             /* fallthrough */
         case 2:
             if (g_ScriptVars[0] == 0x2) {
-                Game_RequestAreaChange(AREA_ID_CAMP_BEFORE_ANGEL_TOWER, TO_COORD_HALF(0x13), TO_COORD(0x18), AREA_ENTRY_MAP_LOADING | FACING_DOWN_RIGHT);
+                Game_RequestAreaChange(AREA_ID_CAMP_BEFORE_ANGEL_TOWER, TO_COORD_HALF(19), TO_COORD(24), AREA_ENTRY_MAP_LOADING | FACING_DOWN_RIGHT);
                 g_SceneState.step_05 = 3;
             }
             break;
@@ -50,7 +50,7 @@ MATCH void func_801FBA70(void) {
             if (g_ScriptVars[0] == 0x8) {
                 Char_RebuildPartyStats();
                 SYS_SetFlag(g_SceneFlags, 7);
-                Game_RequestAreaChange(AREA_ID_DAUNA_WORLD_MAP, TO_COORD(0x1B), TO_COORD(0x21), FACING_RIGHT);
+                Game_RequestAreaChange(AREA_ID_DAUNA_WORLD_MAP, TO_COORD(27), TO_COORD(33), FACING_RIGHT);
                 g_GameFlags &= ~GAME_FLAG_SCROLL_LOCK;
                 Game_ClearScriptActive();
                 g_ScriptVars[0]       = 0;
