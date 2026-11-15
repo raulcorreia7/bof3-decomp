@@ -383,6 +383,59 @@ def offenders(text: str) -> set[str]:
     return found
 
 
+def moved_paths() -> dict[str, str]:
+    """Map each path a staged or unstaged rename moved to the path that holds it now."""
+    moved: dict[str, str] = {}
+    for staged in ([], ["--cached"]):
+        out = subprocess.run(
+            ["git", "diff", "--name-status", "-M", "-z", *staged],
+            check=False,
+            capture_output=True,
+            text=True,
+        ).stdout
+        fields = out.split("\0")
+        index = 0
+        while index < len(fields) and fields[index]:
+            status = fields[index]
+            if status.startswith(("R", "C")):
+                moved[fields[index + 1]] = fields[index + 2]
+                index += 3
+            else:
+                index += 2
+    return moved
+
+
+def worktree_text(path: str) -> str:
+    """Return a path's text; a path a rename moved reads the file that holds it now."""
+    moved: dict[str, str] | None = None
+    while not Path(path).is_file():
+        moved = moved_paths() if moved is None else moved
+        if path not in moved:
+            break
+        path = moved[path]
+    if Path(path).is_file():
+        return Path(path).read_text(encoding="utf-8", errors="replace")
+    result = subprocess.run(
+        ["git", "show", f"HEAD:{path}"], check=False, capture_output=True, text=True
+    )
+    return result.stdout if result.returncode == 0 else ""
+
+
+def fold_moves(new: set[str], gone: set[str]) -> tuple[set[str], set[str]]:
+    """Pair an identifier moved between files of one folder, so a rename keeps its debt."""
+    left_new, left_gone = set(new), set(gone)
+    for entry in sorted(gone):
+        path, name = entry.split("\t", 1)
+        folder = path.rsplit("/", 1)[0]
+        for candidate in sorted(left_new):
+            moved_path, moved_name = candidate.split("\t", 1)
+            if moved_name == name and moved_path.rsplit("/", 1)[0] == folder:
+                left_gone.discard(entry)
+                left_new.discard(candidate)
+                break
+    return left_new, left_gone
+
+
 def tree_entries() -> set[str]:
     files = subprocess.run(
         ["git", "ls-files", *ROOTS], capture_output=True, text=True, check=True
@@ -390,7 +443,7 @@ def tree_entries() -> set[str]:
     entries = set()
     for path in files:
         if path.endswith(SUFFIXES):
-            text = Path(path).read_text(encoding="utf-8", errors="ignore")
+            text = worktree_text(path)
             entries |= {f"{path}\t{name}" for name in offenders(text)}
     return entries
 
@@ -438,9 +491,7 @@ def main(argv: list[str]) -> int:
         moved = renamed_from(argv[1])
         for path in changed_paths(argv[1]):
             before = macro_counts(base_text(argv[1], moved.get(path, path)))
-            after_text = without_drafts(
-                Path(path).read_text(encoding="utf-8", errors="replace")
-            )
+            after_text = without_drafts(worktree_text(path))
             after = macro_counts(after_text)
             grown = {name: after[name] - before.get(name, 0) for name in after}
             for name, extra in sorted(grown.items()):
@@ -477,7 +528,8 @@ def main(argv: list[str]) -> int:
         print(f"check-names: wrote {len(now)} entries to {BASELINE}")
         return 0
     base = baseline_entries()
-    new, gone = sorted(now - base), sorted(base - now)
+    new, gone = fold_moves(now - base, base - now)
+    new, gone = sorted(new), sorted(gone)
     for entry in new:
         print(
             f"{entry.replace(chr(9), ': ')}: a name must not carry an address",

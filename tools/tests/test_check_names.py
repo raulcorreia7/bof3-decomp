@@ -505,3 +505,53 @@ def test_a_diff_that_names_the_row_passes(
     diff_repo(tmp_path, "Named")
     monkeypatch.chdir(tmp_path)
     assert check_names.main(["--diff", "HEAD~1"]) == 0
+
+
+def rename_repo(root: Path, base_extra: dict[str, str] | None = None) -> None:
+    """Commit one offender under ``src/a`` and stage a rename of it or another file."""
+    subprocess.run(["git", "init", "-q"], cwd=root, check=True)
+    for key, value in (("user.email", "t@t"), ("user.name", "t")):
+        subprocess.run(["git", "config", key, value], cwd=root, check=True)
+    (root / "src/a").mkdir(parents=True)
+    (root / "src/a/A.c").write_text("extern u8 Foo_801D933C;\n")
+    (root / "config").mkdir()
+    (root / "config/address_names.txt").write_text("src/a/A.c\tFoo_801D933C\n")
+    for name, text in (base_extra or {}).items():
+        (root / name).parent.mkdir(parents=True, exist_ok=True)
+        (root / name).write_text(text)
+    subprocess.run(["git", "add", "."], cwd=root, check=True)
+    subprocess.run(["git", "commit", "-qm", "base"], cwd=root, check=True)
+
+
+def test_an_unstaged_rename_reads_the_file_that_holds_the_name(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    rename_repo(tmp_path)
+    (tmp_path / "src/a/A.c").rename(tmp_path / "src/a/B.c")
+    monkeypatch.chdir(tmp_path)
+    assert check_names.main([]) == 0
+
+
+def test_a_staged_rename_keeps_the_baseline_debt(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    rename_repo(tmp_path)
+    subprocess.run(["git", "mv", "src/a/A.c", "src/a/B.c"], cwd=tmp_path, check=True)
+    monkeypatch.chdir(tmp_path)
+    assert check_names.main([]) == 0
+
+
+def test_a_diff_reads_a_unit_moved_after_its_commit(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    rename_repo(tmp_path)
+    (tmp_path / "src/a/keep.c").write_text("void f(void);\n")
+    subprocess.run(["git", "add", "-A"], cwd=tmp_path, check=True)
+    subprocess.run(["git", "commit", "-qm", "add a unit"], cwd=tmp_path, check=True)
+    subprocess.run(
+        ["git", "mv", "src/a/keep.c", "src/a/keep_renamed.c"],
+        cwd=tmp_path,
+        check=True,
+    )
+    monkeypatch.chdir(tmp_path)
+    assert check_names.main(["--diff", "HEAD~1"]) == 0
