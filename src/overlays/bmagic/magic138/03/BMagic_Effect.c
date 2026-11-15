@@ -14,8 +14,8 @@ MATCH void func_801EEC88(void) {
     u8           i;
 
     work              = g_Task;
-    work->unk_2E.half = 0xF0;
-    work->unk_30.half = 0xFA;
+    work->unk_2E.half = 240;
+    work->unk_30.half = 250;
     i                 = 0;
     dst               = g_AreaPaletteCopy->rows[26].colors;
     src               = g_AreaPaletteArena->rows[26].colors;
@@ -55,9 +55,9 @@ MATCH void func_801EED60(void) {
             g_Task->header.mode += 1;
         }
         saved_work = g_Task;
-        g_Task     = g_BattleEffectBattler;
+        TASK_SET(g_BattleEffectBattler);
         Actor_StepAnimLoop();
-        g_Task = saved_work;
+        TASK_SET(saved_work);
     }
 }
 
@@ -65,9 +65,9 @@ MATCH void func_801EEED8(void) {
     PartyMember* saved_work;
 
     saved_work = g_Task;
-    g_Task     = g_BattleEffectBattler;
+    TASK_SET(g_BattleEffectBattler);
     Actor_StepAnimLoop();
-    g_Task = saved_work;
+    TASK_SET(saved_work);
     if (saved_work->param.unk_0B == 0) {
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;

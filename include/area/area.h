@@ -69,7 +69,7 @@
 /* The palette arena: one 16 KB CLUT arena (256 units of 0x40 bytes) that the
  * area, ETC, BATTLE and BMAGIC families fill in slices, with a working copy the
  * engine uploads wholesale when `g_GfxPalettePending` is set (`@0x8014E22C`, 32 rows of
- * 0x200 bytes; `@0x8014E284` does the copy). `include/gfx/prim.h:23` names
+ * 0x200 bytes; `@0x8014E284` does the copy). `include/gfx/prim.h` names
  * the working copy. */
 #define AREA_PALETTE_ARENA               0x80033800u /* offset 0 in the arena */
 #define AREA_PALETTE_ARENA_33A00         0x80033A00u /* +0x200, 512 B; panel colors at +8 */
