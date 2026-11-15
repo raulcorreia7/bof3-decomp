@@ -1080,6 +1080,7 @@ g_BMagicEffectModes = { addr = 0x801EFA84, source = "Handlers of magic081 (Rotte
 D_801EFA8C = { addr = 0x801EFA8C, source = "Effect slot table of the magic081 effect, scanned by BMagic_AllocEffect." }
 
 ["emi/bmagic/magic082/03"]
+D_1F800000_HALF = { addr = 0x1F800000, type = "s16", source = "The scratchpad base 0x1F800000 as signed halfwords; func_801F0260 stages the ring radius there for its rsin and rcos scaling.", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
