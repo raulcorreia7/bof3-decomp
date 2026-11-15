@@ -426,7 +426,64 @@ MATCH void func_801D23A0(void) {
 
 INCLUDE_ASM(func_801D2474);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D26BC(void) {
+    u8        table[16];
+    SceneDot* dot;
+    u16       i;
+    u16       j;
+    u8        a;
+    u8        b;
+    u8        swap;
+
+    i = 0;
+    do {
+        table[i] = i & 1;
+        i++;
+    } while (i < 16);
+    dot = SCENE_DOT_TRAIL;
+    j   = 0;
+    for (i = 0; i < D_801D40A8; i++, dot++) {
+        if ((i & 0xF) == 0) {
+            for (j = 0; j < 16; j++) {
+                a        = rand() & 0xF;
+                b        = rand() & 0xF;
+                swap     = table[b];
+                table[b] = table[a];
+                table[a] = swap;
+            }
+            j = 0;
+        }
+        dot->active = table[j];
+        j++;
+        if (g_Task->param.unk_0B == 0) {
+            dot->dx = (rand() & 0x1F) - 0x10;
+            dot->dy = (rand() & 0x1F) - 0x10;
+        } else {
+            dot->dx = rand() & 0xF;
+            dot->dy = rand() & 0xF;
+            if (dot->dx < dot->dy) {
+                dot->dx ^= dot->dy;
+                dot->dy ^= dot->dx;
+                dot->dx ^= dot->dy;
+            }
+            dot->dy = -dot->dy;
+        }
+        if (g_Task->unk_06 == 0) {
+            dot->life = (rand() & 0x1E) + 10;
+            dot->x -= dot->dx * dot->life;
+            dot->y -= dot->dy * dot->life;
+        } else {
+            dot->life = 40 - (rand() & 0x1E);
+        }
+    }
+    g_Task->timer = 80;
+    g_Task->header.mode += 1;
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 12));
+}
+#else
 INCLUDE_ASM(func_801D26BC);
+#endif
 
 MATCH void func_801D2934(void) {
     Actor*    actor;
