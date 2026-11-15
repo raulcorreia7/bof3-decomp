@@ -363,3 +363,145 @@ def test_a_draft_body_does_not_count_its_offset_macros() -> None:
     assert check_names.macro_counts("MATCH void f(void) { x = SP(0x4u); }\n") == {
         "SP": 1
     }
+
+
+LAYOUT = """sha1: 0
+segments:
+  - name: main
+    type: code
+    start: 0x0
+    vram: 0x80000000
+    align: 4
+    subsegments:
+      - [0x0, %s, %s]
+"""
+
+
+def write_image(
+    root: Path, kind: str, row: str, table: str, unit: str, unit_name: str
+) -> None:
+    """Write one image layout, its symbol table and its one source file."""
+    (root / "config/exe/a").mkdir(parents=True, exist_ok=True)
+    (root / "config/exe/a/splat.yaml").write_text(LAYOUT % (kind, row))
+    (root / "config/symbols.toml").write_text('["exe/a"]\n' + table + "\n")
+    (root / "src/a").mkdir(parents=True, exist_ok=True)
+    (root / "src/a" / f"{unit_name}.c").write_text(unit)
+
+
+NAMED_UNIT = "MATCH void Named(void) {}\n"
+NAMED_ROW = 'Named = { addr = 0x80000000, type = "func", source = "x" }'
+
+
+@pytest.fixture
+def no_ratchet(monkeypatch: pytest.MonkeyPatch) -> None:
+    """The address-name ratchet reads git; these fixtures check the layout rule alone."""
+    monkeypatch.setattr(check_names, "tree_entries", lambda: set())
+
+
+def test_a_unit_row_that_keeps_its_address_name_is_stale(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    no_ratchet: None,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    monkeypatch.chdir(tmp_path)
+    write_image(tmp_path, "c", "func_80000000", NAMED_ROW, NAMED_UNIT, "func_80000000")
+    assert check_names.main([]) == 1
+    assert "keeps the address name" in capsys.readouterr().err
+
+
+def test_a_named_unit_row_passes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, no_ratchet: None
+) -> None:
+    monkeypatch.chdir(tmp_path)
+    write_image(tmp_path, "c", "Named", NAMED_ROW, NAMED_UNIT, "Named")
+    assert check_names.main([]) == 0
+
+
+def test_a_unit_that_defines_its_address_name_is_not_stale(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, no_ratchet: None
+) -> None:
+    monkeypatch.chdir(tmp_path)
+    write_image(
+        tmp_path,
+        "c",
+        "func_80000000",
+        NAMED_ROW,
+        "MATCH void func_80000000(void) {}\n",
+        "func_80000000",
+    )
+    assert check_names.main([]) == 0
+
+
+def test_a_data_row_that_keeps_its_address_name_is_stale(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    no_ratchet: None,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    monkeypatch.chdir(tmp_path)
+    write_image(
+        tmp_path,
+        "bin",
+        "D_80000000",
+        'g_Table = { addr = 0x80000000, source = "x" }',
+        "",
+        "x",
+    )
+    assert check_names.main([]) == 1
+    assert "keeps the address name" in capsys.readouterr().err
+
+
+def test_a_named_data_row_passes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, no_ratchet: None
+) -> None:
+    monkeypatch.chdir(tmp_path)
+    write_image(
+        tmp_path,
+        "bin",
+        "g_Table",
+        'g_Table = { addr = 0x80000000, source = "x" }',
+        "",
+        "x",
+    )
+    assert check_names.main([]) == 0
+
+
+def diff_repo(root: Path, row: str) -> None:
+    def git(*args: str) -> None:
+        subprocess.run(["git", *args], cwd=root, check=True, capture_output=True)
+
+    git("init", "-q")
+    git("config", "user.email", "t@t")
+    git("config", "user.name", "t")
+    write_image(
+        root,
+        "c",
+        "func_80000000",
+        "",
+        "MATCH void func_80000000(void) {}\n",
+        "func_80000000",
+    )
+    (root / "config/symbols.toml").write_text('["exe/a"]\n')
+    git("add", ".")
+    git("commit", "-qm", "base")
+    write_image(root, "c", row, NAMED_ROW, NAMED_UNIT, "func_80000000")
+    git("add", ".")
+    git("commit", "-qm", "name the function")
+
+
+def test_a_diff_that_names_a_function_and_leaves_its_row_fails(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    diff_repo(tmp_path, "func_80000000")
+    monkeypatch.chdir(tmp_path)
+    assert check_names.main(["--diff", "HEAD~1"]) == 1
+    assert "keeps the address name" in capsys.readouterr().err
+
+
+def test_a_diff_that_names_the_row_passes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    diff_repo(tmp_path, "Named")
+    monkeypatch.chdir(tmp_path)
+    assert check_names.main(["--diff", "HEAD~1"]) == 0

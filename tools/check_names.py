@@ -18,6 +18,12 @@ this check only stops new debt, the rename map clears the old. A file that chang
 form to write, so those uses can only shrink (plan section AY). A rebuild that moves an existing
 use changes no count, so it passes.
 
+A layout row must not keep an address name its symbol has left. A ``c`` row fails when its unit
+defines no C body under the row name and ``config/symbols.toml`` names its address; a ``bin``,
+``.data`` or ``data`` row fails when its address has a named non-alias data symbol. ``--diff``
+checks the images whose layout or symbol table the change touches; without it, every image.
+``tools/symbol.py rename`` moves the row and the unit file.
+
 Usage: python3 tools/check_names.py [--write]    (--write rewrites the baseline from the tree)
 """
 
@@ -26,7 +32,10 @@ from __future__ import annotations
 import re
 import subprocess
 import sys
+import tomllib
 from pathlib import Path
+
+from bof3.resolve.layout import target_of
 
 BASELINE = Path("config/address_names.txt")
 ROOTS = ("include", "src")
@@ -115,6 +124,106 @@ PREFIXES = (
     (re.compile(r"^Fish_"), "Fishing_"),
     (re.compile(r"^CD_"), "EMI_ or DISC_"),
 )
+
+
+LAYOUT_ROW = re.compile(r"(?:func|D|data)_([0-9A-F]{8})$")
+SYMBOL_ROW = re.compile(r"\s*([A-Za-z_]\w*)\s*=\s*\{")
+UNIT_KINDS = ("c", "asm")
+DATA_KINDS = ("bin", ".data", "data")
+
+
+def layout_images(ref: str | None) -> list[str]:
+    """The images whose layout or symbol table a change touches; every image without a ref."""
+    if ref is None:
+        return sorted(
+            target_of(path)
+            for path in Path("config").rglob("splat.yaml")
+            if target_of(path)
+        )
+    changed = subprocess.run(
+        ["git", "diff", "--name-only", f"{ref}...HEAD", "--", "config"],
+        check=False,
+        capture_output=True,
+        text=True,
+    ).stdout.split()
+    images = {
+        name[len("config/") : -len("/splat.yaml")]
+        for name in changed
+        if name.endswith("/splat.yaml")
+    }
+    images.update(added_symbol_images(ref))
+    return sorted(images)
+
+
+def added_symbol_images(ref: str) -> set[str]:
+    """The images whose table a change gives a new row."""
+    diff = subprocess.run(
+        ["git", "diff", "-U0", f"{ref}...HEAD", "--", "config/symbols.toml"],
+        check=False,
+        capture_output=True,
+        text=True,
+    ).stdout
+    added = {
+        match.group(1)
+        for row in diff.splitlines()
+        if row.startswith("+") and not row.startswith("+++")
+        for match in [SYMBOL_ROW.match(row[1:])]
+        if match
+    }
+    if not added or not Path("config/symbols.toml").is_file():
+        return set()
+    tables = tomllib.loads(Path("config/symbols.toml").read_text(encoding="utf-8"))
+    return {
+        image
+        for image, rows in tables.items()
+        if isinstance(rows, dict) and added & rows.keys()
+    }
+
+
+def stale_rows(images: list[str]) -> list[str]:
+    """One message per layout row that keeps an address name its symbol no longer uses."""
+    from bof3.link import symbols
+    from bof3.resolve.ids import source_folder
+    from bof3.resolve.layout import parse_splat_layout, splat_facts
+    from bof3.status import claims
+
+    if not images:
+        return []
+    tables = symbols.load(Path("."))
+    messages = []
+    for image in images:
+        splat = Path("config") / image / "splat.yaml"
+        if not splat.is_file():
+            continue
+        try:
+            layout = parse_splat_layout(splat, splat_facts(splat).load_address)
+        except (OSError, ValueError, ImportError):
+            continue
+        named = {
+            entry.addr: entry
+            for entry in tables.get(image, ())
+            if not entry.alias and not symbols.ADDRESS_NAME.match(entry.name)
+        }
+        for boundary in layout.boundaries:
+            match = LAYOUT_ROW.fullmatch(boundary.name or "")
+            if not match or boundary.kind not in UNIT_KINDS + DATA_KINDS:
+                continue
+            address = int(match.group(1), 16)
+            entry = named.get(address)
+            if entry is None:
+                continue
+            if boundary.kind in UNIT_KINDS:
+                unit = Path("src") / source_folder(image) / f"{boundary.name}.c"
+                if not unit.is_file() or boundary.name in claims.c_definitions(unit):
+                    continue
+            elif entry.type in ("func", "Callback"):
+                continue
+            messages.append(
+                f"{splat}: [{boundary.file_start:#x}, {boundary.kind}, {boundary.name}]: "
+                f"the row keeps the address name of 0x{address:08X}, "
+                f"which {entry.name} names"
+            )
+    return messages
 
 
 def split_words(name: str) -> list[str]:
@@ -348,11 +457,15 @@ def main(argv: list[str]) -> int:
                     file=sys.stderr,
                 )
                 bad = 1
+        for message in stale_rows(layout_images(argv[1])):
+            print(message, file=sys.stderr)
+            bad = 1
         if bad:
             print(f"check-names: names against {argv[1]}", file=sys.stderr)
             return 1
         print(
-            f"check-names: no new rejected names, unnamed parameters or offset accesses against {argv[1]}"
+            f"check-names: no new rejected names, unnamed parameters, offset accesses "
+            f"or layout rows against {argv[1]}"
         )
         return 0
     now = tree_entries()
@@ -375,8 +488,15 @@ def main(argv: list[str]) -> int:
             f"{BASELINE}: {entry.replace(chr(9), ': ')} no longer exists; delete the line",
             file=sys.stderr,
         )
-    if new or gone:
-        print(f"check-names: {len(new)} new, {len(gone)} stale", file=sys.stderr)
+    rows = stale_rows(layout_images(None))
+    for message in rows:
+        print(message, file=sys.stderr)
+    if new or gone or rows:
+        print(
+            f"check-names: {len(new)} new, {len(gone)} stale, "
+            f"{len(rows)} layout rows with an address name",
+            file=sys.stderr,
+        )
         return 1
     print(f"check-names: no new address names ({len(base)} left to rename)")
     return 0
