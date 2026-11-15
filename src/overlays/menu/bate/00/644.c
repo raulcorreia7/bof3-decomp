@@ -21,7 +21,7 @@ MATCH void func_801D1244(void) {
     category                         = D_80148338;
     cursor_x                         = (u16)D_80148334;
     row                              = D_8014833B;
-    first                            = *(u8*)&D_8014833A;
+    first                            = LOBU(D_8014833A);
     g_MenuPanelTasks[1].flags        = 0;
     g_MenuPanelTasks[4].pos.x        = cursor_x + 7;
     row_offset                       = row - first;
