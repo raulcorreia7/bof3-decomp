@@ -15,7 +15,7 @@ segments:
       - [0x1B0, c, func_801F2DB0]
       - [0x248, c, func_801F2E48]
       - [0x3C4, c, func_801F2FC4]
-      - [0x430, c, func_801F3030]
+      - [0x430, c, Game_SetCurrentActor]
       - [0xC50, c, func_801F3850]
       - [0xCC0, c, func_801F38C0]
       - [0x1390, c, Message_ShowParty]
