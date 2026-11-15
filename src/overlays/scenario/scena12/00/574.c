@@ -259,7 +259,36 @@ MATCH void func_801F7BEC(void) {
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 21));
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F7C24(void) {
+    VECTOR from;
+    VECTOR to;
+    s32    cos;
+
+    from.vx             = -0x6000;
+    from.vy             = -0x12000;
+    from.vz             = 1 << 24;
+    cos                 = rcos(g_Task->unk_6C);
+    to.vx               = (from.vx * cos - from.vy * rsin(g_Task->unk_6C)) >> 12;
+    cos                 = rsin(g_Task->unk_6C);
+    to.vy               = (from.vx * cos + from.vy * rcos(g_Task->unk_6C)) >> 12;
+    to.vz               = from.vz;
+    g_Task->pos.x.fixed = D_80147B24[0] + to.vx;
+    g_Task->pos.y.fixed = D_80147B28 + to.vy;
+    g_Task->pos.z.fixed = D_80147B2C + to.vz;
+    g_Task->vx          = D_80147B24[0] + to.vx - ((s16)g_Task->screen_x << 15);
+    g_Task->vy          = D_80147B28 + to.vy;
+    g_Task->vz          = D_80147B2C + to.vz;
+    func_801F7E34(&g_Task->pos.x.fixed, &g_Task->vx, 0x40);
+    g_Task->screen_x += 1;
+    if ((s16)g_Task->screen_x == 330) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 22));
+        g_Task->header.mode += 1;
+    }
+}
+#else
 INCLUDE_ASM(func_801F7C24);
+#endif
 
 MATCH void func_801F7E14(void) {
     Actor_Clear();
