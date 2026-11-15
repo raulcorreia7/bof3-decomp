@@ -40,7 +40,7 @@ NON_MATCHING void func_801D1D10(void) {
         g_Battle.cursor.panel_entry = 0;
         D_801463B0                  = 0xE;
         g_Battle.phase.step         = 0;
-        g_Battle.phase.mode        += 1;
+        g_Battle.phase.mode += 1;
     }
 }
 #else

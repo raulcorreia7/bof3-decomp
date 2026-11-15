@@ -43,69 +43,69 @@ NON_MATCHING s32 func_80155560(u32 part_word, void* prim, s32 mode) {
     val9  = ((s32)val8 >> 0x1C) & 3;
     if (val8 & 0xF00) {
         if (val8 & 0x800) {
-            tmp14    = (*((val9 * 4) + &g_AreaMapBundle.tile_table_offsets_04[0][1]) * 4) + (((val8 & 0x7FF) * 8) + (MAP_BUNDLE_BASE + 0x00));
-            u0 = FIELD(s8, tmp14, 0x3u);
-            v0 = FIELD(s16, tmp14, 0x2u) & BYTE_MASK;
-            u1 = FIELD(u8, tmp14, 0x1u);
-            tmp15    = tmp14 + 4;
-            v1 = (u16) * (u8*)(tmp14);
-            u2 = FIELD(s8, tmp15, 0x3u);
-            v2 = FIELD(s16, tmp15, 0x2u) & BYTE_MASK;
-            u3 = FIELD(u8, tmp15, 0x1u);
-            v3 = FIELD(u8, tmp14, 0x4u);
+            tmp14 = (*((val9 * 4) + &g_AreaMapBundle.tile_table_offsets_04[0][1]) * 4) + (((val8 & 0x7FF) * 8) + (MAP_BUNDLE_BASE + 0x00));
+            u0    = FIELD(s8, tmp14, 0x3u);
+            v0    = FIELD(s16, tmp14, 0x2u) & BYTE_MASK;
+            u1    = FIELD(u8, tmp14, 0x1u);
+            tmp15 = tmp14 + 4;
+            v1    = (u16) * (u8*)(tmp14);
+            u2    = FIELD(s8, tmp15, 0x3u);
+            v2    = FIELD(s16, tmp15, 0x2u) & BYTE_MASK;
+            u3    = FIELD(u8, tmp15, 0x1u);
+            v3    = FIELD(u8, tmp14, 0x4u);
         } else {
-            tmp16    = (*((val9 * 4) + &g_AreaMapBundle.tile_table_offsets_04[0][0]) * 4) + (((val8 & BYTE_MASK) * 4) + (MAP_BUNDLE_BASE + 0x00));
-            tmp9     = FIELD(s8, tmp16, 0x3u);
-            u2 = (s16)tmp9;
-            u0 = (s16)tmp9;
-            tmp12    = FIELD(s16, tmp16, 0x2u) & BYTE_MASK;
-            v1 = tmp12;
-            v0 = tmp12;
-            tmp1     = tmp9 + FIELD(u8, tmp16, 0x1u);
-            u3 = tmp1;
-            u1 = tmp1;
-            tmp11    = tmp12 + *(u8*)(tmp16);
-            v3 = tmp11;
-            v2 = tmp11;
+            tmp16 = (*((val9 * 4) + &g_AreaMapBundle.tile_table_offsets_04[0][0]) * 4) + (((val8 & BYTE_MASK) * 4) + (MAP_BUNDLE_BASE + 0x00));
+            tmp9  = FIELD(s8, tmp16, 0x3u);
+            u2    = (s16)tmp9;
+            u0    = (s16)tmp9;
+            tmp12 = FIELD(s16, tmp16, 0x2u) & BYTE_MASK;
+            v1    = tmp12;
+            v0    = tmp12;
+            tmp1  = tmp9 + FIELD(u8, tmp16, 0x1u);
+            u3    = tmp1;
+            u1    = tmp1;
+            tmp11 = tmp12 + *(u8*)(tmp16);
+            v3    = tmp11;
+            v2    = tmp11;
         }
     } else {
-        tmp2     = (val8 & 0xF) * 0x10;
-        tmp0     = tmp2 | 0xF;
-        tmp13    = val8 & 0xF0;
-        tmp10    = tmp13 | 0xF;
-        u2 = tmp2;
-        u0 = tmp2;
-        v1 = tmp13;
-        v0 = tmp13;
-        u3 = tmp0;
-        u1 = tmp0;
-        v3 = tmp10;
-        v2 = tmp10;
+        tmp2  = (val8 & 0xF) * 0x10;
+        tmp0  = tmp2 | 0xF;
+        tmp13 = val8 & 0xF0;
+        tmp10 = tmp13 | 0xF;
+        u2    = tmp2;
+        u0    = tmp2;
+        v1    = tmp13;
+        v0    = tmp13;
+        u3    = tmp0;
+        u1    = tmp0;
+        v3    = tmp10;
+        v2    = tmp10;
     }
     if (val8 & 0x40000) {
-        tmp3     = (s32)u0;
-        u0 = (s32)u2;
-        u2 = (s32)u3;
-        u3 = (s32)u1;
-        u1 = tmp3;
+        tmp3 = (s32)u0;
+        u0   = (s32)u2;
+        u2   = (s32)u3;
+        u3   = (s32)u1;
+        u1   = tmp3;
     }
     if (val8 & 0x10000) {
-        tmp6     = u1;
-        u1 = u0;
-        tmp4     = u2;
-        u0 = tmp6;
-        u2 = u3;
-        u3 = tmp4;
+        tmp6 = u1;
+        u1   = u0;
+        tmp4 = u2;
+        u0   = tmp6;
+        u2   = u3;
+        u3   = tmp4;
     }
     val3 = (s32)val8 >> 0x18;
     if (val8 & 0x20000) {
-        tmp7     = u2;
-        u2 = u0;
-        tmp5     = u1;
-        u0 = tmp7;
-        u1 = u3;
-        u3 = tmp5;
-        val3     = (s32)val8 >> 0x18;
+        tmp7 = u2;
+        u2   = u0;
+        tmp5 = u1;
+        u0   = tmp7;
+        u1   = u3;
+        u3   = tmp5;
+        val3 = (s32)val8 >> 0x18;
     }
     tmp8 = val3 & 0xF;
     val1 = ((tmp8 * valid) + 0x1E3) << 6;
