@@ -15,7 +15,7 @@ MATCH void func_800C1F88(void) {
         } else {
             work->direction_08 ^= 2u;
             value             = g_AreaScrollTargetX + ((s8*)g_BattleScrollDeltas)[(g_Battle.scroll_dir ^ 0x2) * 2];
-            work              = TASK_BYTES;
+            work              = g_Task;
             work->pos.x.fixed = value;
             offset            = (g_Battle.scroll_dir ^ 0x2) * 2;
         }
