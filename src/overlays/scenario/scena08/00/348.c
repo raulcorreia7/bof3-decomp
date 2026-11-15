@@ -611,8 +611,8 @@ NON_MATCHING void func_801F85F0(s32 x_arg, s32 y_arg, s32 radius_arg) {
         prim->x3            = x + ((radius * rcos(b)) >> 12);
         prim->y2 = prim->y3 = y + ((radius * rsin(b)) >> 12);
         count += 1;
-        prim->u0            = 0;
-        prim->u1            = (rcos(a) << 5) >> 12;
+        prim->u0 = 0;
+        prim->u1 = (rcos(a) << 5) >> 12;
         prim->v0 = prim->v1 = ((rsin(a) << 5) >> 12) - 64;
         prim->u2            = 0;
         prim->u3            = (rcos(b) << 5) >> 12;
@@ -712,22 +712,6 @@ MATCH void func_801F8D4C(FallingSpark* spark) {
         spark->active = 0;
     }
 }
-
-typedef struct ChainNode {
-    s32 pos[3];
-    u8  pad_0C[4];
-    s16 screen[2];
-    s16 angle;
-    s16 size;
-} ChainNode;
-
-typedef struct Chain {
-    ChainNode node[32];
-    u16       dir[31];
-    u16       size;
-} Chain;
-
-u32 MATH_AverageAngle(u16 a, u16 b);
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F8D98(void* table) {
