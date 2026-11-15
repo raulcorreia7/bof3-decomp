@@ -19,7 +19,7 @@ NON_MATCHING s16 func_801F4A04(s32 x, s32 y) {
     y_pos.fixed = y + COORD_HALF;
     cell_y      = y_pos.part.integer;
     block       = D_801F6138[(cell_y & 0xF0) | ((cell_x & 0xF0) >> 4)];
-    packed      = ((u32*)0x80104030u)[((block & 0xF0) | (cell_y & 0xF)) * 0x60 + ((block & 0xF) << 4 | (cell_x & 0xF))];
+    packed      = MEM_PTR(u32, MAP_BUNDLE_BASE + AREA_MAP_BUNDLE_SIZE)[((block & 0xF0) | (cell_y & 0xF)) * 0x60 + ((block & 0xF) << 4 | (cell_x & 0xF))];
 
     c0 = (s8)packed;
     c1 = (s8)(packed >> 8);
