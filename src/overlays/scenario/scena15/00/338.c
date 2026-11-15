@@ -21,7 +21,7 @@ MATCH void Scene_InitTaskArea(void) {
 }
 
 MATCH void func_801F6FCC(void) {
-    func_801F71B0(g_Task->timer);
+    Scene_DrawLightPillar(g_Task->timer);
     if (g_FrameCount & 0x1) {
         Area_AddSpark();
     }
@@ -34,7 +34,7 @@ MATCH void func_801F6FCC(void) {
 }
 
 MATCH void func_801F7078(void) {
-    func_801F71B0(0xFF);
+    Scene_DrawLightPillar(0xFF);
     if (g_FrameCount & 0x1) {
         Area_AddSpark();
     }
@@ -46,7 +46,7 @@ MATCH void func_801F7078(void) {
 }
 
 MATCH void func_801F7100(void) {
-    func_801F71B0(g_Task->timer);
+    Scene_DrawLightPillar(g_Task->timer);
     Scene_GetZFixed();
     g_Task->timer = (g_Task)->timer - 4;
     if (g_Task->timer == 0) {
@@ -60,7 +60,64 @@ MATCH void func_801F717C(void) {
     }
 }
 
-INCLUDE_ASM(func_801F71B0);
+/* Draws a pillar of light at the task's position: thirty-two semi-transparent Gouraud quads between a ring at the
+ * task's radius and the same ring higher up, dimmed by fade. */
+/* func_801F71B0 */
+MATCH void Scene_DrawLightPillar(u8 fade) {
+    DVECTOR  last_inner;
+    DVECTOR  last_outer;
+    DVECTOR  inner;
+    DVECTOR  outer;
+    s32      point[3];
+    MATRIX   matrix;
+    POLY_G4* prim;
+    s32      angle;
+    s32      shade;
+    u32      color;
+    u8       i;
+
+    Area_SetCameraMatrix(&matrix);
+    angle    = 0;
+    point[0] = g_Task->pos.x.fixed + (((s16)g_Task->screen_x * rcos(0)) >> 4);
+    point[1] = g_Task->pos.y.fixed + (((s16)g_Task->screen_x * rsin(0)) >> 4);
+    point[2] = g_Task->pos.z.fixed;
+    Area_ProjectPoint(point, &inner);
+    point[2] = g_Task->pos.z.fixed + TO_COORD((s16)g_Task->screen_y);
+    Area_ProjectPoint(point, &outer);
+    shade = ((g_FrameCount & 1) << 2) | 0x40;
+    for (i = 0; i < 32; i++) {
+        last_inner = inner;
+        last_outer = outer;
+        angle += 0x80;
+        point[0] = g_Task->pos.x.fixed + (((s16)g_Task->screen_x * rcos((u16)angle)) >> 4);
+        point[1] = g_Task->pos.y.fixed + (((s16)g_Task->screen_x * rsin((u16)angle)) >> 4);
+        point[2] = g_Task->pos.z.fixed;
+        Area_ProjectPoint(point, &inner);
+        point[2] = g_Task->pos.z.fixed + TO_COORD((s16)g_Task->screen_y);
+        Area_ProjectPoint(point, &outer);
+
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 960, 0), 0);
+        if ((u8)(i - 11) >= 17) {
+            GFX_AddPrim(1, 12);
+        }
+        prim = GFX_BeginPolyG4(1);
+        setXY4(prim, last_inner.vx, last_inner.vy, last_outer.vx, last_outer.vy, inner.vx, inner.vy, outer.vx, outer.vy);
+        color = (u32)(fade * (u8)shade) >> 8;
+        setRGB0(prim, color, color, color);
+        setRGB1(prim, color, color, color);
+        if ((u8)(i - 8) >= 16) {
+            shade += 8;
+        } else {
+            shade -= 8;
+        }
+        color = (u32)(fade * (u8)shade) >> 8;
+        setRGB2(prim, color, color, color);
+        setRGB3(prim, color, color, color);
+        if ((u8)(i - 11) >= 17) {
+            GFX_AddPrim(1, 36);
+        }
+    }
+}
 
 MATCH void func_801F752C(AreaSpark* spark) {
     DVECTOR screen;
