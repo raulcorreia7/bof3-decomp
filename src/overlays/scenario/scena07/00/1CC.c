@@ -243,7 +243,7 @@ NON_MATCHING void func_801F78B0(void) {
     FAKE_STACK_PADS(u8, 0x10);
 
     g_Task->pos.z.fixed = TO_COORD(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
-    buffer              = MEM_PTR(Scena07BurstBuffer, 0x800E4C24);
+    buffer              = &D_800E4C24;
     D_801FDFC0          = buffer;
     buffer->x           = g_Task->pos.x.fixed;
     buffer->y           = g_Task->pos.y.fixed;
@@ -315,7 +315,7 @@ NON_MATCHING void func_801F7BE0(void) {
     g_Task->pos.x.fixed = g_Game.members[0].pos.x.fixed;
     g_Task->pos.y.fixed = g_Game.members[0].pos.y.fixed;
     g_Task->pos.z.fixed = TO_COORD(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
-    buffer              = MEM_PTR(Scena07BurstBuffer, 0x800E4C24);
+    buffer              = &D_800E4C24;
     buffer->x           = g_Task->pos.x.fixed;
     D_801FDFC0          = buffer;
     buffer->y           = g_Task->pos.y.fixed;
