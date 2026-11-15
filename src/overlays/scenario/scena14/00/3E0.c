@@ -20,7 +20,30 @@ MATCH void func_801F7014(void) {
 
 INCLUDE_ASM(func_801F7028);
 
+/* Averages each working palette colour's red, green and blue channels into a
+ * grey level and keeps the mask bit, then marks the palette for upload. */
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F7960(void) {
+    u8   row;
+    u16  col;
+    u16* p;
+    u16  color;
+    u32  grey;
+
+    for (row = 0; row < AREA_PALETTE_ROWS; row++) {
+        p = (u16*)(AREA_PALETTE_WORK + row * AREA_PALETTE_ROW);
+        for (col = 0; col < AREA_PALETTE_COLORS; col++) {
+            color = p[col];
+            grey  = (color & 0x1F) + ((color >> 5) & 0x1F) + ((color >> 10) & 0x1F);
+            grey /= 3;
+            p[col] = (color & 0x8000) | (grey << 10) | (grey << 5) | grey;
+        }
+    }
+    g_GfxPalettePending = 1;
+}
+#else
 INCLUDE_ASM(func_801F7960);
+#endif
 
 #include "overlays/scenario/Scene_SpawnActor.h"
 

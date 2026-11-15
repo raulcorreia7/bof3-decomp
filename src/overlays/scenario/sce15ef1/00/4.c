@@ -688,7 +688,35 @@ MATCH void func_801D2C00(void) {
     }
 }
 
+/* Runs the actor's speed up over 20 steps, then reverses the accumulated speed
+ * and hands over to the next mode. */
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D2C94(void) {
+    Actor* work;
+    Actor* work2;
+    u8     i;
+
+    work         = g_Task;
+    work->vx     = 0;
+    work->vy     = 0;
+    work->unk_18 = 0;
+    work->unk_1C = 0;
+    for (i = 0; i < 0x14; i++) {
+        work->unk_18 += 0x100;
+        work->unk_1C += 0x200;
+        work->vx += work->unk_18;
+        work->vy += work->unk_1C;
+    }
+    work2        = g_Task;
+    work2->timer = 0x14;
+    work2->vx    = -work2->vx;
+    work2->vy    = -work2->vy;
+    g_Task->header.mode++;
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 8));
+}
+#else
 INCLUDE_ASM(func_801D2C94);
+#endif
 
 MATCH void func_801D2D5C(void) {
     Actor* work;
