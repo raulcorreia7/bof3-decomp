@@ -41,18 +41,18 @@ MATCH s32 NAME(void) { \
     } \
  \
     cell = Area_GetCellCode(x >> 16, y >> 16); \
-    if ((u8)(cell + 0x10) < 2 || (u8)cell == 0xF4 || (u8)(cell + 0xA) < 2) { \
+    if (CHAR_CELL_CODE_BLOCKS_CHARACTER(cell)) { \
         blocked = 1; \
     } \
     if ((x & HALF_MASK) != 0) { \
         cell = Area_GetCellCode((s16)((x >> 16) + 1), y >> 16); \
-        if ((u8)(cell + 0x10) < 2 || (u8)cell == 0xF4 || (u8)(cell + 0xA) < 2) { \
+        if (CHAR_CELL_CODE_BLOCKS_CHARACTER(cell)) { \
             blocked = 1; \
         } \
     } \
     if ((y & HALF_MASK) != 0) { \
         cell = Area_GetCellCode(x >> 16, (s16)((y >> 16) + 1)); \
-        if ((u8)(cell + 0x10) < 2 || (u8)cell == 0xF4 || (u8)(cell + 0xA) < 2) { \
+        if (CHAR_CELL_CODE_BLOCKS_CHARACTER(cell)) { \
             blocked = 1; \
         } \
     } \
