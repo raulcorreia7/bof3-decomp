@@ -1,7 +1,8 @@
 #include "battle_15.h"
 
-MATCH void func_8009F564(void) {
+/* func_8009F4BC */
+MATCH void Battle_ApplyFlare(void) {
     g_Battle.action_type = BATTLE_ACTION_ABILITY;
-    g_Battle.action_id   = ABILITY_FIREBLAST;
+    g_Battle.action_id   = ABILITY_FLARE;
     Battle_ApplyAbilityDamage();
 }

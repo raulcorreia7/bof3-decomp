@@ -700,15 +700,18 @@ void        func_8009F2B0(void);
 void        func_8009F2E8(void);
 /* func_8009F3DC */
 void        Battle_ApplyMight(void);
-void        func_8009F414(void);
+/* func_8009F414 */
+void        Battle_ApplyInferno(void);
 void        func_8009F44C(void);
 void        func_8009F484(void);
-void        func_8009F4BC(void);
+/* func_8009F4BC */
+void        Battle_ApplyFlare(void);
 /* func_8009F4F4 */
 void        Battle_ApplyProtect(void);
 /* func_8009F52C */
 void        Battle_ApplyWeaken(void);
-void        func_8009F564(void);
+/* func_8009F564 */
+void        Battle_ApplyFireblast(void);
 void        func_8009F59C(void);
 void        func_8009F5D4(void);
 void        func_8009F60C(void);
