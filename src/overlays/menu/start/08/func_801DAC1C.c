@@ -3,6 +3,7 @@
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DAC1C(void) {
     u8* table;
+    u8* base;
     u8* panel;
     u8  count;
     u8  row;
@@ -31,8 +32,10 @@ NON_MATCHING void func_801DAC1C(void) {
     bit         = 1;
     panel_index = 0;
     for (row = 0; row < 3; row++) {
-        table = &D_801ED680[row * 3];
-        for (col = 0; col < 3; col++) {
+        base  = D_801ED680;
+        col   = 0;
+        table = (u8*)(row * 3 + (s32)base);
+        for (; col < 3; col++) {
             if (col == 0 && row < count) {
                 table[0] = 1;
             } else {
