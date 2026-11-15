@@ -62,6 +62,17 @@ bool func_801F60E0(void);
 
 extern Callback D_801F6218[];
 
+/* The sprite menu's screen-rect and texture-cell tables: 8-byte and 4-byte entries. */
+typedef struct SpriteCell {
+    s16 x;
+    s16 y;
+    s16 w;
+    s16 h;
+} SpriteCell;
+
+extern SpriteCell D_801F6230[];
+extern u8         D_801F6248[][4];
+
 extern Callback D_801F6258[];
 extern u8       D_801F626C[];
 /* The x/y entry-coordinate pairs the request step indexes. */
@@ -73,10 +84,10 @@ extern u8       D_801F6B2D[];
 extern Callback D_801F6B34[];
 extern Callback D_801F6B40[];
 void            func_801F37C4(void);
-void            func_801F3830(s32 arg0, s32 arg1);
+void            func_801F3830(s32 texture, s32 cell);
 void            func_801F3CA8(void);
 s32             func_801F5208(s32 x, s32 y);
-s32             func_801F5BCC(s16 arg0);
+s32             func_801F5BCC(s16 height);
 u8              func_801F5C60(s32 x, s32 y);
 u8              func_801F5D1C(void);
 /* The overlay's companion steps the wrappers enter. */
