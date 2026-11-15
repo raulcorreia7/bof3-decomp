@@ -9,11 +9,11 @@ NON_MATCHING void func_801D43EC(void) {
     volatile s32 saved1;
     volatile s32 saved2;
     volatile s32 saved3;
-    s32  index;
-    s32  flags;
-    u16* battle_flags;
-    s32* block74;
-    s32* block84;
+    s32          index;
+    s32          flags;
+    u16*         battle_flags;
+    s32*         block74;
+    s32*         block84;
 
     battle_flags = &g_Battle.state;
     if ((*battle_flags & 4) && (D_801463C2 == 0)) {

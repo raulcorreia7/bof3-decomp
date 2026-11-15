@@ -9,6 +9,7 @@ typedef struct BattleActor {
     u16 unk_30;
     u16 unk_32;
 } BattleActor;
+
 ASSERT_SIZE(BattleActor, 0x34);
 
 /* The panel row the battle state is written into. */
@@ -21,6 +22,7 @@ typedef struct BattlePanelState {
     void* state_08;
     void* work_0C;
 } BattlePanelState;
+
 ASSERT_SIZE(BattlePanelState, 0x10);
 
 /* Advances the battle actor: picks the next actor from the turn
@@ -43,8 +45,8 @@ NON_MATCHING void func_801D2B58(void) {
     u8*               fa8;
     u8*               eb3dc;
 
-    fa8   = D_80145FA8;
-    eb3dc = (u8*)&D_801EB3DC;
+    fa8    = D_80145FA8;
+    eb3dc  = (u8*)&D_801EB3DC;
     cursor = (u8*)&g_Battle.turn_cursor;
     if (cursor[0] < cursor[1]) {
         table = g_Battle.turn_order;

@@ -16,7 +16,7 @@
  * confirms when the party member has the AP. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_800A5330(void) {
-    u8 row;
+    u8  row;
     s32 col;
     s32 entry;
     u8  gene_row;

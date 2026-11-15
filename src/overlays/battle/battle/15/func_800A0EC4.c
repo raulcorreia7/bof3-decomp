@@ -5,17 +5,17 @@
  */
 #ifdef NON_MATCHING
 NON_MATCHING void func_800A0EC4(void) {
-    u8*        cell;
-    u8*        dest;
-    s32        cell_offset;
-    s32        record_index;
-    s32        row_offset;
-    s32        timer;
-    s32        index;
-    s32        member;
-    u16        value;
-    u32        rate;
-    u8*        state;
+    u8* cell;
+    u8* dest;
+    s32 cell_offset;
+    s32 record_index;
+    s32 row_offset;
+    s32 timer;
+    s32 index;
+    s32 member;
+    u16 value;
+    u32 rate;
+    u8* state;
 
     state = &g_Battle.active_battler;
     if (*state < 3U) {
@@ -30,11 +30,11 @@ NON_MATCHING void func_800A0EC4(void) {
         index = 0;
         if (g_Battle.party_count != 0) {
             do {
-                row_offset                 = index * BATTLE_PARTY_STRIDE;
-                cell = (u8*)g_Characters + g_Game.members[index].character_index * PARTY_RECORD_STRIDE;
-                dest = (u8*)D_80145F04 + row_offset;
-                dest[0xE] = cell[0xE];
-                dest[0xF] = cell[0xF];
+                row_offset = index * BATTLE_PARTY_STRIDE;
+                cell       = (u8*)g_Characters + g_Game.members[index].character_index * PARTY_RECORD_STRIDE;
+                dest       = (u8*)D_80145F04 + row_offset;
+                dest[0xE]  = cell[0xE];
+                dest[0xF]  = cell[0xF];
                 dest[0x10] = cell[0x10];
                 dest[0x11] = cell[0x11];
                 dest[0x12] = cell[0x12];
@@ -47,8 +47,8 @@ NON_MATCHING void func_800A0EC4(void) {
         Battle_ApplyFormationStats();
         if (g_Battle.party_count != 0) {
             do {
-                row_offset                           = index * BATTLE_PARTY_STRIDE;
-                dest = (u8*)D_80145F20 + row_offset;
+                row_offset = index * BATTLE_PARTY_STRIDE;
+                dest       = (u8*)D_80145F20 + row_offset;
                 __builtin_memcpy(dest, dest + 0x20, sizeof(BattleStatBlockPart));
                 __builtin_memcpy(dest + 0x10, dest + 0x30, sizeof(BattleStatBlockPart));
                 index++;
