@@ -82,21 +82,18 @@ NON_MATCHING void func_8014BC70(void) {
             Area_DrawCellLayer(var_s7);
         }
         if (g_AreaDrawFlags & AREA_DRAW_APPEND_AREA_PRIMITIVES) {
-            tmp  = ((g_FrameBufferIndex + 4) * 8) + (var_s7 * 0x30);
-            word = *(u32*)(D_80142CC0 + tmp);
+            word = (u32)g_AreaCellPacketLists[var_s7][g_FrameBufferIndex + 4].head;
             if (word != 0) {
                 u32** slot = &D_801459D0[g_AreaDrawMode];
                 u32*  head = *slot;
                 setaddr(head, word);
-                *slot = *(u32**)(D_80142CC4 + tmp);
+                *slot = (u32*)g_AreaCellPacketLists[var_s7][g_FrameBufferIndex + 4].tail;
             }
         }
         layer = var_s7;
-        while ((((OBJ_KEY(var_s4) >> 8) == layer) && (var_s4 < D_8014832D)) ||
-               (((D_80143740[var_fp] >> 0x18) == layer) && (var_fp < D_8014933D))) {
+        while ((((OBJ_KEY(var_s4) >> 8) == layer) && (var_s4 < D_8014832D)) || (((D_80143740[var_fp] >> 0x18) == layer) && (var_fp < D_8014933D))) {
             word = D_80143740[var_fp];
-            if ((((word >> 0x18) == layer) && (var_fp < D_8014933D) && (OBJ_KEY(var_s4) >= (word >> 0x10))) ||
-                (var_s4 == D_8014832D)) {
+            if ((((word >> 0x18) == layer) && (var_fp < D_8014933D) && (OBJ_KEY(var_s4) >= (word >> 0x10))) || (var_s4 == D_8014832D)) {
                 if (g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) {
                     packet = var_fp;
                     CatPrim(D_801459D0[g_AreaDrawMode], &g_AreaCellPrims[D_80143740[packet] & 0xFFF][g_FrameBufferIndex]);
