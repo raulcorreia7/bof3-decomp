@@ -6,6 +6,8 @@ typedef struct {
     u16 unk_02;
 } MapCell;
 
+ASSERT_SIZE(MapCell, 0x04);
+
 /* builds the projected quad for one map cell's texture entry, stages
  * the primitive, and appends it to the ordering table.
  */

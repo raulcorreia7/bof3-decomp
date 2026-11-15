@@ -7778,6 +7778,6 @@ Battle_DrawVictoryZenny = { addr = 0x801F09F4, type = "func", source = "Draws th
 Char_GetExpToNextLevel = { addr = 0x801F0BB0, type = "func", source = "Returns the experience a party member still needs for its next level; 0 once its exp already covers it." }
 
 ["emi/battle/batl_ovr/00"]
-g_BattleEffectPalette = { addr = 0x8003AC00, type = "u16", size = 0x200, source = "Row 26 of the working copy of the palette banks." }
+g_BattleEffectPalette = { addr = 0x8003AC00, type = "u16", size = 0x200, source = "The 256 halfword palette entries the battle overlay converts to grayscale." }
 Battle_StartGameOver = { addr = 0x801EEC40, type = "func", source = "Step 0 of the BATL_OVR (battle defeat) step table that ends in Battle_UpdateGameOver: sets UI mode 0x13, copies palette 0x1A and advances ui_step." }
 Battle_UpdateGameOver = { addr = 0x801EF0A8, type = "func", source = "Runs the game over screen." }

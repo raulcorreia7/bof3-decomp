@@ -5,8 +5,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801FA3A4(void) {
+MATCH void func_801FA3A4(void) {
     switch (g_SceneState.step_05) {
         case 0:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -63,12 +62,9 @@ NON_MATCHING void func_801FA3A4(void) {
                 g_SceneState.state_04 = 0;
                 Scene_RequestChapterAdvance();
                 g_ScriptVars[2] = 2;
-                g_Game.flags ^= 0x16;
+                g_GameFlags ^= 0x16;
                 Game_RequestAreaChange(0x79, 0x290000, 0x330000, 7);
             }
             break;
     }
 }
-#else
-INCLUDE_ASM(func_801FA3A4);
-#endif

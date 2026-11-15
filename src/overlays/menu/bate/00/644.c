@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801D1264(void) {
+NON_MATCHING void func_801D1244(void) {
     s32 cursor_x;
     s32 row;
     s32 first;
@@ -18,6 +18,10 @@ NON_MATCHING void func_801D1264(void) {
     u8  next;
     u8* cursor;
 
+    category                         = D_80148338;
+    cursor_x                         = (u16)D_80148334;
+    row                              = D_8014833B;
+    first                            = *(u8*)&D_8014833A;
     g_MenuPanelTasks[1].flags        = 0;
     g_MenuPanelTasks[4].pos.x        = cursor_x + 7;
     row_offset                       = row - first;
@@ -88,7 +92,7 @@ NON_MATCHING void func_801D1264(void) {
     }
 }
 #else
-INCLUDE_ASM(func_801D1264);
+INCLUDE_ASM(func_801D1244);
 #endif
 
 MATCH void func_801D153C(void) {
