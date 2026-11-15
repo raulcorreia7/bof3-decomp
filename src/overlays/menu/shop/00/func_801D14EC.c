@@ -13,7 +13,7 @@ MATCH void func_801D14EC(void) {
         while (i < (u8)Party_CountOrder(PARTY_ORDER_FIELD)) {
             panel             = &g_MenuPanelTasks[i + 3];
             panel->unk_0A     = i;
-            LOH(panel->pos.x) = -150;
+            LOH(panel->pos.x) = MENU_PANEL_HIDDEN_X;
             panel->pos.y      = i * 54 + 62;
             panel->active     = 1;
             panel->handler    = 7;
