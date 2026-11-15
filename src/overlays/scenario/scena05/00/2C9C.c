@@ -266,7 +266,109 @@ MATCH s32 func_801FCD60(void) {
     return 0;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING s8 func_801FCD68(s32 x, s32 y) {
+    s32 result;
+    u8  step;
+
+    if (g_GameAreaId == AREA_ID_PLANT && SYS_TestFlag(g_SceneFlags, 9) != 0 && SYS_TestFlag(g_SceneFlags, 11) == 0) {
+        if (x == TO_COORD(77) || x == TO_COORD(77) + COORD_HALF) {
+            if ((u32)(y - TO_COORD(33)) <= 0x48000) {
+                Game_SetScriptActive();
+                result = 1;
+                step   = 7;
+                goto done;
+            }
+        }
+    }
+    if (g_GameAreaId == AREA_ID_DUMP) {
+        if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
+            if ((u32)(x - TO_COORD(147)) <= 0x18000) {
+                if (y == TO_COORD(6) || y == TO_COORD(6) + COORD_HALF) {
+                    Game_SetScriptActive();
+                    result = 1;
+                    step   = 4;
+                    goto done;
+                }
+            }
+        } else if (SYS_TestFlag(g_SceneFlags, 9) == 0) {
+            if ((u32)(x - TO_COORD(132)) <= 0x28000) {
+                if (y == TO_COORD(12) || y == TO_COORD(12) + COORD_HALF || y == TO_COORD(24) || y == TO_COORD(24) + COORD_HALF) {
+                    Game_SetScriptActive();
+                    D_80146875      = 20;
+                    g_ScriptVars[0] = 0;
+                    D_80146865      = 0;
+                    D_80146866      = 0;
+                    D_80146867      = 0;
+                    D_80146874      = 4;
+                    return 1;
+                }
+            }
+        }
+    }
+    if (g_GameAreaId == AREA_ID_MAEKYSS_GORGE) {
+        if (y == TO_COORD(52) || y == TO_COORD(52) + COORD_HALF) {
+            if ((u32)(x - TO_COORD(29)) <= 0x18000) {
+                Game_SetScriptActive();
+                result = 1;
+                step   = 11;
+                goto done;
+            }
+        }
+    }
+    if (g_GameAreaId == AREA_ID_CAFE) {
+        if (SYS_TestFlag(g_SceneFlags, 0) == 0) {
+            if (y == TO_COORD(36) || y == TO_COORD(36) + COORD_HALF) {
+                if ((u32)(x - TO_COORD(25)) <= 0x68000) {
+                    Game_SetScriptActive();
+                    result = 1;
+                    step   = 1;
+                    goto done;
+                }
+            }
+        }
+    }
+    if (g_GameAreaId == AREA_ID_CONTEST_OUTER) {
+        if (SYS_TestFlag(g_SceneFlags, 0x3D) != 0) {
+            if (SYS_TestFlag(g_SceneFlags, 0x32) == 0) {
+                if (x == TO_COORD(40) + COORD_HALF || x == TO_COORD(41)) {
+                    if ((u32)(y - TO_COORD(126)) <= 0x38000) {
+                        Game_SetScriptActive();
+                        result = 1;
+                        step   = 19;
+                        goto done;
+                    }
+                } else if (x == TO_COORD(31) || x == TO_COORD(31) + COORD_HALF) {
+                    if ((u32)(y - TO_COORD(113)) <= 0x18000) {
+                        Game_SetScriptActive();
+                        result = 1;
+                        step   = 20;
+                        goto done;
+                    }
+                }
+            } else if (x == TO_COORD(31) || x == TO_COORD(31) + COORD_HALF) {
+                if ((u32)(y - TO_COORD(113)) <= 0x18000) {
+                    Game_SetScriptActive();
+                    result = 1;
+                    step   = 22;
+                    goto done;
+                }
+            }
+        }
+    }
+    return 0;
+done:
+    g_ScriptVars[0] = 0;
+    D_80146865      = 0;
+    D_80146866      = 0;
+    D_80146867      = 0;
+    D_80146875      = 0;
+    D_80146874      = step;
+    return result;
+}
+#else
 INCLUDE_ASM(func_801FCD68);
+#endif
 
 MATCH s8 func_801FD110(s32 x, s32 y) {
     SCENE_PROBE_POSITION(D_801FD668, 2, D_801FD674);
