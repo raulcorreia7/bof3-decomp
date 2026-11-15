@@ -445,7 +445,29 @@ MATCH void func_801F84F4(void) {
     func_801F8B10(0x4B0, 0x80);
 }
 
-INCLUDE_ASM(func_801F8594);
+MATCH void func_801F8594(void) {
+    u8* timer;
+    u8* count;
+
+    if (g_InputPressed & PADRdown) {
+        D_801F9DD8 = 1;
+    }
+    if (EMI_IsReady() != 0) {
+        timer = &D_80146875;
+        *timer -= 1;
+        if (*timer == 0) {
+            count = &D_80146867;
+            *count -= 1;
+            if (*count == 0) {
+                D_80146874 += 1;
+            } else {
+                *timer = 30;
+            }
+        }
+    }
+    func_801F8B10(0x4B0, 0x80);
+    func_801F8FAC(0xE0, 0xBE, 0x80, 1);
+}
 
 MATCH void func_801F8664(void) {
     u8* state;
