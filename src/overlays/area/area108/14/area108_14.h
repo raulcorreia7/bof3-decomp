@@ -112,7 +112,7 @@ extern s8                 D_801F6298;
 extern u8                 D_801F629B;
 extern SceneSampleRecord* D_801F629C;
 
-void func_801C601C(u8 arg0);
+void func_801C601C(u8 stage);
 
 /* The staged actor rows: the event scrolls to row 1 and tints row 0. */
 extern Actor D_80147A58[];
