@@ -418,7 +418,6 @@ Each example is matched C.
 | Asm shows                                                                                 | Write                                                                                 | Example                                  |
 | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------- |
 | an angle byte sign-extended then shifted (`sll a0,v0,24`, `sra a0,a0,16`) ahead of `rsin` | `rsin((s8)phase << 8)`, while the scratch cell stores the unsigned `phase << 8`       | `func_801F002C` (emi/bmagic/magic220/03) |
-| `lbu` of the old byte before `old + 1` is stored, from an `s8` global                     | a `u8 old` local gives `lbu`; an `s32 old` gives `lb`                                 | `func_801D1E98` (emi/etc/commu02/08)     |
 | `quality` counts a raw `*(u8*)&x` cast after a draft becomes `MATCH`                      | the draft body is not counted while `NON_MATCHING`; write `LOBU(x)` and measure again | `func_801D1244` (emi/etc/bate/00)        |
 
 #### Address forms
@@ -427,17 +426,12 @@ Each example is matched C.
 | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
 | a per-actor record read as `lui at; addu at,at,idx; lw lo(at)` for every member                       | byte arithmetic from the array start, `*(s32*)((u8*)g_Actors + ofs + 0x34)` with `ofs` a `u32` byte offset      | `func_801F7AEC` (emi/scenario/scena15/00) |
 | two address adds in retail order `addu v1,v0,a1` (offset, base) where the draft emits `addu v1,a1,v0` | write the sum as integers, `(u8*)(offset + (s32)dst_base + i)`: pointer arithmetic canonicalises the base first | `func_801D4158` (emi/etc/commu02/08)      |
-| an index sum where retail adds `3` to `sel * 5` first and masks `(u8)` in each branch                 | `k = (s8)sel * 5 + 3; k += (u8)B8;` with `s32 k` and `(u8)k` at every use                                       | `func_801D3C30` (emi/etc/commu02/08)      |
 | `y + n * 13 + 26` where retail adds `26` before the base                                              | parenthesise `base + (n * 13 + 26)`                                                                             | `func_801D1244` (emi/etc/bate/00)         |
 
 #### Control flow
 
-| Asm shows                                                                                                                          | Write                                                                                                                                           | Example                                   |
-| ---------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| a position gate that returns 0 at once when the x match fails its range check, a second x test only when the first x did not match | nest the range test under the x match and chain the second x with `else if`; a flat `&&` chain tests the second x after the first range fails   | `func_801FCD68` (emi/scenario/scena05/00) |
-| a result switch whose shared `li v0,N` blocks end the function in order 0, 1, 2, the draft's reversed                              | write the cases in the order of their result value in every switch of the function (36 orders of two three-case switches measured; one matches) | `func_801EF3A0` (emi/bmagic/magic082/03)  |
-| `x == (a < b) ^ 1` compiles to a branch ladder where retail has `sltu`, `xori 1`, `bne`                                            | evaluate the compare into an `s32 lt` local, then `if (value == (lt ^ 1))`; the inline form makes gcc branch                                    | `func_801D1E98` (emi/etc/commu02/08)      |
-| a join tail (`D_801DB0C4 = 0x3C; D_801F294D += 1;`) retail repeats on both paths, `li v1,60` in each                               | write the tail in both arms; a `goto` or a `step` local grows the function by 0x18                                                              | `func_801D1E98` (emi/etc/commu02/08)      |
+| Asm shows | Write | Example |
+| --------- | ----- | ------- |
 
 ## Permuter
 
