@@ -18,6 +18,11 @@ extern Callback D_801F0440[];
 extern u8       D_801F0454[];
 extern u8       D_801F0470[];
 
+/* The task that claimed the claim-table row at `offset`. */
+static inline PartyMember* Magic063ClaimTask(u32 offset) {
+    return *(PartyMember**)((u8*)D_801F0470 + offset);
+}
+
 /* The four sparkle wedges of func_801EFA5C: the radius and angle of their two outer corners. */
 extern s16 D_801F041C[];
 extern s16 D_801F0424[];

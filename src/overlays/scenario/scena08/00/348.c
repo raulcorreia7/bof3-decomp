@@ -475,7 +475,24 @@ MATCH void func_801F81F4(u16 value) {
 
 INCLUDE_ASM(func_801F823C);
 
-INCLUDE_ASM(func_801F8534);
+MATCH void func_801F8534(void) {
+    s32     point[3];
+    DVECTOR sxy;
+    u8      camera[0x20];
+    u16     screen_y;
+
+    Area_SetCameraMatrix(camera);
+    point[0] = g_Task->pos.x.fixed;
+    point[1] = g_Task->pos.y.fixed;
+    point[2] = g_Task->pos.z.fixed;
+    Area_ProjectPoint(point, &sxy);
+    g_Task->screen_x = sxy.vx;
+    screen_y         = sxy.vy;
+    g_Task->screen_y = screen_y;
+    func_801F8108((s16)g_Task->screen_x, (s16)screen_y);
+    func_801F81F4(g_Task->script_pc);
+    func_801F823C((s16)g_Task->screen_x, (s16)g_Task->screen_y, (s16)g_Task->unk_32, (s16)g_Task->unk_2C);
+}
 
 INCLUDE_ASM(func_801F85F0);
 

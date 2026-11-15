@@ -1,3 +1,36 @@
 #include "area048_13.h"
 
-INCLUDE_ASM(func_801F4B60);
+MATCH void func_801F4B60(void) {
+    u8* selector;
+    u32 cue;
+
+    selector = &g_SceneEventSelection;
+    if (*selector == 1) {
+        switch (D_8014686B) {
+            case 8:
+                cue = 1;
+                break;
+            case 6:
+                cue = 7;
+                break;
+            case 2:
+                cue = 6;
+                break;
+            default:
+                cue = 8;
+                break;
+        }
+        func_801BE1B0(cue);
+    } else {
+        if (*selector == 0) {
+            func_801BE1B0(0);
+        }
+        if (*selector == 2) {
+            func_801BE1B0(2);
+        }
+    }
+    Game_ClearScriptActive();
+    g_SceneEventMode      = 0;
+    g_SceneEventStep      = 0;
+    g_SceneEventSelection = 0;
+}

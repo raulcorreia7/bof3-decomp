@@ -14,16 +14,16 @@ MATCH void Menu_DrawPanelFrame(s16 x, s16 y, s32 width, s32 height) {
 
     for (i = 0; i < w; i++) {
         px = x + ((i + 1) * 8);
-        UI_DrawSprite(px, y, 0x29, 0);
+        UI_DrawSprite(px, y, MENU_FRAME_SPRITE_TOP, 0);
         UI_DrawSprite(px, y + ((h + 1) * 8), 0x2E, 0);
     }
     for (i = 0; i < h; i++) {
         py = y + ((i + 1) * 8);
-        UI_DrawSprite(x, py, 0x2B, 0);
-        UI_DrawSprite(x + ((w + 1) * 8), py, 0x2C, 0);
+        UI_DrawSprite(x, py, MENU_FRAME_SPRITE_LEFT, 0);
+        UI_DrawSprite(x + ((w + 1) * 8), py, MENU_FRAME_SPRITE_RIGHT, 0);
     }
-    UI_DrawSprite(x, y, 0x28, 0);
-    UI_DrawSprite(x + ((w + 1) * 8), y, 0x2A, 0);
+    UI_DrawSprite(x, y, MENU_FRAME_SPRITE_TOP_LEFT, 0);
+    UI_DrawSprite(x + ((w + 1) * 8), y, MENU_FRAME_SPRITE_TOP_RIGHT, 0);
     UI_DrawSprite(x, y + ((h + 1) * 8), 0x2D, 0);
     UI_DrawSprite(x + ((w + 1) * 8), y + ((h + 1) * 8), 0x2F, 0);
 }
