@@ -130,8 +130,10 @@ NON_MATCHING void func_8014BC70(void) {
                 if (obj[0x24] & 0x40) {
                     rows += func_8015AD00(&D_80147D08[rows]);
                 } else {
-                    D_80147D08[rows].primitive = obj;
-                    D_80147D0C[rows++].depth   = *(s32*)(obj + 0x60) | WORD_SIGN_BIT;
+                    i = rows;
+                    rows++;
+                    D_80147D08[i].primitive = obj;
+                    D_80147D0C[i].depth     = *(s32*)(obj + 0x60) | WORD_SIGN_BIT;
                 }
                 var_s4 += 1;
                 merged = OBJ_KEY(var_s4) < *(u16*)((u8*)var_s3 + 2);
