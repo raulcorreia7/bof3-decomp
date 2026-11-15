@@ -45,7 +45,7 @@ MATCH void func_801F6EA4(void) {
     }
 }
 
-/* Steps the scene's entrance focus one cell and raises the shade as the timer runs down. */
+/* Steps the scene's entrance focus one cell and fades out the shade as the timer runs down. */
 MATCH void func_801F6F2C(void) {
     Actor* work;
     Actor* actor;
