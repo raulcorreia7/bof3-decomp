@@ -629,4 +629,62 @@ MATCH void func_801D369C(void) {
     Actor_Clear();
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D36BC(s32* pos, s32 vx, s32 vy) {
+    s32      point[3];
+    DVECTOR  screen_vx;
+    DVECTOR  screen_vy;
+    MATRIX   camera;
+    POLY_G4* poly;
+    u16      tpage;
+    s32      angle_accumulator;
+    u16      angle;
+    u8       i;
+    u8       red;
+    u8       green;
+
+    tpage             = GetTPage(0, 1, 704, 256);
+    angle_accumulator = 0;
+    i                 = 0;
+    red               = 255;
+    green             = 127;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    Area_SetCameraMatrix(&camera);
+    point[0] = pos[0] + (vx << 4);
+    point[1] = pos[1];
+    point[2] = pos[2];
+    Area_ProjectPoint(point, &screen_vx);
+    point[0] = pos[0] + (vy << 4);
+    Area_ProjectPoint(point, &screen_vy);
+    do {
+        poly = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(poly);
+        SetSemiTrans(poly, 1);
+        poly->x0 = screen_vx.vx;
+        poly->y0 = screen_vx.vy;
+        angle_accumulator += 128;
+        angle    = angle_accumulator;
+        poly->x2 = screen_vy.vx;
+        poly->y2 = screen_vy.vy;
+        point[0] = pos[0] + ((vx * rcos(angle)) >> 8);
+        point[1] = pos[1] + ((vx * rsin(angle)) >> 8);
+        Area_ProjectPoint(point, &screen_vx);
+        point[0] = pos[0] + ((vy * rcos(angle)) >> 8);
+        point[1] = pos[1] + ((vy * rsin(angle)) >> 8);
+        Area_ProjectPoint(point, &screen_vy);
+        poly->x1 = screen_vx.vx;
+        poly->y1 = screen_vx.vy;
+        i++;
+        poly->x3 = screen_vy.vx;
+        poly->y3 = screen_vy.vy;
+        setRGB0(poly, red, green, 0);
+        setRGB1(poly, red, green, 0);
+        setRGB2(poly, red, green, 0);
+        setRGB3(poly, red, green, 0);
+        GFX_AddPrim(2, sizeof(POLY_G4));
+    } while (i < 32);
+}
+#else
 INCLUDE_ASM(func_801D36BC);
+#endif
