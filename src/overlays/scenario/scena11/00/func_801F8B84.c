@@ -11,7 +11,7 @@ MATCH void func_801F8B84(void) {
             if (g_GameStateIndex == 2) {
                 break;
             }
-            g_ScriptVars[0]      = 1;
+            g_ScriptVars[0] = 1;
             func_801BE1B0(1);
             g_SceneState.step_05 = 1;
             break;
@@ -66,8 +66,8 @@ MATCH void func_801F8B84(void) {
             if (g_UiWindowEffectBusy != 0) {
                 break;
             }
-            g_GameStateIndex        = 8;
-            g_AreaDrawFlags         = 0;
+            g_GameStateIndex = 8;
+            g_AreaDrawFlags  = 0;
             SND_PlaySequence(0, 1, 0x64, 0x64);
             break;
         case 12:

@@ -6,8 +6,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F72E4(void) {
-    u8*          sub;
-    u8           index;
+    u8*           sub;
+    u8            index;
     SpawnedActor* record;
 
     if (g_GameAreaId == 0x65) {
@@ -21,12 +21,12 @@ MATCH void func_801F72E4(void) {
                     break;
                 }
                 Game_SetScriptActive();
-                g_ScriptVars[0] = 0;
-                g_ScriptVars[1] = 0;
-                *sub            = 0;
-                g_ScriptVars[3] = 0;
-                g_AreaDrawFlags = 0;
-                g_SceneState.step_05 = 0;
+                g_ScriptVars[0]       = 0;
+                g_ScriptVars[1]       = 0;
+                *sub                  = 0;
+                g_ScriptVars[3]       = 0;
+                g_AreaDrawFlags       = 0;
+                g_SceneState.step_05  = 0;
                 g_SceneState.state_04 = 8;
                 switch (g_EmiLoadedCharacterIndex & 0x7F) {
                     case 7:
@@ -156,15 +156,14 @@ MATCH void func_801F72E4(void) {
                 if (index == 0xFF) {
                     break;
                 }
-                record              = g_SpawnedActors + index;
+                record               = g_SpawnedActors + index;
                 record->header.flags = 1;
                 record->type         = 0x77;
                 record->header.mode  = 1;
                 break;
         }
     }
-    if (g_GameAreaId == 0x2D || g_GameAreaId == 0x41 || g_GameAreaId == 0x57 || g_GameAreaId == 0x10 ||
-        g_GameAreaId == 0x73) {
+    if (g_GameAreaId == 0x2D || g_GameAreaId == 0x41 || g_GameAreaId == 0x57 || g_GameAreaId == 0x10 || g_GameAreaId == 0x73) {
         g_ScriptVars[0]       = 0;
         g_ScriptVars[1]       = 0;
         g_ScriptVars[2]       = 0;

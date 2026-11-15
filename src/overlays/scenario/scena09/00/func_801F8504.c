@@ -20,8 +20,8 @@ MATCH void func_801F8504(void) {
                 break;
             }
             *g_ScriptVars = 0;
-            D_80146866  = 0;
-            D_80146875  = 3;
+            D_80146866    = 0;
+            D_80146875    = 3;
             SYS_SetFlag(g_SceneFlags, 2);
             func_8019FA28(0x31, 0x540000, 0x640000, 0x86);
             break;
@@ -56,7 +56,7 @@ MATCH void func_801F8504(void) {
             SYS_SetFlag(g_SceneFlags, 3);
             SYS_ClearFlag(g_SceneFlags, 0x25);
             Game_ClearScriptActive();
-            D_80146875  = 0;
+            D_80146875 = 0;
             D_80146874 = 0;
             break;
         case 10:
@@ -70,7 +70,7 @@ MATCH void func_801F8504(void) {
             }
             SYS_SetFlag(g_SceneFlags, 4);
             Game_ClearScriptActive();
-            D_80146875  = 0;
+            D_80146875 = 0;
             D_80146874 = 0;
             break;
     }

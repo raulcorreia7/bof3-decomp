@@ -11,7 +11,7 @@ MATCH void func_801F7CC8(void) {
             if (g_GameStateIndex == 2) {
                 break;
             }
-            g_ScriptVars[0]      = 1;
+            g_ScriptVars[0] = 1;
             func_801BE1B0(4);
             g_SceneState.step_05 = 1;
             break;
@@ -21,18 +21,17 @@ MATCH void func_801F7CC8(void) {
             }
             SYS_SetFlag(g_SceneFlags, 6);
             Game_ClearScriptActive();
-            g_ScriptVars[1]      = 0;
-            g_ScriptVars[2]      = 0;
-            g_ScriptVars[3]      = 0;
-            g_SceneState.step_05 = 0;
+            g_ScriptVars[1]       = 0;
+            g_ScriptVars[2]       = 0;
+            g_ScriptVars[3]       = 0;
+            g_SceneState.step_05  = 0;
             g_SceneState.state_04 = 0;
             break;
         case 10:
             if (g_GameStateIndex == 2) {
                 break;
             }
-            if ((u16)Item_Count(0, 0x23, 0) == 0 || (u16)Item_Count(0, 0x24, 0) == 0 ||
-                (u16)Item_Count(0, 0x56, 0) == 0 || (u16)Item_Count(0, 0x4D, 0) == 0) {
+            if ((u16)Item_Count(0, 0x23, 0) == 0 || (u16)Item_Count(0, 0x24, 0) == 0 || (u16)Item_Count(0, 0x56, 0) == 0 || (u16)Item_Count(0, 0x4D, 0) == 0) {
                 g_SceneState.step_05 = 0xB;
             } else {
                 g_SceneState.step_05 = 0xF;
@@ -54,16 +53,16 @@ MATCH void func_801F7CC8(void) {
                 break;
             }
             Game_ClearScriptActive();
-            *progress            = 0;
-            g_ScriptVars[1]      = 0;
-            g_ScriptVars[2]      = 0;
-            g_ScriptVars[3]      = 0;
-            g_SceneState.step_05 = 0;
+            *progress             = 0;
+            g_ScriptVars[1]       = 0;
+            g_ScriptVars[2]       = 0;
+            g_ScriptVars[3]       = 0;
+            g_SceneState.step_05  = 0;
             g_SceneState.state_04 = 0;
             break;
         }
         case 15:
-            g_ScriptVars[0]      = 1;
+            g_ScriptVars[0] = 1;
             func_801BE1B0(5);
             g_SceneState.step_05 = 0x10;
             break;
@@ -76,10 +75,10 @@ MATCH void func_801F7CC8(void) {
             }
             Game_ClearScriptActive();
             SYS_SetFlag(g_SceneFlags, 9);
-            g_ScriptVars[1]      = 0;
-            g_ScriptVars[2]      = 0;
-            g_ScriptVars[3]      = 0;
-            g_SceneState.step_05 = 0;
+            g_ScriptVars[1]       = 0;
+            g_ScriptVars[2]       = 0;
+            g_ScriptVars[3]       = 0;
+            g_SceneState.step_05  = 0;
             g_SceneState.state_04 = 0;
             break;
     }

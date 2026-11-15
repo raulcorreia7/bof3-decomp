@@ -117,10 +117,10 @@ MATCH void func_801FA8B8(void) {
                 break;
             }
             slot                   = Actor_FindFreeSpawned();
-            ((u8*)&D_1F800000)[0] = slot;
+            D_1F800000.view.raw[0] = slot;
             if (slot != GAME_NONE) {
-                g_SpawnedActors[((u8*)&D_1F800000)[0]].header.flags = 1;
-                g_SpawnedActors[((u8*)&D_1F800000)[0]].type         = 0x9A;
+                g_SpawnedActors[D_1F800000.view.raw[0]].header.flags = 1;
+                g_SpawnedActors[D_1F800000.view.raw[0]].type         = 0x9A;
             }
             D_80146875 = 3;
             break;
@@ -209,10 +209,9 @@ MATCH void func_801FA8B8(void) {
 
 clear_script_state:
     Game_ClearScriptActive();
-    D_80146875  = 0;
+    D_80146875 = 0;
     D_80146874 = 0;
 }
-
 
 MATCH void func_801FAC88(void) {
     switch (g_SceneState.step_05) {

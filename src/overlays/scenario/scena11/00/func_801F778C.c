@@ -55,13 +55,13 @@ MATCH void func_801F778C(void) {
             if (*progress != 1) {
                 break;
             }
-            *progress                    = 0;
-            g_AreaCameraRefreshCount     = 2;
-            g_ScriptVars[2]              = 0;
-            g_AreaCameraOffsetY          = 0;
-            g_SceneState.step_05         = 5;
+            *progress                = 0;
+            g_AreaCameraRefreshCount = 2;
+            g_ScriptVars[2]          = 0;
+            g_AreaCameraOffsetY      = 0;
+            g_SceneState.step_05     = 5;
             Game_RequestAreaChange(0x9C, 0x190000, 0x190000, 0x80);
-            g_GamePrevSelection          = 0x92;
+            g_GamePrevSelection = 0x92;
             break;
         }
         case 5:

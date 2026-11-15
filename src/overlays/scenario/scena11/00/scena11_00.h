@@ -16,11 +16,11 @@ extern Callback  D_801FAEFC[];
 /* D_801FAF24 */
 extern SceneFunc g_SceneActorDispatch[];
 
-extern u8        D_80145E98;
-extern u8        D_80145F09;
-extern u8        D_80145FA8;
-extern s16       D_801492DA;
-extern u16       g_AreaCameraOffsetZHalf;
+extern u8  D_80145E98;
+extern u8  D_80145F09;
+extern u8  D_80145FA8;
+extern s16 D_801492DA;
+extern u16 g_AreaCameraOffsetZHalf;
 
 extern Point3l  D_801481E8;
 extern Point3l  D_801481F8;

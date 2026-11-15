@@ -16,7 +16,7 @@ MATCH void func_801F83C8(void) {
     switch (g_SceneState.step_05) {
         case 0:
             if (g_GameStateIndex != 2) {
-                g_ScriptVars[0]      = 1;
+                g_ScriptVars[0] = 1;
                 func_801BE1B0(1);
                 g_SceneState.step_05 = 1;
             }
@@ -62,13 +62,13 @@ MATCH void func_801F83C8(void) {
             g_SceneState.step_05 = 6;
             break;
         case 6: {
-            index = Actor_FindFreeSpawned();
+            index         = Actor_FindFreeSpawned();
             D_1F800000[0] = index;
             if (index != 0xFF) {
                 g_SpawnedActors[index].header.flags = 1;
                 g_SpawnedActors[D_1F800000[0]].type = 0x8C;
             }
-            index = Actor_FindFreeSpawned();
+            index         = Actor_FindFreeSpawned();
             D_1F800000[0] = index;
             if (index != 0xFF) {
                 g_SpawnedActors[index].header.flags = 1;
@@ -90,17 +90,17 @@ MATCH void func_801F83C8(void) {
             break;
         case 9:
             TASK_SET(&g_Game.members[0]);
-            TASK_BYTES[0xB] = Actor_FindFreeSpawned();
-            if (TASK_BYTES[0xB] != 0xFF) {
-                g_SpawnedActors[TASK_BYTES[0xB]].header.flags = 1;
-                g_SpawnedActors[TASK_BYTES[0xB]].type         = 6;
-                g_SpawnedActors[TASK_BYTES[0xB]].unk_06       = 3;
-                g_SpawnedActors[TASK_BYTES[0xB]].scene_step   = 0;
-                g_SpawnedActors[TASK_BYTES[0xB]].selection    = 0x3A;
-                work                                         = g_TaskMember;
-                g_SpawnedActors[TASK_BYTES[0xB]].unk_2E       = work->unk_2E.half;
-                g_SpawnedActors[TASK_BYTES[0xB]].unk_30       = work->unk_30.half;
-                g_SceneState.step_05 = 0xA;
+            g_Task->param.actor_slot = Actor_FindFreeSpawned();
+            if (g_Task->param.actor_slot != 0xFF) {
+                g_SpawnedActors[g_Task->param.actor_slot].header.flags = 1;
+                g_SpawnedActors[g_Task->param.actor_slot].type         = 6;
+                g_SpawnedActors[g_Task->param.actor_slot].unk_06       = 3;
+                g_SpawnedActors[g_Task->param.actor_slot].scene_step   = 0;
+                g_SpawnedActors[g_Task->param.actor_slot].selection    = 0x3A;
+                work                                                   = g_TaskMember;
+                g_SpawnedActors[g_Task->param.actor_slot].unk_2E       = work->unk_2E.half;
+                g_SpawnedActors[g_Task->param.actor_slot].unk_30       = work->unk_30.half;
+                g_SceneState.step_05                                   = 0xA;
             }
             break;
         case 10:
@@ -175,7 +175,7 @@ MATCH void func_801F83C8(void) {
                 g_SceneState.step_05 = 0x14;
             } else {
                 Message_StartAreaMessage(0x32);
-                g_GameStateIndex     = 2;
+                g_GameStateIndex = 2;
                 SND_PlayCue(0x106);
                 g_SceneState.step_05 = 0x14;
             }
@@ -208,7 +208,7 @@ MATCH void func_801F83C8(void) {
                 g_SceneState.step_05  = 0;
                 g_SceneState.state_04 = 0;
             } else {
-                *progress            = 0;
+                *progress = 0;
                 func_801BE1B0(9);
                 g_SceneState.step_05 = 0x29;
             }
