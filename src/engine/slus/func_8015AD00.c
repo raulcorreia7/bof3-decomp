@@ -63,7 +63,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
     }
     light = m;
     func_8015B2AC(D_801481B8.m[0], &g_Task->unk_64);
-    func_8015B4B0(&light);
+    Area_ApplyCameraMatrix(&light);
     SetLightMatrix(&D_801481B8);
 
     abr = g_Task->range_54.table[3];

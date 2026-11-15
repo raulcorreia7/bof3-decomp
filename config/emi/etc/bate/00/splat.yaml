@@ -9,7 +9,7 @@ segments:
     subsegments:
       - [0x0, .data, g_EmiOverlayHeader]
       - [0x4, .data, D_801D0C04]
-      - [0x128, .rodata, 664]
+      - [0x128, .rodata, 644]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_0b
     type: code
@@ -28,8 +28,7 @@ segments:
     align: 4
     section_order: [.data, .text, .rodata, .bss]
     subsegments:
-      - [0x644, bin, D_801D1244]
-      - [0x664, c, 664]
+      - [0x644, c, 644]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_2
     type: code

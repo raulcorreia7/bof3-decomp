@@ -166,7 +166,21 @@ MATCH void func_801EF5D4(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF61C);
+MATCH void func_801EF61C(void) {
+    PartyMember* work;
+    u8           timer;
+    work = g_Task;
+    work->unk_0C += work->unk_18;
+    if (g_FrameCount & 1) {
+        work->unk_18 -= 1;
+        timer       = work->timer - 1;
+        work->timer = timer;
+        if (timer == 0) {
+            g_BattleEffectBattler->param.unk_0B -= 1;
+            Actor_Clear();
+        }
+    }
+}
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 

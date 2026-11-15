@@ -157,7 +157,17 @@ MATCH void func_801EF44C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF57C);
+MATCH void func_801EF57C(void) {
+    u8 timer;
+    func_800AF2B4((BattleRange*)&g_BattleEffects[g_BattleEffectBattler->timer], 3);
+    Battle_ProjectRange();
+    func_801EF6A0();
+    timer         = g_Task->timer - 1;
+    g_Task->timer = timer;
+    if (timer == 0) {
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF614(void) {
     Battle_ProjectRange();

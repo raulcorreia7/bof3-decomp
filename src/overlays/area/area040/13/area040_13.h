@@ -15,8 +15,11 @@ s32       func_801F2E78(void);
 
 extern u8 D_80146875;
 
+/* The 4x4 cell palette func_801F3570 tests each cell's value against. */
+extern u8 D_801F4960[4][4];
 extern u8 D_801F4970[];
 
 void func_801A4BC0(s32 x, s32 y, s32 value);
+s32  func_801F30B8(s32 x, s32 y);
 
 #endif
