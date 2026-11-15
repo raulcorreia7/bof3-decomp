@@ -514,6 +514,11 @@ NON_MATCHING void func_801F97E0(Scena07Burst* burst) {
     s32      tpage;
     u16      base;
     u16      color;
+
+    enum {
+        BURST_HEIGHT = 0x700 << 16
+    };
+
     FAKE_STACK_PADS(u8, 32); /* FAKE: retail frame reserves 32 unused stack bytes. */
 
     angle         = 0;
@@ -521,7 +526,7 @@ NON_MATCHING void func_801F97E0(Scena07Burst* burst) {
     point.y.fixed = burst->y + (rsin((u16)angle) << 5);
     point.z.fixed = burst->z;
     Area_ProjectPoint((s32*)&point, &inner);
-    point.z.fixed = burst->z + 0x7000000;
+    point.z.fixed = burst->z + BURST_HEIGHT;
     Area_ProjectPoint((s32*)&point, &outer);
     base = burst->unk_10;
     if (base >= 0x100) {
@@ -548,7 +553,7 @@ NON_MATCHING void func_801F97E0(Scena07Burst* burst) {
         setRGB0(prim, base, base, base);
         setRGB1(prim, base, base, base);
         Area_ProjectPoint(point_ptr, &inner);
-        point.z.fixed = burst->z + 0x7000000;
+        point.z.fixed = burst->z + BURST_HEIGHT;
         Area_ProjectPoint(point_ptr, &outer);
         prim->x2 = inner.vx;
         prim->y2 = inner.vy;
