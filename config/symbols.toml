@@ -182,6 +182,10 @@ Battle_InflictSleep = { addr = 0x8009E804, type = "func", source = "Adds STATUS_
 Battle_InflictConfusion = { addr = 0x8009E824, type = "func", source = "Adds STATUS_CONFUSED to the battle action target through Battle_InflictStatus." }
 Battle_InflictSilence = { addr = 0x8009F258, type = "func", source = "Adds STATUS_SILENCED to the battle action target through Battle_InflictStatus." }
 Battle_HalveDamage = { addr = 0x8009F320, type = "func", source = "sets the damage-halved action flag on the current target" }
+Battle_ApplyMight = { addr = 0x8009F3DC, type = "func", source = "Sets the battle action to the Might ability, then applies the ability's target and stat rescale through func_800A403C." }
+Battle_ApplyProtect = { addr = 0x8009F4F4, type = "func", source = "Sets the battle action to the Protect ability, then applies the ability's target and stat rescale through func_800A403C." }
+Battle_ApplyWeaken = { addr = 0x8009F52C, type = "func", source = "Sets the battle action to the Weaken ability, then applies the ability's target and stat rescale through func_800A403C." }
+Battle_ApplyBarrier = { addr = 0x8009F6B4, type = "func", source = "Sets the battle action to the Barrier ability and raises the damage-halved flag through Battle_HalveDamage." }
 Battle_ThirdHpDamage = { addr = 0x8009F7EC, type = "func", source = "Stores Battle_RollHpDamage(3) as the action target's hp change: a third of the attacker's hp, scaled by the random percent and the element resistance." }
 Battle_FullHpDamage = { addr = 0x8009F814, type = "func", source = "Stores Battle_RollHpDamage(1) as the action target's hp change: the attacker's whole hp, scaled by the random percent and the element resistance." }
 Battle_HalfHpDamage = { addr = 0x8009F83C, type = "func", source = "Stores Battle_RollHpDamage(2) as the action target's hp change: half the attacker's hp, scaled by the random percent and the element resistance." }

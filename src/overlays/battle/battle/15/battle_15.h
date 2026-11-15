@@ -698,20 +698,24 @@ void        Battle_InflictSilence(void);
 void        func_8009F278(void);
 void        func_8009F2B0(void);
 void        func_8009F2E8(void);
-void        func_8009F3DC(void);
+/* func_8009F3DC */
+void        Battle_ApplyMight(void);
 void        func_8009F414(void);
 void        func_8009F44C(void);
 void        func_8009F484(void);
 void        func_8009F4BC(void);
-void        func_8009F4F4(void);
-void        func_8009F52C(void);
+/* func_8009F4F4 */
+void        Battle_ApplyProtect(void);
+/* func_8009F52C */
+void        Battle_ApplyWeaken(void);
 void        func_8009F564(void);
 void        func_8009F59C(void);
 void        func_8009F5D4(void);
 void        func_8009F60C(void);
 void        func_8009F644(void);
 void        func_8009F67C(void);
-void        func_8009F6B4(void);
+/* func_8009F6B4 */
+void        Battle_ApplyBarrier(void);
 void        func_8009F758(void);
 /* func_8009F7EC */
 void        Battle_ThirdHpDamage(void);
