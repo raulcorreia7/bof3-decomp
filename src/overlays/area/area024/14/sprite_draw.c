@@ -500,7 +500,7 @@ MATCH void func_801F3708(void* vertices, const void* rotated, s16* transform) {
     dst->points[3].z = (state->base_z + out.vz);
 }
 
-MATCH void func_801F3944(const void* spin) {
+MATCH void func_801F3944(const WorldSpin* spin) {
     WorldSpin* work;
     POLY_G3*   primitive;
     s32        point[3];
@@ -548,13 +548,13 @@ MATCH void func_801F3944(const void* spin) {
     GFX_AddPrim(1u, sizeof(POLY_G3));
 }
 
-MATCH void func_801F3BE4(void* spin) {
+MATCH void func_801F3BE4(WorldSpin* spin) {
     volatile Area024Scratch* scratch;
     WorldSpin*               work;
     MATRIX                   matrix;
     s16                      rot[3];
 
-    work           = (WorldSpin*)spin;
+    work           = spin;
     scratch        = WORLD00_AREA024_SCRATCH_PTR;
     work->origin.x = scratch->pos.x;
     work->origin.y = scratch->pos.y;

@@ -365,7 +365,7 @@ MATCH s32 func_801D1A60(void) {
 
 #include "shared/Area_DrawSpawnSlot.h"
 
-MATCH void func_801D1CD4(const void* spin) {
+MATCH void func_801D1CD4(const WorldSpin* spin) {
     WorldSpin* work;
     POLY_G3*   primitive;
     s32        point[3];
