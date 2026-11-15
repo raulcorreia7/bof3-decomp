@@ -8,12 +8,10 @@ NON_MATCHING void func_801D1D10(void) {
     s8*          cursor;
     s8*          slot;
     volatile u8* flag;
-    u8*          row;
     u8           id;
     u32          index;
     if (EMI_IsReady() != 0) {
         cursor = &g_Battle.command_count;
-        row    = &g_BattleRowCursor;
         if (*cursor == 0)
             g_InputHeld = 0;
         if (*cursor < 3) {
@@ -38,11 +36,11 @@ NON_MATCHING void func_801D1D10(void) {
                 }
             }
         }
-        row[0]                      = 0;
+        g_Battle.row_cursor         = 0;
         g_Battle.cursor.panel_entry = 0;
         D_801463B0                  = 0xE;
-        row[-4]                     = 0;
-        row[-5] += 1;
+        g_Battle.phase.step         = 0;
+        g_Battle.phase.mode        += 1;
     }
 }
 #else
