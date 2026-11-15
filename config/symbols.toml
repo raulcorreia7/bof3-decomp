@@ -300,6 +300,7 @@ g_BattleTemplateStats = { addr = 0x801EC364, source = "Template stat rows of the
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 g_BattleSelectedActor = { addr = 0x8014638C, type = "PartyMember", alias = true, source = "The selected battle actor; the selected_actor member of g_Battle." }
+Effect_RotatePosition = { addr = 0x801DD350, type = "func", alias = true, source = "Integrates the effect velocity pairs the magic044 step reads; battle/03 owns the body." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEnemyBattlers = { addr = 0x801EB630, alias = true, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_CHARACTERS_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
@@ -1039,6 +1040,8 @@ Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the sel
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 
 ["emi/bmagic/magic081/03"]
+D_80036C00 = { addr = 0x80036C00, type = "u16", size = 0x200, alias = true, source = "Row 26 of the palette arena, the source magic081 stages from." }
+g_BattleEffectPalette = { addr = 0x8003AC00, type = "u16", size = 0x200, alias = true, source = "Row 26 of the working palette copy, the row magic081 stages." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 Battle_CenterCamera = { addr = 0x800AFD9C, type = "func", source = "Centres the battle camera on the living battlers." }
@@ -2595,6 +2598,7 @@ g_Fairies = { addr = 0x801F2700, source = "the fairy roster: nine bytes a fairy,
 # Fairy table extents; the types are in include/game/fairy.h.
 
 ["emi/etc/commu01/07"]
+g_SceneEventStep_u8 = { addr = 0x801448EC, type = "u8", alias = true, source = "The scene event step byte as a u8 array; the commu01 menu steps read and step it." }
 g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
 func_801D0C2C = { addr = 0x801D0C2C, type = "func", source = "Entry of the commu01 scene: dispatches on the step byte D_801F294C through g_Commu01States." }
 Fairy_GetJobActive = { addr = 0x801D3A48, type = "func", source = "the body returns g_FairyJobs[i].active" }
@@ -5166,6 +5170,7 @@ Area_DrawLightPillar = { addr = 0x801F3D70, type = "func", source = "Draws a pil
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world02/area103/13"]
+g_GameEntryStateWord = { addr = 0x80143B90, alias = true, source = "The game entry state word; func_801F3B28 tests it against 0x50005." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_FindTaggedPartySlot = { addr = 0x801F56B0, type = "func", source = "Returns the first index 0 to 2 of D_801F5D64 whose tag equals byte 0 of a battle party row, 0xFF when none match; func_801F560C calls it." }
 Actor_SetGroundHeight = { addr = 0x801F57FC, type = "func", source = "Stores the ground height Area_SampleHeight returns at the task position in its Z; unlike Actor_SnapToGround it does not advance the mode. No C caller, it is reached through the area103 tables." }
