@@ -1,17 +1,17 @@
 #include "engine/slus/slus.h"
 
-/* runs the update script selected by arg[0x1B]: each entry is an
+/* runs the update script selected by the character's master: each entry is an
  * (opcode, operand) pair applied to one counter slot, MASTER_MOD_END ends it.
  */
-MATCH void Char_ApplyMaster(u8* arg) {
+MATCH void Char_ApplyMaster(Character* character) {
     u8* pc;
     u8* val;
     u8  op;
 
-    if (arg[0x1B] == GAME_NONE) {
+    if (character->master_id == GAME_NONE) {
         return;
     }
-    pc = (u8*)D_80183A1C[arg[0x1B]];
+    pc = (u8*)D_80183A1C[character->master_id];
     if (pc == NULL) {
         return;
     }
@@ -23,46 +23,46 @@ MATCH void Char_ApplyMaster(u8* arg) {
     do {
         switch (op & BYTE_MASK) {
             case RES_INDEX_FIRE:
-                Char_AddResistance(arg + 0x2B, (s8)*val);
+                Char_AddResistance(&character->stats.resistances[RES_INDEX_FIRE], (s8)*val);
                 break;
             case RES_INDEX_FROST:
-                Char_AddResistance(arg + 0x2C, (s8)*val);
+                Char_AddResistance(&character->stats.resistances[RES_INDEX_FROST], (s8)*val);
                 break;
             case RES_INDEX_ELECTRIC:
-                Char_AddResistance(arg + 0x2D, (s8)*val);
+                Char_AddResistance(&character->stats.resistances[RES_INDEX_ELECTRIC], (s8)*val);
                 break;
             case RES_INDEX_EARTH:
-                Char_AddResistance(arg + 0x2E, (s8)*val);
+                Char_AddResistance(&character->stats.resistances[RES_INDEX_EARTH], (s8)*val);
                 break;
             case RES_INDEX_WIND:
-                Char_AddResistance(arg + 0x2F, (s8)*val);
+                Char_AddResistance(&character->stats.resistances[RES_INDEX_WIND], (s8)*val);
                 break;
             case RES_INDEX_HOLY:
-                Char_AddResistance(arg + 0x30, (s8)*val);
+                Char_AddResistance(&character->stats.resistances[RES_INDEX_HOLY], (s8)*val);
                 break;
             case RES_INDEX_PSIONIC:
-                Char_AddResistance(arg + 0x31, (s8)*val);
+                Char_AddResistance(&character->stats.resistances[RES_INDEX_PSIONIC], (s8)*val);
                 break;
             case RES_INDEX_STATUS:
-                Char_AddResistance(arg + 0x32, (s8)*val);
+                Char_AddResistance(&character->stats.resistances[RES_INDEX_STATUS], (s8)*val);
                 break;
             case RES_INDEX_DEATH:
-                Char_AddResistance(arg + 0x33, (s8)*val);
+                Char_AddResistance(&character->stats.resistances[RES_INDEX_DEATH], (s8)*val);
                 break;
             case MASTER_MOD_SURPRISE_CHANCE:
-                Char_AddPercent(arg + 0x34, *val);
+                Char_AddPercent(&character->stats.surprise_chance, *val);
                 break;
             case MASTER_MOD_REPRISAL_CHANCE:
-                Char_AddPercent(arg + 0x35, *val);
+                Char_AddPercent(&character->stats.reprisal_chance, *val);
                 break;
             case MASTER_MOD_CRITICAL_CHANCE:
-                Char_AddPercent(arg + 0x36, *val);
+                Char_AddPercent(&character->stats.critical_chance, *val);
                 break;
             case MASTER_MOD_EVASION:
-                Char_AddPercent(arg + 0x37, *val);
+                Char_AddPercent(&character->stats.evasion, *val);
                 break;
             case MASTER_MOD_ACCURACY:
-                Char_AddPercent(arg + 0x38, *val);
+                Char_AddPercent(&character->stats.accuracy, *val);
                 break;
             default:
                 break;
