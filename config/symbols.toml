@@ -2015,7 +2015,10 @@ D_801EFA04 = { addr = 0x801EFA04, source = "Step handlers of magic219, run by he
 ["emi/bmagic/magic220/03"]
 Battle_ApplyDamageFlags = { addr = 0x800A9610, alias = true, source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_CenterCamera = { addr = 0x800AFD9C, alias = true, source = "Centres the battle camera on the living battlers." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
 Effect_RequestTargetOnTimerZero = { addr = 0x801EEEB0, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero asks the target selector for targets (Battle_ApplyDamageFlags with 0x10) and advances header.mode (byte 0x01) in magic220 (Geo Breath)." }
 Effect_MarkDamagedOnZeroTick = { addr = 0x801EEF18, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic220 (Geo Breath)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEF78, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic220." }
