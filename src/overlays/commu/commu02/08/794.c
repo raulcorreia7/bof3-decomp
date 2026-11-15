@@ -1893,7 +1893,37 @@ INCLUDE_ASM(func_801D830C);
 
 INCLUDE_ASM(func_801D851C);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D875C(s16 x, s16 y, s32 index) {
+    s32   tpage;
+    SPRT* sprt;
+    u8    slot;
+
+    if (GetGraphType() == 1 || GetGraphType() == 2) {
+        tpage = 0x2E;
+    } else {
+        tpage = 0x1E;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    sprt = (SPRT*)g_GfxPrimCursor;
+    SetSprt(sprt);
+    slot       = index;
+    sprt->x0   = x;
+    sprt->y0   = y;
+    sprt->u0   = D_801DAE88[slot][0];
+    sprt->v0   = D_801DAE88[slot][1];
+    sprt->w    = D_801DAE88[slot][2];
+    sprt->h    = D_801DAE88[slot][3];
+    sprt->r0   = 0x80;
+    sprt->g0   = 0x80;
+    sprt->b0   = 0x80;
+    sprt->clut = (D_801DAE88[slot][4] >> 4) | ((D_801DAE88[slot][5] + 0x1E0) << 6);
+    GFX_AddPrim(1, sizeof(SPRT));
+}
+#else
 INCLUDE_ASM(func_801D875C);
+#endif
 
 MATCH void func_801D88A4(s32 x, s32 y, s32 bright) {
     POLY_F3* poly;
@@ -2326,6 +2356,7 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     SPRT* sprite;
     s32   columns;
     s32   rows;
+    s32   edge;
 
     window.x = 112;
     window.y = 152;
@@ -2337,52 +2368,64 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     SetSprt(sprite);
     setXY0(sprite, x + 16, y);
     setUV0(sprite, 0, 0);
-    setWH(sprite, ((u8)width - 4) * 8, 8);
+    edge = 8;
+    setWH(sprite, ((u8)width - 4) * 8, edge);
     setClut(sprite, 176, STAGE_PALETTE_Y + 1);
     setRGB0(sprite, 0x80, 0x80, 0x80);
     GFX_AddPrim(1, sizeof(SPRT));
 
     window.x = 152;
     window.y = 160;
+    window.h = edge;
+    window.w = edge;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 832, 256), &window);
     GFX_AddPrim(1, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
     setXY0(sprite, x + 16, y + ((u8)height - 1) * 8);
     setUV0(sprite, 0, 0);
-    setWH(sprite, ((u8)width - 4) * 8, 8);
+    edge = 8;
+    setWH(sprite, ((u8)width - 4) * 8, edge);
     setClut(sprite, 176, STAGE_PALETTE_Y + 1);
     setRGB0(sprite, 0x80, 0x80, 0x80);
     GFX_AddPrim(1, sizeof(SPRT));
 
     window.x = 176;
     window.y = 152;
+    window.h = edge;
+    window.w = edge;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 832, 256), &window);
     GFX_AddPrim(1, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
     setXY0(sprite, x, y + 16);
     setUV0(sprite, 0, 0);
-    setWH(sprite, 8, ((u8)height - 4) * 8);
+    edge = 8;
+    setWH(sprite, edge, ((u8)height - 4) * 8);
     setClut(sprite, 176, STAGE_PALETTE_Y + 1);
     setRGB0(sprite, 0x80, 0x80, 0x80);
     GFX_AddPrim(1, sizeof(SPRT));
 
     window.x = 176;
     window.y = 160;
+    window.h = edge;
+    window.w = edge;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 832, 256), &window);
     GFX_AddPrim(1, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
     setXY0(sprite, x + ((u8)width - 1) * 8, y + 16);
     setUV0(sprite, 0, 0);
-    setWH(sprite, 8, ((u8)height - 4) * 8);
+    edge = 8;
+    setWH(sprite, edge, ((u8)height - 4) * 8);
     setClut(sprite, 176, STAGE_PALETTE_Y + 1);
     setRGB0(sprite, 0x80, 0x80, 0x80);
     GFX_AddPrim(1, sizeof(SPRT));
 
     window.x = 112;
     window.y = 160;
+    window.h = edge;
+    window.w = edge;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 832, 256), &window);
     GFX_AddPrim(1, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
@@ -2412,8 +2455,201 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
 INCLUDE_ASM(func_801D9B80);
 #endif
 
+#ifdef NON_MATCHING
+NON_MATCHING s8 func_801DA114(void) {
+    s32 pressed;
+    u8* page;
+    u8* row;
+    u8* cell;
+    s32 col;
+    s32 i;
+    s32 count;
+    u16 pad;
+
+    pressed = INPUT_GetRepeatedButtons(g_InputPressed & 0xF00F);
+    cell    = D_801DAAAC + D_801DAAA8 * 96 + (s8)D_801DB0D8 * 12 + (s8)D_801DB0D4;
+    if (pressed & 0x1000) {
+        SND_PlayCue(0x100);
+        page = D_801DAAAC + D_801DAAA8 * 96;
+        col  = (s8)D_801DB0D4;
+        do {
+            D_801DB0D8 -= 1;
+            if ((s8)D_801DB0D8 < 0) {
+                D_801DB0D8 = 7;
+            }
+        } while (page[(s8)D_801DB0D8 * 12 + col] == 0);
+    } else if (pressed & 0x4000) {
+        SND_PlayCue(0x100);
+        page = D_801DAAAC + D_801DAAA8 * 96;
+        col  = (s8)D_801DB0D4;
+        do {
+            D_801DB0D8 += 1;
+            if ((s8)D_801DB0D8 >= 8) {
+                D_801DB0D8 = 0;
+            }
+        } while (page[(s8)D_801DB0D8 * 12 + col] == 0);
+    } else if (pressed & 0x8000) {
+        SND_PlayCue(0x100);
+        if (*cell != 0 && *cell < 6) {
+            D_801DB0D4 = 9;
+        } else {
+            row = D_801DAAAC + D_801DAAA8 * 96 + (s8)D_801DB0D8 * 12;
+            do {
+                D_801DB0D4 -= 1;
+                if ((s8)D_801DB0D4 < 0) {
+                    D_801DB0D4 = 11;
+                }
+            } while (row[(s8)D_801DB0D4] == 0);
+        }
+    } else if (pressed & 0x2000) {
+        SND_PlayCue(0x100);
+        if (*cell != 0 && *cell < 6) {
+            D_801DB0D4 = 0;
+        } else {
+            row = D_801DAAAC + D_801DAAA8 * 96 + (s8)D_801DB0D8 * 12;
+            do {
+                D_801DB0D4 += 1;
+                if ((s8)D_801DB0D4 >= 12) {
+                    D_801DB0D4 = 0;
+                }
+            } while (row[(s8)D_801DB0D4] == 0);
+        }
+    }
+
+    pad = g_InputPressed;
+    if (pad & 0x40) {
+        cell = D_801DAAAC + D_801DAAA8 * 96 + (s8)D_801DB0D8 * 12 + (s8)D_801DB0D4;
+        switch (*cell) {
+            case 1:
+                if (D_801DB0D0 < 4) {
+                    SND_PlayCue(0x103);
+                    D_801DB0D0 += 1;
+                } else {
+                    SND_PlayCue(0x107);
+                }
+                break;
+            case 2:
+                if (D_801DB0D0 != 0) {
+                    SND_PlayCue(0x103);
+                    D_801DB0D0 -= 1;
+                } else {
+                    SND_PlayCue(0x107);
+                }
+                break;
+            case 3:
+                D_801F294E += 1;
+                return 0;
+            case 4:
+                g_InputPressed = pad | 0x800;
+                break;
+            default:
+                SND_PlayCue(0x103);
+                D_801DB080[D_801DB0D0] = *cell;
+                if (D_801DB0D0 < 4) {
+                    D_801DB0D0 += 1;
+                }
+                break;
+        }
+    }
+
+    if ((g_InputPressed & 0x20) || (pressed & 0xA)) {
+        if (D_801DB0D0 >= 4) {
+            return 0;
+        }
+        SND_PlayCue(0x101);
+        D_801DB0D0 += 1;
+        return 0;
+    }
+    if ((g_InputPressed & 0x80) || (pressed & 0x4) || (pressed & 0x1)) {
+        if (D_801DB0D0 == 0) {
+            return 0;
+        }
+        SND_PlayCue(0x101);
+        D_801DB0D0 -= 1;
+        return 0;
+    }
+    if (g_InputPressed & 0x10) {
+        u8 slot = D_801DB0D0;
+
+        if (slot != 0 && (D_801DB080[slot] == 0xFF || D_801DB080[slot] == 0)) {
+            D_801DB0D0 = slot - 1;
+        }
+        SND_PlayCue(0x106);
+        D_801DB080[D_801DB0D0] = 0xFF;
+        return 0;
+    }
+    if (g_InputPressed & 0x800) {
+        SND_PlayCue(0x104);
+        count = 5;
+        for (i = 4; (s8)i >= 0 && D_801DB080[(s8)i] == 0xFF; i--) {
+            count -= 1;
+        }
+        if ((u16)count < 5) {
+            for (i = 4; (s8)i >= 0 && D_801DB080[(s8)i] == 0xFF; i--) {
+                D_801DB080[(s8)i] = 0;
+            }
+        }
+        D_801F294E += 1;
+        return 1;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM(func_801DA114);
+#endif
 
-INCLUDE_ASM(func_801DA7A4);
+MATCH void func_801DA7A4(void) {
+    s32 i;
 
-INCLUDE_ASM(func_801DA8E8);
+    for (i = 0; i < 5; i++) {
+        g_TextVariables[0][i] = g_Characters[func_801D92F4(D_801DB0B4)].name[i];
+    }
+    D_801490DD = 0;
+    for (i = 0; i < 6; i++) {
+        D_801490F8[i] = D_801DB080[i];
+    }
+    for (i = 0; i < 5; i++) {
+        g_Characters[func_801D92F4(D_801DB0B4)].name[i] = D_801DB080[i];
+    }
+    Message_StartAreaMessage(0xF5);
+    g_GameStateIndex = GAME_REQUEST_MESSAGE;
+    D_801F294C       = 3;
+    D_801F294D       = 0;
+    D_801F294E       = 0;
+}
+
+MATCH void func_801DA8E8(void) {
+    s32 i;
+    u8  started;
+    u8* src;
+    u8(*jobs)[5];
+
+    started = 0;
+    for (i = 4; i >= 0; i--) {
+        if (D_801457E8[Fairy_FindActiveJob(D_801DB0B4)][i] == 0xFF && started == 0) {
+            g_TextVariables[0][i] = 0;
+        } else {
+            started               = 1;
+            g_TextVariables[0][i] = D_801457E8[Fairy_FindActiveJob(D_801DB0B4)][i];
+        }
+    }
+    D_801490DD = 0;
+    for (i = 0; i < 6; i++) {
+        D_801490F8[i] = D_801DB080[i];
+    }
+    i    = 0;
+    jobs = D_801457E8;
+    src  = D_801DB080;
+    for (; i < 5; i++, src++) {
+        if (*src == 0) {
+            jobs[Fairy_FindActiveJob(D_801DB0B4)][i] = 0xFF;
+        } else {
+            jobs[Fairy_FindActiveJob(D_801DB0B4)][i] = *src;
+        }
+    }
+    Message_StartAreaMessage(0xF5);
+    g_GameStateIndex = GAME_REQUEST_MESSAGE;
+    D_801F294C       = 3;
+    D_801F294D       = 0;
+    D_801F294E       = 0;
+}
