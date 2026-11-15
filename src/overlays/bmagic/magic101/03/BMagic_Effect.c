@@ -159,37 +159,34 @@ MATCH void func_801EF3DC(void) {
 
 INCLUDE_ASM(func_801EF4DC);
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF580(void) {
-    PartyMember* task;
+MATCH void func_801EF580(void) {
+    PartyMember* effect;
+    PartyMember* effectForFacing;
+    PartyMember* effectForSetup;
     s32          wave;
-    u8           count;
+    u8           ticksRemaining;
 
     g_Task->param.unk_0B += 8;
-    wave                     = ((rsin((g_FrameCount & 0x1F) << 7) << 5) >> 12) + 384;
-    task                     = g_Task;
-    count                    = task->unk_09 - 1;
-    task->unk_09             = count;
-    task->pos.z.part.integer = (u16)g_BattleEffectBattler->pos.z.part.integer + wave;
-    if (count != 0) {
+    wave                       = ((rsin((g_FrameCount & 0x1F) << 7) << 5) >> 12) + 384;
+    effect                     = g_Task;
+    effect->pos.z.part.integer = (u16)g_BattleEffectBattler->pos.z.part.integer + wave;
+    ticksRemaining             = effect->unk_09 - 1;
+    effect->unk_09             = ticksRemaining;
+    if (ticksRemaining != 0) {
         return;
     }
-    task = g_Task;
-    if (task->unk_04 == 0) {
+    if (g_Task->unk_04 == 0) {
         SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }
-    task               = g_Task;
-    task->param.unk_0B = D_801EFCE0[task->facing];
-    task               = g_Task;
-    task->unk_10       = 128;
-    task->unk_14       = 128;
-    task->unk_09       = 16;
-    task->unk_1C       = 24;
+    effectForFacing               = g_Task;
+    effectForFacing->param.unk_0B = D_801EFCE0[effectForFacing->facing];
+    effectForSetup                = g_Task;
+    effectForSetup->unk_10        = 128;
+    effectForSetup->unk_14        = 128;
+    effectForSetup->unk_09        = 16;
+    effectForSetup->unk_1C        = 24;
     g_Task->header.step += 1;
 }
-#else
-INCLUDE_ASM(func_801EF580);
-#endif
 
 MATCH void func_801EF690(void) {
     u8           counter;
