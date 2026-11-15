@@ -7,15 +7,15 @@
 NON_MATCHING void func_800A0EC4(void) {
     Character* character;
     Character* row;
-    s32 cell_offset;
-    s32 record_index;
-    s32 row_offset;
-    s32 timer;
-    s32 index;
-    s32 member;
-    u16 value;
-    u32 rate;
-    u8* state;
+    s32        cell_offset;
+    s32        record_index;
+    s32        row_offset;
+    s32        timer;
+    s32        index;
+    s32        member;
+    u16        value;
+    u32        rate;
+    u8*        state;
 
     state = &g_Battle.active_battler;
     if (*state < 3U) {
@@ -30,13 +30,13 @@ NON_MATCHING void func_800A0EC4(void) {
         index = 0;
         if (g_Battle.party_count != 0) {
             do {
-                row_offset = index * BATTLE_PARTY_STRIDE;
-                character          = &g_Characters[g_Game.members[index].character_index];
-                row                = &g_Game.members[index].chr;
-                row->equip.weapon  = character->equip.weapon;
-                row->equip.shield  = character->equip.shield;
-                row->equip.helmet  = character->equip.helmet;
-                row->equip.armor   = character->equip.armor;
+                row_offset                = index * BATTLE_PARTY_STRIDE;
+                character                 = &g_Characters[g_Game.members[index].character_index];
+                row                       = &g_Game.members[index].chr;
+                row->equip.weapon         = character->equip.weapon;
+                row->equip.shield         = character->equip.shield;
+                row->equip.helmet         = character->equip.helmet;
+                row->equip.armor          = character->equip.armor;
                 row->equip.accessories[0] = character->equip.accessories[0];
                 row->equip.accessories[1] = character->equip.accessories[1];
                 index++;
