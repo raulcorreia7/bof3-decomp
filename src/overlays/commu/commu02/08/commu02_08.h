@@ -91,6 +91,7 @@ extern u8        D_801DB0D8;
 extern u8        D_801DB0DC;
 extern u8        D_801F2944;
 extern u8        D_801F2945;
+extern u8        D_801F294F;
 extern u8        D_801D0C3C[];
 extern u8        D_801DAAAC[];
 extern const u8* D_801DB038[];

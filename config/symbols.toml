@@ -2606,6 +2606,7 @@ g_Commu02Event3Step2Sub6Funcs = { addr = 0x801DAE68, source = "3 handlers of sub
 g_Commu02Event3Step2Sub7Funcs = { addr = 0x801DAE74, source = "5 handlers of sub-step 7 of step 2 of the commu02 scene event 3, called by func_801D7660 (the sub-step 7 handler of step 2) and indexed by the commu sub-sub-step byte D_801F294E" }
 g_MenuPortraitAtlas = { addr = 0x801DAEDC, source = "4-byte portrait atlas records read by Menu_DrawPortrait by atlas index." }
 g_Fairies = { addr = 0x801F2700, source = "the fairy roster: nine bytes a fairy, the five-byte name first" }
+D_801F294F = { addr = 0x801F294F, type = "u8", size = 0x1, source = "the pending selection byte checked by the commu02 fairy list" }
 
 ["emi/etc/commu03/06"]
 g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
