@@ -76,7 +76,8 @@ MATCH void func_801CEF54(void) {
 
 #include "overlays/plchar/Char_ClearPanelModeIfUnused.h"
 
-INCLUDE_ASM(func_801CF184);
+#include "overlays/plchar/Char_ProbeFacingBlocked.h"
+CHAR_DEFINE_PROBE_FACING_BLOCKED(func_801CF184);
 
 MATCH void func_801CF328(void) {
     SYS_DISPATCH_TASK(D_801CF620, 2, g_Task);

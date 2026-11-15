@@ -76,7 +76,8 @@ MATCH void func_801CEFD0(void) {
 
 #include "overlays/plchar/Char_ClearModeIfUnused.h"
 
-INCLUDE_ASM(func_801CF1A4);
+#include "overlays/plchar/Char_ProbeFacingBlocked.h"
+CHAR_DEFINE_PROBE_FACING_BLOCKED(func_801CF1A4);
 
 MATCH void func_801CF348(void) {
     s16 dist;
