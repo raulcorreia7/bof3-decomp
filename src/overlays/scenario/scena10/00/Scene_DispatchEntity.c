@@ -220,4 +220,9 @@ MATCH u8 func_801FA5EC(void) {
     return 0;
 }
 
-INCLUDE_ASM(func_801FA644);
+MATCH s32 func_801FA644(void) {
+    if (((D_80144908[0] >= 2) && (D_80144908[2] >= 3) && (D_80144908[3] >= 2) && (D_80144908[5] != 0)) && (D_80144908[7] >= 2)) {
+        return 1;
+    }
+    return 0;
+}
