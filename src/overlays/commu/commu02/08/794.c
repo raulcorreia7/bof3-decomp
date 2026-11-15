@@ -879,8 +879,7 @@ INCLUDE_ASM(func_801D3C30);
 
 INCLUDE_ASM(func_801D3E44);
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D4158(void) {
+MATCH void func_801D4158(void) {
     u8* state;
     u8* src_base;
     u8* dst_base;
@@ -899,8 +898,8 @@ NON_MATCHING void func_801D4158(void) {
             i        = 0;
             do {
                 offset   = (s8)D_801DB0B4 * 5;
-                dst_item = offset + dst_base + i;
-                src_item = offset + src_base + i;
+                dst_item = (u8*)(offset + (s32)dst_base + i);
+                src_item = (u8*)(offset + (s32)src_base + i);
                 value    = *src_item;
                 i++;
                 *dst_item = value;
@@ -921,9 +920,6 @@ NON_MATCHING void func_801D4158(void) {
     func_801D3184(204, 16);
     func_801D32A0(204, 60, 0);
 }
-#else
-INCLUDE_ASM(func_801D4158);
-#endif
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D42B4(void) {
@@ -1561,11 +1557,11 @@ MATCH void func_801D65F8(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event3Step1Sub7Funcs, D_801F294E);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D6634(void) {
+MATCH void func_801D6634(void) {
     s32 i;
     u8* dst;
-    u8* tbl;
+    u8 (*tbl)[5];
+    s32 letter;
 
     func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4), 0);
     func_801D97C8(D_801DAAA8, D_801DB0C4 * 30 + 0xB0, 0x2B);
@@ -1573,10 +1569,16 @@ NON_MATCHING void func_801D6634(void) {
     func_801D94D0(D_801DAAA8, 0x18, D_801DB0C4 * 30 + 0x67, D_801DB0D4, D_801DB0D8);
     D_801DB0C4 -= 1;
     if (D_801DB0C4 == 0) {
-        tbl = D_801457E8[0];
+        tbl = D_801457E8;
         dst = D_801DB080;
         for (i = 0; i < 5; i++, dst++) {
-            *dst = tbl[Fairy_FindActiveJob(D_801DB0B4) * 5 + i] ? tbl[Fairy_FindActiveJob(D_801DB0B4) * 5 + i] : 0xFF;
+            letter = tbl[Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK][i];
+            if (letter == 0) {
+                letter = 0xFF;
+            } else {
+                letter = tbl[Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK][i];
+            }
+            *dst = letter;
         }
         D_801DB0D0 = 0;
         D_801DB0D4 = 0;
@@ -1585,9 +1587,6 @@ NON_MATCHING void func_801D6634(void) {
         D_801F294E += 1;
     }
 }
-#else
-INCLUDE_ASM(func_801D6634);
-#endif
 
 MATCH void func_801D67F0(void) {
     func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 1);
