@@ -5,8 +5,8 @@
  */
 #ifdef NON_MATCHING
 NON_MATCHING void func_800A0EC4(void) {
-    u8* cell;
-    u8* dest;
+    Character* character;
+    Character* row;
     s32 cell_offset;
     s32 record_index;
     s32 row_offset;
@@ -31,16 +31,16 @@ NON_MATCHING void func_800A0EC4(void) {
         if (g_Battle.party_count != 0) {
             do {
                 row_offset = index * BATTLE_PARTY_STRIDE;
-                cell       = (u8*)g_Characters + g_Game.members[index].character_index * PARTY_RECORD_STRIDE;
-                dest       = (u8*)D_80145F04 + row_offset;
-                dest[0xE]  = cell[0xE];
-                dest[0xF]  = cell[0xF];
-                dest[0x10] = cell[0x10];
-                dest[0x11] = cell[0x11];
-                dest[0x12] = cell[0x12];
-                dest[0x13] = cell[0x13];
+                character          = &g_Characters[g_Game.members[index].character_index];
+                row                = &g_Game.members[index].chr;
+                row->equip.weapon  = character->equip.weapon;
+                row->equip.shield  = character->equip.shield;
+                row->equip.helmet  = character->equip.helmet;
+                row->equip.armor   = character->equip.armor;
+                row->equip.accessories[0] = character->equip.accessories[0];
+                row->equip.accessories[1] = character->equip.accessories[1];
                 index++;
-                __builtin_memcpy(dest + 0x3C, cell + 0x1C, sizeof(Stats));
+                __builtin_memcpy((u8*)row + 0x3C, (u8*)character + 0x1C, sizeof(Stats));
             } while ((u32)(index & BYTE_MASK) < (u8)g_Battle.party_count);
         }
         index = 0;
