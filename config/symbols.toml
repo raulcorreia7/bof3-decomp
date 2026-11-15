@@ -5749,6 +5749,7 @@ Area_Update = { addr = 0x801F40F0, type = "func", source = "Sets header.step (by
 
 ["emi/world04/area171/13"]
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x58, source = "The switch table of func_801F3B4C: 22 jump targets of its jr dispatch." }
+Area_StartEntryCell = { addr = 0x801F2CA0, type = "func", source = "Starts the work at the entry cell the payload's coordinate tables name: sets its cell and terrain height, queues the away check at the entry cell and runs the area update." }
 
 ["emi/world04/area172/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
