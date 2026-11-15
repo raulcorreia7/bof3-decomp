@@ -107,7 +107,51 @@ MATCH void func_801EF10C(void) {
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
-INCLUDE_ASM(func_801EF3A0);
+MATCH s32 func_801EF3A0(void) {
+    s32 result;
+
+    if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ABILITY) {
+        switch (LOHU(g_Battle.action_id)) {
+            case ABILITY_PROTECT:
+            case ABILITY_PROTECT_SKILL:
+                result = 0;
+                break;
+            case ABILITY_SPEED:
+            case ABILITY_SPEED_SKILL:
+                result = 1;
+                break;
+            case ABILITY_STEROIDS:
+            case ABILITY_MAGIC_BELT:
+            case ABILITY_MIGHT:
+            case ABILITY_MIGHT_SKILL:
+                result = 2;
+                break;
+            default:
+                result = 3;
+                break;
+        }
+    } else {
+        switch (LOHU(g_Battle.action_id)) {
+            case 0x10B:
+                g_Battle.action_id = ABILITY_PROTECT;
+                result             = 0;
+                break;
+            case 0x211:
+                g_Battle.action_id = ABILITY_SPEED;
+                result             = 1;
+                break;
+            case 0x14:
+            case 0x117:
+                g_Battle.action_id = ABILITY_MIGHT;
+                result             = 2;
+                break;
+            default:
+                result = 3;
+                break;
+        }
+    }
+    return result;
+}
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
@@ -345,7 +389,34 @@ MATCH void func_801F00DC(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F0260(void) {
+    s16* angle;
+    u8   count;
+
+    Battle_ProjectRange();
+    func_801F0A84(RANDOM_MASK(3) | 0x20);
+    Effect_SetActorMatrix();
+    func_801F03E0();
+    PopMatrix();
+    g_Task->unk_09 += g_Task->unk_0C;
+    g_Task->unk_10 += 4;
+    g_Task->param.unk_0B += 2;
+    angle                            = &D_1F800004;
+    *angle                           = (g_Task->param.unk_0B & 0x1F) << 7;
+    D_1F800000.view.effect.params[0] = g_Task->timer * g_Task->unk_10 + 0xB0;
+    g_Task->pos.x.fixed              = g_BattleEffectBattler->pos.x.fixed + ((rsin(*angle) * D_1F800000.view.effect.params[0]) >> 3);
+    g_Task->pos.y.fixed              = g_BattleEffectBattler->pos.y.fixed + ((rcos(*angle) * D_1F800000.view.effect.params[0]) >> 3);
+    count                            = g_Task->timer + 1;
+    g_Task->timer                    = count;
+    if (count == 0x10) {
+        g_BattleEffectBattler->param.unk_0B--;
+        func_801E5988();
+    }
+}
+#else
 INCLUDE_ASM(func_801F0260);
+#endif
 
 /* Draw the magic082 shell as two fans of four flat triangles, one above and one below the
  * effect, each shaded from its colour table and linked into the map cell by depth. */
