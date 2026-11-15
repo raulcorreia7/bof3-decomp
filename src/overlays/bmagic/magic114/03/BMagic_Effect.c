@@ -237,7 +237,7 @@ MATCH void func_801EFE70(void) {
     timer              = timer_task->unk_09 - 1;
     timer_task->unk_09 = timer;
     if (timer == 0) {
-        SND_QueueSelectionEffect(0x102);
+        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 2));
         position_task              = g_Task;
         x                          = g_AreaScrollTargetX;
         x_offset                   = position_task->unk_0C;
