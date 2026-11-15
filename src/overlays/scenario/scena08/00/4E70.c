@@ -20,7 +20,7 @@ MATCH void func_801FBA70(void) {
                 index = func_8019601C();
                 if (index != 0xFF) {
                     actor               = &g_SpawnedActors[index];
-                    actor->header.flags = 1;
+                    actor->header.flags = ACTOR_FLAG_IN_USE;
                     actor->type         = 0x57;
                 }
                 g_SceneState.step_05 = 1;

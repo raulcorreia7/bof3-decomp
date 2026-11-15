@@ -22,7 +22,7 @@ MATCH void func_801F8EB0(void) {
             if (g_ScriptVars[0] == 0x8) {
                 g_SceneState.step_05 = 3;
                 SYS_SetFlag(g_SceneFlags, 0x10);
-                Game_RequestAreaChange(0x2D, TO_COORD(0x3C), TO_COORD(0x2E), 0x83);
+                Game_RequestAreaChange(AREA_ID_WYNDIA_WORLD_MAP, TO_COORD(0x3C), TO_COORD(0x2E), AREA_ENTRY_MAP_LOADING | FACING_RIGHT);
                 g_GamePrevSelection = 1;
             }
             break;
@@ -36,7 +36,7 @@ MATCH void func_801F8EB0(void) {
                 g_ScriptVars[0]      = 0x14;
                 SYS_SetFlag(g_SceneFlags, 0x11);
                 g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
-                Game_RequestAreaChange(0x32, TO_COORD(8), TO_COORD(0x26), 0x80);
+                Game_RequestAreaChange(AREA_ID_GENMEL, TO_COORD(8), TO_COORD(0x26), AREA_ENTRY_MAP_LOADING | FACING_UP_LEFT);
             }
             break;
         case 11:
@@ -53,21 +53,21 @@ MATCH void func_801F8EB0(void) {
                     case 1:
                         g_ScriptVars[2] = 0;
                         SYS_SetFlag(g_SceneFlags, 0x13);
-                        Game_RequestAreaChange(0x4E, TO_COORD(0x24), TO_COORD(0xAD), 0x80);
+                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(0x24), TO_COORD(0xAD), AREA_ENTRY_MAP_LOADING | FACING_UP_LEFT);
                         g_GamePrevSelection = 0xFF;
                         break;
                     case 2:
                         g_ScriptVars[2] = 2;
                         SYS_SetFlag(g_SceneFlags, 0x13);
                         func_801C1E3C(3);
-                        Game_RequestAreaChange(0x4E, TO_COORD(0x24), TO_COORD(0xAD), 3);
+                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(0x24), TO_COORD(0xAD), FACING_RIGHT);
                         g_GamePrevSelection = 0xFF;
                         break;
                     case 6:
                         g_ScriptVars[2] = 3;
                         SYS_SetFlag(g_SceneFlags, 0x13);
                         func_801C1E3C(3);
-                        Game_RequestAreaChange(0x4E, TO_COORD(0x24), TO_COORD(0xAD), 3);
+                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(0x24), TO_COORD(0xAD), FACING_RIGHT);
                         g_GamePrevSelection = 0xFF;
                         break;
                 }

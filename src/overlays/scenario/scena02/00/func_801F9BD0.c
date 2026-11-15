@@ -21,7 +21,7 @@ MATCH void func_801F9BD0(void) {
             break;
         case 2:
             if (g_ScriptVars[0] == 0x41) {
-                SND_PlayCue(0x204);
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 4));
                 g_SceneState.step_05 = 3;
             }
             break;
@@ -49,9 +49,9 @@ MATCH void func_801F9BD0(void) {
                 g_ScriptVars[2]      = 1;
                 g_SceneState.step_05 = 7;
                 if (g_PartyFieldOrder[0] == 0) {
-                    Game_RequestAreaChange(0x1B, TO_COORD(0x3B), TO_COORD(0x1A), 0x8A);
+                    Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(0x3B), TO_COORD(0x1A), 0x8A);
                 } else {
-                    Game_RequestAreaChange(0x1B, TO_COORD(0x3B), TO_COORD(0x1A), 0x8B);
+                    Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(0x3B), TO_COORD(0x1A), 0x8B);
                 }
                 g_GamePrevSelection = 0x22;
             }
@@ -66,9 +66,9 @@ MATCH void func_801F9BD0(void) {
                 g_ScriptVars[2]      = 1;
                 g_SceneState.step_05 = 10;
                 if (g_PartyFieldOrder[0] == 0) {
-                    Game_RequestAreaChange(0x1B, TO_COORD(0x3C), TO_COORD(0x48), 0x8A);
+                    Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(0x3C), TO_COORD(0x48), 0x8A);
                 } else {
-                    Game_RequestAreaChange(0x1B, TO_COORD(0x3C), TO_COORD(0x48), 0x8B);
+                    Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(0x3C), TO_COORD(0x48), 0x8B);
                 }
             }
             break;
