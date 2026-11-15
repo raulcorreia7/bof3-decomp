@@ -88,7 +88,7 @@ extern u8 D_80146875;
 void func_801F40D0(s32 unused);
 void func_801F4220(AreaStreakSlot* slot);
 u8   func_801F42E8(void);
-void func_801F4490(WorldPos* pos, s32 vx, s32 vy);
+void func_801F4490(WorldPos* pos, s32 orange_radius, s32 black_radius);
 
 void func_801F40A4(void);
 void GFX_DrawColorFan(s32* pos, s16 origin, s32 flags);
