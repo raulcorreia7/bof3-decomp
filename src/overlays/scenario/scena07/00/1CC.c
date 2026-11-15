@@ -503,17 +503,17 @@ INCLUDE_ASM(func_801F9330);
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F97E0(Scena07Burst* burst) {
-    DVECTOR  inner;
-    DVECTOR  outer;
-    WorldPos point;
-    s32*     point_ptr;
-    POLY_G4* prim;
-    s8       i;
-    s32      angle;
-    s32      shade;
-    s32      tpage;
-    u16      base;
-    u16      color;
+    DVECTOR   inner;
+    DVECTOR   outer;
+    WorldPos  point;
+    WorldPos* pos;
+    POLY_G4*  prim;
+    s8        i;
+    s32       angle;
+    s32       shade;
+    s32       tpage;
+    u16       base;
+    u16       color;
 
     enum {
         BURST_HEIGHT = 0x700 << 16
@@ -532,10 +532,10 @@ NON_MATCHING void func_801F97E0(Scena07Burst* burst) {
     if (base >= 0x100) {
         base = 0xFF;
     }
-    shade     = 0x80;
-    i         = 0;
-    point_ptr = (s32*)&point;
-    angle += 0x80;
+    shade = 0x80;
+    i     = 0;
+    pos   = &point;
+    angle += 128;
     do {
         point.x.fixed = burst->x + (rcos((u16)angle) << 5);
         point.y.fixed = burst->y + (rsin((u16)angle) << 5);
@@ -552,9 +552,9 @@ NON_MATCHING void func_801F97E0(Scena07Burst* burst) {
         prim->y1 = outer.vy;
         setRGB0(prim, base, base, base);
         setRGB1(prim, base, base, base);
-        Area_ProjectPoint(point_ptr, &inner);
+        Area_ProjectPoint((s32*)pos, &inner);
         point.z.fixed = burst->z + BURST_HEIGHT;
-        Area_ProjectPoint(point_ptr, &outer);
+        Area_ProjectPoint((s32*)pos, &outer);
         prim->x2 = inner.vx;
         prim->y2 = inner.vy;
         prim->x3 = outer.vx;
@@ -572,7 +572,7 @@ NON_MATCHING void func_801F97E0(Scena07Burst* burst) {
         setRGB3(prim, color, color, color);
         Area_AddCellPrim(point.x.fixed, point.y.fixed, 0, sizeof(POLY_G4));
         i++;
-        angle += 0x80;
+        angle += 128;
     } while (i < 32);
 }
 #else
