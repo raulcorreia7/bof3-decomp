@@ -1,7 +1,7 @@
 #include "area042_13.h"
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801F3280(u16 x1, u16 y1, s16 radius1, u16 angle1, u16 x2, u16 y2, s16 radius2, u16 angle2) {
+NON_MATCHING void func_801F3280(s16 x1, s16 y1, s16 radius1, u16 angle1, s16 x2, s16 y2, s16 radius2, u16 angle2) {
     POLY_G4* prim;
     u8*      colour;
 

@@ -61,7 +61,9 @@ extern u8 D_801F56D0[];
 extern u8 D_80144FC4[];
 
 void func_801F2DC4(void);
-void func_801F2E78(void* arg0, void* arg1);
+void func_801F2E78(s32* first, s32* second);
+void func_801F30C0(s32 x, s32 y, s16 radius, u16 angle);
+void func_801F3280(s16 x1, s16 y1, s16 radius1, u16 angle1, s16 x2, s16 y2, s16 radius2, u16 angle2);
 
 s32  func_801F4188(void);
 void func_801F4B0C(s32, s32, s32, s32, s32);
