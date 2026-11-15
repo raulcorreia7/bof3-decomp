@@ -32,7 +32,7 @@ MATCH void func_801F8EB0(void) {
             break;
         case 10:
             if (g_ScriptVars[0] == 0xC) {
-                g_SceneState.step_05 = 0xB;
+                g_SceneState.step_05 = 11;
                 g_ScriptVars[0]      = 0x14;
                 SYS_SetFlag(g_SceneFlags, 0x11);
                 g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
@@ -42,7 +42,7 @@ MATCH void func_801F8EB0(void) {
         case 11:
             if (g_ScriptVars[0] == 0x1C) {
                 Area_StartScrollRoute(0);
-                g_SceneState.step_05 = 0xC;
+                g_SceneState.step_05 = 12;
             }
             break;
         case 12:
@@ -54,21 +54,21 @@ MATCH void func_801F8EB0(void) {
                         g_ScriptVars[2] = 0;
                         SYS_SetFlag(g_SceneFlags, 0x13);
                         Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(36), TO_COORD(173), AREA_ENTRY_MAP_LOADING | FACING_UP_LEFT);
-                        g_GamePrevSelection = 0xFF;
+                        g_GamePrevSelection = GAME_NONE;
                         break;
                     case 2:
                         g_ScriptVars[2] = 2;
                         SYS_SetFlag(g_SceneFlags, 0x13);
                         func_801C1E3C(3);
                         Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(36), TO_COORD(173), FACING_RIGHT);
-                        g_GamePrevSelection = 0xFF;
+                        g_GamePrevSelection = GAME_NONE;
                         break;
                     case 6:
                         g_ScriptVars[2] = 3;
                         SYS_SetFlag(g_SceneFlags, 0x13);
                         func_801C1E3C(3);
                         Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(36), TO_COORD(173), FACING_RIGHT);
-                        g_GamePrevSelection = 0xFF;
+                        g_GamePrevSelection = GAME_NONE;
                         break;
                 }
             }

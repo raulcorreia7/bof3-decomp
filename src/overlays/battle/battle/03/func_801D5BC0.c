@@ -18,7 +18,7 @@ MATCH u8 func_801D5BC0(void) {
             g_Game.members[index].header.step         = 5u;
             g_Game.members[index].unk_04              = 0u;
             g_Game.members[index].unk_03              = 0u;
-            g_Game.members[index].u.turn.target_flags = 0x11u;
+            g_Game.members[index].u.turn.target_flags = BATTLE_HIT_HP | BATTLE_HIT_HP_LANDED;
             Battle_SetSlotPending(index);
         }
     }
@@ -33,7 +33,7 @@ MATCH u8 func_801D5BC0(void) {
             ENEMY_COMBATANT(index).header.step       = 5u;
             ENEMY_COMBATANT(index).unk_04            = 0u;
             ENEMY_COMBATANT(index).unk_03            = 0u;
-            ENEMY_COMBATANT(index).turn.target_flags = 0x11u;
+            ENEMY_COMBATANT(index).turn.target_flags = BATTLE_HIT_HP | BATTLE_HIT_HP_LANDED;
             Battle_SetSlotPending(index);
         }
     }

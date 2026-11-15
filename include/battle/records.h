@@ -248,6 +248,9 @@ ASSERT_OFFSET(BattleEffect, unk_08, 0x08);
 ASSERT_OFFSET(BattleEffect, unk_2E, 0x2E);
 ASSERT_OFFSET(BattleEffect, unk_30, 0x30);
 ASSERT_OFFSET(BattleEffect, unk_32, 0x32);
+
+/* Battle effect work records (stride 0x78). */
+extern BattleEffect g_BattleEffects[];
 ASSERT_OFFSET(BattleEffect, handler_index, 0x05);
 ASSERT_OFFSET(BattleEffect, unk_27, 0x27);
 ASSERT_OFFSET(BattleEffect, unk_29, 0x29);
