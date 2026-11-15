@@ -267,7 +267,6 @@ INCLUDE_ASM(func_801D18CC);
 #include "shared/Area_SeedSparkEmitters.h"
 
 MATCH void func_801D19A0(void){AREA_SEED_SPARK_EMITTERS(D_801D27B0)}
-
 /* func_801D1A60 */
 #include "shared/Area_StepSparkEmitters.h"
 
