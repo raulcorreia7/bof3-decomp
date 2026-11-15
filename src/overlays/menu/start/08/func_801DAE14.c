@@ -3,27 +3,28 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DAE14(u16 buttons) {
-    s32 count;
-    /* FAKE: pin keeps the row offset in the retail a3 home. */
-    FAKE_REG(s32, offset, "a3");
+    s32          count;
+    u8           n;
+    s32          offset;
     s32          i;
     s32          index;
     s32          j;
     volatile u8* flags;
     volatile u8* total;
 
-    count  = Party_CountOrder(PARTY_ORDER_FIELD);
-    flags  = &D_801484EA;
-    *flags = 0;
-    offset = 0;
+    count      = Party_CountOrder(PARTY_ORDER_FIELD);
+    n          = count;
+    D_801484EA = 0;
+    flags      = &D_801484EA;
+    offset     = 0;
     for (i = 0; i < CHARACTER_COUNT; i++) {
         if (((u8*)&g_Characters[0].unk_07)[offset] & 1) {
-            for (index = 0; index < (count & BYTE_MASK); index++) {
+            for (index = 0; index < n; index++) {
                 if (g_Characters[i].character_id == g_PartyFieldOrder[index]) {
                     break;
                 }
             }
-            if (index == (count & BYTE_MASK)) {
+            if (index == n) {
                 D_801ED690[(*flags)++] = g_Characters[i].character_id;
             }
         }
@@ -38,7 +39,7 @@ NON_MATCHING void func_801DAE14(u16 buttons) {
     g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.y   = 0x3B;
     D_80148500                                          = D_801ED690;
 
-    for (i = 0; i < (count & BYTE_MASK); i++) {
+    for (i = 0; i < n; i++) {
         D_801ED694[i][0] = 1;
     }
     for (; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {

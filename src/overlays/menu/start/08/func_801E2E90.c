@@ -20,24 +20,21 @@ NON_MATCHING void func_801E2E90(s32 x, s32 y, s32 row_index) {
     LINE_F2*      line;
     s32           index;
     u8            icon;
-    u8*           sel;
+    u32           sel = (u32)&g_WindowStyle;
 
     table = *(MenuPanelRows*)&D_801D0E28;
     tail  = *(PanelTail*)&D_801D0EA8;
-    sel   = &g_WindowStyle;
     index = row_index & BYTE_MASK;
     row   = table.rows[index];
 
-    UI_DrawWindow(x & HALF_MASK, y & HALF_MASK, 84, 16, 0, sel[0]);
+    UI_DrawWindow(x & HALF_MASK, y & HALF_MASK, 84, 16, 0, *(u8*)sel);
     icon = *row;
     row++;
     UI_DrawText((s16)((x + 32) - icon * 4), (s16)(y + 1), 0, 6U, row);
     if (index != 1) {
-        Message_GetText((index + 0xCA));
-    } else if (sel[4] == 0) {
-        Message_GetText((index + 0xCA) & HALF_MASK);
+        Message_GetText((u8)row_index + 0xCA);
     } else {
-        Message_GetText(0xD0);
+        Message_GetText((u16)(*(u8*)(sel + 4) == 0 ? ((u8)row_index + 0xCA) : 0xD0));
     }
 
     line = (LINE_F2*)g_GfxPrimCursor;

@@ -1,8 +1,8 @@
 #include "shop_00.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801E05E0(void) {
+MATCH void func_801E05E0(void) {
     s32 pad;
+    s32 cursor_y;
     u16 cue;
     u32 scroll;
     u32 scroll_hi;
@@ -13,10 +13,11 @@ NON_MATCHING void func_801E05E0(void) {
     u8  new_scroll;
     u8  old;
 
+    D_80148340 = MEM(s16, D_801CA71E + (D_8014546C[D_801483CB] * 0x14));
     D_80148624 = 1;
     D_80148628 = D_801483C4 + 7;
-    D_80148340 = *(s16*)(D_801CA71E + (D_8014546C[D_801483CB] * 0x14));
-    D_8014862A = D_801483C6 + (((D_801483CB - D_801483CA) * 0xD) + 0x1A);
+    cursor_y   = ((D_801483CB - D_801483CA) * 0xD) + 0x1A;
+    D_8014862A = cursor_y + D_801483C6;
     pad        = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown | PADL1 | PADR1));
     old        = D_801483CB;
     if (pad & PADLup) {
@@ -43,7 +44,7 @@ NON_MATCHING void func_801E05E0(void) {
         } else {
             D_801483CB -= 9;
             new_scroll = D_801483CA - 9;
-            goto block_22; /* shared confirm join */
+            goto block_22; /* shared scroll join */
         }
     } else if (pad & 8) {
         scroll_hi = D_801483CA & BYTE_MASK;
@@ -51,7 +52,8 @@ NON_MATCHING void func_801E05E0(void) {
             D_801483CB = 0x7F;
         } else {
             if (scroll_hi >= 0x6FU) {
-                D_801483CB = (D_801483CB + 0x77) - D_801483CA;
+                scroll     = D_801483CB + 0x77;
+                D_801483CB = scroll - D_801483CA;
                 new_scroll = 0x77;
             } else {
                 D_801483CB += 9;
@@ -66,27 +68,24 @@ NON_MATCHING void func_801E05E0(void) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
     if (D_801483CD == 0) {
-        if (g_InputMasks[MENU_INPUT_CONFIRM] & g_InputPressed) {
-            slot     = D_8014546C[D_801483CB];
-            item_ptr = &g_Characters[D_801483A6].abilities.skill[D_801483A7];
+        if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+            item_ptr = (u8*)&g_Characters[D_801483A6] + DECOMP_OFFSETOF(Character, abilities.skill) + D_801483A7;
+            slot     = D_8014546C[*cursor_ptr];
             if ((slot != 0) || (*item_ptr != 0)) {
-                swapped                = *item_ptr;
-                *item_ptr              = slot;
-                D_8014546C[D_801483CB] = swapped;
-                cue                    = 0x103;
-                goto block_32; /* shared confirm join */
+                swapped                 = *item_ptr;
+                *item_ptr               = slot;
+                D_8014546C[*cursor_ptr] = swapped;
+                cue                     = 0x103;
+                goto block_32; /* shared cue join */
             }
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
             return;
         }
         cue = 0x106;
-        if (g_InputMasks[MENU_INPUT_CANCEL] & g_InputPressed) {
+        if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         block_32:
             SND_PlayCue(cue);
             g_MenuStep.state -= 1;
         }
     }
 }
-#else
-INCLUDE_ASM(func_801E05E0);
-#endif
