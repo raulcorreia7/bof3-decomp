@@ -29,7 +29,35 @@ MATCH void func_801170A4(void) {
 
 INCLUDE_ASM(func_801170D8);
 
-INCLUDE_ASM(func_801172D0);
+MATCH void func_801172D0(void) {
+    Actor*      actor;
+    AreaSprite* work;
+    u8          i;
+    s32         speed;
+    u16         angle;
+
+    D_801181DC = MEM_PTR(AreaSprite, AREA_WORK);
+    i          = 0;
+    do {
+        actor                 = g_Task;
+        work                  = D_801181DC;
+        work->origin.x        = actor->pos.x.fixed;
+        work->origin.y        = actor->pos.y.fixed;
+        work->origin.z        = actor->pos.z.fixed;
+        speed                 = RANDOM_MASK(0x7F);
+        angle                 = RANDOM_MASK(ANGLE_90 - 1) + ANGLE_45;
+        D_801181DC->normal.vx = ((speed << 2) * rcos(angle)) >> 7;
+        D_801181DC->normal.vy = ((speed << 2) * rsin(angle)) >> 7;
+        D_801181DC->flags     = 1;
+        D_801181DC->flags_01  = 0;
+        D_801181DC->half_size = 0;
+        D_801181DC->flags_03  = 0x40;
+        D_801181DC->unk_26    = 7;
+        D_801181DC->flags_02  = 4;
+        i++;
+        D_801181DC++;
+    } while (i < 16);
+}
 
 MATCH u8 func_80117410(void) {
     u8  scratch[32];
