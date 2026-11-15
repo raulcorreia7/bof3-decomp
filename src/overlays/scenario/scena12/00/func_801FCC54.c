@@ -1,0 +1,46 @@
+#include "scena12_00.h"
+#include "area/map.h"
+
+#if BOF3_USE_ASM
+__asm__(".include \"include/match/macro.inc\"\n");
+#endif
+
+MATCH s8 func_801FCC54(s32 x, s32 y) {
+    SCENE_PROBE_POSITION(D_801FD228, 4, D_801FD23C);
+}
+
+MATCH s32 func_801FCCBC(void) {
+    Game_SetScriptActive();
+    g_ScriptVars[0] = 0;
+    D_80146865      = 0;
+    D_80146866      = 0;
+    D_80146867      = 0;
+    if (g_Game.members[0].chr.character_id != CHAR_ID_MOMO) {
+        D_80146875 = 0;
+        D_80146874 = 5;
+        return 1;
+    }
+    D_80146875 = 5;
+    D_80146874 = 5;
+    return 1;
+}
+
+MATCH s32 func_801FCD38(void) {
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 9));
+    return -1;
+}
+
+MATCH s32 func_801FCD58(void) {
+    if (SYS_TestFlag(g_SceneFlags, 42) == 0) {
+        Game_SetScriptActive();
+        g_ScriptVars[0]       = 0;
+        g_ScriptVars[1]       = 0;
+        g_ScriptVars[3]       = 0;
+        g_SceneState.step_05  = 0;
+        g_SceneState.state_04 = 7;
+        Area_SetCellPalette(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
+        return 1;
+    }
+    return -1;
+}
