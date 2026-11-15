@@ -17,7 +17,7 @@ MATCH void func_801F3C24(void) {
                 event_mode       = &g_SceneEventMode;
                 *event_mode      = SCENE_EVENT_NONE;
                 g_SceneEventStep = 0;
-                SYS_SetFlag((u8*)event_mode + 0x63D, 70);
+                SYS_SetFlag(event_mode + 0x63D, 70);
                 func_8019FA28(149, TO_COORD(28), TO_COORD(12), 128);
             }
             break;
