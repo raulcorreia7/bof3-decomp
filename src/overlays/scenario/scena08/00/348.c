@@ -472,12 +472,8 @@ MATCH void func_801F81F4(u16 value) {
 }
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801F823C(s32 x_arg, s32 y_arg, s32 half_height, s32 half_width) {
+NON_MATCHING void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
     POLY_GT4* prim;
-    s16       x;
-    s16       y;
-    s16       height;
-    s16       width;
     s16       row;
     s32       half;
     s32       skew;
@@ -485,11 +481,7 @@ NON_MATCHING void func_801F823C(s32 x_arg, s32 y_arg, s32 half_height, s32 half_
     s32       v;
     u8        i;
 
-    x      = x_arg;
-    y      = y_arg;
-    height = half_height;
-    width  = half_width;
-    row    = height - 1;
+    row = height - 1;
     for (i = 0; i < height * 2; i++) {
         half = SquareRoot0(height * height - row * row);
         skew = (width * rsin(D_801FE9EC[i])) >> 12;
@@ -558,21 +550,15 @@ MATCH void func_801F8534(void) {
 }
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801F85F0(s32 x_arg, s32 y_arg, s32 radius_arg) {
+NON_MATCHING void func_801F85F0(s16 x, s16 y, s16 radius) {
     POLY_GT4* prim;
-    s16       radius;
-    s16       x;
-    s16       y;
     u16       angle;
     s32       a;
     s32       b;
     u8        count;
 
-    radius = radius_arg;
-    x      = x_arg;
-    y      = y_arg;
-    count  = 0;
-    angle  = 0xFC00;
+    count = 0;
+    angle = 0xFC00;
     do {
         prim = (POLY_GT4*)g_GfxPrimCursor;
         SetPolyGT4(prim);
