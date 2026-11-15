@@ -10,7 +10,37 @@ INCLUDE_ASM(func_801F6FAC);
 
 INCLUDE_ASM(func_801F7068);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F719C(void) {
+    u8 i;
+
+    for (i = 0; i < 3; i++) {
+        if (((g_Task->option_flags >> i) & 1) == 0) {
+            func_80159B9C(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)D_801FE7CC[i].width, (u8)D_801FE7CC[i].height);
+        }
+    }
+    if ((g_Task->option_flags & 1) == 0) {
+        g_Task->screen_x = (u16)D_801FE7CC[0].x + D_801FE804[0];
+        g_Task->screen_y = (u16)D_801FE7CC[0].y + D_801FE804[1];
+        Actor_StepAnimLoop();
+        Area_AddActor();
+    }
+    if (((g_Task->option_flags >> 1) & 1) == 0) {
+        sprintf(g_UiFormatBuffer, D_801F6C04, Item_GetRecord(0, g_Task->unk_06));
+        UI_DrawText((s16)(D_801FE7CC[1].x + 4), (s16)(D_801FE7CC[1].y + 2), 0, 8, g_UiFormatBuffer);
+        sprintf(g_UiFormatBuffer, D_801F6C04 + 4, Item_Count(0, g_Task->unk_06, 0) & HALF_MASK);
+        UI_DrawText((s16)(D_801FE7CC[1].x + 72), (s16)(D_801FE7CC[1].y + 2), 0, 2, g_UiFormatBuffer);
+    }
+    func_801F781C((u16)D_801FE7CC[2].x + 1, (u16)D_801FE7CC[2].y + 1, 128, 104);
+    if (g_Task->unk_0A != 0) {
+        g_Task->unk_0A--;
+    } else if (g_InputHeld != 0) {
+        g_Task->header.mode = 3;
+    }
+}
+#else
 INCLUDE_ASM(func_801F719C);
+#endif
 
 INCLUDE_ASM(func_801F73EC);
 
