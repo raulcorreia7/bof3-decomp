@@ -5,6 +5,7 @@
 
 /* FAKE: g_Battle.ui_step as a global of its own; the sites that use it match only with a separate symbol. */
 extern u8       g_BattleUIStep;
+extern u16      g_BattleEffectPalette[256];
 extern u16      D_801463B0;
 extern void     func_801EF180(s32 arg);
 extern void     func_801EF3B4(s32 shade);
