@@ -22,28 +22,37 @@ INCLUDE_ASM(func_801F7028);
 
 /* Averages each working palette colour's red, green and blue channels into a
  * grey level and keeps the mask bit, then marks the palette for upload. */
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F7960(void) {
-    u8   row;
-    u16  col;
-    u16* p;
-    u16  color;
-    u32  grey;
+MATCH void func_801F7960(void) {
+    u16* cell;
+    u32  row;
+    u32  col;
+    u32  row_base;
+    u32  color;
+    u32  red;
+    u32  rgb;
+    u32  average;
+    u32  packed;
 
-    for (row = 0; row < AREA_PALETTE_ROWS; row++) {
-        p = (u16*)(AREA_PALETTE_WORK + row * AREA_PALETTE_ROW);
-        for (col = 0; col < AREA_PALETTE_COLORS; col++) {
-            color = p[col];
-            grey  = (color & 0x1F) + ((color >> 5) & 0x1F) + ((color >> 10) & 0x1F);
-            grey /= 3;
-            p[col] = (color & 0x8000) | (grey << 10) | (grey << 5) | grey;
-        }
-    }
+    row = 0;
+    do {
+        col      = 0;
+        row_base = AREA_PALETTE_WORK + (row & 0xFF) * AREA_PALETTE_ROW;
+        do {
+            cell    = MEM_PTR(u16, (col & 0xFFFF) * 2 + row_base);
+            color   = *cell;
+            red     = color & 0x1F;
+            rgb     = color & 0xFFFF;
+            average = (red + ((rgb >> 5) & 0x1F) + ((rgb >> 10) & 0x1F)) / 3;
+            packed  = color & 0x8000;
+            packed |= average << 10;
+            packed |= average << 5;
+            *cell = average | packed;
+            col++;
+        } while ((col & 0xFFFF) < AREA_PALETTE_COLORS);
+        row++;
+    } while ((row & 0xFF) < AREA_PALETTE_ROWS);
     g_GfxPalettePending = 1;
 }
-#else
-INCLUDE_ASM(func_801F7960);
-#endif
 
 #include "overlays/scenario/Scene_SpawnActor.h"
 

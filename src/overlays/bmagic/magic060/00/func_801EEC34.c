@@ -11,9 +11,9 @@ MATCH void func_801EEC34(void) {
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EECA4(void) {
+MATCH void func_801EECA4(void) {
     PartyMember* work;
+    PartyMember* work2;
     u32          slot;
 
     slot                               = Battle_AllocEffect(1, 18) & BYTE_MASK;
@@ -21,16 +21,13 @@ NON_MATCHING void func_801EECA4(void) {
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].target.party = work;
     slot                               = Battle_AllocEffect(1, 18) & BYTE_MASK;
-    work                               = g_Task;
+    work2                              = g_Task;
     g_BattleEffects[slot].header.mode  = 1;
-    g_BattleEffects[slot].target.party = work;
+    g_BattleEffects[slot].target.party = work2;
     func_801EEF50();
     g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
 }
-#else
-INCLUDE_ASM(func_801EECA4);
-#endif
 
 MATCH void func_801EED68(void) {
     u32          slot;
@@ -227,6 +224,56 @@ MATCH void func_801EF76C(u8* text, s32 x, s32 y) {
     }
 }
 
-INCLUDE_ASM(func_801EF924);
+MATCH void func_801EF924(u8* text, s32 x, s32 y) {
+    POLY_FT4* prim;
+    s32       mode;
+    s32       x1;
+    s32       y1;
+    s32       i;
+    s32       code;
+    s16       u;
+    s16       v;
+
+    if (GetGraphType() == 1) {
+        mode = 0x25;
+    } else if (GetGraphType() == 2) {
+        mode = 0x25;
+    } else {
+        mode = 0x15;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mode, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    if (*text == 0) {
+        return;
+    }
+    i  = 0;
+    y1 = y + 0xC;
+    while (*text != 0 && i < 8) {
+        prim = GFX_CURSOR(POLY_FT4);
+        SetPolyFT4(prim);
+        x1 = x + 8;
+        setXY4(prim, x, y, x1, y, x, y1, x1, y1);
+        setRGB0(prim, 0x80, 0x80, 0x80);
+        setTPage(prim, 0, 1, 0x3C0, 0);
+        setClut(prim, 0, 0x1E0);
+        code     = *text - 0x30;
+        u        = (code % 31) * 8;
+        v        = (code / 31) * 12 + 0x48;
+        prim->u0 = u;
+        prim->v0 = v;
+        prim->v1 = v;
+        prim->u1 = u + 8;
+        prim->u2 = u;
+        prim->v2 = v + 0xC;
+        prim->u3 = u + 8;
+        prim->v3 = v + 0xC;
+        if (*text != 0xFF) {
+            GFX_AddPrim(2, sizeof(POLY_FT4));
+        }
+        i++;
+        text++;
+        x = x1;
+    }
+}
 
 INCLUDE_ASM(func_801EFB00);
