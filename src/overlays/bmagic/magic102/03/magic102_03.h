@@ -3,6 +3,8 @@
 
 /* The bmagic/magic102/03 overlay. Only this image includes the file. */
 
+#define BATTLE_PARTY_CELL_RECORD
+
 #include "overlays/bmagic/bmagic.h"
 #include "slus/exports.h"
 #include "slus/functions.h"
@@ -11,6 +13,8 @@
 extern SVECTOR D_1F800014[];
 /* D_1F800034 read unsigned: the screen x and y RotTransPers writes. */
 extern u16     D_1F800034_U16[2];
+
+extern u16 g_AreaCellGrid[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
 
 s32 func_801F0ADC(s32 x, s32 y);
 
@@ -31,6 +35,7 @@ extern u8  D_801F0CC0;
 extern s16 D_801F0CC4;
 extern s16 D_801F0CC8;
 /* Per facing (D_801F0CBC >> 1): the divisor of the rise at each step from the target cell. */
+extern u8  D_801F0C94[8];
 extern u8  D_801F0C9C[2][15];
 extern s8  D_801F0CCC[17][15];
 extern s8  D_801F0DCC[16][15];

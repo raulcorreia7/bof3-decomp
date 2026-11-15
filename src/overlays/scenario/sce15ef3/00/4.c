@@ -267,13 +267,67 @@ INCLUDE_ASM(func_801D18CC);
 #include "shared/Area_SeedSparkEmitters.h"
 
 MATCH void func_801D19A0(void){AREA_SEED_SPARK_EMITTERS(D_801D27B0)}
-
 /* func_801D1A60 */
 #include "shared/Area_StepSparkEmitters.h"
 
 #include "overlays/scenario/Scene_DrawRedGradient.h"
 
-INCLUDE_ASM(func_801D1D20);
+MATCH void func_801D1D20(WorldPos* pos, s32* step, u8 red, u8 green) {
+    FAKE_STACK_PADS(u8, 0x10); /* FAKE: retain the retail frame and projected-point spacing. */
+
+    s32      point[3];
+    s32      point2[3];
+    SVECTOR  screen[2];
+    POLY_G4* prim;
+    s32      angle;
+    u16      angle16;
+    u8       i;
+
+    GFX_AddDitheredDrawMode(1, GetTPage(0, 1, 896, 256) & HALF_MASK);
+
+    angle    = 65024;
+    point[0] = pos->x.fixed + ((((rcos((u16)angle) * 5) << 6) >> 4));
+    point[1] = pos->y.fixed + ((((rsin((u16)angle) * 5) << 6) >> 4));
+    point[2] = pos->z.fixed;
+    Area_ProjectPoint(point, (DVECTOR*)&screen[0]);
+    point2[0] = step[0] + ((((rcos((u16)angle) * 5) << 6) >> 4));
+    point2[1] = step[1] + ((((rsin((u16)angle) * 5) << 6) >> 4));
+    point2[2] = step[2];
+    Area_ProjectPoint(point2, (DVECTOR*)&screen[1]);
+
+    i = 0;
+    do {
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        prim->x0 = screen[0].vx;
+        prim->y0 = screen[0].vy;
+        prim->x1 = screen[1].vx;
+        prim->y1 = screen[1].vy;
+
+        angle += 128;
+        angle16  = (u16)angle;
+        point[0] = pos->x.fixed + ((((rcos(angle16) * 5) << 6) >> 4));
+        point[1] = pos->y.fixed + ((((rsin(angle16) * 5) << 6) >> 4));
+        point[2] = pos->z.fixed;
+        Area_ProjectPoint(point, (DVECTOR*)&screen[0]);
+        point2[0] = step[0] + ((((rcos(angle16) * 5) << 6) >> 4));
+        point2[1] = step[1] + ((((rsin(angle16) * 5) << 6) >> 4));
+        point2[2] = step[2];
+        Area_ProjectPoint(point2, (DVECTOR*)&screen[1]);
+
+        prim->x2 = screen[0].vx;
+        prim->y2 = screen[0].vy;
+        prim->x3 = screen[1].vx;
+        prim->y3 = screen[1].vy;
+        setRGB0(prim, red, red, red);
+        setRGB1(prim, green, green, green);
+        setRGB2(prim, red, red, red);
+        setRGB3(prim, green, green, green);
+        GFX_AddPrim(1, sizeof(POLY_G4));
+        i++;
+    } while (i < 16);
+}
 
 INCLUDE_ASM(func_801D1FF8);
 
