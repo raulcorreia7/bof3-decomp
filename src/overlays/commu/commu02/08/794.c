@@ -92,7 +92,7 @@ NON_MATCHING void func_801D15A4(void) {
             }
             D_801F294E += 1;
         } else {
-            SND_PlayCue(0x102);
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
             D_801DB0C4 = 2;
         }
     }
