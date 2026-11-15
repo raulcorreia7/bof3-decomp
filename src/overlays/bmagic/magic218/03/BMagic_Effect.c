@@ -179,17 +179,18 @@ MATCH void func_801EF250(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING bool func_801EF70C(EnemyBattler* enemy) {
+MATCH bool func_801EF70C(EnemyBattler* enemy) {
     s32 dx;
     s32 dy;
-    s32 ty;
+    s32 horizontal;
+    s32 radius;
+    s32 record_y;
 
-    dx = (enemy->pos.x.fixed >> 9) - (g_Task->pos.x.fixed >> 9);
-    ty = g_Task->pos.y.fixed >> 9;
-    dy = (enemy->pos.y.fixed >> 9) - ty;
-    return dx * dx + dy * dy <= D_1F800000.view.effect.params[0] * D_1F800000.view.effect.params[0];
+    dx         = (enemy->pos.x.fixed >> 9) - (g_Task->pos.x.fixed >> 9);
+    record_y   = g_Task->pos.y.fixed >> 9;
+    dy         = (enemy->pos.y.fixed >> 9) - record_y;
+    horizontal = dx * dx + dy * dy;
+    radius     = D_1F800000.view.effect.params[0];
+    record_y   = radius * radius;
+    return horizontal <= record_y;
 }
-#else
-INCLUDE_ASM(func_801EF70C);
-#endif

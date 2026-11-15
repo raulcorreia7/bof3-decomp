@@ -51,7 +51,7 @@ MATCH void Menu_DrawEquipChoiceWindow(MenuPanelTask* task) {
     }
     task->flags = g_MenuEquipChoiceIds[task->unk_0B];
 
-    UI_DrawWindow(task->pos.x + 3, task->pos.y + 3, 153, 154, 0, CHARACTER_BLOCK->window_style);
+    UI_DrawWindow(task->pos.x + 3, task->pos.y + 3, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_WINDOW_HEIGHT, 0, CHARACTER_BLOCK->window_style);
     first  = func_801AFD10(&task->unk_0A, &scroll_y, &scroll_rows, (u8*)&task->u.addr.unk_10);
     ids    = &g_MenuEquipChoiceIds[first];
     counts = &g_MenuEquipChoiceCounts[first];
@@ -70,8 +70,8 @@ MATCH void Menu_DrawEquipChoiceWindow(MenuPanelTask* task) {
         y += 13;
     }
 
-    UI_DrawWindow(task->pos.x + 3, task->pos.y + 3, 153, 20, 0, CHARACTER_BLOCK->window_style);
-    UI_DrawWindow(task->pos.x + 3, task->pos.y + 146, 153, 8, 0, CHARACTER_BLOCK->window_style);
+    UI_DrawWindow(task->pos.x + 3, task->pos.y + 3, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_TOP_HEIGHT, 0, CHARACTER_BLOCK->window_style);
+    UI_DrawWindow(task->pos.x + 3, task->pos.y + 146, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_BOTTOM_HEIGHT, 0, CHARACTER_BLOCK->window_style);
     title   = &g_MenuEquipTitles[task->unk_08];
     length  = Game_ReadCommand(*title);
     title_x = length * 4 - 78;

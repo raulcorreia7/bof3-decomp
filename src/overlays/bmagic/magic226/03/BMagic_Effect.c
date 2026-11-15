@@ -283,8 +283,7 @@ MATCH void func_801F055C(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F061C(void) {
+MATCH void func_801F061C(void) {
     PartyMember* src;
     PartyMember* work;
     u8           count;
@@ -292,17 +291,14 @@ NON_MATCHING void func_801F061C(void) {
     src               = g_BattleEffectBattler;
     work              = g_Task;
     work->pos.x.fixed = src->pos.x.fixed;
-    count             = work->unk_09 + 1;
-    work->unk_09      = count;
-    work->pos.z.fixed -= work->unk_14;
     work->pos.y.fixed = src->pos.y.fixed;
+    work->pos.z.fixed -= work->unk_14;
+    count        = work->unk_09 + 1;
+    work->unk_09 = count;
     if (count == 24) {
         g_Task->header.step++;
     }
 }
-#else
-INCLUDE_ASM(func_801F061C);
-#endif
 
 MATCH void func_801F068C(void) {
     PartyMember* battler;

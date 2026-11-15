@@ -44,10 +44,10 @@ MATCH void EMI_CdOnReady(u8 status, u8* result) {
         }
 
         transfer_size = g_EmiBytesLeft;
-        if (transfer_size >= 0x801) {
-            pending                                = transfer_size - 0x800;
+        if (transfer_size > EMI_SECTOR_SIZE) {
+            pending                                = transfer_size - EMI_SECTOR_SIZE;
             g_EmiBytesLeft                         = pending;
-            ((u32*)&g_EmiStreamState)[0x21 + slot] = 0x800;
+            ((u32*)&g_EmiStreamState)[0x21 + slot] = EMI_SECTOR_SIZE;
         } else {
             ((u32*)&g_EmiStreamState)[0x21 + slot] = transfer_size;
             g_EmiBytesLeft                         = 0;

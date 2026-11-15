@@ -5,6 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #define GAME_SCRATCH_BASE_SCALAR
+#include "game/spawn.h"
 #include "overlays/area/world01.h"
 #include "area/spad.h"
 

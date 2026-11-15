@@ -303,9 +303,10 @@ MATCH void func_801EFC54(void) {
         return;
     }
     copy->pos.x.fixed = g_BattleSelectedActor->pos.x.fixed;
-    /* FAKE: Re-read the cell after the store; the compiler shares one load. */
+    /* FAKE: Re-read the cell after the store; the compiler shares one load (without it 0xC8 vs 0xD4 bytes). */
     FAKE_BARRIER();
     copy->pos.y.fixed = g_BattleSelectedActor->pos.y.fixed;
+    /* FAKE: keeps the cell read for the final header step after the position stores; plain C reads it first (0xC8 vs 0xD4 bytes). */
     FAKE_BARRIER();
     record            = g_BattleEffectBattler;
     delta             = record->pos.z.fixed - g_BattleSelectedActor->pos.z.fixed;

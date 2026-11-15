@@ -671,16 +671,16 @@ MATCH s32 func_801FDC70(void) {
     if (SYS_TestFlag(g_SceneFlags, 0x33) != 0) {
         return -1;
     }
-    if (D_80145F09 != 4) {
+    if (g_Game.members[0].chr.character_id != CHAR_ID_REI) {
         Game_SetScriptActive();
-        D_80146875 = 0x34;
-        D_80146874 = 0x0F;
+        g_SceneState.step_05  = 0x34;
+        g_SceneState.state_04 = 0x0F;
         return 1;
     }
     *g_ScriptVars = 0;
     Game_SetScriptActive();
-    D_80146875 = 0x32;
-    D_80146874 = 0x0F;
+    g_SceneState.step_05  = 0x32;
+    g_SceneState.state_04 = 0x0F;
     return 1;
 }
 

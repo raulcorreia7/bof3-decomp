@@ -19,7 +19,7 @@ MATCH void Fairy_StartJobs(void) {
 
     record = 0;
     task   = 0;
-    for (; record < 60; record++) {
+    for (; record < FAIRY_VILLAGE_COUNT; record++) {
         if (g_FairyJobs[record].active == 0) {
             continue;
         }

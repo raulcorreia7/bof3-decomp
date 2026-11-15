@@ -146,7 +146,29 @@ MATCH void func_801EF2A4(void) {
     g_Task->header.step += 1;
 }
 
-INCLUDE_ASM(func_801EF3C8);
+MATCH void func_801EF3C8(void) {
+    PartyMember* battler;
+
+    battler = g_Task;
+    g_Task  = &g_Game.members[g_Battle.active_battler];
+    func_801F0EEC(1, 2, (0x80 - battler->unk_09) & BYTE_MASK);
+    func_801F0EEC(0, 1, (0x80 - battler->unk_09) & BYTE_MASK);
+    func_801F0EEC(3, 2, battler->unk_09);
+    func_801F0EEC(2, 1, battler->unk_09);
+    if (battler->unk_09 != 0x80) {
+        battler->unk_09 += 2;
+    } else if (EMI_IsReady()) {
+        Actor_RequestScript(g_Task->facing);
+        GFX_FreePaletteFadeTarget(&g_Game.members[g_Battle.active_battler]);
+        GFX_LoadPalette((g_Task->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0);
+        func_801DDAB4(g_Game.members[g_Battle.active_battler].chr.status);
+        GFX_UploadPaletteRows();
+        g_Task->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
+        SND_PlayCue(0x102);
+        battler->header.step += 1;
+    }
+    g_Task = battler;
+}
 
 MATCH void func_801EF570(void) {
     PartyMember* battler;

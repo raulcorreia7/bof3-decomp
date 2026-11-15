@@ -20,10 +20,10 @@ MATCH bool func_801C7064(s32 x, s32 y, s32 reach, s32 height) {
         base_x = x + prev;
         base_y = y + step;
         func_801C71C4(halves, base_x, base_y, Area_SampleHeight(base_x, base_y) << 0x10);
-        if (halves[0] >= 320) {
+        if (halves[0] >= SCREEN_WIDTH) {
             return 0;
         }
-        if (halves[1] < 240) {
+        if (halves[1] < SCREEN_HEIGHT) {
             saved = prev;
             prev  = step;
             step  = -saved;

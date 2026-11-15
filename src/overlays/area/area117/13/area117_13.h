@@ -15,6 +15,10 @@ extern u16 D_801F55E4[];
 extern u8  D_801F463C[];
 extern u8  D_801F4640[];
 extern u8  D_801F558C[];
+/* The facing byte at +4 and the walk-flag byte at +5 of the record D_801F558C
+ * indexes. */
+extern u8  D_801F5590[];
+extern u8  D_801F5591[];
 /* The x/y byte pairs of the cell table indexed by the actor param. */
 extern u8  D_801F4658[];
 extern u8  D_801F4659[];
@@ -27,6 +31,8 @@ void func_801F364C(void);
 #define AREA_RESET_VARIANT 0x1C
 
 /* The game-overlay state bytes the cancel path resets. */
+
+u8 func_801F4110(u8 member);
 
 void func_801F2E08(void);
 
