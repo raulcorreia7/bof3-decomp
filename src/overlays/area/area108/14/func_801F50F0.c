@@ -4,8 +4,8 @@
 NON_MATCHING void func_801F50F0(void) {
     /* Kept volatile: the track loop's stores leave retail order without it. */
     volatile SceneSampleTrack* track;
-    u8                          i;
-    u8                          index;
+    u8                         i;
+    u8                         index;
 
     switch (g_SceneEventStep) {
         case 0:
@@ -78,7 +78,7 @@ NON_MATCHING void func_801F50F0(void) {
 
             timer = &LOHU(D_801448EE);
             if (--*timer != 0) {
-                i   = 0;
+                i     = 0;
                 track = D_801F629C;
                 if (D_801F6298 > 0) {
                     do {
