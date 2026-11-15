@@ -1,101 +1,100 @@
 #include "engine/slus/slus.h"
 
-/* applies the per-kind adjustments for the two kind bytes at 0x12 and 0x13:
+/* applies the per-kind adjustments for the two equipped accessories:
  * a stat delta from the kind table, then the kind's own counter updates, until two
  * kinds have been handled.
  */
-MATCH void Char_ApplyAccessories(void* param) {
-    u8*  base = param;
-    u8   kinds[2];
-    u8*  p;
-    u8*  kind;
-    s32  n;
-    u16* pair;
-    u8*  counter;
-    s32  delta;
+MATCH void Char_ApplyAccessories(Character* character) {
+    u8     kinds[2];
+    Stats* stats;
+    u8*    kind;
+    s32    n;
+    u16*   pair;
+    u8*    counter;
+    s32    delta;
 
-    p        = base + 0x1C;
-    kinds[0] = base[0x12];
+    stats    = &character->stats;
+    kinds[0] = character->equip.accessories[0];
     kind     = kinds;
-    kinds[1] = base[0x13];
+    kinds[1] = character->equip.accessories[1];
     n        = 0;
     do {
-        Char_AddStat((u16*)(p + 8), -g_Accessories[*kind].weight);
+        Char_AddStat(&stats->agility, -g_Accessories[*kind].weight);
         switch (*kind) {
             case ACCESSORY_TITAN_BELT:
-                pair = (u16*)(p + 4);
+                pair = &stats->power;
                 /* retail shares the call tail with case 3. */
                 goto block_pair;
             case ACCESSORY_HIGH_BOOTS:
-                Char_AddStat((u16*)(p + 6), 5);
+                Char_AddStat(&stats->defense, 5);
                 break;
             case ACCESSORY_SPEED_BOOTS:
-                pair = (u16*)(p + 8);
+                pair = &stats->agility;
             block_pair:
                 Char_AddStat(pair, 10);
                 break;
             case ACCESSORY_WISDOM_RING:
-                Char_AddStat((u16*)(p + 0xA), 0x1E);
+                Char_AddStat(&stats->intellect, 0x1E);
                 break;
             case ACCESSORY_LIONS_BELT:
-                Char_AddWillpower(p + 0xE, 10);
+                Char_AddWillpower(&stats->willpower, 10);
                 break;
             case ACCESSORY_RING_OF_ICE:
-                counter = p + 0x10;
+                counter = &stats->resistances[RES_INDEX_FROST];
                 delta   = 0;
                 /* retail shares one counter call after case 23. */
                 goto block_counter;
             case ACCESSORY_RING_OF_FIRE:
-                counter = p + 0xF;
+                counter = &stats->resistances[RES_INDEX_FIRE];
                 delta   = 0;
                 /* retail shares one counter call after case 23. */
                 goto block_counter;
             case ACCESSORY_THUNDER_RING:
-                counter = p + 0x11;
+                counter = &stats->resistances[RES_INDEX_ELECTRIC];
                 delta   = 0;
                 /* retail shares one counter call after case 23. */
                 goto block_counter;
             case ACCESSORY_TALISMAN:
-                counter = p + 0x17;
+                counter = &stats->resistances[RES_INDEX_DEATH];
                 delta   = 1;
                 /* retail shares one counter call after case 23. */
                 goto block_counter;
             case ACCESSORY_DIAMOND_RING:
-                counter = p + 0x17;
+                counter = &stats->resistances[RES_INDEX_DEATH];
                 delta   = 3;
                 /* retail shares one counter call after case 23. */
                 goto block_counter;
             case ACCESSORY_LIFE_SANDALS:
-                counter = p + 0x16;
+                counter = &stats->resistances[RES_INDEX_STATUS];
                 delta   = 1;
                 /* retail shares one counter call after case 23. */
                 goto block_counter;
             case ACCESSORY_LIGHT_BANGLE:
-                counter = p + 0x16;
+                counter = &stats->resistances[RES_INDEX_STATUS];
                 delta   = 3;
                 /* retail shares one counter call after case 23. */
                 goto block_counter;
             case ACCESSORY_BARRIER_RING:
-                counter = p + 0x15;
+                counter = &stats->resistances[RES_INDEX_PSIONIC];
                 delta   = 3;
                 /* retail shares one counter call after case 23. */
                 goto block_counter;
             case ACCESSORY_HAWKS_RING:
-                Char_AddPercent(p + 0x18, 0x14);
+                Char_AddPercent(&stats->surprise_chance, 0x14);
                 break;
             case ACCESSORY_ARTEMIS_CAP:
-                Char_AddPercent(p + 0x1C, 10);
+                Char_AddPercent(&stats->accuracy, 10);
                 break;
             case ACCESSORY_IVORY_CHARM:
-                Char_AddResistance(p + 0xF, 2);
-                Char_AddResistance(p + 0x10, 2);
-                Char_AddResistance(p + 0x11, 2);
-                Char_AddResistance(p + 0x12, 2);
-                Char_AddResistance(p + 0x13, 2);
-                Char_AddResistance(p + 0x14, 2);
-                Char_AddResistance(p + 0x15, 2);
-                Char_AddResistance(p + 0x16, 2);
-                counter = p + 0x17;
+                Char_AddResistance(&stats->resistances[RES_INDEX_FIRE], 2);
+                Char_AddResistance(&stats->resistances[RES_INDEX_FROST], 2);
+                Char_AddResistance(&stats->resistances[RES_INDEX_ELECTRIC], 2);
+                Char_AddResistance(&stats->resistances[RES_INDEX_EARTH], 2);
+                Char_AddResistance(&stats->resistances[RES_INDEX_WIND], 2);
+                Char_AddResistance(&stats->resistances[RES_INDEX_HOLY], 2);
+                Char_AddResistance(&stats->resistances[RES_INDEX_PSIONIC], 2);
+                Char_AddResistance(&stats->resistances[RES_INDEX_STATUS], 2);
+                counter = &stats->resistances[RES_INDEX_DEATH];
                 delta   = 2;
             block_counter:
                 Char_AddResistance(counter, delta);

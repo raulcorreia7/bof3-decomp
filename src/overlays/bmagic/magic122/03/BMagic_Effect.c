@@ -227,4 +227,101 @@ MATCH void func_801EF324(void) {
     GFX_AddDitheredDrawMode(3, tpage);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EFBA8(void) {
+    POLY_G4*     prim;
+    PartyMember* effect_task;
+    s32          iteration;
+    s32          inner_angle;
+    s32          outer_angle;
+    s32          radius;
+    s32          previous_iteration;
+    s32          inner_radius;
+    s32          outer_radius;
+    s32          white;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
+    GFX_AddPrim(3, sizeof(DR_MODE));
+    D_1F800000.view.effect.params[4] = g_Task->unk_2E.half;
+    D_1F800000.view.effect.params[5] = g_Task->unk_30.half;
+    D_1F800000.view.effect.params[1] = g_Task->unk_14;
+    iteration                        = 1;
+    if (iteration < g_Task->timer + 1) {
+        white        = 1;
+        outer_radius = 18;
+        inner_radius = 0;
+        do {
+            D_1F800000.view.effect.params[6] = D_1F800000.view.effect.params[4];
+            D_1F800000.view.effect.params[7] = D_1F800000.view.effect.params[5];
+            D_1F800000.view.effect.params[2] = (D_1F800000.view.effect.params[1] + FIXED_MUL(rsin(((iteration + g_Task->unk_09) & 0x3F) << 6), 0x100)) & ANGLE_MASK;
+            D_1F800000.view.effect.params[4] += FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), 16);
+            D_1F800000.view.effect.params[5] += FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), 16);
+            prim        = (POLY_G4*)g_GfxPrimCursor;
+            inner_angle = ((iteration - 1 - g_Task->unk_09) & 0xF) << 8;
+            outer_angle = ((iteration - g_Task->unk_09) & 0xF) << 8;
+            SetPolyG4(prim);
+            SetSemiTrans(prim, 1);
+            D_1F800000.view.effect.params[2] = (D_1F800000.view.effect.params[1] + ANGLE_90) & ANGLE_MASK;
+            radius                           = rsin(inner_angle);
+            previous_iteration               = iteration - 1;
+            radius                           = FIXED_MUL((radius * 3) << 1, previous_iteration) + 4;
+            effect_task                      = g_Task;
+            D_1F800000.view.effect.params[0] = inner_radius + radius;
+            D_1F800000.view.effect.params[0] = D_1F800000.view.effect.params[0] / effect_task->param.unk_0B + 1;
+            prim->x1                         = D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+            prim->y1                         = D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+            radius                           = rsin(outer_angle);
+            radius                           = FIXED_MUL((radius * 3) << 1, iteration) + 4;
+            effect_task                      = g_Task;
+            D_1F800000.view.effect.params[0] = outer_radius + radius;
+            D_1F800000.view.effect.params[0] = D_1F800000.view.effect.params[0] / effect_task->param.unk_0B + 1;
+            prim->x3                         = D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+            prim->y3                         = D_1F800000.view.effect.params[5] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+            setXY0(prim, D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
+            prim->x2                         = D_1F800000.view.effect.params[4];
+            prim->y2                         = D_1F800000.view.effect.params[5];
+            D_1F800000.view.effect.params[3] = g_Task->unk_04 * 4;
+            setRGB0(prim, g_Task->unk_04 * 8, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
+            setRGB1(prim, white, white, white);
+            setRGB2(prim, g_Task->unk_04 * 8, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
+            setRGB3(prim, white, white, white);
+            GFX_AddPrim(3, sizeof(POLY_G4));
+            prim = (POLY_G4*)g_GfxPrimCursor;
+            SetPolyG4(prim);
+            SetSemiTrans(prim, 1);
+            D_1F800000.view.effect.params[2] = (D_1F800000.view.effect.params[1] - ANGLE_90) & ANGLE_MASK;
+            radius                           = rsin(inner_angle);
+            radius                           = FIXED_MUL((radius * 3) << 1, previous_iteration) + 4;
+            effect_task                      = g_Task;
+            D_1F800000.view.effect.params[0] = inner_radius + radius;
+            D_1F800000.view.effect.params[0] = D_1F800000.view.effect.params[0] / effect_task->param.unk_0B + 1;
+            setXY0(prim, D_1F800000.view.effect.params[6] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]),
+                   D_1F800000.view.effect.params[7] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]));
+            inner_radius += 18;
+            radius                           = rsin(outer_angle);
+            radius                           = FIXED_MUL((radius * 3) << 1, iteration) + 4;
+            effect_task                      = g_Task;
+            D_1F800000.view.effect.params[0] = outer_radius + radius;
+            D_1F800000.view.effect.params[0] = D_1F800000.view.effect.params[0] / effect_task->param.unk_0B + 1;
+            prim->x2                         = D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+            prim->y2                         = D_1F800000.view.effect.params[5] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+            iteration++;
+            prim->x1                         = D_1F800000.view.effect.params[6];
+            prim->y1                         = D_1F800000.view.effect.params[7];
+            prim->x3                         = D_1F800000.view.effect.params[4];
+            prim->y3                         = D_1F800000.view.effect.params[5];
+            D_1F800000.view.effect.params[3] = g_Task->unk_04 * 4;
+            setRGB0(prim, white, white, white);
+            setRGB1(prim, g_Task->unk_04 * 8, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
+            setRGB2(prim, white, white, white);
+            setRGB3(prim, g_Task->unk_04 * 8, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
+            GFX_AddPrim(3, sizeof(POLY_G4));
+            outer_radius += 18;
+        } while (iteration < g_Task->timer + 1);
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, 320, 256), 0);
+    GFX_AddPrim(3, sizeof(DR_MODE));
+}
+#else
 INCLUDE_ASM(func_801EFBA8);
+#endif

@@ -51,14 +51,14 @@ NON_MATCHING void func_801E8684(void) {
     temp_a0_187                                    = temp_a1_173->slot * BATTLE_PARTY_STRIDE;
     temp_v1_190                                    = g_Game.members[temp_a1_173->slot].chr.level;
     if ((temp_v1_190 == 7) || (temp_v1_190 == 0)) {
-        g_Game.members[temp_a1_173->slot].chr.ap                           = D_801EB4C8;
-        g_Game.members[temp_a1_173->slot].chr.status                       = D_801EB4CC;
-        temp_a0_216                                                        = temp_a1_173->slot * BATTLE_PARTY_STRIDE;
-        g_Game.members[temp_a1_173->slot].chr.fatigue                      = g_Characters[(&g_Game.members[0].character_index)[temp_a0_216]].fatigue;
-        temp_a0_233                                                        = g_Task;
-        *(&D_80145FB4 + (temp_a0_233->slot * 0x140))                       = D_801EB4D0;
-        var_a1_247                                                         = 0;
-        g_Game.members[temp_a0_233->slot].turn.action_flags.volatile_value = D_801EB4D4;
+        g_Game.members[temp_a1_173->slot].chr.ap                             = D_801EB4C8;
+        g_Game.members[temp_a1_173->slot].chr.status                         = D_801EB4CC;
+        temp_a0_216                                                          = temp_a1_173->slot * BATTLE_PARTY_STRIDE;
+        g_Game.members[temp_a1_173->slot].chr.fatigue                        = g_Characters[(&g_Game.members[0].character_index)[temp_a0_216]].fatigue;
+        temp_a0_233                                                          = g_Task;
+        *(&D_80145FB4 + (temp_a0_233->slot * 0x140))                         = D_801EB4D0;
+        var_a1_247                                                           = 0;
+        g_Game.members[temp_a0_233->slot].u.turn.action_flags.volatile_value = D_801EB4D4;
         do {
             temp_a0_259 = var_a1_247 & BYTE_MASK;
             var_a1_247 += 1;
@@ -79,7 +79,7 @@ NON_MATCHING void func_801E8684(void) {
     temp_v0_356                                   = temp_a1_352 * BATTLE_PARTY_STRIDE;
     g_MenuPanelTasks[temp_a1_352 + 0xD].unk_0C    = (u8)((s32)(g_Game.members[temp_a1_352].chr.ap * 0x37) / (s32)g_Game.members[temp_a1_352].chr.stats.max_ap);
     Actor_SelectScript(((g_Task)->facing + 4) & BYTE_MASK);
-    GFX_LoadPalette(((g_Task)->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0U);
+    GFX_LoadPalette((u8*)(((g_Task)->slot << 6) + BATTLE_ACTION_BLOCK_TABLE), 0U);
     func_801DDAB4((u32) * (D_80145F10 + ((g_Task)->slot * BATTLE_PARTY_STRIDE)));
     GFX_UploadPaletteRows();
     temp_v1_420 = g_Task;
