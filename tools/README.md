@@ -199,7 +199,7 @@ other metrics. `--queue --jsonl` writes the same rows as objects. A commit messa
 
 ## Pre-push
 
-`pre_push.sh [BASE_REF]` (Meson target `pre-push`) runs the 15 checks below, one line each, and keeps
+`pre_push.sh [BASE_REF]` (Meson target `pre-push`) runs the 16 checks below, one line each, and keeps
 the logs in `build/pre-push/`. CI runs it too. `BASE_REF` defaults to the newest of `public/main`,
 `origin/main` and `main`.
 
@@ -215,6 +215,7 @@ the logs in `build/pre-push/`. CI runs it too. `BASE_REF` defaults to the newest
 | `meson test`    | a tool test fails                                                                       | Python     |
 | `typeloss`      | a rename, move or retype weakens a type                                                 | none       |
 | `markers`       | a definition in `src/` lacks exactly one status marker, or a change adds a `NON_MATCHING` draft with no `config/attempts.jsonl` object | none |
+| `drafts`        | a `.c` file the change touches holds a `NON_MATCHING` draft that does not compile with `-DNON_MATCHING` | compiler   |
 | `names`         | a new name carries an 8-digit address, a listed legacy one is gone, or an added line names a parameter `argN` | none |
 | `addrs`         | a symbol address that `config/symbols.toml` records on `main` is gone                   | none       |
 | `kept`          | a named helper, define, global, type, member or function is lost or degraded            | none       |

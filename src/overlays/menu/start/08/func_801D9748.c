@@ -7,7 +7,6 @@ NON_MATCHING void func_801D9748(void) {
     u8             i;
 
     record                                                      = &D_801484BC;
-    i                                                           = 0;
     rows                                                        = (MenuPanelTask*)(record + 0x120);
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].handler      = 6;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].mode         = MENU_START_MODE_MESSAGE;
@@ -16,12 +15,11 @@ NON_MATCHING void func_801D9748(void) {
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.x        = 0x14;
     LOH(g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y)   = -0x14;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
-    while (i < 2) {
+    for (i = 0; i < 2; i++) {
         rows[i].handler = 6;
         rows[i].mode    = MENU_START_MODE_CURSOR_FRAME;
         rows[i].active  = 0;
         rows[i].unk_0A  = 0;
-        i++;
     }
     g_MenuPanelTasks[18].mode                         = MENU_START_MODE_COMMANDS;
     g_BattlePanelMode                                 = 2;

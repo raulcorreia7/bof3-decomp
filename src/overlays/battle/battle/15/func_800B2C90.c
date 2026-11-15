@@ -5,7 +5,7 @@
  */
 #ifdef NON_MATCHING
 NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
-    /* FAKE: unused frame, 8 bytes. */
+    /* FAKE: pure C uses a 0x50-byte frame (0x594 bytes, 357 instructions vs retail's 0x5DC, 375); 8 bytes remain unexplained. */
     FAKE_STACK_PADS(u8, 8);
     Ability* ability_obj;
     u8*      kinds;
@@ -18,7 +18,7 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
     u16      icon;
     s16      icon_x;
     s16      icon_y;
-    s32      index;
+    u8       index;
     s32      has_icon;
     char*    text_table;
     void*    name_table;
@@ -34,13 +34,13 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
             if (*kinds != 0) {
                 has_icon = (func_801AF5B0(task->unk_08, D_80148656, *kinds) & BYTE_MASK) == 0;
                 icon     = (u16)(-has_icon & 7);
-                if ((index & BYTE_MASK) == task->flags) {
+                if (index == task->flags) {
                     icon = 2;
                 }
                 ability_kind = Char_GetAbilityCost(D_80148656, *kinds, 1U);
                 ability_id   = (u8)(Char_GetAbilityElement((s32)*kinds));
                 ability_obj  = &g_Abilities[*kinds];
-                icon_x       = (s16)task->u.battle.cursor + (index & BYTE_MASK);
+                icon_x       = (s16)task->u.battle.cursor + index;
                 if ((icon_x == task->flags) || (icon_x == task->unk_0C)) {
                     icon &= BYTE_MASK;
                     if (icon != 7) {
@@ -55,7 +55,7 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
             index += 1;
             kinds += 1;
             row_y += 0xD;
-        } while ((index & BYTE_MASK) < (count + 7));
+        } while (index < count + 7);
     }
     UI_DrawWindow((task->pos.x + 3) & HALF_MASK, (task->pos.y + 3) & HALF_MASK, 153, 20, 0, (s32)g_WindowStyle);
     if ((s16)task->u.addr.unk_14 != 0) {
@@ -86,31 +86,31 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
     }
     index = 0;
     do {
-        selection = (u16)(index & BYTE_MASK);
+        selection = index;
         index += 1;
         UI_DrawSprite((s16)(task->pos.x + ((selection + 5) * 8)), (s16)task->pos.y, 1, 1);
-    } while ((index & BYTE_MASK) < 0xAU);
+    } while (index < 10);
     index = 0;
     do {
-        selection = (u16)(index & BYTE_MASK);
+        selection = index;
         index += 1;
         UI_DrawSprite((s16)task->pos.x, (s16)(task->pos.y + ((selection + 3) * 8)), 4, 1);
-    } while ((index & BYTE_MASK) < 0xCU);
+    } while (index < 12);
     index = 0;
     UI_DrawSprite((s16)(task->pos.x + 144), (s16)(task->pos.y + 24), 0x16, 1);
     do {
-        selection = (u16)(index & BYTE_MASK);
+        selection = index;
         index += 1;
         UI_DrawSprite((s16)(task->pos.x + 144), (s16)(task->pos.y + ((selection + 5) * 8)), 0x17, 1);
-    } while ((index & BYTE_MASK) < 9U);
+    } while (index < 9);
     index = 0;
     UI_DrawSprite((s16)(task->pos.x + 144), (s16)(task->pos.y + 112), 0x18, 1);
     UI_DrawSprite((s16)task->pos.x, (s16)(task->pos.y + 120), 0x19, 1);
     do {
-        selection = (u16)(index & BYTE_MASK);
+        selection = index;
         index += 1;
         UI_DrawSprite((s16)(task->pos.x + ((selection + 1) * 8)), (s16)(task->pos.y + 120), 0x1A, 1);
-    } while ((index & BYTE_MASK) < 0x11U);
+    } while (index < 17);
     if ((s16)task->u.addr.unk_14 != 0) {
         UI_DrawSprite((s16)(task->pos.x + 8), (s16)task->pos.y, 0x32, 1);
         UI_DrawSprite((s16)(task->pos.x + 144), (s16)task->pos.y, 0x33, 1);
