@@ -69,8 +69,8 @@ MATCH void SYS_ShowException(void) {
             y += 8;
         }
 
-        UI_DrawGlyphString(20, 20, 0, (void*)PTR_s_EXCEPTION_8017f504);
-        UI_DrawGlyphString(100, 20, 2, *(void* const*)((const u8*)PTR_s_INTERRRUPT_8017f508 + (exception_code & 0x3C)));
+        UI_DrawGlyphString(20, 20, 0, (void*)g_ExceptionTitle);
+        UI_DrawGlyphString(100, 20, 2, *(void* const*)((const u8*)g_ExceptionCauseNames + (exception_code & 0x3C)));
 
         TEXT_Format(g_UiFormatBuffer, D_80149990, exception_pc);
         UI_DrawGlyphString(70, 36, 3, (void*)g_UiFormatBuffer);
