@@ -95,7 +95,8 @@ MATCH void func_801CF5CC(void) {
 
 #include "overlays/plchar/Char_ClearModeIfUnused.h"
 
-INCLUDE_ASM(func_801CF7A0);
+#include "overlays/plchar/Char_ProbeFacingBlocked.h"
+CHAR_DEFINE_PROBE_FACING_BLOCKED(func_801CF7A0);
 
 MATCH void func_801CF944(void) {
     s16 dist;
