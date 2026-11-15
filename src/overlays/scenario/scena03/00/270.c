@@ -45,11 +45,11 @@ MATCH void func_801F6EB4(void) {
     g_Actors[work[4]].pos.y.fixed += ONE;
     g_Actors[work[3]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     g_Actors[g_Task->unk_04].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    cell                                      = (u8*)g_Task;
-    cell4                                     = cell[4];
-    cell3                                     = cell[3];
-    FIELD(u8, D_801468E4, cell4 * ACTOR_SIZE) = 0;
-    FIELD(u8, D_801468E4, cell3 * ACTOR_SIZE) = 0;
+    cell                           = (u8*)g_Task;
+    cell4                          = cell[4];
+    cell3                          = cell[3];
+    D_801468E4[cell4 * ACTOR_SIZE] = 0;
+    D_801468E4[cell3 * ACTOR_SIZE] = 0;
     GFX_AllocPaletteFade(&g_Actors[work[3]], 15, 0, 0, 1);
     GFX_AllocPaletteFade(&g_Actors[work[4]], 0, 0, 15, 1);
     g_Task->timer       = 4;
@@ -159,15 +159,15 @@ MATCH void func_801F7BB0(void) {
 }
 
 MATCH void func_801F7C50(void) {
-    s32* temp_s0;
-    u8   temp_v0;
+    s32* ptr;
+    u8   value;
 
-    temp_s0 = &g_Task->vx;
-    func_801F7FFC((Scena03Quad*)temp_s0);
-    func_801F8170(temp_s0);
-    temp_v0       = g_Task->timer - 1;
-    g_Task->timer = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    ptr = &g_Task->vx;
+    func_801F7FFC((Scena03Quad*)ptr);
+    func_801F8170(ptr);
+    value         = g_Task->timer - 1;
+    g_Task->timer = value;
+    if (!(value & BYTE_MASK)) {
         g_Task->timer = 128;
         g_Task->header.mode += 1;
     }
@@ -213,11 +213,11 @@ MATCH void func_801F7DF0(void) {
 }
 
 MATCH void func_801F7E34(void) {
-    void* work;
+    Actor* work;
 
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 9));
-    work                  = SP_REF(void*, 0x44);
-    FIELD(u8, work, 0x1u) = (FIELD(u8, work, 0x1u) + 1);
+    work = SP_REF(Actor*, 0x44);
+    work->header.mode += 1;
 }
 
 MATCH void func_801F7E6C(void) {
@@ -348,21 +348,21 @@ MATCH void func_801F8328(void) {
 }
 
 MATCH void func_801F8370(void) {
-    SpawnedActor* temp_v0;
-    s32           temp_v1;
-    u8            temp_v0_2;
+    SpawnedActor* actor;
+    s32           actor_index;
+    u8            remaining;
 
     if (g_Task->timer & 0x4) {
-        temp_v1 = func_8019601C() & BYTE_MASK;
-        if (temp_v1 != 0xFF) {
-            temp_v0               = &g_SpawnedActors[temp_v1];
-            temp_v0->header.flags = 1;
-            temp_v0->type         = 0x24;
+        actor_index = func_8019601C() & BYTE_MASK;
+        if (actor_index != 0xFF) {
+            actor               = &g_SpawnedActors[actor_index];
+            actor->header.flags = 1;
+            actor->type         = 0x24;
         }
     }
-    temp_v0_2     = g_Task->timer - 1;
-    g_Task->timer = temp_v0_2;
-    if (!(temp_v0_2 & BYTE_MASK)) {
+    remaining     = g_Task->timer - 1;
+    g_Task->timer = remaining;
+    if (!(remaining & BYTE_MASK)) {
         g_Task->header.mode += 1;
     }
 }
@@ -664,21 +664,21 @@ MATCH s8 func_801FC704(s32 entry_x, s32 entry_y) {
 }
 
 MATCH s32 func_801FC7EC(s32 entry_x, s32 entry_y) {
-    u8 var_v0;
+    u8 state;
 
     if (SYS_TestFlag(g_SceneFlags, 1) == 0) {
         if (SYS_TestFlag(g_SceneFlags, 0) == 0) {
             if (((entry_x >> 0x10) - 2) < 3U) {
                 if (entry_y == TO_COORD(6)) {
-                    var_v0 = 2;
+                    state = 2;
                     goto block_9;
                 }
             }
         } else if ((SYS_TestFlag(g_SceneFlags, 0) != 0) && (((entry_x >> 0x10) - 3) < 2U)) {
             if (entry_y == TO_COORD(4)) {
-                var_v0 = 1;
+                state = 1;
             block_9:
-                g_SceneState.state_04 = var_v0;
+                g_SceneState.state_04 = state;
             }
         }
     }
@@ -817,11 +817,11 @@ MATCH s8 func_801FCD1C(s32 x, s32 y) {
 }
 
 /* needs: D_801FD030 and D_801FD038 declarations. */
-MATCH s32 func_801FCDB4(s32 arg0, s32 arg1) {
+MATCH s32 func_801FCDB4(s32 entry_x, s32 entry_y) {
     s8  index;
     s32 result;
 
-    index = func_801A7AD8(&D_801FD030, 1, arg0, arg1);
+    index = func_801A7AD8(&D_801FD030, 1, entry_x, entry_y);
     if (index >= 0) {
         SYS_DISPATCH_BYTE(D_801FD038, index);
         result = 1;
