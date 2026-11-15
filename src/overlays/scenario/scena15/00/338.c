@@ -173,30 +173,30 @@ void func_801F7D1C(void);
 MATCH void func_801F7AEC(void) {
     TILE* tile;
     u8*   cursor;
-    u32   actor_offset;
+    u32   idx;
 
     if (g_GameStateIndex == 3 || g_GameStateIndex == 1) {
         return;
     }
 
-    actor_offset = g_Task->param.unk_0B * sizeof(Actor);
-    *((u8*)g_Actors + actor_offset + 0x24) |= 8;
+    idx = g_Task->param.unk_0B;
+    g_Actors[idx].active_flags |= 8;
     {
         Actor* task;
         s32    px;
         s32    pz;
 
-        task                                         = g_Task;
-        px                                           = *(s32*)((u8*)g_Actors + actor_offset + 0x34);
-        *(u16*)((u8*)g_Actors + actor_offset + 0x2E) = task->screen_x;
-        *(u16*)((u8*)g_Actors + actor_offset + 0x30) = task->screen_y;
-        task->pos.x.fixed                            = px;
-        task->pos.y.fixed                            = *(s32*)((u8*)g_Actors + actor_offset + 0x38);
-        pz                                           = *(s32*)((u8*)g_Actors + actor_offset + 0x3C);
-        task->tint.bytes.rgb.blue                    = 0;
-        task->tint.bytes.rgb.green                   = 0;
-        task->tint.bytes.rgb.red                     = 0;
-        task->pos.z.fixed                            = pz;
+        task                       = g_Task;
+        px                         = g_Actors[idx].pos.x.fixed;
+        g_Actors[idx].screen_x     = task->screen_x;
+        g_Actors[idx].screen_y     = task->screen_y;
+        task->pos.x.fixed          = px;
+        task->pos.y.fixed          = g_Actors[idx].pos.y.fixed;
+        pz                         = g_Actors[idx].pos.z.fixed;
+        task->tint.bytes.rgb.blue  = 0;
+        task->tint.bytes.rgb.green = 0;
+        task->tint.bytes.rgb.red   = 0;
+        task->pos.z.fixed          = pz;
     }
 
     cursor             = g_GfxPrimCursor;
@@ -714,11 +714,21 @@ MATCH void func_801F9CE8(void) {
 
 INCLUDE_ASM(func_801F9CFC);
 
-extern u8 D_801FE608[];
+typedef struct ScrollPoint {
+    s16 unk_00;
+    s16 unk_02;
+    s16 unk_04;
+    s16 unk_06;
+    u8  unk_08;
+    u8  unk_09;
+} ScrollPoint;
 
-MATCH void func_801FA6BC(s32 point) {
+extern ScrollPoint D_801FE608[];
+
+#ifdef NON_MATCHING
+NON_MATCHING void func_801FA6BC(s32 point) {
     u8  slot;
-    u32 ofs;
+    u32 i;
     s32 x;
     s32 y;
 
@@ -731,20 +741,23 @@ MATCH void func_801FA6BC(s32 point) {
         g_SpawnedActors[D_801FE748].type   = 0x89;
         g_SpawnedActors[D_801FE748].link   = point;
     }
-    ofs                 = (u8)point * 10;
-    g_AreaScrollTargetX = *(s16*)(D_801FE608 + ofs) << 8;
-    g_AreaScrollTargetY = *(s16*)(D_801FE608 + ofs + 2) << 8;
+    i                   = (u8)point;
+    g_AreaScrollTargetX = D_801FE608[i].unk_00 << 8;
+    g_AreaScrollTargetY = D_801FE608[i].unk_02 << 8;
     func_80153DE8();
     g_Game.unk_3CE[2] = 0;
     func_801BE1B0(0);
-    x = *(s16*)(D_801FE608 + ofs + 4) << 8;
-    y = *(s16*)(D_801FE608 + ofs + 6) << 8;
+    x = D_801FE608[i].unk_04 << 8;
+    y = D_801FE608[i].unk_06 << 8;
     g_Game.walk_flags &= 0xFFEF;
-    func_801BFE34(x, y, D_801FE608[ofs + 9]);
+    func_801BFE34(x, y, D_801FE608[i].unk_09);
     g_AreaDrawMode        = 4;
     g_SceneState.state_04 = 2;
     g_SceneState.step_05  = 0;
 }
+#else
+INCLUDE_ASM(func_801FA6BC);
+#endif
 
 #include "overlays/scenario/Scene_SpawnActor.h"
 
