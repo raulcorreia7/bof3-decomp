@@ -486,7 +486,7 @@ MATCH void func_801F8764(FallingSpark* spark) {
     }
     life         = spark->life - 1;
     spark->life  = life;
-    speed        = spark->speed + 0x40000;
+    speed        = spark->speed + TO_COORD(4);
     spark->speed = speed;
     spark->z += speed;
     spark->fade += 6;

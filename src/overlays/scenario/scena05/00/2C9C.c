@@ -174,12 +174,12 @@ MATCH void func_801FC778(void) {
 MATCH void func_801FC808(void) {
     u8 i;
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < PARTY_SLOT_COUNT; i++) {
         if (g_PartyFieldOrder[i] == CHAR_ID_MOMO) {
             g_ScriptVars[1] = 1;
         }
     }
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < PARTY_SLOT_COUNT; i++) {
         if (g_PartyFieldOrder[i] == CHAR_ID_PECO) {
             g_ScriptVars[1] = 2;
         }
