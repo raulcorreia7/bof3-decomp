@@ -261,7 +261,7 @@ NON_MATCHING void func_801EFBA8(void) {
             outer = ((i - g_Task->unk_09) & 0xF) << 8;
             SetPolyG4(prim);
             SetSemiTrans(prim, 1);
-            D_1F800000.view.effect.params[2] = (D_1F800000.view.effect.params[1] + 0x400) & ANGLE_MASK;
+            D_1F800000.view.effect.params[2] = (D_1F800000.view.effect.params[1] + ANGLE_90) & ANGLE_MASK;
             swing                            = rsin(inner);
             prev                             = i - 1;
             swing                            = FIXED_MUL((swing * 3) << 1, prev) + 4;
@@ -289,7 +289,7 @@ NON_MATCHING void func_801EFBA8(void) {
             prim = (POLY_G4*)g_GfxPrimCursor;
             SetPolyG4(prim);
             SetSemiTrans(prim, 1);
-            D_1F800000.view.effect.params[2] = (D_1F800000.view.effect.params[1] - 0x400) & ANGLE_MASK;
+            D_1F800000.view.effect.params[2] = (D_1F800000.view.effect.params[1] - ANGLE_90) & ANGLE_MASK;
             swing                            = rsin(inner);
             swing                            = FIXED_MUL((swing * 3) << 1, prev) + 4;
             work                             = g_Task;
