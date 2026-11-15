@@ -1772,7 +1772,7 @@ MATCH void Menu_DrawPanelIcon(s16 x, s16 y, s32 u, s32 v, u16 clut, u8 color) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
-    RECT window;
+    RECT  window;
     SPRT* sprite;
     s32   columns;
     s32   rows;
