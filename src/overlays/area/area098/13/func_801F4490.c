@@ -3,6 +3,7 @@
 /* Draws the ring of light around pos: 32 gradient quads on the second ordering
  * layer, the inner edge at orange_radius and the outer at black_radius. */
 MATCH void func_801F4490(WorldPos* pos, s32 orange_radius, s32 black_radius) {
+    /* kept: sce15ef1 func_801D36BC has the same body over an s32[3]; this entry point passes a WorldPos. */
     VECTOR   vertex;
     DVECTOR  inner;
     DVECTOR  outer;

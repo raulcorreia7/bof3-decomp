@@ -3,6 +3,7 @@
 /* Rebuilds the party rows in this area from the cell bounds the walk step
  * returns, keeping each member's facing and walk flag in step. */
 MATCH void func_801F41D8(void) {
+    /* kept: area118 func_801F4CD0 has the same party sync; this image keeps its own helper and table names. */
     PartyMember* saved;
     PartyMember* record;
     u32          index;
