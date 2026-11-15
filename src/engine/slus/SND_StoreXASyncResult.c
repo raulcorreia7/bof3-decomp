@@ -6,7 +6,7 @@
 MATCH void SND_StoreXASyncResult(s32 intr, u8* result) {
     s32 i;
 
-    if (intr == 0x2) {
+    if (intr == CdlComplete) {
         D_8014682E = 0x1;
         result += (i = 0x7);
         do {

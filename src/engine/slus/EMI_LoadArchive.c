@@ -29,7 +29,7 @@ MATCH void EMI_LoadArchive(u32 emi_id) {
 
     if (g_EmiServiceMode == 2) {
         if (CdSync(1, D_80146498) != CdlNoIntr) {
-            if ((D_80146498[0] & 0xE0) != 0) {
+            if ((D_80146498[0] & (CdlStatPlay | CdlStatSeek | CdlStatRead)) != 0) {
                 D_8014648B = 1;
             }
         }
