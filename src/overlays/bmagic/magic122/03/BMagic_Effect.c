@@ -231,7 +231,6 @@ MATCH void func_801EF324(void) {
 NON_MATCHING void func_801EFBA8(void) {
     POLY_G4*     prim;
     PartyMember* work;
-    s32          tpage;
     s32          i;
     s32          inner;
     s32          outer;
@@ -241,14 +240,7 @@ NON_MATCHING void func_801EFBA8(void) {
     s32          outer_radius;
     s32          white;
 
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
     D_1F800000.view.effect.params[4] = g_Task->unk_2E.half;
     D_1F800000.view.effect.params[5] = g_Task->unk_30.half;
@@ -327,14 +319,7 @@ NON_MATCHING void func_801EFBA8(void) {
             outer_radius += 18;
         } while (i < g_Task->timer + 1);
     }
-    if (GetGraphType() == 1) {
-        tpage = 0x25;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x25;
-    } else {
-        tpage = 0x15;
-    }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, 320, 256), 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
 }
 #else
