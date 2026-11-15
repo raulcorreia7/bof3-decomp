@@ -237,12 +237,8 @@ NON_MATCHING void func_801EF750(void) {
         inner_radius = params[0];
         y_origin     = (u16)params[4];
 
-        prim->r0 = 1;
-        prim->g0 = 1;
-        prim->b0 = 1;
-        prim->r1 = 1;
-        prim->g1 = 1;
-        prim->b1 = 1;
+        setRGB0(prim, 1, 1, 1);
+        setRGB1(prim, 1, 1, 1);
         prim->b2 = 0xC0;
         prim->b3 = 0xC0;
         prim->r2 = 0x20;
