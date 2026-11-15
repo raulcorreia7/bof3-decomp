@@ -52,6 +52,7 @@ u8            func_801F8BF8(void);
 FallingSpark* func_801F8B14(void);
 void          Scene_InitSpark(FallingSpark* spark);
 void          func_801F81F4(u16 value);
+void          func_801F823C(s32 x, s32 y, s32 half_height, s32 half_width);
 
 void func_801F9688(void);
 

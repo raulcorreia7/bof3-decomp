@@ -22,7 +22,7 @@ MATCH void EMI_LoadVabBody(void) {
         D_80146486                                                    = 1;
         read_cursor                                                   = g_EmiBytesLeft;
         source_index                                                  = g_EmiNextSlot;
-        D_80146478                                                    = read_cursor + 0x800;
+        D_80146478                                                    = read_cursor + EMI_SECTOR_SIZE;
         D_80146485                                                    = source_index;
     }
 

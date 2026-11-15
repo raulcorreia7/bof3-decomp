@@ -10,6 +10,8 @@
 extern u8 D_801F3930[];
 extern u8 D_801F3944[];
 extern u8 D_801F3948[];
+/* The countdowns the cell byte pair selects. */
+extern u8 D_801F395C[];
 
 s32 func_801F3194();
 

@@ -23,14 +23,17 @@
 /* The party position in 16.16 fixed point. */
 /* The payload includes the per-state handler tables. */
 extern u8 D_801F57BC[];
+extern s8 D_801F58D0[];
 extern u8 D_801F5990[];
 extern u8 D_801F64B8[];
 
 extern void func_801F3994(void);
 
+void func_801F2FA0(s16 x, s16 y, s8* glyphs, u8 phase);
 void func_801F3594(s16 x0, s16 y0, u16 x1, u16 y1, u16 x2, u16 y2, u16 x3, u16 y3, u8 r, u8 g, u8 b, u8 semi_trans);
 void func_801F3698(s16 x0, s16 y0, s16 x1, s16 y1, u16 x2, u16 y2, u8 r, u8 g, u8 b, u8 semi_trans);
 void func_801F3774(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b, u8 semi_trans);
+void func_801F3838(u16 line_index);
 void func_801F4640(s32 arg0);
 
 #endif

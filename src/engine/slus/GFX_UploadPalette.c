@@ -6,7 +6,7 @@
 MATCH void GFX_UploadPalette(void) {
     RECT rect;
 
-    setRECT(&rect, 0, 480, 256, 32);
+    setRECT(&rect, 0, STAGE_PALETTE_Y, AREA_PALETTE_COLORS, AREA_PALETTE_ROWS);
     if (g_GfxPalettePending != 0) {
         LoadImage(&rect, (u_long*)AREA_PALETTE_WORK);
         g_GfxPalettePending = 0;

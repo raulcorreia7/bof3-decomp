@@ -80,9 +80,11 @@ MATCH void func_801D0DD8(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D0F10(void) {
-    Actor* work;
+MATCH void func_801D0F10(void) {
+    s32 origin_x;
+    s32 origin_y;
+    s32 origin_z;
+    u8  mode;
 
     if ((g_Task->unk_06++ & 0x3) == 0) {
         func_801D19C8();
@@ -90,20 +92,22 @@ NON_MATCHING void func_801D0F10(void) {
     func_801D2088();
     func_801D1A60();
     if (g_ScriptVars[0] == 0x14) {
-        work                     = g_Task;
-        *(Point3l*)&work->unk_18 = *(Point3l*)&work->unk_64;
-        work->vx                 = 0;
-        work->vy                 = 0;
-        work->vz                 = 0;
-        work->header.mode += 1;
-        work->unk_64 = (0x2F8000 - work->unk_64) >> 7;
-        work->unk_68 = (0x278000 - work->unk_68) >> 7;
-        work->unk_6C = (TO_COORD(3840) - work->unk_6C) >> 7;
+        origin_x            = g_Task->unk_64;
+        origin_y            = g_Task->unk_68;
+        origin_z            = g_Task->unk_6C;
+        mode                = g_Task->header.mode + 1;
+        g_Task->vx          = 0;
+        g_Task->vy          = 0;
+        g_Task->vz          = 0;
+        g_Task->unk_18      = origin_x;
+        g_Task->unk_1C      = origin_y;
+        g_Task->gravity     = origin_z;
+        g_Task->unk_64      = (0x2F8000 - g_Task->unk_64) >> 7;
+        g_Task->unk_68      = (0x278000 - g_Task->unk_68) >> 7;
+        g_Task->unk_6C      = (TO_COORD(3840) - g_Task->unk_6C) >> 7;
+        g_Task->header.mode = mode;
     }
 }
-#else
-INCLUDE_ASM(func_801D0F10);
-#endif
 
 MATCH void func_801D0FEC(void) {
     if ((g_Task->unk_06++ & 0x3) == 0) {
@@ -239,70 +243,70 @@ MATCH void func_801D147C(s32* pos, s16 origin, s32 flags) {
     } while ((i & BYTE_MASK) < 32U);
 }
 
-MATCH void func_801D1678(s32* from, s32* to, u8 shade) {
-    s32      cur[3];
-    s32      step[3];
-    DVECTOR  screen;
-    POLY_G4* poly;
-    TILE_1*  tile;
-    s32      frame;
+MATCH void func_801D1678(s32* from, s32* to, u8 intensity) {
+    POLY_G4* prim;
+    TILE*    segment;
+    VECTOR   current;
+    VECTOR   step;
+    DVECTOR  projected;
+    s32      phase;
 
-    poly = (POLY_G4*)g_GfxPrimCursor;
-    SetPolyG4(poly);
-    SetSemiTrans(poly, 1);
-    Area_ProjectPoint(from, &screen);
-    poly->x0 = screen.vx + 1;
-    poly->y0 = screen.vy - 1;
-    poly->x1 = screen.vx;
-    poly->y1 = screen.vy;
-    Area_ProjectPoint(to, &screen);
-    poly->x2 = screen.vx + 1;
-    poly->y2 = screen.vy - 1;
-    poly->x3 = screen.vx;
-    poly->y3 = screen.vy;
-    setRGB0(poly, 0, 0, 0);
-    setRGB1(poly, shade, shade, 0);
-    setRGB2(poly, 0, 0, 0);
-    setRGB3(poly, shade, shade, 0);
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    SetSemiTrans(prim, 1);
+    Area_ProjectPoint(from, &projected);
+    prim->x0 = projected.vx + 1;
+    prim->y0 = projected.vy - 1;
+    prim->x1 = projected.vx;
+    prim->y1 = projected.vy;
+    Area_ProjectPoint(to, &projected);
+    prim->x2 = projected.vx + 1;
+    prim->y2 = projected.vy - 1;
+    prim->x3 = projected.vx;
+    prim->y3 = projected.vy;
+    setRGB0(prim, 0, 0, 0);
+    setRGB1(prim, intensity, intensity, 0);
+    setRGB2(prim, 0, 0, 0);
+    setRGB3(prim, intensity, intensity, 0);
     GFX_AddPrim(2, sizeof(POLY_G4));
 
-    poly = (POLY_G4*)g_GfxPrimCursor;
-    SetPolyG4(poly);
-    SetSemiTrans(poly, 1);
-    Area_ProjectPoint(from, &screen);
-    poly->x0 = screen.vx;
-    poly->y0 = screen.vy;
-    poly->x1 = screen.vx - 1;
-    poly->y1 = screen.vy + 1;
-    Area_ProjectPoint(to, &screen);
-    poly->x2 = screen.vx;
-    poly->y2 = screen.vy;
-    poly->x3 = screen.vx - 1;
-    poly->y3 = screen.vy + 1;
-    setRGB0(poly, shade, shade, 0);
-    setRGB1(poly, 0, 0, 0);
-    setRGB2(poly, shade, shade, 0);
-    setRGB3(poly, 0, 0, 0);
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    SetSemiTrans(prim, 1);
+    Area_ProjectPoint(from, &projected);
+    prim->x0 = projected.vx;
+    prim->y0 = projected.vy;
+    prim->x1 = projected.vx - 1;
+    prim->y1 = projected.vy + 1;
+    Area_ProjectPoint(to, &projected);
+    prim->x2 = projected.vx;
+    prim->y2 = projected.vy;
+    prim->x3 = projected.vx - 1;
+    prim->y3 = projected.vy + 1;
+    setRGB0(prim, intensity, intensity, 0);
+    setRGB1(prim, 0, 0, 0);
+    setRGB2(prim, intensity, intensity, 0);
+    setRGB3(prim, 0, 0, 0);
     GFX_AddPrim(2, sizeof(POLY_G4));
 
-    frame   = g_FrameCount & 0xF;
-    step[0] = g_Task->unk_64;
-    step[1] = g_Task->unk_68;
-    step[2] = g_Task->unk_6C;
-    cur[0]  = to[0] + step[0] * frame;
-    cur[1]  = to[1] + step[1] * frame;
-    cur[2]  = to[2] + step[2] * frame;
-    while (from[0] < cur[0]) {
-        Area_ProjectPoint(cur, &screen);
-        tile = (TILE_1*)g_GfxPrimCursor;
-        SetTile1(tile);
-        SetSemiTrans(tile, 1);
-        setXY0(tile, screen.vx, screen.vy);
-        setRGB0(tile, shade, shade, 0);
-        GFX_AddPrim(2, sizeof(TILE_1));
-        cur[0] += g_Task->unk_64 << 4;
-        cur[1] += g_Task->unk_68 << 4;
-        cur[2] += g_Task->unk_6C << 4;
+    step.vx    = g_Task->unk_64;
+    step.vy    = g_Task->unk_68;
+    step.vz    = g_Task->unk_6C;
+    phase      = g_FrameCount & 0xF;
+    current.vx = to[0] + step.vx * phase;
+    current.vy = to[1] + step.vy * phase;
+    current.vz = to[2] + step.vz * phase;
+    while (from[0] < current.vx) {
+        Area_ProjectPoint(&current.vx, &projected);
+        segment = (TILE*)g_GfxPrimCursor;
+        SetTile1(segment);
+        SetSemiTrans(segment, 1);
+        setXY0(segment, projected.vx, projected.vy);
+        setRGB0(segment, intensity, intensity, 0);
+        GFX_AddPrim(2, 12);
+        current.vx += g_Task->unk_64 << 4;
+        current.vy += g_Task->unk_68 << 4;
+        current.vz += g_Task->unk_6C << 4;
     }
 }
 
@@ -690,10 +694,12 @@ MATCH void func_801D2C00(void) {
 
 /* Runs the actor's speed up over 20 steps, then reverses the accumulated speed
  * and hands over to the next mode. */
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D2C94(void) {
+MATCH void func_801D2C94(void) {
     Actor* work;
-    Actor* work2;
+    Actor* step;
+    Actor* arm;
+    Actor* state;
+    s32*   pairs;
     u8     i;
 
     work         = g_Task;
@@ -701,22 +707,22 @@ NON_MATCHING void func_801D2C94(void) {
     work->vy     = 0;
     work->unk_18 = 0;
     work->unk_1C = 0;
-    for (i = 0; i < 0x14; i++) {
-        work->unk_18 += 0x100;
-        work->unk_1C += 0x200;
-        work->vx += work->unk_18;
-        work->vy += work->unk_1C;
+    step         = work;
+    for (i = 0; i < 20; i++) {
+        step->unk_18 += 0x100;
+        step->unk_1C += 0x200;
+        step->vx += step->unk_18;
+        step->vy += step->unk_1C;
     }
-    work2        = g_Task;
-    work2->timer = 0x14;
-    work2->vx    = -work2->vx;
-    work2->vy    = -work2->vy;
-    g_Task->header.mode++;
+    arm        = g_Task;
+    arm->timer = 20;
+    pairs      = &arm->vx;
+    pairs[0]   = -pairs[0];
+    pairs[1]   = -pairs[1];
+    state      = g_Task;
+    state->header.mode++;
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 8));
 }
-#else
-INCLUDE_ASM(func_801D2C94);
-#endif
 
 MATCH void func_801D2D5C(void) {
     Actor* work;
@@ -894,4 +900,52 @@ MATCH void func_801D369C(void) {
     Actor_Clear();
 }
 
-INCLUDE_ASM(func_801D36BC);
+MATCH void func_801D36BC(s32* point, s32 orange_radius, s32 black_radius) {
+    VECTOR   vertex;
+    DVECTOR  inner;
+    DVECTOR  outer;
+    MATRIX   camera;
+    POLY_G4* prim;
+    u16      tpage;
+    s32      turn;
+    u16      angle;
+    u8       i;
+
+    tpage = GetTPage(0, 1, 0x2C0, 0x100);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    Area_SetCameraMatrix(&camera);
+    vertex.vx = point[0] + (orange_radius << 4);
+    vertex.vy = point[1];
+    vertex.vz = point[2];
+    Area_ProjectPoint(&vertex.vx, &inner);
+    vertex.vx = point[0] + (black_radius << 4);
+    Area_ProjectPoint(&vertex.vx, &outer);
+    turn = 0;
+    i    = 0;
+    do {
+        prim     = GFX_BeginPolyG4(1);
+        prim->x0 = inner.vx;
+        prim->y0 = inner.vy;
+        prim->x1 = outer.vx;
+        prim->y1 = outer.vy;
+        turn += 0x80;
+        angle     = turn;
+        vertex.vx = point[0] + ((orange_radius * rcos(angle)) >> 8);
+        vertex.vy = point[1] + ((orange_radius * rsin(angle)) >> 8);
+        Area_ProjectPoint(&vertex.vx, &inner);
+        vertex.vx = point[0] + ((black_radius * rcos(angle)) >> 8);
+        vertex.vy = point[1] + ((black_radius * rsin(angle)) >> 8);
+        Area_ProjectPoint(&vertex.vx, &outer);
+        prim->x2 = inner.vx;
+        prim->y2 = inner.vy;
+        prim->x3 = outer.vx;
+        prim->y3 = outer.vy;
+        setRGB0(prim, 0xFF, 0x7F, 0);
+        setRGB1(prim, 0, 0, 0);
+        setRGB2(prim, 0xFF, 0x7F, 0);
+        setRGB3(prim, 0, 0, 0);
+        GFX_AddPrim(2, sizeof(POLY_G4));
+        i++;
+    } while (i < 32);
+}

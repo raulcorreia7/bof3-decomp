@@ -206,41 +206,39 @@ MATCH void func_801EF5BC(void) {
     g_Task->header.step++;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF620(void) {
+MATCH void func_801EF620(void) {
     Callback     handlers[2] = {func_801EF7A0, func_801EF7E0};
+    PartyMember* phase_record;
+    PartyMember* tail_record;
     PartyMember* work;
-    u8           step;
+    u8           stage;
+    s32          ramp;
 
-    SYS_DISPATCH_TASK(handlers, 3, g_Task);
-
-    if (g_Task->timer != 0xFF) {
-        if (--g_Task->timer == 0) {
-            work         = g_Task;
-            step         = work->unk_09 + 1;
-            work->unk_09 = step;
-            work->timer  = D_801EFADC[step];
-            SND_QueueSelectionEffect(0x100);
-            if (g_Task->unk_09 == 3) {
-                g_BattleEffectBattler->header.step += 1;
-                g_Task->timer = 0xFF;
-            } else {
-                g_Task->unk_03 = 0;
-            }
+    handlers[g_Task->unk_03]();
+    if (g_Task->timer != 0xFF && --g_Task->timer == 0) {
+        work         = g_Task;
+        stage        = work->unk_09 + 1;
+        work->unk_09 = stage;
+        work->timer  = D_801EFADC[stage];
+        SND_QueueSelectionEffect(256);
+        if (g_Task->unk_09 == 3) {
+            g_BattleEffectBattler->header.step++;
+            g_Task->timer = 0xFF;
+        } else {
+            g_Task->unk_03 = 0;
         }
     }
-    if (!(g_BattleEffectBattler->header.flags & 0x1)) {
-        work = g_Task;
-        work->header.step += 1;
-        work->unk_10   = 0;
-        g_Task->unk_03 = 0;
+    if ((g_BattleEffectBattler->header.flags & 1) == 0) {
+        tail_record = g_Task;
+        tail_record->header.step += 1;
+        tail_record->unk_10  = 0;
+        phase_record         = g_Task;
+        phase_record->unk_03 = 0;
     }
+    ramp                     = g_Task->unk_10;
     g_AreaCameraRefreshCount = 2;
-    g_AreaCameraOffsetY      = g_Task->unk_10 * 2;
+    g_AreaCameraOffsetY      = ramp << 1;
 }
-#else
-INCLUDE_ASM(func_801EF620);
-#endif
 
 MATCH void func_801EF7A0(void) {
     PartyMember* work;
