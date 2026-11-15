@@ -101,7 +101,7 @@ void func_801D4178(s16 x, s16 y, u8 mode);
 s16  func_801D44E0(s16 x, s16 y, u8 kind, u8 mode);
 void func_801D4694(s16* out_x, s16* out_y, s32 kind, s32 ordinal);
 void func_801D47C4(void);
-s32  func_801D482C(s32 arg0);
+s32  func_801D482C(s32 ordinal_offset);
 void func_801D49C4(void);
 void func_801D4AAC(u8* room);
 void func_801D4B58(void);

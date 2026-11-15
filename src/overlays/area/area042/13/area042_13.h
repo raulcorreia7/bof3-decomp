@@ -7,7 +7,7 @@
 #include "overlays/area/world01.h"
 #include "area/spad.h"
 
-void func_801F37A8(s32 arg0, s32 arg1);
+void func_801F37A8(s32 depth, s32 color);
 
 extern u8 D_801F2C04[];
 /* One-byte views of the colour triplets in the payload table: the retail code names the second and
@@ -51,12 +51,21 @@ extern u8  D_801F5334[];
 extern u8  D_801F534C[];
 extern u16 D_801F56C4[];
 
+/* The event phase the countdown picks, added to 0x5C to index the spawn-gate flags. */
+extern u8 D_801F56F8;
+
+/* The spawn records the event queues, 13 bytes each, one per phase. */
+extern u8 D_801F56D0[];
+
+/* One bit per spawn-gate flag byte. */
+extern u8 D_80144FC4[];
+
 void func_801F2DC4(void);
 void func_801F2E78(s32* first, s32* second);
 void func_801F30C0(s32 x, s32 y, s16 radius, u16 angle);
 void func_801F3280(s16 x1, s16 y1, s16 radius1, u16 angle1, s16 x2, s16 y2, s16 radius2, u16 angle2);
 
-void func_801F4188(void);
+s32  func_801F4188(void);
 void func_801F4B0C(s32, s32, s32, s32, s32);
 
 #endif

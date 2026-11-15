@@ -316,7 +316,8 @@ void func_801F1AFC(void);
 void func_801F1B30(void);
 void Fairy_RollExploreReward(void);
 void Fairy_LoadCommu02(void);
-void func_801F1F10(void);
+/* func_801F1F10 */
+void Fairy_RunCommu02Events(void);
 void func_801F1F4C(void);
 void Fairy_LoadCommu03(void);
 void func_801F205C(void);
