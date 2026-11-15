@@ -9,8 +9,8 @@
 #include "area/spad.h"
 #include "scenario/party.h"
 
-extern u8  D_801F69AF;
-extern u8  D_801F6BC0;
+extern u8 D_801F69AF;
+extern u8 D_801F6BC0;
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
