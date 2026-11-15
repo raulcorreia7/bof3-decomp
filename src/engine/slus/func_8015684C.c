@@ -12,6 +12,7 @@ typedef struct {
 #ifdef NON_MATCHING
 NON_MATCHING void func_8015684C(u8* record, s32 cell_x, s32 cell_y) {
     MapCell* cell;
+    MapCell* row;
     u8*      prim;
     SVECTOR  v0;
     SVECTOR  v1;
@@ -30,19 +31,17 @@ NON_MATCHING void func_8015684C(u8* record, s32 cell_x, s32 cell_y) {
     } else {
         state = g_AreaDrawMode;
     }
-    cell  = ((MapCell*)(MAP_BUNDLE_BASE + 0x30) + cell_y * g_AreaMapBundle.width) + cell_x;
+    row   = (MapCell*)(MAP_BUNDLE_BASE + 0x30) + cell_y * g_AreaMapBundle.width;
+    cell  = (MapCell*)(cell_x * 4 + (u32)row);
     x     = (cell_x - 128) << 7;
-    edge  = x - 64;
-    v0.vx = v2.vx = edge;
+    v0.vx = v2.vx = x - 64;
     prim          = g_GfxPrimCursor;
     y             = (cell_y - 128) << 7;
-    edge          = y - 64;
-    y |= 64;
-    v0.vy = v2.vy = y;
+    cell_y        = y - 64;
+    v0.vy = v2.vy = y | 64;
     z             = cell->unk_02;
-    x |= 64;
-    v1.vx = v3.vx = x;
-    v1.vy = v3.vy = edge;
+    v1.vx = v3.vx = x | 64;
+    v1.vy = v3.vy = cell_y;
     z             = -((z & BYTE_MASK) << 4);
     v2.vz         = z;
     v0.vz         = z - 128;
