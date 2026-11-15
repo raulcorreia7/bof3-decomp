@@ -11,11 +11,11 @@ NON_MATCHING void func_801AFA1C(u8* marks, u8 thumb_top, s16 x, s16 y, s32 thumb
     POLY_FT4* poly;
     s32       top;
 
-    total_u8     = total;
-    thumb_top_u8 = thumb_top;
+    total_u8      = total;
+    thumb_top_u8  = thumb_top;
     thumb_size_u8 = thumb_size;
     track_size_u8 = track_size;
-    i            = 0;
+    i             = 0;
     if (total_u8 != 0) {
         do {
             if (marks[(u16)i] != 0) {
