@@ -68,8 +68,8 @@ NON_MATCHING void func_8015642C(u8* obj, s32 x, s32 y) {
                 top++;
             }
             for (j = 0; j < 4; j++) {
-                D_1F800014[j].vx = D_8017F7A8[index * 6 + part * 2 + (j >> 1)] + *(s32*)(D_1F800000);
-                D_1F800014[j].vy = D_8017F814[index * 6 + part * 2 + (j >> 1)] + *(s32*)(D_1F800000 + 4);
+                D_1F800014[j].vx = ((u16(*)[6])D_8017F7A8)[index][part * 2 + (j >> 1)] + *(s32*)(D_1F800000);
+                D_1F800014[j].vy = ((u16(*)[6])D_8017F814)[index][part * 2 + (j >> 1)] + *(s32*)(D_1F800000 + 4);
             }
             RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (s32*)&prim[0].x0, (s32*)&prim[0].x1, (s32*)&prim[1].x0, (s32*)&prim[1].x1, &depth, &flag);
         }
