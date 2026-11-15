@@ -12,7 +12,7 @@ NON_MATCHING void func_801F4DF0(s32 x, s32 y, s16 radius, u16 angle) {
     do {
         prim = GFX_BeginPolyG3(1);
         setXY2(prim, x, y, x + FIXED_MUL(radius, rcos(angle)), y + FIXED_MUL(radius, rsin(angle)));
-        angle += 0x100;
+        angle += ANGLE_45 / 2;
         prim->x2 = x + FIXED_MUL(radius, rcos(angle));
         prim->y2 = y + FIXED_MUL(radius, rsin(angle));
         i += 1;

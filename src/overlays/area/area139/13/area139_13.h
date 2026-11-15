@@ -24,6 +24,6 @@ extern Callback D_801F4448[];
 extern u8 D_801F442C[];
 
 /* The sprite-word fields above the floor quad's cell coordinate. */
-#define AREA_FLOOR_QUAD_PART 0x01500000
+#define AREA_FLOOR_QUAD_PART ((0x150) << 16)
 
 #endif
