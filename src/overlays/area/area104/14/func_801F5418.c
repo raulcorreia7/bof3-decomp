@@ -10,6 +10,7 @@ MATCH void func_801F5418(s32 width, s32 palette) {
     prim  = (POLY_FT4*)g_GfxPrimCursor;
     cells = D_801F2C04;
     SetPolyFT4(prim);
+    /* kept: retail calls GetGraphType a second time and discards the result. */
     if (GetGraphType() != 1) {
         GetGraphType();
     }
