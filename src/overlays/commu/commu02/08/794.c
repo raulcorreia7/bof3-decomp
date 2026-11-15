@@ -238,12 +238,14 @@ INCLUDE_ASM(func_801D1A50);
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D1D68(void) {
     s32 i;
+    u8  cnt;
 
     func_801D3184(0x26, 0x10);
     func_801D32A0(0xA8, 0x10, 0);
     func_801D2794((u8)(D_801DB0B4 + 1), 1, D_801DB0B4);
-    D_801DB0C4 += 1;
-    i = (s8)D_801DB0B4 + 1;
+    cnt        = D_801DB0C4 + 1;
+    i          = (s8)D_801DB0B4 + 1;
+    D_801DB0C4 = cnt;
     for (; i < 9; i++) {
         func_801D2CF8(((i << 21) + 0x100000) >> 16, D_801DB0C4 * 40 + 0x6C, 0xFF);
     }
@@ -877,13 +879,10 @@ INCLUDE_ASM(func_801D3C30);
 
 INCLUDE_ASM(func_801D3E44);
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D4158(void) {
+MATCH void func_801D4158(void) {
     u8* state;
     u8* src_base;
     u8* dst_base;
-    u8* src;
-    u8* dst;
     u8* src_item;
     u8* dst_item;
     u8  value;
@@ -899,10 +898,8 @@ NON_MATCHING void func_801D4158(void) {
             i        = 0;
             do {
                 offset   = (s8)D_801DB0B4 * 5;
-                dst      = offset + dst_base;
-                src      = offset + src_base;
-                dst_item = dst + i;
-                src_item = src + i;
+                dst_item = (u8*)(offset + (s32)dst_base + i);
+                src_item = (u8*)(offset + (s32)src_base + i);
                 value    = *src_item;
                 i++;
                 *dst_item = value;
@@ -923,11 +920,34 @@ NON_MATCHING void func_801D4158(void) {
     func_801D3184(204, 16);
     func_801D32A0(204, 60, 0);
 }
-#else
-INCLUDE_ASM(func_801D4158);
-#endif
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D42B4(void) {
+    u8* state;
+    s32 selected;
+    /* FAKE: the retail frame has 8 bytes that nothing in the body uses. */
+    FAKE_STACK_PADS(u8, 8);
+
+    state = &g_GameStateIndex;
+    if (*state != 2) {
+        Message_StartAreaMessage(0x86);
+        *state     = 2;
+        D_801F294D = 8;
+    }
+    func_801D4AE0(0x10, 0x18, 1);
+    func_801D4F88(0x68, 0x40, 1);
+    selected = (s8)D_801DB0B4;
+    if (selected == 8) {
+        func_801D4EA4(0x68, 0x78, 7, 0);
+    } else {
+        func_801D4EA4(0x68, 0x78, (u8)selected, 0);
+    }
+    func_801D3184(0xCC, 0x10);
+    func_801D32A0(0xCC, 0x3C, 0);
+}
+#else
 INCLUDE_ASM(func_801D42B4);
+#endif
 
 MATCH void func_801D437C(void) {
     u8* state;
@@ -1539,11 +1559,11 @@ MATCH void func_801D65F8(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event3Step1Sub7Funcs, D_801F294E);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D6634(void) {
+MATCH void func_801D6634(void) {
     s32 i;
     u8* dst;
-    u8* tbl;
+    u8(*tbl)[5];
+    s32 letter;
 
     func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4), 0);
     func_801D97C8(D_801DAAA8, D_801DB0C4 * 30 + 0xB0, 0x2B);
@@ -1551,10 +1571,16 @@ NON_MATCHING void func_801D6634(void) {
     func_801D94D0(D_801DAAA8, 0x18, D_801DB0C4 * 30 + 0x67, D_801DB0D4, D_801DB0D8);
     D_801DB0C4 -= 1;
     if (D_801DB0C4 == 0) {
-        tbl = D_801457E8[0];
+        tbl = D_801457E8;
         dst = D_801DB080;
         for (i = 0; i < 5; i++, dst++) {
-            *dst = tbl[Fairy_FindActiveJob(D_801DB0B4) * 5 + i] ? tbl[Fairy_FindActiveJob(D_801DB0B4) * 5 + i] : 0xFF;
+            letter = tbl[Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK][i];
+            if (letter == 0) {
+                letter = 0xFF;
+            } else {
+                letter = tbl[Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK][i];
+            }
+            *dst = letter;
         }
         D_801DB0D0 = 0;
         D_801DB0D4 = 0;
@@ -1563,9 +1589,6 @@ NON_MATCHING void func_801D6634(void) {
         D_801F294E += 1;
     }
 }
-#else
-INCLUDE_ASM(func_801D6634);
-#endif
 
 MATCH void func_801D67F0(void) {
     func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 1);
@@ -1766,7 +1789,36 @@ MATCH void func_801D7660(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event3Step2Sub7Funcs, D_801F294E);
 }
 
-INCLUDE_ASM(func_801D769C);
+MATCH void func_801D769C(void) {
+    s32        i;
+    u8*        dst;
+    Character* chars;
+    s32        letter;
+
+    D_801DB0C4 -= 1;
+    func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D97C8(D_801DAAA8, D_801DB0C4 * 30 + 0xB0, 0x2B);
+    func_801D9B80(0x12, D_801DB0C4 * 30 + 0x61, 0x24, 0x11);
+    func_801D94D0(D_801DAAA8, 0x18, D_801DB0C4 * 30 + 0x67, D_801DB0D4, D_801DB0D8);
+    if (D_801DB0C4 == 0) {
+        chars = g_Characters;
+        dst   = D_801DB080;
+        for (i = 0; i < 5; i++, dst++) {
+            letter = chars[func_801D92F4(D_801DB0B4) & BYTE_MASK].name[i];
+            if (letter == 0) {
+                letter = 0xFF;
+            } else {
+                letter = chars[func_801D92F4(D_801DB0B4) & BYTE_MASK].name[i];
+            }
+            *dst = letter;
+        }
+        D_801DB0D0 = 0;
+        D_801DB0D4 = 0;
+        D_801DB0D8 = 0;
+        D_801DAAA8 = 2;
+        D_801F294E += 1;
+    }
+}
 
 MATCH void func_801D7878(void) {
     func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 1);
@@ -1957,12 +2009,12 @@ INCLUDE_ASM(func_801D830C);
 
 INCLUDE_ASM(func_801D851C);
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D875C(s16 x, s16 y, s32 index) {
+MATCH void func_801D875C(s16 x, s16 y, s32 index) {
     s32   tpage;
     SPRT* sprt;
     u8    slot;
 
+    slot = index;
     if (GetGraphType() == 1 || GetGraphType() == 2) {
         tpage = 0x2E;
     } else {
@@ -1972,22 +2024,18 @@ NON_MATCHING void func_801D875C(s16 x, s16 y, s32 index) {
     GFX_AddPrim(1, sizeof(DR_MODE));
     sprt = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprt);
-    slot       = index;
     sprt->x0   = x;
     sprt->y0   = y;
     sprt->u0   = D_801DAE88[slot][0];
     sprt->v0   = D_801DAE88[slot][1];
     sprt->w    = D_801DAE88[slot][2];
     sprt->h    = D_801DAE88[slot][3];
+    sprt->clut = ((D_801DAE88[slot][5] + 0x1E0) << 6) | (D_801DAE88[slot][4] >> 4);
     sprt->r0   = 0x80;
     sprt->g0   = 0x80;
     sprt->b0   = 0x80;
-    sprt->clut = (D_801DAE88[slot][4] >> 4) | ((D_801DAE88[slot][5] + 0x1E0) << 6);
     GFX_AddPrim(1, sizeof(SPRT));
 }
-#else
-INCLUDE_ASM(func_801D875C);
-#endif
 
 MATCH void func_801D88A4(s32 x, s32 y, s32 bright) {
     POLY_F3* poly;
