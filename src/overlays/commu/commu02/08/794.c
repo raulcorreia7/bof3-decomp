@@ -6,9 +6,11 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
+void func_801D4910(s32 x, s32 y);
 void func_801D4EA4(s32 left, s32 top, s32 icon_row, s32 raised);
 void func_801D8058(s32 left, s32 top);
-void func_801D2908(s32 x, s32 y, s32 mode);
+void func_801D2908(s16 x, s16 y, u8 mode);
+void func_801D2FA4(s16 x, s16 y);
 void Menu_DrawPanelIcon(s16 x, s16 y, s32 u, s32 v, u16 clut, u8 color);
 
 INCLUDE_ASM(func_801D1394);
@@ -51,7 +53,51 @@ MATCH void func_801D150C(void) {
     }
 }
 
-INCLUDE_ASM(func_801D15A4);
+MATCH void func_801D15A4(void) {
+    s32 i;
+    u8  n;
+    u32 r;
+    s32 bit;
+    s32 off;
+    s32 base;
+
+    func_801D3184(0x26, 0x10);
+    func_801D32A0(0xA8, 0x10, 0);
+    D_801DB0C4 -= 1;
+    for (i = 0; i < (s8)D_801DB0B4; i++) {
+        func_801D2CF8((i * 0x200000 + 0x100000) >> 16, 0x6C, 0xFF);
+    }
+    base = (s8)D_801DB0B4 * 32;
+    off  = D_801DB0C4 * 16 - 16;
+    func_801D2CF8(base - off, 0x6C, 0xFF);
+    if (D_801DB0C4 == 0) {
+        D_801DB0B4 += 1;
+        if ((s8)D_801DB0B4 == 9) {
+            D_801DB0B8 = 0;
+            if ((rand() & 3) == 0) {
+                r = rand() & 0xF;
+                if (r < 8) {
+                    n = 1;
+                } else if (r < 0xE) {
+                    n = 2;
+                } else {
+                    n = 3;
+                }
+                while (n != 0) {
+                    bit = rand() & 7;
+                    if (((D_801DB0B8 >> bit) & 1) == 0) {
+                        D_801DB0B8 |= 1 << bit;
+                        n--;
+                    }
+                }
+            }
+            D_801F294E += 1;
+        } else {
+            SND_PlayCue(0x102);
+            D_801DB0C4 = 2;
+        }
+    }
+}
 
 MATCH void func_801D1774(void) {
     s32 i;
@@ -189,9 +235,64 @@ NON_MATCHING void func_801D1A50(void) {
 INCLUDE_ASM(func_801D1A50);
 #endif
 
-INCLUDE_ASM(func_801D1D68);
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D1D68(void) {
+    s32 i;
 
+    func_801D3184(0x26, 0x10);
+    func_801D32A0(0xA8, 0x10, 0);
+    func_801D2794((u8)(D_801DB0B4 + 1), 1, D_801DB0B4);
+    D_801DB0C4 += 1;
+    i = (s8)D_801DB0B4 + 1;
+    for (; i < 9; i++) {
+        func_801D2CF8(((i << 21) + 0x100000) >> 16, D_801DB0C4 * 40 + 0x6C, 0xFF);
+    }
+    func_801D2908(0x58, 0x44 - D_801DB0C4 * 40, 2);
+    if (D_801DB0C4 == 4) {
+        D_801DB0C4 = 0x1E;
+        D_801DB0BC = 1;
+        D_801F294D += 1;
+    }
+}
+#else
+INCLUDE_ASM(func_801D1D68);
+#endif
+
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D1E98(void) {
+    s32 idx;
+    s32 old;
+    s32 step;
+
+    func_801D3184(0x26, 0x10);
+    func_801D32A0(0xA8, 0x10, 0);
+    D_801DB0C4 -= 1;
+    if (D_801DB0C4 == 0) {
+        idx = (s8)D_801DB0BC;
+        if (D_801DB080[idx + 9] != ((D_801DB080[idx - 1] < D_801DB080[idx]) ^ 1)) {
+            SND_PlayCue(0x107);
+            D_801DB0C0 = 1;
+        } else {
+            SND_PlayCue(0x104);
+            old        = D_801DB0BC;
+            D_801DB0BC = old + 1;
+            if ((s8)D_801DB0BC != (s8)D_801DB0B4 + 1) {
+                D_801DB0C4 = 0x1E;
+                goto done;
+            }
+            D_801DB0BC = old;
+            D_801DB0C0 = 0;
+        }
+        step       = 0x3C;
+        D_801DB0C4 = step;
+        D_801F294D += 1;
+    }
+done:
+    func_801D2794((u8)(D_801DB0B4 + 1), (u8)D_801DB0BC, D_801DB0B4);
+}
+#else
 INCLUDE_ASM(func_801D1E98);
+#endif
 
 MATCH void func_801D1FE4(void) {
     s32 index;
@@ -209,7 +310,31 @@ MATCH void func_801D1FE4(void) {
     }
 }
 
-INCLUDE_ASM(func_801D2078);
+MATCH void func_801D2078(void) {
+    s32 i;
+
+    D_801DB0C4 += 1;
+    i = 0;
+    if ((s8)D_801DB0B4 >= 0) {
+        do {
+            func_801D2CF8((i * 0x200000 + 0x100000) >> 16, D_801DB0C4 * 40 + 0x6C, D_801DB080[i]);
+            i++;
+        } while (i <= (s8)D_801DB0B4);
+    }
+    if (D_801DB0C4 == 4) {
+        if (D_801DB0C0 != 0) {
+            D_801DB07C = 0;
+            Message_StartAreaMessage(0x74);
+        } else {
+            D_801DB07C = (D_801DB07C * D_801DAC34[D_801448F2][(s8)D_801DB0BC - 1] + 50) / 100;
+            Message_StartAreaMessage(0x76);
+        }
+        g_GameStateIndex = 2;
+        D_801F294D += 1;
+    }
+    func_801D3184(0x26, 0x10);
+    func_801D32A0(0xA8, 0x10, 0);
+}
 
 MATCH void func_801D21FC(void) {
     u8* state = &g_GameStateIndex;
@@ -355,7 +480,35 @@ MATCH void func_801D2870(void) {
     }
 }
 
-INCLUDE_ASM(func_801D2908);
+MATCH void func_801D2908(s16 x, s16 y, u8 mode) {
+    switch (mode) {
+        case 0xFF:
+            func_801D2AC4(x, y, 0, 0);
+            func_801D2AC4(x + 0x30, y, 1, 0);
+            func_801D2AC4(x + 0x60, y, 2, 0);
+            break;
+        case 0:
+            func_801D2AC4(x, y, 0, 1);
+            func_801D2AC4(x + 0x30, y, 1, 2);
+            func_801D2AC4(x + 0x60, y, 2, 0);
+            break;
+        case 1:
+            func_801D2AC4(x, y, 0, 2);
+            func_801D2AC4(x + 0x30, y, 1, 1);
+            func_801D2AC4(x + 0x60, y, 2, 0);
+            break;
+        case 2:
+            func_801D2AC4(x, y, 0, 0);
+            func_801D2AC4(x + 0x30, y, 1, 0);
+            func_801D2AC4(x + 0x60, y, 2, 2);
+            break;
+        case 3:
+            func_801D2AC4(x, y, 0, 2);
+            func_801D2AC4(x + 0x30, y, 1, 2);
+            func_801D2AC4(x + 0x60, y, 2, 0);
+            break;
+    }
+}
 
 INCLUDE_ASM(func_801D2AC4);
 
@@ -417,11 +570,113 @@ MATCH void func_801D2EDC(s32 x, s32 y, s32 index) {
     GFX_AddPrim(1, sizeof(SPRT));
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D2FA4(s16 x, s16 y) {
+    s32 i;
+    s32 off;
+    s32 tpage;
+    s16 y2;
+
+    if (GetGraphType() == 1 || GetGraphType() == 2) {
+        tpage = 0x2D;
+    } else {
+        tpage = 0x1D;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
+    GFX_AddPrim(1, 0xC);
+    func_801D2EDC(x, (s16)y, 0);
+    off = 0x20;
+    for (i = 0; i < 6; i++) {
+        func_801D2EDC((s16)(x + off), (s16)y, 1);
+        off += 8;
+    }
+    func_801D2EDC((s16)(x + 0x50), (s16)y, 2);
+    func_801D2EDC((s16)(x + 0x68), (s16)y, 3);
+    off = 0x18;
+    for (i = 0; i < 2; i++) {
+        func_801D2EDC(x, (s16)(y + off), 4);
+        func_801D2EDC((s16)(x + 0x68), (s16)(y + off), 5);
+        off += 6;
+    }
+    y2 = y + 0x23;
+    func_801D2EDC(x, y2, 6);
+    off = 8;
+    for (i = 0; i < 12; i++) {
+        func_801D2EDC((s16)(x + off), y2, 7);
+        off += 8;
+    }
+    func_801D2EDC((s16)(x + 0x68), (s16)(y + 0x23), 8);
+}
+#else
 INCLUDE_ASM(func_801D2FA4);
+#endif
 
-INCLUDE_ASM(func_801D3184);
+MATCH void func_801D3184(s32 x, s32 y) {
+    UI_DrawWindow(x + 1, y + 1, 0x6A, 0x28, 0x80, g_WindowStyle);
+    func_801D2FA4(x, y);
+    UI_DrawText(x + 0x24, y + 7, 0, 4, D_801DACA8);
+    sprintf(g_UiFormatBuffer, D_801D0C04, g_Zenny);
+    y = (s16)(y + 0x18);
+    UI_DrawAsciiString(x + 0x16, y, 0, g_UiFormatBuffer);
+    UI_DrawText(x + 0x4E, y, 0, 1, D_801DACAC);
+}
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D32A0(s32 x, s32 y, u8 mode) {
+    s32 x2;
+    s32 y2;
+    u8* buf;
+    s16 ox;
+    s32 oy;
+
+    UI_DrawWindow(x + 1, y + 1, 0x6A, 0x28, 0x80, g_WindowStyle);
+    func_801D2FA4(x, y);
+    UI_DrawText(x + 0x2C, y + 7, 0, 3, D_801DACB0);
+    x2 = x;
+    y2 = y;
+    switch (mode) {
+        case 2:
+            if (D_801DB07C < 10) {
+                sprintf(buf = g_UiFormatBuffer, D_801D0C08, D_801DB07C);
+                ox = x + 0x3E;
+            } else {
+                sprintf(buf = g_UiFormatBuffer, D_801D0C04, D_801DB07C);
+                ox = x + 0x16;
+            }
+            oy = y + 0x18;
+            break;
+        case 3:
+            if (D_801DB07C < 100) {
+                sprintf(buf = g_UiFormatBuffer, D_801D0C10, D_801DB07C);
+                ox = x + 0x36;
+            } else {
+                sprintf(buf = g_UiFormatBuffer, D_801D0C04, D_801DB07C);
+                ox = x + 0x16;
+            }
+            oy = y + 0x18;
+            break;
+        case 4:
+            if (D_801DB07C < 1000) {
+                sprintf(buf = g_UiFormatBuffer, D_801D0C18, D_801DB07C);
+                ox = x + 0x2E;
+            } else {
+                sprintf(buf = g_UiFormatBuffer, D_801D0C04, D_801DB07C);
+                ox = x + 0x16;
+            }
+            oy = y + 0x18;
+            break;
+        default:
+            sprintf(buf = g_UiFormatBuffer, D_801D0C04, D_801DB07C);
+            ox = x2 + 0x16;
+            oy = y2 + 0x18;
+            break;
+    }
+    UI_DrawAsciiString(ox, oy, 0, buf);
+    UI_DrawText(x2 + 0x4E, y2 + 0x18, 0, 1, D_801DACB4);
+}
+#else
 INCLUDE_ASM(func_801D32A0);
+#endif
 
 MATCH void func_801D3568(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event1States, D_801F294C);
@@ -487,7 +742,46 @@ MATCH void func_801D3828(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event1Step1Sub0Funcs, D_801F294E);
 }
 
-INCLUDE_ASM(func_801D3864);
+MATCH void func_801D3864(void) {
+    s32  i;
+    s32  j;
+    u8*  p;
+    u8   v;
+    s32  zenny;
+    s32* zp;
+
+    i          = 0;
+    p          = D_801DB080;
+    zp         = &g_Zenny;
+    zenny      = *zp;
+    D_801DB07C = 500;
+    *zp        = zenny - 500;
+    for (; i < 3; i++, p++) {
+        do {
+            v  = func_801D2750(9);
+            *p = v;
+            if (i == 0) {
+                break;
+            }
+            for (j = 0; j < i; j++) {
+                if (D_801DB080[j] == v) {
+                    break;
+                }
+            }
+        } while (j != i);
+    }
+    D_801DB0B4 = 0;
+    for (i = 3; i < 0x2B; i++) {
+        D_801DB080[i] = 1;
+    }
+    func_801D4AE0(0x10, 0x18, 0);
+    func_801D2CF8(0x68, 0x40, 0xFF);
+    func_801D3184(0xCC, 0x10);
+    func_801D32A0(0xCC, 0x3C, 0);
+    D_801DB0C4 = 4;
+    SND_PlayCue(0x102);
+    D_801F294E += 1;
+}
 
 MATCH void func_801D39A4(void) {
     u8 check;
@@ -532,7 +826,54 @@ MATCH void func_801D3B98(void) {
     func_801D32A0(0xCC, 0x3C, 0);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D3C30(void) {
+    u16  buttons;
+    s32  k;
+    u8   val;
+    u16* pad;
+
+    pad     = &g_InputPressed;
+    buttons = INPUT_GetRepeatedButtons(*pad & 0xF000);
+    if (buttons != 0) {
+        SND_PlayCue(0x100);
+        k = (u8)(D_801DB0B8 + (s8)D_801DB0B4 * 5 + 3);
+        if (buttons & 0x4000) {
+            val           = D_801DB080[k] - 1;
+            D_801DB080[k] = val;
+            if ((s8)val <= 0) {
+                D_801DB080[k] = 9;
+            }
+        } else if (buttons & 0x1000) {
+            val           = D_801DB080[k] + 1;
+            D_801DB080[k] = val;
+            if (val >= 10) {
+                D_801DB080[k] = 1;
+            }
+        } else if (buttons & 0x2000) {
+            D_801DB0B8 += 1;
+            if (D_801DB0B8 >= 3) {
+                D_801DB0B8 = 0;
+            }
+        } else if (buttons & 0x8000) {
+            D_801DB0B8 -= 1;
+            if (D_801DB0B8 < 0) {
+                D_801DB0B8 = 2;
+            }
+        }
+    } else if (*pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        SND_PlayCue(0x104);
+        D_801F294D += 1;
+    }
+    func_801D4AE0(0x10, 0x18, 0);
+    func_801D4F88(0x68, 0x40, 0);
+    func_801D4EA4(0x68, 0x78, D_801DB0B4, 1);
+    func_801D3184(0xCC, 0x10);
+    func_801D32A0(0xCC, 0x3C, 0);
+}
+#else
 INCLUDE_ASM(func_801D3C30);
+#endif
 
 INCLUDE_ASM(func_801D3E44);
 
@@ -588,7 +929,25 @@ INCLUDE_ASM(func_801D4158);
 
 INCLUDE_ASM(func_801D42B4);
 
-INCLUDE_ASM(func_801D437C);
+MATCH void func_801D437C(void) {
+    u8* state;
+    s32 idx;
+
+    state = &g_GameStateIndex;
+    if (*state != 2) {
+        idx = ((s8)D_801DB0B4 * 3 + (s8)D_801DB0B8) * 2 + D_801448F2 * 48;
+        if (!(u8)Item_Add(D_801DAD00[0][idx + 1], D_801DAD00[0][idx], 1, 0)) {
+            Message_StartAreaMessage(0x83);
+            *state = 2;
+        }
+        D_801F294D = 6;
+    }
+    func_801D4AE0(0x10, 0x18, 1);
+    func_801D4F88(0x68, 0x40, 1);
+    func_801D4EA4(0x68, 0x78, D_801DB0B4, 0);
+    func_801D3184(0xCC, 0x10);
+    func_801D32A0(0xCC, 0x3C, 0);
+}
 
 INCLUDE_ASM(func_801D448C);
 
@@ -610,9 +969,105 @@ MATCH void func_801D4840(void) {
     }
 }
 
-INCLUDE_ASM(func_801D4910);
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D4910(s32 x, s32 y) {
+    s32 i;
+    s32 off;
+    s32 tpage;
+    s32 y2;
 
+    if (GetGraphType() == 1 || GetGraphType() == 2) {
+        tpage = 0x2D;
+    } else {
+        tpage = 0x1D;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
+    GFX_AddPrim(1, 0xC);
+    func_801D2EDC((s16)x, (s16)y, 0xB);
+    off = 8;
+    for (i = 0; i < 9; i++) {
+        func_801D2EDC((s16)(x + off), (s16)(y - 1), 0xD);
+        off += 8;
+    }
+    func_801D2EDC((s16)(x + 0x4F), (s16)y, 0xC);
+    off = 8;
+    for (i = 0; i < 14; i++) {
+        y2 = (s16)(y + off);
+        func_801D2EDC((s16)x, y2, 0xE);
+        func_801D2EDC((s16)(x + 0x50), y2, 0xF);
+        off += 8;
+    }
+    y2 = (s16)(y + 0x78);
+    func_801D2EDC((s16)x, (s16)y2, 0x10);
+    off = 8;
+    for (i = 0; i < 9; i++) {
+        func_801D2EDC((s16)(x + off), (s16)y2, 0xD);
+        off += 8;
+    }
+    func_801D2EDC((s16)(x + 0x50), (s16)(y + 0x78), 0x11);
+}
+#else
+INCLUDE_ASM(func_801D4910);
+#endif
+
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D4AE0(s16 x, s16 y, u8 flag) {
+    s32 i;
+    s32 dy;
+    s32 gy;
+    s16 ry;
+    u8  k;
+    s8  sel;
+
+    UI_DrawWindow(x, y, 0x52, 0x7A, 0, g_WindowStyle);
+    func_801D4910(x, y);
+    dy = 7;
+    gy = 9;
+    for (i = 0; i < 8; i++) {
+        k   = i * 5 + 3;
+        sel = D_801DB0B4;
+        if (i == sel) {
+            if (flag == 0) {
+                sprintf(g_UiFormatBuffer, D_801DAD60);
+                ry = y + dy;
+                UI_DrawAsciiString(x + 6, ry, 0, g_UiFormatBuffer);
+                sprintf(g_UiFormatBuffer, D_801DAD64);
+                UI_DrawAsciiString(x + 0x2F, ry, 2, g_UiFormatBuffer);
+            } else {
+                sprintf(g_UiFormatBuffer, D_801D0C24, D_801DB080[k], D_801DB080[k + 1], D_801DB080[k + 2]);
+                ry = y + dy;
+                UI_DrawAsciiString(x + 6, ry, 0, g_UiFormatBuffer);
+                sprintf(g_UiFormatBuffer, D_801D0C20, D_801DB080[k + 3]);
+                UI_DrawAsciiString(x + 0x2F, ry, 2, g_UiFormatBuffer);
+                sprintf(g_UiFormatBuffer, D_801D0C20, D_801DB080[k + 4]);
+            }
+            UI_DrawAsciiString(x + 0x43, ry, 1, g_UiFormatBuffer);
+            UI_DrawGlyphString(x + 0x39, y + gy, 0, D_801D0C2C);
+        } else if (i < sel) {
+            sprintf(g_UiFormatBuffer, D_801D0C24, D_801DB080[k], D_801DB080[k + 1], D_801DB080[k + 2]);
+            ry = y + dy;
+            UI_DrawAsciiString(x + 6, ry, 0, g_UiFormatBuffer);
+            sprintf(g_UiFormatBuffer, D_801D0C20, D_801DB080[k + 3]);
+            UI_DrawAsciiString(x + 0x2F, ry, 2, g_UiFormatBuffer);
+            sprintf(g_UiFormatBuffer, D_801D0C20, D_801DB080[k + 4]);
+            UI_DrawAsciiString(x + 0x43, ry, 1, g_UiFormatBuffer);
+            UI_DrawGlyphString(x + 0x39, y + gy, 0, D_801D0C2C);
+        } else {
+            sprintf(g_UiFormatBuffer, D_801DAD60);
+            ry = y + dy;
+            UI_DrawAsciiString(x + 6, ry, 7, g_UiFormatBuffer);
+            sprintf(g_UiFormatBuffer, D_801DAD64);
+            UI_DrawAsciiString(x + 0x2F, ry, 7, g_UiFormatBuffer);
+            UI_DrawAsciiString(x + 0x43, ry, 7, g_UiFormatBuffer);
+            UI_DrawGlyphString(x + 0x39, y + gy, 7, D_801D0C2C);
+        }
+        gy += 14;
+        dy += 14;
+    }
+}
+#else
 INCLUDE_ASM(func_801D4AE0);
+#endif
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D4EA4(s32 left, s32 top, s32 icon_row, s32 raised) {
@@ -689,7 +1144,54 @@ MATCH void func_801D5194(void) {
 
 INCLUDE_ASM(func_801D51D0);
 
-INCLUDE_ASM(func_801D5788);
+MATCH void func_801D5788(void) {
+    POLY_G4* g4;
+    TILE*    tile;
+    s32      c;
+    s32      d;
+    s32      t;
+    s32      n;
+
+    func_801D5B2C();
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(1, 2, 0x140, 0), 0);
+    GFX_AddPrim(0, sizeof(DR_MODE));
+    g4 = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(g4);
+    SetSemiTrans(g4, 1);
+    d      = 0x140;
+    c      = D_801DB0C4;
+    g4->x0 = 0;
+    g4->x1 = d;
+    g4->x2 = 0;
+    g4->x3 = d;
+    setRGB0(g4, 0, 0, 0);
+    setRGB1(g4, 0, 0, 0);
+    setRGB2(g4, 0xFF, 0xFF, 0xFF);
+    setRGB3(g4, 0xFF, 0xFF, 0xFF);
+    g4->y0 = c;
+    g4->y1 = c;
+    c += 0x10;
+    g4->y2 = c;
+    g4->y3 = c;
+    GFX_AddPrim(0, sizeof(POLY_G4));
+    tile = (TILE*)g_GfxPrimCursor;
+    SetTile(tile);
+    t        = D_801DB0C4;
+    tile->x0 = 0;
+    tile->w  = d;
+    setRGB0(tile, 0, 0, 0);
+    tile->y0 = t + 0x10;
+    tile->h  = 0xE0 - t;
+    GFX_AddPrim(0, sizeof(TILE));
+    n          = D_801DB0C4;
+    D_801DB0C4 = n + 1;
+    if (g_InputHeld != 0) {
+        D_801DB0C4 = n + 3;
+    }
+    if (D_801DB0C4 >= 0xC8) {
+        D_801F294D += 1;
+    }
+}
 
 MATCH void func_801D5924(void) {
     func_801D5B2C();
@@ -973,7 +1475,33 @@ MATCH void func_801D65F8(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event3Step1Sub7Funcs, D_801F294E);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D6634(void) {
+    s32 i;
+    u8* dst;
+    u8* tbl;
+
+    func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4), 0);
+    func_801D97C8(D_801DAAA8, D_801DB0C4 * 30 + 0xB0, 0x2B);
+    func_801D9B80(0x12, D_801DB0C4 * 30 + 0x61, 0x24, 0x11);
+    func_801D94D0(D_801DAAA8, 0x18, D_801DB0C4 * 30 + 0x67, D_801DB0D4, D_801DB0D8);
+    D_801DB0C4 -= 1;
+    if (D_801DB0C4 == 0) {
+        tbl = D_801457E8[0];
+        dst = D_801DB080;
+        for (i = 0; i < 5; i++, dst++) {
+            *dst = tbl[Fairy_FindActiveJob(D_801DB0B4) * 5 + i] ? tbl[Fairy_FindActiveJob(D_801DB0B4) * 5 + i] : 0xFF;
+        }
+        D_801DB0D0 = 0;
+        D_801DB0D4 = 0;
+        D_801DB0D8 = 0;
+        D_801DAAA8 = 2;
+        D_801F294E += 1;
+    }
+}
+#else
 INCLUDE_ASM(func_801D6634);
+#endif
 
 MATCH void func_801D67F0(void) {
     func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 1);
@@ -1056,7 +1584,29 @@ MATCH void func_801D6CDC(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event3Step2Funcs, D_801F294D);
 }
 
-INCLUDE_ASM(func_801D6D18);
+MATCH void func_801D6D18(void) {
+    s32 drawn;
+    u32 i;
+    u8  step;
+
+    drawn      = 0;
+    step       = D_801DB0C4 - 1;
+    D_801DB0C4 = step;
+    Menu_DrawHeaderBar(0x14, (0x10 - step * 8) & 0xFFF8, 0x118, 0x13, g_WindowStyle);
+    for (i = 0; i < 7; i++) {
+        if (g_Characters[i].unk_07 & 1) {
+            if ((drawn & 1) == 0) {
+                func_801D90D8(0x20 - D_801DB0C4 * 40, (((u8)drawn >> 1) * 0x38) + 0x2B, (u8)i, 0);
+            } else {
+                func_801D90D8(D_801DB0C4 * 40 + 0xA8, (((u8)drawn >> 1) * 0x38) + 0x2B, (u8)i, 0);
+            }
+            drawn++;
+        }
+    }
+    if (D_801DB0C4 == 0) {
+        D_801F294D += 1;
+    }
+}
 
 INCLUDE_ASM(func_801D6E70);
 
