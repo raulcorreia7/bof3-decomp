@@ -21,37 +21,47 @@ typedef struct CommuCellFrame {
 ASSERT_OFFSET(CommuCellFrame, points, 0x00);
 ASSERT_SIZE(CommuCellFrame, 0xC);
 
-extern u8             D_801455C9[];
+typedef struct CommuSelectionPair {
+    u8 count;
+    u8 value;
+} CommuSelectionPair;
+
+ASSERT_OFFSET(CommuSelectionPair, count, 0x0);
+ASSERT_OFFSET(CommuSelectionPair, value, 0x1);
+ASSERT_SIZE(CommuSelectionPair, 0x2);
+
+extern u8                 D_801455C9[];
 /* g_EmiOverlayHeader */
-extern OverlayHeader  g_EmiOverlayHeader;
-extern u16            D_801D4BB8[10];
+extern OverlayHeader      g_EmiOverlayHeader;
+extern u16                D_801D4BB8[10];
 /* D_801D4BCC */
-extern Callback       g_Commu01States[COMMU01_STEP_COUNT];
+extern Callback           g_Commu01States[COMMU01_STEP_COUNT];
 /* D_801D4BD8 */
-extern Callback       g_Commu01Step2Funcs[COMMU01_STEP2_COUNT];
-extern Callback       D_801D4BE4[];
+extern Callback           g_Commu01Step2Funcs[COMMU01_STEP2_COUNT];
+extern Callback           D_801D4BE4[];
 /* D_801D4BEC */
-extern Callback       g_Commu01Step2Sub1Funcs[COMMU01_STEP2_SUB1_COUNT];
-extern u8             D_801D4C04[12];
-extern u16            D_801D4C10[26];
-extern CommuCellFrame D_801D4C44[COMMU_CELL_FRAME_COUNT];
-extern u8             D_801D4DF4;
-extern u8             D_801D4DF8;
-extern u8             D_801D4DFC;
-extern u8             D_801D4E00;
-extern u8             D_801D4E04;
-extern u8             D_801D4E08;
-extern u16            D_801D4E0C;
-extern u8             D_801D4E10;
-extern u16            D_801D4E14;
-extern u8             D_801D4E18;
-extern u8             D_801D4E1C;
-extern u8             D_801D4E20;
-extern u8             D_801D4E24;
-extern u8             D_801D4E28;
-extern u8             D_801D4E2C;
-extern u8             D_801D4E30;
-extern u8             D_801F286D[];
+extern Callback           g_Commu01Step2Sub1Funcs[COMMU01_STEP2_SUB1_COUNT];
+extern u8                 D_801D4C04[12];
+extern u16                D_801D4C10[4];
+extern CommuSelectionPair D_801D4C18[22];
+extern CommuCellFrame     D_801D4C44[COMMU_CELL_FRAME_COUNT];
+extern u8                 D_801D4DF4;
+extern u8                 D_801D4DF8;
+extern u8                 D_801D4DFC;
+extern u8                 D_801D4E00;
+extern u8                 D_801D4E04;
+extern u8                 D_801D4E08;
+extern u16                D_801D4E0C;
+extern u8                 D_801D4E10;
+extern u16                D_801D4E14;
+extern u8                 D_801D4E18;
+extern u8                 D_801D4E1C;
+extern u8                 D_801D4E20;
+extern u8                 D_801D4E24;
+extern u8                 D_801D4E28;
+extern u8                 D_801D4E2C;
+extern u8                 D_801D4E30;
+extern u8                 D_801F286D[];
 
 void func_801D28A4(s32 x, s32 y, s32 fairy_index, s32 selected);
 void func_801D3038(void);
