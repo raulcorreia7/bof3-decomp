@@ -139,11 +139,11 @@ void func_801D2794(s32 count, s32 shown, s32 chosen);
 void func_801D2870(void);
 void func_801D2AC4(s16 x, s16 y, s32 column, s32 style);
 void func_801D2CF8(s32 x, s32 y, s32 icon);
-void func_801D3184(s32 arg0, s32 arg1);
+void func_801D3184(s32 x, s32 y);
 void func_801D4AE0(s16 x, s16 y, u8 flag);
 void func_801D4F88(s32 x, s32 y, s32 show_values);
 void func_801D5B2C(void);
-void func_801D8058(s32 arg0, s32 arg1);
+void func_801D8058(s32 left, s32 top);
 void func_801D830C(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 /* The area text bank indexes of the tables the fairy name halves come from. */
 #define FAIRY_NAME_FIRST_HALF_INDEX  496
@@ -151,9 +151,9 @@ void func_801D830C(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 /* func_801D8968 */
 void Fairy_GenerateName(void);
 void func_801D90D8(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_801D94D0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
-void func_801D97C8(s32 arg0, s32 arg1, s32 arg2);
-void func_801D9B80(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg, s32 cursor_row_arg);
+void func_801D97C8(s32 unused, s32 x, s32 y);
+void func_801D9B80(s32 x, s32 y, s32 width, s32 height);
 void func_801DA7A4(void);
 
 /* The cell the cursor points at: one 0x60-byte page of eight rows, twelve one-byte cells each. */

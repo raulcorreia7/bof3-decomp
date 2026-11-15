@@ -84,7 +84,17 @@ MATCH void func_801EF164(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF1CC);
+MATCH void func_801EF1CC(void) {
+    g_Task->unk_14 += g_Task->unk_20;
+    g_Task->pos.z.part.integer += g_Task->unk_14;
+    if (g_Task->unk_14 == 0) {
+        g_Task->pos.x.fixed = g_Battle.selected_actor->pos.x.fixed;
+        g_Task->pos.y.fixed = g_Battle.selected_actor->pos.y.fixed;
+        g_Task->pos.z.fixed -= g_BattleEffectBattler->pos.z.fixed - g_Battle.selected_actor->pos.z.fixed;
+        g_Task->unk_09 = 0x1F;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF280(void) {
     PartyMember* work;
@@ -285,34 +295,18 @@ MATCH void func_801EFBEC(void) {
 }
 
 MATCH void func_801EFC54(void) {
-    PartyMember* work;
-    PartyMember* copy;
-    PartyMember* record;
-    s32          delta;
-    u8           countdown;
-
-    work                   = g_Task;
-    work->unk_14           = work->unk_14 + work->unk_20;
-    countdown              = work->timer;
-    COORD_INT(work->pos.z) = COORD_INT(work->pos.z) + work->unk_14;
-    if (countdown != 0) {
-        work->timer = countdown - 1;
+    g_Task->unk_14 += g_Task->unk_20;
+    g_Task->pos.z.part.integer += g_Task->unk_14;
+    if (g_Task->timer != 0) {
+        g_Task->timer -= 1;
     }
-    copy = g_Task;
-    if (copy->unk_14 != 0) {
-        return;
+    if (g_Task->unk_14 == 0) {
+        g_Task->pos.x.fixed = g_Battle.selected_actor->pos.x.fixed;
+        g_Task->pos.y.fixed = g_Battle.selected_actor->pos.y.fixed;
+        g_Task->pos.z.fixed -= g_BattleEffectBattler->pos.z.fixed - g_Battle.selected_actor->pos.z.fixed;
+        g_Task->unk_09 = 0x0F;
+        g_Task->header.step += 1;
     }
-    copy->pos.x.fixed = g_BattleSelectedActor->pos.x.fixed;
-    /* FAKE: Re-read the cell after the store; the compiler shares one load (without it 0xC8 vs 0xD4 bytes). */
-    FAKE_BARRIER();
-    copy->pos.y.fixed = g_BattleSelectedActor->pos.y.fixed;
-    /* FAKE: keeps the cell read for the final header step after the position stores; plain C reads it first (0xC8 vs 0xD4 bytes). */
-    FAKE_BARRIER();
-    record            = g_BattleEffectBattler;
-    delta             = record->pos.z.fixed - g_BattleSelectedActor->pos.z.fixed;
-    copy->unk_09      = 0xF;
-    copy->pos.z.fixed = copy->pos.z.fixed - delta;
-    g_Task->header.step++;
 }
 
 MATCH void func_801EFD28(void) {
