@@ -128,9 +128,50 @@ MATCH void func_801EF41C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF4C8);
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF4C8(void) {
+    s16 angle;
+    s16 phase;
+    u8  mask;
 
+    g_Task->timer                    = (rand() & 3) << 4;
+    angle                            = 0xC0 - g_Task->timer;
+    D_1F800000.view.effect.params[0] = angle;
+    mask                             = g_Task->unk_04 & 7;
+    D_1F80000A                       = mask << 9;
+    g_Task->pos.x.fixed              = g_BattleEffectBattler->pos.x.fixed + ((rsin(mask << 9) * D_1F800000.view.effect.params[0]) >> 3);
+    phase                            = D_1F80000A;
+    g_Task->pos.y.fixed              = g_BattleEffectBattler->pos.y.fixed + ((rcos(phase) * D_1F800000.view.effect.params[0]) >> 3);
+    g_Task->pos.z.fixed              = g_BattleEffectBattler->pos.z.fixed;
+    g_Task->param.unk_0B             = rand();
+    g_Task->unk_09                   = 0;
+    g_Task->header.step += 1;
+}
+#else
+INCLUDE_ASM(func_801EF4C8);
+#endif
+
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF600(void) {
+    s16 angle;
+    u8  mask;
+    u8  count;
+
+    angle                            = g_Task->unk_09 * 8 - (g_Task->timer - 0xC0);
+    D_1F800000.view.effect.params[0] = angle;
+    mask                             = g_Task->unk_04 & 7;
+    D_1F80000A                       = mask << 9;
+    g_Task->pos.x.fixed              = g_BattleEffectBattler->pos.x.fixed + ((rsin(mask << 9) * D_1F800000.view.effect.params[0]) >> 3);
+    g_Task->pos.y.fixed              = g_BattleEffectBattler->pos.y.fixed + ((rcos(SP_REF(s16, 0xA)) * D_1F800000.view.effect.params[0]) >> 3);
+    count                            = g_Task->unk_09 + 1;
+    g_Task->unk_09                   = count;
+    if ((count & BYTE_MASK) == 0x10) {
+        g_Task->header.step += 1;
+    }
+}
+#else
 INCLUDE_ASM(func_801EF600);
+#endif
 
 MATCH void func_801EF710(void) {
     PartyMember* active;

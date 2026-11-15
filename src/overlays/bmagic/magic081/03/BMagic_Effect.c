@@ -38,7 +38,24 @@ MATCH void func_801EEE74(void) {
     g_Task = saved;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EEEDC(void) {
+    PartyMember* saved;
+    u32          slot;
+
+    slot                               = Battle_AllocEffect(1, 66) & BYTE_MASK;
+    g_BattleEffects[slot].header.mode  = 0;
+    g_BattleEffects[slot].target.party = g_Task;
+    saved                              = g_Task;
+    g_Task                             = D_801EC2E0->target.party;
+    Actor_StepAnimOnce();
+    g_Task               = saved;
+    g_Task->param.unk_0B = 1;
+    g_Task->header.mode += 1;
+}
+#else
 INCLUDE_ASM(func_801EEEDC);
+#endif
 
 MATCH void func_801EEF88(void) {
     PartyMember* saved_work;
