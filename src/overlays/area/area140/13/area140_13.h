@@ -9,12 +9,6 @@
 #include "area/spad.h"
 #include "game/spawn.h"
 
-typedef struct Area140InputSnapshot {
-    u16 buttons;
-} Area140InputSnapshot;
-
-ASSERT_SIZE(Area140InputSnapshot, 0x02);
-
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 /* The shared flag word the release path clears a bit of. */
 /* The request selector and the bytes the cancel path sets. */

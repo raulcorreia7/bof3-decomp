@@ -32,7 +32,7 @@ MATCH void func_801F40C0(void) {
                 held                                          = &g_InputHeld;
                 input                                         = *held;
                 low_buttons                                   = input & 0x0FFF;
-                ((Area140InputSnapshot*)&D_1F800000)->buttons = input;
+                SP_REF(u16, 0)                                = input;
                 button_index                                  = input >> 12;
                 *held                                         = low_buttons;
                 low_buttons |= D_801F47C4[0x2B0 + button_index] << 12;
