@@ -36,7 +36,7 @@ MATCH void func_801F8EB0(void) {
                 g_ScriptVars[0]      = 0x14;
                 SYS_SetFlag(g_SceneFlags, 0x11);
                 g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
-                Game_RequestAreaChange(AREA_ID_GENMEL, TO_COORD(8), TO_COORD(0x26), AREA_ENTRY_MAP_LOADING | FACING_UP_LEFT);
+                Game_RequestAreaChange(AREA_ID_GENMEL, TO_COORD(0x8), TO_COORD(0x26), AREA_ENTRY_MAP_LOADING | FACING_UP_LEFT);
             }
             break;
         case 11:

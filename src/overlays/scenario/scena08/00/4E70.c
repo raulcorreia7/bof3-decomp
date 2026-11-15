@@ -17,8 +17,8 @@ MATCH void func_801FBA70(void) {
             break;
         case 100:
             if (g_GameAreaId == AREA_ID_DAUNA_MINE_WORKER) {
-                index = func_8019601C();
-                if (index != 0xFF) {
+                index = Actor_FindFreeSpawned();
+                if (index != GAME_NONE) {
                     actor               = &g_SpawnedActors[index];
                     actor->header.flags = ACTOR_FLAG_IN_USE;
                     actor->type         = 0x57;
@@ -48,7 +48,7 @@ MATCH void func_801FBA70(void) {
             break;
         case 4:
             if (g_ScriptVars[0] == 0x8) {
-                func_801C16B8();
+                Char_RebuildPartyStats();
                 SYS_SetFlag(g_SceneFlags, 7);
                 Game_RequestAreaChange(AREA_ID_DAUNA_WORLD_MAP, TO_COORD(0x1B), TO_COORD(0x21), FACING_RIGHT);
                 g_GameFlags &= ~GAME_FLAG_SCROLL_LOCK;

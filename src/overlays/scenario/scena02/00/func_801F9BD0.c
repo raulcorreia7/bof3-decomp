@@ -40,7 +40,7 @@ MATCH void func_801F9BD0(void) {
             break;
         case 5:
             if (g_ScriptVars[0] == 0x44) {
-                func_801BE1B0(g_PartyFieldOrder[0] == 0 ? 0x17 : 0x18);
+                func_801BE1B0(g_PartyFieldOrder[0] == 0 ? 23 : 24);
                 g_SceneState.step_05 = 6;
             }
             break;
@@ -49,9 +49,9 @@ MATCH void func_801F9BD0(void) {
                 g_ScriptVars[2]      = 1;
                 g_SceneState.step_05 = 7;
                 if (g_PartyFieldOrder[0] == 0) {
-                    Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(0x3B), TO_COORD(0x1A), 0x8A);
+                    Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(0x3B), TO_COORD(0x1A), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_UP_RIGHT);
                 } else {
-                    Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(0x3B), TO_COORD(0x1A), 0x8B);
+                    Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(0x3B), TO_COORD(0x1A), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_RIGHT);
                 }
                 g_GamePrevSelection = 0x22;
             }
@@ -66,9 +66,9 @@ MATCH void func_801F9BD0(void) {
                 g_ScriptVars[2]      = 1;
                 g_SceneState.step_05 = 10;
                 if (g_PartyFieldOrder[0] == 0) {
-                    Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(0x3C), TO_COORD(0x48), 0x8A);
+                    Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(0x3C), TO_COORD(0x48), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_UP_RIGHT);
                 } else {
-                    Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(0x3C), TO_COORD(0x48), 0x8B);
+                    Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(0x3C), TO_COORD(0x48), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_RIGHT);
                 }
             }
             break;
