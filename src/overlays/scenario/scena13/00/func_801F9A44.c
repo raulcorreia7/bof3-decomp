@@ -94,7 +94,7 @@ MATCH void func_801F9A44(void) {
                 g_SpawnedActors[index].type         = 0x7F;
                 g_SpawnedActors[index].pos.x.fixed  = 0x98000;
                 g_SpawnedActors[index].pos.y.fixed  = 0x68000;
-                g_SpawnedActors[index].pos.z.fixed  = 0xF000000;
+                g_SpawnedActors[index].pos.z.fixed  = TO_COORD(3840);
             }
             D_80146876 = 0x28;
             D_80146875 = 0xD;

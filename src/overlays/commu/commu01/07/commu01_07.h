@@ -31,14 +31,14 @@ ASSERT_OFFSET(CommuSelectionPair, value, 0x1);
 ASSERT_SIZE(CommuSelectionPair, 0x2);
 
 /* A commu kind's entry rows: the name run its first row reads and how many rows it has. */
-typedef struct CommuKindRows {
+typedef struct CommuTypeRows {
     u8 first;
     u8 count;
-} CommuKindRows;
+} CommuTypeRows;
 
-ASSERT_OFFSET(CommuKindRows, first, 0x0);
-ASSERT_OFFSET(CommuKindRows, count, 0x1);
-ASSERT_SIZE(CommuKindRows, 0x2);
+ASSERT_OFFSET(CommuTypeRows, first, 0x0);
+ASSERT_OFFSET(CommuTypeRows, count, 0x1);
+ASSERT_SIZE(CommuTypeRows, 0x2);
 
 extern u8             D_801455C9[];
 extern s8             D_801455C2;
@@ -72,7 +72,7 @@ extern u8             D_801D4D34[];
 extern u8             D_801457A9[][8];
 extern u8             D_801457AA[][8];
 extern u8             D_801457AB[][8];
-extern CommuKindRows  D_801D4DD4[];
+extern CommuTypeRows  D_801D4DD4[];
 extern u16            D_801D4DDA[];
 extern Point2u        D_801D4DDC[];
 extern u8             D_801D4DF4;
