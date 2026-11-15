@@ -13,5 +13,7 @@ void func_801F3070(void);
 
 extern u8  D_801F3664[];
 extern u16 D_801F3668[];
+/* The z height delta each y cell adds. */
+extern u8  D_801F3670[];
 
 #endif

@@ -10,6 +10,10 @@
 /* The scenario flag byte the answer path tests. */
 extern u8 D_80144EF0[];
 
+/* The scene flag each x cell selects, and the z height that cell places the task at. */
+extern u8  D_801F420C[];
+extern u16 D_801F4210[];
+
 /* The battle record rows whose first byte is the slot tag. */
 extern u8                  D_801F41F8[];
 /* D_801F48FC */

@@ -7,6 +7,9 @@
 #include "overlays/area/world02.h"
 #include "area/spad.h"
 
+/* The corner vector RotTransPers projects. */
+extern SVECTOR D_1F800014[];
+
 extern u8 D_801F3930[];
 extern u8 D_801F3944[];
 extern u8 D_801F3948[];
