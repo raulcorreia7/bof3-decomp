@@ -3,7 +3,7 @@
 A `MATCH`/`NON_MATCHING` marker is a claim, not proof; one naming another
 address is `foreign` and the claim is withheld. A marker line names its
 function by ``func_ADDR`` or by the name it defines (``MATCH void
-UI_HandleStartButton(void)``), which ``names`` (the image's symbol rows,
+UI_UpdateStartButton(void)``), which ``names`` (the image's symbol rows,
 name -> address) resolves; without the row a renamed function is unnamed.
 """
 

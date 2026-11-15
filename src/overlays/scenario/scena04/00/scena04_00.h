@@ -74,21 +74,6 @@ ASSERT_OFFSET(ScenePathPoint, z, 0x08);
 ASSERT_SIZE(ScenePathWork, 0x90);
 ASSERT_OFFSET(ScenePathWork, points, 0x10);
 
-/* One 16-byte vertex of the box: an x, y and z word and a spare word. func_801F7084 stamps the
- * box's eight corners into D_801FA240 and func_801F732C draws them. */
-typedef struct SceneBoxVertex {
-    s32 x;   /* 0x00 */
-    s32 y;   /* 0x04 */
-    s32 z;   /* 0x08 */
-    s32 pad; /* 0x0C */
-} SceneBoxVertex;
-
-ASSERT_SIZE(SceneBoxVertex, 0x10);
-ASSERT_OFFSET(SceneBoxVertex, y, 0x04);
-ASSERT_OFFSET(SceneBoxVertex, z, 0x08);
-
-extern SceneBoxVertex D_801FA240[];
-
 /* The five 0x20-byte segment keys func_801F75BC draws: a start and an end 16.16 point with a spare
  * word after each. func_801F747C seeds the start x through D_801FA2C0 and the rest here. */
 extern s32 D_801FA2C0[];
@@ -160,9 +145,13 @@ extern s32      D_801FA1C4[];
 void            func_80196070(void);
 s8              func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
 void            func_801F7084(SceneBox* box);
-void            func_801F732C(u8 first, u8 second, u8 third, u8 fourth, s32 level0, s32 level1);
+void            func_801F732C(u8 v0, u8 v1, u8 v2, u8 v3, s32 shade0, s32 shade1);
 void            func_801F747C(void);
-void            func_801F75BC(s32 arg0, s32 arg1);
+void            func_801F75BC(u8 weight, u8 shade);
+
+/* The eight 16-byte path points the scene's quad draws from; func_801F7084 stamps the box's
+ * eight corners into D_801FA240 and func_801F732C draws them. */
+extern ScenePathPoint D_801FA240[];
 
 extern Callback  D_801FA1E4[];
 extern Callback  D_801FA204[];

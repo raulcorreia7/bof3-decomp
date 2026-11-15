@@ -506,7 +506,74 @@ MATCH s32 func_801F88C4(void) {
     return 0;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F88CC(u8 semi, s32 color) {
+    SPRT* sprite;
+    TILE* tile;
+    s32   tpage;
+    s32   shade;
+
+    if (semi != 0) {
+        if (GetGraphType() == 1) {
+            tpage = 0x50B;
+        } else if (GetGraphType() == 2) {
+            tpage = 0x50B;
+        } else {
+            tpage = 0x14B;
+        }
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
+        GFX_AddPrim(2, sizeof(DR_MODE));
+        tile = (TILE*)g_GfxPrimCursor;
+        setlen(tile, 3);
+        setcode(tile, 0x60);
+        SetSemiTrans(tile, 1);
+        shade = color * 2;
+        setRGB0(tile, shade, shade, shade);
+        tile->w = SCREEN_WIDTH;
+        setXY0(tile, 0, 0);
+        tile->h = SCREEN_HEIGHT;
+        GFX_AddPrim(2, sizeof(TILE));
+    }
+    if (GetGraphType() == 1) {
+        tpage = 0x48B;
+    } else if (GetGraphType() == 2) {
+        tpage = 0x48B;
+    } else {
+        tpage = 0x12B;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    sprite = (SPRT*)g_GfxPrimCursor;
+    setSprt(sprite);
+    SetSemiTrans(sprite, semi);
+    sprite->w = 0x100;
+    setXY0(sprite, 0, 0);
+    sprite->h = 0xF0;
+    setUV0(sprite, 0, 0);
+    setRGB0(sprite, color, color, color);
+    GFX_AddPrim(2, sizeof(SPRT));
+    if (GetGraphType() == 1) {
+        tpage = 0x48F;
+    } else if (GetGraphType() == 2) {
+        tpage = 0x48F;
+    } else {
+        tpage = 0x12F;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    sprite = (SPRT*)g_GfxPrimCursor;
+    setSprt(sprite);
+    SetSemiTrans(sprite, semi);
+    setXY0(sprite, 0x100, 0);
+    sprite->w = 0x40;
+    sprite->h = 0xF0;
+    setUV0(sprite, 0, 0);
+    setRGB0(sprite, color, color, color);
+    GFX_AddPrim(2, sizeof(SPRT));
+}
+#else
 INCLUDE_ASM(func_801F88CC);
+#endif
 
 INCLUDE_ASM(func_801F8B10);
 
@@ -553,7 +620,21 @@ MATCH void func_801F8FAC(s32 x, s32 y, s32 color, u8 semi_trans) {
     GFX_AddPrim(2, sizeof(SPRT));
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F90BC(s16 x, s16 y, u32 clut, u32 uv) {
+    SPRT_16* prim;
+
+    prim = (SPRT_16*)g_GfxPrimCursor;
+    SetSprt16(prim);
+    setRGB0(prim, 0x80, 0x80, 0x80);
+    setXY0(prim, x, y);
+    prim->clut = (clut & 0x3F) | 0x7B80;
+    setUV0(prim, (uv & 0xF) << 4, uv & 0xF0);
+    GFX_AddPrim(1, sizeof(SPRT_16));
+}
+#else
 INCLUDE_ASM(func_801F90BC);
+#endif
 
 MATCH void func_801F9160(s16 x, s16 y) {
     SPRT* prim;

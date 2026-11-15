@@ -18,7 +18,7 @@ extern u32      D_801F6C00;
 extern Callback D_801F973C[];
 extern Callback D_801F9748[];
 
-void            func_801F88CC(s32 arg0, s32 arg1);
+void            func_801F88CC(u8 semi, s32 color);
 void            func_801F8B10(s32 arg0, s32 arg1);
 void            func_801F8EF0(void);
 void            func_801F8FAC(s32 x, s32 y, s32 color, u8 semi_trans);
