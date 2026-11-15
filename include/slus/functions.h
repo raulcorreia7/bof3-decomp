@@ -124,7 +124,7 @@ extern void  UI_DrawMessageScript(void);
 /* func_80150E14 */
 void         UI_TickChoiceTimer(void);
 /* func_80151210 */
-void         UI_HandleChoiceInput(void);
+void         UI_UpdateChoiceInput(void);
 /* func_801515A8 */
 void         UI_ClosePanel(void);
 /* func_80151628 */

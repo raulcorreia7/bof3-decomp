@@ -23,7 +23,7 @@ segments:
       - [0x204, c, func_800C1A04]
       - [0x20C, c, func_800C1A0C]
       - [0x214, c, Boss_InstallBattleHooks]
-      - [0x24C, c, Boss_HandleBattleEvent]
+      - [0x24C, c, Boss_RunBattleEvent]
       - [0x254, c, Boss_ChooseBattleEnding]
       - [0x2A0, c, Boss_EndBattle]
       - [0x2A8, c, func_800C1AA8]
