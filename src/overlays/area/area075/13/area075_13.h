@@ -38,7 +38,7 @@ extern void func_801F4874(void);
 
 extern u8 D_801F2C94[];
 
-void func_801F4A50(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+void func_801F4A50(s32, s32, s32, s32, s32);
 
 void func_801F2E64(s32 arg0, s32 arg1);
 
