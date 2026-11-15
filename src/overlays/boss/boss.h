@@ -59,7 +59,7 @@ void func_800C1978(s32 mode);
 void func_800C1998(s32 mode);
 /* func_800C1ACC (boss014), func_800C1AE8 (boss024), func_800C1E74 (boss002), func_800C1FE8 (boss004), func_800C20C0
    (boss008), func_800C2430 (boss018) */
-u8   Boss_HandleBattleEvent2(u32 mode);
+u8   Boss_RunBattleEvent2(u32 mode);
 /* func_800C1AD4 (boss014), func_800C1AF0 (boss024), func_800C1E7C (boss002), func_800C20C8 (boss008), func_800C2188
    (boss004), func_800C253C (boss018) */
 void Boss_ChooseBattleEnding2(void);
@@ -75,7 +75,7 @@ void Boss_EndBattle2(void);
    (boss012), func_800C1BB4 (boss038), func_800C1C44 (boss004), func_800C1D88 (boss002), func_800C1DA8 (boss033),
    func_800C1DB0 (boss036), func_800C1E88 (boss001), func_800C1FD4 (boss008), func_800C2044 (boss013), func_800C214C
    (boss018), func_800C2378 (boss034), func_800C24D8 (boss055), func_800C2B98 (boss025) */
-u8   Boss_HandleBattleEvent(u32 mode);
+u8   Boss_RunBattleEvent(u32 mode);
 /* func_800C1930 (boss015), func_800C1930 (boss029), func_800C193C (boss037), func_800C193C (boss042), func_800C1948
    (boss050), func_800C1970 (boss054), func_800C19C4 (boss023), func_800C1A04 (boss017), func_800C1A08 (boss031),
    func_800C1A08 (boss032), func_800C1A1C (boss030), func_800C1A28 (boss014), func_800C1A28 (boss024), func_800C1A34
@@ -98,7 +98,7 @@ void func_800C1B18(s32 mode);
 void func_800C1C08(s32 mode);
 void func_800C1E58(s32 mode);
 /* func_800C1F40 (boss002), func_800C21BC (boss008), func_800C2384 (boss004), func_800C2714 (boss018) */
-u8   Boss_HandleBattleEvent3(u32 mode);
+u8   Boss_RunBattleEvent3(u32 mode);
 /* func_800C1F48 (boss002), func_800C21C4 (boss008), func_800C2524 (boss004), func_800C2820 (boss018) */
 void Boss_ChooseBattleEnding3(void);
 /* func_800C1F94 (boss002), func_800C2210 (boss008), func_800C25A4 (boss004), func_800C292C (boss018) */
@@ -137,6 +137,6 @@ void Boss_EndBattle3(void);
 void func_800C18C4(s32);
 void func_800C1A80(s32);
 void func_800C1C88(s32);
-u8   Boss_HandleBattleEvent4(u32);
+u8   Boss_RunBattleEvent4(u32);
 
 #endif
