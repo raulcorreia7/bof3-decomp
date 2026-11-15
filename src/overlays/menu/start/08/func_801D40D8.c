@@ -9,35 +9,38 @@ NON_MATCHING void func_801D40D8(void) {
 
     Menu_DrawClutStrip(D_80144953);
     flag = &D_80148624;
-    Message_SetVariable(0, 0xC, Item_GetRecord(g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A, D_801C893C[D_8014850E][g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]));
+    Message_SetVariable(0, 0xC, Item_GetRecord(D_8014850E, D_801C893C[D_8014850E][D_80148510]));
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x1A;
     label                                                       = &D_8014865B;
     *flag                                                       = 1;
+    pad                                                         = &g_InputPressed;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.x + ((1 - *label) << 5) + 0xDE;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y + 5;
-    pad                                                         = &g_InputPressed;
     records                                                     = D_801C893C;
     if (*pad & (PADLright | PADLleft)) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
         *label ^= 1;
     }
-    if (g_InputMasks[MENU_INPUT_CONFIRM] & *pad) {
+    if (*pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (*label != 0) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
-            records[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A][g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]    = 0;
-            D_801C8950[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A][g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C] = 0;
+            records[D_8014850E][D_80148510]    = 0;
+            D_801C8950[D_8014850E][D_80148510] = 0;
         } else {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         }
-        g_MenuStep.sub_step -= 3;
-        /* FAKE: retail reaches the neighbouring flag through the record base. */
-        *(s8*)((u8*)flag - 0x113) = -1;
+        {
+            u8* step = &D_80148651;
+
+            *step -= 3;
+        }
+        D_80148504.drawn_cursor = 0xFF;
         return;
     }
-    if (g_InputMasks[MENU_INPUT_CANCEL] & *pad) {
+    if (*pad & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
-        *(s8*)((u8*)flag - 0x113) = -1;
-        g_MenuStep.sub_step -= 3;
+        *(u8*)&D_80148511 = 0xFF;
+        D_80148651 -= 3;
     }
 }
 #else

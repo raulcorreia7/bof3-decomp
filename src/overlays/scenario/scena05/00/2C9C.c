@@ -35,7 +35,92 @@ MATCH void func_801FC2F0(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801FC380(void) {
+    switch (g_SceneState.step_05) {
+        case 0:
+            func_801FC8A0(0x91);
+            g_SceneState.step_05 = 1;
+            break;
+        case 1:
+            g_SceneState.step_05 = 2;
+            switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {
+                case 1:
+                    Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(37), TO_COORD(174), 0x8A);
+                    break;
+                case 2:
+                    Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(37), TO_COORD(174), 0x89);
+                    break;
+            }
+            break;
+        case 2:
+            if (g_ScriptVars[0] == 0x1) {
+                g_SceneState.step_05 = 3;
+                SYS_SetFlag(g_SceneFlags, 0x30);
+                g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
+                switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {
+                    case 1:
+                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(39), TO_COORD(173), 0x8C);
+                        break;
+                    case 2:
+                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(39), TO_COORD(173), 0x8B);
+                        break;
+                }
+            }
+            break;
+        case 3:
+            if (g_ScriptVars[0] == 0xA) {
+                g_SceneState.step_05 = 4;
+                SYS_SetFlag(g_SceneFlags, 0x31);
+                g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
+                switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {
+                    case 1:
+                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(34), TO_COORD(114), 0x8E);
+                        break;
+                    case 2:
+                        Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, TO_COORD(34), TO_COORD(114), 0x8D);
+                        break;
+                }
+            }
+            break;
+        case 4:
+            if (g_ScriptVars[0] == 0x4) {
+                g_SceneState.step_05 = 5;
+                g_Characters[1].unk_07 |= 1;
+                g_Characters[5].unk_07 |= 1;
+                g_Characters[6].unk_07 |= 1;
+                switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {
+                    case 1:
+                        Scene_RunScenario(3);
+                        break;
+                    case 2:
+                        Scene_RunScenario(2);
+                        break;
+                }
+            }
+            break;
+        case 5:
+            if (g_GameStateIndex == 0) {
+                g_ScriptVars[0]      = 0x5;
+                g_SceneState.step_05 = 6;
+            }
+            break;
+        case 6:
+            if (g_ScriptVars[0] == 0x5) {
+                SYS_SetFlag(g_SceneFlags, 0x32);
+                Game_ClearScriptActive();
+                g_ScriptVars[1]       = 0;
+                g_ScriptVars[2]       = 0;
+                g_ScriptVars[3]       = 0;
+                g_SceneState.step_05  = 0;
+                g_SceneState.state_04 = 0;
+            }
+            break;
+    }
+}
+#else
 INCLUDE_ASM(func_801FC380);
+#endif
 
 MATCH void func_801FC6A8(void) {
     u8* state;

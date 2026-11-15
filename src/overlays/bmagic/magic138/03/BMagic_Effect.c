@@ -6,10 +6,34 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
-INCLUDE_ASM(func_801EEC88);
+MATCH void func_801EEC88(void) {
+    PartyMember* work;
+    PartyMember* saved_work;
+    u16*         src;
+    u16*         dst;
+    u8           i;
+
+    work              = g_Task;
+    work->unk_2E.half = 0xF0;
+    work->unk_30.half = 0xFA;
+    i                 = 0;
+    dst               = g_AreaPaletteCopy->rows[26].colors;
+    src               = g_AreaPaletteArena->rows[26].colors;
+    for (; i < 16; i++) {
+        dst[i] = src[i];
+    }
+    g_GfxPalettePending  = 1;
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0;
+    saved_work           = g_Task;
+    TASK_SET(g_BattleEffectBattler);
+    Actor_StepAnimLoop();
+    TASK_SET(saved_work);
+    saved_work->header.mode += 1;
+}
 
 MATCH void func_801EED60(void) {
-    PartyMember* saved;
+    PartyMember* saved_work;
     u8           slot;
 
     if ((g_FrameCount & 7) == 0) {
@@ -30,10 +54,10 @@ MATCH void func_801EED60(void) {
         if (g_Task->unk_09 == 6) {
             g_Task->header.mode += 1;
         }
-        saved  = g_Task;
-        g_Task = g_BattleEffectBattler;
+        saved_work = g_Task;
+        g_Task     = g_BattleEffectBattler;
         Actor_StepAnimLoop();
-        g_Task = saved;
+        g_Task = saved_work;
     }
 }
 

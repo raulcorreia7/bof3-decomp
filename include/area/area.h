@@ -32,6 +32,7 @@
 #include "types.h"
 #include "common/fixed.h"
 #include "common/vector.h"
+#include "psx/mem.h"
 #include "psx/psyq.h"
 
 /* The world overlays' own records. Every area program keeps its scratch in
@@ -79,13 +80,33 @@
                                         * reader: reached through the base */
 /* The working copy of the palette banks (g_GraphicsPaletteDst): palette animations and fades write it, and the pending
  * flag g_GfxPalettePending asks the next frame to upload it. */
-#define AREA_PALETTE_WORK          0x80037800u
+#define AREA_PALETTE_WORK   0x80037800u
 /* The script tables g_Scripts alternates between: the field's, the battle's and the battle magic's. */
-#define AREA_SCRIPT_TABLE          0x800D3800u
-#define BATTLE_SCRIPT_TABLE        0x800F0800u
-#define BMAGIC_SCRIPT_TABLE        0x800C3800u
-#define AREA_PALETTE_UNIT          0x40u  /* one CLUT entry */
-#define AREA_PALETTE_ROW           0x200u /* one upload row (32 rows) */
+#define AREA_SCRIPT_TABLE   0x800D3800u
+#define BATTLE_SCRIPT_TABLE 0x800F0800u
+#define BMAGIC_SCRIPT_TABLE 0x800C3800u
+#define AREA_PALETTE_UNIT   0x40u  /* one CLUT entry */
+#define AREA_PALETTE_ROW    0x200u /* one upload row (32 rows) */
+#define AREA_PALETTE_COLORS 256u   /* colour words of one upload row */
+#define AREA_PALETTE_ROWS   32u    /* rows of one palette bank */
+
+/* One palette upload row: 256 colour words. */
+typedef struct PaletteRow {
+    u16 colors[AREA_PALETTE_COLORS];
+} PaletteRow;
+
+ASSERT_SIZE(PaletteRow, AREA_PALETTE_ROW);
+
+/* The rows of one palette bank: the arena holds the banks the families fill, the working copy
+ * (g_GraphicsPaletteDst of include/gfx/prim.h) is what the engine uploads. */
+typedef struct PaletteBank {
+    PaletteRow rows[AREA_PALETTE_ROWS];
+} PaletteBank;
+
+ASSERT_SIZE(PaletteBank, AREA_PALETTE_ROWS* AREA_PALETTE_ROW);
+
+#define g_AreaPaletteArena         MEM_PTR(PaletteBank, AREA_PALETTE_ARENA)
+#define g_AreaPaletteCopy          MEM_PTR(PaletteBank, AREA_PALETTE_WORK)
 
 /* The area view space: a cell is 0x80 units wide and cell 128 sits on the origin;
  * a cell's centre is half a cell past its corner. */

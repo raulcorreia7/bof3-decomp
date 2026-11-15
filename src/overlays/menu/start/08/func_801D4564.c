@@ -1,76 +1,76 @@
 #include "start_08.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D4564(void) {
-    s32 tmp0;
-    u32 tmp1;
-    u32 tmp2;
-    u8  val1;
+MATCH void func_801D4564(void) {
+    MenuChoicePanel* panel;
+    u8*              state_counter;
+    u8               cursor;
+    u8               page_start;
+    u8               page_start_masked;
+    u8               scrolled;
+    s32              pressed;
+    u32              span;
 
     Menu_DrawClutStrip(D_80144953);
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id =
-        Item_GetDescription(g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A, D_801C893C[D_8014850E][g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y =
-        (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + (((g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C - g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 0xD) + 0x1A);
-    tmp0 = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown | PADL1 | PADR1));
-    if (tmp0 & PADLup) {
-        if (g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C != 0) {
-            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C -= 1;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(D_8014850E, D_801C893C[D_8014850E][g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;
+    span                                                        = (D_80148510 - g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 0xD + 0x1A;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + span;
+    panel                                                       = &D_80148504;
+    pressed                                                     = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown | PADL1 | PADR1));
+    cursor                                                      = D_80148510;
+    if (pressed & PADLup) {
+        if (cursor != 0) {
+            D_80148510 = cursor - 1;
         }
-        if ((u8)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C < (u8)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) {
+        if ((u32)D_80148510 < (u32)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) {
             g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.scroll = 0xF0;
         }
-    } else if (tmp0 & PADLdown) {
-        if ((u8)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C < 0x1FU) {
-            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C += 1;
+    } else if (pressed & PADLdown) {
+        if ((u32)cursor < 0x1FU) {
+            D_80148510 = cursor + 1;
         }
-        if ((s32)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C >= (g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B + 9)) {
+        if (D_80148510 >= g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B + 9) {
             g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.scroll = 0x10;
         }
-    } else if (tmp0 & 4) {
-        tmp1 = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B & BYTE_MASK;
-        if (tmp1 == 0) {
-            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C = 0;
-        } else if (tmp1 < 9U) {
-            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C -= g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
+    } else if (pressed & 0x4) {
+        if ((D_8014850F & BYTE_MASK) == 0) {
+            D_80148510 = 0;
+        } else if ((u32)(D_8014850F & BYTE_MASK) < 9U) {
+            D_80148510                                      = cursor - D_8014850F;
             g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B = 0;
         } else {
-            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C -= 9;
-            val1 = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B - 9;
-            goto block_22; /* retail branch */
+            D_80148510 = cursor - 9;
+            D_8014850F = D_8014850F - 9;
         }
-    } else if (tmp0 & 8) {
-        tmp2 = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B & BYTE_MASK;
-        if (tmp2 == 0x17) {
-            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C = 0x1F;
+    } else if (pressed & 0x8) {
+        page_start        = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
+        page_start_masked = page_start & BYTE_MASK;
+        if (page_start_masked == 0x17) {
+            D_80148510 = 0x1F;
+        } else if (page_start_masked >= 0xF) {
+            scrolled   = cursor + 0x17;
+            D_80148510 = scrolled - page_start;
+            D_8014850F = 0x17;
         } else {
-            if (tmp2 >= 0xFU) {
-                g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C = (D_80148510 + 0x17) - g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
-                val1                                            = 0x17;
-            } else {
-                g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C += 9;
-                val1 = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B + 9;
-            }
-        block_22:
-            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B = val1;
+            D_80148510 = cursor + 9;
+            D_8014850F = page_start + 9;
         }
     }
-    s_ChoiceMenuCursors[D_80148504.group] = D_80148504.group_cursor;
-    s_ChoiceMenuValues[D_80148504.group]  = D_80148504.group_first;
-    if (g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C != D_80148504.group_cursor) {
+    s_ChoiceMenuCursors[panel->group] = panel->group_cursor;
+    s_ChoiceMenuValues[panel->group]  = panel->group_first;
+    if (cursor != panel->group_cursor) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
-    if ((D_80148504.confirm_gate == 0) && (g_InputMasks[MENU_INPUT_CANCEL] & g_InputPressed)) {
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
-        D_80148504.group               = 0U;
-        D_80148504.group_cursor        = 0xFFU;
-        FIELD(s8, (&D_80148504), 0xDu) = 0xFF;
-        g_MenuStep.sub_step -= 7;
-        D_80148504.group_first = (u8)*s_ChoiceMenuValues;
+    if (panel->confirm_gate == 0) {
+        if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+            state_counter       = &D_80148651;
+            panel->group        = 0;
+            panel->group_cursor = 0xFF;
+            panel->drawn_cursor = 0xFF;
+            *state_counter      = *state_counter - 7;
+            panel->group_first  = s_ChoiceMenuValues[0];
+        }
     }
 }
-#else
-INCLUDE_ASM(func_801D4564);
-#endif

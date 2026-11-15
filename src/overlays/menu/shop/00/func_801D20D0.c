@@ -7,17 +7,23 @@ NON_MATCHING void func_801D20D0(void) {
     u8  old;
     u8* cursor;
     s8  i;
+    s32 idx;
 
     Message_SetVariable(0, 0xC, Item_GetRecord(g_ShopItemCategory, g_ShopItemId));
-    cursor                            = &D_80148656;
     g_MenuPanelTasks[0].u.addr.unk_10 = 0x4B;
-    g_MenuPanelTasks[21].active       = 0;
-    g_MenuPanelTasks[20].active       = 1;
-    D_80148604                        = g_MenuPanelTasks[(s8)*cursor + 3].pos.x;
-    D_80148606                        = g_MenuPanelTasks[(s8)*cursor + 3].pos.y;
-    count                             = Party_CountOrder(PARTY_ORDER_FIELD);
-    buttons                           = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
-    old                               = *cursor;
+    D_80148624                        = 0;
+    /* FAKE: block boundary keeps the panel-task stores base-relative off one la. */
+    FAKE_ORDER_FENCE();
+    cursor                      = &D_80148656;
+    idx                         = (s8)*cursor + 3;
+    g_MenuPanelTasks[20].active = 1;
+    D_80148604                  = g_MenuPanelTasks[idx].pos.x;
+    /* FAKE: block boundary keeps each copy beside its own load. */
+    FAKE_ORDER_FENCE();
+    D_80148606 = g_MenuPanelTasks[idx].pos.y;
+    count      = Party_CountOrder(PARTY_ORDER_FIELD);
+    buttons    = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
+    old        = *cursor;
     if (buttons & PADLup) {
         if ((s8)(*cursor = old - 1) < 0) {
             *cursor = count - 1;
@@ -51,14 +57,14 @@ NON_MATCHING void func_801D20D0(void) {
             D_80148600 = 0;
             D_801E6054 = 0;
             D_80148654 = 5;
-            g_MenuStep.state += 1;
+            D_80148652 += 1;
         } else {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
         }
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         D_80148600 = 0;
-        g_MenuStep.state -= 4;
+        D_80148652 -= 4;
     }
 }
 #else
