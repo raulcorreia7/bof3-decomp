@@ -37,12 +37,12 @@ MATCH s32 func_801F30B8(s32 x, s32 y) {
     }
     map   = (u8*)MAP_BUNDLE_BASE;
     entry = (u8*)(g_AreaMapBundle.record_region_24 * 4 + (s32)(map + cell * 4));
-    end   = entry + (((*((u16*)(entry - 2))) * 4) - 4);
+    end   = entry + ((MEM(u16, entry - 2) * 4) - 4);
     if (entry != end) {
         do {
-            word = *((s32*)entry);
-            if ((word & 0xFF000000) == 0x23000000 || (word & 0xFF000000) == 0x24000000 || (word & 0xFF000000) == 0x25000000) {
-                object = (s32*)((*MEM_PTR(u16, (MAP_BUNDLE_BASE + 0x28)) * 4) + MAP_BUNDLE_BASE + (*((u16*)entry)) * 4);
+            word = MEM(s32, entry);
+            if ((word & BUNDLE_COMMAND_MASK) == BUNDLE_COMMAND(0x23) || (word & BUNDLE_COMMAND_MASK) == BUNDLE_COMMAND(0x24) || (word & BUNDLE_COMMAND_MASK) == BUNDLE_COMMAND(0x25)) {
+                object = MEM_PTR(s32, (*MEM_PTR(u16, MAP_BUNDLE_BASE + 0x28) * 4) + MAP_BUNDLE_BASE + MEM(u16, entry) * 4);
                 value  = *object;
                 if ((value & 0xF000) == 0x8000) {
                     return value & 1;
