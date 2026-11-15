@@ -4154,6 +4154,7 @@ Party_RemoveGarr = { addr = 0x801FE874, type = "func", source = "Removes Garr fr
 g_SceneEntityDispatch = { addr = 0x801FE894, source = "scenario entity dispatch table" }
 g_SceneActorDispatch = { addr = 0x801FE9C0, source = "scenario actor dispatch table" }
 
+D_801FEA6C = { addr = 0x801FEA6C, type = "u8", size = 0x1, source = "A byte the scene handlers store and reload." }
 ["emi/scenario/scena09/00"]
 jtbl_801F6C04 = { addr = 0x801F6C04, type = "Callback", source = "The switch table of func_801F7920: the jump targets of its jr dispatch." }
 jtbl_801F6C34 = { addr = 0x801F6C34, type = "Callback", source = "The switch table of func_801F7920: the jump targets of its jr dispatch." }
