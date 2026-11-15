@@ -92,8 +92,9 @@ NON_MATCHING void func_80161454(u32 index) {
         return;
     }
     do {
-        tmp4 = ((s32)g_Task->state_70.word >> val4) & 0x1F;
-        if (tmp4 != 0x1F) {
+        q = ((s32)g_Task->state_70.word >> val4) & 0x1F;
+        tmp4 = q;
+        if (q != 0x1F) {
             val8 = 1 << tmp4;
             if (SpuGetKeyStatus(val8) == SPU_OFF) {
                 g_Task->state_70.word |= 0x1F << val4;
