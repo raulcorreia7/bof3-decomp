@@ -23,4 +23,7 @@ extern Callback D_801F4448[];
  * and screen-x words at 0x30 and 0x34, indexed by twice the row's x cell. */
 extern u8 D_801F442C[];
 
+/* The sprite-word fields above the floor quad's cell coordinate. */
+#define AREA_FLOOR_QUAD_PART 0x01500000
+
 #endif
