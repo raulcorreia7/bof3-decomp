@@ -105,6 +105,7 @@ typedef struct SceneSampleTrack {
 } SceneSampleTrack;
 
 ASSERT_OFFSET(SceneSampleTrack, sample, 0x02);
+ASSERT_OFFSET(SceneSampleTrack, weight, 0x1A);
 ASSERT_SIZE(SceneSampleTrack, 0x28);
 
 /* The track's row count, the event flag byte beside it and the track the samples walk. */
