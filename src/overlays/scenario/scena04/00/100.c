@@ -86,7 +86,26 @@ MATCH void func_801F7064(void) {
 
 INCLUDE_ASM(func_801F7084);
 
-INCLUDE_ASM(func_801F732C);
+/* Draws a Gouraud quad whose four corners are path points, the first two in one shade and the last two
+ * in another, both stepping with the frame parity. */
+MATCH void func_801F732C(u8 v0, u8 v1, u8 v2, u8 v3, s32 shade0, s32 shade1) {
+    POLY_G4* primitive;
+    u8       color0;
+    u8       color1;
+
+    primitive = GFX_BeginPolyG4(1);
+    Area_ProjectPoint((s32*)&D_801FA240[v0], (DVECTOR*)&primitive->x0);
+    Area_ProjectPoint((s32*)&D_801FA240[v1], (DVECTOR*)&primitive->x1);
+    Area_ProjectPoint((s32*)&D_801FA240[v2], (DVECTOR*)&primitive->x2);
+    Area_ProjectPoint((s32*)&D_801FA240[v3], (DVECTOR*)&primitive->x3);
+    color0 = (shade0 << 7) | ((g_FrameCount & 1) << 2);
+    color1 = (shade1 << 7) | ((g_FrameCount & 1) << 2);
+    setRGB0(primitive, color0, color0, color0 >> 1);
+    setRGB1(primitive, color0, color0, color0 >> 1);
+    setRGB2(primitive, color1, color1, color1 >> 1);
+    setRGB3(primitive, color1, color1, color1 >> 1);
+    GFX_AddPrim(1, sizeof(POLY_G4));
+}
 
 INCLUDE_ASM(func_801F747C);
 
