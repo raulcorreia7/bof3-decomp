@@ -247,9 +247,9 @@ NON_MATCHING void func_801EFBA8(void) {
     D_1F800000.view.effect.params[1] = g_Task->unk_14;
     iteration                        = 1;
     if (iteration < g_Task->timer + 1) {
-        white        = 1;
         outer_radius = 18;
         inner_radius = 0;
+        white        = 1;
         do {
             D_1F800000.view.effect.params[6] = D_1F800000.view.effect.params[4];
             D_1F800000.view.effect.params[7] = D_1F800000.view.effect.params[5];
