@@ -182,6 +182,7 @@ extern s32             D_80145ED0;
 extern volatile u8     D_80145F18[];
 extern u8              D_80145F20[];
 extern u8              D_80145F22[];
+extern u8              D_80145FCC[];
 /* One-field views of the same rows: the local rows (stride 0x140) and the
  * enemy rows (stride 0x118), each anchored at the field the retail symbol
  * names. */

@@ -27,6 +27,30 @@ ASSERT_SIZE(SceneParticle, 0x28);
 ASSERT_OFFSET(SceneParticle, vx, 0x10);
 ASSERT_OFFSET(SceneParticle, life, 0x25);
 
+/* One 0x18-byte cross-section of the vertical box the scene's step draws: its corner point, a
+ * spare word, then the two half extents the four corners add to the point's y and z. */
+typedef struct SceneBoxEdge {
+    s32 x;      /* 0x00 */
+    s32 y;      /* 0x04 */
+    s32 z;      /* 0x08 */
+    s32 unk_0C; /* 0x0C */
+    s32 half_y; /* 0x10 */
+    s32 half_z; /* 0x14 */
+} SceneBoxEdge;
+
+/* The box func_801F7084 stamps the eight corners of: one cross-section at the actor's velocity
+ * words and one at the actor's words from 0x24. */
+typedef struct SceneBox {
+    SceneBoxEdge near; /* 0x00 */
+    SceneBoxEdge far;  /* 0x18 */
+} SceneBox;
+
+ASSERT_SIZE(SceneBoxEdge, 0x18);
+ASSERT_OFFSET(SceneBoxEdge, half_y, 0x10);
+ASSERT_OFFSET(SceneBoxEdge, half_z, 0x14);
+ASSERT_SIZE(SceneBox, 0x30);
+ASSERT_OFFSET(SceneBox, far, 0x18);
+
 /* One point of the path func_801F77EC builds in the area work memory. */
 typedef struct ScenePathPoint {
     s32 x;   /* 0x00 */
@@ -50,12 +74,63 @@ ASSERT_OFFSET(ScenePathPoint, z, 0x08);
 ASSERT_SIZE(ScenePathWork, 0x90);
 ASSERT_OFFSET(ScenePathWork, points, 0x10);
 
-extern s8  D_80144EA8;
-extern u8  g_PartyFieldOrder;
-extern u8  D_80144F5B;
-extern u8  D_80144F5C;
-extern u8  D_80144F5E;
-extern u8  D_80144F5F;
+/* The five 0x20-byte segment keys func_801F75BC draws: a start and an end 16.16 point with a spare
+ * word after each. func_801F747C seeds the start x through the D_801FA2C0 pointer and every other
+ * word through its own absolute name; retail does the same, so a record view would not reproduce
+ * the bytes (needs: scena04 owner). */
+extern s32 D_801FA2C0[];
+extern s32 D_801FA2C4;
+extern s32 D_801FA2C8;
+extern s32 D_801FA2D0;
+extern s32 D_801FA2D4;
+extern s32 D_801FA2D8;
+extern s32 D_801FA2E4;
+extern s32 D_801FA2E8;
+extern s32 D_801FA2F0;
+extern s32 D_801FA2F4;
+extern s32 D_801FA2F8;
+extern s32 D_801FA304;
+extern s32 D_801FA308;
+extern s32 D_801FA310;
+extern s32 D_801FA314;
+extern s32 D_801FA318;
+extern s32 D_801FA324;
+extern s32 D_801FA328;
+extern s32 D_801FA330;
+extern s32 D_801FA334;
+extern s32 D_801FA338;
+extern s32 D_801FA344;
+extern s32 D_801FA348;
+extern s32 D_801FA350;
+extern s32 D_801FA354;
+extern s32 D_801FA358;
+
+extern s8 D_80144EA8;
+extern u8 g_PartyFieldOrder;
+extern u8 D_80144F5B;
+extern u8 D_80144F5C;
+extern u8 D_80144F5E;
+extern u8 D_80144F5F;
+/* The four script-variable bytes as one word; the byte view makes a store reload the area id. */
+#define g_ScriptVarsWord (*(s32*)&g_ScriptVars)
+
+extern u8  D_80143F1D;
+extern u8  D_80145EB4;
+extern u8  D_80145FF4;
+extern u8  D_80146134;
+extern u8  D_80146865;
+extern u8  D_80146874;
+extern u8  D_80146875;
+extern s16 D_801492DA;
+extern s16 D_801492DC;
+/* The spawned-actor row fields func_801F817C stamps: the flag byte, the type byte, the camera
+ * angle and the layer, one record each 0x74 bytes apart. */
+extern u8  D_80143FC8[];
+extern u8  D_80143FCD[];
+extern u8  D_8014402C[];
+extern u8  D_80144030[];
+extern u8  D_80144034[];
+extern u8  D_80143FD1[];
 extern s32 D_80146954;
 extern s32 D_80146958;
 
@@ -71,12 +146,13 @@ extern s32      D_801FA1A4[];
 extern s32      D_801FA1C4[];
 void            func_80196070(void);
 s8              func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
-void            func_801F7084(s32* step);
+void            func_801F7084(SceneBox* box);
 void            func_801F732C(u8 v0, u8 v1, u8 v2, u8 v3, s32 shade0, s32 shade1);
 void            func_801F747C(void);
 void            func_801F75BC(u8 weight, u8 shade);
 
-/* The eight path points the scene's quad draws from. */
+/* The eight 16-byte path points the scene's quad draws from; func_801F7084 stamps the box's
+ * eight corners into D_801FA240 and func_801F732C draws them. */
 extern ScenePathPoint D_801FA240[];
 
 extern Callback  D_801FA1E4[];
