@@ -150,24 +150,17 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
     s32          next_column_reversed;
     s32          inner_next_vertex_reversed;
     s32          vertex;
-    s32          rim_segment_value;
     s32          spiral_angle;
     s32          mesh_angle;
     s32          rim_angle;
-    s32          spiral_segment_value;
     s32          row_offset;
     s32          outer_row_offset;
     s32          next_ring;
-    s32          ring_value;
     s32          rim_y;
     s32          spiral_y;
     s32          rim_y_reversed;
     s32          spiral_y_reversed;
     s32          draw_tpage;
-    s32          rim_segment_byte;
-    s32          spiral_segment_byte;
-    s32          entry_byte;
-    s32          ring_byte;
     s8           next_row;
     s8           next_quad;
     s8           next_entry;
@@ -225,31 +218,23 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
     rim_segment = 0;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, draw_tpage, NULL);
     GFX_AddPrim(3U, 0xCU);
-    rim_segment_byte = 0 << 0x18;
     do {
-        rim_segment_value               = rim_segment_byte >> 0x18;
-        rim_angle                       = rim_segment_value << 8;
-        D_801EF9F8[rim_segment_value].x = FIXED_MUL(rsin(rim_angle), g_Task->unk_09);
-        next_rim_segment                = rim_segment + 1;
-        rim_segment                     = next_rim_segment;
-        D_801EF9F8[rim_segment_value].y = FIXED_MUL(rcos(rim_angle), g_Task->unk_09);
-        rim_segment_byte                = rim_segment << 0x18;
+        rim_angle                    = rim_segment << 8;
+        D_801EF9F8[rim_segment].x    = FIXED_MUL(rsin(rim_angle), g_Task->unk_09);
+        next_rim_segment             = rim_segment + 1;
+        D_801EF9F8[rim_segment].y    = FIXED_MUL(rcos(rim_angle), g_Task->unk_09);
+        rim_segment                  = next_rim_segment;
     } while (next_rim_segment < 0x10);
-    ring      = 7;
-    ring_byte = 7 << 0x18;
+    ring = 7;
     do {
-        ring_value     = ring_byte >> 0x18;
         spiral_segment = 0;
-        ring_angle += effect_offset * (8 - ring_value);
-        spiral_segment_byte = 0 << 0x18;
+        ring_angle += effect_offset * (8 - ring);
     spiral_loop:
-        spiral_segment_value               = spiral_segment_byte >> 0x18;
-        spiral_angle                       = ring_angle + (spiral_segment_value << 8);
-        D_801EFA78[spiral_segment_value].x = FIXED_MUL(rsin(spiral_angle), ring_value * (g_Task->unk_09 >> 3));
-        next_spiral_segment                = spiral_segment + 1;
-        spiral_segment                     = next_spiral_segment;
-        D_801EFA78[spiral_segment_value].y = FIXED_MUL(rcos(spiral_angle), ring_value * (g_Task->unk_09 >> 3));
-        spiral_segment_byte                = spiral_segment << 0x18;
+        spiral_angle                 = ring_angle + (spiral_segment << 8);
+        D_801EFA78[spiral_segment].x = FIXED_MUL(rsin(spiral_angle), ring * (g_Task->unk_09 >> 3));
+        next_spiral_segment          = spiral_segment + 1;
+        D_801EFA78[spiral_segment].y = FIXED_MUL(rcos(spiral_angle), ring * (g_Task->unk_09 >> 3));
+        spiral_segment               = next_spiral_segment;
         if (next_spiral_segment < 0x10) {
             goto spiral_loop;
         }
@@ -385,20 +370,17 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
         if (next_quad < 0x10) {
             goto quad_loop;
         }
-        entry      = 0;
-        entry_byte = 0 << 0x18;
+        entry = 0;
     copy_loop:
         D_801EF9F8[entry].x = D_801EFA78[entry].x;
         D_801EF9F8[entry].y = D_801EFA78[entry].y;
         next_entry          = entry + 1;
         entry               = next_entry;
-        entry_byte          = entry << 0x18;
         if (next_entry < 0x10) {
             goto copy_loop;
         }
         lower_ring = ring - 1;
         ring       = lower_ring;
-        ring_byte  = ring << 0x18;
     } while (!(lower_ring & 0x80));
 }
 #else
