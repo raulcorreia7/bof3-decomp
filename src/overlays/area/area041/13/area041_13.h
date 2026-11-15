@@ -7,7 +7,8 @@
 #include "overlays/area/world01.h"
 #include "area/spad.h"
 
-extern u8 D_80144EA0[];
+extern SVECTOR D_1F800014[];
+extern u8      D_80144EA0[];
 
 void func_801F2EFC(void);
 void func_801F3064(void);
@@ -16,9 +17,14 @@ extern s8  D_80146865;
 extern u8  D_801F42C8[];
 extern u8  D_801F42CC[];
 extern u8  D_801F42D0[];
+extern u32 D_801F42D4[];
 extern u8  D_801F42DC[];
 extern u8  D_801F42EC[];
 extern u8  D_801F4308[];
+/* The six-row sprite's cell pairs: row n's x is the byte at 2n and its y the byte one after. */
+extern u8  D_801F4364[];
+/* The six sprite words' low bytes, one per row. */
+extern u8  D_801F4370[];
 extern u8  D_801F5651[];
 extern u16 D_801F5678[];
 extern u8  D_801F567C[];

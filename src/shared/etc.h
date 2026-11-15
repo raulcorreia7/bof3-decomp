@@ -155,7 +155,6 @@ void        func_801F228C(void);
 
 extern s32 D_801457AC;
 
-/* function-local data for func_801729D0 */
 extern u8 D_8018E9A1;
 
 extern s32 D_8018E9A4;

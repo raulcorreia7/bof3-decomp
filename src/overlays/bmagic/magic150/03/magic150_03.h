@@ -5,6 +5,8 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+extern BattleEffect* D_801EC2E0;
+
 extern Callback D_801EEC04[];
 
 /* One sparkle the eye beam draws: its live flag, its offset along the beam,
