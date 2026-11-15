@@ -565,7 +565,53 @@ INCLUDE_ASM(func_801F92F0);
 
 INCLUDE_ASM(func_801F9500);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
+    POLY_F4* poly;
+    s32      point[3];
+    s32      z_offset;
+    FAKE_STACK_PADS(u8, 16); /* FAKE: retail reserves 16 otherwise unused stack bytes. */
+
+    poly = (POLY_F4*)g_GfxPrimCursor;
+    SetPolyF4(poly);
+    SetSemiTrans(poly, 0);
+    point[0] = pos->x.fixed + arg[0];
+    point[1] = pos->y.fixed + arg[1];
+    point[2] = pos->z.fixed + arg[2];
+    Area_ProjectPoint(point, POLY_XY(poly, 0));
+    if ((g_Task->unk_06 & 1) == 0) {
+        point[0] = pos->x.fixed - arg[0];
+        FAKE_BARRIER(); /* FAKE: retail loads y after the branch-specific x store. */
+        point[1] = pos->y.fixed + arg[1];
+    } else {
+        point[0] = pos->x.fixed + arg[0];
+        FAKE_BARRIER(); /* FAKE: retail loads y after the branch-specific x store. */
+        point[1] = pos->y.fixed + arg[1];
+    }
+    point[2] = pos->z.fixed + arg[2];
+    Area_ProjectPoint(point, POLY_XY(poly, 1));
+    point[0] = pos->x.fixed + arg[0];
+    point[1] = pos->y.fixed + arg[1];
+    z_offset = TO_COORD(16);
+    point[2] = pos->z.fixed + arg[2] + z_offset;
+    Area_ProjectPoint(point, POLY_XY(poly, 2));
+    if ((g_Task->unk_06 & 1) == 0) {
+        point[0] = pos->x.fixed - arg[0];
+        point[1] = pos->y.fixed + arg[1];
+    } else {
+        point[0] = pos->x.fixed + arg[0];
+        point[1] = pos->y.fixed - arg[1];
+    }
+    point[2] = pos->z.fixed + arg[2] + z_offset;
+    Area_ProjectPoint(point, POLY_XY(poly, 3));
+    poly->r0 = ((g_Task->unk_06 & 2) != 0) << 7;
+    poly->b0 = 0;
+    poly->g0 = ((g_Task->unk_06 & 2) == 0) << 7;
+    Area_AddCellPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_F4));
+}
+#else
 INCLUDE_ASM(func_801F97CC);
+#endif
 
 INCLUDE_ASM(func_801F9A20);
 
