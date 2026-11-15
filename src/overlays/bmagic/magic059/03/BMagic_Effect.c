@@ -57,12 +57,9 @@ MATCH void func_801EF224(void) {
 }
 
 MATCH void func_801EF4C4(void) {
-    u8* work;
-
-    *(u8*)((u8*)g_Task + 0x09) = 0;
-    g_Task->timer              = 0;
-    work                       = (u8*)g_Task;
-    work[2] += 1;
+    g_Task->unk_09 = 0;
+    g_Task->timer  = 0;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801EF504(void) {

@@ -5,7 +5,7 @@ MATCH void func_800C1D14(void) {
     volatile u8*  flag;
     s32           remaining;
 
-    remaining = enemy->hp - FIELD(s16, enemy, 0xF8);
+    remaining = enemy->hp - enemy->turn.hp_change;
     if ((enemy->stats.max_hp >> 2) < remaining) {
         return;
     }
