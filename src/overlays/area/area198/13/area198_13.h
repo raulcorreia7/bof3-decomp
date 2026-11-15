@@ -16,19 +16,19 @@
 /* The state handler banks the step dispatchers index. */
 extern u8 D_801F3DFC[];
 
-/* One per-scene seed row: the scene record the actor selects, the script it
- * starts and four bytes the entry does not read. */
-typedef struct AreaSeedRow {
+/* A scene seed: the scene record the actor selects, the script it starts and
+ * four bytes the entry does not read. */
+typedef struct AreaSceneSeed {
     u16 scene_record; /* 0x00 */
     u8  script;       /* 0x02 */
     u8  pad_03;       /* 0x03 */
     u8  unk_04[4];    /* 0x04 */
-} AreaSeedRow;
+} AreaSceneSeed;
 
-ASSERT_SIZE(AreaSeedRow, 8);
+ASSERT_SIZE(AreaSceneSeed, 8);
 
-/* The seed rows, one per scene index. */
-extern AreaSeedRow D_801F43D8[];
+/* The scene seeds, one per scene index. */
+extern AreaSceneSeed D_801F43D8[];
 
 /* The setup callback table. */
 extern Callback D_801F4324[17];

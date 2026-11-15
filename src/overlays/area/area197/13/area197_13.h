@@ -75,9 +75,9 @@ extern AreaTriangleOffset D_801F4328[];
 void func_801F2E74(AreaSparkRow* spark);
 
 /* The dropped sparks follow the sparks at AREA_WORK. */
-#define AREA_SPARK_COUNT 128
-#define AREA_DROP_COUNT  128
-#define AREA_DROP_ROWS   (AREA_WORK + AREA_SPARK_COUNT * sizeof(AreaSparkRow))
+#define AREA_SPARK_ROW_COUNT 128
+#define AREA_DROP_COUNT      128
+#define AREA_DROP_ROWS       (AREA_WORK + AREA_SPARK_ROW_COUNT * sizeof(AreaSparkRow))
 
 /* One dropped spark: it falls and bounces like an AreaSparkRow. */
 typedef struct AreaDropRow {

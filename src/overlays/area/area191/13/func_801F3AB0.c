@@ -21,7 +21,7 @@ MATCH void func_801F3AB0(void) {
         count += 1;
     } while (count < CHARACTER_COUNT);
 
-    /* kept: the party byte is tested with blez, so the read is signed. */
+    /* kept: the byte loads unsigned; the signed `> 0` test becomes `blez`. */
     count = 0;
     if ((s16)g_Game.party_size > 0) {
         src_base = g_Characters;
