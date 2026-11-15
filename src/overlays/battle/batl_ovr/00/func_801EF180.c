@@ -17,8 +17,8 @@ NON_MATCHING void func_801EF180(s32 shade) {
     sprt->x0   = 16;
     sprt->v0   = 96;
     sprt->w    = 256;
-    sprt->y0   = y;
     setRGB0(sprt, shade, shade, shade);
+    sprt->y0 = y;
     sprt->u0 = 0;
     sprt->h  = 160;
     SetSprt(sprt);

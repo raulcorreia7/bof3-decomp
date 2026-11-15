@@ -525,6 +525,8 @@ MATCH void func_801F0DA4(void) {
     }
 }
 
+/* The mote's quad: the screen point at unk_0C/unk_0E, half-width unk_05, height unk_05*4, coloured by unk_06*6,
+ * blitted from the 0x340/0x100 page. */
 MATCH void BMagic_DrawMote(void) {
     POLY_FT4* prim;
 
