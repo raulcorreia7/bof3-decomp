@@ -65,7 +65,7 @@ void  func_801A3D1C(void* unused);
 /* func_801A3E50 */
 void  Area_RunSetupStream(u8* cursor);
 /* func_801A4BC0 */
-void  Area_SetCellCode(s16 column, s16 row, u8 code);
+void  Area_SetCellCode(s32 column, s32 row, u8 code);
 /* func_801A4D54 */
 void  func_801A4D54(u8* script);
 /* func_801A7330 */

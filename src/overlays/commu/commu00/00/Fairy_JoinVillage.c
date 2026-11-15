@@ -14,8 +14,8 @@ MATCH void Fairy_JoinVillage(void) {
     u32 count;
 
     index = RANDOM_MASK(0x3F);
-    if (index >= 60) {
-        index -= 60;
+    if (index >= FAIRY_VILLAGE_COUNT) {
+        index -= FAIRY_VILLAGE_COUNT;
     }
     one       = 1;
     count_ptr = &g_BattleCount;
@@ -44,7 +44,7 @@ MATCH void Fairy_JoinVillage(void) {
             return;
         }
         index++;
-        if (index >= 60) {
+        if (index >= FAIRY_VILLAGE_COUNT) {
             index = 0;
         }
     }

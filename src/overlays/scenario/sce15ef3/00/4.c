@@ -368,4 +368,4 @@ MATCH void Scene_DrawRedFade(u8 red) {
 
 #include "overlays/scenario/Scene_ClaimScanBar.h"
 
-INCLUDE_ASM(Scene_UpdateScanBars);
+#include "overlays/scenario/Scene_UpdateScanBars.h"

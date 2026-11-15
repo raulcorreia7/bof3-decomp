@@ -474,7 +474,26 @@ MATCH void func_801F86BC(u8* row) {
 
 #include "overlays/scenario/Actor_Wait.h"
 
-INCLUDE_ASM(func_801F8764);
+MATCH void func_801F8764(FallingSpark* spark) {
+    u8  life;
+    s32 speed;
+
+    if (D_801FDFC8 == 0) {
+        if (g_Task->unk_06 == 0) {
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 1));
+        }
+        D_801FDFC8 = 1;
+    }
+    life         = spark->life - 1;
+    spark->life  = life;
+    speed        = spark->speed + TO_COORD(4);
+    spark->speed = speed;
+    spark->z += speed;
+    spark->fade += 6;
+    if (life == 0) {
+        spark->active = 0;
+    }
+}
 
 MATCH void func_801F8804(u8 shade) {
     TILE* tile;

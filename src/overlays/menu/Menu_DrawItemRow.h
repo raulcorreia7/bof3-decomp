@@ -17,7 +17,7 @@ MATCH void Menu_DrawItemRow(s32 x0, s32 y0, s32 item, s32 selection) {
     palette    = (u8)((0u - (u32)(mode != 0)) & 7);
     item_index = item & BYTE_MASK;
     UI_DrawWindowOutline((s16)(x0 + 2), (s16)(y0 + 2), 0x86, 0x2A, 0xF1);
-    row_off = item_index * 0xA4;
+    row_off = item_index * PARTY_RECORD_STRIDE;
     stats   = (Stats*)((u8*)&g_Characters[0].stats + row_off);
     TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, stats->power);
     stat_x = (s16)(x0 + 0x29);
