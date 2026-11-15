@@ -1,48 +1,44 @@
 #include "engine/slus/slus.h"
 
-/* lifted draft, best score 39.27%; semantics unverified
- */
+/* Lifted draft; semantics are unverified. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_80167428(void) {
-    s32   tmp0;
-    s32   tmp1;
-    s32   tmp2;
-    s32   tmp3;
-    s32   tmp4;
-    s32   tmp5;
-    s32   tmp6;
-    s32   tmp7;
-    s32   val0;
-    s32   val1;
-    s32   val2;
-    s32   val3;
-    s8    val4;
-    s8    val5;
-    void* tmp8;
-    void* tmp9;
-    void* tmp10;
-    void* tmp11;
-    void* tmp12;
+    s32          tmp0;
+    s32          tmp1;
+    s32          tmp2;
+    s32          tmp3;
+    s32          tmp4;
+    s32          tmp5;
+    s32          tmp6;
+    s32          tmp7;
+    s32          val0;
+    s32          val1;
+    s32          val2;
+    s32          val3;
+    s8           val4;
+    s8           val5;
+    void*        tmp8;
+    void*        tmp9;
+    void*        tmp10;
+    void*        tmp11;
+    void*        tmp12;
+    PartyMember* player;
+    Actor*       actor;
 
     if (g_InputPressed & PADstart) {
-        g_AreaCameraStep = 0x20;
-        tmp3             = FIELD(s32, g_Game.current, 0x34u);
-        tmp7             = g_AreaScrollTargetX - tmp3;
-        val3             = tmp7;
-        if (tmp7 < 0) {
-            val3 = -val3;
-        }
-        tmp6 = g_AreaScrollTargetY - FIELD(s32, g_Game.current, 0x38u);
-        val1 = tmp6;
-        if (tmp6 < 0) {
-            val1 = -val1;
-        }
+        g_AreaCameraStep    = 0x20;
+        player              = g_Game.current;
+        tmp3                = player->pos.x.fixed;
+        tmp7                = g_AreaScrollTargetX - tmp3;
+        val3                = ABS(tmp7);
+        tmp6                = g_AreaScrollTargetY - player->pos.y.fixed;
+        val1                = ABS(tmp6);
         g_AreaScrollTargetX = tmp3;
-        g_AreaScrollTargetY = FIELD(s32, g_Game.current, 0x38u);
+        g_AreaScrollTargetY = player->pos.y.fixed;
         val3                = MAX(val3, val1);
         tmp1                = ((u32)val3 >> 0xD) & BYTE_MASK;
         if (tmp1 != 0) {
-            g_AreaCameraHeightStep = (u16)((s16)(FIELD(u16, g_Game.current, 0x3Eu) - g_AreaCameraHeight) / tmp1);
+            g_AreaCameraHeightStep = (u16)((s16)(player->pos.z.part.integer - g_AreaCameraHeight) / tmp1);
         } else {
             g_AreaCameraHeightStep = 0;
         }
@@ -72,15 +68,15 @@ NON_MATCHING void func_80167428(void) {
         return;
     }
     if (!(func_801B0E44() & BYTE_MASK)) {
-        tmp8 = g_Task;
-        tmp0 = FIELD(u8, tmp8, 0x8u) * 8;
-        tmp2 = ((s32*)g_FacingSteps)[tmp0];
-        tmp4 = D_80145EC4 - (FIELD(s32, tmp8, 0x34u) + tmp2);
-        val2 = tmp4;
+        actor = g_Task;
+        tmp0  = actor->direction_08 * 8;
+        tmp2  = ((s32*)g_FacingSteps)[tmp0];
+        tmp4  = D_80145EC4 - (actor->pos.x.fixed + tmp2);
+        val2  = tmp4;
         if (tmp4 < 0) {
             val2 = -val2;
         }
-        tmp5 = D_80145EC8 - (FIELD(s32, tmp8, 0x38u) + *(g_FacingStepY + tmp0));
+        tmp5 = D_80145EC8 - (actor->pos.y.fixed + *(g_FacingStepY + tmp0));
         val0 = tmp5;
         if (tmp5 < 0) {
             val0 = -val0;

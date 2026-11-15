@@ -1,9 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* lifted draft, best score 48.50%; semantics unverified
- */
-#ifdef NON_MATCHING
-NON_MATCHING void func_80161454(u32 index) {
+MATCH void func_80161454(u32 index) {
     struct {
         s32 mask;
         s32 attr;
@@ -12,17 +9,18 @@ NON_MATCHING void func_80161454(u32 index) {
         u8  pad[0x44];
     } voice;
 
-    s16    tmp0;
-    s16    tmp1;
-    s16    val0;
-    s16    val1;
-    s32    a1;
-    s32    val3;
-    s32    q;
-    s32    tmp2;
-    s32    tmp3;
-    u8     tmp4;
-    u8     val4;
+    s16 tmp0;
+    s16 tmp1;
+    s16 val0;
+    s16 val1;
+    s32 a1;
+    s32 val3;
+    s32 q;
+    s32 tmp2;
+    s32 tmp3;
+    u8  tmp4;
+    /* FAKE: The counter pin keeps retail's s1 assignment. */
+    FAKE_REG(u8, val4, "s1");
     s32    val5;
     s32    val6;
     u32    tmp5;
@@ -110,6 +108,3 @@ NON_MATCHING void func_80161454(u32 index) {
     voice.pan    = val1;
     SpuSetVoiceAttr((SpuVoiceAttr*)&voice);
 }
-#else
-INCLUDE_ASM(func_80161454);
-#endif
