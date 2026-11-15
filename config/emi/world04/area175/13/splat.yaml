@@ -19,7 +19,7 @@ segments:
     subsegments:
       - [0x18, c, func_801F2C18]
       - [0x5C, c, func_801F2C5C]
-      - [0xD8, c, func_801F2CD8]
+      - [0xD8, c, Area_UpdateSpin]
       - [0x20C, c, func_801F2E0C]
       - [0x22C, c, Area_DrawSpinTriangle]
       - [0x4CC, c, Area_InitSpin]

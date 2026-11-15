@@ -31,9 +31,9 @@ extern Callback   D_801F576C[];
 void func_801F3500(void);
 u8   Area_StepSparks(void);
 void func_801F4430(void);
-void func_801F5388(s32 arg0);
+void func_801F5388(s32 scale);
 
-void func_801F5428(s32 arg0);
+void func_801F5428(s32 colors);
 
 extern Callback D_801F57D0[];
 
