@@ -24,7 +24,36 @@ MATCH void func_801EEEE8(void) {
     g_Scripts = AREA_SCRIPT_TABLE;
 }
 
-INCLUDE_ASM(func_801EEF80);
+MATCH void func_801EEF80(void) {
+    PartyMember* work;
+    g_Task->facing = g_BattleEffectBattler->facing;
+    g_Task->unk_0C = 0x10000;
+    g_Task->unk_10 = 0;
+    func_801DD350(g_Task);
+    g_Task->pos.x.fixed      = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
+    g_Task->pos.y.fixed      = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_10;
+    COORD_INT(g_Task->pos.z) = COORD_INT(g_BattleEffectBattler->pos.z) + 0x100;
+    g_Task->unk_25           = 0x1D;
+    g_Task->unk_26           = 0;
+    work                     = g_Task;
+    work->unk_48             = 1;
+    work->scale.x            = 0x10000;
+    work->scale.y            = 0x10000;
+    g_Task->unk_27           = 0xA0;
+    g_Task->unk_28           = 0;
+    g_Task->unk_24           = 4;
+    g_Task->unk_5D           = 0;
+    g_Task->unk_5E           = 0;
+    g_Task->unk_5F           = 0;
+    g_Task->unk_5C           = 0;
+    g_Task->unk_2A           = 0;
+    g_Task->unk_29           = 4;
+    g_Task->unk_2C.half      = 0;
+    g_Task->unk_2B           = 1;
+    Actor_SelectScript(0);
+    g_Task->unk_09 = 0;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EF118(void) {
     PartyMember** selected;
