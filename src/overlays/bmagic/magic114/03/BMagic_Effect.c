@@ -223,7 +223,40 @@ MATCH void func_801EFDD8(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFE70);
+MATCH void func_801EFE70(void) {
+    PartyMember* timer_task;
+    PartyMember* position_task;
+    PartyMember* clear_task;
+    u8           timer;
+    s32          x;
+    s32          x_offset;
+    s32          y;
+    s32          y_offset;
+
+    timer_task         = g_Task;
+    timer              = timer_task->unk_09 - 1;
+    timer_task->unk_09 = timer;
+    if (timer == 0) {
+        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 2));
+        position_task              = g_Task;
+        x                          = g_AreaScrollTargetX;
+        x_offset                   = position_task->unk_0C;
+        position_task->pos.x.fixed = x + x_offset;
+        /* FAKE: Preserve the X write before the Y reads. */
+        FAKE_BARRIER();
+        y        = g_AreaScrollTargetY;
+        y_offset = position_task->unk_10;
+        /* FAKE: Preserve the Y reads before clearing the field. */
+        FAKE_BARRIER();
+        position_task->param.unk_0B = 0;
+        position_task->pos.y.fixed  = y + y_offset;
+        g_Task->unk_09              = 16;
+        clear_task                  = g_Task;
+        clear_task->unk_14          = 0;
+        clear_task->unk_20          = 0;
+        clear_task->header.step     = clear_task->header.step + 1;
+    }
+}
 
 /* func_801EFF1C */
 MATCH void BMagic_ApplyDamageFlags(void) {

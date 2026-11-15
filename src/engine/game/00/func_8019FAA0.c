@@ -7,12 +7,7 @@ typedef struct GameCopyBlock {
 #ifdef NON_MATCHING
 NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_facing) {
     AreaLoad* entry;
-    void*     matrix;
-    u32       word_a;
-    u32       word_b;
-    u16       world;
     u16       world_flags;
-    u8        flag;
     u8        seed;
     u8        counter;
     u8        mode;
@@ -24,15 +19,11 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
     Actor_ClearAll();
     GFX_ResetPaletteFades();
 
-    word_a     = (u32)g_AreaScrollTargetX;
-    world      = g_GameAreaId;
-    flag       = D_80143F03;
-    word_b     = (u32)g_AreaScrollTargetY;
-    D_80143F08 = word_a;
+    D_80143F08 = g_AreaScrollTargetX;
+    D_80143F04 = g_GameAreaId;
+    D_80143F06 = D_80143F03;
+    D_80143F0C = g_AreaScrollTargetY;
     seed       = g_GamePrevSelection;
-    D_80143F04 = world;
-    D_80143F06 = flag;
-    D_80143F0C = word_b;
     if (seed == 0xFFu)
         g_SndBGMId = 0xFFu;
     else
@@ -56,10 +47,9 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
     D_80143F03 = func_801A0348(g_AreaTargetCellX, g_AreaTargetCellY);
     func_80153DE8();
 
-    entry  = (AreaLoad*)g_AreaLoads[g_GameAreaId];
-    matrix = entry->matrix;
-    if (matrix != 0) {
-        SetColorMatrix((MATRIX*)matrix);
+    entry = (AreaLoad*)g_AreaLoads[g_GameAreaId];
+    if (entry->matrix != 0) {
+        SetColorMatrix((MATRIX*)entry->matrix);
         entry                       = (AreaLoad*)g_AreaLoads[g_GameAreaId];
         *(GameCopyBlock*)D_801581E0 = *(GameCopyBlock*)((u8*)entry->matrix + 0x20);
     } else {

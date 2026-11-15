@@ -6,6 +6,11 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
+void func_801D4EA4(s32 left, s32 top, s32 icon_row, s32 raised);
+void func_801D8058(s32 left, s32 top);
+void func_801D2908(s32 x, s32 y, s32 mode);
+void Menu_DrawPanelIcon(s16 x, s16 y, s32 u, s32 v, u16 clut, u8 color);
+
 INCLUDE_ASM(func_801D1394);
 
 MATCH void func_801D143C(void) {
@@ -111,7 +116,78 @@ MATCH void func_801D1938(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D1A50(void) {
+    u16* input;
+    u16  repeated;
+    u8   selection;
+
+    input    = &g_InputPressed;
+    repeated = INPUT_GetRepeatedButtons(*input & 0xA000);
+    if (repeated != 0) {
+        if ((s8)D_801DB0B4 < 8) {
+            SND_PlayCue(0x100);
+            if ((s8)D_801DB0B4 != 0) {
+                if (repeated & 0x8000) {
+                    selection  = (u8)D_801DB0B8 - 1;
+                    D_801DB0B8 = selection;
+                    if ((s8)selection < 0) {
+                        D_801DB0B8 = 2;
+                    }
+                } else if (repeated & 0x2000) {
+                    selection  = (u8)D_801DB0B8 + 1;
+                    D_801DB0B8 = selection;
+                    if ((s8)selection >= 3) {
+                        D_801DB0B8 = 0;
+                    }
+                }
+            } else {
+                D_801DB0B8 ^= 1;
+            }
+        }
+    } else if (*input & g_InputMasks[INPUT_SLOT_MOVE]) {
+        selection = D_801DB0B8;
+        if (selection == 2) {
+            SND_PlayCue(0x104);
+            SND_PlayCue(0x102);
+            D_801DB0B4 = 0;
+            D_801F294D++;
+        } else if ((s8)D_801DB0B4 < 8) {
+            D_801DB080[10 + (u8)D_801DB0B4] = selection;
+            D_801DB0B4++;
+            SND_PlayCue(0x103);
+            if (D_801DB0B4 == 8) {
+                D_801DB0B8 = 2;
+            }
+        }
+    } else if (*input & g_InputMasks[INPUT_SLOT_MENU]) {
+        if ((s8)D_801DB0B4 > 0) {
+            SND_PlayCue(0x106);
+            D_801DB0B4--;
+            if ((s8)D_801DB0B4 == 0 && D_801DB0B8 == 2) {
+                D_801DB0B8 = 0;
+            }
+        }
+    }
+
+    if ((s8)D_801DB0B4 <= 0) {
+        func_801D2908(0x58, 0x44, 2);
+    } else if ((s8)D_801DB0B4 < 8) {
+        func_801D2908(0x58, 0x44, 3);
+    } else {
+        func_801D2908(0x58, 0x44, 0xFF);
+    }
+    func_801D3184(0x26, 0x10);
+    func_801D32A0(0xA8, 0x10, 0);
+    func_801D2794(9, 1, D_801DB0B4);
+    if ((s8)D_801DB0B4 < 8) {
+        func_801D269C(((s8)D_801DB0B4 << 5) + 0x40, 0x6E);
+    }
+    Menu_DrawCursorSprite(((D_801DB0B8 * 3) << 4) + 0x5E & 0xFFFE, 0x4A, 0);
+}
+#else
 INCLUDE_ASM(func_801D1A50);
+#endif
 
 INCLUDE_ASM(func_801D1D68);
 
@@ -460,7 +536,55 @@ INCLUDE_ASM(func_801D3C30);
 
 INCLUDE_ASM(func_801D3E44);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D4158(void) {
+    u8* state;
+    u8* src_base;
+    u8* dst_base;
+    u8* src;
+    u8* dst;
+    u8* src_item;
+    u8* dst_item;
+    u8  value;
+    s32 i;
+    s32 offset;
+
+    state = &g_GameStateIndex;
+    if (*state != 2) {
+        D_801DB0B4 += 1;
+        if ((s8)D_801DB0B4 < 8) {
+            dst_base = &D_801DB080[3];
+            src_base = dst_base - 5;
+            i        = 0;
+            do {
+                offset   = (s8)D_801DB0B4 * 5;
+                dst      = offset + dst_base;
+                src      = offset + src_base;
+                dst_item = dst + i;
+                src_item = src + i;
+                value    = *src_item;
+                i++;
+                *dst_item = value;
+            } while (i < 3);
+            D_801F294D = 1;
+        } else {
+            Message_StartAreaMessage(0x85);
+            *state = 2;
+            D_801F294D += 1;
+        }
+        func_801D4AE0(16, 24, 0);
+        func_801D4EA4(104, 120, (u8)(D_801DB0B4 - 1), 0);
+    } else {
+        func_801D4AE0(16, 24, 1);
+        func_801D4EA4(104, 120, D_801DB0B4, 0);
+    }
+    func_801D4F88(104, 64, 0);
+    func_801D3184(204, 16);
+    func_801D32A0(204, 60, 0);
+}
+#else
 INCLUDE_ASM(func_801D4158);
+#endif
 
 INCLUDE_ASM(func_801D42B4);
 
@@ -490,7 +614,33 @@ INCLUDE_ASM(func_801D4910);
 
 INCLUDE_ASM(func_801D4AE0);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D4EA4(s32 left, s32 top, s32 icon_row, s32 raised) {
+    s32 i;
+    s32 x;
+    s32 draw_y;
+    s32 up_y;
+    u8  icon;
+    u8* icons;
+
+    icon  = (u8)icon_row * 5 + 3;
+    up_y  = (top - 8) << 16;
+    icons = D_801DB080;
+    x     = left;
+    for (i = 0; i < 3; i++) {
+        if (D_801DB0B8 == i && (u8)raised != 0) {
+            draw_y = up_y >> 16;
+        } else {
+            draw_y = top;
+        }
+        func_801D2CF8((s16)x, (s16)draw_y, icons[icon]);
+        icon++;
+        x += 32;
+    }
+}
+#else
 INCLUDE_ASM(func_801D4EA4);
+#endif
 
 MATCH void func_801D4F88(s32 x, s32 y, s32 show_values) {
     s32 i;
@@ -1065,7 +1215,41 @@ MATCH void func_801D7BE8(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D7C6C(void) {
+    s32 drawn;
+    s32 i;
+    s32 offset;
+    s32 x;
+    s32 y;
+    u8  step;
+
+    drawn      = 0;
+    step       = D_801DB0C4 + 1;
+    D_801DB0C4 = step;
+    Menu_DrawHeaderBar(0x14, (0x10 - ((step & BYTE_MASK) * 8)) & 0xFFF8, 0x118, 0x13, g_WindowStyle);
+    i      = 0;
+    offset = 0;
+    do {
+        if (((u8*)g_Characters)[offset + 7] & 1) {
+            y = (((drawn & BYTE_MASK) >> 1) * 0x38) + 0x30;
+            x = (((drawn & 1) == 0) ? 0x18 : 0xA8) - ((u8)D_801DB0C4 * 0x28);
+            func_801D90D8(x, y, D_801DB0C4 & BYTE_MASK, 0);
+            drawn++;
+        }
+        i++;
+        offset += sizeof(Character);
+    } while (i < 7);
+    if (D_801DB0C4 == 4) {
+        Message_StartAreaMessage(0xF7);
+        g_GameStateIndex = GAME_REQUEST_MESSAGE;
+        D_801F294C       = 4;
+        D_801F294D       = 0;
+    }
+}
+#else
 INCLUDE_ASM(func_801D7C6C);
+#endif
 
 /* func_801D7DD4 */
 MATCH void Menu_StartFairyEndMessage(void) {
@@ -1110,7 +1294,33 @@ MATCH void func_801D7EF0(s16 x, s16 y) {
     COMMU_DRAW_CELL_GRID(func_801D875C, 0x16, 20, 2, 6);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D8058(s32 left, s32 top) {
+    s32 i;
+    s32 count;
+    s32 x;
+    s32 base_x;
+    s32 y_fixed;
+
+    x      = left;
+    base_x = x;
+    UI_DrawWindow(x, top, 172, 26, 0x80, g_WindowStyle);
+    func_801D7EF0((s16)x, (s16)top);
+    count = Fairy_CountFairies() & BYTE_MASK;
+    if (count > 0) {
+        y_fixed = (top + 9) << 16;
+        x       = 7;
+        i       = 0;
+        while (i < count) {
+            func_801D875C((s16)(base_x + x), (s16)(y_fixed >> 16), 1);
+            i++;
+            x += 8;
+        }
+    }
+}
+#else
 INCLUDE_ASM(func_801D8058);
+#endif
 
 MATCH void func_801D812C(void) {
     u16 index;
@@ -1186,7 +1396,210 @@ MATCH void Fairy_GenerateName(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, s32 window_style) {
+    s32 stack_18;
+    u8  early;
+    s32 stack_20;
+    s32 stack_28;
+    s32 stack_30;
+    u16 stack_38;
+    s32 stack_40;
+    s32 stack_48;
+    s32 tmp0;
+    s32 val0;
+    s32 val1;
+    s8  tmp1;
+    u16 tmp2;
+    u16 tmp3;
+    u16 tmp4;
+    u16 tmp5;
+    u16 tmp6;
+    u16 val2;
+    u16 val3;
+    u16 val4;
+    u16 val5;
+    u16 val6;
+    u8* val7;
+    u8  tmp7;
+    u8  val8;
+
+    val7                   = g_GfxPrimCursor;
+    val8                   = window_style;
+    early                  = window_style;
+    stack_18               = x;
+    stack_20               = y;
+    stack_28               = width;
+    stack_30               = height;
+    g_GfxPrimCursor        = val7 + 8;
+    FIELD(s16, val7, 0x2u) = 0xF0;
+    *(s16*)(val7)          = 0;
+    FIELD(s16, val7, 0x4u) = 0x10;
+    FIELD(s16, val7, 0x6u) = 0x10;
+    if (GetGraphType() != 1) {
+        GetGraphType();
+    }
+    val3 = (u16)stack_18;
+    val6 = (u16)stack_20;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, 0xF, (RECT*)val7);
+    GFX_AddPrim(1U, sizeof(DR_MODE));
+    val7 = g_GfxPrimCursor;
+    SetPolyFT4((POLY_FT4*)val7);
+    SetSemiTrans(val7, 1);
+    val1                    = (val8 << 5) + 0x10;
+    FIELD(u16, val7, 0x8u)  = val3;
+    FIELD(u16, val7, 0xAu)  = val6;
+    FIELD(u16, val7, 0x12u) = val6;
+    FIELD(u16, val7, 0x18u) = val3;
+    val2                    = stack_18 + 2;
+    FIELD(u16, val7, 0x10u) = val2;
+    val0                    = 0xAC;
+    FIELD(u16, val7, 0x20u) = val2;
+    FIELD(s8, val7, 0xCu)   = 0;
+    FIELD(u8, val7, 0xDu)   = 0U;
+    FIELD(u8, val7, 0x15u)  = 0U;
+    FIELD(s8, val7, 0x1Cu)  = 0;
+    FIELD(s16, val7, 0x4u)  = 0xAC;
+    FIELD(s8, val7, 0x5u)   = 0xAC;
+    FIELD(s16, val7, 0x6u)  = 0xAC;
+    tmp7                    = stack_30 + 1;
+    val4                    = stack_20 + tmp7;
+    val8                    = tmp7;
+    FIELD(u16, val7, 0x1Au) = val4;
+    FIELD(u16, val7, 0x22u) = val4;
+    FIELD(s8, val7, 0x14u)  = 2;
+    FIELD(u8, val7, 0x1Du)  = val8;
+    FIELD(s8, val7, 0x24u)  = 2;
+    FIELD(u8, val7, 0x25u)  = val8;
+    FIELD(u16, val7, 0xAu)  = (u16)(FIELD(u16, val7, 0xAu) + 2);
+    FIELD(u16, val7, 0x1Au) = (u16)(FIELD(u16, val7, 0x1Au) - 3);
+    FIELD(u8, val7, 0xDu)   = (u8)(FIELD(u8, val7, 0xDu) + 2);
+    FIELD(u8, val7, 0x1Du)  = (u8)(FIELD(u8, val7, 0x1Du) - 3);
+    FIELD(u16, val7, 0xEu)  = GetClut(val1, STAGE_PALETTE_Y + 1);
+    stack_40                = stack_28 + 1;
+    val3                    = (u16)stack_40;
+    if (GetGraphType() != 1) {
+        GetGraphType();
+    }
+    FIELD(s16, val7, 0x16u) = 0xF;
+    GFX_AddPrim(1U, sizeof(POLY_FT4));
+    val3     = (u16)((s32)((val3 & HALF_MASK) - 4) >> 1);
+    val7     = g_GfxPrimCursor;
+    stack_48 = (stack_28 - 3) & 1;
+    SetPolyFT4((POLY_FT4*)val7);
+    SetSemiTrans(val7, 1);
+    tmp3                    = val3 + val2;
+    val5                    = val3;
+    FIELD(u16, val7, 0x8u)  = val2;
+    FIELD(u16, val7, 0xAu)  = val6;
+    FIELD(u16, val7, 0x10u) = tmp3;
+    FIELD(u16, val7, 0x12u) = val6;
+    FIELD(u16, val7, 0x18u) = val2;
+    FIELD(u16, val7, 0x1Au) = val4;
+    FIELD(u16, val7, 0x20u) = tmp3;
+    FIELD(u16, val7, 0x22u) = val4;
+    FIELD(s8, val7, 0xCu)   = 0;
+    FIELD(u8, val7, 0xDu)   = 0U;
+    FIELD(s8, val7, 0x14u)  = (s8)val5;
+    FIELD(u8, val7, 0x15u)  = 0U;
+    FIELD(s8, val7, 0x1Cu)  = 0;
+    FIELD(u8, val7, 0x1Du)  = val8;
+    FIELD(s8, val7, 0x24u)  = (s8)val5;
+    FIELD(u8, val7, 0x25u)  = val8;
+    FIELD(s16, val7, 0x4u)  = 0xAC;
+    FIELD(s8, val7, 0x5u)   = 0xAC;
+    FIELD(s16, val7, 0x6u)  = 0xAC;
+    FIELD(u16, val7, 0xEu)  = GetClut(val1, STAGE_PALETTE_Y + 1);
+    stack_38                = (u16)stack_48;
+    if (GetGraphType() != 1) {
+        GetGraphType();
+    }
+    FIELD(s16, val7, 0x16u) = 0xF;
+    GFX_AddPrim(1U, sizeof(POLY_FT4));
+    val7 = g_GfxPrimCursor;
+    SetPolyFT4((POLY_FT4*)val7);
+    SetSemiTrans(val7, 1);
+    FIELD(u16, val7, 0xAu)  = val6;
+    tmp0                    = stack_18 + val3;
+    tmp2                    = tmp0 + 2;
+    FIELD(u16, val7, 0x8u)  = tmp2;
+    tmp5                    = tmp0 + (val3 + stack_48 + 2);
+    FIELD(u16, val7, 0x10u) = tmp5;
+    FIELD(u16, val7, 0x12u) = val6;
+    FIELD(u16, val7, 0x18u) = tmp2;
+    FIELD(u16, val7, 0x1Au) = val4;
+    FIELD(u16, val7, 0x20u) = tmp5;
+    FIELD(u16, val7, 0x22u) = val4;
+    FIELD(s8, val7, 0xCu)   = 0;
+    FIELD(u8, val7, 0xDu)   = 0U;
+    tmp1                    = val5 + stack_38;
+    FIELD(s8, val7, 0x14u)  = tmp1;
+    FIELD(u8, val7, 0x15u)  = 0U;
+    FIELD(s8, val7, 0x1Cu)  = 0;
+    FIELD(u8, val7, 0x1Du)  = val8;
+    FIELD(s8, val7, 0x24u)  = tmp1;
+    FIELD(u8, val7, 0x25u)  = val8;
+    FIELD(s16, val7, 0x4u)  = 0xAC;
+    FIELD(s8, val7, 0x5u)   = 0xAC;
+    FIELD(s16, val7, 0x6u)  = 0xAC;
+    FIELD(u16, val7, 0xEu)  = GetClut(val1, STAGE_PALETTE_Y + 1);
+    if (GetGraphType() != 1) {
+        GetGraphType();
+    }
+    FIELD(s16, val7, 0x16u) = 0xF;
+    GFX_AddPrim(1U, sizeof(POLY_FT4));
+    val7 = g_GfxPrimCursor;
+    SetPolyFT4((POLY_FT4*)val7);
+    SetSemiTrans(val7, 1);
+    tmp4                    = stack_18 + stack_40;
+    FIELD(u16, val7, 0x1Au) = val4;
+    tmp6                    = tmp4 - 2;
+    FIELD(u8, val7, 0x1Du)  = val8;
+    FIELD(u16, val7, 0x10u) = tmp4;
+    FIELD(u16, val7, 0x12u) = val6;
+    FIELD(u16, val7, 0x20u) = tmp4;
+    FIELD(u16, val7, 0x8u)  = tmp6;
+    FIELD(u16, val7, 0x18u) = tmp6;
+    FIELD(u16, val7, 0x22u) = val4;
+    FIELD(u16, val7, 0xAu)  = val6;
+    FIELD(s8, val7, 0xCu)   = 0;
+    FIELD(u8, val7, 0xDu)   = 0U;
+    FIELD(s8, val7, 0x14u)  = 2;
+    FIELD(u8, val7, 0x15u)  = 0U;
+    FIELD(s8, val7, 0x1Cu)  = 0;
+    FIELD(s8, val7, 0x24u)  = 2;
+    FIELD(u8, val7, 0x25u)  = val8;
+    FIELD(s16, val7, 0x4u)  = 0xAC;
+    FIELD(s8, val7, 0x5u)   = 0xAC;
+    FIELD(s16, val7, 0x6u)  = 0xAC;
+    FIELD(u16, val7, 0x12u) = (u16)(FIELD(u16, val7, 0x12u) + 2);
+    FIELD(u16, val7, 0x22u) = (u16)(FIELD(u16, val7, 0x22u) - 3);
+    FIELD(u16, val7, 0x1Au) = (u16)(FIELD(u16, val7, 0x1Au) - 1);
+    FIELD(u8, val7, 0x15u)  = (u8)(FIELD(u8, val7, 0x15u) + 2);
+    FIELD(u8, val7, 0x1Du)  = (u8)(FIELD(u8, val7, 0x1Du) - 1);
+    FIELD(u8, val7, 0x25u)  = (u8)(FIELD(u8, val7, 0x25u) - 3);
+    FIELD(u16, val7, 0xEu)  = GetClut(val1, STAGE_PALETTE_Y + 1);
+    if (GetGraphType() != 1) {
+        GetGraphType();
+    }
+    FIELD(s16, val7, 0x16u) = 0xF;
+    GFX_AddPrim(1U, sizeof(POLY_FT4));
+    val7                   = g_GfxPrimCursor;
+    g_GfxPrimCursor        = val7 + 8;
+    *(s16*)(val7)          = 0;
+    FIELD(s16, val7, 0x2u) = 0;
+    FIELD(s16, val7, 0x4u) = 0x100;
+    FIELD(s16, val7, 0x6u) = 0x100;
+    if (GetGraphType() != 1) {
+        GetGraphType();
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, 0xF, (RECT*)val7);
+    GFX_AddPrim(1U, sizeof(DR_MODE));
+    func_801AEBA0((s16)val2, (s16)(stack_20 + 2), (s16)(stack_28 - 4), (s16)(stack_30 - 4), 0);
+}
+#else
 INCLUDE_ASM(Menu_DrawHeaderBar);
+#endif
 
 #include "shared/Menu_DrawPortrait.h"
 
@@ -1235,9 +1648,123 @@ MATCH u8 func_801D92F4(u8 arg) {
 
 INCLUDE_ASM(func_801D9348);
 
-INCLUDE_ASM(func_801D94D0);
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg, s32 cursor_row_arg) {
+    u8  tags[20];
+    u8* cell;
+    u16 x;
+    u16 y;
+    u16 row;
+    u16 col;
+    u16 cursor_x;
+    u16 cursor_y;
+    u8  cursor_col;
+    u8  cursor_row;
+    u8  code;
 
+    /* FAKE: retail reserves eight bytes outside the active locals. */
+    FAKE_STACK_PADS(u8, 8);
+    memcpy(tags, D_801D0C3C, 20);
+    UI_DrawWindow(left, top, 0x110, 123, 0, g_WindowStyle);
+    cell = D_801DAAAC + ((u8)page * 96);
+    y    = top + 6;
+    for (row = 0; row < 8; row++) {
+        x = left + 4;
+        for (col = 0; col < 12; col++) {
+            if (col == 10 && row >= 3) {
+                code = *cell;
+                switch (code) {
+                    case 1:
+                        UI_DrawText((s16)x, (s16)y, 4, 5, tags);
+                        break;
+                    case 2:
+                        UI_DrawText((s16)x, (s16)y, 4, 5, tags + 5);
+                        break;
+                    case 3:
+                        UI_DrawText((s16)x, (s16)y, 2, 5, tags + 10);
+                        break;
+                    case 4:
+                        UI_DrawText((s16)x, (s16)y, 2, 5, tags + 15);
+                        break;
+                    default:
+                        UI_DrawText((s16)x, (s16)y, 0, 1, cell);
+                        break;
+                }
+            } else {
+                UI_DrawText((s16)x, (s16)y, 0, 1, cell);
+            }
+            x += (col == 4 || col == 9) ? 28 : 20;
+            cell++;
+        }
+        y += 14;
+    }
+    cursor_col = cursor_col_arg;
+    cursor_row = cursor_row_arg;
+    cursor_x   = left + 6 + cursor_col * 20;
+    if (cursor_col >= 5) {
+        cursor_x += 8;
+    }
+    if (cursor_col >= 10) {
+        cursor_x += 8;
+    }
+    if (cursor_col == 11 && cursor_row >= 3) {
+        cursor_x -= 20;
+    }
+    cursor_y = top + 8 + cursor_row * 14;
+    Menu_DrawCursorSprite(cursor_x, cursor_y, 0);
+}
+#else
+INCLUDE_ASM(func_801D94D0);
+#endif
+
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D97C8(s32 unused, s32 x, s32 y) {
+    const u8* const* labels;
+    const u8*        dots;
+    u16              row;
+    u16              column;
+    u16              clut;
+    s32              tpage;
+    s32              left;
+
+    left   = x;
+    labels = D_801DB038;
+    UI_DrawWindow((u16)(x + 3), (u16)(y + 3), 0x4D, 0x2F, 0, g_WindowStyle);
+    for (row = 0; row < 5; row++) {
+        UI_DrawTextString((s16)(x + 0x2A), (s16)(y + (row * 8) + 6), 0, 0x10, labels[row]);
+    }
+    for (row = 0; row < 5; row++) {
+        for (column = 0; column < 3; column++) {
+            dots = D_801DB054;
+            UI_DrawTextString((s16)(left + (column * 4) + 0x1A), (s16)(y + (row * 8) + 6), 0, 1, dots);
+        }
+    }
+
+    if (GetGraphType() == 1 || GetGraphType() == 2) {
+        tpage = 0x8F;
+    } else {
+        tpage = 0x2F;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+
+    clut = GetClut(0x30, 0x1E0);
+    Menu_DrawPanelIcon((s16)(left + 0x0E), (s16)(y + 6), 0x1D, 0, clut, 0x7F);
+    clut = GetClut(0x30, 0x1E0);
+    Menu_DrawPanelIcon((s16)(left + 0x0E), (s16)(y + 0x0E), 0x1C, 0, clut, 0x7F);
+    clut = GetClut(0x30, 0x1E0);
+    Menu_DrawPanelIcon((s16)(left + 0x0E), (s16)(y + 0x16), 0x1B, 0, clut, 0x7F);
+    clut = GetClut(0x30, 0x1E0);
+    Menu_DrawPanelIcon((s16)(left + 0x0E), (s16)(y + 0x1E), 0x1E, 0, clut, 0x7F);
+    clut = GetClut(0, 0x1E0);
+    Menu_DrawPanelIcon((s16)(left + 0x0A), (s16)(y + 0x26), 4, 2, clut, 0x7F);
+    clut = GetClut(0, 0x1E0);
+    Menu_DrawPanelIcon((s16)(left + 0x12), (s16)(y + 0x26), 5, 2, clut, 0x7F);
+    func_801AF390((s16)left, (s16)y, g_MenuPortraitAtlas + 0xC8, 0);
+}
+#else
 INCLUDE_ASM(func_801D97C8);
+#endif
 
 MATCH void Menu_DrawPanelIcon(s16 x, s16 y, s32 u, s32 v, u16 clut, u8 color) {
     MenuDrawPanelIcon(x, y, u, v, clut, color);

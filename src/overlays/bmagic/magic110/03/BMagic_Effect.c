@@ -73,7 +73,25 @@ MATCH void func_801EEEDC(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEF80);
+MATCH void func_801EEF80(void) {
+    u8           i;
+    u32          slot;
+    PartyMember* work;
+
+    func_801EF148();
+    if (g_Task->param.unk_0B == 0) {
+        func_800A9610(g_Battle.target_selector, 16);
+        for (i = 0; i < 6; i++) {
+            slot                               = Battle_AllocEffect(1, 16) & BYTE_MASK;
+            work                               = g_Task;
+            g_BattleEffects[slot].header.mode  = 2;
+            g_BattleEffects[slot].unk_0B       = i;
+            g_BattleEffects[slot].target.party = work;
+            g_Task->param.unk_0B += 1;
+        }
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801EF068(void) {
     u8 timer;
@@ -141,7 +159,38 @@ MATCH void func_801EF43C(void) {
 
 #include "overlays/bmagic/Effect_CountDownTimerStep.h"
 
-INCLUDE_ASM(func_801EF528);
+MATCH void func_801EF528(void) {
+    PartyMember* work;
+    PartyMember* next;
+
+    work              = g_Task;
+    work->unk_2E.half = 0xA0;
+    work->unk_25      = 0x1D;
+    next              = g_Task;
+    work->unk_30.half = 0x12C;
+    next->unk_26      = 0;
+    g_Task->unk_27    = 0x1A;
+    g_Task->unk_28    = 1;
+    g_Task->unk_24    = 0x80;
+    {
+        PartyMember* task;
+
+        task          = g_Task;
+        task->unk_48  = 2;
+        task->scale.x = 0x30000;
+        task->scale.y = 0xC000;
+    }
+    g_Task->unk_5D      = 0;
+    g_Task->unk_5E      = 0;
+    g_Task->unk_5F      = 0;
+    g_Task->unk_5C      = 0;
+    g_Task->unk_2A      = 0;
+    g_Task->unk_29      = 2;
+    g_Task->unk_2C.half = 0;
+    g_Task->unk_2B      = 1;
+    Actor_SelectScript(0);
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EF648(void) {
     PartyMember* work;

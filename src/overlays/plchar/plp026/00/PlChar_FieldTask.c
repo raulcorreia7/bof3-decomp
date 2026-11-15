@@ -94,7 +94,8 @@ MATCH s32 func_801D0148(s16 x, s16 y) {
     CHAR_PROBE_CELL_CODE(Char_SpawnLinkedActor);
 }
 
-INCLUDE_ASM(Char_SpawnLinkedActor);
+/* func_801D0354 */
+#include "overlays/plchar/Char_SpawnLinkedActor.h"
 
 MATCH void func_801D0440(void) {
     SYS_DISPATCH_TASK(D_801D0AA8, 3, g_Task);
@@ -127,7 +128,8 @@ MATCH void func_801D04F0(void) {
 
 #include "overlays/plchar/Char_ClearModeIfUnused.h"
 
-INCLUDE_ASM(func_801D06C4);
+#include "overlays/plchar/Char_ProbeFacingBlocked.h"
+CHAR_DEFINE_PROBE_FACING_BLOCKED(func_801D06C4);
 
 MATCH void func_801D0868(void) {
     s16 dist;

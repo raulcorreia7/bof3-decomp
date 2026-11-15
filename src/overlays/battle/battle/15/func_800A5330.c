@@ -16,7 +16,7 @@
  * confirms when the party member has the AP. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_800A5330(void) {
-    s32 row;
+    u8  row;
     s32 col;
     s32 entry;
     u8  gene_row;
@@ -26,7 +26,7 @@ NON_MATCHING void func_800A5330(void) {
     s32 buttons;
 
     row = g_Battle.cursor.gene.row;
-    if (row != -1) {
+    if (row != GAME_NONE) {
         col = g_Battle.cursor.gene.column;
         if (D_800B7070[row][col] != 0) {
             func_801DE60C(0, 1, 1, 0, GAME_NONE, Message_GetText((u16)(col + (row * GENE_GRID_COLUMNS + GENE_NAME_TEXT))));

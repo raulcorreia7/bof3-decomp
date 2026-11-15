@@ -1,55 +1,56 @@
 #include "engine/slus/slus.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void UI_DrawGlyph(s32 color, u8* text) {
-    /* 73.14%; regalloc: the saved arguments are reversed. Pinning the text pointer to s1
-     * (work/exe/slus_004_22/80151E24/best.c) reaches 77.99%, then the draw-mode constant is hoisted
-     * before the s1 spill. resume: a shape that keeps retail's copy order without the pin. */
-    u8* val0;
-    s32 val1;
-    s32 val2;
+#define WINDOW       ((MessageWindowBlock*)D_801490B8)
+#define GLYPH        ((POLY_FT4*)g_GfxPrimCursor)
 
-    val0 = text;
-    val1 = color;
+/* The glyph's cell in the font sheet: 31 glyphs of 8 by 12 texels per row, from '0', below the first 72 rows. */
+#define GLYPH_INDEX  (*text - '0')
+#define GLYPH_U      ((GLYPH_INDEX % 31) * 8)
+#define GLYPH_V      (((GLYPH_INDEX / 31) * 12) + 72)
+
+/* Rows the glyph loses for the current row offset. */
+#define ROW_OFFSET   g_TextRowOffsets[WINDOW->row_offset_index]
+#define GLYPH_BOTTOM (WINDOW->window.text.y + ((u16)((u16)WINDOW->window.cue_counter + 12) - ((s32)(((((s32)((u16)WINDOW->window.cue_counter << 0x10) >> 0xC) + 192) / 12) * ROW_OFFSET) >> 4)))
+#define GLYPH_RIGHT  ((u16)WINDOW->window.cue_counter + (WINDOW->window.text.x + 8))
+
+/* Draws one glyph of the message text at the window's text cursor in a palette colour, then advances the cursor. */
+MATCH void UI_DrawGlyph(s32 color, u8* text) {
+    s32 height;
+    s32 index;
+    s32 width;
+
     GFX_AddDrawMode(GetTPage(0, 1, 960, 1) & HALF_MASK);
-    val1 &= 0xF;
-    FIELD(u16, g_GfxPrimCursor, 0xEu) = GetClut(val1 * 16, STAGE_PALETTE_Y);
-    val1                              = 8;
-    if (g_MessageWindow.cue_counter < 9) {
-        val2 = 0xC;
+    index       = color & 0xF;
+    GLYPH->clut = GetClut(index * 16, STAGE_PALETTE_Y);
+    width       = 8;
+    if (WINDOW->window.cue_counter < 9) {
+        height = 12;
     } else {
-        val1 = 7;
-        val2 = 0xB;
+        width  = 7;
+        height = 11;
     }
-    if (*val0 != STRING_SPACE) {
-        FIELD(u16, g_GfxPrimCursor, 0x16u) = GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y);
-        FIELD(s8, g_GfxPrimCursor, 0xCu)   = (s8)(((*val0 - '0') % 31) * 8);
-        FIELD(s8, g_GfxPrimCursor, 0xDu)   = (s8)((((*val0 - '0') / 31) * 0xC) + 0x48);
-        FIELD(s8, g_GfxPrimCursor, 0x14u)  = (s8)(val1 + (((*val0 - '0') % 31) * 8));
-        FIELD(s8, g_GfxPrimCursor, 0x15u)  = (s8)((((*val0 - '0') / 31) * 0xC) + 0x48);
-        FIELD(s8, g_GfxPrimCursor, 0x1Cu)  = (s8)(((*val0 - '0') % 31) * 8);
-        FIELD(s8, g_GfxPrimCursor, 0x1Du)  = (s8)((((*val0 - '0') / 31) * 0xC) + 0x48 + (val2 - g_TextRowOffsets[D_801490B8[0]]));
-        FIELD(s8, g_GfxPrimCursor, 0x24u)  = (s8)(val1 + (((*val0 - '0') % 31) * 8));
-        FIELD(s8, g_GfxPrimCursor, 0x25u)  = (s8)((((*val0 - '0') / 31) * 0xC) + 0x48 + (val2 - g_TextRowOffsets[D_801490B8[0]]));
-        FIELD(s8, g_GfxPrimCursor, 0x4u)   = 0x80;
-        FIELD(s8, g_GfxPrimCursor, 0x5u)   = 0x80;
-        FIELD(s8, g_GfxPrimCursor, 0x6u)   = 0x80;
-        FIELD(u16, g_GfxPrimCursor, 0x8u)  = (u16)g_MessageWindow.text.x;
-        FIELD(u16, g_GfxPrimCursor, 0xAu)  = (u16)g_MessageWindow.text.y;
-        FIELD(s16, g_GfxPrimCursor, 0x10u) = (s16)((u16)g_MessageWindow.cue_counter + (g_MessageWindow.text.x + 8));
-        FIELD(u16, g_GfxPrimCursor, 0x12u) = (u16)g_MessageWindow.text.y;
-        FIELD(u16, g_GfxPrimCursor, 0x18u) = (u16)g_MessageWindow.text.x;
-        FIELD(s16, g_GfxPrimCursor, 0x1Au) = (s16)(g_MessageWindow.text.y + (((u16)g_MessageWindow.cue_counter + 0xC) -
-                                                                             ((s32)(((((s32)((u16)g_MessageWindow.cue_counter << 0x10) >> 0xC) + 0xC0) / 12) * g_TextRowOffsets[D_801490B8[0]]) >> 4)));
-        FIELD(s16, g_GfxPrimCursor, 0x20u) = (s16)((u16)g_MessageWindow.cue_counter + (g_MessageWindow.text.x + 8));
-        FIELD(s16, g_GfxPrimCursor, 0x22u) = (s16)(g_MessageWindow.text.y + (((u16)g_MessageWindow.cue_counter + 0xC) -
-                                                                             ((s32)(((((s32)((u16)g_MessageWindow.cue_counter << 0x10) >> 0xC) + 0xC0) / 12) * g_TextRowOffsets[D_801490B8[0]]) >> 4)));
-        SetPolyFT4((POLY_FT4*)g_GfxPrimCursor);
+    if (*text != STRING_SPACE) {
+        GLYPH->tpage = GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y);
+        GLYPH->u0    = (s8)GLYPH_U;
+        GLYPH->v0    = (s8)GLYPH_V;
+        GLYPH->u1    = (s8)(width + GLYPH_U);
+        GLYPH->v1    = (s8)GLYPH_V;
+        GLYPH->u2    = (s8)GLYPH_U;
+        GLYPH->v2    = (s8)((s8)GLYPH_V + (height - ROW_OFFSET));
+        GLYPH->u3    = (s8)(width + GLYPH_U);
+        GLYPH->v3    = (s8)((s8)GLYPH_V + (height - ROW_OFFSET));
+        setRGB0(GLYPH, 0x80, 0x80, 0x80);
+        GLYPH->x0 = (u16)WINDOW->window.text.x;
+        GLYPH->y0 = (u16)WINDOW->window.text.y;
+        GLYPH->x1 = (s16)GLYPH_RIGHT;
+        GLYPH->y1 = (u16)WINDOW->window.text.y;
+        GLYPH->x2 = (u16)WINDOW->window.text.x;
+        GLYPH->y2 = (s16)GLYPH_BOTTOM;
+        GLYPH->x3 = (s16)GLYPH_RIGHT;
+        GLYPH->y3 = (s16)GLYPH_BOTTOM;
+        SetPolyFT4(GLYPH);
         SetSemiTrans(g_GfxPrimCursor, 1);
         GFX_AddPrim(1U, sizeof(POLY_FT4));
     }
-    g_MessageWindow.text.x += (u16)g_MessageWindow.cue_counter;
+    g_MessageWindow.text.x += (u16)WINDOW->window.cue_counter;
 }
-#else
-INCLUDE_ASM(UI_DrawGlyph);
-#endif

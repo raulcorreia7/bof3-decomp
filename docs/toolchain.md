@@ -150,10 +150,14 @@ instruction: retail on the left, candidate on the right, `!` in the first column
 differ (an empty diff has no `!`). Rows pair by position, so one inserted instruction marks every row
 after it; read the first `!` rows, then use `objdiff` for alignment.
 
-It compares `.text` only. It refuses, and never passes, a function that reads its unit's own
-`.rodata`, `.data` or `.bss` (jump table, string, constant), is gp-relative, is still
-`INCLUDE_ASM`, or references a symbol that no map defines. Those and the final verdict need
-`check-<image>`, the only acceptance gate.
+It compares `.text` only. A function that reads its unit's own `.rodata` (jump table, string,
+constant) is measured: the partial link places that section at the address of the unit's
+`.rodata` row in `config/<image>/splat.yaml`, with the `SUBALIGN` of the link script section that
+holds it, so the `lui`/`addiu` pair compares as in the image. The table's contents are not
+compared. A unit with no such row has no `.rodata` in retail, and the function shows a difference.
+It refuses, and never passes, a function that reads its unit's own `.data` or `.bss`, is
+gp-relative, is still `INCLUDE_ASM`, or references a symbol that no map defines. Those and the
+final verdict need `check-<image>`, the only acceptance gate.
 
 ### Reconfigure
 
