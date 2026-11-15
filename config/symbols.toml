@@ -1585,6 +1585,7 @@ Actor_Clear = { addr = 0x801F0588, type = "func", source = "Clears the effect wo
 g_BMagicEffectModes = { addr = 0x801F05D8, source = "Handlers of magic125 (DivineBreath), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic126/03"]
+D_1F800000_HALF = { addr = 0x1F800000, type = "s16", source = "The scratchpad base 0x1F800000 as signed halfwords; the magic effects read and set its first halfword as a vertical offset.", alias = true }
 Battle_ApplyDamageFlags = { addr = 0x800A9610, alias = true, source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
