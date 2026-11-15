@@ -40,7 +40,7 @@ NON_MATCHING void func_800A0EC4(void) {
                 row->equip.accessories[0] = character->equip.accessories[0];
                 row->equip.accessories[1] = character->equip.accessories[1];
                 index++;
-                __builtin_memcpy((u8*)row + 0x3C, (u8*)character + 0x1C, sizeof(Stats));
+                __builtin_memcpy(&row->base, &character->stats, sizeof(Stats));
             } while ((u32)(index & BYTE_MASK) < (u8)g_Battle.party_count);
         }
         index = 0;
