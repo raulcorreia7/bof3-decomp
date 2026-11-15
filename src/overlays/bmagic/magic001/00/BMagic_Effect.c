@@ -365,7 +365,29 @@ MATCH void func_801F00A8(void) {
     EFFECT_RAMP_TINT_AND_FINISH();
 }
 
-INCLUDE_ASM(func_801F014C);
+MATCH void func_801F014C(void) {
+    SVECTOR pos;
+    SVECTOR rot;
+    MATRIX  matrix;
+    long    flags;
+
+    PushMatrix();
+    rot.vz = 0;
+    rot.vy = 0;
+    rot.vx = 0;
+    pos.vx = (g_Task->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
+    pos.vy = (g_Task->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
+    if (g_Task->header.step < 2) {
+        pos.vz = -COORD_INT(g_BattleEffectBattler->pos.z) / 2;
+    } else {
+        pos.vz = -COORD_INT(g_BattleSelectedActor->pos.z) / 2;
+    }
+    RotTrans(&pos, (VECTOR*)matrix.t, &flags);
+    RotMatrix(&rot, &matrix);
+    MulMatrix2(&g_CameraMatrix, &matrix);
+    SetRotMatrix(&matrix);
+    SetTransMatrix(&matrix);
+}
 
 MATCH void func_801F0238(void) {
     POLY_G3* prim;

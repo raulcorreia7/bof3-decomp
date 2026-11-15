@@ -102,6 +102,8 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
    why: a value moves when `threshold * uses * life >= loop size`, and each move lowers the
    threshold by 3 for the values after it. A register that holds a constant in the draft and a
    counter in retail is usually one move too many or too few earlier in the loop.
+   Entry order: a local assigned once is scheduled next to its first reader, one assigned twice
+   stays where the statement is; the first statement copying the last parameter stays at entry.
 
    Script the forms: write the body once with its variable parts as a table, build each with
    `tools/match.sh --diff`, and accept only a line that begins `match:`, then `check-<image>`.

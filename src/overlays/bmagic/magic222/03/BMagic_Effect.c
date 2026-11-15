@@ -322,7 +322,18 @@ MATCH void func_801F0504(void) {
     }
 }
 
-INCLUDE_ASM(func_801F0584);
+MATCH void func_801F0584(void) {
+    PartyMember* src;
+
+    src                 = g_BattleEffectBattler;
+    g_Task->unk_2E.half = src->unk_2E.half;
+    g_Task->unk_30.half = src->unk_30.half;
+    func_800A9610(g_Battle.target_selector, 16);
+    g_Task->param.unk_0B = 8;
+    g_Task->unk_09       = 0;
+    g_Task->timer        = 4;
+    g_Task->header.step += 1;
+}
 
 #include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"
 
