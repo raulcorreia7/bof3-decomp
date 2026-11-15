@@ -4,7 +4,8 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801D1264(void) {
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D1264(void) {
     s32 cursor_x;
     s32 row;
     s32 first;
@@ -14,16 +15,13 @@ MATCH void func_801D1264(void) {
     u16 pad;
     u8  old_cursor;
     u8  first_row;
-    u8  last_row;
     u8  next;
     u8* cursor;
 
-    g_MenuPanelTasks[1].flags = 0;
-    /* keeps the stores above in source order */
-    __asm__ volatile("");
+    g_MenuPanelTasks[1].flags        = 0;
     g_MenuPanelTasks[4].pos.x        = cursor_x + 7;
     row_offset                       = row - first;
-    g_MenuPanelTasks[4].pos.y        = row_offset * 13 + 26 + g_MenuPanelTasks[0].pos.y;
+    g_MenuPanelTasks[4].pos.y        = g_MenuPanelTasks[0].pos.y + row_offset * 13 + 26;
     g_MenuPanelTasks[2].u.message.id = Item_GetDescription(category, g_MenuPanelTasks[0].flags);
     g_MenuPanelTasks[3].u.message.id = 221;
     buttons                          = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
@@ -55,16 +53,16 @@ MATCH void func_801D1264(void) {
             g_MenuPanelTasks[0].unk_0A = first_row - 9;
         }
     } else if (buttons & PADR1) {
-        last_row = g_MenuPanelTasks[0].unk_0A;
-        if (last_row == 119) {
+        first_row = g_MenuPanelTasks[0].unk_0A;
+        if (first_row == 119) {
             g_MenuPanelTasks[0].unk_0B = 127;
-        } else if (old_cursor >= 111) {
+        } else if (first_row >= 111) {
             next                       = old_cursor + 119;
-            g_MenuPanelTasks[0].unk_0B = next - last_row;
+            g_MenuPanelTasks[0].unk_0B = next - first_row;
             g_MenuPanelTasks[0].unk_0A = 119;
         } else {
             g_MenuPanelTasks[0].unk_0B = old_cursor + 9;
-            g_MenuPanelTasks[0].unk_0A = last_row + 9;
+            g_MenuPanelTasks[0].unk_0A = first_row + 9;
         }
     }
     cursor = &g_MenuPanelTasks[0].unk_0B;
@@ -89,6 +87,9 @@ MATCH void func_801D1264(void) {
         }
     }
 }
+#else
+INCLUDE_ASM(func_801D1264);
+#endif
 
 MATCH void func_801D153C(void) {
     SYS_DISPATCH_BYTE(g_MenuBateStep2Sub2Funcs, D_80148652);
