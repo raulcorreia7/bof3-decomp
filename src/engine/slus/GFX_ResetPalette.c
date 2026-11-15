@@ -9,16 +9,16 @@ MATCH void GFX_ResetPalette(void) {
     u16  column;
     u16* row_base;
 
-    for (row = 28; row < 32u; row++) {
+    for (row = AREA_PALETTE_ROWS - 4; row < AREA_PALETTE_ROWS; row++) {
         column   = 0;
-        row_base = (u16*)((u8*)MEM_PTR(const u16, 0x80033800u) + row * 0x200);
-        while (column < 256u) {
+        row_base = (u16*)((u8*)MEM_PTR(const u16, AREA_PALETTE_ARENA) + row * AREA_PALETTE_ROW);
+        while (column < AREA_PALETTE_COLORS) {
             row_base[column] = 0;
             column++;
         }
     }
 
-    for (row = 0; row < 32u; row++) {
-        memcpy((u8*)g_GraphicsPaletteDst + row * 0x200, (u8*)MEM_PTR(const u16, 0x80033800u) + row * 0x200, 0x200);
+    for (row = 0; row < AREA_PALETTE_ROWS; row++) {
+        memcpy((u8*)g_GraphicsPaletteDst + row * AREA_PALETTE_ROW, (u8*)MEM_PTR(const u16, AREA_PALETTE_ARENA) + row * AREA_PALETTE_ROW, AREA_PALETTE_ROW);
     }
 }
