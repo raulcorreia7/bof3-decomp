@@ -72,17 +72,17 @@ NON_MATCHING void func_801EEC80(void) {
             part = (ScenePart*)((u8*)MAP_BUNDLE_BASE + g_AreaMapBundle.record_region_24 * 4 + cell * 4);
             end  = (ScenePart*)((u8*)part + (*(u16*)((u8*)part - 2) * 4 - 4));
             while (part != end) {
-                if ((u8)(part->raw >> 24) == 0x00) {
-                    part->raw = (part->raw & 0xFFFFFF) | 0x28000000;
+                if (PART_COMMAND(part->raw) == 0x00) {
+                    part->raw = PART_COMMAND_SET(part->raw, 0x28);
                 }
-                if ((u8)(part->raw >> 24) == 0x21) {
-                    part->raw = (part->raw & 0xFFFFFF) | 0x29000000;
+                if (PART_COMMAND(part->raw) == 0x21) {
+                    part->raw = PART_COMMAND_SET(part->raw, 0x29);
                 }
-                if ((u8)(part->raw >> 24) == 0x22) {
-                    part->raw = (part->raw & 0xFFFFFF) | 0x2A000000;
+                if (PART_COMMAND(part->raw) == 0x22) {
+                    part->raw = PART_COMMAND_SET(part->raw, 0x2A);
                 }
-                if ((u8)(part->raw >> 24) == 0x27) {
-                    part->raw = (part->raw & 0xFFFFFF) | 0x2B000000;
+                if (PART_COMMAND(part->raw) == 0x27) {
+                    part->raw = PART_COMMAND_SET(part->raw, 0x2B);
                 }
                 part += part->head.count;
             }
