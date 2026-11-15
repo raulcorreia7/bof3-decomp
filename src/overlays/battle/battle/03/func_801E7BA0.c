@@ -31,7 +31,7 @@ NON_MATCHING void func_801E7BA0(void) {
 
     if (EMI_IsReady() != 0) {
         GFX_FreePaletteFadeTarget(&g_Game.members[g_BattleEffectBattler->slot]);
-        if (*(u16*)(&g_Battle.state) & BATTLE_STATE_RELOAD_PARTY) {
+        if (g_Battle.state & BATTLE_STATE_RELOAD_PARTY) {
             g_Battle.living_party_count = 0;
             g_Battle.party_count        = D_801463CF;
             var_s0                      = 0;
@@ -124,7 +124,7 @@ NON_MATCHING void func_801E7BA0(void) {
         GFX_LoadPalette((u8*)BATTLE_ACTION_BLOCK_TABLE + (g_Task->slot << 6), 0);
         func_801DDAB4((u32) * (D_80145F10 + ((g_Task)->slot * BATTLE_PARTY_STRIDE)));
         GFX_UploadPaletteRows();
-        if (*(u16*)(&g_Battle.state) & BATTLE_STATE_RELOAD_PARTY) {
+        if (g_Battle.state & BATTLE_STATE_RELOAD_PARTY) {
             *D_801454F5 = D_801463D4;
             *D_801454F6 = D_801463D5;
         } else {
@@ -132,7 +132,7 @@ NON_MATCHING void func_801E7BA0(void) {
             *(D_801454F6 + ((g_Task)->slot * 3)) = D_801463D5;
         }
         g_Task = var_s1;
-        *(u16*)(&g_Battle.state) &= ~BATTLE_STATE_RELOAD_PARTY;
+        g_Battle.state &= ~BATTLE_STATE_RELOAD_PARTY;
         var_s1->header.mode += 1;
     }
 }
