@@ -195,13 +195,13 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
     do {
         segment = 0;
     mesh_loop:
-        mesh_angle                = segment << 8;
-        vertex                    = segment + (row << 4);
-        D_801EFAF8[vertex].x      = (s32)(rsin(mesh_angle) * row * ((u8)(g_Task)->unk_09 >> 3)) >> 0xC;
-        mesh_task                 = g_Task;
-        next_segment              = segment + 1;
-        segment                   = next_segment;
-        D_801EFAF8[vertex].y      = (s32)(rcos(mesh_angle) * row * ((u8)mesh_task->unk_09 >> 3)) >> 0xC;
+        mesh_angle           = segment << 8;
+        vertex               = segment + (row << 4);
+        D_801EFAF8[vertex].x = FIXED_MUL(rsin(mesh_angle), row * (g_Task->unk_09 >> 3));
+        mesh_task            = g_Task;
+        next_segment         = segment + 1;
+        segment              = next_segment;
+        D_801EFAF8[vertex].y = FIXED_MUL(rcos(mesh_angle), row * (mesh_task->unk_09 >> 3));
         next_row                  = row + 1;
         if (next_segment < 0x10) {
             goto mesh_loop;
@@ -229,10 +229,10 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
     do {
         rim_segment_value               = rim_segment_byte >> 0x18;
         rim_angle                       = rim_segment_value << 8;
-        D_801EF9F8[rim_segment_value].x = (s32)(rsin(rim_angle) * (g_Task)->unk_09) >> 0xC;
+        D_801EF9F8[rim_segment_value].x = FIXED_MUL(rsin(rim_angle), g_Task->unk_09);
         next_rim_segment                = rim_segment + 1;
         rim_segment                     = next_rim_segment;
-        D_801EF9F8[rim_segment_value].y = (s32)(rcos(rim_angle) * (g_Task)->unk_09) >> 0xC;
+        D_801EF9F8[rim_segment_value].y = FIXED_MUL(rcos(rim_angle), g_Task->unk_09);
         rim_segment_byte                = rim_segment << 0x18;
     } while (next_rim_segment < 0x10);
     ring      = 7;
@@ -245,10 +245,10 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
     spiral_loop:
         spiral_segment_value               = spiral_segment_byte >> 0x18;
         spiral_angle                       = ring_angle + (spiral_segment_value << 8);
-        D_801EFA78[spiral_segment_value].x = (s32)(rsin(spiral_angle) * ring_value * ((u8)(g_Task)->unk_09 >> 3)) >> 0xC;
+        D_801EFA78[spiral_segment_value].x = FIXED_MUL(rsin(spiral_angle), ring_value * (g_Task->unk_09 >> 3));
         next_spiral_segment                = spiral_segment + 1;
         spiral_segment                     = next_spiral_segment;
-        D_801EFA78[spiral_segment_value].y = (s32)(rcos(spiral_angle) * ring_value * ((u8)(g_Task)->unk_09 >> 3)) >> 0xC;
+        D_801EFA78[spiral_segment_value].y = FIXED_MUL(rcos(spiral_angle), ring_value * (g_Task->unk_09 >> 3));
         spiral_segment_byte                = spiral_segment << 0x18;
         if (next_spiral_segment < 0x10) {
             goto spiral_loop;
