@@ -1,21 +1,21 @@
 #include "area134_13.h"
 
 MATCH void func_801F48B0(void) {
-    AreaSlotRecord* record;
+    AreaQuadSprite* record;
 
-    record = (AreaSlotRecord*)func_801F4938();
+    record = (AreaQuadSprite*)func_801F4938();
     if (record == NULL) {
         return;
     }
-    record->active      = g_Task->unk_06;
-    record->unk_01      = 0;
-    record->unk_02      = 0;
-    record->unk_03      = 0x80;
-    record->unk_04      = 0x80;
-    record->pos.x.fixed = g_Task->pos.x.fixed;
-    record->pos.y.fixed = g_Task->pos.y.fixed;
-    record->pos.z.fixed = 0;
-    record->unk_18      = 0x1800;
-    record->unk_1C      = 0;
-    record->unk_20      = 0;
+    record->unk_00[0] = g_Task->unk_06;
+    record->unk_00[1] = 0;
+    record->unk_00[2] = 0;
+    record->flags_03  = 0x80;
+    record->half_size = 0x80;
+    record->origin.x  = g_Task->pos.x.fixed;
+    record->origin.y  = g_Task->pos.y.fixed;
+    record->unk_10    = 0;
+    record->unk_18    = 0x1800;
+    record->unk_1C    = 0;
+    record->unk_20    = 0;
 }

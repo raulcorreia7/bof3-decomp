@@ -9,10 +9,20 @@ segments:
     subsegments:
       - [0x0, .data, D_801F6C00]
       - [0x4, bin, D_801F6C04]
-      - [0x2AC, .rodata, D_801F6EAC]
+      - [0x2AC, .rodata, func_801F9F0C]
       - [0x308, .rodata, D_801F6F08]
+      - [0x30C, .rodata, func_801FA7DC]
+      - [0x3BC, .rodata, D_801F6FBC]
       - [0x4B4, .rodata, D_801F70B4]
       - [0x574, c, 574]
+      - [0x330C, c, func_801F9F0C]
+      - [0x3BDC, c, func_801FA7DC]
+      - [0x4204, c, func_801FAE04]
+      - [0x4C64, c, func_801FB864]
+      - [0x5974, c, func_801FC5B4]
+      - [0x5C90, c, func_801FC890]
+      - [0x6054, c, func_801FCC54]
+      - [0x61E0, c, Scene_JoinAdultNinaMomo]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
     type: code
