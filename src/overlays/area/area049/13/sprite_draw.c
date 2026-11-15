@@ -27,7 +27,52 @@ MATCH void func_801170A4(void) {
     }
 }
 
-INCLUDE_ASM(func_801170D8);
+MATCH void func_801170D8(AreaSprite* sprite) {
+    DVECTOR   screen;
+    u16       size[2];
+    s32*      object;
+    POLY_FT4* primitive;
+    u8        flags;
+    u8        red;
+    u8        green;
+    u8        blue;
+
+    object    = (s32*)&sprite->origin;
+    primitive = (POLY_FT4*)g_GfxPrimCursor;
+
+    SetPolyFT4(primitive);
+    SetSemiTrans(primitive, 1);
+
+    Area_ProjectPoint(object, &screen);
+    size[0] = sprite->half_size;
+    size[1] = sprite->half_size;
+    Game_ProjectWorldPoint(object, size, size);
+
+    setXY4(primitive, screen.vx - ((s16)size[0] >> 1), screen.vy - ((s16)size[1] >> 1), (screen.vx - ((s16)size[0] >> 1)) + size[0], screen.vy - ((s16)size[1] >> 1), screen.vx - ((s16)size[0] >> 1),
+           (screen.vy - ((s16)size[1] >> 1)) + size[1], (screen.vx - ((s16)size[0] >> 1)) + size[0], (screen.vy - ((s16)size[1] >> 1)) + size[1]);
+    /* The tile rectangle and texture page have no owner names; every matched sibling spells
+     * these values raw. The palette row is the stage palette plus three rows. */
+    setUV4(primitive, 224, 48, 255, 48, 224, 79, 255, 79);
+    setClut(primitive, 80, STAGE_PALETTE_Y + 3);
+    primitive->tpage = GetTPage(0, 1, 704, 256);
+    flags            = sprite->unk_26;
+    red              = 0;
+    if (flags & 4) {
+        red = sprite->flags_03;
+    }
+    green = 0;
+    if (flags & 2) {
+        green = sprite->flags_03;
+    }
+    blue = 0;
+    if (flags & 1) {
+        blue = sprite->flags_03;
+    }
+    primitive->r0 = red;
+    primitive->g0 = green;
+    primitive->b0 = blue;
+    GFX_AddPrim(2, sizeof(POLY_FT4));
+}
 
 MATCH void func_801172D0(void) {
     Actor*      actor;
@@ -237,7 +282,34 @@ MATCH void func_80117C38(void) {
     Scene_AdvanceActorStep();
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_80117C58(void) {
+    u8 slot;
+
+    if (SYS_TestFlag(D_80144ED0, D_801181D0[COORD_INT(g_Task->pos.x)]) != 0) {
+        SND_PlayCue(0x20A);
+        slot = Actor_FindFreeSpawned();
+        if (slot != GAME_NONE) {
+            g_SpawnedActors[slot].header.flags = ACTOR_FLAG_IN_USE;
+            g_SpawnedActors[slot].type         = 0x6E;
+            g_SpawnedActors[slot].pos.x.fixed  = D_801181C0[COORD_INT(g_Task->pos.x)].x;
+            g_SpawnedActors[slot].pos.y.fixed  = D_801181C0[COORD_INT(g_Task->pos.x)].y;
+            g_SpawnedActors[slot].pos.z.fixed  = TO_COORD(1920);
+        }
+        slot = Actor_FindFreeSpawned();
+        if (slot != GAME_NONE) {
+            g_SpawnedActors[slot].header.flags = ACTOR_FLAG_IN_USE;
+            g_SpawnedActors[slot].type         = 0x6D;
+            g_SpawnedActors[slot].unk_06       = COORD_INT(g_Task->pos.x);
+        }
+        g_Task->timer = 0;
+        g_Task->header.step += 1;
+    }
+    func_80117E78(0x80, 0);
+}
+#else
 INCLUDE_ASM(func_80117C58);
+#endif
 
 MATCH void func_80117DF0(void) {
     if (!(g_FrameCount & 0x1)) {
