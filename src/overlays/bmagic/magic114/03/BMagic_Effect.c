@@ -21,7 +21,37 @@ MATCH void func_801EEC44(void) {
     GFX_AddPrim(3, sizeof(DR_MODE));
 }
 
-INCLUDE_ASM(func_801EEDA0);
+MATCH void func_801EEDA0(void) {
+    PartyMember* work;
+    PartyMember* battler;
+    u16*         src_a;
+    u16*         dst_a;
+    u16*         src_b;
+    u16*         dst_b;
+    u32          i;
+
+    i     = 0;
+    dst_b = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src_b = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    dst_a = MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW);
+    src_a = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
+    for (; i < 256; i++) {
+        *dst_a = *src_a++ | 0x8000;
+        *dst_b = *src_b++;
+        dst_a += 1;
+        dst_b += 1;
+    }
+    g_GfxPalettePending = 1;
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    g_Task->facing    = g_BattleEffectBattler->facing;
+    work              = g_Task;
+    battler           = g_BattleEffectBattler;
+    work->pos.x.fixed = battler->pos.x.fixed;
+    work->pos.y.fixed = battler->pos.y.fixed;
+    work->pos.z.fixed = battler->pos.z.fixed;
+    work->timer       = 0;
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801EEE84(void) {
     u8 count;
