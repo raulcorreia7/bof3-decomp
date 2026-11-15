@@ -6415,6 +6415,7 @@ D_1F800024 = { addr = 0x1F800024, type = "SVECTOR", source = "The third corner v
 D_1F80002C = { addr = 0x1F80002C, type = "SVECTOR", source = "The fourth corner vector of the RotTransPers4 block at 0x1F800014, written on its own by the tile-ring draw (func_801530D0)." }
 g_Task = { addr = 0x1F800044, size = 0x4, source = "The current task work record." }
 jtbl_800327B0 = { addr = 0x800327B0, type = "Callback", source = "The switch table of LZ77_DecodeStep: the jump targets of its jr dispatch." }
+D_80033A08 = { addr = 0x80033A08, type = "u16", source = "Window colors, 0x40 bytes per window style." }
 g_AreaMapBundle = { addr = 0x80104000, type = "AreaMapBundle", size = 0x30, source = "Header of the area map bundle." }
 g_AreaCells = { addr = 0x8012C000, size = 0x1880, source = "The area cells." }
 g_AreaCellPrims = { addr = 0x8012D880, size = 0x14000, source = "The primitives of the area cells." }
