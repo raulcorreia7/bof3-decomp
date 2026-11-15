@@ -35,6 +35,19 @@ extern u8       g_FlockScript[4][2];
 extern Callback D_801F6894[];
 extern Callback D_801F689C[];
 
+/* The two 2-byte palette cells of the meter bar texture: the clut byte and the
+ * texture column of the bar's left edge. */
+typedef struct MeterBarCell {
+    u8 clut;
+    u8 u;
+} MeterBarCell;
+
+typedef struct MeterBarPalette {
+    MeterBarCell cell[2];
+} MeterBarPalette;
+
+extern u8 D_801F2C04[4];
+
 /* func_801F35D0 */
 void Area_Update(void);
 void func_801F5380(void);

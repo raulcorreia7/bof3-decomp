@@ -1,3 +1,36 @@
 #include "area120_13.h"
 
-INCLUDE_ASM(func_801F3468);
+MATCH void func_801F3468(AreaRow* row) {
+    SVECTOR screen[7];
+    TILE_1* dot;
+    TILE*   tile;
+    u8      blue;
+
+    GFX_SET_DRAW_MODE(GetTPage(0, 1, 0x380, 0x100));
+    Area_AddCellPrim(row->x, row->z, 0, 0xC);
+    Area_ProjectPoint(&row->x, (DVECTOR*)&screen[0]);
+
+    dot = (TILE_1*)g_GfxPrimCursor;
+    SetTile1(dot);
+    SetSemiTrans(dot, 1);
+    dot->x0 = screen[0].vx;
+    dot->y0 = screen[0].vy;
+    dot->g0 = 0x80;
+    dot->r0 = 0x80;
+    blue    = (rand() & 1) << 7;
+    dot->b0 = blue;
+    Area_AddCellPrim(row->x, row->z, 0, 0xC);
+
+    tile = (TILE*)g_GfxPrimCursor;
+    SetTile(tile);
+    SetSemiTrans(tile, 1);
+    tile->x0 = screen[0].vx - 1;
+    tile->y0 = screen[0].vy - 1;
+    tile->w  = 3;
+    tile->h  = 3;
+    tile->g0 = 0x20;
+    tile->r0 = 0x20;
+    blue     = (rand() & 1) << 5;
+    tile->b0 = blue;
+    Area_AddCellPrim(row->x, row->z, 0, 0x10);
+}
