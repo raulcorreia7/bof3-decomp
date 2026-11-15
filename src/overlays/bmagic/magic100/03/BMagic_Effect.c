@@ -146,7 +146,41 @@ MATCH void func_801EF1DC(void) {
     g_Task->header.step++;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF358(void) {
+    PartyMember* setup_task;
+    PartyMember* position_task;
+    PartyMember* timer_task;
+    PartyMember* battler;
+    s32          angle;
+    u8           timer;
+
+    setup_task         = g_Task;
+    setup_task->unk_0C = 0x1000;
+    setup_task->unk_10 = 0;
+    func_801DD350(setup_task);
+    position_task              = g_Task;
+    position_task->pos.x.fixed = position_task->pos.x.fixed + position_task->unk_0C;
+    position_task->pos.y.fixed = position_task->pos.y.fixed + position_task->unk_10;
+    COORD_INT(position_task->pos.z) += 0x40;
+    if (position_task->param.unk_0B & 1) {
+        angle = position_task->unk_20 + ANGLE_45;
+    } else {
+        angle = position_task->unk_20 - ANGLE_45;
+    }
+    position_task->unk_20 = angle & ANGLE_MASK;
+    timer_task            = g_Task;
+    timer                 = timer_task->timer - 1;
+    timer_task->timer     = timer;
+    if (timer == 0) {
+        battler = g_BattleEffectBattler;
+        battler->param.unk_0B -= 1;
+        func_801E5988();
+    }
+}
+#else
 INCLUDE_ASM(func_801EF358);
+#endif
 
 MATCH void func_801EF434(void) {
     SVECTOR pos;

@@ -93,7 +93,53 @@ MATCH void func_801D0FEC(void) {
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x09));
 }
 
-INCLUDE_ASM(func_801D106C);
+MATCH void func_801D106C(void) {
+    Actor*     work;
+    WorldSpin* spin;
+    u8         timer;
+    u8         i;
+
+    if ((g_Task->unk_06++ & 0x3) == 0) {
+        func_801D19C8();
+    }
+    func_801D1A60();
+    func_801D2088();
+    func_801D1678(&g_Task->unk_18, &g_Task->pos.x, 0x40);
+
+    work = g_Task;
+    work->vx += work->unk_64;
+    work->vy += work->unk_68;
+    work->vz += work->unk_6C;
+    work->unk_18 += work->vx;
+    work->unk_1C += work->vy;
+    work->gravity += work->vz;
+    if (work->unk_18 <= 0x2F7FFF) {
+        work->unk_18  = 0x2F8000;
+        work->unk_1C  = 0x278000;
+        work->gravity = TO_COORD(3840);
+    }
+
+    g_Task->unk_03 -= 4;
+    timer         = g_Task->timer - 1;
+    g_Task->timer = timer;
+    if (timer == 0) {
+        func_801D2138(&g_Task->pos.x.fixed, &g_Task->unk_18);
+        func_801D2138(&g_Task->pos.y.fixed, &g_Task->unk_1C);
+        func_801D2138(&g_Task->pos.z.fixed, &g_Task->gravity);
+        spin = &g_WorldSpins[16];
+        i    = 16;
+        do {
+            Area_InitSpin(spin);
+            i++;
+            spin++;
+        } while (i < 32);
+        func_801D2138(&g_Task->pos.x.fixed, &g_Task->unk_18);
+        func_801D2138(&g_Task->pos.y.fixed, &g_Task->unk_1C);
+        func_801D2138(&g_Task->pos.z.fixed, &g_Task->gravity);
+        g_Task->timer = 0x80;
+        g_Task->header.mode++;
+    }
+}
 
 MATCH void func_801D12A0(void) {
     if ((g_Task->unk_06++ & 0x3) == 0) {
@@ -382,7 +428,44 @@ INCLUDE_ASM(func_801D2474);
 
 INCLUDE_ASM(func_801D26BC);
 
-INCLUDE_ASM(func_801D2934);
+MATCH void func_801D2934(void) {
+    Actor*    actor;
+    SceneDot* dot;
+    u16       i;
+    TILE_1*   tile;
+
+    actor = (Actor*)g_Task->unk_4C;
+    actor->header.flags |= ACTOR_FLAG_HIDDEN;
+    dot = MEM_PTR(SceneDot, AREA_WORK + 0x5A00);
+    for (i = 0; i < D_801D40A8; dot++, i++) {
+        if (dot->active) {
+            if (g_Task->unk_06 == 0) {
+                if (dot->life != 0) {
+                    dot->x += dot->dx;
+                    dot->y += dot->dy;
+                    dot->life--;
+                }
+            } else if (dot->life != 0) {
+                dot->life--;
+            } else {
+                dot->x += dot->dx;
+                dot->y += dot->dy;
+            }
+            tile = (TILE_1*)g_GfxPrimCursor;
+            SetTile1(tile);
+            tile->x0 = dot->x;
+            tile->y0 = dot->y;
+            tile->r0 = (dot->color & 0x1F) << 3;
+            tile->g0 = (dot->color & 0x3E0) >> 2;
+            tile->b0 = (dot->color & 0x7C00) >> 7;
+            GFX_AddPrim(2u, sizeof(TILE_1));
+        }
+        dot->active ^= 1;
+    }
+    if (--g_Task->timer == 0) {
+        g_Task->header.mode++;
+    }
+}
 
 MATCH void func_801D2B44(void) {
     Actor_Clear();
@@ -507,7 +590,62 @@ MATCH void func_801D2FD8(void) {
 
 INCLUDE_ASM(func_801D30AC);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D32F4(void) {
+    u8        order[16];
+    u16       i;
+    u16       j;
+    u8        a;
+    u8        b;
+    u8        tmp;
+    SceneDot* dot;
+    s16*      y;
+
+    for (i = 0; i < 16; i++) {
+        order[i] = i & 1;
+    }
+
+    dot = MEM_PTR(SceneDot, AREA_WORK + 0x5A00);
+    y   = &dot->y;
+    j   = 0;
+    for (i = 0; i < D_801D40A8; i++) {
+        if ((i & 0xF) == 0) {
+            j = 0;
+            do {
+                a = rand() & 0xF;
+                j++;
+                b        = rand() & 0xF;
+                tmp      = order[b];
+                order[b] = order[a];
+                order[a] = tmp;
+            } while (j < 16);
+            j = 0;
+        }
+
+        dot->active = order[j];
+        j++;
+        dot->dx = rand() & 0xF;
+        dot->dy = rand() & 0xF;
+        if (dot->dx < dot->dy) {
+            tmp     = dot->dx;
+            dot->dx = dot->dy;
+            dot->dy = tmp;
+        }
+        dot->dy   = -dot->dy;
+        dot->life = (rand() & 0x1E) + 10;
+        dot->x += dot->dx * dot->life;
+        *y += dot->dy * dot->life;
+        dot++;
+        y += 5;
+    }
+
+    g_Task->timer = 80;
+    g_Task->header.mode++;
+    SND_PlayCue(0x20C);
+}
+#else
 INCLUDE_ASM(func_801D32F4);
+#endif
 
 /* Step the dot trail: move and draw each live dot, then advance when the countdown ends. */
 MATCH void func_801D34F0(void) {
