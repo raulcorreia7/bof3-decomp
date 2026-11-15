@@ -15,6 +15,9 @@
 
 extern SVECTOR  D_1F800014[];
 extern u8       D_801F5734[];
+/* The four offsets the spark ring projects from, one byte a coordinate. */
+extern s8       D_801F5764[];
+extern s8       D_801F5765[];
 extern Callback D_801F576C[];
 
 void func_801F3500(void);
