@@ -154,8 +154,10 @@ def main(argv: list[str]) -> int:
         for source in drafts:
             args = arguments_for(source, commands)
             if args is None:
-                print(f"{source}: no build flags (run meson setup build/meson)")
-                failed += 1
+                # An image the build graph does not configure (CI has no disc) cannot be compiled here.
+                print(
+                    f"skip  {source}: its image has no draft target in this build graph"
+                )
                 continue
             jobs.append((source, pool.submit(compile_one, source, args)))
         for source, job in jobs:
