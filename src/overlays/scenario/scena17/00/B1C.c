@@ -674,7 +674,26 @@ MATCH void func_801F9160(s16 x, s16 y) {
 
 INCLUDE_ASM(func_801F91F0);
 
-INCLUDE_ASM(func_801F938C);
+MATCH bool func_801F938C(void) {
+    s32 i;
+    u8* text;
+
+    for (i = 0; i < 16; i++) {
+        text = D_801F981C[D_801F9DD0 + i];
+        if (text != (u8*)-1 && text != NULL) {
+            func_801F91F0(16, i * 22 - D_801F9DD4, text);
+        }
+    }
+    if (D_801F981C[D_801F9DD0] != (u8*)-1) {
+        D_801F9DD4 += 1;
+        if (D_801F9DD4 == 22) {
+            D_801F9DD4 = 0;
+            D_801F9DD0 += 1;
+        }
+        return 0;
+    }
+    return 1;
+}
 
 /* func_801F9490 */
 MATCH void Scene_RunSaveMenu(void) {
