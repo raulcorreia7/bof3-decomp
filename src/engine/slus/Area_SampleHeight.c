@@ -14,28 +14,22 @@ NON_MATCHING s16 Area_SampleHeight(s32 x, s32 y) {
     s32  tmp2;
     s32  tmp3;
     s32  tmp4;
-    s32  tmp5;
-    s32  tmp6;
     s32  tmp7;
-    s32  tmp8;
-    s32  tmp9;
     s8*  tmp10;
-    u16  fx;
-    u16  fy;
-    u32  bad;
     u32* tmp11;
     u32  tmp12;
     s32  mw;
+    s32  tmp8;
+    s32  tmp9;
+    u32  bad;
     u8*  tmp13;
     u8*  tmp14;
     u8*  base;
 
-    tmp5 = x;
-    tmp6 = y;
     base = MEM_PTR(u8, (MAP_BUNDLE_BASE + 0x00));
-    tmp8 = tmp5 >> 0x10;
     mw   = *(u8*)base;
-    tmp9 = tmp6 >> 0x10;
+    tmp8 = x >> 0x10;
+    tmp9 = y >> 0x10;
     bad  = ((u32)tmp8 >> 0x1F);
     bad |= (tmp8 >= (s32)mw);
     bad |= ((u32)tmp9 >> 0x1F);
@@ -43,15 +37,13 @@ NON_MATCHING s16 Area_SampleHeight(s32 x, s32 y) {
     if (bad != 0) {
         return 0;
     }
-    tmp6 &= ~0x7FFF;
-    fy   = (u16)tmp6;
-    tmp3 = (tmp6 >> 0x10) * mw;
-    tmp5 &= ~0x7FFF;
-    fx    = (u16)tmp5;
-    tmp1  = tmp5 >> 0x10;
+    y &= ~0x7FFF;
+    tmp3 = (y >> 0x10) * mw;
+    x &= ~0x7FFF;
+    tmp1  = x >> 0x10;
     tmp14 = (u8*)((tmp1 * 4) + ((tmp3 * 4) + (MAP_BUNDLE_BASE + 0x30)));
     tmp13 = (u8*)((g_AreaMapBundle.height_off4_2A * 4) + (tmp1 + base) + tmp3);
-    if (!((tmp5 | tmp6) & HALF_MASK)) {
+    if (!((x | y) & HALF_MASK)) {
         tmp4  = *(s8*)(tmp13)*g_AreaHeightOffsetEnabled;
         tmp12 = *(u32*)(tmp14);
         return (s16)((((s32)(tmp12 << 0x10) >> 0x18) + tmp4 + ((s32)(tmp12 << 8) >> 0x18) + tmp4) * 0x10);
@@ -59,8 +51,8 @@ NON_MATCHING s16 Area_SampleHeight(s32 x, s32 y) {
     tmp7  = mw * 4;
     tmp11 = (u32*)(tmp14 + tmp7);
     tmp10 = (s8*)(tmp13 + mw);
-    if (fx != fy) {
-        if (fx != 0) {
+    if ((u16)x != (u16)y) {
+        if ((u16)x != 0) {
             v[0] = ((u32) * (u32*)(tmp14) >> 8) + (*(s8*)(tmp13)*g_AreaHeightOffsetEnabled);
             v[1] = FIELD(u8, tmp14, 0x3u) + (*(s8*)(tmp13)*g_AreaHeightOffsetEnabled);
             v[2] = FIELD(s32, tmp14, 0x4u) + (FIELD(s8, tmp13, 0x1u) * g_AreaHeightOffsetEnabled);
