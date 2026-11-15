@@ -164,9 +164,9 @@ NON_MATCHING void func_801EF358(void) {
     position_task->pos.y.fixed = position_task->pos.y.fixed + position_task->unk_10;
     COORD_INT(position_task->pos.z) += 0x40;
     if (position_task->param.unk_0B & 1) {
-        angle = position_task->unk_20 + 512;
+        angle = position_task->unk_20 + ANGLE_45;
     } else {
-        angle = position_task->unk_20 - 512;
+        angle = position_task->unk_20 - ANGLE_45;
     }
     position_task->unk_20 = angle & ANGLE_MASK;
     timer_task            = g_Task;
