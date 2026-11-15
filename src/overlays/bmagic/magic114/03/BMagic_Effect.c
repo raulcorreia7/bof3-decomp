@@ -21,7 +21,37 @@ MATCH void func_801EEC44(void) {
     GFX_AddPrim(3, sizeof(DR_MODE));
 }
 
-INCLUDE_ASM(func_801EEDA0);
+MATCH void func_801EEDA0(void) {
+    PartyMember* work;
+    PartyMember* battler;
+    u16*         dst;
+    u16*         src;
+    u16*         row_dst;
+    u16*         row_src;
+    u32          i;
+
+    i       = 0;
+    dst     = g_AreaPaletteCopy->rows[26].colors;
+    src     = g_AreaPaletteArena->rows[26].colors;
+    row_dst = g_AreaPaletteCopy->rows[2].colors;
+    row_src = g_AreaPaletteArena->rows[2].colors;
+    for (; i < AREA_PALETTE_COLORS; i++) {
+        *row_dst = *row_src++ | 0x8000;
+        *dst     = *src++;
+        row_dst += 1;
+        dst += 1;
+    }
+    g_GfxPalettePending = 1;
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    g_Task->facing    = g_BattleEffectBattler->facing;
+    work              = g_Task;
+    battler           = g_BattleEffectBattler;
+    work->pos.x.fixed = battler->pos.x.fixed;
+    work->pos.y.fixed = battler->pos.y.fixed;
+    work->pos.z.fixed = battler->pos.z.fixed;
+    work->timer       = 0;
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801EEE84(void) {
     u8 count;

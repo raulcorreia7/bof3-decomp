@@ -126,9 +126,103 @@ MATCH void func_801D15E4(void) {
 
 INCLUDE_ASM(func_801D165C);
 
-INCLUDE_ASM(func_801D1AB8);
+/* Totals the equipment menu's current and trial stat rows and marks each stat up (2), down (1) or equal (0). */
+MATCH void func_801D1AB8(u16* base, u16* current, u16* trial, u8* change, u8* equipped, u8 swap, u8 slot) {
+    Weapon* weapon;
+    Armor*  armor;
+    s32     i;
 
+    weapon     = &g_Weapons[equipped[0]];
+    armor      = &g_Armors[equipped[1]];
+    current[0] = base[0] + weapon->power;
+    current[1] = base[1] + armor->power;
+    current[2] = base[2];
+    current[3] = base[3] - (weapon->weight + armor->weight);
+    if ((s16)current[3] < 0)
+        current[3] = 0;
+    if (swap == 1)
+        weapon = &g_Weapons[slot];
+    else
+        weapon = &g_Weapons[equipped[0]];
+    if (swap == 1)
+        armor = &g_Armors[equipped[1]];
+    else
+        armor = &g_Armors[slot];
+    trial[0] = base[0] + weapon->power;
+    trial[1] = base[1] + armor->power;
+    trial[2] = base[2];
+    trial[3] = base[3] - (weapon->weight + armor->weight);
+    if ((s16)trial[3] < 0)
+        trial[3] = 0;
+    for (i = 0; (u8)i < 4; i++) {
+        if (current[(u8)i] < trial[(u8)i])
+            change[(u8)i] = 2;
+        else if (trial[(u8)i] < current[(u8)i])
+            change[(u8)i] = 1;
+        else
+            change[(u8)i] = 0;
+    }
+}
+
+#ifdef NON_MATCHING
+/* The item tables hold this address; the reads around it name it one byte at a time. */
+
+NON_MATCHING void func_801D1C90(void) {
+    u8 i;
+
+    g_MenuPanelTasks[0].handler = 2;
+    g_MenuPanelTasks[0].mode    = 2;
+    g_MenuPanelTasks[0].state   = 2;
+    g_MenuPanelTasks[0].active  = 1;
+    g_MenuPanelTasks[0].pos.x   = 0x140;
+    g_MenuPanelTasks[0].pos.y   = 0x3E;
+    for (i = 0; i < 3; i++) {
+        if (g_PartyFieldOrder[i] == 0 || g_PartyFieldOrder[i] == 7) {
+            break;
+        }
+    }
+    g_MenuPanelTasks[0].unk_0C        = i;
+    g_MenuPanelTasks[1].pos.x         = -0xAA;
+    g_MenuPanelTasks[1].pos.y         = 0x3E;
+    g_MenuPanelTasks[1].unk_0C        = 7;
+    g_MenuPanelTasks[1].unk_0B        = 0xFF;
+    g_MenuPanelTasks[1].item_table    = (s32)D_801D8EE0;
+    g_MenuPanelTasks[2].item_table    = (s32)D_801D8EE0;
+    g_MenuPanelTasks[2].pos.x         = 0x14;
+    g_MenuPanelTasks[2].u.addr.unk_12 = 0x118;
+    g_MenuPanelTasks[3].pos.x         = 0xA4;
+    g_MenuPanelTasks[0].unk_09        = 0;
+    g_MenuPanelTasks[0].unk_0B        = 0;
+    g_MenuPanelTasks[0].unk_0A        = 0;
+    g_MenuPanelTasks[0].unk_08        = 0;
+    g_MenuPanelTasks[0].flags         = 0;
+    g_MenuPanelTasks[0].u.addr.unk_10 = 0;
+    g_MenuPanelTasks[1].handler       = 2;
+    g_MenuPanelTasks[1].mode          = 3;
+    g_MenuPanelTasks[1].state         = 2;
+    g_MenuPanelTasks[1].active        = 1;
+    g_MenuPanelTasks[1].unk_0A        = 0;
+    g_MenuPanelTasks[1].flags         = 1;
+    g_MenuPanelTasks[2].handler       = 2;
+    g_MenuPanelTasks[2].mode          = 4;
+    g_MenuPanelTasks[2].state         = 2;
+    g_MenuPanelTasks[2].active        = 1;
+    g_MenuPanelTasks[2].pos.y         = -0x14;
+    g_MenuPanelTasks[2].u.addr.unk_10 = 0;
+    g_MenuPanelTasks[3].handler       = 2;
+    g_MenuPanelTasks[3].mode          = 4;
+    g_MenuPanelTasks[3].state         = 3;
+    g_MenuPanelTasks[3].active        = 1;
+    g_MenuPanelTasks[3].pos.y         = -0x14;
+    g_MenuPanelTasks[3].u.addr.unk_10 = 0;
+    g_MenuPanelTasks[3].u.addr.unk_12 = 0x80;
+    g_MenuPanelTasks[4].handler       = 2;
+    g_MenuPanelTasks[4].mode          = 1;
+    g_MenuPanelTasks[4].active        = 0;
+}
+#else
 INCLUDE_ASM(func_801D1C90);
+#endif
 
 /* Applies the equipment menu's trial set to the record it edits. */
 /* func_801D1E8C */
@@ -219,7 +313,41 @@ MATCH void func_801D2298(void) {
     func_801D2304(0x37, 0x37);
 }
 
+#ifdef NON_MATCHING
+/* The formats and the second counter run the window's rows; the row counters are read through a
+ * volatile view, the address retail materializes before indexing it. */
+
+void Menu_DrawPanelFrame(s16 x, s16 y, s32 width, s32 height);
+void func_801D26E0(s16 x, s16 y);
+
+NON_MATCHING void func_801D2304(s32 x, s32 y) {
+    u16 left;
+    u16 top;
+    u8  i;
+
+    left = x;
+    top  = y;
+    UI_DrawWindow((u16)(x - 4), (u16)(y - 8), 0xDC, 0x8C, 0xF0, g_WindowStyle);
+    Menu_DrawPanelFrame((s16)(x - 4), (s16)(y - 8), 26, 16);
+    UI_DrawText((s16)(x + 0x51), (s16)(y + 6), 0, 0xFF, Message_GetText(0xE7));
+    i = 0;
+    do {
+        UI_DrawText((s16)(left + 6), (s16)(top + (i << 5) + 0x1E), 0, 0xFF, Message_GetText(0xE8 + i));
+        UI_DrawText((s16)(left + 0x94), (s16)(top + (i << 5) + 0x1E), 0, 0xFF, Message_GetText(0xEB + i));
+        sprintf(g_UiFormatBuffer, D_801D0C18, ((volatile s32*)D_801D8F00)[i]);
+        UI_DrawAsciiString((s16)(left + 0x1E), (s16)(top + (i << 5) + 0x2B), 0, g_UiFormatBuffer);
+        sprintf(g_UiFormatBuffer, D_801D0C1C, ((volatile s32*)D_801D8F0C)[i]);
+        UI_DrawAsciiString((s16)(left + 0x94), (s16)(top + (i << 5) + 0x2B), 0, g_UiFormatBuffer);
+        func_801D26E0((s16)(left + 0x94), (s16)(top + (i << 5) + 0x2B));
+        i++;
+    } while (i < 3);
+    UI_DrawText((s16)(left + 0x5A), (s16)(top + 0x2B), 0, 0xFF, Message_GetText(0xF0));
+    UI_DrawText((s16)(left + 0x5A), (s16)(top + 0x4B), 0, 0xFF, Message_GetText(0xEF));
+    UI_DrawText((s16)(left + 0x5A), (s16)(top + 0x6B), 0, 0xFF, Message_GetText(0xEF));
+}
+#else
 INCLUDE_ASM(func_801D2304);
+#endif
 
 MATCH void func_801D259C(void) {
     Character* character;

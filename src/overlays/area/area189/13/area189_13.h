@@ -27,11 +27,13 @@ extern u32*     D_80143534[][2];
 extern Callback D_801F6238[];
 extern s8       D_801F6284[];
 extern s8       D_801F6285[];
+/* The 16 x 16 block table the height query maps a cell to. */
+extern u8       D_801F6138[];
 
 /* The image's step passes. */
 void func_801F3514(void);
 void func_801F3800(void);
-s32  func_801F4A04(s32 x, s32 y);
+s16  func_801F4A04(s32 x, s32 y);
 void func_801F559C(void);
 /* func_801F5F20 */
 void Actor_ClearVelocity(void);

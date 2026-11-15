@@ -6,7 +6,43 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/Effect_RunSlots.h"
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EED18(void) {
+    u16* dst;
+    u16* src;
+    u32  slot;
+    s32  i;
+
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
+    }
+    Battle_CenterCamera();
+    g_Task->pos.x.fixed  = g_AreaScrollTargetX;
+    g_Task->param.unk_0B = 0;
+    g_Task->pos.y.fixed  = g_AreaScrollTargetY;
+    g_Task->unk_09       = 0x38;
+    g_Task->header.mode += 1;
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    slot                               = Battle_AllocEffect(1, 0x61) & BYTE_MASK;
+    g_BattleEffects[slot].header.mode  = 0;
+    g_BattleEffects[slot].target.party = g_Task;
+    g_Task->param.unk_0B += 1;
+    BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
+    i   = 0;
+    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW);
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
+    for (; i < 16; i++) {
+        *dst++ = *src++ | 0x8000;
+    }
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = *MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    *MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW)  = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
+    g_GfxPalettePending                                      = 1;
+}
+#else
 INCLUDE_ASM(func_801EED18);
+#endif
 
 #include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
 
@@ -210,7 +246,20 @@ MATCH void func_801EFFA4(void) {
     }
 }
 
-INCLUDE_ASM(func_801F002C);
+MATCH void func_801F002C(void) {
+    s16* angle_cell;
+    u8   phase;
+
+    angle_cell          = &D_1F800004;
+    phase               = g_Task->param.unk_0B;
+    *angle_cell         = phase << 8;
+    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin((s8)phase << 8) * 24;
+    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * 24;
+    g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+    g_Task->unk_09      = 8;
+    g_Task->timer       = 16;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801F010C(void) {
     s16* angle_cell;

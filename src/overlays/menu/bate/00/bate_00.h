@@ -178,4 +178,9 @@ void func_801D2304(s32 arg0, s32 arg1);
 void func_801D259C(void);
 void func_801D31B0(s16 x, s16 y, u8 index, u8 flag);
 
+extern u8   D_801D8EE0[];
+extern char D_801D0C18[];
+extern char D_801D0C1C[];
+extern s32  D_801D8F0C[];
+
 #endif

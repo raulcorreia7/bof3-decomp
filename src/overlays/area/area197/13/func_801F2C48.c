@@ -1,3 +1,40 @@
 #include "area197_13.h"
 
-INCLUDE_ASM(func_801F2C48);
+MATCH void func_801F2C48(void) {
+    Point3l from;
+    Point3l to;
+
+    func_801F30E4();
+    func_801F3474();
+
+    from.x = TO_COORD(2);
+    from.y = TO_COORD(119);
+    from.z = TO_COORD(-256);
+    to.x   = TO_COORD(5);
+    to.y   = TO_COORD(119);
+    to.z   = TO_COORD(512);
+    func_801F3110(0, 32, &from, &to);
+    func_801F34A0(0, 32, &from, &to);
+
+    from.x = TO_COORD(5);
+    from.y = TO_COORD(119);
+    from.z = TO_COORD(-256);
+    to.x   = TO_COORD(10);
+    to.y   = TO_COORD(119);
+    to.z   = TO_COORD(512);
+    func_801F3110(32, 96, &from, &to);
+    func_801F34A0(32, 96, &from, &to);
+
+    from.x = TO_COORD(10);
+    from.y = TO_COORD(119);
+    from.z = TO_COORD(-256);
+    to.x   = TO_COORD(13);
+    to.y   = TO_COORD(119);
+    to.z   = TO_COORD(512);
+    func_801F3110(96, 128, &from, &to);
+    func_801F34A0(96, 128, &from, &to);
+
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 7));
+    g_Task->header.step = 0;
+    g_Task->header.mode++;
+}
