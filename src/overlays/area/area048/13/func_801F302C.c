@@ -1,6 +1,6 @@
 #include "area048_13.h"
 
-MATCH void func_801F302C(s32* first, s32* second, void* arg2) {
+MATCH void func_801F302C(s32* first, s32* second, Actor* task) {
     LINE_F2* line;
     u16      size[2];
     u16      scale[2];
