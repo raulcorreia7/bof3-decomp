@@ -515,7 +515,61 @@ INCLUDE_ASM(func_801FB268);
 
 INCLUDE_ASM(func_801FB8A4);
 
+#ifdef NON_MATCHING
+NON_MATCHING s32 func_801FC1D0(s32 member_index) {
+    s32    actor_index;
+    s16    height;
+    u8     option_flags;
+    Actor* actor;
+    Actor* task;
+
+    actor_index = Actor_FindFreeField() & BYTE_MASK;
+    if (actor_index == GAME_NONE) {
+        return 0;
+    }
+
+    actor                 = &g_Actors[actor_index];
+    SP_REF(Actor*, 0x44u) = actor;
+    g_CurrentActor        = actor;
+    func_801A4AA8();
+    Area_SelectSceneRecord(0x67);
+    g_Task->header.flags = 1;
+
+    task                              = g_Task;
+    task->pos.x.fixed                 = g_Game.members[(u8)member_index].pos.x.fixed + COORD_HALF;
+    g_Actors[actor_index].walk_dest_x = task->pos.x.fixed;
+    task->pos.y.fixed                 = g_Game.members[(u8)member_index].pos.y.fixed;
+    g_Actors[actor_index].walk_dest_y = task->pos.y.fixed;
+    g_Actors[actor_index].unk_88      = 0;
+
+    height                        = Area_SampleHeight(task->pos.x.fixed, task->pos.y.fixed);
+    task                          = g_Task;
+    task->header.mode             = 4;
+    task->pos.z.part.integer      = height;
+    g_Task->header.step           = 0;
+    g_Task->direction_08          = 0;
+    g_Task->unk_06                = 0;
+    actor->ext.bounds.half_height = 0;
+    g_Actors[actor_index].unk_77  = 2;
+    g_Actors[actor_index].unk_78  = 2;
+
+    option_flags                 = 0x88;
+    actor->ext.bounds.half_width = 0;
+    g_Actors[actor_index].unk_7C = 0;
+    Actor_SetOptionFlags(&option_flags);
+    g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    task                       = g_Task;
+    task->tint.bytes.rgb.blue  = 0;
+    task->tint.bytes.rgb.green = 0;
+    task->tint.bytes.rgb.red   = 0;
+    task                       = g_Task;
+    task->tint.bytes.flags     = 1;
+    func_801A4914();
+    return 1;
+}
+#else
 INCLUDE_ASM(func_801FC1D0);
+#endif
 
 MATCH void func_801FC3B4(void) {
     SCENA03_NUDGE_SCROLL(D_801FD004, 3);

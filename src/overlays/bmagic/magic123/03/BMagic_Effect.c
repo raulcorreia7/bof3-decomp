@@ -202,7 +202,61 @@ MATCH void func_801EF584(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF750(void) {
+    POLY_G4* prim;
+    s16*     params;
+    s32      i;
+    s32      y3_cosine;
+    s16      inner_radius;
+    u16      y_origin;
+    u32      phase;
+
+    params    = D_1F800000.view.effect.params;
+    params[0] = g_Task->timer;
+    params[7] = (g_Task->timer << 1) + (rand() & 7);
+
+    for (i = 0; i < 6; i++) {
+        prim = GFX_CURSOR(POLY_G4);
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+
+        phase     = (D_801EFD6C[i] + g_Task->unk_09) & 0x3F;
+        params[2] = phase << 6;
+        prim->x0  = params[3] + FIXED_MUL(rsin(phase << 6), params[7]);
+        prim->y0  = params[4] + FIXED_MUL(rcos(params[2]), params[7]);
+        prim->x2  = params[3] + FIXED_MUL(rsin(params[2]), params[0]);
+        prim->y2  = params[4] + FIXED_MUL(rcos(params[2]), params[0]);
+
+        phase        = (D_801EFD6C[i + 1] + g_Task->unk_09) & 0x3F;
+        params[2]    = phase << 6;
+        prim->x1     = params[3] + FIXED_MUL(rsin(phase << 6), params[7]);
+        prim->y1     = params[4] + FIXED_MUL(rcos(params[2]), params[7]);
+        prim->x3     = params[3] + FIXED_MUL(rsin(params[2]), params[0]);
+        y3_cosine    = rcos(params[2]);
+        inner_radius = params[0];
+        y_origin     = (u16)params[4];
+
+        prim->r0 = 1;
+        prim->g0 = 1;
+        prim->b0 = 1;
+        prim->r1 = 1;
+        prim->g1 = 1;
+        prim->b1 = 1;
+        prim->b2 = 0xC0;
+        prim->b3 = 0xC0;
+        prim->r2 = 0x20;
+        prim->g2 = 0x20;
+        prim->r3 = 0x20;
+        prim->g3 = 0x20;
+        prim->y3 = y_origin + FIXED_MUL(y3_cosine, inner_radius);
+
+        GFX_AddPrim(3, sizeof(POLY_G4));
+    }
+}
+#else
 INCLUDE_ASM(func_801EF750);
+#endif
 
 INCLUDE_ASM(func_801EF9E0);
 

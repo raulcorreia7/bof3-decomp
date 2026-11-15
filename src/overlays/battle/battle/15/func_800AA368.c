@@ -12,7 +12,7 @@ NON_MATCHING s32 func_800AA368(void) {
     u8            count;
     u8            slot;
     u8            pick;
-    u8            mask;
+    u32           mask;
     u8            active;
     s32           allowed;
     BattleAction* action;
@@ -43,14 +43,14 @@ NON_MATCHING s32 func_800AA368(void) {
             if (mask != 0) {
                 allowed = func_800AA5F4(slot);
                 if (allowed) {
-                    g_Game.members[slot].turn.damage_flags.volatile_value |= BATTLE_SLOT_SELECTED;
+                    g_Game.members[slot].u.turn.damage_flags.volatile_value |= BATTLE_SLOT_SELECTED;
                     D_80145E91[slot * BATTLE_PARTY_STRIDE] = BATTLE_SLOT_COMMAND;
                     return 1;
                 }
             } else {
                 allowed = func_800AA7A0(slot);
                 if (allowed) {
-                    g_Game.members[slot].turn.damage_flags.volatile_value |= BATTLE_SLOT_SELECTED;
+                    g_Game.members[slot].u.turn.damage_flags.volatile_value |= BATTLE_SLOT_SELECTED;
                     D_80145E91[slot * BATTLE_PARTY_STRIDE] = BATTLE_SLOT_COMMAND;
                     return 1;
                 }
@@ -76,7 +76,7 @@ NON_MATCHING s32 func_800AA368(void) {
     if (count != 0) {
         pick                                   = candidates[RANDOM_MOD(count)];
         D_80145E91[pick * BATTLE_PARTY_STRIDE] = BATTLE_SLOT_COMMAND;
-        g_Game.members[pick].turn.damage_flags.volatile_value |= BATTLE_SLOT_SELECTED;
+        g_Game.members[pick].u.turn.damage_flags.volatile_value |= BATTLE_SLOT_SELECTED;
         return 1;
     }
     return 0;

@@ -8,7 +8,9 @@ NON_MATCHING bool func_8009AC18(void) {
     u8* base;
     u8* row;
     u8* cell;
+    u8  character_index;
     u32 i;
+    u32 row_offset;
     s32 j;
 
     base     = &g_Characters[g_CharSlot[g_PartyBattleOrder[D_801485C4]]];
@@ -27,22 +29,23 @@ NON_MATCHING bool func_8009AC18(void) {
     if (g_Battle.party_count != 0) {
         i = 0;
         do {
-            cell                   = &g_Characters[g_Game.members[i].character_index];
-            row                    = D_80145F04 + i * BATTLE_PARTY_STRIDE;
-            FIELD(u8, row, 0xEu)   = FIELD(u8, cell, 0xEu);
-            FIELD(u8, row, 0xFu)   = FIELD(u8, cell, 0xFu);
-            FIELD(u8, row, 0x10u)  = FIELD(u8, cell, 0x10u);
-            FIELD(u8, row, 0x11u)  = FIELD(u8, cell, 0x11u);
-            FIELD(u8, row, 0x12u)  = FIELD(u8, cell, 0x12u);
-            FIELD(u8, row, 0x13u)  = FIELD(u8, cell, 0x13u);
-            FIELD(s32, row, 0x3Cu) = FIELD(s32, cell, 0x1Cu);
-            FIELD(s32, row, 0x40u) = FIELD(s32, cell, 0x20u);
-            FIELD(s32, row, 0x44u) = FIELD(s32, cell, 0x24u);
-            FIELD(s32, row, 0x48u) = FIELD(s32, cell, 0x28u);
-            FIELD(s32, row, 0x4Cu) = FIELD(s32, cell, 0x2Cu);
-            FIELD(s32, row, 0x50u) = FIELD(s32, cell, 0x30u);
-            FIELD(s32, row, 0x54u) = FIELD(s32, cell, 0x34u);
-            FIELD(s32, row, 0x58u) = FIELD(s32, cell, 0x38u);
+            row_offset                                 = i * BATTLE_PARTY_STRIDE;
+            character_index                            = g_Game.members[i].character_index;
+            cell                                       = &g_Characters[character_index];
+            FIELD(u8, D_80145F04, row_offset + 0xEu)   = FIELD(u8, cell, 0xEu);
+            FIELD(u8, D_80145F04, row_offset + 0xFu)   = FIELD(u8, cell, 0xFu);
+            FIELD(u8, D_80145F04, row_offset + 0x10u)  = FIELD(u8, cell, 0x10u);
+            FIELD(u8, D_80145F04, row_offset + 0x11u)  = FIELD(u8, cell, 0x11u);
+            FIELD(u8, D_80145F04, row_offset + 0x12u)  = FIELD(u8, cell, 0x12u);
+            FIELD(u8, D_80145F04, row_offset + 0x13u)  = FIELD(u8, cell, 0x13u);
+            FIELD(s32, D_80145F04, row_offset + 0x3Cu) = FIELD(s32, cell, 0x1Cu);
+            FIELD(s32, D_80145F04, row_offset + 0x40u) = FIELD(s32, cell, 0x20u);
+            FIELD(s32, D_80145F04, row_offset + 0x44u) = FIELD(s32, cell, 0x24u);
+            FIELD(s32, D_80145F04, row_offset + 0x48u) = FIELD(s32, cell, 0x28u);
+            FIELD(s32, D_80145F04, row_offset + 0x4Cu) = FIELD(s32, cell, 0x2Cu);
+            FIELD(s32, D_80145F04, row_offset + 0x50u) = FIELD(s32, cell, 0x30u);
+            FIELD(s32, D_80145F04, row_offset + 0x54u) = FIELD(s32, cell, 0x34u);
+            FIELD(s32, D_80145F04, row_offset + 0x58u) = FIELD(s32, cell, 0x38u);
             i++;
         } while ((u8)i < g_Battle.party_count);
     }
