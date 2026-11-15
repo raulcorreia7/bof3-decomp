@@ -7,7 +7,7 @@
 #include "overlays/area/world01.h"
 #include "area/spad.h"
 
-void func_801F37A8(s32 arg0, s32 arg1);
+void func_801F37A8(s32 depth, s32 color);
 
 extern u8 D_801F2C04[];
 /* One-byte views of the colour triplets in the payload table: the retail code names the second and
