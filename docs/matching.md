@@ -128,8 +128,8 @@ table there:
 4. Write the `switch`. `splat` then emits the table into the function's own asm file (the text and
    its table), and the C compiler's table replaces both once the function is `MATCH`.
 
-`tools/match.sh` refuses such a function: its own `.rodata` is not in the partial link. `check-<image>`
-is the proof, and the whole-image bytes are the verdict. Placed tables to read before editing:
+`tools/match.sh` measures such a function once its `.rodata` row is in `splat.yaml`; it does not
+compare the table's contents. `check-<image>` is the proof, and the whole-image bytes are the verdict. Placed tables to read before editing:
 `world04/area168/13@0x801F4A0C` (a 13-entry table at file offset 0x4),
 `world02/area079/13@0x801F2D20` (PR #808) and `world03/area141/13@0x801F2F14` (PR #809).
 An image whose `target.toml` has a `[[matching.section_placements]]` row also repeats the address
