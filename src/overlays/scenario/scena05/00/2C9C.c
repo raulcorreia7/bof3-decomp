@@ -171,7 +171,20 @@ MATCH void func_801FC778(void) {
     }
 }
 
-INCLUDE_ASM(func_801FC808);
+MATCH void func_801FC808(void) {
+    u8 i;
+
+    for (i = 0; i < PARTY_SLOT_COUNT; i++) {
+        if (g_PartyFieldOrder[i] == CHAR_ID_MOMO) {
+            g_ScriptVars[1] = 1;
+        }
+    }
+    for (i = 0; i < PARTY_SLOT_COUNT; i++) {
+        if (g_PartyFieldOrder[i] == CHAR_ID_PECO) {
+            g_ScriptVars[1] = 2;
+        }
+    }
+}
 
 /* Give the lead party member a field actor of type 6: claim a free slot and seed its row from the member. */
 MATCH void func_801FC8A0(s32 variant){ACTOR_SEED_PARTY_SLOT(0, D_801FD5C0, 6, variant + 112)}
