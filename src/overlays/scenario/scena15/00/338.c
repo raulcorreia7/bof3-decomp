@@ -390,7 +390,23 @@ MATCH void func_801F85F0(void) {
     func_801F8704();
 }
 
-INCLUDE_ASM(func_801F8618);
+MATCH void func_801F8618(void) {
+    u8 i;
+
+    if (g_Task->tint.signed_bytes.delta.red != 0) {
+        g_Task->tint.signed_bytes.delta.red -= 2;
+        g_Task->tint.bytes.rgb.green -= 2;
+        g_Task->tint.bytes.rgb.blue -= 2;
+    } else {
+        for (i = 0; i < g_PartySize; i++) {
+            g_Game.members[i].unk_29 = g_AreaDrawMode;
+        }
+        func_80196070();
+        return;
+    }
+    func_801F79C4();
+    func_801F8704();
+}
 
 MATCH void func_801F8704(void) {
     Actor*       actor;
