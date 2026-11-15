@@ -83,7 +83,7 @@ MATCH void func_801F7064(void) {
 
 /* Fill the eight vertex records of the box: each cross-section's corner point and its two half extents. */
 MATCH void func_801F7084(SceneBox* box) {
-    SceneBoxVertex* vertex;
+    ScenePathPoint* vertex;
     s32*            scratch;
     u16             tpage;
 

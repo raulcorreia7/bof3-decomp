@@ -5,16 +5,16 @@ MATCH void func_801F3188(void) {
 
     index = Actor_FindFreeSpawned();
     if (index != 0xFF) {
-        D_80143FC8[index].value = 1;
-        D_80143FCD[index].value = 0x37;
-        D_80143FFC[index].value = 0x410000;
-        D_80144000[index].value = 0x3C8000;
-        D_80144004[index].value = TO_COORD(512);
-        D_80143FF4[index].value = 0x58;
-        D_80143FCF[index].value = 0x12;
-        D_80143FD1[index].value = 1;
-        D_80143FCE[index].value = 0;
-        D_80143FF1[index].value = 6;
+        g_SpawnedActors[index].header.flags = 1;
+        g_SpawnedActors[index].type         = 0x37;
+        g_SpawnedActors[index].pos.x.fixed  = 0x410000;
+        g_SpawnedActors[index].pos.y.fixed  = 0x3C8000;
+        g_SpawnedActors[index].pos.z.fixed  = TO_COORD(512);
+        g_SpawnedActors[index].unk_2C       = 0x58;
+        g_SpawnedActors[index].unk_07       = 0x12;
+        g_SpawnedActors[index].layer        = 1;
+        g_SpawnedActors[index].unk_06       = 0;
+        g_SpawnedActors[index].unk_29       = 6;
 
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
 

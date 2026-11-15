@@ -1,18 +1,18 @@
 #include "area121_14.h"
 
-/* Appends one textured meter bar to the primitive cursor. */
+/* Appends one textured torch gauge bar to the primitive cursor. */
 MATCH void func_801F595C(s32 width, s32 palette) {
     POLY_FT4*       prim;
-    MeterBarPalette cells;
+    TorchGaugeCells cells;
 
     prim  = (POLY_FT4*)g_GfxPrimCursor;
-    cells = *(const MeterBarPalette*)D_801F2C04;
+    cells = D_801F2C04;
     SetPolyFT4(prim);
     if (GetGraphType() != 1) {
         GetGraphType();
     }
     prim->tpage = 0xF;
-    prim->clut  = (cells.cell[(u8)palette].clut >> 4) | 0x7800;
+    prim->clut  = (cells.rows[(u8)palette].clut >> 4) | 0x7800;
     prim->x0    = 0xE4;
     prim->x1    = (u8)width + 0xE4;
     prim->y0    = 0x1D;
@@ -21,7 +21,7 @@ MATCH void func_801F595C(s32 width, s32 palette) {
     prim->x3    = prim->x1;
     prim->y2    = prim->y0 + 0xA;
     prim->y3    = prim->y2;
-    prim->u0    = cells.cell[(u8)palette].u;
+    prim->u0    = cells.rows[(u8)palette].u;
     prim->u1    = prim->u0 + 4;
     prim->u2    = prim->u0;
     prim->u3    = prim->u1;
