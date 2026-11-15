@@ -106,7 +106,7 @@ MATCH void SND_PlayCue(u16 cue_id) {
         D_8018232A = -1;
         D_8018B3F0 = D_8018B318;
         D_8018B3EC = D_8018B3E8;
-        goto queue_done; /* shared return */
+        goto queue_done;
     } else {
         if (D_8018B3F0 != D_8018B318) {
             if (D_8018B3E4 == 1) {
@@ -171,10 +171,7 @@ queue_array_guard:
     }
     return;
 
-/* NOTE: duplicate of the array-guard mode-0 tail above. GCC merges the two
- * blocks and keeps the array-guard copy; deleting it moves the shared tail and
- * breaks the byte match.
- */
+/* A duplicate of the array-guard mode-0 tail: deleting it moves the shared tail and breaks the match. */
 queue_standard_low:
     if (D_8018B3E4 == 0) {
         goto queue_standard0; /* key mode 0 */
