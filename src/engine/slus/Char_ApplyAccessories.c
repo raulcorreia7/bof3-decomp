@@ -23,7 +23,6 @@ MATCH void Char_ApplyAccessories(Character* character) {
         switch (*kind) {
             case ACCESSORY_TITAN_BELT:
                 pair = &stats->power;
-                /* retail shares the call tail with case 3. */
                 goto block_pair;
             case ACCESSORY_HIGH_BOOTS:
                 Char_AddStat(&stats->defense, 5);
@@ -42,42 +41,34 @@ MATCH void Char_ApplyAccessories(Character* character) {
             case ACCESSORY_RING_OF_ICE:
                 counter = &stats->resistances[RES_INDEX_FROST];
                 delta   = 0;
-                /* retail shares one counter call after case 23. */
                 goto block_counter;
             case ACCESSORY_RING_OF_FIRE:
                 counter = &stats->resistances[RES_INDEX_FIRE];
                 delta   = 0;
-                /* retail shares one counter call after case 23. */
                 goto block_counter;
             case ACCESSORY_THUNDER_RING:
                 counter = &stats->resistances[RES_INDEX_ELECTRIC];
                 delta   = 0;
-                /* retail shares one counter call after case 23. */
                 goto block_counter;
             case ACCESSORY_TALISMAN:
                 counter = &stats->resistances[RES_INDEX_DEATH];
                 delta   = 1;
-                /* retail shares one counter call after case 23. */
                 goto block_counter;
             case ACCESSORY_DIAMOND_RING:
                 counter = &stats->resistances[RES_INDEX_DEATH];
                 delta   = 3;
-                /* retail shares one counter call after case 23. */
                 goto block_counter;
             case ACCESSORY_LIFE_SANDALS:
                 counter = &stats->resistances[RES_INDEX_STATUS];
                 delta   = 1;
-                /* retail shares one counter call after case 23. */
                 goto block_counter;
             case ACCESSORY_LIGHT_BANGLE:
                 counter = &stats->resistances[RES_INDEX_STATUS];
                 delta   = 3;
-                /* retail shares one counter call after case 23. */
                 goto block_counter;
             case ACCESSORY_BARRIER_RING:
                 counter = &stats->resistances[RES_INDEX_PSIONIC];
                 delta   = 3;
-                /* retail shares one counter call after case 23. */
                 goto block_counter;
             case ACCESSORY_HAWKS_RING:
                 Char_AddPercent(&stats->surprise_chance, 0x14);

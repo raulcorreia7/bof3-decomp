@@ -25,7 +25,7 @@ NON_MATCHING bool func_801B6674(void) {
                 func_801B5BDC(g_Task->direction_08);
             }
             func_801B690C();
-            g_Game.walk_flags &= ~AREA_WALK_TRANSITION;
+            g_Game.walk_flags = g_Game.walk_flags & ~AREA_WALK_TRANSITION;
             Game_RequestAreaChange(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);
             return 1;
         }
@@ -50,10 +50,10 @@ NON_MATCHING bool func_801B6674(void) {
             func_801B5BDC(g_Task->direction_08);
         }
         D_8014504A += 1;
-        g_Game.walk_flags &= ~AREA_WALK_TRANSITION;
-        D_80145048 = g_GameAreaId;
-        D_80145044 = g_Task->pos.y.fixed;
-        D_80145040 = g_Task->pos.x.fixed;
+        g_Game.walk_flags = g_Game.walk_flags & ~AREA_WALK_TRANSITION;
+        D_80145048        = g_GameAreaId;
+        D_80145044        = g_Task->pos.y.fixed;
+        D_80145040        = g_Task->pos.x.fixed;
         Game_RequestAreaChange(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);
         return 1;
     }

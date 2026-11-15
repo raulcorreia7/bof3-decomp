@@ -5,7 +5,7 @@
  * in the area request slot.
  */
 /* func_80150224 */
-MATCH void Message_StartAreaMessage(s32 message_index) { /* func_80150224 */
+MATCH void Message_StartAreaMessage(s32 message_index) {
     u32 handle;
 
     handle = *(u16*)(SLUS_LOAD_ADDRESS + (s16)message_index * 2);

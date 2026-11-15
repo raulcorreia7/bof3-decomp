@@ -41,7 +41,6 @@ MATCH void func_801BF8E0(void) {
     limit = g_Game.party_size;
     if (limit > 0) {
         key = g_PartyFieldOrder[0];
-        /* src doubles as the bound: retail keeps both in a0 (a separate local 89.26%). */
         src = limit;
         dst = 0;
     loop:
@@ -49,7 +48,6 @@ MATCH void func_801BF8E0(void) {
             index++;
             dst += BATTLE_PARTY_STRIDE;
             if (index < src) {
-                /* Retail tests the key at the loop head; a do/while measures 67.46%. */
                 goto loop;
             }
         }

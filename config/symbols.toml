@@ -1585,6 +1585,7 @@ Actor_Clear = { addr = 0x801F0588, type = "func", source = "Clears the effect wo
 g_BMagicEffectModes = { addr = 0x801F05D8, source = "Handlers of magic125 (DivineBreath), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic126/03"]
+D_1F800000_HALF = { addr = 0x1F800000, type = "s16", source = "The scratchpad base 0x1F800000 as signed halfwords; the magic effects read and set its first halfword as a vertical offset.", alias = true }
 Battle_ApplyDamageFlags = { addr = 0x800A9610, alias = true, source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
@@ -2588,9 +2589,14 @@ g_Fairies = { addr = 0x801F2700, source = "the fairy roster: nine bytes a fairy,
 g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
 func_801D0C2C = { addr = 0x801D0C2C, type = "func", source = "Entry of the commu01 scene: dispatches on the step byte D_801F294C through g_Commu01States." }
 Fairy_GetJobActive = { addr = 0x801D3A48, type = "func", source = "the body returns g_FairyJobs[i].active" }
+D_801D4BB8 = { addr = 0x801D4BB8, type = "u16", size = 0x14, source = "Halfword values indexed by the selection cursor in func_801D1778." }
 g_Commu01States = { addr = 0x801D4BCC, source = "the 3 step handlers of the commu01 scene, called by func_801D0C2C (the overlay entry) and indexed by the commu step byte D_801F294C" }
 g_Commu01Step2Funcs = { addr = 0x801D4BD8, source = "3 sub-step handlers of step 2 of the commu01 scene, called by func_801D0E44 (the step 2 handler) and indexed by the commu01 phase byte D_801D4E08" }
 g_Commu01Step2Sub1Funcs = { addr = 0x801D4BEC, source = "6 handlers of sub-step 1 of step 2 of the commu01 scene, called by func_801D1328 (the sub-step 1 handler of step 2) and indexed by the commu sub-step byte D_801F294D" }
+D_801D4C04 = { addr = 0x801D4C04, type = "u8", size = 0xC, source = "Byte values indexed by the selection cursor and used to select a halfword value in func_801D1778." }
+D_801D4C10 = { addr = 0x801D4C10, type = "u16", size = 0x8, source = "Halfword values selected by the index stored from D_801D4C04 in func_801D1778." }
+D_801D4C18 = { addr = 0x801D4C18, type = "CommuSelectionPair", size = 0x2C, source = "Twenty-two count/value pairs used by func_801D1A94 for row movement and confirmation." }
+D_801D4C44 = { addr = 0x801D4C44, type = "CommuCellFrame", size = 0x6C, source = "Nine CommuCellFrame records used to draw the commu01 cell outlines." }
 
 ["emi/etc/commu02/08"]
 g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
@@ -2627,6 +2633,7 @@ g_Commu02Event3Step2Sub6Funcs = { addr = 0x801DAE68, source = "3 handlers of sub
 g_Commu02Event3Step2Sub7Funcs = { addr = 0x801DAE74, source = "5 handlers of sub-step 7 of step 2 of the commu02 scene event 3, called by func_801D7660 (the sub-step 7 handler of step 2) and indexed by the commu sub-sub-step byte D_801F294E" }
 g_MenuPortraitAtlas = { addr = 0x801DAEDC, source = "4-byte portrait atlas records read by Menu_DrawPortrait by atlas index." }
 g_Fairies = { addr = 0x801F2700, source = "the fairy roster: nine bytes a fairy, the five-byte name first" }
+D_801F294F = { addr = 0x801F294F, type = "u8", size = 0x1, source = "the pending selection byte checked by the commu02 fairy list" }
 
 ["emi/etc/commu03/06"]
 g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
@@ -6516,7 +6523,7 @@ g_Scenario2Flags = { addr = 0x80144E98, type = "u8", source = "Scene flag words 
 g_SceneEventFlags = { addr = 0x80144F28, type = "u8", source = "Scene event flags." }
 g_Zenny = { addr = 0x80144F50, size = 0x4, source = "Party_SpendZenny subtracts from it when the balance covers the price, Party_AddZenny adds to it and clamps it at 9999999, and every shop panel prints it as the money held" }
 g_PartyFormation = { addr = 0x80144F58, source = "Party formation." }
-g_PartyMenuFlags = { addr = 0x80144F59, size = 0x1, source = "Menu flags of the party: the shop tests bit 3 (0x08), bit 4 (0x10) and bit 5 (0x20) to enable the item classes 11, 13 and 14." }
+g_PartyMenuFlags = { addr = 0x80144F59, size = 0x1, source = "Menu flags of the party: the master menu (emi/etc/sisyou/00 func_801D3A24) sets bit 3, 4 or 5 (1 << the character index of Teepo, Rei, Momo) with the first reward of the special master; the shop tests the same bits to enable the item classes 11, 13 and 14." }
 g_PartyFieldOrder = { addr = 0x80144F5A, size = 0x3, source = "Party order in the field." }
 g_PartyBattleOrder = { addr = 0x80144F5D, size = 0x3, source = "Party order in battle." }
 g_LearnedAbilities = { addr = 0x80144F80, size = 0x20, source = "One bit per ability id, set once the party has learned it: the sisyou master lesson tests and sets it before Char_AddAbility, and battle/15 sets it when a party member learns an enemy skill." }
@@ -6709,7 +6716,7 @@ g_AreaTileRemainderY = { addr = 0x80149338, type = "s16", source = "Y remainder 
 g_AreaSceneMode = { addr = 0x8014933B, type = "u8", source = "Mode of the area scene." }
 g_AreaDrawMode = { addr = 0x8014933E, type = "u8", source = "Draw mode of the area." }
 g_AreaHeightOffsetEnabled = { addr = 0x80149340, source = "Enables the height offset of the area." }
-s__LOGO_LOGO_EXE_1_80149800 = { addr = 0x80149800, size = 0x14, source = "SYS_StartLogo passes this LOGO executable path to SYS_LoadExec" }
+g_LogoExePath = { addr = 0x80149800, size = 0x14, source = "SYS_StartLogo passes this LOGO executable path to SYS_LoadExec" }
 D_80149814 = { addr = 0x80149814, size = 0x184, source = "The 51 name cells of the executable's export strings, starting at 0x80149814; D_8017F470 holds their pointers." }
 jtbl_80149998 = { addr = 0x80149998, type = "Callback", source = "The switch table of Area_BuildClut: the jump targets of its jr dispatch." }
 D_80149998 = { addr = 0x80149998, size = 0x178, alias = true, source = "View of a record member; the row names the address the link reads, not a second object." }
@@ -7619,8 +7626,8 @@ SysDeqIntRP = { addr = 0x8017F3AC, type = "func", source = "LIBAPI.LIB 16 bytes"
 EnablePAD = { addr = 0x8017F3BC, type = "func", size = 0x14, source = "LIBAPI patch.o EnablePAD - tail-dispatches the saved BIOS PAD entry" }
 DesablePAD = { addr = 0x8017F3D0, type = "func", source = "LIBAPI patch.o DesablePAD, words equal retail" }
 _patch_pad = { addr = 0x8017F3E4, type = "func", size = 0x90, source = "PsyQ LIBAPI library routine." }
-PTR_s_EXCEPTION_8017f504 = { addr = 0x8017F504, source = "The EXCEPTION text pointer SYS_ShowException draws as its header." }
-PTR_s_INTERRRUPT_8017f508 = { addr = 0x8017F508, source = "The INTERRRUPT text cells SYS_ShowException indexes by the exception code." }
+g_ExceptionTitle = { addr = 0x8017F504, source = "The EXCEPTION text pointer SYS_ShowException draws as its header." }
+g_ExceptionCauseNames = { addr = 0x8017F508, source = "The INTERRRUPT text cells SYS_ShowException indexes by the exception code." }
 g_SpriteSizes = { addr = 0x8017F53C, source = "Sprite cell sizes by shape." }
 g_SpriteCellRotations = { addr = 0x8017F55C, source = "Sprite cell rotations by shape." }
 g_NumberRowShades = { addr = 0x8017F580, source = "Shades of the number font rows." }
@@ -7778,6 +7785,6 @@ Battle_DrawVictoryZenny = { addr = 0x801F09F4, type = "func", source = "Draws th
 Char_GetExpToNextLevel = { addr = 0x801F0BB0, type = "func", source = "Returns the experience a party member still needs for its next level; 0 once its exp already covers it." }
 
 ["emi/battle/batl_ovr/00"]
-g_BattleEffectPalette = { addr = 0x8003AC00, type = "u16", size = 0x200, source = "Row 26 of the working copy of the palette banks." }
+g_BattleEffectPalette = { addr = 0x8003AC00, type = "u16", size = 0x200, source = "The 256 halfword palette entries the battle overlay converts to grayscale." }
 Battle_StartGameOver = { addr = 0x801EEC40, type = "func", source = "Step 0 of the BATL_OVR (battle defeat) step table that ends in Battle_UpdateGameOver: sets UI mode 0x13, copies palette 0x1A and advances ui_step." }
 Battle_UpdateGameOver = { addr = 0x801EF0A8, type = "func", source = "Runs the game over screen." }

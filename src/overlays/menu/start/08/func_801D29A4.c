@@ -2,11 +2,9 @@
 
 MATCH void func_801D29A4(void) {
     s32            i;
-    u32            j;
     u8             count;
     u32            index;
     MenuPanelTask* panel;
-    u16*           entry;
 
     i = 0;
     for (;;) {
@@ -21,9 +19,7 @@ MATCH void func_801D29A4(void) {
         panel->state   = 2;
         panel->active  = 1;
         panel->pos.x   = 320;
-        j              = index + 4;
-        entry          = (u16*)((u8*)&D_80148336 + j * 0x24);
-        panel->pos.y   = *entry;
+        panel->pos.y   = g_MenuPanelTasks[index + 4].pos.y;
         panel->unk_0A  = i;
         i += 1;
     }
