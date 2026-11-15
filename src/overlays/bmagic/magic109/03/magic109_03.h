@@ -12,4 +12,9 @@ void func_801EF0F8(s32 offset);
 /* The screen point the effect starts from, by g_Battle.scroll_dir. */
 extern Point2l D_801EF9D8[];
 
+/* Three tables of 16 points; func_801EF0F8 writes and reads each point pair. */
+extern Point2l D_801EF9F8[16];
+extern Point2l D_801EFA78[16];
+extern Point2l D_801EFAF8[16];
+
 #endif

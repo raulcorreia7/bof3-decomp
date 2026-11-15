@@ -15,4 +15,6 @@ extern Callback D_801EF5F8[];
  * copied to each member's unk_2E and unk_30. */
 extern s32 D_801EF60C[3][3][2];
 
+extern u16 g_BattleEffectPalette[256];
+
 #endif

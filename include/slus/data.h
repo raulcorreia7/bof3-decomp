@@ -10,7 +10,7 @@
 #define BATTLE_OPT_KEEP_BGM 0x40
 
 /* SLUS_004.22 data the overlays share, in address order. */
-extern s32         D_80033A08;
+extern u16         D_80033A08[];
 /* Main-executable RAM state that has no name yet. */
 /* retail addresses */
 extern u16         D_800C1A70;

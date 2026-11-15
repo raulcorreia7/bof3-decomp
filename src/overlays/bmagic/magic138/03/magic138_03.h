@@ -11,6 +11,9 @@ typedef struct Magic138Steps {
     Callback steps[MAGIC138_STEP_COUNT];
 } Magic138Steps;
 
+extern u16 D_80036C00[256];
+extern u16 g_BattleEffectPalette[256];
+
 extern Magic138Steps D_801EEC10;
 
 extern Magic138Steps D_801EEC1C;
