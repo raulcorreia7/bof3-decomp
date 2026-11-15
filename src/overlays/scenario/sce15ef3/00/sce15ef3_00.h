@@ -27,6 +27,7 @@ extern Callback D_801D280C[];
 void func_801D16DC(void);
 /* func_801D25EC */
 void Scene_ClaimScanBar(void);
+u8   Scene_UpdateScanBars(s32 y);
 s32  func_801D18CC(void);
 s32  Area_StepSparkEmitters(void);
 void func_801D1FF8(Point3l* pos, s16 x, s16 y, u16 angle, u8 colour, u8 shade);
