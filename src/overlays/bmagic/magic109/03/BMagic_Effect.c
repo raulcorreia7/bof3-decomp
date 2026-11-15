@@ -132,7 +132,6 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
     s16          quad_y2_reversed;
     s16          diameter;
     s16          quad_x0;
-    s16          quad_tpage;
     s32          outer_vertex;
     s32          outer_next_vertex;
     s32          outer_vertex_reversed;
@@ -156,7 +155,7 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
     s32          spiral_y;
     s32          rim_y_reversed;
     s32          spiral_y_reversed;
-    s32          draw_tpage;
+    s32          mesh_tpage;
     s8           outer_shade;
     s8           inner_shade;
     s8           segment;
@@ -185,14 +184,9 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
     move.h = move.w = diameter;
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &move, 0x340, 0x100);
     GFX_AddPrim(3U, sizeof(DR_MOVE));
-    draw_tpage = 0x42D;
-    if (GetGraphType() != 1) {
-        draw_tpage = 0x11D;
-        if (GetGraphType() == 2) {
-            draw_tpage = 0x42D;
-        }
-    }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, draw_tpage, NULL);
+    /* The mesh's page at VRAM (832, 256), in the encoding the current graph type reads. */
+    mesh_tpage = getTPage(2, 0, 832, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mesh_tpage, NULL);
     GFX_AddPrim(3U, sizeof(DR_MODE));
     for (segment = 0; segment < 16; segment++) {
         rim_angle             = segment << 8;
@@ -220,13 +214,6 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
             poly_f4->b0 = 0;
             poly_gt4    = (POLY_GT4*)(g_GfxPrimCursor + sizeof(POLY_F4));
             SetPolyGT4((POLY_GT4*)poly_gt4);
-            quad_tpage = 0x42D;
-            if (GetGraphType() != 1) {
-                quad_tpage = 0x11D;
-                if (GetGraphType() == 2) {
-                    quad_tpage = 0x42D;
-                }
-            }
             outer_shade     = outer_ring * 0x10;
             poly_gt4->r0    = outer_shade;
             poly_gt4->g0    = outer_shade;
@@ -242,7 +229,7 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
             poly_gt4->g3    = inner_shade;
             poly_gt4->b3    = inner_shade;
             quad_task       = g_Task;
-            poly_gt4->tpage = quad_tpage;
+            poly_gt4->tpage = mesh_tpage;
             if (quad_task->unk_64 > 0) {
                 next_column       = ((quad + 1) & 0xF);
                 quad_x0           = quad_task->unk_2E.half + rim_point->x;
