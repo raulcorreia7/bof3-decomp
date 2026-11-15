@@ -1,39 +1,32 @@
 #include "engine/slus/slus.h"
 
-/* lifted draft, best score 53.64%; semantics unverified
- */
-/* Byte-sized scale locals leave the first register difference at +0x04; a remaining-time pointer changes the prologue. */
-#ifdef NON_MATCHING
-NON_MATCHING bool Area_StepCameraAngle(s32 degrees, s8 duration) {
-    s32 tmp0;
-    s32 tmp1;
-    s32 val0;
-    s32 val1;
-    u8  tmp2;
+/* Turns the camera towards an angle in degrees, one step a call, the step count scaled by the route speed; true while steps remain. */
+MATCH bool Area_StepCameraAngle(s16 degrees, s8 duration) {
+    s32* remaining;
+    s32  frames;
+    u8   scale;
+    u8   speed;
 
-    val0 = 4;
-    tmp2 = g_RouteSpeedScale[D_80143FC0];
-    if (D_801481F4 == 0) {
-        if (tmp2 != 0) {
-            val0 = 4;
-            if (D_80143F50 != 2 && D_80143F50 != 6)
-                val0 = 8;
-            val1       = val0 * tmp2;
-            tmp0       = duration * (0x80 / (s32)(val1 & BYTE_MASK));
-            D_801481F0 = g_AreaCameraAngle.vz << 0x10;
-            D_801481F4 = tmp0;
-            D_80148200 = (s32)((((((degrees << 16) >> 4) / 360) - (g_AreaCameraAngle.vz & 0x7FF))) << 0x10) / tmp0;
+    scale     = 4;
+    remaining = &D_801481F4;
+    speed     = g_RouteSpeedScale[D_80143FC0];
+    if (*remaining == 0) {
+        if (speed != 0) {
+            if ((D_80143F50 != 2) && (D_80143F50 != 6)) {
+                scale = 8;
+            }
+            scale *= speed;
+            frames     = duration * (128 / scale);
+            D_801481F0 = g_AreaCameraAngle.vz << 16;
+            D_801481F4 = frames;
+            D_80148200 = ((((degrees << 12) / 360) - (g_AreaCameraAngle.vz & 0x7FF)) << 16) / frames;
         } else {
-            g_AreaCameraAngle.vz = ((degrees << 16) >> 4) / 360;
+            g_AreaCameraAngle.vz = (degrees << 12) / 360;
         }
     } else {
-        D_801481F4 -= 1;
-        tmp1                 = D_801481F0 + D_80148200;
-        D_801481F0           = tmp1;
-        g_AreaCameraAngle.vz = (s16)(tmp1 >> 0x10);
+        *remaining -= 1;
+        D_801481F0 += D_80148200;
+        g_AreaCameraAngle.vz = D_801481F0 >> 16;
     }
     return D_801481F4 != 0;
 }
-#else
-INCLUDE_ASM(Area_StepCameraAngle);
-#endif

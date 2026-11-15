@@ -13,6 +13,7 @@ extern u8  D_80146867;
 extern u8  D_80146874;
 extern u8  D_80146875;
 extern u32 D_801F6C00;
+extern s32 g_AreaFocusY[];
 
 /* D_801FD178 */
 extern Callback  g_SceneEntityDispatch[];
@@ -31,7 +32,7 @@ extern union {
 
 extern char D_801F6C04[];
 
-void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, s32 window_style);
+void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
 void func_801F75EC(void);
 
 extern u8 D_801FD228;

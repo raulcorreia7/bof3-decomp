@@ -22,6 +22,16 @@ ASSERT_OFFSET(CommuCellFrame, points, 0x00);
 ASSERT_SIZE(CommuCellFrame, 0xC);
 
 extern u8             D_801455C9[];
+extern s8             D_801455C2;
+extern u16            D_80010000[];
+extern u8             D_801D0C04[12];
+extern char           D_801D0C10[];
+extern char           D_801D0C14[];
+extern u16            D_801D0C18[9];
+extern u16            D_801D4BB8[10];
+extern u8             D_801D4C04[12];
+extern u16            D_801D4C10[4];
+extern u8             D_801D4C18[12][2];
 /* g_EmiOverlayHeader */
 extern OverlayHeader  g_EmiOverlayHeader;
 /* D_801D4BCC */
