@@ -14,6 +14,8 @@ void        func_800A4458(void);
 /* func_800A581C */
 void        Battle_StartAbilityPose(void);
 u8          func_800A9304(u8 slot);
+/* func_800A9610 */
+void        Battle_ApplyDamageFlags(u8 target_mask, u16 damage_flags);
 /* Stages the selection cell for the next battle step. */
 /* func_800A9820 */
 void        Battle_MarkDamaged(u8 target_mask);
@@ -41,6 +43,8 @@ void        func_800AFC98(s32 effect_0, s32 effect_1);
 void        Battle_CenterCamera(void);
 u8          func_800AFF98(void);
 u8          Battle_SlotIsBlocked(u32 slot);
+/* func_801DD350 */
+void        Effect_RotatePosition(void* work);
 void        func_801DD350(void* work);
 s32         func_801DD59C(s32 amount);
 u8          func_801DD7AC(s32 selector);
@@ -70,10 +74,25 @@ void        func_801DDFEC(u32 battler_index);
 s16         func_801DE0AC(s32 factor_a, s32 factor_b);
 void        Battle_SetSlotPending(u32 slot);
 void        func_801DE560(u8 event_kind, u8 event_value, u8 group, u8 timer, u8* payload);
+void        func_801E35D8(void);
+void        func_801E3638(void);
+void        func_801E3980(void);
+void        func_801E3A00(void);
+void        func_801E3B68(void);
+void        func_801E3BAC(void);
+void        func_801E3BD0(void);
+void        func_801E4490(void);
+void        func_801E4AE8(void);
+void        func_801E4D8C(void);
+void        func_801E4F64(void);
+void        func_801E5288(void);
+void        func_801E52E8(void);
 /* func_801E52F0 */
 void        Battle_PlayEnemyCue(u16 cue_id);
 /* func_801E590C */
 u32         Battle_AllocEffect(u32 mode, u32 handler_index);
+/* func_801E5988 */
+void        Effect_Reset(void);
 void        func_801E5988(void);
 extern void func_801E5A38(void);
 

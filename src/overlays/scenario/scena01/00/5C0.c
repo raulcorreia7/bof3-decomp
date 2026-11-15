@@ -142,7 +142,30 @@ MATCH void func_801F7D04(void) {
     }
 }
 
-INCLUDE_ASM(func_801F7DCC);
+MATCH void func_801F7DCC(s32 red, s32 green, s32 blue) {
+    POLY_G4* prim;
+    s32      tpage;
+
+    if (GetGraphType() == 1) {
+        tpage = 0x225;
+    } else if (GetGraphType() == 2) {
+        tpage = 0x225;
+    } else {
+        tpage = 0x95;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(7, sizeof(DR_MODE));
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    setXY4(prim, 0, 0, SCREEN_WIDTH - 1, 0, 0, SCREEN_HEIGHT - 1, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
+    prim->r0 = prim->r1 = red;
+    prim->g0 = prim->g1 = green;
+    prim->b0 = prim->b1 = blue;
+    prim->r2 = prim->r3 = 0;
+    prim->g2 = prim->g3 = 0;
+    prim->b2 = prim->b3 = 0;
+    GFX_AddPrim(7, sizeof(POLY_G4));
+}
 
 MATCH void func_801F7EDC(void) {
     POLY_F4* prim;

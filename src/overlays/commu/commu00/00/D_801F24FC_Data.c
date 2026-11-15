@@ -107,7 +107,7 @@ FairyVillage D_801F24FC_Data = {
         {ITEM_BEADS, ITEM_CAT_ITEM},
         {ITEM_RARE_BOOK, ITEM_CAT_ITEM},
     },
-    {Fairy_LoadCommu02, Fairy_FinishEventLoad, func_801F1F10, Fairy_ReloadPartySprites, func_801F1F4C},
+    {Fairy_LoadCommu02, Fairy_FinishEventLoad, Fairy_RunCommu02Events, Fairy_ReloadPartySprites, func_801F1F4C},
     {func_801D0C50, func_801D3568, func_801D5034, func_801D5D5C},
     {Fairy_LoadCommu03, Fairy_FinishEventLoad, func_801D0C44, Fairy_ReloadPartySprites, func_801F1F4C},
     {func_801F205C, func_801F1AFC, Fairy_LoadCommu04, Fairy_FinishEventLoad, func_801D0C04, Fairy_ReloadPartySprites, func_801F1F4C},
