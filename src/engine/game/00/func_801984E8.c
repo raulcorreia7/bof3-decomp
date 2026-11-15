@@ -12,7 +12,7 @@ MATCH void func_801984E8(void) {
     rect.w = 64;
     rect.x = 0;
     rect.h = 120;
-    rect.y = (g_FrameBufferIndex * 240) + 80;
+    rect.y = (g_FrameBufferIndex * SCREEN_HEIGHT) + 80;
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, 0x340, 0x100);
     GFX_AddPrim(5u, sizeof(DR_MOVE));
     func_801E0BD0();

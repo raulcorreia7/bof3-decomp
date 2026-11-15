@@ -21,8 +21,8 @@ MATCH void func_801C1F4C(s32 key) {
                 if ((((u8*)g_FairyJobs)[inner] != 0) && (((u8*)g_FairyJobs)[inner + 1] == next)) {
                     total += 1;
                 }
-                inner += 8;
-            } while (inner < 480);
+                inner += FAIRY_JOB_STRIDE;
+            } while (inner < FAIRY_JOB_COUNT * FAIRY_JOB_STRIDE);
             if (!(total & BYTE_MASK)) {
                 *(s32*)(counter + 0xED4) = *(s32*)((u8*)&D_801457AC + step) + 1;
             }
