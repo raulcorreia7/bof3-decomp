@@ -16,25 +16,23 @@ MATCH void func_801EEC18(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EECCC(void) {
+MATCH void func_801EECCC(void) {
     u32 slot;
     u32 counter;
-    u32 wave;
-    u8  facing;
 
     if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
-        if (g_Battle.active_battler >= BATTLE_PARTY_CHARACTERS_COUNT) {
-            facing = ((PartyMember*)D_8014637C)->facing;
-            goto have_facing;
+        if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
+            g_Task->facing = ((PartyMember*)D_8014637C)->facing ^ 0x2;
+        } else {
+            g_Task->facing = ((PartyMember*)D_8014637C)->facing;
         }
-    } else if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
-        facing = ((PartyMember*)D_8014637C)->facing;
-        goto have_facing;
+    } else {
+        if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
+            g_Task->facing = ((PartyMember*)D_8014637C)->facing;
+        } else {
+            g_Task->facing = ((PartyMember*)D_8014637C)->facing ^ 0x2;
+        }
     }
-    facing = ((PartyMember*)D_8014637C)->facing ^ 0x2;
-have_facing:
-    g_Task->facing = facing;
     Battle_CenterCamera();
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0x30;
@@ -43,20 +41,15 @@ have_facing:
     counter = 0;
     do {
         slot                               = Battle_AllocEffect(1, 0x1B) & BYTE_MASK;
-        wave                               = (counter >> 2) * 3;
-        wave                               = (wave << 2) + 1;
+        g_BattleEffects[slot].target.party = g_Task;
         g_BattleEffects[slot].header.mode  = 0;
         g_BattleEffects[slot].unk_04       = counter;
-        g_BattleEffects[slot].arg.unk_09   = wave;
-        g_BattleEffects[slot].target.party = g_Task;
+        g_BattleEffects[slot].arg.unk_09   = (((counter >> 2) * 3) << 2) + 1;
         g_Task->param.unk_0B += 1;
         counter += 1;
     } while (counter < 0x10);
     SND_QueueSelectionEffect(0x100);
 }
-#else
-INCLUDE_ASM(func_801EECCC);
-#endif
 
 MATCH void func_801EEE68(void) {
     u8 timer;

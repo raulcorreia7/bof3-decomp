@@ -80,7 +80,30 @@ MATCH void func_801D0DD8(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D0F10(void) {
+    Actor* work;
+
+    if ((g_Task->unk_06++ & 0x3) == 0) {
+        func_801D19C8();
+    }
+    func_801D2088();
+    func_801D1A60();
+    if (g_ScriptVars[0] == 0x14) {
+        work                     = g_Task;
+        *(Point3l*)&work->unk_18 = *(Point3l*)&work->unk_64;
+        work->vx                 = 0;
+        work->vy                 = 0;
+        work->vz                 = 0;
+        work->header.mode += 1;
+        work->unk_64 = (0x2F8000 - work->unk_64) >> 7;
+        work->unk_68 = (0x278000 - work->unk_68) >> 7;
+        work->unk_6C = (TO_COORD(3840) - work->unk_6C) >> 7;
+    }
+}
+#else
 INCLUDE_ASM(func_801D0F10);
+#endif
 
 MATCH void func_801D0FEC(void) {
     if ((g_Task->unk_06++ & 0x3) == 0) {
