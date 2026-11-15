@@ -613,7 +613,54 @@ NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
 INCLUDE_ASM(func_801F97CC);
 #endif
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F9A20(WorldPos* pos, s32* velocity) {
+    POLY_F4* poly;
+    s32      point[3];
+    s32      tpage;
+    FAKE_STACK_PADS(u8, 32); /* FAKE: retail frame reserves 32 unused stack bytes. */
+
+    tpage = GetTPage(0, 0, 0x3C0, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, NULL);
+    Area_AddCellPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(DR_MODE));
+    poly = (POLY_F4*)g_GfxPrimCursor;
+    SetPolyF4(poly);
+    SetSemiTrans(poly, 1);
+
+    point[0] = pos->x.fixed + velocity[0];
+    point[1] = pos->y.fixed + velocity[1];
+    point[2] = pos->z.fixed + velocity[2];
+    Area_ProjectPoint(point, POLY_XY(poly, 0));
+    if ((g_Task->unk_06 & 1) == 0) {
+        point[0] = pos->x.fixed - velocity[0];
+        point[1] = pos->y.fixed + velocity[1];
+    } else {
+        point[0] = pos->x.fixed + velocity[0];
+        point[1] = pos->y.fixed - velocity[1];
+    }
+    point[2] = pos->z.fixed + velocity[2];
+    Area_ProjectPoint(point, POLY_XY(poly, 1));
+    if ((g_Task->unk_06 & 1) == 0) {
+        point[0] = pos->x.fixed + velocity[0];
+        point[1] = pos->y.fixed - velocity[1];
+    } else {
+        point[0] = pos->x.fixed - velocity[0];
+        point[1] = pos->y.fixed + velocity[1];
+    }
+    point[2] = pos->z.fixed - velocity[2];
+    Area_ProjectPoint(point, POLY_XY(poly, 2));
+    point[0] = pos->x.fixed - velocity[0];
+    point[1] = pos->y.fixed - velocity[1];
+    point[2] = pos->z.fixed - velocity[2];
+    Area_ProjectPoint(point, POLY_XY(poly, 3));
+    poly->r0 = ((g_Task->unk_06 & 2) != 0) << 7;
+    poly->b0 = 0;
+    poly->g0 = ((g_Task->unk_06 & 2) == 0) << 7;
+    Area_AddCellPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_F4));
+}
+#else
 INCLUDE_ASM(func_801F9A20);
+#endif
 
 MATCH void func_801F9CAC(void) {
     SYS_DISPATCH_BYTE(D_801FE66C, D_80146872);
