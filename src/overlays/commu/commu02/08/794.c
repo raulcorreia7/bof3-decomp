@@ -258,41 +258,38 @@ NON_MATCHING void func_801D1D68(void) {
 INCLUDE_ASM(func_801D1D68);
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D1E98(void) {
+MATCH void func_801D1E98(void) {
     s32 idx;
-    s32 old;
-    s32 step;
+    u8  old;
+    s32 lt;
 
     func_801D3184(0x26, 0x10);
     func_801D32A0(0xA8, 0x10, 0);
     D_801DB0C4 -= 1;
     if (D_801DB0C4 == 0) {
         idx = (s8)D_801DB0BC;
-        if (D_801DB080[idx + 9] != ((D_801DB080[idx - 1] < D_801DB080[idx]) ^ 1)) {
-            SND_PlayCue(0x107);
-            D_801DB0C0 = 1;
-        } else {
+        lt  = D_801DB080[idx - 1] < D_801DB080[idx];
+        if (D_801DB080[idx + 9] == (lt ^ 1)) {
             SND_PlayCue(0x104);
             old        = D_801DB0BC;
             D_801DB0BC = old + 1;
-            if ((s8)D_801DB0BC != (s8)D_801DB0B4 + 1) {
+            if ((s8)D_801DB0BC == (s8)D_801DB0B4 + 1) {
+                D_801DB0BC = old;
+                D_801DB0C0 = 0;
+                D_801DB0C4 = 0x3C;
+                D_801F294D += 1;
+            } else {
                 D_801DB0C4 = 0x1E;
-                goto done;
             }
-            D_801DB0BC = old;
-            D_801DB0C0 = 0;
+        } else {
+            SND_PlayCue(0x107);
+            D_801DB0C0 = 1;
+            D_801DB0C4 = 0x3C;
+            D_801F294D += 1;
         }
-        step       = 0x3C;
-        D_801DB0C4 = step;
-        D_801F294D += 1;
     }
-done:
     func_801D2794((u8)(D_801DB0B4 + 1), (u8)D_801DB0BC, D_801DB0B4);
 }
-#else
-INCLUDE_ASM(func_801D1E98);
-#endif
 
 MATCH void func_801D1FE4(void) {
     s32 index;
