@@ -32,7 +32,7 @@ MATCH void Scene_RestorePalette(void) {
 
     i = 0;
     do {
-        g_GraphicsPaletteDst[i] = MEM_PTR(const volatile u16, 0x80033800u)[i];
+        g_GraphicsPaletteDst[i] = MEM_PTR(const volatile u16, AREA_PALETTE_ARENA)[i];
         i++;
     } while (i < 16);
     g_GfxPalettePending = (g_GfxPalettePending + 1u);

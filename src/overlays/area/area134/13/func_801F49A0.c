@@ -17,7 +17,7 @@ MATCH s32 func_801F49A0(void) {
     record  = MEM_PTR(AreaQuadSprite, AREA_WORK);
     i       = 0;
     do {
-        if (record->unk_00[0] == TASK_BYTES[6]) {
+        if (record->unk_00[0] == g_Task->unk_06) {
             handled = 1;
             switch (record->unk_00[1]) {
                 case 0:
