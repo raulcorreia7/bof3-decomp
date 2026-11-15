@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801FD400(void) {
-    u8 index;
+    u8 slot;
 
     switch (g_SceneState.step_05) {
         case 0:
@@ -16,30 +16,30 @@ MATCH void func_801FD400(void) {
             g_SceneState.step_05  = 0;
             break;
         case 10:
-            index                  = Actor_FindFreeSpawned();
-            D_1F800000.view.raw[0] = index;
-            if ((index & BYTE_MASK) != GAME_NONE) {
-                g_SpawnedActors[index].header.flags                    = ACTOR_FLAG_IN_USE;
+            slot                   = Actor_FindFreeSpawned();
+            D_1F800000.view.raw[0] = slot;
+            if ((slot & BYTE_MASK) != GAME_NONE) {
+                g_SpawnedActors[slot].header.flags                     = ACTOR_FLAG_IN_USE;
                 g_SpawnedActors[D_1F800000.view.raw[0]].type           = 0x13;
                 g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.x = -748;
                 g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
                 g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.z = 182;
                 g_SpawnedActors[D_1F800000.view.raw[0]].layer          = 0x20;
-                g_SceneState.step_05                                   = 0xB;
+                g_SceneState.step_05                                   = 11;
             }
             break;
         case 11:
             if (g_ScriptVars[0] == 0x6) {
-                index      = Actor_FindFreeSpawned();
-                D_801FEA6C = index;
-                if ((index & BYTE_MASK) != GAME_NONE) {
-                    g_SpawnedActors[index].header.flags        = ACTOR_FLAG_IN_USE;
+                slot       = Actor_FindFreeSpawned();
+                D_801FEA6C = slot;
+                if ((slot & BYTE_MASK) != GAME_NONE) {
+                    g_SpawnedActors[slot].header.flags         = ACTOR_FLAG_IN_USE;
                     g_SpawnedActors[D_801FEA6C].type           = 0x13;
                     g_SpawnedActors[D_801FEA6C].camera_angle.x = -682;
                     g_SpawnedActors[D_801FEA6C].camera_angle.y = g_AreaCameraAngle.vy;
                     g_SpawnedActors[D_801FEA6C].camera_angle.z = ANGLE_45;
                     g_SpawnedActors[D_801FEA6C].layer          = 0x20;
-                    g_SceneState.step_05                       = 0xC;
+                    g_SceneState.step_05                       = 12;
                 }
             }
             break;
