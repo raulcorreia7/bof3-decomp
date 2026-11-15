@@ -73,8 +73,7 @@ MATCH void func_801EEEDC(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EEF80(void) {
+MATCH void func_801EEF80(void) {
     u8           i;
     u32          slot;
     PartyMember* work;
@@ -88,14 +87,11 @@ NON_MATCHING void func_801EEF80(void) {
             g_BattleEffects[slot].header.mode  = 2;
             g_BattleEffects[slot].unk_0B       = i;
             g_BattleEffects[slot].target.party = work;
-            work->param.unk_0B += 1;
+            g_Task->param.unk_0B += 1;
         }
         g_Task->header.mode += 1;
     }
 }
-#else
-INCLUDE_ASM(func_801EEF80);
-#endif
 
 MATCH void func_801EF068(void) {
     u8 timer;
