@@ -282,7 +282,79 @@ MATCH void Scene_RestorePalette(void) {
     g_GfxPalettePending = (g_GfxPalettePending + 1u);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801FB1B4(void) {
+    u32 state;
+    s32 message_id;
+    state = g_SceneState.step_05;
+    if (state >= 12) {
+        return;
+    }
+    /* The state table targets these handlers. */
+    __asm__ __volatile__("" : : "i"(&&state_0), "i"(&&state_4), "i"(&&state_5), "i"(&&state_6), "i"(&&state_8), "i"(&&state_10), "i"(&&state_11), "i"(&&exit));
+    goto*(void*)MEM_PTR(Callback, 0x801F6E74)[state];
+
+state_0:
+    if ((g_Game.members[1].u.field.mode_12B.u8_value != 0) || (g_Game.members[2].u.field.mode_12B.u8_value != 0)) {
+        return;
+    }
+    func_801BE1B0(10);
+    SYS_SetFlag(g_SceneFlags, 29);
+    goto reset_state;
+
+state_4:
+    message_id = 1;
+    goto start_message;
+
+state_5:
+    message_id = 0x4E;
+start_message:
+    Message_StartAreaMessage(message_id);
+    g_GameStateIndex     = GAME_REQUEST_MESSAGE;
+    g_SceneState.step_05 = 6;
+    return;
+
+state_6:
+    if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
+        return;
+    }
+    Game_ClearScriptActive();
+reset_state:
+    g_SceneState.state_04 = 0;
+    g_SceneState.step_05  = 0;
+    goto exit;
+
+state_8:
+    if (g_ScriptVars[0] != 0x28) {
+        goto exit;
+    }
+    g_ScriptVars[0]      = 0;
+    g_SceneState.step_05 = 10;
+    goto exit;
+
+state_10:
+    if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
+        goto exit;
+    }
+    Game_RequestAreaChange(0x97, 0x360000, 0x1D0000, 3);
+    g_SceneState.step_05 = 11;
+    goto exit;
+
+state_11:
+    if (g_GameStateIndex != 0) {
+        goto exit;
+    }
+    SYS_SetFlag(g_SceneFlags, 30);
+    Game_ClearScriptActive();
+    g_SceneState.state_04 = 0;
+    g_SceneState.step_05  = 0;
+    Scene_RequestChapterAdvance();
+exit:
+    return;
+}
+#else
 INCLUDE_ASM(func_801FB1B4);
+#endif
 
 #include "overlays/scenario/Scene_DispatchActor.h"
 
