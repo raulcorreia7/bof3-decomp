@@ -29,7 +29,7 @@ NON_MATCHING void func_801EEF10(void) {
             mirror[i] = (color & 0x8000) | (gray << 10) | (gray << 5) | gray;
         }
         g_GfxPalettePending = 1;
-        UI_SetMode(13);
+        UI_SetMode(UI_MODE_LONG_FADE_OUT);
         g_BattleUIStep++;
     }
 }
