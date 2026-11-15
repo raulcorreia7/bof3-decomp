@@ -1,7 +1,6 @@
 #include "area044_13.h"
 
-/* Place the first two work records at the cells the script row names when the request state is 1;
- * states 0 and 2 clear the script vars and the scene flags instead. */
+/* Place the first two work records at the script row's cells; states 0 and 2 clear the vars and flags. */
 MATCH void func_801F2CB0(void) {
     u8  mode;
     u8  index;
@@ -20,16 +19,16 @@ MATCH void func_801F2CB0(void) {
         row   = (g_ScriptVars[3] & 0x30) >> 3;
 
         D_80147A58[0].pos.x.part.integer  = D_801F3FB4[index];
-        D_80147A58[0].pos.x.part.fraction = 0x8000;
-        D_80147A58[0].pos.y.part.integer  = D_801F3FB5[index];
-        D_80147A58[0].pos.y.part.fraction = 0x8000;
+        D_80147A58[0].pos.x.part.fraction = COORD_HALF;
+        D_80147A58[0].pos.y.part.integer  = D_801F3FB4[index + 1];
+        D_80147A58[0].pos.y.part.fraction = COORD_HALF;
         D_80147A58[0].pos.z.part.integer  = 0x80;
         D_80147A58[0].interaction_flags |= 0x80;
 
         D_80147A58[1].pos.x.part.integer  = D_801F3FBC[row];
-        D_80147A58[1].pos.x.part.fraction = 0x8000;
-        D_80147A58[1].pos.y.part.integer  = D_801F3FBD[row];
-        D_80147A58[1].pos.y.part.fraction = 0x8000;
+        D_80147A58[1].pos.x.part.fraction = COORD_HALF;
+        D_80147A58[1].pos.y.part.integer  = D_801F3FBC[row + 1];
+        D_80147A58[1].pos.y.part.fraction = COORD_HALF;
         D_80147A58[1].pos.z.part.integer  = 0x80;
         D_80147A58[1].interaction_flags |= 0x80;
         func_801F2DF4();

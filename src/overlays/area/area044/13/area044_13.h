@@ -10,11 +10,10 @@ extern Actor D_80147A58[];
 extern u8    D_80147A61;
 extern u8    D_80147AF9;
 
-/* The two sprite rows' cell pairs: row n's x at 2n and its y one byte after. */
+/* The first cell pair table: entry n's x at byte 2n and its y at 2n+1. */
 extern u8 D_801F3FB4[];
-extern u8 D_801F3FB5[];
+/* The second cell pair table: entry n's x at byte n and its y at n+1. */
 extern u8 D_801F3FBC[];
-extern u8 D_801F3FBD[];
 
 void func_801F2DF4(void);
 void func_801F318C(u8 facing, u8 actor_index);

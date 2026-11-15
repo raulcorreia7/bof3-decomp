@@ -21,9 +21,8 @@ extern u32 D_801F42D4[];
 extern u8  D_801F42DC[];
 extern u8  D_801F42EC[];
 extern u8  D_801F4308[];
-/* The six-row sprite's cell bytes: row n's x is the byte at 2n and its y the byte one after. */
+/* The six-row sprite's cell pairs: row n's x is the byte at 2n and its y the byte one after. */
 extern u8  D_801F4364[];
-extern u8  D_801F4365[];
 /* The six sprite words' low bytes, one per row. */
 extern u8  D_801F4370[];
 extern u8  D_801F5651[];

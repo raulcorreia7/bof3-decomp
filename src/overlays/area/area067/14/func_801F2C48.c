@@ -1,6 +1,6 @@
 #include "area067_14.h"
 
-/* Anchors the message banner between the first two actor rows and starts message 0x14. */
+/* Anchor the message banner between the first two actor rows and start message 0x14. */
 MATCH void func_801F2C48(void) {
     AreaRippleQuad* quad;
     s32             pos[3];
@@ -31,7 +31,7 @@ MATCH void func_801F2C48(void) {
     quad->y      = (s16)quad->y >> 1;
 
     Message_StartAreaMessage(0x14);
-    g_GameStateIndex = 2;
+    g_GameStateIndex = GAME_REQUEST_MESSAGE;
     g_Task->timer    = 50;
     g_Task->header.mode++;
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0));

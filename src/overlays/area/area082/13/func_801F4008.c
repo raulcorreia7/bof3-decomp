@@ -1,7 +1,6 @@
 #include "area082_13.h"
 
-/* Emit the effect's four ring points from the offset table, then step its timer; at 16 the timer
- * restarts and the step advances. */
+/* Emit the effect's four ring points from the offset table and step its timer. */
 MATCH void func_801F4008(void) {
     s32 i;
     s32 x;
@@ -15,11 +14,11 @@ MATCH void func_801F4008(void) {
     do {
         x                = D_801F5764[i].x * 3;
         x                = ((x << 16) + 0x4B8000) >> 9;
-        D_1F800014[0].vx = x - 0x4000;
+        D_1F800014[0].vx = x - AREA_CELL_ORIGIN;
 
         y                = D_801F5764[i].y * 3;
         y                = ((y << 16) + 0x568000) >> 9;
-        D_1F800014[0].vy = y - 0x4000;
+        D_1F800014[0].vy = y - AREA_CELL_ORIGIN;
         D_1F800014[1].vz = (g_FrameCount << 5) + (i << 10);
 
         func_801F46C8((g_Task->timer - 8) << 2, 0x1E, i << 10, 0x10);

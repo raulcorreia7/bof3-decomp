@@ -1,7 +1,6 @@
 #include "area041_13.h"
 
-/* Draw the actor's sprite quad: its four corners are projected into one textured primitive and the
- * cell is queued with its draw mode. */
+/* Draw the actor's sprite quad from its four projected corners and queue its cell. */
 MATCH void func_801F3064(void) {
     POLY_FT4* prim;
     SVECTOR*  quad;
@@ -28,5 +27,5 @@ MATCH void func_801F3064(void) {
 
     RotTransPers4(quad, corner1, corner2, corner3, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
     func_80155560((0xBD50u << 16) | 0x00F9u, prim, 1);
-    Area_AddCellPrim((g_Task->pos.x.fixed + 0x4000) << 9, (g_Task->pos.y.fixed + 0x40C0) << 9, 1, sizeof(POLY_FT4));
+    Area_AddCellPrim((g_Task->pos.x.fixed + AREA_CELL_ORIGIN) << 9, (g_Task->pos.y.fixed + 0x40C0) << 9, 1, sizeof(POLY_FT4));
 }
