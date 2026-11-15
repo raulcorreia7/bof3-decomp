@@ -63,6 +63,19 @@ extern u8                 D_801D4E2C;
 extern u8                 D_801D4E30;
 extern u8                 D_801F286D[];
 
+/* The column of the selected fairy room in its row of four. */
+static inline s32 Commu01_RoomColumn(u8 selection) {
+    s32 index;
+    s32 offset;
+
+    index  = selection - 1;
+    offset = index;
+    if (index < 0) {
+        offset = selection + 2;
+    }
+    return index - ((offset >> 2) << 2);
+}
+
 void func_801D28A4(s32 x, s32 y, s32 fairy_index, s32 selected);
 void func_801D3038(void);
 void func_801D36FC(s32 cell, s32 selected);

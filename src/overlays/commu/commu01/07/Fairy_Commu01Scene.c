@@ -143,7 +143,6 @@ NON_MATCHING void func_801D1778(void) {
     s32 room_offset;
     u8* selection;
     s32 index;
-    s32 offset;
 
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
@@ -191,20 +190,10 @@ NON_MATCHING void func_801D1778(void) {
     func_801D3984((s16)x, y, 1);
     y = func_801D4474();
 
-    index  = *selection - 1;
-    offset = index;
-    if (index < 0) {
-        offset = *selection + 2;
-    }
-    index -= (offset >> 2) << 2;
+    index = Commu01_RoomColumn(*selection);
     func_801D4178((s16)(index * 52 + 66), y, 0);
 
-    index  = *selection - 1;
-    offset = index;
-    if (index < 0) {
-        offset = *selection + 2;
-    }
-    index -= (offset >> 2) << 2;
+    index = Commu01_RoomColumn(*selection);
     Menu_DrawCursorSprite((index * 52 + 68) & 0xFFFC, y + 4 + (s8)D_801D4E28 * 16, 0);
 }
 #else
@@ -220,7 +209,6 @@ NON_MATCHING void func_801D1A94(void) {
     s32 room_offset;
     u8* selection;
     s32 index;
-    s32 offset;
 
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
@@ -267,29 +255,14 @@ NON_MATCHING void func_801D1A94(void) {
     func_801D3984((s16)x, y, 1);
     y = func_801D4474();
 
-    index  = *selection - 1;
-    offset = index;
-    if (index < 0) {
-        offset = *selection + 2;
-    }
-    index -= (offset >> 2) << 2;
+    index = Commu01_RoomColumn(*selection);
     func_801D4178((s16)(index * 52 + 66), y, 1);
     if (D_801D4E1C != 0xFF) {
-        y      = (u16)y + 12 + (s8)D_801D4E28 * 16;
-        index  = *selection - 1;
-        offset = index;
-        if (index < 0) {
-            offset = *selection + 2;
-        }
-        index -= (offset >> 2) << 2;
-        y = func_801D44E0((s16)(index * 52 + 74), y, D_801D4E1C, 0);
+        y     = (u16)y + 12 + (s8)D_801D4E28 * 16;
+        index = Commu01_RoomColumn(*selection);
+        y     = func_801D44E0((s16)(index * 52 + 74), y, D_801D4E1C, 0);
 
-        index  = *selection - 1;
-        offset = index;
-        if (index < 0) {
-            offset = *selection + 2;
-        }
-        index -= (offset >> 2) << 2;
+        index = Commu01_RoomColumn(*selection);
         Menu_DrawCursorSprite((index * 52 + 76) & 0xFFFC, y + 4 + (s8)D_801D4E2C * 16, 0);
     }
 }
@@ -303,7 +276,6 @@ NON_MATCHING void func_801D1E48(void) {
     s16 y;
     u8* selection;
     s32 index;
-    s32 offset;
 
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
@@ -324,38 +296,18 @@ NON_MATCHING void func_801D1E48(void) {
     func_801D3984((s16)x, y, 1);
     y = func_801D4474();
 
-    index  = *selection - 1;
-    offset = index;
-    if (index < 0) {
-        offset = *selection + 2;
-    }
-    index -= (offset >> 2) << 2;
+    index = Commu01_RoomColumn(*selection);
     func_801D4178((s16)(index * 52 + 66), y, 1);
 
-    y      = y + 12 + ((s8)D_801D4E28 << 4);
-    index  = *selection - 1;
-    offset = index;
-    if (index < 0) {
-        offset = *selection + 2;
-    }
-    index -= (offset >> 2) << 2;
-    y = func_801D44E0((s16)(index * 52 + 74), y, D_801D4E1C, 1);
+    y     = y + 12 + ((s8)D_801D4E28 << 4);
+    index = Commu01_RoomColumn(*selection);
+    y     = func_801D44E0((s16)(index * 52 + 74), y, D_801D4E1C, 1);
     if (D_801D4E20 != 0xFF) {
-        y      = y + 12 + ((s8)D_801D4E28 << 4);
-        index  = *selection - 1;
-        offset = index;
-        if (index < 0) {
-            offset = *selection + 2;
-        }
-        index -= (offset >> 2) << 2;
-        y = func_801D44E0((s16)(index * 52 + 82), y, D_801D4E20, 0);
+        y     = y + 12 + ((s8)D_801D4E28 << 4);
+        index = Commu01_RoomColumn(*selection);
+        y     = func_801D44E0((s16)(index * 52 + 82), y, D_801D4E20, 0);
 
-        index  = *selection - 1;
-        offset = index;
-        if (index < 0) {
-            offset = *selection + 2;
-        }
-        index -= (offset >> 2) << 2;
+        index = Commu01_RoomColumn(*selection);
         Menu_DrawCursorSprite((index * 52 + 84) & 0xFFFC, (u16)(y + 4 + ((s8)D_801D4E30 << 4)), 0);
     }
 }
