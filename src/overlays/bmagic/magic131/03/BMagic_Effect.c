@@ -410,7 +410,26 @@ MATCH void func_801F0438(void) {
     }
 }
 
-INCLUDE_ASM(func_801F04C0);
+MATCH void func_801F04C0(void) {
+    PartyMember* work;
+    PartyMember* active;
+    s32          x;
+    s32          z;
+
+    work              = g_Task;
+    x                 = g_AreaScrollTargetX;
+    active            = g_BattleEffectBattler;
+    work->pos.x.fixed = x;
+    /* FAKE: Preserve the X write before the Y read. */
+    FAKE_BARRIER();
+    work->pos.y.fixed   = g_AreaScrollTargetY;
+    z                   = active->pos.z.fixed;
+    work->unk_5D        = 16;
+    work->pos.z.fixed   = z;
+    g_Task->unk_09      = 32;
+    g_Task->timer       = 8;
+    g_Task->header.step = g_Task->header.step + 1;
+}
 
 MATCH void func_801F053C(void) {
     EFFECT_ADVANCE_AT_COUNT(4, 0x40);

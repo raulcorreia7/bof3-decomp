@@ -1,8 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* lifted draft, best score 46.74%; semantics unverified
- */
-/* func_80154ABC */
+/* Lifted draft; semantics are unverified. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 Area_GetHeight(s32 x, s32 y, u8 mode) {
     s8   sp[4];
@@ -38,10 +36,12 @@ NON_MATCHING s32 Area_GetHeight(s32 x, s32 y, u8 mode) {
     u8   val7;
     u8*  tmp22;
     u8*  tmp23;
+    u8*  bundle;
 
-    tmp7  = x >> 0x10;
-    tmp21 = MEM(u8, (MAP_BUNDLE_BASE + 0x00));
-    tmp8  = y >> 0x10;
+    tmp7   = x >> 0x10;
+    bundle = MEM_PTR(u8, (MAP_BUNDLE_BASE + 0x00));
+    tmp21  = *bundle;
+    tmp8   = y >> 0x10;
     {
         u8 map_h = g_AreaMapBundle.height;
         if ((((u32)tmp7 >> 0x1F) | (tmp7 >= (s32)tmp21) | ((u32)tmp8 >> 0x1F) | (tmp8 >= (s32)map_h)) != 0) {
@@ -53,8 +53,8 @@ NON_MATCHING s32 Area_GetHeight(s32 x, s32 y, u8 mode) {
     tmp2  = (tmp5 >> 0x10) * tmp21;
     tmp4  = x & ~0x7FFF;
     tmp0  = tmp4 >> 0x10;
-    tmp23 = (u8*)((tmp0 * 4) + ((tmp2 * 4) + (MAP_BUNDLE_BASE + 0x30)));
-    tmp22 = (u8*)((g_AreaMapBundle.height_off4_2A * 4) + (tmp0 + (MAP_BUNDLE_BASE + 0x00)) + tmp2);
+    tmp23 = (u8*)((tmp0 * 4) + ((tmp2 * 4) + (bundle + 0x30)));
+    tmp22 = (u8*)((g_AreaMapBundle.height_off4_2A * 4) + (tmp0 + bundle) + tmp2);
     if (!((tmp4 | tmp5) & HALF_MASK)) {
         SP_REF(void*, 0x0) = 0;
         tmp3               = *(s8*)(tmp22)*g_AreaHeightOffsetEnabled;

@@ -28,10 +28,12 @@ NON_MATCHING void func_80158940(void* obj) {
     }
     entry_count = *((u8*)cursor + 2) - 1;
     cursor += 1;
-    bias = 0x8000;
+    /* FAKE: FAKE_USE preserves the pre-guard cursor advance (pure-C best 90.85%). */
+    FAKE_USE(cursor);
     if (entry_count <= 0) {
         return;
     }
+    bias = 0x8000;
     base = &D_801462A0;
     for (entry_index = 0; entry_index < entry_count; entry_index++) {
         layer        = 0;

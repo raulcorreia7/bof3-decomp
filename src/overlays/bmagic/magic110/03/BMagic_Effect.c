@@ -73,7 +73,25 @@ MATCH void func_801EEEDC(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEF80);
+MATCH void func_801EEF80(void) {
+    u8           i;
+    u32          slot;
+    PartyMember* work;
+
+    func_801EF148();
+    if (g_Task->param.unk_0B == 0) {
+        func_800A9610(g_Battle.target_selector, 16);
+        for (i = 0; i < 6; i++) {
+            slot                               = Battle_AllocEffect(1, 16) & BYTE_MASK;
+            work                               = g_Task;
+            g_BattleEffects[slot].header.mode  = 2;
+            g_BattleEffects[slot].unk_0B       = i;
+            g_BattleEffects[slot].target.party = work;
+            g_Task->param.unk_0B += 1;
+        }
+        g_Task->header.mode += 1;
+    }
+}
 
 MATCH void func_801EF068(void) {
     u8 timer;

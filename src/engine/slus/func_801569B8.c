@@ -23,7 +23,7 @@ NON_MATCHING void func_801569B8(u8* record, s32 cell_x, s32 cell_y) {
     s32      val6;
     s32      val7;
     s32      val8;
-    u8**     val9;
+    u8*      val9;
 
     (void)record;
     val4 = cell_x;
@@ -38,8 +38,7 @@ NON_MATCHING void func_801569B8(u8* record, s32 cell_x, s32 cell_y) {
     val1 = (s16)tmp7 - (val7 * 8);
     val6 = val7;
     do {
-        val9 = &g_GfxPrimCursor;
-        val9 = (u8**)g_GfxPrimCursor;
+        val9 = g_GfxPrimCursor;
         SetPolyFT4((POLY_FT4*)val9);
         SetShadeTex(val9, 0);
         tmp6              = RANDOM_MASK(3);

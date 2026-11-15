@@ -4,7 +4,92 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D1264(void) {
+    s32 cursor_x;
+    s32 row;
+    s32 first;
+    s32 category;
+    s32 row_offset;
+    s32 buttons;
+    u16 pad;
+    u8  old_cursor;
+    u8  first_row;
+    u8  next;
+    u8* cursor;
+
+    g_MenuPanelTasks[1].flags        = 0;
+    g_MenuPanelTasks[4].pos.x        = cursor_x + 7;
+    row_offset                       = row - first;
+    g_MenuPanelTasks[4].pos.y        = g_MenuPanelTasks[0].pos.y + row_offset * 13 + 26;
+    g_MenuPanelTasks[2].u.message.id = Item_GetDescription(category, g_MenuPanelTasks[0].flags);
+    g_MenuPanelTasks[3].u.message.id = 221;
+    buttons                          = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
+    func_801D1FA0();
+    old_cursor = g_MenuPanelTasks[0].unk_0B;
+    if (buttons & PADLup) {
+        if (old_cursor != 0) {
+            g_MenuPanelTasks[0].unk_0B = old_cursor - 1;
+        }
+        if (g_MenuPanelTasks[0].unk_0B < g_MenuPanelTasks[0].unk_0A) {
+            g_MenuPanelTasks[0].u.addr.unk_10 = 240;
+        }
+    } else if (buttons & PADLdown) {
+        if (old_cursor < 127) {
+            g_MenuPanelTasks[0].unk_0B = old_cursor + 1;
+        }
+        if (g_MenuPanelTasks[0].unk_0B >= g_MenuPanelTasks[0].unk_0A + 9) {
+            g_MenuPanelTasks[0].u.addr.unk_10 = 16;
+        }
+    } else if (buttons & PADL1) {
+        first_row = g_MenuPanelTasks[0].unk_0A;
+        if (first_row == 0) {
+            g_MenuPanelTasks[0].unk_0B = 0;
+        } else if (first_row < 9) {
+            g_MenuPanelTasks[0].unk_0B = old_cursor - first_row;
+            g_MenuPanelTasks[0].unk_0A = 0;
+        } else {
+            g_MenuPanelTasks[0].unk_0B = old_cursor - 9;
+            g_MenuPanelTasks[0].unk_0A = first_row - 9;
+        }
+    } else if (buttons & PADR1) {
+        first_row = g_MenuPanelTasks[0].unk_0A;
+        if (first_row == 119) {
+            g_MenuPanelTasks[0].unk_0B = 127;
+        } else if (first_row >= 111) {
+            next                       = old_cursor + 119;
+            g_MenuPanelTasks[0].unk_0B = next - first_row;
+            g_MenuPanelTasks[0].unk_0A = 119;
+        } else {
+            g_MenuPanelTasks[0].unk_0B = old_cursor + 9;
+            g_MenuPanelTasks[0].unk_0A = first_row + 9;
+        }
+    }
+    cursor = &g_MenuPanelTasks[0].unk_0B;
+    if (old_cursor != *cursor) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    }
+    if ((s16)g_MenuPanelTasks[0].u.addr.unk_10 == 0) {
+        pad = g_InputPressed;
+        if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
+            if (g_MenuPanelTasks[0].flags != 0) {
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
+                Menu_ApplyEquipment();
+                *cursor = GAME_NONE;
+                g_MenuStep.state -= 1;
+            } else {
+                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
+            }
+        } else if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+            *cursor = GAME_NONE;
+            g_MenuStep.state -= 1;
+        }
+    }
+}
+#else
 INCLUDE_ASM(func_801D1264);
+#endif
 
 MATCH void func_801D153C(void) {
     SYS_DISPATCH_BYTE(g_MenuBateStep2Sub2Funcs, D_80148652);

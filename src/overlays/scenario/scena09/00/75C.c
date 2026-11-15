@@ -79,7 +79,42 @@ MATCH s32 func_801F75BC(void) {
     return alive;
 }
 
-INCLUDE_ASM(func_801F76D0);
+MATCH void func_801F76D0(void) {
+    SceneSpark* spark;
+    u8          mode;
+    u8          i;
+
+    FAKE_STACK_PADS(u8, 0x20); /* FAKE: retail reserves 32 unused stack bytes. */
+    mode  = g_Task->unk_06;
+    spark = MEM_PTR(SceneSpark, AREA_WORK + 0x800 + mode * 0x500);
+    i     = 0;
+    do {
+        if (g_Task->unk_06 == 0) {
+            spark->pos.x = ((rand() & 0x1FF) << 8) + 0x120000;
+            spark->pos.y = ((rand() & 0x1FF) << 8) + 0x2E8000;
+            spark->pos.z = TO_COORD(2112) - ((spark->pos.x - 0x120000) << 7);
+            spark->vx    = (spark->pos.x - 0x130000) >> 4;
+            spark->vy    = (spark->pos.y - 0x2F8000) >> 4;
+            spark->vz    = (-(rand() & 0xFF)) << 5;
+            spark->vx -= 0x800;
+        } else {
+            spark->pos.x = ((rand() & 0x1FF) << 8) + 0x78000;
+            spark->pos.y = ((rand() & 0x1FF) << 8) + 0x318000;
+            spark->pos.z = TO_COORD(2112) - ((spark->pos.y - 0x318000) << 7);
+            spark->vx    = (spark->pos.x - 0x88000) >> 4;
+            spark->vy    = (spark->pos.y - 0x328000) >> 4;
+            spark->vz    = (-(rand() & 0xFF)) << 5;
+            spark->vy    = -0x800;
+        }
+        spark->active = 1;
+        spark->life   = 0x18;
+        spark->unk_01 = 0;
+        spark->shade  = 0x60;
+        spark->frame  = rand() & 7;
+        spark++;
+        i++;
+    } while (i < 32);
+}
 
 MATCH void func_801F78D0(void) {
     SYS_DISPATCH_BYTE(D_801FE3E0, D_80146872);
