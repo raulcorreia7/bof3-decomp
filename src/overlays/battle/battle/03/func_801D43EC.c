@@ -5,10 +5,10 @@
  */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D43EC(void) {
-    s32  saved0;
-    s32  saved1;
-    s32  saved2;
-    s32  saved3;
+    volatile s32 saved0;
+    volatile s32 saved1;
+    volatile s32 saved2;
+    volatile s32 saved3;
     s32  index;
     s32  flags;
     u16* battle_flags;
@@ -51,7 +51,7 @@ NON_MATCHING void func_801D43EC(void) {
             index                = g_Battle.active_battler;
             if ((u8)index < 3U) {
                 *(BattleStatBlock*)D_801EC308 = *(BattleStatBlock*)(D_80145F20 + index * 0x140 + 3);
-                flags                         = g_Game.members[index].turn.damage_flags.value & COMBATANT_FLAG_REPRISAL;
+                flags                         = g_Game.members[index].u.turn.damage_flags.value & COMBATANT_FLAG_REPRISAL;
             } else {
                 /* The party side reads the same block three bytes in; one address keeps both reads alike. */
                 *(BattleStatBlock*)D_801EC308 = *(BattleStatBlock*)(D_801EB6D0 + 3);
