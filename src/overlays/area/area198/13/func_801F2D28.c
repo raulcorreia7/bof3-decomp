@@ -14,8 +14,8 @@ MATCH void func_801F2D28(s32 scale) {
 
     /* The two palette blocks this pass scales: destination then source. */
     block       = 0;
-    destination = MEM_PTR(u16, 0x80038000u);
-    source      = MEM_PTR(const u16, 0x80034000u);
+    destination = MEM_PTR(u16, AREA_PALETTE_WORK + 0x800u);
+    source      = MEM_PTR(const u16, AREA_PALETTE_ARENA + 0x800u);
     do {
         out   = destination;
         in    = source;

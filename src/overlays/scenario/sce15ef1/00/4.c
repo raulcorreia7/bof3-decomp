@@ -104,7 +104,7 @@ MATCH void func_801D0F10(void) {
         g_Task->gravity     = origin_z;
         g_Task->unk_64      = (0x2F8000 - g_Task->unk_64) >> 7;
         g_Task->unk_68      = (0x278000 - g_Task->unk_68) >> 7;
-        g_Task->unk_6C      = (0x0F000000 - g_Task->unk_6C) >> 7;
+        g_Task->unk_6C      = (TO_COORD(3840) - g_Task->unk_6C) >> 7;
         g_Task->header.mode = mode;
     }
 }

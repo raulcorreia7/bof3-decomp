@@ -1,10 +1,12 @@
 #include "area103_13.h"
 
 MATCH void func_801F457C(void) {
-    u8 ticks;
+    u32* state;
+    u8   ticks;
 
     /* g_GameEntryState and the entry substate, read as one word. */
-    if (*(u32*)&g_GameEntryState == 0x50005 && (D_801EB7CA & 0x4000) != 0) {
+    state = (u32*)&g_GameEntryState;
+    if (*state == 0x50005 && (D_801EB7CA & 0x4000) != 0) {
         g_Task->header.step++;
     }
     if (g_Task->timer == 15) {
