@@ -1009,7 +1009,6 @@ NON_MATCHING void func_801D4910(s32 x, s32 y) {
 #else
 INCLUDE_ASM(func_801D4910);
 #endif
-
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D4AE0(s16 x, s16 y, u8 flag) {
     s32 i;
