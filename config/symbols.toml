@@ -4311,6 +4311,7 @@ g_SceneEntityDispatch = { addr = 0x801FBEF0, source = "scenario entity dispatch 
 g_SceneActorDispatch = { addr = 0x801FBFB8, source = "scenario actor dispatch table" }
 
 ["emi/scenario/scena14/00"]
+D_801FBFEC = { addr = 0x801FBFEC, type = "u8", size = 0x1, source = "A byte the scene handlers store and reload." }
 jtbl_801F6C04 = { addr = 0x801F6C04, type = "Callback", source = "The switch table of func_801F7BA0: the jump targets of its jr dispatch." }
 jtbl_801F6C6C = { addr = 0x801F6C6C, type = "Callback", source = "The switch table of func_801F7FB8: the jump targets of its jr dispatch." }
 jtbl_801F6D04 = { addr = 0x801F6D04, type = "Callback", source = "The switch table of func_801F88DC: the jump targets of its jr dispatch." }
