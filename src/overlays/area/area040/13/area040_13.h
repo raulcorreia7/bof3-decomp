@@ -8,6 +8,11 @@
 #include "overlays/area/world01.h"
 #include "area/spad.h"
 
+/* The bundle record's command tag: the high byte of its first word. The
+ * palette records the grid probe tests carry tags 0x23 to 0x25. */
+#define BUNDLE_COMMAND_MASK (0xFF << 24)
+#define BUNDLE_COMMAND(tag) ((tag) << 24)
+
 /* The game-overlay state bytes the cancel path resets. */
 
 extern u8 D_80144EA8[];
