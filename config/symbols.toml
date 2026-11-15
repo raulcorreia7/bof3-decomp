@@ -177,15 +177,35 @@ Battle_ApplyEnemyEvent = { addr = 0x8009C994, type = "func", source = "Applies o
 Battle_ScaleEnemyStat = { addr = 0x8009CCBC, type = "func", source = "Scales one of an enemy's seven stat fields by a percentage (the enemy event of type 3): hit points and magic points stay within their maximums, the other fields cap at 999." }
 Battle_MergeEnemyPanels = { addr = 0x8009CFEC, type = "func", source = "Removes the entries of the enemy panel list D_801ED9B0 that repeat an enemy kind and panel id, keeping the first; called after the enemy events trigger." }
 Battle_ApplyAbilityDamage = { addr = 0x8009DCC8, type = "func", source = "reads the ability row and stores the computed hp_change into g_Battle.target_record" }
+Battle_ApplyHeal = { addr = 0x8009DE18, type = "func", source = "Stores Battle_CalcHeal as the action target's hp change. The Heal ability's handler calls it and it is entry 7 of the action handler table." }
+Battle_InflictSleep = { addr = 0x8009E804, type = "func", source = "Adds STATUS_SLEEPING to the battle action target through Battle_InflictStatus." }
+Battle_InflictConfusion = { addr = 0x8009E824, type = "func", source = "Adds STATUS_CONFUSED to the battle action target through Battle_InflictStatus." }
+Battle_InflictSilence = { addr = 0x8009F258, type = "func", source = "Adds STATUS_SILENCED to the battle action target through Battle_InflictStatus." }
 Battle_HalveDamage = { addr = 0x8009F320, type = "func", source = "sets the damage-halved action flag on the current target" }
+Battle_ApplyMight = { addr = 0x8009F3DC, type = "func", source = "Sets the battle action to the Might ability, then applies the ability's target and stat rescale through func_800A403C." }
+Battle_ApplyInferno = { addr = 0x8009F414, type = "func", source = "Sets the battle action to the Inferno ability and applies its ability damage." }
+Battle_ApplyFlare = { addr = 0x8009F4BC, type = "func", source = "Sets the battle action to the Flare ability and applies its ability damage." }
+Battle_ApplyProtect = { addr = 0x8009F4F4, type = "func", source = "Sets the battle action to the Protect ability, then applies the ability's target and stat rescale through func_800A403C." }
+Battle_ApplyWeaken = { addr = 0x8009F52C, type = "func", source = "Sets the battle action to the Weaken ability, then applies the ability's target and stat rescale through func_800A403C." }
+Battle_ApplyFireblast = { addr = 0x8009F564, type = "func", source = "Sets the battle action to the Fireblast ability and applies its ability damage." }
+Battle_ApplyBarrier = { addr = 0x8009F6B4, type = "func", source = "Sets the battle action to the Barrier ability and raises the damage-halved flag through Battle_HalveDamage." }
+Battle_ThirdHpDamage = { addr = 0x8009F7EC, type = "func", source = "Stores Battle_RollHpDamage(3) as the action target's hp change: a third of the attacker's hp, scaled by the random percent and the element resistance." }
+Battle_FullHpDamage = { addr = 0x8009F814, type = "func", source = "Stores Battle_RollHpDamage(1) as the action target's hp change: the attacker's whole hp, scaled by the random percent and the element resistance." }
+Battle_HalfHpDamage = { addr = 0x8009F83C, type = "func", source = "Stores Battle_RollHpDamage(2) as the action target's hp change: half the attacker's hp, scaled by the random percent and the element resistance." }
+Battle_InflictParalysis = { addr = 0x8009F864, type = "func", source = "Adds STATUS_PARALYZED to the battle action target through Battle_InflictStatus." }
+Battle_InflictBlindness = { addr = 0x8009F978, type = "func", source = "Adds STATUS_BLIND to the battle action target through Battle_InflictStatus." }
+Battle_InflictPoison = { addr = 0x8009F998, type = "func", source = "Adds STATUS_POISONED to the battle action target through Battle_InflictStatus." }
 Battle_GrantReprisal = { addr = 0x800A1414, type = "func", source = "sets the reprisal damage flag on the active battler" }
 Battle_GrantAlwaysHits = { addr = 0x800A1704, type = "func", source = "sets the always-hits action flag on the active battler" }
 Battle_GrantDamageImmunity = { addr = 0x800A1A30, type = "func", source = "sets the damage-immune damage flag on the active battler" }
 Battle_GetActionId = { addr = 0x800A2880, type = "func", source = "the body returns g_Battle.action_id" }
 Battle_GetFireResistance = { addr = 0x800A2AE0, type = "func", source = "the body returns g_Game.members[battler_index].chr.stats.resistances[0]" }
+Battle_CalcHeal = { addr = 0x800A30E8, type = "func", source = "Computes the heal an action gives: the ability's power row scaled by the rate byte and the target's holy resistance, returned as a negative hp change." }
 Battle_SetTarget = { addr = 0x800A39B4, type = "func", source = "the body stores into g_Battle.target_record" }
 Battle_PickAbility = { addr = 0x800A3A10, type = "func", source = "picks an ability for the battler and selection kind, using g_Abilities and rand" }
 Battle_MarkDamageApplied = { addr = 0x800A3F28, type = "func", source = "existing bottom-up proposal: ORs BATTLE_STATE_DAMAGE_APPLIED into g_Battle.state and marks the damage row" }
+Battle_InflictStatus = { addr = 0x800A41D8, type = "func", source = "Marks the battle damage applied, then adds the given status mask to the action target through func_800A31E0 unless the ability picker still holds the action." }
+Battle_RollHpDamage = { addr = 0x800A4294, type = "func", source = "Rolls the damage of the active battler's hp divided by the divisor, scaled by the random percent table D_800B498C and the target's resistance to the action's element; 0 when the target is damage-immune." }
 Battle_LoadDraArchive = { addr = 0x800A4700, type = "func", source = "Loads the BATL_DRA archive when no choice phase is pending and advances ui_state; step 0 of the D_800B4CAC battle UI step table. The archive's job is not proven, so the name keeps the disc label." }
 Battle_FinishDraLoad = { addr = 0x800A4744, type = "func", source = "Waits EMI_IsReady for the BATL_DRA stream started by Battle_LoadDraArchive, copies palette rows 0x1A and 0x1B and raises g_GfxPalettePending; step 1 of D_800B4CC8." }
 Battle_OpenMenu = { addr = 0x800A47AC, type = "func", source = "Opens the battle menu." }

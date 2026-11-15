@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-MATCH s16 func_800A4294(s32 input_kind) {
+/* func_800A4294 */
+MATCH s16 Battle_RollHpDamage(s32 divisor) {
     u32 mode;
     u16 base;
     u16 kind_mask;
@@ -20,7 +21,7 @@ MATCH s16 func_800A4294(s32 input_kind) {
     if ((kind_mask & (ELEM_FIRE | ELEM_FROST | ELEM_ELECTRIC | ELEM_EARTH | ELEM_WIND)) != 0u) {
         mod = Battle_GetFireResistance((*(u8*)&g_Battle.target), element_mask);
     }
-    mod     = (((base / input_kind) * D_800B498C[RANDOM_MASK(7)]) * mod) / 10000;
+    mod     = (((base / divisor) * D_800B498C[RANDOM_MASK(7)]) * mod) / 10000;
     battler = (*(u8*)&g_Battle.target);
     base    = BATTLER_IS_PLAYER(battler);
     if (base) {
