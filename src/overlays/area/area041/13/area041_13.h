@@ -29,7 +29,7 @@ extern u8  D_801F5651[];
 extern u16 D_801F5678[];
 extern u8  D_801F567C[];
 
-void func_801F387C(s32);
+void func_801F387C(s32 angle);
 
 /* The game-overlay state bytes the cancel path resets. */
 
