@@ -501,7 +501,78 @@ INCLUDE_ASM(func_801F90F4);
 
 INCLUDE_ASM(func_801F9330);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F97E0(Scena07Burst* burst) {
+    DVECTOR  inner;
+    DVECTOR  outer;
+    WorldPos point;
+    s32*     point_ptr;
+    POLY_G4* prim;
+    s8       i;
+    s32      angle;
+    s32      shade;
+    s32      tpage;
+    u16      base;
+    u16      color;
+    FAKE_STACK_PADS(u8, 32); /* FAKE: retail frame reserves 32 unused stack bytes. */
+
+    angle         = 0;
+    point.x.fixed = burst->x + (rcos((u16)angle) << 5);
+    point.y.fixed = burst->y + (rsin((u16)angle) << 5);
+    point.z.fixed = burst->z;
+    Area_ProjectPoint((s32*)&point, &inner);
+    point.z.fixed = burst->z + 0x7000000;
+    Area_ProjectPoint((s32*)&point, &outer);
+    base = burst->unk_10;
+    if (base >= 0x100) {
+        base = 0xFF;
+    }
+    shade     = 0x80;
+    i         = 0;
+    point_ptr = (s32*)&point;
+    angle += 0x80;
+    do {
+        point.x.fixed = burst->x + (rcos((u16)angle) << 5);
+        point.y.fixed = burst->y + (rsin((u16)angle) << 5);
+        point.z.fixed = burst->z;
+        tpage         = GetTPage(0, 1, 960, 0);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, NULL);
+        Area_AddCellPrim(point.x.fixed, point.y.fixed, 0, sizeof(DR_MODE));
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        prim->x0 = inner.vx;
+        prim->y0 = inner.vy;
+        prim->x1 = outer.vx;
+        prim->y1 = outer.vy;
+        setRGB0(prim, base, base, base);
+        setRGB1(prim, base, base, base);
+        Area_ProjectPoint(point_ptr, &inner);
+        point.z.fixed = burst->z + 0x7000000;
+        Area_ProjectPoint(point_ptr, &outer);
+        prim->x2 = inner.vx;
+        prim->y2 = inner.vy;
+        prim->x3 = outer.vx;
+        prim->y3 = outer.vy;
+        if ((u8)(i - 4) >= 16) {
+            shade += 4;
+        } else {
+            shade -= 4;
+        }
+        color = ((u16)((u8)shade * burst->unk_10)) >> 7;
+        if (color >= 0x100) {
+            color = 0xFF;
+        }
+        setRGB2(prim, color, color, color);
+        setRGB3(prim, color, color, color);
+        Area_AddCellPrim(point.x.fixed, point.y.fixed, 0, sizeof(POLY_G4));
+        i++;
+        angle += 0x80;
+    } while (i < 32);
+}
+#else
 INCLUDE_ASM(func_801F97E0);
+#endif
 
 MATCH s32 func_801F9A80(SceneEffectRow* row) {
     POLY_F4* poly;
