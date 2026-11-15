@@ -652,7 +652,55 @@ MATCH void func_801F92F0(Coord* position, s32* step) {
 
 INCLUDE_ASM(func_801F9500);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
+    POLY_F4* poly;
+    s32      point[8];
+    s32      lift;
+
+    poly = (POLY_F4*)g_GfxPrimCursor;
+    SetPolyF4(poly);
+    SetSemiTrans(poly, 0);
+
+    point[0] = pos->x.fixed + arg[0];
+    point[1] = pos->y.fixed + arg[1];
+    point[2] = pos->z.fixed + arg[2];
+    Area_ProjectPoint(point, (DVECTOR*)&poly->x0);
+    if (!(g_Task->unk_06 & 1)) {
+        point[0] = pos->x.fixed - arg[0];
+        point[1] = pos->y.fixed + arg[1];
+    } else {
+        point[0] = pos->x.fixed + arg[0];
+        point[1] = pos->y.fixed - arg[1];
+    }
+    point[2] = pos->z.fixed + arg[2];
+    FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
+    Area_ProjectPoint(point, (DVECTOR*)&poly->x1);
+
+    point[0] = pos->x.fixed + arg[0];
+    point[1] = pos->y.fixed + arg[1];
+    lift     = 0x100000;
+    point[2] = pos->z.fixed + arg[2] + lift;
+    Area_ProjectPoint(point, (DVECTOR*)&poly->x2);
+    if (!(g_Task->unk_06 & 1)) {
+        point[0] = pos->x.fixed - arg[0];
+        point[1] = pos->y.fixed + arg[1];
+    } else {
+        point[0] = pos->x.fixed + arg[0];
+        point[1] = pos->y.fixed - arg[1];
+    }
+    point[2] = pos->z.fixed + arg[2] + lift;
+    FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
+    Area_ProjectPoint(point, (DVECTOR*)&poly->x3);
+
+    poly->r0 = (g_Task->unk_06 & 2) != 0 ? 0x80 : 0;
+    poly->b0 = 0;
+    poly->g0 = (g_Task->unk_06 & 2) == 0 ? 0x80 : 0;
+    Area_AddCellPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_F4));
+}
+#else
 INCLUDE_ASM(func_801F97CC);
+#endif
 
 INCLUDE_ASM(func_801F9A20);
 
