@@ -1,7 +1,6 @@
 #include "shop_00.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shaded, s32 unused) {
+MATCH void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shaded, s32 unused) {
     Character* records;
     Character* stats;
     u32        clut;
@@ -17,17 +16,15 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s
     /* FAKE: the order lock keeps the x and y copies below the window call. */
     FAKE_ORDER_LOCK_BEGIN
         records = (Character*)CHARACTER_BLOCK->records;
-        px += 0x56;
-        py += 2;
-        stats = &records[character_index];
-        Menu_DrawCharacterPortrait(px, py, stats->character_id, (u8)shaded == 0 ? (stats->status >> 6) & 2 : 1);
+        stats   = &records[character_index];
+        Menu_DrawCharacterPortrait(px + 0x56, py + 2, stats->character_id, (u8)shaded == 0 ? (stats->status >> 6) & 2 : 1);
         text_clut = clut & BYTE_MASK;
         UI_DrawText(x + 20, y + 3, text_clut, 5, stats);
     FAKE_ORDER_LOCK_END;
     TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, stats->level);
     text_y = (s16)(y + 0x17);
     UI_DrawGlyphString(x + 22, text_y, text_clut, g_UiFormatBuffer);
-    if ((*(u32*)&stats->status & (STATUS_CONFUSED | STATUS_POISONED)) == (STATUS_CONFUSED | STATUS_POISONED)) {
+    if ((LOWU(stats->status) & (STATUS_CONFUSED | STATUS_POISONED)) == (STATUS_CONFUSED | STATUS_POISONED)) {
         if (g_FrameCount & 0x20) {
             UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, 0x10, D_801E5814);
         } else {
@@ -84,6 +81,3 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s
     px = 0;
     py = 0;
 }
-#else
-INCLUDE_ASM(Menu_DrawCharacterWindow);
-#endif
