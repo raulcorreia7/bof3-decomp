@@ -88,7 +88,8 @@ MATCH s32 func_801CFF4C(s16 x, s16 y) {
     CHAR_PROBE_CELL_CODE(Char_SpawnLinkedActor);
 }
 
-INCLUDE_ASM(Char_SpawnLinkedActor);
+/* func_801D0158 */
+#include "overlays/plchar/Char_SpawnLinkedActor.h"
 
 MATCH void func_801D0244(void) {
     SYS_DISPATCH_TASK(D_801D08B0, 3, g_Task);
