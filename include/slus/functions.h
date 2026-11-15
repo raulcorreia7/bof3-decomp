@@ -232,7 +232,7 @@ u8           Area_StepCameraY(s16 target, s8 step);
 /* func_8015BE10 */
 u8           Area_StepCameraZ(s16 target, s8 step);
 /* func_8015BEA0 */
-bool         Area_StepCameraAngle(s32 degrees, s8 duration);
+bool         Area_StepCameraAngle(s16 degrees, s8 duration);
 /* func_8015C058 */
 void         Game_ClearScriptActive(void);
 /* func_8015C088; int with no value returned (see its definition) */
