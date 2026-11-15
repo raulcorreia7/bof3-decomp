@@ -37,7 +37,21 @@ MATCH void func_801EEEBC(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEF84);
+MATCH void func_801EEF84(void) {
+    PartyMember* work;
+    PartyMember* draw;
+
+    work = g_Task;
+    work->unk_60 += 4;
+    work->unk_09++;
+    work->unk_58 -= 8;
+    work->unk_14 += 0x20;
+    draw = g_Task;
+    func_801EF1FC(draw->unk_0C >> 16, draw->unk_10 >> 16, (draw->unk_18 << 15) >> 16, draw->unk_14, draw->unk_60, draw->unk_58);
+    if (g_Task->unk_09 >= 0x29) {
+        func_801E5988();
+    }
+}
 
 MATCH void func_801EF030(s32 x, s32 y, u16 radius, s32 phase) {
     SVECTOR  points[6];
