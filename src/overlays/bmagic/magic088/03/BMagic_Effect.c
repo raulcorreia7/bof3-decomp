@@ -114,17 +114,17 @@ MATCH s32 func_801EF34C(void) {
     if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ABILITY) {
         switch (LOHU(g_Battle.action_id)) {
             case ABILITY_WEAKEN:
-            case 0xC0:
+            case ABILITY_WEAKEN_SKILL:
                 result = 0;
                 break;
             case ABILITY_MOLASSES:
             case ABILITY_SLOW:
-            case 0xBE:
+            case ABILITY_SLOW_SKILL:
                 result = 1;
                 break;
             case ABILITY_TARBABY:
             case ABILITY_BLUNT:
-            case 0xBF:
+            case ABILITY_BLUNT_SKILL:
                 result = 2;
                 break;
             default:

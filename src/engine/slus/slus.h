@@ -225,7 +225,7 @@ typedef struct SpriteCell {
 } SpriteCell;
 
 /* The 0xC-byte panel sort rows at 0x80147CFC: func_8015AD00 fills one row per
- * quad, func_8014BC70 walks the list, and func_8014C47C swaps two rows. The
+ * quad, func_8014BC70 walks the list, and MATH_SwapVectors swaps two rows. The
  * list's second row starts at 0x80147D08 and the depth word at 0x80147D0C, so
  * those addresses are interior views of the same rows. */
 typedef struct PanelSortItem {
@@ -1011,7 +1011,8 @@ extern u8                    D_801F6A68;
 extern u8                    D_801F6AD0;
 extern const MenuPanelFuncs  g_MenuPanels;
 
-void                    func_8014C47C(struct Vec3W* a, struct Vec3W* b);
+/* func_8014C47C */
+void                    MATH_SwapVectors(struct Vec3W* a, struct Vec3W* b);
 extern void             Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut);
 /* func_8014DB98 */
 extern void             Actor_StageAnimStep(void);
@@ -1176,7 +1177,8 @@ s32                     Game_TestSceneFlag(u8** cursor);
 s32                     func_8015B6A8(u8** cursor);
 s32                     func_8015B6D0(u8** cursor);
 s32                     func_8015B6F8(u8** cursor);
-s32                     func_8015B73C(u8** cursor);
+/* func_8015B73C */
+s32                     Game_IsLeaderEqual(u8** cursor);
 s32                     Game_TestEventFlag(u8** cursor);
 s32                     Game_HasVitalItem(u8** cursor);
 s32                     Game_IsScenarioAtMost(u8** cursor);
@@ -1208,11 +1210,11 @@ extern void             func_80161454(u32 index);
 void                    func_80163230(void);
 void                    func_80163698(void);
 u8*                     func_801642F4(u8* dst, const u8* src, u32 count);
-void                    Char_ApplyMaster(u8* arg);
+void                    Char_ApplyMaster(Character* character);
 /* Retail calls this executable makes into its own units and the overlays. */
-void                    Char_ApplyWeapon(void* character);
-void                    Char_ApplyArmor(void* character);
-void                    Char_ApplyAccessories(void* param);
+void                    Char_ApplyWeapon(Character* character);
+void                    Char_ApplyArmor(Character* character);
+void                    Char_ApplyAccessories(Character* character);
 void                    EMI_LoadPartyCode(u8 member_a, u8 member_b, u8 member_c);
 void                    EMI_LoadParty(u8 member_a, u8 member_b, u8 member_c, u8 family);
 u8                      EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c);

@@ -349,8 +349,8 @@ ActorActionFunc D_801C83BC[7] = {(ActorActionFunc)func_801A225C, (ActorActionFun
 
 ObjectFunc D_801C83D8[11] = {(ObjectFunc)func_801A0AE4, (ObjectFunc)func_801A0CFC, (ObjectFunc)func_801A0F24,
                              (ObjectFunc)func_801A114C, (ObjectFunc)func_801A1384, (ObjectFunc)func_801A271C,
-                             (ObjectFunc)func_801A1A24, (ObjectFunc)func_801A3410, (ObjectFunc)func_801A3594,
-                             (ObjectFunc)func_801A37D4, (ObjectFunc)func_801A3B7C};
+                             (ObjectFunc)func_801A1A24, (ObjectFunc)func_801A3410, (ObjectFunc)Game_DispatchFadeWhite,
+                             (ObjectFunc)Game_DispatchFadeBlack, (ObjectFunc)func_801A3B7C};
 
 u8 s_EntityRouteIndices[8][4] = {{0x03, 0x05, 0x07, 0x01}, {0x05, 0x01, 0x07, 0x03}, {0x07, 0x05, 0x03, 0x01},
                                  {0x01, 0x07, 0x05, 0x03}, {0x07, 0x01, 0x03, 0x05}, {0x03, 0x01, 0x07, 0x05},
@@ -2181,7 +2181,7 @@ u16 D_801CD0F4[4] = {0x0103, 0x0109, 0x010A, 0x0000};
 
 Callback D_801CD0FC[5] = {func_801B1E24, func_801B207C, func_801B21E8, func_801B26E0, Game_EndLeaderSwitch};
 
-Callback D_801CD110[2] = {func_801B2A00, func_801B2A20};
+Callback D_801CD110[2] = {Game_RequestMenu, Game_WaitMenuClose};
 
 Callback D_801CD118[2] = {func_801B2AB4, func_801B2B6C};
 
