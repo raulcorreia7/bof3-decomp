@@ -239,7 +239,7 @@ MATCH void func_801D3320(MenuPanelTask* task) {
         u8 shade;
         u8 flag;
 
-        if (((u8*)task->item_table)[i] != 0) {
+        if (MEM_PTR(u8, task->item_table)[i] != 0) {
             shade = 0;
             flag  = 0;
         } else {
@@ -247,12 +247,12 @@ MATCH void func_801D3320(MenuPanelTask* task) {
             flag  = 1;
         }
         if (i != task->unk_0A) {
-            func_801AF800((s16)(task->pos.x + 7), (s16)((u32)task->pos.y + (i * 13 + 0x1A)), shade, 0, D_801D9798[i], ((u8*)task->item_table)[i], flag);
+            func_801AF800((s16)(task->pos.x + 7), (s16)((u32)task->pos.y + (i * 13 + 0x1A)), shade, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], flag);
         } else {
-            if (((u8*)task->item_table)[i] != 0) {
-                func_801AF800((s16)(task->pos.x + 7), (s16)((u32)task->pos.y + (i * 13 + 0x1A)), 7, 0, D_801D9798[i], ((u8*)task->item_table)[i], 1);
+            if (MEM_PTR(u8, task->item_table)[i] != 0) {
+                func_801AF800((s16)(task->pos.x + 7), (s16)((u32)task->pos.y + (i * 13 + 0x1A)), 7, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], 1);
             }
-            func_801AF800((s16)(task->pos.x + 7), (s16)(task->pos.y + i * 13 + 0x18), shade, 0, D_801D9798[i], ((u8*)task->item_table)[i], flag);
+            func_801AF800((s16)(task->pos.x + 7), (s16)(task->pos.y + i * 13 + 0x18), shade, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], flag);
         }
         i++;
     } while (i < 4);

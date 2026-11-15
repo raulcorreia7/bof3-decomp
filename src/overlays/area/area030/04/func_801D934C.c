@@ -5,11 +5,13 @@ MATCH void func_801D934C(u16 x, u16 y, u16 width, u16 height) {
     TILE*    tile;
     u32      palette_offset;
     u16      color;
+    s8       style;
     u8       red;
     u8       green;
     u8       blue;
 
-    palette_offset = (*(s8*)&g_WindowStyle << 6) | 0x20;
+    style          = MEM(s8, &g_WindowStyle);
+    palette_offset = (style << 6) | 0x20;
     color          = MEM(u16, AREA_PALETTE_ARENA_33A00 + 8u + palette_offset);
     red            = PSX_COLOR_R(color) << 3;
     green          = PSX_COLOR_G(color) << 3;
