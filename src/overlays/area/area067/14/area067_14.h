@@ -41,6 +41,7 @@ ASSERT_OFFSET(AreaRippleQuad, height, 0x06);
 ASSERT_OFFSET(AreaRippleQuad, angle, 0x08);
 ASSERT_SIZE(AreaRippleQuad, 0x0A);
 
+void func_801F31C8(AreaRippleQuad* quad);
 void func_801F3394(AreaRippleQuad* quad);
 void func_801F358C(AreaRippleQuad* quad);
 void func_801F3AD8(AreaRippleQuad* quad);

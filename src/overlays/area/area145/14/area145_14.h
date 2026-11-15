@@ -60,4 +60,19 @@ extern u8           D_80144EF0[];
 /* g_Game.current */
 extern PartyMember* D_80146250;
 
+/* The area focus x and the work word the stage route reads. */
+extern s32 D_80147A8C;
+extern s32 g_AreaFocusY;
+extern s32 D_80147AC4;
+/* The shared route steps the stage table indexes. */
+extern s8  D_80181B00[];
+extern s8  D_80181B01[];
+/* The stage table: the route index, the stage length and the next stage code. */
+extern u8  D_801F5CDC[];
+extern u8  D_801F5CDD[];
+extern u8  D_801F5CDE[];
+
+u8 func_801F4DA4(u32 frame);
+u8 func_801F4EDC(u16 t, u8 stage);
+
 #endif

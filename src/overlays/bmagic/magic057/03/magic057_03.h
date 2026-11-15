@@ -33,4 +33,8 @@ void func_801EF7A0(void);
 void func_801EF7E0(void);
 
 extern u8 D_801EFADC[];
+
+/* The two phase handlers func_801EF620 runs on header.mode. */
+void func_801EF7A0(void);
+void func_801EF7E0(void);
 #endif

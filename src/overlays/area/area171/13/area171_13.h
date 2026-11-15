@@ -19,5 +19,11 @@ extern u8 D_80144CAA;
 extern u8 D_801F3F88[];
 void      func_801A4BC0(s32 arg0, s32 arg1, s32 arg2);
 void      func_801F3070(s32 mode);
+/* The work bound lookup of the party row's trigger box. */
+u8        func_801F379C(u8 member);
+/* The resident field-step helpers the party sync calls. */
+void      func_801C2538(void);
+void      func_801C2710(void);
+void      func_801F3868(void);
 
 #endif

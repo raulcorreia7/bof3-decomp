@@ -212,4 +212,80 @@ MATCH void func_801D1914(s16 amount) {
 /* func_801D1A20 */
 #include "shared/GFX_DrawColorFan.h"
 
-INCLUDE_ASM(func_801D1C1C);
+/* Two tinted slivers between the work position and its target, then eight
+ * stepped segments along the span. */
+MATCH void func_801D1C1C(s32* from, s32* to, u8 level) {
+    POLY_G4* prim;
+    TILE_1*  segment;
+    Point3l  current;
+    Point3l  step;
+    DVECTOR  projected;
+    s32      phase;
+    u8       i;
+    u16      tpage;
+
+    tpage = GetTPage(0, 1, 704, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    SetSemiTrans(prim, 1);
+    Area_ProjectPoint(from, &projected);
+    prim->x0 = projected.vx + 1;
+    prim->y0 = projected.vy + 2;
+    prim->x1 = projected.vx;
+    prim->y1 = projected.vy;
+    Area_ProjectPoint(to, &projected);
+    prim->x2 = projected.vx - 1;
+    prim->y2 = projected.vy - 2;
+    prim->x3 = projected.vx;
+    prim->y3 = projected.vy;
+    setRGB0(prim, 0, 0, 0);
+    setRGB1(prim, level, level, 0);
+    setRGB2(prim, 0, 0, 0);
+    setRGB3(prim, level, level, 0);
+    GFX_AddPrim(2, sizeof(POLY_G4));
+
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    SetSemiTrans(prim, 1);
+    Area_ProjectPoint(from, &projected);
+    prim->x0 = projected.vx;
+    prim->y0 = projected.vy;
+    prim->x1 = projected.vx + 1;
+    prim->y1 = projected.vy + 2;
+    Area_ProjectPoint(to, &projected);
+    prim->x2 = projected.vx;
+    prim->y2 = projected.vy;
+    prim->x3 = projected.vx - 1;
+    prim->y3 = projected.vy - 2;
+    setRGB0(prim, 0, level, 0);
+    setRGB1(prim, 0, 0, 0);
+    setRGB2(prim, 0, level, 0);
+    setRGB3(prim, 0, 0, 0);
+    GFX_AddPrim(2, sizeof(POLY_G4));
+
+    step.x    = (to[0] - from[0]) >> 6;
+    step.y    = (to[1] - from[1]) >> 6;
+    step.z    = (to[2] - from[2]) >> 6;
+    phase     = g_FrameCount & 7;
+    current.x = from[0] + step.x * phase;
+    current.y = from[1] + step.y * phase;
+    current.z = from[2] + step.z * phase;
+    for (i = 0; i < 8; i++) {
+        if (current.y < to[1]) {
+            break;
+        }
+        Area_ProjectPoint(&current.x, &projected);
+        segment = (TILE_1*)g_GfxPrimCursor;
+        SetTile1(segment);
+        SetSemiTrans(segment, 1);
+        setXY0(segment, projected.vx, projected.vy - 1);
+        setRGB0(segment, 0, level, 0);
+        GFX_AddPrim(2, sizeof(TILE_1));
+        current.x += step.x * 8;
+        current.y += step.y * 8;
+        current.z += step.z * 8;
+    }
+}

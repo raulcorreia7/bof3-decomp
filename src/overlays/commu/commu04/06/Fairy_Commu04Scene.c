@@ -127,4 +127,24 @@ MATCH void func_801D1628(void) {
 
 #include "overlays/commu/Fairy_EndCommuScene.h"
 
-INCLUDE_ASM(func_801D16A4);
+MATCH void func_801D16A4(void) {
+    g_MenuPanelTasks[0].handler       = 2;
+    g_MenuPanelTasks[0].mode          = 0;
+    g_MenuPanelTasks[0].state         = 2;
+    g_MenuPanelTasks[0].active        = 1;
+    LOH(g_MenuPanelTasks[0].pos.x)    = -0xAA;
+    g_MenuPanelTasks[0].pos.y         = 0x3E;
+    g_MenuPanelTasks[0].unk_0A        = 0;
+    g_MenuPanelTasks[0].unk_0B        = 0;
+    g_MenuPanelTasks[0].unk_0C        = 0;
+    g_MenuPanelTasks[0].flags         = 0xFF;
+    g_MenuPanelTasks[0].unk_08        = 0;
+    g_MenuPanelTasks[0].unk_09        = 0;
+    g_MenuPanelTasks[0].u.grow.width  = 0;
+    g_MenuPanelTasks[0].u.grow.height = 0;
+
+    g_MenuPanelTasks[1].handler = 2;
+    g_MenuPanelTasks[1].mode    = 1;
+    g_MenuPanelTasks[1].state   = 0;
+    g_MenuPanelTasks[1].active  = 0;
+}

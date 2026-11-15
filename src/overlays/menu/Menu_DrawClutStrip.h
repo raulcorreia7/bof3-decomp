@@ -27,7 +27,7 @@ MATCH void Menu_DrawClutStrip(u8 clut_index) {
         entry = &g_MenuClutStripEntries[g_MenuClutStripPalettes[index]];
         for (pair = 0; pair < 2; pair++, x += 32) {
             y     = 0;
-            shade = 0x80;
+            shade = GFX_COLOR_NEUTRAL;
             do {
                 prim = (SPRT*)g_GfxPrimCursor;
                 SetSprt(prim);

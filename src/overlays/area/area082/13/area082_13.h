@@ -37,6 +37,9 @@ void func_801F5428(s32 arg0);
 
 extern Callback D_801F57D0[];
 
+/* Set while the ramp reaches its end colour. */
+extern u8 D_8014933A;
+
 extern u8 D_80145EED[3];
 
 /* func_801F393C */
