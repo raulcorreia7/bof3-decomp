@@ -826,7 +826,8 @@ void        func_8009CF80(u8* record, s32 index, s32 new_value);
 /* func_8009CFEC */
 void        Battle_MergeEnemyPanels(void);
 void        Battle_ApplyAbilityDamage(void);
-extern void func_8009DE18(void);
+/* func_8009DE18 */
+extern void Battle_ApplyHeal(void);
 void        func_8009DE8C(void);
 extern void func_8009E500(void);
 /* func_8009F320 */
@@ -836,7 +837,8 @@ extern void func_800A0378(void);
 s16         Battle_GetActionId(u8 unused, u8 battler_index, u16 base_value, u8 element_flag);
 s16         Battle_GetFireResistance(u8 battler_index, u16 element_mask);
 s16         func_800A2EF0(u8 battler_index, u16 element_mask);
-s32         func_800A30E8(u8 unused, u8 battler_index);
+/* func_800A30E8 */
+s32         Battle_CalcHeal(u8 unused, u8 battler_index);
 void        func_800A31E0(u8 selection_kind, u16 input_mask);
 bool        func_800A3638(s32 battler_index, s32 compare_value);
 u8          func_800A36BC(s32 battler_index, s32 compare_value);
