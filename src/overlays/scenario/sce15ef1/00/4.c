@@ -516,9 +516,101 @@ MATCH void func_801D23A0(void) {
     }
 }
 
-INCLUDE_ASM(func_801D2474);
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D2474(void) {
+    s32       pos[3];
+    DVECTOR   screen;
+    MATRIX    matrix;
+    SceneDot* dot;
+    u8        row;
+    u8        col;
+    u8        step;
 
-INCLUDE_ASM(func_801D26BC);
+    Area_SetCameraMatrix(&matrix);
+    pos[0] = ((Actor*)g_Task->unk_4C)->pos.x.fixed;
+    pos[1] = ((Actor*)g_Task->unk_4C)->pos.y.fixed;
+    pos[2] = ((Actor*)g_Task->unk_4C)->pos.z.fixed;
+    Area_ProjectPoint(pos, &screen);
+    for (row = (D_801D393C[D_801D40AC].h >> 1) * g_Task->timer; row < (D_801D393C[D_801D40AC].h >> 1) * (g_Task->timer + 1); row++) {
+        for (col = 0; col < D_801D393C[D_801D40AC].w; col++) {
+            if (*(u16*)D_801D40B0 != 0) {
+                dot        = (SceneDot*)D_801D40B4;
+                dot->color = *(u16*)D_801D40B0;
+                D_801D40A8 += 1;
+                dot->x     = screen.vx - D_801D393C[D_801D40AC].x + col;
+                D_801D40B4 = (u32)(dot + 1);
+                dot->y     = screen.vy - D_801D393C[D_801D40AC].y + row;
+            }
+            D_801D40B0 += 2;
+        }
+    }
+    step          = g_Task->timer + 1;
+    g_Task->timer = step;
+    if (step == 2) {
+        g_Task->header.mode += 1;
+    }
+}
+#else
+INCLUDE_ASM(func_801D2474);
+#endif
+
+MATCH void func_801D26BC(void) {
+    u8        order[16];
+    u16       i;
+    u16       j;
+    u8        a;
+    u8        b;
+    u8        tmp;
+    SceneDot* dot;
+
+    for (i = 0; i < 16; i++) {
+        order[i] = i & 1;
+    }
+
+    dot = MEM_PTR(SceneDot, AREA_WORK + 0x5A00);
+    j   = 0;
+    for (i = 0; i < D_801D40A8; i++) {
+        if ((i & 0xF) == 0) {
+            j = 0;
+            do {
+                a = rand() & 0xF;
+                j++;
+                b        = rand() & 0xF;
+                tmp      = order[b];
+                order[b] = order[a];
+                order[a] = tmp;
+            } while (j < 16);
+            j = 0;
+        }
+
+        dot->active = order[j++];
+        if (g_Task->param.unk_0B == 0) {
+            dot->dx = (rand() & 0x1F) - 16;
+            dot->dy = (rand() & 0x1F) - 16;
+        } else {
+            dot->dx = rand() & 0xF;
+            dot->dy = rand() & 0xF;
+            if (dot->dx < dot->dy) {
+                dot->dx ^= dot->dy;
+                dot->dy ^= dot->dx;
+                dot->dx ^= dot->dy;
+            }
+            dot->dy = -dot->dy;
+        }
+        if (g_Task->unk_06 == 0) {
+            dot->life = (rand() & 0x1E) + 10;
+            dot->x -= dot->dx * dot->life;
+            dot->y -= dot->dy * dot->life;
+        } else {
+            dot->life = 40 - (rand() & 0x1E);
+        }
+        dot++;
+    }
+
+    g_Task->timer = 80;
+    g_Task->header.mode++;
+    SND_PlayCue(0x20C);
+}
 
 MATCH void func_801D2934(void) {
     Actor*    actor;
@@ -600,6 +692,8 @@ MATCH void func_801D2C00(void) {
     }
 }
 
+/* Runs the actor's speed up over 20 steps, then reverses the accumulated speed
+ * and hands over to the next mode. */
 MATCH void func_801D2C94(void) {
     Actor* work;
     Actor* step;

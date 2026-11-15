@@ -42,8 +42,8 @@ MATCH void func_801D11DC(void) {
     if (D_801D1774 < 4U) {
         D_801D1774 += 1;
     }
-    UI_DrawWindow(0x14, (0x12 - (D_801D1774 * 0xC)) & 0xFFFE, 0x118, 0x13, 0xF2, g_WindowStyle);
-    UI_DrawWindowOutline(0x16, 0x14 - (D_801D1774 * 0xC), 0x113, 0xF, 0);
+    UI_DrawWindow(0x14, (0x12 - (D_801D1774 * 12)) & 0xFFFE, 0x118, 0x13, 0xF2, g_WindowStyle);
+    UI_DrawWindowOutline(0x16, 0x14 - (D_801D1774 * 12), 0x113, 0xF, 0);
     if (g_MenuPanelTasks[0].state == 0) {
         Menu_ResetPanelTasks();
         Message_StartAreaMessage(0x5F);
@@ -52,7 +52,52 @@ MATCH void func_801D11DC(void) {
     }
 }
 
-INCLUDE_ASM(func_801D12C8);
+MATCH void func_801D12C8(void) {
+    u8* record;
+    s32 i;
+    u8  flags;
+
+    if (D_801D1774 < 4U) {
+        D_801D1774 += 1;
+    }
+    UI_DrawWindow(0x14, (0x12 - (D_801D1774 * 12)) & 0xFFFE, 0x118, 0x13, 0xF2, g_WindowStyle);
+    UI_DrawWindowOutline(0x16, 0x14 - (D_801D1774 * 12), 0x113, 0xF, 0);
+    if (g_MenuPanelTasks[0].state != 0) {
+        return;
+    }
+
+    Menu_ResetPanelTasks();
+    switch (g_FairyJobs[g_SceneEventSelection].unk_03 & 0xF) {
+        case ITEM_CAT_ITEM:
+            flags = g_Items[g_FairyJobs[g_SceneEventSelection].record_state].flags;
+            break;
+        case ITEM_CAT_WEAPON:
+            flags = g_Weapons[g_FairyJobs[g_SceneEventSelection].record_state].header.flags;
+            break;
+        case ITEM_CAT_ARMOR:
+            flags = g_Armors[g_FairyJobs[g_SceneEventSelection].record_state].header.flags;
+            break;
+        default:
+            flags = g_Accessories[g_FairyJobs[g_SceneEventSelection].record_state].header.flags;
+            break;
+    }
+
+    /* Bit 3 is ITEM_TARGET_ALL on an item and an equipability flag on the other three tables. */
+    if (flags & 0x8) {
+        Message_StartAreaMessage(0xEB);
+        D_801F294D = 6;
+    } else {
+        record = Item_GetRecord(g_FairyJobs[g_SceneEventSelection].unk_03, g_FairyJobs[g_SceneEventSelection].record_state);
+        for (i = 0; i < ITEM_NAME_LENGTH; i++) {
+            g_TextVariables[0][i] = record[i];
+        }
+        g_TextVariables[0][ITEM_NAME_LENGTH] = 0;
+        Message_StartAreaMessage(0x61);
+        D_801D1774 = 0;
+        D_801F294D += 1;
+    }
+    g_GameStateIndex = GAME_REQUEST_MESSAGE;
+}
 
 MATCH void func_801D1568(void) {
     u8* selection;

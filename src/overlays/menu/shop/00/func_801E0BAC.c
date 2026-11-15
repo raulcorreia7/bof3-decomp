@@ -8,6 +8,8 @@ NON_MATCHING void func_801E0BAC(void) {
     u8* cursor_ptr;
     u8  new_scroll;
     u8  old;
+    u8  slot;
+    u8  swapped;
 
     D_80148624 = 1;
     D_80148628 = (s16)D_801483C4;
@@ -58,34 +60,36 @@ NON_MATCHING void func_801E0BAC(void) {
         }
     }
     cursor_ptr = &D_801483CB;
-    if (old != *cursor_ptr) {
+    if (old != cursor_ptr[0]) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
     if (D_801483CD == 0) {
-        if (g_InputMasks[MENU_INPUT_CONFIRM] & g_InputPressed) {
-            if (D_801483CC == GAME_NONE) {
-                if (D_8014546C[D_801483CB] != 0) {
+        if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+            if (cursor_ptr[1] == GAME_NONE) {
+                if (D_8014546C[cursor_ptr[0]] != 0) {
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
-                    D_801483CC = (u8)D_801483CB;
+                    cursor_ptr[1] = cursor_ptr[0];
                     return;
                 }
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
                 return;
             }
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
-            D_8014546C[D_801483CC] = D_8014546C[D_801483CB];
-            D_8014546C[D_801483CB] = D_8014546C[D_801483CC];
-            D_801483CC             = 0xFFU;
+            slot                      = D_8014546C[cursor_ptr[0]];
+            swapped                   = D_8014546C[cursor_ptr[1]];
+            D_8014546C[cursor_ptr[1]] = slot;
+            D_8014546C[cursor_ptr[0]] = swapped;
+            cursor_ptr[1]             = 0xFFU;
             return;
         }
-        if (g_InputMasks[MENU_INPUT_CANCEL] & g_InputPressed) {
+        if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
-            if (D_801483CC == GAME_NONE) {
+            if (cursor_ptr[1] == GAME_NONE) {
                 D_801483EF = 0xFF;
                 g_MenuStep.state -= 1;
                 return;
             }
-            D_801483CC = 0xFF;
+            cursor_ptr[1] = 0xFF;
         }
     }
 }

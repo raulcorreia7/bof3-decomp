@@ -27,7 +27,7 @@ segments:
       - [0x514, c, func_800C1D14]
       - [0x568, c, func_800C1D68]
       - [0x570, c, Boss_InstallBattleHooks]
-      - [0x5A8, c, Boss_HandleBattleEvent]
+      - [0x5A8, c, Boss_RunBattleEvent]
       - [0x5B0, c, Boss_ChooseBattleEnding]
       - [0x624, c, Boss_EndBattle]
       - [0x62C, c, func_800C1E2C]

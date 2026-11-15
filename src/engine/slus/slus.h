@@ -262,7 +262,7 @@ typedef struct SoundSequence {
     u8  pad_84[0x28]; /* +0x84 */
 } SoundSequence;
 
-/* Stack snapshots of the fixed dispatch tables the step handlers copy to the frame and index: Message_DispatchState/func_801510DC copy the eight-entry tables at g_MessageStates/D_80149A7C, func_80151538/Message_DispatchChoiceMode the six-entry tables at D_80149A9C/g_MessageChoiceModes, func_8015196C/func_80151A98 build the two-entry tables on the stack, and g_MessageSteps is the sixteen-entry handler table Message_DispatchTableStep copies. */
+/* Stack snapshots of the fixed dispatch tables the step handlers copy to the frame and index: Message_DispatchState/func_801510DC copy the eight-entry tables at g_MessageStates/D_80149A7C, func_80151538/Message_DispatchChoiceMode the six-entry tables at D_80149A9C/g_MessageChoiceModes, func_8015196C/func_80151A98 build the two-entry tables on the stack, and g_MessageSteps is the sixteen-entry handler table Message_DispatchStep copies. */
 typedef struct {
     Callback handlers[8];
 } Table8;
@@ -636,7 +636,7 @@ extern const Table6                D_80149A9C;
 /* D_80149AB4 */
 extern const Table6                g_MessageChoiceModes;
 /* The 16-entry handler table (code addresses 0x80152370..0x801526C8, the step
- * handlers that follow Message_DispatchTableStep): the shared step byte's indices at and
+ * handlers that follow Message_DispatchStep): the shared step byte's indices at and
  * above 0x80 dispatch through it. */
 /* D_80149ACC */
 extern const HandlerTable          g_MessageSteps;
@@ -1094,7 +1094,7 @@ void                    func_80151D3C(void);
 void                    func_80151D8C(void);
 void                    func_80151DCC(void);
 void                    UI_DrawGlyph(s32 color, u8* text);
-void                    Message_DispatchTableStep(void);
+void                    Message_DispatchStep(void);
 void                    func_80152370(void);
 void                    func_801523D0(void);
 void                    func_80152420(void);
@@ -1254,7 +1254,7 @@ void SYS_ResetDisplayFrame(u8* work);
 
 void Actor_ReadValue(void);
 
-s32 SYS_LoadExec(const char* path);
+s32 SYS_LoadExe(const char* path);
 
 void GFX_UploadPalette(void);
 

@@ -16,18 +16,18 @@ typedef struct BattleBlock {
  */
 #ifdef NON_MATCHING
 NON_MATCHING void func_800A1D84(void) {
-    s32          record_index;
-    s32          row_offset;
-    u8           i;
-    u8           row_index;
-    volatile u8* active;
-    u8*          cell;
-    u8*          dest;
-    u8*          src;
-    u8*          dst;
-    u8           timer;
+    s32 record_index;
+    s32 row_offset;
+    u8  i;
+    u32 row_index;
+    u8* active;
+    u8* cell;
+    u8* src;
+    u8* dst;
+    u8* dest;
+    u8  timer;
 
-    active    = &g_Battle.target;
+    active    = (u8*)&g_Battle.target;
     row_index = *active;
     if (row_index < BATTLE_ACTIVE_ROW_COUNT) {
         row_offset   = row_index * BATTLE_PARTY_STRIDE;
@@ -42,17 +42,17 @@ NON_MATCHING void func_800A1D84(void) {
         i = 0;
         if (g_Battle.party_count != 0) {
             do {
-                cell       = &g_Characters[g_Game.members[i].character_index];
                 dest       = i * BATTLE_PARTY_STRIDE + D_80145F04;
+                cell       = &g_Characters[g_Game.members[i].character_index];
                 dest[0x0E] = cell[0x0E];
                 dest[0x0F] = cell[0x0F];
                 dest[0x10] = cell[0x10];
                 dest[0x11] = cell[0x11];
                 dest[0x12] = cell[0x12];
                 i += 1;
-                dest[0x13]                   = cell[0x13];
-                *(BattleBlock*)(dest + 0x3C) = *(BattleBlock*)(cell + 0x1C);
-                *(BattleBlock*)(dest + 0x4C) = *(BattleBlock*)(cell + 0x2C);
+                dest[0x13] = cell[0x13];
+                memcpy(dest + 0x3C, cell + 0x1C, 16);
+                memcpy(dest + 0x4C, cell + 0x2C, 16);
             } while ((u32)(i & BYTE_MASK) < (u8)g_Battle.party_count);
         }
         i = 0;

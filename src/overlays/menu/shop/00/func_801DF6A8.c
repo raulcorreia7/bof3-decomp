@@ -1,19 +1,18 @@
 #include "shop_00.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801DF6A8(void) {
+MATCH void func_801DF6A8(void) {
     u8* cell;
     u8  count;
     u8  record;
+    u8  slot;
     u16 x;
     u16 y;
-    s32 slot;
 
+    slot = 0;
     Menu_DrawClutStrip(D_80144953);
     count = Party_CountOrder(PARTY_ORDER_FIELD);
     MENU_DRAW_HEADER();
     if (count != 0) {
-        slot = 0;
         do {
             record = g_CharSlot[g_PartyFieldOrder[slot]];
             Menu_DrawCharacterWindow(0x11, (slot * 0x36 + 0x3E) & 0xFFFE, record, (g_Characters[record].unk_07 >> 1) & 1, 0);
@@ -24,7 +23,7 @@ NON_MATCHING void func_801DF6A8(void) {
     }
     func_801DF00C(0x96, 0x3B);
     if (D_8014865A != 0x7F) {
-        cell = &D_801E5BC8[D_8014865A * 6 + (s8)D_8014865D * 0xC];
+        cell = &D_801E5BC8[(s8)D_8014865D * 0xC] + D_8014865A * 6;
         if (cell[4] != 0) {
             x = 0x7E;
             y = 0x30;
@@ -32,9 +31,9 @@ NON_MATCHING void func_801DF6A8(void) {
             x = 0x80;
             y = 0x34;
         }
-        Menu_DrawCursorFrame(FIELD(u16, cell, 0), FIELD(u16, cell, 2), x, y, 0, 6);
+        Menu_DrawCursorFrame(MEM(u16, cell), MEM(u16, cell + 2), x, y, 0, 6);
     }
-    cell = &D_801E5BC8[D_80148658 * 6 + D_80148659 * 0xC];
+    cell = &D_801E5BC8[D_80148659 * 0xC] + D_80148658 * 6;
     if (cell[4] != 0) {
         x = 0x7E;
         y = 0x30;
@@ -42,8 +41,5 @@ NON_MATCHING void func_801DF6A8(void) {
         x = 0x80;
         y = 0x34;
     }
-    Menu_DrawCursorFrame(FIELD(u16, cell, 0), FIELD(u16, cell, 2), x, y, 1, 6);
+    Menu_DrawCursorFrame(MEM(u16, cell), MEM(u16, cell + 2), x, y, 1, 6);
 }
-#else
-INCLUDE_ASM(func_801DF6A8);
-#endif

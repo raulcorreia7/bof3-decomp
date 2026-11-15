@@ -25,11 +25,11 @@ segments:
       - [0x1E4, c, func_800C19E4]
       - [0x1EC, c, func_800C19EC]
       - [0x1F4, c, Boss_InstallBattleHooks]
-      - [0x22C, c, Boss_HandleBattleEvent]
+      - [0x22C, c, Boss_RunBattleEvent]
       - [0x234, c, Boss_ChooseBattleEnding]
       - [0x280, c, Boss_EndBattle]
       - [0x288, c, Boss_InstallBattleHooks2]
-      - [0x2C0, c, Boss_HandleBattleEvent2]
+      - [0x2C0, c, Boss_RunBattleEvent2]
       - [0x2C8, c, Boss_ChooseBattleEnding2]
       - [0x314, c, Boss_EndBattle2]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.

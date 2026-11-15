@@ -5,7 +5,8 @@
  * cursor sits at (D_801ED7E0, D_801ED7E4). */
 #ifdef NON_MATCHING
 NON_MATCHING void Menu_DrawNameEntryGrid(u8 page, s32 grid_x, s32 grid_y) {
-    /* 87.1%; regalloc: retail moves grid_y to v0 before the label copy, ours keeps it in a2. */
+    /* Near match: same 189 instructions and frame; retail's prologue saves and parameter copies are
+     * ordered s0 pair, s7 pair, ours s7 pair, grid_y copy, s0 pair (scheduler tie). */
     NameEntryLabels labels;
     u16             base_y;
     s16             x;
@@ -15,13 +16,12 @@ NON_MATCHING void Menu_DrawNameEntryGrid(u8 page, s32 grid_x, s32 grid_y) {
     u8*             cell;
     u16             cursor_x;
 
+    memcpy(&labels, &D_801D0F00, sizeof(labels));
     base_y = grid_y;
-    y      = base_y + 6;
-    row    = 0;
-    labels = D_801D0F00;
     UI_DrawWindow(grid_x & HALF_MASK, base_y, 272, 123, 0, g_WindowStyle);
     cell = D_801ECDBC + (page & BYTE_MASK) * 0x60;
-    for (; row < 8; row++) {
+    y    = base_y + 6;
+    for (row = 0; row < 8; row++) {
         x = grid_x + 4;
         for (col = 0; col < 12; col++) {
             if (col == 10 && row >= 3) {
@@ -42,12 +42,16 @@ NON_MATCHING void Menu_DrawNameEntryGrid(u8 page, s32 grid_x, s32 grid_y) {
             } else if (col != 11 || row < 3) {
                 UI_DrawText(x, y, 0, 1, cell);
             }
-            x += (col == 4 || col == 9) ? 0x1C : 0x14;
+            if (col == 4 || col == 9) {
+                x += 0x1C;
+            } else {
+                x += 0x14;
+            }
             cell++;
         }
         y += 0xE;
     }
-    x = grid_x + 6 + D_801ED7E0 * 0x14;
+    x = (s16)(grid_x + 6) + D_801ED7E0 * 0x14;
     y = base_y + 8 + D_801ED7E4 * 0xE;
     if (D_801ED7E0 >= 5) {
         x += 8;

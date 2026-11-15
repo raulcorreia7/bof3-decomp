@@ -149,7 +149,41 @@ MATCH void func_801EF118(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF3CC);
+MATCH void func_801EF3CC(void) {
+    s32 vec[4];
+    s32 x;
+    s32 y;
+    s32 z;
+    s32 diff;
+    u8  count;
+
+    count = g_Task->unk_09;
+    if (count != 0) {
+        g_Task->unk_09 = count - 1;
+        Actor_StepAnimLoop();
+    }
+    x              = g_Task->unk_0C;
+    y              = g_Task->unk_10;
+    z              = g_Task->unk_14;
+    vec[0]         = (x >> 9) - AREA_CELL_ORIGIN;
+    vec[1]         = (y >> 9) - AREA_CELL_ORIGIN;
+    vec[2]         = ((z >> 16) + 0xC0) >> 1;
+    g_Task->unk_1C = g_Task->unk_18;
+    g_Task->unk_18 = ratan2(x - g_Task->pos.x.fixed, y - g_Task->pos.y.fixed);
+    func_800AF3A0(vec[0], vec[1], vec[2], vec[3], 0x40);
+    if (func_800AF720(x, y, 0x8000) != 0) {
+        g_Task->header.step += 1;
+    } else {
+        diff           = (g_Task->unk_1C & ANGLE_MASK) - (g_Task->unk_18 & ANGLE_MASK);
+        g_Task->unk_1C = diff;
+        if (diff < 0) {
+            g_Task->unk_1C = ~diff + 1;
+        }
+        if ((u32)(g_Task->unk_1C - 0x601) < 0x3FF) {
+            g_Task->header.step += 1;
+        }
+    }
+}
 
 MATCH void func_801EF530(void) {
     PartyMember* work = g_Task;

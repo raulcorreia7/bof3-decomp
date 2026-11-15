@@ -512,26 +512,20 @@ INCLUDE_ASM(func_801F8B10);
 
 MATCH void func_801F8EF0(void) {
     TILE* prim;
-    u8    len;
-    u8    code;
     s16   width;
     s16   height;
 
-    len    = 3;
-    code   = 0x60;
     width  = 320;
     height = 30;
     prim   = (TILE*)g_GfxPrimCursor;
-    setlen(prim, len);
-    setcode(prim, code);
+    setTile(prim);
     setRGB0(prim, 0, 0, 0);
     setXY0(prim, 0, 0);
     setWH(prim, width, height);
     GFX_AddPrim(1, sizeof(TILE));
 
     prim = (TILE*)g_GfxPrimCursor;
-    setlen(prim, len);
-    setcode(prim, code);
+    setTile(prim);
     setRGB0(prim, 0, 0, 0);
     setXY0(prim, 0, 0xD2);
     setWH(prim, width, height);

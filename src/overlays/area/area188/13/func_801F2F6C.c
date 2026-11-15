@@ -1,3 +1,5 @@
 #include "area188_13.h"
 
-INCLUDE_ASM(func_801F2F6C);
+MATCH void func_801F2F6C(void) {
+    Area_DrawFadeQuad();
+}

@@ -19,7 +19,7 @@ segments:
       - [0xF8, c, func_800C18F8]
       - [0x100, c, func_800C1900]
       - [0x108, c, Boss_InstallBattleHooks]
-      - [0x140, c, Boss_HandleBattleEvent]
+      - [0x140, c, Boss_RunBattleEvent]
       - [0x148, c, Boss_ChooseBattleEnding]
       - [0x1A0, c, Boss_EndBattle]
       - [0x1A8, c, func_800C19A8]

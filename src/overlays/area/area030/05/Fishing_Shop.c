@@ -138,16 +138,16 @@ MATCH void Fishing_ShopChooseQuantity(void) {
 
     s0 = 0;
     switch (INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL) & HALF_MASK) {
-        case 0x2000:
+        case PADLright:
             s0 = 1;
             break;
-        case 0x1000:
+        case PADLup:
             s0 = 10;
             break;
-        case 0x8000:
+        case PADLleft:
             s0 = -1;
             break;
-        case 0x4000:
+        case PADLdown:
             s0 = -10;
             break;
     }

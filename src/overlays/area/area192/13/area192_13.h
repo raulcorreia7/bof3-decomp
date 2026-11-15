@@ -12,8 +12,15 @@ extern u8  D_801F380D[];
 extern u8  D_801F3890[];
 /* The neighbour tables the cell lookup reads. */
 extern u8  D_801F38C0[];
-/* The area counter the selection pass reads. */
+/* The area counter and the area flag store the selection pass reads. */
 extern u8  D_80144F56;
+extern u8  D_80144EF8[];
+/* The five character ids, the per-area row offsets and the two result rows
+ * func_801F326C picks between. */
+extern u8  D_801F3878[];
+extern u8  D_801F3880[];
+extern u8  D_801F3818[];
+extern u8  D_801F3848[];
 /* The spawn-row table the selection pass walks, one row set per mode. */
 extern u8* D_801F3A08[];
 

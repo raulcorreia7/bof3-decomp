@@ -18,6 +18,8 @@ extern u8    D_801F4654[];
 extern u16   D_801F5384[];
 extern u16   D_801F5390[];
 extern u16   D_801F539C[];
+extern s32   D_801F53A0;
+extern s32   D_801F53A4;
 
 s32 func_8015CC00(s32 id, s32 step, s32 selection, s32 x, s32 y, s32 z);
 

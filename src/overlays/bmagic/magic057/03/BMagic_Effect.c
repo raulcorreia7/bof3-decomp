@@ -51,7 +51,30 @@ MATCH void func_801EEE50(void) {
     g_Task->timer = 0;
 }
 
-INCLUDE_ASM(func_801EEEB0);
+MATCH void func_801EEEB0(void) {
+    PartyMember* battler;
+    s32          z;
+    u32          slot;
+
+    if (g_FrameCount & 1) {
+        if (g_Task->unk_09 < 0x20) {
+            slot = Battle_AllocEffect(1, 0x41) & BYTE_MASK;
+            if (slot != 0xFF) {
+                g_BattleEffects[slot].header.mode  = 0;
+                g_BattleEffects[slot].header.step  = 0;
+                battler                            = g_BattleEffectBattler;
+                g_BattleEffects[slot].pos.x.fixed  = battler->pos.x.fixed;
+                g_BattleEffects[slot].pos.y.fixed  = battler->pos.y.fixed;
+                z                                  = battler->pos.z.fixed;
+                g_BattleEffects[slot].target.party = g_Task;
+                g_BattleEffects[slot].pos.z.fixed  = z;
+                g_Task->unk_09 += 1;
+            }
+        } else {
+            g_Task->header.step += 1;
+        }
+    }
+}
 
 MATCH void func_801EEFA4(void) {
     if (g_Task->unk_09 == g_Task->timer) {
@@ -88,9 +111,77 @@ MATCH void func_801EF08C(void) {
     g_Scripts = AREA_SCRIPT_TABLE;
 }
 
-INCLUDE_ASM(func_801EF134);
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF134(void) {
+    PartyMember* work;
+    s32          dx;
+    s32          dy;
 
+    if (g_Task->facing & 1) {
+        dx = (RANDOM_MOD(6) << 16) + 0x20000;
+    } else {
+        dx = (RANDOM_MOD(6) << 16) - 0x30000;
+    }
+    work              = g_Task;
+    work->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + dx;
+
+    if (g_Task->facing & 1) {
+        dy = (RANDOM_MOD(6) << 16) + 0x30000;
+    } else {
+        dy = (RANDOM_MOD(6) << 16) + 0x20000;
+    }
+    work              = g_Task;
+    work->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + dy;
+
+    g_Task->unk_14             = -0x20;
+    g_Task->unk_20             = -1;
+    g_Task->unk_25             = 0x1D;
+    g_Task->pos.z.part.integer = (u16)g_Task->pos.z.part.integer + 0x600;
+    g_Task->unk_26             = 0;
+    g_Task->unk_48             = 1;
+    g_Task->unk_27             = 0xA0;
+    g_Task->unk_28             = 0;
+    g_Task->unk_24             = 4;
+    g_Task->unk_5D             = 0;
+    g_Task->unk_5E             = 0;
+    g_Task->unk_5F             = 0;
+    g_Task->unk_5C             = 0;
+    g_Task->unk_2A             = 0;
+    g_Task->unk_29             = 4;
+    g_Task->unk_2C.half        = 0;
+    Actor_SelectScript(0);
+    g_Task->unk_09 = 3;
+    g_Task->header.step += 1;
+}
+#else
+INCLUDE_ASM(func_801EF134);
+#endif
+
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF3C4(void) {
+    s32 offset;
+    u8  count;
+
+    g_Task->pos.z.part.integer = (u16)g_Task->pos.z.part.integer + g_Task->unk_14;
+    g_Task->unk_14             = g_Task->unk_14 + g_Task->unk_20;
+    Actor_StepAnimLoop();
+    if (g_Task->pos.z.part.integer < Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed)) {
+        offset                     = (RANDOM_MOD(6) << 16) + 0x20000;
+        g_Task->pos.x.fixed        = g_BattleEffectBattler->pos.x.fixed + offset;
+        offset                     = (RANDOM_MOD(6) << 16) - 0x30000;
+        g_Task->pos.y.fixed        = g_BattleEffectBattler->pos.y.fixed + offset;
+        g_Task->unk_14             = -0x20;
+        count                      = g_Task->unk_09 - 1;
+        g_Task->unk_09             = count;
+        g_Task->pos.z.part.integer = (u16)g_Task->pos.z.part.integer + 0x600;
+        if (count == 0) {
+            g_Task->header.step += 1;
+        }
+    }
+}
+#else
 INCLUDE_ASM(func_801EF3C4);
+#endif
 
 MATCH void func_801EF528(void) {
     PartyMember* work;

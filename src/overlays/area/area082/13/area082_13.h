@@ -13,9 +13,20 @@
 #define SCRATCH_COLUMN_STRIDE 0x14
 #define SCRATCH_COLUMN_COUNT  0x80
 
-extern SVECTOR  D_1F800014[];
-extern u8       D_801F5734[];
-extern Callback D_801F576C[];
+extern SVECTOR D_1F800014[];
+extern u8      D_801F5734[];
+
+/* One ring point: the x and y byte offsets from the effect origin. */
+typedef struct RingOffset {
+    s8 x;
+    s8 y;
+} RingOffset;
+
+ASSERT_SIZE(RingOffset, 0x02);
+ASSERT_OFFSET(RingOffset, y, 0x01);
+
+extern RingOffset D_801F5764[];
+extern Callback   D_801F576C[];
 
 void func_801F3500(void);
 u8   Area_StepSparks(void);

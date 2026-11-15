@@ -21,6 +21,15 @@ typedef struct CommuCellFrame {
 ASSERT_OFFSET(CommuCellFrame, points, 0x00);
 ASSERT_SIZE(CommuCellFrame, 0xC);
 
+typedef struct CommuSelectionPair {
+    u8 count;
+    u8 value;
+} CommuSelectionPair;
+
+ASSERT_OFFSET(CommuSelectionPair, count, 0x0);
+ASSERT_OFFSET(CommuSelectionPair, value, 0x1);
+ASSERT_SIZE(CommuSelectionPair, 0x2);
+
 extern u8             D_801455C9[];
 extern s8             D_801455C2;
 extern u16            D_80010000[];
@@ -29,12 +38,9 @@ extern char           D_801D0C10[];
 extern char           D_801D0C14[];
 extern u16            D_801D0C18[9];
 extern u16            D_801D4BB0[];
-extern u16            D_801D4BB8[10];
-extern u8             D_801D4C04[12];
-extern u16            D_801D4C10[4];
-extern u8             D_801D4C18[12][2];
 /* g_EmiOverlayHeader */
 extern OverlayHeader  g_EmiOverlayHeader;
+extern u16            D_801D4BB8[10];
 /* D_801D4BCC */
 extern Callback       g_Commu01States[COMMU01_STEP_COUNT];
 /* D_801D4BD8 */
@@ -42,6 +48,9 @@ extern Callback       g_Commu01Step2Funcs[COMMU01_STEP2_COUNT];
 extern Callback       D_801D4BE4[];
 /* D_801D4BEC */
 extern Callback       g_Commu01Step2Sub1Funcs[COMMU01_STEP2_SUB1_COUNT];
+extern u8             D_801D4C04[12];
+extern u16            D_801D4C10[4];
+extern u8             D_801D4C18[12][2];
 extern CommuCellFrame D_801D4C44[COMMU_CELL_FRAME_COUNT];
 extern u8             D_801D4CD4[];
 extern u8             D_801D4CE0[];

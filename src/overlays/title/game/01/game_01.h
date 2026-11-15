@@ -48,7 +48,7 @@ void Game_StartSelectedGame(void);
 void UI_WaitTitleInput(void);
 void UI_UpdateChoicePrompt(void);
 void Game_LeaveTitle(void);
-void UI_HandleStartButton(void);
+void UI_UpdateStartButton(void);
 void SND_StartSelectionEffect(void);
 void SND_StopSelectionEffect(void);
 void UI_DrawChoicePrompt(void);
