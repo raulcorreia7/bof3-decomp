@@ -37,12 +37,12 @@ MATCH void func_801FB6C4(void) {
         case 15:
             Message_StartAreaMessage(115);
             g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-            g_SceneState.step_05 = 0x10;
+            g_SceneState.step_05 = 16;
             break;
         case 16:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 func_801FCD14(145);
-                g_SceneState.step_05 = 0x11;
+                g_SceneState.step_05 = 17;
                 g_ScriptVars[0]      = 0x19;
             }
             break;
