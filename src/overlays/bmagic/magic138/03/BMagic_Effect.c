@@ -6,7 +6,31 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
-INCLUDE_ASM(func_801EEC88);
+MATCH void func_801EEC88(void) {
+    PartyMember* work;
+    PartyMember* saved;
+    u16*         src;
+    u16*         dst;
+    u8           i;
+
+    work              = g_Task;
+    work->unk_2E.half = 0xF0;
+    work->unk_30.half = 0xFA;
+    i                 = 0;
+    dst               = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src               = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    for (; i < 16; i++) {
+        dst[i] = src[i];
+    }
+    g_GfxPalettePending  = 1;
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0;
+    saved                = g_Task;
+    TASK_SET(g_BattleEffectBattler);
+    Actor_StepAnimLoop();
+    TASK_SET(saved);
+    saved->header.mode += 1;
+}
 
 MATCH void func_801EED60(void) {
     PartyMember* saved;
