@@ -1,27 +1,27 @@
 #include "area030_04.h"
 
-/* Seeds the AREA030 battle-intro scratch record: it captures the
- * world anchor pair, samples the ground height at it, with Area_SampleHeight, scales the
- * entry's height byte into the record's clip value, clamps the height plus 0x100,
- * and primes the table pointers and draw state for the next frame. */
+/* Starts the lure cast and positions the camera over its travel height. */
 /* func_801D210C */
 #ifdef NON_MATCHING
 NON_MATCHING void Fishing_LureCast(void) {
-    s32 value;
-    u32 index;
+    FishingState* work;
+    s32           value;
+    s32           index;
 
-    FISHING_STATE->motion_34.unk_34      = D_80145EC4;
-    FISHING_STATE->y_38.pos_y            = D_80145EC8 - COORD_HALF;
-    FISHING_STATE->bounce_3C.half.key_3E = (s16)(Area_SampleHeight(FISHING_STATE->motion_34.unk_34, D_80145EC8 - COORD_HALF) + 0x100);
+    work                   = FISHING_STATE;
+    work->motion_34.unk_34 = D_80145EC4;
+    FAKE_BARRIER();
+    work->y_38.pos_y                     = D_80145EC8 - COORD_HALF;
+    FISHING_STATE->bounce_3C.half.key_3E = (s16)(Area_SampleHeight(work->motion_34.unk_34, work->y_38.pos_y) + 0x100);
 
     value                       = g_FishingRodRow->max_distance_02 * D_801440BC / 255 + 8;
+    FISHING_STATE->cursor_10    = value;
     FISHING_STATE->cue_index_06 = (u8)(value / 15);
     if (FISHING_STATE->cue_index_06 >= 4) {
         FISHING_STATE->cue_index_06 = 3;
     }
-    FISHING_STATE->cursor_10 = value;
-
-    value                    = FISHING_STATE->y_38.pos_y - (FISHING_STATE->cursor_10 << 15);
+    value = FISHING_STATE->y_38.pos_y;
+    value -= FISHING_STATE->cursor_10 << 15;
     FISHING_STATE->cursor_10 = value;
     if (value >= FISHING_CAMERA_Y_MAX) {
         g_AreaScrollTargetY = FISHING_CAMERA_Y_MAX;
@@ -34,8 +34,8 @@ NON_MATCHING void Fishing_LureCast(void) {
     g_AreaCameraStep              = 0;
     TASK_BYTES[0xC]               = 0;
     FISHING_STATE->step_14        = *(u32*)(D_801E1D38 + FISHING_STATE->cue_index_06 * 8);
-    FISHING_STATE->active_flags   = 0;
     FISHING_STATE->step_limit_20  = *(u32*)(D_801E1D3C + FISHING_STATE->cue_index_06 * 8);
+    FISHING_STATE->active_flags   = 0;
     FISHING_STATE->state_29       = 5;
     FISHING_STATE->counter_48     = 1;
     FISHING_STATE->flags          = (u8)(FISHING_STATE->flags & ~ACTOR_FLAG_SEMI_TRANSPARENT);
@@ -52,7 +52,7 @@ NON_MATCHING void Fishing_LureCast(void) {
 
     Area_SelectSceneRecord(g_FishingLureRow->unk_0C);
     Actor_SelectScript(1);
-    index = (u32)Actor_FindFreeSpawned() & BYTE_MASK;
+    index = Actor_FindFreeSpawned() & BYTE_MASK;
     if (index != GAME_NONE) {
         g_SpawnedActors[index].header.flags = 1;
         g_SpawnedActors[index].type         = 10;

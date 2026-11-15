@@ -4,27 +4,27 @@
  * adds delta to level and returns bit 15 of the sum (the fade ran past 0 or 0x7FFF).
  */
 MATCH s32 GFX_UpdateScreenFade(u16* level, s32 delta, char semi_trans, u32 order, u8 blend_mode) {
-    u8* sprite;
-    u16 tpage;
-    u8  shade;
-    u32 mask;
-    s32 sum;
+    TILE* sprite;
+    u16   tpage;
+    u8    shade;
+    u32   mask;
+    s32   sum;
 
     tpage = GetTPage(1, blend_mode, 320, 0);
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, (RECT*)0);
     GFX_AddPrim(order & BYTE_MASK, sizeof(DR_MODE));
-    sprite = g_GfxPrimCursor;
-    SetTile((TILE*)sprite);
-    mask                  = semi_trans & BYTE_MASK;
-    shade                 = (*level >> 7);
-    *(s16*)(sprite + 0xC) = 0x140;
-    *(s16*)(sprite + 0x8) = 0;
-    *(s16*)(sprite + 0xA) = 0;
-    *(s16*)(sprite + 0xE) = 0xF0;
-    sprite[0x6]           = shade;
-    sprite[0x5]           = shade;
-    sprite[0x4]           = shade;
+    sprite = (TILE*)g_GfxPrimCursor;
+    SetTile(sprite);
+    mask       = semi_trans & BYTE_MASK;
+    shade      = (*level >> 7);
+    sprite->w  = 320;
+    sprite->x0 = 0;
+    sprite->y0 = 0;
+    sprite->h  = 240;
+    sprite->b0 = shade;
+    sprite->g0 = shade;
+    sprite->r0 = shade;
     SetSemiTrans(sprite, mask);
     GFX_AddPrim(order & BYTE_MASK, sizeof(TILE));
     sum = *level + delta;

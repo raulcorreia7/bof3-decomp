@@ -36,7 +36,7 @@ NON_MATCHING void Battle_SetPartyCount(s32 x, s32 y) {
     Battle_DrawWindowTile(var_s0, (s16)(y + 2), (g_Battle.party_count + 0xD) & BYTE_MASK, 1U);
     var_s4     = x;
     var_s5     = 0;
-    temp_v0_81 = *(((g_WindowStyle << 6) | 0x20) + &D_80033A08);
+    temp_v0_81 = D_80033A08[((g_WindowStyle << 6) | 0x20) >> 1];
     var_s6     = y;
     temp_v0_85 = temp_v0_81 & HALF_MASK;
     if (g_Battle.party_count != 0) {
