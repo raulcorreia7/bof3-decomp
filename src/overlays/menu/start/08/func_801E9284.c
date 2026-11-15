@@ -4,7 +4,7 @@ MATCH void func_801E9284(void) {
     MenuPanelTask* task;
 
     task = g_MenuCurrentPanel;
-    task->pos.x -= 32;
+    task->pos.x -= MENU_PANEL_STEP_X;
     if ((s16)task->pos.x < -0x64) {
         LOH(task->pos.x) = -0x64;
         task->state      = 0;
