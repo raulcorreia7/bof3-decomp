@@ -15,7 +15,7 @@ NON_MATCHING void func_801F45A8(void) {
     table_row = &D_801F58A0[D_801F58C9 * 15];
     column    = (u16)((u32)timer % 15U);
     if (table_row[column] != 0) {
-        SND_PlayCue(0x202);
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
         D_801F58CC -= rand() % 2 + 4;
         g_SpawnedActors[D_801F58CE[0]].scene_step -= 1;
         actor = &g_Actors[D_801F58D0];
