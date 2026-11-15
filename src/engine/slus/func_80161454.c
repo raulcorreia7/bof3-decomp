@@ -21,7 +21,7 @@ NON_MATCHING void func_80161454(u32 index) {
     s32    q;
     s32    tmp2;
     s32    tmp3;
-    u8    tmp4;
+    u8     tmp4;
     u8     val4;
     s32    val5;
     s32    val6;
@@ -44,7 +44,7 @@ NON_MATCHING void func_80161454(u32 index) {
         val1 = val0;
         if (g_SndMono == 0) {
             tmp1 = (s16)work->screen_x;
-            pan = (tmp1 + 40) / 4;
+            pan  = (tmp1 + 40) / 4;
             if (tmp1 < -40) {
                 pan = 0;
             }
@@ -92,7 +92,7 @@ NON_MATCHING void func_80161454(u32 index) {
         return;
     }
     do {
-        q = ((s32)g_Task->state_70.word >> val4) & 0x1F;
+        q    = ((s32)g_Task->state_70.word >> val4) & 0x1F;
         tmp4 = q;
         if (q != 0x1F) {
             val8 = 1 << tmp4;
