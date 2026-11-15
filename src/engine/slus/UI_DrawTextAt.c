@@ -16,9 +16,9 @@ NON_MATCHING u8* UI_DrawTextAt(s32 x, s32 y, u8* text) {
     s32 left;
     s32 row;
 
-    p     = text;
-    left  = x;
-    row   = y;
+    p      = text;
+    left   = x;
+    row    = y;
     flags  = 0;
     saved  = NULL;
     count  = 0;
@@ -43,12 +43,12 @@ NON_MATCHING u8* UI_DrawTextAt(s32 x, s32 y, u8* text) {
                 p++;
                 saved = p;
                 count = 32;
-                p  = (u8*)&D_801490D7 + (*p << 5);
+                p     = (u8*)&D_801490D7 + (*p << 5);
                 break;
             case STRING_GOTO:
                 flags |= 1;
                 saved = p;
-                p  = (u8*)&g_Game + 0x73;
+                p     = (u8*)&g_Game + 0x73;
                 count = 5;
                 break;
             case STRING_INSERT:
@@ -56,13 +56,12 @@ NON_MATCHING u8* UI_DrawTextAt(s32 x, s32 y, u8* text) {
                 p++;
                 saved = p;
                 count = 5;
-                p  = (u8*)&D_80144967 + *p * PARTY_RECORD_STRIDE;
+                p     = (u8*)&D_80144967 + *p * PARTY_RECORD_STRIDE;
                 break;
             case STRING_COLOR:
                 p++;
                 color = *p;
-                p++;
-                continue;
+                break;
             case STRING_NOCOLOR:
                 color = 0;
                 break;
@@ -75,7 +74,7 @@ NON_MATCHING u8* UI_DrawTextAt(s32 x, s32 y, u8* text) {
                     u8 index;
 
                     index = *p;
-                    p  = (u8*)(D_80010004 + SLUS_LOAD_ADDRESS);
+                    p     = (u8*)(D_80010004 + SLUS_LOAD_ADDRESS);
                     p += *(u16*)((index << 1) + (u32)p);
                 }
                 break;
