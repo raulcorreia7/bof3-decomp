@@ -3,7 +3,6 @@
 MATCH void func_801F529C(void) {
     u8*  game_state;
     u8*  selection;
-    u8*  flags;
     u8   xa_idle;
     u8   at_cell;
     u8   flag_bits;
@@ -149,7 +148,7 @@ MATCH void func_801F529C(void) {
             break;
         case 28:
             if (g_ScriptVars[3] == 17) {
-                flags            = &D_801F69AF;
+                u8* flags        = &D_801F69AF;
                 flag_bits        = *flags;
                 g_SceneEventStep = 29;
                 *flags           = flag_bits | 0x10;
@@ -158,15 +157,12 @@ MATCH void func_801F529C(void) {
         case 29:
             func_801F6168(0);
             if (g_ScriptVars[3] == 18) {
+                u8* flags                        = &D_801F69AF;
                 selection                        = &g_SceneEventSelection;
                 g_Actors[*selection].header.mode = 4;
                 g_Actors[*selection].active_flags &= ~0x20;
                 g_Actors[*selection].unk_7E += 1;
-                {
-                    u8* flag_byte = &D_801F69AF;
-
-                    *flag_byte &= ~0x10;
-                }
+                *flags &= ~0x10;
                 func_801F61A8(143);
                 g_SceneEventStep = 30;
             }

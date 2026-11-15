@@ -15,7 +15,7 @@ MATCH void func_801F3618(s16 x1, s16 y1, s16 radius1, u16 angle1, s16 x2, s16 y2
     GFX_AddPrim(1, sizeof(POLY_G4));
 
     poly++;
-    memcpy(poly, poly - 1, sizeof(POLY_G4));
+    *poly    = poly[-1];
     poly->x2 = x1 + FIXED_MUL(radius1, rcos(angle1 + ANGLE_180));
     poly->y2 = y1 + FIXED_MUL(radius1, rsin(angle1 + ANGLE_180));
     poly->x3 = x2 + FIXED_MUL(radius2, rcos(angle2));
