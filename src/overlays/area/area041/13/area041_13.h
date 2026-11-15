@@ -17,6 +17,7 @@ extern s8  D_80146865;
 extern u8  D_801F42C8[];
 extern u8  D_801F42CC[];
 extern u8  D_801F42D0[];
+extern u32 D_801F42D4[];
 extern u8  D_801F42DC[];
 extern u8  D_801F42EC[];
 extern u8  D_801F4308[];
