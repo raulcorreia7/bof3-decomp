@@ -400,19 +400,24 @@ MATCH void func_801F0568(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F05FC(void) {
+    PartyMember* work;
+    s8           tint;
+
     g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    g_Task->unk_5C      = 1;
-    g_Task->unk_2B      = 1;
-    g_Task->unk_5D      = -0x80;
-    g_Task->unk_5E      = -0x80;
-    g_Task->unk_5F      = -0x80;
-    g_Task->pos.x.fixed = g_AreaScrollTargetX;
-    g_Task->pos.y.fixed = g_AreaScrollTargetY;
-    g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
-    g_Task->unk_48      = 2;
-    g_Task->scale.x     = 0x18000;
-    g_Task->scale.y     = 0x28000;
-    g_Task->unk_27      = g_BattleEffectBattler->unk_27;
+    g_Task->unk_5C    = 1;
+    g_Task->unk_2B    = 1;
+    tint              = -0x80;
+    g_Task->unk_5D    = tint;
+    g_Task->unk_5E    = tint;
+    g_Task->unk_5F    = tint;
+    work              = g_Task;
+    work->pos.x.fixed = g_AreaScrollTargetX;
+    work->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+    work->pos.y.fixed = g_AreaScrollTargetY;
+    work->unk_48      = 2;
+    work->scale.x     = 0x18000;
+    work->scale.y     = 0x28000;
+    g_Task->unk_27    = g_BattleEffectBattler->unk_27;
     SND_QueueSelectionEffect(0x100);
     g_Task->unk_09 = 0x20;
     g_Task->header.step += 1;
