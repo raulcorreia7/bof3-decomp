@@ -20,7 +20,9 @@ extern u8 D_801F6898[];
 
 /* The party position in 16.16 fixed point: x, y and the ground height. */
 
-/* The shared record table as its byte view. */
+/* The shared record table as its byte view; the transition step walks its
+ * leading fade colours. */
+extern u8 D_801F4DF0[];
 
 /* The scrolling halfword and the selection byte the store paths write. */
 

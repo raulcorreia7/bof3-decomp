@@ -1,19 +1,18 @@
 #include "area188_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F2F6C(void) {
+MATCH void func_801F2F6C(void) {
     POLY_G4* prim;
     u8       elapsed;
     u8       index;
 
-    elapsed            = g_Task->timer;
-    g_Task->timer      = elapsed + 1;
+    elapsed       = g_Task->timer;
+    g_Task->timer = elapsed + 1;
     if (elapsed >= 16) {
         D_801F68A0    = D_801F4DF0[D_801F689C];
         g_Task->timer = 0;
 
-        index       = D_801F689C;
-        D_801F689C  = index + 1;
+        index      = D_801F689C;
+        D_801F689C = index + 1;
         if (index != 0) {
             D_801F689C = 0;
         }
@@ -28,6 +27,3 @@ NON_MATCHING void func_801F2F6C(void) {
     SetSemiTrans((POLY_G4*)g_GfxPrimCursor, 1);
     GFX_AddPrim(2U, sizeof(POLY_G4));
 }
-#else
-INCLUDE_ASM(func_801F2F6C);
-#endif
