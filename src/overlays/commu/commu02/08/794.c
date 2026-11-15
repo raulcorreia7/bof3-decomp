@@ -1788,7 +1788,36 @@ MATCH void func_801D7660(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event3Step2Sub7Funcs, D_801F294E);
 }
 
-INCLUDE_ASM(func_801D769C);
+MATCH void func_801D769C(void) {
+    s32        i;
+    u8*        dst;
+    Character* chars;
+    s32        letter;
+
+    D_801DB0C4 -= 1;
+    func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D97C8(D_801DAAA8, D_801DB0C4 * 30 + 0xB0, 0x2B);
+    func_801D9B80(0x12, D_801DB0C4 * 30 + 0x61, 0x24, 0x11);
+    func_801D94D0(D_801DAAA8, 0x18, D_801DB0C4 * 30 + 0x67, D_801DB0D4, D_801DB0D8);
+    if (D_801DB0C4 == 0) {
+        chars = g_Characters;
+        dst   = D_801DB080;
+        for (i = 0; i < 5; i++, dst++) {
+            letter = chars[func_801D92F4(D_801DB0B4) & BYTE_MASK].name[i];
+            if (letter == 0) {
+                letter = 0xFF;
+            } else {
+                letter = chars[func_801D92F4(D_801DB0B4) & BYTE_MASK].name[i];
+            }
+            *dst = letter;
+        }
+        D_801DB0D0 = 0;
+        D_801DB0D4 = 0;
+        D_801DB0D8 = 0;
+        D_801DAAA8 = 2;
+        D_801F294E += 1;
+    }
+}
 
 MATCH void func_801D7878(void) {
     func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 1);
