@@ -1306,6 +1306,7 @@ g_BattleEnemyBattlers = { addr = 0x801EB630, alias = true }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_DrawShadedQuads = { addr = 0x801F016C, type = "func", source = "Draws the effect's Gouraud-shaded quads with a depth offset." }
 Area_DrawGroundSceneSprite = { addr = 0x801F0778, type = "func", source = "Draws one sprite of a scene record as an FT4 primitive like Area_DrawSceneSprite, with its depth from Area_SampleHeight under its origin, so the sprite stands on the ground." }
+D_801F0C94 = { addr = 0x801F0C94, size = 0x8, source = "Eight bytes." }
 
 ["emi/bmagic/magic103/03"]
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
@@ -1376,6 +1377,9 @@ Effect_AdvanceOnTick = { addr = 0x801EF090, type = "func", source = "Raises the 
 ["emi/bmagic/magic109/03"]
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+D_801EF9F8 = { addr = 0x801EF9F8, type = "Point2l", size = 0x80, source = "Sixteen points of the effect." }
+D_801EFA78 = { addr = 0x801EFA78, type = "Point2l", size = 0x80, source = "Sixteen points of the effect." }
+D_801EFAF8 = { addr = 0x801EFAF8, type = "Point2l", size = 0x80, source = "Sixteen points of the effect." }
 
 ["emi/bmagic/magic110/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
@@ -1393,6 +1397,7 @@ Effect_SetActorMatrix = { addr = 0x801EF998, type = "func", source = "Sets the a
 BMagic_DrawDarkRing = { addr = 0x801EFC98, type = "func", source = "draws 64 subtractive POLY_G4 quads in a flat ring; the inner edge subtracts four times the shade byte, the outer edge nothing" }
 Effect_SetActorMatrix2 = { addr = 0x801F0138, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic110 (Ragnarok)." }
 g_BMagicEffectModes = { addr = 0x801F046C, source = "Handlers of magic110 (Ragnarok), run by header.mode (byte 0x01)." }
+D_801F04A4 = { addr = 0x801F04A4, type = "Point2l", size = 0x30, source = "Six points." }
 
 ["emi/bmagic/magic111/03"]
 D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true, source = "The scratchpad base 0x1F800000 as signed halfwords; the magic effects read and set its first halfword as a vertical offset." }
@@ -1428,6 +1433,10 @@ D_801F0BC0 = { addr = 0x801F0BC0, source = "Step handlers of the bmagic/magic113
 D_801F0BCC = { addr = 0x801F0BCC, source = "Step handlers of the bmagic/magic113/03 effect, run by header.step from func_801F0140." }
 
 ["emi/bmagic/magic114/03"]
+D_80033C00 = { addr = 0x80033C00, type = "u16", size = 0x200, source = "Row 2 of the palette arena." }
+D_80036C00 = { addr = 0x80036C00, type = "u16", size = 0x200, source = "Row 26 of the palette arena." }
+D_80037C00 = { addr = 0x80037C00, type = "u16", size = 0x200, source = "Row 2 of the working copy of the palette banks." }
+g_BattleEffectPalette = { addr = 0x8003AC00, type = "u16", size = 0x200, source = "Row 26 of the working copy of the palette banks." }
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
@@ -1682,6 +1691,8 @@ Effect_AddActor = { addr = 0x801F007C, type = "func", source = "Adds the effect'
 g_BMagicEffectModes = { addr = 0x801F00F8, source = "Handlers of magic137 (Corona), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic138/03"]
+D_80036C00 = { addr = 0x80036C00, type = "u16", size = 0x200, source = "Row 26 of the palette arena." }
+g_BattleEffectPalette = { addr = 0x8003AC00, type = "u16", size = 0x200, source = "Row 26 of the working copy of the palette banks." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -7742,5 +7753,6 @@ Battle_DrawVictoryZenny = { addr = 0x801F09F4, type = "func", source = "Draws th
 Char_GetExpToNextLevel = { addr = 0x801F0BB0, type = "func", source = "Returns the experience a party member still needs for its next level; 0 once its exp already covers it." }
 
 ["emi/battle/batl_ovr/00"]
+g_BattleEffectPalette = { addr = 0x8003AC00, type = "u16", size = 0x200, source = "Row 26 of the working copy of the palette banks." }
 Battle_StartGameOver = { addr = 0x801EEC40, type = "func", source = "Step 0 of the BATL_OVR (battle defeat) step table that ends in Battle_UpdateGameOver: sets UI mode 0x13, copies palette 0x1A and advances ui_step." }
 Battle_UpdateGameOver = { addr = 0x801EF0A8, type = "func", source = "Runs the game over screen." }
