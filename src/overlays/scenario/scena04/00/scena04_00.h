@@ -75,7 +75,9 @@ ASSERT_SIZE(ScenePathWork, 0x90);
 ASSERT_OFFSET(ScenePathWork, points, 0x10);
 
 /* The five 0x20-byte segment keys func_801F75BC draws: a start and an end 16.16 point with a spare
- * word after each. func_801F747C seeds the start x through D_801FA2C0 and the rest here. */
+ * word after each. func_801F747C seeds the start x through the D_801FA2C0 pointer and every other
+ * word through its own absolute name; retail does the same, so a record view would not reproduce
+ * the bytes (needs: scena04 owner). */
 extern s32 D_801FA2C0[];
 extern s32 D_801FA2C4;
 extern s32 D_801FA2C8;

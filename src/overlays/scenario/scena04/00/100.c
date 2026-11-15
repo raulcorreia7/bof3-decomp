@@ -571,6 +571,9 @@ MATCH void func_801F817C(void) {
                 *pad_flag &= 0xDF;
                 D_80145FF4 &= 0xDF;
                 D_80146134 &= 0xDF;
+                /* kept: the slot index round-trips through the scratch word so
+                 * each row address re-reads it; a local index drops 0xA8 bytes
+                 * (0x418 vs 0x4C0) and typed g_SpawnedActors rows drop 0xC0. */
                 slot  = (u8*)&D_1F800000;
                 index = Actor_FindFreeSpawned();
                 *slot = index;

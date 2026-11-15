@@ -721,7 +721,7 @@ MATCH void func_801D2C94(void) {
     pairs[1]   = -pairs[1];
     state      = g_Task;
     state->header.mode++;
-    SND_PlayCue(0x208);
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 8));
 }
 
 MATCH void func_801D2D5C(void) {
