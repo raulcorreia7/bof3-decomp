@@ -29,7 +29,8 @@ MATCH void func_801170A4(void) {
 
 INCLUDE_ASM(func_801170D8);
 
-MATCH void func_801172D0(void) {
+#ifdef NON_MATCHING
+NON_MATCHING void func_801172D0(void) {
     Actor*      actor;
     AreaSprite* work;
     u8          i;
@@ -39,7 +40,7 @@ MATCH void func_801172D0(void) {
     D_801181DC = MEM_PTR(AreaSprite, AREA_WORK);
     i          = 0;
     do {
-        actor                       = SP_REF(Actor*, 0x44);
+        actor                       = g_Task;
         work                        = D_801181DC;
         work->origin.x              = actor->pos.x.fixed;
         work->origin.y              = actor->pos.y.fixed;
@@ -58,6 +59,9 @@ MATCH void func_801172D0(void) {
         D_801181DC++;
     } while (i < 16);
 }
+#else
+INCLUDE_ASM(func_801172D0);
+#endif
 
 MATCH u8 func_80117410(void) {
     u8  scratch[32];
