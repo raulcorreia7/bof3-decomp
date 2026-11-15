@@ -11,7 +11,6 @@ MATCH void func_8019D9C0(void) {
     dst2       = MEM_PTR(s32, 0x800E4D5Cu);
     D_800E4D40 = 0x40;
     D_800E4D42 = 0;
-    /* NOTE: a goto loop; gcc 2.7.2 strength-reduces a do/while here (+20 bytes). */
 loop:
     work        = g_Task;
     *dst        = work->pos.x.fixed;
