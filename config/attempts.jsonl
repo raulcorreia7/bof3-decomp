@@ -143,7 +143,6 @@
 {"function": "emi/bmagic/magic172/03@0x801EF590", "tried": "blocker: early constant load", "first_diff": "0x801EF5B8.", "score": null}
 {"function": "emi/bmagic/magic213/03@0x801EF23C", "tried": "nonmatching: same body as Effect_FadePaletteIn, but retail has no stack frame; the shared body links one (+4 bytes", "first_diff": "at +0xE4).", "score": null}
 {"function": "emi/bmagic/magic218/03@0x801EF70C", "tried": "blocker: the radius is a halfword at D_1F800000 (lh) but spawn.h types it s32; needs: type (a per-file width view is not allowed).", "first_diff": "", "score": null}
-{"function": "emi/bmagic/magic220/03@0x801EF078", "tried": "blocker: work pointer lifetime", "first_diff": "lui v0 at +0x84.", "score": null}
 {"function": "emi/bmagic/magic220/03@0x801EF40C", "tried": "blocker: y register merge", "first_diff": "lw v0,56(a1) (retail) against lw v1,56(a1) (candidate).", "score": null}
 {"function": "emi/bmagic/magic220/03@0x801F002C", "tried": "The y position loads g_BattleEffectBattler before the rcos multiply; retail multiplies first (", "first_diff": "at 0x801F0094). The x position matches.", "score": null}
 {"function": "emi/bmagic/magic220/03@0x801F010C", "tried": "Retail reloads g_Task after the rsin call and before the 24x multiply; the draft multiplies first (", "first_diff": "at 0x801F0140). Needs the extern D_1F800004 (u16) in magic220_03.h.", "score": null}

@@ -64,7 +64,33 @@ MATCH void func_801EEFBC(void) {
     g_Scripts = AREA_SCRIPT_TABLE;
 }
 
-INCLUDE_ASM(func_801EF078);
+MATCH void func_801EF078(void) {
+    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+    g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + TO_COORD(0x160);
+    g_Task->unk_25      = 0x1D;
+    g_Task->unk_26      = 0;
+    g_Task->unk_27      = 0x1A;
+    g_Task->unk_28      = 1;
+    g_Task->scale.x     = 0x10000;
+    g_Task->scale.y     = 0x10000;
+    g_Task->unk_48      = 0;
+    g_Task->unk_5D      = 0;
+    g_Task->unk_5E      = 0;
+    g_Task->unk_5F      = 0;
+    g_Task->unk_5C      = 0;
+    g_Task->unk_2A      = 0;
+    g_Task->unk_29      = 4;
+    g_Task->unk_2C.half = 0;
+    g_Task->unk_2B      = 0;
+    g_Task->unk_24      = 0;
+    Actor_SelectScript(0U);
+    g_Task->unk_5D       = 0x10;
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 10;
+    g_Task->timer        = 0;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EF1F4(void) {
     u8 count;
