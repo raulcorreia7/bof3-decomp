@@ -170,42 +170,42 @@ MATCH void func_801F7AA8(void) {
 
 void func_801F7D1C(void);
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F7AEC(void) {
+MATCH void func_801F7AEC(void) {
     TILE* tile;
     u8*   cursor;
-    u32   actor_offset;
+    u32   idx;
 
     if (g_GameStateIndex == 3 || g_GameStateIndex == 1) {
         return;
     }
 
-    actor_offset = g_Task->param.unk_0B * sizeof(Actor);
-    *((u8*)&g_Actors[0].active_flags + actor_offset) |= 8;
+    idx = g_Task->param.unk_0B;
+    g_Actors[idx].active_flags |= 8;
     {
         Actor* task;
-        s32    actor_pos_x;
+        s32    px;
+        s32    pz;
 
-        task                                                        = g_Task;
-        actor_pos_x                                                 = *((s32*)&g_Actors[0].pos.x.fixed + actor_offset / sizeof(s32));
-        *((u16*)&g_Actors[0].screen_x + actor_offset / sizeof(u16)) = task->screen_x;
-        *((u16*)&g_Actors[0].screen_y + actor_offset / sizeof(u16)) = task->screen_y;
-        task->pos.x.fixed                                           = actor_pos_x;
-        task->pos.y.fixed                                           = *((s32*)&g_Actors[0].pos.y.fixed + actor_offset / sizeof(s32));
-        actor_pos_x                                                 = *((s32*)&g_Actors[0].pos.z.fixed + actor_offset / sizeof(s32));
-        task->tint.bytes.rgb.blue                                   = 0;
-        task->tint.bytes.rgb.green                                  = 0;
-        task->tint.bytes.rgb.red                                    = 0;
-        task->pos.z.fixed                                           = actor_pos_x;
+        task                       = g_Task;
+        px                         = g_Actors[idx].pos.x.fixed;
+        g_Actors[idx].screen_x     = task->screen_x;
+        g_Actors[idx].screen_y     = task->screen_y;
+        task->pos.x.fixed          = px;
+        task->pos.y.fixed          = g_Actors[idx].pos.y.fixed;
+        pz                         = g_Actors[idx].pos.z.fixed;
+        task->tint.bytes.rgb.blue  = 0;
+        task->tint.bytes.rgb.green = 0;
+        task->tint.bytes.rgb.red   = 0;
+        task->pos.z.fixed          = pz;
     }
 
     cursor             = g_GfxPrimCursor;
+    g_GfxPrimCursor    = cursor + sizeof(RECT);
     ((RECT*)cursor)->x = 0x340;
     ((RECT*)cursor)->y = 0x100;
     ((RECT*)cursor)->w = 0xC0;
     ((RECT*)cursor)->h = 0x100;
-    g_GfxPrimCursor    = cursor + sizeof(RECT);
-    SetDrawArea((DR_AREA*)(cursor + sizeof(RECT)), (RECT*)cursor);
+    SetDrawArea((DR_AREA*)g_GfxPrimCursor, (RECT*)cursor);
     GFX_AddPrim(7, sizeof(DR_AREA));
 
     tile = (TILE*)g_GfxPrimCursor;
@@ -215,7 +215,7 @@ NON_MATCHING void func_801F7AEC(void) {
 
         task     = g_Task;
         tile->x0 = task->screen_x + 0x334;
-        tile->y0 = task->screen_y + ((g_FrameBufferIndex ^ 1) * 0xF0) - 0x15;
+        tile->y0 = (u16)(task->screen_y + (((g_FrameBufferIndex ^ 1) * 0xF0) - 0x15));
     }
     tile->w  = 0x18;
     tile->h  = 0x30;
@@ -224,10 +224,10 @@ NON_MATCHING void func_801F7AEC(void) {
     tile->b0 = 0;
     GFX_AddPrim(7, sizeof(TILE));
 
-    cursor = g_GfxPrimCursor;
-    memcpy(cursor, g_GfxCurrentDisplayFrame + 0x14, sizeof(RECT));
+    cursor          = g_GfxPrimCursor;
     g_GfxPrimCursor = cursor + sizeof(RECT);
-    SetDrawArea((DR_AREA*)(cursor + sizeof(RECT)), (RECT*)cursor);
+    memcpy(cursor, g_GfxCurrentDisplayFrame + 0x14, sizeof(RECT));
+    SetDrawArea((DR_AREA*)g_GfxPrimCursor, (RECT*)cursor);
     GFX_AddPrim(7, sizeof(DR_AREA));
 
     if (g_Task->unk_06 == 0) {
@@ -237,9 +237,6 @@ NON_MATCHING void func_801F7AEC(void) {
         g_Task->header.mode = 2;
     }
 }
-#else
-INCLUDE_ASM(func_801F7AEC);
-#endif
 
 MATCH void func_801F7D1C(void) {
     Point2u pos;
@@ -390,7 +387,23 @@ MATCH void func_801F85F0(void) {
     func_801F8704();
 }
 
-INCLUDE_ASM(func_801F8618);
+MATCH void func_801F8618(void) {
+    u8 i;
+
+    if (g_Task->tint.signed_bytes.delta.red != 0) {
+        g_Task->tint.signed_bytes.delta.red -= 2;
+        g_Task->tint.bytes.rgb.green -= 2;
+        g_Task->tint.bytes.rgb.blue -= 2;
+    } else {
+        for (i = 0; i < g_PartySize; i++) {
+            g_Game.members[i].unk_29 = g_AreaDrawMode;
+        }
+        func_80196070();
+        return;
+    }
+    func_801F79C4();
+    func_801F8704();
+}
 
 MATCH void func_801F8704(void) {
     Actor*       actor;
@@ -639,7 +652,55 @@ MATCH void func_801F92F0(Coord* position, s32* step) {
 
 INCLUDE_ASM(func_801F9500);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
+    POLY_F4* poly;
+    s32      point[8];
+    s32      lift;
+
+    poly = (POLY_F4*)g_GfxPrimCursor;
+    SetPolyF4(poly);
+    SetSemiTrans(poly, 0);
+
+    point[0] = pos->x.fixed + arg[0];
+    point[1] = pos->y.fixed + arg[1];
+    point[2] = pos->z.fixed + arg[2];
+    Area_ProjectPoint(point, (DVECTOR*)&poly->x0);
+    if (!(g_Task->unk_06 & 1)) {
+        point[0] = pos->x.fixed - arg[0];
+        point[1] = pos->y.fixed + arg[1];
+    } else {
+        point[0] = pos->x.fixed + arg[0];
+        point[1] = pos->y.fixed - arg[1];
+    }
+    point[2] = pos->z.fixed + arg[2];
+    FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
+    Area_ProjectPoint(point, (DVECTOR*)&poly->x1);
+
+    point[0] = pos->x.fixed + arg[0];
+    point[1] = pos->y.fixed + arg[1];
+    lift     = 0x100000;
+    point[2] = pos->z.fixed + arg[2] + lift;
+    Area_ProjectPoint(point, (DVECTOR*)&poly->x2);
+    if (!(g_Task->unk_06 & 1)) {
+        point[0] = pos->x.fixed - arg[0];
+        point[1] = pos->y.fixed + arg[1];
+    } else {
+        point[0] = pos->x.fixed + arg[0];
+        point[1] = pos->y.fixed - arg[1];
+    }
+    point[2] = pos->z.fixed + arg[2] + lift;
+    FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
+    Area_ProjectPoint(point, (DVECTOR*)&poly->x3);
+
+    poly->r0 = (g_Task->unk_06 & 2) != 0 ? 0x80 : 0;
+    poly->b0 = 0;
+    poly->g0 = (g_Task->unk_06 & 2) == 0 ? 0x80 : 0;
+    Area_AddCellPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_F4));
+}
+#else
 INCLUDE_ASM(func_801F97CC);
+#endif
 
 INCLUDE_ASM(func_801F9A20);
 
