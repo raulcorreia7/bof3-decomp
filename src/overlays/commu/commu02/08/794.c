@@ -1562,7 +1562,7 @@ MATCH void func_801D65F8(void) {
 MATCH void func_801D6634(void) {
     s32 i;
     u8* dst;
-    u8 (*tbl)[5];
+    u8(*tbl)[5];
     s32 letter;
 
     func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4), 0);
