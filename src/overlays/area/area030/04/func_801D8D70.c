@@ -11,7 +11,7 @@
 
 /* Draws the two-line AREA030 panel: a 0x8A-wide frame per section,
  * the item icon rows, and the two labelled columns. */
-MATCH void func_801D8D70(u16 x, u16 y) {
+MATCH void func_801D8D70(s32 x, s32 y) {
     u16 panel_x;
     u16 panel_y;
     u8* palette;

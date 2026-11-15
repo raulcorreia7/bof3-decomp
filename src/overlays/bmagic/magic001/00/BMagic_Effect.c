@@ -284,7 +284,35 @@ MATCH void func_801EFBEC(void) {
     g_Task->header.step += 1;
 }
 
-INCLUDE_ASM(func_801EFC54);
+MATCH void func_801EFC54(void) {
+    PartyMember* work;
+    PartyMember* copy;
+    PartyMember* record;
+    s32          delta;
+    u8           countdown;
+
+    work                   = g_Task;
+    work->unk_14           = work->unk_14 + work->unk_20;
+    countdown              = work->timer;
+    COORD_INT(work->pos.z) = COORD_INT(work->pos.z) + work->unk_14;
+    if (countdown != 0) {
+        work->timer = countdown - 1;
+    }
+    copy = g_Task;
+    if (copy->unk_14 != 0) {
+        return;
+    }
+    copy->pos.x.fixed = g_BattleSelectedActor->pos.x.fixed;
+    /* FAKE: Re-read the cell after the store; the compiler shares one load. */
+    FAKE_BARRIER();
+    copy->pos.y.fixed = g_BattleSelectedActor->pos.y.fixed;
+    FAKE_BARRIER();
+    record            = g_BattleEffectBattler;
+    delta             = record->pos.z.fixed - g_BattleSelectedActor->pos.z.fixed;
+    copy->unk_09      = 0xF;
+    copy->pos.z.fixed = copy->pos.z.fixed - delta;
+    g_Task->header.step++;
+}
 
 MATCH void func_801EFD28(void) {
     s32 value;

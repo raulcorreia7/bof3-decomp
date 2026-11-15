@@ -230,7 +230,61 @@ MATCH void Menu_SetPosX(void) {
     }
 }
 
-INCLUDE_ASM(func_801D3320);
+MATCH void func_801D3320(MenuPanelTask* task) {
+    u8 i;
+
+    UI_DrawWindow((u16)(task->pos.x + 3), (u16)(task->pos.y + 3), 0x95, 0xA0, 0, g_WindowStyle);
+    i = 0;
+    do {
+        u8 shade;
+        u8 flag;
+
+        if (MEM_PTR(u8, task->item_table)[i] != 0) {
+            shade = 0;
+            flag  = 0;
+        } else {
+            shade = 7;
+            flag  = 1;
+        }
+        if (i != task->unk_0A) {
+            func_801AF800((s16)(task->pos.x + 7), (s16)((u32)task->pos.y + (i * 13 + 0x1A)), shade, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], flag);
+        } else {
+            if (MEM_PTR(u8, task->item_table)[i] != 0) {
+                func_801AF800((s16)(task->pos.x + 7), (s16)((u32)task->pos.y + (i * 13 + 0x1A)), 7, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], 1);
+            }
+            func_801AF800((s16)(task->pos.x + 7), (s16)(task->pos.y + i * 13 + 0x18), shade, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], flag);
+        }
+        i++;
+    } while (i < 4);
+    UI_DrawText((s16)(task->pos.x + 0x4E - strlen((char*)D_801D979C) * 4), (s16)(task->pos.y + 7), 0, 0x10, D_801D979C);
+    UI_DrawSpriteRun((s16)task->pos.x, (s16)task->pos.y, D_801D9780, 1);
+    UI_DrawSpriteRun((s16)task->pos.x, (s16)task->pos.y, D_801D978C, 1);
+    i = 0;
+    do {
+        UI_DrawSprite((s16)(task->pos.x + (i + 5) * 8), (s16)task->pos.y, 1, 1);
+        i++;
+    } while (i < 0xA);
+    i = 0;
+    do {
+        UI_DrawSprite((s16)task->pos.x, (s16)(task->pos.y + (i + 3) * 8), 4, 1);
+        i++;
+    } while (i < 0x11);
+    UI_DrawSprite((s16)(task->pos.x + 0x90), (s16)(task->pos.y + 0x18), 0x20, 1);
+    i = 0;
+    do {
+        UI_DrawSprite((s16)(task->pos.x + 0x90), (s16)(task->pos.y + (i + 4) * 8), 0x21, 1);
+        i++;
+    } while (i < 0xF);
+    UI_DrawSprite((s16)task->pos.x, (s16)(task->pos.y + 0xA0), 5, 1);
+    UI_DrawSprite((s16)(task->pos.x + 0x90), (s16)(task->pos.y + 0x98), 0x22, 1);
+    UI_DrawSprite((s16)(task->pos.x + 8), (s16)task->pos.y, 0x32, 1);
+    UI_DrawSprite((s16)(task->pos.x + 0x90), (s16)task->pos.y, 0x34, 1);
+    i = 0;
+    do {
+        UI_DrawSprite((s16)(task->pos.x + (i + 1) * 8), (s16)(task->pos.y + 0xA0), 6, 1);
+        i++;
+    } while (i < 0x11);
+}
 
 INCLUDE_ASM(Menu_DrawCharacterWindow);
 

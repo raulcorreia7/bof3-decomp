@@ -615,9 +615,9 @@ void func_801D7EB0(s32 x, s32 y);
 void func_801D8248(s16 x, s16 y, u8 height);
 void func_801D8364(s16 panel_x, s16 panel_y);
 void func_801D88E0(s16 x, s16 y);
-void func_801D8D70(u16 x, u16 y);
+void func_801D8D70(s32 x, s32 y);
 void func_801D90FC(s32 x, s16 y);
-void func_801D934C(s32 x, s32 y, s32 width, s32 height);
+void func_801D934C(u16 x, u16 y, u16 width, u16 height);
 /* func_801D9534 */
 s32  Fishing_DrawWindowFrame(s16 frame_x, u16 frame_y, s16 frame_width, s16 frame_height, u8 frame_mode);
 void func_801D95C4(u16 x, u16 y, u16 w, u16 h, u8 shade);
