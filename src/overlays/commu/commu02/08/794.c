@@ -329,7 +329,7 @@ MATCH void func_801D2078(void) {
             D_801DB07C = (D_801DB07C * D_801DAC34[D_801448F2][(s8)D_801DB0BC - 1] + 50) / 100;
             Message_StartAreaMessage(0x76);
         }
-        g_GameStateIndex = 2;
+        g_GameStateIndex = GAME_REQUEST_MESSAGE;
         D_801F294D += 1;
     }
     func_801D3184(0x26, 0x10);
@@ -339,14 +339,14 @@ MATCH void func_801D2078(void) {
 MATCH void func_801D21FC(void) {
     u8* state = &g_GameStateIndex;
 
-    if (*state != 2) {
+    if (*state != GAME_REQUEST_MESSAGE) {
         if (D_801DB07C >= 0x2710) {
             Message_StartAreaMessage(0x79);
-            *state = 2;
+            *state = GAME_REQUEST_MESSAGE;
             D_801F294D += 1;
         } else {
             Message_StartAreaMessage(0x78);
-            *state     = 2;
+            *state     = GAME_REQUEST_MESSAGE;
             D_801F294D = 3;
         }
     }
@@ -357,11 +357,11 @@ MATCH void func_801D21FC(void) {
 MATCH void func_801D22A4(void) {
     u8* state = &g_GameStateIndex;
 
-    if (*state != 2) {
+    if (*state != GAME_REQUEST_MESSAGE) {
         Party_AddZenny(D_801DB07C, 0);
         Message_StartAreaMessage(0x75);
         D_801DB07C = 0;
-        *state     = 2;
+        *state     = GAME_REQUEST_MESSAGE;
     }
     func_801D3184(0x26, 0x10);
     func_801D32A0(0xA8, 0x10, 0);
@@ -934,11 +934,11 @@ MATCH void func_801D437C(void) {
     s32 idx;
 
     state = &g_GameStateIndex;
-    if (*state != 2) {
+    if (*state != GAME_REQUEST_MESSAGE) {
         idx = ((s8)D_801DB0B4 * 3 + (s8)D_801DB0B8) * 2 + D_801448F2 * 48;
         if (!(u8)Item_Add(D_801DAD00[0][idx + 1], D_801DAD00[0][idx], 1, 0)) {
             Message_StartAreaMessage(0x83);
-            *state = 2;
+            *state = GAME_REQUEST_MESSAGE;
         }
         D_801F294D = 6;
     }
@@ -1363,9 +1363,9 @@ MATCH void func_801D5D5C(void) {
 MATCH void Menu_StartFairyEventMessage(void) {
     u8* state = &g_GameStateIndex;
 
-    if (*state != 2) {
+    if (*state != GAME_REQUEST_MESSAGE) {
         Message_StartAreaMessage(0xEE);
-        *state = 2;
+        *state = GAME_REQUEST_MESSAGE;
         D_801F294C += 1;
     }
 }
@@ -1656,7 +1656,7 @@ MATCH void func_801D6D18(void) {
     drawn      = 0;
     step       = D_801DB0C4 - 1;
     D_801DB0C4 = step;
-    Menu_DrawHeaderBar(0x14, (0x10 - step * 8) & 0xFFF8, 0x118, 0x13, g_WindowStyle);
+    Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - step * 8) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     for (i = 0; i < 7; i++) {
         if (g_Characters[i].unk_07 & 1) {
             if ((drawn & 1) == 0) {
@@ -1869,9 +1869,9 @@ INCLUDE_ASM(func_801D7C6C);
 MATCH void Menu_StartFairyEndMessage(void) {
     u8* state = &g_GameStateIndex;
 
-    if (*state != 2 && D_801F294D == 0) {
+    if (*state != GAME_REQUEST_MESSAGE && D_801F294D == 0) {
         Message_StartAreaMessage(0xF6);
-        *state = 2;
+        *state = GAME_REQUEST_MESSAGE;
     }
 }
 
@@ -1939,7 +1939,7 @@ INCLUDE_ASM(func_801D8058);
 MATCH void func_801D812C(void) {
     u16 index;
 
-    Menu_DrawHeaderBar(0x14, 0x10, 0x118, 0x13, g_WindowStyle);
+    Menu_DrawHeaderBar(MENU_HEADER_X, 0x10, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     index = D_801DB0C8;
     if (index != 0xFFFF) {
         UI_DrawText(0x1B, 0x13, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, index));
