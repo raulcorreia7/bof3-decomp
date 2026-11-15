@@ -151,9 +151,9 @@ void func_801D830C(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 /* func_801D8968 */
 void Fairy_GenerateName(void);
 void func_801D90D8(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_801D94D0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg, s32 cursor_row_arg);
 void func_801D97C8(s32 unused, s32 x, s32 y);
-void func_801D9B80(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+void func_801D9B80(s32 x, s32 y, s32 width, s32 height);
 void func_801DA7A4(void);
 
 /* The cell the cursor points at: one 0x60-byte page of eight rows, twelve one-byte cells each. */
