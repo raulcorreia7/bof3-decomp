@@ -490,11 +490,8 @@ MATCH void func_801F0AC8(void) {
 }
 
 MATCH void func_801F0B44(void) {
-    u16* battle_half;
-
     if (g_Task->unk_09 < 0xCU) {
-        battle_half = (u16*)&g_Battle.action_id;
-        if (*battle_half != 0xA4) {
+        if (g_Battle.action_id != 0xA4) {
             Effect_DrawScreenFade();
         }
         g_Task->unk_09 += 4;

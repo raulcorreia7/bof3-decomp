@@ -39,8 +39,8 @@ MATCH void func_801A3B7C(Actor* entity) {
 
     g_Task->unk_0A       = 3u;
     current              = g_Task->direction_08;
-    ((s32*)g_Task)[4]    = 0;
-    ((s32*)g_Task)[3]    = 0;
+    g_Task->vy           = 0;
+    g_Task->vx           = 0;
     g_Task->direction_08 = (current + sel) & 0x7u;
     entity->interaction_flags |= ACTOR_FLAG_MOVING;
 }

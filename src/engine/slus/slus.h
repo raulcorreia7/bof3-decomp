@@ -1208,11 +1208,11 @@ extern void             func_80161454(u32 index);
 void                    func_80163230(void);
 void                    func_80163698(void);
 u8*                     func_801642F4(u8* dst, const u8* src, u32 count);
-void                    Char_ApplyMaster(u8* arg);
+void                    Char_ApplyMaster(Character* character);
 /* Retail calls this executable makes into its own units and the overlays. */
-void                    Char_ApplyWeapon(void* character);
-void                    Char_ApplyArmor(void* character);
-void                    Char_ApplyAccessories(void* param);
+void                    Char_ApplyWeapon(Character* character);
+void                    Char_ApplyArmor(Character* character);
+void                    Char_ApplyAccessories(Character* character);
 void                    EMI_LoadPartyCode(u8 member_a, u8 member_b, u8 member_c);
 void                    EMI_LoadParty(u8 member_a, u8 member_b, u8 member_c, u8 family);
 u8                      EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c);

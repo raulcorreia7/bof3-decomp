@@ -65,8 +65,11 @@ extern u8        D_801FE9A0[];
 /* D_801FE9C0 */
 extern SceneFunc g_SceneActorDispatch[];
 extern u16       D_801FE9EC[];
+extern u8        D_801FEA6C;
 extern s32       D_801FEA74;
 extern s32       D_801FEA78;
+extern Callback  jtbl_801F6C8C[11];
+extern Callback  jtbl_801F6CE4[16];
 
 void func_801FE800(void);
 

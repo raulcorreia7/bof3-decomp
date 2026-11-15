@@ -101,7 +101,7 @@ MATCH void func_801F75EC(void) {
 }
 
 #ifdef NON_MATCHING
-NON_MATCHING void Menu_DrawHeaderBar(s32 x_arg, s32 y_arg, s32 width, s32 height, s32 style_arg) {
+NON_MATCHING void Menu_DrawHeaderBar(s32 x_arg, s32 y_arg, s32 width, s32 height, u8 style_arg) {
     RECT*     texture_window;
     POLY_FT4* primitive;
     s32       bottom_y;
