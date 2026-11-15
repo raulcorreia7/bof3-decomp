@@ -594,7 +594,7 @@ g_BattleActiveBattler = { addr = 0x80146374, type = "u8", alias = true, source =
 g_BattleSelectedActor = { addr = 0x8014638C, type = "PartyMember", alias = true, source = "The selected battle actor; the selected_actor member of g_Battle." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-g_BattleEnemyBattlers = { addr = 0x801EB630, alias = true }
+g_BattleEnemyBattlers = { addr = 0x801EB630, alias = true, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_CHARACTERS_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
 g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
 Effect_MarkDamagedOnZeroTick = { addr = 0x801EEDA0, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic044 (Evil Eye)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEE00, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic044." }
