@@ -22,8 +22,9 @@ NON_MATCHING void func_801E0B64(void) {
     }
     Battle_ApplyFormationStats();
     for (slot = 0; slot < g_Battle.party_count; slot++) {
+        src = &D_80145F20[0x20];
         dst = &D_80145F20[slot * BATTLE_PARTY_STRIDE];
-        memcpy(dst, dst + 0x20, 0x20);
+        memcpy(dst, src + slot * BATTLE_PARTY_STRIDE, 0x20);
     }
     func_800A4458();
     for (slot = 0; slot < g_Battle.party_count; slot++) {
