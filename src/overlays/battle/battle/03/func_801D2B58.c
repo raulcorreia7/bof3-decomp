@@ -48,14 +48,14 @@ NON_MATCHING void func_801D2B58(void) {
     fa8    = D_80145FA8;
     eb3dc  = (u8*)&D_801EB3DC;
     cursor = (u8*)&g_Battle.turn_cursor;
-    if (cursor[0] < cursor[1]) {
+    if (cursor[0] < g_Battle.turn_count) {
         table = g_Battle.turn_order;
         do {
             value = table[cursor[0] & BYTE_MASK];
             kind  = value & BYTE_MASK;
             if (kind == GAME_NONE) {
                 cursor[0] += 1;
-                if (cursor[0] >= cursor[1]) {
+                if (cursor[0] >= g_Battle.turn_count) {
                     goto done; /* leaves the loop for the final stores */
                 }
                 continue;
