@@ -77,7 +77,7 @@ NON_MATCHING void func_801E7BA0(void) {
             D_801EB4CC  = temp_a0_154;
             temp_v1_165 = *(&D_80145FB4 + (g_BattleEffectBattler->slot * BATTLE_PARTY_STRIDE));
             D_801EB4D0  = temp_v1_165;
-            temp_v0_176 = g_Game.members[g_BattleEffectBattler->slot].turn.action_flags.volatile_value;
+            temp_v0_176 = g_Game.members[g_BattleEffectBattler->slot].u.turn.action_flags.volatile_value;
             D_801EB4CC  = temp_a0_154 & 0xBFFF;
             D_801EB4D0  = temp_v1_165 & 0xFFFE7FFF;
             D_801EB4D4  = temp_v0_176;
@@ -115,14 +115,14 @@ NON_MATCHING void func_801E7BA0(void) {
         temp_a0_363                                    = temp_a1_349->slot * BATTLE_PARTY_STRIDE;
         temp_v1_366                                    = g_Game.members[temp_a1_349->slot].chr.level;
         if ((temp_v1_366 == 7) || (temp_v1_366 == 0)) {
-            g_Game.members[temp_a1_349->slot].chr.ap                           = D_801EB4C8;
-            g_Game.members[temp_a1_349->slot].chr.status                       = D_801EB4CC;
-            temp_a0_392                                                        = temp_a1_349->slot * BATTLE_PARTY_STRIDE;
-            g_Game.members[temp_a1_349->slot].chr.fatigue                      = g_Characters[(&g_Game.members[0].character_index)[temp_a0_392]].fatigue;
-            temp_a0_409                                                        = g_Task;
-            var_s0                                                             = 0;
-            *(&D_80145FB4 + (temp_a0_409->slot * 0x140))                       = D_801EB4D0;
-            g_Game.members[temp_a0_409->slot].turn.action_flags.volatile_value = D_801EB4D4;
+            g_Game.members[temp_a1_349->slot].chr.ap                             = D_801EB4C8;
+            g_Game.members[temp_a1_349->slot].chr.status                         = D_801EB4CC;
+            temp_a0_392                                                          = temp_a1_349->slot * BATTLE_PARTY_STRIDE;
+            g_Game.members[temp_a1_349->slot].chr.fatigue                        = g_Characters[(&g_Game.members[0].character_index)[temp_a0_392]].fatigue;
+            temp_a0_409                                                          = g_Task;
+            var_s0                                                               = 0;
+            *(&D_80145FB4 + (temp_a0_409->slot * 0x140))                         = D_801EB4D0;
+            g_Game.members[temp_a0_409->slot].u.turn.action_flags.volatile_value = D_801EB4D4;
             do {
                 temp_a0_435 = var_s0 & BYTE_MASK;
                 var_s0 += 1;

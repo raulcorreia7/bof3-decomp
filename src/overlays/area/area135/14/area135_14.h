@@ -9,6 +9,9 @@
 #include "area/spad.h"
 #include "scenario/party.h"
 
+extern u8 D_801F69AF;
+extern u8 D_801F6BC0;
+
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
 /* The shared flag word the close path clears a bit of. */
@@ -52,8 +55,10 @@ extern u16  D_801F6216;
 extern char D_801F2C04[];
 extern u8   D_80147C97;
 
-/* The camera and view steps the handlers enter. */
+/* Places the task at the area focus point and reads the height there. */
 void func_801F32A0(s32 value);
+/* Whether a party member stands at the cell. */
+bool func_801F60E0(void);
 
 extern Callback D_801F6218[];
 

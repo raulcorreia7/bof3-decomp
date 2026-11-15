@@ -24,7 +24,20 @@ MATCH void func_801EEC28(void) {
     }
 }
 
-INCLUDE_ASM(func_801EED14);
+MATCH void func_801EED14(void) {
+    u32 i;
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
+    }
+    g_Task->unk_2E.half  = 160;
+    g_Task->unk_30.half  = 112;
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 30;
+    g_Task->timer        = 0;
+    g_Task->header.mode += 1;
+}
 
 MATCH void func_801EEDAC(void) {
     u8 timer;
