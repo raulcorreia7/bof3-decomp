@@ -13,11 +13,12 @@
 # message says why and the next step).
 #
 # MATCH_CAND_OUT=FILE also writes the candidate's bytes there (try_body.py counts differences).
-# Only .text is compared; `check-<image>` stays the acceptance gate. Method and limits:
-# docs/toolchain.md#matchsh.
+# Only .text is compared, with the unit's own .rodata (jump table, string) placed at its retail
+# address; own .data/.bss and gp-relative code are not covered. `check-<image>` stays the
+# acceptance gate. Method and limits: docs/toolchain.md#matchsh.
 set -eu
 case "${1:-}" in
--h | --help) sed -n '2,17p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+-h | --help) sed -n '2,18p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
 esac
 cd "$(dirname "$0")/.."
 
@@ -143,27 +144,61 @@ set -- $(awk -v n="$fname" '$NF == n && $(NF - 1) ~ /^[Tt]$/ && NF == 4 { print 
 coff=$((0x$1)) csize=$((0x$2))
 
 # Relocations in the function that point into the unit's own data (a section, or a symbol the
-# object defines in .data/.rodata/.bss) or use the gp are not covered.
+# object defines in .data/.rodata/.bss) or use the gp. The unit's own .rodata (a jump table, a
+# string) is placed at its retail address below; the rest is not covered.
 refused=$("$BIN/objdump" -r -j .text "$co" | awk -v lo="$coff" -v hi="$((coff + csize))" '
-	NR == FNR { if ($(NF - 1) ~ /^[DdBbRrGgSsCc]$/) own[$NF] = 1; next }
+	NR == FNR { if ($(NF - 1) ~ /^[DdBbRrGgSsCc]$/) own[$NF] = $(NF - 1); next }
 	$2 ~ /^R_MIPS_/ {
 		o = $1; n = 0
 		for (i = 1; i <= length(o); i++) n = n * 16 + index("0123456789abcdef", tolower(substr(o, i, 1))) - 1
 		if (n < lo || n >= hi) next
+		if ($3 == ".rodata" || (($3 in own) && own[$3] ~ /^[Rr]$/)) { rodata = 1; next }
 		if (($3 ~ /^\./ && $3 !~ /^\.text/) || $3 in own) { print "own " $3; exit }
 		if ($2 ~ /GPREL|LITERAL|GOT/) { print "gp " $2; exit }
-	}' "$tmp/nm.txt" -)
+	}
+	END { if (rodata) print "rodata" }' "$tmp/nm.txt" -)
+rodata=
 case $refused in
 '') ;;
+rodata) rodata=1 ;;
 gp*) die "not covered: $fname uses the gp register (${refused#gp }); the partial link has no gp value. Run: meson compile -C $B check-$flat" ;;
-*) die "not covered: $fname reads ${refused#own }, which its own unit defines (jump table, string, constant or data) and the partial link does not place. Run: meson compile -C $B check-$flat" ;;
+*) die "not covered: $fname reads ${refused#own }, which its own unit defines (string, constant or data) and the partial link does not place. Run: meson compile -C $B check-$flat" ;;
 esac
+
+# The unit's retail .rodata address: the unit's `.rodata` row in splat.yaml, segment vram plus
+# the row's offset, and the SUBALIGN of the link script section that places the object's
+# .rodata. A unit with no row or no placement has no .rodata in the retail image; its candidate
+# then links at 0x10, where no retail instruction points, and shows as a difference.
+rodata_addr=10 rodata_align=4
+if [ -n "$rodata" ] && grep -qF "$obj(.rodata);" "$ldscript"; then
+	rodata_align=$(awk -v o="$obj(.rodata);" '/SUBALIGN\(/ { a = $0; sub(/.*SUBALIGN\(/, "", a); sub(/\).*/, "", a) } $1 == o { print a; exit }' "$ldscript")
+	case $rodata_align in
+	1 | 2 | 4 | 8 | 16) ;;
+	*) die "not covered: $fname reads .rodata, and $ldscript gives no section alignment for $obj. Run: meson compile -C $B check-$flat" ;;
+	esac
+	row=$(awk -v u="$unit" '
+		function hex(s,  n, i) { n = 0; s = tolower(s); sub(/^0x/, "", s); for (i = 1; i <= length(s); i++) n = n * 16 + index("0123456789abcdef", substr(s, i, 1)) - 1; return n }
+		/^  - name:/ { start = vram = 0 }
+		/^    start:/ { start = hex($2) }
+		/^    vram:/ { vram = hex($2) }
+		/^      - \[0x/ {
+			l = $0; gsub(/[][,]/, " ", l); split(l, a, " ")
+			if (a[3] == ".rodata" && a[4] == u) { n++; v = vram + hex(a[2]) - start }
+		}
+		END { if (n == 1) printf "%08X\n", v; else if (n > 1) print "dup" }' "config/$target/splat.yaml")
+	[ "$row" != dup ] || die "not covered: $fname reads .rodata, and [$target] splat.yaml has several .rodata rows for $unit. Run: meson compile -C $B check-$flat"
+	[ -z "$row" ] || rodata_addr=$row
+fi
 
 # Partial link: .text at the unit's retail address; every other symbol from the maps.
 .venv/bin/python tools/link_symbols.py --root . --build-dir "$B" --target "$target" --partial "$co" \
 	--output "$tmp/syms.ld" || die "the symbol maps cannot resolve a name of $co (message above)."
 {
-	printf 'SECTIONS {\n  .text 0x%s : { *(.text) }\n  .data 0x10 : { *(.data .sdata .rodata .rodata.* .lit4 .lit8 .sbss .bss .scommon COMMON) }\n  /DISCARD/ : { *(*) }\n}\n' "$base"
+	if [ -n "$rodata" ]; then
+		printf 'SECTIONS {\n  .text 0x%s : { *(.text) }\n  .rodata 0x%s (NOLOAD) : SUBALIGN(%s) { *(.rodata .rodata.*) }\n  .data 0x10 : { *(.data .sdata .lit4 .lit8 .sbss .bss .scommon COMMON) }\n  /DISCARD/ : { *(*) }\n}\n' "$base" "$rodata_addr" "$rodata_align"
+	else
+		printf 'SECTIONS {\n  .text 0x%s : { *(.text) }\n  .data 0x10 : { *(.data .sdata .rodata .rodata.* .lit4 .lit8 .sbss .bss .scommon COMMON) }\n  /DISCARD/ : { *(*) }\n}\n' "$base"
+	fi
 	for f in "build/asm/$target/undefined_syms_auto.txt" "build/asm/$target/undefined_funcs_auto.txt"; do
 		[ ! -f "$f" ] || cat "$f"
 	done
