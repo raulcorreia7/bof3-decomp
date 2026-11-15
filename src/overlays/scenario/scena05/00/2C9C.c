@@ -27,12 +27,12 @@ NON_MATCHING void func_801FB66C(void) {
             if (g_ScriptVars[0] == 1) {
                 g_ScriptVars[0] = 0;
                 Message_StartAreaMessage(0x22);
-                g_GameStateIndex     = 2;
+                g_GameStateIndex     = GAME_REQUEST_MESSAGE;
                 g_SceneState.step_05 = 1;
             } else {
                 g_ScriptVars[0] = 0;
                 Message_StartAreaMessage(0x20);
-                g_GameStateIndex     = 2;
+                g_GameStateIndex     = GAME_REQUEST_MESSAGE;
                 g_SceneState.step_05 = 2;
             }
             break;
@@ -46,7 +46,7 @@ NON_MATCHING void func_801FB66C(void) {
             g_SceneState.step_05 = 2;
             break;
         case 2:
-            if (g_GameStateIndex == 2) {
+            if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
             if (g_ScriptVars[0] == 3) {
