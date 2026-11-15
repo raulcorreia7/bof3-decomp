@@ -9,7 +9,6 @@
 #include "area/spad.h"
 #include "scenario/party.h"
 
-extern s16 D_801448EE;
 extern u8  D_801F69AF;
 extern u8  D_801F6BC0;
 
@@ -56,8 +55,9 @@ extern u16  D_801F6216;
 extern char D_801F2C04[];
 extern u8   D_80147C97;
 
-/* The camera and view steps the handlers enter. */
+/* Places the task at the area focus point and reads the height there. */
 void func_801F32A0(s32 value);
+/* Whether a party member stands at the cell. */
 bool func_801F60E0(void);
 
 extern Callback D_801F6218[];
