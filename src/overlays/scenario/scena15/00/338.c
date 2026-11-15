@@ -669,7 +669,37 @@ MATCH void func_801F9CE8(void) {
 
 INCLUDE_ASM(func_801F9CFC);
 
-INCLUDE_ASM(func_801FA6BC);
+extern u8 D_801FE608[];
+
+MATCH void func_801FA6BC(s32 point) {
+    u8  slot;
+    u32 ofs;
+    s32 x;
+    s32 y;
+
+    Game_SetScriptActive();
+    g_ScriptVars[0] = 1;
+    slot            = Actor_FindFreeSpawned();
+    D_801FE748      = slot;
+    if (slot != GAME_NONE) {
+        g_SpawnedActors[slot].header.flags = 1;
+        g_SpawnedActors[D_801FE748].type   = 0x89;
+        g_SpawnedActors[D_801FE748].link   = point;
+    }
+    ofs                 = (u8)point * 10;
+    g_AreaScrollTargetX = *(s16*)(D_801FE608 + ofs) << 8;
+    g_AreaScrollTargetY = *(s16*)(D_801FE608 + ofs + 2) << 8;
+    func_80153DE8();
+    g_Game.unk_3CE[2] = 0;
+    func_801BE1B0(0);
+    x = *(s16*)(D_801FE608 + ofs + 4) << 8;
+    y = *(s16*)(D_801FE608 + ofs + 6) << 8;
+    g_Game.walk_flags &= 0xFFEF;
+    func_801BFE34(x, y, D_801FE608[ofs + 9]);
+    g_AreaDrawMode        = 4;
+    g_SceneState.state_04 = 2;
+    g_SceneState.step_05  = 0;
+}
 
 #include "overlays/scenario/Scene_SpawnActor.h"
 
