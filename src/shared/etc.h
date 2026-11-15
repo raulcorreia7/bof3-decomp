@@ -145,13 +145,20 @@ void        func_801D3310(void);
 void        func_801E1680(void);
 s32         SAVE_ScanDirectory(char* prefix, u8 length);
 void        func_801F03D0(void);
-void        func_801F16BC(void);
-void        func_801F18BC(void);
-void        func_801F1B8C(void);
-void        func_801F1E74(void);
-void        func_801F1F9C(void);
-void        func_801F2020(void);
-void        func_801F228C(void);
+/* func_801F16BC */
+void        Fairy_RunCommu01Scene(void);
+/* func_801F18BC */
+void        Fairy_RunGiftScene(void);
+/* func_801F1B8C */
+void        Fairy_RunExploreReward(void);
+/* func_801F1E74 */
+void        Fairy_RunCommu02Scene(void);
+/* func_801F1F9C */
+void        Fairy_RunCommu03Scene(void);
+/* func_801F2020 */
+void        Fairy_RunCommu04Scene(void);
+/* func_801F228C */
+void        Fairy_RunCommu05Scene(void);
 
 extern s32 D_801457AC;
 

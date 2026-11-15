@@ -674,8 +674,10 @@ void        func_8009E224(void);
 void        func_8009E248(void);
 void        func_8009E7C4(void);
 void        func_8009E7E4(void);
-void        func_8009E804(void);
-void        func_8009E824(void);
+/* func_8009E804 */
+void        Battle_InflictSleep(void);
+/* func_8009E824 */
+void        Battle_InflictConfusion(void);
 void        func_8009E844(void);
 void        func_8009E98C(void);
 void        func_8009EA30(void);
@@ -691,32 +693,46 @@ void        func_8009EFB8(void);
 void        func_8009F010(void);
 void        func_8009F0A4(void);
 void        func_8009F1BC(void);
-void        func_8009F258(void);
+/* func_8009F258 */
+void        Battle_InflictSilence(void);
 void        func_8009F278(void);
 void        func_8009F2B0(void);
 void        func_8009F2E8(void);
-void        func_8009F3DC(void);
-void        func_8009F414(void);
+/* func_8009F3DC */
+void        Battle_ApplyMight(void);
+/* func_8009F414 */
+void        Battle_ApplyInferno(void);
 void        func_8009F44C(void);
 void        func_8009F484(void);
-void        func_8009F4BC(void);
-void        func_8009F4F4(void);
-void        func_8009F52C(void);
-void        func_8009F564(void);
+/* func_8009F4BC */
+void        Battle_ApplyFlare(void);
+/* func_8009F4F4 */
+void        Battle_ApplyProtect(void);
+/* func_8009F52C */
+void        Battle_ApplyWeaken(void);
+/* func_8009F564 */
+void        Battle_ApplyFireblast(void);
 void        func_8009F59C(void);
 void        func_8009F5D4(void);
 void        func_8009F60C(void);
 void        func_8009F644(void);
 void        func_8009F67C(void);
-void        func_8009F6B4(void);
+/* func_8009F6B4 */
+void        Battle_ApplyBarrier(void);
 void        func_8009F758(void);
-void        func_8009F7EC(void);
-void        func_8009F814(void);
-void        func_8009F83C(void);
-void        func_8009F864(void);
+/* func_8009F7EC */
+void        Battle_ThirdHpDamage(void);
+/* func_8009F814 */
+void        Battle_FullHpDamage(void);
+/* func_8009F83C */
+void        Battle_HalfHpDamage(void);
+/* func_8009F864 */
+void        Battle_InflictParalysis(void);
 void        func_8009F884(void);
-void        func_8009F978(void);
-void        func_8009F998(void);
+/* func_8009F978 */
+void        Battle_InflictBlindness(void);
+/* func_8009F998 */
+void        Battle_InflictPoison(void);
 void        func_8009F9B8(void);
 void        func_8009F9E0(void);
 void        func_8009FA20(void);
@@ -817,7 +833,8 @@ void        func_8009CF80(u8* record, s32 index, s32 new_value);
 /* func_8009CFEC */
 void        Battle_MergeEnemyPanels(void);
 void        Battle_ApplyAbilityDamage(void);
-extern void func_8009DE18(void);
+/* func_8009DE18 */
+extern void Battle_ApplyHeal(void);
 void        func_8009DE8C(void);
 extern void func_8009E500(void);
 /* func_8009F320 */
@@ -827,7 +844,8 @@ extern void func_800A0378(void);
 s16         Battle_GetActionId(u8 unused, u8 battler_index, u16 base_value, u8 element_flag);
 s16         Battle_GetFireResistance(u8 battler_index, u16 element_mask);
 s16         func_800A2EF0(u8 battler_index, u16 element_mask);
-s32         func_800A30E8(u8 unused, u8 battler_index);
+/* func_800A30E8 */
+s32         Battle_CalcHeal(u8 unused, u8 battler_index);
 void        func_800A31E0(u8 selection_kind, u16 input_mask);
 bool        func_800A3638(s32 battler_index, s32 compare_value);
 u8          func_800A36BC(s32 battler_index, s32 compare_value);
@@ -837,9 +855,11 @@ u8          Battle_PickAbility(u8 battler_index, u8 selection_kind);
 u8          func_800A3C9C(u8 battler_index, u8 selection_kind);
 void        Battle_MarkDamageApplied(void);
 u8          func_800A403C(u8 battler_index);
-u8          func_800A41D8(s32 input_mask);
+/* func_800A41D8 */
+u8          Battle_InflictStatus(s32 status_mask);
 u8          func_800A4238(s32 input_mask);
-s16         func_800A4294(s32 input_kind);
+/* func_800A4294 */
+s16         Battle_RollHpDamage(s32 divisor);
 void        func_800A46C4(void);
 /* func_800A4700 */
 void        Battle_LoadDraArchive(void);
@@ -1145,10 +1165,10 @@ static inline void BattleSelectionDelta(s32 mode) {
 
     ctx = (BattleSelectionContext*)&g_Battle.target;
     if (ctx->sel < 3u) {
-        value                                                        = func_800A4294(mode);
+        value                                                        = Battle_RollHpDamage(mode);
         (*(volatile BattleTurn**)&g_Battle.target_record)->hp_change = (s16)(value - g_Game.members[ctx->sel].chr.stats.defense);
     } else {
-        value                                                        = func_800A4294(mode);
+        value                                                        = Battle_RollHpDamage(mode);
         (*(volatile BattleTurn**)&g_Battle.target_record)->hp_change = (s16)(value - ENEMY_COMBATANT(ctx->sel).stats.defense);
     }
 

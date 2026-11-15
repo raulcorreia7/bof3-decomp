@@ -65,7 +65,18 @@ MATCH void func_801D0EAC(void) {
     SYS_DISPATCH_TASK(D_801D27D8, 1, g_Task);
 }
 
-INCLUDE_ASM(func_801D0EF0);
+MATCH void func_801D0EF0(void) {
+    g_Task->pos.x.fixed                   = g_Game.members[2].pos.x.fixed;
+    g_Task->pos.y.fixed                   = g_Game.members[2].pos.y.fixed;
+    g_Task->pos.z.fixed                   = TO_COORD(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
+    g_Task->vx                            = g_Task->pos.x.fixed;
+    g_Task->vy                            = g_Task->pos.y.fixed;
+    g_Task->vz                            = g_Task->pos.z.fixed;
+    g_Task->tint.signed_bytes.delta.red   = 0;
+    g_Task->tint.signed_bytes.delta.green = -0x80;
+    g_Task->timer                         = 0x20;
+    g_Task->header.mode++;
+}
 
 MATCH void func_801D0F94(void) {
     Actor* work;
@@ -262,7 +273,38 @@ MATCH void func_801D1758(SpriteSpark* spark) {
     Area_AddCellPrim(spark->x, spark->y, 0, sizeof(TILE));
 }
 
-INCLUDE_ASM(func_801D18CC);
+MATCH s32 func_801D18CC(void) {
+    SpriteSpark* spark;
+    MATRIX       camera;
+    s32          active;
+    s32          step;
+    u16          i;
+    u8           life;
+
+    active = 0;
+    Area_SetCameraMatrix(&camera);
+    spark = MEM_PTR(SpriteSpark, AREA_WORK);
+    i     = 0;
+    do {
+        if (spark->active != 0) {
+            step          = spark->unk_14 + 0x20000;
+            spark->unk_14 = step;
+            spark->z += step;
+            spark->unk_3 ^= 1;
+            func_801D1758(spark);
+            life        = spark->life - 1;
+            spark->life = life;
+            active      = 1;
+            if (life == 0) {
+                spark->active = 0;
+                spark->unk_1  = 0;
+            }
+        }
+        spark++;
+        i++;
+    } while (i < 256);
+    return active;
+}
 
 #include "shared/Area_SeedSparkEmitters.h"
 
