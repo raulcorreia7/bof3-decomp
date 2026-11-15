@@ -15,7 +15,7 @@ NON_MATCHING void func_801F38DC(void) {
             }
             break;
         case 1:
-            if (g_GameStateIndex == 0) {
+            if (g_GameStateIndex == GAME_REQUEST_IDLE) {
                 Message_StartAreaMessage(0xB5);
                 g_GameStateIndex = GAME_REQUEST_MESSAGE;
                 *state           = *state + 1;
@@ -24,14 +24,14 @@ NON_MATCHING void func_801F38DC(void) {
         case 2:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 UI_SetMode(1);
-                g_AreaDrawFlags = 0x1F;
+                g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
                 *state          = *state + 1;
             }
             break;
         case 3:
             if (WINDOW_EFFECT_IDLE()) {
                 Game_ClearScriptActive();
-                g_SceneEventMode = 0;
+                g_SceneEventMode = SCENE_EVENT_NONE;
                 *state           = 0;
                 D_80146867       = 0;
             }

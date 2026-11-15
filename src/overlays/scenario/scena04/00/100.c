@@ -45,9 +45,7 @@ MATCH void func_801F6EA4(void) {
     }
 }
 
-/* Advances the scene's entrance: raises the actor's unk_1C, steps the focus one cell, moves it
- * through func_801F7084 and sets the shade that fades with the timer, then counts the timer down
- * and hands the step back after eight. */
+/* Steps the scene's entrance focus one cell and raises the shade as the timer runs down. */
 MATCH void func_801F6F2C(void) {
     Actor* work;
     Actor* actor;
@@ -86,8 +84,7 @@ MATCH void func_801F7064(void) {
 
 INCLUDE_ASM(func_801F7084);
 
-/* Draws a Gouraud quad whose four corners are path points, the first two in one shade and the last two
- * in another, both stepping with the frame parity. */
+/* Draws a Gouraud quad through four path points, two corners per shade, flickering with the frame parity. */
 MATCH void func_801F732C(u8 v0, u8 v1, u8 v2, u8 v3, s32 shade0, s32 shade1) {
     POLY_G4* primitive;
     u8       color0;
