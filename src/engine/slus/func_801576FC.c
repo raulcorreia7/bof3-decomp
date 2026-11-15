@@ -1,98 +1,106 @@
 #include "engine/slus/slus.h"
 
-/* lifted draft, best score 48.52%; semantics unverified
- */
-#ifdef NON_MATCHING
-NON_MATCHING void func_801576FC(u8* record) {
-    s32   tmp0;
-    s32   tmp1;
-    s32   tmp2;
-    s32   val0;
-    s32   val1;
-    s32   val2;
-    s32   val3;
-    s32   val4;
-    s8    tmp3;
-    s32   val5;
-    u16   val6;
-    u16   val7;
-    u32   tmp4;
-    u32   tmp5;
-    u8*   val8;
-    u8*   val9;
-    u8*   val10;
-    u8*   val11;
-    u8    tmp6;
-    u8    tmp7;
-    void* val12;
+/* One word of a cell patch list: the list header, a patch head (row, column, selector bits and the patch type
+ * in the top byte) or a patch value. */
+typedef union AreaPatchWord {
+    u32 word;
+
+    struct {
+        s16 request;
+        u16 count;
+    } header;
+
+    struct {
+        u8 row;
+        u8 column;
+        u8 pad_02;
+        u8 type;
+    } head;
+} AreaPatchWord;
+
+/* Applies a cell patch list: each patch stores a record word, a cell word or a cell code for (column, row), picked
+ * by the list's condition, and the first two kinds upload the record to the cell's primitive. */
+MATCH void func_801576FC(u8* record) {
+    AreaPatchWord* list = (AreaPatchWord*)record;
+    AreaPatchWord* entry;
+    POLY_FT4*      prim;
+    u32*           dst;
+    u32*           slot;
+    u32*           cells;
+    AreaMapBundle* map;
+    u16*           grid;
+    u32            word;
+    s32            i;
+    s32            cond;
+    s32            count;
+    s32            row;
+    s32            column;
+    s32            kind;
+    s32            id;
+    s32            size;
+    s32            grid_off;
+    s32            image_off;
+    s32            index;
+    u16            cell;
     /* FAKE: unused frame, 16 bytes. */
     FAKE_STACK_PADS(u8, 16);
 
-    val11 = record;
-    val1  = 0;
-    tmp3  = Area_TestCondition((s32) * (s16*)(val11));
-    val6  = FIELD(u16, val11, 0x2u);
-    val11 += 4;
-    if (val6 != 0) {
-        val5  = tmp3;
-        val10 = MEM_PTR(u8, 0x80100000);
-        val10 = MEM_PTR(u8, (MAP_BUNDLE_BASE + 0x00));
-        val2  = val5 * 4;
-        val8  = (u8*)g_AreaCellPrims;
-        val8  = (u8*)g_AreaCellPrims;
-        val3  = 0 * 4;
-        do {
-            val9 = &val11[val3];
-            tmp4 = *(u32*)(val9);
-            tmp6 = FIELD(u8, val9, 0x1u);
-            tmp5 = tmp4 >> 0x18;
-            tmp1 = tmp4 & BYTE_MASK;
-            switch (tmp5) { /* switch 1; irregular */
-                case 0:     /* switch 1 */
-                    tmp7 = *val10;
-                    val1 += 1;
-                    tmp0 = g_AreaMapBundle.grid_off4_02 * 4;
-                    FIELD(u32, val10, tmp0 + ((((s32)((tmp7 * g_AreaMapBundle.height) + 1) >> 1) * 4) + (FIELD(u16, val10, (tmp1 * tmp7 * 2) + tmp0 + (tmp6 * 2)) * 4) + ((tmp4 >> 0xE) & 0x3C))) =
-                        FIELD(s32, (val2 + val9), 0x4u);
-                    goto block_13; /* retail branch */
-                default:           /* switch 1 */
-                    val1 += 2;
-                    FIELD(u8, (u8*)g_AreaCellCodes, tmp6 + (tmp1 * g_AreaMapBundle.width)) = (s8)(FIELD(u32, val9, 0x4u) >> (val5 * 0x10));
-                    break;
-                case 1: /* switch 1 */
-                block_13:
-                    val0 = ((u32) * (u32*)(val9) >> 0x14) & 0xF;
-                    tmp2 = Area_GetCellId((s32)tmp6, tmp1);
-                    if (tmp2 != 0) {
-                        switch (val0) { /* switch 2; irregular */
-                            case 0:     /* switch 2 */
-                                val12 = (void*)(tmp2 * 0x50);
-                                val4  = (s32)((g_FrameBufferIndex * 0x28) + val8);
-                                break;
-                            case 1: /* switch 2 */
-                                val7 = FIELD(u16, ((u8*)g_AreaCellPrims + 0x4E), tmp2 * 0x50);
-                            block_14:
-                                val4  = val7 * 0x50;
-                                val12 = (g_FrameBufferIndex * 0x28) + val8;
-                                break;
-                            default: /* switch 2 */
-                                val7 = FIELD(u16, ((u8*)g_AreaCellPrims + 0x46), tmp2 * 0x50);
-                                goto block_14; /* retail branch */
-                        }
-                        func_80155560(FIELD(u32, (val2 + val9), 0x4u), val4 + val12, 1);
-                    }
-                    val1 += 2;
-                    break;
-                case 2: /* switch 1 */
-                    FIELD(u32, val10, 0x30 + (tmp6 * 4) + (tmp1 * g_AreaMapBundle.width * 4)) = FIELD(s32, (val2 + val9), 0x4u);
-                    g_AreaCameraRefreshCount                                                  = 2;
-                    val1 += 3;
-                    break;
-            }
-            val3 = val1 * 4;
-        } while (val1 < (s32)val6);
+    i     = 0;
+    cond  = Area_TestCondition(list->header.request);
+    count = list->header.count;
+    list++;
+    if (count == 0) {
+        return;
     }
+    do {
+        entry  = &list[i];
+        word   = entry->word;
+        column = entry->head.column;
+        row    = word & 0xFF;
+        switch (word >> 24) {
+            case 0:
+                map       = (AreaMapBundle*)MAP_BUNDLE_BASE;
+                size      = map->width * g_AreaMapBundle.height;
+                grid_off  = g_AreaMapBundle.grid_off4_02 * 4;
+                image_off = ((size + 1) >> 1) * 4;
+                dst       = (u32*)(grid_off + ((u32)map + image_off));
+                index     = row * map->width * 2 + (grid_off + column * 2);
+                grid      = (u16*)(index + (u32)map);
+                cell      = *grid;
+                dst += cell;
+                slot  = dst + ((word >> 16) & 0xF);
+                *slot = entry[cond + 1].word;
+                i++;
+            case 1:
+                kind = (entry->word >> 20) & 0xF;
+                id   = Area_GetCellId(column, row);
+                if (id != 0) {
+                    switch (kind) {
+                        case 0:
+                            prim = &g_AreaCellPrims[id][g_FrameBufferIndex];
+                            break;
+                        case 1:
+                            prim = &g_AreaCellPrims[g_AreaCellPrims[id][1].pad2][g_FrameBufferIndex];
+                            break;
+                        default:
+                            prim = &g_AreaCellPrims[g_AreaCellPrims[id][1].pad1][g_FrameBufferIndex];
+                            break;
+                    }
+                    func_80155560(entry[cond + 1].word, prim, 1);
+                }
+                i += 2;
+                break;
+            case 2:
+                cells                    = (u32*)(MAP_BUNDLE_BASE + 0x30) + row * g_AreaMapBundle.width;
+                slot                     = (u32*)(column * 4 + (u32)cells);
+                *slot                    = entry[cond + 1].word;
+                g_AreaCameraRefreshCount = 2;
+                i += 3;
+                break;
+            default:
+                *(g_AreaCellCodes + column + row * g_AreaMapBundle.width) = entry[1].word >> (cond * 16);
+                i += 2;
+                break;
+        }
+    } while (i < count);
 }
-#else
-INCLUDE_ASM(func_801576FC);
-#endif
