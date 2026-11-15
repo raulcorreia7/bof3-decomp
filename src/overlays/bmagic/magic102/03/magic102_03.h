@@ -34,8 +34,9 @@ extern u8  D_801F0CBC;
 extern u8  D_801F0CC0;
 extern s16 D_801F0CC4;
 extern s16 D_801F0CC8;
-/* Per facing (D_801F0CBC >> 1): the divisor of the rise at each step from the target cell. */
+/* The target cell offset of each facing: a signed x and y byte at facing * 2, read unsigned. */
 extern u8  D_801F0C94[8];
+/* Per facing pair (D_801F0CBC >> 1): the divisor of the rise at each step from the target cell. */
 extern u8  D_801F0C9C[2][15];
 extern s8  D_801F0CCC[17][15];
 extern s8  D_801F0DCC[16][15];
@@ -49,7 +50,12 @@ extern s16 D_801F0F50[8];
 
 /* The map bundle read through its base address as a number (the retail code loads the constant,
  * not the g_AreaMapBundle symbol): its width, and height byte k of the cell at (row, col). */
-#define MAP_BUNDLE_WIDTH             (((AreaMapBundle*)MAP_BUNDLE_BASE)->width)
-#define MAP_CELL_CORNER(row, col, k) (((u8*)(MAP_BUNDLE_BASE + AREA_MAP_BUNDLE_SIZE))[((col) + (row) * MAP_BUNDLE_WIDTH) * 4 + (k)])
+#define MAP_BUNDLE_WIDTH                (((AreaMapBundle*)MAP_BUNDLE_BASE)->width)
+#define MAP_CELL_CORNER(row, col, k)    (((u8*)(MAP_BUNDLE_BASE + AREA_MAP_BUNDLE_SIZE))[((col) + (row) * MAP_BUNDLE_WIDTH) * 4 + (k)])
+
+/* The command byte of a scene part word picks the cell record's callback (D_8017F668[command]).
+ * The four parts commands this effect raises run the module's own drawers. */
+#define PART_COMMAND(word)              ((u8)((word) >> 24))
+#define PART_COMMAND_SET(word, command) (((word) & 0xFFFFFF) | ((command) << 24))
 
 #endif

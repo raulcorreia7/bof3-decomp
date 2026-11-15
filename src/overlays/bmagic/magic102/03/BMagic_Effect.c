@@ -8,7 +8,108 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/func_801EEC14.h"
 
+#ifdef NON_MATCHING
+/* The effect's start: the caster's facing picks the target cell, every battler,
+ * field actor and actor slot stores its height over the ground, the parts of the
+ * cells around the target take the 0x28..0x2B commands this overlay draws, and the
+ * effect clears its grid and queues the selection sound. */
+NON_MATCHING void func_801EEC80(void) {
+    ScenePart* part;
+    ScenePart* end;
+    s32        i;
+    s32        j;
+    u16        cell;
+
+    if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
+        if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
+            D_801F0CBC = D_8014637C->facing ^ 2;
+        } else {
+            D_801F0CBC = D_8014637C->facing;
+        }
+    } else {
+        if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
+            D_801F0CBC = D_8014637C->facing;
+        } else {
+            D_801F0CBC = D_8014637C->facing ^ 2;
+        }
+    }
+    D_801F0CC4           = g_AreaTargetCellX + (s8)D_801F0C94[D_801F0CBC * 2];
+    D_801F0CC8           = g_AreaTargetCellY + (s8)D_801F0C94[D_801F0CBC * 2 + 1];
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0;
+    for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
+        if (g_Game.members[i].header.flags) {
+            D_801F0ECC[i] = COORD_INT(g_Game.members[i].pos.z) - Area_SampleHeight(g_BattleEffects[i].pos.x.fixed, g_BattleEffects[i].pos.y.fixed);
+        }
+    }
+    for (i = 0; i < 8; i++) {
+        if (!(Battle_SlotIsBlocked((u8)(i + 3)) & BYTE_MASK)) {
+            D_801F0F40[i] = COORD_INT(g_BattleEnemyBattlers[i].pos.z) - Area_SampleHeight(g_BattleEffects[i + 3].pos.x.fixed, g_BattleEffects[i + 3].pos.y.fixed);
+            D_801F0F50[i] = COORD_INT(g_BattleEnemyBattlers[i].pos.z);
+        }
+    }
+    for (i = 0; i < ACTOR_COUNT; i++) {
+        if (g_Actors[i].header.flags) {
+            D_801F0ED4[i] = COORD_INT(g_Actors[i].pos.z) - Area_SampleHeight(g_Actors[i].pos.x.fixed, g_Actors[i].pos.y.fixed);
+        }
+    }
+    for (i = 0; i < 4; i++) {
+        if (D_80147A58[i].header.flags) {
+            D_801F0F10[i] = COORD_INT(D_80147A58[i].pos.z) - Area_SampleHeight(D_80147A58[i].pos.x.fixed, D_80147A58[i].pos.y.fixed);
+        }
+    }
+    for (i = 0; i < ACTOR_SLOT_COUNT; i++) {
+        if (g_SpawnedActors[i].header.flags && g_SpawnedActors[i].type == 0x17) {
+            D_801F0F18[i] = COORD_INT(g_SpawnedActors[i].pos.z) - Area_SampleHeight(g_SpawnedActors[i].pos.x.fixed, g_SpawnedActors[i].pos.y.fixed);
+        }
+    }
+    for (i = 0; i < AREA_CELL_GRID_ROWS; i++) {
+        for (j = 0; j < AREA_CELL_GRID_COLS; j++) {
+            cell = g_AreaCellGrid[i][j];
+            if (cell == 0) {
+                continue;
+            }
+            part = (ScenePart*)((u8*)MAP_BUNDLE_BASE + g_AreaMapBundle.record_region_24 * 4 + cell * 4);
+            end  = (ScenePart*)((u8*)part + (*(u16*)((u8*)part - 2) * 4 - 4));
+            while (part != end) {
+                if (PART_COMMAND(part->raw) == 0x00) {
+                    part->raw = PART_COMMAND_SET(part->raw, 0x28);
+                }
+                if (PART_COMMAND(part->raw) == 0x21) {
+                    part->raw = PART_COMMAND_SET(part->raw, 0x29);
+                }
+                if (PART_COMMAND(part->raw) == 0x22) {
+                    part->raw = PART_COMMAND_SET(part->raw, 0x2A);
+                }
+                if (PART_COMMAND(part->raw) == 0x27) {
+                    part->raw = PART_COMMAND_SET(part->raw, 0x2B);
+                }
+                part += part->head.count;
+            }
+        }
+    }
+    for (i = 0; i < 17; i++) {
+        for (j = 14; j >= 0; j--) {
+            D_801F0CCC[i][j] = 0;
+        }
+    }
+    switch (g_Battle.encounter) {
+        case 0x1C:
+        case 0x23:
+        case 0x2F:
+        case 0x34:
+            D_801F0CC0 = 1;
+            break;
+        default:
+            D_801F0CC0 = 0;
+            break;
+    }
+    SND_QueueSelectionEffect(0x100);
+    g_Task->header.mode += 1;
+}
+#else
 INCLUDE_ASM(func_801EEC80);
+#endif
 
 /* Counts this effect's steps; at the tick limit it re-arms the counter, steps
  * the magic, and flips the area camera's vertical offset with the frame parity. */
