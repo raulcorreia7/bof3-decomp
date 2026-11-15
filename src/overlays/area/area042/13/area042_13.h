@@ -18,7 +18,29 @@ extern u8 D_801F52C6[];
 extern u8 D_801F52D0[];
 extern u8 D_801F52E0[];
 extern u8 D_801F52E8[];
+
+/* The cell each of the payload's eighteen quads is drawn at: x, y and a signed z. */
+typedef struct AreaQuadCell {
+    u8 x;
+    u8 y;
+    s8 z;
+} AreaQuadCell;
+
+ASSERT_SIZE(AreaQuadCell, 3);
+
+extern AreaQuadCell D_801F52F4[];
+
+/* The payload's eighteen quad cells, three bytes each. */
+#define AREA_PAYLOAD_QUAD_COUNT 18
+
+/* The packed part word the payload quads are queued with: the tag in the high half, the first
+ * tile of the bundle's tile table in the low half. The row colour is ORed in. */
+#define AREA_QUAD_PART_TAG      (0xB600u << 16)
+#define AREA_QUAD_PART_TILE     0xB100u
+#define AREA_QUAD_PART_WORD     (AREA_QUAD_PART_TAG | AREA_QUAD_PART_TILE)
 extern u8 D_801F532C[];
+
+extern SVECTOR D_1F800014[];
 
 void func_801F3D18(s32);
 

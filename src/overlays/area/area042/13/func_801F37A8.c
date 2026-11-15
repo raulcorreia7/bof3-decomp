@@ -1,3 +1,29 @@
 #include "area042_13.h"
 
-INCLUDE_ASM(func_801F37A8);
+MATCH void func_801F37A8(s32 depth, s32 color) {
+    SVECTOR* vectors;
+    u8*      prim;
+    s32      p;
+    s32      flag;
+    s32      i;
+
+    i       = 0;
+    vectors = D_1F800014;
+    do {
+        prim = g_GfxPrimCursor;
+        SetPolyFT4(prim);
+        SetShadeTex(prim, 0);
+        /* Cell coordinates into area view space: 128 units per cell (<<7), the grid origin at
+         * AREA_CELL_ORIGIN and each quad edge AREA_CELL_HALF out; 0x40C0 is that origin plus the
+         * three-half-cell inset, which has no name in the tree. */
+        vectors[0].vx = vectors[2].vx = (D_801F52F4[i].x << 7) - 0x40C0;
+        vectors[0].vy = vectors[1].vy = (D_801F52F4[i].y << 7) - 0x40C0;
+        vectors[1].vx = vectors[3].vx = ((D_801F52F4[i].x - 0x80) << 7) | AREA_CELL_HALF;
+        vectors[2].vy = vectors[3].vy = ((D_801F52F4[i].y - 0x80) << 7) | AREA_CELL_HALF;
+        vectors[0].vz = vectors[1].vz = vectors[2].vz = vectors[3].vz = depth;
+        RotTransPers4(&vectors[0], &vectors[1], &vectors[2], &vectors[3], (s32*)(prim + 8), (s32*)(prim + 0x10), (s32*)(prim + 0x18), (s32*)(prim + 0x20), &p, &flag);
+        func_80155560(AREA_QUAD_PART_WORD | color, prim, 1);
+        Area_AddCellPrim(D_801F52F4[i].x << 16, D_801F52F4[i].y << 16, D_801F52F4[i].z, sizeof(POLY_FT4));
+        i++;
+    } while (i < AREA_PAYLOAD_QUAD_COUNT);
+}
