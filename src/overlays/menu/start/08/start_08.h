@@ -207,6 +207,11 @@ extern u8              D_8014850F; /* the panel's group first entry */
 extern u8              D_80148510; /* the panel's group cursor */
 extern s8              D_80148511; /* signed scalar view of the panel's drawn cursor */
 extern u8*             D_80148524;
+extern u8              D_8014852B;
+extern u8              D_80148531;
+extern u8              D_80148532;
+extern u8              D_80148533;
+extern u8              D_80148534;
 extern s8              D_8014854C;
 extern s8              D_8014854D;
 extern s8              D_8014854E;
@@ -314,6 +319,8 @@ extern Callback D_801EC3D4[];
 extern Callback D_801EC400[7];
 extern Callback D_801EC41C[];
 extern u16      D_801EC440[];
+extern u16      D_801EC448[];
+extern u16      D_801EC450[];
 extern u8       s_EquipSlotCategories[8];
 extern Callback D_801EC460[];
 extern Callback D_801EC498[];
@@ -426,6 +433,10 @@ extern u8              s_PartyCharacterIds[3];
 extern u8              D_801ED613[];
 extern s8              D_801ED618;
 extern u8              D_801ED620;
+extern u8              D_801ED8BC;
+extern u8              D_801ED8BD;
+extern u8              D_801ED8D4;
+extern u8              D_801ED8D5;
 /* D_801ED63C */
 extern u8              g_EquipPreview[EQUIP_SLOT_COUNT];
 extern s8              D_801ED648;

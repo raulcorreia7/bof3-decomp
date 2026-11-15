@@ -86,24 +86,29 @@ extern Scena07Burst* D_801FDFBC;
 void                 func_801F97E0(Scena07Burst* burst);
 
 /* The burst buffer D_801FDFC0 points at, at D_800E4C24: the burst position,
- * its rotation angle and the scale triple its draw function reads. The span
- * between the position and the angle is not modelled. */
+ * the projected screen points of eight rows, their shades, its rotation angle and the scale triple its
+ * draw function reads. */
 typedef struct Scena07BurstBuffer {
-    s32 x; /* 0x000 */
-    s32 y; /* 0x004 */
-    s32 z; /* 0x008 */
-    u8  pad_00C[0x504];
-    u16 angle; /* 0x510 */
-    u8  pad_512[2];
-    s32 unk_514; /* 0x514 */
-    s32 unk_518; /* 0x518 */
-    s32 unk_51C; /* 0x51C */
+    s32     x; /* 0x000 */
+    s32     y; /* 0x004 */
+    s32     z; /* 0x008 */
+    u8      pad_00C[4];
+    DVECTOR points[8][32]; /* 0x010 */
+    u8      shade[8][32];  /* 0x410 */
+    u16     angle;         /* 0x510 */
+    u8      pad_512[2];
+    s32     unk_514; /* 0x514 */
+    s32     unk_518; /* 0x518 */
+    s32     unk_51C; /* 0x51C */
 } Scena07BurstBuffer;
 
 ASSERT_SIZE(Scena07BurstBuffer, 0x520);
+ASSERT_OFFSET(Scena07BurstBuffer, points, 0x10);
+ASSERT_OFFSET(Scena07BurstBuffer, shade, 0x410);
 ASSERT_OFFSET(Scena07BurstBuffer, angle, 0x510);
 ASSERT_OFFSET(Scena07BurstBuffer, unk_514, 0x514);
 
+extern Scena07BurstBuffer  D_800E4C24;
 extern Scena07BurstBuffer* D_801FDFC0;
 void                       func_801F9330(Scena07BurstBuffer* buffer);
 

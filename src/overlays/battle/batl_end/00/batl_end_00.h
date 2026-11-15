@@ -9,6 +9,7 @@ extern s16        D_80148628;
 extern u16        D_8014862A;
 extern u8         D_8014862D;
 extern char       D_80149118[];
+extern const char D_801EEC40[4];
 extern u8*        D_801EB4F4;
 /* func_801ADDD4 */
 void              Char_GetExp(s32 char_id);
