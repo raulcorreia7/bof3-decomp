@@ -54,6 +54,7 @@ extern u8        D_801FE71C[];
 /* The scene band's velocity. */
 extern Point3l   D_801FE738;
 extern u8        D_801FE748;
+extern u8        D_801FE608[];
 extern u8        D_801FE74C;
 void             func_801F8958(void);
 void             func_801F9020(Coord* position, s32* step);
