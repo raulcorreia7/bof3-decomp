@@ -36,7 +36,7 @@ segments:
       - [0x3A4, .rodata, func_801FAC54]
       - [0x3D0, .rodata, D_801F6FD0]
       - [0x3D4, .rodata, func_801FB0F0]
-      - [0x3F4, .rodata, D_801F6FF4]
+      - [0x3F4, .rodata, 46F8]
       - [0x448, .rodata, D_801F7048]
       - [0x44C, .rodata, func_801FB6C4]
       - [0x494, .rodata, D_801F7094]
