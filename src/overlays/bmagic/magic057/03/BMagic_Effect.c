@@ -157,31 +157,28 @@ NON_MATCHING void func_801EF134(void) {
 INCLUDE_ASM(func_801EF134);
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF3C4(void) {
-    s32 offset;
+MATCH void func_801EF3C4(void) {
+    s32 offset_x;
+    s32 offset_y;
     u8  count;
 
     g_Task->pos.z.part.integer = (u16)g_Task->pos.z.part.integer + g_Task->unk_14;
     g_Task->unk_14             = g_Task->unk_14 + g_Task->unk_20;
     Actor_StepAnimLoop();
     if (g_Task->pos.z.part.integer < Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed)) {
-        offset                     = (RANDOM_MOD(6) << 16) + 0x20000;
-        g_Task->pos.x.fixed        = g_BattleEffectBattler->pos.x.fixed + offset;
-        offset                     = (RANDOM_MOD(6) << 16) - 0x30000;
-        g_Task->pos.y.fixed        = g_BattleEffectBattler->pos.y.fixed + offset;
+        offset_x                   = (RANDOM_MOD(6) << 16) + 0x20000;
+        g_Task->pos.x.fixed        = g_BattleEffectBattler->pos.x.fixed + offset_x;
+        offset_y                   = (RANDOM_MOD(6) << 16) - 0x30000;
+        g_Task->pos.y.fixed        = g_BattleEffectBattler->pos.y.fixed + offset_y;
         g_Task->unk_14             = -0x20;
+        g_Task->pos.z.part.integer = (u16)g_Task->pos.z.part.integer + 0x600;
         count                      = g_Task->unk_09 - 1;
         g_Task->unk_09             = count;
-        g_Task->pos.z.part.integer = (u16)g_Task->pos.z.part.integer + 0x600;
         if (count == 0) {
             g_Task->header.step += 1;
         }
     }
 }
-#else
-INCLUDE_ASM(func_801EF3C4);
-#endif
 
 MATCH void func_801EF528(void) {
     PartyMember* work;

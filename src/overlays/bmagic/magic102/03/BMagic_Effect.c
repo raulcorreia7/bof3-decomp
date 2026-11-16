@@ -8,17 +8,17 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/func_801EEC14.h"
 
-#ifdef NON_MATCHING
 /* The effect's start: the caster's facing picks the target cell, every battler,
  * field actor and actor slot stores its height over the ground, the parts of the
  * cells around the target take the 0x28..0x2B commands this overlay draws, and the
  * effect clears its grid and queues the selection sound. */
-NON_MATCHING void func_801EEC80(void) {
+MATCH void func_801EEC80(void) {
     ScenePart* part;
     ScenePart* end;
     s32        i;
     s32        j;
     u16        cell;
+    s32        offset;
 
     if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
         if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
@@ -33,8 +33,9 @@ NON_MATCHING void func_801EEC80(void) {
             D_801F0CBC = D_8014637C->facing ^ 2;
         }
     }
-    D_801F0CC4           = g_AreaTargetCellX + (s8)D_801F0C94[D_801F0CBC * 2];
-    D_801F0CC8           = g_AreaTargetCellY + (s8)D_801F0C94[D_801F0CBC * 2 + 1];
+    offset               = D_801F0CBC * 2;
+    D_801F0CC4           = g_AreaTargetCellX + (s8)D_801F0C94[offset];
+    D_801F0CC8           = g_AreaTargetCellY + (s8)D_801F0C94[offset + 1];
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;
     for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
@@ -107,9 +108,6 @@ NON_MATCHING void func_801EEC80(void) {
     SND_QueueSelectionEffect(0x100);
     g_Task->header.mode += 1;
 }
-#else
-INCLUDE_ASM(func_801EEC80);
-#endif
 
 /* Counts this effect's steps; at the tick limit it re-arms the counter, steps
  * the magic, and flips the area camera's vertical offset with the frame parity. */
@@ -216,7 +214,51 @@ MATCH void func_801EF2B8(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EFD7C(void) {
+    u32* record;
+    u32* end;
+    s32  row;
+    s32  col;
+    u16  cell;
+    u8*  base;
+
+    for (row = 0; row < AREA_CELL_GRID_ROWS; row++) {
+        for (col = 0; col < AREA_CELL_GRID_COLS; col++) {
+            cell = g_AreaCellGrid[row][col];
+            if (cell != 0) {
+                base   = (u8*)(MAP_BUNDLE_BASE + cell * 4);
+                record = (u32*)(base + g_AreaMapBundle.record_region_24 * 4);
+                end    = (u32*)((u8*)record + (((u16*)record)[-1] * 4 - 4));
+                if (record != end) {
+                    do {
+                        if ((u32)*record >> 24 == 0x28) {
+                            *record &= 0xFFFFFF;
+                        }
+                        if ((u32)*record >> 24 == 0x29) {
+                            *record = (*record & 0xFFFFFF) | ((u32)0x21 << 24);
+                        }
+                        if ((u8)(*record >> 24) == 0x2A) {
+                            *record = (*record & 0xFFFFFF) | ((u32)0x22 << 24);
+                        }
+                        if ((u8)(*record >> 24) == 0x2B) {
+                            *record = (*record & 0xFFFFFF) | ((u32)0x27 << 24);
+                        }
+                        record += ((u8*)record)[2];
+                    } while (record != end);
+                }
+            }
+        }
+    }
+    g_AreaCameraOffsetY = 0;
+    Battle_MarkDamaged(g_Battle.target_selector);
+    g_Battle.state |= 4;
+    func_801E5988();
+    g_AreaCameraRefreshCount = 2;
+}
+#else
 INCLUDE_ASM(func_801EFD7C);
+#endif
 
 /* Draws the textured quads of the five-record parts at parts like the resident Area_DrawPartQuads, but each vertex
  * depth adds func_801F0ADC of its x and y. */
@@ -450,4 +492,38 @@ MATCH void Area_DrawGroundSceneSprite(u8* record, s32 origin_x, s32 origin_y) {
     GFX_AddPrim(g_AreaDrawMode, sizeof(POLY_FT4));
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING s32 func_801F0ADC(s32 x, s32 y) {
+    s32 col;
+    s32 row;
+    s32 sum;
+    FAKE_STACK_PADS(u8, 8);
+
+    if (D_801F0CBC & 1) {
+        col = ((y + 0x4000) >> 6) - D_801F0CC8 * 2;
+        row = ((x + 0x4000) >> 6) - D_801F0CC4 * 2;
+    } else {
+        col = ((x + 0x4000) >> 6) - D_801F0CC4 * 2;
+        row = ((y + 0x4000) >> 6) - D_801F0CC8 * 2;
+    }
+    if (((u32)col >= 0x1C) | ((u32)row >= 0x20)) {
+        return 0;
+    }
+    if (((col | row) & 1) == 0) {
+        sum = (D_801F0DCC[(row >> 1) + 1][col >> 1] + D_801F0DCC[row >> 1][(col >> 1) + 1]) << 19;
+    } else if (col & 1) {
+        if (row & 1) {
+            sum = D_801F0DCC[(row >> 1) + 1][(col >> 1) + 1] << 20;
+        } else {
+            sum = (D_801F0DCC[(row >> 1) + 1][(col >> 1) + 1] + D_801F0DCC[row >> 1][(col >> 1) + 1]) << 19;
+        }
+    } else if (row & 1) {
+        sum = (D_801F0DCC[(row >> 1) + 1][(col >> 1) + 1] + D_801F0DCC[(row >> 1) + 1][col >> 1]) << 19;
+    } else {
+        sum = D_801F0DCC[(row >> 1) + 1][(col >> 1) + 1] << 20;
+    }
+    return (-sum) >> 16;
+}
+#else
 INCLUDE_ASM(func_801F0ADC);
+#endif
