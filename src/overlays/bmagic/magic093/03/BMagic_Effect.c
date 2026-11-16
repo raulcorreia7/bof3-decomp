@@ -60,9 +60,7 @@ MATCH void func_801EED04(void) {
         BMAGIC_EFFECT_SLOTS[slot].target.party = owner;
         g_Task->param.unk_0B++;
     }
-    i   = 0;
-    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
-    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
     for (; i < 256; i++) {
         *dst++ = *src++ | 0x8000;
     }

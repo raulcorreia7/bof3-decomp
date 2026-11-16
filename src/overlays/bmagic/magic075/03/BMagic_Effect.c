@@ -32,9 +32,7 @@ MATCH void func_801EEC70(void) {
     } while (i < 7);
     GFX_FreePaletteFadeTarget(actor);
     g_Task->timer = GFX_AllocPaletteFade(actor, 0, 0, 0, 1);
-    i             = 0;
-    dst           = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
-    src           = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
     for (; i < 16; i++) {
         dst[i] = src[i];
     }

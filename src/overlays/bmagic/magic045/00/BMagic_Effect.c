@@ -32,9 +32,7 @@ MATCH void func_801EEC5C(void) {
         g_BattleEffects[slot].unk_0B                    = first;
         g_BattleEffects[slot].header.mode               = 1;
         g_GfxPalettePending                             = 1;
-        first                                           = 0;
-        dst                                             = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
-        src                                             = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+        BMAGIC_POINT_AT_PALETTE_ROW(dst, src, first);
         do {
             dst[first] = src[first] | 0x8000;
             first++;
