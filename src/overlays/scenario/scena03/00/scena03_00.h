@@ -8,19 +8,19 @@
 #include "overlays/scenario/scenario.h"
 #include "engine/game/00/game_00.h"
 
-/* The line record func_801F88FC draws at +0x0C of the task row: five
- * halfwords it rotates and projects, then the line colour. */
+/* The line record func_801F88FC draws at +0x0C of the task row: the radius and the two angles of
+ * its direction, a scale and a colour multiplier for each end. */
 typedef struct Scena03Line {
-    s16       unk_00; /* +0x00 */
-    s16       unk_02; /* +0x02 */
-    s16       unk_04; /* +0x04 */
-    s16       unk_06; /* +0x06 */
-    s16       unk_08; /* +0x08 */
-    ColorRGB8 color;  /* +0x0A */
+    s16       radius;      /* +0x00 */
+    s16       yaw;         /* +0x02 */
+    s16       pitch;       /* +0x04 */
+    s16       start_scale; /* +0x06 */
+    s16       end_scale;   /* +0x08 */
+    ColorRGB8 color;       /* +0x0A */
 } Scena03Line;
 
 ASSERT_SIZE(Scena03Line, 0x0E);
-ASSERT_OFFSET(Scena03Line, unk_06, 0x06);
+ASSERT_OFFSET(Scena03Line, start_scale, 0x06);
 ASSERT_OFFSET(Scena03Line, color, 0x0A);
 
 /* The head of the task row this scene reads as its line record. */
