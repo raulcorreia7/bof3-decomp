@@ -28,7 +28,7 @@ NON_MATCHING void func_801D7EB0(s32 x, s32 y) {
     UI_DrawWindow(x, (y + 1) & HALF_MASK, 139, 158, 0xF0, g_WindowStyle);
     for (slot = 0; slot < FISHING_ACCESSORY_SLOT_COUNT; slot++) {
         id = *slot_list;
-        if (g_OptionItems[id].header.flags != 0xB) {
+        if (g_OptionItems[id].type != ITEM_TYPE_FISHING_ROD) {
             slot_list++;
             continue;
         }

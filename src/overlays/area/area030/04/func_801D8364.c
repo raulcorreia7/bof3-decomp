@@ -48,7 +48,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
     row_y  = -2;
     do {
         accessory = *cursor;
-        if (g_OptionItems[accessory].icon == 0xA) {
+        if (g_OptionItems[accessory].type == ITEM_TYPE_FISHING_LURE) {
             if ((row >= (s32)max_rows) && (index < (s32)max_count)) {
                 if (*D_80145E94 == 2) {
                     if (FISHING_STATE->counter_07 & 1) {
@@ -94,7 +94,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
     func_801D90FC((s32)panel_x, panel_y);
     count = 0;
     do {
-        if (g_OptionItems[g_InventoryIds[3][count]].icon == 0xA) {
+        if (g_OptionItems[g_InventoryIds[3][count]].type == ITEM_TYPE_FISHING_LURE) {
             index += 1;
         }
         count += 1;

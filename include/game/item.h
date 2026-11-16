@@ -157,7 +157,7 @@ ASSERT_OFFSET(Armor, price, 0x14);
 
 typedef struct OptionItem {
     ItemHeader header;
-    u8         icon; /* low nibble selects the icon */
+    u8         type; /* ItemType: accessory, fishing lure or rod; the low nibble selects the icon */
     u8         weight;
     u16        description; /* Item_GetDescription, category ITEM_CAT_OPTION */
     u16        price;
@@ -166,11 +166,11 @@ typedef struct OptionItem {
 ASSERT_OFFSET(OptionItem, description, 0x10);
 ASSERT_SIZE(OptionItem, OPTION_ITEM_STRIDE);
 ASSERT_OFFSET(OptionItem, header, 0x00);
-ASSERT_OFFSET(OptionItem, icon, 0x0e);
+ASSERT_OFFSET(OptionItem, type, 0x0e);
 ASSERT_OFFSET(OptionItem, weight, 0x0f);
 ASSERT_OFFSET(OptionItem, price, 0x12);
 
-#define OPTION_ITEM(name, equipability, header_flags, icon, weight, description, price) {{name, (equipability), (header_flags)}, (icon), (weight), (description), (price)}
+#define OPTION_ITEM(name, equipability, header_flags, type, weight, description, price) {{name, (equipability), (header_flags)}, (type), (weight), (description), (price)}
 
 /* The g_GameShopStock index a shop counter opens, from the area scripts that spawn it. */
 typedef enum ShopId {
