@@ -14,24 +14,23 @@
 
 #define g_SceneState        (*(struct SceneState*)&g_SceneState)
 
-extern u8            D_80148656;
+extern u8   D_80148656;
 /* g_EmiOverlayHeader */
-extern OverlayHeader g_EmiOverlayHeader;
-extern char          g_MenuStatFormat[];
-extern char          g_MenuZennyFormat[];
+extern char g_MenuStatFormat[];
+extern char g_MenuZennyFormat[];
 /* D_801D0C2C */
-extern char          g_MenuNextExpBlank[];
-extern char          g_MenuClockFormat[];
+extern char g_MenuNextExpBlank[];
+extern char g_MenuClockFormat[];
 /* D_801D0D64 */
-extern char          g_SaveSlotLevelFormat[];
+extern char g_SaveSlotLevelFormat[];
 /* D_801D0D68 */
-extern char          g_SaveSlotTimeFormat[];
+extern char g_SaveSlotTimeFormat[];
 /* D_801D0D74 */
-extern u8            g_SaveSlotTimeColon[];
+extern u8   g_SaveSlotTimeColon[];
 /* D_801D0D78 */
-extern char          g_SaveCardPortLabelFirst[];
+extern char g_SaveCardPortLabelFirst[];
 /* D_801D0D7C */
-extern char          g_SaveCardPortLabelSecond[];
+extern char g_SaveCardPortLabelSecond[];
 /* Entries of the handler tables. */
 #define MENU_STATUS_STEP_COUNT        5
 #define MENU_STATUS_TASK_COUNT        4
@@ -120,30 +119,22 @@ extern s32      D_801DA12C;
 
 extern const char g_MenuInventoryCountFormat[];
 
-extern FormationLayout g_MenuFormations[FORMATION_COUNT];
-extern FormationOrder  g_MenuFormationOrder;
-extern s32             g_MenuFormationArrow[3][2];
-extern s32             g_MenuFormationArrowTurned[3][2];
-extern s32             g_MenuFormationSpots[PARTY_SLOT_COUNT][2];
-extern u8              g_MenuFormationFrameLeft[];
-extern u8              g_MenuFormationFrameMiddle[];
-extern u8              g_MenuFormationFrameRight[];
-void                   Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle);
-void                   Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
-void                   func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
-bool                   func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id);
-void                   func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
-void                   func_801AFA1C(u8* marks, u8 thumb_top, s16 x, s16 y, u8 thumb_size, u8 total, u8 track_size);
-extern void            func_801D1D1C(void);
-extern void            func_801D1E34(void);
-void                   func_801D4158(s16 x, s16 y, u8 index, u8 flag);
-extern s32             func_801D2978(void);
-extern void            func_801D2ADC(void);
-extern void            func_801D2C0C(void);
-extern void            func_801D2DA8(void);
-extern void            Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
-extern void            Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
-void                   Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
+void        Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle);
+void        Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
+void        func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
+bool        func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id);
+void        func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
+void        func_801AFA1C(u8* marks, u8 thumb_top, s16 x, s16 y, u8 thumb_size, u8 total, u8 track_size);
+extern void func_801D1D1C(void);
+extern void func_801D1E34(void);
+void        func_801D4158(s16 x, s16 y, u8 index, u8 flag);
+extern s32  func_801D2978(void);
+extern void func_801D2ADC(void);
+extern void func_801D2C0C(void);
+extern void func_801D2DA8(void);
+extern void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
+extern void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
+void        Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
 
 /* Slide the master panel up to y -20 and stop it there. */
 static inline void Menu_SlidePanelUp(void) {

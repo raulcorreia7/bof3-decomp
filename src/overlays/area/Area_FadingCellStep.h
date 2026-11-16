@@ -1,5 +1,3 @@
-extern SVECTOR D_1F800014[];
-
 /* Fades the cell marker out: draws the draw mode and cell primitive of the frame, fills the scratch corners of the actor cell through SET_CORNERS, queues the semi-transparent quad in the timer's shade and the outline DRAW_OUTLINE; at timer 0 the step returns to 1. FLAGS is the image's per-actor flag table. */
 #define AREA_FADING_CELL_STEP(FLAGS, SET_CORNERS, DRAW_OUTLINE)                                                                                                                               \
     POLY_F4* primitive;                                                                                                                                                                       \

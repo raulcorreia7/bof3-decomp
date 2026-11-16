@@ -79,12 +79,9 @@ void func_801F2D40(const void* sprite);
 void func_801F2F1C(void* sprite);
 void func_801F2FC8(void);
 void func_801F321C(void);
-void Area_DrawScreenTint(void);
 void func_801F3C84(void);
 
 extern Point2s D_801F63DC[];
-
-extern SVECTOR D_1F800014[];
 
 /* The stage quad's tile, palette and luminance word: the timer's top bits raise its luminance. */
 #define AREA108_QUAD_WORD ((0x2510u << 16) | 0x0100u)
@@ -95,6 +92,7 @@ s32  func_801F3034(void);
 void func_801F34B8(void);
 
 void func_801F4160(s32 arg0, s32 arg1);
+u8   func_801F4F60(s32 x, s32 y);
 
 extern AreaPosEntry D_801F637C[];
 
@@ -120,5 +118,25 @@ extern SceneSampleTrack* D_801F629C;
 
 /* The staged actor rows: the event scrolls to row 1 and tints row 0. */
 extern Actor D_80147A58[];
+
+/* The four trigger cells the stage event matches: the cell, the facing and the scene flag to toggle. */
+typedef struct Area108Trigger {
+    u8 x;
+    u8 y;
+    u8 facing;
+    u8 flag;
+} Area108Trigger;
+
+ASSERT_SIZE(Area108Trigger, 0x04);
+
+extern Area108Trigger D_801F63CC[];
+
+/* Field views of the actor slot table g_SpawnedActors, one cell per field it fills here. */
+extern u8  D_80143FC8[];
+extern u8  D_80143FC9[];
+extern u8  D_80143FCD[];
+extern u8  D_80143FD3[];
+extern u16 D_80143FFE[];
+extern u16 D_80144002[];
 
 #endif

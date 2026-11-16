@@ -40,8 +40,6 @@ extern AreaQuadCell D_801F52F4[];
 #define AREA_QUAD_PART_WORD     (AREA_QUAD_PART_TAG | AREA_QUAD_PART_TILE)
 extern u8 D_801F532C[];
 
-extern SVECTOR D_1F800014[];
-
 void func_801F3D18(s32);
 
 extern u8  D_801F5350[];

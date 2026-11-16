@@ -67,12 +67,17 @@ ASSERT_OFFSET(ScratchPad, unk_48, 0x048);
  * SCRATCH_PAD/SP/SP_PTR/SP_REF helpers in psx/mem.h keep working. */
 #define SPAD(byte_offset) SP_PTR(ScratchPad, byte_offset)
 
+/* ScratchPad.vectors as the symbol the area, bmagic and scenario code names directly. */
+extern SVECTOR D_1F800014[4];
+
 /* Scratchpad base + 1; battle/battle/03 and etc/game/00 write it directly. */
 extern u8  D_1F800001;
 /* ScratchPad.cells.halves[3]: the staged y coordinate that func_801B13BC writes, and the phase angle
  * the KaiserBreath steps store before rcos loads it back. */
 extern s16 D_1F800006;
 extern s16 D_1F800034[2];
+extern s16 D_1F800016;
+extern s16 D_1F800018;
 /* ScratchPad.unk_38/unk_3A: the area emit pair extent and its mode. */
 extern s16 D_1F800038;
 extern s16 D_1F80003A;

@@ -62,24 +62,21 @@ MATCH void func_801EEF24(void) {
     g_Scripts = AREA_SCRIPT_TABLE;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EEFC8(void) {
+MATCH void func_801EEFC8(void) {
     PartyMember* work;
-    PartyMember* battler;
 
     if (--g_Task->unk_09 == 0) {
-        battler             = (PartyMember*)g_BattleEffectBattler;
-        work                = g_Task;
-        work->unk_14        = TO_COORD(120);
-        work->unk_20        = TO_COORD(96);
-        work->pos.x.fixed   = battler->pos.x.fixed;
-        work->pos.y.fixed   = battler->pos.y.fixed;
-        work->unk_25        = 0x1D;
-        work->pos.z.fixed   = battler->pos.z.fixed + work->unk_14;
+        g_Task->unk_14      = TO_COORD(0x780);
+        g_Task->unk_20      = TO_COORD(96);
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + g_Task->unk_14;
+        g_Task->unk_25      = 0x1D;
         g_Task->unk_26      = 0;
         g_Task->unk_27      = 0x1A;
         g_Task->unk_28      = 1;
-        g_Task->unk_48      = 2;
+        work                = g_Task;
+        work->unk_48        = 2;
         work->scale.x       = 0x10000;
         work->scale.y       = 0x10000;
         g_Task->unk_5D      = 0;
@@ -88,17 +85,14 @@ NON_MATCHING void func_801EEFC8(void) {
         g_Task->unk_5C      = 0;
         g_Task->unk_2A      = 0;
         g_Task->unk_29      = 4;
-        g_Task->unk_2B      = 1;
         g_Task->unk_2C.half = 0;
+        g_Task->unk_2B      = 1;
         g_Task->unk_24      = 0;
         Actor_SelectScript(0U);
         g_Task->unk_09 = 0x10;
         g_Task->header.step += 1;
     }
 }
-#else
-INCLUDE_ASM(func_801EEFC8);
-#endif
 
 /* Lets the effect fall onto the battler's height and, at its timer's end, starts eight effect slots, lifts the
  * camera pitch and moves to the next step. */

@@ -85,7 +85,29 @@ MATCH void func_801EEF4C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEFDC);
+MATCH void func_801EEFDC(void) {
+    PartyMember* work;
+    PartyMember* next;
+    u8           timer;
+
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (timer == 0) {
+        next         = g_Task;
+        next->unk_0C = D_801EFAA0[next->param.unk_0B].x;
+        next->unk_10 = D_801EFAA0[next->param.unk_0B].y;
+        func_801DD350(next);
+        work              = g_Task;
+        work->pos.x.fixed = g_AreaScrollTargetX + work->unk_0C;
+        work->pos.y.fixed = g_AreaScrollTargetY + work->unk_10;
+        if (work->param.unk_0B == 0) {
+            Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
+        }
+        g_Task->unk_09 = 32;
+        g_Task->timer  = 2;
+        g_Task->header.step += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_CountUpTimerByTwoAndStep.h"
 

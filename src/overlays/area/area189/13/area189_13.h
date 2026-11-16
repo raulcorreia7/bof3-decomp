@@ -11,13 +11,14 @@
 extern SVECTOR D_801492E0;
 
 /* The scratchpad work row the entry paths read. */
-extern SVECTOR D_1F800014[];
 
 /* The character work record, viewed as bytes here. */
 
 /* The area-flag bit store and the global flag byte. */
 extern u8  D_80144EF8[];
 extern u16 D_80146876;
+/* Steps until the next encounter, rolled by Area_RollEncounterThreshold. */
+extern u16 D_80145FB8;
 
 /* The party row table and the row field the drain pass reads. */
 
@@ -36,6 +37,13 @@ extern s8       D_801F6285[];
 /* The 16 x 16 block table the height query maps a cell to. */
 extern u8       D_801F6138[];
 
+/* The per-facing entry seeds: the area id and the entry tile's x and y high
+ * halves, one byte each, plus the four facing jitters func_801F5D6C adds. */
+extern u8 D_801F6388[];
+extern u8 D_801F6389[];
+extern u8 D_801F638A[];
+extern u8 D_801F62F0[];
+
 /* The image's step passes. */
 void func_801F2DE0(void);
 void func_801F3514(void);
@@ -43,7 +51,6 @@ void func_801F3800(void);
 s16  func_801F4A04(s32 x, s32 y);
 void func_801F559C(void);
 /* func_801F5F20 */
-void Actor_ClearVelocity(void);
 void func_801F5600(void);
 
 extern Callback D_801F62F4[];

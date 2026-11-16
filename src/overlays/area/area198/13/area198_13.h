@@ -16,6 +16,8 @@
 /* The state handler banks the step dispatchers index. */
 extern u8 D_801F3DFC[];
 extern s8 D_801F43B0[];
+/* The script steps the scene entry starts, one per count phase. */
+extern u8 D_801F43AC[];
 
 /* A scene seed: the scene record the actor selects, the script it starts and
  * four bytes the entry does not read. */
@@ -27,6 +29,22 @@ typedef struct AreaSceneSeed {
 } AreaSceneSeed;
 
 ASSERT_SIZE(AreaSceneSeed, 8);
+
+/* The sprite offset an actor type starts at: the x and y deltas the draw adds to the
+ * screen position. */
+typedef struct SpriteOffset {
+    s16 x;         /* 0x00 */
+    s16 y;         /* 0x02 */
+    u8  unk_04[4]; /* 0x04 */
+} SpriteOffset;
+
+ASSERT_SIZE(SpriteOffset, 8);
+
+/* One sprite offset per actor type, indexed by g_Task->unk_06. */
+extern SpriteOffset D_801F43D4[];
+
+/* This image's copy of the sprite coordinate rounding (link-only name: the slus copy shares it). */
+s32 Area_RoundSpriteCoordinate_area198(s32 pair, s32 step);
 
 /* The scene seeds, one per scene index. */
 extern AreaSceneSeed D_801F43D8[];

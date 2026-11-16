@@ -144,7 +144,7 @@ MATCH void Scene_SetPartyWhelp(void) {
 
 /* func_801FE6DC */
 MATCH void Scene_SetPartyRyuAdult(void) {
-    g_Characters[g_CharSlot[10]].unk_07 &= 0xFE;
+    g_Characters[g_CharSlot[10]].party_flags &= 0xFE;
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
 }
