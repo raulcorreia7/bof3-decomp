@@ -726,4 +726,52 @@ MATCH void func_801F0E90(void) {
     SetTransMatrix(&matrix);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F0FBC(void) {
+    LINE_F2* prim;
+    long     depth;
+    long     flag;
+    s32      i;
+    s32      x;
+    s32      y;
+    s32      z;
+    s32      radius;
+    s32      shade;
+    s32      tpage;
+    if (g_Task->unk_09 >= 0x19) {
+        func_801F0E90();
+        i      = 0;
+        x      = g_Task->pos.x.fixed;
+        y      = g_Task->pos.y.fixed;
+        z      = (g_Task->facing >= 2) ? -2 : 0;
+        radius = ~g_Task->unk_09 & 0x1F;
+        shade  = 0x80 - radius * 16;
+        do {
+            if (GetGraphType() == 1 || GetGraphType() == 2) {
+                tpage = 0x2A5;
+            } else {
+                tpage = 0xB5;
+            }
+            SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+            Area_AddCellPrim(x, y, z, sizeof(DR_MODE));
+            prim = (LINE_F2*)g_GfxPrimCursor;
+            SetLineF2(prim);
+            SetSemiTrans(prim, 1);
+            D_1F800014[0].vx = FIXED_MUL(rcos(i << 6) * 16, radius);
+            D_1F800014[0].vy = FIXED_MUL(rsin(i << 6) * 16, radius);
+            D_1F800014[0].vz = 0;
+            RotTransPers(&D_1F800014[0], (long*)&prim->x0, &depth, &flag);
+            i++;
+            D_1F800014[0].vx = FIXED_MUL(rcos(i << 6) * 16, radius);
+            D_1F800016       = FIXED_MUL(rsin(i << 6) * 16, radius);
+            D_1F800018       = 0;
+            RotTransPers(&D_1F800014[0], (long*)&prim->x1, &depth, &flag);
+            setRGB0(prim, shade, shade, shade);
+            Area_AddCellPrim(x, y, z, sizeof(LINE_F2));
+        } while (i < 0x40);
+        PopMatrix();
+    }
+}
+#else
 INCLUDE_ASM(func_801F0FBC);
+#endif
