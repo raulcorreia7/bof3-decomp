@@ -28,6 +28,14 @@ extern Callback D_801F54D8[];
 /* D_801F54F4 */
 extern Callback D_801F54FC[];
 
+/* Seed rows matched against g_GameContextSeed; column 0 is the seed, the
+ * g_SceneState.scenario_id column is the message id. */
+extern u16 D_801F5338[7][16];
+/* The fish ids the pond keeper shows, ended by GAME_NONE, and the "Manillo"
+ * item text at +0x7. */
+extern u8  D_801F5419[];
+extern u8  D_801F5420[];
+
 /* The work-mode steps the request wrapper runs. */
 
 void func_801F3438(void);
