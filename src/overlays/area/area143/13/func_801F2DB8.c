@@ -1,9 +1,10 @@
 #include "area143_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F2DB8(SpriteSpark* spark) {
+MATCH void func_801F2DB8(SpriteSpark* spark) {
     TILE_1* tile1;
     TILE*   tile;
+
+    FAKE_STACK_PADS(u8, 0x30); /* FAKE: retail reserves 48 bytes of unused stack. */
 
     if (spark->blink != 0) {
         tile1 = (TILE_1*)g_GfxPrimCursor;
@@ -14,7 +15,7 @@ NON_MATCHING void func_801F2DB8(SpriteSpark* spark) {
         tile1->r0 = 0;
         Area_AddCellPrim(spark->x, spark->y, 0, sizeof(TILE_1));
 
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x3C0, 0), 0);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 0x3C0, 0), 0);
         Area_AddCellPrim(spark->x, spark->y, 0, sizeof(DR_MODE));
 
         tile = (TILE*)g_GfxPrimCursor;
@@ -31,6 +32,3 @@ NON_MATCHING void func_801F2DB8(SpriteSpark* spark) {
         Area_AddCellPrim(spark->x, spark->y, 0, sizeof(TILE));
     }
 }
-#else
-INCLUDE_ASM(func_801F2DB8);
-#endif
