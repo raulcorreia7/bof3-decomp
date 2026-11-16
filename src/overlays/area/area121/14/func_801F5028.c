@@ -5,7 +5,7 @@ MATCH u8 func_801F5028(s32 x, s32 y, u8 dir) {
 
     if (dir != 0xFF) {
         tries                = 0;
-        g_Task->direction_08 = Actor_FacingToward();
+        g_Task->direction_08 = CALL_AS(s32 (*)(), Actor_FacingToward)();
         do {
             if (func_801B0E44() == 0 && Actor_FindInRange(x, y, 0) == -1) {
                 break;
