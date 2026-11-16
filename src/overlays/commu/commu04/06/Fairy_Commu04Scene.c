@@ -21,7 +21,7 @@ MATCH void func_801D0C98(void) {
     u8* state = &g_GameStateIndex;
 
     if (*state != GAME_REQUEST_MESSAGE) {
-        Message_StartAreaMessage(0x60);
+        Message_StartAreaMessage(FAIRY_MESSAGE_COPY_PICK_ITEM);
         *state = GAME_REQUEST_MESSAGE;
         D_801F294D += 1;
     }
@@ -46,7 +46,7 @@ MATCH void func_801D11DC(void) {
     UI_DrawWindowOutline(0x16, 0x14 - (D_801D1774 * 12), 0x113, 0xF, 0);
     if (g_MenuPanelTasks[0].state == 0) {
         Menu_ResetPanelTasks();
-        MESSAGE_START_WAIT(0x5F);
+        MESSAGE_START_WAIT(FAIRY_MESSAGE_COPY_DECLINED);
         D_801F294C += 1;
     }
 }
@@ -92,7 +92,7 @@ MATCH void func_801D12C8(void) {
             g_TextVariables[0][i] = record[i];
         }
         g_TextVariables[0][ITEM_NAME_LENGTH] = 0;
-        Message_StartAreaMessage(0x61);
+        Message_StartAreaMessage(FAIRY_MESSAGE_COPY_CONFIRM_ITEM);
         D_801D1774 = 0;
         D_801F294D += 1;
     }
@@ -120,7 +120,7 @@ MATCH void func_801D1628(void) {
     u8* state = &g_GameStateIndex;
 
     if (*state != GAME_REQUEST_MESSAGE) {
-        Message_StartAreaMessage(0x63);
+        Message_StartAreaMessage(FAIRY_MESSAGE_COPY_CHOOSE_ANOTHER);
         *state = GAME_REQUEST_MESSAGE;
     }
 }
