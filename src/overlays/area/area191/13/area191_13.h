@@ -49,6 +49,6 @@ void func_801F39AC(void);
 void func_801F3AB0(void);
 
 /* The camp message the selection row picks. */
-u16 func_801F3924(s32 base, s32 arg1, s32 row, s32 mode);
+u16 func_801F3924(s32 base, s32 character_id, s32 row, s32 mode);
 
 #endif
