@@ -474,7 +474,70 @@ MATCH void func_801F058C(void) {
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F06B4(void) {
+    POLY_FT4* poly;
+    long      depth;
+    long      flag;
+    s32       tpage;
+    s32       x;
+    s32       y;
+    u8        ring;
+    u8        i;
+    s16       angle;
+
+    g_ScratchPad.cells.halves[4] = (s8)g_Task->unk_5D * 8;
+    g_ScratchPad.cells.halves[5] = (s8)g_Task->unk_5D * 8;
+    g_ScratchPad.cells.halves[6] = (s8)g_Task->unk_5D * 8;
+    g_ScratchPad.cells.halves[0] = g_Task->timer * 16;
+    g_ScratchPad.cells.halves[1] = g_Task->unk_09 * 16;
+    g_ScratchPadVectors[1].vz    = -FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
+    for (ring = 1; ring < 9; ring++) {
+        g_ScratchPad.cells.halves[2] = g_ScratchPad.cells.halves[1];
+        g_ScratchPad.cells.halves[1] = g_ScratchPad.cells.halves[2] - 0x40;
+        g_ScratchPadVectors[3].vx    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[2]);
+        g_ScratchPadVectors[3].vy    = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[2]);
+        g_ScratchPadVectors[2].vz    = g_ScratchPadVectors[1].vz;
+        g_ScratchPadVectors[3].vz    = g_ScratchPadVectors[1].vz;
+        g_ScratchPadVectors[1].vx    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[1]);
+        g_ScratchPadVectors[1].vy    = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[1]);
+        g_ScratchPadVectors[0].vz    = -FIXED_MUL(rsin(ring << 8), g_ScratchPad.cells.halves[0]);
+        g_ScratchPadVectors[1].vz    = g_ScratchPadVectors[0].vz;
+        for (i = 1; i < 33; i++) {
+            angle = i;
+            angle &= 0x1F;
+            g_ScratchPad.cells.halves[3] = angle << 7;
+            g_ScratchPadVectors[0].vx    = g_ScratchPadVectors[1].vx;
+            g_ScratchPadVectors[0].vy    = g_ScratchPadVectors[1].vy;
+            g_ScratchPadVectors[1].vx    = FIXED_MUL(rsin(angle << 7), g_ScratchPad.cells.halves[1]);
+            g_ScratchPadVectors[1].vy    = FIXED_MUL(rcos(g_ScratchPad.cells.halves[3]), g_ScratchPad.cells.halves[1]);
+            g_ScratchPadVectors[2].vx    = g_ScratchPadVectors[3].vx;
+            g_ScratchPadVectors[2].vy    = g_ScratchPadVectors[3].vy;
+            g_ScratchPadVectors[3].vx    = FIXED_MUL(rsin(g_ScratchPad.cells.halves[3]), g_ScratchPad.cells.halves[2]);
+            g_ScratchPadVectors[3].vy    = FIXED_MUL(rcos(g_ScratchPad.cells.halves[3]), g_ScratchPad.cells.halves[2]);
+            x                            = (g_ScratchPadVectors[3].vx << 9) + g_Task->pos.x.fixed;
+            y                            = (g_ScratchPadVectors[3].vy << 9) + g_Task->pos.y.fixed;
+            tpage                        = getTPage(1, 1, 320, 256);
+            SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+            Area_AddCellPrim(x, y, 1, sizeof(DR_MODE));
+            poly = (POLY_FT4*)g_GfxPrimCursor;
+            SetPolyFT4(poly);
+            SetSemiTrans(poly, 1);
+            poly->tpage = GetTPage(1, 1, 0x340, 0x100);
+            poly->clut  = GetClut(0, 0x1FA);
+            setUV4(poly, ((i & 1) + (ring - 1) / 4 * 2) << 6, FIELD(u8, D_801F1C08, 0xB + ring - 1), (((i & 1) + (ring - 1) / 4 * 2) << 6) + 0x3F, FIELD(u8, D_801F1C08, 0xB + ring - 1),
+                   ((i & 1) + (ring - 1) / 4 * 2) << 6, FIELD(u8, D_801F1C08, 0x13 + ring - 1) - 1 + FIELD(u8, D_801F1C08, 0xB + ring - 1), (((i & 1) + (ring - 1) / 4 * 2) << 6) + 0x3F,
+                   FIELD(u8, D_801F1C08, 0x13 + ring - 1) - 1 + FIELD(u8, D_801F1C08, 0xB + ring - 1));
+            RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3,
+                          &depth, &flag);
+            setRGB0(poly, g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6]);
+            Area_AddCellPrim(x, y, 1, sizeof(POLY_FT4));
+        }
+    }
+}
+#else
 INCLUDE_ASM(func_801F06B4);
+#endif
 
 MATCH void func_801F0B44(void) {
     SYS_DISPATCH_BYTE(D_801F1C24, g_Task->header.step);
