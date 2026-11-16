@@ -122,16 +122,14 @@ NON_MATCHING void func_801EF134(void) {
     } else {
         dx = (RANDOM_MOD(6) << 16) - 0x30000;
     }
-    work              = g_Task;
-    work->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + dx;
+    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + dx;
 
     if (g_Task->facing & 1) {
         dy = (RANDOM_MOD(6) << 16) + 0x30000;
     } else {
         dy = (RANDOM_MOD(6) << 16) + 0x20000;
     }
-    work              = g_Task;
-    work->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + dy;
+    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + dy;
 
     g_Task->unk_14             = -0x20;
     g_Task->unk_20             = -1;

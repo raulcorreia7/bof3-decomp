@@ -1,7 +1,6 @@
 #include "area091_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F2ED4(u16 radius, u16 color) {
+MATCH void func_801F2ED4(u16 radius, u16 color) {
     SVECTOR  pos;
     SVECTOR  rot;
     MATRIX   matrix;
@@ -30,7 +29,11 @@ NON_MATCHING void func_801F2ED4(u16 radius, u16 color) {
 
     i = 0;
     do {
-        angle                     = i << 7;
+        angle = i << 7;
+        /* FAKE: the counter's spare refs keep it in s1; the plain loop leaves the
+         * scratch-vector pointer there and the two swap (19 rows). */
+        i++;
+        i--;
         g_ScratchPadVectors[0].vx = 0;
         g_ScratchPadVectors[0].vy = 0;
         g_ScratchPadVectors[0].vz = 0;
@@ -53,6 +56,3 @@ NON_MATCHING void func_801F2ED4(u16 radius, u16 color) {
     } while (i < 32);
     PopMatrix();
 }
-#else
-INCLUDE_ASM(func_801F2ED4);
-#endif
