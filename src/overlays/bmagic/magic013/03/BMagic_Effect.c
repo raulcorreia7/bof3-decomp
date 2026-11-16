@@ -333,7 +333,7 @@ MATCH void func_801F0164(void) {
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     prim = (POLY_F3*)g_GfxPrimCursor;
     SetPolyF3(prim);
-    SetSemiTrans(prim, 1);
+    PSX_SET_SEMI_TRANSPARENT(prim);
     setVector(&g_ScratchPadVectors[0], (u32)rsin(0) >> 8, (u32)rcos(0) >> 8, 0);
     setVector(&g_ScratchPadVectors[1], (u32)rsin(DEG(120)) >> 8, (u32)rcos(DEG(120)) >> 8, 0);
     setVector(&g_ScratchPadVectors[2], (u32)rsin(DEG(240)) >> 8, (u32)rcos(DEG(240)) >> 8, 0);

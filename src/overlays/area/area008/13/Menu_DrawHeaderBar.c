@@ -27,7 +27,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
 
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
-    SetSemiTrans(prim, 1);
+    PSX_SET_SEMI_TRANSPARENT(prim);
     left     = x;
     top      = y;
     clut_x   = (window_style << 5) + 0x10;
@@ -64,7 +64,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     prim = (POLY_FT4*)g_GfxPrimCursor;
     odd  = (width - 3) & 1;
     SetPolyFT4(prim);
-    SetSemiTrans(prim, 1);
+    PSX_SET_SEMI_TRANSPARENT(prim);
     half_u = half;
     setXY4(prim, inner, top, half + inner, top, inner, bottom_y, half + inner, bottom_y);
     setUV4(prim, 0u, 0u, (u8)half_u, 0u, 0u, bottom_v, (u8)half_u, bottom_v);
@@ -76,7 +76,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
 
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
-    SetSemiTrans(prim, 1);
+    PSX_SET_SEMI_TRANSPARENT(prim);
     prim->y0 = top;
     prim->x0 = x + half + 2;
     prim->x1 = (x + half) + (half + odd + 2);
@@ -93,7 +93,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
 
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
-    SetSemiTrans(prim, 1);
+    PSX_SET_SEMI_TRANSPARENT(prim);
     prim->y2 = bottom_y;
     prim->v2 = bottom_v;
     prim->x1 = x + width1;

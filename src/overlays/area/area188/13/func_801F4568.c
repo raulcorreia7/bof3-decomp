@@ -6,7 +6,7 @@ MATCH void func_801F4568(s32* pos_a, s32* pos_b, u8 shade) {
 
     prim = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(prim);
-    SetSemiTrans(prim, 1);
+    PSX_SET_SEMI_TRANSPARENT(prim);
     Area_ProjectPoint(pos_a, &xy);
     setXY0(prim, (u16)xy.vx, (u16)xy.vy);
     Area_ProjectPoint(pos_b, &xy);

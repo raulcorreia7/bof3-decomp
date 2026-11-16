@@ -12,7 +12,7 @@ MATCH void func_801F3BFC(const SpinEffect* spin) {
     primitive = (POLY_G3*)g_GfxPrimCursor;
 
     SetPolyG3(primitive);
-    SetSemiTrans(primitive, 1);
+    PSX_SET_SEMI_TRANSPARENT(primitive);
     Area_ProjectPoint(&work->origin.x, POLY_XY(primitive, 0));
 
     point[0] = ((rcos(work->spin_angle) * work->vertex_a.vx - rsin(work->spin_angle) * work->vertex_a.vy) >> 8) * work->scale;

@@ -148,7 +148,7 @@ MATCH void func_801EF158(void) {
     for (i = 1; i < 128; i++) {
         poly = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(poly);
-        SetSemiTrans(poly, 1);
+        PSX_SET_SEMI_TRANSPARENT(poly);
         g_ScratchPadVectors[2].vx    = 0;
         g_ScratchPadVectors[2].vy    = g_ScratchPadVectors[0].vy;
         g_ScratchPadVectors[2].vz    = g_ScratchPadVectors[0].vz;
@@ -273,7 +273,7 @@ MATCH void func_801EFCC8(void) {
         if (i * 3 < g_Task->unk_09 && D_801F00B0[i] < 16) {
             poly = (POLY_FT4*)g_GfxPrimCursor;
             SetPolyFT4(poly);
-            SetSemiTrans(poly, 1);
+            PSX_SET_SEMI_TRANSPARENT(poly);
             g_ScratchPad.cells.halves[0] = D_801F00B0[i] * 4 + 50;
             g_ScratchPad.cells.halves[2] = D_801F00B0[i] * 15;
             g_ScratchPadVectors[0].vx    = (rcos(0x200) * g_ScratchPad.cells.halves[0]) >> 12;

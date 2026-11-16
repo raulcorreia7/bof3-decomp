@@ -189,7 +189,7 @@ MATCH void func_801EF580(s32 phase) {
     for (i = start; i < count; i++) {
         prim = GFX_CURSOR(POLY_GT4);
         SetPolyGT4(prim);
-        SetSemiTrans(prim, 1);
+        PSX_SET_SEMI_TRANSPARENT(prim);
         g_ScratchPad.cells.words[1] = ((g_Task->unk_04 + i + phase + 1) & 0x1F) << 7;
         offset                      = ((rsin(g_ScratchPad.cells.words[1]) * 8) >> 12) + 4;
         setXY2(prim, g_Task->unk_2E.half - offset, g_Task->unk_30.half - (i + 1) * 8, prim->x0 + 8, g_Task->unk_30.half - (i + 1) * 8);
@@ -373,7 +373,7 @@ MATCH void func_801F0014(void) {
 
     prim = GFX_CURSOR(LINE_G3);
     SetLineG3(prim);
-    SetSemiTrans(prim, 1);
+    PSX_SET_SEMI_TRANSPARENT(prim);
     if (g_Task->header.mode < 2) {
         g_ScratchPad.cells.words[0] = 0x80;
     } else {
@@ -391,7 +391,7 @@ MATCH void func_801F0014(void) {
 
     prim = GFX_CURSOR(LINE_G3);
     SetLineG3(prim);
-    SetSemiTrans(prim, 1);
+    PSX_SET_SEMI_TRANSPARENT(prim);
     setVector(&g_ScratchPadVectors[0], FIXED_MUL(rsin(0xA00), g_ScratchPad.cells.words[0]), FIXED_MUL(rcos(0xA00), g_ScratchPad.cells.words[0]), 0);
     setVector(&g_ScratchPadVectors[1], FIXED_MUL(rsin(0xE00), g_ScratchPad.cells.words[0]), FIXED_MUL(rcos(0xE00), g_ScratchPad.cells.words[0]), 0);
     setVector(&g_ScratchPadVectors[2], FIXED_MUL(rsin(0x200), g_ScratchPad.cells.words[0]), FIXED_MUL(rcos(0x200), g_ScratchPad.cells.words[0]), 0);

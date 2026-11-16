@@ -52,7 +52,7 @@ MATCH void UI_DrawGlyphString(s16 x, s16 y, u32 clut, const u8* text) {
             sprite->v0 = ((v0a >> 5) << 3);
             setXY0(sprite, X, Y);
             SetSprt8(sprite);
-            SetSemiTrans(sprite, 1);
+            PSX_SET_SEMI_TRANSPARENT(sprite);
             GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT_8));
             sprite = (SPRT_8*)g_GfxPrimCursor;
         }

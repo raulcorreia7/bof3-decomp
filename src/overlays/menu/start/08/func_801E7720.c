@@ -8,7 +8,7 @@ MATCH void func_801E7720(s16 tile_x, s8 tile_kind) {
     GFX_AddDrawMode(tpage);
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
-    SetSemiTrans(tile, 1);
+    PSX_SET_SEMI_TRANSPARENT(tile);
     setXY0(tile, 0, tile_x);
     setWH(tile, 320, 13);
     tile->b0 = tile_kind;

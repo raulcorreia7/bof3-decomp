@@ -22,7 +22,7 @@ MATCH void Menu_DrawTintedLine(s16 line_x0, s16 line_y0, s16 line_x1, s16 line_y
     GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, tpage, FONT_TPAGE_X, FONT_TPAGE_Y));
     primitive = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(primitive);
-    SetSemiTrans(primitive, 1);
+    PSX_SET_SEMI_TRANSPARENT(primitive);
     setRGB0(primitive, color0, color1, color2);
     setXY2(primitive, x0, y0, x1, y1);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F2));

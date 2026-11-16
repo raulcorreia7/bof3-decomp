@@ -540,7 +540,7 @@ MATCH void func_801F88CC(s32 semi, s32 color) {
         tile = (TILE*)g_GfxPrimCursor;
         setlen(tile, 3);
         setcode(tile, 0x60);
-        SetSemiTrans(tile, 1);
+        PSX_SET_SEMI_TRANSPARENT(tile);
         shade = color * 2;
         setRGB0(tile, shade, shade, shade);
         tile->w = SCREEN_WIDTH;
@@ -618,7 +618,7 @@ NON_MATCHING void func_801F8B10(s32 scale, s32 shade) {
         g_ScratchPadVectors[2].vz = 0;
         tri                       = (POLY_G3*)g_GfxPrimCursor;
         setPolyG3(tri);
-        SetSemiTrans(tri, 1);
+        PSX_SET_SEMI_TRANSPARENT(tri);
         RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&tri->x0, (long*)&tri->x1, (long*)&tri->x2, &p, &sxy);
         setRGB0(tri, 0, 0, 0);
         setRGB1(tri, col, col, col);
@@ -635,7 +635,7 @@ NON_MATCHING void func_801F8B10(s32 scale, s32 shade) {
         g_ScratchPadVectors[2].vz = 0;
         quad                      = (POLY_F4*)g_GfxPrimCursor;
         setPolyF4(quad);
-        SetSemiTrans(quad, 1);
+        PSX_SET_SEMI_TRANSPARENT(quad);
         RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&quad->x0, (long*)&quad->x2, (long*)&quad->x3, &p, &sxy);
         quad->x0 = tri->x1;
         quad->x1 = tri->x2;
@@ -713,7 +713,7 @@ MATCH void func_801F9160(s16 x, s16 y) {
 
     prim = (SPRT*)g_GfxPrimCursor;
     SetSprt(prim);
-    setRGB0(prim, 128, 128, 128);
+    PSX_SET_NEUTRAL_RGB(prim);
     prim->clut = 0x7B85;
     prim->v0   = 0x40;
     setXY0(prim, x, y);
