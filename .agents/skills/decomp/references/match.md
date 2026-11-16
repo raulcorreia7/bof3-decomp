@@ -117,3 +117,17 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
    first differing instruction; `check-markers` refuses a new draft without one. A later pass
    starts from that draft and replaces it only with a closer one. Then `format` and `pre-push` decide
    ([gates](../SKILL.md#rules-for-every-job)).
+
+**Before you report.** The reviewer returned 32 heads with changes; these are the classes, most
+frequent first.
+
+- The gate ran on this exact head: `meson compile -C build/meson pre-push` after the last commit, on
+  the current base (21 heads; [gates](../../../../docs/matching.md#gates), [pre-push](../../../../tools/README.md#pre-push)).
+- `config/attempts.jsonl` keeps every row it had; a new try appends one (6; step 7 above).
+- No `config/**/splat.yaml`, header, target-map or compiler-config edit unless the task's `writes`
+  list names it; otherwise a `needs: config` line (5; [rule 4](../../../../AGENTS.md#standing-rules)).
+- A report names a function only when it matched; a miss is an escalation, not a report (3).
+- The diff against the base holds only the granted paths and no body that already landed on `main` (4;
+  [rule 1](../../../../AGENTS.md#standing-rules)).
+- The report carries the real head and the matched functions (2).
+- A type or prototype lives in its owner header, once (2; [layout](../../../../docs/layout.md)).

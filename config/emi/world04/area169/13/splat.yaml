@@ -13,7 +13,7 @@ segments:
       - [0x1CC, c, Actor_AdvanceWhenPartyNear]
       - [0x30C, c, Actor_SlideScreenX]
       - [0x368, c, Actor_AdvanceWhenPartyAway]
-      - [0x478, c, func_801F3078]
+      - [0x478, c, Actor_SlideScreenDown16]
       - [0x4E8, c, Area_Update]
       - [0x804, c, func_801F3404]
       - [0x924, c, func_801F3524]

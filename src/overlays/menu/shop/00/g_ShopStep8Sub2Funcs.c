@@ -1,5 +1,6 @@
 #include "shop_00.h"
 
+// clang-format off
 Callback g_ShopStep8Sub2Funcs[SHOP_STEP8_SUB2_COUNT] = {
     func_801D2828,
     func_801D28D0,

@@ -11,12 +11,14 @@
 /* The scroll counter the step paths test. */
 
 /* The step handler bank. */
+extern u8                  D_801F412C[];
 extern Callback            D_801F4138[];
 /* D_801F42F4 */
 extern PartyMemberMessages g_PartyMemberMessages[2];
 
 /* The image's step passes. */
-void func_801F3030(s32 arg0);
+/* func_801F3030 */
+void Game_SetCurrentActor(s32 tint);
 void func_801F3850(void);
 
 #endif

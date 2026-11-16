@@ -15,7 +15,7 @@ MATCH s32 Area_StepSparkEmitters(void) {
             alive = 1;
             if (emitter->timer-- == 0) {
                 for (n = 0; n < 2; n++) {
-                    spark = (SpriteSpark*)Area_FindFreeSpriteRow();
+                    spark = Area_FindFreeSpriteRow();
                     if (spark != NULL) {
                         spark->active = 1;
                         spark->life   = (rand() & 0x1F) + 0x20;
