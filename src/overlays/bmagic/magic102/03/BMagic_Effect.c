@@ -492,4 +492,38 @@ MATCH void Area_DrawGroundSceneSprite(u8* record, s32 origin_x, s32 origin_y) {
     GFX_AddPrim(g_AreaDrawMode, sizeof(POLY_FT4));
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING s32 func_801F0ADC(s32 x, s32 y) {
+    s32 col;
+    s32 row;
+    s32 sum;
+    FAKE_STACK_PADS(u8, 8);
+
+    if (D_801F0CBC & 1) {
+        col = ((y + 0x4000) >> 6) - D_801F0CC8 * 2;
+        row = ((x + 0x4000) >> 6) - D_801F0CC4 * 2;
+    } else {
+        col = ((x + 0x4000) >> 6) - D_801F0CC4 * 2;
+        row = ((y + 0x4000) >> 6) - D_801F0CC8 * 2;
+    }
+    if (((u32)col >= 0x1C) | ((u32)row >= 0x20)) {
+        return 0;
+    }
+    if (((col | row) & 1) == 0) {
+        sum = (D_801F0DCC[(row >> 1) + 1][col >> 1] + D_801F0DCC[row >> 1][(col >> 1) + 1]) << 19;
+    } else if (col & 1) {
+        if (row & 1) {
+            sum = D_801F0DCC[(row >> 1) + 1][(col >> 1) + 1] << 20;
+        } else {
+            sum = (D_801F0DCC[(row >> 1) + 1][(col >> 1) + 1] + D_801F0DCC[row >> 1][(col >> 1) + 1]) << 19;
+        }
+    } else if (row & 1) {
+        sum = (D_801F0DCC[(row >> 1) + 1][(col >> 1) + 1] + D_801F0DCC[(row >> 1) + 1][col >> 1]) << 19;
+    } else {
+        sum = D_801F0DCC[(row >> 1) + 1][(col >> 1) + 1] << 20;
+    }
+    return (-sum) >> 16;
+}
+#else
 INCLUDE_ASM(func_801F0ADC);
+#endif
