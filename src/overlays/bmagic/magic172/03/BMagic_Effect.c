@@ -129,7 +129,7 @@ MATCH void func_801EF210(void) {
     }
     actor = g_Battle.selected_actor;
     setVector(&pos, (actor->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (actor->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, (actor->pos.z.fixed + TO_COORD(256)) >> 17);
-    func_800AF3A0(pos, 0x40);
+    Battle_StepRangeToward(pos, 0x40);
     g_Task->unk_10 = g_Task->unk_0C;
     g_Task->unk_0C = ratan2(actor->pos.x.fixed - g_Task->pos.x.fixed, actor->pos.y.fixed - g_Task->pos.y.fixed);
     if (func_800AF66C((BattleRange*)actor, 0x8000) == 0) {
@@ -216,7 +216,7 @@ MATCH void func_801EF650(void) {
     }
     actor = g_Battle.selected_actor;
     setVector(&pos, (actor->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (actor->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, (actor->pos.z.fixed + TO_COORD(256)) >> 17);
-    func_800AF3A0(pos, 0x40);
+    Battle_StepRangeToward(pos, 0x40);
     g_Task->unk_10 = g_Task->unk_0C;
     g_Task->unk_0C = ratan2(actor->pos.x.fixed - g_Task->pos.x.fixed, actor->pos.y.fixed - g_Task->pos.y.fixed);
     if (g_BattleEffects[g_Task->unk_04].header.step == 2) {

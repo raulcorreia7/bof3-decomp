@@ -29,7 +29,8 @@ extern Magic006SecondSteps D_801EEC28;
 
 void func_801EEC90(void);
 
-void func_800AF3A0(VECTOR pos, s16 step);
+/* func_800AF3A0 */
+void Battle_StepRangeToward(VECTOR pos, s16 step);
 
 void func_801F0308(void);
 void func_801F0790(void);

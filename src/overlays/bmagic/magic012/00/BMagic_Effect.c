@@ -74,7 +74,7 @@ MATCH void func_801EF188(void) {
         g_Task->unk_14      = (COORD_INT(target->pos.z) + 0xC0) >> 1;
         g_Task->header.step = 0xB;
     }
-    func_800AF3A0(pos, 0x40);
+    Battle_StepRangeToward(pos, 0x40);
     if (func_800AF66C((BattleRange*)target, 0x8000)) {
         g_Battle.state |= BATTLE_STATE_DAMAGE_APPLIED;
         Battle_MarkDamaged(g_Task->unk_03);
@@ -156,7 +156,7 @@ MATCH void func_801EF6A4(void) {
         g_Task->timer += 1;
     }
     setVector(&pos, g_Task->unk_0C, g_Task->unk_10, g_Task->unk_14);
-    func_800AF3A0(pos, 0x30);
+    Battle_StepRangeToward(pos, 0x30);
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {

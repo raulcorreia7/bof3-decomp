@@ -81,7 +81,7 @@ MATCH void func_801EF05C(void) {
 
     g_Task->unk_09 += 1;
     setVector(&pos, (g_Task->unk_0C >> 9) - AREA_CELL_ORIGIN, (g_Task->unk_10 >> 9) - AREA_CELL_ORIGIN, g_Task->unk_14 >> 1);
-    func_800AF3A0(pos, 0x10);
+    Battle_StepRangeToward(pos, 0x10);
     if (g_Task->timer != 16) {
         g_Task->timer += 1;
     }
@@ -95,7 +95,7 @@ MATCH void func_801EF158(void) {
     u8     count;
 
     setVector(&pos, (g_Task->unk_0C >> 9) - AREA_CELL_ORIGIN, (g_Task->unk_10 >> 9) - AREA_CELL_ORIGIN, g_Task->unk_14 >> 1);
-    func_800AF3A0(pos, 0x10);
+    Battle_StepRangeToward(pos, 0x10);
     g_Task->unk_09 = g_Task->unk_09 + 1;
     count          = g_Task->timer - 1;
     g_Task->timer  = count;

@@ -170,7 +170,7 @@ MATCH void func_801EF3CC(void) {
     vec[2]         = ((z >> 16) + 0xC0) >> 1;
     g_Task->unk_1C = g_Task->unk_18;
     g_Task->unk_18 = ratan2(x - g_Task->pos.x.fixed, y - g_Task->pos.y.fixed);
-    func_800AF3A0(vec[0], vec[1], vec[2], vec[3], 0x40);
+    Battle_StepRangeToward(vec[0], vec[1], vec[2], vec[3], 0x40);
     if (func_800AF720(x, y, 0x8000) != 0) {
         g_Task->header.step += 1;
     } else {
