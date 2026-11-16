@@ -21,7 +21,7 @@ MATCH void Area_BuildClut(u16* dst) {
             *dst = ((base + n) << 6);
             break;
         }
-        case PALETTE_KIND_CELLS_2:
+        case PALETTE_TYPE_CELLS_2:
             sel  = g_Task->unk_27;
             *dst = (((base + (sel >> 3)) << 6) | ((sel & 0x7) * 2));
             break;

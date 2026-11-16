@@ -2,14 +2,14 @@
 
 #define BATL_END_PANEL_MODE_COUNT 6
 
-typedef struct BatlEndPanelModes {
+typedef struct BattleEndPanelModes {
     Callback modes[BATL_END_PANEL_MODE_COUNT];
-} BatlEndPanelModes;
+} BattleEndPanelModes;
 
-extern BatlEndPanelModes D_801EEC28;
+extern BattleEndPanelModes D_801EEC28;
 
 MATCH void func_801EFD98(void) {
-    BatlEndPanelModes handlers = D_801EEC28;
+    BattleEndPanelModes handlers = D_801EEC28;
 
     handlers.modes[g_MenuCurrentPanel->mode]();
 }

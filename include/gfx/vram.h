@@ -27,7 +27,7 @@
 typedef enum PaletteType {
     PALETTE_TYPE_CELL    = 0,
     PALETTE_TYPE_ROW     = 1,
-    PALETTE_KIND_CELLS_2 = 2,
+    PALETTE_TYPE_CELLS_2 = 2,
     PALETTE_TYPE_CELLS_4 = 3,
     PALETTE_TYPE_CELLS_8 = 4,
 } PaletteType;

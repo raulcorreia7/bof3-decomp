@@ -11,7 +11,7 @@ FishingAnchors D_801D0C30 = {
 char D_801D0C38[] = "%3d";
 
 /* The roster panel icon rows, read by Fishing_DrawRank: icon id, x offset and the two marker flags, 13 rows. */
-FishingIconData g_FishingRankIcons = {
+FishingIcons g_FishingRankIcons = {
     {
         {8, 56, 0, 0},
         {8, 56, 1, 0},

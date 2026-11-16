@@ -250,13 +250,13 @@ MATCH void func_801F77A8(void) {
 }
 
 MATCH void func_801F77EC(void) {
-    ScenePathWork* work;
-    u8             i;
+    ScenePath* work;
+    u8         i;
 
     /* FAKE: retail reserves 16 bytes of unused stack. */
     FAKE_STACK_PADS(u8, 16);
 
-    work    = MEM_PTR(ScenePathWork, AREA_WORK + 0x1400);
+    work    = MEM_PTR(ScenePath, AREA_WORK + 0x1400);
     work->x = D_80147A8C;
     work->y = g_AreaFocusY;
     work->z = D_80147A94 >> 8;
@@ -276,11 +276,11 @@ MATCH void func_801F77EC(void) {
 MATCH void func_801F78F4(void) {
     /* FAKE: retail reserves 16 bytes of unused stack. */
     FAKE_STACK_PADS(u8, 16);
-    ScenePathWork* work;
+    ScenePath*     work;
     SceneParticle* row;
     u8             i;
 
-    work = MEM_PTR(ScenePathWork, AREA_WORK + 0x1400);
+    work = MEM_PTR(ScenePath, AREA_WORK + 0x1400);
     if ((g_Task->vx & 0xF) == 0) {
         i = 0;
         do {

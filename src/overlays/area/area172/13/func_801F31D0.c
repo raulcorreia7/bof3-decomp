@@ -1,8 +1,8 @@
 #include "area172_13.h"
 
 MATCH void func_801F31D0(void) {
-    WorldSpin* spin;
-    u8         i;
+    SpinEffect* spin;
+    u8          i;
 
     if ((g_Task->unk_06++ & 3) == 0) {
         Area_ClaimSpawnSlot();
@@ -13,7 +13,7 @@ MATCH void func_801F31D0(void) {
     if (g_Task->tint.signed_bytes.delta.red < 64) {
         g_Task->tint.signed_bytes.delta.red++;
     }
-    spin = MEM_PTR(WorldSpin, AREA_WORK + 0xC0);
+    spin = MEM_PTR(SpinEffect, AREA_WORK + 0xC0);
     for (i = 0; i < 32; i++) {
         spin->fade = (s8)g_Task->tint.bytes.rgb.red >> 1;
         spin++;

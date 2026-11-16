@@ -35,7 +35,7 @@ MATCH u8 GFX_MarkPaletteCells(u8 mode, u8 value, u8 search) {
             D_80145D54[row][column + 0x3] = value;
             D_80145D54[row][column + 0x2] = value;
             /* fallthrough */
-        case PALETTE_KIND_CELLS_2:
+        case PALETTE_TYPE_CELLS_2:
             D_80145D54[row][column + 0x1] = value;
             /* fallthrough */
         case PALETTE_TYPE_CELL:

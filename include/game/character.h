@@ -17,7 +17,7 @@
 #define CHARACTER_BLOCK_RECORDS 0x16
 
 /* The block at its retail address; an image header declares g_WindowStyle. */
-#define CHARACTER_BLOCK         ((Char_Block*)&g_WindowStyle)
+#define CHARACTER_BLOCK         ((CharacterRoster*)&g_WindowStyle)
 
 /* Char_GetExp applies the six stat gains and learns both abilities. */
 #define LEVEL_OBJECT(exp, hp, ap, power, defense, agility, intelligence, ability, extra_ability)                   \
@@ -44,7 +44,7 @@
 
 /* Equipment bits: the characters that may use a weapon or armor record
  * (Item.equipability). */
-typedef enum EquipFlags {
+typedef enum EquipCharacterFlags {
     EQUIP_RYU   = 1 << 0,
     EQUIP_NINA  = 1 << 1,
     EQUIP_GARR  = 1 << 2,
@@ -53,7 +53,7 @@ typedef enum EquipFlags {
     EQUIP_MOMO  = 1 << 5,
     EQUIP_PECO  = 1 << 6,
     EQUIP_WHELP = 1 << 7,
-} EquipFlags;
+} EquipCharacterFlags;
 
 /* Equipment slot: the order of the Character members weapon, shield, helmet,
  * armor and accessories[]. */
@@ -257,14 +257,14 @@ ASSERT_SIZE(Character, PARTY_RECORD_STRIDE);
  *
  * Reader: `emi/etc/shop/00@0x801E1710` loads the style byte through the
  * base register, then adds 0x90 (0x16 plus the skill-ability offset) to it. */
-typedef struct Char_Block {
+typedef struct CharacterRoster {
     u8 window_style; /* 0x00: the last argument of UI_DrawWindow */
     u8 pad_01[0x15];
     u8 records[8][PARTY_RECORD_STRIDE]; /* 0x16: the Character rows */
-} Char_Block;
+} CharacterRoster;
 
-ASSERT_OFFSET(Char_Block, records, CHARACTER_BLOCK_RECORDS);
-ASSERT_SIZE(Char_Block, CHARACTER_BLOCK_RECORDS + 8 * PARTY_RECORD_STRIDE);
+ASSERT_OFFSET(CharacterRoster, records, CHARACTER_BLOCK_RECORDS);
+ASSERT_SIZE(CharacterRoster, CHARACTER_BLOCK_RECORDS + 8 * PARTY_RECORD_STRIDE);
 
 typedef struct MasterSkills {
     u8 skill_levels[MASTER_SKILL_COUNT][2];

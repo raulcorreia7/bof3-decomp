@@ -28,13 +28,13 @@
  */
 /* Resume states; the original stores state * 4 as a byte offset into the
  * absolute case-address table at 0x801640C0. */
-typedef enum DecoderState {
+typedef enum Lz77DecoderState {
     DECODER_MAIN           = 0,  /* read a fresh control byte */
     DECODER_MATCH_OFFSET   = 4,  /* control byte saved; distance byte pending */
     DECODER_LITERAL_TAIL   = 8,  /* literal run cut short by the window end */
     DECODER_MATCH_LENGTH   = 12, /* long match; length byte pending */
     DECODER_LITERAL_LENGTH = 16  /* 16-byte literal; length byte pending */
-} DecoderState;
+} Lz77DecoderState;
 
 /* Copy kernel: copies count bytes forward and returns the advanced
  * destination. The original takes count/src/dst in $s4/$s5/$t3. */

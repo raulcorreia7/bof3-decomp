@@ -32,7 +32,7 @@ MATCH u8 GFX_FindFreePaletteCell(u8 mode) {
                             return (row + (column >> 4) + 0x1Cu);
                         }
                         break;
-                    case PALETTE_KIND_CELLS_2:
+                    case PALETTE_TYPE_CELLS_2:
                         if ((column & 0x1u) != 0u) {
                             break;
                         }

@@ -500,14 +500,14 @@ MATCH void func_801F3708(void* vertices, const void* rotated, s16* transform) {
     dst->points[3].z = (state->base_z + out.vz);
 }
 
-MATCH void func_801F3944(const WorldSpin* spin) {
-    WorldSpin* work;
-    POLY_G3*   primitive;
-    s32        point[3];
-    s16        fade;
-    s16        tmp;
-    s16        shade;
-    work      = (WorldSpin*)spin;
+MATCH void func_801F3944(const SpinEffect* spin) {
+    SpinEffect* work;
+    POLY_G3*    primitive;
+    s32         point[3];
+    s16         fade;
+    s16         tmp;
+    s16         shade;
+    work      = (SpinEffect*)spin;
     primitive = (POLY_G3*)g_GfxPrimCursor;
 
     SetPolyG3(primitive);
@@ -548,9 +548,9 @@ MATCH void func_801F3944(const WorldSpin* spin) {
     GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G3));
 }
 
-MATCH void func_801F3BE4(WorldSpin* spin) {
+MATCH void func_801F3BE4(SpinEffect* spin) {
     volatile Area024Scratch* scratch;
-    WorldSpin*               work;
+    SpinEffect*              work;
     MATRIX                   matrix;
     s16                      rot[3];
 
@@ -585,10 +585,10 @@ MATCH void func_801F3BE4(WorldSpin* spin) {
 }
 
 MATCH void func_801F3D0C(void) {
-    WorldSpin* work;
-    u8         i;
+    SpinEffect* work;
+    u8          i;
 
-    work = (WorldSpin*)WORLD00_AREA024_SPIN_WORK_BASE;
+    work = (SpinEffect*)WORLD00_AREA024_SPIN_WORK_BASE;
     i    = 0u;
 
     do {
@@ -599,14 +599,14 @@ MATCH void func_801F3D0C(void) {
 }
 
 MATCH void func_801F3D5C(void) {
-    u8         scratch[32];
-    WorldSpin* work;
-    u8         i;
+    u8          scratch[32];
+    SpinEffect* work;
+    u8          i;
 
     GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 896, 256));
     Area_SetCameraMatrix(scratch);
 
-    work = (WorldSpin*)WORLD00_AREA024_SPIN_WORK_BASE;
+    work = (SpinEffect*)WORLD00_AREA024_SPIN_WORK_BASE;
     i    = 0u;
 
     do {

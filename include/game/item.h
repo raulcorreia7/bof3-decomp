@@ -104,7 +104,7 @@ ASSERT_OFFSET(Item, price, 0x10);
 /* The run Weapon, Armor and Accessory open with. */
 typedef struct ItemHeader {
     u8 name[ITEM_NAME_LENGTH];
-    u8 equipability; /* EquipFlags */
+    u8 equipability; /* EquipCharacterFlags */
     u8 flags;        /* Item_GetFlags; bit tests in Item_PassesTest */
 } ItemHeader;
 
