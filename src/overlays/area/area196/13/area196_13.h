@@ -9,6 +9,9 @@
 
 /* The scratchpad work row the step paths read. */
 /* The scroll counter the step paths test. */
+extern u8 D_801F4134;
+/* The face scale bytes the draw pass multiplies and the step passes decay. */
+extern u8 D_801F412C[];
 
 /* The step handler bank. */
 extern Callback            D_801F4138[];
