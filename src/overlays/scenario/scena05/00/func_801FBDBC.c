@@ -6,8 +6,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801FBDBC(void) {
+MATCH void func_801FBDBC(void) {
     switch (g_SceneState.step_05) {
         case 0:
             if ((g_UiWindowChannel & 2) == 0) {
@@ -165,6 +164,3 @@ NON_MATCHING void func_801FBDBC(void) {
             break;
     }
 }
-#else
-INCLUDE_ASM(func_801FBDBC);
-#endif
