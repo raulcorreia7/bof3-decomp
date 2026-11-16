@@ -239,7 +239,7 @@ extern u16             D_8014862A; /* the second bar length; func_801D8188 store
 extern u8              D_80148653;
 extern u8              D_80148654;
 /* D_80148656, the party cursor, has no declaration here: its readers split between lb and lbu, so each unit keeps its own view. */
-extern s8              g_PartyCursor; /* 0x80148656: the signed view */
+extern s8              g_PartyCursor;
 extern s8              D_80148658[6];
 extern u8              D_8014865F;
 extern u8              D_80148660;
