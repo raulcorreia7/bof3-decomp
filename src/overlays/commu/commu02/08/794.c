@@ -1068,7 +1068,7 @@ NON_MATCHING void func_801D4910(s32 x, s32 y) {
     s32 i;
     s32 off;
     s32 tpage;
-    s32 y2;
+    s16 y2;
 
     if (GetGraphType() == 1 || GetGraphType() == 2) {
         tpage = 0x2D;
@@ -1229,7 +1229,32 @@ MATCH void func_801D50AC(void) {
     D_801F294D += 1;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D50E4(void) {
+    s32 selection_offset;
+    u8  bgm;
+    u8  state;
+
+    if (g_UiWindowEffectBusy != 0) {
+        return;
+    }
+    bgm              = g_SndBGMId;
+    g_AreaDrawFlags  = 0;
+    D_801DB0CC       = bgm;
+    selection_offset = bgm * BGM_TRACK_SIZE;
+    SND_StopSequence(g_SelectionCues[selection_offset], g_SelectionSequences[selection_offset]);
+    SND_RequestBGM(0x67);
+    while (EMI_IsReady() == 0) {
+        SYS_ThreadWait(1);
+    }
+    SND_PlayBGM(0x67, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+    state      = D_801F294C;
+    D_801F294D = 0;
+    D_801F294C = state + 1;
+}
+#else
 INCLUDE_ASM(func_801D50E4);
+#endif
 
 MATCH void func_801D5194(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event2Step1Funcs, D_801F294D);
