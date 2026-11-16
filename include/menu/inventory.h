@@ -24,7 +24,7 @@
 
 #define INV_VITAL_ITEM_SLOTS    32
 
-/* One id row and one count row per ITEM_CAT_ITEM..ITEM_CAT_ACCESSORY. */
+/* One id row and one count row per ITEM_CAT_ITEM..ITEM_CAT_OPTION. */
 /* D_8014504C */
 extern u8 g_InventoryIds[4][INV_SLOTS_PER_CATEGORY];
 /* D_8014524C */

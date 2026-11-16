@@ -555,7 +555,7 @@ MATCH void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color) {
 
 #include "overlays/menu/Menu_DrawPlayTimeWindow.h"
 
-#include "overlays/menu/Menu_ToggleOption.h"
+#include "overlays/menu/Menu_ChooseYesNo.h"
 
 #include "overlays/menu/Menu_DrawCommandRow.h"
 

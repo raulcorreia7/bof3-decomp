@@ -99,8 +99,8 @@ MATCH void BMagic_SetTextItemName(u8 item_id, u8 category) {
         case ITEM_CAT_ARMOR:
             SYS_CopyString(g_TextVariables[0], g_Armors[item_id].header.name, ITEM_NAME_LENGTH);
             break;
-        case ITEM_CAT_ACCESSORY:
-            SYS_CopyString(g_TextVariables[0], g_Accessories[item_id].header.name, ITEM_NAME_LENGTH);
+        case ITEM_CAT_OPTION:
+            SYS_CopyString(g_TextVariables[0], g_OptionItems[item_id].header.name, ITEM_NAME_LENGTH);
             break;
     }
 }

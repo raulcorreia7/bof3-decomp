@@ -48,13 +48,13 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
     row_y  = -2;
     do {
         accessory = *cursor;
-        if (g_Accessories[accessory].icon == 0xA) {
+        if (g_OptionItems[accessory].icon == 0xA) {
             if ((row >= (s32)max_rows) && (index < (s32)max_count)) {
                 if (*D_80145E94 == 2) {
                     if (FISHING_STATE->counter_07 & 1) {
                         if (FISHING_STATE->step_14 == index) {
-                            UI_DrawText(bar_x, bar_y, 7, 0xCU, (&g_Accessories[accessory]));
-                            UI_DrawText(bar_x, (s16)(text_y + row_y), 0, 0xCU, (&g_Accessories[*cursor]));
+                            UI_DrawText(bar_x, bar_y, 7, 0xCU, (&g_OptionItems[accessory]));
+                            UI_DrawText(bar_x, (s16)(text_y + row_y), 0, 0xCU, (&g_OptionItems[*cursor]));
                             if (g_InventoryCounts[3][slot] >= 2U) {
                                 TEXT_Format(text, D_801D0C14, g_InventoryCounts[3][slot]);
                                 text_x = (s16)(panel_x + 104);
@@ -64,7 +64,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
                         }
                     }
                 }
-                UI_DrawText(bar_x, bar_y, 0, 0xCU, (&g_Accessories[*cursor]));
+                UI_DrawText(bar_x, bar_y, 0, 0xCU, (&g_OptionItems[*cursor]));
                 if (g_InventoryCounts[3][slot] >= 2U) {
                     TEXT_Format(text, D_801D0C14, g_InventoryCounts[3][slot]);
                     text_x = (s16)(panel_x + 104);
@@ -94,7 +94,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
     func_801D90FC((s32)panel_x, panel_y);
     count = 0;
     do {
-        if (g_Accessories[g_InventoryIds[3][count]].icon == 0xA) {
+        if (g_OptionItems[g_InventoryIds[3][count]].icon == 0xA) {
             index += 1;
         }
         count += 1;

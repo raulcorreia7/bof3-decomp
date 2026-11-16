@@ -13,11 +13,11 @@ MATCH void func_801D3560(u16* result_code) {
          * which `i * 0x140` does not. */
         item  = g_Game.members[i].character_index;
         entry = &g_Characters[item];
-        if (entry->equip.accessories[0] == ACCESSORY_COUPONS) {
+        if (entry->equip.accessories[0] == OPTION_ITEM_COUPONS) {
             *result_code = 0x50;
             break;
         }
-        if (entry->equip.accessories[1] == ACCESSORY_COUPONS) {
+        if (entry->equip.accessories[1] == OPTION_ITEM_COUPONS) {
             *result_code = 0x50;
             break;
         }

@@ -7,7 +7,7 @@ MATCH void func_801E590C(void) {
     MENU_DRAW_HEADER();
     WinDrawCueText(28, 21, 0xB9);
     SAVE_DrawSlots(SAVE_SLOTS_X, SAVE_SLOTS_Y, 0);
-    if ((Menu_ToggleOption() & BYTE_MASK) != 0) {
+    if ((Menu_ChooseYesNo() & BYTE_MASK) != 0) {
         if (D_8014865B != 0) {
             count                 = g_MenuStartStep;
             D_801ED7FC            = 0xA;

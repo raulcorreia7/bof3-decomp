@@ -128,7 +128,7 @@ void        Menu_DrawEquipment(s32 origin_x, s32 origin_y, s32 index, s32 select
 /* func_801DA2F4 */
 void        Menu_DrawZennyWindow(s32 panel_x, s32 panel_y, s32 panel_kind, s32 caption_value);
 /* func_801DA678 */
-u8          Menu_ToggleOption(void);
+u8          Menu_ChooseYesNo(void);
 /* func_801D504C */
 u32         Char_GetExpProgress(u32 character, u32 level, u32 exp);
 /* func_801D6470 (bate), func_801DBF18 (shop) */

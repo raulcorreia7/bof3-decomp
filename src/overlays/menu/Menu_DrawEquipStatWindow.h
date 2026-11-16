@@ -28,7 +28,7 @@ MATCH void Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 item_ki
         case ITEM_TYPE_ACCESSORY:
         case ITEM_TYPE_FISHING_LURE:
         case ITEM_TYPE_FISHING_ROD:
-            category = ITEM_CAT_ACCESSORY;
+            category = ITEM_CAT_OPTION;
             break;
     }
     shaded = ((Item_GetEquipability(category, item_id) >> character_index) ^ 1) & 1;

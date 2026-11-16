@@ -33,11 +33,11 @@ MATCH void func_801D639C(void) {
             choice      = record + 0x11;
             break;
         case EQUIP_SLOT_ACCESSORY_1:
-            group_index = ITEM_CAT_ACCESSORY;
+            group_index = ITEM_CAT_OPTION;
             choice      = record + 0x12;
             break;
         case EQUIP_SLOT_ACCESSORY_2:
-            group_index = ITEM_CAT_ACCESSORY;
+            group_index = ITEM_CAT_OPTION;
             choice      = record + 0x13;
             break;
     }

@@ -188,7 +188,7 @@ segments:
       - [0x95D8, c, Menu_DrawExperienceLine]
       - [0x96F4, c, Menu_DrawZennyWindow]
       - [0x987C, c, Menu_DrawPlayTimeWindow]
-      - [0x9A78, c, Menu_ToggleOption]
+      - [0x9A78, c, Menu_ChooseYesNo]
       - [0x9B7C, c, Menu_DrawCommandRow]
       - [0x9DC4, c, Item_GetPrice]
       - [0x9E78, c, Char_GetExpForLevel]

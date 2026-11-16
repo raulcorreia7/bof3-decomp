@@ -21,12 +21,12 @@ MATCH void func_801E0788(void) {
             *half &= 0xBFFF;
         }
         g_Task->unk_03 = 4;
-    } else if (w->chr.equip.accessories[0] == ACCESSORY_SOUL_GEM) {
-        g_Characters[w->unk_13A[2]].equip.accessories[0] = ACCESSORY_NOTHING;
+    } else if (w->chr.equip.accessories[0] == OPTION_ITEM_SOUL_GEM) {
+        g_Characters[w->unk_13A[2]].equip.accessories[0] = OPTION_ITEM_NOTHING;
         g_Task->unk_09                                   = 30;
         g_Task->unk_03                                   = 3;
-    } else if (w->chr.equip.accessories[1] == ACCESSORY_SOUL_GEM) {
-        g_Characters[w->unk_13A[2]].equip.accessories[1] = ACCESSORY_NOTHING;
+    } else if (w->chr.equip.accessories[1] == OPTION_ITEM_SOUL_GEM) {
+        g_Characters[w->unk_13A[2]].equip.accessories[1] = OPTION_ITEM_NOTHING;
         g_Task->unk_09                                   = 30;
         g_Task->unk_03                                   = 6;
     } else if (w->chr.equip.armor == ARMOR_MANLY_CLOTHES) {

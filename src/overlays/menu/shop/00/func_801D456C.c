@@ -8,7 +8,7 @@ MATCH void func_801D456C(void) {
         confirm = g_UiWindowChannel & FRONTEND_FLAG_CONFIRM;
     } else {
         WinDrawCueText(MENU_PROMPT_X, MENU_PROMPT_Y, 0x1D);
-        confirm = Menu_ToggleOption() & BYTE_MASK;
+        confirm = Menu_ChooseYesNo() & BYTE_MASK;
     }
     if (confirm != 0) {
         D_80148652 += 1;

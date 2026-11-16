@@ -38,16 +38,16 @@ MATCH u8 Battle_ApplyTurnDamage(void) {
             if (g_Game.members[slot].chr.equip.armor == ARMOR_LIFE_ARMOR) {
                 g_Game.members[slot].u.turn.hp_change -= 1;
             }
-            if (g_Game.members[slot].chr.equip.accessories[0] == ACCESSORY_CUPIDS_LYRE) {
+            if (g_Game.members[slot].chr.equip.accessories[0] == OPTION_ITEM_CUPIDS_LYRE) {
                 g_Game.members[slot].u.turn.hp_change -= 1;
             }
-            if (g_Game.members[slot].chr.equip.accessories[1] == ACCESSORY_CUPIDS_LYRE) {
+            if (g_Game.members[slot].chr.equip.accessories[1] == OPTION_ITEM_CUPIDS_LYRE) {
                 g_Game.members[slot].u.turn.hp_change -= 1;
             }
-            if (g_Game.members[slot].chr.equip.accessories[0] == ACCESSORY_IVORY_CHARM) {
+            if (g_Game.members[slot].chr.equip.accessories[0] == OPTION_ITEM_IVORY_CHARM) {
                 g_Game.members[slot].u.turn.hp_change -= 1;
             }
-            if (g_Game.members[slot].chr.equip.accessories[1] == ACCESSORY_IVORY_CHARM) {
+            if (g_Game.members[slot].chr.equip.accessories[1] == OPTION_ITEM_IVORY_CHARM) {
                 g_Game.members[slot].u.turn.hp_change -= 1;
             }
             if (HAS_STATUS(g_Game.members[slot], 1)) {

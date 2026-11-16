@@ -31,8 +31,8 @@ MATCH void Shop_DrawEquipment(s16 x, s16 y, u8 record_index) {
     objects[1] = &g_Armors[record->equip.shield];
     objects[2] = &g_Armors[record->equip.helmet];
     objects[3] = &g_Armors[record->equip.armor];
-    objects[4] = &g_Accessories[record->equip.accessories[0]];
-    objects[5] = &g_Accessories[record->equip.accessories[1]];
+    objects[4] = &g_OptionItems[record->equip.accessories[0]];
+    objects[5] = &g_OptionItems[record->equip.accessories[1]];
 
     for (row = 0; row < MENU_EQUIPMENT_ROW_COUNT; row++) {
         row_y = (u16)(y + (row * MENU_EQUIPMENT_ROW_HEIGHT + MENU_EQUIPMENT_FIRST_ROW_Y));

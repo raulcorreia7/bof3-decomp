@@ -45,7 +45,7 @@ NON_MATCHING void func_801D3A24(void) {
             case MASTER_LANG:
                 if (diff >= 3) {
                     if (SYS_TestFlag(&g_SceneEventSelection + 0x63B, 0x6C) == 0) {
-                        if (Item_Add(ITEM_CAT_ACCESSORY, ACCESSORY_CUPIDS_LYRE, 1, 0) & BYTE_MASK) {
+                        if (Item_Add(ITEM_CAT_OPTION, OPTION_ITEM_CUPIDS_LYRE, 1, 0) & BYTE_MASK) {
                             SYS_SetFlag(&g_SceneEventSelection + 0x63B, 0x6C);
                             func_801D39CC(g_Game.members[g_MenuMasterCursor].character_index);
                             done = 1;

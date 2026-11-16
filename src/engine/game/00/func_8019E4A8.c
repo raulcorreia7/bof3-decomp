@@ -11,7 +11,7 @@ MATCH void func_8019E4A8(void) {
         index       = Actor_FindFreeSpawned();
         if (index != GAME_NONE) {
             g_SpawnedActors[index].header.flags = 1;
-            g_SpawnedActors[index].type         = ACCESSORY_COUNT;
+            g_SpawnedActors[index].type         = OPTION_ITEM_COUNT;
             g_SpawnedActors[index].header.mode  = 2;
             g_SpawnedActors[index].header.step  = 2;
             work                                = g_Task;

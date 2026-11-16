@@ -70,11 +70,11 @@ MATCH void func_801D5A28(void) {
             choice      = &record->equip.armor;
             break;
         case EQUIP_SLOT_ACCESSORY_1:
-            group_index = ITEM_CAT_ACCESSORY;
+            group_index = ITEM_CAT_OPTION;
             choice      = &record->equip.accessories[0];
             break;
         case EQUIP_SLOT_ACCESSORY_2:
-            group_index = ITEM_CAT_ACCESSORY;
+            group_index = ITEM_CAT_OPTION;
             choice      = &record->equip.accessories[1];
             break;
     }

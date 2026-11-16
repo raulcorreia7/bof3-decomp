@@ -19,64 +19,64 @@ MATCH void Char_ApplyAccessories(Character* character) {
     kinds[1] = character->equip.accessories[1];
     n        = 0;
     do {
-        Char_AddStat(&stats->agility, -g_Accessories[*kind].weight);
+        Char_AddStat(&stats->agility, -g_OptionItems[*kind].weight);
         switch (*kind) {
-            case ACCESSORY_TITAN_BELT:
+            case OPTION_ITEM_TITAN_BELT:
                 pair = &stats->power;
                 goto block_pair;
-            case ACCESSORY_HIGH_BOOTS:
+            case OPTION_ITEM_HIGH_BOOTS:
                 Char_AddStat(&stats->defense, 5);
                 break;
-            case ACCESSORY_SPEED_BOOTS:
+            case OPTION_ITEM_SPEED_BOOTS:
                 pair = &stats->agility;
             block_pair:
                 Char_AddStat(pair, 10);
                 break;
-            case ACCESSORY_WISDOM_RING:
+            case OPTION_ITEM_WISDOM_RING:
                 Char_AddStat(&stats->intelligence, 0x1E);
                 break;
-            case ACCESSORY_LIONS_BELT:
+            case OPTION_ITEM_LIONS_BELT:
                 Char_AddWillpower(&stats->willpower, 10);
                 break;
-            case ACCESSORY_RING_OF_ICE:
+            case OPTION_ITEM_RING_OF_ICE:
                 counter = &stats->resistances[RES_INDEX_FROST];
                 delta   = 0;
                 goto block_counter;
-            case ACCESSORY_RING_OF_FIRE:
+            case OPTION_ITEM_RING_OF_FIRE:
                 counter = &stats->resistances[RES_INDEX_FIRE];
                 delta   = 0;
                 goto block_counter;
-            case ACCESSORY_THUNDER_RING:
+            case OPTION_ITEM_THUNDER_RING:
                 counter = &stats->resistances[RES_INDEX_ELECTRIC];
                 delta   = 0;
                 goto block_counter;
-            case ACCESSORY_TALISMAN:
+            case OPTION_ITEM_TALISMAN:
                 counter = &stats->resistances[RES_INDEX_DEATH];
                 delta   = 1;
                 goto block_counter;
-            case ACCESSORY_DIAMOND_RING:
+            case OPTION_ITEM_DIAMOND_RING:
                 counter = &stats->resistances[RES_INDEX_DEATH];
                 delta   = 3;
                 goto block_counter;
-            case ACCESSORY_LIFE_SANDALS:
+            case OPTION_ITEM_LIFE_SANDALS:
                 counter = &stats->resistances[RES_INDEX_STATUS];
                 delta   = 1;
                 goto block_counter;
-            case ACCESSORY_LIGHT_BANGLE:
+            case OPTION_ITEM_LIGHT_BANGLE:
                 counter = &stats->resistances[RES_INDEX_STATUS];
                 delta   = 3;
                 goto block_counter;
-            case ACCESSORY_BARRIER_RING:
+            case OPTION_ITEM_BARRIER_RING:
                 counter = &stats->resistances[RES_INDEX_PSIONIC];
                 delta   = 3;
                 goto block_counter;
-            case ACCESSORY_HAWKS_RING:
+            case OPTION_ITEM_HAWKS_RING:
                 Char_AddPercent(&stats->surprise_chance, 0x14);
                 break;
-            case ACCESSORY_ARTEMIS_CAP:
+            case OPTION_ITEM_ARTEMIS_CAP:
                 Char_AddPercent(&stats->accuracy, 10);
                 break;
-            case ACCESSORY_IVORY_CHARM:
+            case OPTION_ITEM_IVORY_CHARM:
                 Char_AddResistance(&stats->resistances[RES_INDEX_FIRE], 2);
                 Char_AddResistance(&stats->resistances[RES_INDEX_FROST], 2);
                 Char_AddResistance(&stats->resistances[RES_INDEX_ELECTRIC], 2);

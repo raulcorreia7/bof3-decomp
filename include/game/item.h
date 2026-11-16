@@ -64,12 +64,12 @@ typedef enum ItemType {
 
 /* The inventory category code Item_GetRecord resolves a record from. */
 typedef enum ItemCategory {
-    ITEM_CAT_ITEM      = 0,
-    ITEM_CAT_WEAPON    = 1,
-    ITEM_CAT_ARMOR     = 2,
-    ITEM_CAT_ACCESSORY = 3,
-    ITEM_CAT_VITAL     = 4,
-    ITEM_CAT_EMPTY     = 0xFF,
+    ITEM_CAT_ITEM   = 0,
+    ITEM_CAT_WEAPON = 1,
+    ITEM_CAT_ARMOR  = 2,
+    ITEM_CAT_OPTION = 3,
+    ITEM_CAT_VITAL  = 4,
+    ITEM_CAT_EMPTY  = 0xFF,
 } ItemCategory;
 
 typedef struct VitalItem {
@@ -101,7 +101,7 @@ ASSERT_OFFSET(Item, price, 0x10);
 
 #define ITEM_OBJECT(name, flags, icon, description, price) {name, (flags), (icon), (description), (price)}
 
-/* The run Weapon, Armor and Accessory open with. */
+/* The run Weapon, Armor and OptionItem open with. */
 typedef struct ItemHeader {
     u8 name[ITEM_NAME_LENGTH];
     u8 equipability; /* EquipCharacterFlags */
@@ -155,22 +155,22 @@ ASSERT_OFFSET(Armor, price, 0x14);
 #define ARMOR_OBJECT(name, equipability, header_flags, equip_type, weight, power, description, price)    \
     {{name, (equipability), (header_flags)}, (equip_type), (weight), (power), 0, (description), (price)}
 
-typedef struct Accessory {
+typedef struct OptionItem {
     ItemHeader header;
     u8         icon; /* low nibble selects the icon */
     u8         weight;
-    u16        description; /* Item_GetDescription, category ITEM_CAT_ACCESSORY */
+    u16        description; /* Item_GetDescription, category ITEM_CAT_OPTION */
     u16        price;
-} Accessory;
+} OptionItem;
 
-ASSERT_OFFSET(Accessory, description, 0x10);
-ASSERT_SIZE(Accessory, ACCESSORY_STRIDE);
-ASSERT_OFFSET(Accessory, header, 0x00);
-ASSERT_OFFSET(Accessory, icon, 0x0e);
-ASSERT_OFFSET(Accessory, weight, 0x0f);
-ASSERT_OFFSET(Accessory, price, 0x12);
+ASSERT_OFFSET(OptionItem, description, 0x10);
+ASSERT_SIZE(OptionItem, OPTION_ITEM_STRIDE);
+ASSERT_OFFSET(OptionItem, header, 0x00);
+ASSERT_OFFSET(OptionItem, icon, 0x0e);
+ASSERT_OFFSET(OptionItem, weight, 0x0f);
+ASSERT_OFFSET(OptionItem, price, 0x12);
 
-#define ACCESSORY_OBJECT(name, equipability, header_flags, icon, weight, description, price) {{name, (equipability), (header_flags)}, (icon), (weight), (description), (price)}
+#define OPTION_ITEM(name, equipability, header_flags, icon, weight, description, price) {{name, (equipability), (header_flags)}, (icon), (weight), (description), (price)}
 
 /* The g_GameShopStock index a shop counter opens, from the area scripts that spawn it. */
 typedef enum ShopId {
@@ -516,61 +516,61 @@ typedef enum ArmorId {
     ARMOR_MANLY_CLOTHES     = 67,
 } ArmorId;
 
-/* The accessory table ids (category ITEM_CAT_ACCESSORY). Names from the GAME.EMI record tables. */
-typedef enum AccessoryId {
-    ACCESSORY_NOTHING      = 0,
-    ACCESSORY_TITAN_BELT   = 1,
-    ACCESSORY_HIGH_BOOTS   = 2,
-    ACCESSORY_SPEED_BOOTS  = 3,
-    ACCESSORY_WISDOM_RING  = 4,
-    ACCESSORY_LIONS_BELT   = 5,
-    ACCESSORY_DREAM_RING   = 6,
-    ACCESSORY_MIDAS_STONE  = 7,
-    ACCESSORY_BALANCE_RING = 8,
-    ACCESSORY_BAT_AMULET   = 9,
-    ACCESSORY_RING_OF_ICE  = 10,
-    ACCESSORY_RING_OF_FIRE = 11,
-    ACCESSORY_THUNDER_RING = 12,
-    ACCESSORY_TALISMAN     = 13,
-    ACCESSORY_DIAMOND_RING = 14,
-    ACCESSORY_LIFE_SANDALS = 15,
-    ACCESSORY_LIGHT_BANGLE = 16,
-    ACCESSORY_BARRIER_RING = 17,
-    ACCESSORY_HAWKS_RING   = 18,
-    ACCESSORY_ARTEMIS_CAP  = 19,
-    ACCESSORY_BELL_COLLAR  = 20,
-    ACCESSORY_HOLY_MANTLE  = 21,
-    ACCESSORY_CUPIDS_LYRE  = 22,
-    ACCESSORY_IVORY_CHARM  = 23,
-    ACCESSORY_SOUL_GEM     = 24,
-    ACCESSORY_SHAMANS_RING = 25,
-    ACCESSORY_SPIRIT_RING  = 26,
-    ACCESSORY_COUPONS      = 27,
-    ACCESSORY_WORM         = 28,
-    ACCESSORY_SPIRIT       = 29,
-    ACCESSORY_CARO         = 30,
-    ACCESSORY_HEAVY_CARO   = 31,
-    ACCESSORY_TOAD         = 32,
-    ACCESSORY_BABY_FROG    = 33,
-    ACCESSORY_FROG         = 34,
-    ACCESSORY_FAT_FROG     = 35,
-    ACCESSORY_OLD_POPPER   = 36,
-    ACCESSORY_POPPER       = 37,
-    ACCESSORY_TOP          = 38,
-    ACCESSORY_DOGWALKER    = 39,
-    ACCESSORY_SINKER       = 40,
-    ACCESSORY_FLOAT        = 41,
-    ACCESSORY_HANGER       = 42,
-    ACCESSORY_DEEP_DIVER   = 43,
-    ACCESSORY_COIN         = 44,
-    ACCESSORY_DING_FROG    = 45,
-    ACCESSORY_WOODEN_ROD   = 46,
-    ACCESSORY_BAMBOO_ROD   = 47,
-    ACCESSORY_DELUXE_ROD   = 48,
-    ACCESSORY_ANGLING_ROD  = 49,
-    ACCESSORY_SPANNER      = 50,
-    ACCESSORY_MASTERS_ROD  = 51,
-} AccessoryId;
+/* The option item table ids (category ITEM_CAT_OPTION: accessories, fishing lures and rods). Names from the GAME.EMI record tables. */
+typedef enum OptionItemId {
+    OPTION_ITEM_NOTHING      = 0,
+    OPTION_ITEM_TITAN_BELT   = 1,
+    OPTION_ITEM_HIGH_BOOTS   = 2,
+    OPTION_ITEM_SPEED_BOOTS  = 3,
+    OPTION_ITEM_WISDOM_RING  = 4,
+    OPTION_ITEM_LIONS_BELT   = 5,
+    OPTION_ITEM_DREAM_RING   = 6,
+    OPTION_ITEM_MIDAS_STONE  = 7,
+    OPTION_ITEM_BALANCE_RING = 8,
+    OPTION_ITEM_BAT_AMULET   = 9,
+    OPTION_ITEM_RING_OF_ICE  = 10,
+    OPTION_ITEM_RING_OF_FIRE = 11,
+    OPTION_ITEM_THUNDER_RING = 12,
+    OPTION_ITEM_TALISMAN     = 13,
+    OPTION_ITEM_DIAMOND_RING = 14,
+    OPTION_ITEM_LIFE_SANDALS = 15,
+    OPTION_ITEM_LIGHT_BANGLE = 16,
+    OPTION_ITEM_BARRIER_RING = 17,
+    OPTION_ITEM_HAWKS_RING   = 18,
+    OPTION_ITEM_ARTEMIS_CAP  = 19,
+    OPTION_ITEM_BELL_COLLAR  = 20,
+    OPTION_ITEM_HOLY_MANTLE  = 21,
+    OPTION_ITEM_CUPIDS_LYRE  = 22,
+    OPTION_ITEM_IVORY_CHARM  = 23,
+    OPTION_ITEM_SOUL_GEM     = 24,
+    OPTION_ITEM_SHAMANS_RING = 25,
+    OPTION_ITEM_SPIRIT_RING  = 26,
+    OPTION_ITEM_COUPONS      = 27,
+    OPTION_ITEM_WORM         = 28,
+    OPTION_ITEM_SPIRIT       = 29,
+    OPTION_ITEM_CARO         = 30,
+    OPTION_ITEM_HEAVY_CARO   = 31,
+    OPTION_ITEM_TOAD         = 32,
+    OPTION_ITEM_BABY_FROG    = 33,
+    OPTION_ITEM_FROG         = 34,
+    OPTION_ITEM_FAT_FROG     = 35,
+    OPTION_ITEM_OLD_POPPER   = 36,
+    OPTION_ITEM_POPPER       = 37,
+    OPTION_ITEM_TOP          = 38,
+    OPTION_ITEM_DOGWALKER    = 39,
+    OPTION_ITEM_SINKER       = 40,
+    OPTION_ITEM_FLOAT        = 41,
+    OPTION_ITEM_HANGER       = 42,
+    OPTION_ITEM_DEEP_DIVER   = 43,
+    OPTION_ITEM_COIN         = 44,
+    OPTION_ITEM_DING_FROG    = 45,
+    OPTION_ITEM_WOODEN_ROD   = 46,
+    OPTION_ITEM_BAMBOO_ROD   = 47,
+    OPTION_ITEM_DELUXE_ROD   = 48,
+    OPTION_ITEM_ANGLING_ROD  = 49,
+    OPTION_ITEM_SPANNER      = 50,
+    OPTION_ITEM_MASTERS_ROD  = 51,
+} OptionItemId;
 
 /* The vital item table ids (category ITEM_CAT_VITAL). Names from the GAME.EMI record tables. */
 typedef enum VitalItemId {
@@ -594,30 +594,30 @@ typedef enum VitalItemId {
 /* The five equipment tables; counts are owned by game/records.h. Read through
  * the record types above so the offsets stay declared in one place. */
 /* D_801C8964 */
-extern volatile Item      g_Items[];
+extern volatile Item       g_Items[];
 /* The two cells the retail materializes by symbol in each equipment table: the
  * row's flags byte and its price halfword. The record types above hold them at
  * their offsets, but a reader that walks a table by the cell's own symbol
  * needs the cell named; the row's stride is the record's stride.
  *
  * The offsets are Item.flags and .price, Weapon.flags and .price,
- * Armor.flags and .price, and Accessory.flags and .price. */
-extern u8                 D_801C8970[]; /* the item row's flags byte */
-extern u8                 D_801C8974;   /* the item row's price halfword */
+ * Armor.flags and .price, and OptionItem.flags and .price. */
+extern u8                  D_801C8970[]; /* the item row's flags byte */
+extern u8                  D_801C8974;   /* the item row's price halfword */
 /* D_801C8FDC */
-extern volatile VitalItem g_VitalItems[];
+extern volatile VitalItem  g_VitalItems[];
 /* D_801C90DC */
-extern Weapon             g_Weapons[];
-extern u8                 D_801C90E9[]; /* the weapon row's flags byte */
-extern u8                 D_801C90F2;   /* the weapon row's price halfword */
+extern Weapon              g_Weapons[];
+extern u8                  D_801C90E9[]; /* the weapon row's flags byte */
+extern u8                  D_801C90F2;   /* the weapon row's price halfword */
 /* D_801C98A4 */
-extern Armor              g_Armors[];
-extern u8                 D_801C98B1[]; /* the armor row's flags byte */
-extern u8                 D_801C98B8;   /* the armor row's price halfword */
+extern Armor               g_Armors[];
+extern u8                  D_801C98B1[]; /* the armor row's flags byte */
+extern u8                  D_801C98B8;   /* the armor row's price halfword */
 /* D_801C9E7C */
-extern volatile Accessory g_Accessories[];
-extern u8                 D_801C9E89[]; /* the accessory row's flags byte */
-extern u8                 D_801C9E8E;   /* the accessory row's price halfword */
+extern volatile OptionItem g_OptionItems[];
+extern u8                  D_801C9E89[]; /* the accessory row's flags byte */
+extern u8                  D_801C9E8E;   /* the accessory row's price halfword */
 
 /* Resolves one GAME.EMI equipment record from its category and key: the
  * category selects the item, weapon, armor, accessory or vital-item table above,
