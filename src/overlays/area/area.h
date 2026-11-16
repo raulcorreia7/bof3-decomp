@@ -123,7 +123,6 @@ void            Area_DrawGradientDiamond(s16 x, s16 y);
 void            Area_DrawHudBanner(s16 x, s16 y);
 void            func_801F4178(void);
 void            func_801F41D8(void);
-void            func_801F4534(void);
 void            func_801F455C(void);
 void            Area_AddCameraOffsetY20(void);
 void            Area_SubCameraOffsetY20(void);

@@ -15,10 +15,15 @@ extern u8       D_80146158;
 /* The field focus point the work position copies. */
 /* D_80147A90 */
 extern s32      g_AreaFocusY;
+/* The integer half of the focus x, stepped by the scene trigger. */
+extern u16      D_80147A8E;
 /* The mirror the scroll step reads. */
 extern s16      g_ScrollHeight;
-/* The camera focus halfword the scroll step samples. */
+/* The camera focus halfword the scroll step samples and the trigger clears. */
 extern u16      D_80147A96;
+extern s16      D_80147AD6;
+/* The scenario flag bytes the trigger tests. */
+extern u8       D_80144EF8[];
 extern s8       D_80147AD0;
 /* The state handler tables the dispatchers index. */
 extern u8       D_801F37D0[];
