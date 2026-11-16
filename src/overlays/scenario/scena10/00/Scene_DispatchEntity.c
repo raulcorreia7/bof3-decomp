@@ -166,7 +166,7 @@ MATCH void func_801F781C(u16 x, u16 y, u16 width, u16 height) {
 
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
-    prim->tpage = GetTPage(0, 0, 704, 256);
+    prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 704, 256);
     setClut(prim, 64, 483);
     setRGB0(prim, 0x80, 0x80, 0x80);
     setXY4(prim, x, y, x + width, y, x, y + height, x + width, y + height);
@@ -193,7 +193,7 @@ MATCH void func_801F79E8(u16 x, u16 y) {
 
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
-    prim->tpage = GetTPage(0, 0, 704, 256);
+    prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 704, 256);
     setClut(prim, 48, 483);
     setRGB0(prim, 0x80, 0x80, 0x80);
     setXY4(prim, x, y, x + 16, y, x, y + 16, x + 16, y + 16);
@@ -236,7 +236,7 @@ MATCH void func_801F7C34(void) {
     func_801AE3F0((u16)rect->x, (u16)rect->y, rect->width, rect->height, 0, g_WindowStyle);
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
-    prim->tpage = GetTPage(0, 0, 704, 256);
+    prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 704, 256);
     setClut(prim, 32, 483);
     setRGB0(prim, 0x80, 0x80, 0x80);
     setXY4(prim, (u16)rect->x, (u16)rect->y, (u16)rect->x + (rect->width - 1), (u16)rect->y, (u16)rect->x, (u16)rect->y + rect->height, (u16)rect->x + (rect->width - 1), (u16)rect->y + rect->height);

@@ -13,7 +13,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     window.y = 152;
     window.h = 8;
     window.w = 8;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 832, 256), &window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(1, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
@@ -29,7 +29,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     window.y = 160;
     window.h = 8;
     window.w = 8;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 832, 256), &window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(1, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
@@ -45,7 +45,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     window.y = 152;
     window.h = 8;
     window.w = 8;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 832, 256), &window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(1, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
@@ -61,7 +61,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     window.y = 160;
     window.h = 8;
     window.w = 8;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 832, 256), &window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(1, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
@@ -77,7 +77,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     window.y = 160;
     window.h = 8;
     window.w = 8;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 832, 256), &window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(1, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
@@ -93,7 +93,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     window.x = 0;
     window.h = 256;
     window.w = 256;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 832, 256), &window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(1, sizeof(DR_MODE));
 
     /* the corners */

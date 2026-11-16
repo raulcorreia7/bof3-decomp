@@ -9,7 +9,7 @@
     if (g_Task->timer == 0) {                                                                                                                                                                 \
         g_Task->header.step = 1;                                                                                                                                                              \
     }                                                                                                                                                                                         \
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(1, 1, 320, 256), NULL);                                                                                                             \
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256), NULL);                                                                                  \
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));                                                                                                           \
     SET_CORNERS(g_Task->param.unk_0B + SYS_TestFlag(D_80144ED0, FLAGS[g_Task->param.unk_0B]) * 4 + 1, AREA_CELL_HALF);                                                                        \
     primitive = (POLY_F4*)g_GfxPrimCursor;                                                                                                                                                    \

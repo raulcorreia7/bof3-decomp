@@ -398,7 +398,7 @@ MATCH void func_801F026C(void) {
             D_1F800014[3].vy           = FIXED_MUL(rcos(D_1F800000.cells.halves[7]), D_1F800000.cells.halves[2]);
             x                          = (D_1F800014[3].vx << 9) + g_Task->pos.x.fixed;
             y                          = (D_1F800014[3].vy << 9) + g_Task->pos.y.fixed;
-            tpage                      = getTPage(0, 2, 320, 256);
+            tpage                      = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
             Area_AddCellPrim(x, y, 1, sizeof(DR_MODE));
             prim = (POLY_F4*)g_GfxPrimCursor;
@@ -449,7 +449,7 @@ MATCH void func_801F0648(void) {
         D_1F800014[3].vy           = FIXED_MUL(rcos(D_1F800000.cells.halves[7]), D_1F800000.cells.halves[2]);
         x                          = (D_1F800014[3].vx << 9) + g_Task->pos.x.fixed;
         y                          = (D_1F800014[3].vy << 9) + g_Task->pos.y.fixed;
-        tpage                      = getTPage(0, 1, 320, 256);
+        tpage                      = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(x, y, 1, sizeof(DR_MODE));
         prim = (POLY_G4*)g_GfxPrimCursor;
@@ -550,7 +550,7 @@ MATCH void func_801F0D0C(u8 angle0, u8 angle1) {
         D_1F800014[1].vy = FIXED_MUL(rcos(angle0 << 4), D_1F800000.cells.halves[1]);
         x                = (D_1F800014[1].vx << 9) + g_Task->pos.x.fixed;
         y                = (D_1F800014[1].vy << 9) + g_Task->pos.y.fixed;
-        tpage            = getTPage(0, g_Task->param.unk_0B, 320, 256);
+        tpage            = getTPage(TPAGE_DEPTH_4BIT, g_Task->param.unk_0B, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(x, y, 2, sizeof(DR_MODE));
         prim = (LINE_F2*)g_GfxPrimCursor;
@@ -686,7 +686,7 @@ MATCH void BMagic_DrawGlowRingInner(void) {
     long     flag;
     s32      i;
 
-    GFX_AddDitheredDrawMode(4, getTPage(0, 1, 320, 256));
+    GFX_AddDitheredDrawMode(4, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     GLOW_RING_INNER  = g_Task->unk_14;
     GLOW_RING_OUTER  = g_Task->unk_14 + 0x40;
     GLOW_RING_SHADE  = g_Task->unk_09 * 15;
@@ -722,7 +722,7 @@ MATCH void BMagic_DrawGlowRingOuter(void) {
     long     flag;
     s32      i;
 
-    GFX_AddDitheredDrawMode(4, getTPage(0, 1, 320, 256));
+    GFX_AddDitheredDrawMode(4, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     GLOW_RING_INNER  = g_Task->unk_14 + 0x40;
     GLOW_RING_OUTER  = g_Task->unk_14 + 0x80;
     GLOW_RING_SHADE  = g_Task->unk_09 * 15;

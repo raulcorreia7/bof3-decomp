@@ -187,7 +187,7 @@ MATCH void func_801EF4E0(void) {
     s32      k;
     s32      tpage;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     k = g_Task->param.unk_0B;
     while (BMagic_Trail[g_Task->unk_04][k].x == -1) {
@@ -232,7 +232,7 @@ MATCH void func_801EF4E0(void) {
         setRGB3(prim, 1, 1, D_1F800000.cells.halves[3]);
         GFX_AddPrim(3, sizeof(POLY_G4));
     }
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
 }
 
@@ -241,7 +241,7 @@ MATCH void func_801EFA4C(void) {
     s32      k;
     s32      tpage;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     D_1F800000.cells.halves[0] = 12;
     k                          = g_Task->param.unk_0B;
@@ -320,7 +320,7 @@ MATCH void func_801EFA4C(void) {
         setRGB3(prim, D_1F800000.cells.halves[3], 1, D_1F800000.cells.halves[3]);
         GFX_AddPrim(3, sizeof(POLY_G4));
     }
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
 }
 
@@ -399,7 +399,7 @@ MATCH void func_801F0638(void) {
 MATCH void func_801F06D8(void) {
     POLY_FT4* prim;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 2, 320, 256), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256), 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     prim        = (POLY_FT4*)g_GfxPrimCursor;
     QUAD_RADIUS = g_Task->unk_09 * 2;
@@ -408,7 +408,7 @@ MATCH void func_801F06D8(void) {
     setXY4(prim, g_Task->unk_2E.half + FIXED_MUL(rcos(ANGLE_45), QUAD_RADIUS), g_Task->unk_30.half + FIXED_MUL(rsin(ANGLE_45), QUAD_RADIUS), g_Task->unk_2E.half + FIXED_MUL(rcos(1536), QUAD_RADIUS),
            g_Task->unk_30.half + FIXED_MUL(rsin(1536), QUAD_RADIUS), g_Task->unk_2E.half + FIXED_MUL(rcos(3584), QUAD_RADIUS), g_Task->unk_30.half + FIXED_MUL(rsin(3584), QUAD_RADIUS),
            g_Task->unk_2E.half + FIXED_MUL(rcos(2560), QUAD_RADIUS), g_Task->unk_30.half + FIXED_MUL(rsin(2560), QUAD_RADIUS));
-    setTPage(prim, 0, 2, 832, 256);
+    setTPage(prim, TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 832, 256);
     setClut(prim, 32, 506);
     setUVWH(prim, 128, 32, 32, 32);
     QUAD_RED   = g_Task->timer * (s8)g_Task->unk_5D;

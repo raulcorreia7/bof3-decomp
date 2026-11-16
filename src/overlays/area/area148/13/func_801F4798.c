@@ -11,7 +11,7 @@ MATCH void func_801F4798(void* first, void* second) {
     FAKE_STACK_PADS(u8, 0x30);
 
     if (g_AreaDrawFlags != 0 && SYS_TestFlag(g_SceneEventFlags, 0x6A) != 0) {
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 960, 0), 0);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
         Area_AddCellPrim(g_Task->unk_18, g_Task->unk_1C, 0, sizeof(DR_MODE));
         ((void (*)(void))Area_SetCameraMatrix)();
         line = (LINE_F2*)g_GfxPrimCursor;
@@ -30,7 +30,7 @@ MATCH void func_801F4798(void* first, void* second) {
         radius2 = scale[0] + (g_FrameCount & 1);
         func_801F4DF0(line->x1, line->y1, radius2, angle + ANGLE_270);
         func_801F4A50(line->x0, line->y0, radius1, angle + ANGLE_90, line->x1, line->y1, radius2, angle + ANGLE_270);
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 1, 960, 0), 0);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
         Area_AddCellPrim(g_Task->unk_18, g_Task->unk_1C, 0, sizeof(DR_MODE));
     }
 }

@@ -22,7 +22,7 @@ MATCH void func_801E30FC(u16 row_x, u16 row_y, s32 row_flags) {
         UI_DrawText(row_x + 4, y + 1, 0, 3, (data + 0xF));
         UI_DrawTextString(row_x + 12, y + 5, 0, 1, data + 0x12);
     } else if (row_flags & 0x100) {
-        GFX_AddDrawMode(getTPage(0, 0, 960, 0));
+        GFX_AddDrawMode(getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
         y = (y + 3) & HALF_MASK;
         Menu_DrawPanelIcon(row_x + 1, y, 6, 2, GetClut(0, STAGE_PALETTE_Y) & HALF_MASK, 128);
         Menu_DrawPanelIcon(row_x + 9, y, 7, 2, GetClut(0, STAGE_PALETTE_Y) & HALF_MASK, 128);

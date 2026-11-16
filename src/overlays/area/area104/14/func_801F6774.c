@@ -9,7 +9,7 @@ NON_MATCHING void func_801F6774(void) {
     prim = (POLY_FT4*)g_GfxPrimCursor;
     setPolyFT4(prim);
     SetSemiTrans(prim, 1);
-    prim->tpage = getTPage(0, 0, 896, 256);
+    prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 896, 256);
     prim->clut  = 0x7BC6;
     setUV4(prim, 0, 0, 0x40, 0, 0, 0x40, 0x40, 0x40);
     setXY4(prim, 255, 134, 300, 179, 210, 179, 255, 224);

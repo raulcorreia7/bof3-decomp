@@ -464,7 +464,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     texture_window->x = 0;
     setWH(texture_window, 16, 16);
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
     GFX_AddPrim(1u, sizeof(DR_MODE));
 
     primitive = (POLY_FT4*)g_GfxPrimCursor;
@@ -497,7 +497,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     primitive->clut = GetClut(clut_x, STAGE_PALETTE_Y + 1);
     width_plus_1    = (s32)(width + 1);
 
-    primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
+    primitive->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1u, sizeof(POLY_FT4));
 
     r_s1 = (s32)(u16)width_plus_1;
@@ -514,7 +514,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     setRGB0(primitive, 172, 172, 172);
     primitive->clut = GetClut(clut_x, STAGE_PALETTE_Y + 1);
 
-    primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
+    primitive->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1u, sizeof(POLY_FT4));
 
     primitive = (POLY_FT4*)g_GfxPrimCursor;
@@ -532,7 +532,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     setRGB0(primitive, 172, 172, 172);
     primitive->clut = GetClut(clut_x, STAGE_PALETTE_Y + 1);
 
-    primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
+    primitive->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1u, sizeof(POLY_FT4));
 
     primitive = (POLY_FT4*)g_GfxPrimCursor;
@@ -561,7 +561,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     primitive->v3 -= 3;
     primitive->clut = GetClut(clut_x, STAGE_PALETTE_Y + 1);
 
-    primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
+    primitive->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1u, sizeof(POLY_FT4));
 
     texture_window    = (RECT*)g_GfxPrimCursor;
@@ -570,7 +570,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     texture_window->y = 0;
     setWH(texture_window, 256, 256);
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
     GFX_AddPrim(1u, sizeof(DR_MODE));
     func_801AEBA0((s16)r_s8, (s16)((s32)(u16)y + 2), (s16)(width - 4), (s16)(height - 4), 0);
 }

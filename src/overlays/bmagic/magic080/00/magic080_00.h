@@ -26,7 +26,7 @@ extern Magic080Cell D_801EF13C[];
         setXY4(prim, g_Task->unk_2E.half + i * 12, g_Task->unk_30.half, g_Task->unk_2E.half + (i + 1) * 12, g_Task->unk_30.half, g_Task->unk_2E.half + i * 12, g_Task->unk_30.half + 12, \
                g_Task->unk_2E.half + (i + 1) * 12, g_Task->unk_30.half + 12);                                                                                                            \
         setRGB0(prim, 0x80, 0x80, 0x80);                                                                                                                                                 \
-        prim->tpage = GetTPage(0, 1, 0x3C0, PAGE_Y);                                                                                                                                     \
+        prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x3C0, PAGE_Y);                                                                                                          \
         prim->clut  = GetClut(0, 0x1E0);                                                                                                                                                 \
         setUVWH(prim, CELLS[i].u, CELLS[i].v, 12, 12);                                                                                                                                   \
         GFX_AddPrim(2, sizeof(POLY_FT4));                                                                                                                                                \

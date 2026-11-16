@@ -11,7 +11,7 @@ MATCH void func_801F302C(s32* first, s32* second, Actor* task) {
     s16      radius1;
     s16      radius2;
 
-    GFX_AddDitheredDrawMode(3, GetTPage(0, 1, 960, 0));
+    GFX_AddDitheredDrawMode(3, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     Area_SetCameraMatrix(&camera);
     line = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(line);

@@ -16,7 +16,7 @@ MATCH void func_801F4F0C(s32* center, s32 radius, u16 angle, s32 offset_x, s32 o
 
     i = 0;
     do {
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 2, 896, 256) & HALF_MASK, 0);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 896, 256) & HALF_MASK, 0);
         Area_AddCellPrim(center[0] + offset_x, center[1] + offset_y, 0, 0x18);
         packet = (POLY_F3*)g_GfxPrimCursor;
         SetPolyF3(packet);

@@ -14,7 +14,7 @@ MATCH void func_801F4490(WorldPos* pos, s32 orange_radius, s32 black_radius) {
     u16      angle;
     u8       i;
 
-    tpage = GetTPage(0, 1, 0x2C0, 0x100);
+    tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100);
     GFX_ADD_LAYER_DRAW_MODE(2, tpage);
     Area_SetCameraMatrix(&camera);
     vertex.vx = pos->x.fixed + (orange_radius << 4);

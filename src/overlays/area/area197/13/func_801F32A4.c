@@ -5,7 +5,7 @@ MATCH void func_801F32A4(Actor* actor) {
     /* FAKE: retail frame reserves 48 bytes no statement uses. */
     FAKE_STACK_PADS(u8, 48);
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 1, 0x3C0, 0), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
     Area_AddCellPrim(actor->vz, actor->unk_18, -2, sizeof(DR_MODE));
 
     tile = (TILE_1*)g_GfxPrimCursor;

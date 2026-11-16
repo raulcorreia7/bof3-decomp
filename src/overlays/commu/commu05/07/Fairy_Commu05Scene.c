@@ -40,7 +40,7 @@ MATCH void func_801D0F50(s16 x, s16 y, u8 row) {
     SPRT* sprite;
     s32   tpage;
 
-    tpage = getTPage(0, 0, 896, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 896, 256);
     GFX_ADD_DRAW_MODE(tpage);
     sprite = GFX_CURSOR(SPRT);
     SetSprt(sprite);

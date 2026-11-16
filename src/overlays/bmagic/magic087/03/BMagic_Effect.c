@@ -174,7 +174,7 @@ MATCH void func_801EF580(s32 phase) {
     s32       offset;
     s32       tpage;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.cells.words[2] = 1;
@@ -208,7 +208,7 @@ MATCH void func_801EF580(s32 phase) {
         }
         setRGB0(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[2], D_1F800000.cells.words[2]);
         setRGB1(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[2], D_1F800000.cells.words[2]);
-        prim->tpage = GetTPage(0, 1, 0x3C0, 0x100);
+        prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x3C0, 0x100);
         prim->clut  = GetClut(0, 0x1FA);
         setUV4(prim, 0, (i * 8 + g_Task->unk_04 * 2) & 0x1F, 8, (i * 8 + g_Task->unk_04 * 2) & 0x1F, 0, ((i * 8 + g_Task->unk_04 * 2) & 0x1F) + 8, 8, ((i * 8 + g_Task->unk_04 * 2) & 0x1F) + 8);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_GT4));
@@ -372,7 +372,7 @@ MATCH void func_801F0014(void) {
     long     depth;
     long     flag;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
 

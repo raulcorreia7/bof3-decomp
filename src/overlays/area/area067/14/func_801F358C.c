@@ -10,7 +10,7 @@ NON_MATCHING void func_801F358C(AreaRippleQuad* quad) {
     u8       i;
     u8       j;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 2, 0x380, 0x100), NULL);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 0x380, 0x100), NULL);
     Area_AddCellPrim(D_801F53A0, D_801F53A4, 4, sizeof(DR_MODE));
     i = 0;
     do {
@@ -42,7 +42,7 @@ NON_MATCHING void func_801F358C(AreaRippleQuad* quad) {
         } while (j < 16);
         i++;
     } while (i < 8);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 1, 0x380, 0x100), NULL);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100), NULL);
     Area_AddCellPrim(D_801F53A0, D_801F53A4, 4, sizeof(DR_MODE));
 }
 #else

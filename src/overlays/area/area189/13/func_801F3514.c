@@ -54,7 +54,7 @@ NON_MATCHING void func_801F3514(void) {
     }
 
     if (g_AreaSceneMode == 2) {
-        tpage = getTPage(1, 2, 448, 256);
+        tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_SUB, 448, 256);
         GFX_ADD_LAYER_DRAW_MODE(3, tpage);
         tile = (TILE*)g_GfxPrimCursor;
         SetTile(tile);

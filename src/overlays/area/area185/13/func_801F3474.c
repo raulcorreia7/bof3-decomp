@@ -13,7 +13,7 @@ MATCH void func_801F3474(void) {
     D_1F800034[0] = -0x3100;
     D_1F800034[1] = -0x3A00;
 
-    mode = getTPage(1, 1, 320, 256);
+    mode = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mode, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
 
@@ -35,7 +35,7 @@ MATCH void func_801F3474(void) {
         }
     }
 
-    mode = getTPage(1, 1, 320, 256);
+    mode = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_SET_DRAW_MODE(mode);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
 }

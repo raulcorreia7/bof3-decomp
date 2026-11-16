@@ -296,7 +296,7 @@ MATCH void func_801F009C(void) {
 
     handlers = D_801EEC5C;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
-    tpage = getTPage(0, 1, 960, 0);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_ADD_LAYER_DRAW_MODE(2, tpage);
     for (i = 0; i < MAGIC064_RING_COUNT; i++) {
         if (D_801F13B4[i].active != 0) {
@@ -505,7 +505,7 @@ MATCH void func_801F0EEC(u32 sprite, s32 blend, s32 color) {
     FAKE_REG(PartyMember*, task, "v0");
     u16 tpage;
 
-    tpage = GetTPage(2, blend & BYTE_MASK, 832, 256);
+    tpage = GetTPage(TPAGE_DEPTH_15BIT, blend & BYTE_MASK, 832, 256);
     GFX_SET_DRAW_MODE(tpage);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
     prim = (SPRT*)g_GfxPrimCursor;

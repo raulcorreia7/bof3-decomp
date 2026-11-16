@@ -54,7 +54,7 @@ MATCH void func_801170D8(AreaSprite* sprite) {
      * these values raw. The palette row is the stage palette plus three rows. */
     setUV4(primitive, 224, 48, 255, 48, 224, 79, 255, 79);
     setClut(primitive, 80, STAGE_PALETTE_Y + 3);
-    primitive->tpage = GetTPage(0, 1, 704, 256);
+    primitive->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
     flags            = sprite->unk_26;
     red              = 0;
     if (flags & 4) {
@@ -110,7 +110,7 @@ MATCH u8 func_80117410(void) {
     s32 result;
 
     Area_SetCameraMatrix(scratch);
-    GFX_SET_DRAW_MODE(GetTPage(0, 1, 960, 0));
+    GFX_SET_DRAW_MODE(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     GFX_AddPrim(2, 12);
 
     result     = 0;
@@ -258,7 +258,7 @@ MATCH u8 func_80117900(void) {
     AreaSprite* work;
 
     Area_SetCameraMatrix(scratch);
-    GFX_SET_DRAW_MODE(GetTPage(0, 1, 960, 0));
+    GFX_SET_DRAW_MODE(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     GFX_AddPrim(2, 12);
 
     result     = 0;
@@ -411,7 +411,7 @@ NON_MATCHING void func_80117E78(s32 brightness, s32 unused) {
                 SetSemiTrans(primitive, 1);
                 setUV4(primitive, 224, 48, 255, 48, 224, 79, 255, 79);
                 primitive->clut  = getClut(80, STAGE_PALETTE_Y + 3);
-                primitive->tpage = getTPage(0, 1, 704, 256);
+                primitive->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
                 primitive->r0    = brightness / 2;
                 primitive->g0    = brightness;
                 primitive->b0    = brightness / 2;

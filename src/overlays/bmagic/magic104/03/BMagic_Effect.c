@@ -189,7 +189,7 @@ MATCH void func_801EF370(void) {
             D_1F800014[3].vy = FIXED_MUL(rcos(i << 8), FIXED_MUL(rcos(k << 7), D_1F800000.cells.halves[0]));
             x                = (D_1F800014[3].vx << 9) + g_Task->pos.x.fixed;
             y                = (D_1F800014[3].vy << 9) + g_Task->pos.y.fixed;
-            tpage            = getTPage(1, 1, 320, 256);
+            tpage            = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
             Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
             prim = (POLY_G4*)g_GfxPrimCursor;
@@ -268,7 +268,7 @@ MATCH void func_801EFB2C(void) {
         D_1F800014[2].vz = 0;
         x                = (D_1F800014[2].vx >> 9) + g_Task->pos.x.fixed;
         y                = (D_1F800014[2].vy >> 9) + g_Task->pos.y.fixed;
-        tpage            = getTPage(0, 1, 320, 256);
+        tpage            = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(x, y, 2, sizeof(DR_MODE));
         prim = (POLY_G3*)g_GfxPrimCursor;
@@ -285,7 +285,7 @@ MATCH void func_801EFB2C(void) {
         RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
         Area_AddCellPrim(x, y, 2, sizeof(POLY_G3));
     }
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 }
 
@@ -305,7 +305,7 @@ MATCH void func_801EFE34(void) {
     D_1F800014[1].vy           = FIXED_MUL(rcos(0), D_1F800000.cells.halves[0]);
     D_1F800014[3].vx           = FIXED_MUL(rsin(0), D_1F800000.cells.halves[1]);
     D_1F800014[3].vy           = FIXED_MUL(rcos(0), D_1F800000.cells.halves[1]);
-    tpage                      = getTPage(0, 1, 320, 256);
+    tpage                      = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     for (i = 1; i <= 32; i++) {
         prim = (POLY_G4*)g_GfxPrimCursor;
@@ -336,14 +336,14 @@ MATCH void func_801EFE34(void) {
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         GFX_AddPrim(5, sizeof(POLY_G4));
     }
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 }
 
 MATCH void func_801F020C(void) {
-    GFX_AddDitheredDrawMode(4, getTPage(0, 1, 320, 256));
+    GFX_AddDitheredDrawMode(4, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     SYS_DISPATCH_BYTE(D_801F0900, g_Task->header.step);
-    GFX_AddDitheredDrawMode(4, getTPage(0, 1, 320, 256));
+    GFX_AddDitheredDrawMode(4, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
 }
 
 MATCH void func_801F02F4(void) {
@@ -407,7 +407,7 @@ MATCH void func_801F03C4(void) {
                       FIXED_MUL(rcos(i << 9), FIXED_MUL(rcos((band + 1) << 8), D_1F800000.cells.halves[0])), FIXED_MUL(rsin((band + 1) << 8), D_1F800000.cells.halves[0]));
             x     = (D_1F800014[3].vx << 9) + g_Task->pos.x.fixed;
             y     = (D_1F800014[3].vy << 9) + g_Task->pos.y.fixed;
-            tpage = getTPage(1, 1, 320, 256);
+            tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
             Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
             prim = (POLY_G4*)g_GfxPrimCursor;

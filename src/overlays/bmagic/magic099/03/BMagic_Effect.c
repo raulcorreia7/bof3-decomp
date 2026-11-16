@@ -306,7 +306,7 @@ MATCH void func_801F070C(void) {
 
     D_1F800000 = RANDOM_MASK(7) + g_Task->timer * 3;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
     i      = 0;
     radius = &D_1F800000;
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));

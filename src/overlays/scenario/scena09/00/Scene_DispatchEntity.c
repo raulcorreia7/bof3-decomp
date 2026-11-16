@@ -23,7 +23,7 @@ MATCH void func_801F7424(Actor* actor) {
     POLY_F3* poly;
     FAKE_STACK_PADS(u8, 48); /* FAKE: retail frame reserves 48 bytes no statement uses. */
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 1, 960, 0) & HALF_MASK, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK, 0);
     Area_AddCellPrim(actor->unk_18, actor->unk_1C, 0, sizeof(DR_MODE));
     poly = (POLY_F3*)g_GfxPrimCursor;
     SetPolyF3(poly);

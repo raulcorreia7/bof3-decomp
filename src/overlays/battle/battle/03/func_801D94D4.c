@@ -13,7 +13,7 @@ MATCH void func_801D94D4(s32 x, u32 y, s32 clut_index, s32 text_value) {
     } else {
         TEXT_Format(g_UiFormatBuffer, D_801D0C74, (u16)text_value);
     }
-    GFX_AddDrawMode(GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
+    GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
 
     do {
         temp = g_UiFormatBuffer[index];

@@ -18,7 +18,7 @@ MATCH void UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 frame_flags, u
     texture_window->y = 240;
     texture_window->x = 0;
     setWH(texture_window, 16, 16);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
     GFX_AddPrim(1, sizeof(DR_MODE));
 
     primitive = (POLY_FT4*)g_GfxPrimCursor;
@@ -45,7 +45,7 @@ MATCH void UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 frame_flags, u
         primitive->v2 -= 4;
     }
     setClut(primitive, clut_x, clut_y);
-    primitive->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
+    primitive->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1, sizeof(POLY_FT4));
     primitive++;
     if (width < 256) {
@@ -84,6 +84,6 @@ MATCH void UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 frame_flags, u
     texture_window->y = 0;
     texture_window->h = 256;
     texture_window->w = 256;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
     GFX_AddPrim(1, sizeof(DR_MODE));
 }

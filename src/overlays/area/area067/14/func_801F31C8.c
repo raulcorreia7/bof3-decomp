@@ -6,7 +6,7 @@ MATCH void func_801F31C8(AreaRippleQuad* quad) {
     u8       i;
     u16      angle;
 
-    GFX_SET_DRAW_MODE(GetTPage(0, 1, 0x380, 0x100));
+    GFX_SET_DRAW_MODE(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
     Area_AddCellPrim(D_801F53A0, D_801F53A4, 4, sizeof(DR_MODE));
     i = 0;
     do {
@@ -24,6 +24,6 @@ MATCH void func_801F31C8(AreaRippleQuad* quad) {
         i++;
     } while (i < 8);
     func_801F3394(quad);
-    GFX_SET_DRAW_MODE(GetTPage(0, 1, 0x380, 0x100));
+    GFX_SET_DRAW_MODE(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
     Area_AddCellPrim(D_801F53A0, D_801F53A4, 4, sizeof(DR_MODE));
 }

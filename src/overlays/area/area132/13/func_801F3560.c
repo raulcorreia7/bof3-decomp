@@ -16,7 +16,7 @@ NON_MATCHING void func_801F3560(AreaSpawnSlot* slot) {
     /* FAKE: retail reserves 32 frame bytes that no local or callee buffer explains. */
     FAKE_STACK_PADS(u8, 0x20);
 
-    GFX_SET_DRAW_MODE(GetTPage(0, 2, 960, 0));
+    GFX_SET_DRAW_MODE(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, FONT_TPAGE_X, FONT_TPAGE_Y));
     Area_AddCellPrim(slot->pos.x.fixed, slot->pos.y.fixed, 3, sizeof(DR_MODE));
 
     primitive = (POLY_FT4*)g_GfxPrimCursor;
@@ -33,7 +33,7 @@ NON_MATCHING void func_801F3560(AreaSpawnSlot* slot) {
            (screen.vy - ((s16)size[1] >> 1)) + size[1], (screen.vx - ((s16)size[0] >> 1)) + size[0], (screen.vy - ((s16)size[1] >> 1)) + size[1]);
     setUV4(primitive, 224, 48, 255, 48, 224, 79, 255, 79);
     primitive->clut  = GetClut(160, STAGE_PALETTE_Y + 3);
-    primitive->tpage = GetTPage(0, 2, 704, 256);
+    primitive->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 704, 256);
     flags            = slot->core_shade_16;
     red              = 0;
     if ((flags & 4) != 0) {

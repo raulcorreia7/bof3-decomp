@@ -139,7 +139,7 @@ MATCH u8 func_801EF118(void) {
     u8                   drawn;
 
     drawn = 0;
-    GFX_SET_DRAW_MODE(GetTPage(0, 1, 0x2C0, 0x100) & HALF_MASK);
+    GFX_SET_DRAW_MODE(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100) & HALF_MASK);
     GFX_AddPrim(3, sizeof(DR_MODE));
     func_801AFE18();
     for (record = D_801EF2A8, i = 0; i < 128; record++, i++) {

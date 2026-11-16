@@ -214,7 +214,7 @@ MATCH void func_801D147C(s32* pos, s16 origin, s32 flags) {
     s32      angle;
     s32      i;
 
-    GFX_AddDitheredDrawMode(2u, GetTPage(0, 1, 0x2C0, 0x100));
+    GFX_AddDitheredDrawMode(2u, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100));
     Area_SetCameraMatrix(&camera);
     Area_ProjectPoint(pos, &screen);
     size.vx = size.vy = origin;
@@ -422,7 +422,7 @@ MATCH void func_801D2088(void) {
     u16*       angle;
     s32        i;
 
-    GFX_AddDitheredDrawMode(2, GetTPage(0, 1, 0x380, 0x100));
+    GFX_AddDitheredDrawMode(2, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
     Area_SetCameraMatrix(&matrix);
     spin  = g_WorldSpins;
     i     = 0;
@@ -472,7 +472,7 @@ MATCH void func_801D21B4(void) {
         actor->screen_x     = D_801D393C[D_801D40AC].x;
         actor->screen_y     = D_801D393C[D_801D40AC].y;
         if (actor->active_flags & 1) {
-            actor->unk_25 = GetTPage(0, 0, 0x340, 0x100);
+            actor->unk_25 = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 0x340, 0x100);
             actor->unk_26 = 0x80;
         }
         actor->active_flags |= 0x88;
@@ -768,7 +768,7 @@ MATCH void func_801D2E30(void) {
             actor->unk_05       = 0x3A;
             actor->screen_x     = D_801D393C[D_801D40AC].x;
             actor->screen_y     = D_801D393C[D_801D40AC].y;
-            actor->unk_25       = GetTPage(0, 0, 0x340, 0x100);
+            actor->unk_25       = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 0x340, 0x100);
             actor->unk_26       = 0x80;
             actor->active_flags |= 0x88;
             parent = g_Task;
@@ -937,7 +937,7 @@ MATCH void func_801D36BC(s32* point, s32 orange_radius, s32 black_radius) {
     u16      angle;
     u8       i;
 
-    tpage = GetTPage(0, 1, 0x2C0, 0x100);
+    tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100);
     GFX_ADD_LAYER_DRAW_MODE(2, tpage);
     Area_SetCameraMatrix(&camera);
     vertex.vx = point[0] + (orange_radius << 4);

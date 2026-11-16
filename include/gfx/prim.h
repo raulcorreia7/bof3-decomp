@@ -52,6 +52,17 @@ ASSERT_SIZE(UvRect, 0x4);
 #define FONT_TPAGE_X                 960
 #define FONT_TPAGE_Y                 0
 
+/* GetTPage `tp`: the colour depth of the texture page (bits 7-8 of the page word; PsyQ manual: 4-bit CLUT, 8-bit CLUT, 15-bit direct). */
+#define TPAGE_DEPTH_4BIT             0
+#define TPAGE_DEPTH_8BIT             1
+#define TPAGE_DEPTH_15BIT            2
+
+/* GetTPage `abr`: the semi-transparency rate (bits 5-6 of the page word): B is the back pixel, F the primitive's. */
+#define TPAGE_ABR_HALF               0 /* 0.5 B + 0.5 F */
+#define TPAGE_ABR_ADD                1 /* B + F */
+#define TPAGE_ABR_SUB                2 /* B - F */
+#define TPAGE_ABR_QUARTER            3 /* B + 0.25 F */
+
 /* A textured primitive's colour channel that leaves the texel unchanged (128 is 1.0 in the PSX modulation). */
 #define GFX_COLOR_NEUTRAL            128
 

@@ -419,7 +419,7 @@ MATCH void func_801F0238(void) {
     s32      i;
     s32      tpage;
 
-    tpage = getTPage(0, 2, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     D_1F800000.cells.halves[1] = g_Task->timer << 3;
     D_1F800000.cells.halves[0] = g_Task->timer << 3;
@@ -442,6 +442,6 @@ MATCH void func_801F0238(void) {
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
 
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 }

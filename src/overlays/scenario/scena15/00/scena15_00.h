@@ -17,7 +17,7 @@
            (u8)g_Task->screen_x + 12, (u8)g_Task->screen_y + 11)
 
 #define SCENA15_SPRITE_END(prim)                                                    \
-    (prim)->tpage = GetTPage(2, 1, 0x340, 0x100);                                   \
+    (prim)->tpage = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_ADD, 0x340, 0x100);       \
     SetSemiTrans(prim, 1);                                                          \
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_GT4))
 

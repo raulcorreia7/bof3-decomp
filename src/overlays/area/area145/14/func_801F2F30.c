@@ -12,7 +12,7 @@ NON_MATCHING void func_801F2F30(s32* first, s32* second) {
     u8       i;
 
     Area_SetCameraMatrix(&camera);
-    tpage = GetTPage(0, 1, 0x3C0, 0);
+    tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_ADD_DITHERED_DRAW_MODE(1, tpage);
 
     memcpy(&vertex, first, sizeof(vertex));

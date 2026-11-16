@@ -10,7 +10,7 @@ MATCH void func_801D8248(s16 x, s16 y, u8 height) {
 
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
-    tpage       = getTPage(0, 0, 832, 256);
+    tpage       = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256);
     prim->x0    = x;
     prim->tpage = tpage;
     prim->clut  = getClut(112, 482);

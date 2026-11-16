@@ -7,7 +7,7 @@ MATCH void GFX_DrawShadedDisc(s16 x, s16 y, s16 radius, u8 center_shade, u8 rim_
     u16      other;
     s32      scale;
 
-    GFX_AddDitheredDrawMode(1u, GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
+    GFX_AddDitheredDrawMode(1u, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
     angle = 0;
     do {
         packet = GFX_BeginPolyG3(1);

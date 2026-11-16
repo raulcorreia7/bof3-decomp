@@ -94,7 +94,7 @@ MATCH void func_801EF5D4(s16 band_height, u16 radius, u16 jitter_mask) {
     D_1F800000.cells.halves[6] = band_height - RANDOM_MASK(3);
     D_1F800014[0].vy           = FIXED_MUL(rsin(D_1F800000.cells.halves[1]), D_1F800000.cells.halves[0]);
     D_1F800014[0].vz           = 0;
-    tpage                      = getTPage(0, 1, 320, 256);
+    tpage                      = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     for (i = 1; i < 18; i++) {
@@ -197,7 +197,7 @@ MATCH void func_801EFE24(void) {
     s32      tpage;
     s32      i;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     d          = D_1F800000_HALF;

@@ -203,7 +203,7 @@ NON_MATCHING void func_801D1714(s16 x, s16 y, u32 clut, u8* text) {
             poly->b0   = 0x80;
             poly->clut = color;
             poly->v3 = poly->v2 = poly->v1 + 8;
-            poly->tpage         = getTPage(0, 0, 0x3C0, 0);
+            poly->tpage         = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
             GFX_AddPrim(1, sizeof(POLY_FT4));
         }
         p += 1;

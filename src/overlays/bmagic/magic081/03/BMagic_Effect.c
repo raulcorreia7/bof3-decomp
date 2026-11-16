@@ -234,7 +234,7 @@ MATCH void func_801EF6A0(void) {
     s16*      shade;
     s32       tpage;
 
-    tpage = getTPage(0, 2, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     prim = (POLY_GT4*)g_GfxPrimCursor;
@@ -252,7 +252,7 @@ MATCH void func_801EF6A0(void) {
            D_1F800000.cells.halves[2] + FIXED_MUL(rsin(0x800), D_1F800000.cells.halves[0]), D_1F800000.cells.halves[3] + FIXED_MUL(rcos(0x800), D_1F800000.cells.halves[0]),
            D_1F800000.cells.halves[2] + FIXED_MUL(rsin(0), D_1F800000.cells.halves[0]), D_1F800000.cells.halves[3] + FIXED_MUL(rcos(0), D_1F800000.cells.halves[0]),
            D_1F800000.cells.halves[2] + FIXED_MUL(rsin(0x400), D_1F800000.cells.halves[0]), D_1F800000.cells.halves[3] + FIXED_MUL(rcos(0x400), D_1F800000.cells.halves[0]));
-    prim->tpage = GetTPage(0, 2, 832, 256);
+    prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 832, 256);
     prim->clut  = GetClut(0, 506);
     setUVWH(prim, 1, 1, 30, 30);
     GFX_SET_RGB_ALL(prim, *shade, *shade, *shade);

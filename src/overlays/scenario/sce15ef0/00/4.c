@@ -127,7 +127,7 @@ NON_MATCHING void func_801D1220(s32 value) {
     back[2]            = -TO_COORD(768);
     i                  = 0;
     do {
-        tpage = GetTPage(0, 1, 0x3C0, 0);
+        tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(front[0], front[1], 0, 0xC);
         prim = (POLY_F4*)g_GfxPrimCursor;
@@ -160,7 +160,7 @@ MATCH void func_801D1370(s32* first, s32* second, s16 width) {
     s16      radius1;
     s16      radius2;
 
-    GFX_AddDitheredDrawMode(3, GetTPage(0, 1, 960, 0));
+    GFX_AddDitheredDrawMode(3, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     Area_SetCameraMatrix(&camera);
     line = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(line);
@@ -259,7 +259,7 @@ MATCH void func_801D1C1C(s32* from, s32* to, u8 level) {
     u8       i;
     u16      tpage;
 
-    tpage = GetTPage(0, 1, 704, 256);
+    tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
 
     prim = (POLY_G4*)g_GfxPrimCursor;

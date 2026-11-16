@@ -2,7 +2,7 @@ MATCH void Effect_DrawScreenFade(void) {
     s8       shade;
     POLY_G4* prim;
 
-    GFX_AddDitheredDrawMode(1U, getTPage(0, 1, 320, 256));
+    GFX_AddDitheredDrawMode(1U, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     prim  = (POLY_G4*)g_GfxPrimCursor;
     shade = g_Task->unk_09 * 0x10;
     SetPolyG4(prim);
@@ -22,5 +22,5 @@ MATCH void Effect_DrawScreenFade(void) {
     setRGB2(prim, 128, 128, 128);
     setRGB3(prim, 128, 128, 128);
     GFX_AddPrim(1U, sizeof(POLY_G4));
-    GFX_AddDitheredDrawMode(1U, getTPage(0, 0, 320, 256));
+    GFX_AddDitheredDrawMode(1U, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256));
 }

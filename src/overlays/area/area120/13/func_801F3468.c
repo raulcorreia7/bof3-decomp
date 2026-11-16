@@ -6,7 +6,7 @@ MATCH void func_801F3468(AreaRow* row) {
     TILE*   tile;
     u8      blue;
 
-    GFX_SET_DRAW_MODE(GetTPage(0, 1, 0x380, 0x100));
+    GFX_SET_DRAW_MODE(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
     Area_AddCellPrim(row->x, row->z, 0, 0xC);
     Area_ProjectPoint(&row->x, (DVECTOR*)&screen[0]);
 

@@ -103,7 +103,7 @@ MATCH void func_801EF0E4(void) {
     s32      tpage;
     s32*     shade;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     prim = (LINE_G3*)g_GfxPrimCursor;
@@ -137,7 +137,7 @@ MATCH void func_801EF290(void) {
     s32      tpage;
 
     semi  = g_Task->header.mode & 1;
-    tpage = getTPage(0, semi, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, semi, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.cells.words[0] = 32;
@@ -180,7 +180,7 @@ MATCH void func_801EF544(void) {
     s32      tpage;
 
     semi  = g_Task->header.mode & 1;
-    tpage = getTPage(0, semi, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, semi, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.cells.words[0] = 32;
@@ -251,7 +251,7 @@ MATCH void func_801EFAE0(void) {
         D_1F800014[2].vy = D_1F800014[3].vy;
         D_1F800014[2].vz = D_1F800014[3].vz;
         setVector(&D_1F800014[3], 0, FIXED_MUL(rcos(D_1F800000.cells.words[2]), D_1F800000.cells.words[1]), FIXED_MUL(rsin(D_1F800000.cells.words[2]), D_1F800000.cells.words[1]));
-        tpage = getTPage(0, 1, 320, 256);
+        tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
         prim = (POLY_G4*)g_GfxPrimCursor;
@@ -292,7 +292,7 @@ MATCH void func_801EFEA8(void) {
         D_1F800014[3].vx          = 0;
         D_1F800014[3].vy          = (u32)(rcos(D_1F800000.cells.words[2]) * 3) >> 5;
         D_1F800014[3].vz          = (u32)(rsin(D_1F800000.cells.words[2]) * 3) >> 5;
-        tpage                     = getTPage(0, 1, 320, 256);
+        tpage                     = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
         prim = (LINE_G4*)g_GfxPrimCursor;

@@ -158,7 +158,7 @@ MATCH void func_801EF478(void) {
     s32      i;
     s32      tpage;
 
-    tpage = getTPage(0, 2, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     D_1F800000.cells.halves[2] = 8;
     D_1F800000.cells.halves[0] = g_Task->unk_2E.half;
@@ -185,7 +185,7 @@ MATCH void func_801EF478(void) {
         setRGB3(prim, 64, 64, 64);
         GFX_AddPrim(3, sizeof(POLY_G4));
     }
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
@@ -236,7 +236,7 @@ MATCH void func_801EFB6C(void) {
     POLY_G4* prim;
     s32      tpage;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     D_1F800000.cells.halves[2] = 8;
     prim                       = (POLY_G4*)g_GfxPrimCursor;
@@ -346,7 +346,7 @@ MATCH void func_801F0308(void) {
     D_1F800000.cells.halves[3] = g_Task->timer;
     D_1F800000.cells.halves[0] = g_Task->unk_2E.half;
     D_1F800000.cells.halves[1] = g_Task->unk_30.half;
-    tpage                      = getTPage(0, 1, 320, 256);
+    tpage                      = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
     prim = (POLY_G4*)g_GfxPrimCursor;
@@ -408,7 +408,7 @@ MATCH void func_801F0790(void) {
     s32      i;
     s32      tpage;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     D_1F800000.cells.halves[0] = 0x100;
     D_1F800000.cells.halves[5] = g_Task->unk_09 << 3;
@@ -428,6 +428,6 @@ MATCH void func_801F0790(void) {
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
 
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 }

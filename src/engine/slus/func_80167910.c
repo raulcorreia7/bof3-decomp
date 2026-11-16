@@ -53,7 +53,7 @@ MATCH void func_80167910(void) {
     poly->u2    = poly->u0 + 24;
     poly->u3    = poly->u2;
     poly->v3    = poly->v1;
-    poly->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
+    poly->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     poly->clut  = 0x7802;
     if (!(g_Task->param.unk_0B & 0x1)) {
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
@@ -65,7 +65,7 @@ MATCH void func_80167910(void) {
     setVector(&rot, (s16)((g_Task->pos.x.fixed >> 9) - 0x4000), (s16)((g_Task->pos.y.fixed >> 9) - 0x4000), (s16)(-COORD_INT(g_Task->pos.z) / 2));
     RotTransMatrix(&rot, mtx, &flag);
     Camera_SetModelMatrix(&axis, &mtx);
-    mode = getTPage(0, 2, 896, 256);
+    mode = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 896, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, mode, NULL);
     if (!(g_Task->param.unk_0B & 0x1)) {
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));

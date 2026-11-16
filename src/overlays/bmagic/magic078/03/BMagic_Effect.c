@@ -8,13 +8,13 @@ MATCH void func_801EEC04(void) {
     Callback handlers[2] = {func_801EECFC, Effect_PlayOnIdleTick};
     s32      tpage;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(4, 0xC);
 
     SYS_DISPATCH_BYTE(handlers, g_Task->header.mode);
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(4, 0xC);
 }
@@ -57,7 +57,7 @@ MATCH void func_801EECFC(void) {
 MATCH void func_801EEF28(void) {
     s32 tpage;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(4, 0xC);
 
@@ -77,7 +77,7 @@ MATCH void func_801EEF28(void) {
         PopMatrix();
     }
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(4, 0xC);
 }
@@ -186,7 +186,7 @@ MATCH void func_801EFEB8(void) {
 MATCH void func_801EFF84(void) {
     s32 tpage;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(4, 0xC);
 
@@ -196,7 +196,7 @@ MATCH void func_801EFF84(void) {
 
     SYS_DISPATCH_BYTE(D_801F08C4, g_Task->header.step);
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(4, 0xC);
 }

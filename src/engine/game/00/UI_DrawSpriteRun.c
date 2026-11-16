@@ -13,7 +13,7 @@ MATCH void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 f
     if (!(flags & 0x1)) {
         tpage = 896;
     }
-    shift = GetTPage(0, 0, tpage, 256);
+    shift = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, tpage, 256);
     GFX_AddDrawMode(shift);
 
     id = record_table[2];

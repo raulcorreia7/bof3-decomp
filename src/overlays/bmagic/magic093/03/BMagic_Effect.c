@@ -216,7 +216,7 @@ MATCH void func_801EF85C(void) {
     s32      green;
     s32      blue;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.cells.halves[0] = ((rsin((g_Task->param.unk_0B & 0x1F) << 7) * 16) >> 12) + 0x100;
     red                        = g_Task->unk_09 * 10;
@@ -249,7 +249,7 @@ MATCH void func_801EFAE8(void) {
     u8       green;
     u8       blue;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.cells.halves[0] = ((rsin((g_Task->param.unk_0B & 0x1F) << 7) * 16) >> 12) + 0x100;
@@ -381,7 +381,7 @@ MATCH void func_801F01F0(void) {
     D_1F800000.cells.halves[7] = g_Task->timer;
     D_1F800000.cells.halves[3] = g_Task->unk_2E.half;
     D_1F800000.cells.halves[4] = g_Task->unk_30.half;
-    tpage                      = getTPage(1, 1, 320, 256);
+    tpage                      = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
 
@@ -392,7 +392,7 @@ MATCH void func_801F01F0(void) {
            D_1F800000.cells.halves[4] - D_1F800000.cells.halves[6], D_1F800000.cells.halves[3] - D_1F800000.cells.halves[7], D_1F800000.cells.halves[4],
            D_1F800000.cells.halves[3] + D_1F800000.cells.halves[7], D_1F800000.cells.halves[4]);
     GFX_SET_RGB_ALL(prim, shade, shade, shade);
-    prim->tpage = GetTPage(1, 1, 832, 256);
+    prim->tpage = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 832, 256);
     prim->clut  = GetClut(0, 506);
     setUVWH(prim, 0x40, 0x40, 128, 191);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_GT4));
@@ -407,7 +407,7 @@ MATCH void func_801F01F0(void) {
     setRGB1(prim, 1, 1, 1);
     setRGB2(prim, shade, shade, shade);
     setRGB3(prim, shade, shade, shade);
-    prim->tpage = GetTPage(1, 1, 832, 256);
+    prim->tpage = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 832, 256);
     prim->clut  = GetClut(0, 506);
     setUVWH(prim, 0x40, 0x30, 128, 16);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_GT4));

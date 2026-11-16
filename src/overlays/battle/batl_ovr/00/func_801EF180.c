@@ -9,7 +9,7 @@ NON_MATCHING void func_801EF180(s32 shade) {
     y = 60;
     x = 272;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(1, 0, 832, 256), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 832, 256), 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
 
     sprt       = (SPRT*)g_GfxPrimCursor;

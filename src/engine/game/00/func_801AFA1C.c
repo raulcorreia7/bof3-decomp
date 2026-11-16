@@ -46,7 +46,7 @@ NON_MATCHING void func_801AFA1C(u8* marks, u8 thumb_top, s16 x, s16 y, u8 thumb_
     poly->v2    = 0x9F;
     poly->u3    = 0x60;
     poly->v3    = 0x9F;
-    poly->tpage = GetTPage(0, 0, 832, 256);
+    poly->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256);
     poly->clut  = GetClut(176, STAGE_PALETTE_Y + 1);
     poly->r0    = 0x80;
     poly->g0    = 0x80;

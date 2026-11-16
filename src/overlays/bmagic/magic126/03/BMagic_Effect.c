@@ -99,7 +99,7 @@ MATCH void func_801EF1C8(void) {
     s32      i;
     s32      tpage;
 
-    tpage = getTPage(0, 2, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     GLOW_RING_INNER = g_Task->timer * 2;
     GLOW_RING_RED   = g_Task->unk_09 * 12;
@@ -129,7 +129,7 @@ MATCH void BMagic_DrawGlowRingOuter(void) {
     long     flag;
     s32      i;
 
-    GFX_AddDitheredDrawMode(5, getTPage(0, 1, 320, 256));
+    GFX_AddDitheredDrawMode(5, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     GLOW_RING_INNER  = g_Task->timer * 2;
     GLOW_RING_OUTER  = g_Task->timer * 3 + (RANDOM_MASK(3));
     GLOW_RING_RED    = g_Task->unk_09 * 15;
@@ -167,7 +167,7 @@ MATCH void BMagic_DrawGlowRingInner(void) {
     long     flag;
     s32      i;
 
-    GFX_AddDitheredDrawMode(5, getTPage(0, 1, 320, 256));
+    GFX_AddDitheredDrawMode(5, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     GLOW_RING_INNER  = g_Task->timer;
     GLOW_RING_OUTER  = g_Task->timer * 2;
     GLOW_RING_RED    = g_Task->unk_09 * 15;
@@ -254,7 +254,7 @@ MATCH void func_801EFD5C(void) {
     D_1F800000.cells.halves[2] = g_Task->timer * 8;
     D_1F800000.cells.halves[6] = g_Task->unk_2E.half;
     D_1F800000.cells.halves[7] = g_Task->unk_30.half;
-    tpage                      = getTPage(1, 1, 320, 256);
+    tpage                      = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     prim = (POLY_GT4*)g_GfxPrimCursor;
@@ -263,7 +263,7 @@ MATCH void func_801EFD5C(void) {
     setXY4(prim, D_1F800000.cells.halves[6] - D_1F800000.cells.halves[0], -(D_1F800000.cells.halves[1] + 16) + D_1F800000.cells.halves[7], D_1F800000.cells.halves[6] + D_1F800000.cells.halves[0],
            -(D_1F800000.cells.halves[1] + 16) + D_1F800000.cells.halves[7], D_1F800000.cells.halves[6] - D_1F800000.cells.halves[0], D_1F800000.cells.halves[7] - 16,
            D_1F800000.cells.halves[6] + D_1F800000.cells.halves[0], D_1F800000.cells.halves[7] - 16);
-    setTPage(prim, 0, 1, 832, 256);
+    setTPage(prim, TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 832, 256);
     setClut(prim, 0, 506);
     setUV4(prim, 8, 8, 87, 8, 8, D_1F800000.cells.halves[1] + 8, 87, D_1F800000.cells.halves[1] + 8);
     GFX_SET_RGB_ALL(prim, D_1F800000.cells.halves[2], D_1F800000.cells.halves[2], D_1F800000.cells.halves[2]);
@@ -273,7 +273,7 @@ MATCH void func_801EFD5C(void) {
     SetSemiTrans(prim, 1);
     setXY4(prim, D_1F800000.cells.halves[6] - D_1F800000.cells.halves[0], D_1F800000.cells.halves[7] - 16, D_1F800000.cells.halves[6] + D_1F800000.cells.halves[0], D_1F800000.cells.halves[7] - 16,
            D_1F800000.cells.halves[6] - D_1F800000.cells.halves[0], D_1F800000.cells.halves[7], D_1F800000.cells.halves[6] + D_1F800000.cells.halves[0], D_1F800000.cells.halves[7]);
-    setTPage(prim, 0, 1, 832, 256);
+    setTPage(prim, TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 832, 256);
     setClut(prim, 0, 506);
     setUV4(prim, 8, D_1F800000.cells.halves[1] + 8, 87, D_1F800000.cells.halves[1] + 8, 8, D_1F800000.cells.halves[1] + 24, 87, D_1F800000.cells.halves[1] + 24);
     setRGB0(prim, D_1F800000.cells.halves[2], D_1F800000.cells.halves[2], D_1F800000.cells.halves[2]);
@@ -383,7 +383,7 @@ MATCH void func_801F06AC(void) {
     s32      i;
     s32      tpage;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     D_1F800000.cells.halves[2] = 0;
     D_1F800000.cells.halves[0] = 24;
@@ -522,7 +522,7 @@ MATCH void BMagic_DrawMote(void) {
     D_1F800000.cells.halves[2] = MAGIC126_MOTE->unk_06 * 6;
     D_1F800000.cells.halves[6] = MAGIC126_MOTE->unk_0C;
     D_1F800000.cells.halves[7] = MAGIC126_MOTE->unk_0E;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(1, 1, 320, 256), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256), 0);
     Area_AddCellPrim(MAGIC126_MOTE->unk_10, MAGIC126_MOTE->unk_14, 2, sizeof(DR_MODE));
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
@@ -530,7 +530,7 @@ MATCH void BMagic_DrawMote(void) {
     setXY4(prim, D_1F800000.cells.halves[6] - D_1F800000.cells.halves[0], D_1F800000.cells.halves[7] - D_1F800000.cells.halves[1], D_1F800000.cells.halves[6] + D_1F800000.cells.halves[0],
            D_1F800000.cells.halves[7] - D_1F800000.cells.halves[1], D_1F800000.cells.halves[6] - D_1F800000.cells.halves[0], D_1F800000.cells.halves[7],
            D_1F800000.cells.halves[6] + D_1F800000.cells.halves[0], D_1F800000.cells.halves[7]);
-    setTPage(prim, 0, 1, 832, 256);
+    setTPage(prim, TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 832, 256);
     setClut(prim, 0, 506);
     setUVWH(prim, 88, 8, 16, 64);
     setRGB0(prim, D_1F800000.cells.halves[2], D_1F800000.cells.halves[2], D_1F800000.cells.halves[2]);

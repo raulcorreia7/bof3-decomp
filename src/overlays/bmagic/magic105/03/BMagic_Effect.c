@@ -179,7 +179,7 @@ MATCH void func_801EF3A0(void) {
         setVector(&D_1F800014[1], FIXED_MUL(rsin(g_Task->unk_10), D_1F800000.cells.halves[0]), FIXED_MUL(rcos(g_Task->unk_10), D_1F800000.cells.halves[0]), D_1F800000.cells.halves[1]);
         x     = (D_1F800014[0].vx << 9) + g_Task->pos.x.fixed;
         y     = (D_1F800014[0].vy << 9) + g_Task->pos.y.fixed;
-        tpage = getTPage(0, 1, 320, 256);
+        tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(x, y, 2, sizeof(DR_MODE));
         prim = (POLY_G4*)g_GfxPrimCursor;

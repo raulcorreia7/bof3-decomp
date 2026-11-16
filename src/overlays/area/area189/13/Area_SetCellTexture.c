@@ -8,6 +8,6 @@ MATCH void Area_SetCellTexture(s32 texture, POLY_FT4* prim) {
     prim->g0    = 0x80;
     prim->r0    = 0x80;
     prim->clut  = (((texture >> 24) & 0xF) + 0x1E3) << 6;
-    prim->tpage = getTPage(1, 0, 320, 256);
+    prim->tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
     setUVWH(prim, (texture & 0xF) << 4, texture & 0xF0, 0xF, 0xF);
 }

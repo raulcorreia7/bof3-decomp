@@ -3,7 +3,7 @@
 MATCH void func_801F4F70(s32 x, s32 y) {
     POLY_G4* poly;
 
-    GFX_AddDitheredDrawMode(1, GetTPage(0, 2, 960, 0));
+    GFX_AddDitheredDrawMode(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, FONT_TPAGE_X, FONT_TPAGE_Y));
     poly = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(poly);
     poly->x0 = x - 64;

@@ -3,7 +3,7 @@
 MATCH void func_801DA4B4(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b) {
     LINE_F2* primitive;
 
-    GFX_AddDrawMode(GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
+    GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
     primitive = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(primitive);
     setRGB0(primitive, r, g, b);

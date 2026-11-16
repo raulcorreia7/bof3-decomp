@@ -62,7 +62,7 @@ MATCH void func_801EEED4(void) {
     s32 tpage;
 
     SYS_DISPATCH_BYTE(D_801F0504, g_Task->header.step);
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, 0xC);
     if (g_Task->header.flags & 0x1) {
@@ -76,7 +76,7 @@ MATCH void func_801EEED4(void) {
             func_801F0104();
         }
     }
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(3, 0xC);
 }
@@ -165,12 +165,12 @@ MATCH void func_801EF2AC(void) {
 
 MATCH void func_801EF30C(void) {
     SYS_DISPATCH_BYTE(D_801F0518, g_Task->header.step);
-    GFX_AddDitheredDrawMode(3, getTPage(0, 1, 320, 256));
+    GFX_AddDitheredDrawMode(3, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     if (g_Task->header.flags & 0x1 && g_Task->header.step != 0) {
         func_801EFF14();
         func_801EFC00();
     }
-    GFX_AddDitheredDrawMode(3, getTPage(0, 0, 320, 256));
+    GFX_AddDitheredDrawMode(3, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256));
 }
 
 MATCH void func_801EF430(void) {
@@ -282,13 +282,13 @@ MATCH void func_801EFA84(void) {
     POLY_FT4* prim;
     s32       tpage;
 
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     setXY4(prim, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + 48, g_Task->unk_30.half, g_Task->unk_2E.half, g_Task->unk_30.half + g_Task->timer, g_Task->unk_2E.half + 48,
            g_Task->unk_30.half + g_Task->timer);
-    setTPage(prim, 0, 0, 896, 256);
+    setTPage(prim, TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 896, 256);
     setClut(prim, 32, 506);
     setUV4(prim, 0, 32, 64, 32, 0, g_Task->timer + 32, 64, g_Task->timer + 32);
     setRGB0(prim, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);

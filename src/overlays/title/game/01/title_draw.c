@@ -68,7 +68,7 @@ MATCH void UI_DrawChoicePrompt(void) { /* func_801D11E4 */
     }
 
     if (g_AreaDrawFlags != 0u && LOBU(g_UiPopupRequest) != 0u) {
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(1, 0, 832, 256), 0);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 832, 256), 0);
         GFX_AddPrim(2, sizeof(DR_MODE));
         GFX_BuildGlyphPrimitive(192, 4, 10, 2, 0);
     }
@@ -84,18 +84,18 @@ MATCH void UI_DrawChoicePanels(u8 selected, u8 alpha) { /* func_801D12CC */
     s32 pulse;
     s32 pulse_counter;
 
-    tpage = getTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddDrawMode(tpage);
     primitive = GFX_BuildGlyphPrimitive(262, 130, 1, 1, selected);
     GFX_SetPrimitiveAlpha(primitive, alpha);
 
-    tpage = getTPage(1, 1, 832, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 832, 256);
     GFX_SET_DRAW_MODE(tpage);
     GFX_AddPrim(2, sizeof(DR_MODE));
     primitive = GFX_BuildGlyphPrimitive(12, 200, 8, 2, selected);
     GFX_SetPrimitiveAlpha(primitive, alpha);
 
-    tpage = getTPage(1, 1, 832, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 832, 256);
     GFX_SET_DRAW_MODE(tpage);
     GFX_AddPrim(2, sizeof(DR_MODE));
     primitive = GFX_BuildGlyphPrimitive(12, 212, 19, 2, selected);
@@ -126,7 +126,7 @@ MATCH void UI_DrawLabelPair(s16 x, s16 y, u8 selected, u8 alpha) { /* func_801D1
     s32 tpage;
 
     if (selected != 0u) {
-        tpage = getTPage(1, 2, 576, 256);
+        tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_SUB, 576, 256);
         GFX_SET_DRAW_MODE(tpage);
         GFX_AddPrim(2, sizeof(DR_MODE));
         primitive = GFX_BuildGlyphPrimitive(x, y, 15, 2, 1);
@@ -135,7 +135,7 @@ MATCH void UI_DrawLabelPair(s16 x, s16 y, u8 selected, u8 alpha) { /* func_801D1
         GFX_SetPrimitiveAlpha(primitive, alpha);
     }
 
-    tpage = getTPage(1, 1, 576, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 576, 256);
     GFX_SET_DRAW_MODE(tpage);
     GFX_AddPrim(2, sizeof(DR_MODE));
     primitive = GFX_BuildGlyphPrimitive(x, y, 4, 2, selected);
@@ -152,7 +152,7 @@ MATCH void UI_DrawIconPair(s16 x, s16 y, u8 selected, u8 alpha) { /* func_801D16
     u8* primitive;
     s32 tpage;
 
-    tpage = getTPage(1, 1, 704, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 704, 256);
     GFX_SET_DRAW_MODE(tpage);
     GFX_AddPrim(2, sizeof(DR_MODE));
     primitive = GFX_BuildGlyphPrimitive(x, y, 2, 2, selected);

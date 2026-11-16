@@ -8,7 +8,7 @@ MATCH void Area_DrawHud(s16 x, s16 y) {
         return;
     }
 
-    tpage = getTPage(1, 0, 768, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 768, 256);
     GFX_AddDrawMode(tpage);
     Area_DrawHudSprite((s16)x, (s16)y, 0);
 

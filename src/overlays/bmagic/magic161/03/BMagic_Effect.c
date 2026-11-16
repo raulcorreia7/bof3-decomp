@@ -109,7 +109,7 @@ MATCH void func_801EF1DC(void) {
     s32      red;
     s32      shade;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(1, tpage);
     prim  = (POLY_G4*)g_GfxPrimCursor;
     red   = g_Task->unk_09 * 12;
@@ -131,6 +131,6 @@ MATCH void func_801EF1DC(void) {
     setRGB2(prim, 0xC0, 0x60, 0x60);
     setRGB3(prim, 0xC0, 0x60, 0x60);
     GFX_AddPrim(1, sizeof(POLY_G4));
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(1, tpage);
 }

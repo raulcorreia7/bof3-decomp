@@ -282,7 +282,7 @@ MATCH void func_801F2DF8(const AreaSprite* sprite) {
            (screen.vy - ((s16)size[1] >> 1)) + size[1], (screen.vx - ((s16)size[0] >> 1)) + size[0], (screen.vy - ((s16)size[1] >> 1)) + size[1]);
     setUV4(primitive, 224u, 48u, 255u, 48u, 224u, 79u, 255u, 79u);
     setClut(primitive, 160, STAGE_PALETTE_Y + 3);
-    primitive->tpage = GetTPage(0, 1, 704, 256);
+    primitive->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
     setRGB0(primitive, VOL(u8, work->flags_03), VOL(u8, work->flags_03), VOL(u8, work->flags_03));
 
     Area_AddCellPrim(VOL(s32, work->origin.x), VOL(s32, work->origin.y), 2, sizeof(POLY_FT4));
@@ -603,7 +603,7 @@ MATCH void func_801F3D5C(void) {
     WorldSpin* work;
     u8         i;
 
-    GFX_AddDrawMode(GetTPage(0, 1, 896, 256));
+    GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 896, 256));
     Area_SetCameraMatrix(scratch);
 
     work = (WorldSpin*)WORLD00_AREA024_SPIN_WORK_BASE;
@@ -654,7 +654,7 @@ MATCH s32 func_801F3E48(u8 shade) {
     matrix2 = matrix;
     func_8015B4B0(&matrix2);
 
-    GFX_AddDrawMode(GetTPage(0, 1, 896, 256));
+    GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 896, 256));
 
     src = (u16*)WORLD00_AREA024_PTR_7AA8;
     i   = 0;

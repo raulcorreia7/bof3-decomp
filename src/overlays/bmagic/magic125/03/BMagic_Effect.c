@@ -118,7 +118,7 @@ MATCH void func_801EF258(void) {
     s32      i;
     s32      tpage;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     D_1F800000.cells.halves[0] = g_Task->unk_14;
     D_1F800014[2].vx           = FIXED_MUL(rsin(0), D_1F800000.cells.halves[0]);
@@ -143,7 +143,7 @@ MATCH void func_801EF258(void) {
         setRGB2(prim, 0x10, 0x10, 0x10);
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 }
 
@@ -176,7 +176,7 @@ MATCH void func_801EF508(void) {
         D_1F800014[3].vz = 0;
         x                = (D_1F800014[1].vx << 9) + g_Task->pos.x.fixed;
         y                = (D_1F800014[1].vy << 9) + g_Task->pos.y.fixed;
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
         Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
@@ -268,13 +268,13 @@ MATCH void func_801EFB8C(void) {
 
     SYS_DISPATCH_BYTE((g_BMagicEffectModes + 9), g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        tpage = getTPage(0, 1, 320, 256);
+        tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
         func_800AF764();
         func_801EFFC8();
         func_801F020C();
-        tpage = getTPage(0, 0, 320, 256);
+        tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     }

@@ -239,7 +239,7 @@ MATCH void func_801EF7D4(s32 x, s32 y, s32 radius, s32 color) {
     s32      tpage;
     s32      i;
 
-    tpage = getTPage(0, 2, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE((u8)g_Task->unk_29, tpage);
     D_1F800000_WORD[0] = (s16)radius;
     D_1F800000_WORD[1] = (s16)radius + (s16)radius / 2;
@@ -275,7 +275,7 @@ MATCH void func_801EFCA0(void) {
     s32           tpage;
     volatile s32* shade;
 
-    tpage = getTPage(0, g_Task->param.unk_0B, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, g_Task->param.unk_0B, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE((u8)g_Task->unk_29, tpage);
     prim = (POLY_F4*)g_GfxPrimCursor;
     SetPolyF4(prim);

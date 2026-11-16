@@ -129,7 +129,7 @@ MATCH void func_801EF040(void) {
 }
 
 MATCH void func_801EF254(void) {
-    GFX_AddDrawMode(GetTPage(0, 1, 0x2C0, 0x100) & HALF_MASK);
+    GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100) & HALF_MASK);
     func_801AFE18();
     func_801EF040();
     func_801EF4E0();
@@ -260,7 +260,7 @@ MATCH u8 func_801EF8EC(void) {
     u8      i;
     u8      drawn;
 
-    GFX_AddDrawMode(GetTPage(0, 1, 0x2C0, 0x100));
+    GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100));
     func_801AFE18();
     drawn      = 0;
     D_801EFAF4 = D_801EFA9C.sparks;

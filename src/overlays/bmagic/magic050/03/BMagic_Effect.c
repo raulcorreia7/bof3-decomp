@@ -142,7 +142,7 @@ NON_MATCHING void func_801EF1B0(void) {
     D_1F800000.cells.words[3] = g_Task->unk_09;
     spad                      = &D_1F800000;
     for (i = 0; i < 16; i++) {
-        tpage = getTPage(0, 1, 320, 256);
+        tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
         prim = (POLY_G3*)g_GfxPrimCursor;
@@ -181,7 +181,7 @@ NON_MATCHING void func_801EF4C4(void) {
     }
     D_1F800000.cells.words[3] = g_Task->unk_09;
     for (i = 0; i < 16; i++) {
-        tpage = getTPage(0, 1, 320, 256);
+        tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
         prim = (POLY_G4*)g_GfxPrimCursor;
@@ -216,7 +216,7 @@ MATCH void func_801EF898(void) {
     D_1F800000.cells.words[2] = g_Task->unk_09 * 6;
     D_1F800000.cells.words[3] = g_Task->unk_09;
     for (i = 0; i < 16; i++) {
-        tpage = getTPage(0, 1, 320, 256);
+        tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
         prim = (TILE_1*)g_GfxPrimCursor;

@@ -5,7 +5,7 @@ MATCH void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mo
     s32   tpage;
     s32   u;
 
-    tpage = getTPage(0, 1, 960, 0);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddDrawMode(tpage);
     sprt = (SPRT*)g_GfxPrimCursor;
     setWH(sprt, 16, 8);

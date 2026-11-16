@@ -13,7 +13,7 @@ MATCH void func_801F6390(void) {
     if ((g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) == 0) {
         return;
     }
-    tpage = getTPage(1, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(7, tpage);
     poly = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(poly);

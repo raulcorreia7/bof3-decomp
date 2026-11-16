@@ -157,13 +157,13 @@ MATCH void func_801EF250(void) {
             D_1F800014[3].vy           = FIXED_MUL(rcos(D_1F800000.cells.halves[3]), D_1F800000.cells.halves[2]);
             x                          = (D_1F800014[3].vx << 9) + g_Task->pos.x.fixed;
             y                          = (D_1F800014[3].vy << 9) + g_Task->pos.y.fixed;
-            tpage                      = getTPage(1, 1, 320, 256);
+            tpage                      = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
             Area_AddCellPrim(x, y, 1, sizeof(DR_MODE));
             poly = (POLY_FT4*)g_GfxPrimCursor;
             SetPolyFT4(poly);
             SetSemiTrans(poly, 1);
-            poly->tpage = GetTPage(1, 1, 0x340, 0x100);
+            poly->tpage = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 0x340, 0x100);
             poly->clut  = GetClut(0, 0x1FA);
             setUV4(poly, ((i & 1) + (ring - 1) / 4 * 2) << 6, D_801EF780[ring - 1], (((i & 1) + (ring - 1) / 4 * 2) << 6) + 0x3F, D_801EF780[ring - 1], ((i & 1) + (ring - 1) / 4 * 2) << 6,
                    D_801EF788[ring - 1] - 1 + D_801EF780[ring - 1], (((i & 1) + (ring - 1) / 4 * 2) << 6) + 0x3F, D_801EF788[ring - 1] - 1 + D_801EF780[ring - 1]);

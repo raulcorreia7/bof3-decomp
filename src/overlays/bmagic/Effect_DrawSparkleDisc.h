@@ -4,7 +4,7 @@ MATCH void Effect_DrawSparkleDisc(void) {
     POLY_G3* prim;
     s32      i;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
     Area_AddCellPrim(EFFECT_SPARKLE_TASK->pos.x.fixed, EFFECT_SPARKLE_TASK->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.cells.halves[2] = EFFECT_SPARKLE_TASK->unk_06 + (rand() & 3);
     D_1F800000.cells.halves[0] = EFFECT_SPARKLE_TASK->unk_20;

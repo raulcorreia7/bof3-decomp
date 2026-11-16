@@ -75,7 +75,7 @@ MATCH void func_801D218C(void) {
     if (i < D_1F80000C) {
         cell = d + 1;
         do {
-            GFX_AddDitheredDrawMode(2, getTPage(1, 1, 320, 256));
+            GFX_AddDitheredDrawMode(2, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256));
             primitive = (LINE_G2*)g_GfxPrimCursor;
             SetLineG2(primitive);
             SetSemiTrans(primitive, 1);
@@ -108,7 +108,7 @@ MATCH void func_801D240C(void) {
 
     D_1F800000 = RANDOM_MASK(7) + g_Task->band * 3;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
     i         = 0;
     angle_ptr = &D_1F800000;
     GFX_AddPrim(2, sizeof(DR_MODE));

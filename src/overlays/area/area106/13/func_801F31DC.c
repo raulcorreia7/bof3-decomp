@@ -14,7 +14,7 @@ NON_MATCHING void func_801F31DC(s32 depth, s32 height) {
     long      p;
     long      flag;
 
-    tpage = getTPage(1, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_LAYER_DRAW_MODE(5, tpage);
 
     x_base = -0x37C0;

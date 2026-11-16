@@ -63,7 +63,7 @@ MATCH void func_801E3284(MenuPanelTask* task) {
     TEXT_Format(text, D_801D0E98, Item_Count(group, key, ITEM_COUNT_MODE_EQUIPPED) & HALF_MASK);
     UI_DrawGlyphString((task->pos.x + SHOP_COUNTS_NUMBER_X), (task->pos.y + SHOP_COUNTS_EQUIPPED_Y), 0U, text);
 
-    GFX_AddDrawMode(GetTPage(0, 0, 896, 256) & HALF_MASK);
+    GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 896, 256) & HALF_MASK);
 
     for (index = 0; index < SHOP_COUNTS_FRAME_COLUMNS; index++) {
         UI_DrawSprite((task->pos.x + (index + 1) * SHOP_COUNTS_FRAME_CELL), task->pos.y, MENU_FRAME_SPRITE_TOP, 0);

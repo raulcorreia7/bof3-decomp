@@ -50,7 +50,7 @@ MATCH void func_801EEE4C(void) {
         func_801EF710();
         PopMatrix();
     }
-    GFX_AddDitheredDrawMode(3, getTPage(0, 0, 320, 256));
+    GFX_AddDitheredDrawMode(3, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256));
 }
 
 MATCH void func_801EEF1C(void) {
@@ -144,7 +144,7 @@ MATCH void func_801EF710(void) {
     }
     i = 0;
     do {
-        tpage = getTPage(0, 1, 320, 256);
+        tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
         prim = (POLY_G3*)g_GfxPrimCursor;

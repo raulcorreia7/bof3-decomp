@@ -44,7 +44,7 @@ MATCH void func_801F6FD0(void) {
 #include "shared/Area_DrawScreenTint.h"
 
 MATCH void Area_DrawScreenTint(void) {
-    Screen_DrawTintLayer(5, (GetTPage(0, 2, 960, 0) & HALF_MASK));
+    Screen_DrawTintLayer(5, (GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK));
 }
 
 MATCH void func_801F70DC(void) {
@@ -141,7 +141,7 @@ MATCH void func_801F7444(void) {
 
 /* func_801F7484 */
 MATCH void Scene_DrawScreenTint(void) {
-    Screen_DrawTintLayer(5, (GetTPage(0, 2, 960, 0) & HALF_MASK));
+    Screen_DrawTintLayer(5, (GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK));
 }
 
 MATCH void func_801F7568(void) {

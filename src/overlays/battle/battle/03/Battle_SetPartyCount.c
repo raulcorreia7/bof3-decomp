@@ -28,7 +28,7 @@ NON_MATCHING void Battle_SetPartyCount(s32 x, s32 y) {
     u8  temp_a2_160;
     u8  temp_v0_153;
 
-    GFX_AddDrawMode(GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
+    GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
     var_s0 = x << 0x10;
     var_s0 = (s16)x;
     func_801D9AB4(var_s0, (s16)y, ((g_Battle.party_count * 2) + 0xA) & 0xFE, 1);

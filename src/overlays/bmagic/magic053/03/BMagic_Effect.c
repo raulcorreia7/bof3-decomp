@@ -309,7 +309,7 @@ MATCH void func_801F01C0(void) {
     long      flag;
     s32       tpage;
 
-    tpage = getTPage(0, 2, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
@@ -320,7 +320,7 @@ MATCH void func_801F01C0(void) {
     setVector(&D_1F800014[1], FIXED_MUL(rcos(1536), D_1F800000.cells.halves[0]), FIXED_MUL(rsin(1536), D_1F800000.cells.halves[0]), 0);
     setVector(&D_1F800014[2], FIXED_MUL(rcos(3584), D_1F800000.cells.halves[0]), FIXED_MUL(rsin(3584), D_1F800000.cells.halves[0]), 0);
     setVector(&D_1F800014[3], FIXED_MUL(rcos(2560), D_1F800000.cells.halves[0]), FIXED_MUL(rsin(2560), D_1F800000.cells.halves[0]), 0);
-    setTPage(prim, 0, 1, 832, 256);
+    setTPage(prim, TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 832, 256);
     /* FAKE: a volatile store keeps the clut write ahead of the texture-point stores; the best pure-C body is 0x2C8 against retail's 0x2D4. */
     VOL(u16, prim->clut) = GetClut(0, 482);
     setUVWH(prim, 0, 128, 32, 32);

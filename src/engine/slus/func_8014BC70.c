@@ -71,7 +71,7 @@ NON_MATCHING void func_8014BC70(void) {
             count = D_8014832D;
         } while (var_s7 < (count - 1));
     }
-    tpage  = getTPage(1, 0, 320, 256);
+    tpage  = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
     var_s7 = 0;
     var_s4 = 0;
     var_fp = 0;

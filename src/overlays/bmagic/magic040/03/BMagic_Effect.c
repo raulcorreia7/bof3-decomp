@@ -161,7 +161,7 @@ MATCH void func_801EF600(u8 start, u16 radius) {
 
     D_1F800000.cells.halves[0] = g_Task->unk_2E.half;
     D_1F800000.cells.halves[1] = g_Task->unk_30.half;
-    tpage                      = getTPage(0, 1, 320, 256);
+    tpage                      = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_AddDitheredDrawMode(3, tpage);
     for (i = start; i < start + 32; i += 8) {
         line = (LINE_G2*)g_GfxPrimCursor;
@@ -174,7 +174,7 @@ MATCH void func_801EF600(u8 start, u16 radius) {
         setRGB1(line, 1, 1, 1);
         GFX_AddPrim(3, sizeof(LINE_G2));
     }
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_AddDitheredDrawMode(3, tpage);
 }
 

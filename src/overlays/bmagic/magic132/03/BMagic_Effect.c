@@ -188,7 +188,7 @@ MATCH void func_801EF5B0(void) {
     s32       i;
     s32       tpage;
 
-    tpage = getTPage(1, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
     D_1F800000.cells.halves[0] = g_Task->unk_20;
     D_1F800000.cells.halves[1] = (g_Task->param.unk_0B & 0x3F) << 7;
@@ -210,14 +210,14 @@ MATCH void func_801EF5B0(void) {
         setVector(&D_1F800014[2], 0, i << 6, FIXED_MUL(rsin(D_1F800000.cells.halves[1]), D_1F800000.cells.halves[0]));
         setVector(&D_1F800014[3], 0xE00, D_1F800014[2].vy, D_1F800014[2].vz);
         setRGB0(prim, D_1F800000.cells.halves[2], D_1F800000.cells.halves[2], D_1F800000.cells.halves[2]);
-        prim->tpage                = GetTPage(1, 1, 832, 256);
+        prim->tpage                = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 832, 256);
         prim->clut                 = GetClut(0, 506);
         D_1F800000.cells.halves[3] = ((g_Task->timer + i) % 14) * 16 + 8;
         setUV4(prim, 8, D_1F800000.cells.halves[3], 248, D_1F800000.cells.halves[3], 8, D_1F800000.cells.halves[3] + 16, 248, D_1F800000.cells.halves[3] + 16);
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         GFX_AddPrim(2, sizeof(POLY_FT4));
     }
-    tpage = getTPage(1, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
 }
 
@@ -231,7 +231,7 @@ MATCH void func_801EF914(void) {
     s32      tpage;
     s32      phase;
 
-    tpage = getTPage(1, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
     if (g_Task->header.step == 4) {
         D_1F800000.cells.halves[2] = (g_Task->unk_1C / 2) << 3;
@@ -278,6 +278,6 @@ MATCH void func_801EF914(void) {
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         GFX_AddPrim(2, sizeof(POLY_G4));
     }
-    tpage = getTPage(1, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
 }

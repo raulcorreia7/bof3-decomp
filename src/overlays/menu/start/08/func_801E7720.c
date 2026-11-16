@@ -4,7 +4,7 @@ MATCH void func_801E7720(s16 tile_x, s8 tile_kind) {
     TILE* tile;
     s32   tpage;
 
-    tpage = getTPage(1, 2, 704, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_SUB, 704, 256);
     GFX_AddDrawMode(tpage);
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);

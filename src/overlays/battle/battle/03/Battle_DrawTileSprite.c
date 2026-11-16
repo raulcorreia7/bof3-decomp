@@ -26,7 +26,7 @@ MATCH void Battle_DrawTileSprite(s16 origin_x, s16 origin_y, s32 tile_offset, s3
     palette_index  = clut_index;
     SetPolyFT4(primitive);
     /* FAKE: the volatile typed store keeps tpage ahead of the palette load. */
-    *(volatile u16*)&primitive->tpage = GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
+    *(volatile u16*)&primitive->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     palette_index &= BYTE_MASK;
     /* FAKE: retail reads g_WindowStyle as s8. */
     setClut(primitive, (((*(s8*)&g_WindowStyle) * 2) + palette_index) * 16, STAGE_PALETTE_Y + 1);

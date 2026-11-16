@@ -8,7 +8,7 @@ MATCH void Area_DrawSpark(AreaSparkSlot* spark) {
     POLY_G4* poly;
     s8       i;
 
-    GFX_AddDitheredDrawMode(1, GetTPage(0, 1, 0x3C0, 0));
+    GFX_AddDitheredDrawMode(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     Area_SetCameraMatrix(&camera);
     i = 2;
     do {

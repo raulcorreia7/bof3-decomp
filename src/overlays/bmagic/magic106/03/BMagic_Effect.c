@@ -133,7 +133,7 @@ MATCH void func_801EF5F4(void) {
     u8       i;
     s32      tpage;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_BMagicOrbit->pos.x.fixed, g_BMagicOrbit->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.cells.halves[5] = g_BMagicOrbit->timer_05 * g_BMagicOrbit->unk_09;

@@ -191,7 +191,7 @@ MATCH void func_801F77B4(Scena08Billboard* sprite) {
     prim->y0 = prim->y1 = screen.vy - scale.vx;
     prim->y2 = prim->y3 = screen.vy + scale.vx;
     setClut(prim, 160, STAGE_PALETTE_Y + 3);
-    prim->tpage = GetTPage(0, 1, 704, 256);
+    prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
     setUVWH(prim, 224, 48, 31, 31);
     setRGB0(prim, sprite->shade, 0, 0);
     GFX_AddPrim(1, sizeof(POLY_FT4));
@@ -352,7 +352,7 @@ NON_MATCHING s32 func_801F7E14(void) {
     s32          step;
     u8           i;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 1, 0x2C0, 0x100) & 0xFFFF, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100) & 0xFFFF, 0);
     GFX_AddPrim(1, sizeof(DR_MODE));
     Area_SetCameraMatrix(&camera);
     drawn = 1;
@@ -501,7 +501,7 @@ NON_MATCHING void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
         v                   = i + 0x40 - (u8)height;
         prim->v0 = prim->v1 = i - ((u8)height - 0x40);
         prim->v2 = prim->v3 = v + 1;
-        prim->tpage         = GetTPage(2, 0, 0x340, 0x100);
+        prim->tpage         = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
         setRGB0(prim, 0x40, 0x40, 0x80);
         setRGB1(prim, 0x60, 0x60, 0x60);
         setRGB2(prim, 0x40, 0x40, 0x80);
@@ -520,7 +520,7 @@ NON_MATCHING void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
         prim->v0 = prim->v1 = v - 0x80;
         prim->u1 = prim->u3 = half;
         prim->v2 = prim->v3 = v - 0x7F;
-        prim->tpage         = GetTPage(2, 0, 0x340, 0x100);
+        prim->tpage         = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
         setRGB0(prim, 0x60, 0x60, 0x60);
         setRGB1(prim, 0x80, 0x40, 0x40);
         setRGB2(prim, 0x60, 0x60, 0x60);
@@ -584,7 +584,7 @@ NON_MATCHING void func_801F85F0(s16 x, s16 y, s16 radius) {
         setRGB1(prim, 0x60, 0x60, 0x60);
         setRGB2(prim, 0x40, 0x40, 0x80);
         setRGB3(prim, 0x60, 0x60, 0x60);
-        prim->tpage = GetTPage(2, 0, 0x340, 0x100);
+        prim->tpage = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
         GFX_AddPrim(2, sizeof(POLY_GT4));
 
         prim = (POLY_GT4*)g_GfxPrimCursor;
@@ -607,7 +607,7 @@ NON_MATCHING void func_801F85F0(s16 x, s16 y, s16 radius) {
         setRGB1(prim, 0x80, 0x40, 0x40);
         setRGB2(prim, 0x60, 0x60, 0x60);
         setRGB3(prim, 0x80, 0x40, 0x40);
-        prim->tpage = GetTPage(2, 0, 0x340, 0x100);
+        prim->tpage = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
         GFX_AddPrim(2, sizeof(POLY_GT4));
     } while (count < 16);
 }
@@ -657,7 +657,7 @@ MATCH u8 func_801F8BF8(void) {
     u8            buffer[0x20];
 
     live = 0;
-    GFX_AddDitheredDrawMode(1, GetTPage(0, 1, 0x3C0, 0));
+    GFX_AddDitheredDrawMode(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     Area_SetCameraMatrix(buffer);
     spark = (FallingSpark*)AREA_WORK;
     for (i = 0; i < SCENA08_SPARK_COUNT; i += 1, spark += 1) {
@@ -731,7 +731,7 @@ MATCH void func_801F9688(void) {
     s32      angle;
     u8       i;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 2, 960, 256) & HALF_MASK, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 960, 256) & HALF_MASK, 0);
     GFX_AddPrim(1, sizeof(DR_MODE));
     inner.vx = 240;
     inner.vy = 120;
@@ -940,7 +940,7 @@ NON_MATCHING void func_801F9F8C(WorldPos* pos, s32 unused, s32 jitter, s32 layer
 
     FAKE_STACK_PADS(u8, 0x20); /* FAKE: retail reserves unused stack bytes. */
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 0x3C0, 0x100) & 0xFFFF, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 0x3C0, 0x100) & 0xFFFF, 0);
     Area_AddCellPrim(pos->x.fixed, pos->y.fixed, (s8)layer, 12);
     Area_SetCameraMatrix(&camera);
     Area_ProjectPoint(&pos->x.fixed, &screen);
@@ -971,7 +971,7 @@ MATCH void func_801FA19C(WorldPos* pos, s32* vx) {
     DVECTOR  xy;
     MATRIX   camera;
 
-    GFX_SET_DRAW_MODE(GetTPage(0, 1, 960, 256));
+    GFX_SET_DRAW_MODE(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 960, 256));
     GFX_AddPrim(1, sizeof(DR_MODE));
     prim = (LINE_G2*)g_GfxPrimCursor;
     SetLineG2(prim);

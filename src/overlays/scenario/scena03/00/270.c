@@ -312,7 +312,7 @@ MATCH void func_801F7FFC(Scena03Quad* quad) {
 MATCH void func_801F8170(s32* vertices) {
     MATRIX camera;
 
-    GFX_AddDitheredDrawMode(1u, GetTPage(0, 1, 0x3C0, 0));
+    GFX_AddDitheredDrawMode(1u, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     Area_SetCameraMatrix(&camera);
     func_801F8200(vertices, 0, 1, 2);
     func_801F8200(vertices, 0, 3, 2);
@@ -471,7 +471,7 @@ MATCH void func_801F88FC(Scena03Line* line) {
     s16      scale;
     s8       i;
 
-    GFX_AddDitheredDrawMode(1, GetTPage(0, 1, 0x3C0, 0));
+    GFX_AddDitheredDrawMode(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     i      = 0;
     rot.vx = (rsin(line->yaw) * rcos(line->pitch)) >> 8;
     rot.vy = (rsin(line->yaw) * rsin(line->pitch)) >> 8;

@@ -45,7 +45,7 @@ MATCH void func_801EF1E8(void) {
     s32*     dark;
     s32      tpage;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
@@ -61,7 +61,7 @@ MATCH void func_801EF1E8(void) {
     setRGB0(prim, prim->r3 = D_1F80000C, prim->g3 = D_1F80000C, prim->b3 = D_1F80000C);
     setRGB1(prim, prim->r2 = *dark, prim->g2 = *dark, prim->b2 = *dark);
     GFX_AddPrim(2, sizeof(POLY_G4));
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
 }
 
@@ -137,7 +137,7 @@ MATCH void func_801EF7A8(void) {
     POLY_FT4* prim;
     s32       tpage;
 
-    tpage = getTPage(0, 2, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     D_1F800000.cells.words[0] = 0x4A;
     prim                      = (POLY_FT4*)g_GfxPrimCursor;
@@ -156,7 +156,7 @@ MATCH void func_801EF7A8(void) {
     D_1F800000.cells.words[1] = g_Task->unk_14 + 0x773;
     prim->x3                  = g_Task->unk_2E.half + FIXED_MUL(rsin(D_1F800000.cells.words[1]), D_1F800000.cells.words[0]);
     prim->y3                  = g_Task->unk_30.half + FIXED_MUL(rcos(D_1F800000.cells.words[1]), D_1F800000.cells.words[0]);
-    prim->tpage               = GetTPage(0, 1, 832, 256);
+    prim->tpage               = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 832, 256);
     prim->clut                = GetClut(g_Task->param.unk_0B, 506);
     setUV4(prim, 8, (g_Task->unk_09 & 3) * 32 + 8, 0x98, (g_Task->unk_09 & 3) * 32 + 8, 8, (g_Task->unk_09 & 3) * 32 + 0x28, 0x98, (g_Task->unk_09 & 3) * 32 + 0x28);
     setRGB0(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[2], D_1F800000.cells.words[2]);

@@ -16,7 +16,7 @@ MATCH void func_801F71C0(void) {
 MATCH void func_801F729C(void) {
     POLY_G4* prim;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(1, 2, 0x140, 0) & 0xFFFF, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_SUB, 0x140, 0) & 0xFFFF, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
@@ -35,7 +35,7 @@ MATCH void func_801F729C(void) {
     prim->b3 = 0;
     prim->b2 = 0;
     GFX_AddPrim(2, sizeof(POLY_G4));
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(2, 3, 0x140, 0x140) & 0xFFFF, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_QUARTER, 0x140, 0x140) & 0xFFFF, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
 }
 
@@ -139,7 +139,7 @@ NON_MATCHING void func_801F7678(s32 shade_arg) {
         point[2] = g_Task->pos.z.fixed + (FIELD(s16, g_Task, 0x30) << 16);
         Area_ProjectPoint(point, &outer);
 
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 960, 0), 0);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
         Area_AddCellPrim(point[0], point[1], 0, sizeof(DR_MODE));
         prim = GFX_BeginPolyG4(1);
         setXY4(prim, last_inner.vx, last_inner.vy, last_outer.vx, last_outer.vy, inner.vx, inner.vy, outer.vx, outer.vy);
@@ -155,7 +155,7 @@ NON_MATCHING void func_801F7678(s32 shade_arg) {
         setRGB2(prim, color, color, color);
         setRGB3(prim, color, color, color);
         Area_AddCellPrim(point[0], point[1], 0, sizeof(POLY_G4));
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 1, 960, 0), 0);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
         Area_AddCellPrim(point[0], point[1], 0, sizeof(DR_MODE));
     }
 }
@@ -206,7 +206,7 @@ MATCH void func_801F7DCC(s32 red, s32 green, s32 blue) {
     POLY_G4* prim;
     s32      tpage;
 
-    tpage = getTPage(1, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(7, tpage);
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
@@ -224,7 +224,7 @@ MATCH void func_801F7EDC(void) {
     POLY_F4* prim;
     s32      tpage;
 
-    tpage = getTPage(1, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_SET_DRAW_MODE(tpage);
     GFX_AddPrim(3, sizeof(DR_MODE));
     prim = (POLY_F4*)g_GfxPrimCursor;

@@ -270,7 +270,7 @@ MATCH void func_801D1758(SpriteSpark* spark) {
     /* FAKE: retail reserves 48 bytes of unused stack. */
     FAKE_STACK_PADS(u8, 48);
 
-    GFX_SET_DRAW_MODE(GetTPage(0, 1, 960, 0));
+    GFX_SET_DRAW_MODE(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     Area_AddCellPrim(spark->x, spark->y, 0, sizeof(DR_MODE));
     Area_ProjectPoint(&spark->x, &xy);
     dot = (TILE_1*)g_GfxPrimCursor;
@@ -349,7 +349,7 @@ MATCH void func_801D1D20(WorldPos* pos, s32* step, u8 red, u8 green) {
     u16      angle16;
     u8       i;
 
-    GFX_AddDitheredDrawMode(1, GetTPage(0, 1, 896, 256) & HALF_MASK);
+    GFX_AddDitheredDrawMode(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 896, 256) & HALF_MASK);
 
     angle    = 65024;
     point[0] = pos->x.fixed + ((((rcos((u16)angle) * 5) << 6) >> 4));
@@ -404,7 +404,7 @@ MATCH void Scene_SetXFixed(void) {
     s16  y;
     u16  angle;
 
-    GFX_AddDitheredDrawMode(1, GetTPage(0, 1, 896, 256));
+    GFX_AddDitheredDrawMode(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 896, 256));
     pos.x = g_Task->pos.x.fixed;
     pos.y = g_Task->pos.y.fixed;
     pos.z = g_Task->pos.z.fixed;

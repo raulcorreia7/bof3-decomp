@@ -30,13 +30,13 @@
         D_1F800014[3].vz           = 0;                                                                                                                                               \
         x                          = (D_1F800014[1].vx << 9) + g_Task->pos.x.fixed;                                                                                                   \
         y                          = (D_1F800014[1].vx << 9) + g_Task->pos.y.fixed;                                                                                                   \
-        tpage                      = getTPage(0, (ABR), 320, 256);                                                                                                                    \
+        tpage                      = getTPage(TPAGE_DEPTH_4BIT, (ABR), 320, 256);                                                                                                     \
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);                                                                                                                       \
         Area_AddCellPrim(x, y, 2, sizeof(DR_MODE));                                                                                                                                   \
         prim = (POLY_GT4*)g_GfxPrimCursor;                                                                                                                                            \
         SetPolyGT4(prim);                                                                                                                                                             \
         SetSemiTrans(prim, 1);                                                                                                                                                        \
-        setTPage(prim, 0, (ABR), 832, 256);                                                                                                                                           \
+        setTPage(prim, TPAGE_DEPTH_4BIT, (ABR), 832, 256);                                                                                                                            \
         setClut(prim, 0, 506);                                                                                                                                                        \
         setUV4(prim, i * 4, g_Task->param.unk_0B * 4 + 32, i * 4 + 4, g_Task->param.unk_0B * 4 + 32, i * 4, g_Task->param.unk_0B * 4 + 48, i * 4 + 4, g_Task->param.unk_0B * 4 + 48); \
         D_1F800000.cells.halves[5] = 104 - g_Task->param.unk_0B * 3;                                                                                                                  \
