@@ -668,9 +668,11 @@ BMagic_DispatchEffectMode = { addr = 0x801EEE70, type = "func", source = "Runs t
 g_BMagicEffectModes = { addr = 0x801EF818, source = "Handlers of magic048 (Dream Breath), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic050/03"]
+Battle_ApplyDamageFlags = { addr = 0x800A9610, source = "Applies the damage flags to the selected battlers.", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 Battle_CenterCamera = { addr = 0x800AFD9C, alias = true }
+func_801DD350 = { addr = 0x801DD350, source = "Integrates the effect velocity pairs the magic050 step reads.", alias = true }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
@@ -810,9 +812,13 @@ g_BMagicEffectModes = { addr = 0x801F0BB0, source = "Handlers of magic060 (Ident
 ["emi/bmagic/magic062/03"]
 D_1F800000_HALF = { addr = 0x1F800000, type = "s16", source = "The scratchpad base 0x1F800000 as signed halfwords; func_801F00EC stages the ring radius there for its rsin and rcos scaling.", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_RescaleStats = { addr = 0x800A9BD8, source = "Rescales one battler stats.", alias = true }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+g_BattleTargetRecord = { addr = 0x801463A0, source = "Result cells of the target battler; the target_record member of g_Battle.", alias = true }
+g_Abilities = { addr = 0x801CA70C, source = "The 228 Ability records of GAME.EMI.", alias = true }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEnemyBattlers = { addr = 0x801EB630, source = "The enemy battlers of the battle.", alias = true }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_DispatchMode = { addr = 0x801EEC1C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the six-handler table at the module head in magic062 (Celerity)." }
 Effect_ReplacePaletteFade = { addr = 0x801EEEC0, type = "func", source = "When the effect timer (byte 0x09) reaches zero frees the selected actor's palette fade, allocates a new one (index in byte 0x0A), restarts the timer at 8 and advances header.mode (byte 0x01) in magic062 (Celerity)." }
@@ -3430,6 +3436,7 @@ g_MenuMasterCursor = { addr = 0x801D428A, source = "indexes the 0x140-byte stock
 
 ["emi/etc/start/08"]
 g_SndMono_nv = { addr = 0x80144951, type = "u8", source = "The g_SndMono byte under a plain view of its own; the start menu's settings step toggles it through one pointer.", alias = true }
+g_PartyCursor = { addr = 0x80148656, type = "s8", size = 0x1, source = "Party slot the start menu's ability and skill lists read.", alias = true }
 jtbl_801D0C04 = { addr = 0x801D0C04, type = "Callback", source = "The switch table of func_801D5A28: the jump targets of its jr dispatch." }
 jtbl_801D0C1C = { addr = 0x801D0C1C, type = "Callback", source = "The switch table of func_801D639C: the jump targets of its jr dispatch." }
 jtbl_801D0C34 = { addr = 0x801D0C34, type = "Callback", source = "The switch table of func_801D9274: the jump targets of its jr dispatch." }
@@ -5746,6 +5753,8 @@ Actor_SlideScreenDown16 = { addr = 0x801F38A4, type = "func", source = "Subtract
 Area_Update = { addr = 0x801F3914, type = "func", source = "Sets header.step (byte 0x02) to 3 when D_801454F2 is 2, then draws the area HUD at the actor screen_x with Area_DrawHud." }
 func_801F4158_area168 = { addr = 0x801F4158, type = "func", source = "mechanical disambiguation of the cross-image address-name collision with the area.h func_801F4158 edge_cross declaration (coordinator instruction)" }
 Message_ClearRequest = { addr = 0x801F4808, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 0 and g_SceneEventSelection to AREA_RESET_VARIANT." }
+D_801F4B2D = { addr = 0x801F4B2D, type = "u8", source = "D_801F4B2C+0x1", alias = true }
+D_801F4B2E = { addr = 0x801F4B2E, type = "u8", source = "D_801F4B2C+0x2", alias = true }
 
 ["emi/world04/area169/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
@@ -6209,6 +6218,7 @@ Area_ResetCameraOffsetY = { addr = 0x801F4930, type = "func", source = "Zeroes g
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_SetCellTexture = { addr = 0x801F3378, type = "func", source = "Sets a cell primitive's clut, texture page, corner UVs and shade from the packed cell texture word." }
 Actor_ClearVelocity = { addr = 0x801F5F20, type = "func", source = "Zeroes the velocity members of the current g_Task (+0x0C, +0x10 and vz) that Actor_ApplyVelocity integrates into x and y." }
+Actor_ClearVelocity_area189 = { addr = 0x801F5F20, type = "func", source = "Link-only name for the area189 copy of Actor_ClearVelocity; the engine copy at 0x801C5798 is visible to the area189 link too, so a draft cannot resolve the bare name. Same body and reason as func_801F4158_area168.", alias = true }
 Char_DrainFatigue = { addr = 0x801F6024, type = "func", source = "Adds 1 to the fatigue of each of the seven g_Characters while it is below 9 and rebuilds that character's stats with Char_RebuildStats." }
 
 ["emi/world04/area191/13"]
