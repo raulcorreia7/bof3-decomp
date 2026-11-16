@@ -3,6 +3,10 @@
 
 #include "types.h"
 
+/* The operand bits that select one of the four script variables. */
+#define SCRIPT_VAR_MASK  0x0C
+#define SCRIPT_VAR_SHIFT 2
+
 typedef u8 (*ScriptFunc)(u8** cursor);
 
 /* The script variable bytes at 0x80146864. */

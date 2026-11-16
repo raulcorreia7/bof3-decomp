@@ -20,5 +20,5 @@ segments:
       - [0x180C, bin, D_801F040E]
       - [0x1814, bin, D_801F0416]
       - [0x181C, bin, D_801F041C]
-      - [0x1824, bin, D_801F0424]
+      - [0x1824, bin, g_BMagicEffectModes]
   - [0x182C]

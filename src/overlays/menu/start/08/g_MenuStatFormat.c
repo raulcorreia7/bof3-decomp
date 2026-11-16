@@ -1,5 +1,6 @@
 #include "start_08.h"
 
+// clang-format off
 /* The stat format strings the item, party and save panels print numbers with. */
 char g_MenuStatFormat[4] = "%3d";
 char g_MenuCurrentValueFormat[8] = "%3d/   ";

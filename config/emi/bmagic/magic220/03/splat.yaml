@@ -16,6 +16,6 @@ segments:
     vram: 0x801F06DC
     align: 4
     subsegments:
-      - [0x1ADC, bin, D_801F06DC]
+      - [0x1ADC, bin, g_BMagicEffectModes]
       - [0x1B10, bin, D_801F0710]
   - [0x3910]
