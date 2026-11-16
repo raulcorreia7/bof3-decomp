@@ -8,17 +8,17 @@
 
 #define g_Task ((Actor*)g_Task)
 
+extern u8       D_80145F09;
+extern u8       D_80145FA8;
+extern s16      D_801492DA;
 extern u32      D_801F6C00;
 extern Callback D_801FAEC0[];
+/* D_801FAF24 */
+
 extern u8       D_801FAECC[];
 extern Callback D_801FAEF0[];
 extern Callback D_801FAEFC[];
-/* D_801FAF24 */
-
-extern u8  D_80145F09;
-extern u8  D_80145FA8;
-extern s16 D_801492DA;
-extern u16 g_AreaCameraOffsetZHalf;
+extern u16      g_AreaCameraOffsetZHalf;
 
 extern Pos3     D_801481E8;
 extern Pos3     D_801481F8;

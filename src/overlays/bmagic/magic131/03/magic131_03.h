@@ -9,8 +9,8 @@ extern Callback D_801EEC04[];
 extern Callback D_801F1BF4[];
 void            func_801F10F4(void);
 
-extern u8       D_801F1C38[];
 extern Callback D_801F1C08[];
+extern u8       D_801F1C38[];
 extern u8       D_801F1C54[];
 extern u8       D_801F1C74[];
 void            func_801F030C(void);
@@ -25,8 +25,8 @@ extern u16* D_800B499C[][2];
 
 extern Callback      D_801F1C48[];
 extern Callback      D_801F1C94[];
-extern BMagicEffect* D_801F24E0;
 extern BMagicEffect  D_801F1CA0[48];
+extern BMagicEffect* D_801F24E0;
 
 /* Places the orbit point of a KaiserBreath ring: the angle TABLE[unk_07]
  * shifted SHIFT goes to the scratchpad cell, and the point follows the area

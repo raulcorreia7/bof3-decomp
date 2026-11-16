@@ -24,15 +24,15 @@ extern u8 D_800B6BF0[];
 /* func_800AED5C */
 u8        Battle_CanTarget(s32 selector, u32 battler_index);
 
+/* The colours of the four triangles of the upper and the lower fan, per colour row. */
+extern u8 D_801F0C9C[][4][3];
+extern u8 D_801F0CCC[][4][3];
+
 /* The red, green and blue of each colour row, indexed by the effect byte 0x04. */
 extern u8 D_801F0CFC[][3];
 
 /* The ring colours, laid out as D_801F0CFC. */
 extern u8 D_801F0D08[][3];
-
-/* The colours of the four triangles of the upper and the lower fan, per colour row. */
-extern u8 D_801F0C9C[][4][3];
-extern u8 D_801F0CCC[][4][3];
 
 /* battle/battle/15: links count packets of size bytes from base into the map cell at the position,
  * ordered by values[]. */

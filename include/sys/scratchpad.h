@@ -20,9 +20,9 @@ typedef struct ScratchPadRay {
 } ScratchPadRay;
 
 #define SCRATCH_PAD_RAY_SIZE 0x0E
-ASSERT_SIZE(ScratchPadRay, SCRATCH_PAD_RAY_SIZE);
 ASSERT_OFFSET(ScratchPadRay, angle, 0x06);
 ASSERT_OFFSET(ScratchPadRay, shade, 0x08);
+ASSERT_SIZE(ScratchPadRay, SCRATCH_PAD_RAY_SIZE);
 
 /* The 16 bytes at the base, read at three widths: the entity slot the area and scene code stages in
  * byte 0 (the battle event slot in bytes 0-2), the halfword counters and effect parameters, and the
@@ -52,7 +52,6 @@ typedef struct ScratchPad {
     /* 0x048 */ u8              unk_48[0x3B8];
 } ScratchPad;
 
-ASSERT_SIZE(ScratchPad, SCRATCH_PAD_SIZE);
 ASSERT_OFFSET(ScratchPad, cells, 0x000);
 ASSERT_OFFSET(ScratchPad, unk_10, 0x010);
 ASSERT_OFFSET(ScratchPad, vectors, 0x014);
@@ -62,6 +61,7 @@ ASSERT_OFFSET(ScratchPad, unk_3A, 0x03A);
 ASSERT_OFFSET(ScratchPad, unk_3C, 0x03C);
 ASSERT_OFFSET(ScratchPad, task, 0x044);
 ASSERT_OFFSET(ScratchPad, unk_48, 0x048);
+ASSERT_SIZE(ScratchPad, SCRATCH_PAD_SIZE);
 
 /* The scratchpad as a typed object at a byte offset: SPAD(0u)->cells.bytes[0]. The existing
  * SCRATCH_PAD/SP/SP_PTR/SP_REF helpers in psx/mem.h keep working. */
@@ -88,9 +88,9 @@ extern u8  D_1F800001;
 /* ScratchPad.cells.halves[3]: the staged y coordinate that func_801B13BC writes, and the phase angle
  * the KaiserBreath steps store before rcos loads it back. */
 extern s16 D_1F800006;
-extern s16 D_1F800034[2];
 extern s16 D_1F800016;
 extern s16 D_1F800018;
+extern s16 D_1F800034[2];
 /* ScratchPad.unk_38/unk_3A: the area emit pair extent and its mode. */
 extern s16 D_1F800038;
 extern s16 D_1F80003A;

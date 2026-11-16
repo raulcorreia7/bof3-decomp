@@ -12,10 +12,10 @@
 #define SCRATCH_ROW_OFFSET 0x00
 
 extern u16      D_800E4C1E;
-extern u8       D_80144EC8[];
 extern s16      D_801448EE;
-extern u16      D_80146258;
+extern u8       D_80144EC8[];
 extern u8       D_80145FD0;
+extern u16      D_80146258;
 extern u8       D_80146921;
 extern u8       D_80146997;
 extern s8       D_80147ACF;
@@ -36,8 +36,8 @@ typedef struct Scena08Billboard {
     u32    size;         /* +0x24 */
 } Scena08Billboard;
 
-ASSERT_SIZE(Scena08Billboard, 0x28);
 ASSERT_OFFSET(Scena08Billboard, size, 0x24);
+ASSERT_SIZE(Scena08Billboard, 0x28);
 
 /* The SCENA08_SPARK_COUNT falling sparks at AREA_WORK; FallingSpark is in scenario.h. */
 #define SCENA08_SPARK_COUNT 8U
@@ -55,11 +55,13 @@ void          func_801F823C(s16 x, s16 y, s16 half_height, s16 half_width);
 
 void func_801F9688(void);
 
+extern Callback jtbl_801F6C8C[11];
+extern Callback jtbl_801F6CE4[16];
 extern Callback D_801FE908[];
 extern Callback D_801FE910[];
+
 extern Callback D_801FE938[];
 extern Callback D_801FE964[];
-
 extern Callback D_801FE970[];
 extern u8       D_801FE9A0[];
 /* D_801FE9C0 */
@@ -68,8 +70,6 @@ extern u8       D_801FEA6C;
 extern u8       D_801FEA70;
 extern s32      D_801FEA74;
 extern s32      D_801FEA78;
-extern Callback jtbl_801F6C8C[11];
-extern Callback jtbl_801F6CE4[16];
 
 void func_801FE800(void);
 

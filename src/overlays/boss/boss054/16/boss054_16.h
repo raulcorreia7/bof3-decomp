@@ -12,8 +12,8 @@ typedef struct Boss054Modes {
     Callback modes[10];
 } Boss054Modes;
 
-ASSERT_SIZE(Boss054Modes, 0x28);
 ASSERT_OFFSET(Boss054Modes, modes, 0x00);
+ASSERT_SIZE(Boss054Modes, 0x28);
 
 extern Boss054Modes D_800C1804;
 

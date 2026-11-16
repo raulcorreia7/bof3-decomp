@@ -20,8 +20,8 @@ typedef struct EMIBank {
     u16 flags;           /* 0x12 bit 1: sequence loaded */
 } EMIBank;
 
-ASSERT_SIZE(EMIBank, EMI_BANK_RECORD_SIZE);
 ASSERT_OFFSET(EMIBank, source, 0x04);
 ASSERT_OFFSET(EMIBank, resource_id, 0x10);
+ASSERT_SIZE(EMIBank, EMI_BANK_RECORD_SIZE);
 
 #endif

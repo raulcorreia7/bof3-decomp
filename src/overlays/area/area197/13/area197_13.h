@@ -7,6 +7,9 @@
 #include "overlays/area/world04.h"
 #include "area/spad.h"
 #include "area/effects.h"
+/* The state handler banks the step dispatchers index. */
+extern u8       D_801F431C[];
+extern Callback D_801F4368[];
 
 /* The scratchpad work row and the published record the step paths read. */
 
@@ -15,9 +18,6 @@
 /* The area-flag bit store. */
 /* D_801F4A2C */
 extern PartyMemberMessages g_PartyMemberMessages[7];
-/* The state handler banks the step dispatchers index. */
-extern u8                  D_801F431C[];
-extern Callback            D_801F4368[];
 extern Callback            D_801F4A80[];
 /* The two-byte step table the falling path indexes. */
 extern s8                  D_801F4A88[];
@@ -61,8 +61,8 @@ typedef struct AreaDropParticle {
     u8   pad_20[4];
 } AreaDropParticle;
 
-ASSERT_SIZE(AreaDropParticle, 0x24);
 ASSERT_OFFSET(AreaDropParticle, pos, 0x14);
+ASSERT_SIZE(AreaDropParticle, 0x24);
 
 void func_801F32A4(Actor* actor);
 

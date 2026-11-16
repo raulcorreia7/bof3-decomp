@@ -5,13 +5,13 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern Magic010SharedSteps D_801EEC04;
-
 extern s32 D_1F800004;
 
+extern Magic010SharedSteps D_801EEC04;
+
 extern Callback     D_801F03C0[];
-extern Callback     D_801F03DC[];
 extern u8           D_801F03D4[];
+extern Callback     D_801F03DC[];
 extern SVECTOR      g_ScratchPadVectors[];
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
 extern BattleEffect D_801F03E4[];

@@ -293,7 +293,6 @@ typedef struct LevelGrowth {
     u8  extra_ability; /* Char_GetExp learns both ability bytes through Char_AddAbility */
 } LevelGrowth;
 
-ASSERT_SIZE(LevelGrowth, LEVEL_STRIDE);
 ASSERT_OFFSET(LevelGrowth, exp, 0x00);
 ASSERT_OFFSET(LevelGrowth, hp, 0x02);
 ASSERT_OFFSET(LevelGrowth, ap, 0x03);
@@ -301,6 +300,7 @@ ASSERT_OFFSET(LevelGrowth, power_defense, 0x04);
 ASSERT_OFFSET(LevelGrowth, agility_intelligence, 0x05);
 ASSERT_OFFSET(LevelGrowth, ability, 0x06);
 ASSERT_OFFSET(LevelGrowth, extra_ability, 0x07);
+ASSERT_SIZE(LevelGrowth, LEVEL_STRIDE);
 
 typedef struct CharacterSprites {
     u32 section_offset[CHARACTER_SPRITES_SECTION_COUNT]; /* 0x00 from the container base */

@@ -26,6 +26,8 @@ typedef struct Area075PoseSequence {
     u8  pad_05[3];
 } Area075PoseSequence;
 
+extern u8                  D_801F2C94[];
+extern void                func_801F4874(void);
 extern Area075PoseSequence D_801F5858[3];
 extern u8                  D_801F5870[16];
 extern u8                  D_801F5880[16];
@@ -43,12 +45,10 @@ extern u16                 D_801F58CC;
 extern u8                  D_801F58CE[2];
 extern u8                  D_801F58D0;
 extern u8                  D_801F58D1;
-extern u8                  D_801F58D2;
-extern u8                  D_801F58D3;
 
-extern void func_801F4874(void);
+extern u8 D_801F58D2;
 
-extern u8 D_801F2C94[];
+extern u8 D_801F58D3;
 
 void func_801F4A50(s32, s32, s32, s32, s32);
 

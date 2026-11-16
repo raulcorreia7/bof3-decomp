@@ -5,13 +5,13 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern Callback D_801EFC40[];
-
 extern s32 D_1F800004;
-extern s32 D_1F800008;
-extern s32 D_1F80000C;
+
+extern s32      D_1F800008;
+extern s32      D_1F80000C;
+extern Callback D_801EFC40[];
 /* The four facing angle offsets the wind sway adds to the phase. */
-extern s32 D_801EFC50[];
+extern s32      D_801EFC50[];
 
 void func_801EF1E8(void);
 

@@ -30,11 +30,11 @@ typedef struct Sce15ef0Work {
     u8         color_g; /* +0x5E */
 } Sce15ef0Work;
 
-ASSERT_SIZE(Sce15ef0Work, 0x60);
 ASSERT_OFFSET(Sce15ef0Work, timer, 0x09);
 ASSERT_OFFSET(Sce15ef0Work, origin_x, 0x2E);
 ASSERT_OFFSET(Sce15ef0Work, pos, 0x34);
 ASSERT_OFFSET(Sce15ef0Work, color_r, 0x5D);
+ASSERT_SIZE(Sce15ef0Work, 0x60);
 
 extern u32 D_801D0C00;
 /* D_801D1F88 */

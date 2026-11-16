@@ -42,12 +42,12 @@ typedef struct SceneState {
     u8  pad_0A[6]; /* the copy is 0x10 bytes; these six bytes have no reader */
 } SceneState;
 
-ASSERT_SIZE(SceneState, 0x10);
 ASSERT_OFFSET(SceneState, flags_01, 0x01);
 ASSERT_OFFSET(SceneState, mode_02, 0x02);
 ASSERT_OFFSET(SceneState, state_04, 0x04);
 ASSERT_OFFSET(SceneState, step_05, 0x05);
 ASSERT_OFFSET(SceneState, timer_06, 0x06);
+ASSERT_SIZE(SceneState, 0x10);
 
 /* The scenario record the overlays switch on. */
 /* D_80146870 */

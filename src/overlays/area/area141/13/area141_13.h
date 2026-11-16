@@ -29,13 +29,12 @@ extern u8       D_801F4E2C[];
 /* func_801F4300 */
 void Area_SetCellRun(u8* table, u8 arg);
 
-extern u8 D_801F4DFC[];
+/* The cells that start the scene events of func_801F4158. */
+extern SceneTrigger D_801F4DD4[];
+extern u8           D_801F4DFC[];
 
 /* The game-overlay state bytes the cancel path resets. */
 extern u8 D_801F4E50[];
-
-/* The cells that start the scene events of func_801F4158. */
-extern SceneTrigger D_801F4DD4[];
 
 /* A box of map cells: the first and last column and row, all included. The
  * upload step of func_801F2D2C reads one block per work x position. */
@@ -46,10 +45,10 @@ typedef struct CellBox {
     u8 y1;
 } CellBox;
 
-ASSERT_SIZE(CellBox, 0x04);
 ASSERT_OFFSET(CellBox, y0, 0x01);
 ASSERT_OFFSET(CellBox, x1, 0x02);
 ASSERT_OFFSET(CellBox, y1, 0x03);
+ASSERT_SIZE(CellBox, 0x04);
 
 /* The five-bit fade field of a cell entry: bit 19, filled up to CELL_FADE_MAX by the fade-in step. */
 #define CELL_FADE_SHIFT  19

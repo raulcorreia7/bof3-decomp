@@ -17,9 +17,9 @@ typedef struct Scena03Line {
     ColorRGB8 color;       /* +0x0A */
 } Scena03Line;
 
-ASSERT_SIZE(Scena03Line, 0x0E);
 ASSERT_OFFSET(Scena03Line, start_scale, 0x06);
 ASSERT_OFFSET(Scena03Line, color, 0x0A);
+ASSERT_SIZE(Scena03Line, 0x0E);
 
 /* The head of the task row this scene reads as its line record. */
 typedef struct Scena03Work {
@@ -27,8 +27,8 @@ typedef struct Scena03Work {
     Scena03Line line; /* +0x0C */
 } Scena03Work;
 
-ASSERT_SIZE(Scena03Work, 0x1A);
 ASSERT_OFFSET(Scena03Work, line, 0x0C);
+ASSERT_SIZE(Scena03Work, 0x1A);
 
 #define SCN_LINE ((Scena03Work*)g_Task)
 
@@ -43,16 +43,16 @@ typedef struct Scena03Quad {
     s16    length;     /* +0x52 offset length */
 } Scena03Quad;
 
-ASSERT_SIZE(Scena03Quad, 0x54);
 ASSERT_OFFSET(Scena03Quad, corner, 0x0C);
 ASSERT_OFFSET(Scena03Quad, angle, 0x4C);
 ASSERT_OFFSET(Scena03Quad, length, 0x52);
+ASSERT_SIZE(Scena03Quad, 0x54);
 
 /* g_ScratchPadVectors */
 extern SVECTOR  g_ScratchPadVectors[];
-extern s16      D_801492DA;
 extern s8       D_80144EA0;
 extern u8       D_801468E4[];
+extern s16      D_801492DA;
 extern u32      D_801F6C00;
 /* D_801FCF24 */
 extern u8       D_801FCF30[];

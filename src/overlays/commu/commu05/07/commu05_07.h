@@ -20,31 +20,31 @@ typedef struct {
 
 extern Commu05State D_801D19F0;
 
-void        func_801D1048(s16 x, s16 y, u8 group);
-void        func_801D129C(s16 x, s16 y, u8 group);
-void        func_801D14C8(s32 x, s32 y, s32 group);
-void        func_801D1724(u16 x, u16 y);
-extern char D_801D0C04[];
-
-/* g_EmiOverlayHeader */
-/* D_801D1950 */
-extern Callback g_Commu05Steps[COMMU05_STEP_COUNT];
+void      func_801D1048(s16 x, s16 y, u8 group);
+void      func_801D129C(s16 x, s16 y, u8 group);
+void      func_801D14C8(s32 x, s32 y, s32 group);
+void      func_801D1724(u16 x, u16 y);
+extern u8 D_801457E8[][5];
+extern u8 D_80145E30[];
 
 /* The entry rows of the shared executable's fairy list (D_80145E48) and the
  * 5-byte icon cells each row byte selects (D_801457E8). */
-extern u8 D_80145E48[];
-extern u8 D_80145E30[];
-extern u8 D_801457E8[][5];
+extern u8   D_80145E48[];
+extern char D_801D0C04[];
 
 /* The background panel's cell origins, a u and a v byte per tile:
  * D_801D199C, D_801D19BC and D_801D19DC. */
 extern u8 D_801D0C0C[];
-extern u8 D_801D195C[];
-extern u8 D_801D1964[];
-extern u8 D_801D196C[];
-extern u8 D_801D1974[];
-extern u8 D_801D199C[][2];
-extern u8 D_801D19BC[][2];
-extern u8 D_801D19DC[][2];
+
+/* g_EmiOverlayHeader */
+/* D_801D1950 */
+extern Callback g_Commu05Steps[COMMU05_STEP_COUNT];
+extern u8       D_801D195C[];
+extern u8       D_801D1964[];
+extern u8       D_801D196C[];
+extern u8       D_801D1974[];
+extern u8       D_801D199C[][2];
+extern u8       D_801D19BC[][2];
+extern u8       D_801D19DC[][2];
 
 #endif

@@ -34,9 +34,9 @@ extern Callback D_801D0684[];
 extern Callback D_801D0690[];
 extern Callback D_801D069C[];
 
-extern s32  func_801D02A0(void);
-extern void func_801D0444(void);
+s32        func_801CFD24(s16 x, s16 y);
+extern s32 func_801D02A0(void);
 
-s32 func_801CFD24(s16 x, s16 y);
+extern void func_801D0444(void);
 
 #endif

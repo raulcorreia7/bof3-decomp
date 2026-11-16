@@ -63,13 +63,13 @@ typedef struct SceneBandEffect {
     /* 0x3E */ s16 proj_z; /* the projected z; the GTE vertex takes it halved */
 } SceneBandEffect;
 
-ASSERT_SIZE(SceneBandEffect, 0x40);
 ASSERT_OFFSET(SceneBandEffect, state, 0x02);
 ASSERT_OFFSET(SceneBandEffect, step_index, 0x03);
 ASSERT_OFFSET(SceneBandEffect, orbit_counter, 0x0C);
 ASSERT_OFFSET(SceneBandEffect, origin, 0x2E);
 ASSERT_OFFSET(SceneBandEffect, proj, 0x34);
 ASSERT_OFFSET(SceneBandEffect, proj_z, 0x3E);
+ASSERT_SIZE(SceneBandEffect, 0x40);
 
 /* Data, in address order. */
 extern s32              D_1F800004;

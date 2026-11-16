@@ -11,8 +11,8 @@ typedef struct MenuListRow {
     u8 unk_16[6];
 } MenuListRow;
 
-ASSERT_SIZE(MenuListRow, 0x1C);
 ASSERT_OFFSET(MenuListRow, source_index, 0x15);
+ASSERT_SIZE(MenuListRow, 0x1C);
 
 /* The same row as seven words: retail copies a source record into a row word-wise. */
 typedef struct MenuListRowWords {

@@ -7,8 +7,8 @@
 #include "overlays/scenario/scenario.h"
 
 void            Shop_DispatchStep(void);
-extern s8       D_80146873;
 extern u8       D_80143BB4;
+extern s8       D_80146873;
 extern u32      D_801F6C00;
 extern Callback D_801F973C[];
 extern Callback D_801F9748[];
@@ -22,10 +22,10 @@ void            func_801F8FAC(s32 x, s32 y, s32 color, u8 semi_trans);
 void            Scene_DrawEndingRollLine(s16 x, s16 y, u8* text);
 /* func_801F938C */
 bool            Scene_UpdateEndingRoll(void);
-/* D_801F981C */
-extern u8*      g_EndingRollText[];
 /* D_801F97DC */
 extern u8       g_EndingGlyphWidth[];
+/* D_801F981C */
+extern u8*      g_EndingRollText[];
 /* func_801F9490 */
 void            Scene_RunSaveMenu(void);
 extern Callback D_801F9758[];

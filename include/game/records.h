@@ -128,16 +128,16 @@ typedef struct SpawnedActor {
     u8         pad_70[4];    /* 0x70-0x73 */
 } SpawnedActor;
 
-ASSERT_SIZE(SpawnedActor, ACTOR_SLOT_SIZE);
 ASSERT_OFFSET(SpawnedActor, header, 0x00);
 ASSERT_OFFSET(SpawnedActor, type, 0x05);
 ASSERT_OFFSET(SpawnedActor, layer, 0x09);
-ASSERT_OFFSET(SpawnedActor, unk_2C, 0x2C);
 ASSERT_OFFSET(SpawnedActor, scene_step, 0x0C);
 ASSERT_OFFSET(SpawnedActor, selection, 0x10);
 ASSERT_OFFSET(SpawnedActor, unk_20, 0x20);
+ASSERT_OFFSET(SpawnedActor, unk_2C, 0x2C);
 ASSERT_OFFSET(SpawnedActor, pos, 0x34);
 ASSERT_OFFSET(SpawnedActor, camera_angle, 0x64);
+ASSERT_SIZE(SpawnedActor, ACTOR_SLOT_SIZE);
 
 extern SpawnedActor g_SpawnedActors[ACTOR_SLOT_COUNT];
 

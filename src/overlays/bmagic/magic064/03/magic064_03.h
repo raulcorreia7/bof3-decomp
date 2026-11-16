@@ -44,7 +44,6 @@ typedef struct Magic064Ring {
     s32   outer_speed; /* +0x18 added to the outer radius each frame */
 } Magic064Ring;
 
-ASSERT_SIZE(Magic064Ring, 0x1C);
 ASSERT_OFFSET(Magic064Ring, mode, 0x01);
 ASSERT_OFFSET(Magic064Ring, angle, 0x02);
 ASSERT_OFFSET(Magic064Ring, x, 0x04);
@@ -53,6 +52,7 @@ ASSERT_OFFSET(Magic064Ring, inner, 0x0C);
 ASSERT_OFFSET(Magic064Ring, outer, 0x10);
 ASSERT_OFFSET(Magic064Ring, inner_speed, 0x14);
 ASSERT_OFFSET(Magic064Ring, outer_speed, 0x18);
+ASSERT_SIZE(Magic064Ring, 0x1C);
 
 extern Magic064Ring* D_801F28B4;
 
@@ -82,10 +82,10 @@ extern Magic064SpriteUv D_801F13A4[];
 
 void func_801EF8F4(void);
 void func_801F001C(void);
-void func_801F04A0(void);
-
 void func_801F03D8(void);
+
 void func_801F0448(void);
+void func_801F04A0(void);
 void func_801F0B8C(s16 x0, s16 y0, s16 x1, s16 y1);
 void func_801F0EEC(u32 sprite, s32 blend, s32 color);
 void func_801F103C(void);

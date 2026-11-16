@@ -16,8 +16,8 @@ typedef struct MenuPortraitSprite {
     u8 clut_y;
 } MenuPortraitSprite;
 
-ASSERT_SIZE(MenuPortraitSprite, 4);
 ASSERT_OFFSET(MenuPortraitSprite, clut_x, 0x02);
 ASSERT_OFFSET(MenuPortraitSprite, clut_y, 0x03);
+ASSERT_SIZE(MenuPortraitSprite, 4);
 
 #endif

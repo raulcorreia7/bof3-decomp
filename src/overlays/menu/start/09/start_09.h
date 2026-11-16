@@ -51,9 +51,9 @@ typedef struct SaveFile {
     s32  size;
 } SaveFile;
 
-ASSERT_SIZE(SaveFile, SAVE_DIR_SIZE);
 ASSERT_OFFSET(SaveFile, name, 0x00);
 ASSERT_OFFSET(SaveFile, size, 0x14);
+ASSERT_SIZE(SaveFile, SAVE_DIR_SIZE);
 
 typedef struct {
     u32  unk_00;                       /* 0x00 0x141; no reader */
@@ -65,7 +65,6 @@ typedef struct {
     char wildcard[CARD_WILDCARD_MAX];  /* 0x2C "*" */
 } CardNames;
 
-ASSERT_SIZE(CardNames, CARD_NAME_SIZE);
 ASSERT_OFFSET(CardNames, unk_00, 0x00);
 ASSERT_OFFSET(CardNames, port0_prefix, 0x04);
 ASSERT_OFFSET(CardNames, port1_prefix, 0x0C);
@@ -73,31 +72,32 @@ ASSERT_OFFSET(CardNames, game_id, 0x14);
 ASSERT_OFFSET(CardNames, port0_pattern, 0x1C);
 ASSERT_OFFSET(CardNames, port1_pattern, 0x24);
 ASSERT_OFFSET(CardNames, wildcard, 0x2C);
+ASSERT_SIZE(CardNames, CARD_NAME_SIZE);
 
 /* The 16 colours of the save icon, copied as bytes. */
 typedef struct {
     u8 bytes[SAVE_ICON_CLUT_SIZE];
 } SaveIconClut;
 
-ASSERT_SIZE(SaveIconClut, SAVE_ICON_CLUT_SIZE);
 ASSERT_OFFSET(SaveIconClut, bytes, 0x00);
+ASSERT_SIZE(SaveIconClut, SAVE_ICON_CLUT_SIZE);
 
 /* One 16x16 4-bit frame of the save icon, copied as bytes. */
 typedef struct {
     u8 bytes[SAVE_ICON_SIZE];
 } SaveIcon;
 
-ASSERT_SIZE(SaveIcon, SAVE_ICON_SIZE);
 ASSERT_OFFSET(SaveIcon, bytes, 0x00);
+ASSERT_SIZE(SaveIcon, SAVE_ICON_SIZE);
 
 typedef struct {
     u32 magic; /* 0x00 0x10 = TIM magic */
     u32 flags; /* 0x04 TimFlags; bits 0-2 0 = 4bpp */
 } TimHeader;
 
-ASSERT_SIZE(TimHeader, TIM_HEADER_SIZE);
 ASSERT_OFFSET(TimHeader, magic, 0x00);
 ASSERT_OFFSET(TimHeader, flags, 0x04);
+ASSERT_SIZE(TimHeader, TIM_HEADER_SIZE);
 
 typedef struct {
     u32 length; /* 0x00 block bytes incl. header: 0x2C */
@@ -112,13 +112,13 @@ typedef struct {
     } data; /* 0x0C CLUT words */
 } TimClutBlock;
 
-ASSERT_SIZE(TimClutBlock, TIM_CLUT_BLOCK_SIZE);
 ASSERT_OFFSET(TimClutBlock, length, 0x00);
 ASSERT_OFFSET(TimClutBlock, x, 0x04);
 ASSERT_OFFSET(TimClutBlock, y, 0x06);
 ASSERT_OFFSET(TimClutBlock, width, 0x08);
 ASSERT_OFFSET(TimClutBlock, height, 0x0A);
 ASSERT_OFFSET(TimClutBlock, data, 0x0C);
+ASSERT_SIZE(TimClutBlock, TIM_CLUT_BLOCK_SIZE);
 
 typedef struct {
     u32 length; /* 0x00 block bytes incl. header: 0x8C */
@@ -133,13 +133,13 @@ typedef struct {
     } data; /* 0x0C 16x16 4bpp pixels, 64 VRAM words */
 } TimImageBlock;
 
-ASSERT_SIZE(TimImageBlock, TIM_IMAGE_BLOCK_SIZE);
 ASSERT_OFFSET(TimImageBlock, length, 0x00);
 ASSERT_OFFSET(TimImageBlock, x, 0x04);
 ASSERT_OFFSET(TimImageBlock, y, 0x06);
 ASSERT_OFFSET(TimImageBlock, width, 0x08);
 ASSERT_OFFSET(TimImageBlock, height, 0x0A);
 ASSERT_OFFSET(TimImageBlock, data, 0x0C);
+ASSERT_SIZE(TimImageBlock, TIM_IMAGE_BLOCK_SIZE);
 
 typedef struct {
     TimHeader     header; /* 0x00 */
@@ -147,10 +147,10 @@ typedef struct {
     TimImageBlock image;  /* 0x34 */
 } TimIcon;
 
-ASSERT_SIZE(TimIcon, TIM_ICON_SIZE);
 ASSERT_OFFSET(TimIcon, header, 0x00);
 ASSERT_OFFSET(TimIcon, clut, 0x08);
 ASSERT_OFFSET(TimIcon, image, 0x34);
+ASSERT_SIZE(TimIcon, TIM_ICON_SIZE);
 
 /* The memory card file header block: the PsyQ sample's _CARD. */
 typedef struct {
@@ -163,7 +163,6 @@ typedef struct {
     SaveIcon     icons[SAVE_ICON_COUNT];     /* 0x80 */
 } SaveHeader;
 
-ASSERT_SIZE(SaveHeader, SAVE_HEADER_SIZE);
 ASSERT_OFFSET(SaveHeader, magic, 0x00);
 ASSERT_OFFSET(SaveHeader, type, 0x02);
 ASSERT_OFFSET(SaveHeader, block_entry, 0x03);
@@ -171,6 +170,7 @@ ASSERT_OFFSET(SaveHeader, title, 0x04);
 ASSERT_OFFSET(SaveHeader, reserve, 0x44);
 ASSERT_OFFSET(SaveHeader, clut, 0x60);
 ASSERT_OFFSET(SaveHeader, icons, 0x80);
+ASSERT_SIZE(SaveHeader, SAVE_HEADER_SIZE);
 
 /* The card file header at the start of the save file buffer; the code addresses it as a
  * literal (lui/ori), so it is a fixed-address view, not a linked symbol. */

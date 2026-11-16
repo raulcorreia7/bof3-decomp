@@ -41,8 +41,8 @@ typedef struct Thread {
     u8       pad_48[0x38];
 } Thread;
 
-ASSERT_SIZE(Thread, SYS_THREAD_SIZE);
 ASSERT_OFFSET(Thread, state, 0x00);
 ASSERT_OFFSET(Thread, entry, 0x04);
+ASSERT_SIZE(Thread, SYS_THREAD_SIZE);
 
 #endif

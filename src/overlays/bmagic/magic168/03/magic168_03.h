@@ -21,10 +21,10 @@ extern u8 D_801F0194[];
 extern u8 D_801F019C[];
 /* The colour rows of each kind. */
 #define EFFECT_SPARKLE_COLORS D_801F0158
-extern u8 D_801F0158[][4][3];
+extern BMagicEffectSteps D_801EEC04;
 
 extern BMagicEffectWorkSteps D_801EEC1C;
-extern BMagicEffectSteps     D_801EEC04;
+extern u8                    D_801F0158[][4][3];
 
 /* The sparkle record being updated, its launch offset row and the shortest rise per kind. */
 #define EFFECT_SPARKLE_TASK    D_801F17B0

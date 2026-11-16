@@ -80,11 +80,11 @@ typedef struct BattleEventSlot {
     u8  pad_0A[2];
 } BattleEventSlot;
 
-ASSERT_SIZE(BattleEventSlot, 0xC);
 ASSERT_OFFSET(BattleEventSlot, event_type, 0x01);
 ASSERT_OFFSET(BattleEventSlot, group, 0x03);
 ASSERT_OFFSET(BattleEventSlot, payload, 0x04);
 ASSERT_OFFSET(BattleEventSlot, timer, 0x08);
+ASSERT_SIZE(BattleEventSlot, 0xC);
 
 /* The battle sub-step byte 0x801462E2 selects one of these four entrance
  * handlers, copied to the stack from 0x801D0C1C. */
@@ -116,10 +116,10 @@ typedef struct BattlePanel {
     u8  pad_09[0x1B];
 } BattlePanel;
 
-ASSERT_SIZE(BattlePanel, 0x24);
 ASSERT_OFFSET(BattlePanel, x_02, 0x02);
 ASSERT_OFFSET(BattlePanel, y_04, 0x04);
 ASSERT_OFFSET(BattlePanel, battler, 0x08);
+ASSERT_SIZE(BattlePanel, 0x24);
 
 /* The battle mode byte 0x801462E0 selects one of these six handlers, copied to
  * the stack from 0x801D0C04. */
@@ -176,7 +176,6 @@ extern s32             D_80145ED0;
 extern volatile u8     D_80145F18[];
 extern u8              D_80145F20[];
 extern u8              D_80145F22[];
-extern u8              D_80145FCC[];
 /* One-field views of the same rows: the local rows (stride 0x140) and the
  * enemy rows (stride 0x118), each anchored at the field the retail symbol
  * names. */
@@ -187,6 +186,7 @@ extern volatile u32    D_80145FB8[][80];
 extern u8              D_80145FC6;
 extern u8              D_80145FC7;
 extern u8              D_80145FC9;
+extern u8              D_80145FCC[];
 extern u8              D_801462F6[];
 extern u8              D_80146304; /* oscillation direction latch */
 extern u8              D_80146308; /* UI oscillator byte */

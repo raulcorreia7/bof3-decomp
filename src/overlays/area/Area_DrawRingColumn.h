@@ -4,9 +4,9 @@ typedef struct AreaRingDepthView {
     s32 depth; /* 0x24 */
 } AreaRingDepthView;
 
-ASSERT_SIZE(AreaRingDepthView, 0x28);
-
 ASSERT_OFFSET(AreaRingDepthView, depth, 0x24);
+
+ASSERT_SIZE(AreaRingDepthView, 0x28);
 
 /* Draws a column of light strips: textured, semi-transparent quads between successive points of a ring of radius 32 around the actor, rising along z until they pass the work window's ceiling; shade is the strip's grey level. A statement macro: an inline function loads shade as a variable and moves the bytes. func_801F3268 (area132) and func_801F4B6C (area134); every change must verify both. */
 #define AREA_DRAW_RING_COLUMN(shade)                                        \

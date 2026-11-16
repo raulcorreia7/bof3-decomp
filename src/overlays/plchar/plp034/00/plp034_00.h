@@ -29,8 +29,8 @@ extern Callback D_801D0340[];
 extern Callback D_801D034C[];
 extern Callback D_801D0358[];
 
-void func_801CFB4C(s32 kind, s32 x, s32 y, s32 code);
-
 s32 func_801CF940(s16 x, s16 y);
+
+void func_801CFB4C(s32 kind, s32 x, s32 y, s32 code);
 
 #endif

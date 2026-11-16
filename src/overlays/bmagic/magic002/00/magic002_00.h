@@ -20,9 +20,9 @@ typedef struct BattleEffectHalfColumn {
     u8  pad[BATTLE_EFFECT_STRIDE - sizeof(u16)];
 } BattleEffectHalfColumn;
 
-extern BattleEffectHalfColumn D_801EC388[];
-
 extern BattleEffect* D_801EC2E0;
+
+extern BattleEffectHalfColumn D_801EC388[];
 
 void func_801EF030(s32 x, s32 y, u16 radius, s32 phase);
 void func_801EF1FC(s16 arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5);

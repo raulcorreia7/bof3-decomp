@@ -64,7 +64,6 @@ typedef struct SaveData {
     /* 0xED0 */ u8              unk_ED0[0x1E0];
 } SaveData;
 
-ASSERT_SIZE(SaveData, SAVE_BLOCK_SIZE);
 ASSERT_OFFSET(SaveData, scene_event, 0x013);
 ASSERT_OFFSET(SaveData, scene_event_timer, 0x016);
 ASSERT_OFFSET(SaveData, script_vars, 0x020);
@@ -92,6 +91,7 @@ ASSERT_OFFSET(SaveData, vital_item_ids, 0xB74);
 ASSERT_OFFSET(SaveData, celerity_timer, 0xC7C);
 ASSERT_OFFSET(SaveData, bonebreak_timer, 0xC80);
 ASSERT_OFFSET(SaveData, fairy_jobs, 0xCF0);
+ASSERT_SIZE(SaveData, SAVE_BLOCK_SIZE);
 
 /* D_801448D8 */
 extern SaveData g_SaveData;

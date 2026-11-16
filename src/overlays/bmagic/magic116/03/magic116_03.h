@@ -31,13 +31,13 @@ typedef struct BMagicStreakSegment {
     /* 0x3B */ u8        pad_3B;
 } BMagicStreakSegment;
 
-ASSERT_SIZE(BMagicStreakSegment, 0x3C);
 ASSERT_OFFSET(BMagicStreakSegment, life, 0x02);
 ASSERT_OFFSET(BMagicStreakSegment, head, 0x04);
 ASSERT_OFFSET(BMagicStreakSegment, tail, 0x14);
 ASSERT_OFFSET(BMagicStreakSegment, velocity, 0x24);
 ASSERT_OFFSET(BMagicStreakSegment, head_color, 0x34);
 ASSERT_OFFSET(BMagicStreakSegment, tail_color, 0x38);
+ASSERT_SIZE(BMagicStreakSegment, 0x3C);
 
 extern BMagicStreakSegment D_801EF2A8[];
 

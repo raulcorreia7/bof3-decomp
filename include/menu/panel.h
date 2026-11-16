@@ -93,13 +93,13 @@ typedef struct MenuChoicePanel {
     s16   confirm_gate; /* 0x12: non-zero closes the confirm step */
 } MenuChoicePanel;
 
-ASSERT_SIZE(MenuChoicePanel, MENU_CHOICE_PANEL_SIZE);
 ASSERT_OFFSET(MenuChoicePanel, pos, 0x04);
 ASSERT_OFFSET(MenuChoicePanel, group, 0x0A);
 ASSERT_OFFSET(MenuChoicePanel, group_first, 0x0B);
 ASSERT_OFFSET(MenuChoicePanel, group_cursor, 0x0C);
 ASSERT_OFFSET(MenuChoicePanel, drawn_cursor, 0x0D);
 ASSERT_OFFSET(MenuChoicePanel, confirm_gate, 0x12);
+ASSERT_SIZE(MenuChoicePanel, MENU_CHOICE_PANEL_SIZE);
 
 /* What a list panel lists: the shop's item list reads a price discount (and
  * dims the whole list when it is set), the ability lists read whose abilities

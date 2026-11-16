@@ -22,12 +22,12 @@
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_GT4))
 
 extern u32      D_801F6C00;
-extern s32      D_801FE740;
 /* D_801FE57C */
 extern Callback D_801FE590[];
 extern Callback D_801FE5A0[];
 extern Callback D_801FE5B0[];
 extern Callback D_801FE5C0[];
+extern s32      D_801FE740;
 
 /* One textured cell of the scene's sprite sheet: the texture page origin and the cell's corner in
  * it. func_801F9500 takes the second cell when bit 0x4 of the task's unk_06 is set. */
@@ -38,9 +38,9 @@ typedef struct Scena15SpriteCell {
     u8  v;      /* 0x5 */
 } Scena15SpriteCell;
 
-ASSERT_SIZE(Scena15SpriteCell, 6);
 ASSERT_OFFSET(Scena15SpriteCell, u, 0x4);
 ASSERT_OFFSET(Scena15SpriteCell, v, 0x5);
+ASSERT_SIZE(Scena15SpriteCell, 6);
 
 extern Scena15SpriteCell D_801FE5E8[];
 
@@ -64,23 +64,23 @@ extern s8       D_801FE6E8[];
 /* D_801FE6EC */
 void            func_801F83AC(Pos2u* out);
 void            func_801F8704(void);
-extern u8       D_801FE71C[];
-/* The scene band's velocity. */
-extern Pos3     D_801FE738;
-extern u8       D_801FE748;
-extern u8       D_801FE608[];
 extern u8       D_80143F1D;
 extern u16      D_80144F54;
 extern s8       D_8014504A;
 extern s8       D_8014504B;
+extern u8       D_801FE608[];
+extern u8       D_801FE71C[];
+/* The scene band's velocity. */
+extern Pos3     D_801FE738;
+extern u8       D_801FE748;
 extern u8       D_801FE74C;
 void            func_801F8958(void);
 void            func_801F9020(Coord* position, s32* step);
 void            func_801F92F0(Coord* position, s32* step);
 
+extern Callback jtbl_801F6C6C[6];
 extern u8       D_801FE694[];
 extern u8       D_801FE6C8[];
 extern u8       D_801FE750;
-extern Callback jtbl_801F6C6C[6];
 
 #endif

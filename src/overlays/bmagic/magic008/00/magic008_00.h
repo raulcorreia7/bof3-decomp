@@ -34,22 +34,22 @@ typedef struct Magic008ThirdSteps {
     Callback steps[MAGIC008_THIRD_STEP_COUNT];
 } Magic008ThirdSteps;
 
+extern u8                 D_800B6BF0[];
 extern Magic008FirstSteps D_801EEC04;
-extern BMagicEffectSteps  D_801EEC58;
 
 extern Magic008SecondSteps D_801EEC14;
-extern Magic008ThirdSteps  D_801EEC70;
 extern Magic008FirstSteps  D_801EEC20;
 extern Magic008FirstSteps  D_801EEC30;
 extern Magic008SecondSteps D_801EEC40;
 extern Magic008SecondSteps D_801EEC4C;
+extern BMagicEffectSteps   D_801EEC58;
+extern Magic008ThirdSteps  D_801EEC70;
 extern Magic008FirstSteps  D_801EEC84;
-extern BMagicEffectSteps   D_801EEC94;
 
+extern BMagicEffectSteps  D_801EEC94;
 extern Magic008EarlySteps D_801EECAC;
 extern Magic008Steps      D_801EECC8;
 extern Offset2            D_801F1C04[];
-extern u8                 D_800B6BF0[];
 /* func_800AED5C */
 u8                        Battle_CanTarget(s32 selector, u32 battler_index);
 /* The battle/battle/15 sprite-cell routines, called with a battler or the effect work record. */

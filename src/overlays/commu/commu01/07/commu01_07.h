@@ -40,9 +40,14 @@ ASSERT_OFFSET(CommuTypeRows, first, 0x0);
 ASSERT_OFFSET(CommuTypeRows, count, 0x1);
 ASSERT_SIZE(CommuTypeRows, 0x2);
 
-extern u8             D_801455C9[];
-extern s8             D_801455C2;
 extern u16            D_80010000[];
+extern s8             D_801455C2;
+extern u8             D_801455C9[];
+/* The commu request slot run's byte columns: the kind grid line, the cursor box
+ * row and the byte the commit clears, each at the run's eight-byte row stride. */
+extern u8             D_801457A9[][8];
+extern u8             D_801457AA[][8];
+extern u8             D_801457AB[][8];
 extern u8             D_801D0C04[12];
 extern char           D_801D0C10[];
 extern char           D_801D0C14[];
@@ -66,11 +71,6 @@ extern CommuCellFrame D_801D4C44[COMMU_CELL_FRAME_COUNT];
 extern u8             D_801D4CD4[];
 extern u8             D_801D4CE0[];
 extern u8             D_801D4D34[];
-/* The commu request slot run's byte columns: the kind grid line, the cursor box
- * row and the byte the commit clears, each at the run's eight-byte row stride. */
-extern u8             D_801457A9[][8];
-extern u8             D_801457AA[][8];
-extern u8             D_801457AB[][8];
 extern CommuTypeRows  D_801D4DD4[];
 extern u16            D_801D4DDA[];
 extern Pos2u          D_801D4DDC[];

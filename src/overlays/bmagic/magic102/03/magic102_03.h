@@ -25,6 +25,10 @@ extern Magic010SharedSteps D_801EEC04;
 
 /* The four field actor rows that follow g_Actors. */
 extern Actor D_80147A58[4];
+/* The target cell offset of each facing: a signed x and y byte at facing * 2. */
+extern s8    D_801F0C94[8];
+/* Per facing pair (D_801F0CBC >> 1): the divisor of the rise at each step from the target cell. */
+extern u8    D_801F0C9C[2][15];
 
 /* The caster's facing, the flag func_801EEC80 raises for encounters 0x1C, 0x23, 0x2F and 0x34, and the
  * target cell the effect starts from. */
@@ -32,10 +36,6 @@ extern u8  D_801F0CBC;
 extern u8  D_801F0CC0;
 extern s16 D_801F0CC4;
 extern s16 D_801F0CC8;
-/* The target cell offset of each facing: a signed x and y byte at facing * 2. */
-extern s8  D_801F0C94[8];
-/* Per facing pair (D_801F0CBC >> 1): the divisor of the rise at each step from the target cell. */
-extern u8  D_801F0C9C[2][15];
 extern s8  D_801F0CCC[17][15];
 extern s8  D_801F0DCC[16][15];
 /* The height of each party member, enemy, field actor, actor row and actor slot over the ground. */

@@ -6,8 +6,8 @@
 #include "overlays/bmagic/bmagic.h"
 
 extern s16                 D_1F800004;
-extern BMagicEffectSteps   D_801EEC14;
 extern Magic010SharedSteps D_801EEC04;
+extern BMagicEffectSteps   D_801EEC14;
 void                       func_800AF764(void);
 void                       func_801EF070(void);
 void                       func_801EF860(void);

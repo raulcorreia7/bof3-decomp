@@ -60,11 +60,11 @@ typedef struct ScanBar {
     /* 0x04 */ s16 y;
 } ScanBar;
 
-ASSERT_SIZE(ScanBar, 6);
 ASSERT_OFFSET(ScanBar, in_use, 0x00);
 ASSERT_OFFSET(ScanBar, state, 0x02);
 ASSERT_OFFSET(ScanBar, half_height, 0x03);
 ASSERT_OFFSET(ScanBar, y, 0x04);
+ASSERT_SIZE(ScanBar, 6);
 
 /* The scene context record the entity dispatchers pass to their handler. */
 #define g_SceneFlags ((void*)g_SceneFlags)
@@ -101,9 +101,9 @@ typedef union SceneRequest {
     u8  byte;
 } SceneRequest;
 
-ASSERT_SIZE(SceneRequest, 4);
 ASSERT_OFFSET(SceneRequest, word, 0x00);
 ASSERT_OFFSET(SceneRequest, byte, 0x00);
+ASSERT_SIZE(SceneRequest, 4);
 
 #define g_ScriptVarsReq (*(SceneRequest*)&g_ScriptVars)
 
@@ -147,7 +147,6 @@ typedef struct FallingSpark {
     s32 unk_18; /* 0x18 */
 } FallingSpark;
 
-ASSERT_SIZE(FallingSpark, 0x1C);
 ASSERT_OFFSET(FallingSpark, active, 0x00);
 ASSERT_OFFSET(FallingSpark, kind, 0x01);
 ASSERT_OFFSET(FallingSpark, life, 0x02);
@@ -158,6 +157,7 @@ ASSERT_OFFSET(FallingSpark, x, 0x0C);
 ASSERT_OFFSET(FallingSpark, y, 0x10);
 ASSERT_OFFSET(FallingSpark, z, 0x14);
 ASSERT_OFFSET(FallingSpark, unk_18, 0x18);
+ASSERT_SIZE(FallingSpark, 0x1C);
 
 FallingSpark* func_801F8394(void);
 

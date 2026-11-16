@@ -397,8 +397,8 @@ typedef struct AreaVertex {
     u8    unk_1A[0x0E];
 } AreaVertex;
 
-ASSERT_SIZE(AreaVertex, WORLD_VERTEX_RECORD_SIZE);
 ASSERT_OFFSET(AreaVertex, points, 0x02);
+ASSERT_SIZE(AreaVertex, WORLD_VERTEX_RECORD_SIZE);
 
 typedef struct AreaTrail {
     Pos3    pos;                     /* 0x00 - the head anchor */
@@ -409,8 +409,8 @@ typedef struct AreaTrail {
     DVECTOR points[WORLD_TRAIL_MAX]; /* 0x18 - the trail points */
 } AreaTrail;
 
-ASSERT_SIZE(AreaTrail, WORLD_TRAIL_SIZE);
 ASSERT_OFFSET(AreaTrail, points, 0x18);
+ASSERT_SIZE(AreaTrail, WORLD_TRAIL_SIZE);
 
 #define AREA_SPAWN_SLOT_COUNT 8
 
@@ -427,11 +427,11 @@ typedef struct AreaSpawnSlot {
     u8       rim_shade;  /* 0x17 - shade at the disc rim */
 } AreaSpawnSlot;
 
-ASSERT_SIZE(AreaSpawnSlot, 0x18);
 ASSERT_OFFSET(AreaSpawnSlot, pos, 0x04);
 ASSERT_OFFSET(AreaSpawnSlot, radius, 0x14);
 ASSERT_OFFSET(AreaSpawnSlot, core_shade, 0x16);
 ASSERT_OFFSET(AreaSpawnSlot, rim_shade, 0x17);
+ASSERT_SIZE(AreaSpawnSlot, 0x18);
 
 #define AREA_RING_POINTS     16
 #define AREA_RING_ANGLE_STEP 0x100
@@ -450,10 +450,10 @@ typedef struct AreaRing {
     DVECTOR screen[AREA_RING_POINTS]; /* 0x2C - one screen position per ring point */
 } AreaRing;
 
-ASSERT_SIZE(AreaRing, 0x6C);
-
 ASSERT_OFFSET(AreaRing, radius, 0x20);
+
 ASSERT_OFFSET(AreaRing, screen, 0x2C);
+ASSERT_SIZE(AreaRing, 0x6C);
 
 /* The AREA028 slot row: 0x10 bytes. The program keeps 32 of them at
  * `0x800E4800` (`@0x801F2F5C`, `@0x801F3004`, `@0x801F3060` walk them with
@@ -466,17 +466,17 @@ typedef struct AreaSlotWork {
     volatile Pos2u screen;
 } AreaSlotWork;
 
-ASSERT_SIZE(AreaSlotWork, WORLD_SLOT_WORK_SIZE);
 ASSERT_OFFSET(AreaSlotWork, screen, 0x0C);
+ASSERT_SIZE(AreaSlotWork, WORLD_SLOT_WORK_SIZE);
 
 typedef struct PartyMemberMessages {
     u8  tags[PARTY_MEMBER_MESSAGE_COUNT];     /* 0x00 */
     s16 messages[PARTY_MEMBER_MESSAGE_COUNT]; /* 0x04 message ids */
 } PartyMemberMessages;
 
-ASSERT_SIZE(PartyMemberMessages, PARTY_MEMBER_MESSAGE_SIZE);
 ASSERT_OFFSET(PartyMemberMessages, tags, 0x00);
 ASSERT_OFFSET(PartyMemberMessages, messages, 0x04);
+ASSERT_SIZE(PartyMemberMessages, PARTY_MEMBER_MESSAGE_SIZE);
 
 /* Finds the scene-table record for a wanted scene id and fills its palette and
  * tile fields (exe/slus_004_22@0x8014DD3C). */

@@ -83,12 +83,12 @@ typedef struct SkillOrder {
     u8 unk_54;
 } SkillOrder;
 
-ASSERT_SIZE(SkillOrder, 0x55);
 ASSERT_OFFSET(SkillOrder, party_slot, 0x0A);
 ASSERT_OFFSET(SkillOrder, ability_group, 0x0B);
 ASSERT_OFFSET(SkillOrder, cursor, 0x0C);
 ASSERT_OFFSET(SkillOrder, swap_cursor, 0x0D);
 ASSERT_OFFSET(SkillOrder, unk_54, 0x54);
+ASSERT_SIZE(SkillOrder, 0x55);
 
 /* One starting point of a new game: the save entry, the party and the records'
  * starting values the start menu writes before the first scene loads. */
@@ -107,7 +107,6 @@ typedef struct NewGameStart {
     u32 unk_58;         /* 0x58 */
 } NewGameStart;
 
-ASSERT_SIZE(NewGameStart, 0x5C);
 ASSERT_OFFSET(NewGameStart, entry_x, 0x00);
 ASSERT_OFFSET(NewGameStart, entry_y, 0x04);
 ASSERT_OFFSET(NewGameStart, area, 0x08);
@@ -119,16 +118,17 @@ ASSERT_OFFSET(NewGameStart, zenny, 0x34);
 ASSERT_OFFSET(NewGameStart, items, 0x38);
 ASSERT_OFFSET(NewGameStart, vitals, 0x48);
 ASSERT_OFFSET(NewGameStart, unk_58, 0x58);
+ASSERT_SIZE(NewGameStart, 0x5C);
+extern u8 D_80181B17;
+extern u8 D_80181B18;
 
 /* The new game's starting points and the tables its start menu copies. */
 extern NewGameStart D_801EBA44[];
-extern u8           D_80181B17;
-extern u8           D_80181B18;
 extern u8           D_801EC174[];
 extern u8           D_801EC214[];
 extern u8           g_BattleTargetRows[][4];
-extern u8           D_80145518[][4];
 extern u8           D_801454FF;
+extern u8           D_80145518[][4];
 
 /* The start overlay's step counter at 0x80143B92. func_801E3EC4 takes its
  * address before the increment (lui/addiu of the base, then lhu/shu through
@@ -139,8 +139,8 @@ typedef union CampMenuStepCounter {
     u16 rows[1];
 } CampMenuStepCounter;
 
-ASSERT_SIZE(CampMenuStepCounter, 2);
 ASSERT_OFFSET(CampMenuStepCounter, rows, 0);
+ASSERT_SIZE(CampMenuStepCounter, 2);
 
 /* The save menu results g_SaveCardStatus holds beyond the CardEvent codes 0 to 4. */
 enum {
@@ -217,11 +217,9 @@ typedef struct NameEntryLabels {
     u8 start[5];
 } NameEntryLabels;
 
-extern NameEntryLabels D_801D0F00;
-extern u8              D_801ECDBC[];
+extern u8  D_80144F57;
+extern u16 D_80145594[];
 
-extern u8              D_80144F57;
-extern u16             D_80145594[];
 extern u8              D_80148480;
 extern u8              D_8014849B;
 extern s8              D_801484BD;
@@ -241,6 +239,8 @@ extern u8              D_801484EB;
  * their own symbols below; each is the cell the shared record names. */
 extern u8*             D_80148500;
 extern MenuChoicePanel D_80148504;
+extern NameEntryLabels D_801D0F00;
+extern u8              D_801ECDBC[];
 extern s16             D_80148508; /* signed scalar view of the panel's x */
 extern u8              D_8014850E; /* the panel's group */
 extern u8              D_8014850F; /* the panel's group first entry */
@@ -467,10 +467,6 @@ extern u8              s_PartyCharacterIds[3];
 extern u8              D_801ED613[];
 extern s8              D_801ED618;
 extern u8              D_801ED620;
-extern u8              D_801ED8BC;
-extern u8              D_801ED8BD;
-extern u8              D_801ED8D4;
-extern u8              D_801ED8D5;
 /* D_801ED63C */
 extern u8              g_EquipPreview[EQUIP_SLOT_COUNT];
 extern s8              D_801ED648;
@@ -494,6 +490,10 @@ extern u8              D_801ED7F4;
 extern u8              D_801ED7F8;
 /* D_801ED860 */
 extern u8              g_MenuStartReturnStep;
+extern u8              D_801ED8BC;
+extern u8              D_801ED8BD;
+extern u8              D_801ED8D4;
+extern u8              D_801ED8D5;
 extern u8              g_MenuStartStep;
 extern u8              D_801ED864;
 extern u8              D_801ED868;
@@ -512,14 +512,14 @@ extern u8              s_SkillOrderGroups[4][6];
 extern u8              s_SkillOrderKinds[3][6];
 extern Callback        g_MenuCampSubSteps[5];
 extern Callback        g_MenuCampSteps[5];
+/* D_801ED05C */
+extern u8              g_NameEntryControlsFrame[];
 
 /* The name entry command labels, the grid's dot string and the control window's sprite table. */
 /* D_801ED1B8 */
 extern u8* g_NameEntryCommandLabels[];
 /* D_801ED1D4 */
 extern u8* g_NameEntryGridDot;
-/* D_801ED05C */
-extern u8  g_NameEntryControlsFrame[];
 
 /* Shared calls the start-screen units make: the main executable's window,
  * input, resource and sound helpers, and the game overlay's draw helpers. */
@@ -851,11 +851,13 @@ extern u8        D_801EC938[];
 extern u8        g_MenuClockColon[];
 extern u8*       g_MenuCommandLabels[];  /* label id -> button text */
 extern u8        g_MenuCommandRows[][5]; /* button count, then four label ids */
+extern u8        D_801485B8;
 extern u8        D_801ECD0C[];
 extern u8        D_801ECD14[];
 extern u8        D_801ECDAC[];
 extern u8        D_801ECDB4[];
 extern s32       D_801ECFB8;
+extern u8        D_801ED105;
 extern const u16 D_801ED1FC[];
 extern const u16 D_801ED1FE[];
 extern const u16 D_801ED200[];
@@ -869,16 +871,14 @@ extern s8        D_801ED654;
 extern u8        D_801ED660;
 extern u8        D_801ED664;
 extern s8        D_801ED668;
+extern s8        D_801ED66C;
 extern s8        D_801ED670;
 extern s8        D_801ED674;
 extern s8        D_801ED678;
 extern s8        D_801ED67C;
 extern u8        D_801ED69C;
-extern u8        D_801ED878[];
 extern u8        D_801ED7FC;
-extern s8        D_801ED66C;
-extern u8        D_801ED105;
-extern u8        D_801485B8;
+extern u8        D_801ED878[];
 void             func_801EA1F0(MenuPanelTask* task);
 
 /* Pick the party record the record index selects: record 0 is the saved

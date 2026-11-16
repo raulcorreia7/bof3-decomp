@@ -19,8 +19,8 @@ typedef struct Magic129Steps {
     Callback steps[MAGIC129_STEP_COUNT];
 } Magic129Steps;
 
-extern Magic129Steps D_801EEC04;
 /* The two staged screen points: the target (+0x04) and the start (+0x00). */
 extern s16           D_1F800008[];
+extern Magic129Steps D_801EEC04;
 
 #endif
