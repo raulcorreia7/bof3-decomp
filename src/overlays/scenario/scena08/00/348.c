@@ -1074,11 +1074,11 @@ MATCH void func_801FA32C(void) {
     u8 i;
 
     for (i = 0; i < CHARACTER_COUNT; i++) {
-        g_Characters[i].unk_07 |= 1;
+        g_Characters[i].party_flags |= 1;
     }
     Char_RebuildPartyStats();
     for (i = 1; i < CHARACTER_COUNT; i++) {
-        g_Characters[i].unk_07 &= 0xFE;
+        g_Characters[i].party_flags &= 0xFE;
     }
 }
 

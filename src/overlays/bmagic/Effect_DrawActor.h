@@ -2,7 +2,6 @@
 /* Effect_DrawActor (magic055, magic091) */
 void func_801EF7B0(void);
 void Effect_SetActorMatrix(void);
-void func_801EF9E4(void);
 
 MATCH void Effect_DrawActor(void) {
     ActorEffectSteps handlers = D_801EEC04;
