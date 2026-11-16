@@ -1,10 +1,10 @@
 /* Outside a game-entry state 1, when the work step byte no longer matches
- * the option flags, or a step-1 actor no longer matches the world context
- * seed, arms the restart: byte 0x48 with 2, byte 0x09 with 8 and handler
+ * the option flags, or a step-1 actor no longer matches the entry
+ * area id, arms the restart: byte 0x48 with 2, byte 0x09 with 8 and handler
  * state 4.
  */
 /* func_801F32A4 (area115), func_801F32B8 (area121) */
-MATCH void Area_RequestRestartOnContextChange(void) {
+MATCH void Area_RequestRestartOnEntryChange(void) {
     Actor* work;
     u8     step;
 
@@ -16,7 +16,7 @@ MATCH void Area_RequestRestartOnContextChange(void) {
             if (step != 1) {
                 goto tail;
             }
-            if (work->unk_18 == g_GameContextSeed) {
+            if (work->unk_18 == g_GameEntryAreaId) {
                 goto tail;
             }
         }

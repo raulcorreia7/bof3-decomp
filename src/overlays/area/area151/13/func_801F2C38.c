@@ -17,7 +17,7 @@ MATCH void func_801F2C38(void) {
             Game_SetScriptActive();
             if ((Area_GetCellCode(D_80145EC6, D_80145ECA) & BYTE_MASK) == 0xA1) {
                 for (index = 0; index < 7; index++) {
-                    if (g_GameContextSeed == D_801F5338[index][0]) {
+                    if (g_GameEntryAreaId == D_801F5338[index][0]) {
                         break;
                     }
                 }

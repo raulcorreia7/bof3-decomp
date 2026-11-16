@@ -49,7 +49,7 @@ MATCH void SYS_Main(void) {
         EMI_Update();
         g_SysLastVSync = VSync(1);
         DrawSync(0);
-        SYS_SubmitFrame();
+        SYS_LinkOt();
         g_FrameCount++;
     }
 }

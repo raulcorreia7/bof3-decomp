@@ -1,7 +1,7 @@
 #include "area033_13.h"
 
 /* func_801F31D4 */
-MATCH void Area_RequestRestartOnContextChange(void) {
+MATCH void Area_RequestRestartOnEntryChange(void) {
     u8* scratch;
     u8  step;
 
@@ -13,7 +13,7 @@ MATCH void Area_RequestRestartOnContextChange(void) {
             if (step != 1) {
                 goto tail;
             }
-            if (*(u32*)(scratch + 0x18) == g_GameContextSeed) {
+            if (*(u32*)(scratch + 0x18) == g_GameEntryAreaId) {
                 goto tail;
             }
         }

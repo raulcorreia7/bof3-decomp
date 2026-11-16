@@ -10,11 +10,11 @@ MATCH void Game_UpdateAreaLoad(void) {
     u8  request_kind;
     s32 pending_world;
 
-    context_seed      = g_GameContextSeed;
+    context_seed      = g_GameEntryAreaId;
     context_a         = g_GameEntryPosX;
     world_flags       = g_AreaWalkFlags;
     context_b         = g_GameEntryPosY;
-    context_kind      = g_GameContextKind;
+    context_kind      = g_GameEntryFacing;
     g_Game.walk_flags = world_flags & ~AREA_WALK_ENTRY_ACTIVE;
     func_8019FAA0(context_seed, context_a, context_b, context_kind);
 

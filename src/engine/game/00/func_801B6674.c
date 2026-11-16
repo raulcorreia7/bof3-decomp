@@ -23,7 +23,7 @@ NON_MATCHING bool func_801B6674(void) {
             }
             func_801B690C();
             g_Game.walk_flags = g_Game.walk_flags & ~AREA_WALK_TRANSITION;
-            Game_RequestAreaChange(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);
+            Game_RequestAreaChange(g_GameEntryAreaId, g_GameEntryPosX, g_GameEntryPosY, g_GameEntryFacing);
             return 1;
         }
         g_SceneEventState.mode = 0x37;
@@ -51,7 +51,7 @@ NON_MATCHING bool func_801B6674(void) {
         D_80145048        = g_GameAreaId;
         D_80145044        = g_Task->pos.y.fixed;
         D_80145040        = g_Task->pos.x.fixed;
-        Game_RequestAreaChange(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);
+        Game_RequestAreaChange(g_GameEntryAreaId, g_GameEntryPosX, g_GameEntryPosY, g_GameEntryFacing);
         return 1;
     }
     if ((g_InputPressed & g_InputMasks[WORLD_INPUT_LOCATION_GUIDE]) && ((u8)(temp + 0x60) < 2)) {

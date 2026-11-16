@@ -6,16 +6,16 @@ NON_MATCHING u8 func_801F5D6C(void) {
 
     if ((g_InputPressed & PADstart) != 0) {
         index             = (D_8014933C < 1) ? 3 : 0;
-        g_GameContextSeed = D_801F6388[index];
+        g_GameEntryAreaId = D_801F6388[index];
         g_GameEntryPosX   = D_801F6389[index] << 16;
         g_GameEntryPosY   = D_801F638A[index] << 16;
-        g_GameContextKind = 4;
+        g_GameEntryFacing = 4;
         D_80145040        = g_Task->pos.x.fixed;
         D_80145044        = g_Task->pos.y.fixed;
         D_80145048        = g_GameAreaId;
         D_8014504A += 1;
         D_8014504B = (g_Task->direction_08 + D_801F62F0[rand() & 3]) & 0xF;
-        Game_RequestAreaChange(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);
+        Game_RequestAreaChange(g_GameEntryAreaId, g_GameEntryPosX, g_GameEntryPosY, g_GameEntryFacing);
         return 1;
     }
     return 0;

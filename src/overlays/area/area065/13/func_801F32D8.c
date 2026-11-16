@@ -12,7 +12,7 @@ MATCH void func_801F32D8(void) {
             if (step != 1) {
                 goto tail; /* skips the arming stores: run the step only */
             }
-            if (scratch->unk_18 == g_GameContextSeed) {
+            if (scratch->unk_18 == g_GameEntryAreaId) {
                 goto tail; /* skips the arming stores: run the step only */
             }
         }

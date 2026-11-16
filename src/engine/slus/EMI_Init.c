@@ -22,11 +22,11 @@ MATCH void EMI_Init(void) {
     /* FAKE: +0x53 derivation keeps original address formation. */
     slot_state        = (u8*)loader_state + 0x53;
 
-    *loader_state    = bootstrap_address;
-    g_EmiServiceMode = 0;
-    D_8014648A       = 0;
-    D_8014648C       = 0;
-    D_8014681A       = 0xFFFF;
+    *loader_state   = bootstrap_address;
+    g_EmiStreamMode = 0;
+    D_8014648A      = 0;
+    D_8014648C      = 0;
+    D_8014681A      = 0xFFFF;
 
     do {
         *slot_state = empty_state;

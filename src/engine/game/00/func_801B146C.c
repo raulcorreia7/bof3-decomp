@@ -49,7 +49,7 @@ MATCH void func_801B146C(void) {
             work_c = g_Task;
             if ((Area_GetCellCode(COORD_INT(work_c->pos.x), COORD_INT(work_c->pos.y)) & BYTE_MASK) == 0xAF) {
                 func_801B5BDC(g_Task->direction_08);
-                Game_RequestAreaChange(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);
+                Game_RequestAreaChange(g_GameEntryAreaId, g_GameEntryPosX, g_GameEntryPosY, g_GameEntryFacing);
                 g_GameEntryMode   = 0;
                 g_GameRequestKind = 0xC;
                 return;

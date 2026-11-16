@@ -78,7 +78,7 @@ MATCH void SYS_ShowException(void) {
         UI_DrawGlyphString(142, 36, 4, (void*)g_UiFormatBuffer);
 
         DrawSync(0);
-        SYS_SubmitFrame();
+        SYS_LinkOt();
         g_FrameCount += 1;
     }
 }

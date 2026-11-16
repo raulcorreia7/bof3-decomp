@@ -19,7 +19,7 @@ MATCH void func_801F3020(void) {
 
     check = (u8*)g_Task;
     if (check[0x0B] == 1) {
-        key = g_GameContextSeed;
+        key = g_GameEntryAreaId;
         i   = 0;
     scan:
         next = i;

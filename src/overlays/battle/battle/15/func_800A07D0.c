@@ -6,15 +6,15 @@
  * 0xFFFF; it re-reads the selector before storing the second result.
  */
 MATCH void func_800A07D0(void) {
-    BattleSelectionContext* ctx;
-    s32                     first_doubled;
-    s32                     second_doubled;
-    u16                     first;
-    u16                     second;
-    u32                     index;
+    BattleTargetSelection* ctx;
+    s32                    first_doubled;
+    s32                    second_doubled;
+    u16                    first;
+    u16                    second;
+    u32                    index;
 
     Battle_MarkDamageApplied();
-    ctx           = (BattleSelectionContext*)&g_Battle.target;
+    ctx           = (BattleTargetSelection*)&g_Battle.target;
     index         = ctx->sel - 3u;
     first         = g_BattleEnemyBattlers[index].zenny;
     second        = g_BattleEnemyBattlers[index].exp;

@@ -19,7 +19,7 @@ segments:
       - [0x478, c, Area_InitSceneActor]
       - [0x504, c, func_801F3104]
       - [0x63C, c, Area_WidenActor]
-      - [0x6B8, c, Area_RequestRestartOnContextChange]
+      - [0x6B8, c, Area_RequestRestartOnEntryChange]
       - [0x778, c, Area_NarrowActorOrClear]
       - [0x818, c, Actor_SetScreenOrigin]
       - [0x834, c, func_801F3434]
