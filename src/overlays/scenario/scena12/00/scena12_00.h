@@ -19,14 +19,12 @@ extern volatile s32 D_80147B2C;
 extern s32          g_AreaFocusY[];
 
 /* D_801FD178 */
-extern Callback  g_SceneEntityDispatch[];
-extern Callback  D_801FD184[];
-extern Callback  D_801FD190[];
-extern Callback  D_801FD198[];
-extern Callback  D_801FD1B8[];
-extern Callback  D_801FD1C4[];
+extern Callback D_801FD184[];
+extern Callback D_801FD190[];
+extern Callback D_801FD198[];
+extern Callback D_801FD1B8[];
+extern Callback D_801FD1C4[];
 /* D_801FD1EC */
-extern SceneFunc g_SceneActorDispatch[];
 
 extern union {
     u8  bytes[4];
