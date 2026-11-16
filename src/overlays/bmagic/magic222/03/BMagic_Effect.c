@@ -66,7 +66,7 @@ MATCH void func_801EEFC8(void) {
     PartyMember* work;
 
     if (--g_Task->unk_09 == 0) {
-        g_Task->unk_14      = 0x7800000;
+        g_Task->unk_14      = TO_COORD(0x780);
         g_Task->unk_20      = TO_COORD(96);
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
