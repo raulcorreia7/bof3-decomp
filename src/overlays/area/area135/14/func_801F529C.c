@@ -82,15 +82,15 @@ MATCH void func_801F529C(void) {
         case 21:
             if (g_AreaCameraMoving == 0) {
                 func_801F61A8(139);
-                g_SpawnedActors[D_801F6BC0].header.mode = 2;
-                g_SceneEventState.step                  = 22;
-                g_AreaCameraStep                        = g_RouteSpeedScale[3] << 3;
+                g_SpawnedActors[g_SceneActorSlot].header.mode = 2;
+                g_SceneEventState.step                        = 22;
+                g_AreaCameraStep                              = g_RouteSpeedScale[3] << 3;
             }
             break;
         case 22:
             if (g_InputHeld & PADRdown) {
                 func_801F61A8(140);
-                g_SpawnedActors[D_801F6BC0].header.mode = 3;
+                g_SpawnedActors[g_SceneActorSlot].header.mode = 3;
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 9));
                 g_ScriptVars[3]        = 10;
                 g_SceneEventState.step = 23;
@@ -100,8 +100,8 @@ MATCH void func_801F529C(void) {
             func_801F6168(0);
             if (g_ScriptVars[3] == 11) {
                 func_801F61A8(141);
-                g_SpawnedActors[D_801F6BC0].header.mode = 2;
-                g_SceneEventState.step                  = 24;
+                g_SpawnedActors[g_SceneActorSlot].header.mode = 2;
+                g_SceneEventState.step                        = 24;
             }
             break;
         case 24:
@@ -112,7 +112,7 @@ MATCH void func_801F529C(void) {
         case 25:
             if (g_InputHeld & PADRdown) {
                 func_801F61A8(142);
-                g_SpawnedActors[D_801F6BC0].header.mode = 3;
+                g_SpawnedActors[g_SceneActorSlot].header.mode = 3;
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 9));
                 g_ScriptVars[3]        = 12;
                 g_SceneEventState.step = 26;
@@ -121,8 +121,8 @@ MATCH void func_801F529C(void) {
         case 26:
             func_801F6168(0);
             if (g_ScriptVars[3] == 13) {
-                g_SpawnedActors[D_801F6BC0].header.mode = 4;
-                g_SceneEventState.step                  = 27;
+                g_SpawnedActors[g_SceneActorSlot].header.mode = 4;
+                g_SceneEventState.step                        = 27;
             }
             break;
         case 27:
@@ -170,11 +170,11 @@ MATCH void func_801F529C(void) {
         case 30:
             func_801F6168(0);
             if (g_ScriptVars[3] == 21) {
-                g_AreaScrollTargetX                     = g_Game.members[0].pos.x.fixed;
-                g_AreaScrollTargetY                     = g_Game.members[0].pos.y.fixed;
-                g_AreaCameraStep                        = g_RouteSpeedScale[3] << 3;
-                g_SpawnedActors[D_801F6BC0].header.mode = 5;
-                g_SceneEventState.step                  = 31;
+                g_AreaScrollTargetX                           = g_Game.members[0].pos.x.fixed;
+                g_AreaScrollTargetY                           = g_Game.members[0].pos.y.fixed;
+                g_AreaCameraStep                              = g_RouteSpeedScale[3] << 3;
+                g_SpawnedActors[g_SceneActorSlot].header.mode = 5;
+                g_SceneEventState.step                        = 31;
             }
             break;
         case 31:
