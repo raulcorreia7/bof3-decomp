@@ -90,8 +90,6 @@ extern u8       g_MenuEquipCompareLabels[];
 extern u8       g_MenuEquipCompareSprites[];
 extern u8       g_MenuEquipSlotIcons[];
 extern u8       g_MenuEquipStatSprites[];
-extern u8       g_MenuEquipChoiceIds[];
-extern u8       g_MenuEquipChoiceCounts[];
 extern u8       g_MenuInventoryTab1OnSprites[];
 extern u8       D_801D9990[];
 extern u8       D_801D999C[];
