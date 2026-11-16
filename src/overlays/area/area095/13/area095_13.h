@@ -7,9 +7,17 @@
 #include "overlays/area/world02.h"
 #include "area/spad.h"
 
-extern u8 D_801F3684[];
+extern SVECTOR D_1F800014[];
+extern u8      D_801F3684[];
+/* The cell rows the floor quad walk reads: x, y and the signed depth of each. */
+extern u8      D_801F3694[];
+extern u8      D_801F3695[];
+extern s8      D_801F3696[];
 
-void func_801F2F3C(s32 arg0, s32 arg1);
+/* The quad part word: the tag in the high half, the tile in the low half. */
+#define AREA095_QUAD_PART_WORD ((0xB600u << 16) | 0xB102u)
+
+void func_801F2F3C(s32 depth, s32 height);
 void func_801F2C48(void);
 
 #endif
