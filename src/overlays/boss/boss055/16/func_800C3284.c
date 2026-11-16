@@ -17,10 +17,10 @@ MATCH void func_800C3284(void) {
     g_Task->unk_5F       = g_BattleEffectBattler->unk_5F;
 
     if (g_Task->unk_48 != 0) {
-        g_Task->unk_2E.half += Area_RoundSpriteCoordinate(D_800C34D4[g_Task->header.mode].x * g_Task->scale.x, g_Task->scale.x);
-        g_Task->unk_30.half += Area_RoundSpriteCoordinate(D_800C34D4[g_Task->header.mode].y * g_Task->scale.y, g_Task->scale.y);
+        g_Task->unk_2E.half += Area_RoundSpriteCoordinate(D_800C34D4[g_Task->header.mode].vx * g_Task->scale.x, g_Task->scale.x);
+        g_Task->unk_30.half += Area_RoundSpriteCoordinate(D_800C34D4[g_Task->header.mode].vy * g_Task->scale.y, g_Task->scale.y);
     } else {
-        g_Task->unk_2E.half += Area_RoundSpriteCoordinate(TO_COORD(D_800C34D4[g_Task->header.mode].x), TO_COORD(1));
-        g_Task->unk_30.half += Area_RoundSpriteCoordinate(TO_COORD(D_800C34D4[g_Task->header.mode].y), TO_COORD(1));
+        g_Task->unk_2E.half += Area_RoundSpriteCoordinate(TO_COORD(D_800C34D4[g_Task->header.mode].vx), TO_COORD(1));
+        g_Task->unk_30.half += Area_RoundSpriteCoordinate(TO_COORD(D_800C34D4[g_Task->header.mode].vy), TO_COORD(1));
     }
 }

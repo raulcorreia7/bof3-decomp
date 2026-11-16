@@ -14,12 +14,12 @@ MATCH void Effect_LaunchSparkle(void) {
         EFFECT_SPARKLE_TASK->pos.z  = battler->pos.z;
         EFFECT_SPARKLE_TASK->unk_20 = battler->unk_2E.half;
         EFFECT_SPARKLE_TASK->unk_22 = battler->unk_30.half;
-        if (EFFECT_SPARKLE_OFFSET().x < 0) {
-            EFFECT_SPARKLE_TASK->unk_20 += EFFECT_SPARKLE_OFFSET().x - RANDOM_MASK(7);
+        if (EFFECT_SPARKLE_OFFSET().vx < 0) {
+            EFFECT_SPARKLE_TASK->unk_20 += EFFECT_SPARKLE_OFFSET().vx - RANDOM_MASK(7);
         } else {
-            EFFECT_SPARKLE_TASK->unk_20 += EFFECT_SPARKLE_OFFSET().x + RANDOM_MASK(7);
+            EFFECT_SPARKLE_TASK->unk_20 += EFFECT_SPARKLE_OFFSET().vx + RANDOM_MASK(7);
         }
-        EFFECT_SPARKLE_TASK->unk_22 -= EFFECT_SPARKLE_OFFSET().y + RANDOM_MASK(7);
+        EFFECT_SPARKLE_TASK->unk_22 -= EFFECT_SPARKLE_OFFSET().vy + RANDOM_MASK(7);
         /* FAKE: reread the work pointer after the y store. */
         FAKE_BARRIER();
         EFFECT_SPARKLE_TASK->unk_08   = EFFECT_SPARKLE_TASK->unk_20;

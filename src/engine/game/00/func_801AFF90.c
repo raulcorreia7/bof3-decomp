@@ -6,7 +6,7 @@ MATCH s16 func_801AFF90(Pos2* origin, Pos2* first_point, Pos2* second_point) {
     s16 first_x;
     s16 first_y;
 
-    first_x = first_point->x;
-    first_y = first_point->y;
-    return (((first_x - origin->x) * (second_point->y - first_y)) - ((first_y - origin->y) * (second_point->x - first_x)));
+    first_x = first_point->vx;
+    first_y = first_point->vy;
+    return (((first_x - origin->vx) * (second_point->vy - first_y)) - ((first_y - origin->vy) * (second_point->vx - first_x)));
 }

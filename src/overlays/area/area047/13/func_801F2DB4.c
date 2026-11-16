@@ -13,7 +13,7 @@ MATCH void func_801F2DB4(s32* pos, s16 radius, u8 center_shade, u8 rim_shade) {
 
     Area_SetCameraMatrix(&matrix);
     Area_ProjectPoint(pos, &screen);
-    size.x = radius;
+    size.vx = radius;
     Game_ProjectWorldPoint(pos, &size, &projected);
 
     screen_radius = projected.x + ((g_FrameCount & 1) * 2);

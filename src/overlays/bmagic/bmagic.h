@@ -159,12 +159,12 @@ typedef Pos2 TrailPoint;
 /* Shift the points of the trail TRAIL[unk_04] from unk_0B up to unk_0A - 1 one
  * place toward the end, freeing the point at unk_0B. A statement macro: the
  * member declares s32 i. */
-#define BMAGIC_SHIFT_TRAIL(TRAIL)                                        \
-    i = g_Task->timer - 1;                                               \
-    while (i >= g_Task->param.unk_0B) {                                  \
-        (TRAIL)[g_Task->unk_04][i + 1].x = (TRAIL)[g_Task->unk_04][i].x; \
-        (TRAIL)[g_Task->unk_04][i + 1].y = (TRAIL)[g_Task->unk_04][i].y; \
-        i -= 1;                                                          \
+#define BMAGIC_SHIFT_TRAIL(TRAIL)                                          \
+    i = g_Task->timer - 1;                                                 \
+    while (i >= g_Task->param.unk_0B) {                                    \
+        (TRAIL)[g_Task->unk_04][i + 1].vx = (TRAIL)[g_Task->unk_04][i].vx; \
+        (TRAIL)[g_Task->unk_04][i + 1].vy = (TRAIL)[g_Task->unk_04][i].vy; \
+        i -= 1;                                                            \
     }
 
 /* Decrement the active effect ticker. */

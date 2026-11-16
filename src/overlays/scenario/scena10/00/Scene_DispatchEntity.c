@@ -211,7 +211,7 @@ MATCH void func_801F781C(u16 x, u16 y, u16 width, u16 height) {
         for (j = 0; j < count; j++) {
             glyph = D_801FE830[i][j];
             if (glyph != 10) {
-                func_801F79E8(D_801FE848[glyph].x + x, D_801FE848[glyph].y + y);
+                func_801F79E8(D_801FE848[glyph].vx + x, D_801FE848[glyph].vy + y);
             }
         }
         i++;

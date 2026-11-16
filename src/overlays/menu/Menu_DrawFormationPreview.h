@@ -82,8 +82,8 @@ MATCH void Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle
             shade[i] = FORMATION_SHADE_IDLE;
         }
 
-        g_MenuFormationSpots[i][0] = (layout->offsets[i].x * rcos(angle) - layout->offsets[i].y * rsin(angle)) >> 11;
-        g_MenuFormationSpots[i][1] = (layout->offsets[i].x * rsin(angle) + layout->offsets[i].y * rcos(angle)) >> 12;
+        g_MenuFormationSpots[i][0] = (layout->offsets[i].vx * rcos(angle) - layout->offsets[i].vy * rsin(angle)) >> 11;
+        g_MenuFormationSpots[i][1] = (layout->offsets[i].vx * rsin(angle) + layout->offsets[i].vy * rcos(angle)) >> 12;
         j <<= 1;
     }
 

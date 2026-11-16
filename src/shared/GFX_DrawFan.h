@@ -7,11 +7,11 @@ MATCH void GFX_DrawFan(Pos2* point, s16 radius, u16 angle, u8 colour) {
     i = 0;
     do {
         prim = GFX_BeginPolyG3(1);
-        setXY2(prim, point->x, point->y, point->x + FIXED_MUL(radius, rcos(angle)), point->y + FIXED_MUL(radius, rsin(angle)));
+        setXY2(prim, point->vx, point->vy, point->vx + FIXED_MUL(radius, rcos(angle)), point->vy + FIXED_MUL(radius, rsin(angle)));
         angle += 0x100;
-        prim->x2 = point->x + FIXED_MUL(radius, rcos(angle));
+        prim->x2 = point->vx + FIXED_MUL(radius, rcos(angle));
         i += 1;
-        prim->y2 = point->y + FIXED_MUL(radius, rsin(angle));
+        prim->y2 = point->vy + FIXED_MUL(radius, rsin(angle));
         prim->b0 = colour;
         prim->g0 = colour;
         prim->r0 = colour;
