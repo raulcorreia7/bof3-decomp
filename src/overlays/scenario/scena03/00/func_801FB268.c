@@ -57,8 +57,8 @@ NON_MATCHING void func_801FB268(void) {
                     g_SpawnedActors[g_ScratchPad[0]].camera_angle.z = g_AreaCameraAngle.vz;
                     g_SpawnedActors[g_ScratchPad[0]].layer          = 0x38;
                 }
+                g_SceneState.step_05 = 6;
             }
-            g_SceneState.step_05 = 6;
             break;
         case 6:
             if (g_ScriptVars[0] == 0x16) {
@@ -71,8 +71,8 @@ NON_MATCHING void func_801FB268(void) {
                     g_SpawnedActors[LOB(g_SceneState.unk_03)].pos.y.fixed = 0x4F0000;
                     g_SpawnedActors[LOB(g_SceneState.unk_03)].pos.z.fixed = TO_COORD(0x480);
                 }
+                g_SceneState.step_05 = 7;
             }
-            g_SceneState.step_05 = 7;
             break;
         case 7:
             if (g_ScriptVars[0] == 0x18) {
@@ -86,8 +86,8 @@ NON_MATCHING void func_801FB268(void) {
                     g_SpawnedActors[g_ScratchPad[0]].camera_angle.z = g_AreaCameraAngle.vz;
                     g_SpawnedActors[g_ScratchPad[0]].layer          = 0x38;
                 }
+                g_SceneState.step_05 = 8;
             }
-            g_SceneState.step_05 = 8;
             break;
         case 8:
             if (g_ScriptVars[0] == 0x27) {
