@@ -14,7 +14,7 @@ MATCH void Fishing_CastGaugeSweep(void) {
     work  = (FishingState*)g_Task;
     speed = work->step_delta_18;
     if (speed != 0) {
-        switch (g_FishingRodRow->cast_sweep_direction_01) {
+        switch (g_FishingRodRow->cast_sweep_direction) {
             case 0:
                 work->pos_x_0C = work->pos_x_0C + speed;
                 if ((s32)work->step_delta_18 > 0 && work->pos_x_0C >= 0xFF) {

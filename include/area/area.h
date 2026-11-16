@@ -123,7 +123,7 @@ ASSERT_SIZE(PaletteBank, AREA_PALETTE_ROWS* AREA_PALETTE_ROW);
 #define AREA_AUX_ID_FIRST          0xFCu
 #define AREA_AUX_ID_LAST           0x104u
 
-/* The area program's work memory (AreaWorkPointers.work_08). */
+/* The area program's work memory (AreaWorkPointers.work). */
 #define AREA_WORK                  0x800E4800u
 
 #define WORLD_VERTEX_POINT_SIZE    0x06
@@ -158,29 +158,29 @@ ASSERT_SIZE(PaletteBank, AREA_PALETTE_ROWS* AREA_PALETTE_ROW);
  * `@0x80158B24`, `@0x8015507C`, `@0x80155B40`; the grid readers live in
  * emi/etc/game/00 (`@0x8019C4F0`, `@0x8019C794`, `@0x8019EC20`). */
 typedef struct AreaMapBundle {
-    u8  width;                       /* 0x00 - grid width in cells */
-    u8  height;                      /* 0x01 */
-    u16 grid_off4_02;                /* 0x02 - cell grid, 4-byte units:
+    u8  width;              /* 0x00 - grid width in cells */
+    u8  height;             /* 0x01 */
+    u16 grid_off4_02;       /* 0x02 - cell grid, 4-byte units:
                                 *        (0x30 + width*height*4 + align4(width*height)) / 4 */
-    u16 tile_table_offsets_04[4][2]; /* 0x04-0x13 - [selector][table], A then B */
-    u16 byte_code_off4_14;           /* 0x14 - per-cell byte-code table (`g_AreaCellCodes`):
+    u16 tile_offsets[4][2]; /* 0x04-0x13 - [selector][table], A then B */
+    u16 byte_code_off4_14;  /* 0x14 - per-cell byte-code table (`g_AreaCellCodes`):
                                 *        (0x30 + width*height*4) / 4; equals
                                 *        width*height + 12 in 200/200 payloads */
-    u16 zero_16;                     /* 0x16 - zero in 200/200, no reader */
-    u16 zero_18;                     /* 0x18 - zero in 200/200, no reader */
-    u16 color_1A[2];                 /* 0x1A-0x1D - runtime color words, written by the engine
+    u16 zero_16;            /* 0x16 - zero in 200/200, no reader */
+    u16 zero_18;            /* 0x18 - zero in 200/200, no reader */
+    u16 color[2];           /* 0x1A-0x1D - runtime color words, written by the engine
                                 *            (`@0x801583BC` is the only header store) and
                                 *            read at `0x8010401A + (mask >> 3) * 2` */
-    u16 scroll_1E;                   /* 0x1E - shipped 0xF300-0xFA90 in 76/200, meaning open */
-    u16 list_base_20;                /* 0x20 - record list, opcode byte & 0x3f */
-    u16 list_base_22;                /* 0x22 - record list, opcode byte & 0x7f */
-    u16 record_region_24;            /* 0x24 - indexed by the 4-byte-unit ids in g_AreaCellGrid */
-    u16 zero_26;                     /* 0x26 - zero in 200/200, no reader */
-    u16 object_list_28;              /* 0x28 - tag + body size, walked by the map interpreter */
-    u16 height_off4_2A;              /* 0x2A - height-byte table; u16[+0x2A]*4 == size in 187
+    u16 scroll;             /* 0x1E - shipped 0xF300-0xFA90 in 76/200, meaning open */
+    u16 list_base_20;       /* 0x20 - record list, opcode byte & 0x3f */
+    u16 list_base_22;       /* 0x22 - record list, opcode byte & 0x7f */
+    u16 record_region_24;   /* 0x24 - indexed by the 4-byte-unit ids in g_AreaCellGrid */
+    u16 zero_26;            /* 0x26 - zero in 200/200, no reader */
+    u16 object_list_28;     /* 0x28 - tag + body size, walked by the map interpreter */
+    u16 height_off4_2A;     /* 0x2A - height-byte table; u16[+0x2A]*4 == size in 187
                                 *        payloads, == size - width*height in the rest */
-    u16 zero_2C;                     /* 0x2C - zero in 200/200, no reader */
-    u16 zero_2E;                     /* 0x2E - zero in 200/200, no reader */
+    u16 zero_2C;            /* 0x2C - zero in 200/200, no reader */
+    u16 zero_2E;            /* 0x2E - zero in 200/200, no reader */
 } AreaMapBundle;
 
 ASSERT_SIZE(AreaMapBundle, AREA_MAP_BUNDLE_SIZE);
@@ -190,7 +190,7 @@ ASSERT_SIZE(AreaMapBundle, AREA_MAP_BUNDLE_SIZE);
 ASSERT_OFFSET(AreaMapBundle, width, 0x00);
 ASSERT_OFFSET(AreaMapBundle, height, 0x01);
 ASSERT_OFFSET(AreaMapBundle, grid_off4_02, 0x02);
-ASSERT_OFFSET(AreaMapBundle, tile_table_offsets_04, 0x04);
+ASSERT_OFFSET(AreaMapBundle, tile_offsets, 0x04);
 ASSERT_OFFSET(AreaMapBundle, byte_code_off4_14, 0x14);
 ASSERT_OFFSET(AreaMapBundle, list_base_20, 0x20);
 ASSERT_OFFSET(AreaMapBundle, height_off4_2A, 0x2A);
@@ -239,7 +239,7 @@ typedef enum FieldTaskMode {
  * `@0x801530D0`, `@0x8015684C` and `@0x80157CE4`.
  */
 typedef struct AreaCellCorners {
-    s8 corner_height_00[4];
+    s8 corner_height[4];
 } AreaCellCorners;
 
 ASSERT_SIZE(AreaCellCorners, AREA_MAP_CELL_RECORD_SIZE);
@@ -268,8 +268,8 @@ extern s16      g_AreaGridRowCursor;
 
 /* Four-byte tile table A rectangle. */
 typedef struct AreaTileRect {
-    u8 dv_00;
-    u8 du_01;
+    u8 dv;
+    u8 du;
     u8 v_02;
     s8 u_03; /* signed: `lb a0,3(a1)` at 0x80155670; 0x80 reads as -128 */
 } AreaTileRect;
@@ -278,16 +278,16 @@ ASSERT_SIZE(AreaTileRect, AREA_TILE_RECT_SIZE);
 
 /* Eight-byte tile table B descriptor: four UV pairs. */
 typedef struct AreaTileQuad {
-    u8 uv_pairs_00[4][2];
+    u8 uv_pairs[4][2];
 } AreaTileQuad;
 
 ASSERT_SIZE(AreaTileQuad, AREA_TILE_QUAD_SIZE);
 
 /* +0x20/+0x22 list entry header; the body follows as u32 words. */
 typedef struct AreaMapListHeader {
-    u8 operand_00[2];
+    u8 operand[2];
     u8 word_count_02; /* includes this 4-byte header */
-    u8 opcode_03;
+    u8 opcode;
 } AreaMapListHeader;
 
 ASSERT_SIZE(AreaMapListHeader, AREA_MAP_LIST_RECORD_HEADER_SIZE);
@@ -303,8 +303,8 @@ ASSERT_SIZE(AreaMapCellHeader, AREA_MAP_CELL_HEADER_SIZE);
 
 /* +0x28 object header; the body follows as body_words_02 words. */
 typedef struct AreaMapObjectHeader {
-    u16 tag_00;
-    u16 body_words_02;
+    u16 tag;
+    u16 body_words;
 } AreaMapObjectHeader;
 
 ASSERT_SIZE(AreaMapObjectHeader, AREA_MAP_OBJECT_HEADER_SIZE);
@@ -368,10 +368,10 @@ typedef struct AreaActorDefs {
  * records); this type is what a reader casts the address to when it wants all
  * four, so the words keep their own declarations. */
 typedef struct AreaWorkPointers {
-    u32 script_table_00;  /* 0x00 -> 0x800D3800 (swapped per battle handler) */
-    u32 scene_records_04; /* 0x04 -> 0x800E3804 */
-    u32 work_08;          /* 0x08 -> 0x800E4800 */
-    u32 code_base_0C;     /* 0x0C -> 0x800F5000 */
+    u32 scripts;       /* 0x00 -> 0x800D3800 (swapped per battle handler) */
+    u32 scene_records; /* 0x04 -> 0x800E3804 */
+    u32 work;          /* 0x08 -> 0x800E4800 */
+    u32 code_base;     /* 0x0C -> 0x800F5000 */
 } AreaWorkPointers;
 
 ASSERT_SIZE(AreaWorkPointers, AREA_WORK_POINTERS_SIZE);
@@ -404,22 +404,22 @@ ASSERT_OFFSET(AreaTrail, points, 0x18);
 
 /* One entry of the spawn table: a shrinking glow disc at an actor position. */
 typedef struct AreaSpawnSlot {
-    u8       active;        /* 0x00 - 0 marks a free slot */
-    u8       unk_01;        /* 0x01 */
-    u8       life_02;       /* 0x02 - frames left; counts down and frees the slot at 0 */
-    u8       unk_03;        /* 0x03 */
-    WorldPos pos;           /* 0x04 */
-    u8       unk_10[4];     /* 0x10 */
-    u16      radius_14;     /* 0x14 - disc radius, shrinks every frame */
-    u8       core_shade_16; /* 0x16 - shade at the disc centre */
-    u8       rim_shade_17;  /* 0x17 - shade at the disc rim */
+    u8       active;     /* 0x00 - 0 marks a free slot */
+    u8       unk_01;     /* 0x01 */
+    u8       life;       /* 0x02 - frames left; counts down and frees the slot at 0 */
+    u8       unk_03;     /* 0x03 */
+    WorldPos pos;        /* 0x04 */
+    u8       unk_10[4];  /* 0x10 */
+    u16      radius;     /* 0x14 - disc radius, shrinks every frame */
+    u8       core_shade; /* 0x16 - shade at the disc centre */
+    u8       rim_shade;  /* 0x17 - shade at the disc rim */
 } AreaSpawnSlot;
 
 ASSERT_SIZE(AreaSpawnSlot, 0x18);
 ASSERT_OFFSET(AreaSpawnSlot, pos, 0x04);
-ASSERT_OFFSET(AreaSpawnSlot, radius_14, 0x14);
-ASSERT_OFFSET(AreaSpawnSlot, core_shade_16, 0x16);
-ASSERT_OFFSET(AreaSpawnSlot, rim_shade_17, 0x17);
+ASSERT_OFFSET(AreaSpawnSlot, radius, 0x14);
+ASSERT_OFFSET(AreaSpawnSlot, core_shade, 0x16);
+ASSERT_OFFSET(AreaSpawnSlot, rim_shade, 0x17);
 
 #define AREA_RING_POINTS     16
 #define AREA_RING_ANGLE_STEP 0x100

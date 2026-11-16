@@ -27,7 +27,7 @@ typedef struct WinGlyphGeometry {
 typedef struct GameUIBannerState {
     u16 scroll;
     u16 alpha;
-    u8  reserved_04[11];
+    u8  reserved[11];
     u8  phase;
 } GameUIBannerState;
 

@@ -106,20 +106,20 @@ typedef struct DropChances {
 /* The battle panel's own 0x24-stride entry table at 0x80148332: the base
  * symbol is the table's first byte, so its fields start at +0. */
 typedef struct BattlePanel {
-    u8  mode_00;    /* +0x00 panel mode; Battle_OpenPanels writes 5 and 7 */
-    u8  unk_01;     /* +0x01 */
-    s16 x_02;       /* +0x02 panel x */
-    s16 y_04;       /* +0x04 panel y */
-    u8  unk_06;     /* +0x06 */
-    u8  unk_07;     /* +0x07 */
-    u8  battler_08; /* +0x08 the battler the entry belongs to */
+    u8  mode_00; /* +0x00 panel mode; Battle_OpenPanels writes 5 and 7 */
+    u8  unk_01;  /* +0x01 */
+    s16 x_02;    /* +0x02 panel x */
+    s16 y_04;    /* +0x04 panel y */
+    u8  unk_06;  /* +0x06 */
+    u8  unk_07;  /* +0x07 */
+    u8  battler; /* +0x08 the battler the entry belongs to */
     u8  pad_09[0x1B];
 } BattlePanel;
 
 ASSERT_SIZE(BattlePanel, 0x24);
 ASSERT_OFFSET(BattlePanel, x_02, 0x02);
 ASSERT_OFFSET(BattlePanel, y_04, 0x04);
-ASSERT_OFFSET(BattlePanel, battler_08, 0x08);
+ASSERT_OFFSET(BattlePanel, battler, 0x08);
 
 /* The battle mode byte 0x801462E0 selects one of these six handlers, copied to
  * the stack from 0x801D0C04. */

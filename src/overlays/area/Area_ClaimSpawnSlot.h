@@ -7,15 +7,15 @@ MATCH void Area_ClaimSpawnSlot(void) {
     slot = MEM_PTR(AreaSpawnSlot, AREA_WORK);
     for (i = 0; i < AREA_SPAWN_SLOT_COUNT; i++) {
         if (slot->active == 0) {
-            slot->active        = 1;
-            slot->unk_01        = 0;
-            slot->life_02       = AREA_SPAWN_SLOT_LIFE;
-            slot->pos.x         = g_Task->pos.x;
-            slot->pos.y         = g_Task->pos.y;
-            slot->pos.z         = g_Task->pos.z;
-            slot->radius_14     = AREA_SPAWN_SLOT_RADIUS;
-            slot->core_shade_16 = AREA_SPAWN_SLOT_CORE_SHADE;
-            slot->rim_shade_17  = 0;
+            slot->active     = 1;
+            slot->unk_01     = 0;
+            slot->life       = AREA_SPAWN_SLOT_LIFE;
+            slot->pos.x      = g_Task->pos.x;
+            slot->pos.y      = g_Task->pos.y;
+            slot->pos.z      = g_Task->pos.z;
+            slot->radius     = AREA_SPAWN_SLOT_RADIUS;
+            slot->core_shade = AREA_SPAWN_SLOT_CORE_SHADE;
+            slot->rim_shade  = 0;
             return;
         }
         slot++;

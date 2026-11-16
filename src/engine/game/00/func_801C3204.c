@@ -9,6 +9,6 @@ MATCH void func_801C3204(void) {
     }
     index = g_Game.current->character_index;
     if (g_Characters[index].status & STATUS_CONFUSED) {
-        g_Game.current->u.field.countdown_119 = 0x28;
+        g_Game.current->u.field.countdown = 0x28;
     }
 }

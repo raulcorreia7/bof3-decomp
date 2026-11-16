@@ -52,7 +52,7 @@ NON_MATCHING s32 Area_ApplyTileToQuad(u32 part_word, void* prim, s32 mode) {
     if (word & 0xF00) {
         if (word & 0x800) {
             rect       = (AreaTileRectWord*)((word & 0x7FF) * 8 + MAP_BUNDLE_BASE);
-            rect       = (AreaTileRectWord*)(g_AreaMapBundle.tile_table_offsets_04[sel][1] * 4 + (u32)rect);
+            rect       = (AreaTileRectWord*)(g_AreaMapBundle.tile_offsets[sel][1] * 4 + (u32)rect);
             u          = rect->corner.u;
             v          = rect->box.v & 0xFF;
             uv[1].at.u = u;
@@ -68,7 +68,7 @@ NON_MATCHING s32 Area_ApplyTileToQuad(u32 part_word, void* prim, s32 mode) {
             uv[4].at.v = rect->box.height;
         } else {
             rect       = (AreaTileRectWord*)((word & 0xFF) * 4 + MAP_BUNDLE_BASE);
-            rect       = (AreaTileRectWord*)(g_AreaMapBundle.tile_table_offsets_04[sel][0] * 4 + (u32)rect);
+            rect       = (AreaTileRectWord*)(g_AreaMapBundle.tile_offsets[sel][0] * 4 + (u32)rect);
             u          = rect->corner.u;
             v          = rect->box.v & 0xFF;
             uv[1].at.u = u;

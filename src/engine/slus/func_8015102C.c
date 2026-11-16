@@ -17,20 +17,20 @@ MATCH void func_8015102C(void) {
     }
     one                     = 1;
     g_MessageState.count_06 = one;
-    phase                   = g_MessageState.phase_18 + 1;
-    g_MessageState.phase_18 = phase;
+    phase                   = g_MessageState.phase + 1;
+    g_MessageState.phase    = phase;
     if ((phase & BYTE_MASK) == 7) {
         if ((g_MessageState.state_00 == 4) || (g_MessageState.state_00 == 5)) {
             Message_StartRequest();
         } else {
-            g_MessageState.selection_01 = 0;
-            g_MessageState.state_00     = one;
-            cursor                      = g_MessageState.cursor_10;
-            g_MessageState.count_06     = 8;
-            g_MessageState.scroll_28    = 0;
-            g_MessageState.index_19     = 0;
-            g_MessageState.phase_18     = 0;
-            g_MessageState.entry_0C     = cursor;
+            g_MessageState.selection = 0;
+            g_MessageState.state_00  = one;
+            cursor                   = g_MessageState.cursor_10;
+            g_MessageState.count_06  = 8;
+            g_MessageState.scroll    = 0;
+            g_MessageState.index_19  = 0;
+            g_MessageState.phase     = 0;
+            g_MessageState.entry     = cursor;
             g_MessageState.flags_04 &= 0xFFF3;
         }
     }

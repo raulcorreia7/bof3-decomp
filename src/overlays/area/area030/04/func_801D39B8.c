@@ -13,7 +13,7 @@ MATCH void func_801D39B8(void) {
 
     record         = FISHING_STATE;
     table          = g_FishingPromptSets;
-    column         = record->column_4A;
+    column         = record->column;
     row            = table[record->cue_index_06];
     record->row_4B = row[column];
 

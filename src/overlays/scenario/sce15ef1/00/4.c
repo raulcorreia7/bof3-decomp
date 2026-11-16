@@ -328,14 +328,14 @@ MATCH void func_801D19C8(void) {
     slot = D_801D39A8;
     for (i = 0; i < EFFECT_SLOT_COUNT; slot++, i++) {
         if (slot->active == 0) {
-            slot->active  = 1;
-            slot->unk_01  = 0;
-            slot->life_02 = 16;
-            actor         = g_Task;
+            slot->active = 1;
+            slot->unk_01 = 0;
+            slot->life   = 16;
+            actor        = g_Task;
             WorldPos_Copy(&slot->pos, &actor->pos);
-            slot->radius_14     = 256;
-            slot->core_shade_16 = 96;
-            slot->rim_shade_17  = 0;
+            slot->radius     = 256;
+            slot->core_shade = 96;
+            slot->rim_shade  = 0;
             return;
         }
     }
@@ -353,8 +353,8 @@ MATCH s32 func_801D1A60(void) {
     for (i = 0; i < EFFECT_SLOT_COUNT; slot++, i++) {
         if (slot->active != 0) {
             alive = 1;
-            slot->radius_14 -= 0x10;
-            if (--slot->life_02 == 0) {
+            slot->radius -= 0x10;
+            if (--slot->life == 0) {
                 slot->active = 0;
             }
             Area_DrawSpawnSlot(slot);

@@ -68,7 +68,7 @@ NON_MATCHING void Area_InitMapRenderer(void) {
     } else {
         D_8014933A = 0;
     }
-    height     = g_AreaMapBundle.scroll_1E;
+    height     = g_AreaMapBundle.scroll;
     D_8014933D = 0;
     if (height == 0) {
         height = g_AreaCameraHeight * -2;

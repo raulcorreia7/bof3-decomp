@@ -45,11 +45,11 @@ MATCH void func_801D3C74(void) {
         work->step_timer_09 = (work->step_timer_09 - 1);
         timer               = FISHING_STATE;
         if (timer->step_timer_09 == 0) {
-            timer->column_4A = (timer->column_4A + 1);
-            queue            = FISHING_STATE;
-            queue_pos        = queue->column_4A;
+            timer->column = (timer->column + 1);
+            queue         = FISHING_STATE;
+            queue_pos     = queue->column;
             if ((queue_pos >= FISHING_QUEUE_COLUMN_COUNT) || (g_FishingPromptSets[queue->cue_index_06][queue_pos] == GAME_NONE)) {
-                queue->column_4A = 0U;
+                queue->column = 0U;
             }
             if (D_80144125 != 7) {
                 entry = Actor_FindFreeSpawned();
@@ -58,7 +58,7 @@ MATCH void func_801D3C74(void) {
                     g_SpawnedActors[entry].type         = 0xF;
                     g_SpawnedActors[entry].header.mode  = 8;
                     g_SpawnedActors[entry].unk_06       = FISHING_STATE->cue_index_06;
-                    g_SpawnedActors[entry].unk_4A       = FISHING_STATE->column_4A;
+                    g_SpawnedActors[entry].unk_4A       = FISHING_STATE->column;
                     g_SpawnedActors[entry].link         = 0;
                 }
             }

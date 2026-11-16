@@ -19,8 +19,8 @@ MATCH void func_801B60DC(s32 actor_index) {
                 Actor_RequestScript(g_Task->direction_08);
             }
         }
-        g_Game.current->status.field.slot_12D = actor_index;
-        g_Task->header.mode                   = 0xB;
+        g_Game.current->status.field.slot = actor_index;
+        g_Task->header.mode               = 0xB;
         ACTOR_CLEAR_STEP();
     }
 }
