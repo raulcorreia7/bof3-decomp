@@ -7,6 +7,9 @@
 #include "overlays/area/world02.h"
 #include "area/spad.h"
 
+/* The projected cell, read unsigned: the primitives take it as a screen pixel. */
+extern u16 D_1F800034_U16[2];
+
 u8   Area_FindTaggedPartySlot(void);
 void func_801F482C(void);
 void func_801F49A0(s32 arg);

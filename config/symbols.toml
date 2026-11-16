@@ -5269,6 +5269,7 @@ Area_DrawLightPillar = { addr = 0x801F3D70, type = "func", source = "Draws a pil
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world02/area103/13"]
+D_1F800034_U16 = { addr = 0x1F800034, type = "u16", source = "The projected screen coordinates at 0x1F800034 read as unsigned halfwords x and y, the output RotTransPers writes.", alias = true }
 g_GameEntryStateWord = { addr = 0x80143B90, alias = true, source = "The game entry state word; func_801F3B28 tests it against 0x50005." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_FindTaggedPartySlot = { addr = 0x801F56B0, type = "func", source = "Returns the first index 0 to 2 of D_801F5D64 whose tag equals byte 0 of a battle party row, 0xFF when none match; func_801F560C calls it." }
