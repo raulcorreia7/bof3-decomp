@@ -39,7 +39,6 @@ ASSERT_SIZE(AreaRingRow, 0x18);
 
 void func_801F2DB4(s32* pos, s16 radius, u8 center_shade, u8 rim_shade);
 
-/* func_801F2F60 */
 void Area_DrawRingQuads(AreaRingRow* row);
 
 void func_801F31F4(s16 scale);
