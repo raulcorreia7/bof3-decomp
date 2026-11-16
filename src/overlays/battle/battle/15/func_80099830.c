@@ -4,11 +4,11 @@ void func_8009A744(void); /* extern */
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_80099830(void) {
-    s32  pad;
     u16* row_base;
+    s32  pad;
     u32  scroll_lo;
     u32  scroll_hi;
-    u8*  choice;
+    u8   choice;
     u8   new_scroll;
 
     if (D_80148597 == 0) {
@@ -18,8 +18,9 @@ NON_MATCHING void func_80099830(void) {
     } else {
         D_801485DC = 0;
     }
-    INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
-    pad      = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown | PADL1 | PADR1));
+    row_base = &g_InputPressed;
+    INPUT_REPEATED(*row_base, (INPUT_DIRECTIONAL | PADL1 | PADR1));
+    pad      = INPUT_REPEATED(*row_base, (PADLup | PADLdown | PADL1 | PADR1));
     row_base = (u16*)&D_80148594;
     if (pad & PADLup) {
         if (g_BattleListCursor != 0) {
@@ -66,15 +67,16 @@ NON_MATCHING void func_80099830(void) {
     if (g_BattleListCursor != FIELD(u8, row_base, 0xBu)) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
-    choice                                   = (u8*)D_801485A1;
+    choice                                   = D_801485A1;
     D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = Message_GetText(Item_GetDescription((s32)D_8014859C, (s32)choice) & HALF_MASK);
-    if (g_InputMasks[BATTLE_INPUT_CANCEL] & g_InputPressed) {
+    row_base                                 = &g_InputPressed;
+    if (g_InputMasks[BATTLE_INPUT_CANCEL] & *row_base) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
         goto block_33; /* shared scroll/confirm join */
     }
     func_8009AAE8();
-    if (g_InputMasks[BATTLE_INPUT_CONFIRM] & g_InputPressed) {
-        if (choice != NULL) {
+    if (g_InputMasks[BATTLE_INPUT_CONFIRM] & *row_base) {
+        if (choice != 0) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
             func_8009A744();
         block_33:
