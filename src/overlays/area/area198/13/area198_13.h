@@ -15,6 +15,7 @@
 /* The scratchpad work pointer the palette pass reads. */
 /* The state handler banks the step dispatchers index. */
 extern u8 D_801F3DFC[];
+extern s8 D_801F43B0[];
 
 /* A scene seed: the scene record the actor selects, the script it starts and
  * four bytes the entry does not read. */
@@ -38,8 +39,6 @@ extern u8       D_801F4368[];
 extern Callback D_801F43EC[];
 /* The actor script ids the phase starts, one per phase. */
 extern u8       D_801F43AC[];
-/* The per-phase speed steps, in a sixteenth of a cell. */
-extern s8       D_801F43B0[];
 
 /* The state update's fallback handler. */
 /* The image's setup pass. */

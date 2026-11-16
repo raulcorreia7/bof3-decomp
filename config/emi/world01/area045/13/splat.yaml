@@ -33,7 +33,7 @@ segments:
       - [0xDD8, c, Area_DrawHudSprite]
       - [0xF00, c, Area_DrawHud]
       - [0x12CC, c, Area_DrawGradientDiamond]
-      - [0x14C4, c, func_801F40C4]
+      - [0x14C4, c, Area_DrawHudValue]
       - [0x1578, c, func_801F4178]
       - [0x15BC, c, Actor_SpawnFlock]
       - [0x16F8, c, Actor_StartFlying]
