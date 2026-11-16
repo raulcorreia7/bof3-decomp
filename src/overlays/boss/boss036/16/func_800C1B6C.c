@@ -2,38 +2,47 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_800C1B6C(void) {
-    u32        effect_slot;
-    u32        effect_offset;
-    s32        active_battler;
-    WorkChunk* src;
-    WorkChunk* dst;
-    WorkChunk* end;
+    u32           effect_slot;
+    u8            effect_index;
+    u32           effect_offset;
+    s32           enemy_index;
+    u8*           effect_base;
+    EnemyBattler* enemy_base;
+    WorkChunk*    src;
+    WorkChunk*    dst;
+    WorkChunk*    end;
 
-    if ((FIELD(u32, g_Task, 0) & 0xFFFF00) != 0x10700) {
-        return;
+    if ((FIELD(u32, g_Task, 0) & 0xFFFF00) == 0x10700) {
+        effect_slot   = Battle_AllocEffect(3, 3);
+        effect_index  = effect_slot & BYTE_MASK;
+        effect_offset = effect_index * BATTLE_EFFECT_STRIDE;
+        /* FAKE: retail reads the active enemy after computing the effect offset. */
+        FAKE_BARRIER();
+        enemy_index = g_Battle.active_battler;
+        /* FAKE: retail reads the effect base after the active enemy. */
+        FAKE_BARRIER();
+        effect_base = (u8*)g_BattleEffects;
+        dst         = (WorkChunk*)(effect_base + effect_offset);
+        enemy_base  = g_BattleEnemyBattlers;
+        /* FAKE: retail reads the enemy base before applying the party offset. */
+        FAKE_BARRIER();
+        enemy_index -= BATTLE_PARTY_CHARACTERS_COUNT;
+        src = (WorkChunk*)&enemy_base[enemy_index];
+        end = src + 7;
+        do {
+            *dst = *src;
+            src += 1;
+            dst += 1;
+        } while (src != end);
+        /* FAKE: hold tail store before tail. */
+        FAKE_ORDER_LOCK(dst->w0 = src->w0);
+        g_BattleEffects[effect_index].header.mode   = 0;
+        g_BattleEffects[effect_index].header.step   = 0;
+        g_BattleEffects[effect_index].unk_06        = 3;
+        g_BattleEffects[effect_index].handler_index = 3;
+        g_BattleEffects[effect_index].arg.unk_09    = 0;
+        g_BattleEffects[effect_index].unk_29        = 3;
     }
-
-    effect_slot   = Battle_AllocEffect(3, 3);
-    effect_offset = (effect_slot & BYTE_MASK) * sizeof(BattleEffect);
-    /* FAKE: keeps the battler load between the slot offset and destination base. */
-    FAKE_ORDER_LOCK(active_battler = g_Battle.active_battler);
-    dst = (WorkChunk*)((u8*)g_BattleEffects + effect_offset);
-    active_battler -= 3;
-    src = (WorkChunk*)&g_BattleEnemyBattlers[active_battler];
-    end = src + 7;
-    do {
-        *dst = *src;
-        src += 1;
-        dst += 1;
-    } while (src != end);
-    FAKE_ORDER_LOCK(dst->w0 = src->w0);
-
-    g_BattleEffects[effect_slot & BYTE_MASK].header.mode   = 0;
-    g_BattleEffects[effect_slot & BYTE_MASK].header.step   = 0;
-    g_BattleEffects[effect_slot & BYTE_MASK].unk_06        = 3;
-    g_BattleEffects[effect_slot & BYTE_MASK].handler_index = 3;
-    g_BattleEffects[effect_slot & BYTE_MASK].arg.unk_09    = 0;
-    g_BattleEffects[effect_slot & BYTE_MASK].unk_29        = 3;
 }
 #else
 INCLUDE_ASM(func_800C1B6C);

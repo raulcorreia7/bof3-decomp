@@ -42,5 +42,11 @@ ASSERT_SIZE(AnswerCell, 4);
 extern AnswerCell D_801F4908[4];
 /* The first four answer flags, cleared by the low four mask bits and set by the high four. */
 extern u8         D_801F4928[4];
+extern u8         D_801F492C[];
+extern u8         D_801F492D[];
+extern u8         D_801F492E[];
+extern u8         D_801F492F[];
+
+bool func_801F3CF0(void);
 
 #endif
