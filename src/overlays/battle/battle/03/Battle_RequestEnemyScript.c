@@ -2,7 +2,8 @@
 
 #define ENEMY_SCRIPT_PTR(i) (g_BattleCurrentEnemy->script + (i))
 
-MATCH void func_801E2314(u32 script_index) {
+/* func_801E2314 */
+MATCH void Battle_RequestEnemyScript(u32 script_index) {
     /* FAKE: volatile-drop cast steers switch codegen. */
     switch (g_Task->facing) {
         case 0: {

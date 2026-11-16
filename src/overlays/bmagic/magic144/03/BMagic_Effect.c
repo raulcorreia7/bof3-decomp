@@ -111,7 +111,7 @@ MATCH void func_801EF154(void) {
     }
     if (g_Task->param.unk_0B == 0x80) {
         GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
-        func_800AF814(g_Battle.target_selector);
+        Battle_FadePoisonedBattler(g_Battle.target_selector);
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         Effect_Reset();
     }

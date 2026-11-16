@@ -12,10 +12,10 @@ MATCH void func_800C20A8(void) {
             Char_AddAbility(ABILITY_WERETIGER, D_800C2778, 0, 1);
         }
         g_BattleResult |= BATTLE_RESULT_NO_BGM;
-        func_801DDED8();
+        Battle_EndVictory();
         ending = &D_80146875;
         *ending += 1;
         return;
     }
-    func_801DDF00();
+    Battle_EndDefeat();
 }

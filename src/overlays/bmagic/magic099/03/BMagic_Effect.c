@@ -68,7 +68,7 @@ MATCH void func_801EEF98(void) {
 MATCH void func_801EF0EC(void) {
     if (g_Task->param.unk_0B == 9) {
         GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
-        func_800AF814(g_Battle.target_selector);
+        Battle_FadePoisonedBattler(g_Battle.target_selector);
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
         Effect_Reset();

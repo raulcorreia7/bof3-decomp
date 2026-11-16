@@ -97,7 +97,7 @@ ASSERT_SIZE(BattleEffectTargetColumn, BATTLE_EFFECT_STRIDE);
     }                                                                           \
     func_80196718(battler);                                                     \
     selector = (u8*)&g_Battle.target_selector;                                  \
-    func_800AF814(*selector);                                                   \
+    Battle_FadePoisonedBattler(*selector);                                      \
     Battle_MarkDamaged(*selector);                                              \
     g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;                              \
     Effect_Reset()

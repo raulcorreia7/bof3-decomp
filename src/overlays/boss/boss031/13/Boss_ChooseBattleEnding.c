@@ -3,9 +3,9 @@
 MATCH void Boss_ChooseBattleEnding(void) {
     if BATTLE_IS_VICTORY () {
         g_SceneState.step_05 = 0x14;
-        func_801DDED8();
+        Battle_EndVictory();
     } else {
         g_Battle.outcome.options &= 0xBF;
-        func_801DDF00();
+        Battle_EndDefeat();
     }
 }

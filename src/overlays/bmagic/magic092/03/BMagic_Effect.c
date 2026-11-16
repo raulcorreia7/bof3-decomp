@@ -146,11 +146,11 @@ MATCH void func_801EF388(void) {
     if (g_Task->param.unk_0B == 0x80) {
         if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
             GFX_FreePaletteFadeTarget(&g_BattleEnemyBattlers[g_Task->unk_03]);
-            func_800AF814((g_Task->unk_03 + 3) & BYTE_MASK);
+            Battle_FadePoisonedBattler((g_Task->unk_03 + 3) & BYTE_MASK);
             Battle_MarkDamaged((g_Task->unk_03 + 3) & BYTE_MASK);
         } else {
             GFX_FreePaletteFadeTarget((EnemyBattler*)&g_Game.members[g_Task->unk_03]);
-            func_800AF814(g_Task->unk_03);
+            Battle_FadePoisonedBattler(g_Task->unk_03);
             Battle_MarkDamaged(g_Task->unk_03);
         }
         g_BattleEffectBattler->param.unk_0B -= 1;

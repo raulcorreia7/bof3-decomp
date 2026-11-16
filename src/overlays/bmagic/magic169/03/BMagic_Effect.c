@@ -207,7 +207,7 @@ MATCH void func_801EF688(void) {
     battler        = &g_Game.members[unk04];
     if (!(count & BYTE_MASK)) {
         GFX_FreePaletteFadeTarget(battler);
-        func_800AF814(g_Task->unk_04);
+        Battle_FadePoisonedBattler(g_Task->unk_04);
         g_Task->header.step += 1;
     }
 }

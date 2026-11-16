@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-MATCH void func_800AF814(u32 battler_index) {
+/* func_800AF814 */
+MATCH void Battle_FadePoisonedBattler(u32 battler_index) {
     u8  index;
     u32 offset;
 

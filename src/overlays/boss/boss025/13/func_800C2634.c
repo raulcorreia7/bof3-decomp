@@ -4,5 +4,5 @@ MATCH void func_800C2634(void) {
     g_SceneState.step_05 = 4;
     D_80145F18           = D_800C32B4;
     D_80145F1A[0]        = D_800C32B8;
-    func_801DDF28();
+    Battle_EndToArea();
 }

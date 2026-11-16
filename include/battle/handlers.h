@@ -23,11 +23,15 @@ typedef u8 (*BossEventFunc)(u32 event);
 void        func_800AC844(u8 entry_id);
 void        func_800AC934(u8 entry_id);
 s32         func_800ACFF4(void);
-void        func_801DDED8(void);
-void        func_801DDF00(void);
-void        func_801DDF28(void);
+/* func_801DDED8 */
+void        Battle_EndVictory(void);
+/* func_801DDF00 */
+void        Battle_EndDefeat(void);
+/* func_801DDF28 */
+void        Battle_EndToArea(void);
 void        Battle_ClearSlotPending(u32 slot);
-void        func_801E2314(u32 script_index);
+/* func_801E2314 */
+void        Battle_RequestEnemyScript(u32 script_index);
 u8          func_801E30F8(void);
 u8          func_801E3160(void);
 /* func_801E54EC */

@@ -15,5 +15,5 @@ MATCH void Boss_ChooseBattleEnding(void) {
         g_SndBGMId = 4;
         g_SceneState.step_05++;
     }
-    func_801DDF28();
+    Battle_EndToArea();
 }

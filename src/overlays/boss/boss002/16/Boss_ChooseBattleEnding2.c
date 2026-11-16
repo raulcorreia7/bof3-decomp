@@ -5,8 +5,8 @@ MATCH void Boss_ChooseBattleEnding2(void) {
         func_800AC870(0, (PartyMember*)g_BattleEnemyBattlers, 0);
         g_ScriptVars[0] = 0x6D;
         g_SndBGMId      = 0x18;
-        func_801DDED8();
+        Battle_EndVictory();
     } else {
-        func_801DDF00();
+        Battle_EndDefeat();
     }
 }

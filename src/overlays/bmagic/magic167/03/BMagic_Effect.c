@@ -67,7 +67,7 @@ MATCH void func_801EF080(void) {
     g_PaletteFades[g_Task->timer].offset.blue -= 1;
     if (g_PaletteFades[g_Task->timer].offset.red == 0) {
         GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
-        func_800AF814(g_Battle.target_selector);
+        Battle_FadePoisonedBattler(g_Battle.target_selector);
         g_Task->header.mode += 1;
     }
 }

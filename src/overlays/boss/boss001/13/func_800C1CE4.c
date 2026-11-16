@@ -3,7 +3,7 @@
 MATCH void func_800C1CE4(void) {
     PartyMember* work;
 
-    func_801E2314(4);
+    Battle_RequestEnemyScript(4);
     work       = g_Task;
     D_801463BE = 0x3C;
     work->header.step++;

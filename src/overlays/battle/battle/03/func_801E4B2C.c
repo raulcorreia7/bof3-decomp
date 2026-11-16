@@ -19,7 +19,7 @@ MATCH void func_801E4B2C(void) {
         }
         if (!(D_801CA71C[g_Battle.action_id].mask & 0x800)) {
             g_Task->unk_09 = MEM_PTR(u8, 0x800E40CFu)[((EnemyBattler*)g_BattleCurrentEnemy)->kind * 0x88u];
-            func_801E2314(6U);
+            Battle_RequestEnemyScript(6U);
             work              = g_Task;
             work->header.step = (work->header.step + 1);
         } else {

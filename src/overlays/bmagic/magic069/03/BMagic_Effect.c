@@ -252,7 +252,7 @@ MATCH void func_801EF834(void) {
             SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 2));
         }
         GFX_FreePaletteFade(g_Task->timer);
-        func_800AF814(g_Task->param.unk_0B);
+        Battle_FadePoisonedBattler(g_Task->param.unk_0B);
         g_Task->unk_09 = 0;
         g_Task->timer  = 4;
         g_Task->header.step += 1;

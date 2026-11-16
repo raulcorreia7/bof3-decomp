@@ -11,8 +11,8 @@ MATCH void Boss_ChooseBattleEnding(void) {
         g_SndBGMId = 0x6B;
         D_80146875 = 0xE;
         *result |= 8;
-        func_801DDED8();
+        Battle_EndVictory();
         return;
     }
-    func_801DDF00();
+    Battle_EndDefeat();
 }

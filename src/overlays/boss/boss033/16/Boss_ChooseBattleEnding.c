@@ -6,8 +6,8 @@ MATCH void Boss_ChooseBattleEnding(void) {
         D_80146875          = 8;
         g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;
         g_AreaScrollTargetY = g_Game.members[0].pos.y.fixed;
-        func_801DDED8();
+        Battle_EndVictory();
         return;
     }
-    func_801DDF00();
+    Battle_EndDefeat();
 }

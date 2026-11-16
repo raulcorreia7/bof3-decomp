@@ -37,7 +37,7 @@ MATCH void func_801EEE40(void) {
             g_Task->header.mode--;
         } else {
             GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
-            func_800AF814(g_Battle.target_selector);
+            Battle_FadePoisonedBattler(g_Battle.target_selector);
             g_Task->header.mode++;
         }
     }
@@ -69,7 +69,7 @@ MATCH void func_801EF20C(void) {
     g_PaletteFades[g_Task->param.unk_0B].offset.blue++;
     if (--g_Task->unk_09 == 0) {
         GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
-        func_800AF814(g_Battle.target_selector);
+        Battle_FadePoisonedBattler(g_Battle.target_selector);
         g_Task->header.mode++;
     }
 }

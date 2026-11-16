@@ -71,7 +71,7 @@ MATCH void func_801EF024(void) {
     g_PaletteFades[g_Task->timer].offset.blue--;
     if (g_PaletteFades[g_Task->timer].offset.red == 0) {
         func_80196718(battler);
-        func_800AF814(g_Battle.target_selector);
+        Battle_FadePoisonedBattler(g_Battle.target_selector);
         g_Task->header.mode++;
     }
 }

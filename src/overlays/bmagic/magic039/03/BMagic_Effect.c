@@ -144,7 +144,7 @@ MATCH void func_801EF44C(void) {
     g_Task->timer = timer_next;
     if (!(timer_next & BYTE_MASK)) {
         GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
-        func_800AF814(g_Battle.target_selector);
+        Battle_FadePoisonedBattler(g_Battle.target_selector);
         g_BattleEffectBattler->param.unk_0B -= 1;
         Effect_Reset();
     }

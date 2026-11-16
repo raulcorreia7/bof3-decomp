@@ -3,8 +3,8 @@
 MATCH void Boss_ChooseBattleEnding4(void) {
     if BATTLE_IS_VICTORY () {
         g_ScriptVars[0] = 0x44;
-        func_801DDED8();
+        Battle_EndVictory();
     } else {
-        func_801DDF00();
+        Battle_EndDefeat();
     }
 }

@@ -51,13 +51,13 @@ MATCH void func_801E3C14(void) {
     }
     if (!(g_BattleCurrentEnemy->turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_ROW_PRESENT)) {
         if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ATTACK) {
-            func_801E2314(4);
+            Battle_RequestEnemyScript(4);
         }
         if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ITEM && !(Item_GetFlags(LOHU(g_Battle.action_id) >> 8, LOHU(g_Battle.action_id) & BYTE_MASK) & 0x4)) {
-            func_801E2314(4);
+            Battle_RequestEnemyScript(4);
         }
         if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ABILITY && !(D_801CA718[g_Battle.action_id][0] & ABILITY_TARGET_NO_HIT_REACT)) {
-            func_801E2314(4);
+            Battle_RequestEnemyScript(4);
         }
     }
     hit_work = g_BattleCurrentEnemy;

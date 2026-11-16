@@ -93,7 +93,7 @@ MATCH void func_801EF0A8(void) {
     }
     actor->unk_5C = 0;
     func_80196718(actor);
-    func_800AF814(g_Battle.target_selector);
+    Battle_FadePoisonedBattler(g_Battle.target_selector);
     g_Task->header.mode += 1;
 }
 

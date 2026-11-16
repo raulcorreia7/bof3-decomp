@@ -16,5 +16,5 @@ MATCH void Boss_ChooseBattleEnding(void) {
     if (*flags & 0x4) {
         D_80146875 = 0x14;
     }
-    func_801DDF28();
+    Battle_EndToArea();
 }
