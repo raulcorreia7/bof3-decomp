@@ -30,6 +30,16 @@ ASSERT_OFFSET(CommuSelectionPair, count, 0x0);
 ASSERT_OFFSET(CommuSelectionPair, value, 0x1);
 ASSERT_SIZE(CommuSelectionPair, 0x2);
 
+/* A commu kind's entry rows: the name run its first row reads and how many rows it has. */
+typedef struct CommuTypeRows {
+    u8 first;
+    u8 count;
+} CommuTypeRows;
+
+ASSERT_OFFSET(CommuTypeRows, first, 0x0);
+ASSERT_OFFSET(CommuTypeRows, count, 0x1);
+ASSERT_SIZE(CommuTypeRows, 0x2);
+
 extern u8             D_801455C9[];
 extern s8             D_801455C2;
 extern u16            D_80010000[];
@@ -50,10 +60,18 @@ extern Callback       g_Commu01Step2Sub1Funcs[COMMU01_STEP2_SUB1_COUNT];
 extern u8             D_801D4C04[12];
 extern u16            D_801D4C10[4];
 extern u8             D_801D4C18[12][2];
+/* The channel each commu record kind blinks. */
+extern u8             D_801D4C20[];
 extern CommuCellFrame D_801D4C44[COMMU_CELL_FRAME_COUNT];
 extern u8             D_801D4CD4[];
 extern u8             D_801D4CE0[];
 extern u8             D_801D4D34[];
+/* The commu request slot run's byte columns: the kind grid line, the cursor box
+ * row and the byte the commit clears, each at the run's eight-byte row stride. */
+extern u8             D_801457A9[][8];
+extern u8             D_801457AA[][8];
+extern u8             D_801457AB[][8];
+extern CommuTypeRows  D_801D4DD4[];
 extern u16            D_801D4DDA[];
 extern Point2u        D_801D4DDC[];
 extern u8             D_801D4DF4;
@@ -74,6 +92,10 @@ extern u8             D_801D4E2C;
 extern u8             D_801D4E30;
 extern u8             D_801F286D[];
 
+/* The battle counter that follows the scene event's selection byte; retail loads
+ * it off the selection pointer the commu request walks. */
+#define COMMU_REQUEST_ANCHOR(rec) (*(u32*)((rec) + 0x73F))
+
 /* The column of the selected fairy room in its row of four. */
 static inline s32 Commu01_RoomColumn(u8 selection) {
     s32 index;
@@ -87,7 +109,8 @@ static inline s32 Commu01_RoomColumn(u8 selection) {
     return index - ((offset >> 2) << 2);
 }
 
-void func_801D28A4(s32 x, s32 y, s32 fairy_index, s32 selected);
+void func_801D28A4(s16 x, s16 y, u8 slot, s32 selected);
+void func_801D2D98(s16 x, s16 y, s32 width, u8 channel, u8 blink);
 void func_801D3038(void);
 void func_801D36FC(s32 cell, s32 selected);
 void func_801D3984(s32 x, s32 y, s32 bright);
