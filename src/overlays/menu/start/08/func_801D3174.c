@@ -119,7 +119,7 @@ MATCH void func_801D3174(void) {
             if (D_801ED618 == 0) {
                 if ((Item_PassesTest(base[8], CHAR_ID_RYU_YOUNG, base[0xA], *row) & BYTE_MASK) != 0) {
                     entry = *row;
-                    if (g_Items[entry].flags & 0x10) {
+                    if (g_Items[entry].flags & ITEM_STORY_ITEM) {
                         result = func_801E8C9C(0, entry, 0) & BYTE_MASK;
                         if (result == 0 || result == 4) {
                             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));

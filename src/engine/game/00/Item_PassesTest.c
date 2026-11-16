@@ -15,7 +15,7 @@ MATCH bool Item_PassesTest(u8 test, u8 character_id, u8 category, u8 item_id) {
                 return false;
             }
             index = item_id;
-            if ((g_Items[index].flags & 0x1) == 0) {
+            if ((g_Items[index].flags & ITEM_TARGET_BOTH) == 0) {
                 return false;
             }
             if (index != ITEM_FAERIE_TIARA) {
@@ -27,13 +27,13 @@ MATCH bool Item_PassesTest(u8 test, u8 character_id, u8 category, u8 item_id) {
             }
             return false;
         case 2:
-            if (Item_GetFlags(category, item_id) & 0x2) {
+            if (Item_GetFlags(category, item_id) & ITEM_TARGET_SELECTABLE) {
                 /* record bit 1 set */
                 goto ret1;
             }
             return false;
         case 3:
-            if ((Item_GetFlags(category, item_id) & 0x8) == 0) {
+            if ((Item_GetFlags(category, item_id) & ITEM_TARGET_ALL) == 0) {
                 /* record bit 3 clear */
                 goto ret1;
             }

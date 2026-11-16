@@ -17,7 +17,7 @@ MATCH void func_8009A0A4(void) {
     }
     buttons = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
     if (buttons & (PADLup | PADLdown)) {
-        if (Item_GetFlags(kind_index >> 8, kind_index & BYTE_MASK) & 0x80) {
+        if (Item_GetFlags(kind_index >> 8, kind_index & BYTE_MASK) & ITEM_USABLE_MENU) {
             if (func_8009AF7C() & BYTE_MASK) {
                 g_BattleActorTurn->command.target = 0;
             } else {

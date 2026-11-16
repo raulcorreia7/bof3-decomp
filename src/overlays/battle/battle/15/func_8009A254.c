@@ -16,7 +16,7 @@ MATCH void func_8009A254(void) {
     }
     input = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
     if (input & (PADLup | PADLdown)) {
-        if (Item_GetFlags(slot_data >> 8, slot_data & BYTE_MASK) & 0x80) {
+        if (Item_GetFlags(slot_data >> 8, slot_data & BYTE_MASK) & ITEM_USABLE_MENU) {
             g_BattleActorTurn->command.target = Battle_TargetNext(3);
             {
                 u8* state = (u8*)&g_Battle.ui_state;
