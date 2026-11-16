@@ -981,7 +981,7 @@ MATCH void func_801D437C(void) {
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D448C(void) {
     s32 selected;
-    s8  value;
+    u8  value;
 
     selected = (s8)D_801DB0B4;
     if (selected == 8) {
@@ -2501,9 +2501,9 @@ NON_MATCHING void func_801D97C8(s32 unused, s32 x, s32 y) {
     s32              tpage;
     s32              left;
 
-    left   = x;
-    labels = D_801DB038;
+    left = x;
     UI_DrawWindow((u16)(x + 3), (u16)(y + 3), 0x4D, 0x2F, 0, g_WindowStyle);
+    labels = D_801DB038;
     for (row = 0; row < 5; row++) {
         UI_DrawTextString((s16)(x + 0x2A), (s16)(y + (row * 8) + 6), 0, 0x10, labels[row]);
     }
@@ -2655,7 +2655,7 @@ NON_MATCHING s8 func_801DA114(void) {
     u8* row;
     u8* cell;
     s32 col;
-    s32 i;
+    s8  i;
     s32 count;
     u16 pad;
 
@@ -2774,12 +2774,12 @@ NON_MATCHING s8 func_801DA114(void) {
     if (g_InputPressed & 0x800) {
         SND_PlayCue(0x104);
         count = 5;
-        for (i = 4; (s8)i >= 0 && D_801DB080[(s8)i] == 0xFF; i--) {
+        for (i = 4; i >= 0 && D_801DB080[i] == 0xFF; i--) {
             count -= 1;
         }
         if ((u16)count < 5) {
-            for (i = 4; (s8)i >= 0 && D_801DB080[(s8)i] == 0xFF; i--) {
-                D_801DB080[(s8)i] = 0;
+            for (i = 4; i >= 0 && D_801DB080[i] == 0xFF; i--) {
+                D_801DB080[i] = 0;
             }
         }
         D_801F294E += 1;
