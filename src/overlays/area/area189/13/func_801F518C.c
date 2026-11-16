@@ -46,8 +46,7 @@ MATCH void func_801F518C(void) {
                 func_801F5D20();
                 return;
             } else if (SYS_TestFlag(D_80144EF8, 4) && (u32)((x >> 24) - 0x15) < 5 && (y >> 24) < 0xF) {
-                Message_StartAreaMessage(3);
-                g_GameStateIndex = GAME_REQUEST_MESSAGE;
+                MESSAGE_START_WAIT(3);
                 func_801F5D20();
                 return;
             }

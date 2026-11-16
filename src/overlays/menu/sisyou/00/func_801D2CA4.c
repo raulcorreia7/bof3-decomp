@@ -9,8 +9,7 @@ MATCH void func_801D2CA4(void) {
     u8* edp;
 
     if (g_MenuMasterBannerLock != 0) {
-        Message_StartAreaMessage((s16)(g_MenuMasterMessageIds[g_SceneEventState.selection] + MASTER_MESSAGE_FAREWELL));
-        g_GameStateIndex    = GAME_REQUEST_MESSAGE;
+        MESSAGE_START_WAIT((s16)(g_MenuMasterMessageIds[g_SceneEventState.selection] + MASTER_MESSAGE_FAREWELL));
         g_MenuMasterStep    = 6;
         g_MenuMasterSubStep = 0;
     } else {
@@ -31,8 +30,7 @@ MATCH void func_801D2CA4(void) {
         g_Characters[g_Game.members[g_MenuMasterCursor].character_index].level_up_modifiers[3] = g_MenuMasterStats[*edp].defense_bonus;
         g_Characters[g_Game.members[g_MenuMasterCursor].character_index].level_up_modifiers[4] = g_MenuMasterStats[*edp].agility_bonus;
         g_Characters[g_Game.members[g_MenuMasterCursor].character_index].level_up_modifiers[5] = g_MenuMasterStats[*edp].intellect_bonus;
-        Message_StartAreaMessage((s16)(g_MenuMasterMessageIds[*edp] + MASTER_MESSAGE_ENROLLED));
-        g_GameStateIndex = GAME_REQUEST_MESSAGE;
+        MESSAGE_START_WAIT((s16)(g_MenuMasterMessageIds[*edp] + MASTER_MESSAGE_ENROLLED));
         g_MenuMasterSubStep += 1;
     }
 }

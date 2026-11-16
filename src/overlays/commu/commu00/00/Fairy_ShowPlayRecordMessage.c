@@ -10,7 +10,6 @@ MATCH s32 Fairy_ShowPlayRecordMessage(void) {
     TEXT_Format(dest + 0x20, fmt, g_PlayClock.minutes);
     TEXT_Format(dest + 0x40, fmt, g_BattleCount);
     TEXT_Format(dest + 0x60, fmt, D_80145030);
-    Message_StartAreaMessage(FAIRY_MESSAGE_PLAY_RECORD);
-    g_GameStateIndex = GAME_REQUEST_MESSAGE;
+    MESSAGE_START_WAIT(FAIRY_MESSAGE_PLAY_RECORD);
     return 0;
 }

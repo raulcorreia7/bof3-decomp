@@ -16,9 +16,8 @@ MATCH void func_801F2E1C(void) {
                     break;
                 }
             }
-            Message_StartAreaMessage((s16)(i + 1));
-            g_GameStateIndex = GAME_REQUEST_MESSAGE;
-            counter          = (u8*)&g_SceneEventState.step;
+            MESSAGE_START_WAIT((s16)(i + 1));
+            counter = (u8*)&g_SceneEventState.step;
             *counter += 1;
             break;
 

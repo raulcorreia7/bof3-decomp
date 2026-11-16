@@ -219,6 +219,11 @@ typedef enum GameRequest {
     GAME_REQUEST_SCENE_CAMERA = 9, /* state 11 */
 } GameRequest;
 
+/* Open the area message `id` and park the game on its window until it closes. */
+#define MESSAGE_START_WAIT(id)              \
+    Message_StartAreaMessage(id);           \
+    g_GameStateIndex = GAME_REQUEST_MESSAGE
+
 /* The rows of g_GameStates, the full-screen modes Game_RunMain runs. */
 typedef enum GameEntryState {
     GAME_STATE_NEW_GAME     = 0,

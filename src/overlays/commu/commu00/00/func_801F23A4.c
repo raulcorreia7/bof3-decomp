@@ -19,8 +19,7 @@ MATCH void func_801F23A4(void) {
             break;
         case 1:
             if ((SND_IsXAIdle() & BYTE_MASK) != 0) {
-                Message_StartAreaMessage(0x2A1);
-                g_GameStateIndex = GAME_REQUEST_MESSAGE;
+                MESSAGE_START_WAIT(0x2A1);
                 *variant += 1;
             }
             break;

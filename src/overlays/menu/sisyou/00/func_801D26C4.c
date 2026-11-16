@@ -9,7 +9,6 @@
 /* FAKE: retail materializes the byte address at each read; the record member reuses one. */
 MATCH void func_801D26C4(void) {
     SYS_SetFlag(D_8014554C, g_SceneEventSelection);
-    Message_StartAreaMessage(g_MenuMasterMessageIds[g_SceneEventSelection]);
-    g_GameStateIndex = GAME_REQUEST_MESSAGE;
+    MESSAGE_START_WAIT(g_MenuMasterMessageIds[g_SceneEventSelection]);
     g_MenuMasterSubStep++;
 }
