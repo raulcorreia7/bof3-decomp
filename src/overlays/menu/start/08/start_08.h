@@ -873,7 +873,7 @@ extern s8        D_801ED674;
 extern s8        D_801ED678;
 extern s8        D_801ED67C;
 extern u8        D_801ED69C;
-extern s32       D_801ED878;
+extern u8        D_801ED878[];
 extern u8        D_801ED7FC;
 extern s8        D_801ED66C;
 extern u8        D_801ED105;
