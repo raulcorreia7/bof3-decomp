@@ -59,7 +59,7 @@ typedef enum ItemType {
 /* The most of one item an inventory slot holds. */
 #define ITEM_STACK_MAX           99
 
-/* The func_801AF494 predicate that holds when bit record_bit of the item's equipability is set. */
+/* The Item_PassesTest predicate that holds when bit record_bit of the item's equipability is set. */
 #define ITEM_TEST_EQUIPPABLE     4
 
 /* The inventory category code Item_GetRecord resolves a record from. */
@@ -105,7 +105,7 @@ ASSERT_OFFSET(Item, price, 0x10);
 typedef struct ItemHeader {
     u8 name[ITEM_NAME_LENGTH];
     u8 equipability; /* EquipFlags */
-    u8 flags;        /* Item_GetFlags; bit tests in func_801AF494 */
+    u8 flags;        /* Item_GetFlags; bit tests in Item_PassesTest */
 } ItemHeader;
 
 ASSERT_SIZE(ItemHeader, 0x0E);

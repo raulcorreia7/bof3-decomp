@@ -875,7 +875,8 @@ s8      func_801ADC98(void);
 void    func_801ADCF4(u8 actor_slot);
 void    GFX_DrawLine(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b, s32 blend);
 /* func_801AF270 */
-bool    func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id);
+/* func_801AF494 */
+bool    Item_PassesTest(u8 test, u8 character_id, u8 category, u8 item_id);
 void    func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
 
 void  func_801AFA1C(u8* marks, u8 thumb_top, s16 x, s16 y, u8 thumb_size, u8 total, u8 track_size);

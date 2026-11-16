@@ -2756,7 +2756,7 @@ jtbl_80195EB8 = { addr = 0x80195EB8, type = "Callback", source = "The switch tab
 jtbl_80195EEC = { addr = 0x80195EEC, type = "Callback", source = "The switch table of func_801ACF2C: the jump targets of its jr dispatch." }
 jtbl_80195F24 = { addr = 0x80195F24, type = "Callback", source = "The switch table of func_801AD4DC: the jump targets of its jr dispatch." }
 jtbl_80195F5C = { addr = 0x80195F5C, type = "Callback", source = "The switch table of func_801AD734: the jump targets of its jr dispatch." }
-jtbl_80195F7C = { addr = 0x80195F7C, type = "Callback", source = "The switch table of func_801AF494: the jump targets of its jr dispatch." }
+jtbl_80195F7C = { addr = 0x80195F7C, type = "Callback", source = "The switch table of Item_PassesTest: the jump targets of its jr dispatch." }
 jtbl_80195F9C = { addr = 0x80195F9C, type = "Callback", source = "The switch table of func_801B0E44: the jump targets of its jr dispatch." }
 jtbl_80195FC0 = { addr = 0x80195FC0, type = "Callback", source = "The switch table of func_801BC4D0: the jump targets of its jr dispatch." }
 s_FairyConstructionThresholds = { addr = 0x80195FE0, source = "Row of s8 thresholds func_801C2018 indexes by bit_index - 0xF6 to decide when the fairy village construction stage is reached." }
@@ -2837,6 +2837,7 @@ Game_ReadCommand = { addr = 0x801AF20C, type = "func", source = "comment: read t
 UI_GetSpriteRect = { addr = 0x801AF270, type = "func", source = "Returns the rectangle of a sprite id from one of two rect tables." }
 UI_DrawSprite = { addr = 0x801AF2A0, type = "func", source = "Appends one SPRT at x, y with the rectangle of sprite_id; bit 2 of flags picks the CLUT." }
 UI_DrawSpriteRun = { addr = 0x801AF390, type = "func", source = "Draws the (x offset, y offset, sprite id) triples of record_table from base_x, base_y through UI_DrawSprite until the id 0xFF; bit 0 of flags picks the sprite page." }
+Item_PassesTest = { addr = 0x801AF494, type = "func", source = "Tells whether an item passes the list's filter test: test 0 passes every item, 1 an item the field can use, 2 and 3 the item record flag bits, 4 an item the character can equip; the menu lists draw a failing item dimmed." }
 Area_SetCameraMatrix = { addr = 0x801AFE18, type = "func", source = "Sets the GTE rotation and translation from the camera angle, height and offsets, and returns out_matrix unchanged." }
 Area_ProjectPoint = { addr = 0x801AFF04, type = "func", source = "Projects the 16.16 position pos through RotTransPers and writes the result to screen_xy." }
 MATH_SetIdentity = { addr = 0x801AFF64, type = "func", source = "Writes 4096 to the three diagonal cells of a 3x3 s16 matrix and 0 to the other six." }

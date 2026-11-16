@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH bool func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id) {
+/* func_801AF494 */
+MATCH bool Item_PassesTest(u8 test, u8 character_id, u8 category, u8 item_id) {
     u8 index;
 
     if (item_id == ITEM_NOTHING) {

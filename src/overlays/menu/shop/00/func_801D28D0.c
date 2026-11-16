@@ -100,7 +100,7 @@ MATCH void func_801D28D0(void) {
             D_80148628         = panel->pos.x + 7;
             D_8014862A         = panel->pos.y + (((panel->group_cursor - panel->group_first) * ((unsigned long)0xD)) + 0x1B);
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
-            if (func_801AF494(panel->kind, CHAR_ID_RYU_YOUNG, g_ShopItemCategory, g_ShopItemId) & BYTE_MASK) {
+            if (Item_PassesTest(panel->kind, CHAR_ID_RYU_YOUNG, g_ShopItemCategory, g_ShopItemId) & BYTE_MASK) {
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
                 selected_cursor    = panel->group_cursor;
                 g_ShopStockIndex   = selected_cursor;

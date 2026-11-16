@@ -28,7 +28,7 @@ MATCH void func_801999F8(MenuPanelTask* task) {
         byte = *src;
         if (byte != 0) {
             flag = 0;
-            if (task->unk_09 != 0 || (func_801AF494(task->unk_08, g_CharSlot[g_PartyFieldOrder[D_80148656]], task->unk_0A, byte) & BYTE_MASK) == 0) {
+            if (task->unk_09 != 0 || (Item_PassesTest(task->unk_08, g_CharSlot[g_PartyFieldOrder[D_80148656]], task->unk_0A, byte) & BYTE_MASK) == 0) {
                 flag = 1;
             }
             visible = flag;

@@ -32,7 +32,7 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
         item = *ids;
         if (item != 0) {
             unusable = false;
-            if (task->unk_09 != 0 || (func_801AF494(task->unk_08, g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], task->unk_0A, item) & BYTE_MASK) == 0) {
+            if (task->unk_09 != 0 || (Item_PassesTest(task->unk_08, g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], task->unk_0A, item) & BYTE_MASK) == 0) {
                 unusable = true;
             }
             dim   = unusable;

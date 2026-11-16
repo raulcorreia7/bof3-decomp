@@ -82,7 +82,7 @@ typedef struct MenuChoicePanel {
     u8      active; /* 0x00: set while the panel is armed */
     u8      pad_01[0x03];
     Point2u pos;          /* 0x04 */
-    u8      kind;         /* 0x08: the panel's kind, the first argument of func_801AF494 */
+    u8      kind;         /* 0x08: the panel's kind, the first argument of Item_PassesTest */
     u8      pad_09;       /* 0x09 */
     u8      group;        /* 0x0A: the group the cursor walks */
     u8      group_first;  /* 0x0B: the group's first entry, the page start */

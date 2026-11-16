@@ -159,7 +159,7 @@ segments:
     subsegments:
       - [0x744, .data, D_80195F44]
       - [0x75C, .rodata, func_801AD734]
-      - [0x77C, .rodata, func_801AF494]
+      - [0x77C, .rodata, Item_PassesTest]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_16
     type: code
@@ -558,7 +558,7 @@ segments:
       - [0x19A70, c, UI_GetSpriteRect]
       - [0x19AA0, c, UI_DrawSprite]
       - [0x19B90, c, UI_DrawSpriteRun]
-      - [0x19C94, c, func_801AF494]
+      - [0x19C94, c, Item_PassesTest]
       - [0x19DB0, c, func_801AF5B0]
       - [0x1A000, c, func_801AF800]
       - [0x1A130, c, func_801AF930]
