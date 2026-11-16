@@ -11,8 +11,6 @@ extern u8       D_80146866;
 void            Shop_DispatchStep(void);
 extern u8       D_80146867;
 extern s8       D_80146873;
-extern u8       D_80146874;
-extern u8       D_80146875;
 extern u8       D_80143BB4;
 extern u32      D_801F6C00;
 extern Callback D_801F973C[];
@@ -22,7 +20,14 @@ void            func_801F88CC(u8 semi, s32 color);
 void            func_801F8B10(s32 arg0, s32 arg1);
 void            func_801F8EF0(void);
 void            func_801F8FAC(s32 x, s32 y, s32 color, u8 semi_trans);
-bool            func_801F938C(void);
+/* func_801F91F0 */
+void            Scene_DrawEndingRollLine(s16 x, s16 y, u8* text);
+/* func_801F938C */
+bool            Scene_UpdateEndingRoll(void);
+/* D_801F981C */
+extern u8*      g_EndingRollText[];
+/* D_801F97DC */
+extern u8       g_EndingGlyphWidth[];
 /* func_801F9490 */
 void            Scene_RunSaveMenu(void);
 extern Callback D_801F9758[];
@@ -33,8 +38,10 @@ extern Callback  D_801F97A4[];
 /* D_801F97D8 */
 extern SceneFunc g_SceneActorDispatch[];
 extern Callback  D_801F9DBC[];
-extern u16       D_801F9DD0;
-extern u8        D_801F9DD4;
+/* D_801F9DD0 */
+extern u16       g_EndingRollLine;
+/* D_801F9DD4 */
+extern u8        g_EndingRollScroll;
 extern u8        D_801F9DD8;
 
 #endif

@@ -365,7 +365,7 @@ MATCH s32 func_801D1A60(void) {
 
 #include "shared/Area_DrawSpawnSlot.h"
 
-MATCH void func_801D1CD4(const void* spin) {
+MATCH void func_801D1CD4(const WorldSpin* spin) {
     WorldSpin* work;
     POLY_G3*   primitive;
     s32        point[3];
@@ -537,9 +537,9 @@ NON_MATCHING void func_801D2474(void) {
                 dot        = (SceneDot*)D_801D40B4;
                 dot->color = *(u16*)D_801D40B0;
                 D_801D40A8 += 1;
-                dot->x     = screen.vx - D_801D393C[D_801D40AC].x + col;
                 D_801D40B4 = (u32)(dot + 1);
                 dot->y     = screen.vy - D_801D393C[D_801D40AC].y + row;
+                dot->x     = screen.vx - D_801D393C[D_801D40AC].x + col;
             }
             D_801D40B0 += 2;
         }

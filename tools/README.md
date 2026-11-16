@@ -38,7 +38,7 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Find repeated instruction runs in functions | `tools/chunks.py -w 24 -o chunks.jsonl`                               | [duplicates](#duplicates-and-names)                       |
 | Mark each run asm, shared or pasted      | `tools/classify.py chunks.jsonl out.jsonl`                               | same                                                      |
 | Find repeated C bodies in the source     | `ripwire src --clones`                                                   | same                                                      |
-| Rename a function or global everywhere   | `tools/symbol.py rename OLD NEW` (an address name: `--image <target> --local`) | [rename steps](../docs/naming.md#rename-steps)       |
+| Rename a function or global everywhere   | `tools/symbol.py rename OLD NEW` (an address name: `--image <target> --local`); its layout rows and unit file follow | [rename steps](../docs/naming.md#rename-steps)  |
 | Rename parameters                        | `tools/symbol.py params <func> old=new ...`                              | same                                                      |
 | Rank units to name first                 | `tools/symbol.py refs src/<path>`                                        | same                                                      |
 | Find the symbol and member at an address | `tools/symbol.py at <target> 0x<ADDR>`                                   | [lookup](#lookup)                                         |
@@ -169,6 +169,9 @@ several names. All print tab-separated rows, or one JSON object per line with `-
 writes JSON Lines with each group's `members`; `classify.py` reads and writes that form and
 marks each member asm, shared (a header body or a call) or pasted, so the rows left are the copies to
 fold. `ripwire src --clones` lists token-normalized duplicate C bodies.
+`dup_decls.py` lists an `extern` declaration written the same way in three or more headers,
+widest first: a repeated declaration is a seam whose text belongs at the declaration's owner
+(`--min` changes the count, `--json` prints one row per seam).
 
 ## Lookup
 
@@ -229,9 +232,9 @@ the logs in `build/pre-push/`. CI runs it too. `BASE_REF` defaults to the newest
 | `format-check`  | C, Python, TOML or Markdown differs from the formatter                                  | the tools  |
 | `meson test`    | a tool test fails                                                                       | Python     |
 | `typeloss`      | a rename, move or retype weakens a type                                                 | none       |
-| `markers`       | a definition in `src/` lacks exactly one status marker, or a change adds a `NON_MATCHING` draft with no `config/attempts.jsonl` object | none |
+| `markers`       | a definition in `src/` lacks exactly one status marker, a change adds a `NON_MATCHING` draft with no `config/attempts.jsonl` object, or an `attempts.jsonl` row carries other keys or another order | none |
 | `drafts`        | a `.c` file the change touches holds a `NON_MATCHING` draft that does not compile with `-DNON_MATCHING` | compiler   |
-| `names`         | a new name carries an 8-digit address, a listed legacy one is gone, or an added line names a parameter `argN` | none |
+| `names`         | a new name carries an 8-digit address, a listed legacy one is gone, an added line names a parameter `argN`, or a changed image keeps an address-named layout row for a named symbol | none |
 | `addrs`         | a symbol address that `config/symbols.toml` records on `main` is gone                   | none       |
 | `kept`          | a named helper, define, global, type, member or function is lost or degraded            | none       |
 | `quality`       | a touched file gains casts, fake helpers, `func_`/`D_` names or pasted bodies           | none       |

@@ -15,15 +15,15 @@ MATCH s32 Area_StepSparkEmitters(void) {
             alive = 1;
             if (emitter->timer-- == 0) {
                 for (n = 0; n < 2; n++) {
-                    spark = (SpriteSpark*)Area_FindFreeSpriteRow();
+                    spark = Area_FindFreeSpriteRow();
                     if (spark != NULL) {
                         spark->active = 1;
                         spark->life   = (rand() & 0x1F) + 0x20;
                         spark->x      = emitter->x + ((rand() & 0xFF) << 8) - 0x10000;
                         spark->y      = emitter->y + ((rand() & 0xFF) << 8) - 0x10000;
                         spark->z      = emitter->z;
-                        spark->unk_14 = 0;
-                        spark->unk_3  = rand() & 1;
+                        spark->z_step = 0;
+                        spark->blink  = rand() & 1;
                     }
                 }
                 emitter->timer = rand() & 7;

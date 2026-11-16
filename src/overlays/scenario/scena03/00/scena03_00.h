@@ -99,6 +99,7 @@ s32 func_8019601C();
 
 extern u16      D_80146876;
 extern u16      D_8014600E;
+extern u16      D_80146258;
 extern s8       D_801FD004[4];
 extern s8       D_801FD008[2];
 extern u8       D_801FD030;

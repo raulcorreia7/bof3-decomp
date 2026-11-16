@@ -31,9 +31,9 @@ segments:
     section_order: [.text, .data, .rodata, .bss]
     subsegments:
       - [0xF24, c, __SN_ENTRY_POINT]
-      - [0xF58, c, func_801CE758]
+      - [0xF58, c, __main]
       - [0xF60, c, init]
-      - [0x1130, c, start_stream]
+      - [0x1130, c, Logo_StartStream]
       - [0x1298, c, playback]
       - [0x167C, asm, PadInit]
       - [0x16CC, asm, PadRead]
@@ -193,7 +193,7 @@ segments:
       - [0xC870, o, toolchains/psyq/3.7/libcd/cdread, .data]
       - {start: 0xC8A0, type: data, name: data_801DA0A0, linker_section_order: .data}
       - [0xCAE0, o, toolchains/psyq/3.7/libpress/libpress, .data]
-      - {start: 0xCC24, type: data, name: data_801DA424, linker_section_order: .data}
+      - {start: 0xCC24, type: data, name: DCL_DVLC, linker_section_order: .data}
       - {start: 0xD424, type: data, name: CF_DVLC, linker_section_order: .data}
       - {start: 0x1D5B4, type: data, name: D_801EADB4, linker_section_order: .data}
   - [0x1E000]

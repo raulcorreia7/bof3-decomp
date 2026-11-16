@@ -8,9 +8,13 @@
 
 extern BMagicEffectFuncs D_801EEC04;
 
-extern Callback D_801F0C18[];
-void            func_801EF2F0(s32 selector);
-void            func_801EF934(void);
+extern s16 D_1F800000_HALF;
+extern s16 D_1F800004;
+
+extern Callback    D_801F0C18[];
+void               func_801EF2F0(s32 stat_index);
+extern BattleTurn* g_BattleTargetRecord;
+void               func_801EF934(void);
 
 void      func_801F026C(void);
 /* The disc colours by effect kind and ring: red, green and blue. */

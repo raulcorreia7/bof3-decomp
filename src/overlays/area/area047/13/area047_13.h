@@ -18,7 +18,7 @@ extern u8  D_801F39C8[];
 
 /* One row of the work window: the ring the overlay leaves at the lead
  * member's position, its two projected sizes and the grey both ring passes
- * draw with. func_801F2F60 reads +0x10 and +0x12 as signed halfwords and +0x17
+ * draw with. Area_DrawRingQuads reads +0x10 and +0x12 as signed halfwords and +0x17
  * as the grey. */
 typedef struct AreaRingRow {
     WorldPos pos;        /* 0x00 */
@@ -39,7 +39,8 @@ ASSERT_SIZE(AreaRingRow, 0x18);
 
 void func_801F2DB4(s32* pos, s16 radius, u8 center_shade, u8 rim_shade);
 
-void func_801F2F60(AreaRingRow* row);
+/* func_801F2F60 */
+void Area_DrawRingQuads(AreaRingRow* row);
 
 void func_801F31F4(s16 scale);
 

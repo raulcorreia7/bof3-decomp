@@ -101,7 +101,41 @@ MATCH void func_801EF2A0(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF2F0(s32 stat_index) {
+    BattleTurn* turn;
+    s8*         cell;
+    u8          selector;
+    s32         value;
+    s8          power;
+
+    FAKE_STACK_PADS(u8, 8); /* FAKE: retail frames 0x28 with no other stack use; plain C gives 0x20 (36 rows both ways). */
+    selector = g_Battle.target_selector;
+    if (selector < BATTLE_PARTY_CHARACTERS_COUNT) {
+        turn = &g_Game.members[selector].u.turn;
+    } else {
+        turn = &ENEMY_COMBATANT(selector).turn;
+    }
+    g_Battle.target_record               = turn;
+    g_Battle.target_record->hp_change    = 0;
+    g_Battle.target_record->ap_change    = 0;
+    g_Battle.target_record->target_flags = 0;
+    power                                = (s8)g_Abilities[g_Battle.action_id].power;
+    cell                                 = (s8*)g_BattleTargetRecord + (u8)stat_index;
+    value                                = cell[sizeof(BattleTurn)] + power;
+    if (value > 100) {
+        cell[sizeof(BattleTurn)] = 100;
+    } else if (value < -100) {
+        cell[sizeof(BattleTurn)] = -100;
+    } else {
+        cell[sizeof(BattleTurn)] += power;
+        Battle_RescaleStats(g_Battle.target_selector);
+    }
+}
+
+#else
 INCLUDE_ASM(func_801EF2F0);
+#endif
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
@@ -306,7 +340,33 @@ MATCH void func_801EFF68(void) {
     }
 }
 
-INCLUDE_ASM(func_801F00EC);
+MATCH void func_801F00EC(void) {
+    s16* angle;
+    u16  phase;
+    u8   count;
+
+    Battle_ProjectRange();
+    func_801F0910(RANDOM_MASK(3) | 0x20);
+    Effect_SetActorMatrix();
+    func_801F026C();
+    PopMatrix();
+    g_Task->unk_10 += 4;
+    g_Task->unk_09 += g_Task->unk_0C;
+    phase                = g_Task->param.unk_0B + 2;
+    g_Task->param.unk_0B = phase;
+    phase &= 0x1F;
+    angle               = &D_1F800004;
+    *angle              = phase << 7;
+    D_1F800000_HALF     = g_Task->timer * g_Task->unk_10 + 0xB0;
+    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + ((rsin(phase << 7) * D_1F800000_HALF) >> 3);
+    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + ((rcos(*angle) * D_1F800000_HALF) >> 3);
+    count               = g_Task->timer + 1;
+    g_Task->timer       = count;
+    if (count == 0x10) {
+        g_BattleEffectBattler->param.unk_0B--;
+        func_801E5988();
+    }
+}
 
 MATCH void func_801F026C(void) {
     POLY_G3* prim;
