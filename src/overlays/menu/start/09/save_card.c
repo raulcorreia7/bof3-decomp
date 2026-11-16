@@ -245,39 +245,36 @@ MATCH s32 SAVE_FormatCard(void) { /* func_801EF200 */
     return -1;
 }
 
-/* Builds the save-frame header and copies blocks for the selected save kind. */
+/* Builds the card file header for the selected save kind: title and icon frames. */
 
 /* func_801EF27C */
-MATCH void SAVE_BuildFileHeader(s8 magic_lo, s8 magic_hi, char* kind_name) { /* func_801EF27C */
-    u8  i;
-    u8* save;
+MATCH void SAVE_BuildFileHeader(s8 block_entry, s8 type, char* title) { /* func_801EF27C */
+    u8 i;
 
-    D_800C1800 = 0x53;
-    D_800C1801 = 0x43;
-    D_800C1802 = magic_hi;
-    D_800C1803 = magic_lo;
-    i          = 0;
-    save       = MEM_PTR(u8, SAVE_FRAME_ADDR);
-    for (; i < 28; i++) {
-        save[0x44 + i] = 0;
+    g_SaveHeader.magic[0]    = 'S';
+    g_SaveHeader.magic[1]    = 'C';
+    g_SaveHeader.type        = type;
+    g_SaveHeader.block_entry = block_entry;
+    for (i = 0; i < SAVE_RESERVE_SIZE; i++) {
+        g_SaveHeader.reserve[i] = 0;
     }
-    strcpy(MEM_PTR(char, SAVE_FRAME_ADDR + 4), kind_name);
-    *MEM_PTR(SaveIconPalette, 0x800C1860) = *MEM_PTR(SaveIconPalette, D_801EFE68);
-    switch (magic_hi & BYTE_MASK) {
+    strcpy(g_SaveHeader.title, title);
+    g_SaveHeader.clut = *(SaveIconClut*)D_801EFE68;
+    switch (type & BYTE_MASK) {
         case 17:
-            *MEM_PTR(SaveIconFrame, 0x800C1880) = *MEM_PTR(SaveIconFrame, D_801EFE68 + 0x2C);
-            *MEM_PTR(SaveIconFrame, 0x800C1900) = *MEM_PTR(SaveIconFrame, D_801EFE94);
-            *MEM_PTR(SaveIconFrame, 0x800C1980) = *MEM_PTR(SaveIconFrame, D_801EFE94);
+            g_SaveHeader.icons[0] = *(SaveIcon*)(D_801EFE68 + TIM_CLUT_BLOCK_SIZE);
+            g_SaveHeader.icons[1] = *(SaveIcon*)D_801EFE94;
+            g_SaveHeader.icons[2] = *(SaveIcon*)D_801EFE94;
             break;
         case 18:
-            *MEM_PTR(SaveIconFrame, 0x800C1880) = *MEM_PTR(SaveIconFrame, D_801EFE68 + 0x2C);
-            *MEM_PTR(SaveIconFrame, 0x800C1900) = *MEM_PTR(SaveIconFrame, D_801EFF54);
-            *MEM_PTR(SaveIconFrame, 0x800C1980) = *MEM_PTR(SaveIconFrame, D_801EFF54);
+            g_SaveHeader.icons[0] = *(SaveIcon*)(D_801EFE68 + TIM_CLUT_BLOCK_SIZE);
+            g_SaveHeader.icons[1] = *(SaveIcon*)D_801EFF54;
+            g_SaveHeader.icons[2] = *(SaveIcon*)D_801EFF54;
             break;
         case 19:
-            *MEM_PTR(SaveIconFrame, 0x800C1880) = *MEM_PTR(SaveIconFrame, D_801EFE68 + 0x2C);
-            *MEM_PTR(SaveIconFrame, 0x800C1900) = *MEM_PTR(SaveIconFrame, D_801EFF54);
-            *MEM_PTR(SaveIconFrame, 0x800C1980) = *MEM_PTR(SaveIconFrame, D_801F0014);
+            g_SaveHeader.icons[0] = *(SaveIcon*)(D_801EFE68 + TIM_CLUT_BLOCK_SIZE);
+            g_SaveHeader.icons[1] = *(SaveIcon*)D_801EFF54;
+            g_SaveHeader.icons[2] = *(SaveIcon*)D_801F0014;
             break;
     }
 }
@@ -340,7 +337,7 @@ MATCH s32 SAVE_TransferFile(s32 fd, s32 mode, s32 size, s32 offset) { /* func_80
     FAKE_REG(s32, count, "s1");
     /* FAKE: pin the constant one to $s6. */
     FAKE_REG(s32, one, "s6");
-    s32 frame;
+    s32 file;
     s32 minus_one;
     s32 remain;
 
@@ -352,20 +349,20 @@ MATCH s32 SAVE_TransferFile(s32 fd, s32 mode, s32 size, s32 offset) { /* func_80
         offset &= ~0x7F;
     }
     one       = 1;
-    frame     = SAVE_FRAME_ADDR;
+    file      = SAVE_FILE_ADDR;
     minus_one = -1;
 
 loop:
     if (mode != one) {
         if (mode == 2) {
-            goto write_path; /* the mode 2 branch writes the frame */
+            goto write_path; /* the mode 2 branch writes the file */
         }
         remain = count & BYTE_MASK;
         goto check; /* an unknown mode reuses the counter test */
     }
 read_path:
     lseek(fd, offset, 0);
-    if (read(fd, (void*)(offset + frame), size) != minus_one) {
+    if (read(fd, (void*)(offset + file), size) != minus_one) {
         close(fd);
         return 0;
     }
@@ -373,7 +370,7 @@ read_path:
 
 write_path:
     lseek(fd, offset, 0);
-    if (write(fd, (void*)(offset + frame), size) != minus_one) {
+    if (write(fd, (void*)(offset + file), size) != minus_one) {
         close(fd);
         return 0;
     }

@@ -4038,9 +4038,9 @@ SAVE_PollCard = { addr = 0x801EF040, type = "func", source = "Polls _card_info f
 SAVE_PollCardLoad = { addr = 0x801EF0B4, type = "func", source = "Retries _card_load for up to 60 frames and stores its event result." }
 SAVE_ClearCard = { addr = 0x801EF1C0, type = "func", source = "Issues _card_clear once and records the software card event result." }
 SAVE_FormatCard = { addr = 0x801EF200, type = "func", source = "Formats the bu00 or bu10 device of the selected port through format()." }
-SAVE_BuildFileHeader = { addr = 0x801EF27C, type = "func", source = "Writes the SC save frame header at 0x800C1800 and copies the icon blocks of the selected save kind." }
+SAVE_BuildFileHeader = { addr = 0x801EF27C, type = "func", source = "Fills the memory card file header g_SaveHeader at 0x800C1800: SC magic, icon type, block count, title and the icon frames of the selected save kind." }
 SAVE_OpenFile = { addr = 0x801EF96C, type = "func", source = "Opens the named file under the selected port prefix with up to 120 retries; a failure stores the directory capacity in g_SaveCardStatus." }
-SAVE_TransferFile = { addr = 0x801EFB44, type = "func", source = "Reads or writes the 0x200-byte save frame at 0x800C1800, retrying the card for up to 60 frames." }
+SAVE_TransferFile = { addr = 0x801EFB44, type = "func", source = "Reads or writes the save file buffer at 0x800C1800, retrying the card for up to 60 frames." }
 SAVE_ScanDirectory = { addr = 0x801EFCA8, type = "func", source = "Copies the firstfile and nextfile entries that match prefix into the 15-slot g_SaveCardDirectory table." }
 # Readable names live in the owning
 # headers; a row exists only for a type:func boundary or a
