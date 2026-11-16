@@ -1,7 +1,6 @@
 #include "area077_14.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F3D24(void) {
+MATCH void func_801F3D24(void) {
     Actor* task;
 
     PushMatrix();
@@ -22,6 +21,3 @@ NON_MATCHING void func_801F3D24(void) {
         func_80196070();
     }
 }
-#else
-INCLUDE_ASM(func_801F3D24);
-#endif
