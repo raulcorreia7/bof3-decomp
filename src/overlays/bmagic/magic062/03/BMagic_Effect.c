@@ -306,7 +306,33 @@ MATCH void func_801EFF68(void) {
     }
 }
 
-INCLUDE_ASM(func_801F00EC);
+MATCH void func_801F00EC(void) {
+    s16* angle;
+    u16  phase;
+    u8   count;
+
+    Battle_ProjectRange();
+    func_801F0910(RANDOM_MASK(3) | 0x20);
+    Effect_SetActorMatrix();
+    func_801F026C();
+    PopMatrix();
+    g_Task->unk_10 += 4;
+    g_Task->unk_09 += g_Task->unk_0C;
+    phase                = g_Task->param.unk_0B + 2;
+    g_Task->param.unk_0B = phase;
+    phase &= 0x1F;
+    angle               = &D_1F800004;
+    *angle              = phase << 7;
+    D_1F800000_HALF     = g_Task->timer * g_Task->unk_10 + 0xB0;
+    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + ((rsin(phase << 7) * D_1F800000_HALF) >> 3);
+    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + ((rcos(*angle) * D_1F800000_HALF) >> 3);
+    count               = g_Task->timer + 1;
+    g_Task->timer       = count;
+    if (count == 0x10) {
+        g_BattleEffectBattler->param.unk_0B--;
+        func_801E5988();
+    }
+}
 
 MATCH void func_801F026C(void) {
     POLY_G3* prim;

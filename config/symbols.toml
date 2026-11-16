@@ -807,6 +807,7 @@ Effect_TickOnTimerZero = { addr = 0x801F00D0, type = "func", source = "Counts th
 g_BMagicEffectModes = { addr = 0x801F0BB0, source = "Handlers of magic060 (Identify), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic062/03"]
+D_1F800000_HALF = { addr = 0x1F800000, type = "s16", source = "The scratchpad base 0x1F800000 as signed halfwords; func_801F00EC stages the ring radius there for its rsin and rcos scaling.", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
@@ -1084,6 +1085,7 @@ g_BMagicEffectModes = { addr = 0x801EFA84, source = "Handlers of magic081 (Rotte
 D_801EFA8C = { addr = 0x801EFA8C, source = "Effect slot table of the magic081 effect, scanned by BMagic_AllocEffect." }
 
 ["emi/bmagic/magic082/03"]
+D_1F800000_HALF = { addr = 0x1F800000, type = "s16", source = "The scratchpad base 0x1F800000 as signed halfwords; func_801F0260 stages the ring radius there for its rsin and rcos scaling.", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
@@ -1103,6 +1105,7 @@ Effect_CountDownAndStep = { addr = 0x801EFD74, type = "func", source = "Counts t
 g_BMagicEffectModes = { addr = 0x801F0D14, source = "Handlers of magic082 (Steroids, Magic Belt, Protect…), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic083/03"]
+D_1F800000_HALF = { addr = 0x1F800000, type = "s16", source = "The scratchpad base 0x1F800000 as signed halfwords; func_801F038C stages the ring radius there for its rsin and rcos scaling.", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }

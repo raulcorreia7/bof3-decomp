@@ -20,10 +20,10 @@ NON_MATCHING void func_801EED18(void) {
     }
     Battle_CenterCamera();
     g_Task->pos.x.fixed  = g_AreaScrollTargetX;
-    g_Task->param.unk_0B = 0;
-    g_Task->pos.y.fixed  = g_AreaScrollTargetY;
     g_Task->unk_09       = 0x38;
+    g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
+    g_Task->pos.y.fixed = g_AreaScrollTargetY;
     SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
     slot                               = Battle_AllocEffect(1, 0x61) & BYTE_MASK;
     g_BattleEffects[slot].header.mode  = 0;
