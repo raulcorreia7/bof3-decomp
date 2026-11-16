@@ -21,7 +21,7 @@ NON_MATCHING void func_801F2FA0(s16 x, s16 y, s8* glyphs, u8 phase) {
     for (i = 0; i < 9; i++) {
         px = x + i * 10;
         for (j = 0; j < 7; j++) {
-            func_801F388C(px, y + j * 10, glyphs[j * 9 + phase]);
+            func_801F388C(px, (s16)(y + j * 10), glyphs[j * 9 + phase]);
         }
         phase++;
         if (phase >= 9) {
