@@ -484,9 +484,9 @@ NON_MATCHING void func_801FC380(void) {
         case 4:
             if (g_ScriptVars[0] == 0x4) {
                 g_SceneState.step_05 = 5;
-                g_Characters[CHAR_INDEX_NINA].unk_07 |= 1;
-                g_Characters[CHAR_INDEX_MOMO].unk_07 |= 1;
-                g_Characters[CHAR_INDEX_PECO].unk_07 |= 1;
+                g_Characters[CHAR_INDEX_NINA].party_flags |= 1;
+                g_Characters[CHAR_INDEX_MOMO].party_flags |= 1;
+                g_Characters[CHAR_INDEX_PECO].party_flags |= 1;
                 switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {
                     case 1:
                         Scene_RunScenario(3);
