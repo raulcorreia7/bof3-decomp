@@ -8,7 +8,7 @@ MATCH void func_801F2CDC(void) {
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 1, 0x380, 0x100), 0);
     GFX_AddPrim(1, sizeof(DR_MODE));
-    func_801AFE18(scratch);
+    Area_SetCameraMatrix(scratch);
 
     spin  = (WorldSpin*)AREA_WORK;
     index = 0;
