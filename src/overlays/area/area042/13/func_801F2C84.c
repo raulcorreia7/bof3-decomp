@@ -2,12 +2,14 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F2C84(void) {
-    FAKE_STACK_PADS(u8, 16); /* FAKE: retail frame is 16 bytes larger with no access. */
     s16 height;
+    s32 value;
+    FAKE_STACK_PADS(u8, 16); /* FAKE: retail's frame is 0x28, the body's locals take 0x18. */
 
     height                   = Area_SampleHeight(g_Task->vx, g_Task->vy);
-    g_Task->vz               = TO_COORD(height) + TO_COORD(256);
-    g_Task->gravity          = TO_COORD(height) + TO_COORD(256);
+    value                    = (height << 0x10) + TO_COORD(0x100);
+    g_Task->vz               = value;
+    g_Task->gravity          = value;
     COORD_INT(g_Task->pos.z) = height;
     g_Task->state_70.word    = 0;
     if (SYS_TestFlag(g_SceneEventFlags, 0xB) == 0) {

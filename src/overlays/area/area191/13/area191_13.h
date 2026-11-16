@@ -45,6 +45,8 @@ extern u8* D_801F43D8[];
 
 /* The draw pass this image's entry runs. */
 
+/* Starts scene event 0x35 when the actor stands on an 0xA6 cell. */
+u8   func_801F3658(s32 x, s32 y);
 void func_801F39AC(void);
 void func_801F3AB0(void);
 

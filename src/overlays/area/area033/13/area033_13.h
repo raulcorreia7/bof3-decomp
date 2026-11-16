@@ -10,12 +10,11 @@
 #include "area/spad.h"
 
 /* The scratchpad quad vertices the map arrow draws through. */
-extern SVECTOR D_1F800014[];
 /* The map step: 9 runs the area entry instead of the reset. */
-extern u8      D_8014496D;
+extern u8 D_8014496D;
 /* The party focus point: the camera-scroll targets, x then y, in 16.16. */
 /* The tile map scan: four byte records per work row, the map offset and code. */
-extern u8      D_801F4CB0[];
+extern u8 D_801F4CB0[];
 
 #include "overlays/area/WorldMapMessage.h"
 
@@ -36,10 +35,8 @@ extern u8             D_801F4FA3[];
 extern WorldMapMarker D_801F4FF8[6];
 extern void (*D_801F5010[])(void);
 /* D_801F501C */
-extern Point2u g_FlockVelocity[4];
 /* The script id and tile-mode byte tables indexed by twice the spawn row. */
 /* D_801F502C */
-extern u8      g_FlockScript[4][2];
 extern void (*D_801F5034[])(void);
 #define AREA_HUD_MASK_TABLE D_801F4FF8
 
