@@ -2,27 +2,26 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F2FA0(s16 x, s16 y, s8* glyphs, u8 phase) {
-    s16 left = x;
-    s16 top  = y;
-    s16 right;
-    s16 bottom;
+    s16 px;
+    s16 py;
     u8  i;
-    u8  col;
+    u8  j;
 
     func_801F3838(2);
-    right  = x + 0x5A;
-    bottom = y + 0x46;
-    func_801F3594(x, y, right, y, x, bottom, right, bottom, 0x40, 0x40, 0x40, 1);
+    func_801F3594(x, y, x + 0x5A, y, x, y + 0x46, x + 0x5A, y + 0x46, 0x40, 0x40, 0x40, 1);
     func_801F3838(1);
     for (i = 0; i < 10; i++) {
-        func_801F3774(left + i * 10, top, left + i * 10, top + 0x45, 0x96, 0x96, 0x96, 0);
+        px = x + i * 10;
+        func_801F3774(px, y, px, y + 0x45, 0x96, 0x96, 0x96, 0);
     }
     for (i = 0; i < 8; i++) {
-        func_801F3774(left, top + i * 10, left + 0x59, top + i * 10, 0x96, 0x96, 0x96, 0);
+        py = y + i * 10;
+        func_801F3774(x, py, x + 0x59, py, 0x96, 0x96, 0x96, 0);
     }
     for (i = 0; i < 9; i++) {
-        for (col = 0; col < 7; col++) {
-            func_801F388C(left + i * 10, top + col * 10, glyphs[col * 9 + phase]);
+        px = x + i * 10;
+        for (j = 0; j < 7; j++) {
+            func_801F388C(px, (s16)(y + j * 10), glyphs[j * 9 + phase]);
         }
         phase++;
         if (phase >= 9) {
