@@ -15,7 +15,7 @@ MATCH u8 func_801D54F8(void) {
             g_Game.members[index].chr.hp        = g_Game.members[index].chr.stats.max_hp;
             g_Game.members[index].chr.ap        = g_Game.members[index].chr.stats.max_ap;
             g_Game.members[index].chr.willpower = g_Game.members[index].chr.stats.willpower;
-            func_800A36F0(index, 0x8FFu);
+            Battle_CureStatus(index, 0x8FFu);
         }
     }
 

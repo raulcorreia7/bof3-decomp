@@ -16,7 +16,7 @@ MATCH void func_8009E98C(void) {
             g_Battle.target_record->hp_change = selection;
             /* FAKE: retail schedules the call arguments after the count store. */
             FAKE_ORDER_LOCK(g_BattleLivingPartyCount += 1);
-            func_800A36F0(*state, 0x4000);
+            Battle_CureStatus(*state, 0x4000);
             return;
         }
         g_Battle.target_record->hp_change = 0;

@@ -4,7 +4,7 @@
 MATCH u8 Battle_InflictStatus(s32 status_mask) {
     Battle_MarkDamageApplied();
     if (Battle_PickAbility(g_Battle.active_battler, g_Battle.target) == 0) {
-        func_800A31E0(g_Battle.target, status_mask);
+        Battle_AddStatus(g_Battle.target, status_mask);
         return 0;
     }
     return 1;

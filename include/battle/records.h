@@ -556,7 +556,7 @@ typedef struct PartyMember {
     TaskHeader          header; /* 0x00 */
     u8                  unk_03;
     u8                  unk_04;
-    u8                  slot; /* +0x05 battler slot; func_801DC044 passes it to func_800A36F0 */
+    u8                  slot; /* +0x05 battler slot; func_801DC044 passes it to Battle_CureStatus */
     u8                  pad_06;
     u8                  unk_07;
     u8                  facing; /* +0x08 the direction the battler faces */

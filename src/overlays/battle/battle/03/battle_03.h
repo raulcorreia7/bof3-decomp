@@ -494,8 +494,10 @@ extern Stats D_801EC2E8;
 void               func_8009BFC4(void);
 void               func_8009D198(void);
 u16                func_800A2AE0(u8 arg0);
-void               func_800A31E0(u32 selection_kind, u32 input_mask);
-void               func_800A36F0(u32 battler_index, u32 flags);
+/* func_800A31E0 */
+void               Battle_AddStatus(u32 battler_index, u32 status_mask);
+/* func_800A36F0 */
+void               Battle_CureStatus(u32 battler_index, u32 status_mask);
 u8                 func_800A3DF8(u32 battler_index, u32 selection_kind);
 s32                func_800A8F58(void);
 s32                func_800AA368(void);

@@ -23,8 +23,8 @@ MATCH void Battle_ApplyEnemyEvent(EnemyBattler* work_arg, BattleEventPacket* eve
         case 2:
             saved = TASK_BYTES;
             TASK_SET(work);
-            func_800A36F0(work->slot, 0xFFFF);
-            func_800A31E0(((EnemyBattler*)(void*)g_Task)->slot, *(u8*)&((EnemyBattler*)(void*)work)->status | event->selector);
+            Battle_CureStatus(work->slot, 0xFFFF);
+            Battle_AddStatus(((EnemyBattler*)(void*)g_Task)->slot, *(u8*)&((EnemyBattler*)(void*)work)->status | event->selector);
             TASK_SET(saved);
             break;
         case 3:

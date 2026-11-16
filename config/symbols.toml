@@ -4,6 +4,8 @@
 
 ["emi/battle/battle/03"]
 Battle_TriggerEnemyEvents = { addr = 0x8009BBE8, type = "func", source = "Walks the four event packets of the current enemy and triggers each one whose condition holds, once per battle unless it is a repeating trigger." }
+Battle_AddStatus = { addr = 0x800A31E0, type = "func", source = "Adds the status bits of the mask to one battler (players below 3, enemies from 3): each bit goes into g_Battle.pending_status unless the battler already has it or a blocking status, then the merged word is stored back and published." }
+Battle_CureStatus = { addr = 0x800A36F0, type = "func", source = "Cures the status bits of the mask on one battler: clears them from its status word, restores a confused battler's position and publishes the new status through the work cell." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_RescaleStats = { addr = 0x800A9BD8, type = "func", source = "Rescales one battler's stats." }
 Battle_ApplyFormationStats = { addr = 0x800AAA74, type = "func", source = "Applies the formation's stat changes to the party." }
@@ -154,7 +156,7 @@ g_BattleEffects = { addr = 0x801EC330, source = "Battle effect work records (str
 Effect_StartPlaying = { addr = 0x801EF00C, alias = true, source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic150 (Eye Beam)." }
 
 ["emi/battle/battle/15"]
-g_BattleWorkCell = { addr = 0x1F800044, alias = true, source = "The task cell at 0x1F800044 as one u32: the plain word func_800A36F0 saves and restores without reloading g_Task." }
+g_BattleWorkCell = { addr = 0x1F800044, alias = true, source = "The task cell at 0x1F800044 as one u32: the plain word Battle_CureStatus saves and restores without reloading g_Task." }
 jtbl_80096804 = { addr = 0x80096804, type = "Callback", source = "The switch table of Battle_TriggerEnemyEvents: the jump targets of its jr dispatch." }
 jtbl_8009689C = { addr = 0x8009689C, type = "Callback", source = "The switch table of func_8009BFC4: the jump targets of its jr dispatch." }
 jtbl_80096914 = { addr = 0x80096914, type = "Callback", source = "The switch table of Battle_ApplyEnemyEvent: the jump targets of its jr dispatch." }
@@ -201,10 +203,12 @@ Battle_GrantDamageImmunity = { addr = 0x800A1A30, type = "func", source = "sets 
 Battle_GetActionId = { addr = 0x800A2880, type = "func", source = "the body returns g_Battle.action_id" }
 Battle_GetFireResistance = { addr = 0x800A2AE0, type = "func", source = "the body returns g_Game.members[battler_index].chr.stats.resistances[0]" }
 Battle_CalcHeal = { addr = 0x800A30E8, type = "func", source = "Computes the heal an action gives: the ability's power row scaled by the rate byte and the target's holy resistance, returned as a negative hp change." }
+Battle_AddStatus = { addr = 0x800A31E0, type = "func", source = "Adds the status bits of the mask to one battler (players below 3, enemies from 3): each bit goes into g_Battle.pending_status unless the battler already has it or a blocking status, then the merged word is stored back and published." }
+Battle_CureStatus = { addr = 0x800A36F0, type = "func", source = "Cures the status bits of the mask on one battler: clears them from its status word, restores a confused battler's position and publishes the new status through the work cell." }
 Battle_SetTarget = { addr = 0x800A39B4, type = "func", source = "the body stores into g_Battle.target_record" }
 Battle_PickAbility = { addr = 0x800A3A10, type = "func", source = "picks an ability for the battler and selection kind, using g_Abilities and rand" }
 Battle_MarkDamageApplied = { addr = 0x800A3F28, type = "func", source = "existing bottom-up proposal: ORs BATTLE_STATE_DAMAGE_APPLIED into g_Battle.state and marks the damage row" }
-Battle_InflictStatus = { addr = 0x800A41D8, type = "func", source = "Marks the battle damage applied, then adds the given status mask to the action target through func_800A31E0 unless the ability picker still holds the action." }
+Battle_InflictStatus = { addr = 0x800A41D8, type = "func", source = "Marks the battle damage applied, then adds the given status mask to the action target through Battle_AddStatus unless the ability picker still holds the action." }
 Battle_RollHpDamage = { addr = 0x800A4294, type = "func", source = "Rolls the damage of the active battler's hp divided by the divisor, scaled by the random percent table D_800B498C and the target's resistance to the action's element; 0 when the target is damage-immune." }
 Battle_LoadDraArchive = { addr = 0x800A4700, type = "func", source = "Loads the BATL_DRA archive when no choice phase is pending and advances ui_state; step 0 of the D_800B4CAC battle UI step table. The archive's job is not proven, so the name keeps the disc label." }
 Battle_FinishDraLoad = { addr = 0x800A4744, type = "func", source = "Waits EMI_IsReady for the BATL_DRA stream started by Battle_LoadDraArchive, copies palette rows 0x1A and 0x1B and raises g_GfxPalettePending; step 1 of D_800B4CC8." }

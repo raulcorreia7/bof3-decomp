@@ -5,7 +5,8 @@
 
 /* Applies the battler's status masks, updates shared defence values when the
  * magic-defence bit changes, and restores the active work pointer. */
-MATCH u16 func_800A36F0(u8 battler_index, u16 flags) {
+/* func_800A36F0 */
+MATCH u16 Battle_CureStatus(u8 battler_index, u16 status_mask) {
     u16 status;
     u32 saved_work;
 
@@ -15,35 +16,35 @@ MATCH u16 func_800A36F0(u8 battler_index, u16 flags) {
         status = ENEMY_COMBATANT(battler_index).status;
     }
 
-    if (flags & STATUS_KO) {
+    if (status_mask & STATUS_KO) {
         status &= ~STATUS_KO;
     }
-    if (flags & STATUS_POISONED) {
+    if (status_mask & STATUS_POISONED) {
         status &= ~STATUS_POISONED;
     }
-    if (flags & 0x1u) {
+    if (status_mask & 0x1u) {
         status &= 0xFFFEu;
     }
-    if (flags & 0x2u) {
+    if (status_mask & 0x2u) {
         status &= 0xFFFDu;
     }
-    if (flags & STATUS_PARALYZED) {
+    if (status_mask & STATUS_PARALYZED) {
         status &= ~STATUS_PARALYZED;
     }
-    if (flags & STATUS_SLEEPING) {
+    if (status_mask & STATUS_SLEEPING) {
         status &= ~STATUS_SLEEPING;
     }
-    if (flags & STATUS_BLIND) {
+    if (status_mask & STATUS_BLIND) {
         status &= ~STATUS_BLIND;
     }
-    if (flags & STATUS_SILENCED) {
+    if (status_mask & STATUS_SILENCED) {
         status &= ~STATUS_SILENCED;
     }
-    if (flags & 0x800u) {
+    if (status_mask & 0x800u) {
         status &= 0xF7FFu;
     }
 
-    if ((flags & STATUS_CONFUSED) && (status & STATUS_CONFUSED)) {
+    if ((status_mask & STATUS_CONFUSED) && (status & STATUS_CONFUSED)) {
         u32 slot;
 
         status &= ~STATUS_CONFUSED;

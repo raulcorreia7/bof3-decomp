@@ -60,10 +60,10 @@ MATCH s16 Battle_CalcDamage(u8 attacker_slot, u8 target_slot, u16 element_id) {
         if (status & STATUS_SLEEPING) {
             *(volatile s16*)&D_801463DA |= 0x40;
             if (BATTLER_IS_PLAYER(target_slot)) {
-                func_800A36F0(g_Game.members[target_slot].slot, 0x40);
+                Battle_CureStatus(g_Game.members[target_slot].slot, 0x40);
                 g_Game.members[target_slot].u.turn.counter = 0;
             } else {
-                func_800A36F0(ENEMY_COMBATANT(target_slot).slot, 0x40);
+                Battle_CureStatus(ENEMY_COMBATANT(target_slot).slot, 0x40);
                 ENEMY_COMBATANT(target_slot).turn.counter = 0;
             }
             if (damage == 0) {
@@ -73,10 +73,10 @@ MATCH s16 Battle_CalcDamage(u8 attacker_slot, u8 target_slot, u16 element_id) {
         if (status & STATUS_CONFUSED) {
             *(volatile s16*)&D_801463DA |= 0x20;
             if (BATTLER_IS_PLAYER(target_slot)) {
-                func_800A36F0(g_Game.members[target_slot].slot, 0x20);
+                Battle_CureStatus(g_Game.members[target_slot].slot, 0x20);
                 g_Game.members[target_slot].u.turn.counter = 0;
             } else {
-                func_800A36F0(ENEMY_COMBATANT(target_slot).slot, 0x20);
+                Battle_CureStatus(ENEMY_COMBATANT(target_slot).slot, 0x20);
                 ENEMY_COMBATANT(target_slot).turn.counter = 0;
             }
             if (damage == 0) {

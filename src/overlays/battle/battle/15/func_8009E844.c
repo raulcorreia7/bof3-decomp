@@ -21,7 +21,7 @@ MATCH void func_8009E844(void) {
                 g_Battle.target_record->hp_change = (-ENEMY_COMBATANT(battler).stats.max_hp >> 2);
                 g_Battle.living_enemy_count++;
             }
-            func_800A36F0(g_Battle.target, 0x4000);
+            Battle_CureStatus(g_Battle.target, 0x4000);
             return;
         }
         g_Battle.target_record->target_flags = 1;
