@@ -23,10 +23,10 @@ MATCH void func_801E1710(MenuPanelTask* task) {
             shade   = (n == task->unk_0C) * 2;
             ability = (Ability*)&g_Abilities[*list];
             if (n == task->unk_0B || n == task->unk_0C) {
-                func_801AF930((s16)(task->pos.x + 7), (s16)(y + 0x1A), 7, level, ability, ability->cost, 1);
-                func_801AF930((s16)(task->pos.x + 7), (s16)(y + 0x18), shade, level, ability, ability->cost, 0);
+                UI_DrawAbilityRow((s16)(task->pos.x + 7), (s16)(y + 0x1A), 7, level, ability, ability->cost, 1);
+                UI_DrawAbilityRow((s16)(task->pos.x + 7), (s16)(y + 0x18), shade, level, ability, ability->cost, 0);
             } else {
-                func_801AF930((s16)(task->pos.x + 7), (s16)(y + 0x1A), 0, level, ability, ability->cost, 0);
+                UI_DrawAbilityRow((s16)(task->pos.x + 7), (s16)(y + 0x1A), 0, level, ability, ability->cost, 0);
             }
         }
         n++;

@@ -561,7 +561,7 @@ segments:
       - [0x19C94, c, Item_PassesTest]
       - [0x19DB0, c, func_801AF5B0]
       - [0x1A000, c, func_801AF800]
-      - [0x1A130, c, func_801AF930]
+      - [0x1A130, c, UI_DrawAbilityRow]
       - [0x1A21C, c, func_801AFA1C]
       - [0x1A510, c, func_801AFD10]
       - [0x1A618, c, Area_SetCameraMatrix]

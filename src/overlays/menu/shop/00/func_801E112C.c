@@ -28,10 +28,10 @@ MATCH void func_801E112C(MenuPanelTask* task) {
             level   = Char_GetAbilityElement(*kinds);
             shade   = (task->unk_0A + i == task->unk_0C + offset) * 2;
             if (task->unk_0A + i == task->unk_0B + offset || task->unk_0A + i == task->unk_0C + offset) {
-                func_801AF930((s16)(task->pos.x + 7), (s16)(y + 0x1A), 7, level, ability, ability->cost, 1);
-                func_801AF930((s16)(task->pos.x + 7), (s16)(y + 0x18), shade, level, ability, ability->cost, 0);
+                UI_DrawAbilityRow((s16)(task->pos.x + 7), (s16)(y + 0x1A), 7, level, ability, ability->cost, 1);
+                UI_DrawAbilityRow((s16)(task->pos.x + 7), (s16)(y + 0x18), shade, level, ability, ability->cost, 0);
             } else {
-                func_801AF930((s16)(task->pos.x + 7), (s16)(y + 0x1A), 0, level, ability, ability->cost, 0);
+                UI_DrawAbilityRow((s16)(task->pos.x + 7), (s16)(y + 0x1A), 0, level, ability, ability->cost, 0);
             }
         }
         kinds++;

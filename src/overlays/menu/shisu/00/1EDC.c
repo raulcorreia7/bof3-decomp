@@ -538,11 +538,11 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
             count   = Char_GetAbilityCost(g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], *list, 0);
             if (n == panel->drawn_cursor || n == panel->group_cursor) {
                 if (shade != MENU_SHADE_DIM) {
-                    func_801AF930((s16)(panel->pos.x + 7), (s16)(y + 0x1A), MENU_SHADE_DIM, level, (u8*)ability, count, 1);
+                    UI_DrawAbilityRow((s16)(panel->pos.x + 7), (s16)(y + 0x1A), MENU_SHADE_DIM, level, (u8*)ability, count, 1);
                 }
-                func_801AF930((s16)(panel->pos.x + 7), (s16)(y + 0x18), shade, level, (u8*)ability, count, locked);
+                UI_DrawAbilityRow((s16)(panel->pos.x + 7), (s16)(y + 0x18), shade, level, (u8*)ability, count, locked);
             } else {
-                func_801AF930((s16)(panel->pos.x + 7), (s16)(y + 0x1A), shade, level, (u8*)ability, count, locked);
+                UI_DrawAbilityRow((s16)(panel->pos.x + 7), (s16)(y + 0x1A), shade, level, (u8*)ability, count, locked);
             }
         }
         n++;

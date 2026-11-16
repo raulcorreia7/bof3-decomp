@@ -44,13 +44,13 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
                 if ((icon_x == task->flags) || (icon_x == task->unk_0C)) {
                     icon &= BYTE_MASK;
                     if (icon != 7) {
-                        func_801AF930((s16)(task->pos.x + 7), (s16)(row_y + 0x1A), 7U, ability_id & BYTE_MASK, ability_obj, ability_kind & BYTE_MASK, 1);
+                        UI_DrawAbilityRow((s16)(task->pos.x + 7), (s16)(row_y + 0x1A), 7U, ability_id & BYTE_MASK, ability_obj, ability_kind & BYTE_MASK, 1);
                     }
                     icon_y = (s16)(row_y + 0x18);
                 } else {
                     icon_y = (s16)(row_y + 0x1A);
                 }
-                func_801AF930((s16)(task->pos.x + 7), icon_y, icon, ability_id & BYTE_MASK, ability_obj, ability_kind & BYTE_MASK, 1);
+                UI_DrawAbilityRow((s16)(task->pos.x + 7), icon_y, icon, ability_id & BYTE_MASK, ability_obj, ability_kind & BYTE_MASK, 1);
             }
             index += 1;
             kinds += 1;

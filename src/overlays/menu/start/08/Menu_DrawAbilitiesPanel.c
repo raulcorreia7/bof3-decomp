@@ -32,11 +32,11 @@ MATCH void Menu_DrawAbilitiesPanel(MenuPanelTask* task) {
             ability = Char_GetAbilityCost(g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], *text, 0);
             if (n == task->flags || n == task->unk_0C) {
                 if ((u8)color != 7) {
-                    func_801AF930((s16)(task->pos.x + 7), (s16)(y + 0x1A), 7, level, entry, ability, 1);
+                    UI_DrawAbilityRow((s16)(task->pos.x + 7), (s16)(y + 0x1A), 7, level, entry, ability, 1);
                 }
-                func_801AF930((s16)(task->pos.x + 7), (s16)(y + 0x18), color, level, entry, ability, disabled);
+                UI_DrawAbilityRow((s16)(task->pos.x + 7), (s16)(y + 0x18), color, level, entry, ability, disabled);
             } else {
-                func_801AF930((s16)(task->pos.x + 7), (s16)(y + 0x1A), color, level, entry, ability, disabled);
+                UI_DrawAbilityRow((s16)(task->pos.x + 7), (s16)(y + 0x1A), color, level, entry, ability, disabled);
             }
         }
     }
