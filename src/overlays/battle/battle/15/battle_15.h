@@ -295,11 +295,6 @@ typedef struct BattleTemplateStats {
     u8  pad_0C[0x6C];
 } BattleTemplateStats;
 
-/* Enemy battler records (stride 0x118), one per battler slot. */
-typedef struct BattleEnemy {
-    u8 unk_00[0x118];
-} BattleEnemy;
-
 /* The same cell read without the reload is g_BattleWorkCell: Battle_CureStatus's
  * save/restore keeps the plain word. A second name is the only form that keeps
  * the retail `lui`/`sw` pairs; the address is an `alias:true` row of the image's table in config/symbols.toml. */
