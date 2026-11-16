@@ -46,7 +46,33 @@ MATCH void func_801EEE1C(void) {
     battler->header.step += 1;
 }
 
-INCLUDE_ASM(func_801EEEA8);
+MATCH void func_801EEEA8(void) {
+    s32*         scroll_x;
+    s32*         scroll_y;
+    PartyMember* target;
+    u8           index;
+
+    if (g_Task->unk_09-- != 0) {
+        return;
+    }
+
+    scroll_x                   = &g_AreaScrollTargetX;
+    scroll_y                   = &g_AreaScrollTargetY;
+    g_Task->pos.x.fixed        = *scroll_x;
+    g_Task->pos.y.fixed        = *scroll_y;
+    g_Task->pos.z.part.integer = g_AreaCameraHeight;
+    *scroll_x                  = g_Game.members[g_Battle.active_battler].pos.x.fixed;
+    *scroll_y                  = g_Game.members[g_Battle.active_battler].pos.y.fixed;
+    g_AreaCameraHeight         = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
+    func_801F103C();
+    index                               = Battle_AllocEffect(1, 0x3A) & BYTE_MASK;
+    target                              = g_Task;
+    g_BattleEffects[index].header.mode  = 3;
+    g_BattleEffects[index].target.party = target;
+    g_Task->unk_09                      = 1;
+    g_Task->timer                       = 1;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EEFF8(void) {
     u32          effect_slot;
