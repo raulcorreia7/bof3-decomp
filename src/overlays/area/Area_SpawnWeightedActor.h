@@ -1,7 +1,4 @@
-typedef struct AreaSpawnPosition {
-    u8 x;
-    u8 y;
-} AreaSpawnPosition;
+typedef Cell2 AreaSpawnPosition;
 
 ASSERT_SIZE(AreaSpawnPosition, 2);
 ASSERT_OFFSET(AreaSpawnPosition, x, 0);

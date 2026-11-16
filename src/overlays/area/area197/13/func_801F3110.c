@@ -1,6 +1,6 @@
 #include "area197_13.h"
 
-MATCH void func_801F3110(u16 start, u16 end, Point3l* from, Point3l* to) {
+MATCH void func_801F3110(u16 start, u16 end, Pos3* from, Pos3* to) {
     AreaSparkRow* row;
     u16           slot;
 

@@ -1,11 +1,11 @@
 #include "area077_14.h"
 
 MATCH void func_801F2C48(void) {
-    Point2s* points;
+    Pos2* points;
     u8       i;
 
     i      = 0;
-    points = MEM_PTR(Point2s, AREA_WORK);
+    points = MEM_PTR(Pos2, AREA_WORK);
     do {
         points[i].x                         = 0;
         /* The Y column is its own address in the original; the two halves load apart. */

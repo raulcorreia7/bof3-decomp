@@ -296,7 +296,7 @@ MATCH void func_801F7AEC(void) {
 }
 
 MATCH void func_801F7D1C(void) {
-    Point2u pos;
+    Pos2u pos;
 
     if (g_GameStateIndex == 3 || g_GameStateIndex == 1) {
         g_Actors[g_Task->param.actor_slot].active_flags &= 0xF7;
@@ -311,7 +311,7 @@ MATCH void func_801F7D1C(void) {
 }
 
 MATCH void func_801F7E2C(void) {
-    Point2u pos;
+    Pos2u pos;
 
     func_801F83AC(&pos);
     if (g_Task->tint.signed_bytes.delta.red < 0x70) {
@@ -332,7 +332,7 @@ MATCH void func_801F7E2C(void) {
 }
 
 MATCH void func_801F7F5C(void) {
-    Point2u pos;
+    Pos2u pos;
 
     func_801F83AC(&pos);
     if (g_Task->tint.signed_bytes.delta.red != 0) {
@@ -383,7 +383,7 @@ MATCH void func_801F81D8(s16 x, s16 y) {
     SCENA15_SPRITE_END(prim);
 }
 
-MATCH void func_801F83AC(Point2u* out) {
+MATCH void func_801F83AC(Pos2u* out) {
     SVECTOR vec;
     long    depth;
     long    flag;

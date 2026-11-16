@@ -4,7 +4,7 @@
  * clock, and files it into the actor's cell. */
 MATCH void func_801F3400(s16 x, s16 y, s16 radius_x, s16 radius_y) {
     POLY_F3* prim;
-    Point2u  point;
+    Pos2u  point;
     u16      angle;
     u16      i;
 

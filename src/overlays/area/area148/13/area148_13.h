@@ -19,9 +19,9 @@
 /* The field focus point the work position copies. */
 /* D_80147A90 */
 extern s32     g_AreaFocusY;
-/* The facing routes the projection reads, one Point2l per spawn index. */
+/* The facing routes the projection reads, one Offset2 per spawn index. */
 /* D_80181AC0 */
-extern Point2l g_FacingOffsets[];
+extern Offset2 g_FacingOffsets[];
 /* The state handler tables the dispatchers index. */
 extern u8      D_801F4FC4[];
 /* The four scratch vectors RotTransPers4 projects. */

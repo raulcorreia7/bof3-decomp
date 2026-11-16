@@ -13,7 +13,7 @@ extern u8  D_801F4F68[];
 extern u16 D_801F4F5C[];
 
 void Area_DrawMatrixLightPillar(s32* pos);
-void func_801F31E8(Point3l* pos, s32 height);
+void func_801F31E8(Pos3* pos, s32 height);
 void Area_DrawLightPillar(s32* pos);
 
 #endif

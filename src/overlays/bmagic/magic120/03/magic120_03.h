@@ -13,7 +13,7 @@ extern u8 D_801F0D08[];
 extern u8 D_801F0D0C[];
 
 /* The offset of each of the three rows of breath pieces from an enemy, in 16.16. */
-extern Point3l D_801F0CE4[];
+extern Pos3 D_801F0CE4[];
 
 void func_801F078C(void);
 

@@ -215,7 +215,7 @@ Callback D_801F51AC[3] = {
 };
 
 /* Spawn offsets selected by the work byte at +0x08. */
-Point2u g_FlockVelocity[4] = {
+Pos2u g_FlockVelocity[4] = {
     {0, SPAWN_OFFSET_BACK},
     {SPAWN_OFFSET_BACK, 0},
     {0, SPAWN_OFFSET_FORWARD},

@@ -128,7 +128,7 @@ void  Area_ProjectPoint(s32* pos, DVECTOR* screen_xy);
 /* func_801AFF64 */
 void  MATH_SetIdentity(MATRIX* matrix);
 /* func_801AFF90 */
-s16   func_801AFF90(Point2s* origin, Point2s* first_point, Point2s* second_point);
+s16   func_801AFF90(Pos2* origin, Pos2* first_point, Pos2* second_point);
 /* Game_ProjectWorldPoint */
 /* func_801AFFD8 */
 void  Game_ProjectWorldPoint(const void* world_position, void* screen_xy, void* projection);

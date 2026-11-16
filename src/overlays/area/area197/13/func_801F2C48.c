@@ -1,8 +1,8 @@
 #include "area197_13.h"
 
 MATCH void func_801F2C48(void) {
-    Point3l from;
-    Point3l to;
+    Pos3 from;
+    Pos3 to;
 
     func_801F30E4();
     func_801F3474();

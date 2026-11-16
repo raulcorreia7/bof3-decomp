@@ -29,7 +29,7 @@ statements. A workaround stays only when the retail bytes need it, and its comme
 | A slot is a filled position (`party_slot`); a fixed table position is an index (`CharacterIndex`) | `CharacterSlot` for the record array's position               |
 | An id is the value the game stores to identify a thing (`item_id`, `character_id`)                | `slot_id`, `item_index` for the stored value                  |
 | A fixed array position is an index (`element_index`); never abbreviate it                         | `idx`, `slot_index`, `element_slot`                           |
-| A vector type names its element width: `Point3l`, `Point2u`                                       | `Vec3i`, `Vec2us`                                             |
+| A vector type names what it holds; a `u`/`s` suffix only where two widths share a role: `Pos3`, `Pos2u`, `Step2` | `Point3l`, `Vec3i`, `Vec2us`                    |
 | `mode`/`step`: state phase, `step++`; `timer` counts down; `frame` counts up per frame            | `frame--`, a `timer` that counts up, a per-frame `_step`      |
 | A per-frame amount is a `_delta` or `speed`: `vz_delta`                                           | `vz_step`                                                     |
 | Keep the address name until a caller proves the role                                              | Guess a name from a count, an offset or a tool's output       |
@@ -241,13 +241,15 @@ when two or more subsystems store the same layout.
 
 | Type                                     | Holds                                            |
 | ---------------------------------------- | ------------------------------------------------ |
-| `Point2s`, `Point2u`, `Point2l`          | 2-D vectors by member width                      |
-| `Point3s`, `Point3l`                     | 3-D vectors by member width                      |
+| `Pos2`, `Pos2u`, `Pos3`, `Pos3s`         | a position (s16, u16, s32, packed s16 triple)    |
+| `Offset2`, `Step2`, `Cell2`              | an s32 offset pair; a byte step per move (`dx`, `dy`); a map cell |
+| `Coord2`, `Coord3`                       | 16.16 pairs and triples (`WorldPos` over `Coord3`) |
 | `ColorRGB8`, `ColorRGB16`, `ColorDelta8` | a colour by channel width; a signed colour shift |
 | `Coord`                                  | a 16.16 coordinate                               |
 
 The shared fundamentals are defined once in `include/common/vector.h` and `include/common/fixed.h`. Local types with a proven
-matching layout use the shared type and member names. PsyQ types stay at SDK calls; PsyQ's padded
+matching layout use the shared type and member names; a recurring role is a typedef over one
+(`WorldPos`, `SpriteScale`, `Angle3`, `FormationPos`, `ScenePathPoint` over `VECTOR`). PsyQ types stay at SDK calls; PsyQ's padded
 `VECTOR`, `SVECTOR`, `DVECTOR`, `CVECTOR` and `RECT` are reused where the pad is real. A record that
 holds a position declares the member that matches its access width. `FIELD()` reads become members
 when touched.

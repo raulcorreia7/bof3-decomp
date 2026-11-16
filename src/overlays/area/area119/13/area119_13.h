@@ -22,7 +22,7 @@ extern u8  D_80146920[];
 extern u8  D_801F45C4[];
 
 /* The eight spawn positions the overlay cycles through, in sixteenths of a cell. */
-extern Point2u D_801F4614[8];
+extern Pos2u D_801F4614[8];
 
 /* The distance from a camera word to the point the overlay watches, given as the
  * point's offset from zero. */

@@ -2,8 +2,8 @@
 
 MATCH void func_801F2DB4(s32* pos, s16 radius, u8 center_shade, u8 rim_shade) {
     DVECTOR  screen;
-    Point2s  size;
-    Point2u  projected;
+    Pos2  size;
+    Pos2u  projected;
     MATRIX   matrix;
     POLY_G3* prim;
     u16      angle;

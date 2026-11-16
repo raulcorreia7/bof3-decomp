@@ -7,6 +7,7 @@
 
 #include "types.h"
 #include "common/fixed.h"
+#include "common/vector.h"
 #include "menu/gameui.h"
 #include "slus/functions.h"
 #include "battle/records.h"
@@ -93,10 +94,7 @@ extern u8           g_GameContextKind;
 extern u16          D_80143F20;
 
 /* Field-battle placement: the formation origin and one start position per party order slot. */
-typedef struct FormationPos {
-    Coord x;
-    Coord y;
-} FormationPos;
+typedef Coord2 FormationPos;
 
 extern s32          g_EncounterOriginX;
 extern s32          g_EncounterOriginY;
