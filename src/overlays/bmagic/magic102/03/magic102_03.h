@@ -10,6 +10,7 @@
 #include "slus/functions.h"
 #include "slus/part.h"
 
+void       func_801F0488(ScenePart* part_list, s32 x, s32 y);
 /* D_1F800034 read unsigned: the screen x and y RotTransPers writes. */
 extern u16 D_1F800034_U16[2];
 

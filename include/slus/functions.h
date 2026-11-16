@@ -11,6 +11,7 @@
 #include "common/handler.h"
 #include "gfx/palette.h"
 #include "gfx/prim.h"
+#include "slus/part.h"
 
 volatile u8* func_800AC754(u8 entry_id);
 /* Functions. */
@@ -176,7 +177,7 @@ s8           Area_TestCondition(s32 request);
 /* func_80156ED4 */
 void         Area_DrawCellQuad(s32 mask, s32 index);
 /* func_80157358 */
-void         Area_DrawParts(u8* part_list, s32 x, s32 y);
+void         Area_DrawParts(ScenePart* part_list, s32 x, s32 y);
 /* func_801579A8 */
 void         Area_DrawSceneSprite(u8* record, s32 origin_x, s32 origin_y);
 /* func_80157F98 */
