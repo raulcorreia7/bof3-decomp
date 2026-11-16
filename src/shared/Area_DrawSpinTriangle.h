@@ -1,5 +1,5 @@
 /* Draws one spin-effect triangle: a gradient POLY_G3 from the record origin and its two rotated vertex offsets, shaded by the record fade. `order` is the primitive list the triangle joins. */
-static inline void Area_DrawSpinTriangleOn(const void* spin, u32 order) {
+static inline void Area_DrawSpinTriangleOn(const WorldSpin* spin, u32 order) {
     WorldSpin* work;
     POLY_G3*   primitive;
     s32        point[3];

@@ -1,6 +1,6 @@
 #include "area172_13.h"
 
-MATCH void func_801F3BFC(const void* spin) {
+MATCH void func_801F3BFC(const WorldSpin* spin) {
     WorldSpin* work;
     POLY_G3*   primitive;
     s32        point[3];

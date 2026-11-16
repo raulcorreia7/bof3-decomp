@@ -1,14 +1,11 @@
 #include "scena01_00.h"
 #include "area/map.h"
-#include "overlays/area/Area_DrawDimQuad.h"
-#include "overlays/area/Actor_SeedPartySlot.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801FC488(void) {
+MATCH void func_801FC488(void) {
     switch (g_SceneState.step_05) {
         case 0:
             g_SceneState.step_05 = 3;
@@ -35,10 +32,9 @@ NON_MATCHING void func_801FC488(void) {
             break;
         case 5:
             if (WINDOW_EFFECT_IDLE()) {
-                g_SceneState.flags_01 |= 1;
+                D_80146871 |= 1;
                 g_AreaDrawFlags      = 0;
                 g_SceneState.step_05 = 7;
-                FAKE_BARRIER(); /* FAKE: retail stores the flag byte before the call, not in its delay slot. */
                 func_80153DE8();
                 g_ScriptVars[0] = 8;
                 Message_StartAreaMessage(0x1C);
@@ -69,6 +65,3 @@ NON_MATCHING void func_801FC488(void) {
             break;
     }
 }
-#else
-INCLUDE_ASM(func_801FC488);
-#endif
