@@ -311,4 +311,40 @@ MATCH void func_801EFEA8(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F01AC(void) {
+    POLY_G3* prim;
+    long     depth;
+    long     flag;
+    s32      i;
+    s32      tpage;
+
+    tpage = getTPage(0, 2, 320, 256);
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
+    g_ScratchPad.cells.halves[5] = g_Task->unk_09 * 12;
+    g_ScratchPad.cells.halves[0] = 240;
+    g_ScratchPadVectors[2].vx    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
+    g_ScratchPadVectors[2].vy    = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]);
+    for (i = 1; i <= 16; i++) {
+        g_ScratchPadVectors[0].vx = 0;
+        g_ScratchPadVectors[0].vy = 0;
+        g_ScratchPadVectors[1].vx = g_ScratchPadVectors[2].vx;
+        g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy;
+        setVector(&g_ScratchPadVectors[2], FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.halves[0]), FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.halves[0]), 0);
+        g_ScratchPadVectors[1].vz = 0;
+        g_ScratchPadVectors[0].vz = 0;
+        prim                      = (POLY_G3*)g_GfxPrimCursor;
+        SetPolyG3(prim);
+        SetSemiTrans(prim, 1);
+        RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+        setRGB0(prim, g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[5]);
+        setRGB1(prim, 1, 1, 1);
+        setRGB2(prim, 1, 1, 1);
+        GFX_AddPrim(5, sizeof(POLY_G3));
+    }
+    tpage = getTPage(0, 0, 320, 256);
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
+}
+#else
 INCLUDE_ASM(func_801F01AC);
+#endif

@@ -125,7 +125,77 @@ MATCH void func_801EF37C(void) {
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF4C0(void) {
+    POLY_GT4* prim;
+    long      depth;
+    long      flag;
+    s32       tpage;
+    s32       band;
+    s32       row;
+    s32       i;
+    s32       x;
+    s32       y;
+
+    for (band = 24, row = 1; band >= 17; band--, row++) {
+        g_ScratchPad.cells.halves[3] = 0x81;
+        g_ScratchPad.cells.halves[4] = 0x81;
+        if (row - 1 < g_Task->unk_09 - 16) {
+            g_ScratchPad.cells.halves[3] = g_Task->unk_09 - 15 - row;
+            if (g_ScratchPad.cells.halves[3] < 17) {
+                g_ScratchPad.cells.halves[3] = 0x81 - g_ScratchPad.cells.halves[3] * 8;
+            } else {
+                g_ScratchPad.cells.halves[3] = 1;
+            }
+        }
+        if (row < g_Task->unk_09 - 16) {
+            g_ScratchPad.cells.halves[4] = g_Task->unk_09 - 16 - row;
+            if (g_ScratchPad.cells.halves[4] < 17) {
+                g_ScratchPad.cells.halves[4] = 0x81 - g_ScratchPad.cells.halves[4] * 8;
+            } else {
+                g_ScratchPad.cells.halves[4] = 1;
+            }
+        }
+        g_ScratchPad.cells.halves[1] = FIXED_MUL(rcos((band - 1) << 7), g_ScratchPad.cells.halves[0]);
+        g_ScratchPad.cells.halves[2] = FIXED_MUL(rcos(band << 7), g_ScratchPad.cells.halves[0]);
+        setVector(&g_ScratchPadVectors[1], FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[1]), FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[1]),
+                  g_ScratchPadVectors[0].vz = FIXED_MUL(rsin((band - 1) << 7), g_ScratchPad.cells.halves[0]));
+        setVector(&g_ScratchPadVectors[3], FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[2]), FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[2]),
+                  g_ScratchPadVectors[2].vz = FIXED_MUL(rsin(band << 7), g_ScratchPad.cells.halves[0]));
+        for (i = 1; i <= 32; i++) {
+            g_ScratchPadVectors[0].vx = g_ScratchPadVectors[1].vx;
+            g_ScratchPadVectors[0].vy = g_ScratchPadVectors[1].vy;
+            g_ScratchPadVectors[1].vx = FIXED_MUL(rsin(i << 7), g_ScratchPad.cells.halves[1]);
+            g_ScratchPadVectors[1].vy = FIXED_MUL(rcos(i << 7), g_ScratchPad.cells.halves[1]);
+            g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx;
+            g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy;
+            g_ScratchPadVectors[3].vx = FIXED_MUL(rsin(i << 7), g_ScratchPad.cells.halves[2]);
+            g_ScratchPadVectors[3].vy = FIXED_MUL(rcos(i << 7), g_ScratchPad.cells.halves[2]);
+            x                         = (g_ScratchPadVectors[3].vx << 9) + g_Task->pos.x.fixed;
+            y                         = (g_ScratchPadVectors[3].vy << 9) + g_Task->pos.y.fixed;
+            tpage                     = getTPage(0, 1, 320, 256);
+            SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+            Area_AddCellPrim(x, y, 2, sizeof(DR_MODE));
+            prim = (POLY_GT4*)g_GfxPrimCursor;
+            SetPolyGT4(prim);
+            SetSemiTrans(prim, 1);
+            RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
+                          &depth, &flag);
+            prim->tpage = GetTPage(0, 1, 0x340, 0x100);
+            prim->clut  = GetClut(0, 0x1FA);
+            setUV4(prim, i * 8, (band - 16) * 8 + 32 + g_Task->timer * 4, i * 8 + 8, (band - 16) * 8 + 32 + g_Task->timer * 4, i * 8, g_Task->timer * 4 + (band - 16) * 8 + 0x28, i * 8 + 8,
+                   g_Task->timer * 4 + (band - 16) * 8 + 0x28);
+            setRGB0(prim, LOHU(g_ScratchPad.cells.halves[4]), LOHU(g_ScratchPad.cells.halves[4]), LOHU(g_ScratchPad.cells.halves[4]));
+            setRGB1(prim, LOHU(g_ScratchPad.cells.halves[4]), LOHU(g_ScratchPad.cells.halves[4]), LOHU(g_ScratchPad.cells.halves[4]));
+            setRGB2(prim, LOHU(g_ScratchPad.cells.halves[3]), LOHU(g_ScratchPad.cells.halves[3]), LOHU(g_ScratchPad.cells.halves[3]));
+            setRGB3(prim, LOHU(g_ScratchPad.cells.halves[3]), LOHU(g_ScratchPad.cells.halves[3]), LOHU(g_ScratchPad.cells.halves[3]));
+            Area_AddCellPrim(x, y, 2, sizeof(POLY_GT4));
+        }
+    }
+}
+#else
 INCLUDE_ASM(func_801EF4C0);
+#endif
 
 MATCH void func_801EFA50(void) {
     BMAGIC_DISPATCH_AND_DRAW(D_801F0760, func_801EFC74);
