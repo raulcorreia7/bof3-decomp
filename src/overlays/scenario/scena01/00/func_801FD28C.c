@@ -83,10 +83,7 @@ MATCH void func_801FD6CC(Actor* actor) {
     g_Task->direction_08 = g_Game.members[0].facing ^ 0x4;
     Actor_DispatchSelectorScript(g_Task->direction_08);
     g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
-    g_ScriptVars[0]       = 0;
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_ScriptVars[3]       = 0;
+    SCRIPT_VARS_CLEAR_ALL();
     g_SceneState.step_05  = 13;
     g_SceneState.state_04 = 13;
 }
@@ -100,11 +97,8 @@ MATCH void func_801FD788(Actor* actor) {
     g_Task->direction_08 = g_Game.members[0].facing ^ 4;
     Actor_DispatchSelectorScript(g_Task->direction_08);
     g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
-    g_SceneState.step_05  = 16;
-    g_ScriptVars[0]       = 0;
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_ScriptVars[3]       = 0;
+    g_SceneState.step_05 = 16;
+    SCRIPT_VARS_CLEAR_ALL();
     g_SceneState.state_04 = 13;
 }
 
@@ -140,11 +134,8 @@ MATCH void func_801FD934(void) {
 
 MATCH void func_801FD948(void) {
     Game_SetScriptActive();
-    g_SceneState.step_05  = 40;
-    g_ScriptVars[0]       = 0;
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_ScriptVars[3]       = 0;
+    g_SceneState.step_05 = 40;
+    SCRIPT_VARS_CLEAR_ALL();
     g_SceneState.state_04 = 9;
 }
 

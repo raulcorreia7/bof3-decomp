@@ -146,12 +146,9 @@ MATCH void func_801FA548(void) {
             if (g_ScriptVars[0] == 6) {
                 Char_RebuildPartyStats();
                 D_80146258 ^= GAME_FLAG_SCROLL_LOCK;
-                g_ScriptVars[1] = 0;
-                g_ScriptVars[2] = 0;
-                g_ScriptVars[3] = 0;
+                SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
     }

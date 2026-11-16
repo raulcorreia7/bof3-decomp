@@ -102,10 +102,7 @@ MATCH void func_801FCB1C(void) {
 
 MATCH void func_801FCB80(void) {
     Game_SetScriptActive();
-    g_ScriptVars[0]       = 0;
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_ScriptVars[3]       = 0;
+    SCRIPT_VARS_CLEAR_ALL();
     g_SceneState.step_05  = 0;
     g_SceneState.state_04 = 12;
 }
@@ -116,27 +113,21 @@ MATCH void func_801FCBD4(void) {
 
 MATCH void func_801FCC28(void) {
     Game_SetScriptActive();
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_ScriptVars[3]       = 0;
+    SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
     g_SceneState.step_05  = 0;
     g_SceneState.state_04 = 16;
 }
 
 MATCH void func_801FCC74(void) {
     Game_SetScriptActive();
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_ScriptVars[3]       = 0;
+    SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
     g_SceneState.step_05  = 0;
     g_SceneState.state_04 = 17;
 }
 
 MATCH void func_801FCCC0(void) {
     Game_SetScriptActive();
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_ScriptVars[3]       = 0;
+    SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
     g_SceneState.step_05  = 0;
     g_SceneState.state_04 = 18;
 }
@@ -174,11 +165,8 @@ MATCH s32 func_801FCD68(s32 x, s32 y) {
             }
         } else if (SYS_TestFlag(g_SceneFlags, 9) == 0 && (u32)(x - TO_COORD(132)) <= TO_COORD_HALF(2) && (y == TO_COORD(12) || y == TO_COORD_HALF(12) || y == TO_COORD(24) || y == TO_COORD_HALF(24))) {
             Game_SetScriptActive();
-            g_SceneState.step_05  = 20;
-            g_ScriptVars[0]       = 0;
-            g_ScriptVars[1]       = 0;
-            g_ScriptVars[2]       = 0;
-            g_ScriptVars[3]       = 0;
+            g_SceneState.step_05 = 20;
+            SCRIPT_VARS_CLEAR_ALL();
             g_SceneState.state_04 = 4;
             return 1;
         }

@@ -57,6 +57,11 @@ extern SceneState g_SceneState; /* 0x80146870 */
  * area105 compare the pair with one lhu. */
 #define SCENE_PROGRESS (*(u16*)&g_SceneState.state_04)
 
+/* Put the scene back at the state and step that Scene_Start begins it with. */
+#define SCENE_RETURN_TO_START() \
+    g_SceneState.step_05  = 0;  \
+    g_SceneState.state_04 = 0
+
 /* Open the area message `id`, wait for its window, and leave the scene at step `step`. */
 #define SCENE_MESSAGE_WAIT(id, step) \
     MESSAGE_START_WAIT(id);          \

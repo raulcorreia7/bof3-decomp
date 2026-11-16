@@ -36,8 +36,7 @@ MATCH void func_801F8538(void) {
             break;
         case 4:
             Game_ClearScriptActive();
-            g_SceneState.step_05  = 0;
-            g_SceneState.state_04 = 0;
+            SCENE_RETURN_TO_START();
             SYS_ClearFlag(g_SceneFlags, 0x24);
             if (SYS_TestFlag(g_SceneFlags, 7)) {
                 SYS_ClearFlag(g_SceneFlags, 0x2B);

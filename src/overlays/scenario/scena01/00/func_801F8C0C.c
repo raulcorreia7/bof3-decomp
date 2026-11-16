@@ -74,12 +74,8 @@ MATCH void func_801F8C0C(void) {
                 SYS_SetFlag(g_SceneFlags, 1);
                 Game_ClearScriptActive();
                 g_GameFlags |= 0x60;
-                g_ScriptVars[0]       = 0;
-                g_ScriptVars[1]       = 0;
-                g_ScriptVars[2]       = 0;
-                g_ScriptVars[3]       = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCRIPT_VARS_CLEAR_ALL();
+                SCENE_RETURN_TO_START();
             }
             break;
     }

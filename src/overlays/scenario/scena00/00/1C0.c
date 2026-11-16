@@ -1774,8 +1774,7 @@ MATCH void func_801FAF6C(void) {
         case 13:
             g_ScriptVarsReq.byte++;
             Game_ClearScriptActive();
-            g_SceneState.step_05  = 0;
-            g_SceneState.state_04 = 0;
+            SCENE_RETURN_TO_START();
             break;
 
         case 20:
@@ -1815,8 +1814,7 @@ MATCH void func_801FAF6C(void) {
         case 23:
         case 33:
             Game_ClearScriptActive();
-            g_SceneState.step_05  = 0;
-            g_SceneState.state_04 = 0;
+            SCENE_RETURN_TO_START();
             g_ScriptVarsReq.byte++;
             break;
 

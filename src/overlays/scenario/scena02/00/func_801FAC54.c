@@ -83,9 +83,8 @@ MATCH void func_801FAC54(void) {
             if (g_ScriptVars[0] != 0x3C) {
                 break;
             }
-            g_SceneState.step_05  = 0;
-            g_SceneState.state_04 = 0;
-            g_ScriptVars[2]       = 0;
+            SCENE_RETURN_TO_START();
+            g_ScriptVars[2] = 0;
             SYS_SetFlag(g_SceneFlags, 0x1E);
             Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_BUNYAN, TO_COORD(0x4F), TO_COORD(0x1A), AREA_ENTRY_MAP_LOADING);
             g_GamePrevSelection = 0xFF;

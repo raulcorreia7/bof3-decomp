@@ -36,8 +36,7 @@ MATCH void func_801FA1F0(void) {
             if (g_ScriptVars[0] == 9) {
                 SYS_SetFlag(g_SceneFlags, 0x15);
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         case 15:
@@ -96,8 +95,7 @@ MATCH void func_801FA1F0(void) {
             if (g_ScriptVars[0] == 7) {
                 g_ScriptVars[2] = 0;
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         case 3:

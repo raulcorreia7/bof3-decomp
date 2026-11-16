@@ -18,10 +18,9 @@ MATCH void func_801F7C38(void) {
             if (g_ScriptVars[0] == 8) {
                 D_80146258 |= 6;
                 Game_ClearScriptActive();
-                g_ScriptVars[1]       = 0;
-                g_ScriptVars[2]       = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                g_ScriptVars[1] = 0;
+                g_ScriptVars[2] = 0;
+                SCENE_RETURN_TO_START();
                 SYS_SetFlag(g_SceneFlags, 4);
             }
             break;
@@ -32,10 +31,9 @@ MATCH void func_801F7C38(void) {
         case 6:
             if (g_ScriptVars[0] == 0x22) {
                 Game_ClearScriptActive();
-                g_ScriptVars[1]       = 0;
-                g_ScriptVars[2]       = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                g_ScriptVars[1] = 0;
+                g_ScriptVars[2] = 0;
+                SCENE_RETURN_TO_START();
                 SYS_SetFlag(g_SceneFlags, 5);
                 SYS_SetFlag(g_SceneFlags, 6);
                 D_80146258 ^= 0xB0;
@@ -61,9 +59,8 @@ MATCH void func_801F7C38(void) {
             break;
         case 20:
             if (g_ScriptVars[0] == 0x1E) {
-                g_ScriptVars[2]       = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                g_ScriptVars[2] = 0;
+                SCENE_RETURN_TO_START();
                 if (g_Game.party_size == 3) {
                     D_80146258 ^= 0x80;
                     Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR_COURTYARD, TO_COORD(0x31), TO_COORD(0x4B), 0x85);
@@ -88,9 +85,8 @@ MATCH void func_801F7C38(void) {
                 SND_FadeOutSequence(0, 1, 4, 0x1E);
             } else if (vars[0] == 0x65) {
                 Game_ClearScriptActive();
-                vars[0]               = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                vars[0] = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         }
@@ -122,8 +118,7 @@ MATCH void func_801F7C38(void) {
         case 35:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
     }

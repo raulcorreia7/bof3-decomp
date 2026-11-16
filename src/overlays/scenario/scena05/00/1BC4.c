@@ -13,11 +13,8 @@ MATCH void func_801F8B94(void) {
         if (g_ScriptVars[0] == 0x18) {
             SYS_SetFlag(g_SceneFlags, 10);
             Game_ClearScriptActive();
-            g_ScriptVars[1]       = 0;
-            g_ScriptVars[2]       = 0;
-            g_ScriptVars[3]       = 0;
-            g_SceneState.step_05  = 0;
-            g_SceneState.state_04 = 0;
+            SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
+            SCENE_RETURN_TO_START();
         }
     }
 }

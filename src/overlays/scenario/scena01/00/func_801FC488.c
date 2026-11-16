@@ -54,9 +54,8 @@ MATCH void func_801FC488(void) {
             break;
         case 9:
             if (g_ScriptVars[0] == 0x14) {
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
-                g_AreaDrawFlags       = 0;
+                SCENE_RETURN_TO_START();
+                g_AreaDrawFlags = 0;
                 Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR_AREA, TO_COORD(54), TO_COORD(80), 0);
                 Scene_RequestChapterAdvance();
             }

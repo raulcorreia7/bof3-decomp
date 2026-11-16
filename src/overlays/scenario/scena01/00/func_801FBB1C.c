@@ -95,12 +95,8 @@ MATCH void func_801FBB1C(void) {
         case 10:
             Game_ClearScriptActive();
             Char_RebuildPartyStats();
-            g_ScriptVars[0]       = 0;
-            g_ScriptVars[1]       = 0;
-            g_ScriptVars[2]       = 0;
-            g_ScriptVars[3]       = 0;
-            g_SceneState.step_05  = 0;
-            g_SceneState.state_04 = 0;
+            SCRIPT_VARS_CLEAR_ALL();
+            SCENE_RETURN_TO_START();
             break;
     }
 }

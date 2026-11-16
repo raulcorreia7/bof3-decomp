@@ -22,8 +22,7 @@ MATCH void func_801F9EA4(void) {
                 g_ScriptVars[1] = 0;
                 g_ScriptVars[2] = 0;
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         }
@@ -63,8 +62,7 @@ MATCH void func_801F9EA4(void) {
             if (g_ScriptVars[0] == 1) {
                 g_ScriptVars[2] = 0;
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         case 10:
@@ -94,8 +92,7 @@ MATCH void func_801F9EA4(void) {
                 g_ScriptVars[1] = 0;
                 g_ScriptVars[2] = 0;
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
                 g_GameFlags ^= 8;
             }
             break;

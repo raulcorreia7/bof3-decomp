@@ -28,8 +28,7 @@ MATCH void func_801FB868(void) {
                 g_ScriptVars[2] = 0;
                 g_ScriptVars[3] = 0;
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         case 5:
@@ -61,8 +60,7 @@ MATCH void func_801FB868(void) {
                 g_ScriptVars[2] = 0;
                 g_ScriptVars[3] = 0;
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         case 15:
@@ -71,8 +69,7 @@ MATCH void func_801FB868(void) {
         case 11:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         case 20:
@@ -97,8 +94,7 @@ MATCH void func_801FB868(void) {
                 g_ScriptVars[2] = 0;
                 g_ScriptVars[3] = 0;
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         case 25:
@@ -132,8 +128,7 @@ MATCH void func_801FB868(void) {
                 g_ScriptVars[2] = 0;
                 g_ScriptVars[3] = 0;
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         case 30: {
@@ -141,9 +136,8 @@ MATCH void func_801FB868(void) {
 
             counter = &g_ScriptVars[3];
             if (++*counter >= 0x10) {
-                *counter              = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                *counter = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         }
