@@ -55,7 +55,7 @@ void func_801F3AE8(void);
 void func_801F3BB4(void);
 void func_801F3C2C(void);
 void func_801F3D18(void);
-void Menu_DrawHeaderBar(s16 x, s16 y, s32 width, s32 height, u8 window_style);
+void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
 void func_801F42D4(void);
 void func_801F4334(void);
 void func_801F437C(void);

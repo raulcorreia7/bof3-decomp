@@ -31,6 +31,9 @@ extern u8 D_801F4970[];
 /* The event's lookup table of pad-direction overrides, indexed by the held pad's top nibble. */
 extern u8 D_801F4984[];
 
+s32  func_801F3570(void);
+void func_801F369C(void);
+void func_801F372C(s32 pos0, s32 pos1);
 void func_801F37D4(void);
 void func_801A4BC0(s32 x, s32 y, s32 value);
 s32  func_801F30B8(s32 x, s32 y);
