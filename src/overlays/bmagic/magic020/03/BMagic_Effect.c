@@ -37,10 +37,10 @@ MATCH void func_801EECC0(void) {
     g_BattleEffects[index & BYTE_MASK].header.mode   = 0;
     g_BattleEffects[index & BYTE_MASK].header.step   = 0;
     g_BattleEffects[index & BYTE_MASK].handler_index = 0x2E;
-    g_Task->unk_27                                   = func_800AFB48(g_BattleEffectBattler);
+    g_Task->unk_27                                   = Battle_CopyCellPalette(g_BattleEffectBattler);
     g_Task->unk_28                                   = g_BattleEffectBattler->unk_28;
     g_Task->unk_24                                   = g_BattleEffectBattler->unk_24;
-    func_800AF8F0(g_Task);
+    Battle_SetCellPaletteStp(g_Task);
     if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
         func_800AFC98(2, 0);
     }

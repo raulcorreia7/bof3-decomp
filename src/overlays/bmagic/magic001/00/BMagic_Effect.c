@@ -39,10 +39,10 @@ MATCH void func_801EECC4(void) {
     g_BattleEffects[index & BYTE_MASK].handler_index = 73;
     g_BattleEffects[index & BYTE_MASK].arg.unk_09    = 0;
     g_BattleEffects[index & BYTE_MASK].target.party  = work;
-    g_Task->unk_27                                   = func_800AFB48(g_BattleEffectBattler);
+    g_Task->unk_27                                   = Battle_CopyCellPalette(g_BattleEffectBattler);
     g_Task->unk_28                                   = g_BattleEffectBattler->unk_28;
     g_Task->unk_24                                   = g_BattleEffectBattler->unk_24;
-    func_800AF8F0(g_Task);
+    Battle_SetCellPaletteStp(g_Task);
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_Task->header.mode += 1;
 }
@@ -212,7 +212,7 @@ MATCH void func_801EF72C(void) {
 }
 
 /* Copy the active battler into a new effect as func_801EECC4 does, then take the battler sprite
- * cell and pass it to func_800AF8F0 and func_800AFAB8. */
+ * cell and pass it to Battle_SetCellPaletteStp and Battle_ClearCellPaletteEntry. */
 MATCH void func_801EF78C(void) {
     BattleEffect* slot;
     PartyMember*  work;
@@ -247,11 +247,11 @@ MATCH void func_801EF78C(void) {
     g_BattleEffects[index & BYTE_MASK].handler_index = 79;
     g_BattleEffects[index & BYTE_MASK].arg.unk_09    = 0;
     g_BattleEffects[index & BYTE_MASK].target.party  = work;
-    g_Task->unk_27                                   = func_800AFB48(g_BattleEffectBattler);
+    g_Task->unk_27                                   = Battle_CopyCellPalette(g_BattleEffectBattler);
     g_Task->unk_28                                   = g_BattleEffectBattler->unk_28;
     g_Task->unk_24                                   = g_BattleEffectBattler->unk_24;
-    func_800AF8F0(g_Task);
-    func_800AFAB8(g_Task);
+    Battle_SetCellPaletteStp(g_Task);
+    Battle_ClearCellPaletteEntry(g_Task);
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_Task->header.mode += 1;
 }

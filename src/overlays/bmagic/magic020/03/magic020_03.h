@@ -23,7 +23,8 @@ extern Magic020SecondSteps D_801EEC3C;
 extern Magic020Steps       D_801EEC1C;
 extern u8                  D_801EFEC4[];
 
-u32  func_800AFB48(PartyMember* battler);
+/* func_800AFB48 */
+u32  Battle_CopyCellPalette(PartyMember* battler);
 void func_801EFBA0(void);
 
 void func_801EFD10(void);

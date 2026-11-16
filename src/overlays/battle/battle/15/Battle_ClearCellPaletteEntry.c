@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-MATCH void func_800AFAB8(u8* record) {
+/* func_800AFAB8 */
+MATCH void Battle_ClearCellPaletteEntry(u8* record) {
     u8 slot;
     /* FAKE: retail keeps the frame index in v1. */
     FAKE_REG(u32, index, "v1");
