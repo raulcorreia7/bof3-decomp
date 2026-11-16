@@ -188,25 +188,15 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
         for (quad = 0; quad < 16; quad++) {
             poly_f4 = (POLY_F4*)g_GfxPrimCursor;
             SetPolyF4((POLY_F4*)poly_f4);
-            poly_f4->r0 = 0;
-            poly_f4->g0 = 0;
-            poly_f4->b0 = 0;
-            poly_gt4    = (POLY_GT4*)(g_GfxPrimCursor + sizeof(POLY_F4));
+            setRGB0(poly_f4, 0, 0, 0);
+            poly_gt4 = (POLY_GT4*)(g_GfxPrimCursor + sizeof(POLY_F4));
             SetPolyGT4((POLY_GT4*)poly_gt4);
-            outer_shade     = outer_ring * 0x10;
-            poly_gt4->r0    = outer_shade;
-            poly_gt4->g0    = outer_shade;
-            poly_gt4->b0    = outer_shade;
-            poly_gt4->r1    = outer_shade;
-            poly_gt4->g1    = outer_shade;
-            poly_gt4->b1    = outer_shade;
-            inner_shade     = ring * 0x10;
-            poly_gt4->r2    = inner_shade;
-            poly_gt4->g2    = inner_shade;
-            poly_gt4->b2    = inner_shade;
-            poly_gt4->r3    = inner_shade;
-            poly_gt4->g3    = inner_shade;
-            poly_gt4->b3    = inner_shade;
+            outer_shade = outer_ring * 0x10;
+            setRGB0(poly_gt4, outer_shade, outer_shade, outer_shade);
+            setRGB1(poly_gt4, outer_shade, outer_shade, outer_shade);
+            inner_shade = ring * 0x10;
+            setRGB2(poly_gt4, inner_shade, inner_shade, inner_shade);
+            setRGB3(poly_gt4, inner_shade, inner_shade, inner_shade);
             poly_gt4->tpage = mesh_tpage;
             quad_task       = g_Task;
             next_column     = (quad + 1) & 0xF;
@@ -245,14 +235,9 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
             outer_next_vertex = second + outer_row_offset;
             inner_vertex      = first + row_offset;
             inner_next_vertex = second + row_offset;
-            poly_gt4->u0      = quad_task->unk_09 + D_801EFAF8[outer_vertex].x;
-            poly_gt4->v0      = quad_task->unk_09 + D_801EFAF8[outer_vertex].y;
-            poly_gt4->u1      = quad_task->unk_09 + D_801EFAF8[outer_next_vertex].x;
-            poly_gt4->v1      = quad_task->unk_09 + D_801EFAF8[outer_next_vertex].y;
-            poly_gt4->u2      = quad_task->unk_09 + D_801EFAF8[inner_vertex].x;
-            poly_gt4->v2      = quad_task->unk_09 + D_801EFAF8[inner_vertex].y;
-            poly_gt4->u3      = quad_task->unk_09 + D_801EFAF8[inner_next_vertex].x;
-            poly_gt4->v3      = quad_task->unk_09 + D_801EFAF8[inner_next_vertex].y;
+            setUV4(poly_gt4, quad_task->unk_09 + D_801EFAF8[outer_vertex].x, quad_task->unk_09 + D_801EFAF8[outer_vertex].y, quad_task->unk_09 + D_801EFAF8[outer_next_vertex].x,
+                   quad_task->unk_09 + D_801EFAF8[outer_next_vertex].y, quad_task->unk_09 + D_801EFAF8[inner_vertex].x, quad_task->unk_09 + D_801EFAF8[inner_vertex].y,
+                   quad_task->unk_09 + D_801EFAF8[inner_next_vertex].x, quad_task->unk_09 + D_801EFAF8[inner_next_vertex].y);
             GFX_AddPrim(3U, sizeof(POLY_F4));
             GFX_AddPrim(3U, sizeof(POLY_GT4));
         }

@@ -222,10 +222,8 @@ MATCH void func_801EF7FC(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0                   = D_1F800000.cells.halves[4];
-        prim->y0                   = D_1F800000.cells.halves[5];
-        prim->x1                   = D_1F800000.cells.halves[4] + FIXED_MUL(rsin(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
-        prim->y1                   = D_1F800000.cells.halves[5] + FIXED_MUL(rcos(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
+        setXY2(prim, D_1F800000.cells.halves[4], D_1F800000.cells.halves[5], D_1F800000.cells.halves[4] + FIXED_MUL(rsin(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]),
+               D_1F800000.cells.halves[5] + FIXED_MUL(rcos(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]));
         D_1F800000.cells.halves[2] = (i + 1) << 8;
         prim->x2                   = D_1F800000.cells.halves[4] + FIXED_MUL(rsin(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
         prim->y2                   = D_1F800000.cells.halves[5] + FIXED_MUL(rcos(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
