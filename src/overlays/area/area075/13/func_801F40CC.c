@@ -22,7 +22,7 @@ MATCH void func_801F40CC(void) {
         D_801F58C7 = 0;
         D_801F58C8 = 0;
         D_801F58C9 = D_801F5870[rand() & 0xF];
-        /* FAKE: cse folds the constant base into absolute symbol loads; plain C reaches 0x240 bytes, first difference +0xC. */
+        /* FAKE: cse folds the constant base into absolute symbol loads. */
         FAKE_OPAQUE(state);
         state[0x10] += 1;
         if (state[0x10] >= D_801F5858[state[0xF]].count) {
