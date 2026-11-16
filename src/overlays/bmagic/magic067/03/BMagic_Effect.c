@@ -220,10 +220,7 @@ MATCH void func_801EF79C(void) {
         if (g_Task->header.step == 3) {
             D_1F800000.cells.halves[1] = (g_Task->unk_09 - 48) / 3 * 8;
         }
-        setRGB0(prim, D_1F800000.cells.halves[1], D_1F800000.cells.halves[1], D_1F800000.cells.halves[1]);
-        setRGB1(prim, D_1F800000.cells.halves[1], D_1F800000.cells.halves[1], D_1F800000.cells.halves[1]);
-        setRGB2(prim, D_1F800000.cells.halves[1], D_1F800000.cells.halves[1], D_1F800000.cells.halves[1]);
-        setRGB3(prim, D_1F800000.cells.halves[1], D_1F800000.cells.halves[1], D_1F800000.cells.halves[1]);
+        GFX_SET_RGB_ALL(prim, D_1F800000.cells.halves[1], D_1F800000.cells.halves[1], D_1F800000.cells.halves[1]);
         if (i < 16) {
             setRGB0(prim, D_1F800000.cells.halves[1] / 16 * (i + 1), D_1F800000.cells.halves[1] / 16 * (i + 1), D_1F800000.cells.halves[1] / 16 * (i + 1));
             setRGB1(prim, prim->r0, prim->g0, prim->b0);

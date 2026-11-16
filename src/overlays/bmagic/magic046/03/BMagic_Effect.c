@@ -251,10 +251,7 @@ MATCH void func_801EF7E8(void) {
     prim->tpage = GetTPage(0, 1, 832, 256);
     prim->clut  = GetClut(0, 506);
     setUVWH(prim, 1, 1, 30, 30);
-    setRGB0(prim, D_1F800000.cells.halves[4], D_1F800000.cells.halves[4], D_1F800000.cells.halves[4]);
-    setRGB1(prim, D_1F800000.cells.halves[4], D_1F800000.cells.halves[4], D_1F800000.cells.halves[4]);
-    setRGB2(prim, D_1F800000.cells.halves[4], D_1F800000.cells.halves[4], D_1F800000.cells.halves[4]);
-    setRGB3(prim, D_1F800000.cells.halves[4], D_1F800000.cells.halves[4], D_1F800000.cells.halves[4]);
+    GFX_SET_RGB_ALL(prim, D_1F800000.cells.halves[4], D_1F800000.cells.halves[4], D_1F800000.cells.halves[4]);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_GT4));
 }
 

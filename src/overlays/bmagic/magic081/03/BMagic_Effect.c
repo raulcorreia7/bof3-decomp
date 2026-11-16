@@ -255,10 +255,7 @@ MATCH void func_801EF6A0(void) {
     prim->tpage = GetTPage(0, 2, 832, 256);
     prim->clut  = GetClut(0, 506);
     setUVWH(prim, 1, 1, 30, 30);
-    setRGB0(prim, *shade, *shade, *shade);
-    setRGB1(prim, *shade, *shade, *shade);
-    setRGB2(prim, *shade, *shade, *shade);
-    setRGB3(prim, *shade, *shade, *shade);
+    GFX_SET_RGB_ALL(prim, *shade, *shade, *shade);
     SetSemiTrans(prim, 1);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_GT4));
 }

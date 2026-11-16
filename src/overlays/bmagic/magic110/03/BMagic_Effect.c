@@ -128,19 +128,13 @@ MATCH void func_801EF148(void) {
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
     setXYWH(prim, 0, 0, 319, 120);
-    setRGB0(prim, *shade, *shade, *shade);
-    setRGB1(prim, *shade, *shade, *shade);
-    setRGB2(prim, *shade, *shade, *shade);
-    setRGB3(prim, *shade, *shade, *shade);
+    GFX_SET_RGB_ALL(prim, *shade, *shade, *shade);
     GFX_AddPrim(1, sizeof(POLY_G4));
     prim = GFX_CURSOR(POLY_G4);
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
     setXYWH(prim, 0, 0x78, 319, 239);
-    setRGB0(prim, *shade, *shade, *shade);
-    setRGB1(prim, *shade, *shade, *shade);
-    setRGB2(prim, *shade, *shade, *shade);
-    setRGB3(prim, *shade, *shade, *shade);
+    GFX_SET_RGB_ALL(prim, *shade, *shade, *shade);
     GFX_AddPrim(1, sizeof(POLY_G4));
     GFX_AddDitheredDrawMode(1, getTPage(0, 0, 320, 256));
 }
