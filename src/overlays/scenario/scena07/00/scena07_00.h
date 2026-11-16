@@ -9,6 +9,7 @@
 
 void            func_801F3C3C(s32 value);
 void            func_801F8358(void);
+bool            func_801FDA34(void);
 extern u16      D_800E4C1E;
 extern s8       D_80144EC0;
 extern u32      D_801F6C00;
