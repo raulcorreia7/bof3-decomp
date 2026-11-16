@@ -63,7 +63,7 @@ MATCH void func_801EF0A4(void) {
         D_8014637C->unk_29 = 4;
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -93,14 +93,14 @@ MATCH void func_801EF200(void) {
         g_Task->facing = g_BattleEffectBattler->facing;
         g_Task->unk_0C = -0x80000;
         g_Task->unk_10 = -0xF0000;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         g_Task->pos.x.fixed = g_AreaScrollTargetX + g_Task->unk_0C;
         g_Task->pos.y.fixed = g_AreaScrollTargetY + g_Task->unk_10;
         z                   = g_BattleEffectBattler->pos.z.fixed + 0x800000;
         g_Task->unk_0C      = 0x8000;
         g_Task->unk_10      = 0;
         g_Task->pos.z.fixed = z;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         g_Task->param.unk_0B = 0x1A;
         g_Task->unk_09       = 0x2C;
         g_Task->timer        = 0;
@@ -149,7 +149,7 @@ MATCH void func_801EF44C(void) {
     g_Task->unk_20 -= 2;
     if (g_Task->unk_1C == 0) {
         BATTLE_ACTIVE_WORK->param.unk_0B = 0xFF;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

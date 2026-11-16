@@ -242,7 +242,7 @@ MATCH void func_801EFA94(void) {
     work         = g_Task;
     work->unk_09 = work->unk_09 - 2;
     if (g_Task->unk_09 == 0) {
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

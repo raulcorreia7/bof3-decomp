@@ -142,7 +142,7 @@ MATCH void func_801EF388(void) {
     g_Task->timer -= 12;
     if (g_Task->param.unk_0B == 0) {
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

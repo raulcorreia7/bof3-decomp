@@ -43,7 +43,7 @@ MATCH void func_801EF1CC(void) {
     if (D_801EC2E4 == 0) {
         battle_flags = &g_Battle.state;
         *battle_flags |= 4;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -83,7 +83,7 @@ MATCH void func_801EF394(void) {
 }
 
 MATCH void func_801EF408(void) {
-    func_801E5988();
+    Effect_Reset();
 }
 
 /* func_801EF428 */

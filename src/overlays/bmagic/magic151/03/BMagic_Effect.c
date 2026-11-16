@@ -170,7 +170,7 @@ MATCH void func_801EF938(void) {
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
         g_Game.members[g_Battle.active_battler].u.turn.action_flags.value |= COMBATANT_FLAG_ACTION_UNK_5;
         g_Game.members[g_Battle.active_battler].u.turn.action_flags.value &= ~COMBATANT_FLAG_ABILITY_ALT_POSE;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -266,7 +266,7 @@ MATCH void func_801EFD80(void) {
 MATCH void func_801EFDC0(void) {
     if (g_Task->param.unk_0B == 0) {
         g_BattleEffectBattler->param.unk_0B = 2;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -353,7 +353,7 @@ MATCH void func_801F013C(void) {
     g_Task->unk_5E = count_next;
     if ((count_next << 0x18) == 0) {
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -518,7 +518,7 @@ MATCH void func_801F0CB0(void) {
     if (timer == 0) {
         work               = g_BattleEffectBattler;
         work->param.unk_0B = work->param.unk_0B - 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -660,7 +660,7 @@ MATCH void func_801F1D60(void) {
     work->unk_09 = timer;
     if (timer == 0) {
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

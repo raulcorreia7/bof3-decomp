@@ -15,7 +15,7 @@ MATCH void func_801EEF64(void) {
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Task->unk_09 = 30;
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -36,7 +36,7 @@ MATCH void func_801EF090(void) {
 
     g_Task->unk_0C = -TO_COORD_HALF(2);
     g_Task->unk_10 = 0;
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     g_Task->pos.x.fixed        = VOL(s32, g_AreaScrollTargetX) + g_Task->unk_0C;
     g_Task->pos.y.fixed        = VOL(s32, g_AreaScrollTargetY) + g_Task->unk_10;
     g_Task->pos.z.part.integer = Area_SampleHeight(VOL(s32, g_AreaScrollTargetX), VOL(s32, g_AreaScrollTargetY)) + 0x200;
@@ -214,5 +214,5 @@ MATCH void func_801F001C(void) {
 #include "overlays/bmagic/Effect_AddActor.h"
 
 MATCH void func_801F00D8(void) {
-    func_801E5988();
+    Effect_Reset();
 }

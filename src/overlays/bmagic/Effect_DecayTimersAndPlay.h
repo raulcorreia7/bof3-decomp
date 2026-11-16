@@ -14,6 +14,6 @@ MATCH void Effect_DecayTimersAndPlay(void) {
     if ((PARTY_MEMBER_WORD_08(g_Task) & 0xFFFF0000u) == 0) {
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
-        func_801E5988();
+        Effect_Reset();
     }
 }

@@ -233,7 +233,7 @@ MATCH void func_801EF4EC(void) {
 
     if (D_801EC2E4 == 0) {
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
-        func_801E5988();
+        Effect_Reset();
         return;
     }
     val = g_Task->unk_09;
@@ -332,7 +332,7 @@ MATCH void func_801EF9D0(void) {
     g_Task->unk_09 = timer;
     if (timer == 0) {
         BMAGIC_TICK_EFFECT_WORK();
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

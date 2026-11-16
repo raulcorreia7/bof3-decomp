@@ -8,6 +8,6 @@ MATCH void Effect_StartOnZeroTick(void) {
 
     if (g_Task->param.unk_0B == 0) {
         BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING);
-        func_801E5988();
+        Effect_Reset();
     }
 }

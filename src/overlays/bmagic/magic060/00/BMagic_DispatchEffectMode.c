@@ -99,7 +99,7 @@ MATCH void func_801F03BC(void) {
     if (g_Task->unk_09 == 0) {
         active               = BATTLE_ACTIVE_WORK;
         active->param.unk_0B = active->param.unk_0B - 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -171,6 +171,6 @@ MATCH void func_801F09E0(void) {
         func_80196718(g_Battle.selected_actor);
         func_800AF814(g_Battle.target_selector);
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }

@@ -43,7 +43,7 @@ MATCH void func_801EECE4(void) {
     if (!(count & BYTE_MASK)) {
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

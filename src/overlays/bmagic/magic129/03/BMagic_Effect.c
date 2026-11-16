@@ -147,7 +147,7 @@ MATCH void func_801EF4F0(void) {
     if (timer == 0) {
         work               = g_BattleEffectBattler;
         work->param.unk_0B = work->param.unk_0B - 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

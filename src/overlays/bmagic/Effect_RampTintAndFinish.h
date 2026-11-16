@@ -6,5 +6,5 @@
     g_Task->unk_5F += 0x10;                    \
     if ((s8)g_Task->unk_5D == -0x40) {         \
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1; \
-        func_801E5988();                       \
+        Effect_Reset();                        \
     }

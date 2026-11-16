@@ -94,7 +94,7 @@ MATCH void func_801EF09C(void) {
     battle_flags = &g_BattleState;
     *battle_flags |= 0x2004;
     Battle_MarkDamaged(*(battle_flags = &g_Battle.target_selector));
-    func_801E5988();
+    Effect_Reset();
 }
 
 /* func_801EF0DC */
@@ -120,7 +120,7 @@ MATCH void func_801EF198(void) {
         work           = g_Task;
         work->unk_0C   = D_801EF8B0[work->param.unk_0B].x;
         work->unk_10   = D_801EF8B0[work->param.unk_0B].y;
-        func_801DD350(work);
+        Effect_RotatePosition(work);
         g_Task->pos.x.fixed = actor->pos.x.fixed + g_Task->unk_0C;
         g_Task->pos.y.fixed = actor->pos.y.fixed + g_Task->unk_10;
         g_Task->pos.z.fixed = actor->pos.z.fixed + D_801EF8B0[g_Task->param.unk_0B].z;
@@ -201,5 +201,5 @@ MATCH void func_801EF814(void) {
 }
 
 MATCH void func_801EF87C(void) {
-    func_801E5988();
+    Effect_Reset();
 }

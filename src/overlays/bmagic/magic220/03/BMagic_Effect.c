@@ -210,7 +210,7 @@ MATCH void func_801EF8CC(void) {
     }
     if (Actor_StepAnimOnce() & BYTE_MASK) {
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

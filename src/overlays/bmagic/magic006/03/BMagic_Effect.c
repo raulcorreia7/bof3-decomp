@@ -147,7 +147,7 @@ MATCH void func_801EF298(void) {
         g_Task->header.step += 1;
     } else {
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

@@ -57,12 +57,12 @@ MATCH s32 func_801EEF3C(void) {
         func_801EF6A0();
         g_Task->unk_0C = 0x10000;
         g_Task->unk_10 = 0;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_10;
         g_Task->unk_0C      = 0x80000;
         g_Task->unk_10      = 0;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         work = g_Task;
         work->unk_0C += g_AreaScrollTargetX;
         FAKE_BARRIER(); /* FAKE: keeps the height read below the velocity store. */
@@ -101,7 +101,7 @@ MATCH void func_801EF158(void) {
     g_Task->timer  = count;
     if (!(count & BYTE_MASK)) {
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

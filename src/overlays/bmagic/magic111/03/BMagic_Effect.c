@@ -88,7 +88,7 @@ MATCH void func_801EF0F0(void) {
 }
 
 MATCH void func_801EF138(void) {
-    func_801E5988();
+    Effect_Reset();
 }
 
 MATCH void func_801EF158(void) {

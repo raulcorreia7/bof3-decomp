@@ -276,7 +276,7 @@ MATCH void func_801EFE84(void) {
 }
 
 MATCH void func_801EFEFC(void) {
-    func_801E5988();
+    Effect_Reset();
 }
 
 MATCH void func_801EFF1C(void) {
@@ -509,7 +509,7 @@ MATCH void func_801F0864(void) {
     if ((g_Task->unk_14 < 0) && (g_Task->pos.z.fixed < g_Battle.selected_actor->pos.z.fixed)) {
         if (g_Task->param.unk_0B != 0) {
             g_BattleEffectBattler->param.unk_0B--;
-            func_801E5988();
+            Effect_Reset();
         } else {
             g_Task->unk_5D      = 0;
             g_Task->unk_5E      = 0;
@@ -644,7 +644,7 @@ MATCH void func_801F1180(void) {
 }
 
 MATCH void func_801F1230(void) {
-    func_801E5988();
+    Effect_Reset();
 }
 
 MATCH void func_801F1250(void) {

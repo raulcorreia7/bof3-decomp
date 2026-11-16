@@ -117,14 +117,14 @@ MATCH void func_801EF174(void) {
         g_Task->unk_0C             = 0x20000;
         g_Task->unk_10             = 0;
         g_Task->unk_14             = TO_COORD(1536);
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         g_Task->pos.x.fixed += g_Task->unk_0C;
         g_Task->pos.y.fixed += g_Task->unk_10;
         g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + g_Task->unk_14;
         g_Task->unk_0C      = -0x2000;
         g_Task->unk_10      = 0;
         g_Task->unk_20      = 0x600000;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         g_Task->unk_25      = 0x1D;
         g_Task->unk_26      = 0;
         g_Task->unk_27      = 0x1A;
@@ -230,7 +230,7 @@ MATCH void func_801EF6D8(void) {
     if (g_Task->unk_04 == 0) {
         work               = (PartyMember*)g_BattleEffectBattler;
         work->param.unk_0B = work->param.unk_0B - 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

@@ -77,7 +77,7 @@ ASSERT_SIZE(BattleEffectTargetColumn, BATTLE_EFFECT_STRIDE);
     func_800AF814(*selector);                                                   \
     Battle_MarkDamaged(*selector);                                              \
     g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;                              \
-    func_801E5988()
+    Effect_Reset()
 
 /* The sway step of the effect work record WORK points to: phase_0C advances and
  * its low six bits set the wave (also stored in the scratchpad halfword at
@@ -208,7 +208,7 @@ static inline void BMagic_CountDownEffectTimer(u8 step) {
     if (count == 0) {
         active = BATTLE_ACTIVE_WORK;
         active->param.unk_0B--;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

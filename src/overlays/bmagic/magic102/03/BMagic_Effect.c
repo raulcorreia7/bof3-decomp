@@ -253,9 +253,9 @@ MATCH void func_801EFD7C(void) {
         }
     }
     g_AreaCameraOffsetY = 0;
-    func_800A9820(g_Battle.target_selector);
+    Battle_MarkDamaged(g_Battle.target_selector);
     g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
-    func_801E5988();
+    Effect_Reset();
     g_AreaCameraRefreshCount = 2;
 }
 

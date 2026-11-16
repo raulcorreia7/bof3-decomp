@@ -13,6 +13,6 @@ MATCH void Effect_MarkDamagedOnZeroTick(void) {
     if (g_Task->param.unk_0B == 0) {
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
-        func_801E5988();
+        Effect_Reset();
     }
 }

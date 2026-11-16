@@ -20,7 +20,7 @@ MATCH void Effect_ShakeScreen(void) {
         old          = work->unk_09;
         work->unk_09 = old + 255;
         if (old == 0) {
-            func_801E5988();
+            Effect_Reset();
         }
     }
 }

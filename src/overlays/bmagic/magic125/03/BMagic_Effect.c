@@ -109,7 +109,7 @@ MATCH void func_801EF148(void) {
     work->unk_09 = timer;
     if (timer == 0) {
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -265,7 +265,7 @@ MATCH void func_801EFAB0(void) {
         g_Task->unk_09 = counter;
         if (!(counter & BYTE_MASK)) {
             BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
-            func_801E5988();
+            Effect_Reset();
         }
     }
 }

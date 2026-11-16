@@ -231,7 +231,7 @@ MATCH void func_801EF67C(void) {
     if (--g_Task->timer == 0) {
         BMAGIC_MARK_SELECTED_SIDE(4);
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -320,7 +320,7 @@ MATCH void func_801EFEE8(void) {
         g_Task->facing = caster->facing;
         g_Task->unk_0C = 0x10000;
         g_Task->unk_10 = 0;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         work              = g_Task;
         battler           = g_BattleEffectBattler;
         work->pos.x.fixed = caster->pos.x.fixed + work->unk_0C;

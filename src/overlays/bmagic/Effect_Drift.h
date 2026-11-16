@@ -12,7 +12,7 @@ MATCH void Effect_Drift(void) {
     }
     g_Task->unk_0C = 0x2000;
     g_Task->unk_10 = 0;
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     work         = g_Task;
     timer        = work->unk_09 - 2;
     work->unk_09 = timer;
@@ -20,6 +20,6 @@ MATCH void Effect_Drift(void) {
     work->pos.y.fixed += work->unk_10;
     if (timer == 48) {
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }

@@ -389,7 +389,7 @@ MATCH void func_801F0260(void) {
     g_Task->timer       = count;
     if (count == 0x10) {
         g_BattleEffectBattler->param.unk_0B--;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

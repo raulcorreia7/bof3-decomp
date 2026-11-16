@@ -132,12 +132,12 @@ MATCH void func_801EF128(void) {
         row            = i & 3;
         g_Task->unk_0C = D_801F11F4[row][0] * g_Task->timer;
         g_Task->unk_10 = D_801F11F4[row][1] * g_Task->timer;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         g_Task->pos.x.fixed = g_Task->unk_0C;
         g_Task->pos.y.fixed = g_Task->unk_10;
         g_Task->unk_0C      = D_801F11F4[row + 1][0] * g_Task->timer;
         g_Task->unk_10      = D_801F11F4[row + 1][1] * g_Task->timer;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         g_Task->param.unk_0B = i;
         func_801EF280(values);
         i++;
@@ -272,7 +272,7 @@ MATCH void func_801EF7FC(void) {
     g_Task->unk_14 = g_Task->pos.z.part.integer;
     g_Task->unk_0C = D_801F11F4[2][0] * 32;
     g_Task->unk_10 = D_801F11F4[2][1] * 32;
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     g_Task->pos.x.fixed      = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
     g_Task->pos.y.fixed      = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_10;
     work                     = g_Task;
@@ -308,7 +308,7 @@ MATCH void func_801EF8C0(void) {
     count          = g_Task->unk_09 + 1;
     g_Task->unk_09 = count;
     if (count >= 13) {
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -322,7 +322,7 @@ MATCH void func_801EFA80(void) {
 
     g_Task->unk_0C = 0x28000;
     g_Task->unk_10 = 0xA0000 - (g_Task->unk_09 << 17);
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     x     = g_AreaScrollTargetX + g_Task->unk_0C;
     y     = g_AreaScrollTargetY + g_Task->unk_10;
     tpage = getTPage(1, 1, 320, 256);
@@ -333,15 +333,15 @@ MATCH void func_801EFA80(void) {
     SetSemiTrans(prim, 1);
     g_Task->unk_0C = 0;
     g_Task->unk_10 = -0x1000;
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     setVector(&D_1F800014[0], ((g_Task->pos.x.fixed + g_Task->unk_0C) >> 9) - AREA_CELL_ORIGIN, ((g_Task->pos.y.fixed + g_Task->unk_10) >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
     g_Task->unk_0C = 0;
     g_Task->unk_10 = 0x1000;
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     setVector(&D_1F800014[1], ((g_Task->pos.x.fixed + g_Task->unk_0C) >> 9) - AREA_CELL_ORIGIN, ((g_Task->pos.y.fixed + g_Task->unk_10) >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
     g_Task->unk_10 = 0xA8000 - ((g_Task->unk_09 * 3) << 15);
     g_Task->unk_0C = 0x28000;
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     setVector(&D_1F800014[3], ((g_AreaScrollTargetX + g_Task->unk_0C) >> 9) - AREA_CELL_ORIGIN, ((g_AreaScrollTargetY + g_Task->unk_10) >> 9) - AREA_CELL_ORIGIN, -g_Task->unk_14 / 2);
     setVector(&D_1F800014[2], (x >> 9) - AREA_CELL_ORIGIN, (y >> 9) - AREA_CELL_ORIGIN, -g_Task->unk_14 / 2);
     RotAverage4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
@@ -419,7 +419,7 @@ MATCH void func_801EFFB0(void) {
     work->unk_20 -= 5;
     work->unk_14 += 2;
     if (timer == 0) {
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -438,13 +438,13 @@ MATCH void func_801F0004(void) {
     GFX_AddPrim(3, sizeof(DR_MODE));
     g_Task->unk_0C = 0x80000;
     g_Task->unk_10 = 0;
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     x = g_Task->pos.x.fixed + g_Task->unk_0C;
     y = g_Task->pos.y.fixed + g_Task->unk_10;
     setVector(&D_1F800014[2], (x >> 9) - AREA_CELL_ORIGIN, (y >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
     g_Task->unk_0C = -0x30000;
     g_Task->unk_10 = 0;
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     x = g_Task->pos.x.fixed + g_Task->unk_0C;
     y = g_Task->pos.y.fixed + g_Task->unk_10;
     setVector(&D_1F800014[3], (x >> 9) - AREA_CELL_ORIGIN, (y >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
@@ -465,7 +465,7 @@ MATCH void func_801F0004(void) {
             g_Task->unk_0C = 0x80000;
         }
         g_Task->unk_10 = i * -0x8000;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         x                = g_Task->pos.x.fixed + g_Task->unk_0C;
         y                = g_Task->pos.y.fixed + g_Task->unk_10;
         D_1F800014[2].vx = (x >> 9) - AREA_CELL_ORIGIN;
@@ -478,7 +478,7 @@ MATCH void func_801F0004(void) {
             g_Task->unk_0C = -0x30000;
         }
         g_Task->unk_10 = i * -0x8000;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         x                          = g_Task->pos.x.fixed + g_Task->unk_0C;
         y                          = g_Task->pos.y.fixed + g_Task->unk_10;
         D_1F800014[3].vx           = (x >> 9) - AREA_CELL_ORIGIN;
@@ -517,13 +517,13 @@ MATCH void func_801F04D4(s32 semi) {
     GFX_AddPrim(5, sizeof(DR_MODE));
     g_Task->unk_0C = 0x80000;
     g_Task->unk_10 = 0;
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     x = g_Task->pos.x.fixed + g_Task->unk_0C;
     y = g_Task->pos.y.fixed + g_Task->unk_10;
     setVector(&D_1F800014[2], (x >> 9) - AREA_CELL_ORIGIN, (y >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
     g_Task->unk_0C = -0x30000;
     g_Task->unk_10 = 0;
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     x = g_Task->pos.x.fixed + g_Task->unk_0C;
     y = g_Task->pos.y.fixed + g_Task->unk_10;
     setVector(&D_1F800014[3], (x >> 9) - AREA_CELL_ORIGIN, (y >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
@@ -547,7 +547,7 @@ MATCH void func_801F04D4(s32 semi) {
             g_Task->unk_0C = 0x80000;
         }
         g_Task->unk_10 = i * -0x8000;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         x                = g_Task->pos.x.fixed + g_Task->unk_0C;
         y                = g_Task->pos.y.fixed + g_Task->unk_10;
         D_1F800014[2].vx = (x >> 9) - AREA_CELL_ORIGIN;
@@ -560,7 +560,7 @@ MATCH void func_801F04D4(s32 semi) {
             g_Task->unk_0C = -0x30000;
         }
         g_Task->unk_10 = i * -0x8000;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         x                          = g_Task->pos.x.fixed + g_Task->unk_0C;
         y                          = g_Task->pos.y.fixed + g_Task->unk_10;
         D_1F800014[3].vx           = (x >> 9) - AREA_CELL_ORIGIN;
@@ -592,14 +592,14 @@ MATCH void func_801F093C(void) {
     GFX_AddPrim(5, sizeof(DR_MODE));
     g_Task->unk_0C = -0x30000;
     g_Task->unk_10 = 0;
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     x                = g_Task->pos.x.fixed + g_Task->unk_0C;
     y                = g_Task->pos.y.fixed + g_Task->unk_10;
     D_1F800014[1].vx = (x >> 9) - AREA_CELL_ORIGIN;
     D_1F800014[1].vy = (y >> 9) - AREA_CELL_ORIGIN;
     g_Task->unk_0C   = -0x50000;
     g_Task->unk_10   = 0;
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     x                = g_Task->pos.x.fixed + g_Task->unk_0C;
     y                = g_Task->pos.y.fixed + g_Task->unk_10;
     D_1F800014[3].vx = (x >> 9) - AREA_CELL_ORIGIN;
@@ -623,7 +623,7 @@ MATCH void func_801F093C(void) {
             g_Task->unk_0C = -0x30000;
         }
         g_Task->unk_10 = i * -0x8000;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         x                = g_Task->pos.x.fixed + g_Task->unk_0C;
         y                = g_Task->pos.y.fixed + g_Task->unk_10;
         D_1F800014[1].vx = (x >> 9) - AREA_CELL_ORIGIN;
@@ -635,7 +635,7 @@ MATCH void func_801F093C(void) {
             g_Task->unk_0C = -0x50000;
         }
         g_Task->unk_10 = i * -0x8000;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         x                = g_Task->pos.x.fixed + g_Task->unk_0C;
         y                = g_Task->pos.y.fixed + g_Task->unk_10;
         D_1F800014[3].vx = (x >> 9) - AREA_CELL_ORIGIN;
@@ -677,7 +677,7 @@ MATCH void func_801F0D6C(void) {
 
 MATCH void func_801F0E4C(void) {
     if (Actor_StepAnimOnce() & BYTE_MASK) {
-        func_801E5988();
+        Effect_Reset();
         return;
     }
     func_8014D290();
@@ -702,7 +702,7 @@ MATCH void func_801F0E90(void) {
     rot.vz         = 0;
     g_Task->unk_0C = 0xC000;
     g_Task->unk_10 = 0;
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     battler                = g_BattleEffectBattler;
     work                   = g_Task;
     work->pos.x.fixed      = battler->pos.x.fixed + work->unk_0C;

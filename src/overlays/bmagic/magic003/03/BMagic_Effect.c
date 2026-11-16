@@ -163,7 +163,7 @@ MATCH void func_801EF268(void) {
     D_801463D6 = g_Task->timer;
     Battle_MarkDamaged(g_BattleTargetSelector);
     g_BattleState = g_Battle.state | BATTLE_STATE_EFFECT_PLAYING;
-    func_801E5988();
+    Effect_Reset();
 }
 
 MATCH void func_801EF2CC(void) {
@@ -201,7 +201,7 @@ MATCH void func_801EF3C8(void) {
         g_Task->unk_18  = x;
         g_Task->unk_1C  = y;
         g_Task->scale.y = z;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         g_Task->unk_09 = func_800AFF98();
         g_Task->header.step += 1;
     }
@@ -255,7 +255,7 @@ MATCH void func_801EF578(void) {
     if (g_Task->unk_09 == 0xFF) {
         g_Task->unk_0C = -0x2000;
         g_Task->unk_10 = 0;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         g_Task->header.step += 1;
     }
 }
@@ -277,7 +277,7 @@ MATCH void func_801EF6CC(void) {
     step = work->param.unk_0B;
     if (step < 2) {
         work->param.unk_0B = step - 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -310,7 +310,7 @@ MATCH void func_801EF7A8(void) {
         g_Task->unk_18  = x;
         g_Task->unk_1C  = y;
         g_Task->scale.y = z;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         g_Task->header.flags |= 0x20;
         g_Task->unk_5C = 3;
         g_Task->unk_5D = -(g_Task->param.unk_0B << 4);
@@ -335,7 +335,7 @@ MATCH void func_801EF918(void) {
 MATCH void func_801EF9AC(void) {
     g_Task->unk_0C = -0x2000;
     g_Task->unk_10 = 0;
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     Actor_StepAnimOnce();
     g_Task->header.step += 1;
 }
@@ -347,7 +347,7 @@ MATCH void func_801EF9FC(void) {
     if ((g_Task->pos.x.fixed == g_Task->unk_18) && (g_Task->pos.y.fixed == g_Task->unk_1C)) {
         GFX_FreePaletteFadeTarget(g_Task);
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

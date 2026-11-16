@@ -129,7 +129,7 @@ MATCH void func_801EF108(void) {
     work->unk_14 += work->unk_20;
     if (timer == 0) {
         g_BattleEffectBattler->param.unk_0B--;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

@@ -71,7 +71,7 @@ MATCH void func_801EF0EC(void) {
         func_800AF814(g_Battle.target_selector);
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -119,7 +119,7 @@ MATCH void func_801EF44C(void) {
     if (count == 0) {
         active = BATTLE_ACTIVE_WORK;
         active->param.unk_0B++;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -200,7 +200,7 @@ MATCH void func_801EF7D8(void) {
 
     if (--g_Task->timer == 0) {
         BATTLE_ACTIVE_WORK->param.unk_0B++;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -292,7 +292,7 @@ MATCH void func_801F0314(void) {
 
     if (g_Task->timer == 0) {
         BATTLE_ACTIVE_WORK->param.unk_0B++;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

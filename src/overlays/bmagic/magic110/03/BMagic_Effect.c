@@ -224,7 +224,7 @@ MATCH void func_801EF740(void) {
     g_Task->unk_30.half = position;
     if ((s16)position < 128) {
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -341,7 +341,7 @@ MATCH void func_801F00D8(void) {
     work         = g_Task;
     work->timer  = work->timer - 1;
     if (work->timer == 0) {
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

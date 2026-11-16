@@ -132,7 +132,7 @@ MATCH void func_801EF3E0(void) {
         return;
     }
     g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
-    func_801E5988();
+    Effect_Reset();
 }
 
 MATCH void func_801EF490(void) {
@@ -227,7 +227,7 @@ MATCH void func_801EF9E8(void) {
 #include "overlays/bmagic/Effect_LowerTickerStepOnReady.h"
 
 MATCH void func_801EFAD4(void) {
-    func_801E5988();
+    Effect_Reset();
 }
 
 /* func_801EFAF4 */
@@ -279,7 +279,7 @@ MATCH void func_801EFD84(void) {
     }
     if (Actor_StepAnimOnce() & BYTE_MASK) {
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
         return;
     }
     func_8014D290();

@@ -18,7 +18,7 @@ MATCH void func_801EEC5C(void) {
         (g_Battle.target_selector >= BATTLE_PARTY_CHARACTERS_COUNT && g_Battle.active_battler >= BATTLE_PARTY_CHARACTERS_COUNT)) {
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
-        func_801E5988();
+        Effect_Reset();
     } else {
         g_Task->facing                                  = g_BattleEffectBattler->facing;
         g_Task->pos.x                                   = g_BattleEffectBattler->pos.x;
@@ -64,7 +64,7 @@ MATCH void func_801EEF80(void) {
     g_Task->facing = g_BattleEffectBattler->facing;
     g_Task->unk_0C = 0x10000;
     g_Task->unk_10 = 0;
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     g_Task->pos.x.fixed      = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
     g_Task->pos.y.fixed      = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_10;
     COORD_INT(g_Task->pos.z) = COORD_INT(g_BattleEffectBattler->pos.z) + 0x100;

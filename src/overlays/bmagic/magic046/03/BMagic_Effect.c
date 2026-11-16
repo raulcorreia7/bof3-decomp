@@ -128,7 +128,7 @@ MATCH void func_801EF250(void) {
 #include "overlays/bmagic/Effect_AddActor.h"
 
 MATCH void func_801EF304(void) {
-    func_801E5988();
+    Effect_Reset();
 }
 
 MATCH void func_801EF324(void) {
@@ -171,7 +171,7 @@ MATCH void func_801EF3B8(void) {
             g_Task->unk_14 = TO_COORD(256);
             break;
     }
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     work              = g_Task;
     actor             = g_BattleEffectBattler;
     work->pos.x.fixed = actor->pos.x.fixed + work->unk_0C;

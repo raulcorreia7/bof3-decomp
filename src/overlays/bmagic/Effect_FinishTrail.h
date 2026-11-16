@@ -8,6 +8,6 @@ MATCH void Effect_FinishTrail(void) {
     g_Task->unk_09 = timer;
     if (timer == 0) {
         BMAGIC_TICK_EFFECT_WORK();
-        func_801E5988();
+        Effect_Reset();
     }
 }

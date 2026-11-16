@@ -10,5 +10,5 @@ MATCH void func_800A8BD0(void) {
     TASK_SET(work);
     Actor_SelectScript((((PartyMember*)work)->facing + 4) & BYTE_MASK);
     TASK_SET(saved);
-    func_801E5988();
+    Effect_Reset();
 }

@@ -89,7 +89,7 @@ MATCH void func_801EEFEC(void) {
     battle_flags = &g_BattleState;
     *battle_flags |= 4;
     Battle_MarkDamaged(*(battle_flags = &g_Battle.target_selector));
-    func_801E5988();
+    Effect_Reset();
 }
 
 MATCH void func_801EF02C(void) {
@@ -185,7 +185,7 @@ MATCH void func_801EF528(void) {
 
     work        = (PartyMember*)g_BattleEffectBattler;
     work->timer = work->timer + 1;
-    func_801E5988();
+    Effect_Reset();
 }
 
 MATCH void func_801EF55C(void) {
@@ -260,7 +260,7 @@ MATCH void func_801EF7E0(void) {
 }
 
 MATCH void func_801EF81C(void) {
-    func_801E5988();
+    Effect_Reset();
 }
 
 MATCH void func_801EF83C(void) {
@@ -318,5 +318,5 @@ MATCH void func_801EFA38(void) {
 }
 
 MATCH void func_801EFABC(void) {
-    func_801E5988();
+    Effect_Reset();
 }

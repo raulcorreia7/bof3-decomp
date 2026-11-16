@@ -132,7 +132,7 @@ MATCH void func_801EF38C(void) {
     func_800AFD9C();
     g_Task->unk_0C = -0x40000;
     g_Task->unk_10 = 0;
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     /* FAKE: the cast store keeps the y read behind the x store. */
     LOW(g_Task->pos.x.fixed) = g_AreaScrollTargetX + g_Task->unk_0C;
     g_Task->pos.y.fixed      = g_AreaScrollTargetY + g_Task->unk_10;
@@ -312,5 +312,5 @@ MATCH void func_801F03EC(void) {
 #include "overlays/bmagic/Effect_AddActor.h"
 
 MATCH void func_801F0498(void) {
-    func_801E5988();
+    Effect_Reset();
 }

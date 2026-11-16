@@ -4,7 +4,7 @@
 /* The statements of Effect_TickDownAndClear. */
 #define EFFECT_TICK_DOWN_AND_CLEAR() \
     BMAGIC_TICK_EFFECT_WORK();       \
-    func_801E5988()
+    Effect_Reset()
 
 MATCH void Effect_TickDownAndClear(void) {
     EFFECT_TICK_DOWN_AND_CLEAR();

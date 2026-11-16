@@ -89,7 +89,7 @@ MATCH void func_801EEF58(void) {
 
     if (D_801EC2E4 == 0) {
         BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING);
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

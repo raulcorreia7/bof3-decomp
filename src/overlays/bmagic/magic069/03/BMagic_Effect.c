@@ -112,7 +112,7 @@ MATCH void func_801EF0C4(void) {
             return;
         }
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -161,7 +161,7 @@ MATCH void func_801EF2AC(void) {
     work->timer = next;
     if (next == 8) {
         BATTLE_ACTIVE_WORK->param.unk_0B--;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -199,7 +199,7 @@ MATCH void func_801EF4C0(void) {
     g_Task->unk_2E.half += count;
     if (g_Task->unk_0C == 0) {
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

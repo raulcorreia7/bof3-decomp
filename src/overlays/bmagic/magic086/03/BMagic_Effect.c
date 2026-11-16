@@ -117,7 +117,7 @@ MATCH void func_801EF3E0(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -212,7 +212,7 @@ MATCH void func_801EF974(void) {
     g_Task->timer = timer_next;
     if (!(timer_next & BYTE_MASK)) {
         g_BattleEffectBattler->param.unk_0B = 0xFF;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -325,7 +325,7 @@ MATCH void func_801F0154(void) {
     g_Task->unk_14           = dz;
     COORD_INT(g_Task->pos.z) = COORD_INT(g_Task->pos.z) + dz;
     if (g_Task->unk_14 < -0x10) {
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

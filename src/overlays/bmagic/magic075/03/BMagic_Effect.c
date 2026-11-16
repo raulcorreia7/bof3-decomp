@@ -61,7 +61,7 @@ MATCH void func_801EEEB0(void) {
         GFX_FreePaletteFade(g_Task->timer);
         Battle_MarkDamaged(g_Battle.target_selector);
         BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING);
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -117,7 +117,7 @@ MATCH void func_801EF2A8(void) {
     if (Actor_StepAnimOnce() != 0u) {
         work               = (PartyMember*)g_BattleEffectBattler;
         work->param.unk_0B = work->param.unk_0B + 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

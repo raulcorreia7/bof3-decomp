@@ -164,13 +164,13 @@ MATCH void func_801EF42C(void) {
         g_Task->facing = g_BattleEffectBattler->facing;
         g_Task->unk_0C = 0x20000;
         g_Task->unk_10 = 0;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_10;
         g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + TO_COORD(256);
         g_Task->unk_0C      = -0x1000;
         g_Task->unk_10      = 0;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         g_Task->unk_14 = ratan2(g_BattleEffectBattler->pos.x.fixed - g_AreaScrollTargetX, g_BattleEffectBattler->pos.y.fixed - g_AreaScrollTargetY);
         g_Task->unk_09 = 0;
         g_Task->timer  = 0;

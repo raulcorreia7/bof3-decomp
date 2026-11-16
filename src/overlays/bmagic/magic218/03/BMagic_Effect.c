@@ -114,7 +114,7 @@ MATCH void func_801EF0F0(void) {
     g_Task->unk_5D = count;
     if ((count << 24) == 0) {
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

@@ -91,7 +91,7 @@ MATCH void func_801EEEFC(void) {
                 break;
         }
     }
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     record            = g_BattleEffectBattler;
     work              = g_Task;
     work->pos.x.fixed = record->pos.x.fixed + work->unk_0C;
@@ -388,7 +388,7 @@ MATCH void func_801F0638(void) {
     state->timer = timer;
     if (timer == 0) {
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

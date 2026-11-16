@@ -13,6 +13,6 @@ MATCH void func_800C3088(void) {
         g_Task->header.mode -= 1;
     }
     if (g_Battle.phase.mode == BATTLE_MODE_RESULT) {
-        func_801E5988();
+        Effect_Reset();
     }
 }

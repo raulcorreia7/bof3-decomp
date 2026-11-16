@@ -245,7 +245,7 @@ MATCH void func_801EF69C(void) {
     g_Game.members[g_Battle.active_battler].counter_136 = 0;
     g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
     Battle_MarkDamaged(g_Battle.target_selector);
-    func_801E5988();
+    Effect_Reset();
 }
 
 MATCH void func_801EF78C(void) {
@@ -285,7 +285,7 @@ MATCH void func_801F001C(void) {
 }
 
 MATCH void func_801F007C(void) {
-    func_801E5988();
+    Effect_Reset();
 }
 
 /* Run the magic064 step, then draw every live ring under one draw mode. */
@@ -358,7 +358,7 @@ MATCH void func_801F0364(void) {
         i++;
     } while (i < MAGIC064_RING_COUNT);
     g_BattleEffectBattler->param.unk_0B &= 0xFE;
-    func_801E5988();
+    Effect_Reset();
 }
 
 MATCH void func_801F03D8(void) {
@@ -456,7 +456,7 @@ MATCH void func_801F0D14(void) {
 
 MATCH void func_801F0D34(void) {
     GFX_FreePaletteFadeTarget(g_Task);
-    func_801E5988();
+    Effect_Reset();
 }
 
 MATCH void func_801F0D64(void) {
@@ -495,7 +495,7 @@ MATCH void func_801F0E90(void) {
     work = g_Task;
     work->unk_09++;
     if (work->unk_09 == 0) {
-        func_801E5988();
+        Effect_Reset();
     }
     Area_UpdatePaletteTint((s8)g_Task->unk_09);
 }

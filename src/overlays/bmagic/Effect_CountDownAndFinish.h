@@ -8,6 +8,6 @@ MATCH void Effect_CountDownAndFinish(void) {
     if (work->timer == 0) {
         work               = BATTLE_ACTIVE_WORK;
         work->param.unk_0B = work->param.unk_0B - 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }

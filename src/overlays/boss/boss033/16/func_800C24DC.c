@@ -10,5 +10,5 @@ MATCH void func_800C24DC(void) {
     ((PartyMember*)g_Task)                    = g_BattleEffectBattler;
     Actor_SelectScript(0U);
     ((PartyMember*)g_Task) = saved;
-    func_801E5988();
+    Effect_Reset();
 }

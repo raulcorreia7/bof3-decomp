@@ -9,6 +9,6 @@ MATCH void func_801EF1B8(void) {
     g_Task->timer = timer;
     if ((timer & BYTE_MASK) == 0x10) {
         BATTLE_ACTIVE_WORK->param.unk_0B = 0xFF;
-        func_801E5988();
+        Effect_Reset();
     }
 }

@@ -135,7 +135,7 @@ MATCH void func_801EF2CC(void) {
 }
 
 MATCH void func_801EF328(void) {
-    func_801E5988();
+    Effect_Reset();
 }
 
 #include "overlays/bmagic/Effect_DrawScreenFade.h"

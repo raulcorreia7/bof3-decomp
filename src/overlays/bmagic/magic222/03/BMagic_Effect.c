@@ -155,7 +155,7 @@ MATCH void func_801EF4F0(void) {
     g_Task->scale.x += 0x1800;
     if ((s8)g_Task->unk_5D == -0x80) {
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -304,7 +304,7 @@ MATCH void func_801F0070(void) {
     g_Task->timer       = count;
     if (count == 0) {
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -404,7 +404,7 @@ MATCH void func_801F0730(void) {
     if (count == 0) {
         active = BATTLE_ACTIVE_WORK;
         active->param.unk_0B--;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
