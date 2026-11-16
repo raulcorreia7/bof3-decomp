@@ -2,28 +2,31 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F5F28(void) {
-    s32 x;
-    s32 y;
-    s32 right_x;
-    s32 row1;
-    s32 row2;
-    s32 i;
-    u8  j;
+    Coord column_plus_one;
+    s32   column;
+    s32   row;
+    s32   cell_base_row;
+    s16   height_row;
+    s32   cell_row;
+    s32   i;
+    s32   byte_index;
 
-    x       = g_Task->pos.x.part.integer;
-    y       = g_Task->pos.y.part.integer;
-    right_x = (x + 1) << 16;
-    i       = 0;
+    column                = COORD_INT(g_Task->pos.x);
+    row                   = COORD_INT(g_Task->pos.y);
+    cell_base_row         = row;
+    column_plus_one.fixed = TO_COORD(column + 1);
+    i                     = 0;
     do {
-        j    = i;
-        row1 = (s16)(y + j);
-        Area_StoreHeight(x, row1, 0);
-        row2 = (s16)(y + j);
+        height_row = cell_base_row + (u8)i;
+        Area_StoreHeight(column, height_row, 0);
+        byte_index = (u8)i;
+        cell_row   = row + byte_index;
+        Area_SetCellCode(column, cell_row, (u8)(g_Task->gravity >> (byte_index * 8)));
         i++;
-        Area_SetCellCode(x, row1, (u8)(g_Task->gravity >> (j * 8)));
-        Area_StoreHeight(right_x >> 16, row2, 0);
-        Area_SetCellCode(right_x >> 16, row2, (u8)(g_Task->gravity >> ((j + 2) * 8)));
-    } while ((u8)i < 2);
+        Area_StoreHeight(COORD_INT(column_plus_one), height_row, 0);
+        byte_index += 2;
+        Area_SetCellCode(column + 1, cell_row, (u8)(g_Task->gravity >> (byte_index * 8)));
+    } while (i < 2);
 }
 #else
 INCLUDE_ASM(func_801F5F28);
