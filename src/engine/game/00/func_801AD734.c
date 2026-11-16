@@ -17,33 +17,33 @@ MATCH void func_801AD734(void) {
             case 1:
             case 2:
             case 3:
-                func_801ADAC0(1);
+                Actor_SpawnSceneActor(1);
                 g_Task->unk_04 = 1;
                 break;
             case 4:
             case 5:
             case 6:
-                func_801ADAC0(1);
+                Actor_SpawnSceneActor(1);
                 Party_AddZenny(1, 0);
                 func_801ADCF4(((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
                 g_Task->unk_04 = 2;
                 break;
             case 7:
-                func_801ADAC0(1);
+                Actor_SpawnSceneActor(1);
                 Party_AddZenny(10, 0);
                 func_801ADCF4(((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
                 g_Task->unk_04 = 3;
                 break;
             default:
-                func_801ADAC0(3);
+                Actor_SpawnSceneActor(3);
                 g_Task->unk_04 = 1;
                 break;
         }
     } else {
         if (choice >= 8) {
-            func_801ADAC0(1);
+            Actor_SpawnSceneActor(1);
         } else {
-            func_801ADAC0(3);
+            Actor_SpawnSceneActor(3);
         }
         g_Task->unk_04 = 1;
     }

@@ -16,14 +16,14 @@ MATCH void func_801DFA60(void) {
             if ((RANDOM_PERCENT()) < chance) {
                 gate = &g_Battle.state;
                 *gate |= 0x80;
-                func_801DD858(3);
+                Battle_PlayEffectCue(3);
             } else {
-                func_801DD858(2);
+                Battle_PlayEffectCue(2);
             }
         } else {
-            func_801DD858(3);
+            Battle_PlayEffectCue(3);
         }
-        func_801DD858(4);
+        Battle_PlayEffectCue(4);
         g_Task->header.step = g_Task->header.step + 1;
     }
 }

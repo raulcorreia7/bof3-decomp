@@ -16,10 +16,10 @@ MATCH void func_801E1494(void) {
     if (work->chr.hp <= value) {
         work->chr.status = STATUS_KO;
         work->chr.hp     = 0;
-        func_801DD858(1);
+        Battle_PlayEffectCue(1);
     } else {
         if (value >= 0) {
-            func_801DD858(0);
+            Battle_PlayEffectCue(0);
         } else {
             SND_QueueSelectionEffect(0x206);
         }

@@ -580,7 +580,7 @@ MATCH void func_801D2E60(s16 x, s16 y) {
 }
 
 /* Queues the 128-grey sprite whose source rectangle is entry index of the rectangle table. */
-MATCH void func_801D2EDC(s32 x, s32 y, s32 index) {
+MATCH void FairyCasino_DrawFramePiece(s32 x, s32 y, s32 index) {
     SPRT* sprt;
 
     sprt = g_GfxPrimCursor;
@@ -608,28 +608,28 @@ NON_MATCHING void func_801D2FA4(s16 x, s16 y) {
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
     GFX_AddPrim(GFX_LAYER_UI, 0xC);
-    func_801D2EDC(x, (s16)y, 0);
+    FairyCasino_DrawFramePiece(x, (s16)y, 0);
     off = 0x20;
     for (i = 0; i < 6; i++) {
-        func_801D2EDC((s16)(x + off), (s16)y, 1);
+        FairyCasino_DrawFramePiece((s16)(x + off), (s16)y, 1);
         off += 8;
     }
-    func_801D2EDC((s16)(x + 0x50), (s16)y, 2);
-    func_801D2EDC((s16)(x + 0x68), (s16)y, 3);
+    FairyCasino_DrawFramePiece((s16)(x + 0x50), (s16)y, 2);
+    FairyCasino_DrawFramePiece((s16)(x + 0x68), (s16)y, 3);
     off = 0x18;
     for (i = 0; i < 2; i++) {
-        func_801D2EDC(x, (s16)(y + off), 4);
-        func_801D2EDC((s16)(x + 0x68), (s16)(y + off), 5);
+        FairyCasino_DrawFramePiece(x, (s16)(y + off), 4);
+        FairyCasino_DrawFramePiece((s16)(x + 0x68), (s16)(y + off), 5);
         off += 6;
     }
     y2 = y + 0x23;
-    func_801D2EDC(x, y2, 6);
+    FairyCasino_DrawFramePiece(x, y2, 6);
     off = 8;
     for (i = 0; i < 12; i++) {
-        func_801D2EDC((s16)(x + off), y2, 7);
+        FairyCasino_DrawFramePiece((s16)(x + off), y2, 7);
         off += 8;
     }
-    func_801D2EDC((s16)(x + 0x68), (s16)(y + 0x23), 8);
+    FairyCasino_DrawFramePiece((s16)(x + 0x68), (s16)(y + 0x23), 8);
 }
 #else
 INCLUDE_ASM(func_801D2FA4);
@@ -1077,28 +1077,28 @@ NON_MATCHING void func_801D4910(s32 x, s32 y) {
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
     GFX_AddPrim(GFX_LAYER_UI, 0xC);
-    func_801D2EDC((s16)x, (s16)y, 0xB);
+    FairyCasino_DrawFramePiece((s16)x, (s16)y, 0xB);
     off = 8;
     for (i = 0; i < 9; i++) {
-        func_801D2EDC((s16)(x + off), (s16)(y - 1), 0xD);
+        FairyCasino_DrawFramePiece((s16)(x + off), (s16)(y - 1), 0xD);
         off += 8;
     }
-    func_801D2EDC((s16)(x + 0x4F), (s16)y, 0xC);
+    FairyCasino_DrawFramePiece((s16)(x + 0x4F), (s16)y, 0xC);
     off = 8;
     for (i = 0; i < 14; i++) {
         y2 = (s16)(y + off);
-        func_801D2EDC((s16)x, y2, 0xE);
-        func_801D2EDC((s16)(x + 0x50), y2, 0xF);
+        FairyCasino_DrawFramePiece((s16)x, y2, 0xE);
+        FairyCasino_DrawFramePiece((s16)(x + 0x50), y2, 0xF);
         off += 8;
     }
     y2 = (s16)(y + 0x78);
-    func_801D2EDC((s16)x, (s16)y2, 0x10);
+    FairyCasino_DrawFramePiece((s16)x, (s16)y2, 0x10);
     off = 8;
     for (i = 0; i < 9; i++) {
-        func_801D2EDC((s16)(x + off), (s16)y2, 0xD);
+        FairyCasino_DrawFramePiece((s16)(x + off), (s16)y2, 0xD);
         off += 8;
     }
-    func_801D2EDC((s16)(x + 0x50), (s16)(y + 0x78), 0x11);
+    FairyCasino_DrawFramePiece((s16)(x + 0x50), (s16)(y + 0x78), 0x11);
 }
 #else
 INCLUDE_ASM(func_801D4910);
@@ -1786,7 +1786,7 @@ MATCH void func_801D73F8(void) {
         }
         D_801F294D = value;
     }
-    func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D90D8(0x20, 0x2B, Party_GetJoinedCharacter(D_801DB0B4) & BYTE_MASK, 0);
 }
 
 MATCH void func_801D7474(void) {
@@ -1802,7 +1802,7 @@ MATCH void func_801D74B0(void) {
     }
     MESSAGE_START_WAIT(MSG_243);
     D_801F294E++;
-    func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D90D8(0x20, 0x2B, Party_GetJoinedCharacter(D_801DB0B4) & BYTE_MASK, 0);
 }
 
 MATCH void func_801D7548(void) {
@@ -1815,12 +1815,12 @@ MATCH void func_801D7548(void) {
             D_801F294E = 0;
         }
     }
-    func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D90D8(0x20, 0x2B, Party_GetJoinedCharacter(D_801DB0B4) & BYTE_MASK, 0);
 }
 
 MATCH void func_801D75DC(void) {
     D_801DB0C4 = D_801DB0C4 + 1;
-    func_801D90D8(0x20 - ((u8)D_801DB0C4 * 0x28), 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D90D8(0x20 - ((u8)D_801DB0C4 * 0x28), 0x2B, Party_GetJoinedCharacter(D_801DB0B4) & BYTE_MASK, 0);
     if ((u8)D_801DB0C4 == 4) {
         func_801DA7A4();
     }
@@ -1837,7 +1837,7 @@ MATCH void func_801D769C(void) {
     s32        letter;
 
     D_801DB0C4 -= 1;
-    func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 0);
+    func_801D90D8(0x20, 0x2B, Party_GetJoinedCharacter(D_801DB0B4) & BYTE_MASK, 0);
     func_801D97C8(D_801DAAA8, D_801DB0C4 * 30 + 0xB0, 0x2B);
     func_801D9B80(0x12, D_801DB0C4 * 30 + 0x61, 0x24, 0x11);
     func_801D94D0(D_801DAAA8, 0x18, D_801DB0C4 * 30 + 0x67, D_801DB0D4, D_801DB0D8);
@@ -1845,11 +1845,11 @@ MATCH void func_801D769C(void) {
         chars = g_Characters;
         dst   = D_801DB080;
         for (i = 0; i < 5; i++, dst++) {
-            letter = chars[func_801D92F4(D_801DB0B4) & BYTE_MASK].name[i];
+            letter = chars[Party_GetJoinedCharacter(D_801DB0B4) & BYTE_MASK].name[i];
             if (letter == 0) {
                 letter = 0xFF;
             } else {
-                letter = chars[func_801D92F4(D_801DB0B4) & BYTE_MASK].name[i];
+                letter = chars[Party_GetJoinedCharacter(D_801DB0B4) & BYTE_MASK].name[i];
             }
             *dst = letter;
         }
@@ -1862,7 +1862,7 @@ MATCH void func_801D769C(void) {
 }
 
 MATCH void func_801D7878(void) {
-    func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 1);
+    func_801D90D8(0x20, 0x2B, Party_GetJoinedCharacter(D_801DB0B4) & BYTE_MASK, 1);
     func_801AE214((D_801DB0D0 * 8) + 0x5B, 0x50, 8, 0);
     func_801D97C8(D_801DAAA8, 0xB0, 0x2B);
     func_801D9B80(0x12, 0x61, 0x24, 0x11);
@@ -1875,9 +1875,9 @@ MATCH void func_801D7934(void) {
 
     D_801DB0C4 = D_801DB0C4 + 1;
     if (D_801DB0DC != 0) {
-        func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 1);
+        func_801D90D8(0x20, 0x2B, Party_GetJoinedCharacter(D_801DB0B4) & BYTE_MASK, 1);
     } else {
-        func_801D90D8(0x20 - (D_801DB0C4 * 0x1E), 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 1);
+        func_801D90D8(0x20 - (D_801DB0C4 * 0x1E), 0x2B, Party_GetJoinedCharacter(D_801DB0B4) & BYTE_MASK, 1);
     }
     func_801D97C8(D_801DAAA8, (D_801DB0C4 * 0x1E) + 0xB0, 0x2B);
     func_801D9B80(0x12, (D_801DB0C4 * 0x1E) + 0x61, 0x24, 0x11);
@@ -1886,7 +1886,7 @@ MATCH void func_801D7934(void) {
         if (D_801DB0DC != 0) {
             if (D_801DB080[0] == 0) {
                 for (i = 0; i < 5; i++) {
-                    D_801DB080[i] = D_801DB058[func_801D92F4(D_801DB0B4) & BYTE_MASK][i];
+                    D_801DB080[i] = D_801DB058[Party_GetJoinedCharacter(D_801DB0B4) & BYTE_MASK][i];
                 }
             }
             MESSAGE_START_WAIT(MSG_244);
@@ -1900,7 +1900,7 @@ MATCH void func_801D7934(void) {
 }
 
 MATCH void func_801D7B50(void) {
-    func_801D90D8(0x20, 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 1);
+    func_801D90D8(0x20, 0x2B, Party_GetJoinedCharacter(D_801DB0B4) & BYTE_MASK, 1);
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         if (D_801F2945 == 0) {
             D_801DB0C4 = 0;
@@ -1914,7 +1914,7 @@ MATCH void func_801D7B50(void) {
 
 MATCH void func_801D7BE8(void) {
     D_801DB0C4 = D_801DB0C4 + 1;
-    func_801D90D8(0x20 - ((u8)D_801DB0C4 * 0x1E), 0x2B, func_801D92F4(D_801DB0B4) & BYTE_MASK, 1);
+    func_801D90D8(0x20 - ((u8)D_801DB0C4 * 0x1E), 0x2B, Party_GetJoinedCharacter(D_801DB0B4) & BYTE_MASK, 1);
     if ((u8)D_801DB0C4 == 4) {
         func_801DA7A4();
     }
@@ -2350,7 +2350,7 @@ MATCH u8 func_801D92B0(void) {
     return count;
 }
 
-MATCH u8 func_801D92F4(u8 arg) {
+MATCH u8 Party_GetJoinedCharacter(u8 arg) {
     s32 active_count;
     s32 i;
 
@@ -2795,14 +2795,14 @@ MATCH void func_801DA7A4(void) {
     s32 i;
 
     for (i = 0; i < 5; i++) {
-        g_TextVariables[0][i] = g_Characters[func_801D92F4(D_801DB0B4)].name[i];
+        g_TextVariables[0][i] = g_Characters[Party_GetJoinedCharacter(D_801DB0B4)].name[i];
     }
     D_801490DD = 0;
     for (i = 0; i < 6; i++) {
         D_801490F8[i] = D_801DB080[i];
     }
     for (i = 0; i < 5; i++) {
-        g_Characters[func_801D92F4(D_801DB0B4)].name[i] = D_801DB080[i];
+        g_Characters[Party_GetJoinedCharacter(D_801DB0B4)].name[i] = D_801DB080[i];
     }
     MESSAGE_START_WAIT(MSG_245);
     D_801F294C = 3;

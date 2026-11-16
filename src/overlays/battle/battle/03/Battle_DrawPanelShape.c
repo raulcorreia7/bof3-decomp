@@ -1,6 +1,6 @@
 #include "battle_03.h"
 
-MATCH void func_801D9AB4(s16 x, s16 y, s32 shape_index, s32 shade) {
+MATCH void Battle_DrawPanelShape(s16 x, s16 y, s32 shape_index, s32 shade) {
     POLY_F4* prim;
     s8*      selector;
 

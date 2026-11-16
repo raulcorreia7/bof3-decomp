@@ -1014,7 +1014,7 @@ extern u8   func_800A3B6C(u8 battler_index, u8 selection_kind, u16 input_mask);
 bool        func_800A4FD8(void);
 bool        func_800A5D00(void);
 u8          func_800A6C2C(void);
-s32         func_800A7B40(u8 combination, u8 count);
+s32         Battle_AppendComboIds(u8 combination, u8 count);
 /* func_800A9FC4 */
 void        Battle_RescalePanel(BattlePanelRecord* rec, s32 slot);
 bool        func_800AA5F4(s32 slot);

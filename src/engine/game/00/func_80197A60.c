@@ -5,7 +5,7 @@ MATCH void func_80197A60(void) {
 
     func_801BEDD0();
     func_801A06D8();
-    func_801992B8();
+    Area_RunLoadingFrame();
     state = &g_GameEntrySubstate;
     (*state)++;
 }

@@ -21,8 +21,8 @@ MATCH void Battle_DrawEnemyNamePanel(s32 x, s32 y, s32 slot) {
     b       = PSX_COLOR_B(color) << 3;
     Battle_DrawWindowTile(x, new_var, 8, 1);
     func_801D9DBC((x + 6), ((new_var = y) + 0xB), 9, 0, 0);
-    func_801D9AB4(x, y, 2, 1);
-    func_801D9AB4(x, (y + 0x13), 3, 1);
+    Battle_DrawPanelShape(x, y, 2, 1);
+    Battle_DrawPanelShape(x, (y + 0x13), 3, 1);
     panel_x = x;
     panel_y = y;
     if (g_BattleEnemyBattlers[index].unk_7F == 1) {
@@ -33,8 +33,8 @@ MATCH void Battle_DrawEnemyNamePanel(s32 x, s32 y, s32 slot) {
     if (func_801DA69C(index) != 0) {
         UI_DrawTextString((panel_x + 4), (panel_y + 3), 0, 8, (const u8*)g_BattleEnemyBattlers[index].name);
     }
-    func_801DA5A8((panel_x + 2), (panel_y + 2), (panel_x + 0x49), (panel_y + 2), r, g, b);
-    func_801DA5A8((panel_x + 2), (panel_y + 3), (panel_x + 2), (panel_y + 0x12), r, g, b);
+    Battle_DrawPanelLine((panel_x + 2), (panel_y + 2), (panel_x + 0x49), (panel_y + 2), r, g, b);
+    Battle_DrawPanelLine((panel_x + 2), (panel_y + 3), (panel_x + 2), (panel_y + 0x12), r, g, b);
     new_var = (panel_y + 2);
     func_801DA4B4((panel_x + 0x49), new_var, (panel_x + 0x49), (panel_y + 0x12), r, g, b);
     func_801DA4B4((panel_x + 2), (panel_y + 0x12), (panel_x + 0x49), (panel_y + 0x12), r, g, b);

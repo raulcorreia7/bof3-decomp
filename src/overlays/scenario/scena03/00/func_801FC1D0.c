@@ -109,7 +109,7 @@ MATCH void func_801FC5FC(void) {
     SND_PauseBGM(g_SndBGMId);
     SND_StartXAStream(2, 1);
     while (!(SND_IsXAIdle() & BYTE_MASK)) {
-        func_801992B8();
+        Area_RunLoadingFrame();
         SYS_ThreadWait(1U);
     }
     SND_ResumeBGM(g_SndBGMId);

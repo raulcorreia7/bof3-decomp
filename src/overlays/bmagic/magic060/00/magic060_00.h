@@ -30,7 +30,7 @@ extern Callback D_801F0BCC[];
 void            func_801F0428(void);
 
 void func_801EF2DC(void);
-void func_801EF590(u8* text, s32 x, s32 y);
+void Effect_DrawText(u8* text, s32 x, s32 y);
 void func_801EF76C(u8* text, s32 x, s32 y);
 void func_801EF924(u8* text, s32 x, s32 y);
 void func_801EFB00(u16 value, s32 x, s32 y);

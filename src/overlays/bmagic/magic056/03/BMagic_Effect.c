@@ -320,7 +320,7 @@ MATCH void func_801F023C(void) {
         if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
             saved       = g_GameState;
             g_GameState = &g_Game.members[g_Battle.active_battler];
-            func_801DD858(0);
+            Battle_PlayEffectCue(0);
             g_GameState = saved;
         }
         if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {

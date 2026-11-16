@@ -51,7 +51,7 @@
     UI_SetMode(2u);                               \
     if (WINDOW_EFFECT_BUSY()) {                   \
         do {                                      \
-            func_801992B8();                      \
+            Area_RunLoadingFrame();               \
             SYS_ThreadWait(1u);                   \
         } while (WINDOW_EFFECT_BUSY());           \
     }                                             \
@@ -603,7 +603,7 @@ void    func_80198F1C(void);
 void    func_801990D0(void);
 void    Area_RunFrame(void);
 void    func_80199230(void);
-void    func_801992B8(void);
+void    Area_RunLoadingFrame(void);
 void    func_80199308(void);
 /* func_80199368 */
 void    Game_UpdateMenuFrame(void);
@@ -869,7 +869,7 @@ void    func_801AD734(void);
 void    func_801AD90C(void);
 void    func_801AD9C4(void);
 void    func_801AD9F0(void);
-void    func_801ADAC0(s8 actor_slot);
+void    Actor_SpawnSceneActor(s8 actor_slot);
 s8      func_801ADC98(void);
 void    func_801ADCF4(u8 actor_slot);
 void    GFX_DrawLine(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b, s32 blend);
@@ -1028,7 +1028,7 @@ s32   func_801BB2B8(s32 x0, s32 y0, s32 x1, s32 y1);
 bool  func_801BB6F0(s32 command);
 s32   func_801BB760(s32 x, s32 y);
 s32   func_801BB7B0(s32 selector);
-s32   func_801BB86C(s16 from_x0, s16 from_x1, s16 from_y0, s16 from_y1, u8 probe_mode);
+s32   Area_IsStepTooHigh(s16 from_x0, s16 from_x1, s16 from_y0, s16 from_y1, u8 probe_mode);
 void  func_801BB8E8(u8 arg_a, u8 arg_b, u8 arg_c);
 bool  func_801BB934(s32 first_index, s32 second_index, s8 route_value, s32 expected_value);
 void  func_801BBBC8(s16 from_x, s16 from_y);
@@ -1106,7 +1106,7 @@ s32   func_801C3E40(s32 pos_x, s32 pos_y, s32 probe_flag, s16 probe_range);
 bool  func_801C3E80(s32 pos_x, s32 pos_y, s32 probe_flag);
 s32   func_801C4040(s32 pos_x, s32 pos_y, s16 probe_range);
 s32   func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range);
-u8    func_801C472C(s32 pos_x, s32 pos_y, s32 flag, s32 wanted_code, u8 mask_cells);
+u8    Area_TestCellCorners(s32 pos_x, s32 pos_y, s32 flag, s32 wanted_code, u8 mask_cells);
 u8    func_801C476C(s32 pos_x, s32 pos_y, u8 wanted_code, u8 mask_cells);
 u8    func_801C48FC(s32 pos_x, s32 pos_y, u8 wanted_code, u8 mask_cells);
 void  func_801C4D1C(void);
@@ -1539,7 +1539,7 @@ static inline void GameRunMapLoadHandshake(void) {
     UI_SetMode(3U);
     if (WINDOW_EFFECT_BUSY()) {
         do {
-            func_801992B8();
+            Area_RunLoadingFrame();
             SYS_ThreadWait(1U);
         } while (WINDOW_EFFECT_BUSY());
     }
@@ -1594,33 +1594,33 @@ static inline void Game_RollAreaSetup(s32 actor_slot) {
             case 1:
             case 2:
             case 3:
-                func_801ADAC0(1);
+                Actor_SpawnSceneActor(1);
                 g_Task->unk_04 = 3;
                 break;
             case 4:
             case 5:
             case 6:
-                func_801ADAC0(1);
+                Actor_SpawnSceneActor(1);
                 Party_AddZenny(2, 0);
                 func_801ADCF4((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
                 g_Task->unk_04 = 1;
                 break;
             case 7:
-                func_801ADAC0(1);
+                Actor_SpawnSceneActor(1);
                 Party_AddZenny(5, 0);
                 func_801ADCF4((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
                 g_Task->unk_04 = 2;
                 break;
             default:
-                func_801ADAC0(actor_slot);
+                Actor_SpawnSceneActor(actor_slot);
                 g_Task->unk_04 = 3;
                 break;
         }
     } else {
         if (choice >= 8) {
-            func_801ADAC0(1);
+            Actor_SpawnSceneActor(1);
         } else {
-            func_801ADAC0(actor_slot);
+            Actor_SpawnSceneActor(actor_slot);
         }
         g_Task->unk_04 = 3;
     }

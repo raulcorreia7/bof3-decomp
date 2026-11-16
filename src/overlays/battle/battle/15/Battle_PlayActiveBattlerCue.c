@@ -22,10 +22,10 @@ MATCH void Battle_PlayActiveBattlerCue(s32 effect_0, s32 effect_1) {
         g_GameState = &g_Game.members[kind];
         test        = sel & BYTE_MASK;
         if (test != 0) {
-            func_801DD858((effect_0 + 1) & BYTE_MASK);
+            Battle_PlayEffectCue((effect_0 + 1) & BYTE_MASK);
         }
         if ((u8)other != 0u) {
-            func_801DD858((u8)other);
+            Battle_PlayEffectCue((u8)other);
         }
     } else if (BATTLE_IS_SCRIPTED()) {
         Battle_PlayEnemyCue(*ENEMY_COMBATANT(kind).unk_E8);

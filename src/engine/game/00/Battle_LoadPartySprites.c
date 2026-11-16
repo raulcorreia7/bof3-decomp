@@ -14,7 +14,7 @@ MATCH void Battle_LoadPartySprites(void) {
 
     ready = Battle_LoadPartyScripts();
     func_801A06D8();
-    func_801992B8();
+    Area_RunLoadingFrame();
     if (ready != 0) {
         SND_SetBankLayout(1);
         flags = &g_Battle.outcome.options;

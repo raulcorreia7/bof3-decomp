@@ -83,7 +83,7 @@ MATCH void func_801B146C(void) {
             goto block_46; /* re-arm the frame flags */
         }
         work_i = g_Task;
-        if (!(func_801C472C(work_i->pos.x.fixed, work_i->pos.y.fixed, work_i->state_70.byte, 0xA6, 0U) & BYTE_MASK)) {
+        if (!(Area_TestCellCorners(work_i->pos.x.fixed, work_i->pos.y.fixed, work_i->state_70.byte, 0xA6, 0U) & BYTE_MASK)) {
             Actor_RequestScript(g_Task->direction_08);
             D_8014504A = 0;
             Game_RequestAreaChange(D_80145048, D_80145040, D_80145044, FACING_DOWN_RIGHT);

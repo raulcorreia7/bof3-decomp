@@ -6,5 +6,5 @@ MATCH void Game_UpdateCameraLook(void) {
     } else {
         Game_FinishCameraLook();
     }
-    func_801992B8();
+    Area_RunLoadingFrame();
 }

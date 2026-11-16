@@ -73,7 +73,7 @@ void        func_801DAAE4(void);
 /* func_801DC044 */
 s16         Battle_CalcDamage(u8 attacker_slot, u8 target_slot, u16 element_id);
 void        func_801DD14C(u8 battler_index);
-void        func_801DD858(u32 effect_index);
+void        Battle_PlayEffectCue(u32 effect_index);
 void        func_801DDAB4(u32 status);
 u8          func_801DDF50(u16 entry_id, u32 table_kind);
 void        func_801DDFEC(u32 battler_index);

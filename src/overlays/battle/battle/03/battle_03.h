@@ -669,7 +669,7 @@ void               func_801D9804(s32 x, s32 y, s32 clut_index, s32 glyph_index);
 /* func_801D9900 */
 void               Battle_DrawDimOverlay(void);
 void               func_801D99AC(s16 x, s16 y, u8 template_index);
-void               func_801D9AB4(s16 x, s16 y, s32 shape_index, s32 shade);
+void               Battle_DrawPanelShape(s16 x, s16 y, s32 shape_index, s32 shade);
 void               Battle_DrawWindowTile(s16 x, s16 y, u8 template_index, u8 shade);
 bool               Battle_EndRound(void);
 s32                Battle_StepBattlers(void);
@@ -680,7 +680,7 @@ void               func_801DA078(s32 x, s32 y, s32 u_index);
 /* func_801DA408 */
 void               Battle_DrawLine(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b);
 void               func_801DA4B4(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b);
-void               func_801DA5A8(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b);
+void               Battle_DrawPanelLine(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b);
 u8                 func_801DA69C(u32 enemy_index);
 void               func_801DA7D4(void);
 u8                 func_801DB058(void);
@@ -1079,10 +1079,10 @@ static inline void BattleDrawPanelFrame(s32 x, s32 y, s32 kind, s32 glyph0, s32 
     g     = PSX_COLOR_G(color) << 3;
     b     = PSX_COLOR_B(color) << 3;
     Battle_DrawWindowTile((s16)x, (s16)(y + 2), kind, 1);
-    func_801D9AB4((s16)x, (s16)y, glyph0, 1);
-    func_801D9AB4((s16)x, (s16)(y + 0x11), glyph1, 1);
-    func_801DA5A8((s16)(x + 2), (s16)(y + 2), (s16)(x + width), (s16)(y + 2), r, g, b);
-    func_801DA5A8((s16)(x + 2), (s16)(y + 3), (s16)(x + 2), (s16)(y + 0x10), r, g, b);
+    Battle_DrawPanelShape((s16)x, (s16)y, glyph0, 1);
+    Battle_DrawPanelShape((s16)x, (s16)(y + 0x11), glyph1, 1);
+    Battle_DrawPanelLine((s16)(x + 2), (s16)(y + 2), (s16)(x + width), (s16)(y + 2), r, g, b);
+    Battle_DrawPanelLine((s16)(x + 2), (s16)(y + 3), (s16)(x + 2), (s16)(y + 0x10), r, g, b);
     func_801DA4B4((s16)(x + width), (s16)(y + 2), (s16)(x + width), (s16)(y + 0x10), r, g, b);
     func_801DA4B4((s16)(x + 2), (s16)(y + 0x10), (s16)(x + width), (s16)(y + 0x10), r, g, b);
 }

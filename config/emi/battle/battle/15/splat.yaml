@@ -358,7 +358,7 @@ segments:
       - [0x10E48, c, func_800A7648]
       - [0x10E94, c, func_800A7694]
       - [0x110B8, c, func_800A78B8]
-      - [0x11340, c, func_800A7B40]
+      - [0x11340, c, Battle_AppendComboIds]
       - [0x11414, c, func_800A7C14]
       - [0x1185C, c, func_800A805C]
       - [0x11AA0, c, func_800A82A0]

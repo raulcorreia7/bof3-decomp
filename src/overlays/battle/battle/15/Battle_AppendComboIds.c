@@ -1,6 +1,6 @@
 #include "battle_15.h"
 
-MATCH s32 func_800A7B40(u8 combination, u8 count) {
+MATCH s32 Battle_AppendComboIds(u8 combination, u8 count) {
     u8* rec;
     u8  limit;
     u8  i;
