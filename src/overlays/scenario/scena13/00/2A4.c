@@ -181,7 +181,7 @@ MATCH void func_801F763C(void) {
         return;
     }
 
-    scratch                               = (s16*)g_ScratchPad;
+    scratch                               = (s16*)g_ScratchPad.cells.bytes;
     data                                  = (u8*)D_801FBF20;
     g_Actors[g_Task->unk_04].header.flags = 1;
     work                                  = (u8*)g_Task;

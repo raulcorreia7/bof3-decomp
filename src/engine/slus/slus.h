@@ -5,8 +5,6 @@
  * state, the window state and the data symbols its units share. The shared
  * subsystem headers own the cross-image names; only this executable includes
  * this file. */
-
-#define FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
 #include "common/vector.h"
 #include "game.h"
 #include "sys/cd.h"

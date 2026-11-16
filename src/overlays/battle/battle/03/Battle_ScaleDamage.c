@@ -1,4 +1,3 @@
-#define FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
 #include "battle_03.h"
 
 /* Record views: the scale-index byte sits at record offset 0xA4 of the local
@@ -20,7 +19,7 @@ MATCH u32 Battle_ScaleDamage(u32 unused, u8 battler_index, s32 damage_value) {
     damage = damage_value << 8;
     value  = (0x100 - ((damage / 0x3E800) << 17)) >> 8;
     CLAMP_MIN(value, 0xCD);
-    scratch = (u16*)g_ScratchPad;
+    scratch = (u16*)g_ScratchPad.cells.bytes;
     damage  = ((damage * value) >> 8) * D_801EAFA0[RANDOM_MASK(7u)] >> 8;
     flags   = *scratch;
     mask    = flags & 0x1Fu;

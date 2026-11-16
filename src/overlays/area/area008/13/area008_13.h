@@ -1,7 +1,5 @@
 #ifndef OVERLAY_WORLD00_AREA008_13_H
 #define OVERLAY_WORLD00_AREA008_13_H
-
-#define FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
 #include "overlays/area/world00.h"
 #include "area/spad.h"
 #include <rand.h>

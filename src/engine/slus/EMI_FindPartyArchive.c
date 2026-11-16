@@ -16,11 +16,11 @@ MATCH u8 EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c) {
     u8*       current;
     const u8* archive;
 
-    loaded          = &g_EmiLoadedCharacterIndex;
-    party           = g_ScratchPad;
-    *party          = member_a;
-    g_ScratchPad[1] = member_b;
-    g_ScratchPad[2] = member_c;
+    loaded                      = &g_EmiLoadedCharacterIndex;
+    party                       = g_ScratchPad.cells.bytes;
+    *party                      = member_a;
+    g_ScratchPad.cells.bytes[1] = member_b;
+    g_ScratchPad.cells.bytes[2] = member_c;
     if (*loaded != GAME_NONE) {
         for (i = 0; i < 3; i++, party++) {
             member = *party;
@@ -44,18 +44,18 @@ MATCH u8 EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c) {
     i     = 0;
     count = 0;
     do {
-        if (g_ScratchPad[i] != GAME_NONE) {
+        if (g_ScratchPad.cells.bytes[i] != GAME_NONE) {
             count++;
         }
         i++;
     } while (i < 3);
-    swap = &g_ScratchPad[4];
+    swap = &g_ScratchPad.cells.bytes[4];
     for (i = 0; i < 2; i++) {
         for (j = i + 1; j < 3; j++) {
-            if (g_ScratchPad[j] < g_ScratchPad[i]) {
-                *swap           = g_ScratchPad[i];
-                g_ScratchPad[i] = g_ScratchPad[j];
-                g_ScratchPad[j] = *swap;
+            if (g_ScratchPad.cells.bytes[j] < g_ScratchPad.cells.bytes[i]) {
+                *swap                       = g_ScratchPad.cells.bytes[i];
+                g_ScratchPad.cells.bytes[i] = g_ScratchPad.cells.bytes[j];
+                g_ScratchPad.cells.bytes[j] = *swap;
             }
         }
     }
@@ -66,14 +66,14 @@ MATCH u8 EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c) {
     i     = 0;
     do {
         for (j = (u8)first; j < (u8)last; j++) {
-            if (g_ScratchPad[slot] == D_80181B34[j][i]) {
+            if (g_ScratchPad.cells.bytes[slot] == D_80181B34[j][i]) {
                 if (slot == (u8)count - 1) {
                     found = j;
                     break;
                 }
                 first = j;
                 for (; j < 19; j++) {
-                    if (g_ScratchPad[slot] != D_80181B34[j][i]) {
+                    if (g_ScratchPad.cells.bytes[slot] != D_80181B34[j][i]) {
                         break;
                     }
                 }

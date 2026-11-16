@@ -1,5 +1,3 @@
-#define FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
-
 #include "scena12_00.h"
 #include "area/map.h"
 
@@ -38,19 +36,19 @@ MATCH void func_801F9F0C(void) {
             break;
         }
         case 3:
-            g_AreaSceneMode = 1;
-            g_ScratchPad[0] = Actor_FindFreeSpawned();
-            if ((g_ScratchPad[0] & 0xFF) == 0xFF) {
+            g_AreaSceneMode             = 1;
+            g_ScratchPad.cells.bytes[0] = Actor_FindFreeSpawned();
+            if ((g_ScratchPad.cells.bytes[0] & 0xFF) == 0xFF) {
                 break;
             }
-            g_SpawnedActors[g_ScratchPad[0]].header.flags   = 1;
-            g_SpawnedActors[g_ScratchPad[0]].type           = 0x13;
-            g_SpawnedActors[g_ScratchPad[0]].camera_angle.x = -0x370;
-            g_SpawnedActors[g_ScratchPad[0]].camera_angle.y = g_AreaCameraAngle.vy;
-            g_SpawnedActors[g_ScratchPad[0]].camera_angle.z = 0x200;
-            g_SpawnedActors[g_ScratchPad[0]].layer          = 4;
-            g_SceneState.step_05                            = 4;
-            g_ScriptVars[3]                                 = g_ScratchPad[0];
+            g_SpawnedActors[g_ScratchPad.cells.bytes[0]].header.flags   = 1;
+            g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type           = 0x13;
+            g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.x = -0x370;
+            g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
+            g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = 0x200;
+            g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 4;
+            g_SceneState.step_05                                        = 4;
+            g_ScriptVars[3]                                             = g_ScratchPad.cells.bytes[0];
             break;
         case 4: {
             u8* record_index = &g_ScriptVars[3];
@@ -223,14 +221,14 @@ MATCH void func_801F9F0C(void) {
             if (*progress != 3) {
                 break;
             }
-            g_ScratchPad[0] = Actor_FindFreeSpawned();
-            if ((g_ScratchPad[0] & 0xFF) == 0xFF) {
+            g_ScratchPad.cells.bytes[0] = Actor_FindFreeSpawned();
+            if ((g_ScratchPad.cells.bytes[0] & 0xFF) == 0xFF) {
                 break;
             }
-            g_SpawnedActors[g_ScratchPad[0]].header.flags = 1;
-            g_SpawnedActors[g_ScratchPad[0]].type         = 0x7A;
-            *progress                                     = 4;
-            g_SceneState.step_05                          = 0x13;
+            g_SpawnedActors[g_ScratchPad.cells.bytes[0]].header.flags = 1;
+            g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type         = 0x7A;
+            *progress                                                 = 4;
+            g_SceneState.step_05                                      = 0x13;
             break;
         }
         case 19:

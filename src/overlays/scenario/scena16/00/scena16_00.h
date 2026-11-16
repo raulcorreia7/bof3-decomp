@@ -4,8 +4,6 @@
 /* The scena16 scenario overlay's local declarations: its palette and VRAM
  * records, the window words it shares and its prototypes. Only this image
  * includes the file. */
-
-#define FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
 #include "overlays/scenario/scenario.h"
 
 #define SCENA16_PALETTE_SRC MEM_PTR(const volatile u16, 0x80033800u)

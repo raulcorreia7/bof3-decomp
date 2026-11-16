@@ -1,5 +1,3 @@
-#define FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
-
 #include "scena12_00.h"
 #include "area/map.h"
 
