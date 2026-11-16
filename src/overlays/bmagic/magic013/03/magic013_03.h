@@ -18,7 +18,7 @@ extern BattleEffect D_801F03E4[];
 #define BMAGIC_EFFECT_SLOTS D_801F03E4
 #define BMAGIC_EFFECT_COUNT 64
 /* func_800AED5C */
-s32  Battle_CanTarget(s32 selector, u32 battler_index);
+u8   Battle_CanTarget(s32 selector, u32 battler_index);
 void func_801EF79C(void);
 void func_801EF648(void);
 void func_801EFAA8(void);
