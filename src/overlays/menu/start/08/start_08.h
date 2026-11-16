@@ -262,7 +262,6 @@ extern char            g_MenuExperienceFormat[4];
 extern char            g_MenuExperienceBlank[12];
 extern char            g_MenuZennyFormat[4];
 /* D_801D0C74 */
-extern char            g_MenuNextExpBlank[];
 extern char            g_SaveSlotLevelFormat[];
 extern char            g_SaveSlotTimeFormat[];
 extern char            g_SaveSlotTimeColon[4];
@@ -348,17 +347,12 @@ extern u8       g_MenuCaptionRight[688];
 extern u8       g_MenuListTab2OffSprites[];
 /* D_801EC76C */
 extern u8       g_MenuListTab2OnSprites[];
-extern u8*      g_MenuInventoryTitles[5];
 extern char     g_MenuInventoryCountFormat[];
-extern u8       g_MenuInventoryTab1OffSprites[];
-extern u8*      g_MenuEquipTitles[5];
-extern u8       g_MenuInventoryTab1OnSprites[];
 /* D_801EC784 */
 extern u8       g_MenuListTab1OffSprites[];
 /* D_801EC790 */
 extern u8       g_MenuListTab1OnSprites[];
 extern u8       g_MenuExperienceSprites[];
-extern u8       g_SaveSlotFrameSprites[];
 extern u8       g_MenuLabelAgility[4];
 extern u8       g_MenuEquipRowIcons[8]; /* equipment-row sprites. @source: read:Shop_DrawEquipment */
 extern u8       g_MenuLabelEquip[8];    /* the equipment panel caption. @source: read:Shop_DrawEquipment */
@@ -809,16 +803,11 @@ extern s32       D_801EC598;
 extern u8        g_MenuClockCaption[];
 extern u8        g_MenuCommandFrame[];
 extern u8        g_MenuCommandFrameSelected[];
-extern u8        g_MenuEquipStatSprites[];
 extern u8        D_801EC930[];
 extern u8        D_801EC938[];
 extern u8        g_MenuClockColon[];
 extern u8*       g_MenuCommandLabels[];  /* label id -> button text */
 extern u8        g_MenuCommandRows[][5]; /* button count, then four label ids */
-extern u8        g_MenuEquipStatLabels[];
-extern u8        g_MenuEquipCompareLabels[];
-extern u8        g_MenuEquipCompareSprites[];
-extern u8        g_MenuEquipSlotIcons[];
 extern u8        D_801ECD0C[];
 extern u8        D_801ECD14[];
 extern u8        D_801ECDAC[];
