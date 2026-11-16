@@ -73,8 +73,12 @@ extern s8  D_80181B01[];
 extern u8  D_801F5CDC[];
 extern u8  D_801F5CDD[];
 extern u8  D_801F5CDE[];
+/* The per-direction stage steps of a full stage and of a half stage: the route
+ * index, the stage length and the next stage code in each four-byte record. */
+extern u8  D_801F5CEC[];
+extern u8  D_801F5CFC[];
 
 u8 func_801F4DA4(u32 frame);
-u8 func_801F4EDC(u16 t, u8 stage);
+u8 func_801F4EDC(u16 t, u32 stage);
 
 #endif
