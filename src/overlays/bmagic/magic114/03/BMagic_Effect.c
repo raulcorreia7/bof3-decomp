@@ -150,14 +150,15 @@ MATCH void func_801EF128(void) {
 /* A segment's shade: the red, green and blue its first two vertices take, the
  * blue of its third, and the steps the mode-3 and mode-4 flash adds to it. */
 typedef struct Magic114Shade {
-    u8 red;
-    u8 green;
-    u8 blue;
-    u8 tip_blue;
-    s8 red_step;
-    s8 green_step;
-    s8 blue_step;
+    ColorRGB8 color;
+    u8        tip_blue;
+    s8        red_step;
+    s8        green_step;
+    s8        blue_step;
 } Magic114Shade;
+
+ASSERT_OFFSET(Magic114Shade, color, 0x00);
+ASSERT_SIZE(Magic114Shade, 0x07);
 
 /* The four shades by segment mode: bit 0 picks the brighter row of a pair and
  * bit 2 the pair. */
@@ -199,9 +200,9 @@ NON_MATCHING void func_801EF280(s32* values) {
     values[mode] = RotAverage3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &p, &flag);
 
     shade = &shades[(mode & 1) | ((mode & 4) >> 1)];
-    setRGB0(prim, shade->red, shade->green, shade->blue);
-    setRGB1(prim, shade->red, shade->green, shade->blue);
-    setRGB2(prim, shade->red, shade->green, shade->tip_blue);
+    setRGB0(prim, shade->color.red, shade->color.green, shade->color.blue);
+    setRGB1(prim, shade->color.red, shade->color.green, shade->color.blue);
+    setRGB2(prim, shade->color.red, shade->color.green, shade->tip_blue);
 
     if (g_Task->header.mode == 2) {
         frame_count = g_FrameCount;
@@ -227,9 +228,9 @@ NON_MATCHING void func_801EF280(s32* values) {
             case 6:
                 shade = &shades[(mode & 1) | ((mode & 4) >> 1)];
                 if ((mode & 1) != 0) {
-                    setRGB1(prim, shade->red + shade->red_step * g_Task->unk_09, shade->green + shade->green_step * g_Task->unk_09, shade->blue + shade->blue_step * g_Task->unk_09);
+                    setRGB1(prim, shade->color.red + shade->red_step * g_Task->unk_09, shade->color.green + shade->green_step * g_Task->unk_09, shade->color.blue + shade->blue_step * g_Task->unk_09);
                 } else {
-                    setRGB0(prim, shade->red + shade->red_step * g_Task->unk_09, shade->green + shade->green_step * g_Task->unk_09, shade->blue + shade->blue_step * g_Task->unk_09);
+                    setRGB0(prim, shade->color.red + shade->red_step * g_Task->unk_09, shade->color.green + shade->green_step * g_Task->unk_09, shade->color.blue + shade->blue_step * g_Task->unk_09);
                 }
                 break;
         }
