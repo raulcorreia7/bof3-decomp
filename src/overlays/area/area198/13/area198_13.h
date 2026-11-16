@@ -38,6 +38,8 @@ extern u8       D_801F4368[];
 extern Callback D_801F43EC[];
 /* The actor script ids the phase starts, one per phase. */
 extern u8       D_801F43AC[];
+/* The per-phase speed steps, in a sixteenth of a cell. */
+extern s8       D_801F43B0[];
 
 /* The state update's fallback handler. */
 /* The image's setup pass. */
