@@ -5698,6 +5698,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 
 ["emi/world04/area156/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+WorldMap_WaveCells = { addr = 0x801F2C04, type = "func", source = "Waves the four corner heights of the map cells around the party cell with a frame-to-frame sine delta." }
 
 ["emi/world04/area157/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
