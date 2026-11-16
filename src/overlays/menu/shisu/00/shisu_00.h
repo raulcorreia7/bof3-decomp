@@ -14,24 +14,23 @@
 
 #define g_SceneState        (*(struct SceneState*)&g_SceneState)
 
-extern u8            D_80148656;
+extern u8   D_80148656;
 /* g_EmiOverlayHeader */
-extern OverlayHeader g_EmiOverlayHeader;
-extern char          g_MenuStatFormat[];
-extern char          g_MenuZennyFormat[];
+extern char g_MenuStatFormat[];
+extern char g_MenuZennyFormat[];
 /* D_801D0C2C */
-extern char          g_MenuNextExpBlank[];
-extern char          g_MenuClockFormat[];
+extern char g_MenuNextExpBlank[];
+extern char g_MenuClockFormat[];
 /* D_801D0D64 */
-extern char          g_SaveSlotLevelFormat[];
+extern char g_SaveSlotLevelFormat[];
 /* D_801D0D68 */
-extern char          g_SaveSlotTimeFormat[];
+extern char g_SaveSlotTimeFormat[];
 /* D_801D0D74 */
-extern u8            g_SaveSlotTimeColon[];
+extern u8   g_SaveSlotTimeColon[];
 /* D_801D0D78 */
-extern char          g_SaveCardPortLabelFirst[];
+extern char g_SaveCardPortLabelFirst[];
 /* D_801D0D7C */
-extern char          g_SaveCardPortLabelSecond[];
+extern char g_SaveCardPortLabelSecond[];
 /* Entries of the handler tables. */
 #define MENU_STATUS_STEP_COUNT        5
 #define MENU_STATUS_TASK_COUNT        4
