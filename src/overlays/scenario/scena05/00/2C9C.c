@@ -739,7 +739,7 @@ MATCH s32 func_801FD208(void) {
 
 /* func_801FD298 */
 MATCH void Scene_JoinMomoNinaPeco(void) {
-    g_Characters[g_CharSlot[6]].unk_07 |= 1;
+    g_Characters[g_CharSlot[6]].party_flags |= 1;
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_MOMO);
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
