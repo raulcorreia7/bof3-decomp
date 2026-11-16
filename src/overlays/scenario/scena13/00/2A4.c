@@ -78,8 +78,7 @@ MATCH void func_801F71DC(void) {
     work->tint.bytes.rgb.green = 0;
     work->tint.bytes.rgb.red   = 0;
     g_Task->param.unk_0B       = 0x33;
-    Message_StartAreaMessage(g_Task->param.unk_0B);
-    g_GameStateIndex    = GAME_REQUEST_MESSAGE;
+    MESSAGE_START_WAIT(g_Task->param.unk_0B);
     g_Task->header.mode = 1;
 }
 
@@ -122,8 +121,7 @@ MATCH void func_801F735C(void) {
             g_Task->header.mode                 = 4;
             g_ScriptVars[0] += 1;
         } else {
-            Message_StartAreaMessage(message_id);
-            g_GameStateIndex    = GAME_REQUEST_MESSAGE;
+            MESSAGE_START_WAIT(message_id);
             g_Task->header.mode = 1;
         }
     }

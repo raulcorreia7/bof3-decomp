@@ -51,9 +51,7 @@ MATCH void func_801FA3A4(void) {
         case 8:
             if (g_UiWindowEffectBusy == 0) {
                 g_AreaDrawFlags = 0;
-                Message_StartAreaMessage(0x3F);
-                g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-                g_SceneState.step_05 = 9;
+                SCENE_MESSAGE_WAIT(0x3F, 9);
             }
             break;
         case 9:

@@ -492,9 +492,8 @@ MATCH void func_801F8710(void) {
         *bgm = GAME_NONE;
         SND_SetBankLayout(0);
         g_AreaDrawFlags = 0;
-        Message_StartAreaMessage(1);
-        g_GameStateIndex = GAME_REQUEST_MESSAGE;
-        state            = &g_SceneState.state_04;
+        MESSAGE_START_WAIT(1);
+        state = &g_SceneState.state_04;
         (*state)++;
     }
     func_801F8B10(0x4B0, 0x80);

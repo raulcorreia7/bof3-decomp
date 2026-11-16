@@ -172,9 +172,7 @@ MATCH void func_801FA8B8(void) {
             D_80146258 ^= 8;
             goto clear_script_state;
         case 20:
-            Message_StartAreaMessage(0x4B);
-            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-            g_SceneState.step_05 = 0x15;
+            SCENE_MESSAGE_WAIT(0x4B, 0x15);
             break;
         case 21:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -193,9 +191,7 @@ MATCH void func_801FA8B8(void) {
             SYS_SetFlag(g_SceneFlags, 0x2C);
             goto clear_script_state;
         case 30:
-            Message_StartAreaMessage(0x4C);
-            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-            g_SceneState.step_05 = 0x1F;
+            SCENE_MESSAGE_WAIT(0x4C, 0x1F);
             break;
         case 31:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {

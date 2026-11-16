@@ -366,15 +366,11 @@ MATCH void func_801F894C(void) {
             break;
 
         case 50:
-            Message_StartAreaMessage(6);
-            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-            g_SceneState.step_05 = 51;
+            SCENE_MESSAGE_WAIT(6, 51);
             break;
 
         case 60:
-            Message_StartAreaMessage(7);
-            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-            g_SceneState.step_05 = 51;
+            SCENE_MESSAGE_WAIT(7, 51);
             break;
     }
 }

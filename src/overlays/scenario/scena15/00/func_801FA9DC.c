@@ -29,9 +29,7 @@ MATCH void func_801FA9DC(void) {
             break;
         case 2:
             if (!WINDOW_EFFECT_BUSY()) {
-                Message_StartAreaMessage(0x12);
-                g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-                g_SceneState.step_05 = 3;
+                SCENE_MESSAGE_WAIT(0x12, 3);
             }
             break;
         case 3:
@@ -44,9 +42,7 @@ MATCH void func_801FA9DC(void) {
             break;
         case 4:
             if (!(g_SpawnedActors[D_801FE748].header.flags & 1)) {
-                Message_StartAreaMessage(0x13);
-                g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-                g_SceneState.step_05 = 5;
+                SCENE_MESSAGE_WAIT(0x13, 5);
             }
             break;
         case 5:
@@ -59,9 +55,7 @@ MATCH void func_801FA9DC(void) {
             break;
         case 6:
             if (!(g_SpawnedActors[D_801FE748].header.flags & 1)) {
-                Message_StartAreaMessage(0x14);
-                g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-                g_SceneState.step_05 = 7;
+                SCENE_MESSAGE_WAIT(0x14, 7);
             }
             break;
         case 7:

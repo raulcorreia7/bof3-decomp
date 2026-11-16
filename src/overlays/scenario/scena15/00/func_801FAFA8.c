@@ -110,9 +110,7 @@ MATCH void func_801FAFA8(void) {
         case 22:
             if (!WINDOW_EFFECT_BUSY()) {
                 g_AreaDrawFlags = 0;
-                Message_StartAreaMessage(3);
-                g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-                g_SceneState.step_05 = 0x17;
+                SCENE_MESSAGE_WAIT(3, 0x17);
             }
             break;
         case 23:
