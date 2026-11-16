@@ -5,8 +5,6 @@
 #include "overlays/area/Message_ShowParty.h"
 #include "overlays/area/WorldAreaRequest.h"
 
-extern u16 D_80146876;
-
 /* The work origin offset, step and threshold this overlay advances. */
 #define AREA_ORIGIN_OFFSET       0x2E
 #define ACTOR_SCREEN_X_STEP      0x10

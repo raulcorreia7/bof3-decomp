@@ -33,8 +33,8 @@ INCLUDE_ASM(func_801FB464);
 MATCH s32 func_801FBA34(s32 x, s32 y) {
     if (LOHU(g_GameAreaId) == 0x8F && D_80143F03 == 0 && SYS_TestFlag(g_SceneFlags, 0x1C) != 0 && SYS_TestFlag(g_SceneFlags, 0x1D) == 0 && (x >> 16) == 0x2E && (u32)((y >> 16) - 0x1F) < 4U) {
         Game_SetScriptActive();
-        D_80146874 = 8;
-        D_80146875 = 0;
+        g_SceneState.state_04 = 8;
+        g_SceneState.step_05  = 0;
         return 1;
     }
     if (LOHU(g_GameAreaId) != 0x91) {

@@ -10,7 +10,7 @@ MATCH void func_801F4B58(void) {
             g_SceneEventState.step = 1;
             break;
         case 1:
-            if (D_80146867 == 0x24) {
+            if (g_ScriptVars[3] == 0x24) {
                 SYS_SetFlag(g_SceneEventFlags, 0x55);
                 Game_RequestAreaChange(AREA_ID_MYRIA_STATION_HE_SHELLS, TO_COORD(6), TO_COORD(63), AREA_ENTRY_MAP_LOADING | FACING_UP_RIGHT);
                 g_SceneEventState.step = 0x1E;
@@ -21,7 +21,7 @@ MATCH void func_801F4B58(void) {
             g_SceneEventState.step = 6;
             break;
         case 6:
-            if (D_80146867 == 0x24) {
+            if (g_ScriptVars[3] == 0x24) {
                 SYS_SetFlag(g_SceneEventFlags, 0x55);
                 Game_RequestAreaChange(AREA_ID_MYRIA_STATION_HE_SHELLS, TO_COORD(4), TO_COORD(117), AREA_ENTRY_MAP_LOADING | FACING_RIGHT);
                 g_SceneEventState.step = 0x1E;
@@ -32,7 +32,7 @@ MATCH void func_801F4B58(void) {
             g_SceneEventState.step = 0xB;
             break;
         case 11:
-            if (D_80146867 == 0x44) {
+            if (g_ScriptVars[3] == 0x44) {
                 SYS_SetFlag(g_SceneEventFlags, 0x56);
                 Game_RequestAreaChange(AREA_ID_MYRIA_STATION_HE_SHELLS, TO_COORD(16), TO_COORD(93), AREA_ENTRY_MAP_LOADING | FACING_DOWN_LEFT);
                 g_SceneEventState.step = 0x1E;
@@ -43,7 +43,7 @@ MATCH void func_801F4B58(void) {
             g_SceneEventState.step = 0x10;
             break;
         case 16:
-            if (D_80146867 == 0x44) {
+            if (g_ScriptVars[3] == 0x44) {
                 SYS_SetFlag(g_SceneEventFlags, 0x56);
                 Game_RequestAreaChange(AREA_ID_MYRIA_STATION_HE_SHELLS, TO_COORD(10), TO_COORD(147), AREA_ENTRY_MAP_LOADING | FACING_LEFT);
                 g_SceneEventState.step = 0x1E;
@@ -54,7 +54,7 @@ MATCH void func_801F4B58(void) {
             g_SceneEventState.step = 0x15;
             break;
         case 21:
-            if (D_80146867 == 0x64) {
+            if (g_ScriptVars[3] == 0x64) {
                 SYS_SetFlag(g_SceneEventFlags, 0x57);
                 Game_RequestAreaChange(AREA_ID_MYRIA_STATION_HE_SHELLS, TO_COORD(23), TO_COORD(93), AREA_ENTRY_MAP_LOADING | 10);
                 g_SceneEventState.step = 0x1E;
@@ -65,21 +65,21 @@ MATCH void func_801F4B58(void) {
             g_SceneEventState.step = 0x1A;
             break;
         case 26:
-            if (D_80146867 == 0x64) {
+            if (g_ScriptVars[3] == 0x64) {
                 SYS_SetFlag(g_SceneEventFlags, 0x57);
                 Game_RequestAreaChange(AREA_ID_MYRIA_STATION_HE_SHELLS, TO_COORD(17), TO_COORD(147), AREA_ENTRY_MAP_LOADING | 11);
                 g_SceneEventState.step = 0x1E;
             }
             break;
         case 29:
-            if (D_80146867 == 0) {
+            if (g_ScriptVars[3] == 0) {
                 g_GameFlags |= 0x1010;
                 SYS_ClearFlag(g_SceneEventFlags, 0x57);
                 g_SceneEventState.step = 0x35;
             }
             break;
         case 30:
-            if (D_80146867 == 0) {
+            if (g_ScriptVars[3] == 0) {
                 SYS_ClearFlag(g_SceneEventFlags, 0x55);
                 SYS_ClearFlag(g_SceneEventFlags, 0x56);
                 SYS_ClearFlag(g_SceneEventFlags, 0x57);

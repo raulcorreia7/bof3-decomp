@@ -118,9 +118,6 @@ extern u8  D_80143F1D;
 extern u8  D_80145EB4;
 extern u8  D_80145FF4;
 extern u8  D_80146134;
-extern u8  D_80146865;
-extern u8  D_80146874;
-extern u8  D_80146875;
 extern s16 D_801492DA;
 extern s16 D_801492DC;
 /* The spawned-actor row fields func_801F817C stamps: the flag byte, the type byte, the camera

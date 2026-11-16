@@ -10,7 +10,7 @@ MATCH void Well_RaiseReady(void) {
         g_WellIdleFrames = 0;
         g_WellPressCount += 1;
         g_Task->header.mode = WELL_MODE_RAISE_COUNT;
-        counter             = &D_80146865;
+        counter             = &g_ScriptVars[1];
         *counter += 1;
     } else if (++g_WellIdleFrames >= WELL_IDLE_FRAMES_MAX) {
         g_Task->header.mode = WELL_MODE_FAIL;

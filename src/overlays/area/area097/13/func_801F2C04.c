@@ -10,7 +10,7 @@ MATCH void func_801F2C04(void) {
             *state = 1;
             break;
         case 1:
-            result = &D_80146867;
+            result = &g_ScriptVars[3];
             if (*result == 2) {
                 Game_ClearScriptActive();
                 *result                = 0;

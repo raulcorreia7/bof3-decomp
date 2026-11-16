@@ -37,10 +37,10 @@ MATCH void func_801FB36C(void) {
             switch (vars[0]) {
                 case 8:
                     if ((u8)Party_SpendZenny(0x32, 0) != 0) {
-                        vars[0]    = 9;
-                        D_80146865 = 0;
-                        D_80146866 = 0;
-                        D_80146867 = 0;
+                        vars[0]         = 9;
+                        g_ScriptVars[1] = 0;
+                        g_ScriptVars[2] = 0;
+                        g_ScriptVars[3] = 0;
                         Game_ClearScriptActive();
                         g_SceneState.step_05  = 0;
                         g_SceneState.state_04 = 0;
@@ -68,10 +68,10 @@ MATCH void func_801FB36C(void) {
             switch (vars[0]) {
                 case 8:
                     if ((u8)Party_SpendZenny(0x32, 0) != 0) {
-                        vars[0]    = 9;
-                        D_80146865 = 0;
-                        D_80146866 = 0;
-                        D_80146867 = 0;
+                        vars[0]         = 9;
+                        g_ScriptVars[1] = 0;
+                        g_ScriptVars[2] = 0;
+                        g_ScriptVars[3] = 0;
                         Game_ClearScriptActive();
                         g_SceneState.step_05  = 0;
                         g_SceneState.state_04 = 0;
@@ -95,9 +95,9 @@ MATCH void func_801FB36C(void) {
                 break;
             }
             g_ScriptVars[0] = 0x10;
-            D_80146865      = 1;
-            D_80146866      = 0;
-            D_80146867      = 0;
+            g_ScriptVars[1] = 1;
+            g_ScriptVars[2] = 0;
+            g_ScriptVars[3] = 0;
             SYS_SetFlag(g_SceneFlags, 0x3A);
             Game_ClearScriptActive();
             g_SceneState.step_05  = 0;
@@ -115,10 +115,10 @@ MATCH void func_801FB36C(void) {
             switch (vars[0]) {
                 case 8:
                     if ((u8)Party_SpendZenny(0x32, 0) != 0) {
-                        vars[0]    = 9;
-                        D_80146865 = 0;
-                        D_80146866 = 0;
-                        D_80146867 = 0;
+                        vars[0]         = 9;
+                        g_ScriptVars[1] = 0;
+                        g_ScriptVars[2] = 0;
+                        g_ScriptVars[3] = 0;
                         Game_ClearScriptActive();
                         g_SceneState.step_05  = 0;
                         g_SceneState.state_04 = 0;

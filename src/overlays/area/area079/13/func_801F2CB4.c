@@ -3,22 +3,22 @@
 MATCH void func_801F2CB4(void) {
     switch (g_MessageChoice) {
         case 0:
-            D_80146867 = 1;
+            g_ScriptVars[3] = 1;
             break;
         case 1:
-            D_80146867 = 2;
+            g_ScriptVars[3] = 2;
             break;
         case 2:
-            D_80146867 = 3;
+            g_ScriptVars[3] = 3;
             break;
         case 3:
-            D_80146867 = 4;
+            g_ScriptVars[3] = 4;
             break;
         case 4:
-            D_80146867 = 5;
+            g_ScriptVars[3] = 5;
             break;
         case 5:
-            D_80146867 = 6;
+            g_ScriptVars[3] = 6;
             break;
     }
 }

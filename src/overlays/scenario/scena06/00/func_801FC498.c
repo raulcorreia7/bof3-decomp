@@ -23,8 +23,8 @@ MATCH void func_801FC498(void) {
             }
             stored = &D_80144DF2;
             if ((u8)Item_Add(ITEM_CAT_WEAPON, *stored + 1, 1, 0) == 0) {
-                *progress  = 0x20;
-                D_80146865 = 0;
+                *progress       = 0x20;
+                g_ScriptVars[1] = 0;
                 Game_ClearScriptActive();
                 g_SceneState.step_05  = 0;
                 g_SceneState.state_04 = 0;
@@ -53,8 +53,8 @@ MATCH void func_801FC498(void) {
             }
             stored = &D_80144DF5;
             if ((u8)Item_Add(ITEM_CAT_ARMOR, *stored + 1, 1, 0) == 0) {
-                *progress  = 0x25;
-                D_80146865 = 0;
+                *progress       = 0x25;
+                g_ScriptVars[1] = 0;
                 Game_ClearScriptActive();
                 g_SceneState.step_05  = 0;
                 g_SceneState.state_04 = 0;
@@ -76,7 +76,7 @@ MATCH void func_801FC498(void) {
         case 21:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 g_ScriptVars[0] = 0;
-                D_80146865      = 0;
+                g_ScriptVars[1] = 0;
                 Game_ClearScriptActive();
                 g_SceneState.step_05  = 0;
                 g_SceneState.state_04 = 0;

@@ -13,7 +13,7 @@ MATCH void func_801FB868(void) {
         case 1: {
             u8* counter;
 
-            counter = &D_80146867;
+            counter = &g_ScriptVars[3];
             if (*counter == 0x4B) {
                 func_801C601C(2);
                 Scene_SetupParty(0xF);
@@ -24,9 +24,9 @@ MATCH void func_801FB868(void) {
         }
         case 2:
             if (g_ScriptVars[0] == 0x27 && g_AreaCameraMoving == 0) {
-                D_80146865 = 0;
-                D_80146866 = 0;
-                D_80146867 = 0;
+                g_ScriptVars[1] = 0;
+                g_ScriptVars[2] = 0;
+                g_ScriptVars[3] = 0;
                 Game_ClearScriptActive();
                 g_SceneState.step_05  = 0;
                 g_SceneState.state_04 = 0;
@@ -57,9 +57,9 @@ MATCH void func_801FB868(void) {
         case 7:
             if (g_ScriptVars[0] == 0x3C) {
                 SYS_SetFlag(g_SceneFlags, 0x2F);
-                D_80146865 = 0;
-                D_80146866 = 0;
-                D_80146867 = 0;
+                g_ScriptVars[1] = 0;
+                g_ScriptVars[2] = 0;
+                g_ScriptVars[3] = 0;
                 Game_ClearScriptActive();
                 g_SceneState.step_05  = 0;
                 g_SceneState.state_04 = 0;
@@ -93,9 +93,9 @@ MATCH void func_801FB868(void) {
         case 24:
             if (g_ScriptVars[0] == 0x4B) {
                 SYS_SetFlag(g_SceneFlags, 0x30);
-                D_80146865 = 0;
-                D_80146866 = 0;
-                D_80146867 = 0;
+                g_ScriptVars[1] = 0;
+                g_ScriptVars[2] = 0;
+                g_ScriptVars[3] = 0;
                 Game_ClearScriptActive();
                 g_SceneState.step_05  = 0;
                 g_SceneState.state_04 = 0;
@@ -128,9 +128,9 @@ MATCH void func_801FB868(void) {
         case 26:
             if (g_ScriptVars[0] == 0x51) {
                 SYS_SetFlag(g_SceneFlags, 0x32);
-                D_80146865 = 0;
-                D_80146866 = 0;
-                D_80146867 = 0;
+                g_ScriptVars[1] = 0;
+                g_ScriptVars[2] = 0;
+                g_ScriptVars[3] = 0;
                 Game_ClearScriptActive();
                 g_SceneState.step_05  = 0;
                 g_SceneState.state_04 = 0;
@@ -139,7 +139,7 @@ MATCH void func_801FB868(void) {
         case 30: {
             u8* counter;
 
-            counter = &D_80146867;
+            counter = &g_ScriptVars[3];
             if (++*counter >= 0x10) {
                 *counter              = 0;
                 g_SceneState.step_05  = 0;

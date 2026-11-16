@@ -7,13 +7,6 @@
 #include "overlays/scenario/scenario.h"
 #include "sys/exe.h"
 
-extern u8 D_80146865;
-extern u8 D_80146866;
-
-extern u8 D_80146874;
-
-extern u8 D_80146875;
-
 extern u32       D_801F6C00;
 extern u8        D_801460FB;
 extern u8        D_801FE26C[];
@@ -94,11 +87,11 @@ extern u8  D_80146871;
 /* Starts the scene script 0x1A with the camera shake state cleared. */
 #define SCENA02_START_SCRIPT_1A() \
     Game_SetScriptActive();       \
-    *g_ScriptVars = 0x23;         \
-    D_80146865    = 0;            \
-    D_80146866    = 0;            \
-    D_80146867    = 0;            \
-    D_80146875    = 0;            \
-    D_80146874    = 0x1A
+    *g_ScriptVars         = 0x23; \
+    g_ScriptVars[1]       = 0;    \
+    g_ScriptVars[2]       = 0;    \
+    g_ScriptVars[3]       = 0;    \
+    g_SceneState.step_05  = 0;    \
+    g_SceneState.state_04 = 0x1A
 
 #endif

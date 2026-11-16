@@ -34,7 +34,7 @@ MATCH void func_801F38DC(void) {
                 Game_ClearScriptActive();
                 g_SceneEventState.mode = SCENE_EVENT_NONE;
                 *state                 = 0;
-                D_80146867             = 0;
+                g_ScriptVars[3]        = 0;
             }
             break;
     }

@@ -5,9 +5,9 @@ MATCH void func_801F2CB4(void) {
 
     MESSAGE_REQUEST_CLEAR();
     if (MENU_SELECTION_ARMED()) {
-        D_80146875 = 0x1E;
+        g_SceneState.step_05 = 0x1E;
     } else {
-        D_80146875 = 0x1C;
+        g_SceneState.step_05 = 0x1C;
     }
     SYS_SetFlag(g_SceneFlags, 5);
     flags = &g_SceneState.flags_01;

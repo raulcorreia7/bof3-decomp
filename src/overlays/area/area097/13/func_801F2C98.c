@@ -5,7 +5,7 @@ MATCH s32 func_801F2C98(s32 x, s32 y) {
 
     if (y <= TO_COORD(58) && ((x >> 16) - 48) < 3U) {
         if ((facing < 2U || facing == FACING_UP_RIGHT) && Item_VitalHas(VITAL_ITEM_GUILD_LETTER) == 0) {
-            D_80146867             = 1;
+            g_ScriptVars[3]        = 1;
             g_SceneEventState.mode = 0xD;
             g_SceneEventState.step = 0;
             return 1;

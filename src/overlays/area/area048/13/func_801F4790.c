@@ -8,7 +8,7 @@ MATCH void func_801F4790(void) {
     } else {
         g_ScriptVars[0] = 1;
         Game_ClearScriptActive();
-        D_80146874 = 0;
-        D_80146875 = 0;
+        g_SceneState.state_04 = 0;
+        g_SceneState.step_05  = 0;
     }
 }

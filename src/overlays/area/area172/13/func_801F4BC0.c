@@ -10,7 +10,7 @@ MATCH void func_801F4BC0(void) {
             *state = 1;
             break;
         case 1:
-            if (D_80146867 == 0x14) {
+            if (g_ScriptVars[3] == 0x14) {
                 SYS_SetFlag(state + 0x63C, 0x4E);
                 Game_RequestAreaChange(AREA_ID_EDEN_TEEPO_FIGHT, TO_COORD(10), TO_COORD(5), AREA_ENTRY_MAP_LOADING | FACING_RIGHT);
                 g_SceneEventState.mode = SCENE_EVENT_NONE;
@@ -22,7 +22,7 @@ MATCH void func_801F4BC0(void) {
             *state = 6;
             break;
         case 6:
-            if (D_80146867 == 0x14) {
+            if (g_ScriptVars[3] == 0x14) {
                 SYS_SetFlag(state + 0x63C, 0x4E);
                 Game_RequestAreaChange(AREA_ID_EDEN_TEEPO_FIGHT, TO_COORD(38), TO_COORD(54), AREA_ENTRY_MAP_LOADING | FACING_UP_RIGHT);
                 g_SceneEventState.mode = SCENE_EVENT_NONE;

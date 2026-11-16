@@ -94,7 +94,7 @@ MATCH void func_801F8428(void) {
 MATCH void func_801F8430(void) {
     u8* step;
 
-    step = &D_80146875;
+    step = &g_SceneState.step_05;
     switch (*step) {
         case 0:
             MESSAGE_START_WAIT(5);
@@ -102,8 +102,8 @@ MATCH void func_801F8430(void) {
             break;
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                D_80146866 = 1;
-                *step      = 2;
+                g_ScriptVars[2] = 1;
+                *step           = 2;
                 SYS_SetFlag(g_SceneFlags, 0);
                 func_8019FA28(0x44, 0x1D0000, 0x1E0000, 0x80);
             }
@@ -112,11 +112,11 @@ MATCH void func_801F8430(void) {
             if (*g_ScriptVars == 0x2D) {
                 SYS_SetFlag(g_SceneFlags, 1);
                 Game_ClearScriptActive();
-                D_80146865 = 0;
-                D_80146866 = 0;
-                D_80146867 = 0;
-                *step      = 0;
-                D_80146874 = 0;
+                g_ScriptVars[1]       = 0;
+                g_ScriptVars[2]       = 0;
+                g_ScriptVars[3]       = 0;
+                *step                 = 0;
+                g_SceneState.state_04 = 0;
             }
             break;
     }

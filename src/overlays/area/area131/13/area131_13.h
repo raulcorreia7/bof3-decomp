@@ -6,8 +6,6 @@
 
 #include "overlays/area/world03.h"
 extern s8 D_8014504A;
-extern u8 D_80146874;
-extern u8 D_80146875;
 
 /* The scenario state byte the copy writes. */
 #endif

@@ -18,8 +18,8 @@ MATCH void func_801F7C38(void) {
             if (g_ScriptVars[0] == 8) {
                 D_80146258 |= 6;
                 Game_ClearScriptActive();
-                D_80146865            = 0;
-                D_80146866            = 0;
+                g_ScriptVars[1]       = 0;
+                g_ScriptVars[2]       = 0;
                 g_SceneState.step_05  = 0;
                 g_SceneState.state_04 = 0;
                 SYS_SetFlag(g_SceneFlags, 4);
@@ -32,8 +32,8 @@ MATCH void func_801F7C38(void) {
         case 6:
             if (g_ScriptVars[0] == 0x22) {
                 Game_ClearScriptActive();
-                D_80146865            = 0;
-                D_80146866            = 0;
+                g_ScriptVars[1]       = 0;
+                g_ScriptVars[2]       = 0;
                 g_SceneState.step_05  = 0;
                 g_SceneState.state_04 = 0;
                 SYS_SetFlag(g_SceneFlags, 5);
@@ -49,8 +49,8 @@ MATCH void func_801F7C38(void) {
         case 8:
             if (g_ScriptVars[0] == 0x22) {
                 Game_ClearScriptActive();
-                D_80146865            = 0;
-                D_80146866            = 0;
+                g_ScriptVars[1]       = 0;
+                g_ScriptVars[2]       = 0;
                 g_SceneState.state_04 = 0;
                 g_SceneState.step_05  = 0;
                 SYS_SetFlag(g_SceneFlags, 5);
@@ -61,7 +61,7 @@ MATCH void func_801F7C38(void) {
             break;
         case 20:
             if (g_ScriptVars[0] == 0x1E) {
-                D_80146866            = 0;
+                g_ScriptVars[2]       = 0;
                 g_SceneState.step_05  = 0;
                 g_SceneState.state_04 = 0;
                 if (g_Game.party_size == 3) {

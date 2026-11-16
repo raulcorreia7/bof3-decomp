@@ -134,7 +134,7 @@ MATCH void func_801F8414(void) {
 }
 
 MATCH void func_801F841C(void) {
-    u8* step = &D_80146875;
+    u8* step = &g_SceneState.step_05;
 
     switch (*step) {
         case 0:
@@ -150,8 +150,8 @@ MATCH void func_801F841C(void) {
             if (*g_ScriptVars == 0x11) {
                 SYS_SetFlag(g_SceneFlags, 1);
                 Game_ClearScriptActive();
-                *step      = 0;
-                D_80146874 = 0;
+                *step                 = 0;
+                g_SceneState.state_04 = 0;
             }
             break;
     }

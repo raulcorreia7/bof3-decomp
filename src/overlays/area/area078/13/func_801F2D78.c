@@ -8,13 +8,13 @@ MATCH void func_801F2D78(void) {
     switch (choice) {
         case 0:
             Game_SetScriptActive();
-            g_ScriptVars[0] = 0;
-            D_80146865      = 0;
-            D_80146866      = 0;
-            D_80146867      = 0;
-            D_80146875      = 0;
-            D_80146876      = 0;
-            D_80146874      = 14;
+            g_ScriptVars[0]       = 0;
+            g_ScriptVars[1]       = 0;
+            g_ScriptVars[2]       = 0;
+            g_ScriptVars[3]       = 0;
+            g_SceneState.step_05  = 0;
+            g_SceneState.timer_06 = 0;
+            g_SceneState.state_04 = 14;
             break;
         case 1:
             g_ScriptVars[0] = 0;

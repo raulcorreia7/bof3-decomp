@@ -55,15 +55,15 @@ MATCH void func_801FD524(void) {
 MATCH void func_801FD5A0(void) {
     Game_SetScriptActive();
     g_ScriptVars[0] = 0;
-    D_80146865      = 0;
-    D_80146866      = 0;
-    D_80146867      = 0;
+    g_ScriptVars[1] = 0;
+    g_ScriptVars[2] = 0;
+    g_ScriptVars[3] = 0;
     if (SYS_TestFlag(D_80144EB8, 35)) {
-        D_80146875 = 0x14;
+        g_SceneState.step_05 = 0x14;
     } else {
-        D_80146875 = 0xA;
+        g_SceneState.step_05 = 0xA;
     }
-    D_80146874 = 7;
+    g_SceneState.state_04 = 7;
 }
 
 MATCH SpawnedActor* func_801FD610(u8 mode) {

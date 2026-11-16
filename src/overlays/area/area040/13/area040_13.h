@@ -22,8 +22,6 @@ extern u8 D_80144EA9;
 extern u8 D_80143F06;
 s32       func_801F2E78(void);
 
-extern u8 D_80146875;
-
 /* The 4x4 cell palette func_801F3570 tests each cell's value against. */
 extern u8 D_801F4960[4][4];
 extern u8 D_801F4970[];

@@ -23,7 +23,7 @@ MATCH void func_801F3124(void) {
     }
     g_Task->tint.signed_bytes.delta.red = -1;
     func_801F3308(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->vz, 0);
-    if (D_80146867 == 0xE) {
+    if (g_ScriptVars[3] == 0xE) {
         g_Task->header.mode = 1;
     }
 }

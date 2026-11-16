@@ -73,9 +73,9 @@ MATCH void func_801FDF84(void) {
 MATCH void func_801FE058(void) {
     g_ScriptVars[0] = 0;
     Game_SetScriptActive();
-    D_80146874 = 7;
-    D_80146876 = 32;
-    D_80146875 = 0;
+    g_SceneState.state_04 = 7;
+    g_SceneState.timer_06 = 32;
+    g_SceneState.step_05  = 0;
 }
 
 MATCH void func_801FE0A0(void) {
@@ -88,8 +88,8 @@ MATCH void func_801FE0A0(void) {
 MATCH void func_801FE0E0(void) {
     g_ScriptVars[0] = 0;
     Game_SetScriptActive();
-    D_80146874 = 10;
-    D_80146875 = 0;
+    g_SceneState.state_04 = 10;
+    g_SceneState.step_05  = 0;
     SYS_SetFlag(g_SceneFlags, 19);
 }
 
@@ -112,15 +112,15 @@ MATCH s32 func_801FE170(s32 x, s32 y) {
     if ((LOHU(g_GameAreaId) == AREA_ID_DAUNA_MINE_ADULT) && (x == TO_COORD(51) + COORD_HALF) && (((y >> 16) - 39) < 2U)) {
         if (SYS_TestFlag(g_SceneFlags, 6) == 0) {
             Game_SetScriptActive();
-            D_80146874 = 4;
-            D_80146875 = 5;
+            g_SceneState.state_04 = 4;
+            g_SceneState.step_05  = 5;
             return 1;
         }
         if (SYS_TestFlag(g_SceneFlags, 7) == 0) {
             Game_SetScriptActive();
-            *g_ScriptVars = 0;
-            D_80146874    = 5;
-            D_80146875    = 0;
+            *g_ScriptVars         = 0;
+            g_SceneState.state_04 = 5;
+            g_SceneState.step_05  = 0;
             return 1;
         }
         goto block_7;

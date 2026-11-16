@@ -8,9 +8,6 @@
 
 #define g_SceneFlags ((void*)g_SceneFlags)
 
-extern u8 D_80146874;
-extern u8 D_80146875;
-
 extern u8 D_801F398C[];
 
 extern u8 D_801F5C08[];
@@ -35,8 +32,8 @@ extern u8 D_801F5CDF[];
     if (g_Game.members[0].chr.character_id == 6) {                            \
         g_CurrentActor->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING; \
         Game_SetScriptActive();                                               \
-        D_80146874 = 4;                                                       \
-        D_80146875 = (step_next);                                             \
+        g_SceneState.state_04 = 4;                                            \
+        g_SceneState.step_05  = (step_next);                                  \
     } else {                                                                  \
         g_CurrentActor->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING; \
     }

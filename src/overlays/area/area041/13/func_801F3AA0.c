@@ -13,5 +13,5 @@ MATCH void func_801F3AA0(void) {
         FAKE_ORDER_FENCE(); /* FAKE: the order fence keeps the value store in retail's schedule. */
         value = 0x28;
     }
-    D_80146865 = value;
+    g_ScriptVars[1] = value;
 }

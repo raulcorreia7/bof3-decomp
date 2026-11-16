@@ -3,8 +3,8 @@
 MATCH void func_801F2C40(void) {
     if (g_MessageChoice == 0) {
         Game_SetScriptActive();
-        D_80146874                              = 7;
-        D_80146875                              = 10;
+        g_SceneState.state_04                   = 7;
+        g_SceneState.step_05                    = 10;
         g_ScriptVars[0]                         = 0;
         ((u8*)g_ScriptWorkRecord)[1]            = 4;
         ((u8*)g_ScriptWorkRecord)[0x78]         = 2;

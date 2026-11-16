@@ -12,16 +12,16 @@ MATCH s8 func_801FCC54(s32 x, s32 y) {
 MATCH s32 func_801FCCBC(void) {
     Game_SetScriptActive();
     g_ScriptVars[0] = 0;
-    D_80146865      = 0;
-    D_80146866      = 0;
-    D_80146867      = 0;
+    g_ScriptVars[1] = 0;
+    g_ScriptVars[2] = 0;
+    g_ScriptVars[3] = 0;
     if (g_Game.members[0].chr.character_id != CHAR_ID_MOMO) {
-        D_80146875 = 0;
-        D_80146874 = 5;
+        g_SceneState.step_05  = 0;
+        g_SceneState.state_04 = 5;
         return 1;
     }
-    D_80146875 = 5;
-    D_80146874 = 5;
+    g_SceneState.step_05  = 5;
+    g_SceneState.state_04 = 5;
     return 1;
 }
 

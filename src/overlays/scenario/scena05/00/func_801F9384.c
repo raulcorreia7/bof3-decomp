@@ -61,7 +61,7 @@ MATCH void func_801F9384(void) {
         case 5:
             if (g_ScriptVars[0] == 0x33) {
                 if (g_GameStateIndex != 2) {
-                    D_80146866           = 6;
+                    g_ScriptVars[2]      = 6;
                     g_SceneState.step_05 = 6;
                     SYS_SetFlag(g_SceneFlags, 0x17);
                     SYS_ClearFlag(g_SceneFlags, 0x16);
@@ -73,9 +73,9 @@ MATCH void func_801F9384(void) {
         case 6:
             if (g_ScriptVars[0] == 2) {
             scene_end:
-                D_80146865 = 0;
-                D_80146866 = 0;
-                D_80146867 = 0;
+                g_ScriptVars[1] = 0;
+                g_ScriptVars[2] = 0;
+                g_ScriptVars[3] = 0;
                 Game_ClearScriptActive();
                 g_SceneState.step_05  = 0;
                 g_SceneState.state_04 = 0;
@@ -107,7 +107,7 @@ MATCH void func_801F9384(void) {
         case 18:
             if (g_ScriptVars[0] == 0x33) {
                 if (g_GameStateIndex != 2) {
-                    D_80146866           = 5;
+                    g_ScriptVars[2]      = 5;
                     g_SceneState.step_05 = 6;
                     SYS_SetFlag(g_SceneFlags, 0x16);
                     SYS_ClearFlag(g_SceneFlags, 0x17);

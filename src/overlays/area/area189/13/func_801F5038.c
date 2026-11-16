@@ -20,10 +20,10 @@ NON_MATCHING void func_801F5038(void) {
     g_Task->vz       = 0;
     if (SYS_TestFlag(flags, 9) != 0 && SYS_TestFlag(flags, 10) == 0) {
         g_SpawnedActors[0].header.flags |= ACTOR_FLAG_HIDDEN;
-        g_Task->header.step = 3;
-        g_Task->vy          = -0x2000;
-        g_Task->timer       = 0x78;
-        D_80146876          = 0x3C;
+        g_Task->header.step   = 3;
+        g_Task->vy            = -0x2000;
+        g_Task->timer         = 0x78;
+        g_SceneState.timer_06 = 0x3C;
     } else {
         g_Task->header.step = 2;
     }

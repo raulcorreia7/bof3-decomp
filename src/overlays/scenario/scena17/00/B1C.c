@@ -147,7 +147,7 @@ MATCH void func_801F7BC0(void) {
     if (g_AreaCameraMoving == 0) {
         step                = &g_SceneState.state_04;
         g_AreaScrollTargetX = TO_COORD(84);
-        D_80146867          = 0xA;
+        g_ScriptVars[3]     = 0xA;
         *step += 1;
     }
 }
@@ -155,7 +155,7 @@ MATCH void func_801F7BC0(void) {
 MATCH void func_801F7C14(void) {
     s8* step;
 
-    if (g_AreaCameraMoving == 0 && D_80146867 == 0x14) {
+    if (g_AreaCameraMoving == 0 && g_ScriptVars[3] == 0x14) {
         step                = &g_SceneState.state_04;
         g_AreaCameraStep    = 0x10;
         g_AreaScrollTargetX = TO_COORD(60);
@@ -232,7 +232,7 @@ MATCH void func_801F7E9C(void) {
 MATCH void func_801F7F04(void) {
     s8* step;
 
-    if (D_80146867 == 0x64) {
+    if (g_ScriptVars[3] == 0x64) {
         step            = &g_SceneState.state_04;
         g_AreaSceneMode = 3;
         *step += 1;
@@ -373,7 +373,7 @@ MATCH void func_801F833C(void) {
     timer = &g_SceneState.step_05;
     *timer -= 1;
     if (*timer == 0) {
-        D_80146867 = 0x6E;
+        g_ScriptVars[3] = 0x6E;
         g_SceneState.state_04 += 1;
         *timer = 70;
     }
@@ -433,9 +433,9 @@ MATCH void func_801F84F4(void) {
     value  = *timer + 1;
     *timer = value;
     if (value >= 128) {
-        D_80146867 = 0x3C;
-        *timer     = 30;
-        D_801F9DD8 = 0;
+        g_ScriptVars[3] = 0x3C;
+        *timer          = 30;
+        D_801F9DD8      = 0;
         g_SceneState.state_04 += 1;
         EMI_LoadArchive(0x260);
         func_801F8FAC(0xE0, 0xBE, 0x80, 1);
@@ -456,7 +456,7 @@ MATCH void func_801F8594(void) {
         timer = &g_SceneState.step_05;
         *timer -= 1;
         if (*timer == 0) {
-            count = &D_80146867;
+            count = &g_ScriptVars[3];
             *count -= 1;
             if (*count == 0) {
                 g_SceneState.state_04 += 1;
@@ -850,9 +850,9 @@ MATCH void Scene_UpdateSaveMenu(void) {
 /* func_801F967C */
 MATCH void Scene_ExitToTitle(void) {
     g_ScriptVars[0] = 0;
-    D_80146865      = 0;
-    D_80146866      = 0;
-    D_80146867      = 0;
+    g_ScriptVars[1] = 0;
+    g_ScriptVars[2] = 0;
+    g_ScriptVars[3] = 0;
     SND_Exit();
     SYS_ThreadReplace(SYS_StartFrontend);
 }

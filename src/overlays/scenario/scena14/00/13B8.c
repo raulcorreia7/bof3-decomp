@@ -23,7 +23,7 @@ MATCH void func_801F8850(void) {
     D_80146134 &= 0xFE;
     Game_RequestAreaChange(AREA_ID_DESERT_MANMO, TO_COORD(41) + COORD_HALF, TO_COORD(22) + COORD_HALF, AREA_ENTRY_MAP_LOADING);
     Game_SetScriptActive();
-    D_80146874 = 2;
-    D_80146875 = 0;
+    g_SceneState.state_04 = 2;
+    g_SceneState.step_05  = 0;
     D_80146871 &= 0xFE;
 }

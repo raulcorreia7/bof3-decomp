@@ -8,13 +8,8 @@
 #include "sys/exe.h"
 #include "area/spad.h"
 
-extern u8 D_80146874;
-
 void func_8015D104(s32 slot, s32 amount);
 void SND_StartVolumeSweep(s32 voice);
-
-extern u8  D_80146875;
-extern u16 D_80146876;
 
 /* The scene starter func_801FD178 and func_801FD208 share: both scene flags 6 set and 9 clear raise
  * an event flag, start the script and arm the timer, else return -1. Every change must keep both
@@ -25,15 +20,13 @@ extern u16 D_80146876;
     }                                                                               \
     SYS_SetFlag(g_SceneEventFlags, event_flag);                                     \
     Game_SetScriptActive();                                                         \
-    D_80146866 = 0;                                                                 \
-    D_80146867 = 0;                                                                 \
+    g_ScriptVars[2] = 0;                                                            \
+    g_ScriptVars[3] = 0;                                                            \
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));                                      \
-    D_80146875 = timer;                                                             \
-    D_80146876 = 0;                                                                 \
+    g_SceneState.step_05  = timer;                                                  \
+    g_SceneState.timer_06 = 0;                                                      \
     return 1
 
-extern u8  D_80146865;
-extern u8  D_80146866;
 extern u32 D_801F6C00;
 /* D_801FD5A8 */
 

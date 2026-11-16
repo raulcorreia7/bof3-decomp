@@ -2,5 +2,5 @@
 
 MATCH void func_801F2DF0(void) {
     Actor_Clear();
-    D_80146876 = 0;
+    g_SceneState.timer_06 = 0;
 }

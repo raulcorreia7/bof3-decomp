@@ -12,7 +12,6 @@ extern u8 D_80144EA0[];
 void func_801F2EFC(void);
 void func_801F3064(void);
 
-extern s8  D_80146865;
 extern u8  D_801F42C8[];
 extern u8  D_801F42CC[];
 extern u8  D_801F42D0[];

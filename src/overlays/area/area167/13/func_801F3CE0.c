@@ -9,9 +9,9 @@ MATCH void func_801F3CE0(void) {
         if (g_MessageChoice == 0) {
             variant = 1;
         }
-        D_80146866 = variant;
+        g_ScriptVars[2] = variant;
         Game_SetScriptActive();
-        D_80146867             = 0x40;
+        g_ScriptVars[3]        = 0x40;
         g_SceneEventState.mode = 0x20;
         g_SceneEventState.step = 0x15;
     }

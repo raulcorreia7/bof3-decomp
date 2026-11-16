@@ -11,7 +11,7 @@ MATCH void func_801F4494(void) {
             g_SceneEventState.step = 1;
             break;
         case 1:
-            if (D_80146867 == 0x18) {
+            if (g_ScriptVars[3] == 0x18) {
                 mode                   = &g_SceneEventState.mode;
                 *mode                  = 0;
                 g_SceneEventState.step = 0;
@@ -33,13 +33,13 @@ MATCH void func_801F4494(void) {
             }
             break;
         case 10:
-            if (D_80146867 == 0x64) {
+            if (g_ScriptVars[3] == 0x64) {
                 Scene_SetupParty(5);
                 g_SceneEventState.step = 0xB;
             }
             break;
         case 11:
-            if (D_80146867 == 0x74) {
+            if (g_ScriptVars[3] == 0x74) {
                 if (D_80143F03 == 2) {
                     Game_RequestAreaChange(AREA_ID_MYRIA_STATION_WORKERS, TO_COORD(19), TO_COORD(154), AREA_ENTRY_MAP_LOADING | FACING_LEFT);
                 } else {
@@ -51,17 +51,17 @@ MATCH void func_801F4494(void) {
             }
             break;
         case 12:
-            if (D_80146867 == 0) {
+            if (g_ScriptVars[3] == 0) {
                 if (D_80143F03 == 0) {
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 6));
                 }
-                D_80146866             = 0;
+                g_ScriptVars[2]        = 0;
                 g_SceneEventState.mode = 0;
                 g_SceneEventState.step = 0;
             }
             break;
         case 20:
-            if (D_80146867 == 0x44) {
+            if (g_ScriptVars[3] == 0x44) {
                 Scene_SetupParty(2);
                 g_SceneEventState.step = 0x18;
             }
@@ -71,19 +71,19 @@ MATCH void func_801F4494(void) {
             g_SceneEventState.step = 0x18;
             break;
         case 24:
-            flag = &D_80146867;
+            flag = &g_ScriptVars[3];
             if (*flag == 0x54) {
-                if (D_80146866 == 0) {
+                if (g_ScriptVars[2] == 0) {
                     *flag = 0;
                     Game_ClearScriptActive();
                     Game_RequestAreaChange(AREA_ID_MYRIA_STATION_WORKERS, TO_COORD(26) + COORD_HALF, TO_COORD(86), FACING_DOWN);
                     SYS_ClearFlag(g_SceneEventFlags, 0x48);
                     SYS_ClearFlag(g_SceneEventFlags, 0x49);
-                } else if (D_80146866 == 1) {
+                } else if (g_ScriptVars[2] == 1) {
                     Game_RequestAreaChange(AREA_ID_MYRIA_STATION_WORKERS, TO_COORD(32), TO_COORD(15), AREA_ENTRY_MAP_LOADING | FACING_RIGHT);
                     SYS_SetFlag(g_SceneEventFlags, 0x48);
                     SYS_ClearFlag(g_SceneEventFlags, 0x49);
-                } else if (D_80146866 == 2) {
+                } else if (g_ScriptVars[2] == 2) {
                     Game_RequestAreaChange(AREA_ID_MYRIA_STATION_WORKERS, TO_COORD(41), TO_COORD(139), AREA_ENTRY_MAP_LOADING | FACING_DOWN_RIGHT);
                     SYS_ClearFlag(g_SceneEventFlags, 0x48);
                     SYS_SetFlag(g_SceneEventFlags, 0x49);

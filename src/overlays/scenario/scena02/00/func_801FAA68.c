@@ -20,8 +20,8 @@ MATCH void func_801FAA68(void) {
             break;
         case 2:
             if (g_ScriptVars[0] == 4) {
-                D_80146865 = 0;
-                D_80146867 = 0;
+                g_ScriptVars[1] = 0;
+                g_ScriptVars[3] = 0;
                 Game_ClearScriptActive();
                 g_SceneState.step_05  = 0;
                 g_SceneState.state_04 = 0;
@@ -31,7 +31,7 @@ MATCH void func_801FAA68(void) {
             g_SceneState.step_05 = 6;
             g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
             SND_StopSequence(0, 0);
-            D_80146866 = 1;
+            g_ScriptVars[2] = 1;
             Game_RequestAreaChange(AREA_ID_FARM, TO_COORD(6), TO_COORD(84), AREA_ENTRY_MAP_LOADING | FACING_RIGHT);
             break;
         case 6:
@@ -40,9 +40,9 @@ MATCH void func_801FAA68(void) {
                 SYS_SetFlag(g_SceneFlags, 0x38);
                 SYS_SetFlag(g_SceneFlags, 0x1B);
                 g_SceneState.step_05 = 7;
-                D_80146865           = 0;
-                D_80146866           = 0;
-                D_80146867           = 0;
+                g_ScriptVars[1]      = 0;
+                g_ScriptVars[2]      = 0;
+                g_ScriptVars[3]      = 0;
                 g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
                 Game_ClearScriptActive();
             }

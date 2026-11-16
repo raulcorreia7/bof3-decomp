@@ -8,7 +8,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801F8538(void) {
     switch (g_SceneState.step_05) {
         case 0:
-            D_80146866 = 5;
+            g_ScriptVars[2] = 5;
             Scene_SetupParty(6);
             g_SceneState.step_05 = 1;
             break;
@@ -26,7 +26,7 @@ MATCH void func_801F8538(void) {
             break;
         case 3:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                D_80146866           = 0;
+                g_ScriptVars[2]      = 0;
                 g_ScriptVars[0]      = 0;
                 g_SceneState.step_05 = 4;
                 Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR_AREA, TO_COORD(38), TO_COORD(25), AREA_ENTRY_MAP_LOADING | FACING_DOWN_LEFT);

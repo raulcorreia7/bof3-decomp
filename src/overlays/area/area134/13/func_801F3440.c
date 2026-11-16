@@ -8,15 +8,15 @@ MATCH void func_801F3440(void) {
     D_80146250 = &D_80146110;
     TASK_SET(&D_80146110);
     if (D_80146144 > 0x33FFFF) {
-        D_80146865 = 0xFF;
-        step       = 0x14;
+        g_ScriptVars[1] = 0xFF;
+        step            = 0x14;
     } else {
-        D_80146865 = 0xFE;
-        step       = 0x1E;
+        g_ScriptVars[1] = 0xFE;
+        step            = 0x1E;
     }
-    D_80146866 = 0;
-    D_80146867 = 0;
-    D_80146875 = step;
+    g_ScriptVars[2]      = 0;
+    g_ScriptVars[3]      = 0;
+    g_SceneState.step_05 = step;
     TASK_SET(actor);
     func_80196070();
 }

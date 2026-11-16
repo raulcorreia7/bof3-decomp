@@ -542,15 +542,15 @@ MATCH void func_801F817C(void) {
                 SND_FadeOutBGM(g_SndBGMId, 0x64, 8);
                 SND_PlayBGM(0x3F, 0x64, 8);
                 Game_SetScriptActive();
-                D_80146874 = 1;
-                D_80146875 = 7;
+                g_SceneState.state_04 = 1;
+                g_SceneState.step_05  = 7;
                 Scene_RunScenario(1);
                 Scene_SetupParty(1);
             }
         }
         if (SYS_TestFlag(g_SceneFlags, 4) != 0) {
             if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
-                switch (D_80146865) {
+                switch (g_ScriptVars[1]) {
                     case 0:
                         g_AreaDrawFlags = 0x1F;
                         break;

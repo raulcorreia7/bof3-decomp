@@ -77,7 +77,7 @@ MATCH void func_801FBDBC(void) {
                     func_801C1E3C(3);
                     break;
             }
-            D_80146866           = 1;
+            g_ScriptVars[2]      = 1;
             g_SceneState.step_05 = 7;
             Game_RequestAreaChange(0x50, TO_COORD(198), TO_COORD(15) + COORD_HALF, 0x82);
             g_GamePrevSelection = 0xFF;

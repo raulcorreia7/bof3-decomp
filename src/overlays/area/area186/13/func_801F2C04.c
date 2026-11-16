@@ -22,9 +22,9 @@ MATCH void func_801F2C04(void) {
             count--;
             D_801448EE = count;
             if (count == 0) {
-                D_80146867 = 0x1C;
-                D_801448EE = 0xF;
-                *step      = 1;
+                g_ScriptVars[3] = 0x1C;
+                D_801448EE      = 0xF;
+                *step           = 1;
             }
             break;
         case 1:
@@ -54,9 +54,9 @@ MATCH void func_801F2C04(void) {
             count--;
             D_801448EE = count;
             if (count == 0) {
-                D_80146867 = 0x1C;
-                D_801448EE = 0xF;
-                *step      = 11;
+                g_ScriptVars[3] = 0x1C;
+                D_801448EE      = 0xF;
+                *step           = 11;
             }
             break;
         case 11:

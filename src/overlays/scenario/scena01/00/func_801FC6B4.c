@@ -17,8 +17,8 @@ MATCH void func_801FC6B4(void) {
                 } else if (g_ScriptVars[0] == 0x65) {
                     Game_ClearScriptActive();
                     g_ScriptVars[0]       = 0;
-                    D_80146865            = 0;
-                    D_80146866            = 0;
+                    g_ScriptVars[1]       = 0;
+                    g_ScriptVars[2]       = 0;
                     g_SceneState.step_05  = 0;
                     g_SceneState.state_04 = 0;
                 }

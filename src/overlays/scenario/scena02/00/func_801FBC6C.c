@@ -37,7 +37,7 @@ MATCH void func_801FBC6C(void) {
                 if (g_ScriptVars[0] != 0x5B) {
                     break;
                 }
-                D_80146866           = 1;
+                g_ScriptVars[2]      = 1;
                 g_SceneState.step_05 = 20;
                 UI_SetMode(0xD);
             }
@@ -71,7 +71,7 @@ MATCH void func_801FBC6C(void) {
             break;
 
         case 23:
-            D_80146866           = 2;
+            g_ScriptVars[2]      = 2;
             g_SceneState.step_05 = 24;
             Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR, TO_COORD(73), TO_COORD(10), 0x99);
             break;
@@ -132,9 +132,9 @@ MATCH void func_801FBC6C(void) {
     return;
 
 reset:
-    D_80146865 = 0;
-    D_80146866 = 0;
-    D_80146867 = 0;
+    g_ScriptVars[1] = 0;
+    g_ScriptVars[2] = 0;
+    g_ScriptVars[3] = 0;
     Game_ClearScriptActive();
     g_SceneState.step_05  = 0;
     g_SceneState.state_04 = 0;
