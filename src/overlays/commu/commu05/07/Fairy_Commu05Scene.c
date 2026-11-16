@@ -99,12 +99,10 @@ MATCH void func_801D0F50(s16 x, s16 y, u8 row) {
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D1048(s16 x, s16 y, u8 group) {
+MATCH void func_801D1048(s16 x, s16 y, u8 group) {
     s32 i;
     s16 row_y;
     u8* buffer;
-    u8* entry;
 
     UI_DrawText(x + 0x28, y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, MSG_055));
     row_y = y + 0x14;
@@ -118,23 +116,20 @@ NON_MATCHING void func_801D1048(s16 x, s16 y, u8 group) {
     } else {
         UI_DrawText(x + 0x84, row_y, 0, 7, D_801D195C);
     }
-    entry = D_80145E30 + group * 7;
-    for (i = 0; i < 7; i++, entry++) {
-        if (entry - D_80145E30 >= D_80145E44) {
+    for (i = 0; i < 7; i++) {
+        if (i + group * 7 >= D_80145E44) {
             break;
         }
         row_y = y + 0x2C + (i * 0x10);
-        UI_DrawText(x + 0x14, row_y, 0, 5, D_801457E8[entry[0] & 0x7F]);
-        if (entry[0] & 0x80) {
-            UI_DrawText(x + 0x48, row_y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, MSG_058));
+        UI_DrawText(x + 0x14, row_y, 0, 5, D_801457E8[D_80145E30[i + group * 7] & 0x7F]);
+        /* kept: the shared message macro hoists the table base out of the loop. */
+        if (D_80145E30[i + group * 7] & 0x80) {
+            UI_DrawText(x + 0x48, row_y, 0, 0xFF, (u8*)(MEM(u16, (u32)AREA_MESSAGE_TABLE + MSG_058 * 2) + (u32)AREA_MESSAGE_TABLE));
         } else {
-            UI_DrawText(x + 0x48, row_y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, MSG_057));
+            UI_DrawText(x + 0x48, row_y, 0, 0xFF, (u8*)(MEM(u16, (u32)AREA_MESSAGE_TABLE + MSG_057 * 2) + (u32)AREA_MESSAGE_TABLE));
         }
     }
 }
-#else
-INCLUDE_ASM(func_801D1048);
-#endif
 
 MATCH void func_801D129C(s16 x, s16 y, u8 group) {
     s32 i;
