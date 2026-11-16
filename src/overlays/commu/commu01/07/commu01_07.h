@@ -39,7 +39,6 @@ extern char           D_801D0C14[];
 extern u16            D_801D0C18[9];
 extern u16            D_801D4BB0[];
 /* g_EmiOverlayHeader */
-extern OverlayHeader  g_EmiOverlayHeader;
 extern u16            D_801D4BB8[10];
 /* D_801D4BCC */
 extern Callback       g_Commu01States[COMMU01_STEP_COUNT];
