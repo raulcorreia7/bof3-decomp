@@ -86,6 +86,12 @@ void func_801FC734(u8 actor_id);
 void func_801FC7E4(void);
 void func_801FC9CC(void);
 void func_801FCB54(void);
+void func_801FCBDC(s32 delta);
+
+/* D_80146258: the world input/scheduler lock word; retail reads and writes it as a halfword. */
+extern u16 D_80146258;
+/* D_80146871: g_SceneState.flags_01; retail folds its address into each access. */
+extern u8  D_80146871;
 
 /* Starts the scene script 0x1A with the camera shake state cleared. */
 #define SCENA02_START_SCRIPT_1A() \
