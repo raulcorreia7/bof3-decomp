@@ -18,7 +18,7 @@ MATCH void func_801EEC98(void) {
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;
     g_Task->header.mode += 1;
-    func_800AEF98(0xC, 0);
+    Battle_SelectActiveBattlerScript(0xC, 0);
     for (i = 0; i < 6; i++) {
         index = Battle_AllocEffect(1, 33);
         Effect_CopyActiveBattlerToSlot(index);
@@ -178,7 +178,7 @@ MATCH void func_801EF5FC(void) {
         g_Task->unk_09 = counter;
         if (!(counter & BYTE_MASK)) {
             Battle_MarkDamaged(g_Battle.target_selector);
-            func_800AFC98(2, 4);
+            Battle_PlayActiveBattlerCue(2, 4);
             g_Task->header.step += 1;
         }
     }

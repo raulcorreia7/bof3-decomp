@@ -8,7 +8,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/bmagic/Effect_CopyActiveBattlerToSlot.h"
 
 /* Start the magic020 effect: four copies of the caster in mode 1 (arg 4 down to 1), one more
- * in mode 0, then the caster sprite cell, and func_800AFC98(2, 0) for a party caster. */
+ * in mode 0, then the caster sprite cell, and Battle_PlayActiveBattlerCue(2, 0) for a party caster. */
 MATCH void func_801EECC0(void) {
     u32 index;
     s32 i;
@@ -18,7 +18,7 @@ MATCH void func_801EECC0(void) {
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;
     g_Task->header.mode += 1;
-    func_800AEF98(0xC, 2);
+    Battle_SelectActiveBattlerScript(0xC, 2);
     for (i = 0; (u32)(i & BYTE_MASK) < 4; i++) {
         index = Battle_AllocEffect(1, 0x2E);
         Effect_CopyActiveBattlerToSlot(index);
@@ -42,7 +42,7 @@ MATCH void func_801EECC0(void) {
     g_Task->unk_24                                   = g_BattleEffectBattler->unk_24;
     Battle_SetCellPaletteStp(g_Task);
     if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
-        func_800AFC98(2, 0);
+        Battle_PlayActiveBattlerCue(2, 0);
     }
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
 }
@@ -92,7 +92,7 @@ MATCH void func_801EF2A8(void) {
     if (g_Task->param.unk_0B == 0xFF) {
         func_800AFC54();
         BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
-        func_800AEF98(4, 0);
+        Battle_SelectActiveBattlerScript(4, 0);
         g_Task->header.mode += 1;
     }
 }

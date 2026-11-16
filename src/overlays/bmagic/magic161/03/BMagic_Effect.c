@@ -16,7 +16,7 @@ MATCH void func_801EEC84(void) {
     WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
     g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
-    func_800AEF98(0xC, 2);
+    Battle_SelectActiveBattlerScript(0xC, 2);
     index  = Battle_AllocEffect(1, 84);
     active = g_Battle.active_battler;
     if (BATTLER_IS_PLAYER(active)) {
@@ -47,7 +47,7 @@ MATCH void func_801EEC84(void) {
 MATCH void func_801EEE9C(void) {
     if (g_Task->param.unk_0B == 0) {
         g_BattleEffectBattler->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
-        func_800AEF98(0x18, 0);
+        Battle_SelectActiveBattlerScript(0x18, 0);
         g_Task->header.mode += 1;
     }
 }
@@ -77,7 +77,7 @@ MATCH void func_801EF06C(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
-        func_800AFC98(2, 4);
+        Battle_PlayActiveBattlerCue(2, 4);
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Task->header.step += 1;
     }

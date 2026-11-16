@@ -15,7 +15,7 @@ MATCH void func_801EEC90(void) {
     u16*         dst;
     u16*         src;
 
-    func_800AEF98(12, 2);
+    Battle_SelectActiveBattlerScript(12, 2);
     slot = Battle_AllocEffect(1, 82) & BYTE_MASK;
     Effect_CopyActiveBattlerToSlot(slot);
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
@@ -68,7 +68,7 @@ MATCH void func_801EEE94(void) {
 
 MATCH void func_801EEFE0(void) {
     if (g_Task->unk_09 == 0) {
-        func_800AEF98(4, 0);
+        Battle_SelectActiveBattlerScript(4, 0);
         BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
         g_Task->header.mode += 1;
@@ -175,11 +175,11 @@ MATCH void func_801EF58C(void) {
     g_Task->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
         Actor_StepAnimOnce();
-        func_800AFC98(2, 4);
+        Battle_PlayActiveBattlerCue(2, 4);
         g_BattleEffectBattler->param.unk_0B -= 1;
         g_Task->header.step += 1;
     } else if (Actor_StepAnimOnce() & BYTE_MASK) {
-        func_800AFC98(2, 4);
+        Battle_PlayActiveBattlerCue(2, 4);
         g_Task->unk_09 = 0;
         g_BattleEffectBattler->param.unk_0B -= 1;
         g_Task->header.step += 1;

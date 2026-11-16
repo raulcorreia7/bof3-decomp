@@ -31,7 +31,8 @@ void        func_800AAEBC(s16 target_index, u8 battler_index);
 void        Battle_LoadEnemyBattler(u8 slot, u8 enemy_index);
 s32         func_800AC704(s32 entry_id);
 s32         func_800AEEC8(s32 arg0, u8 arg1);
-void        func_800AEF98(s32 step, s32 payload);
+/* func_800AEF98 */
+void        Battle_SelectActiveBattlerScript(s32 step, s32 payload);
 void        func_800AF2B4(BattleRange* target, s32 step);
 s32         func_800AF5FC(BattleRange* target, u32 extent);
 u32         func_800AF66C(BattleRange* range, u32 extent);
@@ -41,7 +42,8 @@ void        Battle_ProjectRange(void);
 void        Battle_FadePoisonedBattler(u32 battler_index);
 /* func_800AF8F0 */
 void        Battle_SetCellPaletteStp(BattleSpriteCell* record);
-void        func_800AFC98(s32 effect_0, s32 effect_1);
+/* func_800AFC98 */
+void        Battle_PlayActiveBattlerCue(s32 effect_0, s32 effect_1);
 /* func_800AFD9C */
 void        Battle_CenterCamera(void);
 u8          func_800AFF98(void);

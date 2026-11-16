@@ -17,7 +17,7 @@ extern u8 g_PartyFieldOrder[];
  *
  * Two callers do write $a1 first, for their own reasons: emi/etc/game/00
  * func_8019A3FC leaves the work pointer there and emi/battle/battle/15
- * func_800AEF98 leaves its own payload word. Their $a1 is caller context and
+ * Battle_SelectActiveBattlerScript leaves its own payload word. Their $a1 is caller context and
  * not part of this function's contract, so they call EXE_Func8014D6B8 through
  * the local macro EXE_CALL_8014D6B8, which names their own two-argument
  * form. */

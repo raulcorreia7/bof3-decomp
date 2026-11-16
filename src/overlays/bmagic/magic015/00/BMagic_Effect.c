@@ -23,7 +23,7 @@ MATCH void func_801EED0C(void) {
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;
     g_Task->header.mode += 1;
-    func_800AEF98(8, 2);
+    Battle_SelectActiveBattlerScript(8, 2);
     for (i = 0; i < 4; i++) {
         index = Battle_AllocEffect(1, 35);
         Effect_CopyActiveBattlerToSlot(index);
@@ -81,7 +81,7 @@ MATCH void func_801EF2B4(void) {
     g_Task->unk_24 = g_BattleEffectBattler->unk_24;
     Battle_SetCellPaletteStp(g_Task);
     Battle_ClearCellPaletteEntry(g_Task);
-    func_800AEF98(8, 2);
+    Battle_SelectActiveBattlerScript(8, 2);
     g_Task->param.unk_0B = 0;
     for (i = 0; i < 3; i++) {
         index = Battle_AllocEffect(1, 35);
@@ -126,7 +126,7 @@ MATCH void func_801EF6B0(void) {
     g_Task->pos.y.fixed        = g_BattleEffectBattler->pos.y.fixed;
     g_Task->pos.z.part.integer = g_BattleEffectBattler->pos.z.part.integer;
     g_Task->param.unk_0B       = 1;
-    func_800AEF98(8, 0);
+    Battle_SelectActiveBattlerScript(8, 0);
     index = Battle_AllocEffect(1, 35);
     Effect_CopyActiveBattlerToSlot(index);
     work                                             = g_Task;
@@ -149,7 +149,7 @@ MATCH void func_801EF93C(void) {
     if (g_Task->param.unk_0B == 0) {
         func_800AFC54();
         BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
-        func_800AEF98(4, 0);
+        Battle_SelectActiveBattlerScript(4, 0);
         g_Task->header.mode += 1;
     }
 }
@@ -201,7 +201,7 @@ MATCH void func_801EFBD8(void) {
     func_800AF2B4((BattleRange*)*actor_cell, 0x60);
     if (func_800AF66C((BattleRange*)*actor_cell, 0xC000) != 0) {
         if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
-            func_800AFC98(2, 0);
+            Battle_PlayActiveBattlerCue(2, 0);
         }
         SND_QueueSelectionEffect(0x203);
         Battle_MarkDamaged(g_Battle.target_selector);
@@ -474,7 +474,7 @@ MATCH void func_801F0770(void) {
         if (flag->param.unk_0B == 0) {
             Battle_MarkDamaged(g_Battle.target_selector);
             if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
-                func_800AFC98(2, 0);
+                Battle_PlayActiveBattlerCue(2, 0);
             }
             SND_QueueSelectionEffect(0x203);
         }
@@ -592,7 +592,7 @@ MATCH void func_801F0E54(void) {
         g_Task->unk_20 = -8;
         func_800A9820(g_Battle.target_selector);
         if (g_Battle.active_battler < 3) {
-            func_800AFC98(2, 0);
+            Battle_PlayActiveBattlerCue(2, 0);
         }
         SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_AREA, 0x03));
         g_Task->header.step += 1;

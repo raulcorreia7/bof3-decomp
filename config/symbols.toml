@@ -241,6 +241,7 @@ Battle_SetEnemyDefeated = { addr = 0x800AD074, type = "func", source = "Sets the
 Battle_LoadSelectionEffect = { addr = 0x800AE1F8, type = "func", source = "Loads the effect module of a battle selection: the row of g_BattleSelections that the action selects gives the EMI slot, which the loader streams in." }
 Battle_AllocActionEffect = { addr = 0x800AE260, type = "func", source = "sets the action id, allocates a battle action effect from the action table and stores its target" }
 Battle_CanTarget = { addr = 0x800AED5C, type = "func", source = "Tells whether the battler can be a target of the selector: it makes the battler the current target, runs the selector's target test and restores the target; true when the test passes." }
+Battle_SelectActiveBattlerScript = { addr = 0x800AEF98, type = "func", source = "Selects the active battler's actor script for a step and payload; a party member's facing offsets the step." }
 Battle_MoveRangeToward = { addr = 0x800AF2B4, type = "func", source = "moves the range work toward the target along a normalized vector by the step" }
 Battle_StepRangeToward = { addr = 0x800AF3A0, type = "func", source = "Moves the battle range one step toward a point: the range's x and y axes and its vertical span each move by the step along the unit direction to the point." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
@@ -249,6 +250,7 @@ Battle_SetCellPaletteStp = { addr = 0x800AF8F0, type = "func", source = "Sets bi
 Battle_ClearCellPaletteStp = { addr = 0x800AF9D4, type = "func", source = "Clears bit 15 (STP) of each palette entry after the first in the palette row of the battle sprite cell." }
 Battle_ClearCellPaletteEntry = { addr = 0x800AFAB8, type = "func", source = "Zeroes one palette entry (index 0x1F) of the palette row of the battle sprite cell." }
 Battle_CopyCellPalette = { addr = 0x800AFB48, type = "func", source = "Copies the palette rows of the battle sprite cell into the second palette bank and returns the value the effect keeps in unk_27, from the row divisor." }
+Battle_PlayActiveBattlerCue = { addr = 0x800AFC98, type = "func", source = "Plays the active battler's cues: a party member's two effect cues, or the enemy cue and selection voice." }
 Battle_CenterCamera = { addr = 0x800AFD9C, type = "func", source = "Centres the battle camera on the living battlers." }
 Battle_SelectStepRule = { addr = 0x800AFF98, type = "func", source = "existing proposal: selects a battle step rule for a player battler" }
 Battle_DrawCommandList = { addr = 0x800B1728, type = "func", source = "Draws the battle command list." }
@@ -334,9 +336,11 @@ g_BattleTemplateStats = { addr = 0x801EC364, source = "Template stat rows of the
 ["emi/bmagic/magic001/00"]
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_SelectActiveBattlerScript = { addr = 0x800AEF98, type = "func", source = "Selects the active battler's actor script for a step and payload; a party member's facing offsets the step.", alias = true }
 Battle_SetCellPaletteStp = { addr = 0x800AF8F0, type = "func", source = "Sets bit 15 (STP) of each palette entry after the first in the palette row of the battle sprite cell. battle/15 owns the body." }
 Battle_ClearCellPaletteEntry = { addr = 0x800AFAB8, type = "func", source = "Zeroes one palette entry (index 0x1F) of the palette row of the battle sprite cell. battle/15 owns the body." }
 Battle_CopyCellPalette = { addr = 0x800AFB48, type = "func", source = "Copies the palette rows of the battle sprite cell into the second palette bank and returns the value the effect keeps in unk_27, from the row divisor. battle/15 owns the body." }
+Battle_PlayActiveBattlerCue = { addr = 0x800AFC98, type = "func", source = "Plays the active battler's cues: a party member's two effect cues, or the enemy cue and selection voice.", alias = true }
 g_BattleSelectedActor = { addr = 0x8014638C, type = "PartyMember", alias = true, source = "The selected battle actor; the selected_actor member of g_Battle." }
 Effect_RotatePosition = { addr = 0x801DD350, type = "func", alias = true, source = "Integrates the effect velocity pairs the magic044 step reads; battle/03 owns the body." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
@@ -366,7 +370,9 @@ Effect_StartPlaying = { addr = 0x801EEE30, type = "func", source = "Raises BATTL
 ["emi/bmagic/magic003/03"]
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_SelectActiveBattlerScript = { addr = 0x800AEF98, type = "func", source = "Selects the active battler's actor script for a step and payload; a party member's facing offsets the step.", alias = true }
 Battle_ProjectRange = { addr = 0x800AF764, alias = true }
+Battle_PlayActiveBattlerCue = { addr = 0x800AFC98, type = "func", source = "Plays the active battler's cues: a party member's two effect cues, or the enemy cue and selection voice.", alias = true }
 Effect_RotatePosition = { addr = 0x801DD350, type = "func", source = "Integrates the effect velocity pairs the effect steps read; battle/03 owns the body." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
@@ -383,7 +389,9 @@ D_801F0B38 = { addr = 0x801F0B38, source = "Effect slot table of the magic003 ef
 ["emi/bmagic/magic004/03"]
 Battle_ApplyDamageFlags = { addr = 0x800A9610, alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_SelectActiveBattlerScript = { addr = 0x800AEF98, type = "func", source = "Selects the active battler's actor script for a step and payload; a party member's facing offsets the step.", alias = true }
 Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
+Battle_PlayActiveBattlerCue = { addr = 0x800AFC98, type = "func", source = "Plays the active battler's cues: a party member's two effect cues, or the enemy cue and selection voice.", alias = true }
 GFX_AllocPaletteFade = { addr = 0x8019651C, alias = true }
 GFX_FreePaletteFadeTarget = { addr = 0x80196718, alias = true }
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
@@ -424,9 +432,11 @@ g_BMagicEffectModes = { addr = 0x801F0A24, source = "Handlers of magic006 (Mind 
 ["emi/bmagic/magic008/00"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_CanTarget = { addr = 0x800AED5C, type = "func", source = "Tells whether the battler can be a target of the selector: it makes the battler the current target, runs the selector's target test and restores the target; true when the test passes. battle/15 owns the body." }
+Battle_SelectActiveBattlerScript = { addr = 0x800AEF98, type = "func", source = "Selects the active battler's actor script for a step and payload; a party member's facing offsets the step.", alias = true }
 Battle_SetCellPaletteStp = { addr = 0x800AF8F0, type = "func", source = "Sets bit 15 (STP) of each palette entry after the first in the palette row of the battle sprite cell. battle/15 owns the body." }
 Battle_ClearCellPaletteEntry = { addr = 0x800AFAB8, type = "func", source = "Zeroes one palette entry (index 0x1F) of the palette row of the battle sprite cell. battle/15 owns the body." }
 Battle_CopyCellPalette = { addr = 0x800AFB48, type = "func", source = "Copies the palette rows of the battle sprite cell into the second palette bank and returns the value the effect keeps in unk_27, from the row divisor. battle/15 owns the body." }
+Battle_PlayActiveBattlerCue = { addr = 0x800AFC98, type = "func", source = "Plays the active battler's cues: a party member's two effect cues, or the enemy cue and selection voice.", alias = true }
 g_BattleTargetSelector = { addr = 0x80146384, alias = true, source = "Target of the current action; the target_selector member of g_Battle." }
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
 Effect_RotatePosition = { addr = 0x801DD350, type = "func", source = "Integrates the effect velocity pairs the effect steps read; battle/03 owns the body." }
@@ -454,6 +464,8 @@ D_801F1C04 = { addr = 0x801F1C04, type = "Offset2", source = "Velocity pairs fun
 
 ["emi/bmagic/magic009/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_SelectActiveBattlerScript = { addr = 0x800AEF98, type = "func", source = "Selects the active battler's actor script for a step and payload; a party member's facing offsets the step.", alias = true }
+Battle_PlayActiveBattlerCue = { addr = 0x800AFC98, type = "func", source = "Plays the active battler's cues: a party member's two effect cues, or the enemy cue and selection voice.", alias = true }
 Effect_RotatePosition = { addr = 0x801DD350, type = "func", source = "Integrates the effect velocity pairs the effect steps read; battle/03 owns the body." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
@@ -512,9 +524,11 @@ g_BMagicEffectModes = { addr = 0x801F03BC, source = "Handlers of magic013 (Snap)
 
 ["emi/bmagic/magic015/00"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_SelectActiveBattlerScript = { addr = 0x800AEF98, type = "func", source = "Selects the active battler's actor script for a step and payload; a party member's facing offsets the step.", alias = true }
 Battle_SetCellPaletteStp = { addr = 0x800AF8F0, type = "func", source = "Sets bit 15 (STP) of each palette entry after the first in the palette row of the battle sprite cell. battle/15 owns the body." }
 Battle_ClearCellPaletteEntry = { addr = 0x800AFAB8, type = "func", source = "Zeroes one palette entry (index 0x1F) of the palette row of the battle sprite cell. battle/15 owns the body." }
 Battle_CopyCellPalette = { addr = 0x800AFB48, type = "func", source = "Copies the palette rows of the battle sprite cell into the second palette bank and returns the value the effect keeps in unk_27, from the row divisor. battle/15 owns the body." }
+Battle_PlayActiveBattlerCue = { addr = 0x800AFC98, type = "func", source = "Plays the active battler's cues: a party member's two effect cues, or the enemy cue and selection voice.", alias = true }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -531,8 +545,10 @@ g_BMagicEffectModes = { addr = 0x801F1630, source = "Handlers of magic015 (Flyin
 
 ["emi/bmagic/magic017/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_SelectActiveBattlerScript = { addr = 0x800AEF98, type = "func", source = "Selects the active battler's actor script for a step and payload; a party member's facing offsets the step.", alias = true }
 Battle_SetCellPaletteStp = { addr = 0x800AF8F0, type = "func", source = "Sets bit 15 (STP) of each palette entry after the first in the palette row of the battle sprite cell. battle/15 owns the body." }
 Battle_CopyCellPalette = { addr = 0x800AFB48, type = "func", source = "Copies the palette rows of the battle sprite cell into the second palette bank and returns the value the effect keeps in unk_27, from the row divisor. battle/15 owns the body." }
+Battle_PlayActiveBattlerCue = { addr = 0x800AFC98, type = "func", source = "Plays the active battler's cues: a party member's two effect cues, or the enemy cue and selection voice.", alias = true }
 Effect_RotatePosition = { addr = 0x801DD350, type = "func", source = "Integrates the effect velocity pairs the effect steps read; battle/03 owns the body." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
@@ -541,15 +557,17 @@ g_BattleEnemyBattlers = { addr = 0x801EB630, alias = true }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
 D_801EEC10 = { addr = 0x801EEC10, type = "Magic017Steps", source = "Step handlers of magic017 (Astral Warp, Shadowwalk), run by header.step (byte 0x02) from func_801EF058; the eight Callback slots are copied to a local table first." }
 BMagic_DispatchMode = { addr = 0x801EEC38, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic017 (Astral Warp, Shadowwalk)." }
-Effect_ReleaseActiveBattlerOnTickerZero = { addr = 0x801EEF68, type = "func", source = "When the effect ticker (byte 0x0B) is zero advances the active battler's script (func_800AEF98), clears its busy flag and advances header.mode (byte 0x01) in magic017 (Astral Warp, Shadowwalk)." }
+Effect_ReleaseActiveBattlerOnTickerZero = { addr = 0x801EEF68, type = "func", source = "When the effect ticker (byte 0x0B) is zero advances the active battler's script (Battle_SelectActiveBattlerScript), clears its busy flag and advances header.mode (byte 0x01) in magic017 (Astral Warp, Shadowwalk)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF014, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic017." }
 g_BMagicEffectModes = { addr = 0x801EF990, source = "Handlers of magic017 (Astral Warp, Shadowwalk), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic020/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_SelectActiveBattlerScript = { addr = 0x800AEF98, type = "func", source = "Selects the active battler's actor script for a step and payload; a party member's facing offsets the step.", alias = true }
 Battle_ProjectRange = { addr = 0x800AF764, alias = true }
 Battle_SetCellPaletteStp = { addr = 0x800AF8F0, type = "func", source = "Sets bit 15 (STP) of each palette entry after the first in the palette row of the battle sprite cell. battle/15 owns the body." }
 Battle_CopyCellPalette = { addr = 0x800AFB48, type = "func", source = "Copies the palette rows of the battle sprite cell into the second palette bank and returns the value the effect keeps in unk_27, from the row divisor. battle/15 owns the body." }
+Battle_PlayActiveBattlerCue = { addr = 0x800AFC98, type = "func", source = "Plays the active battler's cues: a party member's two effect cues, or the enemy cue and selection voice.", alias = true }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -565,6 +583,7 @@ g_BMagicEffectModes = { addr = 0x801EFEB8, source = "Handlers of magic020 (Disem
 ["emi/bmagic/magic021/03"]
 g_ScratchPadHalves = { addr = 0x1F800000, type = "s16", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_SelectActiveBattlerScript = { addr = 0x800AEF98, type = "func", source = "Selects the active battler's actor script for a step and payload; a party member's facing offsets the step.", alias = true }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
@@ -573,7 +592,7 @@ g_BattleEnemyBattlers = { addr = 0x801EB630, alias = true, source = "The enemy b
 g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
 D_801EEC04 = { addr = 0x801EEC04, type = "Magic021Steps", source = "Step handlers of magic021 (Bonebreak), run by header.mode (byte 0x01) from func_801EEC28." }
 D_801EEC10 = { addr = 0x801EEC10, type = "BMagicEffectFuncs", source = "Six step handlers of magic021, run by header.step (byte 0x02) from func_801EF020." }
-Effect_ReleaseActiveBattlerOnTickerZero = { addr = 0x801EEF38, type = "func", source = "When the effect ticker (byte 0x0B) is zero advances the active battler's script (func_800AEF98), clears its busy flag and advances header.mode (byte 0x01) in magic021 (Bonebreak)." }
+Effect_ReleaseActiveBattlerOnTickerZero = { addr = 0x801EEF38, type = "func", source = "When the effect ticker (byte 0x0B) is zero advances the active battler's script (Battle_SelectActiveBattlerScript), clears its busy flag and advances header.mode (byte 0x01) in magic021 (Bonebreak)." }
 Effect_StartPlaying = { addr = 0x801EEFA8, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic021 (Bonebreak)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEFDC, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic021." }
 Effect_SetDuration = { addr = 0x801EF0BC, type = "func", source = "Reloads the effect timer (byte 0x09) with the value func_800AFF98 returns and advances header.step (byte 0x02) in magic021 (Bonebreak)." }
@@ -826,6 +845,7 @@ D_801EFC64 = { addr = 0x801EFC64, source = "Mode handlers of the magic055 effect
 ["emi/bmagic/magic056/03"]
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_SelectActiveBattlerScript = { addr = 0x800AEF98, type = "func", source = "Selects the active battler's actor script for a step and payload; a party member's facing offsets the step.", alias = true }
 Battle_SetCellPaletteStp = { addr = 0x800AF8F0, type = "func", source = "Sets bit 15 (STP) of each palette entry after the first in the palette row of the battle sprite cell. battle/15 owns the body." }
 Battle_CopyCellPalette = { addr = 0x800AFB48, type = "func", source = "Copies the palette rows of the battle sprite cell into the second palette bank and returns the value the effect keeps in unk_27, from the row divisor. battle/15 owns the body." }
 Battle_CenterCamera = { addr = 0x800AFD9C, type = "func", source = "Centres the battle camera on the living battlers." }
@@ -963,6 +983,8 @@ g_BMagicEffectModes = { addr = 0x801F1394, source = "Handlers of magic064 (Weret
 
 ["emi/bmagic/magic065/00"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_SelectActiveBattlerScript = { addr = 0x800AEF98, type = "func", source = "Selects the active battler's actor script for a step and payload; a party member's facing offsets the step.", alias = true }
+Battle_PlayActiveBattlerCue = { addr = 0x800AFC98, type = "func", source = "Plays the active battler's cues: a party member's two effect cues, or the enemy cue and selection voice.", alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 D_801EC2E4 = { addr = 0x801EC2E4, source = "Byte the magic065 effect tests against zero in func_801EF134 and func_801EF1CC." }
@@ -1622,6 +1644,7 @@ D_801F04A4 = { addr = 0x801F04A4, type = "Offset2", size = 0x30, source = "Six p
 ["emi/bmagic/magic111/03"]
 g_ScratchPadHalves = { addr = 0x1F800000, type = "s16", alias = true, source = "ScratchPad.cells.halves at 0x1F800000 as signed halfwords; the magic effects read and set its first halfword as a vertical offset." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_SelectActiveBattlerScript = { addr = 0x800AEF98, type = "func", source = "Selects the active battler's actor script for a step and payload; a party member's facing offsets the step.", alias = true }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -2066,6 +2089,8 @@ g_BMagicEffectModes = { addr = 0x801F24A4, source = "Handlers of magic151 (Acces
 ["emi/bmagic/magic154/03"]
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_SelectActiveBattlerScript = { addr = 0x800AEF98, type = "func", source = "Selects the active battler's actor script for a step and payload; a party member's facing offsets the step.", alias = true }
+Battle_PlayActiveBattlerCue = { addr = 0x800AFC98, type = "func", source = "Plays the active battler's cues: a party member's two effect cues, or the enemy cue and selection voice.", alias = true }
 Effect_RotatePosition = { addr = 0x801DD350, type = "func", source = "Integrates the effect velocity pairs the effect steps read; battle/03 owns the body." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
@@ -2102,6 +2127,8 @@ D_801EF424 = { addr = 0x801EF424, source = "Step handlers of magic159, run by he
 
 ["emi/bmagic/magic161/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_SelectActiveBattlerScript = { addr = 0x800AEF98, type = "func", source = "Selects the active battler's actor script for a step and payload; a party member's facing offsets the step.", alias = true }
+Battle_PlayActiveBattlerCue = { addr = 0x800AFC98, type = "func", source = "Plays the active battler's cues: a party member's two effect cues, or the enemy cue and selection voice.", alias = true }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
