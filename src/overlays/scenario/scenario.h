@@ -2,6 +2,7 @@
 #define SCENARIO_FAMILY_H
 
 #include "game.h"
+#include "sys/scratchpad.h"
 #include "sys/scene.h"
 #include "gfx/prim.h"
 #include "area/map.h"

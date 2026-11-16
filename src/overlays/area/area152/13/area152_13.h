@@ -15,14 +15,13 @@
 
 /* The scratchpad cell holding this mode's work pointer. */
 
-extern SVECTOR D_1F800014[];
 /* The selection byte that arms the area request. */
 /* The area state byte and the frame flags it is tested against. */
 /* The staged cue rows' fields: the allocation flags, kind, layer, step and
  * distance halfword, indexed by the row stride the spawn pass allocates. */
 /* The payload's data after the last function; the per-state handler tables
  * start at 0x130. */
-extern u8      D_801F4C3C[];
+extern u8 D_801F4C3C[];
 #define AREA_HUD_SPRITE_CELLS (D_801F4C3C + 0x158)
 
 #include "overlays/area/WorldMapMessage.h"

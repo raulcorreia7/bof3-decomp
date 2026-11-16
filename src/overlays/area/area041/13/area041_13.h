@@ -7,8 +7,7 @@
 #include "overlays/area/world01.h"
 #include "area/spad.h"
 
-extern SVECTOR D_1F800014[];
-extern u8      D_80144EA0[];
+extern u8 D_80144EA0[];
 
 void func_801F2EFC(void);
 void func_801F3064(void);

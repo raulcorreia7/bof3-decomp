@@ -7,8 +7,7 @@
 #include "overlays/area/world01.h"
 #include "area/spad.h"
 
-extern SVECTOR D_1F800014[];
-extern u8      D_801F4DB4[];
+extern u8 D_801F4DB4[];
 #define AREA_HUD_SPRITE_CELLS ((u8*)D_801F4DB4 + 0x4FC)
 /* The spawn step handler table indexed by the record's step byte. */
 extern Callback D_801F5274[];

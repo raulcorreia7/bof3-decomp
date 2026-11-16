@@ -33,6 +33,7 @@
 #include "common/fixed.h"
 #include "common/vector.h"
 #include "psx/mem.h"
+#include "sys/scratchpad.h"
 #include "psx/psyq.h"
 
 /* The world overlays' own records. Every area program keeps its scratch in
