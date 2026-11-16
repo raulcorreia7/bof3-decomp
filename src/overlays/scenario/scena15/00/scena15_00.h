@@ -30,6 +30,21 @@ extern Callback D_801FE5A0[];
 extern Callback D_801FE5B0[];
 extern Callback D_801FE5C0[];
 
+/* One textured cell of the scene's sprite sheet: the texture page origin and the cell's corner in
+ * it. func_801F9500 takes the second cell when bit 0x4 of the task's unk_06 is set. */
+typedef struct Scena15SpriteCell {
+    s16 page_x; /* 0x0 */
+    s16 page_y; /* 0x2 */
+    u8  u;      /* 0x4 */
+    u8  v;      /* 0x5 */
+} Scena15SpriteCell;
+
+ASSERT_SIZE(Scena15SpriteCell, 6);
+ASSERT_OFFSET(Scena15SpriteCell, u, 0x4);
+ASSERT_OFFSET(Scena15SpriteCell, v, 0x5);
+
+extern Scena15SpriteCell D_801FE5E8[];
+
 /* func_801F71B0 */
 void             Scene_DrawLightPillar(u8 fade);
 void             func_801F752C(AreaSpark* spark);

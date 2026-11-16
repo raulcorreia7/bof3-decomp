@@ -28,7 +28,7 @@ MATCH void func_801E16B4(void) {
             if (work->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) {
                 g_Task->unk_09 = D_801EB23C[g_Battle.dragon_form];
             } else {
-                g_Task->unk_09 = s_BattleCharacterStepIds[work->chr.character_id];
+                g_Task->unk_09 = g_BattleCharacterStepIds[work->chr.character_id];
             }
             Actor_RequestScript((g_Task->facing + 0x2C) & BYTE_MASK);
             g_Task->header.step = g_Task->header.step + 1;
