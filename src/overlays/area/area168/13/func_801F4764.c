@@ -1,16 +1,16 @@
 #include "area168_13.h"
 
 MATCH void func_801F4764(void) {
-    u8* record;
+    Actor* record;
 
     MESSAGE_REQUEST_CLEAR();
     if (g_MessageChoice == 3) {
         Scene_StartEvent(SCENE_EVENT_SHOP_SAVE, 0x5);
         g_SceneEventState.selection = 0xFF;
     }
-    record                    = (u8*)g_ScriptWorkRecord;
-    FIELD(s32, record, 0x18U) = D_801F4F94[g_MessageChoice * 2];
+    record         = (u8*)g_ScriptWorkRecord;
+    record->unk_18 = D_801F4F94[g_MessageChoice * 2];
     /* FAKE: retail reloads the selection byte after the 0x18 store. */
     FAKE_BARRIER();
-    FIELD(s32, record, 0x1CU) = D_801F4F95[g_MessageChoice * 2];
+    record->unk_1C = D_801F4F95[g_MessageChoice * 2];
 }

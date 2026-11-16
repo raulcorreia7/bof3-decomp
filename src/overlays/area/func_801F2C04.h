@@ -1,10 +1,10 @@
 MATCH s32 func_801F2C04(void) {
-    u8* record;
+    Actor* record;
 
-    record = (u8*)g_ScriptWorkRecord;
+    record = g_ScriptWorkRecord;
     MESSAGE_REQUEST_CLEAR();
-    FIELD(s32, record, 0x18U) = AREA_SELECTION_FIRST[g_MessageChoice * 2];
+    record->unk_18 = AREA_SELECTION_FIRST[g_MessageChoice * 2];
     /* FAKE: retail reloads the selection after the 0x18 store. */
     FAKE_BARRIER();
-    FIELD(s32, record, 0x1CU) = AREA_SELECTION_SECOND[g_MessageChoice * 2];
+    record->unk_1C = AREA_SELECTION_SECOND[g_MessageChoice * 2];
 }
