@@ -18,15 +18,16 @@
 
 /* The field focus point the work position copies. */
 /* D_80147A90 */
-extern s32     g_AreaFocusY;
+extern s32      g_AreaFocusY;
 /* The facing routes the projection reads, one Offset2 per spawn index. */
 /* D_80181AC0 */
-extern Offset2 g_FacingOffsets[];
+extern Offset2  g_FacingOffsets[];
 /* The state handler tables the dispatchers index. */
-extern u8      D_801F4FC4[];
+extern u8       D_801F4FC4[];
 /* The four scratch vectors RotTransPers4 projects. */
 /* g_ScratchPadVectors */
-extern SVECTOR g_ScratchPadVectors[];
+extern SVECTOR  g_ScratchPadVectors[];
+extern Callback D_801F5024[];
 
 /* The three part quads func_801F37B8 draws: their vertex offsets, the scroll
  * factors of each direction, and the texture word of each mode. */
@@ -37,7 +38,6 @@ extern u32                 D_801F5080[];
 extern u8                  D_801F6138[];
 extern u8                  D_801F6139[];
 extern u8                  D_801F613A[];
-extern Callback            D_801F5024[];
 /* D_801F6144 */
 extern PartyMemberMessages g_PartyMemberMessages[2];
 extern Callback            D_801F6160[];

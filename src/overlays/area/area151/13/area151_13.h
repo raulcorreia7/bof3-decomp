@@ -15,9 +15,17 @@
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
 /* g_ScratchPadVectors */
-extern SVECTOR  g_ScratchPadVectors[];
+extern SVECTOR g_ScratchPadVectors[];
 /* The world-area state byte tested by the work handlers. */
-extern u8       D_801F4CE8[];
+extern u8      D_801F4CE8[];
+
+/* Seed rows matched against g_GameEntryAreaId; column 0 is the seed, the
+ * g_SceneState.scenario_id column is the message id. */
+extern u16      D_801F5338[7][16];
+/* The fish ids the pond keeper shows, ended by GAME_NONE, and the "Manillo"
+ * item text at +0x7. */
+extern u8       D_801F5419[];
+extern u8       D_801F5420[];
 /* The request selector and the area request slot. */
 extern Callback D_801F542C[];
 /* The state handler tables the dispatchers index. */
@@ -28,14 +36,6 @@ extern Callback D_801F54D8[];
 /* D_801F54E4 */
 /* D_801F54F4 */
 extern Callback D_801F54FC[];
-
-/* Seed rows matched against g_GameEntryAreaId; column 0 is the seed, the
- * g_SceneState.scenario_id column is the message id. */
-extern u16 D_801F5338[7][16];
-/* The fish ids the pond keeper shows, ended by GAME_NONE, and the "Manillo"
- * item text at +0x7. */
-extern u8  D_801F5419[];
-extern u8  D_801F5420[];
 
 /* The work-mode steps the request wrapper runs. */
 

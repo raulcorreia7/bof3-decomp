@@ -12,19 +12,19 @@
 /* The camera words and the slot flags the reset path sets. */
 extern u8       D_80146018;
 extern u8       D_80146158;
+/* The integer half of the focus x, stepped by the scene trigger. */
+extern u16      D_80147A8E;
 /* The field focus point the work position copies. */
 /* D_80147A90 */
 extern s32      g_AreaFocusY;
-/* The integer half of the focus x, stepped by the scene trigger. */
-extern u16      D_80147A8E;
 /* The mirror the scroll step reads. */
 extern s16      g_ScrollHeight;
-/* The camera focus halfword the scroll step samples and the trigger clears. */
-extern u16      D_80147A96;
-extern s16      D_80147AD6;
 /* The scenario flag bytes the trigger tests. */
 extern u8       D_80144EF8[];
+/* The camera focus halfword the scroll step samples and the trigger clears. */
+extern u16      D_80147A96;
 extern s8       D_80147AD0;
+extern s16      D_80147AD6;
 /* The state handler tables the dispatchers index. */
 extern u8       D_801F37D0[];
 extern Callback D_801F4580[];

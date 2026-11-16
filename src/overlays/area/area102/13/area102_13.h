@@ -19,9 +19,9 @@ s32 func_801F3194();
 /* The texture page and colour bits of the cell quads' primitive code. */
 #define AREA_CELL_QUAD_CODE ((0xBAu << 16) | 0x9124u)
 
-void func_801F36B4(s32 steps);
-
 void func_801F2F44(s32 steps);
+
+void func_801F36B4(s32 steps);
 
 /* Counts the task timer down while the game is idle; on zero it advances the step
  * and plays the area cue when the gate reports ready. */

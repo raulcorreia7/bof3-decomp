@@ -6,15 +6,12 @@
 
 #include "overlays/area/world04.h"
 #include "area/spad.h"
-
-/* The camera view rotation the refresh compares against. */
-extern SVECTOR D_801492E0;
+/* The per-buffer ordering-table heads, one 8-byte entry per slot. */
+extern u32* D_80143534[][2];
 
 /* The marker screen-y source flag and the y it holds. */
 extern s32 D_80145EA4;
 extern s16 D_80145EC0;
-/* The sorted object pointer list and its count. */
-extern s32 D_8014828C[];
 
 /* The scratchpad work row the entry paths read. */
 
@@ -23,30 +20,33 @@ extern s32 D_8014828C[];
 /* The area-flag bit store and the global flag byte. */
 /* Steps until the next encounter, rolled by Area_RollEncounterThreshold. */
 extern u16 D_80145FB8;
+/* The sorted object pointer list and its count. */
+extern s32 D_8014828C[];
 
 /* The party row table and the row field the drain pass reads. */
 
 /* The game-overlay state bytes the cancel paths reset. */
 
-extern u16      D_801492DC;
-/* The eight-direction unit step table: the x and y words of the entry, 1/16 of a tile per unit. */
-extern Offset2  D_801F6308[];
-/* The per-buffer ordering-table heads, one 8-byte entry per slot. */
-extern u32*     D_80143534[][2];
+extern u16 D_801492DC;
+
+/* The camera view rotation the refresh compares against. */
+extern SVECTOR  D_801492E0;
+/* The 16 x 16 block table the height query maps a cell to. */
+extern u8       D_801F6138[];
 /* The key-state word and its mask partner (gameui.h names it g_InputPressed). */
 /* The state handler banks the step dispatchers index. */
 extern Callback D_801F6238[];
 extern s8       D_801F6284[];
 extern s8       D_801F6285[];
-/* The 16 x 16 block table the height query maps a cell to. */
-extern u8       D_801F6138[];
+extern u8       D_801F62F0[];
+/* The eight-direction unit step table: the x and y words of the entry, 1/16 of a tile per unit. */
+extern Offset2  D_801F6308[];
 
 /* The per-facing entry seeds: the area id and the entry tile's x and y high
  * halves, one byte each, plus the four facing jitters func_801F5D6C adds. */
 extern u8 D_801F6388[];
 extern u8 D_801F6389[];
 extern u8 D_801F638A[];
-extern u8 D_801F62F0[];
 
 /* The image's step passes. */
 void func_801F518C(void);

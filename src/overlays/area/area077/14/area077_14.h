@@ -22,12 +22,12 @@
 /* g_ScratchPadVectors */
 extern SVECTOR  g_ScratchPadVectors[];
 extern s16      D_800E4800;
-extern WorldPos D_80146954;
 extern u16      D_800E5500;
 extern u8       D_800E5502;
 /* Main-RAM flag bank whose bit 0x2C gates the trigger search, and the scene mode byte
  * the trigger records are matched against. */
 extern u8       D_80144EB8[];
+extern WorldPos D_80146954;
 
 /* One of the 64 slots at AREA_WORK, 0x34 bytes each: the trail centre, its two
  * ribbon edges and the rotation angle. */

@@ -16,12 +16,12 @@ void Area_Update(s32 arg);
 /* The party position in 16.16 fixed point. */
 /* The state handler tables the dispatchers index. */
 extern u8 D_801F358C[];
+extern u8 D_801F35A0[];
+extern u8 D_801F35B0[];
 
 /* The payload func_801F2C48 steps by: x and y cell bytes, the z and screen-x
  * words, and the unk_32 byte indexed by the x cell alone. */
 extern u8 D_801F35C0[];
-extern u8 D_801F35A0[];
-extern u8 D_801F35B0[];
 extern u8 D_801F35D0[];
 
 #endif

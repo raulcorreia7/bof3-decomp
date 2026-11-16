@@ -9,11 +9,13 @@
 #include "area/spad.h"
 #include "scenario/party.h"
 
-extern u8 D_801F69AF;
+/* The fixed work record the dispatch compares the work pointer against. */
+extern Actor D_80143F48;
 /* The area flag byte the request step sets. */
-extern u8 D_80143FBC;
-/* D_801F6BC0 */
-extern u8 g_SceneActorSlot;
+extern u8    D_80143FBC;
+/* The four party work rows, and the shadow record each party row owns: 0x10
+ * bytes, its flag byte first. */
+extern Actor D_80147A58[];
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
@@ -31,22 +33,19 @@ extern u8 g_SceneActorSlot;
 /* The camera seed halfword the request step stores. */
 /* The field focus point the camera step copies. */
 /* D_80147A90 */
-extern s32   g_AreaFocusY;
-extern u8    D_80147AAC[];
+extern s32  g_AreaFocusY;
+extern u8   D_80147AAC[];
 /* The scaled grid position and size the step checks compare against. */
-extern u8    D_80147C29;
-extern s32   D_80147C2C;
-extern s32   D_80147C30;
-extern s32   D_80147C54;
-extern s32   D_80147C58;
-extern s32   D_80147C5C;
-extern u8    D_80147C90;
-/* The fixed work record the dispatch compares the work pointer against. */
-extern Actor D_80143F48;
-/* The four party work rows, and the shadow record each party row owns: 0x10
- * bytes, its flag byte first. */
-extern Actor D_80147A58[];
-extern u8    D_80147CB8[];
+extern u8   D_80147C29;
+extern s32  D_80147C2C;
+extern s32  D_80147C30;
+extern s32  D_80147C54;
+extern s32  D_80147C58;
+extern s32  D_80147C5C;
+extern u8   D_80147C90;
+extern u8   D_80147C97;
+extern u8   D_80147CB8[];
+extern char D_801F2C04[];
 /* D_80149340 */
 
 /* The state handler tables the dispatchers index. */
@@ -54,12 +53,13 @@ extern u8       D_801F61F8[];
 extern Callback D_801F6200[];
 
 /* The panel box words UI_DrawPanelBox draws: x, y, width and height. */
-extern u16  D_801F6210;
-extern u16  D_801F6212;
-extern u16  D_801F6214;
-extern u16  D_801F6216;
-extern char D_801F2C04[];
-extern u8   D_80147C97;
+extern u16 D_801F6210;
+extern u16 D_801F6212;
+extern u16 D_801F6214;
+extern u16 D_801F6216;
+extern u8  D_801F69AF;
+/* D_801F6BC0 */
+extern u8  g_SceneActorSlot;
 
 /* Places the task at the area focus point and reads the height there. */
 void func_801F32A0(s32 value);
@@ -101,9 +101,9 @@ typedef struct Area135CameraPan {
     u8 direction; /* 0x06 */
 } Area135CameraPan;
 
-ASSERT_SIZE(Area135CameraPan, 0x7);
 ASSERT_OFFSET(Area135CameraPan, target_x, 0x03);
 ASSERT_OFFSET(Area135CameraPan, direction, 0x06);
+ASSERT_SIZE(Area135CameraPan, 0x7);
 
 extern Area135CameraPan D_801F6ABC[];
 
@@ -121,10 +121,10 @@ void            func_801F5D98(void);
 void            func_801F5F28(void);
 s32             func_801F603C(s32 x, s32 y);
 
+extern u8       D_801F6B3C[];
 extern Callback D_801F6B48[];
 extern Callback D_801F6B6C[];
 extern u8       D_801F6B74[][13];
-extern u8       D_801F6B3C[];
 
 /* func_80159B9C */
 /* No prototype: the retail callers pass the words unnarrowed. */

@@ -1,8 +1,8 @@
 typedef Cell2 AreaSpawnCell;
 
-ASSERT_SIZE(AreaSpawnCell, 2);
 ASSERT_OFFSET(AreaSpawnCell, x, 0);
 ASSERT_OFFSET(AreaSpawnCell, y, 1);
+ASSERT_SIZE(AreaSpawnCell, 2);
 
 extern u16           D_80145FB8;
 extern AreaSpawnCell g_AreaSpawnPositions[];

@@ -33,10 +33,10 @@ typedef struct AreaQuadSprite {
     s32     unk_24;
 } AreaQuadSprite;
 
-ASSERT_SIZE(AreaQuadSprite, 0x28);
 ASSERT_OFFSET(AreaQuadSprite, flags_03, 0x03);
 ASSERT_OFFSET(AreaQuadSprite, half_size, 0x04);
 ASSERT_OFFSET(AreaQuadSprite, origin, 0x08);
+ASSERT_SIZE(AreaQuadSprite, 0x28);
 
 /* The global state byte the area update gates on. */
 

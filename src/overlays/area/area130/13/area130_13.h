@@ -25,9 +25,9 @@ extern s16 D_80146000;
 extern u8  D_80146110;
 extern s16 D_8014613E;
 extern s16 D_80146140;
+extern u16 D_801469EA;
 extern u8  D_801F3ED8[];
 extern u16 D_801F5058[];
-extern u16 D_801469EA;
 
 void func_801F3400(s16 x, s16 y, s16 z, s16 w);
 

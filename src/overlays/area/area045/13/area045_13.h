@@ -12,18 +12,14 @@
 #define AREA_HUD_SPRITE_CELLS ((u8*)D_801F5364 + 0x10)
 
 /* g_ScratchPadVectors */
-extern SVECTOR  g_ScratchPadVectors[];
-extern u8       D_801F4D7C[];
+extern SVECTOR        g_ScratchPadVectors[];
+extern u8             D_801F4D7C[];
 /* The spawn step handler table indexed by the record's step byte. */
-extern Callback D_801F5338[];
-extern u8       D_801F534C[];
-extern u8       D_801F5354[];
-extern u8       D_801F53E4[];
-/* The signed spawn focus offsets, one (x, y) pair per spawn row. */
-/* D_801F53F0 */
-/* The script id and tile-mode byte tables indexed by twice the spawn row. */
-/* D_801F5400 */
-extern u8       D_801F5408[];
+extern Callback       D_801F5338[];
+extern u8             D_801F534C[];
+extern u8             D_801F5354[];
+extern WorldMapMarker D_801F53CC[6];
+extern u8             D_801F53E4[];
 
 /* The steppers that reload the cell after every store select the volatile
  * declaration. */
@@ -32,7 +28,11 @@ extern u8       D_801F5408[];
 
 /* The value of area update step in the shared Area_Update body. */
 
-extern WorldMapMarker D_801F53CC[6];
+/* The signed spawn focus offsets, one (x, y) pair per spawn row. */
+/* D_801F53F0 */
+/* The script id and tile-mode byte tables indexed by twice the spawn row. */
+/* D_801F5400 */
+extern u8 D_801F5408[];
 #define AREA_HUD_MASK_TABLE D_801F53CC
 
 extern u8  D_801F4DA4[548];

@@ -7,9 +7,9 @@ typedef union WorldMapMessageRow {
     s16 messages[16];
 } WorldMapMessageRow;
 
-ASSERT_SIZE(WorldMapMessageRow, 0x20);
 ASSERT_OFFSET(WorldMapMessageRow, seed, 0x00);
 ASSERT_OFFSET(WorldMapMessageRow, messages, 0x00);
+ASSERT_SIZE(WorldMapMessageRow, 0x20);
 
 #define WORLD_MAP_SHOW_MESSAGE(table, count)                                          \
     {                                                                                 \

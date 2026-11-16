@@ -30,8 +30,8 @@ typedef struct Area024Scratch {
     Pos3          pos;
 } Area024Scratch;
 
-ASSERT_SIZE(Area024Scratch, 0x40);
 ASSERT_OFFSET(Area024Scratch, pos, 0x34);
+ASSERT_SIZE(Area024Scratch, 0x40);
 
 /* Per-sprite transform state at 0x800E4940 (0x18-byte stride): the halfword
  * translation base at +0x00 and the rotation angles at +0x10. */

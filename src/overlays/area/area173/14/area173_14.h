@@ -28,16 +28,16 @@ typedef struct AreaPart {
     u32 cell;        /* 0x10 */
 } AreaPart;
 
-ASSERT_SIZE(AreaPart, 0x14);
 ASSERT_OFFSET(AreaPart, cells, 0x02);
 ASSERT_OFFSET(AreaPart, cell, 0x10);
+ASSERT_SIZE(AreaPart, 0x14);
+
+/* The part rows: the cell pair, four vertex cells and the part word, 20 bytes each. */
+extern AreaPart D_801F4F14[];
 
 /* Each sweep frame's first and last cell row. */
 extern u8 D_801F52E8[][2];
 extern u8 D_801F52E9[][2];
-
-/* The part rows: the cell pair, four vertex cells and the part word, 20 bytes each. */
-extern AreaPart D_801F4F14[];
 
 /* The four corner vectors RotTransPers4 projects. */
 /* g_ScratchPadVectors */
@@ -45,6 +45,13 @@ extern SVECTOR g_ScratchPadVectors[];
 /* The projected quad's origin: x then y. */
 extern s16     D_1F800034[2];
 extern s16     D_1F800036;
+
+/* The part-row bytes the draw addresses by offset: the base y, the four corner triples and the part word. */
+extern u8 D_801F4F15[];
+extern u8 D_801F4F16[];
+extern u8 D_801F4F17[];
+extern u8 D_801F4F18[];
+extern u8 D_801F4F24[];
 
 /* The two boards func_801F3FBC draws: the scroll factor of each mode, the
  * four corner vertex offsets of each of the three runs, and the texture word
@@ -54,13 +61,6 @@ extern u8  D_801F5310[];
 extern u8  D_801F5312[];
 extern u8  D_801F5314[];
 extern u32 D_801F5358[];
-
-/* The part-row bytes the draw addresses by offset: the base y, the four corner triples and the part word. */
-extern u8  D_801F4F15[];
-extern u8  D_801F4F16[];
-extern u8  D_801F4F17[];
-extern u8  D_801F4F18[];
-extern u8  D_801F4F24[];
 /* The cell pair a part draw stages, then the drawer's own x and z offsets, as unsigned halfwords. */
 extern u16 D_1F800034_U16[4];
 

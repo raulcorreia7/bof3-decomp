@@ -15,9 +15,9 @@
 /* The scratchpad work pointer the palette pass reads. */
 /* The state handler banks the step dispatchers index. */
 extern u8 D_801F3DFC[];
-extern s8 D_801F43B0[];
 /* The script steps the scene entry starts, one per count phase. */
 extern u8 D_801F43AC[];
+extern s8 D_801F43B0[];
 
 /* A scene seed: the scene record the actor selects, the script it starts and
  * four bytes the entry does not read. */
@@ -46,19 +46,19 @@ extern SpriteOffset D_801F43D4[];
 /* This image's copy of the sprite coordinate rounding (link-only name: the slus copy shares it). */
 s32 Area_RoundSpriteCoordinate_801F3DCC(s32 pair, s32 step);
 
-/* The scene seeds, one per scene index. */
-extern AreaSceneSeed D_801F43D8[];
-
 /* The setup callback table. */
 extern Callback D_801F4324[17];
 /* The palette source bytes passed to the slot claim. */
 extern u8       D_801F4368[];
-
-extern Callback D_801F43EC[];
 /* The actor script ids the phase starts, one per phase. */
 extern u8       D_801F43AC[];
+
 /* The spark trail the spawn starts. */
-extern u8       D_801F43C0[];
+extern u8 D_801F43C0[];
+
+/* The scene seeds, one per scene index. */
+extern AreaSceneSeed D_801F43D8[];
+extern Callback      D_801F43EC[];
 
 /* The state update's fallback handler. */
 /* The image's setup pass. */

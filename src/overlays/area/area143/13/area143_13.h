@@ -15,6 +15,7 @@
 
 /* The variant byte the cancel path stores in the game-overlay state. */
 #define AREA_RESET_VARIANT 0xFF
+extern s8 D_801F42E8[][2];
 
 /* The character work record the span step reads. */
 
@@ -28,7 +29,6 @@ extern Callback            D_801F4314[];
 /* D_801F52FC */
 extern PartyMemberMessages g_PartyMemberMessages[1];
 extern Callback            D_801F5308[];
-extern s8                  D_801F42E8[][2];
 
 /* The battle-step selector the handler tests. */
 /* The frame word the request compares. */

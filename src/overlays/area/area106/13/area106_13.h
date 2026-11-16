@@ -8,11 +8,11 @@
 #include "area/spad.h"
 
 #define g_CurrentActor ((u8*)g_CurrentActor)
+extern u8 D_801F3EAC[];
 
 /* The X and Y cell columns the scene-flag pair selects. */
 extern u8 D_801F4850[];
 extern u8 D_801F4851[];
-extern u8 D_801F3EAC[];
 
 void      func_801F2F38(s32 arg0, s32 arg1);
 extern u8 D_801F3E90[];
