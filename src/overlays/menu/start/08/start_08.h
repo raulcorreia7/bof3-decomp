@@ -90,6 +90,47 @@ ASSERT_OFFSET(SkillOrder, cursor, 0x0C);
 ASSERT_OFFSET(SkillOrder, swap_cursor, 0x0D);
 ASSERT_OFFSET(SkillOrder, unk_54, 0x54);
 
+/* One starting point of a new game: the save entry, the party and the records'
+ * starting values the start menu writes before the first scene loads. */
+typedef struct NewGameStart {
+    u32 entry_x;        /* 0x00 */
+    u32 entry_y;        /* 0x04 */
+    u16 area;           /* 0x08 */
+    u8  facing;         /* 0x0A */
+    u8  party[3];       /* 0x0B */
+    u8  party_flags[7]; /* 0x0E */
+    u8  pad_15[3];      /* 0x15 */
+    u32 exp[7];         /* 0x18 */
+    u32 zenny;          /* 0x34 */
+    u16 items[8];       /* 0x38 */
+    u8  vitals[16];     /* 0x48 */
+    u32 unk_58;         /* 0x58 */
+} NewGameStart;
+
+ASSERT_SIZE(NewGameStart, 0x5C);
+ASSERT_OFFSET(NewGameStart, entry_x, 0x00);
+ASSERT_OFFSET(NewGameStart, entry_y, 0x04);
+ASSERT_OFFSET(NewGameStart, area, 0x08);
+ASSERT_OFFSET(NewGameStart, facing, 0x0A);
+ASSERT_OFFSET(NewGameStart, party, 0x0B);
+ASSERT_OFFSET(NewGameStart, party_flags, 0x0E);
+ASSERT_OFFSET(NewGameStart, exp, 0x18);
+ASSERT_OFFSET(NewGameStart, zenny, 0x34);
+ASSERT_OFFSET(NewGameStart, items, 0x38);
+ASSERT_OFFSET(NewGameStart, vitals, 0x48);
+ASSERT_OFFSET(NewGameStart, unk_58, 0x58);
+
+/* The new game's starting points and the tables its start menu copies. */
+extern NewGameStart D_801EBA44[];
+extern u8           D_80181B17;
+extern u8           D_80181B18;
+extern u8           D_801EC174[];
+extern u8           D_801EC214[];
+extern u8           g_BattleTargetRows[][4];
+extern u8           D_80145518[][4];
+extern u8           D_801454FF;
+void                Char_GetExp(u8 character);
+
 /* The start overlay's step counter at 0x80143B92. func_801E3EC4 takes its
  * address before the increment (lui/addiu of the base, then lhu/shu through
  * it), so that unit needs the one-element table view; every other reader
