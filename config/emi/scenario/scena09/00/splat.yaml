@@ -10,7 +10,7 @@ segments:
       - [0x0, .data, D_801F6C00]
       - [0x4, bin, D_801F6C04]
       - [0x64, .rodata, func_801F8504]
-      - [0x94, .rodata, D_801F6C94]
+      - [0x94, .rodata, func_801F8770]
       - [0xCC, .rodata, D_801F6CCC]
       - [0x158, .rodata, D_801F6D58]
       - [0x15C, .rodata, D_801F6D5C]
@@ -23,7 +23,8 @@ segments:
       - [0x6CC, .rodata, D_801F72CC]
       - [0x75C, c, Scene_DispatchEntity]
       - [0x1904, c, func_801F8504]
-      - [0x1B70, c, 1B70]
+      - [0x1B70, c, func_801F8770]
+      - [0x2130, c, 1B70]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
     type: code
