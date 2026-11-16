@@ -124,7 +124,7 @@ MATCH void func_801D10AC(void) {
     point[1] = g_Task->pos.y.fixed;
     point[2] = g_Task->pos.z.fixed;
     Area_ProjectPoint(point, &start);
-    point[2] -= 0x1000000;
+    point[2] -= TO_COORD(256);
     Area_ProjectPoint(point, &end);
     g_Task->unk_32 = ratan2(end.vy - start.vy, end.vx - start.vx) + 0x400;
     SND_PlayCue(0x202);
