@@ -69,5 +69,3 @@ MATCH void func_801F92EC(void) {
 
 MATCH void func_801F937C(void) {
 }
-
-INCLUDE_ASM(func_801F9384);
