@@ -4,9 +4,9 @@
     tools/try_variants.py TARGET@0xADDRESS SOURCE.c VARIANTS.py
 
 VARIANTS.py is Python that defines `NAME` (the function name) and `V`, a dict of tag to the
-complete function text. Each variant replaces the `INCLUDE_ASM(NAME);` line of SOURCE.c, or the
-existing `MATCH`/`NON_MATCHING` definition of NAME, and `tools/match.sh --diff` judges it. A line
-per variant: `<tag> => MATCH`, `<tag> => N diff | <first difference>` or `<tag> => ERR ...`.
+complete function text. Each variant replaces the existing `MATCH`/`NON_MATCHING` definition of NAME
+in SOURCE.c, or its `INCLUDE_ASM(NAME);` line when there is none, and `tools/match.sh --diff`
+judges it. A line per variant: `<tag> => MATCH`, `<tag> => N diff | <first difference>` or `<tag> => ERR ...`.
 The first match stays in SOURCE.c and ends the run; otherwise SOURCE.c is restored and the last
 line is `best (N, tag)`. Run `check-<image>` on a match.
 
@@ -23,14 +23,14 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 def function_span(source, name):
-    """Return the start and end of the line or definition to replace."""
-    found = re.search(rf"INCLUDE_ASM\({name}\);\n", source)
+    """Return the start and end of the definition to replace, else of the INCLUDE_ASM line."""
+    found = re.search(
+        rf"^(?:MATCH|NON_MATCHING)[^\n]*\b{name}\([^\n]*\{{\n.*?^\}}\n",
+        source,
+        re.S | re.M,
+    )
     if not found:
-        found = re.search(
-            rf"^(?:MATCH|NON_MATCHING)[^\n]*\b{name}\([^\n]*\{{\n.*?^\}}\n",
-            source,
-            re.S | re.M,
-        )
+        found = re.search(rf"INCLUDE_ASM\({name}\);\n", source)
     return found.start(), found.end()
 
 
