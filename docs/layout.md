@@ -280,7 +280,7 @@ A named global lives in the header of the system that owns it, beside the code t
 writes it: `g_SndBGMId` in the sound runtime header, `g_Battle.state` in `battle/records.h`. Each system
 header stays self-contained. An executable word with no name yet is declared at the lowest scope that
 covers its users ([lowest scope wins](#lowest-scope-wins)); one that several families read is in
-`include/slus/data.h` or `include/slus/functions.h`, in address order. The change that names one moves
+`include/slus/data.h` or `include/slus/<domain>.h` (`area`, `sound`, `system`, `actor`, `ui`, `party`; `functions.h` includes them and keeps the rest), in address order. The change that names one moves
 its `extern` to the owner.
 
 Adjacent globals that form one record are [one struct or array](conventions.md#globals-are-records).
