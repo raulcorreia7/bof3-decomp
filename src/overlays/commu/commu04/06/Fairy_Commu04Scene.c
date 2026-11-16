@@ -67,6 +67,7 @@ MATCH void func_801D12C8(void) {
     }
 
     Menu_ResetPanelTasks();
+    /* kept: retail indexes g_FairyJobs by the selection at every use; a FairyJob local shrinks the image by 0x50 bytes. */
     switch (g_FairyJobs[g_SceneEventSelection].unk_03 & 0xF) {
         case ITEM_CAT_ITEM:
             flags = g_Items[g_FairyJobs[g_SceneEventSelection].record_state].flags;

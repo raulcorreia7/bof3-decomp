@@ -7,6 +7,7 @@ MATCH u16 func_801F326C(u8 character_id) {
     u8  row;
     s32 base;
 
+    /* kept: row is the found slot, then its table base, then the index; a local of its own for the slot changes the bytes. */
     for (row = 0; row < CAMP_MESSAGE_CHARACTER_COUNT; row++) {
         if (D_801F3878[row] == character_id) {
             break;
