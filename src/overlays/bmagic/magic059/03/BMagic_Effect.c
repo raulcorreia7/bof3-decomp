@@ -27,28 +27,25 @@ MATCH void func_801EEC04(void) {
 
 INCLUDE_ASM(func_801EED0C);
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF118(void) {
-    s16* angle;
-    s32  step;
-    u8   phase;
+/* Moves the effect one step around a circle. */
+MATCH void func_801EF118(void) {
+    u8           angle;
+    s16*         cell;
+    PartyMember* work;
 
-    step                = g_Task->unk_09 + 1;
-    g_Task->unk_09      = step;
-    phase               = step;
-    angle               = (s16*)&D_1F80000E;
-    *angle              = phase << 4;
-    g_Task->pos.x.fixed = g_Task->unk_18 + (rsin(phase << 4) << 6);
-    g_Task->pos.y.fixed = g_Task->unk_1C + (rcos(*angle) << 6);
+    work                = g_Task;
+    cell                = (s16*)&D_1F80000E;
+    angle               = work->unk_09 + 1;
+    work->unk_09        = angle;
+    *cell               = angle << 4;
+    g_Task->pos.x.fixed = g_Task->unk_18 + (rsin((s16)(angle << 4)) << 6);
+    g_Task->pos.y.fixed = g_Task->unk_1C + (rcos(*cell) << 6);
     if (g_Task->param.unk_0B == 0) {
         func_800A9820(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
     }
 }
-#else
-INCLUDE_ASM(func_801EF118);
-#endif
 
 /* func_801EF1E0 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
