@@ -13,7 +13,7 @@ MATCH s32 Item_GetDescription(s32 category, s32 item_id) {
             return *(u16*)(&D_801C90F0 + ((item_id & BYTE_MASK) * 0x18));
         case ITEM_CAT_ARMOR:
             return *(u16*)(&D_801C98B6 + ((item_id & BYTE_MASK) * 0x16));
-        case ITEM_CAT_OPTION:
+        case ITEM_CAT_ACCESSORY:
             return *(u16*)(&D_801C9E8C + ((item_id & BYTE_MASK) * 0x14));
         case ITEM_CAT_VITAL:
             return *(u16*)(&D_801C8FE8 + ((item_id & BYTE_MASK) * 0x10));

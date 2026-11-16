@@ -26,10 +26,10 @@ MATCH void Shop_Equip(u8 character_id, u8 slot, u8 item_id) {
             SHOP_SWAP_EQUIPMENT(ITEM_CAT_ARMOR, armor);
             break;
         case EQUIP_SLOT_ACCESSORY_1:
-            SHOP_SWAP_EQUIPMENT(ITEM_CAT_OPTION, accessories[0]);
+            SHOP_SWAP_EQUIPMENT(ITEM_CAT_ACCESSORY, accessories[0]);
             break;
         case EQUIP_SLOT_ACCESSORY_2:
-            SHOP_SWAP_EQUIPMENT(ITEM_CAT_OPTION, accessories[1]);
+            SHOP_SWAP_EQUIPMENT(ITEM_CAT_ACCESSORY, accessories[1]);
             break;
     }
 }

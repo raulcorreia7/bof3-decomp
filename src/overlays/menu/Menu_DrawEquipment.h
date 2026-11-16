@@ -21,8 +21,8 @@ MATCH void Menu_DrawEquipment(s32 origin_x, s32 origin_y, s32 index, s32 selecti
     UI_DrawText(icon_x, (s16)(y + 83), palette, 8, (u8*)(&g_Armors[record->equip.shield]));
     UI_DrawText(icon_x, (s16)(y + 96), palette, 8, (u8*)(&g_Armors[record->equip.helmet]));
     UI_DrawText(icon_x, (s16)(y + 109), palette, 8, (u8*)(&g_Armors[record->equip.armor]));
-    UI_DrawText(icon_x, (s16)(y + 129), palette, 8, (u8*)(&g_OptionItems[record->equip.accessories[0]]));
-    UI_DrawText(icon_x, (s16)(y + 142), palette, 8, (u8*)(&g_OptionItems[record->equip.accessories[1]]));
+    UI_DrawText(icon_x, (s16)(y + 129), palette, 8, (u8*)(&g_Accessories[record->equip.accessories[0]]));
+    UI_DrawText(icon_x, (s16)(y + 142), palette, 8, (u8*)(&g_Accessories[record->equip.accessories[1]]));
     x = (x + 5) & HALF_MASK;
     func_801AEA80(x, (y + 0x49) & HALF_MASK, 8, selected);
     func_801AEA80(x, (y + 0x56) & HALF_MASK, 0xA, selected);

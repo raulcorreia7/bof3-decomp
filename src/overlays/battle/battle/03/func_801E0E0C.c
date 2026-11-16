@@ -23,10 +23,10 @@ MATCH u8 func_801E0E0C(void) {
             return 0u;
         }
         if ((flags_80 & STATUS_KO) != 0u) {
-            if (g_Game.members[index].chr.equip.accessories[0] == OPTION_ITEM_SOUL_GEM) {
+            if (g_Game.members[index].chr.equip.accessories[0] == ACCESSORY_SOUL_GEM) {
                 return 0u;
             }
-            if (g_Game.members[index].chr.equip.accessories[1] == OPTION_ITEM_SOUL_GEM) {
+            if (g_Game.members[index].chr.equip.accessories[1] == ACCESSORY_SOUL_GEM) {
                 return 0u;
             }
             if (g_Game.members[index].chr.equip.armor == ARMOR_MANLY_CLOTHES) {

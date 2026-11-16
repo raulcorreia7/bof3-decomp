@@ -176,7 +176,7 @@ An id is the fixed-width integer the retail data stores, named `<thing>_id`; its
 constants in an anonymous `enum` whose comment names the table they index. No typedef per id: in C
 it checks nothing that `item_id` does not already say, and an `enum` type would change the width
 ([compiler chain](toolchain.md#compiler-chain)). Each retail table has its own constants: `ITEM_ID_`, `WEAPON_ID_`,
-`ARMOR_ID_`, `OPTION_ITEM_ID_`, `VITAL_ITEM_ID_`.
+`ARMOR_ID_`, `ACCESSORY_ID_`, `VITAL_ITEM_ID_`.
 
 **Do**
 

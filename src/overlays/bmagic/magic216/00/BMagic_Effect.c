@@ -105,8 +105,8 @@ MATCH void func_801EEF98(s32 index, s32 category) {
         case ITEM_CAT_ARMOR:
             SYS_CopyString(g_TextVariables, g_Armors[index & BYTE_MASK].header.name, 12);
             break;
-        case ITEM_CAT_OPTION:
-            SYS_CopyString(g_TextVariables, g_OptionItems[index & BYTE_MASK].header.name, 12);
+        case ITEM_CAT_ACCESSORY:
+            SYS_CopyString(g_TextVariables, g_Accessories[index & BYTE_MASK].header.name, 12);
             break;
     }
 }

@@ -58,7 +58,7 @@
 #define ITEM_COUNT                     92
 #define WEAPON_COUNT                   83
 #define ARMOR_COUNT                    68
-#define OPTION_ITEM_COUNT              52
+#define ACCESSORY_COUNT                52
 #define VITAL_ITEM_COUNT               16
 #define SHOP_COUNT                     40
 #define ABILITY_COUNT                  228
@@ -82,7 +82,7 @@
 #define VITAL_ITEM_STRIDE              0x10
 #define WEAPON_STRIDE                  0x18
 #define ARMOR_STRIDE                   0x16
-#define OPTION_ITEM_STRIDE             0x14
+#define ACCESSORY_STRIDE               0x14
 #define SHOP_STRIDE                    0x17
 #define ABILITY_STRIDE                 0x14
 #define LEVEL_STRIDE                   0x08
