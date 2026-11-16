@@ -10,8 +10,7 @@ MATCH void func_801EEC04(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EEC5C(void) {
-    u32  first;
-    u8   i;
+    u8   first;
     u16* dst;
     u16* src;
     u32  slot;
@@ -27,20 +26,20 @@ NON_MATCHING void func_801EEC5C(void) {
         g_Task->pos.y                                   = g_BattleEffectBattler->pos.y;
         g_Task->pos.z                                   = g_BattleEffectBattler->pos.z;
         first                                           = Battle_AllocEffect(1, 0x31);
-        g_BattleEffects[first & BYTE_MASK].header.mode  = 0;
         g_BattleEffects[first & BYTE_MASK].target.party = g_Task;
+        g_BattleEffects[first & BYTE_MASK].header.mode  = 0;
         slot                                            = Battle_AllocEffect(1, 0x31) & BYTE_MASK;
         g_BattleEffects[slot].unk_0B                    = first;
-        i                                               = 0;
+        g_BattleEffects[slot].header.mode               = 1;
+        g_BattleEffects[slot].target.party              = g_Task;
+        g_GfxPalettePending                             = 1;
+        first                                           = 0;
         dst                                             = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
         src                                             = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
-        g_BattleEffects[slot].header.mode               = 1;
-        g_GfxPalettePending                             = 1;
-        g_BattleEffects[slot].target.party              = g_Task;
         do {
-            dst[i] = src[i] | 0x8000;
-            i++;
-        } while (i < 16);
+            dst[first] = src[first] | 0x8000;
+            first++;
+        } while (first < 16);
         g_AreaPaletteCopy->rows[26].colors[0] = g_AreaPaletteArena->rows[26].colors[0];
         g_Task->param.unk_0B                  = 2;
         g_Task->header.mode += 1;
