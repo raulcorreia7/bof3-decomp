@@ -5,7 +5,6 @@
  * includes the file. */
 
 #define FAKE_DECL_GRAPHICS_PALETTE_PENDING_VOLATILE
-#define FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
 #include "overlays/scenario/scenario.h"
 #include "engine/game/00/game_00.h"
 
@@ -56,9 +55,9 @@ extern u8        D_801FBFEC;
                 return;                                                 \
             }                                                           \
             g_Actors[second_index].header.flags = 1;                    \
-            *(s16*)g_ScratchPad                 = (u8)first;            \
+            g_ScratchPad.cells.halves[0]        = (u8)first;            \
             func_801A65A0(script);                                      \
-            *(s16*)g_ScratchPad = (u8)second;                           \
+            g_ScratchPad.cells.halves[0] = (u8)second;                  \
             func_801A65A0((script) + 0x10);                             \
         }                                                               \
     } while (0)

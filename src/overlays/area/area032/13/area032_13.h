@@ -3,8 +3,6 @@
 
 /* The area032 world overlay's local declarations: the sprite and scratch views,
  * its handler table and prototypes. Only this image includes the file. */
-
-#define FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
 #include "overlays/area/world00.h"
 #include "area/spad.h"
 

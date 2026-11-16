@@ -3,8 +3,6 @@
 
 /* The scenario/scena03/00 overlay's local declarations. Only this image
  * includes the file. */
-
-#define FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
 #include "overlays/scenario/scenario.h"
 #include "engine/game/00/game_00.h"
 

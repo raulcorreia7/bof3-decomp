@@ -27,7 +27,7 @@ MATCH void func_801F6EB4(void) {
         return;
     }
 
-    scratch                               = (s16*)g_ScratchPad;
+    scratch                               = (s16*)g_ScratchPad.cells.bytes;
     data                                  = (u8*)D_801FCF30;
     g_Actors[g_Task->unk_04].header.flags = 1;
     work                                  = (u8*)g_Task;

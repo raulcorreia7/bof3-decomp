@@ -1,4 +1,3 @@
-#define FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
 #include "battle_03.h"
 
 /* computes one hit's damage: the element id defaults to the attacker's weapon,
@@ -16,12 +15,12 @@ MATCH s16 Battle_CalcDamage(u8 attacker_slot, u8 target_slot, u16 element_id) {
     spread = g_BattleDamageSpread;
     if (element_id == BATTLE_ELEMENT_FROM_WEAPON) {
         if (BATTLER_IS_PLAYER(attacker_slot)) {
-            *(u16*)g_ScratchPad = g_Weapons[g_Game.members[attacker_slot].chr.equip.weapon].element;
+            g_ScratchPad.cells.halves[0] = g_Weapons[g_Game.members[attacker_slot].chr.equip.weapon].element;
         } else {
-            *(u16*)g_ScratchPad = 0;
+            g_ScratchPad.cells.halves[0] = 0;
         }
     } else {
-        *(u16*)g_ScratchPad = element_id;
+        g_ScratchPad.cells.halves[0] = element_id;
     }
     if (BATTLER_IS_PLAYER(attacker_slot)) {
         if (g_Game.members[attacker_slot].u.turn.action_flags.value & BATTLER_ACTION_POWER_BOOST) {

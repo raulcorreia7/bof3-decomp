@@ -3,8 +3,6 @@
 
 /* The world01/area043/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
-
-#define FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
 #include "game/spawn.h"
 #include "overlays/area/world01.h"
 #include "area/spad.h"

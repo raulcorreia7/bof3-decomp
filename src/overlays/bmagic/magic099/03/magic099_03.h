@@ -16,6 +16,7 @@ extern s32 D_1F800004;
 #define BOLT_RADIUS       0x40
 #define BOLT_FLICKER_MASK 0x3F
 #define BOLT_FLICKER_BASE 0x80
+#define BOLT_FLICKER_CELL g_ScratchPad
 
 /* The bolt point g_ScratchPadVectors, also read as halfwords, and the scratch words of the bolt: the segment length, the
  * swing angle, the flicker and the segment count. */

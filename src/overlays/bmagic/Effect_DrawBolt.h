@@ -1,4 +1,4 @@
-/* Draws the lightning bolt of the effect as LINE_G2 segments: each segment swings by the effect ticker, its length and brightness flicker at random, and it goes into the depth cell of the effect's position. Each image header defines BOLT_RADIUS, BOLT_FLICKER_MASK and BOLT_FLICKER_BASE and reads the scratch words as s32 (FAKE_DECL_GAME_SCRATCH_BASE_WORD). */
+/* Draws the lightning bolt of the effect as LINE_G2 segments: each segment swings by the effect ticker, its length and brightness flicker at random, and it goes into the depth cell of the effect's position. Each image header defines BOLT_RADIUS, BOLT_FLICKER_MASK and BOLT_FLICKER_BASE, and BOLT_FLICKER_CELL, the scratch word the flicker is stored in. */
 /* func_801F043C (magic099), func_801EF9A4 (magic143) */
 MATCH void Effect_DrawBolt(void) {
     LINE_G2* primitive;
@@ -36,9 +36,9 @@ MATCH void Effect_DrawBolt(void) {
             SetSemiTrans(primitive, 1);
             RotTransPers(g_ScratchPadVectors, (long*)&primitive->x0, &p, &flag);
             if RANDOM_MASK (1) {
-                g_ScratchPad = RANDOM_MASK(BOLT_FLICKER_MASK) + BOLT_FLICKER_BASE;
+                BOLT_FLICKER_CELL = RANDOM_MASK(BOLT_FLICKER_MASK) + BOLT_FLICKER_BASE;
             } else {
-                g_ScratchPad = BOLT_FLICKER_BASE - RANDOM_MASK(BOLT_FLICKER_MASK);
+                BOLT_FLICKER_CELL = BOLT_FLICKER_BASE - RANDOM_MASK(BOLT_FLICKER_MASK);
             }
             page     = ((g_Task->param.unk_0B + i + 2) & 0xF) << 8;
             point[0] = 0;

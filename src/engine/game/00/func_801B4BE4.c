@@ -1,4 +1,3 @@
-#define FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
 #include "game_00.h"
 
 MATCH u8 func_801B4BE4(u8 mode, u8 code) {
@@ -19,7 +18,7 @@ MATCH u8 func_801B4BE4(u8 mode, u8 code) {
     index = mode;
     if ((index == 1) || (index == 5)) {
         count = 0;
-        cells = (s16*)g_ScratchPad;
+        cells = (s16*)g_ScratchPad.cells.bytes;
         want  = code;
         do {
             if ((Area_GetCellCode(cells[0], cells[1]) & BYTE_MASK) == want) {
@@ -33,7 +32,7 @@ MATCH u8 func_801B4BE4(u8 mode, u8 code) {
     }
     if ((index == 3) | (index == 7)) {
         count = 0;
-        cells = (s16*)g_ScratchPad;
+        cells = (s16*)g_ScratchPad.cells.bytes;
         want  = code;
         do {
             if ((Area_GetCellCode(cells[0], cells[1]) & BYTE_MASK) == want) {
