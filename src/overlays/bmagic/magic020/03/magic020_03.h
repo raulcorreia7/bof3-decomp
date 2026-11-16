@@ -5,7 +5,7 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern BMagicEffectFuncs D_801EEC04;
+extern BMagicEffectSteps D_801EEC04;
 
 #define MAGIC020_SECOND_STEP_COUNT 3
 

@@ -10,7 +10,7 @@
 #define MAGIC056_STEP_COUNT 9
 
 typedef struct Magic056Steps {
-    Callback handlers[MAGIC056_STEP_COUNT];
+    Callback steps[MAGIC056_STEP_COUNT];
 } Magic056Steps;
 
 extern Magic056Steps D_801EEC10;

@@ -1,6 +1,6 @@
 #include "slus.h"
 
-const Table8 g_MessageStates = {{
+const MessageStateSteps g_MessageStateSteps = {{
     func_8015083C,
     UI_TickChoiceTimer,
     func_80150E48,
@@ -11,7 +11,7 @@ const Table8 g_MessageStates = {{
     func_80151844,
 }};
 
-const Table8 D_80149A7C = {{
+const MessageStateSteps D_80149A7C = {{
     func_80150F8C,
     func_8015115C,
     func_801511C8,
@@ -22,7 +22,7 @@ const Table8 D_80149A7C = {{
     func_80151480,
 }};
 
-const Table6 D_80149A9C = {{
+const MessageChoiceSteps D_80149A9C = {{
     UI_ClosePanel,
     func_801515F4,
     UI_ScrollChoice,

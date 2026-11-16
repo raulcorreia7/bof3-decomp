@@ -12,10 +12,10 @@ MATCH void func_801EECDC(void) {
 }
 
 MATCH void func_801EECFC(void) {
-    BMagic064Steps steps;
+    Magic064MainSteps steps;
 
     steps = D_801EEC10;
-    steps.handlers[g_Task->header.step]();
+    steps.steps[g_Task->header.step]();
 }
 
 MATCH void func_801EED7C(void) {

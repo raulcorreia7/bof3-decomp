@@ -598,7 +598,7 @@ g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running e
 g_BattleEnemyBattlers = { addr = 0x801EB630, alias = true, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_CHARACTERS_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
 g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
 D_801EEC04 = { addr = 0x801EEC04, type = "Magic021Steps", source = "Step handlers of magic021 (Bonebreak), run by header.mode (byte 0x01) from func_801EEC28." }
-D_801EEC10 = { addr = 0x801EEC10, type = "BMagicEffectFuncs", source = "Six step handlers of magic021, run by header.step (byte 0x02) from func_801EF020." }
+D_801EEC10 = { addr = 0x801EEC10, type = "BMagicEffectSteps", source = "Six step handlers of magic021, run by header.step (byte 0x02) from func_801EF020." }
 Effect_ReleaseActiveBattlerOnTickerZero = { addr = 0x801EEF38, type = "func", source = "When the effect ticker (byte 0x0B) is zero advances the active battler's script (Battle_SelectActiveBattlerScript), clears its busy flag and advances header.mode (byte 0x01) in magic021 (Bonebreak)." }
 Effect_StartPlaying = { addr = 0x801EEFA8, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic021 (Bonebreak)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEFDC, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic021." }
@@ -2155,7 +2155,7 @@ Battle_ProjectRange = { addr = 0x800AF764, alias = true, source = "Projects the 
 Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-D_801EEC04 = { addr = 0x801EEC04, type = "BMagicEffectFuncs", source = "Step handlers of magic162, run by header.mode (byte 0x01) from func_801EEC28." }
+D_801EEC04 = { addr = 0x801EEC04, type = "BMagicEffectSteps", source = "Step handlers of magic162, run by header.mode (byte 0x01) from func_801EEC28." }
 Effect_ReplacePaletteFade = { addr = 0x801EEFA0, type = "func", source = "When the effect timer (byte 0x09) reaches zero frees the selected actor's palette fade, allocates a new one (index in byte 0x0A), restarts the timer at 8 and advances header.mode (byte 0x01) in magic162 (Transfer)." }
 Effect_BrightenPalette = { addr = 0x801EF048, type = "func", source = "Raises the red, green and blue offsets of the palette fade entry the effect counter (byte 0x0A) names by one per frame and advances header.mode (byte 0x01) when the effect timer (byte 0x09) reaches zero in magic162 (Transfer)." }
 Effect_NextStep = { addr = 0x801EF158, type = "func", source = "While the effect ticker (byte 0x0B) is under 5, reloads the effect timer (byte 0x09) with 8 and advances header.mode (byte 0x01) in magic162 (Transfer)." }
@@ -2203,7 +2203,7 @@ Battle_ProjectRange = { addr = 0x800AF764, alias = true, source = "Projects the 
 Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
-D_801EEC04 = { addr = 0x801EEC04, type = "BMagicEffectFuncs", source = "Step handlers of magic168, run by header.mode (byte 0x01) from func_801EEC28." }
+D_801EEC04 = { addr = 0x801EEC04, type = "BMagicEffectSteps", source = "Step handlers of magic168, run by header.mode (byte 0x01) from func_801EEC28." }
 Effect_ReplacePaletteFade = { addr = 0x801EEFA0, type = "func", source = "When the effect timer (byte 0x09) reaches zero frees the selected actor's palette fade, allocates a new one (index in byte 0x0A), restarts the timer at 8 and advances header.mode (byte 0x01) in magic168 (Cure)." }
 Effect_BrightenPalette = { addr = 0x801EF048, type = "func", source = "Raises the red, green and blue offsets of the palette fade entry the effect counter (byte 0x0A) names by one per frame and advances header.mode (byte 0x01) when the effect timer (byte 0x09) reaches zero in magic168 (Cure)." }
 Effect_NextStep = { addr = 0x801EF158, type = "func", source = "While the effect ticker (byte 0x0B) is under 5, reloads the effect timer (byte 0x09) with 8 and advances header.mode (byte 0x01) in magic168 (Cure)." }
@@ -7250,13 +7250,13 @@ jtbl_80149998 = { addr = 0x80149998, type = "Callback", source = "The switch tab
 D_80149998 = { addr = 0x80149998, size = 0x178, alias = true, source = "View of a record member; the row names the address the link reads, not a second object." }
 g_UiLocalModes = { addr = 0x801499AC, size = 0x54, alias = true, source = "Local UI mode handlers." }
 jtbl_80149A00 = { addr = 0x80149A00, type = "Callback", source = "The switch table of UI_DrawMessageScript: the jump targets of its jr dispatch." }
-g_MessageStates = { addr = 0x80149A5C, size = 0x20, alias = true, source = "Message state handlers." }
+g_MessageStateSteps = { addr = 0x80149A5C, size = 0x20, alias = true, source = "Message state handlers." }
 g_MessageChoiceModes = { addr = 0x80149AB4, size = 0x18, alias = true, source = "Message choice handlers." }
 g_MessageSteps = { addr = 0x80149ACC, size = 0x40, alias = true, source = "Message answer step handlers." }
 jtbl_80149B78 = { addr = 0x80149B78, type = "Callback", source = "The switch table of UI_DrawTextAt: the jump targets of its jr dispatch." }
 jtbl_80149C00 = { addr = 0x80149C00, type = "Callback", source = "The switch table of func_8015B870: the jump targets of its jr dispatch." }
 g_EmiCDSteps = { addr = 0x80149C3C, alias = true, source = "CD step handlers of the EMI loader." }
-g_EmiRingSlotHandlers = { addr = 0x80149C60, alias = true, source = "EMI_UpdateStream copies it" }
+g_EmiRingSteps = { addr = 0x80149C60, alias = true, source = "EMI_UpdateStream copies it" }
 jtbl_80149C90 = { addr = 0x80149C90, type = "Callback", source = "The switch table of Char_ApplyMaster: the jump targets of its jr dispatch." }
 jtbl_80149CC8 = { addr = 0x80149CC8, type = "Callback", source = "The switch table of Char_PreviewEquip: the jump targets of its jr dispatch." }
 jtbl_80149CE0 = { addr = 0x80149CE0, type = "Callback", source = "The switch table of Char_ApplyWeapon: the jump targets of its jr dispatch." }

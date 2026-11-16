@@ -5,15 +5,15 @@
  * EMI_STREAM_TIMEOUT_FRAMES frames.
  */
 MATCH void EMI_UpdateStream(void) {
-    SystemDispatchFuncs callbacks;
-    u8*                 head;
-    s8*                 slot;
-    s8                  next;
-    s32                 count;
-    u16*                frame_counter;
+    EmiRingSteps callbacks;
+    u8*          head;
+    s8*          slot;
+    s8           next;
+    s32          count;
+    u16*         frame_counter;
 
     head      = (u8*)&g_EmiReadStatus;
-    callbacks = g_EmiRingSlotHandlers;
+    callbacks = g_EmiRingSteps;
     if (*head != 0) {
         g_EmiStreamState = 0;
         EMI_StartArchive();
@@ -25,7 +25,7 @@ MATCH void EMI_UpdateStream(void) {
     if ((g_EmiRingStates[D_80146488] & 0x80) == 0) {
         slot = (s8*)(head + 8);
         do {
-            ((Callback)callbacks.handlers[g_EmiRingStates[*slot] & 0x7F])();
+            ((Callback)callbacks.steps[g_EmiRingStates[*slot] & 0x7F])();
             g_EmiRingStates[*slot] = 0xFF;
             next                   = *slot + 1;
             *slot                  = next;

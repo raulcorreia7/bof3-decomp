@@ -33,10 +33,10 @@ MATCH void func_801EEC90(void) {
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEE48(void) {
-    BMagicEffectFuncs handlers;
+    BMagicEffectSteps handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Battle_ProjectRange();
         if (g_Task->param.unk_0B != 0) {

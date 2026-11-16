@@ -315,10 +315,10 @@ MATCH u32 func_801F0230(void) {
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801F0294(void) {
-    BMagicEffectFuncs handlers;
+    BMagicEffectSteps handlers;
 
     handlers = D_801EEC58;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0) {
         Area_AddGridActor();
     }
@@ -527,10 +527,10 @@ MATCH void func_801F0B44(void) {
 #include "overlays/bmagic/Effect_DrawScreenFade.h"
 
 MATCH void func_801F0DA8(void) {
-    BMagicEffectFuncs handlers;
+    BMagicEffectSteps handlers;
 
     handlers = D_801EEC94;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Area_AddGridActor();
     }
@@ -622,7 +622,7 @@ MATCH void func_801F1294(void) {
     Magic008EarlySteps handlers;
 
     handlers = D_801EECAC;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0) {
         Area_AddGridActor();
     }
@@ -668,7 +668,7 @@ MATCH void func_801F1708(void) {
     Magic008Steps handlers;
 
     handlers = D_801EECC8;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0) {
         Area_AddGridActor();
     }

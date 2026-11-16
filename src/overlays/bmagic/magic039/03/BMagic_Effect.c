@@ -65,10 +65,10 @@ MATCH s32 func_801EEF3C(void) {
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEFA8(void) {
-    BMagicEffectFuncs handlers;
+    BMagicEffectSteps handlers;
 
     handlers = D_801EEC10;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if ((g_Task->header.flags & 0x1) && g_Task->header.step != 0) {
         Effect_SetActorMatrix();
         func_801EFAA4();

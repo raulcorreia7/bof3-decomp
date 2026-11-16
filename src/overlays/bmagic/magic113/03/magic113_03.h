@@ -43,7 +43,7 @@ static inline void Effect_CountUpTimer(void) {
 #define MAGIC113_STEP_COUNT 8
 
 typedef struct Magic113Steps {
-    Callback handlers[MAGIC113_STEP_COUNT];
+    Callback steps[MAGIC113_STEP_COUNT];
 } Magic113Steps;
 
 extern Magic113Steps D_801EEC04;

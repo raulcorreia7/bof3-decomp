@@ -12,6 +12,6 @@ typedef struct Magic054Steps {
 } Magic054Steps;
 
 extern Magic054Steps     D_801EEC04;
-extern BMagicEffectFuncs D_801EEC14;
+extern BMagicEffectSteps D_801EEC14;
 
 #endif

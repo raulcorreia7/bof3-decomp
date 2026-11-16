@@ -160,8 +160,8 @@ typedef struct {
 
 /* Fixed five-entry saved-preview/result handler table at 0x801D0F6C. */
 typedef struct {
-    Callback handlers[5];
-} BattleSavedPreviewFuncs;
+    Callback modes[5];
+} BattleSavedPreviewModes;
 
 /* The panel task forwarder func_801EA1E0 calls the routine its selector names
  * with the caller's seven words. */
@@ -335,7 +335,7 @@ extern BattleEffect1Steps        D_801D0F2C;
 extern BattleEffect2Steps        D_801D0F38;
 extern BattleEffect3Steps        D_801D0F44;
 extern BattleEffect4Steps        D_801D0F58;
-extern BattleSavedPreviewFuncs   D_801D0F6C;
+extern BattleSavedPreviewModes   D_801D0F6C;
 /* D_801D0F80 */
 extern BattlePanelFuncs          g_BattlePanelFuncs;
 extern BattlePanel0States        D_801D0FA0;

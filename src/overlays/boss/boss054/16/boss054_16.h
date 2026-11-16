@@ -8,14 +8,14 @@
 #include "overlays/battle/battle.h"
 #include "battle/records.h"
 
-typedef struct Boss054Funcs {
-    Callback handlers[10];
-} Boss054Funcs;
+typedef struct Boss054Modes {
+    Callback modes[10];
+} Boss054Modes;
 
-ASSERT_SIZE(Boss054Funcs, 0x28);
-ASSERT_OFFSET(Boss054Funcs, handlers, 0x00);
+ASSERT_SIZE(Boss054Modes, 0x28);
+ASSERT_OFFSET(Boss054Modes, modes, 0x00);
 
-extern Boss054Funcs D_800C1804;
+extern Boss054Modes D_800C1804;
 
 #define BOSS054_EFFECT_STEP_COUNT 3
 

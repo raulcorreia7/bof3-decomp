@@ -175,7 +175,7 @@ typedef Pos2 TrailPoint;
  * the frame is 56 bytes where retail has 48 (func_801EEC1C in magic086). */
 #define BMAGIC_DISPATCH_STEP_HANDLERS(table, field) \
     handlers = (table);                             \
-    handlers.handlers[g_Task->field]()
+    handlers.steps[g_Task->field]()
 #define g_Task ((PartyMember*)g_Task)
 
 /* Copy the active battler's work image into a free effect slot. A statement
@@ -295,21 +295,21 @@ static inline void BMagic_AdvanceEffectStep(u8 limit) {
         }                                          \
     } while (0)
 
-typedef struct BMagicEffectFuncs {
-    Callback handlers[6];
-} BMagicEffectFuncs;
+typedef struct BMagicEffectSteps {
+    Callback steps[6];
+} BMagicEffectSteps;
 
-ASSERT_SIZE(BMagicEffectFuncs, 0x18);
-ASSERT_OFFSET(BMagicEffectFuncs, handlers, 0x00);
+ASSERT_SIZE(BMagicEffectSteps, 0x18);
+ASSERT_OFFSET(BMagicEffectSteps, steps, 0x00);
 
 /* The step handlers Effect_DrawRings runs, indexed by header.step (byte 0x02). */
-typedef struct BMagicStepHandlers {
+typedef struct BMagicSteps {
     Callback steps[3];
-} BMagicStepHandlers;
+} BMagicSteps;
 
-ASSERT_SIZE(BMagicStepHandlers, 0xC);
+ASSERT_SIZE(BMagicSteps, 0xC);
 
-extern BMagicStepHandlers BMagic_EffectSteps;
+extern BMagicSteps BMagic_EffectSteps;
 
 /* The effect work record D_801F17B4 points to: func_801F006C clears bytes 0-4,
  * func_801EF33C dispatches on mode. magic070-072 keep a pool of them, one

@@ -5,8 +5,8 @@
  */
 /* func_801518F4 */
 MATCH void Message_DispatchChoiceMode(void) {
-    Table6 handlers;
+    MessageChoiceSteps handlers;
 
     handlers = g_MessageChoiceModes;
-    handlers.handlers[g_MessageChoiceMode]();
+    handlers.steps[g_MessageChoiceMode]();
 }

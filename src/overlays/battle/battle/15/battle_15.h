@@ -161,9 +161,9 @@ typedef struct BattleTargetSelection {
     s16* record;
 } BattleTargetSelection;
 
-typedef struct BattleHandlerQuad {
-    Callback handlers[4];
-} BattleHandlerQuad;
+typedef struct BattleTaskModes {
+    Callback modes[4];
+} BattleTaskModes;
 
 /* One battle event packet (0x10 bytes) of the event table at 0x800E407C: the
  * table holds four packets per enemy kind record, at the kind record's +0x34.
@@ -1181,11 +1181,11 @@ static inline void BattleSetSelectionFlag(u32 flag) {
 
 /* Run the handler-quad row at offset with the spad step. */
 static inline void BattleRunHandlerQuad(s32 offset) {
-    BattleHandlerQuad handlers;
-    PartyMember*      work;
+    BattleTaskModes handlers;
+    PartyMember*    work;
 
-    handlers = *(BattleHandlerQuad*)((Callback*)&D_800969B8 + offset);
-    handlers.handlers[BATTLE_WORK->header.mode]();
+    handlers = *(BattleTaskModes*)((Callback*)&D_800969B8 + offset);
+    handlers.modes[BATTLE_WORK->header.mode]();
     work = (PartyMember*)g_Task;
     if ((work->header.flags != 0u) && (work->header.mode != 0u)) {
         func_800AE9C4(work->unk_04);

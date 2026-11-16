@@ -6,7 +6,7 @@
 #include "overlays/bmagic/bmagic.h"
 #include "overlays/battle/battle/15/battle_15.h"
 
-extern BMagicEffectFuncs D_801EEC04;
+extern BMagicEffectSteps D_801EEC04;
 
 extern s16 g_ScratchPadHalves;
 extern s16 D_1F800004;

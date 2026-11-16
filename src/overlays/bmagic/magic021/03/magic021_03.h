@@ -24,6 +24,6 @@ typedef struct Magic021Steps {
 
 extern Magic021Steps D_801EEC04;
 
-extern BMagicEffectFuncs D_801EEC10;
+extern BMagicEffectSteps D_801EEC10;
 
 #endif

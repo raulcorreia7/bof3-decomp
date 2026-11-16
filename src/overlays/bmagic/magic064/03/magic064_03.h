@@ -9,11 +9,11 @@
 /* The twelve step callbacks at D_801EEC10, copied to the stack and indexed by the work state byte. */
 #define BMAGIC064_STEP_COUNT 12
 
-typedef struct BMagic064Steps {
-    Callback handlers[BMAGIC064_STEP_COUNT];
-} BMagic064Steps;
+typedef struct Magic064MainSteps {
+    Callback steps[BMAGIC064_STEP_COUNT];
+} Magic064MainSteps;
 
-extern BMagic064Steps D_801EEC10;
+extern Magic064MainSteps D_801EEC10;
 
 #define MAGIC064_STEP_COUNT 4
 

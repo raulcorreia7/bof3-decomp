@@ -1,7 +1,7 @@
 /* Runs the effect step the task mode selects, then runs every effect slot in use, with g_BattleEffectBattler set to the battler of that slot. */
 /* func_801EEC28 (magic162), func_801EEC28 (magic168) */
 MATCH void func_801EEC28(void) {
-    BMagicEffectFuncs handlers;
+    BMagicEffectSteps handlers;
     PartyMember*      active;
     u8                i;
 

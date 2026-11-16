@@ -2,8 +2,8 @@
  * layers and projects the battle range. Every change must verify every member image. */
 /* func_801EF8EC (magic076), func_801EF8A4 (magic169) */
 MATCH void Effect_DrawRings(void) {
-    BMagicStepHandlers handlers = BMagic_EffectSteps;
-    s32                tpage;
+    BMagicSteps handlers = BMagic_EffectSteps;
+    s32         tpage;
 
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);

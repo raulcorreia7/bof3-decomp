@@ -20,7 +20,7 @@ typedef struct Magic151Steps {
 extern Magic151Steps D_801EEC10;
 extern Magic151Steps D_801EEC24;
 
-extern BMagicEffectFuncs D_801EEC38;
+extern BMagicEffectSteps D_801EEC38;
 void                     func_800A68A4(void);
 void                     func_801F026C(void);
 void                     func_801F0648(void);

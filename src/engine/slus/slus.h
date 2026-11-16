@@ -262,22 +262,22 @@ typedef struct SoundSequence {
     u8  pad_84[0x28]; /* +0x84 */
 } SoundSequence;
 
-/* Stack snapshots of the fixed dispatch tables the step handlers copy to the frame and index: Message_DispatchState/func_801510DC copy the eight-entry tables at g_MessageStates/D_80149A7C, func_80151538/Message_DispatchChoiceMode the six-entry tables at D_80149A9C/g_MessageChoiceModes, func_8015196C/func_80151A98 build the two-entry tables on the stack, and g_MessageSteps is the sixteen-entry handler table Message_DispatchStep copies. */
+/* Stack snapshots of the fixed dispatch tables the step handlers copy to the frame and index: Message_DispatchState/func_801510DC copy the eight-entry tables at g_MessageStateSteps/D_80149A7C, func_80151538/Message_DispatchChoiceMode the six-entry tables at D_80149A9C/g_MessageChoiceModes, func_8015196C/func_80151A98 build the two-entry tables on the stack, and g_MessageSteps is the sixteen-entry handler table Message_DispatchStep copies. */
 typedef struct {
-    Callback handlers[8];
-} Table8;
+    Callback steps[8];
+} MessageStateSteps;
 
 typedef struct {
-    Callback handlers[6];
-} Table6;
+    Callback steps[6];
+} MessageChoiceSteps;
 
 typedef struct {
-    Callback handlers[2];
-} Table2;
+    Callback steps[2];
+} ChoiceSteps;
 
 typedef struct {
-    Callback handlers[16];
-} HandlerTable;
+    Callback steps[16];
+} MessageSteps;
 
 typedef struct MenuPanelFuncs {
     Callback handlers[9];
@@ -285,23 +285,23 @@ typedef struct MenuPanelFuncs {
 
 ASSERT_SIZE(MenuPanelFuncs, 0x24);
 
-typedef struct CallbackTable3 {
-    void (*entry[3])(void);
-} CallbackTable3;
+typedef struct MenuPanelModes {
+    void (*modes[3])(void);
+} MenuPanelModes;
 
-ASSERT_SIZE(CallbackTable3, 0x0C);
+ASSERT_SIZE(MenuPanelModes, 0x0C);
 
-typedef struct CallbackTable5 {
-    void (*entry[5])(void);
-} CallbackTable5;
+typedef struct MenuPanelSteps {
+    void (*steps[5])(void);
+} MenuPanelSteps;
 
-ASSERT_SIZE(CallbackTable5, 0x14);
+ASSERT_SIZE(MenuPanelSteps, 0x14);
 
-typedef struct SystemDispatchFuncs {
-    u32 handlers[6];
-} SystemDispatchFuncs;
+typedef struct EmiRingSteps {
+    u32 steps[6];
+} EmiRingSteps;
 
-ASSERT_SIZE(SystemDispatchFuncs, 0x18);
+ASSERT_SIZE(EmiRingSteps, 0x18);
 
 typedef void (*CellFunc)(u8* record, s32 cell_x, s32 cell_y);
 
@@ -631,23 +631,23 @@ extern u8                          D_80149341;
 extern const char                  D_80149990[];
 extern const u32                   g_UiLocalModes[];
 /* D_80149A5C */
-extern const Table8                g_MessageStates;
-extern const Table8                D_80149A7C;
-extern const Table6                D_80149A9C;
+extern const MessageStateSteps     g_MessageStateSteps;
+extern const MessageStateSteps     D_80149A7C;
+extern const MessageChoiceSteps    D_80149A9C;
 /* D_80149AB4 */
-extern const Table6                g_MessageChoiceModes;
+extern const MessageChoiceSteps    g_MessageChoiceModes;
 /* The 16-entry handler table (code addresses 0x80152370..0x801526C8, the step
  * handlers that follow Message_DispatchStep): the shared step byte's indices at and
  * above 0x80 dispatch through it. */
 /* D_80149ACC */
-extern const HandlerTable          g_MessageSteps;
-extern const struct CallbackTable3 D_80149B30;
-extern const struct CallbackTable5 D_80149B3C;
-extern const struct CallbackTable5 D_80149B50;
-extern const struct CallbackTable5 D_80149B64;
+extern const MessageSteps          g_MessageSteps;
+extern const struct MenuPanelModes D_80149B30;
+extern const struct MenuPanelSteps D_80149B3C;
+extern const struct MenuPanelSteps D_80149B50;
+extern const struct MenuPanelSteps D_80149B64;
 extern const VECTOR                D_80149BF0;
 extern const u32                   g_EmiCDSteps[];
-extern const SystemDispatchFuncs   g_EmiRingSlotHandlers;
+extern const EmiRingSteps          g_EmiRingSteps;
 extern const char                  D_80149F9C[];
 extern const char                  D_80149FAC[];
 extern const u32                   D_8014AAB8[4];

@@ -44,7 +44,7 @@ typedef struct SparkleEffectSteps {
 #define MAGIC220_SHARED_STEP_COUNT 3
 
 typedef struct Magic220SharedSteps {
-    Callback handlers[MAGIC220_SHARED_STEP_COUNT];
+    Callback steps[MAGIC220_SHARED_STEP_COUNT];
 } Magic220SharedSteps;
 
 #define MAGIC010_SHARED_STEP_COUNT 4

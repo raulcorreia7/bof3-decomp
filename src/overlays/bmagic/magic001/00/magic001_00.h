@@ -14,7 +14,7 @@ void Battle_ClearCellPaletteEntry(void* record);
 #define MAGIC001_STEP_COUNT 11
 
 typedef struct Magic001Steps {
-    Callback handlers[MAGIC001_STEP_COUNT];
+    Callback steps[MAGIC001_STEP_COUNT];
 } Magic001Steps;
 
 #define MAGIC001_SECOND_STEP_COUNT 3

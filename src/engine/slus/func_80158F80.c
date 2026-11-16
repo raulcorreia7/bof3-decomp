@@ -4,8 +4,8 @@
  * the menu panel task's byte at +2.
  */
 MATCH void func_80158F80(void) {
-    struct CallbackTable3 table;
+    struct MenuPanelModes table;
 
     table = D_80149B30;
-    table.entry[g_MenuCurrentPanel->mode]();
+    table.modes[g_MenuCurrentPanel->mode]();
 }
