@@ -13,9 +13,9 @@
 
 /* The ordering-table layers a battle magic effect draws on, relative to the battlers: Battle_InitEnemy files them on
  * GFX_LAYER_BATTLE_SCENE and the party takes g_AreaDrawMode (4 in battle). A lower layer is in front. */
-#define BMAGIC_LAYER_FOREGROUND      2 /* in front of the effects on layer 3 */
-#define BMAGIC_LAYER_OVER_BATTLERS   3 /* in front of the battlers */
-#define BMAGIC_LAYER_BEHIND_BATTLERS 5 /* behind the battlers */
+#define BMAGIC_LAYER_FOREGROUND      (GFX_LAYER_BATTLE_SCENE - 2) /* in front of the effects on layer 3 */
+#define BMAGIC_LAYER_OVER_BATTLERS   (GFX_LAYER_BATTLE_SCENE - 1) /* in front of the battlers */
+#define BMAGIC_LAYER_BEHIND_BATTLERS (GFX_LAYER_BATTLE_SCENE + 1) /* behind the battlers */
 
 /* The bytes a sparkle ray reserves in its cell packet. */
 #define BMAGIC_RAY_CELL_SIZE         32
