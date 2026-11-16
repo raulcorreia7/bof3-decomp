@@ -264,31 +264,32 @@ MATCH void func_801EFE98(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 7), 2, g_Task);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EFEDC(void) {
+MATCH void func_801EFEDC(void) {
+    s16*         angle_cell;
     PartyMember* work;
-    s32          angle;
+    PartyMember* battler;
+    u8           angle;
+    s32          dy;
 
     if (--g_Task->unk_09 == 0) {
+        angle_cell          = &D_1F800004;
         angle               = g_Task->param.unk_0B & 0x1F;
-        D_1F800004          = angle << 7;
+        *angle_cell         = angle << 7;
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + ((rsin(angle << 7) * 0xB0) >> 3);
+        dy                  = (rcos(*angle_cell) * 0xB0) >> 3;
+        battler             = (PartyMember*)g_BattleEffectBattler;
         work                = g_Task;
-        work->pos.y.fixed   = g_BattleEffectBattler->pos.y.fixed + ((rcos(D_1F800004) * 0xB0) >> 3);
+        work->pos.y.fixed   = battler->pos.y.fixed + dy;
+        work->pos.z.fixed   = battler->pos.z.fixed;
         work->unk_14        = 0x40;
         work->unk_20        = -4;
         work->unk_09        = 0;
-        work->pos.z.fixed   = g_BattleEffectBattler->pos.z.fixed;
         g_Task->timer       = 0xC;
-        work                = g_Task;
-        work->unk_0C        = 1;
-        work->unk_10        = 0;
-        work->header.step += 1;
+        g_Task->unk_0C      = 1;
+        g_Task->unk_10      = 0;
+        g_Task->header.step += 1;
     }
 }
-#else
-INCLUDE_ASM(func_801EFEDC);
-#endif
 
 MATCH void func_801F0010(void) {
     s32          timer;
@@ -389,10 +390,9 @@ MATCH void func_801F01F8(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F038C(void) {
+MATCH void func_801F038C(void) {
     s16* angle;
-    u8   phase;
+    u16  phase;
     u8   count;
 
     Battle_ProjectRange();
@@ -400,26 +400,23 @@ NON_MATCHING void func_801F038C(void) {
     Effect_SetActorMatrix();
     func_801F050C();
     PopMatrix();
-    g_Task->unk_09 += g_Task->unk_0C;
     g_Task->unk_10 += 4;
+    g_Task->unk_09 += g_Task->unk_0C;
     phase                = g_Task->param.unk_0B + 2;
     g_Task->param.unk_0B = phase;
     phase &= 0x1F;
-    angle                            = &D_1F800004;
-    *angle                           = phase << 7;
-    D_1F800000.view.effect.params[0] = g_Task->timer * g_Task->unk_10 + 0xB0;
-    g_Task->pos.x.fixed              = g_BattleEffectBattler->pos.x.fixed + ((rsin(phase << 7) * D_1F800000.view.effect.params[0]) >> 3);
-    g_Task->pos.y.fixed              = g_BattleEffectBattler->pos.y.fixed + ((rcos(*angle) * D_1F800000.view.effect.params[0]) >> 3);
-    count                            = g_Task->timer + 1;
-    g_Task->timer                    = count;
+    angle               = &D_1F800004;
+    *angle              = phase << 7;
+    D_1F800000_HALF     = g_Task->timer * g_Task->unk_10 + 0xB0;
+    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + ((rsin(phase << 7) * D_1F800000_HALF) >> 3);
+    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + ((rcos(*angle) * D_1F800000_HALF) >> 3);
+    count               = g_Task->timer + 1;
+    g_Task->timer       = count;
     if (count == 0x10) {
         g_BattleEffectBattler->param.unk_0B--;
         Actor_Clear();
     }
 }
-#else
-INCLUDE_ASM(func_801F038C);
-#endif
 
 MATCH void func_801F050C(void) {
     POLY_G3* prim;

@@ -19,5 +19,5 @@ segments:
       - [0x1F74, bin, g_BMagicEffectModes]
       - [0x1F7C, bin, D_801F0B7C]
       - [0x1F90, bin, D_801F0B90]
-      - [0x1F9C, bin, D_801F0B9D]
+      - [0x1F9C, bin, D_801F0B9C]
   - [0x1FAC]
