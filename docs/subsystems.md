@@ -70,5 +70,5 @@ named, with the owner whose header declares each and how many call sites or file
 | `g_ScratchPadVectorHalves`                | Executable       | `sys/scratchpad.h`                     | 6 files, Battle magic                                                                                             |
 | `g_SceneState` members and `g_ScriptVars` | Scenario         | `scenario/state.h`                     | the scene step, state, timer and script variable bytes by member, 150 files, Area, Scenario, Boss                 |
 | Engine function prototypes                | Game, Executable | `game/functions.h`, `slus/functions.h` | 19 functions, Menu 78, Game 34, Scenario 29, Area 28, Battle 15, Executable 5, Battle magic 5, Player character 3 |
-| ----------------------------------------- | ---------- | -------------------- | ------------------------------------------------------------------------------------------------- |
-| `g_GameCellType`, `g_GameLastAreaId`      | Game       | `game/game.h`        | 72 and 13 files                                                                                   |
+| ----------------------------------------- | ----------       | --------------------                   | -------------------------------------------------------------------------------------------------                 |
+| `g_GameCellType`, `g_GameLastAreaId`      | Game             | `game/game.h`                          | 72 and 13 files                                                                                                   |
