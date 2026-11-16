@@ -55,24 +55,24 @@ extern char g_SaveCardPortLabelSecond[];
 /* The overlay's step and sub-step handler pools; the tables are views into one
  * callback run, selected by the shared menu step byte. */
 /* D_801D96DC */
-extern Callback g_MenuStatusStates[MENU_STATUS_STEP_COUNT];
+extern Callback g_MenuStatusSteps[MENU_STATUS_STEP_COUNT];
 /* D_801D96F0 */
-extern Callback g_MenuStatusStep1Funcs[MENU_STATUS_STEP1_COUNT];
+extern Callback g_MenuStatusStep1Steps[MENU_STATUS_STEP1_COUNT];
 /* D_801D96F8 */
-extern Callback g_MenuStatusStep3Funcs[MENU_STATUS_STEP3_COUNT];
+extern Callback g_MenuStatusStep3Steps[MENU_STATUS_STEP3_COUNT];
 /* D_801D9700 */
-extern Callback g_MenuStatusStep2Funcs[MENU_STATUS_STEP2_COUNT];
+extern Callback g_MenuStatusStep2Steps[MENU_STATUS_STEP2_COUNT];
 /* D_801D970C */
-extern Callback g_MenuStatusStep2Sub2Funcs[MENU_STATUS_STEP2_SUB2_COUNT];
+extern Callback g_MenuStatusStep2Sub2Steps[MENU_STATUS_STEP2_SUB2_COUNT];
 extern Callback D_801D9720[];
 extern Callback D_801D9734[];
-extern Callback g_MenuStatusTaskFuncs[MENU_STATUS_TASK_COUNT];
+extern Callback g_MenuStatusTaskSteps[MENU_STATUS_TASK_COUNT];
 /* D_801D975C */
-extern Callback g_MenuStatusTask1StateFuncs[MENU_STATUS_TASK1_STATE_COUNT];
+extern Callback g_MenuStatusTask1Steps[MENU_STATUS_TASK1_STATE_COUNT];
 /* D_801D9768 */
-extern Callback g_MenuStatusTask2StateFuncs[MENU_STATUS_TASK2_STATE_COUNT];
+extern Callback g_MenuStatusTask2Steps[MENU_STATUS_TASK2_STATE_COUNT];
 /* D_801D9774 */
-extern Callback g_MenuStatusTask3StateFuncs[MENU_STATUS_TASK3_STATE_COUNT];
+extern Callback g_MenuStatusTask3Steps[MENU_STATUS_TASK3_STATE_COUNT];
 extern u8       g_MenuCaptionRight[];
 extern u8       g_MenuClockCaption[];
 extern u8       g_MenuCommandFrame[];

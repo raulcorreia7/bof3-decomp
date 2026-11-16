@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 /* The shisu overlay entry: the shared menu step byte selects the handler. */
 MATCH void func_801D0D80(void) {
-    SYS_DISPATCH_BYTE(g_MenuStatusStates, g_MenuStep.step);
+    SYS_DISPATCH_BYTE(g_MenuStatusSteps, g_MenuStep.step);
 }
 
 MATCH void func_801D0DBC(void) {
@@ -31,7 +31,7 @@ MATCH void func_801D0DBC(void) {
 }
 
 MATCH void func_801D0E4C(void) {
-    SYS_DISPATCH_BYTE(g_MenuStatusStep1Funcs, g_MenuStep.sub_step);
+    SYS_DISPATCH_BYTE(g_MenuStatusStep1Steps, g_MenuStep.sub_step);
 }
 
 MATCH void func_801D0E88(void) {
@@ -55,7 +55,7 @@ MATCH void func_801D0EC4(void) {
 }
 
 MATCH void func_801D0F24(void) {
-    SYS_DISPATCH_BYTE(g_MenuStatusStep3Funcs, g_MenuStep.sub_step);
+    SYS_DISPATCH_BYTE(g_MenuStatusStep3Steps, g_MenuStep.sub_step);
 }
 
 MATCH void func_801D0F60(void) {
@@ -122,7 +122,7 @@ MATCH void func_801D1018(void) {
 
 MATCH void func_801D11A4(void) {
     Menu_DrawClutStrip(D_80144953);
-    g_MenuStatusStep2Funcs[g_MenuStep.sub_step]();
+    g_MenuStatusStep2Steps[g_MenuStep.sub_step]();
 }
 
 /* Reads the status item input, advances the step and places the panel task. */
@@ -194,7 +194,7 @@ INCLUDE_ASM(func_801D14C0);
 MATCH void func_801D1898(void) {
     Callback handler;
 
-    handler = g_MenuStatusStep2Sub2Funcs[g_MenuStep.state];
+    handler = g_MenuStatusStep2Sub2Steps[g_MenuStep.state];
     handler();
     func_801D2C0C();
     func_801D2DA8();

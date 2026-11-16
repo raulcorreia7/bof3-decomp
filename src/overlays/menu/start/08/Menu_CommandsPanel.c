@@ -5,7 +5,7 @@
 
 /* func_801EA0B0 */
 MATCH void Menu_CommandsPanel(void) {
-    g_MenuStartCommandsStates[g_MenuCurrentPanel->state]();
+    g_MenuStartCommandsSteps[g_MenuCurrentPanel->state]();
     /* clang-format off */
     Menu_DrawCommandRow(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y,
                         g_MenuCurrentPanel->unk_0A, g_MenuCurrentPanel->unk_0B, 0);

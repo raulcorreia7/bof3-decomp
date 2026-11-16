@@ -349,13 +349,13 @@ extern u8             s_CampMenuPanelIds[8];
 #define MENU_START_PANEL20_STATE_COUNT 3
 
 /* D_801EC35C */
-extern Callback g_MenuStartStates[MENU_START_STEP_COUNT];
+extern Callback g_MenuStartSteps[MENU_START_STEP_COUNT];
 extern Callback D_801EC380[];
 extern u8       D_801EC38C[];
 /* D_801EC394 */
-extern Callback g_MenuStartStep6Funcs[MENU_START_STEP6_COUNT];
+extern Callback g_MenuStartStep6Steps[MENU_START_STEP6_COUNT];
 /* D_801EC3A8 */
-extern Callback g_MenuStartStep2Funcs[MENU_START_STEP2_COUNT];
+extern Callback g_MenuStartStep2Steps[MENU_START_STEP2_COUNT];
 extern Callback D_801EC3D4[];
 extern Callback D_801EC400[7];
 extern Callback D_801EC41C[];
@@ -368,9 +368,9 @@ extern Callback D_801EC498[];
 extern Callback D_801EC4B0[5];
 extern Callback D_801EC4C4[];
 /* D_801EC518 */
-extern Callback g_MenuStartStep5Funcs[MENU_START_STEP5_COUNT];
+extern Callback g_MenuStartStep5Steps[MENU_START_STEP5_COUNT];
 /* D_801EC530 */
-extern Callback g_MenuStartStep5Sub2Funcs[MENU_START_STEP5_SUB2_COUNT];
+extern Callback g_MenuStartStep5Sub2Steps[MENU_START_STEP5_SUB2_COUNT];
 extern Callback D_801EC53C[];
 extern Callback D_801EC578[];
 extern Callback D_801EC58C[];
@@ -414,25 +414,25 @@ extern u8       g_SaveRecordTypeCommands[92];
 /* D_801ED330 */
 extern Callback g_MenuStartPanelModes[MENU_START_MODE_COUNT];
 /* D_801ED384 */
-extern Callback g_MenuStartCharacterStates[MENU_START_PANEL0_STATE_COUNT];
+extern Callback g_MenuStartCharacterSteps[MENU_START_PANEL0_STATE_COUNT];
 /* D_801ED3B0 */
-extern Callback g_MenuStartZennyStates[MENU_START_PANEL1_STATE_COUNT];
+extern Callback g_MenuStartZennySteps[MENU_START_PANEL1_STATE_COUNT];
 /* D_801ED3BC */
-extern Callback g_MenuStartPlayTimeStates[MENU_START_PANEL2_STATE_COUNT];
+extern Callback g_MenuStartPlayTimeSteps[MENU_START_PANEL2_STATE_COUNT];
 /* D_801ED3C8 */
-extern Callback g_MenuStartCampIconsStates[MENU_START_PANEL3_STATE_COUNT];
+extern Callback g_MenuStartCampIconsSteps[MENU_START_PANEL3_STATE_COUNT];
 /* D_801ED3D4 */
-extern Callback g_MenuStartTitleStates[MENU_START_PANEL4_STATE_COUNT];
+extern Callback g_MenuStartTitleSteps[MENU_START_PANEL4_STATE_COUNT];
 /* D_801ED3E0 */
-extern Callback g_MenuStartStatsStates[MENU_START_PANEL5_STATE_COUNT];
+extern Callback g_MenuStartStatsSteps[MENU_START_PANEL5_STATE_COUNT];
 /* D_801ED3FC */
-extern Callback g_MenuStartEquipmentStates[MENU_START_PANEL6_STATE_COUNT];
+extern Callback g_MenuStartEquipmentSteps[MENU_START_PANEL6_STATE_COUNT];
 /* D_801ED408 */
-extern Callback g_MenuStartPanel7StateFuncs[MENU_START_PANEL7_STATE_COUNT];
+extern Callback g_MenuStartPanel7Steps[MENU_START_PANEL7_STATE_COUNT];
 /* D_801ED414 */
-extern Callback g_MenuStartPanel8StateFuncs[MENU_START_PANEL8_STATE_COUNT];
+extern Callback g_MenuStartPanel8Steps[MENU_START_PANEL8_STATE_COUNT];
 /* D_801ED420 */
-extern Callback g_MenuStartMessageStates[MENU_START_PANEL9_STATE_COUNT];
+extern Callback g_MenuStartMessageSteps[MENU_START_PANEL9_STATE_COUNT];
 
 typedef struct CursorFrameSize {
     u16 width;
@@ -443,26 +443,26 @@ ASSERT_SIZE(CursorFrameSize, 4);
 
 extern CursorFrameSize g_MenuStartCursorFrames[4];
 /* D_801ED43C */
-extern Callback        g_MenuStartPanel11StateFuncs[MENU_START_PANEL11_STATE_COUNT];
+extern Callback        g_MenuStartPanel11Steps[MENU_START_PANEL11_STATE_COUNT];
 /* D_801ED448 */
-extern Callback        g_MenuStartInventoryStates[MENU_START_PANEL12_STATE_COUNT];
+extern Callback        g_MenuStartInventorySteps[MENU_START_PANEL12_STATE_COUNT];
 /* D_801ED45C */
-extern Callback        g_MenuStartCommandsStates[MENU_START_PANEL13_STATE_COUNT];
+extern Callback        g_MenuStartCommandsSteps[MENU_START_PANEL13_STATE_COUNT];
 extern u8              D_801ED468[];
 extern u8              D_801ED48C[];
 extern u8              D_801ED498[];
 extern u32             D_801ED534[];
 extern u8              D_801ED560[][6];
 /* D_801ED58C */
-extern Callback        g_MenuStartEquipCompareStates[MENU_START_PANEL16_STATE_COUNT];
+extern Callback        g_MenuStartEquipCompareSteps[MENU_START_PANEL16_STATE_COUNT];
 /* D_801ED5A0 */
-extern Callback        g_MenuStartAbilitiesStates[MENU_START_PANEL17_STATE_COUNT];
+extern Callback        g_MenuStartAbilitiesSteps[MENU_START_PANEL17_STATE_COUNT];
 /* D_801ED5B4 */
-extern Callback        g_MenuStartPanel18StateFuncs[MENU_START_PANEL18_STATE_COUNT];
+extern Callback        g_MenuStartPanel18Steps[MENU_START_PANEL18_STATE_COUNT];
 /* D_801ED5C8 */
-extern Callback        g_MenuStartPanel19StateFuncs[MENU_START_PANEL19_STATE_COUNT];
+extern Callback        g_MenuStartPanel19Steps[MENU_START_PANEL19_STATE_COUNT];
 /* D_801ED5E4 */
-extern Callback        g_MenuStartPanel20StateFuncs[MENU_START_PANEL20_STATE_COUNT];
+extern Callback        g_MenuStartPanel20Steps[MENU_START_PANEL20_STATE_COUNT];
 extern u8              s_PartyCharacterIds[3];
 extern u8              D_801ED613[];
 extern s8              D_801ED618;
@@ -510,8 +510,8 @@ extern volatile u8     g_SndMono;
 extern u8              s_SkillOrderCursors[4][4];
 extern u8              s_SkillOrderGroups[4][6];
 extern u8              s_SkillOrderKinds[3][6];
-extern Callback        g_MenuCampSubFuncs[5];
-extern Callback        g_MenuCampSubstates[5];
+extern Callback        g_MenuCampSubSteps[5];
+extern Callback        g_MenuCampSteps[5];
 
 /* The name entry command labels, the grid's dot string and the control window's sprite table. */
 /* D_801ED1B8 */
