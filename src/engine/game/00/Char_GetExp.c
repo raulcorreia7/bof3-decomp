@@ -55,20 +55,20 @@ MATCH void Char_GetExp(s32 char_id) {
         if (value >= 1000) {
             g_Characters[(u8)char_id].base.defense = 999;
         }
-        work = (g_LevelGrowth[(u8)char_id][level].agility_intellect >> 4) + ((s8)g_Characters[(u8)char_id].level_up_modifiers[4]);
+        work = (g_LevelGrowth[(u8)char_id][level].agility_intelligence >> 4) + ((s8)g_Characters[(u8)char_id].level_up_modifiers[4]);
         CLAMP_MIN(work, 0);
         value                                  = g_Characters[(u8)char_id].base.agility + work;
         g_Characters[(u8)char_id].base.agility = value;
         if (value >= 1000) {
             g_Characters[(u8)char_id].base.agility = 999;
         }
-        tmp  = g_LevelGrowth[(u8)char_id][level].agility_intellect & 0xF;
+        tmp  = g_LevelGrowth[(u8)char_id][level].agility_intelligence & 0xF;
         work = tmp + ((s8)g_Characters[(u8)char_id].level_up_modifiers[5]);
         CLAMP_MIN(work, 0);
-        value                                    = g_Characters[(u8)char_id].base.intellect + work;
-        g_Characters[(u8)char_id].base.intellect = value;
+        value                                       = g_Characters[(u8)char_id].base.intelligence + work;
+        g_Characters[(u8)char_id].base.intelligence = value;
         if (value >= 1000) {
-            g_Characters[(u8)char_id].base.intellect = 999;
+            g_Characters[(u8)char_id].base.intelligence = 999;
         }
         Char_AddAbility(g_LevelGrowth[(u8)char_id][level].ability, (u8)char_id, 0, 0);
         Char_AddAbility(g_LevelGrowth[(u8)char_id][level].extra_ability, (u8)char_id, 0, 0);

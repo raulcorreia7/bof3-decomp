@@ -9,7 +9,7 @@
 
 /* applies the formation's stat changes to the party during the selection phase.
  * Char_AddStat moves a 0..999 stat by a delta; by formation (1=attack, 2=defense, 3=chain, 4=magic) the
- * base power, defence, reprisal chance, agility or intellect of the party rows is eased.
+ * base power, defence, reprisal chance, agility or intelligence of the party rows is eased.
  */
 /* func_800AAA74 */
 MATCH void Battle_ApplyFormationStats(void) {
@@ -51,9 +51,9 @@ MATCH void Battle_ApplyFormationStats(void) {
             }
             break;
         case PARTY_FORMATION_MAGIC:
-            Char_AddStat(&g_Game.members[2].chr.base.intellect, (g_Game.members[2].chr.base.intellect >> 1u));
-            Char_AddStat(&g_Game.members[0].chr.base.intellect, -((g_Game.members[0].chr.base.intellect >> 2u)));
-            Char_AddStat(&g_Game.members[1].chr.base.intellect, -((g_Game.members[1].chr.base.intellect >> 2u)));
+            Char_AddStat(&g_Game.members[2].chr.base.intelligence, (g_Game.members[2].chr.base.intelligence >> 1u));
+            Char_AddStat(&g_Game.members[0].chr.base.intelligence, -((g_Game.members[0].chr.base.intelligence >> 2u)));
+            Char_AddStat(&g_Game.members[1].chr.base.intelligence, -((g_Game.members[1].chr.base.intelligence >> 2u)));
             break;
     }
 }

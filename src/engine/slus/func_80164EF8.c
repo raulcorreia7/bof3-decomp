@@ -24,11 +24,11 @@ MATCH void func_80164EF8(s32 index, u8* patch, u8* flags, u16* values) {
     end    = record + 0x28;
     org[0] = &((Character*)src)->stats.power;
     org[1] = &((Character*)src)->stats.defense;
-    org[2] = &((Character*)src)->stats.intellect;
+    org[2] = &((Character*)src)->stats.intelligence;
     org[3] = &((Character*)src)->stats.agility;
     loc[0] = &copy.stats.power;
     loc[1] = &copy.stats.defense;
-    loc[2] = &copy.stats.intellect;
+    loc[2] = &copy.stats.intelligence;
     loc[3] = &copy.stats.agility;
     do {
         *(Quad*)dst = *(Quad*)src;

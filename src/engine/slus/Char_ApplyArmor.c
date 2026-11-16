@@ -41,7 +41,7 @@ MATCH void Char_ApplyArmor(Character* character) {
                 Char_AddResistance(&stats->resistances[RES_INDEX_FROST], 2);
                 break;
             case ARMOR_SAGES_FROCK:
-                Char_AddStat(&stats->intellect, 5);
+                Char_AddStat(&stats->intelligence, 5);
                 break;
             case ARMOR_HOLY_ROBE:
             case ARMOR_DIANAS_DRESS:
@@ -88,7 +88,7 @@ MATCH void Char_ApplyArmor(Character* character) {
                 break;
             case ARMOR_MIND_SHIELD:
                 Char_AddResistance(&stats->resistances[RES_INDEX_PSIONIC], 2);
-                Char_AddStat(&stats->intellect, 5);
+                Char_AddStat(&stats->intelligence, 5);
                 break;
             case ARMOR_DRAGON_ARMOR:
             case ARMOR_DRAGON_HELM:

@@ -32,7 +32,7 @@ u8 D_801D4020[MASTER_MENU_SPRITE_0C8_SIZE] = {
 /* Panel stat labels. */
 u8 g_MenuLabelPower[MASTER_MENU_LABEL_SIZE]      = "Pwr";
 u8 g_MenuLabelDefense[MASTER_MENU_LABEL_SIZE]      = "Def";
-u8 g_MenuLabelIntellect[MASTER_MENU_LABEL_SIZE]      = "Int";
+u8 g_MenuLabelIntelligence[MASTER_MENU_LABEL_SIZE]      = "Int";
 u8 g_MenuLabelAgility[MASTER_MENU_LABEL_SIZE]      = "Agl";
 char g_MenuLabelPoison[MASTER_MENU_LABEL_LONG_SIZE] = "Pois";
 char g_MenuLabelConfusion[MASTER_MENU_LABEL_LONG_SIZE] = "Conf";
@@ -86,7 +86,7 @@ MasterSkill g_MenuMasterSkills[MASTER_COUNT][MASTER_SKILL_COUNT] = {
     /* MASTER_MERYLEEP */ {{2, ABILITY_CHARM}, {5, ABILITY_SHADOWWALK}, {8, ABILITY_WAR_SHOUT}, MASTER_SKILL_NONE, MASTER_SKILL_NONE, MASTER_SKILL_NONE},
 };
 
-/* Master stat bonuses: hp, ap, power, defense, agility, intellect. */
+/* Master stat bonuses: hp, ap, power, defense, agility, intelligence. */
 // clang-format off
 MasterStats g_MenuMasterStats[MASTER_COUNT] = {
     /* MASTER_BUNYAN */ {2, -2, 2, 1, 0, -3},

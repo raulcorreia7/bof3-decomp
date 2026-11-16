@@ -30,7 +30,7 @@ MATCH void Battle_LoadEnemyBattler(u8 slot, u8 enemy_index) {
     g_BattleEnemyBattlers[slot].base.power                                   = ENCOUNTER_ENEMIES[enemy_index].power;
     g_BattleEnemyBattlers[slot].base.defense                                 = ENCOUNTER_ENEMIES[enemy_index].defense;
     g_BattleEnemyBattlers[slot].base.agility                                 = ENCOUNTER_ENEMIES[enemy_index].agility;
-    g_BattleEnemyBattlers[slot].base.intellect                               = ENCOUNTER_ENEMIES[enemy_index].intellect;
+    g_BattleEnemyBattlers[slot].base.intelligence                            = ENCOUNTER_ENEMIES[enemy_index].intelligence;
     g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_FIRE]             = ENCOUNTER_ENEMIES[enemy_index].resistances[RES_INDEX_FIRE];
     g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_FROST]            = ENCOUNTER_ENEMIES[enemy_index].resistances[RES_INDEX_FROST];
     g_BattleEnemyBattlers[slot].base.resistances[RES_INDEX_ELECTRIC]         = ENCOUNTER_ENEMIES[enemy_index].resistances[RES_INDEX_ELECTRIC];

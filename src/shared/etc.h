@@ -86,7 +86,7 @@ extern u8          g_MenuLabelPower[4];
 /* D_801EC944 */
 extern u8          g_MenuLabelDefense[4];
 /* D_801EC948 */
-extern u8          g_MenuLabelIntellect[4];
+extern u8          g_MenuLabelIntelligence[4];
 
 /* D_801E5A24 (shop), D_801ECB40 (start) */
 extern UvRect      g_MenuClutStripCells[];

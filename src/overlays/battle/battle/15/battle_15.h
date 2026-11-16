@@ -121,7 +121,7 @@ typedef struct BattleStatDisplayTemplate {
     s16 power;          /* 0x02 */
     s16 defense;        /* 0x04 */
     s16 agility;        /* 0x06 */
-    s16 intellect;      /* 0x08 */
+    s16 intelligence;   /* 0x08 */
     u8  resistances[9]; /* 0x0A */
     u8  pad_13[5];      /* 0x13 */
 } BattleStatDisplayTemplate;

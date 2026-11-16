@@ -20,8 +20,8 @@
 #define CHARACTER_BLOCK         ((Char_Block*)&g_WindowStyle)
 
 /* Char_GetExp applies the six stat gains and learns both abilities. */
-#define LEVEL_OBJECT(exp, hp, ap, power, defense, agility, intellect, ability, extra_ability)                   \
-    {(exp), (hp), (ap), ((power) << 4) | (defense), ((agility) << 4) | (intellect), (ability), (extra_ability)}
+#define LEVEL_OBJECT(exp, hp, ap, power, defense, agility, intelligence, ability, extra_ability)                   \
+    {(exp), (hp), (ap), ((power) << 4) | (defense), ((agility) << 4) | (intelligence), (ability), (extra_ability)}
 
 /* The character sprites container loaded at 0x8003B800 (PLxxx archives;
  * @source: wiki:formats/character): a table of section offsets relative to the container.
@@ -70,10 +70,10 @@ typedef enum EquipSlot {
 
 /* The stats Char_PreviewEquip compares, in its order (not the order of Stats). */
 typedef enum EquipPreviewStat {
-    EQUIP_PREVIEW_POWER     = 0,
-    EQUIP_PREVIEW_DEFENSE   = 1,
-    EQUIP_PREVIEW_INTELLECT = 2,
-    EQUIP_PREVIEW_AGILITY   = 3,
+    EQUIP_PREVIEW_POWER        = 0,
+    EQUIP_PREVIEW_DEFENSE      = 1,
+    EQUIP_PREVIEW_INTELLIGENCE = 2,
+    EQUIP_PREVIEW_AGILITY      = 3,
 } EquipPreviewStat;
 
 #define EQUIP_PREVIEW_STAT_COUNT 4
@@ -187,7 +187,7 @@ typedef struct Stats {
     u16 power;
     u16 defense;
     u16 agility;
-    u16 intellect;
+    u16 intelligence;
     u16 unk_0C;
     u8  willpower;
     u8  resistances[RES_INDEX_COUNT];
@@ -278,7 +278,7 @@ typedef struct MasterStats {
     s8 power_bonus;
     s8 defense_bonus;
     s8 agility_bonus;
-    s8 intellect_bonus;
+    s8 intelligence_bonus;
 } MasterStats;
 
 ASSERT_SIZE(MasterStats, MASTER_STATS_STRIDE);
@@ -288,7 +288,7 @@ typedef struct LevelGrowth {
     u8  hp;
     u8  ap;
     u8  power_defense;
-    u8  agility_intellect;
+    u8  agility_intelligence;
     u8  ability;
     u8  extra_ability; /* Char_GetExp learns both ability bytes through Char_AddAbility */
 } LevelGrowth;
@@ -298,7 +298,7 @@ ASSERT_OFFSET(LevelGrowth, exp, 0x00);
 ASSERT_OFFSET(LevelGrowth, hp, 0x02);
 ASSERT_OFFSET(LevelGrowth, ap, 0x03);
 ASSERT_OFFSET(LevelGrowth, power_defense, 0x04);
-ASSERT_OFFSET(LevelGrowth, agility_intellect, 0x05);
+ASSERT_OFFSET(LevelGrowth, agility_intelligence, 0x05);
 ASSERT_OFFSET(LevelGrowth, ability, 0x06);
 ASSERT_OFFSET(LevelGrowth, extra_ability, 0x07);
 

@@ -58,12 +58,12 @@ MATCH void Battle_ScaleEnemyStat(void* battler, s32 rate_type, s32 rate_percent)
             enemy->base.agility = 0x3E7U;
             return;
         case 5:
-            value = enemy->base.intellect * (scale = percent * 100) / 1000;
+            value = enemy->base.intelligence * (scale = percent * 100) / 1000;
             if (value < 0x3E8U) {
-                enemy->base.intellect = value;
+                enemy->base.intelligence = value;
                 return;
             }
-            enemy->base.intellect = 0x3E7U;
+            enemy->base.intelligence = 0x3E7U;
             return;
         case 6:
             value = enemy->level * percent * (scale = percent * 100) / 1000;

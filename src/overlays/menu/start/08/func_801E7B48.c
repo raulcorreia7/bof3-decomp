@@ -18,7 +18,7 @@ MATCH s32 func_801E7B48(s32 caster_index, s32 target_index, s32 use_battle_recor
             break;
         }
         i++;
-        found |= Char_RestoreHP(g_Game.members[index].character_index, ((g_Characters[caster_index & BYTE_MASK].stats.intellect + 0x64) * 0x78 / 100) & HALF_MASK, use_battle_copy & BYTE_MASK);
+        found |= Char_RestoreHP(g_Game.members[index].character_index, ((g_Characters[caster_index & BYTE_MASK].stats.intelligence + 0x64) * 0x78 / 100) & HALF_MASK, use_battle_copy & BYTE_MASK);
     }
     result = 4;
     if (found & BYTE_MASK) {

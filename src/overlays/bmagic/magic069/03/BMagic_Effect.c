@@ -405,7 +405,7 @@ MATCH void func_801F0104(void) {
 }
 
 /* Spawn a piece on every selectable battler other than the actor and the target that is
- * confused, charging or under 2 intellect, counting the pieces in the effect battler ticker. */
+ * confused, charging or under 2 intelligence, counting the pieces in the effect battler ticker. */
 MATCH void func_801F0274(void) {
     s32          i;
     s32          count;
@@ -416,7 +416,8 @@ MATCH void func_801F0274(void) {
     for (i = 0; i < 8; i++) {
         if (Battle_SlotIsBlocked((u8)(i + BATTLE_PARTY_CHARACTERS_COUNT)) == 0 && g_Battle.active_battler != i + BATTLE_PARTY_CHARACTERS_COUNT &&
             g_Battle.target_selector != i + BATTLE_PARTY_CHARACTERS_COUNT) {
-            if (g_BattleEnemyBattlers[i].stats.intellect < 2 || (g_BattleEnemyBattlers[i].status & STATUS_CONFUSED) || (g_BattleEnemyBattlers[i].turn.action_flags.value & COMBATANT_FLAG_CHARGING)) {
+            if (g_BattleEnemyBattlers[i].stats.intelligence < 2 || (g_BattleEnemyBattlers[i].status & STATUS_CONFUSED) ||
+                (g_BattleEnemyBattlers[i].turn.action_flags.value & COMBATANT_FLAG_CHARGING)) {
                 slot                               = Battle_AllocEffect(1, 57) & BYTE_MASK;
                 work                               = g_BattleEffectBattler;
                 g_BattleEffects[slot].header.mode  = 2;
@@ -430,7 +431,7 @@ MATCH void func_801F0274(void) {
     }
     for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         if (Battle_SlotIsBlocked((u8)i) == 0 && g_Battle.active_battler != i && g_Battle.target_selector != i) {
-            if (g_Game.members[i].chr.stats.intellect < 2 || (g_Game.members[i].chr.status & STATUS_CONFUSED) || (g_Game.members[i].u.turn.action_flags.value & COMBATANT_FLAG_CHARGING) ||
+            if (g_Game.members[i].chr.stats.intelligence < 2 || (g_Game.members[i].chr.status & STATUS_CONFUSED) || (g_Game.members[i].u.turn.action_flags.value & COMBATANT_FLAG_CHARGING) ||
                 (g_Game.members[i].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM_QUEUED)) {
                 slot                               = Battle_AllocEffect(1, 57) & BYTE_MASK;
                 work                               = g_BattleEffectBattler;

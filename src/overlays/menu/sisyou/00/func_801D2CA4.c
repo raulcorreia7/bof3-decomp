@@ -29,7 +29,7 @@ MATCH void func_801D2CA4(void) {
         g_Characters[g_Game.members[g_MenuMasterCursor].character_index].level_up_modifiers[2] = g_MenuMasterStats[*edp].power_bonus;
         g_Characters[g_Game.members[g_MenuMasterCursor].character_index].level_up_modifiers[3] = g_MenuMasterStats[*edp].defense_bonus;
         g_Characters[g_Game.members[g_MenuMasterCursor].character_index].level_up_modifiers[4] = g_MenuMasterStats[*edp].agility_bonus;
-        g_Characters[g_Game.members[g_MenuMasterCursor].character_index].level_up_modifiers[5] = g_MenuMasterStats[*edp].intellect_bonus;
+        g_Characters[g_Game.members[g_MenuMasterCursor].character_index].level_up_modifiers[5] = g_MenuMasterStats[*edp].intelligence_bonus;
         MESSAGE_START_WAIT((s16)(g_MenuMasterMessageIds[*edp] + MASTER_MESSAGE_ENROLLED));
         g_MenuMasterSubStep += 1;
     }

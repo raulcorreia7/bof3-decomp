@@ -35,7 +35,7 @@ MATCH void Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 item_ki
     UI_DrawWindow((x + MENU_EQUIP_STAT_INSET) & HALF_MASK, (y + MENU_EQUIP_STAT_INSET) & HALF_MASK, MENU_EQUIP_STAT_WINDOW_WIDTH, MENU_EQUIP_STAT_WINDOW_HEIGHT, shaded, g_WindowStyle);
     if (shaded == 0) {
         Char_PreviewEquip(character_index, EQUIP_SLOT_OF_TYPE(item_kind), item_id, flags, values);
-        /* The agility row takes the place of the intellect entry. */
+        /* The agility row takes the place of the intelligence entry. */
         values[EQUIP_STAT_ROW_AGILITY] = values[EQUIP_PREVIEW_AGILITY];
         flags[EQUIP_STAT_ROW_AGILITY]  = flags[EQUIP_PREVIEW_AGILITY];
         for (i = 0; i < MENU_EQUIP_STAT_ROWS; i++) {

@@ -431,7 +431,7 @@ typedef struct EnemyBattler {
     u8          unk_F1;
     u8          pad_F2[2];
     BattleTurn  turn;                                          /* +0xF4 the action the enemy has queued and its outcome */
-    s8          stat_multipliers[ENEMY_STAT_MULTIPLIER_COUNT]; /* +0x108 the first four modify power, defense, agility and intellect */
+    s8          stat_multipliers[ENEMY_STAT_MULTIPLIER_COUNT]; /* +0x108 the first four modify power, defense, agility and intelligence */
     u8          pad_110[2];
     u8          unk_112;
     u8          unk_113;

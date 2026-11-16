@@ -19,10 +19,10 @@ MATCH void func_8009F010(void) {
 
     index = LOBU(g_Battle.active_battler);
     if (index < 3) {
-        value = g_Game.members[index].chr.stats.intellect;
+        value = g_Game.members[index].chr.stats.intelligence;
     } else {
         enemy_index = index - 3;
-        value       = g_BattleEnemyBattlers[enemy_index].stats.intellect;
+        value       = g_BattleEnemyBattlers[enemy_index].stats.intelligence;
     }
     D_801EC30C     = value;
     battler_index  = g_BattleActiveBattler;
