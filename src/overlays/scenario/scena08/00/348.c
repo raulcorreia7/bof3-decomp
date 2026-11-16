@@ -699,8 +699,10 @@ MATCH void func_801F8D4C(FallingSpark* spark) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F8D98(void* table) {
+/* Link directions follow the nodes; the shifted offset keeps the chain pointer first in the add. */
+#define CHAIN_DIR(chain, i) (*(u16*)((u8*)(chain) + ((i) << 1) + sizeof((chain)->node)))
+
+MATCH void func_801F8D98(void* table) {
     Chain* chain;
     s8     i;
     s8     j;
@@ -727,40 +729,37 @@ NON_MATCHING void func_801F8D98(void* table) {
         scale[0] = chain->node[i].screen[0] - chain->node[i + 1].screen[0];
         scale[1] = chain->node[i].screen[1] - chain->node[i + 1].screen[1];
         if ((s16)scale[0] != 0 || (s16)scale[1] != 0) {
-            chain->dir[i] = ratan2((s16)scale[1], (s16)scale[0]);
+            CHAIN_DIR(chain, i) = ratan2((s16)scale[1], (s16)scale[0]);
         } else {
-            chain->dir[i] = 0x1000;
+            CHAIN_DIR(chain, i) = 0x1000;
         }
     }
     for (i = 0; i < 31; i++) {
-        if (chain->dir[i] != 0x1000) {
+        if (CHAIN_DIR(chain, i) != 0x1000) {
             continue;
         }
         for (j = i + 1; j < 31; j++) {
-            if (chain->dir[j] != 0x1000) {
-                chain->dir[i] = chain->dir[j];
+            if (CHAIN_DIR(chain, j) != 0x1000) {
+                CHAIN_DIR(chain, i) = CHAIN_DIR(chain, j);
                 goto next;
             }
         }
         for (j = 0; j < i; j++) {
-            if (chain->dir[j] != 0x1000) {
-                chain->dir[i] = chain->dir[j];
+            if (CHAIN_DIR(chain, j) != 0x1000) {
+                CHAIN_DIR(chain, i) = CHAIN_DIR(chain, j);
                 goto next;
             }
         }
-        chain->dir[j] = 0;
+        CHAIN_DIR(chain, j) = 0;
     next:;
     }
-    chain->node[0].angle = chain->dir[0];
+    chain->node[0].angle = CHAIN_DIR(chain, 0);
     for (i = 1; i < 31; i++) {
         prev                 = i - 1;
-        chain->node[i].angle = MATH_AverageAngle(chain->dir[prev], chain->dir[i]);
+        chain->node[i].angle = MATH_AverageAngle(CHAIN_DIR(chain, prev), CHAIN_DIR(chain, i));
     }
-    chain->node[31].angle = chain->dir[30];
+    chain->node[31].angle = CHAIN_DIR(chain, 30);
 }
-#else
-INCLUDE_ASM(func_801F8D98);
-#endif
 
 INCLUDE_ASM(func_801F90C8);
 
@@ -999,7 +998,7 @@ NON_MATCHING void func_801F9F8C(WorldPos* pos, s32 unused, s32 jitter, s32 layer
     s32      depth;
     s32      root;
 
-    FAKE_STACK_PADS(u8, 0x28); /* FAKE: retail reserves 40 unused stack bytes. */
+    FAKE_STACK_PADS(u8, 0x20); /* FAKE: retail reserves unused stack bytes. */
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 0x3C0, 0x100) & 0xFFFF, 0);
     Area_AddCellPrim(pos->x.fixed, pos->y.fixed, (s8)layer, 12);
@@ -1009,27 +1008,18 @@ NON_MATCHING void func_801F9F8C(WorldPos* pos, s32 unused, s32 jitter, s32 layer
     Game_ProjectWorldPoint(pos, &size, &scale);
     angle = rand() & 0xFFF;
     depth = layer;
-    i     = -scale.vx;
-    if (scale.vx >= -scale.vx) {
-        do {
-            s32 offset;
-
-            root = SquareRoot0((scale.vx * scale.vx) - (i * i));
-            line = (LINE_F2*)g_GfxPrimCursor;
-            SetLineF2(line);
-            SetSemiTrans(line, 1);
-            offset   = (rsin((u16)angle) * 16) >> 12;
-            line->x0 = screen.vx + offset + jitter - root;
-            offset   = (rsin((u16)angle) * 16) >> 12;
-            line->x1 = screen.vx + offset + jitter + root;
-            line->y0 = screen.vy + i;
-            line->y1 = screen.vy + i;
-            setRGB0(line, 0, 0, 0);
-            Area_AddCellPrim(pos->x.fixed, pos->y.fixed, (s8)depth, sizeof(LINE_F2));
-            jitter = -jitter;
-            angle += rand() & 0xFF;
-            i++;
-        } while (i <= scale.vx);
+    for (i = -scale.vx; i <= scale.vx; i++) {
+        root = SquareRoot0((scale.vx * scale.vx) - (i * i));
+        line = (LINE_F2*)g_GfxPrimCursor;
+        SetLineF2(line);
+        SetSemiTrans(line, 1);
+        line->x0 = jitter + (screen.vx + ((rsin((u16)angle) * 16) >> 12)) - root;
+        line->x1 = root + (jitter + (screen.vx + ((rsin((u16)angle) * 16) >> 12)));
+        line->y0 = line->y1 = screen.vy + i;
+        setRGB0(line, 0, 0, 0);
+        Area_AddCellPrim(pos->x.fixed, pos->y.fixed, (s8)depth, sizeof(LINE_F2));
+        jitter = -jitter;
+        angle += rand() & 0xFF;
     }
 }
 #else
