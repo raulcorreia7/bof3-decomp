@@ -16,10 +16,10 @@ MATCH s32 func_801F2EF0(void) {
     do {
         if (spark->active != 0) {
             D_801F5310++;
-            step          = spark->unk_14 + 0x20000;
-            spark->unk_14 = step;
+            step          = spark->z_step + 0x20000;
+            spark->z_step = step;
             spark->z += step;
-            spark->unk_3 ^= 1;
+            spark->blink ^= 1;
             func_801F2DB8(spark);
             life        = spark->life - 1;
             spark->life = life;

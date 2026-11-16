@@ -6,10 +6,7 @@
 
 #include "overlays/area/world02.h"
 #include "area/spad.h"
-
-extern SVECTOR D_1F800014[];
-extern s16     D_1F800016;
-extern s16     D_1F800018;
+#include "sys/scratchpad.h"
 
 extern u8 D_801F3930[];
 extern u8 D_801F3944[];
