@@ -11,49 +11,41 @@
  * payload. Measured over all 880 US archives: @source: wiki:formats/emi. */
 
 /* Container layout, measured over all 880 US Breath of Fire III (USA) archives (@source: wiki:formats/emi#padding). */
-#define EMI_SECTOR_SIZE             0x800 /* payload alignment; also the first payload offset */
-#define EMI_STREAM_TIMEOUT_FRAMES   301   /* frames without progress before a read restarts */
-#define EMI_DATA_OFFSET             0x800u
-#define EMI_MAGIC_OFFSET            0x08 /* archive header magic offset, before the TOC at 0x10 */
-#define EMI_MAGIC_SIZE              8    /* archive header magic size; see EMI_MAGIC_STR */
-#define EMI_MAGIC_STR               "MATH_TBL"
-#define EMI_ARCHIVE_HEADER_SIZE     0x10
-#define EMI_TOC_ENTRY_SIZE          0x10   /* TOC row size; the header is 0x10 + entry_count * 0x10 bytes */
-#define EMI_TOC_ENTRY_PAD           0x2e2e /* fill of the TOC entry u16 at 0x0e */
-#define EMI_HEADER_FILL             0x2e   /* fill from the TOC end up to EMI_SECTOR_SIZE */
-#define EMI_PAYLOAD_FILL            0x5f   /* fill from a payload end to the next EMI_SECTOR_SIZE boundary */
+#define EMI_SECTOR_SIZE           0x800 /* payload alignment; also the first payload offset */
+#define EMI_STREAM_TIMEOUT_FRAMES 301   /* frames without progress before a read restarts */
+#define EMI_DATA_OFFSET           0x800u
+#define EMI_MAGIC_OFFSET          0x08 /* archive header magic offset, before the TOC at 0x10 */
+#define EMI_MAGIC_SIZE            8    /* archive header magic size; see EMI_MAGIC_STR */
+#define EMI_MAGIC_STR             "MATH_TBL"
+#define EMI_ARCHIVE_HEADER_SIZE   0x10
+#define EMI_TOC_ENTRY_SIZE        0x10   /* TOC row size; the header is 0x10 + entry_count * 0x10 bytes */
+#define EMI_TOC_ENTRY_PAD         0x2e2e /* fill of the TOC entry u16 at 0x0e */
+#define EMI_HEADER_FILL           0x2e   /* fill from the TOC end up to EMI_SECTOR_SIZE */
+#define EMI_PAYLOAD_FILL          0x5f   /* fill from a payload end to the next EMI_SECTOR_SIZE boundary */
 
-/* Entry slots inside one archive, by archive kind (disc names; @source: wiki:formats/emi). The bank
- * selectors are the load_arg of the VAB entries. BENEMY, BGM and the first BPLCHAR bank hold a VAB
- * triple at slots 0-2. */
-#define EMI_BENEMY_SLOT_VAB_HEADER  0
-#define EMI_BENEMY_SLOT_CUES        1
-#define EMI_BENEMY_SLOT_VAB_BODY    2
-#define EMI_BENEMY_BANK             6
+/* Entry slots inside one archive (disc names; @source: wiki:formats/emi). The archive kinds BENEMY, BGM,
+ * BPLCHAR and PLCHAR start with the same three entries: the VAB header, the cue table or the sequence
+ * (slot 1, by kind) and the VAB body. The bank selectors are the load_arg of the VAB entries. */
+typedef enum EmiSoundSlot {
+    EMI_SOUND_SLOT_VAB_HEADER = 0,
+    EMI_SOUND_SLOT_SE         = 1, /* BENEMY, BPLCHAR and PLCHAR: the cue table */
+    EMI_SOUND_SLOT_SEQUENCE   = 1, /* BGM */
+    EMI_SOUND_SLOT_VAB_BODY   = 2, /* BGM: 3 when the archive also carries a cue table at 2 */
+} EmiSoundSlot;
 
-#define EMI_BGM_SLOT_VAB_HEADER     0
-#define EMI_BGM_SLOT_SEQUENCE       1
-#define EMI_BGM_SLOT_VAB_BODY       2 /* 3 when the archive also carries a cue table at 2 */
-#define EMI_BGM_BANK                0
+#define EMI_BENEMY_BANK              6
+#define EMI_BGM_BANK                 0
 
 /* A whole bank holds three VAB triples around a zero filler and the LZ77 container;
  * a one-section bank holds the first triple and one section. */
-#define EMI_BPLCHAR_SLOT_VAB_HEADER 0
-#define EMI_BPLCHAR_SLOT_CUES       1
-#define EMI_BPLCHAR_SLOT_VAB_BODY   2
-#define EMI_BPLCHAR_SLOT_SECTION    3 /* one-section bank */
-#define EMI_BPLCHAR_SLOT_FILLER     3 /* whole bank */
-#define EMI_BPLCHAR_SLOT_CONTAINER  7 /* whole bank */
-#define EMI_BPLCHAR_BANK_FIRST      3
-#define EMI_BPLCHAR_BANK_SECOND     4
-#define EMI_BPLCHAR_BANK_THIRD      5
+#define EMI_BPLCHAR_SLOT_SECTION     3                  /* one-section bank */
+#define EMI_BPLCHAR_SLOT_FILLER      3                  /* whole bank */
+#define EMI_BPLCHAR_SLOT_CONTAINER   7                  /* whole bank */
+#define EMI_BPLCHAR_BANK(party_slot) ((party_slot) + 3) /* the three banks follow the party slots 0-2 */
 
-#define EMI_PLCHAR_SLOT_VAB_HEADER  0
-#define EMI_PLCHAR_SLOT_CUES        1
-#define EMI_PLCHAR_SLOT_VAB_BODY    2
-#define EMI_PLCHAR_SLOT_CONTAINER   3 /* PLxxx: the character sprites, LZ77 */
-#define EMI_PLCHAR_SLOT_PROGRAM     0 /* PLPxxx: the character program */
-#define EMI_PLCHAR_BANK             1
+#define EMI_PLCHAR_SLOT_CONTAINER    3 /* PLxxx: the character sprites, LZ77 */
+#define EMI_PLCHAR_SLOT_PROGRAM      0 /* PLPxxx: the character program */
+#define EMI_PLCHAR_BANK              1
 
 /* Entry type ids (@source: wiki:formats/emi#entry-types): what the loader does with a payload.
  * EMILoaderState holds the two internal loader states. */
