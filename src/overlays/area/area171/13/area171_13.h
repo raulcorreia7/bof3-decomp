@@ -9,6 +9,10 @@
 
 /* The scratchpad cell holding this mode's work pointer. */
 
+/* The entry cell's lift and vx, by entry. */
+extern u16 D_801F3F70[];
+extern u8  D_801F3F78[];
+
 /* The payload's per-state handler table. */
 extern u8         D_801F3F5C[];
 extern TriggerBox D_801F4188[2];
