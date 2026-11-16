@@ -9,7 +9,7 @@ MATCH s32 func_801F2CE4(void) {
     if (tick == 0) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x00));
     }
-    func_801F2F28((u8*)AREA_WORK);
+    Chain_Update((u8*)AREA_WORK);
     func_801F3258((u8*)AREA_WORK);
     x                   = g_Task->pos.x.fixed + TO_COORD(1);
     g_Task->pos.x.fixed = x;

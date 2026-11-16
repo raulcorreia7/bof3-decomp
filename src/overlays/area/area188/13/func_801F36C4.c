@@ -12,7 +12,7 @@ MATCH void func_801F36C4(void) {
     }
     Area_UpdateSpawnSlots();
     AREA_SPAWN_TICK();
-    func_801F3ADC(&g_Task->unk_18, &g_Task->pos.x, 0x40);
+    Area_DrawYellowLine(&g_Task->unk_18, &g_Task->pos.x, 0x40);
     task = g_Task;
     task->vx -= 0x800;
     task->vy -= 0x200;

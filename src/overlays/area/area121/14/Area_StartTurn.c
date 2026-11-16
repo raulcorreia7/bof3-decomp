@@ -1,3 +1,3 @@
 #include "area121_14.h"
 
-INCLUDE_ASM(Area_StartTurn);
+#include "overlays/area/Area_StartTurn.h"

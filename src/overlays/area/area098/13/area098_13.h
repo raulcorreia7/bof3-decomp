@@ -111,7 +111,8 @@ void func_801F40A4(void);
 void GFX_DrawColorFan(s32* pos, s16 origin, s32 flags);
 s32  func_801F4E7C(void);
 
-void func_801F48E8(void* arg0, void* arg1, s32 arg2);
+/* func_801F48E8 */
+void Area_DrawYellowLine(s32* from, s32* to, u8 intensity);
 void func_801F4BC0(AreaBurstSlot* slot);
 void func_801F4FEC(AreaBurstSlot* slot);
 void func_801F4DBC(AreaBurstSlot* slot);

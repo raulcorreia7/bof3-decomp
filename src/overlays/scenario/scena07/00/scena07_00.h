@@ -140,9 +140,11 @@ static inline void Scene_PlaceAtLead(void) {
     g_Task->pos.z.fixed = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
 }
 
-void      Scene_InitSpark(FallingSpark* spark);
-void      func_801F8478(FallingSpark* spark);
-void      func_801F88B8(void* table);
+void Scene_InitSpark(FallingSpark* spark);
+void func_801F8478(FallingSpark* spark);
+/* func_801F88B8 */
+void Chain_Update(void* table);
+
 void      func_801F8BE8(void* table);
 void      func_801FA38C(void);
 extern u8 D_801FDFC8;
@@ -155,7 +157,7 @@ extern u8 D_801FDFC8;
 /* The panel fade step func_801F72E0 and func_801F80F0 share: draw the panel table, dim it by 12 and
  * advance the actor when its countdown ends. Every change must keep both members matching. */
 #define SCENA07_PANEL_FADE_STEP()      \
-    func_801F88B8(SCENA07_PANEL_ROWS); \
+    Chain_Update(SCENA07_PANEL_ROWS);  \
     func_801F8BE8(SCENA07_PANEL_ROWS); \
     D_800E4C1E -= 0xC;                 \
     if (--g_Task->timer == 0) {        \
@@ -165,7 +167,7 @@ extern u8 D_801FDFC8;
 /* The panel brighten step func_801F724C and func_801F805C share: draw the panel table, brighten it by 6
  * and re-arm the countdown to 0x20 when it ends. Every change must keep both members matching. */
 #define SCENA07_PANEL_BRIGHTEN_STEP()  \
-    func_801F88B8(SCENA07_PANEL_ROWS); \
+    Chain_Update(SCENA07_PANEL_ROWS);  \
     func_801F8BE8(SCENA07_PANEL_ROWS); \
     D_800E4C1E += 6;                   \
     if (--g_Task->timer == 0) {        \

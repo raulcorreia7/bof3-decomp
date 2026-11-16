@@ -3,7 +3,7 @@
 MATCH void func_801F2D80(void) {
     u8 remaining;
 
-    func_801F2F28((u8*)AREA_WORK);
+    Chain_Update((u8*)AREA_WORK);
     func_801F3258((u8*)AREA_WORK);
     remaining     = g_Task->timer - 1;
     g_Task->timer = remaining;

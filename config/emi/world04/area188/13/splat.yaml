@@ -29,7 +29,7 @@ segments:
       - [0xBCC, c, func_801F37CC]
       - [0xCC0, c, func_801F38C0]
       - [0xCE0, c, func_801F38E0]
-      - [0xEDC, c, func_801F3ADC]
+      - [0xEDC, c, Area_DrawYellowLine]
       - [0x11B4, c, Area_ClearWorkColumn]
       - [0x11E0, c, Area_ClaimSpawnSlot]
       - [0x127C, c, Area_UpdateSpawnSlots]
