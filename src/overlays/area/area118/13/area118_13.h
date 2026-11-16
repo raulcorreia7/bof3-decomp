@@ -27,7 +27,7 @@ extern u8  D_801F5138[];
 extern u8  D_801F5994[];
 extern u8  D_801F5998[];
 extern u8  D_801F5999[];
-void       func_801F381C(s32 arg0);
+void       func_801F381C(s32 sample_height);
 
 void func_801F33A4(void);
 void func_801F4634(s32, s32);

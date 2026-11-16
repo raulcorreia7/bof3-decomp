@@ -74,7 +74,7 @@ NON_MATCHING void func_800A1D84(void) {
                 i += 1;
             } while ((u32)(i & BYTE_MASK) < (u8)g_Battle.party_count);
         }
-        g_Battle.target_record->hp_change = (s16) - (s16) * (D_80145F20 + (*active * BATTLE_PARTY_STRIDE));
+        g_Battle.target_record->hp_change = -(s16) * (u16*)(D_80145F20 + (*active * BATTLE_PARTY_STRIDE));
     }
 }
 #else
