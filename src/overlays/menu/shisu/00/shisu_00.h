@@ -80,7 +80,7 @@ extern u8*      g_MenuInventoryTitles[5];
 extern u8       g_MenuInventoryTab1OffSprites[];
 extern u8*      g_MenuEquipTitles[5];
 extern u8       D_801D9EF0[7];
-extern s8       D_80148654;
+extern u8       D_80148654;
 extern u8       D_801D9780[12];
 extern u8       D_801D978C[12];
 extern u8       D_801D9798[4];
