@@ -22,4 +22,3 @@ MATCH void func_801FB300(void) {
         g_SceneState.state_04 = 0;
     }
 }
-
