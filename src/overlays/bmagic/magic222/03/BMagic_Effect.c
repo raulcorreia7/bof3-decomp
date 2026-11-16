@@ -238,12 +238,7 @@ MATCH void BMagic_DrawDarkRing(void) {
 }
 
 MATCH void func_801EFDEC(void) {
-    SYS_DISPATCH_BYTE(D_801F0D8C, g_Task->header.step);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_801F0168();
-        func_801F0218();
-        PopMatrix();
-    }
+    BMAGIC_DISPATCH_AND_DRAW_IN_OWN_MATRIX(D_801F0D8C, func_801F0168, func_801F0218);
 }
 
 MATCH void func_801EFE74(void) {

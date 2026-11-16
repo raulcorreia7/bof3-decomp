@@ -611,12 +611,7 @@ INCLUDE_ASM(func_801F06B4);
 #endif
 
 MATCH void func_801F0B44(void) {
-    SYS_DISPATCH_BYTE(D_801F1C24, g_Task->header.step);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_801F0D44();
-        func_801F0DF4();
-        PopMatrix();
-    }
+    BMAGIC_DISPATCH_AND_DRAW_IN_OWN_MATRIX(D_801F1C24, func_801F0D44, func_801F0DF4);
 }
 
 MATCH void func_801F0BCC(void) {

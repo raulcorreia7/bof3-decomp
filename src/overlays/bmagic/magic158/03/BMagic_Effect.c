@@ -14,12 +14,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF34(void) {
-    SYS_DISPATCH_BYTE(D_801EF788, g_Task->header.step);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_801EF2F0();
-        func_801EF3EC();
-        PopMatrix();
-    }
+    BMAGIC_DISPATCH_AND_DRAW_IN_OWN_MATRIX(D_801EF788, func_801EF2F0, func_801EF3EC);
 }
 
 /* At the ticker's zero, places the effect half a cell from the battler by the
