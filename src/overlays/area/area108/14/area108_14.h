@@ -20,16 +20,16 @@ extern u8* D_80147B40;
 extern s16 D_80147B26[];
 extern u8  D_80147CC8;
 
-/* One staged party cell: its x, y and facing. */
-typedef struct AreaCellEntry {
+/* A map cell and a facing: the spots the leader stands on to pick a branch (func_801F4414). */
+typedef struct AreaFacingCell {
     u8 x;
     u8 y;
     u8 facing;
-} AreaCellEntry;
+} AreaFacingCell;
 
-ASSERT_SIZE(AreaCellEntry, 0x03);
+ASSERT_SIZE(AreaFacingCell, 0x03);
 
-extern AreaCellEntry D_801F636C[];
+extern AreaFacingCell D_801F636C[];
 
 void func_801F3588(u8* dst, u8* src, u16* state);
 

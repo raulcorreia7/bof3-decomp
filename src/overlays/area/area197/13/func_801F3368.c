@@ -1,13 +1,13 @@
 #include "area197_13.h"
 
 MATCH s32 func_801F3368(void) {
-    AreaDropRow* drop;
-    s32          alive;
-    u16          i;
-    u8           life;
+    AreaDropParticle* drop;
+    s32               alive;
+    u16               i;
+    u8                life;
 
     alive = 0;
-    drop  = MEM_PTR(AreaDropRow, AREA_DROP_ROWS);
+    drop  = MEM_PTR(AreaDropParticle, AREA_DROP_ROWS);
     i     = 0;
     do {
         if (drop->active != 0) {
