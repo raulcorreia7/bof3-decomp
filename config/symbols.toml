@@ -133,7 +133,7 @@ D_801EB0B1 = { addr = 0x801EB0B1, alias = true, source = "Position offsets by pa
 s_BattlePanelYOffsets = { addr = 0x801EB108, source = "Battle panel vertical positions." }
 s_BattleCharacterSprites = { addr = 0x801EB18C, source = "Battle sprite step ids per party character." }
 g_BattleTaskFuncs = { addr = 0x801EB1B4, source = "Battle task state handlers." }
-s_BattleCharacterStepIds = { addr = 0x801EB230, source = "Step id of each character (0x28 entries) that func_801E16B4 stores in the task byte 0x09 by character_id." }
+g_BattleCharacterStepIds = { addr = 0x801EB230, source = "Step id of each character (0x28 entries) that func_801E16B4 stores in the task byte 0x09 by character_id." }
 g_BattleEnemies = { addr = 0x801EB2E8, alias = true, source = "The enemy battlers." }
 s_BattlePartialPartyTargetWeights = { addr = 0x801EB394, source = "Target weights for a party with two active members." }
 s_BattleFullPartyTargetWeights = { addr = 0x801EB39C, source = "Target weights for a party with three active members." }
@@ -6246,6 +6246,7 @@ Actor_BeginScriptFromAreaTableAtStart = { addr = 0x801F2F04, type = "func", sour
 Actor_FreePalette = { addr = 0x801F2FD4, type = "func", source = "Frees the palette slots owned by the running task g_Task through GFX_FreePaletteSlotOwner; the same body is Actor_FreePalette in area085." }
 Area_FreePaletteOnChange = { addr = 0x801F35A4, type = "func", source = "Frees the task's palette slot on area change, otherwise rewinds the script cursor to wait." }
 Area_RoundSpriteCoordinate = { addr = 0x801F3DCC, type = "func", source = "Returns pair >> 16, rounded up by 1 when step is not negative and the low halfword of pair is nonzero." }
+Area_RoundSpriteCoordinate_area198 = { addr = 0x801F3DCC, source = "Link-only name for the area198 copy of Area_RoundSpriteCoordinate; the same body at 0x8014CE48 is visible to the area198 link. Coordinator instruction, as func_801F4158_area168.", alias = true }
 
 ["emi/world04/area199/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }

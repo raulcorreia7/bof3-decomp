@@ -1674,7 +1674,7 @@ MATCH void func_801D6D18(void) {
     D_801DB0C4 = step;
     Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - step * 8) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     for (i = 0; i < 7; i++) {
-        if (g_Characters[i].unk_07 & 1) {
+        if (g_Characters[i].party_flags & 1) {
             if ((drawn & 1) == 0) {
                 func_801D90D8(0x20 - D_801DB0C4 * 40, (((u8)drawn >> 1) * 0x38) + 0x2B, (u8)i, 0);
             } else {
@@ -2296,7 +2296,7 @@ MATCH void func_801D9210(void) {
 
     drawn = 0;
     for (i = 0; i < 7; i++) {
-        if (g_Characters[i].unk_07 & 1) {
+        if (g_Characters[i].party_flags & 1) {
             func_801D90D8(((drawn & 1) * 0x88) + 0x20, (((u8)drawn >> 1) * 0x38) + 0x2B, (u8)i, 0);
             drawn++;
         }
@@ -2308,7 +2308,7 @@ MATCH u8 func_801D92B0(void) {
     s32 i;
 
     for (i = 0; i < 7; i++) {
-        if (g_Characters[i].unk_07 & 1) {
+        if (g_Characters[i].party_flags & 1) {
             count++;
         }
     }
@@ -2321,7 +2321,7 @@ MATCH u8 func_801D92F4(u8 arg) {
 
     active_count = 0;
     for (i = 0; i < 7; i++) {
-        if (g_Characters[i].unk_07 & 1) {
+        if (g_Characters[i].party_flags & 1) {
             if ((active_count & BYTE_MASK) == arg) {
                 return (u8)i;
             }
