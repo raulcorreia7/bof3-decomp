@@ -22,12 +22,12 @@ MATCH void func_801F6E54(void) {
 }
 
 MATCH void func_801F6E90(void) {
-    u8* row;
+    FallingSpark* spark;
 
     if ((g_Task->vx & 0x7) == 0) {
-        row = func_801F8394();
-        if (row != NULL) {
-            Scene_InitSpark((FallingSpark*)row);
+        spark = func_801F8394();
+        if (spark != NULL) {
+            Scene_InitSpark(spark);
         }
     }
     func_801F85D8();
@@ -280,13 +280,13 @@ MATCH void func_801F7A30(void) {
 }
 
 MATCH void func_801F7AB0(void) {
-    u8* row;
+    FallingSpark* spark;
 
     func_801F9330(D_801FDFC0);
     if (g_Task->vx >= 9) {
-        row = func_801F8394();
-        if (((g_Task->vx & 3) == 0) && (row != NULL)) {
-            func_801F8478(row);
+        spark = func_801F8394();
+        if (((g_Task->vx & 3) == 0) && (spark != NULL)) {
+            func_801F8478(spark);
         }
     }
     func_801F85D8();
@@ -420,35 +420,35 @@ MATCH void func_801F81B4(void) {
 
 #include "shared/GFX_DrawProjectedDisc.h"
 
-MATCH void func_801F81D4(u8* row) {
-    GFX_DRAW_PROJECTED_DISC((s32*)(row + 0x0C), row[3], 0x20, 1);
+MATCH void func_801F81D4(FallingSpark* spark) {
+    GFX_DRAW_PROJECTED_DISC(&spark->x, spark->fade, 0x20, 1);
 }
 
 MATCH void func_801F8358(void) {
-    u8* p;
-    u8  i;
+    FallingSpark* spark;
+    u8            i;
 
-    p = MEM_PTR(u8, AREA_WORK);
-    i = 0;
+    spark = MEM_PTR(FallingSpark, AREA_WORK);
+    i     = 0;
     do {
-        p[0] = 0;
+        spark->active = 0;
         i++;
-        p += 0x1C;
+        spark++;
     } while (i < 8);
     D_801FDFC4 = 0;
     D_801FDFC8 = 0;
 }
 
-MATCH u8* func_801F8394(void) {
-    u8* p;
-    u8  i;
+MATCH FallingSpark* func_801F8394(void) {
+    FallingSpark* spark;
+    u8            i;
 
-    p = MEM_PTR(u8, AREA_WORK);
+    spark = MEM_PTR(FallingSpark, AREA_WORK);
     for (i = 0; i < 8; i++) {
-        if (p[SCRATCH_ROW_OFFSET] == 0) {
-            return p;
+        if (spark->active == 0) {
+            return spark;
         }
-        p += SCRATCH_ROW_STRIDE;
+        spark++;
     }
     return NULL;
 }
@@ -456,58 +456,56 @@ MATCH u8* func_801F8394(void) {
 #include "overlays/scenario/Scene_InitSpark.h"
 
 /* Starts a spark row at a random point of a sphere around the actor, raised 512 units. */
-MATCH void func_801F8478(u8* row) {
-    s32* cell;
-    u16  yaw;
-    u16  pitch;
-    s16  radius;
+MATCH void func_801F8478(FallingSpark* spark) {
+    u16 yaw;
+    u16 pitch;
+    s16 radius;
 
-    cell    = (s32*)row;
-    row[0]  = 1;
-    row[1]  = 0;
-    row[2]  = 8;
-    row[3]  = 0;
-    cell[2] = 0;
-    row[4]  = 1;
-    yaw     = rand() & 0x7FF;
-    pitch   = rand() & 0xFFF;
-    radius  = ((rand() % 2) << 12) | (rand() & 0xFFF);
-    cell[3] = g_Task->pos.x.fixed + ((radius * ((rsin(yaw) * rcos(pitch)) >> 12)) >> 8);
-    cell[4] = g_Task->pos.y.fixed + ((radius * ((rsin(yaw) * rsin(pitch)) >> 12)) >> 8);
-    cell[5] = g_Task->pos.z.fixed + radius * rcos(yaw) + TO_COORD(512);
+    spark->active      = 1;
+    spark->kind        = 0;
+    spark->life        = 8;
+    spark->fade        = 0;
+    spark->speed       = 0;
+    spark->life_reload = 1;
+    yaw                = rand() & 0x7FF;
+    pitch              = rand() & 0xFFF;
+    radius             = ((rand() % 2) << 12) | (rand() & 0xFFF);
+    spark->x           = g_Task->pos.x.fixed + ((radius * ((rsin(yaw) * rcos(pitch)) >> 12)) >> 8);
+    spark->y           = g_Task->pos.y.fixed + ((radius * ((rsin(yaw) * rsin(pitch)) >> 12)) >> 8);
+    spark->z           = g_Task->pos.z.fixed + radius * rcos(yaw) + TO_COORD(512);
 }
 
 MATCH u8 func_801F85D8(void) {
-    u8     active;
-    u8*    rec;
-    s32    i;
-    MATRIX matrix;
+    u8            active;
+    FallingSpark* spark;
+    s32           i;
+    MATRIX        matrix;
 
     active = 0;
     GFX_AddDitheredDrawMode(1, GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y));
     Area_SetCameraMatrix(&matrix);
-    rec = MEM_PTR(u8, AREA_WORK);
-    i   = 0;
+    spark = MEM_PTR(FallingSpark, AREA_WORK);
+    i     = 0;
     do {
-        if (rec[0] != 0) {
-            D_801FDDF0[rec[1]](rec);
+        if (spark->active != 0) {
+            D_801FDDF0[spark->kind](spark);
             active = 1;
-            func_801F81D4(rec);
+            func_801F81D4(spark);
         }
         i++;
-        rec += SCRATCH_ROW_STRIDE;
+        spark++;
     } while ((u32)(i & BYTE_MASK) < 8);
     return active;
 }
 
-MATCH void func_801F86BC(u8* row) {
+MATCH void func_801F86BC(FallingSpark* spark) {
     u8 next;
 
-    row[3] += 6;
-    if (--row[2] == 0) {
-        next   = row[1] + 1;
-        row[2] = row[4];
-        row[1] = next;
+    spark->fade += 6;
+    if (--spark->life == 0) {
+        next        = spark->kind + 1;
+        spark->life = spark->life_reload;
+        spark->kind = next;
         if (D_801FDFC4 == 0) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x00));
             D_801FDFC4 = 1;
