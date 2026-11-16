@@ -1,5 +1,6 @@
 #include "shop_00.h"
 
+// clang-format off
 Callback g_ShopPanelModes[SHOP_MODE_COUNT] = {
     Menu_MessagePanel,
     Menu_ZennyPanel,

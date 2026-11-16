@@ -472,7 +472,64 @@ MATCH void func_801F81F4(u16 value) {
     D_801FE9EC[0] = value;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
+    POLY_GT4* prim;
+    s16       row;
+    s32       half;
+    s32       skew;
+    s32       top;
+    s32       v;
+    u8        i;
+
+    row = height - 1;
+    for (i = 0; i < height * 2; i++) {
+        half = SquareRoot0(height * height - row * row);
+        skew = (width * rsin(D_801FE9EC[i])) >> 12;
+        prim = (POLY_GT4*)g_GfxPrimCursor;
+        row -= 1;
+        SetPolyGT4(prim);
+        SetSemiTrans(prim, 0);
+        prim->x0 = prim->x2 = x - half + skew;
+        top                 = i + (y - height);
+        prim->y0 = prim->y1 = top;
+        prim->x1 = prim->x3 = x - half + skew + half;
+        prim->y2 = prim->y3 = top + 1;
+        prim->u0 = prim->u2 = 0x40 - half;
+        prim->u1 = prim->u3 = 0x40;
+        v                   = i + 0x40 - (u8)height;
+        prim->v0 = prim->v1 = i - ((u8)height - 0x40);
+        prim->v2 = prim->v3 = v + 1;
+        prim->tpage         = GetTPage(2, 0, 0x340, 0x100);
+        setRGB0(prim, 0x40, 0x40, 0x80);
+        setRGB1(prim, 0x60, 0x60, 0x60);
+        setRGB2(prim, 0x40, 0x40, 0x80);
+        setRGB3(prim, 0x60, 0x60, 0x60);
+        GFX_AddPrim(2, sizeof(POLY_GT4));
+
+        prim = (POLY_GT4*)g_GfxPrimCursor;
+        SetPolyGT4(prim);
+        SetSemiTrans(prim, 0);
+        prim->y0 = prim->y1 = top;
+        prim->y2 = prim->y3 = top + 1;
+        prim->u0 = prim->u2 = 0;
+        skew                = x + skew;
+        prim->x0 = prim->x2 = skew;
+        prim->x1 = prim->x3 = skew + half;
+        prim->v0 = prim->v1 = v - 0x80;
+        prim->u1 = prim->u3 = half;
+        prim->v2 = prim->v3 = v - 0x7F;
+        prim->tpage         = GetTPage(2, 0, 0x340, 0x100);
+        setRGB0(prim, 0x60, 0x60, 0x60);
+        setRGB1(prim, 0x80, 0x40, 0x40);
+        setRGB2(prim, 0x60, 0x60, 0x60);
+        setRGB3(prim, 0x80, 0x40, 0x40);
+        GFX_AddPrim(2, sizeof(POLY_GT4));
+    }
+}
+#else
 INCLUDE_ASM(func_801F823C);
+#endif
 
 MATCH void func_801F8534(void) {
     s32     point[3];
@@ -493,7 +550,69 @@ MATCH void func_801F8534(void) {
     func_801F823C((s16)g_Task->screen_x, (s16)g_Task->screen_y, (s16)g_Task->unk_32, (s16)g_Task->unk_2C);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F85F0(s16 x, s16 y, s16 radius) {
+    POLY_GT4* prim;
+    u16       angle;
+    s32       a;
+    s32       b;
+    u8        count;
+
+    count = 0;
+    angle = 0xFC00;
+    do {
+        prim = (POLY_GT4*)g_GfxPrimCursor;
+        SetPolyGT4(prim);
+        SetSemiTrans(prim, 0);
+        a        = angle;
+        prim->x0 = x - ((radius * rcos(a)) >> 12);
+        prim->x1 = x;
+        angle += 128;
+        b        = angle;
+        prim->y0 = prim->y1 = y + ((radius * rsin(a)) >> 12);
+        prim->x2            = x - ((radius * rcos(b)) >> 12);
+        prim->x3            = x;
+        prim->y2 = prim->y3 = y + ((radius * rsin(b)) >> 12);
+        prim->u0            = 63 - ((rcos(a) << 5) >> 12);
+        prim->u1            = 63;
+        prim->v0 = prim->v1 = 64 + ((rsin(a) << 5) >> 12);
+        prim->u2            = 63 - ((rcos(b) << 5) >> 12);
+        prim->u3            = 63;
+        prim->v2 = prim->v3 = 64 + ((rsin(b) << 5) >> 12);
+        setRGB0(prim, 0x40, 0x40, 0x80);
+        setRGB1(prim, 0x60, 0x60, 0x60);
+        setRGB2(prim, 0x40, 0x40, 0x80);
+        setRGB3(prim, 0x60, 0x60, 0x60);
+        prim->tpage = GetTPage(2, 0, 0x340, 0x100);
+        GFX_AddPrim(2, sizeof(POLY_GT4));
+
+        prim = (POLY_GT4*)g_GfxPrimCursor;
+        SetPolyGT4(prim);
+        SetSemiTrans(prim, 0);
+        prim->x0 = x;
+        prim->x1 = x + ((radius * rcos(a)) >> 12);
+        prim->y0 = prim->y1 = y + ((radius * rsin(a)) >> 12);
+        prim->x2            = x;
+        prim->x3            = x + ((radius * rcos(b)) >> 12);
+        prim->y2 = prim->y3 = y + ((radius * rsin(b)) >> 12);
+        count += 1;
+        prim->u0 = 0;
+        prim->u1 = (rcos(a) << 5) >> 12;
+        prim->v0 = prim->v1 = ((rsin(a) << 5) >> 12) - 64;
+        prim->u2            = 0;
+        prim->u3            = (rcos(b) << 5) >> 12;
+        prim->v2 = prim->v3 = ((rsin(b) << 5) >> 12) - 64;
+        setRGB0(prim, 0x60, 0x60, 0x60);
+        setRGB1(prim, 0x80, 0x40, 0x40);
+        setRGB2(prim, 0x60, 0x60, 0x60);
+        setRGB3(prim, 0x80, 0x40, 0x40);
+        prim->tpage = GetTPage(2, 0, 0x340, 0x100);
+        GFX_AddPrim(2, sizeof(POLY_GT4));
+    } while (count < 16);
+}
+#else
 INCLUDE_ASM(func_801F85F0);
+#endif
 
 #include "shared/GFX_DrawProjectedDisc.h"
 
@@ -579,7 +698,68 @@ MATCH void func_801F8D4C(FallingSpark* spark) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F8D98(void* table) {
+    Chain* chain;
+    s8     i;
+    s8     j;
+    s32    prev;
+    u16    size[2];
+    u16    scale[2];
+    MATRIX camera;
+
+    chain = table;
+    for (i = 30; i >= 0; i--) {
+        chain->node[i + 1] = chain->node[i];
+    }
+    chain->node[0].pos[0] = g_Task->pos.x.fixed;
+    chain->node[0].pos[1] = g_Task->pos.y.fixed;
+    chain->node[0].pos[2] = g_Task->pos.z.fixed;
+    Area_SetCameraMatrix(&camera);
+    for (i = 0; i < 32; i++) {
+        Area_ProjectPoint(chain->node[i].pos, (DVECTOR*)chain->node[i].screen);
+        size[0] = size[1] = chain->size;
+        Game_ProjectWorldPoint(&chain->node[i], size, scale);
+        chain->node[i].size = scale[0];
+    }
+    for (i = 0; i < 31; i++) {
+        scale[0] = chain->node[i].screen[0] - chain->node[i + 1].screen[0];
+        scale[1] = chain->node[i].screen[1] - chain->node[i + 1].screen[1];
+        if ((s16)scale[0] != 0 || (s16)scale[1] != 0) {
+            chain->dir[i] = ratan2((s16)scale[1], (s16)scale[0]);
+        } else {
+            chain->dir[i] = 0x1000;
+        }
+    }
+    for (i = 0; i < 31; i++) {
+        if (chain->dir[i] != 0x1000) {
+            continue;
+        }
+        for (j = i + 1; j < 31; j++) {
+            if (chain->dir[j] != 0x1000) {
+                chain->dir[i] = chain->dir[j];
+                goto next;
+            }
+        }
+        for (j = 0; j < i; j++) {
+            if (chain->dir[j] != 0x1000) {
+                chain->dir[i] = chain->dir[j];
+                goto next;
+            }
+        }
+        chain->dir[j] = 0;
+    next:;
+    }
+    chain->node[0].angle = chain->dir[0];
+    for (i = 1; i < 31; i++) {
+        prev                 = i - 1;
+        chain->node[i].angle = MATH_AverageAngle(chain->dir[prev], chain->dir[i]);
+    }
+    chain->node[31].angle = chain->dir[30];
+}
+#else
 INCLUDE_ASM(func_801F8D98);
+#endif
 
 INCLUDE_ASM(func_801F90C8);
 
