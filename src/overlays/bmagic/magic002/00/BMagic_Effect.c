@@ -6,27 +6,23 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EEC78(void) {
+MATCH void func_801EEC78(void) {
     u32 index;
 
     index                                       = Battle_AllocEffect(3, 1) & BYTE_MASK;
     g_BattleEffects[index].header.mode          = 0;
     g_BattleEffects[index].unk_0C               = g_Game.members[0].unk_2E.signed_half << 16;
+    g_BattleEffects[index].unk_10               = g_Game.members[0].unk_30.signed_half << 16;
     D_801EC344[index].value                     = 0;
     g_BattleEffects[index].unk_18               = 40;
     g_BattleEffects[index].arg.unk_09           = 0;
-    g_BattleEffects[index].unk_10               = g_Game.members[0].unk_30.signed_half << 16;
     g_BattleEffects[index].unk_1C               = ((g_Battle.selected_actor->unk_2E.signed_half - g_Game.members[0].unk_2E.signed_half) << 16) / 10;
     D_801EC350[index].value                     = ((g_Battle.selected_actor->unk_30.signed_half - g_Game.members[0].unk_30.signed_half) << 16) / 10;
-    LOHU(g_BattleEffects[index].pad_50[8])      = 0x100;
     g_BattleEffects[index].word_60.target_index = 0x100;
+    D_801EC388[index].value                     = 0x100;
     D_801EC2E0->target.effect                   = &g_BattleEffects[index];
     g_Task->header.mode += 1;
 }
-#else
-INCLUDE_ASM(func_801EEC78);
-#endif
 
 MATCH void func_801EEDE4(void) {
     if (D_801EC2E0->target.party->unk_09 >= 0x28) {
