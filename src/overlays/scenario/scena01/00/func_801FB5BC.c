@@ -7,19 +7,4 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801F9AA0);
-
-MATCH void func_801FA244(void) {
-}
-
-INCLUDE_ASM(func_801FA24C);
-
-INCLUDE_ASM(func_801FA844);
-
-INCLUDE_ASM(func_801FB218);
-
 INCLUDE_ASM(func_801FB5BC);
-
-INCLUDE_ASM(func_801FBB1C);
-
-INCLUDE_ASM(func_801FBF30);

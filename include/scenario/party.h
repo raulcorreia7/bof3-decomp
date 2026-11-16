@@ -58,3 +58,12 @@ extern u32 g_Zenny;
  * `sel = map[party_order[slot]]`). */
 
 #endif
+
+extern FormationLayout g_MenuFormations[FORMATION_COUNT];
+extern FormationOrder  g_MenuFormationOrder;
+extern s32             g_MenuFormationArrow[3][2];
+extern s32             g_MenuFormationArrowTurned[3][2];
+extern s32             g_MenuFormationSpots[PARTY_SLOT_COUNT][2];
+extern u8              g_MenuFormationFrameLeft[];
+extern u8              g_MenuFormationFrameMiddle[];
+extern u8              g_MenuFormationFrameRight[];

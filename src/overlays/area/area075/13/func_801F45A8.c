@@ -3,17 +3,16 @@
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F45A8(void) {
     Actor* actor;
-    u8*    table_row;
+    s32*   step;
     u16    column;
     u16    timer;
 
-    timer     = D_801F58C4;
-    table_row = D_801F58A0[D_801F58C9];
-    column    = timer % 15;
-    if (table_row[column] != 0) {
+    timer = D_801F58C4;
+    if (D_801F58A0[D_801F58C9][timer % 15] != 0) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
         D_801F58CC -= rand() % 2 + 4;
-        g_SpawnedActors[D_801F58CE[0]].scene_step -= 1;
+        step = &g_SpawnedActors[D_801F58CE[0]].scene_step;
+        *step -= 1;
         actor = &g_Actors[D_801F58D0];
         TASK_SET(actor);
         actor->unk_4A = 1;

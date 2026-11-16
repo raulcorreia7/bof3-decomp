@@ -49,6 +49,9 @@ void func_801F3040(s16 x0, s16 y0, s16 radius0, u16 angle0, s16 x1, s16 y1, s16 
 /* The payload's data after the last function; the per-state handler tables
  * start at 0xC. */
 extern u8 D_801F4B2C[];
+/* The green and blue bytes of the line colour entry that starts at D_801F4B2C. */
+extern u8 D_801F4B2D[];
+extern u8 D_801F4B2E[];
 extern u8 D_801F4B30[];
 
 #endif
