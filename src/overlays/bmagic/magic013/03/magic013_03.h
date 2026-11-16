@@ -25,9 +25,9 @@ void func_801EFDB4(void);
 void func_801F0164(void);
 
 /* The wave band scratch: the wave height, the facing angle and the band shade, then the quad corners (D_1F800014). */
-#define WAVE_HEIGHT D_1F800000.view.scenario.math_00
-#define WAVE_ANGLE  D_1F800000.view.scenario.math_04
-#define WAVE_SHADE  D_1F800000.view.scenario.math_08
+#define WAVE_HEIGHT D_1F800000.cells.words[0]
+#define WAVE_ANGLE  D_1F800000.cells.words[1]
+#define WAVE_SHADE  D_1F800000.cells.words[2]
 
 /* Draws the wave band of 16 shaded quads around the effect cell, turned by the facing table; LIFT is added to the
  * band height for the first and second corners. The caller declares prim, depth, flag, i and tpage. */

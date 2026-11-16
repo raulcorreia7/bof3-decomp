@@ -43,8 +43,8 @@ MATCH void func_801F8C0C(void) {
         case 4:
             if (WINDOW_EFFECT_IDLE()) {
                 UI_SetMode(0x10);
-                g_SpawnedActors[D_1F800000.view.raw[0]].header.flags = 0;
-                g_SceneState.step_05                                 = 8;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].header.flags = 0;
+                g_SceneState.step_05                                    = 8;
             }
             break;
         case 8:

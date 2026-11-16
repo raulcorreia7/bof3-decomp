@@ -216,7 +216,7 @@ MATCH void func_801F7E34(void) {
     Actor* work;
 
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 9));
-    work = SPAD(0u)->view.area.work_ptr;
+    work = SPAD(0u)->task;
     work->header.mode += 1;
 }
 

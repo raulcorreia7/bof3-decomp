@@ -173,8 +173,8 @@ MATCH void func_801EF4F0(void) {
         D_1F800014[1].vz = 0;
         D_1F800014[0].vz = 0;
         RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
-        D_1F800000.view.scenario.math_04 = g_Task->unk_09 * 12;
-        setRGB0(prim, D_1F800000.view.scenario.math_04, D_1F800000.view.scenario.math_04, D_1F800000.view.scenario.math_04);
+        D_1F800000.cells.words[1] = g_Task->unk_09 * 12;
+        setRGB0(prim, D_1F800000.cells.words[1], D_1F800000.cells.words[1], D_1F800000.cells.words[1]);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);
         GFX_AddPrim(5, sizeof(POLY_G3));
@@ -391,20 +391,20 @@ MATCH void func_801F02CC(void) {
     s32      tpage;
 
     if (g_Task->unk_09 < 16) {
-        D_1F800000.view.scenario.math_08 = g_Task->unk_09 * 32;
+        D_1F800000.cells.words[2] = g_Task->unk_09 * 32;
     } else {
-        D_1F800000.view.scenario.math_08 = 0x200;
+        D_1F800000.cells.words[2] = 0x200;
     }
-    setVector(&D_1F800014[1], FIXED_MUL(rcos(0), 304), FIXED_MUL(rsin(0), 304), g_Task->timer * 8 - D_1F800000.view.scenario.math_08);
+    setVector(&D_1F800014[1], FIXED_MUL(rcos(0), 304), FIXED_MUL(rsin(0), 304), g_Task->timer * 8 - D_1F800000.cells.words[2]);
     setVector(&D_1F800014[3], FIXED_MUL(rcos(0), 304), FIXED_MUL(rsin(0), 304), 0);
     for (i = 1; i <= 32; i++) {
         if (i < g_Task->unk_09) {
             if (g_Task->unk_09 - i < 16) {
-                D_1F800000.view.scenario.math_08 = (g_Task->unk_09 - i) * 32;
+                D_1F800000.cells.words[2] = (g_Task->unk_09 - i) * 32;
             } else {
-                D_1F800000.view.scenario.math_08 = (rand() & 0x3F) + 0x200;
+                D_1F800000.cells.words[2] = (rand() & 0x3F) + 0x200;
                 if (i == 32) {
-                    D_1F800000.view.scenario.math_08 = 0x200;
+                    D_1F800000.cells.words[2] = 0x200;
                 }
             }
             D_1F800014[0].vx = D_1F800014[1].vx;
@@ -413,7 +413,7 @@ MATCH void func_801F02CC(void) {
             D_1F800014[2].vx = D_1F800014[3].vx;
             D_1F800014[2].vy = D_1F800014[3].vy;
             D_1F800014[2].vz = 0;
-            setVector(&D_1F800014[1], FIXED_MUL(rcos(i << 7), 304), FIXED_MUL(rsin(i << 7), 304), g_Task->timer * 8 - D_1F800000.view.scenario.math_08);
+            setVector(&D_1F800014[1], FIXED_MUL(rcos(i << 7), 304), FIXED_MUL(rsin(i << 7), 304), g_Task->timer * 8 - D_1F800000.cells.words[2]);
             D_1F800014[3].vx = FIXED_MUL(rcos(i << 7), 304);
             D_1F800014[3].vy = FIXED_MUL(rsin(i << 7), 304);
             D_1F800014[3].vz = 0;
@@ -425,11 +425,11 @@ MATCH void func_801F02CC(void) {
             prim = (POLY_G4*)g_GfxPrimCursor;
             SetPolyG4(prim);
             SetSemiTrans(prim, 1);
-            D_1F800000.view.scenario.math_04 = 32 - g_Task->timer * 2;
+            D_1F800000.cells.words[1] = 32 - g_Task->timer * 2;
             setRGB0(prim, 1, 1, 1);
             setRGB1(prim, 1, 1, 1);
-            setRGB2(prim, 192 - g_Task->timer * 12, D_1F800000.view.scenario.math_04, D_1F800000.view.scenario.math_04);
-            setRGB3(prim, 192 - g_Task->timer * 12, D_1F800000.view.scenario.math_04, D_1F800000.view.scenario.math_04);
+            setRGB2(prim, 192 - g_Task->timer * 12, D_1F800000.cells.words[1], D_1F800000.cells.words[1]);
+            setRGB3(prim, 192 - g_Task->timer * 12, D_1F800000.cells.words[1], D_1F800000.cells.words[1]);
             RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
             Area_AddCellPrim(x, y, 0, sizeof(POLY_G4));
         }
