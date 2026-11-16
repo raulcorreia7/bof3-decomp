@@ -16,11 +16,11 @@ NON_MATCHING void func_801F38A0(s16* row) {
     }
     bottom   = (u16)row[1] + (u16)row[2];
     prim->y2 = prim->y3 = bottom;
-    if (row[5] < bottom) {
+    if (bottom > (s16)row[5]) {
         prim->y2 = prim->y3 = row[5];
     }
-    prim->x0 = prim->x2 = (u16)row[0];
     prim->x1 = prim->x3 = (u16)row[0] + 2;
+    prim->x0 = prim->x2 = (u16)row[0];
     setRGB0(prim, 0x80, 0x80, 0x80);
     Area_AddCellPrim(D_801F53A0, D_801F53A4, 4, sizeof(POLY_F4));
 }
