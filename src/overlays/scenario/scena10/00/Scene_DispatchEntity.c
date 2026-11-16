@@ -68,7 +68,7 @@ MATCH void func_801F719C(void) {
     i = 0;
     do {
         if (((g_Task->option_flags >> i) & 1) == 0) {
-            func_80159B9C(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)D_801FE7CC[i].width, (u8)D_801FE7CC[i].height);
+            UI_DrawPanelBox(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)D_801FE7CC[i].width, (u8)D_801FE7CC[i].height);
         }
         i++;
     } while (i < 3);
@@ -146,7 +146,7 @@ MATCH void func_801F7758(void) {
     Scena10Rect* rect;
 
     rect = &D_801FE7CC[2];
-    func_80159B9C(rect->x, rect->y, (u8)rect->width, (u8)rect->height);
+    UI_DrawPanelBox(rect->x, rect->y, (u8)rect->width, (u8)rect->height);
     func_801F781C((u16)rect->x + 1, (u16)rect->y + 1, 128, 104);
     if (g_Task->unk_0A != 0) {
         g_Task->unk_0A--;
@@ -254,7 +254,7 @@ MATCH void func_801F7DDC(void) {
     func_801F7C34();
     g_Task->screen_x = D_801FE7CC[5].x + D_801FE804[0];
     g_Task->screen_y = D_801FE7CC[5].y + D_801FE804[1];
-    func_80159B9C(D_801FE7CC[5].x, D_801FE7CC[5].y, (u8)D_801FE7CC[5].width, (u8)D_801FE7CC[5].height);
+    UI_DrawPanelBox(D_801FE7CC[5].x, D_801FE7CC[5].y, (u8)D_801FE7CC[5].width, (u8)D_801FE7CC[5].height);
     Actor_StepAnimLoop();
     Area_AddActor();
 }

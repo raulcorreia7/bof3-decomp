@@ -346,7 +346,7 @@ segments:
       - [0xC3A20, c, func_80159A20]
       - [0xC3A90, c, func_80159A90]
       - [0xC3B38, c, func_80159B38]
-      - [0xC3B9C, c, func_80159B9C]
+      - [0xC3B9C, c, UI_DrawPanelBox]
       - [0xC3FA0, c, func_80159FA0]
       - [0xC4098, c, func_8015A098]
       - [0xC4170, c, UI_DrawTextRows]

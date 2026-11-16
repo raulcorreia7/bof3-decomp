@@ -3,7 +3,8 @@
 
 /* Draws a window panel: a dark translucent tile, the window texture in the current style over it, a
  * grey outline, and a darker line outside each edge. */
-MATCH void func_80159B9C(s16 x, s16 y, u8 w, u8 h) {
+/* func_80159B9C */
+MATCH void UI_DrawPanelBox(s16 x, s16 y, u8 w, u8 h) {
     s16       right;
     s16       bottom;
     s32       tile_w;
