@@ -1,7 +1,5 @@
 #include "start_08.h"
 
-extern volatile u8 g_SndMono;
-
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E26A8(s32 x, s32 y) {
     u8  pairs[6][2] = {{0, D_80144950}, {1, g_WindowStyle}, {2, D_80144953}, {3, g_SndMono}, {4, g_AutoRun}, {5, 0}};

@@ -16,8 +16,8 @@ NON_MATCHING void func_801EECB0(void) {
     battler              = g_BattleEffectBattler;
     g_Task->pos.x.fixed  = battler->pos.x.fixed;
     g_Task->pos.y.fixed  = battler->pos.y.fixed;
-    g_Task->param.unk_0B = 0;
     g_Task->pos.z.fixed  = battler->pos.z.fixed;
+    g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0xA;
     g_Task->timer        = 0;
     g_Task->header.mode += 1;

@@ -14,6 +14,7 @@ extern const char D_801EEC44[];
 extern const char D_801EEC48[];
 extern u8*        D_801EB4F4;
 /* func_801ADDD4 */
+u32               Char_GetExpToNextLevel(s32 slot);
 u8                func_801DB524(u32 slot);
 extern const char D_801EEC04[];
 extern const char D_801EEC4C[];
