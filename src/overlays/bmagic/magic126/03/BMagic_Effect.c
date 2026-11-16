@@ -100,8 +100,7 @@ MATCH void func_801EF1C8(void) {
     s32      tpage;
 
     tpage = getTPage(0, 2, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     GLOW_RING_INNER = g_Task->timer * 2;
     GLOW_RING_RED   = g_Task->unk_09 * 12;
     GLOW_RING_GREEN = g_Task->unk_09 * 12;
@@ -385,8 +384,7 @@ MATCH void func_801F06AC(void) {
     s32      tpage;
 
     tpage = getTPage(0, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     D_1F800000.cells.halves[2] = 0;
     D_1F800000.cells.halves[0] = 24;
     D_1F800000.cells.halves[6] = g_Task->unk_2E.half;

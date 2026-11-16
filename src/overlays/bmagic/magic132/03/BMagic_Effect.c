@@ -189,8 +189,7 @@ MATCH void func_801EF5B0(void) {
     s32       tpage;
 
     tpage = getTPage(1, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
     D_1F800000.cells.halves[0] = g_Task->unk_20;
     D_1F800000.cells.halves[1] = (g_Task->param.unk_0B & 0x3F) << 7;
     if (g_Task->header.step == 4) {
@@ -219,8 +218,7 @@ MATCH void func_801EF5B0(void) {
         GFX_AddPrim(2, sizeof(POLY_FT4));
     }
     tpage = getTPage(1, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
 }
 
 /* Draw the two magic132 breath bands as shaded quads along the sine wave of the effect ticker,
@@ -234,8 +232,7 @@ MATCH void func_801EF914(void) {
     s32      phase;
 
     tpage = getTPage(1, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
     if (g_Task->header.step == 4) {
         D_1F800000.cells.halves[2] = (g_Task->unk_1C / 2) << 3;
     } else {
@@ -282,6 +279,5 @@ MATCH void func_801EF914(void) {
         GFX_AddPrim(2, sizeof(POLY_G4));
     }
     tpage = getTPage(1, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
 }

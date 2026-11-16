@@ -12,8 +12,7 @@ MATCH void func_801EEC04(void) {
 
     BMagic_DispatchTaskPair(func_801EEDAC, Effect_MarkDamagedOnZeroTick);
     tpage = getTPage(0, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
 
     for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
         if (BMAGIC_EFFECT_SLOTS[i].header.flags & BMAGIC_EFFECT_IN_USE) {
@@ -28,8 +27,7 @@ MATCH void func_801EEC04(void) {
     }
 
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
 }
 
 MATCH void func_801EEDAC(void) {

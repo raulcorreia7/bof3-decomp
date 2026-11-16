@@ -154,8 +154,7 @@ MATCH void func_801EF4F0(void) {
     s32      tpage;
 
     tpage = getTPage(0, 2, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     s_Magic113OrbitRadius = 0x1C0;
     D_1F800014[2].vx      = FIXED_MUL(rsin(0), s_Magic113OrbitRadius);
     D_1F800014[2].vy      = FIXED_MUL(rcos(0), s_Magic113OrbitRadius);
@@ -176,8 +175,7 @@ MATCH void func_801EF4F0(void) {
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 }
 
 /* func_801EF75C */
@@ -229,8 +227,7 @@ MATCH void func_801EF944(void) {
     s32      tpage;
 
     tpage = getTPage(0, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     setVector(&D_1F800014[0], FIXED_MUL(rsin(0), s_Magic113OrbitRadius), FIXED_MUL(rcos(0), s_Magic113OrbitRadius), 0);
     for (i = 1; i <= 32; i++) {
         if (i < g_Task->unk_09) {
@@ -250,8 +247,7 @@ MATCH void func_801EF944(void) {
         }
     }
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 }
 
 MATCH void func_801EFC28(void) {
@@ -297,8 +293,7 @@ MATCH void func_801EFDA0(void) {
     s32      tpage;
 
     tpage = getTPage(0, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     for (i = 0; i < 5; i++) {
         if (i * 8 < g_Task->unk_09) {
             left   = g_Task->unk_09 - i * 8;
@@ -327,8 +322,7 @@ MATCH void func_801EFDA0(void) {
         }
     }
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 }
 
 MATCH void func_801F0140(void) {
@@ -423,8 +417,7 @@ MATCH void func_801F02CC(void) {
         }
     }
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
 }
 
 MATCH void func_801F0764(void) {

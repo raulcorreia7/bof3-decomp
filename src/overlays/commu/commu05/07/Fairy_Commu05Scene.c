@@ -41,8 +41,7 @@ MATCH void func_801D0F50(s16 x, s16 y, u8 row) {
     s32   tpage;
 
     tpage = getTPage(0, 0, 896, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_ADD_DRAW_MODE(tpage);
     sprite = GFX_CURSOR(SPRT);
     SetSprt(sprite);
     setXY0(sprite, x, y);

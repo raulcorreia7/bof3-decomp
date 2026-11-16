@@ -260,8 +260,7 @@ MATCH void func_801D1C1C(s32* from, s32* to, u8 level) {
     u16      tpage;
 
     tpage = GetTPage(0, 1, 704, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
 
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);

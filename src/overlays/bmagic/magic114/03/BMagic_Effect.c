@@ -10,15 +10,13 @@ MATCH void func_801EEC44(void) {
 
     __builtin_memcpy(handlers, D_801EEC04, sizeof(handlers));
     tpage = getTPage(0, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     if (g_Task->header.flags != 0 && g_Task->header.mode != 0) {
         func_801EF128();
     }
     SYS_DISPATCH_BYTE(handlers, g_Task->header.mode);
     tpage = getTPage(0, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
 }
 
 MATCH void func_801EEDA0(void) {
@@ -434,8 +432,7 @@ MATCH void func_801F0004(void) {
     s32       y;
 
     tpage = getTPage(1, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     g_Task->unk_0C = 0x80000;
     g_Task->unk_10 = 0;
     Effect_RotatePosition(g_Task);
@@ -513,8 +510,7 @@ MATCH void func_801F04D4(s32 semi) {
 
     trans = semi;
     tpage = getTPage(1, semi, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     g_Task->unk_0C = 0x80000;
     g_Task->unk_10 = 0;
     Effect_RotatePosition(g_Task);
@@ -588,8 +584,7 @@ MATCH void func_801F093C(void) {
     s32      y;
 
     tpage = getTPage(0, 2, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     g_Task->unk_0C = -0x30000;
     g_Task->unk_10 = 0;
     Effect_RotatePosition(g_Task);

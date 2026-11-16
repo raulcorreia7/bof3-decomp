@@ -938,8 +938,7 @@ MATCH void func_801D36BC(s32* point, s32 orange_radius, s32 black_radius) {
     u8       i;
 
     tpage = GetTPage(0, 1, 0x2C0, 0x100);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_LAYER_DRAW_MODE(2, tpage);
     Area_SetCameraMatrix(&camera);
     vertex.vx = point[0] + (orange_radius << 4);
     vertex.vy = point[1];

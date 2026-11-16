@@ -190,8 +190,7 @@ MATCH void func_801EF4EC(void) {
     s32      next;
 
     tpage = getTPage(0, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     i = g_Task->param.unk_0B;
     while (BMagic_Trail[g_Task->unk_04][i].x == -1) {
         i++;
@@ -235,8 +234,7 @@ MATCH void func_801EF4EC(void) {
         GFX_AddPrim(3, sizeof(POLY_G4));
     }
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
 }
 
 /* Draws the trail as a ribbon twelve units wide in two passes, one side of the centreline each: the outer edge near
@@ -248,8 +246,7 @@ MATCH void func_801EFA34(void) {
     s32      next;
 
     tpage = getTPage(0, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     D_1F800000.cells.halves[0] = 0xC;
     i                          = g_Task->param.unk_0B;
     while (BMagic_Trail[g_Task->unk_04][i].x == -1) {
@@ -330,8 +327,7 @@ MATCH void func_801EFA34(void) {
         GFX_AddPrim(3, sizeof(POLY_G4));
     }
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
 }
 
 /* func_801F02B0 */
@@ -398,8 +394,7 @@ MATCH void func_801F075C(void) {
     s32      tpage;
 
     tpage = getTPage(0, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     D_1F800000.cells.halves[0] = (rand() & 3) + 28;
     D_1F800000.cells.halves[3] = g_Task->unk_09 * 6;
     for (i = 0; i < 8; i++) {
