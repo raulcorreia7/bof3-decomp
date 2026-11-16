@@ -26,7 +26,7 @@ segments:
       - [0x1F7C, bin, D_801F0B7C]
       - [0x1F88, bin, D_801F0B88]
       - [0x1F8C, bin, D_801F0B8C]
-      - [0x1F98, bin, D_801F0B9A]
+      - [0x1F98, bin, D_801F0B98]
       - [0x1FB0, bin, D_801F0BB2]
       - [0x1FBC, bin, D_801F0BBC]
       - [0x1FCC, bin, D_801F0BCC]
