@@ -21,13 +21,13 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     u16 temp_v0_57;
     u32 temp_v0_61;
     u8  temp_v1_139;
-    u8  var_s4;
+    s32 var_s4;
 
     var_s2 = x;
     var_s1 = y;
     var_s0 = slot;
-    var_s4 = var_s0 - 3;
     GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
+    var_s4 = var_s0 - 3;
     var_s0 = var_s2 + 4;
     var_s0 <<= 0x10;
     var_s0     = var_s0 >> 0x10;

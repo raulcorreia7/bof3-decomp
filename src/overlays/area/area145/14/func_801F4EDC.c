@@ -14,18 +14,18 @@ NON_MATCHING u8 func_801F4EDC(u16 t, u32 stage) {
     u8* step;
     u32 direction;
 
+    elapsed   = t;
     direction = (D_80147A58[(u8)stage].unk_6C >> 9) & 3;
-    if (stage == 1) {
-        step = D_801F5CEC;
+    if ((u8)stage == 1) {
+        step = D_801F5CEC + direction * 4;
     } else {
-        step = D_801F5CFC;
+        step = D_801F5CFC + direction * 4;
     }
-    step += direction * 4;
-    elapsed = (s32)t - 5;
-    time    = elapsed;
-    limit   = step[1];
-    dx      = D_80181B00[step[0] * 2] << 16;
-    mx      = elapsed;
+    elapsed -= 5;
+    time  = elapsed;
+    limit = step[1];
+    dx    = D_80181B00[step[0] * 2] << 16;
+    mx    = elapsed;
     if (limit < time) {
         mx = limit;
     }

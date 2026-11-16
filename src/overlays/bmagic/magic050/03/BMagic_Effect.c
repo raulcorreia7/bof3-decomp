@@ -168,18 +168,20 @@ INCLUDE_ASM(func_801EF1B0);
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EF4C4(void) {
-    POLY_G4* prim;
-    s32      i;
-    s32      tpage;
+    POLY_G4*     prim;
+    PartyMember* work;
+    s32          i;
+    s32          tpage;
 
-    g_ScratchPad.cells.words[0] = g_Task->timer;
-    g_ScratchPad.cells.words[1] = g_Task->timer + (u32)g_Task->timer / 2;
+    work                        = g_Task;
+    g_ScratchPad.cells.words[0] = work->timer;
+    g_ScratchPad.cells.words[1] = work->timer + (u32)work->timer / 2;
     if (g_Battle.action_id == 50) {
-        SPAD(0)->cells.words[2] = g_Task->unk_09 << 2;
+        SPAD(0)->cells.words[2] = work->unk_09 << 2;
     } else {
-        g_ScratchPad.cells.words[2] = g_Task->unk_09 * 6;
+        g_ScratchPad.cells.words[2] = work->unk_09 * 6;
     }
-    g_ScratchPad.cells.words[3] = g_Task->unk_09;
+    g_ScratchPad.cells.words[3] = work->unk_09;
     for (i = 0; i < 16; i++) {
         tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
