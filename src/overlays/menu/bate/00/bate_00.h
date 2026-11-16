@@ -144,7 +144,7 @@ s32  Char_GetExpForLevel(s32 character, s32 level);
 void Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle);
 void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
 
-/* func_801AF930 */
+/* func_801AF930; sig-kept: the retail callers narrow x and y to s16 and pass the ability record. */
 void UI_DrawAbilityRow(s16 x, s16 y, u8 shade, u8 element, volatile Ability* ability, u8 cost, u8 flags);
 /* func_801AF494 */
 bool Item_PassesTest(u8 test, u8 character_id, u8 category, u8 item_id);

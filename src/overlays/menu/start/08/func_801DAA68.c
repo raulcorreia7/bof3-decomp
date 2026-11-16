@@ -1,7 +1,5 @@
 #include "start_08.h"
 
-void func_801DAC1C(void);
-
 MATCH void func_801DAA68(void) {
     u8*            record;
     MenuPanelTask* rows;

@@ -11,7 +11,7 @@ void func_801D4EA4(s32 left, s32 top, s32 icon_row, s32 raised);
 void func_801D8058(s32 left, s32 top);
 void func_801D2908(s16 x, s16 y, u8 mode);
 void func_801D2FA4(s16 x, s16 y);
-void Menu_DrawPanelIcon(s16 x, s16 y, s32 u, s32 v, u16 clut, u8 color);
+void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
 
 INCLUDE_ASM(func_801D1394);
 
@@ -2065,7 +2065,7 @@ MATCH void Fairy_GenerateName(void) {
 }
 
 #ifdef NON_MATCHING
-NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, s32 window_style) {
+NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style) {
     s32 stack_18;
     u8  early;
     s32 stack_20;
@@ -2434,7 +2434,7 @@ NON_MATCHING void func_801D97C8(s32 unused, s32 x, s32 y) {
 INCLUDE_ASM(func_801D97C8);
 #endif
 
-MATCH void Menu_DrawPanelIcon(s16 x, s16 y, s32 u, s32 v, u16 clut, u8 color) {
+MATCH void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color) {
     MenuDrawPanelIcon(x, y, u, v, clut, color);
 }
 

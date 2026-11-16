@@ -1,7 +1,8 @@
 #include "battle_03.h"
 
-u8 Battle_EndRound(void);
-u8 Battle_StepBattlers(void);
+/* sig-kept: the retail caller tests both results as a byte. */
+#define Battle_EndRound     ((u8 (*)(void))Battle_EndRound)
+#define Battle_StepBattlers ((u8 (*)(void))Battle_StepBattlers)
 
 MATCH void func_801D5024(void) {
     switch (g_Battle.phase.sub_step) {

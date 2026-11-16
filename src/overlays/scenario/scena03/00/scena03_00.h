@@ -134,6 +134,4 @@ s8  func_801FC9DC(s32 entry_x, s32 entry_y);
 s8  func_801FCAB8(s32 entry_x, s32 entry_y);
 s8  func_801FCB4C(s32 entry_x, s32 entry_y);
 
-s8 func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
-
 #endif

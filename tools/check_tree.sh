@@ -1,5 +1,5 @@
 #!/bin/sh
-# Reject tracked retail media, files over 1 MiB (config/symbols.toml, the one table of every symbol: 4 MiB), relative includes or imports, struct members of enum type, and sources no image layout compiles. Needs no build inputs.
+# Reject tracked retail media, files over 1 MiB (config/symbols.toml, the one table of every symbol: 4 MiB), relative includes or imports, struct members of enum type, prototypes that differ from their definition, and sources no image layout compiles. Needs no build inputs.
 set -eu
 case "${1:-}" in
 -h | --help) sed -n '2,2p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
@@ -178,4 +178,5 @@ if [ -n "$base" ]; then
 fi
 python3 tools/check_enum_members.py
 python3 tools/check_sources.py
+python3 tools/check_signatures.py
 echo "check-tree: ok"

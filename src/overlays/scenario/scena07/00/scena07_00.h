@@ -195,6 +195,4 @@ extern Callback g_ScenePositionDispatch[];
 extern void (*D_801FDDF0[])(FallingSpark* spark);
 void func_801F81D4(FallingSpark* spark);
 
-s8 func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
-
 #endif

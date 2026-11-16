@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = ROOT / "tools/check_tree.sh"
 ENUM = ROOT / "tools/check_enum_members.py"
 SOURCES = ROOT / "tools/check_sources.py"
+SIGNATURES = ROOT / "tools/check_signatures.py"
 PACKAGE = ROOT / "tools/bof3"
 
 
@@ -23,6 +24,7 @@ def run_tree(
     (repo / "tools/check_tree.sh").write_text(SCRIPT.read_text())
     (repo / "tools/check_enum_members.py").write_text(ENUM.read_text())
     (repo / "tools/check_sources.py").write_text(SOURCES.read_text())
+    (repo / "tools/check_signatures.py").write_text(SIGNATURES.read_text())
     shutil.copytree(
         PACKAGE, repo / "tools/bof3", ignore=shutil.ignore_patterns("__pycache__")
     )

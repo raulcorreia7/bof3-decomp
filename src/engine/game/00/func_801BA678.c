@@ -1,7 +1,5 @@
 #include "game_00.h"
 
-extern bool func_801BB1B8(s32 arg0);
-
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801BA678(void) {
     u8     buf[16];

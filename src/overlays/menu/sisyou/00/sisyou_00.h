@@ -148,6 +148,11 @@ void Menu_DrawMasterPartyRow(u16 x, u16 y, u8 entry, u8 icon);
 void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
 void Menu_DrawPortrait(u16 x, u16 y, u8 sprite_id, u8 shade);
 void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
+void Menu_DrawStatPanel(u16 panel_x, u16 panel_y, u8 palette_index);
+#ifndef MENU_STAT_PANEL_DEFINITION
+/* sig-kept: the retail callers pass the panel position as words; the definition narrows it to s16. */
+#define Menu_DrawStatPanel ((void (*)(s32, s32, u8))Menu_DrawStatPanel)
+#endif
 void Menu_UpdateMaster(void);
 void func_801D2614(void);
 void func_801D2688(void);

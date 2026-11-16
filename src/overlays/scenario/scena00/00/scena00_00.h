@@ -223,7 +223,7 @@ extern u8             D_801FCA65[];
 /* D_801FCA90 */
 extern SceneFx        g_SceneEffect;
 
-void func_80164020(u32 arg0, u32 arg1);
+void func_80164020();
 void func_801F6E04(void);
 void func_801F6E48(void);
 void func_801F7134(s32 chapter_id);

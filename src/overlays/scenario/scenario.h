@@ -12,6 +12,7 @@
 #include "scenario/runtime.h"
 #include "sys/cd.h"
 
+/* sig-kept: the retail callers narrow x and y to u16; the callee masks them to u8. */
 s8 func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
 
 /* The body of a scene's position probe: look the position up in a table of `count` entries and run the handler at the index found, returning its result, else -1. The probes differ only in table, count and handlers. */
