@@ -28,6 +28,7 @@ extern u16 D_80144E24;
 extern u16         D_80144E26;
 extern u16         D_80144E28;
 extern u16         D_80144E2A;
+extern u16         D_80146258;
 extern u8          D_80146865;
 extern u8          D_80146866;
 extern u8          D_80146867;
