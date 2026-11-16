@@ -20,19 +20,19 @@ MATCH u8 func_800C1DD0(void) {
         switch (g_Battle.action_id) {
             case ABILITY_SANCTUARY:
                 func_800C2340(5, 4, 7);
-                func_801E2314(10);
+                Battle_RequestEnemyScript(10);
                 break;
             case ABILITY_HOLOCAUST:
                 func_800C2340(6, 4, 6);
-                func_801E2314(10);
+                Battle_RequestEnemyScript(10);
                 break;
             case ABILITY_VENOM:
                 func_800C2340(3, 4, 5);
-                func_801E2314(6);
+                Battle_RequestEnemyScript(6);
                 break;
             default:
                 func_800C2340(3, 4, 3);
-                func_801E2314(10);
+                Battle_RequestEnemyScript(10);
                 break;
         }
         g_Task->header.step++;

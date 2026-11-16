@@ -37,7 +37,8 @@ s32         func_800AF5FC(BattleRange* target, u32 extent);
 u32         func_800AF66C(BattleRange* range, u32 extent);
 /* func_800AF764 */
 void        Battle_ProjectRange(void);
-void        func_800AF814(u32 battler_index);
+/* func_800AF814 */
+void        Battle_FadePoisonedBattler(u32 battler_index);
 /* func_800AF8F0 */
 void        Battle_SetCellPaletteStp(BattleSpriteCell* record);
 void        func_800AFC98(s32 effect_0, s32 effect_1);

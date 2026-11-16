@@ -5,9 +5,9 @@ MATCH void func_801E35D8(void) {
 
     enemy = g_BattleCurrentEnemy;
     if ((enemy->turn.damage_flags.value & COMBATANT_FLAG_DEFENDING) != 0u) {
-        func_801E2314(8);
+        Battle_RequestEnemyScript(8);
     } else {
-        func_801E2314(0);
+        Battle_RequestEnemyScript(0);
     }
     Battle_IsEnemyBlocked();
     g_Task->header.mode += 1;

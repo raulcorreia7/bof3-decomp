@@ -13,7 +13,7 @@ MATCH void func_801E4FA8(void) {
     work->unk_10  = 0;
     work->unk_09  = 0x10;
     g_Task->timer = 8;
-    func_801E2314(0);
+    Battle_RequestEnemyScript(0);
     GFX_AllocPaletteFade(g_Task, -4, -4, -4, 1);
     work               = g_Task;
     work->header.flags = work->header.flags | ACTOR_FLAG_SEMI_TRANSPARENT;

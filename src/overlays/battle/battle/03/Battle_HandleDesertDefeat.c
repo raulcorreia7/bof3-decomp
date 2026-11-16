@@ -6,6 +6,6 @@ MATCH void Battle_HandleDesertDefeat(void) {
         g_SceneState.state_04 = 1u;
         g_SceneState.step_05  = 0x19u;
         Game_SetScriptActive();
-        func_801DDF28();
+        Battle_EndToArea();
     }
 }

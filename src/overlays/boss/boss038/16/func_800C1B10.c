@@ -6,8 +6,8 @@ MATCH void func_800C1B10(void) {
         g_ScriptVars[0]      = 5;
         g_SceneState.step_05 = 0x20;
         g_SndBGMId           = 0x77;
-        func_801DDED8();
+        Battle_EndVictory();
         return;
     }
-    func_801DDF00();
+    Battle_EndDefeat();
 }

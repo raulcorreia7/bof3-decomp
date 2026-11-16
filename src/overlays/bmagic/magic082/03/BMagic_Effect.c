@@ -83,7 +83,7 @@ MATCH void func_801EF10C(void) {
     g_Task->unk_09 = timer;
     if (timer == 0) {
         GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
-        func_800AF814(g_Battle.target_selector);
+        Battle_FadePoisonedBattler(g_Battle.target_selector);
         if (Battle_CanTarget(D_800B6BF0[g_Task->unk_04], g_Battle.target_selector) & BYTE_MASK) {
             slot                               = Battle_AllocEffect(1, 72) & BYTE_MASK;
             g_BattleEffects[slot].target.party = g_Task;

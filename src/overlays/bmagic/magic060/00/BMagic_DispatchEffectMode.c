@@ -166,7 +166,7 @@ MATCH void func_801F09E0(void) {
     }
     if (g_BattleEffectBattler->param.unk_0B & 0x80) {
         func_80196718(g_Battle.selected_actor);
-        func_800AF814(g_Battle.target_selector);
+        Battle_FadePoisonedBattler(g_Battle.target_selector);
         g_BattleEffectBattler->param.unk_0B -= 1;
         Effect_Reset();
     }

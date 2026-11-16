@@ -111,7 +111,7 @@ MATCH void func_801EF1F0(void) {
     if ((LOWU(g_Task->unk_5C) & ~0xFF) == 0) {
         BMAGIC_SELECT_TARGET_BATTLER();
         GFX_FreePaletteFadeTarget(battler);
-        func_800AF814(g_Battle.target_selector);
+        Battle_FadePoisonedBattler(g_Battle.target_selector);
         g_Task->header.mode++;
     }
 }

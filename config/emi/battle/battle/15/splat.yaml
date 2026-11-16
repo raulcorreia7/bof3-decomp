@@ -485,7 +485,7 @@ segments:
       - [0x18EB8, c, func_800AF6B8]
       - [0x18F20, c, func_800AF720]
       - [0x18F64, c, Battle_ProjectRange]
-      - [0x19014, c, func_800AF814]
+      - [0x19014, c, Battle_FadePoisonedBattler]
       - [0x190F0, c, Battle_SetCellPaletteStp]
       - [0x191D4, c, Battle_ClearCellPaletteStp]
       - [0x192B8, c, Battle_ClearCellPaletteEntry]

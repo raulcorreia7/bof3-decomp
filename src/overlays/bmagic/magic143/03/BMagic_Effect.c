@@ -87,7 +87,7 @@ MATCH void func_801EF054(void) {
         selector = &g_BattleTargetSelector;
         Battle_MarkDamaged(*selector);
         func_80196718(g_BattleSelectedActor);
-        func_800AF814(*selector);
+        Battle_FadePoisonedBattler(*selector);
         g_Task->header.step++;
     }
 }

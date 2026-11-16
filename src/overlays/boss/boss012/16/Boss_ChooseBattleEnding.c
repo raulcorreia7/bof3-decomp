@@ -9,8 +9,8 @@ MATCH void Boss_ChooseBattleEnding(void) {
     if (bits & BATTLE_RESULT_VICTORY) {
         g_ScriptVars[0] = 0x23;
         *status         = bits | BATTLE_RESULT_NO_BGM;
-        func_801DDED8();
+        Battle_EndVictory();
     } else {
-        func_801DDF00();
+        Battle_EndDefeat();
     }
 }

@@ -10,8 +10,8 @@ MATCH void Boss_ChooseBattleEnding(void) {
         g_ScriptVars[0] = 5;
         *status         = bits | BATTLE_RESULT_NO_BGM;
         g_SndBGMId      = 0x44;
-        func_801DDED8();
+        Battle_EndVictory();
     } else {
-        func_801DDF00();
+        Battle_EndDefeat();
     }
 }

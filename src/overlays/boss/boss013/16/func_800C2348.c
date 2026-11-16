@@ -4,7 +4,7 @@ MATCH void func_800C2348(void) {
     if (g_Battle.outcome.result & BATTLE_RESULT_VICTORY) {
         *g_ScriptVars               = 0x14;
         g_Battle.outcome.reward_exp = ENEMY_COMBATANT(3).exp + ENEMY_COMBATANT(4).exp;
-        func_801DDED8();
+        Battle_EndVictory();
     } else {
         if (g_Battle.boss_flags & 0x40) {
             g_Task = &D_801EB860;
@@ -14,7 +14,7 @@ MATCH void func_800C2348(void) {
             Actor_SelectScript(1U);
         }
         *g_ScriptVars = 0x50;
-        func_801DDF28();
+        Battle_EndToArea();
     }
     g_SndBGMId = 0x31;
     g_GameFlags &= 0xFF7F;

@@ -7,7 +7,7 @@ MATCH void func_801E347C(void) {
 
     work = g_Task;
     work->header.flags &= ~ACTOR_FLAG_HIDDEN;
-    func_801E2314(0);
+    Battle_RequestEnemyScript(0);
     old34          = g_Task->pos.x.fixed;
     old38          = g_Task->pos.y.fixed;
     g_Task->unk_0C = 0x80000;

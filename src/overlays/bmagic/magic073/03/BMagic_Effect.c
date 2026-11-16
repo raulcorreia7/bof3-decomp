@@ -82,7 +82,7 @@ MATCH void func_801EF52C(void) {
     g_PaletteFades[g_Task->timer].offset.blue--;
     if (--g_Task->unk_09 == 0) {
         func_80196718(battler);
-        func_800AF814(g_Task->unk_04);
+        Battle_FadePoisonedBattler(g_Task->unk_04);
         g_Task->header.step++;
     }
 }

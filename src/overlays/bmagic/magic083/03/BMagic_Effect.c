@@ -162,7 +162,7 @@ MATCH void func_801EF55C(void) {
     }
     if (--g_Task->unk_09 == 0) {
         GFX_FreePaletteFadeTarget(battler);
-        func_800AF814(slot);
+        Battle_FadePoisonedBattler(slot);
         func_800AEEC8(g_Task->unk_04, g_Task->unk_03);
         g_Task->param.unk_0B++;
         g_Task->header.step++;

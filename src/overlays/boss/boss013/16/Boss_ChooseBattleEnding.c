@@ -3,10 +3,10 @@
 MATCH void Boss_ChooseBattleEnding(void) {
     if BATTLE_IS_VICTORY () {
         g_ScriptVars[0] = 0x32;
-        func_801DDED8();
+        Battle_EndVictory();
     } else {
         g_ScriptVars[0] = 0x32;
-        func_801DDF28();
+        Battle_EndToArea();
         g_Game.battle_order = 3;
     }
 }

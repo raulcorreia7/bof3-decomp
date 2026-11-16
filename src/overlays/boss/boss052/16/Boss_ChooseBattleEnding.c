@@ -6,8 +6,8 @@ MATCH void Boss_ChooseBattleEnding(void) {
         BOSS_SEND_PARTY_TO_ENDING_POSE(1)
         BOSS_SEND_PARTY_TO_ENDING_POSE(2)
         D_80146875 = 0x1A;
-        func_801DDED8();
+        Battle_EndVictory();
         return;
     }
-    func_801DDF00();
+    Battle_EndDefeat();
 }

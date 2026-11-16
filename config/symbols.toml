@@ -85,6 +85,9 @@ Battle_ScaleDamage = { addr = 0x801DCD50, type = "func", source = "Scales the ba
 Battle_CancelTurn = { addr = 0x801DD14C, type = "func", source = "Cancels a battler's queued command and removes it from the turn order by overwriting its g_BattleTurnOrder entry with 0xFF." }
 Battle_InsertTurnFirst = { addr = 0x801DD26C, type = "func", source = "Puts battler arg0 at the head of the turn order: steps g_BattleTurnCursor back one and stores the battler there." }
 Effect_RotatePosition = { addr = 0x801DD350, type = "func", source = "the symbols source says it integrates the effect velocity pairs that func_801F0E54 reads by the ticker; body moves the work record" }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory." }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory." }
+Battle_EndToArea = { addr = 0x801DDF28, type = "func", source = "Ends the battle without a result panel: sets the battle phase to the result mode at step 3, which reloads the party sprites and the area audio and hands the scene back to its script." }
 Battle_GetTurnCursor = { addr = 0x801DDFEC, type = "func", source = "the body returns g_Battle.turn_cursor" }
 Battle_SetSlotPending = { addr = 0x801DE190, type = "func", source = "Marks a battler action as pending." }
 Battle_ClearSlotPending = { addr = 0x801DE1B0, type = "func", source = "Clears a battler's pending action." }
@@ -100,6 +103,7 @@ Battle_UpdatePartyActors = { addr = 0x801DED54, type = "func", source = "Redraws
 Battle_IsPartyMemberBlocked = { addr = 0x801DEE4C, type = "func", source = "returns 1 while the party member is paralyzed or suppressed, else steps its animation once" }
 Battle_UpdateEnemies = { addr = 0x801E2170, type = "func", source = "Runs active enemies in battle." }
 Battle_UpdateEnemyActors = { addr = 0x801E2284, type = "func", source = "Reprojects each active enemy." }
+Battle_RequestEnemyScript = { addr = 0x801E2314, type = "func", source = "Requests the script at index script_index of the current enemy (g_BattleCurrentEnemy) for the task actor, by its facing; bit 0x80 of the script byte sets the actor flag unk_2A." }
 Battle_PickRandomTarget = { addr = 0x801E29B4, type = "func", source = "Picks a random selectable battler." }
 Battle_PickEnemyTarget = { addr = 0x801E2A88, type = "func", source = "Chooses the target of one enemy." }
 Battle_PickLowestHpTarget = { addr = 0x801E2CA4, type = "func", source = "Returns the selectable battler with the lowest hp." }
@@ -240,6 +244,7 @@ Battle_CanTarget = { addr = 0x800AED5C, type = "func", source = "Tells whether t
 Battle_MoveRangeToward = { addr = 0x800AF2B4, type = "func", source = "moves the range work toward the target along a normalized vector by the step" }
 Battle_StepRangeToward = { addr = 0x800AF3A0, type = "func", source = "Moves the battle range one step toward a point: the range's x and y axes and its vertical span each move by the step along the unit direction to the point." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot." }
 Battle_SetCellPaletteStp = { addr = 0x800AF8F0, type = "func", source = "Sets bit 15 (STP) of each palette entry after the first in the palette row of the battle sprite cell." }
 Battle_ClearCellPaletteStp = { addr = 0x800AF9D4, type = "func", source = "Clears bit 15 (STP) of each palette entry after the first in the palette row of the battle sprite cell." }
 Battle_ClearCellPaletteEntry = { addr = 0x800AFAB8, type = "func", source = "Zeroes one palette entry (index 0x1F) of the palette row of the battle sprite cell." }
@@ -378,6 +383,7 @@ D_801F0B38 = { addr = 0x801F0B38, source = "Effect slot table of the magic003 ef
 ["emi/bmagic/magic004/03"]
 Battle_ApplyDamageFlags = { addr = 0x800A9610, alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 GFX_AllocPaletteFade = { addr = 0x8019651C, alias = true }
 GFX_FreePaletteFadeTarget = { addr = 0x80196718, alias = true }
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
@@ -466,6 +472,7 @@ D_801EF8A4 = { addr = 0x801EF8A4, source = "Step handlers of magic009 (Chlorine)
 
 ["emi/bmagic/magic010/00"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 g_PaletteFades = { addr = 0x80145BD4, alias = true, source = "Palette fade table: one PaletteFade row per fading target, claimed by GFX_AllocPaletteFade and released by GFX_FreePaletteFade." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
 Effect_StartPaletteFade = { addr = 0x801EEC80, type = "func", source = "Frees the selected actor's palette fade, allocates a new one into the effect ticker (byte 0x0B), clears the effect timer (byte 0x09) and advances header.mode (byte 0x01) in magic010 (Unmotivate, Bad back, Watch Enemy…)." }
@@ -597,6 +604,7 @@ g_BMagicEffectModes = { addr = 0x801EF9A4, source = "Handlers of magic038 (War S
 ["emi/bmagic/magic039/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 g_PaletteFades = { addr = 0x80145BD4, alias = true, source = "Palette fade table: one PaletteFade row per fading target, claimed by GFX_AllocPaletteFade and released by GFX_FreePaletteFade." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
@@ -629,6 +637,7 @@ g_BMagicEffectModes = { addr = 0x801EFC6C, source = "Handlers of magic040 (Enlig
 
 ["emi/bmagic/magic041/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -658,6 +667,7 @@ g_BMagicEffectModes = { addr = 0x801EFB70, source = "Handlers of magic042 (Count
 ["emi/bmagic/magic043/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_CanTarget = { addr = 0x800AED5C, type = "func", source = "Tells whether the battler can be a target of the selector: it makes the battler the current target, runs the selector's target test and restores the target; true when the test passes. battle/15 owns the body." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Effect_RotatePosition = { addr = 0x801DD350, type = "func", source = "Integrates the effect velocity pairs the effect steps read; battle/03 owns the body." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
@@ -880,6 +890,7 @@ g_BMagicEffectModes = { addr = 0x801F066C, source = "Handlers of magic059 (Torna
 
 ["emi/bmagic/magic060/00"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 g_IdentifiedEnemies = { addr = 0x80144FA0, alias = true, source = "One bit per enemy kind byte (256 bits): Identify sets the bit of the targeted enemy and the identified test reads it." }
 g_BattleTargetSelector = { addr = 0x80146384, alias = true, source = "Target of the current action; the target_selector member of g_Battle." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
@@ -900,6 +911,7 @@ D_1F800000_HALF = { addr = 0x1F800000, type = "s16", source = "The scratchpad ba
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_RescaleStats = { addr = 0x800A9BD8, source = "Rescales one battler stats.", alias = true }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 g_BattleTargetRecord = { addr = 0x801463A0, source = "Result cells of the target battler; the target_record member of g_Battle.", alias = true }
 g_Abilities = { addr = 0x801CA70C, source = "The 228 Ability records of GAME.EMI.", alias = true }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
@@ -1011,6 +1023,7 @@ g_BMagicEffectModes = { addr = 0x801EFCC8, source = "Handlers of magic068 (Foret
 
 ["emi/bmagic/magic069/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
@@ -1027,6 +1040,7 @@ g_BMagicEffectModes = { addr = 0x801F04F8, source = "Handlers of magic069 (Influ
 ["emi/bmagic/magic070/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, alias = true, source = "Projects the battle range to the screen." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_ReplacePaletteFade = { addr = 0x801EEFA4, type = "func", source = "When the effect timer (byte 0x09) reaches zero frees the selected actor's palette fade, allocates a new one (index in byte 0x0A), restarts the timer at 8 and advances header.mode (byte 0x01) in magic070 (Absorb, Heal)." }
@@ -1041,6 +1055,7 @@ Effect_DrawSparkleDisc = { addr = 0x801EFCDC, type = "func", source = "Draws the
 ["emi/bmagic/magic071/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, alias = true, source = "Projects the battle range to the screen." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_ReplacePaletteFade = { addr = 0x801EEFA4, type = "func", source = "When the effect timer (byte 0x09) reaches zero frees the selected actor's palette fade, allocates a new one (index in byte 0x0A), restarts the timer at 8 and advances header.mode (byte 0x01) in magic071 (Healing Herb, Rejuvenate)." }
@@ -1055,6 +1070,7 @@ Effect_DrawSparkleDisc = { addr = 0x801EFCDC, type = "func", source = "Draws the
 ["emi/bmagic/magic072/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, alias = true, source = "Projects the battle range to the screen." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 Effect_ReplacePaletteFade = { addr = 0x801EEFA4, type = "func", source = "When the effect timer (byte 0x09) reaches zero frees the selected actor's palette fade, allocates a new one (index in byte 0x0A), restarts the timer at 8 and advances header.mode (byte 0x01) in magic072 (Restore)." }
@@ -1069,6 +1085,7 @@ Effect_DrawSparkleDisc = { addr = 0x801EFCDC, type = "func", source = "Draws the
 ["emi/bmagic/magic073/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, alias = true, source = "Projects the battle range to the screen." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
@@ -1093,6 +1110,7 @@ D_801F21F0 = { addr = 0x801F21F0, source = "Work record of the magic073 sway eff
 ["emi/bmagic/magic074/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, alias = true, source = "Projects the battle range to the screen." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
@@ -1203,6 +1221,7 @@ D_1F800000_HALF = { addr = 0x1F800000, type = "s16", source = "The scratchpad ba
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_CanTarget = { addr = 0x800AED5C, type = "func", source = "Tells whether the battler can be a target of the selector: it makes the battler the current target, runs the selector's target test and restores the target; true when the test passes. battle/15 owns the body." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -1225,6 +1244,7 @@ g_BMagicEffectModes = { addr = 0x801F0D14, source = "Handlers of magic082 (Stero
 D_1F800000_HALF = { addr = 0x1F800000, type = "s16", source = "The scratchpad base 0x1F800000 as signed halfwords; func_801F038C stages the ring radius there for its rsin and rcos scaling.", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
@@ -1245,6 +1265,7 @@ g_BMagicEffectModes = { addr = 0x801F0EEC, source = "Handlers of magic083 (Shiel
 ["emi/bmagic/magic086/03"]
 D_1F800000_WORD = { addr = 0x1F800000, type = "s32", alias = true, source = "ScratchPad.cells.words[0]: func_801EF424 stages the ring radius there for its rsin and rcos scaling." }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -1277,6 +1298,7 @@ D_801F0530 = { addr = 0x801F0530, source = "Step handlers of the effect, run by 
 ["emi/bmagic/magic088/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_CanTarget = { addr = 0x800AED5C, type = "func", source = "Tells whether the battler can be a target of the selector: it makes the battler the current target, runs the selector's target test and restores the target; true when the test passes. battle/15 owns the body." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -1311,6 +1333,7 @@ D_801EFC64 = { addr = 0x801EFC64, source = "Mode handlers of the magic091 effect
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
@@ -1336,6 +1359,7 @@ D_801F07D8 = { addr = 0x801F07D8, source = "Second step handlers of the magic092
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
@@ -1353,6 +1377,7 @@ D_801F08C4 = { addr = 0x801F08C4, source = "Step handlers of the magic093 effect
 D_1F800000_WORD = { addr = 0x1F800000, type = "s32", alias = true, source = "ScratchPad.cells.words[0]: func_801EF710 stages the ring radius there for its rsin and rcos scaling." }
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_AllocEffect = { addr = 0x801E590C, type = "func", alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEnemies = { addr = 0x801EB2E8, alias = true, source = "The enemy battlers." }
@@ -1363,6 +1388,7 @@ D_801EF988 = { addr = 0x801EF988, source = "Mode handlers of magic094, run by he
 ["emi/bmagic/magic095/03"]
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEnemies = { addr = 0x801EB2E8, alias = true, source = "The enemy battlers." }
@@ -1398,6 +1424,7 @@ D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true, source = "Scr
 D_1F800014_HALF = { addr = 0x1F800014, type = "s16", alias = true, source = "ScratchPad.vectors read as signed halfwords: the four projected SVECTORs RotTransPers4 writes." }
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
@@ -1416,6 +1443,7 @@ g_BMagicEffectModes = { addr = 0x801F0AC0, source = "Handlers of magic097 (Jolt)
 D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true, source = "ScratchPad.cells.halves at 0x1F800000 as signed halfwords; the magic effects read and set its first halfword as a vertical offset." }
 D_1F800014_HALF = { addr = 0x1F800014, type = "s16", alias = true, source = "ScratchPad.vectors read as signed halfwords: the four projected SVECTORs RotTransPers4 writes." }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
@@ -1437,6 +1465,7 @@ Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the sel
 Battle_RescaleStats = { addr = 0x800A9BD8, alias = true, source = "Rescales one battler's stats." }
 Battle_QueueAction = { addr = 0x800AAC88, alias = true, source = "Queues one battler action." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -1662,6 +1691,7 @@ Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer,
 
 ["emi/bmagic/magic117/00"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
 Effect_PlayOnce = { addr = 0x801EEFB8, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic117 (Rest, Douse, Snooze)." }
 Effect_StartPaletteFade = { addr = 0x801EF06C, type = "func", source = "Frees the selected actor's palette fade, allocates a new one into the effect ticker (byte 0x0B), clears the effect timer (byte 0x09) and advances header.mode (byte 0x01) in magic117 (Rest, Douse, Snooze)." }
@@ -1876,6 +1906,7 @@ g_BMagicEffectModes = { addr = 0x801F1BC4, source = "Handlers of magic131 (Kaise
 ["emi/bmagic/magic132/03"]
 Battle_ApplyDamageFlags = { addr = 0x800A9610, alias = true, source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_CenterCamera = { addr = 0x800AFD9C, alias = true, source = "Centres the battle camera on the living battlers." }
 GFX_AllocPaletteFade = { addr = 0x8019651C, alias = true, source = "Claims the first free of the 32 g_PaletteFades entries for a target, fills its red, green and blue offsets and table index from the target, marks the palette cells it fades and returns its index, or 0xFF when all are active." }
 GFX_FreePaletteFadeTarget = { addr = 0x80196718, alias = true, source = "Releases every g_PaletteFades entry whose target is the given target." }
@@ -1926,6 +1957,7 @@ g_BMagicEffectModes = { addr = 0x801EF72C, source = "Handlers of magic138 (Main 
 D_1F800014_HALF = { addr = 0x1F800014, type = "s16", alias = true, source = "ScratchPad.vectors read as signed halfwords: the four projected SVECTORs RotTransPers4 writes." }
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 SND_QueueSelectionEffect = { addr = 0x8015D71C, alias = true, source = "Marks the four effect voice slots free and queues the cue through SND_PlayCue." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
@@ -1941,6 +1973,7 @@ g_BMagicEffectModes = { addr = 0x801EFEE8, source = "Handlers of magic143 (Thund
 ["emi/bmagic/magic144/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -2083,6 +2116,7 @@ g_BMagicEffectModes = { addr = 0x801EF3E8, source = "Handlers of magic161 (Timed
 ["emi/bmagic/magic162/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, alias = true, source = "Projects the battle range to the screen." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 D_801EEC04 = { addr = 0x801EEC04, type = "BMagicEffectFuncs", source = "Step handlers of magic162, run by header.mode (byte 0x01) from func_801EEC28." }
@@ -2108,6 +2142,7 @@ g_BMagicEffectModes = { addr = 0x801EF718, source = "Handlers of magic166 (Monop
 
 ["emi/bmagic/magic167/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -2129,6 +2164,7 @@ D_801F08C4 = { addr = 0x801F08C4, source = "Step handlers of magic167, run by he
 ["emi/bmagic/magic168/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, alias = true, source = "Projects the battle range to the screen." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 D_801EEC04 = { addr = 0x801EEC04, type = "BMagicEffectFuncs", source = "Step handlers of magic168, run by header.mode (byte 0x01) from func_801EEC28." }
@@ -2146,6 +2182,7 @@ BMagic_AllocEffect = { addr = 0x801EFFFC, type = "func", source = "Claims the fi
 ["emi/bmagic/magic169/03"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
@@ -2370,23 +2407,27 @@ Boss_FinishDefeat2 = { addr = 0x800C1900, type = "func", source = "Defeats the b
 Boss_FinishDefeat = { addr = 0x800C1C20, type = "func", source = "Defeats the boss with Battle_DefeatEnemy (banks its EXP and Zenny, counts it off and sets BATTLE_RESULT_VICTORY for the last enemy), flags the enemy to skip its action step, unhides the actor and sets header.mode (byte 0x01) to 3 with the step cleared in boss001." }
 Boss_InstallBattleHooks = { addr = 0x800C1E50, type = "func", source = "Installs the boss battle hooks of boss001: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1E88, type = "func", source = "Handles the boss battle events of boss001: g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
-Boss_ChooseBattleEnding = { addr = 0x800C1FF8, type = "func", source = "Chooses how the boss battle of boss001 ends (g_BattleChooseEndingHook). On defeat sets g_SceneState.state_04 to 6 and step_05 to 0x32; otherwise advances g_SceneState.step_05. Then runs func_801DDF28." }
+Boss_ChooseBattleEnding = { addr = 0x800C1FF8, type = "func", source = "Chooses how the boss battle of boss001 ends (g_BattleChooseEndingHook). On defeat sets g_SceneState.state_04 to 6 and step_05 to 0x32; otherwise advances g_SceneState.step_05. Then runs Battle_EndToArea." }
 Boss_EndBattle = { addr = 0x800C2060, type = "func", source = "Ends the boss battle of boss001 (g_BattleEndHook): for each of battle slots 6 and 7 runs func_800AC844 and func_800AC870 on the matching enemy battler, takes the actor func_800AC754 returns, finds scene record 0x5F, clears work bytes 0x2A and 0x48, selects script 1 for slot 6 and script 0 for slot 7, and copies the halfwords at bytes 0x58 and 0x5A of that enemy battler into it." }
+Battle_EndToArea = { addr = 0x801DDF28, type = "func", source = "Ends the battle without a result panel: sets the battle phase to the result mode at step 3, which reloads the party sprites and the area audio and hands the scene back to its script.", alias = true }
+Battle_RequestEnemyScript = { addr = 0x801E2314, type = "func", source = "Requests the script at index script_index of the current enemy (g_BattleCurrentEnemy) for the task actor, by its facing; bit 0x80 of the script byte sets the actor flag unk_2A.", alias = true }
 
 ["emi/boss/boss002/16"]
 Boss_FinishDefeat = { addr = 0x800C1B88, type = "func", source = "Defeats the boss with Battle_DefeatEnemy (banks its EXP and Zenny, counts it off and sets BATTLE_RESULT_VICTORY for the last enemy), flags the enemy to skip its action step, unhides the actor and sets header.mode (byte 0x01) to 3 with the step cleared in boss002." }
 Boss_InstallBattleHooks = { addr = 0x800C1D50, type = "func", source = "Installs the boss battle hooks of boss002: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1D88, type = "func", source = "Handles the boss battle events of boss002: at event mode 0, when the battle is won, sets g_MenuPanelMode to 2 and starts area message 0x19; always returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C1DD4, type = "func", source = "Chooses how the boss battle of boss002 ends (g_BattleChooseEndingHook). When a result bit in mask 6 is set runs func_800AC934(0), sets script variable 0 to 0x24, sets g_SndBGMId to 0x1B, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C1DD4, type = "func", source = "Chooses how the boss battle of boss002 ends (g_BattleChooseEndingHook). When a result bit in mask 6 is set runs func_800AC934(0), sets script variable 0 to 0x24, sets g_SndBGMId to 0x1B, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C1E34, type = "func", source = "Ends the boss battle of boss002: the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
 Boss_InstallBattleHooks2 = { addr = 0x800C1E3C, type = "func", source = "Installs the boss battle hooks of boss002 (set 2): Boss_ChooseBattleEnding2 into g_BattleChooseEndingHook, Boss_EndBattle2 into g_BattleEndHook and Boss_RunBattleEvent2 into g_BossBattleEventHook." }
 Boss_RunBattleEvent2 = { addr = 0x800C1E74, type = "func", source = "Handles the boss battle events of boss002 (set 2): ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding2 = { addr = 0x800C1E7C, type = "func", source = "Chooses how the boss battle of boss002 (set 2) ends (g_BattleChooseEndingHook). When a result bit in mask 6 is set runs func_800AC870(0, (PartyMember*)g_BattleEnemyBattlers, 0), sets script variable 0 to 0x6D, sets g_SndBGMId to 0x18, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding2 = { addr = 0x800C1E7C, type = "func", source = "Chooses how the boss battle of boss002 (set 2) ends (g_BattleChooseEndingHook). When a result bit in mask 6 is set runs func_800AC870(0, (PartyMember*)g_BattleEnemyBattlers, 0), sets script variable 0 to 0x6D, sets g_SndBGMId to 0x18, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle2 = { addr = 0x800C1EE8, type = "func", source = "Ends the boss battle of boss002 (set 2): the battle-end hook (g_BattleEndHook) of this set, which runs func_800AC844(0)." }
 Boss_InstallBattleHooks3 = { addr = 0x800C1F08, type = "func", source = "Installs the boss battle hooks of boss002 (set 3): Boss_ChooseBattleEnding3 into g_BattleChooseEndingHook, Boss_EndBattle3 into g_BattleEndHook and Boss_RunBattleEvent3 into g_BossBattleEventHook." }
 Boss_RunBattleEvent3 = { addr = 0x800C1F40, type = "func", source = "Handles the boss battle events of boss002 (set 3): ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding3 = { addr = 0x800C1F48, type = "func", source = "Chooses how the boss battle of boss002 (set 3) ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding3 = { addr = 0x800C1F48, type = "func", source = "Chooses how the boss battle of boss002 (set 3) ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle3 = { addr = 0x800C1F94, type = "func", source = "Ends the boss battle of boss002 (set 3): the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 
 ["emi/boss/boss004/13"]
 jtbl_800C1804 = { addr = 0x800C1804, type = "Callback", size = 0x1C, source = "The switch table of Boss_RunBattleEvent: 7 jump targets of its jr dispatch." }
@@ -2395,16 +2436,18 @@ jtbl_800C1844 = { addr = 0x800C1844, type = "Callback", size = 0x1C, source = "T
 Boss_FinishDefeat = { addr = 0x800C1940, type = "func", source = "Defeats the boss with Battle_DefeatEnemy (banks its EXP and Zenny, counts it off and sets BATTLE_RESULT_VICTORY for the last enemy), flags the enemy to skip its action step, unhides the actor and sets header.mode (byte 0x01) to 3 with the step cleared in boss004." }
 Boss_InstallBattleHooks = { addr = 0x800C1C0C, type = "func", source = "Installs the boss battle hooks of boss004: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1C44, type = "func", source = "Handles the boss battle events of boss004: g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
-Boss_ChooseBattleEnding = { addr = 0x800C1DE4, type = "func", source = "Chooses how the boss battle of boss004 ends (g_BattleChooseEndingHook). On defeat sets g_Game.battle_order to 7, sets 0x80 in g_BattleOptions, runs func_801DDF28, sets g_SceneState.step_05 to 0x32; otherwise advances g_SceneState.step_05, runs func_801DDF28." }
+Boss_ChooseBattleEnding = { addr = 0x800C1DE4, type = "func", source = "Chooses how the boss battle of boss004 ends (g_BattleChooseEndingHook). On defeat sets g_Game.battle_order to 7, sets 0x80 in g_BattleOptions, runs Battle_EndToArea, sets g_SceneState.step_05 to 0x32; otherwise advances g_SceneState.step_05, runs Battle_EndToArea." }
 Boss_EndBattle = { addr = 0x800C1E64, type = "func", source = "Ends the boss battle of boss004: the battle-end hook (g_BattleEndHook) of this set." }
 Boss_InstallBattleHooks2 = { addr = 0x800C1FB0, type = "func", source = "Installs the boss battle hooks of boss004 (set 2): Boss_ChooseBattleEnding2 into g_BattleChooseEndingHook, Boss_EndBattle2 into g_BattleEndHook and Boss_RunBattleEvent2 into g_BossBattleEventHook." }
 Boss_RunBattleEvent2 = { addr = 0x800C1FE8, type = "func", source = "Handles the boss battle events of boss004 (set 2): g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
-Boss_ChooseBattleEnding2 = { addr = 0x800C2188, type = "func", source = "Chooses how the boss battle of boss004 (set 2) ends (g_BattleChooseEndingHook). On defeat sets g_Game.battle_order to 8, sets 0x80 in g_BattleOptions, runs func_801DDF28, sets g_SceneState.step_05 to 0x32; otherwise advances g_SceneState.step_05, runs func_801DDF28." }
+Boss_ChooseBattleEnding2 = { addr = 0x800C2188, type = "func", source = "Chooses how the boss battle of boss004 (set 2) ends (g_BattleChooseEndingHook). On defeat sets g_Game.battle_order to 8, sets 0x80 in g_BattleOptions, runs Battle_EndToArea, sets g_SceneState.step_05 to 0x32; otherwise advances g_SceneState.step_05, runs Battle_EndToArea." }
 Boss_EndBattle2 = { addr = 0x800C2208, type = "func", source = "Ends the boss battle of boss004 (set 2): the battle-end hook (g_BattleEndHook) of this set." }
 Boss_InstallBattleHooks3 = { addr = 0x800C234C, type = "func", source = "Installs the boss battle hooks of boss004 (set 3): Boss_ChooseBattleEnding3 into g_BattleChooseEndingHook, Boss_EndBattle3 into g_BattleEndHook and Boss_RunBattleEvent3 into g_BossBattleEventHook." }
 Boss_RunBattleEvent3 = { addr = 0x800C2384, type = "func", source = "Handles the boss battle events of boss004 (set 3): g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
-Boss_ChooseBattleEnding3 = { addr = 0x800C2524, type = "func", source = "Chooses how the boss battle of boss004 (set 3) ends (g_BattleChooseEndingHook). On defeat sets g_Game.battle_order to 7, sets 0x80 in g_BattleOptions, runs func_801DDF28, sets g_SceneState.step_05 to 0x32; otherwise advances g_SceneState.step_05, runs func_801DDF28." }
+Boss_ChooseBattleEnding3 = { addr = 0x800C2524, type = "func", source = "Chooses how the boss battle of boss004 (set 3) ends (g_BattleChooseEndingHook). On defeat sets g_Game.battle_order to 7, sets 0x80 in g_BattleOptions, runs Battle_EndToArea, sets g_SceneState.step_05 to 0x32; otherwise advances g_SceneState.step_05, runs Battle_EndToArea." }
 Boss_EndBattle3 = { addr = 0x800C25A4, type = "func", source = "Ends the boss battle of boss004 (set 3): the battle-end hook (g_BattleEndHook) of this set." }
+Battle_EndToArea = { addr = 0x801DDF28, type = "func", source = "Ends the battle without a result panel: sets the battle phase to the result mode at step 3, which reloads the party sprites and the area audio and hands the scene back to its script.", alias = true }
+Battle_RequestEnemyScript = { addr = 0x801E2314, type = "func", source = "Requests the script at index script_index of the current enemy (g_BattleCurrentEnemy) for the task actor, by its facing; bit 0x80 of the script byte sets the actor flag unk_2A.", alias = true }
 
 ["emi/boss/boss007/16"]
 jtbl_800C1804 = { addr = 0x800C1804, type = "Callback", size = 0x1C, source = "The switch table of Boss_RunBattleEvent: 7 jump targets of its jr dispatch." }
@@ -2412,59 +2455,72 @@ Boss_InstallBattleHooks = { addr = 0x800C1A0C, type = "func", source = "Installs
 Boss_RunBattleEvent = { addr = 0x800C1A44, type = "func", source = "Handles the boss battle events of boss007: g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
 Boss_ChooseBattleEnding = { addr = 0x800C1CB4, type = "func", source = "Chooses how the boss battle of boss007 ends: the ending hook (g_BattleChooseEndingHook) of this set." }
 Boss_EndBattle = { addr = 0x800C1D50, type = "func", source = "Ends the boss battle of boss007: the battle-end hook (g_BattleEndHook) of this set, which runs func_800AC844(0) and func_800AC844(1)." }
+Battle_EndToArea = { addr = 0x801DDF28, type = "func", source = "Ends the battle without a result panel: sets the battle phase to the result mode at step 3, which reloads the party sprites and the area audio and hands the scene back to its script.", alias = true }
 
 ["emi/boss/boss008/16"]
 Boss_InstallBattleHooks = { addr = 0x800C1F9C, type = "func", source = "Installs the boss battle hooks of boss008: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1FD4, type = "func", source = "Handles the boss battle events of boss008: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C1FDC, type = "func", source = "Chooses how the boss battle of boss008 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x11, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C1FDC, type = "func", source = "Chooses how the boss battle of boss008 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x11, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C2028, type = "func", source = "Ends the boss battle of boss008 (g_BattleEndHook): runs func_800AC844(0), takes the actor func_800AC754(0) returns, finds scene record 0x83, plays script 0 and copies the halfwords at bytes 0x58 and 0x5A of the first enemy battler into it." }
 Boss_InstallBattleHooks2 = { addr = 0x800C2088, type = "func", source = "Installs the boss battle hooks of boss008 (set 2): Boss_ChooseBattleEnding2 into g_BattleChooseEndingHook, Boss_EndBattle2 into g_BattleEndHook and Boss_RunBattleEvent2 into g_BossBattleEventHook." }
 Boss_RunBattleEvent2 = { addr = 0x800C20C0, type = "func", source = "Handles the boss battle events of boss008 (set 2): ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding2 = { addr = 0x800C20C8, type = "func", source = "Chooses how the boss battle of boss008 (set 2) ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x20, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding2 = { addr = 0x800C20C8, type = "func", source = "Chooses how the boss battle of boss008 (set 2) ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x20, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle2 = { addr = 0x800C2114, type = "func", source = "Ends the boss battle of boss008, set 2 (g_BattleEndHook): runs func_800AC844(1), takes the actor func_800AC754(1) returns, finds scene record 0x83, sets work byte 0x2A to 1, plays script 0 and copies the halfwords at bytes 0x58 and 0x5A of the first enemy battler into it." }
 Boss_InstallBattleHooks3 = { addr = 0x800C2184, type = "func", source = "Installs the boss battle hooks of boss008 (set 3): Boss_ChooseBattleEnding3 into g_BattleChooseEndingHook, Boss_EndBattle3 into g_BattleEndHook and Boss_RunBattleEvent3 into g_BossBattleEventHook." }
 Boss_RunBattleEvent3 = { addr = 0x800C21BC, type = "func", source = "Handles the boss battle events of boss008 (set 3): ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding3 = { addr = 0x800C21C4, type = "func", source = "Chooses how the boss battle of boss008 (set 3) ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x30, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding3 = { addr = 0x800C21C4, type = "func", source = "Chooses how the boss battle of boss008 (set 3) ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x30, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle3 = { addr = 0x800C2210, type = "func", source = "Ends the boss battle of boss008, set 3 (g_BattleEndHook): runs func_800AC844(2), takes the actor func_800AC754(2) returns, finds scene record 0x83, sets work byte 0x2A to 1, plays script 0 and copies the halfwords at bytes 0x58 and 0x5A of the first enemy battler into it." }
 Boss_RunBattleEvent4 = { addr = 0x800C22B8, type = "func", source = "Handles the boss battle events of boss008 (set 4): ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding4 = { addr = 0x800C22C0, type = "func", source = "Chooses how the boss battle of boss008 (set 4) ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x44, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding4 = { addr = 0x800C22C0, type = "func", source = "Chooses how the boss battle of boss008 (set 4) ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x44, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle4 = { addr = 0x800C230C, type = "func", source = "Ends the boss battle of boss008, set 4 (g_BattleEndHook): runs func_800AC844(3), takes the actor func_800AC754(3) returns, finds scene record 0x83, plays script 0 and copies the halfwords at bytes 0x58 and 0x5A of the first enemy battler into it." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 
 ["emi/boss/boss012/16"]
 Boss_InstallBattleHooks = { addr = 0x800C1B68, type = "func", source = "Installs the boss battle hooks of boss012: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1BA0, type = "func", source = "Handles the boss battle events of boss012: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C1BA8, type = "func", source = "Chooses how the boss battle of boss012 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x23, sets BATTLE_RESULT_NO_BGM in g_BattleResult and runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C1BA8, type = "func", source = "Chooses how the boss battle of boss012 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x23, sets BATTLE_RESULT_NO_BGM in g_BattleResult and runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C1C00, type = "func", source = "Ends the boss battle of boss012: the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 
 ["emi/boss/boss013/16"]
 jtbl_800C1804 = { addr = 0x800C1804, type = "Callback", size = 0x18, source = "The switch table of func_800C2138: 6 jump targets of its jr dispatch." }
 Boss_InstallBattleHooks = { addr = 0x800C200C, type = "func", source = "Installs the boss battle hooks of boss013: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C2044, type = "func", source = "Handles the boss battle events of boss013: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C204C, type = "func", source = "Chooses how the boss battle of boss013 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x32, runs func_801DDED8; otherwise sets script variable 0 to 0x32, runs func_801DDF28, sets g_Game.battle_order to 3." }
+Boss_ChooseBattleEnding = { addr = 0x800C204C, type = "func", source = "Chooses how the boss battle of boss013 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x32, runs Battle_EndVictory; otherwise sets script variable 0 to 0x32, runs Battle_EndToArea, sets g_Game.battle_order to 3." }
 Boss_EndBattle = { addr = 0x800C20B0, type = "func", source = "Ends the boss battle of boss013: the battle-end hook (g_BattleEndHook) of this set, which runs func_800AC844(0) and func_800AC844(1)." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndToArea = { addr = 0x801DDF28, type = "func", source = "Ends the battle without a result panel: sets the battle phase to the result mode at step 3, which reloads the party sprites and the area audio and hands the scene back to its script.", alias = true }
 
 ["emi/boss/boss014/16"]
 Boss_InstallBattleHooks = { addr = 0x800C19E8, type = "func", source = "Installs the boss battle hooks of boss014: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1A20, type = "func", source = "Handles the boss battle events of boss014: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C1A28, type = "func", source = "Chooses how the boss battle of boss014 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x0C, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C1A28, type = "func", source = "Chooses how the boss battle of boss014 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x0C, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C1A74, type = "func", source = "Ends the boss battle of boss014: the battle-end hook (g_BattleEndHook) of this set, which runs func_800AC934(0)." }
 Boss_InstallBattleHooks2 = { addr = 0x800C1A94, type = "func", source = "Installs the boss battle hooks of boss014 (set 2): Boss_ChooseBattleEnding2 into g_BattleChooseEndingHook, Boss_EndBattle2 into g_BattleEndHook and Boss_RunBattleEvent2 into g_BossBattleEventHook." }
 Boss_RunBattleEvent2 = { addr = 0x800C1ACC, type = "func", source = "Handles the boss battle events of boss014 (set 2): ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding2 = { addr = 0x800C1AD4, type = "func", source = "Chooses how the boss battle of boss014 (set 2) ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding2 = { addr = 0x800C1AD4, type = "func", source = "Chooses how the boss battle of boss014 (set 2) ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle2 = { addr = 0x800C1B20, type = "func", source = "Ends the boss battle of boss014 (set 2): the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 
 ["emi/boss/boss015/16"]
 Boss_InstallBattleHooks = { addr = 0x800C18F0, type = "func", source = "Installs the boss battle hooks of boss015: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1928, type = "func", source = "Handles the boss battle events of boss015: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C1930, type = "func", source = "Chooses how the boss battle of boss015 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x4B, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C1930, type = "func", source = "Chooses how the boss battle of boss015 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x4B, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C197C, type = "func", source = "Ends the boss battle of boss015: the battle-end hook (g_BattleEndHook) of this set, which runs func_800AC934(1)." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 
 ["emi/boss/boss017/16"]
 Boss_FinishDefeat = { addr = 0x800C18E4, type = "func", source = "Defeats the boss with Battle_DefeatEnemy (banks its EXP and Zenny, counts it off and sets BATTLE_RESULT_VICTORY for the last enemy), flags the enemy to skip its action step, unhides the actor and sets header.mode (byte 0x01) to 3 with the step cleared in boss017." }
 Boss_InstallBattleHooks = { addr = 0x800C19C4, type = "func", source = "Installs the boss battle hooks of boss017: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C19FC, type = "func", source = "Handles the boss battle events of boss017: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C1A04, type = "func", source = "Chooses how the boss battle of boss017 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x14, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C1A04, type = "func", source = "Chooses how the boss battle of boss017 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x14, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C1A50, type = "func", source = "Ends the boss battle of boss017: the battle-end hook (g_BattleEndHook) of this set, which runs func_800AC844(0)." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 
 ["emi/boss/boss018/16"]
 jtbl_800C1804 = { addr = 0x800C1804, type = "Callback", size = 0x18, source = "The switch table of Boss_RunBattleEvent: 6 jump targets of its jr dispatch." }
@@ -2474,23 +2530,26 @@ Boss_EndEntrance = { addr = 0x800C1940, type = "func", source = "Ends the entran
 Boss_EndEntrance2 = { addr = 0x800C1ADC, type = "func", source = "Ends the entrance of boss018: once Actor_StepAnimOnce reports the actor script ready, sets header.mode (byte 0x01) to 2." }
 Boss_InstallBattleHooks = { addr = 0x800C2114, type = "func", source = "Installs the boss battle hooks of boss018: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C214C, type = "func", source = "Handles the boss battle events of boss018: g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
-Boss_ChooseBattleEnding = { addr = 0x800C2258, type = "func", source = "Chooses how the boss battle of boss018 ends. On victory sets D_80146875 to 0x1A when bit 1 of g_BattleBossFlags is set, else to 0x1B, and runs func_801DDED8. On defeat with bit 0 of g_BattleBossFlags clear, runs func_800C2A40, sets D_80146875 to 0x1C (scene flag 0x23 clear) or 0x3A (flag 0x23 set, 0x24 clear) and runs func_801DDF28; otherwise runs func_801DDF00. Always copies four battler words to D_801FD6FC to D_801FD702." }
+Boss_ChooseBattleEnding = { addr = 0x800C2258, type = "func", source = "Chooses how the boss battle of boss018 ends. On victory sets D_80146875 to 0x1A when bit 1 of g_BattleBossFlags is set, else to 0x1B, and runs Battle_EndVictory. On defeat with bit 0 of g_BattleBossFlags clear, runs func_800C2A40, sets D_80146875 to 0x1C (scene flag 0x23 clear) or 0x3A (flag 0x23 set, 0x24 clear) and runs Battle_EndToArea; otherwise runs Battle_EndDefeat. Always copies four battler words to D_801FD6FC to D_801FD702." }
 Boss_EndBattle = { addr = 0x800C2378, type = "func", source = "Ends the boss battle of boss018 (g_BattleEndHook): when bit 0x4000 of the halfword at D_801EB6B2 is clear, runs func_800AC870 and func_800AC844 for battle slot 0; always runs both for slots 3 and 4." }
 Boss_InstallBattleHooks2 = { addr = 0x800C23F8, type = "func", source = "Installs the boss battle hooks of boss018 (set 2): Boss_ChooseBattleEnding2 into g_BattleChooseEndingHook, Boss_EndBattle2 into g_BattleEndHook and Boss_RunBattleEvent2 into g_BossBattleEventHook." }
 Boss_RunBattleEvent2 = { addr = 0x800C2430, type = "func", source = "Handles the boss battle events of boss018 (set 2): g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
-Boss_ChooseBattleEnding2 = { addr = 0x800C253C, type = "func", source = "Chooses how the boss battle of boss018 (set 2) ends. On victory sets D_80146875 to 0x1A when bit 1 of g_BattleBossFlags is set, else to 0x23, and runs func_801DDED8. On defeat with bit 0 of g_BattleBossFlags clear, runs func_800C2A40, sets D_80146875 to 0x1C (scene flag 0x23 clear) or 0x3A (flag 0x23 set, 0x24 clear) and runs func_801DDF28; otherwise runs func_801DDF00. Always copies four battler words to D_801FD6FC to D_801FD702." }
+Boss_ChooseBattleEnding2 = { addr = 0x800C253C, type = "func", source = "Chooses how the boss battle of boss018 (set 2) ends. On victory sets D_80146875 to 0x1A when bit 1 of g_BattleBossFlags is set, else to 0x23, and runs Battle_EndVictory. On defeat with bit 0 of g_BattleBossFlags clear, runs func_800C2A40, sets D_80146875 to 0x1C (scene flag 0x23 clear) or 0x3A (flag 0x23 set, 0x24 clear) and runs Battle_EndToArea; otherwise runs Battle_EndDefeat. Always copies four battler words to D_801FD6FC to D_801FD702." }
 Boss_EndBattle2 = { addr = 0x800C265C, type = "func", source = "Ends the boss battle of boss018 (set 2) (g_BattleEndHook): when bit 0x4000 of the halfword at D_801EB6B2 is clear, runs func_800AC870 and func_800AC844 for battle slot 1; always runs both for slots 3 and 4." }
 Boss_InstallBattleHooks3 = { addr = 0x800C26DC, type = "func", source = "Installs the boss battle hooks of boss018 (set 3): Boss_ChooseBattleEnding3 into g_BattleChooseEndingHook, Boss_EndBattle3 into g_BattleEndHook and Boss_RunBattleEvent3 into g_BossBattleEventHook." }
 Boss_RunBattleEvent3 = { addr = 0x800C2714, type = "func", source = "Handles the boss battle events of boss018 (set 3): g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
 Boss_ChooseBattleEnding3 = { addr = 0x800C2820, type = "func", source = "Chooses how the boss battle of boss018 (set 3) ends: the ending hook (g_BattleChooseEndingHook) of this set." }
 Boss_EndBattle3 = { addr = 0x800C292C, type = "func", source = "Ends the boss battle of boss018 (set 3) (g_BattleEndHook): when bit 0x4000 of the halfword at D_801EB6B2 is clear, runs func_800AC870 and func_800AC844 for battle slot 2; always runs both for slots 3 and 4." }
 Boss_SetCharacterId = { addr = 0x800C2A40, type = "func", source = "the body stores into g_Game.members[0].chr.character_id" }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
+Battle_EndToArea = { addr = 0x801DDF28, type = "func", source = "Ends the battle without a result panel: sets the battle phase to the result mode at step 3, which reloads the party sprites and the area audio and hands the scene back to its script.", alias = true }
 
 ["emi/boss/boss021/16"]
 jtbl_800C1804 = { addr = 0x800C1804, type = "Callback", size = 0x18, source = "The switch table of Boss_RunBattleEvent: 6 jump targets of its jr dispatch." }
 Boss_InstallBattleHooks = { addr = 0x800C1AD0, type = "func", source = "Installs the boss battle hooks of boss021: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1B08, type = "func", source = "Handles the boss battle events of boss021: g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
-Boss_ChooseBattleEnding = { addr = 0x800C1C18, type = "func", source = "Chooses how the boss battle of boss021 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x0A, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C1C18, type = "func", source = "Chooses how the boss battle of boss021 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x0A, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C1C64, type = "func", source = "Ends the boss battle of boss021 (g_BattleEndHook): runs func_800AC844(0), clears work byte 0x2A of the actor func_800AC754(0) returns, selects its script 4 and runs func_800AC934 for slots 1 and 2." }
 
 ["emi/boss/boss022/13"]
@@ -2500,22 +2559,25 @@ Boss_InstallBattleHooks = { addr = 0x800C1A08, type = "func", source = "Installs
 Boss_RunBattleEvent = { addr = 0x800C1A40, type = "func", source = "Handles the boss battle events of boss022: ignores every event mode and returns 0." }
 Boss_ChooseBattleEnding = { addr = 0x800C1A48, type = "func", source = "Chooses how the boss battle of boss022 ends: the ending hook (g_BattleChooseEndingHook) of this set." }
 Boss_EndBattle = { addr = 0x800C1ABC, type = "func", source = "Ends the boss battle of boss022 (g_BattleEndHook): runs func_800AC844(0), takes the actor func_800AC754(0) returns, finds scene record 0xAA, clears work bytes 0x2A and 0x48 and selects script 6." }
+Battle_EndToArea = { addr = 0x801DDF28, type = "func", source = "Ends the battle without a result panel: sets the battle phase to the result mode at step 3, which reloads the party sprites and the area audio and hands the scene back to its script.", alias = true }
 
 ["emi/boss/boss023/16"]
 Boss_InstallBattleHooks = { addr = 0x800C1984, type = "func", source = "Installs the boss battle hooks of boss023: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C19BC, type = "func", source = "Handles the boss battle events of boss023: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C19C4, type = "func", source = "Chooses how the boss battle of boss023 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x0A, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C19C4, type = "func", source = "Chooses how the boss battle of boss023 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x0A, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C1A10, type = "func", source = "Ends the boss battle of boss023 (g_BattleEndHook): runs func_800AC934 for battle slots 0, 1 and 2." }
 
 ["emi/boss/boss024/16"]
 Boss_InstallBattleHooks = { addr = 0x800C19E8, type = "func", source = "Installs the boss battle hooks of boss024: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1A20, type = "func", source = "Handles the boss battle events of boss024: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C1A28, type = "func", source = "Chooses how the boss battle of boss024 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 5, sets BATTLE_RESULT_NO_BGM in g_BattleResult, sets g_SndBGMId to 0x44 and runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C1A28, type = "func", source = "Chooses how the boss battle of boss024 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 5, sets BATTLE_RESULT_NO_BGM in g_BattleResult, sets g_SndBGMId to 0x44 and runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C1A90, type = "func", source = "Ends the boss battle of boss024: the battle-end hook (g_BattleEndHook) of this set, which runs func_800AC934(3)." }
 Boss_InstallBattleHooks2 = { addr = 0x800C1AB0, type = "func", source = "Installs the boss battle hooks of boss024 (set 2): Boss_ChooseBattleEnding2 into g_BattleChooseEndingHook, Boss_EndBattle2 into g_BattleEndHook and Boss_RunBattleEvent2 into g_BossBattleEventHook." }
 Boss_RunBattleEvent2 = { addr = 0x800C1AE8, type = "func", source = "Handles the boss battle events of boss024 (set 2): ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding2 = { addr = 0x800C1AF0, type = "func", source = "Chooses how the boss battle of boss024 (set 2) ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding2 = { addr = 0x800C1AF0, type = "func", source = "Chooses how the boss battle of boss024 (set 2) ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle2 = { addr = 0x800C1B3C, type = "func", source = "Ends the boss battle of boss024 (set 2): the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 
 ["emi/boss/boss025/13"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
@@ -2531,86 +2593,110 @@ Boss_InstallBattleHooks = { addr = 0x800C2B60, type = "func", source = "Installs
 Boss_RunBattleEvent = { addr = 0x800C2B98, type = "func", source = "Handles the boss battle events of boss025: g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
 Boss_ChooseBattleEnding = { addr = 0x800C2D7C, type = "func", source = "Chooses how the boss battle of boss025 ends: the ending hook (g_BattleChooseEndingHook) of this set." }
 Boss_EndBattle = { addr = 0x800C2F74, type = "func", source = "Ends the boss battle of boss025: the battle-end hook (g_BattleEndHook) of this set." }
+Battle_EndToArea = { addr = 0x801DDF28, type = "func", source = "Ends the battle without a result panel: sets the battle phase to the result mode at step 3, which reloads the party sprites and the area audio and hands the scene back to its script.", alias = true }
+Battle_RequestEnemyScript = { addr = 0x801E2314, type = "func", source = "Requests the script at index script_index of the current enemy (g_BattleCurrentEnemy) for the task actor, by its facing; bit 0x80 of the script byte sets the actor flag unk_2A.", alias = true }
 
 ["emi/boss/boss028/16"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Boss_RaiseEffectPlaying = { addr = 0x800C1AA0, type = "func", source = "raises BATTLE_STATE_EFFECT_PLAYING and runs Battle_TriggerCritical and func_801E567C when func_801E30F8 is ready in boss028" }
 Boss_InstallBattleHooks = { addr = 0x800C1B40, type = "func", source = "Installs the boss battle hooks of boss028: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1B78, type = "func", source = "Handles the boss battle events of boss028: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C1B80, type = "func", source = "Chooses how the boss battle of boss028 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 30, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C1B80, type = "func", source = "Chooses how the boss battle of boss028 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 30, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C1BCC, type = "func", source = "Ends the boss battle of boss028: the battle-end hook (g_BattleEndHook) of this set, which runs func_800AC934(0)." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
+Battle_RequestEnemyScript = { addr = 0x801E2314, type = "func", source = "Requests the script at index script_index of the current enemy (g_BattleCurrentEnemy) for the task actor, by its facing; bit 0x80 of the script byte sets the actor flag unk_2A.", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 
 ["emi/boss/boss029/16"]
 Boss_InstallBattleHooks = { addr = 0x800C18F0, type = "func", source = "Installs the boss battle hooks of boss029: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1928, type = "func", source = "Handles the boss battle events of boss029: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C1930, type = "func", source = "Chooses how the boss battle of boss029 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 0x1C, runs func_801DDED8, sets g_SndBGMId to 0x62; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C1930, type = "func", source = "Chooses how the boss battle of boss029 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 0x1C, runs Battle_EndVictory, sets g_SndBGMId to 0x62; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C1988, type = "func", source = "Ends the boss battle of boss029: the battle-end hook (g_BattleEndHook) of this set, which runs func_800AC934(0)." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 
 ["emi/boss/boss030/16"]
 Boss_InstallBattleHooks = { addr = 0x800C19DC, type = "func", source = "Installs the boss battle hooks of boss030: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1A14, type = "func", source = "Handles the boss battle events of boss030: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C1A1C, type = "func", source = "Chooses how the boss battle of boss030 ends (g_BattleChooseEndingHook). On victory sets visit_count to &g_ScriptVars[0], advances (*visit_count), sets g_SceneState.step_05 to 0xC, runs func_801DDED8, sets g_SndBGMId to 0x5A; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C1A1C, type = "func", source = "Chooses how the boss battle of boss030 ends (g_BattleChooseEndingHook). On victory sets visit_count to &g_ScriptVars[0], advances (*visit_count), sets g_SceneState.step_05 to 0xC, runs Battle_EndVictory, sets g_SndBGMId to 0x5A; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C1A84, type = "func", source = "Ends the boss battle of boss030 (g_BattleEndHook): runs func_800AC934 for battle slots 0, 1 and 2." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 
 ["emi/boss/boss031/13"]
 Boss_InstallBattleHooks = { addr = 0x800C19C8, type = "func", source = "Installs the boss battle hooks of boss031: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1A00, type = "func", source = "Handles the boss battle events of boss031: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C1A08, type = "func", source = "Chooses how the boss battle of boss031 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 0x14 and runs func_801DDED8; otherwise clears bit 0x40 of g_BattleOptions and runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C1A08, type = "func", source = "Chooses how the boss battle of boss031 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 0x14 and runs Battle_EndVictory; otherwise clears bit 0x40 of g_BattleOptions and runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C1A6C, type = "func", source = "Ends the boss battle of boss031: the battle-end hook (g_BattleEndHook) of this set, which runs func_800AC844(0) and func_800AC754(0)." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 
 ["emi/boss/boss032/16"]
 Boss_InstallBattleHooks = { addr = 0x800C19C8, type = "func", source = "Installs the boss battle hooks of boss032: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1A00, type = "func", source = "Handles the boss battle events of boss032: ignores every event mode and returns 0." }
 Boss_ChooseBattleEnding = { addr = 0x800C1A08, type = "func", source = "Chooses how the boss battle of boss032 ends: the ending hook (g_BattleChooseEndingHook) of this set." }
 Boss_EndBattle = { addr = 0x800C1BEC, type = "func", source = "Ends the boss battle of boss032: the battle-end hook (g_BattleEndHook) of this set, which runs func_800AC844(0) and func_800AC754(0)." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 
 ["emi/boss/boss033/16"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 g_BattleScrollDeltas = { addr = 0x800B44C0, alias = true, source = "The camera scroll step of each scroll direction." }
 Boss_InstallBattleHooks = { addr = 0x800C1D70, type = "func", source = "Installs the boss battle hooks of boss033: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1DA8, type = "func", source = "Handles the boss battle events of boss033: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C1DB0, type = "func", source = "Chooses how the boss battle of boss033 ends (g_BattleChooseEndingHook). When a result bit in mask 6 is set runs func_800AC934(0), sets D_80146875 to 8, copies D_80145EC4 and D_80145EC8 into g_AreaScrollTargetX and g_AreaScrollTargetY and runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C1DB0, type = "func", source = "Chooses how the boss battle of boss033 ends (g_BattleChooseEndingHook). When a result bit in mask 6 is set runs func_800AC934(0), sets D_80146875 to 8, copies D_80145EC4 and D_80145EC8 into g_AreaScrollTargetX and g_AreaScrollTargetY and runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C1E24, type = "func", source = "Ends the boss battle of boss033: the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
 Effect_ShakeScreen = { addr = 0x800C26A4, type = "func", source = "Sets the three screen shake offsets (bytes 0x5D to 0x5F) to -16 times the effect ticker (byte 0x0B) and counts the effect timer (byte 0x09) down, clearing the effect at the wrap past zero in the boss033 battle." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 
 ["emi/boss/boss034/16"]
 jtbl_800C1804 = { addr = 0x800C1804, type = "Callback", size = 0x18, source = "The switch table of func_800C1F30: 6 jump targets of its jr dispatch." }
 Boss_InstallBattleHooks = { addr = 0x800C2340, type = "func", source = "Installs the boss battle hooks of boss034: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C2378, type = "func", source = "Handles the boss battle events of boss034: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C2380, type = "func", source = "Chooses how the boss battle of boss034 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C2380, type = "func", source = "Chooses how the boss battle of boss034 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C23CC, type = "func", source = "Ends the boss battle of boss034: the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 
 ["emi/boss/boss035/16"]
 jtbl_800C1804 = { addr = 0x800C1804, type = "Callback", size = 0x18, source = "The switch table of Boss_RunBattleEvent: 6 jump targets of its jr dispatch." }
 Boss_InstallBattleHooks = { addr = 0x800C1B4C, type = "func", source = "Installs the boss battle hooks of boss035: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1B84, type = "func", source = "Handles the boss battle events of boss035: g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
-Boss_ChooseBattleEnding = { addr = 0x800C1BF0, type = "func", source = "Chooses how the boss battle of boss035 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 21, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C1BF0, type = "func", source = "Chooses how the boss battle of boss035 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 21, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C1C3C, type = "func", source = "Ends the boss battle of boss035: the battle-end hook (g_BattleEndHook) of this set, which runs ." }
 Boss_InstallBattleHooks2 = { addr = 0x800C1C70, type = "func", source = "Installs the boss battle hooks of boss035 (set 2): Boss_ChooseBattleEnding2 into g_BattleChooseEndingHook, Boss_EndBattle2 into g_BattleEndHook and Boss_RunBattleEvent2 into g_BossBattleEventHook." }
 Boss_RunBattleEvent2 = { addr = 0x800C1CA8, type = "func", source = "Handles the boss battle events of boss035 (set 2): ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding2 = { addr = 0x800C1CB0, type = "func", source = "Chooses how the boss battle of boss035 (set 2) ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding2 = { addr = 0x800C1CB0, type = "func", source = "Chooses how the boss battle of boss035 (set 2) ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle2 = { addr = 0x800C1CFC, type = "func", source = "Ends the boss battle of boss035 (set 2): the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 
 ["emi/boss/boss036/16"]
 Boss_InstallBattleHooks = { addr = 0x800C1D78, type = "func", source = "Installs the boss battle hooks of boss036: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1DB0, type = "func", source = "Handles the boss battle events of boss036: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C1DB8, type = "func", source = "Chooses how the boss battle of boss036 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 8, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C1DB8, type = "func", source = "Chooses how the boss battle of boss036 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 8, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C1E04, type = "func", source = "Ends the boss battle of boss036: the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
 Boss_InstallBattleHooks2 = { addr = 0x800C1E0C, type = "func", source = "Installs the boss battle hooks of boss036 (set 2): Boss_ChooseBattleEnding2 into g_BattleChooseEndingHook, Boss_EndBattle2 into g_BattleEndHook and Boss_RunBattleEvent2 into g_BossBattleEventHook." }
 Boss_RunBattleEvent2 = { addr = 0x800C1E44, type = "func", source = "Handles the boss battle events of boss036 (set 2): ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding2 = { addr = 0x800C1E4C, type = "func", source = "Chooses how the boss battle of boss036 (set 2) ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding2 = { addr = 0x800C1E4C, type = "func", source = "Chooses how the boss battle of boss036 (set 2) ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle2 = { addr = 0x800C1E98, type = "func", source = "Ends the boss battle of boss036 (set 2): the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
 Boss_RunSubStep = { addr = 0x800C1EE4, type = "func", source = "Runs the sub-step handler that the actor step byte (byte 0x02) selects from the three callbacks at D_800C1804 in boss036." }
 Effect_AddActor = { addr = 0x800C1FA4, type = "func", source = "Adds the effect's actor and advances header.step (byte 0x02) once BATTLE_STATE_EFFECT_PLAYING is set." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
+Battle_RequestEnemyScript = { addr = 0x801E2314, type = "func", source = "Requests the script at index script_index of the current enemy (g_BattleCurrentEnemy) for the task actor, by its facing; bit 0x80 of the script byte sets the actor flag unk_2A.", alias = true }
 
 ["emi/boss/boss037/16"]
 Boss_InitEnemy = { addr = 0x800C1848, type = "func", source = "Sets up the current boss enemy of boss037: points its script at D_800C1990, its mode handler (member 0xE4) at func_800C18AC and its action table (member 0xE8) at D_800C199C, flags COMBATANT_FLAG_MODE_HANDLER_ACTION, sets header.mode (byte 0x01) to 2 and runs Actor_StepAnimLoop." }
 Boss_InstallBattleHooks = { addr = 0x800C18FC, type = "func", source = "Installs the boss battle hooks of boss037: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1934, type = "func", source = "Handles the boss battle events of boss037: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C193C, type = "func", source = "Chooses how the boss battle of boss037 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 28, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C193C, type = "func", source = "Chooses how the boss battle of boss037 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 28, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C1988, type = "func", source = "Ends the boss battle of boss037: the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 
 ["emi/boss/boss038/16"]
 Battle_LoadEnemyBattler = { addr = 0x800AC218, type = "func", source = "Loads the area enemy record enemy_index into the EnemyBattler row of battle slot slot." }
@@ -2619,28 +2705,32 @@ Boss_SetEnemyScript = { addr = 0x800C1980, type = "func", source = "sets boss038
 Boss_EnemyScriptMode = { addr = 0x800C19E4, type = "func", source = "boss038 enemy script mode handler" }
 Boss_InstallBattleHooks = { addr = 0x800C1B7C, type = "func", source = "Installs the boss battle hooks of boss038: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1BB4, type = "func", source = "Handles the boss battle events of boss038: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C1BBC, type = "func", source = "Chooses how the boss battle of boss038 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C1BBC, type = "func", source = "Chooses how the boss battle of boss038 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C1C08, type = "func", source = "Ends the boss battle of boss038: the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
 g_BossEnemyScript = { addr = 0x800C1C10, source = "boss038 enemy script data" }
 g_BossEnemyActions = { addr = 0x800C1C1C, source = "boss038 enemy action table" }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 
 ["emi/boss/boss040/16"]
 Boss_InitEnemy2 = { addr = 0x800C1848, type = "func", source = "Sets up the current boss enemy of boss040: points its script at D_800C1B1C, its mode handler (member 0xE4) at func_800C18AC and its action table (member 0xE8) at D_800C1B28, flags COMBATANT_FLAG_MODE_HANDLER_ACTION, sets header.mode (byte 0x01) to 2 and runs Actor_StepAnimLoop." }
 Boss_InitEnemy3 = { addr = 0x800C1940, type = "func", source = "Sets up the current boss enemy of boss040: points its script at D_800C1B1C, its mode handler (member 0xE4) at func_800C19A4 and its action table (member 0xE8) at D_800C1B28, flags COMBATANT_FLAG_MODE_HANDLER_ACTION, sets header.mode (byte 0x01) to 2 and runs Actor_StepAnimLoop." }
 Boss_InstallBattleHooks = { addr = 0x800C19F4, type = "func", source = "Installs the boss battle hooks of boss040: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1A2C, type = "func", source = "Handles the boss battle events of boss040: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C1A34, type = "func", source = "Chooses how the boss battle of boss040 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C1A34, type = "func", source = "Chooses how the boss battle of boss040 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C1A80, type = "func", source = "Ends the boss battle of boss040: the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
 Boss_InstallBattleHooks2 = { addr = 0x800C1A88, type = "func", source = "Installs the boss battle hooks of boss040 (set 2): Boss_ChooseBattleEnding2 into g_BattleChooseEndingHook, Boss_EndBattle2 into g_BattleEndHook and Boss_RunBattleEvent2 into g_BossBattleEventHook." }
 Boss_RunBattleEvent2 = { addr = 0x800C1AC0, type = "func", source = "Handles the boss battle events of boss040 (set 2): ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding2 = { addr = 0x800C1AC8, type = "func", source = "Chooses how the boss battle of boss040 (set 2) ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 38, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding2 = { addr = 0x800C1AC8, type = "func", source = "Chooses how the boss battle of boss040 (set 2) ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 38, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle2 = { addr = 0x800C1B14, type = "func", source = "Ends the boss battle of boss040 (set 2): the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 
 ["emi/boss/boss042/16"]
 Boss_InitEnemy = { addr = 0x800C1848, type = "func", source = "Sets up the current boss enemy of boss042: points its script at D_800C1990, its mode handler (member 0xE4) at func_800C18AC and its action table (member 0xE8) at D_800C199C, flags COMBATANT_FLAG_MODE_HANDLER_ACTION, sets header.mode (byte 0x01) to 2 and runs Actor_StepAnimLoop." }
 Boss_InstallBattleHooks = { addr = 0x800C18FC, type = "func", source = "Installs the boss battle hooks of boss042: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1934, type = "func", source = "Handles the boss battle events of boss042: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C193C, type = "func", source = "Chooses how the boss battle of boss042 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C193C, type = "func", source = "Chooses how the boss battle of boss042 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C1988, type = "func", source = "Ends the boss battle of boss042: the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
 
 ["emi/boss/boss049/16"]
@@ -2648,20 +2738,24 @@ Boss_InitEnemy2 = { addr = 0x800C1848, type = "func", source = "Sets up the curr
 Boss_InitEnemy3 = { addr = 0x800C1940, type = "func", source = "Sets up the current boss enemy of boss049: points its script at D_800C1B1C, its mode handler (member 0xE4) at func_800C19A4 and its action table (member 0xE8) at D_800C1B28, flags COMBATANT_FLAG_MODE_HANDLER_ACTION, sets header.mode (byte 0x01) to 2 and runs Actor_StepAnimLoop." }
 Boss_InstallBattleHooks = { addr = 0x800C19F4, type = "func", source = "Installs the boss battle hooks of boss049: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1A2C, type = "func", source = "Handles the boss battle events of boss049: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C1A34, type = "func", source = "Chooses how the boss battle of boss049 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C1A34, type = "func", source = "Chooses how the boss battle of boss049 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 5, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C1A80, type = "func", source = "Ends the boss battle of boss049 (g_BattleEndHook): does nothing." }
 Boss_InstallBattleHooks2 = { addr = 0x800C1A88, type = "func", source = "Installs the boss battle hooks of boss049 (set 2): Boss_ChooseBattleEnding2 into g_BattleChooseEndingHook, Boss_EndBattle2 into g_BattleEndHook and Boss_RunBattleEvent2 into g_BossBattleEventHook." }
 Boss_RunBattleEvent2 = { addr = 0x800C1AC0, type = "func", source = "Handles the boss battle events of boss049 (set 2): ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding2 = { addr = 0x800C1AC8, type = "func", source = "Chooses how the boss battle of boss049 (set 2) ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 10, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding2 = { addr = 0x800C1AC8, type = "func", source = "Chooses how the boss battle of boss049 (set 2) ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 10, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle2 = { addr = 0x800C1B14, type = "func", source = "Ends the boss battle of boss049 (set 2) (g_BattleEndHook): does nothing." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 
 ["emi/boss/boss050/16"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Boss_InstallBattleHooks = { addr = 0x800C1908, type = "func", source = "Installs the boss battle hooks of boss050: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1940, type = "func", source = "Handles the boss battle events of boss050: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C1948, type = "func", source = "Chooses how the boss battle of boss050 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 0x10, runs func_801DDED8, sets g_SndBGMId to 0x8C; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C1948, type = "func", source = "Chooses how the boss battle of boss050 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 0x10, runs Battle_EndVictory, sets g_SndBGMId to 0x8C; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C19A0, type = "func", source = "Ends the boss battle of boss050 (g_BattleEndHook): does nothing." }
 Effect_PlayOnce = { addr = 0x800C1AEC, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in the boss050 battle." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 
 ["emi/boss/boss051/16"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
@@ -2669,11 +2763,13 @@ Boss_SetEnemyScript = { addr = 0x800C1858, type = "func", source = "sets boss051
 Boss_EnemyScriptMode = { addr = 0x800C19C4, type = "func", source = "boss051 enemy script mode handler" }
 Boss_InstallBattleHooks = { addr = 0x800C1A14, type = "func", source = "Installs the boss battle hooks of boss051: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1A4C, type = "func", source = "Handles the boss battle events of boss051: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C1A54, type = "func", source = "Chooses how the boss battle of boss051 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 15, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C1A54, type = "func", source = "Chooses how the boss battle of boss051 ends (g_BattleChooseEndingHook). On victory sets g_SceneState.step_05 to 15, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C1AA0, type = "func", source = "Ends the boss battle of boss051 (g_BattleEndHook): does nothing." }
 Effect_StartPlaying = { addr = 0x800C1D7C, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in the boss051 battle." }
 g_BossEnemyScript = { addr = 0x800C1DB0, source = "boss051 enemy script data" }
 g_BossEnemyActions = { addr = 0x800C1DBC, source = "boss051 enemy action table" }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 
 ["emi/boss/boss052/16"]
@@ -2682,14 +2778,18 @@ Boss_RunBattleEvent = { addr = 0x800C1B44, type = "func", source = "Handles the 
 Boss_ChooseBattleEnding = { addr = 0x800C1B4C, type = "func", source = "Chooses how the boss battle of boss052 ends: g_BattleChooseEndingHook runs it from Battle_LoadEndOverlay once the battle result is set; the body is not decompiled." }
 Boss_EndBattle = { addr = 0x800C1D14, type = "func", source = "Ends the boss battle of boss052 (g_BattleEndHook): runs func_800AC844(0), takes the actor func_800AC754(0) returns and selects its script 5." }
 Boss_RunSubStep = { addr = 0x800C1D98, type = "func", source = "Runs the sub-step handler that the actor step byte (byte 0x02) selects from the three callbacks at D_800C1804 in boss052." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 
 ["emi/boss/boss054/16"]
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Boss_InstallBattleHooks = { addr = 0x800C1930, type = "func", source = "Installs the boss battle hooks of boss054: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1968, type = "func", source = "Handles the boss battle events of boss054: ignores every event mode and returns 0." }
-Boss_ChooseBattleEnding = { addr = 0x800C1970, type = "func", source = "Chooses how the boss battle of boss054 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 50, runs func_801DDED8; otherwise runs func_801DDF00." }
+Boss_ChooseBattleEnding = { addr = 0x800C1970, type = "func", source = "Chooses how the boss battle of boss054 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 50, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
 Boss_EndBattle = { addr = 0x800C19BC, type = "func", source = "Ends the boss battle of boss054 (g_BattleEndHook): does nothing." }
 Effect_StartPlaying = { addr = 0x800C1CFC, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in the boss054 battle." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
 
@@ -2702,6 +2802,9 @@ Boss_ChooseBattleEnding = { addr = 0x800C24E0, type = "func", source = "Chooses 
 Boss_EndBattle = { addr = 0x800C26B4, type = "func", source = "Ends the boss battle of boss055 (g_BattleEndHook): runs func_800AC844(0)." }
 Area_RoundSpriteCoordinate = { addr = 0x800C3254, type = "func", source = "Rounds a 16.16 sprite cell coordinate up to the next whole unit when its fraction is nonzero and step is not negative, and returns the whole part." }
 Boss_CopyEffectTransform = { addr = 0x800C3284, type = "func", source = "copies the g_BattleEffectBattler transform, scale and flags into the task and rounds the sprite coordinates" }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
+Battle_EndToArea = { addr = 0x801DDF28, type = "func", source = "Ends the battle without a result panel: sets the battle phase to the result mode at step 3, which reloads the party sprites and the area audio and hands the scene back to its script.", alias = true }
+Battle_RequestEnemyScript = { addr = 0x801E2314, type = "func", source = "Requests the script at index script_index of the current enemy (g_BattleCurrentEnemy) for the task actor, by its facing; bit 0x80 of the script byte sets the actor flag unk_2A.", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 D_801EC331 = { addr = 0x801EC331, type = "u8", alias = true, source = "The slot byte at +0x01 of g_BattleEffects: func_800C238C stores its first argument there." }
 D_801EC332 = { addr = 0x801EC332, type = "u8", alias = true, source = "The slot byte at +0x02 of g_BattleEffects, cleared by func_800C238C." }
