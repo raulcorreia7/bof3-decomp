@@ -67,7 +67,7 @@ MATCH void func_8015920C(void) {
         u32 width  = (g_MenuCurrentPanel->u.grow.width >> 4) & BYTE_MASK;
         u32 height = (g_MenuCurrentPanel->u.grow.height >> 4) & BYTE_MASK;
 
-        func_80159FA0((s16)g_MenuCurrentPanel->pos.x >> 4, (s16)g_MenuCurrentPanel->pos.y >> 4, width, height);
+        UI_DrawBoxOutline((s16)g_MenuCurrentPanel->pos.x >> 4, (s16)g_MenuCurrentPanel->pos.y >> 4, width, height);
     }
 
     if ((advanced & BYTE_MASK) == 2) {

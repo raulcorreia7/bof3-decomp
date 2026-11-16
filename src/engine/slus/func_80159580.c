@@ -3,7 +3,7 @@
 /* advances the panel's two 12.4 axes by half their per-frame steps
  * and, when an axis reaches zero, snaps that axis to the mode-keyed table
  * value; completing both axes steps the panel state, otherwise the box is
- * redrawn through func_80159FA0.
+ * redrawn through UI_DrawBoxOutline.
  */
 MATCH void func_80159580(void) {
     MenuPanelTask* task;
@@ -59,7 +59,7 @@ MATCH void func_80159580(void) {
         return;
     }
     if (!(g_MenuCurrentPanel->flags & 0x1)) {
-        func_80159FA0((s16)g_MenuCurrentPanel->pos.x >> 4, (s16)g_MenuCurrentPanel->pos.y >> 4, (g_MenuCurrentPanel->u.grow.width >> 4), (g_MenuCurrentPanel->u.grow.height >> 4));
+        UI_DrawBoxOutline((s16)g_MenuCurrentPanel->pos.x >> 4, (s16)g_MenuCurrentPanel->pos.y >> 4, (g_MenuCurrentPanel->u.grow.width >> 4), (g_MenuCurrentPanel->u.grow.height >> 4));
     }
     if (g_MenuCurrentPanel->mode == 0) {
         UI_UpdateLayout();

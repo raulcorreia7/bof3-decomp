@@ -137,7 +137,8 @@ extern u8       D_801F6B3C[];
 /* func_80159B9C */
 /* FAKE: the callers pass the panel words as s32; narrowing the parameters to s16 and u8 adds extension instructions the retail bytes lack. */
 void UI_DrawPanelBox(s32 x, s32 y, s32 w, s32 h);
-void func_80159FA0(s32 x, s32 y, s32 width, s32 height);
+/* func_80159FA0 */
+void UI_DrawBoxOutline(s32 x, s32 y, s32 width, s32 height);
 /* The engine places a work row from a spawn record. */
 void func_801A6C98(u8* record);
 /* The owner is src/engine/game/00/game_00.h; that header is not visible to this
