@@ -8,9 +8,9 @@ MATCH bool Item_PassesTest(u8 test, u8 character_id, u8 category, u8 item_id) {
         return false;
     }
     switch (test) {
-        case 0:
+        case ITEM_TEST_ANY:
             return true;
-        case 1:
+        case ITEM_TEST_TARGET_BOTH:
             if (category != ITEM_CAT_ITEM) {
                 return false;
             }
@@ -26,21 +26,18 @@ MATCH bool Item_PassesTest(u8 test, u8 character_id, u8 category, u8 item_id) {
                 goto ret1;
             }
             return false;
-        case 2:
+        case ITEM_TEST_SELECTABLE:
             if (Item_GetFlags(category, item_id) & ITEM_TARGET_SELECTABLE) {
-                /* record bit 1 set */
                 goto ret1;
             }
             return false;
-        case 3:
-            if ((Item_GetFlags(category, item_id) & ITEM_TARGET_ALL) == 0) {
-                /* record bit 3 clear */
+        case ITEM_TEST_SELLABLE:
+            if ((Item_GetFlags(category, item_id) & ITEM_UNSELLABLE) == 0) {
                 goto ret1;
             }
             return false;
-        case 4:
+        case ITEM_TEST_EQUIPPABLE:
             if (((Item_GetEquipability(category, item_id) & BYTE_MASK) >> character_id) & 0x1) {
-                /* selected record bit set */
                 goto ret1;
             }
             return false;

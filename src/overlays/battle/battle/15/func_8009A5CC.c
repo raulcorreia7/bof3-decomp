@@ -6,7 +6,7 @@ MATCH void func_8009A5CC(void) {
 
     packed = g_Game.members[g_BattleMessageSlot[5] & BYTE_MASK].u.turn.command.id;
     flags  = Item_GetFlags(packed >> 8, packed & BYTE_MASK);
-    if ((flags & 0x20) != 0) {
+    if ((flags & ITEM_SHOW_NAME) != 0) {
         g_BattleActorTurn->command.target = BATTLE_TARGET_ENEMY_SIDE;
     } else {
         g_BattleActorTurn->command.target = BATTLE_TARGET_PARTY_SIDE;

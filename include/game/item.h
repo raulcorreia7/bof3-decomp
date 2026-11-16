@@ -14,37 +14,32 @@
 
 #define SHOP_ITEM_REF_SIZE 0x02
 
-/* Item flags: what the menu offers and how the battle selector targets the
- * item. */
+/* Item flags: which lists offer a row, how the battle selector aims it, and whether it can be
+ * sold. Bit 3 marks a row the shop cannot sell and the copy shop cannot copy. */
 typedef enum ItemFlags {
     ITEM_TARGET_BOTH          = 1 << 0,
     ITEM_TARGET_SELECTABLE    = 1 << 1,
     ITEM_TARGET_ENEMY_DEFAULT = 1 << 2,
-    ITEM_TARGET_ALL           = 1 << 3,
+    ITEM_UNSELLABLE           = 1 << 3,
     ITEM_STORY_ITEM           = 1 << 4,
     ITEM_SHOW_NAME            = 1 << 5,
     ITEM_SHOW_ANIMATION       = 1 << 6,
     ITEM_USABLE_MENU          = 1 << 7,
 } ItemFlags;
 
-/* The armor record's equipment slot; NOTHING is the empty armor record. */
-typedef enum ArmorType {
-    ARMOR_TYPE_NOTHING = 0,
-    ARMOR_TYPE_SHIELD  = 2,
-    ARMOR_TYPE_HELMET  = 3,
-    ARMOR_TYPE_BODY    = 4,
-} ArmorType;
-
-/* The kind of a weapon, armor or accessory record (Item_GetKind): it selects the icon the item list draws. Armor
- * records hold their ArmorType; accessory kinds 10 and 11 are the fishing lures and rods, which no equipment slot
- * holds. No record has kind ITEM_TYPE_UNUSED. */
+/* The kind byte at +0x0D of an item row and +0x0E of the three equipment rows (Item_GetIcon): the
+ * weapon, armor and accessory tables hold what the row is, and the low nibble is the icon index
+ * the item list draws. Armor rows hold their slot's type (2 shield, 3 helmet, 4 body); accessory
+ * rows hold 5 accessory, 10 lure or 11 rod. Kind 0 is a plain item and the empty first row of
+ * every table. Kinds 6 to 9 hold no record. */
 typedef enum ItemType {
     ITEM_TYPE_ITEM         = 0,
     ITEM_TYPE_WEAPON       = 1,
-    ITEM_TYPE_SHIELD       = ARMOR_TYPE_SHIELD,
-    ITEM_TYPE_HELMET       = ARMOR_TYPE_HELMET,
-    ITEM_TYPE_ARMOR        = ARMOR_TYPE_BODY,
+    ITEM_TYPE_SHIELD       = 2,
+    ITEM_TYPE_HELMET       = 3,
+    ITEM_TYPE_ARMOR        = 4,
     ITEM_TYPE_ACCESSORY    = 5,
+    /* 6 to 9: no record. */
     ITEM_TYPE_FISHING_LURE = 10,
     ITEM_TYPE_FISHING_ROD  = 11,
     ITEM_TYPE_UNUSED       = 12,
@@ -53,14 +48,20 @@ typedef enum ItemType {
 /* The equipment slot that holds an item of kind ITEM_TYPE_WEAPON..ITEM_TYPE_ACCESSORY. */
 #define EQUIP_SLOT_OF_TYPE(kind) ((kind) - 1)
 
-/* The armor type that fits equipment slot EQUIP_SLOT_SHIELD..EQUIP_SLOT_ARMOR. */
-#define ARMOR_TYPE_OF_SLOT(slot) ((slot) + 1)
+/* The item type that fits equipment slot EQUIP_SLOT_WEAPON..EQUIP_SLOT_ACCESSORY_1. */
+#define ITEM_TYPE_OF_SLOT(slot)  ((slot) + 1)
 
 /* The most of one item an inventory slot holds. */
 #define ITEM_STACK_MAX           99
 
-/* The Item_PassesTest predicate that holds when bit record_bit of the item's equipability is set. */
-#define ITEM_TEST_EQUIPPABLE     4
+/* The predicate Item_PassesTest applies to one list row. */
+typedef enum ItemTest {
+    ITEM_TEST_ANY         = 0, /* every row */
+    ITEM_TEST_TARGET_BOTH = 1, /* ItemFlags ITEM_TARGET_BOTH set */
+    ITEM_TEST_SELECTABLE  = 2, /* ItemFlags ITEM_TARGET_SELECTABLE set */
+    ITEM_TEST_SELLABLE    = 3, /* ItemFlags ITEM_UNSELLABLE clear */
+    ITEM_TEST_EQUIPPABLE  = 4, /* the character's equipability bit set */
+} ItemTest;
 
 /* The inventory category code Item_GetRecord resolves a record from. */
 typedef enum ItemCategory {
@@ -75,19 +76,20 @@ typedef enum ItemCategory {
 typedef struct VitalItem {
     u8  name[ITEM_NAME_LENGTH];
     u16 description; /* Item_GetDescription, category ITEM_CAT_VITAL */
-    u16 pad_0E;
+    u16 unk_0E;      /* no reader */
 } VitalItem;
 
 ASSERT_OFFSET(VitalItem, description, 0x0C);
 ASSERT_SIZE(VitalItem, VITAL_ITEM_STRIDE);
 ASSERT_OFFSET(VitalItem, name, 0x00);
+ASSERT_OFFSET(VitalItem, unk_0E, 0x0E);
 
 #define VITAL_ITEM_OBJECT(name, description) {name, (description), 0}
 
 typedef struct Item {
     u8  name[ITEM_NAME_LENGTH];
     u8  flags;       /* ItemFlags */
-    u8  icon;        /* low nibble selects the icon */
+    u8  type;        /* ItemType; every item row is ITEM_TYPE_ITEM */
     u16 description; /* Item_GetDescription, category ITEM_CAT_ITEM */
     u16 price;
 } Item;
@@ -96,28 +98,30 @@ ASSERT_OFFSET(Item, description, 0x0E);
 ASSERT_SIZE(Item, ITEM_STRIDE);
 ASSERT_OFFSET(Item, name, 0x00);
 ASSERT_OFFSET(Item, flags, 0x0c);
-ASSERT_OFFSET(Item, icon, 0x0d);
+ASSERT_OFFSET(Item, type, 0x0d);
 ASSERT_OFFSET(Item, price, 0x10);
 
-#define ITEM_OBJECT(name, flags, icon, description, price) {name, (flags), (icon), (description), (price)}
+#define ITEM_OBJECT(name, flags, type, description, price) {name, (flags), (type), (description), (price)}
 
 /* The header the Weapon, Armor and Accessory rows open with. */
 typedef struct ItemHeader {
     u8 name[ITEM_NAME_LENGTH];
     u8 equipability; /* EquipCharacterFlags */
-    u8 flags;        /* Item_GetFlags; bit tests in Item_PassesTest */
+    u8 flags;        /* ItemFlags; ITEM_UNSELLABLE is the one bit equipment tests */
 } ItemHeader;
 
 ASSERT_SIZE(ItemHeader, 0x0E);
+ASSERT_OFFSET(ItemHeader, equipability, 0x0C);
+ASSERT_OFFSET(ItemHeader, flags, 0x0D);
 
 typedef struct Weapon {
     ItemHeader header;
-    u8         icon;    /* low nibble selects the icon */
+    u8         type;    /* ItemType; every weapon row is ITEM_TYPE_WEAPON */
     u8         element; /* ElementFlags */
     u8         weight;
     u8         sound; /* cue-table index in battle/battle/15 func_800AB834 and func_800AB910 */
     u8         power;
-    u8         pad_13;
+    u8         unk_13;      /* no reader */
     u16        description; /* Item_GetDescription, category ITEM_CAT_WEAPON */
     u16        price;
 } Weapon;
@@ -125,21 +129,22 @@ typedef struct Weapon {
 ASSERT_OFFSET(Weapon, description, 0x14);
 ASSERT_SIZE(Weapon, WEAPON_STRIDE);
 ASSERT_OFFSET(Weapon, header, 0x00);
-ASSERT_OFFSET(Weapon, icon, 0x0e);
+ASSERT_OFFSET(Weapon, type, 0x0e);
 ASSERT_OFFSET(Weapon, element, 0x0f);
 ASSERT_OFFSET(Weapon, weight, 0x10);
 ASSERT_OFFSET(Weapon, power, 0x12);
+ASSERT_OFFSET(Weapon, unk_13, 0x13);
 ASSERT_OFFSET(Weapon, price, 0x16);
 
-#define WEAPON_OBJECT(name, equipability, header_flags, icon, element, weight, sound, power, description, price)       \
-    {{name, (equipability), (header_flags)}, (icon), (element), (weight), (sound), (power), 0, (description), (price)}
+#define WEAPON_OBJECT(name, equipability, header_flags, type, element, weight, sound, power, description, price)       \
+    {{name, (equipability), (header_flags)}, (type), (element), (weight), (sound), (power), 0, (description), (price)}
 
 typedef struct Armor {
     ItemHeader header;
-    u8         equip_type; /* ArmorType */
+    u8         type; /* ItemType: shield, helmet or body; the empty row is kind 0 */
     u8         weight;
     u8         power;
-    u8         pad_11;
+    u8         unk_11;      /* no reader */
     u16        description; /* Item_GetDescription, category ITEM_CAT_ARMOR */
     u16        price;
 } Armor;
@@ -147,13 +152,13 @@ typedef struct Armor {
 ASSERT_OFFSET(Armor, description, 0x12);
 ASSERT_SIZE(Armor, ARMOR_STRIDE);
 ASSERT_OFFSET(Armor, header, 0x00);
-ASSERT_OFFSET(Armor, equip_type, 0x0e);
+ASSERT_OFFSET(Armor, type, 0x0e);
 ASSERT_OFFSET(Armor, weight, 0x0f);
 ASSERT_OFFSET(Armor, power, 0x10);
+ASSERT_OFFSET(Armor, unk_11, 0x11);
 ASSERT_OFFSET(Armor, price, 0x14);
 
-#define ARMOR_OBJECT(name, equipability, header_flags, equip_type, weight, power, description, price)    \
-    {{name, (equipability), (header_flags)}, (equip_type), (weight), (power), 0, (description), (price)}
+#define ARMOR_OBJECT(name, equipability, header_flags, type, weight, power, description, price) {{name, (equipability), (header_flags)}, (type), (weight), (power), 0, (description), (price)}
 
 typedef struct Accessory {
     ItemHeader header;
@@ -574,6 +579,7 @@ typedef enum AccessoryId {
 
 /* The vital item table ids (category ITEM_CAT_VITAL). Names from the GAME.EMI record tables. */
 typedef enum VitalItemId {
+    VITAL_ITEM_NOTHING      = 0,
     VITAL_ITEM_FLIER        = 1,
     VITAL_ITEM_WALLET       = 2,
     VITAL_ITEM_EGG          = 3,

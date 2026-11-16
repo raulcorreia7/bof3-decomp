@@ -6,7 +6,7 @@ MATCH void func_80099FCC(void) {
 
     packed = g_Game.members[g_BattleMessageSlot[5] & BYTE_MASK].u.turn.command.id;
     flags  = Item_GetFlags(packed >> 8, packed & BYTE_MASK);
-    if ((flags & 0x20) != 0) {
+    if ((flags & ITEM_SHOW_NAME) != 0) {
         g_BattleActorTurn->command.target = Battle_TargetNext(3);
         g_Battle.ui_state                 = 1;
     } else {
