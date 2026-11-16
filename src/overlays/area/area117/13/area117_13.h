@@ -15,6 +15,11 @@ extern u16 D_801F55E4[];
 extern u8  D_801F463C[];
 extern u8  D_801F4640[];
 extern u8  D_801F558C[];
+/* The trigger cells the area entry step tests: x, y, facing and the flag it toggles. */
+extern u8  D_801F55F0[];
+extern u8  D_801F55F1[];
+extern u8  D_801F55F2[];
+extern u8  D_801F55F3[];
 /* The facing byte at +4 and the walk-flag byte at +5 of the record D_801F558C
  * indexes. */
 extern u8  D_801F5590[];
@@ -26,6 +31,7 @@ extern u8  D_801F4659[];
 void func_801F3884(s32, s32);
 void func_801F34C8(void);
 void func_801F364C(void);
+s32  func_801F4534(s32 x, s32 y);
 
 /* The variant byte the cancel path stores in the game-overlay state. */
 #define AREA_RESET_VARIANT 0x1C
