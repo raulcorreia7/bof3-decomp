@@ -561,7 +561,7 @@ extern void func_801DC150(s16 x, s16 y, u8 index, u8 flag);
 /* func_801DCDB8 */
 void        Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle);
 extern void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
-void        Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 shaded, s32 unused);
+void        Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shaded, s32 unused);
 void        Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 item_kind, u8 item_id);
 void        Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height);
 /* func_801DFBF4 */
@@ -812,6 +812,7 @@ extern u8        g_MenuClockCaption[];
 extern u8        g_MenuCommandFrame[];
 extern u8        g_MenuCommandFrameSelected[];
 extern u8        g_MenuEquipStatSprites[];
+extern u8        D_801EC930[];
 extern u8        D_801EC938[];
 extern u8        g_MenuClockColon[];
 extern u8*       g_MenuCommandLabels[];  /* label id -> button text */
