@@ -12,7 +12,7 @@ MATCH void Actor_BeginScriptFromAreaTable(void) {
 
     bank  = g_AreaLoads[g_GameAreaId];
     table = FIELD(u8*, bank, 0x10);
-    row   = FIELD(u8*, table, g_ScriptState->pad_03 * 4);
+    row   = FIELD(u8*, table, g_ScriptState->script_index * 4);
     row += g_ScriptState->cursor;
     step = row[2];
     arg  = row[3];

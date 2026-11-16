@@ -5,7 +5,7 @@
 #define ACTOR_RUN_SCRIPT_ROW_STEP(NEXT_DIRECTION)                                                   \
     bank  = g_AreaLoads[g_GameAreaId];                                                              \
     table = ((AreaLoad*)bank)->field_10;                                                            \
-    row   = *(u8**)(table + g_ScriptState->pad_03 * 4);                                             \
+    row   = *(u8**)(table + g_ScriptState->script_index * 4);                                       \
     if (g_Task->direction_08 != row[g_ScriptState->cursor + 2]) {                                   \
         g_Task->direction_08 = (NEXT_DIRECTION) & 7;                                                \
         func_801F4A5C(D_801F6748[*(row + (u32)(g_ScriptState->cursor + 3))], g_Task->direction_08); \

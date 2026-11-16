@@ -7166,7 +7166,7 @@ g_ActorWalkDestY = { addr = 0x8014690C, size = 0x4, alias = true, source = "y of
 D_80146910 = { addr = 0x80146910, size = 0x4, alias = true, source = "The Actor.unk_88 word (byte 0x88) seen as a column of g_Actors" }
 g_AreaFocusY = { addr = 0x80147A90, source = "Y focus of the area." }
 g_ScriptWorkRecord = { addr = 0x80148208, type = "Actor", source = "The script work record." }
-g_ScriptState = { addr = 0x80148210, type = "GameScriptState", source = "The script state." }
+g_ScriptState = { addr = 0x80148210, type = "ScriptState", source = "The script state." }
 g_AreaDrawState = { addr = 0x8014832C, size = 0x4, alias = true, source = "Area draw counts." }
 g_AreaDrawFlags = { addr = 0x8014832E, source = "Flags that select the area draw passes." }
 g_MenuPanelTasks = { addr = 0x80148330, source = "The menu panel tasks." }

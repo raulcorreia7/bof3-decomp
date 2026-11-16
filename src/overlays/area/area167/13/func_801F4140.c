@@ -6,10 +6,10 @@ MATCH void func_801F4140(void) {
             SYS_ClearFlag(g_SceneEventFlags, 74);
             g_ScriptState->cursor = 0xFFFE;
             if (g_GameLastCellType == 0) {
-                g_ScriptState->pad_03 = 7;
+                g_ScriptState->script_index = 7;
                 return;
             }
-            g_ScriptState->pad_03 = 8;
+            g_ScriptState->script_index = 8;
             return;
         }
         if (SYS_TestFlag(g_SceneEventFlags, 72) == 0) {
@@ -26,8 +26,8 @@ MATCH void func_801F4140(void) {
     if (g_GameCellType == 1) {
         if (SYS_TestFlag(g_SceneEventFlags, 74)) {
             SYS_ClearFlag(g_SceneEventFlags, 74);
-            g_ScriptState->pad_03 = 7;
-            g_ScriptState->cursor = 0xFFFE;
+            g_ScriptState->script_index = 7;
+            g_ScriptState->cursor       = 0xFFFE;
             return;
         }
         if (SYS_TestFlag(g_SceneEventFlags, 73) == 0) {
