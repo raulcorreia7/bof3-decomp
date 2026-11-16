@@ -10,6 +10,4 @@
 /* Both body words of the map bundle's 0x81 record, written by func_801F2D00. */
 #define AREA051_RECORD_81_WORD ((0x0421u << 16) | 0x4E73u)
 
-extern u8 D_80144EF8[];
-
 #endif
