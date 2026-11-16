@@ -50,8 +50,8 @@ NON_MATCHING void func_800A0EC4(void) {
             do {
                 row_offset = index * BATTLE_PARTY_STRIDE;
                 dest       = (u8*)D_80145F20 + row_offset;
-                __builtin_memcpy(dest, dest + 0x20, sizeof(BattleStatBlockPart));
-                __builtin_memcpy(dest + 0x10, dest + 0x30, sizeof(BattleStatBlockPart));
+                __builtin_memcpy(dest, dest + 0x20, sizeof(CopyBytes16));
+                __builtin_memcpy(dest + 0x10, dest + 0x30, sizeof(CopyBytes16));
                 index++;
             } while ((u32)(index & BYTE_MASK) < (u8)g_Battle.party_count);
         }

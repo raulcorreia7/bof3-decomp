@@ -5,12 +5,6 @@
 /* The timer counts up to this value before it stops. */
 #define BATTLE_TIMER_MAX        9
 
-/* A sixteen-byte block the retail copies with four unaligned word pairs, so the
- * block is moved as a byte group and never as machine words. */
-typedef struct BattleBlock {
-    u8 bytes[16];
-} BattleBlock;
-
 /* Advances the player battler: bumps its timer and mirrored work row, copies the battler work rows and effect
  * vectors, and mirrors the active row value into the selection slot.
  */
@@ -61,8 +55,8 @@ NON_MATCHING void func_800A1D84(void) {
             do {
                 dst                         = i * BATTLE_PARTY_STRIDE + D_80145F20;
                 src                         = i * BATTLE_PARTY_STRIDE + (D_80145F20 + 0x20);
-                *(BattleBlock*)(dst + 0x00) = *(BattleBlock*)(src + 0x00);
-                *(BattleBlock*)(dst + 0x10) = *(BattleBlock*)(src + 0x10);
+                *(CopyBytes16*)(dst + 0x00) = *(CopyBytes16*)(src + 0x00);
+                *(CopyBytes16*)(dst + 0x10) = *(CopyBytes16*)(src + 0x10);
                 i += 1;
             } while ((u32)(i & BYTE_MASK) < (u8)g_Battle.party_count);
         }

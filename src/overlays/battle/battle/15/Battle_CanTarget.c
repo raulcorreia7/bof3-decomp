@@ -1,10 +1,5 @@
 #include "battle_15.h"
 
-/* 0x20-byte unaligned head record copied with lwl/lwr. */
-typedef struct BattleRecordHead {
-    u8 bytes[32];
-} BattleRecordHead;
-
 /* func_800AED5C */
 #ifdef NON_MATCHING
 NON_MATCHING u8 Battle_CanTarget(s32 selector, u32 battler_index) {
@@ -29,8 +24,8 @@ NON_MATCHING u8 Battle_CanTarget(s32 selector, u32 battler_index) {
         src                    = (u8*)&g_BattleEnemyBattlers[index].stats;
         g_Battle.target        = battler_index;
     }
-    dst                     = D_801EC2E8;
-    *(BattleRecordHead*)dst = *(BattleRecordHead*)src;
+    dst                = D_801EC2E8;
+    *(CopyBytes32*)dst = *(CopyBytes32*)src;
     if (func_800A40D0(selector & BYTE_MASK) != 0) {
         result = 0;
     } else {

@@ -103,14 +103,14 @@ MATCH void func_801EF0D8(void) {
 }
 
 MATCH void func_801EF0E0(void) {
-    u32        effect_slot;
-    WorkChunk* src;
-    WorkChunk* dst;
-    WorkChunk* end;
+    u32          effect_slot;
+    CopyWords16* src;
+    CopyWords16* dst;
+    CopyWords16* end;
 
     effect_slot = Battle_AllocEffect(1, 58);
-    dst         = (WorkChunk*)&g_BattleEffects[effect_slot & BYTE_MASK];
-    src         = (WorkChunk*)&BATTLE_ACTIVE_PARTY;
+    dst         = (CopyWords16*)&g_BattleEffects[effect_slot & BYTE_MASK];
+    src         = (CopyWords16*)&BATTLE_ACTIVE_PARTY;
     end         = src + 7;
     do {
         *dst = *src;
@@ -118,7 +118,7 @@ MATCH void func_801EF0E0(void) {
         dst += 1;
     } while (src != end);
     /* FAKE: hold tail store before tail. */
-    FAKE_ORDER_LOCK(dst->w0 = src->w0);
+    FAKE_ORDER_LOCK(dst->w[0] = src->w[0]);
     g_BattleEffects[effect_slot & BYTE_MASK].target.party  = g_Task;
     g_BattleEffects[effect_slot & BYTE_MASK].header.mode   = 0;
     g_BattleEffects[effect_slot & BYTE_MASK].header.step   = 0;

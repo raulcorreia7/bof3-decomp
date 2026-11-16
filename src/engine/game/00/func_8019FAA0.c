@@ -1,8 +1,5 @@
 #include "game_00.h"
-
-typedef struct GameCopyBlock {
-    u8 data[8];
-} GameCopyBlock;
+#include "common/copy.h"
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_facing) {
@@ -50,11 +47,11 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
     entry = (AreaLoad*)g_AreaLoads[g_GameAreaId];
     if (entry->matrix != 0) {
         SetColorMatrix((MATRIX*)entry->matrix);
-        entry                       = (AreaLoad*)g_AreaLoads[g_GameAreaId];
-        *(GameCopyBlock*)D_801581E0 = *(GameCopyBlock*)((u8*)entry->matrix + 0x20);
+        entry                    = (AreaLoad*)g_AreaLoads[g_GameAreaId];
+        *(CopyBytes8*)D_801581E0 = *(CopyBytes8*)((u8*)entry->matrix + 0x20);
     } else {
         SetColorMatrix((MATRIX*)D_8018214C);
-        *(GameCopyBlock*)D_801581E0 = *(GameCopyBlock*)s_ScriptCopyBlock;
+        *(CopyBytes8*)D_801581E0 = *(CopyBytes8*)s_ScriptCopyBlock;
     }
 
     if ((g_SceneState.flags_01 & SCENE_STATE_CHAPTER_ADVANCE) != 0) {

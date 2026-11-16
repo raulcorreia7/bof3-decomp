@@ -98,12 +98,6 @@ typedef struct {
     Callback handlers[4];
 } BattleEffectStages;
 
-/* A Stats-sized copy from an odd address (+3 into the source row), so it is
- * byte-aligned where Stats is halfword-aligned; func_801D43EC reads it. */
-typedef struct BattleStatBlock {
-    u8 bytes[0x20];
-} BattleStatBlock;
-
 /* Drop chance per EnemyDrop.rate, out of 256: 0, 0, 1, 3, 7, 31, 127, 255. */
 typedef struct DropChances {
     u8 chance[8];
