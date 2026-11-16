@@ -65,7 +65,8 @@ ASSERT_SIZE(UvRect, 0x4);
 
 /* The eight ordering-table layers of GFX_AddPrim: layer 7 is linked first and draws first (behind everything), layer 0 last
  * (in front). Proof: SYS_Main clears the table with ClearOTagR(work + 0x70, 8) and draws it from work + 0x8C, which is entry 7.
- * The layers named here are the ones whose content the callers show; 2, 3 and 5 (battle and field effects) stay numeric. */
+ * The layers named here are the ones whose content the callers show; the battle-magic family names 2, 3 and 5
+ * relative to GFX_LAYER_BATTLE_SCENE (src/overlays/bmagic/bmagic.h). */
 #define GFX_LAYER_TOP                0 /* the menu cursor and full-screen flashes */
 #define GFX_LAYER_UI                 1 /* text, windows and menu sprites */
 #define GFX_LAYER_BATTLE_SCENE       4 /* g_AreaDrawMode while a battle runs (Battle_LoadPartySprites) */
