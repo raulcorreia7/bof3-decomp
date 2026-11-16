@@ -1,3 +1,42 @@
 #include "area198_13.h"
 
-INCLUDE_ASM(func_801F2FFC);
+MATCH void func_801F2FFC(void) {
+    Actor* work;
+    u8     count;
+    s8     tint_a;
+    s8     tint_b;
+    s8     tint_c;
+
+    work = g_Task;
+    COORD_INT(work->pos.z) -= 0x10;
+    count = g_ScriptState->count_02;
+    if (count < 0x80 && (count & 3) == 0) {
+        Actor_BeginScript(D_801F43AC[(count >> 2) & 3], (u16)(work->script_pc - 2));
+    }
+    g_ScriptState->count_02++;
+    work = g_Task;
+    if (COORD_INT(work->pos.z) < -0x280) {
+        tint_a = work->tint.signed_bytes.delta.red;
+        if (tint_a >= -0x7F) {
+            work->tint.signed_bytes.delta.red = tint_a - 1;
+            work                              = g_Task;
+        }
+        tint_b = work->tint.signed_bytes.delta.green;
+        if (tint_b >= -0x7F) {
+            work->tint.signed_bytes.delta.green = tint_b - 1;
+        }
+        work   = g_Task;
+        tint_c = work->tint.signed_bytes.delta.blue;
+        if (tint_c >= -0x7F) {
+            work->tint.signed_bytes.delta.blue = tint_c - 1;
+        }
+    }
+    if (COORD_INT(g_Task->pos.z) == -0xA00) {
+        g_ScriptVars[0]++;
+    }
+    if (COORD_INT(g_Task->pos.z) >= -0xC7F) {
+        g_ScriptState->cursor -= 2;
+    } else {
+        g_ScriptState->count_02 = 0;
+    }
+}
