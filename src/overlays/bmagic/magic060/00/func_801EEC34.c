@@ -326,4 +326,58 @@ MATCH void func_801EF924(u8* text, s32 x, s32 y) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EFB00(u16 value, s32 x, s32 y) {
+    POLY_FT4* prim;
+    s32       digit;
+    u32       scale;
+    s32       i;
+    s32       mode;
+    s32       started;
+    s16       u;
+    s32       y1;
+
+    if (GetGraphType() == 1) {
+        mode = 0x25;
+    } else if (GetGraphType() == 2) {
+        mode = 0x25;
+    } else {
+        mode = 0x15;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mode, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    started = 0;
+    scale   = 10000;
+    i       = 0;
+    y1      = y + 12;
+    for (i = 0; i < 5; i++) {
+        prim = GFX_CURSOR(POLY_FT4);
+        SetPolyFT4(prim);
+        setXY4(prim, x, y, x + 12, y, x, y1, x + 12, y1);
+        setRGB0(prim, 128, 128, 128);
+        setTPage(prim, 0, 1, 0x3C0, 0);
+        setClut(prim, 0, 0x1E0);
+        digit = (u32)value / (u16)scale;
+        if (digit != 0) {
+            started = 1;
+        }
+        value -= digit * scale;
+        scale /= 10;
+        u        = digit * 12 + 72;
+        prim->u0 = u;
+        prim->v0 = 24;
+        prim->u1 = u + 12;
+        prim->v1 = 24;
+        prim->u2 = u;
+        prim->v2 = 36;
+        prim->u3 = u + 12;
+        prim->v3 = 36;
+        if (started != 0 || scale == 0) {
+            GFX_AddPrim(2, sizeof(POLY_FT4));
+        }
+        x += 12;
+    }
+}
+#else
 INCLUDE_ASM(func_801EFB00);
+#endif

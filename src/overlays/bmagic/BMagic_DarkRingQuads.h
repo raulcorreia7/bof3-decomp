@@ -4,7 +4,6 @@
 #define BMAGIC_DARK_RING_SEGMENTS 64 /* 64 steps of 64 make the full 4096 circle */
 
 /* The quad corners, outer pair first. */
-extern SVECTOR D_1F800014[];
 
 #define BMAGIC_DRAW_DARK_RING_QUADS(layer, shade_slot)                                                                                                                            \
     do {                                                                                                                                                                          \

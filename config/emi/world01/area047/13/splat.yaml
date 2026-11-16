@@ -14,7 +14,7 @@ segments:
       - [0xC8, c, func_801F2CC8]
       - [0x144, c, func_801F2D44]
       - [0x1B4, c, func_801F2DB4]
-      - [0x360, c, func_801F2F60]
+      - [0x360, c, Area_DrawRingQuads]
       - [0x5F4, c, func_801F31F4]
       - [0x698, c, func_801F3298]
       - [0x6C4, c, func_801F32C4]

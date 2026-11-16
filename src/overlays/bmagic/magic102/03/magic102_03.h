@@ -10,9 +10,8 @@
 #include "slus/functions.h"
 #include "slus/part.h"
 
-extern SVECTOR D_1F800014[];
 /* D_1F800034 read unsigned: the screen x and y RotTransPers writes. */
-extern u16     D_1F800034_U16[2];
+extern u16 D_1F800034_U16[2];
 
 s32 func_801F0ADC(s32 x, s32 y);
 
