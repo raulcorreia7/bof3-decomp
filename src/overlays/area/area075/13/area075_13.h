@@ -20,31 +20,31 @@ extern u8       D_801F5818[];
 extern Callback D_801F5820[];
 
 /* A pose sequence: step and duration pairs, and how many the sequence holds. */
-typedef struct Area075StepSet {
+typedef struct Area075PoseSequence {
     u8* steps; /* 0x0 */
     u8  count; /* 0x4 */
     u8  pad_05[3];
-} Area075StepSet;
+} Area075PoseSequence;
 
-extern Area075StepSet D_801F5858[3];
-extern u8             D_801F5870[16];
-extern u8             D_801F5880[16];
-extern u8             D_801F5890[4][4];
-extern u8             D_801F58A0[][15];
-extern u8             D_801F58C0;
-extern u8             D_801F58C3;
-extern u16            D_801F58C4;
-extern u8             D_801F58C6;
-extern u8             D_801F58C7;
-extern u8             D_801F58C8;
-extern u8             D_801F58C9;
-extern u16            D_801F58CA;
-extern u16            D_801F58CC;
-extern u8             D_801F58CE[2];
-extern u8             D_801F58D0;
-extern u8             D_801F58D1;
-extern u8             D_801F58D2;
-extern u8             D_801F58D3;
+extern Area075PoseSequence D_801F5858[3];
+extern u8                  D_801F5870[16];
+extern u8                  D_801F5880[16];
+extern u8                  D_801F5890[4][4];
+extern u8                  D_801F58A0[][15];
+extern u8                  D_801F58C0;
+extern u8                  D_801F58C3;
+extern u16                 D_801F58C4;
+extern u8                  D_801F58C6;
+extern u8                  D_801F58C7;
+extern u8                  D_801F58C8;
+extern u8                  D_801F58C9;
+extern u16                 D_801F58CA;
+extern u16                 D_801F58CC;
+extern u8                  D_801F58CE[2];
+extern u8                  D_801F58D0;
+extern u8                  D_801F58D1;
+extern u8                  D_801F58D2;
+extern u8                  D_801F58D3;
 
 extern void func_801F4874(void);
 

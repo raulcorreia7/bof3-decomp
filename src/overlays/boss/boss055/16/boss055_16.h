@@ -12,32 +12,32 @@
 #include "overlays/battle/battle.h"
 
 /* The ten script ids a phase starts, picked by g_Battle.unk_DE. */
-typedef union Boss055Scripts {
+typedef union Boss055ScriptIds {
     s8 id[10];
     u8 byte[10];
-} Boss055Scripts;
+} Boss055ScriptIds;
 
-ASSERT_SIZE(Boss055Scripts, 10);
+ASSERT_SIZE(Boss055ScriptIds, 10);
 
-extern Boss055Scripts D_800C1804;
-extern Boss055Scripts D_800C1810;
-extern Boss055Scripts D_800C181C;
-extern Boss055Scripts D_800C1828;
-extern Boss055Scripts D_800C1834;
-extern Boss055Scripts D_800C1840;
-extern Boss055Scripts D_800C1858;
-extern Callback       D_800C184C[];
-extern u8             D_800C34F0[];
-extern u16            D_800C34FC[];
-extern u8             D_800C352C[];
-extern Callback       D_800C356C[];
-extern Callback       D_800C359C[];
-extern Callback       D_800C35A4[];
-extern Callback       D_800C35AC[];
-extern Callback       D_800C35B4[];
-extern Callback       D_800C35CC[];
-extern Callback       D_800C35EC[];
-extern Callback       D_800C35F8[];
+extern Boss055ScriptIds D_800C1804;
+extern Boss055ScriptIds D_800C1810;
+extern Boss055ScriptIds D_800C181C;
+extern Boss055ScriptIds D_800C1828;
+extern Boss055ScriptIds D_800C1834;
+extern Boss055ScriptIds D_800C1840;
+extern Boss055ScriptIds D_800C1858;
+extern Callback         D_800C184C[];
+extern u8               D_800C34F0[];
+extern u16              D_800C34FC[];
+extern u8               D_800C352C[];
+extern Callback         D_800C356C[];
+extern Callback         D_800C359C[];
+extern Callback         D_800C35A4[];
+extern Callback         D_800C35AC[];
+extern Callback         D_800C35B4[];
+extern Callback         D_800C35CC[];
+extern Callback         D_800C35EC[];
+extern Callback         D_800C35F8[];
 /* D_801EB630 */
 
 u8   Battle_IsEnemyBlocked(void);

@@ -1,7 +1,7 @@
 #include "boss055_16.h"
 
 MATCH void func_800C2D2C(void) {
-    Boss055Scripts scripts;
+    Boss055ScriptIds scripts;
 
     scripts = D_800C1834;
     Area_SelectSceneRecord(0x318);

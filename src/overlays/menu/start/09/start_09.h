@@ -169,11 +169,11 @@ ASSERT_OFFSET(CardFileHeader, image, 0x80);
 typedef union {
     u8             bytes[CARD_FILE_HEADER_SIZE];
     CardFileHeader frame;
-} SaveFrameBuffer;
+} CardFileFrame;
 
-ASSERT_SIZE(SaveFrameBuffer, CARD_FILE_HEADER_SIZE);
-ASSERT_OFFSET(SaveFrameBuffer, bytes, 0x00);
-ASSERT_OFFSET(SaveFrameBuffer, frame, 0x00);
+ASSERT_SIZE(CardFileFrame, CARD_FILE_HEADER_SIZE);
+ASSERT_OFFSET(CardFileFrame, bytes, 0x00);
+ASSERT_OFFSET(CardFileFrame, frame, 0x00);
 
 /* Retail-address data symbols, in address order. */
 extern u8              D_800C1800;
