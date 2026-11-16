@@ -6,4 +6,8 @@
 
 #include "overlays/area/world04.h"
 
+extern s32 g_AreaFocusY;
+extern s32 D_80147A6C;
+extern u16 D_80147A96;
+
 #endif
