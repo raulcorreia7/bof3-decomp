@@ -51,7 +51,7 @@ void func_801F44B4(void);
 #define AREA_SPAWN_TICK func_801F44B4
 
 void func_801F38E0(void* position, s32 radius, s32 colors);
-void func_801F3ADC(void* arg0, void* arg1, s32 arg2);
+void func_801F3ADC(s32* from, s32* to, u8 intensity);
 void func_801F40F4(s32 arg0);
 
 /* Draws the screen fade: advances the timer, takes the next fade colour when the
