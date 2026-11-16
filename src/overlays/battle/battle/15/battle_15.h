@@ -882,6 +882,7 @@ u8          func_800A6D84(void);
 void        func_800A6E14(u8 value);
 void        func_800A7C14(u8 slot);
 extern u8   func_800A805C(void);
+extern bool func_800A82A0(u8 selection_id);
 extern void Battle_SetGeneCount(void);
 void        func_800A83F8(void);
 void        func_800A8450(void);

@@ -5,7 +5,6 @@
 
 /* In-overlay dispatch targets (split assembly units). */
 extern void func_801EA254(void), func_801EA530(void);
-extern void func_801EA59C(void);
 
 /* 0x801D0F20 */
 BattleEffect0Steps D_801D0F20 = {

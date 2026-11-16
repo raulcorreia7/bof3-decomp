@@ -41,7 +41,7 @@ typedef struct AreaStart {
 
 extern AreaStart D_801F47F4[];
 
-s32 func_801F4058(s16 x, s16 y);
+bool func_801F4058(s16 x, s16 y);
 
 void func_801F4380(u16 x, u16 y);
 

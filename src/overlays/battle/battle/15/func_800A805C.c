@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-u8 func_800A82A0(u8 selection_id); /* extern */
+/* sig-kept: the retail caller tests the result as a byte. */
+#define func_800A82A0 ((u8 (*)(u8))func_800A82A0)
 
 /* picks the battle formation: collects the flag byte of each live,
  * non-active party slot, then accepts one of the six directional pairs,

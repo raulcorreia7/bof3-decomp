@@ -42,7 +42,7 @@ void func_801F5380(void);
 void func_801F595C(s32 value, s32 flag);
 void func_801F5B90(void);
 
-/* FAKE: the walk step tests the result unextended; the s8 of game_00.h adds an sll/sra the retail bytes lack. */
+/* sig-kept: the retail walk step tests the result unextended; the engine's s8 return adds an sll/sra. */
 s32 func_801A79A4(s32 handler_x, s32 handler_y);
 
 u8 func_801F5028(s32 x, s32 y, u8 dir);

@@ -26,7 +26,7 @@ s32  func_800AC7D0(u8 entry_id);
 /* The enemy-work mode dispatch each installer publishes at unk_E4. */
 void func_800C19C8(s32 mode);
 void func_800C1D00(s32 mode);
-/* FAKE: the caller tests the result unextended; the s8 of game_00.h adds an sll/sra the retail bytes lack. */
+/* sig-kept: the retail caller tests the result unextended; the engine's s8 return adds an sll/sra. */
 s32  Actor_Run(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 landing_flags);
 
 #endif

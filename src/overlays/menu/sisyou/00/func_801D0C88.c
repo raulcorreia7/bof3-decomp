@@ -1,7 +1,5 @@
 #include "sisyou_00.h"
 
-void Menu_DrawStatPanel(s32 id, s32 y, u8 entry);
-
 /* Stock list (stride 0x140 per entry) and item count. */
 
 MATCH void func_801D0C88(void) {

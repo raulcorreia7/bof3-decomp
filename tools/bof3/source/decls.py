@@ -21,7 +21,7 @@ _KEYWORDS = frozenset(
 _TYPES = frozenset("void s8 s16 s32 u8 u16 u32 int char short long unsigned".split())
 _QUALIFIERS = frozenset(("struct", "union", "enum", "unsigned", "signed", "const"))
 _MARKERS = re.compile(
-    r"\b(static|extern|inline|INLINE|STATIC|MATCH|NON_MATCHING|FAKE_MATCH|MATCH_FAKE)\b"
+    r"\b(static|extern|inline|INLINE|STATIC|MATCH|NON_MATCHING|HAND_ASM|FAKE_MATCH|MATCH_FAKE)\b"
 )
 _HEAD = re.compile(
     r"(?:^|(?<=[;}]))\s*((?:[\w\s\*]+?)[\s\*])(\w+)\s*"
@@ -310,6 +310,76 @@ def problems(tree: Tree) -> list[Problem]:
                         f"{d.ret} -> {kinds.pop()}",
                     )
     return sorted(rows, key=lambda r: (r.kind, r.name, r.file, r.line, r.detail))
+
+
+def signature_rows(tree: Tree) -> list[Problem]:
+    """Return the prototypes that are neither their owner's signature nor its non-prototype form.
+
+    A prototype has an owner when a definition of the name is in a unit that sees it, in the same
+    image, or in the engine. It is fine when it has the owner's return type and parameter types,
+    or has no parameter list (``T name();``) with the owner's return type, or carries a
+    ``sig-kept:`` comment on the line above or on its own line.
+    """
+    views = tree.views()
+    rows: list[Problem] = []
+    for name, found in tree.decls.items():
+        defs = [d for d in found if d.kind == "def"]
+        if not defs:
+            continue
+        for p in (d for d in found if d.kind == "proto"):
+            sees = set().union(*views[p.file]) if views[p.file] else set()
+            owners = [d for d in defs if _owns(d, p, sees)]
+            if (
+                not owners
+                or any(_same_signature(d, p) for d in owners)
+                or _kept(tree, p)
+            ):
+                continue
+            owner = owners[0]
+            rows.append(
+                Problem(
+                    "signature_differs",
+                    name,
+                    p.file,
+                    p.line,
+                    f"{_shape(p)} vs {_shape(owner)} ({owner.file})",
+                )
+            )
+    return sorted(rows, key=lambda r: (r.file, r.line, r.name))
+
+
+def _shape(d: Decl) -> str:
+    """Write a declaration as ``ret(types)``; empty parentheses mean no prototype."""
+    if d.unspecified:
+        return f"{d.ret}()"
+    return f"{d.ret}({', '.join(t for t, _ in d.params)})"
+
+
+def _image(path: str) -> str:
+    """Return the image folder of an overlay path (``src/overlays/<family>/<image>/<slot>``)."""
+    return "/".join(path.split("/")[:5]) if path.startswith("src/overlays/") else ""
+
+
+def _owns(d: Decl, p: Decl, sees: set[str]) -> bool:
+    return (
+        d.file in sees
+        or d.file.startswith("src/engine/")
+        or bool(_image(p.file) and _image(d.file) == _image(p.file))
+    )
+
+
+def _same_signature(d: Decl, p: Decl) -> bool:
+    if d.ret != p.ret:
+        return False
+    if p.unspecified or d.unspecified:
+        return True
+    types = lambda x: [t for t, _ in x.params if t != "void"]  # noqa: E731
+    return types(d) == types(p)
+
+
+def _kept(tree: Tree, p: Decl) -> bool:
+    lines = tree.texts[p.file].split("\n")
+    return any("sig-kept:" in line for line in lines[max(0, p.line - 3) : p.line])
 
 
 def _prototype_rows(add, name: str, d: Decl, p: Decl) -> None:

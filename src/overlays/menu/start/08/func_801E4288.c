@@ -1,7 +1,9 @@
 #include "start_08.h"
 
+/* sig-kept: the retail caller passes the tile and kind as words. */
+#define func_801E7720 ((void (*)(s32, u8))func_801E7720)
+
 void func_801E7608(void);
-void func_801E7720(s32 tile_x, u8 tile_kind);
 
 MATCH void func_801E4288(void) {
     u8* state;

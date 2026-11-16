@@ -1,8 +1,5 @@
 #include "game_00.h"
 
-/* Retail callers pass leftover register values the callee ignores. */
-extern bool func_801B6470(s32 arg0, s32 arg1);
-
 #ifdef NON_MATCHING
 NON_MATCHING bool func_801B6674(void) {
     s32 temp;

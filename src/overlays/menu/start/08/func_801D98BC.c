@@ -1,7 +1,5 @@
 #include "start_08.h"
 
-s32 func_801DAC1C(u16);
-
 MATCH void func_801D98BC(void) {
     u16* pad;
     s32  prev;

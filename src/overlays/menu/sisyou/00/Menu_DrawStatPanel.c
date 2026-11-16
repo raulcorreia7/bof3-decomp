@@ -1,10 +1,11 @@
+#define MENU_STAT_PANEL_DEFINITION
 #include "sisyou_00.h"
 
 /* "%3d" format and the stat-label strings in this overlay. */
 
 /* Stat glyph-row templates in this overlay. */
 
-MATCH void Menu_DrawStatPanel(s16 panel_x, s16 panel_y, u8 palette_index) {
+MATCH void Menu_DrawStatPanel(u16 panel_x, u16 panel_y, u8 palette_index) {
     u8*        base;
     Character* entryp;
     s16        xb;

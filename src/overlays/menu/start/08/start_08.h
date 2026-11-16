@@ -129,7 +129,7 @@ extern u8           D_801EC214[];
 extern u8           g_BattleTargetRows[][4];
 extern u8           D_80145518[][4];
 extern u8           D_801454FF;
-void                Char_GetExp(u8 character);
+void                Char_GetExp(s32 char_id);
 
 /* The start overlay's step counter at 0x80143B92. func_801E3EC4 takes its
  * address before the increment (lui/addiu of the base, then lhu/shu through
@@ -526,7 +526,8 @@ extern u8  g_NameEntryControlsFrame[];
 /* Draws one sprite at (x, y); defined in the game overlay (emi/etc/game/00). */
 /* func_801AF494 */
 bool        Item_PassesTest(u8 test, u8 character_id, u8 category, u8 item_id);
-s32         func_801B6470(u8 arg0);
+/* No prototype: the retail caller passes a leftover register value the callee ignores. */
+bool        func_801B6470();
 /* The start overlay's handler tables call these functions. */
 void        func_801D177C(void);
 void        func_801D1B24(void);
@@ -908,6 +909,9 @@ void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
 void func_801D49F8(s32 handler_index);
 void func_801E2E90(s32 x, s32 y, s32 row_index);
 void func_801E7608(void);
+void func_801E7720(s16 tile_x, s8 tile_kind);
+/* No prototype: the retail callers pass a byte the callee ignores. */
+void func_801DAC1C();
 void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 shade_mode);
 void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 
