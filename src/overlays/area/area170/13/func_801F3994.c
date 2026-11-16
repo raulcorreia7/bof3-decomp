@@ -2,6 +2,7 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F3994(void) {
+    u8*  bundle;
     u32* cell;
     u8   hidden;
     s32  row;
@@ -15,6 +16,7 @@ NON_MATCHING void func_801F3994(void) {
     s32  width;
 
     hidden = SYS_TestFlag(g_SceneEventFlags, 0x7E) == 0;
+    bundle = MEM_PTR(u8, 0x80104000);
     row    = 0;
     do {
         col = 0;
