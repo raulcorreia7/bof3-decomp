@@ -85,11 +85,7 @@ MATCH void func_801EF024(void) {
 
 MATCH void func_801EF2BC(void) {
     SYS_DISPATCH_BYTE(D_801F0360, g_Task->header.step);
-    if (g_Task->header.flags != 0) {
-        Effect_SetActorMatrix();
-        func_801EF424();
-        PopMatrix();
-    }
+    BMAGIC_DRAW_IF_ALIVE(func_801EF424);
 }
 
 MATCH void func_801EF334(void) {
@@ -156,11 +152,7 @@ MATCH void func_801EF424(void) {
 
 MATCH void func_801EF70C(void) {
     SYS_DISPATCH_BYTE(D_801F036C, g_Task->header.step);
-    if (g_Task->header.flags != 0) {
-        Effect_SetActorMatrix();
-        func_801EF9E0();
-        PopMatrix();
-    }
+    BMAGIC_DRAW_IF_ALIVE(func_801EF9E0);
 }
 
 #include "overlays/bmagic/Effect_CountUpAndStep.h"
@@ -292,12 +284,7 @@ MATCH void func_801EF9E0(void) {
 }
 
 MATCH void func_801F0038(void) {
-    SYS_DISPATCH_BYTE(D_801F0384, g_Task->header.step);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        Effect_SetActorMatrix();
-        func_801F01A8();
-        PopMatrix();
-    }
+    BMAGIC_DISPATCH_AND_DRAW(D_801F0384, func_801F01A8);
 }
 
 #include "overlays/bmagic/Effect_NextStepOnLastTick.h"

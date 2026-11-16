@@ -10,9 +10,7 @@ MATCH void func_801EEC18(void) {
     handlers = D_801EEC04;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
     if (g_Task->timer != 0 && g_Task->header.flags != 0) {
-        Effect_SetActorMatrix();
-        func_801EF07C();
-        PopMatrix();
+        BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801EF07C);
     }
 }
 

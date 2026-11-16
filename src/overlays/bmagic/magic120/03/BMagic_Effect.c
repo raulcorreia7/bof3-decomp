@@ -480,9 +480,7 @@ MATCH void func_801F08AC(void) {
         g_Task->pos.x.fixed      = g_BattleEnemyBattlers[i].pos.x.fixed;
         g_Task->pos.y.fixed      = g_BattleEnemyBattlers[i].pos.y.fixed;
         COORD_INT(g_Task->pos.z) = FIELD(u16, D_801EB66E, i * BATTLE_ENEMY_STRIDE);
-        Effect_SetActorMatrix();
-        func_801F0974();
-        PopMatrix();
+        BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801F0974);
     }
 }
 

@@ -296,9 +296,7 @@ MATCH void func_801EF7C4(void) {
 MATCH void func_801EF884(void) {
     u8 count;
 
-    Effect_SetActorMatrix();
-    func_801EFA48();
-    PopMatrix();
+    BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801EFA48);
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
@@ -324,9 +322,7 @@ MATCH void func_801EF908(void) {
 MATCH void func_801EF9D0(void) {
     u8 timer;
 
-    Effect_SetActorMatrix();
-    func_801EFA48();
-    PopMatrix();
+    BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801EFA48);
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {

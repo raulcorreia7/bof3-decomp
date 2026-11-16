@@ -193,12 +193,7 @@ MATCH void func_801EF508(void) {
 }
 
 MATCH void func_801EF808(void) {
-    SYS_DISPATCH_BYTE(D_801F05EC, g_Task->header.step);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        Effect_SetActorMatrix();
-        func_801EF508();
-        PopMatrix();
-    }
+    BMAGIC_DISPATCH_AND_DRAW(D_801F05EC, func_801EF508);
 }
 
 MATCH void func_801EF890(void) {

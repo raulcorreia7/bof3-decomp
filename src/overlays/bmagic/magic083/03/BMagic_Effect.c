@@ -268,9 +268,7 @@ MATCH void func_801F0010(void) {
 
     Battle_ProjectRange();
     BMagic_SetXFixed((RANDOM_MASK(3)) | 0x18);
-    Effect_SetActorMatrix();
-    func_801F050C();
-    PopMatrix();
+    BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801F050C);
     if (g_FrameCount & 0x1) {
         g_Task->unk_09 += 1;
     }
@@ -296,9 +294,7 @@ MATCH void func_801F0104(void) {
 
     Battle_ProjectRange();
     BMagic_SetXFixed((RANDOM_MASK(3)) | 0x18);
-    Effect_SetActorMatrix();
-    func_801F050C();
-    PopMatrix();
+    BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801F050C);
     if (g_FrameCount & 0x1) {
         g_Task->unk_09 += 1;
     }
@@ -328,9 +324,7 @@ MATCH void func_801F01F8(void) {
         value2 = (RANDOM_MASK(3)) | 0x18;
     }
     BMagic_SetXFixed(value2);
-    Effect_SetActorMatrix();
-    func_801F050C();
-    PopMatrix();
+    BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801F050C);
     if (g_Task->unk_0C < 4) {
         value          = g_Task->unk_10 + 1;
         g_Task->unk_10 = value;
@@ -366,9 +360,7 @@ MATCH void func_801F038C(void) {
 
     Battle_ProjectRange();
     BMagic_SetXFixed(RANDOM_MASK(3) | 0x20);
-    Effect_SetActorMatrix();
-    func_801F050C();
-    PopMatrix();
+    BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801F050C);
     g_Task->unk_10 += 4;
     g_Task->unk_09 += g_Task->unk_0C;
     phase                = g_Task->param.unk_0B + 2;

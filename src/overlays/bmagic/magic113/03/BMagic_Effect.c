@@ -8,11 +8,7 @@ MATCH void func_801EEC24(void) {
     Magic113Steps handlers;
 
     BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC04, header.mode);
-    if (g_Task->header.flags != 0) {
-        Effect_SetActorMatrix();
-        func_801EF4F0();
-        PopMatrix();
-    }
+    BMAGIC_DRAW_IF_ALIVE(func_801EF4F0);
 }
 
 MATCH void func_801EECE0(void) {
@@ -260,11 +256,7 @@ MATCH void func_801EF944(void) {
 
 MATCH void func_801EFC28(void) {
     SYS_DISPATCH_BYTE(D_801F0BC0, g_Task->header.step);
-    if (g_Task->header.flags != 0) {
-        Effect_SetActorMatrix();
-        func_801EFDA0();
-        PopMatrix();
-    }
+    BMAGIC_DRAW_IF_ALIVE(func_801EFDA0);
 }
 
 MATCH void func_801EFCA0(void) {
@@ -341,11 +333,7 @@ MATCH void func_801EFDA0(void) {
 
 MATCH void func_801F0140(void) {
     SYS_DISPATCH_BYTE(D_801F0BCC, g_Task->header.step);
-    if (g_Task->header.flags != 0) {
-        Effect_SetActorMatrix();
-        func_801F02CC();
-        PopMatrix();
-    }
+    BMAGIC_DRAW_IF_ALIVE(func_801F02CC);
 }
 
 MATCH void func_801F01B8(void) {

@@ -33,12 +33,7 @@ MATCH void func_801EEC5C(void) {
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEDDC(void) {
-    SYS_DISPATCH_BYTE(D_801F02B4, g_Task->header.step);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        Effect_SetActorMatrix();
-        func_801EF458();
-        PopMatrix();
-    }
+    BMAGIC_DISPATCH_AND_DRAW(D_801F02B4, func_801EF458);
 }
 
 MATCH void func_801EEE64(void) {
@@ -109,12 +104,7 @@ MATCH void func_801EF048(void) {
 }
 
 MATCH void func_801EF0A8(void) {
-    SYS_DISPATCH_BYTE(D_801F02C8, g_Task->header.step);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        Effect_SetActorMatrix();
-        func_801EF458();
-        PopMatrix();
-    }
+    BMAGIC_DISPATCH_AND_DRAW(D_801F02C8, func_801EF458);
 }
 
 MATCH void func_801EF130(void) {
@@ -196,12 +186,7 @@ MATCH void func_801EF348(void) {
 INCLUDE_ASM(func_801EF458);
 
 MATCH void func_801EFBEC(void) {
-    SYS_DISPATCH_BYTE(D_801F035C, g_Task->header.step);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        Effect_SetActorMatrix();
-        func_801F002C();
-        PopMatrix();
-    }
+    BMAGIC_DISPATCH_AND_DRAW(D_801F035C, func_801F002C);
 }
 
 MATCH void func_801EFC74(void) {
@@ -241,12 +226,7 @@ MATCH void func_801EFD84(void) {
 }
 
 MATCH void func_801EFE00(void) {
-    SYS_DISPATCH_BYTE(D_801F036C, g_Task->header.step);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        Effect_SetActorMatrix();
-        func_801F002C();
-        PopMatrix();
-    }
+    BMAGIC_DISPATCH_AND_DRAW(D_801F036C, func_801F002C);
 }
 
 MATCH void func_801EFE88(void) {
