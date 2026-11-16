@@ -30,6 +30,11 @@ void        func_801F4E8C(s32 x, s32 y);
 
 extern u8 D_80144EF8[];
 
+/* The palette counters the fade advances, one 12-byte row per palette index. */
+extern u8  D_80145BD6[];
+/* The height the scroll advance follows. */
+extern s32 D_80143F84;
+
 #define AREA_SPAWN_SLOT_LIFE        0x20
 #define AREA_SPAWN_SLOT_RADIUS      0x180
 #define AREA_SPAWN_SLOT_CORE_SHADE  g_Task->tint.bytes.rgb.red
