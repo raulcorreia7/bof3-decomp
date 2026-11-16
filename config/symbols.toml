@@ -4454,6 +4454,7 @@ jtbl_801F6E5C = { addr = 0x801F6E5C, type = "Callback", source = "The switch tab
 Scene_DispatchEntity = { addr = 0x801F6F38, type = "func", source = "dispatches a scene entity by its callback index" }
 func_801F6F40 = { addr = 0x801F6F40, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
 Scene_InitTaskArea = { addr = 0x801F6F7C, type = "func", source = "sets the task screen position and timer, clears the work column and advances the task mode" }
+Scene_DrawLightPillar = { addr = 0x801F71B0, type = "func", source = "pillar of light with a fade: twin of Area_DrawLightPillar; callers fade it in, hold at 0xFF, and out" }
 Area_ClearWorkColumn = { addr = 0x801F75AC, type = "func", source = "Clears one byte of each row in the actor window." }
 Area_AddSpark = { addr = 0x801F75D8, type = "func", source = "Adds one falling spark to the first free row of the 128-spark work table: marks it active, sets its fall speed and places it around the work position at a random angle and radius." }
 Scene_GetZFixed = { addr = 0x801F7748, type = "func", source = "the body returns g_Task->pos.z.fixed" }
