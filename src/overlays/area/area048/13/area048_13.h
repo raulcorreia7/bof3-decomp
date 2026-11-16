@@ -7,18 +7,27 @@
 #include "overlays/area/world01.h"
 #include "area/spad.h"
 
-extern u8 D_8014686B;
-extern u8 D_80146874;
-extern u8 D_80146875;
-extern u8 D_80147CC8;
+extern u8      D_8014686B;
+extern u8      D_80146874;
+extern u8      D_80146875;
+extern u8      D_80147CC8;
 /* The disc's colour rows: one byte table per channel, indexed by the work record's byte 6. */
-extern u8 D_801F4D5C[];
-extern u8 D_801F4D5D[];
-extern u8 D_801F4D5E[];
-extern u8 D_801F4D68[];
-extern u8 D_801F4D78[];
-extern u8 D_801F4D79[];
-s32       func_801F3AE4(s32, s32, s32);
+extern u8      D_801F4D5C[];
+extern u8      D_801F4D5D[];
+extern u8      D_801F4D5E[];
+extern u8      D_801F4D68[];
+extern u8      D_801F4D78[];
+extern u8      D_801F4D79[];
+/* The quad table the curtain walks: eight entries per variant, a word each. */
+extern u32     D_801F4DF4[];
+/* The vertex triplets the curtain projects: x, y and z bytes, four per quad. */
+extern s8      D_801F4D94[];
+extern s8      D_801F4D95[];
+extern s8      D_801F4D96[];
+extern s8      D_801F4E34[];
+extern SVECTOR D_1F800014[];
+
+void func_801F3AE4(s32 angle, s32 pos, s32 variant);
 
 extern u8 D_801F4D80[];
 
