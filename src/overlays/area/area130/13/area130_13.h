@@ -31,4 +31,6 @@ extern u16 D_801469EA;
 
 void func_801F3400(s16 x, s16 y, s16 z, s16 w);
 
+void* func_801AFE18(void* out_matrix);
+
 #endif
