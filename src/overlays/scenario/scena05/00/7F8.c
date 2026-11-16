@@ -97,9 +97,8 @@ MATCH void func_801F8430(void) {
     step = &D_80146875;
     switch (*step) {
         case 0:
-            Message_StartAreaMessage(5);
-            g_GameStateIndex = GAME_REQUEST_MESSAGE;
-            *step            = 1;
+            MESSAGE_START_WAIT(5);
+            *step = 1;
             break;
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {

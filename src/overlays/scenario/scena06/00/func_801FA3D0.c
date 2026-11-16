@@ -71,9 +71,7 @@ MATCH void func_801FA3D0(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            Message_StartAreaMessage(0x2B);
-            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-            g_SceneState.step_05 = 18;
+            SCENE_MESSAGE_WAIT(0x2B, 18);
             break;
         case 18:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -102,9 +100,7 @@ MATCH void func_801FA3D0(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            Message_StartAreaMessage(0x29);
-            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-            g_SceneState.step_05 = 23;
+            SCENE_MESSAGE_WAIT(0x29, 23);
             break;
         case 23:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {

@@ -10,9 +10,7 @@ MATCH void func_801FA548(void) {
         case 0:
             SND_StopSequence(0, 0);
             SND_PlayBGM(0x25, 0x64, 8);
-            Message_StartAreaMessage(0x14);
-            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-            g_SceneState.step_05 = 1;
+            SCENE_MESSAGE_WAIT(0x14, 1);
             break;
         case 1:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -105,9 +103,7 @@ MATCH void func_801FA548(void) {
             }
             break;
         case 22:
-            Message_StartAreaMessage(0x29);
-            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-            g_SceneState.step_05 = 0x17;
+            SCENE_MESSAGE_WAIT(0x29, 0x17);
             break;
         case 23:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -135,9 +131,7 @@ MATCH void func_801FA548(void) {
             }
             break;
         case 27:
-            Message_StartAreaMessage(0x38);
-            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-            g_SceneState.step_05 = 0x1C;
+            SCENE_MESSAGE_WAIT(0x38, 0x1C);
             break;
         case 28:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {

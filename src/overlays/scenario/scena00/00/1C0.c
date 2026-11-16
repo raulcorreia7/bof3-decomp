@@ -1222,8 +1222,7 @@ MATCH void func_801F9BE4(void) {
                 break;
             }
             SsSetMVol(0, 0);
-            Message_StartAreaMessage(16);
-            g_GameStateIndex = GAME_REQUEST_MESSAGE;
+            MESSAGE_START_WAIT(16);
             SND_PlayBGM(6, 0x5A, 8);
             g_SceneState.timer_06 = 0;
             g_SceneState.step_05  = 1;
@@ -1262,9 +1261,7 @@ MATCH void func_801F9BE4(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            Message_StartAreaMessage(17);
-            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-            g_SceneState.step_05 = 4;
+            SCENE_MESSAGE_WAIT(17, 4);
             break;
 
         case 4:
@@ -1373,9 +1370,7 @@ MATCH void func_801FA27C(void) {
             if (WINDOW_EFFECT_BUSY()) {
                 break;
             }
-            Message_StartAreaMessage(1);
-            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-            g_SceneState.step_05 = 1;
+            SCENE_MESSAGE_WAIT(1, 1);
             break;
 
         case 1:
@@ -1389,17 +1384,14 @@ MATCH void func_801FA27C(void) {
             if (g_ScriptVarsReq.byte != 3) {
                 break;
             }
-            Message_StartAreaMessage(2);
-            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-            g_SceneState.step_05 = 3;
+            SCENE_MESSAGE_WAIT(2, 3);
             break;
 
         case 3:
             if (g_ScriptVarsReq.byte != 4) {
                 break;
             }
-            Message_StartAreaMessage(3);
-            g_GameStateIndex      = GAME_REQUEST_MESSAGE;
+            MESSAGE_START_WAIT(3);
             g_SceneState.timer_06 = 304;
             g_SceneState.step_05  = 4;
             break;
@@ -1480,8 +1472,7 @@ MATCH void func_801FA27C(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            Message_StartAreaMessage(4);
-            g_GameStateIndex = GAME_REQUEST_MESSAGE;
+            MESSAGE_START_WAIT(4);
             SND_FadeOutBGM(2, 0x64, 0x20);
             g_SceneState.step_05 = 0xA;
             break;
@@ -1862,9 +1853,7 @@ MATCH void func_801FB204(void) {
 
         case 3:
             g_GameFlags |= 0x180;
-            Message_StartAreaMessage(14);
-            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-            g_SceneState.step_05 = 4;
+            SCENE_MESSAGE_WAIT(14, 4);
             break;
 
         case 4:

@@ -32,9 +32,7 @@ MATCH void func_801FA8EC(void) {
             } else if (SYS_TestFlag(g_SceneFlags, 37)) {
                 Message_StartAreaMessage(8);
             } else {
-                Message_StartAreaMessage(9);
-                g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-                g_SceneState.step_05 = 6;
+                SCENE_MESSAGE_WAIT(9, 6);
                 break;
             }
             g_GameStateIndex     = GAME_REQUEST_MESSAGE;

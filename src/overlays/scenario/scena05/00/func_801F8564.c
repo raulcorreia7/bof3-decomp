@@ -59,9 +59,8 @@ MATCH void func_801F8564(void) {
             }
             break;
         case 20:
-            Message_StartAreaMessage(0xB);
-            g_GameStateIndex = GAME_REQUEST_MESSAGE;
-            D_80146875       = 0x15;
+            MESSAGE_START_WAIT(0xB);
+            D_80146875 = 0x15;
             break;
         case 21:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {

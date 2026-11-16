@@ -38,9 +38,8 @@ MATCH void func_801FCCFC(void) {
     state = &D_80146875;
     switch (*state) {
         case 0:
-            Message_StartAreaMessage(24);
-            g_GameStateIndex = GAME_REQUEST_MESSAGE;
-            *state           = 1;
+            MESSAGE_START_WAIT(24);
+            *state = 1;
             return;
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -60,9 +59,8 @@ MATCH void func_801FCD9C(void) {
     state = &D_80146875;
     switch (*state) {
         case 0:
-            Message_StartAreaMessage(52);
-            g_GameStateIndex = GAME_REQUEST_MESSAGE;
-            *state           = 1;
+            MESSAGE_START_WAIT(52);
+            *state = 1;
             return;
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -80,9 +78,8 @@ MATCH void func_801FCE30(void) {
     state = &D_80146875;
     switch (*state) {
         case 0:
-            Message_StartAreaMessage(52);
-            g_GameStateIndex = GAME_REQUEST_MESSAGE;
-            *state           = 1;
+            MESSAGE_START_WAIT(52);
+            *state = 1;
             return;
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {

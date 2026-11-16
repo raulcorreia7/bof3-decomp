@@ -105,8 +105,7 @@ MATCH s32 func_801FC5A4(void) {
 
 MATCH void func_801FC5FC(void) {
     Item_VitalAdd(VITAL_ITEM_FLIER);
-    Message_StartAreaMessage(47);
-    g_GameStateIndex = GAME_REQUEST_MESSAGE;
+    MESSAGE_START_WAIT(47);
     SND_PauseBGM(g_SndBGMId);
     SND_StartXAStream(2, 1);
     while (!(SND_IsXAIdle() & BYTE_MASK)) {
@@ -322,8 +321,7 @@ MATCH s32 func_801FCDB4(s32 entry_x, s32 entry_y) {
 }
 
 MATCH void func_801FCE18(void) {
-    Message_StartAreaMessage(25);
-    g_GameStateIndex = GAME_REQUEST_MESSAGE;
+    MESSAGE_START_WAIT(25);
     Game_SetScriptActive();
     g_SceneState.timer_06 = 30;
     g_SceneState.state_04 = 7;

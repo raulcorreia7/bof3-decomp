@@ -13,8 +13,7 @@ MATCH void func_801FC488(void) {
             SND_PlayBGM(0x11, 0x64, 8);
             g_AreaDrawFlags = 0;
             g_GameFlags |= 0x80;
-            Message_StartAreaMessage(0x10);
-            g_GameStateIndex = GAME_REQUEST_MESSAGE;
+            MESSAGE_START_WAIT(0x10);
             break;
         case 3:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -37,8 +36,7 @@ MATCH void func_801FC488(void) {
                 g_SceneState.step_05 = 7;
                 func_80153DE8();
                 g_ScriptVars[0] = 8;
-                Message_StartAreaMessage(0x1C);
-                g_GameStateIndex = GAME_REQUEST_MESSAGE;
+                MESSAGE_START_WAIT(0x1C);
             }
             break;
         case 7:

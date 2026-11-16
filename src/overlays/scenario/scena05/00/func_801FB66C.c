@@ -17,14 +17,10 @@ MATCH void func_801FB66C(void) {
             }
             if (g_ScriptVars[0] == 1) {
                 g_ScriptVars[0] = 0;
-                Message_StartAreaMessage(0x22);
-                g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-                g_SceneState.step_05 = 1;
+                SCENE_MESSAGE_WAIT(0x22, 1);
             } else {
                 g_ScriptVars[0] = 0;
-                Message_StartAreaMessage(0x20);
-                g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-                g_SceneState.step_05 = 2;
+                SCENE_MESSAGE_WAIT(0x20, 2);
             }
             break;
         case 1:
