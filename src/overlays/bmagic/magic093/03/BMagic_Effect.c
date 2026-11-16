@@ -167,8 +167,7 @@ MATCH void func_801EF4C8(void) {
     g_Task->header.step += 1;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF600(void) {
+MATCH void func_801EF600(void) {
     s16 angle;
     u8  mask;
     u8  count;
@@ -177,7 +176,7 @@ NON_MATCHING void func_801EF600(void) {
     D_1F800000.view.effect.params[0] = angle;
     mask                             = g_Task->unk_04 & 7;
     D_1F80000A                       = mask << 9;
-    g_Task->pos.x.fixed              = g_BattleEffectBattler->pos.x.fixed + ((rsin(mask << 9) * D_1F800000.view.effect.params[0]) >> 3);
+    LOW(g_Task->pos.x.fixed)         = g_BattleEffectBattler->pos.x.fixed + ((rsin(mask << 9) * D_1F800000.view.effect.params[0]) >> 3);
     g_Task->pos.y.fixed              = g_BattleEffectBattler->pos.y.fixed + ((rcos(SP_REF(s16, 0xA)) * D_1F800000.view.effect.params[0]) >> 3);
     count                            = g_Task->unk_09 + 1;
     g_Task->unk_09                   = count;
@@ -185,9 +184,6 @@ NON_MATCHING void func_801EF600(void) {
         g_Task->header.step += 1;
     }
 }
-#else
-INCLUDE_ASM(func_801EF600);
-#endif
 
 MATCH void func_801EF710(void) {
     PartyMember* active;
