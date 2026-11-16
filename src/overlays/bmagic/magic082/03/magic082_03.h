@@ -21,7 +21,8 @@ s32  func_801EF3A0(void);
 
 /* battle/battle/15: the target selector of each effect side, and the test of a selector against the target. */
 extern u8 D_800B6BF0[];
-u8        func_800AED5C(s32 selector, u32 battler_index);
+/* func_800AED5C */
+u8        Battle_CanTarget(s32 selector, u32 battler_index);
 
 /* The red, green and blue of each colour row, indexed by the effect byte 0x04. */
 extern u8 D_801F0CFC[][3];

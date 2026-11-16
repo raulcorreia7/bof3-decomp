@@ -1223,7 +1223,8 @@ static inline void Battle_SeedQueuedSlotPanel(u8 unk14, u8 unk08) {
 
 u8 func_800A40D0(u8 battler_index);
 
-u8 func_800AED5C(s32 selector, u32 battler_index);
+/* func_800AED5C */
+u8 Battle_CanTarget(s32 selector, u32 battler_index);
 
 volatile u8* Battle_FindActorEntry(u8 entry_id);
 void         Battle_MoveRangeToward(BattleRange* target, s32 step);
