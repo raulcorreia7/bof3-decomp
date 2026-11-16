@@ -38,6 +38,15 @@ extern Callback            D_801F6160[];
 extern s8                  g_PartyTrailStep[10][2];
 extern s8                  g_PartyTrailOffset[32][2];
 
+/* The four corner vectors the area projection fills. */
+extern SVECTOR D_1F800014[];
+/* The signed height scale of each mode, one byte. */
+extern u8      D_801F5034[];
+/* The corner vectors of the three quads: three halfwords each, four corners a quad. */
+extern u8      D_801F5038[];
+/* The part word of each quad, three per mode. */
+extern u32     D_801F5080[];
+
 /* The setup step the selector enters. */
 void func_801F37B8(s32 mode, s32 value);
 

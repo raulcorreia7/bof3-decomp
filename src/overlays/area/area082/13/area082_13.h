@@ -13,8 +13,7 @@
 #define SCRATCH_COLUMN_STRIDE 0x14
 #define SCRATCH_COLUMN_COUNT  0x80
 
-extern SVECTOR D_1F800014[];
-extern u8      D_801F5734[];
+extern u8 D_801F5734[];
 
 /* One ring point: the x and y byte offsets from the effect origin. */
 typedef struct RingOffset {

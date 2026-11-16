@@ -80,7 +80,57 @@ MATCH SpawnedActor* func_801FD610(u8 mode) {
     return slot;
 }
 
-INCLUDE_ASM(func_801FD67C);
+MATCH s32 func_801FD67C(s32 x, s32 y) {
+    if ((g_GameAreaId == AREA_ID_URKAN_TAPA) && (SYS_TestFlag(g_SceneFlags, 4) != 0) && (SYS_TestFlag(g_SceneFlags, 7) == 0) && (x == 0x348000) && ((u32)((y >> 16) - 0x13) < 4U)) {
+        Game_SetScriptActive();
+        g_SceneState.state_04 = 5;
+        g_SceneState.step_05  = 0;
+        return 1;
+    }
+    if ((g_GameAreaId == AREA_ID_ANGEL_TOWER_OUTSIDE) && ((u32)((y >> 16) - 0x3C) < 5U) && ((u32)((x >> 16) - 0x22) < 4U)) {
+        if ((SYS_TestFlag(g_SceneFlags, 4) == 0) || ((func_801FDA34() & BYTE_MASK) == 0)) {
+            u16 facing;
+
+            facing                 = g_Game.members[0].facing;
+            D_1F800000.view.raw[0] = facing;
+            if (((u32)(facing - 5) >= 2U) && ((u8)facing != 4)) {
+                g_ScriptVars[0] = 0x10;
+                Game_SetScriptActive();
+                return 1;
+            }
+        }
+    }
+    if ((g_GameAreaId == AREA_ID_ANGEL_TOWER_GARR_FIGHT) && (y == 0x1C8000) && ((u32)((x >> 16) - 0x25) < 2U) && (SYS_TestFlag(g_SceneFlags, 9) == 0)) {
+        Message_StartAreaMessage(2);
+        g_GameStateIndex      = 2;
+        g_SceneState.state_04 = 6;
+        g_SceneState.step_05  = 5;
+        g_GameFlags |= 0x100;
+        return 1;
+    }
+    if (g_GameAreaId == AREA_ID_TIDAL_CAVES_OUTSIDE) {
+        u8 facing;
+
+        facing                 = g_Game.members[0].facing;
+        D_1F800000.view.raw[0] = facing;
+        if (((u32)facing >= 2U) && (facing != 2) && ((y >> 16) >= 0x1E)) {
+            Game_SetScriptActive();
+            Message_StartAreaMessage(1);
+            g_GameStateIndex      = 2;
+            g_SceneState.state_04 = 8;
+            g_SceneState.step_05  = 0;
+            return 1;
+        }
+    }
+    if ((g_GameAreaId == AREA_ID_FAIRY_VILLAGE_DOLPHIN) && (SYS_TestFlag(g_SceneFlags, 0) != 0) && (SYS_TestFlag(g_SceneFlags, 1) == 0) && ((u32)((y >> 16) - 0x20) < 5U) &&
+        ((u32)((x >> 16) - 0x18) < 0x16U)) {
+        Game_SetScriptActive();
+        g_SceneState.state_04 = 2;
+        g_SceneState.step_05  = 0;
+        return 1;
+    }
+    return 0;
+}
 
 MATCH s32 func_801FD960(s32 x, s32 y) {
     s32 value;

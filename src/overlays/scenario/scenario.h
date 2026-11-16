@@ -2,6 +2,7 @@
 #define SCENARIO_FAMILY_H
 
 #include "game.h"
+#include "sys/scratchpad.h"
 #include "sys/scene.h"
 #include "gfx/prim.h"
 #include "area/map.h"
@@ -158,5 +159,9 @@ ASSERT_OFFSET(FallingSpark, z, 0x14);
 ASSERT_OFFSET(FallingSpark, unk_18, 0x18);
 
 FallingSpark* func_801F8394(void);
+
+/* The two dispatch tables the scenario step code indexes. */
+extern SceneFunc g_SceneActorDispatch[];
+extern Callback  g_SceneEntityDispatch[];
 
 #endif

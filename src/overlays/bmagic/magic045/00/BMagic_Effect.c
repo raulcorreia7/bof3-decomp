@@ -8,7 +8,47 @@ MATCH void func_801EEC04(void) {
     ACTOR_RUN_MODE_HANDLER(func_801EEC5C, func_801EEE58);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EEC5C(void) {
+    u32  first;
+    u8   i;
+    u16* dst;
+    u16* src;
+    u32  slot;
+
+    if ((g_Battle.target_selector < BATTLE_PARTY_CHARACTERS_COUNT && g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) ||
+        (g_Battle.target_selector >= BATTLE_PARTY_CHARACTERS_COUNT && g_Battle.active_battler >= BATTLE_PARTY_CHARACTERS_COUNT)) {
+        Battle_MarkDamaged(g_Battle.target_selector);
+        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+        func_801E5988();
+    } else {
+        g_Task->facing                                  = g_BattleEffectBattler->facing;
+        g_Task->pos.x                                   = g_BattleEffectBattler->pos.x;
+        g_Task->pos.y                                   = g_BattleEffectBattler->pos.y;
+        g_Task->pos.z                                   = g_BattleEffectBattler->pos.z;
+        first                                           = Battle_AllocEffect(1, 0x31);
+        g_BattleEffects[first & BYTE_MASK].header.mode  = 0;
+        g_BattleEffects[first & BYTE_MASK].target.party = g_Task;
+        slot                                            = Battle_AllocEffect(1, 0x31) & BYTE_MASK;
+        g_BattleEffects[slot].unk_0B                    = first;
+        i                                               = 0;
+        dst                                             = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+        src                                             = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+        g_BattleEffects[slot].header.mode               = 1;
+        g_GfxPalettePending                             = 1;
+        g_BattleEffects[slot].target.party              = g_Task;
+        do {
+            dst[i] = src[i] | 0x8000;
+            i++;
+        } while (i < 16);
+        g_AreaPaletteCopy->rows[26].colors[0] = g_AreaPaletteArena->rows[26].colors[0];
+        g_Task->param.unk_0B                  = 2;
+        g_Task->header.mode += 1;
+    }
+}
+#else
 INCLUDE_ASM(func_801EEC5C);
+#endif
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
