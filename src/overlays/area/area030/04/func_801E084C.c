@@ -29,7 +29,7 @@ MATCH void func_801E084C(void) {
     saved           = (AreaWorkSaved*)g_Task;
     save            = saved->saved_3C;
     saved->saved_3C = 0;
-    func_8014D290();
+    Area_AddGridActor();
     work                             = (AreaWorkScale*)g_Task;
     ((AreaWorkSaved*)work)->saved_3C = save;
     if (work->distance_60 < 0) {

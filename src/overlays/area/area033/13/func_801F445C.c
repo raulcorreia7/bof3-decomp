@@ -18,5 +18,5 @@ MATCH void func_801F445C(void) {
     *(s32*)(work + 0x34) += *(s32*)(work + 0x0C);
     *(s32*)(work + 0x38) += *(s32*)(work + 0x10);
     Actor_StepAnimLoop();
-    func_8014D290();
+    Area_AddGridActor();
 }

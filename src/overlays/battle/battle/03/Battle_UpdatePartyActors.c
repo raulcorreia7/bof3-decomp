@@ -12,7 +12,7 @@ MATCH void Battle_UpdatePartyActors(void) {
         g_Task      = battle_work;
 
         if ((((battle_work->header.flags & PARTY_MEMBER_FLAG_OCCUPIED) != 0)) && ((battle_work->header.flags & PARTY_MEMBER_FLAG_HANDLER_BUSY) == 0u)) {
-            func_8014D290();
+            Area_AddGridActor();
         }
     }
 }

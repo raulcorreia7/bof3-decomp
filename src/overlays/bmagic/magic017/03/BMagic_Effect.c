@@ -59,7 +59,7 @@ MATCH void func_801EF058(void) {
     handlers = D_801EEC10;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_8014D290();
+        Area_AddGridActor();
     }
 }
 

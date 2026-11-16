@@ -85,7 +85,7 @@ MATCH void func_801EF104(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(g_BMagicEffectModes + 2, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_8014D290();
+        Area_AddGridActor();
     }
     g_Scripts = AREA_SCRIPT_TABLE;
 }
@@ -162,7 +162,7 @@ MATCH void func_801EF4B4(void) {
 
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0) {
-        func_8014D290();
+        Area_AddGridActor();
     }
 }
 

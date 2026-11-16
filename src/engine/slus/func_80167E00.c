@@ -59,7 +59,7 @@ NON_MATCHING void func_80167E00(void) {
         }
         for (j = 0; D_80183A70[j] != 0xFFFF; j++) {
             if (SCENE_SLOTS[slot].id == D_80183A70[j]) {
-                func_8014D290();
+                Area_AddGridActor();
                 break;
             }
         }

@@ -61,7 +61,8 @@ extern void  Area_DrawObjectSprite(void);
 extern void  Area_BuildClut(u16* dst);
 /* func_8014D260 */
 void         Area_SetDrawMode(void);
-void         func_8014D290(void);
+/* func_8014D290 */
+void         Area_AddGridActor(void);
 /* func_8014D4E0 */
 extern void  Area_AddActor(void);
 /* func_8014D54C */

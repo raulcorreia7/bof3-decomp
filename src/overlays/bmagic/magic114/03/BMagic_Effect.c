@@ -672,7 +672,7 @@ MATCH void func_801F0D6C(void) {
     g_Task->unk_09    = 0;
     g_Task->header.step += 1;
     Actor_SelectScript(0);
-    func_8014D290();
+    Area_AddGridActor();
 }
 
 MATCH void func_801F0E4C(void) {
@@ -680,7 +680,7 @@ MATCH void func_801F0E4C(void) {
         Effect_Reset();
         return;
     }
-    func_8014D290();
+    Area_AddGridActor();
 }
 
 MATCH void func_801F0E90(void) {

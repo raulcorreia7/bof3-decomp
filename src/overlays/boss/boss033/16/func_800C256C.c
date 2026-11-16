@@ -4,6 +4,6 @@
 MATCH void func_800C256C(void) {
     D_800C27D0[g_Task->header.step]();
     if (g_Task->header.flags != 0) {
-        func_8014D290();
+        Area_AddGridActor();
     }
 }

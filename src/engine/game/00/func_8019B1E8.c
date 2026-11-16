@@ -17,5 +17,5 @@ MATCH void func_8019B1E8(void) {
     if ((flag != 0) && (flag == FIELD(u8, work, 0x58u))) {
         work->header.mode = 2;
     }
-    func_8014D290();
+    Area_AddGridActor();
 }

@@ -486,7 +486,7 @@ MATCH void func_801D21B4(void) {
                 Actor_BeginScript(0x50, 0x24);
             }
         }
-        func_8014D290();
+        Area_AddGridActor();
         func_80196070();
         g_Task        = parent;
         parent->timer = 2;
@@ -774,7 +774,7 @@ MATCH void func_801D2E30(void) {
             parent = g_Task;
             g_Task = actor;
             Actor_SelectScript(7);
-            func_8014D290();
+            Area_AddGridActor();
             func_80196070();
             g_Task        = parent;
             parent->timer = 2;

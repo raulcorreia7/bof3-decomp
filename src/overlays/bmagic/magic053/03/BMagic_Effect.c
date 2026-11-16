@@ -84,7 +84,7 @@ MATCH void func_801EF0A8(void) {
         if (g_Task->header.step != 0) {
             if (g_Task->header.step < 4) {
                 Battle_ProjectRange();
-                func_8014D290();
+                Area_AddGridActor();
                 Effect_SetActiveActorMatrix();
                 Effect_DrawShadedDisc();
                 BMagic_DrawDarkRing();

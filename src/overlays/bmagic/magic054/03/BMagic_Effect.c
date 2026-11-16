@@ -28,7 +28,7 @@ MATCH void func_801EF19C(void) {
     handlers = D_801EEC14;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
     if (g_Task->header.flags != 0) {
-        func_8014D290();
+        Area_AddGridActor();
     }
 }
 

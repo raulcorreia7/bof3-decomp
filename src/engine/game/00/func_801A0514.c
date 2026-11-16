@@ -38,7 +38,7 @@ MATCH void func_801A0514(void) {
                         func_8015A944();
                         next_u8 = index & BYTE_MASK;
                     } else {
-                        func_8014D290();
+                        Area_AddGridActor();
                         goto block_10; /* the kind is not 10, step the slot */
                     }
                 }

@@ -109,7 +109,7 @@ MATCH void func_801EF3DC(void) {
 
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_8014D290();
+        Area_AddGridActor();
     }
 }
 
@@ -211,7 +211,7 @@ MATCH void func_801EF894(void) {
     handlers = D_801EEC3C;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_8014D290();
+        Area_AddGridActor();
     }
 }
 

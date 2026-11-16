@@ -10,7 +10,7 @@ MATCH void Battle_UpdateEnemyActors(void) {
             enemy = &g_BattleEnemyBattlers[i];
             TASK_SET((PartyMember*)enemy);
             BATTLE_CURRENT_ENEMY_PTR = enemy;
-            func_8014D290();
+            Area_AddGridActor();
         }
     }
 }

@@ -62,7 +62,7 @@ MATCH void func_801EF01C(void) {
     handlers = D_801EEC10;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_8014D290();
+        Area_AddGridActor();
     }
 }
 
@@ -276,7 +276,7 @@ MATCH void func_801EFAFC(void) {
     memcpy(handlers, D_801EEC48, sizeof(handlers));
     SYS_DISPATCH_BYTE(handlers, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_8014D290();
+        Area_AddGridActor();
         if (g_Task->header.step < 5) {
             func_801F014C();
             func_801F0238();
