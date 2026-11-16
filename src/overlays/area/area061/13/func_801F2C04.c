@@ -6,9 +6,9 @@ MATCH s32 func_801F2C04(void) {
     sel = g_MessageChoice;
     if (sel == 0) {
         g_Zenny          = 0;
-        g_MessageRequest = 2;
+        g_MessageRequest = AREA061_MSG_MASTER_AP_TERMS;
     } else {
-        g_MessageRequest = 3;
+        g_MessageRequest = AREA061_MSG_MASTER_QUIT;
         g_MenuMasterStep = 6;
     }
 }

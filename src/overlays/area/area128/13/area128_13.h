@@ -8,4 +8,7 @@
 #include "scenario/state.h"
 #include "area/spad.h"
 
+/* The line that starts the trial. */
+#define AREA128_MSG_START 0x49
+
 #endif

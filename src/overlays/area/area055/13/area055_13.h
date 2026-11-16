@@ -6,4 +6,9 @@
 
 #include "overlays/area/world01.h"
 
+/* The master's Wisdom Fruit lines. */
+#define AREA055_MSG_WISDOM_FRUIT_GIVEN   0x22
+#define AREA055_MSG_WISDOM_FRUIT_MISSING 0x23
+#define AREA055_MSG_MASTER_FAREWELL      0x24
+
 #endif

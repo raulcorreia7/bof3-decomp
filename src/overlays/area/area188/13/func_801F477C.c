@@ -7,7 +7,7 @@ MATCH void func_801F477C(void) {
     Actor* work;
 
     work             = g_ScriptWorkRecord;
-    g_MessageRequest = 0xFFFF;
+    g_MessageRequest = MESSAGE_NONE;
     work->unk_18     = D_801F688C[g_MessageChoice * 2];
     FAKE_BARRIER(); /* FAKE: retail reads the choice again for the second row. */
     work->unk_1C = D_801F688D[g_MessageChoice * 2];

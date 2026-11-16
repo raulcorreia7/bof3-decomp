@@ -6,4 +6,8 @@
 
 #include "overlays/area/world01.h"
 
+/* The master's terms and his answer to quitting. */
+#define AREA061_MSG_MASTER_AP_TERMS 0x2
+#define AREA061_MSG_MASTER_QUIT     0x3
+
 #endif

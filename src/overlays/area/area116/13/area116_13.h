@@ -7,6 +7,9 @@
 #include "overlays/area/world03.h"
 #include "area/spad.h"
 
+/* The master's acceptance once the 10000 zenny is paid. */
+#define AREA116_MSG_ZENNY_DEAL 2
+
 extern Callback D_801F34E8[];
 
 void Area_DrawLightPillar(s32* pos);
