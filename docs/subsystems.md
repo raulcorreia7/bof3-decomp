@@ -62,3 +62,6 @@ named, with the owner whose header declares each and how many call sites it reac
 | `Battle_EndToArea`           | Battle     | `battle/handlers.h`  | Boss 18, Battle 1                                              |
 | `Battle_RequestEnemyScript`  | Battle     | `battle/handlers.h`  | Battle 16, Boss 13                                             |
 | `Battle_FadePoisonedBattler` | Battle     | `battle/functions.h` | Battle magic 30                                                |
+| ---------------------- | ---------- | ------------------ | -------------------------------------------------------------- |
+| `Area_InitMapRenderer` | Executable | `slus/functions.h` | Scenario 10, Menu 4, Game 3, Area 2                            |
+| `Area_ApplyTileToQuad` | Executable | `slus/functions.h` | Area 31, Executable 12, Battle magic 3                         |

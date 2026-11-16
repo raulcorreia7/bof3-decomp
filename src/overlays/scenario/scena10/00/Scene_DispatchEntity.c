@@ -274,7 +274,7 @@ MATCH void func_801F8550(void) {
     Scene_SetupParty(0);
     g_AreaScrollTargetX = 0x490000;
     g_AreaScrollTargetY = 0x560000;
-    func_80153DE8();
+    Area_InitMapRenderer();
     g_AreaCameraAngle.vx = -0x23C;
     D_801FE9D8           = Actor_FindFreeSpawned();
     if (D_801FE9D8 != GAME_NONE) {

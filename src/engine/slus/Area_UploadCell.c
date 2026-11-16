@@ -21,12 +21,12 @@ MATCH s32 Area_UploadCell(s32 column, s32 row, POLY_FT4* context, s32 slot) {
     entry  = (u8*)(map->grid_off4_02 * 4 + (((map->width * map->height + 1) / 2) * 4 + (u32)map) + cell * 4);
     value  = *(u32*)entry;
     result = ((value & 0x40000000) >> 15) | (value & 0x4000);
-    func_80155560(value, &context[slot], 1);
+    Area_ApplyTileToQuad(value, &context[slot], 1);
     entry += 4;
     id = context[1].pad2;
     if (id != 0) {
         value = *(u32*)entry;
-        func_80155560(value, &g_AreaCellPrims[id][slot], 1);
+        Area_ApplyTileToQuad(value, &g_AreaCellPrims[id][slot], 1);
         result |= (*(s32*)entry & 0x40000000) >> 18;
         entry += 4;
     }
@@ -34,7 +34,7 @@ MATCH s32 Area_UploadCell(s32 column, s32 row, POLY_FT4* context, s32 slot) {
     if (size != 0) {
         value = *(u32*)entry;
         if (value != 0) {
-            func_80155560(value, &g_AreaCellPrims[size][slot], 1);
+            Area_ApplyTileToQuad(value, &g_AreaCellPrims[size][slot], 1);
             result |= (*(s32*)entry & 0x40000000) >> 17;
         } else {
             Area_FreeCellPrimRow(size);

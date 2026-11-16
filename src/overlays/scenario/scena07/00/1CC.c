@@ -931,7 +931,7 @@ MATCH void func_801FAA70(void) {
                 UI_SetMode(1);
                 g_AreaScrollTargetX = 0x2D8000;
                 g_AreaScrollTargetY = 0x5D0000;
-                func_80153DE8();
+                Area_InitMapRenderer();
                 g_AreaDrawFlags = 0x1F;
                 *step           = 2;
             }

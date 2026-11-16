@@ -34,7 +34,7 @@ MATCH void Area_DrawQuad(ScenePart* parts, s32 origin_x, s32 origin_y) {
                     setVector(&verts[i], origin_x + rec[i].vertex.x * 2, origin_y + rec[i].vertex.y * 2, rec[i].raw);
                 }
                 gte_ldv3c(&verts[1]);
-                func_80155560(rec[4].raw, prim, 1);
+                Area_ApplyTileToQuad(rec[4].raw, prim, 1);
                 gte_rtpt();
                 GFX_AddPrim((rec[4].raw & 0x40000000) ? 7 : 4, sizeof(POLY_FT4));
                 gte_stsxy3(&prim->x1, &prim->x2, &prim->x3);

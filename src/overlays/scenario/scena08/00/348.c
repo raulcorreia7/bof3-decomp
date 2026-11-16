@@ -1028,7 +1028,7 @@ NON_MATCHING void func_801FA3E4(void) {
             Game_SetScriptActive();
             Scene_SetupParty(3);
             Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX = TO_COORD_HALF(81), VOL(s32, g_AreaScrollTargetY) = TO_COORD_HALF(30)));
-            func_80153DE8();
+            Area_InitMapRenderer();
             D_801468FF    = 13;
             D_80146997    = 14;
             D_80146889[0] = 4;
@@ -1093,14 +1093,14 @@ NON_MATCHING void func_801FA3E4(void) {
                 }
                 Scene_SetupParty(0);
                 Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX = TO_COORD_HALF(41), VOL(s32, g_AreaScrollTargetY) = TO_COORD(13)));
-                func_80153DE8();
+                Area_InitMapRenderer();
                 SYS_SetFlag(g_SceneFlags, 17);
             }
             if (SYS_TestFlag(g_SceneFlags, 19) && !SYS_TestFlag(g_SceneFlags, 20)) {
                 Game_SetScriptActive();
                 Scene_SetupParty(2);
                 Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX = TO_COORD_HALF(10), VOL(s32, g_AreaScrollTargetY) = TO_COORD(20)));
-                func_80153DE8();
+                Area_InitMapRenderer();
                 SYS_SetFlag(g_SceneFlags, 20);
                 D_80146874 = 10;
                 D_80146875 = 10;

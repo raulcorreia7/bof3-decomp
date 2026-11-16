@@ -40,7 +40,7 @@ NON_MATCHING void func_801F2F44(s32 steps) {
         prim->y0 = prim->y1 = D_1F800034[1] - spread;
         prim->y2 = prim->y3 = D_1F800034[1] + spread;
         order += steps;
-        func_80155560((shade & 0xF80000) | AREA_CELL_QUAD_CODE, prim, 1);
+        Area_ApplyTileToQuad((shade & 0xF80000) | AREA_CELL_QUAD_CODE, prim, 1);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
     }
 }

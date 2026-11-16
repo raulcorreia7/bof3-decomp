@@ -39,7 +39,7 @@ MATCH void Area_DrawPartAnimation(ScenePart* parts, s32 origin_x, s32 origin_y) 
                 goto scan;
             }
             skip = (u32)(run->pick.extra + 5) >> 2;
-            func_80155560((run + skip)[i].raw, prim, 1);
+            Area_ApplyTileToQuad((run + skip)[i].raw, prim, 1);
             n += skip + run->pick.extra;
             GFX_AddPrim(g_AreaDrawMode, sizeof(POLY_FT4));
         } while (n != parts->head.count);

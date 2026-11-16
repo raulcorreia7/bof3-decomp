@@ -21,7 +21,7 @@ MATCH void func_801F2D2C(void) {
             *entry     = value & CELL_UPLOAD_MASK;
             id         = Area_GetCellId(col, row);
             if (id != 0) {
-                func_80155560(*entry, &g_AreaCellPrims[id][0], 2);
+                Area_ApplyTileToQuad(*entry, &g_AreaCellPrims[id][0], 2);
             }
         }
     }

@@ -952,7 +952,7 @@ MATCH void func_801FA6BC(u8 point) {
     row                 = point * 10;
     g_AreaScrollTargetX = LOH(D_801FE608[row]) << 8;
     g_AreaScrollTargetY = LOH(D_801FE608[row + 2]) << 8;
-    func_80153DE8();
+    Area_InitMapRenderer();
     g_Game.unk_3CE[2] = 0;
     Scene_SetupParty(0);
     x = LOH(D_801FE608[row + 4]) << 8;

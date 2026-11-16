@@ -33,7 +33,7 @@ NON_MATCHING void func_801F31DC(s32 depth, s32 height) {
             row += 3;
         }
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (s32*)((u8*)prim + 8), (s32*)((u8*)prim + 0x10), (s32*)((u8*)prim + 0x18), (s32*)((u8*)prim + 0x20), &p, &flag);
-        func_80155560((height << 16) | AREA106_QUAD_PART_WORD, prim, 1);
+        Area_ApplyTileToQuad((height << 16) | AREA106_QUAD_PART_WORD, prim, 1);
         GFX_AddPrim(5, sizeof(POLY_FT4));
         n += 12;
     }

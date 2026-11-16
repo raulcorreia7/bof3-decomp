@@ -86,7 +86,7 @@ MATCH void func_801576FC(u8* record) {
                             prim = &g_AreaCellPrims[g_AreaCellPrims[id][1].pad1][g_FrameBufferIndex];
                             break;
                     }
-                    func_80155560(entry[cond + 1].word, prim, 1);
+                    Area_ApplyTileToQuad(entry[cond + 1].word, prim, 1);
                 }
                 i += 2;
                 break;

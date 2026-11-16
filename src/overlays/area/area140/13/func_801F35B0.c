@@ -29,7 +29,7 @@ NON_MATCHING void func_801F35B0(void) {
                 prim                        = Area_AllocCellPrimRow();
                 g_AreaCellPrims[id][1].pad1 = prim;
                 row_id                      = prim & HALF_MASK;
-                func_80155560(*(u32*)(entry + 4), &g_AreaCellPrims[row_id][0], 2);
+                Area_ApplyTileToQuad(*(u32*)(entry + 4), &g_AreaCellPrims[row_id][0], 2);
             }
         } else {
             prim = g_AreaCellPrims[id][1].pad2;
@@ -37,7 +37,7 @@ NON_MATCHING void func_801F35B0(void) {
                 prim                        = Area_AllocCellPrimRow();
                 g_AreaCellPrims[id][1].pad2 = prim;
                 row_id                      = prim & HALF_MASK;
-                func_80155560(*(u32*)(entry + 4), &g_AreaCellPrims[row_id][0], 2);
+                Area_ApplyTileToQuad(*(u32*)(entry + 4), &g_AreaCellPrims[row_id][0], 2);
             }
         }
         i++;

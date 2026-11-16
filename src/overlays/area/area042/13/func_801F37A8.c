@@ -22,7 +22,7 @@ MATCH void func_801F37A8(s32 depth, s32 color) {
         vectors[2].vy = vectors[3].vy = ((D_801F52F4[i].y - 0x80) << 7) | AREA_CELL_HALF;
         vectors[0].vz = vectors[1].vz = vectors[2].vz = vectors[3].vz = depth;
         RotTransPers4(&vectors[0], &vectors[1], &vectors[2], &vectors[3], (s32*)(prim + 8), (s32*)(prim + 0x10), (s32*)(prim + 0x18), (s32*)(prim + 0x20), &p, &flag);
-        func_80155560(AREA_QUAD_PART_WORD | color, prim, 1);
+        Area_ApplyTileToQuad(AREA_QUAD_PART_WORD | color, prim, 1);
         Area_AddCellPrim(D_801F52F4[i].x << 16, D_801F52F4[i].y << 16, D_801F52F4[i].z, sizeof(POLY_FT4));
         i++;
     } while (i < AREA_PAYLOAD_QUAD_COUNT);

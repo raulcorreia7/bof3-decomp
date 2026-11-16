@@ -34,7 +34,7 @@ MATCH void func_801FC488(void) {
                 D_80146871 |= 1;
                 g_AreaDrawFlags      = 0;
                 g_SceneState.step_05 = 7;
-                func_80153DE8();
+                Area_InitMapRenderer();
                 g_ScriptVars[0] = 8;
                 MESSAGE_START_WAIT(0x1C);
             }

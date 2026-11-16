@@ -42,7 +42,7 @@ NON_MATCHING void func_801F3AE4(s32 angle, s32 pos, s32 variant) {
         if ((word & 0xF80000) == 0) {
             word |= (((angle >> 5) & 0x38) + 0x50) << 16;
         }
-        func_80155560(word, prim, 1);
+        Area_ApplyTileToQuad(word, prim, 1);
         Area_AddCellPrim(pos, 0xB8000, D_801F4E34[(variant & 1) * 2 + i * 4 + (variant >> 4)], sizeof(POLY_FT4));
     }
     PopMatrix();

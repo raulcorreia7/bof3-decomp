@@ -21,7 +21,7 @@ MATCH void func_801F2EFC(void) {
         quad[2].vz = quad[3].vz = -0x80;
 
         RotTransPers4(&quad[0], &quad[1], &quad[2], &quad[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
-        func_80155560(D_801F42D4[i], prim, 1);
+        Area_ApplyTileToQuad(D_801F42D4[i], prim, 1);
         Area_AddCellPrim((g_Task->pos.x.fixed + AREA_CELL_ORIGIN) << 9, (g_Task->pos.y.fixed + (i << 7) + (AREA_CELL_ORIGIN + AREA_CELL_HALF)) << 9, 1, sizeof(POLY_FT4));
         i++;
     } while (i < 2);

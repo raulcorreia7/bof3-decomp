@@ -407,7 +407,7 @@ MATCH POLY_FT4* func_801F3480(const Pos3s* point, s32 angle, u32 texture) {
 
     PopMatrix();
 
-    func_80155560(texture, primitive, 1);
+    Area_ApplyTileToQuad(texture, primitive, 1);
     return primitive;
 }
 

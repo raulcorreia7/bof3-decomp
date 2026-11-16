@@ -42,7 +42,7 @@ NON_MATCHING void func_801F3994(void) {
             *cell |= D_801F57CC[sum * 63 + (u8)row * 9 + (u8)col];
             cell_id = Area_GetCellId((u8)col + 0x16, (u8)row + 0x8E);
             if (cell_id != 0) {
-                func_80155560(*cell, &g_AreaCellPrims[cell_id * 80], 2);
+                Area_ApplyTileToQuad(*cell, &g_AreaCellPrims[cell_id * 80], 2);
             }
             col++;
         } while ((u8)col < 9);

@@ -42,7 +42,7 @@ NON_MATCHING void func_801F3954(s32 frame) {
             entry += 3;
         } while (i < 4);
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
-        func_80155560(LOWU(D_801F4F24[row]), prim, 1);
+        Area_ApplyTileToQuad(LOWU(D_801F4F24[row]), prim, 1);
         row += 20;
         Area_AddCellPrim(((*cell_x) << 16) + (D_1F800038 << 9), (*cell_y) << 16, 0, sizeof(POLY_FT4));
         cell_y += 20;

@@ -59,7 +59,7 @@ MATCH void func_801F4768(void) {
     q3->vx   = x_high + size;
     q3->vy   = y_high + size;
     RotTransPers4(quad, q1, q2, q3, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
-    func_80155560(width | 0xBB509100, prim, 1);
+    Area_ApplyTileToQuad(width | 0xBB509100, prim, 1);
     GFX_AddPrim(4, sizeof(POLY_FT4));
 
     for (row = 0; row < (2 - width) * 4 + 1; row++) {

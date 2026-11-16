@@ -68,7 +68,7 @@ MATCH void Area_DrawParts(ScenePart* part_list, s32 x, s32 y) {
         }
 
         RotTransPers4(&uv[1], &uv[2], &uv[3], &uv[0], (long*)(&prim->x1), (long*)(&prim->x2), (long*)(&prim->x3), (long*)(&prim->x0), &p, &flag);
-        func_80155560(part_list[part_word_offset + 5].raw, prim, 1);
+        Area_ApplyTileToQuad(part_list[part_word_offset + 5].raw, prim, 1);
         draw_mode = 6;
         if ((part_list[part_word_offset + 5].raw & 0x40000000) == 0) {
             draw_mode = g_AreaDrawMode;
