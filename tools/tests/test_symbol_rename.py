@@ -396,3 +396,75 @@ def test_a_local_rename_keeps_the_other_image(repo: Path) -> None:
     tables = tomllib.loads((repo / "config/symbols.toml").read_text())
     assert set(tables["exe/a"]) == {"New"}
     assert set(tables["exe/b"]) == {"Old"}
+
+
+def test_an_address_name_is_unique_only_inside_its_image(repo: Path) -> None:
+    set_files(
+        repo,
+        {
+            "config/exe/a/splat.yaml": LAYOUT + "      - [0x0, c, Old]\n",
+            "config/exe/b/splat.yaml": LAYOUT + "      - [0x0, c, func_80000000]\n",
+            "src/b/func_80000000.c": "MATCH void func_80000000(void) {}\n",
+        },
+    )
+    assert symbol.main(["rename", "Old", "func_80000000", "--image", "exe/a"]) == 0
+    assert (repo / "src/a/func_80000000.c").is_file()
+    assert (repo / "src/b/func_80000000.c").read_text() == (
+        "MATCH void func_80000000(void) {}\n"
+    )
+
+
+def test_an_address_name_clashes_inside_its_image(repo: Path) -> None:
+    set_files(
+        repo,
+        {
+            "config/exe/a/splat.yaml": LAYOUT + "      - [0x0, c, Old]\n",
+            "src/a/other.c": "void func_80000000(void);\n",
+        },
+    )
+    before = snapshot(repo)
+    with pytest.raises(SystemExit, match="already occurs"):
+        symbol.main(["rename", "Old", "func_80000000", "--image", "exe/a"])
+    assert snapshot(repo) == before
+
+
+def test_a_readable_name_keeps_the_tree_wide_clash(repo: Path) -> None:
+    set_files(repo, {"src/b/New.c": "void New(void);\n"})
+    before = snapshot(repo)
+    with pytest.raises(SystemExit, match="New already occurs"):
+        symbol.main(["rename", "Old", "New", "--image", "exe/a"])
+    assert snapshot(repo) == before
+
+
+def test_an_address_name_clashes_in_a_visible_table(repo: Path) -> None:
+    set_files(
+        repo,
+        {
+            "config/link.toml": '[[resident]]\ntarget = "exe/b"\nvisible_to = ["exe"]\n',
+            "config/symbols.toml": (
+                '["exe/a"]\nOld = { addr = 0x80000000, type = "func" }\n'
+                '\n["exe/b"]\nfunc_80000000 = { addr = 0x80001000, type = "func" }\n'
+            ),
+            "config/exe/a/splat.yaml": LAYOUT + "      - [0x0, c, Old]\n",
+            "config/exe/b/splat.yaml": LAYOUT,
+        },
+    )
+    before = snapshot(repo)
+    with pytest.raises(SystemExit, match="func_80000000 is 0x80001000"):
+        symbol.main(["rename", "Old", "func_80000000", "--image", "exe/a"])
+    assert snapshot(repo) == before
+
+
+def test_an_address_name_use_in_a_visible_image_is_not_a_clash(repo: Path) -> None:
+    set_files(
+        repo,
+        {
+            "config/link.toml": '[[resident]]\ntarget = "exe/b"\nvisible_to = ["exe"]\n',
+            "config/exe/a/splat.yaml": LAYOUT + "      - [0x0, c, Old]\n",
+            "config/exe/b/splat.yaml": LAYOUT,
+            "src/b/uses.c": "extern void func_80000000(void);\n",
+        },
+    )
+    assert symbol.main(["rename", "Old", "func_80000000", "--image", "exe/a"]) == 0
+    assert (repo / "src/a/func_80000000.c").is_file()
+    assert (repo / "src/b/uses.c").read_text() == "extern void func_80000000(void);\n"
