@@ -75,7 +75,6 @@ ASSERT_OFFSET(TorchGaugeCells, rows, 0x00);
 
 extern u8       D_80143F06;
 extern s16      D_801448EE;
-extern u8       D_80146867;
 extern u8       D_80147ACF;
 void            Area_SpawnWeightedActor(void);
 void            func_801F2C18(void);

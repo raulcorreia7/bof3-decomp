@@ -15,7 +15,6 @@ extern Callback D_801FAEF0[];
 extern Callback D_801FAEFC[];
 /* D_801FAF24 */
 
-extern u8  D_80145E98;
 extern u8  D_80145F09;
 extern u8  D_80145FA8;
 extern s16 D_801492DA;

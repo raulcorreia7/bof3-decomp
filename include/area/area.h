@@ -33,6 +33,7 @@
 #include "common/fixed.h"
 #include "common/vector.h"
 #include "psx/mem.h"
+#include "sys/scratchpad.h"
 #include "psx/psyq.h"
 
 /* The world overlays' own records. Every area program keeps its scratch in
@@ -510,5 +511,8 @@ void Scene_ClearActor();
 /* The flock tables the area flocks share: four velocities and their script rows. */
 extern Point2u g_FlockVelocity[4];
 extern u8      g_FlockScript[4][2];
+
+/* The area bytes the area and scena15 images read as one array. */
+extern u8 D_80144EF8[];
 
 #endif

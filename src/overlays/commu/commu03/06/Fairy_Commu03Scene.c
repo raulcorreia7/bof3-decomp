@@ -45,7 +45,53 @@ MATCH void func_801D0DEC(void) {
     SYS_DISPATCH_BYTE(g_Commu03Step1Funcs, D_801F294D);
 }
 
-INCLUDE_ASM(func_801D0E28);
+MATCH void func_801D0E28(void) {
+    volatile u16* pad;
+    s32           index;
+    s32           count;
+    s32           bgm_offset;
+    u16           buttons;
+    u16           held;
+    s16           cue;
+
+    index   = g_SceneEventSelection;
+    count   = D_801457AB[(g_FairyJobs[index].type - 1) << 3];
+    pad     = &g_InputPressed;
+    buttons = INPUT_REPEATED(*pad, PADLleft | PADLright);
+    if (buttons != 0) {
+        if ((buttons & PADLright) != 0) {
+            D_801D1940 = D_801D1940 + 1;
+            if (count < (s16)D_801D1940) {
+                D_801D1940 = 0;
+            }
+        } else if ((buttons & PADLleft) != 0) {
+            D_801D1940 = D_801D1940 - 1;
+            if ((s16)D_801D1940 < 0) {
+                D_801D1940 = count;
+            }
+        }
+        func_801D1250(0x32, 0x28);
+    } else {
+        held = *pad;
+        if ((held & PADRdown) != 0) {
+            if (g_SndBGMId != BGM_NONE) {
+                bgm_offset = g_SndBGMId * 4;
+                SND_StopSequence(*(g_SelectionCues + bgm_offset), *(g_SelectionSequences + bgm_offset));
+            }
+            cue = D_801D1918[D_801D1940];
+            if (g_SndBGMId == cue) {
+                g_SndBGMId = BGM_NONE;
+            } else {
+                SND_RequestBGM(cue);
+                D_801F294D += 1;
+            }
+        } else if ((held & PADRup) != 0) {
+            D_801F294D = 0;
+            D_801F294C += 1;
+        }
+        func_801D1250(0x32, 0x28);
+    }
+}
 
 MATCH void func_801D1000(void) {
     if (EMI_IsReady()) {
