@@ -114,8 +114,8 @@ NON_MATCHING void func_8014BC70(void) {
                 if (!(var_s4 < D_8014832D)) {
                     break;
                 }
-                if (g_AreaDrawMode != 6) {
-                    if (g_AreaDrawMode != 4) {
+                if (g_AreaDrawMode != GFX_LAYER_FIELD_SCENE) {
+                    if (g_AreaDrawMode != GFX_LAYER_BATTLE_SCENE) {
                         break;
                     }
                     if ((s16)var_s2 != (s16)key) {

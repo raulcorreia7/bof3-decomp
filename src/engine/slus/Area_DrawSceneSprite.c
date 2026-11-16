@@ -56,5 +56,5 @@ MATCH void Area_DrawSceneSprite(u8* record, s32 origin_x, s32 origin_y) {
     y += FIELD(s8, frame, 0xB) * 1125 / z;
     prim->y2 = prim->y3 = y;
     Area_ApplyTileToQuad(FIELD(u32, frame, 0xC), prim, 1);
-    GFX_AddPrim((FIELD(u32, frame, 0xC) & 0x40000000) ? 6 : g_AreaDrawMode, sizeof(POLY_FT4));
+    GFX_AddPrim((FIELD(u32, frame, 0xC) & 0x40000000) ? GFX_LAYER_FIELD_SCENE : g_AreaDrawMode, sizeof(POLY_FT4));
 }
