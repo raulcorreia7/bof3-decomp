@@ -62,6 +62,8 @@ extern u8   D_80147C97;
 
 /* Places the task at the area focus point and reads the height there. */
 void func_801F32A0(s32 value);
+/* Draws the cross of lines at a world point, tinted by the task red. */
+void func_801F3308(s32 x, s32 y, s32 z, s32 semitrans);
 /* Whether a party member stands at the cell. */
 bool func_801F60E0(void);
 
