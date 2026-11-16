@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-MATCH void func_800AF3A0(VECTOR pos, s16 step) {
+/* func_800AF3A0 */
+MATCH void Battle_StepRangeToward(VECTOR pos, s16 step) {
     BattleWork* work;
     BattleWork* store;
     SVECTOR     normal;

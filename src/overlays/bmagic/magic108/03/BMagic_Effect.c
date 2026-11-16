@@ -75,7 +75,7 @@ MATCH void func_801EEF48(void) {
     vec[1] = (g_Task->unk_1C >> 9) - AREA_CELL_ORIGIN;
     vec[2] = g_Task->unk_20 >> 0x11;
     /* The retail build passes the never-written slot after the vector. */
-    func_800AF3A0(vec[0], vec[1], vec[2], vec[3], 0x20);
+    Battle_StepRangeToward(vec[0], vec[1], vec[2], vec[3], 0x20);
     if (func_800AF6B8(g_Task->unk_18, g_Task->unk_1C, g_Task->unk_20, 0x8000) != 0) {
         g_Task->header.mode += 1;
     }

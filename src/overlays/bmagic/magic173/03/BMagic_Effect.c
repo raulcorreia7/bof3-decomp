@@ -128,7 +128,7 @@ MATCH void func_801EF148(void) {
     }
     target = g_Battle.selected_actor;
     setVector(&pos, (target->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (target->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, (target->pos.z.fixed + 0x800000) >> 17);
-    func_800AF3A0(pos, 0xC0);
+    Battle_StepRangeToward(pos, 0xC0);
     g_Task->unk_10 = g_Task->unk_0C;
     g_Task->unk_0C = ratan2(target->pos.x.fixed - g_Task->pos.x.fixed, target->pos.y.fixed - g_Task->pos.y.fixed);
     if (func_800AF66C((BattleRange*)target, 0x8000) != 0) {

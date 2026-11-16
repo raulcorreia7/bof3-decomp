@@ -14,7 +14,8 @@ extern Callback   D_801F0990[];
 extern Callback   D_801F09A0[];
 
 void func_801EED90(void);
-void func_800AF3A0(VECTOR pos, s16 step);
+/* func_800AF3A0 */
+void Battle_StepRangeToward(VECTOR pos, s16 step);
 /* func_801F02B0 */
 /* func_801F03A0 */
 

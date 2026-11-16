@@ -477,7 +477,7 @@ segments:
       - [0x18814, c, func_800AF014]
       - [0x188F8, c, func_800AF0F8]
       - [0x18AB4, c, Battle_MoveRangeToward]
-      - [0x18BA0, c, func_800AF3A0]
+      - [0x18BA0, c, Battle_StepRangeToward]
       - [0x18CA0, c, func_800AF4A0]
       - [0x18D50, c, func_800AF550]
       - [0x18DFC, c, func_800AF5FC]
