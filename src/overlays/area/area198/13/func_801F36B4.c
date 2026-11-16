@@ -7,7 +7,7 @@ MATCH void func_801F36B4(void) {
     u8     y;
 
     work = g_Task;
-    slot = SP_REF(s16, 0x0u) = Actor_FindFreeField();
+    slot = D_1F800000.view.area.entity_counter = Actor_FindFreeField();
     if (slot != GAME_NONE) {
         func_801A4D54(D_801F43C0);
         g_Task->vz                 = 8;
