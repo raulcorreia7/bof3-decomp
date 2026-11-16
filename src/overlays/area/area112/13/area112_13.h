@@ -25,12 +25,19 @@ extern u8  D_801F420C[];
 /* The ground height of each cell, by cell column. */
 extern u16 D_801F4210[];
 
-/* The answer cells: x, y, the flag mask and the flag the answer toggles. */
-extern u8 D_801F4908[];
-extern u8 D_801F4909[];
-extern u8 D_801F490A[];
-extern u8 D_801F490B[];
+/* An answer cell: the cell x and y, the flag mask and the flag the answer toggles. */
+typedef struct AnswerCell {
+    /* 0x0 */ u8 x;
+    /* 0x1 */ u8 y;
+    /* 0x2 */ u8 flag_mask; /* low four bits clear a direction flag, high four set it */
+    /* 0x3 */ u8 flag_id;
+} AnswerCell;
+
+ASSERT_SIZE(AnswerCell, 4);
+
+/* The four answer cells of the area. */
+extern AnswerCell D_801F4908[4];
 /* The first four answer flags, cleared by the low four mask bits and set by the high four. */
-extern u8 D_801F4928[];
+extern u8         D_801F4928[4];
 
 #endif
