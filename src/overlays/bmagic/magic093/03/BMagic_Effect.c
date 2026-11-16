@@ -169,6 +169,7 @@ MATCH void func_801EF4C8(void) {
 
 MATCH void func_801EF600(void) {
     s16 angle;
+    s16 phase;
     u8  mask;
     u8  count;
     s16 phase;

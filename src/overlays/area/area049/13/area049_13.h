@@ -29,7 +29,7 @@ extern Point2l D_801181C0[];
 extern u8      D_801181D0[];
 
 /* The visible cell window per column: first row, first column, last row, last column. */
-extern u8 D_801181D4[][4];
+extern u8      D_801181D4[][4];
 extern SVECTOR D_1F800014[];
 extern u16     D_1F800034_U16[2];
 

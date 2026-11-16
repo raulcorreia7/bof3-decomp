@@ -7,6 +7,9 @@
 #include "overlays/area/world04.h"
 #include "area/spad.h"
 
+/* The camera view rotation the refresh compares against. */
+extern SVECTOR D_801492E0;
+
 /* The scratchpad work row the entry paths read. */
 extern SVECTOR D_1F800014[];
 
@@ -34,6 +37,7 @@ extern s8       D_801F6285[];
 extern u8       D_801F6138[];
 
 /* The image's step passes. */
+void func_801F2DE0(void);
 void func_801F3514(void);
 void func_801F3800(void);
 s16  func_801F4A04(s32 x, s32 y);
