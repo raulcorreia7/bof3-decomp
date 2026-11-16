@@ -31,8 +31,7 @@ void func_801EEC90(void);
 
 void func_800AF3A0(VECTOR pos, s16 step);
 
-void           func_801F0308(void);
-extern SVECTOR D_1F800014[];
-void           func_801F0790(void);
+void func_801F0308(void);
+void func_801F0790(void);
 
 #endif

@@ -224,9 +224,77 @@ MATCH void func_801D1910(void) {
     }
 }
 
+#ifdef NON_MATCHING
+/* Copies the equipped item's status values onto the equip list's title row. */
+NON_MATCHING void func_801D1964(void) {
+    if ((D_801DA0C6 != 0) && (D_801DA04E != 0)) {
+        D_801D9EF0[0] = D_801DA11D;
+        D_801D9EF0[1] = D_801DA11E;
+        D_801D9EF0[2] = D_801DA11F;
+        D_801D9EF0[4] = D_801DA0A5;
+        D_801D9EF0[5] = D_801DA0A6;
+        D_801D9EF0[6] = D_801DA0A7;
+        D_801DA0C1    = 4;
+        D_801DA049    = 4;
+        D_80148654    = 0;
+        D_80148652 += 1;
+    }
+}
+#else
 INCLUDE_ASM(func_801D1964);
+#endif
 
+#ifdef NON_MATCHING
+/* Fades the six tint channels up to the fade level. */
+NON_MATCHING void func_801D1A20(void) {
+    u8* fade;
+    s32 level;
+    u8  value;
+
+    fade  = &D_80148654;
+    level = *fade;
+    value = D_801D9EF0[0];
+    if (value < (u8)level) {
+        value = level;
+    }
+    D_801DA11D = value;
+    value      = D_801D9EF0[1];
+    if (value < (u8)level) {
+        value = level;
+    }
+    D_801DA11E = value;
+    value      = D_801D9EF0[2];
+    if (value < (u8)level) {
+        value = level;
+    }
+    D_801DA11F = value;
+    value      = D_801D9EF0[4];
+    if (value < (u8)level) {
+        value = level;
+    }
+    D_801DA0A5 = value;
+    value      = D_801D9EF0[5];
+    if (value < (u8)level) {
+        value = level;
+    }
+    D_801DA0A6 = value;
+    value      = D_801D9EF0[6];
+    if (value < (u8)level) {
+        value = level;
+    }
+    D_801DA0A7 = value;
+    if ((u8)level == 0x80) {
+        SND_PlayCue(0x200);
+    }
+    *fade = *fade + 8;
+    if (*fade == 0) {
+        *fade = 0xF8;
+        D_80148652 += 1;
+    }
+}
+#else
 INCLUDE_ASM(func_801D1A20);
+#endif
 
 INCLUDE_ASM(func_801D1B58);
 
@@ -237,7 +305,41 @@ MATCH void func_801D1CA4(void) {
     g_MenuStatusItems.held[3] = Item_Count(ITEM_CAT_ITEM, ITEM_HORSERADISH, 0);
 }
 
+#ifdef NON_MATCHING
+/* Places the four status panels and points the skill list at the item counts. */
+NON_MATCHING void func_801D1D1C(void) {
+    g_MenuPanelTasks[1].pos.x      = 0x14;
+    g_MenuPanelTasks[2].pos.x      = 0x70;
+    LOH(g_MenuPanelTasks[1].pos.y) = -0x64;
+    LOH(g_MenuPanelTasks[2].pos.y) = -0x64;
+    g_MenuPanelTasks[2].unk_0A     = 8;
+    g_MenuPanelTasks[3].mode       = 3;
+    LOH(g_MenuPanelTasks[3].pos.x) = -0x78;
+    g_MenuPanelTasks[3].pos.y      = 0x3F;
+    g_MenuPanelTasks[0].active     = 0;
+    g_MenuPanelTasks[0].handler    = 1;
+    g_MenuPanelTasks[0].mode       = 0;
+    g_MenuPanelTasks[0].state      = 2;
+    g_MenuPanelTasks[0].pos.x      = 0;
+    g_MenuPanelTasks[0].pos.y      = 0;
+    g_MenuPanelTasks[1].active     = 1;
+    g_MenuPanelTasks[1].handler    = 1;
+    g_MenuPanelTasks[1].mode       = 1;
+    g_MenuPanelTasks[1].state      = 2;
+    g_MenuPanelTasks[2].active     = 1;
+    g_MenuPanelTasks[2].handler    = 1;
+    g_MenuPanelTasks[2].mode       = 2;
+    g_MenuPanelTasks[2].state      = 2;
+    g_MenuPanelTasks[2].unk_0B     = 0xFF;
+    g_MenuPanelTasks[3].active     = 1;
+    g_MenuPanelTasks[3].handler    = 1;
+    g_MenuPanelTasks[3].state      = 2;
+    g_MenuPanelTasks[3].unk_0A     = 0xFF;
+    g_MenuPanelTasks[3].item_table = (s32)&g_MenuStatusItems;
+}
+#else
 INCLUDE_ASM(func_801D1D1C);
+#endif
 
 MATCH void func_801D1E34(void) {
     FIELD(u8, g_MenuPanelTasks, 0x0) = 0;

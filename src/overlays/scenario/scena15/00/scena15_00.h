@@ -24,47 +24,59 @@
 extern u32      D_801F6C00;
 extern s32      D_801FE740;
 /* D_801FE57C */
-extern Callback g_SceneEntityDispatch[];
 extern Callback D_801FE590[];
 extern Callback D_801FE5A0[];
 extern Callback D_801FE5B0[];
 extern Callback D_801FE5C0[];
 
+/* One textured cell of the scene's sprite sheet: the texture page origin and the cell's corner in
+ * it. func_801F9500 takes the second cell when bit 0x4 of the task's unk_06 is set. */
+typedef struct Scena15SpriteCell {
+    s16 page_x; /* 0x0 */
+    s16 page_y; /* 0x2 */
+    u8  u;      /* 0x4 */
+    u8  v;      /* 0x5 */
+} Scena15SpriteCell;
+
+ASSERT_SIZE(Scena15SpriteCell, 6);
+ASSERT_OFFSET(Scena15SpriteCell, u, 0x4);
+ASSERT_OFFSET(Scena15SpriteCell, v, 0x5);
+
+extern Scena15SpriteCell D_801FE5E8[];
+
 /* func_801F71B0 */
-void             Scene_DrawLightPillar(u8 fade);
-void             func_801F752C(AreaSpark* spark);
+void            Scene_DrawLightPillar(u8 fade);
+void            func_801F752C(AreaSpark* spark);
 /* func_801F75D8 */
-void             Area_AddSpark(void);
+void            Area_AddSpark(void);
 /* func_801F7748 */
-bool             Scene_GetZFixed(void);
-void             func_801F79C4(void);
-void             func_801F9500(WorldPos* pos, s32* vx);
-void             func_801F97CC(WorldPos* pos, s32* arg);
-void             func_801F9A20(WorldPos* pos, s32* vx);
-void             func_801F7FFC(s16 x, s16 y);
-void             func_801F81D8(s16 x, s16 y);
-extern Callback  D_801FE5CC[];
-extern Callback  D_801FE66C[];
-extern Callback  D_801FE678[];
-extern s8        D_801FE6E8[];
+bool            Scene_GetZFixed(void);
+void            func_801F79C4(void);
+void            func_801F9500(WorldPos* pos, s32* vx);
+void            func_801F97CC(WorldPos* pos, s32* arg);
+void            func_801F9A20(WorldPos* pos, s32* vx);
+void            func_801F7FFC(s16 x, s16 y);
+void            func_801F81D8(s16 x, s16 y);
+extern Callback D_801FE5CC[];
+extern Callback D_801FE66C[];
+extern Callback D_801FE678[];
+extern s8       D_801FE6E8[];
 /* D_801FE6EC */
-extern SceneFunc g_SceneActorDispatch[];
-void             func_801F83AC(Point2u* out);
-void             func_801F8704(void);
-extern u8        D_801FE71C[];
+void            func_801F83AC(Point2u* out);
+void            func_801F8704(void);
+extern u8       D_801FE71C[];
 /* The scene band's velocity. */
-extern Point3l   D_801FE738;
-extern u8        D_801FE748;
-extern u8        D_801FE608[];
-extern u8        D_80144EF8[];
-extern u8        D_80143F1D;
-extern u16       D_80144F54;
-extern s8        D_8014504A;
-extern s8        D_8014504B;
-extern u8        D_801FE74C;
-void             func_801F8958(void);
-void             func_801F9020(Coord* position, s32* step);
-void             func_801F92F0(Coord* position, s32* step);
+extern Point3l  D_801FE738;
+extern u8       D_801FE748;
+extern u8       D_801FE608[];
+extern u8       D_80143F1D;
+extern u16      D_80144F54;
+extern s8       D_8014504A;
+extern s8       D_8014504B;
+extern u8       D_801FE74C;
+void            func_801F8958(void);
+void            func_801F9020(Coord* position, s32* step);
+void            func_801F92F0(Coord* position, s32* step);
 
 extern u8       D_801FE694[];
 extern u8       D_801FE6C8[];

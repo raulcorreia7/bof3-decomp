@@ -197,7 +197,51 @@ MATCH void func_801EF7A0(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF7FC(void) {
+    POLY_G3* prim;
+    s32      i;
+    s16*     cell;
+    s32      tpage;
+    u8       blue;
+    u8       green;
+    u8       green_edge;
+    u8       red;
+
+    tpage = getTPage(0, 1, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    cell       = &D_1F800004;
+    cell[0]    = 0;
+    red        = g_Task->timer * 12;
+    green      = g_Task->timer * 11;
+    blue       = g_Task->timer * 4;
+    green_edge = g_Task->timer * 8;
+    cell[-2]   = g_Task->unk_09 * 2;
+    cell[2]    = g_Task->unk_2E.half;
+    cell[3]    = g_Task->unk_30.half;
+    i          = 0;
+    do {
+        prim = (POLY_G3*)g_GfxPrimCursor;
+        SetPolyG3(prim);
+        SetSemiTrans(prim, 1);
+        prim->x0 = cell[2];
+        prim->y0 = cell[3];
+        prim->x1 = cell[2] + FIXED_MUL(rsin(cell[0]), cell[-2]);
+        prim->y1 = cell[3] + FIXED_MUL(rcos(cell[0]), cell[-2]);
+        i++;
+        cell[0]  = i << 8;
+        prim->x2 = cell[2] + FIXED_MUL(rsin(cell[0]), cell[-2]);
+        prim->y2 = cell[3] + FIXED_MUL(rcos(cell[0]), cell[-2]);
+        setRGB0(prim, red, green, blue);
+        setRGB1(prim, red, green_edge, blue);
+        setRGB2(prim, red, green_edge, blue);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
+    } while (i < 16);
+}
+#else
 INCLUDE_ASM(func_801EF7FC);
+#endif
 
 /* Draw the magic021 ring as sixteen shaded quads between two radii around the effect,
  * tinted on the inner edge by the timer and dark on the outer one. */
