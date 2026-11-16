@@ -319,7 +319,7 @@ extern Callback    g_ShopStep6Sub3Funcs[SHOP_STEP6_SUB3_COUNT];
 typedef VECTOR BoatPartyPos;
 
 extern BoatPartyPos g_ShopBoatPartyPositions[PARTY_SLOT_COUNT];
-extern Pos2      g_ShopFacingSteps[8];
+extern Pos2         g_ShopFacingSteps[8];
 extern u8           D_801E5C68[];
 extern u8           D_801E5C70[];
 extern u8           D_801E5C78[];

@@ -31,7 +31,7 @@ extern u8       D_80144EB8[];
 /* One edge of the trail ribbon: a position and the word beside it. */
 typedef struct AreaSlotEdge {
     Pos3 pos;    /* 0x00 */
-    s32     unk_0C; /* 0x0C */
+    s32  unk_0C; /* 0x0C */
 } AreaSlotEdge;
 
 ASSERT_SIZE(AreaSlotEdge, 0x10);
@@ -39,7 +39,7 @@ ASSERT_SIZE(AreaSlotEdge, 0x10);
 /* One of the 64 slots at AREA_WORK, 0x34 bytes each: the trail centre, its two
  * ribbon edges and the rotation angle. */
 typedef struct AreaSlot {
-    Pos3      pos;      /* 0x00 - the trail centre */
+    Pos3         pos;      /* 0x00 - the trail centre */
     s32          unk_0C;   /* 0x0C */
     AreaSlotEdge edges[2]; /* 0x10, 0x20 - the ribbon's two edges */
     u16          angle;    /* 0x30 */

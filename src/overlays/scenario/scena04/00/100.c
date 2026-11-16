@@ -109,7 +109,7 @@ MATCH void func_801F7084(SceneBox* box) {
 
     tpage = GetTPage(0, 1, 0x3C0, 0);
     GFX_AddDitheredDrawMode(1, tpage);
-    vertex    = D_801FA240;
+    vertex     = D_801FA240;
     vertex->vx = box->near.x;
     vertex->vy = box->near.y + box->near.half_y;
     vertex->vz = box->near.z + box->near.half_z;
@@ -137,7 +137,7 @@ MATCH void func_801F7084(SceneBox* box) {
     vertex->vx = box->far.x;
     vertex->vy = box->far.y + box->far.half_y;
     vertex->vz = box->far.z;
-    scratch   = &vertex->vx;
+    scratch    = &vertex->vx;
     vertex++;
     vertex->vx = box->far.x;
     vertex->vy = box->far.y - box->far.half_y;

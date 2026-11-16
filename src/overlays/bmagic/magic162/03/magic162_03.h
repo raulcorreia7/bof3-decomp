@@ -31,6 +31,6 @@ extern BMagicEffectFuncs     D_801EEC04;
 #define EFFECT_SPARKLE_OFFSETS D_801F00B8
 #define EFFECT_SPARKLE_RISE    D_801F01A4
 extern Pos2 D_801F00B8[];
-extern u8      D_801F01A4[];
+extern u8   D_801F01A4[];
 
 #endif

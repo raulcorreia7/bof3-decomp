@@ -673,7 +673,7 @@ MATCH void func_801F8360(void) {
  * func_8015B410 passes the three angles to RotMatrix. */
 typedef struct SceneRotation {
     Angle3 angle;
-    s32     unk_0C; /* 0x0C */
+    s32    unk_0C; /* 0x0C */
 } SceneRotation;
 
 ASSERT_SIZE(SceneRotation, 0x10);

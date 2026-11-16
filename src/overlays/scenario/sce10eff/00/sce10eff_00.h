@@ -56,7 +56,7 @@ typedef struct SceneBandEffect {
     /* 0x0B */ u8  ticker;        /* a random nibble that is bumped */
     /* 0x0C */ s32 orbit_counter; /* the orbit counter */
     u8             pad_10[0x1E];
-    Pos2u        origin;
+    Pos2u          origin;
     u8             pad_32[0x02];
     Offset2        proj;
     u8             pad_3c[0x02];

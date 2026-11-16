@@ -380,16 +380,16 @@ ASSERT_SIZE(AreaWorkPointers, AREA_WORK_POINTERS_SIZE);
  * 0x28-byte rows (`emi/world00/area024/14@0x801F3314`) and advances both
  * buffers by 0x28 (`@0x801F362C`). */
 typedef struct AreaVertex {
-    u16     unk_00;
+    u16   unk_00;
     Pos3s points[4]; /* 0x02 */
-    u8      unk_1A[0x0E];
+    u8    unk_1A[0x0E];
 } AreaVertex;
 
 ASSERT_SIZE(AreaVertex, WORLD_VERTEX_RECORD_SIZE);
 ASSERT_OFFSET(AreaVertex, points, 0x02);
 
 typedef struct AreaTrail {
-    Pos3 pos;                     /* 0x00 - the head anchor */
+    Pos3    pos;                     /* 0x00 - the head anchor */
     s32     unk_0C;                  /* 0x0C */
     s32     radius;                  /* 0x10 - the ring radius */
     u16     angle;                   /* 0x14 - the rotation angle */
@@ -445,10 +445,10 @@ ASSERT_OFFSET(AreaRing, screen, 0x2C);
  * `0x800E4800` (`@0x801F2F5C`, `@0x801F3004`, `@0x801F3060` walk them with
  * that stride) and the ring projection reads the active one. */
 typedef struct AreaSlotWork {
-    u8               unk_00[4];
-    Pos2          offset;
-    s16              scale; /* 0x08 - the projection scale */
-    s16              unk_0A;
+    u8             unk_00[4];
+    Pos2           offset;
+    s16            scale; /* 0x08 - the projection scale */
+    s16            unk_0A;
     volatile Pos2u screen;
 } AreaSlotWork;
 
@@ -510,7 +510,7 @@ void Scene_ClearActor(void);
 
 /* The flock tables the area flocks share: four velocities and their script rows. */
 extern Pos2u g_FlockVelocity[4];
-extern u8      g_FlockScript[4][2];
+extern u8    g_FlockScript[4][2];
 
 /* The area bytes the area and scena15 images read as one array. */
 extern u8 D_80144EF8[];
