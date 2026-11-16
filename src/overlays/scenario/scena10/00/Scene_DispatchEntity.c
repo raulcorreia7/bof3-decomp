@@ -297,7 +297,106 @@ MATCH void func_801F7F8C(void) {
     D_80146872 = 1;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F7FA0(void) {
+    s32 actor_index;
+    u16 updated_flags;
+    u8  slot;
+
+    if (g_GameAreaId == 0x52) {
+        if ((g_GameCellType == 0) && (SYS_TestFlag(g_SceneFlags, 4) == 0)) {
+            SYS_ClearFlag(g_SceneFlags, 0x33);
+        }
+        if ((g_GameCellType == 1) && (SYS_TestFlag(g_SceneFlags, 0x3D) != 0) && (SYS_TestFlag(g_SceneFlags, 4) == 0)) {
+            func_801F8550();
+        }
+    }
+    if (g_GameAreaId == 0x5E) {
+        if ((SYS_TestFlag(g_SceneFlags, 0x17) == 0) && (SYS_TestFlag(g_SceneFlags, 0x16) != 0)) {
+            g_AreaDrawFlags = 0;
+            SYS_SetFlag(g_SceneFlags, 0x17);
+        }
+        if (SYS_TestFlag(g_SceneFlags, 0x12) == 0) {
+            func_801A4BC0(0x31, 0x1A, 0);
+            func_801A4BC0(0x32, 0x1A, 0);
+        }
+    }
+    if ((g_GameAreaId == 0x62) && (g_GameCellType == 0) && (SYS_TestFlag(g_SceneFlags, 4) != 0) && (SYS_TestFlag(g_SceneFlags, 8) == 0)) {
+        func_801C1DF0(0);
+        func_801BE1B0(1);
+    }
+    if (g_GameAreaId == 0x69) {
+        if ((g_GameCellType == 0) && (SYS_TestFlag(g_SceneFlags, 0x35) == 0)) {
+            SYS_SetFlag(g_SceneEventFlags, 0x4F);
+        }
+        if (g_GameCellType == 1) {
+            SYS_SetFlag(g_SceneFlags, 0x36);
+        }
+    }
+    if ((g_GameAreaId == 0x78) && (SYS_TestFlag(g_SceneFlags, 0x3D) == 0)) {
+        if (SYS_TestFlag(g_SceneFlags, 0x39) != 0) {
+            if (SYS_TestFlag(g_SceneFlags, 0x3A) == 0) {
+                func_801BE1B0(2);
+            } else if (SYS_TestFlag(g_SceneFlags, 0x3B) == 0) {
+                if (g_GameCellType == 5) {
+                    func_801BE1B0(7);
+                    updated_flags = g_Game.flags | 0x10;
+                } else {
+                    updated_flags = g_Game.flags & 0xFFEF;
+                }
+                g_Game.flags = updated_flags;
+            }
+        }
+        if (SYS_TestFlag(g_SceneFlags, 0x3C) != 0) {
+            func_801C1DF0(5);
+            func_801BE1B0(6);
+            g_Game.flags &= 0xFFEF;
+        }
+    }
+    if (g_GameAreaId == 0x79) {
+        if ((SYS_TestFlag(g_SceneFlags, 0x16) == 0) && (SYS_TestFlag(g_SceneFlags, 0x15) != 0)) {
+            g_AreaCameraAngle.vx       = -0x2EC;
+            FIELD(s16, &D_801492DA, 2) = 0x360;
+            g_AreaCameraOffsetZ        = 0x5DC;
+            func_801C601C(0);
+        }
+        g_Game.members[0].param.unk_0B = 0;
+    }
+    if ((g_GameAreaId == 0x80) && (g_GameCellType == 3) && (SYS_TestFlag(g_SceneFlags, 0x12) == 0) && (SYS_TestFlag(g_SceneFlags, 0xB) != 0)) {
+        SYS_SetFlag(g_SceneFlags, 0xC);
+    }
+    if (g_GameAreaId == 0x83) {
+        if (SYS_TestFlag(g_SceneFlags, 0x12) != 0) {
+            if (g_GameCellType != 0) {
+                SND_PlayCue(0x205);
+                D_801FE9DC = 1;
+            } else {
+                SND_PlayCue(0x204);
+                D_801FE9DC = 0;
+            }
+        }
+    }
+    if ((g_GameAreaId == 0x84) && (g_GameCellType == 1) && (SYS_TestFlag(g_SceneFlags, 0x14) == 0)) {
+        SND_PlayCue(0x204);
+        D_801FE9DC                 = 1;
+        FIELD(s16, &D_801492DA, 2) = 0x302;
+        slot                       = func_8019601C();
+        actor_index                = slot & 0xFF;
+        D_801FE9D8                 = slot;
+        if (actor_index != 0xFF) {
+            g_SpawnedActors[actor_index].header.flags  = 1;
+            g_SpawnedActors[D_801FE9D8].type           = 0x13;
+            g_SpawnedActors[D_801FE9D8].camera_angle.x = -0x2AA;
+            g_SpawnedActors[D_801FE9D8].camera_angle.z = 0x200;
+            g_SpawnedActors[D_801FE9D8].layer          = 0x40;
+            g_SpawnedActors[D_801FE9D8].camera_angle.y = D_801492DA;
+        }
+    }
+    D_80146872 = 2;
+}
+#else
 INCLUDE_ASM(func_801F7FA0);
+#endif
 
 MATCH void func_801F8550(void) {
     Game_SetScriptActive();
@@ -327,11 +426,458 @@ MATCH void func_801F8694(void) {
 MATCH void func_801F86D0(void) {
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F86D8(void) {
+    u8 slot;
+
+    switch (g_SceneState.step_05) {
+        case 0:
+            if (FIELD(u8, &g_Game.flags, -0x1D) == 3) {
+                break;
+            }
+            g_Game.flags |= 8;
+            Scene_SetupParty(5);
+            func_801C601C(1);
+            g_SceneState.step_05 = 1;
+            break;
+        case 1:
+            if (*g_ScriptVars != 2) {
+                break;
+            }
+            Scene_SetupParty(6);
+            g_SceneState.step_05 = 2;
+            break;
+        case 2:
+            if (*g_ScriptVars != 0x25) {
+                break;
+            }
+            slot                        = Actor_FindFreeSpawned();
+            g_ScratchPad.cells.bytes[0] = slot;
+            if (slot != GAME_NONE) {
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].header.flags = 1;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type         = 0x9A;
+            }
+            g_SceneState.step_05 = 3;
+            break;
+        case 3:
+            if (*g_ScriptVars != 0x28) {
+                break;
+            }
+            func_801BFE34(0xE8000, 0xE8000, 0x36);
+            func_801C7A54(0x36);
+            g_SceneState.step_05 = 4;
+            break;
+        case 4:
+            if (*g_ScriptVars != 0x32) {
+                break;
+            }
+            *g_ScriptVars = 0;
+            Scene_SetupParty(9);
+            UI_SetMode(4);
+            g_SceneState.step_05 = 5;
+            break;
+        case 5:
+            if (g_UiWindowEffectBusy) {
+                break;
+            }
+            g_AreaDrawFlags      = 0;
+            g_SceneState.step_05 = 6;
+            SYS_SetFlag(g_SceneFlags, 0x1E);
+            func_8019FA28(0x77, 0xA8000, 0xB0000, 0x87);
+            g_GamePrevSelection = 0x61;
+            break;
+        case 6:
+            if (*g_ScriptVars != 1) {
+                break;
+            }
+            UI_SetMode(5);
+            g_AreaDrawFlags = 0x1F;
+            SND_PlayCue(0x20C);
+            g_SceneState.step_05 = 7;
+            break;
+        case 7:
+            if (g_UiWindowEffectBusy) {
+                break;
+            }
+            *g_ScriptVars        = 2;
+            g_SceneState.step_05 = 8;
+            break;
+        case 8:
+            if (*g_ScriptVars != 0x0E) {
+                break;
+            }
+            g_Game.flags ^= 8;
+            goto clear_script_state;
+        case 20:
+            SCENE_MESSAGE_WAIT(MSG_075, 0x15);
+            break;
+        case 21:
+            if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
+                break;
+            }
+            if (*g_ScriptVars != 0x0A) {
+                goto clear_script_state;
+            }
+            Scene_SetupParty(8);
+            g_SceneState.step_05 = 0x16;
+            break;
+        case 22:
+            if (*g_ScriptVars != 0x19) {
+                break;
+            }
+            SYS_SetFlag(g_SceneFlags, 0x2C);
+            goto clear_script_state;
+        case 30:
+            SCENE_MESSAGE_WAIT(MSG_076, 0x1F);
+            break;
+        case 31:
+            if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
+                break;
+            }
+            goto clear_script_state;
+    }
+    return;
+
+clear_script_state:
+    Game_ClearScriptActive();
+    g_SceneState.step_05  = 0;
+    g_SceneState.state_04 = 0;
+}
+#else
 INCLUDE_ASM(func_801F86D8);
+#endif
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F8C00(void) {
+    u8  slot;
+    u8* char_slots;
+
+    switch (g_SceneState.step_05) {
+        case 0:
+            g_SceneState.step_05 = 1;
+            Game_RequestAreaChange(AREA_ID_WYNDIA_HONEY_BALCONY, TO_COORD(113) + COORD_HALF, TO_COORD(9), AREA_ENTRY_MAP_LOADING);
+            g_GamePrevSelection = 0xFF;
+            break;
+        case 1:
+            if (WINDOW_EFFECT_BUSY()) {
+                break;
+            }
+            g_ScriptVars[0] = 1;
+            Area_StartScrollRoute(0);
+            g_SceneState.step_05 = 3;
+            break;
+        case 3:
+            if (g_ScriptVars[0] != 3) {
+                break;
+            }
+            slot                        = Actor_FindFreeSpawned();
+            g_ScratchPad.cells.bytes[0] = slot;
+            if ((slot & BYTE_MASK) != GAME_NONE) {
+                g_SpawnedActors[slot].header.flags                          = 1;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type           = 0x31;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.x = g_AreaCameraAngle.vx;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = 292;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].scene_step     = 0x700;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x5A;
+                g_SceneState.step_05                                        = 4;
+            }
+            break;
+        case 4:
+            if (g_ScriptVars[0] != 7) {
+                break;
+            }
+            SND_PlayBGM(0x27, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+            g_SceneState.step_05 = 5;
+            g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
+            break;
+        case 5:
+            if (g_ScriptVars[0] != 0xA) {
+                break;
+            }
+            slot                        = Actor_FindFreeSpawned();
+            g_ScratchPad.cells.bytes[0] = slot;
+            if ((slot & BYTE_MASK) != GAME_NONE) {
+                g_SpawnedActors[slot].header.flags                          = 1;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type           = 0x13;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.x = -949;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x1E;
+                g_SceneState.step_05                                        = 7;
+            }
+            break;
+        case 7:
+            SND_StopSequence(0, 2);
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
+            g_SceneState.step_05 = 8;
+            break;
+        case 8:
+            if (g_ScriptVars[0] != 0xC) {
+                break;
+            }
+            SND_PlayBGM(0x24, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
+            g_SceneState.step_05 = 9;
+            g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
+            break;
+        case 9:
+            if (g_ScriptVars[0] != 0xD) {
+                break;
+            }
+            slot                        = Actor_FindFreeSpawned();
+            g_ScratchPad.cells.bytes[0] = slot;
+            if ((slot & BYTE_MASK) != GAME_NONE) {
+                g_SpawnedActors[slot].header.flags                          = 1;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type           = 0x13;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.x = -682;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x1E;
+                g_SceneState.step_05                                        = 10;
+            }
+            break;
+        case 10:
+            if (g_ScriptVars[0] != 0xE) {
+                break;
+            }
+            g_SceneState.step_05 = 11;
+            g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
+            SYS_SetFlag(g_SceneFlags, 10);
+            Game_RequestAreaChange(AREA_ID_CAMP_BEFORE_ANGEL_TOWER, TO_COORD(35), TO_COORD(41), AREA_ENTRY_MAP_LOADING);
+            break;
+        case 11:
+            Area_StartScrollRoute(0);
+            slot                        = Actor_FindFreeSpawned();
+            g_ScratchPad.cells.bytes[0] = slot;
+            if ((slot & BYTE_MASK) != GAME_NONE) {
+                g_SpawnedActors[slot].header.flags                          = 1;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type           = 0x13;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.x = 0;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 2;
+                g_SceneState.step_05                                        = 12;
+            }
+            break;
+        case 12:
+            if (g_ScriptVars[0] != 1) {
+                break;
+            }
+            slot                        = Actor_FindFreeSpawned();
+            g_ScratchPad.cells.bytes[0] = slot;
+            if ((slot & BYTE_MASK) != GAME_NONE) {
+                g_SpawnedActors[slot].header.flags                          = 1;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type           = 0x13;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.x = -682;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x78;
+                g_SceneState.step_05                                        = 13;
+            }
+            break;
+        case 13:
+            if (g_ScriptVars[0] != 2) {
+                break;
+            }
+            g_SceneState.step_05 = 14;
+            SYS_SetFlag(g_SceneFlags, 11);
+            SYS_SetFlag(g_SceneFlags, 9);
+            Item_VitalAdd(VITAL_ITEM_PASSPORT);
+            break;
+        case 14:
+            if (g_ScriptVars[0] != 0x32) {
+                break;
+            }
+            g_SceneState.step_05 = 15;
+            g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
+            /* FAKE: retail reads g_CharSlot as u8[]. */
+            char_slots = (u8*)g_CharSlot;
+            g_Characters[char_slots[CHAR_ID_PECO]].party_flags |= PARTY_FLAG_JOINED;
+            g_Characters[char_slots[CHAR_ID_GARR]].party_flags |= PARTY_FLAG_JOINED;
+            Game_RequestAreaChange(AREA_ID_WYNDIA_WORLD_MAP, TO_COORD(34), TO_COORD(42), FACING_RIGHT);
+            break;
+        case 15:
+            Char_RebuildPartyStats();
+            Game_ClearScriptActive();
+            g_ScriptVars[0]       = 0;
+            g_ScriptVars[1]       = 0;
+            g_ScriptVars[2]       = 0;
+            g_ScriptVars[3]       = 0;
+            g_SceneState.step_05  = 0;
+            g_SceneState.state_04 = 0;
+            break;
+    }
+}
+#else
 INCLUDE_ASM(func_801F8C00);
+#endif
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F95B8(void) {
+    u8  slot;
+    u8* char_slots;
+
+    switch (g_SceneState.step_05) {
+        case 0:
+            g_SceneState.step_05 = 1;
+            Game_RequestAreaChange(AREA_ID_WYNDIA_HONEY_BALCONY, TO_COORD(113) + COORD_HALF, TO_COORD(9), AREA_ENTRY_MAP_LOADING);
+            g_GamePrevSelection = 0xFF;
+            break;
+        case 1:
+            if (WINDOW_EFFECT_BUSY()) {
+                break;
+            }
+            g_ScriptVars[0] = 1;
+            Area_StartScrollRoute(0);
+            g_SceneState.step_05 = 3;
+            break;
+        case 3:
+            if (g_ScriptVars[0] != 3) {
+                break;
+            }
+            slot                        = Actor_FindFreeSpawned();
+            g_ScratchPad.cells.bytes[0] = slot;
+            if ((slot & BYTE_MASK) != GAME_NONE) {
+                g_SpawnedActors[slot].header.flags                          = 1;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type           = 0x31;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.x = g_AreaCameraAngle.vx;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = 292;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].scene_step     = 0x700;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x5A;
+                g_SceneState.step_05                                        = 4;
+            }
+            break;
+        case 4:
+            if (g_ScriptVars[0] != 7) {
+                break;
+            }
+            SND_PlayBGM(0x27, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+            g_SceneState.step_05 = 5;
+            g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
+            break;
+        case 5:
+            if (g_ScriptVars[0] != 0xA) {
+                break;
+            }
+            slot                        = Actor_FindFreeSpawned();
+            g_ScratchPad.cells.bytes[0] = slot;
+            if ((slot & BYTE_MASK) != GAME_NONE) {
+                g_SpawnedActors[slot].header.flags                          = 1;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type           = 0x13;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.x = -949;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x1E;
+                g_SceneState.step_05                                        = 7;
+            }
+            break;
+        case 7:
+            SND_StopSequence(0, 2);
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
+            g_SceneState.step_05 = 8;
+            break;
+        case 8:
+            if (g_ScriptVars[0] != 0xC) {
+                break;
+            }
+            SND_PlayBGM(0x24, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
+            g_SceneState.step_05 = 9;
+            g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
+            break;
+        case 9:
+            if (g_ScriptVars[0] != 0xD) {
+                break;
+            }
+            slot                        = Actor_FindFreeSpawned();
+            g_ScratchPad.cells.bytes[0] = slot;
+            if ((slot & BYTE_MASK) != GAME_NONE) {
+                g_SpawnedActors[slot].header.flags                          = 1;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type           = 0x13;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.x = -682;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x1E;
+                g_SceneState.step_05                                        = 10;
+            }
+            break;
+        case 10:
+            if (g_ScriptVars[0] != 0xE) {
+                break;
+            }
+            g_SceneState.step_05 = 11;
+            g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
+            SYS_SetFlag(g_SceneFlags, 10);
+            Game_RequestAreaChange(AREA_ID_CAMP_BEFORE_ANGEL_TOWER, TO_COORD(35), TO_COORD(41), AREA_ENTRY_MAP_LOADING);
+            break;
+        case 11:
+            Area_StartScrollRoute(0);
+            slot                        = Actor_FindFreeSpawned();
+            g_ScratchPad.cells.bytes[0] = slot;
+            if ((slot & BYTE_MASK) != GAME_NONE) {
+                g_SpawnedActors[slot].header.flags                          = 1;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type           = 0x13;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.x = 0;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 2;
+                g_SceneState.step_05                                        = 12;
+            }
+            break;
+        case 12:
+            if (g_ScriptVars[0] != 1) {
+                break;
+            }
+            slot                        = Actor_FindFreeSpawned();
+            g_ScratchPad.cells.bytes[0] = slot;
+            if ((slot & BYTE_MASK) != GAME_NONE) {
+                g_SpawnedActors[slot].header.flags                          = 1;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type           = 0x13;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.x = -682;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x78;
+                g_SceneState.step_05                                        = 13;
+            }
+            break;
+        case 13:
+            if (g_ScriptVars[0] != 2) {
+                break;
+            }
+            g_SceneState.step_05 = 14;
+            SYS_SetFlag(g_SceneFlags, 11);
+            SYS_SetFlag(g_SceneFlags, 9);
+            Item_VitalAdd(VITAL_ITEM_PASSPORT);
+            break;
+        case 14:
+            if (g_ScriptVars[0] != 0x32) {
+                break;
+            }
+            g_SceneState.step_05 = 15;
+            g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
+            /* FAKE: retail reads g_CharSlot as u8[]. */
+            char_slots = (u8*)g_CharSlot;
+            g_Characters[char_slots[CHAR_ID_PECO]].party_flags |= PARTY_FLAG_JOINED;
+            g_Characters[char_slots[CHAR_ID_GARR]].party_flags |= PARTY_FLAG_JOINED;
+            Game_RequestAreaChange(AREA_ID_WYNDIA_WORLD_MAP, TO_COORD(34), TO_COORD(42), FACING_RIGHT);
+            break;
+        case 15:
+            Char_RebuildPartyStats();
+            Game_ClearScriptActive();
+            g_ScriptVars[0]       = 0;
+            g_ScriptVars[1]       = 0;
+            g_ScriptVars[2]       = 0;
+            g_ScriptVars[3]       = 0;
+            g_SceneState.step_05  = 0;
+            g_SceneState.state_04 = 0;
+            break;
+    }
+}
+#else
 INCLUDE_ASM(func_801F95B8);
+#endif
 
 MATCH void func_801F9FC4(void) {
     g_ScratchPad.cells.halves[0] = Actor_FindFreeField();
