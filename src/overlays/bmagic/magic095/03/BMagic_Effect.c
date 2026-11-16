@@ -169,7 +169,7 @@ MATCH void func_801EF1FC(void) {
             }
             x     = (D_1F800014[0].vx << 9) + g_Task->pos.x.fixed;
             y     = (D_1F800014[0].vy << 9) + g_Task->pos.y.fixed;
-            tpage = getTPage(0, 1, 320, 256);
+            tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
             Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
             prim = GFX_CURSOR(LINE_G4);
@@ -247,7 +247,7 @@ MATCH void func_801EF804(void) {
             }
             x     = (D_1F800014[0].vx << 9) + g_Task->pos.x.fixed;
             y     = (D_1F800014[0].vy << 9) + g_Task->pos.y.fixed;
-            tpage = getTPage(0, 1, 320, 256);
+            tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
             Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
             prim = GFX_CURSOR(POLY_G4);
@@ -301,7 +301,7 @@ MATCH void func_801EFDDC(void) {
         D_1F800014[2].vx = FIXED_MUL(rsin(i << 8), D_1F800000.cells.words[0]);
         D_1F800014[2].vy = FIXED_MUL(rcos(i << 8), D_1F800000.cells.words[0]);
         D_1F800014[2].vz = 0;
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
         prim                      = GFX_BeginPolyG3(1);
         D_1F800000.cells.words[2] = g_Task->timer * 8;
@@ -377,7 +377,7 @@ MATCH void func_801F012C(void) {
         center.vz += D_801F065C[i + row];
         x     = (center.vx << 9) + g_Task->pos.x.fixed;
         y     = (center.vy << 9) + g_Task->pos.y.fixed;
-        tpage = getTPage(0, 1, 320, 256);
+        tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
         prim = GFX_CURSOR(POLY_F3);

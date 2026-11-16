@@ -13,7 +13,7 @@ MATCH void func_801EEC14(void) {
 
     handlers = D_801EEC04;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_AddDitheredDrawMode(3, tpage);
     for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
         if (BMAGIC_EFFECT_SLOTS[i].header.flags & BMAGIC_EFFECT_IN_USE) {
@@ -27,7 +27,7 @@ MATCH void func_801EEC14(void) {
         }
     }
     func_801EF0B0();
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_AddDitheredDrawMode(3, tpage);
 }
 

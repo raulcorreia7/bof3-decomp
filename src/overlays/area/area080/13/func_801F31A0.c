@@ -11,7 +11,7 @@ MATCH void func_801F31A0(AreaRing* ring) {
     u8       i;
     u8       j;
 
-    GFX_AddDitheredDrawMode(1, GetTPage(0, 2, 0x3C0, 0));
+    GFX_AddDitheredDrawMode(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, FONT_TPAGE_X, FONT_TPAGE_Y));
 
     top    = 0;
     bottom = 0xF0;

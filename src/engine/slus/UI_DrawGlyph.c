@@ -19,7 +19,7 @@ MATCH void UI_DrawGlyph(s32 color, u8* text) {
     s32 index;
     s32 width;
 
-    GFX_AddDrawMode(GetTPage(0, 1, 960, 1) & HALF_MASK);
+    GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 960, 1) & HALF_MASK);
     index       = color & 0xF;
     GLYPH->clut = GetClut(index * 16, STAGE_PALETTE_Y);
     width       = 8;
@@ -30,7 +30,7 @@ MATCH void UI_DrawGlyph(s32 color, u8* text) {
         height = 11;
     }
     if (*text != STRING_SPACE) {
-        GLYPH->tpage = GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y);
+        GLYPH->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
         GLYPH->u0    = (s8)GLYPH_U;
         GLYPH->v0    = (s8)GLYPH_V;
         GLYPH->u1    = (s8)(width + GLYPH_U);

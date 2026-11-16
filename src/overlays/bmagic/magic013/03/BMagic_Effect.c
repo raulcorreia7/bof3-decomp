@@ -329,7 +329,7 @@ MATCH void func_801F0164(void) {
     long     depth;
     long     flag;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), NULL);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), NULL);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     prim = (POLY_F3*)g_GfxPrimCursor;
     SetPolyF3(prim);

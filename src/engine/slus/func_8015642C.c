@@ -61,7 +61,7 @@ NON_MATCHING void func_8015642C(u8* obj, s32 x, s32 y) {
                 p->r0 = p->g0 = p->b0 = value;
                 p->v2 = p->v3 = shade;
                 p->clut       = (((u8*)g_SpriteCellCluts)[index] >> 4) | 0x78C0;
-                tpage         = getTPage(0, 0, 704, 256);
+                tpage         = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 704, 256);
                 p->tpage      = tpage;
                 GFX_AddPrim((u8)order, sizeof(POLY_FT4));
                 bottom++;

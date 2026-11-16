@@ -11,7 +11,7 @@ MATCH void func_801F3244(void) {
     long      depth;
     long      flag;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(1, 0, 320, 256), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256), 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
 
     prim = (POLY_FT4*)g_GfxPrimCursor;

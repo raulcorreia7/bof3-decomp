@@ -11,7 +11,7 @@ MATCH void Fishing_DrawFishArrow(s16 x, s16 y, s8 flip, u8 ot_index) {
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
 
-    primitive->tpage = getTPage(1, 0, 576, 256);
+    primitive->tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 576, 256);
     primitive->clut  = getClut(0, 489);
     setXY0(primitive, (x - 8), y);
     primitive->x1 = (x + 8);

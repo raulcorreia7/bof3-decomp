@@ -4,7 +4,7 @@ MATCH void func_801F3404(void) {
     POLY_F4* prim;
     s32      mode;
 
-    mode = getTPage(1, 1, 320, 256);
+    mode = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_LAYER_DRAW_MODE(3, mode);
     prim = (POLY_F4*)g_GfxPrimCursor;
     SetPolyF4(prim);

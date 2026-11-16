@@ -120,7 +120,7 @@ MATCH void func_801EF148(void) {
     POLY_G4* prim;
     s16*     shade;
 
-    GFX_AddDitheredDrawMode(1, getTPage(0, 1, 320, 256));
+    GFX_AddDitheredDrawMode(1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     shade  = &D_1F800004;
     prim   = GFX_CURSOR(POLY_G4);
     *shade = g_Task->unk_09 * 15;
@@ -136,7 +136,7 @@ MATCH void func_801EF148(void) {
     setXYWH(prim, 0, 0x78, 319, 239);
     GFX_SET_RGB_ALL(prim, *shade, *shade, *shade);
     GFX_AddPrim(1, sizeof(POLY_G4));
-    GFX_AddDitheredDrawMode(1, getTPage(0, 0, 320, 256));
+    GFX_AddDitheredDrawMode(1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256));
 }
 
 /* func_801EF3F8 */
@@ -268,7 +268,7 @@ MATCH void func_801EFA48(void) {
     s32      i;
     s32      tpage;
 
-    tpage = getTPage(0, 2, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
     D_1F800000.cells.halves[0] = g_Task->unk_14;
     D_1F800000.cells.halves[2] = g_Task->unk_09 << 2;
@@ -291,7 +291,7 @@ MATCH void func_801EFA48(void) {
 
 /* func_801EFC98 */
 MATCH void BMagic_DrawDarkRing(void) {
-    GFX_AddDitheredDrawMode(2, getTPage(0, 2, 320, 256));
+    GFX_AddDitheredDrawMode(2, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256));
     D_1F800000.cells.halves[0] = g_Task->unk_14;
     D_1F800000.cells.halves[1] = g_Task->unk_14 + 0x80;
     D_1F800000.cells.halves[2] = g_Task->unk_09 * 4;
@@ -356,7 +356,7 @@ MATCH void func_801F01E8(void) {
     setVector(&D_1F800014[1], FIXED_MUL(rcos(1536), D_1F800000.cells.halves[0]), FIXED_MUL(rsin(1536), D_1F800000.cells.halves[0]), 0);
     setVector(&D_1F800014[2], FIXED_MUL(rcos(3584), D_1F800000.cells.halves[0]), FIXED_MUL(rsin(3584), D_1F800000.cells.halves[0]), 0);
     setVector(&D_1F800014[3], FIXED_MUL(rcos(2560), D_1F800000.cells.halves[0]), FIXED_MUL(rsin(2560), D_1F800000.cells.halves[0]), 0);
-    setTPage(prim, 0, 1, 832, 256);
+    setTPage(prim, TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 832, 256);
     /* FAKE: a volatile store keeps the clut write ahead of the texture-point stores; the plain setClut sinks it below them. */
     *FAKE_VOLATILE_PTR(u16, &prim->clut) = GetClut(0, 482);
     setUVWH(prim, 0, 128, 32, 32);

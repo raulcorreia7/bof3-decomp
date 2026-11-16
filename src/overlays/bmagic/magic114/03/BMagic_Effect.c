@@ -9,13 +9,13 @@ MATCH void func_801EEC44(void) {
     s32      tpage;
 
     __builtin_memcpy(handlers, D_801EEC04, sizeof(handlers));
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     if (g_Task->header.flags != 0 && g_Task->header.mode != 0) {
         func_801EF128();
     }
     SYS_DISPATCH_BYTE(handlers, g_Task->header.mode);
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
 }
 
@@ -323,7 +323,7 @@ MATCH void func_801EFA80(void) {
     Effect_RotatePosition(g_Task);
     x     = g_AreaScrollTargetX + g_Task->unk_0C;
     y     = g_AreaScrollTargetY + g_Task->unk_10;
-    tpage = getTPage(1, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
     prim = (POLY_G4*)g_GfxPrimCursor;
@@ -431,7 +431,7 @@ MATCH void func_801F0004(void) {
     s32       x;
     s32       y;
 
-    tpage = getTPage(1, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     g_Task->unk_0C = 0x80000;
     g_Task->unk_10 = 0;
@@ -481,7 +481,7 @@ MATCH void func_801F0004(void) {
         D_1F800014[3].vx           = (x >> 9) - AREA_CELL_ORIGIN;
         D_1F800014[3].vy           = (y >> 9) - AREA_CELL_ORIGIN;
         D_1F800014[3].vz           = -COORD_INT(g_Task->pos.z) / 2;
-        prim->tpage                = GetTPage(1, 1, 832, 256);
+        prim->tpage                = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 832, 256);
         prim->clut                 = GetClut(0, 482);
         D_1F800000.cells.halves[0] = (u32)(g_Task->unk_20 + i * 4) % 188 + 64;
         setUV4(prim, 64, D_1F800000.cells.halves[0], 192, D_1F800000.cells.halves[0], 64, D_1F800000.cells.halves[0] + 3, 192, D_1F800000.cells.halves[0] + 3);
@@ -509,7 +509,7 @@ MATCH void func_801F04D4(s32 semi) {
     u8        trans;
 
     trans = semi;
-    tpage = getTPage(1, semi, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, semi, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     g_Task->unk_0C = 0x80000;
     g_Task->unk_10 = 0;
@@ -562,7 +562,7 @@ MATCH void func_801F04D4(s32 semi) {
         D_1F800014[3].vx           = (x >> 9) - AREA_CELL_ORIGIN;
         D_1F800014[3].vy           = (y >> 9) - AREA_CELL_ORIGIN;
         D_1F800014[3].vz           = -COORD_INT(g_Task->pos.z) / 2;
-        prim->tpage                = GetTPage(1, trans, 832, 256);
+        prim->tpage                = GetTPage(TPAGE_DEPTH_8BIT, trans, 832, 256);
         prim->clut                 = GetClut(0, 482);
         D_1F800000.cells.halves[0] = (i & 0xF) * 12 + 64;
         setUV4(prim, 0, D_1F800000.cells.halves[0], 196, D_1F800000.cells.halves[0], 0, D_1F800000.cells.halves[0] + 11, 196, D_1F800000.cells.halves[0] + 11);
@@ -583,7 +583,7 @@ MATCH void func_801F093C(void) {
     s32      x;
     s32      y;
 
-    tpage = getTPage(0, 2, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     g_Task->unk_0C = -0x30000;
     g_Task->unk_10 = 0;

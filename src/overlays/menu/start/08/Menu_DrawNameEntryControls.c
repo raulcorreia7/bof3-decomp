@@ -67,11 +67,11 @@ MATCH s32 Menu_DrawNameEntryControls(u8 page, s32 x, s32 y) {
     top  = y;
 
     /* The window. */
-    GFX_AddDitheredDrawMode(1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
+    GFX_AddDitheredDrawMode(1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
     UI_DrawWindow(x + CONTROLS_WINDOW_INSET, y + CONTROLS_WINDOW_INSET, CONTROLS_WINDOW_WIDTH, CONTROLS_WINDOW_HEIGHT, 0, g_WindowStyle);
 
     /* The panel sprite. */
-    GFX_AddDrawMode(GetTPage(0, 0, CONTROLS_SPRITE_TPAGE_X, CONTROLS_SPRITE_TPAGE_Y));
+    GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, CONTROLS_SPRITE_TPAGE_X, CONTROLS_SPRITE_TPAGE_Y));
     rect   = UI_GetSpriteRect(CONTROLS_SPRITE_ID, 1);
     sprite = GFX_CURSOR(SPRT);
     SetSprt(sprite);
@@ -104,7 +104,7 @@ MATCH s32 Menu_DrawNameEntryControls(u8 page, s32 x, s32 y) {
     }
 
     /* The button icons, blended. */
-    GFX_AddDrawMode(getTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y));
+    GFX_AddDrawMode(getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
 
     Menu_DrawPanelIcon(left + CONTROLS_BUTTON_X, top + CONTROLS_ROW_Y, CONTROLS_ICON_OK, CONTROLS_ICON_BUTTONS_V, GetClut(CONTROLS_BUTTON_CLUT_X, MENU_ICON_CLUT_Y), CONTROLS_ICON_SHADE);
     Menu_DrawPanelIcon(left + CONTROLS_BUTTON_X, top + CONTROLS_ROW_Y + CONTROLS_ROW_HEIGHT, CONTROLS_ICON_DEL, CONTROLS_ICON_BUTTONS_V, GetClut(CONTROLS_BUTTON_CLUT_X, MENU_ICON_CLUT_Y),

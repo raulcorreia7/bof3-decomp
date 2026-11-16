@@ -3,7 +3,7 @@
 MATCH void func_801EF3B4(s32 shade) {
     SPRT* sprt;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(1, 0, 0x340, 0x100), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 0x340, 0x100), 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
 
     sprt       = (SPRT*)g_GfxPrimCursor;

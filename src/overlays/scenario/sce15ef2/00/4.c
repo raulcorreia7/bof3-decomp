@@ -178,7 +178,7 @@ MATCH void func_801D1218(WorldPos* pos, s16 y, s32 mode) {
     s32      angle;
     s32      i;
 
-    GFX_AddDitheredDrawMode(7u, GetTPage(0, 1, 0x2C0, 0x100));
+    GFX_AddDitheredDrawMode(7u, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100));
     Area_SetCameraMatrix(&camera);
     Area_ProjectPoint((s32*)pos, &screen);
     size.vx = size.vy = y;
@@ -221,7 +221,7 @@ MATCH void func_801D17A0(s16 half_width, s16 half_height, u8 shade) {
     u8       i;
     s16      next[2];
 
-    tpage = GetTPage(0, 1, 0x380, 0x100);
+    tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(7, 0xC);
     parity  = (g_FrameCount & 1) << 2;

@@ -96,7 +96,7 @@ MATCH void func_801EF4C4(void) {
     s32       i;
     s32       tpage;
 
-    tpage = getTPage(1, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
     D_1F800000.cells.halves[1] = 128;
     D_1F800000.cells.halves[0] = g_Task->unk_09;
@@ -142,7 +142,7 @@ MATCH void func_801EF4C4(void) {
             setRGB2(prim, D_1F800000.cells.halves[1], D_1F800000.cells.halves[1], D_1F800000.cells.halves[1]);
             setRGB3(prim, D_1F800000.cells.halves[1], D_1F800000.cells.halves[1], D_1F800000.cells.halves[1]);
         }
-        prim->tpage                = GetTPage(1, 1, 832, 256);
+        prim->tpage                = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 832, 256);
         prim->clut                 = GetClut(0, 506);
         D_1F800000.cells.halves[7] = 252 - ((((g_FrameCount * 2) ^ 0xFFFF) + i) & 0x3F) * 4;
         if (D_1F800000.cells.halves[7] == 252) {
@@ -152,7 +152,7 @@ MATCH void func_801EF4C4(void) {
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         GFX_AddPrim(2, sizeof(POLY_GT4));
     }
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
 }
 
@@ -175,7 +175,7 @@ MATCH void func_801EFDF8(void) {
     POLY_G4* prim;
     s32      tpage;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
@@ -189,7 +189,7 @@ MATCH void func_801EFDF8(void) {
     prim->r1 = prim->r2 = g_Task->unk_09 * 12;
     prim->g1 = prim->b1 = prim->g2 = prim->b2 = g_Task->unk_09 * 4;
     GFX_AddPrim(2, sizeof(POLY_G4));
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
 }
 

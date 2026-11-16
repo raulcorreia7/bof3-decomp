@@ -127,7 +127,7 @@ MATCH void func_801F6E48(void) {
     poly->y3 = y;
     poly->y2 = y;
     setClut(poly, 176, STAGE_PALETTE_Y + 3);
-    poly->tpage = GetTPage(0, 0, 704, 256);
+    poly->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 704, 256);
 
     setUV4(poly, 0, (g_FrameCount >> 2) & 0x15, 16, (g_FrameCount >> 2) & 0x15, 0, ((g_FrameCount >> 2) & 0x15) + poly->y2, 16, ((g_FrameCount >> 2) & 0x15) + poly->y2);
 
@@ -158,7 +158,7 @@ MATCH void func_801F7134(s32 chapter_id) {
     SPRT* prim;
     s32   tpage;
 
-    tpage = getTPage(1, 2, 832, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_SUB, 832, 256);
     GFX_SET_DRAW_MODE(tpage);
     GFX_AddPrim(g_Task->draw_layer, sizeof(DR_MODE));
 
@@ -867,7 +867,7 @@ MATCH void func_801F8BCC(void) {
     setUVWH(prim, 0xE0, 0x30, 0x1F, 0x20);
     setRGB0(prim, SCN_EFFECT->color.red, SCN_EFFECT->color.green, SCN_EFFECT->color.blue);
     setClut(prim, 160, STAGE_PALETTE_Y + 3);
-    prim->tpage = GetTPage(0, 1, 704, 256);
+    prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
     SetShadeTex(prim, 0);
     SetSemiTrans(prim, 1);
     if (g_AreaDrawFlags != 0) {
@@ -934,7 +934,7 @@ MATCH void func_801F8D90(void) {
     g_Task   = work;
 
     setClut(poly, 176, STAGE_PALETTE_Y + 3);
-    poly->tpage = GetTPage(0, 0, 704, 256);
+    poly->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 704, 256);
 
     setUV4(poly, 0, (g_FrameCount >> 2) & 0x15, 16, (g_FrameCount >> 2) & 0x15, 0, ((g_FrameCount >> 2) & 0x15) + abs(poly->y2 - poly->y0), 16,
            ((g_FrameCount >> 2) & 0x15) + abs(poly->y2 - poly->y0));

@@ -34,7 +34,7 @@ MATCH void Area_DrawMatrixLightPillar(s32* pos) {
         point[2] = pos[2] + TO_COORD(2048);
         Area_ProjectPoint(point, &outer);
 
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 960, 0), 0);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
         Area_AddCellPrim(point[0], point[1], 0, sizeof(DR_MODE));
         prim = GFX_BeginPolyG4(1);
         setXY4(prim, last_inner.vx, last_inner.vy, last_outer.vx, last_outer.vy, inner.vx, inner.vy, outer.vx, outer.vy);
@@ -48,7 +48,7 @@ MATCH void Area_DrawMatrixLightPillar(s32* pos) {
         setRGB2(prim, shade, shade, shade);
         setRGB3(prim, shade, shade, shade);
         Area_AddCellPrim(point[0], point[1], 0, sizeof(POLY_G4));
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 1, 960, 0), 0);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
         Area_AddCellPrim(point[0], point[1], 0, sizeof(DR_MODE));
     }
 }

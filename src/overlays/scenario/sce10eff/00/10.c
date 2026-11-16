@@ -287,7 +287,7 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
     shade       = work->band * 13;
     quad[0].vz  = 0;
     quad[0].vy  = FIXED_MUL(rsin((work->ticker & 0xF) << 8), (*depth_cell));
-    tpage       = getTPage(0, 1, 320, 256);
+    tpage       = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     i           = 1;
     cell        = &D_1F800004;
     ramp        = cell + 1;

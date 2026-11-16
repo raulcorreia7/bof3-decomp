@@ -334,7 +334,7 @@ MATCH void Fishing_ShopDrawBackdrop(void) {
     ((RECT*)cursor)->y = 128;
     ((RECT*)cursor)->h = 32;
     ((RECT*)cursor)->w = 32;
-    tpage              = getTPage(1, 0, 320, 256);
+    tpage              = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, (RECT*)cursor);
     GFX_AddPrim(7, sizeof(DR_MODE));
     for (i = 0; i < 2; i++) {
@@ -342,7 +342,7 @@ MATCH void Fishing_ShopDrawBackdrop(void) {
 
         cursor = g_GfxPrimCursor;
         SetPolyFT4((POLY_FT4*)cursor);
-        quad_tpage                 = getTPage(1, 0, 320, 256);
+        quad_tpage                 = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
         ((POLY_FT4*)cursor)->x1    = i * 160 + 160;
         ((POLY_FT4*)cursor)->x0    = i * 160;
         ((POLY_FT4*)cursor)->tpage = quad_tpage;
@@ -363,7 +363,7 @@ MATCH void Fishing_ShopDrawBackdrop(void) {
     ((RECT*)cursor)->y = 0;
     ((RECT*)cursor)->h = 256;
     ((RECT*)cursor)->w = 256;
-    tpage              = getTPage(1, 0, 320, 256);
+    tpage              = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, (RECT*)cursor);
     GFX_AddPrim(7, sizeof(DR_MODE));
 }

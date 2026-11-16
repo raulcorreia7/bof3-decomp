@@ -12,7 +12,7 @@ MATCH void func_801F314C(void) {
     if ((g_AreaDrawFlags & 0x4) == 0) {
         return;
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(1, 0, 320, 256), NULL);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256), NULL);
     GFX_AddPrim(6, sizeof(DR_MODE));
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);

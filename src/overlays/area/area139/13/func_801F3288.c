@@ -9,7 +9,7 @@ MATCH void func_801F3288(s32* first, s32* second) {
     u16      radius1;
     u16      radius2;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 960, 0), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
     Area_SetCameraMatrix(&camera);
     line = (LINE_F2*)g_GfxPrimCursor;
@@ -27,6 +27,6 @@ MATCH void func_801F3288(s32* first, s32* second) {
     Game_ProjectWorldPoint(second, size, scale);
     radius2 = scale[0] + (g_FrameCount & 1);
     func_801F36DC(line->x0, line->y0, radius1, angle + ANGLE_90, line->x1, line->y1, radius2, angle + ANGLE_270);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 1, 960, 0), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
 }

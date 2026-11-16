@@ -96,7 +96,7 @@ MATCH void Scene_DrawLightPillar(u8 fade) {
         point[2] = g_Task->pos.z.fixed + TO_COORD((s16)g_Task->screen_y);
         Area_ProjectPoint(point, &outer);
 
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 960, 0), 0);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
         if ((u8)(i - 11) >= 17) {
             GFX_AddPrim(1, 12);
         }
@@ -218,7 +218,7 @@ MATCH void func_801F79BC(void) {
 }
 
 MATCH void func_801F79C4(void) {
-    Screen_DrawTintLayer(3, GetTPage(0, 2, 960, 0));
+    Screen_DrawTintLayer(3, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, FONT_TPAGE_X, FONT_TPAGE_Y));
 }
 
 MATCH void func_801F7AA8(void) {
@@ -818,7 +818,7 @@ MATCH void func_801F9500(WorldPos* pos, s32* vx) {
     Area_ProjectPoint(point, (DVECTOR*)&prim->x3);
 
     setUV4(prim, cell->u, cell->v, cell->u + 0x18, cell->v, cell->u, cell->v + 0x10, cell->u + 0x18, cell->v + 0x10);
-    prim->tpage = GetTPage(1, 1, cell->page_x, cell->page_y);
+    prim->tpage = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, cell->page_x, cell->page_y);
     setClut(prim, 0xA0, 0x1F0);
     setRGB0(prim, 0x20, 0x20, 0x20);
     Area_AddCellPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_FT4));
@@ -880,7 +880,7 @@ MATCH void func_801F9A20(WorldPos* pos, s32* vx) {
 
     FAKE_STACK_PADS(u8, 0x20); /* FAKE: retail keeps the point row in an 88-byte frame. */
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 0, 0x3C0, 0) & 0xFFFF, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y) & 0xFFFF, 0);
     Area_AddCellPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(DR_MODE));
     poly = (POLY_F4*)g_GfxPrimCursor;
     SetPolyF4(poly);

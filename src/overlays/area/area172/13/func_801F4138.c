@@ -23,7 +23,7 @@ MATCH void func_801F4138(s16 centre_x, s16 centre_y, s16 radius, s16 centre_shad
             arc_color = 0xFF;
         }
     }
-    GFX_AddDitheredDrawMode(1, GetTPage(0, 1, 0x380, 0x100));
+    GFX_AddDitheredDrawMode(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
     phase = 0;
     i     = 0;
     do {

@@ -136,7 +136,7 @@ MATCH void func_801EF158(void) {
     s32       i;
     s16       angle;
 
-    tpage = getTPage(1, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_AddDitheredDrawMode(2, tpage);
     D_1F800000.cells.halves[0] = g_Task->unk_14;
     angle                      = g_Task->param.unk_0B;
@@ -169,7 +169,7 @@ MATCH void func_801EF158(void) {
             D_1F800000.cells.halves[1] = 0x80;
         }
         setRGB0(poly, D_1F800000.cells.halves[1], D_1F800000.cells.halves[1], D_1F800000.cells.halves[1]);
-        poly->tpage                = GetTPage(1, 1, 0x340, 0x100);
+        poly->tpage                = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 0x340, 0x100);
         poly->clut                 = GetClut(0, 0x1FA);
         D_1F800000.cells.halves[4] = 0xE0 - (((g_Task->param.unk_0B + i) & 7) << 4);
         setUV4(poly, 0, D_1F800000.cells.halves[4], 0xF8, D_1F800000.cells.halves[4], 0, D_1F800000.cells.halves[4] + 0x10, 0xF8, D_1F800000.cells.halves[4] + 0x10);
@@ -217,7 +217,7 @@ MATCH void func_801EF158(void) {
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         GFX_AddPrim(2, sizeof(POLY_G4));
     }
-    tpage = getTPage(1, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_AddDitheredDrawMode(2, tpage);
 }
 
@@ -280,7 +280,7 @@ MATCH void func_801EFCC8(void) {
             setVector(&D_1F800014[1], (rcos(0x600) * D_1F800000.cells.halves[0]) >> 12, (rsin(0x600) * D_1F800000.cells.halves[0]) >> 12, -D_1F800000.cells.halves[2]);
             setVector(&D_1F800014[2], (rcos(0xE00) * D_1F800000.cells.halves[0]) >> 12, (rsin(0xE00) * D_1F800000.cells.halves[0]) >> 12, -D_1F800000.cells.halves[2]);
             setVector(&D_1F800014[3], (rcos(0xA00) * D_1F800000.cells.halves[0]) >> 12, (rsin(0xA00) * D_1F800000.cells.halves[0]) >> 12, -D_1F800000.cells.halves[2]);
-            poly->tpage = GetTPage(0, 1, 0x340, 0x100);
+            poly->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x340, 0x100);
             poly->clut  = GetClut(0, 0x1E2);
             setUVWH(poly, 0, 0, 32, 32);
             D_1F800000.cells.halves[1] = 0x41 - (D_801F00B0[i] >> 1) * 4;

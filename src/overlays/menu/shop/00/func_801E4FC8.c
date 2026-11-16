@@ -14,7 +14,7 @@ MATCH void func_801E4FC8(s32 sprite_x, s32 sprite_y, u8 atlas_index, s32 shade_m
     }
     entry = &g_ShopPortraitAtlas[atlas_index & BYTE_MASK];
 
-    tpage = getTPage(0, 0, 896, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 896, 256);
     GFX_AddDitheredDrawMode(1, tpage);
 
     sprt = (SPRT*)g_GfxPrimCursor;

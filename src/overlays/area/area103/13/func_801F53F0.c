@@ -22,7 +22,7 @@ NON_MATCHING void func_801F53F0(s32 radius) {
     D_1F800014[0].vz = z;
     RotTransPers(D_1F800014, (long*)D_1F800034_U16, &depth, &flag);
 
-    tpage     = getTPage(1, 1, 320, 256);
+    tpage     = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     scale     = radius << 2;
     shade     = scale ^ 0x3F;
     alternate = shade << 1;

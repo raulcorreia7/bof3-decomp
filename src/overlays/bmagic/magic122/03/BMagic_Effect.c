@@ -154,7 +154,7 @@ MATCH void func_801EF324(void) {
     s32       outer;
     s32       swing;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_AddDitheredDrawMode(3, tpage);
     D_1F800000.cells.halves[4] = g_Task->unk_2E.half;
     D_1F800000.cells.halves[5] = g_Task->unk_30.half;
@@ -185,7 +185,7 @@ MATCH void func_801EF324(void) {
         prim->x2    = D_1F800000.cells.halves[4];
         prim->y2    = D_1F800000.cells.halves[5];
         prim->clut  = GetClut(0, 0x1FA);
-        prim->tpage = GetTPage(0, 1, 0x380, 0x100);
+        prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100);
         setUV4(prim, 0x40, i * 8 - g_Task->unk_09 * 16, 0x80, i * 8 - g_Task->unk_09 * 16, 0x40, i * 8 - g_Task->unk_09 * 16 + 8, 0x80, i * 8 - g_Task->unk_09 * 16 + 8);
         D_1F800000.cells.halves[3] = g_Task->unk_04 * 8;
         setRGB0(prim, D_1F800000.cells.halves[3], D_1F800000.cells.halves[3], D_1F800000.cells.halves[3]);
@@ -213,7 +213,7 @@ MATCH void func_801EF324(void) {
         prim->x3                   = D_1F800000.cells.halves[4];
         prim->y3                   = D_1F800000.cells.halves[5];
         prim->clut                 = GetClut(0, 0x1FA);
-        prim->tpage                = GetTPage(0, 1, 0x380, 0x100);
+        prim->tpage                = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100);
         setUV4(prim, 0, i * 8 - g_Task->unk_09 * 16, 0x40, i * 8 - g_Task->unk_09 * 16, 0, i * 8 - g_Task->unk_09 * 16 + 8, 0x40, i * 8 - g_Task->unk_09 * 16 + 8);
         D_1F800000.cells.halves[3] = g_Task->unk_04 * 8;
         setRGB1(prim, D_1F800000.cells.halves[3], D_1F800000.cells.halves[3], D_1F800000.cells.halves[3]);
@@ -223,7 +223,7 @@ MATCH void func_801EF324(void) {
         setRGB2(prim, D_1F800000.cells.halves[3], D_1F800000.cells.halves[3], D_1F800000.cells.halves[3]);
         GFX_AddPrim(3, sizeof(POLY_GT4));
     }
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_AddDitheredDrawMode(3, tpage);
 }
 
@@ -240,7 +240,7 @@ NON_MATCHING void func_801EFBA8(void) {
     s32          outer_radius;
     s32          white;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
     D_1F800000.cells.halves[4] = g_Task->unk_2E.half;
     D_1F800000.cells.halves[5] = g_Task->unk_30.half;
@@ -319,7 +319,7 @@ NON_MATCHING void func_801EFBA8(void) {
             outer_radius += 18;
         } while (iteration < g_Task->timer + 1);
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, 320, 256), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256), 0);
     GFX_AddPrim(3, sizeof(DR_MODE));
 }
 #else

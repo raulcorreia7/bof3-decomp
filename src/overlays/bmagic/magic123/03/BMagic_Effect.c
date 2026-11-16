@@ -11,7 +11,7 @@ MATCH void func_801EEC04(void) {
     u8           i;
 
     BMagic_DispatchTaskPair(func_801EEDAC, Effect_MarkDamagedOnZeroTick);
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
 
     for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
@@ -26,7 +26,7 @@ MATCH void func_801EEC04(void) {
         }
     }
 
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
 }
 

@@ -844,7 +844,7 @@ MATCH void func_801D3EFC(s16 x, s16 y, u8 ordinal) {
     SPRT_16* sprite;
     u8       icon;
 
-    page = getTPage(0, 0, 896, 256);
+    page = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 896, 256);
     GFX_SET_DRAW_MODE(page);
     GFX_AddPrim(1, sizeof(DR_MODE));
 
@@ -868,7 +868,7 @@ MATCH void func_801D4030(s16 x, s16 y, u8 piece) {
     s32   page;
     SPRT* sprite;
 
-    page = getTPage(0, 0, 896, 256);
+    page = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 896, 256);
     GFX_SET_DRAW_MODE(page);
     GFX_AddPrim(1, sizeof(DR_MODE));
 

@@ -161,7 +161,7 @@ MATCH void func_801EFC74(void) {
     s32      i;
     s32      scale;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 2, 320, 256), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256), 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
     if (g_Task->header.step >= 2) {
         D_1F800000.cells.halves[0] = ((g_Task->unk_09 * 4 + 0x210) * rcos(0x800)) >> 12;

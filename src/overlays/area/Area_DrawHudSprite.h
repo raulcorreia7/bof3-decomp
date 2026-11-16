@@ -4,7 +4,7 @@ MATCH void Area_DrawHudSprite(s32 x, s32 y, u32 sprite_id) {
     s32   tpage;
     s32   index;
 
-    tpage = getTPage(1, 0, 768, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 768, 256);
     GFX_AddDrawMode(tpage);
 
     sprt = GfxBeginSprite(x, y, WORLD_SPRITE_CLUT);

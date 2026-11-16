@@ -181,7 +181,7 @@ MATCH void BMagic_DrawBurnSprites(void) {
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, D_1F800000.cells.halves[5], D_1F800000.cells.halves[5], D_1F800000.cells.halves[5]);
         setRGB3(prim, D_1F800000.cells.halves[5], D_1F800000.cells.halves[5], D_1F800000.cells.halves[5]);
-        prim->tpage = GetTPage(0, 1, 0x340, 0x100);
+        prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x340, 0x100);
         prim->clut  = GetClut(0, 0x1FA);
         setUV4(prim, i << 3, g_Task->timer * 4 + 0x20, (i << 3) + 8, g_Task->timer * 4 + 0x20, i << 3, g_Task->timer * 4 + 0x28, (i << 3) + 8, g_Task->timer * 4 + 0x28);
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
@@ -205,7 +205,7 @@ MATCH void BMagic_DrawBurnFlameQuads(void) {
     long     flag;
     s32      i;
 
-    GFX_AddDitheredDrawMode(5, getTPage(0, 2, 320, 256));
+    GFX_AddDitheredDrawMode(5, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256));
     DARK_RING_INNER  = 0x80;
     DARK_RING_OUTER  = 0xC0;
     DARK_RING_SHADE  = g_Task->unk_09 * 6;
@@ -232,7 +232,7 @@ MATCH void BMagic_DrawBurnFlameQuads(void) {
         setRGB3(prim, DARK_RING_SHADE, DARK_RING_SHADE, DARK_RING_SHADE);
         GFX_AddPrim(5, sizeof(POLY_G4));
     }
-    GFX_AddDitheredDrawMode(5, getTPage(0, 0, 320, 256));
+    GFX_AddDitheredDrawMode(5, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256));
 }
 
 MATCH void BMagic_DrawBurnFlameTris(void) {
@@ -242,7 +242,7 @@ MATCH void BMagic_DrawBurnFlameTris(void) {
     s32      i;
     s32      tpage;
 
-    tpage = getTPage(0, 2, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     D_1F800000.cells.halves[0] = 0x80;
     D_1F800000.cells.halves[5] = g_Task->unk_09 * 4;
@@ -261,6 +261,6 @@ MATCH void BMagic_DrawBurnFlameTris(void) {
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
 
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 }

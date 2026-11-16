@@ -207,7 +207,7 @@ MATCH void func_801EF87C(void) {
     s32      i;
     s32      tpage;
 
-    tpage = getTPage(0, 2, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     D_1F800000.cells.halves[0] = g_Task->unk_14;
     D_1F800000.cells.halves[5] = g_Task->unk_09 << 2;
@@ -230,7 +230,7 @@ MATCH void func_801EF87C(void) {
 
 /* func_801EFACC */
 MATCH void BMagic_DrawDarkRing(void) {
-    GFX_AddDitheredDrawMode(5, getTPage(0, 2, 320, 256));
+    GFX_AddDitheredDrawMode(5, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256));
     D_1F800000.cells.halves[0] = g_Task->unk_14;
     D_1F800000.cells.halves[1] = g_Task->unk_14 * 2;
     D_1F800000.cells.halves[5] = g_Task->unk_09 * 4;
@@ -317,7 +317,7 @@ MATCH void func_801F0218(void) {
     long      flag;
     s32       tpage;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     prim = (POLY_FT4*)g_GfxPrimCursor;
@@ -329,7 +329,7 @@ MATCH void func_801F0218(void) {
     setVector(&D_1F800014[1], FIXED_MUL(rcos(1536), D_1F800000.cells.halves[0]), FIXED_MUL(rsin(1536), D_1F800000.cells.halves[0]), 0);
     setVector(&D_1F800014[2], FIXED_MUL(rcos(3584), D_1F800000.cells.halves[0]), FIXED_MUL(rsin(3584), D_1F800000.cells.halves[0]), 0);
     setVector(&D_1F800014[3], FIXED_MUL(rcos(2560), D_1F800000.cells.halves[0]), FIXED_MUL(rsin(2560), D_1F800000.cells.halves[0]), 0);
-    setTPage(prim, 0, 1, 832, 256);
+    setTPage(prim, TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 832, 256);
     /* FAKE: a volatile store keeps the clut write ahead of the texture-point stores; the best pure-C body is 0x2C8 against retail's 0x2D4. */
     *FAKE_VOLATILE_PTR(u16, &prim->clut) = GetClut(0, 482);
     setUVWH(prim, 0, 128, 32, 32);
@@ -413,7 +413,7 @@ MATCH void func_801F07A8(void) {
     s16          x;
     s16          y;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
     work                       = g_Task;
     D_1F800000.cells.halves[0] = work->param.unk_0B;

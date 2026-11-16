@@ -189,7 +189,7 @@ MATCH void func_801EF4EC(void) {
     s32      i;
     s32      next;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     i = g_Task->param.unk_0B;
     while (BMagic_Trail[g_Task->unk_04][i].x == -1) {
@@ -233,7 +233,7 @@ MATCH void func_801EF4EC(void) {
         setRGB3(prim, D_1F800000.cells.halves[3], D_1F800000.cells.halves[3], 1);
         GFX_AddPrim(3, sizeof(POLY_G4));
     }
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
 }
 
@@ -245,7 +245,7 @@ MATCH void func_801EFA34(void) {
     s32      i;
     s32      next;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     D_1F800000.cells.halves[0] = 0xC;
     i                          = g_Task->param.unk_0B;
@@ -326,7 +326,7 @@ MATCH void func_801EFA34(void) {
         setRGB3(prim, D_1F800000.cells.halves[3], D_1F800000.cells.halves[3], D_1F800000.cells.halves[3]);
         GFX_AddPrim(3, sizeof(POLY_G4));
     }
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
 }
 
@@ -393,7 +393,7 @@ MATCH void func_801F075C(void) {
     s32      i;
     s32      tpage;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     D_1F800000.cells.halves[0] = (rand() & 3) + 28;
     D_1F800000.cells.halves[3] = g_Task->unk_09 * 6;

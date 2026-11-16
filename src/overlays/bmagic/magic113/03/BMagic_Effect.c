@@ -153,7 +153,7 @@ MATCH void func_801EF4F0(void) {
     s32      i;
     s32      tpage;
 
-    tpage = getTPage(0, 2, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     s_Magic113OrbitRadius = 0x1C0;
     D_1F800014[2].vx      = FIXED_MUL(rsin(0), s_Magic113OrbitRadius);
@@ -174,7 +174,7 @@ MATCH void func_801EF4F0(void) {
         setRGB2(prim, 1, 1, 1);
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 }
 
@@ -226,7 +226,7 @@ MATCH void func_801EF944(void) {
     s32      i;
     s32      tpage;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     setVector(&D_1F800014[0], FIXED_MUL(rsin(0), s_Magic113OrbitRadius), FIXED_MUL(rcos(0), s_Magic113OrbitRadius), 0);
     for (i = 1; i <= 32; i++) {
@@ -246,7 +246,7 @@ MATCH void func_801EF944(void) {
             GFX_AddPrim(5, sizeof(LINE_F2));
         }
     }
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 }
 
@@ -292,7 +292,7 @@ MATCH void func_801EFDA0(void) {
     s32      left;
     s32      tpage;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     for (i = 0; i < 5; i++) {
         if (i * 8 < g_Task->unk_09) {
@@ -321,7 +321,7 @@ MATCH void func_801EFDA0(void) {
             GFX_AddPrim(5, sizeof(LINE_F2));
         }
     }
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 }
 
@@ -401,7 +401,7 @@ MATCH void func_801F02CC(void) {
             D_1F800014[3].vz = 0;
             x                = (D_1F800014[3].vx << 9) + g_Task->pos.x.fixed;
             y                = (D_1F800014[3].vy << 9) + g_Task->pos.y.fixed;
-            tpage            = getTPage(0, 1, 320, 256);
+            tpage            = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
             Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
             prim = (POLY_G4*)g_GfxPrimCursor;
@@ -416,16 +416,16 @@ MATCH void func_801F02CC(void) {
             Area_AddCellPrim(x, y, 0, sizeof(POLY_G4));
         }
     }
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
 }
 
 MATCH void func_801F0764(void) {
-    GFX_AddDitheredDrawMode(3, getTPage(1, 1, 320, 256));
+    GFX_AddDitheredDrawMode(3, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256));
     g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0BD8, g_Task->header.step);
     g_Scripts = AREA_SCRIPT_TABLE;
-    GFX_AddDitheredDrawMode(3, getTPage(1, 0, 320, 256));
+    GFX_AddDitheredDrawMode(3, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256));
 }
 
 #include "overlays/bmagic/Effect_CountDownTimerStep.h"

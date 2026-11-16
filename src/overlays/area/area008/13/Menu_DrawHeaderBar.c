@@ -22,7 +22,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     window->y       = 240;
     window->x       = 0;
     setWH(window, 16, 16);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), window);
     GFX_AddPrim(1u, sizeof(DR_MODE));
 
     prim = (POLY_FT4*)g_GfxPrimCursor;
@@ -57,7 +57,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     prim->clut  = GetClut(clut_x, STAGE_PALETTE_Y + 1);
     width1      = width + 1;
     width1_u    = width1;
-    prim->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
+    prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1u, sizeof(POLY_FT4));
 
     half = ((s32)width1_u - 4) >> 1;
@@ -71,7 +71,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     setRGB0(prim, 172, 172, 172);
     prim->clut  = GetClut(clut_x, STAGE_PALETTE_Y + 1);
     odd_u       = odd;
-    prim->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
+    prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1u, sizeof(POLY_FT4));
 
     prim = (POLY_FT4*)g_GfxPrimCursor;
@@ -88,7 +88,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     setUV4(prim, 0u, 0u, (u8)(half_u + odd_u), 0u, 0u, bottom_v, (u8)(half_u + odd_u), bottom_v);
     setRGB0(prim, 172, 172, 172);
     prim->clut  = GetClut(clut_x, STAGE_PALETTE_Y + 1);
-    prim->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
+    prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1u, sizeof(POLY_FT4));
 
     prim = (POLY_FT4*)g_GfxPrimCursor;
@@ -117,7 +117,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     prim->v2 -= 1;
     prim->v3 -= 3;
     prim->clut  = GetClut(clut_x, STAGE_PALETTE_Y + 1);
-    prim->tpage = getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
+    prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(1u, sizeof(POLY_FT4));
 
     window          = (RECT*)g_GfxPrimCursor;
@@ -125,7 +125,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     window->x       = 0;
     window->y       = 0;
     setWH(window, 256, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), window);
     GFX_AddPrim(1u, sizeof(DR_MODE));
     func_801AEBA0(inner, y + 2, width - 4, height - 4, 0);
 }

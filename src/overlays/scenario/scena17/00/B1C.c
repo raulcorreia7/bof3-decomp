@@ -536,7 +536,7 @@ NON_MATCHING void func_801F88CC(u8 semi, s32 color) {
     s32   shade;
 
     if (semi != 0) {
-        tpage = getTPage(2, 2, 704, 0);
+        tpage = getTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_SUB, 704, 0);
         GFX_ADD_LAYER_DRAW_MODE(2, tpage);
         tile = (TILE*)g_GfxPrimCursor;
         setlen(tile, 3);
@@ -549,7 +549,7 @@ NON_MATCHING void func_801F88CC(u8 semi, s32 color) {
         tile->h = SCREEN_HEIGHT;
         GFX_AddPrim(2, sizeof(TILE));
     }
-    tpage = getTPage(2, 1, 704, 0);
+    tpage = getTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_ADD, 704, 0);
     GFX_ADD_LAYER_DRAW_MODE(2, tpage);
     sprite = (SPRT*)g_GfxPrimCursor;
     setSprt(sprite);
@@ -560,7 +560,7 @@ NON_MATCHING void func_801F88CC(u8 semi, s32 color) {
     setUV0(sprite, 0, 0);
     setRGB0(sprite, color, color, color);
     GFX_AddPrim(2, sizeof(SPRT));
-    tpage = getTPage(2, 1, 960, 0);
+    tpage = getTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_ADD_LAYER_DRAW_MODE(2, tpage);
     sprite = (SPRT*)g_GfxPrimCursor;
     setSprt(sprite);
@@ -605,7 +605,7 @@ NON_MATCHING void func_801F8B10(s32 scale, s32 shade) {
     MulMatrix2(&g_CameraMatrix, &mtx);
     SetRotMatrix(&mtx);
     SetTransMatrix(&mtx);
-    mode = getTPage(0, 2, 0, 0);
+    mode = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 0, 0);
     GFX_ADD_DITHERED_DRAW_MODE(2, mode);
     for (i = 0; i < 32;) {
         a                = i << 7;
@@ -683,7 +683,7 @@ MATCH void func_801F8FAC(s32 x, s32 y, s32 color, u8 semi_trans) {
     if (g_AreaDrawFlags == 0) {
         return;
     }
-    tpage = getTPage(1, 1, 832, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 832, 256);
     GFX_ADD_LAYER_DRAW_MODE(2, tpage);
     sprite = (SPRT*)g_GfxPrimCursor;
     setSprt(sprite);
@@ -735,7 +735,7 @@ MATCH void Scene_DrawEndingRollLine(s16 x, s16 y, u8* text) {
     s32 t;
 
     color = 0;
-    tpage = getTPage(0, 1, 960, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 960, 256);
     GFX_ADD_DRAW_MODE(tpage);
     while (*text != 0) {
         switch (*text) {

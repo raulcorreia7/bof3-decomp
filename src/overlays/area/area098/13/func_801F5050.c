@@ -9,7 +9,7 @@ NON_MATCHING void func_801F5050(u8 shade) {
     POLY_F4* packet;
     u8       i;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 0x3C0, 0) & HALF_MASK, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     Area_SetCameraMatrix(scratch);
     point[0] = g_Task->pos.x.fixed - TO_COORD(2);
@@ -21,7 +21,7 @@ NON_MATCHING void func_801F5050(u8 shade) {
     i = 0;
     do {
         point[0] += TO_COORD(1);
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 1, 0x3C0, 0) & HALF_MASK, 0);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK, 0);
         Area_AddCellPrim(point[0], point[1], 0, sizeof(DR_MODE));
         packet = (POLY_F4*)g_GfxPrimCursor;
         SetPolyF4(packet);

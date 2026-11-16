@@ -163,7 +163,7 @@ MATCH void func_801EF698(void) {
     s16       half_w;
     s16       height;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(1, 1, 320, 256), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256), 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
     if (g_Task->unk_04 != 0) {
         height = 0x60;
@@ -179,7 +179,7 @@ MATCH void func_801EF698(void) {
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
     setXY4(prim, x - half_w, y - height, x + half_w, y - height, x - half_w, y, x + half_w, y);
-    prim->tpage = GetTPage(1, 1, 0x340, 0x100);
+    prim->tpage = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 0x340, 0x100);
     prim->clut  = GetClut(0, 0x1FA);
     if (g_Task->unk_04 != 0) {
         setUVWH(prim, 8, 8, 112, 96);

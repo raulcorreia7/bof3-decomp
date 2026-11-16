@@ -214,7 +214,7 @@ MATCH void func_801EF74C(void) {
     D_1F800014[1].vy           = FIXED_MUL(rcos(0), D_1F800000.cells.halves[0]);
     D_1F800014[3].vx           = FIXED_MUL(rsin(0), D_1F800000.cells.halves[1]);
     D_1F800014[3].vy           = FIXED_MUL(rcos(0), D_1F800000.cells.halves[1]);
-    tpage                      = getTPage(0, 1, 320, 256);
+    tpage                      = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 
     for (i = 1; i <= 64; i++) {
@@ -233,7 +233,7 @@ MATCH void func_801EF74C(void) {
         GFX_AddPrim(5, sizeof(POLY_G4));
     }
 
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 }
 
@@ -251,7 +251,7 @@ MATCH void func_801EFA78(void) {
     D_1F800014[1].vy           = FIXED_MUL(rcos(0), D_1F800000.cells.halves[0]);
     D_1F800014[3].vx           = FIXED_MUL(rsin(0), D_1F800000.cells.halves[1]);
     D_1F800014[3].vy           = FIXED_MUL(rcos(0), D_1F800000.cells.halves[1]);
-    tpage                      = getTPage(0, 1, 320, 256);
+    tpage                      = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 
     for (i = 1; i <= 16; i++) {
@@ -270,7 +270,7 @@ MATCH void func_801EFA78(void) {
         GFX_AddPrim(5, sizeof(POLY_G4));
     }
 
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 }
 

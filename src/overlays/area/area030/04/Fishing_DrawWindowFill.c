@@ -12,7 +12,7 @@ MATCH void Fishing_DrawWindowFill(s16 x, s16 y, u8 height, u8 style) {
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
 
-    tpage       = getTPage(0, 0, D_801E218C[style].tpage, 256);
+    tpage       = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, D_801E218C[style].tpage, 256);
     prim->tpage = tpage;
 
     prim->clut = getClut(112, 482);

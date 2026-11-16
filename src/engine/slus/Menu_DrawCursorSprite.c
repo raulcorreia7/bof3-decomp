@@ -6,7 +6,7 @@
 MATCH void Menu_DrawCursorSprite(u16 x, u16 y, s32 unused) {
     SPRT* sprite;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 0x3C0, 0), (RECT*)0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), (RECT*)0);
     GFX_AddPrim(0, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);

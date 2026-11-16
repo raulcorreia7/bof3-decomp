@@ -25,7 +25,7 @@ NON_MATCHING void func_801F2ED4(u16 radius, u16 color) {
 
     cell_x = TO_COORD(31) + COORD_HALF;
     cell_y = TO_COORD(26);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 1, 896, 256), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 896, 256), 0);
     Area_AddCellPrim(cell_x, cell_y, 2, sizeof(DR_MODE));
 
     i = 0;

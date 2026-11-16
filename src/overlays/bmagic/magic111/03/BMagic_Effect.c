@@ -126,7 +126,7 @@ MATCH void func_801EF330(void) {
     u8       g;
     u8       b;
 
-    tpage = getTPage(0, 2, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
@@ -157,7 +157,7 @@ MATCH void func_801EF330(void) {
     b                  = g_Task->unk_09 * (FIXED_MUL(rsin(D_1F800002), 6) + 8);
     setRGB3(prim, r, g, b);
     GFX_AddPrim(3, sizeof(POLY_G4));
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
 }
 

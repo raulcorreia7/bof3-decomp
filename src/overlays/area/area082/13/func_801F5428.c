@@ -6,7 +6,7 @@ MATCH void func_801F5428(s32 colors) {
     u32      packedColors = colors;
     u8       topRed, topGreen, topBlue, bottomRed, bottomGreen, bottomBlue;
 
-    texturePage = getTPage(1, 0, 320, 256);
+    texturePage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(6, texturePage);
     polygon = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(polygon);
@@ -24,6 +24,6 @@ MATCH void func_801F5428(s32 colors) {
     polygon->g2 = polygon->g3 = bottomGreen;
     polygon->b2 = polygon->b3 = bottomBlue;
     GFX_AddPrim(6, sizeof(POLY_G4));
-    texturePage = getTPage(1, 0, 320, 256);
+    texturePage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_LAYER_DRAW_MODE(6, texturePage);
 }

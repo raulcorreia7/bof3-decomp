@@ -8,7 +8,7 @@ MATCH void func_801EF7B0(void) {
 
     D_1F800000.cells.halves[0] = g_Task->unk_09 * 2 + 32;
     for (i = 0; i < 8; i++) {
-        tpage = getTPage(0, 1, 320, 256);
+        tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
         prim = (POLY_G3*)g_GfxPrimCursor;

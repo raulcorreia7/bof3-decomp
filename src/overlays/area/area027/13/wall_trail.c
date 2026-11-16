@@ -250,7 +250,7 @@ MATCH void func_801F2F0C(const void* trail) {
     u32       index;
 
     work = (const u8*)trail;
-    GFX_AddDrawMode(GetTPage(0, 1, 896, 256));
+    GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 896, 256));
     i = 0u;
     do {
         primitive = (LINE_G2*)g_GfxPrimCursor;
@@ -355,7 +355,7 @@ MATCH void func_801F33A8(void) {
 
     u = TO_COORD(70) + COORD_HALF;
     v = TO_COORD(71) + COORD_HALF;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(1, 0, 320, 256), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256), 0);
     Area_AddCellPrim(u, v, -1, sizeof(DR_MODE));
     point[0] = ((u >> 9) - 0x4000);
     point[1] = ((v >> 9) - 0x4000);

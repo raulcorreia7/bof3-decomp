@@ -513,7 +513,7 @@ MATCH void func_801D2CF8(s32 x, s32 y, s32 icon) {
     SPRT* sprite;
     u8    index;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 896, 256), NULL);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 896, 256), NULL);
     GFX_AddPrim(1, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
@@ -1218,7 +1218,7 @@ MATCH void func_801D5788(void) {
     s32      n;
 
     func_801D5B2C();
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(1, 2, 0x140, 0), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_SUB, 0x140, 0), 0);
     GFX_AddPrim(0, sizeof(DR_MODE));
     g4 = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(g4);
@@ -2435,7 +2435,7 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     window.y = 152;
     window.w = 8;
     window.h = 8;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 832, 256), &window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(1, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
@@ -2451,7 +2451,7 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     window.y = 160;
     window.h = edge;
     window.w = edge;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 832, 256), &window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(1, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
@@ -2467,7 +2467,7 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     window.y = 152;
     window.h = edge;
     window.w = edge;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 832, 256), &window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(1, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
@@ -2483,7 +2483,7 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     window.y = 160;
     window.h = edge;
     window.w = edge;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 832, 256), &window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(1, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
@@ -2499,7 +2499,7 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     window.y = 160;
     window.h = edge;
     window.w = edge;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 832, 256), &window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(1, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
@@ -2514,7 +2514,7 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     window.y = 0;
     window.w = 256;
     window.h = 256;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 832, 256), &window);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(1, sizeof(DR_MODE));
 
     UI_DrawSprite((s16)x, (s16)y, 0x23, 1);

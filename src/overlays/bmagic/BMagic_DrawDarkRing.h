@@ -4,7 +4,7 @@
 
 /* func_801EFA30 (magic053), func_801EFA64 (magic226) */
 MATCH void BMagic_DrawDarkRing(void) {
-    GFX_AddDitheredDrawMode(5, getTPage(0, 2, 320, 256));
+    GFX_AddDitheredDrawMode(5, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256));
     D_1F800000.cells.halves[0] = g_Task->param.unk_0B;
     D_1F800000.cells.halves[1] = g_Task->param.unk_0B * 2;
     D_1F800000.cells.halves[5] = g_Task->timer * 4;

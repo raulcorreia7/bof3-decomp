@@ -159,7 +159,7 @@ MATCH void func_801EF678(void) {
     s32      i;
     s32      tpage;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     D_1F800000.cells.halves[3] = g_Task->unk_09 * 5;
     D_1F800000.cells.halves[4] = ((rand() & 3) + 3) * g_Task->unk_09;
@@ -181,7 +181,7 @@ MATCH void func_801EF678(void) {
         setRGB2(prim, D_1F800000.cells.halves[4], D_1F800000.cells.halves[5], D_1F800000.cells.halves[6]);
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 }
 
@@ -192,7 +192,7 @@ MATCH void func_801EF934(void) {
     s32      i;
     s32      tpage;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     D_1F800014[1].vx = FIXED_MUL(rsin(0), 128U);
     D_1F800014[1].vy = FIXED_MUL(rcos(0), 128U);
@@ -221,7 +221,7 @@ MATCH void func_801EF934(void) {
         setRGB3(prim, 1, 1, 1);
         GFX_AddPrim(5, sizeof(POLY_G4));
     }
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 }
 
@@ -356,7 +356,7 @@ MATCH void func_801F026C(void) {
     s32      tpage;
     s32      i;
 
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     first = g_GfxPrimCursor;
@@ -431,7 +431,7 @@ MATCH void func_801F0910(s32 shade) {
     D_1F800000.cells.halves[5] = D_801F0C04[g_Task->unk_04][1];
     D_1F800000.cells.halves[6] = D_801F0C04[g_Task->unk_04][2];
     for (i = 0; i < 8; i++) {
-        tpage = getTPage(0, 1, 320, 256);
+        tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
         prim = (POLY_G3*)g_GfxPrimCursor;

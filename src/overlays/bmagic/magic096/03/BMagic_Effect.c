@@ -186,12 +186,12 @@ MATCH void func_801EF4FC(void) {
         D_1F800014[2].vz = -D_1F800000.cells.halves[3];
         x                = (D_1F800014[1].vx << 9) + g_Task->pos.x.fixed;
         y                = (D_1F800014[1].vy << 9) + g_Task->pos.y.fixed;
-        tpage            = getTPage(1, 0, 320, 256);
+        tpage            = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
         tri = (POLY_FT3*)g_GfxPrimCursor;
         SetPolyFT3(tri);
-        setTPage(tri, 1, 0, 832, 256);
+        setTPage(tri, TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 832, 256);
         setClut(tri, 0, 506);
         setUV3(tri, j * 64 + 32, 64, j * 64, 96, (j + 1) * 64 - 1, 96);
         RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&tri->x0, (long*)&tri->x1, (long*)&tri->x2, &depth, &flag);
@@ -204,12 +204,12 @@ MATCH void func_801EF4FC(void) {
         setVector(&D_1F800014[3], FIXED_MUL(rsin((j + 1) << 10), D_1F800000.cells.halves[1]), FIXED_MUL(rcos((j + 1) << 10), D_1F800000.cells.halves[1]), 0);
         x     = (D_1F800014[2].vx << 9) + g_Task->pos.x.fixed;
         y     = (D_1F800014[2].vy << 9) + g_Task->pos.y.fixed;
-        tpage = getTPage(1, 0, 320, 256);
+        tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
         quad = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(quad);
-        setTPage(quad, 1, 0, 832, 256);
+        setTPage(quad, TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 832, 256);
         setClut(quad, 0, 506);
         setUV4(quad, j * 64, 96, j * 64 + 152, 96, j * 64, 159, j * 64 + 152, 159);
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&quad->x0, (long*)&quad->x1, (long*)&quad->x2, (long*)&quad->x3, &depth, &flag);
@@ -227,7 +227,7 @@ MATCH void func_801EFB3C(void) {
     s32      i;
     s32      tpage;
 
-    tpage = getTPage(0, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.cells.halves[0] = g_Task->timer * 16 + 16;
@@ -265,7 +265,7 @@ MATCH void BMagic_DrawGlowRing(void) {
     long     flag;
     s32      i;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     GLOW_RING_INNER  = g_Task->timer * 16 + 16;
     GLOW_RING_OUTER  = g_Task->timer * 16 + 0x80;

@@ -212,7 +212,7 @@ MATCH void func_801EF590(u8* text, s32 x, s32 y) {
     s16       u;
     s16       v;
 
-    mode = getTPage(0, 0, 320, 256);
+    mode = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, mode);
     if (*text == 0) {
         return;
@@ -225,7 +225,7 @@ MATCH void func_801EF590(u8* text, s32 x, s32 y) {
         x1 = x + 8;
         setXY4(prim, x, y, x1, y, x, y1, x1, y1);
         setRGB0(prim, 0x80, 0x80, 0x80);
-        setTPage(prim, 0, 1, 0x3C0, 0);
+        setTPage(prim, TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
         setClut(prim, 0, 0x1E0);
         code = *text - 0x30;
         u    = (code % 31) * 8;
@@ -243,13 +243,13 @@ MATCH void func_801EF590(u8* text, s32 x, s32 y) {
 MATCH void func_801EF76C(u8* text, s32 x, s32 y) {
     POLY_FT4* prim;
 
-    GFX_AddDitheredDrawMode(2, getTPage(0, 0, 0x140, 0x100));
+    GFX_AddDitheredDrawMode(2, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 0x140, 0x100));
     while (*text != 0) {
         prim = GFX_CURSOR(POLY_FT4);
         SetPolyFT4(prim);
         setXYWH(prim, x, y, 8, 8);
         setRGB0(prim, 128, 128, 128);
-        setTPage(prim, 0, 1, 0x3C0, 0);
+        setTPage(prim, TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
         setClut(prim, 0, 0x1E0);
         setUV4(prim, (*text - 0x40) * 8, 8, (*text - 0x40) * 8 + 8, 8, (*text - 0x40) * 8, 16, (*text - 0x40) * 8 + 8, 16);
         if (*text != 0xFF) {
@@ -270,7 +270,7 @@ MATCH void func_801EF924(u8* text, s32 x, s32 y) {
     s16       u;
     s16       v;
 
-    mode = getTPage(0, 0, 320, 256);
+    mode = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, mode);
     if (*text == 0) {
         return;
@@ -283,7 +283,7 @@ MATCH void func_801EF924(u8* text, s32 x, s32 y) {
         x1 = x + 8;
         setXY4(prim, x, y, x1, y, x, y1, x1, y1);
         setRGB0(prim, 0x80, 0x80, 0x80);
-        setTPage(prim, 0, 1, 0x3C0, 0);
+        setTPage(prim, TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
         setClut(prim, 0, 0x1E0);
         code = *text - 0x30;
         u    = (code % 31) * 8;
@@ -309,7 +309,7 @@ NON_MATCHING void func_801EFB00(u16 value, s32 x, s32 y) {
     s16       u;
     s32       y1;
 
-    mode = getTPage(0, 0, 320, 256);
+    mode = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, mode);
     started = 0;
     scale   = 10000;
@@ -320,7 +320,7 @@ NON_MATCHING void func_801EFB00(u16 value, s32 x, s32 y) {
         SetPolyFT4(prim);
         setXY4(prim, x, y, x + 12, y, x, y1, x + 12, y1);
         setRGB0(prim, 128, 128, 128);
-        setTPage(prim, 0, 1, 0x3C0, 0);
+        setTPage(prim, TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
         setClut(prim, 0, 0x1E0);
         digit = (u32)value / (u16)scale;
         if (digit != 0) {

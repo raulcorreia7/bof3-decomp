@@ -93,7 +93,7 @@ MATCH void func_801EF070(void) {
     s16       x;
     s16       y;
 
-    tpage = getTPage(1, 1, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
     shade  = &D_1F800006;
@@ -104,7 +104,7 @@ MATCH void func_801EF070(void) {
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
     setXY4(prim, x - 0x38, y - 0x60, x + 0x38, y - 0x60, x - 0x38, y, x + 0x38, y);
-    prim->tpage = GetTPage(1, 1, 832, 256);
+    prim->tpage = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 832, 256);
     prim->clut  = GetClut(0, 506);
     setUVWH(prim, 8, 8, 112, 96);
     setRGB0(prim, *shade, *shade, *shade);

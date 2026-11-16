@@ -7,7 +7,7 @@ MATCH void func_801F532C(void) {
     if (g_AreaSceneMode == 0) {
         return;
     }
-    tpage = getTPage(1, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(7, tpage);
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);

@@ -7,7 +7,7 @@ MATCH void func_801F3124(void) {
     s32 height;
     s32 jitter;
 
-    tpage = GetTPage(1, 1, 0x140, 0);
+    tpage = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 0x140, 0);
     GFX_AddDitheredDrawMode(3, tpage);
     func_801F32A0(0);
     jitter                     = (g_FrameCount & 0xF) << 20;

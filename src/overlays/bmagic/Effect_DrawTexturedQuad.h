@@ -3,7 +3,7 @@
 MATCH void Effect_DrawTexturedQuad(void) {
     POLY_FT4* prim;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 2, 320, 256), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256), 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.cells.halves[0] = g_Task->unk_09 << 1;
     D_1F800000.cells.halves[2] = g_Task->timer << 3;
@@ -18,7 +18,7 @@ MATCH void Effect_DrawTexturedQuad(void) {
     prim->y2    = g_Task->unk_30.half + FIXED_MUL(rsin(3584), D_1F800000.cells.halves[0]);
     prim->x3    = g_Task->unk_2E.half + FIXED_MUL(rcos(2560), D_1F800000.cells.halves[0]);
     prim->y3    = g_Task->unk_30.half + FIXED_MUL(rsin(2560), D_1F800000.cells.halves[0]);
-    prim->tpage = GetTPage(0, 2, 832, 256);
+    prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 832, 256);
     prim->clut  = GetClut(32, 506);
     prim->u0    = 128;
     prim->v0    = 32;

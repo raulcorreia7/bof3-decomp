@@ -471,7 +471,7 @@ MATCH void func_801F0164(s32 index) {
     s32       u;
     s32       v;
 
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
     length = D_801F0A9C[(u8)index];
     x      = g_Task->unk_2E.half - ((length >> 1) * 12 + (length & 1) * 6);
@@ -482,7 +482,7 @@ MATCH void func_801F0164(s32 index) {
             prim = (POLY_FT4*)g_GfxPrimCursor;
             SetPolyFT4(prim);
             setXYWH(prim, x, y, 12, 12);
-            prim->tpage = GetTPage(0, 0, 0x3C0, 0);
+            prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
             prim->clut  = GetClut(0, 0x1E0);
             setRGB0(prim, 0x80, 0x80, 0x80);
             u = (glyph % 21) * 12;
@@ -503,14 +503,14 @@ MATCH void func_801F03F0(s32 dir) {
     u16       y;
     s32       u;
 
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
     prim = (POLY_FT4*)g_GfxPrimCursor;
     x    = g_Task->unk_2E.half;
     y    = g_Task->unk_30.half;
     SetPolyFT4(prim);
     setXYWH(prim, x, y, 12, 12);
-    prim->tpage = GetTPage(0, 0, 0x3C0, 0);
+    prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     prim->clut  = GetClut(D_801F0AD4[(u8)dir], 0x1E0);
     u           = ((u8)dir + 15) * 12;
     setUV4(prim, u, 0x30, u + 12, 0x30, u, 0x3C, u + 12, 0x3C);
@@ -528,7 +528,7 @@ MATCH void func_801F0550(s32 value) {
     s32       u;
     u16       left;
 
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
     tens = (u8)value / 10;
     ones = (u8)value % 10;
@@ -538,7 +538,7 @@ MATCH void func_801F0550(s32 value) {
     left = x - 66;
     SetPolyFT4(prim);
     setXY4(prim, left, y, x - 54, y, left, y + 12, x - 54, y + 12);
-    prim->tpage = GetTPage(0, 0, 0x3C0, 0);
+    prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     prim->clut  = GetClut(0, 0x1E0);
     u           = ones * 12;
     setUV4(prim, u + 72, 24, u + 84, 24, u + 72, 36, u + 84, 36);
@@ -549,7 +549,7 @@ MATCH void func_801F0550(s32 value) {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
         setXY4(prim, left, y, x - 66, y, left, y + 12, x - 66, y + 12);
-        prim->tpage = GetTPage(0, 0, 0x3C0, 0);
+        prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
         prim->clut  = GetClut(0, 0x1E0);
         u           = tens * 12;
         setUV4(prim, u + 72, 24, u + 84, 24, u + 72, 36, u + 84, 36);
@@ -562,7 +562,7 @@ MATCH void func_801F07B0(s32 index) {
     TILE* tile;
     s32   tpage;
 
-    tpage = getTPage(0, 2, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
@@ -578,7 +578,7 @@ MATCH void func_801F07B0(s32 index) {
     setWH(tile, D_801F0B10[(u8)index].w + 12, D_801F0B10[(u8)index].h + 12);
     setRGB0(tile, 0x20, 0x20, 0x20);
     GFX_AddPrim(2, sizeof(TILE));
-    tpage = getTPage(0, 0, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
 }
 

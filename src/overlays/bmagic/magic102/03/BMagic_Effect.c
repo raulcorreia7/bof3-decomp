@@ -337,7 +337,7 @@ MATCH void Effect_DrawShadedQuads(ScenePart* parts, s32 shift_x, s32 shift_y) {
     if (parts->head.count != 1) {
         rec = &parts[1];
         do {
-            mode = getTPage(1, rec[4].color.tpage, 320, 256);
+            mode = getTPage(TPAGE_DEPTH_8BIT, rec[4].color.tpage, 320, 256);
             /* Written out: GFX_AddDitheredDrawMode moves the g_AreaDrawMode load. */
             GFX_ADD_DITHERED_DRAW_MODE(g_AreaDrawMode, mode);
             prim = (POLY_G4*)g_GfxPrimCursor;
@@ -361,7 +361,7 @@ MATCH void Effect_DrawShadedQuads(ScenePart* parts, s32 shift_x, s32 shift_y) {
             GFX_AddPrim(g_AreaDrawMode, sizeof(POLY_G4));
         } while (n != parts->head.count);
     }
-    mode = getTPage(1, 0, 320, 256);
+    mode = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_LAYER_DRAW_MODE(g_AreaDrawMode, mode);
 }
 

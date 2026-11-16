@@ -9,7 +9,7 @@ MATCH void func_800C23D4(s32 angle) {
     POLY_FT4* poly;
     s32       lift;
 
-    GFX_AddDrawMode(GetTPage(2, 0, 832, 256));
+    GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 832, 256));
 
     PushMatrix();
     lift = 40;
@@ -22,7 +22,7 @@ MATCH void func_800C23D4(s32 angle) {
     SetTransMatrix(&matrix);
 
     poly        = (POLY_FT4*)g_GfxPrimCursor;
-    poly->tpage = GetTPage(2, 0, 832, 256);
+    poly->tpage = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 832, 256);
     setRGB0(poly, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
 
     vec.vx = -(g_Task->unk_0C / 2);

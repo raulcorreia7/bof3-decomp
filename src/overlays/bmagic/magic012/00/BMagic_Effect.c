@@ -172,7 +172,7 @@ MATCH void func_801EF79C(u8 unused, s32 semi) {
     u8        trans;
 
     trans = semi;
-    tpage = getTPage(0, semi, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, semi, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.cells.words[0] = 36;
@@ -192,7 +192,7 @@ MATCH void func_801EF79C(u8 unused, s32 semi) {
     D_1F800000.cells.words[2] = ((g_Task->timer + 5) & 0xF) << 8;
     prim->x3                  = g_Task->unk_2E.half + FIXED_MUL(rcos(D_1F800000.cells.words[2]), D_1F800000.cells.words[0]);
     prim->y3                  = g_Task->unk_30.half + FIXED_MUL(rsin(D_1F800000.cells.words[2]), D_1F800000.cells.words[0]);
-    prim->tpage               = GetTPage(1, trans, 832, 256);
+    prim->tpage               = GetTPage(TPAGE_DEPTH_8BIT, trans, 832, 256);
     prim->clut                = GetClut(0, 506);
     setUV4(prim, g_Task->param.unk_0B << 5, 0, (g_Task->param.unk_0B << 5) + 31, 0, g_Task->param.unk_0B << 5, 64, (g_Task->param.unk_0B << 5) + 31, 64);
     setRGB0(prim, D_1F800000.cells.words[1], D_1F800000.cells.words[1], D_1F800000.cells.words[1]);

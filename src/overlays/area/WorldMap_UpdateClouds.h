@@ -74,7 +74,7 @@ MATCH void WorldMap_UpdateClouds(void) {
             *(u32*)&prim->x2 = *(u32*)&cell->x2;
             *(u32*)&prim->x3 = *(u32*)&cell->x3;
             prim->clut       = getClut(176, 483);
-            prim->tpage      = getTPage(0, 2, 704, 256);
+            prim->tpage      = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 704, 256);
             setRGB0(prim, 40, 40, 40);
             setUV4(prim, g_WorldMapCloudTexture.u_origin[width] + col * g_WorldMapCloudTexture.cell_size[width],
                    g_WorldMapCloudTexture.v_origin[width] + row * g_WorldMapCloudTexture.cell_size[width] - g_WorldMapCloudTexture.cell_size[width] * COORD_FRAC(g_Task->pos.y) / 0x10000,

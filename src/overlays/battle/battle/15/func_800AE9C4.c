@@ -34,14 +34,14 @@ MATCH void func_800AE9C4(u8 texture_index) {
     /* The second quad reads the work record again, the way the retail code does. */
     BattlePanelGeometry* panel2;
 
-    mode = getTPage(0, 0, 320, 256);
+    mode = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_AddDitheredDrawMode(2, mode);
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
     panel = (BattlePanelGeometry*)BATTLE_WORK;
     setXY4(primitive, panel->origin.x + 1, panel->origin.y + 1, panel->origin.x + 49, panel->origin.y + 1, panel->origin.x + 1, panel->origin.y + (panel->height + 1), panel->origin.x + 0x31,
            panel->origin.y + (panel->height + 1));
-    primitive->tpage = GetTPage(0, 0, BATTLE_PANEL_TPAGE_X, BATTLE_PANEL_TPAGE_Y);
+    primitive->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, BATTLE_PANEL_TPAGE_X, BATTLE_PANEL_TPAGE_Y);
     setClut(primitive, BATTLE_PANEL_CLUT_X, BATTLE_PANEL_CLUT_Y);
     /* The texture entry is read through the table symbol at every use: the retail
      * code materializes the table address again for each access. */
@@ -56,7 +56,7 @@ MATCH void func_800AE9C4(u8 texture_index) {
     panel2 = (BattlePanelGeometry*)BATTLE_WORK;
     setXY4(primitive, panel2->origin.x, panel2->origin.y, panel2->origin.x + BATTLE_PANEL_WIDTH, panel2->origin.y, panel2->origin.x, panel2->origin.y + panel2->height,
            panel2->origin.x + BATTLE_PANEL_WIDTH, panel2->origin.y + panel2->height);
-    primitive->tpage = GetTPage(0, 0, BATTLE_PANEL_TPAGE_X, BATTLE_PANEL_TPAGE_Y);
+    primitive->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, BATTLE_PANEL_TPAGE_X, BATTLE_PANEL_TPAGE_Y);
     setClut(primitive, BATTLE_PANEL_CLUT_X, BATTLE_PANEL_CLUT_Y);
     /* The second texture block reads the work record again for its last row, the
      * way the retail code reloads the scratchpad work pointer there. */

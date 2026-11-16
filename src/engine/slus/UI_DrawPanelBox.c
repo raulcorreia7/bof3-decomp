@@ -16,7 +16,7 @@ MATCH void UI_DrawPanelBox(s16 x, s16 y, u8 w, u8 h) {
     LINE_F4*  line;
     RECT*     rect;
 
-    GFX_AddDrawMode(getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
+    GFX_AddDrawMode(getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     width  = w;
@@ -35,12 +35,12 @@ MATCH void UI_DrawPanelBox(s16 x, s16 y, u8 w, u8 h) {
     rect->y = 240;
     rect->x = 0;
     rect->w = rect->h = 16;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y), rect);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), rect);
     GFX_AddPrim(1, sizeof(DR_MODE));
 
     poly = (POLY_GT4*)g_GfxPrimCursor;
     SetPolyGT4(poly);
-    poly->tpage = GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
+    poly->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     poly->clut  = GetClut(((s8)CHARACTER_BLOCK->window_style << 5) | 0x10, STAGE_PALETTE_Y + 1);
     GFX_SET_RGB_ALL(poly, 255, 255, 255);
     setXY4(poly, x, y, x + tile_w, y, x, y + tile_h, x + tile_w, y + tile_h);
@@ -53,7 +53,7 @@ MATCH void UI_DrawPanelBox(s16 x, s16 y, u8 w, u8 h) {
     rect->y = 0;
     rect->x = 0;
     rect->w = rect->h = 256;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(0, 0, 320, 0), rect);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 0), rect);
     GFX_AddPrim(1, sizeof(DR_MODE));
 
     line = (LINE_F4*)g_GfxPrimCursor;

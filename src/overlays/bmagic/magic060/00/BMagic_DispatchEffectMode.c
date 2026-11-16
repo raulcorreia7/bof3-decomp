@@ -44,7 +44,7 @@ MATCH void func_801F0090(void) {
 MATCH void func_801F012C(void) {
     TILE* tile;
 
-    GFX_AddDitheredDrawMode(3, getTPage(0, 2, 320, 256));
+    GFX_AddDitheredDrawMode(3, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256));
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
@@ -55,7 +55,7 @@ MATCH void func_801F012C(void) {
     SCREEN_SHADE = g_Task->unk_09;
     setRGB0(tile, SCREEN_SHADE, SCREEN_SHADE, SCREEN_SHADE);
     GFX_AddPrim(3, sizeof(TILE));
-    GFX_AddDitheredDrawMode(3, getTPage(0, 0, 320, 256));
+    GFX_AddDitheredDrawMode(3, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256));
 }
 
 MATCH void func_801F0254(void) {
@@ -109,7 +109,7 @@ MATCH void func_801F0428(void) {
     POLY_G4* prim;
     u8       shade;
 
-    GFX_AddDitheredDrawMode(3, getTPage(0, 2, 320, 256));
+    GFX_AddDitheredDrawMode(3, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256));
     prim                      = GFX_BeginPolyG4(1);
     D_1F800000.cells.words[0] = g_Task->unk_09 * 3 + 18;
     D_1F800000.cells.words[2] = ((g_Task->unk_09 + 6) & 0x1F) << 7;
@@ -127,7 +127,7 @@ MATCH void func_801F0428(void) {
     D_1F800000.cells.words[1] = shade * 6;
     GFX_SET_RGB_ALL(prim, D_1F800000.cells.words[1], D_1F800000.cells.words[1], D_1F800000.cells.words[1]);
     GFX_AddPrim(3, sizeof(POLY_G4));
-    GFX_AddDitheredDrawMode(3, getTPage(0, 0, 320, 256));
+    GFX_AddDitheredDrawMode(3, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256));
 }
 
 MATCH void func_801F07E8(void) {

@@ -147,7 +147,7 @@ block_15:
     val5  = 0;
 block_16:
     val11->clut  = val10;
-    val11->tpage = GetTPage(0, 1, 960, val5);
+    val11->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 960, val5);
     GFX_AddPrim(1U, sizeof(POLY_FT4));
     return val12 + 1;
 }

@@ -9,7 +9,7 @@ MATCH void func_801F36DC(s16 x, s16 y, s16 radius) {
     s32      other;
     s32      scale;
 
-    GFX_AddDitheredDrawMode(1u, GetTPage(0, 1, 0x3C0, 0) & HALF_MASK);
+    GFX_AddDitheredDrawMode(1u, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
     angle = 0;
     do {
         packet = GFX_BeginPolyG3(1);

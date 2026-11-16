@@ -19,7 +19,7 @@ MATCH void func_801AE2B0(s16 quad_x, s16 quad_y, s32 quad_width, s32 quad_height
     } else {
         shade = 0xFF;
     }
-    GFX_AddDrawMode(getTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y));
+    GFX_AddDrawMode(getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
     prim = (POLY_F4*)g_GfxPrimCursor;
     SetPolyF4(prim);
     SetSemiTrans(prim, 1);

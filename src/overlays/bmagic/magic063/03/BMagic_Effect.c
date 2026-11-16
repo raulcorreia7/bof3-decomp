@@ -229,7 +229,7 @@ MATCH void func_801EFA5C(void) {
     SVECTOR* vec;
     u8       i;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
     Area_AddCellPrim(g_BMagicOrbit->pos.x.fixed, g_BMagicOrbit->pos.y.fixed, 2, sizeof(DR_MODE));
     D_1F800000.cells.halves[5] = g_BMagicOrbit->timer_05 * g_BMagicOrbit->unk_09;
     D_1F800000.cells.halves[6] = g_BMagicOrbit->timer_06 * g_BMagicOrbit->unk_09;

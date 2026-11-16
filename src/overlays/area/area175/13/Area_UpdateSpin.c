@@ -7,7 +7,7 @@ MATCH void Area_UpdateSpin(void) {
     u8         index;
     u8         timer;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 1, 0x380, 0x100), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100), 0);
     GFX_AddPrim(1, sizeof(DR_MODE));
     Area_SetCameraMatrix(scratch);
 
