@@ -76,9 +76,7 @@ MATCH void func_801F88DC(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            Message_StartAreaMessage(0x15);
-            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-            g_SceneState.step_05 = 9;
+            SCENE_MESSAGE_WAIT(0x15, 9);
             break;
         case 9:
             mode = &g_GameStateIndex;

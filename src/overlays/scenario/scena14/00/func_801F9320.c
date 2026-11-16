@@ -111,9 +111,7 @@ MATCH void func_801F9320(void) {
             SYS_SetFlag(g_SceneFlags, 0xF);
             goto clear_step;
         case 20:
-            Message_StartAreaMessage(0x1C);
-            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-            g_SceneState.step_05 = 0x15;
+            SCENE_MESSAGE_WAIT(0x1C, 0x15);
             break;
         case 21:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -132,9 +130,7 @@ MATCH void func_801F9320(void) {
             SND_PauseBGM(g_SndBGMId);
             SND_StartXAStream(2, 1);
             Item_VitalAdd(0xD);
-            Message_StartAreaMessage(0x1D);
-            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-            g_SceneState.step_05 = 0x20;
+            SCENE_MESSAGE_WAIT(0x1D, 0x20);
             break;
         case 32:
             if (SND_IsXAIdle() == 0) {
