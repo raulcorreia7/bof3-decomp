@@ -5,14 +5,14 @@ MATCH u16 Item_GetPrice(ItemCategory category, s32 item_id) {
 
     category_byte = category;
     switch (category_byte & BYTE_MASK) {
-        case ITEM_CAT_ITEM:
+        case ITEM_CATEGORY_ITEM:
         default:
             return *(u16*)(&D_801C8974 + ((item_id & BYTE_MASK) * ITEM_STRIDE));
-        case ITEM_CAT_WEAPON:
+        case ITEM_CATEGORY_WEAPON:
             return *(u16*)(&D_801C90F2 + ((item_id & BYTE_MASK) * WEAPON_STRIDE));
-        case ITEM_CAT_ARMOR:
+        case ITEM_CATEGORY_ARMOR:
             return *(u16*)(&D_801C98B8 + ((item_id & BYTE_MASK) * ARMOR_STRIDE));
-        case ITEM_CAT_ACCESSORY:
+        case ITEM_CATEGORY_ACCESSORY:
             return *(u16*)(&D_801C9E8E + ((item_id & BYTE_MASK) * ACCESSORY_STRIDE));
     }
 }

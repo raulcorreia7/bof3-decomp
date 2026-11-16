@@ -48,7 +48,7 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
             }
             row_shade = shade;
             held      = 1;
-            if (task->unk_0A != ITEM_CAT_VITAL) {
+            if (task->unk_0A != ITEM_CATEGORY_VITAL) {
                 held = *counts;
             }
             if (row == task->flags + scroll_shift || row == task->unk_0C + scroll_shift) {
@@ -71,7 +71,7 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
     length  = Game_ReadCommand(*title);
     title_x = length * 4 - 78;
     UI_DrawText(task->pos.x - title_x, task->pos.y + 7, -(task->unk_09 != 0) & MENU_SHADE_DIM, 16, *title);
-    sprintf(g_UiFormatBuffer, g_MenuInventoryCountFormat, Item_CountHeld(task->unk_0A) & BYTE_MASK, task->unk_0A != ITEM_CAT_VITAL ? INV_SLOTS_PER_CATEGORY : INV_VITAL_ITEM_SLOTS);
+    sprintf(g_UiFormatBuffer, g_MenuInventoryCountFormat, Item_CountHeld(task->unk_0A) & BYTE_MASK, task->unk_0A != ITEM_CATEGORY_VITAL ? INV_SLOTS_PER_CATEGORY : INV_VITAL_ITEM_SLOTS);
     UI_DrawGlyphString(task->pos.x + 85, task->pos.y + 146, -(task->unk_09 != 0) & MENU_SHADE_DIM, g_UiFormatBuffer);
 
     UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->u.list.tabs & MENU_LIST_FLAG_TAB_2) ? g_MenuListTab2OnSprites : g_MenuListTab2OffSprites, 1);
@@ -103,10 +103,10 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
         UI_DrawSprite(task->pos.x + (i + 11) * 8, task->pos.y + 144, 0x1C, 1);
     }
     UI_DrawSprite(task->pos.x + 136, task->pos.y + 144, 0x1D, 1);
-    if (task->unk_0A == ITEM_CAT_VITAL) {
+    if (task->unk_0A == ITEM_CATEGORY_VITAL) {
         UI_DrawSprite(task->pos.x + 8, task->pos.y, 0x32, 1);
         UI_DrawSprite(task->pos.x + 144, task->pos.y, 0x33, 1);
     }
 
-    func_801AFA1C(D_801C893C[task->unk_0A], task->unk_0B, task->pos.x + 144, task->pos.y + 24, 9, task->unk_0A != ITEM_CAT_VITAL ? INV_SLOTS_PER_CATEGORY : INV_VITAL_ITEM_SLOTS, 116);
+    func_801AFA1C(D_801C893C[task->unk_0A], task->unk_0B, task->pos.x + 144, task->pos.y + 24, 9, task->unk_0A != ITEM_CATEGORY_VITAL ? INV_SLOTS_PER_CATEGORY : INV_VITAL_ITEM_SLOTS, 116);
 }

@@ -89,17 +89,17 @@ MATCH void func_801EF408(void) {
 /* func_801EF428 */
 MATCH void BMagic_SetTextItemName(u8 item_id, u8 category) {
     switch (category) {
-        case ITEM_CAT_ITEM:
+        case ITEM_CATEGORY_ITEM:
         default:
             SYS_CopyString(g_TextVariables[0], g_Items[item_id].name, ITEM_NAME_LENGTH);
             break;
-        case ITEM_CAT_WEAPON:
+        case ITEM_CATEGORY_WEAPON:
             SYS_CopyString(g_TextVariables[0], g_Weapons[item_id].header.name, ITEM_NAME_LENGTH);
             break;
-        case ITEM_CAT_ARMOR:
+        case ITEM_CATEGORY_ARMOR:
             SYS_CopyString(g_TextVariables[0], g_Armors[item_id].header.name, ITEM_NAME_LENGTH);
             break;
-        case ITEM_CAT_ACCESSORY:
+        case ITEM_CATEGORY_ACCESSORY:
             SYS_CopyString(g_TextVariables[0], g_Accessories[item_id].header.name, ITEM_NAME_LENGTH);
             break;
     }

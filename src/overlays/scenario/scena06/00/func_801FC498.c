@@ -22,14 +22,14 @@ MATCH void func_801FC498(void) {
                 break;
             }
             stored = &D_80144DF2;
-            if ((u8)Item_Add(ITEM_CAT_WEAPON, *stored + 1, 1, 0) == 0) {
+            if ((u8)Item_Add(ITEM_CATEGORY_WEAPON, *stored + 1, 1, 0) == 0) {
                 *progress       = 0x20;
                 g_ScriptVars[1] = 0;
                 Game_ClearScriptActive();
                 g_SceneState.step_05  = 0;
                 g_SceneState.state_04 = 0;
             } else {
-                strncpy((char*)g_TextVariables[0], (char*)Item_GetRecord(ITEM_CAT_WEAPON, (u8)(*stored + 1)), ITEM_NAME_LENGTH);
+                strncpy((char*)g_TextVariables[0], (char*)Item_GetRecord(ITEM_CATEGORY_WEAPON, (u8)(*stored + 1)), ITEM_NAME_LENGTH);
                 g_TextVariables[0][ITEM_NAME_LENGTH] = 0;
                 MESSAGE_START_WAIT(MSG_148);
                 SYS_SetFlag(g_SceneFlags, 0x22);
@@ -52,14 +52,14 @@ MATCH void func_801FC498(void) {
                 break;
             }
             stored = &D_80144DF5;
-            if ((u8)Item_Add(ITEM_CAT_ARMOR, *stored + 1, 1, 0) == 0) {
+            if ((u8)Item_Add(ITEM_CATEGORY_ARMOR, *stored + 1, 1, 0) == 0) {
                 *progress       = 0x25;
                 g_ScriptVars[1] = 0;
                 Game_ClearScriptActive();
                 g_SceneState.step_05  = 0;
                 g_SceneState.state_04 = 0;
             } else {
-                strncpy((char*)g_TextVariables[1], (char*)Item_GetRecord(ITEM_CAT_ARMOR, (u8)(*stored + 1)), ITEM_NAME_LENGTH);
+                strncpy((char*)g_TextVariables[1], (char*)Item_GetRecord(ITEM_CATEGORY_ARMOR, (u8)(*stored + 1)), ITEM_NAME_LENGTH);
                 g_TextVariables[1][ITEM_NAME_LENGTH] = 0;
                 MESSAGE_START_WAIT(MSG_149);
                 SYS_SetFlag(g_SceneFlags, 0x23);

@@ -182,17 +182,17 @@ MATCH void func_801EF470(u8 item_id, u8 category, s32 y) {
 
     if (g_Task->unk_04 != 0) {
         switch (category) {
-            case ITEM_CAT_ITEM:
+            case ITEM_CATEGORY_ITEM:
             default:
                 record = (u8*)&g_Items[item_id];
                 break;
-            case ITEM_CAT_WEAPON:
+            case ITEM_CATEGORY_WEAPON:
                 record = (u8*)&g_Weapons[item_id];
                 break;
-            case ITEM_CAT_ARMOR:
+            case ITEM_CATEGORY_ARMOR:
                 record = (u8*)&g_Armors[item_id];
                 break;
-            case ITEM_CAT_ACCESSORY:
+            case ITEM_CATEGORY_ACCESSORY:
                 record = (u8*)&g_Accessories[item_id];
                 break;
         }

@@ -6,16 +6,16 @@
  */
 MATCH u8* Item_GetRecord(s32 category, s32 item) {
     switch (category & BYTE_MASK) {
-        case ITEM_CAT_ITEM:
+        case ITEM_CATEGORY_ITEM:
         default:
             return (u8*)&g_Items[item & BYTE_MASK];
-        case ITEM_CAT_WEAPON:
+        case ITEM_CATEGORY_WEAPON:
             return (u8*)&g_Weapons[item & BYTE_MASK];
-        case ITEM_CAT_ARMOR:
+        case ITEM_CATEGORY_ARMOR:
             return (u8*)&g_Armors[item & BYTE_MASK];
-        case ITEM_CAT_ACCESSORY:
+        case ITEM_CATEGORY_ACCESSORY:
             return (u8*)&g_Accessories[item & BYTE_MASK];
-        case ITEM_CAT_VITAL:
+        case ITEM_CATEGORY_VITAL:
             return (u8*)&g_VitalItems[item & BYTE_MASK];
     }
 }

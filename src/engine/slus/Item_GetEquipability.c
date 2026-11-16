@@ -5,14 +5,14 @@
  * flags and type bytes of the same rows. */
 MATCH u8 Item_GetEquipability(u8 category, u8 item) {
     switch (category) {
-        case ITEM_CAT_WEAPON:
+        case ITEM_CATEGORY_WEAPON:
             return D_801C90E8[(item & BYTE_MASK) * 0x18];
-        case ITEM_CAT_ARMOR:
+        case ITEM_CATEGORY_ARMOR:
             return D_801C98B0[(item & BYTE_MASK) * 0x16];
-        case ITEM_CAT_ACCESSORY:
+        case ITEM_CATEGORY_ACCESSORY:
             return D_801C9E88[(item & BYTE_MASK) * 0x14];
-        case ITEM_CAT_ITEM:
-        case ITEM_CAT_VITAL:
+        case ITEM_CATEGORY_ITEM:
+        case ITEM_CATEGORY_VITAL:
         default:
             return 0xFF;
     }

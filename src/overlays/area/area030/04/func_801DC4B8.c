@@ -7,7 +7,7 @@ MATCH void func_801DC4B8(void) {
     u8* flags;
 
     flags = &g_FishingLure;
-    if (Item_Remove(ITEM_CAT_ACCESSORY, *flags, 1, 0) == 0) {
+    if (Item_Remove(ITEM_CATEGORY_ACCESSORY, *flags, 1, 0) == 0) {
         *flags           = 0;
         g_FishingLureQty = 0;
     }

@@ -29,12 +29,12 @@ MATCH s32 PlChar_ProbeCellSpawn(s16 x, s16 y) {
     }
     if (cell == 0xF8) {
         PlChar_SpawnActor(0, x, y);
-        record = Item_GetRecord(ITEM_CAT_ITEM, ITEM_HORSERADISH);
+        record = Item_GetRecord(ITEM_CATEGORY_ITEM, ITEM_HORSERADISH);
         for (i = 0; i < 12; i++) {
             g_TextVariables[0][i] = record[i];
         }
         D_801490E4[0] = 0;
-        if (Item_Add(ITEM_CAT_ITEM, ITEM_HORSERADISH, 1, 0) & BYTE_MASK) {
+        if (Item_Add(ITEM_CATEGORY_ITEM, ITEM_HORSERADISH, 1, 0) & BYTE_MASK) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
             Message_Request(MSG_002);
         } else {

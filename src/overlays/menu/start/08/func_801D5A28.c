@@ -54,27 +54,27 @@ MATCH void func_801D5A28(void) {
     switch (task->unk_0A) {
         case EQUIP_SLOT_WEAPON:
         default:
-            group_index = ITEM_CAT_WEAPON;
+            group_index = ITEM_CATEGORY_WEAPON;
             choice      = &record->equip.weapon;
             break;
         case EQUIP_SLOT_SHIELD:
-            group_index = ITEM_CAT_ARMOR;
+            group_index = ITEM_CATEGORY_ARMOR;
             choice      = &record->equip.shield;
             break;
         case EQUIP_SLOT_HELMET:
-            group_index = ITEM_CAT_ARMOR;
+            group_index = ITEM_CATEGORY_ARMOR;
             choice      = &record->equip.helmet;
             break;
         case EQUIP_SLOT_ARMOR:
-            group_index = ITEM_CAT_ARMOR;
+            group_index = ITEM_CATEGORY_ARMOR;
             choice      = &record->equip.armor;
             break;
         case EQUIP_SLOT_ACCESSORY_1:
-            group_index = ITEM_CAT_ACCESSORY;
+            group_index = ITEM_CATEGORY_ACCESSORY;
             choice      = &record->equip.accessories[0];
             break;
         case EQUIP_SLOT_ACCESSORY_2:
-            group_index = ITEM_CAT_ACCESSORY;
+            group_index = ITEM_CATEGORY_ACCESSORY;
             choice      = &record->equip.accessories[1];
             break;
     }

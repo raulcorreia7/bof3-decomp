@@ -25,7 +25,7 @@ MATCH s32 func_801F2E48(void) {
             if (SYS_TestFlag(flags, 0x96) != 0) {
                 goto set_msg5_result1;
             }
-            Item_Add(ITEM_CAT_ACCESSORY, ACCESSORY_DING_FROG, 3, 0);
+            Item_Add(ITEM_CATEGORY_ACCESSORY, ACCESSORY_DING_FROG, 3, 0);
             SYS_SetFlag(flags, 0x96);
             message = 2;
             result  = 5;
@@ -39,12 +39,12 @@ MATCH s32 func_801F2E48(void) {
                 message = 5;
                 goto set_result_1;
             }
-            Item_Add(ITEM_CAT_ACCESSORY, ACCESSORY_MASTERS_ROD, 1, 0);
+            Item_Add(ITEM_CATEGORY_ACCESSORY, ACCESSORY_MASTERS_ROD, 1, 0);
             SYS_SetFlag(flags, 0x97);
             message = 6;
             result  = 5;
             if (SYS_TestFlag(flags, 0x96) == 0) {
-                Item_Add(ITEM_CAT_ACCESSORY, ACCESSORY_DING_FROG, 3, 0);
+                Item_Add(ITEM_CATEGORY_ACCESSORY, ACCESSORY_DING_FROG, 3, 0);
                 SYS_SetFlag(flags, 0x96);
                 message = 3;
             }
@@ -62,11 +62,11 @@ MATCH s32 func_801F2E48(void) {
                 u8* flags = g_SceneEventFlags;
 
                 if (SYS_TestFlag(flags, 0x97) == 0) {
-                    Item_Add(ITEM_CAT_ACCESSORY, ACCESSORY_MASTERS_ROD, 1, 0);
+                    Item_Add(ITEM_CATEGORY_ACCESSORY, ACCESSORY_MASTERS_ROD, 1, 0);
                     SYS_SetFlag(flags, 0x97);
                     message = 7;
                     if (SYS_TestFlag(flags, 0x96) == 0) {
-                        Item_Add(ITEM_CAT_ACCESSORY, ACCESSORY_DING_FROG, 3, 0);
+                        Item_Add(ITEM_CATEGORY_ACCESSORY, ACCESSORY_DING_FROG, 3, 0);
                         SYS_SetFlag(flags, 0x96);
                         message = 4;
                     }

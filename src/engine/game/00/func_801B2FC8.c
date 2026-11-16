@@ -6,7 +6,7 @@ typedef struct GameSelRecord {
     u8 pad_00[4];
     u8 index_04; /* bit index into the D_80145004 marks */
     u8 unk_05;
-    u8 kind_06; /* ITEM_CAT_* of the selected record */
+    u8 kind_06; /* ITEM_CATEGORY_* of the selected record */
 } GameSelRecord;
 
 MATCH void func_801B2FC8(void) {

@@ -21,16 +21,16 @@ MATCH void Menu_DrawEquipChoiceWindow(MenuPanelTask* task) {
     switch (task->unk_09) {
         case EQUIP_SLOT_WEAPON:
         default:
-            task->unk_08 = ITEM_CAT_WEAPON;
+            task->unk_08 = ITEM_CATEGORY_WEAPON;
             break;
         case EQUIP_SLOT_SHIELD:
         case EQUIP_SLOT_HELMET:
         case EQUIP_SLOT_ARMOR:
-            task->unk_08 = ITEM_CAT_ARMOR;
+            task->unk_08 = ITEM_CATEGORY_ARMOR;
             break;
         case EQUIP_SLOT_ACCESSORY_1:
         case EQUIP_SLOT_ACCESSORY_2:
-            task->unk_08 = ITEM_CAT_ACCESSORY;
+            task->unk_08 = ITEM_CATEGORY_ACCESSORY;
             break;
     }
 
@@ -40,7 +40,7 @@ MATCH void Menu_DrawEquipChoiceWindow(MenuPanelTask* task) {
     counts  = D_801C8950[task->unk_08];
     for (slot = 0; slot < INV_SLOTS_PER_CATEGORY; slot++) {
         if ((Item_PassesTest(ITEM_TEST_EQUIPPABLE, g_CharSlot[g_PartyBattleOrder[task->unk_0C]], task->unk_08, *ids) & BYTE_MASK) &&
-            (task->unk_08 != ITEM_CAT_ARMOR || task->unk_09 - EQUIP_SLOT_SHIELD == (Item_GetIcon(ITEM_CAT_ARMOR, *ids) & BYTE_MASK) - ITEM_TYPE_SHIELD)) {
+            (task->unk_08 != ITEM_CATEGORY_ARMOR || task->unk_09 - EQUIP_SLOT_SHIELD == (Item_GetIcon(ITEM_CATEGORY_ARMOR, *ids) & BYTE_MASK) - ITEM_TYPE_SHIELD)) {
             choices++;
             g_MenuEquipChoiceIds[i]    = *ids;
             g_MenuEquipChoiceCounts[i] = *counts;

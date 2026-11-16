@@ -15,7 +15,7 @@
  * array's vital-item label is inferred from its position and the category-4
  * vital-item code.
  *
- * Category codes match ITEM_CAT_* in game/item.h.
+ * Category codes match ITEM_CATEGORY_* in game/item.h.
  */
 
 #define INV_SLOTS_PER_CATEGORY  128
@@ -24,7 +24,7 @@
 
 #define INV_VITAL_ITEM_SLOTS    32
 
-/* One id row and one count row per ITEM_CAT_ITEM..ITEM_CAT_ACCESSORY. */
+/* One id row and one count row per ITEM_CATEGORY_ITEM..ITEM_CATEGORY_ACCESSORY. */
 /* D_8014504C */
 extern u8 g_InventoryIds[4][INV_SLOTS_PER_CATEGORY];
 /* D_8014524C */

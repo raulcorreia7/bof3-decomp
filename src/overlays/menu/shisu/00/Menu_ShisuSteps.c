@@ -85,10 +85,10 @@ MATCH void func_801D0FAC(void) {
 
 MATCH void func_801D1018(void) {
     if (g_ShisuIngredients.rounds != 0) {
-        Item_Remove(ITEM_CAT_ITEM, ITEM_MACKEREL, g_ShisuIngredients.used[0], 0);
-        Item_Remove(ITEM_CAT_ITEM, ITEM_SHALY_SEED, g_ShisuIngredients.used[1], 0);
-        Item_Remove(ITEM_CAT_ITEM, ITEM_VINEGAR, g_ShisuIngredients.used[2], 0);
-        Item_Remove(ITEM_CAT_ITEM, ITEM_HORSERADISH, g_ShisuIngredients.used[3], 0);
+        Item_Remove(ITEM_CATEGORY_ITEM, ITEM_MACKEREL, g_ShisuIngredients.used[0], 0);
+        Item_Remove(ITEM_CATEGORY_ITEM, ITEM_SHALY_SEED, g_ShisuIngredients.used[1], 0);
+        Item_Remove(ITEM_CATEGORY_ITEM, ITEM_VINEGAR, g_ShisuIngredients.used[2], 0);
+        Item_Remove(ITEM_CATEGORY_ITEM, ITEM_HORSERADISH, g_ShisuIngredients.used[3], 0);
         g_SceneState.step_05 = 0x14;
         func_801D1EE8();
         if (D_801DA044 >= 0x33) {
@@ -367,10 +367,10 @@ INCLUDE_ASM(func_801D1B58);
 #endif
 
 MATCH void func_801D1CA4(void) {
-    g_ShisuIngredients.held[0] = Item_Count(ITEM_CAT_ITEM, ITEM_MACKEREL, 0);
-    g_ShisuIngredients.held[1] = Item_Count(ITEM_CAT_ITEM, ITEM_SHALY_SEED, 0);
-    g_ShisuIngredients.held[2] = Item_Count(ITEM_CAT_ITEM, ITEM_VINEGAR, 0);
-    g_ShisuIngredients.held[3] = Item_Count(ITEM_CAT_ITEM, ITEM_HORSERADISH, 0);
+    g_ShisuIngredients.held[0] = Item_Count(ITEM_CATEGORY_ITEM, ITEM_MACKEREL, 0);
+    g_ShisuIngredients.held[1] = Item_Count(ITEM_CATEGORY_ITEM, ITEM_SHALY_SEED, 0);
+    g_ShisuIngredients.held[2] = Item_Count(ITEM_CATEGORY_ITEM, ITEM_VINEGAR, 0);
+    g_ShisuIngredients.held[3] = Item_Count(ITEM_CATEGORY_ITEM, ITEM_HORSERADISH, 0);
 }
 
 #ifdef NON_MATCHING

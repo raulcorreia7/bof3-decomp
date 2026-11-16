@@ -11,7 +11,7 @@ MATCH bool Item_PassesTest(u8 test, u8 character_id, u8 category, u8 item_id) {
         case ITEM_TEST_ANY:
             return true;
         case ITEM_TEST_TARGET_BOTH:
-            if (category != ITEM_CAT_ITEM) {
+            if (category != ITEM_CATEGORY_ITEM) {
                 return false;
             }
             index = item_id;
