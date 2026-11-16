@@ -18,9 +18,8 @@ extern Callback      D_801EFCD4[];
 void BMagic_DrawBurnSprites(void);
 
 /* func_801EF6BC */
-extern SVECTOR D_1F800014[];
-void           BMagic_DrawBurnFlameQuads(void);
+void BMagic_DrawBurnFlameQuads(void);
 /* func_801EFA1C */
-void           BMagic_DrawBurnFlameTris(void);
+void BMagic_DrawBurnFlameTris(void);
 
 #endif

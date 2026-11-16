@@ -27,6 +27,9 @@ typedef struct ScratchPadVectors {
 ASSERT_SIZE(ScratchPadVectors, SCRATCH_PAD_VECTOR_VIEW_SIZE);
 ASSERT_OFFSET(ScratchPadVectors, vectors, 0x14);
 
+/* The four vectors as the symbol the area, bmagic and scenario code names directly. */
+extern SVECTOR D_1F800014[4];
+
 /* Battle overlays: bytes 0-2 stage the current local-work byte 9 (func_801E6A54), byte 0 advances the
  * slot index (written by func_801DE43C, read by func_801DE754). Byte 0x03 has no battle access yet. */
 typedef struct ScratchPadBattle {
@@ -140,6 +143,8 @@ extern u8  D_1F800001;
  * store before rcos loads it back. */
 extern s16 D_1F800006;
 extern s16 D_1F800034[2];
+extern s16 D_1F800016;
+extern s16 D_1F800018;
 /* The area emit slots: the pair extent and its mode. */
 extern s16 D_1F800038;
 extern s16 D_1F80003A;
