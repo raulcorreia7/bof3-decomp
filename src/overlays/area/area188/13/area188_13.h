@@ -8,6 +8,7 @@
 #include "area/spad.h"
 
 #include "shared/WorldSpin.h"
+#include "overlays/area/Area_DrawDimQuad.h"
 
 /* The per-scene y limit bytes the walk step reads, in 16.16 units. */
 extern u8 D_801F688C[];
@@ -68,14 +69,7 @@ static inline void Area_DrawFadeQuad(void) {
         }
     }
 
-    GFX_AddDitheredDrawMode(6U, GetTPage(2, 2, 320, 320) & HALF_MASK);
-    prim = (POLY_G4*)g_GfxPrimCursor;
-    SetPolyG4(prim);
-    setRGB0(prim, prim->r1 = D_801F68A0, prim->g1 = 0, prim->b1 = 0);
-    setRGB2(prim, prim->r3 = D_801F68A0, prim->g3 = 0, prim->b3 = 0);
-    setXY4(prim, 0, 0, SCREEN_WIDTH, 0, 0, 320, SCREEN_WIDTH, 320);
-    SetSemiTrans((POLY_G4*)g_GfxPrimCursor, 1);
-    GFX_AddPrim(2U, sizeof(POLY_G4));
+    AREA_DRAW_DIM_QUAD(2, D_801F68A0);
 }
 
 /* Restarts the area task at mode 1 and resets the fade colour and its ramp index. */

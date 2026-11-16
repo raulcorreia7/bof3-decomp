@@ -16,7 +16,6 @@
 #define SCN_EFFECT         ((SceneEffect*)g_Task)
 #define SPAD_ROW           g_Task
 
-#define g_PartyX           (*(u32*)&g_PartyX)
 #define g_PartyY           ((u32*)&g_PartyY)
 
 /* g_ScriptVars[2] in func_801FA7D8: retail loads every access through its own `lui $r, %hi(D_80146866)`; the array
