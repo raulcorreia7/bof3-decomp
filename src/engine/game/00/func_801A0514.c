@@ -26,7 +26,7 @@ MATCH void func_801A0514(void) {
                 goto block_7; /* the slot's state byte is already set */
             }
 
-            if (g_AreaDrawMode != 4) {
+            if (g_AreaDrawMode != GFX_LAYER_BATTLE_SCENE) {
             block_7:
                 {
                     Actor* scratch;
