@@ -37,9 +37,9 @@ MATCH void func_800A4458(void) {
             work->chr.base.agility                 = stat;
             g_Game.members[slot].chr.stats.agility = stat;
 
-            stat                                     = g_Game.members[slot].chr.base.intellect + tpl->intellect;
-            work->chr.base.intellect                 = stat;
-            g_Game.members[slot].chr.stats.intellect = stat;
+            stat                                        = g_Game.members[slot].chr.base.intelligence + tpl->intelligence;
+            work->chr.base.intelligence                 = stat;
+            g_Game.members[slot].chr.stats.intelligence = stat;
 
             res                                           = tpl->resistances[0];
             work->chr.base.resistances[0]                 = res;

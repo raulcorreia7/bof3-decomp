@@ -1,7 +1,7 @@
 #include "battle_15.h"
 
 /* Rescales one battler's stats: player slots defer to the player
- * stat routine; enemy slots scale their power, defense, agility and intellect and their
+ * stat routine; enemy slots scale their power, defense, agility and intelligence and their
  * reprisal, critical, evasion and accuracy from the base stats by the stat modifier bytes,
  * copy the resistances and apply the row's doubling and zeroing flags.
  */
@@ -15,7 +15,7 @@ MATCH void Battle_RescaleStats(u8 slot) {
         g_BattleEnemyBattlers[slot].stats.power           = func_801DE0AC(g_BattleEnemyBattlers[slot].base.power, (g_BattleEnemyBattlers[slot].stat_multipliers[0] * 2) + 100);
         g_BattleEnemyBattlers[slot].stats.defense         = func_801DE0AC(g_BattleEnemyBattlers[slot].base.defense, (g_BattleEnemyBattlers[slot].stat_multipliers[1] * 2) + 100);
         g_BattleEnemyBattlers[slot].stats.agility         = func_801DE0AC(g_BattleEnemyBattlers[slot].base.agility, (g_BattleEnemyBattlers[slot].stat_multipliers[2] * 2) + 100);
-        g_BattleEnemyBattlers[slot].stats.intellect       = func_801DE0AC(g_BattleEnemyBattlers[slot].base.intellect, (g_BattleEnemyBattlers[slot].stat_multipliers[3] * 2) + 100);
+        g_BattleEnemyBattlers[slot].stats.intelligence    = func_801DE0AC(g_BattleEnemyBattlers[slot].base.intelligence, (g_BattleEnemyBattlers[slot].stat_multipliers[3] * 2) + 100);
         g_BattleEnemyBattlers[slot].stats.reprisal_chance = func_801DE144(g_BattleEnemyBattlers[slot].base.reprisal_chance, (g_BattleEnemyBattlers[slot].stat_multipliers[4] * 2) + 100);
         g_BattleEnemyBattlers[slot].stats.critical_chance = func_801DE144(g_BattleEnemyBattlers[slot].base.critical_chance, (g_BattleEnemyBattlers[slot].stat_multipliers[5] * 2) + 100);
         g_BattleEnemyBattlers[slot].stats.evasion         = func_801DE144(g_BattleEnemyBattlers[slot].base.evasion, (g_BattleEnemyBattlers[slot].stat_multipliers[6] * 2) + 100);

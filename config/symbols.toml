@@ -2866,7 +2866,7 @@ D_801EC3A4 = { addr = 0x801EC3A4, type = "u32", alias = true, source = "The slot
 
 ["emi/etc/bate/00"]
 g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
-g_MenuStatFormat = { addr = 0x801D0C20, source = "Format string of the four stat values of the Bate menu: Menu_DrawStatPanel prints power, defense, intellect and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
+g_MenuStatFormat = { addr = 0x801D0C20, source = "Format string of the four stat values of the Bate menu: Menu_DrawStatPanel prints power, defense, intelligence and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
 g_MenuExperienceFormat = { addr = 0x801D0C34, source = "Format of the experience panel value: the character's experience, or the experience of the next level." }
 g_MenuExperienceBlank = { addr = 0x801D0C38, source = "Dashes the experience panel prints in place of the value when it is -1." }
 g_MenuZennyFormat = { addr = 0x801D0C44, source = "Format string of the Bate menu amounts: Menu_DrawZennyWindow prints the zenny caption value through it and Menu_DrawItemRow prints the character experience and the experience of the next level." }
@@ -2887,7 +2887,7 @@ Menu_ResetPanels = { addr = 0x801D0E04, type = "func", source = "resets menu pan
 Menu_StartFadeIn = { addr = 0x801D0EB0, type = "func", source = "sets fast fade-in mode and advances the menu step state" }
 Menu_ApplyEquipment = { addr = 0x801D1E8C, type = "func", source = "Applies the equipment menu's trial set to g_Characters[7]: for each slot whose chosen item changed it removes the new item from the inventory, returns the old one and stores the new one, then rebuilds the record's stats." }
 Menu_DrawCharacterWindow = { addr = 0x801D27C4, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
-Menu_DrawStatPanel = { addr = 0x801D2C2C, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intellect and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
+Menu_DrawStatPanel = { addr = 0x801D2C2C, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intelligence and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
 Shop_DrawEquipment = { addr = 0x801D2F64, type = "func", source = "Draws the equipment panel of character record_index in the Bate menu: the filled panel, the EQUIP caption, the emblem and six rows with the weapon, shield, helmet, armor and two accessories, each with its row icon." }
 Menu_DrawCursorFrame = { addr = 0x801D3384, type = "func", source = "Draws the cursor frame of a menu cell at x, y as one LINE_F3 and one LINE_F4. The colour is white, or blinks with g_FrameCount bit 3 when color is nonzero, and each party slot bit set in frame_mode lights one colour channel." }
 Menu_DrawPortrait = { addr = 0x801D3518, type = "func", source = "Draws a 40x48 character portrait from g_MenuPortraitAtlas record atlas_index at sprite_x, sprite_y, shaded dark when shade_mode is nonzero." }
@@ -2907,7 +2907,7 @@ Item_GetPrice = { addr = 0x801D4F1C, type = "func", source = "Returns the u16 pr
 Char_GetExpForLevel = { addr = 0x801D4FD0, type = "func", source = "Returns the experience a character needs to reach a level: the sum of the first level u16 entries of the character row of g_LevelGrowth, or -1 from level 100." }
 Char_GetExpProgress = { addr = 0x801D504C, type = "func", source = "Returns how far exp is between the experience of level and of level + 1, scaled to 0x18 steps (0 when both levels need the same experience)." }
 Menu_DrawHeaderBar = { addr = 0x801D50E8, type = "func", source = "Draws the window of a menu header bar from x, y, width and height with the window style g_WindowStyle." }
-Menu_DrawEquipCompareWindow = { addr = 0x801D5634, type = "func", source = "Draws the equipment compare window: the party member's power, defense, intellect and agility, the values the equipment in patch would give with an icon chosen by each compare flag, and the six equipment slots with the task's two selected slots raised." }
+Menu_DrawEquipCompareWindow = { addr = 0x801D5634, type = "func", source = "Draws the equipment compare window: the party member's power, defense, intelligence and agility, the values the equipment in patch would give with an icon chosen by each compare flag, and the six equipment slots with the task's two selected slots raised." }
 Menu_DrawRowIcons = { addr = 0x801D5E90, type = "func", source = "Draws the party row at the position in row_record (u16 x at byte 4, y at byte 6): its window, then Menu_DrawEquipment and Menu_DrawItemRow for the character at D_80145FCC[row_record[0xC]]." }
 Menu_DrawEquipStatWindow = { addr = 0x801D5F48, type = "func", source = "Draws the power, defense and agility rows a character would have with an item equipped in a slot, and greys the window when the character cannot equip it." }
 Menu_DrawClutStrip = { addr = 0x801D627C, type = "func", source = "Draws the five-row strip of 0x20-wide sprite cells with the clut at index clut_index of the four strip palettes, covering the screen height of 240." }
@@ -2949,7 +2949,7 @@ g_MenuEquipStatSprites = { addr = 0x801D89E0, source = "Sprite run of the equip 
 g_SaveSlotFrameSprites = { addr = 0x801D8A3C, source = "Sprite run of a save slot row frame." }
 g_MenuLabelPower = { addr = 0x801D8B28, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
 g_MenuLabelDefense = { addr = 0x801D8B2C, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
-g_MenuLabelIntellect = { addr = 0x801D8B30, source = "Text of the intellect label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
+g_MenuLabelIntelligence = { addr = 0x801D8B30, source = "Text of the intelligence label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
 g_MenuLabelAgility = { addr = 0x801D8B34, source = "Text of the agility label, drawn by Menu_DrawStatPanel at the second column of the second stat row." }
 g_MenuEquipRowIcons = { addr = 0x801D8B38, source = "Icon index of each of the six equipment rows (weapon, shield, helmet, armor, two accessories) drawn by Shop_DrawEquipment." }
 g_MenuLabelEquip = { addr = 0x801D8B40, source = "Text of the EQUIP caption of the equipment panel, drawn by Shop_DrawEquipment." }
@@ -3455,7 +3455,7 @@ UI_UpdateWindowFade = { addr = 0x801D1B00, type = "func", source = "Advances the
 
 ["emi/etc/shisu/00"]
 g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
-g_MenuStatFormat = { addr = 0x801D0C04, source = "Format string of the four stat values of the menu: Menu_DrawStatPanel prints power, defense, intellect and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
+g_MenuStatFormat = { addr = 0x801D0C04, source = "Format string of the four stat values of the menu: Menu_DrawStatPanel prints power, defense, intelligence and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
 g_MenuCurrentValueFormat = { addr = 0x801D0C08, alias = true, source = "Format of the current value of an HP or AP pair: Menu_DrawCharacterWindow prints hp or ap through it, then the maximum through g_MenuMaxValueFormat. The shop overlay owns the same string at the same address of its own payload." }
 g_MenuMaxValueFormat = { addr = 0x801D0C10, alias = true, source = "Format of the maximum value of an HP or AP pair, printed after the current value (g_MenuCurrentValueFormat)." }
 g_MenuZennyFormat = { addr = 0x801D0C28, source = "Format string of the menu amounts: Menu_DrawZennyWindow prints the zenny caption value through it and Menu_DrawItemRow prints the character experience and the experience of the next level." }
@@ -3478,7 +3478,7 @@ Menu_StatusCommandsPanel = { addr = 0x801D3164, type = "func", source = "Entry a
 Menu_SetPosY = { addr = 0x801D320C, type = "func", source = "the body stores into g_MenuCurrentPanel->pos.y" }
 Menu_SetPosX = { addr = 0x801D32E0, type = "func", source = "the body stores into g_MenuCurrentPanel->pos.x" }
 Menu_DrawCharacterWindow = { addr = 0x801D376C, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
-Menu_DrawStatPanel = { addr = 0x801D3BD4, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intellect and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
+Menu_DrawStatPanel = { addr = 0x801D3BD4, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intelligence and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
 Shop_DrawEquipment = { addr = 0x801D3F0C, type = "func", source = "Draws the equipment panel of character record_index: the filled panel, the EQUIP caption, the emblem and six rows with the weapon, shield, helmet, armor and two accessories, each with its row icon." }
 Menu_DrawCursorFrame = { addr = 0x801D432C, type = "func", source = "Draws the cursor frame of a menu cell at x, y as one LINE_F3 and one LINE_F4. The colour is white, or blinks with g_FrameCount bit 3 when color is nonzero, and each party slot bit set in frame_mode lights one colour channel." }
 Menu_DrawPortrait = { addr = 0x801D44C0, type = "func", source = "Draws a 40x48 character portrait from g_MenuPortraitAtlas record atlas_index at sprite_x, sprite_y, shaded dark when shade_mode is nonzero." }
@@ -3498,7 +3498,7 @@ Item_GetPrice = { addr = 0x801D5EC4, type = "func", source = "Returns the u16 pr
 Char_GetExpForLevel = { addr = 0x801D5F78, type = "func", source = "Returns the experience a character needs to reach a level: the sum of the first level u16 entries of the character row of g_LevelGrowth, or -1 from level 100." }
 Char_GetExpProgress = { addr = 0x801D5FF4, type = "func", source = "Returns how far exp is between the experience of level and of level + 1, scaled to 0x18 steps (0 when both levels need the same experience)." }
 Menu_DrawHeaderBar = { addr = 0x801D6090, type = "func", source = "Draws the window of a menu header bar from x, y, width and height with the window style g_WindowStyle." }
-Menu_DrawEquipCompareWindow = { addr = 0x801D65DC, type = "func", source = "Draws the equipment compare window: the party member's power, defense, intellect and agility, the values the equipment in patch would give with an icon chosen by each compare flag, and the six equipment slots with the task's two selected slots raised." }
+Menu_DrawEquipCompareWindow = { addr = 0x801D65DC, type = "func", source = "Draws the equipment compare window: the party member's power, defense, intelligence and agility, the values the equipment in patch would give with an icon chosen by each compare flag, and the six equipment slots with the task's two selected slots raised." }
 Menu_DrawRowIcons = { addr = 0x801D6E38, type = "func", source = "Draws the party row at the position in row_record (u16 x at byte 4, y at byte 6): its window, then Menu_DrawEquipment and Menu_DrawItemRow for the character at D_80145FCC[row_record[0xC]]." }
 Menu_DrawEquipStatWindow = { addr = 0x801D6EF0, type = "func", source = "Draws the power, defense and agility rows a character would have with an item equipped in a slot, and greys the window when the character cannot equip it." }
 Menu_DrawClutStrip = { addr = 0x801D7224, type = "func", source = "Draws the five-row CLUT strip of 0x20-wide sprite cells; the shared body with the shop and start overlays, bound to the shisu tables." }
@@ -3542,7 +3542,7 @@ D_801D9B3C = { addr = 0x801D9B3C, alias = true, source = "The poison label text,
 D_801D9B44 = { addr = 0x801D9B44, alias = true, source = "The confusion label text, drawn by Menu_DrawCharacterWindow beside the name of a confused character; the same label the shop overlay owns as D_801E581C." }
 g_MenuLabelPower = { addr = 0x801D9B4C, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
 g_MenuLabelDefense = { addr = 0x801D9B50, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
-g_MenuLabelIntellect = { addr = 0x801D9B54, source = "Text of the intellect label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
+g_MenuLabelIntelligence = { addr = 0x801D9B54, source = "Text of the intelligence label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
 g_MenuLabelAgility = { addr = 0x801D9B58, source = "Text of the agility label, drawn by Menu_DrawStatPanel at the second column of the second stat row." }
 g_MenuEquipRowIcons = { addr = 0x801D9B5C, source = "Icon index of each of the six equipment rows (weapon, shield, helmet, armor, two accessories) drawn by Shop_DrawEquipment." }
 g_MenuLabelEquip = { addr = 0x801D9B64, source = "Text of the EQUIP caption of the equipment panel, drawn by Shop_DrawEquipment." }
@@ -3588,7 +3588,7 @@ g_SaveBuffer = { addr = 0x800C1A00, source = "The resident save image in memory;
 jtbl_801D0C04 = { addr = 0x801D0C04, type = "Callback", source = "The switch table of Shop_Equip: the jump targets of its jr dispatch." }
 jtbl_801D0C3C = { addr = 0x801D0C3C, type = "Callback", source = "The switch table of func_801D543C: the jump targets of its jr dispatch." }
 jtbl_801D0C7C = { addr = 0x801D0C7C, type = "Callback", source = "The switch table of func_801D5E88: the jump targets of its jr dispatch." }
-g_MenuStatFormat = { addr = 0x801D0CE4, source = "Format string of the four stat values of the menu: Menu_DrawStatPanel prints power, defense, intellect and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
+g_MenuStatFormat = { addr = 0x801D0CE4, source = "Format string of the four stat values of the menu: Menu_DrawStatPanel prints power, defense, intelligence and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
 g_MenuCurrentValueFormat = { addr = 0x801D0CE8, source = "Format of the current value of an HP or AP pair: the character window prints hp or ap through it, then the maximum through g_MenuMaxValueFormat." }
 g_MenuMaxValueFormat = { addr = 0x801D0CF0, source = "Format of the maximum value of an HP or AP pair, printed after the current value (g_MenuCurrentValueFormat)." }
 g_MenuExperienceFormat = { addr = 0x801D0CF8, source = "Format of the experience panel value: the character's experience, or the experience of the next level." }
@@ -3616,7 +3616,7 @@ SAVE_BuildSlotImage = { addr = 0x801D69E0, type = "func", source = "Builds the s
 SAVE_FormatSlot = { addr = 0x801D7080, type = "func", source = "Formats the play time and leader level line of a save slot." }
 Menu_SwapBytes = { addr = 0x801D7E08, type = "func", source = "Swaps the two bytes that two pointers address; the shop callers pass entries of the party order D_80144F5A and of D_801E6244." }
 Menu_DrawCharacterWindow = { addr = 0x801D826C, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
-Menu_DrawStatPanel = { addr = 0x801D86D4, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intellect and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
+Menu_DrawStatPanel = { addr = 0x801D86D4, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intelligence and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
 Shop_DrawEquipment = { addr = 0x801D8A0C, type = "func", source = "Draws the equipment panel of character record_index: the filled panel, the EQUIP caption, the emblem and six rows with the weapon, shield, helmet, armor and two accessories, each with its row icon." }
 Menu_DrawCursorFrame = { addr = 0x801D8E2C, type = "func", source = "Draws the cursor frame of a menu cell at x, y as one LINE_F3 and one LINE_F4. The colour is white, or blinks with g_FrameCount bit 3 when color is nonzero, and each party slot bit set in frame_mode lights one colour channel." }
 Menu_DrawPortrait = { addr = 0x801D8FC0, type = "func", source = "Draws a 40x48 character portrait from g_MenuPortraitAtlas record atlas_index at sprite_x, sprite_y, shaded dark when shade_mode is nonzero." }
@@ -3636,7 +3636,7 @@ Item_GetPrice = { addr = 0x801DA9C4, type = "func", source = "Returns the u16 pr
 Char_GetExpForLevel = { addr = 0x801DAA78, type = "func", source = "Returns the experience a character needs to reach a level: the sum of the first level u16 entries of the character row of g_LevelGrowth, or -1 from level 100." }
 Char_GetExpProgress = { addr = 0x801DAAF4, type = "func", source = "Returns how far exp is between the experience of level and of level + 1, scaled to 0x18 steps (0 when both levels need the same experience)." }
 Menu_DrawHeaderBar = { addr = 0x801DAB90, type = "func", source = "Draws the window of a menu header bar from x, y, width and height with the window style g_WindowStyle." }
-Menu_DrawEquipCompareWindow = { addr = 0x801DB0DC, type = "func", source = "Draws the equipment compare window: the party member's power, defense, intellect and agility, the values the equipment in patch would give with an icon chosen by each compare flag, and the six equipment slots with the task's two selected slots raised." }
+Menu_DrawEquipCompareWindow = { addr = 0x801DB0DC, type = "func", source = "Draws the equipment compare window: the party member's power, defense, intelligence and agility, the values the equipment in patch would give with an icon chosen by each compare flag, and the six equipment slots with the task's two selected slots raised." }
 Menu_DrawRowIcons = { addr = 0x801DB938, type = "func", source = "Draws the party row at the position in row_record (u16 x at byte 4, y at byte 6): its window, then Menu_DrawEquipment and Menu_DrawItemRow for the character at D_80145FCC[row_record[0xC]]." }
 Menu_DrawEquipStatWindow = { addr = 0x801DB9F0, type = "func", source = "Draws the power, defense and agility rows a character would have with an item equipped in a slot, and greys the window when the character cannot equip it." }
 Menu_DrawClutStrip = { addr = 0x801DBD24, type = "func", source = "Draws the five-row strip of 0x20-wide sprite cells with the clut at index clut_index of the four strip palettes, covering the screen height of 240." }
@@ -3706,7 +3706,7 @@ g_MenuEquipStatSprites = { addr = 0x801E56DC, source = "Sprite run of the equip 
 g_SaveSlotFrameSprites = { addr = 0x801E5738, source = "Sprite run of a save slot row frame." }
 g_MenuLabelPower = { addr = 0x801E5824, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
 g_MenuLabelDefense = { addr = 0x801E5828, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
-g_MenuLabelIntellect = { addr = 0x801E582C, source = "Text of the intellect label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
+g_MenuLabelIntelligence = { addr = 0x801E582C, source = "Text of the intelligence label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
 g_MenuLabelAgility = { addr = 0x801E5830, source = "Text of the agility label, drawn by Menu_DrawStatPanel at the second column of the second stat row." }
 g_MenuEquipRowIcons = { addr = 0x801E5834, source = "Icon index of each of the six equipment rows (weapon, shield, helmet, armor, two accessories) drawn by Shop_DrawEquipment." }
 g_MenuLabelEquip = { addr = 0x801E583C, source = "Text of the EQUIP caption of the equipment panel, drawn by Shop_DrawEquipment." }
@@ -3776,7 +3776,7 @@ g_MasterMenuOverlayHeader = { addr = 0x801D0C00, source = "The master menu overl
 g_MenuCurrentValueFormat = { addr = 0x801D0C08, source = "Format of the current value of an HP or AP pair printed in a party row (Menu_DrawMasterPartyRow); the maximum follows through g_MenuMaxValueFormat." }
 g_MenuMaxValueFormat = { addr = 0x801D0C10, source = "Format of the maximum value of an HP or AP pair, printed after the current value (g_MenuCurrentValueFormat)." }
 Menu_ResetMasterPanel = { addr = 0x801D0C18, type = "func", source = "Clears the master panel step, sub-step, lock and scroll bytes D_801D4285 to D_801D4289; the game overlay calls it after streaming slot 0x267." }
-Menu_DrawStatPanel = { addr = 0x801D1444, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intellect and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
+Menu_DrawStatPanel = { addr = 0x801D1444, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intelligence and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
 Menu_DrawMasterPartyRow = { addr = 0x801D177C, type = "func", source = "Draws one party row of the master menu: portrait, name, level and experience line, with the poison and confusion tags." }
 Menu_DrawExperienceLine = { addr = 0x801D1B28, type = "func", source = "Draws the red experience line of a character from x, y: its length is the experience gained since level, scaled by 57 over the span to the next level, and is zero when both levels need the same experience." }
 Char_GetExpForLevel = { addr = 0x801D1C44, type = "func", source = "Returns the experience a character needs to reach a level: the sum of the first level u16 entries of the character row of g_LevelGrowth, or -1 from level 100." }
@@ -3790,7 +3790,7 @@ Master_StartFarewell = { addr = 0x801D2B64, type = "func", source = "Starts the 
 Menu_ApplyMasterMode = { addr = 0x801D3ED0, type = "func", source = "Writes the actor mode g_MenuMasterActorModes[g_SceneEventSelection] into the header of g_Actors[g_ScriptVars[3]] and closes the panel." }
 g_MenuLabelPower = { addr = 0x801D4038, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
 g_MenuLabelDefense = { addr = 0x801D403C, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
-g_MenuLabelIntellect = { addr = 0x801D4040, source = "Text of the intellect label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
+g_MenuLabelIntelligence = { addr = 0x801D4040, source = "Text of the intelligence label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
 g_MenuLabelAgility = { addr = 0x801D4044, source = "Text of the agility label, drawn by Menu_DrawStatPanel at the second column of the second stat row." }
 g_MenuLabelPoison = { addr = 0x801D4048, source = "Menu_DrawMasterPartyRow draws it for STATUS_POISONED; its text is Pois" }
 g_MenuLabelConfusion = { addr = 0x801D4050, source = "Menu_DrawMasterPartyRow draws it for STATUS_CONFUSED; its text is Conf" }
@@ -3816,7 +3816,7 @@ g_PartyCursor = { addr = 0x80148656, type = "s8", size = 0x1, source = "Party sl
 jtbl_801D0C04 = { addr = 0x801D0C04, type = "Callback", source = "The switch table of func_801D5A28: the jump targets of its jr dispatch." }
 jtbl_801D0C1C = { addr = 0x801D0C1C, type = "Callback", source = "The switch table of func_801D639C: the jump targets of its jr dispatch." }
 jtbl_801D0C34 = { addr = 0x801D0C34, type = "Callback", source = "The switch table of func_801D9274: the jump targets of its jr dispatch." }
-g_MenuStatFormat = { addr = 0x801D0C4C, source = "Format string of the four stat values of the menu: Menu_DrawStatPanel prints power, defense, intellect and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
+g_MenuStatFormat = { addr = 0x801D0C4C, source = "Format string of the four stat values of the menu: Menu_DrawStatPanel prints power, defense, intelligence and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
 g_MenuCurrentValueFormat = { addr = 0x801D0C50, source = "Format of the current value of an HP or AP pair: the character window prints hp or ap through it, then the maximum through g_MenuMaxValueFormat." }
 g_MenuMaxValueFormat = { addr = 0x801D0C58, source = "Format of the maximum value of an HP or AP pair, printed after the current value (g_MenuCurrentValueFormat)." }
 g_MenuExperienceFormat = { addr = 0x801D0C60, source = "Format of the experience panel value: the character's experience, or the experience of the next level." }
@@ -3844,7 +3844,7 @@ Menu_PreviewStrongestEquipment = { addr = 0x801D67D8, type = "func", source = "F
 Menu_SwapBytes3 = { addr = 0x801D933C, type = "func", source = "Swaps the two bytes that two pointers address; the start callers pass entries of D_801C893C and D_801C8950, adjacent rows or mirrored pairs. Same bytes as Menu_SwapBytes at 0x801D4A30." }
 Menu_SwapBytes4 = { addr = 0x801DAC08, type = "func", source = "Swaps the two bytes that two pointers address; the start callers pass entries of D_801C893C and D_801C8950, adjacent rows or mirrored pairs. Same bytes as Menu_SwapBytes at 0x801D4A30." }
 Menu_DrawCharacterWindow = { addr = 0x801DB764, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
-Menu_DrawStatPanel = { addr = 0x801DBBCC, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intellect and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
+Menu_DrawStatPanel = { addr = 0x801DBBCC, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intelligence and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
 Shop_DrawEquipment = { addr = 0x801DBF04, type = "func", source = "Draws the equipment panel of character record_index: the filled panel, the EQUIP caption, the emblem and six rows with the weapon, shield, helmet, armor and two accessories, each with its row icon." }
 Menu_DrawCursorFrame = { addr = 0x801DC324, type = "func", source = "Draws the cursor frame of a menu cell at x, y as one LINE_F3 and one LINE_F4. The colour is white, or blinks with g_FrameCount bit 3 when color is nonzero, and each party slot bit set in frame_mode lights one colour channel." }
 Menu_DrawPortrait = { addr = 0x801DC4B8, type = "func", source = "Draws a 40x48 character portrait from g_MenuPortraitAtlas record atlas_index at sprite_x, sprite_y, shaded dark when shade_mode is nonzero." }
@@ -3864,7 +3864,7 @@ Item_GetPrice = { addr = 0x801DDEBC, type = "func", source = "Returns the u16 pr
 Char_GetExpForLevel = { addr = 0x801DDF70, type = "func", source = "Returns the experience a character needs to reach a level: the sum of the first level u16 entries of the character row of g_LevelGrowth, or -1 from level 100." }
 Char_GetExpProgress = { addr = 0x801DDFEC, type = "func", source = "Returns how far exp is between the experience of level and of level + 1, scaled to 0x18 steps (0 when both levels need the same experience)." }
 Menu_DrawHeaderBar = { addr = 0x801DE088, type = "func", source = "Draws the window of a menu header bar from x, y, width and height with the window style g_WindowStyle." }
-Menu_DrawEquipCompareWindow = { addr = 0x801DE5D4, type = "func", source = "Draws the equipment compare window: the party member's power, defense, intellect and agility, the values the equipment in patch would give with an icon chosen by each compare flag, and the six equipment slots with the task's two selected slots raised." }
+Menu_DrawEquipCompareWindow = { addr = 0x801DE5D4, type = "func", source = "Draws the equipment compare window: the party member's power, defense, intelligence and agility, the values the equipment in patch would give with an icon chosen by each compare flag, and the six equipment slots with the task's two selected slots raised." }
 Menu_DrawRowIcons = { addr = 0x801DEE30, type = "func", source = "Draws the party row at the position in row_record (u16 x at byte 4, y at byte 6): its window, then Menu_DrawEquipment and Menu_DrawItemRow for the character at D_80145FCC[row_record[0xC]]." }
 Menu_DrawEquipStatWindow = { addr = 0x801DEEE8, type = "func", source = "Draws the power, defense and agility rows a character would have with an item equipped in a slot, and greys the window when the character cannot equip it." }
 Menu_DrawClutStrip = { addr = 0x801DF21C, type = "func", source = "Draws the five-row strip of 0x20-wide sprite cells with the clut at index clut_index of the four strip palettes, covering the screen height of 240." }
@@ -3894,7 +3894,7 @@ Item_AddMaxAP = { addr = 0x801E8448, type = "func", source = "raises max AP by 1
 Item_AddPower = { addr = 0x801E84E4, type = "func", source = "raises power by 1 in both character records" }
 Item_AddDefense = { addr = 0x801E8580, type = "func", source = "raises defense by 1 in both character records" }
 Item_AddAgility = { addr = 0x801E861C, type = "func", source = "raises agility by 1 in both character records" }
-Item_AddIntellect = { addr = 0x801E86B8, type = "func", source = "raises intellect by 1 in both character records" }
+Item_AddIntelligence = { addr = 0x801E86B8, type = "func", source = "raises intelligence by 1 in both character records" }
 Item_AddWillpower = { addr = 0x801E8754, type = "func", source = "raises willpower by 1 in both character records" }
 Item_CurePoisonParty = { addr = 0x801E8A70, type = "func", source = "clears poison status from all field party members in the start menu item effects" }
 Menu_CharacterPanel = { addr = 0x801E8D60, type = "func", source = "panel mode 0 of the start menu: the character window with its portrait" }
@@ -3949,7 +3949,7 @@ g_MenuEquipStatSprites = { addr = 0x801EC7F8, source = "Sprite run of the equip 
 g_SaveSlotFrameSprites = { addr = 0x801EC854, source = "Sprite run of a save slot row frame." }
 g_MenuLabelPower = { addr = 0x801EC940, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
 g_MenuLabelDefense = { addr = 0x801EC944, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
-g_MenuLabelIntellect = { addr = 0x801EC948, source = "Text of the intellect label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
+g_MenuLabelIntelligence = { addr = 0x801EC948, source = "Text of the intelligence label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
 g_MenuLabelAgility = { addr = 0x801EC94C, source = "Text of the agility label, drawn by Menu_DrawStatPanel at the second column of the second stat row." }
 g_MenuEquipRowIcons = { addr = 0x801EC950, source = "Icon index of each of the six equipment rows (weapon, shield, helmet, armor, two accessories) drawn by Shop_DrawEquipment." }
 g_MenuLabelEquip = { addr = 0x801EC958, source = "Text of the EQUIP caption of the equipment panel, drawn by Shop_DrawEquipment." }

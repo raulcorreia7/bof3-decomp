@@ -33,7 +33,7 @@ MATCH void Char_ApplyAccessories(Character* character) {
                 Char_AddStat(pair, 10);
                 break;
             case ACCESSORY_WISDOM_RING:
-                Char_AddStat(&stats->intellect, 0x1E);
+                Char_AddStat(&stats->intelligence, 0x1E);
                 break;
             case ACCESSORY_LIONS_BELT:
                 Char_AddWillpower(&stats->willpower, 10);

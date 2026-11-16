@@ -8,7 +8,7 @@ u8 g_MenuLabelPower[4] = "Pwr" T_END;
 
 u8 g_MenuLabelDefense[4] = "Def" T_END;
 
-u8 g_MenuLabelIntellect[4] = "Int" T_END;
+u8 g_MenuLabelIntelligence[4] = "Int" T_END;
 
 u8 g_MenuLabelAgility[4] = "Agl" T_END;
 

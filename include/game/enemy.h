@@ -281,7 +281,7 @@ typedef struct Enemy {
     u16          power;
     u16          defense;
     u16          agility;
-    u16          intellect;
+    u16          intelligence;
     EnemyDrop    drops[2];
     EnemyAIBlock ai[ENEMY_AI_COUNT];
     u8           unk_74[4];

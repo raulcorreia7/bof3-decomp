@@ -38,7 +38,7 @@ MATCH void Menu_DrawStatPanel(u16 panel_x, u16 panel_y, u8 palette_index) {
     y17 = panel_y + 0x17;
     UI_DrawGlyphString(x30, y17, 0, g_UiFormatBuffer);
     x53 = panel_x + 0x53;
-    UI_DrawText(x53, y8, 0, TEXT_LENGTH_MAX, g_MenuLabelIntellect);
+    UI_DrawText(x53, y8, 0, TEXT_LENGTH_MAX, g_MenuLabelIntelligence);
     TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, *((u16*)(entryp + 0x26)));
     x78 = panel_x + 0x78;
     UI_DrawGlyphString(x78, y10, 0, g_UiFormatBuffer);

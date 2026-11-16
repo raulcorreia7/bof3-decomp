@@ -25,7 +25,7 @@ MATCH void Menu_DrawItemRow(s32 x0, s32 y0, s32 item, s32 selection) {
     UI_DrawGlyphString(stat_x, stat_y, (u32)palette, g_UiFormatBuffer);
     TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, stats->defense);
     UI_DrawGlyphString(stat_x, (s16)(y0 + 18), (u32)palette, g_UiFormatBuffer);
-    TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, stats->intellect);
+    TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, stats->intelligence);
     UI_DrawGlyphString((s16)(x0 + 111), stat_y, (u32)palette, g_UiFormatBuffer);
     TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, stats->agility);
     UI_DrawGlyphString((s16)(x0 + 111), (s16)(y0 + 18), (u32)palette, g_UiFormatBuffer);

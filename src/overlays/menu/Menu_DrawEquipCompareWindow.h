@@ -1,7 +1,7 @@
-/* The equipment compare window: a party member's name, power, defense, intellect and agility, the value each stat would reach with the equipment in patch (func_80164EF8) beside an icon chosen by its compare flag, and the six equipment slots, with the task's two selected slots raised. */
+/* The equipment compare window: a party member's name, power, defense, intelligence and agility, the value each stat would reach with the equipment in patch (func_80164EF8) beside an icon chosen by its compare flag, and the six equipment slots, with the task's two selected slots raised. */
 #define MENU_EQUIP_COMPARE_WINDOW_WIDTH  120
 #define MENU_EQUIP_COMPARE_WINDOW_HEIGHT 163
-#define MENU_EQUIP_COMPARE_STATS         4 /* power, defense, intellect and agility */
+#define MENU_EQUIP_COMPARE_STATS         4 /* power, defense, intelligence and agility */
 
 /* func_801DE5D4 (start), func_801DB0DC (shop), func_801D5634 (bate), func_801D65DC (shisu) */
 MATCH void Menu_DrawEquipCompareWindow(u8 index, s32 x, s32 y, u8* patch, u8 hide_changes, MenuPanelTask* task) {
@@ -32,7 +32,7 @@ MATCH void Menu_DrawEquipCompareWindow(u8 index, s32 x, s32 y, u8* patch, u8 hid
     UI_DrawGlyphString(left + 49, top + 28, 0, g_UiFormatBuffer);
     TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, stats->defense);
     UI_DrawGlyphString(left + 49, top + 41, 0, g_UiFormatBuffer);
-    TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, stats->intellect);
+    TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, stats->intelligence);
     UI_DrawGlyphString(left + 49, top + 54, 0, g_UiFormatBuffer);
     TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, stats->agility);
     UI_DrawGlyphString(left + 49, top + 67, 0, g_UiFormatBuffer);

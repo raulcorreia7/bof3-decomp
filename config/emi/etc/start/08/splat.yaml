@@ -314,7 +314,7 @@ segments:
       - [0x178E4, c, Item_AddPower]
       - [0x17980, c, Item_AddDefense]
       - [0x17A1C, c, Item_AddAgility]
-      - [0x17AB8, c, Item_AddIntellect]
+      - [0x17AB8, c, Item_AddIntelligence]
       - [0x17B54, c, Item_AddWillpower]
       - [0x17BF0, c, func_801E87F0]
       - [0x17CAC, c, func_801E88AC]

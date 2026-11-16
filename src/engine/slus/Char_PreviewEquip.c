@@ -13,16 +13,16 @@ MATCH void Char_PreviewEquip(u8 character_id, u8 slot, u8 item_id, u8* flags, u1
     u8         i;
     s32        j;
 
-    character                       = &g_Characters[character_id];
-    before[EQUIP_PREVIEW_POWER]     = &character->stats.power;
-    before[EQUIP_PREVIEW_DEFENSE]   = &character->stats.defense;
-    before[EQUIP_PREVIEW_INTELLECT] = &character->stats.intellect;
-    before[EQUIP_PREVIEW_AGILITY]   = &character->stats.agility;
-    after[EQUIP_PREVIEW_POWER]      = &preview.stats.power;
-    after[EQUIP_PREVIEW_DEFENSE]    = &preview.stats.defense;
-    after[EQUIP_PREVIEW_INTELLECT]  = &preview.stats.intellect;
-    after[EQUIP_PREVIEW_AGILITY]    = &preview.stats.agility;
-    preview                         = *character;
+    character                          = &g_Characters[character_id];
+    before[EQUIP_PREVIEW_POWER]        = &character->stats.power;
+    before[EQUIP_PREVIEW_DEFENSE]      = &character->stats.defense;
+    before[EQUIP_PREVIEW_INTELLIGENCE] = &character->stats.intelligence;
+    before[EQUIP_PREVIEW_AGILITY]      = &character->stats.agility;
+    after[EQUIP_PREVIEW_POWER]         = &preview.stats.power;
+    after[EQUIP_PREVIEW_DEFENSE]       = &preview.stats.defense;
+    after[EQUIP_PREVIEW_INTELLIGENCE]  = &preview.stats.intelligence;
+    after[EQUIP_PREVIEW_AGILITY]       = &preview.stats.agility;
+    preview                            = *character;
     switch (slot) {
         case EQUIP_SLOT_WEAPON:
             preview.equip.weapon = item_id;

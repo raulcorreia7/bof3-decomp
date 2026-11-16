@@ -21,22 +21,22 @@ MATCH void Char_ApplyWeapon(Character* character) {
         case WEAPON_SEEKING_SWORD - WEAPON_DEADLY_BLADE:
             Char_AddStat(&stats->defense, 5);
             Char_AddStat(&stats->agility, 5);
-            Char_AddStat(&stats->intellect, 5);
+            Char_AddStat(&stats->intelligence, 5);
             break;
         case WEAPON_ASHURAS_SWORD - WEAPON_DEADLY_BLADE:
             Char_AddResistance(&stats->resistances[RES_INDEX_DEATH], 3);
             break;
         case WEAPON_MAGICIAN_ROD - WEAPON_DEADLY_BLADE:
-            Char_AddStat(&stats->intellect, 3);
+            Char_AddStat(&stats->intelligence, 3);
             break;
         case WEAPON_BERYL_ROD - WEAPON_DEADLY_BLADE:
-            Char_AddStat(&stats->intellect, 5);
+            Char_AddStat(&stats->intelligence, 5);
             break;
         case WEAPON_BLESSED_STAFF - WEAPON_DEADLY_BLADE:
             Char_AddResistance(&stats->resistances[RES_INDEX_DEATH], 1);
             break;
         case WEAPON_OUROBOROS - WEAPON_DEADLY_BLADE:
-            Char_AddStat(&stats->intellect, 0xA);
+            Char_AddStat(&stats->intelligence, 0xA);
             Char_AddResistance(&stats->resistances[RES_INDEX_DEATH], 1);
             Char_AddResistance(&stats->resistances[RES_INDEX_STATUS], 1);
             break;
