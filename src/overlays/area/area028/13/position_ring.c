@@ -144,23 +144,23 @@ MATCH void func_801F2D3C(void) {
     u16           x_base;
 
     work           = D_801F3E00;
-    ratio_x        = (work->offset.x << 7) / work->scale;
+    ratio_x        = (work->offset.vx << 7) / work->scale;
     x_base         = (u16)D_800E4A00.vx;
     i              = 0;
     work->screen.x = (x_base + ratio_x);
-    ratio_y        = (work->offset.y << 7) / work->scale;
+    ratio_y        = (work->offset.vy << 7) / work->scale;
     y_base         = (u16)D_800E4A00.vy;
     w              = work;
     work->screen.y = (y_base + ratio_y);
 
     do {
         next = i + 1u;
-        d.x  = (WORLD_RING_HALFWORD(next & (32u - 1u), 0x4A04u) - WORLD_RING_HALFWORD(i, 0x4A04u));
-        d.y  = (WORLD_RING_HALFWORD(next & (32u - 1u), 0x4A06u) - WORLD_RING_HALFWORD(i, 0x4A06u));
-        c.x  = (w->screen.x - WORLD_RING_HALFWORD(i, 0x4A04u));
-        c.y  = (w->screen.y - WORLD_RING_HALFWORD(i, 0x4A06u));
+        d.vx = (WORLD_RING_HALFWORD(next & (32u - 1u), 0x4A04u) - WORLD_RING_HALFWORD(i, 0x4A04u));
+        d.vy = (WORLD_RING_HALFWORD(next & (32u - 1u), 0x4A06u) - WORLD_RING_HALFWORD(i, 0x4A06u));
+        c.vx = (w->screen.x - WORLD_RING_HALFWORD(i, 0x4A04u));
+        c.vy = (w->screen.y - WORLD_RING_HALFWORD(i, 0x4A06u));
         i    = next;
-        if (((d.x * c.y) - (d.y * c.x)) < 0) {
+        if (((d.vx * c.vy) - (d.vy * c.vx)) < 0) {
             return;
         }
     } while (i < 32u);
@@ -194,8 +194,8 @@ MATCH void func_801F2FB0(void* slot) {
 
     work            = slot;
     work->unk_00[0] = 1u;
-    work->offset.x  = (RANDOM_MASK(0xFF) - 0x80);
-    work->offset.y  = (RANDOM_MASK(0xFF) - 0x80);
+    work->offset.vx = (RANDOM_MASK(0xFF) - 0x80);
+    work->offset.vy = (RANDOM_MASK(0xFF) - 0x80);
     work->scale     = 0x280;
 }
 

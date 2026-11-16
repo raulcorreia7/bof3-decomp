@@ -101,13 +101,13 @@ MATCH void func_801EEEFC(void) {
     g_Task->unk_0C    = heading;
     g_Task->unk_10    = 0;
     Battle_ProjectRange();
-    BMagic_Trail[g_Task->unk_04][0].x = g_Task->unk_2E.half;
-    BMagic_Trail[g_Task->unk_04][0].y = g_Task->unk_30.half;
-    BMagic_Trail[g_Task->unk_04][1].x = g_Task->unk_2E.half;
-    BMagic_Trail[g_Task->unk_04][1].y = g_Task->unk_30.half;
-    g_Task->param.unk_0B              = 0;
-    g_Task->unk_09                    = 0x10;
-    g_Task->timer                     = 1;
+    BMagic_Trail[g_Task->unk_04][0].vx = g_Task->unk_2E.half;
+    BMagic_Trail[g_Task->unk_04][0].vy = g_Task->unk_30.half;
+    BMagic_Trail[g_Task->unk_04][1].vx = g_Task->unk_2E.half;
+    BMagic_Trail[g_Task->unk_04][1].vy = g_Task->unk_30.half;
+    g_Task->param.unk_0B               = 0;
+    g_Task->unk_09                     = 0x10;
+    g_Task->timer                      = 1;
     g_Task->header.step++;
 }
 
@@ -190,22 +190,22 @@ MATCH void func_801EF4E0(void) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     k = g_Task->param.unk_0B;
-    while (BMagic_Trail[g_Task->unk_04][k].x == -1) {
+    while (BMagic_Trail[g_Task->unk_04][k].vx == -1) {
         k++;
     }
     g_ScratchPad.cells.halves[0] = 2;
-    g_ScratchPad.cells.halves[6] = BMagic_Trail[g_Task->unk_04][k].x;
-    g_ScratchPad.cells.halves[7] = BMagic_Trail[g_Task->unk_04][k].y;
-    g_ScratchPad.cells.halves[4] = BMagic_Trail[g_Task->unk_04][k + 1].x;
-    g_ScratchPad.cells.halves[5] = BMagic_Trail[g_Task->unk_04][k + 1].y;
+    g_ScratchPad.cells.halves[6] = BMagic_Trail[g_Task->unk_04][k].vx;
+    g_ScratchPad.cells.halves[7] = BMagic_Trail[g_Task->unk_04][k].vy;
+    g_ScratchPad.cells.halves[4] = BMagic_Trail[g_Task->unk_04][k + 1].vx;
+    g_ScratchPad.cells.halves[5] = BMagic_Trail[g_Task->unk_04][k + 1].vy;
     g_ScratchPad.cells.halves[1] = ratan2(g_ScratchPad.cells.halves[4] - g_ScratchPad.cells.halves[6], g_ScratchPad.cells.halves[5] - g_ScratchPad.cells.halves[7]);
-    g_ScratchPad.cells.halves[4] = BMagic_Trail[g_Task->unk_04][k].x;
-    g_ScratchPad.cells.halves[5] = BMagic_Trail[g_Task->unk_04][k].y;
+    g_ScratchPad.cells.halves[4] = BMagic_Trail[g_Task->unk_04][k].vx;
+    g_ScratchPad.cells.halves[5] = BMagic_Trail[g_Task->unk_04][k].vy;
     for (k = k + 1; k < g_Task->timer; k++) {
         g_ScratchPad.cells.halves[6] = g_ScratchPad.cells.halves[4];
         g_ScratchPad.cells.halves[7] = g_ScratchPad.cells.halves[5];
-        g_ScratchPad.cells.halves[4] = BMagic_Trail[g_Task->unk_04][k].x;
-        g_ScratchPad.cells.halves[5] = BMagic_Trail[g_Task->unk_04][k].y;
+        g_ScratchPad.cells.halves[4] = BMagic_Trail[g_Task->unk_04][k].vx;
+        g_ScratchPad.cells.halves[5] = BMagic_Trail[g_Task->unk_04][k].vy;
         prim                         = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
@@ -245,21 +245,21 @@ MATCH void func_801EFA4C(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     g_ScratchPad.cells.halves[0] = 12;
     k                            = g_Task->param.unk_0B;
-    while (BMagic_Trail[g_Task->unk_04][k].x == -1) {
+    while (BMagic_Trail[g_Task->unk_04][k].vx == -1) {
         k++;
     }
-    g_ScratchPad.cells.halves[6] = BMagic_Trail[g_Task->unk_04][k].x;
-    g_ScratchPad.cells.halves[7] = BMagic_Trail[g_Task->unk_04][k].y;
-    g_ScratchPad.cells.halves[4] = BMagic_Trail[g_Task->unk_04][k + 1].x;
-    g_ScratchPad.cells.halves[5] = BMagic_Trail[g_Task->unk_04][k + 1].y;
+    g_ScratchPad.cells.halves[6] = BMagic_Trail[g_Task->unk_04][k].vx;
+    g_ScratchPad.cells.halves[7] = BMagic_Trail[g_Task->unk_04][k].vy;
+    g_ScratchPad.cells.halves[4] = BMagic_Trail[g_Task->unk_04][k + 1].vx;
+    g_ScratchPad.cells.halves[5] = BMagic_Trail[g_Task->unk_04][k + 1].vy;
     g_ScratchPad.cells.halves[1] = ratan2(g_ScratchPad.cells.halves[4] - g_ScratchPad.cells.halves[6], g_ScratchPad.cells.halves[5] - g_ScratchPad.cells.halves[7]);
-    g_ScratchPad.cells.halves[4] = BMagic_Trail[g_Task->unk_04][k].x;
-    g_ScratchPad.cells.halves[5] = BMagic_Trail[g_Task->unk_04][k].y;
+    g_ScratchPad.cells.halves[4] = BMagic_Trail[g_Task->unk_04][k].vx;
+    g_ScratchPad.cells.halves[5] = BMagic_Trail[g_Task->unk_04][k].vy;
     for (k = k + 1; k < g_Task->timer; k++) {
         g_ScratchPad.cells.halves[6] = g_ScratchPad.cells.halves[4];
         g_ScratchPad.cells.halves[7] = g_ScratchPad.cells.halves[5];
-        g_ScratchPad.cells.halves[4] = BMagic_Trail[g_Task->unk_04][k].x;
-        g_ScratchPad.cells.halves[5] = BMagic_Trail[g_Task->unk_04][k].y;
+        g_ScratchPad.cells.halves[4] = BMagic_Trail[g_Task->unk_04][k].vx;
+        g_ScratchPad.cells.halves[5] = BMagic_Trail[g_Task->unk_04][k].vy;
         prim                         = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
@@ -283,21 +283,21 @@ MATCH void func_801EFA4C(void) {
         GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
     }
     k = g_Task->param.unk_0B;
-    while (BMagic_Trail[g_Task->unk_04][k].x == -1) {
+    while (BMagic_Trail[g_Task->unk_04][k].vx == -1) {
         k++;
     }
-    g_ScratchPad.cells.halves[6] = BMagic_Trail[g_Task->unk_04][k].x;
-    g_ScratchPad.cells.halves[7] = BMagic_Trail[g_Task->unk_04][k].y;
-    g_ScratchPad.cells.halves[4] = BMagic_Trail[g_Task->unk_04][k + 1].x;
-    g_ScratchPad.cells.halves[5] = BMagic_Trail[g_Task->unk_04][k + 1].y;
+    g_ScratchPad.cells.halves[6] = BMagic_Trail[g_Task->unk_04][k].vx;
+    g_ScratchPad.cells.halves[7] = BMagic_Trail[g_Task->unk_04][k].vy;
+    g_ScratchPad.cells.halves[4] = BMagic_Trail[g_Task->unk_04][k + 1].vx;
+    g_ScratchPad.cells.halves[5] = BMagic_Trail[g_Task->unk_04][k + 1].vy;
     g_ScratchPad.cells.halves[1] = ratan2(g_ScratchPad.cells.halves[4] - g_ScratchPad.cells.halves[6], g_ScratchPad.cells.halves[5] - g_ScratchPad.cells.halves[7]);
-    g_ScratchPad.cells.halves[4] = BMagic_Trail[g_Task->unk_04][k].x;
-    g_ScratchPad.cells.halves[5] = BMagic_Trail[g_Task->unk_04][k].y;
+    g_ScratchPad.cells.halves[4] = BMagic_Trail[g_Task->unk_04][k].vx;
+    g_ScratchPad.cells.halves[5] = BMagic_Trail[g_Task->unk_04][k].vy;
     for (k = k + 1; k < g_Task->timer; k++) {
         g_ScratchPad.cells.halves[6] = g_ScratchPad.cells.halves[4];
         g_ScratchPad.cells.halves[7] = g_ScratchPad.cells.halves[5];
-        g_ScratchPad.cells.halves[4] = BMagic_Trail[g_Task->unk_04][k].x;
-        g_ScratchPad.cells.halves[5] = BMagic_Trail[g_Task->unk_04][k].y;
+        g_ScratchPad.cells.halves[4] = BMagic_Trail[g_Task->unk_04][k].vx;
+        g_ScratchPad.cells.halves[5] = BMagic_Trail[g_Task->unk_04][k].vy;
         prim                         = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);

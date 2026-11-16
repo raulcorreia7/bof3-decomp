@@ -47,8 +47,8 @@ MATCH void func_801DE944(void) {
             } while (i < g_PartySize);
         }
         if (mode != CHAR_ID_GARR && g_Game.members[0].chr.character_id == CHAR_ID_GARR) {
-            g_Game.members[0].pos.x.fixed += g_ShopFacingSteps[g_Game.members[0].facing].x << 15;
-            g_Game.members[0].pos.y.fixed += g_ShopFacingSteps[g_Game.members[0].facing].y << 15;
+            g_Game.members[0].pos.x.fixed += g_ShopFacingSteps[g_Game.members[0].facing].vx << 15;
+            g_Game.members[0].pos.y.fixed += g_ShopFacingSteps[g_Game.members[0].facing].vy << 15;
         }
         if (!(g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE)) {
             g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;

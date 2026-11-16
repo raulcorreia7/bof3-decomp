@@ -7,15 +7,15 @@ MATCH void func_801F55F0(u8 raise) {
 
     if (raise != 0) {
         for (i = 0; i < 4; i++) {
-            x = D_801F63DC[i].x;
-            y = D_801F63DC[i].y;
+            x = D_801F63DC[i].vx;
+            y = D_801F63DC[i].vy;
             Area_StoreHeight(x, y, 0xE);
             Area_SetCellCode(x, y, 0x11);
         }
     } else {
         for (i = 0; i < 4; i++) {
-            x = D_801F63DC[i].x;
-            y = D_801F63DC[i].y;
+            x = D_801F63DC[i].vx;
+            y = D_801F63DC[i].vy;
             Area_StoreHeight(x, y, 0);
             Area_SetCellCode(x, y, 0);
         }

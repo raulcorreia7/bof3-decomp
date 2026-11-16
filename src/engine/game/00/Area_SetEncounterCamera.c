@@ -43,8 +43,8 @@ loop_5:
     rot        = &g_AreaCameraAngle;
     D_801CD954 = ((D_801CD954 / count) >> 5) << 5;
     RotMatrix(rot, &matrix);
-    offset_x = D_801CD778[mode_index & BYTE_MASK].x;
-    offset_y = D_801CD778[mode_index & BYTE_MASK].y;
+    offset_x = D_801CD778[mode_index & BYTE_MASK].vx;
+    offset_y = D_801CD778[mode_index & BYTE_MASK].vy;
     angle.vz = (D_801CD954 >> 1);
     angle.vx = 16384 - ((g_EncounterOriginX + (offset_x << 0x10)) >> 9);
     angle.vy = 16384 - ((g_EncounterOriginY + (offset_y << 0x10)) >> 9);

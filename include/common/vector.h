@@ -2,6 +2,7 @@
 #define COMMON_VECTOR_H
 
 #include "common/fixed.h"
+#include "psyq/libgte.h"
 #include "types.h"
 
 /* Packed vectors shared across images, named by what they hold; PsyQ vectors keep their SDK padding.
@@ -13,11 +14,8 @@ typedef struct Cell2 {
     u8 y;
 } Cell2;
 
-/* A screen or map position. */
-typedef struct Pos2 {
-    s16 x;
-    s16 y;
-} Pos2;
+/* A screen or map position: the SDK's 2-D short vector. */
+typedef DVECTOR Pos2;
 
 /* A position stored unsigned. */
 typedef struct Pos2u {
@@ -108,7 +106,7 @@ ASSERT_OFFSET(Coord3, z, 0x08);
 ASSERT_SIZE(Cell2, 0x02);
 ASSERT_SIZE(Coord2, 0x08);
 ASSERT_SIZE(Pos2, 0x04);
-ASSERT_OFFSET(Pos2, y, 0x02);
+ASSERT_OFFSET(Pos2, vy, 0x02);
 ASSERT_SIZE(Pos2u, 0x04);
 ASSERT_OFFSET(Pos2u, y, 0x02);
 ASSERT_SIZE(Offset2, 0x08);

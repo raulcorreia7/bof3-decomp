@@ -7,7 +7,7 @@ MATCH void func_801F2C48(void) {
     i      = 0;
     points = MEM_PTR(Pos2, AREA_WORK);
     do {
-        points[i].x                         = 0;
+        points[i].vx                        = 0;
         /* The Y column is its own address in the original; the two halves load apart. */
         MEM(s16, AREA_WORK + 2u + (i << 2)) = 0;
         i++;
