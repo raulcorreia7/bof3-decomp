@@ -1159,7 +1159,8 @@ void                    func_80159A90(void);
 void                    func_80159B38(void);
 /* func_80159B9C */
 extern void             UI_DrawPanelBox(s16 x, s16 y, u8 w, u8 h);
-void                    func_80159FA0(s32 x, s32 y, u8 width, u8 height);
+/* func_80159FA0 */
+void                    UI_DrawBoxOutline(s32 x, s32 y, u8 width, u8 height);
 extern void             func_8015A098(void);
 extern void             func_8015A170(void);
 extern void             func_8015A1D8(void);

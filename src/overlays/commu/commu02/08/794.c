@@ -914,33 +914,25 @@ MATCH void func_801D4158(void) {
     func_801D32A0(204, 60, 0);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D42B4(void) {
+MATCH void func_801D42B4(void) {
     u8* state;
-    s32 selected;
-    /* FAKE: the retail frame has 8 bytes that nothing in the body uses. */
-    FAKE_STACK_PADS(u8, 8);
 
     state = &g_GameStateIndex;
-    if (*state != 2) {
+    if (*state != GAME_REQUEST_MESSAGE) {
         Message_StartAreaMessage(0x86);
-        *state     = 2;
+        *state     = GAME_REQUEST_MESSAGE;
         D_801F294D = 8;
     }
-    func_801D4AE0(0x10, 0x18, 1);
-    func_801D4F88(0x68, 0x40, 1);
-    selected = (s8)D_801DB0B4;
-    if (selected == 8) {
-        func_801D4EA4(0x68, 0x78, 7, 0);
+    func_801D4AE0(16, 24, 1);
+    func_801D4F88(104, 64, 1);
+    if ((s8)D_801DB0B4 == 8) {
+        func_801D4EA4(104, 120, 7, 0);
     } else {
-        func_801D4EA4(0x68, 0x78, (u8)selected, 0);
+        func_801D4EA4(104, 120, (u8)D_801DB0B4, 0);
     }
-    func_801D3184(0xCC, 0x10);
-    func_801D32A0(0xCC, 0x3C, 0);
+    func_801D3184(204, 16);
+    func_801D32A0(204, 60, 0);
 }
-#else
-INCLUDE_ASM(func_801D42B4);
-#endif
 
 MATCH void func_801D437C(void) {
     u8* state;

@@ -49,7 +49,7 @@ NON_MATCHING void func_801F7068(void) {
             count++;
         }
         if ((g_Task->option_flags & (1 << i)) == 0) {
-            func_80159FA0(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)width, (u8)height);
+            UI_DrawBoxOutline(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)width, (u8)height);
         }
         i++;
     }
