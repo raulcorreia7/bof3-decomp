@@ -28,5 +28,5 @@ MATCH void func_801F2EC8(AreaEffectRow* row) {
     setTPage(primitive, TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
     setUV4(primitive, 224, 48, 255, 48, 224, 79, 255, 79);
     setRGB0(primitive, row->unk_14, row->unk_14, row->unk_14);
-    GFX_AddPrim(1, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 }

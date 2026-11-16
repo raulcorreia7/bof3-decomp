@@ -133,7 +133,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x_arg, s32 y_arg, s32 width, s32 height
         GetGraphType();
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, FONT_TPAGE_X >> 6, texture_window);
-    GFX_AddPrim(1u, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
 
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
@@ -165,7 +165,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x_arg, s32 y_arg, s32 width, s32 height
     width_plus_1    = (s32)(width + 1);
 
     primitive->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddPrim(1u, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 
     /* FAKE: pin signed shift matches original sra computation. */
     r_s1 = (s32)(u16)width_plus_1;
@@ -183,7 +183,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x_arg, s32 y_arg, s32 width, s32 height
     primitive->clut = GetClut(clut_x, STAGE_PALETTE_Y + 1);
 
     primitive->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddPrim(1u, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
@@ -201,7 +201,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x_arg, s32 y_arg, s32 width, s32 height
     primitive->clut = GetClut(clut_x, STAGE_PALETTE_Y + 1);
 
     primitive->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddPrim(1u, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
@@ -230,7 +230,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x_arg, s32 y_arg, s32 width, s32 height
     primitive->clut = GetClut(clut_x, STAGE_PALETTE_Y + 1);
 
     primitive->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddPrim(1u, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 
     texture_window    = (RECT*)g_GfxPrimCursor;
     g_GfxPrimCursor   = (u8*)(texture_window + 1);
@@ -239,7 +239,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x_arg, s32 y_arg, s32 width, s32 height
     setWH(texture_window, 256, 256);
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), texture_window);
-    GFX_AddPrim(1u, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     func_801AEBA0((s16)r_s8, (s16)((s32)(u16)y + 2), (s16)(width - 4), (s16)(height - 4), 0);
 }
 #else
@@ -300,7 +300,7 @@ MATCH void func_801F7E34(s32* pos_a, s32* pos_b, u8 shade) {
     MATRIX   matrix;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     Area_SetCameraMatrix(&matrix);
     prim = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(prim);
@@ -311,7 +311,7 @@ MATCH void func_801F7E34(s32* pos_a, s32* pos_b, u8 shade) {
     prim->x1 = (u16)xy.vx;
     prim->y1 = (u16)xy.vy;
     setRGB0(prim, shade, shade, 0);
-    GFX_AddPrim(1, sizeof(LINE_F2));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F2));
 }
 
 MATCH void func_801F7F28(void) {

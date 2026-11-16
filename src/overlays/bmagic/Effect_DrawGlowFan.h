@@ -3,7 +3,7 @@
 /* func_801EF7FC (magic040), func_801EF920 (magic042) */
 #define EFFECT_DRAW_GLOW_FAN(RADIUS, SHADE)                                                                                                                                                      \
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);                                                                                                                                 \
-    GFX_AddDitheredDrawMode(3, tpage);                                                                                                                                                           \
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);                                                                                                                                  \
     i                            = 0;                                                                                                                                                            \
     g_ScratchPad.cells.halves[2] = (RADIUS);                                                                                                                                                     \
     g_ScratchPad.cells.halves[0] = g_Task->unk_2E.half;                                                                                                                                          \
@@ -18,8 +18,8 @@
         setRGB0(poly, (SHADE), (SHADE), (SHADE));                                                                                                                                                \
         setRGB1(poly, 1, 1, 1);                                                                                                                                                                  \
         setRGB2(poly, 1, 1, 1);                                                                                                                                                                  \
-        GFX_AddPrim(3, sizeof(POLY_G3));                                                                                                                                                         \
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G3));                                                                                                                                \
         i++;                                                                                                                                                                                     \
     } while (i < 16);                                                                                                                                                                            \
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);                                                                                                                                \
-    GFX_AddDitheredDrawMode(3, tpage)
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage)

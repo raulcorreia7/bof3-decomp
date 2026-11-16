@@ -220,7 +220,7 @@ MATCH void func_801EF9F0(void) {
     s32      tpage;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
     g_ScratchPad.cells.halves[0] = g_Task->param.unk_0B;
     g_ScratchPad.cells.halves[5] = LOB(g_Task->unk_5D) * 4;
     setVector(&g_ScratchPadVectors[2], FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]), FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]), 0);
@@ -234,7 +234,7 @@ MATCH void func_801EF9F0(void) {
         setRGB0(prim, LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]));
         setRGB1(prim, LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]));
         setRGB2(prim, LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]));
-        GFX_AddPrim(5, sizeof(POLY_G3));
+        GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(POLY_G3));
     }
 }
 
@@ -242,11 +242,11 @@ MATCH void func_801EF9F0(void) {
 
 /* func_801EFC40 */
 MATCH void BMagic_DrawDarkRing(void) {
-    GFX_AddDitheredDrawMode(5, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256));
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256));
     g_ScratchPad.cells.halves[0] = g_Task->param.unk_0B;
     g_ScratchPad.cells.halves[1] = g_Task->param.unk_0B * 2;
     g_ScratchPad.cells.halves[5] = (s8)g_Task->unk_5D * 4;
-    BMAGIC_DRAW_DARK_RING_QUADS(5, 5);
+    BMAGIC_DRAW_DARK_RING_QUADS(BMAGIC_LAYER_BEHIND_BATTLERS, 5);
 }
 
 MATCH void func_801EFF60(void) {

@@ -63,6 +63,15 @@ ASSERT_SIZE(UvRect, 0x4);
 #define TPAGE_ABR_SUB                2 /* B - F */
 #define TPAGE_ABR_QUARTER            3 /* B + 0.25 F */
 
+/* The eight ordering-table layers of GFX_AddPrim: layer 7 is linked first and draws first (behind everything), layer 0 last
+ * (in front). Proof: SYS_Main clears the table with ClearOTagR(work + 0x70, 8) and draws it from work + 0x8C, which is entry 7.
+ * The layers named here are the ones whose content the callers show; 2, 3 and 5 (battle and field effects) stay numeric. */
+#define GFX_LAYER_TOP                0 /* the menu cursor and full-screen flashes */
+#define GFX_LAYER_UI                 1 /* text, windows and menu sprites */
+#define GFX_LAYER_BATTLE_SCENE       4 /* g_AreaDrawMode while a battle runs (Battle_LoadPartySprites) */
+#define GFX_LAYER_FIELD_SCENE        6 /* g_AreaDrawMode in the field (Game_NewGame) */
+#define GFX_LAYER_BACKDROP           7 /* gradients and map quads behind the scene */
+
 /* A textured primitive's colour channel that leaves the texel unchanged (128 is 1.0 in the PSX modulation). */
 #define GFX_COLOR_NEUTRAL            128
 
@@ -85,7 +94,7 @@ extern u8  g_UiFormatBuffer[];
  * default texture window. */
 static inline void GFX_AddDrawMode(s32 tpage) {
     GFX_SET_DRAW_MODE(tpage);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
 }
 
 /* The same draw mode with dithering on, at order-table slot `layer`. */
@@ -101,7 +110,7 @@ static inline void GFX_AddDitheredDrawMode(u32 layer, s32 tpage) {
     GFX_AddPrim((layer), sizeof(DR_MODE))
 
 /* The same draw mode at order-table slot 1. */
-#define GFX_ADD_DRAW_MODE(tpage) GFX_ADD_LAYER_DRAW_MODE(1, tpage)
+#define GFX_ADD_DRAW_MODE(tpage) GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_UI, tpage)
 
 /* The same draw mode with dithering on. */
 #define GFX_ADD_DITHERED_DRAW_MODE(layer, tpage)              \

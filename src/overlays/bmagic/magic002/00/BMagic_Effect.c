@@ -89,7 +89,7 @@ MATCH void func_801EF030(s32 x, s32 y, u16 radius, s32 phase) {
         setXY3(prim, points[i].vx, points[i].vy, points[i + 2].vx, points[i + 2].vy, points[i + 4].vx, points[i + 4].vy);
         setRGB0(prim, 0xFF, 0xFF, 0);
         SetSemiTrans(prim, 1);
-        GFX_AddPrim(1, sizeof(POLY_F3));
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_F3));
     }
 }
 

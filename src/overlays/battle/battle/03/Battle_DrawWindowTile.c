@@ -14,5 +14,5 @@ MATCH void Battle_DrawWindowTile(s16 x, s16 y, u8 template_index, u8 shade) {
             PSX_COLOR_G(*(volatile u16*)(MEM_PTR(u8, 0x80033A08u) + ((*selector * 2 + shade) << 5))) << 3,
             PSX_COLOR_B(*(volatile u16*)(MEM_PTR(u8, 0x80033A08u) + ((*selector * 2 + shade) << 5))) << 3);
     SetSemiTrans(tile, shade);
-    GFX_AddPrim(1, sizeof(TILE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
 }

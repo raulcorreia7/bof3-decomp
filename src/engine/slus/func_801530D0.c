@@ -185,7 +185,7 @@ NON_MATCHING s32 func_801530D0(void) {
                                 } else {
                                     LINK_PACKET(s6, g_FrameBufferIndex + 2, pkt);
                                 }
-                            } else if ((cell->prim_id & 0x4000) && ((g_AreaDrawMode == 6) || ((g_AreaDrawMode == 4) && (depth_threshold < s6)))) {
+                            } else if ((cell->prim_id & 0x4000) && ((g_AreaDrawMode == GFX_LAYER_FIELD_SCENE) || ((g_AreaDrawMode == GFX_LAYER_BATTLE_SCENE) && (depth_threshold < s6)))) {
                                 *low_min = *(u32*)rec ^ 0x80;
                                 word     = *(u32*)rec >> 8;
                                 if (((word & BYTE_MASK) ^ 0x80) < *low_min) {

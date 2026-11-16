@@ -74,7 +74,7 @@ NON_MATCHING void Menu_DrawOptionRow(s32 x, s32 y, s32 option_index, s32 select_
     setXY0(line, tmp0, (s16)(val3 + 1) - (val4 & BYTE_MASK));
     line->y1 = (s16)(val3 + (val4 & BYTE_MASK) + 9);
     setRGB0(line, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
-    GFX_AddPrim(1U, sizeof(LINE_F2));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F2));
 }
 #else
 INCLUDE_ASM(Menu_DrawOptionRow);

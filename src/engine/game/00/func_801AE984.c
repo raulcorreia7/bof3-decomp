@@ -15,5 +15,5 @@ MATCH void func_801AE984(s32 sprite_x, s32 sprite_y, s32 texture_index, s32 dimm
     setXY0(sprite, (sprite_x + 1), sprite_y);
     setUV0(sprite, (((texture_index & BYTE_MASK) * 8) - 56), 248);
     setClut(sprite, 192, STAGE_PALETTE_Y);
-    GFX_AddPrim(1U, sizeof(SPRT_8));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT_8));
 }

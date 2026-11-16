@@ -100,7 +100,7 @@ MATCH void func_801EF1C8(void) {
     s32      tpage;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
     GLOW_RING_INNER = g_Task->timer * 2;
     GLOW_RING_RED   = g_Task->unk_09 * 12;
     GLOW_RING_GREEN = g_Task->unk_09 * 12;
@@ -117,7 +117,7 @@ MATCH void func_801EF1C8(void) {
         setRGB0(prim, GLOW_RING_RED, GLOW_RING_GREEN, GLOW_RING_BLUE);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);
-        GFX_AddPrim(5, sizeof(POLY_G3));
+        GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(POLY_G3));
     }
 }
 
@@ -129,7 +129,7 @@ MATCH void BMagic_DrawGlowRingOuter(void) {
     long     flag;
     s32      i;
 
-    GFX_AddDitheredDrawMode(5, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     GLOW_RING_INNER           = g_Task->timer * 2;
     GLOW_RING_OUTER           = g_Task->timer * 3 + (RANDOM_MASK(3));
     GLOW_RING_RED             = g_Task->unk_09 * 15;
@@ -157,7 +157,7 @@ MATCH void BMagic_DrawGlowRingOuter(void) {
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, GLOW_RING_RED, GLOW_RING_GREEN, GLOW_RING_BLUE);
         setRGB3(prim, GLOW_RING_RED, GLOW_RING_GREEN, GLOW_RING_BLUE);
-        GFX_AddPrim(5, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(POLY_G4));
     }
 }
 
@@ -168,7 +168,7 @@ MATCH void BMagic_DrawGlowRingInner(void) {
     long     flag;
     s32      i;
 
-    GFX_AddDitheredDrawMode(5, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     GLOW_RING_INNER           = g_Task->timer;
     GLOW_RING_OUTER           = g_Task->timer * 2;
     GLOW_RING_RED             = g_Task->unk_09 * 15;
@@ -196,7 +196,7 @@ MATCH void BMagic_DrawGlowRingInner(void) {
         setRGB1(prim, GLOW_RING_RED, GLOW_RING_GREEN, GLOW_RING_BLUE);
         setRGB2(prim, 1, 1, 1);
         setRGB3(prim, 1, 1, 1);
-        GFX_AddPrim(5, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(POLY_G4));
     }
 }
 
@@ -388,7 +388,7 @@ MATCH void func_801F06AC(void) {
     s32      tpage;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     g_ScratchPad.cells.halves[2] = 0;
     g_ScratchPad.cells.halves[0] = 24;
     g_ScratchPad.cells.halves[6] = g_Task->unk_2E.half;
@@ -408,7 +408,7 @@ MATCH void func_801F06AC(void) {
         setRGB0(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[5]);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);
-        GFX_AddPrim(3, sizeof(POLY_G3));
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G3));
     }
 }
 

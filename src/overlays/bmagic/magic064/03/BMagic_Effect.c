@@ -297,7 +297,7 @@ MATCH void func_801F009C(void) {
     handlers = D_801EEC5C;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_ADD_LAYER_DRAW_MODE(2, tpage);
+    GFX_ADD_LAYER_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     for (i = 0; i < MAGIC064_RING_COUNT; i++) {
         if (D_801F13B4[i].active != 0) {
             D_801F28B4 = &D_801F13B4[i];
@@ -429,7 +429,7 @@ MATCH void func_801F0B8C(s16 x0, s16 y0, s16 x1, s16 y1) {
     setRGB1(primitive, 0, 0, 0);
     setXY2(primitive, x0, y0, x1, y1);
     SetSemiTrans(primitive, 1);
-    GFX_AddPrim(2, sizeof(LINE_G2));
+    GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(LINE_G2));
 }
 
 MATCH void func_801F0C38(void) {

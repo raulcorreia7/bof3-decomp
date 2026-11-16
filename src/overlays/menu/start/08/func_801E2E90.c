@@ -43,7 +43,7 @@ NON_MATCHING void func_801E2E90(s32 x, s32 y, s32 row_index) {
     line->x1 = (s16)(x + 63);
     line->y1 = (s16)(y + 14);
     setRGB0(line, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
-    GFX_AddPrim(1U, sizeof(LINE_F2));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F2));
 }
 #else
 INCLUDE_ASM(func_801E2E90);

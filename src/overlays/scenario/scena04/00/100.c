@@ -108,7 +108,7 @@ MATCH void func_801F7084(SceneBox* box) {
     u16             tpage;
 
     tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddDitheredDrawMode(1, tpage);
+    GFX_AddDitheredDrawMode(GFX_LAYER_UI, tpage);
     vertex     = D_801FA240;
     vertex->vx = box->near.x;
     vertex->vy = box->near.y + box->near.half_y;
@@ -167,7 +167,7 @@ MATCH void func_801F732C(u8 v0, u8 v1, u8 v2, u8 v3, s32 shade0, s32 shade1) {
     setRGB1(primitive, color0, color0, color0 >> 1);
     setRGB2(primitive, color1, color1, color1 >> 1);
     setRGB3(primitive, color1, color1, color1 >> 1);
-    GFX_AddPrim(1, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
 }
 
 MATCH void func_801F747C(void) {
@@ -222,7 +222,7 @@ NON_MATCHING void func_801F75BC(u8 weight, u8 shade) {
     u32      tint;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     ((void (*)(void))Area_SetCameraMatrix)();
     for (i = 0; i < 5; i++) {
         line = (LINE_G2*)g_GfxPrimCursor;
@@ -238,7 +238,7 @@ NON_MATCHING void func_801F75BC(u8 weight, u8 shade) {
         setRGB0(line, ((flicker + 0x80) * shade) >> 8, ((flicker + 0x80) * shade) >> 8, (u8)(((flicker + 0x80) * shade) >> 8) >> 1);
         tint = (flicker * shade) >> 8;
         setRGB1(line, tint, tint, (u8)tint >> 1);
-        GFX_AddPrim(1, sizeof(LINE_G2));
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_G2));
     }
 }
 #else

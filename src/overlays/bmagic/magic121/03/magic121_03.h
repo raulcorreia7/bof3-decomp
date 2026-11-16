@@ -21,7 +21,7 @@ extern s16 D_1F800008[];
     run   = 0;                                                                                                                                  \
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);                                                                                \
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);                                                                                     \
-    GFX_AddPrim(3, sizeof(DR_MODE));                                                                                                            \
+    GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(DR_MODE));                                                                                   \
     g_ScratchPad.cells.halves[4] = g_Task->unk_2E.half;                                                                                         \
     g_ScratchPad.cells.halves[5] = g_Task->unk_30.half;                                                                                         \
     for (i = 0; i < (COUNT) + 1; i++) {                                                                                                         \
@@ -66,10 +66,10 @@ extern s16 D_1F800008[];
         g_ScratchPadVectors[0].vy = g_ScratchPad.cells.halves[7] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]); \
         line->y1                  = g_ScratchPadVectors[0].vy;                                                                                  \
         setRGB0(line, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3] / 3);                            \
-        GFX_AddPrim(3, sizeof(LINE_F2));                                                                                                        \
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(LINE_F2));                                                                               \
     }                                                                                                                                           \
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);                                                                               \
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);                                                                                     \
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(DR_MODE));
 
 #endif

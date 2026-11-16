@@ -49,7 +49,7 @@ MATCH void func_801D0F50(s16 x, s16 y, u8 row) {
     setWH(sprite, 0xC, 0xC);
     sprite->clut = 0x7849;
     setRGB0(sprite, 0x80, 0x80, 0x80);
-    GFX_AddPrim(1, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 }
 
 #ifdef NON_MATCHING
@@ -131,7 +131,7 @@ MATCH void func_801D1670(s16 x, s16 y, u16 u, u16 v, u8 width) {
     setWH(sprite, (width << 4) + 0x10, 0x10);
     sprite->clut = 0x7883;
     setRGB0(sprite, 0x80, 0x80, 0x80);
-    GFX_AddPrim(1, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 }
 
 MATCH void func_801D1724(u16 x, u16 y) {
@@ -147,7 +147,7 @@ MATCH void func_801D1724(u16 x, u16 y) {
         tpage = 0x1D;
     }
     GFX_SET_DRAW_MODE(tpage);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     for (i = 0; i < 16; i++) {
         func_801D1670(x + i * 0x10, y, D_801D199C[i][0], D_801D199C[i][1], 0);
     }

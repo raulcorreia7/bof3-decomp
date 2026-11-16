@@ -43,7 +43,7 @@ MATCH void UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text) {
             sprite->v0 = value;
             SetSprt(sprite);
             SetSemiTrans(sprite, 1);
-            GFX_AddPrim(1, sizeof(SPRT));
+            GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
             sprite = (SPRT*)g_GfxPrimCursor;
         }
         str++;

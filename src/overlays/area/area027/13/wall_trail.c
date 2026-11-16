@@ -269,7 +269,7 @@ MATCH void func_801F2F0C(const void* trail) {
         red = MIN(red, 0xFFu);
         setRGB1(primitive, red, 0u, 0u);
 
-        GFX_AddPrim(1u, sizeof(LINE_G2));
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_G2));
         i += 1u;
     } while (i < 31u);
 }

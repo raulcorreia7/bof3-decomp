@@ -14,7 +14,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     window.h = 8;
     window.w = 8;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
     setXY0(sprite, x + 16, y);
@@ -22,7 +22,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     setWH(sprite, (width - 4) * 8, 8);
     setClut(sprite, 176, STAGE_PALETTE_Y + 1);
     setRGB0(sprite, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
-    GFX_AddPrim(1, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
     /* the bottom edge */
     window.x = 152;
@@ -30,7 +30,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     window.h = 8;
     window.w = 8;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
     setXY0(sprite, x + 16, y + (height - 1) * 8);
@@ -38,7 +38,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     setWH(sprite, (width - 4) * 8, 8);
     setClut(sprite, 176, STAGE_PALETTE_Y + 1);
     setRGB0(sprite, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
-    GFX_AddPrim(1, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
     /* the left edge */
     window.x = 176;
@@ -46,7 +46,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     window.h = 8;
     window.w = 8;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
     setXY0(sprite, x, y + 16);
@@ -54,7 +54,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     setWH(sprite, 8, (height - 4) * 8);
     setClut(sprite, 176, STAGE_PALETTE_Y + 1);
     setRGB0(sprite, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
-    GFX_AddPrim(1, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
     /* the right edge */
     window.x = 176;
@@ -62,7 +62,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     window.h = 8;
     window.w = 8;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
     setXY0(sprite, x + (width - 1) * 8, y + 16);
@@ -70,7 +70,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     setWH(sprite, 8, (height - 4) * 8);
     setClut(sprite, 176, STAGE_PALETTE_Y + 1);
     setRGB0(sprite, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
-    GFX_AddPrim(1, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
     /* the body */
     window.x = 112;
@@ -78,7 +78,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     window.h = 8;
     window.w = 8;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
     setXY0(sprite, x + 8, y + 8);
@@ -86,7 +86,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     setWH(sprite, (width - 2) * 8, (height - 2) * 8);
     setClut(sprite, 176, STAGE_PALETTE_Y + 1);
     setRGB0(sprite, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
-    GFX_AddPrim(1, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
     /* back to the full texture window */
     window.y = 0;
@@ -94,7 +94,7 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     window.h = 256;
     window.w = 256;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
 
     /* the corners */
     UI_DrawSprite(x, y, 0x23, 1);

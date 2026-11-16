@@ -154,7 +154,7 @@ MATCH void func_801EF4F0(void) {
     s32      tpage;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
     s_Magic113OrbitRadius     = 0x1C0;
     g_ScratchPadVectors[2].vx = FIXED_MUL(rsin(0), s_Magic113OrbitRadius);
     g_ScratchPadVectors[2].vy = FIXED_MUL(rcos(0), s_Magic113OrbitRadius);
@@ -172,10 +172,10 @@ MATCH void func_801EF4F0(void) {
         setRGB0(prim, g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1]);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);
-        GFX_AddPrim(5, sizeof(POLY_G3));
+        GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(POLY_G3));
     }
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
 }
 
 /* func_801EF75C */
@@ -227,7 +227,7 @@ MATCH void func_801EF944(void) {
     s32      tpage;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
     setVector(&g_ScratchPadVectors[0], FIXED_MUL(rsin(0), s_Magic113OrbitRadius), FIXED_MUL(rcos(0), s_Magic113OrbitRadius), 0);
     for (i = 1; i <= 32; i++) {
         if (i < g_Task->unk_09) {
@@ -243,11 +243,11 @@ MATCH void func_801EF944(void) {
             if (g_Task->header.step == 2) {
                 setRGB0(prim, 240 - g_Task->timer * 20, 170 - g_Task->timer * 14, 200 - g_Task->timer * 16);
             }
-            GFX_AddPrim(5, sizeof(LINE_F2));
+            GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(LINE_F2));
         }
     }
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
 }
 
 MATCH void func_801EFC28(void) {
@@ -293,7 +293,7 @@ MATCH void func_801EFDA0(void) {
     s32      tpage;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
     for (i = 0; i < 5; i++) {
         if (i * 8 < g_Task->unk_09) {
             left   = g_Task->unk_09 - i * 8;
@@ -319,11 +319,11 @@ MATCH void func_801EFDA0(void) {
             if (g_Task->header.step == 2) {
                 setRGB0(prim, 240 - g_Task->timer * 20, 170 - g_Task->timer * 14, 200 - g_Task->timer * 16);
             }
-            GFX_AddPrim(5, sizeof(LINE_F2));
+            GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(LINE_F2));
         }
     }
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
 }
 
 MATCH void func_801F0140(void) {
@@ -419,15 +419,15 @@ MATCH void func_801F02CC(void) {
         }
     }
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
 }
 
 MATCH void func_801F0764(void) {
-    GFX_AddDitheredDrawMode(3, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256));
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256));
     g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0BD8, g_Task->header.step);
     g_Scripts = AREA_SCRIPT_TABLE;
-    GFX_AddDitheredDrawMode(3, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256));
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256));
 }
 
 #include "overlays/bmagic/Effect_CountDownTimerStep.h"

@@ -11,7 +11,7 @@ MATCH void Area_DrawSpawnSlot(AreaSpawnSlot* slot) {
     u8       core;
     u8       rim;
 
-    GFX_AddDitheredDrawMode(1u, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
+    GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     size[0] = slot->radius_14;
     Game_ProjectWorldPoint(&slot->pos, size, scale);
     Area_ProjectPoint(&slot->pos.x.fixed, &screen);
@@ -34,6 +34,6 @@ MATCH void Area_DrawSpawnSlot(AreaSpawnSlot* slot) {
         primitive->b1 = rim;
         primitive->g1 = rim;
         primitive->r1 = rim;
-        GFX_AddPrim(1u, sizeof(POLY_G3));
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G3));
     } while ((u16)angle < ONE);
 }

@@ -11,5 +11,5 @@ MATCH void Battle_DrawDimOverlay(void) {
     setXY0(tile, 0, 0);
     setRGB0(tile, 40, 40, 40);
     SetSemiTrans(tile, 1);
-    GFX_AddPrim(1, sizeof(TILE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
 }

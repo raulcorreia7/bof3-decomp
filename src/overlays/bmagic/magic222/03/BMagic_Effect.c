@@ -208,7 +208,7 @@ MATCH void func_801EF87C(void) {
     s32      tpage;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
     g_ScratchPad.cells.halves[0] = g_Task->unk_14;
     g_ScratchPad.cells.halves[5] = g_Task->unk_09 << 2;
     setVector(&g_ScratchPadVectors[2], FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]), FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]), 0);
@@ -222,7 +222,7 @@ MATCH void func_801EF87C(void) {
         setRGB0(prim, LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]));
         setRGB1(prim, LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]));
         setRGB2(prim, LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]));
-        GFX_AddPrim(5, sizeof(POLY_G3));
+        GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(POLY_G3));
     }
 }
 
@@ -230,11 +230,11 @@ MATCH void func_801EF87C(void) {
 
 /* func_801EFACC */
 MATCH void BMagic_DrawDarkRing(void) {
-    GFX_AddDitheredDrawMode(5, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256));
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256));
     g_ScratchPad.cells.halves[0] = g_Task->unk_14;
     g_ScratchPad.cells.halves[1] = g_Task->unk_14 * 2;
     g_ScratchPad.cells.halves[5] = g_Task->unk_09 * 4;
-    BMAGIC_DRAW_DARK_RING_QUADS(5, 5);
+    BMAGIC_DRAW_DARK_RING_QUADS(BMAGIC_LAYER_BEHIND_BATTLERS, 5);
 }
 
 MATCH void func_801EFDEC(void) {
@@ -415,7 +415,7 @@ MATCH void func_801F07A8(void) {
     s16          y;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     work                         = g_Task;
     g_ScratchPad.cells.halves[0] = work->param.unk_0B;
     g_ScratchPad.cells.halves[1] = work->param.unk_0B * 2;
@@ -439,7 +439,7 @@ MATCH void func_801F07A8(void) {
         setRGB1(prim, LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[6]), LOHU(g_ScratchPad.cells.halves[7]));
         setRGB2(prim, LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]));
         setRGB3(prim, LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]));
-        GFX_AddPrim(2, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_G4));
 
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
@@ -455,7 +455,7 @@ MATCH void func_801F07A8(void) {
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[6]), LOHU(g_ScratchPad.cells.halves[7]));
         setRGB3(prim, LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[6]), LOHU(g_ScratchPad.cells.halves[7]));
-        GFX_AddPrim(2, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_G4));
 
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
@@ -471,7 +471,7 @@ MATCH void func_801F07A8(void) {
         setRGB1(prim, LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[6]), LOHU(g_ScratchPad.cells.halves[7]));
         setRGB2(prim, LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]));
         setRGB3(prim, LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]));
-        GFX_AddPrim(2, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_G4));
 
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
@@ -487,7 +487,7 @@ MATCH void func_801F07A8(void) {
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[6]), LOHU(g_ScratchPad.cells.halves[7]));
         setRGB3(prim, LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[6]), LOHU(g_ScratchPad.cells.halves[7]));
-        GFX_AddPrim(2, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_G4));
 
         x += 16;
     }

@@ -178,7 +178,7 @@ MATCH void func_801D1218(WorldPos* pos, s16 y, s32 mode) {
     s32      angle;
     s32      i;
 
-    GFX_AddDitheredDrawMode(7u, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100));
+    GFX_AddDitheredDrawMode(GFX_LAYER_BACKDROP, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100));
     Area_SetCameraMatrix(&camera);
     Area_ProjectPoint((s32*)pos, &screen);
     size.vx = size.vy = y;
@@ -199,7 +199,7 @@ MATCH void func_801D1218(WorldPos* pos, s16 y, s32 mode) {
         setRGB0(primitive, (mode & 4) << 5, (mode & 2) << 6, (mode & 1) << 7);
         setRGB1(primitive, 0, 0, 0);
         setRGB2(primitive, 0, 0, 0);
-        GFX_AddPrim(7u, sizeof(POLY_G3));
+        GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(POLY_G3));
         i++;
     } while ((i & BYTE_MASK) < 32U);
 }
@@ -223,7 +223,7 @@ MATCH void func_801D17A0(s16 half_width, s16 half_height, u8 shade) {
 
     tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(7, 0xC);
+    GFX_AddPrim(GFX_LAYER_BACKDROP, 0xC);
     parity  = (g_FrameCount & 1) << 2;
     phase   = 0x800;
     next[0] = ((half_width * rcos(phase)) >> 12) + 0xA0 + parity;
@@ -246,7 +246,7 @@ MATCH void func_801D17A0(s16 half_width, s16 half_height, u8 shade) {
         setRGB0(prim, shade, shade >> 2, shade >> 2);
         setRGB1(prim, 0, 0, 0);
         setRGB2(prim, 0, 0, 0);
-        GFX_AddPrim(7, 0x1C);
+        GFX_AddPrim(GFX_LAYER_BACKDROP, 0x1C);
         i++;
     } while (i < 0x20);
 }

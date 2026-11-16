@@ -23,7 +23,7 @@ MATCH void func_801F4138(s16 centre_x, s16 centre_y, s16 radius, s16 centre_shad
             arc_color = 0xFF;
         }
     }
-    GFX_AddDitheredDrawMode(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
+    GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
     phase = 0;
     i     = 0;
     do {
@@ -46,7 +46,7 @@ MATCH void func_801F4138(s16 centre_x, s16 centre_y, s16 radius, s16 centre_shad
         prim->r2 = arc_color;
         prim->g2 = arc_color;
         prim->b2 = arc_color;
-        GFX_AddPrim(1, sizeof(POLY_G3));
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G3));
         i += 1;
     } while (i < 0x20);
 }

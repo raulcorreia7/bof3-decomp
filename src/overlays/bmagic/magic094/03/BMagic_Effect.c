@@ -50,7 +50,7 @@ MATCH void func_801EEE4C(void) {
         func_801EF710();
         PopMatrix();
     }
-    GFX_AddDitheredDrawMode(3, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256));
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256));
 }
 
 MATCH void func_801EEF1C(void) {

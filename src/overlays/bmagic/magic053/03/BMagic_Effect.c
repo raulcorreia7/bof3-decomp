@@ -310,7 +310,7 @@ MATCH void func_801F01C0(void) {
     s32       tpage;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
@@ -327,7 +327,7 @@ MATCH void func_801F01C0(void) {
     setRGB0(prim, D_1F80000A, D_1F80000A, D_1F80000A);
     RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
                   &flag);
-    GFX_AddPrim(5, sizeof(POLY_FT4));
+    GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(POLY_FT4));
 }
 
 /* func_801F0494 */

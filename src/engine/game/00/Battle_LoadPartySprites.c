@@ -41,7 +41,7 @@ MATCH void Battle_LoadPartySprites(void) {
         }
         state                    = &g_GameEntrySubstate;
         count                    = *state;
-        g_AreaDrawMode           = 4;
+        g_AreaDrawMode           = GFX_LAYER_BATTLE_SCENE;
         g_AreaCameraRefreshCount = 2;
         D_8014933F               = g_Battle.scroll_dir & 0x1;
         count++;

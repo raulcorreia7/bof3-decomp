@@ -22,7 +22,7 @@ MATCH void Scene_DrawScanBar(ScanBar* bar) {
     setRGB1(poly, 0, 0, 0);
     setRGB2(poly, 128, 0, 0);
     setRGB3(poly, 128, 0, 0);
-    GFX_AddPrim(7, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(POLY_G4));
 
     poly = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(poly);
@@ -39,5 +39,5 @@ MATCH void Scene_DrawScanBar(ScanBar* bar) {
     setRGB1(poly, 128, 0, 0);
     setRGB2(poly, 0, 0, 0);
     setRGB3(poly, 0, 0, 0);
-    GFX_AddPrim(7, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(POLY_G4));
 }

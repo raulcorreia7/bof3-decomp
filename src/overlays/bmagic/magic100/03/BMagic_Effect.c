@@ -265,7 +265,7 @@ MATCH void func_801EF9D4(void) {
     s16      phase;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
-    GFX_AddDitheredDrawMode(5, tpage);
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
     g_ScratchPad.cells.halves[1] = g_Task->unk_1C - 0x20;
     g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[1] + FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[1] / 2);
     phase                        = (g_Task->unk_20 / 64) & 0x3F;
@@ -292,8 +292,8 @@ MATCH void func_801EF9D4(void) {
         setRGB3(prim, 1, 1, 1);
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                       &depth, &flag);
-        GFX_AddPrim(5, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(POLY_G4));
     }
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_AddDitheredDrawMode(5, tpage);
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
 }

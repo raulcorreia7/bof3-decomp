@@ -30,7 +30,7 @@ void            func_801F0908(void);
 #define MAGIC172_DRAW_JAGGED_LINE(ANGLE, SPREAD, WOBBLE, FADE, MIN)                                                                                                                     \
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);                                                                                                                        \
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);                                                                                                                             \
-    GFX_AddPrim(3, sizeof(DR_MODE));                                                                                                                                                    \
+    GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(DR_MODE));                                                                                                                           \
     g_ScratchPad.cells.halves[0] = 16;                                                                                                                                                  \
     g_ScratchPad.cells.halves[2] = ANGLE;                                                                                                                                               \
     x                            = g_Task->unk_2E.half;                                                                                                                                 \
@@ -56,7 +56,7 @@ void            func_801F0908(void);
             g_ScratchPad.cells.halves[3] = (g_ScratchPad.cells.halves[0] - (FADE + 1)) * 6;                                                                                             \
         }                                                                                                                                                                               \
         setRGB1(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3] / 3);                                                                    \
-        GFX_AddPrim(3, sizeof(LINE_G2));                                                                                                                                                \
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(LINE_G2));                                                                                                                       \
         i++;                                                                                                                                                                            \
     } while (g_ScratchPad.cells.halves[0] >= MIN);
 

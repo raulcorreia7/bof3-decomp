@@ -451,7 +451,7 @@ MATCH void func_801D269C(s32 x, s32 y) {
     SetPolyF3(poly);
     setXY3(poly, x, y, x - 6, y - 6, x + 6, y - 6);
     setRGB0(poly, 0, colour, 0);
-    GFX_AddPrim(1, sizeof(POLY_F3));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_F3));
 }
 
 MATCH s32 func_801D2750(s32 limit) {
@@ -542,7 +542,7 @@ MATCH void func_801D2CF8(s32 x, s32 y, s32 icon) {
     u8    index;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 896, 256), NULL);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
     setXY0(sprite, x, y);
@@ -556,7 +556,7 @@ MATCH void func_801D2CF8(s32 x, s32 y, s32 icon) {
         setUV0(sprite, (icon & 7) * 32, (index / 8) * 40);
         sprite->clut = 0x7BC9;
     }
-    GFX_AddPrim(1, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 }
 
 MATCH void func_801D2E10(void) {
@@ -576,7 +576,7 @@ MATCH void func_801D2E60(s16 x, s16 y) {
     primitive->y0 = y;
     primitive->y1 = y;
     setRGB0(primitive, 0x80, 0x80, 0x80);
-    GFX_AddPrim(1, sizeof(LINE_F2));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F2));
 }
 
 /* Queues the 128-grey sprite whose source rectangle is entry index of the rectangle table. */
@@ -591,7 +591,7 @@ MATCH void func_801D2EDC(s32 x, s32 y, s32 index) {
     setRGB0(sprt, 128, 128, 128);
     setUV0(sprt, D_801DAC60[index], D_801DAC60[index + 1]);
     sprt->clut = 0x7887;
-    GFX_AddPrim(1, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 }
 
 #ifdef NON_MATCHING
@@ -607,7 +607,7 @@ NON_MATCHING void func_801D2FA4(s16 x, s16 y) {
         tpage = 0x1D;
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddPrim(GFX_LAYER_UI, 0xC);
     func_801D2EDC(x, (s16)y, 0);
     off = 0x20;
     for (i = 0; i < 6; i++) {
@@ -1076,7 +1076,7 @@ NON_MATCHING void func_801D4910(s32 x, s32 y) {
         tpage = 0x1D;
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-    GFX_AddPrim(1, 0xC);
+    GFX_AddPrim(GFX_LAYER_UI, 0xC);
     func_801D2EDC((s16)x, (s16)y, 0xB);
     off = 8;
     for (i = 0; i < 9; i++) {
@@ -1247,7 +1247,7 @@ MATCH void func_801D5788(void) {
 
     func_801D5B2C();
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_SUB, 0x140, 0), 0);
-    GFX_AddPrim(0, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_TOP, sizeof(DR_MODE));
     g4 = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(g4);
     SetSemiTrans(g4, 1);
@@ -1266,7 +1266,7 @@ MATCH void func_801D5788(void) {
     c += 0x10;
     g4->y2 = c;
     g4->y3 = c;
-    GFX_AddPrim(0, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_TOP, sizeof(POLY_G4));
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     t        = D_801DB0C4;
@@ -1275,7 +1275,7 @@ MATCH void func_801D5788(void) {
     setRGB0(tile, 0, 0, 0);
     tile->y0 = t + 0x10;
     tile->h  = 0xE0 - t;
-    GFX_AddPrim(0, sizeof(TILE));
+    GFX_AddPrim(GFX_LAYER_TOP, sizeof(TILE));
     n          = D_801DB0C4;
     D_801DB0C4 = n + 1;
     if (g_InputHeld != 0) {
@@ -2062,7 +2062,7 @@ MATCH void func_801D875C(s16 x, s16 y, s32 index) {
     sprt->r0   = 0x80;
     sprt->g0   = 0x80;
     sprt->b0   = 0x80;
-    GFX_AddPrim(1, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 }
 
 MATCH void func_801D88A4(s32 x, s32 y, s32 bright) {
@@ -2162,7 +2162,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     val3 = (u16)stack_18;
     val6 = (u16)stack_20;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, 0xF, (RECT*)val7);
-    GFX_AddPrim(1U, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     val7 = g_GfxPrimCursor;
     SetPolyFT4((POLY_FT4*)val7);
     SetSemiTrans(val7, 1);
@@ -2202,7 +2202,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
         GetGraphType();
     }
     FIELD(s16, val7, 0x16u) = 0xF;
-    GFX_AddPrim(1U, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
     val3     = (u16)((s32)((val3 & HALF_MASK) - 4) >> 1);
     val7     = g_GfxPrimCursor;
     stack_48 = (stack_28 - 3) & 1;
@@ -2235,7 +2235,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
         GetGraphType();
     }
     FIELD(s16, val7, 0x16u) = 0xF;
-    GFX_AddPrim(1U, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
     val7 = g_GfxPrimCursor;
     SetPolyFT4((POLY_FT4*)val7);
     SetSemiTrans(val7, 1);
@@ -2267,7 +2267,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
         GetGraphType();
     }
     FIELD(s16, val7, 0x16u) = 0xF;
-    GFX_AddPrim(1U, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
     val7 = g_GfxPrimCursor;
     SetPolyFT4((POLY_FT4*)val7);
     SetSemiTrans(val7, 1);
@@ -2303,7 +2303,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
         GetGraphType();
     }
     FIELD(s16, val7, 0x16u) = 0xF;
-    GFX_AddPrim(1U, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
     val7                   = g_GfxPrimCursor;
     g_GfxPrimCursor        = val7 + 8;
     *(s16*)(val7)          = 0;
@@ -2314,7 +2314,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
         GetGraphType();
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, 0xF, (RECT*)val7);
-    GFX_AddPrim(1U, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     func_801AEBA0((s16)val2, (s16)(stack_20 + 2), (s16)(stack_28 - 4), (s16)(stack_30 - 4), 0);
 }
 #else
@@ -2405,7 +2405,7 @@ NON_MATCHING void func_801D9348(s32 x, s32 y, s32 color, s32 frame_mode) {
     SetLineF3(line3);
     setXY3(line3, x + 4, y, x, y + 4, x, y + 0x34);
     setRGB0(line3, rgb[2], rgb[1], rgb[0]);
-    GFX_AddPrim(1, sizeof(LINE_F3));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F3));
 
     line4 = (LINE_F4*)g_GfxPrimCursor;
     SetLineF4(line4);
@@ -2416,7 +2416,7 @@ NON_MATCHING void func_801D9348(s32 x, s32 y, s32 color, s32 frame_mode) {
     line4->y2 = y + 0x34;
     line4->x1 = (line4->x2 = x + width_copy - 1);
     setRGB0(line4, rgb[2], rgb[1], rgb[0]);
-    GFX_AddPrim(1, sizeof(LINE_F4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F4));
 }
 #else
 INCLUDE_ASM(func_801D9348);
@@ -2556,7 +2556,7 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     window.w = 8;
     window.h = 8;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
     setXY0(sprite, x + 16, y);
@@ -2565,14 +2565,14 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     setWH(sprite, ((u8)width - 4) * 8, edge);
     setClut(sprite, 176, STAGE_PALETTE_Y + 1);
     setRGB0(sprite, 0x80, 0x80, 0x80);
-    GFX_AddPrim(1, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
     window.x = 152;
     window.y = 160;
     window.h = edge;
     window.w = edge;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
     setXY0(sprite, x + 16, y + ((u8)height - 1) * 8);
@@ -2581,14 +2581,14 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     setWH(sprite, ((u8)width - 4) * 8, edge);
     setClut(sprite, 176, STAGE_PALETTE_Y + 1);
     setRGB0(sprite, 0x80, 0x80, 0x80);
-    GFX_AddPrim(1, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
     window.x = 176;
     window.y = 152;
     window.h = edge;
     window.w = edge;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
     setXY0(sprite, x, y + 16);
@@ -2597,14 +2597,14 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     setWH(sprite, edge, ((u8)height - 4) * 8);
     setClut(sprite, 176, STAGE_PALETTE_Y + 1);
     setRGB0(sprite, 0x80, 0x80, 0x80);
-    GFX_AddPrim(1, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
     window.x = 176;
     window.y = 160;
     window.h = edge;
     window.w = edge;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
     setXY0(sprite, x + ((u8)width - 1) * 8, y + 16);
@@ -2613,14 +2613,14 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     setWH(sprite, edge, ((u8)height - 4) * 8);
     setClut(sprite, 176, STAGE_PALETTE_Y + 1);
     setRGB0(sprite, 0x80, 0x80, 0x80);
-    GFX_AddPrim(1, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
     window.x = 112;
     window.y = 160;
     window.h = edge;
     window.w = edge;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
     setXY0(sprite, x + 8, y + 8);
@@ -2628,14 +2628,14 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     setWH(sprite, ((u8)width - 2) * 8, ((u8)height - 2) * 8);
     setClut(sprite, 176, STAGE_PALETTE_Y + 1);
     setRGB0(sprite, 0x80, 0x80, 0x80);
-    GFX_AddPrim(1, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
     window.x = 0;
     window.y = 0;
     window.w = 256;
     window.h = 256;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
 
     UI_DrawSprite((s16)x, (s16)y, 0x23, 1);
     columns = (u8)width - 2;

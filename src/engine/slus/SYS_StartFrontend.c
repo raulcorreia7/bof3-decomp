@@ -51,7 +51,7 @@ MATCH void SYS_StartFrontend(void) {
     GFX_ResetPaletteFades();
     GFX_FreeAllPaletteSlots();
     g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
-    g_AreaDrawMode  = 6;
+    g_AreaDrawMode  = GFX_LAYER_FIELD_SCENE;
     g_Scripts       = AREA_SCRIPT_TABLE;
     D_801459F4      = MEM_PTR(u8, (SCENE_TABLE_BASE + 4));
     D_80143E07      = 0;

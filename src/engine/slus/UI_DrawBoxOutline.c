@@ -17,6 +17,6 @@ MATCH void UI_DrawBoxOutline(s32 x, s32 y, u8 width, u8 height) {
     y1 = y + height + 1;
     setRGB0(line, 120, 120, 120);
     setXY4(line, x0, y0, x1, y0, x1, y1, x0, y1);
-    GFX_AddPrim(1u, sizeof(LINE_F4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F4));
     UI_DrawLine(x0, y0, x0, y1, 0x78);
 }

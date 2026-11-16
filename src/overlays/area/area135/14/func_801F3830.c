@@ -12,5 +12,5 @@ MATCH void func_801F3830(s32 texture, s32 cell) {
     setRGB0(prim, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     prim->clut  = GetClut(0, 0x1E8);
     prim->tpage = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 0x240, 0x100);
-    GFX_AddPrim(1, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 }

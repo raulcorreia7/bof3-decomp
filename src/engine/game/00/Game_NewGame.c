@@ -8,7 +8,7 @@ MATCH void Game_NewGame(void) {
     u8  entry_facing;
 
     g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
-    g_AreaDrawMode  = 6u;
+    g_AreaDrawMode  = GFX_LAYER_FIELD_SCENE;
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     area_id                  = g_SaveAreaId;
     g_GameAreaId             = 0xFFFFu;

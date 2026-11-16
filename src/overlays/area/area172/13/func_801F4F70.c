@@ -3,7 +3,7 @@
 MATCH void func_801F4F70(s32 x, s32 y) {
     POLY_G4* poly;
 
-    GFX_AddDitheredDrawMode(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, FONT_TPAGE_X, FONT_TPAGE_Y));
+    GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, FONT_TPAGE_X, FONT_TPAGE_Y));
     poly = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(poly);
     poly->x0 = x - 64;
@@ -17,5 +17,5 @@ MATCH void func_801F4F70(s32 x, s32 y) {
     setRGB3(poly, 0xFF, 0xFF, 0xFF);
     SetSemiTrans(poly, 1);
     SetShadeTex(poly, 0);
-    GFX_AddPrim(1, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
 }

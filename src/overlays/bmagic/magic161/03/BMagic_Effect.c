@@ -110,7 +110,7 @@ MATCH void func_801EF1DC(void) {
     s32      shade;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(1, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_UI, tpage);
     prim  = (POLY_G4*)g_GfxPrimCursor;
     red   = g_Task->unk_09 * 12;
     shade = g_Task->unk_09 * 6;
@@ -121,7 +121,7 @@ MATCH void func_801EF1DC(void) {
     setRGB1(prim, 0xC0, 0x60, 0x60);
     setRGB2(prim, red, shade, shade);
     setRGB3(prim, red, shade, shade);
-    GFX_AddPrim(1, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
@@ -130,7 +130,7 @@ MATCH void func_801EF1DC(void) {
     setRGB1(prim, red, shade, shade);
     setRGB2(prim, 0xC0, 0x60, 0x60);
     setRGB3(prim, 0xC0, 0x60, 0x60);
-    GFX_AddPrim(1, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(1, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_UI, tpage);
 }

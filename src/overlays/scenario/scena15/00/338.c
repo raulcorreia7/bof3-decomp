@@ -98,7 +98,7 @@ MATCH void Scene_DrawLightPillar(u8 fade) {
 
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
         if ((u8)(i - 11) >= 17) {
-            GFX_AddPrim(1, 12);
+            GFX_AddPrim(GFX_LAYER_UI, 12);
         }
         prim = GFX_BeginPolyG4(1);
         setXY4(prim, last_inner.vx, last_inner.vy, last_outer.vx, last_outer.vy, inner.vx, inner.vy, outer.vx, outer.vy);
@@ -114,7 +114,7 @@ MATCH void Scene_DrawLightPillar(u8 fade) {
         setRGB2(prim, color, color, color);
         setRGB3(prim, color, color, color);
         if ((u8)(i - 11) >= 17) {
-            GFX_AddPrim(1, 36);
+            GFX_AddPrim(GFX_LAYER_UI, 36);
         }
     }
 }
@@ -133,7 +133,7 @@ MATCH void func_801F752C(AreaSpark* spark) {
     tile->b0 = shade;
     tile->g0 = shade;
     tile->r0 = shade;
-    GFX_AddPrim(1, sizeof(TILE_1));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE_1));
 }
 
 #include "shared/Area_ClearWorkColumn.h"
@@ -263,7 +263,7 @@ MATCH void func_801F7AEC(void) {
     ((RECT*)cursor)->w = 0xC0;
     ((RECT*)cursor)->h = 0x100;
     SetDrawArea((DR_AREA*)g_GfxPrimCursor, (RECT*)cursor);
-    GFX_AddPrim(7, sizeof(DR_AREA));
+    GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(DR_AREA));
 
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
@@ -279,13 +279,13 @@ MATCH void func_801F7AEC(void) {
     tile->r0 = 0;
     tile->g0 = 0;
     tile->b0 = 0;
-    GFX_AddPrim(7, sizeof(TILE));
+    GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(TILE));
 
     cursor          = g_GfxPrimCursor;
     g_GfxPrimCursor = cursor + sizeof(RECT);
     memcpy(cursor, g_GfxCurrentDisplayFrame + 0x14, sizeof(RECT));
     SetDrawArea((DR_AREA*)g_GfxPrimCursor, (RECT*)cursor);
-    GFX_AddPrim(7, sizeof(DR_AREA));
+    GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(DR_AREA));
 
     if (g_Task->unk_06 == 0) {
         func_801F7D1C();
@@ -959,7 +959,7 @@ MATCH void func_801FA6BC(u8 point) {
     y = LOH(D_801FE608[row + 6]) << 8;
     g_Game.walk_flags &= ~AREA_WALK_ACCEPT_LOCK;
     func_801BFE34(x, y, D_801FE608[row + 9]);
-    g_AreaDrawMode        = 4;
+    g_AreaDrawMode        = GFX_LAYER_BATTLE_SCENE;
     g_SceneState.state_04 = 2;
     g_SceneState.step_05  = 0;
 }

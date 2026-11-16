@@ -10,13 +10,13 @@ MATCH void func_801EEC04(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(4, 0xC);
+    GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, 0xC);
 
     SYS_DISPATCH_BYTE(handlers, g_Task->header.mode);
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(4, 0xC);
+    GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, 0xC);
 }
 
 MATCH void func_801EECFC(void) {
@@ -59,7 +59,7 @@ MATCH void func_801EEF28(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(4, 0xC);
+    GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, 0xC);
 
     if (g_Task->header.step < 3) {
         if ((g_FrameCount & BYTE_MASK) == 0x40) {
@@ -79,7 +79,7 @@ MATCH void func_801EEF28(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(4, 0xC);
+    GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, 0xC);
 }
 
 MATCH void func_801EF08C(void) {
@@ -188,7 +188,7 @@ MATCH void func_801EFF84(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(4, 0xC);
+    GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, 0xC);
 
     if (g_Task->header.step != 0) {
         BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801F02FC);
@@ -198,7 +198,7 @@ MATCH void func_801EFF84(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(4, 0xC);
+    GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, 0xC);
 }
 
 MATCH void func_801F00A0(void) {
@@ -296,7 +296,7 @@ NON_MATCHING void func_801F02FC(void) {
                       FIXED_MUL(rcos(i << 9), FIXED_MUL(rcos((band + 1) << 8), g_ScratchPad.cells.halves[0])), FIXED_MUL(rsin((band + 1) << 8), g_ScratchPad.cells.halves[0]));
             x     = (g_ScratchPadVectors[3].vx << 9) + g_Task->pos.x.fixed;
             y     = (g_ScratchPadVectors[3].vy << 9) + g_Task->pos.y.fixed;
-            tpage = getTPage(1, 1, 320, 256);
+            tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
             Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
             prim = (POLY_G4*)g_GfxPrimCursor;

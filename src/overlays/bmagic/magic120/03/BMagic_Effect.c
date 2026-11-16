@@ -166,7 +166,7 @@ MATCH void BMagic_DrawWhelpBreath(void) {
     s32       prev;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_AddDitheredDrawMode(3, tpage);
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     g_ScratchPad.cells.halves[4] = g_Task->unk_2E.half;
     g_ScratchPad.cells.halves[5] = g_Task->unk_30.half;
     g_ScratchPad.cells.halves[1] = g_Task->unk_14;
@@ -207,7 +207,7 @@ MATCH void BMagic_DrawWhelpBreath(void) {
         g_ScratchPad.cells.halves[3] = g_Task->unk_04;
         setRGB1(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
         setRGB3(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
-        GFX_AddPrim(3, sizeof(POLY_GT4));
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_GT4));
         prim = (POLY_GT4*)g_GfxPrimCursor;
         SetPolyGT4(prim);
         SetSemiTrans(prim, 1);
@@ -237,10 +237,10 @@ MATCH void BMagic_DrawWhelpBreath(void) {
         g_ScratchPad.cells.halves[3] = g_Task->unk_04;
         setRGB0(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
         setRGB2(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
-        GFX_AddPrim(3, sizeof(POLY_GT4));
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_GT4));
     }
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_AddDitheredDrawMode(3, tpage);
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
 }
 
 #include "overlays/bmagic/BMagic_RunStep.h"
@@ -374,7 +374,7 @@ MATCH void func_801F0274(void) {
     u8           enemy;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     for (j = 0; j < 3; j++) {
         for (i = 0; i < 8; i++) {
             enemy = i;
@@ -435,7 +435,7 @@ MATCH void func_801F04B0(void) {
             setRGB0(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
             RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                           &depth, &flag);
-            GFX_AddPrim(3, sizeof(POLY_FT4));
+            GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_FT4));
         }
     }
 }
@@ -494,7 +494,7 @@ NON_MATCHING void func_801F0974(void) {
 
     g_ScratchPad.cells.halves[0] = (g_FrameCount & 0x3F) + 0x100;
     tpage                        = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_SUB, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
     prim                      = GFX_BeginPolyG3(1);
     g_ScratchPadVectors[0].vx = 0;
     g_ScratchPadVectors[0].vy = 0;
@@ -511,7 +511,7 @@ NON_MATCHING void func_801F0974(void) {
     setRGB1(prim, 1, 1, 1);
     setRGB2(prim, 1, 1, 1);
     RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
-    GFX_AddPrim(5, sizeof(POLY_G3));
+    GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(POLY_G3));
 }
 #else
 INCLUDE_ASM(func_801F0974);

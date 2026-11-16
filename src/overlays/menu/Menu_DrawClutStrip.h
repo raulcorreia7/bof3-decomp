@@ -40,7 +40,7 @@ MATCH void Menu_DrawClutStrip(u8 clut_index) {
                 h       = desc->h;
                 setRGB0(prim, shade, shade, shade);
                 prim->h = h;
-                GFX_AddPrim(1, sizeof(SPRT));
+                GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
                 y += desc->h;
                 entry++;
             } while (y < 240);

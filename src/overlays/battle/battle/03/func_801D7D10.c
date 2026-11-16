@@ -15,5 +15,5 @@ MATCH void func_801D7D10(u8 clut_index, u16 x, u16 y, u16 width, u8 height, u8 s
     setUV4(primitive, u0, 224, u0 + 24, 224, u0, 248, u0 + 24, 248);
     primitive->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 256, 256);
     primitive->clut  = (clut_table.bytes[clut_index] & 0x3F) | STAGE_PALETTE_CLUT;
-    GFX_AddPrim(1, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 }

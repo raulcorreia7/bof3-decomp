@@ -68,7 +68,7 @@ MATCH void Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle
     poly->b1            = 0;
     poly->r2 = poly->g2 = g_MenuFormationArrowTurned[2][1] * 8 - 97;
     poly->b2            = 0;
-    GFX_AddPrim(1, sizeof(POLY_G3));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G3));
 
     j = 1;
     for (i = 0; i < members; i++) {

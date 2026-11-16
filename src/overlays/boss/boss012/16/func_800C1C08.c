@@ -9,7 +9,7 @@ MATCH void func_800C1C08(s32 mode) {
     s32    y2;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100), 0);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
 
     sprt = (SPRT*)g_GfxPrimCursor;
     setRGB0(sprt, 0x80, 0x80, 0x80);
@@ -22,5 +22,5 @@ MATCH void func_800C1C08(s32 mode) {
     sprt->h  = 0x56;
     sprt->y0 = y1 + y2;
     SetSprt(sprt);
-    GFX_AddPrim(1, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 }

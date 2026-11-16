@@ -206,7 +206,7 @@ MATCH void BMagic_DrawBurnFlameQuads(void) {
     long     flag;
     s32      i;
 
-    GFX_AddDitheredDrawMode(5, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256));
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256));
     DARK_RING_INNER           = 0x80;
     DARK_RING_OUTER           = 0xC0;
     DARK_RING_SHADE           = g_Task->unk_09 * 6;
@@ -232,9 +232,9 @@ MATCH void BMagic_DrawBurnFlameQuads(void) {
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, DARK_RING_SHADE, DARK_RING_SHADE, DARK_RING_SHADE);
         setRGB3(prim, DARK_RING_SHADE, DARK_RING_SHADE, DARK_RING_SHADE);
-        GFX_AddPrim(5, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(POLY_G4));
     }
-    GFX_AddDitheredDrawMode(5, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256));
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256));
 }
 
 MATCH void BMagic_DrawBurnFlameTris(void) {
@@ -245,7 +245,7 @@ MATCH void BMagic_DrawBurnFlameTris(void) {
     s32      tpage;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
     g_ScratchPad.cells.halves[0] = 0x80;
     g_ScratchPad.cells.halves[5] = g_Task->unk_09 * 4;
     g_ScratchPad.cells.halves[6] = g_Task->unk_09 * 6;
@@ -260,9 +260,9 @@ MATCH void BMagic_DrawBurnFlameTris(void) {
         setRGB0(prim, g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6]);
         setRGB1(prim, g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6], g_ScratchPad.cells.halves[6]);
         setRGB2(prim, g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6], g_ScratchPad.cells.halves[6]);
-        GFX_AddPrim(5, sizeof(POLY_G3));
+        GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(POLY_G3));
     }
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
 }

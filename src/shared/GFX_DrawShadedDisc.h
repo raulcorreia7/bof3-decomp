@@ -7,7 +7,7 @@ MATCH void GFX_DrawShadedDisc(s16 x, s16 y, s16 radius, u8 center_shade, u8 rim_
     u16      other;
     s32      scale;
 
-    GFX_AddDitheredDrawMode(1u, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
+    GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
     angle = 0;
     do {
         packet = GFX_BeginPolyG3(1);
@@ -20,7 +20,7 @@ MATCH void GFX_DrawShadedDisc(s16 x, s16 y, s16 radius, u8 center_shade, u8 rim_
         setRGB1(packet, rim_shade, rim_shade, rim_shade);
         setRGB2(packet, rim_shade, rim_shade, rim_shade);
         packet->y2 = (s16)(y + ((radius * scale) >> 0x0C));
-        GFX_AddPrim(1u, sizeof(POLY_G3));
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G3));
         angle = next;
     } while ((u16)angle < ONE);
 }

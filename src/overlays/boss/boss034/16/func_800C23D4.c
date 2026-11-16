@@ -50,6 +50,6 @@ MATCH void func_800C23D4(s32 angle) {
 
     setUV4(poly, 0, 0, 191, 0, 0, 104, 191, 104);
     SetPolyFT4(poly);
-    GFX_AddPrim(1, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
     PopMatrix();
 }

@@ -249,7 +249,7 @@ MATCH void func_801EF55C(void) {
     s32   i;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(0, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_TOP, tpage);
     g_ScratchPad.cells.words[0] = 0xE8;
     g_ScratchPad.cells.words[1] = g_Task->unk_09;
     for (i = 0; i < 6; i++) {
@@ -260,7 +260,7 @@ MATCH void func_801EF55C(void) {
             g_ScratchPad.cells.words[0] += 10;
             setWH(prim, 8, 12);
             setRGB0(prim, D_801EFCA4[i][0], D_801EFCA4[i][1], D_801EFCA4[i][2]);
-            GFX_AddPrim(0, sizeof(TILE));
+            GFX_AddPrim(GFX_LAYER_TOP, sizeof(TILE));
         }
     }
     if (g_Task->param.unk_0B == 0) {
@@ -269,7 +269,7 @@ MATCH void func_801EF55C(void) {
         setXY0(prim, g_ScratchPad.cells.words[0], g_ScratchPad.cells.words[1]);
         setWH(prim, 8, 12);
         setRGB0(prim, 0x60, 0x60, 0x60);
-        GFX_AddPrim(0, sizeof(TILE));
+        GFX_AddPrim(GFX_LAYER_TOP, sizeof(TILE));
     }
 }
 
@@ -336,7 +336,7 @@ MATCH void func_801EFA48(void) {
     s32       tpage;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     setXY4(prim, g_Task->unk_2E.half - 12, g_Task->unk_30.half - 12, g_Task->unk_2E.half + 12, g_Task->unk_30.half - 12, g_Task->unk_2E.half - 12, g_Task->unk_30.half + 12, g_Task->unk_2E.half + 12,
@@ -345,7 +345,7 @@ MATCH void func_801EFA48(void) {
     prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     prim->clut  = GetClut(0, 480);
     setUV4(prim, g_Task->param.unk_0B, 36, g_Task->param.unk_0B + 11, 36, g_Task->param.unk_0B, 46, g_Task->param.unk_0B + 11, 46);
-    GFX_AddPrim(2, sizeof(POLY_FT4));
+    GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_FT4));
 }
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"

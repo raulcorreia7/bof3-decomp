@@ -11,7 +11,7 @@ MATCH void func_801F31A0(AreaRing* ring) {
     u8       i;
     u8       j;
 
-    GFX_AddDitheredDrawMode(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, FONT_TPAGE_X, FONT_TPAGE_Y));
+    GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, FONT_TPAGE_X, FONT_TPAGE_Y));
 
     top    = 0;
     bottom = 0xF0;
@@ -43,7 +43,7 @@ MATCH void func_801F31A0(AreaRing* ring) {
         poly->b0 = shade;
         poly->g0 = shade;
         poly->r0 = shade;
-        GFX_AddPrim(1, sizeof(POLY_F4));
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_F4));
         i++;
     } while (i < AREA_RING_POINTS);
 
@@ -58,7 +58,7 @@ MATCH void func_801F31A0(AreaRing* ring) {
     tile->b0 = shade;
     tile->g0 = shade;
     tile->r0 = shade;
-    GFX_AddPrim(1, sizeof(TILE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
 
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
@@ -71,5 +71,5 @@ MATCH void func_801F31A0(AreaRing* ring) {
     tile->b0 = shade;
     tile->g0 = shade;
     tile->r0 = shade;
-    GFX_AddPrim(1, sizeof(TILE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
 }

@@ -28,5 +28,5 @@ MATCH void func_800AF014(void) {
     prim->g1 = 128;
     prim->b2 = 128;
     prim->b1 = 128;
-    GFX_AddPrim(7U, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(POLY_G4));
 }

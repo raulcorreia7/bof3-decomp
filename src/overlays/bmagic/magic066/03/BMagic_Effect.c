@@ -137,7 +137,7 @@ MATCH void func_801EF158(void) {
     s16       angle;
 
     tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_AddDitheredDrawMode(2, tpage);
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_FOREGROUND, tpage);
     g_ScratchPad.cells.halves[0] = g_Task->unk_14;
     angle                        = g_Task->param.unk_0B;
     g_ScratchPadVectors[0].vx    = 0;
@@ -175,7 +175,7 @@ MATCH void func_801EF158(void) {
         setUV4(poly, 0, g_ScratchPad.cells.halves[4], 0xF8, g_ScratchPad.cells.halves[4], 0, g_ScratchPad.cells.halves[4] + 0x10, 0xF8, g_ScratchPad.cells.halves[4] + 0x10);
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3,
                       &depth, &flag);
-        GFX_AddPrim(2, sizeof(POLY_FT4));
+        GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_FT4));
     }
     i -= 2;
     angle                        = (g_Task->param.unk_0B + i) & 0x1F;
@@ -217,10 +217,10 @@ MATCH void func_801EF158(void) {
         }
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                       &depth, &flag);
-        GFX_AddPrim(2, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_G4));
     }
     tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_AddDitheredDrawMode(2, tpage);
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_FOREGROUND, tpage);
 }
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
@@ -289,7 +289,7 @@ MATCH void func_801EFCC8(void) {
             setRGB0(poly, g_ScratchPad.cells.halves[1], g_ScratchPad.cells.halves[1], g_ScratchPad.cells.halves[1]);
             RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3,
                           &depth, &flag);
-            GFX_AddPrim(3, sizeof(POLY_FT4));
+            GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_FT4));
         }
     }
 }

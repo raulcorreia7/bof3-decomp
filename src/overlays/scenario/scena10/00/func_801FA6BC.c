@@ -16,7 +16,7 @@ MATCH void func_801FA6BC(void) {
             g_AreaCameraOffsetZ -= 5;
             if (g_AreaCameraOffsetZ == -0x280) {
                 SND_StopSequence(g_SelectionCues[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4]);
-                g_AreaDrawMode           = 4;
+                g_AreaDrawMode           = GFX_LAYER_BATTLE_SCENE;
                 D_8014933F               = 0;
                 g_AreaCameraRefreshCount = 2;
                 g_SceneState.step_05     = 2;

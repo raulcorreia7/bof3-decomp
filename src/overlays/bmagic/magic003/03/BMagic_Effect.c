@@ -472,7 +472,7 @@ MATCH void func_801F0164(s32 index) {
     s32       v;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     length = D_801F0A9C[(u8)index];
     x      = g_Task->unk_2E.half - ((length >> 1) * 12 + (length & 1) * 6);
     y      = g_Task->unk_30.half;
@@ -488,7 +488,7 @@ MATCH void func_801F0164(s32 index) {
             u = (glyph % 21) * 12;
             v = (glyph / 21) * 12;
             setUV4(prim, u, v + 36, u + 12, v + 36, u, v + 48, u + 12, v + 48);
-            GFX_AddPrim(2, sizeof(POLY_FT4));
+            GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_FT4));
         } else {
             x -= 6;
         }
@@ -504,7 +504,7 @@ MATCH void func_801F03F0(s32 dir) {
     s32       u;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     prim = (POLY_FT4*)g_GfxPrimCursor;
     x    = g_Task->unk_2E.half;
     y    = g_Task->unk_30.half;
@@ -515,7 +515,7 @@ MATCH void func_801F03F0(s32 dir) {
     u           = ((u8)dir + 15) * 12;
     setUV4(prim, u, 0x30, u + 12, 0x30, u, 0x3C, u + 12, 0x3C);
     setRGB0(prim, 0x80, 0x80, 0x80);
-    GFX_AddPrim(2, sizeof(POLY_FT4));
+    GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_FT4));
 }
 
 MATCH void func_801F0550(s32 value) {
@@ -529,7 +529,7 @@ MATCH void func_801F0550(s32 value) {
     u16       left;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     tens = (u8)value / 10;
     ones = (u8)value % 10;
     prim = (POLY_FT4*)g_GfxPrimCursor;
@@ -543,7 +543,7 @@ MATCH void func_801F0550(s32 value) {
     u           = ones * 12;
     setUV4(prim, u + 72, 24, u + 84, 24, u + 72, 36, u + 84, 36);
     setRGB0(prim, 0x80, 0x80, 0x80);
-    GFX_AddPrim(2, sizeof(POLY_FT4));
+    GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_FT4));
     left = x - 78;
     if (tens != 0) {
         prim = (POLY_FT4*)g_GfxPrimCursor;
@@ -554,7 +554,7 @@ MATCH void func_801F0550(s32 value) {
         u           = tens * 12;
         setUV4(prim, u + 72, 24, u + 84, 24, u + 72, 36, u + 84, 36);
         setRGB0(prim, 0x80, 0x80, 0x80);
-        GFX_AddPrim(2, sizeof(POLY_FT4));
+        GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_FT4));
     }
 }
 
@@ -563,23 +563,23 @@ MATCH void func_801F07B0(s32 index) {
     s32   tpage;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
     setXY0(tile, g_Task->unk_2E.half - (D_801F0B10[(u8)index].x + 4), g_Task->unk_30.half - (D_801F0B10[(u8)index].y + 4));
     setWH(tile, D_801F0B10[(u8)index].w + 8, D_801F0B10[(u8)index].h + 8);
     setRGB0(tile, 0x20, 0x20, 0x20);
-    GFX_AddPrim(2, sizeof(TILE));
+    GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(TILE));
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
     setXY0(tile, g_Task->unk_2E.half - (D_801F0B10[(u8)index].x + 6), g_Task->unk_30.half - (D_801F0B10[(u8)index].y + 6));
     setWH(tile, D_801F0B10[(u8)index].w + 12, D_801F0B10[(u8)index].h + 12);
     setRGB0(tile, 0x20, 0x20, 0x20);
-    GFX_AddPrim(2, sizeof(TILE));
+    GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(TILE));
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
 }
 
 /* func_801F09C4 */

@@ -29,7 +29,7 @@ extern Magic080Cell D_801EF13C[];
         prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x3C0, PAGE_Y);                                                                                                          \
         prim->clut  = GetClut(0, 0x1E0);                                                                                                                                                 \
         setUVWH(prim, CELLS[i].u, CELLS[i].v, 12, 12);                                                                                                                                   \
-        GFX_AddPrim(2, sizeof(POLY_FT4));                                                                                                                                                \
+        GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_FT4));                                                                                                                          \
     }
 
 void func_801EEF5C(void);

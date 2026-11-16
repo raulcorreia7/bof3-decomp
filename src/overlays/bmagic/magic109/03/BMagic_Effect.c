@@ -29,7 +29,7 @@ MATCH void func_801EEC80(void) {
     rect.y         = work->unk_30.half - work->unk_09 + g_FrameBufferIndex * 240;
     rect.h = rect.w = work->unk_09 * 2;
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, 0x340, 0x100);
-    GFX_AddPrim(3, sizeof(DR_MOVE));
+    GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(DR_MOVE));
     if (g_Battle.target_selector & 0x40) {
         g_Task->unk_2E.half = D_801EF9D8[g_Battle.scroll_dir].x;
         g_Task->unk_30.half = D_801EF9D8[g_Battle.scroll_dir].y;
@@ -164,10 +164,10 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
     diameter  = mesh_task->unk_09 * 2;
     move.h = move.w = diameter;
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &move, 0x340, 0x100);
-    GFX_AddPrim(3U, sizeof(DR_MOVE));
+    GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(DR_MOVE));
     /* The mesh's page at VRAM (832, 256), in the encoding the current graph type reads. */
     mesh_tpage = getTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 832, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(3U, mesh_tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, mesh_tpage);
     for (segment = 0; segment < 16; segment++) {
         rim_angle             = segment << 8;
         D_801EF9F8[segment].x = FIXED_MUL(rsin(rim_angle), g_Task->unk_09);
@@ -237,8 +237,8 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
             setUV4(poly_gt4, quad_task->unk_09 + D_801EFAF8[outer_vertex].x, quad_task->unk_09 + D_801EFAF8[outer_vertex].y, quad_task->unk_09 + D_801EFAF8[outer_next_vertex].x,
                    quad_task->unk_09 + D_801EFAF8[outer_next_vertex].y, quad_task->unk_09 + D_801EFAF8[inner_vertex].x, quad_task->unk_09 + D_801EFAF8[inner_vertex].y,
                    quad_task->unk_09 + D_801EFAF8[inner_next_vertex].x, quad_task->unk_09 + D_801EFAF8[inner_next_vertex].y);
-            GFX_AddPrim(3U, sizeof(POLY_F4));
-            GFX_AddPrim(3U, sizeof(POLY_GT4));
+            GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_F4));
+            GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_GT4));
         }
         for (entry = 0; entry < 16; entry++) {
             D_801EF9F8[entry].x = D_801EFA78[entry].x;

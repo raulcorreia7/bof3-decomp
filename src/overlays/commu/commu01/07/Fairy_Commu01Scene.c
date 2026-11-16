@@ -586,7 +586,7 @@ MATCH void func_801D28A4(s16 x, s16 y, u8 slot, s32 selected) {
     prim->r0 = 0;
     prim->g0 = 0;
     prim->b0 = 0;
-    GFX_AddPrim(1, sizeof(TILE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
     sel = selected;
     if (sel == 0) {
         func_801D2D98((s16)(x + 6), (s16)(y + 0x12), g_Fairies[slot][5] * 12, 0, 0);
@@ -669,7 +669,7 @@ MATCH void func_801D36FC(s32 cell, s32 selected) {
     prim->x2 = D_801D4C44[cell_index].points[2][0];
     prim->y2 = D_801D4C44[cell_index].points[2][1];
     setRGB0(prim, shade, shade, 0);
-    GFX_AddPrim(1, sizeof(LINE_F3));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F3));
 
     prim = (LINE_F3*)g_GfxPrimCursor;
     SetLineF3(prim);
@@ -684,7 +684,7 @@ MATCH void func_801D36FC(s32 cell, s32 selected) {
     prim->x2 = D_801D4C44[cell_index].points[2][0];
     prim->y2 = D_801D4C44[cell_index].points[2][1];
     setRGB0(prim, shade, shade, 0);
-    GFX_AddPrim(1, sizeof(LINE_F3));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F3));
 }
 
 MATCH void func_801D3984(s32 x, s32 y, s32 bright) {
@@ -846,7 +846,7 @@ MATCH void func_801D3EFC(s16 x, s16 y, u8 ordinal) {
 
     page = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 896, 256);
     GFX_SET_DRAW_MODE(page);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
 
     sprite = GFX_CURSOR(SPRT_16);
     SetSprt16(sprite);
@@ -859,7 +859,7 @@ MATCH void func_801D3EFC(s16 x, s16 y, u8 ordinal) {
     sprite->r0   = GFX_COLOR_NEUTRAL;
     sprite->g0   = GFX_COLOR_NEUTRAL;
     sprite->b0   = GFX_COLOR_NEUTRAL;
-    GFX_AddPrim(1, sizeof(SPRT_16));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT_16));
 }
 
 /* Draws one tile of the entry screen's window frames. */
@@ -870,7 +870,7 @@ MATCH void func_801D4030(s16 x, s16 y, u8 piece) {
 
     page = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 896, 256);
     GFX_SET_DRAW_MODE(page);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
 
     sprite = GFX_CURSOR(SPRT);
     SetSprt(sprite);
@@ -885,7 +885,7 @@ MATCH void func_801D4030(s16 x, s16 y, u8 piece) {
     sprite->r0   = GFX_COLOR_NEUTRAL;
     sprite->g0   = GFX_COLOR_NEUTRAL;
     sprite->b0   = GFX_COLOR_NEUTRAL;
-    GFX_AddPrim(1, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 }
 
 /* Draws the entry list panel and its captions. */

@@ -173,7 +173,7 @@ NON_MATCHING void func_801EF4C0(void) {
             g_ScratchPadVectors[3].vy = FIXED_MUL(rcos(i << 7), g_ScratchPad.cells.halves[2]);
             x                         = (g_ScratchPadVectors[3].vx << 9) + g_Task->pos.x.fixed;
             y                         = (g_ScratchPadVectors[3].vy << 9) + g_Task->pos.y.fixed;
-            tpage                     = getTPage(0, 1, 320, 256);
+            tpage                     = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
             Area_AddCellPrim(x, y, 2, sizeof(DR_MODE));
             prim = (POLY_GT4*)g_GfxPrimCursor;
@@ -181,7 +181,7 @@ NON_MATCHING void func_801EF4C0(void) {
             SetSemiTrans(prim, 1);
             RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                           &depth, &flag);
-            prim->tpage = GetTPage(0, 1, 0x340, 0x100);
+            prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x340, 0x100);
             prim->clut  = GetClut(0, 0x1FA);
             setUV4(prim, i * 8, (band - 16) * 8 + 32 + g_Task->timer * 4, i * 8 + 8, (band - 16) * 8 + 32 + g_Task->timer * 4, i * 8, g_Task->timer * 4 + (band - 16) * 8 + 0x28, i * 8 + 8,
                    g_Task->timer * 4 + (band - 16) * 8 + 0x28);
@@ -232,7 +232,7 @@ MATCH void func_801EFC74(void) {
     s32      scale;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256), 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(DR_MODE));
     if (g_Task->header.step >= 2) {
         g_ScratchPad.cells.halves[0] = ((g_Task->unk_09 * 4 + 0x210) * rcos(0x800)) >> 12;
     } else {
@@ -251,7 +251,7 @@ MATCH void func_801EFC74(void) {
         setRGB1(prim, 0, 0, 0);
         setRGB2(prim, 0, 0, 0);
         RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
-        GFX_AddPrim(5, sizeof(POLY_G3));
+        GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(POLY_G3));
     }
 }
 

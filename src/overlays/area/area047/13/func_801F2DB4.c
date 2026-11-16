@@ -32,7 +32,7 @@ MATCH void func_801F2DB4(s32* pos, s16 radius, u8 center_shade, u8 rim_shade) {
         setRGB0(prim, center_shade, center_shade, center_shade);
         setRGB1(prim, rim_shade, rim_shade, rim_shade);
         setRGB2(prim, rim_shade, rim_shade, rim_shade);
-        GFX_AddPrim(1, sizeof(POLY_G3));
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G3));
         angle = next;
     } while ((u16)angle < ONE);
 }

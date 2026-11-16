@@ -4,9 +4,9 @@
 
 /* func_801EFA30 (magic053), func_801EFA64 (magic226) */
 MATCH void BMagic_DrawDarkRing(void) {
-    GFX_AddDitheredDrawMode(5, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256));
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256));
     g_ScratchPad.cells.halves[0] = g_Task->param.unk_0B;
     g_ScratchPad.cells.halves[1] = g_Task->param.unk_0B * 2;
     g_ScratchPad.cells.halves[5] = g_Task->timer * 4;
-    BMAGIC_DRAW_DARK_RING_QUADS(5, 5);
+    BMAGIC_DRAW_DARK_RING_QUADS(BMAGIC_LAYER_BEHIND_BATTLERS, 5);
 }

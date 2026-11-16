@@ -50,7 +50,7 @@ MATCH void UI_DrawGlyph(s32 color, u8* text) {
         GLYPH->y3 = (s16)GLYPH_BOTTOM;
         SetPolyFT4(GLYPH);
         SetSemiTrans(g_GfxPrimCursor, 1);
-        GFX_AddPrim(1U, sizeof(POLY_FT4));
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
     }
     g_MessageWindow.text.x += (u16)WINDOW->window.cue_counter;
 }

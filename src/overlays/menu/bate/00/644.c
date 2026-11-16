@@ -397,7 +397,7 @@ MATCH void func_801D26E0(s16 x, s16 y) {
     line->b0 = 0x80;
     line->g0 = 0x80;
     line->r0 = 0x80;
-    GFX_AddPrim(1, sizeof(LINE_F2));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F2));
     line = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(line);
     SetSemiTrans(line, 1);
@@ -405,7 +405,7 @@ MATCH void func_801D26E0(s16 x, s16 y) {
     line->b0 = 0x80;
     line->g0 = 0x80;
     line->r0 = 0x80;
-    GFX_AddPrim(1, sizeof(LINE_F2));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F2));
 }
 
 #ifdef NON_MATCHING
