@@ -20,7 +20,7 @@ MATCH void func_801DC248(void) {
     Fishing_DrawCatchIcon((FISHING_PAGE_STEP * FISHING_CATCH_ICON_STEP) + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, D_8014688E[g_FishingHookedFish * 0x98]);
 
     offset = g_FishingHookedFish * 0x98;
-    func_801E1004(D_8014688E[offset], D_80146918[offset], FISHING_PAGE_STEP);
+    Fishing_DrawCatchRow(D_8014688E[offset], D_80146918[offset], FISHING_PAGE_STEP);
     Fishing_DrawRank(FISHING_CATCH_RANK_X, (FISHING_PAGE_STEP * FISHING_CATCH_ROW_STEP) + FISHING_CATCH_RANK_Y);
 
     if (FISHING_PAGE_CATEGORY == 1) {

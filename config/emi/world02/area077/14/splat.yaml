@@ -45,7 +45,7 @@ segments:
       - [0x22C4, c, func_801F4EC4]
       - [0x23FC, c, func_801F4FFC]
       - [0x255C, c, func_801F515C]
-      - [0x269C, c, func_801F529C]
+      - [0x269C, c, Area_CopyPaletteRow]
       - [0x26F8, c, func_801F52F8]
       - [0x273C, c, func_801F533C]
       - [0x2774, c, func_801F5374]

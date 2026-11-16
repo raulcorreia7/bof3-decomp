@@ -1,9 +1,9 @@
 #include "start_08.h"
 
-void func_801E7608(void);
+void Menu_DrawBackdrop(void);
 
 MATCH void func_801E4060(void) {
-    func_801E7608();
+    Menu_DrawBackdrop();
     D_80148654 = 2;
     g_MenuStartStep += 1;
 }

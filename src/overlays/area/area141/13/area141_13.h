@@ -26,7 +26,8 @@ extern u8       D_801F4DDC[];
 extern u8       D_801F4E0C[];
 extern u8       D_801F4E2C[];
 
-void func_801F4300(u8* table, u8 arg);
+/* func_801F4300 */
+void Area_SetCellRun(u8* table, u8 arg);
 
 extern u8 D_801F4DFC[];
 

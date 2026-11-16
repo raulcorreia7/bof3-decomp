@@ -2,7 +2,8 @@
 
 void func_801E7514(s32 x, s32 y, s32 icon, s32 palette); /* extern */
 
-MATCH void func_801E7608(void) {
+/* func_801E7608 */
+MATCH void Menu_DrawBackdrop(void) {
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 704, 256), 0);
     GFX_AddPrim(2U, sizeof(DR_MODE));
     func_801E7514(0x1A, 0x18, 0, 2);

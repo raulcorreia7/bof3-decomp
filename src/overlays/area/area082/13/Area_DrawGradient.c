@@ -1,6 +1,7 @@
 #include "area082_13.h"
 
-MATCH void func_801F5428(s32 colors) {
+/* func_801F5428 */
+MATCH void Area_DrawGradient(s32 colors) {
     POLY_G4* polygon;
     s32      texturePage;
     u32      packedColors = colors;

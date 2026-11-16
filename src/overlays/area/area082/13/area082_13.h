@@ -32,7 +32,8 @@ u8   Area_StepSparks(void);
 void func_801F4430(void);
 void func_801F5388(s32 scale);
 
-void func_801F5428(s32 colors);
+/* func_801F5428 */
+void Area_DrawGradient(s32 colors);
 
 extern u8 D_80145EED[3];
 

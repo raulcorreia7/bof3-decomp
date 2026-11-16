@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH s32 func_801A20F8(s16 cell_x, s16 cell_y) {
+/* func_801A20F8 */
+MATCH s32 Area_IsCellBlocked(s16 cell_x, s16 cell_y) {
     s32 value;
 
     value = Area_GetCellCode(cell_x, cell_y) & 0xF0;

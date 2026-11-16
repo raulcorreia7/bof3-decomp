@@ -1,7 +1,8 @@
 #include "area030_04.h"
 
 /* Draws the item name, count and label in one column. */
-MATCH void func_801E1004(s32 item, s32 count, s32 column) {
+/* func_801E1004 */
+MATCH void Fishing_DrawCatchRow(s32 item, s32 count, s32 column) {
     FishingAnchors anchors;
     s32            i;
     u8*            dst;

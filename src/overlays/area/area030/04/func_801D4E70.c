@@ -20,7 +20,7 @@ MATCH void func_801D4E70(void) {
         index = GAME_NONE;
         fish  = 0;
     }
-    func_801E1004(index, fish, 0);
+    Fishing_DrawCatchRow(index, fish, 0);
     work = FISHING_STATE;
     if (work->counter_08 == 0) {
         key_a = work->bounce_3C.half.key_3E;

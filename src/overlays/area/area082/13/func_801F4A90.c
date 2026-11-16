@@ -4,7 +4,7 @@ MATCH void func_801F4A90(void) {
     if (*g_ScriptVars == 0x26) {
         func_801F5388(0x40);
         D_8014933A = 0;
-        func_801F5428(-1);
+        Area_DrawGradient(-1);
         g_Task->timer = 0;
         g_Task->header.step++;
     }

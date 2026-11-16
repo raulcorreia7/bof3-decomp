@@ -30,7 +30,7 @@ MATCH s32 func_801B1C18(s32 x, s32 y, s32 mode) {
         if (abs(COORD_INT(g_Game.members[0].pos.z) - value) >= 0x41) {
             return 0;
         }
-        if (func_801C3E40(px, y, mode & BYTE_MASK, value) & BYTE_MASK) {
+        if (Game_TestPlacement(px, y, mode & BYTE_MASK, value) & BYTE_MASK) {
             return 0;
         }
     }
@@ -40,7 +40,7 @@ MATCH s32 func_801B1C18(s32 x, s32 y, s32 mode) {
         if (abs(COORD_INT(g_Game.members[0].pos.z) - value) >= 0x41) {
             return 0;
         }
-        if (func_801C3E40(x, py, mode & BYTE_MASK, value) & BYTE_MASK) {
+        if (Game_TestPlacement(x, py, mode & BYTE_MASK, value) & BYTE_MASK) {
             return 0;
         }
     }

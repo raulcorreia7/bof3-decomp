@@ -17,7 +17,7 @@ MATCH void func_801F4DC8(void) {
     level      = colorCell->timer;
     color      = (u32)1 << 28 | ((u32)(0x1F - level * 27 / 100) << 10) | ((u32)(0x19 - level * 27 / 100) << 5) | (u32)(u8)((u32)level / 17);
     D_8014933A = 0;
-    func_801F5428((s32)color);
+    Area_DrawGradient((s32)color);
     shadeCell = g_Task;
     func_801F5388(0x80 - (u8)((u32)shadeCell->timer / 3));
     offsetCell               = g_Task;

@@ -16,9 +16,9 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
         case FACING_UP:
             s3     = (s16)(sx >> 16);
             s4     = ((u32)sy) >> 16;
-            result = func_801A20F8(s3 & HALF_MASK, s4);
+            result = Area_IsCellBlocked(s3 & HALF_MASK, s4);
             if (sx & HALF_MASK) {
-                result += (func_801A20F8((s3 + 1) & HALF_MASK, s4) + func_801A223C(sx & 0xFFFF0000, sy)) + func_801A223C(sx + 0x8000, sy);
+                result += (Area_IsCellBlocked((s3 + 1) & HALF_MASK, s4) + func_801A223C(sx & 0xFFFF0000, sy)) + func_801A223C(sx + 0x8000, sy);
             }
             break;
 
@@ -26,17 +26,17 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
             if (sy & HALF_MASK) {
                 s4     = (s16)(sx >> 16);
                 s3     = ((sy >> 16) + 1) & HALF_MASK;
-                result = func_801A20F8(s4 & HALF_MASK, s3);
+                result = Area_IsCellBlocked(s4 & HALF_MASK, s3);
                 if (sx & HALF_MASK) {
                     s3 = ((sy >> 16) + 1) & HALF_MASK;
-                    result += (func_801A20F8((s4 + 1) & HALF_MASK, s3) + func_801A223C(sx & 0xFFFF0000, sy)) + func_801A223C(sx + 0x8000, sy);
+                    result += (Area_IsCellBlocked((s4 + 1) & HALF_MASK, s3) + func_801A223C(sx & 0xFFFF0000, sy)) + func_801A223C(sx + 0x8000, sy);
                 }
             } else {
                 s3     = (s16)(sx >> 16);
                 s4     = ((u32)sy) >> 16;
-                result = func_801A20F8(s3 & HALF_MASK, s4);
+                result = Area_IsCellBlocked(s3 & HALF_MASK, s4);
                 if (sx & HALF_MASK) {
-                    result += (func_801A20F8((s3 + 1) & HALF_MASK, s4) + func_801A223C(sx & 0xFFFF0000, sy)) + func_801A223C(sx + 0x8000, sy);
+                    result += (Area_IsCellBlocked((s3 + 1) & HALF_MASK, s4) + func_801A223C(sx & 0xFFFF0000, sy)) + func_801A223C(sx + 0x8000, sy);
                 }
             }
             break;
@@ -55,9 +55,9 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
         body_7:
             s3 = (s16)(sy >> 16);
 
-            result = func_801A20F8(s4, s3 & HALF_MASK);
+            result = Area_IsCellBlocked(s4, s3 & HALF_MASK);
             if (sy & HALF_MASK) {
-                result += (func_801A20F8(s4, (s3 + 1) & HALF_MASK) + func_801A223C(sx, sy & 0xFFFF0000)) + func_801A223C(sx, sy + 0x8000);
+                result += (Area_IsCellBlocked(s4, (s3 + 1) & HALF_MASK) + func_801A223C(sx, sy & 0xFFFF0000)) + func_801A223C(sx, sy + 0x8000);
             }
             break;
 

@@ -26,7 +26,7 @@ MATCH void func_801A57F0(u8* script) {
 
     D_1F800002 = ((script[1] << 8) | script[2]);
 
-    func_801A4AA8();
+    Actor_ResetMotion();
     Area_SelectSceneRecord(D_1F800002);
 
     g_Task->header.flags = ACTOR_FLAG_IN_USE;

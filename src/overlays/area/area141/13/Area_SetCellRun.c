@@ -1,6 +1,7 @@
 #include "area141_13.h"
 
-MATCH void func_801F4300(u8* table, u8 arg) {
+/* func_801F4300 */
+MATCH void Area_SetCellRun(u8* table, u8 arg) {
     u8 count;
     u8 i;
 

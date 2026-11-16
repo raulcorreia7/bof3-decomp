@@ -37,7 +37,7 @@ MATCH void func_801A6C98(u8* record) {
     src                  = *(u8**)((u8*)g_AreaLoads[g_GameAreaId] + 8) + off;
     g_Task->direction_08 = script[0] & 0xF;
 
-    func_801A4AA8();
+    Actor_ResetMotion();
     func_801A4B80(script[0xB]);
     SYS_InitScratchpad(src);
 

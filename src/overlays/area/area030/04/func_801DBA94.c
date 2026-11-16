@@ -16,7 +16,7 @@ MATCH void func_801DBA94(void) {
     Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, D_8014688E[g_FishingHookedFish * 0x98]);
 
     offset = g_FishingHookedFish * 0x98;
-    func_801E1004(D_8014688E[offset], D_80146918[offset], 0);
+    Fishing_DrawCatchRow(D_8014688E[offset], D_80146918[offset], 0);
     Fishing_DrawRank(FISHING_CATCH_RANK_X, FISHING_STATE->step_timer_09 * FISHING_CATCH_ROW_STEP + FISHING_CATCH_RANK_Y);
     func_801E1C7C();
 

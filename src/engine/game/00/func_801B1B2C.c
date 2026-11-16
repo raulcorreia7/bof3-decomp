@@ -16,7 +16,7 @@ MATCH s32 func_801B1B2C(s32 x, s32 y, s32 probe_kind, s32 flags) {
     work        = g_Task;
     saved       = work->timer;
     work->timer = 0U;
-    if (func_801C3E40(px, py, mode & BYTE_MASK, value) & BYTE_MASK) {
+    if (Game_TestPlacement(px, py, mode & BYTE_MASK, value) & BYTE_MASK) {
         return 0;
     }
     distance = COORD_INT(g_Game.members[0].pos.z) - value;

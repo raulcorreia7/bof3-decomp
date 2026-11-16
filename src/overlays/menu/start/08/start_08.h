@@ -656,7 +656,8 @@ extern u8   func_801E715C(s32 range_low, s32 range_high, s32 draw_count);
 extern void func_801E7210(u32 panel_index);
 s32         func_801E7D20(s32 character_index, s32 target_index, s32 ability_id, s32 use_battle_record);
 s32         func_801E8C9C(u8 save_slot, u8 item_id, u8 record_value);
-void        func_801E8D58(void);
+/* func_801E8D58 */
+void        Menu_PanelIdle(void);
 /* func_801E8D60 */
 void        Menu_CharacterPanel(void);
 /* func_801E8DB4 */
@@ -904,7 +905,8 @@ void Menu_SetGlyphPage(u16 line_index);
 void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
 void func_801D49F8(s32 handler_index);
 void func_801E2E90(s32 x, s32 y, s32 row_index);
-void func_801E7608(void);
+/* func_801E7608 */
+void Menu_DrawBackdrop(void);
 void func_801E7720(s16 tile_x, s8 tile_kind);
 /* No prototype: the retail callers pass a byte the callee ignores. */
 void func_801DAC1C();

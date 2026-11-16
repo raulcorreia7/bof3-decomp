@@ -58,7 +58,7 @@ segments:
       - [0x267C, c, func_801F527C]
       - [0x26D8, c, func_801F52D8]
       - [0x2788, c, func_801F5388]
-      - [0x2828, c, func_801F5428]
+      - [0x2828, c, Area_DrawGradient]
       - [0x2994, c, func_801F5594]
       - [0x29F4, c, func_801F55F4]
       - [0x2A08, c, func_801F5608]
