@@ -7,6 +7,6 @@ MATCH void func_800C1D7C(void) {
     handlers.steps[((PartyMember*)g_Task)->header.step]();
     if (ACTOR_IN_USE(*(PartyMember*)g_Task)) {
         Actor_StepAnimLoop();
-        func_8014D290();
+        Area_AddGridActor();
     }
 }

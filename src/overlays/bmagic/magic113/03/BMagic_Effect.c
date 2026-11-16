@@ -487,7 +487,7 @@ MATCH void func_801F0A80(void) {
         }
         g_Task->unk_2A = (g_Task->unk_2A + 0x1) & 1;
         Actor_SelectScript(g_Task->param.unk_0B);
-        func_8014D290();
+        Area_AddGridActor();
         if (g_Task->param.unk_0B == 0) {
             if (g_Task->unk_09 == 1) {
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x04));
@@ -496,6 +496,6 @@ MATCH void func_801F0A80(void) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
         }
     } else {
-        func_8014D290();
+        Area_AddGridActor();
     }
 }

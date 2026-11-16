@@ -18,5 +18,5 @@ MATCH void func_801F4494(void) {
     work->pos.x.fixed += work->vx;
     work->pos.y.fixed += work->vy;
     Actor_StepAnimLoop();
-    func_8014D290();
+    Area_AddGridActor();
 }

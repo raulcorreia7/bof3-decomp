@@ -347,7 +347,7 @@ MATCH void func_801F0488(void) {
         Battle_ProjectRange();
         func_801F075C();
         if (g_Task->header.step < 3) {
-            func_8014D290();
+            Area_AddGridActor();
         }
     }
     g_Scripts = AREA_SCRIPT_TABLE;

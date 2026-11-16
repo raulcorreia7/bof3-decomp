@@ -181,7 +181,7 @@ MATCH void func_801F783C(void) {
             battler = &g_Game.members[i & BYTE_MASK];
             TASK_SET(battler);
             battler->unk_29 = 3;
-            func_8014D290();
+            Area_AddGridActor();
             i += 1;
         } while ((u32)(i & BYTE_MASK) < g_PartySize);
     }
@@ -529,13 +529,13 @@ MATCH void func_801F8958(void) {
             work             = &g_Actors[i];
             g_Task           = work;
             work->draw_layer = 3;
-            func_8014D290();
+            Area_AddGridActor();
         }
         if (func_801ACE9C(g_Actors[i].unk_2C) == 0x308 && SYS_TestFlag(g_SceneFlags, 0x11)) {
             work             = &g_Actors[i];
             g_Task           = work;
             work->draw_layer = 3;
-            func_8014D290();
+            Area_AddGridActor();
         }
     }
     g_Task = actor;

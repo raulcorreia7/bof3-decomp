@@ -12,12 +12,12 @@ MATCH void func_801F2FCC(void) {
         g_Task = record;
         if (record->header.flags & 0x1) {
             record->draw_layer = 5;
-            func_8014D290();
+            Area_AddGridActor();
         }
         i += 1;
     } while ((i & BYTE_MASK) < 0x1EU);
     g_Task                   = (Actor*)&g_Game;
     g_Game.members[0].unk_29 = 5;
-    func_8014D290();
+    Area_AddGridActor();
     g_Task = actor;
 }

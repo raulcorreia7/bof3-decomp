@@ -30,5 +30,5 @@ MATCH void func_801D2AE0(void) {
     *(u32*)((scratch + 0x54u)) = *(u32*)((world + 0x401Cu));
     *(u16*)((scratch + 0x58u)) = *(u16*)((world + 0x4020u));
     *(u16*)(scratch + 0x5Au)   = *(u16*)((world + 0x4022u));
-    func_8014D290();
+    Area_AddGridActor();
 }

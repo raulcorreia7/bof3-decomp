@@ -11,7 +11,7 @@ MATCH void func_801BDAB8(void) {
             if (g_GameStateIndex == GAME_REQUEST_BATTLE) {
                 Area_SetDrawMode();
             } else {
-                func_8014D290();
+                Area_AddGridActor();
             }
         }
     }

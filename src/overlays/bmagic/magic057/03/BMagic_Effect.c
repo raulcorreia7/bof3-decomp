@@ -106,7 +106,7 @@ MATCH void func_801EF08C(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if (g_Task->header.flags & 0x1) {
-        func_8014D290();
+        Area_AddGridActor();
     }
     g_Scripts = AREA_SCRIPT_TABLE;
 }
@@ -270,7 +270,7 @@ MATCH void func_801EF83C(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if ((g_Task->header.flags & 0x1) && (g_BattleEffectBattler->timer == 0)) {
-        func_8014D290();
+        Area_AddGridActor();
     }
     g_Scripts = AREA_SCRIPT_TABLE;
 }

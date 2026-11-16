@@ -2,7 +2,7 @@
 
 /*
  * small lookup tables read by the sprite, menu and step-table code
- * (func_8014CF9C, func_8014D290, func_8014EA80, func_8014FC90, UI_DrawGlyph,
+ * (func_8014CF9C, Area_AddGridActor, func_8014EA80, func_8014FC90, UI_DrawGlyph,
  * func_801523D0..Message_SetAnswerMessage15).
  */
 
@@ -14,7 +14,7 @@ const u8 g_SpriteSizes[16][2] = {
     {8, 32}, {16, 32}, {24, 32}, {32, 32},
 };
 
-/* Stride 3: func_8014D290 takes the row at [g_Task->unk_2B * 3]. needs: type, the three members. */
+/* Stride 3: Area_AddGridActor takes the row at [g_Task->unk_2B * 3]. needs: type, the three members. */
 const s8 g_SpriteCellRotations[16] = {
     0, 0, 0, 0, 1, 1, 1, 2, 3, 2, 2, 3, 0, 0, 1, 0,
 };

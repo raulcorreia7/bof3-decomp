@@ -133,7 +133,7 @@ segments:
       - [0xB6E78, c, Area_BuildClut]
       - [0xB6F9C, c, Area_DrawSpriteCell]
       - [0xB7260, c, Area_SetDrawMode]
-      - [0xB7290, c, func_8014D290]
+      - [0xB7290, c, Area_AddGridActor]
       - [0xB74E0, c, Area_AddActor]
       - [0xB754C, c, Actor_CopyScriptRecord]
       - [0xB75F0, c, Actor_SwitchScript]

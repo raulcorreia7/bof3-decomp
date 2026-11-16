@@ -6,8 +6,9 @@
  * and publishes the resulting screen pair.
  */
 /* Pinned or opaque work pointers change the prologue; a barrier and coordinate loads through work differ at +0x20. */
+/* func_8014D290 */
 #ifdef NON_MATCHING
-NON_MATCHING void func_8014D290(void) {
+NON_MATCHING void Area_AddGridActor(void) {
     SVECTOR   vec;
     s32       sxy;
     s32       p;
@@ -85,5 +86,5 @@ NON_MATCHING void func_8014D290(void) {
     }
 }
 #else
-INCLUDE_ASM(func_8014D290);
+INCLUDE_ASM(Area_AddGridActor);
 #endif

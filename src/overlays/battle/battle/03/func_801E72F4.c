@@ -30,7 +30,7 @@ MATCH void func_801E72F4(void) {
     scratch->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
     scratch->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
 
-    func_8014D290();
+    Area_AddGridActor();
     if (!ACTOR_IN_USE(*g_BattleEffectBattler)) {
         Effect_Reset();
     }

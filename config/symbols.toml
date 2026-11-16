@@ -7113,6 +7113,7 @@ Area_RoundSpriteCoordinate = { addr = 0x8014CE48, type = "func", source = "Retur
 Area_BuildClut = { addr = 0x8014CE78, type = "func", source = "Builds the CLUT of an actor sprite." }
 Area_DrawSpriteCell = { addr = 0x8014CF9C, type = "func", source = "Draws one plain sprite cell." }
 Area_SetDrawMode = { addr = 0x8014D260, type = "func", source = "Sets the draw mode of the actor." }
+Area_AddGridActor = { addr = 0x8014D290, type = "func", source = "Adds the current task actor to the draw list: derives its depth sort key from the grid position (or from the x, y or z position by draw mode), retires it when the key leaves the ordering table, projects its position through the GTE, stores the screen pair at +0x2E and +0x30 and appends it to the 40-entry draw list." }
 Area_AddActor = { addr = 0x8014D4E0, type = "func", source = "Adds an actor to the draw list." }
 Actor_CopyScriptRecord = { addr = 0x8014D54C, type = "func", source = "Copies a script entry to the staging buffer." }
 Actor_SwitchScript = { addr = 0x8014D5F0, type = "func", source = "Switches the actor to another script." }

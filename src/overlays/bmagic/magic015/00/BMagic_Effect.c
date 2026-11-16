@@ -168,7 +168,7 @@ MATCH void func_801EFA28(void) {
 
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_8014D290();
+        Area_AddGridActor();
     }
 }
 
@@ -285,7 +285,7 @@ MATCH void func_801EFF1C(void) {
     handlers = D_801EEC54;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_8014D290();
+        Area_AddGridActor();
     }
 }
 
@@ -357,7 +357,7 @@ MATCH void func_801F0334(void) {
     __builtin_memcpy(handlers, D_801EEC68, sizeof(handlers));
     SYS_DISPATCH_BYTE(handlers, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_8014D290();
+        Area_AddGridActor();
         if (g_Task->unk_09 != 0 && g_Task->param.unk_0B == 0 && g_Task->header.step < 5) {
             if (g_Task->header.step < 4) {
                 func_801F1250();
@@ -538,7 +538,7 @@ MATCH void func_801F0C30(void) {
     __builtin_memcpy(handlers, D_801EEC84, sizeof(handlers));
     SYS_DISPATCH_BYTE(handlers, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_8014D290();
+        Area_AddGridActor();
         if (g_Task->unk_09 != 0 && g_Task->header.step < 4) {
             if (g_Task->header.step < 3) {
                 func_801F1250();

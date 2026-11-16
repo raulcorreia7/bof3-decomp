@@ -45,5 +45,5 @@ MATCH void Actor_StartFlying(void) {
     Actor_SelectScript(g_FlockScript[g_Task->direction_08][0]);
 
     g_Task->unk_2A = g_FlockScript[g_Task->direction_08][1];
-    func_8014D290();
+    Area_AddGridActor();
 }

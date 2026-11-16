@@ -596,7 +596,7 @@ typedef struct PartyMember {
     u8                  unk_5D;
     u8                  unk_5E;
     u8                  unk_5F;
-    s32                 unk_60; /* +0x60 the cell func_8014D290 stores the rotation in; bmagic effects read its low halfword */
+    s32                 unk_60; /* +0x60 the cell Area_AddGridActor stores the rotation in; bmagic effects read its low halfword */
     s32                 unk_64; /* +0x64 the offset magic109 sweeps between -0x7F and 0x80 in steps of 8 */
     u8                  pad_68[8];
     u8                  unk_70;

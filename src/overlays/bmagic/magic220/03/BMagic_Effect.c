@@ -51,7 +51,7 @@ MATCH void func_801EEFBC(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F06E0, g_Task->header.step);
     if ((g_Task->header.flags & BMAGIC_EFFECT_IN_USE) != 0 && g_Task->header.step != 0) {
-        func_8014D290();
+        Area_AddGridActor();
         Effect_SetActiveActorMatrix();
         func_801EF9F0();
         BMagic_DrawDarkRing();

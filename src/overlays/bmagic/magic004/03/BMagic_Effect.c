@@ -200,7 +200,7 @@ MATCH void func_801EF910(void) {
     handlers = D_801EEC18;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0) {
-        func_8014D290();
+        Area_AddGridActor();
     }
 }
 
@@ -280,5 +280,5 @@ MATCH void func_801EFD84(void) {
         Effect_Reset();
         return;
     }
-    func_8014D290();
+    Area_AddGridActor();
 }

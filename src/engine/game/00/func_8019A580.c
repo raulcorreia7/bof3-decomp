@@ -18,6 +18,6 @@ MATCH void func_8019A580(void) {
             Area_AddActor();
             return;
         }
-        func_8014D290();
+        Area_AddGridActor();
     }
 }

@@ -13,14 +13,14 @@ MATCH void func_801F3C84(void) {
         TASK_SET(actor);
         if (actor->header.flags & 0x1) {
             actor->draw_layer = 5;
-            func_8014D290();
+            Area_AddGridActor();
         }
     }
     for (j = 0; j < g_PartySize; j++) {
         battler = &g_Game.members[j];
         TASK_SET(battler);
         battler->unk_29 = 5;
-        func_8014D290();
+        Area_AddGridActor();
     }
     TASK_SET(saved);
 }

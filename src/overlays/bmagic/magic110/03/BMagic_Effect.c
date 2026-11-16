@@ -146,7 +146,7 @@ MATCH void func_801EF43C(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(D_801F0478, g_Task->header.step);
     if ((g_Task->header.flags & 0x1) && g_Task->header.step >= 2) {
-        func_8014D290();
+        Area_AddGridActor();
     }
     g_Scripts = AREA_SCRIPT_TABLE;
 }

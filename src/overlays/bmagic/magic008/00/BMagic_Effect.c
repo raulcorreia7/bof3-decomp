@@ -320,7 +320,7 @@ MATCH void func_801F0294(void) {
     handlers = D_801EEC58;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
     if (g_Task->header.flags != 0) {
-        func_8014D290();
+        Area_AddGridActor();
     }
 }
 
@@ -392,7 +392,7 @@ MATCH void func_801F0568(void) {
     handlers = D_801EEC70;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0) {
-        func_8014D290();
+        Area_AddGridActor();
     }
 }
 
@@ -484,7 +484,7 @@ MATCH void func_801F0964(void) {
 MATCH void func_801F09D0(void) {
     g_Task->unk_09      = func_800AFF98();
     g_Task->header.step = g_Task->header.step + 1;
-    func_8014D290();
+    Area_AddGridActor();
 }
 
 MATCH void func_801F0A20(void) {
@@ -501,7 +501,7 @@ MATCH void func_801F0A20(void) {
         g_Task->unk_09 = 0;
         g_Task->header.step += 1;
     }
-    func_8014D290();
+    Area_AddGridActor();
 }
 
 MATCH void func_801F0AC8(void) {
@@ -510,7 +510,7 @@ MATCH void func_801F0AC8(void) {
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         g_Task->header.step += 1;
     }
-    func_8014D290();
+    Area_AddGridActor();
 }
 
 MATCH void func_801F0B44(void) {
@@ -532,7 +532,7 @@ MATCH void func_801F0DA8(void) {
     handlers = D_801EEC94;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_8014D290();
+        Area_AddGridActor();
     }
 }
 
@@ -624,7 +624,7 @@ MATCH void func_801F1294(void) {
     handlers = D_801EECAC;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
     if (g_Task->header.flags != 0) {
-        func_8014D290();
+        Area_AddGridActor();
     }
 }
 
@@ -670,7 +670,7 @@ MATCH void func_801F1708(void) {
     handlers = D_801EECC8;
     SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
     if (g_Task->header.flags != 0) {
-        func_8014D290();
+        Area_AddGridActor();
     }
 }
 

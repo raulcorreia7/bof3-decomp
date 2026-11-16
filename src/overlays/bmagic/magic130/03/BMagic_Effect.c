@@ -52,7 +52,7 @@ MATCH void func_801EEF18(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
     D_801EFA4C[g_Task->header.step]();
     if ((g_Task->header.flags & ACTOR_FLAG_IN_USE) && (g_Task->header.step != 0)) {
-        func_8014D290();
+        Area_AddGridActor();
     }
     g_Scripts = AREA_SCRIPT_TABLE;
 }

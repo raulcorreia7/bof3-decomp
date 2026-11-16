@@ -22,6 +22,6 @@ MATCH void func_8019A6AC(void) {
         if ((work->timer & 0x1) != 0) {
             work->vy--;
         }
-        func_8014D290();
+        Area_AddGridActor();
     }
 }

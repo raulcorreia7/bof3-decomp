@@ -12,5 +12,5 @@ MATCH void Fishing_LureSettle(void) {
         record->handler_index_01 = (record->handler_index_01 + 1);
     }
 
-    func_8014D290();
+    Area_AddGridActor();
 }

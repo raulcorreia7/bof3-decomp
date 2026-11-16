@@ -64,5 +64,5 @@ MATCH void Fishing_LureFly(void) {
         }
         Actor_StepAnimLoop();
     }
-    func_8014D290();
+    Area_AddGridActor();
 }

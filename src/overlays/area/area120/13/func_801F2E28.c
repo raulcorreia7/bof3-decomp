@@ -20,7 +20,7 @@ MATCH void func_801F2E28(void) {
         slot->unk_24 |= 0x88;
         previous = g_Task;
         TASK_SET(slot);
-        func_8014D290();
+        Area_AddGridActor();
         Actor_Clear();
         TASK_SET(previous);
         previous->timer = 2;
