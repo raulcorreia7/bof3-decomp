@@ -483,7 +483,8 @@ extern u8  g_NameEntryControlsFrame[];
 /* Shared calls the start-screen units make: the main executable's window,
  * input, resource and sound helpers, and the game overlay's draw helpers. */
 /* Draws one sprite at (x, y); defined in the game overlay (emi/etc/game/00). */
-bool        func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id);
+/* func_801AF494 */
+bool        Item_PassesTest(u8 test, u8 character_id, u8 category, u8 item_id);
 s32         func_801B6470(u8 arg0);
 /* The start overlay's handler tables call these functions. */
 void        func_801D177C(void);

@@ -117,7 +117,7 @@ MATCH void func_801D3174(void) {
         if (*row != 0) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
             if (D_801ED618 == 0) {
-                if ((func_801AF494(base[8], CHAR_ID_RYU_YOUNG, base[0xA], *row) & BYTE_MASK) != 0) {
+                if ((Item_PassesTest(base[8], CHAR_ID_RYU_YOUNG, base[0xA], *row) & BYTE_MASK) != 0) {
                     entry = *row;
                     if (g_Items[entry].flags & 0x10) {
                         result = func_801E8C9C(0, entry, 0) & BYTE_MASK;
@@ -143,7 +143,7 @@ MATCH void func_801D3174(void) {
                     goto fail;
                 }
             } else {
-                if ((func_801AF494(base[8], CHAR_ID_RYU_YOUNG, base[0xA], D_801C893C[base[0xA]][base[0xC]]) & BYTE_MASK) != 0) {
+                if ((Item_PassesTest(base[8], CHAR_ID_RYU_YOUNG, base[0xA], D_801C893C[base[0xA]][base[0xC]]) & BYTE_MASK) != 0) {
                     saved      = base[0xC];
                     D_8014865B = 0;
                     counter    = g_MenuStep.sub_step + 3;
