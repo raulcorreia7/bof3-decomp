@@ -22,13 +22,13 @@ extern u8 D_801F41D1[];
 #define CAMP_MESSAGE_CHARACTER_COUNT 5
 #define CAMP_MESSAGE_ROW_SIZE        9
 #define CAMP_MESSAGE_AREA_LAST       (CAMP_MESSAGE_ROW_SIZE - 1)
+extern u8 D_801F41E8[];
+extern u8 D_801F4218[];
 
 /* The five character ids, the per-area row offsets and the two result rows
  * func_801F37AC picks between. */
 extern u8 D_801F4248[];
 extern u8 D_801F4250[];
-extern u8 D_801F41E8[];
-extern u8 D_801F4218[];
 
 /* The area counter and the area flag store the selection pass reads. */
 

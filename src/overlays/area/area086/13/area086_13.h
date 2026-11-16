@@ -8,13 +8,13 @@
 
 extern Callback D_801F3658[];
 
-void func_801F2DE8(void);
-void func_801F3070(void);
-
-/* The ground height step of each cell, read by func_801F2D28 in signed rows. */
-extern s8  D_801F3670[];
+void       func_801F2DE8(void);
+void       func_801F3070(void);
 extern u8  D_801F3664[];
 extern u16 D_801F3668[];
+
+/* The ground height step of each cell, read by func_801F2D28 in signed rows. */
+extern s8 D_801F3670[];
 
 /* The three cell triggers: the cell pair, the facing that arms one and the flag it turns on. */
 extern u8 D_801F3CEC[];

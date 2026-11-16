@@ -80,11 +80,11 @@ extern u16 D_801F651C;
 #define AREA_SPAWN_SLOT_RADIUS      0x100
 #define AREA_SPAWN_SLOT_CORE_SHADE  0x40
 #define AREA_SPAWN_SLOT_RADIUS_STEP 0x10
-void        func_801F4D44(void);
-void        func_801F5050(u8 level);
-extern void func_801F5940(void);
-
+void      func_801F4D44(void);
+void      func_801F5050(u8 level);
 extern u8 D_8014554C[];
+
+extern void func_801F5940(void);
 
 void func_801F40D0(s32 unused);
 void func_801F4220(AreaStreakSlot* slot);
@@ -112,7 +112,7 @@ typedef struct CaptureRect {
 
 ASSERT_SIZE(CaptureRect, 8);
 
-extern u8          D_801F6520;
 extern CaptureRect D_801F5F58[];
+extern u8          D_801F6520;
 
 #endif

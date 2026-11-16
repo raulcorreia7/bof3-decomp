@@ -21,6 +21,9 @@ extern u8 D_801F6898[];
 #define AREA_SPIN_SCALE_BASE 3
 #define AREA_SPIN_FADE       0x20
 
+/* The game-overlay state bytes the cancel path resets. */
+extern u8 D_8014865F;
+
 /* The party position in 16.16 fixed point: x, y and the ground height. */
 
 /* The image payload as its byte view; its leading bytes are the fade ramp the
@@ -37,9 +40,6 @@ extern Callback D_801F4E04[];
 /* The fade ramp index and the fade colour it selects. */
 extern u8       D_801F689C;
 extern u8       D_801F68A0;
-
-/* The game-overlay state bytes the cancel path resets. */
-extern u8 D_8014865F;
 
 #define AREA_SPAWN_SLOT_LIFE        0x10
 #define AREA_SPAWN_SLOT_RADIUS      0x100

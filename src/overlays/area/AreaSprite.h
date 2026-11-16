@@ -16,10 +16,10 @@ typedef struct AreaSprite {
     u8     unk_26;
 } AreaSprite;
 
-ASSERT_SIZE(AreaSprite, 0x28);
 ASSERT_OFFSET(AreaSprite, origin, 0x04);
 ASSERT_OFFSET(AreaSprite, normal, 0x14);
 ASSERT_OFFSET(AreaSprite, half_size, 0x24);
 ASSERT_OFFSET(AreaSprite, unk_26, 0x26);
+ASSERT_SIZE(AreaSprite, 0x28);
 
 #endif

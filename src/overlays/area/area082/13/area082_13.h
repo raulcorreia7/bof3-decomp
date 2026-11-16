@@ -21,8 +21,8 @@ typedef struct RingOffset {
     s8 y;
 } RingOffset;
 
-ASSERT_SIZE(RingOffset, 0x02);
 ASSERT_OFFSET(RingOffset, y, 0x01);
+ASSERT_SIZE(RingOffset, 0x02);
 
 extern RingOffset D_801F5764[];
 extern Callback   D_801F576C[];
@@ -34,12 +34,12 @@ void func_801F5388(s32 scale);
 
 void func_801F5428(s32 colors);
 
-extern Callback D_801F57D0[];
+extern u8 D_80145EED[3];
 
 /* Set while the ramp reaches its end colour. */
 extern u8 D_8014933A;
 
-extern u8 D_80145EED[3];
+extern Callback D_801F57D0[];
 
 /* func_801F393C */
 void Area_AddSpark(void);

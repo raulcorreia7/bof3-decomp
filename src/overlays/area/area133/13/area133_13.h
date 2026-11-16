@@ -14,9 +14,8 @@ typedef struct MessageChoiceEntry {
 
 ASSERT_SIZE(MessageChoiceEntry, 2);
 
-extern MessageChoiceEntry D_801F3DF0[];
-
 /* The return counter the confirm step restarts. */
-extern u8 D_8014865F;
+extern u8                 D_8014865F;
+extern MessageChoiceEntry D_801F3DF0[];
 
 #endif

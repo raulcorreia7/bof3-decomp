@@ -79,10 +79,10 @@ typedef struct AreaShot {
     u8       pad_28[4];
 } AreaShot;
 
-ASSERT_SIZE(AreaShot, 0x2C);
 ASSERT_OFFSET(AreaShot, angle, 0x06);
 ASSERT_OFFSET(AreaShot, pos, 0x0C);
 ASSERT_OFFSET(AreaShot, velocity, 0x1C);
+ASSERT_SIZE(AreaShot, 0x2C);
 
 void func_801F2FEC(s32* pos, s16, s16, u16 angle, u8, u8);
 void func_801F3378(AreaShot* shot);

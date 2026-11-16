@@ -64,13 +64,13 @@ typedef struct AreaRiseTile {
     s16 limit; /* 0x0A index into D_801F4F34 */
 } AreaRiseTile;
 
-ASSERT_SIZE(AreaRiseTile, 0x0C);
 ASSERT_OFFSET(AreaRiseTile, timer, 0x01);
 ASSERT_OFFSET(AreaRiseTile, color, 0x02);
 ASSERT_OFFSET(AreaRiseTile, x, 0x04);
 ASSERT_OFFSET(AreaRiseTile, y, 0x06);
 ASSERT_OFFSET(AreaRiseTile, step, 0x08);
 ASSERT_OFFSET(AreaRiseTile, limit, 0x0A);
+ASSERT_SIZE(AreaRiseTile, 0x0C);
 
 /* The height limit of each rising tile, by the row's limit index. */
 extern s16 D_801F4F34[];
@@ -80,9 +80,9 @@ void func_801F3468(AreaRow* row);
 
 /* g_GameEntryState and the byte after it, read as one word. */
 extern u32 g_GameEntryStateWord;
+extern u8  D_801EB748[];
 extern u8  D_801F4404[];
 extern u8  D_801F4405[];
-extern u8  D_801EB748[];
 
 void func_801F3630(void);
 

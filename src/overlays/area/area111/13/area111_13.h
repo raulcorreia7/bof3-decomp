@@ -10,16 +10,16 @@
 /* g_ScratchPadVectors */
 extern SVECTOR g_ScratchPadVectors[];
 extern Actor   D_80147A58[];
-extern u8      D_801F4890[];
-extern u8      D_801F489C[];
 /* The facing step bytes the cell walk advances by: x and y, one byte per facing. */
 extern s8      D_80181B00[];
 extern s8      D_80181B01[];
-/* The cell grid's nibble table: four bytes per row, one nibble per cell. */
-extern u8      D_801F5C18[][4];
-extern u8      D_801F5BFC[][4];
+extern u8      D_801F4890[];
+extern u8      D_801F489C[];
 /* One byte per cell of the 7x7 cell grid, read by func_801F46A8. */
 extern u8      D_801F5BC8[7][7];
+extern u8      D_801F5BFC[][4];
+/* The cell grid's nibble table: four bytes per row, one nibble per cell. */
+extern u8      D_801F5C18[][4];
 /* g_SceneEventStep read unsigned: func_801F3EE8 switches on a byte load. */
 extern u8      g_SceneEventStep_u8[];
 

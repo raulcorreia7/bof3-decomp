@@ -15,9 +15,9 @@
 #define AREA108_STATE_BASE   MEM_PTR(u16, AREA_WORK + 0x280)
 #define AREA108_STATE_OFFSET MEM_PTR(u16, AREA_WORK + 0x284)
 
-extern u8* D_80147B40;
 /* The cell the party leader's choice commits and the bit the event sets. */
 extern s16 D_80147B26[];
+extern u8* D_80147B40;
 extern u8  D_80147CC8;
 
 /* A map cell and a facing: the spots the leader stands on to pick a branch (func_801F4414). */
@@ -41,8 +41,8 @@ typedef struct Area108Scratch {
     Pos3 pos;
 } Area108Scratch;
 
-ASSERT_SIZE(Area108Scratch, 0x40);
 ASSERT_OFFSET(Area108Scratch, pos, 0x34);
+ASSERT_SIZE(Area108Scratch, 0x40);
 
 /* One placement row: a whole coordinate per axis and whether it sits half a cell on. */
 typedef struct AreaPosEntry {
@@ -111,13 +111,13 @@ ASSERT_OFFSET(SceneSampleTrack, sample, 0x02);
 ASSERT_OFFSET(SceneSampleTrack, weight, 0x1A);
 ASSERT_SIZE(SceneSampleTrack, 0x28);
 
+/* The staged actor rows: the event scrolls to row 1 and tints row 0. */
+extern Actor D_80147A58[];
+
 /* The track's row count, the event flag byte beside it and the track the samples walk. */
 extern s8                D_801F6298;
 extern u8                D_801F629B;
 extern SceneSampleTrack* D_801F629C;
-
-/* The staged actor rows: the event scrolls to row 1 and tints row 0. */
-extern Actor D_80147A58[];
 
 /* The four trigger cells the stage event matches: the cell, the facing and the scene flag to toggle. */
 typedef struct Area108Trigger {

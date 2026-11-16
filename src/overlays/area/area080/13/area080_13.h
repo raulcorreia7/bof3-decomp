@@ -31,7 +31,6 @@ typedef struct AreaSparkSlot {
     DVECTOR  pos_trail[AREA_SPARK_TRAIL_POINTS];    /* 0x50 */
 } AreaSparkSlot;
 
-ASSERT_SIZE(AreaSparkSlot, 0x60);
 ASSERT_OFFSET(AreaSparkSlot, color, 0x04);
 ASSERT_OFFSET(AreaSparkSlot, velocity_x, 0x08);
 ASSERT_OFFSET(AreaSparkSlot, velocity_z, 0x10);
@@ -39,6 +38,7 @@ ASSERT_OFFSET(AreaSparkSlot, origin, 0x18);
 ASSERT_OFFSET(AreaSparkSlot, pos, 0x28);
 ASSERT_OFFSET(AreaSparkSlot, origin_trail, 0x40);
 ASSERT_OFFSET(AreaSparkSlot, pos_trail, 0x50);
+ASSERT_SIZE(AreaSparkSlot, 0x60);
 
 #define AREA_SPARK_SLOT_COUNT 8u
 #define g_AreaSparks          ((AreaSparkSlot*)(AREA_WORK + sizeof(AreaRing)))

@@ -17,12 +17,12 @@
 extern u8       D_801F442C[];
 extern u8       D_801F442D[];
 extern u8       D_801F442E[];
-/* The game mode the trigger records of this payload match. */
-/* Trigger records: two match bytes, a mode nibble and a flag bit. */
-extern u8       D_801F45E4[];
 /* The state handler tables the dispatchers index. */
 extern Callback D_801F4430[];
 extern Callback D_801F4448[];
+/* The game mode the trigger records of this payload match. */
+/* Trigger records: two match bytes, a mode nibble and a flag bit. */
+extern u8       D_801F45E4[];
 
 /* The sprite-word fields above the floor quad's cell coordinate. */
 #define AREA_FLOOR_QUAD_PART ((0x150) << 16)

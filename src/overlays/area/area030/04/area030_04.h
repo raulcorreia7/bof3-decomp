@@ -208,9 +208,9 @@ typedef struct FishingSceneCue {
     u8  pad_0B[0x19];
 } FishingSceneCue;
 
-ASSERT_SIZE(FishingSceneCue, 0x24);
 ASSERT_OFFSET(FishingSceneCue, value_00, 0x00);
 ASSERT_OFFSET(FishingSceneCue, count_0A, 0x0A);
+ASSERT_SIZE(FishingSceneCue, 0x24);
 
 /* The world panel's selection state word at the head of each 0x98-byte field
  * work row; Fishing_HookedReel latches the pad state here and the byte at +1 is the
@@ -232,11 +232,11 @@ typedef struct PanelIcon {
     u8  pad_0E[2];
 } PanelIcon;
 
-ASSERT_SIZE(PanelIcon, 0x10);
 ASSERT_OFFSET(PanelIcon, width, 0x08);
 ASSERT_OFFSET(PanelIcon, height, 0x0A);
 ASSERT_OFFSET(PanelIcon, u, 0x0C);
 ASSERT_OFFSET(PanelIcon, v, 0x0D);
+ASSERT_SIZE(PanelIcon, 0x10);
 
 /* g_FishingLureRow selects a 0x14-byte row from D_801E2720. */
 typedef struct FishingTarget {
@@ -251,7 +251,6 @@ typedef struct FishingTarget {
     u8  pad_12[2]; /* 0x12 */
 } FishingTarget;
 
-ASSERT_SIZE(FishingTarget, 0x14);
 ASSERT_OFFSET(FishingTarget, unk_00, 0x00);
 ASSERT_OFFSET(FishingTarget, unk_04, 0x04);
 ASSERT_OFFSET(FishingTarget, unk_08, 0x08);
@@ -261,6 +260,7 @@ ASSERT_OFFSET(FishingTarget, unk_0F, 0x0F);
 ASSERT_OFFSET(FishingTarget, unk_10, 0x10);
 ASSERT_OFFSET(FishingTarget, unk_11, 0x11);
 ASSERT_OFFSET(FishingTarget, pad_12, 0x12);
+ASSERT_SIZE(FishingTarget, 0x14);
 
 /* One 0xA-byte panel texture cell: the U/V origin, the quad width, the extra V
  * span and the texture page word. The D_801E218C..D_801E2194 tables are
