@@ -33,6 +33,6 @@ extern s16 D_801F5388[];
 /* Fairy_InitVillage in the commu overlay at the same address. */
 void func_801EECA4(void);
 
-void func_801F36DC(s32 arg0, s32 arg1, s32 arg2);
+void func_801F36DC(s16 x, s16 y, s16 radius);
 
 #endif
