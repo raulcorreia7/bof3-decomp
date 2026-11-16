@@ -922,7 +922,7 @@ MATCH void func_801FAA70(void) {
     switch (*step) {
         case 0:
             if (g_UiWindowEffectBusy == 0) {
-                MESSAGE_START_WAIT(1);
+                MESSAGE_START_WAIT(MSG_001);
                 *step = 1;
             }
             break;

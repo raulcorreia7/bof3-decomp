@@ -6,8 +6,6 @@
 
 #include "overlays/area/world03.h"
 
-/* The heading prompt the walk step asks. */
-#define AREA131_MSG_HEADING_PROMPT 0xC
 extern s8 D_8014504A;
 
 /* The scenario state byte the copy writes. */

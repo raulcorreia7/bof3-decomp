@@ -9,7 +9,7 @@ MATCH void func_801F3AF4(void) {
         if (g_MessageRequest == 0x44) {
             work                 = g_ScriptWorkRecord;
             g_SceneState.step_05 = 8;
-            g_MessageRequest     = 0x4B;
+            g_MessageRequest     = MSG_075;
             /* FAKE: retail keeps the count load after the request store. */
             FAKE_BARRIER();
             work->unk_7E++;
@@ -18,6 +18,6 @@ MATCH void func_801F3AF4(void) {
             g_MessageRequest     = MESSAGE_NONE;
         }
     } else {
-        g_MessageRequest = 0x4C;
+        g_MessageRequest = MSG_076;
     }
 }

@@ -7,9 +7,6 @@
 #include "overlays/area/world00.h"
 #include "area/spad.h"
 
-/* The line the area change plays before the screen returns. */
-#define AREA037_MSG_READY 181
-
 /* The owner is src/engine/game/00/game_00.h; that header is not visible to this
  * overlay, so keep the local declaration with the owner's volatile qualifier. */
 extern volatile u8 g_GameRequestKind;

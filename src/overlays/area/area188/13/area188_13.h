@@ -10,10 +10,6 @@
 #include "area/effects.h"
 #include "overlays/area/Area_DrawDimQuad.h"
 
-/* The card reader's reply. */
-#define AREA188_MSG_ID_ACCEPTED 0x82
-#define AREA188_MSG_ID_REJECTED 0x83
-
 /* The per-scene y limit bytes the walk step reads, in 16.16 units. */
 extern u8 D_801F688C[];
 extern u8 D_801F688D[];

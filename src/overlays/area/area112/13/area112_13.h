@@ -7,9 +7,6 @@
 #include "overlays/area/world02.h"
 #include "area/spad.h"
 
-/* The warp pad's failure line. */
-#define AREA112_MSG_WARP_TARGET_LOST 2
-
 /* The scenario flag byte the answer path tests. */
 extern u8 D_80144EF0[];
 

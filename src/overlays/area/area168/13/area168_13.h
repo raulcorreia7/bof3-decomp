@@ -7,11 +7,6 @@
 #include "overlays/area/world04.h"
 #include "area/spad.h"
 
-/* The navigator keeper's three answers. */
-#define AREA168_MSG_NAVIGATOR_EXPLAIN  0x12
-#define AREA168_MSG_NAVIGATOR_OWNED    0x13
-#define AREA168_MSG_NAVIGATOR_DECLINED 0x14
-
 /* Message ids of the card-key door: its ID check result. */
 enum {
     AREA168_MESSAGE_ID_CHECK_PASSED = 6,

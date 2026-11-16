@@ -8,7 +8,7 @@ MATCH void func_801F8770(void) {
     switch (g_SceneState.step_05) {
         case 0:
             if (!WINDOW_EFFECT_BUSY()) {
-                MESSAGE_START_WAIT(0);
+                MESSAGE_START_WAIT(MSG_000);
                 Area_StartScrollRoute(0);
                 Scene_SetupParty(0);
                 g_SceneState.step_05 = 1;
@@ -84,7 +84,7 @@ MATCH void func_801F8770(void) {
             if (!WINDOW_EFFECT_BUSY()) {
                 g_AreaDrawFlags = 0;
                 g_ScriptVars[0] = 0x17;
-                SCENE_MESSAGE_WAIT(0x14, 0xA);
+                SCENE_MESSAGE_WAIT(MSG_020, 0xA);
                 SND_FadeOutSequence(0, 1, 4, 0x1E);
             }
             break;

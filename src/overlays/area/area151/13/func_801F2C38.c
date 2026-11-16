@@ -51,7 +51,7 @@ MATCH void func_801F2C38(void) {
                     from++;
                     dst += 0x20;
                 }
-                Message_StartAreaMessage(0x16);
+                Message_StartAreaMessage(MSG_022);
             }
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             LOBU(g_SceneEventStep)++;

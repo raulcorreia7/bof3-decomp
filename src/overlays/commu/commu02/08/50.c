@@ -62,7 +62,7 @@ MATCH void func_801D0DE0(void) {
     func_801D32A0(0x6E - ((u8)D_801DB0C4 * 0x28), 0x74, 1);
     check = D_801DB0C4;
     if (check == 0) {
-        MESSAGE_START_WAIT(FAIRY_MESSAGE_CASINO_BET);
+        MESSAGE_START_WAIT(MSG_113);
         D_801DB07C = 0;
         D_801DB0B4 = 0;
         D_801F294E = 0;

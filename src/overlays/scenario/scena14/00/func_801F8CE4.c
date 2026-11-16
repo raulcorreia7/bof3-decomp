@@ -48,7 +48,7 @@ MATCH void func_801F8CE4(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            SCENE_MESSAGE_WAIT(0x14, 0xD);
+            SCENE_MESSAGE_WAIT(MSG_020, 0xD);
             break;
         case 13:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -83,7 +83,7 @@ MATCH void func_801F8CE4(void) {
                 break;
             }
             func_801F924C();
-            MESSAGE_START_WAIT(1);
+            MESSAGE_START_WAIT(MSG_001);
             g_SpawnedActors[D_801FC4C0].header.mode = 2;
             g_SceneState.step_05                    = 0x11;
             break;
@@ -113,7 +113,7 @@ MATCH void func_801F8CE4(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            SCENE_MESSAGE_WAIT(2, 0x15);
+            SCENE_MESSAGE_WAIT(MSG_002, 0x15);
             break;
         case 21:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {

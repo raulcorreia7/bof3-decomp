@@ -155,7 +155,7 @@ MATCH void func_801F778C(void) {
             break;
         }
         case 0x32:
-            Message_StartAreaMessage(6);
+            Message_StartAreaMessage(MSG_006);
             g_GameStateIndex     = 2;
             g_SceneState.step_05 = 0x33;
             break;
@@ -168,7 +168,7 @@ MATCH void func_801F778C(void) {
             g_SceneState.state_04 = 0;
             break;
         case 0x3C:
-            Message_StartAreaMessage(7);
+            Message_StartAreaMessage(MSG_007);
             g_GameStateIndex     = 2;
             g_SceneState.step_05 = 0x33;
             break;

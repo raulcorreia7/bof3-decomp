@@ -5,11 +5,11 @@ MATCH void FairyCasino_AnswerNumbersPlayAgain(void) {
     u16 value;
 
     if (MENU_SELECTION_ARMED()) {
-        value = FAIRY_MESSAGE_NUMBERS_DECLINED;
+        value = MSG_123;
     } else if (g_Zenny < 500u) {
-        value = FAIRY_MESSAGE_CASINO_NOT_ENOUGH_ZENNY;
+        value = MSG_124;
     } else {
-        g_MessageRequest = FAIRY_MESSAGE_NUMBERS_START;
+        g_MessageRequest = MSG_127;
         D_801F294F       = 0;
         return;
     }

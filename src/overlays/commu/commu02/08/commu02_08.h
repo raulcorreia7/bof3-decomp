@@ -6,27 +6,6 @@
 
 #include "shared/etc.h"
 
-/* The village messages the casino and nickname steps request from the area table. */
-#define FAIRY_MESSAGE_CASINO_BET                0x71
-#define FAIRY_MESSAGE_CASINO_DECLINED           0x72
-#define FAIRY_MESSAGE_CASINO_HIGH_LOW           0x73
-#define FAIRY_MESSAGE_CASINO_MISSED             0x74
-#define FAIRY_MESSAGE_CASINO_PLAY_AGAIN         0x75
-#define FAIRY_MESSAGE_CASINO_WON_KEEP_PLAYING   0x76
-#define FAIRY_MESSAGE_CASINO_START              0x78
-#define FAIRY_MESSAGE_CASINO_BET_TOO_HIGH       0x79
-#define FAIRY_MESSAGE_CASINO_NUMBERS_START      0x7F
-#define FAIRY_MESSAGE_CASINO_NUMBERS_PROMPT     0x80
-#define FAIRY_MESSAGE_CASINO_BAG_FULL           0x83
-#define FAIRY_MESSAGE_CASINO_NUMBERS_ANSWER     0x85
-#define FAIRY_MESSAGE_CASINO_NUMBERS_PLAY_AGAIN 0x86
-#define FAIRY_MESSAGE_NICKNAME_WHO              0xEE
-#define FAIRY_MESSAGE_NICKNAME_PROPOSED         0xF3
-#define FAIRY_MESSAGE_NICKNAME_LIKE             0xF4
-#define FAIRY_MESSAGE_NICKNAME_ACCEPTED         0xF5
-#define FAIRY_MESSAGE_NICKNAME_KEEP_GOING       0xF6
-#define FAIRY_MESSAGE_NICKNAME_FAREWELL         0xF7
-
 extern u8 D_801457E8[][5];
 /* g_EmiOverlayHeader */
 extern u8 D_801DAAA8;

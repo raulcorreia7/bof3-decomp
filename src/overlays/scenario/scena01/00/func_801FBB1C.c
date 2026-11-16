@@ -73,7 +73,7 @@ MATCH void func_801FBB1C(void) {
             }
             g_AreaDrawFlags = 0;
             g_ScriptVars[0] = 9;
-            SCENE_MESSAGE_WAIT(4, 8);
+            SCENE_MESSAGE_WAIT(MSG_004, 8);
             break;
         case 8:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {

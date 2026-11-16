@@ -38,7 +38,7 @@ MATCH void func_801FCCFC(void) {
     state = &g_SceneState.step_05;
     switch (*state) {
         case 0:
-            MESSAGE_START_WAIT(24);
+            MESSAGE_START_WAIT(MSG_024);
             *state = 1;
             return;
         case 1:
@@ -59,7 +59,7 @@ MATCH void func_801FCD9C(void) {
     state = &g_SceneState.step_05;
     switch (*state) {
         case 0:
-            MESSAGE_START_WAIT(52);
+            MESSAGE_START_WAIT(MSG_052);
             *state = 1;
             return;
         case 1:
@@ -78,7 +78,7 @@ MATCH void func_801FCE30(void) {
     state = &g_SceneState.step_05;
     switch (*state) {
         case 0:
-            MESSAGE_START_WAIT(52);
+            MESSAGE_START_WAIT(MSG_052);
             *state = 1;
             return;
         case 1:

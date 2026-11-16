@@ -12,12 +12,12 @@ MATCH void func_801F2C04(void) {
         D_801490E4[0] = 0;
         if (Item_Add(1, 0x4D, 1, 0) & BYTE_MASK) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x06));
-            g_MessageRequest = AREA155_MSG_ROBOT_GIFT;
+            g_MessageRequest = MSG_011;
         } else {
-            g_MessageRequest = AREA155_MSG_ROBOT_SPEECH;
+            g_MessageRequest = MSG_010;
         }
     } else {
-        g_MessageRequest = AREA155_MSG_ROBOT_SPEECH;
+        g_MessageRequest = MSG_010;
     }
     SYS_SetFlag(D_80144EF0, 1);
 }

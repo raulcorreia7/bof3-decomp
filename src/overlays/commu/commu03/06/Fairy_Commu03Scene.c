@@ -137,7 +137,7 @@ MATCH void func_801D1184(void) {
     D_801D1948 = count;
     func_801D1250(0x32, (s16)(0x28 - count * 0x32));
     if (D_801D1948 == 4) {
-        MESSAGE_START_WAIT(FAIRY_MESSAGE_COMMU03_FAREWELL);
+        MESSAGE_START_WAIT(MSG_090);
         D_801F294D += 1;
     }
 }

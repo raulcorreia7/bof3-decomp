@@ -17,10 +17,10 @@ MATCH void func_801FB66C(void) {
             }
             if (g_ScriptVars[0] == 1) {
                 g_ScriptVars[0] = 0;
-                SCENE_MESSAGE_WAIT(0x22, 1);
+                SCENE_MESSAGE_WAIT(MSG_034, 1);
             } else {
                 g_ScriptVars[0] = 0;
-                SCENE_MESSAGE_WAIT(0x20, 2);
+                SCENE_MESSAGE_WAIT(MSG_032, 2);
             }
             break;
         case 1:
@@ -28,7 +28,7 @@ MATCH void func_801FB66C(void) {
             if (*mode == 2) {
                 break;
             }
-            Message_StartAreaMessage(0x20);
+            Message_StartAreaMessage(MSG_032);
             *mode                = 2;
             g_SceneState.step_05 = 2;
             break;

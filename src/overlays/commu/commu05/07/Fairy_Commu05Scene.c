@@ -61,10 +61,10 @@ NON_MATCHING void func_801D1048(s16 x, s16 y, u8 group) {
     u8* buffer;
     u8* entry;
 
-    UI_DrawText(x + 0x28, y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 55));
+    UI_DrawText(x + 0x28, y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, MSG_055));
     row_y = y + 0x14;
     func_801D0F50(x + 8, row_y, 0);
-    UI_DrawText(x + 0x18, row_y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 56));
+    UI_DrawText(x + 0x18, row_y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, MSG_056));
     buffer = g_UiFormatBuffer;
     TEXT_Format(buffer, D_801D0C0C, D_80145E44);
     UI_DrawAsciiString(x + 0x6C, row_y, 0, buffer);
@@ -83,9 +83,9 @@ NON_MATCHING void func_801D1048(s16 x, s16 y, u8 group) {
         entry = &D_80145E30[entry_index];
         UI_DrawText(x + 0x14, row_y, 0, 5, D_801457E8[entry[0] & 0x7F]);
         if (entry[0] & 0x80) {
-            UI_DrawText(x + 0x48, row_y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 58));
+            UI_DrawText(x + 0x48, row_y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, MSG_058));
         } else {
-            UI_DrawText(x + 0x48, row_y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 57));
+            UI_DrawText(x + 0x48, row_y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, MSG_057));
         }
     }
 }
@@ -98,10 +98,10 @@ MATCH void func_801D129C(s16 x, s16 y, u8 group) {
     s16 row_y;
     u8* buffer;
 
-    UI_DrawText(x + 0x28, y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 55));
+    UI_DrawText(x + 0x28, y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, MSG_055));
     row_y = y + 0x14;
     func_801D0F50(x + 8, row_y, 0);
-    UI_DrawText(x + 0x18, row_y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 59));
+    UI_DrawText(x + 0x18, row_y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, MSG_059));
     buffer = g_UiFormatBuffer;
     /* The row-count format and its two captions sit in the unit's data. */
     TEXT_Format(buffer, D_801D0C0C, g_FairyVillagePendingQueueCount);

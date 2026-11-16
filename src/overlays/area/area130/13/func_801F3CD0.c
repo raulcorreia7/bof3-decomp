@@ -42,7 +42,7 @@ MATCH void func_801F3CD0(void) {
             }
             g_TextVariables[0][ITEM_NAME_LENGTH] = 0;
             g_TextVariables[1][8]                = 0;
-            SCENE_MESSAGE_WAIT(0x49, 1);
+            SCENE_MESSAGE_WAIT(MSG_073, 1);
             break;
         case 1:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {

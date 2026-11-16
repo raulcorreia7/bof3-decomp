@@ -59,7 +59,7 @@ MATCH void func_801F8564(void) {
             }
             break;
         case 20:
-            MESSAGE_START_WAIT(0xB);
+            MESSAGE_START_WAIT(MSG_011);
             g_SceneState.step_05 = 0x15;
             break;
         case 21:

@@ -366,11 +366,11 @@ MATCH void func_801F894C(void) {
             break;
 
         case 50:
-            SCENE_MESSAGE_WAIT(6, 51);
+            SCENE_MESSAGE_WAIT(MSG_006, 51);
             break;
 
         case 60:
-            SCENE_MESSAGE_WAIT(7, 51);
+            SCENE_MESSAGE_WAIT(MSG_007, 51);
             break;
     }
 }

@@ -36,9 +36,9 @@ MATCH s32 Char_ProbeCellSpawn(s16 x, s16 y) {
         D_801490E4[0] = 0;
         if (Item_Add(ITEM_CAT_ITEM, ITEM_HORSERADISH, 1, 0) & BYTE_MASK) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
-            Message_Request(2);
+            Message_Request(MSG_002);
         } else {
-            Message_Request(3);
+            Message_Request(MSG_003);
         }
         g_GameStateIndex     = GAME_REQUEST_MESSAGE;
         g_Task->param.unk_0B = 1;

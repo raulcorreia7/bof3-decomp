@@ -19,7 +19,7 @@ MATCH void func_801F390C(void) {
             return;
         case 2:
             if (WINDOW_EFFECT_IDLE()) {
-                MESSAGE_START_WAIT(1);
+                MESSAGE_START_WAIT(MSG_001);
                 *state = 3;
             }
             return;

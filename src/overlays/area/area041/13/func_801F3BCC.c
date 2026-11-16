@@ -10,7 +10,7 @@ MATCH void func_801F3BCC(void) {
             Item_Remove(ITEM_CAT_ITEM, ITEM_MARTIAN_SQUID, 1, 0);
             Item_Remove(ITEM_CAT_ITEM, ITEM_BEEF_JERKY, 1, 0);
             Item_Remove(ITEM_CAT_ITEM, ITEM_SWALLOW_EYE, 1, 0);
-            g_MessageRequest = AREA041_MSG_COOK_APPRENTICE;
+            g_MessageRequest = MSG_098;
             return;
         }
         value = 0x63;

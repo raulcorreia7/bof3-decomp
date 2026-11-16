@@ -30,7 +30,7 @@ MATCH void func_801F2C48(void) {
     quad->x      = (s16)quad->x >> 1;
     quad->y      = (s16)quad->y >> 1;
 
-    MESSAGE_START_WAIT(0x14);
+    MESSAGE_START_WAIT(MSG_020);
     g_Task->timer = 50;
     g_Task->header.mode++;
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0));

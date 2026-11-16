@@ -2,10 +2,10 @@
 
 MATCH void func_801F49D4(void) {
     if (g_MessageChoice == 0) {
-        g_MessageRequest = AREA168_MSG_NAVIGATOR_EXPLAIN;
+        g_MessageRequest = MSG_018;
     } else if (g_MessageChoice == 1) {
-        g_MessageRequest = AREA168_MSG_NAVIGATOR_OWNED;
+        g_MessageRequest = MSG_019;
     } else {
-        g_MessageRequest = AREA168_MSG_NAVIGATOR_DECLINED;
+        g_MessageRequest = MSG_020;
     }
 }
