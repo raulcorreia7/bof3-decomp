@@ -472,8 +472,7 @@ MATCH void func_801F0164(s32 index) {
     s32       v;
 
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
     length = D_801F0A9C[(u8)index];
     x      = g_Task->unk_2E.half - ((length >> 1) * 12 + (length & 1) * 6);
     y      = g_Task->unk_30.half;
@@ -505,8 +504,7 @@ MATCH void func_801F03F0(s32 dir) {
     s32       u;
 
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
     prim = (POLY_FT4*)g_GfxPrimCursor;
     x    = g_Task->unk_2E.half;
     y    = g_Task->unk_30.half;
@@ -531,8 +529,7 @@ MATCH void func_801F0550(s32 value) {
     u16       left;
 
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
     tens = (u8)value / 10;
     ones = (u8)value % 10;
     prim = (POLY_FT4*)g_GfxPrimCursor;
@@ -566,8 +563,7 @@ MATCH void func_801F07B0(s32 index) {
     s32   tpage;
 
     tpage = getTPage(0, 2, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
@@ -583,8 +579,7 @@ MATCH void func_801F07B0(s32 index) {
     setRGB0(tile, 0x20, 0x20, 0x20);
     GFX_AddPrim(2, sizeof(TILE));
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
 }
 
 /* func_801F09C4 */

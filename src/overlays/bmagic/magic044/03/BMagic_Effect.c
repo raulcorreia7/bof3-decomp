@@ -188,8 +188,7 @@ MATCH void func_801EF4E0(void) {
     s32      tpage;
 
     tpage = getTPage(0, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     k = g_Task->param.unk_0B;
     while (BMagic_Trail[g_Task->unk_04][k].x == -1) {
         k++;
@@ -234,8 +233,7 @@ MATCH void func_801EF4E0(void) {
         GFX_AddPrim(3, sizeof(POLY_G4));
     }
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
 }
 
 MATCH void func_801EFA4C(void) {
@@ -244,8 +242,7 @@ MATCH void func_801EFA4C(void) {
     s32      tpage;
 
     tpage = getTPage(0, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     D_1F800000.cells.halves[0] = 12;
     k                          = g_Task->param.unk_0B;
     while (BMagic_Trail[g_Task->unk_04][k].x == -1) {
@@ -324,8 +321,7 @@ MATCH void func_801EFA4C(void) {
         GFX_AddPrim(3, sizeof(POLY_G4));
     }
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
 }
 
 /* func_801F02A0 */

@@ -75,8 +75,7 @@ NON_MATCHING void func_8014BC70(void) {
     var_s7 = 0;
     var_s4 = 0;
     var_fp = 0;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, NULL);
-    GFX_AddPrim(6U, sizeof(DR_MODE));
+    GFX_ADD_LAYER_DRAW_MODE(6U, tpage);
     do {
         if (g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) {
             Area_DrawCellLayer(var_s7);

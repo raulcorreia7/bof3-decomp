@@ -83,6 +83,20 @@ static inline void GFX_AddDitheredDrawMode(u32 layer, s32 tpage) {
     GFX_AddPrim(layer, sizeof(DR_MODE));
 }
 
+/* Queue a draw mode for the texture page `tpage` at order-table slot `layer`: the default texture
+ * window, dithering off. */
+#define GFX_ADD_LAYER_DRAW_MODE(layer, tpage) \
+    GFX_SET_DRAW_MODE(tpage);                 \
+    GFX_AddPrim((layer), sizeof(DR_MODE))
+
+/* The same draw mode at order-table slot 1. */
+#define GFX_ADD_DRAW_MODE(tpage) GFX_ADD_LAYER_DRAW_MODE(1, tpage)
+
+/* The same draw mode with dithering on. */
+#define GFX_ADD_DITHERED_DRAW_MODE(layer, tpage)              \
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, (tpage), 0); \
+    GFX_AddPrim((layer), sizeof(DR_MODE))
+
 /* The shared cursor viewed as the primitive it is about to receive. */
 #define GFX_CURSOR(type) ((type*)g_GfxPrimCursor)
 

@@ -24,8 +24,7 @@ NON_MATCHING void func_801F6368(void) {
     } else {
         tpage = 0x35;
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_LAYER_DRAW_MODE(2, tpage);
 
     radius = 8 - ((g_FrameCount >> 1) & 7);
     shade  = ~(radius * 0x1E);

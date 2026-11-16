@@ -213,8 +213,7 @@ MATCH void func_801EF590(u8* text, s32 x, s32 y) {
     s16       v;
 
     mode = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mode, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(2, mode);
     if (*text == 0) {
         return;
     }
@@ -272,8 +271,7 @@ MATCH void func_801EF924(u8* text, s32 x, s32 y) {
     s16       v;
 
     mode = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mode, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(2, mode);
     if (*text == 0) {
         return;
     }
@@ -312,8 +310,7 @@ NON_MATCHING void func_801EFB00(u16 value, s32 x, s32 y) {
     s32       y1;
 
     mode = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mode, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(2, mode);
     started = 0;
     scale   = 10000;
     i       = 0;

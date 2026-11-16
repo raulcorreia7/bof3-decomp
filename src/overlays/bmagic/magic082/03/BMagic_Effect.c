@@ -183,8 +183,7 @@ MATCH void func_801EF720(void) {
     s32      tpage;
 
     tpage = getTPage(0, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     D_1F800000.cells.halves[3] = g_Task->unk_09 * 5;
     D_1F800000.cells.halves[4] = D_801F0CFC[g_Task->unk_04][0] * g_Task->unk_09;
     D_1F800000.cells.halves[5] = D_801F0CFC[g_Task->unk_04][1] * g_Task->unk_09;
@@ -212,8 +211,7 @@ MATCH void func_801EF720(void) {
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 }
 
 /* Draw the magic082 ring as sixteen shaded quads between two radii, tinted at the inner edge
@@ -226,8 +224,7 @@ MATCH void func_801EFA00(void) {
     s32      tpage;
 
     tpage = getTPage(0, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     D_1F800000.cells.halves[4] = D_801F0D08[g_Task->unk_04][0] * g_Task->unk_09;
     D_1F800000.cells.halves[5] = D_801F0D08[g_Task->unk_04][1] * g_Task->unk_09;
     D_1F800000.cells.halves[6] = D_801F0D08[g_Task->unk_04][2] * g_Task->unk_09;
@@ -259,8 +256,7 @@ MATCH void func_801EFA00(void) {
         GFX_AddPrim(5, sizeof(POLY_G4));
     }
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 }
 
 MATCH void func_801EFD30(void) {

@@ -82,8 +82,7 @@ MATCH void func_801EF030(s32 x, s32 y, u16 radius, s32 phase) {
         points[i].vy = y + ((rcos(angle) * radius) >> 12);
     }
     tpage = GetTPage(0x3C0, 0x100, 0, 0);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_ADD_DRAW_MODE(tpage);
     for (i = 0; i < 2; i++) {
         prim = (POLY_F3*)g_GfxPrimCursor;
         SetPolyF3(prim);

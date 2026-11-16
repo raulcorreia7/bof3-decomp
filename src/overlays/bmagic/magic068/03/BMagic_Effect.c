@@ -249,8 +249,7 @@ MATCH void func_801EF55C(void) {
     s32   i;
 
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(0, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(0, tpage);
     D_1F800000.cells.words[0] = 0xE8;
     D_1F800000.cells.words[1] = g_Task->unk_09;
     for (i = 0; i < 6; i++) {
@@ -341,8 +340,7 @@ MATCH void func_801EFA48(void) {
     s32       tpage;
 
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     setXY4(prim, g_Task->unk_2E.half - 12, g_Task->unk_30.half - 12, g_Task->unk_2E.half + 12, g_Task->unk_30.half - 12, g_Task->unk_2E.half - 12, g_Task->unk_30.half + 12, g_Task->unk_2E.half + 12,

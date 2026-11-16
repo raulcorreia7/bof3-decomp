@@ -5,8 +5,7 @@ MATCH void func_801F3404(void) {
     s32      mode;
 
     mode = getTPage(1, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, mode, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_LAYER_DRAW_MODE(3, mode);
     prim = (POLY_F4*)g_GfxPrimCursor;
     SetPolyF4(prim);
     SetSemiTrans(prim, 1);

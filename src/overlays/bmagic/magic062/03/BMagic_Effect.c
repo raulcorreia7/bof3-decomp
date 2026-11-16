@@ -160,8 +160,7 @@ MATCH void func_801EF678(void) {
     s32      tpage;
 
     tpage = getTPage(0, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     D_1F800000.cells.halves[3] = g_Task->unk_09 * 5;
     D_1F800000.cells.halves[4] = ((rand() & 3) + 3) * g_Task->unk_09;
     D_1F800000.cells.halves[5] = ((rand() & 3) + 3) * g_Task->unk_09;
@@ -188,8 +187,7 @@ MATCH void func_801EF678(void) {
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 }
 
 MATCH void func_801EF934(void) {
@@ -200,8 +198,7 @@ MATCH void func_801EF934(void) {
     s32      tpage;
 
     tpage = getTPage(0, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     D_1F800014[1].vx = FIXED_MUL(rsin(0), 128U);
     D_1F800014[1].vy = FIXED_MUL(rcos(0), 128U);
     D_1F800014[3].vx = FIXED_MUL(rsin(0), 256U);
@@ -230,8 +227,7 @@ MATCH void func_801EF934(void) {
         GFX_AddPrim(5, sizeof(POLY_G4));
     }
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 }
 
 MATCH void func_801EFBBC(void) {
