@@ -14,13 +14,13 @@
 #define COMMU03_STEP2_COUNT 4
 
 /* D_801D18C8 */
-extern Callback g_Commu03States[COMMU03_STEP_COUNT];
+extern Callback g_Commu03Steps[COMMU03_STEP_COUNT];
 /* D_801D18D4 */
-extern Callback g_Commu03Step0Funcs[COMMU03_STEP0_COUNT];
+extern Callback g_Commu03Step0Steps[COMMU03_STEP0_COUNT];
 /* D_801D18DC */
-extern Callback g_Commu03Step1Funcs[COMMU03_STEP1_COUNT];
+extern Callback g_Commu03Step1Steps[COMMU03_STEP1_COUNT];
 /* D_801D18E4 */
-extern Callback g_Commu03Step2Funcs[COMMU03_STEP2_COUNT];
+extern Callback g_Commu03Step2Steps[COMMU03_STEP2_COUNT];
 extern u8       D_801D1944;
 extern u8       D_801D18F4[];
 extern u8       D_801D18F8[];

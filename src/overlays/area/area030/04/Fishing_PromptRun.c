@@ -12,5 +12,5 @@ MATCH void Fishing_PromptRun(void) {
         Actor_Clear();
         return;
     }
-    g_FishingPromptStates[FISHING_STATE->handler_index_01]();
+    g_FishingPromptSteps[FISHING_STATE->handler_index_01]();
 }

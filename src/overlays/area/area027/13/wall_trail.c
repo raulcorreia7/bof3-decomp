@@ -2,7 +2,7 @@
 #include "area/map.h"
 
 /* Dispatch handlers, indexed by work byte +0x01. */
-static Callback s_WorkStates[6] = {
+static Callback s_WallTrailModes[6] = {
     func_801F2C74, func_801F2D5C, func_801F3164, func_801F31CC, func_801F32B0, func_801F33A8,
 };
 /* Variable-length script records; no reader names a field, so the block stays a byte array. */
@@ -159,7 +159,7 @@ u8 D_801F3ACC[4760] = {
 };
 
 MATCH void func_801F2C30(void) {
-    SYS_DISPATCH_BYTE(s_WorkStates, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(s_WallTrailModes, g_Task->header.mode);
 }
 
 MATCH void func_801F2C74(void) {

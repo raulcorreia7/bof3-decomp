@@ -141,7 +141,7 @@ g_BattlePanelOffsets = { addr = 0x801EB0B0, source = "Battle panel positions." }
 D_801EB0B1 = { addr = 0x801EB0B1, alias = true, source = "Position offsets by party character (8 bytes each) and facing (2 bytes each) that func_801D3624 adds to the target position." }
 s_BattlePanelYOffsets = { addr = 0x801EB108, source = "Battle panel vertical positions." }
 s_BattleCharacterSprites = { addr = 0x801EB18C, source = "Battle sprite step ids per party character." }
-g_BattleTaskFuncs = { addr = 0x801EB1B4, source = "Battle task state handlers." }
+g_BattleTaskSteps = { addr = 0x801EB1B4, source = "Battle task state handlers." }
 g_BattleCharacterStepIds = { addr = 0x801EB230, source = "Step id of each character (0x28 entries) that func_801E16B4 stores in the task byte 0x09 by character_id." }
 g_BattleEnemies = { addr = 0x801EB2E8, alias = true, source = "The enemy battlers." }
 s_BattlePartialPartyTargetWeights = { addr = 0x801EB394, source = "Target weights for a party with two active members." }
@@ -2890,7 +2890,7 @@ g_SaveSlotTimeFormat = { addr = 0x801D0D84, source = "Format of the play time on
 g_SaveSlotTimeColon = { addr = 0x801D0D90, source = "Colon glyphs between the hours and minutes of a save slot row." }
 g_SaveCardPortLabelFirst = { addr = 0x801D0D94, source = "Label of memory card port 1 in the port tabs." }
 g_SaveCardPortLabelSecond = { addr = 0x801D0D98, source = "Label of memory card port 2 in the port tabs." }
-func_801D0D9C = { addr = 0x801D0D9C, type = "func", source = "Entry of the Bate menu: dispatches on the menu step byte (g_MenuStep.step) through g_MenuBateStates." }
+func_801D0D9C = { addr = 0x801D0D9C, type = "func", source = "Entry of the Bate menu: dispatches on the menu step byte (g_MenuStep.step) through g_MenuBateSteps." }
 Menu_ResetPanels = { addr = 0x801D0E04, type = "func", source = "resets menu panel tasks and advances the game entry substate" }
 Menu_StartFadeIn = { addr = 0x801D0EB0, type = "func", source = "sets fast fade-in mode and advances the menu step state" }
 Menu_ApplyEquipment = { addr = 0x801D1E8C, type = "func", source = "Applies the equipment menu's trial set to g_Characters[7]: for each slot whose chosen item changed it removes the new item from the inventory, returns the old one and stores the new one, then rebuilds the record's stats." }
@@ -2927,13 +2927,13 @@ Menu_DrawPanelFrame = { addr = 0x801D78A8, type = "func", source = "Draws the 8-
 Menu_DrawEquipChoiceWindow = { addr = 0x801D7AD0, type = "func", source = "Draws the equip list: gathers the inventory rows of the equipment slot's category (unk_09) that the party member can equip, armor only of the slot's type, into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts, then draws them with the category title, the choice count and the scroll bar." }
 SAVE_DrawSlotRow = { addr = 0x801D8208, type = "func", source = "Draws one save slot row: the window, the party icons, the name, the level, the play time and the experience line; a NULL row draws only the window." }
 SAVE_DrawPortTabs = { addr = 0x801D8508, type = "func", source = "Draws the memory card port panel: the title, the two port tabs and the cursor at the selected port." }
-g_MenuBateStates = { addr = 0x801D86E0, source = "the bate overlay step handlers, indexed by the menu step byte" }
-g_MenuBateStep2Funcs = { addr = 0x801D8700, source = "3 sub-step handlers of step 2 of the Bate menu, called by func_801D0E38 (the step 2 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
-g_MenuBateStep2Sub0Funcs = { addr = 0x801D870C, source = "3 handlers of sub-step 0 of step 2 of the Bate menu, called by func_801D0E74 (the sub-step 0 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
-g_MenuBateStep2Sub1Funcs = { addr = 0x801D8718, source = "2 handlers of sub-step 1 of step 2 of the Bate menu, called by func_801D0FF8 (the sub-step 1 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
-g_MenuBateStep2Sub2Funcs = { addr = 0x801D8720, source = "2 handlers of sub-step 2 of step 2 of the Bate menu, called by func_801D153C (the sub-step 2 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
-g_MenuBateStep3Funcs = { addr = 0x801D8764, source = "3 sub-step handlers of step 3 of the Bate menu, called by func_801D2070 (the step 3 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
-g_MenuBateStep3Sub0Funcs = { addr = 0x801D8770, source = "2 handlers of sub-step 0 of step 3 of the Bate menu, called by func_801D20AC (the sub-step 0 handler of step 3) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_MenuBateSteps = { addr = 0x801D86E0, source = "the bate overlay step handlers, indexed by the menu step byte" }
+g_MenuBateStep2Steps = { addr = 0x801D8700, source = "3 sub-step handlers of step 2 of the Bate menu, called by func_801D0E38 (the step 2 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_MenuBateStep2Sub0Steps = { addr = 0x801D870C, source = "3 handlers of sub-step 0 of step 2 of the Bate menu, called by func_801D0E74 (the sub-step 0 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_MenuBateStep2Sub1Steps = { addr = 0x801D8718, source = "2 handlers of sub-step 1 of step 2 of the Bate menu, called by func_801D0FF8 (the sub-step 1 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_MenuBateStep2Sub2Steps = { addr = 0x801D8720, source = "2 handlers of sub-step 2 of step 2 of the Bate menu, called by func_801D153C (the sub-step 2 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_MenuBateStep3Steps = { addr = 0x801D8764, source = "3 sub-step handlers of step 3 of the Bate menu, called by func_801D2070 (the step 3 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_MenuBateStep3Sub0Steps = { addr = 0x801D8770, source = "2 handlers of sub-step 0 of step 3 of the Bate menu, called by func_801D20AC (the sub-step 0 handler of step 3) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
 g_MenuStatFrameLeft = { addr = 0x801D8810, source = "Sprite run of the left end of the stat panel border, drawn by Menu_DrawStatPanel." }
 g_MenuStatFrameMiddle = { addr = 0x801D883C, source = "Sprite run repeated 16 times along the stat panel border, drawn by Menu_DrawStatPanel." }
 g_MenuStatFrameRight = { addr = 0x801D8848, source = "Sprite run of the right end of the stat panel border, drawn by Menu_DrawStatPanel." }
@@ -2993,38 +2993,38 @@ Fairy_StartJobs = { addr = 0x801F0534, type = "func", source = "Builds one villa
 Fairy_SpawnWorker = { addr = 0x801F08D8, type = "func", source = "Starts the actor of a job's worker fairy: places it at the job's position from D_801F25A4, selects its script, and runs the setup for the room kind of the job. Called by Fairy_StartJobs for each job of a kind below hunting." }
 Fairy_ShowPlayRecordMessage = { addr = 0x801F1318, type = "func", source = "Formats the play clock hours and minutes, g_BattleCount and D_80145030 into text variables 0 to 3, starts area message FAIRY_MESSAGE_PLAY_RECORD and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
 Scene_ClearEventState = { addr = 0x801F1684, type = "func", source = "Ends the scene event: clears the script-active flag, sets g_SceneEventMode to SCENE_EVENT_NONE and zeroes g_SceneEventStep and g_SceneEventSelection." }
-Fairy_RunCommu01Scene = { addr = 0x801F16BC, type = "func", source = "Runs the commu01 scene's steps: g_FairyCommu01States indexed by g_SceneEventStep, whose step 3 is the commu01 overlay entry. g_SceneEvents entry 14, selected by g_SceneEventMode." }
+Fairy_RunCommu01Scene = { addr = 0x801F16BC, type = "func", source = "Runs the commu01 scene's steps: g_FairyCommu01Steps indexed by g_SceneEventStep, whose step 3 is the commu01 overlay entry. g_SceneEvents entry 14, selected by g_SceneEventMode." }
 Fairy_EndEventLoad = { addr = 0x801F17A4, type = "func", source = "Event step after each Fairy_LoadCommu0N stream: waits EMI_IsReady, GFX_ResetPalette, raises g_GfxPalettePending, clears the event latches and advances FAIRY_EVENT_STEP (D_801F24FC_Data step tables)." }
-Fairy_RunGiftScene = { addr = 0x801F18BC, type = "func", source = "Runs the fairy gift event's steps: g_FairyGiftStates indexed by g_SceneEventStep, starting with Fairy_GrantGift. g_SceneEvents entry 21." }
+Fairy_RunGiftScene = { addr = 0x801F18BC, type = "func", source = "Runs the fairy gift event's steps: g_FairyGiftSteps indexed by g_SceneEventStep, starting with Fairy_GrantGift. g_SceneEvents entry 21." }
 Fairy_GrantGift = { addr = 0x801F18F8, type = "func", source = "Gives the selected fairy gift: counts the battles since progress_anchor against the 20 g_FairyGifts thresholds, adds the item of the highest threshold reached and starts area message FAIRY_MESSAGE_GIFT_RECEIVED, or message FAIRY_MESSAGE_NO_GIFT_YET below the first; resets progress_anchor to g_BattleCount when the item is added." }
-Fairy_RunExploreReward = { addr = 0x801F1B8C, type = "func", source = "Runs the fairy explore-reward event's steps: g_FairyExploreRewardStates indexed by g_SceneEventStep, whose only step is Fairy_RollExploreReward. g_SceneEvents entry 22." }
+Fairy_RunExploreReward = { addr = 0x801F1B8C, type = "func", source = "Runs the fairy explore-reward event's steps: g_FairyExploreRewardSteps indexed by g_SceneEventStep, whose only step is Fairy_RollExploreReward. g_SceneEvents entry 22." }
 Fairy_RollExploreReward = { addr = 0x801F1BC8, type = "func", source = "Resolves the exploration of the selected fairy: for record_state 3 starts message FAIRY_MESSAGE_EXPLORE_NO_REWARD and resets the anchor; for record_state 2 rolls a random reward among the 16-entry tiers of g_FairyExploreRewards, adds the item (FAIRY_MESSAGE_EXPLORE_FOUND_ITEM) or reports a full inventory (FAIRY_MESSAGE_EXPLORE_BAG_FULL)." }
-Fairy_RunCommu02Scene = { addr = 0x801F1E74, type = "func", source = "Runs the commu02 scene's steps: g_FairyCommu02States indexed by g_SceneEventStep, which loads the commu02 overlay. g_SceneEvents entry 23." }
-Fairy_RunCommu02Events = { addr = 0x801F1F10, type = "func", source = "Runs the commu02 event the scene selected: g_FairyCommu02Events indexed by g_SceneEventSelection; step 2 of g_FairyCommu02States." }
-Fairy_RunCommu03Scene = { addr = 0x801F1F9C, type = "func", source = "Runs the commu03 scene's steps: g_FairyCommu03States indexed by g_SceneEventStep, whose step 2 is the commu03 overlay entry. g_SceneEvents entry 24." }
-Fairy_RunCommu04Scene = { addr = 0x801F2020, type = "func", source = "Runs the commu04 scene's steps: g_FairyCommu04States indexed by g_SceneEventStep, whose step 4 is the commu04 overlay entry. g_SceneEvents entry 25." }
-Fairy_RunCommu05Scene = { addr = 0x801F228C, type = "func", source = "Runs the commu05 scene's steps: g_FairyCommu05States indexed by g_SceneEventStep, whose step 2 is the commu05 overlay entry. g_SceneEvents entry 26." }
-g_FairyCommu01States = { addr = 0x801F25EC, source = "the 6 step handlers of the commu01 scene that the village runs through Fairy_RunCommu01Scene, indexed by g_SceneEventStep; entry 3 is the commu01 overlay entry" }
-g_FairyGiftStates = { addr = 0x801F2604, source = "the 3 step handlers of the fairy gift event, starting with Fairy_GrantGift, run through Fairy_RunGiftScene and indexed by g_SceneEventStep" }
-g_FairyExploreRewardStates = { addr = 0x801F2610, source = "the step handler of the fairy explore-reward event, Fairy_RollExploreReward, run through Fairy_RunExploreReward and indexed by g_SceneEventStep" }
+Fairy_RunCommu02Scene = { addr = 0x801F1E74, type = "func", source = "Runs the commu02 scene's steps: g_FairyCommu02Steps indexed by g_SceneEventStep, which loads the commu02 overlay. g_SceneEvents entry 23." }
+Fairy_RunCommu02Events = { addr = 0x801F1F10, type = "func", source = "Runs the commu02 event the scene selected: g_FairyCommu02Events indexed by g_SceneEventSelection; step 2 of g_FairyCommu02Steps." }
+Fairy_RunCommu03Scene = { addr = 0x801F1F9C, type = "func", source = "Runs the commu03 scene's steps: g_FairyCommu03Steps indexed by g_SceneEventStep, whose step 2 is the commu03 overlay entry. g_SceneEvents entry 24." }
+Fairy_RunCommu04Scene = { addr = 0x801F2020, type = "func", source = "Runs the commu04 scene's steps: g_FairyCommu04Steps indexed by g_SceneEventStep, whose step 4 is the commu04 overlay entry. g_SceneEvents entry 25." }
+Fairy_RunCommu05Scene = { addr = 0x801F228C, type = "func", source = "Runs the commu05 scene's steps: g_FairyCommu05Steps indexed by g_SceneEventStep, whose step 2 is the commu05 overlay entry. g_SceneEvents entry 26." }
+g_FairyCommu01Steps = { addr = 0x801F25EC, source = "the 6 step handlers of the commu01 scene that the village runs through Fairy_RunCommu01Scene, indexed by g_SceneEventStep; entry 3 is the commu01 overlay entry" }
+g_FairyGiftSteps = { addr = 0x801F2604, source = "the 3 step handlers of the fairy gift event, starting with Fairy_GrantGift, run through Fairy_RunGiftScene and indexed by g_SceneEventStep" }
+g_FairyExploreRewardSteps = { addr = 0x801F2610, source = "the step handler of the fairy explore-reward event, Fairy_RollExploreReward, run through Fairy_RunExploreReward and indexed by g_SceneEventStep" }
 g_FairyExploreRewards = { addr = 0x801F2618, source = "Reward table of fairy exploration: 3 tiers of 16 entries, each a pair of item type and item index; Fairy_RollExploreReward picks one entry of the tier its roll selects." }
-g_FairyCommu02States = { addr = 0x801F2678, source = "the 5 step handlers of the commu02 scene that the village runs through Fairy_RunCommu02Scene, indexed by g_SceneEventStep" }
+g_FairyCommu02Steps = { addr = 0x801F2678, source = "the 5 step handlers of the commu02 scene that the village runs through Fairy_RunCommu02Scene, indexed by g_SceneEventStep" }
 g_FairyCommu02Events = { addr = 0x801F268C, source = "the 4 overlay entries of the commu02 scene events 0 to 3, called by Fairy_RunCommu02Events and indexed by g_SceneEventSelection" }
-g_FairyCommu03States = { addr = 0x801F269C, source = "the 5 step handlers of the commu03 scene that the village runs through Fairy_RunCommu03Scene, indexed by g_SceneEventStep; entry 2 is the commu03 overlay entry" }
-g_FairyCommu04States = { addr = 0x801F26B0, source = "the 7 step handlers of the commu04 scene that the village runs through Fairy_RunCommu04Scene, indexed by g_SceneEventStep; entry 4 is the commu04 overlay entry" }
-g_FairyCommu05States = { addr = 0x801F26EC, source = "the 5 step handlers of the commu05 scene that the village runs through Fairy_RunCommu05Scene, indexed by g_SceneEventStep; entry 2 is the commu05 overlay entry" }
+g_FairyCommu03Steps = { addr = 0x801F269C, source = "the 5 step handlers of the commu03 scene that the village runs through Fairy_RunCommu03Scene, indexed by g_SceneEventStep; entry 2 is the commu03 overlay entry" }
+g_FairyCommu04Steps = { addr = 0x801F26B0, source = "the 7 step handlers of the commu04 scene that the village runs through Fairy_RunCommu04Scene, indexed by g_SceneEventStep; entry 4 is the commu04 overlay entry" }
+g_FairyCommu05Steps = { addr = 0x801F26EC, source = "the 5 step handlers of the commu05 scene that the village runs through Fairy_RunCommu05Scene, indexed by g_SceneEventStep; entry 2 is the commu05 overlay entry" }
 g_Fairies = { addr = 0x801F2700, source = "the fairy roster: nine bytes a fairy, the five-byte name first" }
 # Fairy table extents; the types are in include/game/fairy.h.
 
 ["emi/etc/commu01/07"]
 g_SceneEventStep_u8 = { addr = 0x801448EC, type = "u8", alias = true, source = "The scene event step byte as a u8 array; the commu01 menu steps read and step it." }
 g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
-func_801D0C2C = { addr = 0x801D0C2C, type = "func", source = "Entry of the commu01 scene: dispatches on the step byte D_801F294C through g_Commu01States." }
+func_801D0C2C = { addr = 0x801D0C2C, type = "func", source = "Entry of the commu01 scene: dispatches on the step byte D_801F294C through g_Commu01Steps." }
 Fairy_GetJobActive = { addr = 0x801D3A48, type = "func", source = "the body returns g_FairyJobs[i].active" }
 D_801D4BB8 = { addr = 0x801D4BB8, type = "u16", size = 0x14, source = "Halfword values indexed by the selection cursor in func_801D1778." }
-g_Commu01States = { addr = 0x801D4BCC, source = "the 3 step handlers of the commu01 scene, called by func_801D0C2C (the overlay entry) and indexed by the commu step byte D_801F294C" }
-g_Commu01Step2Funcs = { addr = 0x801D4BD8, source = "3 sub-step handlers of step 2 of the commu01 scene, called by func_801D0E44 (the step 2 handler) and indexed by the commu01 phase byte D_801D4E08" }
-g_Commu01Step2Sub1Funcs = { addr = 0x801D4BEC, source = "6 handlers of sub-step 1 of step 2 of the commu01 scene, called by func_801D1328 (the sub-step 1 handler of step 2) and indexed by the commu sub-step byte D_801F294D" }
+g_Commu01Steps = { addr = 0x801D4BCC, source = "the 3 step handlers of the commu01 scene, called by func_801D0C2C (the overlay entry) and indexed by the commu step byte D_801F294C" }
+g_Commu01Step2Steps = { addr = 0x801D4BD8, source = "3 sub-step handlers of step 2 of the commu01 scene, called by func_801D0E44 (the step 2 handler) and indexed by the commu01 phase byte D_801D4E08" }
+g_Commu01Step2Sub1Steps = { addr = 0x801D4BEC, source = "6 handlers of sub-step 1 of step 2 of the commu01 scene, called by func_801D1328 (the sub-step 1 handler of step 2) and indexed by the commu sub-step byte D_801F294D" }
 D_801D4C04 = { addr = 0x801D4C04, type = "u8", size = 0xC, source = "Byte values indexed by the selection cursor and used to select a halfword value in func_801D1778." }
 D_801D4C10 = { addr = 0x801D4C10, type = "u16", size = 0x8, source = "Halfword values selected by the index stored from D_801D4C04 in func_801D1778." }
 D_801D4C18 = { addr = 0x801D4C18, type = "CommuSelectionPair", size = 0x2C, source = "Twenty-two count/value pairs used by func_801D1A94 for row movement and confirmation." }
@@ -3033,38 +3033,38 @@ g_Fairies = { addr = 0x801F2700, alias = true, source = "the fairy roster: the c
 
 ["emi/etc/commu02/08"]
 g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
-func_801D0C50 = { addr = 0x801D0C50, type = "func", source = "Entry of the commu02 scene: dispatches on the step byte D_801F294C through g_Commu02Event0States." }
+func_801D0C50 = { addr = 0x801D0C50, type = "func", source = "Entry of the commu02 scene: dispatches on the step byte D_801F294C through g_Commu02Event0Steps." }
 FairyCasino_DrawFramePiece = { addr = 0x801D2EDC, type = "func", source = "draws one piece of the casino frame from the uv and width/height rows of D_801DAC60" }
-Fairy_EndCommuScene = { addr = 0x801D5A9C, type = "func", source = "Last slot of g_Commu02Event2States; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE, which hands the village on to its next step." }
+Fairy_EndCommuScene = { addr = 0x801D5A9C, type = "func", source = "Last slot of g_Commu02Event2Steps; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE, which hands the village on to its next step." }
 Menu_StartFairyEventMessage = { addr = 0x801D5D98, type = "func", source = "starts area message 0xEE and advances the event step once" }
 Menu_ConfirmFairy = { addr = 0x801D5E30, type = "func", source = "confirm and cancel cues set the list offset and the selected job row" }
 Menu_StartFairyEndMessage = { addr = 0x801D7DD4, type = "func", source = "starts area message 0xF6 when the sub-step is zero" }
-Fairy_EndCommuSceneEvent3 = { addr = 0x801D7E30, type = "func", source = "Last slot of g_Commu02Event3States; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE; same bytes as Fairy_EndCommuScene." }
+Fairy_EndCommuSceneEvent3 = { addr = 0x801D7E30, type = "func", source = "Last slot of g_Commu02Event3Steps; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE; same bytes as Fairy_EndCommuScene." }
 Fairy_CountFairies = { addr = 0x801D7E64, type = "func", source = "Returns the number of fairy rows of g_FairyJobs whose active byte is nonzero, out of 60." }
 Fairy_FindActiveJob = { addr = 0x801D7EA0, type = "func", source = "walks the 0x3C g_FairyJobs rows and returns the index of the Nth active job, or 0xFF" }
 Fairy_GenerateName = { addr = 0x801D8968, type = "func", source = "Builds the fairy's name in D_801DB080 from one random half of each of the two name tables in the loaded text bank." }
 Menu_DrawHeaderBar = { addr = 0x801D8A40, type = "func", source = "Draws the window of a menu header bar from x, y, width and height with the window style g_WindowStyle." }
 Menu_DrawPortrait = { addr = 0x801D8F8C, type = "func", source = "Draws a 40x48 character portrait from g_MenuPortraitAtlas record atlas_index at sprite_x, sprite_y, shaded dark when shade_mode is nonzero." }
 Menu_DrawPanelIcon = { addr = 0x801D9AC8, type = "func", source = "Draws one menu icon cell at x, y from atlas position u, v with clut and the grey level color, through MenuDrawPanelIcon." }
-g_Commu02Event0States = { addr = 0x801DABCC, source = "the 3 step handlers of the commu02 scene event 0, called by func_801D0C50 (the overlay entry) and indexed by the commu step byte D_801F294C" }
-g_Commu02Event0Step0Funcs = { addr = 0x801DABD8, source = "2 sub-step handlers of step 0 of the commu02 scene event 0, called by func_801D0C8C (the step 0 handler) and indexed by the commu sub-step byte D_801F294D" }
-g_Commu02Event0Step1Funcs = { addr = 0x801DABE0, source = "13 sub-step handlers of step 1 of the commu02 scene event 0, called by func_801D0DA4 (the step 1 handler) and indexed by the commu sub-step byte D_801F294D" }
-g_Commu02Event0Step1Sub2Funcs = { addr = 0x801DAC14, source = "3 handlers of sub-step 2 of step 1 of the commu02 scene event 0, called by func_801D0F4C (the sub-step 2 handler of step 1) and indexed by the commu sub-sub-step byte D_801F294E" }
-g_Commu02Event0Step1Sub3Funcs = { addr = 0x801DAC20, source = "5 handlers of sub-step 3 of step 1 of the commu02 scene event 0, called by func_801D14D0 (the sub-step 3 handler of step 1) and indexed by the commu sub-sub-step byte D_801F294E" }
-g_Commu02Event1States = { addr = 0x801DACB8, source = "the 3 step handlers of the commu02 scene event 1, called by func_801D3568 (the overlay entry) and indexed by the commu step byte D_801F294C" }
-g_Commu02Event1Step0Funcs = { addr = 0x801DACC4, source = "4 sub-step handlers of step 0 of the commu02 scene event 1, called by func_801D35A4 (the step 0 handler) and indexed by the commu sub-step byte D_801F294D" }
-g_Commu02Event1Step1Funcs = { addr = 0x801DACD4, source = "9 sub-step handlers of step 1 of the commu02 scene event 1, called by func_801D37EC (the step 1 handler) and indexed by the commu sub-step byte D_801F294D" }
-g_Commu02Event1Step1Sub0Funcs = { addr = 0x801DACF8, source = "2 handlers of sub-step 0 of step 1 of the commu02 scene event 1, called by func_801D3828 (the sub-step 0 handler of step 1) and indexed by the commu sub-sub-step byte D_801F294E" }
-g_Commu02Event2States = { addr = 0x801DAD68, source = "the 3 step handlers of the commu02 scene event 2, called by func_801D5034 (the overlay entry) and indexed by the commu step byte D_801F294C" }
-g_Commu02Event2Step0Funcs = { addr = 0x801DAD74, source = "2 sub-step handlers of step 0 of the commu02 scene event 2, called by func_801D5070 (the step 0 handler) and indexed by the commu sub-step byte D_801F294D" }
-g_Commu02Event2Step1Funcs = { addr = 0x801DAD7C, source = "5 sub-step handlers of step 1 of the commu02 scene event 2, called by func_801D5194 (the step 1 handler) and indexed by the commu sub-step byte D_801F294D" }
-g_Commu02Event3States = { addr = 0x801DADEC, source = "the 5 step handlers of the commu02 scene event 3, called by func_801D5D5C (the overlay entry) and indexed by the commu step byte D_801F294C" }
-g_Commu02Event3Step1Funcs = { addr = 0x801DAE00, source = "9 sub-step handlers of step 1 of the commu02 scene event 3, called by func_801D5DF4 (the step 1 handler) and indexed by the commu sub-step byte D_801F294D" }
-g_Commu02Event3Step1Sub6Funcs = { addr = 0x801DAE24, source = "3 handlers of sub-step 6 of step 1 of the commu02 scene event 3, called by func_801D640C (the sub-step 6 handler of step 1) and indexed by the commu sub-sub-step byte D_801F294E" }
-g_Commu02Event3Step1Sub7Funcs = { addr = 0x801DAE30, source = "5 handlers of sub-step 7 of step 1 of the commu02 scene event 3, called by func_801D65F8 (the sub-step 7 handler of step 1) and indexed by the commu sub-sub-step byte D_801F294E" }
-g_Commu02Event3Step2Funcs = { addr = 0x801DAE44, source = "9 sub-step handlers of step 2 of the commu02 scene event 3, called by func_801D6CDC (the step 2 handler) and indexed by the commu sub-step byte D_801F294D" }
-g_Commu02Event3Step2Sub6Funcs = { addr = 0x801DAE68, source = "3 handlers of sub-step 6 of step 2 of the commu02 scene event 3, called by func_801D7474 (the sub-step 6 handler of step 2) and indexed by the commu sub-sub-step byte D_801F294E" }
-g_Commu02Event3Step2Sub7Funcs = { addr = 0x801DAE74, source = "5 handlers of sub-step 7 of step 2 of the commu02 scene event 3, called by func_801D7660 (the sub-step 7 handler of step 2) and indexed by the commu sub-sub-step byte D_801F294E" }
+g_Commu02Event0Steps = { addr = 0x801DABCC, source = "the 3 step handlers of the commu02 scene event 0, called by func_801D0C50 (the overlay entry) and indexed by the commu step byte D_801F294C" }
+g_Commu02Event0Step0Steps = { addr = 0x801DABD8, source = "2 sub-step handlers of step 0 of the commu02 scene event 0, called by func_801D0C8C (the step 0 handler) and indexed by the commu sub-step byte D_801F294D" }
+g_Commu02Event0Step1Steps = { addr = 0x801DABE0, source = "13 sub-step handlers of step 1 of the commu02 scene event 0, called by func_801D0DA4 (the step 1 handler) and indexed by the commu sub-step byte D_801F294D" }
+g_Commu02Event0Step1Sub2Steps = { addr = 0x801DAC14, source = "3 handlers of sub-step 2 of step 1 of the commu02 scene event 0, called by func_801D0F4C (the sub-step 2 handler of step 1) and indexed by the commu sub-sub-step byte D_801F294E" }
+g_Commu02Event0Step1Sub3Steps = { addr = 0x801DAC20, source = "5 handlers of sub-step 3 of step 1 of the commu02 scene event 0, called by func_801D14D0 (the sub-step 3 handler of step 1) and indexed by the commu sub-sub-step byte D_801F294E" }
+g_Commu02Event1Steps = { addr = 0x801DACB8, source = "the 3 step handlers of the commu02 scene event 1, called by func_801D3568 (the overlay entry) and indexed by the commu step byte D_801F294C" }
+g_Commu02Event1Step0Steps = { addr = 0x801DACC4, source = "4 sub-step handlers of step 0 of the commu02 scene event 1, called by func_801D35A4 (the step 0 handler) and indexed by the commu sub-step byte D_801F294D" }
+g_Commu02Event1Step1Steps = { addr = 0x801DACD4, source = "9 sub-step handlers of step 1 of the commu02 scene event 1, called by func_801D37EC (the step 1 handler) and indexed by the commu sub-step byte D_801F294D" }
+g_Commu02Event1Step1Sub0Steps = { addr = 0x801DACF8, source = "2 handlers of sub-step 0 of step 1 of the commu02 scene event 1, called by func_801D3828 (the sub-step 0 handler of step 1) and indexed by the commu sub-sub-step byte D_801F294E" }
+g_Commu02Event2Steps = { addr = 0x801DAD68, source = "the 3 step handlers of the commu02 scene event 2, called by func_801D5034 (the overlay entry) and indexed by the commu step byte D_801F294C" }
+g_Commu02Event2Step0Steps = { addr = 0x801DAD74, source = "2 sub-step handlers of step 0 of the commu02 scene event 2, called by func_801D5070 (the step 0 handler) and indexed by the commu sub-step byte D_801F294D" }
+g_Commu02Event2Step1Steps = { addr = 0x801DAD7C, source = "5 sub-step handlers of step 1 of the commu02 scene event 2, called by func_801D5194 (the step 1 handler) and indexed by the commu sub-step byte D_801F294D" }
+g_Commu02Event3Steps = { addr = 0x801DADEC, source = "the 5 step handlers of the commu02 scene event 3, called by func_801D5D5C (the overlay entry) and indexed by the commu step byte D_801F294C" }
+g_Commu02Event3Step1Steps = { addr = 0x801DAE00, source = "9 sub-step handlers of step 1 of the commu02 scene event 3, called by func_801D5DF4 (the step 1 handler) and indexed by the commu sub-step byte D_801F294D" }
+g_Commu02Event3Step1Sub6Steps = { addr = 0x801DAE24, source = "3 handlers of sub-step 6 of step 1 of the commu02 scene event 3, called by func_801D640C (the sub-step 6 handler of step 1) and indexed by the commu sub-sub-step byte D_801F294E" }
+g_Commu02Event3Step1Sub7Steps = { addr = 0x801DAE30, source = "5 handlers of sub-step 7 of step 1 of the commu02 scene event 3, called by func_801D65F8 (the sub-step 7 handler of step 1) and indexed by the commu sub-sub-step byte D_801F294E" }
+g_Commu02Event3Step2Steps = { addr = 0x801DAE44, source = "9 sub-step handlers of step 2 of the commu02 scene event 3, called by func_801D6CDC (the step 2 handler) and indexed by the commu sub-step byte D_801F294D" }
+g_Commu02Event3Step2Sub6Steps = { addr = 0x801DAE68, source = "3 handlers of sub-step 6 of step 2 of the commu02 scene event 3, called by func_801D7474 (the sub-step 6 handler of step 2) and indexed by the commu sub-sub-step byte D_801F294E" }
+g_Commu02Event3Step2Sub7Steps = { addr = 0x801DAE74, source = "5 handlers of sub-step 7 of step 2 of the commu02 scene event 3, called by func_801D7660 (the sub-step 7 handler of step 2) and indexed by the commu sub-sub-step byte D_801F294E" }
 g_MenuPortraitAtlas = { addr = 0x801DAEDC, source = "4-byte portrait atlas records read by Menu_DrawPortrait by atlas index." }
 g_Fairies = { addr = 0x801F2700, source = "the fairy roster: nine bytes a fairy, the five-byte name first" }
 D_801F294F = { addr = 0x801F294F, type = "u8", size = 0x1, source = "the pending selection byte checked by the commu02 fairy list" }
@@ -3072,23 +3072,23 @@ D_801F294F = { addr = 0x801F294F, type = "u8", size = 0x1, source = "the pending
 ["emi/etc/commu03/06"]
 g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
 func_801D0C44 = { addr = 0x801D0C44, type = "func", source = "Entry of the commu03 scene: dispatches on the step byte D_801F294C through the D_801D18C8 handlers." }
-Fairy_EndCommuScene = { addr = 0x801D121C, type = "func", source = "Last slot of g_Commu03Step2Funcs; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE." }
-g_Commu03States = { addr = 0x801D18C8, source = "the 3 step handlers of the commu03 scene, called by func_801D0C44 (the overlay entry) and indexed by the commu step byte D_801F294C" }
-g_Commu03Step0Funcs = { addr = 0x801D18D4, source = "2 sub-step handlers of step 0 of the commu03 scene, called by func_801D0C80 (the step 0 handler) and indexed by the commu sub-step byte D_801F294D" }
-g_Commu03Step1Funcs = { addr = 0x801D18DC, source = "2 sub-step handlers of step 1 of the commu03 scene, called by func_801D0DEC (the step 1 handler) and indexed by the commu sub-step byte D_801F294D" }
-g_Commu03Step2Funcs = { addr = 0x801D18E4, source = "4 sub-step handlers of step 2 of the commu03 scene, called by func_801D1058 (the step 2 handler) and indexed by the commu sub-step byte D_801F294D" }
+Fairy_EndCommuScene = { addr = 0x801D121C, type = "func", source = "Last slot of g_Commu03Step2Steps; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE." }
+g_Commu03Steps = { addr = 0x801D18C8, source = "the 3 step handlers of the commu03 scene, called by func_801D0C44 (the overlay entry) and indexed by the commu step byte D_801F294C" }
+g_Commu03Step0Steps = { addr = 0x801D18D4, source = "2 sub-step handlers of step 0 of the commu03 scene, called by func_801D0C80 (the step 0 handler) and indexed by the commu sub-step byte D_801F294D" }
+g_Commu03Step1Steps = { addr = 0x801D18DC, source = "2 sub-step handlers of step 1 of the commu03 scene, called by func_801D0DEC (the step 1 handler) and indexed by the commu sub-step byte D_801F294D" }
+g_Commu03Step2Steps = { addr = 0x801D18E4, source = "4 sub-step handlers of step 2 of the commu03 scene, called by func_801D1058 (the step 2 handler) and indexed by the commu sub-step byte D_801F294D" }
 
 ["emi/etc/commu04/06"]
 g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
 func_801D0C04 = { addr = 0x801D0C04, type = "func", source = "Entry of the commu04 scene: dispatches on the step byte D_801F294C through the D_801D1750 handlers, then refreshes the panels when the game state is 0." }
-Fairy_EndCommuScene = { addr = 0x801D1670, type = "func", source = "Last slot of g_Commu04States; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE." }
-g_Commu04States = { addr = 0x801D1750, source = "the 2 step handlers of the commu04 scene, called by func_801D0C04 (the overlay entry) and indexed by the commu step byte D_801F294C" }
-g_Commu04Step0Funcs = { addr = 0x801D1758, source = "7 sub-step handlers of step 0 of the commu04 scene, called by func_801D0C5C (the step 0 handler) and indexed by the commu sub-step byte D_801F294D" }
+Fairy_EndCommuScene = { addr = 0x801D1670, type = "func", source = "Last slot of g_Commu04Steps; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE." }
+g_Commu04Steps = { addr = 0x801D1750, source = "the 2 step handlers of the commu04 scene, called by func_801D0C04 (the overlay entry) and indexed by the commu step byte D_801F294C" }
+g_Commu04Step0Steps = { addr = 0x801D1758, source = "7 sub-step handlers of step 0 of the commu04 scene, called by func_801D0C5C (the step 0 handler) and indexed by the commu sub-step byte D_801F294D" }
 
 ["emi/etc/commu05/07"]
 g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
 func_801D0C10 = { addr = 0x801D0C10, type = "func", source = "Entry of the commu05 scene: dispatches on the step byte D_801F294C through the D_801D1950 handlers." }
-g_Commu05States = { addr = 0x801D1950, source = "the 3 step handlers of the commu05 scene, called by func_801D0C10 (the overlay entry) and indexed by the commu step byte D_801F294C" }
+g_Commu05Steps = { addr = 0x801D1950, source = "the 3 step handlers of the commu05 scene, called by func_801D0C10 (the overlay entry) and indexed by the commu step byte D_801F294C" }
 
 ["emi/etc/game/00"]
 jtbl_80195804 = { addr = 0x80195804, type = "Callback", source = "The switch table of GFX_MarkPaletteCells: the jump targets of its jr dispatch." }
@@ -3135,24 +3135,24 @@ GFX_StepPaletteAnimation = { addr = 0x80196D84, type = "func", source = "Advance
 GFX_CopyPaletteAnimationColors = { addr = 0x80196E74, type = "func", source = "Copies the colours of one palette animation entry into g_GraphicsPaletteDst, with the divisor and stride read from s_PaletteSlotDivisors and s_PaletteSlotStrides, and sets g_GfxPalettePending." }
 Game_RunCampMenu = { addr = 0x80196F78, type = "func", source = "Thread body that never returns: waits a frame, runs the g_GameCampMenuLoad handler of the current step, then Menu_UpdatePanelTasks." }
 Game_LoadCampMenu = { addr = 0x80196FFC, type = "func", source = "Camp menu step 0: loads the menu overlay slot 0x268, resets the palette and advances the camp menu step." }
-Game_RunMain = { addr = 0x80197068, type = "func", source = "Thread body that never returns: runs the g_GameStates handler the game state index selects, updates the clock and waits a frame." }
+Game_RunMain = { addr = 0x80197068, type = "func", source = "Thread body that never returns: runs the g_GameModes handler the game state index selects, updates the clock and waits a frame." }
 Game_NewGame = { addr = 0x801970EC, type = "func", source = "Game state loop step 0: clears the new-game flags, resets g_GameAreaId and builds the party battlers for a new game." }
 Game_UpdateAreaLoad = { addr = 0x801971E8, type = "func", source = "Game state 1: loads the requested area, then sets g_GameEntryState to 8 when g_GameRequestFlags bit 3 is set, else to 2." }
 Game_UpdateField = { addr = 0x80197378, type = "func", source = "Game state 2: runs Game_UpdateScenario and Area_RunFrame, then maps g_GameStateIndex to the next g_GameEntryState." }
-Game_UpdateMenu = { addr = 0x801975E4, type = "func", source = "Game state 3: runs the g_GameMenuSubstates entry selected by g_GameEntrySubstate." }
-Game_UpdateBattle = { addr = 0x80197A24, type = "func", source = "Game state 5: runs the g_GameBattleSubstates entry selected by g_GameEntrySubstate." }
+Game_UpdateMenu = { addr = 0x801975E4, type = "func", source = "Game state 3: runs the g_GameMenuSteps entry selected by g_GameEntrySubstate." }
+Game_UpdateBattle = { addr = 0x80197A24, type = "func", source = "Game state 5: runs the g_GameBattleSteps entry selected by g_GameEntrySubstate." }
 Game_UpdateCameraLook = { addr = 0x80198170, type = "func", source = "Game state 6: while the look button is held the D-pad orbits g_AreaCameraAngle; on release the angle eases back to the default and the game returns to state 2." }
 Game_EndCameraLook = { addr = 0x801981D4, type = "func", source = "Ends the camera look once the area camera angle reaches its resting pitch -682 and ANGLE_45 yaw: returns the game request to idle. Called by Game_UpdateCameraLook." }
-Game_UpdateShop = { addr = 0x80198234, type = "func", source = "Game state 7: runs the g_GameShopSubstates entry selected by g_GameEntrySubstate, which stream SHOP and run the shop and save screens." }
+Game_UpdateShop = { addr = 0x80198234, type = "func", source = "Game state 7: runs the g_GameShopSteps entry selected by g_GameEntrySubstate, which stream SHOP and run the shop and save screens." }
 Game_LoadShopOverlay = { addr = 0x80198270, type = "func", source = "Shop substate 0: streams the SHOP overlay slot with EMI_LoadArchive and copies palettes 1 and 2." }
-Game_UpdateFishing = { addr = 0x801984AC, type = "func", source = "Game state 8: runs the g_GameFishingSubstates entry selected by g_GameEntrySubstate." }
+Game_UpdateFishing = { addr = 0x801984AC, type = "func", source = "Game state 8: runs the g_GameFishingSteps entry selected by g_GameEntrySubstate." }
 Game_UpdateAbilityMenu = { addr = 0x80198744, type = "func", source = "Game state 9: runs the g_MenuAbilityOpen entry selected by g_GameEntrySubstate." }
 Game_UpdateShisu = { addr = 0x80198904, type = "func", source = "Game state 10: runs the g_GameShisuSteps entry selected by g_GameEntrySubstate." }
-Game_UpdateSceneCamera = { addr = 0x80198AC4, type = "func", source = "Game state 11: runs the g_GameSceneCameraSubstates entry selected by g_GameEntrySubstate, which dispatch the scene, drive the camera angle and return to state 2." }
+Game_UpdateSceneCamera = { addr = 0x80198AC4, type = "func", source = "Game state 11: runs the g_GameSceneCameraSteps entry selected by g_GameEntrySubstate, which dispatch the scene, drive the camera angle and return to state 2." }
 Game_UpdateClock = { addr = 0x80198CAC, type = "func", source = "Advances the play clock by frame, second, minute and hour." }
 Area_RunFrame = { addr = 0x801991B8, type = "func", source = "Runs one field frame: Area_UpdateParty, Actor_DispatchAll and Area_DrawScene." }
 Area_RunLoadingFrame = { addr = 0x801992B8, type = "func", source = "runs one field update-and-draw frame (camera, party, actors, scene) in the overlay and archive wait loops" }
-Game_UpdateMenuFrame = { addr = 0x80199368, type = "func", source = "Middle entry of g_GameMenuSubstates, between Game_LoadMenu and Game_ReturnFromMenu: each frame updates the scenario, dispatches the menu step and updates the panel tasks; func_80198C38 also calls it while a window effect is busy." }
+Game_UpdateMenuFrame = { addr = 0x80199368, type = "func", source = "Middle entry of g_GameMenuSteps, between Game_LoadMenu and Game_ReturnFromMenu: each frame updates the scenario, dispatches the menu step and updates the panel tasks; func_80198C38 also calls it while a window effect is busy." }
 Game_UpdateAbilityMenuFrame = { addr = 0x801993F0, type = "func", source = "Middle entry of g_MenuAbilityOpen, between Game_LoadAbilityMenu and Game_ReturnFromAbilityMenu: runs the Bate (ability menu) entry func_801D0D9C and updates the panel tasks each frame." }
 Game_UpdateShisuFrame = { addr = 0x80199418, type = "func", source = "Middle entry of g_GameShisuSteps, between Game_LoadShisu and Game_ReturnFromShisu: runs the shisu screen entry func_801D0D80 and updates the panel tasks each frame." }
 Menu_DrawPanelCursor = { addr = 0x80199678, type = "func", source = "Draws the menu panel cursor at the x and y of the current task root through Menu_DrawCursorSprite." }
@@ -3178,7 +3178,7 @@ Game_DispatchScenarioRecord = { addr = 0x801A7878, type = "func", source = "Pass
 Scene_RequestChapterAdvance = { addr = 0x801A78F8, type = "func", source = "Sets bit 0x80 of g_SceneState.flags_01 to request the next chapter." }
 Area_IsStepBlocked = { addr = 0x801A7914, type = "func", source = "Runs entry_08 of the scenario and calls func_801A8728 when it returns 0; returns whether the step is blocked." }
 Game_CallScenario = { addr = 0x801A7A34, type = "func", source = "Calls entry_10 of the scenario when it exists, else Game_CallArea." }
-Game_UpdateScene = { addr = 0x801A7BF0, type = "func", source = "Runs the g_SceneStates callback selected by the scene state byte D_801448EA." }
+Game_UpdateScene = { addr = 0x801A7BF0, type = "func", source = "Runs the g_SceneSteps callback selected by the scene state byte D_801448EA." }
 Scene_ResetEventState = { addr = 0x801A7C2C, type = "func", source = "Resets the scene state bytes and copies the 16-byte D_801C84AC table to g_SceneEventFlags." }
 Scene_UpdateEvent = { addr = 0x801A7CAC, type = "func", source = "Runs the g_SceneEvents callback selected by the scene event byte D_801448EB." }
 Menu_OpenMaster = { addr = 0x801A7CF0, type = "func", source = "Scene event 4: loads SISYOU with EMI_LoadArchive(EMI_SLOT_SISYOU) and runs the master menu through func_801D25D8." }
@@ -3264,25 +3264,25 @@ s_PaletteFadeStrides = { addr = 0x801C7AE8, size = 0x10, source = "Stride per pa
 s_PaletteSlotDivisors = { addr = 0x801C7AF8, size = 0x8, source = "Divisor per palette slot that GFX_CopyPaletteAnimationColors applies to the colour value." }
 s_PaletteSlotStrides = { addr = 0x801C7B00, size = 0x8, source = "Stride per palette slot that GFX_CopyPaletteAnimationColors steps the colour row by." }
 g_GameCampMenuLoad = { addr = 0x801C7B08, size = 0xC, source = "3 handlers of the camp menu load, called by Game_RunCampMenu in order." }
-g_GameStates = { addr = 0x801C7B14, size = 0x30, source = "12 game state handlers, called by Game_RunMain and indexed by the game state." }
-g_GameMenuSubstates = { addr = 0x801C7B44, size = 0xC, source = "3 handlers of game state 3 (menu), indexed by g_GameEntrySubstate by Game_UpdateMenu." }
+g_GameModes = { addr = 0x801C7B14, size = 0x30, source = "12 game state handlers, called by Game_RunMain and indexed by the game state." }
+g_GameMenuSteps = { addr = 0x801C7B44, size = 0xC, source = "3 handlers of game state 3 (menu), indexed by g_GameEntrySubstate by Game_UpdateMenu." }
 s_DirectionJitters = { addr = 0x801C7B50, size = 0x4, source = "Random offsets Game_ReturnFromMenu adds to the palette index when it picks a direction." }
-g_GameBattleSubstates = { addr = 0x801C7B54, size = 0x20, source = "8 handlers of game state 5 (battle), indexed by g_GameEntrySubstate by Game_UpdateBattle." }
+g_GameBattleSteps = { addr = 0x801C7B54, size = 0x20, source = "8 handlers of game state 5 (battle), indexed by g_GameEntrySubstate by Game_UpdateBattle." }
 s_BattleScrollCellSteps = { addr = 0x801C7B74, source = "g_BattleScrollDir selects the cell step Battle_LoadPartySprites adds to the target cell", size = 0x8 }
-g_GameShopSubstates = { addr = 0x801C7B7C, size = 0xC, source = "3 handlers of game state 7 (shop), indexed by g_GameEntrySubstate by Game_UpdateShop." }
-g_GameFishingSubstates = { addr = 0x801C7B88, size = 0x10, source = "4 handlers of game state 8 (fishing), indexed by g_GameEntrySubstate by Game_UpdateFishing." }
+g_GameShopSteps = { addr = 0x801C7B7C, size = 0xC, source = "3 handlers of game state 7 (shop), indexed by g_GameEntrySubstate by Game_UpdateShop." }
+g_GameFishingSteps = { addr = 0x801C7B88, size = 0x10, source = "4 handlers of game state 8 (fishing), indexed by g_GameEntrySubstate by Game_UpdateFishing." }
 g_MenuAbilityOpen = { addr = 0x801C7B98, size = 0xC, source = "3 handlers of game state 9 (ability menu), indexed by g_GameEntrySubstate by Game_UpdateAbilityMenu." }
 g_GameShisuSteps = { addr = 0x801C7BA4, size = 0xC, source = "3 handlers of game state 10 (the scena11 shisu screen), indexed by g_GameEntrySubstate by Game_UpdateShisu." }
-g_GameSceneCameraSubstates = { addr = 0x801C7BB0, size = 0xC, source = "3 handlers of game state 11 (scene camera), indexed by g_GameEntrySubstate by Game_UpdateSceneCamera." }
+g_GameSceneCameraSteps = { addr = 0x801C7BB0, size = 0xC, source = "3 handlers of game state 11 (scene camera), indexed by g_GameEntrySubstate by Game_UpdateSceneCamera." }
 s_MenuLine1Run = { addr = 0x801C7BBC, size = 0xC, source = "Sprite run of the first menu line, drawn by func_801999F8." }
 s_MenuLine2Run = { addr = 0x801C7BC8, size = 0xC, source = "Sprite run of the second menu line, drawn by func_801999F8." }
 s_MenuLine1FlagRun = { addr = 0x801C7BD4, size = 0xC, source = "Sprite run of the first menu line that func_801999F8 draws when bit 2 of the task unk_10 is set." }
 s_MenuLine2FlagRun = { addr = 0x801C7BE0, size = 0xC, source = "Sprite run of the second menu line that func_801999F8 draws when bit 1 of the task unk_10 is set." }
 g_MenuPanelModes = { addr = 0x801C7BEC, size = 0x14, source = "5 handlers of the menu panel, called by func_80199558." }
-g_MenuPanelStates = { addr = 0x801C7C00, size = 0xC, source = "3 handlers of the menu panel states, called by func_801995A4." }
-g_MenuOptionStates = { addr = 0x801C7C0C, size = 0xC, source = "3 handlers of the menu option screen, called by func_801996A8." }
-g_MenuActionStates = { addr = 0x801C7C18, size = 0xC, source = "3 handlers of the menu action screen, called by func_8019977C." }
-g_MenuTaskStates = { addr = 0x801C7C24, size = 0x10, source = "4 handlers of the menu tasks, called by func_8019986C." }
+g_MenuPanelSteps = { addr = 0x801C7C00, size = 0xC, source = "3 handlers of the menu panel states, called by func_801995A4." }
+g_MenuOptionSteps = { addr = 0x801C7C0C, size = 0xC, source = "3 handlers of the menu option screen, called by func_801996A8." }
+g_MenuActionSteps = { addr = 0x801C7C18, size = 0xC, source = "3 handlers of the menu action screen, called by func_8019977C." }
+g_MenuTaskSteps = { addr = 0x801C7C24, size = 0x10, source = "4 handlers of the menu tasks, called by func_8019986C." }
 D_801C7C34 = { addr = 0x801C7C34, size = 0x28, source = "The five menu category names ITEM, WEAPON, ARMOR, OPTION and VITAL, padded to eight bytes; D_801C7C5C points at each row." }
 D_801C7C5C = { addr = 0x801C7C5C, size = 0x14, source = "Pointers to the five menu category names D_801C7C34, picked by func_801999F8 through the menu task's unk_0A." }
 g_ActorTypes = { addr = 0x801C7C70, size = 0x2EC, source = "187 actor handlers, indexed by the type of each active g_SpawnedActors entry by Actor_DispatchAll; they live in the resident image and in the shared, area and scenario windows." }
@@ -3311,7 +3311,7 @@ D_801C81B0 = { addr = 0x801C81B0, size = 0x8, source = "The two step handlers fu
 D_801C81B8 = { addr = 0x801C81B8, size = 0x8, source = "The two step handlers func_8019E95C and func_8019EA60 that func_8019E918 runs by g_Task->header.step." }
 D_801C81C0 = { addr = 0x801C81C0, size = 0xC, source = "The three mode handlers func_8019EB38, func_8019EC20 and func_8019ED40 that func_8019EAF4 runs by g_Task->header.mode." }
 D_801C81CC = { addr = 0x801C81CC, size = 0x10, source = "The four mode handlers func_8019F310, func_8019F384, func_8019F430 and func_8019F4F8 that func_8019F2CC runs by g_Task->header.mode." }
-g_TaskModeHandlers = { addr = 0x801C81DC, type = "Callback", size = 0x1A4, source = "callbacks selected by the current task mode" }
+g_TaskModes = { addr = 0x801C81DC, type = "Callback", size = 0x1A4, source = "callbacks selected by the current task mode" }
 s_EntityModes = { addr = 0x801C8380, size = 0x4, source = "Entity mode byte by scene entry mode, read by func_8019FF88." }
 D_801C8384 = { addr = 0x801C8384, size = 0x38, source = "The 28 entity seed values func_801A02E8 compares against the entity's seed byte." }
 D_801C83BC = { addr = 0x801C83BC, size = 0x1C, source = "The seven actor step handlers func_801A0AE4 and the rows it builds run by the actor's header.step; the first four share func_801A225C." }
@@ -3323,7 +3323,7 @@ D_801C8434 = { addr = 0x801C8434, size = 0x8, source = "The two fade handlers Ga
 D_801C843C = { addr = 0x801C843C, size = 0x8, source = "The two fade handlers Game_StartFadeBlack and func_801A386C that func_801A37D4 runs by g_Task->unk_04." }
 s_ScriptOpcodeLengths = { addr = 0x801C8444, size = 0x10, source = "Length in bytes of each script opcode; the script walkers (func_801A4374, func_801A46E8, func_801A4798, func_801A4844, func_801A4BF8) advance the cursor by it." }
 g_SceneScenes = { addr = 0x801C8454, size = 0x50, source = "Handler tables of the scenarios, indexed by g_SceneState.scenario_id by Game_UpdateScenario." }
-g_SceneStates = { addr = 0x801C84A4, size = 0x8, source = "Scene update callbacks, indexed by the scene state byte D_801448EA by Game_UpdateScene." }
+g_SceneSteps = { addr = 0x801C84A4, size = 0x8, source = "Scene update callbacks, indexed by the scene state byte D_801448EA by Game_UpdateScene." }
 s_EventFlagsReset = { addr = 0x801C84AC, size = 0x10, source = "Scene_ResetEventState copies these 16 mode bytes to g_SceneEventFlags" }
 g_SceneEvents = { addr = 0x801C84BC, size = 0x100, source = "Scene event callbacks, indexed by the scene event byte D_801448EB by Scene_UpdateEvent." }
 s_SceneStateStepArgs = { addr = 0x801C85BC, size = 0x8, source = "Argument of each scene state step; func_801A7E54 passes the entry for D_801448ED to Scene_SetupParty." }
@@ -3430,13 +3430,13 @@ D_801CD954 = { addr = 0x801CD954, size = 0x4, source = "The average height Area_
 Shop_DispatchStep = { addr = 0x801D0EA0, type = "func", source = "Runs the shop step handler selected by the menu step byte g_MenuStep.step from D_801E5144." }
 Menu_DispatchStep = { addr = 0x801D1740, type = "func", source = "Runs the menu step handler selected by the menu step byte g_MenuStep.step from D_801EC35C." }
 Fishing_ActorRun = { addr = 0x801D2978, type = "func", source = "Runs the fishing actor's init and update states." }
-Fairy_RunCommu01Scene = { addr = 0x801F16BC, type = "func", source = "Runs the commu01 scene's steps: g_FairyCommu01States indexed by g_SceneEventStep. Entry 14 of the game's own scene event table g_SceneEvents; the definition is in emi/etc/commu00/00." }
-Fairy_RunGiftScene = { addr = 0x801F18BC, type = "func", source = "Runs the fairy gift event's steps: g_FairyGiftStates indexed by g_SceneEventStep. Entry 21 of g_SceneEvents; the definition is in emi/etc/commu00/00." }
-Fairy_RunExploreReward = { addr = 0x801F1B8C, type = "func", source = "Runs the fairy explore-reward event's steps: g_FairyExploreRewardStates indexed by g_SceneEventStep. Entry 22 of g_SceneEvents; the definition is in emi/etc/commu00/00." }
-Fairy_RunCommu02Scene = { addr = 0x801F1E74, type = "func", source = "Runs the commu02 scene's steps: g_FairyCommu02States indexed by g_SceneEventStep. Entry 23 of g_SceneEvents; the definition is in emi/etc/commu00/00." }
-Fairy_RunCommu03Scene = { addr = 0x801F1F9C, type = "func", source = "Runs the commu03 scene's steps: g_FairyCommu03States indexed by g_SceneEventStep. Entry 24 of g_SceneEvents; the definition is in emi/etc/commu00/00." }
-Fairy_RunCommu04Scene = { addr = 0x801F2020, type = "func", source = "Runs the commu04 scene's steps: g_FairyCommu04States indexed by g_SceneEventStep. Entry 25 of g_SceneEvents; the definition is in emi/etc/commu00/00." }
-Fairy_RunCommu05Scene = { addr = 0x801F228C, type = "func", source = "Runs the commu05 scene's steps: g_FairyCommu05States indexed by g_SceneEventStep. Entry 26 of g_SceneEvents; the definition is in emi/etc/commu00/00." }
+Fairy_RunCommu01Scene = { addr = 0x801F16BC, type = "func", source = "Runs the commu01 scene's steps: g_FairyCommu01Steps indexed by g_SceneEventStep. Entry 14 of the game's own scene event table g_SceneEvents; the definition is in emi/etc/commu00/00." }
+Fairy_RunGiftScene = { addr = 0x801F18BC, type = "func", source = "Runs the fairy gift event's steps: g_FairyGiftSteps indexed by g_SceneEventStep. Entry 21 of g_SceneEvents; the definition is in emi/etc/commu00/00." }
+Fairy_RunExploreReward = { addr = 0x801F1B8C, type = "func", source = "Runs the fairy explore-reward event's steps: g_FairyExploreRewardSteps indexed by g_SceneEventStep. Entry 22 of g_SceneEvents; the definition is in emi/etc/commu00/00." }
+Fairy_RunCommu02Scene = { addr = 0x801F1E74, type = "func", source = "Runs the commu02 scene's steps: g_FairyCommu02Steps indexed by g_SceneEventStep. Entry 23 of g_SceneEvents; the definition is in emi/etc/commu00/00." }
+Fairy_RunCommu03Scene = { addr = 0x801F1F9C, type = "func", source = "Runs the commu03 scene's steps: g_FairyCommu03Steps indexed by g_SceneEventStep. Entry 24 of g_SceneEvents; the definition is in emi/etc/commu00/00." }
+Fairy_RunCommu04Scene = { addr = 0x801F2020, type = "func", source = "Runs the commu04 scene's steps: g_FairyCommu04Steps indexed by g_SceneEventStep. Entry 25 of g_SceneEvents; the definition is in emi/etc/commu00/00." }
+Fairy_RunCommu05Scene = { addr = 0x801F228C, type = "func", source = "Runs the commu05 scene's steps: g_FairyCommu05Steps indexed by g_SceneEventStep. Entry 26 of g_SceneEvents; the definition is in emi/etc/commu00/00." }
 Fishing_ShowLocation = { addr = 0x801F2C38, type = "func", source = "Prints the fish listed for the player position from g_FishingBestCatch with Message_StartAreaMessage, steps D_801448EC from 0 to 1, and clears it when the message closes." }
 # Readable names live in the owning headers
 # (src/engine/game/00/game_00.h); a row exists only for a type:func
@@ -3692,20 +3692,20 @@ Menu_InventoryPanel = { addr = 0x801E3720, type = "func", source = "panel mode 9
 Menu_CharacterPanel = { addr = 0x801E3E4C, type = "func", source = "panel mode 13 of the shop: the character window" }
 Party_HasSkill = { addr = 0x801E4D4C, type = "func", source = "Returns whether item_id is in the seven character item rows or the 128-entry item list." }
 Shop_DrawCuePanel = { addr = 0x801E4DF4, type = "func", source = "draws the shop cue text panel window and frame" }
-g_ShopStates = { addr = 0x801E5144, source = "the 11 step handlers of the shop, called by Shop_DispatchStep and indexed by the menu step byte g_MenuStep.step" }
-g_ShopStep2Funcs = { addr = 0x801E5170, source = "5 sub-step handlers of step 2 of the shop, called by func_801D10E4 (the step 2 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
-g_ShopStep2Sub0Funcs = { addr = 0x801E5184, source = "2 handlers of sub-step 0 of step 2 of the shop, called by func_801D1120 (the sub-step 0 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
-g_ShopStep2Sub1Funcs = { addr = 0x801E518C, source = "1 handlers of sub-step 1 of step 2 of the shop, called by func_801D12C0 (the sub-step 1 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
-g_ShopStep2Sub2Funcs = { addr = 0x801E5190, source = "8 handlers of sub-step 2 of step 2 of the shop, called by func_801D14B0 (the sub-step 2 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
-g_ShopStep2Sub3Funcs = { addr = 0x801E51B0, source = "5 handlers of sub-step 3 of step 2 of the shop, called by func_801D27EC (the sub-step 3 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
-g_ShopStep8Funcs = { addr = 0x801E51C4, source = "4 sub-step handlers of step 8 of the shop, called by func_801D3310 (the step 8 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
-g_ShopStep8Sub2Funcs = { addr = 0x801E51D4, source = "5 handlers of sub-step 2 of step 8 of the shop, called by func_801D34F0 (the sub-step 2 handler of step 8) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
-g_ShopStep3Funcs = { addr = 0x801E52C4, source = "5 sub-step handlers of step 3 of the shop, called by func_801D39BC (the step 3 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
-g_ShopStep3Sub1Funcs = { addr = 0x801E52D8, source = "6 handlers of sub-step 1 of step 3 of the shop, called by func_801D3AA8 (the sub-step 1 handler of step 3) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
-g_ShopStep3Sub2Funcs = { addr = 0x801E52F0, source = "7 handlers of sub-step 2 of step 3 of the shop, called by func_801D41B0 (the sub-step 2 handler of step 3) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
-g_SaveStates = { addr = 0x801E530C, source = "the 21 state handlers of the save screen of the shop overlay, called by SAVE_DispatchState and indexed by the menu sub-sub-step byte g_MenuStep.state" }
-g_ShopStep10Funcs = { addr = 0x801E5360, source = "7 sub-step handlers of step 10 of the shop, called by func_801D6184 (the step 10 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
-g_ShopStep5Funcs = { addr = 0x801E545C, source = "8 sub-step handlers of step 5 of the shop, called by func_801D7344 (the step 5 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_ShopSteps = { addr = 0x801E5144, source = "the 11 step handlers of the shop, called by Shop_DispatchStep and indexed by the menu step byte g_MenuStep.step" }
+g_ShopStep2Steps = { addr = 0x801E5170, source = "5 sub-step handlers of step 2 of the shop, called by func_801D10E4 (the step 2 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_ShopStep2Sub0Steps = { addr = 0x801E5184, source = "2 handlers of sub-step 0 of step 2 of the shop, called by func_801D1120 (the sub-step 0 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep2Sub1Steps = { addr = 0x801E518C, source = "1 handlers of sub-step 1 of step 2 of the shop, called by func_801D12C0 (the sub-step 1 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep2Sub2Steps = { addr = 0x801E5190, source = "8 handlers of sub-step 2 of step 2 of the shop, called by func_801D14B0 (the sub-step 2 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep2Sub3Steps = { addr = 0x801E51B0, source = "5 handlers of sub-step 3 of step 2 of the shop, called by func_801D27EC (the sub-step 3 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep8Steps = { addr = 0x801E51C4, source = "4 sub-step handlers of step 8 of the shop, called by func_801D3310 (the step 8 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_ShopStep8Sub2Steps = { addr = 0x801E51D4, source = "5 handlers of sub-step 2 of step 8 of the shop, called by func_801D34F0 (the sub-step 2 handler of step 8) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep3Steps = { addr = 0x801E52C4, source = "5 sub-step handlers of step 3 of the shop, called by func_801D39BC (the step 3 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_ShopStep3Sub1Steps = { addr = 0x801E52D8, source = "6 handlers of sub-step 1 of step 3 of the shop, called by func_801D3AA8 (the sub-step 1 handler of step 3) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep3Sub2Steps = { addr = 0x801E52F0, source = "7 handlers of sub-step 2 of step 3 of the shop, called by func_801D41B0 (the sub-step 2 handler of step 3) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_SaveSteps = { addr = 0x801E530C, source = "the 21 state handlers of the save screen of the shop overlay, called by SAVE_DispatchState and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep10Steps = { addr = 0x801E5360, source = "7 sub-step handlers of step 10 of the shop, called by func_801D6184 (the step 10 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_ShopStep5Steps = { addr = 0x801E545C, source = "8 sub-step handlers of step 5 of the shop, called by func_801D7344 (the step 5 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
 g_MenuStatFrameLeft = { addr = 0x801E550C, source = "Sprite run of the left end of the stat panel border, drawn by Menu_DrawStatPanel." }
 g_MenuStatFrameMiddle = { addr = 0x801E5538, source = "Sprite run repeated 16 times along the stat panel border, drawn by Menu_DrawStatPanel." }
 g_MenuStatFrameRight = { addr = 0x801E5544, source = "Sprite run of the right end of the stat panel border, drawn by Menu_DrawStatPanel." }
@@ -3748,34 +3748,34 @@ g_MenuClutStripPalettes = { addr = 0x801E5B1C, source = "Start of the run in g_M
 g_MenuInventoryTitles = { addr = 0x801E5B48, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
 g_MenuAbilityListNames = { addr = 0x801E5B7C, source = "the list names indexed by the ability type, drawn above the ability list" }
 g_MenuEquipTitles = { addr = 0x801E5BB4, source = "the equip list's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
-g_ShopStep6Funcs = { addr = 0x801E5BEC, source = "4 sub-step handlers of step 6 of the shop, called by func_801DE188 (the step 6 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
-g_ShopStep6Sub0Funcs = { addr = 0x801E5BFC, source = "3 handlers of sub-step 0 of step 6 of the shop, called by func_801DE1C4 (the sub-step 0 handler of step 6) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
-g_ShopStep6Sub3Funcs = { addr = 0x801E5C08, source = "4 handlers of sub-step 3 of step 6 of the shop, called by func_801DE850 (the sub-step 3 handler of step 6) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep6Steps = { addr = 0x801E5BEC, source = "4 sub-step handlers of step 6 of the shop, called by func_801DE188 (the step 6 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_ShopStep6Sub0Steps = { addr = 0x801E5BFC, source = "3 handlers of sub-step 0 of step 6 of the shop, called by func_801DE1C4 (the sub-step 0 handler of step 6) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep6Sub3Steps = { addr = 0x801E5C08, source = "4 handlers of sub-step 3 of step 6 of the shop, called by func_801DE850 (the sub-step 3 handler of step 6) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
 g_ShopBoatPartyPositions = { addr = 0x801E5C18, size = 0x30, source = "Where each of the three party members stands on the boat after the Black Ship: x, y and height, read by the field party setup func_801DE944." }
 g_ShopFacingSteps = { addr = 0x801E5C48, size = 0x20, source = "The x and y step of each of the eight facings, added to the scroll target by func_801DE944." }
-g_ShopStep7Funcs = { addr = 0x801E5CE8, source = "5 sub-step handlers of step 7 of the shop, called by func_801DF978 (the step 7 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
-g_ShopStep7Sub2Funcs = { addr = 0x801E5CFC, source = "5 handlers of sub-step 2 of step 7 of the shop, called by func_801DFDB8 (the sub-step 2 handler of step 7) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
-g_ShopStep7Sub3Funcs = { addr = 0x801E5D10, source = "3 handlers of sub-step 3 of step 7 of the shop, called by func_801E092C (the sub-step 3 handler of step 7) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep7Steps = { addr = 0x801E5CE8, source = "5 sub-step handlers of step 7 of the shop, called by func_801DF978 (the step 7 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_ShopStep7Sub2Steps = { addr = 0x801E5CFC, source = "5 handlers of sub-step 2 of step 7 of the shop, called by func_801DFDB8 (the sub-step 2 handler of step 7) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep7Sub3Steps = { addr = 0x801E5D10, source = "3 handlers of sub-step 3 of step 7 of the shop, called by func_801E092C (the sub-step 3 handler of step 7) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
 g_AbilityStockCommands = { addr = 0x801E5D2C, source = "the stock commands of the ability menu, indexed by its cursor row: pack, sort by cost highest first, sort by cost lowest first" }
-g_ShopStep9Funcs = { addr = 0x801E5D3C, source = "3 sub-step handlers of step 9 of the shop, called by func_801E200C (the step 9 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
-g_ShopStep9Sub0Funcs = { addr = 0x801E5D48, source = "2 handlers of sub-step 0 of step 9 of the shop, called by func_801E2048 (the sub-step 0 handler of step 9) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
-g_ShopStep9Sub1Funcs = { addr = 0x801E5D50, source = "3 handlers of sub-step 1 of step 9 of the shop, called by func_801E2114 (the sub-step 1 handler of step 9) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
-g_ShopStep9Sub2Funcs = { addr = 0x801E5D5C, source = "3 handlers of sub-step 2 of step 9 of the shop, called by func_801E2590 (the sub-step 2 handler of step 9) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep9Steps = { addr = 0x801E5D3C, source = "3 sub-step handlers of step 9 of the shop, called by func_801E200C (the step 9 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_ShopStep9Sub0Steps = { addr = 0x801E5D48, source = "2 handlers of sub-step 0 of step 9 of the shop, called by func_801E2048 (the sub-step 0 handler of step 9) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep9Sub1Steps = { addr = 0x801E5D50, source = "3 handlers of sub-step 1 of step 9 of the shop, called by func_801E2114 (the sub-step 1 handler of step 9) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep9Sub2Steps = { addr = 0x801E5D5C, source = "3 handlers of sub-step 2 of step 9 of the shop, called by func_801E2590 (the sub-step 2 handler of step 9) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
 g_ShopPanelModes = { addr = 0x801E5D68, source = "the Shop panel handlers, indexed by the panel task mode; the dispatcher of each is one entry" }
-g_ShopMessageStates = { addr = 0x801E5DB4, source = "the state handlers of panel mode 0, indexed by the panel task state" }
-g_ShopCommandsStates = { addr = 0x801E5DC0, source = "the state handlers of panel mode 2, indexed by the panel task state" }
-g_ShopZennyStates = { addr = 0x801E5DCC, source = "the state handlers of panel mode 1, indexed by the panel task state" }
-g_ShopEquipStatStates = { addr = 0x801E5DDC, source = "the state handlers of panel mode 5, indexed by the panel task state" }
-g_ShopEquipmentStates = { addr = 0x801E5DF0, source = "the state handlers of panel mode 6, indexed by the panel task state" }
-g_ShopItemsStates = { addr = 0x801E5DFC, source = "the state handlers of panel mode 7, indexed by the panel task state" }
-g_ShopInventoryStates = { addr = 0x801E5E2C, source = "the state handlers of panel mode 9, indexed by the panel task state" }
-g_ShopPanel11StateFuncs = { addr = 0x801E5E48, source = "the state handlers of panel mode 11, indexed by the panel task state" }
-g_ShopPanel12StateFuncs = { addr = 0x801E5E5C, source = "the state handlers of panel mode 12, indexed by the panel task state" }
-g_ShopCharacterStates = { addr = 0x801E5E70, source = "the state handlers of panel mode 13, indexed by the panel task state" }
-g_ShopPanel15StateFuncs = { addr = 0x801E5F14, source = "the state handlers of panel mode 15, indexed by the panel task state" }
-g_ShopPanel16StateFuncs = { addr = 0x801E5F24, source = "the state handlers of panel mode 16, indexed by the panel task state" }
-g_ShopPanel17StateFuncs = { addr = 0x801E5F30, source = "the state handlers of panel mode 17, indexed by the panel task state" }
-g_ShopPanel18StateFuncs = { addr = 0x801E5F3C, source = "the state handlers of panel mode 18, indexed by the panel task state" }
+g_ShopMessageSteps = { addr = 0x801E5DB4, source = "the state handlers of panel mode 0, indexed by the panel task state" }
+g_ShopCommandsSteps = { addr = 0x801E5DC0, source = "the state handlers of panel mode 2, indexed by the panel task state" }
+g_ShopZennySteps = { addr = 0x801E5DCC, source = "the state handlers of panel mode 1, indexed by the panel task state" }
+g_ShopEquipStatSteps = { addr = 0x801E5DDC, source = "the state handlers of panel mode 5, indexed by the panel task state" }
+g_ShopEquipmentSteps = { addr = 0x801E5DF0, source = "the state handlers of panel mode 6, indexed by the panel task state" }
+g_ShopItemsSteps = { addr = 0x801E5DFC, source = "the state handlers of panel mode 7, indexed by the panel task state" }
+g_ShopInventorySteps = { addr = 0x801E5E2C, source = "the state handlers of panel mode 9, indexed by the panel task state" }
+g_ShopPanel11Steps = { addr = 0x801E5E48, source = "the state handlers of panel mode 11, indexed by the panel task state" }
+g_ShopPanel12Steps = { addr = 0x801E5E5C, source = "the state handlers of panel mode 12, indexed by the panel task state" }
+g_ShopCharacterSteps = { addr = 0x801E5E70, source = "the state handlers of panel mode 13, indexed by the panel task state" }
+g_ShopPanel15Steps = { addr = 0x801E5F14, source = "the state handlers of panel mode 15, indexed by the panel task state" }
+g_ShopPanel16Steps = { addr = 0x801E5F24, source = "the state handlers of panel mode 16, indexed by the panel task state" }
+g_ShopPanel17Steps = { addr = 0x801E5F30, source = "the state handlers of panel mode 17, indexed by the panel task state" }
+g_ShopPanel18Steps = { addr = 0x801E5F3C, source = "the state handlers of panel mode 18, indexed by the panel task state" }
 g_ShopPortraitAtlas = { addr = 0x801E600C, size = 0x30, source = "Portrait cells by portrait index, read by func_801E4FC8: u, v and the palette position of each portrait; the same cells as g_MenuPortraitAtlas." }
 g_ShopStockIndex = { addr = 0x801E6044, source = "Index of the selected row of the shop stock at D_8018E7CC (count byte, then category and item pairs); func_801D163C wraps it at the count." }
 g_ShopItemCategory = { addr = 0x801E6048, source = "Item category of the selected shop row, loaded from the stock row by func_801D163C and passed to Item_Add and Item_GetIcon by func_801D1D60." }
@@ -3807,9 +3807,9 @@ Menu_DrawCursorFrame = { addr = 0x801D1CC0, type = "func", source = "Draws the c
 Menu_DrawHeaderBar = { addr = 0x801D1E54, type = "func", source = "Draws the window of a menu header bar from x, y, width and height with the window style g_WindowStyle." }
 Menu_DrawPortrait = { addr = 0x801D23A0, type = "func", source = "Draws a 40x48 character portrait from g_MenuPortraitAtlas record atlas_index at sprite_x, sprite_y, shaded dark when shade_mode is nonzero." }
 Menu_DrawPanelIcon = { addr = 0x801D2520, type = "func", source = "Draws one menu icon cell at x, y from atlas position u, v with clut and the grey level color, through MenuDrawPanelIcon." }
-Menu_UpdateMaster = { addr = 0x801D25D8, type = "func", source = "Runs the g_MasterMenuStates handler selected by the panel step byte g_MenuMasterStep; the game overlay runs it each frame." }
+Menu_UpdateMaster = { addr = 0x801D25D8, type = "func", source = "Runs the g_MasterMenuSteps handler selected by the panel step byte g_MenuMasterStep; the game overlay runs it each frame." }
 Master_StartOffer = { addr = 0x801D27C8, type = "func", source = "starts the master skill offer message in the sisyou menu" }
-Master_StartFarewell = { addr = 0x801D2B64, type = "func", source = "Starts the master's farewell message (g_MenuMasterMessageIds + MASTER_MESSAGE_FAREWELL) once and moves the master menu to step 6; the last entry of g_MenuMasterStep2Funcs, which starts with Master_StartOffer." }
+Master_StartFarewell = { addr = 0x801D2B64, type = "func", source = "Starts the master's farewell message (g_MenuMasterMessageIds + MASTER_MESSAGE_FAREWELL) once and moves the master menu to step 6; the last entry of g_MenuMasterStep2Steps, which starts with Master_StartOffer." }
 Menu_ApplyMasterMode = { addr = 0x801D3ED0, type = "func", source = "Writes the actor mode g_MenuMasterActorModes[g_SceneEventSelection] into the header of g_Actors[g_ScriptVars[3]] and closes the panel." }
 g_MenuLabelPower = { addr = 0x801D4038, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
 g_MenuLabelDefense = { addr = 0x801D403C, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
@@ -3821,13 +3821,13 @@ g_MenuPortraitAtlas = { addr = 0x801D4058, source = "4-byte portrait atlas recor
 g_MenuMasterSkills = { addr = 0x801D4088, source = "Ability rows each master teaches: func_801D3A24 compares the level of each row of the current master and teaches the ability." }
 g_MenuMasterStats = { addr = 0x801D4154, source = "Stat growth row of each master; func_801D2CA4 copies the row of the current master into the character level_up_modifiers." }
 g_MenuMasterMessageIds = { addr = 0x801D41BC, source = "Message id of each master; func_801D2CA4 adds an offset to the entry of the current master and starts it with Message_StartAreaMessage." }
-g_MenuMasterStep2Funcs = { addr = 0x801D4204, source = "sub-handler table dispatched by func_801D278C, entry 2 of g_MasterMenuStates" }
-g_MenuMasterStep3Funcs = { addr = 0x801D421C, source = "sub-handler table dispatched by func_801D2BE8, entry 3 of g_MasterMenuStates" }
-g_MenuMasterStep4Funcs = { addr = 0x801D4240, source = "sub-handler table dispatched by func_801D32D4, entry 4 of g_MasterMenuStates" }
-g_MenuMasterStep5Funcs = { addr = 0x801D4264, source = "sub-handler table dispatched by func_801D3924, entry 5 of g_MasterMenuStates" }
+g_MenuMasterStep2Steps = { addr = 0x801D4204, source = "sub-handler table dispatched by func_801D278C, entry 2 of g_MasterMenuSteps" }
+g_MenuMasterStep3Steps = { addr = 0x801D421C, source = "sub-handler table dispatched by func_801D2BE8, entry 3 of g_MasterMenuSteps" }
+g_MenuMasterStep4Steps = { addr = 0x801D4240, source = "sub-handler table dispatched by func_801D32D4, entry 4 of g_MasterMenuSteps" }
+g_MenuMasterStep5Steps = { addr = 0x801D4264, source = "sub-handler table dispatched by func_801D3924, entry 5 of g_MasterMenuSteps" }
 g_MenuMasterActorModes = { addr = 0x801D4270, type = "u8", size = 0x14, source = "the actor mode Menu_ApplyMasterMode writes for each MasterId; GAME_NONE leaves it" }
 g_MenuMasterBannerLock = { addr = 0x801D4284, source = "Nonzero while the info banner owns the master panel." }
-g_MenuMasterStep = { addr = 0x801D4285, source = "Current step of the master menu, indexing g_MasterMenuStates." }
+g_MenuMasterStep = { addr = 0x801D4285, source = "Current step of the master menu, indexing g_MasterMenuSteps." }
 g_MenuMasterSubStep = { addr = 0x801D4286, source = "Current sub-step of the master menu that the step handlers advance." }
 g_MenuMasterPanelLock = { addr = 0x801D4287, source = "Lock byte of the master panel (D_801D4287)." }
 g_MenuMasterScrollOffset = { addr = 0x801D4289, source = "Scroll offset of the master panel (D_801D4289)." }
@@ -5069,35 +5069,35 @@ g_FishingRankIcons = { addr = 0x801D0C3C, source = "13 rank rows (Novice through
 Fishing_DrawHud = { addr = 0x801D159C, type = "func", source = "draws the fishing HUD: the cast and line panel with the lure's distance from the shore in two digits (flashing at 50 or more while reeling) and the depth gauge" }
 Fishing_DrawIcon = { addr = 0x801D18CC, type = "func", source = "draws an 8x8 fishing icon sprite (SPRT_8) at the given position" }
 Fishing_DrawDepthGauge = { addr = 0x801D195C, type = "func", source = "draws the depth gauge: the lure's height over the pond floor as a bar with a cursor, and the lure's depth marker in mode 4" }
-Fishing_CastGaugeRun = { addr = 0x801D1B10, type = "func", source = "runs the cast power gauge actor: g_FishingCastGaugeStates[handler_index_01]" }
+Fishing_CastGaugeRun = { addr = 0x801D1B10, type = "func", source = "runs the cast power gauge actor: g_FishingCastGaugeSteps[handler_index_01]" }
 Fishing_CastGaugeInit = { addr = 0x801D1B54, type = "func", source = "cast gauge step 1: clears the gauge and loads its sweep speed (step_delta_18) from the rod's cast power speed" }
 Fishing_DrawGaugeFill = { addr = 0x801D1B88, type = "func", source = "draws a gauge bar of the given width as two green gradient quads" }
 Fishing_CastGaugeSweep = { addr = 0x801D1CF0, type = "func", source = "cast gauge step 2: moves the gauge (pos_x_0C) 0..255 by step_delta_18 as the rod's sweep direction sets (bounce, one way, accelerating), draws it, and steps on at phase 3" }
-Fishing_LureRun = { addr = 0x801D20C8, type = "func", source = "runs the lure actor: g_FishingLureStates[handler_index_01]" }
+Fishing_LureRun = { addr = 0x801D20C8, type = "func", source = "runs the lure actor: g_FishingLureSteps[handler_index_01]" }
 Fishing_LureCast = { addr = 0x801D210C, type = "func", source = "lure step 1: starts the lure at the cast position with a distance from the rod's max distance and the gauge power, and loads the flight steps" }
 Fishing_LureFly = { addr = 0x801D23F4, type = "func", source = "lure step 2: moves the lure along the cast arc until its y reaches the target, then plays the splash cue and steps on" }
 Fishing_LureSettle = { addr = 0x801D25F0, type = "func", source = "lure step 3: waits for the splash animation to end, then plays the float script and steps on" }
 Fishing_LureFloat = { addr = 0x801D2648, type = "func", source = "lure step 4: lets the lure bob and drift on the water, picks its script from the drift direction and ticks the lure's counter_07" }
 Fishing_LureHooked = { addr = 0x801D28DC, type = "func", source = "lure step 5: puts the lure at the hooked fish's position (g_FishingHookedFish) and picks its script from the line direction" }
 Fishing_ActorRun = { addr = 0x801D2978, type = "func", source = "Runs the fishing actor's init and update states." }
-Fishing_ReelGaugeRun = { addr = 0x801D2BF0, type = "func", source = "runs the reel gauge actor: g_FishingReelGaugeStates[handler_index_01]" }
+Fishing_ReelGaugeRun = { addr = 0x801D2BF0, type = "func", source = "runs the reel gauge actor: g_FishingReelGaugeSteps[handler_index_01]" }
 Fishing_DrawFishArrow = { addr = 0x801D2C34, type = "func", source = "draws the 16x8 arrow of the hooked fish on the reel gauge, flipped by its direction" }
 Fishing_ReelGaugeInit = { addr = 0x801D2D74, type = "func", source = "reel gauge step 1: clears the gauge timers and the cursor and steps on" }
 Fishing_ReelGaugeUpdate = { addr = 0x801D2DC4, type = "func", source = "reel gauge step 2: draws the gauge and its cursor of the rod's reel cursor size, drifts the cursor (origin_y_30) toward the hooked fish and sounds the warning cue while the fish marker is outside it" }
 Fishing_DrawReelCursor = { addr = 0x801D3244, type = "func", source = "draws the reel cursor strip of the given width, flashing red when enabled" }
-Fishing_PromptRun = { addr = 0x801D35CC, type = "func", source = "runs the prompt bar actor: g_FishingPromptStates[handler_index_01], and frees it when the fishing state is not 0 and below 4" }
+Fishing_PromptRun = { addr = 0x801D35CC, type = "func", source = "runs the prompt bar actor: g_FishingPromptSteps[handler_index_01], and frees it when the fishing state is not 0 and below 4" }
 Fishing_PromptSlideIn = { addr = 0x801D3684, type = "func", source = "prompt bar step 2: moves the bar down to its row (origin_y_30 0x12)" }
 Fishing_PromptSlideOut = { addr = 0x801D3938, type = "func", source = "prompt bar step 7: moves the bar up out of view, then goes to idle (or step 1 while counter_07 is set)" }
-Fishing_CatchPageRun = { addr = 0x801D42A0, type = "func", source = "runs the Data page actor: g_FishingStates[handler_index_01]" }
+Fishing_CatchPageRun = { addr = 0x801D42A0, type = "func", source = "runs the Data page actor: g_FishingSteps[handler_index_01]" }
 Fishing_CatchPageNext = { addr = 0x801D4884, type = "func", source = "Data page step: finds the next recorded fish in g_FishingBestCatch (key_3E) and starts the page slide" }
 Fishing_DrawWindowFill = { addr = 0x801D799C, type = "func", source = "Fills a fishing window with its interior texture." }
 Fishing_DrawWindowFrame = { addr = 0x801D9534, type = "func", source = "Draws a fishing window frame and its inset shadow." }
 Fishing_SceneRun = { addr = 0x801D9B14, type = "func", source = "runs the fishing scene: g_FishingSceneModes[mode_index_02]" }
-Fishing_EntryRun = { addr = 0x801D9B58, type = "func", source = "scene mode 0: runs g_FishingEntryStates[sub_index_03]" }
+Fishing_EntryRun = { addr = 0x801D9B58, type = "func", source = "scene mode 0: runs g_FishingEntrySteps[sub_index_03]" }
 Fishing_EntryBegin = { addr = 0x801D9B9C, type = "func", source = "Runs the fishing entry's begin step." }
 Fishing_EntryWait = { addr = 0x801D9C4C, type = "func", source = "Waits for the entry window effect." }
 Fishing_EntryDone = { addr = 0x801D9C9C, type = "func", source = "Finishes the entry once the anchor count reaches four." }
-Fishing_ReadyRun = { addr = 0x801D9CF4, type = "func", source = "scene mode 1: runs g_FishingReadyStates[sub_index_03]" }
+Fishing_ReadyRun = { addr = 0x801D9CF4, type = "func", source = "scene mode 1: runs g_FishingReadySteps[sub_index_03]" }
 Fishing_ReadyBegin = { addr = 0x801D9D38, type = "func", source = "Resets the fishing work record and starts the ready script." }
 Fishing_ReadyWait = { addr = 0x801D9E08, type = "func", source = "Waits for the ready state." }
 Fishing_ChooseAction = { addr = 0x801D9E40, type = "func", source = "ready step 2: Triangle starts the quit prompt, Square opens the gear menu (mode 9), X casts (mode 2) when a lure and rod are equipped and otherwise opens the gear menu, L1 enters mode 10" }
@@ -5108,15 +5108,15 @@ Fishing_QuitSlideOut = { addr = 0x801DA2A0, type = "func", source = "Slides the 
 Fishing_CautionSlideIn = { addr = 0x801DA3F4, type = "func", source = "Slides the caution box into place." }
 Fishing_CautionInput = { addr = 0x801DA498, type = "func", source = "Reads the caution prompt's answer." }
 Fishing_CautionSlideOut = { addr = 0x801DA508, type = "func", source = "Slides the caution box away." }
-Fishing_CastRun = { addr = 0x801DA5B4, type = "func", source = "scene mode 2: runs g_FishingCastStates[sub_index_03]" }
+Fishing_CastRun = { addr = 0x801DA5B4, type = "func", source = "scene mode 2: runs g_FishingCastSteps[sub_index_03]" }
 Fishing_CastInput = { addr = 0x801DA638, type = "func", source = "cast step 1: FISHING_INPUT_CAST throws the lure (sub step 2) and FISHING_INPUT_CANCEL goes back to the ready mode" }
-Fishing_HookedRun = { addr = 0x801DAED4, type = "func", source = "scene mode 4: runs g_FishingHookedStates[sub_index_03]" }
+Fishing_HookedRun = { addr = 0x801DAED4, type = "func", source = "scene mode 4: runs g_FishingHookedSteps[sub_index_03]" }
 Fishing_HookedReel = { addr = 0x801DB140, type = "func", source = "hooked step 2: reads the pad while a fish is on the line: Left and Down pull to the left, Up and Right to the right, Circle-down pulls hard, by the rod's cursor speeds, and ends the fight at the shore (lure y above 0x3E8000)" }
 Fishing_CatchRecord = { addr = 0x801DB554, type = "func", source = "hooked step 3: raises the species' g_FishingBestCatch length to the catch's roll_90 when longer and sets g_FishingNewRecord" }
 Fishing_CatchPage = { addr = 0x801DBBAC, type = "func", source = "hooked step 9: draws the catch page of g_FishingHookedFish and on confirm adds the fish item (fish id + 0x38) to the bag, or sets the failure message" }
 Fishing_SelectGear = { addr = 0x801DDE2C, type = "func", source = "points g_FishingLureRow and g_FishingRodRow at the rows of the equipped lure (g_FishingLure) and rod (g_FishingRod) when each is set" }
 Fishing_SpawnFish = { addr = 0x801DE1C0, type = "func", source = "fills the pond's fish rows: per species the g_FishingSpawnCounts count, rolls each fish's length (roll_90) up to the species maximum and sets stamina and stamina_max from the species stamina scaled by length" }
-Fishing_UpdateFish = { addr = 0x801DE4AC, type = "func", source = "runs g_FishingFishStates[mode] for each of the 30 live pond fish rows, then sets the fish's blend bytes (0x5D..0x5F) from its depth" }
+Fishing_UpdateFish = { addr = 0x801DE4AC, type = "func", source = "runs g_FishingFishSteps[mode] for each of the 30 live pond fish rows, then sets the fish's blend bytes (0x5D..0x5F) from its depth" }
 Fishing_FishAppear = { addr = 0x801DE5EC, type = "func", source = "fish mode 0: opens the species scene, picks a random facing and position in the pond and a depth, then steps the fish to swim" }
 Fishing_FishSwim = { addr = 0x801DE82C, type = "func", source = "fish mode 1: every 16 frames rolls the fish's heading (counter_08) and depth step, keeps it above the pond floor, and sends it to mode 3 when Fishing_LureInRange is true" }
 Fishing_FishStaminaAdd = { addr = 0x801E026C, type = "func", source = "adds delta to the fish row's ext.fishing.stamina, clamped to 0 and stamina_max" }
@@ -5134,18 +5134,18 @@ Fishing_DrawDimScreen = { addr = 0x801E16DC, type = "func", source = "Dims the s
 Fishing_DrawPromptBox = { addr = 0x801E1758, type = "func", source = "Draws the fish, retry and exit prompt box." }
 Fishing_DrawCautionBox = { addr = 0x801E19CC, type = "func", source = "Draws the caution and full-inventory box." }
 Fishing_FishStacksFull = { addr = 0x801E1C10, type = "func", source = "reports whether every fish species (ITEM_JELLYFISH through ITEM_MACKEREL) is held at the 99-item stack limit; Fishing_ChooseAction diverts to sub step 7 once before the cast while it is true" }
-g_FishingCastGaugeStates = { addr = 0x801E1D10, source = "cast power gauge steps: idle, start, sweep, label" }
-g_FishingLureStates = { addr = 0x801E1D20, source = "lure actor steps: idle, cast, fly, settle, float, hooked" }
-g_FishingReelGaugeStates = { addr = 0x801E1D80, source = "reel gauge steps: idle, start, update" }
+g_FishingCastGaugeSteps = { addr = 0x801E1D10, source = "cast power gauge steps: idle, start, sweep, label" }
+g_FishingLureSteps = { addr = 0x801E1D20, source = "lure actor steps: idle, cast, fly, settle, float, hooked" }
+g_FishingReelGaugeSteps = { addr = 0x801E1D80, source = "reel gauge steps: idle, start, update" }
 g_FishingPromptSets = { addr = 0x801E1F20, source = "prompt ids of each prompt set (cue_index_06): up to three prompts, 0xFF ends the list, the last byte says whether a follow-up bar is spawned" }
-g_FishingPromptStates = { addr = 0x801E1F44, source = "prompt bar steps: idle, init, slide in, first prompt, show, hold, wait, slide out, ready, scroll text, expand, button, close" }
-g_FishingStates = { addr = 0x801E1F78, source = "Data page steps: idle, init and the fish page, rank and cursor steps" }
+g_FishingPromptSteps = { addr = 0x801E1F44, source = "prompt bar steps: idle, init, slide in, first prompt, show, hold, wait, slide out, ready, scroll text, expand, button, close" }
+g_FishingSteps = { addr = 0x801E1F78, source = "Data page steps: idle, init and the fish page, rank and cursor steps" }
 g_FishingSceneModes = { addr = 0x801E21E0, source = "fishing scene modes: entry, ready, cast, 3, hooked, 5 to 8, gear menu, 10 and 11" }
-g_FishingEntryStates = { addr = 0x801E2210, source = "entry steps: settle the lure at the pond edge, wait for the window effect, wait for the fade" }
-g_FishingReadyStates = { addr = 0x801E221C, source = "ready steps: init, wait, choose action and the prompt and panel steps" }
-g_FishingCastStates = { addr = 0x801E2248, source = "cast steps: start, input, wait for the throw animation, steer the lure" }
-g_FishingHookedStates = { addr = 0x801E2268, source = "hooked steps: start, bite, reel, record, results and the catch page" }
-g_FishingFishStates = { addr = 0x801E2314, source = "handlers of a pond fish row by its mode byte (0x01): appear, swim, and the later modes" }
+g_FishingEntrySteps = { addr = 0x801E2210, source = "entry steps: settle the lure at the pond edge, wait for the window effect, wait for the fade" }
+g_FishingReadySteps = { addr = 0x801E221C, source = "ready steps: init, wait, choose action and the prompt and panel steps" }
+g_FishingCastSteps = { addr = 0x801E2248, source = "cast steps: start, input, wait for the throw animation, steer the lure" }
+g_FishingHookedSteps = { addr = 0x801E2268, source = "hooked steps: start, bite, reel, record, results and the catch page" }
+g_FishingFishSteps = { addr = 0x801E2314, source = "handlers of a pond fish row by its mode byte (0x01): appear, swim, and the later modes" }
 g_FishingSpecies = { addr = 0x801E2AC8, source = "fish species rows of 0x24 bytes indexed by fish id: scene id (+0), stamina (+0x0E), maximum length (+0x0F) and maximum score (+0x12); the item id of a catch is the fish id plus 0x38" }
 g_FishingSpawnCounts = { addr = 0x801E2DF4, source = "how many fish of each species Fishing_SpawnFish puts in a pond: 0x17 bytes per pond, indexed by g_GameEntryFacing" }
 g_FishingFullNoticeShown = { addr = 0x801E3204, type = "u8", source = "set when Fishing_ChooseAction has diverted to sub step 7 because the fish stacks are full; cleared when they are not and by the entry reset" }
@@ -5178,7 +5178,7 @@ Fishing_ShopDrawQuantity = { addr = 0x800F6C5C, type = "func", source = "Draws t
 Fishing_ShopDrawQuantityWindow = { addr = 0x800F6EE0, type = "func", source = "Draws the quantity prompt window." }
 Fishing_ShopDrawItemIcon = { addr = 0x800F7094, type = "func", source = "Draws a trade item's icon." }
 Fishing_ShopTakeTradeItems = { addr = 0x800F7100, type = "func", source = "Takes the traded quantities from the party." }
-s_ShopStates = { addr = 0x800F71F0, source = "The shop's state handlers." }
+s_ShopSteps = { addr = 0x800F71F0, source = "The shop's state handlers." }
 s_ShopItemIcons = { addr = 0x800F722C, source = "Sprite id per trade item icon." }
 s_ShopItemCount = { addr = 0x800F7240, source = "Number of stock rows the shop shows." }
 s_ShopDeclined = { addr = 0x800F7248, source = "The confirm prompt's answer: 0 yes, 1 no." }
@@ -5191,8 +5191,8 @@ Fishing_DrawSprite = { addr = 0x801E0DCC, type = "func", source = "Draws a fishi
 ["emi/world00/area032/13"]
 GFX_AddPrim = { addr = 0x8014E5A0, type = "func", source = "Appends the current primitive to one ordering-table head and advances the shared primitive cursor while the requested byte count fits the active buffer." }
 Actor_TrackFocus = { addr = 0x801F2C48, type = "func", source = "Projects the party focus with RotTransPers into the ordering-table screen buffer, stores the result in the work record and advances the handler index." }
-Area_ShrinkDisc = { addr = 0x801F2E64, type = "func", source = "Step 3 of the s_WorkStates table in marker_work.c, after the grow step func_801F2D18 and the hold step func_801F2DAC: draws the shaded disc at the task's screen position with the timer as radius, counts the radius down and advances the mode when it goes negative." }
-Scene_ClearActor = { addr = 0x801F2EE4, type = "func", source = "Last used step of the s_WorkStates table in marker_work.c: calls Actor_Clear to remove the running actor; the same body as Scene_ClearActor in scena15 and many other images." }
+Area_ShrinkDisc = { addr = 0x801F2E64, type = "func", source = "Step 3 of the s_MarkerModes table in marker_work.c, after the grow step func_801F2D18 and the hold step func_801F2DAC: draws the shaded disc at the task's screen position with the timer as radius, counts the radius down and advances the mode when it goes negative." }
+Scene_ClearActor = { addr = 0x801F2EE4, type = "func", source = "Last used step of the s_MarkerModes table in marker_work.c: calls Actor_Clear to remove the running actor; the same body as Scene_ClearActor in scena15 and many other images." }
 GFX_DrawShadedDisc = { addr = 0x801F2F04, type = "func", source = "Fans 32 POLY_G3 around (x, y), each spanning 128 of the 4096-step angle and reaching radius through rcos and rsin; the centre vertex uses center_shade, the rim vertices rim_shade." }
 Actor_Reveal = { addr = 0x801F3480, type = "func", source = "Keeps the actor slot at the work byte 0x0B hidden until the timer at byte 0x09 reaches zero, then shows it, clears the two actor slots at the work bytes 0x03 and 0x04 and sets the handler index at byte 0x01 to 2." }
 Actor_FreePaletteFades = { addr = 0x801F35B4, type = "func", source = "Frees the two palette fade targets of the actor slot and resets the area work." }
@@ -6998,7 +6998,7 @@ g_SysThreads = { addr = 0x80143B40, type = "Thread", source = "The scheduler's t
 g_GameEntryState = { addr = 0x80143B90, source = "Game state the main loop runs next: Game_NewGame sets it to 1, Game_LoadShopOverlay to 2 and Game_UpdateAreaLoad to 8." }
 g_GameEntrySubstate = { addr = 0x80143B92, source = "Stage within the current game state; the state handlers read it to pick their stage and add 1 as they advance." }
 g_GameStateIndex = { addr = 0x80143BB0, source = "Game request code that picks the next game state." }
-g_UiTitleState = { addr = 0x80143C10, source = "Index into s_TitleStates of the title screen state that runs each frame; each state adds 1 when it is done, and the start button sets it to 2 below state 3 or to 7." }
+g_UiTitleState = { addr = 0x80143C10, source = "Index into s_TitleSteps of the title screen state that runs each frame; each state adds 1 when it is done, and the start button sets it to 2 below state 3 or to 7." }
 g_UiTitleSubstate = { addr = 0x80143C12, source = "Substate of the title screen state, cleared to 0 when the title screen starts." }
 g_UiTitleTimer = { addr = 0x80143C20, source = "Frame countdown of the title screen states: Game_WaitTitleFade arms it to 360 and Game_AdvanceTitleFade to 900, and the state advances when it reaches 0." }
 g_UiTitleBannerScroll = { addr = 0x80143C22, source = "Horizontal scroll of the title banner: starts at 200 and the banner draw adds 2 each frame." }

@@ -28,7 +28,7 @@ extern char D_801D0C04[];
 
 /* g_EmiOverlayHeader */
 /* D_801D1950 */
-extern Callback g_Commu05States[COMMU05_STEP_COUNT];
+extern Callback g_Commu05Steps[COMMU05_STEP_COUNT];
 
 /* The entry rows of the shared executable's fairy list (D_80145E48) and the
  * 5-byte icon cells each row byte selects (D_801457E8). */

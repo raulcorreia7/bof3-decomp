@@ -4,7 +4,7 @@
 u32 D_801F2C00 = 0x54;
 
 /* Work-state handlers; func_801F30A8 enters the same table at its sixth entry (D_801F3F80). */
-static const Callback s_WorkStates[8] = {
+static const Callback s_MarkerModes[8] = {
     Actor_TrackFocus, func_801F2D18, func_801F2DAC, Area_ShrinkDisc, Scene_ClearActor, func_801F30EC, Actor_Reveal, Actor_FreePaletteFades,
 };
 
@@ -99,7 +99,7 @@ static const Callback D_801F4908[2] = {
 };
 
 MATCH s32 func_801F2C04(void) {
-    SYS_DISPATCH_BYTE(s_WorkStates, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(s_MarkerModes, g_Task->header.mode);
 }
 
 #include "shared/Actor_TrackFocus.h"

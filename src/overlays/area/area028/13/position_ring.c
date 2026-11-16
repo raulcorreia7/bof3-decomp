@@ -1,7 +1,7 @@
 #include "area028_13.h"
 
 /* Dispatch handlers, indexed by work byte +0x01. */
-static Callback s_WorkStates[3] = {
+static Callback s_PositionRingModes[3] = {
     func_801F2C48,
     func_801F2C80,
     func_801F2D1C,
@@ -90,7 +90,7 @@ static u8 D_801F34B4[2380] = {
 static AreaSlotWork* D_801F3E00 = 0;
 
 MATCH s32 func_801F2C04(void) {
-    SYS_DISPATCH_BYTE(s_WorkStates, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(s_PositionRingModes, g_Task->header.mode);
 }
 
 MATCH void func_801F2C48(void) {

@@ -31,7 +31,7 @@ extern u8          D_801F53F6;
 extern u8          D_801F53F7;
 extern char        WORLD00_AREA008_D_801F2C04[];
 extern char        WORLD00_AREA008_D_801F2C10[];
-extern Callback    g_AreaWorkStates[10];
+extern Callback    g_AreaModes[10];
 
 void func_801F2D24(void);
 void func_801F2F78(void);

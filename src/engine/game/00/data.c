@@ -24,26 +24,26 @@ u8 s_PaletteSlotStrides[8] = {0x10, 0x00, 0x20, 0x40, 0x80, 0xCC, 0xCC, 0xCC};
 
 Callback g_GameCampMenuLoad[3] = {Game_LoadCampMenu, func_801E3E88, func_801E1680};
 
-Callback g_GameStates[12] = {Game_NewGame,          Game_UpdateAreaLoad, Game_UpdateField,   Game_UpdateMenu,        func_801979D4,         Game_UpdateBattle,
+Callback g_GameModes[12] = {Game_NewGame,          Game_UpdateAreaLoad, Game_UpdateField,   Game_UpdateMenu,        func_801979D4,         Game_UpdateBattle,
                              Game_UpdateCameraLook, Game_UpdateShop,     Game_UpdateFishing, Game_UpdateAbilityMenu, Game_UpdateShisu, Game_UpdateSceneCamera};
 
-Callback g_GameMenuSubstates[3] = {Game_LoadMenu, Game_UpdateMenuFrame, Game_ReturnFromMenu};
+Callback g_GameMenuSteps[3] = {Game_LoadMenu, Game_UpdateMenuFrame, Game_ReturnFromMenu};
 
 u8 s_DirectionJitters[4] = {0xFF, 0x00, 0x01, 0x00};
 
-Callback g_GameBattleSubstates[8] = {func_80197A60, Battle_LoadPartySprites, func_80197C1C, Battle_LoadBattleArchive, func_80197E54, func_801D1014, func_80197EFC, func_80197F48};
+Callback g_GameBattleSteps[8] = {func_80197A60, Battle_LoadPartySprites, func_80197C1C, Battle_LoadBattleArchive, func_80197E54, func_801D1014, func_80197EFC, func_80197F48};
 
 Step2 s_BattleScrollCellSteps[4] = {{4, 0}, {0, 4}, {-4, 0}, {0, -4}};
 
-Callback g_GameShopSubstates[3] = {Game_LoadShopOverlay, func_80199398, Game_ReturnFromShop};
+Callback g_GameShopSteps[3] = {Game_LoadShopOverlay, func_80199398, Game_ReturnFromShop};
 
-Callback g_GameFishingSubstates[4] = {func_801984E8, func_801E0BD0, func_801985C8, func_801E0C20};
+Callback g_GameFishingSteps[4] = {func_801984E8, func_801E0BD0, func_801985C8, func_801E0C20};
 
 Callback g_MenuAbilityOpen[3] = {Game_LoadAbilityMenu, Game_UpdateAbilityMenuFrame, Game_ReturnFromAbilityMenu};
 
 Callback g_GameShisuSteps[3] = {Game_LoadShisu, Game_UpdateShisuFrame, Game_ReturnFromShisu};
 
-Callback g_GameSceneCameraSubstates[3] = {func_80198B00, func_80198B44, func_80198B6C};
+Callback g_GameSceneCameraSteps[3] = {func_80198B00, func_80198B44, func_80198B6C};
 
 u8 s_MenuLine1Run[12] = {0x00, 0x00, 0x0B, 0x01, 0x00, 0x14, 0x02, 0x00, 0x0C, 0x00, 0x00, 0xFF};
 
@@ -55,13 +55,13 @@ u8 s_MenuLine2FlagRun[12] = {0x0F, 0x00, 0x09, 0x11, 0x00, 0x0A, 0x12, 0x00, 0x2
 
 Callback g_MenuPanelModes[5] = {func_801995A4, Menu_DrawPanelCursor, func_801996A8, func_8019977C, func_8019986C};
 
-Callback g_MenuPanelStates[3] = {func_8019959C, func_801995F8, func_80199638};
+Callback g_MenuPanelSteps[3] = {func_8019959C, func_801995F8, func_80199638};
 
-Callback g_MenuOptionStates[3] = {func_8019959C, func_801996FC, Menu_SlidePanelLeft};
+Callback g_MenuOptionSteps[3] = {func_8019959C, func_801996FC, Menu_SlidePanelLeft};
 
-Callback g_MenuActionStates[3] = {func_8019959C, func_801997EC, func_8019982C};
+Callback g_MenuActionSteps[3] = {func_8019959C, func_801997EC, func_8019982C};
 
-Callback g_MenuTaskStates[4] = {func_8019959C, func_80199938, func_80199978, func_801999B8};
+Callback g_MenuTaskSteps[4] = {func_8019959C, func_80199938, func_80199978, func_801999B8};
 
 char D_801C7C34[5][8] = {"ITEM" T_END T_END T_END T_END, "WEAPON" T_END T_END, "ARMOR" T_END T_END T_END,
                          "OPTION" T_END T_END, "VITAL" T_END T_END T_END};
@@ -319,7 +319,7 @@ Callback D_801C81C0[3] = {func_8019EB38, func_8019EC20, func_8019ED40};
 
 Callback D_801C81CC[4] = {func_8019F310, func_8019F384, func_8019F430, func_8019F4F8};
 
-Callback g_TaskModeHandlers[105] = {
+Callback g_TaskModes[105] = {
     func_8019F9D0,           func_801F7D04,           func_8019A370,           func_8019A370,           func_801F3120,           func_801F4CDC,           (Callback)func_801F2C04,
     (Callback)func_801F2C04, func_801F31AC,           (Callback)func_801F2C04, func_801F37B0,           func_801F35FC,           (Callback)func_801F3944, func_801F3D60,
     func_801F2C1C,           func_801F3014,           func_801F2E98,           (Callback)func_801F2C04, (Callback)func_801F2C04, func_801F33B4,           func_80117A30,
@@ -374,7 +374,7 @@ SceneSlots* g_SceneScenes[20] = {
     (SceneSlots*)&D_801FD1A4, (SceneSlots*)&D_801FBF34, (SceneSlots*)&D_801FC404, (SceneSlots*)&D_801FE5F4,
     (SceneSlots*)&D_801F8538, (SceneSlots*)&D_801F9728, (SceneSlots*)&D_801F6D58, (SceneSlots*)&D_801F6DBC};
 
-Callback g_SceneStates[2] = {Scene_ResetEventState, Scene_UpdateEvent};
+Callback g_SceneSteps[2] = {Scene_ResetEventState, Scene_UpdateEvent};
 
 u8 s_EventFlagsReset[16] = {0x08, 0x00, 0x00, 0x0A, 0x00, 0x00, 0x00, 0x00,
                             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};

@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 /* The bate overlay entry: the shared menu step byte selects the handler. */
 MATCH void func_801D0D9C(void) {
-    SYS_DISPATCH_BYTE(g_MenuBateStates, g_MenuStep.step);
+    SYS_DISPATCH_BYTE(g_MenuBateSteps, g_MenuStep.step);
 }
 
 MATCH void func_801D0DD8(void) {
@@ -25,11 +25,11 @@ MATCH void Menu_ResetPanels(void) {
 }
 
 MATCH void func_801D0E38(void) {
-    SYS_DISPATCH_BYTE(g_MenuBateStep2Funcs, g_MenuStep.sub_step);
+    SYS_DISPATCH_BYTE(g_MenuBateStep2Steps, g_MenuStep.sub_step);
 }
 
 MATCH void func_801D0E74(void) {
-    SYS_DISPATCH_BYTE(g_MenuBateStep2Sub0Funcs, g_MenuStep.state);
+    SYS_DISPATCH_BYTE(g_MenuBateStep2Sub0Steps, g_MenuStep.state);
 }
 
 /* func_801D0EB0 */
@@ -70,7 +70,7 @@ MATCH void func_801D0F70(void) {
 }
 
 MATCH void func_801D0FF8(void) {
-    SYS_DISPATCH_BYTE(g_MenuBateStep2Sub1Funcs, g_MenuStep.state);
+    SYS_DISPATCH_BYTE(g_MenuBateStep2Sub1Steps, g_MenuStep.state);
     Menu_DrawClutStrip(D_80144953);
 }
 

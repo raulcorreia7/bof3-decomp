@@ -2,7 +2,7 @@
 
 /* The eight frontend state handlers are indexed by the state byte in
  * Game_RunFrontend. The table ends where the glyph geometry records begin. */
-static Callback s_TitleStates[8] = {
+static Callback s_TitleSteps[8] = {
     Game_BeginTitle, Game_WaitTitleFade, Game_AdvanceTitleFade, Game_StartTitleFade, Game_StartSelectedGame, UI_WaitTitleInput, UI_UpdateChoicePrompt, Game_LeaveTitle,
 };
 
@@ -17,7 +17,7 @@ MATCH void Game_RunTitle(void) { /* func_801D0C04 */
     for (;;) {
         SYS_ThreadWait(1);
         UI_UpdateStartButton();
-        s_TitleStates[g_UiTitleState]();
+        s_TitleSteps[g_UiTitleState]();
         UI_UpdateBannerFade();
         UI_UpdateWindowFade();
     }

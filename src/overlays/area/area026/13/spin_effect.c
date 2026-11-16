@@ -2,7 +2,7 @@
 #include "area/spad.h"
 
 /* Dispatch handlers, indexed by work byte +0x01. */
-static const Callback s_WorkStates[4] = {
+static const Callback s_SpinEffectModes[4] = {
     func_801F2C48,
     func_801F2C94,
     func_801F2D1C,
@@ -219,7 +219,7 @@ static u16 D_801F4CDC[2] = {0x0031, 0xFFFF};
 static u8  D_801F4CE0[4] = {0x1C, 0x00, 0x00, 0x1C};
 
 MATCH s32 func_801F2C04(void) {
-    SYS_DISPATCH_BYTE(s_WorkStates, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(s_SpinEffectModes, g_Task->header.mode);
 }
 
 /* `work2` re-reads the slot so each site emits its own address load;

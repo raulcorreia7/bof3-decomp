@@ -6,4 +6,4 @@ void Menu_ResetPanels(void);
 void func_801D0E38(void);
 void func_801D2070(void);
 
-Callback g_MenuBateStates[MENU_BATE_STEP_COUNT] = {func_801D0DD8, Menu_ResetPanels, func_801D0E38, func_801D2070};
+Callback g_MenuBateSteps[MENU_BATE_STEP_COUNT] = {func_801D0DD8, Menu_ResetPanels, func_801D0E38, func_801D2070};

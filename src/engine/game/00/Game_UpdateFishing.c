@@ -4,7 +4,7 @@ MATCH void Game_UpdateFishing(void) {
     Callback* handlers;
     u16       state;
 
-    handlers = (Callback*)g_GameFishingSubstates;
+    handlers = (Callback*)g_GameFishingSteps;
     state    = g_GameEntrySubstate;
     handlers[state]();
 }

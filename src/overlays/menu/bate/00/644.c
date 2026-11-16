@@ -93,7 +93,7 @@ MATCH void func_801D1244(void) {
 }
 
 MATCH void func_801D153C(void) {
-    SYS_DISPATCH_BYTE(g_MenuBateStep2Sub2Funcs, D_80148652);
+    SYS_DISPATCH_BYTE(g_MenuBateStep2Sub2Steps, D_80148652);
 }
 
 MATCH void func_801D1578(void) {
@@ -281,11 +281,11 @@ MATCH void func_801D1FA0(void) {
 }
 
 MATCH void func_801D2070(void) {
-    SYS_DISPATCH_BYTE(g_MenuBateStep3Funcs, D_80148651);
+    SYS_DISPATCH_BYTE(g_MenuBateStep3Steps, D_80148651);
 }
 
 MATCH void func_801D20AC(void) {
-    SYS_DISPATCH_BYTE(g_MenuBateStep3Sub0Funcs, D_80148652);
+    SYS_DISPATCH_BYTE(g_MenuBateStep3Sub0Steps, D_80148652);
 }
 
 MATCH void func_801D20E8(void) {

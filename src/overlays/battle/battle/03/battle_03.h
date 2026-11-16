@@ -415,7 +415,7 @@ extern Callback         D_801EB188[];
 extern u8               s_BattleCharacterSprites[];
 extern s32              D_801EB198;
 /* D_801EB1B4 */
-extern Callback         g_BattleTaskFuncs[];
+extern Callback         g_BattleTaskSteps[];
 extern Callback         D_801EB1BC[];
 extern Callback         D_801EB1D4[];
 extern Callback         D_801EB1E0[];

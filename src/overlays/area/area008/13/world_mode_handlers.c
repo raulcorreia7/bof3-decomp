@@ -1,6 +1,6 @@
 #include "area008_13.h"
 
-Callback g_AreaWorkStates[10] = {
+Callback g_AreaModes[10] = {
     func_801F2C5C, func_801F2C88, func_801F2D24, func_801F2E1C, func_801F2F24, func_801F2F78, func_801F3010, func_801F30B8, func_801F317C, func_801F31D0,
 };
 Callback D_801F46B0[15] = {
