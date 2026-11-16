@@ -4,7 +4,7 @@ MATCH void func_801F4128(void) {
     Actor* work;
     u16*   span;
 
-    if (D_80143F03 == 4) {
+    if (g_GameCellType == 4) {
         work                     = g_Task;
         span                     = (u16*)g_ScriptState;
         work->pos.z.part.integer = (work->pos.z.part.integer + work->vz);

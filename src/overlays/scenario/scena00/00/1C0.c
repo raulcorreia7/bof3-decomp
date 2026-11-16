@@ -1047,7 +1047,7 @@ MATCH void func_801F92DC(void) {
             Game_SetScriptActive();
             g_SceneState.state_04 = 2;
         }
-        if (D_80143F03 == 2) {
+        if (g_GameCellType == 2) {
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             Party_HideBattlers();
         }
@@ -1125,7 +1125,7 @@ MATCH void func_801F9868(void) {
     u8  free_slot;
 
     if (g_GameAreaId == AREA_ID_DAUNA_MINE_WHELP) {
-        switch (D_80143F03) {
+        switch (g_GameCellType) {
             case 1:
                 if (SYS_TestFlag(g_SceneFlags, 3) == 0) {
                     SND_RequestBGM(3);
@@ -1273,7 +1273,7 @@ MATCH void func_801F9BE4(void) {
             break;
 
         case 5:
-            if (D_80143F03 != 2) {
+            if (g_GameCellType != 2) {
                 break;
             }
             g_AreaDrawFlags      = AREA_DRAW_ALL_FLAGS;
@@ -1753,7 +1753,7 @@ MATCH void func_801FA7D8(void) {
 MATCH void func_801FAF6C(void) {
     switch (g_SceneState.step_05) {
         case 0:
-            g_SceneState.step_05 = D_801FCA5C[D_80143F03];
+            g_SceneState.step_05 = D_801FCA5C[g_GameCellType];
             break;
 
         case 10:
@@ -2365,7 +2365,7 @@ MATCH s32 Scene_CheckStepTrigger(s32 x) { /* func_801FC818 */
         g_SceneState.step_05  = 0;
     }
     if (g_GameAreaId == AREA_ID_DAUNA_MINE_WHELP) {
-        if (D_80143F03 == 0) {
+        if (g_GameCellType == 0) {
             if ((x >> 16) == 20) {
                 if (SYS_TestFlag(g_SceneFlags, 7) != 0) {
                     return 0;

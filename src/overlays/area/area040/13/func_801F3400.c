@@ -7,7 +7,7 @@ NON_MATCHING s32 func_801F3400(s32 x, s32 y) {
     s32 i;
     s32 j;
 
-    if (D_80143F03 != 6) {
+    if (g_GameCellType != 6) {
         return 0;
     }
     if (LOBU(g_Game.current->unk_2B) != 0) {

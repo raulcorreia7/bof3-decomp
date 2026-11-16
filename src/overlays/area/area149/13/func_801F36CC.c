@@ -4,7 +4,7 @@ MATCH void func_801F36CC(void) {
     s32 y;
     s32 x;
 
-    if (D_80143F04 == 0x94) {
+    if (g_GameLastAreaId == 0x94) {
         D_80147A8E += 22;
         y = g_AreaFocusY;
         /* FAKE: keeps the focus x load after the integer-half store; pure C differs in 11 rows. */
@@ -20,7 +20,7 @@ MATCH void func_801F36CC(void) {
             D_801448EE       = 0x5A;
         }
     }
-    if (D_80143F04 == 0xA7) {
+    if (g_GameLastAreaId == 0xA7) {
         D_80147ACF       = 2;
         g_AreaSceneMode  = 2;
         g_SceneEventMode = 0x21;

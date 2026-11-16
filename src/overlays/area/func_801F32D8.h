@@ -3,7 +3,7 @@ MATCH void func_801F32D8(void) {
         Fairy_InitVillage();
     }
     D_801455C7 = 0;
-    if (D_80143F03 != 0) {
+    if (g_GameCellType != 0) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 12));
     }
 }

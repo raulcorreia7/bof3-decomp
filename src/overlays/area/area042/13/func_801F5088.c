@@ -6,7 +6,7 @@ MATCH void func_801F5088(void) {
     u8  slot;
     s16 field;
 
-    if (D_80143F03 == 0) {
+    if (g_GameCellType == 0) {
         if (!SYS_TestFlag(g_SceneEventFlags, 0x11)) {
             for (i = 0; i < 3; i++) {
                 if (!SYS_TestFlag(D_80144FC4, i + 0x5C)) {
@@ -24,7 +24,7 @@ MATCH void func_801F5088(void) {
             func_801A7330(&D_801F56D0[D_801F56F8 * 13]);
         }
     }
-    if (D_80143F03 == 1) {
+    if (g_GameCellType == 1) {
         slot                        = Actor_FindFreeSpawned();
         g_ScratchPad.cells.bytes[0] = slot;
         if (slot != GAME_NONE) {

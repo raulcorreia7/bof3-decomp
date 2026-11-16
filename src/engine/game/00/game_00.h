@@ -284,11 +284,14 @@ extern s8                        D_800E4D40; /* 0x800E4D40 */
 extern s16                       D_800E4D42; /* 0x800E4D42 */
 extern u8                        D_80143BB1;
 extern volatile u16              g_GameAreaId;
-extern volatile u8               D_80143F06; /* 0x80143F06 */
-extern volatile u32              D_80143F08; /* 0x80143F08 */
-extern volatile u32              D_80143F0C; /* 0x80143F0C */
-extern s16                       D_80143F16; /* 0x80143F16; signed high halfword of the context bundle */
-extern s16                       D_80143F1A; /* 0x80143F1A */
+/* D_80143F06 */
+extern volatile u8               g_GameLastCellType; /* 0x80143F06 */
+/* D_80143F08 */
+extern volatile u32              g_GameLastX; /* 0x80143F08 */
+/* D_80143F0C */
+extern volatile u32              g_GameLastY; /* 0x80143F0C */
+extern s16                       D_80143F16;  /* 0x80143F16; signed high halfword of the context bundle */
+extern s16                       D_80143F1A;  /* 0x80143F1A */
 extern volatile u8               g_GameRequestKind;
 extern s16                       D_80143F26; /* integer half of g_EncounterOriginX */
 extern s16                       D_80143F2A; /* integer half of g_EncounterOriginY */

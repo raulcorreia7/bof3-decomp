@@ -3,7 +3,7 @@
 MATCH s32 func_801F5208(s32 x, s32 y) {
     u8 state;
 
-    state = D_80143F03;
+    state = g_GameCellType;
     if (state != 4 && (u8)(state - 6) >= 2) {
         return 0;
     }

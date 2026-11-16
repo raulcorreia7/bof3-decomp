@@ -1,7 +1,7 @@
 #include "area118_13.h"
 
 MATCH void func_801F33A4(void) {
-    if (D_80143F03 == 0) {
+    if (g_GameCellType == 0) {
         if (g_AreaSceneMode == g_Task->unk_0A) {
             if (g_GameStateIndex == GAME_REQUEST_IDLE) {
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x00));

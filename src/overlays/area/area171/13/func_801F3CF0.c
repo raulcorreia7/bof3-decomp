@@ -4,7 +4,7 @@ MATCH u8 func_801F3CF0(s32 x, s32 y) {
     s32 cx;
     s32 cy;
 
-    if (D_80143F03 == 2) {
+    if (g_GameCellType == 2) {
         if (SYS_TestFlag(g_SceneEventFlags, 115) == 0) {
             g_ScratchPad.cells.bytes[0] = 0;
             cx                          = x >> 16;

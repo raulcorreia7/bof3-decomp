@@ -17,7 +17,6 @@ extern u16         D_80033A08[];
 extern u16         D_800C1A70;
 extern volatile u8 D_80140000[];
 extern u8          D_80143BB0;
-extern u16         D_80143F04;
 /* D_80143F7C */
 extern u32         g_UiPopupRequest;
 extern u16         g_GameAreaId;

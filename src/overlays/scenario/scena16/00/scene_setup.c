@@ -128,7 +128,7 @@ MATCH void func_801F6EB0(void) {
         g_SceneState.state_04 = 2;
     }
 
-    if (D_80143F03 == 2u) {
+    if (g_GameCellType == 2u) {
         g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
         Party_HideBattlers();
     }
@@ -327,7 +327,7 @@ MATCH void func_801F7230(void) {
             u8* next;
             u8  step;
 
-            if (D_80143F03 == 2u) {
+            if (g_GameCellType == 2u) {
                 next            = &g_SceneState.step_05;
                 step            = *next;
                 g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;

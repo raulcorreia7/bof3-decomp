@@ -3,11 +3,11 @@
 MATCH void func_801F3B04(void) {
     u8 i;
 
-    if (D_80143F03 == 0) {
+    if (g_GameCellType == 0) {
         func_801F4300(&D_801F4D94, 1);
         func_801F4300(&D_801F4D94 + 5, 1);
     }
-    if (D_80143F03 == 1) {
+    if (g_GameCellType == 1) {
         if (SYS_TestFlag(g_SceneEventFlags, 122) == 0) {
             i = 2;
             do {
@@ -48,7 +48,7 @@ MATCH void func_801F3B04(void) {
             } while (i < 8);
         }
     }
-    if (D_80143F03 == 2) {
+    if (g_GameCellType == 2) {
         func_801F4300(D_801F4DBC, 1);
     }
 }

@@ -1018,13 +1018,13 @@ NON_MATCHING void func_801FA3E4(void) {
     u8  slot;
     u8* flags;
 
-    if (LOHU(g_GameAreaId) == 0 && D_80143F03 == 0 && !SYS_TestFlag(g_SceneFlags, 10)) {
+    if (LOHU(g_GameAreaId) == 0 && g_GameCellType == 0 && !SYS_TestFlag(g_SceneFlags, 10)) {
         SYS_SetFlag(g_SceneFlags, 10);
         Scene_RunScenario(3);
         Scene_SetupParty(5);
     }
     if (LOHU(g_GameAreaId) == 1) {
-        if (D_80143F03 == 2 && !SYS_TestFlag(g_SceneFlags, 6)) {
+        if (g_GameCellType == 2 && !SYS_TestFlag(g_SceneFlags, 6)) {
             Game_SetScriptActive();
             Scene_SetupParty(3);
             Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX = TO_COORD_HALF(81), VOL(s32, g_AreaScrollTargetY) = TO_COORD_HALF(30)));
@@ -1083,7 +1083,7 @@ NON_MATCHING void func_801FA3E4(void) {
             i++;
         } while (i < 11);
     }
-    if (LOHU(g_GameAreaId) == 21 && D_80143F03 == 0) {
+    if (LOHU(g_GameAreaId) == 21 && g_GameCellType == 0) {
         g_ScriptVars[3] = 0;
         if (SYS_TestFlag(g_SceneFlags, 15)) {
             if (!SYS_TestFlag(g_SceneFlags, 17)) {
@@ -1108,7 +1108,7 @@ NON_MATCHING void func_801FA3E4(void) {
         }
     }
     if (LOHU(g_GameAreaId) == 32) {
-        if (D_80143F03 == 5) {
+        if (g_GameCellType == 5) {
             if (!SYS_TestFlag(g_SceneFlags, 0)) {
                 Game_SetScriptActive();
                 g_AreaDrawFlags = 0;
@@ -1118,7 +1118,7 @@ NON_MATCHING void func_801FA3E4(void) {
                 g_SceneState.timer_06 = 150;
             }
         }
-        if (D_80143F03 == 1) {
+        if (g_GameCellType == 1) {
             if (!SYS_TestFlag(g_SceneFlags, 0)) {
                 Scene_SetupParty(1);
                 g_AreaDrawFlags = 0x1F;
@@ -1128,7 +1128,7 @@ NON_MATCHING void func_801FA3E4(void) {
                 g_AreaDrawFlags = 0;
             }
         }
-        if (D_80143F03 == 0 && !SYS_TestFlag(g_SceneFlags, 2)) {
+        if (g_GameCellType == 0 && !SYS_TestFlag(g_SceneFlags, 2)) {
             Scene_RunScenario(2);
             Scene_SetupParty(3);
             SYS_SetFlag(g_SceneFlags, 2);

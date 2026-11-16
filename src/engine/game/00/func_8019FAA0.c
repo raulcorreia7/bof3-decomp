@@ -19,11 +19,11 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
     Actor_ClearAll();
     GFX_ResetPaletteFades();
 
-    D_80143F08 = g_AreaScrollTargetX;
-    D_80143F04 = g_GameAreaId;
-    D_80143F06 = D_80143F03;
-    D_80143F0C = g_AreaScrollTargetY;
-    seed       = g_GamePrevSelection;
+    g_GameLastX        = g_AreaScrollTargetX;
+    g_GameLastAreaId   = g_GameAreaId;
+    g_GameLastCellType = g_GameCellType;
+    g_GameLastY        = g_AreaScrollTargetY;
+    seed               = g_GamePrevSelection;
     if (seed == 0xFFu)
         g_SndBGMId = 0xFFu;
     else
@@ -44,7 +44,7 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
     g_GfxPalettePending = 1u;
 
     func_801BFF9C(entry_x, entry_y, (u32)entry_facing);
-    D_80143F03 = func_801A0348(g_AreaTargetCellX, g_AreaTargetCellY);
+    g_GameCellType = func_801A0348(g_AreaTargetCellX, g_AreaTargetCellY);
     Area_InitMapRenderer();
 
     entry = (AreaLoad*)g_AreaLoads[g_GameAreaId];

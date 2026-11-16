@@ -19,7 +19,8 @@ extern u8 D_80144EA8[];
 extern s8 D_80181B00[];
 extern s8 D_80181B01[];
 extern u8 D_80144EA9;
-extern u8 D_80143F06;
+/* D_80143F06 */
+extern u8 g_GameLastCellType;
 s32       func_801F2E78(void);
 
 /* The 4x4 cell palette func_801F3570 tests each cell's value against. */

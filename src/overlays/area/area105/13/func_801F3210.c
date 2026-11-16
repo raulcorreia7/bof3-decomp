@@ -4,7 +4,7 @@ MATCH s32 func_801F3210(s32 x, s32 y) {
     u32 facing;
 
     if (g_SceneState.scenario_id < 0xA) {
-        if (D_80143F03 == 0) {
+        if (g_GameCellType == 0) {
             facing        = g_Game.members[0].facing;
             SP_REF(u8, 0) = g_Game.members[0].facing;
             if (facing >= 2U) {

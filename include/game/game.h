@@ -74,15 +74,15 @@ extern PaletteFade              g_PaletteFades[PALETTE_FADE_COUNT];
 extern GraphicsPaletteAnimation D_80145D94[8];
 
 /* The game's area state at 0x80143F00: the area being run, the area to return to and the pending area request.
- * func_8019FAA0 stores the current area, its cell class and the scroll target into last_*, and func_801B146C hands
+ * func_8019FAA0 stores the current area, its cell type and the scroll target into last_*, and func_801B146C hands
  * them back to Game_RequestAreaChange; Game_RequestAreaChange stores the request fields in the order of its
  * arguments. The members keep their own globals (several images read them with a different width or volatile). */
 typedef struct GameAreaState {
     /* 0x00 */ u16 area_id;
     /* 0x02 */ u8  request_flags;
-    /* 0x03 */ u8  cell_class;
+    /* 0x03 */ u8  cell_type;
     /* 0x04 */ u16 last_area_id;
-    /* 0x06 */ u16 last_cell_class;
+    /* 0x06 */ u16 last_cell_type;
     /* 0x08 */ u32 last_x;
     /* 0x0C */ u32 last_y;
     /* 0x10 */ u16 request_area_id;
@@ -110,6 +110,10 @@ ASSERT_OFFSET(GameAreaState, prev_selection, 0x1F);
 
 /* D_80143F00 */
 extern GameAreaState g_GameArea;
+/* D_80143F03: the members of g_GameArea that the area and scenario overlays read on their own */
+extern u8            g_GameCellType;
+/* D_80143F04 */
+extern u16           g_GameLastAreaId;
 
 /* GAME.EMI#0 exports: the frontend's data and entry points, in address order. */
 

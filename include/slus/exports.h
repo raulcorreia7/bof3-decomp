@@ -85,7 +85,6 @@ extern u32          g_FrameCount;
 /* D_80143EF8 */
 extern s32          g_SysLastVSync;
 extern s32          D_80143EFC;
-extern u8           D_80143F03;
 /* D_80143F10 */
 extern u16          g_GameContextSeed;
 /* D_80143F1C */
