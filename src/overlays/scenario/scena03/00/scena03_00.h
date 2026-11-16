@@ -60,6 +60,7 @@ ASSERT_OFFSET(Scena03Quad, angle, 0x4C);
 ASSERT_OFFSET(Scena03Quad, length, 0x52);
 
 extern SVECTOR  D_1F800014[];
+extern s16      D_801492DA;
 extern s8       D_80144EA0;
 extern u8       D_801468E4[];
 extern u32      D_801F6C00;

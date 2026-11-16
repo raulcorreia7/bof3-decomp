@@ -11,7 +11,6 @@ extern u8  D_80144908[];
 extern u8  D_80145F09;
 extern u8  D_80146865;
 extern u8  D_80146866;
-extern u8  D_80146867;
 extern u8  D_8014623B;
 extern u8  D_80146874;
 extern u8  D_80146875;
