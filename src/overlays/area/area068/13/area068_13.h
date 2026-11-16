@@ -7,19 +7,14 @@
 #include "overlays/area/world01.h"
 #include "area/spad.h"
 
-/* The master's weapon-count gate and its answers. */
-#define AREA068_MSG_MASTER_ACCEPTS  0x82
-#define AREA068_MSG_WEAPONS_NEEDED  0x83
-#define AREA068_MSG_MASTER_FAREWELL 0x84
-
 /* Frames without a press before a well minigame phase ends, and steps of the bucket swish. */
-#define WELL_IDLE_FRAMES_MAX        0x1C
-#define WELL_SWISH_STEPS            8
-#define WELL_SWISH_DELAY_FRAMES     0xC
+#define WELL_IDLE_FRAMES_MAX    0x1C
+#define WELL_SWISH_STEPS        8
+#define WELL_SWISH_DELAY_FRAMES 0xC
 
 /* The lowering and raising phases each last one of 16 random times. */
-#define WELL_TIME_LIMIT_COUNT       16
-#define WELL_TIME_LIMIT_MASK        (WELL_TIME_LIMIT_COUNT - 1)
+#define WELL_TIME_LIMIT_COUNT   16
+#define WELL_TIME_LIMIT_MASK    (WELL_TIME_LIMIT_COUNT - 1)
 
 /* Task modes of the well minigame, the index of its handler table. Lowering and raising run the same
  * ready, count and repeat cycle: a press in "ready" goes to "count", which goes to "repeat"; a press in

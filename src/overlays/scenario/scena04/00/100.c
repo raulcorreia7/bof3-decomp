@@ -689,20 +689,20 @@ MATCH s8 func_801F9DF4(s32 x, s32 y) {
             if ((u8)(g_ScratchPad.cells.bytes[0] - 5) >= 2U && g_ScratchPad.cells.bytes[0] != 4) {
                 g_SceneState.state_04 = 1;
                 g_SceneState.step_05  = 0;
-                return Scene_ShowMessage(2);
+                return Scene_ShowMessage(MSG_002);
             }
         }
         if (((y >> 16) - 0x18) < 2U && x == TO_COORD_HALF(77)) {
             g_SceneState.state_04 = 1;
             g_SceneState.step_05  = 0;
-            return Scene_ShowMessage(3);
+            return Scene_ShowMessage(MSG_003);
         }
         return 0;
     }
     if (SYS_TestFlag(g_SceneFlags, 7) == 0 && ((x >> 16) - 0x1F) < 3U && y == TO_COORD_HALF(36)) {
         g_SceneState.state_04 = 1;
         g_SceneState.step_05  = 0;
-        return Scene_ShowMessage(0x26);
+        return Scene_ShowMessage(MSG_038);
     }
     return 0;
 }

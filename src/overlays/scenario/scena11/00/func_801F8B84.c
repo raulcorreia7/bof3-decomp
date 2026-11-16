@@ -182,7 +182,7 @@ MATCH void func_801F8B84(void) {
             g_SceneState.step_05 = 0x2C;
             break;
         case 44:
-            Message_StartAreaMessage(0x40);
+            Message_StartAreaMessage(MSG_064);
             g_GameStateIndex     = 2;
             g_SceneState.step_05 = 0x2D;
             break;

@@ -12,7 +12,7 @@ MATCH void func_801F16F8(void) {
             variant = &g_SceneEventState.step;
             *variant += 1;
         } else {
-            Message_StartAreaMessage(FAIRY_MESSAGE_HELP_MENU);
+            Message_StartAreaMessage(MSG_248);
             *state = GAME_REQUEST_MESSAGE;
         }
     }

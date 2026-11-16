@@ -8,9 +8,6 @@
 #include "overlays/area/world03.h"
 #include "area/spad.h"
 
-/* The villager's answer when the party declines. */
-#define AREA120_MSG_VISITOR_REFUSED 0x35
-
 extern u8 D_801F43B8[];
 
 /* The width and height halves of the RECT at the start of D_801F43B8. */

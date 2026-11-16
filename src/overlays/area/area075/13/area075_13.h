@@ -7,11 +7,6 @@
 #include "overlays/area/world01.h"
 #include "area/spad.h"
 
-/* The foreman's rope-pulling game lines. */
-#define AREA075_MSG_ROPE_RULES       0x18
-#define AREA075_MSG_ROPE_START       0x19
-#define AREA075_MSG_ROPE_RULES_AGAIN 0x1A
-
 extern s32      D_80144ED8;
 extern s8       D_80146B81;
 extern s8       D_80146BF7;

@@ -25,7 +25,7 @@ MATCH void func_801FA7DC(void) {
             Game_ClearScriptActive();
             break;
         case 5:
-            Message_StartAreaMessage(0xB);
+            Message_StartAreaMessage(MSG_011);
             g_GameStateIndex     = 2;
             g_SceneState.step_05 = 6;
             return;
@@ -111,7 +111,7 @@ MATCH void func_801FA7DC(void) {
             g_SceneState.step_05 = 0x12;
             return;
         case 18:
-            Message_StartAreaMessage(0x17);
+            Message_StartAreaMessage(MSG_023);
             g_GameStateIndex     = 2;
             g_SceneState.step_05 = 0x13;
             return;

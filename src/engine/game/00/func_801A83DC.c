@@ -16,7 +16,7 @@ MATCH void func_801A83DC(void) {
                 SYS_SetFlag(state + 0xC5C, g_SceneEventState.selection);
                 strncpy((char*)g_TextVariables[0], (char*)Message_GetText((g_SceneEventState.selection + 0x4172)), 8);
                 D_801490E0 = 0;
-                Message_Request(0xFA);
+                Message_Request(MSG_250);
                 *game_state = GAME_REQUEST_MESSAGE;
                 if (g_SndBGMId != GAME_NONE) {
                     SND_PauseBGM(g_SndBGMId);

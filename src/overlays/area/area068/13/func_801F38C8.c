@@ -5,12 +5,12 @@ MATCH void func_801F38C8(void) {
 
     if (g_MessageChoice == 0) {
         if ((Item_CountHeld(1) & BYTE_MASK) >= 15U) {
-            g_MessageRequest = AREA068_MSG_MASTER_ACCEPTS;
+            g_MessageRequest = MSG_130;
             return;
         }
-        message = AREA068_MSG_WEAPONS_NEEDED;
+        message = MSG_131;
     } else {
-        message = AREA068_MSG_MASTER_FAREWELL;
+        message = MSG_132;
     }
     g_MessageRequest = message;
     g_MenuMasterStep = 6;

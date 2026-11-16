@@ -33,7 +33,7 @@ MATCH void func_801F38D8(void) {
         } break;
         case 3:
             if (g_ScriptVars[0] == 0) {
-                MESSAGE_START_WAIT(3);
+                MESSAGE_START_WAIT(MSG_003);
                 g_SceneEventState.step = 4;
             }
             break;

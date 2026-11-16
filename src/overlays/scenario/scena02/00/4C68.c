@@ -66,7 +66,7 @@ MATCH void func_801FB868(void) {
             }
             break;
         case 15:
-            SCENE_MESSAGE_WAIT(0x7F, 0xB);
+            SCENE_MESSAGE_WAIT(MSG_127, 0xB);
             break;
         case 11:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {

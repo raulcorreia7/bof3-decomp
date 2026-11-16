@@ -153,16 +153,16 @@ void Char_SpawnLinkedActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y, s32 code);
             D_801490E4[0] = 0;                                             \
             if (Item_Add(ITEM_CAT_ITEM, ITEM_BERRIES, 1, 0) & BYTE_MASK) { \
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));               \
-                Message_Request(2);                                        \
+                Message_Request(MSG_002);                                  \
             } else {                                                       \
-                Message_Request(3);                                        \
+                Message_Request(MSG_003);                                  \
             }                                                              \
             g_Task->param.unk_0B = 2;                                      \
         } else if (roll >= 12) {                                           \
             CALLEE(2, x, y, cell & BYTE_MASK);                             \
             func_801C308C(0);                                              \
             Char_LoseHP(1, g_Game.current->chr.character_id);              \
-            Message_Request(0xD9);                                         \
+            Message_Request(MSG_217);                                      \
             g_GameStateIndex     = GAME_REQUEST_MESSAGE;                   \
             g_Task->param.unk_0B = 1;                                      \
         }                                                                  \

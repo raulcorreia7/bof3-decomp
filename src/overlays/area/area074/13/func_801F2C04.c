@@ -7,12 +7,12 @@ MATCH s32 func_801F2C04(void) {
     sel = g_MessageChoice;
     if (sel == 0) {
         if (D_80144F94 & 0x20) {
-            g_MessageRequest = AREA074_MSG_MASTER_ACCEPTS;
+            g_MessageRequest = MSG_146;
             return;
         }
-        request = AREA074_MSG_MASTER_REFUSES;
+        request = MSG_147;
     } else {
-        request = AREA074_MSG_MASTER_FAREWELL;
+        request = MSG_148;
     }
     g_MessageRequest = request;
     g_MenuMasterStep = 6;

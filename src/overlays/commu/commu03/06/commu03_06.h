@@ -6,15 +6,12 @@
 
 #include "shared/etc.h"
 
-/* The closing line the scene waits on. */
-#define FAIRY_MESSAGE_COMMU03_FAREWELL 0x5A
-
 /* g_EmiOverlayHeader */
 /* Entries of the handler tables. */
-#define COMMU03_STEP_COUNT             3
-#define COMMU03_STEP0_COUNT            2
-#define COMMU03_STEP1_COUNT            2
-#define COMMU03_STEP2_COUNT            4
+#define COMMU03_STEP_COUNT  3
+#define COMMU03_STEP0_COUNT 2
+#define COMMU03_STEP1_COUNT 2
+#define COMMU03_STEP2_COUNT 4
 
 /* D_801D18C8 */
 extern Callback g_Commu03States[COMMU03_STEP_COUNT];

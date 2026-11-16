@@ -2,5 +2,5 @@
 
 /* func_801F2C04 */
 MATCH void Message_OpenAnswerMenu(void) {
-    WORLD_ARM_ANSWER_MESSAGE_IDLE(2, 4);
+    WORLD_ARM_ANSWER_MESSAGE_IDLE(MSG_002, MSG_004);
 }

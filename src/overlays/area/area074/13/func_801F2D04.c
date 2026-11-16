@@ -1,5 +1,5 @@
 #include "area074_13.h"
 
 MATCH void func_801F2D04(void) {
-    WORLD_ARM_ANSWER_MESSAGE(0x94);
+    WORLD_ARM_ANSWER_MESSAGE(MSG_148);
 }

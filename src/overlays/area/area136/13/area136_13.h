@@ -8,10 +8,6 @@
 #include "scenario/party.h"
 #include "area/spad.h"
 
-/* The card reader's reply. */
-#define AREA136_MSG_ID_ACCEPTED 0x82
-#define AREA136_MSG_ID_REJECTED 0x83
-
 /* The per-scene y limit bytes the walk step reads, in 16.16 units. */
 /* The field step bytes the palette path tests. */
 /* The request value blob the selection handlers index. */

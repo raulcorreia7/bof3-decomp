@@ -21,7 +21,7 @@ MATCH void func_801F8538(void) {
         case 2:
             if (!WINDOW_EFFECT_BUSY()) {
                 g_AreaDrawFlags = 0;
-                SCENE_MESSAGE_WAIT(22, 3);
+                SCENE_MESSAGE_WAIT(MSG_022, 3);
             }
             break;
         case 3:

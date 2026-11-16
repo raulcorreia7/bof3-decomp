@@ -7,9 +7,6 @@
 #include "overlays/area/world03.h"
 #include "area/spad.h"
 
-/* The master's line as he grants his power. */
-#define AREA143_MSG_POWER_AWAKENED 0x52
-
 /* The shop panel step the request sets. */
 
 /* The shop panel sub-step the request handlers advance. */
@@ -17,7 +14,7 @@
 /* The game-overlay state bytes the cancel path resets. */
 
 /* The variant byte the cancel path stores in the game-overlay state. */
-#define AREA_RESET_VARIANT         0xFF
+#define AREA_RESET_VARIANT 0xFF
 
 /* The character work record the span step reads. */
 

@@ -22,10 +22,10 @@ MATCH void func_801F2C7C(void) {
                 D_801490E4[0] = 0;
                 if (Item_Add(0, 0x59, 1, 0) & BYTE_MASK) {
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x06));
-                    Message_Request(2);
+                    Message_Request(MSG_002);
                     SYS_SetFlag(g_SceneEventFlags, 104);
                 } else {
-                    Message_Request(3);
+                    Message_Request(MSG_003);
                 }
                 g_GameStateIndex       = GAME_REQUEST_MESSAGE;
                 g_SceneEventState.step = 2;

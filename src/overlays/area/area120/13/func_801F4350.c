@@ -10,6 +10,6 @@ MATCH void func_801F4350(void) {
         g_SceneState.state_04 = 0xD;
         g_SceneState.step_05  = 8;
     } else {
-        g_MessageRequest = AREA120_MSG_VISITOR_REFUSED;
+        g_MessageRequest = MSG_053;
     }
 }

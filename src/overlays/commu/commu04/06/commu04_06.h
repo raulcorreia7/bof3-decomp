@@ -6,16 +6,10 @@
 
 #include "shared/etc.h"
 
-/* The copy shop's item choice prompts. */
-#define FAIRY_MESSAGE_COPY_DECLINED       0x5F
-#define FAIRY_MESSAGE_COPY_PICK_ITEM      0x60
-#define FAIRY_MESSAGE_COPY_CONFIRM_ITEM   0x61
-#define FAIRY_MESSAGE_COPY_CHOOSE_ANOTHER 0x63
-
 /* g_EmiOverlayHeader */
 /* Entries of the handler tables. */
-#define COMMU04_STEP_COUNT                2
-#define COMMU04_STEP0_COUNT               7
+#define COMMU04_STEP_COUNT  2
+#define COMMU04_STEP0_COUNT 7
 
 /* D_801D1750 */
 extern Callback g_Commu04States[COMMU04_STEP_COUNT];

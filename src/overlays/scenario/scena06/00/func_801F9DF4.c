@@ -98,7 +98,7 @@ MATCH void func_801F9DF4(void) {
             g_SceneState.step_05 = 16;
             break;
         case 16:
-            SCENE_MESSAGE_WAIT(0x23, 17);
+            SCENE_MESSAGE_WAIT(MSG_035, 17);
             break;
         case 17:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {

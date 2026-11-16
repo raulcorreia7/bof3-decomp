@@ -11,7 +11,7 @@ MATCH void func_801F82F4(void) {
     switch (g_SceneState.step_05) {
         case 0:
             Game_SetScriptActive();
-            SCENE_MESSAGE_WAIT(0x30, 1);
+            SCENE_MESSAGE_WAIT(MSG_048, 1);
             break;
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {

@@ -8,15 +8,10 @@
 #include "area/spad.h"
 #include "area/effects.h"
 
-/* The gate keeper's two refusals: the Patriarch's permission and the holy
- * ground's special permission. */
-#define AREA082_MSG_NEED_PATRIARCH_PERMISSION 3
-#define AREA082_MSG_NEED_SPECIAL_PERMISSION   8
-
 /* The work-window byte offset, row stride and row count this overlay clears. */
-#define SCRATCH_COLUMN_OFFSET                 0
-#define SCRATCH_COLUMN_STRIDE                 0x14
-#define SCRATCH_COLUMN_COUNT                  0x80
+#define SCRATCH_COLUMN_OFFSET 0
+#define SCRATCH_COLUMN_STRIDE 0x14
+#define SCRATCH_COLUMN_COUNT  0x80
 
 extern u8 D_801F5734[];
 

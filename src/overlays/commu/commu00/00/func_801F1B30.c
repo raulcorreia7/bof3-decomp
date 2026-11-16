@@ -7,7 +7,7 @@ MATCH void func_801F1B30(void) {
 
     state = &g_GameStateIndex;
     if (*state == GAME_REQUEST_IDLE) {
-        Message_StartAreaMessage(FAIRY_MESSAGE_GIFT_BAG_FULL);
+        Message_StartAreaMessage(MSG_151);
         *state           = GAME_REQUEST_MESSAGE;
         FAIRY_EVENT_STEP = FAIRY_EVENT_STEP - 1;
     }

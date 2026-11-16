@@ -28,7 +28,7 @@ MATCH void func_801F37AC(void) {
                 SYS_SetFlag(g_SceneEventFlags, 0x94);
                 SYS_SetFlag(g_SceneEventFlags, 0x33);
             } else {
-                g_MessageRequest = AREA100_MSG_CODE_REJECTED;
+                g_MessageRequest = MSG_009;
                 SYS_ClearFlag(g_SceneEventFlags, 0x33);
             }
             break;

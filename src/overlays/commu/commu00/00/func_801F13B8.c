@@ -9,6 +9,6 @@ MATCH s32 func_801F13B8(void) {
     TEXT_Format(dest, fmt, D_80145034);
     TEXT_Format(dest + 0x20, fmt, D_80145038);
     TEXT_Format(dest + 0x40, fmt, D_8014503C);
-    MESSAGE_START_WAIT(FAIRY_MESSAGE_PLAY_RECORD_COUNTS);
+    MESSAGE_START_WAIT(MSG_086);
     return 0;
 }

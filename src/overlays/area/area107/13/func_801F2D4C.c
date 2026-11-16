@@ -8,7 +8,7 @@ MATCH void func_801F2D4C(void) {
 
     ACTOR_COUNT_DOWN(timer, timer);
     if (!(timer & BYTE_MASK)) {
-        Message_StartAreaMessage(1);
+        Message_StartAreaMessage(MSG_001);
         work              = g_Task;
         g_GameStateIndex  = GAME_REQUEST_MESSAGE;
         work->header.mode = 4;

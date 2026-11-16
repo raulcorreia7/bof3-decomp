@@ -14,7 +14,7 @@ MATCH void func_801F529C(void) {
             game_state = &g_GameStateIndex;
             if (*game_state != GAME_REQUEST_MESSAGE) {
                 Item_VitalAdd(6);
-                Message_StartAreaMessage(AREA135_MSG_ID_CARD_FOUND);
+                Message_StartAreaMessage(MSG_129);
                 *game_state = GAME_REQUEST_MESSAGE;
                 SND_PauseBGM(g_SndBGMId);
                 SND_StartXAStream(2, 1);
@@ -33,7 +33,7 @@ MATCH void func_801F529C(void) {
         case 5:
             at_cell = func_801F60E0();
             if (at_cell != 0) {
-                Message_StartAreaMessage(AREA135_MSG_CATWALK_OCCUPIED);
+                Message_StartAreaMessage(MSG_135);
                 goto message_request;
             } else {
                 SYS_ToggleFlag(g_SceneEventFlags, 42);
@@ -56,9 +56,9 @@ MATCH void func_801F529C(void) {
         case 10:
             if (SYS_TestFlag(g_SceneEventFlags, 12)) {
                 sprintf(g_TextVariables, D_801F2C04, g_SceneEventState.selection);
-                Message_StartAreaMessage(AREA135_MSG_PLATFORM_ACTIVATED);
+                Message_StartAreaMessage(MSG_132);
             } else {
-                Message_StartAreaMessage(AREA135_MSG_PLATFORM_PROGRAM_HELP);
+                Message_StartAreaMessage(MSG_131);
                 SYS_SetFlag(g_SceneEventFlags, 12);
             }
         message_request:

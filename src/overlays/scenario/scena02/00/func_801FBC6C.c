@@ -11,7 +11,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801FBC6C(void) {
     switch (g_SceneState.step_05) {
         case 0:
-            Message_StartAreaMessage(0x6F);
+            Message_StartAreaMessage(MSG_111);
             g_GameStateIndex     = 2;
             g_SceneState.step_05 = 1;
             break;

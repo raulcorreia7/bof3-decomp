@@ -2,6 +2,7 @@
 #define MENU_GAMEUI_H
 
 #include "types.h"
+#include "menu/message_ids.h"
 #include "game/character.h"
 
 /* Script interpreter state; the same 12-byte record in each handler. */

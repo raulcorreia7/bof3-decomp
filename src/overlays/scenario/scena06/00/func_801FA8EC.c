@@ -9,9 +9,9 @@ MATCH void func_801FA8EC(void) {
         case 0:
             g_SceneState.step_05 = 1;
             if (!SYS_TestFlag(g_SceneFlags, 39)) {
-                Message_StartAreaMessage(8);
+                Message_StartAreaMessage(MSG_008);
             } else {
-                Message_StartAreaMessage(0xA);
+                Message_StartAreaMessage(MSG_010);
             }
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             break;
@@ -28,11 +28,11 @@ MATCH void func_801FA8EC(void) {
             break;
         case 5:
             if (SYS_TestFlag(g_SceneFlags, 39)) {
-                Message_StartAreaMessage(0xA);
+                Message_StartAreaMessage(MSG_010);
             } else if (SYS_TestFlag(g_SceneFlags, 37)) {
-                Message_StartAreaMessage(8);
+                Message_StartAreaMessage(MSG_008);
             } else {
-                SCENE_MESSAGE_WAIT(9, 6);
+                SCENE_MESSAGE_WAIT(MSG_009, 6);
                 break;
             }
             g_GameStateIndex     = GAME_REQUEST_MESSAGE;

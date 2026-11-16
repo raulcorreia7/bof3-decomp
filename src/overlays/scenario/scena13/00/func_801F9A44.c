@@ -113,7 +113,7 @@ MATCH void func_801F9A44(void) {
                 break;
             }
             SND_StartXAStream(5, 1);
-            Message_StartAreaMessage(5);
+            Message_StartAreaMessage(MSG_005);
             g_GameStateIndex     = 2;
             g_SceneState.step_05 = 0xF;
             break;
