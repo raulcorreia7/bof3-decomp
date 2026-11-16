@@ -54,7 +54,6 @@ extern u8                 D_800B6BF0[];
 u8                        Battle_CanTarget(s32 selector, u32 battler_index);
 /* The battle/battle/15 sprite-cell routines, called with a battler or the effect work record. */
 u32                       func_800AFB48(PartyMember* record);
-void                      func_800AF8F0(PartyMember* record);
 void                      func_800AFAB8(PartyMember* record);
 /* One halfword per entry of the sprite upload queue. */
 extern u16                D_80145A54[];

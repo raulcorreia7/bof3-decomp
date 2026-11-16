@@ -6,7 +6,7 @@ MATCH s32 Party_JoinMember(s32 char_id) {
     func_801C1840();
     id = char_id & BYTE_MASK;
     /* FAKE: retail reads g_CharSlot as u8[]. */
-    g_Characters[((u8*)g_CharSlot)[id]].party_flags |= 1;
+    g_Characters[((u8*)g_CharSlot)[id]].party_flags |= PARTY_FLAG_JOINED;
     if (g_PartySize < PARTY_SLOT_COUNT) {
         g_PartyFieldOrder[g_PartySize]           = char_id;
         g_PartyBattleOrder[g_PartySize]          = char_id;

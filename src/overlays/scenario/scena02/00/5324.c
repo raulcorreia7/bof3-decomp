@@ -407,9 +407,9 @@ MATCH void Party_JoinRei(void) {
 /* Scene_RemoveReiTeepo */
 /* func_801FE1C0 */
 MATCH void Scene_RemoveReiTeepo(void) {
-    g_Characters[g_CharSlot[CHAR_ID_REI]].party_flags &= 0xFE;
+    g_Characters[g_CharSlot[CHAR_ID_REI]].party_flags &= ~PARTY_FLAG_JOINED;
     FAKE_BARRIER(); /* FAKE: retail keeps the second index load below the first store. */
-    g_Characters[g_CharSlot[CHAR_ID_TEEPO]].party_flags &= 0xFE;
+    g_Characters[g_CharSlot[CHAR_ID_TEEPO]].party_flags &= ~PARTY_FLAG_JOINED;
     Party_RemoveMember(CHAR_ID_REI);
     Party_RemoveMember(CHAR_ID_TEEPO);
     Party_LoadPalettes();

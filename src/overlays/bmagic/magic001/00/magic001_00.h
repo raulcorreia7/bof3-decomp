@@ -7,7 +7,6 @@
 
 /* battle/battle/15: the sprite cell of a battle record, and its copies into the cell rows. */
 u32  func_800AFB48(void* record);
-void func_800AF8F0(void* record);
 void func_800AFAB8(void* record);
 
 #define MAGIC001_STEP_COUNT 11
