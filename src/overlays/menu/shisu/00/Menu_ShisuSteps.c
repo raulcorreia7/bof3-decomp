@@ -503,4 +503,44 @@ NON_MATCHING void func_801D27BC(void) {
 INCLUDE_ASM(func_801D27BC);
 #endif
 
+#ifdef NON_MATCHING
+NON_MATCHING s32 func_801D2978(void) {
+    s8 amount;
+    u8 saved[3];
+
+    amount = g_MenuStatusItems.used[1] - g_MenuStatusItems.unk_08;
+    if (amount <= 0) {
+        amount = 1;
+    }
+    if (amount > 20) {
+        amount = 20;
+    }
+    D_801DA088 = D_801D9688[amount];
+
+    saved[0] = D_801DA0A5;
+    saved[1] = D_801DA0A6;
+    saved[2] = D_801DA0A7;
+    if (g_MenuStatusItems.used[2] * 3 < 0xFF - saved[0]) {
+        D_801DA0A5 = saved[0] + g_MenuStatusItems.used[2] * 3;
+    } else {
+        D_801DA0A5 = 0xFF;
+    }
+    if (g_MenuStatusItems.used[2] * 3 < 0xFF - D_801DA0A6) {
+        D_801DA0A6 += g_MenuStatusItems.used[2] * 3;
+    } else {
+        D_801DA0A6 = 0xFF;
+    }
+    if (g_MenuStatusItems.used[2] * 3 < D_801DA0A7) {
+        D_801DA0A7 -= g_MenuStatusItems.used[2] * 3;
+    } else {
+        D_801DA0A7 = 0;
+    }
+    func_801D2308(&D_801DA044 + 1);
+    D_801DA0A5 = saved[0];
+    D_801DA0A6 = saved[1];
+    D_801DA0A7 = saved[2];
+    return saved[2];
+}
+#else
 INCLUDE_ASM(func_801D2978);
+#endif
