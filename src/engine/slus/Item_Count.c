@@ -42,7 +42,7 @@ MATCH s32 Item_Count(u8 category, u8 item_id, u8 mode) {
                     if (record->equip.armor == item_id)
                         count++;
                     break;
-                case ITEM_CAT_OPTION:
+                case ITEM_CAT_ACCESSORY:
                     if (record->equip.accessories[0] == item_id)
                         count++;
                     if (record->equip.accessories[1] == item_id)
@@ -51,7 +51,7 @@ MATCH s32 Item_Count(u8 category, u8 item_id, u8 mode) {
             }
         }
     }
-    if (category == ITEM_CAT_OPTION) {
+    if (category == ITEM_CAT_ACCESSORY) {
         if (g_FishingRod == item_id)
             count++;
         if (g_FishingLure == item_id)

@@ -58,8 +58,8 @@ MATCH void Menu_DrawEquipCompareWindow(u8 index, s32 x, s32 y, u8* patch, u8 hid
     compare.names[EQUIP_SLOT_SHIELD]      = g_Armors[chr->equip.shield].header.name;
     compare.names[EQUIP_SLOT_HELMET]      = g_Armors[chr->equip.helmet].header.name;
     compare.names[EQUIP_SLOT_ARMOR]       = g_Armors[chr->equip.armor].header.name;
-    compare.names[EQUIP_SLOT_ACCESSORY_1] = (u8*)g_OptionItems[chr->equip.accessories[0]].header.name;
-    compare.names[EQUIP_SLOT_ACCESSORY_2] = (u8*)g_OptionItems[chr->equip.accessories[1]].header.name;
+    compare.names[EQUIP_SLOT_ACCESSORY_1] = (u8*)g_Accessories[chr->equip.accessories[0]].header.name;
+    compare.names[EQUIP_SLOT_ACCESSORY_2] = (u8*)g_Accessories[chr->equip.accessories[1]].header.name;
     for (i = 0; i < EQUIP_SLOT_COUNT; i++) {
         if (i == task->unk_0B) {
             func_801AEA80((u16)(left + 6), (u16)(top + (i * 13 + 87)), g_MenuEquipSlotIcons[i], 1);

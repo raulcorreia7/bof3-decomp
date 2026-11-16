@@ -12,14 +12,14 @@ MATCH void func_801E10C8(void) {
     g_Task->unk_09 = count;
     if (count == 0) {
         if (g_Task->unk_03 == 3) {
-            g_Game.current->chr.equip.accessories[0] = OPTION_ITEM_NOTHING;
+            g_Game.current->chr.equip.accessories[0] = ACCESSORY_NOTHING;
         }
         if (g_Task->unk_03 == 5) {
             g_Game.current->chr.equip.armor = ARMOR_NOTHING;
             func_801E0B64();
         }
         if (g_Task->unk_03 == 6) {
-            g_Game.current->chr.equip.accessories[1] = OPTION_ITEM_NOTHING;
+            g_Game.current->chr.equip.accessories[1] = ACCESSORY_NOTHING;
         }
         current = g_Game.current;
         current->chr.status &= ~STATUS_KO;

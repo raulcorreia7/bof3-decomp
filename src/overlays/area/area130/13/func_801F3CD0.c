@@ -35,9 +35,9 @@ MATCH void func_801F3CD0(void) {
                     Item_Add(ITEM_CAT_WEAPON, WEAPON_BARBAROSSA, 1, 0);
                     break;
                 case 5:
-                    record = Item_GetRecord(ITEM_CAT_OPTION, OPTION_ITEM_SHAMANS_RING);
+                    record = Item_GetRecord(ITEM_CAT_ACCESSORY, ACCESSORY_SHAMANS_RING);
                     strncpy((char*)g_TextVariables[0], (char*)record, ITEM_NAME_LENGTH);
-                    Item_Add(ITEM_CAT_OPTION, OPTION_ITEM_SHAMANS_RING, 1, 0);
+                    Item_Add(ITEM_CAT_ACCESSORY, ACCESSORY_SHAMANS_RING, 1, 0);
                     break;
             }
             g_TextVariables[0][ITEM_NAME_LENGTH] = 0;

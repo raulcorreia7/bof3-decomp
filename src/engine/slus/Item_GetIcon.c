@@ -13,7 +13,7 @@ MATCH s32 Item_GetIcon(ItemCategory category, s32 item_id) {
             return g_Weapons[item_id & BYTE_MASK].icon & 0xF;
         case ITEM_CAT_ARMOR:
             return g_Armors[item_id & BYTE_MASK].equip_type & 0xF;
-        case ITEM_CAT_OPTION:
-            return g_OptionItems[item_id & BYTE_MASK].type & 0xF;
+        case ITEM_CAT_ACCESSORY:
+            return g_Accessories[item_id & BYTE_MASK].type & 0xF;
     }
 }

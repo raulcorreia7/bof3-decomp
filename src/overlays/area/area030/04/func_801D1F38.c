@@ -10,10 +10,10 @@ MATCH void func_801D1F38(void) {
 
     if (g_FrameCount & 0x40) {
         label = g_FishingRod;
-        UI_DrawText(138, 200, 0, 12, (u8*)((label * OPTION_ITEM_STRIDE) + (u32)g_OptionItems));
+        UI_DrawText(138, 200, 0, 12, (u8*)((label * ACCESSORY_STRIDE) + (u32)g_Accessories));
     } else {
         label = g_FishingLure;
-        UI_DrawText(138, 200, 0, 12, (u8*)((label * OPTION_ITEM_STRIDE) + (u32)g_OptionItems));
+        UI_DrawText(138, 200, 0, 12, (u8*)((label * ACCESSORY_STRIDE) + (u32)g_Accessories));
     }
 
     count = (g_SpawnedActors[0].unk_07 - g_FishingLureRow->unk_0F);

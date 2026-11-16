@@ -3342,7 +3342,7 @@ g_Items = { addr = 0x801C8964, size = 0x678, source = "The Item records of GAME.
 g_VitalItems = { addr = 0x801C8FDC, size = 0x100, source = "The VitalItem records of GAME.EMI that every image reads." }
 g_Weapons = { addr = 0x801C90DC, size = 0x7C8, source = "The Weapon records of GAME.EMI that every image reads, indexed by equip.weapon." }
 g_Armors = { addr = 0x801C98A4, size = 0x5D8, source = "The Armor records of GAME.EMI that every image reads, indexed by equip.shield, helmet and armor." }
-g_OptionItems = { addr = 0x801C9E7C, size = 0x410, source = "The option item records (category 3: accessories, lures and rods) of GAME.EMI that every image reads, indexed by equip.accessories." }
+g_Accessories = { addr = 0x801C9E7C, size = 0x410, source = "The accessory records (category 3: accessories, lures and rods) of GAME.EMI that every image reads, indexed by equip.accessories." }
 g_GameShopStock = { addr = 0x801CA28C, size = 0x398, source = "The ShopStock records of GAME.EMI: the shop picks one in func_801D0EDC and the fairy village writes one in func_801F12C8." }
 D_801CA624 = { addr = 0x801CA624, size = 0xE8, source = "232 zeroed bytes of GAME.EMI data; no matched code reads them." }
 g_Abilities = { addr = 0x801CA70C, size = 0x11D0, source = "The 228 Ability records of GAME.EMI." }
@@ -7068,9 +7068,9 @@ g_IdentifiedEnemies = { addr = 0x80144FA0, size = 0x20, source = "One bit per en
 g_PlayClock = { addr = 0x80144FC0, size = 0x4, source = "Play time." }
 g_FishingBestCatch = { addr = 0x80144FE4, size = 0x20, source = "Best catch of each fish." }
 g_EmiLoadedCharacterIndex = { addr = 0x80145024, source = "Index of the last loaded EMI character." }
-g_FishingLure = { addr = 0x80145026, source = "Option item id of the equipped lure; Item_Count counts it with the held option items." }
+g_FishingLure = { addr = 0x80145026, source = "Accessory id of the equipped lure; Item_Count counts it with the held accessories." }
 g_FishingLureQty = { addr = 0x80145027, source = "Number of equipped lures held; Item_Count adds it to the lure's item count." }
-g_FishingRod = { addr = 0x80145028, source = "Option item id of the equipped rod; Item_Count counts it with the held option items." }
+g_FishingRod = { addr = 0x80145028, source = "Accessory id of the equipped rod; Item_Count counts it with the held accessories." }
 g_SndBGMId = { addr = 0x80145029, source = "Id of the background music being played." }
 g_BattleCount = { addr = 0x8014502C, source = "Number of battles fought." }
 g_InventoryIds = { addr = 0x8014504C, size = 0x200, source = "Item ids of each inventory category." }

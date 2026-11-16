@@ -26,7 +26,7 @@ MATCH void Menu_DrawEquipChoiceWindow(MenuPanelTask* task) {
             break;
         case EQUIP_SLOT_ACCESSORY_1:
         case EQUIP_SLOT_ACCESSORY_2:
-            task->unk_08 = ITEM_CAT_OPTION;
+            task->unk_08 = ITEM_CAT_ACCESSORY;
             break;
     }
 

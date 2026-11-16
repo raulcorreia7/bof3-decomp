@@ -192,8 +192,8 @@ MATCH void func_801EF470(u8 item_id, u8 category, s32 y) {
             case ITEM_CAT_ARMOR:
                 record = (u8*)&g_Armors[item_id];
                 break;
-            case ITEM_CAT_OPTION:
-                record = (u8*)&g_OptionItems[item_id];
+            case ITEM_CAT_ACCESSORY:
+                record = (u8*)&g_Accessories[item_id];
                 break;
         }
         UI_DrawText(112, (s16)y, 0, Game_ReadCommand(record) & BYTE_MASK, record);
