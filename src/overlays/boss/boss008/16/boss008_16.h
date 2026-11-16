@@ -36,7 +36,7 @@ void func_800C236C(u8 phase);
  * record 0x83; the finish plays script 0 and copies the halfwords at +0x58 and +0x5A of the first enemy record. A
  * member that marks the record writes that statement between the two. */
 #define BOSS008_END_BATTLE_BEGIN(slot)          \
-    func_800AC844(slot);                        \
+    Battle_ShowActorEntry(slot);                \
     g_Task = (PartyMember*)func_800AC754(slot); \
     Area_SelectSceneRecord(0x83)
 

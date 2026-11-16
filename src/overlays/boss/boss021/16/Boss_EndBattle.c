@@ -3,7 +3,7 @@
 MATCH void Boss_EndBattle(void) {
     u8* work;
 
-    func_800AC844(0);
+    Battle_ShowActorEntry(0);
     work = (u8*)func_800AC754(0);
     TASK_SET(work);
     work[0x2A] = 0;

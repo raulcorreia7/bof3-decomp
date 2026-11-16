@@ -54,7 +54,6 @@ static inline void Boss_StartEnemyScriptAction(u8* script, ModeFunc handler, u16
     Actor_StepAnimLoop();
 }
 
-void func_800AC870(s32 entry_id, PartyMember* source_record, s32 mode);
 void func_800C1978(s32 mode);
 void func_800C1998(s32 mode);
 /* func_800C1ACC (boss014), func_800C1AE8 (boss024), func_800C1E74 (boss002), func_800C1FE8 (boss004), func_800C20C0

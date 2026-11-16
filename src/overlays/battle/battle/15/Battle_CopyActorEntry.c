@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-MATCH void func_800AC870(s32 entry_id, PartyMember* source_record, s32 mode) {
+/* func_800AC870 */
+MATCH void Battle_CopyActorEntry(s32 entry_id, PartyMember* source_record, s32 mode) {
     PartyMember* dst;
 
     dst = (PartyMember*)Battle_FindActorEntry(entry_id & BYTE_MASK);

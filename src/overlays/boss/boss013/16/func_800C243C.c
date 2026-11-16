@@ -3,7 +3,7 @@
 MATCH void func_800C243C(void) {
     if (!(g_Battle.outcome.result & BATTLE_RESULT_VICTORY)) {
         if (!(g_Battle.boss_flags & 0x1)) {
-            func_800AC844(2);
+            Battle_ShowActorEntry(2);
             TASK_SET(func_800AC754(2));
             Area_SelectSceneRecord(0xF9);
             g_Task->unk_24 &= 0xFE;
@@ -14,13 +14,13 @@ MATCH void func_800C243C(void) {
             }
             g_Task->unk_2A = 1;
         }
-        func_800AC844(1);
+        Battle_ShowActorEntry(1);
         TASK_SET(func_800AC754(1));
         Area_SelectSceneRecord(0xEF);
         Actor_SelectScript(0);
         g_Task->unk_58 = g_BattleEnemyBattlers[1].unk_58;
         g_Task->unk_5A = g_BattleEnemyBattlers[1].unk_5A;
-        func_800AC844(0);
+        Battle_ShowActorEntry(0);
         TASK_SET(func_800AC754(0));
         Area_SelectSceneRecord(0xEE);
         Actor_SelectScript(0);
