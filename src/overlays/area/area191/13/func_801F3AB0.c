@@ -13,7 +13,7 @@ MATCH void func_801F3AB0(void) {
     buffer_ptr = buffer;
     count      = 0;
     do {
-        if (g_Characters[count].unk_07 & 0x1) {
+        if (g_Characters[count].party_flags & 0x1) {
             g_Characters[count].status = 0;
             g_Characters[count].hp     = g_Characters[count].stats.max_hp;
             g_Characters[count].ap     = g_Characters[count].stats.max_ap;

@@ -133,7 +133,7 @@ D_801EB0B1 = { addr = 0x801EB0B1, alias = true, source = "Position offsets by pa
 s_BattlePanelYOffsets = { addr = 0x801EB108, source = "Battle panel vertical positions." }
 s_BattleCharacterSprites = { addr = 0x801EB18C, source = "Battle sprite step ids per party character." }
 g_BattleTaskFuncs = { addr = 0x801EB1B4, source = "Battle task state handlers." }
-s_BattleCharacterStepIds = { addr = 0x801EB230, source = "Step id of each character (0x28 entries) that func_801E16B4 stores in the task byte 0x09 by character_id." }
+g_BattleCharacterStepIds = { addr = 0x801EB230, source = "Step id of each character (0x28 entries) that func_801E16B4 stores in the task byte 0x09 by character_id." }
 g_BattleEnemies = { addr = 0x801EB2E8, alias = true, source = "The enemy battlers." }
 s_BattlePartialPartyTargetWeights = { addr = 0x801EB394, source = "Target weights for a party with two active members." }
 s_BattleFullPartyTargetWeights = { addr = 0x801EB39C, source = "Target weights for a party with three active members." }
@@ -5752,6 +5752,8 @@ Actor_SlideScreenDown16 = { addr = 0x801F38A4, type = "func", source = "Subtract
 Area_Update = { addr = 0x801F3914, type = "func", source = "Sets header.step (byte 0x02) to 3 when D_801454F2 is 2, then draws the area HUD at the actor screen_x with Area_DrawHud." }
 func_801F4158_area168 = { addr = 0x801F4158, type = "func", source = "mechanical disambiguation of the cross-image address-name collision with the area.h func_801F4158 edge_cross declaration (coordinator instruction)" }
 Message_ClearRequest = { addr = 0x801F4808, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 0 and g_SceneEventSelection to AREA_RESET_VARIANT." }
+D_801F4B2D = { addr = 0x801F4B2D, type = "u8", source = "D_801F4B2C+0x1", alias = true }
+D_801F4B2E = { addr = 0x801F4B2E, type = "u8", source = "D_801F4B2C+0x2", alias = true }
 
 ["emi/world04/area169/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
