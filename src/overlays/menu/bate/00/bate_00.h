@@ -115,8 +115,6 @@ extern u8       g_MenuEquipCompareLabels[];
 extern u8       g_MenuEquipCompareSprites[];
 extern u8       g_MenuEquipSlotIcons[];
 extern u8       g_MenuEquipStatSprites[];
-extern u8       g_MenuEquipChoiceIds[];
-extern u8       g_MenuEquipChoiceCounts[];
 extern u8       g_MenuInventoryTab1OnSprites[];
 /* D_801D896C */
 extern u8       g_MenuListTab1OffSprites[];
