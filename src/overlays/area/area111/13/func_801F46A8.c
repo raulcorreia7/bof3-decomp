@@ -14,7 +14,7 @@ MATCH void func_801F46A8(void) {
             }
         }
         for (j = 0; j < 7; j++) {
-            ((s32*)D_801F5C18)[j] = ((s32*)D_801F5BFC)[j];
+            D_801F5C18.rows[j] = D_801F5BFC.rows[j];
         }
         if (SYS_TestFlag(g_SceneEventFlags, 0x28) == 0) {
             func_801A4BC0(0x11, 0xAD, 0x50);
