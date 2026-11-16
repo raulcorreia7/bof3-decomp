@@ -104,5 +104,6 @@ extern SceneFunc g_SceneActorDispatch[];
 void func_801F6FAC(void);
 void func_801F781C(u16 x, u16 y, u16 width, u16 height);
 void func_801F79E8(u16 x, u16 y);
+u16  func_801FD278(void);
 
 #endif
