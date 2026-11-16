@@ -19,7 +19,7 @@ MATCH void func_801F38DC(void) {
             if (*request == GAME_REQUEST_IDLE) {
                 Message_StartAreaMessage(0xB5);
                 *request = GAME_REQUEST_MESSAGE;
-                *state           = *state + 1;
+                *state   = *state + 1;
             }
             break;
         case 2:

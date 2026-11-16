@@ -9,8 +9,8 @@ NON_MATCHING s32 func_801F3570(void) {
 
     row = 0;
     do {
-        y       = row + 0x20;
-        column  = 0;
+        y      = row + 0x20;
+        column = 0;
         do {
             x = column + 0x94;
             if ((func_801F30B8(x, y) & BYTE_MASK) != D_801F4960[row][column]) {
