@@ -35,7 +35,7 @@ MATCH u8 func_801F330C(void) {
                     if (timer == 0) {
                         row->active = 0;
                     }
-                    func_801F2F60(row);
+                    Area_DrawRingQuads(row);
                     break;
             }
         }

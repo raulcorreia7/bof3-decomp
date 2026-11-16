@@ -15,7 +15,7 @@ MATCH void func_801F3548(void) {
     count      = 0;
     record     = g_Characters;
     do {
-        if (g_Characters[count].unk_07 & 0x1) {
+        if (g_Characters[count].party_flags & 0x1) {
             g_Characters[count].status = 0;
             g_Characters[count].hp     = g_Characters[count].stats.max_hp;
             g_Characters[count].ap     = g_Characters[count].stats.max_ap;
