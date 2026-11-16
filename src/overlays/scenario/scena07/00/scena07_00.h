@@ -65,7 +65,6 @@ extern u8              D_801FDDA4[];
 extern u8              D_801FDE8C[];
 extern u8              D_801FDF7C[];
 /* D_801FDF8C */
-extern SceneFunc       g_SceneActorDispatch[];
 extern u8              D_801FDFC4;
 
 /* The record D_801FDFBC points at: a world position the burst draws around and its size. */
@@ -172,7 +171,6 @@ u8   func_801F9EFC(void);
 u8*  func_801F9DD4(void);
 
 /* D_801FDD14 */
-extern Callback g_SceneEntityDispatch[];
 
 extern u8       D_80144DF2;
 extern u8       D_80144DF5;
