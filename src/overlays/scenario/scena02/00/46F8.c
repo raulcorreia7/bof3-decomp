@@ -23,4 +23,3 @@ MATCH void func_801FB300(void) {
     }
 }
 
-INCLUDE_ASM(func_801FB36C);
