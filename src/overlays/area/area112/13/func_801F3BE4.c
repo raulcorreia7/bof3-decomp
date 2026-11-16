@@ -10,9 +10,9 @@ NON_MATCHING s32 func_801F3BE4(s32 x, s32 y) {
 
     /* FAKE: retail reserves eight bytes of frame that no access explains. */
     FAKE_STACK_PADS(u8, 8);
-    count = g_Game.party_size;
+    i     = 0;
+    count = g_PartySize;
     if (count > 0) {
-        i = 0;
         do {
             if (g_Game.members[i].header.flags != 0) {
                 height = (g_Game.members[i].unk_70 + 2) << 15;
