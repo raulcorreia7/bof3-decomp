@@ -219,6 +219,7 @@ NON_MATCHING void func_801F75BC(u8 weight, u8 shade) {
     u8       i;
     u32      off;
     u32      flicker;
+    u32      tint;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 960, 0), 0);
     GFX_AddPrim(1, sizeof(DR_MODE));
@@ -228,14 +229,15 @@ NON_MATCHING void func_801F75BC(u8 weight, u8 shade) {
         SetLineG2(line);
         SetSemiTrans(line, 1);
         off      = i << 5;
-        point[0] = KEY_WORD(off, 0) + (((KEY_WORD(off, 4) - KEY_WORD(off, 0)) * weight) >> 4);
-        point[1] = KEY_WORD(off, 1) + (((KEY_WORD(off, 5) - KEY_WORD(off, 1)) * weight) >> 4);
-        point[2] = KEY_WORD(off, 2) + (((KEY_WORD(off, 6) - KEY_WORD(off, 2)) * weight) >> 4);
+        point[0] = (((KEY_WORD(off, 4) - KEY_WORD(off, 0)) * weight) >> 4) + KEY_WORD(off, 0);
+        point[1] = (((KEY_WORD(off, 5) - KEY_WORD(off, 1)) * weight) >> 4) + KEY_WORD(off, 1);
+        point[2] = (((KEY_WORD(off, 6) - KEY_WORD(off, 2)) * weight) >> 4) + KEY_WORD(off, 2);
         Area_ProjectPoint((s32*)((u8*)D_801FA2C0 + off), (DVECTOR*)&line->x0);
         Area_ProjectPoint(point, (DVECTOR*)&line->x1);
         flicker = (g_FrameCount & 1) << 2;
         setRGB0(line, ((flicker + 0x80) * shade) >> 8, ((flicker + 0x80) * shade) >> 8, (u8)(((flicker + 0x80) * shade) >> 8) >> 1);
-        setRGB1(line, (flicker * shade) >> 8, (flicker * shade) >> 8, (u8)((flicker * shade) >> 8) >> 1);
+        tint = (flicker * shade) >> 8;
+        setRGB1(line, tint, tint, (u8)tint >> 1);
         GFX_AddPrim(1, sizeof(LINE_G2));
     }
 }
