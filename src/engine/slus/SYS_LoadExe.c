@@ -1,12 +1,5 @@
 #include "engine/slus/slus.h"
 
-typedef struct {
-    u32 w0;
-    u32 w1;
-    u32 w2;
-    u32 w3;
-} SystemWord4;
-
 /* reads one EXE file into RAM in two sector-sized steps and copies
  * the first staged header block into the boot scratch area.
  */
@@ -28,11 +21,11 @@ MATCH s32 SYS_LoadExe(const char* path) {
         if (CdSearchFile(&file, (char*)current_path) != NULL) {
             CdControl(CdlSetloc, (u_char*)&file, NULL);
             if (SYS_ReadCD(0x800, D_801459F8, sectors) == 0) {
-                SystemWord4* s = (SystemWord4*)D_801459F8;
-                SystemWord4* d = (SystemWord4*)D_80143E70;
-                SystemWord4* e = s + 8;
-                u32          w0;
-                u32          w1;
+                WorkChunk* s = (WorkChunk*)D_801459F8;
+                WorkChunk* d = (WorkChunk*)D_80143E70;
+                WorkChunk* e = s + 8;
+                u32        w0;
+                u32        w1;
 
                 do {
                     *d++ = *s++;
