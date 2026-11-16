@@ -17,7 +17,7 @@ MATCH void Game_RunMain(void) {
     Menu_ResetPanelTasks();
 
     while (1) {
-        callbacks = g_GameStates;
+        callbacks = g_GameModes;
         callbacks[GAME_SEL_STATE->state]();
         Game_UpdateClock();
         SYS_ThreadWait(1u);

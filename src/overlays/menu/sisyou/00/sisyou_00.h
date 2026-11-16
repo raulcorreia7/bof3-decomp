@@ -123,13 +123,13 @@ extern u8                 D_801D41BB;
 /* D_801D41BC */
 extern s16                g_MenuMasterMessageIds[MASTER_MENU_MESSAGE_ID_COUNT];
 /* D_801D4204 */
-extern Callback           g_MenuMasterStep2Funcs[SISYOU_SUB2_HANDLER_COUNT];
+extern Callback           g_MenuMasterStep2Steps[SISYOU_SUB2_HANDLER_COUNT];
 /* D_801D421C */
-extern Callback           g_MenuMasterStep3Funcs[SISYOU_SUB3_HANDLER_COUNT];
+extern Callback           g_MenuMasterStep3Steps[SISYOU_SUB3_HANDLER_COUNT];
 /* D_801D4240 */
-extern Callback           g_MenuMasterStep4Funcs[SISYOU_SUB4_HANDLER_COUNT];
+extern Callback           g_MenuMasterStep4Steps[SISYOU_SUB4_HANDLER_COUNT];
 /* D_801D4264 */
-extern Callback           g_MenuMasterStep5Funcs[SISYOU_SUB5_HANDLER_COUNT];
+extern Callback           g_MenuMasterStep5Steps[SISYOU_SUB5_HANDLER_COUNT];
 /* D_801D4270 */
 extern u8                 g_MenuMasterActorModes[MASTER_ACTOR_MODE_COUNT];
 extern u8                 g_MenuMasterBannerLock;
@@ -139,8 +139,8 @@ extern u8                 g_MenuMasterPanelLock;
 extern u8                 D_801D4288;
 extern u8                 g_MenuMasterScrollOffset;
 extern u8                 g_MenuMasterCursor;
-extern Callback           g_MasterMenuStates[MASTER_MENU_STEP_COUNT];
-extern Callback           g_MasterMenuSubFuncs[MASTER_MENU_SUBSTEP_COUNT];
+extern Callback           g_MasterMenuSteps[MASTER_MENU_STEP_COUNT];
+extern Callback           g_MasterMenuSubSteps[MASTER_MENU_SUBSTEP_COUNT];
 
 /* Functions, in address order. */
 void Menu_ResetMasterPanel(void);

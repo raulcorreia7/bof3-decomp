@@ -74,7 +74,7 @@ extern u8   g_SaveCardPortLabelSecond[];
 /* The overlay's step and sub-step handler pools; the tables are views into one
  * callback run, selected by the shared menu step bytes. */
 /* D_801D86E0 */
-extern Callback g_MenuBateStates[MENU_BATE_STEP_COUNT];
+extern Callback g_MenuBateSteps[MENU_BATE_STEP_COUNT];
 extern s8       D_801D86F0;
 extern u8       g_MenuLabelAgility[];
 /* D_801D8B38 */
@@ -87,21 +87,21 @@ extern u8       D_801D8B48[];
 extern u8       D_801D8B4C[];
 extern u8       g_MenuPortraitAtlas[];
 /* D_801D8700 */
-extern Callback g_MenuBateStep2Funcs[MENU_BATE_STEP2_COUNT];
+extern Callback g_MenuBateStep2Steps[MENU_BATE_STEP2_COUNT];
 extern u8       g_MenuCaptionIcon[];
 extern u8       g_MenuClockColon[];
 extern u8*      g_MenuCommandLabels[];
 extern u8       g_MenuCommandRows[][5];
 /* D_801D870C */
-extern Callback g_MenuBateStep2Sub0Funcs[MENU_BATE_STEP2_SUB0_COUNT];
+extern Callback g_MenuBateStep2Sub0Steps[MENU_BATE_STEP2_SUB0_COUNT];
 /* D_801D8718 */
-extern Callback g_MenuBateStep2Sub1Funcs[MENU_BATE_STEP2_SUB1_COUNT];
+extern Callback g_MenuBateStep2Sub1Steps[MENU_BATE_STEP2_SUB1_COUNT];
 /* D_801D8720 */
-extern Callback g_MenuBateStep2Sub2Funcs[MENU_BATE_STEP2_SUB2_COUNT];
+extern Callback g_MenuBateStep2Sub2Steps[MENU_BATE_STEP2_SUB2_COUNT];
 /* D_801D8764 */
-extern Callback g_MenuBateStep3Funcs[MENU_BATE_STEP3_COUNT];
+extern Callback g_MenuBateStep3Steps[MENU_BATE_STEP3_COUNT];
 /* D_801D8770 */
-extern Callback g_MenuBateStep3Sub0Funcs[MENU_BATE_STEP3_SUB0_COUNT];
+extern Callback g_MenuBateStep3Sub0Steps[MENU_BATE_STEP3_SUB0_COUNT];
 extern u8       D_801D8778[];
 /* D_801D893C */
 extern u8       g_MenuListTab2OffSprites[];

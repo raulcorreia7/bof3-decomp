@@ -2,5 +2,5 @@
 
 /* func_801F16BC */
 MATCH void Fairy_RunCommu01Scene(void) {
-    SYS_DISPATCH_BYTE(g_FairyCommu01States, g_SceneEventState.step);
+    SYS_DISPATCH_BYTE(g_FairyCommu01Steps, g_SceneEventState.step);
 }

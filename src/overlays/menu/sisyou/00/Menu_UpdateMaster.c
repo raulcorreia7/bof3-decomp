@@ -5,5 +5,5 @@
  * Menu_ApplyMasterMode, indexed by the step byte g_MenuMasterStep. */
 
 MATCH void Menu_UpdateMaster(void) {
-    SYS_DISPATCH_BYTE(g_MasterMenuStates, g_MenuMasterStep);
+    SYS_DISPATCH_BYTE(g_MasterMenuSteps, g_MenuMasterStep);
 }

@@ -80,11 +80,11 @@ Callback D_801E1D00[3] = {
 u8 D_801E1D0C[4] = {
     0xC0, 0xD0, 0xE0, 0xD0,
 };
-Callback g_FishingCastGaugeStates[4] = {
+Callback g_FishingCastGaugeSteps[4] = {
     (Callback)func_801D0C90, (Callback)Fishing_CastGaugeInit, (Callback)Fishing_CastGaugeSweep,
     (Callback)func_801D1F38,
 };
-Callback g_FishingLureStates[6] = {
+Callback g_FishingLureSteps[6] = {
     (Callback)func_801D0C90, (Callback)Fishing_LureCast, (Callback)Fishing_LureFly,
     (Callback)Fishing_LureSettle, (Callback)Fishing_LureFloat, (Callback)Fishing_LureHooked,
 };
@@ -101,7 +101,7 @@ FishingCueStep D_801E1D58[4] = {
 Callback D_801E1D78[2] = {
     (Callback)func_801D29BC, (Callback)func_801D2AE0,
 };
-Callback g_FishingReelGaugeStates[3] = {
+Callback g_FishingReelGaugeSteps[3] = {
     (Callback)func_801D0C90, (Callback)Fishing_ReelGaugeInit, (Callback)Fishing_ReelGaugeUpdate,
 };
 Callback D_801E1D8C[5] = {
@@ -156,14 +156,14 @@ u8 g_FishingPromptSets[9][4] = {
     {0x0D, 0xFF, 0xFF, 0x00},
     {0x0E, 0xFF, 0xFF, 0x00},
 };
-Callback g_FishingPromptStates[13] = {
+Callback g_FishingPromptSteps[13] = {
     (Callback)func_801D0C90, (Callback)func_801D3650, (Callback)Fishing_PromptSlideIn,
     (Callback)func_801D36F8, (Callback)func_801D3824, (Callback)func_801D3898,
     (Callback)func_801D3908, (Callback)Fishing_PromptSlideOut, (Callback)func_801D39B8,
     (Callback)func_801D3A54, (Callback)func_801D3C74, (Callback)func_801D3F40,
     (Callback)func_801D41E4,
 };
-Callback g_FishingStates[17] = {
+Callback g_FishingSteps[17] = {
     (Callback)func_801D0C90, (Callback)func_801D42E4, (Callback)func_801D4378,
     (Callback)func_801D4570, (Callback)func_801D45F8, (Callback)func_801D4680,
     (Callback)Fishing_CatchPageNext, (Callback)func_801D4984, (Callback)func_801D4B60,
@@ -289,16 +289,16 @@ Callback g_FishingSceneModes[12] = {
     (Callback)func_801DC590, (Callback)func_801DC64C, (Callback)func_801DC708,
     (Callback)func_801DC838, (Callback)func_801DD95C, (Callback)func_801DDBC8,
 };
-Callback g_FishingEntryStates[3] = {
+Callback g_FishingEntrySteps[3] = {
     (Callback)Fishing_EntryBegin, (Callback)Fishing_EntryWait, (Callback)Fishing_EntryDone,
 };
-Callback g_FishingReadyStates[11] = {
+Callback g_FishingReadySteps[11] = {
     (Callback)Fishing_ReadyBegin, (Callback)Fishing_ReadyWait, (Callback)Fishing_ChooseAction,
     (Callback)Fishing_ReadyPrompt, (Callback)Fishing_QuitSlideIn, (Callback)Fishing_QuitInput,
     (Callback)Fishing_QuitSlideOut, (Callback)Fishing_ReadyPrompt, (Callback)Fishing_CautionSlideIn,
     (Callback)Fishing_CautionInput, (Callback)Fishing_CautionSlideOut,
 };
-Callback g_FishingCastStates[4] = {
+Callback g_FishingCastSteps[4] = {
     (Callback)func_801DA5F8, (Callback)Fishing_CastInput, (Callback)func_801DA714,
     (Callback)func_801DA78C,
 };
@@ -306,7 +306,7 @@ Callback D_801E2258[4] = {
     (Callback)func_801DA92C, (Callback)func_801DA9DC, (Callback)func_801DAE3C,
     (Callback)func_801DAE84,
 };
-Callback g_FishingHookedStates[15] = {
+Callback g_FishingHookedSteps[15] = {
     (Callback)func_801DAF18, (Callback)func_801DAFBC, (Callback)Fishing_HookedReel,
     (Callback)Fishing_CatchRecord, (Callback)func_801DB620, (Callback)func_801DB738,
     (Callback)func_801DB808, (Callback)func_801DB8F0, (Callback)func_801DBA94,
@@ -342,7 +342,7 @@ Callback D_801E2304[4] = {
     (Callback)func_801DDC0C, (Callback)func_801DDC54, (Callback)func_801DDCB8,
     (Callback)func_801DDCF8,
 };
-void (*g_FishingFishStates[7])(void) = {
+void (*g_FishingFishSteps[7])(void) = {
     (void (*)(void))Fishing_FishAppear, (void (*)(void))Fishing_FishSwim, (void (*)(void))func_801DEBC4,
     (void (*)(void))func_801DECDC, (void (*)(void))func_801DF334, (void (*)(void))func_801DFFA8,
     (void (*)(void))func_801E00E0,

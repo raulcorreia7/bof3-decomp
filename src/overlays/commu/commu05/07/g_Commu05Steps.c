@@ -4,7 +4,7 @@ void func_801D0C4C(void);
 void func_801D0D4C(void);
 void func_801D0F34(void);
 
-Callback    g_Commu05States[3] = {func_801D0C4C, func_801D0D4C, func_801D0F34};
+Callback    g_Commu05Steps[3]  = {func_801D0C4C, func_801D0D4C, func_801D0F34};
 static char s_gap_801D195C[8]  = "faeries";
 static char s_gap_801D1964[8]  = "faery";
 static char s_gap_801D196C[8]  = "faeries";

@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 /* The commu01 overlay entry: the shared commu step byte selects the handler. */
 MATCH void func_801D0C2C(void) {
-    SYS_DISPATCH_BYTE(g_Commu01States, D_801F294C);
+    SYS_DISPATCH_BYTE(g_Commu01Steps, D_801F294C);
 }
 
 MATCH void func_801D0C68(void) {
@@ -68,7 +68,7 @@ MATCH void func_801D0CAC(void) {
 }
 
 MATCH void func_801D0E44(void) {
-    SYS_DISPATCH_BYTE(g_Commu01Step2Funcs, D_801D4E08);
+    SYS_DISPATCH_BYTE(g_Commu01Step2Steps, D_801D4E08);
 }
 
 MATCH void func_801D0E80(void) {
@@ -184,7 +184,7 @@ MATCH void func_801D1158(void) {
 }
 
 MATCH void func_801D1328(void) {
-    SYS_DISPATCH_BYTE(g_Commu01Step2Sub1Funcs, D_801F294D);
+    SYS_DISPATCH_BYTE(g_Commu01Step2Sub1Steps, D_801F294D);
 }
 
 /* Reads the fairy room list input and draws the selected room. */

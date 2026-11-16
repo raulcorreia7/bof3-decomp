@@ -8,11 +8,11 @@ u8 D_801E5BC8[0x24] = {
     0xA9, 0x00, 0x01, 0x00,
 };
 
-Callback g_ShopStep6Funcs[SHOP_STEP6_COUNT] = {func_801DE1C4, func_801DE45C, func_801DE4C8, func_801DE850};
+Callback g_ShopStep6Steps[SHOP_STEP6_COUNT] = {func_801DE1C4, func_801DE45C, func_801DE4C8, func_801DE850};
 
-Callback g_ShopStep6Sub0Funcs[SHOP_STEP6_SUB0_COUNT] = {func_801DE200, Shop_StartFadeIn, func_801DE40C};
+Callback g_ShopStep6Sub0Steps[SHOP_STEP6_SUB0_COUNT] = {func_801DE200, Shop_StartFadeIn, func_801DE40C};
 
-Callback g_ShopStep6Sub3Funcs[SHOP_STEP6_SUB3_COUNT] = {func_801DE88C, func_801DE8E8, func_801DE944, func_801DEE20};
+Callback g_ShopStep6Sub3Steps[SHOP_STEP6_SUB3_COUNT] = {func_801DE88C, func_801DE8E8, func_801DE944, func_801DEE20};
 
 /* Where the party stands on the boat after the Black Ship, one position per party slot; read by func_801DE944 (0x801DE944). */
 BoatPartyPos g_ShopBoatPartyPositions[PARTY_SLOT_COUNT] = {
@@ -50,11 +50,11 @@ u8 D_801E5CCC[12] = {0x01, 0x00, 0x29, 0x01, 0x02, 0x2E, 0x00, 0x00, 0xFF, 0x00,
 u8 D_801E5CD8[16] = {0x0A, 0x00, 0x2A, 0x0A, 0x01, 0x2C, 0x0A, 0x02,
                      0x2F, 0x00, 0x00, 0xFF, 0x12, 0x11, 0x07, 0x00};
 
-Callback g_ShopStep7Funcs[SHOP_STEP7_COUNT] = {func_801DF9B4, func_801DF9EC, func_801DFDB8, func_801E092C, func_801E0F28};
+Callback g_ShopStep7Steps[SHOP_STEP7_COUNT] = {func_801DF9B4, func_801DF9EC, func_801DFDB8, func_801E092C, func_801E0F28};
 
-Callback g_ShopStep7Sub2Funcs[SHOP_STEP7_SUB2_COUNT] = {func_801DFDF4, func_801E0028, func_801E006C, func_801E032C, func_801E05E0};
+Callback g_ShopStep7Sub2Steps[SHOP_STEP7_SUB2_COUNT] = {func_801DFDF4, func_801E0028, func_801E006C, func_801E032C, func_801E05E0};
 
-Callback g_ShopStep7Sub3Funcs[SHOP_STEP7_SUB3_COUNT] = {func_801E0968, func_801E09F4, func_801E0BAC};
+Callback g_ShopStep7Sub3Steps[SHOP_STEP7_SUB3_COUNT] = {func_801E0968, func_801E09F4, func_801E0BAC};
 
 u8 D_801E5D1C[8] = "NOTE";
 u8 D_801E5D24[8] = "SKILL";
@@ -63,10 +63,10 @@ Callback g_AbilityStockCommands[3] = {Menu_PackAbilityStock, Menu_SortAbilitySto
 
 u8 D_801E5D38[4] = "Ink";
 
-Callback g_ShopStep9Funcs[SHOP_STEP9_COUNT] = {func_801E2048, func_801E2114, func_801E2590};
+Callback g_ShopStep9Steps[SHOP_STEP9_COUNT] = {func_801E2048, func_801E2114, func_801E2590};
 
-Callback g_ShopStep9Sub0Funcs[SHOP_STEP9_SUB0_COUNT] = {func_801E2084, func_801E20CC};
+Callback g_ShopStep9Sub0Steps[SHOP_STEP9_SUB0_COUNT] = {func_801E2084, func_801E20CC};
 
-Callback g_ShopStep9Sub1Funcs[SHOP_STEP9_SUB1_COUNT] = {func_801E2150, func_801E2474, func_801E254C};
+Callback g_ShopStep9Sub1Steps[SHOP_STEP9_SUB1_COUNT] = {func_801E2150, func_801E2474, func_801E254C};
 
-Callback g_ShopStep9Sub2Funcs[SHOP_STEP9_SUB2_COUNT] = {func_801E25CC, func_801E2610, func_801E262C};
+Callback g_ShopStep9Sub2Steps[SHOP_STEP9_SUB2_COUNT] = {func_801E25CC, func_801E2610, func_801E262C};

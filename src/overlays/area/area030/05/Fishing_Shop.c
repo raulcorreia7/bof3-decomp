@@ -1,7 +1,7 @@
 #include "area030_05.h"
 
 /* D_800F71F0 */
-static Callback s_ShopStates[11] = {
+static Callback s_ShopSteps[11] = {
     Fishing_ShopOpen,    Fishing_ShopChooseTrade, Fishing_ShopConfirmAll,      Fishing_ShopInit, Fishing_ShopWaitOpen, Fishing_ShopChooseItem, Fishing_ShopChooseQuantity,
     Fishing_ShopConfirm, Fishing_ShopTooGreedy,   Fishing_ShopConfirmAllInput, Fishing_ShopExit,
 };
@@ -37,12 +37,12 @@ static u8 pad_800F724E = 0, pad_800F724F = 0;
 
 /* func_800F500C */
 MATCH void Fishing_ShopRun(void) {
-    s_ShopStates[s_ShopMode]();
+    s_ShopSteps[s_ShopMode]();
 }
 
 /* func_800F5048 */
 MATCH void Fishing_ShopOpen(void) {
-    s_ShopStates[3 + s_Step]();
+    s_ShopSteps[3 + s_Step]();
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     Fishing_ShopDrawTradeList(0);
     Fishing_ShopDrawNeeded();
@@ -68,7 +68,7 @@ MATCH void Fishing_ShopWaitOpen(void) {
 
 /* func_800F5138 */
 MATCH void Fishing_ShopChooseTrade(void) {
-    s_ShopStates[5 + s_Step]();
+    s_ShopSteps[5 + s_Step]();
     Fishing_ShopDrawBackdrop();
     Fishing_ShopDrawNeeded();
     if (((s8)s_ListCursor & 0xC0) == 0) {
@@ -259,7 +259,7 @@ MATCH void Fishing_ShopTooGreedy(void) {
 
 /* func_800F5BA4 */
 MATCH void Fishing_ShopConfirmAll(void) {
-    s_ShopStates[9 + s_Step]();
+    s_ShopSteps[9 + s_Step]();
 }
 
 /* func_800F5BE0 */

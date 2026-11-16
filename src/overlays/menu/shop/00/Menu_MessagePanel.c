@@ -6,7 +6,7 @@
 #define ICON_CURSOR ((s16)g_MenuCurrentPanel->u.message.id)
 
 MATCH void Menu_MessagePanel(void) {
-    g_ShopMessageStates[g_MenuCurrentPanel->state]();
+    g_ShopMessageSteps[g_MenuCurrentPanel->state]();
     Menu_DrawHeaderBar(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     if (ICON_CURSOR != 0) {
         WinDrawCueText((g_MenuCurrentPanel->pos.x + 7), (g_MenuCurrentPanel->pos.y + 3), (u16)ICON_CURSOR);

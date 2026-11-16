@@ -118,30 +118,30 @@ s16 g_MenuMasterMessageIds[MASTER_MENU_MESSAGE_ID_COUNT] = {
 };
 
 /* Step and sub-step handlers. */
-Callback g_MasterMenuStates[MASTER_MENU_STEP_COUNT] = {
+Callback g_MasterMenuSteps[MASTER_MENU_STEP_COUNT] = {
     func_801D2614, func_801D2688, func_801D278C, func_801D2BE8, func_801D32D4, func_801D3924, Menu_ApplyMasterMode,
 };
 
-Callback g_MasterMenuSubFuncs[MASTER_MENU_SUBSTEP_COUNT] = {
+Callback g_MasterMenuSubSteps[MASTER_MENU_SUBSTEP_COUNT] = {
     func_801D26C4,
     func_801D2738,
 };
 
-Callback g_MenuMasterStep2Funcs[SISYOU_SUB2_HANDLER_COUNT] = {
+Callback g_MenuMasterStep2Steps[SISYOU_SUB2_HANDLER_COUNT] = {
     Master_StartOffer, func_801D282C, func_801D28B0, func_801D29C8, func_801D2A4C, Master_StartFarewell,
 };
 
-Callback g_MenuMasterStep3Funcs[SISYOU_SUB3_HANDLER_COUNT] = {
+Callback g_MenuMasterStep3Steps[SISYOU_SUB3_HANDLER_COUNT] = {
     func_801D0C48, func_801D0C88, func_801D2C24, func_801D2C64, func_801D12FC,
     func_801D2CA4, func_801D30C4, func_801D3148, func_801D3258,
 };
 
-Callback g_MenuMasterStep4Funcs[SISYOU_SUB4_HANDLER_COUNT] = {
+Callback g_MenuMasterStep4Steps[SISYOU_SUB4_HANDLER_COUNT] = {
     func_801D0C48, func_801D0C88, func_801D3310, func_801D3350, func_801D12FC,
     func_801D3390, func_801D3714, func_801D3798, func_801D38A8,
 };
 
-Callback g_MenuMasterStep5Funcs[SISYOU_SUB5_HANDLER_COUNT] = {
+Callback g_MenuMasterStep5Steps[SISYOU_SUB5_HANDLER_COUNT] = {
     func_801D3960,
     func_801D3A24,
     func_801D3E70,

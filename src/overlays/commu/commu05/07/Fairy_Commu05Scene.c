@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 /* The overlay entry: the commu state byte selects the step handler. */
 MATCH void func_801D0C10(void) {
-    SYS_DISPATCH_BYTE(g_Commu05States, D_801F294C);
+    SYS_DISPATCH_BYTE(g_Commu05Steps, D_801F294C);
 }
 
 MATCH void func_801D0C4C(void) {
@@ -175,14 +175,14 @@ NON_MATCHING void func_801D14C8(s32 x, s32 y, s32 group) {
     j = 0;
     while (i < g_FairyVillageUpdateCount) {
         kind = ((u8*)&g_FairyVillageUpdateCount)[i * 2 + 3];
-        if (((u16*)((u8*)g_Commu05States + 0x2C))[kind * 2 + 1] != 0) {
+        if (((u16*)((u8*)g_Commu05Steps + 0x2C))[kind * 2 + 1] != 0) {
             queue_row = ((u8*)&g_FairyVillageUpdateCount)[i * 2 + 4];
             for (k = 0; k < 8; k++) {
                 g_TextVariables[0][k] = D_801457E8[queue_row][k];
             }
             g_TextVariables[0][5] = 0;
         }
-        UI_DrawText((s16)(x + 0x14), (s16)(y + j * 0x10 + 0x1C), 0, 0xFF, (u8*)((u8*)AREA_MESSAGE_TABLE + (((u16*)((u8*)g_Commu05States + 0x2C))[kind * 2] << 1)));
+        UI_DrawText((s16)(x + 0x14), (s16)(y + j * 0x10 + 0x1C), 0, 0xFF, (u8*)((u8*)AREA_MESSAGE_TABLE + (((u16*)((u8*)g_Commu05Steps + 0x2C))[kind * 2] << 1)));
         i++;
         j++;
         if (j < 8) {

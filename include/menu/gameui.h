@@ -225,7 +225,7 @@ typedef enum GameRequest {
     Message_StartAreaMessage(id);           \
     g_GameStateIndex = GAME_REQUEST_MESSAGE
 
-/* The rows of g_GameStates, the full-screen modes Game_RunMain runs. */
+/* The rows of g_GameModes, the full-screen modes Game_RunMain runs. */
 typedef enum GameMode {
     GAME_STATE_NEW_GAME     = 0,
     GAME_STATE_AREA_LOAD    = 1,

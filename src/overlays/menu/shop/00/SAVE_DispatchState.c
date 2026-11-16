@@ -4,5 +4,5 @@
  * shop-state byte g_MenuStep.state. */
 
 MATCH void SAVE_DispatchState(void) {
-    SYS_DISPATCH_BYTE(g_SaveStates, g_MenuStep.state);
+    SYS_DISPATCH_BYTE(g_SaveSteps, g_MenuStep.state);
 }

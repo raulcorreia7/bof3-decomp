@@ -5,6 +5,6 @@
 
 /* func_801E3E4C */
 MATCH void Menu_CharacterPanel(void) {
-    g_ShopCharacterStates[g_MenuCurrentPanel->state]();
+    g_ShopCharacterSteps[g_MenuCurrentPanel->state]();
     Menu_DrawCharacterWindow(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, g_MenuCurrentPanel->unk_0A, 0, 0);
 }

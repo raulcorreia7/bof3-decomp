@@ -342,7 +342,7 @@ u8 s_BattleCharacterSprites[0x28] = {
 
 /* 0x801EB1B4 */
 /* D_801EB1B4 */
-Callback g_BattleTaskFuncs[2] = {
+Callback g_BattleTaskSteps[2] = {
     (Callback)func_801DFA60,
     (Callback)func_801DFB64,
 };

@@ -17,5 +17,5 @@ segments:
     vram: 0x801D1950
     align: 4
     subsegments:
-      - [0xD50, .data, g_Commu05States]
+      - [0xD50, .data, g_Commu05Steps]
   - [0xDF8]

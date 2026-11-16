@@ -51,12 +51,12 @@ extern u16            D_801D4BB0[];
 /* g_EmiOverlayHeader */
 extern u16            D_801D4BB8[10];
 /* D_801D4BCC */
-extern Callback       g_Commu01States[COMMU01_STEP_COUNT];
+extern Callback       g_Commu01Steps[COMMU01_STEP_COUNT];
 /* D_801D4BD8 */
-extern Callback       g_Commu01Step2Funcs[COMMU01_STEP2_COUNT];
+extern Callback       g_Commu01Step2Steps[COMMU01_STEP2_COUNT];
 extern Callback       D_801D4BE4[];
 /* D_801D4BEC */
-extern Callback       g_Commu01Step2Sub1Funcs[COMMU01_STEP2_SUB1_COUNT];
+extern Callback       g_Commu01Step2Sub1Steps[COMMU01_STEP2_SUB1_COUNT];
 extern u8             D_801D4C04[12];
 extern u16            D_801D4C10[4];
 extern u8             D_801D4C18[12][2];

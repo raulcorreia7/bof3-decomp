@@ -28,7 +28,7 @@ MATCH void func_801D143C(void) {
 }
 
 MATCH void func_801D14D0(void) {
-    SYS_DISPATCH_BYTE(g_Commu02Event0Step1Sub3Funcs, D_801F294E);
+    SYS_DISPATCH_BYTE(g_Commu02Event0Step1Sub3Steps, D_801F294E);
 }
 
 MATCH void func_801D150C(void) {
@@ -703,11 +703,11 @@ INCLUDE_ASM(func_801D32A0);
 #endif
 
 MATCH void func_801D3568(void) {
-    SYS_DISPATCH_BYTE(g_Commu02Event1States, D_801F294C);
+    SYS_DISPATCH_BYTE(g_Commu02Event1Steps, D_801F294C);
 }
 
 MATCH void func_801D35A4(void) {
-    SYS_DISPATCH_BYTE(g_Commu02Event1Step0Funcs, D_801F294D);
+    SYS_DISPATCH_BYTE(g_Commu02Event1Step0Steps, D_801F294D);
 }
 
 MATCH void func_801D35E0(void) {
@@ -758,11 +758,11 @@ MATCH void func_801D3700(void) {
 }
 
 MATCH void func_801D37EC(void) {
-    SYS_DISPATCH_BYTE(g_Commu02Event1Step1Funcs, D_801F294D);
+    SYS_DISPATCH_BYTE(g_Commu02Event1Step1Steps, D_801F294D);
 }
 
 MATCH void func_801D3828(void) {
-    SYS_DISPATCH_BYTE(g_Commu02Event1Step1Sub0Funcs, D_801F294E);
+    SYS_DISPATCH_BYTE(g_Commu02Event1Step1Sub0Steps, D_801F294E);
 }
 
 MATCH void func_801D3864(void) {
@@ -1217,11 +1217,11 @@ MATCH void func_801D4F88(s32 x, s32 y, s32 show_values) {
 }
 
 MATCH void func_801D5034(void) {
-    SYS_DISPATCH_BYTE(g_Commu02Event2States, D_801F294C);
+    SYS_DISPATCH_BYTE(g_Commu02Event2Steps, D_801F294C);
 }
 
 MATCH void func_801D5070(void) {
-    SYS_DISPATCH_BYTE(g_Commu02Event2Step0Funcs, D_801F294D);
+    SYS_DISPATCH_BYTE(g_Commu02Event2Step0Steps, D_801F294D);
 }
 
 MATCH void func_801D50AC(void) {
@@ -1254,7 +1254,7 @@ MATCH void func_801D50E4(void) {
 }
 
 MATCH void func_801D5194(void) {
-    SYS_DISPATCH_BYTE(g_Commu02Event2Step1Funcs, D_801F294D);
+    SYS_DISPATCH_BYTE(g_Commu02Event2Step1Steps, D_801F294D);
 }
 
 INCLUDE_ASM(func_801D51D0);
@@ -1406,7 +1406,7 @@ MATCH void func_801D5B2C(void) {
 }
 
 MATCH void func_801D5D5C(void) {
-    SYS_DISPATCH_BYTE(g_Commu02Event3States, D_801F294C);
+    SYS_DISPATCH_BYTE(g_Commu02Event3Steps, D_801F294C);
 }
 
 /* func_801D5D98 */
@@ -1421,7 +1421,7 @@ MATCH void Menu_StartFairyEventMessage(void) {
 }
 
 MATCH void func_801D5DF4(void) {
-    SYS_DISPATCH_BYTE(g_Commu02Event3Step1Funcs, D_801F294D);
+    SYS_DISPATCH_BYTE(g_Commu02Event3Step1Steps, D_801F294D);
 }
 
 /* func_801D5E30 */
@@ -1548,7 +1548,7 @@ MATCH void func_801D6390(void) {
 }
 
 MATCH void func_801D640C(void) {
-    SYS_DISPATCH_BYTE(g_Commu02Event3Step1Sub6Funcs, D_801F294E);
+    SYS_DISPATCH_BYTE(g_Commu02Event3Step1Sub6Steps, D_801F294E);
 }
 
 MATCH void func_801D6448(void) {
@@ -1585,7 +1585,7 @@ MATCH void func_801D6574(void) {
 }
 
 MATCH void func_801D65F8(void) {
-    SYS_DISPATCH_BYTE(g_Commu02Event3Step1Sub7Funcs, D_801F294E);
+    SYS_DISPATCH_BYTE(g_Commu02Event3Step1Sub7Steps, D_801F294E);
 }
 
 MATCH void func_801D6634(void) {
@@ -1694,7 +1694,7 @@ MATCH void func_801D6BE4(void) {
 }
 
 MATCH void func_801D6CDC(void) {
-    SYS_DISPATCH_BYTE(g_Commu02Event3Step2Funcs, D_801F294D);
+    SYS_DISPATCH_BYTE(g_Commu02Event3Step2Steps, D_801F294D);
 }
 
 MATCH void func_801D6D18(void) {
@@ -1812,7 +1812,7 @@ MATCH void func_801D73F8(void) {
 }
 
 MATCH void func_801D7474(void) {
-    SYS_DISPATCH_BYTE(g_Commu02Event3Step2Sub6Funcs, D_801F294E);
+    SYS_DISPATCH_BYTE(g_Commu02Event3Step2Sub6Steps, D_801F294E);
 }
 
 MATCH void func_801D74B0(void) {
@@ -1849,7 +1849,7 @@ MATCH void func_801D75DC(void) {
 }
 
 MATCH void func_801D7660(void) {
-    SYS_DISPATCH_BYTE(g_Commu02Event3Step2Sub7Funcs, D_801F294E);
+    SYS_DISPATCH_BYTE(g_Commu02Event3Step2Sub7Steps, D_801F294E);
 }
 
 MATCH void func_801D769C(void) {
