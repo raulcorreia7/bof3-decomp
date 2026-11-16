@@ -5,7 +5,7 @@
  * matrix, rotates the part, emits a POLY_FT4 with four packed texture
  * coordinates and appends it with the part's draw mode.
  */
-MATCH void Area_DrawParts(u8* part_list, s32 x, s32 y) {
+MATCH void Area_DrawParts(ScenePart* part_list, s32 x, s32 y) {
     SVECTOR   pos;
     SVECTOR   rot;
     SVECTOR   part_rotation;
@@ -25,16 +25,16 @@ MATCH void Area_DrawParts(u8* part_list, s32 x, s32 y) {
     s32       signed_coordinate;
     s32       draw_mode;
 
-    if ((Area_TestCondition(((ScenePart*)part_list)[0].head.id) << 24) == 0) {
+    if ((Area_TestCondition(part_list[0].head.id) << 24) == 0) {
         return;
     }
-    setVector(&pos, ((x - 0x80) << 0x7) + FIELD(s8, part_list, 7) * 2, ((y - 0x80) << 7) + FIELD(s8, part_list, 0x6) * 2, ((ScenePart*)part_list)[1].raw);
+    setVector(&pos, ((x - 0x80) << 0x7) + part_list[1].vertex.x * 2, ((y - 0x80) << 7) + part_list[1].vertex.y * 2, part_list[1].raw);
     scale = (g_FrameCount & 0xFFF) * 4;
-    setVector(&rot, (((ScenePart*)part_list)[2].raw >> 0x14 & 0x3FF) * scale, (((ScenePart*)part_list)[2].raw >> 0xA & 0x3FF) * scale, (((ScenePart*)part_list)[2].raw & 0x3FF) * scale);
-    for (part_word_offset = 3; part_word_offset != (FIELD(u8, part_list, 0x2u)); part_word_offset += 6) {
+    setVector(&rot, (part_list[2].raw >> 0x14 & 0x3FF) * scale, (part_list[2].raw >> 0xA & 0x3FF) * scale, (part_list[2].raw & 0x3FF) * scale);
+    for (part_word_offset = 3; part_word_offset != (part_list[0].head.count); part_word_offset += 6) {
         PushMatrix();
-        setVector(&part_rotation, (rot.vx + (((((ScenePart*)part_list)[part_word_offset].raw) >> 0x12) & 0xFFC)) & ANGLE_MASK,
-                  (rot.vy + (((((ScenePart*)part_list)[part_word_offset].raw) >> 8) & 0xFFC)) & ANGLE_MASK, (rot.vz + (((((ScenePart*)part_list)[part_word_offset].raw) & 0x3FF) * 4)) & ANGLE_MASK);
+        setVector(&part_rotation, (rot.vx + (((part_list[part_word_offset].raw) >> 0x12) & 0xFFC)) & ANGLE_MASK, (rot.vy + (((part_list[part_word_offset].raw) >> 8) & 0xFFC)) & ANGLE_MASK,
+                  (rot.vz + (((part_list[part_word_offset].raw) & 0x3FF) * 4)) & ANGLE_MASK);
         RotTransMatrix(&pos, matrix, &flag);
         Camera_SetModelMatrix(&part_rotation, &matrix);
         prim = (POLY_FT4*)g_GfxPrimCursor;
@@ -68,9 +68,9 @@ MATCH void Area_DrawParts(u8* part_list, s32 x, s32 y) {
         }
 
         RotTransPers4(&uv[1], &uv[2], &uv[3], &uv[0], (long*)(&prim->x1), (long*)(&prim->x2), (long*)(&prim->x3), (long*)(&prim->x0), &p, &flag);
-        func_80155560(((ScenePart*)part_list)[part_word_offset + 5].raw, prim, 1);
+        func_80155560(part_list[part_word_offset + 5].raw, prim, 1);
         draw_mode = 6;
-        if ((((ScenePart*)part_list)[part_word_offset + 5].raw & 0x40000000) == 0) {
+        if ((part_list[part_word_offset + 5].raw & 0x40000000) == 0) {
             draw_mode = g_AreaDrawMode;
         }
         GFX_AddPrim(draw_mode, sizeof(*prim));
