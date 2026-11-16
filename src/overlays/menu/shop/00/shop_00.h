@@ -585,7 +585,7 @@ void Menu_DrawRowIcons(u8* row_record, s32 palette_index);
 void Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 item_kind, u8 item_id);
 void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height);
 /* func_801DC6FC */
-void Menu_DrawInventoryWindow(MenuPanelTask* arg0);
+void Menu_DrawInventoryWindow(MenuPanelTask* task);
 void SAVE_DrawSlot(u8 index, s32 left, s32 top, MenuListRow* row);
 void SAVE_DrawPortTabs(s16 x, s16 y, u32 tab_flags, u8 port, u8 variant);
 void func_801DE188(void);
@@ -717,7 +717,7 @@ void func_801E44A0(void);
 void func_801E44E0(void);
 void func_801E4540(void);
 void func_801E4580(void);
-void func_801E45C0(MenuPanelTask* arg0);
+void func_801E45C0(MenuPanelTask* task);
 s32  func_801E4C2C(s32 item_class);
 bool Party_HasSkill(s32 item_id);
 /* func_801E4DF4 */
