@@ -430,7 +430,7 @@ extern Callback         D_801EB210[];
 extern Callback         D_801EB218[];
 extern Callback         D_801EB224[];
 /* D_801EB230 */
-extern u8               s_BattleCharacterStepIds[];
+extern u8               g_BattleCharacterStepIds[0x28];
 extern u8               D_801EB23C[];
 extern Callback         D_801EB258[];
 extern Callback         D_801EB26C[];
