@@ -214,7 +214,51 @@ MATCH void func_801EF2B8(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EFD7C(void) {
+    u32* record;
+    u32* end;
+    s32  row;
+    s32  col;
+    u16  cell;
+    u8*  base;
+
+    for (row = 0; row < AREA_CELL_GRID_ROWS; row++) {
+        for (col = 0; col < AREA_CELL_GRID_COLS; col++) {
+            cell = g_AreaCellGrid[row][col];
+            if (cell != 0) {
+                base   = (u8*)(MAP_BUNDLE_BASE + cell * 4);
+                record = (u32*)(base + g_AreaMapBundle.record_region_24 * 4);
+                end    = (u32*)((u8*)record + (((u16*)record)[-1] * 4 - 4));
+                if (record != end) {
+                    do {
+                        if ((u32)*record >> 24 == 0x28) {
+                            *record &= 0xFFFFFF;
+                        }
+                        if ((u32)*record >> 24 == 0x29) {
+                            *record = (*record & 0xFFFFFF) | 0x21000000;
+                        }
+                        if ((u8)(*record >> 24) == 0x2A) {
+                            *record = (*record & 0xFFFFFF) | 0x22000000;
+                        }
+                        if ((u8)(*record >> 24) == 0x2B) {
+                            *record = (*record & 0xFFFFFF) | 0x27000000;
+                        }
+                        record += ((u8*)record)[2];
+                    } while (record != end);
+                }
+            }
+        }
+    }
+    g_AreaCameraOffsetY = 0;
+    Battle_MarkDamaged(g_Battle.target_selector);
+    g_Battle.state |= 4;
+    func_801E5988();
+    g_AreaCameraRefreshCount = 2;
+}
+#else
 INCLUDE_ASM(func_801EFD7C);
+#endif
 
 /* Draws the textured quads of the five-record parts at parts like the resident Area_DrawPartQuads, but each vertex
  * depth adds func_801F0ADC of its x and y. */
