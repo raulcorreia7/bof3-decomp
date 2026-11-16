@@ -38,7 +38,7 @@ void func_801F3588(u8* dst, u8* src, u16* state);
 
 typedef struct Area108Scratch {
     u8      unk_00[0x34];
-    Point3l pos;
+    Pos3 pos;
 } Area108Scratch;
 
 ASSERT_SIZE(Area108Scratch, 0x40);
@@ -81,7 +81,7 @@ void func_801F2FC8(void);
 void func_801F321C(void);
 void func_801F3C84(void);
 
-extern Point2s D_801F63DC[];
+extern Pos2 D_801F63DC[];
 
 /* The stage quad's tile, palette and luminance word: the timer's top bits raise its luminance. */
 #define AREA108_QUAD_WORD ((0x2510u << 16) | 0x0100u)

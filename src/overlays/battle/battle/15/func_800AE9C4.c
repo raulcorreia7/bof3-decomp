@@ -7,7 +7,7 @@ typedef struct BattlePanelGeometry {
     u8      pad_00[0x0A];
     u8      height;
     u8      pad_0B[0x23];
-    Point2u origin;
+    Pos2u origin;
 } BattlePanelGeometry;
 
 ASSERT_SIZE(BattlePanelGeometry, 0x32);
@@ -46,9 +46,9 @@ MATCH void func_800AE9C4(u8 texture_index) {
     /* The texture entry is read through the table symbol at every use: the retail
      * code materializes the table address again for each access. */
     tex_offset = texture_index * BATTLE_PANEL_TEX_STRIDE;
-    setUV4(primitive, ((Point2u*)&g_BattlePanelUV[tex_offset])->x, ((Point2u*)&g_BattlePanelUV[tex_offset])->y, ((Point2u*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH,
-           ((Point2u*)&g_BattlePanelUV[tex_offset])->y, ((Point2u*)&g_BattlePanelUV[tex_offset])->x, ((BattlePanelGeometry*)BATTLE_WORK)->height + ((Point2u*)&g_BattlePanelUV[tex_offset])->y,
-           ((Point2u*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH, ((BattlePanelGeometry*)BATTLE_WORK)->height + ((Point2u*)&g_BattlePanelUV[tex_offset])->y);
+    setUV4(primitive, ((Pos2u*)&g_BattlePanelUV[tex_offset])->x, ((Pos2u*)&g_BattlePanelUV[tex_offset])->y, ((Pos2u*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH,
+           ((Pos2u*)&g_BattlePanelUV[tex_offset])->y, ((Pos2u*)&g_BattlePanelUV[tex_offset])->x, ((BattlePanelGeometry*)BATTLE_WORK)->height + ((Pos2u*)&g_BattlePanelUV[tex_offset])->y,
+           ((Pos2u*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH, ((BattlePanelGeometry*)BATTLE_WORK)->height + ((Pos2u*)&g_BattlePanelUV[tex_offset])->y);
     setRGB0(primitive, 1, 1, 1);
     GFX_AddPrim(2, sizeof(POLY_FT4));
     primitive = (POLY_FT4*)g_GfxPrimCursor;
@@ -60,9 +60,9 @@ MATCH void func_800AE9C4(u8 texture_index) {
     setClut(primitive, BATTLE_PANEL_CLUT_X, BATTLE_PANEL_CLUT_Y);
     /* The second texture block reads the work record again for its last row, the
      * way the retail code reloads the scratchpad work pointer there. */
-    setUV4(primitive, ((Point2u*)&g_BattlePanelUV[tex_offset])->x, ((Point2u*)&g_BattlePanelUV[tex_offset])->y, ((Point2u*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH,
-           ((Point2u*)&g_BattlePanelUV[tex_offset])->y, ((Point2u*)&g_BattlePanelUV[tex_offset])->x, ((BattlePanelGeometry*)BATTLE_WORK)->height + ((Point2u*)&g_BattlePanelUV[tex_offset])->y,
-           ((Point2u*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH, ((BattlePanelGeometry*)BATTLE_WORK)->height + ((Point2u*)&g_BattlePanelUV[tex_offset])->y);
+    setUV4(primitive, ((Pos2u*)&g_BattlePanelUV[tex_offset])->x, ((Pos2u*)&g_BattlePanelUV[tex_offset])->y, ((Pos2u*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH,
+           ((Pos2u*)&g_BattlePanelUV[tex_offset])->y, ((Pos2u*)&g_BattlePanelUV[tex_offset])->x, ((BattlePanelGeometry*)BATTLE_WORK)->height + ((Pos2u*)&g_BattlePanelUV[tex_offset])->y,
+           ((Pos2u*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH, ((BattlePanelGeometry*)BATTLE_WORK)->height + ((Pos2u*)&g_BattlePanelUV[tex_offset])->y);
     setRGB0(primitive, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     GFX_AddPrim(2, sizeof(POLY_FT4));
 }

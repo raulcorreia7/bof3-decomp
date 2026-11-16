@@ -25,7 +25,7 @@ extern AreaSprite* D_801181DC;
 
 /* The fixed x/y pair and the flag bit a scene spawns its helper actors with,
  * both indexed by the task's cell column. */
-extern Point2l D_801181C0[];
+extern Offset2 D_801181C0[];
 extern u8      D_801181D0[];
 
 /* The visible cell window per column: first row, first column, last row, last column. */

@@ -209,7 +209,7 @@ def test_a_new_name_with_a_rejected_word_is_an_offender(name: str) -> None:
         "Callback",
         "Thread",
         "ColorRGB8",
-        "Point2l",
+        "Offset2",
         "BattleCommandFunc",
         "Message_WindowOpen",
         "Item_Add",

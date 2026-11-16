@@ -672,7 +672,7 @@ MATCH void func_801F8360(void) {
 /* Scene_DrawTriangle saves the active effect's rotation across a triangle draw;
  * func_8015B410 passes the three angles to RotMatrix. */
 typedef struct SceneRotation {
-    Point3l angle;
+    Angle3 angle;
     s32     unk_0C; /* 0x0C */
 } SceneRotation;
 

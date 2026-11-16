@@ -30,7 +30,7 @@ extern u8       D_80144EB8[];
 
 /* One edge of the trail ribbon: a position and the word beside it. */
 typedef struct AreaSlotEdge {
-    Point3l pos;    /* 0x00 */
+    Pos3 pos;    /* 0x00 */
     s32     unk_0C; /* 0x0C */
 } AreaSlotEdge;
 
@@ -39,7 +39,7 @@ ASSERT_SIZE(AreaSlotEdge, 0x10);
 /* One of the 64 slots at AREA_WORK, 0x34 bytes each: the trail centre, its two
  * ribbon edges and the rotation angle. */
 typedef struct AreaSlot {
-    Point3l      pos;      /* 0x00 - the trail centre */
+    Pos3      pos;      /* 0x00 - the trail centre */
     s32          unk_0C;   /* 0x0C */
     AreaSlotEdge edges[2]; /* 0x10, 0x20 - the ribbon's two edges */
     u16          angle;    /* 0x30 */
@@ -76,8 +76,8 @@ extern u8  D_801F6B6C;
 extern u8  D_801F6B70;
 extern u8  D_801F6B74;
 
-void       func_801F3778(u8 count, Point2s* current, RECT* rect);
-void       func_801F3898(Point2s first, Point2s second, u8 shade);
+void       func_801F3778(u8 count, Pos2* current, RECT* rect);
+void       func_801F3898(Pos2 first, Pos2 second, u8 shade);
 /* The two sprite tables the step draws index by the timer's low two bits. */
 extern s32 D_801F62CC[];
 extern s32 D_801F62DC[];
@@ -86,7 +86,7 @@ extern s32 D_801F62DC[];
 s16        func_801F35E0(s32 origin_x, s32 origin_y, s16 scroll_x, s16 scroll_y, s16 radius, s16 focus_x);
 void       func_801F3CB8(void);
 void       func_801F41B4(void);
-void       func_801F3B48(Point2s* pos, u8 shade);
+void       func_801F3B48(Pos2* pos, u8 shade);
 void       func_801F30E8(s16 x0, s16 y0, s16 x1, s16 y1);
 void       func_801F3BC4(s16 x, s16 y, s16 w, s16 h);
 

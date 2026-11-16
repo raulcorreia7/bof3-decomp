@@ -73,9 +73,9 @@ MATCH void func_801DE944(void) {
         if (i < g_PartySize) {
             count = g_PartySize;
             for (; i < count; i++) {
-                g_Game.members[i].pos.x.fixed = g_ShopBoatPartyPositions[i].x;
-                g_Game.members[i].pos.y.fixed = g_ShopBoatPartyPositions[i].y;
-                g_Game.members[i].pos.z.fixed = g_ShopBoatPartyPositions[i].z;
+                g_Game.members[i].pos.x.fixed = g_ShopBoatPartyPositions[i].vx;
+                g_Game.members[i].pos.y.fixed = g_ShopBoatPartyPositions[i].vy;
+                g_Game.members[i].pos.z.fixed = g_ShopBoatPartyPositions[i].vz;
             }
         }
         if (!(g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE)) {

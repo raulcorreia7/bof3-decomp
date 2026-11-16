@@ -2,7 +2,7 @@
 
 MATCH void func_801F3108(void) {
     Actor*  actor = g_Task;
-    Point3l pos;
+    Pos3 pos;
 
     actor->gravity += 0x100000;
     actor->vz += actor->gravity;

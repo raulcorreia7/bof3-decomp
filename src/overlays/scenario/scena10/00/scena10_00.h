@@ -40,7 +40,7 @@ ASSERT_OFFSET(Scena10Rect, height, 0x06);
 extern Scena10Rect D_801FE7CC[];
 extern u8          D_801FE804[2];
 extern u8          D_801FE830[8][3];
-extern Point2s     D_801FE848[];
+extern Pos2     D_801FE848[];
 extern u8          D_801FE808[2];
 extern u8          D_801FE874[];
 

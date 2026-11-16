@@ -73,7 +73,7 @@ extern u8             D_801457AA[][8];
 extern u8             D_801457AB[][8];
 extern CommuTypeRows  D_801D4DD4[];
 extern u16            D_801D4DDA[];
-extern Point2u        D_801D4DDC[];
+extern Pos2u        D_801D4DDC[];
 extern u8             D_801D4DF4;
 extern u8             D_801D4DF8;
 extern u8             D_801D4DFC;

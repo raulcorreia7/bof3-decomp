@@ -1,7 +1,7 @@
 #include "area103_13.h"
 
 MATCH void func_801F2CB0(void) {
-    Point3l         pos;
+    Pos3         pos;
     MATRIX          matrix;
     AreaSpinEffect* row;
     u8              i;

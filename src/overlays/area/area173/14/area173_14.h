@@ -17,10 +17,7 @@
 /* The scratchpad cell holding this mode's work pointer. */
 
 /* The cell a state lands on, in tile units. */
-typedef struct CellOffset {
-    u8 x;
-    u8 y;
-} CellOffset;
+typedef Cell2 CellOffset;
 
 /* A part row: the base cell and the four corner cell offsets around it. */
 typedef struct AreaPart {

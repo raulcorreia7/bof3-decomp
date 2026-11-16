@@ -316,15 +316,10 @@ extern Callback    g_ShopStep6Sub0Funcs[SHOP_STEP6_SUB0_COUNT];
 /* D_801E5C08 */
 extern Callback    g_ShopStep6Sub3Funcs[SHOP_STEP6_SUB3_COUNT];
 
-typedef struct BoatPartyPos {
-    s32 x;
-    s32 y;
-    s32 z;
-    s32 unk_0C;
-} BoatPartyPos;
+typedef VECTOR BoatPartyPos;
 
 extern BoatPartyPos g_ShopBoatPartyPositions[PARTY_SLOT_COUNT];
-extern Point2s      g_ShopFacingSteps[8];
+extern Pos2      g_ShopFacingSteps[8];
 extern u8           D_801E5C68[];
 extern u8           D_801E5C70[];
 extern u8           D_801E5C78[];

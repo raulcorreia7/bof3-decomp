@@ -1,6 +1,6 @@
 #include "area077_14.h"
 
-MATCH void func_801F3778(u8 count, Point2s* current, RECT* rect) {
+MATCH void func_801F3778(u8 count, Pos2* current, RECT* rect) {
     u8 shade;
     u8 i;
 

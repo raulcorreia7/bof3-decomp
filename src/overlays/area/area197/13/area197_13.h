@@ -27,7 +27,7 @@ extern s8                  D_801F4A88[];
 void func_801F3768(s32 arg0, s32 arg1);
 void func_801F30E4(void);
 void func_801F3474(void);
-void func_801F3110(u16 start, u16 end, Point3l* from, Point3l* to);
+void func_801F3110(u16 start, u16 end, Pos3* from, Pos3* to);
 
 s32 func_801F2FC4(void);
 s32 func_801F3368(void);
@@ -44,7 +44,7 @@ typedef struct AreaSparkRow {
     s32     vy; /* 0x0C */
     s32     vz; /* 0x10 - the fall speed and the bounce */
     u8      pad_14[4];
-    Point3l pos;       /* 0x18 */
+    Pos3 pos;       /* 0x18 */
     u8      pad_24[4]; /* 0x24 */
 } AreaSparkRow;
 
@@ -88,7 +88,7 @@ typedef struct AreaDropRow {
     s32     vy;     /* 0x08 */
     s32     vz;     /* 0x0C */
     u8      pad_10[4];
-    Point3l pos; /* 0x14 */
+    Pos3 pos; /* 0x14 */
     u8      pad_20[4];
 } AreaDropRow;
 

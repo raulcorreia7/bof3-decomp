@@ -16,7 +16,7 @@ extern Callback D_801F048C[];
 extern Callback D_801F049C[];
 
 /* Six points. */
-extern Point2l D_801F04A4[6];
+extern Offset2 D_801F04A4[6];
 
 void func_801F0138(void);
 void func_801F01E8(void);

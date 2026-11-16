@@ -252,8 +252,8 @@ MATCH void func_801D1914(s16 amount) {
 MATCH void func_801D1C1C(s32* from, s32* to, u8 level) {
     POLY_G4* prim;
     TILE_1*  segment;
-    Point3l  current;
-    Point3l  step;
+    Pos3  current;
+    Pos3  step;
     DVECTOR  projected;
     s32      phase;
     u8       i;

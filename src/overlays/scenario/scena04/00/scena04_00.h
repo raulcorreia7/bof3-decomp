@@ -52,12 +52,7 @@ ASSERT_SIZE(SceneBox, 0x30);
 ASSERT_OFFSET(SceneBox, far, 0x18);
 
 /* One point of the path func_801F77EC builds in the area work memory. */
-typedef struct ScenePathPoint {
-    s32 x;   /* 0x00 */
-    s32 y;   /* 0x04 */
-    s32 z;   /* 0x08 */
-    s32 pad; /* 0x0C */
-} ScenePathPoint;
+typedef VECTOR ScenePathPoint;
 
 /* The work area: the area focus point, then the path points. */
 typedef struct ScenePathWork {
@@ -69,8 +64,8 @@ typedef struct ScenePathWork {
 } ScenePathWork;
 
 ASSERT_SIZE(ScenePathPoint, 0x10);
-ASSERT_OFFSET(ScenePathPoint, y, 0x04);
-ASSERT_OFFSET(ScenePathPoint, z, 0x08);
+ASSERT_OFFSET(ScenePathPoint, vy, 0x04);
+ASSERT_OFFSET(ScenePathPoint, vz, 0x08);
 ASSERT_SIZE(ScenePathWork, 0x90);
 ASSERT_OFFSET(ScenePathWork, points, 0x10);
 
