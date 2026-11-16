@@ -32,4 +32,8 @@ extern u8 g_InventoryCounts[4][INV_SLOTS_PER_CATEGORY];
 /* D_8014544C */
 extern u8 g_VitalItemIds[INV_VITAL_ITEM_SLOTS];
 
+/* The five list titles the inventory and equip menus draw. */
+extern u8* g_MenuInventoryTitles[5];
+extern u8* g_MenuEquipTitles[5];
+
 #endif
