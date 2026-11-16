@@ -42,6 +42,8 @@ extern LineEndpoints D_801F4B44[];
 
 /* Draws a line between two world points. */
 void func_801F2E10(s32* first, s32* second);
+/* The drop-shadow pair under the line, one shadow per endpoint. */
+void func_801F3040(s16 x0, s16 y0, s16 radius0, u16 angle0, s16 x1, s16 y1, s16 radius1, u16 angle1);
 
 #define AREA168_ENTRY_TABLE(type, offset, index) AREA_PAYLOAD_FIELD(D_801F4B2C, type, offset, index)
 /* The payload's data after the last function; the per-state handler tables
