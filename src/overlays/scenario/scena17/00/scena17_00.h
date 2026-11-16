@@ -9,7 +9,6 @@
 extern u8       D_80146865;
 extern u8       D_80146866;
 void            Shop_DispatchStep(void);
-extern u8       D_80146867;
 extern s8       D_80146873;
 extern u8       D_80143BB4;
 extern u32      D_801F6C00;
