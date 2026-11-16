@@ -272,10 +272,7 @@ MATCH void func_801EFD5C(void) {
     setTPage(prim, 0, 1, 832, 256);
     setClut(prim, 0, 506);
     setUV4(prim, 8, 8, 87, 8, 8, D_1F800000.cells.halves[1] + 8, 87, D_1F800000.cells.halves[1] + 8);
-    setRGB0(prim, D_1F800000.cells.halves[2], D_1F800000.cells.halves[2], D_1F800000.cells.halves[2]);
-    setRGB1(prim, D_1F800000.cells.halves[2], D_1F800000.cells.halves[2], D_1F800000.cells.halves[2]);
-    setRGB2(prim, D_1F800000.cells.halves[2], D_1F800000.cells.halves[2], D_1F800000.cells.halves[2]);
-    setRGB3(prim, D_1F800000.cells.halves[2], D_1F800000.cells.halves[2], D_1F800000.cells.halves[2]);
+    GFX_SET_RGB_ALL(prim, D_1F800000.cells.halves[2], D_1F800000.cells.halves[2], D_1F800000.cells.halves[2]);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_GT4));
     prim = (POLY_GT4*)g_GfxPrimCursor;
     SetPolyGT4(prim);

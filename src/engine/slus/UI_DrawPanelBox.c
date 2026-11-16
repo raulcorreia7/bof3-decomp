@@ -42,10 +42,7 @@ MATCH void UI_DrawPanelBox(s16 x, s16 y, u8 w, u8 h) {
     SetPolyGT4(poly);
     poly->tpage = GetTPage(0, 0, FONT_TPAGE_X, FONT_TPAGE_Y);
     poly->clut  = GetClut(((s8)CHARACTER_BLOCK->window_style << 5) | 0x10, STAGE_PALETTE_Y + 1);
-    setRGB0(poly, 255, 255, 255);
-    setRGB1(poly, 255, 255, 255);
-    setRGB2(poly, 255, 255, 255);
-    setRGB3(poly, 255, 255, 255);
+    GFX_SET_RGB_ALL(poly, 255, 255, 255);
     setXY4(poly, x, y, x + tile_w, y, x, y + tile_h, x + tile_w, y + tile_h);
     setUV4(poly, 0, 0, w, 0, 0, h, w, h);
     SetSemiTrans(poly, 1);

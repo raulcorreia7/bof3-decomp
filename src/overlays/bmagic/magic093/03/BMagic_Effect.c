@@ -396,10 +396,7 @@ MATCH void func_801F01F0(void) {
     setXY4(prim, D_1F800000.cells.halves[3] - D_1F800000.cells.halves[7], D_1F800000.cells.halves[4] - D_1F800000.cells.halves[6], D_1F800000.cells.halves[3] + D_1F800000.cells.halves[7],
            D_1F800000.cells.halves[4] - D_1F800000.cells.halves[6], D_1F800000.cells.halves[3] - D_1F800000.cells.halves[7], D_1F800000.cells.halves[4],
            D_1F800000.cells.halves[3] + D_1F800000.cells.halves[7], D_1F800000.cells.halves[4]);
-    setRGB0(prim, shade, shade, shade);
-    setRGB1(prim, shade, shade, shade);
-    setRGB2(prim, shade, shade, shade);
-    setRGB3(prim, shade, shade, shade);
+    GFX_SET_RGB_ALL(prim, shade, shade, shade);
     prim->tpage = GetTPage(1, 1, 832, 256);
     prim->clut  = GetClut(0, 506);
     setUVWH(prim, 0x40, 0x40, 128, 191);

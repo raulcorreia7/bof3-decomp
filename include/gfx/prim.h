@@ -98,6 +98,13 @@ static inline void GFX_AddDitheredDrawMode(u32 layer, s32 tpage) {
     GFX_AddPrim((layer), sizeof(DR_MODE))
 
 /* The shared cursor viewed as the primitive it is about to receive. */
+/* Give all four vertices of a Gouraud quad one colour. */
+#define GFX_SET_RGB_ALL(poly, r, g, b) \
+    setRGB0(poly, r, g, b);            \
+    setRGB1(poly, r, g, b);            \
+    setRGB2(poly, r, g, b);            \
+    setRGB3(poly, r, g, b)
+
 #define GFX_CURSOR(type) ((type*)g_GfxPrimCursor)
 
 /* Begin a semi-transparent, neutral-colour sprite at (x, y) on the shared

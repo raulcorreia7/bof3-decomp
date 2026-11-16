@@ -125,10 +125,7 @@ MATCH void func_801F0428(void) {
     prim->y3                  = FIXED_MUL(rcos(D_1F800000.cells.words[2]), D_1F800000.cells.words[0]) + 120;
     shade                     = g_Task->unk_09 / 3;
     D_1F800000.cells.words[1] = shade * 6;
-    setRGB0(prim, D_1F800000.cells.words[1], D_1F800000.cells.words[1], D_1F800000.cells.words[1]);
-    setRGB1(prim, D_1F800000.cells.words[1], D_1F800000.cells.words[1], D_1F800000.cells.words[1]);
-    setRGB2(prim, D_1F800000.cells.words[1], D_1F800000.cells.words[1], D_1F800000.cells.words[1]);
-    setRGB3(prim, D_1F800000.cells.words[1], D_1F800000.cells.words[1], D_1F800000.cells.words[1]);
+    GFX_SET_RGB_ALL(prim, D_1F800000.cells.words[1], D_1F800000.cells.words[1], D_1F800000.cells.words[1]);
     GFX_AddPrim(3, sizeof(POLY_G4));
     GFX_AddDitheredDrawMode(3, getTPage(0, 0, 320, 256));
 }
