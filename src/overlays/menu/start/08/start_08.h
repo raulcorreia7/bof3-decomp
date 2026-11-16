@@ -613,7 +613,7 @@ void        func_801E206C(void);
 void        func_801E2408(void);
 extern void func_801E2668(s32 icon_kind, s32 icon_x, s32 icon_y);
 extern void func_801E26A8(s32 x, s32 y);
-void        Menu_DrawOptionRow(s32 x, s32 y, s32 option_index, s32 select_step);
+void        Menu_DrawConfigRow(s32 x, s32 y, s32 option_index, s32 select_step);
 u8*         Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, s32 glyph_left, s32 glyph_right);
 void        func_801E3EC4(void);
 void        func_801E4024(void);

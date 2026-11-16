@@ -14,7 +14,7 @@ NON_MATCHING void func_801E26A8(s32 x, s32 y) {
         if ((s8)D_80148655 - 2 == i) {
             marker = D_80148654;
         }
-        Menu_DrawOptionRow(x, y & HALF_MASK, i & BYTE_MASK, marker);
+        Menu_DrawConfigRow(x, y & HALF_MASK, i & BYTE_MASK, marker);
         marker = 0;
         if ((s8)D_80148655 - 2 == i) {
             marker = D_80148654;

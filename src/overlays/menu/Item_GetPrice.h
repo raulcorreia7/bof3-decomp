@@ -12,7 +12,7 @@ MATCH u16 Item_GetPrice(ItemCategory category, s32 item_id) {
             return *(u16*)(&D_801C90F2 + ((item_id & BYTE_MASK) * WEAPON_STRIDE));
         case ITEM_CAT_ARMOR:
             return *(u16*)(&D_801C98B8 + ((item_id & BYTE_MASK) * ARMOR_STRIDE));
-        case ITEM_CAT_ACCESSORY:
-            return *(u16*)(&D_801C9E8E + ((item_id & BYTE_MASK) * ACCESSORY_STRIDE));
+        case ITEM_CAT_OPTION:
+            return *(u16*)(&D_801C9E8E + ((item_id & BYTE_MASK) * OPTION_ITEM_STRIDE));
     }
 }

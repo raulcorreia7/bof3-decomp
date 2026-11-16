@@ -2,7 +2,7 @@
 
 typedef struct {
     char* text[6];
-} OptionText;
+} ConfigText;
 
 typedef struct {
     Record10   unk_00;
@@ -16,8 +16,8 @@ typedef struct {
     Record8    unk_38;
     Record11   unk_40;
     u8         pad_4B[5];
-    OptionText chosen;
-    OptionText all;
+    ConfigText chosen;
+    ConfigText all;
 } WorkFields;
 
 typedef union {
@@ -26,7 +26,7 @@ typedef union {
 } WorkArea;
 
 #ifdef NON_MATCHING
-NON_MATCHING void Menu_DrawOptionRow(s32 x, s32 y, s32 option_index, s32 select_step) {
+NON_MATCHING void Menu_DrawConfigRow(s32 x, s32 y, s32 option_index, s32 select_step) {
     WorkArea work;
     s16      tmp0;
     LINE_F2* line;
@@ -77,5 +77,5 @@ NON_MATCHING void Menu_DrawOptionRow(s32 x, s32 y, s32 option_index, s32 select_
     GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F2));
 }
 #else
-INCLUDE_ASM(Menu_DrawOptionRow);
+INCLUDE_ASM(Menu_DrawConfigRow);
 #endif

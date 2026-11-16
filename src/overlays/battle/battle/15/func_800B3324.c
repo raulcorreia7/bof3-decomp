@@ -54,8 +54,8 @@ NON_MATCHING void func_800B3324(u8 index, u16 x, u16 y, s32 patch, s32 hide_chan
     compare_names[EQUIP_SLOT_SHIELD]      = g_Armors[chr->equip.shield].header.name;
     compare_names[EQUIP_SLOT_HELMET]      = g_Armors[chr->equip.helmet].header.name;
     compare_names[EQUIP_SLOT_ARMOR]       = g_Armors[chr->equip.armor].header.name;
-    compare_names[EQUIP_SLOT_ACCESSORY_1] = (u8*)g_Accessories[chr->equip.accessories[0]].header.name;
-    compare_names[EQUIP_SLOT_ACCESSORY_2] = (u8*)g_Accessories[chr->equip.accessories[1]].header.name;
+    compare_names[EQUIP_SLOT_ACCESSORY_1] = (u8*)g_OptionItems[chr->equip.accessories[0]].header.name;
+    compare_names[EQUIP_SLOT_ACCESSORY_2] = (u8*)g_OptionItems[chr->equip.accessories[1]].header.name;
     for (i = 0; i < EQUIP_SLOT_COUNT; i++) {
         if (i == task->unk_0B) {
             func_801AEA80((u16)(left + 6), (u16)(top + (i * 13 + 87)), g_MenuEquipSlotIcons[i], 1);

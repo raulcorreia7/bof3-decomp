@@ -9,7 +9,7 @@ MATCH void func_801D7960(void) {
     state = &D_80148656;
     func_801D7E1C(state[0], 152, 63, 0, D_8014865D);
     Menu_DrawCursorFrame(17, ((s8)state[0] * 0x36 + 0x3E) & 0xFFFE, 128, 52, 0, 6);
-    if ((Menu_ToggleOption() & BYTE_MASK) != 0) {
+    if ((Menu_ChooseYesNo() & BYTE_MASK) != 0) {
         if (D_8014865B != 0) {
             u8 turns;
 

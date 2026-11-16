@@ -12,7 +12,7 @@ MATCH u32 Item_GetFlags(u32 category, u32 item) {
             return D_801C90E9[(item & BYTE_MASK) * 0x18];
         case ITEM_CAT_ARMOR:
             return D_801C98B1[(item & BYTE_MASK) * 0x16];
-        case ITEM_CAT_ACCESSORY:
+        case ITEM_CAT_OPTION:
             return D_801C9E89[(item & BYTE_MASK) * 0x14];
         case ITEM_CAT_VITAL:
             return 0;

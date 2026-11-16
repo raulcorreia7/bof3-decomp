@@ -78,7 +78,7 @@ MATCH void func_801D12C8(void) {
             flags = g_Armors[g_FairyJobs[g_SceneEventState.selection].record_state].header.flags;
             break;
         default:
-            flags = g_Accessories[g_FairyJobs[g_SceneEventState.selection].record_state].header.flags;
+            flags = g_OptionItems[g_FairyJobs[g_SceneEventState.selection].record_state].header.flags;
             break;
     }
 
