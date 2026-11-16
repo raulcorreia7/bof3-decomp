@@ -20,8 +20,8 @@ MATCH void func_801F3588(u8* dst, u8* src, u16* state) {
     SetTransMatrix(&rot);
     SetRotMatrix(&rot);
 
-    corner = (s16*)dst + 1;
-    result = (s16*)src + 1;
+    corner = FIELD_PTR(s16, dst, 2);
+    result = FIELD_PTR(s16, src, 2);
     index  = 0;
     do {
         in.vx = *corner++;
