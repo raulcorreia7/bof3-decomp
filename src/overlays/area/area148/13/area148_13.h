@@ -7,6 +7,9 @@
 #include "overlays/area/world03.h"
 #include "area/spad.h"
 
+/* The control station's boot line. */
+#define AREA148_MSG_CONTROL_STATION_UNLOCKED 5
+
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
 /* The active battle-step selector. */

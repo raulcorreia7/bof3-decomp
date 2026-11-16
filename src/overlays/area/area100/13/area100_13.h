@@ -7,6 +7,9 @@
 #include "overlays/area/world02.h"
 #include "area/spad.h"
 
+/* The antenna code check's rejection line. */
+#define AREA100_MSG_CODE_REJECTED 9
+
 extern u8  D_801F407C[];
 extern u8  D_801F4084[];
 extern u8  D_801F4F68[];

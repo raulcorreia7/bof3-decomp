@@ -2,7 +2,7 @@
 
 MATCH void func_801F3BD0(void) {
     if (MENU_SELECTION_IDLE()) {
-        g_MessageRequest = 5;
+        g_MessageRequest = AREA148_MSG_CONTROL_STATION_UNLOCKED;
         SYS_SetFlag(g_SceneEventFlags, 89);
     } else {
         MESSAGE_REQUEST_CLEAR();

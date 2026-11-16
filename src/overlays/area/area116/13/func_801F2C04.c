@@ -12,7 +12,7 @@ MATCH s32 func_801F2C04(void) {
             message = 3;
         } else {
             *zenny -= 10000;
-            g_MessageRequest = 2;
+            g_MessageRequest = AREA116_MSG_ZENNY_DEAL;
             return;
         }
     }

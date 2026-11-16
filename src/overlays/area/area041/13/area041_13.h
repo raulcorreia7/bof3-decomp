@@ -7,6 +7,9 @@
 #include "overlays/area/world01.h"
 #include "area/spad.h"
 
+/* The cook's acceptance once the ingredients are gathered. */
+#define AREA041_MSG_COOK_APPRENTICE 0x62
+
 extern u8 D_80144EA0[];
 
 void func_801F2EFC(void);
