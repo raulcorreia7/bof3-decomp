@@ -4,6 +4,7 @@
 NON_MATCHING void func_801E0BAC(void) {
     s32 pad;
     u32 scroll;
+    u8  scroll_base;
     u32 scroll_hi;
     u8* cursor_ptr;
     u8  new_scroll;
@@ -32,11 +33,12 @@ NON_MATCHING void func_801E0BAC(void) {
             D_801483CD = 0x10;
         }
     } else if (pad & 4) {
-        scroll = D_801483CA & BYTE_MASK;
+        scroll_base = D_801483CA;
+        scroll      = scroll_base & BYTE_MASK;
         if (scroll == 0) {
             D_801483CB = 0;
         } else if (scroll < 9U) {
-            D_801483CB -= D_801483CA;
+            D_801483CB -= scroll_base;
             D_801483CA = 0;
         } else {
             D_801483CB -= 9;
