@@ -4,43 +4,6 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801FA98C);
-
-MATCH void func_801FC220(void) {
-    if (D_801FE9DC != 0) {
-        s8 step                  = D_801FE94C[g_FrameCount & 0x3];
-        g_AreaCameraRefreshCount = 2;
-        g_AreaCameraOffsetY += step * 4;
-    }
-}
-
-INCLUDE_ASM(func_801FC280);
-
-MATCH void func_801FC830(void) {
-    if (g_SceneState.step_05 == 1) {
-        if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-            func_801BE1B0(2);
-            SYS_SetFlag(g_SceneFlags, 52);
-            g_SceneState.state_04 = 0;
-            g_SceneState.step_05  = 0;
-        }
-    }
-}
-
-MATCH void func_801FC8A0(void) {
-    if (g_SceneState.step_05 == 0x23) {
-        Game_ClearScriptActive();
-        func_801BE1B0(4);
-        *g_ScriptVars         = 0x20;
-        g_SceneState.state_04 = 0;
-        g_SceneState.step_05  = 0;
-    }
-}
-
-INCLUDE_ASM(func_801FC900);
-
-INCLUDE_ASM(func_801FCD80);
-
 MATCH u16 func_801FD278(void) {
     SCENA10_PARTY_LOOKUP(4, D_801FE950, D_801FE954, 0);
 }
