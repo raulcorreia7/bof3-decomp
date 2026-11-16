@@ -133,14 +133,14 @@ NON_MATCHING void func_801EF1B0(void) {
     s32                 i;
     s32                 tpage;
 
-    D_1F800000.view.scenario.math_00 = g_Task->timer;
+    D_1F800000.cells.words[0] = g_Task->timer;
     if (g_Battle.action_id == 50) {
-        D_1F800000.view.scenario.math_08 = g_Task->unk_09 * 3;
+        D_1F800000.cells.words[2] = g_Task->unk_09 * 3;
     } else {
-        D_1F800000.view.scenario.math_08 = g_Task->unk_09 * 5;
+        D_1F800000.cells.words[2] = g_Task->unk_09 * 5;
     }
-    D_1F800000.view.scenario.math_0C = g_Task->unk_09;
-    spad                             = &D_1F800000.view.scenario;
+    D_1F800000.cells.words[3] = g_Task->unk_09;
+    spad                      = &D_1F800000.view.scenario;
     for (i = 0; i < 16; i++) {
         tpage = getTPage(0, 1, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
