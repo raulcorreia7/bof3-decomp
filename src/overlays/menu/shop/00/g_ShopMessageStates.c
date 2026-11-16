@@ -1,5 +1,6 @@
 #include "shop_00.h"
 
+// clang-format off
 void (*g_ShopMessageStates[SHOP_PANEL0_STATE_COUNT])() = {
     func_801E2800,
     func_801E2948,

@@ -20,7 +20,7 @@ segments:
       - [0x9F8, c, Actor_AdvanceWhenPartyNear]
       - [0xB38, c, Actor_SlideScreenX]
       - [0xB94, c, Actor_AdvanceWhenPartyAway]
-      - [0xCA4, c, func_801F38A4]
+      - [0xCA4, c, Actor_SlideScreenDown16]
       - [0xD14, c, Area_Update]
       - [0x116C, c, func_801F3D6C]
       - [0x11B0, c, func_801F3DB0]
