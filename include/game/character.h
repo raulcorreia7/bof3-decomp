@@ -32,6 +32,9 @@
 #define CHARACTER_SPRITES_SECTION_COUNT 3
 #define CHARACTER_PALETTE_COLORS        32
 
+/* The highest fatigue level a character reaches: Char_DrainFatigue raises the byte only below it. */
+#define CHARACTER_FATIGUE_MAX           9
+
 /* The ailments the engine cures when a battle ends (the game's own strings
  * call status removal "cure"): Battle_ReloadPartySprites and Battle_LoadEndOverlay pass a
  * battler's status & this mask to Battle_CureStatus; STATUS_KO, STATUS_POISONED

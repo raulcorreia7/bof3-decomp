@@ -9,7 +9,7 @@ MATCH void Char_DrainFatigue(void) {
     chr = g_Characters;
 loop:
     fatigue = chr->fatigue;
-    if (fatigue < 9U) {
+    if (fatigue < CHARACTER_FATIGUE_MAX) {
         chr->fatigue = fatigue + 1;
         Char_RebuildStats(chr);
     }
