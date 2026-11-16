@@ -22,6 +22,6 @@ MATCH void func_801DE754(void) {
         }
     } else {
         sp                    = SPAD(0u);
-        D_8014833A[0].kind_00 = sp->view.battle.state_00;
+        D_8014833A[0].kind_00 = sp->cells.bytes[0];
     }
 }

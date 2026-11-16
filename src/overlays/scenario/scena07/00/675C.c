@@ -91,8 +91,8 @@ MATCH s32 func_801FD67C(s32 x, s32 y) {
         if ((SYS_TestFlag(g_SceneFlags, 4) == 0) || ((func_801FDA34() & BYTE_MASK) == 0)) {
             u16 facing;
 
-            facing                 = g_Game.members[0].facing;
-            D_1F800000.view.raw[0] = facing;
+            facing                    = g_Game.members[0].facing;
+            D_1F800000.cells.bytes[0] = facing;
             if (((u32)(facing - 5) >= 2U) && ((u8)facing != 4)) {
                 g_ScriptVars[0] = 0x10;
                 Game_SetScriptActive();
@@ -111,8 +111,8 @@ MATCH s32 func_801FD67C(s32 x, s32 y) {
     if (g_GameAreaId == AREA_ID_TIDAL_CAVES_OUTSIDE) {
         u8 facing;
 
-        facing                 = g_Game.members[0].facing;
-        D_1F800000.view.raw[0] = facing;
+        facing                    = g_Game.members[0].facing;
+        D_1F800000.cells.bytes[0] = facing;
         if (((u32)facing >= 2U) && (facing != 2) && ((y >> 16) >= 0x1E)) {
             Game_SetScriptActive();
             Message_StartAreaMessage(1);

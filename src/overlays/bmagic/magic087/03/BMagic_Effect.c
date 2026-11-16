@@ -181,9 +181,9 @@ MATCH void func_801EF580(s32 phase) {
     tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
-    D_1F800000.view.scenario.math_08 = 1;
-    start                            = 0;
-    count                            = 8;
+    D_1F800000.cells.words[2] = 1;
+    start                     = 0;
+    count                     = 8;
     if (g_Task->unk_04 < 16) {
         count = (g_Task->unk_04 >> 1) + 1;
     }
@@ -194,24 +194,24 @@ MATCH void func_801EF580(s32 phase) {
         prim = GFX_CURSOR(POLY_GT4);
         SetPolyGT4(prim);
         SetSemiTrans(prim, 1);
-        D_1F800000.view.scenario.math_04 = ((g_Task->unk_04 + i + phase + 1) & 0x1F) << 7;
-        offset                           = ((rsin(D_1F800000.view.scenario.math_04) * 8) >> 12) + 4;
+        D_1F800000.cells.words[1] = ((g_Task->unk_04 + i + phase + 1) & 0x1F) << 7;
+        offset                    = ((rsin(D_1F800000.cells.words[1]) * 8) >> 12) + 4;
         setXY2(prim, g_Task->unk_2E.half - offset, g_Task->unk_30.half - (i + 1) * 8, prim->x0 + 8, g_Task->unk_30.half - (i + 1) * 8);
-        D_1F800000.view.scenario.math_04 = ((g_Task->unk_04 + phase + i) & 0x1F) << 7;
-        offset                           = ((rsin(D_1F800000.view.scenario.math_04) * 8) >> 12) + 4;
-        prim->x2                         = g_Task->unk_2E.half - offset;
-        prim->y2                         = g_Task->unk_30.half - i * 8;
-        prim->x3                         = prim->x2 + 8;
-        prim->y3                         = g_Task->unk_30.half - i * 8;
-        setRGB2(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08);
-        setRGB3(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08);
+        D_1F800000.cells.words[1] = ((g_Task->unk_04 + phase + i) & 0x1F) << 7;
+        offset                    = ((rsin(D_1F800000.cells.words[1]) * 8) >> 12) + 4;
+        prim->x2                  = g_Task->unk_2E.half - offset;
+        prim->y2                  = g_Task->unk_30.half - i * 8;
+        prim->x3                  = prim->x2 + 8;
+        prim->y3                  = g_Task->unk_30.half - i * 8;
+        setRGB2(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[2], D_1F800000.cells.words[2]);
+        setRGB3(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[2], D_1F800000.cells.words[2]);
         if (i < 6) {
-            D_1F800000.view.scenario.math_08 = (i + 1) * 16;
+            D_1F800000.cells.words[2] = (i + 1) * 16;
         } else {
-            D_1F800000.view.scenario.math_08 = 0x61 - (i - 5) * 48;
+            D_1F800000.cells.words[2] = 0x61 - (i - 5) * 48;
         }
-        setRGB0(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08);
-        setRGB1(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08);
+        setRGB0(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[2], D_1F800000.cells.words[2]);
+        setRGB1(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[2], D_1F800000.cells.words[2]);
         prim->tpage = GetTPage(0, 1, 0x3C0, 0x100);
         prim->clut  = GetClut(0, 0x1FA);
         setUV4(prim, 0, (i * 8 + g_Task->unk_04 * 2) & 0x1F, 8, (i * 8 + g_Task->unk_04 * 2) & 0x1F, 0, ((i * 8 + g_Task->unk_04 * 2) & 0x1F) + 8, 8, ((i * 8 + g_Task->unk_04 * 2) & 0x1F) + 8);
@@ -260,14 +260,14 @@ MATCH void func_801EFAD4(void) {
     s32          offset;
 
     g_Task->param.unk_0B += 1;
-    D_1F800000.view.scenario.math_04 = (++g_Task->unk_09 & 0x3F) << 6;
-    D_1F800000.view.scenario.math_00 = g_Task->unk_0C -= g_Task->unk_18;
-    g_Task->pos.x.fixed              = g_BattleEffectBattler->pos.x.fixed + ((rsin(D_1F800000.view.scenario.math_04) * D_1F800000.view.scenario.math_00) >> 3);
-    offset                           = rcos(D_1F800000.view.scenario.math_04) * D_1F800000.view.scenario.math_00;
-    battler                          = g_BattleEffectBattler;
-    work                             = g_Task;
-    work->pos.y.fixed                = battler->pos.y.fixed + (offset >> 3);
-    work->pos.z.fixed                = battler->pos.z.fixed;
+    D_1F800000.cells.words[1] = (++g_Task->unk_09 & 0x3F) << 6;
+    D_1F800000.cells.words[0] = g_Task->unk_0C -= g_Task->unk_18;
+    g_Task->pos.x.fixed       = g_BattleEffectBattler->pos.x.fixed + ((rsin(D_1F800000.cells.words[1]) * D_1F800000.cells.words[0]) >> 3);
+    offset                    = rcos(D_1F800000.cells.words[1]) * D_1F800000.cells.words[0];
+    battler                   = g_BattleEffectBattler;
+    work                      = g_Task;
+    work->pos.y.fixed         = battler->pos.y.fixed + (offset >> 3);
+    work->pos.z.fixed         = battler->pos.z.fixed;
     if (work->timer < 33) {
         work->timer += 1;
     }
@@ -384,30 +384,30 @@ MATCH void func_801F0014(void) {
     SetLineG3(prim);
     SetSemiTrans(prim, 1);
     if (g_Task->header.mode < 2) {
-        D_1F800000.view.scenario.math_00 = 0x80;
+        D_1F800000.cells.words[0] = 0x80;
     } else {
-        D_1F800000.view.scenario.math_00 = g_Task->unk_09 * 4 + 0x80;
+        D_1F800000.cells.words[0] = g_Task->unk_09 * 4 + 0x80;
     }
-    setVector(&D_1F800014[0], FIXED_MUL(rsin(0x200), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(0x200), D_1F800000.view.scenario.math_00), 0);
-    setVector(&D_1F800014[1], FIXED_MUL(rsin(0x600), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(0x600), D_1F800000.view.scenario.math_00), 0);
-    setVector(&D_1F800014[2], FIXED_MUL(rsin(0xA00), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(0xA00), D_1F800000.view.scenario.math_00), 0);
+    setVector(&D_1F800014[0], FIXED_MUL(rsin(0x200), D_1F800000.cells.words[0]), FIXED_MUL(rcos(0x200), D_1F800000.cells.words[0]), 0);
+    setVector(&D_1F800014[1], FIXED_MUL(rsin(0x600), D_1F800000.cells.words[0]), FIXED_MUL(rcos(0x600), D_1F800000.cells.words[0]), 0);
+    setVector(&D_1F800014[2], FIXED_MUL(rsin(0xA00), D_1F800000.cells.words[0]), FIXED_MUL(rcos(0xA00), D_1F800000.cells.words[0]), 0);
     RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
-    D_1F800000.view.scenario.math_08 = g_Task->timer * D_801F0548[g_Task->unk_04];
-    setRGB0(prim, D_1F800000.view.scenario.math_08, 1, D_1F800000.view.scenario.math_08);
-    setRGB1(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, 1);
-    setRGB2(prim, D_1F800000.view.scenario.math_08, 1, D_1F800000.view.scenario.math_08);
+    D_1F800000.cells.words[2] = g_Task->timer * D_801F0548[g_Task->unk_04];
+    setRGB0(prim, D_1F800000.cells.words[2], 1, D_1F800000.cells.words[2]);
+    setRGB1(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[2], 1);
+    setRGB2(prim, D_1F800000.cells.words[2], 1, D_1F800000.cells.words[2]);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(LINE_G3));
 
     prim = GFX_CURSOR(LINE_G3);
     SetLineG3(prim);
     SetSemiTrans(prim, 1);
-    setVector(&D_1F800014[0], FIXED_MUL(rsin(0xA00), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(0xA00), D_1F800000.view.scenario.math_00), 0);
-    setVector(&D_1F800014[1], FIXED_MUL(rsin(0xE00), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(0xE00), D_1F800000.view.scenario.math_00), 0);
-    setVector(&D_1F800014[2], FIXED_MUL(rsin(0x200), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(0x200), D_1F800000.view.scenario.math_00), 0);
+    setVector(&D_1F800014[0], FIXED_MUL(rsin(0xA00), D_1F800000.cells.words[0]), FIXED_MUL(rcos(0xA00), D_1F800000.cells.words[0]), 0);
+    setVector(&D_1F800014[1], FIXED_MUL(rsin(0xE00), D_1F800000.cells.words[0]), FIXED_MUL(rcos(0xE00), D_1F800000.cells.words[0]), 0);
+    setVector(&D_1F800014[2], FIXED_MUL(rsin(0x200), D_1F800000.cells.words[0]), FIXED_MUL(rcos(0x200), D_1F800000.cells.words[0]), 0);
     RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
-    setRGB0(prim, D_1F800000.view.scenario.math_08, 1, D_1F800000.view.scenario.math_08);
-    setRGB1(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, 1);
-    setRGB2(prim, D_1F800000.view.scenario.math_08, 1, D_1F800000.view.scenario.math_08);
+    setRGB0(prim, D_1F800000.cells.words[2], 1, D_1F800000.cells.words[2]);
+    setRGB1(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[2], 1);
+    setRGB2(prim, D_1F800000.cells.words[2], 1, D_1F800000.cells.words[2]);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(LINE_G3));
 }
 
