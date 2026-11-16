@@ -276,17 +276,17 @@ def select(args: argparse.Namespace, funcs: list[Func]) -> list[Func]:
     done = read_results(ROOT)
     chosen = [f for f in chosen if f.ref not in done]
     if args.sample:
-        chosen = random.Random(SAMPLE_SEED).sample(
-            chosen, min(args.sample, len(chosen))
-        )
+        chosen = random.Random(args.seed).sample(chosen, min(args.sample, len(chosen)))
     return sorted(chosen, key=lambda f: (f.size, f.ref))
 
 
-def stream(root: Path, funcs: list[Func]) -> Iterator[tuple[Func, dict]]:
-    """Yield each function with its drafts; m2c runs ``JOBS`` at a time, in order."""
+def stream(
+    root: Path, funcs: list[Func], jobs: int = JOBS
+) -> Iterator[tuple[Func, dict]]:
+    """Yield each function with its drafts; m2c runs ``jobs`` at a time, in order."""
     cache: dict[str, Path] = {}
     contexts = {id(f): context(root, f, cache) for f in funcs}
-    with ThreadPoolExecutor(JOBS) as pool:
+    with ThreadPoolExecutor(jobs) as pool:
         yield from zip(
             funcs,
             pool.map(lambda f: drafts(root, f, contexts[id(f)]), funcs),
@@ -303,6 +303,18 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--image", action="append", help="image id or prefix")
     parser.add_argument("--sample", type=int, help="sweep N functions at random")
     parser.add_argument(
+        "--seed",
+        type=int,
+        default=SAMPLE_SEED,
+        help="seed of the random sample (default %(default)s)",
+    )
+    parser.add_argument(
+        "--jobs",
+        type=int,
+        default=JOBS,
+        help="m2c runs at a time (default %(default)s)",
+    )
+    parser.add_argument(
         "--jsonl", action="store_true", help="one JSON object per printed line"
     )
     args = parser.parse_args(argv)
@@ -312,7 +324,7 @@ def main(argv: list[str] | None = None) -> int:
     path.parent.mkdir(parents=True, exist_ok=True)
     hits = 0
     with path.open("a", encoding="utf-8") as log:
-        for func, found in stream(ROOT, funcs):
+        for func, found in stream(ROOT, funcs, args.jobs):
             save_drafts(ROOT, func, found)
             status, diff, variant = sweep_one(ROOT, func, found)
             hits += status == "EXACT"

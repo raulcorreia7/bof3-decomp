@@ -9,12 +9,12 @@ The bundle is `work/<image>/<ADDR>/`:
     ctx.c        the image header's preprocessed context (tools/m2ctx.py)
     draft.c      the best m2c draft, the one with the fewest differing instructions
     draft.txt    that draft's result: variant, differing instructions, first difference
-    twins.txt    the three nearest matched functions: C body and instruction diff
+    twins.txt    the nearest matched functions (`--twins`, three by default): C body and instruction diff
                  (tools/template_diff.py)
     hints.md     the facts in the assembly, each with the tactic row it maps to
                  (bof3/source/hints.py)
     callees.txt  the prototype of each function the assembly calls
-    callers.txt  the lines of src/ and asm/ that call the function
+    callers.txt  the lines of src/ and asm/ that call the function (`--callers`, 30 by default)
 
 The trial runs `tools/try_body.py` on each m2c draft (tools/m2c_sweep.py); an exact draft stays
 in the tree, so polish it and run `meson compile -C build/meson check-<image>`. The bundle is
@@ -56,7 +56,7 @@ def callees(root: Path, func: Func) -> list[str]:
     ]
 
 
-def callers(root: Path, func: Func) -> list[str]:
+def callers(root: Path, func: Func, limit: int = CALLERS) -> list[str]:
     """Return the ``path:line: text`` lines that call the function, outside its own file."""
     out = subprocess.run(
         ["git", "grep", "-n", "-w", func.name, "--", "src", "asm"],
@@ -71,7 +71,7 @@ def callers(root: Path, func: Func) -> list[str]:
         ln
         for ln in lines
         if re.search(r"\b" + re.escape(func.name) + r"\s*\(|jal\s+" + func.name, ln)
-    ][:CALLERS]
+    ][:limit]
 
 
 def twins(root: Path, ranked: list[tuple[float, Func]], func: Func) -> str:
@@ -114,6 +114,15 @@ def main(argv: list[str] | None = None) -> int:
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument("target", help="TARGET@NAME or TARGET@0xADDRESS")
+    parser.add_argument(
+        "--twins", type=int, default=TWINS, help="twins to list (default %(default)s)"
+    )
+    parser.add_argument(
+        "--callers",
+        type=int,
+        default=CALLERS,
+        help="caller lines to keep (default %(default)s)",
+    )
     args = parser.parse_args(argv)
     funcs = load_index(ROOT)
     func = find(funcs, args.target)
@@ -125,7 +134,7 @@ def main(argv: list[str] | None = None) -> int:
     (folder / "asm.s").write_text(asm.read_text(encoding="utf-8"), encoding="utf-8")
     context = m2c_sweep.context(ROOT, func, {})
     (folder / "ctx.c").write_text(context.read_text(encoding="utf-8"), encoding="utf-8")
-    ranked = template_diff.candidates(funcs, func, TWINS)
+    ranked = template_diff.candidates(funcs, func, args.twins)
     body, result = draft(ROOT, func, context)
     (folder / "draft.c").write_text(body, encoding="utf-8")
     (folder / "draft.txt").write_text(result, encoding="utf-8")
@@ -135,7 +144,9 @@ def main(argv: list[str] | None = None) -> int:
         encoding="utf-8",
     )
     (folder / "callees.txt").write_text("\n".join(callees(ROOT, func)) + "\n", "utf-8")
-    (folder / "callers.txt").write_text("\n".join(callers(ROOT, func)) + "\n", "utf-8")
+    (folder / "callers.txt").write_text(
+        "\n".join(callers(ROOT, func, args.callers)) + "\n", "utf-8"
+    )
     print(folder.relative_to(ROOT))
     print(result.rstrip())
     return 0

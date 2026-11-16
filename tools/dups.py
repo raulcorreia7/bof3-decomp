@@ -76,7 +76,7 @@ def import_rapidfuzz():
 def near(args: argparse.Namespace) -> int:
     """Group functions whose opcode sequences are alike; pair assembly with a C template."""
     process, indel = import_rapidfuzz()
-    funcs = functions(args, MIN_WORDS)
+    funcs = functions(args, args.min_words)
     by_seq: dict[str, list[Func]] = collections.defaultdict(list)
     for f in funcs:
         by_seq[opcode_string(f.words)].append(f)
@@ -87,7 +87,7 @@ def near(args: argparse.Namespace) -> int:
             s,
             seqs,
             scorer=indel.normalized_similarity,
-            score_cutoff=THRESHOLD,
+            score_cutoff=args.threshold,
             limit=None,
         ):
             if j != i:
@@ -324,6 +324,18 @@ def main(argv: list[str] | None = None) -> int:
             "--jsonl", action="store_true", help="one JSON object per line"
         )
         if name == "near":
+            verb.add_argument(
+                "--threshold",
+                type=float,
+                default=THRESHOLD,
+                help="least opcode similarity of a pair, 0 to 1 (default %(default)s)",
+            )
+            verb.add_argument(
+                "--min-words",
+                type=int,
+                default=MIN_WORDS,
+                help="shortest function to compare, in instructions (default %(default)s)",
+            )
             verb.add_argument(
                 "--full",
                 action="store_true",
