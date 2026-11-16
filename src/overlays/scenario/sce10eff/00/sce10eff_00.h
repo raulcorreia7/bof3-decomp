@@ -28,13 +28,13 @@
     angle                         = SCE10EFF_ORBIT_ANGLE(counter); \
     angle_cell                    = &D_1F800004;                   \
     *angle_cell                   = angle;                         \
-    D_1F800000                    = (depth);                       \
+    g_ScratchPad                  = (depth);                       \
                                                                    \
-    velocity     = rcos(angle) * D_1F800000;                       \
+    velocity     = rcos(angle) * g_ScratchPad;                     \
     work         = g_Task;                                         \
     work->proj.x = D_801D2744->proj.x + velocity;                  \
                                                                    \
-    velocity       = rsin(*angle_cell) * D_1F800000;               \
+    velocity       = rsin(*angle_cell) * g_ScratchPad;             \
     g_Task->proj.y = D_801D2744->proj.y + velocity;                \
                                                                    \
     if (TIMER_EXPIRED(g_Task->timer)) {                            \
@@ -75,7 +75,8 @@ ASSERT_OFFSET(SceneBandEffect, proj_z, 0x3E);
 extern s32              D_1F800004;
 extern s32              D_1F800008;
 extern s32              D_1F80000C;
-extern SVECTOR          D_1F800014[];
+/* g_ScratchPadVectors */
+extern SVECTOR          g_ScratchPadVectors[];
 extern Callback         D_801D2708[SCN_EFFECT_STATE_STEP_COUNT];
 extern Callback         D_801D2714[];
 extern Callback         D_801D2724[];

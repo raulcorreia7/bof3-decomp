@@ -153,13 +153,13 @@ MATCH void func_801EF554(void) {
     angle                  = (temp & 0x7F) << 5;
     VOL(s32, work->unk_0C) = temp;
     *angle_cell            = angle;
-    D_1F800000             = 0x28;
+    g_ScratchPad           = 0x28;
 
-    velocity          = rcos(angle) * D_1F800000;
+    velocity          = rcos(angle) * g_ScratchPad;
     work              = g_Task;
     work->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed + velocity;
 
-    velocity            = rsin(*angle_cell) * D_1F800000;
+    velocity            = rsin(*angle_cell) * g_ScratchPad;
     g_Task->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed + velocity;
 
     g_Task->pos.z.part.integer = BATTLE_ACTIVE_WORK->pos.z.part.integer;
@@ -189,13 +189,13 @@ MATCH void func_801EF7D8(void) {
     angle                  = (counter & 0x7F) << 5;
     angle_cell             = &D_1F800004;
     *angle_cell            = angle;
-    D_1F800000             = 0x28;
+    g_ScratchPad           = 0x28;
 
-    velocity          = rcos(angle) * D_1F800000;
+    velocity          = rcos(angle) * g_ScratchPad;
     work              = g_Task;
     work->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed + velocity;
 
-    velocity            = rsin(*angle_cell) * D_1F800000;
+    velocity            = rsin(*angle_cell) * g_ScratchPad;
     g_Task->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed + velocity;
 
     if (--g_Task->timer == 0) {
@@ -234,12 +234,12 @@ MATCH void func_801F0090(void) {
     VOL(s32, work->unk_0C) = counter;
     angle_cell             = &D_1F800004;
     *angle_cell            = angle;
-    D_1F800000             = 0x18;
+    g_ScratchPad           = 0x18;
 
-    velocity            = rcos(angle) * D_1F800000;
+    velocity            = rcos(angle) * g_ScratchPad;
     g_Task->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed + velocity;
 
-    velocity            = rsin(*angle_cell) * D_1F800000;
+    velocity            = rsin(*angle_cell) * g_ScratchPad;
     g_Task->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed + velocity;
 
     COORD_INT(g_Task->pos.z) = COORD_INT(BATTLE_ACTIVE_WORK->pos.z);
@@ -279,13 +279,13 @@ MATCH void func_801F0314(void) {
     angle                  = (counter & 0x7F) << 5;
     angle_cell             = &D_1F800004;
     *angle_cell            = angle;
-    D_1F800000             = 0x18;
+    g_ScratchPad           = 0x18;
 
-    velocity          = rcos(angle) * D_1F800000;
+    velocity          = rcos(angle) * g_ScratchPad;
     work              = g_Task;
     work->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed + velocity;
 
-    velocity             = rsin(*angle_cell) * D_1F800000;
+    velocity             = rsin(*angle_cell) * g_ScratchPad;
     scratch              = g_Task;
     scratch->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed + velocity;
     scratch->timer -= 2;
@@ -304,11 +304,11 @@ MATCH void func_801F070C(void) {
     s32      angle;
     s32      i;
 
-    D_1F800000 = RANDOM_MASK(7) + g_Task->timer * 3;
+    g_ScratchPad = RANDOM_MASK(7) + g_Task->timer * 3;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
     i      = 0;
-    radius = &D_1F800000;
+    radius = &g_ScratchPad;
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
 
     do {

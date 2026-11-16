@@ -104,15 +104,15 @@ MATCH void func_801EF174(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
-        angle                      = &D_1F800000.cells.halves[2];
-        *angle                     = g_Task->param.unk_0B << 9;
-        D_1F800000.cells.halves[0] = (rand() & 0x10) + 0x18;
-        g_Task->pos.x.fixed        = g_BattleEffectBattler->pos.x.fixed + rsin(*angle) * D_1F800000.cells.halves[0];
-        g_Task->pos.y.fixed        = g_BattleEffectBattler->pos.y.fixed + rcos(*angle) * D_1F800000.cells.halves[0];
-        g_Task->facing             = g_BattleEffectBattler->facing;
-        g_Task->unk_0C             = 0x20000;
-        g_Task->unk_10             = 0;
-        g_Task->unk_14             = TO_COORD(1536);
+        angle                        = &g_ScratchPad.cells.halves[2];
+        *angle                       = g_Task->param.unk_0B << 9;
+        g_ScratchPad.cells.halves[0] = (rand() & 0x10) + 0x18;
+        g_Task->pos.x.fixed          = g_BattleEffectBattler->pos.x.fixed + rsin(*angle) * g_ScratchPad.cells.halves[0];
+        g_Task->pos.y.fixed          = g_BattleEffectBattler->pos.y.fixed + rcos(*angle) * g_ScratchPad.cells.halves[0];
+        g_Task->facing               = g_BattleEffectBattler->facing;
+        g_Task->unk_0C               = 0x20000;
+        g_Task->unk_10               = 0;
+        g_Task->unk_14               = TO_COORD(1536);
         Effect_RotatePosition(g_Task);
         g_Task->pos.x.fixed += g_Task->unk_0C;
         g_Task->pos.y.fixed += g_Task->unk_10;
@@ -314,18 +314,19 @@ MATCH void func_801F01C0(void) {
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
-    D_1F800000.cells.halves[0] = 0x100;
-    D_1F80000A                 = g_Task->timer * 6;
-    setVector(&D_1F800014[0], FIXED_MUL(rcos(ANGLE_45), D_1F800000.cells.halves[0]), FIXED_MUL(rsin(ANGLE_45), D_1F800000.cells.halves[0]), 0);
-    setVector(&D_1F800014[1], FIXED_MUL(rcos(1536), D_1F800000.cells.halves[0]), FIXED_MUL(rsin(1536), D_1F800000.cells.halves[0]), 0);
-    setVector(&D_1F800014[2], FIXED_MUL(rcos(3584), D_1F800000.cells.halves[0]), FIXED_MUL(rsin(3584), D_1F800000.cells.halves[0]), 0);
-    setVector(&D_1F800014[3], FIXED_MUL(rcos(2560), D_1F800000.cells.halves[0]), FIXED_MUL(rsin(2560), D_1F800000.cells.halves[0]), 0);
+    g_ScratchPad.cells.halves[0] = 0x100;
+    D_1F80000A                   = g_Task->timer * 6;
+    setVector(&g_ScratchPadVectors[0], FIXED_MUL(rcos(ANGLE_45), g_ScratchPad.cells.halves[0]), FIXED_MUL(rsin(ANGLE_45), g_ScratchPad.cells.halves[0]), 0);
+    setVector(&g_ScratchPadVectors[1], FIXED_MUL(rcos(1536), g_ScratchPad.cells.halves[0]), FIXED_MUL(rsin(1536), g_ScratchPad.cells.halves[0]), 0);
+    setVector(&g_ScratchPadVectors[2], FIXED_MUL(rcos(3584), g_ScratchPad.cells.halves[0]), FIXED_MUL(rsin(3584), g_ScratchPad.cells.halves[0]), 0);
+    setVector(&g_ScratchPadVectors[3], FIXED_MUL(rcos(2560), g_ScratchPad.cells.halves[0]), FIXED_MUL(rsin(2560), g_ScratchPad.cells.halves[0]), 0);
     setTPage(prim, TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 832, 256);
     /* FAKE: a volatile store keeps the clut write ahead of the texture-point stores; the best pure-C body is 0x2C8 against retail's 0x2D4. */
     VOL(u16, prim->clut) = GetClut(0, 482);
     setUVWH(prim, 0, 128, 32, 32);
     setRGB0(prim, D_1F80000A, D_1F80000A, D_1F80000A);
-    RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+    RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
+                  &flag);
     GFX_AddPrim(5, sizeof(POLY_FT4));
 }
 

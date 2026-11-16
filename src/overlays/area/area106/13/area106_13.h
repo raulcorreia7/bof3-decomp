@@ -17,7 +17,7 @@ extern u8 D_801F3EAC[];
 void      func_801F2F38(s32 arg0, s32 arg1);
 extern u8 D_801F3E90[];
 
-/* The four corner vectors RotTransPers4 projects; D_1F800014 forwards. */
+/* The four corner vectors RotTransPers4 projects; g_ScratchPadVectors forwards. */
 
 /* The quad corner bytes: x, y and the signed depth of each corner. */
 extern u8 D_801F3F34[];

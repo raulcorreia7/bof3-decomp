@@ -13,7 +13,7 @@ MATCH void func_801A5400(u8* script) {
     u8*    data;
     s16*   counter;
 
-    counter = (s16*)&D_1F800000;
+    counter = (s16*)&g_ScratchPad;
     data    = script;
     if (*counter < 30) {
         slot_record               = &g_Actors[*counter];
@@ -68,6 +68,6 @@ MATCH void func_801A5400(u8* script) {
         if ((COORD_FRAC(cell_record_c->pos.x) != 0) && (COORD_FRAC(cell_record_c->pos.y) != 0)) {
             Area_SetCellCode((s16)((u16)COORD_INT(cell_record_c->pos.x) + 1), (s16)((u16)COORD_INT(cell_record_c->pos.y) + 1), 0x10);
         }
-        VOL(u16, D_1F800000) += 1;
+        VOL(u16, g_ScratchPad) += 1;
     }
 }

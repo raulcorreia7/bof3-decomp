@@ -183,7 +183,7 @@ MATCH void func_801F763C(void) {
         return;
     }
 
-    scratch                               = (s16*)D_1F800000;
+    scratch                               = (s16*)g_ScratchPad;
     data                                  = (u8*)D_801FBF20;
     g_Actors[g_Task->unk_04].header.flags = 1;
     work                                  = (u8*)g_Task;

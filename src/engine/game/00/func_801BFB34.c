@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-#define SCRATCH ((s32*)&D_1F800000)
+#define SCRATCH ((s32*)&g_ScratchPad)
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801BFB34(void) {

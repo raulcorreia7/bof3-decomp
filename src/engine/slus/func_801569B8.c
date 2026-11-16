@@ -22,7 +22,7 @@ MATCH void func_801569B8(u8* record, s32 cell_x, s32 cell_y) {
     cell_x  = (cell_x - 0x81) << 7;
     cell_y  = (cell_y - 0x80) << 7;
     i       = 0;
-    corners = D_1F800014;
+    corners = g_ScratchPadVectors;
     phase   = g_FrameCount & 7;
     z       = (s16)height - phase * 8;
     wave    = phase;

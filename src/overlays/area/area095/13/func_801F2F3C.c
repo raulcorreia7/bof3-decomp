@@ -11,7 +11,7 @@ NON_MATCHING void func_801F2F3C(s32 depth, s32 height) {
     long      flag;
 
     i      = 0;
-    quad   = D_1F800014;
+    quad   = g_ScratchPadVectors;
     cell_y = D_801F3695;
     cell_x = cell_y - 1;
     do {

@@ -240,18 +240,18 @@ MATCH void func_801EF6A0(void) {
     prim = (POLY_GT4*)g_GfxPrimCursor;
     SetPolyGT4(prim);
     if (g_Task->unk_09 < 8) {
-        D_1F800000.cells.halves[0] = (g_Task->unk_09 + 1) * 8;
+        g_ScratchPad.cells.halves[0] = (g_Task->unk_09 + 1) * 8;
     } else {
-        D_1F800000.cells.halves[0] = 0x40;
+        g_ScratchPad.cells.halves[0] = 0x40;
     }
-    shade                      = &D_1F800000.cells.halves[4];
-    *shade                     = 0x80;
-    D_1F800000.cells.halves[2] = g_Task->unk_2E.half;
-    D_1F800000.cells.halves[3] = g_Task->unk_30.half;
-    setXY4(prim, D_1F800000.cells.halves[2] + FIXED_MUL(rsin(0xC00), D_1F800000.cells.halves[0]), D_1F800000.cells.halves[3] + FIXED_MUL(rcos(0xC00), D_1F800000.cells.halves[0]),
-           D_1F800000.cells.halves[2] + FIXED_MUL(rsin(0x800), D_1F800000.cells.halves[0]), D_1F800000.cells.halves[3] + FIXED_MUL(rcos(0x800), D_1F800000.cells.halves[0]),
-           D_1F800000.cells.halves[2] + FIXED_MUL(rsin(0), D_1F800000.cells.halves[0]), D_1F800000.cells.halves[3] + FIXED_MUL(rcos(0), D_1F800000.cells.halves[0]),
-           D_1F800000.cells.halves[2] + FIXED_MUL(rsin(0x400), D_1F800000.cells.halves[0]), D_1F800000.cells.halves[3] + FIXED_MUL(rcos(0x400), D_1F800000.cells.halves[0]));
+    shade                        = &g_ScratchPad.cells.halves[4];
+    *shade                       = 0x80;
+    g_ScratchPad.cells.halves[2] = g_Task->unk_2E.half;
+    g_ScratchPad.cells.halves[3] = g_Task->unk_30.half;
+    setXY4(prim, g_ScratchPad.cells.halves[2] + FIXED_MUL(rsin(0xC00), g_ScratchPad.cells.halves[0]), g_ScratchPad.cells.halves[3] + FIXED_MUL(rcos(0xC00), g_ScratchPad.cells.halves[0]),
+           g_ScratchPad.cells.halves[2] + FIXED_MUL(rsin(0x800), g_ScratchPad.cells.halves[0]), g_ScratchPad.cells.halves[3] + FIXED_MUL(rcos(0x800), g_ScratchPad.cells.halves[0]),
+           g_ScratchPad.cells.halves[2] + FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]), g_ScratchPad.cells.halves[3] + FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]),
+           g_ScratchPad.cells.halves[2] + FIXED_MUL(rsin(0x400), g_ScratchPad.cells.halves[0]), g_ScratchPad.cells.halves[3] + FIXED_MUL(rcos(0x400), g_ScratchPad.cells.halves[0]));
     prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 832, 256);
     prim->clut  = GetClut(0, 506);
     setUVWH(prim, 1, 1, 30, 30);

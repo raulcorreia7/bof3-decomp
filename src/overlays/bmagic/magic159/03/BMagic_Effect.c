@@ -114,22 +114,22 @@ MATCH void func_801EF08C(void) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
-    D_1F800000.cells.halves[0] = g_Task->unk_09 << 1;
-    D_1F800000.cells.halves[1] = g_Task->timer << 3;
-    D_1F800000.cells.halves[2] = g_Task->timer;
-    prim                       = (POLY_GT4*)g_GfxPrimCursor;
+    g_ScratchPad.cells.halves[0] = g_Task->unk_09 << 1;
+    g_ScratchPad.cells.halves[1] = g_Task->timer << 3;
+    g_ScratchPad.cells.halves[2] = g_Task->timer;
+    prim                         = (POLY_GT4*)g_GfxPrimCursor;
     SetPolyGT4(prim);
     SetSemiTrans(prim, 1);
-    setXY4(prim, g_Task->unk_2E.half + FIXED_MUL(rcos(3584), D_1F800000.cells.halves[0]), g_Task->unk_30.half + FIXED_MUL(rsin(3584), D_1F800000.cells.halves[0]),
-           g_Task->unk_2E.half + FIXED_MUL(rcos(2560), D_1F800000.cells.halves[0]), g_Task->unk_30.half + FIXED_MUL(rsin(2560), D_1F800000.cells.halves[0]),
-           g_Task->unk_2E.half + FIXED_MUL(rcos(512), D_1F800000.cells.halves[0]), g_Task->unk_30.half + FIXED_MUL(rsin(512), D_1F800000.cells.halves[0]),
-           g_Task->unk_2E.half + FIXED_MUL(rcos(1536), D_1F800000.cells.halves[0]), g_Task->unk_30.half + FIXED_MUL(rsin(1536), D_1F800000.cells.halves[0]));
+    setXY4(prim, g_Task->unk_2E.half + FIXED_MUL(rcos(3584), g_ScratchPad.cells.halves[0]), g_Task->unk_30.half + FIXED_MUL(rsin(3584), g_ScratchPad.cells.halves[0]),
+           g_Task->unk_2E.half + FIXED_MUL(rcos(2560), g_ScratchPad.cells.halves[0]), g_Task->unk_30.half + FIXED_MUL(rsin(2560), g_ScratchPad.cells.halves[0]),
+           g_Task->unk_2E.half + FIXED_MUL(rcos(512), g_ScratchPad.cells.halves[0]), g_Task->unk_30.half + FIXED_MUL(rsin(512), g_ScratchPad.cells.halves[0]),
+           g_Task->unk_2E.half + FIXED_MUL(rcos(1536), g_ScratchPad.cells.halves[0]), g_Task->unk_30.half + FIXED_MUL(rsin(1536), g_ScratchPad.cells.halves[0]));
     prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 832, 256);
     prim->clut  = GetClut(0, 506);
     setUVWH(prim, 8, 8, 79, 64);
-    setRGB0(prim, D_1F800000.cells.halves[1], D_1F800000.cells.halves[1], D_1F800000.cells.halves[1]);
-    setRGB1(prim, D_1F800000.cells.halves[1], D_1F800000.cells.halves[1], D_1F800000.cells.halves[1]);
-    setRGB2(prim, D_1F800000.cells.halves[2], D_1F800000.cells.halves[2], D_1F800000.cells.halves[2]);
-    setRGB3(prim, D_1F800000.cells.halves[2], D_1F800000.cells.halves[2], D_1F800000.cells.halves[2]);
+    setRGB0(prim, g_ScratchPad.cells.halves[1], g_ScratchPad.cells.halves[1], g_ScratchPad.cells.halves[1]);
+    setRGB1(prim, g_ScratchPad.cells.halves[1], g_ScratchPad.cells.halves[1], g_ScratchPad.cells.halves[1]);
+    setRGB2(prim, g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2]);
+    setRGB3(prim, g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2]);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_GT4));
 }

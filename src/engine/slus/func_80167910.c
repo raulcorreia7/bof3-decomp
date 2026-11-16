@@ -78,20 +78,20 @@ MATCH void func_80167910(void) {
         radius = (s16)(0x38 - (g_FrameCount & 0x6));
     }
     for (i = 0; i < 32; i++) {
-        angle            = i << 7;
-        D_1F800014[0].vx = 0;
-        D_1F800014[0].vy = 0;
-        D_1F800014[0].vz = 0;
-        D_1F800014[1].vx = (s16)FIXED_MUL(radius, rcos(angle));
-        D_1F800014[1].vy = (s16)FIXED_MUL(radius, rsin(angle));
-        D_1F800014[1].vz = 0;
-        D_1F800014[2].vx = (s16)FIXED_MUL(radius, rcos(angle + 128));
-        D_1F800014[2].vy = (s16)FIXED_MUL(radius, rsin(angle + 128));
-        D_1F800014[2].vz = 0;
-        prim             = (POLY_G3*)g_GfxPrimCursor;
+        angle                     = i << 7;
+        g_ScratchPadVectors[0].vx = 0;
+        g_ScratchPadVectors[0].vy = 0;
+        g_ScratchPadVectors[0].vz = 0;
+        g_ScratchPadVectors[1].vx = (s16)FIXED_MUL(radius, rcos(angle));
+        g_ScratchPadVectors[1].vy = (s16)FIXED_MUL(radius, rsin(angle));
+        g_ScratchPadVectors[1].vz = 0;
+        g_ScratchPadVectors[2].vx = (s16)FIXED_MUL(radius, rcos(angle + 128));
+        g_ScratchPadVectors[2].vy = (s16)FIXED_MUL(radius, rsin(angle + 128));
+        g_ScratchPadVectors[2].vz = 0;
+        prim                      = (POLY_G3*)g_GfxPrimCursor;
         setPolyG3(prim);
         SetSemiTrans(prim, 1);
-        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &p, &sxy2);
+        RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &p, &sxy2);
         setRGB0(prim, 0x80, 0x80, 0x80);
         setRGB1(prim, 0, 0, 0);
         setRGB2(prim, 0, 0, 0);

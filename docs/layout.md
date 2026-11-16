@@ -306,12 +306,12 @@ header reads the macro when it is first included; a later `#define` changes noth
 declarations has one name and gives a different qualifier or width, so a pair is not a duplicate to
 merge, and the macro is not a setting to move into a header.
 
-| Macro                               | Header                  | Selects                                             |
-| ----------------------------------- | ----------------------- | --------------------------------------------------- |
-| `TASK_VOLATILE`                     | `include/psx/mem.h`     | `volatile` view of `g_Task`                         |
-| `SCRIPT_VARS_VOLATILE`              | `include/game/script.h` | `volatile u8 g_ScriptVars`                          |
-| `GRAPHICS_PALETTE_PENDING_VOLATILE` | `include/slus/data.h`   | `volatile u8 g_GfxPalettePending`                   |
-| `GAME_SCRATCH_BASE_SCALAR`          | `include/game/spawn.h`  | `u8 D_1F800000[]` in place of the `ScratchPad` view |
+| Macro                               | Header                  | Selects                                               |
+| ----------------------------------- | ----------------------- | ----------------------------------------------------- |
+| `TASK_VOLATILE`                     | `include/psx/mem.h`     | `volatile` view of `g_Task`                           |
+| `SCRIPT_VARS_VOLATILE`              | `include/game/script.h` | `volatile u8 g_ScriptVars`                            |
+| `GRAPHICS_PALETTE_PENDING_VOLATILE` | `include/slus/data.h`   | `volatile u8 g_GfxPalettePending`                     |
+| `GAME_SCRATCH_BASE_SCALAR`          | `include/game/spawn.h`  | `u8 g_ScratchPad[]` in place of the `ScratchPad` view |
 
 ## Unit files
 

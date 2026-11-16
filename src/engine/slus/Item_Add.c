@@ -20,11 +20,11 @@ MATCH bool Item_Add(s32 category, u8 item_id, u8 count, s32 unused) {
     if (add == 0) {
         return false;
     }
-    limit         = 99;
-    D_1F800000[0] = 0;
-    keys          = D_801C893C[category & BYTE_MASK];
-    vals          = D_801C8950[category & BYTE_MASK];
-    i             = 0;
+    limit           = 99;
+    g_ScratchPad[0] = 0;
+    keys            = D_801C893C[category & BYTE_MASK];
+    vals            = D_801C8950[category & BYTE_MASK];
+    i               = 0;
     do {
         if (*keys == key) {
             cur = *vals;
@@ -44,9 +44,9 @@ MATCH bool Item_Add(s32 category, u8 item_id, u8 count, s32 unused) {
     vals = D_801C8950[category & BYTE_MASK];
     do {
         if ((*keys == 0) || (*vals == 0)) {
-            *keys         = item_id;
-            *vals         = count;
-            D_1F800000[0] = 1;
+            *keys           = item_id;
+            *vals           = count;
+            g_ScratchPad[0] = 1;
             return true;
         }
         keys++;

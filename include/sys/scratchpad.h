@@ -68,19 +68,20 @@ ASSERT_OFFSET(ScratchPad, unk_48, 0x048);
 #define SPAD(byte_offset) SP_PTR(ScratchPad, byte_offset)
 
 /* ScratchPad.vectors as the symbol the area, bmagic and scenario code names directly. */
-extern SVECTOR D_1F800014[4];
+/* g_ScratchPadVectors */
+extern SVECTOR g_ScratchPadVectors[4];
 /* The same four vectors read a halfword at a time. */
-extern s16     D_1F800014_HALF[];
+extern s16     g_ScratchPadVectorHalves[];
 
 /* Advance the triangle fan on the scratchpad one step: vertex 0 stays at the origin, vertex 1 takes
  * the old rim point and vertex 2 moves to the rim point at `angle`, `radius` away. */
-#define GFX_STEP_TRIANGLE_FAN(angle, radius)             \
-    D_1F800014[0].vx = 0;                                \
-    D_1F800014[0].vy = 0;                                \
-    D_1F800014[1].vx = D_1F800014[2].vx;                 \
-    D_1F800014[1].vy = D_1F800014[2].vy;                 \
-    D_1F800014[2].vx = FIXED_MUL(rsin(angle), (radius)); \
-    D_1F800014[2].vy = FIXED_MUL(rcos(angle), (radius))
+#define GFX_STEP_TRIANGLE_FAN(angle, radius)                      \
+    g_ScratchPadVectors[0].vx = 0;                                \
+    g_ScratchPadVectors[0].vy = 0;                                \
+    g_ScratchPadVectors[1].vx = g_ScratchPadVectors[2].vx;        \
+    g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy;        \
+    g_ScratchPadVectors[2].vx = FIXED_MUL(rsin(angle), (radius)); \
+    g_ScratchPadVectors[2].vy = FIXED_MUL(rcos(angle), (radius))
 
 /* Scratchpad base + 1; battle/battle/03 and etc/game/00 write it directly. */
 extern u8  D_1F800001;

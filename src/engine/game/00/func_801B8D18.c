@@ -3,7 +3,7 @@
 /* Scratch byte 0: nonzero while the current route probe is active. The retail
  * code materializes this symbol address in each branch, so keep the pointer
  * expression rather than a cached direct access. */
-#define SPAD_ACTIVE (*(volatile u8*)&D_1F800000)
+#define SPAD_ACTIVE (*(volatile u8*)&g_ScratchPad)
 
 MATCH bool func_801B8D18(void) {
     s16 value;

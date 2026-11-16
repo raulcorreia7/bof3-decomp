@@ -14,7 +14,7 @@
 #define BOLT_FLICKER_MASK 0x1F
 #define BOLT_FLICKER_BASE 0xA0
 
-/* The bolt point D_1F800014, also read as halfwords, and the scratch words of the bolt: the segment length, the
+/* The bolt point g_ScratchPadVectors, also read as halfwords, and the scratch words of the bolt: the segment length, the
  * swing angle, the flicker and the segment count. */
 extern s32 D_1F800008;
 extern s32 D_1F80000C;

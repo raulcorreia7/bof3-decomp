@@ -184,19 +184,19 @@ MATCH void func_801EFAB8(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
-    D_1F800000.cells.halves[0] = 0x88;
-    D_1F800000.cells.halves[3] = g_Task->unk_09 << 3;
-    setVector(&D_1F800014[2], FIXED_MUL(rsin(0), D_1F800000.cells.halves[0]), FIXED_MUL(rcos(0), D_1F800000.cells.halves[0]), 0);
-    D_1F800014[1].vz = 0;
-    D_1F800014[0].vz = 0;
+    g_ScratchPad.cells.halves[0] = 0x88;
+    g_ScratchPad.cells.halves[3] = g_Task->unk_09 << 3;
+    setVector(&g_ScratchPadVectors[2], FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]), FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]), 0);
+    g_ScratchPadVectors[1].vz = 0;
+    g_ScratchPadVectors[0].vz = 0;
 
     for (i = 1; i <= 16; i++) {
         prim = GFX_BeginPolyG3(1);
-        GFX_STEP_TRIANGLE_FAN(i << 8, D_1F800000.cells.halves[0]);
-        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+        GFX_STEP_TRIANGLE_FAN(i << 8, g_ScratchPad.cells.halves[0]);
+        RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
         setRGB0(prim, 1, 1, 1);
-        setRGB1(prim, D_1F800000.cells.halves[3], D_1F800000.cells.halves[3] / 4, D_1F800000.cells.halves[3] / 4);
-        setRGB2(prim, D_1F800000.cells.halves[3], D_1F800000.cells.halves[3] / 4, D_1F800000.cells.halves[3] / 4);
+        setRGB1(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3] / 4, g_ScratchPad.cells.halves[3] / 4);
+        setRGB2(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3] / 4, g_ScratchPad.cells.halves[3] / 4);
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
 

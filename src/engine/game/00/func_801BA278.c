@@ -27,7 +27,7 @@ loop:
 done:
 
     for (index = 0; index < (count & BYTE_MASK); index++)
-        cells[index] = ((u8*)&D_1F800000)[cells[index]];
+        cells[index] = ((u8*)&g_ScratchPad)[cells[index]];
 
     if ((count & BYTE_MASK) == 2 && cells[0] == 0x70 && cells[1] == cells[0])
         return 0x70;

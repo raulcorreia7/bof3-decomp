@@ -17,9 +17,10 @@ extern s32 D_1F800004;
 #define BOLT_FLICKER_MASK 0x3F
 #define BOLT_FLICKER_BASE 0x80
 
-/* The bolt point D_1F800014, also read as halfwords, and the scratch words of the bolt: the segment length, the
+/* The bolt point g_ScratchPadVectors, also read as halfwords, and the scratch words of the bolt: the segment length, the
  * swing angle, the flicker and the segment count. */
-extern SVECTOR             D_1F800014[];
+/* g_ScratchPadVectors */
+extern SVECTOR             g_ScratchPadVectors[];
 extern s32                 D_1F800008;
 extern s32                 D_1F80000C;
 extern Magic068SharedSteps D_801EEC04;
@@ -66,13 +67,13 @@ static inline void MagicOrbitProjectionStep(s32 depth) {
     angle                  = (counter & 0x7F) << 5;
     angle_cell             = &D_1F800004;
     *angle_cell            = angle;
-    D_1F800000             = depth;
+    g_ScratchPad           = depth;
 
-    velocity          = rcos(angle) * D_1F800000;
+    velocity          = rcos(angle) * g_ScratchPad;
     work              = g_Task;
     work->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed + velocity;
 
-    velocity            = rsin(*angle_cell) * D_1F800000;
+    velocity            = rsin(*angle_cell) * g_ScratchPad;
     g_Task->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed + velocity;
 
     if (--g_Task->unk_09 == 0) {

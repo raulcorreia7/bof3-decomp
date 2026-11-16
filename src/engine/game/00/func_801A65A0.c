@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 MATCH void func_801A65A0(u8* script) {
-    s16*   counter = (s16*)&D_1F800000;
+    s16*   counter = (s16*)&g_ScratchPad;
     s16    slot;
     s32    coord_x;
     s32    coord_y;

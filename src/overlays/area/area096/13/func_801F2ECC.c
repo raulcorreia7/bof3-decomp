@@ -9,7 +9,7 @@ NON_MATCHING void func_801F2ECC(s32 depth, s32 height) {
     s32      i;
 
     i       = 0;
-    vectors = D_1F800014;
+    vectors = g_ScratchPadVectors;
     do {
         prim = g_GfxPrimCursor;
         SetPolyFT4(prim);

@@ -17,11 +17,11 @@ MATCH void func_801F9338(void) {
             u8 slot;
 
             if (g_ScriptVars[0] == 0x28) {
-                slot          = Actor_FindFreeSpawned();
-                D_1F800000[0] = slot;
+                slot            = Actor_FindFreeSpawned();
+                g_ScratchPad[0] = slot;
                 if (slot != GAME_NONE) {
-                    g_SpawnedActors[slot].header.flags  = 1;
-                    g_SpawnedActors[D_1F800000[0]].type = 0x14;
+                    g_SpawnedActors[slot].header.flags    = 1;
+                    g_SpawnedActors[g_ScratchPad[0]].type = 0x14;
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
                 }
                 g_SceneState.step_05 = 2;
@@ -33,11 +33,11 @@ MATCH void func_801F9338(void) {
             u8 slot;
 
             if (g_ScriptVars[0] == 0x29) {
-                slot          = Actor_FindFreeSpawned();
-                D_1F800000[0] = slot;
+                slot            = Actor_FindFreeSpawned();
+                g_ScratchPad[0] = slot;
                 if (slot != GAME_NONE) {
-                    g_SpawnedActors[slot].header.flags  = 1;
-                    g_SpawnedActors[D_1F800000[0]].type = 0x14;
+                    g_SpawnedActors[slot].header.flags    = 1;
+                    g_SpawnedActors[g_ScratchPad[0]].type = 0x14;
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
                 }
                 g_SceneState.step_05 = 3;
@@ -49,11 +49,11 @@ MATCH void func_801F9338(void) {
             u8 slot;
 
             if (g_ScriptVars[0] == 0x2A) {
-                slot          = Actor_FindFreeSpawned();
-                D_1F800000[0] = slot;
+                slot            = Actor_FindFreeSpawned();
+                g_ScratchPad[0] = slot;
                 if (slot != GAME_NONE) {
-                    g_SpawnedActors[slot].header.flags  = 1;
-                    g_SpawnedActors[D_1F800000[0]].type = 0x14;
+                    g_SpawnedActors[slot].header.flags    = 1;
+                    g_SpawnedActors[g_ScratchPad[0]].type = 0x14;
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
                 }
                 g_SceneState.step_05 = 4;
@@ -76,15 +76,15 @@ MATCH void func_801F9338(void) {
         case 5: {
             u8 slot;
 
-            slot          = Actor_FindFreeSpawned();
-            D_1F800000[0] = slot;
+            slot            = Actor_FindFreeSpawned();
+            g_ScratchPad[0] = slot;
             if (slot != GAME_NONE) {
-                g_SpawnedActors[slot].header.flags            = 1;
-                g_SpawnedActors[D_1F800000[0]].type           = 0x13;
-                g_SpawnedActors[D_1F800000[0]].camera_angle.x = -0x31A;
-                g_SpawnedActors[D_1F800000[0]].camera_angle.y = D_801492DA;
-                g_SpawnedActors[D_1F800000[0]].camera_angle.z = 0x360;
-                g_SpawnedActors[D_1F800000[0]].layer          = 0xF0;
+                g_SpawnedActors[slot].header.flags              = 1;
+                g_SpawnedActors[g_ScratchPad[0]].type           = 0x13;
+                g_SpawnedActors[g_ScratchPad[0]].camera_angle.x = -0x31A;
+                g_SpawnedActors[g_ScratchPad[0]].camera_angle.y = D_801492DA;
+                g_SpawnedActors[g_ScratchPad[0]].camera_angle.z = 0x360;
+                g_SpawnedActors[g_ScratchPad[0]].layer          = 0xF0;
             }
             g_SceneState.timer_06 = 0x20;
             g_SceneState.step_05  = 6;

@@ -18,23 +18,23 @@ MATCH void func_801F5088(void) {
                 D_801F56F8 = 2;
             }
         }
-        field                      = Actor_FindFreeField();
-        D_1F800000.cells.halves[0] = field;
+        field                        = Actor_FindFreeField();
+        g_ScratchPad.cells.halves[0] = field;
         if (field != GAME_NONE) {
             func_801A7330(&D_801F56D0[D_801F56F8 * 13]);
         }
     }
     if (D_80143F03 == 1) {
-        slot                      = Actor_FindFreeSpawned();
-        D_1F800000.cells.bytes[0] = slot;
+        slot                        = Actor_FindFreeSpawned();
+        g_ScratchPad.cells.bytes[0] = slot;
         if (slot != GAME_NONE) {
-            g_SpawnedActors[slot].header.flags                    = ACTOR_FLAG_IN_USE;
-            g_SpawnedActors[D_1F800000.cells.bytes[0]].type       = 0x28;
-            g_SpawnedActors[D_1F800000.cells.bytes[0]].unk_06     = 2;
-            g_SpawnedActors[D_1F800000.cells.bytes[0]].scene_step = 0x418000;
-            g_SpawnedActors[D_1F800000.cells.bytes[0]].selection  = 0x108000;
-            g_SpawnedActors[D_1F800000.cells.bytes[0]].counter_18 = 0x4D8000;
-            g_SpawnedActors[D_1F800000.cells.bytes[0]].counter_1C = 0x108000;
+            g_SpawnedActors[slot].header.flags                      = ACTOR_FLAG_IN_USE;
+            g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type       = 0x28;
+            g_SpawnedActors[g_ScratchPad.cells.bytes[0]].unk_06     = 2;
+            g_SpawnedActors[g_ScratchPad.cells.bytes[0]].scene_step = 0x418000;
+            g_SpawnedActors[g_ScratchPad.cells.bytes[0]].selection  = 0x108000;
+            g_SpawnedActors[g_ScratchPad.cells.bytes[0]].counter_18 = 0x4D8000;
+            g_SpawnedActors[g_ScratchPad.cells.bytes[0]].counter_1C = 0x108000;
         }
     }
 }

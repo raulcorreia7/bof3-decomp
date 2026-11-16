@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 MATCH void func_801A68C0(u8* script) {
-    s16*   counter = (s16*)&D_1F800000;
+    s16*   counter = (s16*)&g_ScratchPad;
     s16    slot;
     s32    tile;
     Actor* rows;
@@ -76,5 +76,5 @@ MATCH void func_801A68C0(u8* script) {
         }
     }
 
-    (VOL(u16, D_1F800000)) = (VOL(u16, D_1F800000)) + 1;
+    (VOL(u16, g_ScratchPad)) = (VOL(u16, g_ScratchPad)) + 1;
 }

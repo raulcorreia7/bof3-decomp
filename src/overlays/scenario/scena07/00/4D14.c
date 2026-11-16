@@ -70,8 +70,8 @@ MATCH void func_801FD000(void) {
     u8 idx;
 
     for (i = 0; i < 0xE; i++) {
-        D_1F800000.cells.halves[0] = Actor_FindFreeField();
-        if (D_1F800000.cells.halves[0] != GAME_NONE) {
+        g_ScratchPad.cells.halves[0] = Actor_FindFreeField();
+        if (g_ScratchPad.cells.halves[0] != GAME_NONE) {
             idx = i;
             func_801A4D54(&D_801FDE8C[idx * 17]);
             g_Task->pos.z.part.integer = 0xA00;

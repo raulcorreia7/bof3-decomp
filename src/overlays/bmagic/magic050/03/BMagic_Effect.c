@@ -133,14 +133,14 @@ NON_MATCHING void func_801EF1B0(void) {
     s32         i;
     s32         tpage;
 
-    D_1F800000.cells.words[0] = g_Task->timer;
+    g_ScratchPad.cells.words[0] = g_Task->timer;
     if (g_Battle.action_id == 50) {
-        D_1F800000.cells.words[2] = g_Task->unk_09 * 3;
+        g_ScratchPad.cells.words[2] = g_Task->unk_09 * 3;
     } else {
-        D_1F800000.cells.words[2] = g_Task->unk_09 * 5;
+        g_ScratchPad.cells.words[2] = g_Task->unk_09 * 5;
     }
-    D_1F800000.cells.words[3] = g_Task->unk_09;
-    spad                      = &D_1F800000;
+    g_ScratchPad.cells.words[3] = g_Task->unk_09;
+    spad                        = &g_ScratchPad;
     for (i = 0; i < 16; i++) {
         tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
@@ -172,14 +172,14 @@ NON_MATCHING void func_801EF4C4(void) {
     s32      i;
     s32      tpage;
 
-    D_1F800000.cells.words[0] = g_Task->timer;
-    D_1F800000.cells.words[1] = g_Task->timer + (u32)g_Task->timer / 2;
+    g_ScratchPad.cells.words[0] = g_Task->timer;
+    g_ScratchPad.cells.words[1] = g_Task->timer + (u32)g_Task->timer / 2;
     if (g_Battle.action_id == 50) {
         SPAD(0)->cells.words[2] = g_Task->unk_09 << 2;
     } else {
-        D_1F800000.cells.words[2] = g_Task->unk_09 * 6;
+        g_ScratchPad.cells.words[2] = g_Task->unk_09 * 6;
     }
-    D_1F800000.cells.words[3] = g_Task->unk_09;
+    g_ScratchPad.cells.words[3] = g_Task->unk_09;
     for (i = 0; i < 16; i++) {
         tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
@@ -187,16 +187,16 @@ NON_MATCHING void func_801EF4C4(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        setXY4(prim, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), D_1F800000.cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), D_1F800000.cells.words[0]),
-               g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), D_1F800000.cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), D_1F800000.cells.words[0]),
-               g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), D_1F800000.cells.words[1]), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), D_1F800000.cells.words[1]),
-               g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), D_1F800000.cells.words[1]), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), D_1F800000.cells.words[1]));
+        setXY4(prim, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.words[0]),
+               g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), g_ScratchPad.cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), g_ScratchPad.cells.words[0]),
+               g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.words[1]), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.words[1]),
+               g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), g_ScratchPad.cells.words[1]), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), g_ScratchPad.cells.words[1]));
         if (g_Battle.action_id == 50) {
-            setRGB0(prim, D_1F800000.cells.words[3], D_1F800000.cells.words[2], D_1F800000.cells.words[3]);
-            setRGB1(prim, D_1F800000.cells.words[3], D_1F800000.cells.words[2], D_1F800000.cells.words[3]);
+            setRGB0(prim, g_ScratchPad.cells.words[3], g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[3]);
+            setRGB1(prim, g_ScratchPad.cells.words[3], g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[3]);
         } else {
-            setRGB0(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[3], D_1F800000.cells.words[2]);
-            setRGB1(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[3], D_1F800000.cells.words[2]);
+            setRGB0(prim, g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[3], g_ScratchPad.cells.words[2]);
+            setRGB1(prim, g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[3], g_ScratchPad.cells.words[2]);
         }
         setRGB2(prim, 1, 1, 1);
         setRGB3(prim, 1, 1, 1);
@@ -212,9 +212,9 @@ MATCH void func_801EF898(void) {
     s32     i;
     s32     tpage;
 
-    D_1F800000.cells.words[0] = g_Task->timer * 3;
-    D_1F800000.cells.words[2] = g_Task->unk_09 * 6;
-    D_1F800000.cells.words[3] = g_Task->unk_09;
+    g_ScratchPad.cells.words[0] = g_Task->timer * 3;
+    g_ScratchPad.cells.words[2] = g_Task->unk_09 * 6;
+    g_ScratchPad.cells.words[3] = g_Task->unk_09;
     for (i = 0; i < 16; i++) {
         tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
@@ -222,11 +222,11 @@ MATCH void func_801EF898(void) {
         prim = (TILE_1*)g_GfxPrimCursor;
         SetTile1(prim);
         SetSemiTrans(prim, 1);
-        setXY0(prim, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), D_1F800000.cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), D_1F800000.cells.words[0]));
+        setXY0(prim, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.words[0]));
         if (g_Battle.action_id == 50) {
-            setRGB0(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[2], D_1F800000.cells.words[3]);
+            setRGB0(prim, g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[3]);
         } else {
-            setRGB0(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[3], D_1F800000.cells.words[2]);
+            setRGB0(prim, g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[3], g_ScratchPad.cells.words[2]);
         }
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(TILE_1));
     }

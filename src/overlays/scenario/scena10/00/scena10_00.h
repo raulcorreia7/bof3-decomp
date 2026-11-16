@@ -82,20 +82,20 @@ extern u16 D_801FE974[3];
 /* D_801FE97C */
 
 /* The two end-of-pan actors of func_801FC900: spawn a type 0x13 actor on layer 0x40 with the given x and z scene rotation and the current y. */
-#define SCENA10_SPAWN_ANGLED_ACTOR(angle_x, angle_z)                                \
-    do {                                                                            \
-        u8 slot;                                                                    \
-                                                                                    \
-        slot                      = Actor_FindFreeSpawned();                        \
-        D_1F800000.cells.bytes[0] = slot;                                           \
-        if (slot != GAME_NONE) {                                                    \
-            g_SpawnedActors[slot].header.flags                        = 1;          \
-            g_SpawnedActors[D_1F800000.cells.bytes[0]].type           = 0x13;       \
-            g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.x = (angle_x);  \
-            g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.y = D_801492DA; \
-            g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.z = (angle_z);  \
-            g_SpawnedActors[D_1F800000.cells.bytes[0]].layer          = 0x40;       \
-        }                                                                           \
+#define SCENA10_SPAWN_ANGLED_ACTOR(angle_x, angle_z)                                  \
+    do {                                                                              \
+        u8 slot;                                                                      \
+                                                                                      \
+        slot                        = Actor_FindFreeSpawned();                        \
+        g_ScratchPad.cells.bytes[0] = slot;                                           \
+        if (slot != GAME_NONE) {                                                      \
+            g_SpawnedActors[slot].header.flags                          = 1;          \
+            g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type           = 0x13;       \
+            g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.x = (angle_x);  \
+            g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = D_801492DA; \
+            g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = (angle_z);  \
+            g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x40;       \
+        }                                                                             \
     } while (0)
 
 /* The actor-start members of 3D8C.c: start the actor, then raise a scene flag. They differ only in the three constants. */

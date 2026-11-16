@@ -4,10 +4,10 @@
 MATCH void func_801F2CF4(void) {
     u8 index;
 
-    index                     = Actor_FindFreeSpawned();
-    D_1F800000.cells.bytes[0] = index;
+    index                       = Actor_FindFreeSpawned();
+    g_ScratchPad.cells.bytes[0] = index;
     if (index != GAME_NONE) {
-        g_SpawnedActors[index].header.flags             = 1;
-        g_SpawnedActors[D_1F800000.cells.bytes[0]].type = 0x25;
+        g_SpawnedActors[index].header.flags               = 1;
+        g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type = 0x25;
     }
 }

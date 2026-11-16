@@ -35,13 +35,14 @@ NON_MATCHING void func_801F3954(s32 frame) {
         offset  = 0;
         do {
             i++;
-            FIELD(u16, D_1F800014, offset)     = (slot[0] + D_801F4F16[entry] * 64) + slot[2];
-            FIELD(u16, D_1F800014, offset + 2) = slot[1] + D_801F4F17[entry] * 64;
-            FIELD(u16, D_1F800014, offset + 4) = (slot[3] + 0x180) - D_801F4F18[entry] * 64;
+            FIELD(u16, g_ScratchPadVectors, offset)     = (slot[0] + D_801F4F16[entry] * 64) + slot[2];
+            FIELD(u16, g_ScratchPadVectors, offset + 2) = slot[1] + D_801F4F17[entry] * 64;
+            FIELD(u16, g_ScratchPadVectors, offset + 4) = (slot[3] + 0x180) - D_801F4F18[entry] * 64;
             offset += 8;
             entry += 3;
         } while (i < 4);
-        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
+                      &depth, &flag);
         Area_ApplyTileToQuad(LOWU(D_801F4F24[row]), prim, 1);
         row += 20;
         Area_AddCellPrim(((*cell_x) << 16) + (D_1F800038 << 9), (*cell_y) << 16, 0, sizeof(POLY_FT4));

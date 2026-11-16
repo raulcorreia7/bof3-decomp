@@ -62,17 +62,17 @@ MATCH void func_801F83C8(void) {
             g_SceneState.step_05 = 6;
             break;
         case 6: {
-            index         = Actor_FindFreeSpawned();
-            D_1F800000[0] = index;
+            index           = Actor_FindFreeSpawned();
+            g_ScratchPad[0] = index;
             if (index != 0xFF) {
-                g_SpawnedActors[index].header.flags = 1;
-                g_SpawnedActors[D_1F800000[0]].type = 0x8C;
+                g_SpawnedActors[index].header.flags   = 1;
+                g_SpawnedActors[g_ScratchPad[0]].type = 0x8C;
             }
-            index         = Actor_FindFreeSpawned();
-            D_1F800000[0] = index;
+            index           = Actor_FindFreeSpawned();
+            g_ScratchPad[0] = index;
             if (index != 0xFF) {
-                g_SpawnedActors[index].header.flags = 1;
-                g_SpawnedActors[D_1F800000[0]].type = 0x8B;
+                g_SpawnedActors[index].header.flags   = 1;
+                g_SpawnedActors[g_ScratchPad[0]].type = 0x8B;
             }
             g_GameState = &g_Game.members[0];
             TASK_SET(&g_Game.members[0]);

@@ -2,7 +2,7 @@
 
 #include <inline_c.h>
 
-#define SCRATCH_AT(type, off)       ((type*)((u8*)&D_1F800000 + (off)))
+#define SCRATCH_AT(type, off)       ((type*)((u8*)&g_ScratchPad + (off)))
 #define SCRATCH(type, off)          (*SCRATCH_AT(type, off))
 
 /* Appends the packet to a list of the cell ordering table. */
@@ -91,7 +91,7 @@ NON_MATCHING s32 func_801530D0(void) {
     sp10_row      = g_AreaGridRowCursor;
     D_80149341    = SCRATCH(s32, 0xC);
     low_min       = SCRATCH_AT(u8, 0);
-    vert          = D_1F800014;
+    vert          = g_ScratchPadVectors;
     do {
         next_row = 0;
         if (sp10_row != 0x37) {
@@ -123,7 +123,7 @@ NON_MATCHING s32 func_801530D0(void) {
                     rec        = (s8*)((MAP_BUNDLE_BASE + 0x30) + cell->tile_y * *map_width_ptr * 4 + cell->tile_x * 4);
                     D_1F800010 = rec;
                     vert->vz   = -(rec[0] * 0x10);
-                    gte_ldv0(&D_1F800014[0]);
+                    gte_ldv0(&g_ScratchPadVectors[0]);
                     gte_rtps();
                     gte_stsxy(&D_1F800034[0]);
                     if (((u16)(D_1F800034[0] + 0x32) >= 0x1A5U) || ((u16)(D_1F800034[1] + 0xC8) >= 0x1EBU)) {
@@ -164,8 +164,8 @@ NON_MATCHING s32 func_801530D0(void) {
                         block_38:
                             pkt             = &prim[g_FrameBufferIndex];
                             *(u32*)&pkt->x0 = *(u32*)D_1F800034;
-                            ux              = D_1F800014[0].vx;
-                            uy              = D_1F800014[0].vy;
+                            ux              = g_ScratchPadVectors[0].vx;
+                            uy              = g_ScratchPadVectors[0].vy;
                             rec             = D_1F800010;
                             D_1F80001C.vx   = ux + 0x80;
                             D_1F800024.vx   = ux;
@@ -222,7 +222,7 @@ NON_MATCHING s32 func_801530D0(void) {
                                 vert[1].vy       = y + AREA_CELL_HALF;
                                 vert[0].vz       = -(rec[0] * 0x10);
                                 vert[1].vz       = -((s8) * (u16*)(rec + 2) * 0x10);
-                                gte_ldv3c(&D_1F800014[0]);
+                                gte_ldv3c(&g_ScratchPadVectors[0]);
                                 LINK_PACKET(s6, g_FrameBufferIndex + (((cell->prim_id >> 0xC) & 2) ^ 2), link);
                                 gte_rtpt();
                                 gte_stsxy3((s32*)&link->x3, (s32*)&link->x2, (s32*)D_1F800034);
@@ -242,7 +242,7 @@ NON_MATCHING s32 func_801530D0(void) {
                                 D_1F80001C.vy    = y;
                                 vert[0].vz       = -(rec[0] * 0x10);
                                 D_1F80001C.vz    = -(((*(s32*)rec << 0x10) >> 0x18) * 0x10);
-                                gte_ldv3c(&D_1F800014[0]);
+                                gte_ldv3c(&g_ScratchPadVectors[0]);
                                 LINK_PACKET(s6, g_FrameBufferIndex + (((cell->prim_id >> 0xB) & 2) ^ 2), link);
                                 gte_rtpt();
                                 gte_stsxy3((s32*)&link->x2, (s32*)&link->x3, (s32*)D_1F800034);

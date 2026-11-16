@@ -6,7 +6,7 @@
 MATCH void SYS_ShowFileNotFound(void) {
     while (1) {
         UI_DrawGlyphString(160, 100, 0, (const u8*)D_80149F9C);
-        TEXT_Format(g_UiFormatBuffer, D_80149FAC, D_1F800000[0], D_1F800000[1], D_1F800000[2]);
+        TEXT_Format(g_UiFormatBuffer, D_80149FAC, g_ScratchPad[0], g_ScratchPad[1], g_ScratchPad[2]);
         UI_DrawGlyphString(160, 116, 0, (const u8*)g_UiFormatBuffer);
         SYS_ThreadWait(1);
     }

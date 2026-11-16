@@ -18,18 +18,18 @@ MATCH void func_801F7F08(void) {
                 g_SceneState.step_05 = 0x32;
                 break;
             }
-            index         = Actor_FindFreeSpawned();
-            D_1F800000[0] = index;
+            index           = Actor_FindFreeSpawned();
+            g_ScratchPad[0] = index;
             if (index == 0xFF) {
                 break;
             }
-            g_SpawnedActors[index].header.flags        = 1;
-            g_SpawnedActors[D_1F800000[0]].type        = 0x34;
-            g_SpawnedActors[D_1F800000[0]].pos.x.fixed = TO_COORD(37);
-            g_SpawnedActors[D_1F800000[0]].pos.y.fixed = TO_COORD(11);
-            g_SpawnedActors[D_1F800000[0]].pos.z.fixed = TO_COORD(1280);
-            roll                                       = rand() & 0xF;
-            g_SpawnedActors[D_1F800000[0]].header.mode = D_801FAECC[roll];
+            g_SpawnedActors[index].header.flags          = 1;
+            g_SpawnedActors[g_ScratchPad[0]].type        = 0x34;
+            g_SpawnedActors[g_ScratchPad[0]].pos.x.fixed = TO_COORD(37);
+            g_SpawnedActors[g_ScratchPad[0]].pos.y.fixed = TO_COORD(11);
+            g_SpawnedActors[g_ScratchPad[0]].pos.z.fixed = TO_COORD(1280);
+            roll                                         = rand() & 0xF;
+            g_SpawnedActors[g_ScratchPad[0]].header.mode = D_801FAECC[roll];
             switch (D_801FAECC[roll]) {
                 case 0:
                     g_SceneState.step_05 = 0x32;
@@ -41,7 +41,7 @@ MATCH void func_801F7F08(void) {
                     g_SceneState.step_05 = 0x32;
                     break;
                 case 5:
-                    func_801F82D8(D_1F800000[0]);
+                    func_801F82D8(g_ScratchPad[0]);
                     g_SceneState.step_05 = 5;
                     break;
             }

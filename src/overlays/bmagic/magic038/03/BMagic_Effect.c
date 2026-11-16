@@ -112,18 +112,18 @@ MATCH void func_801EF1AC(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        g_Task->unk_0C            = 0;
-        g_Task->unk_14            = 0;
-        D_1F800000.cells.words[0] = (g_Task->unk_0C & 0x7F) << 5;
-        g_Task->pos.x.fixed       = g_BattleEffectBattler->pos.x.fixed + FIXED_MUL(rsin(D_1F800000.cells.words[0]), 0x40000);
-        g_Task->pos.y.fixed       = g_BattleEffectBattler->pos.y.fixed + FIXED_MUL(rcos(D_1F800000.cells.words[0]), 0x40000);
-        D_1F800000.cells.words[0] = (g_Task->unk_14 & 0x3F) << 6;
-        g_Task->pos.z.fixed       = g_BattleEffectBattler->pos.z.fixed + FIXED_MUL(rsin(D_1F800000.cells.words[0]), 0x800000);
-        g_Task->unk_25            = 29;
-        g_Task->unk_26            = 0;
-        g_Task->unk_27            = 32;
-        g_Task->unk_28            = 0;
-        g_Task->unk_24            = 0;
+        g_Task->unk_0C              = 0;
+        g_Task->unk_14              = 0;
+        g_ScratchPad.cells.words[0] = (g_Task->unk_0C & 0x7F) << 5;
+        g_Task->pos.x.fixed         = g_BattleEffectBattler->pos.x.fixed + FIXED_MUL(rsin(g_ScratchPad.cells.words[0]), 0x40000);
+        g_Task->pos.y.fixed         = g_BattleEffectBattler->pos.y.fixed + FIXED_MUL(rcos(g_ScratchPad.cells.words[0]), 0x40000);
+        g_ScratchPad.cells.words[0] = (g_Task->unk_14 & 0x3F) << 6;
+        g_Task->pos.z.fixed         = g_BattleEffectBattler->pos.z.fixed + FIXED_MUL(rsin(g_ScratchPad.cells.words[0]), 0x800000);
+        g_Task->unk_25              = 29;
+        g_Task->unk_26              = 0;
+        g_Task->unk_27              = 32;
+        g_Task->unk_28              = 0;
+        g_Task->unk_24              = 0;
         g_Task->header.flags |= 0x20;
         g_Task->unk_5C    = 1;
         tint              = -0x80;
@@ -147,14 +147,14 @@ MATCH void func_801EF3BC(void) {
     g_Task->unk_5D += 4;
     g_Task->unk_5E += 4;
     g_Task->unk_5F += 4;
-    work                      = g_Task;
-    D_1F800000.cells.words[0] = (++work->unk_0C & 0x7F) << 5;
-    g_Task->pos.x.fixed       = g_BattleEffectBattler->pos.x.fixed + FIXED_MUL(rsin(D_1F800000.cells.words[0]), 0x20000);
-    g_Task->pos.y.fixed       = g_BattleEffectBattler->pos.y.fixed + FIXED_MUL(rcos(D_1F800000.cells.words[0]), 0x20000);
-    work                      = g_Task;
-    D_1F800000.cells.words[0] = (++work->unk_14 & 0x3F) << 6;
-    D_1F800000.cells.words[1] = 0x800;
-    g_Task->pos.z.fixed       = g_BattleEffectBattler->pos.z.fixed + rsin(D_1F800000.cells.words[0]) * D_1F800000.cells.words[1];
+    work                        = g_Task;
+    g_ScratchPad.cells.words[0] = (++work->unk_0C & 0x7F) << 5;
+    g_Task->pos.x.fixed         = g_BattleEffectBattler->pos.x.fixed + FIXED_MUL(rsin(g_ScratchPad.cells.words[0]), 0x20000);
+    g_Task->pos.y.fixed         = g_BattleEffectBattler->pos.y.fixed + FIXED_MUL(rcos(g_ScratchPad.cells.words[0]), 0x20000);
+    work                        = g_Task;
+    g_ScratchPad.cells.words[0] = (++work->unk_14 & 0x3F) << 6;
+    g_ScratchPad.cells.words[1] = 0x800;
+    g_Task->pos.z.fixed         = g_BattleEffectBattler->pos.z.fixed + rsin(g_ScratchPad.cells.words[0]) * g_ScratchPad.cells.words[1];
     if ((s8)g_Task->unk_5D == -0x40) {
         g_Task->header.flags &= 0xDF;
         g_Task->unk_5C = 0;
@@ -172,14 +172,14 @@ MATCH void func_801EF590(void) {
     s8           tint;
 
     Actor_StepAnimLoop();
-    work                      = g_Task;
-    D_1F800000.cells.words[0] = (++work->unk_0C & 0x7F) << 5;
-    g_Task->pos.x.fixed       = g_BattleEffectBattler->pos.x.fixed + FIXED_MUL(rsin(D_1F800000.cells.words[0]), 0x20000);
-    g_Task->pos.y.fixed       = g_BattleEffectBattler->pos.y.fixed + FIXED_MUL(rcos(D_1F800000.cells.words[0]), 0x20000);
-    work                      = g_Task;
-    D_1F800000.cells.words[0] = (++work->unk_14 & 0x3F) << 6;
-    D_1F800000.cells.words[1] = 0x800;
-    g_Task->pos.z.fixed       = g_BattleEffectBattler->pos.z.fixed + rsin(D_1F800000.cells.words[0]) * D_1F800000.cells.words[1];
+    work                        = g_Task;
+    g_ScratchPad.cells.words[0] = (++work->unk_0C & 0x7F) << 5;
+    g_Task->pos.x.fixed         = g_BattleEffectBattler->pos.x.fixed + FIXED_MUL(rsin(g_ScratchPad.cells.words[0]), 0x20000);
+    g_Task->pos.y.fixed         = g_BattleEffectBattler->pos.y.fixed + FIXED_MUL(rcos(g_ScratchPad.cells.words[0]), 0x20000);
+    work                        = g_Task;
+    g_ScratchPad.cells.words[0] = (++work->unk_14 & 0x3F) << 6;
+    g_ScratchPad.cells.words[1] = 0x800;
+    g_Task->pos.z.fixed         = g_BattleEffectBattler->pos.z.fixed + rsin(g_ScratchPad.cells.words[0]) * g_ScratchPad.cells.words[1];
     if (g_Task->unk_0C == 0x100) {
         g_Task->header.flags |= 0x20;
         g_Task->unk_5C = 1;
@@ -199,15 +199,15 @@ MATCH void func_801EF710(void) {
     g_Task->unk_5E -= 4;
     g_Task->unk_5F -= 4;
     Actor_StepAnimLoop();
-    work                      = g_Task;
-    D_1F800000.cells.words[0] = (++work->unk_0C & 0x7F) << 5;
-    g_Task->pos.x.fixed       = g_BattleEffectBattler->pos.x.fixed + FIXED_MUL(rsin(D_1F800000.cells.words[0]), 0x20000);
-    g_Task->pos.y.fixed       = g_BattleEffectBattler->pos.y.fixed + FIXED_MUL(rcos(D_1F800000.cells.words[0]), 0x20000);
-    work                      = g_Task;
-    D_1F800000.cells.words[0] = (++work->unk_14 & 0x3F) << 6;
-    D_1F800000.cells.words[1] = 0x800;
-    g_Task->pos.z.fixed       = g_BattleEffectBattler->pos.z.fixed + rsin(D_1F800000.cells.words[0]) * D_1F800000.cells.words[1];
-    g_Task->unk_5D            = tint;
+    work                        = g_Task;
+    g_ScratchPad.cells.words[0] = (++work->unk_0C & 0x7F) << 5;
+    g_Task->pos.x.fixed         = g_BattleEffectBattler->pos.x.fixed + FIXED_MUL(rsin(g_ScratchPad.cells.words[0]), 0x20000);
+    g_Task->pos.y.fixed         = g_BattleEffectBattler->pos.y.fixed + FIXED_MUL(rcos(g_ScratchPad.cells.words[0]), 0x20000);
+    work                        = g_Task;
+    g_ScratchPad.cells.words[0] = (++work->unk_14 & 0x3F) << 6;
+    g_ScratchPad.cells.words[1] = 0x800;
+    g_Task->pos.z.fixed         = g_BattleEffectBattler->pos.z.fixed + rsin(g_ScratchPad.cells.words[0]) * g_ScratchPad.cells.words[1];
+    g_Task->unk_5D              = tint;
     g_Task->header.step += 1;
 }
 

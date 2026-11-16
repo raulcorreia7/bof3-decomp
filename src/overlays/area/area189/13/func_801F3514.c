@@ -31,7 +31,7 @@ NON_MATCHING void func_801F3514(void) {
         g_Task->tint.signed_bytes.delta.blue  = 0;
     }
 
-    vertex         = D_1F800014;
+    vertex         = g_ScratchPadVectors;
     screen         = D_1F800034;
     g_Task->unk_32 = 0x3200;
     vertex->vx     = (s16)(((((g_AreaScrollTargetX - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);

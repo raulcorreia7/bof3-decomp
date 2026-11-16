@@ -383,7 +383,7 @@ NON_MATCHING void func_80117E78(s32 brightness, s32 unused) {
     long      depth;
     long      flag;
 
-    corner = D_1F800014;
+    corner = g_ScratchPadVectors;
     for (row = D_801181D4[COORD_INT(g_Task->pos.x)][1]; row < D_801181D4[COORD_INT(g_Task->pos.x)][3]; row++) {
         for (col = D_801181D4[COORD_INT(g_Task->pos.x)][0]; col < D_801181D4[COORD_INT(g_Task->pos.x)][2]; col++) {
             sum = row + col;

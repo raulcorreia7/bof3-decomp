@@ -9,9 +9,9 @@ MATCH u8 func_801B4BE4(u8 mode, u8 code) {
     s32 want;
     s8  delta;
 
-    delta                       = D_80181B00[mode * 2];
+    delta                         = D_80181B00[mode * 2];
     /* FAKE: the scratchpad cell is stored through a volatile halfword view, as retail. */
-    *(volatile s16*)&D_1F800000 = (g_Task->pos.x.part.integer + ((delta == 1) ? 2 : delta));
+    *(volatile s16*)&g_ScratchPad = (g_Task->pos.x.part.integer + ((delta == 1) ? 2 : delta));
 
     delta      = D_80181B01[mode * 2];
     D_1F800002 = (g_Task->pos.y.part.integer + ((delta == 1) ? 2 : delta));
@@ -19,7 +19,7 @@ MATCH u8 func_801B4BE4(u8 mode, u8 code) {
     index = mode;
     if ((index == 1) || (index == 5)) {
         count = 0;
-        cells = (s16*)D_1F800000;
+        cells = (s16*)g_ScratchPad;
         want  = code;
         do {
             if ((Area_GetCellCode(cells[0], cells[1]) & BYTE_MASK) == want) {
@@ -33,7 +33,7 @@ MATCH u8 func_801B4BE4(u8 mode, u8 code) {
     }
     if ((index == 3) | (index == 7)) {
         count = 0;
-        cells = (s16*)D_1F800000;
+        cells = (s16*)g_ScratchPad;
         want  = code;
         do {
             if ((Area_GetCellCode(cells[0], cells[1]) & BYTE_MASK) == want) {

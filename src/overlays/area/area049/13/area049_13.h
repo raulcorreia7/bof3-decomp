@@ -30,7 +30,8 @@ extern u8      D_801181D0[];
 
 /* The visible cell window per column: first row, first column, last row, last column. */
 extern u8      D_801181D4[][4];
-extern SVECTOR D_1F800014[];
+/* g_ScratchPadVectors */
+extern SVECTOR g_ScratchPadVectors[];
 extern u16     D_1F800034_U16[2];
 
 void func_801170D8(AreaSprite* sprite);

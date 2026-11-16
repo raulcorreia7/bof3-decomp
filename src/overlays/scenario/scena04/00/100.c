@@ -607,7 +607,7 @@ MATCH void func_801F817C(void) {
                 /* kept: the slot index round-trips through the scratch word so
                  * each row address re-reads it; a local index drops 0xA8 bytes
                  * (0x418 vs 0x4C0) and typed g_SpawnedActors rows drop 0xC0. */
-                slot  = (u8*)&D_1F800000;
+                slot  = (u8*)&g_ScratchPad;
                 index = Actor_FindFreeSpawned();
                 *slot = index;
                 if (index != 0xFF) {
@@ -670,8 +670,8 @@ MATCH s32 func_801F9DB4(s32 x, s32 y) {
 MATCH s8 func_801F9DF4(s32 x, s32 y) {
     if (SYS_TestFlag(g_SceneFlags, 2) == 0) {
         if (((x >> 16) - 0x57) < 4U && ((y >> 16) - 0x13) < 3U) {
-            D_1F800000.cells.bytes[0] = g_Game.members[0].facing;
-            if ((u8)(D_1F800000.cells.bytes[0] - 5) >= 2U && D_1F800000.cells.bytes[0] != 4) {
+            g_ScratchPad.cells.bytes[0] = g_Game.members[0].facing;
+            if ((u8)(g_ScratchPad.cells.bytes[0] - 5) >= 2U && g_ScratchPad.cells.bytes[0] != 4) {
                 Game_SetScriptActive();
                 SYS_SetFlag(g_SceneFlags, 2);
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 4));
@@ -685,8 +685,8 @@ MATCH s8 func_801F9DF4(s32 x, s32 y) {
     }
     if (SYS_TestFlag(g_SceneFlags, 3) == 0) {
         if (((x >> 16) - 0x57) < 4U && ((y >> 16) - 0xB) < 6U) {
-            D_1F800000.cells.bytes[0] = g_Game.members[0].facing;
-            if ((u8)(D_1F800000.cells.bytes[0] - 5) >= 2U && D_1F800000.cells.bytes[0] != 4) {
+            g_ScratchPad.cells.bytes[0] = g_Game.members[0].facing;
+            if ((u8)(g_ScratchPad.cells.bytes[0] - 5) >= 2U && g_ScratchPad.cells.bytes[0] != 4) {
                 g_SceneState.state_04 = 1;
                 g_SceneState.step_05  = 0;
                 return Scene_ShowMessage(2);

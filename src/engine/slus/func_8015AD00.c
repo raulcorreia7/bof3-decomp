@@ -85,7 +85,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
 
             vv = piece->v[0][0];
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            D_1F800014[0].vx = vv;
+            g_ScratchPadVectors[0].vx = vv;
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             vv = piece->v[0][1];
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
@@ -97,7 +97,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             vv = piece->v[1][0];
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            D_1F800014[1].vx = vv;
+            g_ScratchPadVectors[1].vx = vv;
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             vv = piece->v[1][1];
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
@@ -109,7 +109,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             vv = piece->v[2][0];
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            D_1F800014[2].vx = vv;
+            g_ScratchPadVectors[2].vx = vv;
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             vv = piece->v[2][1];
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
@@ -121,7 +121,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             vv = piece->v[3][0];
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            D_1F800014[3].vx = vv;
+            g_ScratchPadVectors[3].vx = vv;
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             vv = piece->v[3][1];
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
@@ -137,7 +137,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
             quad->halves.uv2 = piece->uv[2];
             quad->halves.uv3 = piece->uv[3];
 
-            gte_ldv0(&D_1F800014[0]);
+            gte_ldv0(&g_ScratchPadVectors[0]);
             gte_rtps();
             gte_stsxy(&quad->ft4.x0);
             gte_stszotz(&z);
@@ -145,7 +145,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
             sort_list->z  = otz;
             sort_list->z0 = otz;
 
-            gte_ldv0(&D_1F800014[1]);
+            gte_ldv0(&g_ScratchPadVectors[1]);
             gte_rtps();
             gte_stsxy(&quad->ft4.x1);
             gte_stszotz(&z);
@@ -153,7 +153,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
                 sort_list->z = z;
             }
 
-            gte_ldv0(&D_1F800014[2]);
+            gte_ldv0(&g_ScratchPadVectors[2]);
             gte_rtps();
             gte_stsxy(&quad->ft4.x2);
             gte_stszotz(&z);
@@ -161,7 +161,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
                 sort_list->z = z;
             }
 
-            gte_ldv0(&D_1F800014[3]);
+            gte_ldv0(&g_ScratchPadVectors[3]);
             gte_rtps();
             gte_stsxy(&quad->ft4.x3);
             gte_stszotz(&z);
@@ -173,12 +173,12 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
             sort_list->primitive = p;
             setRGB0(&quad->ft4, g_Task->tint.bytes.rgb.red, g_Task->tint.bytes.rgb.green, g_Task->tint.bytes.rgb.blue);
             if ((g_Task->range_54.table[3] & 0x80) != 0) {
-                VectorNormalS(&normal, D_1F800014);
+                VectorNormalS(&normal, g_ScratchPadVectors);
                 color.r  = g_Task->tint.bytes.rgb.red;
                 color.g  = g_Task->tint.bytes.rgb.green;
                 color.b  = g_Task->tint.bytes.rgb.blue;
                 color.cd = quad->ft4.code;
-                NormalColorCol(D_1F800014, &color, (CVECTOR*)&quad->ft4.r0);
+                NormalColorCol(g_ScratchPadVectors, &color, (CVECTOR*)&quad->ft4.r0);
             }
 
             quad->ft4.tpage = tpage;

@@ -29,16 +29,16 @@ NON_MATCHING void func_801FAFA0(s32 message, s32 frames) {
     s32  total;
     u16* cell;
 
-    cell                       = (u16*)D_1F800000 + 1;
-    total                      = frames * 0x1E - 1;
-    limit                      = total;
-    elapsed                    = (u16)(total - g_SceneState.timer_06);
-    *cell                      = total;
-    g_MessageRequest           = message;
-    *(volatile u16*)D_1F800000 = elapsed;
+    cell                         = (u16*)g_ScratchPad + 1;
+    total                        = frames * 0x1E - 1;
+    limit                        = total;
+    elapsed                      = (u16)(total - g_SceneState.timer_06);
+    *cell                        = total;
+    g_MessageRequest             = message;
+    *(volatile u16*)g_ScratchPad = elapsed;
     if (elapsed < limit) {
         UI_DrawText(0x50, 0x3C, 0, 0xFF, (MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, (u16)message) + 2));
-        elapsed = *(volatile u16*)D_1F800000;
+        elapsed = *(volatile u16*)g_ScratchPad;
         if (elapsed < 0x20) {
             GFX_CopyPaletteCapped(elapsed & 0xFF);
         } else if (elapsed == 0x20) {

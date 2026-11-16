@@ -144,18 +144,18 @@ MATCH void func_801F6F30(void) {
         Area_StartScrollRoute(0u);
         /* The cell is advanced through an unsigned view and read back signed
          * for x: the two views of g_AreaCameraAngle.vx are not interchangeable. */
-        base          = (u16*)&g_AreaCameraAngle.vx;
-        base[0]       = (base[0] + 0xAAu);
-        object_index  = Actor_FindFreeSpawned();
-        D_1F800000[0] = object_index;
+        base            = (u16*)&g_AreaCameraAngle.vx;
+        base[0]         = (base[0] + 0xAAu);
+        object_index    = Actor_FindFreeSpawned();
+        g_ScratchPad[0] = object_index;
 
         if (object_index != GAME_NONE) {
-            g_SpawnedActors[object_index].header.flags    = 1u;
-            g_SpawnedActors[D_1F800000[0]].type           = 0x13u;
-            g_SpawnedActors[D_1F800000[0]].camera_angle.x = ((s16)*base - 170);
-            g_SpawnedActors[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
-            g_SpawnedActors[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
-            g_SpawnedActors[D_1F800000[0]].layer          = 0x40u;
+            g_SpawnedActors[object_index].header.flags      = 1u;
+            g_SpawnedActors[g_ScratchPad[0]].type           = 0x13u;
+            g_SpawnedActors[g_ScratchPad[0]].camera_angle.x = ((s16)*base - 170);
+            g_SpawnedActors[g_ScratchPad[0]].camera_angle.y = g_AreaCameraAngle.vy;
+            g_SpawnedActors[g_ScratchPad[0]].camera_angle.z = g_AreaCameraAngle.vz;
+            g_SpawnedActors[g_ScratchPad[0]].layer          = 0x40u;
         }
 
         Party_HideBattlers();
@@ -344,16 +344,16 @@ MATCH void func_801F7230(void) {
                 break;
             }
 
-            object_index  = Actor_FindFreeSpawned();
-            D_1F800000[0] = object_index;
+            object_index    = Actor_FindFreeSpawned();
+            g_ScratchPad[0] = object_index;
 
             if (object_index != GAME_NONE) {
-                g_SpawnedActors[object_index].header.flags    = 1u;
-                g_SpawnedActors[D_1F800000[0]].type           = 0x13u;
-                g_SpawnedActors[D_1F800000[0]].camera_angle.x = (g_AreaCameraAngle.vx + 384);
-                g_SpawnedActors[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                g_SpawnedActors[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
-                g_SpawnedActors[D_1F800000[0]].layer          = 0x60u;
+                g_SpawnedActors[object_index].header.flags      = 1u;
+                g_SpawnedActors[g_ScratchPad[0]].type           = 0x13u;
+                g_SpawnedActors[g_ScratchPad[0]].camera_angle.x = (g_AreaCameraAngle.vx + 384);
+                g_SpawnedActors[g_ScratchPad[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[g_ScratchPad[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_SpawnedActors[g_ScratchPad[0]].layer          = 0x60u;
             }
 
             next  = &g_SceneState.step_05;
@@ -416,15 +416,15 @@ MATCH void func_801F7790(void) {
             g_ScriptVars[2] = 0x30u;
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             object_index    = Actor_FindFreeSpawned();
-            D_1F800000[0]   = object_index;
+            g_ScratchPad[0] = object_index;
 
             if (object_index != GAME_NONE) {
-                g_SpawnedActors[object_index].header.flags    = 1u;
-                g_SpawnedActors[D_1F800000[0]].type           = 0x13u;
-                g_SpawnedActors[D_1F800000[0]].camera_angle.x = (g_AreaCameraAngle.vx + 448);
-                g_SpawnedActors[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                g_SpawnedActors[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
-                g_SpawnedActors[D_1F800000[0]].layer          = 0xFFu;
+                g_SpawnedActors[object_index].header.flags      = 1u;
+                g_SpawnedActors[g_ScratchPad[0]].type           = 0x13u;
+                g_SpawnedActors[g_ScratchPad[0]].camera_angle.x = (g_AreaCameraAngle.vx + 448);
+                g_SpawnedActors[g_ScratchPad[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[g_ScratchPad[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_SpawnedActors[g_ScratchPad[0]].layer          = 0xFFu;
             }
 
             state  = &g_SceneState.step_05;
@@ -570,7 +570,7 @@ MATCH void func_801F7CC4(void) {
             u16* progress;
             u16* timer;
 
-            progress  = (u16*)D_1F800000;
+            progress  = (u16*)g_ScratchPad;
             *progress = (0x130u - g_SceneState.timer_06);
             if (*progress < 191u) {
                 UI_DrawText(72, 80, 0, 255u, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
@@ -603,15 +603,15 @@ MATCH void func_801F7CC4(void) {
             if (g_ScriptVars[0] != 5u) {
                 return;
             }
-            object_index  = Actor_FindFreeSpawned();
-            D_1F800000[0] = object_index;
+            object_index    = Actor_FindFreeSpawned();
+            g_ScratchPad[0] = object_index;
             if (object_index != GAME_NONE) {
-                g_SpawnedActors[object_index].header.flags    = 1u;
-                g_SpawnedActors[D_1F800000[0]].type           = 0x13u;
-                g_SpawnedActors[D_1F800000[0]].camera_angle.x = -842;
-                g_SpawnedActors[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                g_SpawnedActors[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
-                g_SpawnedActors[D_1F800000[0]].layer          = 0x60u;
+                g_SpawnedActors[object_index].header.flags      = 1u;
+                g_SpawnedActors[g_ScratchPad[0]].type           = 0x13u;
+                g_SpawnedActors[g_ScratchPad[0]].camera_angle.x = -842;
+                g_SpawnedActors[g_ScratchPad[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[g_ScratchPad[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_SpawnedActors[g_ScratchPad[0]].layer          = 0x60u;
             }
             state  = &g_SceneState.step_05;
             *state = (*state + 1u);
@@ -621,15 +621,15 @@ MATCH void func_801F7CC4(void) {
             if (g_ScriptVars[0] != 8u) {
                 break;
             }
-            object_index  = Actor_FindFreeSpawned();
-            D_1F800000[0] = object_index;
+            object_index    = Actor_FindFreeSpawned();
+            g_ScratchPad[0] = object_index;
             if (object_index != GAME_NONE) {
-                g_SpawnedActors[object_index].header.flags    = 1u;
-                g_SpawnedActors[D_1F800000[0]].type           = 0x13u;
-                g_SpawnedActors[D_1F800000[0]].camera_angle.x = -684;
-                g_SpawnedActors[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                g_SpawnedActors[D_1F800000[0]].camera_angle.z = g_AreaCameraAngle.vz;
-                g_SpawnedActors[D_1F800000[0]].layer          = 0x20u;
+                g_SpawnedActors[object_index].header.flags      = 1u;
+                g_SpawnedActors[g_ScratchPad[0]].type           = 0x13u;
+                g_SpawnedActors[g_ScratchPad[0]].camera_angle.x = -684;
+                g_SpawnedActors[g_ScratchPad[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[g_ScratchPad[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_SpawnedActors[g_ScratchPad[0]].layer          = 0x20u;
             }
             g_SceneState.timer_06 = 0x200u;
             g_SceneState.step_05  = (g_SceneState.step_05 + 1u);

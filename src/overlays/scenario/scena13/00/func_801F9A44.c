@@ -23,9 +23,9 @@ MATCH void func_801F9A44(void) {
             D_80146875 = 2;
             break;
         case 2:
-            angle_cell      = &D_80147B5C;
-            angle           = *angle_cell;
-            LOH(D_1F800000) = angle & 0xFFF;
+            angle_cell        = &D_80147B5C;
+            angle             = *angle_cell;
+            LOH(g_ScratchPad) = angle & 0xFFF;
             if (g_InputHeld & 0x2000) {
                 angle += 0x10;
                 *angle_cell = angle;
@@ -42,7 +42,7 @@ MATCH void func_801F9A44(void) {
         case 3: {
             u32 turn = D_80147B5C & 0xFFF;
 
-            LOH(D_1F800000) = turn;
+            LOH(g_ScratchPad) = turn;
             if (turn - 0x4A0 < 0x41) {
                 D_80146875 = 0xA;
             } else {

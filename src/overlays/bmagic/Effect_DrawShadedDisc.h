@@ -10,24 +10,24 @@ MATCH void Effect_DrawShadedDisc(void) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
-    D_1F800000.cells.halves[0] = g_Task->param.unk_0B;
-    D_1F800000.cells.halves[5] = g_Task->timer << 2;
-    setVector(&D_1F800014[2], FIXED_MUL(rsin(0), D_1F800000.cells.halves[0]), FIXED_MUL(rcos(0), D_1F800000.cells.halves[0]), 0);
-    D_1F800014[1].vz = 0;
-    D_1F800014[0].vz = 0;
+    g_ScratchPad.cells.halves[0] = g_Task->param.unk_0B;
+    g_ScratchPad.cells.halves[5] = g_Task->timer << 2;
+    setVector(&g_ScratchPadVectors[2], FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]), FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]), 0);
+    g_ScratchPadVectors[1].vz = 0;
+    g_ScratchPadVectors[0].vz = 0;
 
     for (i = 1; i <= 64; i++) {
-        prim             = GFX_BeginPolyG3(1);
-        D_1F800014[0].vx = 0;
-        D_1F800014[0].vy = 0;
-        D_1F800014[1].vx = D_1F800014[2].vx;
-        D_1F800014[1].vy = D_1F800014[2].vy;
-        D_1F800014[2].vx = FIXED_MUL(rsin(i << 6), D_1F800000.cells.halves[0]);
-        D_1F800014[2].vy = FIXED_MUL(rcos(i << 6), D_1F800000.cells.halves[0]);
-        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
-        setRGB0(prim, LOHU(D_1F800000.cells.halves[5]), LOHU(D_1F800000.cells.halves[5]), LOHU(D_1F800000.cells.halves[5]));
-        setRGB1(prim, LOHU(D_1F800000.cells.halves[5]), LOHU(D_1F800000.cells.halves[5]), LOHU(D_1F800000.cells.halves[5]));
-        setRGB2(prim, LOHU(D_1F800000.cells.halves[5]), LOHU(D_1F800000.cells.halves[5]), LOHU(D_1F800000.cells.halves[5]));
+        prim                      = GFX_BeginPolyG3(1);
+        g_ScratchPadVectors[0].vx = 0;
+        g_ScratchPadVectors[0].vy = 0;
+        g_ScratchPadVectors[1].vx = g_ScratchPadVectors[2].vx;
+        g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy;
+        g_ScratchPadVectors[2].vx = FIXED_MUL(rsin(i << 6), g_ScratchPad.cells.halves[0]);
+        g_ScratchPadVectors[2].vy = FIXED_MUL(rcos(i << 6), g_ScratchPad.cells.halves[0]);
+        RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+        setRGB0(prim, LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]));
+        setRGB1(prim, LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]));
+        setRGB2(prim, LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]), LOHU(g_ScratchPad.cells.halves[5]));
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
 }

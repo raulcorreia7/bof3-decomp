@@ -32,12 +32,13 @@ NON_MATCHING void func_801F3AE4(s32 angle, s32 pos, s32 variant) {
         }
         ofs = i * 0xC;
         for (j = 0; j < 4; j++) {
-            D_1F800014[j].vx = D_801F4D94[ofs] << 7;
-            D_1F800014[j].vy = D_801F4D95[ofs] << 7;
-            D_1F800014[j].vz = -(D_801F4D96[ofs] * 320);
+            g_ScratchPadVectors[j].vx = D_801F4D94[ofs] << 7;
+            g_ScratchPadVectors[j].vy = D_801F4D95[ofs] << 7;
+            g_ScratchPadVectors[j].vz = -(D_801F4D96[ofs] * 320);
             ofs += 3;
         }
-        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
+                      &depth, &flag);
         word = D_801F4DF4[i * 2 + (variant & 1)];
         if ((word & 0xF80000) == 0) {
             word |= (((angle >> 5) & 0x38) + 0x50) << 16;

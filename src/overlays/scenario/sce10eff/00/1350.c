@@ -35,13 +35,13 @@ MATCH void func_801D2064(void) {
     angle                         = SCE10EFF_ORBIT_ANGLE(counter);
     angle_cell                    = &D_1F800004;
     *angle_cell                   = angle;
-    D_1F800000                    = 0x18;
+    g_ScratchPad                  = 0x18;
 
-    velocity     = rcos(angle) * D_1F800000;
+    velocity     = rcos(angle) * g_ScratchPad;
     work         = g_Task;
     work->proj.x = D_801D2744->proj.x + velocity;
 
-    velocity        = rsin(*angle_cell) * D_1F800000;
+    velocity        = rsin(*angle_cell) * g_ScratchPad;
     scratch         = g_Task;
     scratch->proj.y = D_801D2744->proj.y + velocity;
     scratch->band -= 2;
@@ -62,8 +62,8 @@ MATCH void func_801D218C(void) {
     s32      page;
     s32      i;
 
-    d          = &D_1F800000;
-    vec        = (s16*)D_1F800014;
+    d          = &g_ScratchPad;
+    vec        = (s16*)g_ScratchPadVectors;
     d[0]       = 0x40;
     D_1F800004 = ((g_Task->ticker + 2) & 0xF) << 8;
     D_1F80000C = g_Task->band;
@@ -79,11 +79,11 @@ MATCH void func_801D218C(void) {
             primitive = (LINE_G2*)g_GfxPrimCursor;
             SetLineG2(primitive);
             SetSemiTrans(primitive, 1);
-            RotTransPers((SVECTOR*)D_1F800014, (long*)&primitive->x0, &p, &flag);
+            RotTransPers((SVECTOR*)g_ScratchPadVectors, (long*)&primitive->x0, &p, &flag);
             if RANDOM_MASK (1) {
-                D_1F800000 = RANDOM_MASK(0x3F) + 0x80;
+                g_ScratchPad = RANDOM_MASK(0x3F) + 0x80;
             } else {
-                D_1F800000 = 0x80 - RANDOM_MASK(0x3F);
+                g_ScratchPad = 0x80 - RANDOM_MASK(0x3F);
             }
             page    = ((g_Task->ticker + i + 2) & 0xF) << 8;
             vec[0]  = 0;
@@ -106,11 +106,11 @@ MATCH void func_801D240C(void) {
     s32      angle;
     s32      i;
 
-    D_1F800000 = RANDOM_MASK(7) + g_Task->band * 3;
+    g_ScratchPad = RANDOM_MASK(7) + g_Task->band * 3;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
     i         = 0;
-    angle_ptr = &D_1F800000;
+    angle_ptr = &g_ScratchPad;
     GFX_AddPrim(2, sizeof(DR_MODE));
 
     do {

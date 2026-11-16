@@ -15,7 +15,7 @@ NON_MATCHING void func_801F34AC(void) {
         func_801F3704();
     }
 
-    quad = D_1F800014;
+    quad = g_ScratchPadVectors;
     sxy  = (u16*)D_1F800034;
     for (i = 0; i < 0xE; i += 2) {
         prim = (POLY_FT4*)g_GfxPrimCursor;

@@ -39,7 +39,7 @@ MATCH void func_801F0090(void) {
 #include "overlays/bmagic/Effect_TickOnTimerZero.h"
 
 /* The shade the screen tile fades to. */
-#define SCREEN_SHADE D_1F800000.cells.words[1]
+#define SCREEN_SHADE g_ScratchPad.cells.words[1]
 
 MATCH void func_801F012C(void) {
     TILE* tile;
@@ -110,22 +110,22 @@ MATCH void func_801F0428(void) {
     u8       shade;
 
     GFX_AddDitheredDrawMode(3, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256));
-    prim                      = GFX_BeginPolyG4(1);
-    D_1F800000.cells.words[0] = g_Task->unk_09 * 3 + 18;
-    D_1F800000.cells.words[2] = ((g_Task->unk_09 + 6) & 0x1F) << 7;
-    setXY0(prim, FIXED_MUL(rsin(D_1F800000.cells.words[2]), D_1F800000.cells.words[0]) + 160, FIXED_MUL(rcos(D_1F800000.cells.words[2]), D_1F800000.cells.words[0]) + 120);
-    D_1F800000.cells.words[2] = ((g_Task->unk_09 + 14) & 0x1F) << 7;
-    prim->x1                  = FIXED_MUL(rsin(D_1F800000.cells.words[2]), D_1F800000.cells.words[0]) + 160;
-    prim->y1                  = FIXED_MUL(rcos(D_1F800000.cells.words[2]), D_1F800000.cells.words[0]) + 120;
-    D_1F800000.cells.words[2] = ((g_Task->unk_09 + 30) & 0x1F) << 7;
-    prim->x2                  = FIXED_MUL(rsin(D_1F800000.cells.words[2]), D_1F800000.cells.words[0]) + 160;
-    prim->y2                  = FIXED_MUL(rcos(D_1F800000.cells.words[2]), D_1F800000.cells.words[0]) + 120;
-    D_1F800000.cells.words[2] = ((g_Task->unk_09 + 22) & 0x1F) << 7;
-    prim->x3                  = FIXED_MUL(rsin(D_1F800000.cells.words[2]), D_1F800000.cells.words[0]) + 160;
-    prim->y3                  = FIXED_MUL(rcos(D_1F800000.cells.words[2]), D_1F800000.cells.words[0]) + 120;
-    shade                     = g_Task->unk_09 / 3;
-    D_1F800000.cells.words[1] = shade * 6;
-    GFX_SET_RGB_ALL(prim, D_1F800000.cells.words[1], D_1F800000.cells.words[1], D_1F800000.cells.words[1]);
+    prim                        = GFX_BeginPolyG4(1);
+    g_ScratchPad.cells.words[0] = g_Task->unk_09 * 3 + 18;
+    g_ScratchPad.cells.words[2] = ((g_Task->unk_09 + 6) & 0x1F) << 7;
+    setXY0(prim, FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]) + 160, FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]) + 120);
+    g_ScratchPad.cells.words[2] = ((g_Task->unk_09 + 14) & 0x1F) << 7;
+    prim->x1                    = FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]) + 160;
+    prim->y1                    = FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]) + 120;
+    g_ScratchPad.cells.words[2] = ((g_Task->unk_09 + 30) & 0x1F) << 7;
+    prim->x2                    = FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]) + 160;
+    prim->y2                    = FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]) + 120;
+    g_ScratchPad.cells.words[2] = ((g_Task->unk_09 + 22) & 0x1F) << 7;
+    prim->x3                    = FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]) + 160;
+    prim->y3                    = FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]) + 120;
+    shade                       = g_Task->unk_09 / 3;
+    g_ScratchPad.cells.words[1] = shade * 6;
+    GFX_SET_RGB_ALL(prim, g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1]);
     GFX_AddPrim(3, sizeof(POLY_G4));
     GFX_AddDitheredDrawMode(3, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256));
 }

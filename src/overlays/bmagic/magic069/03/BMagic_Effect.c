@@ -302,32 +302,32 @@ MATCH void func_801EFC00(void) {
     s32      i;
     s32      j;
 
-    D_1F800000.cells.halves[0] = g_Task->timer;
-    D_1F800000.cells.halves[1] = (g_Task->timer >> 2) + 1;
+    g_ScratchPad.cells.halves[0] = g_Task->timer;
+    g_ScratchPad.cells.halves[1] = (g_Task->timer >> 2) + 1;
     if (g_Task->header.step < 2) {
-        D_1F800000.cells.halves[3] = 0x80 - g_Task->param.unk_0B * 48;
-        D_1F800000.cells.halves[4] = 0x80 - g_Task->param.unk_0B * 48;
+        g_ScratchPad.cells.halves[3] = 0x80 - g_Task->param.unk_0B * 48;
+        g_ScratchPad.cells.halves[4] = 0x80 - g_Task->param.unk_0B * 48;
     } else {
-        D_1F800000.cells.halves[3] = g_Task->unk_09 * 6 + 0x80;
-        D_1F800000.cells.halves[4] = 0x80 - g_Task->unk_09 * 6;
+        g_ScratchPad.cells.halves[3] = g_Task->unk_09 * 6 + 0x80;
+        g_ScratchPad.cells.halves[4] = 0x80 - g_Task->unk_09 * 6;
     }
     for (i = 0; i < 4; i++) {
-        D_1F800000.cells.halves[6] = g_Task->unk_2E.half + FIXED_MUL(rsin(i << 10), D_1F800000.cells.halves[0]);
-        D_1F800000.cells.halves[7] = g_Task->unk_30.half + FIXED_MUL(rcos(i << 10), D_1F800000.cells.halves[0]);
+        g_ScratchPad.cells.halves[6] = g_Task->unk_2E.half + FIXED_MUL(rsin(i << 10), g_ScratchPad.cells.halves[0]);
+        g_ScratchPad.cells.halves[7] = g_Task->unk_30.half + FIXED_MUL(rcos(i << 10), g_ScratchPad.cells.halves[0]);
         for (j = 0; j < 3; j++) {
             prim = (POLY_G3*)g_GfxPrimCursor;
             SetPolyG3(prim);
             SetSemiTrans(prim, 1);
-            setXY0(prim, D_1F800000.cells.halves[6], D_1F800000.cells.halves[7]);
-            D_1F800000.cells.halves[2] = ((D_801F0534[j] + i * 16) & 0x3F) << 6;
-            prim->x1                   = D_1F800000.cells.halves[6] + FIXED_MUL(rsin(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[1]);
-            prim->y1                   = D_1F800000.cells.halves[7] + FIXED_MUL(rcos(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[1]);
-            D_1F800000.cells.halves[2] = ((D_801F0534[j + 1] + i * 16) & 0x3F) << 6;
-            prim->x2                   = D_1F800000.cells.halves[6] + FIXED_MUL(rsin(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[1]);
-            prim->y2                   = D_1F800000.cells.halves[7] + FIXED_MUL(rcos(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[1]);
-            setRGB0(prim, D_1F800000.cells.halves[3], D_1F800000.cells.halves[4], 1);
-            setRGB1(prim, D_1F800000.cells.halves[3], D_1F800000.cells.halves[4], 1);
-            setRGB2(prim, D_1F800000.cells.halves[3], D_1F800000.cells.halves[4], 1);
+            setXY0(prim, g_ScratchPad.cells.halves[6], g_ScratchPad.cells.halves[7]);
+            g_ScratchPad.cells.halves[2] = ((D_801F0534[j] + i * 16) & 0x3F) << 6;
+            prim->x1                     = g_ScratchPad.cells.halves[6] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
+            prim->y1                     = g_ScratchPad.cells.halves[7] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
+            g_ScratchPad.cells.halves[2] = ((D_801F0534[j + 1] + i * 16) & 0x3F) << 6;
+            prim->x2                     = g_ScratchPad.cells.halves[6] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
+            prim->y2                     = g_ScratchPad.cells.halves[7] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
+            setRGB0(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[4], 1);
+            setRGB1(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[4], 1);
+            setRGB2(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[4], 1);
             GFX_AddPrim(3, sizeof(POLY_G3));
         }
     }
@@ -340,26 +340,26 @@ MATCH void func_801EFF14(void) {
     s32      i;
     s32      segment;
 
-    D_1F800000.cells.halves[0] = g_Task->timer;
-    D_1F800000.cells.halves[6] = g_Task->unk_2E.half;
-    D_1F800000.cells.halves[7] = g_Task->unk_30.half;
+    g_ScratchPad.cells.halves[0] = g_Task->timer;
+    g_ScratchPad.cells.halves[6] = g_Task->unk_2E.half;
+    g_ScratchPad.cells.halves[7] = g_Task->unk_30.half;
     if (g_Task->header.step < 2) {
-        D_1F800000.cells.halves[3] = 0x80 - g_Task->param.unk_0B * 48;
+        g_ScratchPad.cells.halves[3] = 0x80 - g_Task->param.unk_0B * 48;
     } else {
-        D_1F800000.cells.halves[3] = 0x80;
+        g_ScratchPad.cells.halves[3] = 0x80;
     }
     for (segment = 0, i = 0; i < 64; i++, segment++) {
         if ((segment & 0xC) == 4 || (segment & 0xC) == 8) {
             prim = (LINE_F2*)g_GfxPrimCursor;
             SetLineF2(prim);
             SetSemiTrans(prim, 1);
-            D_1F800000.cells.halves[2] = i << 6;
-            setXY0(prim, D_1F800000.cells.halves[6] + FIXED_MUL(rsin(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]),
-                   D_1F800000.cells.halves[7] + FIXED_MUL(rcos(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]));
-            D_1F800000.cells.halves[2] = (i + 1) << 6;
-            prim->x1                   = D_1F800000.cells.halves[6] + FIXED_MUL(rsin(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
-            prim->y1                   = D_1F800000.cells.halves[7] + FIXED_MUL(rcos(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
-            setRGB0(prim, D_1F800000.cells.halves[3], D_1F800000.cells.halves[3], D_1F800000.cells.halves[3]);
+            g_ScratchPad.cells.halves[2] = i << 6;
+            setXY0(prim, g_ScratchPad.cells.halves[6] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]),
+                   g_ScratchPad.cells.halves[7] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]));
+            g_ScratchPad.cells.halves[2] = (i + 1) << 6;
+            prim->x1                     = g_ScratchPad.cells.halves[6] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
+            prim->y1                     = g_ScratchPad.cells.halves[7] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
+            setRGB0(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
             GFX_AddPrim(3, sizeof(LINE_F2));
         }
     }

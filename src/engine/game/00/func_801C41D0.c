@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-#define BLOCKED(px, py, dir) (Area_ReadStepHeight((px), (py), (dir)) >= 0x41 && ((u8*)&D_1F800000)[0])
+#define BLOCKED(px, py, dir) (Area_ReadStepHeight((px), (py), (dir)) >= 0x41 && ((u8*)&g_ScratchPad)[0])
 
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {

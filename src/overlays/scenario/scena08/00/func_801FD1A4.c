@@ -59,8 +59,8 @@ MATCH void func_801FD1A4(void) {
             if (g_ScriptVars[0] != 5) {
                 break;
             }
-            object_index              = Actor_FindFreeSpawned();
-            D_1F800000.cells.bytes[0] = object_index;
+            object_index                = Actor_FindFreeSpawned();
+            g_ScratchPad.cells.bytes[0] = object_index;
             if (object_index != 0xFF) {
                 record               = &g_SpawnedActors[object_index];
                 record->header.flags = 1;

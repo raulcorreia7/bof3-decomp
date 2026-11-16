@@ -128,26 +128,26 @@ MATCH void func_801EF294(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
-    D_1F800000.cells.halves[0] = 0x180;
-    D_1F800014[2].vx           = FIXED_MUL(rsin(0), D_1F800000.cells.halves[0]);
-    D_1F800014[2].vy           = FIXED_MUL(rcos(0), D_1F800000.cells.halves[0]);
+    g_ScratchPad.cells.halves[0] = 0x180;
+    g_ScratchPadVectors[2].vx    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
+    g_ScratchPadVectors[2].vy    = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]);
     if (g_Task->unk_09 < 16) {
-        D_1F800000.cells.halves[7] = g_Task->unk_09 << 3;
+        g_ScratchPad.cells.halves[7] = g_Task->unk_09 << 3;
     } else {
-        D_1F800000.cells.halves[7] = 0x80;
+        g_ScratchPad.cells.halves[7] = 0x80;
     }
 
     for (i = 1; i < 9; i++) {
-        prim             = GFX_BeginPolyG3(1);
-        D_1F800014[0].vx = 0;
-        D_1F800014[0].vy = 0;
-        D_1F800014[1].vx = D_1F800014[2].vx;
-        D_1F800014[1].vy = D_1F800014[2].vy;
-        setVector(&D_1F800014[2], FIXED_MUL(rsin(i << 9), D_1F800000.cells.halves[0]), FIXED_MUL(rcos(i << 9), D_1F800000.cells.halves[0]), 0);
-        D_1F800014[1].vz = 0;
-        D_1F800014[0].vz = 0;
-        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
-        setRGB0(prim, D_1F800000.cells.halves[7], D_1F800000.cells.halves[7], D_1F800000.cells.halves[7]);
+        prim                      = GFX_BeginPolyG3(1);
+        g_ScratchPadVectors[0].vx = 0;
+        g_ScratchPadVectors[0].vy = 0;
+        g_ScratchPadVectors[1].vx = g_ScratchPadVectors[2].vx;
+        g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy;
+        setVector(&g_ScratchPadVectors[2], FIXED_MUL(rsin(i << 9), g_ScratchPad.cells.halves[0]), FIXED_MUL(rcos(i << 9), g_ScratchPad.cells.halves[0]), 0);
+        g_ScratchPadVectors[1].vz = 0;
+        g_ScratchPadVectors[0].vz = 0;
+        RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+        setRGB0(prim, g_ScratchPad.cells.halves[7], g_ScratchPad.cells.halves[7], g_ScratchPad.cells.halves[7]);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);
         GFX_AddPrim(5, sizeof(POLY_G3));
@@ -219,8 +219,8 @@ MATCH void func_801F01D0(void) {
     s32      i;
     s32      tpage;
 
-    D_1F800000.cells.halves[0] = (rand() & 0xF) + 0x40;
-    D_1F800000.cells.halves[7] = g_Task->unk_09 * 10;
+    g_ScratchPad.cells.halves[0] = (rand() & 0xF) + 0x40;
+    g_ScratchPad.cells.halves[7] = g_Task->unk_09 * 10;
     for (i = 0; i < 8; i++) {
         tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
@@ -228,10 +228,10 @@ MATCH void func_801F01D0(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        setXY3(prim, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), D_1F800000.cells.halves[0]),
-               g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), D_1F800000.cells.halves[0]), g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 9), D_1F800000.cells.halves[0]),
-               g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 9), D_1F800000.cells.halves[0]));
-        setRGB0(prim, D_1F800000.cells.halves[7], D_1F800000.cells.halves[7] / 5, D_1F800000.cells.halves[7] / 5);
+        setXY3(prim, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), g_ScratchPad.cells.halves[0]),
+               g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), g_ScratchPad.cells.halves[0]), g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 9), g_ScratchPad.cells.halves[0]),
+               g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 9), g_ScratchPad.cells.halves[0]));
+        setRGB0(prim, g_ScratchPad.cells.halves[7], g_ScratchPad.cells.halves[7] / 5, g_ScratchPad.cells.halves[7] / 5);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));

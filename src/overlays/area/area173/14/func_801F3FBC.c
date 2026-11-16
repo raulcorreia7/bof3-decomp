@@ -30,11 +30,12 @@ NON_MATCHING void func_801F3FBC(s32 mode, s32 value) {
         SetPolyFT4(prim);
         SetShadeTex(prim, 0);
         for (j = 0; j < 4; j++) {
-            D_1F800014[j].vx = D_1F800034[0] + LOHU(D_801F5310[i * 24 + j * 6]);
-            D_1F800014[j].vy = D_1F800034[1] + LOHU(D_801F5312[i * 24 + j * 6]);
-            D_1F800014[j].vz = LOHU(D_801F5314[i * 24 + j * 6]);
+            g_ScratchPadVectors[j].vx = D_1F800034[0] + LOHU(D_801F5310[i * 24 + j * 6]);
+            g_ScratchPadVectors[j].vy = D_1F800034[1] + LOHU(D_801F5312[i * 24 + j * 6]);
+            g_ScratchPadVectors[j].vz = LOHU(D_801F5314[i * 24 + j * 6]);
         }
-        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p, &flag);
+        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p,
+                      &flag);
         Area_ApplyTileToQuad(D_801F5358[g_Task->param.unk_0B * 6 + mode * 3 + i], prim, 1);
         i++;
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, (s8)value, sizeof(POLY_FT4));

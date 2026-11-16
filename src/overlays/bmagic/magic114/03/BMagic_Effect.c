@@ -182,21 +182,21 @@ NON_MATCHING void func_801EF280(s32* values) {
     prim = (POLY_G3*)g_GfxPrimCursor;
     SetPolyG3(prim);
 
-    D_1F800014[0].vx = g_Task->pos.x.fixed >> 9;
-    D_1F800014[0].vy = g_Task->pos.y.fixed >> 9;
-    D_1F800014[0].vz = 0;
-    D_1F800014[1].vx = g_Task->unk_0C >> 9;
-    D_1F800014[1].vy = g_Task->unk_10 >> 9;
-    D_1F800014[1].vz = 0;
-    D_1F800014[2].vx = 0;
-    D_1F800014[2].vy = 0;
+    g_ScratchPadVectors[0].vx = g_Task->pos.x.fixed >> 9;
+    g_ScratchPadVectors[0].vy = g_Task->pos.y.fixed >> 9;
+    g_ScratchPadVectors[0].vz = 0;
+    g_ScratchPadVectors[1].vx = g_Task->unk_0C >> 9;
+    g_ScratchPadVectors[1].vy = g_Task->unk_10 >> 9;
+    g_ScratchPadVectors[1].vz = 0;
+    g_ScratchPadVectors[2].vx = 0;
+    g_ScratchPadVectors[2].vy = 0;
     if (mode < 4) {
-        D_1F800014[2].vz = g_Task->timer * 3;
+        g_ScratchPadVectors[2].vz = g_Task->timer * 3;
     } else {
-        D_1F800014[2].vz = -(g_Task->timer * 6) / 2;
+        g_ScratchPadVectors[2].vz = -(g_Task->timer * 6) / 2;
     }
 
-    values[mode] = RotAverage3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &p, &flag);
+    values[mode] = RotAverage3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &p, &flag);
 
     shade = &shades[(mode & 1) | ((mode & 4) >> 1)];
     setRGB0(prim, shade->red, shade->green, shade->blue);
@@ -332,17 +332,20 @@ MATCH void func_801EFA80(void) {
     g_Task->unk_0C = 0;
     g_Task->unk_10 = -0x1000;
     Effect_RotatePosition(g_Task);
-    setVector(&D_1F800014[0], ((g_Task->pos.x.fixed + g_Task->unk_0C) >> 9) - AREA_CELL_ORIGIN, ((g_Task->pos.y.fixed + g_Task->unk_10) >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
+    setVector(&g_ScratchPadVectors[0], ((g_Task->pos.x.fixed + g_Task->unk_0C) >> 9) - AREA_CELL_ORIGIN, ((g_Task->pos.y.fixed + g_Task->unk_10) >> 9) - AREA_CELL_ORIGIN,
+              -COORD_INT(g_Task->pos.z) / 2);
     g_Task->unk_0C = 0;
     g_Task->unk_10 = 0x1000;
     Effect_RotatePosition(g_Task);
-    setVector(&D_1F800014[1], ((g_Task->pos.x.fixed + g_Task->unk_0C) >> 9) - AREA_CELL_ORIGIN, ((g_Task->pos.y.fixed + g_Task->unk_10) >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
+    setVector(&g_ScratchPadVectors[1], ((g_Task->pos.x.fixed + g_Task->unk_0C) >> 9) - AREA_CELL_ORIGIN, ((g_Task->pos.y.fixed + g_Task->unk_10) >> 9) - AREA_CELL_ORIGIN,
+              -COORD_INT(g_Task->pos.z) / 2);
     g_Task->unk_10 = 0xA8000 - ((g_Task->unk_09 * 3) << 15);
     g_Task->unk_0C = 0x28000;
     Effect_RotatePosition(g_Task);
-    setVector(&D_1F800014[3], ((g_AreaScrollTargetX + g_Task->unk_0C) >> 9) - AREA_CELL_ORIGIN, ((g_AreaScrollTargetY + g_Task->unk_10) >> 9) - AREA_CELL_ORIGIN, -g_Task->unk_14 / 2);
-    setVector(&D_1F800014[2], (x >> 9) - AREA_CELL_ORIGIN, (y >> 9) - AREA_CELL_ORIGIN, -g_Task->unk_14 / 2);
-    RotAverage4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+    setVector(&g_ScratchPadVectors[3], ((g_AreaScrollTargetX + g_Task->unk_0C) >> 9) - AREA_CELL_ORIGIN, ((g_AreaScrollTargetY + g_Task->unk_10) >> 9) - AREA_CELL_ORIGIN, -g_Task->unk_14 / 2);
+    setVector(&g_ScratchPadVectors[2], (x >> 9) - AREA_CELL_ORIGIN, (y >> 9) - AREA_CELL_ORIGIN, -g_Task->unk_14 / 2);
+    RotAverage4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
+                &flag);
     setRGB0(prim, 16, 1, 1);
     setRGB1(prim, 16, 1, 1);
     setRGB2(prim, 224, 64, 64);
@@ -438,24 +441,24 @@ MATCH void func_801F0004(void) {
     Effect_RotatePosition(g_Task);
     x = g_Task->pos.x.fixed + g_Task->unk_0C;
     y = g_Task->pos.y.fixed + g_Task->unk_10;
-    setVector(&D_1F800014[2], (x >> 9) - AREA_CELL_ORIGIN, (y >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
+    setVector(&g_ScratchPadVectors[2], (x >> 9) - AREA_CELL_ORIGIN, (y >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
     g_Task->unk_0C = -0x30000;
     g_Task->unk_10 = 0;
     Effect_RotatePosition(g_Task);
     x = g_Task->pos.x.fixed + g_Task->unk_0C;
     y = g_Task->pos.y.fixed + g_Task->unk_10;
-    setVector(&D_1F800014[3], (x >> 9) - AREA_CELL_ORIGIN, (y >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
+    setVector(&g_ScratchPadVectors[3], (x >> 9) - AREA_CELL_ORIGIN, (y >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
     for (i = 1; i < g_Task->unk_14 && i < 56; i++) {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
         SetSemiTrans(prim, 1);
-        D_1F800014[0].vx = D_1F800014[2].vx;
-        D_1F800014[0].vy = D_1F800014[2].vy;
-        D_1F800014[0].vz = D_1F800014[2].vz;
-        D_1F800014[1].vx = D_1F800014[3].vx;
-        D_1F800014[1].vy = D_1F800014[3].vy;
-        D_1F800014[1].vz = D_1F800014[3].vz;
-        left             = g_Task->unk_14 - i;
+        g_ScratchPadVectors[0].vx = g_ScratchPadVectors[2].vx;
+        g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy;
+        g_ScratchPadVectors[0].vz = g_ScratchPadVectors[2].vz;
+        g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx;
+        g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy;
+        g_ScratchPadVectors[1].vz = g_ScratchPadVectors[3].vz;
+        left                      = g_Task->unk_14 - i;
         if (left < 32) {
             g_Task->unk_0C = left << 14;
         } else {
@@ -463,12 +466,12 @@ MATCH void func_801F0004(void) {
         }
         g_Task->unk_10 = i * -0x8000;
         Effect_RotatePosition(g_Task);
-        x                = g_Task->pos.x.fixed + g_Task->unk_0C;
-        y                = g_Task->pos.y.fixed + g_Task->unk_10;
-        D_1F800014[2].vx = (x >> 9) - AREA_CELL_ORIGIN;
-        D_1F800014[2].vy = (y >> 9) - AREA_CELL_ORIGIN;
-        D_1F800014[2].vz = -COORD_INT(g_Task->pos.z) / 2;
-        left             = g_Task->unk_14 - i;
+        x                         = g_Task->pos.x.fixed + g_Task->unk_0C;
+        y                         = g_Task->pos.y.fixed + g_Task->unk_10;
+        g_ScratchPadVectors[2].vx = (x >> 9) - AREA_CELL_ORIGIN;
+        g_ScratchPadVectors[2].vy = (y >> 9) - AREA_CELL_ORIGIN;
+        g_ScratchPadVectors[2].vz = -COORD_INT(g_Task->pos.z) / 2;
+        left                      = g_Task->unk_14 - i;
         if (left < 8) {
             g_Task->unk_0C = -((left * 3) << 13);
         } else {
@@ -476,22 +479,23 @@ MATCH void func_801F0004(void) {
         }
         g_Task->unk_10 = i * -0x8000;
         Effect_RotatePosition(g_Task);
-        x                          = g_Task->pos.x.fixed + g_Task->unk_0C;
-        y                          = g_Task->pos.y.fixed + g_Task->unk_10;
-        D_1F800014[3].vx           = (x >> 9) - AREA_CELL_ORIGIN;
-        D_1F800014[3].vy           = (y >> 9) - AREA_CELL_ORIGIN;
-        D_1F800014[3].vz           = -COORD_INT(g_Task->pos.z) / 2;
-        prim->tpage                = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 832, 256);
-        prim->clut                 = GetClut(0, 482);
-        D_1F800000.cells.halves[0] = (u32)(g_Task->unk_20 + i * 4) % 188 + 64;
-        setUV4(prim, 64, D_1F800000.cells.halves[0], 192, D_1F800000.cells.halves[0], 64, D_1F800000.cells.halves[0] + 3, 192, D_1F800000.cells.halves[0] + 3);
-        RotAverage4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        x                            = g_Task->pos.x.fixed + g_Task->unk_0C;
+        y                            = g_Task->pos.y.fixed + g_Task->unk_10;
+        g_ScratchPadVectors[3].vx    = (x >> 9) - AREA_CELL_ORIGIN;
+        g_ScratchPadVectors[3].vy    = (y >> 9) - AREA_CELL_ORIGIN;
+        g_ScratchPadVectors[3].vz    = -COORD_INT(g_Task->pos.z) / 2;
+        prim->tpage                  = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 832, 256);
+        prim->clut                   = GetClut(0, 482);
+        g_ScratchPad.cells.halves[0] = (u32)(g_Task->unk_20 + i * 4) % 188 + 64;
+        setUV4(prim, 64, g_ScratchPad.cells.halves[0], 192, g_ScratchPad.cells.halves[0], 64, g_ScratchPad.cells.halves[0] + 3, 192, g_ScratchPad.cells.halves[0] + 3);
+        RotAverage4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
+                    &flag);
         if (g_Task->header.step < 2) {
-            D_1F800000.cells.halves[1] = (rsin(((g_FrameCount + i) & 0x3F) << 6) * 32 >> 12) + 160;
-            setRGB0(prim, D_1F800000.cells.halves[1], D_1F800000.cells.halves[1], D_1F800000.cells.halves[1]);
+            g_ScratchPad.cells.halves[1] = (rsin(((g_FrameCount + i) & 0x3F) << 6) * 32 >> 12) + 160;
+            setRGB0(prim, g_ScratchPad.cells.halves[1], g_ScratchPad.cells.halves[1], g_ScratchPad.cells.halves[1]);
         } else {
-            D_1F800000.cells.halves[1] = g_Task->unk_09 * 10;
-            setRGB0(prim, D_1F800000.cells.halves[1], D_1F800000.cells.halves[1], D_1F800000.cells.halves[1]);
+            g_ScratchPad.cells.halves[1] = g_Task->unk_09 * 10;
+            setRGB0(prim, g_ScratchPad.cells.halves[1], g_ScratchPad.cells.halves[1], g_ScratchPad.cells.halves[1]);
         }
         GFX_AddPrim(3, sizeof(POLY_FT4));
     }
@@ -516,13 +520,13 @@ MATCH void func_801F04D4(s32 semi) {
     Effect_RotatePosition(g_Task);
     x = g_Task->pos.x.fixed + g_Task->unk_0C;
     y = g_Task->pos.y.fixed + g_Task->unk_10;
-    setVector(&D_1F800014[2], (x >> 9) - AREA_CELL_ORIGIN, (y >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
+    setVector(&g_ScratchPadVectors[2], (x >> 9) - AREA_CELL_ORIGIN, (y >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
     g_Task->unk_0C = -0x30000;
     g_Task->unk_10 = 0;
     Effect_RotatePosition(g_Task);
     x = g_Task->pos.x.fixed + g_Task->unk_0C;
     y = g_Task->pos.y.fixed + g_Task->unk_10;
-    setVector(&D_1F800014[3], (x >> 9) - AREA_CELL_ORIGIN, (y >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
+    setVector(&g_ScratchPadVectors[3], (x >> 9) - AREA_CELL_ORIGIN, (y >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_Task->pos.z) / 2);
     for (i = 1; i < g_Task->unk_14; i++) {
         if (i >= 56) {
             break;
@@ -530,13 +534,13 @@ MATCH void func_801F04D4(s32 semi) {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
         SetSemiTrans(prim, trans);
-        D_1F800014[0].vx = D_1F800014[2].vx;
-        D_1F800014[0].vy = D_1F800014[2].vy;
-        D_1F800014[0].vz = D_1F800014[2].vz;
-        D_1F800014[1].vx = D_1F800014[3].vx;
-        D_1F800014[1].vy = D_1F800014[3].vy;
-        D_1F800014[1].vz = D_1F800014[3].vz;
-        left             = g_Task->unk_14 - i;
+        g_ScratchPadVectors[0].vx = g_ScratchPadVectors[2].vx;
+        g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy;
+        g_ScratchPadVectors[0].vz = g_ScratchPadVectors[2].vz;
+        g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx;
+        g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy;
+        g_ScratchPadVectors[1].vz = g_ScratchPadVectors[3].vz;
+        left                      = g_Task->unk_14 - i;
         if (left < 32) {
             g_Task->unk_0C = left << 14;
         } else {
@@ -544,12 +548,12 @@ MATCH void func_801F04D4(s32 semi) {
         }
         g_Task->unk_10 = i * -0x8000;
         Effect_RotatePosition(g_Task);
-        x                = g_Task->pos.x.fixed + g_Task->unk_0C;
-        y                = g_Task->pos.y.fixed + g_Task->unk_10;
-        D_1F800014[2].vx = (x >> 9) - AREA_CELL_ORIGIN;
-        D_1F800014[2].vy = (y >> 9) - AREA_CELL_ORIGIN;
-        D_1F800014[2].vz = -COORD_INT(g_Task->pos.z) / 2;
-        left             = g_Task->unk_14 - i;
+        x                         = g_Task->pos.x.fixed + g_Task->unk_0C;
+        y                         = g_Task->pos.y.fixed + g_Task->unk_10;
+        g_ScratchPadVectors[2].vx = (x >> 9) - AREA_CELL_ORIGIN;
+        g_ScratchPadVectors[2].vy = (y >> 9) - AREA_CELL_ORIGIN;
+        g_ScratchPadVectors[2].vz = -COORD_INT(g_Task->pos.z) / 2;
+        left                      = g_Task->unk_14 - i;
         if (left < 8) {
             g_Task->unk_0C = -((left * 3) << 13);
         } else {
@@ -557,18 +561,19 @@ MATCH void func_801F04D4(s32 semi) {
         }
         g_Task->unk_10 = i * -0x8000;
         Effect_RotatePosition(g_Task);
-        x                          = g_Task->pos.x.fixed + g_Task->unk_0C;
-        y                          = g_Task->pos.y.fixed + g_Task->unk_10;
-        D_1F800014[3].vx           = (x >> 9) - AREA_CELL_ORIGIN;
-        D_1F800014[3].vy           = (y >> 9) - AREA_CELL_ORIGIN;
-        D_1F800014[3].vz           = -COORD_INT(g_Task->pos.z) / 2;
-        prim->tpage                = GetTPage(TPAGE_DEPTH_8BIT, trans, 832, 256);
-        prim->clut                 = GetClut(0, 482);
-        D_1F800000.cells.halves[0] = (i & 0xF) * 12 + 64;
-        setUV4(prim, 0, D_1F800000.cells.halves[0], 196, D_1F800000.cells.halves[0], 0, D_1F800000.cells.halves[0] + 11, 196, D_1F800000.cells.halves[0] + 11);
-        RotAverage4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
-        D_1F800000.cells.halves[1] = g_Task->unk_09 << 3;
-        setRGB0(prim, D_1F800000.cells.halves[1], D_1F800000.cells.halves[1], D_1F800000.cells.halves[1]);
+        x                            = g_Task->pos.x.fixed + g_Task->unk_0C;
+        y                            = g_Task->pos.y.fixed + g_Task->unk_10;
+        g_ScratchPadVectors[3].vx    = (x >> 9) - AREA_CELL_ORIGIN;
+        g_ScratchPadVectors[3].vy    = (y >> 9) - AREA_CELL_ORIGIN;
+        g_ScratchPadVectors[3].vz    = -COORD_INT(g_Task->pos.z) / 2;
+        prim->tpage                  = GetTPage(TPAGE_DEPTH_8BIT, trans, 832, 256);
+        prim->clut                   = GetClut(0, 482);
+        g_ScratchPad.cells.halves[0] = (i & 0xF) * 12 + 64;
+        setUV4(prim, 0, g_ScratchPad.cells.halves[0], 196, g_ScratchPad.cells.halves[0], 0, g_ScratchPad.cells.halves[0] + 11, 196, g_ScratchPad.cells.halves[0] + 11);
+        RotAverage4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
+                    &flag);
+        g_ScratchPad.cells.halves[1] = g_Task->unk_09 << 3;
+        setRGB0(prim, g_ScratchPad.cells.halves[1], g_ScratchPad.cells.halves[1], g_ScratchPad.cells.halves[1]);
         GFX_AddPrim(5, sizeof(POLY_FT4));
     }
 }
@@ -588,18 +593,18 @@ MATCH void func_801F093C(void) {
     g_Task->unk_0C = -0x30000;
     g_Task->unk_10 = 0;
     Effect_RotatePosition(g_Task);
-    x                = g_Task->pos.x.fixed + g_Task->unk_0C;
-    y                = g_Task->pos.y.fixed + g_Task->unk_10;
-    D_1F800014[1].vx = (x >> 9) - AREA_CELL_ORIGIN;
-    D_1F800014[1].vy = (y >> 9) - AREA_CELL_ORIGIN;
-    g_Task->unk_0C   = -0x50000;
-    g_Task->unk_10   = 0;
+    x                         = g_Task->pos.x.fixed + g_Task->unk_0C;
+    y                         = g_Task->pos.y.fixed + g_Task->unk_10;
+    g_ScratchPadVectors[1].vx = (x >> 9) - AREA_CELL_ORIGIN;
+    g_ScratchPadVectors[1].vy = (y >> 9) - AREA_CELL_ORIGIN;
+    g_Task->unk_0C            = -0x50000;
+    g_Task->unk_10            = 0;
     Effect_RotatePosition(g_Task);
-    x                = g_Task->pos.x.fixed + g_Task->unk_0C;
-    y                = g_Task->pos.y.fixed + g_Task->unk_10;
-    D_1F800014[3].vx = (x >> 9) - AREA_CELL_ORIGIN;
-    D_1F800014[3].vy = (y >> 9) - AREA_CELL_ORIGIN;
-    D_1F800014[0].vz = D_1F800014[1].vz = D_1F800014[2].vz = D_1F800014[3].vz = -COORD_INT(g_Task->pos.z) / 2;
+    x                         = g_Task->pos.x.fixed + g_Task->unk_0C;
+    y                         = g_Task->pos.y.fixed + g_Task->unk_10;
+    g_ScratchPadVectors[3].vx = (x >> 9) - AREA_CELL_ORIGIN;
+    g_ScratchPadVectors[3].vy = (y >> 9) - AREA_CELL_ORIGIN;
+    g_ScratchPadVectors[0].vz = g_ScratchPadVectors[1].vz = g_ScratchPadVectors[2].vz = g_ScratchPadVectors[3].vz = -COORD_INT(g_Task->pos.z) / 2;
     for (i = 1; i < g_Task->unk_14; i++) {
         if (i >= 56) {
             break;
@@ -607,11 +612,11 @@ MATCH void func_801F093C(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        D_1F800014[0].vx = D_1F800014[1].vx;
-        D_1F800014[0].vy = D_1F800014[1].vy;
-        D_1F800014[2].vx = D_1F800014[3].vx;
-        D_1F800014[2].vy = D_1F800014[3].vy;
-        left             = g_Task->unk_14 - i;
+        g_ScratchPadVectors[0].vx = g_ScratchPadVectors[1].vx;
+        g_ScratchPadVectors[0].vy = g_ScratchPadVectors[1].vy;
+        g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx;
+        g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy;
+        left                      = g_Task->unk_14 - i;
         if (left < 8) {
             g_Task->unk_0C = -((left * 3) << 13);
         } else {
@@ -619,11 +624,11 @@ MATCH void func_801F093C(void) {
         }
         g_Task->unk_10 = i * -0x8000;
         Effect_RotatePosition(g_Task);
-        x                = g_Task->pos.x.fixed + g_Task->unk_0C;
-        y                = g_Task->pos.y.fixed + g_Task->unk_10;
-        D_1F800014[1].vx = (x >> 9) - AREA_CELL_ORIGIN;
-        D_1F800014[1].vy = (y >> 9) - AREA_CELL_ORIGIN;
-        left             = g_Task->unk_14 - i;
+        x                         = g_Task->pos.x.fixed + g_Task->unk_0C;
+        y                         = g_Task->pos.y.fixed + g_Task->unk_10;
+        g_ScratchPadVectors[1].vx = (x >> 9) - AREA_CELL_ORIGIN;
+        g_ScratchPadVectors[1].vy = (y >> 9) - AREA_CELL_ORIGIN;
+        left                      = g_Task->unk_14 - i;
         if (left < 8) {
             g_Task->unk_0C = -((left * 5) << 13);
         } else {
@@ -631,14 +636,15 @@ MATCH void func_801F093C(void) {
         }
         g_Task->unk_10 = i * -0x8000;
         Effect_RotatePosition(g_Task);
-        x                = g_Task->pos.x.fixed + g_Task->unk_0C;
-        y                = g_Task->pos.y.fixed + g_Task->unk_10;
-        D_1F800014[3].vx = (x >> 9) - AREA_CELL_ORIGIN;
-        D_1F800014[3].vy = (y >> 9) - AREA_CELL_ORIGIN;
-        RotAverage4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
-        D_1F800000.cells.halves[1] = g_Task->unk_09 << 2;
-        setRGB0(prim, D_1F800000.cells.halves[1], D_1F800000.cells.halves[1], D_1F800000.cells.halves[1]);
-        setRGB1(prim, D_1F800000.cells.halves[1], D_1F800000.cells.halves[1], D_1F800000.cells.halves[1]);
+        x                         = g_Task->pos.x.fixed + g_Task->unk_0C;
+        y                         = g_Task->pos.y.fixed + g_Task->unk_10;
+        g_ScratchPadVectors[3].vx = (x >> 9) - AREA_CELL_ORIGIN;
+        g_ScratchPadVectors[3].vy = (y >> 9) - AREA_CELL_ORIGIN;
+        RotAverage4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
+                    &flag);
+        g_ScratchPad.cells.halves[1] = g_Task->unk_09 << 2;
+        setRGB0(prim, g_ScratchPad.cells.halves[1], g_ScratchPad.cells.halves[1], g_ScratchPad.cells.halves[1]);
+        setRGB1(prim, g_ScratchPad.cells.halves[1], g_ScratchPad.cells.halves[1], g_ScratchPad.cells.halves[1]);
         setRGB2(prim, 1, 1, 1);
         setRGB3(prim, 1, 1, 1);
         GFX_AddPrim(5, sizeof(POLY_G4));
@@ -742,15 +748,15 @@ NON_MATCHING void func_801F0FBC(void) {
             prim = (LINE_F2*)g_GfxPrimCursor;
             SetLineF2(prim);
             SetSemiTrans(prim, 1);
-            D_1F800014[0].vx = FIXED_MUL(rcos(i << 6) * 16, radius);
-            D_1F800014[0].vy = FIXED_MUL(rsin(i << 6) * 16, radius);
-            D_1F800014[0].vz = 0;
-            RotTransPers(&D_1F800014[0], (long*)&prim->x0, &depth, &flag);
+            g_ScratchPadVectors[0].vx = FIXED_MUL(rcos(i << 6) * 16, radius);
+            g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(i << 6) * 16, radius);
+            g_ScratchPadVectors[0].vz = 0;
+            RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x0, &depth, &flag);
             i++;
-            D_1F800014[0].vx = FIXED_MUL(rcos(i << 6) * 16, radius);
-            D_1F800016       = FIXED_MUL(rsin(i << 6) * 16, radius);
-            D_1F800018       = 0;
-            RotTransPers(&D_1F800014[0], (long*)&prim->x1, &depth, &flag);
+            g_ScratchPadVectors[0].vx = FIXED_MUL(rcos(i << 6) * 16, radius);
+            D_1F800016                = FIXED_MUL(rsin(i << 6) * 16, radius);
+            D_1F800018                = 0;
+            RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x1, &depth, &flag);
             setRGB0(prim, shade, shade, shade);
             Area_AddCellPrim(x, y, z, sizeof(LINE_F2));
         } while (i < 0x40);

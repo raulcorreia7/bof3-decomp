@@ -20,7 +20,8 @@ typedef union AreaWallAngle {
 
 ASSERT_SIZE(AreaWallAngle, 4);
 
-extern SVECTOR  D_1F800014[];
+/* g_ScratchPadVectors */
+extern SVECTOR  g_ScratchPadVectors[];
 extern Callback D_801F3ABC[];
 
 void      func_801F2C74(void);
