@@ -179,7 +179,7 @@ MATCH void func_801EF3D8(void) {
 }
 
 /* func_801EF484 */
-#include "overlays/bmagic/Effect_FinishTrail.h"
+#include "overlays/bmagic/Effect_EndTrail.h"
 
 /* Draws the trail as a ribbon of POLY_G4 quads two units wide either side of each segment heading, from the first
  * recorded point to the effect timer, the shade falling by 12 per segment. */

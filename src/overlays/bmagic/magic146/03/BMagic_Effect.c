@@ -120,7 +120,7 @@ MATCH void func_801EF0D4(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_FinishOnZeroTick.h"
+#include "overlays/bmagic/Effect_EndOnZeroTick.h"
 
 MATCH void func_801EF2FC(void) {
     SYS_DISPATCH_TASK(D_801EF9C0, 1, g_Task);

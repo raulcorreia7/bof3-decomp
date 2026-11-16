@@ -109,7 +109,7 @@ void Boss_EndBattle3(void);
     }
 
 /* Finishes the boss's defeat: adds the battle reward, shows the task again and parks it in mode 3.
- * Boss_FinishDefeat (boss001, boss002, boss004, boss017, boss022) and Boss_FinishDefeat2 (boss001). */
+ * Boss_EndDefeat (boss001, boss002, boss004, boss017, boss022) and Boss_EndDefeat2 (boss001). */
 #define BOSS_FINISH_DEFEAT()                                              \
     do {                                                                  \
         EnemyBattler* work;                                               \

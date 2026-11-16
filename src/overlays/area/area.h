@@ -93,7 +93,7 @@ void            func_801F2C30(void);
 /* func_801F2C38 */
 void            func_801F2C48(void);
 void            func_801F2C5C(void);
-s32             Area_CheckStepTrigger(s32 x, s32 y);
+s32             Area_TestStepTrigger(s32 x, s32 y);
 void            func_801F2C88(void);
 void            func_801F2C8C(void);
 void            func_801F2D18(void);

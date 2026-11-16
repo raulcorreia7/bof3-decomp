@@ -14,6 +14,6 @@ extern u8 D_801F3824[];
 
 void Area_DrawLightPillar(s32* pos);
 
-/* The first row of the trigger band in the shared Area_CheckStepTrigger body. */
+/* The first row of the trigger band in the shared Area_TestStepTrigger body. */
 
 #endif

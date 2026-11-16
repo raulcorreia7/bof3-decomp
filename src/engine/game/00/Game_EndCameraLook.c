@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 /* func_801981D4 */
-MATCH void Game_FinishCameraLook(void) {
+MATCH void Game_EndCameraLook(void) {
     func_801990D0();
     if (g_AreaCameraAngle.vx == -682 && g_AreaCameraAngle.vz == ANGLE_45) {
         g_GameStateIndex    = GAME_REQUEST_IDLE;

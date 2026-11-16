@@ -226,7 +226,7 @@ segments:
       - [0x2748, c, func_80197F48]
       - [0x2970, c, Game_UpdateCameraLook]
       - [0x29B4, c, func_801981B4]
-      - [0x29D4, c, Game_FinishCameraLook]
+      - [0x29D4, c, Game_EndCameraLook]
       - [0x2A34, c, Game_UpdateShop]
       - [0x2A70, c, Game_LoadShopOverlay]
       - [0x2BD8, c, Game_ReturnFromShop]

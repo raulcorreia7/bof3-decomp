@@ -1,6 +1,6 @@
 #include "area189_13.h"
 
-MATCH void Char_DrainFatigue(void) {
+MATCH void Char_AddFatigue(void) {
     Character* chr;
     s32        i;
     u8         fatigue;

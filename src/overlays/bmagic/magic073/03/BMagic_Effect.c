@@ -88,7 +88,7 @@ MATCH void func_801EF52C(void) {
 }
 
 /* func_801EF6B8 */
-#include "overlays/bmagic/Effect_FinishRecovery.h"
+#include "overlays/bmagic/Effect_EndRecovery.h"
 
 MATCH void func_801EF724(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 1, D_801F21F0);

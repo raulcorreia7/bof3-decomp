@@ -839,7 +839,7 @@ void        func_800A46C4(void);
 /* func_800A4700 */
 void        Battle_LoadDraArchive(void);
 /* func_800A4744 */
-void        Battle_FinishDraLoad(void);
+void        Battle_EndDraLoad(void);
 /* func_800A47AC */
 void        Battle_OpenMenu(void);
 void        func_800A4900(void);
@@ -849,7 +849,7 @@ void        func_800A4B08(void);
 /* func_800A4B2C */
 void        Battle_LoadRe2Archive(void);
 /* func_800A4BB4 */
-void        Battle_FinishRe2Load(void);
+void        Battle_EndRe2Load(void);
 void        func_800A4C08(void);
 void        func_800A4C44(void);
 void        func_800A4C70(void);

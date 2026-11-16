@@ -180,7 +180,7 @@ MATCH void func_801EF320(void) {
 }
 
 /* func_801EF478 */
-#include "overlays/bmagic/Effect_FinishTrail.h"
+#include "overlays/bmagic/Effect_EndTrail.h"
 
 MATCH void func_801EF4E0(void) {
     POLY_G4* prim;

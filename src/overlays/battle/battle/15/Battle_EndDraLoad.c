@@ -1,7 +1,7 @@
 #include "battle_15.h"
 
 /* func_800A4744 */
-MATCH void Battle_FinishDraLoad(void) {
+MATCH void Battle_EndDraLoad(void) {
     if (EMI_IsReady() != 0) {
         GFX_CopyPalette(26);
         GFX_CopyPalette(27);
