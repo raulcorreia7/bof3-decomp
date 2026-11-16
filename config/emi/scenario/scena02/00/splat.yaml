@@ -39,7 +39,7 @@ segments:
       - [0x3F4, .rodata, func_801FB36C]
       - [0x448, .rodata, D_801F7048]
       - [0x44C, .rodata, func_801FB6C4]
-      - [0x494, .rodata, D_801F7094]
+      - [0x494, .rodata, 4C68]
       - [0x534, .rodata, func_801FBC6C]
       - [0x59C, .rodata, D_801F719C]
       - [0x5A4, c, func_801F71A4]
