@@ -66,7 +66,7 @@ void            func_801F83AC(Pos2u* out);
 void            func_801F8704(void);
 extern u8       D_801FE71C[];
 /* The scene band's velocity. */
-extern Pos3  D_801FE738;
+extern Pos3     D_801FE738;
 extern u8       D_801FE748;
 extern u8       D_801FE608[];
 extern u8       D_80143F1D;

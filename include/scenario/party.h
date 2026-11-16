@@ -38,8 +38,8 @@ static inline void Menu_SwapEntries(u8* first, u8* second) {
 /* One party formation: its name as the formation menu prints it (the length is what centres it) and the screen
  * offset of each party member from the formation origin. */
 typedef struct FormationLayout {
-    char    name[7];
-    u8      name_length;
+    char name[7];
+    u8   name_length;
     Pos2 offsets[PARTY_SLOT_COUNT];
 } FormationLayout;
 

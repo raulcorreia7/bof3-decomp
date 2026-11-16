@@ -135,8 +135,8 @@ MATCH void func_801F2D3C(void) {
     AreaSlotWork* w;
     TILE_1*       prim;
     /* 4-byte delta pair: retail keeps both components in adjacent stack slots. */
-    Pos2       d;
-    Pos2       c;
+    Pos2          d;
+    Pos2          c;
     s16           shade;
     s32           ratio_y;
     u16           y_base;

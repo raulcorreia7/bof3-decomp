@@ -5,10 +5,10 @@
 NON_MATCHING s16 func_801F35E0(s32 origin_x, s32 origin_y, s16 scroll_x, s16 scroll_y, s16 radius, s16 focus_x) {
     Pos2* current;
     Pos2* next;
-    s16      offset;
-    s16      y;
-    s32      angle;
-    s8       i;
+    s16   offset;
+    s16   y;
+    s32   angle;
+    s8    i;
 
     i       = 0x22;
     next    = MEM_PTR(Pos2, AREA_WORK + 4);

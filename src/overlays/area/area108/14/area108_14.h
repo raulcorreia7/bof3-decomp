@@ -37,7 +37,7 @@ void func_801F3588(u8* dst, u8* src, u16* state);
 #define AREA_RESET_VARIANT 0x04
 
 typedef struct Area108Scratch {
-    u8      unk_00[0x34];
+    u8   unk_00[0x34];
     Pos3 pos;
 } Area108Scratch;
 

@@ -2,8 +2,8 @@
 MATCH void Area_DrawYellowLine(s32* from, s32* to, u8 intensity) {
     POLY_G4* prim;
     TILE_1*  segment;
-    Pos3  current;
-    Pos3  step;
+    Pos3     current;
+    Pos3     step;
     DVECTOR  projected;
     s32      phase;
     u8       i;

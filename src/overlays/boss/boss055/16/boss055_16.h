@@ -62,6 +62,6 @@ void func_800C227C(void);
 void func_800C2340(u8 arg0, u8 index, u8 value);
 
 extern Callback D_800C35D8[];
-extern Pos2  D_800C34D4[];
+extern Pos2     D_800C34D4[];
 
 #endif

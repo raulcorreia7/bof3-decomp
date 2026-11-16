@@ -4,8 +4,8 @@
  * radius scale a 32-segment fan. */
 MATCH void func_801F352C(s32* pos, s16 radius, u8 center_shade, u8 rim_shade) {
     DVECTOR  screen;
-    Pos2  size;
-    Pos2u  projected;
+    Pos2     size;
+    Pos2u    projected;
     MATRIX   matrix;
     POLY_G3* packet;
     u16      angle;

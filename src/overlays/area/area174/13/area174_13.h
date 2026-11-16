@@ -75,7 +75,7 @@ typedef struct AreaShot {
     s16      unk_0A;
     WorldPos pos;
     u8       pad_18[4];
-    Pos3  velocity;
+    Pos3     velocity;
     u8       pad_28[4];
 } AreaShot;
 

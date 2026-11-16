@@ -2,7 +2,7 @@
 
 MATCH void func_801F2C48(void) {
     Pos2* points;
-    u8       i;
+    u8    i;
 
     i      = 0;
     points = MEM_PTR(Pos2, AREA_WORK);

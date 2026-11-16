@@ -20,8 +20,8 @@ extern u8  D_80145FA8;
 extern s16 D_801492DA;
 extern u16 g_AreaCameraOffsetZHalf;
 
-extern Pos3  D_801481E8;
-extern Pos3  D_801481F8;
+extern Pos3     D_801481E8;
+extern Pos3     D_801481F8;
 extern Callback jtbl_801F6D5C[17];
 
 #endif
