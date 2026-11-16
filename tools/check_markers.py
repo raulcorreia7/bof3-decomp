@@ -11,7 +11,8 @@ sits under ``#ifdef NON_MATCHING`` like a draft, is required for every function 
 (``<image>@0x<ADDR>``), so every unmatched function keeps its closest draft with its record.
 Every row of that file is one JSON object per line with exactly ``function``, ``tried``,
 ``first_diff``, ``score``, in that order, which are the keys ``tools/worklist.py`` reads; a row
-with other keys or another order fails here.
+with other keys or another order fails here. The rows stay in ``function`` order, added with
+``tools/attempts.py add``, so a row that sorts before the row above it fails as well.
 Status markers never take a ``FAKE:`` note.
 The one exception is a ``static inline`` helper in a header, which is not a lifted function. PsyQ
 stubs such as ``__main`` carry ``MATCH`` like any other definition.
@@ -318,11 +319,13 @@ def attempted(root: Path | None = None) -> set[str]:
 
 
 def attempt_problems(root: Path | None = None) -> list[str]:
-    """Each `config/attempts.jsonl` row outside the schema, as `path:line: problem`."""
+    """Each attempts row outside the schema or the order, as `path:line: problem`."""
     path = (root or ROOT) / "config/attempts.jsonl"
     if not path.exists():
         return []
     found: list[str] = []
+    previous = ""
+    ordered = True
     for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
         if not line.strip():
             continue
@@ -336,6 +339,14 @@ def attempt_problems(root: Path | None = None) -> list[str]:
             found.append(
                 f"{path}:{number}: keys {list(keys)} instead of {list(ATTEMPT_KEYS)}"
             )
+            continue
+        if ordered and row["function"] < previous:
+            found.append(
+                f"{path}:{number}: {row['function']} sorts before {previous}; "
+                "keep the rows in function order with tools/attempts.py sort"
+            )
+            ordered = False
+        previous = row["function"]
     return found
 
 

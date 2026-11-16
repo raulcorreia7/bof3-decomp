@@ -229,6 +229,21 @@ def test_an_attempt_row_with_other_keys_or_order_names_its_line(tmp_path) -> Non
     ]
 
 
+def test_a_row_out_of_function_order_names_the_first_line(tmp_path) -> None:
+    root = _attempt_rows(
+        tmp_path,
+        '{"function":"a@0x1","tried":"t","first_diff":"d","score":null}',
+        '{"function":"c@0x3","tried":"t","first_diff":"","score":null}',
+        '{"function":"b@0x2","tried":"t","first_diff":"","score":null}',
+        '{"function":"a@0x1","tried":"u","first_diff":"","score":null}',
+    )
+    path = root / "config/attempts.jsonl"
+    assert attempt_problems(root) == [
+        f"{path}:3: b@0x2 sorts before c@0x3; keep the rows in function order "
+        "with tools/attempts.py sort"
+    ]
+
+
 def test_a_malformed_attempts_row_fails_the_diff_check(
     monkeypatch, tmp_path, capsys
 ) -> None:
