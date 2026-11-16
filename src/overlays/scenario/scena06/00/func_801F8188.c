@@ -26,17 +26,17 @@ MATCH void func_801F8188(void) {
             if (g_ScriptVars[0] != 3) {
                 break;
             }
-            slot                   = Actor_FindFreeSpawned();
-            D_1F800000.view.raw[0] = slot;
+            slot                      = Actor_FindFreeSpawned();
+            D_1F800000.cells.bytes[0] = slot;
             if ((slot & BYTE_MASK) != GAME_NONE) {
-                g_SpawnedActors[slot].header.flags                     = 1;
-                g_SpawnedActors[D_1F800000.view.raw[0]].type           = 0x31;
-                g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.x = g_AreaCameraAngle.vx;
-                g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.z = 292;
-                g_SpawnedActors[D_1F800000.view.raw[0]].scene_step     = 0x700;
-                g_SpawnedActors[D_1F800000.view.raw[0]].layer          = 0x5A;
-                g_SceneState.step_05                                   = 4;
+                g_SpawnedActors[slot].header.flags                        = 1;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].type           = 0x31;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.x = g_AreaCameraAngle.vx;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.z = 292;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].scene_step     = 0x700;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].layer          = 0x5A;
+                g_SceneState.step_05                                      = 4;
             }
             break;
         case 4:
@@ -51,16 +51,16 @@ MATCH void func_801F8188(void) {
             if (g_ScriptVars[0] != 0xA) {
                 break;
             }
-            slot                   = Actor_FindFreeSpawned();
-            D_1F800000.view.raw[0] = slot;
+            slot                      = Actor_FindFreeSpawned();
+            D_1F800000.cells.bytes[0] = slot;
             if ((slot & BYTE_MASK) != GAME_NONE) {
-                g_SpawnedActors[slot].header.flags                     = 1;
-                g_SpawnedActors[D_1F800000.view.raw[0]].type           = 0x13;
-                g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.x = -949;
-                g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.z = g_AreaCameraAngle.vz;
-                g_SpawnedActors[D_1F800000.view.raw[0]].layer          = 0x1E;
-                g_SceneState.step_05                                   = 7;
+                g_SpawnedActors[slot].header.flags                        = 1;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].type           = 0x13;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.x = -949;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].layer          = 0x1E;
+                g_SceneState.step_05                                      = 7;
             }
             break;
         case 7:
@@ -81,16 +81,16 @@ MATCH void func_801F8188(void) {
             if (g_ScriptVars[0] != 0xD) {
                 break;
             }
-            slot                   = Actor_FindFreeSpawned();
-            D_1F800000.view.raw[0] = slot;
+            slot                      = Actor_FindFreeSpawned();
+            D_1F800000.cells.bytes[0] = slot;
             if ((slot & BYTE_MASK) != GAME_NONE) {
-                g_SpawnedActors[slot].header.flags                     = 1;
-                g_SpawnedActors[D_1F800000.view.raw[0]].type           = 0x13;
-                g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.x = -682;
-                g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.z = g_AreaCameraAngle.vz;
-                g_SpawnedActors[D_1F800000.view.raw[0]].layer          = 0x1E;
-                g_SceneState.step_05                                   = 10;
+                g_SpawnedActors[slot].header.flags                        = 1;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].type           = 0x13;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.x = -682;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].layer          = 0x1E;
+                g_SceneState.step_05                                      = 10;
             }
             break;
         case 10:
@@ -104,32 +104,32 @@ MATCH void func_801F8188(void) {
             break;
         case 11:
             Area_StartScrollRoute(0);
-            slot                   = Actor_FindFreeSpawned();
-            D_1F800000.view.raw[0] = slot;
+            slot                      = Actor_FindFreeSpawned();
+            D_1F800000.cells.bytes[0] = slot;
             if ((slot & BYTE_MASK) != GAME_NONE) {
-                g_SpawnedActors[slot].header.flags                     = 1;
-                g_SpawnedActors[D_1F800000.view.raw[0]].type           = 0x13;
-                g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.x = 0;
-                g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.z = g_AreaCameraAngle.vz;
-                g_SpawnedActors[D_1F800000.view.raw[0]].layer          = 2;
-                g_SceneState.step_05                                   = 12;
+                g_SpawnedActors[slot].header.flags                        = 1;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].type           = 0x13;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.x = 0;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].layer          = 2;
+                g_SceneState.step_05                                      = 12;
             }
             break;
         case 12:
             if (g_ScriptVars[0] != 1) {
                 break;
             }
-            slot                   = Actor_FindFreeSpawned();
-            D_1F800000.view.raw[0] = slot;
+            slot                      = Actor_FindFreeSpawned();
+            D_1F800000.cells.bytes[0] = slot;
             if ((slot & BYTE_MASK) != GAME_NONE) {
-                g_SpawnedActors[slot].header.flags                     = 1;
-                g_SpawnedActors[D_1F800000.view.raw[0]].type           = 0x13;
-                g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.x = -682;
-                g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.z = g_AreaCameraAngle.vz;
-                g_SpawnedActors[D_1F800000.view.raw[0]].layer          = 0x78;
-                g_SceneState.step_05                                   = 13;
+                g_SpawnedActors[slot].header.flags                        = 1;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].type           = 0x13;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.x = -682;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.z = g_AreaCameraAngle.vz;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].layer          = 0x78;
+                g_SceneState.step_05                                      = 13;
             }
             break;
         case 13:

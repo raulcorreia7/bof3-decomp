@@ -251,14 +251,14 @@ MATCH void func_801EF55C(void) {
     tpage = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(0, sizeof(DR_MODE));
-    D_1F800000.view.scenario.math_00 = 0xE8;
-    D_1F800000.view.scenario.math_04 = g_Task->unk_09;
+    D_1F800000.cells.words[0] = 0xE8;
+    D_1F800000.cells.words[1] = g_Task->unk_09;
     for (i = 0; i < 6; i++) {
         if ((g_Task->param.unk_0B >> i) & 1) {
             prim = (TILE*)g_GfxPrimCursor;
             SetTile(prim);
-            setXY0(prim, D_1F800000.view.scenario.math_00, D_1F800000.view.scenario.math_04);
-            D_1F800000.view.scenario.math_00 += 10;
+            setXY0(prim, D_1F800000.cells.words[0], D_1F800000.cells.words[1]);
+            D_1F800000.cells.words[0] += 10;
             setWH(prim, 8, 12);
             setRGB0(prim, D_801EFCA4[i][0], D_801EFCA4[i][1], D_801EFCA4[i][2]);
             GFX_AddPrim(0, sizeof(TILE));
@@ -267,7 +267,7 @@ MATCH void func_801EF55C(void) {
     if (g_Task->param.unk_0B == 0) {
         prim = (TILE*)g_GfxPrimCursor;
         SetTile(prim);
-        setXY0(prim, D_1F800000.view.scenario.math_00, D_1F800000.view.scenario.math_04);
+        setXY0(prim, D_1F800000.cells.words[0], D_1F800000.cells.words[1]);
         setWH(prim, 8, 12);
         setRGB0(prim, 0x60, 0x60, 0x60);
         GFX_AddPrim(0, sizeof(TILE));

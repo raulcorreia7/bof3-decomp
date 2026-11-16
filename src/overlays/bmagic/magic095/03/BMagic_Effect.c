@@ -136,35 +136,33 @@ MATCH void func_801EF1FC(void) {
     s32      fade;
 
     for (row = 0; row < 6; row++) {
-        D_1F800000.view.scenario.math_04 = 0x100 - row * 41;
-        D_1F800000.view.scenario.math_00 = D_1F800000.view.scenario.math_04 + D_801F065C[row * 8];
-        D_1F800014[0].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.scenario.math_00);
-        D_1F800014[0].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.scenario.math_00);
-        D_1F800014[0].vz                 = -(D_801F065C[row * 8] + row * 72);
-        D_1F800000.view.scenario.math_04 = 0x100 - (row + 1) * 41;
-        D_1F800000.view.scenario.math_00 = D_1F800000.view.scenario.math_04 + D_801F065C[row * 8 + 8];
-        D_1F800014[1].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.scenario.math_00);
-        D_1F800014[1].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.scenario.math_00);
-        D_1F800014[1].vz                 = -((row + 1) * 72 + D_801F065C[row * 8 + 8]);
+        D_1F800000.cells.words[1] = 0x100 - row * 41;
+        D_1F800000.cells.words[0] = D_1F800000.cells.words[1] + D_801F065C[row * 8];
+        D_1F800014[0].vx          = FIXED_MUL(rsin(0), D_1F800000.cells.words[0]);
+        D_1F800014[0].vy          = FIXED_MUL(rcos(0), D_1F800000.cells.words[0]);
+        D_1F800014[0].vz          = -(D_801F065C[row * 8] + row * 72);
+        D_1F800000.cells.words[1] = 0x100 - (row + 1) * 41;
+        D_1F800000.cells.words[0] = D_1F800000.cells.words[1] + D_801F065C[row * 8 + 8];
+        D_1F800014[1].vx          = FIXED_MUL(rsin(0), D_1F800000.cells.words[0]);
+        D_1F800014[1].vy          = FIXED_MUL(rcos(0), D_1F800000.cells.words[0]);
+        D_1F800014[1].vz          = -((row + 1) * 72 + D_801F065C[row * 8 + 8]);
         if (row == 5) {
             D_1F800014[1].vy = 0;
             D_1F800014[1].vx = 0;
         }
         for (i = 1; i < 9; i++) {
-            D_1F800014[2].vx                 = D_1F800014[1].vx;
-            D_1F800014[2].vy                 = D_1F800014[1].vy;
-            D_1F800014[2].vz                 = D_1F800014[1].vz;
-            D_1F800014[3].vx                 = D_1F800014[0].vx;
-            D_1F800014[3].vy                 = D_1F800014[0].vy;
-            D_1F800014[3].vz                 = D_1F800014[0].vz;
-            D_1F800000.view.scenario.math_04 = 0x100 - row * 41;
-            D_1F800000.view.scenario.math_00 = D_1F800000.view.scenario.math_04 + D_801F065C[row * 8 + (i & 7)];
-            setVector(&D_1F800014[0], FIXED_MUL(rsin(i << 9), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(i << 9), D_1F800000.view.scenario.math_00),
-                      -(D_801F065C[row * 8 + (i & 7)] + row * 72));
-            D_1F800000.view.scenario.math_04 = 0x100 - (row + 1) * 41;
-            D_1F800000.view.scenario.math_00 = D_1F800000.view.scenario.math_04 + D_801F065C[(row + 1) * 8 + (i & 7)];
-            setVector(&D_1F800014[1], FIXED_MUL(rsin(i << 9), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(i << 9), D_1F800000.view.scenario.math_00),
-                      -(D_801F065C[(row + 1) * 8 + (i & 7)] + (row + 1) * 72));
+            D_1F800014[2].vx          = D_1F800014[1].vx;
+            D_1F800014[2].vy          = D_1F800014[1].vy;
+            D_1F800014[2].vz          = D_1F800014[1].vz;
+            D_1F800014[3].vx          = D_1F800014[0].vx;
+            D_1F800014[3].vy          = D_1F800014[0].vy;
+            D_1F800014[3].vz          = D_1F800014[0].vz;
+            D_1F800000.cells.words[1] = 0x100 - row * 41;
+            D_1F800000.cells.words[0] = D_1F800000.cells.words[1] + D_801F065C[row * 8 + (i & 7)];
+            setVector(&D_1F800014[0], FIXED_MUL(rsin(i << 9), D_1F800000.cells.words[0]), FIXED_MUL(rcos(i << 9), D_1F800000.cells.words[0]), -(D_801F065C[row * 8 + (i & 7)] + row * 72));
+            D_1F800000.cells.words[1] = 0x100 - (row + 1) * 41;
+            D_1F800000.cells.words[0] = D_1F800000.cells.words[1] + D_801F065C[(row + 1) * 8 + (i & 7)];
+            setVector(&D_1F800014[1], FIXED_MUL(rsin(i << 9), D_1F800000.cells.words[0]), FIXED_MUL(rcos(i << 9), D_1F800000.cells.words[0]), -(D_801F065C[(row + 1) * 8 + (i & 7)] + (row + 1) * 72));
             if (row == 5) {
                 D_1F800014[1].vy = 0;
                 D_1F800014[1].vx = 0;
@@ -180,20 +178,20 @@ MATCH void func_801EF1FC(void) {
             RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
             fade = g_Task->unk_09 - row * 7;
             if (fade > 0) {
-                D_1F800000.view.scenario.math_08 = fade * 6;
-                if (D_1F800000.view.scenario.math_08 > 0x30) {
-                    D_1F800000.view.scenario.math_08 = 0x30;
+                D_1F800000.cells.words[2] = fade * 6;
+                if (D_1F800000.cells.words[2] > 0x30) {
+                    D_1F800000.cells.words[2] = 0x30;
                 }
                 if (i & 1) {
-                    setRGB0(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08);
+                    setRGB0(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[2], D_1F800000.cells.words[2]);
                     setRGB1(prim, 1, 1, 1);
-                    setRGB2(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08);
+                    setRGB2(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[2], D_1F800000.cells.words[2]);
                     setRGB3(prim, 1, 1, 1);
                 } else {
                     setRGB0(prim, 1, 1, 1);
-                    setRGB1(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08);
+                    setRGB1(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[2], D_1F800000.cells.words[2]);
                     setRGB2(prim, 1, 1, 1);
-                    setRGB3(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08);
+                    setRGB3(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[2], D_1F800000.cells.words[2]);
                 }
                 Area_AddCellPrim(x, y, 0, sizeof(LINE_G4));
             }
@@ -216,35 +214,33 @@ MATCH void func_801EF804(void) {
     s32      fade;
 
     for (row = 0; row < 6; row++) {
-        D_1F800000.view.scenario.math_04 = 0x100 - row * 41;
-        D_1F800000.view.scenario.math_00 = D_1F800000.view.scenario.math_04 + D_801F065C[row * 8];
-        D_1F800014[0].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.scenario.math_00);
-        D_1F800014[0].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.scenario.math_00);
-        D_1F800014[0].vz                 = -(D_801F065C[row * 8] + row * 72);
-        D_1F800000.view.scenario.math_04 = 0x100 - (row + 1) * 41;
-        D_1F800000.view.scenario.math_00 = D_1F800000.view.scenario.math_04 + D_801F065C[row * 8 + 8];
-        D_1F800014[1].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.scenario.math_00);
-        D_1F800014[1].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.scenario.math_00);
-        D_1F800014[1].vz                 = -((row + 1) * 72 + D_801F065C[row * 8 + 8]);
+        D_1F800000.cells.words[1] = 0x100 - row * 41;
+        D_1F800000.cells.words[0] = D_1F800000.cells.words[1] + D_801F065C[row * 8];
+        D_1F800014[0].vx          = FIXED_MUL(rsin(0), D_1F800000.cells.words[0]);
+        D_1F800014[0].vy          = FIXED_MUL(rcos(0), D_1F800000.cells.words[0]);
+        D_1F800014[0].vz          = -(D_801F065C[row * 8] + row * 72);
+        D_1F800000.cells.words[1] = 0x100 - (row + 1) * 41;
+        D_1F800000.cells.words[0] = D_1F800000.cells.words[1] + D_801F065C[row * 8 + 8];
+        D_1F800014[1].vx          = FIXED_MUL(rsin(0), D_1F800000.cells.words[0]);
+        D_1F800014[1].vy          = FIXED_MUL(rcos(0), D_1F800000.cells.words[0]);
+        D_1F800014[1].vz          = -((row + 1) * 72 + D_801F065C[row * 8 + 8]);
         if (row == 5) {
             D_1F800014[1].vy = 0;
             D_1F800014[1].vx = 0;
         }
         for (i = 1; i < 9; i++) {
-            D_1F800014[2].vx                 = D_1F800014[0].vx;
-            D_1F800014[2].vy                 = D_1F800014[0].vy;
-            D_1F800014[2].vz                 = D_1F800014[0].vz;
-            D_1F800014[3].vx                 = D_1F800014[1].vx;
-            D_1F800014[3].vy                 = D_1F800014[1].vy;
-            D_1F800014[3].vz                 = D_1F800014[1].vz;
-            D_1F800000.view.scenario.math_04 = 0x100 - row * 41;
-            D_1F800000.view.scenario.math_00 = D_1F800000.view.scenario.math_04 + D_801F065C[row * 8 + (i & 7)];
-            setVector(&D_1F800014[0], FIXED_MUL(rsin(i << 9), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(i << 9), D_1F800000.view.scenario.math_00),
-                      -(D_801F065C[row * 8 + (i & 7)] + row * 72));
-            D_1F800000.view.scenario.math_04 = 0x100 - (row + 1) * 41;
-            D_1F800000.view.scenario.math_00 = D_1F800000.view.scenario.math_04 + D_801F065C[(row + 1) * 8 + (i & 7)];
-            setVector(&D_1F800014[1], FIXED_MUL(rsin(i << 9), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(i << 9), D_1F800000.view.scenario.math_00),
-                      -(D_801F065C[(row + 1) * 8 + (i & 7)] + (row + 1) * 72));
+            D_1F800014[2].vx          = D_1F800014[0].vx;
+            D_1F800014[2].vy          = D_1F800014[0].vy;
+            D_1F800014[2].vz          = D_1F800014[0].vz;
+            D_1F800014[3].vx          = D_1F800014[1].vx;
+            D_1F800014[3].vy          = D_1F800014[1].vy;
+            D_1F800014[3].vz          = D_1F800014[1].vz;
+            D_1F800000.cells.words[1] = 0x100 - row * 41;
+            D_1F800000.cells.words[0] = D_1F800000.cells.words[1] + D_801F065C[row * 8 + (i & 7)];
+            setVector(&D_1F800014[0], FIXED_MUL(rsin(i << 9), D_1F800000.cells.words[0]), FIXED_MUL(rcos(i << 9), D_1F800000.cells.words[0]), -(D_801F065C[row * 8 + (i & 7)] + row * 72));
+            D_1F800000.cells.words[1] = 0x100 - (row + 1) * 41;
+            D_1F800000.cells.words[0] = D_1F800000.cells.words[1] + D_801F065C[(row + 1) * 8 + (i & 7)];
+            setVector(&D_1F800014[1], FIXED_MUL(rsin(i << 9), D_1F800000.cells.words[0]), FIXED_MUL(rcos(i << 9), D_1F800000.cells.words[0]), -(D_801F065C[(row + 1) * 8 + (i & 7)] + (row + 1) * 72));
             if (row == 5) {
                 D_1F800014[1].vy = 0;
                 D_1F800014[1].vx = 0;
@@ -260,25 +256,25 @@ MATCH void func_801EF804(void) {
             RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
             fade = g_Task->unk_09 - row * 8;
             if (fade > 0) {
-                D_1F800000.view.scenario.math_08 = fade;
+                D_1F800000.cells.words[2] = fade;
                 if (fade < 5) {
-                    D_1F800000.view.scenario.math_08 = fade * 48;
-                    if (D_1F800000.view.scenario.math_08 > 0xC0) {
-                        D_1F800000.view.scenario.math_08 = 0xC0;
+                    D_1F800000.cells.words[2] = fade * 48;
+                    if (D_1F800000.cells.words[2] > 0xC0) {
+                        D_1F800000.cells.words[2] = 0xC0;
                     }
-                    setRGB0(prim, 1, 1, D_1F800000.view.scenario.math_08);
+                    setRGB0(prim, 1, 1, D_1F800000.cells.words[2]);
                     setRGB1(prim, 1, 1, 1);
-                    setRGB2(prim, 1, 1, D_1F800000.view.scenario.math_08);
+                    setRGB2(prim, 1, 1, D_1F800000.cells.words[2]);
                     setRGB3(prim, 1, 1, 1);
                 } else {
-                    D_1F800000.view.scenario.math_08 = (fade - 4) * 48;
-                    if (D_1F800000.view.scenario.math_08 > 0xC0) {
-                        D_1F800000.view.scenario.math_08 = 0xC0;
+                    D_1F800000.cells.words[2] = (fade - 4) * 48;
+                    if (D_1F800000.cells.words[2] > 0xC0) {
+                        D_1F800000.cells.words[2] = 0xC0;
                     }
                     setRGB0(prim, 1, 1, 0xC0);
-                    setRGB1(prim, 1, 1, D_1F800000.view.scenario.math_08);
+                    setRGB1(prim, 1, 1, D_1F800000.cells.words[2]);
                     setRGB2(prim, 1, 1, 0xC0);
-                    setRGB3(prim, 1, 1, D_1F800000.view.scenario.math_08);
+                    setRGB3(prim, 1, 1, D_1F800000.cells.words[2]);
                 }
                 Area_AddCellPrim(x, y, 0, sizeof(POLY_G4));
             }
@@ -292,9 +288,9 @@ MATCH void func_801EFDDC(void) {
     long     flag;
     s32      i;
 
-    D_1F800000.view.scenario.math_00 = 0x1C0;
-    D_1F800014[2].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.scenario.math_00);
-    D_1F800014[2].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.scenario.math_00);
+    D_1F800000.cells.words[0] = 0x1C0;
+    D_1F800014[2].vx          = FIXED_MUL(rsin(0), D_1F800000.cells.words[0]);
+    D_1F800014[2].vy          = FIXED_MUL(rcos(0), D_1F800000.cells.words[0]);
     for (i = 1; i <= 16; i++) {
         D_1F800014[0].vx = 0;
         D_1F800014[0].vy = 0;
@@ -302,14 +298,14 @@ MATCH void func_801EFDDC(void) {
         D_1F800014[1].vz = 0;
         D_1F800014[1].vx = D_1F800014[2].vx;
         D_1F800014[1].vy = D_1F800014[2].vy;
-        D_1F800014[2].vx = FIXED_MUL(rsin(i << 8), D_1F800000.view.scenario.math_00);
-        D_1F800014[2].vy = FIXED_MUL(rcos(i << 8), D_1F800000.view.scenario.math_00);
+        D_1F800014[2].vx = FIXED_MUL(rsin(i << 8), D_1F800000.cells.words[0]);
+        D_1F800014[2].vy = FIXED_MUL(rcos(i << 8), D_1F800000.cells.words[0]);
         D_1F800014[2].vz = 0;
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
-        prim                             = GFX_BeginPolyG3(1);
-        D_1F800000.view.scenario.math_08 = g_Task->timer * 8;
-        setRGB0(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08);
+        prim                      = GFX_BeginPolyG3(1);
+        D_1F800000.cells.words[2] = g_Task->timer * 8;
+        setRGB0(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[2], D_1F800000.cells.words[2]);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);
         RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
@@ -365,14 +361,14 @@ MATCH void func_801F012C(void) {
 
     row = g_Task->param.unk_0B >> 1;
     for (i = 1; i < 33; i++) {
-        D_1F800000.view.scenario.math_04 = 0x100 - row * 41;
-        D_1F800000.view.scenario.math_00 = D_1F800000.view.scenario.math_04 + D_801F065C[row * 8 + (i / 8 & 7)];
+        D_1F800000.cells.words[1] = 0x100 - row * 41;
+        D_1F800000.cells.words[0] = D_1F800000.cells.words[1] + D_801F065C[row * 8 + (i / 8 & 7)];
         if (g_Task->timer != 0) {
-            D_1F800000.view.scenario.math_00 += g_Task->timer * 4;
+            D_1F800000.cells.words[0] += g_Task->timer * 4;
         } else {
-            D_1F800000.view.scenario.math_00 += g_Task->unk_09 * 4;
+            D_1F800000.cells.words[0] += g_Task->unk_09 * 4;
         }
-        setVector(&center, FIXED_MUL(rsin(i << 7), D_1F800000.view.scenario.math_00), FIXED_MUL(rcos(i << 7), D_1F800000.view.scenario.math_00), -(D_801F065C[row * 8 + (i / 8 & 7)] + row * 72));
+        setVector(&center, FIXED_MUL(rsin(i << 7), D_1F800000.cells.words[0]), FIXED_MUL(rcos(i << 7), D_1F800000.cells.words[0]), -(D_801F065C[row * 8 + (i / 8 & 7)] + row * 72));
         if (g_Task->param.unk_0B & 1) {
             center.vz -= 0x24;
         }
@@ -387,17 +383,17 @@ MATCH void func_801F012C(void) {
         prim = GFX_CURSOR(POLY_F3);
         SetPolyF3(prim);
         SetSemiTrans(prim, 1);
-        D_1F800000.view.scenario.math_00 = 0x21 - g_Task->unk_09;
-        D_1F800014[0].vx                 = center.vx + FIXED_MUL(rsin(((g_Task->unk_09 + 0x10) & 0x3F) << 6), D_1F800000.view.scenario.math_00);
-        D_1F800014[0].vy                 = center.vy + FIXED_MUL(rcos(((g_Task->unk_09 + 0x10) & 0x3F) << 6), D_1F800000.view.scenario.math_00);
-        D_1F800014[1].vx                 = center.vx + FIXED_MUL(rsin(((g_Task->unk_09 + 0x28) & 0x3F) << 6), D_1F800000.view.scenario.math_00);
-        D_1F800014[1].vy                 = center.vy + FIXED_MUL(rcos(((g_Task->unk_09 + 0x28) & 0x3F) << 6), D_1F800000.view.scenario.math_00);
-        D_1F800014[2].vx                 = center.vx + FIXED_MUL(rsin(((g_Task->unk_09 + 0x31) & 0x3F) << 6), D_1F800000.view.scenario.math_00);
-        D_1F800014[2].vy                 = center.vy + FIXED_MUL(rcos(((g_Task->unk_09 + 0x31) & 0x3F) << 6), D_1F800000.view.scenario.math_00);
-        z                                = center.vz + g_Task->unk_09 * 4;
-        D_1F800014[2].vz                 = z;
-        D_1F800014[1].vz                 = z;
-        D_1F800014[0].vz                 = z;
+        D_1F800000.cells.words[0] = 0x21 - g_Task->unk_09;
+        D_1F800014[0].vx          = center.vx + FIXED_MUL(rsin(((g_Task->unk_09 + 0x10) & 0x3F) << 6), D_1F800000.cells.words[0]);
+        D_1F800014[0].vy          = center.vy + FIXED_MUL(rcos(((g_Task->unk_09 + 0x10) & 0x3F) << 6), D_1F800000.cells.words[0]);
+        D_1F800014[1].vx          = center.vx + FIXED_MUL(rsin(((g_Task->unk_09 + 0x28) & 0x3F) << 6), D_1F800000.cells.words[0]);
+        D_1F800014[1].vy          = center.vy + FIXED_MUL(rcos(((g_Task->unk_09 + 0x28) & 0x3F) << 6), D_1F800000.cells.words[0]);
+        D_1F800014[2].vx          = center.vx + FIXED_MUL(rsin(((g_Task->unk_09 + 0x31) & 0x3F) << 6), D_1F800000.cells.words[0]);
+        D_1F800014[2].vy          = center.vy + FIXED_MUL(rcos(((g_Task->unk_09 + 0x31) & 0x3F) << 6), D_1F800000.cells.words[0]);
+        z                         = center.vz + g_Task->unk_09 * 4;
+        D_1F800014[2].vz          = z;
+        D_1F800014[1].vz          = z;
+        D_1F800014[0].vz          = z;
         if (z > 0) {
             D_1F800014[2].vz = 0;
             D_1F800014[1].vz = 0;

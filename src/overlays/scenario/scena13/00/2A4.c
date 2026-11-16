@@ -302,7 +302,37 @@ INCLUDE_ASM(func_801F9F18);
 
 INCLUDE_ASM(func_801FA844);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801FAFA0(s32 message, s32 frames) {
+    u16  elapsed;
+    u16  limit;
+    s32  total;
+    u16* cell;
+
+    cell                       = (u16*)D_1F800000 + 1;
+    total                      = frames * 0x1E - 1;
+    limit                      = total;
+    elapsed                    = (u16)(total - g_SceneState.timer_06);
+    *cell                      = total;
+    g_MessageRequest           = message;
+    *(volatile u16*)D_1F800000 = elapsed;
+    if (elapsed < limit) {
+        UI_DrawText(0x50, 0x3C, 0, 0xFF, (MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, (u16)message) + 2));
+        elapsed = *(volatile u16*)D_1F800000;
+        if (elapsed < 0x20) {
+            GFX_CopyPaletteCapped(elapsed & 0xFF);
+        } else if (elapsed == 0x20) {
+            Scene_RestorePalette();
+        } else if (*cell - 0x20 < elapsed) {
+            GFX_CopyPaletteCapped((0x20 - (elapsed - (*cell - 0x20))) & 0xFF);
+        }
+    } else if (elapsed == limit) {
+        Scene_RestorePalette();
+    }
+}
+#else
 INCLUDE_ASM(func_801FAFA0);
+#endif
 
 #include "overlays/scenario/GFX_CopyPaletteCapped.h"
 

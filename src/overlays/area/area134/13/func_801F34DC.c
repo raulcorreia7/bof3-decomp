@@ -4,18 +4,18 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F34DC(void) {
-    Actor* work;
-    s32    edge;
+    u8* work;
+    s32 edge;
 
-    work              = g_Task;
-    edge              = FIELD(s32, D_801468BC, 0x0);
-    g_Task            = g_Actors;
-    D_80146875        = 0x1E;
-    g_GameState       = g_Game.members;
-    work->pos.x.fixed = g_Game.members[0].pos.x.fixed - edge;
-    g_Task            = work;
+    work                   = (u8*)g_Task;
+    edge                   = FIELD(s32, D_801468BC, 0x0);
+    g_Task                 = g_Actors;
+    g_GameState            = g_Game.members;
+    FIELD(s32, work, 0x34) = D_80145EC4 - edge;
+    g_Task                 = work;
     TASK_SET(g_Game.members);
-    g_Task = work;
+    g_Task     = work;
+    D_80146875 = 0x1E;
     Actor_Clear();
 }
 #else
