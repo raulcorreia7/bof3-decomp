@@ -1,5 +1,6 @@
 #include "slus.h"
 
+// clang-format off
 /*
  * resident-executable variables and tables 0x801821E0..0x80183B78; widths follow the
  * loads and stores of the consumers, no field meaning is proven.

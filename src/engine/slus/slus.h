@@ -1189,7 +1189,7 @@ s32                     Game_IsScriptVar1Equal(u8** cursor);
 s32                     Game_IsScriptVar2Equal(u8** cursor);
 s32                     Game_IsScriptVar3Equal(u8** cursor);
 s32                     Game_SetScriptVar(u8* operand);
-s32                     Game_IsScriptVarEqual(u8* record);
+s32                     Game_IsScriptVarEqual(u8* operand);
 s32                     Game_IncScriptVar(u8* operand);
 s32                     func_8015BABC(void);
 /* func_8015E994 */

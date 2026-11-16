@@ -15,6 +15,7 @@
 /* The scratchpad work pointer the palette pass reads. */
 /* The state handler banks the step dispatchers index. */
 extern u8 D_801F3DFC[];
+extern s8 D_801F43B0[];
 
 /* A scene seed: the scene record the actor selects, the script it starts and
  * four bytes the entry does not read. */
