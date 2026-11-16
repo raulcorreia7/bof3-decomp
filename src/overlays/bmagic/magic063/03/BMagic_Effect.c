@@ -231,29 +231,29 @@ MATCH void func_801EFA5C(void) {
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
     Area_AddCellPrim(g_BMagicOrbit->pos.x.fixed, g_BMagicOrbit->pos.y.fixed, 2, sizeof(DR_MODE));
-    D_1F800000.view.effect.params[5] = g_BMagicOrbit->timer_05 * g_BMagicOrbit->unk_09;
-    D_1F800000.view.effect.params[6] = g_BMagicOrbit->timer_06 * g_BMagicOrbit->unk_09;
-    D_1F800000.view.effect.params[7] = g_BMagicOrbit->timer_07 * g_BMagicOrbit->unk_09;
+    D_1F800000.cells.halves[5] = g_BMagicOrbit->timer_05 * g_BMagicOrbit->unk_09;
+    D_1F800000.cells.halves[6] = g_BMagicOrbit->timer_06 * g_BMagicOrbit->unk_09;
+    D_1F800000.cells.halves[7] = g_BMagicOrbit->timer_07 * g_BMagicOrbit->unk_09;
     /* FAKE: the vector base in a local makes the centre vector the register base of the corner writes. */
-    vec                              = D_1F800014;
-    D_1F800014[0].vz                 = 0;
-    D_1F800014[0].vy                 = 0;
-    vec[0].vx                        = 0;
+    vec                        = D_1F800014;
+    D_1F800014[0].vz           = 0;
+    D_1F800014[0].vy           = 0;
+    vec[0].vx                  = 0;
     for (i = 0; i < 4; i++) {
-        D_1F800000.view.effect.params[0] = D_801F041C[i];
-        D_1F800000.view.effect.params[1] = D_801F0424[i];
-        D_1F800000.view.effect.params[2] = D_801F042C[i];
-        D_1F800000.view.effect.params[3] = D_801F0434[i];
-        D_1F800000.view.effect.params[4] = ((g_BMagicOrbit->unk_0B + D_801F043C[i]) & 0xF) << 8;
-        prim                             = GFX_BeginPolyG3(1);
-        D_1F800014[1].vx                 = FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-        D_1F800014[1].vy                 = FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-        setVector(&D_1F800014[2], FIXED_MUL(rsin(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[1]),
-                  FIXED_MUL(rcos(D_1F800000.view.effect.params[3]), D_1F800000.view.effect.params[1]), D_1F800014[1].vz = (u32)rsin(D_1F800000.view.effect.params[4]) >> 7);
+        D_1F800000.cells.halves[0] = D_801F041C[i];
+        D_1F800000.cells.halves[1] = D_801F0424[i];
+        D_1F800000.cells.halves[2] = D_801F042C[i];
+        D_1F800000.cells.halves[3] = D_801F0434[i];
+        D_1F800000.cells.halves[4] = ((g_BMagicOrbit->unk_0B + D_801F043C[i]) & 0xF) << 8;
+        prim                       = GFX_BeginPolyG3(1);
+        D_1F800014[1].vx           = FIXED_MUL(rsin(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
+        D_1F800014[1].vy           = FIXED_MUL(rcos(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
+        setVector(&D_1F800014[2], FIXED_MUL(rsin(D_1F800000.cells.halves[3]), D_1F800000.cells.halves[1]), FIXED_MUL(rcos(D_1F800000.cells.halves[3]), D_1F800000.cells.halves[1]),
+                  D_1F800014[1].vz = (u32)rsin(D_1F800000.cells.halves[4]) >> 7);
         RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
-        setRGB0(prim, D_1F800000.view.effect.params[7], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[5]);
-        setRGB1(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
-        setRGB2(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
+        setRGB0(prim, D_1F800000.cells.halves[7], D_1F800000.cells.halves[6], D_1F800000.cells.halves[5]);
+        setRGB1(prim, D_1F800000.cells.halves[5], D_1F800000.cells.halves[6], D_1F800000.cells.halves[7]);
+        setRGB2(prim, D_1F800000.cells.halves[5], D_1F800000.cells.halves[6], D_1F800000.cells.halves[7]);
         Area_AddCellPrim(g_BMagicOrbit->pos.x.fixed, g_BMagicOrbit->pos.y.fixed, 2, sizeof(POLY_G3));
     }
 }

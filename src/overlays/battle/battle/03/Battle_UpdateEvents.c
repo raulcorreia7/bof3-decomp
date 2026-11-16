@@ -15,8 +15,8 @@ MATCH void Battle_UpdateEvents(void) {
             slot       = (BattleEventSlot*)&g_BattleEventSlots[event_slot * 12];
             D_801EB4DC = slot;
             if ((slot->active != 0u) && (slot->group == group) && ((slot->event_type & g_Battle.outcome.event_flags) == 0u)) {
-                sp                       = SPAD(0u);
-                sp->view.battle.state_00 = event_slot;
+                sp                 = SPAD(0u);
+                sp->cells.bytes[0] = event_slot;
                 handlers.events[slot->event_type]();
             }
         }

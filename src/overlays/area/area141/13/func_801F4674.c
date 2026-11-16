@@ -17,9 +17,9 @@ MATCH void func_801F4674(void) {
             return;
         }
         g_Actors[second_index].header.flags = 1;
-        D_1F800000.view.area.entity_counter = (u8)first;
+        D_1F800000.cells.halves[0]          = (u8)first;
         func_801A4D54(D_801F4E2C);
-        D_1F800000.view.area.entity_counter = (u8)second;
+        D_1F800000.cells.halves[0] = (u8)second;
         func_801A4D54(D_801F4E2C + 0x11);
     }
 }

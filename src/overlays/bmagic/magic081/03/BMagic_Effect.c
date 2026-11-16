@@ -240,19 +240,18 @@ MATCH void func_801EF6A0(void) {
     prim = (POLY_GT4*)g_GfxPrimCursor;
     SetPolyGT4(prim);
     if (g_Task->unk_09 < 8) {
-        D_1F800000.view.effect.params[0] = (g_Task->unk_09 + 1) * 8;
+        D_1F800000.cells.halves[0] = (g_Task->unk_09 + 1) * 8;
     } else {
-        D_1F800000.view.effect.params[0] = 0x40;
+        D_1F800000.cells.halves[0] = 0x40;
     }
-    shade                            = &D_1F800000.view.effect.params[4];
-    *shade                           = 0x80;
-    D_1F800000.view.effect.params[2] = g_Task->unk_2E.half;
-    D_1F800000.view.effect.params[3] = g_Task->unk_30.half;
-    setXY4(prim, D_1F800000.view.effect.params[2] + FIXED_MUL(rsin(0xC00), D_1F800000.view.effect.params[0]),
-           D_1F800000.view.effect.params[3] + FIXED_MUL(rcos(0xC00), D_1F800000.view.effect.params[0]), D_1F800000.view.effect.params[2] + FIXED_MUL(rsin(0x800), D_1F800000.view.effect.params[0]),
-           D_1F800000.view.effect.params[3] + FIXED_MUL(rcos(0x800), D_1F800000.view.effect.params[0]), D_1F800000.view.effect.params[2] + FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]),
-           D_1F800000.view.effect.params[3] + FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]), D_1F800000.view.effect.params[2] + FIXED_MUL(rsin(0x400), D_1F800000.view.effect.params[0]),
-           D_1F800000.view.effect.params[3] + FIXED_MUL(rcos(0x400), D_1F800000.view.effect.params[0]));
+    shade                      = &D_1F800000.cells.halves[4];
+    *shade                     = 0x80;
+    D_1F800000.cells.halves[2] = g_Task->unk_2E.half;
+    D_1F800000.cells.halves[3] = g_Task->unk_30.half;
+    setXY4(prim, D_1F800000.cells.halves[2] + FIXED_MUL(rsin(0xC00), D_1F800000.cells.halves[0]), D_1F800000.cells.halves[3] + FIXED_MUL(rcos(0xC00), D_1F800000.cells.halves[0]),
+           D_1F800000.cells.halves[2] + FIXED_MUL(rsin(0x800), D_1F800000.cells.halves[0]), D_1F800000.cells.halves[3] + FIXED_MUL(rcos(0x800), D_1F800000.cells.halves[0]),
+           D_1F800000.cells.halves[2] + FIXED_MUL(rsin(0), D_1F800000.cells.halves[0]), D_1F800000.cells.halves[3] + FIXED_MUL(rcos(0), D_1F800000.cells.halves[0]),
+           D_1F800000.cells.halves[2] + FIXED_MUL(rsin(0x400), D_1F800000.cells.halves[0]), D_1F800000.cells.halves[3] + FIXED_MUL(rcos(0x400), D_1F800000.cells.halves[0]));
     prim->tpage = GetTPage(0, 2, 832, 256);
     prim->clut  = GetClut(0, 506);
     setUVWH(prim, 1, 1, 30, 30);
