@@ -20,7 +20,8 @@ typedef enum BossEvent {
 
 typedef u8 (*BossEventFunc)(u32 event);
 
-void        func_800AC844(u8 entry_id);
+/* func_800AC844 */
+void        Battle_ShowActorEntry(u8 entry_id);
 void        func_800AC934(u8 entry_id);
 s32         func_800ACFF4(void);
 /* func_801DDED8 */

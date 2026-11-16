@@ -1,7 +1,7 @@
 #include "boss034_16.h"
 
 MATCH void func_800C22D0(void) {
-    func_800AC844(0);
+    Battle_ShowActorEntry(0);
     TASK_SET(func_800AC754(0));
     Area_SelectSceneRecord(0x1C1);
     Actor_SelectScript(8);

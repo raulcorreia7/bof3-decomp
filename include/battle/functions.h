@@ -30,6 +30,8 @@ void        func_800AAEBC(s16 target_index, u8 battler_index);
 /* func_800AC218 */
 void        Battle_LoadEnemyBattler(u8 slot, u8 enemy_index);
 s32         func_800AC704(s32 entry_id);
+/* func_800AC870 */
+void        Battle_CopyActorEntry(s32 entry_id, PartyMember* source_record, s32 mode);
 s32         func_800AEEC8(s32 arg0, u8 arg1);
 /* func_800AEF98 */
 void        Battle_SelectActiveBattlerScript(s32 step, s32 payload);
