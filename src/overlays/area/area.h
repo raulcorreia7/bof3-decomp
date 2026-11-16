@@ -187,6 +187,8 @@ typedef struct SceneTrigger {
     u8 step;
 } SceneTrigger;
 
+ASSERT_SIZE(SceneTrigger, 0x4);
+
 /* The body of a scene trigger check `u8 f(u8 x, u8 y)`: the party at (x, y) facing the leader's way stands on one of
  * the `count` triggers of `table`. It starts the scene event `mode` at the trigger's step and returns 1, else returns
  * 0. A block statement macro: it declares a local, so it is the first statement of the function. */

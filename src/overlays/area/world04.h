@@ -63,4 +63,6 @@ typedef struct TriggerBox {
     u8 unk_04;
 } TriggerBox;
 
+ASSERT_SIZE(TriggerBox, 0x5);
+
 #endif

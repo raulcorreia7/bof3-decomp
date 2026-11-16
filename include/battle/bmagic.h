@@ -12,12 +12,16 @@ typedef struct MagicModuleSteps {
     Callback steps[MAGIC_MODULE_STEP_COUNT];
 } MagicModuleSteps;
 
+ASSERT_SIZE(MagicModuleSteps, 0xC);
+
 /* The step routines Effect_DispatchStep runs for the work battler. */
 #define EFFECT_DISPATCH_STEP_COUNT 3
 
 typedef struct EffectDispatchSteps {
     Callback steps[EFFECT_DISPATCH_STEP_COUNT];
 } EffectDispatchSteps;
+
+ASSERT_SIZE(EffectDispatchSteps, 0xC);
 
 /* The mode routines Effect_DrawActor runs before it draws the effect's actor. */
 #define ACTOR_EFFECT_STEP_COUNT 3
@@ -26,12 +30,16 @@ typedef struct ActorEffectSteps {
     Callback steps[ACTOR_EFFECT_STEP_COUNT];
 } ActorEffectSteps;
 
+ASSERT_SIZE(ActorEffectSteps, 0xC);
+
 /* The step routines of the effect work record func_801EF37C advances. */
 #define BMAGIC_EFFECT_WORK_STEP_COUNT 3
 
 typedef struct BMagicEffectWorkSteps {
     Callback steps[BMAGIC_EFFECT_WORK_STEP_COUNT];
 } BMagicEffectWorkSteps;
+
+ASSERT_SIZE(BMagicEffectWorkSteps, 0xC);
 
 /* The step routines of one sparkle of the sparkle pool. */
 #define SPARKLE_EFFECT_STEP_COUNT 3
@@ -40,6 +48,8 @@ typedef struct SparkleEffectSteps {
     Callback steps[SPARKLE_EFFECT_STEP_COUNT];
 } SparkleEffectSteps;
 
+ASSERT_SIZE(SparkleEffectSteps, 0xC);
+
 /* One step list per shared dispatcher; the type takes the lowest-numbered spell of the images that include it. */
 #define MAGIC220_SHARED_STEP_COUNT 3
 
@@ -47,11 +57,15 @@ typedef struct Magic220SharedSteps {
     Callback steps[MAGIC220_SHARED_STEP_COUNT];
 } Magic220SharedSteps;
 
+ASSERT_SIZE(Magic220SharedSteps, 0xC);
+
 #define MAGIC010_SHARED_STEP_COUNT 4
 
 typedef struct Magic010SharedSteps {
     Callback steps[MAGIC010_SHARED_STEP_COUNT];
 } Magic010SharedSteps;
+
+ASSERT_SIZE(Magic010SharedSteps, 0x10);
 
 #define MAGIC068_SHARED_STEP_COUNT 5
 
@@ -59,17 +73,23 @@ typedef struct Magic068SharedSteps {
     Callback steps[MAGIC068_SHARED_STEP_COUNT];
 } Magic068SharedSteps;
 
+ASSERT_SIZE(Magic068SharedSteps, 0x14);
+
 #define MAGIC065_SHARED_STEP_COUNT 4
 
 typedef struct Magic065SharedSteps {
     Callback steps[MAGIC065_SHARED_STEP_COUNT];
 } Magic065SharedSteps;
 
+ASSERT_SIZE(Magic065SharedSteps, 0x10);
+
 #define MAGIC004_SHARED_STEP_COUNT 5
 
 typedef struct Magic004SharedSteps {
     Callback steps[MAGIC004_SHARED_STEP_COUNT];
 } Magic004SharedSteps;
+
+ASSERT_SIZE(Magic004SharedSteps, 0x14);
 
 /* A battle-effect module's head. The id word is the value the type-0 EMI
  * loader compares with the archive TOC; the three state callbacks follow and
