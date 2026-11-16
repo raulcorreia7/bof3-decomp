@@ -78,8 +78,8 @@ MATCH void func_801EEE7C(BMagicStreakSegment* segment) {
     Area_ProjectPoint(point, POLY_XY(prim, 2));
     point[0] = segment->tail.x - 0x1000;
     Area_ProjectPoint(point, POLY_XY(prim, 3));
-    setRGB0(prim, prim->r1 = segment->head_red, prim->g1 = segment->head_green, prim->b1 = segment->head_blue);
-    setRGB2(prim, prim->r3 = segment->tail_red, prim->g3 = segment->tail_green, prim->b3 = segment->tail_blue);
+    setRGB0(prim, prim->r1 = segment->head_color.red, prim->g1 = segment->head_color.green, prim->b1 = segment->head_color.blue);
+    setRGB2(prim, prim->r3 = segment->tail_color.red, prim->g3 = segment->tail_color.green, prim->b3 = segment->tail_color.blue);
     GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
 }
 
@@ -112,25 +112,25 @@ MATCH void func_801EEFF4(void) {
 MATCH void func_801EF020(BMagicStreakSegment* record) {
     s32 offset;
 
-    record->active     = 1;
-    record->unk_01     = 0;
-    record->life       = 16;
-    offset             = (RANDOM_MASK(0x1FF) - 0x100) << 8;
-    record->head.x     = g_Task->pos.x.fixed + offset + offset;
-    record->head.y     = g_Task->pos.y.fixed + 0x20000;
-    record->head.z     = g_Task->pos.z.fixed;
-    record->tail.x     = g_Task->pos.x.fixed + offset;
-    record->tail.y     = g_Task->pos.y.fixed;
-    record->tail.z     = g_Task->pos.z.fixed;
-    record->head_red   = RANDOM_MASK(1) << 7;
-    record->head_green = RANDOM_MASK(1) << 7;
-    record->head_blue  = RANDOM_MASK(1) << 7;
-    record->velocity.x = offset >> 1;
-    record->velocity.y = 0x10000;
-    record->velocity.z = 0;
-    record->tail_red   = 0;
-    record->tail_green = 0;
-    record->tail_blue  = 0;
+    record->active           = 1;
+    record->unk_01           = 0;
+    record->life             = 16;
+    offset                   = (RANDOM_MASK(0x1FF) - 0x100) << 8;
+    record->head.x           = g_Task->pos.x.fixed + offset + offset;
+    record->head.y           = g_Task->pos.y.fixed + 0x20000;
+    record->head.z           = g_Task->pos.z.fixed;
+    record->tail.x           = g_Task->pos.x.fixed + offset;
+    record->tail.y           = g_Task->pos.y.fixed;
+    record->tail.z           = g_Task->pos.z.fixed;
+    record->head_color.red   = RANDOM_MASK(1) << 7;
+    record->head_color.green = RANDOM_MASK(1) << 7;
+    record->head_color.blue  = RANDOM_MASK(1) << 7;
+    record->velocity.x       = offset >> 1;
+    record->velocity.y       = 0x10000;
+    record->velocity.z       = 0;
+    record->tail_color.red   = 0;
+    record->tail_color.green = 0;
+    record->tail_color.blue  = 0;
 }
 
 MATCH u8 func_801EF118(void) {
