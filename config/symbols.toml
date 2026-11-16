@@ -668,9 +668,11 @@ BMagic_DispatchEffectMode = { addr = 0x801EEE70, type = "func", source = "Runs t
 g_BMagicEffectModes = { addr = 0x801EF818, source = "Handlers of magic048 (Dream Breath), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic050/03"]
+Battle_ApplyDamageFlags = { addr = 0x800A9610, source = "Applies the damage flags to the selected battlers.", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 Battle_CenterCamera = { addr = 0x800AFD9C, alias = true }
+func_801DD350 = { addr = 0x801DD350, source = "Integrates the effect velocity pairs the magic050 step reads.", alias = true }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
@@ -810,9 +812,13 @@ g_BMagicEffectModes = { addr = 0x801F0BB0, source = "Handlers of magic060 (Ident
 ["emi/bmagic/magic062/03"]
 D_1F800000_HALF = { addr = 0x1F800000, type = "s16", source = "The scratchpad base 0x1F800000 as signed halfwords; func_801F00EC stages the ring radius there for its rsin and rcos scaling.", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_RescaleStats = { addr = 0x800A9BD8, source = "Rescales one battler stats.", alias = true }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+g_BattleTargetRecord = { addr = 0x801463A0, source = "Result cells of the target battler; the target_record member of g_Battle.", alias = true }
+g_Abilities = { addr = 0x801CA70C, source = "The 228 Ability records of GAME.EMI.", alias = true }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEnemyBattlers = { addr = 0x801EB630, source = "The enemy battlers of the battle.", alias = true }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_DispatchMode = { addr = 0x801EEC1C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the six-handler table at the module head in magic062 (Celerity)." }
 Effect_ReplacePaletteFade = { addr = 0x801EEEC0, type = "func", source = "When the effect timer (byte 0x09) reaches zero frees the selected actor's palette fade, allocates a new one (index in byte 0x0A), restarts the timer at 8 and advances header.mode (byte 0x01) in magic062 (Celerity)." }
