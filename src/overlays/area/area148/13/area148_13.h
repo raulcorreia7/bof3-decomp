@@ -16,15 +16,25 @@
 
 /* The party position in 16.16 fixed point. */
 
-void                       Area_Update(s32 arg);
+void           Area_Update(s32 arg);
 /* The field focus point the work position copies. */
 /* D_80147A90 */
-extern s32                 g_AreaFocusY;
+extern s32     g_AreaFocusY;
 /* The facing routes the projection reads, one Point2l per spawn index. */
 /* D_80181AC0 */
-extern Point2l             g_FacingOffsets[];
+extern Point2l g_FacingOffsets[];
 /* The state handler tables the dispatchers index. */
-extern u8                  D_801F4FC4[];
+extern u8      D_801F4FC4[];
+/* The four scratch vectors RotTransPers4 projects; the part quads write them
+ * by byte offset. */
+extern SVECTOR D_1F800014[];
+extern u8      D_1F800014_BYTE[];
+
+/* The three part quads func_801F37B8 draws: their vertex offsets, the scroll
+ * factors of each direction, and the texture word of each mode. */
+extern u8                  D_801F5034[];
+extern u8                  D_801F5038[];
+extern u32                 D_801F5080[];
 /* The three colour bytes func_801F4DF0 reads for each task row. */
 extern u8                  D_801F6138[];
 extern u8                  D_801F6139[];
