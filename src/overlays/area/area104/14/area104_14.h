@@ -53,6 +53,8 @@ u8 func_801F4AE4(s32, s32, s32);
 extern u16 D_80145A54[];
 /* The area CLUT: the first 32 entries of the palette mirror at GAME_PALETTE_MIRROR. */
 extern u16 D_800396C0[];
+/* The area overlay code base (AreaHandlerRecord.code_base_0C). */
+extern u8  D_800F5000[];
 
 s32  func_801F66D0(s16 x, s16 y);
 void func_801F656C(void);
