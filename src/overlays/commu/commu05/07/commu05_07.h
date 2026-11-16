@@ -27,11 +27,14 @@ extern Callback g_Commu05States[COMMU05_STEP_COUNT];
 /* The entry rows of the shared executable's fairy list (D_80145E48) and the
  * 5-byte icon cells each row byte selects (D_801457E8). */
 extern u8 D_80145E48[];
+extern u8 D_80145E30[];
 extern u8 D_801457E8[][5];
 
 /* The background panel's cell origins, a u and a v byte per tile:
  * D_801D199C, D_801D19BC and D_801D19DC. */
 extern u8 D_801D0C0C[];
+extern u8 D_801D195C[];
+extern u8 D_801D1964[];
 extern u8 D_801D196C[];
 extern u8 D_801D1974[];
 extern u8 D_801D199C[][2];

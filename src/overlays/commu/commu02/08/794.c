@@ -1734,7 +1734,45 @@ MATCH void func_801D708C(void) {
     func_801D9348(((D_801DB0B4 & 1) * 0x88) + 0x20, ((((s32)(D_801DB0B4 << 0x18) >> 0x19) * 0x38) + 0x2B) & HALF_MASK, 0, 6);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D7234(void) {
+    s32 drawn;
+    u32 i;
+    u8  step;
+    u8  drawn_index;
+    s32 remaining;
+    s32 x;
+    s32 y;
+
+    drawn      = 0;
+    step       = D_801DB0C4 + 1;
+    D_801DB0C4 = step;
+    Menu_DrawHeaderBar(20, (0x10 - step * 8) & 0xFFF8, 280, 19, g_WindowStyle);
+    for (i = 0; i < 7; i++) {
+        if (g_Characters[i].party_flags & PARTY_FLAG_JOINED) {
+            drawn_index = drawn;
+            if (drawn_index == (s8)D_801DB0B4) {
+                remaining = 4 - D_801DB0C4;
+                x         = ((s8)D_801DB0B4 * 34 * remaining) + 32;
+                y         = ((drawn_index >> 1) * 14) & 0xFF;
+                y         = (y * remaining) + 43;
+                func_801D90D8((s16)x, (s16)y, (u8)i, 0);
+            } else if ((drawn & 1) == 0) {
+                func_801D90D8(32 - D_801DB0C4 * 40, ((drawn_index >> 1) * 56) + 43, (u8)i, 0);
+            } else {
+                func_801D90D8(D_801DB0C4 * 40 + 168, ((drawn_index >> 1) * 56) + 43, (u8)i, 0);
+            }
+            drawn++;
+        }
+    }
+    if (D_801DB0C4 == 4) {
+        D_801DB0C4 = 4;
+        D_801F294D = 7;
+    }
+}
+#else
 INCLUDE_ASM(func_801D7234);
+#endif
 
 MATCH void func_801D73F8(void) {
     u8 value;
@@ -2328,7 +2366,61 @@ MATCH u8 func_801D92F4(u8 arg) {
     return 0xFF;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D9348(s32 x, s32 y, s32 color, s32 frame_mode) {
+    u8       rgb[3];
+    u8       base;
+    u8       i;
+    s32      width_copy;
+    s32      bit;
+    s32      state;
+    s32      mask;
+    LINE_F3* line3;
+    LINE_F4* line4;
+
+    width_copy = 0x7F;
+
+    if ((u8)color != 0) {
+        state = g_FrameCount;
+        if (state & 8) {
+            base = (u8)((state & 6) << 5 | 0x3F);
+        } else {
+            base = (u8)((~state & 6) << 5 | 0x3F);
+        }
+    } else {
+        base = 0xFF;
+    }
+
+    mask = (u8)frame_mode;
+    for (bit = 1, i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++, bit <<= 1) {
+        if (bit & mask) {
+            rgb[i] = base;
+        } else {
+            rgb[i] = 0;
+        }
+    }
+
+    x += 2;
+    line3 = (LINE_F3*)g_GfxPrimCursor;
+    SetLineF3(line3);
+    setXY3(line3, x + 4, y, x, y + 4, x, y + 0x34);
+    setRGB0(line3, rgb[2], rgb[1], rgb[0]);
+    GFX_AddPrim(1, sizeof(LINE_F3));
+
+    line4 = (LINE_F4*)g_GfxPrimCursor;
+    SetLineF4(line4);
+    setXY0(line4, x + 4, y);
+    line4->x3 = x;
+    line4->y3 = y + 0x34;
+    line4->y1 = y;
+    line4->y2 = y + 0x34;
+    line4->x1 = (line4->x2 = x + width_copy - 1);
+    setRGB0(line4, rgb[2], rgb[1], rgb[0]);
+    GFX_AddPrim(1, sizeof(LINE_F4));
+}
+#else
 INCLUDE_ASM(func_801D9348);
+#endif
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg, s32 cursor_row_arg) {
