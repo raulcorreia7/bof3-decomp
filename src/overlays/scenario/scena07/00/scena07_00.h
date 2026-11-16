@@ -6,8 +6,6 @@
 
 #include "overlays/scenario/scenario.h"
 #include "area/spad.h"
-#define SCRATCH_ROW_STRIDE 0x1C
-#define SCRATCH_ROW_OFFSET 0x00
 
 void            func_801F3C3C(s32 value);
 void            func_801F8358(void);
@@ -24,7 +22,7 @@ extern Callback D_801FDDB4[];
 extern Callback D_801FDDC0[];
 extern Callback D_801FDDC8[];
 extern Callback D_801FDDD0[];
-extern void (*D_801FDDF0[])(u8* row);
+extern void (*D_801FDDF0[])(FallingSpark* spark);
 
 /* One 32-byte row of the effect table at AREA_WORK + 0x95C; a row is free while active is 0. */
 typedef struct SceneEffectRow {
@@ -125,7 +123,7 @@ static inline void Scene_TurnBurst(s32 step) {
     }
 }
 
-void func_801F81D4(u8* row);
+void func_801F81D4(FallingSpark* spark);
 
 /* The position setup func_801F7A30 and func_801F7D6C share: place the actor at the lead member's position and
  * sample the ground there. Every change must keep both members matching. */
@@ -136,7 +134,7 @@ static inline void Scene_PlaceAtLead(void) {
 }
 
 void      Scene_InitSpark(FallingSpark* spark);
-void      func_801F8478(u8* row);
+void      func_801F8478(FallingSpark* spark);
 void      func_801F88B8(void* table);
 void      func_801F8BE8(void* table);
 void      func_801FA38C(void);
@@ -187,8 +185,8 @@ extern u8       D_80146875;
 extern u8       g_ScenePositions;
 /* D_801FDFA8 */
 extern Callback g_ScenePositionDispatch[];
-extern void (*D_801FDDF0[])(u8* row);
-void func_801F81D4(u8* row);
+extern void (*D_801FDDF0[])(FallingSpark* spark);
+void func_801F81D4(FallingSpark* spark);
 
 s8 func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
 
