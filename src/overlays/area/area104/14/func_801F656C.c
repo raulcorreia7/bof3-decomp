@@ -15,9 +15,9 @@ NON_MATCHING void func_801F656C(void) {
     /* FAKE: retail reserves 8 bytes of frame that no statement uses. */
     FAKE_STACK_PADS(u8, 8);
 
-    MEM(u16, 0x800F5000u) = 20;
-    MEM(u16, 0x800F5002u) = 68;
-    base                  = MEM_PTR(u8, 0x800F5004u);
+    MEM(u16, AREA_CODE_BASE) = 20;
+    MEM(u16, AREA_CODE_BASE + 2) = 68;
+    base = MEM_PTR(u8, AREA_CODE_BASE + 4);
     row                   = 13;
     do {
         col = 5;
@@ -37,7 +37,7 @@ NON_MATCHING void func_801F656C(void) {
     pending              = g_GfxPalettePending + 1;
     D_80145A54[index]    = 0x380;
     (&D_80145A7C)[index] = 0x100;
-    (&D_80145A04)[index] = 0x800F5000u;
+    (&D_80145A04)[index] = AREA_CODE_BASE;
     D_800396C0[0]        = 0xFE10;
     D_800396C0[1]        = 0xDC00;
     D_800396C0[2]        = 0x8908;
