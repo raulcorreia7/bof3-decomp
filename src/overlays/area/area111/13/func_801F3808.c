@@ -14,17 +14,17 @@ NON_MATCHING void func_801F3808(void) {
     func_801F4604(x, y, 0);
     for (row = 0; row < 7; row++) {
         for (col = 0; col < 7; col++) {
-            if ((D_801F5C18[row * 4 + col / 2] & 0xF) == (u8)index) {
-                D_801F5C18[row * 4 + col / 2] &= 0xF0;
-            } else if ((D_801F5C18[row * 4 + col / 2] >> 4) == (u8)index) {
-                D_801F5C18[row * 4 + col / 2] &= 0xF;
+            if ((D_801F5C18[row][col / 2] & 0xF) == (u8)index) {
+                D_801F5C18[row][col / 2] &= 0xF0;
+            } else if ((D_801F5C18[row][col / 2] >> 4) == (u8)index) {
+                D_801F5C18[row][col / 2] &= 0xF;
             }
         }
     }
     if (x & 1) {
-        D_801F5C18[y * 4 + x / 2] |= index;
+        D_801F5C18[y][x / 2] |= index;
     } else {
-        D_801F5C18[y * 4 + x / 2] |= index << 4;
+        D_801F5C18[y][x / 2] |= index << 4;
     }
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 4));
 }

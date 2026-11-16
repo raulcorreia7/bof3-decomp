@@ -22,6 +22,28 @@ typedef struct CellOffset {
     u8 y;
 } CellOffset;
 
+/* A part row: the base cell and the four corner cell offsets around it. */
+typedef struct AreaPart {
+    u8  x;           /* 0x00 */
+    u8  y;           /* 0x01 */
+    u8  cells[4][3]; /* 0x02 */
+    u8  unk_0E[2];   /* 0x0E */
+    u32 cell;        /* 0x10 */
+} AreaPart;
+
+ASSERT_SIZE(AreaPart, 0x14);
+ASSERT_OFFSET(AreaPart, cells, 0x02);
+ASSERT_OFFSET(AreaPart, cell, 0x10);
+
+/* The part rows one frame draws, from the first row index to the row after the last. */
+extern u8 D_801F52E8[];
+extern u8 D_801F52E9[];
+
+extern AreaPart D_801F4F14[];
+
+/* The four corner vectors RotTransPers4 projects. */
+extern SVECTOR D_1F800014[];
+
 /* The payload's first words: the per-state handler pointers. */
 extern u8                  D_801F4ED4[];
 extern CellOffset          D_801F5304[];
@@ -31,7 +53,7 @@ extern PartyMemberMessages g_PartyMemberMessages[2];
 
 /* The mode byte the request handler writes. */
 
-void func_801F3954(s32 arg0);
+void func_801F3954(s32 frame);
 void func_801F3FBC(s32 mode, s32 value);
 
 void func_801F3060(s32 arg0, s32 arg1);

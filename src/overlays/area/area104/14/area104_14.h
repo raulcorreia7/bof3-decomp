@@ -61,7 +61,7 @@ extern u16 D_800396C0[];
 /* The area overlay code base (AreaHandlerRecord.code_base_0C), the engine's AREA_CODE_BASE. */
 #define AREA_CODE_BASE ((0x800Fu << 16) | 0x5000u)
 
-s32  func_801F66D0(s16 x, s16 y);
+s32  func_801F66D0(s16 cell_x, s16 cell_y);
 void func_801F656C(void);
 
 void func_801F4608(s32 arg0);

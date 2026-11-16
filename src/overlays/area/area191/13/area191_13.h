@@ -33,7 +33,6 @@ extern u8 D_801F41E8[];
 extern u8 D_801F4218[];
 
 /* The area counter and the area flag store the selection pass reads. */
-extern u8 D_80144EF8[];
 
 extern u8  D_801F4260[];
 /* The neighbour tables the cell lookup reads. */
