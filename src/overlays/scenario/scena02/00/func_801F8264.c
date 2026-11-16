@@ -26,5 +26,3 @@ MATCH void func_801F8264(void) {
             return;
     }
 }
-
-INCLUDE_ASM(func_801F82F4);

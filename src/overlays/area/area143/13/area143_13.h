@@ -37,6 +37,7 @@ extern s8                  D_801F42E8[][2];
 /* The scene steps the work step enters. */
 /* The overlay's gate the request wrapper tests. */
 s32  func_801F2EF0();
+void func_801F3584(s32 height, s32 y, s32 flag);
 void func_801F2FE0(void);
 /* The focus-point projection and the frame step the handlers enter. */
 s32  Area_StepSparkEmitters(void);
@@ -44,6 +45,10 @@ s32  Area_StepSparkEmitters(void);
 void Area_DrawLightPillar(s32* pos);
 
 #include "shared/SparkEmitter.h"
+
+void       func_801F2DB8(SpriteSpark* spark);
+/* The number of sprite sparks the spark step updated this frame. */
+extern u16 D_801F5310;
 
 /* The emitters seeded at fixed cells, resting at the ground height. */
 #define SPARK_EMITTER_COUNT 16
