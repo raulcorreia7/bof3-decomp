@@ -5,7 +5,6 @@
  */
 #ifdef NON_MATCHING
 NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
-    /* FAKE: pure C uses a 0x50-byte frame (0x594 bytes, 357 instructions vs retail's 0x5DC, 375); 8 bytes remain unexplained. */
     FAKE_STACK_PADS(u8, 8);
     Ability* ability_obj;
     u8*      kinds;
