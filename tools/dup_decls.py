@@ -67,11 +67,9 @@ def main():
                 json.dumps({"count": count, "name": name, "decl": decl, "files": files})
             )
         else:
-            print("%d\t%s\t%s\t%s" % (count, name, decl, " ".join(files)))
+            print(f"{count}\t{name}\t{decl}\t" + " ".join(files))
     if not args.json:
-        print(
-            "%s declaration(s) repeated in %d or more headers" % (len(seams), args.min)
-        )
+        print(f"{len(seams)} declaration(s) repeated in {args.min} or more headers")
 
 
 if __name__ == "__main__":
