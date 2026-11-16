@@ -3,7 +3,7 @@
 MATCH void func_801F3B4C(void) {
     switch (g_SceneEventState.step) {
         case 0:
-            if (D_80143F03 == 3) {
+            if (g_GameCellType == 3) {
                 UI_SetMode(UI_MODE_WHITE_OUT);
                 g_SceneEventState.step = 1;
             } else {

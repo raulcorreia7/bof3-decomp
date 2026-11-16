@@ -8,7 +8,7 @@ MATCH void func_801F4C84(void) {
             break;
         case 1:
             if (g_ScriptVars[3] == 0x18) {
-                if (D_80143F03 == 2) {
+                if (g_GameCellType == 2) {
                     Game_RequestAreaChange(AREA_ID_LOOP_ELEVATOR, TO_COORD(4) + COORD_HALF, TO_COORD(10), AREA_ENTRY_MAP_LOADING);
                 } else {
                     Game_RequestAreaChange(AREA_ID_LOOP_ELEVATOR, TO_COORD(4) + COORD_HALF, TO_COORD(100), AREA_ENTRY_MAP_LOADING);

@@ -8,13 +8,13 @@ MATCH void func_801F4ABC(void) {
         *mode = 0x25;
     }
     func_801F3994();
-    if (D_80143F06 == 2) {
-        if (D_80143F03 == 1) {
+    if (g_GameLastCellType == 2) {
+        if (g_GameCellType == 1) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x0C));
         }
     }
-    if (D_80143F06 == 3) {
-        if (D_80143F03 == 2) {
+    if (g_GameLastCellType == 3) {
+        if (g_GameCellType == 2) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x0C));
         }
     }

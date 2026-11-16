@@ -31,7 +31,7 @@ MATCH void func_801FB414(void) {
 INCLUDE_ASM(func_801FB464);
 
 MATCH s32 func_801FBA34(s32 x, s32 y) {
-    if (LOHU(g_GameAreaId) == 0x8F && D_80143F03 == 0 && SYS_TestFlag(g_SceneFlags, 0x1C) != 0 && SYS_TestFlag(g_SceneFlags, 0x1D) == 0 && (x >> 16) == 0x2E && (u32)((y >> 16) - 0x1F) < 4U) {
+    if (LOHU(g_GameAreaId) == 0x8F && g_GameCellType == 0 && SYS_TestFlag(g_SceneFlags, 0x1C) != 0 && SYS_TestFlag(g_SceneFlags, 0x1D) == 0 && (x >> 16) == 0x2E && (u32)((y >> 16) - 0x1F) < 4U) {
         Game_SetScriptActive();
         g_SceneState.state_04 = 8;
         g_SceneState.step_05  = 0;
@@ -40,7 +40,7 @@ MATCH s32 func_801FBA34(s32 x, s32 y) {
     if (LOHU(g_GameAreaId) != 0x91) {
         return 0;
     }
-    if (D_80143F03 != 5) {
+    if (g_GameCellType != 5) {
         return 0;
     }
     if (SYS_TestFlag(g_SceneFlags, 0xA) != 0) {

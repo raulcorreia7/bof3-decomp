@@ -7,7 +7,7 @@ NON_MATCHING void func_801F41C8(void) {
     u8  entry_y;
 
     index = g_ScriptState->pad_03 - 6;
-    if (D_80143F03 == 4) {
+    if (g_GameCellType == 4) {
         entry_x = D_801F6AAC[(u8)index * 2];
         entry_y = D_801F6AAD[(u8)index * 2];
     } else {

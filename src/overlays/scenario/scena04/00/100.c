@@ -535,7 +535,7 @@ MATCH void func_801F817C(void) {
     u8* pad_flag;
 
     if (g_GameAreaId == AREA_ID_MOMO_TOWER_FIRST_FLOOR) {
-        if (D_80143F03 == 7) {
+        if (g_GameCellType == 7) {
             if (SYS_TestFlag(g_SceneFlags, 3) == 0) {
                 SYS_SetFlag(g_SceneFlags, 3);
                 g_ScriptVarsWord = 0;
@@ -579,7 +579,7 @@ MATCH void func_801F817C(void) {
         }
     }
     if (g_GameAreaId == AREA_ID_MOMO_TOWER_TOP) {
-        if (D_80143F03 == 3) {
+        if (g_GameCellType == 3) {
             g_ScriptVarsWord = 0;
             if (SYS_TestFlag(g_SceneFlags, 6) == 0) {
                 SYS_SetFlag(g_SceneFlags, 6);

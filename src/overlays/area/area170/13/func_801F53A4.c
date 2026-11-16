@@ -2,7 +2,7 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801F53A4(s32 x, s32 y) {
-    if (D_80143F03 == 4) {
+    if (g_GameCellType == 4) {
         if (((y == 0x708000 || y == 0x738000) && (u32)((x >> 16) - 3) < 3U) || (x == 0x28000 && (u32)((y >> 16) - 0x71) < 3U) || (x == 0x58000 && (u32)((y >> 16) - 0x71) < 3U)) {
             Game_SetScriptActive();
             g_SceneEventMode = 0x25;
@@ -10,7 +10,7 @@ NON_MATCHING s32 func_801F53A4(s32 x, s32 y) {
             return 1;
         }
     }
-    if (D_80143F03 != 5) {
+    if (g_GameCellType != 5) {
         return 0;
     }
     if (((y == 0x8E8000 || y == 0x918000) && (u32)((x >> 16) - 9) < 3U) || (x == 0x88000 && (u32)((y >> 16) - 0x8F) < 3U) || (x == 0xB8000 && (u32)((y >> 16) - 0x8F) < 3U)) {

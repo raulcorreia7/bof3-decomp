@@ -3,7 +3,7 @@
 /* The step into Tidal Caves: the scene-event flags select one of the six entrance steps, and a
  * position inside that step's window starts scene 0x24 at the step. */
 MATCH s32 func_801F3CD4(s32 entry_x, s32 entry_y) {
-    if (D_80143F03 != 0) {
+    if (g_GameCellType != 0) {
         return 0;
     }
 

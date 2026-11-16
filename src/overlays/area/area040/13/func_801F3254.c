@@ -37,7 +37,7 @@ MATCH void func_801F3254(void) {
             func_801F37D4();
             break;
     }
-    if (g_GameAreaId != 0x28 || g_SceneEventState.step == 10 || D_80143F03 != 6) {
+    if (g_GameAreaId != 0x28 || g_SceneEventState.step == 10 || g_GameCellType != 6) {
         g_SceneEventState.mode = 0;
         g_SceneEventState.step = 0;
         g_GameFlags &= ~0x1006;

@@ -7,7 +7,7 @@ MATCH void func_801F2CB0(void) {
     u8  row;
     u8* flags;
 
-    mode = D_80143F03;
+    mode = g_GameCellType;
     if (mode == 0 || mode == 2) {
         flags           = g_SceneEventFlags;
         g_ScriptVars[2] = 0;

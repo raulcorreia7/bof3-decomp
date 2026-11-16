@@ -73,7 +73,8 @@ ASSERT_OFFSET(TorchGaugeCell, u, 0x01);
 ASSERT_SIZE(TorchGaugeCells, 0x04);
 ASSERT_OFFSET(TorchGaugeCells, rows, 0x00);
 
-extern u8       D_80143F06;
+/* D_80143F06 */
+extern u8       g_GameLastCellType;
 extern s16      D_801448EE;
 extern u8       D_80147ACF;
 void            Area_SpawnWeightedActor(void);
@@ -198,7 +199,7 @@ typedef struct SceneTrigger {
 /* Whether a step to (x, y) enters the trigger band that starts at `first_row`: with the scene ready it clears
  * the first script variable and runs script entry 0, which starts the area scene and blocks the step. */
 static inline s32 Area_StepIntoTrigger(s32 x, s32 y, s32 first_row) {
-    if (D_80143F03 == 2 && SYS_TestFlag(g_SceneEventFlags, 0x33) != 0 && (u32)((x >> 16) - 70) < 3U) {
+    if (g_GameCellType == 2 && SYS_TestFlag(g_SceneEventFlags, 0x33) != 0 && (u32)((x >> 16) - 70) < 3U) {
         if ((u32)((y >> 16) - first_row) < 3U && (g_Game.members[0].facing == FACING_UP_LEFT || (u32)(g_Game.members[0].facing - 6) < 2U)) {
             *g_ScriptVars = 0;
             Scene_SetupParty(0);

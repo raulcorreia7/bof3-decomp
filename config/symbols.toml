@@ -2927,7 +2927,7 @@ g_MenuEquipChoiceCounts = { addr = 0x801D8FC8, source = "the held counts of the 
 g_FairyVillageHead = { addr = 0x801EEC00, source = "The fairy village overlay's payload prologue: its overlay id, the exploration success thresholds and the label caps." }
 jtbl_801EEC0C = { addr = 0x801EEC0C, type = "Callback", source = "The switch table of Fairy_SpawnWorker: the jump targets of its jr dispatch." }
 g_FairyGifts = { addr = 0x801EEC48, source = "Fairy_GrantGift copies the FairyGift table" }
-Fairy_InitVillage = { addr = 0x801EECA4, type = "func", source = "Sets up the fairy village each time g_GameAreaId changes from D_80143F04: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
+Fairy_InitVillage = { addr = 0x801EECA4, type = "func", source = "Sets up the fairy village each time g_GameAreaId changes from g_GameLastAreaId: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
 Fairy_AddRooms = { addr = 0x801EEDF8, type = "func", source = "Queues the fairy village room of kind 4 and of kind 5 into D_80145E60 once each, for the areas between D_801455C0 and g_GameAreaId, then stores g_GameAreaId into D_801455C0." }
 Fairy_JoinVillage = { addr = 0x801F00D4, type = "func", source = "Adds one fairy to the village: takes the first inactive g_FairyJobs row from a random start below 60, sets active to 1 and type to FAIRY_JOB_IDLE, stamps progress_anchor with g_BattleCount, copies the fairy 5-byte name and queues the row index." }
 Fairy_CountFairies = { addr = 0x801F02E4, type = "func", source = "Returns the number of fairy rows of g_FairyJobs whose active byte is nonzero, out of 60." }
@@ -5137,7 +5137,7 @@ g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_EnterWyndiaTeleporter = { addr = 0x801F2C04, type = "func", source = "warps to the Wyndia basement teleporter (scene script action)" }
 Actor_RunAreaStep = { addr = 0x801F2C30, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
-Area_CheckStepTrigger = { addr = 0x801F2C64, type = "func", source = "Returns 1 and runs script entry 0 when the party leader steps into the trigger band: x tile 70 to 72, y tile from AREA_STEP_TRIGGER_ROW for 3 rows, facing up-left or direction 6 or 7, with scene flag 0x33 set and D_80143F03 equal to 2; clears g_ScriptVars[0] first." }
+Area_CheckStepTrigger = { addr = 0x801F2C64, type = "func", source = "Returns 1 and runs script entry 0 when the party leader steps into the trigger band: x tile 70 to 72, y tile from AREA_STEP_TRIGGER_ROW for 3 rows, facing up-left or direction 6 or 7, with scene flag 0x33 set and g_GameCellType equal to 2; clears g_ScriptVars[0] first." }
 Actor_SnapToGround = { addr = 0x801F2D5C, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
 Area_DrawLinkedLightPillar = { addr = 0x801F2DA8, type = "func", source = "Draws a light pillar at the position of the actor the scratchpad link cell (byte 0x44) points to." }
 Area_DrawLightPillar = { addr = 0x801F2DF0, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
@@ -5277,7 +5277,7 @@ g_MenuMasterSubStep = { addr = 0x801D4286, source = "Current sub-step of the mas
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_OpenAnswerMenu = { addr = 0x801F2C04, type = "func", source = "Sets g_MessageRequest to 0x42 when g_MessageChoice is 0, otherwise to 0x44 and g_MenuMasterStep to 6." }
 Actor_RunAreaStep = { addr = 0x801F2D5C, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
-Area_CheckStepTrigger = { addr = 0x801F2E80, type = "func", source = "Returns 1 and runs script entry 0 when the party leader steps into the trigger band: x tile 70 to 72, y tile from AREA_STEP_TRIGGER_ROW for 3 rows, facing up-left or direction 6 or 7, with scene flag 0x33 set and D_80143F03 equal to 2; clears g_ScriptVars[0] first." }
+Area_CheckStepTrigger = { addr = 0x801F2E80, type = "func", source = "Returns 1 and runs script entry 0 when the party leader steps into the trigger band: x tile 70 to 72, y tile from AREA_STEP_TRIGGER_ROW for 3 rows, facing up-left or direction 6 or 7, with scene flag 0x33 set and g_GameCellType equal to 2; clears g_ScriptVars[0] first." }
 Actor_SnapToGround = { addr = 0x801F3014, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
 Area_DrawLinkedLightPillar = { addr = 0x801F3060, type = "func", source = "Draws a light pillar at the position of the actor the scratchpad link cell (byte 0x44) points to." }
 Area_DrawLightPillar = { addr = 0x801F30A8, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
@@ -5693,7 +5693,7 @@ g_MenuMasterSubStep = { addr = 0x801D4286, source = "Current sub-step of the mas
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_EnterWyndiaTeleporter = { addr = 0x801F2D54, type = "func", source = "warps to the Wyndia basement teleporter" }
 Actor_RunAreaStep = { addr = 0x801F2D80, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
-Area_CheckStepTrigger = { addr = 0x801F2DB4, type = "func", source = "Returns 1 and runs script entry 0 when the party leader steps into the trigger band: x tile 70 to 72, y tile from AREA_STEP_TRIGGER_ROW for 3 rows, facing up-left or direction 6 or 7, with scene flag 0x33 set and D_80143F03 equal to 2; clears g_ScriptVars[0] first." }
+Area_CheckStepTrigger = { addr = 0x801F2DB4, type = "func", source = "Returns 1 and runs script entry 0 when the party leader steps into the trigger band: x tile 70 to 72, y tile from AREA_STEP_TRIGGER_ROW for 3 rows, facing up-left or direction 6 or 7, with scene flag 0x33 set and g_GameCellType equal to 2; clears g_ScriptVars[0] first." }
 Actor_SnapToGround = { addr = 0x801F2EE4, type = "func", source = "Stores the ground height Area_SampleHeight returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
 Area_DrawActorLightPillar = { addr = 0x801F2F30, type = "func", source = "draws a light pillar at the actor's position" }
 Area_DrawLightPillar = { addr = 0x801F2F78, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
@@ -6178,7 +6178,7 @@ FairySinger_AnswerHearSong = { addr = 0x801F3EB4, type = "func", source = "the a
 Area_QueueSelectEffect = { addr = 0x801F3FBC, type = "func", source = "queues the selection sound effect (0x201)" }
 
 ["emi/world04/area176/13"]
-Fairy_InitVillage = { addr = 0x801EECA4, alias = true, source = "Sets up the fairy village each time g_GameAreaId changes from D_80143F04: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
+Fairy_InitVillage = { addr = 0x801EECA4, alias = true, source = "Sets up the fairy village each time g_GameAreaId changes from g_GameLastAreaId: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", source = "The switch table of Message_SetAnswerMessage: the jump targets of its jr dispatch." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
@@ -6212,7 +6212,7 @@ Message_SetAnswerMessage = { addr = 0x801F31FC, type = "func", source = "Stores 
 FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the answer to the singing fairy asking to hear Pure Again (message 0x2A0): the first choice clears the request and the answer byte 0x801F2944, the second sets it to 1, otherwise requests the farewell 0x2A1 and ends the callback" }
 
 ["emi/world04/area177/13"]
-Fairy_InitVillage = { addr = 0x801EECA4, alias = true, source = "Sets up the fairy village each time g_GameAreaId changes from D_80143F04: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
+Fairy_InitVillage = { addr = 0x801EECA4, alias = true, source = "Sets up the fairy village each time g_GameAreaId changes from g_GameLastAreaId: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", source = "The switch table of Message_SetAnswerMessage: the jump targets of its jr dispatch." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
@@ -6247,7 +6247,7 @@ FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the a
 Area_QueueSelectEffect = { addr = 0x801F3328, type = "func", source = "queues the selection sound effect (0x201)" }
 
 ["emi/world04/area178/13"]
-Fairy_InitVillage = { addr = 0x801EECA4, alias = true, source = "Sets up the fairy village each time g_GameAreaId changes from D_80143F04: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
+Fairy_InitVillage = { addr = 0x801EECA4, alias = true, source = "Sets up the fairy village each time g_GameAreaId changes from g_GameLastAreaId: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", source = "The switch table of Message_SetAnswerMessage: the jump targets of its jr dispatch." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
@@ -6282,7 +6282,7 @@ FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the a
 Area_QueueSelectEffect = { addr = 0x801F3328, type = "func", source = "queues the selection sound effect (0x201)" }
 
 ["emi/world04/area179/13"]
-Fairy_InitVillage = { addr = 0x801EECA4, alias = true, source = "Sets up the fairy village each time g_GameAreaId changes from D_80143F04: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
+Fairy_InitVillage = { addr = 0x801EECA4, alias = true, source = "Sets up the fairy village each time g_GameAreaId changes from g_GameLastAreaId: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", source = "The switch table of Message_SetAnswerMessage: the jump targets of its jr dispatch." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
@@ -6317,7 +6317,7 @@ FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the a
 Area_QueueSelectEffect = { addr = 0x801F3328, type = "func", source = "queues the selection sound effect (0x201)" }
 
 ["emi/world04/area180/13"]
-Fairy_InitVillage = { addr = 0x801EECA4, alias = true, source = "Sets up the fairy village each time g_GameAreaId changes from D_80143F04: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
+Fairy_InitVillage = { addr = 0x801EECA4, alias = true, source = "Sets up the fairy village each time g_GameAreaId changes from g_GameLastAreaId: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", source = "The switch table of Message_SetAnswerMessage: the jump targets of its jr dispatch." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
@@ -6352,7 +6352,7 @@ FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the a
 Area_QueueSelectEffect = { addr = 0x801F3328, type = "func", source = "queues the selection sound effect (0x201)" }
 
 ["emi/world04/area181/13"]
-Fairy_InitVillage = { addr = 0x801EECA4, alias = true, source = "Sets up the fairy village each time g_GameAreaId changes from D_80143F04: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
+Fairy_InitVillage = { addr = 0x801EECA4, alias = true, source = "Sets up the fairy village each time g_GameAreaId changes from g_GameLastAreaId: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", source = "The switch table of Message_SetAnswerMessage: the jump targets of its jr dispatch." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
@@ -6387,7 +6387,7 @@ FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the a
 Area_QueueSelectEffect = { addr = 0x801F3328, type = "func", source = "queues the selection sound effect (0x201)" }
 
 ["emi/world04/area182/13"]
-Fairy_InitVillage = { addr = 0x801EECA4, alias = true, source = "Sets up the fairy village each time g_GameAreaId changes from D_80143F04: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
+Fairy_InitVillage = { addr = 0x801EECA4, alias = true, source = "Sets up the fairy village each time g_GameAreaId changes from g_GameLastAreaId: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", source = "The switch table of Message_SetAnswerMessage: the jump targets of its jr dispatch." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
@@ -6422,7 +6422,7 @@ FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the a
 Area_QueueSelectEffect = { addr = 0x801F3328, type = "func", source = "queues the selection sound effect (0x201)" }
 
 ["emi/world04/area183/13"]
-Fairy_InitVillage = { addr = 0x801EECA4, alias = true, source = "Sets up the fairy village each time g_GameAreaId changes from D_80143F04: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
+Fairy_InitVillage = { addr = 0x801EECA4, alias = true, source = "Sets up the fairy village each time g_GameAreaId changes from g_GameLastAreaId: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", source = "The switch table of Message_SetAnswerMessage: the jump targets of its jr dispatch." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
@@ -6457,7 +6457,7 @@ FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the a
 Area_QueueSelectEffect = { addr = 0x801F3328, type = "func", source = "queues the selection sound effect (0x201)" }
 
 ["emi/world04/area184/13"]
-Fairy_InitVillage = { addr = 0x801EECA4, alias = true, source = "Sets up the fairy village each time g_GameAreaId changes from D_80143F04: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
+Fairy_InitVillage = { addr = 0x801EECA4, alias = true, source = "Sets up the fairy village each time g_GameAreaId changes from g_GameLastAreaId: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", source = "The switch table of Message_SetAnswerMessage: the jump targets of its jr dispatch." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
@@ -6492,7 +6492,7 @@ FairySinger_AnswerHearSong = { addr = 0x801F3260, type = "func", source = "the a
 Area_QueueSelectEffect = { addr = 0x801F3328, type = "func", source = "queues the selection sound effect (0x201)" }
 
 ["emi/world04/area185/13"]
-Fairy_InitVillage = { addr = 0x801EECA4, alias = true, source = "Sets up the fairy village each time g_GameAreaId changes from D_80143F04: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
+Fairy_InitVillage = { addr = 0x801EECA4, alias = true, source = "Sets up the fairy village each time g_GameAreaId changes from g_GameLastAreaId: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", source = "The switch table of Message_SetAnswerMessage: the jump targets of its jr dispatch." }
 Fairy_AnswerWaitForNightfall = { addr = 0x801F2C18, type = "func", source = "the answer to the beach question do you wait for nightfall (message 0x11): clears the request and sets the scene step_05 to 2 for the second choice, 3 for the first" }
@@ -6923,6 +6923,11 @@ g_SysLastVSync = { addr = 0x80143EF8, source = "SYS_Main stores the VSync return
 g_GameAreaId = { addr = 0x80143F00, source = "The area to load." }
 g_GameArea = { addr = 0x80143F00, size = 0x20, alias = true, source = "The current area and the request to change it." }
 g_GameRequestFlags = { addr = 0x80143F02, source = "Flags of the game request." }
+g_GameCellType = { addr = 0x80143F03, source = "The cell type of the party's cell: func_8019FAA0 stores the type of the entry cell here; the previous type goes to last_cell_type." }
+g_GameLastAreaId = { addr = 0x80143F04, source = "The area the party came from: func_8019FAA0 stores the current area id here before it loads the next one." }
+g_GameLastCellType = { addr = 0x80143F06, source = "The cell type before the last area load: func_8019FAA0 copies it from the cell type." }
+g_GameLastX = { addr = 0x80143F08, source = "The scroll target x before the last area load: func_8019FAA0 stores it here." }
+g_GameLastY = { addr = 0x80143F0C, source = "The scroll target y before the last area load: func_8019FAA0 stores it here." }
 g_GameContextSeed = { addr = 0x80143F10, source = "Seed of the game entry context." }
 g_GameEntryPosX = { addr = 0x80143F14, source = "Entry x position of the game." }
 g_GameEntryPosY = { addr = 0x80143F18, source = "Entry y position of the game." }

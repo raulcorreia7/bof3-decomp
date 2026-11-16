@@ -10,7 +10,7 @@ MATCH void Fairy_InitVillage(void) {
     s32 active_count;
     s32 i;
 
-    if (g_GameAreaId != D_80143F04) {
+    if (g_GameAreaId != g_GameLastAreaId) {
         active_count = Fairy_CountFairies();
         func_801F03D0();
         active_count &= BYTE_MASK;

@@ -150,7 +150,7 @@ MATCH void func_801F8050(void) {
             if (*script_phase == 1) {
                 g_AreaDrawFlags = 0x1F;
             }
-            if (SYS_TestFlag(g_SceneFlags, 0x3C) && !SYS_TestFlag(g_SceneFlags, 0x3E) && D_80143F03 == 1) {
+            if (SYS_TestFlag(g_SceneFlags, 0x3C) && !SYS_TestFlag(g_SceneFlags, 0x3E) && g_GameCellType == 1) {
                 g_AreaDrawFlags = 0;
                 Game_SetScriptActive();
                 g_ScriptVars[0]       = 0;

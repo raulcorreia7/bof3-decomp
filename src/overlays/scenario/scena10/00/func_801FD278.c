@@ -154,13 +154,13 @@ MATCH s32 func_801FE00C(s32 x, s32 y) {
             return 1;
         }
     }
-    if (g_GameAreaId == AREA_ID_TIDAL_CAVES_OUTSIDE && D_80143F03 == 0 && SYS_TestFlag(g_SceneFlags, 53) == 0 && (y >> 16) >= 29) {
+    if (g_GameAreaId == AREA_ID_TIDAL_CAVES_OUTSIDE && g_GameCellType == 0 && SYS_TestFlag(g_SceneFlags, 53) == 0 && (y >> 16) >= 29) {
         Game_SetScriptActive();
         g_SceneState.state_04 = 12;
         g_SceneState.step_05  = 0;
         return 1;
     }
-    if (g_GameAreaId == AREA_ID_CLIFF_GAIST && D_80143F03 == 5 && SYS_TestFlag(g_SceneFlags, 59) && SYS_TestFlag(g_SceneFlags, 60) == 0 && y == TO_COORD(116) + COORD_HALF && x == TO_COORD(37)) {
+    if (g_GameAreaId == AREA_ID_CLIFF_GAIST && g_GameCellType == 5 && SYS_TestFlag(g_SceneFlags, 59) && SYS_TestFlag(g_SceneFlags, 60) == 0 && y == TO_COORD(116) + COORD_HALF && x == TO_COORD(37)) {
         Game_SetScriptActive();
         g_SceneState.state_04 = 13;
         g_SceneState.step_05  = 15;

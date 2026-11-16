@@ -40,7 +40,7 @@ MATCH void func_801F4494(void) {
             break;
         case 11:
             if (g_ScriptVars[3] == 0x74) {
-                if (D_80143F03 == 2) {
+                if (g_GameCellType == 2) {
                     Game_RequestAreaChange(AREA_ID_MYRIA_STATION_WORKERS, TO_COORD(19), TO_COORD(154), AREA_ENTRY_MAP_LOADING | FACING_LEFT);
                 } else {
                     Game_RequestAreaChange(AREA_ID_MYRIA_STATION_WORKERS, TO_COORD(10), TO_COORD(30), AREA_ENTRY_MAP_LOADING | FACING_DOWN_LEFT);
@@ -52,7 +52,7 @@ MATCH void func_801F4494(void) {
             break;
         case 12:
             if (g_ScriptVars[3] == 0) {
-                if (D_80143F03 == 0) {
+                if (g_GameCellType == 0) {
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 6));
                 }
                 g_ScriptVars[2]        = 0;
@@ -88,7 +88,7 @@ MATCH void func_801F4494(void) {
                     SYS_ClearFlag(g_SceneEventFlags, 0x48);
                     SYS_SetFlag(g_SceneEventFlags, 0x49);
                 }
-                if (D_80143F03 == 0) {
+                if (g_GameCellType == 0) {
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 5));
                 }
                 SYS_SetFlag(g_SceneEventFlags, 0x4A);

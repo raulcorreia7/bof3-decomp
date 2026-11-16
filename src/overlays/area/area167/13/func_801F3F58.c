@@ -1,7 +1,7 @@
 #include "area167_13.h"
 
 MATCH void func_801F3F58(void) {
-    if (D_80143F03 == 2) {
+    if (g_GameCellType == 2) {
         if (SYS_TestFlag(g_SceneEventFlags, 76)) {
             SYS_ClearFlag(g_SceneEventFlags, 76);
             g_ScriptState->pad_03 = 5;
@@ -14,7 +14,7 @@ MATCH void func_801F3F58(void) {
             return;
         }
     }
-    if (D_80143F03 == 1) {
+    if (g_GameCellType == 1) {
         if (SYS_TestFlag(g_SceneEventFlags, 76)) {
             SYS_ClearFlag(g_SceneEventFlags, 76);
             g_ScriptState->pad_03 = 4;

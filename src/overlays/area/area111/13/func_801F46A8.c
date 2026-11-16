@@ -4,10 +4,10 @@ MATCH void func_801F46A8(void) {
     s16 i;
     s16 j;
 
-    if (D_80143F03 == 0) {
+    if (g_GameCellType == 0) {
         SYS_ClearFlag(g_SceneEventFlags, 0x28);
     }
-    if (D_80143F03 == 1) {
+    if (g_GameCellType == 1) {
         for (i = 0; i < 7; i++) {
             for (j = 0; j < 7; j++) {
                 func_801F4604(j, i, D_801F5BC8[i][j]);
@@ -28,7 +28,7 @@ MATCH void func_801F46A8(void) {
             func_801A4BC0(0x12, 0xAE, 0xC0);
         }
     }
-    if (D_80143F03 == 5) {
+    if (g_GameCellType == 5) {
         func_801A4BC0(0xA, 8, 0x50);
         func_801A4BC0(0xB, 8, 0x50);
     }

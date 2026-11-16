@@ -30,7 +30,7 @@ MATCH void func_801FC044(u8 actor_id) {
 }
 
 MATCH void func_801FC0F4(u8 actor_id) {
-    if (D_80143F03 == 0) {
+    if (g_GameCellType == 0) {
         if (g_Actors[actor_id].pos.x.fixed + TO_COORD(1) + COORD_HALF >= g_Game.members[0].pos.x.fixed && g_Game.members[0].pos.x.fixed >= g_Actors[actor_id].pos.x.fixed - TO_COORD(1) - COORD_HALF &&
             g_Game.members[0].pos.y.fixed >= g_Actors[actor_id].pos.y.fixed + TO_COORD(1) && g_Actors[actor_id].pos.y.fixed + TO_COORD(4) >= g_Game.members[0].pos.y.fixed) {
             func_801FCB54();
@@ -39,7 +39,7 @@ MATCH void func_801FC0F4(u8 actor_id) {
 }
 
 MATCH void func_801FC1A4(u8 actor_id) {
-    if (D_80143F03 == 0) {
+    if (g_GameCellType == 0) {
         if (g_Actors[actor_id].pos.y.fixed + TO_COORD(1) >= g_Game.members[0].pos.y.fixed && g_Game.members[0].pos.y.fixed >= g_Actors[actor_id].pos.y.fixed - TO_COORD(4) &&
             g_Game.members[0].pos.x.fixed >= g_Actors[actor_id].pos.x.fixed - TO_COORD(1) - COORD_HALF && g_Actors[actor_id].pos.x.fixed + TO_COORD(1) + COORD_HALF >= g_Game.members[0].pos.x.fixed) {
             func_801FCB54();
@@ -52,7 +52,7 @@ MATCH void func_801FC25C(u8 actor_id) {
 }
 
 MATCH void func_801FC308(u8 actor_id) {
-    if (D_80143F03 == 0) {
+    if (g_GameCellType == 0) {
         if (g_Game.members[0].pos.y.fixed <= g_Actors[actor_id].pos.y.fixed && g_Game.members[0].pos.y.fixed >= g_Actors[actor_id].pos.y.fixed - TO_COORD(5) &&
             g_Game.members[0].pos.x.fixed >= g_Actors[actor_id].pos.x.fixed - TO_COORD(1) && g_Actors[actor_id].pos.x.fixed + TO_COORD(1) >= g_Game.members[0].pos.x.fixed) {
             func_801FCB54();
