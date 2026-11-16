@@ -16,7 +16,6 @@
 
 /* The party position in 16.16 fixed point. */
 
-void           Area_Update(s32 arg);
 /* The field focus point the work position copies. */
 /* D_80147A90 */
 extern s32     g_AreaFocusY;
