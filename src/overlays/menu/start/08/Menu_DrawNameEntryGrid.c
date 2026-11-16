@@ -3,10 +3,7 @@
 /* Character grid of the name entry window: page `page` of D_801ECDBC holds 8 rows of 12 cells. The cells in column 10
  * of rows 3 to 7 hold a command id 1 to 5, drawn as a label; column 11 of those rows is part of that label. The
  * cursor sits at (D_801ED7E0, D_801ED7E4). */
-#ifdef NON_MATCHING
-NON_MATCHING void Menu_DrawNameEntryGrid(u8 page, s32 grid_x, s32 grid_y) {
-    /* Near match: same 189 instructions and frame; retail's prologue saves and parameter copies are
-     * ordered s0 pair, s7 pair, ours s7 pair, grid_y copy, s0 pair (scheduler tie). */
+MATCH void Menu_DrawNameEntryGrid(u8 page, s16 grid_x, s32 grid_y) {
     NameEntryLabels labels;
     u16             base_y;
     s16             x;
@@ -65,6 +62,3 @@ NON_MATCHING void Menu_DrawNameEntryGrid(u8 page, s32 grid_x, s32 grid_y) {
     cursor_x = x;
     Menu_DrawCursorSprite(cursor_x, y & HALF_MASK, 0);
 }
-#else
-INCLUDE_ASM(Menu_DrawNameEntryGrid);
-#endif

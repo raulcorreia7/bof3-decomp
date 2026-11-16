@@ -649,7 +649,7 @@ void        func_801E5F34(void);
 void        SAVE_RunLoadRestore(void);
 void        Menu_ExitCamp(void);
 extern void func_801E6388(s32 overlay_x, s32 overlay_y);
-extern void Menu_DrawNameEntryGrid(u8 page, s32 grid_x, s32 grid_y);
+extern void Menu_DrawNameEntryGrid(u8 page, s16 grid_x, s32 grid_y);
 /* func_801E6784 */
 extern s32  Menu_DrawNameEntryControls(u8 page, s32 x, s32 y);
 extern u8   func_801E715C(s32 range_low, s32 range_high, s32 draw_count);
