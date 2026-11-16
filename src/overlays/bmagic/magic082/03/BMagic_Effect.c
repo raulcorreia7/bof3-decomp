@@ -271,21 +271,21 @@ MATCH void func_801EFD30(void) {
 
 #include "overlays/bmagic/Effect_CountDownAndStep.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EFDC0(void) {
+MATCH void func_801EFDC0(void) {
     PartyMember* work;
     s32          angle;
+    s16*         p;
 
     if (--g_Task->unk_09 == 0) {
         angle               = g_Task->param.unk_0B & 0x1F;
-        D_1F800004          = angle << 7;
-        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + ((rsin(angle << 7) * 0xB0) >> 3);
-        work                = g_Task;
-        work->pos.y.fixed   = g_BattleEffectBattler->pos.y.fixed + ((rcos(D_1F800004) * 0xB0) >> 3);
-        work->unk_14        = 0x40;
-        work->unk_20        = -4;
-        work->unk_09        = 0;
-        work->pos.z.fixed   = g_BattleEffectBattler->pos.z.fixed;
+        p                   = (s16*)&D_1F800004;
+        *p                  = angle << 7;
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + ((rsin((s16)(angle << 7)) * 0xB0) >> 3);
+        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + ((rcos(*p) * 0xB0) >> 3);
+        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+        g_Task->unk_14      = 0x40;
+        g_Task->unk_20      = -4;
+        g_Task->unk_09      = 0;
         g_Task->timer       = 0xC;
         work                = g_Task;
         work->unk_0C        = 1;
@@ -293,9 +293,6 @@ NON_MATCHING void func_801EFDC0(void) {
         work->header.step += 1;
     }
 }
-#else
-INCLUDE_ASM(func_801EFDC0);
-#endif
 
 MATCH void func_801EFEF4(void) {
     s32          timer;
