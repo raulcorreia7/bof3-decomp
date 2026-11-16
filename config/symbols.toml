@@ -2974,7 +2974,7 @@ g_MenuEquipChoiceIds = { addr = 0x801D8F48, source = "the item ids of the equip 
 g_MenuEquipChoiceCounts = { addr = 0x801D8FC8, source = "the held counts of the g_MenuEquipChoiceIds rows" }
 
 ["emi/etc/commu00/00"]
-g_FairyVillageHead = { addr = 0x801EEC00, source = "The fairy village overlay's payload prologue: its overlay id, the exploration success thresholds and the label caps." }
+g_FairyVillageOverlayHeader = { addr = 0x801EEC00, source = "The fairy village overlay's payload prologue: its overlay id, the exploration success thresholds and the label caps." }
 jtbl_801EEC0C = { addr = 0x801EEC0C, type = "Callback", source = "The switch table of Fairy_SpawnWorker: the jump targets of its jr dispatch." }
 g_FairyGifts = { addr = 0x801EEC48, source = "Fairy_GrantGift copies the FairyGift table" }
 Fairy_InitVillage = { addr = 0x801EECA4, type = "func", source = "Sets up the fairy village each time g_GameAreaId changes from g_GameLastAreaId: with no active fairy it adds BATTLE_PARTY_CHARACTERS_COUNT fairies and stamps g_BattleCount into the roster counters; otherwise it queues the new rooms and runs the roster upkeep. Always ends by building the village jobs." }
@@ -3772,7 +3772,7 @@ SAVE_AccessFile = { addr = 0x801EEC30, type = "func", source = "Reads or writes 
 SAVE_ScanDirectory = { addr = 0x801EFCA8, alias = true, source = "Copies the firstfile and nextfile entries that match prefix into the 15-slot g_SaveCardDirectory table." }
 
 ["emi/etc/sisyou/00"]
-g_MasterMenuHead = { addr = 0x801D0C00, source = "The master menu overlay's payload prologue: its overlay id and the three number formats of its panels." }
+g_MasterMenuOverlayHeader = { addr = 0x801D0C00, source = "The master menu overlay's payload prologue: its overlay id and the three number formats of its panels." }
 g_MenuCurrentValueFormat = { addr = 0x801D0C08, source = "Format of the current value of an HP or AP pair printed in a party row (Menu_DrawMasterPartyRow); the maximum follows through g_MenuMaxValueFormat." }
 g_MenuMaxValueFormat = { addr = 0x801D0C10, source = "Format of the maximum value of an HP or AP pair, printed after the current value (g_MenuCurrentValueFormat)." }
 Menu_ResetMasterPanel = { addr = 0x801D0C18, type = "func", source = "Clears the master panel step, sub-step, lock and scroll bytes D_801D4285 to D_801D4289; the game overlay calls it after streaming slot 0x267." }

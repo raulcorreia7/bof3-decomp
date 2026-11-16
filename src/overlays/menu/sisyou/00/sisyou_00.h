@@ -10,18 +10,18 @@
 #include "shared/etc.h"
 #include <stdio.h>
 
-#define MASTER_MENU_HEAD_SIZE        0x18
-#define MASTER_MENU_FMT_A_SIZE       4
-#define MASTER_MENU_FMT_BC_SIZE      8
-#define MASTER_MENU_ATLAS_COUNT      12
-#define MASTER_SKILL_SIZE            2
-#define MASTER_MENU_SPRITE_BANK_SIZE 0x90
-#define MASTER_MENU_SPRITE_090_SIZE  0x2C
-#define MASTER_MENU_SPRITE_0BC_SIZE  0x0C
-#define MASTER_MENU_SPRITE_0C8_SIZE  0x18
-#define MASTER_MENU_LABEL_SIZE       4
-#define MASTER_MENU_LABEL_LONG_SIZE  8
-#define MASTER_MENU_MESSAGE_ID_COUNT 18
+#define MASTER_MENU_OVERLAY_HEADER_SIZE 0x18
+#define MASTER_MENU_FMT_A_SIZE          4
+#define MASTER_MENU_FMT_BC_SIZE         8
+#define MASTER_MENU_ATLAS_COUNT         12
+#define MASTER_SKILL_SIZE               2
+#define MASTER_MENU_SPRITE_BANK_SIZE    0x90
+#define MASTER_MENU_SPRITE_090_SIZE     0x2C
+#define MASTER_MENU_SPRITE_0BC_SIZE     0x0C
+#define MASTER_MENU_SPRITE_0C8_SIZE     0x18
+#define MASTER_MENU_LABEL_SIZE          4
+#define MASTER_MENU_LABEL_LONG_SIZE     8
+#define MASTER_MENU_MESSAGE_ID_COUNT    18
 
 /* The messages of one master, as offsets from the master's entry of g_MenuMasterMessageIds. */
 enum MasterMessage {
@@ -73,14 +73,14 @@ enum MasterMessage {
 /* The payload prologue at 0x801D0C00: the type-0 EMI loader compares the
  * first word with the archive TOC's cached first word; the rest are the three
  * sprintf formats the shop panels pass as D_801D0C04/g_MenuCurrentValueFormat/g_MenuMaxValueFormat. */
-typedef struct MasterMenuHead {
-    u32  id;                             /* 0x00; TOC cached first word, 0x1F */
-    char fmt_a[MASTER_MENU_FMT_A_SIZE];  /* 0x04 "%3d" */
-    char fmt_b[MASTER_MENU_FMT_BC_SIZE]; /* 0x08 "%3d/   " */
-    char fmt_c[MASTER_MENU_FMT_BC_SIZE]; /* 0x10 "   /%3d" */
-} MasterMenuHead;
+typedef struct MasterMenuOverlayHeader {
+    OverlayHeader overlay;                        /* 0x00; module id 0x1F */
+    char          fmt_a[MASTER_MENU_FMT_A_SIZE];  /* 0x04 "%3d" */
+    char          fmt_b[MASTER_MENU_FMT_BC_SIZE]; /* 0x08 "%3d/   " */
+    char          fmt_c[MASTER_MENU_FMT_BC_SIZE]; /* 0x10 "   /%3d" */
+} MasterMenuOverlayHeader;
 
-ASSERT_SIZE(MasterMenuHead, MASTER_MENU_HEAD_SIZE);
+ASSERT_SIZE(MasterMenuOverlayHeader, MASTER_MENU_OVERLAY_HEADER_SIZE);
 
 /* Master skill record: one level and the ability it teaches. */
 typedef struct MasterSkill {

@@ -7,14 +7,6 @@
 #include "battle/functions.h"
 #include <memory.h>
 
-/* A boss module's head. The rest of the head is the per-boss callback block
- * measured from each image's own bytes. */
-typedef struct BossModule {
-    EMIModuleId id; /* 0x00; 0x11E-0x140 */
-} BossModule;
-
-ASSERT_SIZE(BossModule, 4);
-
 extern u8       D_800C1990[];
 extern Callback D_800C19A4[];
 extern Callback D_800C19D4[];

@@ -362,6 +362,10 @@ A role that recurs gets one typedef over the shared block (`Pos2`, `Pos3`, `Coor
 (`WorldPos`, `SpriteScale`, `CameraAngle`). A one-off keeps the block type and carries the role in its
 member name. Never one typedef per member, never a second layout.
 
+Every module payload starts with `OverlayHeader` (`sys/emi.h`). A prologue that carries more
+data is `<Owner>OverlayHeader` and nests it as its first member (`FairyVillageOverlayHeader`); the
+word is `Header`, never `Head`.
+
 ### Storage words
 
 A name says what a thing is, never how it is stored or found. Drop the storage word; what is left is

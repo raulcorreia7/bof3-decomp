@@ -14,12 +14,6 @@
  * on the menu step byte g_MenuStep.step. The handler tables and step bytes stay in
  * each image's own header. */
 
-typedef struct OverlayHeader {
-    EMIModuleId id; /* 0x00 OverlayId, the TOC's cached first payload word */
-} OverlayHeader;
-
-ASSERT_SIZE(OverlayHeader, 0x4);
-
 /* The loaded overlay's leading word, one per EMI overlay. */
 extern OverlayHeader g_EmiOverlayHeader;
 

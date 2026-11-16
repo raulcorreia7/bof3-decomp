@@ -78,6 +78,14 @@ typedef enum EMIEntryType {
  * its source's id. */
 typedef u32 EMIModuleId;
 
+/* The prologue every module payload starts with; an overlay whose prologue
+ * carries more data nests this as its first member. */
+typedef struct OverlayHeader {
+    EMIModuleId id; /* 0x00 the TOC's cached first payload word */
+} OverlayHeader;
+
+ASSERT_SIZE(OverlayHeader, 0x4);
+
 /* States the loader keeps in the type cell besides the entry types. EMI_NextEntry sets
  * EMI_LOADER_STATE_ARCHIVE_HEADER while it reads the archive's first sector; EMI_ReadToc
  * handles it. */

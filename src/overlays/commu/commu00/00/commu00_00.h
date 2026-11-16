@@ -41,10 +41,10 @@
  * (func_801EF110, func_801EFA50). */
 #define FAIRY_JOB_SIZE                        0x8
 #define FAIRY_VARIANT_SIZE                    0x6
-#define FAIRY_VILLAGE_HEAD_SIZE               0xC
+#define FAIRY_VILLAGE_OVERLAY_HEADER_SIZE     0xC
 #define FAIRY_EXPLORE_TRIP_COUNT              3
 #define FAIRY_REWARD_ROLL_SIZE                4
-#define FAIRY_VILLAGE_HEADER_DATA_SIZE        0x60
+#define FAIRY_VILLAGE_REWARDS_SIZE            0x60
 #define FAIRY_VILLAGE_FMT_SIZE                4
 
 /* The overlay's shared data block at 0x801F24FC..0x801F2950, read through the
@@ -104,16 +104,16 @@ ASSERT_OFFSET(FairyVariant, count, 0x04);
  * (@source: wiki:formats/emi). The two threshold arrays are read as signed
  * bytes: D_801EEC04[0..2] by func_801EF784 and D_801EEC08[0..2] by
  * func_801F03D0. */
-typedef struct FairyVillageHead {
-    u32 id;                                              /* 0x00; TOC cached first word, 0x18 */
-    s8  explore_threshold[FAIRY_EXPLORE_TRIP_COUNT + 1]; /* 0x04 D_801EEC04; 65, 55, 15: the success roll per trip type */
-    s8  label_cap[FAIRY_EXPLORE_TRIP_COUNT];             /* 0x08 D_801EEC08; values 15/20/25 */
-    u8  pad_0B;
-} FairyVillageHead;
+typedef struct FairyVillageOverlayHeader {
+    OverlayHeader overlay;                                         /* 0x00; module id 0x18 */
+    s8            explore_threshold[FAIRY_EXPLORE_TRIP_COUNT + 1]; /* 0x04 D_801EEC04; 65, 55, 15: the success roll per trip type */
+    s8            label_cap[FAIRY_EXPLORE_TRIP_COUNT];             /* 0x08 D_801EEC08; values 15/20/25 */
+    u8            pad_0B;
+} FairyVillageOverlayHeader;
 
-ASSERT_SIZE(FairyVillageHead, FAIRY_VILLAGE_HEAD_SIZE);
-ASSERT_OFFSET(FairyVillageHead, explore_threshold, 0x04);
-ASSERT_OFFSET(FairyVillageHead, label_cap, 0x08);
+ASSERT_SIZE(FairyVillageOverlayHeader, FAIRY_VILLAGE_OVERLAY_HEADER_SIZE);
+ASSERT_OFFSET(FairyVillageOverlayHeader, explore_threshold, 0x04);
+ASSERT_OFFSET(FairyVillageOverlayHeader, label_cap, 0x08);
 
 /* One exploration reward row (Fairy_RollExploreReward): the roll the group starts at,
  * then the three group weights. */
@@ -128,15 +128,15 @@ ASSERT_OFFSET(FairyRewardRoll, weights, 0x01);
 /* The 96-byte header-data block: the "%d" format, the 20 gift rows
  * Fairy_GrantGift copies, and the 3 exploration reward rows Fairy_RollExploreReward
  * copies. */
-typedef struct FairyVillageHeader {
+typedef struct FairyVillageRewards {
     char            fmt[FAIRY_VILLAGE_FMT_SIZE];     /* 0x00 D_801EEC44 "%d" */
     FairyGift       gifts[FAIRY_GIFT_COUNT];         /* 0x04 D_801EEC48 */
     FairyRewardRoll rolls[FAIRY_EXPLORE_TRIP_COUNT]; /* 0x54 D_801EEC98 */
-} FairyVillageHeader;
+} FairyVillageRewards;
 
-ASSERT_SIZE(FairyVillageHeader, FAIRY_VILLAGE_HEADER_DATA_SIZE);
-ASSERT_OFFSET(FairyVillageHeader, gifts, 0x04);
-ASSERT_OFFSET(FairyVillageHeader, rolls, 0x54);
+ASSERT_SIZE(FairyVillageRewards, FAIRY_VILLAGE_REWARDS_SIZE);
+ASSERT_OFFSET(FairyVillageRewards, gifts, 0x04);
+ASSERT_OFFSET(FairyVillageRewards, rolls, 0x54);
 
 /* The overlay's shared data block, read through the symbol views listed
  * beside each member. The step arrays are the scene step tables the village dispatches through. */

@@ -7,7 +7,7 @@ segments:
     align: 4
     section_order: [.data, .rodata]
     subsegments:
-      - [0x0, .data, g_FairyVillageHead]
+      - [0x0, .data, g_FairyVillageOverlayHeader]
       - [0xC, .rodata, Fairy_SpawnWorker]
   # Placement: a source shared with the earlier segment must claim its sections first.
   - name: main

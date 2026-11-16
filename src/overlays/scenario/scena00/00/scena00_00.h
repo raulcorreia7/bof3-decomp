@@ -111,14 +111,14 @@ ASSERT_OFFSET(AreaScroll, half, 0x00);
  * first word with the archive TOC's cached first word
  * (@source: wiki:formats/emi); the second word holds the line colour:
  * func_801F7670 reads its first three bytes (D_801F6C04..D_801F6C06). */
-typedef struct Scene00Head {
-    SceneOverlayHeader overlay;
-    u32                unk_04; /* 0x04; the first three bytes are the line colour (D_801F6C04) */
-} Scene00Head;
+typedef struct Scene00OverlayHeader {
+    OverlayHeader overlay;
+    u32           unk_04; /* 0x04; the first three bytes are the line colour (D_801F6C04) */
+} Scene00OverlayHeader;
 
-ASSERT_SIZE(Scene00Head, 8);
-ASSERT_OFFSET(Scene00Head, overlay, 0x00);
-ASSERT_OFFSET(Scene00Head, unk_04, 0x04);
+ASSERT_SIZE(Scene00OverlayHeader, 8);
+ASSERT_OFFSET(Scene00OverlayHeader, overlay, 0x00);
+ASSERT_OFFSET(Scene00OverlayHeader, unk_04, 0x04);
 
 /* The scenario line colour, copied from D_801F6C04 and passed to func_801F78EC by value. */
 typedef ColorRGB8 SceneLineColor;
