@@ -27,4 +27,7 @@ extern Callback D_801F4448[];
 /* The sprite-word fields above the floor quad's cell coordinate. */
 #define AREA_FLOOR_QUAD_PART ((0x150) << 16)
 
+/* The pair of rings the cell line joins. */
+void func_801F36DC(s16 x0, s16 y0, s16 radius0, u16 angle0, s16 x1, s16 y1, s16 radius1, u16 angle1);
+
 #endif

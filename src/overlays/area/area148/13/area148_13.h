@@ -51,7 +51,10 @@ void func_801F37B8(s32 mode, s32 value);
 /* func_801F4544 */
 void Area_SampleForwardHeight(void);
 void func_801F45C8(void);
-void func_801F4798(void* arg0, void* arg1);
+void func_801F4798(void* first, void* second);
+/* The ring the line's far end joins and the quad between its ends. */
+void func_801F4DF0(s16 x, s16 y, s16 radius, u16 angle);
+void func_801F4A50(s16 x0, s16 y0, s16 radius0, u16 angle0, s16 x1, s16 y1, s16 radius1, u16 angle1);
 
 void func_801F4614(void);
 
