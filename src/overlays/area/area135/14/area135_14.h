@@ -36,7 +36,10 @@ extern s32   D_80147C2C;
 extern s32   D_80147C30;
 extern s32   D_80147C54;
 extern s32   D_80147C58;
+extern s32   D_80147C5C;
 extern u8    D_80147C90;
+/* The fixed work record the dispatch compares the work pointer against. */
+extern Actor D_80143F48;
 /* The four party work rows, and the shadow record each party row owns: 0x10
  * bytes, its flag byte first. */
 extern Actor D_80147A58[];
