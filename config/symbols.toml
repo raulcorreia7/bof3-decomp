@@ -4905,6 +4905,7 @@ Area_DrawRingQuads = { addr = 0x801F2F60, type = "func", source = "Draws the two
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world01/area049/13"]
+D_1F800034_U16 = { addr = 0x1F800034, type = "u16", source = "The projected screen coordinates at 0x1F800034 read as unsigned halfwords x and y, the output RotTransPers writes.", alias = true }
 Area_FindFreeWorkRow = { addr = 0x801178C4, type = "func", source = "Finds the first work-window row whose byte is zero or returns NULL." }
 func_80117C38 = { addr = 0x80117C38, type = "func", source = "Adds 1 to header.step of the running task (Scene_AdvanceActorStep); the same body is unnamed in magic064, scena07 (four times), area108 (twice) and area197, so no shared name fits." }
 
