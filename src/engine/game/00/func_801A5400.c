@@ -68,6 +68,6 @@ MATCH void func_801A5400(u8* script) {
         if ((COORD_FRAC(cell_record_c->pos.x) != 0) && (COORD_FRAC(cell_record_c->pos.y) != 0)) {
             Area_SetCellCode((s16)((u16)COORD_INT(cell_record_c->pos.x) + 1), (s16)((u16)COORD_INT(cell_record_c->pos.y) + 1), 0x10);
         }
-        VOL(u16, g_ScratchPad) += 1;
+        FAKE_VOLATILE(u16, g_ScratchPad) += 1;
     }
 }

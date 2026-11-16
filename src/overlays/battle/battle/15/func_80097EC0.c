@@ -31,28 +31,28 @@ MATCH void func_80097EC0(void) {
     u8                   entry_value;
     u8                   tail_byte;
 
-    init_work                           = (BattleSelectionInit*)g_BattleChoicePanel;
-    init_work->selection_kind           = 1u;
-    g_BattleChoicePanel[1]              = 8u;
-    g_BattleChoicePanel[2]              = 2u;
-    g_BattleChoicePanel[3]              = 2u;
-    entry_index                         = g_BattleMessageSlot[5];
-    actor_turn                          = g_BattleActorTurn;
-    source_slot_offset                  = entry_index * 3u;
-    g_BattleChoicePanel[0xA]            = entry_index;
-    g_BattleChoicePanel[0xB]            = ((u8*)D_801454F4)[source_slot_offset];
-    VOL(u16, g_BattleChoicePanel[0x10]) = ((u8*)D_801454F4)[source_slot_offset + 1];
-    entry_value                         = ((u8*)D_801454F4)[source_slot_offset + 2];
-    g_BattleChoicePanel[0xD]            = 0xFFu;
-    g_BattleChoicePanel[8]              = 2u;
-    g_BattleChoicePanel[9]              = 0u;
-    g_BattleChoicePanel[0xC]            = entry_value;
-    active_selection_flags              = actor_turn->action_flags.value;
-    flag_mask                           = active_selection_flags & 0x20002u;
+    init_work                                     = (BattleSelectionInit*)g_BattleChoicePanel;
+    init_work->selection_kind                     = 1u;
+    g_BattleChoicePanel[1]                        = 8u;
+    g_BattleChoicePanel[2]                        = 2u;
+    g_BattleChoicePanel[3]                        = 2u;
+    entry_index                                   = g_BattleMessageSlot[5];
+    actor_turn                                    = g_BattleActorTurn;
+    source_slot_offset                            = entry_index * 3u;
+    g_BattleChoicePanel[0xA]                      = entry_index;
+    g_BattleChoicePanel[0xB]                      = ((u8*)D_801454F4)[source_slot_offset];
+    FAKE_VOLATILE(u16, g_BattleChoicePanel[0x10]) = ((u8*)D_801454F4)[source_slot_offset + 1];
+    entry_value                                   = ((u8*)D_801454F4)[source_slot_offset + 2];
+    g_BattleChoicePanel[0xD]                      = 0xFFu;
+    g_BattleChoicePanel[8]                        = 2u;
+    g_BattleChoicePanel[9]                        = 0u;
+    g_BattleChoicePanel[0xC]                      = entry_value;
+    active_selection_flags                        = actor_turn->action_flags.value;
+    flag_mask                                     = active_selection_flags & 0x20002u;
     if (flag_mask != 2u) {
-        VOL(u16, g_BattleChoicePanel[0x14]) = 0u;
+        FAKE_VOLATILE(u16, g_BattleChoicePanel[0x14]) = 0u;
     } else {
-        VOL(u16, g_BattleChoicePanel[0x14]) = (active_selection_flags & 0x2u);
+        FAKE_VOLATILE(u16, g_BattleChoicePanel[0x14]) = (active_selection_flags & 0x2u);
     }
     init_work->scroll_base_x = 0x140u;
     init_work->scroll_base_y = 0x3Fu;

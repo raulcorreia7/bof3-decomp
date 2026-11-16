@@ -147,13 +147,13 @@ MATCH void func_801EF554(void) {
     g_Task->unk_09 = 0;
     g_Task->timer  = 0;
 
-    work                   = g_Task;
-    temp                   = work->unk_03 << 5;
-    angle_cell             = &D_1F800004;
-    angle                  = (temp & 0x7F) << 5;
-    VOL(s32, work->unk_0C) = temp;
-    *angle_cell            = angle;
-    g_ScratchPad           = 0x28;
+    work                             = g_Task;
+    temp                             = work->unk_03 << 5;
+    angle_cell                       = &D_1F800004;
+    angle                            = (temp & 0x7F) << 5;
+    FAKE_VOLATILE(s32, work->unk_0C) = temp;
+    *angle_cell                      = angle;
+    g_ScratchPad                     = 0x28;
 
     velocity          = rcos(angle) * g_ScratchPad;
     work              = g_Task;
@@ -183,13 +183,13 @@ MATCH void func_801EF7D8(void) {
 
     g_Task->param.unk_0B++;
 
-    work                   = g_Task;
-    counter                = work->unk_0C + 1;
-    VOL(s32, work->unk_0C) = counter;
-    angle                  = (counter & 0x7F) << 5;
-    angle_cell             = &D_1F800004;
-    *angle_cell            = angle;
-    g_ScratchPad           = 0x28;
+    work                             = g_Task;
+    counter                          = work->unk_0C + 1;
+    FAKE_VOLATILE(s32, work->unk_0C) = counter;
+    angle                            = (counter & 0x7F) << 5;
+    angle_cell                       = &D_1F800004;
+    *angle_cell                      = angle;
+    g_ScratchPad                     = 0x28;
 
     velocity          = rcos(angle) * g_ScratchPad;
     work              = g_Task;
@@ -228,13 +228,13 @@ MATCH void func_801F0090(void) {
     g_Task->unk_09       = 0;
     g_Task->timer        = 0;
 
-    work                   = g_Task;
-    counter                = (work->unk_03 << 5) + 0x10;
-    angle                  = (counter & 0x7F) << 5;
-    VOL(s32, work->unk_0C) = counter;
-    angle_cell             = &D_1F800004;
-    *angle_cell            = angle;
-    g_ScratchPad           = 0x18;
+    work                             = g_Task;
+    counter                          = (work->unk_03 << 5) + 0x10;
+    angle                            = (counter & 0x7F) << 5;
+    FAKE_VOLATILE(s32, work->unk_0C) = counter;
+    angle_cell                       = &D_1F800004;
+    *angle_cell                      = angle;
+    g_ScratchPad                     = 0x18;
 
     velocity            = rcos(angle) * g_ScratchPad;
     g_Task->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed + velocity;
@@ -273,13 +273,13 @@ MATCH void func_801F0314(void) {
 
     g_Task->param.unk_0B++;
 
-    work                   = g_Task;
-    counter                = work->unk_0C + 1;
-    VOL(s32, work->unk_0C) = counter;
-    angle                  = (counter & 0x7F) << 5;
-    angle_cell             = &D_1F800004;
-    *angle_cell            = angle;
-    g_ScratchPad           = 0x18;
+    work                             = g_Task;
+    counter                          = work->unk_0C + 1;
+    FAKE_VOLATILE(s32, work->unk_0C) = counter;
+    angle                            = (counter & 0x7F) << 5;
+    angle_cell                       = &D_1F800004;
+    *angle_cell                      = angle;
+    g_ScratchPad                     = 0x18;
 
     velocity          = rcos(angle) * g_ScratchPad;
     work              = g_Task;

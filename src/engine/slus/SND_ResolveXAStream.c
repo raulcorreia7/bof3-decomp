@@ -44,7 +44,7 @@ MATCH void SND_ResolveXAStream(s32 stream_id) {
     flag  = &D_80146834;
     *flag = 1;
     /* FAKE: force the flag base back into a2. */
-    FAKE_CLOBBER_A2();
+    FAKE_CLOBBER("a2");
     base                 = g_EmiSlotLbas[g_XaStreamSlots[stream_id >> 12]];
     D_80146810           = base;
     *(s32*)(flag - 0x28) = base;

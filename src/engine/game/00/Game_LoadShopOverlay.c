@@ -30,5 +30,5 @@ MATCH void Game_LoadShopOverlay(void) {
     GFX_CopyPalette(2u);
     g_GfxPalettePending = 1u;
     Area_RunFrame();
-    VOL(u16, g_GameEntrySubstate) += 1u;
+    FAKE_VOLATILE(u16, g_GameEntrySubstate) += 1u;
 }

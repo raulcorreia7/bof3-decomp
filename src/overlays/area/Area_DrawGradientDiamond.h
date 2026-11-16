@@ -31,18 +31,18 @@ MATCH void Area_DrawGradientDiamond(s16 x, s16 y) {
     q2 = scratch + 2;
     q3 = scratch + 3;
 
-    scratch[0].vx           = -10;
-    VOL(s16, scratch[0].vy) = 0;
-    VOL(s16, scratch[0].vz) = 0;
-    VOL(s16, q1->vx)        = 0;
-    VOL(s16, q1->vy)        = -4;
-    VOL(s16, q1->vz)        = 0;
-    VOL(s16, q2->vx)        = 0;
-    VOL(s16, q2->vy)        = 4;
-    VOL(s16, q2->vz)        = 0;
-    VOL(s16, q3->vx)        = 10;
-    VOL(s16, q3->vy)        = 0;
-    VOL(s16, q3->vz)        = 0;
+    scratch[0].vx                     = -10;
+    FAKE_VOLATILE(s16, scratch[0].vy) = 0;
+    FAKE_VOLATILE(s16, scratch[0].vz) = 0;
+    FAKE_VOLATILE(s16, q1->vx)        = 0;
+    FAKE_VOLATILE(s16, q1->vy)        = -4;
+    FAKE_VOLATILE(s16, q1->vz)        = 0;
+    FAKE_VOLATILE(s16, q2->vx)        = 0;
+    FAKE_VOLATILE(s16, q2->vy)        = 4;
+    FAKE_VOLATILE(s16, q2->vz)        = 0;
+    FAKE_VOLATILE(s16, q3->vx)        = 10;
+    FAKE_VOLATILE(s16, q3->vy)        = 0;
+    FAKE_VOLATILE(s16, q3->vz)        = 0;
 
     SetPolyG4((POLY_G4*)primitive);
     RotTransPers4(scratch, scratch + 1, scratch + 2, scratch + 3, (long*)(primitive + 8), (long*)(primitive + 0x10), (long*)(primitive + 0x18), (long*)(primitive + 0x20), &depth, &flag);

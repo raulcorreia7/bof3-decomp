@@ -25,15 +25,15 @@ MATCH void func_8009AF84(void) {
     FAKE_ORDER_LOCK(eight = 8u);
     g_BattleChoicePanel[2] = one;
 
-    g_BattleChoicePanel[0xD]            = 0xFFu;
-    VOL(s16, g_BattleChoicePanel[4])    = -0xAA;
-    g_BattleChoicePanel[1]              = eight;
-    g_BattleChoicePanel[9]              = 0u;
-    VOL(u16, g_BattleChoicePanel[0x10]) = 0u;
-    VOL(u16, g_BattleChoicePanel[6])    = 0x3Fu;
-    g_BattleChoicePanel[0xA]            = group;
-    g_BattleChoicePanel[0xB]            = page_base;
-    g_BattleChoicePanel[0xC]            = cursor;
+    g_BattleChoicePanel[0xD]                      = 0xFFu;
+    FAKE_VOLATILE(s16, g_BattleChoicePanel[4])    = -0xAA;
+    g_BattleChoicePanel[1]                        = eight;
+    g_BattleChoicePanel[9]                        = 0u;
+    FAKE_VOLATILE(u16, g_BattleChoicePanel[0x10]) = 0u;
+    FAKE_VOLATILE(u16, g_BattleChoicePanel[6])    = 0x3Fu;
+    g_BattleChoicePanel[0xA]                      = group;
+    g_BattleChoicePanel[0xB]                      = page_base;
+    g_BattleChoicePanel[0xC]                      = cursor;
     /* FAKE: alias keeps the work base in the register. */
     FAKE_OPAQUE(work);
     work[0x6C]                = 0u;

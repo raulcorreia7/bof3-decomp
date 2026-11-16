@@ -612,7 +612,7 @@ only renames or forwards goes.
 | A helper several sites share: `INPUT_REPEATED`, `HAS_STATUS`, `MIN`, `SYS_DISPATCH_BYTE` | A second name for one function or global: `#define BATTLE_AllocEffect func_801E590C` |
 | A constant that names a value, even with one user                                        | A macro that forwards another name with the same arguments                           |
 | An accessor several sites share while the type is open, named for the role               | An accessor used once that hides a cast: write the member, or `FIELD` at the site    |
-| A seam the hardware or a volatile access needs: `HW_REF`, `VOL`                          | A third level: a macro on a macro on a macro                                         |
+| A seam the hardware or a volatile access needs: `HW_REF`, `FAKE_VOLATILE`                | A third level: a macro on a macro on a macro                                         |
 | A cast view of a global where the bytes need it, with the reason in its comment          | An `#ifndef` default, or a second definition of the same name                        |
 | A per-image setting in each image header                                                 | A `#define` nothing uses and that holds no fact                                      |
 

@@ -61,5 +61,5 @@ MATCH void func_801A50C0(u8* script) {
 
     func_801A4914();
 
-    (VOL(u16, g_ScratchPad)) = (VOL(u16, g_ScratchPad)) + 1;
+    (FAKE_VOLATILE(u16, g_ScratchPad)) = (FAKE_VOLATILE(u16, g_ScratchPad)) + 1;
 }

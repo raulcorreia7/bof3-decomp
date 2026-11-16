@@ -834,7 +834,7 @@ MATCH void Scene_EnterSaveMenu(void) {
     GFX_CopyPalette(1);
     GFX_CopyPalette(2);
     g_GfxPalettePending = 1;
-    VOL(u16, g_GameEntrySubstate) += 1;
+    FAKE_VOLATILE(u16, g_GameEntrySubstate) += 1;
 }
 
 /* func_801F9654 */

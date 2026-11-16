@@ -25,8 +25,8 @@ NON_MATCHING void func_801F3560(AreaSpawnSlot* slot) {
 
     object = &slot->pos.x.fixed;
     Area_ProjectPoint(object, &screen);
-    size[0] = VOL(u16, slot->radius);
-    size[1] = VOL(u16, slot->radius);
+    size[0] = FAKE_VOLATILE(u16, slot->radius);
+    size[1] = FAKE_VOLATILE(u16, slot->radius);
     Game_ProjectWorldPoint(object, size, size);
 
     setXY4(primitive, screen.vx - ((s16)size[0] >> 1), screen.vy - ((s16)size[1] >> 1), (screen.vx - ((s16)size[0] >> 1)) + size[0], screen.vy - ((s16)size[1] >> 1), screen.vx - ((s16)size[0] >> 1),
@@ -37,15 +37,15 @@ NON_MATCHING void func_801F3560(AreaSpawnSlot* slot) {
     flags            = slot->core_shade;
     red              = 0;
     if ((flags & 4) != 0) {
-        red = VOL(u8, slot->unk_03);
+        red = FAKE_VOLATILE(u8, slot->unk_03);
     }
     green = 0;
     if ((flags & 2) != 0) {
-        green = VOL(u8, slot->unk_03);
+        green = FAKE_VOLATILE(u8, slot->unk_03);
     }
     blue = 0;
     if ((flags & 1) != 0) {
-        blue = VOL(u8, slot->unk_03);
+        blue = FAKE_VOLATILE(u8, slot->unk_03);
     }
     primitive->r0 = red;
     primitive->g0 = green;

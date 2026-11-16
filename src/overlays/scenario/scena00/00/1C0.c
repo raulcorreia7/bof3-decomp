@@ -804,13 +804,13 @@ MATCH void func_801F89F0(void) {
     SceneEffect* update_work;
     SceneEffect* setup_work;
 
-    setup_work                    = SCN_EFFECT;
-    VOL(s32, setup_work->pos.x)   = D_80147A8C;
-    VOL(s32, setup_work->pos.y)   = g_AreaFocusY[0];
-    FIELD(s32, setup_work, 0x3Cu) = D_80147A94;
-    VOL(s32, setup_work->angle.x) = D_80147ABC;
-    VOL(s32, setup_work->angle.y) = D_80147AC0;
-    setup_work->angle.z           = D_80147AC4;
+    setup_work                              = SCN_EFFECT;
+    FAKE_VOLATILE(s32, setup_work->pos.x)   = D_80147A8C;
+    FAKE_VOLATILE(s32, setup_work->pos.y)   = g_AreaFocusY[0];
+    FIELD(s32, setup_work, 0x3Cu)           = D_80147A94;
+    FAKE_VOLATILE(s32, setup_work->angle.x) = D_80147ABC;
+    FAKE_VOLATILE(s32, setup_work->angle.y) = D_80147AC0;
+    setup_work->angle.z                     = D_80147AC4;
     func_801AC1DC(deltas, FIELD(u8, setup_work, 0x1Cu));
     update_work                     = SCN_EFFECT;
     update_work->pos.x              = (update_work->pos.x + deltas[0]);
@@ -835,10 +835,10 @@ MATCH void func_801F8AB8(void) {
     point[2] = work->pos.z.fixed;
     Area_ProjectPoint(point, screen);
 
-    current                     = SCN_EFFECT;
-    VOL(u16, current->origin.x) = (u16)screen->vx;
-    current->origin.y           = SP_REF(u16, 0x36u);
-    shade                       = *(s8*)&current->color.red;
+    current                               = SCN_EFFECT;
+    FAKE_VOLATILE(u16, current->origin.x) = (u16)screen->vx;
+    current->origin.y                     = SP_REF(u16, 0x36u);
+    shade                                 = *(s8*)&current->color.red;
 
     if (shade != 0) {
         current->color.red = shade - 4;

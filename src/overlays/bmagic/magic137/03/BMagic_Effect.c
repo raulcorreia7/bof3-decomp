@@ -37,9 +37,9 @@ MATCH void func_801EF090(void) {
     g_Task->unk_0C = -TO_COORD_HALF(2);
     g_Task->unk_10 = 0;
     Effect_RotatePosition(g_Task);
-    g_Task->pos.x.fixed        = VOL(s32, g_AreaScrollTargetX) + g_Task->unk_0C;
-    g_Task->pos.y.fixed        = VOL(s32, g_AreaScrollTargetY) + g_Task->unk_10;
-    g_Task->pos.z.part.integer = Area_SampleHeight(VOL(s32, g_AreaScrollTargetX), VOL(s32, g_AreaScrollTargetY)) + 0x200;
+    g_Task->pos.x.fixed        = FAKE_VOLATILE(s32, g_AreaScrollTargetX) + g_Task->unk_0C;
+    g_Task->pos.y.fixed        = FAKE_VOLATILE(s32, g_AreaScrollTargetY) + g_Task->unk_10;
+    g_Task->pos.z.part.integer = Area_SampleHeight(FAKE_VOLATILE(s32, g_AreaScrollTargetX), FAKE_VOLATILE(s32, g_AreaScrollTargetY)) + 0x200;
     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     work               = g_Task;
     work->param.unk_0B = 0x34;

@@ -90,5 +90,5 @@ MATCH void func_801A7330(const volatile u8* data) {
         Actor_SelectScript(0);
     }
 
-    (VOL(u16, g_ScratchPad)) = (VOL(u16, g_ScratchPad)) + 1;
+    (FAKE_VOLATILE(u16, g_ScratchPad)) = (FAKE_VOLATILE(u16, g_ScratchPad)) + 1;
 }

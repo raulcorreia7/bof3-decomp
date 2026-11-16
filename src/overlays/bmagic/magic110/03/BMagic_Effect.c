@@ -235,14 +235,14 @@ MATCH void func_801EF7B4(void) {
 MATCH void func_801EF844(void) {
     PartyMember* work;
 
-    work                   = g_Task;
-    VOL(s32, work->unk_0C) = 0x60000;
-    VOL(s32, work->unk_10) = 0x60000;
-    work->pos.x.fixed      = g_AreaScrollTargetX + VOL(s32, work->unk_0C);
-    work->pos.y.fixed      = g_AreaScrollTargetY + VOL(s32, work->unk_10);
-    work->pos.z.fixed      = g_BattleEffectBattler->pos.z.fixed;
-    work->unk_09           = 0x10;
-    work->unk_14           = 0x100;
+    work                             = g_Task;
+    FAKE_VOLATILE(s32, work->unk_0C) = 0x60000;
+    FAKE_VOLATILE(s32, work->unk_10) = 0x60000;
+    work->pos.x.fixed                = g_AreaScrollTargetX + FAKE_VOLATILE(s32, work->unk_0C);
+    work->pos.y.fixed                = g_AreaScrollTargetY + FAKE_VOLATILE(s32, work->unk_10);
+    work->pos.z.fixed                = g_BattleEffectBattler->pos.z.fixed;
+    work->unk_09                     = 0x10;
+    work->unk_14                     = 0x100;
     g_Task->header.step++;
 }
 

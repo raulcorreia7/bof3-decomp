@@ -61,13 +61,13 @@ static inline void MagicOrbitProjectionStep(s32 depth) {
 
     g_Task->param.unk_0B++;
 
-    work                   = g_Task;
-    counter                = work->unk_0C + 1;
-    VOL(s32, work->unk_0C) = counter;
-    angle                  = (counter & 0x7F) << 5;
-    angle_cell             = &D_1F800004;
-    *angle_cell            = angle;
-    g_ScratchPad           = depth;
+    work                             = g_Task;
+    counter                          = work->unk_0C + 1;
+    FAKE_VOLATILE(s32, work->unk_0C) = counter;
+    angle                            = (counter & 0x7F) << 5;
+    angle_cell                       = &D_1F800004;
+    *angle_cell                      = angle;
+    g_ScratchPad                     = depth;
 
     velocity          = rcos(angle) * g_ScratchPad;
     work              = g_Task;

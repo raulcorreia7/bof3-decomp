@@ -13,9 +13,9 @@ MATCH void func_80153D34(void) {
         for (j = i + 1; j < D_8014933D; j++) {
             current = D_80143740[i];
             if ((D_80143740[j] >> 16) < (current >> 16)) {
-                VOL(u32, D_1F80000C) = current;
-                D_80143740[i]        = D_80143740[j];
-                D_80143740[j]        = VOL(u32, D_1F80000C);
+                FAKE_VOLATILE(u32, D_1F80000C) = current;
+                D_80143740[i]                  = D_80143740[j];
+                D_80143740[j]                  = FAKE_VOLATILE(u32, D_1F80000C);
             }
         }
     }

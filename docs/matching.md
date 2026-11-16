@@ -174,7 +174,7 @@ a symbol or a member once the evidence exists.
 | `FIELD(type, base, off)`     | one access at an offset of a base whose type is not proven yet             |
 | `HW_REF(type, addr)`         | a hardware register (`include/psx/hw.h` names them)                        |
 | `SP*`                        | the scratchpad (`include/sys/scratchpad.h`)                                |
-| `VOL(type, x)`               | a volatile access the hardware or a shared buffer needs; not a fake helper |
+| `FAKE_VOLATILE(type, x)`     | a volatile access the hardware or a shared buffer needs; not a fake helper |
 
 ### Fake-match helpers
 
@@ -236,7 +236,7 @@ volatile narrow global read through its non-volatile view (`LOHU`/`LOBU`) can re
 ### `imm`
 
 Shape and registers match, an immediate differs. Try the address spelling first (symbol, pointer
-local, `VOL`, `MEM`), then access width and signedness, then whether the value is a position,
+local, `FAKE_VOLATILE`, `MEM`), then access width and signedness, then whether the value is a position,
 address, mask, count or index and which symbol owns the base register.
 
 ### `insert`
