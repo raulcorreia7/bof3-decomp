@@ -69,7 +69,7 @@ MATCH void func_801CF8AC(void) {
     }
     slot                     = func_8019601C();
     g_Task->param.actor_slot = slot;
-    if (g_Task->param.actor_slot != 0xFF) {
+    if (g_Task->param.actor_slot != GAME_NONE) {
         g_SpawnedActors[g_Task->param.actor_slot].header.flags = 1;
         g_SpawnedActors[g_Task->param.actor_slot].type         = 0x1B;
     }

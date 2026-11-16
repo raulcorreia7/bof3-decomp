@@ -85,10 +85,10 @@ MATCH void func_801D0FAC(void) {
 
 MATCH void func_801D1018(void) {
     if (g_MenuStatusItems.unk_08 != 0) {
-        Item_Remove(ITEM_CAT_ITEM, 0x4DU, g_MenuStatusItems.used[0], 0);
-        Item_Remove(ITEM_CAT_ITEM, 0x23U, g_MenuStatusItems.used[1], 0);
-        Item_Remove(ITEM_CAT_ITEM, 0x24U, g_MenuStatusItems.used[2], 0);
-        Item_Remove(ITEM_CAT_ITEM, 0x56U, g_MenuStatusItems.used[3], 0);
+        Item_Remove(ITEM_CAT_ITEM, ITEM_MACKEREL, g_MenuStatusItems.used[0], 0);
+        Item_Remove(ITEM_CAT_ITEM, ITEM_SHALY_SEED, g_MenuStatusItems.used[1], 0);
+        Item_Remove(ITEM_CAT_ITEM, ITEM_VINEGAR, g_MenuStatusItems.used[2], 0);
+        Item_Remove(ITEM_CAT_ITEM, ITEM_HORSERADISH, g_MenuStatusItems.used[3], 0);
         g_SceneState.step_05 = 0x14;
         func_801D1EE8();
         if (D_801DA044 >= 0x33) {

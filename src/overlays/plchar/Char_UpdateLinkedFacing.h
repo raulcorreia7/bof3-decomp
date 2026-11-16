@@ -13,7 +13,7 @@ MATCH void Char_UpdateLinkedFacing(void) {
         if (g_Task->unk_0A == 0) {
             g_SpawnedActors[g_Task->param.actor_slot].unk_08 = g_Task->direction_08;
             if (g_Task->option_flags == 0) {
-                g_Task->option_flags = 1;
+                g_Task->option_flags = ACTOR_OPT_HIDDEN_ON_SPAWN;
             }
             g_SpawnedActors[g_Task->param.actor_slot].unk_0A = g_Task->option_flags;
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 11));
