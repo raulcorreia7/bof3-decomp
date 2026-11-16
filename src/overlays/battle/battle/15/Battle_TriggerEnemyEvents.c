@@ -24,7 +24,7 @@ MATCH void Battle_TriggerEnemyEvents(void) {
     u8                 i;
 
     for (i = 0; i < ENEMY_AI_COUNT; i++) {
-        packet = &BATTLE_ENEMY_EVENTS[g_BattleCurrentEnemy->kind].packets[i];
+        packet = &BATTLE_ENEMY_EVENTS[g_BattleCurrentEnemy->type].packets[i];
         switch (packet->kind) {
             case BATTLE_EVENT_HIT_FIRE:
                 BATTLE_TRIGGER_ENEMY_EVENT_ONCE(Battle_ActionHasElement(ELEM_FIRE));

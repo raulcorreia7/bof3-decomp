@@ -1,36 +1,36 @@
 #include "game_00.h"
 
 MATCH void Game_UpdateAreaLoad(void) {
-    u16 context_seed;
-    u32 context_a;
-    u32 context_b;
-    u8  context_kind;
+    u16 area_id;
+    u32 entry_x;
+    u32 entry_y;
+    u8  entry_facing;
     u16 world_flags;
     u16 final_world_flags;
-    u8  request_kind;
+    u8  ui_mode;
     s32 pending_world;
 
-    context_seed      = g_GameEntryAreaId;
-    context_a         = g_GameEntryPosX;
+    area_id           = g_GameEntryAreaId;
+    entry_x           = g_GameEntryPosX;
     world_flags       = g_AreaWalkFlags;
-    context_b         = g_GameEntryPosY;
-    context_kind      = g_GameEntryFacing;
+    entry_y           = g_GameEntryPosY;
+    entry_facing      = g_GameEntryFacing;
     g_Game.walk_flags = world_flags & ~AREA_WALK_ENTRY_ACTIVE;
-    func_8019FAA0(context_seed, context_a, context_b, context_kind);
+    func_8019FAA0(area_id, entry_x, entry_y, entry_facing);
 
     if (g_GameRequestFlags & AREA_LOAD_FLAG_FISHING) {
         g_GameEntryState = GAME_STATE_FISHING;
         return;
     }
 
-    request_kind = g_GameRequestKind;
-    if ((u8)(request_kind + 2u) >= 2u) {
-        UI_SetMode(request_kind);
+    ui_mode = g_GameRequestKind;
+    if ((u8)(ui_mode + 2u) >= 2u) {
+        UI_SetMode(ui_mode);
         func_80198BC4(1u);
         if (LOBU(g_GameRequestFlags) & 0x1u) {
             func_801A0048(g_AreaTargetCellX, g_AreaTargetCellY);
         }
-    } else if (request_kind == 0xFEu) {
+    } else if (ui_mode == 0xFEu) {
         g_AreaDrawFlags = 0u;
     }
 

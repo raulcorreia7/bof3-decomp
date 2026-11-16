@@ -28,7 +28,7 @@ MATCH void func_801EED04(void) {
                 g_BattleEffects[slot].pos.x.fixed  = g_BattleEnemyBattlers[i].pos.x.fixed;
                 g_BattleEffects[slot].pos.y.fixed  = g_BattleEnemyBattlers[i].pos.y.fixed;
                 g_BattleEffects[slot].pos.z.fixed  = g_BattleEnemyBattlers[i].pos.z.fixed + 0x800000;
-                g_BattleEffects[slot].pos.z.part.integer += ENCOUNTER_ENEMIES[g_BattleEnemyBattlers[i].kind].height;
+                g_BattleEffects[slot].pos.z.part.integer += ENCOUNTER_ENEMIES[g_BattleEnemyBattlers[i].type].height;
                 g_Task->param.unk_0B += 1;
             }
         }

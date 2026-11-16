@@ -11,7 +11,7 @@ MATCH void func_80153CC4(void) {
     u32 v1;
 
     count_a3  = 0;
-    level_t1  = g_FrameBufferIndex & BYTE_MASK;
+    level_t1  = g_GfxBufferIndex & BYTE_MASK;
     base_t0   = (u8*)&D_80142CC0;
     offset_a2 = 0;
     do {

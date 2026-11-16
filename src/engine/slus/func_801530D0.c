@@ -155,14 +155,14 @@ NON_MATCHING s32 func_801530D0(void) {
                             if (((below[0] < ((sword << 8) >> 0x18)) | (((*(s32*)below << 0x10) >> 0x18) < (sword >> 0x18))) != 0) {
                                 prim[1].pad2 = Area_AllocCellPrimRow();
                             }
-                            cell->prim_id |= Area_UploadCell(cell->tile_x, cell->tile_y, prim, g_FrameBufferIndex);
+                            cell->prim_id |= Area_UploadCell(cell->tile_x, cell->tile_y, prim, g_GfxBufferIndex);
                             v = 1;
-                            if (g_FrameBufferIndex == 0) {
+                            if (g_GfxBufferIndex == 0) {
                                 v = 2;
                             }
                             prim[0].pad1 = v;
                         block_38:
-                            pkt             = &prim[g_FrameBufferIndex];
+                            pkt             = &prim[g_GfxBufferIndex];
                             *(u32*)&pkt->x0 = *(u32*)D_1F800034;
                             ux              = g_ScratchPadVectors[0].vx;
                             uy              = g_ScratchPadVectors[0].vy;
@@ -177,13 +177,13 @@ NON_MATCHING s32 func_801530D0(void) {
                             D_1F80001C.vz   = -(((*(s32*)rec << 0x10) >> 0x18) * 0x10);
                             D_1F800024.vz   = -(rec[2] * 0x10);
                             gte_ldv3c(&D_1F80001C);
-                            pkt2 = &g_AreaCellPrims[s2][g_FrameBufferIndex];
+                            pkt2 = &g_AreaCellPrims[s2][g_GfxBufferIndex];
                             gte_rtpt();
                             if (cell->prim_id & 0x8000) {
                                 if (cell->prim_id & 0x4000) {
-                                    LINK_PACKET((s6 != 0) ? s6 - 1 : 0, g_FrameBufferIndex, pkt);
+                                    LINK_PACKET((s6 != 0) ? s6 - 1 : 0, g_GfxBufferIndex, pkt);
                                 } else {
-                                    LINK_PACKET(s6, g_FrameBufferIndex + 2, pkt);
+                                    LINK_PACKET(s6, g_GfxBufferIndex + 2, pkt);
                                 }
                             } else if ((cell->prim_id & 0x4000) && ((g_AreaDrawMode == GFX_LAYER_FIELD_SCENE) || ((g_AreaDrawMode == GFX_LAYER_BATTLE_SCENE) && (depth_threshold < s6)))) {
                                 *low_min = *(u32*)rec ^ 0x80;
@@ -204,12 +204,12 @@ NON_MATCHING s32 func_801530D0(void) {
                                 D_8014933D += 1;
                                 D_80143740[tmp] = (s6 << 0x18) | (cell->prim_id & AREA_CELL_PRIM_MASK) | (*low_min << 0x10);
                             } else {
-                                LINK_PACKET(s6, g_FrameBufferIndex, &prim[g_FrameBufferIndex]);
+                                LINK_PACKET(s6, g_GfxBufferIndex, &prim[g_GfxBufferIndex]);
                             }
-                            gte_stsxy3((s32*)&prim[g_FrameBufferIndex].x1, (s32*)&prim[g_FrameBufferIndex].x2, (s32*)&prim[g_FrameBufferIndex].x3);
+                            gte_stsxy3((s32*)&prim[g_GfxBufferIndex].x1, (s32*)&prim[g_GfxBufferIndex].x2, (s32*)&prim[g_GfxBufferIndex].x3);
                             v16 = g_AreaCellPrims[s2][1].pad1;
                             if (v16 != 0) {
-                                link             = &g_AreaCellPrims[v16][g_FrameBufferIndex];
+                                link             = &g_AreaCellPrims[v16][g_GfxBufferIndex];
                                 *(u32*)&link->x0 = *(u32*)&pkt2->x3;
                                 *(u32*)&link->x1 = *(u32*)&pkt2->x1;
                                 x                = (cell->tile_x << 7) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
@@ -223,13 +223,13 @@ NON_MATCHING s32 func_801530D0(void) {
                                 vert[0].vz       = -(rec[0] * 0x10);
                                 vert[1].vz       = -((s8) * (u16*)(rec + 2) * 0x10);
                                 gte_ldv3c(&g_ScratchPadVectors[0]);
-                                LINK_PACKET(s6, g_FrameBufferIndex + (((cell->prim_id >> 0xC) & 2) ^ 2), link);
+                                LINK_PACKET(s6, g_GfxBufferIndex + (((cell->prim_id >> 0xC) & 2) ^ 2), link);
                                 gte_rtpt();
                                 gte_stsxy3((s32*)&link->x3, (s32*)&link->x2, (s32*)D_1F800034);
                             }
                             v16 = g_AreaCellPrims[s2][1].pad2;
                             if (v16 != 0) {
-                                link             = &g_AreaCellPrims[v16][g_FrameBufferIndex];
+                                link             = &g_AreaCellPrims[v16][g_GfxBufferIndex];
                                 *(u32*)&link->x0 = *(u32*)&pkt2->x2;
                                 *(u32*)&link->x1 = *(u32*)&pkt2->x3;
                                 x                = (cell->tile_x - 0x80) << 7;
@@ -243,7 +243,7 @@ NON_MATCHING s32 func_801530D0(void) {
                                 vert[0].vz       = -(rec[0] * 0x10);
                                 D_1F80001C.vz    = -(((*(s32*)rec << 0x10) >> 0x18) * 0x10);
                                 gte_ldv3c(&g_ScratchPadVectors[0]);
-                                LINK_PACKET(s6, g_FrameBufferIndex + (((cell->prim_id >> 0xB) & 2) ^ 2), link);
+                                LINK_PACKET(s6, g_GfxBufferIndex + (((cell->prim_id >> 0xB) & 2) ^ 2), link);
                                 gte_rtpt();
                                 gte_stsxy3((s32*)&link->x2, (s32*)&link->x3, (s32*)D_1F800034);
                             }

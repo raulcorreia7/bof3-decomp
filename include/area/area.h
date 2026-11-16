@@ -166,8 +166,8 @@ typedef struct AreaMapBundle {
     u16 byte_code_off4_14;  /* 0x14 - per-cell byte-code table (`g_AreaCellCodes`):
                                 *        (0x30 + width*height*4) / 4; equals
                                 *        width*height + 12 in 200/200 payloads */
-    u16 zero_16;            /* 0x16 - zero in 200/200, no reader */
-    u16 zero_18;            /* 0x18 - zero in 200/200, no reader */
+    u16 unk_16;             /* 0x16 - zero in 200/200, no reader */
+    u16 unk_18;             /* 0x18 - zero in 200/200, no reader */
     u16 color[2];           /* 0x1A-0x1D - runtime color words, written by the engine
                                 *            (`@0x801583BC` is the only header store) and
                                 *            read at `0x8010401A + (mask >> 3) * 2` */
@@ -175,12 +175,12 @@ typedef struct AreaMapBundle {
     u16 list_base_20;       /* 0x20 - record list, opcode byte & 0x3f */
     u16 list_base_22;       /* 0x22 - record list, opcode byte & 0x7f */
     u16 record_region_24;   /* 0x24 - indexed by the 4-byte-unit ids in g_AreaCellGrid */
-    u16 zero_26;            /* 0x26 - zero in 200/200, no reader */
+    u16 unk_26;             /* 0x26 - zero in 200/200, no reader */
     u16 object_list_28;     /* 0x28 - tag + body size, walked by the map interpreter */
     u16 height_off4_2A;     /* 0x2A - height-byte table; u16[+0x2A]*4 == size in 187
                                 *        payloads, == size - width*height in the rest */
-    u16 zero_2C;            /* 0x2C - zero in 200/200, no reader */
-    u16 zero_2E;            /* 0x2E - zero in 200/200, no reader */
+    u16 unk_2C;             /* 0x2C - zero in 200/200, no reader */
+    u16 unk_2E;             /* 0x2E - zero in 200/200, no reader */
 } AreaMapBundle;
 
 ASSERT_SIZE(AreaMapBundle, AREA_MAP_BUNDLE_SIZE);
@@ -260,7 +260,7 @@ ASSERT_SIZE(AreaCell, 0x4);
 extern AreaCell g_AreaCells[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
 extern u16      g_AreaCellGrid[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
 /* Zero in the load image: 0x400 rows of one POLY_FT4 per display buffer
- * (g_FrameBufferIndex). In a row's second record, pad1 and pad2 hold the rows of the two linked
+ * (g_GfxBufferIndex). In a row's second record, pad1 and pad2 hold the rows of the two linked
  * cells (0 = none); in its first, pad1 holds the pending upload request. */
 extern POLY_FT4 g_AreaCellPrims[][2];
 extern u16      g_AreaCellPrimFreeIds[0x400];

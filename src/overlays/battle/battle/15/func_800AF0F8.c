@@ -46,10 +46,10 @@ NON_MATCHING void func_800AF0F8(s32 pos_x, s32 pos_y, s32* values, u8* base, u8 
         g_GfxPrimCursor -= count * size;
     } else {
         cursor = g_GfxPrimCursor;
-        limit  = g_FrameBufferIndex * 0x9000 + PRIM_ARENA_BASE;
+        limit  = g_GfxBufferIndex * 0x9000 + PRIM_ARENA_BASE;
         next   = cursor + slot;
         if (next < limit) {
-            offset = (g_FrameBufferIndex + 4) * 8 + total * 0x30;
+            offset = (g_GfxBufferIndex + 4) * 8 + total * 0x30;
             if ((count & BYTE_MASK) != 0) {
                 claim = 0;
                 do {

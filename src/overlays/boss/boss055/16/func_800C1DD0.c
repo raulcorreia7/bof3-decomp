@@ -16,7 +16,7 @@ MATCH u8 func_800C1DD0(void) {
         g_Task->unk_09 = 0;
     }
     if (!(D_801CA71C[g_Battle.action_id].mask & 0x800)) {
-        g_Task->unk_09 = ENCOUNTER_ENEMIES[g_BattleCurrentEnemy->kind].unk_84[3];
+        g_Task->unk_09 = ENCOUNTER_ENEMIES[g_BattleCurrentEnemy->type].unk_84[3];
         switch (g_Battle.action_id) {
             case ABILITY_SANCTUARY:
                 func_800C2340(5, 4, 7);

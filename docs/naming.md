@@ -403,7 +403,7 @@ the player sees, the PlayStation `Scratchpad`, an SDK name.
   table, and no wrapper type. A player-visible menu list keeps `List`; a map's grid data keeps
   `Map` (`MapCell`, `AreaMapBundle`).
 - The element type carries the mechanism: `<Thing>Func`, one type per signature. The no-argument
-  entry `void (*)(void)` is `Callback` (`include/common/handler.h`).
+  entry `void (*)(void)` is `Callback` (`include/common/callback.h`).
 - Until the index is known, a table keeps its address name. Per-image tables of different tasks
   never share a numbered name.
 

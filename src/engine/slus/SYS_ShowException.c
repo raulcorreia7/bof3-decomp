@@ -41,14 +41,14 @@ MATCH void SYS_ShowException(void) {
         y       = 60;
         x_value = 0x3C;
 
-        PutDispEnv((DISPENV*)g_GfxCurrentDisplayFrame);
-        PutDrawEnv((DRAWENV*)(g_GfxCurrentDisplayFrame + 0x14));
-        DrawOTag((u_long*)(g_GfxCurrentDisplayFrame + 0x8C));
+        PutDispEnv((DISPENV*)g_GfxCurrentBuffer);
+        PutDrawEnv((DRAWENV*)(g_GfxCurrentBuffer + 0x14));
+        DrawOTag((u_long*)(g_GfxCurrentBuffer + 0x8C));
 
-        g_FrameBufferIndex       = g_FrameBufferIndex ^ 0x1;
-        g_GfxCurrentDisplayFrame = &g_GfxDisplayFrames[g_FrameBufferIndex * 0x90];
+        g_GfxBufferIndex   = g_GfxBufferIndex ^ 0x1;
+        g_GfxCurrentBuffer = &g_GfxBuffers[g_GfxBufferIndex * 0x90];
 
-        ClearOTagR((u_long*)(g_GfxCurrentDisplayFrame + 0x70), 8);
+        ClearOTagR((u_long*)(g_GfxCurrentBuffer + 0x70), 8);
         SYS_PrepareFrame();
 
         for (i = 0; i < 18; i++) {

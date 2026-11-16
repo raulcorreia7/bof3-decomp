@@ -13,7 +13,7 @@ MATCH void SYS_PrepareFrame(void) {
 
     index           = 0;
     ordering        = (u32*)D_801459D0;
-    buffer_index    = g_FrameBufferIndex;
+    buffer_index    = g_GfxBufferIndex;
     packet          = D_80145990;
     g_GfxPrimCursor = (u8*)(0x80020000u + ((buffer_index * 9) << 12));
     /* The paired no-op increments keep the counter live across the store; a
@@ -28,7 +28,7 @@ MATCH void SYS_PrepareFrame(void) {
     }
 
     index         = 0;
-    buffer_index  = g_FrameBufferIndex;
+    buffer_index  = g_GfxBufferIndex;
     packet        = D_80142CE0;
     packet_offset = buffer_index << 3;
     table_offset  = (buffer_index + 4) << 3;

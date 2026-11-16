@@ -20,7 +20,7 @@
  * carries a FAKE comment. */
 
 #include "common/fixed.h"
-#include "common/handler.h"
+#include "common/callback.h"
 #include "psx/mem.h"
 #include "common/vector.h"
 #include "common/facing.h"

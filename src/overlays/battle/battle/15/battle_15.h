@@ -66,7 +66,7 @@
             }                                                                                             \
         } else {                                                                                          \
             row    = (u32)battler - 3u;                                                                   \
-            result = enemy[(u32)g_BattleEnemyBattlers[row].kind * 0x88u];                                 \
+            result = enemy[(u32)g_BattleEnemyBattlers[row].type * 0x88u];                                 \
         }                                                                                                 \
         return result;                                                                                    \
     } while (0)

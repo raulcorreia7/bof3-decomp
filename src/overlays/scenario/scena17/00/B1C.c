@@ -39,7 +39,7 @@ MATCH void func_801F77B4(void) {
         func_801A0514();
         Area_DrawScene();
         rect.x = 0;
-        rect.y = g_FrameBufferIndex * SCREEN_HEIGHT;
+        rect.y = g_GfxBufferIndex * SCREEN_HEIGHT;
         rect.w = SCREEN_WIDTH;
         rect.h = SCREEN_HEIGHT;
         SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, 0x2C0, 0);

@@ -3,7 +3,7 @@
 
 #include "types.h"
 #include "sys/cd_format.h"
-#include "common/handler.h"
+#include "common/callback.h"
 
 /* The executable's system, archive, input and decompression functions, in address order. */
 /* func_8014AEE0 */

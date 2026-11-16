@@ -74,7 +74,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
     tpage = GetTPage(TPAGE_DEPTH_4BIT, abr & 0x3, 704, 256);
     prim  = g_GfxPrimCursor;
     p     = prim;
-    if ((u8*)(g_FrameBufferIndex * 0x9000 + PRIM_ARENA_BASE) < (prim + count * 0x28)) {
+    if ((u8*)(g_GfxBufferIndex * 0x9000 + PRIM_ARENA_BASE) < (prim + count * 0x28)) {
         return 0;
     }
     i = 0;

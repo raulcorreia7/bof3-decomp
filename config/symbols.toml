@@ -7012,9 +7012,9 @@ g_UiTitleInputGate = { addr = 0x80143C33, source = "Gate of the title start butt
 g_UiWindowEffectBusy = { addr = 0x80143C40, source = "Tells whether a window effect is running." }
 g_UiLocalMode = { addr = 0x80143C90, source = "Set by UI_SetMode, which arms UI_DispatchLocalMode." }
 g_SysCurrentThread = { addr = 0x80143D40, type = "Thread", source = "The thread record the scheduler runs now." }
-g_FrameBufferIndex = { addr = 0x80143D44, source = "Index of the frame buffer being drawn." }
-g_GfxDisplayFrames = { addr = 0x80143D48, source = "SYS_InitRuntime initializes the display frames and SYS_Main selects one by g_FrameBufferIndex" }
-g_GfxCurrentDisplayFrame = { addr = 0x80143E68, source = "SYS_Main selects a display frame and passes its display and draw environments to PsyQ" }
+g_GfxBufferIndex = { addr = 0x80143D44, source = "Index of the frame buffer being drawn." }
+g_GfxBuffers = { addr = 0x80143D48, source = "SYS_InitRuntime initializes the display frames and SYS_Main selects one by g_GfxBufferIndex" }
+g_GfxCurrentBuffer = { addr = 0x80143E68, source = "SYS_Main selects a display frame and passes its display and draw environments to PsyQ" }
 g_FrameCount = { addr = 0x80143E6C, source = "Absolute frame counter." }
 g_SysLastVSync = { addr = 0x80143EF8, source = "SYS_Main stores the VSync return value" }
 g_GameAreaId = { addr = 0x80143F00, source = "The area to load." }

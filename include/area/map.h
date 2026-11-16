@@ -1,7 +1,7 @@
 #ifndef AREA_MAP_H
 #define AREA_MAP_H
 
-#include "common/handler.h"
+#include "common/callback.h"
 #include "common/facing.h"
 #include "types.h"
 

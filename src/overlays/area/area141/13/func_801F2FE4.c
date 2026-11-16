@@ -24,7 +24,7 @@ MATCH void func_801F2FE4(void) {
             *entry     = (value & CELL_UPLOAD_MASK) | (fade << CELL_FADE_SHIFT);
             id         = Area_GetCellId(col, row);
             if (id != 0) {
-                Area_ApplyTileToQuad(*entry, &g_AreaCellPrims[id][g_FrameBufferIndex], 1);
+                Area_ApplyTileToQuad(*entry, &g_AreaCellPrims[id][g_GfxBufferIndex], 1);
             }
         }
     }

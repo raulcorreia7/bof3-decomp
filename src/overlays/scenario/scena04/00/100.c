@@ -506,10 +506,10 @@ MATCH void func_801F8034(s32 x, s32 y, s32 depth, s32 size, u32 tag) {
     }
     if ((u32)count < 56) {
         cursor = g_GfxPrimCursor;
-        limit  = g_FrameBufferIndex * 0x9000 + PRIM_ARENA_BASE;
+        limit  = g_GfxBufferIndex * 0x9000 + PRIM_ARENA_BASE;
         next   = cursor + size;
         if (next < limit) {
-            offset = (g_FrameBufferIndex + 4) * 8 + count * 0x30;
+            offset = (g_GfxBufferIndex + 4) * 8 + count * 0x30;
             packet = *(u8**)(D_80142CC4 + offset);
             setaddr(packet, cursor);
             g_GfxPrimCursor = next;

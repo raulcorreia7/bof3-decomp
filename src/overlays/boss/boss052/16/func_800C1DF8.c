@@ -5,7 +5,7 @@ MATCH void func_800C1DF8(void) {
     u8 kind;
 
     g_Task->param.unk_0B = 0;
-    kind                 = g_BattleEnemyBattlers[0].kind;
+    kind                 = g_BattleEnemyBattlers[0].type;
     g_Task->timer        = ENCOUNTER_ENEMIES[kind].unk_84[2];
     Actor_SelectScript(4);
     Actor_StepAnimLoop();

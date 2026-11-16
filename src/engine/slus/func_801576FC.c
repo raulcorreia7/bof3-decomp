@@ -77,13 +77,13 @@ MATCH void func_801576FC(u8* record) {
                 if (id != 0) {
                     switch (kind) {
                         case 0:
-                            prim = &g_AreaCellPrims[id][g_FrameBufferIndex];
+                            prim = &g_AreaCellPrims[id][g_GfxBufferIndex];
                             break;
                         case 1:
-                            prim = &g_AreaCellPrims[g_AreaCellPrims[id][1].pad2][g_FrameBufferIndex];
+                            prim = &g_AreaCellPrims[g_AreaCellPrims[id][1].pad2][g_GfxBufferIndex];
                             break;
                         default:
-                            prim = &g_AreaCellPrims[g_AreaCellPrims[id][1].pad1][g_FrameBufferIndex];
+                            prim = &g_AreaCellPrims[g_AreaCellPrims[id][1].pad1][g_GfxBufferIndex];
                             break;
                     }
                     Area_ApplyTileToQuad(entry[cond + 1].word, prim, 1);

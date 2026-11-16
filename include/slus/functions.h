@@ -8,7 +8,7 @@
 #include "psx/psyq.h"
 #include "game/character.h"
 #include "game/item.h"
-#include "common/handler.h"
+#include "common/callback.h"
 #include "gfx/palette.h"
 #include "gfx/prim.h"
 #include "slus/part.h"

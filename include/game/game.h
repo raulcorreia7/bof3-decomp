@@ -13,7 +13,7 @@
 #include "ability.h"
 #include "text.h"
 #include "gfx/vram.h"
-#include "common/handler.h"
+#include "common/callback.h"
 #include "types.h"
 
 /* Rows in the palette fade table g_PaletteFades. */
@@ -31,10 +31,10 @@ typedef struct PaletteOwner {
     u8 flags; /* +0x24 bit 2 is cleared when a fade that flagged its row with 0x80 frees */
     u8 pad_25[0x2];
     u8 saved_byte;   /* +0x27 restored from PaletteFade.saved_byte when the fade frees */
-    u8 palette_kind; /* +0x28 a PaletteType: how many palette cells the owner's fade covers */
+    u8 palette_type; /* +0x28 a PaletteType: how many palette cells the owner's fade covers */
 } PaletteOwner;
 
-ASSERT_OFFSET(PaletteOwner, palette_kind, 0x28);
+ASSERT_OFFSET(PaletteOwner, palette_type, 0x28);
 
 #define PALETTE_OWNER(record) ((PaletteOwner*)(record))
 

@@ -7,7 +7,7 @@ MATCH void func_800C1B14(void) {
     u8           kind;
 
     g_Task->header.mode += 1;
-    kind           = g_BattleEnemyBattlers[0].kind;
+    kind           = g_BattleEnemyBattlers[0].type;
     g_Task->unk_09 = ENCOUNTER_ENEMIES[kind].unk_84[2];
     g_Task->timer  = 45;
 
