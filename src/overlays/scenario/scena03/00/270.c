@@ -515,7 +515,98 @@ MATCH void func_801F8DE4(void) {
     D_80144EA0 = 0;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F8E00(void) {
+    if (LOHU(g_GameAreaId) == AREA_ID_WYNDIA_LOWER && !SYS_TestFlag(g_SceneFlags, 0x15)) {
+        g_AreaDrawFlags = 0x1F;
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_WYNDIA_UPPER) {
+        Area_SetCellCode(0xC, 0x1C, 0);
+        Area_SetCellCode(0xC, 0x1E, 0);
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_WYNDIA_CASTLE && !SYS_TestFlag(g_SceneFlags, 3)) {
+        g_ScriptVarsWord = 0;
+        g_AreaDrawFlags  = 0;
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_WYNDIA_CASTLE_BASEMENT && !SYS_TestFlag(g_SceneFlags, 3)) {
+        g_SceneState.timer_06 = 60;
+        g_AreaCameraAngle.vx  = -0x344;
+        g_ScriptVarsWord      = 0;
+        g_AreaCameraAngle.vy  = 0;
+        g_AreaCameraAngle.vz  = 0x10E;
+        func_801BE1B0(0);
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_WYNDIA_WORLD_MAP && SYS_TestFlag(g_SceneFlags, 1) && !SYS_TestFlag(g_SceneFlags, 2)) {
+        Game_SetScriptActive();
+        Scene_RunScenario(0);
+        g_ScriptVarsWord = 0;
+        Area_AdvanceScroll(448);
+        g_AreaCameraOffsetZ = 0x2BC;
+        Area_StartScrollRoute(1);
+    }
+    if (SYS_TestFlag(g_SceneFlags, 0x18) && !SYS_TestFlag(g_SceneFlags, 0x19)) {
+        Game_SetScriptActive();
+        g_AreaCameraAngle.vx = -0x2EC;
+        g_AreaCameraAngle.vz = 0x376;
+        Area_StartScrollRoute(2);
+        g_AreaDrawFlags = 0x1F;
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_GENMEL) {
+        g_ScriptVarsWord = 0;
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_WYNDIAN_CATACOMBS && D_80143F03 == 1 && !SYS_TestFlag(g_SceneFlags, 0xF)) {
+        SYS_SetFlag(g_SceneFlags, 0xF);
+        g_ScriptVarsWord = 0;
+        func_801BE1B0(0);
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_EYGNOCK_ROAD && D_80143F03 == 0) {
+        if (!SYS_TestFlag(g_SceneFlags, 0x16)) {
+            func_801BE1B0(3);
+            SYS_SetFlag(g_SceneFlags, 0x16);
+        } else if (D_80143F06 == 1 && !SYS_TestFlag(g_SceneFlags, 0x18)) {
+            Game_SetScriptActive();
+            SND_FadeOutBGM(g_SndBGMId, 100, 8);
+            SND_PlayBGM(20, 0, 8);
+            D_80146258 |= 0x80;
+            func_801BE1B0(5);
+            SYS_SetFlag(g_SceneFlags, 0x18);
+            g_SceneState.state_04 = 5;
+            g_SceneState.step_05  = 2;
+        }
+    }
+    if (D_80143F03 == 1 && !SYS_TestFlag(g_SceneFlags, 0x17)) {
+        func_801C1E3C(0);
+        func_801BE1B0(4);
+        SND_PlayCue(0x201);
+        SYS_SetFlag(g_SceneFlags, 0x17);
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_MOUNT_BOUMORE_SECOND && !SYS_TestFlag(g_SceneFlags, 0x1E)) {
+        Area_SetCellCode(0x19, 0x77, 0x50);
+        Area_SetCellCode(0x19, 0x78, 0x50);
+        Area_SetCellCode(0x19, 0x79, 0x50);
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_MOUNT_BOUMORE_FIRST && !SYS_TestFlag(g_SceneFlags, 0x1B)) {
+        if (D_80143F03 == 2) {
+            g_AreaDrawFlags = 0x1F;
+        }
+        if (D_80143F03 == 3) {
+            Game_SetScriptActive();
+            g_ScriptVarsWord    = 0;
+            g_AreaScrollTargetX = 0x58000;
+            g_AreaScrollTargetY = 0xB8000;
+            func_801BE1B0(1);
+            g_AreaDrawFlags = 0;
+            SYS_SetFlag(g_SceneFlags, 0x1B);
+            g_SceneState.timer_06 = 30;
+            g_SceneState.state_04 = 6;
+            g_SceneState.step_05  = 6;
+        }
+    }
+    g_SceneState.mode_02 = 2;
+}
+#else
 INCLUDE_ASM(func_801F8E00);
+#endif
 
 MATCH void func_801F92F4(void) {
     SYS_DISPATCH_BYTE(D_801FCFE0, g_SceneState.state_04);
