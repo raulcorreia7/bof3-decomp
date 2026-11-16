@@ -49,6 +49,11 @@ void func_801F3514(void);
 void func_801F3800(void);
 s16  func_801F4A04(s32 x, s32 y);
 void func_801F559C(void);
+void func_801F5D20(void);
+bool func_801F5D6C(void);
+bool func_801F5EA8(void);
+s32  func_801F5F3C(void);
+void func_801F54B0(void);
 /* func_801F5F20 */
 void func_801F5600(void);
 
