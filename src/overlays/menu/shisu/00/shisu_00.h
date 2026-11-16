@@ -17,6 +17,14 @@
 extern u8   D_80148656;
 /* g_EmiOverlayHeader */
 extern char g_MenuStatFormat[];
+/* The value formats Menu_DrawCharacterWindow prints. */
+extern char g_MenuCurrentValueFormat[];
+extern char g_MenuMaxValueFormat[];
+/* The poison and confusion labels it draws beside the name. */
+extern u8   D_801D9B3C[];
+extern u8   D_801D9B44[];
+/* The sprite run it draws under the record. */
+extern u8   D_801D97A4[];
 extern char g_MenuZennyFormat[];
 /* D_801D0C2C */
 extern char g_MenuClockFormat[];
