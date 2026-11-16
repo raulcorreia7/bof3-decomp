@@ -15,8 +15,7 @@ extern u8 D_801F3FB4[];
 /* The second cell pair table: entry n's x at byte n and its y at n+1. */
 extern u8 D_801F3FBC[];
 
-/* The scene trigger rows func_801F33A8 scans, five bytes each: cell x, cell y,
- * the party facing in the low nibble and the scene flag it toggles. */
+/* The trigger table: the cell pair, the facing and the cue id of each five-byte slot. */
 extern u8 D_801F3FC4[];
 extern u8 D_801F3FC5[];
 extern u8 D_801F3FC6[];

@@ -1,10 +1,11 @@
 #include "area044_13.h"
 
+/* Sets the flag bit of the trigger record that matches the two cell coordinates and queues its cue. */
 MATCH s32 func_801F33A8(s32 x, s32 y) {
     s32 i;
     s32 off;
-    u8  event;
     u8* mode;
+    u8  next_mode;
 
     i    = 0;
     x    = x & BYTE_MASK;
@@ -22,8 +23,8 @@ MATCH s32 func_801F33A8(s32 x, s32 y) {
     SYS_ToggleFlag(g_SceneEventFlags, D_801F3FC7[i * 5]);
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0));
     Game_SetScriptActive();
-    event            = D_801F3FC8[i * 5];
+    next_mode        = D_801F3FC8[i * 5];
     g_SceneEventStep = 0;
-    g_SceneEventMode = event;
+    g_SceneEventMode = next_mode;
     return 1;
 }

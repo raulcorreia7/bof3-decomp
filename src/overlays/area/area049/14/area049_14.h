@@ -19,8 +19,7 @@ extern u16 D_801F5CD4[];
 
 extern u16 D_801F5CD8[];
 
-/* The scene trigger rows func_801F3194 scans: cell x, cell y, the party facing it
- * needs and the scene flag it toggles. */
+/* The cell pair, facing and cue id of the nine trigger slots; each row starts at a multiple of 4. */
 extern u8 D_801F5CDC[];
 extern u8 D_801F5CDD[];
 extern u8 D_801F5CDE[];
