@@ -55,15 +55,13 @@ MATCH void func_801D0F50(s16 x, s16 y, u8 row) {
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D1048(s16 x, s16 y, u8 group) {
     s32 i;
-    s32 first_entry;
-    s32 entry_index;
     s16 row_y;
     u8* buffer;
     u8* entry;
 
     UI_DrawText(x + 0x28, y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, MSG_055));
     row_y = y + 0x14;
-    func_801D0F50(x + 8, row_y, 0);
+    func_801D0F50(x + 8, row_y, 1);
     UI_DrawText(x + 0x18, row_y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, MSG_056));
     buffer = g_UiFormatBuffer;
     TEXT_Format(buffer, D_801D0C0C, D_80145E44);
@@ -73,14 +71,12 @@ NON_MATCHING void func_801D1048(s16 x, s16 y, u8 group) {
     } else {
         UI_DrawText(x + 0x84, row_y, 0, 7, D_801D195C);
     }
-    first_entry = group * 7;
-    for (i = 0; i < 7; i++) {
-        entry_index = first_entry + i;
-        if (entry_index >= D_80145E44) {
+    entry = D_80145E30 + group * 7;
+    for (i = 0; i < 7; i++, entry++) {
+        if (entry - D_80145E30 >= D_80145E44) {
             break;
         }
         row_y = y + 0x2C + (i * 0x10);
-        entry = &D_80145E30[entry_index];
         UI_DrawText(x + 0x14, row_y, 0, 5, D_801457E8[entry[0] & 0x7F]);
         if (entry[0] & 0x80) {
             UI_DrawText(x + 0x48, row_y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, MSG_058));
@@ -127,7 +123,6 @@ NON_MATCHING void func_801D14C8(s32 x, s32 y, s32 group) {
     u8  kind;
     u8  queue_row;
     u16 text_offset;
-    u8* text;
 
     text_offset = MEM(u16, (u8*)AREA_MESSAGE_TABLE + 0x1D8);
     UI_DrawText((s16)(x + 0x52), (s16)y, 0, 0xFF, (u8*)((u8*)AREA_MESSAGE_TABLE + text_offset));
@@ -145,10 +140,13 @@ NON_MATCHING void func_801D14C8(s32 x, s32 y, s32 group) {
             }
             g_TextVariables[0][5] = 0;
         }
-        text = (u8*)((u8*)AREA_MESSAGE_TABLE + (((u16*)((u8*)g_Commu05States + 0x2C))[kind * 2] << 1));
-        UI_DrawText((s16)(x + 0x14), (s16)(y + j * 0x10 + 0x1C), 0, 0xFF, text);
+        UI_DrawText((s16)(x + 0x14), (s16)(y + j * 0x10 + 0x1C), 0, 0xFF, (u8*)((u8*)AREA_MESSAGE_TABLE + (((u16*)((u8*)g_Commu05States + 0x2C))[kind * 2] << 1)));
         i++;
         j++;
+        if (j < 8) {
+            continue;
+        }
+        break;
     }
 }
 #else
