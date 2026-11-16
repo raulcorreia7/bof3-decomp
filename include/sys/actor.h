@@ -205,7 +205,7 @@ typedef struct Actor {
     u16            unk_2C;            /* 0x2C */
     u16            screen_x;          /* 0x2E - HUD banner and marker screen x */
     u16            screen_y;          /* 0x30 - HUD banner and marker screen y */
-    u16            unk_32;            /* 0x32 */
+    s16            unk_32;            /* 0x32 - signed: every matched user loads it with lh */
     WorldPos       pos;               /* 0x34; z integer is ground height */
     SpriteScale    scale;             /* 0x40 16.16; 0x10000 is full size */
     u8             unk_48;            /* 0x48 - commu00 calls it the reset flag */
