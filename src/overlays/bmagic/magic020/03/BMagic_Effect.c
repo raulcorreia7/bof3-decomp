@@ -301,7 +301,7 @@ MATCH void func_801EFD10(void) {
 }
 
 /* The full-screen tile's colour scratch, read back for the three channels. */
-#define SCREEN_SHADE D_1F800000.view.effect.params[1]
+#define SCREEN_SHADE D_1F800000.cells.halves[1]
 
 /* A semi-transparent full-screen tile shaded fifteen times the effect counter, then the draw mode back
  * to plain blending. */
