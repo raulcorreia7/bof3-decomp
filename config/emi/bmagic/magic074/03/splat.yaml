@@ -16,15 +16,15 @@ segments:
     vram: 0x801F0490
     align: 4
     subsegments:
-      - [0x1890, bin, D_801F0492]
-      - [0x1930, bin, D_801F0532]
+      - [0x1890, bin, D_801F0490]
+      - [0x1930, bin, D_801F0530]
       - [0x1948, bin, D_801F0548]
       - [0x194C, bin, D_801F054C]
       - [0x1950, bin, D_801F0550]
       - [0x1954, bin, g_BMagicEffectModes]
       - [0x1958, bin, D_801F0558]
-      - [0x195C, bin, D_801F055F]
-      - [0x1960, bin, D_801F0563]
+      - [0x195C, bin, D_801F055C]
+      - [0x1960, bin, D_801F0560]
       - [0x1984, bin, D_801F0584]
       - [0x34DC, bin, D_801F20DC]
   - [0x34E0]
