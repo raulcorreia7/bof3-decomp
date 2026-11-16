@@ -13,11 +13,7 @@ MATCH void func_801EED04(void) {
     u32          i;
     u32          slot;
 
-    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
-        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
-    }
+    BMAGIC_CLEAR_EFFECTS(i);
     func_801F0670();
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;

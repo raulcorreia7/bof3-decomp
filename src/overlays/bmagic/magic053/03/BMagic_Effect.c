@@ -30,11 +30,7 @@ MATCH void func_801EED18(void) {
     s32          i;
     u8           slot;
 
-    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
-        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
-    }
+    BMAGIC_CLEAR_EFFECTS(i);
     Battle_CenterCamera();
     Battle_ProjectRange();
     if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {

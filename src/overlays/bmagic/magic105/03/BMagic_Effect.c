@@ -33,11 +33,7 @@ MATCH void func_801EED1C(void) {
     u8           i;
     u8           slot;
 
-    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
-        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
-    }
+    BMAGIC_CLEAR_EFFECTS(i);
     Battle_CenterCamera();
     g_Task->facing = g_BattleEffectBattler->facing;
     g_Task->unk_0C = -0x80000;

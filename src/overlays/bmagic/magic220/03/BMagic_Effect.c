@@ -13,11 +13,7 @@ NON_MATCHING void func_801EED18(void) {
     u32  slot;
     s32  i;
 
-    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
-        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
-    }
+    BMAGIC_CLEAR_EFFECTS(i);
     Battle_CenterCamera();
     g_Task->pos.x.fixed  = g_AreaScrollTargetX;
     g_Task->unk_09       = 0x38;

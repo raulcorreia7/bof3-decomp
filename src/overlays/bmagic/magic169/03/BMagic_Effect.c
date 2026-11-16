@@ -34,11 +34,7 @@ MATCH void func_801EED8C(void) {
     u16* dst;
     u16  i;
 
-    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
-        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
-    }
+    BMAGIC_CLEAR_EFFECTS(i);
     func_800AFD9C();
     g_Task->pos.z.fixed += TO_COORD(192);
     BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);

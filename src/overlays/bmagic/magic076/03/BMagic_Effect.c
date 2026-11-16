@@ -32,11 +32,7 @@ MATCH void func_801EED48(void) {
     u16          i;
     u8           slot;
 
-    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
-        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
-    }
+    BMAGIC_CLEAR_EFFECTS(i);
     g_Task->unk_04       = func_801EF2E8();
     actor                = g_Battle.selected_actor;
     g_Task->facing       = actor->facing;

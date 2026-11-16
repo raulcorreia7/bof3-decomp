@@ -32,11 +32,7 @@ MATCH void func_801EED30(void) {
     u32          slot;
     u8           i;
 
-    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
-        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
-    }
+    BMAGIC_CLEAR_EFFECTS(i);
     for (i = 0; i < 11; i++) {
         D_801F0FD4[i] = 0;
     }

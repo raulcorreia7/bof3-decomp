@@ -16,11 +16,7 @@ MATCH void func_801EED04(void) {
     u8 battler;
 
     g_Task->param.unk_0B = 0;
-    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
-        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
-    }
+    BMAGIC_CLEAR_EFFECTS(i);
     if (g_Battle.target_selector & 0x40) {
         for (i = 0; i < 8; i++) {
             battler = i + BATTLE_PARTY_CHARACTERS_COUNT;

@@ -36,11 +36,7 @@ MATCH void func_801EEDD8(void) {
     u32          slot;
     u32          i;
 
-    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
-        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
-    }
+    BMAGIC_CLEAR_EFFECTS(i);
     g_Task->facing = g_BattleEffectBattler->facing;
     WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
     Battle_ProjectRange();
