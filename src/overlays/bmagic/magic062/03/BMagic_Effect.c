@@ -44,9 +44,7 @@ MATCH void func_801EEC94(void) {
         g_BattleEffects[slot].unk_0A       = g_Task->unk_09;
         g_Task->param.unk_0B += 1;
     }
-    i   = 0;
-    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
-    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
     for (; i < 16; i++) {
         dst[i]      = src[i];
         dst[i + 16] = src[i + 16];

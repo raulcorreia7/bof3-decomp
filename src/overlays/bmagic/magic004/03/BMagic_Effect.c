@@ -45,9 +45,7 @@ MATCH void func_801EEC98(void) {
     g_Task->param.unk_0B++;
     g_BattleEffectBattler->header.flags |= ACTOR_FLAG_HIDDEN;
     g_Battle.state |= BATTLE_STATE_DAMAGE_APPLIED;
-    i   = 0;
-    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
-    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
     for (; i < 256; i++) {
         *dst++ = *src++;
     }
