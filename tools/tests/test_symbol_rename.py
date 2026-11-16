@@ -375,3 +375,24 @@ def test_a_layout_row_outside_the_scope_is_refused(repo: Path) -> None:
     with pytest.raises(SystemExit, match="names Old; add its folder to --scope"):
         symbol.main(["rename", "Old", "New", "--scope", "src/a", "include"])
     assert snapshot(repo) == before
+
+
+def test_a_local_rename_keeps_the_other_image(repo: Path) -> None:
+    (repo / "src/b").mkdir()
+    (repo / "src/b/Old.c").write_text("MATCH void Old(void) {}\n")
+    (repo / "config/exe/b").mkdir(parents=True)
+    (repo / "config/exe/b/splat.yaml").write_text("- [0x0, c, Old]\n")
+    (repo / "config/symbols.toml").write_text(
+        '["exe/a"]\nOld = { addr = 0x80000000, type = "func" }\n'
+        '\n["exe/b"]\nOld = { addr = 0x80010000, type = "func" }\n'
+    )
+    symbol.git("add", "-A")
+    assert symbol.main(["rename", "Old", "New", "--image", "exe/a", "--local"]) == 0
+    assert (repo / "src/a/New.c").is_file()
+    assert not (repo / "src/a/Old.c").exists()
+    assert (repo / "src/b/Old.c").read_text() == "MATCH void Old(void) {}\n"
+    assert "[0x0, c, New]" in (repo / "config/exe/a/splat.yaml").read_text()
+    assert "[0x0, c, Old]" in (repo / "config/exe/b/splat.yaml").read_text()
+    tables = tomllib.loads((repo / "config/symbols.toml").read_text())
+    assert set(tables["exe/a"]) == {"New"}
+    assert set(tables["exe/b"]) == {"Old"}
