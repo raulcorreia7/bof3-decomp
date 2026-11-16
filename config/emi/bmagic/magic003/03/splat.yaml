@@ -23,7 +23,7 @@ segments:
       - [0x1EA0, bin, D_801F0AA0]
       - [0x1ED4, bin, D_801F0AD4]
       - [0x1ED8, bin, D_801F0AD8]
-      - [0x1F00, bin, D_801F0B00]
+      - [0x1F00, bin, g_BMagicEffectModes]
       - [0x1F04, bin, D_801F0B04]
       - [0x1F10, bin, D_801F0B12]
       - [0x1F14, bin, D_801F0B16]

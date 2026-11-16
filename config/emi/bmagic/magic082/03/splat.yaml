@@ -20,7 +20,7 @@ segments:
       - [0x20CC, bin, D_801F0CCE]
       - [0x20FC, bin, D_801F0CFE]
       - [0x2108, bin, D_801F0D0A]
-      - [0x2114, bin, D_801F0D14]
+      - [0x2114, bin, g_BMagicEffectModes]
       - [0x211C, bin, D_801F0D1C]
       - [0x2128, bin, D_801F0D28]
   - [0x2140]
