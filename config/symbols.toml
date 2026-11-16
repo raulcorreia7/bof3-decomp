@@ -5746,6 +5746,8 @@ Actor_SlideScreenDown16 = { addr = 0x801F38A4, type = "func", source = "Subtract
 Area_Update = { addr = 0x801F3914, type = "func", source = "Sets header.step (byte 0x02) to 3 when D_801454F2 is 2, then draws the area HUD at the actor screen_x with Area_DrawHud." }
 func_801F4158_area168 = { addr = 0x801F4158, type = "func", source = "mechanical disambiguation of the cross-image address-name collision with the area.h func_801F4158 edge_cross declaration (coordinator instruction)" }
 Message_ClearRequest = { addr = 0x801F4808, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 0 and g_SceneEventSelection to AREA_RESET_VARIANT." }
+D_801F4B2D = { addr = 0x801F4B2D, type = "u8", source = "D_801F4B2C+0x1", alias = true }
+D_801F4B2E = { addr = 0x801F4B2E, type = "u8", source = "D_801F4B2C+0x2", alias = true }
 
 ["emi/world04/area169/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
