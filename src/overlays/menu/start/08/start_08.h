@@ -469,6 +469,9 @@ extern u8              D_801ED890;
 extern u8              D_801ED891;
 extern u8              s_ChoiceMenuValues[8];
 extern u8              s_ChoiceMenuCursors[12];
+/* The g_SndMono byte under a plain view of its own (an alias row); the
+ * settings step reads and writes it through one pointer. */
+extern u8              g_SndMono_nv;
 extern u8              s_SkillOrderCursors[4][4];
 extern u8              s_SkillOrderGroups[4][6];
 extern u8              s_SkillOrderKinds[3][6];
@@ -523,7 +526,9 @@ void        func_801D4FCC(void);
 void        func_801D5114(void);
 extern void func_801D528C(void);
 void        func_801D52AC(void);
+void        func_801D6AC4(u8 character);
 void        func_801D6E6C(void);
+void        func_801D6FBC(void);
 bool        func_801D70EC(void);
 void        func_801D7204(void);
 void        func_801D8CC8(void);

@@ -68,7 +68,7 @@ segments:
       - [0x29B8, c, func_801F15B8]
       - [0x29F8, c, func_801F15F8]
       - [0x2A38, c, func_801F1638]
-      - [0x2A84, c, func_801F1684]
+      - [0x2A84, c, Scene_ClearEventState]
       - [0x2ABC, c, Fairy_RunCommu01Scene]
       - [0x2AF8, c, func_801F16F8]
       - [0x2B70, c, Fairy_LoadCommu01]

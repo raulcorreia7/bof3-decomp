@@ -15,6 +15,7 @@
 /* The scratchpad work pointer the palette pass reads. */
 /* The state handler banks the step dispatchers index. */
 extern u8 D_801F3DFC[];
+extern s8 D_801F43B0[];
 
 /* A scene seed: the scene record the actor selects, the script it starts and
  * four bytes the entry does not read. */
@@ -36,6 +37,8 @@ extern Callback D_801F4324[17];
 extern u8       D_801F4368[];
 
 extern Callback D_801F43EC[];
+/* The spark trail the spawn starts. */
+extern u8       D_801F43C0[];
 
 /* The state update's fallback handler. */
 /* The image's setup pass. */

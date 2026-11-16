@@ -21,7 +21,7 @@ MATCH void Scene_InitTaskArea(void) {
 }
 
 MATCH void func_801F6FCC(void) {
-    func_801F71B0(g_Task->timer);
+    Scene_DrawLightPillar(g_Task->timer);
     if (g_FrameCount & 0x1) {
         Area_AddSpark();
     }
@@ -34,7 +34,7 @@ MATCH void func_801F6FCC(void) {
 }
 
 MATCH void func_801F7078(void) {
-    func_801F71B0(0xFF);
+    Scene_DrawLightPillar(0xFF);
     if (g_FrameCount & 0x1) {
         Area_AddSpark();
     }
@@ -46,7 +46,7 @@ MATCH void func_801F7078(void) {
 }
 
 MATCH void func_801F7100(void) {
-    func_801F71B0(g_Task->timer);
+    Scene_DrawLightPillar(g_Task->timer);
     Scene_GetZFixed();
     g_Task->timer = (g_Task)->timer - 4;
     if (g_Task->timer == 0) {
@@ -60,7 +60,64 @@ MATCH void func_801F717C(void) {
     }
 }
 
-INCLUDE_ASM(func_801F71B0);
+/* Draws a pillar of light at the task's position: thirty-two semi-transparent Gouraud quads between a ring at the
+ * task's radius and the same ring higher up, dimmed by fade. */
+/* func_801F71B0 */
+MATCH void Scene_DrawLightPillar(u8 fade) {
+    DVECTOR  last_inner;
+    DVECTOR  last_outer;
+    DVECTOR  inner;
+    DVECTOR  outer;
+    s32      point[3];
+    MATRIX   matrix;
+    POLY_G4* prim;
+    s32      angle;
+    s32      shade;
+    u32      color;
+    u8       i;
+
+    Area_SetCameraMatrix(&matrix);
+    angle    = 0;
+    point[0] = g_Task->pos.x.fixed + (((s16)g_Task->screen_x * rcos(0)) >> 4);
+    point[1] = g_Task->pos.y.fixed + (((s16)g_Task->screen_x * rsin(0)) >> 4);
+    point[2] = g_Task->pos.z.fixed;
+    Area_ProjectPoint(point, &inner);
+    point[2] = g_Task->pos.z.fixed + TO_COORD((s16)g_Task->screen_y);
+    Area_ProjectPoint(point, &outer);
+    shade = ((g_FrameCount & 1) << 2) | 0x40;
+    for (i = 0; i < 32; i++) {
+        last_inner = inner;
+        last_outer = outer;
+        angle += 0x80;
+        point[0] = g_Task->pos.x.fixed + (((s16)g_Task->screen_x * rcos((u16)angle)) >> 4);
+        point[1] = g_Task->pos.y.fixed + (((s16)g_Task->screen_x * rsin((u16)angle)) >> 4);
+        point[2] = g_Task->pos.z.fixed;
+        Area_ProjectPoint(point, &inner);
+        point[2] = g_Task->pos.z.fixed + TO_COORD((s16)g_Task->screen_y);
+        Area_ProjectPoint(point, &outer);
+
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 960, 0), 0);
+        if ((u8)(i - 11) >= 17) {
+            GFX_AddPrim(1, 12);
+        }
+        prim = GFX_BeginPolyG4(1);
+        setXY4(prim, last_inner.vx, last_inner.vy, last_outer.vx, last_outer.vy, inner.vx, inner.vy, outer.vx, outer.vy);
+        color = (u32)(fade * (u8)shade) >> 8;
+        setRGB0(prim, color, color, color);
+        setRGB1(prim, color, color, color);
+        if ((u8)(i - 8) >= 16) {
+            shade += 8;
+        } else {
+            shade -= 8;
+        }
+        color = (u32)(fade * (u8)shade) >> 8;
+        setRGB2(prim, color, color, color);
+        setRGB3(prim, color, color, color);
+        if ((u8)(i - 11) >= 17) {
+            GFX_AddPrim(1, 36);
+        }
+    }
+}
 
 MATCH void func_801F752C(AreaSpark* spark) {
     DVECTOR screen;
@@ -714,7 +771,35 @@ MATCH void func_801F9CE8(void) {
 
 INCLUDE_ASM(func_801F9CFC);
 
-INCLUDE_ASM(func_801FA6BC);
+MATCH void func_801FA6BC(u8 point) {
+    u8  slot;
+    s32 row;
+    s32 x;
+    s32 y;
+
+    Game_SetScriptActive();
+    g_ScriptVars[0] = 1;
+    slot            = Actor_FindFreeSpawned();
+    D_801FE748      = slot;
+    if (slot != GAME_NONE) {
+        g_SpawnedActors[slot].header.flags = 1;
+        g_SpawnedActors[D_801FE748].type   = 0x89;
+        g_SpawnedActors[D_801FE748].link   = point;
+    }
+    row                 = point * 10;
+    g_AreaScrollTargetX = LOH(D_801FE608[row]) << 8;
+    g_AreaScrollTargetY = LOH(D_801FE608[row + 2]) << 8;
+    func_80153DE8();
+    g_Game.unk_3CE[2] = 0;
+    func_801BE1B0(0);
+    x = LOH(D_801FE608[row + 4]) << 8;
+    y = LOH(D_801FE608[row + 6]) << 8;
+    g_Game.walk_flags &= ~AREA_WALK_ACCEPT_LOCK;
+    func_801BFE34(x, y, D_801FE608[row + 9]);
+    g_AreaDrawMode        = 4;
+    g_SceneState.state_04 = 2;
+    g_SceneState.step_05  = 0;
+}
 
 #include "overlays/scenario/Scene_SpawnActor.h"
 
@@ -725,248 +810,4 @@ MATCH void func_801FA998(void) {
 }
 
 MATCH void func_801FA9D4(void) {
-}
-
-INCLUDE_ASM(func_801FA9DC);
-
-INCLUDE_ASM(func_801FADFC);
-
-INCLUDE_ASM(func_801FAFA8);
-
-INCLUDE_ASM(func_801FB788);
-
-MATCH void func_801FC100(void) {
-    u8 i;
-
-    for (i = 0; i < 3; i++) {
-        D_1F800000.view.area.entity_counter = Actor_FindFreeField();
-        if (D_1F800000.view.area.entity_counter != GAME_NONE) {
-            func_801A4D54(&D_801FE694[i * 17]);
-        }
-    }
-    for (i = 0; i < 2; i++) {
-        D_1F800000.view.area.entity_counter = Actor_FindFreeField();
-        if (D_1F800000.view.area.entity_counter != GAME_NONE) {
-            func_801A65A0(&D_801FE6C8[i * 16]);
-        }
-    }
-}
-
-INCLUDE_ASM(func_801FC1D8);
-
-INCLUDE_ASM(func_801FCA3C);
-
-INCLUDE_ASM(func_801FCBAC);
-
-MATCH void func_801FDB84(void) {
-    if (D_801FE74C == 0) {
-        g_ScriptVars[1] = 1;
-        D_801FE74C      = (RANDOM_MOD(38) + 42) / 2;
-    } else {
-        D_801FE74C--;
-    }
-}
-
-MATCH void func_801FDC10(s32 shift) {
-    s32 offset;
-
-    if (D_801FE750 != 0) {
-        offset                   = D_801FE6E8[g_FrameCount & 0x3];
-        g_AreaCameraRefreshCount = 2;
-        g_AreaCameraOffsetY += offset << shift;
-    }
-}
-
-MATCH s32 func_801FDC6C(s32 x, s32 y, s32 unk_06, s32 unk_07, u8 link) {
-    u8 slot;
-
-    slot = Actor_FindFreeSpawned();
-    if (slot != GAME_NONE) {
-        g_SpawnedActors[slot].header.flags = 1;
-        g_SpawnedActors[slot].pos.x.fixed  = x;
-        g_SpawnedActors[slot].type         = 0x9E;
-        g_SpawnedActors[slot].pos.y.fixed  = y;
-        g_SpawnedActors[slot].pos.z.fixed  = (Area_SampleHeight(g_SpawnedActors[slot].pos.x.fixed, y) << 16) + TO_COORD(512);
-        g_SpawnedActors[slot].unk_06       = unk_06;
-        g_SpawnedActors[slot].unk_07       = unk_07;
-        g_SpawnedActors[slot].link         = link;
-        return 1;
-    }
-    return 0;
-}
-
-#include "overlays/scenario/Scene_DispatchActor.h"
-
-/* func_801FDDC0 */
-MATCH void Scene_ShowEntityMessage(void* entity) {
-    u8 message;
-
-    message = D_801FE71C[((Actor*)entity)->callback_index];
-    if (g_GameAreaId == AREA_ID_DESERT_CAMP_SECOND) {
-        Message_StartAreaMessage(func_801F326C(message));
-    } else {
-        Message_StartAreaMessage(func_801F37AC(message));
-    }
-    g_GameStateIndex = GAME_REQUEST_MESSAGE;
-}
-
-MATCH void func_801FDE2C(void) {
-    Game_SetScriptActive();
-    g_SceneState.state_04 = 3;
-    g_SceneState.step_05  = 0x32;
-}
-
-MATCH void func_801FDE64(void* entity) {
-    Actor* actor;
-
-    actor = entity;
-    Game_SetScriptActive();
-    SYS_SetFlag(g_SceneFlags, 13);
-    func_801BE1B0(11);
-    actor->unk_7E = actor->unk_7E + 1;
-}
-
-MATCH void func_801FDEB4(void* entity) {
-    Actor* actor;
-
-    actor = entity;
-    Game_SetScriptActive();
-    SYS_SetFlag(g_SceneFlags, 14);
-    func_801BE1B0(12);
-    actor->unk_7E = actor->unk_7E + 1;
-}
-
-MATCH void func_801FDF04(void* entity) {
-    Actor* actor;
-
-    actor = entity;
-    Game_SetScriptActive();
-    SYS_SetFlag(g_SceneFlags, 12);
-    actor->unk_7E = actor->unk_7E + 1;
-}
-
-MATCH void func_801FDF4C(void* entity) {
-    Actor* actor;
-
-    actor = entity;
-    Game_SetScriptActive();
-    SYS_SetFlag(g_SceneFlags, 16);
-    func_801BE1B0(14);
-    actor->unk_7E = actor->unk_7E + 1;
-}
-
-MATCH void func_801FDF9C(void* entity) {
-    Actor* actor;
-
-    actor = entity;
-    Game_SetScriptActive();
-    SYS_SetFlag(g_SceneFlags, 15);
-    func_801BE1B0(13);
-    actor->unk_7E = actor->unk_7E + 1;
-}
-
-MATCH void func_801FDFEC(void* entity) {
-    Actor* actor;
-
-    actor = entity;
-    Game_SetScriptActive();
-    actor->unk_7E = actor->unk_7E + 1;
-}
-
-MATCH s32 func_801FE024(s32 x, s32 y) {
-    if (g_GameAreaId == AREA_ID_MYRIA_STATION_AFTER_SAMPLES) {
-        if (D_80143F03 == 1) {
-            if (SYS_TestFlag(g_SceneFlags, 1) == 0 && y > TO_COORD(71)) {
-                Game_SetScriptActive();
-                g_SceneState.state_04 = 3;
-                g_SceneState.step_05  = 15;
-            }
-        }
-        if (D_80143F03 == 2) {
-            if (SYS_TestFlag(g_SceneEventFlags, 0x81) == 0 && (x >> 16) >= 45 && (u32)((y >> 16) - 120) < 8) {
-                Game_SetScriptActive();
-                g_SceneState.state_04 = 3;
-                g_SceneState.step_05  = 0;
-            }
-        }
-    }
-    if (g_GameAreaId == AREA_ID_MYRIA_STATION_MYRIA_ROOM && D_80143F03 == 0 && x == TO_COORD(65) + COORD_HALF && (u32)((y >> 16) - 34) < 3) {
-        Game_SetScriptActive();
-        g_SceneState.state_04 = 4;
-        g_SceneState.step_05  = 0;
-        return 1;
-    }
-    return 0;
-}
-
-MATCH s32 func_801FE18C(s32 x, s32 y) {
-    if (g_GameAreaId == 0xAE) {
-        if (SYS_TestFlag(g_SceneFlags, 2) == 0) {
-            if (x > 4456447 && (u32)((y >> 16) - 3) < 2) {
-                Game_SetScriptActive();
-                g_SceneState.state_04 = 3;
-                g_SceneState.step_05  = 0x14;
-            }
-            return 0;
-        }
-        if (SYS_TestFlag(g_SceneFlags, 4) == 0) {
-            if (x <= 5439488 && (u32)((y >> 16) - 0x2E) < 3) {
-                Game_SetScriptActive();
-                g_SceneState.state_04 = 3;
-                g_SceneState.step_05  = 0x1E;
-            }
-            return 0;
-        }
-        if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
-            if (y <= 3801088 && (u32)((x >> 16) - 0x23) < 4) {
-                Game_SetScriptActive();
-                g_SceneState.state_04 = 3;
-                g_SceneState.step_05  = 0x28;
-            }
-            return 0;
-        }
-        if (x == 3211264 && (u32)((y >> 16) - 0x27) < 2) {
-            if (SYS_TestFlag(g_SceneFlags, 12) && SYS_TestFlag(g_SceneFlags, 14) && SYS_TestFlag(g_SceneFlags, 13) && SYS_TestFlag(g_SceneFlags, 15) && SYS_TestFlag(g_SceneFlags, 16)) {
-                Game_SetScriptActive();
-                g_SceneState.state_04 = 5;
-                g_SceneState.step_05  = 5;
-            } else {
-                Game_SetScriptActive();
-                g_SceneState.state_04 = 5;
-                g_SceneState.step_05  = 0;
-            }
-        }
-    }
-    return 0;
-}
-
-MATCH void func_801FE3C8(void) {
-    u8 ids[PARTY_SLOT_COUNT];
-    u8 slot;
-
-    for (slot = 0; slot < g_PartySize; slot++) {
-        ids[slot] = g_Game.members[slot].chr.character_id;
-    }
-    for (slot = 0; slot < PARTY_SLOT_COUNT; slot++) {
-        Party_RemoveMember(ids[slot]);
-    }
-    EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_GARR, 0);
-    g_PartySize = 0;
-    Party_JoinMember(CHAR_ID_RYU_ADULT);
-    Party_LoadPalettes();
-}
-
-MATCH void func_801FE49C(void) {
-    Party_JoinMember(CHAR_ID_REI);
-    Party_JoinMember(CHAR_ID_GARR);
-    Party_LoadPalettes();
-}
-
-MATCH void Scene_SetPartyRyuAdultNinaAdultGarr(void) {
-    SCENE_SET_PARTY(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_GARR);
-}
-
-#include "overlays/scenario/Scene_SetPartyRyuAdultNinaAdultRei.h"
-
-MATCH void func_801FE574(void) {
 }

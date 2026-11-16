@@ -202,7 +202,57 @@ MATCH void func_801EF470(u8 item_id, u8 category, s32 y) {
     }
 }
 
-INCLUDE_ASM(func_801EF590);
+MATCH void func_801EF590(u8* text, s32 x, s32 y) {
+    POLY_FT4* prim;
+    s32       mode;
+    s32       x1;
+    s32       y1;
+    s32       i;
+    s32       code;
+    s16       u;
+    s16       v;
+
+    if (GetGraphType() == 1) {
+        mode = 0x25;
+    } else if (GetGraphType() == 2) {
+        mode = 0x25;
+    } else {
+        mode = 0x15;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mode, 0);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    if (*text == 0) {
+        return;
+    }
+    i  = 0;
+    y1 = y + 0xC;
+    while (*text != 0 && i < 12) {
+        prim = GFX_CURSOR(POLY_FT4);
+        SetPolyFT4(prim);
+        x1 = x + 8;
+        setXY4(prim, x, y, x1, y, x, y1, x1, y1);
+        setRGB0(prim, 0x80, 0x80, 0x80);
+        setTPage(prim, 0, 1, 0x3C0, 0);
+        setClut(prim, 0, 0x1E0);
+        code     = *text - 0x30;
+        u        = (code % 31) * 8;
+        v        = (code / 31) * 12 + 0x48;
+        prim->u0 = u;
+        prim->v0 = v;
+        prim->v1 = v;
+        prim->u1 = u + 8;
+        prim->u2 = u;
+        prim->v2 = v + 0xC;
+        prim->u3 = u + 8;
+        prim->v3 = v + 0xC;
+        if (*text != 0xFF) {
+            GFX_AddPrim(2, sizeof(POLY_FT4));
+        }
+        i++;
+        text++;
+        x = x1;
+    }
+}
 
 MATCH void func_801EF76C(u8* text, s32 x, s32 y) {
     POLY_FT4* prim;

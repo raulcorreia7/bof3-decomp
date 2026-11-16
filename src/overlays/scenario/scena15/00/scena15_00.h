@@ -30,7 +30,8 @@ extern Callback D_801FE5A0[];
 extern Callback D_801FE5B0[];
 extern Callback D_801FE5C0[];
 
-void             func_801F71B0(u8 arg);
+/* func_801F71B0 */
+void             Scene_DrawLightPillar(u8 fade);
 void             func_801F752C(AreaSpark* spark);
 /* func_801F75D8 */
 void             Area_AddSpark(void);
@@ -54,6 +55,12 @@ extern u8        D_801FE71C[];
 /* The scene band's velocity. */
 extern Point3l   D_801FE738;
 extern u8        D_801FE748;
+extern u8        D_801FE608[];
+extern u8        D_80144EF8[];
+extern u8        D_80143F1D;
+extern u16       D_80144F54;
+extern s8        D_8014504A;
+extern s8        D_8014504B;
 extern u8        D_801FE74C;
 void             func_801F8958(void);
 void             func_801F9020(Coord* position, s32* step);

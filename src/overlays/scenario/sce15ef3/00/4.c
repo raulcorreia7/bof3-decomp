@@ -218,6 +218,7 @@ MATCH void func_801D16BC(void) {
     Actor_Clear();
 }
 
+/* kept: retail steps the row and tail pointers apart; a SpriteSpark walk changes the bytes. */
 MATCH void func_801D16DC(void) {
     s32   index;
     s8*   row;
@@ -302,7 +303,7 @@ MATCH s32 func_801D18CC(void) {
         }
         spark++;
         i++;
-    } while (i < 256);
+    } while (i < SPRITE_SPARK_COUNT);
     return active;
 }
 
