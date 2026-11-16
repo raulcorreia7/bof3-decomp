@@ -28,7 +28,10 @@ void        func_801F4138(s16 x, s16 y, s16 radius, s16 color0, s16 color1);
 void        func_801F47F0(void);
 void        func_801F4E8C(s32 x, s32 y);
 
-extern u8 D_80144EF8[];
+/* The palette counters the fade advances, one 12-byte row per palette index. */
+extern u8  D_80145BD6[];
+/* The height the scroll advance follows. */
+extern s32 D_80143F84;
 
 #define AREA_SPAWN_SLOT_LIFE        0x20
 #define AREA_SPAWN_SLOT_RADIUS      0x180

@@ -1,3 +1,59 @@
 #include "area080_13.h"
 
-INCLUDE_ASM(Area_DrawSpark);
+MATCH void Area_DrawSpark(AreaSparkSlot* spark) {
+    CVECTOR  color;
+    CVECTOR  delta;
+    MATRIX   camera;
+    LINE_F2* line;
+    POLY_G4* poly;
+    s8       i;
+
+    GFX_AddDitheredDrawMode(1, GetTPage(0, 1, 0x3C0, 0));
+    Area_SetCameraMatrix(&camera);
+    i = 2;
+    do {
+        spark->origin_trail[i + 1] = spark->origin_trail[i];
+        spark->pos_trail[i + 1]    = spark->pos_trail[i];
+        i--;
+    } while (i >= 0);
+    Area_ProjectPoint(&spark->origin.x.fixed, &spark->origin_trail[0]);
+    Area_ProjectPoint(&spark->pos.x.fixed, &spark->pos_trail[0]);
+
+    delta = spark->color;
+    color = delta;
+    delta.r >>= 2;
+    delta.g >>= 2;
+    delta.b >>= 2;
+
+    line = (LINE_F2*)g_GfxPrimCursor;
+    SetLineF2(line);
+    SetSemiTrans(line, 1);
+    line->x0 = spark->origin_trail[0].vx;
+    line->y0 = spark->origin_trail[0].vy;
+    line->x1 = spark->pos_trail[0].vx;
+    line->y1 = spark->pos_trail[0].vy;
+    setRGB0(line, color.r, color.g, color.b);
+    GFX_AddPrim(1, sizeof(LINE_F2));
+
+    for (i = 0; i < 3; i++) {
+        poly = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(poly);
+        SetSemiTrans(poly, 1);
+        poly->x0 = spark->origin_trail[i].vx;
+        poly->y0 = spark->origin_trail[i].vy;
+        poly->x1 = spark->pos_trail[i].vx;
+        poly->y1 = spark->pos_trail[i].vy;
+        setRGB0(poly, color.r, color.g, color.b);
+        setRGB1(poly, color.r, color.g, color.b);
+        color.r -= delta.r;
+        color.g -= delta.g;
+        color.b -= delta.b;
+        poly->x2 = spark->origin_trail[i + 1].vx;
+        poly->y2 = spark->origin_trail[i + 1].vy;
+        poly->x3 = spark->pos_trail[i + 1].vx;
+        poly->y3 = spark->pos_trail[i + 1].vy;
+        setRGB2(poly, color.r, color.g, color.b);
+        setRGB3(poly, color.r, color.g, color.b);
+        GFX_AddPrim(1, sizeof(POLY_G4));
+    }
+}
