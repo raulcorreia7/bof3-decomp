@@ -981,7 +981,7 @@ MATCH void func_801D437C(void) {
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D448C(void) {
     s32 selected;
-    u8  value;
+    s8  value;
 
     selected = (s8)D_801DB0B4;
     if (selected == 8) {
@@ -1762,7 +1762,7 @@ MATCH void func_801D708C(void) {
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D7234(void) {
     s32 drawn;
-    u32 i;
+    s32 i;
     u8  step;
     u8  drawn_index;
     s32 remaining;
@@ -2348,7 +2348,33 @@ INCLUDE_ASM(Menu_DrawHeaderBar);
 
 #include "shared/Menu_DrawPortrait.h"
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D90D8(s32 x, s32 y, s32 character, s32 frame_mode) {
+    s32 index;
+    s32 x_copy;
+    s32 y_copy;
+    u8* window_style;
+    u8* text;
+
+    window_style = &g_WindowStyle;
+    UI_DrawWindow((u16)(x + 3), (u16)(y + 3), 0x7D, 0x2D, 0, *window_style);
+    character = (u8)character;
+    index     = ((((character << 2) + character) << 3) + character) << 2;
+    Menu_DrawPortrait((u16)(x + 6), (u16)(y + 2), ((Character*)((u8*)g_Characters + index))->character_id, 0);
+    x_copy     = x;
+    y_copy     = y;
+    frame_mode = (u8)frame_mode;
+    if ((u8)frame_mode == 0) {
+        text = window_style + 0x16 + index;
+    } else {
+        text = D_801DB080;
+    }
+    UI_DrawText((s16)(x + 0x3B), (s16)(y + 0x19), 0, 5, text);
+    func_801AF390((s16)x_copy, (s16)y_copy, g_MenuPortraitAtlas + 0x24, 0);
+}
+#else
 INCLUDE_ASM(func_801D90D8);
+#endif
 
 MATCH void func_801D9210(void) {
     s32 drawn;
@@ -2397,7 +2423,6 @@ NON_MATCHING void func_801D9348(s32 x, s32 y, s32 color, s32 frame_mode) {
     u8       base;
     u8       i;
     s32      width_copy;
-    s32      bit;
     s32      state;
     s32      mask;
     LINE_F3* line3;
@@ -2417,8 +2442,8 @@ NON_MATCHING void func_801D9348(s32 x, s32 y, s32 color, s32 frame_mode) {
     }
 
     mask = (u8)frame_mode;
-    for (bit = 1, i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++, bit <<= 1) {
-        if (bit & mask) {
+    for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
+        if ((mask >> i) & 1) {
             rgb[i] = base;
         } else {
             rgb[i] = 0;
@@ -2526,9 +2551,9 @@ NON_MATCHING void func_801D97C8(s32 unused, s32 x, s32 y) {
     s32              tpage;
     s32              left;
 
-    left = x;
-    UI_DrawWindow((u16)(x + 3), (u16)(y + 3), 0x4D, 0x2F, 0, g_WindowStyle);
+    left   = x;
     labels = D_801DB038;
+    UI_DrawWindow((u16)(x + 3), (u16)(y + 3), 0x4D, 0x2F, 0, g_WindowStyle);
     for (row = 0; row < 5; row++) {
         UI_DrawTextString((s16)(x + 0x2A), (s16)(y + (row * 8) + 6), 0, 0x10, labels[row]);
     }
@@ -2680,7 +2705,7 @@ NON_MATCHING s8 func_801DA114(void) {
     u8* row;
     u8* cell;
     s32 col;
-    s8  i;
+    s32 i;
     s32 count;
     u16 pad;
 
@@ -2799,12 +2824,12 @@ NON_MATCHING s8 func_801DA114(void) {
     if (g_InputPressed & 0x800) {
         SND_PlayCue(0x104);
         count = 5;
-        for (i = 4; i >= 0 && D_801DB080[i] == 0xFF; i--) {
+        for (i = 4; (s8)i >= 0 && D_801DB080[(s8)i] == 0xFF; i--) {
             count -= 1;
         }
         if ((u16)count < 5) {
-            for (i = 4; i >= 0 && D_801DB080[i] == 0xFF; i--) {
-                D_801DB080[i] = 0;
+            for (i = 4; (s8)i >= 0 && D_801DB080[(s8)i] == 0xFF; i--) {
+                D_801DB080[(s8)i] = 0;
             }
         }
         D_801F294E += 1;
