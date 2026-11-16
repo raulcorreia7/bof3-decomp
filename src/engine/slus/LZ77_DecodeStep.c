@@ -29,11 +29,11 @@
 /* Resume states; the original stores state * 4 as a byte offset into the
  * absolute case-address table at 0x801640C0. */
 typedef enum Lz77DecoderState {
-    DECODER_MAIN           = 0,  /* read a fresh control byte */
-    DECODER_MATCH_OFFSET   = 4,  /* control byte saved; distance byte pending */
-    DECODER_LITERAL_TAIL   = 8,  /* literal run cut short by the window end */
-    DECODER_MATCH_LENGTH   = 12, /* long match; length byte pending */
-    DECODER_LITERAL_LENGTH = 16  /* 16-byte literal; length byte pending */
+    LZ77_DECODER_MAIN           = 0,  /* read a fresh control byte */
+    LZ77_DECODER_MATCH_OFFSET   = 4,  /* control byte saved; distance byte pending */
+    LZ77_DECODER_LITERAL_TAIL   = 8,  /* literal run cut short by the window end */
+    LZ77_DECODER_MATCH_LENGTH   = 12, /* long match; length byte pending */
+    LZ77_DECODER_LITERAL_LENGTH = 16  /* 16-byte literal; length byte pending */
 } Lz77DecoderState;
 
 /* Copy kernel: copies count bytes forward and returns the advanced
@@ -54,25 +54,25 @@ HAND_ASM s32 LZ77_DecodeStep(void) {
     limit = ctx->limit;
 
     switch (ctx->state) {
-        case DECODER_MATCH_OFFSET:
+        case LZ77_DECODER_MATCH_OFFSET:
             src  = (u8*)SCRATCH_PAD;
             ctrl = ctx->pending;
             goto match_offset; /* resume with the saved control byte */
-        case DECODER_LITERAL_TAIL:
+        case LZ77_DECODER_LITERAL_TAIL:
             /* the remainder of a literal run: the original copies it straight from
              * the refilled window without re-checking the limit */
             src = (u8*)SCRATCH_PAD;
             len = ctx->pending;
             dst = func_801642F4(dst, src, len);
             src += len;
-            ctx->state = DECODER_MAIN;
+            ctx->state = LZ77_DECODER_MAIN;
             goto window_check; /* shared window-end test */
-        case DECODER_MATCH_LENGTH:
+        case LZ77_DECODER_MATCH_LENGTH:
             src   = (u8*)SCRATCH_PAD;
             match = ctx->src;
             len   = 15 + *src++;
             goto copy_match; /* resume with the long match length */
-        case DECODER_LITERAL_LENGTH:
+        case LZ77_DECODER_LITERAL_LENGTH:
             src = (u8*)SCRATCH_PAD;
             len = 16 + *src++;
             goto literal_run; /* resume with the long literal length */
@@ -83,14 +83,14 @@ HAND_ASM s32 LZ77_DecodeStep(void) {
 main_loop:
     ctrl = *src++;
     if ((ctrl & LZ77_CONTROL_LITERAL_FLAG) != 0) {
-        if (ctrl == 0xFF) {
+        if (ctrl == LZ77_CONTROL_END) {
             return 15;
         }
         len = 0x20 - (ctrl & LZ77_CONTROL_LITERAL_LENGTH_MASK);
         if (len == 16) {
             if (src == limit) {
                 ctx->dst   = dst;
-                ctx->state = DECODER_LITERAL_LENGTH;
+                ctx->state = LZ77_DECODER_LITERAL_LENGTH;
                 return 0;
             }
             len += *src++;
@@ -101,7 +101,7 @@ main_loop:
     if (src == limit) {
         ctx->pending = ctrl;
         ctx->dst     = dst;
-        ctx->state   = DECODER_MATCH_OFFSET;
+        ctx->state   = LZ77_DECODER_MATCH_OFFSET;
         return 0;
     }
 
@@ -112,7 +112,7 @@ match_offset:
         if (src == limit) {
             ctx->src   = match;
             ctx->dst   = dst;
-            ctx->state = DECODER_MATCH_LENGTH;
+            ctx->state = LZ77_DECODER_MATCH_LENGTH;
             return 0;
         }
         len += *src++;
@@ -130,19 +130,19 @@ literal_run:
             dst = func_801642F4(dst, src, len);
         }
         ctx->dst   = dst;
-        ctx->state = DECODER_LITERAL_TAIL;
+        ctx->state = LZ77_DECODER_LITERAL_TAIL;
         return 0;
     }
     dst = func_801642F4(dst, src, len);
     src += len;
-    ctx->state = DECODER_MAIN; /* the original clears the state here, mid-loop */
+    ctx->state = LZ77_DECODER_MAIN; /* the original clears the state here, mid-loop */
 
 window_check:
     if (src != limit) {
         goto main_loop; /* the window still has input */
     }
     ctx->dst   = dst;
-    ctx->state = DECODER_MAIN;
+    ctx->state = LZ77_DECODER_MAIN;
     ctx->src   = (u8*)SCRATCH_PAD;
     return 0;
 }
