@@ -68,6 +68,8 @@ void  Area_RunSetupStream(u8* cursor);
 void  Area_SetCellCode(s32 column, s32 row, u8 code);
 /* func_801A4D54 */
 void  func_801A4D54(u8* script);
+void  func_801A65A0(u8* script);
+void  func_801A6C98(u8* record);
 /* func_801A7330 */
 void  func_801A7330(const volatile u8* data);
 /* func_801A7704 */
@@ -93,8 +95,10 @@ void  Scene_DispatchObject(void* record);
 /* Area_MoveActorRoute */
 /* func_801ABBA8 */
 void  Area_MoveActorRoute(void* sub, s32 route);
+u8    func_801ABD68(s32 pos_x, s32 pos_y, s32 step_count, void* deltas);
 /* func_801AC1DC */
 void  func_801AC1DC(s32* out, u8 selector);
+void  Char_GetExp(s32 char_id);
 /* func_801AE214 */
 void  func_801AE214(s32 line_x, s32 line_y, s32 line_length, s32 line_mode);
 /* func_801AE3F0 */
@@ -117,8 +121,11 @@ void  UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
 s32   func_801AF390(s16 x, s16 y, u8* table, s32 flags);
 /* func_801AF390 */
 void  UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
+bool  Item_PassesTest(u8 test, u8 character_id, u8 category, u8 item_id);
 /* func_801AF5B0 */
 u8    func_801AF5B0(s32 item_category, s32 character_index, s32 ability_kind);
+void  func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
+void  func_801AFA1C(u8* marks, u8 thumb_top, s16 x, s16 y, u8 thumb_size, u8 total, u8 track_size);
 /* func_801AFD10 */
 s32   func_801AFD10(u8* column_counter, u8* row_offset, u8* row_flag, u8* position);
 /* func_801AFE18 */
@@ -152,6 +159,7 @@ void  Area_UpdateIdleActor(void);
 void  func_801BDAB8(void);
 /* func_801BDB7C */
 u8    Party_CountOrder(u8 order);
+u8    Party_CountOrder(u8 mode);
 /* func_801BDD58 */
 u8    func_801BDD58(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* record);
 /* Actor_FindInRange */
@@ -172,6 +180,7 @@ void  Party_BuildBattlers(u32 order);
 /* Party_LoadPalettes */
 /* func_801C1630 */
 void  Party_LoadPalettes(void);
+void  Char_RebuildPartyStats(void);
 /* func_801C187C */
 s32   Party_JoinMember(s32 char_id);
 /* Party_RemoveMember */
@@ -186,6 +195,8 @@ void  func_801C1E3C(s32 handler_index);
 void  func_801C2438(void);
 /* func_801C24D0 */
 void  func_801C24D0(void);
+void  func_801C2538(void);
+void  func_801C2710(void);
 /* func_801C29A0 */
 bool  func_801C29A0(s8 tuning_delta);
 /* func_801C2BEC */

@@ -40,9 +40,6 @@ static inline void Effect_CountUpTimer(void) {
     COORD_INT(g_BattleEffects[slot].pos.z) = COORD_INT(g_Task->pos.z);             \
     g_Task->header.mode += 1
 
-void func_8015D104(s32 slot, s32 amount);
-void SND_StartVolumeSweep(s32 voice);
-
 #define MAGIC113_STEP_COUNT 8
 
 typedef struct Magic113Steps {

@@ -93,9 +93,6 @@ void func_801F103C(void);
 extern u16 D_80149336;
 extern u8  D_8014933D;
 
-void Area_LoadCellRowsNext(void);
-void Area_LoadCellRowsPrev(void);
-void func_80154438(void);
 void BMagic_ProjectCell(s32 px, s32 py, AreaCell* out);
 
 #endif

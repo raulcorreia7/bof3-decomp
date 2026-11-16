@@ -137,8 +137,11 @@ void         UI_UpdateChoice(void);
 extern void  UI_DrawWaitMarker(s16 x, s16 y);
 /* func_801527E4 */
 extern void  Area_UpdateCamera(void);
+void         Area_LoadCellRowsPrev(void);
+void         Area_LoadCellRowsNext(void);
 /* func_80153DE8 */
 void         Area_InitMapRenderer(void);
+void         func_80154438(void);
 /* func_80154698 */
 extern void  Area_RefreshCellGrid(void);
 /* func_8015477C */
@@ -161,6 +164,7 @@ void         Area_StoreHeight(s32 x, s32 y, u8 value);
 s32          Area_SetCellPalette(s32 x, s32 y);
 /* func_80155218 */
 u8           Area_ClearCellPalette(s32 x, s32 y);
+void         Area_ClearCell(s32 x, s32 y);
 /* func_80155560 */
 extern s32   Area_ApplyTileToQuad(u32 part_word, void* prim, s32 mode);
 /* func_801558F0 */
@@ -209,6 +213,7 @@ void         Menu_ClearPanel(void);
 u8           Menu_OpenPanelTask(u8 panel_index, u8 handler_index);
 /* func_80158E50 */
 void         Menu_ResetPanelTasks(void);
+void         UI_DrawBoxOutline(s32 x, s32 y, u8 width, u8 height);
 /* func_8015A758 */
 void         Area_UpdateParty(void);
 void         func_8015B410(void* matrix);
@@ -260,12 +265,15 @@ void         Actor_ApplyVelocity(void);
 s32          Actor_FindFreeField(void);
 /* func_8015CA9C */
 u16          Actor_ReadState(void);
+s32          func_8015CC00(u8 id, s32 step, s32 selection, s32 x, s32 y, s32 z);
 /* func_8015CD00 */
 void         SND_Init(void);
 /* func_8015CE70 */
 extern void  SND_Start(void);
 /* func_8015CEBC */
 void         SND_Exit(void);
+void         func_8015D104(s32 slot, s32 amount);
+void         SND_StartVolumeSweep(s32 voice);
 /* func_8015D300 */
 void         SND_PlaySequence(u16 sep_slot, s32 sequence, s32 left_volume, s32 right_volume);
 /* func_8015D404 */
