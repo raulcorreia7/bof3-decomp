@@ -20,6 +20,9 @@ typedef struct OverlayHeader {
 
 ASSERT_SIZE(OverlayHeader, 0x4);
 
+/* The loaded overlay's leading word, one per EMI overlay. */
+extern OverlayHeader g_EmiOverlayHeader;
+
 typedef enum OverlayId {
     ETC_OVERLAY_START   = 18, /* START.EMI#8, start menu */
     ETC_OVERLAY_SHOP    = 19, /* SHOP.EMI#0, shop program */

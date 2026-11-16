@@ -6,11 +6,11 @@ MATCH void func_801E6A54(void) {
 
     ScratchPad* sp;
 
-    work                     = g_Task;
-    value                    = work->unk_09;
-    sp                       = SPAD(0u);
-    sp->view.battle.state_02 = value;
-    sp->view.battle.state_01 = value;
-    sp->view.battle.state_00 = value;
+    work               = g_Task;
+    value              = work->unk_09;
+    sp                 = SPAD(0u);
+    sp->cells.bytes[2] = value;
+    sp->cells.bytes[1] = value;
+    sp->cells.bytes[0] = value;
     func_801D99AC(0, 0, 11);
 }

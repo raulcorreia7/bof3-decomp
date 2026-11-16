@@ -127,8 +127,8 @@ MATCH void func_801EF2B4(void) {
                         battler                                = g_BattleEffectBattler;
                         BMAGIC_EFFECT_SLOTS[slot].header.mode  = 1;
                         BMAGIC_EFFECT_SLOTS[slot].target.party = battler;
-                        BMAGIC_EFFECT_SLOTS[slot].unk_2E       = D_1F800000.view.effect.params[4];
-                        BMAGIC_EFFECT_SLOTS[slot].unk_30       = D_1F800000.view.effect.params[5];
+                        BMAGIC_EFFECT_SLOTS[slot].unk_2E       = D_1F800000.cells.halves[4];
+                        BMAGIC_EFFECT_SLOTS[slot].unk_30       = D_1F800000.cells.halves[5];
                         g_BattleEffectBattler->param.unk_0B++;
                     }
                 }
@@ -143,12 +143,12 @@ MATCH void func_801EF3FC(void) {
     if (--g_Task->unk_09 == 0) {
         Battle_CenterCamera();
         Battle_ProjectRange();
-        battler                          = g_BattleEffectBattler;
-        D_1F800000.view.effect.params[6] = g_Task->unk_2E.half;
-        D_1F800000.view.effect.params[7] = g_Task->unk_30.half;
-        D_1F800000.view.effect.params[4] = g_Task->unk_2E.half = battler->unk_2E.half;
-        D_1F800000.view.effect.params[5] = g_Task->unk_30.half = battler->unk_30.half;
-        g_Task->unk_14 = ratan2(D_1F800000.view.effect.params[6] - D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[7] - D_1F800000.view.effect.params[5]);
+        battler                    = g_BattleEffectBattler;
+        D_1F800000.cells.halves[6] = g_Task->unk_2E.half;
+        D_1F800000.cells.halves[7] = g_Task->unk_30.half;
+        D_1F800000.cells.halves[4] = g_Task->unk_2E.half = battler->unk_2E.half;
+        D_1F800000.cells.halves[5] = g_Task->unk_30.half = battler->unk_30.half;
+        g_Task->unk_14                                   = ratan2(D_1F800000.cells.halves[6] - D_1F800000.cells.halves[4], D_1F800000.cells.halves[7] - D_1F800000.cells.halves[5]);
         if (g_Task->unk_04 & 1) {
             g_Task->unk_14 += (rand() & 7) << 6;
         } else {

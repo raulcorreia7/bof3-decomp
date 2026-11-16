@@ -144,14 +144,14 @@ MATCH void func_801EF3B8(void) {
     tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
-    D_1F800000.view.scenario.math_00 = g_Task->unk_09 << 1;
-    prim                             = (POLY_FT4*)g_GfxPrimCursor;
+    D_1F800000.cells.words[0] = g_Task->unk_09 << 1;
+    prim                      = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
-    setXY4(prim, g_Task->unk_2E.half + FIXED_MUL(rcos(512), D_1F800000.view.scenario.math_00), g_Task->unk_30.half + FIXED_MUL(rsin(512), D_1F800000.view.scenario.math_00),
-           g_Task->unk_2E.half + FIXED_MUL(rcos(1536), D_1F800000.view.scenario.math_00), g_Task->unk_30.half + FIXED_MUL(rsin(1536), D_1F800000.view.scenario.math_00),
-           g_Task->unk_2E.half + FIXED_MUL(rcos(3584), D_1F800000.view.scenario.math_00), g_Task->unk_30.half + FIXED_MUL(rsin(3584), D_1F800000.view.scenario.math_00),
-           g_Task->unk_2E.half + FIXED_MUL(rcos(2560), D_1F800000.view.scenario.math_00), g_Task->unk_30.half + FIXED_MUL(rsin(2560), D_1F800000.view.scenario.math_00));
+    setXY4(prim, g_Task->unk_2E.half + FIXED_MUL(rcos(512), D_1F800000.cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rsin(512), D_1F800000.cells.words[0]),
+           g_Task->unk_2E.half + FIXED_MUL(rcos(1536), D_1F800000.cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rsin(1536), D_1F800000.cells.words[0]),
+           g_Task->unk_2E.half + FIXED_MUL(rcos(3584), D_1F800000.cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rsin(3584), D_1F800000.cells.words[0]),
+           g_Task->unk_2E.half + FIXED_MUL(rcos(2560), D_1F800000.cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rsin(2560), D_1F800000.cells.words[0]));
     prim->tpage = GetTPage(0, 1, 832, 256);
     prim->clut  = GetClut(32, 506);
     setUVWH(prim, 128, 32, 32, 32);
