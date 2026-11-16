@@ -10,6 +10,8 @@
 #include "scenario/party.h"
 
 extern u8 D_801F69AF;
+/* The area flag byte the request step sets. */
+extern u8 D_80143FBC;
 extern u8 D_801F6BC0;
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
@@ -36,7 +38,10 @@ extern s32   D_80147C2C;
 extern s32   D_80147C30;
 extern s32   D_80147C54;
 extern s32   D_80147C58;
+extern s32   D_80147C5C;
 extern u8    D_80147C90;
+/* The fixed work record the dispatch compares the work pointer against. */
+extern Actor D_80143F48;
 /* The four party work rows, and the shadow record each party row owns: 0x10
  * bytes, its flag byte first. */
 extern Actor D_80147A58[];
@@ -80,9 +85,11 @@ extern u8         D_801F6248[][4];
 
 extern Callback D_801F6258[];
 extern u8       D_801F626C[];
-/* The x/y entry-coordinate pairs the request step indexes. */
+/* The x and y entry coordinates the request step indexes. */
 extern u8       D_801F6AAC[];
+extern u8       D_801F6AAD[];
 extern u8       D_801F6AB4[];
+extern u8       D_801F6AB5[];
 /* The x/y byte pairs the step compares the position against. */
 extern u8       D_801F6B2C[];
 extern u8       D_801F6B2D[];
