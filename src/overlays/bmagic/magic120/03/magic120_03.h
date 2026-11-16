@@ -7,6 +7,9 @@
 
 extern Callback D_801F0CB0[];
 
+/* The breath angle of each facing, in 1/64 turn. */
+extern u8 D_801F0D08[];
+
 extern u8 D_801F0D0C[];
 
 /* The offset of each of the three rows of breath pieces from an enemy, in 16.16. */

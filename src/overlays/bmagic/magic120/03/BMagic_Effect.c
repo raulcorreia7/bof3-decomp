@@ -486,6 +486,38 @@ MATCH void func_801F08AC(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F0974(void) {
+    POLY_G3* prim;
+    long     depth;
+    long     flag;
+    s32      angle;
+    s32      tpage;
+
+    D_1F800000.cells.halves[0] = (g_FrameCount & 0x3F) + 0x100;
+    tpage                      = getTPage(1, 2, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(5, sizeof(DR_MODE));
+    prim             = GFX_BeginPolyG3(1);
+    D_1F800014[0].vx = 0;
+    D_1F800014[0].vy = 0;
+    D_1F800014[0].vz = 0;
+    angle            = BMAGIC_PHASE_ANGLE((D_801F0D08[g_Task->facing] - 6) & BMAGIC_PHASE_MASK);
+    D_1F800014[1].vx = FIXED_MUL(rsin(angle), D_1F800000.cells.halves[0]);
+    D_1F800014[1].vy = FIXED_MUL(rcos(angle), D_1F800000.cells.halves[0]);
+    D_1F800014[1].vz = 0;
+    angle            = BMAGIC_PHASE_ANGLE((D_801F0D08[g_Task->facing] + 6) & BMAGIC_PHASE_MASK);
+    D_1F800014[2].vx = FIXED_MUL(rsin(angle), D_1F800000.cells.halves[0]);
+    D_1F800014[2].vy = FIXED_MUL(rcos(angle), D_1F800000.cells.halves[0]);
+    D_1F800014[2].vz = 0;
+    setRGB0(prim, g_Task->unk_09 * 10 + 1, g_Task->unk_09 * 10 + 1, g_Task->unk_09 * 10 + 1);
+    setRGB1(prim, 1, 1, 1);
+    setRGB2(prim, 1, 1, 1);
+    RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+    GFX_AddPrim(5, sizeof(POLY_G3));
+}
+#else
 INCLUDE_ASM(func_801F0974);
+#endif
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
