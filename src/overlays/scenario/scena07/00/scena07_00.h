@@ -9,6 +9,7 @@
 
 void            func_801F3C3C(s32 value);
 void            func_801F8358(void);
+bool            func_801FDA34(void);
 extern u16      D_800E4C1E;
 extern s8       D_80144EC0;
 extern u32      D_801F6C00;
@@ -183,7 +184,6 @@ extern u8       D_80144DF5;
 extern u8       D_80144EB8[];
 extern u8       D_80146865;
 extern u8       D_80146866;
-extern u8       D_80146867;
 extern u8       D_80146874;
 extern u8       D_80146875;
 /* D_801FDFA0 */
