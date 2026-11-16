@@ -44,7 +44,7 @@ MATCH void func_801EEC7C(void) {
 
 MATCH void func_801EEF44(void) {
     if (g_Task->param.unk_0B == 0) {
-        func_800AEF98(4, 0);
+        Battle_SelectActiveBattlerScript(4, 0);
         BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Task->header.mode += 1;

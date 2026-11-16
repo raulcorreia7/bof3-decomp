@@ -76,7 +76,7 @@ MATCH void func_801EF0E8(void) {
 
 MATCH void func_801EF164(void) {
     if (Actor_StepAnimOnce() & BYTE_MASK) {
-        func_800AFC98(2, 0);
+        Battle_PlayActiveBattlerCue(2, 0);
         func_801E257C(g_Battle.active_battler, 11U);
         g_Task->unk_14 = 0x100;
         g_Task->unk_20 = -8;
@@ -127,7 +127,7 @@ MATCH void func_801EF37C(void) {
     Actor_StepAnimOnce();
     Actor_StepAnimOnce();
     if (Actor_StepAnimOnce() & BYTE_MASK) {
-        func_800AFC98(2, 0);
+        Battle_PlayActiveBattlerCue(2, 0);
         func_801E257C(g_Battle.active_battler, 11);
         work         = g_Task;
         work->unk_14 = 0x140;
@@ -222,7 +222,7 @@ MATCH void func_801EF78C(void) {
     g_Task->facing = g_BattleEffectBattler->facing;
     WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
     g_Task->param.unk_0B = 1;
-    func_800AEF98(8, 0);
+    Battle_SelectActiveBattlerScript(8, 0);
     index  = Battle_AllocEffect(1, 79);
     active = g_Battle.active_battler;
     if (BATTLER_IS_PLAYER(active)) {
@@ -324,7 +324,7 @@ MATCH void func_801EFD28(void) {
     next           = g_Task->unk_09 - 1;
     g_Task->unk_09 = next;
     if (!(next & BYTE_MASK)) {
-        func_800AFC98(2, 0);
+        Battle_PlayActiveBattlerCue(2, 0);
         SND_QueueSelectionEffect(0x203);
         g_Task->unk_14 = 0x40;
         g_Task->unk_20 = -8;

@@ -25,7 +25,7 @@ MATCH void func_801EEC98(void) {
     task->param.unk_0B = 0;
     g_Task->unk_09     = 0;
     g_Task->header.mode++;
-    func_800AEF98(12, 2);
+    Battle_SelectActiveBattlerScript(12, 2);
     func_801EF490();
     slot = Battle_AllocEffect(1, 70) & BYTE_MASK;
     Effect_CopyActiveBattlerToSlot(slot);
@@ -63,7 +63,7 @@ MATCH void func_801EEF8C(void) {
         g_Task->unk_5F = D_801EFE12[g_Task->unk_04 * 3];
         GFX_FreePaletteFadeTarget(battler);
         g_Task->timer = GFX_AllocPaletteFade(battler, (s8)g_Task->unk_5D, (s8)g_Task->unk_5E, (s8)g_Task->unk_5F, 0);
-        func_800AEF98(4, 0);
+        Battle_SelectActiveBattlerScript(4, 0);
         g_BattleEffectBattler->header.flags &= ~ACTOR_FLAG_HIDDEN;
         Battle_ApplyDamageFlags(LOBU(g_Battle.target_selector), 0x20);
         SND_QueueSelectionEffect(0x100);
@@ -214,9 +214,9 @@ MATCH void func_801EF9E8(void) {
     g_Task->unk_09 = counter;
     if (!(counter & BYTE_MASK)) {
         if (g_Battle.action_id > 0x84) {
-            func_800AFC98(2, 4);
+            Battle_PlayActiveBattlerCue(2, 4);
         } else {
-            func_800AFC98(0, 4);
+            Battle_PlayActiveBattlerCue(0, 4);
         }
         g_Task->header.step += 1;
     }

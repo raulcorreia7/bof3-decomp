@@ -142,7 +142,7 @@ MATCH void func_801EF12C(void) {
     g_Task->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
     g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
-    func_800AEF98(0xC, 2);
+    Battle_SelectActiveBattlerScript(0xC, 2);
     func_801EFD4C();
     func_801EFEC8();
     g_Task->unk_04 = g_Task->param.unk_0B;
@@ -153,7 +153,7 @@ MATCH void func_801EF12C(void) {
 MATCH void func_801EF1FC(void) {
     if (g_Task->param.unk_0B == 0) {
         *D_8014637C &= 0xBF;
-        func_800AEF98(4, 0);
+        Battle_SelectActiveBattlerScript(4, 0);
         g_Task->header.mode += 1;
     }
 }
@@ -219,7 +219,7 @@ MATCH void func_801EF478(void) {
         }
     } else {
         SND_QueueSelectionEffect(0x101);
-        func_800AFC98(2, 0);
+        Battle_PlayActiveBattlerCue(2, 0);
         func_801F0078();
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
         g_Task->unk_09 = 0xFF;
@@ -246,7 +246,7 @@ MATCH void func_801EF578(void) {
         }
     } else {
         SND_QueueSelectionEffect(0x101);
-        func_800AFC98(2, 0);
+        Battle_PlayActiveBattlerCue(2, 0);
         func_801F0078();
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
         g_Task->unk_09 = 0xFF;

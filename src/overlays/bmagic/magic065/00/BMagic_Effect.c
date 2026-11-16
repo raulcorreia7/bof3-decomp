@@ -13,7 +13,7 @@ MATCH void func_801EF08C(void) {
 
     if (g_Task->param.unk_0B == 0) {
         if (g_Task->unk_09 == 0x1E) {
-            func_800AEF98(4, 0);
+            Battle_SelectActiveBattlerScript(4, 0);
             BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
         }
         counter        = g_Task->unk_09 - 1;
@@ -69,7 +69,7 @@ MATCH void func_801EF328(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        func_800AFC98(0, 4);
+        Battle_PlayActiveBattlerCue(0, 4);
         g_Task->header.step = g_Task->header.step + 1;
     }
 }

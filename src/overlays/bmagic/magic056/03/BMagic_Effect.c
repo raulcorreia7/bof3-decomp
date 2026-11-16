@@ -26,7 +26,7 @@ MATCH void func_801EEC94(void) {
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;
     g_Task->header.mode += 1;
-    func_800AEF98(8, 0);
+    Battle_SelectActiveBattlerScript(8, 0);
     index  = Battle_AllocEffect(1, 0x55) & BYTE_MASK;
     active = g_Battle.active_battler;
     if (BATTLER_IS_PLAYER(active)) {
@@ -66,7 +66,7 @@ MATCH s32 func_801EEF3C(void) {
     if (g_Task->param.unk_0B == 0) {
         g_BattleEffectBattler->header.flags &= ~0x40;
         func_800AFC54();
-        func_800AEF98(0x1C, 0);
+        Battle_SelectActiveBattlerScript(0x1C, 0);
         Battle_MarkDamaged(g_Battle.target_selector);
         if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
             g_Game.members[g_Battle.active_battler].header.mode = 6;

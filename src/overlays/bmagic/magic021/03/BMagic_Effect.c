@@ -35,7 +35,7 @@ MATCH void func_801EED30(void) {
     BMAGIC_CLEAR_EFFECTS(i);
     g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
-    func_800AEF98(0xC, 2);
+    Battle_SelectActiveBattlerScript(0xC, 2);
     index  = Battle_AllocEffect(1, 9) & BYTE_MASK;
     active = g_Battle.active_battler;
     if (BATTLER_IS_PLAYER(active)) {

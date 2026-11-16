@@ -22,7 +22,7 @@ MATCH void func_801EED5C(void) {
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;
     g_Task->header.mode += 1;
-    func_800AEF98(0xC, 2);
+    Battle_SelectActiveBattlerScript(0xC, 2);
     BMAGIC_ALLOC_BATTLER_EFFECT();
     work                                             = g_Task;
     g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
@@ -36,7 +36,7 @@ MATCH void func_801EED5C(void) {
 
 MATCH void func_801EEF6C(void) {
     if (g_Task->param.unk_0B == 0xFF) {
-        func_800AEF98(4, 0);
+        Battle_SelectActiveBattlerScript(4, 0);
         BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
         g_Task->header.mode += 1;
     }
@@ -64,7 +64,7 @@ MATCH void func_801EF0B8(void) {
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;
     g_Task->header.mode += 1;
-    func_800AEF98(0xC, 2);
+    Battle_SelectActiveBattlerScript(0xC, 2);
     BMAGIC_ALLOC_BATTLER_EFFECT();
     work                                             = g_Task;
     g_BattleEffects[index & BYTE_MASK].header.mode   = 1;
@@ -84,7 +84,7 @@ MATCH void func_801EF324(void) {
 
     if (g_Task->param.unk_0B == 0xFF) {
         func_800AFC54();
-        func_800AEF98(4, 0);
+        Battle_SelectActiveBattlerScript(4, 0);
         battle_flags = &g_Battle.state;
         *battle_flags |= 4;
         Effect_Reset();
@@ -110,7 +110,7 @@ MATCH void func_801EF3F0(void) {
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;
     g_Task->header.mode += 1;
-    func_800AEF98(0xC, 2);
+    Battle_SelectActiveBattlerScript(0xC, 2);
     for (i = 0; i < 3; i++) {
         BMAGIC_ALLOC_BATTLER_EFFECT();
         work                                             = g_Task;
@@ -159,7 +159,7 @@ MATCH void func_801EF7C8(void) {
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;
     g_Task->header.mode += 1;
-    func_800AEF98(0xC, 2);
+    Battle_SelectActiveBattlerScript(0xC, 2);
     BMAGIC_ALLOC_BATTLER_EFFECT();
     work                                             = g_Task;
     g_BattleEffects[index & BYTE_MASK].header.mode   = 4;
@@ -173,7 +173,7 @@ MATCH void func_801EF7C8(void) {
 MATCH void func_801EF9D4(void) {
     if (g_Task->param.unk_0B == 0xFF) {
         BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
-        func_800AEF98(4, 0);
+        Battle_SelectActiveBattlerScript(4, 0);
         g_Task->header.mode += 1;
     }
 }
@@ -201,7 +201,7 @@ MATCH void func_801EFAD4(void) {
 
     g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
-    func_800AEF98(0xC, 2);
+    Battle_SelectActiveBattlerScript(0xC, 2);
     BMAGIC_ALLOC_BATTLER_EFFECT();
     work                                             = g_Task;
     g_BattleEffects[index & BYTE_MASK].header.mode   = 5;
@@ -215,7 +215,7 @@ MATCH void func_801EFAD4(void) {
 MATCH void func_801EFC90(void) {
     if (g_Task->param.unk_0B == 0xFF) {
         BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
-        func_800AEF98(4, 0);
+        Battle_SelectActiveBattlerScript(4, 0);
         g_Task->header.mode += 1;
     }
 }
@@ -252,7 +252,7 @@ MATCH void func_801EFD90(void) {
     g_Task->unk_04       = func_801F0230();
     g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
-    func_800AEF98(0xC, 2);
+    Battle_SelectActiveBattlerScript(0xC, 2);
     BMAGIC_ALLOC_BATTLER_EFFECT();
     work                                             = g_Task;
     g_BattleEffects[index & BYTE_MASK].header.mode   = 2;
@@ -300,7 +300,7 @@ MATCH void func_801F0018(void) {
             g_Task->param.unk_0B++;
         }
     }
-    func_800AEF98(4, 0);
+    Battle_SelectActiveBattlerScript(4, 0);
     g_BattleEffectBattler->header.flags &= 0xBF;
     g_Task->header.mode++;
 }
@@ -354,7 +354,7 @@ MATCH void func_801F03FC(void) {
     g_Task->unk_09 = counter;
     if (!(counter & BYTE_MASK)) {
         Battle_MarkDamaged(g_Battle.target_selector);
-        func_800AFC98(2, 4);
+        Battle_PlayActiveBattlerCue(2, 4);
         g_Task->header.step += 1;
     }
 }
@@ -446,7 +446,7 @@ MATCH void func_801F07D4(void) {
     g_Task->unk_09 = counter;
     if (!(counter & BYTE_MASK)) {
         Battle_MarkDamaged(g_Battle.target_selector);
-        func_800AFC98(2, 4);
+        Battle_PlayActiveBattlerCue(2, 4);
         g_Task->unk_09 = 0x20;
         g_Task->header.step += 1;
     }
@@ -494,10 +494,10 @@ MATCH void func_801F0A20(void) {
     g_Task->unk_09 = value;
     if (!(value & BYTE_MASK)) {
         Actor_StepAnimOnce();
-        func_800AFC98(2, 4);
+        Battle_PlayActiveBattlerCue(2, 4);
         g_Task->header.step += 1;
     } else if (Actor_StepAnimOnce() & BYTE_MASK) {
-        func_800AFC98(2, 4);
+        Battle_PlayActiveBattlerCue(2, 4);
         g_Task->unk_09 = 0;
         g_Task->header.step += 1;
     }
@@ -587,7 +587,7 @@ MATCH void func_801F1090(void) {
         g_Task->unk_09      = value;
         if (!(value & BYTE_MASK)) {
             if (g_Task->param.unk_0B == 0) {
-                func_800AFC98(2, 4);
+                Battle_PlayActiveBattlerCue(2, 4);
                 Battle_MarkDamaged(g_BattleTargetSelector);
             }
             g_Task->header.step += 1;
@@ -637,7 +637,7 @@ MATCH void func_801F1384(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        func_800AFC98(2, 0);
+        Battle_PlayActiveBattlerCue(2, 0);
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Task->header.step += 1;
     }
@@ -685,7 +685,7 @@ MATCH void func_801F1804(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        func_800AFC98(2, 0);
+        Battle_PlayActiveBattlerCue(2, 0);
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Task->header.step += 1;
     }

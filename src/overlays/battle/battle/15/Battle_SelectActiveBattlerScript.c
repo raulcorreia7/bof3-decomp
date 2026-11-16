@@ -15,7 +15,8 @@ asm(".globl Actor_SelectScript_keep_a1\n.set Actor_SelectScript_keep_a1, Actor_S
  * through Actor_SelectScript or, for kind 3 and above, forwards the kind and payload through func_801E24F8; restores
  * the pointer. NOTE: the kind byte is read through a plain (non-volatile) MEM view; a volatile u8 load into the widened
  * local emits a redundant `andi 0xFF` that the original bytes do not have. */
-MATCH void func_800AEF98(s32 step, s32 payload) {
+/* func_800AEF98 */
+MATCH void Battle_SelectActiveBattlerScript(s32 step, s32 payload) {
     u8* work;
     u8* saved;
     u32 kind;

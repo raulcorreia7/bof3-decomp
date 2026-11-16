@@ -23,7 +23,7 @@ MATCH void func_801EEC98(void) {
     } else {
         g_BattleEnemyBattlers[active - BATTLE_PARTY_CHARACTERS_COUNT].unk_4B = 0xFF;
     }
-    func_800AEF98(0x2C, 6);
+    Battle_SelectActiveBattlerScript(0x2C, 6);
     index  = Battle_AllocEffect(1, 42) & BYTE_MASK;
     active = g_Battle.active_battler;
     if (BATTLER_IS_PLAYER(active)) {
@@ -76,7 +76,7 @@ MATCH void func_801EEF08(void) {
             g_Task->param.unk_0B += 1;
             i++;
         } while (i < 3);
-        func_800AEF98(4, 0);
+        Battle_SelectActiveBattlerScript(4, 0);
         BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
         SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
         g_Task->unk_09 = 8;
@@ -180,7 +180,7 @@ MATCH void func_801EF788(void) {
         next           = timer - 1;
         g_Task->unk_09 = next;
         if (!(next & BYTE_MASK)) {
-            func_800AFC98(2, 5);
+            Battle_PlayActiveBattlerCue(2, 5);
         }
     }
     if (Actor_StepAnimOnce() & BYTE_MASK) {
