@@ -30,7 +30,7 @@ MATCH void func_801E7BA0(void) {
     saved       = g_Task;
     g_Task      = g_BattleEffectBattler;
     g_GameState = &g_Game.members[g_Task->slot];
-    if (g_Game.members[g_Task->slot].chr.character_id == 7 || g_Game.members[g_Task->slot].chr.character_id == 0) {
+    if (g_Game.members[g_Task->slot].chr.character_id == CHAR_ID_RYU_ADULT || g_Game.members[g_Task->slot].chr.character_id == CHAR_ID_RYU_YOUNG) {
         D_801EB4C8 = g_Game.members[g_Task->slot].chr.ap;
         D_801EB4CC = g_Game.members[g_Task->slot].chr.status;
         D_801EB4D0 = g_Game.members[g_Task->slot].u.turn.damage_flags.value;
@@ -50,11 +50,11 @@ MATCH void func_801E7BA0(void) {
     g_Game.members[g_Task->slot].facing      = facing;
     g_Game.members[g_Task->slot].unk_48      = 2;
     g_Game.members[g_Task->slot].scale.x     = 0;
-    g_Game.members[g_Task->slot].u.turn.damage_flags.value |= 0x2000;
+    g_Game.members[g_Task->slot].u.turn.damage_flags.value |= COMBATANT_FLAG_FORM_EFFECT_PLAYING;
     g_BattleEffects[g_Task->slot].pos.x.fixed = g_EncounterParty[g_Task->slot].x.fixed;
     g_BattleEffects[g_Task->slot].pos.y.fixed = g_EncounterParty[g_Task->slot].y.fixed;
     g_BattleEffects[g_Task->slot].pos.z.fixed = Area_SampleHeight(g_BattleEffects[g_Task->slot].pos.x.fixed, g_BattleEffects[g_Task->slot].pos.y.fixed) << 16;
-    if (g_Game.members[g_Task->slot].chr.character_id == 7 || g_Game.members[g_Task->slot].chr.character_id == 0) {
+    if (g_Game.members[g_Task->slot].chr.character_id == CHAR_ID_RYU_ADULT || g_Game.members[g_Task->slot].chr.character_id == CHAR_ID_RYU_YOUNG) {
         g_Game.members[g_Task->slot].chr.ap                    = D_801EB4C8;
         g_Game.members[g_Task->slot].chr.status                = D_801EB4CC;
         g_Game.members[g_Task->slot].chr.fatigue               = g_Characters[g_Game.members[g_Task->slot].character_index].fatigue;

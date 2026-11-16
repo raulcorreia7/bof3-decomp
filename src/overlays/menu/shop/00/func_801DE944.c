@@ -46,7 +46,7 @@ MATCH void func_801DE944(void) {
                 i++;
             } while (i < g_PartySize);
         }
-        if (mode != CHAR_ID_GARR && g_Game.members[0].chr.character_id == 2) {
+        if (mode != CHAR_ID_GARR && g_Game.members[0].chr.character_id == CHAR_ID_GARR) {
             g_Game.members[0].pos.x.fixed += g_ShopFacingSteps[g_Game.members[0].facing].x << 15;
             g_Game.members[0].pos.y.fixed += g_ShopFacingSteps[g_Game.members[0].facing].y << 15;
         }

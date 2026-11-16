@@ -112,7 +112,7 @@ MATCH void func_801D02F4(void) {
             ((void (*)(s32))SND_PlayCue)(g_Task->unk_2C + 0x100);
             g_SpawnedActors[g_Task->param.actor_slot].unk_08 = g_Task->direction_08;
             if (g_Task->option_flags == 0) {
-                g_Task->option_flags = 1;
+                g_Task->option_flags = ACTOR_OPT_HIDDEN_ON_SPAWN;
             }
             g_SpawnedActors[g_Task->param.actor_slot].unk_0A = g_Task->option_flags;
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 11));
