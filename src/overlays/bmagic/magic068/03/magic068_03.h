@@ -5,11 +5,11 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern Magic068SharedSteps D_801EEC04;
 extern u8                  D_801EC2E4;
-extern u16                 D_801EFCA4[][3];
+extern Magic068SharedSteps D_801EEC04;
 /* The Foretell score bonus, indexed by the standing party count less the standing enemy count. */
 extern s8                  D_801EFC9F[];
+extern u16                 D_801EFCA4[][3];
 
 void func_801DE8C0(s8 index, s8 record_kind, u8* text);
 

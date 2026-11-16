@@ -11,9 +11,9 @@ typedef struct PlCharPos {
     u8  pad_0C[0x74 - 0x0C];
 } PlCharPos;
 
-ASSERT_SIZE(PlCharPos, 0x74);
 ASSERT_OFFSET(PlCharPos, pos_y, 0x04);
 ASSERT_OFFSET(PlCharPos, z, 0x0A);
+ASSERT_SIZE(PlCharPos, 0x74);
 
 extern PlCharPos D_80143FFC[];
 

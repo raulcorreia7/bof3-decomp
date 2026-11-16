@@ -37,13 +37,13 @@ typedef struct Magic126Mote {
     PartyMember* battler; /* +0x1C */
 } Magic126Mote;
 
-ASSERT_SIZE(Magic126Mote, 0x20);
 ASSERT_OFFSET(Magic126Mote, unk_04, 0x04);
 ASSERT_OFFSET(Magic126Mote, unk_0C, 0x0C);
 ASSERT_OFFSET(Magic126Mote, unk_0E, 0x0E);
 ASSERT_OFFSET(Magic126Mote, unk_10, 0x10);
 ASSERT_OFFSET(Magic126Mote, unk_14, 0x14);
 ASSERT_OFFSET(Magic126Mote, battler, 0x1C);
+ASSERT_SIZE(Magic126Mote, 0x20);
 
 #define BMAGIC_EFFECT_SLOTS D_801F12BC
 #define BMAGIC_EFFECT_COUNT 128

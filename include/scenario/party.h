@@ -43,9 +43,9 @@ typedef struct FormationLayout {
     Pos2 offsets[PARTY_SLOT_COUNT];
 } FormationLayout;
 
-ASSERT_SIZE(FormationLayout, 0x14);
 ASSERT_OFFSET(FormationLayout, name_length, 0x07);
 ASSERT_OFFSET(FormationLayout, offsets, 0x08);
+ASSERT_SIZE(FormationLayout, 0x14);
 
 /* The party members of a formation preview in drawing order, back to front. */
 typedef struct FormationOrder {

@@ -4,7 +4,7 @@
 #   tools/pre_push.sh [BASE_REF]          or    meson compile -C build/meson pre-push
 #
 # Checks: check (only with a disc), check-plain (only with the compiler), check-headers, check-tree, externs, include-asm, markers, drafts, names, addrs, kept, format-check,
-# meson test, typeloss, quality (no touched file gets worse), message-ids (the generated message-id header is current), subsystems (writes the debt table to build/subsystems.md; never fails). BASE_REF is what the work is compared with; it defaults to the newest of
+# order (declarations and symbols stay in order), meson test, typeloss, quality (no touched file gets worse), message-ids (the generated message-id header is current), subsystems (writes the debt table to build/subsystems.md; never fails). BASE_REF is what the work is compared with; it defaults to the newest of
 # public/main, origin/main and main; comparisons use the merge base with HEAD. Each log is
 # build/pre-push/<check>.log. Format first with `meson compile -C build/meson format`.
 set -u
@@ -84,6 +84,7 @@ start names python3 tools/check_names.py --diff "$ref"
 start addrs python3 tools/check_addrs.py "$ref" HEAD
 start kept python3 tools/check_kept.py "$ref" HEAD
 start quality python3 tools/quality.py --diff "$ref"
+start order python3 tools/order_check.py --diff "$ref"
 start message-ids python3 tools/message_ids.py --check
 start subsystems python3 tools/quality.py --markdown
 wait

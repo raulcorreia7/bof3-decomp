@@ -318,8 +318,8 @@ typedef struct BMagicEffectSteps {
     Callback steps[6];
 } BMagicEffectSteps;
 
-ASSERT_SIZE(BMagicEffectSteps, 0x18);
 ASSERT_OFFSET(BMagicEffectSteps, steps, 0x00);
+ASSERT_SIZE(BMagicEffectSteps, 0x18);
 
 /* The step handlers Effect_DrawRings runs, indexed by header.step (byte 0x02). */
 typedef struct BMagicSteps {
@@ -355,9 +355,8 @@ typedef struct BMagicEffect {
 /* header.flags bit of a BMagicEffect slot that is running. */
 #define BMAGIC_EFFECT_IN_USE 0x01
 
-ASSERT_SIZE(BMagicEffect, 0x2C);
-
 ASSERT_OFFSET(BMagicEffect, unk_03, 0x03);
+
 ASSERT_OFFSET(BMagicEffect, unk_04, 0x04);
 ASSERT_OFFSET(BMagicEffect, timer_05, 0x05);
 ASSERT_OFFSET(BMagicEffect, unk_06, 0x06);
@@ -370,6 +369,7 @@ ASSERT_OFFSET(BMagicEffect, unk_20, 0x20);
 ASSERT_OFFSET(BMagicEffect, unk_22, 0x22);
 ASSERT_OFFSET(BMagicEffect, unk_26, 0x26);
 ASSERT_OFFSET(BMagicEffect, battler, 0x28);
+ASSERT_SIZE(BMagicEffect, 0x2C);
 
 /* The record of an effect that orbits its battler: the angle advances every frame and the radius scales sin and cos. */
 typedef struct BMagicOrbit {
@@ -388,11 +388,11 @@ typedef struct BMagicOrbit {
     /* 0x10 */ WorldPos   pos;
 } BMagicOrbit;
 
-ASSERT_SIZE(BMagicOrbit, 0x1C);
-
 ASSERT_OFFSET(BMagicOrbit, radius, 0x0C);
+
 ASSERT_OFFSET(BMagicOrbit, angle, 0x0E);
 ASSERT_OFFSET(BMagicOrbit, pos, 0x10);
+ASSERT_SIZE(BMagicOrbit, 0x1C);
 
 /* D_801F05F8 (magic106), D_801F1054 (magic063) */
 extern BMagicOrbit* g_BMagicOrbit;
@@ -502,14 +502,13 @@ void Effect_DrawTexturedQuad(void);
         }                                         \
     } while (0)
 
-void func_801F07A8(void);
-
 /* Prototypes the images of this group share. */
 u32  func_800AF6B8(u32, u32, s32, u32);
 void func_801EED38();
 void func_801EF174();
 void func_801EF250();
 void func_801EF338();
+void func_801F07A8(void);
 void Effect_SetActorMatrixRolled();
 void func_801EF678();
 void func_801EF688();

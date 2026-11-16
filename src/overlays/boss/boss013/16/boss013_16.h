@@ -9,8 +9,12 @@
 /* The scratchpad work area is a PartyMember record in this image. */
 #define g_Task ((PartyMember*)g_Task)
 
+extern u8          D_800C25D8;
+extern u8          D_800C25E4;
 extern u8          D_800C25F0[];
 extern u8          D_800C25FC;
+extern u16         D_800C2608;
+extern u16         D_800C2610;
 extern u16         D_800C2618[];
 extern Callback    D_800C2620[];
 extern Callback    D_800C2650[];
@@ -25,10 +29,6 @@ extern u8          D_80146322;
  * declares only the 6375 byte. */
 extern u8          D_80181B11;
 extern PartyMember D_801EB860;
-extern u8          D_800C25D8;
-extern u16         D_800C2608;
-extern u8          D_800C25E4;
-extern u16         D_800C2610;
 
 /* The mode handler sets the image installs into the battle hooks; the
  * addresses are in [emi/boss/boss013/16] of config/symbols.toml. */

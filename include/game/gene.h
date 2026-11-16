@@ -118,8 +118,8 @@ typedef struct DragonFormStats {
     u8 resist[RES_INDEX_COUNT];
 } DragonFormStats;
 
-ASSERT_SIZE(DragonFormStats, DRAGON_FORM_STATS_SIZE);
 ASSERT_OFFSET(DragonFormStats, resist, 0x05);
+ASSERT_SIZE(DragonFormStats, DRAGON_FORM_STATS_SIZE);
 
 /* 0x800B4C7C: per-gene AP cost, 8-bit entries. */
 extern const u8 D_800B4C7C[GENE_ID_COUNT];

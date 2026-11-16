@@ -8,9 +8,9 @@
 #define MAGIC092_RISE_Y 12
 
 extern Callback D_801F04D4[];
-extern Callback D_801F04FC[];
-
 extern Callback D_801F04E4[];
+
+extern Callback D_801F04FC[];
 void            func_801EF818(void);
 
 extern Callback     D_801F04EC[];

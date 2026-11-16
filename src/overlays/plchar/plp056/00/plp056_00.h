@@ -30,11 +30,11 @@ extern Callback D_801D08B0[];
 extern Callback D_801D08BC[];
 extern Callback D_801D08C8[];
 
-extern s32  func_801D04C8(void);
-extern void func_801D066C(void);
-
+s32  func_801CFF4C(s16 x, s16 y);
 void func_801D0158(s32 kind, s32 x, s32 y, s32 code);
 
-s32 func_801CFF4C(s16 x, s16 y);
+extern s32 func_801D04C8(void);
+
+extern void func_801D066C(void);
 
 #endif

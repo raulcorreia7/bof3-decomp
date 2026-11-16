@@ -91,8 +91,8 @@ typedef struct MasterSkill {
 /* The empty slot: MASTER_SKILL_EMPTY as a pair. */
 #define MASTER_SKILL_NONE {99, 0xFF}
 
-ASSERT_SIZE(MasterSkill, MASTER_SKILL_SIZE);
 ASSERT_OFFSET(MasterSkill, ability, 0x01);
+ASSERT_SIZE(MasterSkill, MASTER_SKILL_SIZE);
 
 /* Retail addresses. */
 

@@ -19,12 +19,12 @@ typedef struct ScriptState {
     u16 cursor;
 } ScriptState;
 
-ASSERT_SIZE(ScriptState, 0x0C);
 ASSERT_OFFSET(ScriptState, unk_04, 0x04);
 ASSERT_OFFSET(ScriptState, unk_05, 0x05);
 ASSERT_OFFSET(ScriptState, unk_07, 0x07);
 ASSERT_OFFSET(ScriptState, unk_08, 0x08);
 ASSERT_OFFSET(ScriptState, cursor, 0x0A);
+ASSERT_SIZE(ScriptState, 0x0C);
 
 /* The front-end step record behind g_MessageState: func_8015102C walks the timer,
  * phase, cursor and flag fields; the other units read only its first byte. */
@@ -44,11 +44,11 @@ typedef struct MessageState {
     u16 scroll;       /* 0x28 */
 } MessageState;
 
-ASSERT_SIZE(MessageState, 0x2C);
 ASSERT_OFFSET(MessageState, state_00, 0x00);
 ASSERT_OFFSET(MessageState, count_06, 0x06);
 ASSERT_OFFSET(MessageState, cursor_10, 0x10);
 ASSERT_OFFSET(MessageState, scroll, 0x28);
+ASSERT_SIZE(MessageState, 0x2C);
 
 typedef struct AreaDrawState {
     u8 actor_count;
@@ -57,9 +57,9 @@ typedef struct AreaDrawState {
     u8 unk_03;
 } AreaDrawState;
 
-ASSERT_SIZE(AreaDrawState, 4);
 ASSERT_OFFSET(AreaDrawState, actor_count, 0x00);
 ASSERT_OFFSET(AreaDrawState, flags, 0x02);
+ASSERT_SIZE(AreaDrawState, 4);
 
 extern AreaDrawState g_AreaDrawState;
 

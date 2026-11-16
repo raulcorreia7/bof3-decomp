@@ -79,10 +79,10 @@ typedef struct VitalItem {
     u16 unk_0E;      /* no reader */
 } VitalItem;
 
-ASSERT_OFFSET(VitalItem, description, 0x0C);
-ASSERT_SIZE(VitalItem, VITAL_ITEM_STRIDE);
 ASSERT_OFFSET(VitalItem, name, 0x00);
+ASSERT_OFFSET(VitalItem, description, 0x0C);
 ASSERT_OFFSET(VitalItem, unk_0E, 0x0E);
+ASSERT_SIZE(VitalItem, VITAL_ITEM_STRIDE);
 
 #define VITAL_ITEM_OBJECT(name, description) {name, (description), 0}
 
@@ -94,12 +94,12 @@ typedef struct Item {
     u16 price;
 } Item;
 
-ASSERT_OFFSET(Item, description, 0x0E);
-ASSERT_SIZE(Item, ITEM_STRIDE);
 ASSERT_OFFSET(Item, name, 0x00);
 ASSERT_OFFSET(Item, flags, 0x0c);
 ASSERT_OFFSET(Item, type, 0x0d);
+ASSERT_OFFSET(Item, description, 0x0E);
 ASSERT_OFFSET(Item, price, 0x10);
+ASSERT_SIZE(Item, ITEM_STRIDE);
 
 #define ITEM_OBJECT(name, flags, type, description, price) {name, (flags), (type), (description), (price)}
 
@@ -110,9 +110,9 @@ typedef struct ItemHeader {
     u8 flags;        /* ItemFlags; ITEM_UNSELLABLE is the one bit equipment tests */
 } ItemHeader;
 
-ASSERT_SIZE(ItemHeader, 0x0E);
 ASSERT_OFFSET(ItemHeader, equipability, 0x0C);
 ASSERT_OFFSET(ItemHeader, flags, 0x0D);
+ASSERT_SIZE(ItemHeader, 0x0E);
 
 typedef struct Weapon {
     ItemHeader header;
@@ -126,15 +126,15 @@ typedef struct Weapon {
     u16        price;
 } Weapon;
 
-ASSERT_OFFSET(Weapon, description, 0x14);
-ASSERT_SIZE(Weapon, WEAPON_STRIDE);
 ASSERT_OFFSET(Weapon, header, 0x00);
 ASSERT_OFFSET(Weapon, type, 0x0e);
 ASSERT_OFFSET(Weapon, element, 0x0f);
 ASSERT_OFFSET(Weapon, weight, 0x10);
 ASSERT_OFFSET(Weapon, power, 0x12);
 ASSERT_OFFSET(Weapon, unk_13, 0x13);
+ASSERT_OFFSET(Weapon, description, 0x14);
 ASSERT_OFFSET(Weapon, price, 0x16);
+ASSERT_SIZE(Weapon, WEAPON_STRIDE);
 
 #define WEAPON_OBJECT(name, equipability, header_flags, type, element, weight, sound, power, description, price)       \
     {{name, (equipability), (header_flags)}, (type), (element), (weight), (sound), (power), 0, (description), (price)}
@@ -149,14 +149,14 @@ typedef struct Armor {
     u16        price;
 } Armor;
 
-ASSERT_OFFSET(Armor, description, 0x12);
-ASSERT_SIZE(Armor, ARMOR_STRIDE);
 ASSERT_OFFSET(Armor, header, 0x00);
 ASSERT_OFFSET(Armor, type, 0x0e);
 ASSERT_OFFSET(Armor, weight, 0x0f);
 ASSERT_OFFSET(Armor, power, 0x10);
 ASSERT_OFFSET(Armor, unk_11, 0x11);
+ASSERT_OFFSET(Armor, description, 0x12);
 ASSERT_OFFSET(Armor, price, 0x14);
+ASSERT_SIZE(Armor, ARMOR_STRIDE);
 
 #define ARMOR_OBJECT(name, equipability, header_flags, type, weight, power, description, price) {{name, (equipability), (header_flags)}, (type), (weight), (power), 0, (description), (price)}
 
@@ -168,12 +168,12 @@ typedef struct Accessory {
     u16        price;
 } Accessory;
 
-ASSERT_OFFSET(Accessory, description, 0x10);
-ASSERT_SIZE(Accessory, ACCESSORY_STRIDE);
 ASSERT_OFFSET(Accessory, header, 0x00);
 ASSERT_OFFSET(Accessory, type, 0x0e);
 ASSERT_OFFSET(Accessory, weight, 0x0f);
+ASSERT_OFFSET(Accessory, description, 0x10);
 ASSERT_OFFSET(Accessory, price, 0x12);
+ASSERT_SIZE(Accessory, ACCESSORY_STRIDE);
 
 #define ACCESSORY(name, equipability, header_flags, type, weight, description, price) {{name, (equipability), (header_flags)}, (type), (weight), (description), (price)}
 

@@ -5,13 +5,13 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+/* func_801F06D8 */
+/* g_ScratchPadVectors */
+extern SVECTOR    g_ScratchPadVectors[];
 extern Callback   D_801F0A1C[];
 extern Callback   D_801F0A2C[];
 /* D_801F0A38 */
 extern TrailPoint BMagic_Trail[][BMAGIC_TRAIL_LENGTH];
-/* func_801F06D8 */
-/* g_ScratchPadVectors */
-extern SVECTOR    g_ScratchPadVectors[];
 /* func_801F0390 */
 void              func_801F06D8(void);
 

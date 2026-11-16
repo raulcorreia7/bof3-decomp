@@ -11,8 +11,8 @@ typedef struct Magic080Cell {
     u16 v;
 } Magic080Cell;
 
-ASSERT_SIZE(Magic080Cell, 0x04);
 ASSERT_OFFSET(Magic080Cell, v, 0x02);
+ASSERT_SIZE(Magic080Cell, 0x04);
 
 extern Magic080Cell D_801EF124[];
 extern Magic080Cell D_801EF13C[];
@@ -32,8 +32,8 @@ extern Magic080Cell D_801EF13C[];
         GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_FT4));                                                                                                                          \
     }
 
-void func_801EEF5C(void);
-
 void func_801EED94(void);
+
+void func_801EEF5C(void);
 
 #endif

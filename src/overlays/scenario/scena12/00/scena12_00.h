@@ -7,10 +7,10 @@
 #include "overlays/scenario/scenario.h"
 #include "area/spad.h"
 
-extern u32          D_801F6C00;
 extern s32          D_80147B24[];
 extern volatile s32 D_80147B28;
 extern volatile s32 D_80147B2C;
+extern u32          D_801F6C00;
 extern s32          g_AreaFocusY[];
 
 /* D_801FD178 */

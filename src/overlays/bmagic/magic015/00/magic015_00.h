@@ -27,8 +27,8 @@ extern Magic015Steps D_801EEC04;
 
 extern Magic015Steps       D_801EEC14;
 extern Magic015Steps       D_801EEC24;
-extern Magic015ThirdSteps  D_801EEC54;
 extern Magic015SecondSteps D_801EEC34;
+extern Magic015ThirdSteps  D_801EEC54;
 extern Callback            D_801EEC68[];
 /* Per-strength tint steps of the magic015 landing effect: the red step, then the green and blue step. */
 extern u8                  D_801F1640[][2];

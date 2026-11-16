@@ -12,12 +12,12 @@
 /* FAKE: the callers pass and read the cost as s32, the width the real prototype (u8) lacks. */
 #define Char_GetAbilityCost ((s32 (*)(s32, s32, s32))Char_GetAbilityCost)
 
-extern u8  D_80148654;
 extern u8  D_80148339;
 extern u8  D_8014835F;
 extern u8  D_80148361;
 extern s16 D_80148388;
 extern s16 D_801483AC;
+extern u8  D_80148654;
 
 #define g_SceneState (*(struct SceneState*)&g_SceneState)
 
@@ -29,25 +29,25 @@ extern char g_MenuStatFormat[];
 extern char g_MenuExperienceFormat[];
 extern char g_MenuExperienceBlank[];
 extern char g_MenuZennyFormat[];
-/* D_801D0C48 */
-extern char g_MenuClockFormat[];
 extern u8   D_80144DF5;
 extern u8   D_80144DF6;
 extern u8   D_80144DF7;
-/* The item category of each equipment slot. */
-extern u8   D_801D875C[];
-extern u8*  D_801D8744[4];
-extern u16  D_801D8ECC[];
 extern u8   D_80148338;
 extern s8   D_80148511;
 extern u8   D_80148656;
 extern s8   D_80148658;
 extern u8   D_8018E244;
+/* D_801D0C48 */
+extern char g_MenuClockFormat[];
 /* g_EmiOverlayHeader */
 /* D_801D0D80 */
 extern u8   g_SaveSlotLevelFormat[];
 /* D_801D0D84 */
 extern u8   g_SaveSlotTimeFormat[];
+extern u8*  D_801D8744[4];
+/* The item category of each equipment slot. */
+extern u8   D_801D875C[];
+extern u16  D_801D8ECC[];
 extern u8   g_MenuCaptionRight[];
 extern u8   g_MenuClockCaption[];
 extern u8   g_MenuCommandFrame[];
@@ -77,12 +77,12 @@ extern u8   g_SaveCardPortLabelSecond[];
 extern Callback g_MenuBateSteps[MENU_BATE_STEP_COUNT];
 extern s8       D_801D86F0;
 extern u8       g_MenuLabelAgility[];
+extern u8       D_801D8B18[];
+extern u8       D_801D8B20[];
 /* D_801D8B38 */
 extern u8       g_MenuEquipRowIcons[];
 /* D_801D8B40 */
 extern u8       g_MenuLabelEquip[];
-extern u8       D_801D8B18[];
-extern u8       D_801D8B20[];
 extern u8       D_801D8B48[];
 extern u8       D_801D8B4C[];
 extern u8       g_MenuPortraitAtlas[];
@@ -92,6 +92,8 @@ extern u8       g_MenuCaptionIcon[];
 extern u8       g_MenuClockColon[];
 extern u8*      g_MenuCommandLabels[];
 extern u8       g_MenuCommandRows[][5];
+extern u8*      D_801C893C[];
+extern u8*      D_801C8950[];
 /* D_801D870C */
 extern Callback g_MenuBateStep2Sub0Steps[MENU_BATE_STEP2_SUB0_COUNT];
 /* D_801D8718 */
@@ -107,8 +109,6 @@ extern u8       D_801D8778[];
 extern u8       g_MenuListTab2OffSprites[];
 /* D_801D8954 */
 extern u8       g_MenuListTab2OnSprites[];
-extern u8*      D_801C893C[];
-extern u8*      D_801C8950[];
 /* D_801D896C */
 extern u8       g_MenuListTab1OffSprites[];
 /* D_801D8978 */
@@ -134,8 +134,8 @@ typedef struct BateState {
 } BateState;
 
 extern s8        D_80148659;
-extern BateState D_801D8ED4;
 extern u8        D_801D86F8[];
+extern BateState D_801D8ED4;
 /* The stat tally: the six targets it counts to and the six shown counters. */
 extern s32       D_801D8EE8[6];
 extern s32       D_801D8F00[6];
@@ -159,12 +159,12 @@ void func_801D259C(void);
 void func_801D31B0(s16 x, s16 y, u8 index, u8 flag);
 void func_801AE3F0(u16 x, u16 y, u16 width, u16 height, s32 frame_flags, u8 palette);
 
-extern u8   D_801D8EE0[];
 extern char D_801D0C18[];
 extern char D_801D0C1C[];
 extern char D_801D0C24[];
 extern char D_801D0C2C[];
-extern s32  D_801D8F0C[];
 extern u8   D_801D8780[];
+extern u8   D_801D8EE0[];
+extern s32  D_801D8F0C[];
 
 #endif

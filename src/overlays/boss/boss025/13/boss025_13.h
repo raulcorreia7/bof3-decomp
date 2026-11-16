@@ -32,9 +32,9 @@ extern u16          D_80145F18;
 extern u32          D_801462EC;
 extern volatile u8  D_80146322;
 extern u8           D_80148603;
+extern EnemyBattler D_801EB748[];
 extern u8           D_801FE4E4;
 extern u8           D_801FE4EC[];
-extern EnemyBattler D_801EB748[];
 
 void func_800C1A68(u8 index);
 void func_800C1D2C(s32 mode);
@@ -44,8 +44,8 @@ void func_800C2634(void);
 void func_800C2680(void);
 
 extern u8  D_800C184C[];
-extern u32 D_801463D0;
-extern u8  D_80146329;
 extern u8  D_800C32A8[];
+extern u8  D_80146329;
+extern u32 D_801463D0;
 
 #endif

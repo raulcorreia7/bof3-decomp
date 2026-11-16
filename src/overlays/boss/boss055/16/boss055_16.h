@@ -25,8 +25,8 @@ extern Boss055ScriptIds D_800C181C;
 extern Boss055ScriptIds D_800C1828;
 extern Boss055ScriptIds D_800C1834;
 extern Boss055ScriptIds D_800C1840;
-extern Boss055ScriptIds D_800C1858;
 extern Callback         D_800C184C[];
+extern Boss055ScriptIds D_800C1858;
 extern u8               D_800C34F0[];
 extern u16              D_800C34FC[];
 extern u8               D_800C352C[];
@@ -61,7 +61,7 @@ void func_800C3284(void);
 void func_800C227C(void);
 void func_800C2340(u8 arg0, u8 index, u8 value);
 
-extern Callback D_800C35D8[];
 extern Pos2     D_800C34D4[];
+extern Callback D_800C35D8[];
 
 #endif

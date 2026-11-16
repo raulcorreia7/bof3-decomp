@@ -40,9 +40,9 @@ typedef struct SceneEffectRow {
     s32 unk_1C; /* +0x1C */
 } SceneEffectRow;
 
-ASSERT_SIZE(SceneEffectRow, 0x20);
 ASSERT_OFFSET(SceneEffectRow, x, 0x04);
 ASSERT_OFFSET(SceneEffectRow, unk_1C, 0x1C);
+ASSERT_SIZE(SceneEffectRow, 0x20);
 
 /* The spawn rows func_801FC094 reads: the cell position and the scene timer value that spawn an
  * actor there. Twelve rows fill the span up to D_801FDE88. */
@@ -52,17 +52,17 @@ typedef struct SceneTimerSpawn {
     s16 timer; /* +0x4 */
 } SceneTimerSpawn;
 
-ASSERT_SIZE(SceneTimerSpawn, 6);
 ASSERT_OFFSET(SceneTimerSpawn, y, 0x02);
 ASSERT_OFFSET(SceneTimerSpawn, timer, 0x04);
-extern Callback        D_801FDE10[];
-extern Callback        D_801FDE1C[];
-extern SceneTimerSpawn D_801FDE40[12];
-extern u8              D_801FDE88[4];
+ASSERT_SIZE(SceneTimerSpawn, 6);
 extern u8              D_801FDD7C[];
 extern u8              D_801FDD84[];
 extern u8              D_801FDD9C[];
 extern u8              D_801FDDA4[];
+extern Callback        D_801FDE10[];
+extern Callback        D_801FDE1C[];
+extern SceneTimerSpawn D_801FDE40[12];
+extern u8              D_801FDE88[4];
 extern u8              D_801FDE8C[];
 extern u8              D_801FDF7C[];
 /* D_801FDF8C */
@@ -100,19 +100,19 @@ typedef struct Scena07BurstBuffer {
     s32     unk_51C; /* 0x51C */
 } Scena07BurstBuffer;
 
-ASSERT_SIZE(Scena07BurstBuffer, 0x520);
 ASSERT_OFFSET(Scena07BurstBuffer, points, 0x10);
 ASSERT_OFFSET(Scena07BurstBuffer, shade, 0x410);
 ASSERT_OFFSET(Scena07BurstBuffer, angle, 0x510);
 ASSERT_OFFSET(Scena07BurstBuffer, unk_514, 0x514);
+ASSERT_SIZE(Scena07BurstBuffer, 0x520);
 
+extern Scena07BurstBuffer  D_800E4C24;
 extern s16                 D_800E595C;
 extern s16                 D_800E595E;
 extern s16                 D_800E5960;
 extern s32                 D_800E81D8;
 extern s32                 D_800E81DC;
 extern s32                 D_800E81E0;
-extern Scena07BurstBuffer  D_800E4C24;
 extern Scena07BurstBuffer* D_801FDFC0;
 void                       func_801F90F4(Scena07BurstBuffer* buffer);
 void                       func_801F9330(Scena07BurstBuffer* buffer);
@@ -176,8 +176,8 @@ extern u8 D_801FDFC8;
     }
 u8   func_801F85D8(void);
 void func_801F9DA8(void);
-u8   func_801F9EFC(void);
 u8*  func_801F9DD4(void);
+u8   func_801F9EFC(void);
 
 /* D_801FDD14 */
 

@@ -5,12 +5,12 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern BMagicEffectSteps D_801EEC04;
+extern s32 D_1F800004;
 
-extern Callback D_801F08B8[];
-extern s32      D_1F800004;
 /* The spark trail angle word; the trail reads its radius and depth words before it. */
-extern s32      D_1F80000C;
+extern s32               D_1F80000C;
+extern BMagicEffectSteps D_801EEC04;
+extern Callback          D_801F08B8[];
 
 extern Callback D_801F08C4[];
 

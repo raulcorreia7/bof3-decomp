@@ -95,7 +95,6 @@ typedef struct GameAreaState {
     /* 0x1F */ u8  prev_selection;
 } GameAreaState;
 
-ASSERT_SIZE(GameAreaState, 0x20);
 ASSERT_OFFSET(GameAreaState, request_flags, 0x02);
 ASSERT_OFFSET(GameAreaState, last_area_id, 0x04);
 ASSERT_OFFSET(GameAreaState, last_x, 0x08);
@@ -107,6 +106,7 @@ ASSERT_OFFSET(GameAreaState, request_facing, 0x1C);
 ASSERT_OFFSET(GameAreaState, request_kind, 0x1D);
 ASSERT_OFFSET(GameAreaState, entry_mode, 0x1E);
 ASSERT_OFFSET(GameAreaState, prev_selection, 0x1F);
+ASSERT_SIZE(GameAreaState, 0x20);
 
 /* D_80143F00 */
 extern GameAreaState g_GameArea;

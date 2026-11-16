@@ -257,7 +257,6 @@ typedef struct Actor {
     u8             pad_96[0x02];      /* 0x96-0x97 */
 } Actor;
 
-ASSERT_SIZE(Actor, ACTOR_SIZE);
 ASSERT_OFFSET(Actor, header, 0x00);
 ASSERT_OFFSET(Actor, direction_08, 0x08);
 ASSERT_OFFSET(Actor, param, 0x0B);
@@ -280,6 +279,7 @@ ASSERT_OFFSET(Actor, walk_dest_y, 0x84);
 ASSERT_OFFSET(Actor, unk_88, 0x88);
 ASSERT_OFFSET(Actor, ext, 0x8C);
 ASSERT_OFFSET(Actor, facing, 0x92);
+ASSERT_SIZE(Actor, ACTOR_SIZE);
 
 /* D_80146884 */
 extern Actor* g_CurrentActor; /* 0x80146884 */

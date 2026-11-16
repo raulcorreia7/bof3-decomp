@@ -26,9 +26,9 @@ typedef struct GameClock {
     u8 thirtieths;
 } GameClock;
 
-ASSERT_SIZE(GameClock, GAME_CLOCK_SIZE);
 ASSERT_OFFSET(GameClock, hours, 0x00);
 ASSERT_OFFSET(GameClock, thirtieths, 0x03);
+ASSERT_SIZE(GameClock, GAME_CLOCK_SIZE);
 
 /* D_80144FC0 */
 extern GameClock g_PlayClock;

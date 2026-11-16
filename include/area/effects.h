@@ -19,12 +19,12 @@ typedef struct AreaSpark {
 
 #define AREA_SPARK_COUNT 128
 
-ASSERT_SIZE(AreaSpark, 0x14);
 ASSERT_OFFSET(AreaSpark, active, 0x00);
 ASSERT_OFFSET(AreaSpark, unk_01, 0x01);
 ASSERT_OFFSET(AreaSpark, fall_speed, 0x02);
 ASSERT_OFFSET(AreaSpark, pos, 0x04);
 ASSERT_OFFSET(AreaSpark, unk_10, 0x10);
+ASSERT_SIZE(AreaSpark, 0x14);
 
 /* One 0x14-byte emitter of the table at AREA_WORK + 0x1800: it spawns two sparks each time its timer runs out. */
 typedef struct SparkEmitter {
@@ -75,13 +75,13 @@ typedef struct SpinEffect {
     /* 0x2A */ s16     fade;  /* the triangle fade */
 } SpinEffect;
 
-ASSERT_SIZE(SpinEffect, 0x2C);
 ASSERT_OFFSET(SpinEffect, origin, 0x00);
 ASSERT_OFFSET(SpinEffect, vertex_a, 0x10);
 ASSERT_OFFSET(SpinEffect, vertex_b, 0x18);
 ASSERT_OFFSET(SpinEffect, spin_angle, 0x24);
 ASSERT_OFFSET(SpinEffect, scale, 0x28);
 ASSERT_OFFSET(SpinEffect, fade, 0x2A);
+ASSERT_SIZE(SpinEffect, 0x2C);
 
 /* One sample of a motion trail: a world position and where it lands on the screen. */
 typedef struct MotionTrailNode {
@@ -91,9 +91,9 @@ typedef struct MotionTrailNode {
     s16    size;   /* the projected size */
 } MotionTrailNode;
 
-ASSERT_SIZE(MotionTrailNode, 0x18);
 ASSERT_OFFSET(MotionTrailNode, screen, 0x10);
 ASSERT_OFFSET(MotionTrailNode, angle, 0x14);
+ASSERT_SIZE(MotionTrailNode, 0x18);
 
 #define MOTION_TRAIL_LENGTH 32
 
@@ -104,8 +104,8 @@ typedef struct MotionTrail {
     u16             size;                         /* the world size every node projects */
 } MotionTrail;
 
-ASSERT_SIZE(MotionTrail, 0x340);
 ASSERT_OFFSET(MotionTrail, dir, 0x300);
+ASSERT_SIZE(MotionTrail, 0x340);
 
 /* A falling spark particle: the area and scenario spark tables (area197 at AREA_WORK,
  * scena09 at AREA_WORK + 0x800) fall it by its velocity, bounce it off the ground and
@@ -125,10 +125,10 @@ typedef struct SparkParticle {
     u8   pad_24[4]; /* 0x24 */
 } SparkParticle;
 
-ASSERT_SIZE(SparkParticle, 0x28);
 ASSERT_OFFSET(SparkParticle, vx, 0x08);
 ASSERT_OFFSET(SparkParticle, vz, 0x10);
 ASSERT_OFFSET(SparkParticle, pos, 0x18);
+ASSERT_SIZE(SparkParticle, 0x28);
 
 /* The second and third vertex of a spark triangle relative to its projected first
  * vertex, in screen space. */
@@ -139,10 +139,10 @@ typedef struct TriangleOffset {
     u16 dy2;
 } TriangleOffset;
 
-ASSERT_SIZE(TriangleOffset, 8);
 ASSERT_OFFSET(TriangleOffset, dy1, 0x02);
 ASSERT_OFFSET(TriangleOffset, dx2, 0x04);
 ASSERT_OFFSET(TriangleOffset, dy2, 0x06);
+ASSERT_SIZE(TriangleOffset, 8);
 
 /* One 10-byte point of a dot trail (area098 at AREA_WORK + 0x2000, sce15ef1 at
  * AREA_WORK + 0x5A00). */

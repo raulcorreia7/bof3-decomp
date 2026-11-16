@@ -27,8 +27,8 @@ typedef struct BGMTrack {
     u8  sequence;  /* 0x03 sequence number in the package, g_SelectionSequences */
 } BGMTrack;
 
-ASSERT_SIZE(BGMTrack, BGM_TRACK_SIZE);
 ASSERT_OFFSET(BGMTrack, sep_slot, 0x02);
 ASSERT_OFFSET(BGMTrack, sequence, 0x03);
+ASSERT_SIZE(BGMTrack, BGM_TRACK_SIZE);
 
 #endif

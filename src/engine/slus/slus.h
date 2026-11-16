@@ -187,7 +187,6 @@ typedef struct MenuState {
     s16   cue_timer;       /* 0x0E */
 } MenuState;
 
-ASSERT_SIZE(MenuState, 0x10);
 ASSERT_OFFSET(MenuState, text, 0x00);
 ASSERT_OFFSET(MenuState, origin, 0x04);
 ASSERT_OFFSET(MenuState, step_id, 0x08);
@@ -196,6 +195,7 @@ ASSERT_OFFSET(MenuState, last_row, 0x0A);
 ASSERT_OFFSET(MenuState, selection_index, 0x0B);
 ASSERT_OFFSET(MenuState, cue_counter, 0x0C);
 ASSERT_OFFSET(MenuState, cue_timer, 0x0E);
+ASSERT_SIZE(MenuState, 0x10);
 
 /* The spill offsets and the 0x40 extent are retail reads: the decoder stores s0-s7 with `sw s0..s7, 0x20..0x3C($t0)` on the context base. */
 typedef struct EMIDecodeContext {
@@ -210,8 +210,8 @@ typedef struct EMIDecodeContext {
     u32 spill[8];   /* 0x20-0x3C outer caller s0-s7, reloaded by func_801642CC */
 } EMIDecodeContext;
 
-ASSERT_SIZE(EMIDecodeContext, 0x40);
 ASSERT_OFFSET(EMIDecodeContext, spill, 0x20);
+ASSERT_SIZE(EMIDecodeContext, 0x40);
 
 /* One status sprite cell: the size index selects a width and height row from D_8017F53C. */
 typedef struct SpriteCell {
@@ -643,6 +643,7 @@ extern const EmiRingSteps          g_EmiRingSteps;
 extern const char                  D_80149F9C[];
 extern const char                  D_80149FAC[];
 extern const u32                   D_8014AAB8[4];
+extern void                        func_8014BC70(void);
 extern u8                          D_8016432C;
 /* D_8017F44C */
 extern const char                  D_8017F44C[];
@@ -657,7 +658,6 @@ extern const s16                   D_8017F7A8[54];
 extern const s16                   D_8017F814[54];
 extern const u16                   D_8017F880[10];
 extern const u32                   D_8017F8E0[4];
-extern void                        func_8014BC70(void);
 /* D_8017F8F0 */
 extern const ObjectFunc            g_BundleOpcodes[7];
 extern u8                          D_8017F91C;
@@ -1108,12 +1108,12 @@ void                    Message_SetAnswerMessage15(void);
 void                    Area_LoadCellColumnPrev(void);
 /* func_80152D9C */
 void                    Area_LoadCellColumnNext(void);
+/* The cell record the tile-ring draw is working on. */
+extern s8*              D_1F800010;
 /* func_80152E94 */
 /* func_80152FB0 */
 extern s32              func_801530D0(void);
 extern void             func_80153CC4(void);
-/* The cell record the tile-ring draw is working on. */
-extern s8*              D_1F800010;
 extern void             func_80153D34(void);
 extern void             Area_GetCell(s32 px, s32 py, AreaCell* out);
 extern s32              Area_UploadCell(s32 column, s32 row, POLY_FT4* context, s32 slot);

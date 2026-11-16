@@ -15,8 +15,8 @@ extern Callback     D_801F056C[];
 extern BattleEffect D_801F0578[];
 #define BMAGIC_EFFECT_SLOTS D_801F0578
 #define BMAGIC_EFFECT_COUNT 32
-void func_801F01C0(void);
 void func_801EFD50(void);
+void func_801F01C0(void);
 
 #define MAGIC053_STEP_COUNT 3
 
@@ -26,8 +26,8 @@ typedef struct Magic053Steps {
 
 extern Magic053Steps D_801EEC04;
 
-extern Callback D_801F0554[];
 /* Per spark: the start byte; its high nibble picks the spark kind. */
 extern u8       D_801F0548[];
+extern Callback D_801F0554[];
 
 #endif

@@ -11,12 +11,12 @@
 #define Item_Count ((s32 (*)(s32, s32, s32))Item_Count)
 
 extern u8   D_80144908[];
+extern s16  D_801492DA;
+extern u8   D_80181BD7;
 extern u32  D_801F6C00;
 extern char D_801F6C04[];
 extern char D_801F6C08[];
 extern char D_801F6C10[];
-extern u8   D_80181BD7;
-extern s16  D_801492DA;
 
 /* A scene rectangle the panel draws: position and size. */
 typedef struct Scena10Rect {
@@ -26,18 +26,18 @@ typedef struct Scena10Rect {
     u16 height; /* 0x06 */
 } Scena10Rect;
 
-ASSERT_SIZE(Scena10Rect, 8);
 ASSERT_OFFSET(Scena10Rect, x, 0x00);
 ASSERT_OFFSET(Scena10Rect, y, 0x02);
 ASSERT_OFFSET(Scena10Rect, width, 0x04);
 ASSERT_OFFSET(Scena10Rect, height, 0x06);
+ASSERT_SIZE(Scena10Rect, 8);
 
 /* The panel draws entry 2. */
 extern Scena10Rect D_801FE7CC[];
 extern u8          D_801FE804[2];
+extern u8          D_801FE808[2];
 extern u8          D_801FE830[8][3];
 extern Pos2        D_801FE848[];
-extern u8          D_801FE808[2];
 extern u8          D_801FE874[];
 
 /* The g_SceneFlags bit the scene trigger row flags count from. */
@@ -53,10 +53,10 @@ typedef struct SceneTriggerRow {
     u16 y;      /* +0x4 - cell y, compared with the work record's pos.y integer */
 } SceneTriggerRow;
 
-ASSERT_SIZE(SceneTriggerRow, 6);
 ASSERT_OFFSET(SceneTriggerRow, script, 0x01);
 ASSERT_OFFSET(SceneTriggerRow, x, 0x02);
 ASSERT_OFFSET(SceneTriggerRow, y, 0x04);
+ASSERT_SIZE(SceneTriggerRow, 6);
 
 /* D_801FE80C */
 extern Callback        D_801FE820[];
@@ -66,15 +66,15 @@ extern Callback        D_801FE8F4[];
 extern Callback D_801FE900[];
 extern u8       D_801FE938[];
 
-extern u8  D_801FE950[4];
-extern u8  D_801FE9D8;
-extern u8  D_801FE9DC;
 extern s8  D_801FE94C[4];
+extern u8  D_801FE950[4];
 extern u16 D_801FE954[4];
 extern u8  D_801FE95C[5];
 extern u16 D_801FE964[5];
 extern u8  D_801FE970[3];
 extern u16 D_801FE974[3];
+extern u8  D_801FE9D8;
+extern u8  D_801FE9DC;
 /* D_801FE97C */
 
 /* The two end-of-pan actors of func_801FC900: spawn a type 0x13 actor on layer 0x40 with the given x and z scene rotation and the current y. */

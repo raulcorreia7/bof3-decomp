@@ -23,9 +23,9 @@ typedef struct SceneParticle {
     u8     pad[2]; /* +0x26 */
 } SceneParticle;
 
-ASSERT_SIZE(SceneParticle, 0x28);
 ASSERT_OFFSET(SceneParticle, vx, 0x10);
 ASSERT_OFFSET(SceneParticle, life, 0x25);
+ASSERT_SIZE(SceneParticle, 0x28);
 
 /* One 0x18-byte cross-section of the vertical box the scene's step draws: its corner point, a
  * spare word, then the two half extents the four corners add to the point's y and z. */
@@ -68,6 +68,7 @@ ASSERT_OFFSET(ScenePathPoint, vy, 0x04);
 ASSERT_OFFSET(ScenePathPoint, vz, 0x08);
 ASSERT_SIZE(ScenePath, 0x90);
 ASSERT_OFFSET(ScenePath, points, 0x10);
+extern s8 D_80144EA8;
 
 /* The eight 16-byte path points the scene's quad draws from: func_801F7084 stamps the box's eight
  * corners into D_801FA240 and func_801F732C draws them. */
@@ -102,36 +103,35 @@ extern s32 D_801FA344;
 extern s32 D_801FA348;
 extern s32 D_801FA350;
 extern s32 D_801FA354;
-extern s32 D_801FA358;
 
-extern s8 D_80144EA8;
-extern u8 g_PartyFieldOrder;
-extern u8 D_80144F5B;
-extern u8 D_80144F5C;
-extern u8 D_80144F5E;
-extern u8 D_80144F5F;
+extern s32 D_801FA358;
+extern u8  g_PartyFieldOrder;
+extern u8  D_80144F5B;
+extern u8  D_80144F5C;
+extern u8  D_80144F5E;
+extern u8  D_80144F5F;
 /* kept: the four script-variable bytes as one word; the byte view makes a store reload the area id, and the
  * g_ScriptVarsWord global of game/script.h shifts the image. */
 #define g_ScriptVarsWord (*(s32*)&g_ScriptVars)
 
 extern u8  D_80143F1D;
-extern u8  D_80145EB4;
-extern u8  D_80145FF4;
-extern u8  D_80146134;
-extern s16 D_801492DA;
-extern s16 D_801492DC;
 /* The spawned-actor row fields func_801F817C stamps: the flag byte, the type byte, the camera
  * angle and the layer, one record each 0x74 bytes apart. */
 extern u8  D_80143FC8[];
 extern u8  D_80143FCD[];
+extern u8  D_80143FD1[];
 extern u8  D_8014402C[];
 extern u8  D_80144030[];
 extern u8  D_80144034[];
-extern u8  D_80143FD1[];
+extern u8  D_80145EB4;
+extern u8  D_80145FF4;
+extern u8  D_80146134;
 extern s32 D_80146954;
 extern s32 D_80146958;
-
 extern s32 D_8014695C;
+extern s16 D_801492DA;
+
+extern s16 D_801492DC;
 
 extern s32 g_AreaFocusY;
 
@@ -145,12 +145,8 @@ void            func_801F7084(SceneBox* box);
 void            func_801F732C(u8 v0, u8 v1, u8 v2, u8 v3, s32 shade0, s32 shade1);
 void            func_801F747C(void);
 void            func_801F75BC(u8 weight, u8 shade);
-
-/* The eight 16-byte path points the scene's quad draws from; func_801F7084 stamps the box's
- * eight corners into D_801FA240 and func_801F732C draws them. */
-extern ScenePathPoint D_801FA240[];
-
 extern Callback D_801FA1E4[];
+
 extern Callback D_801FA204[];
 extern Callback D_801FA210[];
 extern s8       D_801FA220[];
@@ -159,6 +155,10 @@ extern s8       D_801FA220[];
 extern u8       g_ScenePositions;
 /* D_801FA230 */
 extern Callback g_ScenePositionDispatch[];
+
+/* The eight 16-byte path points the scene's quad draws from; func_801F7084 stamps the box's
+ * eight corners into D_801FA240 and func_801F732C draws them. */
+extern ScenePathPoint D_801FA240[];
 
 void func_801F7EC0();
 

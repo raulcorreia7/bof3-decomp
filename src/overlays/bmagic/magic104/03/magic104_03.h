@@ -8,12 +8,12 @@
 #include "overlays/bmagic/bmagic.h"
 
 extern Magic010SharedSteps D_801EEC04;
-extern Callback            D_801F08F0[];
-/* The step handlers the draw step dispatches. */
-extern Callback            D_801F0900[];
 
 /* The x and y offset of each of the eight spawned effects. */
-extern Offset2 D_801F08A8[];
+extern Offset2  D_801F08A8[];
+extern Callback D_801F08F0[];
+/* The step handlers the draw step dispatches. */
+extern Callback D_801F0900[];
 
 void func_801EF370(void);
 void func_801EFA54(void);

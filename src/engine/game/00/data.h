@@ -81,9 +81,9 @@ typedef struct PartySlot {
     u8 unk_03;
 } PartySlot;
 
-ASSERT_SIZE(PartySlot, 0x4);
 ASSERT_OFFSET(PartySlot, active, 0x0);
 ASSERT_OFFSET(PartySlot, key, 0x1);
+ASSERT_SIZE(PartySlot, 0x4);
 
 /* 0x1C-byte front-end handler row. Game_FindArea returns the row whose key
  * byte at +0x18 matches the current world state; the handlers sit at +0, +4,

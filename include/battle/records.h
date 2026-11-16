@@ -87,11 +87,11 @@ typedef struct BattleAction {
     u8  unk_08; /* +0x08 step byte: func_8009E248 sets 1, func_8009E500 sets 2 */
 } BattleAction;
 
-ASSERT_SIZE(BattleAction, 0x0A);
-
 ASSERT_OFFSET(BattleAction, type, 0x01);
+
 ASSERT_OFFSET(BattleAction, unk_02, 0x02);
 ASSERT_OFFSET(BattleAction, unk_08, 0x08);
+ASSERT_SIZE(BattleAction, 0x0A);
 
 /* One entry of the candidate table at 0x801463DC: eight rows of 0x0C bytes
  * that the game overlay fills before a wild encounter and the battle overlay
@@ -113,9 +113,9 @@ typedef struct EncounterEnemy {
     Offset2 pos; /* 0x04 encounter position, 16.16 */
 } EncounterEnemy;
 
-ASSERT_SIZE(EncounterEnemy, 0x0C);
 ASSERT_OFFSET(EncounterEnemy, id, 0x01);
 ASSERT_OFFSET(EncounterEnemy, pos, 0x04);
+ASSERT_SIZE(EncounterEnemy, 0x0C);
 
 /* One entry of the panel-owner table at 0x801ED9B0: the owner index, a second
  * byte, and the panel id. */
@@ -125,9 +125,9 @@ typedef struct PanelOwner {
     u16 panel_id;
 } PanelOwner;
 
-ASSERT_SIZE(PanelOwner, 0x04);
 ASSERT_OFFSET(PanelOwner, owner_index, 0x00);
 ASSERT_OFFSET(PanelOwner, panel_id, 0x02);
+ASSERT_SIZE(PanelOwner, 0x04);
 
 /* One entry of the selection table g_BattleSelections: the id battle/battle/03 tests
  * against 0xFFFF and battle/battle/15 reads, and the handler. 8 bytes. */
@@ -137,9 +137,9 @@ typedef struct BattleSelection {
     Callback handler;
 } BattleSelection;
 
-ASSERT_SIZE(BattleSelection, 0x08);
 ASSERT_OFFSET(BattleSelection, id, 0x00);
 ASSERT_OFFSET(BattleSelection, handler, 0x04);
+ASSERT_SIZE(BattleSelection, 0x08);
 
 /* One entry of the selection-type table at 0x801CA71C: a mask halfword and the
  * rest of the 0x14-byte row, which battle/battle/15 reads byte by byte. */
@@ -148,8 +148,8 @@ typedef struct BattleSelectionType {
     u8  unk_02[0x12];
 } BattleSelectionType;
 
-ASSERT_SIZE(BattleSelectionType, 0x14);
 ASSERT_OFFSET(BattleSelectionType, mask, 0x00);
+ASSERT_SIZE(BattleSelectionType, 0x14);
 
 /* The word at +0x60 of a queued slot. battle/battle/15 stores the action's target
  * index there (func_800AAEBC) and battle/battle/03 reads the low halfword of it to
@@ -224,12 +224,12 @@ typedef struct BattleEffect {
     BattleEffectTarget  target; /* +0x74 the battler the effect acts on */
 } BattleEffect;
 
-ASSERT_SIZE(BattleEffect, 0x78);
 ASSERT_OFFSET(BattleEffect, unk_07, 0x07);
 ASSERT_OFFSET(BattleEffect, unk_08, 0x08);
 ASSERT_OFFSET(BattleEffect, unk_2E, 0x2E);
 ASSERT_OFFSET(BattleEffect, unk_30, 0x30);
 ASSERT_OFFSET(BattleEffect, unk_32, 0x32);
+ASSERT_SIZE(BattleEffect, 0x78);
 
 /* Battle effect work records (stride 0x78). */
 extern BattleEffect g_BattleEffects[];
@@ -265,11 +265,11 @@ typedef struct BattleTurn {
     BattlerFlags      action_flags; /* BattlerActionFlags */
 } BattleTurn;
 
-ASSERT_SIZE(BattleTurn, 0x14);
 ASSERT_OFFSET(BattleTurn, hp_change, 0x04);
 ASSERT_OFFSET(BattleTurn, target_flags, 0x08);
 ASSERT_OFFSET(BattleTurn, damage_flags, 0x0C);
 ASSERT_OFFSET(BattleTurn, action_flags, 0x10);
+ASSERT_SIZE(BattleTurn, 0x14);
 
 /* A screen coordinate cell: battle/battle/03 and the field overlays read it
  * unsigned, battle/battle/15 reads it signed because the panels slide to
@@ -309,9 +309,9 @@ typedef struct BattlePanelByteCells {
     u8 pad_15[0x09];
 } BattlePanelByteCells;
 
-ASSERT_SIZE(BattlePanelByteCells, BATTLE_PANEL_BYTE_CELLS_SIZE);
 ASSERT_OFFSET(BattlePanelByteCells, scale, 0x12);
 ASSERT_OFFSET(BattlePanelByteCells, rows, 0x14);
+ASSERT_SIZE(BattlePanelByteCells, BATTLE_PANEL_BYTE_CELLS_SIZE);
 
 /* The battle panel task at 0x80148648 (g_MenuCurrentPanel).
  *
@@ -340,7 +340,6 @@ typedef struct BattlePanelTask {
     u16                  max_hp;    /* +0x1C copied from EnemyBattler.stats.max_hp; the HP bar's divisor */
 } BattlePanelTask;
 
-ASSERT_SIZE(BattlePanelTask, 0x1E);
 ASSERT_OFFSET(BattlePanelTask, state, 0x03);
 ASSERT_OFFSET(BattlePanelTask, x, 0x04);
 ASSERT_OFFSET(BattlePanelTask, y, 0x06);
@@ -348,6 +347,7 @@ ASSERT_OFFSET(BattlePanelTask, selection, 0x0A);
 ASSERT_OFFSET(BattlePanelTask, row_base, 0x12);
 ASSERT_OFFSET(BattlePanelTask, hp, 0x14);
 ASSERT_OFFSET(BattlePanelTask, max_hp, 0x1C);
+ASSERT_SIZE(BattlePanelTask, 0x1E);
 
 typedef struct EnemyBattler {
     TaskHeader  header; /* 0x00 */
@@ -422,7 +422,6 @@ typedef struct EnemyBattler {
     u8          pad_116[0x2];
 } EnemyBattler;
 
-ASSERT_SIZE(EnemyBattler, 0x118);
 ASSERT_OFFSET(EnemyBattler, slot, 0x05);
 ASSERT_OFFSET(EnemyBattler, unk_06, 0x06);
 ASSERT_OFFSET(EnemyBattler, unk_08, 0x08);
@@ -441,19 +440,20 @@ ASSERT_OFFSET(EnemyBattler, unk_58, 0x58);
 ASSERT_OFFSET(EnemyBattler, unk_5A, 0x5A);
 ASSERT_OFFSET(EnemyBattler, unk_5C, 0x5C);
 ASSERT_OFFSET(EnemyBattler, unk_5F, 0x5F);
+ASSERT_OFFSET(EnemyBattler, enemy_id, 0x7C);
+ASSERT_OFFSET(EnemyBattler, choice_ai, 0x7E);
 ASSERT_OFFSET(EnemyBattler, status, 0x82);
+ASSERT_OFFSET(EnemyBattler, zenny, 0x84);
+ASSERT_OFFSET(EnemyBattler, exp, 0x86);
 ASSERT_OFFSET(EnemyBattler, unk_8A, 0x8A);
 ASSERT_OFFSET(EnemyBattler, skills, 0x8C);
 ASSERT_OFFSET(EnemyBattler, hp, 0x94);
-ASSERT_OFFSET(EnemyBattler, enemy_id, 0x7C);
-ASSERT_OFFSET(EnemyBattler, choice_ai, 0x7E);
-ASSERT_OFFSET(EnemyBattler, zenny, 0x84);
-ASSERT_OFFSET(EnemyBattler, exp, 0x86);
 ASSERT_OFFSET(EnemyBattler, stats, 0xA0);
 ASSERT_OFFSET(EnemyBattler, base, 0xC0);
 ASSERT_OFFSET(EnemyBattler, type, 0xE0);
-ASSERT_OFFSET(EnemyBattler, turn, 0xF4);
 ASSERT_OFFSET(EnemyBattler, unk_E8, 0xE8);
+ASSERT_OFFSET(EnemyBattler, turn, 0xF4);
+ASSERT_SIZE(EnemyBattler, 0x118);
 
 /* Point a boss enemy at its script, event handler and step table. */
 static inline void EnemyBattler_SetScript(EnemyBattler* enemy, u8* script, ModeFunc handler, u16* steps) {
@@ -517,11 +517,11 @@ typedef struct FieldMode {
     PanelCounter mode_12B; /* 0x13 panel mode */
 } FieldMode;
 
-ASSERT_SIZE(FieldMode, 0x14);
 ASSERT_OFFSET(FieldMode, counter_11C, 0x04);
 ASSERT_OFFSET(FieldMode, value_120, 0x08);
 ASSERT_OFFSET(FieldMode, index_124, 0x0C);
 ASSERT_OFFSET(FieldMode, mode_12B, 0x13);
+ASSERT_SIZE(FieldMode, 0x14);
 
 /* The field's view of the eight cells after the turn: the flags that gate the entry check and the entity slot. */
 typedef struct FieldEntry {
@@ -610,9 +610,9 @@ typedef struct PartyMember {
     u8  pad_13E[2];
 } PartyMember;
 
-ASSERT_SIZE(PartyMember, 0x140);
 ASSERT_OFFSET(PartyMember, slot, 0x05);
 ASSERT_OFFSET(PartyMember, u, 0x118);
+ASSERT_SIZE(PartyMember, 0x140);
 /* The four bytes at +0x08 as one word; the bmagic tests mask it. */
 #define PARTY_MEMBER_WORD_08(battler) (*(u32*)&(battler)->facing)
 
@@ -622,16 +622,16 @@ ASSERT_OFFSET(PartyMember, timer, 0x0A);
 ASSERT_OFFSET(PartyMember, param, 0x0B);
 ASSERT_OFFSET(PartyMember, unk_14, 0x14);
 ASSERT_OFFSET(PartyMember, unk_20, 0x20);
-ASSERT_OFFSET(PartyMember, unk_60, 0x60);
-ASSERT_OFFSET(PartyMember, unk_70, 0x70);
 ASSERT_OFFSET(PartyMember, unk_29, 0x29);
 ASSERT_OFFSET(PartyMember, unk_2C, 0x2C);
 ASSERT_OFFSET(PartyMember, depth, 0x32);
 ASSERT_OFFSET(PartyMember, pos, 0x34);
+ASSERT_OFFSET(PartyMember, unk_60, 0x60);
+ASSERT_OFFSET(PartyMember, unk_70, 0x70);
 ASSERT_OFFSET(PartyMember, chr, 0x74);
 ASSERT_OFFSET(PartyMember, status, 0x12C);
-ASSERT_OFFSET(PartyMember, unk_13A, 0x13A);
 ASSERT_OFFSET(PartyMember, focus_counter, 0x138);
+ASSERT_OFFSET(PartyMember, unk_13A, 0x13A);
 ASSERT_OFFSET(PartyMember, character_index, 0x13C);
 
 /* The damage/status word: `damage_flags` of the enemy row, `damage_flags` of the
@@ -718,7 +718,6 @@ typedef struct GameState {
     /* 0x418 */ u8           unk_418[4];
 } GameState;
 
-ASSERT_SIZE(GameState, 0x41C);
 ASSERT_OFFSET(GameState, current, 0x3C0);
 ASSERT_OFFSET(GameState, party_size, 0x3C4);
 ASSERT_OFFSET(GameState, battle_order, 0x3C5);
@@ -729,6 +728,7 @@ ASSERT_OFFSET(GameState, input, 0x3CC);
 ASSERT_OFFSET(GameState, unk_3CE, 0x3CE);
 ASSERT_OFFSET(GameState, unk_3E7, 0x3E7);
 ASSERT_OFFSET(GameState, base_x, 0x410);
+ASSERT_SIZE(GameState, 0x41C);
 
 /* D_80145E90 */
 extern GameState g_Game;
@@ -855,8 +855,8 @@ typedef struct BattleDrops {
     u8  item_counts[16]; /* 0x20 drops of each id */
 } BattleDrops;
 
-ASSERT_SIZE(BattleDrops, 0x30);
 ASSERT_OFFSET(BattleDrops, item_counts, 0x20);
+ASSERT_SIZE(BattleDrops, 0x30);
 
 /* How the battle went at 0x80146324: the surprise and option flags it started with, the escape attempts, the
  * result and event flags, and the experience, zenny and drops it pays out. */
@@ -873,10 +873,10 @@ typedef struct BattleOutcome {
     BattleDrops drops;        /* 0x10 */
 } BattleOutcome;
 
-ASSERT_SIZE(BattleOutcome, BATTLE_OUTCOME_SIZE);
 ASSERT_OFFSET(BattleOutcome, drop_count, 0x03);
 ASSERT_OFFSET(BattleOutcome, reward_exp, 0x08);
 ASSERT_OFFSET(BattleOutcome, drops, 0x10);
+ASSERT_SIZE(BattleOutcome, BATTLE_OUTCOME_SIZE);
 
 /* The battle modes, the rows of g_BattlePhases: set-up and entrance once, then rounds of commands, turn order,
  * actions and round end, then the result. */
@@ -898,9 +898,9 @@ typedef struct BattlePhase {
     u8 sub_step; /* 0x02 */
 } BattlePhase;
 
-ASSERT_SIZE(BattlePhase, 3);
 ASSERT_OFFSET(BattlePhase, step, 0x01);
 ASSERT_OFFSET(BattlePhase, sub_step, 0x02);
+ASSERT_SIZE(BattlePhase, 3);
 
 /* Battle sprite cell record consumed by Battle_SetCellPaletteStp, Battle_ClearCellPaletteStp
  * and Battle_CopyCellPalette: +0x24 bit 2 selects the second cell bank, +0x27 is
@@ -1043,7 +1043,6 @@ typedef struct BattleState {
     /* 0xFA */ u8            unk_FA[6];
 } BattleState;
 
-ASSERT_SIZE(BattleState, 0x100);
 ASSERT_OFFSET(BattleState, phase, 0x00);
 ASSERT_OFFSET(BattleState, ui_step, 0x03);
 ASSERT_OFFSET(BattleState, cursor, 0x06);
@@ -1070,6 +1069,7 @@ ASSERT_OFFSET(BattleState, gene_count, 0xE7);
 ASSERT_OFFSET(BattleState, dragon_form, 0xE9);
 ASSERT_OFFSET(BattleState, action_lock, 0xEE);
 ASSERT_OFFSET(BattleState, pending_status, 0xF8);
+ASSERT_SIZE(BattleState, 0x100);
 
 /* D_801462E0 */
 extern BattleState g_Battle;
@@ -1130,14 +1130,14 @@ extern u8            g_BattleEnemies[];
  * purpose: some retail stores rely on the plain form, for example the counter
  * store in the return-jump delay slot of func_801E8D04. */
 extern PartyMember*  g_BattleEffectBattler;
+/* The selection slot byte; battle/battle/15 re-reads it through a pointer. */
+extern volatile u8   D_801462E7;
 /* The current battler's enemy work row (the row at ENEMY_COMBATANT_BASE that
  * the battle mode is running). battle/battle/03 stores it when it arms a slot
  * (func_801E2170) and battle/battle/15 reads its cells (Battle_TriggerEnemyEvents). */
 /* D_801EB4E8 */
 extern EnemyBattler* g_BattleCurrentEnemy;
 extern u8            D_801EB6B2[];
-/* The selection slot byte; battle/battle/15 re-reads it through a pointer. */
-extern volatile u8   D_801462E7;
 /* Enemy battler work record (stride 0x118, indexed by slot - 3). */
 extern EnemyBattler  g_BattleEnemyBattlers[];
 /* The last battle's stat gains, which the bate stat screen adds to its character. */

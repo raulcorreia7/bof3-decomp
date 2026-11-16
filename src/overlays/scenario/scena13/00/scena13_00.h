@@ -24,13 +24,13 @@ void func_801F70DC(void);
 void func_801F7568(void);
 void func_801F9E70(u16 phase);
 
-extern u8 D_801FBF78[];
+extern u8 D_801460FB;
 
-extern u8        D_801FBF98[];
-extern u16       D_80146258;
-extern u8        D_801460FB;
 extern u8        D_8014623B;
+extern u16       D_80146258;
 extern u32       D_80147B5C;
+extern u8        D_801FBF78[];
+extern u8        D_801FBF98[];
 /* D_801FBFB8 */
 extern SceneFunc g_SceneActorDispatch[];
 /* A byte the scene handlers store and reload. */

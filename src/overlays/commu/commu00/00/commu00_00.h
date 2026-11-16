@@ -94,10 +94,10 @@ typedef struct FairyVariant {
     u16 count;
 } FairyVariant;
 
-ASSERT_SIZE(FairyVariant, FAIRY_VARIANT_SIZE);
 ASSERT_OFFSET(FairyVariant, message_id, 0x00);
 ASSERT_OFFSET(FairyVariant, item_id, 0x02);
 ASSERT_OFFSET(FairyVariant, count, 0x04);
+ASSERT_SIZE(FairyVariant, FAIRY_VARIANT_SIZE);
 
 /* The payload prologue at 0x801EEC00: the type-0 EMI loader compares the
  * first word with the archive TOC's cached first word
@@ -111,9 +111,9 @@ typedef struct FairyVillageOverlayHeader {
     u8            pad_0B;
 } FairyVillageOverlayHeader;
 
-ASSERT_SIZE(FairyVillageOverlayHeader, FAIRY_VILLAGE_OVERLAY_HEADER_SIZE);
 ASSERT_OFFSET(FairyVillageOverlayHeader, explore_threshold, 0x04);
 ASSERT_OFFSET(FairyVillageOverlayHeader, label_cap, 0x08);
+ASSERT_SIZE(FairyVillageOverlayHeader, FAIRY_VILLAGE_OVERLAY_HEADER_SIZE);
 
 /* One exploration reward row (Fairy_RollExploreReward): the roll the group starts at,
  * then the three group weights. */
@@ -122,8 +122,8 @@ typedef struct FairyRewardRoll {
     u8 weights[FAIRY_EXPLORE_TRIP_COUNT];
 } FairyRewardRoll;
 
-ASSERT_SIZE(FairyRewardRoll, FAIRY_REWARD_ROLL_SIZE);
 ASSERT_OFFSET(FairyRewardRoll, weights, 0x01);
+ASSERT_SIZE(FairyRewardRoll, FAIRY_REWARD_ROLL_SIZE);
 
 /* The 96-byte header-data block: the "%d" format, the 20 gift rows
  * Fairy_GrantGift copies, and the 3 exploration reward rows Fairy_RollExploreReward
@@ -134,9 +134,9 @@ typedef struct FairyVillageRewards {
     FairyRewardRoll rolls[FAIRY_EXPLORE_TRIP_COUNT]; /* 0x54 D_801EEC98 */
 } FairyVillageRewards;
 
-ASSERT_SIZE(FairyVillageRewards, FAIRY_VILLAGE_REWARDS_SIZE);
 ASSERT_OFFSET(FairyVillageRewards, gifts, 0x04);
 ASSERT_OFFSET(FairyVillageRewards, rolls, 0x54);
+ASSERT_SIZE(FairyVillageRewards, FAIRY_VILLAGE_REWARDS_SIZE);
 
 /* The overlay's shared data block, read through the symbol views listed
  * beside each member. The step arrays are the scene step tables the village dispatches through. */
@@ -173,7 +173,6 @@ typedef struct FairyVillage {
     u8                  state_450[4]; /* 0x450 D_801F294C..D_801F294F */
 } FairyVillage;
 
-ASSERT_SIZE(FairyVillage, FAIRY_VILLAGE_DATA_SIZE);
 ASSERT_OFFSET(FairyVillage, culture_threshold, 0x018);
 ASSERT_OFFSET(FairyVillage, job_progress_cap, 0x027);
 ASSERT_OFFSET(FairyVillage, copy_class, 0x034);
@@ -184,6 +183,7 @@ ASSERT_OFFSET(FairyVillage, explore_rewards, 0x11C);
 ASSERT_OFFSET(FairyVillage, fairies, 0x204);
 ASSERT_OFFSET(FairyVillage, variant_counter, 0x42C);
 ASSERT_OFFSET(FairyVillage, labels, 0x434);
+ASSERT_SIZE(FairyVillage, FAIRY_VILLAGE_DATA_SIZE);
 
 /* Retail-address data symbols, in address order. */
 extern u8             D_801448F2;

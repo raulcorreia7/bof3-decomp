@@ -5,11 +5,11 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern Callback     D_801EF788[];
 /* The angle cell the effect's sine and cosine pair share. */
 extern s16          D_1F800004;
 /* The tint rows the effect picks from: three bytes (red, green, blue) each. */
 extern u8           D_801EF76C[];
+extern Callback     D_801EF788[];
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
 extern BattleEffect D_801EF794[];
 #define BMAGIC_EFFECT_SLOTS         D_801EF794

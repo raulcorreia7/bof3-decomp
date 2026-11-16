@@ -20,11 +20,11 @@ extern char g_MenuStatFormat[];
 /* The value formats Menu_DrawCharacterWindow prints. */
 extern char g_MenuCurrentValueFormat[];
 extern char g_MenuMaxValueFormat[];
+/* The sprite run it draws under the record. */
+extern u8   D_801D97A4[];
 /* The poison and confusion labels it draws beside the name. */
 extern u8   D_801D9B3C[];
 extern u8   D_801D9B44[];
-/* The sprite run it draws under the record. */
-extern u8   D_801D97A4[];
 extern char g_MenuZennyFormat[];
 /* D_801D0C2C */
 extern char g_MenuClockFormat[];
@@ -77,18 +77,17 @@ extern u8       g_MenuCaptionRight[];
 extern u8       g_MenuClockCaption[];
 extern u8       g_MenuCommandFrame[];
 extern u8       g_MenuCommandFrameSelected[];
-/* D_801D9960 */
-extern u8       g_MenuListTab2OffSprites[];
-/* D_801D9978 */
-extern u8       g_MenuListTab2OnSprites[];
+extern u8       D_80148654;
 extern u8*      D_801C893C[];
 extern u8*      D_801C8950[];
-extern u8       D_801D9EF0[7];
-extern u8       D_80148654;
 extern u8       D_801D9780[12];
 extern u8       D_801D978C[12];
 extern u8       D_801D9798[4];
 extern u8       D_801D979C[];
+/* D_801D9960 */
+extern u8       g_MenuListTab2OffSprites[];
+/* D_801D9978 */
+extern u8       g_MenuListTab2OnSprites[];
 extern u8       D_801D9990[];
 extern u8       D_801D999C[];
 /* D_801D9A60 */
@@ -97,6 +96,7 @@ extern u8       g_MenuLabelAgility[];
 extern u8       g_MenuEquipRowIcons[];
 /* D_801D9B64 */
 extern u8       g_MenuLabelEquip[];
+extern u8       D_801D9EF0[7];
 extern u8       g_MenuPortraitAtlas[];
 extern u32      g_ShisuScales[];
 extern u8       D_801D9BA8[];
@@ -177,14 +177,14 @@ ASSERT_SIZE(ShisuIngredients, 12);
 
 extern s8 D_80144E5E;
 
+extern u8               D_80144FF9;
+extern s16              D_80148364;
+extern u8               D_8014839C;
 extern void             func_801D1CA4(void);
 extern s32              func_801D1E60(void);
 extern void             func_801D1EE8(void);
 extern void             func_801D2308(void* record);
 extern void             func_801D27BC(void);
-extern u8               D_80144FF9;
-extern s16              D_80148364;
-extern u8               D_8014839C;
 /* D_801DA028 */
 extern ShisuIngredients g_ShisuIngredients;
 extern s32              D_801DA034;
@@ -198,9 +198,9 @@ extern u8               g_ShisuBaseB;
 extern u8               D_801DA04E;
 extern s32              D_801DA084;
 extern s32              g_ShisuBaseScale;
-extern s32              D_801DA0FC;
 extern u8               D_801DA0C0;
 extern u8               D_801DA0C6;
+extern s32              D_801DA0FC;
 extern u32              g_ShisuToppingScale;
 /* kept: the tint bytes stay separate globals; one array shares their base register and leaves
    func_801D2ADC eight bytes short. */

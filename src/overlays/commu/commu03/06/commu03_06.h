@@ -12,6 +12,9 @@
 #define COMMU03_STEP0_COUNT 2
 #define COMMU03_STEP1_COUNT 2
 #define COMMU03_STEP2_COUNT 4
+extern u16 D_800104E2;
+/* g_FairyRooms + 3: the selected room's cue count. */
+extern u8  D_801457AB[];
 
 /* D_801D18C8 */
 extern Callback g_Commu03Steps[COMMU03_STEP_COUNT];
@@ -21,16 +24,13 @@ extern Callback g_Commu03Step0Steps[COMMU03_STEP0_COUNT];
 extern Callback g_Commu03Step1Steps[COMMU03_STEP1_COUNT];
 /* D_801D18E4 */
 extern Callback g_Commu03Step2Steps[COMMU03_STEP2_COUNT];
-extern u8       D_801D1944;
 extern u8       D_801D18F4[];
 extern u8       D_801D18F8[];
 extern u8*      D_801D190C;
-extern u16      D_800104E2;
-extern u8       D_801D1948;
-extern s16      D_801D1940;
 extern u8       D_801D1918[];
-/* g_FairyRooms + 3: the selected room's cue count. */
-extern u8       D_801457AB[];
+extern s16      D_801D1940;
+extern u8       D_801D1944;
+extern u8       D_801D1948;
 
 /* The overlay's state byte the guarded step advances. */
 

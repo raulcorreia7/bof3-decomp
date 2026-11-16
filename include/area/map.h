@@ -239,7 +239,6 @@ typedef struct AreaLoad {
     /* 0x40 */ Callback  callback;
 } AreaLoad;
 
-ASSERT_SIZE(AreaLoad, GAME_TABLE_ENTRY_SIZE);
 ASSERT_OFFSET(AreaLoad, handler, 0x00);
 ASSERT_OFFSET(AreaLoad, unk_0C, 0x0C);
 ASSERT_OFFSET(AreaLoad, flag_32, 0x32);
@@ -247,5 +246,6 @@ ASSERT_OFFSET(AreaLoad, steps, 0x34);
 ASSERT_OFFSET(AreaLoad, matrix, 0x38);
 ASSERT_OFFSET(AreaLoad, unk_3C, 0x3C);
 ASSERT_OFFSET(AreaLoad, callback, 0x40);
+ASSERT_SIZE(AreaLoad, GAME_TABLE_ENTRY_SIZE);
 
 #endif

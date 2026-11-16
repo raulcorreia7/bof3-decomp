@@ -183,7 +183,6 @@ typedef struct BattleEventPacket {
     u8  unk_08[8]; /* +0x08 the eight bytes copied to the work row's +0x8C */
 } BattleEventPacket;
 
-ASSERT_SIZE(BattleEventPacket, 0x10);
 ASSERT_OFFSET(BattleEventPacket, kind, 0x00);
 ASSERT_OFFSET(BattleEventPacket, effect_kind, 0x01);
 ASSERT_OFFSET(BattleEventPacket, selector, 0x02);
@@ -191,6 +190,7 @@ ASSERT_OFFSET(BattleEventPacket, value, 0x03);
 ASSERT_OFFSET(BattleEventPacket, unk_04, 0x04);
 ASSERT_OFFSET(BattleEventPacket, panel_id, 0x06);
 ASSERT_OFFSET(BattleEventPacket, unk_08, 0x08);
+ASSERT_SIZE(BattleEventPacket, 0x10);
 
 /* What makes an event packet trigger (BattleEventPacket.kind). The once-only kinds trigger at most once per
  * battle; the REPEAT kinds trigger at every hit. */
@@ -276,11 +276,11 @@ typedef struct BattlePanelRecord {
     u8  unk_58;
 } BattlePanelRecord;
 
-ASSERT_SIZE(BattlePanelRecord, 0x5A);
 ASSERT_OFFSET(BattlePanelRecord, unk_20, 0x20);
 ASSERT_OFFSET(BattlePanelRecord, unk_35, 0x35);
 ASSERT_OFFSET(BattlePanelRecord, unk_40, 0x40);
 ASSERT_OFFSET(BattlePanelRecord, unk_55, 0x55);
+ASSERT_SIZE(BattlePanelRecord, 0x5A);
 
 typedef struct BattleSelectionState {
     volatile u8 active_count; /* +0x00 */
@@ -369,13 +369,13 @@ extern u8                                D_800B44B0[];
 extern u8                                D_800B44B8[];
 extern Callback                          D_800B44C8[3];
 extern Callback                          D_800B44D4[4];
+extern Callback                          D_800B44E4[];
 extern u8                                D_800B45E0[96];
 extern u8                                D_800B4640[92];
 extern u8                                D_800B469C[72];
 extern u8                                D_800B46E4[40];
 extern u8*                               D_800B470C[4];
 extern Callback                          D_800B471C[130];
-extern Callback                          D_800B44E4[];
 extern u8                                g_BattleEscapeThresholds[];
 extern s8                                D_800B4924[];
 extern u16                               D_800B492C[16];
@@ -386,7 +386,6 @@ extern s16                               D_800B496C[8];
 extern s16                               D_800B497C[8];
 extern s16                               D_800B498C[400];
 extern u8                                D_800B4C90[];
-extern u8                                D_800B70AC[];
 extern Callback                          D_800B4CAC[7];
 extern Callback                          D_800B4CC8[2];
 extern Callback                          D_800B4CD0[5];
@@ -403,6 +402,7 @@ extern u8                                D_800B4E9E[5];
 extern u8                                D_800B4EE0[21][14];
 extern u8                                D_800B5008[21][8];
 extern u16                               D_800B51E8[4][2];
+extern u8                                D_800B70AC[];
 extern PartyMember                       s_BattleBattlerTemplates[BATTLE_PARTY_CHARACTERS_COUNT];
 extern Callback                          D_800B50B0[7];
 extern Callback                          D_800B50CC[2];

@@ -18,11 +18,11 @@ typedef struct Magic150Spark {
     s16 life;   /* 0x06 */
 } Magic150Spark;
 
-ASSERT_SIZE(Magic150Spark, 0x08);
 ASSERT_OFFSET(Magic150Spark, active, 0x00);
 ASSERT_OFFSET(Magic150Spark, offset, 0x02);
 ASSERT_OFFSET(Magic150Spark, angle, 0x04);
 ASSERT_OFFSET(Magic150Spark, life, 0x06);
+ASSERT_SIZE(Magic150Spark, 0x08);
 
 /* The beam origin, the ring radius, the offset and angle that place the beam's
  * path, and the eight sparks the cursor walks. */
@@ -36,12 +36,12 @@ typedef struct Magic150Beam {
     Magic150Spark sparks[8]; /* 0x18 */
 } Magic150Beam;
 
-ASSERT_SIZE(Magic150Beam, 0x58);
 ASSERT_OFFSET(Magic150Beam, origin, 0x00);
 ASSERT_OFFSET(Magic150Beam, radius, 0x10);
 ASSERT_OFFSET(Magic150Beam, offset, 0x12);
 ASSERT_OFFSET(Magic150Beam, angle, 0x14);
 ASSERT_OFFSET(Magic150Beam, sparks, 0x18);
+ASSERT_SIZE(Magic150Beam, 0x58);
 extern Magic150Beam   D_801EFA9C;
 /* The cursor over the spark table. */
 extern Magic150Spark* D_801EFAF4;
@@ -60,8 +60,8 @@ typedef struct Magic150SpanPair {
     ProjectedSpan current;  /* 0x1C */
 } Magic150SpanPair;
 
-ASSERT_SIZE(Magic150SpanPair, 0x38);
 ASSERT_OFFSET(Magic150SpanPair, current, 0x1C);
+ASSERT_SIZE(Magic150SpanPair, 0x38);
 /* The beam segment the beam draw walks along its path. */
 extern Magic150SpanPair D_801EFAF8;
 

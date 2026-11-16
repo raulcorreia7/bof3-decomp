@@ -12,6 +12,12 @@
 #define ACTOR_SCREEN_X_STEP      0x10
 #define ACTOR_SCREEN_X_THRESHOLD 0xC0
 
+/* The map bundle's height and grid offset, and the cell table after it. */
+extern u8   D_80104001;
+extern u16  D_80104002;
+extern u8   D_8010402C[];
+extern void func_801F3994(void);
+
 /* The scratchpad cell holding this mode's work pointer. */
 
 /* The overlay's flag word. */
@@ -23,21 +29,15 @@
 /* The party position in 16.16 fixed point. */
 /* The payload includes the per-state handler tables. */
 extern u8 D_801F57BC[];
-extern s8 D_801F58D0[];
-extern u8 D_801F5990[];
-
-/* The map bundle's height and grid offset, and the cell table after it. */
-extern u8  D_80104001;
-extern u16 D_80104002;
-extern u8  D_8010402C[];
 
 /* The per-cell tile bytes and the cell primitives. */
 extern u8  D_801F57CC[];
 extern u8  D_801F584C[];
 extern u32 D_801F58C8[];
-extern u8  D_801F64B8[];
+extern s8  D_801F58D0[];
+extern u8  D_801F5990[];
 
-extern void func_801F3994(void);
+extern u8 D_801F64B8[];
 
 void func_801F2FA0(s16 x, s16 y, s8* glyphs, u8 phase);
 void func_801F31DC(s16 x, s16 y);

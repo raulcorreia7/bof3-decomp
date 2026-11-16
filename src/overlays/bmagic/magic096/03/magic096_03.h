@@ -21,10 +21,10 @@ typedef struct Magic096Steps {
 } Magic096Steps;
 
 extern Magic096Steps D_801EEC10;
-extern u8            D_801F0488[];
 
 /* The x and y offset from the battler each spawned effect starts at, one row per effect index (byte 0x04). */
 extern Offset2 D_801F0408[];
+extern u8      D_801F0488[];
 /* One byte per spawned effect. */
 extern u8      D_801F0498[];
 

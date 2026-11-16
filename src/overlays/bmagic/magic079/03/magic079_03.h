@@ -7,10 +7,10 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern s32 D_801F037C[];
-
 extern Callback D_801F02B4[];
-void            func_801EF458(void);
+
+extern s32 D_801F037C[];
+void       func_801EF458(void);
 
 extern Callback D_801F02C8[];
 void            func_801F002C(void);

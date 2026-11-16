@@ -50,10 +50,10 @@ typedef struct SceneLinePoint {
     Coord z;
 } SceneLinePoint;
 
-ASSERT_SIZE(SceneLinePoint, 0x0C);
 ASSERT_OFFSET(SceneLinePoint, x, 0x00);
 ASSERT_OFFSET(SceneLinePoint, y, 0x04);
 ASSERT_OFFSET(SceneLinePoint, z, 0x08);
+ASSERT_SIZE(SceneLinePoint, 0x0C);
 
 /* Scene effects: func_801F7134 draws the actor-relative sprite;
  * func_801F78EC draws its field-space lines and Scene_DrawTriangle its rotated triangles. */
@@ -87,10 +87,10 @@ typedef struct SceneEffect {
     Angle3         angle;
 } SceneEffect;
 
-ASSERT_SIZE(SceneEffect, 0x70);
 ASSERT_OFFSET(SceneEffect, step, 0x01);
 ASSERT_OFFSET(SceneEffect, channel_18, 0x18);
 ASSERT_OFFSET(SceneEffect, pos, 0x34);
+ASSERT_SIZE(SceneEffect, 0x70);
 STATIC_ASSERT(SceneEffect_pos_z, DECOMP_OFFSETOF(SceneEffect, pos.z) == 0x3C);
 ASSERT_OFFSET(SceneEffect, unk_54, 0x54);
 ASSERT_OFFSET(SceneEffect, color, 0x5D);
@@ -103,9 +103,9 @@ typedef union AreaScroll {
     s16 half[2];
 } AreaScroll;
 
-ASSERT_SIZE(AreaScroll, 4);
 ASSERT_OFFSET(AreaScroll, raw, 0x00);
 ASSERT_OFFSET(AreaScroll, half, 0x00);
+ASSERT_SIZE(AreaScroll, 4);
 
 /* The payload prologue at 0x801F6C00: the type-0 EMI loader compares the
  * first word with the archive TOC's cached first word
@@ -116,9 +116,9 @@ typedef struct Scene00OverlayHeader {
     u32           unk_04; /* 0x04; the first three bytes are the line colour (D_801F6C04) */
 } Scene00OverlayHeader;
 
-ASSERT_SIZE(Scene00OverlayHeader, 8);
 ASSERT_OFFSET(Scene00OverlayHeader, overlay, 0x00);
 ASSERT_OFFSET(Scene00OverlayHeader, unk_04, 0x04);
+ASSERT_SIZE(Scene00OverlayHeader, 8);
 
 /* The scenario line colour, copied from D_801F6C04 and passed to func_801F78EC by value. */
 typedef ColorRGB8 SceneLineColor;
