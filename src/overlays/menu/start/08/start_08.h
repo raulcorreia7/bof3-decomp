@@ -233,11 +233,13 @@ extern u16             D_801485BC;
 extern u16             D_801485BE;
 extern u8              D_801485DD;
 extern u8              D_801485DE;
+extern u8              D_801485E7;
 extern s16             D_80148628; /* the computed bar length; func_801D8188 stores it with sh at 0x801D81FC */
 extern u16             D_8014862A; /* the second bar length; func_801D8188 stores it with sh at 0x801D8210 */
 extern u8              D_80148653;
 extern u8              D_80148654;
 /* D_80148656, the party cursor, has no declaration here: its readers split between lb and lbu, so each unit keeps its own view. */
+extern s8              g_PartyCursor;
 extern s8              D_80148658[6];
 extern u8              D_8014865F;
 extern u8              D_80148660;
