@@ -62,6 +62,7 @@ s32                    func_801F3980(s32* x, s32* y);
 void                   func_801F3A14(s32 x, s32 y);
 void                   func_801F3BA0(s32 x, s32 y);
 void                   func_801F3C4C(s32 x, s32 y);
+void                   func_801A4BC0(s32 x, s32 y, s32 value);
 
 void func_801F431C(void);
 

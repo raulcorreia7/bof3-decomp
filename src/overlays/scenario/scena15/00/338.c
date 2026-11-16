@@ -21,7 +21,7 @@ MATCH void Scene_InitTaskArea(void) {
 }
 
 MATCH void func_801F6FCC(void) {
-    func_801F71B0(g_Task->timer);
+    Scene_DrawLightPillar(g_Task->timer);
     if (g_FrameCount & 0x1) {
         Area_AddSpark();
     }
@@ -34,7 +34,7 @@ MATCH void func_801F6FCC(void) {
 }
 
 MATCH void func_801F7078(void) {
-    func_801F71B0(0xFF);
+    Scene_DrawLightPillar(0xFF);
     if (g_FrameCount & 0x1) {
         Area_AddSpark();
     }
@@ -46,7 +46,7 @@ MATCH void func_801F7078(void) {
 }
 
 MATCH void func_801F7100(void) {
-    func_801F71B0(g_Task->timer);
+    Scene_DrawLightPillar(g_Task->timer);
     Scene_GetZFixed();
     g_Task->timer = (g_Task)->timer - 4;
     if (g_Task->timer == 0) {
@@ -60,7 +60,64 @@ MATCH void func_801F717C(void) {
     }
 }
 
-INCLUDE_ASM(func_801F71B0);
+/* Draws a pillar of light at the task's position: thirty-two semi-transparent Gouraud quads between a ring at the
+ * task's radius and the same ring higher up, dimmed by fade. */
+/* func_801F71B0 */
+MATCH void Scene_DrawLightPillar(u8 fade) {
+    DVECTOR  last_inner;
+    DVECTOR  last_outer;
+    DVECTOR  inner;
+    DVECTOR  outer;
+    s32      point[3];
+    MATRIX   matrix;
+    POLY_G4* prim;
+    s32      angle;
+    s32      shade;
+    u32      color;
+    u8       i;
+
+    Area_SetCameraMatrix(&matrix);
+    angle    = 0;
+    point[0] = g_Task->pos.x.fixed + (((s16)g_Task->screen_x * rcos(0)) >> 4);
+    point[1] = g_Task->pos.y.fixed + (((s16)g_Task->screen_x * rsin(0)) >> 4);
+    point[2] = g_Task->pos.z.fixed;
+    Area_ProjectPoint(point, &inner);
+    point[2] = g_Task->pos.z.fixed + TO_COORD((s16)g_Task->screen_y);
+    Area_ProjectPoint(point, &outer);
+    shade = ((g_FrameCount & 1) << 2) | 0x40;
+    for (i = 0; i < 32; i++) {
+        last_inner = inner;
+        last_outer = outer;
+        angle += 0x80;
+        point[0] = g_Task->pos.x.fixed + (((s16)g_Task->screen_x * rcos((u16)angle)) >> 4);
+        point[1] = g_Task->pos.y.fixed + (((s16)g_Task->screen_x * rsin((u16)angle)) >> 4);
+        point[2] = g_Task->pos.z.fixed;
+        Area_ProjectPoint(point, &inner);
+        point[2] = g_Task->pos.z.fixed + TO_COORD((s16)g_Task->screen_y);
+        Area_ProjectPoint(point, &outer);
+
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 960, 0), 0);
+        if ((u8)(i - 11) >= 17) {
+            GFX_AddPrim(1, 12);
+        }
+        prim = GFX_BeginPolyG4(1);
+        setXY4(prim, last_inner.vx, last_inner.vy, last_outer.vx, last_outer.vy, inner.vx, inner.vy, outer.vx, outer.vy);
+        color = (u32)(fade * (u8)shade) >> 8;
+        setRGB0(prim, color, color, color);
+        setRGB1(prim, color, color, color);
+        if ((u8)(i - 8) >= 16) {
+            shade += 8;
+        } else {
+            shade -= 8;
+        }
+        color = (u32)(fade * (u8)shade) >> 8;
+        setRGB2(prim, color, color, color);
+        setRGB3(prim, color, color, color);
+        if ((u8)(i - 11) >= 17) {
+            GFX_AddPrim(1, 36);
+        }
+    }
+}
 
 MATCH void func_801F752C(AreaSpark* spark) {
     DVECTOR screen;
@@ -754,7 +811,68 @@ MATCH void func_801FC100(void) {
 
 INCLUDE_ASM(func_801FC1D8);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801FCA3C(u32 mode) {
+    u16* cell;
+    u32  row;
+    u32  col;
+    u32  row_base;
+    u16  color;
+    u16  red;
+    u16  green;
+    u32  blue;
+    u16  average;
+    u16  flag;
+
+    row = 0;
+    do {
+        if ((row & 0xFF) != 11) {
+            col      = 0;
+            row_base = AREA_PALETTE_WORK + (row & 0xFF) * AREA_PALETTE_ROW;
+            do {
+                cell    = MEM_PTR(u16, (col & 0xFFFF) * 2 + row_base);
+                color   = *cell;
+                red     = color & 0x1F;
+                green   = (color >> 5) & 0x1F;
+                blue    = (color >> 10) & 0x1F;
+                average = (red + green + blue) / 3;
+                flag    = color & 0x8000;
+                if ((u8)mode != 0) {
+                    *cell = average | flag | (average << 10) | (average << 5);
+                } else {
+                    if (red != average) {
+                        if (average - red >= 0) {
+                            red = red + 1;
+                        } else {
+                            red = red - 1;
+                        }
+                    }
+                    if (green != average) {
+                        if (average - green >= 0) {
+                            green = green + 1;
+                        } else {
+                            green = green - 1;
+                        }
+                    }
+                    if (blue != average) {
+                        if (average - blue >= 0) {
+                            blue = blue + 1;
+                        } else {
+                            blue = blue - 1;
+                        }
+                    }
+                    *cell = red | flag | (blue << 10) | (green << 5);
+                }
+                col++;
+            } while ((col & 0xFFFF) < AREA_PALETTE_COLORS);
+        }
+        row++;
+    } while ((row & 0xFF) < AREA_PALETTE_ROWS);
+    g_GfxPalettePending = 1;
+}
+#else
 INCLUDE_ASM(func_801FCA3C);
+#endif
 
 INCLUDE_ASM(func_801FCBAC);
 
