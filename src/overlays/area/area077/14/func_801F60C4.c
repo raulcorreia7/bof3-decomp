@@ -15,7 +15,7 @@ MATCH void func_801F60C4(void) {
     state = g_ScriptState;
     load  = g_AreaLoads[g_GameAreaId];
     table = load->field_10;
-    base  = *(u8**)(table + state->pad_03 * 4);
+    base  = *(u8**)(table + state->script_index * 4);
     entry = base + state->cursor;
     index = entry[2];
     if (func_801FD34C(state, D_801F6B60[index][0], D_801F6B60[index][1], 0x40, -0x400, 4, 0)) {

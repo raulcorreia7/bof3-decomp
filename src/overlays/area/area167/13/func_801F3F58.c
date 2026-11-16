@@ -4,8 +4,8 @@ MATCH void func_801F3F58(void) {
     if (g_GameCellType == 2) {
         if (SYS_TestFlag(g_SceneEventFlags, 76)) {
             SYS_ClearFlag(g_SceneEventFlags, 76);
-            g_ScriptState->pad_03 = 5;
-            g_ScriptState->cursor = 0xFFFE;
+            g_ScriptState->script_index = 5;
+            g_ScriptState->cursor       = 0xFFFE;
             return;
         }
         if (!SYS_TestFlag(g_SceneEventFlags, 75)) {
@@ -17,8 +17,8 @@ MATCH void func_801F3F58(void) {
     if (g_GameCellType == 1) {
         if (SYS_TestFlag(g_SceneEventFlags, 76)) {
             SYS_ClearFlag(g_SceneEventFlags, 76);
-            g_ScriptState->pad_03 = 4;
-            g_ScriptState->cursor = 0xFFFE;
+            g_ScriptState->script_index = 4;
+            g_ScriptState->cursor       = 0xFFFE;
             return;
         }
         if (SYS_TestFlag(g_SceneEventFlags, 75)) {

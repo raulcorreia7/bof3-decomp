@@ -10,9 +10,9 @@ typedef struct ScriptState {
     u8  flag_00;
     u8  unk_01;
     u8  count_02;
-    u8  pad_03;
-    u8  unk_04; /* 0x04 */
-    u8  unk_05; /* 0x05 */
+    u8  script_index; /* 0x03 the row of the area script table to run */
+    u8  unk_04;       /* 0x04 */
+    u8  unk_05;       /* 0x05 */
     u8  pad_06;
     u8  unk_07;
     s16 unk_08; /* 0x08 */
