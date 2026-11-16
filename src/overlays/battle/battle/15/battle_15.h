@@ -1045,7 +1045,7 @@ bool        func_800AA7A0(u8 slot);
 /* func_800AD044 */
 extern u32  Battle_IsEnemyDefeated(u32 bit_index);
 extern void func_800B1DAC(s16 x, s16 y, u8 sprite_arg);
-s32         func_801DDE7C(u8 index, u16 packed_value);
+u8          func_801DDE7C(u32 counter_index, u32 packed_value);
 extern u8   g_BattleUIStep_nv;
 extern u8   D_80145F20[];
 
