@@ -80,7 +80,7 @@ MATCH void func_801EF02C(void) {
 
     if ((PARTY_MEMBER_WORD_08(g_Task) & 0xFF00FF00u) == 0) {
         BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING);
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -130,7 +130,7 @@ MATCH void func_801EF264(void) {
 
 MATCH void func_801EF3A4(void) {
     BATTLE_ACTIVE_WORK->unk_09--;
-    func_801E5988();
+    Effect_Reset();
 }
 
 MATCH void func_801EF3D8(void) {

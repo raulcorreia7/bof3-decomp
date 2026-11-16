@@ -87,7 +87,7 @@ MATCH void func_801EF324(void) {
         func_800AEF98(4, 0);
         battle_flags = &g_Battle.state;
         *battle_flags |= 4;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -385,7 +385,7 @@ MATCH void func_801F04DC(void) {
 }
 
 MATCH void func_801F0548(void) {
-    func_801E5988();
+    Effect_Reset();
 }
 
 MATCH void func_801F0568(void) {
@@ -472,7 +472,7 @@ MATCH void func_801F08C4(void) {
     g_Task->unk_09 = counter;
     if (!(counter & BYTE_MASK)) {
         BATTLE_ACTIVE_WORK->param.unk_0B = 0xFF;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -523,7 +523,7 @@ MATCH void func_801F0B44(void) {
         g_Task->unk_09 += 4;
         return;
     }
-    func_801E5988();
+    Effect_Reset();
 }
 
 #include "overlays/bmagic/Effect_DrawScreenFade.h"
@@ -555,7 +555,7 @@ MATCH void func_801F0E54(void) {
     g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
     g_Task->unk_0C      = D_801F1C04[g_Task->param.unk_0B].x;
     g_Task->unk_10      = D_801F1C04[g_Task->param.unk_0B].y;
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     g_Task->unk_09 = func_800AFF98();
     g_Task->header.step += 1;
 }
@@ -617,7 +617,7 @@ MATCH void func_801F11C4(void) {
 }
 
 MATCH void func_801F1274(void) {
-    func_801E5988();
+    Effect_Reset();
 }
 
 MATCH void func_801F1294(void) {
@@ -663,7 +663,7 @@ MATCH void func_801F1474(void) {
 }
 
 MATCH void func_801F16E8(void) {
-    func_801E5988();
+    Effect_Reset();
 }
 
 MATCH void func_801F1708(void) {
@@ -715,5 +715,5 @@ MATCH void func_801F18F4(void) {
 }
 
 MATCH void func_801F1BCC(void) {
-    func_801E5988();
+    Effect_Reset();
 }

@@ -65,7 +65,7 @@ MATCH void func_801EEF84(void) {
     draw = g_Task;
     func_801EF1FC(draw->unk_0C >> 16, draw->unk_10 >> 16, (draw->unk_18 << 15) >> 16, draw->unk_14, draw->unk_60, draw->unk_58);
     if (g_Task->unk_09 >= 0x29) {
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

@@ -9,6 +9,6 @@ MATCH void func_801EF124(void) {
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }

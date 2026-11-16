@@ -24,7 +24,7 @@ MATCH void func_801EEEAC(void) {
             }
         }
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -44,7 +44,7 @@ MATCH void func_801EF080(void) {
         g_Task->facing = g_BattleEffectBattler->facing;
         g_Task->unk_0C = 0x20000;
         g_Task->unk_10 = 0;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         g_Task->pos.x.fixed      = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
         g_Task->pos.y.fixed      = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_10;
         COORD_INT(g_Task->pos.z) = COORD_INT(g_BattleEffectBattler->pos.z) + 0x100;
@@ -135,7 +135,7 @@ MATCH void func_801EF4B8(void) {
         g_Task->facing = g_BattleEffectBattler->facing;
         g_Task->unk_0C = 0x10000;
         g_Task->unk_10 = 0;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         g_Task->pos.x.fixed      = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
         g_Task->pos.y.fixed      = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_10;
         COORD_INT(g_Task->pos.z) = COORD_INT(g_BattleEffectBattler->pos.z) + 0x100;

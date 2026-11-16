@@ -44,7 +44,7 @@ MATCH void func_801EEE0C(void) {
 
     g_Task->unk_0C = 0x20000;
     g_Task->unk_10 = 0;
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     g_Task->pos.x.fixed += g_Task->unk_0C;
     g_Task->pos.y.fixed += g_Task->unk_10;
     COORD_INT(g_Task->pos.z) = COORD_INT(g_Task->pos.z) + 0xC0;
@@ -112,7 +112,7 @@ MATCH void func_801EF130(void) {
     g_Task->timer = timer_next;
     if ((timer_next & BYTE_MASK) == 0x80) {
         g_BattleEffectBattler->param.unk_0B = 0xFF;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

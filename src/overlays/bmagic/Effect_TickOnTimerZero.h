@@ -15,7 +15,7 @@
     if (work->unk_09 == 0) {                                      \
         work               = (PartyMember*)g_BattleEffectBattler; \
         work->param.unk_0B = work->param.unk_0B - 1;              \
-        func_801E5988();                                          \
+        Effect_Reset();                                           \
     }
 
 MATCH void Effect_TickOnTimerZero(void) {

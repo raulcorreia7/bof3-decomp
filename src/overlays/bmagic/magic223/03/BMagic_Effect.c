@@ -18,7 +18,7 @@ MATCH void func_801EEFB4(void) {
     if (g_Task->param.unk_0B == 0) {
         BATTLE_RAISE_STATE(BATTLE_STATE_DAMAGE_APPLIED | BATTLE_STATE_EFFECT_PLAYING);
         func_800A9820(g_Battle.target_selector);
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

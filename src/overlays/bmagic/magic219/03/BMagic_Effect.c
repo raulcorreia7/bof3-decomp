@@ -116,7 +116,7 @@ MATCH void func_801EF118(void) {
         g_Task->facing = cell->facing;
         g_Task->unk_0C = 0x20000;
         g_Task->unk_10 = 0;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         g_Task->pos.x.fixed  = cell->pos.x.fixed + g_Task->unk_0C;
         g_Task->pos.y.fixed  = cell->pos.y.fixed + g_Task->unk_10;
         g_Task->pos.z.fixed  = cell->pos.z.fixed + 0x800000;

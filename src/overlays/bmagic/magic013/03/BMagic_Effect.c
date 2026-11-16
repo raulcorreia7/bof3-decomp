@@ -98,13 +98,13 @@ MATCH void func_801EF0A4(void) {
     g_Task->facing = g_BattleEffectBattler->facing;
     g_Task->unk_0C = 0x20000;
     g_Task->unk_10 = 0;
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
     g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_10;
     g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + TO_COORD(256);
     g_Task->unk_0C      = -0x6000;
     g_Task->unk_10      = 0;
-    func_801DD350(g_Task);
+    Effect_RotatePosition(g_Task);
     g_Task->unk_04       = 0;
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 16;
@@ -139,7 +139,7 @@ MATCH void func_801EF1F0(void) {
         }
         g_Task->unk_0C = 0x3000;
         g_Task->unk_10 = 0;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         SND_QueueSelectionEffect(0x100);
         g_Task->header.step += 1;
     }
@@ -163,7 +163,7 @@ MATCH void func_801EF36C(void) {
         } else {
             g_Task->unk_0C = -0x6000;
             g_Task->unk_10 = 0;
-            func_801DD350(g_Task);
+            Effect_RotatePosition(g_Task);
             g_Task->header.step -= 1;
         }
     }
@@ -179,7 +179,7 @@ MATCH void func_801EF484(void) {
         if (work->unk_04 == 0) {
             active               = BATTLE_ACTIVE_WORK;
             active->param.unk_0B = active->param.unk_0B - 1;
-            func_801E5988();
+            Effect_Reset();
         }
     }
 }

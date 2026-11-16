@@ -71,7 +71,7 @@ MATCH void func_801EEED8(void) {
     if (saved_work->param.unk_0B == 0) {
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -169,7 +169,7 @@ MATCH void func_801EF3A0(void) {
 }
 
 MATCH void func_801EF50C(void) {
-    func_801E5988();
+    Effect_Reset();
 }
 
 MATCH void func_801EF52C(void) {

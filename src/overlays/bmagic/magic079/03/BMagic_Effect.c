@@ -104,7 +104,7 @@ MATCH void func_801EF048(void) {
     work               = g_Task;
     work->param.unk_0B = work->param.unk_0B - 1;
     if (work->param.unk_0B == 0) {
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -187,7 +187,7 @@ MATCH void func_801EF348(void) {
     work               = g_Task;
     work->param.unk_0B = work->param.unk_0B - 1;
     if (work->param.unk_0B == 0) {
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -236,7 +236,7 @@ MATCH void func_801EFD84(void) {
     if (work->unk_09 == 4) {
         active               = BATTLE_ACTIVE_WORK;
         active->param.unk_0B = active->param.unk_0B - 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -287,7 +287,7 @@ MATCH void func_801EFFB0(void) {
     if (work->unk_09 == 4) {
         active               = BATTLE_ACTIVE_WORK;
         active->param.unk_0B = active->param.unk_0B - 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

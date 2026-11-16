@@ -318,7 +318,7 @@ MATCH void func_801F0240(void) {
         work->pos.z.fixed = D_8014637C->pos.z.fixed;
         work->unk_0C      = 0x8000;
         work->unk_10      = 0;
-        func_801DD350(work);
+        Effect_RotatePosition(work);
         g_Task->pos.x.fixed += g_Task->unk_0C;
         g_Task->pos.y.fixed += g_Task->unk_10;
         g_Task->pos.z.fixed += 0x800000;

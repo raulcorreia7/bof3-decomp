@@ -97,7 +97,7 @@ MATCH void func_801EF2A0(void) {
         flags                     = &g_Battle.state;
         g_GameCelerityTimer.hours = 5;
         *flags |= BATTLE_STATE_EFFECT_PLAYING;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -360,7 +360,7 @@ MATCH void func_801F00EC(void) {
     g_Task->timer       = count;
     if (count == 0x10) {
         g_BattleEffectBattler->param.unk_0B--;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

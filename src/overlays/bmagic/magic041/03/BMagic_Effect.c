@@ -142,7 +142,7 @@ MATCH void func_801EF358(void) {
     if (count == 0) {
         active = BATTLE_ACTIVE_WORK;
         active->param.unk_0B--;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

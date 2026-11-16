@@ -10,7 +10,7 @@ MATCH void func_800AE09C(void) {
     if (count == 0) {
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
-        func_801E5988();
+        Effect_Reset();
     } else {
         g_Task->timer = count - 1;
     }

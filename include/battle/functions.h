@@ -47,7 +47,6 @@ u8          func_800AFF98(void);
 u8          Battle_SlotIsBlocked(u32 slot);
 /* func_801DD350 */
 void        Effect_RotatePosition(void* work);
-void        func_801DD350(void* work);
 s32         func_801DD59C(s32 amount);
 u8          func_801DD7AC(s32 selector);
 void        func_801E257C(u32 enemy_index, u32 script_index);
@@ -95,7 +94,6 @@ void        Battle_PlayEnemyCue(u16 cue_id);
 u32         Battle_AllocEffect(u32 mode, u32 handler_index);
 /* func_801E5988 */
 void        Effect_Reset(void);
-void        func_801E5988(void);
 extern void func_801E5A38(void);
 
 #endif

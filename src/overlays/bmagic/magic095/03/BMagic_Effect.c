@@ -338,7 +338,7 @@ MATCH void func_801F00D8(void) {
     count          = g_Task->unk_09 + 1;
     g_Task->unk_09 = count;
     if ((count & BYTE_MASK) == 0x20) {
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

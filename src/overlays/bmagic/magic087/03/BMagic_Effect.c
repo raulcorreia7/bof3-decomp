@@ -163,7 +163,7 @@ MATCH void func_801EF530(void) {
     if (g_Task->param.unk_0B == 0x80) {
         work               = (PartyMember*)g_BattleEffectBattler;
         work->param.unk_0B = work->param.unk_0B - 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

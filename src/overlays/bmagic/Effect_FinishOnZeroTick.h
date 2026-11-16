@@ -4,6 +4,6 @@ MATCH void Effect_FinishOnZeroTick(void) {
     if (g_Task->param.unk_0B == 0) {
         Battle_MarkDamaged(g_Task->unk_04);
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }

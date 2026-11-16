@@ -72,7 +72,7 @@ MATCH s32 func_801EEF3C(void) {
         g_Task->facing = g_BattleEffectBattler->facing;
         g_Task->unk_0C = 0x60000;
         g_Task->unk_10 = 0;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_10;
         g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
@@ -157,7 +157,7 @@ MATCH void func_801EF358(void) {
     setup_task         = g_Task;
     setup_task->unk_0C = 0x1000;
     setup_task->unk_10 = 0;
-    func_801DD350(setup_task);
+    Effect_RotatePosition(setup_task);
     position_task              = g_Task;
     position_task->pos.x.fixed = position_task->pos.x.fixed + position_task->unk_0C;
     position_task->pos.y.fixed = position_task->pos.y.fixed + position_task->unk_10;
@@ -175,7 +175,7 @@ MATCH void func_801EF358(void) {
     if (timer == 0) {
         battler = g_BattleEffectBattler;
         battler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

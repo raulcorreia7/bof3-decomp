@@ -53,7 +53,7 @@ MATCH void func_801EEE34(void) {
 
     if ((func_801EF118() & BYTE_MASK) == 0) {
         BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING);
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

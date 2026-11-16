@@ -49,7 +49,7 @@ MATCH void func_801EEE94(void) {
         g_Task->facing = actor->facing;
         g_Task->unk_0C = 0;
         g_Task->unk_10 = -TO_COORD_HALF(1);
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         g_Task->pos.x.fixed = actor->pos.x.fixed + g_Task->unk_0C;
         g_Task->pos.y.fixed = actor->pos.y.fixed + g_Task->unk_10;
         g_Task->pos.z.fixed = actor->pos.z.fixed;
@@ -101,7 +101,7 @@ MATCH void func_801EF1EC(void) {
         g_Task->facing = g_BattleEffectBattler->facing;
         g_Task->unk_0C = 0;
         g_Task->unk_10 = g_Task->param.unk_0B << 0xF;
-        func_801DD350(g_Task);
+        Effect_RotatePosition(g_Task);
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
         g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_10;
         g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
@@ -147,7 +147,7 @@ MATCH void func_801EF3E4(void) {
     work->scale.y -= 0x8000;
     if (timer == 0) {
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -155,7 +155,7 @@ MATCH void func_801EF454(void) {
     g_Task->scale.y -= 0x1000;
     if ((s8)g_Task->unk_5F == -0x80) {
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -196,5 +196,5 @@ MATCH void func_801EF648(void) {
 }
 
 MATCH void func_801EF6AC(void) {
-    func_801E5988();
+    Effect_Reset();
 }

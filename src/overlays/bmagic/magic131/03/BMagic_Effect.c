@@ -392,7 +392,7 @@ MATCH void func_801F0034(void) {
     work->unk_30.half += work->unk_10;
     if (!(timer & BYTE_MASK)) {
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -475,7 +475,7 @@ MATCH void func_801F058C(void) {
     if (count == 0) {
         active = BATTLE_ACTIVE_WORK;
         active->param.unk_0B--;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -535,7 +535,7 @@ MATCH void func_801F0CE4(void) {
     work->unk_09 = timer;
     if (timer == 0) {
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

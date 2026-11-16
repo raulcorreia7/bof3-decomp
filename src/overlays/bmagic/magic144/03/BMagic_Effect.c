@@ -122,7 +122,7 @@ MATCH void func_801EF154(void) {
         GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
         func_800AF814(g_Battle.target_selector);
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

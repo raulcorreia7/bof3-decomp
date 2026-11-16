@@ -6,7 +6,7 @@
 /* The statements of Effect_StartPlaying; each member declares flags. */
 #define BATTLE_RAISE_EFFECT_PLAYING()                \
     BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING); \
-    func_801E5988()
+    Effect_Reset()
 
 MATCH void Effect_StartPlaying(void) {
     u16* flags;

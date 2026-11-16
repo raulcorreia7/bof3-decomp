@@ -148,7 +148,7 @@ MATCH void func_801EF3B8(void) {
         WorldPos_Copy(&work->pos, &battler->pos);
         work->unk_0C = D_801EF9D0[work->param.unk_0B].x;
         work->unk_10 = D_801EF9D0[work->param.unk_0B].y;
-        func_801DD350(work);
+        Effect_RotatePosition(work);
         g_Task->pos.x.fixed += g_Task->unk_0C;
         g_Task->pos.y.fixed += g_Task->unk_10;
         g_Task->pos.z.fixed += D_801EF9D0[g_Task->param.unk_0B].z;

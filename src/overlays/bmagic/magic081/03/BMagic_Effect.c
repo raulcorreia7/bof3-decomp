@@ -98,7 +98,7 @@ MATCH void func_801EEF88(void) {
     if (saved_work->param.unk_0B == 0) {
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -159,7 +159,7 @@ MATCH void func_801EF18C(void) {
 
 MATCH void func_801EF2F0(void) {
     if (g_Battle.state & BATTLE_STATE_EFFECT_PLAYING) {
-        func_801E5988();
+        Effect_Reset();
     } else {
         Battle_CenterCamera();
     }

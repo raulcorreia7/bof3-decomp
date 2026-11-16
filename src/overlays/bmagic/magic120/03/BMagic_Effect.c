@@ -295,7 +295,7 @@ MATCH void func_801EFDD4(void) {
 MATCH void func_801F0008(void) {
     func_8014D290();
     if (Actor_StepAnimOnce() & BYTE_MASK) {
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -307,7 +307,7 @@ MATCH void func_801F0044(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -329,7 +329,7 @@ MATCH void func_801F0104(void) {
     count          = g_Task->unk_09 + 1;
     g_Task->unk_09 = count;
     if ((count & BYTE_MASK) == 0x70) {
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -362,7 +362,7 @@ MATCH void func_801F0224(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -387,7 +387,7 @@ MATCH void func_801F0274(void) {
             work                 = g_Task;
             work->unk_0C         = D_801F0CE4[j].x;
             work->unk_10         = D_801F0CE4[j].y;
-            func_801DD350(work);
+            Effect_RotatePosition(work);
             g_Task->pos.x.fixed = g_BattleEnemyBattlers[i].pos.x.fixed + g_Task->unk_0C;
             g_Task->pos.y.fixed = g_BattleEnemyBattlers[i].pos.y.fixed + g_Task->unk_10;
             g_Task->pos.z.fixed = g_BattleEnemyBattlers[i].pos.z.fixed + D_801F0CE4[j].z;

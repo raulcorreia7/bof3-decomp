@@ -222,7 +222,7 @@ MATCH void func_801EF7D0(void) {
         if (Battle_SlotIsBlocked(g_Task->unk_04) & BYTE_MASK) {
             Battle_MarkDamaged(g_Task->unk_04);
         }
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

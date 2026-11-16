@@ -96,7 +96,7 @@ MATCH void func_801EEFDC(void) {
         next         = g_Task;
         next->unk_0C = D_801EFAA0[next->param.unk_0B].x;
         next->unk_10 = D_801EFAA0[next->param.unk_0B].y;
-        func_801DD350(next);
+        Effect_RotatePosition(next);
         work              = g_Task;
         work->pos.x.fixed = g_AreaScrollTargetX + work->unk_0C;
         work->pos.y.fixed = g_AreaScrollTargetY + work->unk_10;
@@ -122,7 +122,7 @@ MATCH void func_801EF138(void) {
     work->unk_09 = count;
     if (count == 0) {
         BATTLE_ACTIVE_WORK->param.unk_0B--;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

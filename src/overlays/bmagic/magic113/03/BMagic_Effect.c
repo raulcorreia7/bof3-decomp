@@ -24,7 +24,7 @@ MATCH void func_801EECE0(void) {
         (g_Battle.target_selector >= BATTLE_PARTY_CHARACTERS_COUNT && g_Battle.active_battler >= BATTLE_PARTY_CHARACTERS_COUNT)) {
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
-        func_801E5988();
+        Effect_Reset();
     } else {
         i = 0;
         WorldPos_Copy(&g_Task->pos, &g_Battle.selected_actor->pos);
@@ -375,7 +375,7 @@ MATCH void func_801F026C(void) {
     work->timer = next;
     if (next == 0x10) {
         BATTLE_ACTIVE_WORK->param.unk_0B--;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 
@@ -494,7 +494,7 @@ MATCH void func_801F0A80(void) {
         g_Task->unk_09 = value;
         if ((value & BYTE_MASK) >= 3U) {
             g_BattleEffectBattler->param.unk_0B += 1;
-            func_801E5988();
+            Effect_Reset();
             return;
         }
         g_Task->unk_2A = (g_Task->unk_2A + 0x1) & 1;

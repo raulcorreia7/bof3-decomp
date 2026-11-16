@@ -202,7 +202,7 @@ MATCH void func_801EF7D0(void) {
 }
 
 MATCH void func_801EF874(void) {
-    func_801E5988();
+    Effect_Reset();
 }
 
 MATCH void func_801EF894(void) {
@@ -248,7 +248,7 @@ MATCH void func_801EFA70(void) {
 }
 
 MATCH void func_801EFAD4(void) {
-    func_801E5988();
+    Effect_Reset();
 }
 
 #include "overlays/bmagic/BMagic_RunEffectStep.h"
@@ -296,7 +296,7 @@ MATCH void func_801EFD10(void) {
             Battle_MarkDamaged(g_Battle.target_selector);
         }
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

@@ -19,7 +19,7 @@ MATCH void func_801EEC80(void) {
     if (g_Task->header.mode != 0) {
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
-        func_801E5988();
+        Effect_Reset();
         return;
     }
     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
@@ -89,7 +89,7 @@ MATCH void func_801EF008(void) {
     if (timer == 2) {
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
-        func_801E5988();
+        Effect_Reset();
         return;
     }
     func_801EF0F8(g_Task->unk_64);

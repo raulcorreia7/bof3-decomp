@@ -163,7 +163,7 @@ MATCH void func_801EF388(void) {
             Battle_MarkDamaged(g_Task->unk_03);
         }
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

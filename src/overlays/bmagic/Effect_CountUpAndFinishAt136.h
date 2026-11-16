@@ -9,6 +9,6 @@ MATCH void Effect_CountUpAndFinishAt136(void) {
     g_Task->unk_09 = counter;
     if ((counter & BYTE_MASK) == 0x88) {
         BATTLE_ACTIVE_WORK->param.unk_0B = 0xFF;
-        func_801E5988();
+        Effect_Reset();
     }
 }

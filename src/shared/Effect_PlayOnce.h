@@ -7,7 +7,7 @@
     /* FAKE: keeps the flag load after the request call. */ \
     FAKE_BARRIER();                                         \
     g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;          \
-    func_801E5988()
+    Effect_Reset()
 
 MATCH void Effect_PlayOnce(void) {
     BATTLE_PLAY_ONCE();

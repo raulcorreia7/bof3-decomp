@@ -100,7 +100,7 @@ MATCH void func_801EF0E8(void) {
 #include "overlays/bmagic/Effect_LowerTickerStepOnReady.h"
 
 MATCH void func_801EF1BC(void) {
-    func_801E5988();
+    Effect_Reset();
 }
 
 MATCH void func_801EF1DC(void) {

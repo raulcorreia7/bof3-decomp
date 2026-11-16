@@ -124,7 +124,7 @@ MATCH void func_801EF110(void) {
 
 MATCH void func_801EF190(void) {
     if (g_Task->param.unk_0B == 0) {
-        func_801E5988();
+        Effect_Reset();
     }
 }
 

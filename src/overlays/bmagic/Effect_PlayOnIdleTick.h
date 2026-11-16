@@ -5,6 +5,6 @@ MATCH void Effect_PlayOnIdleTick(void) {
     if (g_Task->param.unk_0B == 0xFF) {
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
-        func_801E5988();
+        Effect_Reset();
     }
 }
