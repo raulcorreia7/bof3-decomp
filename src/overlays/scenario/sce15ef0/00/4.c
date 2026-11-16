@@ -111,7 +111,42 @@ MATCH void func_801D11B4(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D1220(s32 value) {
+    s32      front[3];
+    s32      back[3];
+    POLY_F4* prim;
+    u16      tpage;
+    u8       i;
+
+    FAKE_STACK_PADS(u8, 0x18); /* FAKE: retail keeps six unused words between the point rows and the saved registers. */
+
+    front[0] = back[0] = TO_COORD(44) + COORD_HALF;
+    front[1] = back[1] = TO_COORD(113) + COORD_HALF;
+    front[2]           = 0;
+    back[2]            = -TO_COORD(768);
+    i                  = 0;
+    do {
+        tpage = GetTPage(0, 1, 0x3C0, 0);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+        Area_AddCellPrim(front[0], front[1], 0, 0xC);
+        prim = (POLY_F4*)g_GfxPrimCursor;
+        SetPolyF4(prim);
+        SetSemiTrans(prim, 1);
+        Area_ProjectPoint(front, (DVECTOR*)&prim->x0);
+        Area_ProjectPoint(back, (DVECTOR*)&prim->x1);
+        front[0] += TO_COORD(1);
+        back[0] += TO_COORD(1);
+        Area_ProjectPoint(front, (DVECTOR*)&prim->x2);
+        Area_ProjectPoint(back, (DVECTOR*)&prim->x3);
+        setRGB0(prim, value, value, value);
+        GFX_AddPrim(1, sizeof(POLY_F4));
+        i++;
+    } while (i < 8);
+}
+#else
 INCLUDE_ASM(func_801D1220);
+#endif
 
 /* Draw a red line between two points with a fan at each end. */
 MATCH void func_801D1370(s32* first, s32* second, s16 width) {
