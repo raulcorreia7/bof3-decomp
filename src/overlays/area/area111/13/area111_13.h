@@ -15,7 +15,7 @@ extern u8      D_801F489C[];
 extern u8      D_80181B00[];
 extern u8      D_80181B01[];
 /* The cell grid's nibble table: four bytes per row, one nibble per cell. */
-extern u8      D_801F5C18[];
+extern u8      D_801F5C18[][4];
 /* g_SceneEventStep read unsigned: func_801F3EE8 switches on a byte load. */
 extern u8      g_SceneEventStep_u8[];
 

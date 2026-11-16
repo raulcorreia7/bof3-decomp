@@ -16,7 +16,6 @@
 extern u32      D_801D0C00;
 extern s8       D_801D27B0[][2];
 /* D_801D27C0 */
-extern Callback g_SceneEntityDispatch[];
 extern Callback D_801D27CC[];
 extern Callback D_801D27D8[];
 extern Callback D_801D27EC[];

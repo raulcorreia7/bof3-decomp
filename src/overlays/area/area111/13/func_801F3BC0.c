@@ -22,9 +22,9 @@ NON_MATCHING void func_801F3BC0(void) {
             break;
         }
         if (x & 1) {
-            value = D_801F5C18[y * 4 + x / 2] & 0xF;
+            value = D_801F5C18[y][x / 2] & 0xF;
         } else {
-            value = D_801F5C18[y * 4 + x / 2] >> 4;
+            value = D_801F5C18[y][x / 2] >> 4;
         }
         if (value == 0xF) {
             break;
