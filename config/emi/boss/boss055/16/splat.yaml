@@ -79,7 +79,7 @@ segments:
     vram: 0x800C34D4
     align: 4
     subsegments:
-      - [0x1CD4, bin, D_800C34D6]
+      - [0x1CD4, bin, D_800C34D4]
       - [0x1CF0, bin, D_800C34F0]
       - [0x1CFC, bin, D_800C34FC]
       - [0x1D2C, bin, D_800C352C]

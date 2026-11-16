@@ -18,8 +18,8 @@ segments:
     subsegments:
       - [0x1154, bin, g_BMagicEffectModes]
       - [0x115C, bin, D_801EFD5C]
-      - [0x116C, bin, D_801EFD6D]
-      - [0x1174, bin, D_801EFD76]
-      - [0x117C, bin, D_801EFD7D]
+      - [0x116C, bin, D_801EFD6C]
+      - [0x1174, bin, D_801EFD74]
+      - [0x117C, bin, D_801EFD7C]
       - [0x11E8, bin, D_801EFDE8]
   - [0x3BA4]
