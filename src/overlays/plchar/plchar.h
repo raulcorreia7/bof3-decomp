@@ -18,7 +18,7 @@
  * name-order ordinal (0x21-0x33); code follows at +0x04. */
 #define PLCHAR_PROGRAM_FIRST                                     33
 
-/* Runs one route step's script: when the facing index has reached the direction byte, it selects the script id for the turn (0x40 at the back facing, 0x41 at the away facing) and advances the task state; otherwise it counts the step timer down, and on zero re-arms it and requests the next script. The body of every Char_RunStepScript member; each passes the two facing values at which it selects script 0x40 and 0x41. */
+/* Runs one route step's script: when the facing index has reached the direction byte, it selects the script id for the turn (0x40 at the back facing, 0x41 at the away facing) and advances the task state; otherwise it counts the step timer down, and on zero re-arms it and requests the next script. The body of every PlChar_RunStepScript member; each passes the two facing values at which it selects script 0x40 and 0x41. */
 #define CHAR_RUN_STEP_SCRIPT(FACING_SCRIPT_40, FACING_SCRIPT_41) CHAR_RUN_STEP_CASES(FACING_SCRIPT_40, 0x40, FACING_SCRIPT_41, 0x41)
 
 /* The same step with the two switch cases written in the given order: a member whose
@@ -44,7 +44,7 @@
         }                                                                             \
     }
 
-/* Starts the character's walk route: picks the direction away from the work record's current route index with the resident selector (Actor_GetTurnStep), stores it in the direction byte at +0x03, arms the step timer at +0x09 and advances the task state at +0x02. The body of every Char_StartTurn member; each passes the two facing values it turns between. */
+/* Starts the character's walk route: picks the direction away from the work record's current route index with the resident selector (Actor_GetTurnStep), stores it in the direction byte at +0x03, arms the step timer at +0x09 and advances the task state at +0x02. The body of every PlChar_StartTurn member; each passes the two facing values it turns between. */
 #define CHAR_START_TURN(FACING_BACK, FACING_AWAY)                                            \
     if (abs(g_Task->direction_08 - FACING_BACK) > abs(g_Task->direction_08 - FACING_AWAY)) { \
         g_Task->param.turn_step = Actor_GetTurnStep(FACING_AWAY);                            \
@@ -63,8 +63,8 @@
     g_Task->unk_0A = 0xB;                                       \
     g_Task->unk_03 = 1
 
-/* Chooses a direction and requests its script: steps direction_08 to a free neighbouring facing when it is even (CHECK reports whether the facing is free), then runs this image's turn preparation PREPARE and starts the facing script. The body of every Char_FaceFreeDirection; each passes its two functions. */
-/* Char_FaceFreeDirection (plp016 0x801CF7B4, plp026 0x801CFBD8, plp056 0x801CF9DC, plp267 0x801CEEB0, plp467
+/* Chooses a direction and requests its script: steps direction_08 to a free neighbouring facing when it is even (CHECK reports whether the facing is free), then runs this image's turn preparation PREPARE and starts the facing script. The body of every PlChar_FaceFreeDirection; each passes its two functions. */
+/* PlChar_FaceFreeDirection (plp016 0x801CF7B4, plp026 0x801CFBD8, plp056 0x801CF9DC, plp267 0x801CEEB0, plp467
  * 0x801CE8D4, plp567 0x801CECB4, plp678 0x801CE6B8) */
 #define CHAR_FACE_FREE_DIRECTION(CHECK, PREPARE)                                \
     u8 direction;                                                               \
@@ -120,8 +120,8 @@
     Actor_RequestScript((g_Task->direction_08 >> 1) + 0x42); \
     g_Task->header.step++
 
-void Char_SpawnActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y);
-void Char_SpawnLinkedActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y, s32 code);
+void PlChar_SpawnActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y);
+void PlChar_SpawnLinkedActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y, s32 code);
 
 #define CHAR_CELL_CODE_BLOCKS_CHARACTER(cell) ((u8)((cell) + 0x10) < 2 || ((cell) & BYTE_MASK) == 0xF4 || (u8)((cell) + 0xA) < 2)
 
@@ -181,9 +181,9 @@ extern Callback D_801CF90C[];
    (plp457), func_801CF940 (plp247), func_801CFD20 (plp257), func_801CFFD4 (plp678), func_801D01F0 (plp467),
    func_801D05D0 (plp567), func_801D07CC (plp267) */
 s32 func_801B2D00(s32 selector);
-s32 Char_ProbeFacingCell(void);
-s32 Char_ProbeCellSpawn(s16 x, s16 y);
-s32 Char_ProbeCellSpawn(s16 x, s16 y);
+s32 PlChar_ProbeFacingCell(void);
+s32 PlChar_ProbeCellSpawn(s16 x, s16 y);
+s32 PlChar_ProbeCellSpawn(s16 x, s16 y);
 
 /* Probes the cell one facing step (doubled) from the indexed route record for a party member. */
 #define PLCHAR_PROBE_FACING_FOLLOWER(index)                                                                                \

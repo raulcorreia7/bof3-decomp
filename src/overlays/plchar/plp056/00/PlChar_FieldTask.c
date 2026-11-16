@@ -22,23 +22,23 @@ MATCH void func_801CE72C(void) {
 #include "overlays/plchar/Char_RunFacingProbe.h"
 
 MATCH void func_801CEA94(void){CHAR_RUN_FACING_PROBE()}
-#include "overlays/plchar/Char_AdvanceScript.h"
+#include "overlays/plchar/PlChar_AdvanceScript.h"
 
-#include "overlays/plchar/Char_ProbeCellSpawn.h"
+#include "overlays/plchar/PlChar_ProbeCellSpawn.h"
 
-#include "overlays/plchar/Char_SpawnActor.h"
+#include "overlays/plchar/PlChar_SpawnActor.h"
 
-#include "overlays/plchar/Char_ProbeFacingCell.h"
+#include "overlays/plchar/PlChar_ProbeFacingCell.h"
 
 MATCH void func_801CF12C(void) {
     SYS_DISPATCH_TASK(D_801D0870, 2, g_Task);
 }
 
-#include "overlays/plchar/Char_StartTurn.h"
+#include "overlays/plchar/PlChar_StartTurn.h"
 
 /* Runs one route step script: facing 5 requests script 0x41 and facing 3 requests 0x40,
  * the reverse of the script ids in CHAR_RUN_STEP_SCRIPT (plchar.h). */
-#include "overlays/plchar/Char_AdvanceFacingTurn.h"
+#include "overlays/plchar/PlChar_AdvanceFacingTurn.h"
 
 MATCH void func_801CF338(void) {
     SYS_DISPATCH_TASK(D_801D087C, 2, g_Task);
@@ -48,17 +48,17 @@ MATCH void func_801CF37C(void) {
     CHAR_START_FREE_FACING;
 }
 
-#include "overlays/plchar/Char_ClaimLinkSlot.h"
+#include "overlays/plchar/PlChar_ClaimLinkSlot.h"
 
-#include "overlays/plchar/Char_PollScriptRequest.h"
+#include "overlays/plchar/PlChar_PollScriptRequest.h"
 
 MATCH void func_801CF728(void) {
     SYS_DISPATCH_TASK(D_801D0888, 2, g_Task);
 }
 
-#include "overlays/plchar/Char_StartTurnPeco.h"
+#include "overlays/plchar/PlChar_StartTurnPeco.h"
 
-#include "overlays/plchar/Char_RunStepScript.h"
+#include "overlays/plchar/PlChar_RunStepScript.h"
 
 MATCH void func_801CF934(void) {
     Actor_StepAnimLoop();
@@ -72,24 +72,24 @@ MATCH void func_801CF998(void) {
     SYS_DISPATCH_TASK(D_801D089C, 3, g_Task);
 }
 
-MATCH void Char_FaceFreeDirection(void) {
+MATCH void PlChar_FaceFreeDirection(void) {
     CHAR_FACE_FREE_DIRECTION(func_801D04C8, func_801D066C);
 }
 
-#include "overlays/plchar/Char_RunPersonalAction.h"
+#include "overlays/plchar/PlChar_RunPersonalAction.h"
 
-#include "overlays/plchar/Char_AdvancePaletteScript.h"
+#include "overlays/plchar/PlChar_AdvancePaletteScript.h"
 
-#include "overlays/plchar/Char_StartFacingScript.h"
+#include "overlays/plchar/PlChar_StartFacingScript.h"
 
-#include "overlays/plchar/Char_ClearSlotRefIfUnused.h"
+#include "overlays/plchar/PlChar_ClearSlotRefIfUnused.h"
 
 MATCH s32 func_801CFF4C(s16 x, s16 y) {
-    CHAR_PROBE_CELL_CODE(Char_SpawnLinkedActor);
+    CHAR_PROBE_CELL_CODE(PlChar_SpawnLinkedActor);
 }
 
 /* func_801D0158 */
-#include "overlays/plchar/Char_SpawnLinkedActor.h"
+#include "overlays/plchar/PlChar_SpawnLinkedActor.h"
 
 MATCH void func_801D0244(void) {
     SYS_DISPATCH_TASK(D_801D08B0, 3, g_Task);
@@ -99,9 +99,9 @@ MATCH void func_801D0288(void) {
     CHAR_START_FACING_TURN(func_801D066C);
 }
 
-#include "overlays/plchar/Char_ReleaseSpawnedActor.h"
+#include "overlays/plchar/PlChar_ReleaseSpawnedActor.h"
 
-#include "overlays/plchar/Char_ClearModeIfUnused.h"
+#include "overlays/plchar/PlChar_ClearModeIfUnused.h"
 
 #include "overlays/plchar/Char_ProbeFacingBlocked.h"
 CHAR_DEFINE_PROBE_FACING_BLOCKED(func_801D04C8);

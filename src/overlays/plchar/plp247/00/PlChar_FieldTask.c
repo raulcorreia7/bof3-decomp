@@ -8,9 +8,9 @@ MATCH void func_801CE404(void) {
     D_801CFAFC[g_Task->header.step]();
 }
 
-#include "overlays/plchar/Char_StartTurnGarr.h"
+#include "overlays/plchar/PlChar_StartTurnGarr.h"
 
-#include "overlays/plchar/Char_RunStepScriptGarr.h"
+#include "overlays/plchar/PlChar_RunStepScriptGarr.h"
 
 MATCH void func_801CE610(void) {
     SYS_DISPATCH_TASK(D_801CFB08, 2, g_Task);
@@ -23,7 +23,7 @@ MATCH void PlChar_RunGarrFieldTask(void) {
     PLCHAR_RUN_GARR_FIELD_TASK(func_801CEAE0);
 }
 
-#include "overlays/plchar/Char_TickPauseTimer.h"
+#include "overlays/plchar/PlChar_TickPauseTimer.h"
 
 /* func_801CE8AC */
 #include "overlays/plchar/PlChar_FindGarrActorSlot.h"
@@ -36,9 +36,9 @@ MATCH void func_801CEBFC(void) {
     SYS_DISPATCH_TASK(D_801CFB10, 2, g_Task);
 }
 
-#include "overlays/plchar/Char_StartTurn.h"
+#include "overlays/plchar/PlChar_StartTurn.h"
 
-#include "overlays/plchar/Char_RunStepScript.h"
+#include "overlays/plchar/PlChar_RunStepScript.h"
 
 MATCH void func_801CEE08(void) {
     g_Game.current->u.field.mode_12B.s8_value = 0;
@@ -48,26 +48,26 @@ MATCH void func_801CEE18(void) {
     SYS_DISPATCH_TASK(D_801CFB1C, 2, g_Task);
 }
 
-#include "overlays/plchar/Char_StartFacingTurn.h"
+#include "overlays/plchar/PlChar_StartFacingTurn.h"
 
-#include "overlays/plchar/Char_RunStepScriptRyuAdult.h"
+#include "overlays/plchar/PlChar_RunStepScriptRyuAdult.h"
 
 MATCH void func_801CF04C(void) {
     SYS_DISPATCH_TASK(D_801CFB28, 2, g_Task);
 }
 
-#include "overlays/plchar/Char_WalkStep.h"
+#include "overlays/plchar/PlChar_WalkStep.h"
 
 #include "overlays/plchar/Char_RunFacingProbe.h"
 
 MATCH void func_801CF3DC(void){CHAR_RUN_FACING_PROBE()}
-#include "overlays/plchar/Char_AdvanceScript.h"
+#include "overlays/plchar/PlChar_AdvanceScript.h"
 
-#include "overlays/plchar/Char_ProbeCellSpawn.h"
+#include "overlays/plchar/PlChar_ProbeCellSpawn.h"
 
-#include "overlays/plchar/Char_SpawnActor.h"
+#include "overlays/plchar/PlChar_SpawnActor.h"
 
-#include "overlays/plchar/Char_ProbeFacingCell.h"
+#include "overlays/plchar/PlChar_ProbeFacingCell.h"
 
 MATCH void func_801CFA74(void) {
     D_801CFB34[g_Task->unk_2C]();

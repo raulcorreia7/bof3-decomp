@@ -9,11 +9,11 @@ MATCH void func_801CE404(void) {
     D_801CF5EC[g_Task->header.step]();
 }
 
-MATCH void Char_StartTurnTeepo(void) {
+MATCH void PlChar_StartTurnTeepo(void) {
     CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
 }
 
-#include "overlays/plchar/Char_RunStepScriptTeepo.h"
+#include "overlays/plchar/PlChar_RunStepScriptTeepo.h"
 
 MATCH void func_801CE610(void) {
     SYS_DISPATCH_TASK(D_801CF5F8, 2, g_Task);
@@ -45,20 +45,20 @@ MATCH void func_801CE698(void) {
     g_Task->unk_03       = 1;
 }
 
-#include "overlays/plchar/Char_RunPersonalAction.h"
+#include "overlays/plchar/PlChar_RunPersonalAction.h"
 
-#include "overlays/plchar/Char_AdvancePaletteScript.h"
+#include "overlays/plchar/PlChar_AdvancePaletteScript.h"
 
-#include "overlays/plchar/Char_StartFacingScript.h"
+#include "overlays/plchar/PlChar_StartFacingScript.h"
 
-#include "overlays/plchar/Char_ClearSlotRefIfUnused.h"
+#include "overlays/plchar/PlChar_ClearSlotRefIfUnused.h"
 
 MATCH s32 func_801CEC18(s16 x, s16 y) {
-    CHAR_PROBE_CELL_CODE(Char_SpawnLinkedActor);
+    CHAR_PROBE_CELL_CODE(PlChar_SpawnLinkedActor);
 }
 
 /* func_801CEE24 */
-#include "overlays/plchar/Char_SpawnLinkedActor.h"
+#include "overlays/plchar/PlChar_SpawnLinkedActor.h"
 
 MATCH void func_801CEF10(void) {
     SYS_DISPATCH_TASK(D_801CF614, 3, g_Task);
@@ -72,9 +72,9 @@ MATCH void func_801CEF54(void) {
     g_Task->unk_03 = 1;
 }
 
-#include "overlays/plchar/Char_UpdateLinkedFacing.h"
+#include "overlays/plchar/PlChar_UpdateLinkedFacing.h"
 
-#include "overlays/plchar/Char_ClearPanelModeIfUnused.h"
+#include "overlays/plchar/PlChar_ClearPanelModeIfUnused.h"
 
 #include "overlays/plchar/Char_ProbeFacingBlocked.h"
 CHAR_DEFINE_PROBE_FACING_BLOCKED(func_801CF184);
@@ -83,9 +83,9 @@ MATCH void func_801CF328(void) {
     SYS_DISPATCH_TASK(D_801CF620, 2, g_Task);
 }
 
-#include "overlays/plchar/Char_StartTurn.h"
+#include "overlays/plchar/PlChar_StartTurn.h"
 
-#include "overlays/plchar/Char_RunStepScript.h"
+#include "overlays/plchar/PlChar_RunStepScript.h"
 
 MATCH void func_801CF534(void) {
     g_Game.current->u.field.mode_12B.s8_value = 0;

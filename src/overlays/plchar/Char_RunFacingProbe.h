@@ -1,4 +1,4 @@
-/* Counts down the work timer at +0x0A; at zero it marks the field actor one facing step ahead and probes that route cell, then its right and lower neighbours when the position is off the cell grid, with Char_ProbeCellSpawn, and advances the step. A statement macro: each image names its function. */
+/* Counts down the work timer at +0x0A; at zero it marks the field actor one facing step ahead and probes that route cell, then its right and lower neighbours when the position is off the cell grid, with PlChar_ProbeCellSpawn, and advances the step. A statement macro: each image names its function. */
 #define CHAR_RUN_FACING_PROBE()                                                          \
     {                                                                                    \
         s32 x;                                                                           \
@@ -20,15 +20,15 @@
             }                                                                            \
             cell_x = x >> 16;                                                            \
             cell_y = y >> 16;                                                            \
-            hit    = Char_ProbeCellSpawn(cell_x, cell_y);                                \
+            hit    = PlChar_ProbeCellSpawn(cell_x, cell_y);                              \
             if ((hit & BYTE_MASK) == 0) {                                                \
                 if ((x & HALF_MASK) != 0) {                                              \
-                    hit = Char_ProbeCellSpawn((s16)(cell_x + 1), cell_y);                \
+                    hit = PlChar_ProbeCellSpawn((s16)(cell_x + 1), cell_y);              \
                 }                                                                        \
             }                                                                            \
             if ((hit & BYTE_MASK) == 0) {                                                \
                 if ((y & HALF_MASK) != 0) {                                              \
-                    Char_ProbeCellSpawn(cell_x, (s16)(cell_y + 1));                      \
+                    PlChar_ProbeCellSpawn(cell_x, (s16)(cell_y + 1));                    \
                 }                                                                        \
             }                                                                            \
             g_Task->header.step++;                                                       \
