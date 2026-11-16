@@ -52,6 +52,6 @@ extern u8 D_801F2C94[];
 
 void func_801F4A50(s32, s32, s32, s32, s32);
 
-void func_801F2E64(s32 arg0, s32 arg1);
+void func_801F2E64(s32 phase, s32 semi_trans);
 
 #endif
