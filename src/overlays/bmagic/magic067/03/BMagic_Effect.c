@@ -28,16 +28,16 @@ NON_MATCHING void func_801EEC94(void) {
     g_Task->param.unk_0B += 1;
     slot                               = Battle_AllocEffect(1, 0x13) & BYTE_MASK;
     i                                  = 0;
-    dst                                = MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW);
-    src                                = MEM_PTR(u16, AREA_PALETTE_ARENA + 2 * AREA_PALETTE_ROW);
+    dst                                = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW));
+    src                                = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BMAGIC_ROW));
     g_BattleEffects[slot].header.mode  = 1;
     g_BattleEffects[slot].target.party = (PartyMember*)g_Task;
     g_Task->param.unk_0B += 1;
     for (; i < 0x100; i++) {
-        *dst++ = *src++ | 0x8000;
+        *dst++ = *src++ | PSX_COLOR_STP_BIT;
     }
-    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
-    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW));
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
     for (i = 0; i < 0x10; i++) {
         dst[0]    = src[0];
         dst[0x10] = src[0x10];

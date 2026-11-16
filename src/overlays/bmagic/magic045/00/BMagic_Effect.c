@@ -34,7 +34,7 @@ MATCH void func_801EEC5C(void) {
         g_GfxPalettePending                             = 1;
         BMAGIC_POINT_AT_PALETTE_ROW(dst, src, first);
         do {
-            dst[first] = src[first] | 0x8000;
+            dst[first] = src[first] | PSX_COLOR_STP_BIT;
             first++;
         } while (first < 16);
         g_AreaPaletteCopy->rows[26].colors[0] = g_AreaPaletteArena->rows[26].colors[0];

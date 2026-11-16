@@ -39,7 +39,7 @@ MATCH void GFX_UploadPaletteRows(void) {
         cell_base = product & BYTE_MASK;
         loop_work = work;
         do {
-            colors[cell_base + color_index] |= 0x8000u;
+            colors[cell_base + color_index] |= PSX_COLOR_STP_BIT;
             color_index++;
         } while (color_index < (s_PaletteFadeColorCounts[loop_work[0x28]] << 4));
     }

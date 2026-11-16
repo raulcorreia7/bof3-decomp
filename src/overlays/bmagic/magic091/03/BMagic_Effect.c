@@ -30,10 +30,10 @@ MATCH void func_801EECCC(void) {
         anchor += 6;
     }
     i   = 1;
-    dst = BATTLE_EFFECT_PALETTE_ENTRY_1;
-    src = BATTLE_PALETTE_SOURCE_ENTRY_1;
+    dst = BATTLE_EFFECT_PALETTE_COLORS;
+    src = BATTLE_PALETTE_SOURCE_COLORS;
     for (; i < 16; i++) {
-        *dst++ = *src++ | 0x8000;
+        *dst++ = *src++ | PSX_COLOR_STP_BIT;
     }
     g_BattleEffectPalette[0] = 0;
     g_GfxPalettePending      = 1;

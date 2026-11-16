@@ -36,18 +36,18 @@ MATCH void func_801EED18(void) {
     g_Task->param.unk_0B += 1;
     SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
-    for (; i < 256; i++) {
-        *dst++ = *src++ | 0x8000;
+    for (; i < AREA_PALETTE_COLORS; i++) {
+        *dst++ = *src++ | PSX_COLOR_STP_BIT;
     }
     i   = 0;
-    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW);
+    dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW));
     src = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
     for (; i < 16; i++) {
-        *dst++ = *src++ | 0x8000;
+        *dst++ = *src++ | PSX_COLOR_STP_BIT;
     }
-    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = *MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
-    *MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW)  = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
-    g_GfxPalettePending                                      = 1;
+    *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)) = *MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
+    *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW))   = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
+    g_GfxPalettePending                                               = 1;
 }
 
 #include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"

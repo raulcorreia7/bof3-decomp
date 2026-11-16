@@ -42,7 +42,7 @@ MATCH void func_801F3C3C(s32 delta) {
                 b = 0x1F;
             }
         }
-        *dst = (*src & 0x8000) | (b << 0xA) | (g << 5) | r;
+        *dst = (*src & PSX_COLOR_STP_BIT) | (b << 0xA) | (g << 5) | r;
         dst += 1;
         src += 1;
     } while ((s32)dst < (s32)0x80038600);

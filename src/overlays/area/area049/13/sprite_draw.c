@@ -322,7 +322,7 @@ MATCH void func_80117B60(s32 scale) {
         red   = ((s32)(color & 0x1F) * scale) / 0x80;
         green = (color & 0xFFFF) >> 5 & 0x1F;
         blue  = ((s32)((color & 0xFFFF) >> 10 & 0x1F) * scale) / 0x80;
-        *dst  = (u16)((color & 0x8000) | (blue << 10) | (green << 5) | red);
+        *dst  = (u16)((color & PSX_COLOR_STP_BIT) | (blue << 10) | (green << 5) | red);
         dst++;
         i++;
     } while (i < 0x10);

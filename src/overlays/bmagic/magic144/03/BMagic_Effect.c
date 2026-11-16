@@ -37,8 +37,8 @@ MATCH void func_801EED04(void) {
     actor                              = g_Battle.selected_actor;
     slot                               = Battle_AllocEffect(1, 0x36) & BYTE_MASK;
     i                                  = 1;
-    dst                                = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW + 2);
-    src                                = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW + 2);
+    dst                                = BATTLE_EFFECT_PALETTE_COLORS;
+    src                                = BATTLE_PALETTE_SOURCE_COLORS;
     task                               = g_Task;
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].target.party = task;
@@ -47,10 +47,10 @@ MATCH void func_801EED04(void) {
     g_BattleEffects[slot].pos.z.fixed  = actor->pos.z.fixed;
     g_Task->param.unk_0B               = 1;
     for (; i < 16; i++) {
-        *dst++ = *src++ | 0x8000;
+        *dst++ = *src++ | PSX_COLOR_STP_BIT;
     }
-    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = 0;
-    g_GfxPalettePending                                      = 1;
+    *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)) = 0;
+    g_GfxPalettePending                                               = 1;
     g_Task->header.mode += 1;
 }
 

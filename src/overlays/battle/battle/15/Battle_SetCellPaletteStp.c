@@ -24,7 +24,7 @@ MATCH void Battle_SetCellPaletteStp(BattleSpriteCell* record) {
     }
     for (i = 1; i < (s_BattleCellRowCount[record->bank_index] << 4); i++) {
         clut = (u32)g_GraphicsPaletteDst + ((base & BYTE_MASK) << 9);
-        *(u16*)(clut + ((product & BYTE_MASK) + i) * 2) |= 0x8000;
+        *(u16*)(clut + ((product & BYTE_MASK) + i) * 2) |= PSX_COLOR_STP_BIT;
     }
     g_GfxPalettePending = 1;
 }

@@ -46,18 +46,18 @@ MATCH void func_801EEC94(void) {
     g_BattleEffects[index].handler_index = 0x55;
     g_BattleEffects[index].target.party  = work;
     g_Task->param.unk_0B += 1;
-    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
-    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW));
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
     for (i = 1; i < 16; i++) {
-        dst[i]      = src[i] | 0x8000;
-        dst[i + 16] = src[i + 16] | 0x8000;
+        dst[i]      = src[i] | PSX_COLOR_STP_BIT;
+        dst[i + 16] = src[i + 16] | PSX_COLOR_STP_BIT;
     }
-    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW)        = 0;
-    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW + 0x20) = 0;
-    g_GfxPalettePending                                             = 1;
-    g_Task->unk_27                                                  = Battle_CopyCellPalette(g_BattleEffectBattler);
-    g_Task->unk_28                                                  = g_BattleEffectBattler->unk_28;
-    g_Task->unk_24                                                  = g_BattleEffectBattler->unk_24;
+    *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))        = 0;
+    *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW) + 0x20) = 0;
+    g_GfxPalettePending                                                      = 1;
+    g_Task->unk_27                                                           = Battle_CopyCellPalette(g_BattleEffectBattler);
+    g_Task->unk_28                                                           = g_BattleEffectBattler->unk_28;
+    g_Task->unk_24                                                           = g_BattleEffectBattler->unk_24;
     Battle_SetCellPaletteStp(g_Task);
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
 }

@@ -52,7 +52,7 @@ MATCH void func_801EEC98(void) {
     src = MEM_PTR(u16, AREA_PALETTE_ARENA + 0x3402u);
     dst = MEM_PTR(u16, AREA_PALETTE_WORK + 0x3402u);
     for (; i < 16; i++) {
-        dst[0x20] = src[0x20] | 0x8000;
+        dst[0x20] = src[0x20] | PSX_COLOR_STP_BIT;
         src++;
         dst++;
     }

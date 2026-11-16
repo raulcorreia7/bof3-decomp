@@ -33,7 +33,7 @@ MATCH void func_801EECCC(void) {
     dst = MEM_PTR(u16, 0x8003AC02u);
     src = MEM_PTR(u16, 0x80036C02u);
     for (; i < 16; i++) {
-        *dst++ = *src++ | 0x8000;
+        *dst++ = *src++ | PSX_COLOR_STP_BIT;
     }
     *MEM_PTR(u16, 0x8003AC00u) = 0;
     g_GfxPalettePending        = 1;

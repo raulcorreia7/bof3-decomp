@@ -21,17 +21,17 @@ NON_MATCHING void func_801EEF10(void) {
     func_801EF47C(*fade);
 
     if (g_InputHeld != 0) {
-        for (i = 0; i < 256; i++) {
+        for (i = 0; i < AREA_PALETTE_COLORS; i++) {
             color                    = g_BattleEffectPalette[i];
             gray                     = (PSX_COLOR_R(color) + PSX_COLOR_G(color) + PSX_COLOR_B(color)) / 3U;
-            value                    = (color & 0x8000) | (gray << 10) | (gray << 5) | gray;
+            value                    = (color & PSX_COLOR_STP_BIT) | (gray << 10) | (gray << 5) | gray;
             g_BattleEffectPalette[i] = value;
         }
         mirror = GAME_PALETTE_MIRROR_U16;
-        for (i = 0; i < 256; i++) {
+        for (i = 0; i < AREA_PALETTE_COLORS; i++) {
             color     = mirror[i];
             gray      = (PSX_COLOR_R(color) + PSX_COLOR_G(color) + PSX_COLOR_B(color)) / 3U;
-            value     = (color & 0x8000) | (gray << 10) | (gray << 5) | gray;
+            value     = (color & PSX_COLOR_STP_BIT) | (gray << 10) | (gray << 5) | gray;
             mirror[i] = value;
         }
         g_GfxPalettePending = 1;
