@@ -92,7 +92,37 @@ MATCH void func_801F719C(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F73EC(void) {
+    u8  i;
+    u16 height;
+    u16 limit;
+    u16 width;
+
+    i = 0;
+    do {
+        width = D_801FE7CC[i].width;
+        limit = (u16)(g_Task->timer << 4);
+        if (limit < width) {
+            width = limit;
+        }
+        height = D_801FE7CC[i].height;
+        if (limit < height) {
+            height = limit;
+        }
+        if (((g_Task->option_flags >> i) & 1) == 0) {
+            UI_DrawBoxOutline(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)width, (u8)height);
+        }
+        i++;
+    } while (i < 3);
+    g_Task->timer--;
+    if (g_Task->timer == 0) {
+        g_Task->header.mode = 4;
+    }
+}
+#else
 INCLUDE_ASM(func_801F73EC);
+#endif
 
 MATCH void func_801F74F8(void) {
     Actor_Clear();
