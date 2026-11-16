@@ -11,6 +11,8 @@
 #define EFFECT_TICK_LIMIT     0x80
 
 /* func_800AF3A0 */
+/* battle/15 defines this as func_800AF3A0(VECTOR, s16); this image passes the four words and the
+ * step separately, and rebuilding the VECTOR would not match. */
 void Battle_StepRangeToward(s32, s32, s32, s32, s32);
 
 extern Callback D_801EFC9C[];
