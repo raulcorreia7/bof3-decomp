@@ -159,7 +159,7 @@ extern Callback g_GameFishingSubstates[4];
 /* D_801C7B98 */
 extern Callback g_MenuAbilityOpen[3];
 /* D_801C7BA4 */
-extern Callback g_MenuShisuOpen[3];
+extern Callback g_GameShisuSteps[3];
 /* D_801C7BB0 */
 extern Callback g_GameSceneCameraSubstates[3];
 /* D_801C7BBC */

@@ -216,7 +216,7 @@ typedef enum GameRequest {
     GAME_REQUEST_AREA_CHANGE  = 5, /* state 1 */
     GAME_REQUEST_SHOP         = 6, /* state 7 */
     GAME_REQUEST_ABILITY_MENU = 7, /* state 9; scena06 writes it */
-    GAME_REQUEST_SHISU_MENU   = 8, /* state 10; scena11 writes it */
+    GAME_REQUEST_SHISU        = 8, /* state 10; scena11 func_801F8B84 writes it (script var 0 at 7, and its step 11) */
     GAME_REQUEST_SCENE_CAMERA = 9, /* state 11 */
 } GameRequest;
 
@@ -237,7 +237,7 @@ typedef enum GameMode {
     GAME_STATE_SHOP         = 7,
     GAME_STATE_FISHING      = 8,
     GAME_STATE_ABILITY_MENU = 9,
-    GAME_STATE_SHISU_MENU   = 10,
+    GAME_STATE_SHISU        = 10,
     GAME_STATE_SCENE_CAMERA = 11,
 } GameMode;
 

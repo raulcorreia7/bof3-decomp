@@ -35,5 +35,5 @@ segments:
     vram: 0x801D9688
     align: 4
     subsegments:
-      - [0x8A88, bin, D_801D9688]
+      - [0x8A88, bin, g_ShisuScales]
   - [0x9534]

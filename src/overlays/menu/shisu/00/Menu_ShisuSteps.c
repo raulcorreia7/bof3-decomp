@@ -6,19 +6,19 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 /* The shisu overlay entry: the shared menu step byte selects the handler. */
 MATCH void func_801D0D80(void) {
-    SYS_DISPATCH_BYTE(g_MenuShisuSteps, g_MenuStep.step);
+    SYS_DISPATCH_BYTE(g_ShisuSteps, g_MenuStep.step);
 }
 
 MATCH void func_801D0DBC(void) {
     func_801D1CA4();
-    g_MenuShisuIngredients.unk_09  = 0;
-    g_MenuShisuIngredients.unk_0A  = 0;
-    g_MenuShisuIngredients.unk_08  = 0;
-    g_MenuShisuIngredients.used[0] = 0;
-    g_MenuShisuIngredients.used[1] = 0;
-    g_MenuShisuIngredients.used[2] = 0;
-    g_MenuShisuIngredients.used[3] = 0;
-    g_MenuShisuIngredients.unk_0B  = func_801D1E60();
+    g_ShisuIngredients.command      = 0;
+    g_ShisuIngredients.cursor       = 0;
+    g_ShisuIngredients.rounds       = 0;
+    g_ShisuIngredients.used[0]      = 0;
+    g_ShisuIngredients.used[1]      = 0;
+    g_ShisuIngredients.used[2]      = 0;
+    g_ShisuIngredients.used[3]      = 0;
+    g_ShisuIngredients.topping_size = func_801D1E60();
     func_801D27BC();
     {
         u8* step = &g_MenuStep.step;
@@ -31,7 +31,7 @@ MATCH void func_801D0DBC(void) {
 }
 
 MATCH void func_801D0E4C(void) {
-    SYS_DISPATCH_BYTE(g_MenuShisuStep1Steps, g_MenuStep.sub_step);
+    SYS_DISPATCH_BYTE(g_ShisuStep1Steps, g_MenuStep.sub_step);
 }
 
 MATCH void func_801D0E88(void) {
@@ -55,7 +55,7 @@ MATCH void func_801D0EC4(void) {
 }
 
 MATCH void func_801D0F24(void) {
-    SYS_DISPATCH_BYTE(g_MenuShisuStep3Steps, g_MenuStep.sub_step);
+    SYS_DISPATCH_BYTE(g_ShisuStep3Steps, g_MenuStep.sub_step);
 }
 
 MATCH void func_801D0F60(void) {
@@ -84,11 +84,11 @@ MATCH void func_801D0FAC(void) {
 }
 
 MATCH void func_801D1018(void) {
-    if (g_MenuShisuIngredients.unk_08 != 0) {
-        Item_Remove(ITEM_CAT_ITEM, ITEM_MACKEREL, g_MenuShisuIngredients.used[0], 0);
-        Item_Remove(ITEM_CAT_ITEM, ITEM_SHALY_SEED, g_MenuShisuIngredients.used[1], 0);
-        Item_Remove(ITEM_CAT_ITEM, ITEM_VINEGAR, g_MenuShisuIngredients.used[2], 0);
-        Item_Remove(ITEM_CAT_ITEM, ITEM_HORSERADISH, g_MenuShisuIngredients.used[3], 0);
+    if (g_ShisuIngredients.rounds != 0) {
+        Item_Remove(ITEM_CAT_ITEM, ITEM_MACKEREL, g_ShisuIngredients.used[0], 0);
+        Item_Remove(ITEM_CAT_ITEM, ITEM_SHALY_SEED, g_ShisuIngredients.used[1], 0);
+        Item_Remove(ITEM_CAT_ITEM, ITEM_VINEGAR, g_ShisuIngredients.used[2], 0);
+        Item_Remove(ITEM_CAT_ITEM, ITEM_HORSERADISH, g_ShisuIngredients.used[3], 0);
         g_SceneState.step_05 = 0x14;
         func_801D1EE8();
         if (D_801DA044 >= 0x33) {
@@ -122,10 +122,10 @@ MATCH void func_801D1018(void) {
 
 MATCH void func_801D11A4(void) {
     Menu_DrawClutStrip(D_80144953);
-    g_MenuShisuStep2Steps[g_MenuStep.sub_step]();
+    g_ShisuStep2Steps[g_MenuStep.sub_step]();
 }
 
-/* Reads the status item input, advances the step and places the panel task. */
+/* Reads the command row input: left and right flip mix or leave, up and down open the ingredient list. */
 MATCH void func_801D11F4(void) {
     u16* input;
     u8*  step;
@@ -136,25 +136,25 @@ MATCH void func_801D11F4(void) {
     buttons = INPUT_REPEATED(*input, INPUT_DIRECTIONAL);
     if (buttons & (PADLright | PADLleft)) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
-        g_MenuShisuIngredients.unk_09 ^= 1;
-        D_80148364 = g_MenuShisuIngredients.unk_09 + 0x2B;
+        g_ShisuIngredients.command ^= 1;
+        D_80148364 = g_ShisuIngredients.command + 0x2B;
     } else if (buttons & PADLup) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
-        D_80148364                    = 0x2A;
-        g_MenuShisuIngredients.unk_0A = 3;
+        D_80148364                = 0x2A;
+        g_ShisuIngredients.cursor = 3;
         g_MenuStep.sub_step++;
     } else if (buttons & PADLdown) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
-        D_80148364                    = 0x2A;
-        g_MenuShisuIngredients.unk_0A = 0;
+        D_80148364                = 0x2A;
+        g_ShisuIngredients.cursor = 0;
         g_MenuStep.sub_step++;
     } else if (*input & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        if (g_MenuShisuIngredients.unk_09 != 0) {
+        if (g_ShisuIngredients.command != 0) {
             goto advance;
         }
-        if (g_MenuShisuIngredients.unk_08 < 8) {
-            if (g_MenuShisuIngredients.unk_08 == 0) {
-                if (g_MenuShisuIngredients.used[0] != 0 && g_MenuShisuIngredients.used[1] != 0) {
+        if (g_ShisuIngredients.rounds < 8) {
+            if (g_ShisuIngredients.rounds == 0) {
+                if (g_ShisuIngredients.used[0] != 0 && g_ShisuIngredients.used[1] != 0) {
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
                     g_MenuStep.sub_step += 2;
                     g_MenuStep.state = g_MenuStep.state; /* FAKE: retail reloads and stores state. */
@@ -164,7 +164,7 @@ MATCH void func_801D11F4(void) {
                 }
             } else {
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
-                g_MenuShisuIngredients.unk_08++;
+                g_ShisuIngredients.rounds++;
             }
         } else {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
@@ -180,10 +180,10 @@ MATCH void func_801D11F4(void) {
     }
 
     g_MenuPanelTasks[0].active = 1;
-    D_80148334                 = D_8014837C + g_MenuShisuIngredients.unk_09 * 48;
+    D_80148334                 = D_8014837C + g_ShisuIngredients.command * 48;
     D_80148336                 = D_8014837E + 4;
-    if (g_MenuShisuIngredients.unk_08 != 0) {
-        D_801DA0FC = D_801DA084 + D_801DA088 * 0xA00;
+    if (g_ShisuIngredients.rounds != 0) {
+        D_801DA0FC = D_801DA084 + g_ShisuBaseScale * 0xA00;
     }
     func_801D2C0C();
     func_801D2DA8();
@@ -194,7 +194,7 @@ INCLUDE_ASM(func_801D14C0);
 MATCH void func_801D1898(void) {
     Callback handler;
 
-    handler = g_MenuShisuStep2Sub2Steps[g_MenuStep.state];
+    handler = g_ShisuStep2Sub2Steps[g_MenuStep.state];
     handler();
     func_801D2C0C();
     func_801D2DA8();
@@ -228,12 +228,12 @@ MATCH void func_801D1910(void) {
 /* Copies the equipped item's status values onto the equip list's title row. */
 NON_MATCHING void func_801D1964(void) {
     if ((D_801DA0C6 != 0) && (D_801DA04E != 0)) {
-        D_801D9EF0[0] = D_801DA11D;
-        D_801D9EF0[1] = D_801DA11E;
-        D_801D9EF0[2] = D_801DA11F;
-        D_801D9EF0[4] = D_801DA0A5;
-        D_801D9EF0[5] = D_801DA0A6;
-        D_801D9EF0[6] = D_801DA0A7;
+        D_801D9EF0[0] = g_ShisuToppingR;
+        D_801D9EF0[1] = g_ShisuToppingG;
+        D_801D9EF0[2] = g_ShisuToppingB;
+        D_801D9EF0[4] = g_ShisuBaseR;
+        D_801D9EF0[5] = g_ShisuBaseG;
+        D_801D9EF0[6] = g_ShisuBaseB;
         D_801DA0C1    = 4;
         D_801DA049    = 4;
         D_80148654    = 0;
@@ -257,32 +257,32 @@ NON_MATCHING void func_801D1A20(void) {
     if (value < (u8)level) {
         value = level;
     }
-    D_801DA11D = value;
-    value      = D_801D9EF0[1];
+    g_ShisuToppingR = value;
+    value           = D_801D9EF0[1];
     if (value < (u8)level) {
         value = level;
     }
-    D_801DA11E = value;
-    value      = D_801D9EF0[2];
+    g_ShisuToppingG = value;
+    value           = D_801D9EF0[2];
     if (value < (u8)level) {
         value = level;
     }
-    D_801DA11F = value;
-    value      = D_801D9EF0[4];
+    g_ShisuToppingB = value;
+    value           = D_801D9EF0[4];
     if (value < (u8)level) {
         value = level;
     }
-    D_801DA0A5 = value;
-    value      = D_801D9EF0[5];
+    g_ShisuBaseR = value;
+    value        = D_801D9EF0[5];
     if (value < (u8)level) {
         value = level;
     }
-    D_801DA0A6 = value;
-    value      = D_801D9EF0[6];
+    g_ShisuBaseG = value;
+    value        = D_801D9EF0[6];
     if (value < (u8)level) {
         value = level;
     }
-    D_801DA0A7 = value;
+    g_ShisuBaseB = value;
     if ((u8)level == 0x80) {
         SND_PlayCue(0x200);
     }
@@ -314,46 +314,46 @@ NON_MATCHING void func_801D1B58(void) {
     if (value0 < level) {
         value0 = level;
     }
-    D_801DA11D = value0;
-    value1     = D_801D9EF0[1];
+    g_ShisuToppingR = value0;
+    value1          = D_801D9EF0[1];
     if (value1 < level) {
         value1 = level;
     }
-    D_801DA11E = value1;
-    value2     = D_801D9EF0[2];
+    g_ShisuToppingG = value1;
+    value2          = D_801D9EF0[2];
     if (value2 < level) {
         value2 = level;
     }
-    D_801DA11F = value2;
-    value3     = D_801D9EF0[4];
+    g_ShisuToppingB = value2;
+    value3          = D_801D9EF0[4];
     if (value3 < level) {
         value3 = level;
     }
-    D_801DA0A5 = value3;
-    value4     = D_801D9EF0[5];
+    g_ShisuBaseR = value3;
+    value4       = D_801D9EF0[5];
     if (value4 < level) {
         value4 = level;
     }
-    D_801DA0A6 = value4;
-    value5     = D_801D9EF0[6];
+    g_ShisuBaseG = value4;
+    value5       = D_801D9EF0[6];
     if (value5 < level) {
         value5 = level;
     }
-    D_801DA0A7 = value5;
+    g_ShisuBaseB = value5;
 
     level -= 8;
     *fade = level;
     if ((u8)level == 0) {
-        D_801DA0C1 = 5;
-        D_801DA049 = 1;
-        D_80148652 = 0;
-        D_801DA11D = D_801D9EF0[0];
-        D_801DA11E = D_801D9EF0[1];
-        D_801DA11F = D_801D9EF0[2];
-        D_801DA0A5 = D_801D9EF0[4];
-        D_801DA0A6 = D_801D9EF0[5];
-        D_801DA0A7 = D_801D9EF0[6];
-        g_MenuShisuIngredients.unk_08 += 1;
+        D_801DA0C1      = 5;
+        D_801DA049      = 1;
+        D_80148652      = 0;
+        g_ShisuToppingR = D_801D9EF0[0];
+        g_ShisuToppingG = D_801D9EF0[1];
+        g_ShisuToppingB = D_801D9EF0[2];
+        g_ShisuBaseR    = D_801D9EF0[4];
+        g_ShisuBaseG    = D_801D9EF0[5];
+        g_ShisuBaseB    = D_801D9EF0[6];
+        g_ShisuIngredients.rounds += 1;
         D_80148651 -= 2;
     }
 }
@@ -362,14 +362,14 @@ INCLUDE_ASM(func_801D1B58);
 #endif
 
 MATCH void func_801D1CA4(void) {
-    g_MenuShisuIngredients.held[0] = Item_Count(ITEM_CAT_ITEM, ITEM_MACKEREL, 0);
-    g_MenuShisuIngredients.held[1] = Item_Count(ITEM_CAT_ITEM, ITEM_SHALY_SEED, 0);
-    g_MenuShisuIngredients.held[2] = Item_Count(ITEM_CAT_ITEM, ITEM_VINEGAR, 0);
-    g_MenuShisuIngredients.held[3] = Item_Count(ITEM_CAT_ITEM, ITEM_HORSERADISH, 0);
+    g_ShisuIngredients.held[0] = Item_Count(ITEM_CAT_ITEM, ITEM_MACKEREL, 0);
+    g_ShisuIngredients.held[1] = Item_Count(ITEM_CAT_ITEM, ITEM_SHALY_SEED, 0);
+    g_ShisuIngredients.held[2] = Item_Count(ITEM_CAT_ITEM, ITEM_VINEGAR, 0);
+    g_ShisuIngredients.held[3] = Item_Count(ITEM_CAT_ITEM, ITEM_HORSERADISH, 0);
 }
 
 #ifdef NON_MATCHING
-/* Places the four status panels and points the skill list at the item counts. */
+/* Places the four shisu panels and points the ingredient list at the item counts. */
 NON_MATCHING void func_801D1D1C(void) {
     g_MenuPanelTasks[1].pos.x      = 0x14;
     g_MenuPanelTasks[2].pos.x      = 0x70;
@@ -398,7 +398,7 @@ NON_MATCHING void func_801D1D1C(void) {
     g_MenuPanelTasks[3].handler    = 1;
     g_MenuPanelTasks[3].state      = 2;
     g_MenuPanelTasks[3].unk_0A     = 0xFF;
-    g_MenuPanelTasks[3].item_table = (s32)&g_MenuShisuIngredients;
+    g_MenuPanelTasks[3].item_table = (s32)&g_ShisuIngredients;
 }
 #else
 INCLUDE_ASM(func_801D1D1C);
@@ -466,38 +466,38 @@ NON_MATCHING void func_801D27BC(void) {
     y           = *scroll_y;
     D_801DA098  = record[1];
 
-    D_801DA049 = 0;
-    D_801DA090 = 0;
-    D_801DA088 = bias;
-    D_801DA0AC = 0;
-    D_801DA0B0 = 0;
-    D_801DA0B4 = 0;
-    initial    = -0x80;
-    D_801DA0A5 = initial;
-    D_801DA0A6 = initial;
-    D_801DA0A7 = initial;
-    D_801DA07C = *scroll_x;
-    D_801DA080 = y;
-    height     = Area_SampleHeight(x, y);
-    D_801DA084 = (height << 16) - MENU_SHISU_HEIGHT_BIAS;
+    D_801DA049       = 0;
+    D_801DA090       = 0;
+    g_ShisuBaseScale = bias;
+    D_801DA0AC       = 0;
+    D_801DA0B0       = 0;
+    g_ShisuBaseAngle = 0;
+    initial          = -0x80;
+    g_ShisuBaseR     = initial;
+    g_ShisuBaseG     = initial;
+    g_ShisuBaseB     = initial;
+    D_801DA07C       = *scroll_x;
+    D_801DA080       = y;
+    height           = Area_SampleHeight(x, y);
+    D_801DA084       = (height << 16) - SHISU_HEIGHT_BIAS;
 
-    record      = *record_cell;
-    D_801DA114  = record + 2;
-    next_record = D_801DA114;
-    D_801DA0C1  = 0;
-    D_801DA108  = 0;
-    D_801DA100  = bias;
-    D_801DA124  = 0;
-    D_801DA128  = 0;
-    D_801DA12C  = 0;
-    D_801DA11D  = initial;
-    D_801DA11E  = initial;
-    D_801DA11F  = initial;
-    D_801DA0F4  = *scroll_x;
-    D_801DA0F8  = *scroll_y;
-    D_801DA110  = next_record[1];
-    height      = Area_SampleHeight(*scroll_x, *scroll_y);
-    D_801DA0FC  = (height << 16) + MENU_SHISU_HEIGHT_BIAS;
+    record              = *record_cell;
+    D_801DA114          = record + 2;
+    next_record         = D_801DA114;
+    D_801DA0C1          = 0;
+    D_801DA108          = 0;
+    g_ShisuToppingScale = bias;
+    D_801DA124          = 0;
+    D_801DA128          = 0;
+    g_ShisuToppingAngle = 0;
+    g_ShisuToppingR     = initial;
+    g_ShisuToppingG     = initial;
+    g_ShisuToppingB     = initial;
+    D_801DA0F4          = *scroll_x;
+    D_801DA0F8          = *scroll_y;
+    D_801DA110          = next_record[1];
+    height              = Area_SampleHeight(*scroll_x, *scroll_y);
+    D_801DA0FC          = (height << 16) + SHISU_HEIGHT_BIAS;
 }
 #else
 INCLUDE_ASM(func_801D27BC);
@@ -508,37 +508,37 @@ NON_MATCHING s32 func_801D2978(void) {
     s8 amount;
     u8 saved[3];
 
-    amount = g_MenuShisuIngredients.used[1] - g_MenuShisuIngredients.unk_08;
+    amount = g_ShisuIngredients.used[1] - g_ShisuIngredients.rounds;
     if (amount <= 0) {
         amount = 1;
     }
     if (amount > 20) {
         amount = 20;
     }
-    D_801DA088 = D_801D9688[amount];
+    g_ShisuBaseScale = g_ShisuScales[amount];
 
-    saved[0] = D_801DA0A5;
-    saved[1] = D_801DA0A6;
-    saved[2] = D_801DA0A7;
-    if (g_MenuShisuIngredients.used[2] * 3 < 0xFF - saved[0]) {
-        D_801DA0A5 = saved[0] + g_MenuShisuIngredients.used[2] * 3;
+    saved[0] = g_ShisuBaseR;
+    saved[1] = g_ShisuBaseG;
+    saved[2] = g_ShisuBaseB;
+    if (g_ShisuIngredients.used[2] * 3 < 0xFF - saved[0]) {
+        g_ShisuBaseR = saved[0] + g_ShisuIngredients.used[2] * 3;
     } else {
-        D_801DA0A5 = 0xFF;
+        g_ShisuBaseR = 0xFF;
     }
-    if (g_MenuShisuIngredients.used[2] * 3 < 0xFF - D_801DA0A6) {
-        D_801DA0A6 += g_MenuShisuIngredients.used[2] * 3;
+    if (g_ShisuIngredients.used[2] * 3 < 0xFF - g_ShisuBaseG) {
+        g_ShisuBaseG += g_ShisuIngredients.used[2] * 3;
     } else {
-        D_801DA0A6 = 0xFF;
+        g_ShisuBaseG = 0xFF;
     }
-    if (g_MenuShisuIngredients.used[2] * 3 < D_801DA0A7) {
-        D_801DA0A7 -= g_MenuShisuIngredients.used[2] * 3;
+    if (g_ShisuIngredients.used[2] * 3 < g_ShisuBaseB) {
+        g_ShisuBaseB -= g_ShisuIngredients.used[2] * 3;
     } else {
-        D_801DA0A7 = 0;
+        g_ShisuBaseB = 0;
     }
     func_801D2308(&D_801DA044 + 1);
-    D_801DA0A5 = saved[0];
-    D_801DA0A6 = saved[1];
-    D_801DA0A7 = saved[2];
+    g_ShisuBaseR = saved[0];
+    g_ShisuBaseG = saved[1];
+    g_ShisuBaseB = saved[2];
     return saved[2];
 }
 #else

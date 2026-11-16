@@ -588,9 +588,9 @@ void    func_801985C8(void);
 void    Game_UpdateAbilityMenu(void);
 void    Game_LoadAbilityMenu(void);
 void    Game_ReturnFromAbilityMenu(void);
-void    Game_UpdateShisuMenu(void);
-void    Game_LoadShisuMenu(void);
-void    Game_ReturnFromShisuMenu(void);
+void    Game_UpdateShisu(void);
+void    Game_LoadShisu(void);
+void    Game_ReturnFromShisu(void);
 void    Game_UpdateSceneCamera(void);
 void    func_80198B00(void);
 void    func_80198B44(void);
@@ -611,7 +611,7 @@ void    func_80199398(void);
 /* func_801993F0 */
 void    Game_UpdateAbilityMenuFrame(void);
 /* func_80199418 */
-void    Game_UpdateShisuMenuFrame(void);
+void    Game_UpdateShisuFrame(void);
 void    func_8019959C(void);
 void    func_801995A4(void);
 void    func_801995F8(void);
