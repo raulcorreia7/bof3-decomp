@@ -977,7 +977,8 @@ void        Menu_DrawEquipChoiceWindow(MenuPanelTask* task);
 void        func_800B4220(s16 x, s16 y, u8 selected);
 /* func_801AF494 */
 bool        Item_PassesTest(u8 test, u8 character_id, u8 category, u8 item_id);
-void        func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
+/* func_801AF930 */
+void        UI_DrawAbilityRow(s32 x, s32 y, u8 shade, u8 element, u8* name, u8 cost, u8 flags);
 void        func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
 void        func_801AFA1C(u8* marks, u8 thumb_top, s16 x, s16 y, u8 thumb_size, u8 total, u8 track_size);
 /* func_801DB5CC */

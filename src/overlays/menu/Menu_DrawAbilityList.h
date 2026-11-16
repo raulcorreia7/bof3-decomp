@@ -26,7 +26,7 @@
 #define MENU_ABILITY_LIST_RIGHT_FIRST   4
 #define MENU_ABILITY_LIST_GLYPH_HALF    4
 
-/* The flags argument of UI_DrawSprite and UI_DrawSpriteRun, and the dim-icon flag of func_801AF930. */
+/* The flags argument of UI_DrawSprite and UI_DrawSpriteRun, and the dim-icon flag of UI_DrawAbilityRow. */
 #define MENU_ABILITY_LIST_SPRITE_FLAGS  1
 #define MENU_ABILITY_LIST_ICON_ENABLED  0
 #define MENU_ABILITY_LIST_ICON_DIMMED   1
@@ -73,12 +73,12 @@ MATCH void Menu_DrawAbilityList(MenuListPanel* panel) {
             cost    = Char_GetAbilityCost(g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], *list, 0);
             if (n == panel->selected || n == panel->unk_0C) {
                 if (shade != MENU_SHADE_DIM) {
-                    func_801AF930(panel->pos.x + MENU_ABILITY_LIST_ICON_X, y + MENU_ABILITY_LIST_ROW_Y + MENU_ABILITY_LIST_SHADOW_DY, MENU_SHADE_DIM, element, ability, cost,
-                                  MENU_ABILITY_LIST_ICON_DIMMED);
+                    UI_DrawAbilityRow(panel->pos.x + MENU_ABILITY_LIST_ICON_X, y + MENU_ABILITY_LIST_ROW_Y + MENU_ABILITY_LIST_SHADOW_DY, MENU_SHADE_DIM, element, ability, cost,
+                                      MENU_ABILITY_LIST_ICON_DIMMED);
                 }
-                func_801AF930(panel->pos.x + MENU_ABILITY_LIST_ICON_X, y + MENU_ABILITY_LIST_ROW_Y, shade, element, ability, cost, locked);
+                UI_DrawAbilityRow(panel->pos.x + MENU_ABILITY_LIST_ICON_X, y + MENU_ABILITY_LIST_ROW_Y, shade, element, ability, cost, locked);
             } else {
-                func_801AF930(panel->pos.x + MENU_ABILITY_LIST_ICON_X, y + MENU_ABILITY_LIST_ROW_Y + MENU_ABILITY_LIST_SHADOW_DY, shade, element, ability, cost, locked);
+                UI_DrawAbilityRow(panel->pos.x + MENU_ABILITY_LIST_ICON_X, y + MENU_ABILITY_LIST_ROW_Y + MENU_ABILITY_LIST_SHADOW_DY, shade, element, ability, cost, locked);
             }
         }
         n++;

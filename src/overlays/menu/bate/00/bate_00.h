@@ -144,7 +144,8 @@ s32  Char_GetExpForLevel(s32 character, s32 level);
 void Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle);
 void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
 
-void func_801AF930(s16 x, s16 y, u8 palette_index, u8 icon_index, volatile Ability* ability, u8 stat_value, u8 sprite_flag);
+/* func_801AF930 */
+void UI_DrawAbilityRow(s16 x, s16 y, u8 shade, u8 element, volatile Ability* ability, u8 cost, u8 flags);
 /* func_801AF494 */
 bool Item_PassesTest(u8 test, u8 character_id, u8 category, u8 item_id);
 void func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);

@@ -2861,6 +2861,7 @@ UI_GetSpriteRect = { addr = 0x801AF270, type = "func", source = "Returns the rec
 UI_DrawSprite = { addr = 0x801AF2A0, type = "func", source = "Appends one SPRT at x, y with the rectangle of sprite_id; bit 2 of flags picks the CLUT." }
 UI_DrawSpriteRun = { addr = 0x801AF390, type = "func", source = "Draws the (x offset, y offset, sprite id) triples of record_table from base_x, base_y through UI_DrawSprite until the id 0xFF; bit 0 of flags picks the sprite page." }
 Item_PassesTest = { addr = 0x801AF494, type = "func", source = "Tells whether an item passes the list's filter test: test 0 passes every item, 1 an item the field can use, 2 and 3 the item record flag bits, 4 an item the character can equip; the menu lists draw a failing item dimmed." }
+UI_DrawAbilityRow = { addr = 0x801AF930, type = "func", source = "Draws one row of an ability list: the element icon, the ability name from its text command stream and the cost as a two-digit number at the right, in the given text shade." }
 Area_SetCameraMatrix = { addr = 0x801AFE18, type = "func", source = "Sets the GTE rotation and translation from the camera angle, height and offsets, and returns out_matrix unchanged." }
 Area_ProjectPoint = { addr = 0x801AFF04, type = "func", source = "Projects the 16.16 position pos through RotTransPers and writes the result to screen_xy." }
 MATH_SetIdentity = { addr = 0x801AFF64, type = "func", source = "Writes 4096 to the three diagonal cells of a 3x3 s16 matrix and 0 to the other six." }
@@ -3010,7 +3011,7 @@ g_LevelGrowth = { addr = 0x801CB8DC, size = 0x15A8, source = "The LevelGrowth re
 D_801CCE84 = { addr = 0x801CCE84, size = 0xF8, source = "The 62 sprite UV rectangles UI_GetSpriteRect returns by sprite id, one per menu sprite." }
 D_801CCF7C = { addr = 0x801CCF7C, size = 0xD4, source = "The 53 sprite UV rectangles UI_GetSpriteRect returns by sprite id, one per battle sprite." }
 s_ItemSpriteIds = { addr = 0x801CD050, size = 0x10, source = "Sprite id indexed by the item icon; func_801AF800 passes the entry to func_801AEA80." }
-s_ItemIconIds = { addr = 0x801CD060, size = 0xC, source = "Icon id by icon index; func_801AF930 passes the entry to func_801AEA80." }
+s_ItemIconIds = { addr = 0x801CD060, size = 0xC, source = "Icon id by icon index; UI_DrawAbilityRow passes the entry to func_801AEA80." }
 s_RouteStepScratch = { addr = 0x801CD06C, size = 0x20, source = "func_801B5BDC splits each two-byte entry into a route step and the scratch byte at unk_2A" }
 s_EntityPlacementOffsets = { addr = 0x801CD08C, size = 0x20, source = "s8 x, y pairs that func_801B1E24 and func_801B21E8 search for an entity position." }
 D_801CD08D = { addr = 0x801CD08D, size = 0x1, alias = true, source = "The first byte of s_EntityPlacementOffsets, which func_801B1E24 and func_801B21E8 read as an array by entity index." }

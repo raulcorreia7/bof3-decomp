@@ -118,7 +118,7 @@ typedef union MenuListSource {
 
 ASSERT_SIZE(MenuListSource, 2);
 
-/* The text shade a menu row is drawn with (UI_DrawText and func_801AF930). */
+/* The text shade a menu row is drawn with (UI_DrawText and UI_DrawAbilityRow). */
 enum {
     MENU_SHADE_NORMAL   = 0,
     MENU_SHADE_SELECTED = 2,
