@@ -31,9 +31,7 @@ extern u8      D_801F4C3C[];
 /* The message rows inside the payload data. */
 extern WorldMapMessageRow D_801F4CF8[WORLD_MAP_MESSAGE_ROWS];
 /* D_801F4E10 */
-extern Point2u            g_FlockVelocity[4];
 /* D_801F4E20 */
-extern u8                 g_FlockScript[4][2];
 
 /* The value of area update step in the shared Area_Update body. */
 

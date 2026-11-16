@@ -1,139 +1,83 @@
 #include "start_08.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void Menu_DrawCharacterWindow(u16 x, u16 y, u8 character_index, u8 shaded, s32 unused) {
-    s16        val0;
-    s16        val1;
-    s16        val2;
-    s32        tmp0;
-    s32        val3;
-    s32        val4;
-    s32        val5;
-    s32        val6;
-    s32        val7;
-    u16        tmp1;
-    u16        tmp2;
-    u16        tmp3;
-    u16        val8;
-    u32        val9;
-    u8*        val10;
-    u8         val11;
-    Character* character;
+MATCH void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shaded, s32 unused) {
+    Character* records;
+    Character* stats;
+    u32        clut;
+    u32        text_clut;
+    s32        text_y;
+    s32        x;
+    s32        y;
 
-    val5 = x;
-    val1 = y;
-    val4 = shaded;
-    val6 = val4 & BYTE_MASK;
-    val9 = -(val6 != 0) & 7;
-    UI_DrawWindow((val5 + 3) & HALF_MASK, (val1 + 3) & HALF_MASK, MENU_CHARACTER_WINDOW_WIDTH, MENU_CHARACTER_WINDOW_HEIGHT, val6, CHARACTER_BLOCK->window_style);
-    val7 = val5;
-    val2 = val1;
-    val5 += 0x56;
-    tmp1 = val5 & HALF_MASK;
-    val1 += 2;
-    character = &g_Characters[character_index];
-    if (val6 == 0) {
-        val11 = (character->status >> 6) & 2;
-    } else {
-        val11 = 1;
-    }
-    val5 = val9 & BYTE_MASK;
-    Menu_DrawCharacterPortrait(tmp1, val1 & HALF_MASK, character->character_id, val11);
-    UI_DrawText((s16)(val7 + 20), (s16)(val2 + 3), val5, 5U, (u8*)character);
-    val10 = g_UiFormatBuffer;
-    val10 = g_UiFormatBuffer;
-    TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, character->level);
-    val1 = val2 + 0x17;
-    UI_DrawGlyphString((s16)(val7 + 22), val1, (u32)val5, g_UiFormatBuffer);
-    if ((character->status & (STATUS_CONFUSED | STATUS_POISONED)) == (STATUS_CONFUSED | STATUS_POISONED)) {
-        val3 = 1;
+    clut = (u8)shaded ? 7 : 0;
+    UI_DrawWindow(px + 3, py + 3, MENU_CHARACTER_WINDOW_WIDTH, MENU_CHARACTER_WINDOW_HEIGHT, (u8)shaded, CHARACTER_BLOCK->window_style);
+    x = px;
+    y = py;
+    /* FAKE: the order lock keeps the x and y copies below the window call. */
+    FAKE_ORDER_LOCK_BEGIN
+        records = (Character*)CHARACTER_BLOCK->records;
+        stats   = &records[character_index];
+        Menu_DrawCharacterPortrait(px + 0x56, py + 2, stats->character_id, (u8)shaded == 0 ? (stats->status >> 6) & 2 : 1);
+        text_clut = clut & BYTE_MASK;
+        UI_DrawText(x + 20, y + 3, text_clut, 5, stats);
+    FAKE_ORDER_LOCK_END;
+    TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, stats->level);
+    text_y = (s16)(y + 0x17);
+    UI_DrawGlyphString(x + 22, text_y, text_clut, g_UiFormatBuffer);
+    if ((LOWU(stats->status) & (STATUS_CONFUSED | STATUS_POISONED)) == (STATUS_CONFUSED | STATUS_POISONED)) {
         if (g_FrameCount & 0x20) {
-            val0 = val7 + 0x2E;
-            if (val5 != 0) {
-                val3 = val5;
-            }
+            UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, 0x10, D_801EC930);
         } else {
-            goto block_13; /* retail branch */
+            UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, 0x10, D_801EC938);
         }
-        goto block_16; /* retail branch */
+    } else if (stats->status & STATUS_POISONED) {
+        UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, 0x10, D_801EC930);
+    } else if (stats->status & STATUS_CONFUSED) {
+        UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, 0x10, D_801EC938);
     }
-    tmp2 = character->status;
-    val3 = 1;
-    if (tmp2 & STATUS_POISONED) {
-        val0 = val7 + 0x2E;
-        if (val5 != 0) {
-            val3 = val5;
-        }
-        goto block_16; /* retail branch */
-    }
-    if (tmp2 & STATUS_CONFUSED) {
-    block_13:
-        val3 = 1;
-        val0 = val7 + 0x2E;
-        if (val5 != 0) {
-            val3 = val5;
-        }
-    block_16:
-        UI_DrawTextString(val0, val1, val3, 0x10, D_801EC938);
-    }
-    if (character->hp < (u32)(character->stats.max_hp >> 2)) {
-        val8 = character->status | STATUS_LOW_HP;
+    if (stats->hp < (u32)(stats->stats.max_hp >> 2)) {
+        stats->status |= STATUS_LOW_HP;
     } else {
-        val8 = character->status & ~STATUS_LOW_HP;
+        stats->status &= ~STATUS_LOW_HP;
     }
-    character->status = val8;
-    if (!(val4 & BYTE_MASK)) {
-        if (character->status & STATUS_LOW_HP) {
-            val9 = 4;
+    if ((u8)shaded == 0) {
+        if (stats->status & STATUS_LOW_HP) {
+            clut = 4;
         }
-        if (character->hp < 2U) {
-            val9 = 2;
+        if (stats->hp < 2) {
+            clut = 2;
         }
     } else {
-        val9 = 7;
+        clut = 7;
     }
-    val10 = g_UiFormatBuffer;
-    val10 = g_UiFormatBuffer;
-    TEXT_Format(g_UiFormatBuffer, g_MenuCurrentValueFormat, character->hp);
-    UI_DrawGlyphString((s16)(val7 + 22), (s16)(val2 + 31), val9, g_UiFormatBuffer);
-    if (!(val4 & BYTE_MASK)) {
-        val9 = (character->fatigue != 0) * 4;
+    TEXT_Format(g_UiFormatBuffer, g_MenuCurrentValueFormat, stats->hp);
+    UI_DrawGlyphString(x + 22, y + 31, clut, g_UiFormatBuffer);
+    if ((u8)shaded == 0) {
+        clut = (stats->fatigue != 0) * 4;
     } else {
-        val9 = 7;
+        clut = 7;
     }
-    val10 = g_UiFormatBuffer;
-    val10 = g_UiFormatBuffer;
-    TEXT_Format(g_UiFormatBuffer, g_MenuMaxValueFormat, character->stats.max_hp);
-    UI_DrawGlyphString((s16)(val7 + 22), (s16)(val2 + 31), val9, g_UiFormatBuffer);
-    tmp0 = val4 & BYTE_MASK;
-    val9 = -(tmp0 != 0) & 7;
-    if (tmp0 == 0) {
-        tmp3 = character->ap;
-        if (tmp3 < (u32)(character->stats.max_ap >> 2)) {
-            val9 = 4;
+    TEXT_Format(g_UiFormatBuffer, g_MenuMaxValueFormat, stats->stats.max_hp);
+    UI_DrawGlyphString(x + 22, y + 31, clut, g_UiFormatBuffer);
+    clut = (u8)shaded ? 7 : 0;
+    if ((u8)shaded == 0) {
+        if (stats->ap < (u32)(stats->stats.max_ap >> 2)) {
+            clut = 4;
         }
-        if (tmp3 == 0) {
-            val9 = 2;
+        if (stats->ap == 0) {
+            clut = 2;
         }
     } else {
-        val9 = 7;
+        clut = 7;
     }
-    val1 = (s16)g_UiFormatBuffer;
-    val1 = (s16)g_UiFormatBuffer;
-    TEXT_Format(val1, g_MenuCurrentValueFormat, character->ap);
-    val5 = val7 + 0x16;
-    val5 <<= 0x10;
-    val5  = val5 >> 0x10;
-    val10 = val2 + 0x27;
-    val10 = (u8*)((s32)val10 << 0x10);
-    val10 = (u8*)((s32)val10 >> 0x10);
-    UI_DrawGlyphString((s16)val5, (s16)val10, val9, (u8*)val1);
-    val9 = -((val4 & BYTE_MASK) != 0) & 7;
-    TEXT_Format(val1, g_MenuMaxValueFormat, character->stats.max_ap);
-    UI_DrawGlyphString((s16)val5, (s16)val10, val9, (u8*)val1);
-    UI_DrawSpriteRun((s16)val7, val2, &D_801EC598, 0);
-    Menu_DrawExperienceLine((val7 + 0x14) & HALF_MASK, (val2 + 0x12) & HALF_MASK, character_index, character->level, character->exp);
+    TEXT_Format(g_UiFormatBuffer, g_MenuCurrentValueFormat, stats->ap);
+    UI_DrawGlyphString(x + 22, y + 39, clut, g_UiFormatBuffer);
+    clut = (u8)shaded ? 7 : 0;
+    TEXT_Format(g_UiFormatBuffer, g_MenuMaxValueFormat, stats->stats.max_ap);
+    UI_DrawGlyphString(x + 22, y + 39, clut, g_UiFormatBuffer);
+    UI_DrawSpriteRun(x, y, &D_801EC598, 0);
+    Menu_DrawExperienceLine(x + 0x14, y + 0x12, character_index, stats->level, stats->exp);
+    /* FAKE: dead stores keep px and py the CSE heads of their x and y copies. */
+    px = 0;
+    py = 0;
 }
-#else
-INCLUDE_ASM(Menu_DrawCharacterWindow);
-#endif
