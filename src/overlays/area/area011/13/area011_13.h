@@ -6,7 +6,6 @@
 
 #include "overlays/area/world00.h"
 
-extern u8 D_80144EF8[];
 extern u8 D_801F2D78[];
 
 #endif
