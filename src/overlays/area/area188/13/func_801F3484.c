@@ -8,8 +8,7 @@ MATCH void func_801F3484(void) {
     g_Task->unk_6C += 0xC0000;
     g_Task->screen_x -= 6;
     func_801F38E0(&g_Task->unk_64, (s16)g_Task->screen_x, 6);
-    timer         = g_Task->timer - 1;
-    g_Task->timer = timer;
+    ACTOR_COUNT_DOWN(timer, timer);
     if ((timer & BYTE_MASK) == 0) {
         g_Task->timer  = 0x20;
         g_Task->unk_06 = 0;

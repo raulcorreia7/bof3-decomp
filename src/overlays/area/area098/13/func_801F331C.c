@@ -32,8 +32,7 @@ MATCH void func_801F331C(void) {
         }
         dot->active ^= 1;
     }
-    timer         = g_Task->timer - 1;
-    g_Task->timer = timer;
+    ACTOR_COUNT_DOWN(timer, timer);
     if (timer == 0) {
         Actor_Clear();
     }

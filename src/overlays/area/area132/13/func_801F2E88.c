@@ -11,8 +11,7 @@ MATCH void func_801F2E88(void) {
         }
     }
     func_801F38B0();
-    count         = g_Task->timer - 1;
-    g_Task->timer = count;
+    ACTOR_COUNT_DOWN(count, timer);
     if (count == 0) {
         g_Task->header.step += 1;
     }

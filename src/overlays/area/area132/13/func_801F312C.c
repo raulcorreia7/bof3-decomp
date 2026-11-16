@@ -13,8 +13,7 @@ MATCH void func_801F312C(void) {
     }
     FIELD(u16, g_Task, 0x20u) -= 0x200;
     func_801F3268();
-    timer         = g_Task->timer - 1;
-    g_Task->timer = timer;
+    ACTOR_COUNT_DOWN(timer, timer);
     if (timer == 0) {
         g_Task->timer = 16;
         g_Task->header.mode++;

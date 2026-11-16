@@ -9,8 +9,7 @@ MATCH void func_801F30EC(void) {
     quad->height += 2;
     quad->y -= quad->height;
     func_801F3AD8(quad);
-    timer         = g_Task->timer - 1;
-    g_Task->timer = timer;
+    ACTOR_COUNT_DOWN(timer, timer);
     if (timer == 0) {
         g_Task->header.mode += 1;
     }
