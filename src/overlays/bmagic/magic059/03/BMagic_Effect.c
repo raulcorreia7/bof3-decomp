@@ -29,13 +29,17 @@ INCLUDE_ASM(func_801EED0C);
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EF118(void) {
-    u8 angle;
+    s16* angle;
+    s32  step;
+    u8   phase;
 
-    angle               = g_Task->unk_09 + 1;
-    g_Task->unk_09      = angle;
-    D_1F80000E          = angle << 4;
-    g_Task->pos.x.fixed = g_Task->unk_18 + (rsin(angle << 4) << 6);
-    g_Task->pos.y.fixed = g_Task->unk_1C + (rcos(D_1F80000E) << 6);
+    step                = g_Task->unk_09 + 1;
+    g_Task->unk_09      = step;
+    phase               = step;
+    angle               = (s16*)&D_1F80000E;
+    *angle              = phase << 4;
+    g_Task->pos.x.fixed = g_Task->unk_18 + (rsin(phase << 4) << 6);
+    g_Task->pos.y.fixed = g_Task->unk_1C + (rcos(*angle) << 6);
     if (g_Task->param.unk_0B == 0) {
         func_800A9820(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
