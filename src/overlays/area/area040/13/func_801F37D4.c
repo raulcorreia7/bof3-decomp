@@ -11,12 +11,13 @@ NON_MATCHING void func_801F37D4(void) {
     u8       j;
 
     for (i = 0; i < 4; i++) {
+        j = 0;
         y = i + 0x20;
-        for (j = 0; j < 4; j++) {
-            if ((u8)Area_GetCellCode(j + 0x94, (s16)(i + 0x20)) != 0x50) {
+        for (; j < 4; j++) {
+            if ((u8)Area_GetCellCode((u8)(j + 0x94), (s16)(i + 0x20)) != 0x50) {
                 continue;
             }
-            x  = j + 0x94;
+            x  = (u8)j + 0x94;
             id = Area_GetCellId(x, y);
             if (id == 0) {
                 continue;
@@ -32,7 +33,11 @@ NON_MATCHING void func_801F37D4(void) {
             prim->y2 = g_AreaCellPrims[id][g_FrameBufferIndex ? 0 : 1].y2;
             prim->x3 = g_AreaCellPrims[id][g_FrameBufferIndex ? 0 : 1].x3;
             prim->y3 = g_AreaCellPrims[id][g_FrameBufferIndex ? 0 : 1].y3;
-            shade    = ABS((s32)((g_FrameCount >> 1) & 0xF) - 8) * 31;
+            shade    = (s32)((g_FrameCount >> 1) & 0xF) - 8;
+            if (shade < 0) {
+                shade = -shade;
+            }
+            shade *= 31;
             prim->b0 = shade;
             prim->g0 = shade;
             prim->r0 = shade;
