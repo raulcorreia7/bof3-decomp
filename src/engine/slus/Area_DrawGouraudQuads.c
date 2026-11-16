@@ -27,9 +27,7 @@ MATCH void Area_DrawGouraudQuads(ScenePart* parts, s32 shift_x, s32 shift_y) {
         rec = &parts[1];
         do {
             mode = getTPage(1, rec[4].color.tpage, 320, 256);
-            /* Written out: GFX_AddDitheredDrawMode moves the g_AreaDrawMode load. */
-            SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mode, NULL);
-            GFX_AddPrim(g_AreaDrawMode, sizeof(DR_MODE));
+            GFX_ADD_DITHERED_DRAW_MODE(g_AreaDrawMode, mode);
             prim = (POLY_G4*)g_GfxPrimCursor;
             SetPolyG4(prim);
             for (i = 0; i < 4; i++, rec++, n++) {
@@ -50,6 +48,5 @@ MATCH void Area_DrawGouraudQuads(ScenePart* parts, s32 shift_x, s32 shift_y) {
         } while (n != parts->head.count);
     }
     mode = getTPage(1, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, mode, NULL);
-    GFX_AddPrim(g_AreaDrawMode, sizeof(DR_MODE));
+    GFX_ADD_LAYER_DRAW_MODE(g_AreaDrawMode, mode);
 }

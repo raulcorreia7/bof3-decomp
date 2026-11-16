@@ -55,8 +55,7 @@ NON_MATCHING void func_801F3514(void) {
 
     if (g_AreaSceneMode == 2) {
         tpage = getTPage(1, 2, 448, 256);
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-        GFX_AddPrim(3, sizeof(DR_MODE));
+        GFX_ADD_LAYER_DRAW_MODE(3, tpage);
         tile = (TILE*)g_GfxPrimCursor;
         SetTile(tile);
         SetSemiTrans(tile, 1);

@@ -13,8 +13,7 @@ MATCH void func_801F3CB0(void) {
         return;
     }
     tpage = getTPage(1, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(7, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(7, tpage);
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 0);

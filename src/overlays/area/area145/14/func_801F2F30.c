@@ -13,8 +13,7 @@ NON_MATCHING void func_801F2F30(s32* first, s32* second) {
 
     Area_SetCameraMatrix(&camera);
     tpage = GetTPage(0, 1, 0x3C0, 0);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(1, tpage);
 
     memcpy(&vertex, first, sizeof(vertex));
     vz = vertex.vz;

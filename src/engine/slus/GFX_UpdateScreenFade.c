@@ -12,8 +12,7 @@ MATCH s32 GFX_UpdateScreenFade(u16* level, s32 delta, char semi_trans, u32 order
 
     tpage = GetTPage(1, blend_mode, 320, 0);
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, (RECT*)0);
-    GFX_AddPrim(order & BYTE_MASK, sizeof(DR_MODE));
+    GFX_ADD_LAYER_DRAW_MODE(order & BYTE_MASK, tpage);
     sprite = (TILE*)g_GfxPrimCursor;
     SetTile(sprite);
     mask       = semi_trans & BYTE_MASK;

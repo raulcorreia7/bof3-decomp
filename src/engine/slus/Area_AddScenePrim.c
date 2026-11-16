@@ -12,8 +12,7 @@ MATCH void Area_AddScenePrim(s32 scene) {
     s32  offset;
 
     mode = getTPage(1, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, mode, NULL);
-    GFX_AddPrim(6U, sizeof(DR_MODE));
+    GFX_ADD_LAYER_DRAW_MODE(6U, mode);
     offset = (g_FrameBufferIndex + 2) * 8 + scene * 0x30;
     entry  = *(u32*)(D_80142CC0 + offset);
     if (entry != 0) {

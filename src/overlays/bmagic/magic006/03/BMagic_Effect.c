@@ -159,8 +159,7 @@ MATCH void func_801EF478(void) {
     s32      tpage;
 
     tpage = getTPage(0, 2, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     D_1F800000.cells.halves[2] = 8;
     D_1F800000.cells.halves[0] = g_Task->unk_2E.half;
     D_1F800000.cells.halves[1] = g_Task->unk_30.half;
@@ -187,8 +186,7 @@ MATCH void func_801EF478(void) {
         GFX_AddPrim(3, sizeof(POLY_G4));
     }
     tpage = getTPage(0, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
@@ -239,8 +237,7 @@ MATCH void func_801EFB6C(void) {
     s32      tpage;
 
     tpage = getTPage(0, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     D_1F800000.cells.halves[2] = 8;
     prim                       = (POLY_G4*)g_GfxPrimCursor;
     D_1F800000.cells.halves[0] = g_Task->unk_2E.half;
@@ -416,8 +413,7 @@ MATCH void func_801F0790(void) {
     s32      tpage;
 
     tpage = getTPage(0, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     D_1F800000.cells.halves[0] = 0x100;
     D_1F800000.cells.halves[5] = g_Task->unk_09 << 3;
     D_1F800000.cells.halves[6] = g_Task->unk_09 << 1;
@@ -442,6 +438,5 @@ MATCH void func_801F0790(void) {
     }
 
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
 }

@@ -15,8 +15,7 @@ NON_MATCHING void func_801F31DC(s32 depth, s32 height) {
     long      flag;
 
     tpage = getTPage(1, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_LAYER_DRAW_MODE(5, tpage);
 
     x_base = -0x37C0;
     y_base = -0x2DC0;

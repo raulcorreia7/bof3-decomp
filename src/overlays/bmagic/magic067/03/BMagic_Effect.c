@@ -191,8 +191,7 @@ MATCH void func_801EF79C(void) {
     s32       tpage;
 
     tpage = getTPage(1, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
     D_1F800000.cells.halves[1] = 128;
     D_1F800000.cells.halves[0] = g_Task->unk_09;
     D_1F800000.cells.halves[2] = 512;
@@ -248,8 +247,7 @@ MATCH void func_801EF79C(void) {
         GFX_AddPrim(2, sizeof(POLY_GT4));
     }
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
 }
 
 MATCH void func_801EFF24(void) {

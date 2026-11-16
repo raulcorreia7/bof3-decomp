@@ -297,8 +297,7 @@ MATCH void func_801F009C(void) {
     handlers = D_801EEC5C;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     tpage = getTPage(0, 1, 960, 0);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_LAYER_DRAW_MODE(2, tpage);
     for (i = 0; i < MAGIC064_RING_COUNT; i++) {
         if (D_801F13B4[i].active != 0) {
             D_801F28B4 = &D_801F13B4[i];

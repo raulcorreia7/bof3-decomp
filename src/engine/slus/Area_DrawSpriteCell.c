@@ -65,8 +65,7 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
         draw_value |= packed;
     }
     draw_value |= scratch;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, draw_value, NULL);
-    GFX_AddPrim(SPAD_CURSOR->draw_layer, sizeof(DR_MODE));
+    GFX_ADD_LAYER_DRAW_MODE(SPAD_CURSOR->draw_layer, draw_value);
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
     setWH(sprite, g_SpriteSizes[sprite_cell->size & GFX_SPRITE_SIZE_MASK][0], g_SpriteSizes[sprite_cell->size & GFX_SPRITE_SIZE_MASK][1]);
