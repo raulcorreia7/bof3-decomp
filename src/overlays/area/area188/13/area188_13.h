@@ -10,6 +10,8 @@
 #include "shared/WorldSpin.h"
 
 /* The per-scene y limit bytes the walk step reads, in 16.16 units. */
+extern u8 D_801F688C[];
+extern u8 D_801F688D[];
 extern u8 D_801F6898[];
 
 #define AREA_SPIN_RADIUS     16
@@ -36,6 +38,7 @@ extern u8       D_801F689C;
 extern u8       D_801F68A0;
 
 /* The game-overlay state bytes the cancel path resets. */
+extern u8 D_8014865F;
 
 #define AREA_SPAWN_SLOT_LIFE        0x10
 #define AREA_SPAWN_SLOT_RADIUS      0x100
