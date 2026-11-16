@@ -15,6 +15,8 @@ extern u8 D_80146865;
 
 extern u8 D_80146866;
 
+extern u8 D_80146871;
+
 extern u8 D_80146874;
 
 extern u8        D_80146875;
