@@ -352,8 +352,6 @@ extern u8*      g_MenuInventoryTitles[5];
 extern char     g_MenuInventoryCountFormat[];
 extern u8       g_MenuInventoryTab1OffSprites[];
 extern u8*      g_MenuEquipTitles[5];
-extern u8       g_MenuEquipChoiceIds[];
-extern u8       g_MenuEquipChoiceCounts[];
 extern u8       g_MenuInventoryTab1OnSprites[];
 /* D_801EC784 */
 extern u8       g_MenuListTab1OffSprites[];
