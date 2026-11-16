@@ -24,7 +24,7 @@ MATCH u8 func_801F38B0(void) {
             if (--D_801F4A88[2] == 0) {
                 D_801F4A88[0] = 0;
             }
-            func_801F3560(D_801F4A88);
+            func_801F3560((AreaSpawnSlot*)D_801F4A88);
             result = 1;
         }
         index += 1;

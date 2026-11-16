@@ -63,19 +63,17 @@ MATCH void func_801EF058(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF11C(void) {
-    s8  tint;
-    s32 dy;
-    u8  count;
+MATCH void func_801EF11C(void) {
+    s8 tint;
+    u8 count;
 
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
-    if ((count & BYTE_MASK) != 0) {
+    if (count != 0) {
         return;
     }
     g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    tint           = -0x40;
+    tint           = -64;
     g_Task->unk_5C = 1;
     g_Task->unk_2B = 1;
     g_Task->unk_5D = tint;
@@ -83,20 +81,16 @@ NON_MATCHING void func_801EF11C(void) {
     g_Task->unk_5F = tint;
     g_Task->unk_27 = g_BattleEffectBattler->unk_27;
     if ((g_Task->param.unk_0B & 1) == 0) {
-        dy = -0x1000;
+        g_Task->unk_0C = 0;
+        g_Task->unk_10 = -ONE;
     } else {
-        dy = 0x1000;
+        g_Task->unk_0C = 0;
+        g_Task->unk_10 = ONE;
     }
-    g_Task->unk_0C = 0;
-    g_Task->unk_10 = dy;
-    FAKE_BARRIER(); /* FAKE: retail reloads the g_Task cell for the velocity call; plain C reuses the copy. */
     func_801DD350(g_Task);
-    g_Task->unk_09 = 0x10;
+    g_Task->unk_09 = 16;
     g_Task->header.step += 1;
 }
-#else
-INCLUDE_ASM(func_801EF11C);
-#endif
 
 MATCH void func_801EF248(void) {
     g_Task->pos.x.fixed += g_Task->unk_0C;
@@ -109,7 +103,39 @@ MATCH void func_801EF248(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF300);
+MATCH void func_801EF300(void) {
+    u8 count;
+
+    count          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = count;
+    if ((count & BYTE_MASK) != 0x10) {
+        return;
+    }
+    if ((g_Task->param.unk_0B & 1) != 0) {
+        g_Task->unk_0C = -0x20000;
+        g_Task->unk_10 = -0x10000;
+    } else {
+        g_Task->unk_0C = -0x20000;
+        g_Task->unk_10 = 0x10000;
+    }
+    func_801DD350(g_Task);
+    g_Task->pos.x.fixed = g_Battle.selected_actor->pos.x.fixed + g_Task->unk_0C;
+    g_Task->pos.y.fixed = g_Battle.selected_actor->pos.y.fixed + g_Task->unk_10;
+    g_Task->pos.z.fixed = g_Battle.selected_actor->pos.z.fixed;
+    if ((g_Task->param.unk_0B & 1) != 0) {
+        g_Task->unk_0C = 0;
+        g_Task->unk_10 = 0x1000;
+    } else {
+        g_Task->unk_0C = 0;
+        g_Task->unk_10 = -0x1000;
+    }
+    func_801DD350(g_Task);
+    if (g_Task->param.unk_0B == 0) {
+        SND_QueueSelectionEffect(0x101);
+    }
+    g_Task->unk_09 = 0x10;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EF460(void) {
     PartyMember* task;
