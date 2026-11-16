@@ -24,8 +24,7 @@ MATCH void func_801FB0F0(void) {
             g_ScriptVars[3] = 0;
             g_GameFlags |= 0x80;
             Game_ClearScriptActive();
-            g_SceneState.step_05  = 0;
-            g_SceneState.state_04 = 0;
+            SCENE_RETURN_TO_START();
             break;
         case 5:
             if (g_ScriptVars[0] == 1) {
@@ -49,8 +48,7 @@ MATCH void func_801FB0F0(void) {
                 g_ScriptVars[3] = 0;
                 g_GameFlags ^= 0x80;
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
                 func_801A78F8();
             }
             break;

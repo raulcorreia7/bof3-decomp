@@ -23,8 +23,7 @@ MATCH void func_801FAA68(void) {
                 g_ScriptVars[1] = 0;
                 g_ScriptVars[3] = 0;
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         case 5:
@@ -50,9 +49,8 @@ MATCH void func_801FAA68(void) {
         case 7:
             if (g_GameCellType == 0) {
                 SND_PlayBGM(16, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
-                g_ScriptVars[0]       = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                g_ScriptVars[0] = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
     }

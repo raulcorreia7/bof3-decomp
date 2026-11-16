@@ -308,10 +308,7 @@ MATCH void func_801FD450(void) {
 
 MATCH void func_801FD490(void) {
     Game_SetScriptActive();
-    g_ScriptVars[0]       = 0;
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_ScriptVars[3]       = 0;
+    SCRIPT_VARS_CLEAR_ALL();
     g_SceneState.step_05  = 0;
     g_SceneState.state_04 = 18;
 }
@@ -321,10 +318,8 @@ MATCH void func_801FD4E4(void) {
 
 MATCH void func_801FD4EC(void) {
     Game_SetScriptActive();
-    g_SceneState.step_05  = 0x1e;
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_ScriptVars[3]       = 0;
+    g_SceneState.step_05 = 0x1e;
+    SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
     g_SceneState.state_04 = 2;
 }
 
@@ -342,21 +337,15 @@ MATCH void func_801FD574(void) {
 
 MATCH void func_801FD5A8(void) {
     Game_SetScriptActive();
-    g_ScriptVars[0]       = 0;
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_ScriptVars[3]       = 0;
+    SCRIPT_VARS_CLEAR_ALL();
     g_SceneState.step_05  = 0;
     g_SceneState.state_04 = 25;
 }
 
 MATCH void func_801FD5FC(void) {
     Game_SetScriptActive();
-    g_SceneState.step_05  = 10;
-    g_ScriptVars[0]       = 0;
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_ScriptVars[3]       = 0;
+    g_SceneState.step_05 = 10;
+    SCRIPT_VARS_CLEAR_ALL();
     g_SceneState.state_04 = 25;
     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
 }

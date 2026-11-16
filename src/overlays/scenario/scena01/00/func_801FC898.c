@@ -26,8 +26,7 @@ MATCH void func_801FC898(void) {
                 g_ScriptVars[1] = 0;
                 g_ScriptVars[2] = 0;
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         }
@@ -63,8 +62,7 @@ MATCH void func_801FC898(void) {
                 g_ScriptVars[1] = 0;
                 g_ScriptVars[2] = 0;
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         case 2:
@@ -83,8 +81,7 @@ MATCH void func_801FC898(void) {
                 g_ScriptVars[1] = 0;
                 g_ScriptVars[2] = 0;
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         case 5:
@@ -105,8 +102,7 @@ MATCH void func_801FC898(void) {
                 g_ScriptVars[1] = 0;
                 g_ScriptVars[2] = 0;
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         case 6:
@@ -122,13 +118,9 @@ MATCH void func_801FC898(void) {
         case 3:
         case 7:
             if (g_GameStateIndex == 0) {
-                g_ScriptVars[0] = 0;
-                g_ScriptVars[1] = 0;
-                g_ScriptVars[2] = 0;
-                g_ScriptVars[3] = 0;
+                SCRIPT_VARS_CLEAR_ALL();
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
     }

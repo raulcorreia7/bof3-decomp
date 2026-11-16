@@ -26,8 +26,7 @@ NON_MATCHING void func_801FCEC0(void) {
                 g_ScriptVars[1] = 0;
                 g_ScriptVars[2] = 0;
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         }
@@ -64,12 +63,9 @@ NON_MATCHING void func_801FCEC0(void) {
             break;
         case 0x18:
             if (g_ScriptVars[0] == 1) {
-                g_ScriptVars[1] = 0;
-                g_ScriptVars[2] = 0;
-                g_ScriptVars[3] = 0;
+                SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         case 2:
@@ -88,19 +84,14 @@ NON_MATCHING void func_801FCEC0(void) {
                 g_ScriptVars[1] = 0;
                 g_ScriptVars[2] = 0;
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         case 3:
             if (g_GameStateIndex == 0) {
-                g_ScriptVars[0] = 0;
-                g_ScriptVars[1] = 0;
-                g_ScriptVars[2] = 0;
-                g_ScriptVars[3] = 0;
+                SCRIPT_VARS_CLEAR_ALL();
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         case 5: {
@@ -121,8 +112,7 @@ NON_MATCHING void func_801FCEC0(void) {
                 g_ScriptVars[1] = 0;
                 g_ScriptVars[2] = 0;
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         }

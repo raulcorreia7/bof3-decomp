@@ -32,11 +32,10 @@ MATCH void func_801F8AE4(void) {
         case 2:
             if (g_ScriptVars[0] == 0x1E) {
                 SYS_SetFlag(g_SceneFlags, 0);
-                g_ScriptVars[0]       = 0;
-                g_ScriptVars[1]       = 0;
-                g_ScriptVars[2]       = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                g_ScriptVars[0] = 0;
+                g_ScriptVars[1] = 0;
+                g_ScriptVars[2] = 0;
+                SCENE_RETURN_TO_START();
                 func_8019FA28(0xA, 0x2B0000, 0x200000, 3);
             }
             break;

@@ -16,11 +16,10 @@ MATCH void func_801FC6B4(void) {
                     SND_FadeOutSequence(0, 0, 4, 0x1E);
                 } else if (g_ScriptVars[0] == 0x65) {
                     Game_ClearScriptActive();
-                    g_ScriptVars[0]       = 0;
-                    g_ScriptVars[1]       = 0;
-                    g_ScriptVars[2]       = 0;
-                    g_SceneState.step_05  = 0;
-                    g_SceneState.state_04 = 0;
+                    g_ScriptVars[0] = 0;
+                    g_ScriptVars[1] = 0;
+                    g_ScriptVars[2] = 0;
+                    SCENE_RETURN_TO_START();
                 }
             }
             break;
@@ -50,8 +49,7 @@ MATCH void func_801FC6B4(void) {
         case 5:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
     }

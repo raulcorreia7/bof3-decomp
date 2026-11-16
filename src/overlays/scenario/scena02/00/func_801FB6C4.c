@@ -14,13 +14,9 @@ MATCH void func_801FB6C4(void) {
             break;
         case 1:
             if (g_ScriptVars[0] == 0x16) {
-                g_ScriptVars[0] = 0;
-                g_ScriptVars[1] = 0;
-                g_ScriptVars[2] = 0;
-                g_ScriptVars[3] = 0;
+                SCRIPT_VARS_CLEAR_ALL();
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         case 10:
@@ -28,11 +24,8 @@ MATCH void func_801FB6C4(void) {
             SYS_SetFlag(g_SceneFlags, 0x26);
             Item_Add(ITEM_CAT_VITAL, VITAL_ITEM_WALLET, 1, 0);
             Game_ClearScriptActive();
-            g_ScriptVars[1]       = 0;
-            g_ScriptVars[2]       = 0;
-            g_ScriptVars[3]       = 0;
-            g_SceneState.step_05  = 0;
-            g_SceneState.state_04 = 0;
+            SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
+            SCENE_RETURN_TO_START();
             break;
         case 15:
             SCENE_MESSAGE_WAIT(MSG_115, 16);
@@ -46,13 +39,9 @@ MATCH void func_801FB6C4(void) {
             break;
         case 17:
             if (g_ScriptVars[0] == 0x1A) {
-                g_ScriptVars[0] = 0;
-                g_ScriptVars[1] = 0;
-                g_ScriptVars[2] = 0;
-                g_ScriptVars[3] = 0;
+                SCRIPT_VARS_CLEAR_ALL();
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
     }

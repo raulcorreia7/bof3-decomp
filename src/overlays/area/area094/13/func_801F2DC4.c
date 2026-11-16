@@ -23,18 +23,12 @@ MATCH void func_801F2DC4(void) {
                 break;
             }
             Game_SetScriptActive();
-            g_ScriptVars[0]      = 0;
-            g_ScriptVars[1]      = 0;
-            g_ScriptVars[2]      = 0;
-            g_ScriptVars[3]      = 0;
+            SCRIPT_VARS_CLEAR_ALL();
             g_SceneState.step_05 = 0;
             state                = 9;
             goto state_store;
     }
-    g_ScriptVars[0] = 0;
-    g_ScriptVars[1] = 0;
-    g_ScriptVars[2] = 0;
-    g_ScriptVars[3] = 0;
+    SCRIPT_VARS_CLEAR_ALL();
 state_store:
     g_SceneState.state_04 = state;
 }

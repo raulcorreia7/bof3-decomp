@@ -71,10 +71,9 @@ MATCH void func_801FB218(void) {
         case 13:
             if (g_ScriptVars[0] == 0xA) {
                 Game_ClearScriptActive();
-                g_ScriptVars[1]       = 0;
-                g_ScriptVars[2]       = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                g_ScriptVars[1] = 0;
+                g_ScriptVars[2] = 0;
+                SCENE_RETURN_TO_START();
             }
             break;
         case 20:
@@ -90,10 +89,9 @@ MATCH void func_801FB218(void) {
         case 25:
             if (g_ScriptVars[0] == 0xD) {
                 g_GameFlags ^= 0x80;
-                g_ScriptVars[1]       = 0;
-                g_ScriptVars[2]       = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                g_ScriptVars[1] = 0;
+                g_ScriptVars[2] = 0;
+                SCENE_RETURN_TO_START();
                 Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_HOUSE, TO_COORD(0x30), TO_COORD(1), 0);
                 g_GamePrevSelection = 0xFF;
             }
@@ -104,10 +102,9 @@ MATCH void func_801FB218(void) {
             break;
         case 31:
             if (g_ScriptVars[0] == 0xA) {
-                g_ScriptVars[1]       = 0;
-                g_ScriptVars[2]       = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                g_ScriptVars[1] = 0;
+                g_ScriptVars[2] = 0;
+                SCENE_RETURN_TO_START();
                 Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_HOUSE, TO_COORD(0x30), TO_COORD(1), 0);
                 g_GamePrevSelection = 0xFF;
             }

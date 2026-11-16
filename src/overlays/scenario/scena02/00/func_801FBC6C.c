@@ -136,6 +136,5 @@ reset:
     g_ScriptVars[2] = 0;
     g_ScriptVars[3] = 0;
     Game_ClearScriptActive();
-    g_SceneState.step_05  = 0;
-    g_SceneState.state_04 = 0;
+    SCENE_RETURN_TO_START();
 }

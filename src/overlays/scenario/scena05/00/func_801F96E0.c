@@ -40,24 +40,16 @@ MATCH void func_801F96E0(void) {
         case 3:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                g_ScriptVars[0]       = 0;
-                g_ScriptVars[1]       = 0;
-                g_ScriptVars[2]       = 0;
-                g_ScriptVars[3]       = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCRIPT_VARS_CLEAR_ALL();
+                SCENE_RETURN_TO_START();
             }
             break;
         case 4:
             if (g_ScriptVars[0] == 0x14) {
                 SYS_SetFlag(g_SceneFlags, 0x1A);
                 Game_ClearScriptActive();
-                g_ScriptVars[0]       = 0;
-                g_ScriptVars[1]       = 0;
-                g_ScriptVars[2]       = 0;
-                g_ScriptVars[3]       = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCRIPT_VARS_CLEAR_ALL();
+                SCENE_RETURN_TO_START();
             }
             break;
     }

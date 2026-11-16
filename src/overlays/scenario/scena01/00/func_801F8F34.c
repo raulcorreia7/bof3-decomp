@@ -57,8 +57,7 @@ MATCH void func_801F8F34(void) {
             }
             SYS_SetFlag(g_SceneFlags, 2);
             Game_ClearScriptActive();
-            g_SceneState.step_05  = 0;
-            g_SceneState.state_04 = 0;
+            SCENE_RETURN_TO_START();
             break;
         case 10:
             Scene_SetupParty(1);
@@ -181,11 +180,8 @@ MATCH void func_801F8F34(void) {
             SYS_SetFlag(g_SceneFlags, 3);
             g_GameFlags ^= 8;
             Game_ClearScriptActive();
-            g_ScriptVars[1]       = 0;
-            g_ScriptVars[2]       = 0;
-            g_ScriptVars[3]       = 0;
-            g_SceneState.step_05  = 0;
-            g_SceneState.state_04 = 0;
+            SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
+            SCENE_RETURN_TO_START();
             break;
     }
 }

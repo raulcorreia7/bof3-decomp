@@ -27,11 +27,8 @@ MATCH void func_801F9134(void) {
                 SYS_SetFlag(g_SceneFlags, 0xF);
                 g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
                 Game_ClearScriptActive();
-                g_ScriptVars[1]       = 0;
-                g_ScriptVars[2]       = 0;
-                g_ScriptVars[3]       = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
+                SCENE_RETURN_TO_START();
             }
             break;
         case 5:
@@ -66,11 +63,8 @@ MATCH void func_801F9134(void) {
             if (g_ScriptVars[0] == 0x14) {
                 SYS_SetFlag(g_SceneFlags, 0x10);
                 Game_ClearScriptActive();
-                g_ScriptVars[1]       = 0;
-                g_ScriptVars[2]       = 0;
-                g_ScriptVars[3]       = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
+                SCENE_RETURN_TO_START();
             }
             break;
     }

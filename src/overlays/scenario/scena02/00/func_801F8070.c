@@ -15,10 +15,9 @@ MATCH void func_801F8070(void) {
             if (g_ScriptVars[0] == 8) {
                 g_GameFlags |= 0x6;
                 Game_ClearScriptActive();
-                g_ScriptVars[1]       = 0;
-                g_ScriptVars[2]       = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                g_ScriptVars[1] = 0;
+                g_ScriptVars[2] = 0;
+                SCENE_RETURN_TO_START();
                 SYS_SetFlag(g_SceneFlags, 4);
             }
             break;
@@ -29,10 +28,9 @@ MATCH void func_801F8070(void) {
         case 6:
             if (g_ScriptVars[0] == 0x22) {
                 Game_ClearScriptActive();
-                g_ScriptVars[1]       = 0;
-                g_ScriptVars[2]       = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                g_ScriptVars[1] = 0;
+                g_ScriptVars[2] = 0;
+                SCENE_RETURN_TO_START();
                 SYS_SetFlag(g_SceneFlags, 5);
                 SYS_SetFlag(g_SceneFlags, 6);
                 g_GameFlags ^= 0x80;

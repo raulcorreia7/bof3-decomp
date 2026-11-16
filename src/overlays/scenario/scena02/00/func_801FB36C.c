@@ -42,8 +42,7 @@ MATCH void func_801FB36C(void) {
                         g_ScriptVars[2] = 0;
                         g_ScriptVars[3] = 0;
                         Game_ClearScriptActive();
-                        g_SceneState.step_05  = 0;
-                        g_SceneState.state_04 = 0;
+                        SCENE_RETURN_TO_START();
                         SYS_SetFlag(g_SceneFlags, 0x24);
                         SYS_SetFlag(g_SceneFlags, 0x25);
                         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
@@ -73,8 +72,7 @@ MATCH void func_801FB36C(void) {
                         g_ScriptVars[2] = 0;
                         g_ScriptVars[3] = 0;
                         Game_ClearScriptActive();
-                        g_SceneState.step_05  = 0;
-                        g_SceneState.state_04 = 0;
+                        SCENE_RETURN_TO_START();
                         SYS_SetFlag(g_SceneFlags, 0x24);
                         SYS_SetFlag(g_SceneFlags, 0x25);
                         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
@@ -100,8 +98,7 @@ MATCH void func_801FB36C(void) {
             g_ScriptVars[3] = 0;
             SYS_SetFlag(g_SceneFlags, 0x3A);
             Game_ClearScriptActive();
-            g_SceneState.step_05  = 0;
-            g_SceneState.state_04 = 0;
+            SCENE_RETURN_TO_START();
             break;
         case 20: {
             u8* state;
@@ -120,8 +117,7 @@ MATCH void func_801FB36C(void) {
                         g_ScriptVars[2] = 0;
                         g_ScriptVars[3] = 0;
                         Game_ClearScriptActive();
-                        g_SceneState.step_05  = 0;
-                        g_SceneState.state_04 = 0;
+                        SCENE_RETURN_TO_START();
                         SYS_SetFlag(g_SceneFlags, 0x24);
                         SYS_SetFlag(g_SceneFlags, 0x25);
                         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
