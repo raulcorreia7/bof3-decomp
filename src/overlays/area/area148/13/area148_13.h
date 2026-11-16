@@ -24,10 +24,8 @@ extern s32     g_AreaFocusY;
 extern Point2l g_FacingOffsets[];
 /* The state handler tables the dispatchers index. */
 extern u8      D_801F4FC4[];
-/* The four scratch vectors RotTransPers4 projects; the part quads write them
- * by byte offset. */
+/* The four scratch vectors RotTransPers4 projects. */
 extern SVECTOR D_1F800014[];
-extern u8      D_1F800014_BYTE[];
 
 /* The three part quads func_801F37B8 draws: their vertex offsets, the scroll
  * factors of each direction, and the texture word of each mode. */
