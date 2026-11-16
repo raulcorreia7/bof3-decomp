@@ -34,14 +34,13 @@ extern Callback D_801F9758[];
 
 extern Callback D_801F9798[];
 
-extern Callback  D_801F97A4[];
+extern Callback D_801F97A4[];
 /* D_801F97D8 */
-extern SceneFunc g_SceneActorDispatch[];
-extern Callback  D_801F9DBC[];
+extern Callback D_801F9DBC[];
 /* D_801F9DD0 */
-extern u16       g_EndingRollLine;
+extern u16      g_EndingRollLine;
 /* D_801F9DD4 */
-extern u8        g_EndingRollScroll;
-extern u8        D_801F9DD8;
+extern u8       g_EndingRollScroll;
+extern u8       D_801F9DD8;
 
 #endif

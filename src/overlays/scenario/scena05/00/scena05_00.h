@@ -32,20 +32,18 @@ extern u16 D_80146876;
     D_80146876 = 0;                                                                 \
     return 1
 
-extern u8       D_80146865;
-extern u8       D_80146866;
-extern u8       D_80146867;
-extern u32      D_801F6C00;
+extern u8  D_80146865;
+extern u8  D_80146866;
+extern u8  D_80146867;
+extern u32 D_801F6C00;
 /* D_801FD5A8 */
-extern Callback g_SceneEntityDispatch[];
 
 extern Callback D_801FD5B4[];
 extern u8       D_801FD5C0[];
 
-extern Callback  D_801FD5DC[];
-extern Callback  D_801FD5E8[];
+extern Callback D_801FD5DC[];
+extern Callback D_801FD5E8[];
 /* D_801FD644 */
-extern SceneFunc g_SceneActorDispatch[];
 
 extern u8 D_801FD668;
 extern s8 (*D_801FD674[])(void);
