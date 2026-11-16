@@ -34,24 +34,15 @@ ASSERT_OFFSET(Scena03Work, line, 0x0C);
 
 #define SCN_LINE ((Scena03Work*)g_Task)
 
-/* The four corner points of a quad that func_801F7FFC places around a centre: each is the centre plus a
- * rotated offset. */
-typedef struct Scena03Corner {
-    s32 x;
-    s32 y;
-    s32 z;
-    s32 unk_0C;
-} Scena03Corner;
-
 typedef struct Scena03Quad {
-    s32           x;          /* +0x00 centre */
-    s32           y;          /* +0x04 */
-    s32           z;          /* +0x08 */
-    Scena03Corner corner[4];  /* +0x0C */
-    s16           angle;      /* +0x4C offset direction */
-    s16           rotation_y; /* +0x4E */
-    s16           rotation_z; /* +0x50 */
-    s16           length;     /* +0x52 offset length */
+    s32    x;          /* +0x00 centre */
+    s32    y;          /* +0x04 */
+    s32    z;          /* +0x08 */
+    VECTOR corner[4];  /* +0x0C the centre plus a rotated offset, placed by func_801F7FFC */
+    s16    angle;      /* +0x4C offset direction */
+    s16    rotation_y; /* +0x4E */
+    s16    rotation_z; /* +0x50 */
+    s16    length;     /* +0x52 offset length */
 } Scena03Quad;
 
 ASSERT_SIZE(Scena03Quad, 0x54);

@@ -28,14 +28,14 @@ MATCH void func_801F4220(void) {
 
     i = 0;
     do {
-        cos                  = rcos(slot->angle) << 3;
-        sin                  = rsin(slot->angle) << 11;
-        slot->edges[0].pos.x = slot->pos.x;
-        slot->edges[0].pos.y = slot->pos.y + cos;
-        slot->edges[0].pos.z = slot->pos.z + sin;
-        slot->edges[1].pos.x = slot->pos.x;
-        slot->edges[1].pos.y = slot->pos.y - cos;
-        slot->edges[1].pos.z = slot->pos.z - sin;
+        cos               = rcos(slot->angle) << 3;
+        sin               = rsin(slot->angle) << 11;
+        slot->edges[0].vx = slot->pos.x;
+        slot->edges[0].vy = slot->pos.y + cos;
+        slot->edges[0].vz = slot->pos.z + sin;
+        slot->edges[1].vx = slot->pos.x;
+        slot->edges[1].vy = slot->pos.y - cos;
+        slot->edges[1].vz = slot->pos.z - sin;
         i++;
         slot++;
     } while (i < AREA_SLOT_COUNT);

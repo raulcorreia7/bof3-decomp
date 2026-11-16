@@ -70,21 +70,8 @@ bool func_801F60E0(void);
 
 extern Callback D_801F6218[];
 
-/* The sprite menu's screen-rect and texture-cell tables: 8-byte and 4-byte entries. */
-typedef struct Area135SpriteRect {
-    s16 x; /* 0x00 */
-    s16 y; /* 0x02 */
-    s16 w; /* 0x04 */
-    s16 h; /* 0x06 */
-} Area135SpriteRect;
-
-ASSERT_SIZE(Area135SpriteRect, 0x8);
-ASSERT_OFFSET(Area135SpriteRect, y, 0x02);
-ASSERT_OFFSET(Area135SpriteRect, w, 0x04);
-ASSERT_OFFSET(Area135SpriteRect, h, 0x06);
-
-extern Area135SpriteRect D_801F6230[];
-extern u8                D_801F6248[][4];
+extern RECT D_801F6230[];
+extern u8   D_801F6248[][4];
 
 extern Callback D_801F6258[];
 extern u8       D_801F626C[];

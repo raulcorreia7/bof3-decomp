@@ -521,7 +521,7 @@ NON_MATCHING void func_801D2474(void) {
     s32       pos[3];
     DVECTOR   screen;
     MATRIX    matrix;
-    SceneDot* dot;
+    TrailDot* dot;
     u8        row;
     u8        col;
     u8        step;
@@ -534,7 +534,7 @@ NON_MATCHING void func_801D2474(void) {
     for (row = (D_801D393C[D_801D40AC].h >> 1) * g_Task->timer; row < (D_801D393C[D_801D40AC].h >> 1) * (g_Task->timer + 1); row++) {
         for (col = 0; col < D_801D393C[D_801D40AC].w; col++) {
             if (*(u16*)D_801D40B0 != 0) {
-                dot        = (SceneDot*)D_801D40B4;
+                dot        = (TrailDot*)D_801D40B4;
                 dot->color = *(u16*)D_801D40B0;
                 D_801D40A8 += 1;
                 D_801D40B4 = (u32)(dot + 1);
@@ -561,13 +561,13 @@ MATCH void func_801D26BC(void) {
     u8        a;
     u8        b;
     u8        tmp;
-    SceneDot* dot;
+    TrailDot* dot;
 
     for (i = 0; i < 16; i++) {
         order[i] = i & 1;
     }
 
-    dot = MEM_PTR(SceneDot, AREA_WORK + 0x5A00);
+    dot = MEM_PTR(TrailDot, AREA_WORK + 0x5A00);
     j   = 0;
     for (i = 0; i < D_801D40A8; i++) {
         if ((i & 0xF) == 0) {
@@ -614,14 +614,14 @@ MATCH void func_801D26BC(void) {
 
 MATCH void func_801D2934(void) {
     Actor*    actor;
-    SceneDot* dot;
+    TrailDot* dot;
     TILE_1*   tile;
     u16       i;
     u8        timer;
 
     actor = (Actor*)g_Task->unk_4C;
     actor->header.flags |= ACTOR_FLAG_HIDDEN;
-    dot = MEM_PTR(SceneDot, AREA_WORK + 0x5A00);
+    dot = MEM_PTR(TrailDot, AREA_WORK + 0x5A00);
     for (i = 0; i < D_801D40A8; dot++, i++) {
         if (dot->active != 0) {
             if (g_Task->unk_06 == 0) {
@@ -810,7 +810,7 @@ NON_MATCHING void func_801D30AC(void) {
     s32       pos[3];
     DVECTOR   screen;
     MATRIX    matrix;
-    SceneDot* dot;
+    TrailDot* dot;
     u8        row;
     u8        col;
 
@@ -822,7 +822,7 @@ NON_MATCHING void func_801D30AC(void) {
     for (row = (D_801D393C[D_801D40AC].h >> 1) * g_Task->timer; row < (D_801D393C[D_801D40AC].h >> 1) * (g_Task->timer + 1); row++) {
         for (col = 0; col < D_801D393C[D_801D40AC].w; col++) {
             if (*(u16*)D_801D40B0 != 0) {
-                dot        = (SceneDot*)D_801D40B4;
+                dot        = (TrailDot*)D_801D40B4;
                 dot->color = *(u16*)D_801D40B0;
                 D_801D40A8 += 1;
                 D_801D40B4 = (u32)(dot + 1);
@@ -848,13 +848,13 @@ MATCH void func_801D32F4(void) {
     u8        a;
     u8        b;
     u8        tmp;
-    SceneDot* dot;
+    TrailDot* dot;
 
     for (i = 0; i < 16; i++) {
         order[i] = i & 1;
     }
 
-    dot = MEM_PTR(SceneDot, AREA_WORK + 0x5A00);
+    dot = MEM_PTR(TrailDot, AREA_WORK + 0x5A00);
     j   = 0;
     for (i = 0; i < D_801D40A8; i++) {
         if ((i & 0xF) == 0) {
@@ -892,12 +892,12 @@ MATCH void func_801D32F4(void) {
 
 /* Step the dot trail: move and draw each live dot, then advance when the countdown ends. */
 MATCH void func_801D34F0(void) {
-    SceneDot* dot;
+    TrailDot* dot;
     u16       i;
     TILE_1*   tile;
 
     ((Actor*)g_Task->unk_4C)->header.flags |= ACTOR_FLAG_HIDDEN;
-    dot = MEM_PTR(SceneDot, AREA_WORK + 0x5A00);
+    dot = MEM_PTR(TrailDot, AREA_WORK + 0x5A00);
     for (i = 0; i < D_801D40A8; dot++, i++) {
         if (dot->active) {
             if (dot->life != 0) {

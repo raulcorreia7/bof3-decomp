@@ -39,25 +39,25 @@ MATCH void func_801F7424(Actor* actor) {
 
 /* func_801F7574 */
 MATCH void Scene_ClearWorkRows(void) {
-    SceneSpark* row;
-    u8          i;
+    SparkParticle* row;
+    u8             i;
 
-    row = (SceneSpark*)(MEM_PTR(u8, AREA_WORK + 0x800) + g_Task->unk_06 * 0x500);
+    row = (SparkParticle*)(MEM_PTR(u8, AREA_WORK + 0x800) + g_Task->unk_06 * 0x500);
     for (i = 0; i < SCENE_SPARK_COUNT; i++, row++) {
         row->active = 0;
     }
 }
 
 MATCH s32 func_801F75BC(void) {
-    MATRIX      camera;
-    SceneSpark* row;
-    u8          i;
-    u8          life;
-    s32         alive;
+    MATRIX         camera;
+    SparkParticle* row;
+    u8             i;
+    u8             life;
+    s32            alive;
 
     Area_SetCameraMatrix(&camera);
     alive = 0;
-    row   = (SceneSpark*)(MEM_PTR(u8, AREA_WORK + 0x800) + g_Task->unk_06 * 0x500);
+    row   = (SparkParticle*)(MEM_PTR(u8, AREA_WORK + 0x800) + g_Task->unk_06 * 0x500);
     for (i = 0; i < SCENE_SPARK_COUNT; row++, i++) {
         if (row->active == 0) {
             continue;
@@ -80,13 +80,13 @@ MATCH s32 func_801F75BC(void) {
 }
 
 MATCH void func_801F76D0(void) {
-    SceneSpark* spark;
-    u8          mode;
-    u8          i;
+    SparkParticle* spark;
+    u8             mode;
+    u8             i;
 
     FAKE_STACK_PADS(u8, 0x20); /* FAKE: retail reserves 32 unused stack bytes. */
     mode  = g_Task->unk_06;
-    spark = MEM_PTR(SceneSpark, AREA_WORK + 0x800 + mode * 0x500);
+    spark = MEM_PTR(SparkParticle, AREA_WORK + 0x800 + mode * 0x500);
     i     = 0;
     do {
         if (g_Task->unk_06 == 0) {

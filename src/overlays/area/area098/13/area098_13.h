@@ -68,19 +68,6 @@ ASSERT_SIZE(AreaStreakSlot, 0x38);
 extern u8 D_801F6510;
 extern u8 D_801F6514;
 
-/* One point of the spark trail at AREA_WORK + 0x2000, 10 bytes each. */
-typedef struct TrailDot {
-    u8  active; /* 0x00 - flips every frame it is processed */
-    u8  life;   /* 0x01 */
-    u16 color;  /* 0x02 - 5-5-5 */
-    s16 x;      /* 0x04 */
-    s16 y;      /* 0x06 */
-    s8  dx;     /* 0x08 */
-    s8  dy;     /* 0x09 */
-} TrailDot;
-
-ASSERT_SIZE(TrailDot, 10);
-
 /* The trail points at AREA_WORK + 0x2000. */
 #define AREA_TRAIL_DOTS MEM_PTR(TrailDot, AREA_WORK + 0x2000u)
 

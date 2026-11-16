@@ -16,8 +16,8 @@ NON_MATCHING void func_801F43C8(void) {
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage & HALF_MASK, 0);
     GFX_AddPrim(1, sizeof(DR_MODE));
     Area_SetCameraMatrix(&matrix);
-    Area_ProjectPoint((s32*)&MEM_PTR(AreaSlot, AREA_WORK)->edges[0], &first);
-    Area_ProjectPoint((s32*)&MEM_PTR(AreaSlot, AREA_WORK)->edges[1], &second);
+    Area_ProjectPoint(&MEM_PTR(AreaSlot, AREA_WORK)->edges[0].vx, &first);
+    Area_ProjectPoint(&MEM_PTR(AreaSlot, AREA_WORK)->edges[1].vx, &second);
 
     slot  = MEM_PTR(AreaSlot, AREA_WORK);
     shade = 0x40;
@@ -34,8 +34,8 @@ NON_MATCHING void func_801F43C8(void) {
         prim->y1 = second.vy;
         setRGB0(prim, shade, shade / 2, shade / 2);
         setRGB1(prim, shade, shade / 2, shade / 2);
-        Area_ProjectPoint((s32*)&slot->edges[0], &first);
-        Area_ProjectPoint((s32*)&slot->edges[1], &second);
+        Area_ProjectPoint(&slot->edges[0].vx, &first);
+        Area_ProjectPoint(&slot->edges[1].vx, &second);
         shade--;
         prim->x2 = first.vx;
         prim->y2 = first.vy;
