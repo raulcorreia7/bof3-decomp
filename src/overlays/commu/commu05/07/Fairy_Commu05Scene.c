@@ -52,7 +52,46 @@ MATCH void func_801D0F50(s16 x, s16 y, u8 row) {
     GFX_AddPrim(1, sizeof(SPRT));
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D1048(s16 x, s16 y, u8 group) {
+    s32 i;
+    s32 first_entry;
+    s32 entry_index;
+    s16 row_y;
+    u8* buffer;
+    u8* entry;
+
+    UI_DrawText(x + 0x28, y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 55));
+    row_y = y + 0x14;
+    func_801D0F50(x + 8, row_y, 0);
+    UI_DrawText(x + 0x18, row_y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 56));
+    buffer = g_UiFormatBuffer;
+    TEXT_Format(buffer, D_801D0C0C, D_80145E44);
+    UI_DrawAsciiString(x + 0x6C, row_y, 0, buffer);
+    if (D_80145E44 == 1) {
+        UI_DrawText(x + 0x84, row_y, 0, 7, D_801D1964);
+    } else {
+        UI_DrawText(x + 0x84, row_y, 0, 7, D_801D195C);
+    }
+    first_entry = group * 7;
+    for (i = 0; i < 7; i++) {
+        entry_index = first_entry + i;
+        if (entry_index >= D_80145E44) {
+            break;
+        }
+        row_y = y + 0x2C + (i * 0x10);
+        entry = &D_80145E30[entry_index];
+        UI_DrawText(x + 0x14, row_y, 0, 5, D_801457E8[entry[0] & 0x7F]);
+        if (entry[0] & 0x80) {
+            UI_DrawText(x + 0x48, row_y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 58));
+        } else {
+            UI_DrawText(x + 0x48, row_y, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 57));
+        }
+    }
+}
+#else
 INCLUDE_ASM(func_801D1048);
+#endif
 
 MATCH void func_801D129C(s16 x, s16 y, u8 group) {
     s32 i;

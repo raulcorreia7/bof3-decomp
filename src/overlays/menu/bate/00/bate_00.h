@@ -81,6 +81,8 @@ extern u8       g_MenuLabelAgility[];
 extern u8       g_MenuEquipRowIcons[];
 /* D_801D8B40 */
 extern u8       g_MenuLabelEquip[];
+extern u8       D_801D8B18[];
+extern u8       D_801D8B20[];
 extern u8       D_801D8B48[];
 extern u8       D_801D8B4C[];
 extern u8       g_MenuPortraitAtlas[];
@@ -154,10 +156,14 @@ void Menu_DrawAbilityList(MenuListPanel* panel);
 void func_801D2304(s32 x, s32 y);
 void func_801D259C(void);
 void func_801D31B0(s16 x, s16 y, u8 index, u8 flag);
+void func_801AE3F0(u16 x, u16 y, u16 width, u16 height, s32 frame_flags, u8 palette);
 
 extern u8   D_801D8EE0[];
 extern char D_801D0C18[];
 extern char D_801D0C1C[];
+extern char D_801D0C24[];
+extern char D_801D0C2C[];
 extern s32  D_801D8F0C[];
+extern u8   D_801D8780[];
 
 #endif
