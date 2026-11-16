@@ -39,40 +39,40 @@ extern char g_SaveCardPortLabelFirst[];
 /* D_801D0D7C */
 extern char g_SaveCardPortLabelSecond[];
 /* Entries of the handler tables. */
-#define MENU_STATUS_STEP_COUNT        5
-#define MENU_STATUS_TASK_COUNT        4
-#define MENU_STATUS_STEP1_COUNT       2
-#define MENU_STATUS_STEP2_COUNT       3
-#define MENU_STATUS_STEP2_SUB2_COUNT  5
-#define MENU_STATUS_STEP3_COUNT       2
-#define MENU_STATUS_TASK1_STATE_COUNT 3
-#define MENU_STATUS_TASK2_STATE_COUNT 3
-#define MENU_STATUS_TASK3_STATE_COUNT 3
+#define MENU_SHISU_STEP_COUNT        5
+#define MENU_SHISU_TASK_COUNT        4
+#define MENU_SHISU_STEP1_COUNT       2
+#define MENU_SHISU_STEP2_COUNT       3
+#define MENU_SHISU_STEP2_SUB2_COUNT  5
+#define MENU_SHISU_STEP3_COUNT       2
+#define MENU_SHISU_TASK1_STATE_COUNT 3
+#define MENU_SHISU_TASK2_STATE_COUNT 3
+#define MENU_SHISU_TASK3_STATE_COUNT 3
 
-/* The height the status display settles above the ground it follows, in 16.16. */
-#define MENU_STATUS_HEIGHT_BIAS       (512 << 16)
+/* The height the shisu screen display settles above the ground it follows, in 16.16. */
+#define MENU_SHISU_HEIGHT_BIAS       (512 << 16)
 
 /* The overlay's step and sub-step handler pools; the tables are views into one
  * callback run, selected by the shared menu step byte. */
 /* D_801D96DC */
-extern Callback g_MenuStatusSteps[MENU_STATUS_STEP_COUNT];
+extern Callback g_MenuShisuSteps[MENU_SHISU_STEP_COUNT];
 /* D_801D96F0 */
-extern Callback g_MenuStatusStep1Steps[MENU_STATUS_STEP1_COUNT];
+extern Callback g_MenuShisuStep1Steps[MENU_SHISU_STEP1_COUNT];
 /* D_801D96F8 */
-extern Callback g_MenuStatusStep3Steps[MENU_STATUS_STEP3_COUNT];
+extern Callback g_MenuShisuStep3Steps[MENU_SHISU_STEP3_COUNT];
 /* D_801D9700 */
-extern Callback g_MenuStatusStep2Steps[MENU_STATUS_STEP2_COUNT];
+extern Callback g_MenuShisuStep2Steps[MENU_SHISU_STEP2_COUNT];
 /* D_801D970C */
-extern Callback g_MenuStatusStep2Sub2Steps[MENU_STATUS_STEP2_SUB2_COUNT];
+extern Callback g_MenuShisuStep2Sub2Steps[MENU_SHISU_STEP2_SUB2_COUNT];
 extern Callback D_801D9720[];
 extern Callback D_801D9734[];
-extern Callback g_MenuStatusTaskSteps[MENU_STATUS_TASK_COUNT];
+extern Callback g_MenuShisuTaskSteps[MENU_SHISU_TASK_COUNT];
 /* D_801D975C */
-extern Callback g_MenuStatusTask1Steps[MENU_STATUS_TASK1_STATE_COUNT];
+extern Callback g_MenuShisuTask1Steps[MENU_SHISU_TASK1_STATE_COUNT];
 /* D_801D9768 */
-extern Callback g_MenuStatusTask2Steps[MENU_STATUS_TASK2_STATE_COUNT];
+extern Callback g_MenuShisuTask2Steps[MENU_SHISU_TASK2_STATE_COUNT];
 /* D_801D9774 */
-extern Callback g_MenuStatusTask3Steps[MENU_STATUS_TASK3_STATE_COUNT];
+extern Callback g_MenuShisuTask3Steps[MENU_SHISU_TASK3_STATE_COUNT];
 extern u8       g_MenuCaptionRight[];
 extern u8       g_MenuClockCaption[];
 extern u8       g_MenuCommandFrame[];
@@ -163,50 +163,50 @@ void func_801D3320(MenuPanelTask* task);
 s32  Char_GetExpForLevel(s32 character, s32 level);
 
 /* The item stacks the screen counts and consumes: held[] and used[] follow the same four items. */
-typedef struct MenuStatusItems {
+typedef struct ShisuIngredients {
     /* 0x00 */ u8 held[4];
     /* 0x04 */ u8 used[4];
     /* 0x08 */ u8 unk_08; /* nonzero commits the use */
     /* 0x09 */ u8 unk_09;
     /* 0x0A */ u8 unk_0A;
     /* 0x0B */ u8 unk_0B;
-} MenuStatusItems;
+} ShisuIngredients;
 
-ASSERT_OFFSET(MenuStatusItems, used, 0x04);
-ASSERT_SIZE(MenuStatusItems, 12);
+ASSERT_OFFSET(ShisuIngredients, used, 0x04);
+ASSERT_SIZE(ShisuIngredients, 12);
 
 extern s8 D_80144E5E;
 
-extern void            func_801D1CA4(void);
-extern s32             func_801D1E60(void);
-extern void            func_801D1EE8(void);
-extern void            func_801D2308(void* record);
-extern void            func_801D27BC(void);
-extern u8              D_80144FF9;
-extern s16             D_80148364;
-extern u8              D_8014839C;
+extern void             func_801D1CA4(void);
+extern s32              func_801D1E60(void);
+extern void             func_801D1EE8(void);
+extern void             func_801D2308(void* record);
+extern void             func_801D27BC(void);
+extern u8               D_80144FF9;
+extern s16              D_80148364;
+extern u8               D_8014839C;
 /* D_801DA028 */
-extern MenuStatusItems g_MenuStatusItems;
-extern s32             D_801DA034;
-extern s32             D_801DA038;
-extern s32             D_801DA03C;
-extern s32             D_801DA040;
-extern s32             D_801DA044;
-extern u8              D_801DA0A5;
-extern u8              D_801DA0A6;
-extern u8              D_801DA0A7;
-extern u8              D_801DA04E;
-extern s32             D_801DA084;
-extern s32             D_801DA088;
-extern s32             D_801DA0FC;
-extern u8              D_801DA0C0;
-extern u8              D_801DA0C6;
-extern u32             D_801DA100;
+extern ShisuIngredients g_MenuShisuIngredients;
+extern s32              D_801DA034;
+extern s32              D_801DA038;
+extern s32              D_801DA03C;
+extern s32              D_801DA040;
+extern s32              D_801DA044;
+extern u8               D_801DA0A5;
+extern u8               D_801DA0A6;
+extern u8               D_801DA0A7;
+extern u8               D_801DA04E;
+extern s32              D_801DA084;
+extern s32              D_801DA088;
+extern s32              D_801DA0FC;
+extern u8               D_801DA0C0;
+extern u8               D_801DA0C6;
+extern u32              D_801DA100;
 /* kept: the tint bytes stay separate globals; one array shares their base register and leaves
    func_801D2ADC eight bytes short. */
-extern u8              D_801DA11D;
-extern u8              D_801DA11E;
-extern u8              D_801DA11F;
+extern u8               D_801DA11D;
+extern u8               D_801DA11E;
+extern u8               D_801DA11F;
 
 /* The clut strip tables of this overlay, bound in config/symbols.toml. */
 extern UvRect g_MenuClutStripCells[];
