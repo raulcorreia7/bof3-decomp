@@ -1,9 +1,6 @@
 #include "area118_13.h"
 
-#include "overlays/area/Area_DrawDimQuad.h"
-
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F2EA0(void) {
+MATCH void func_801F2EA0(void) {
     POLY_G4* prim;
 
     if (g_Task->timer++ >= 16) {
@@ -13,8 +10,16 @@ NON_MATCHING void func_801F2EA0(void) {
             D_801F59E8 = 0;
         }
     }
-    AREA_DRAW_DIM_QUAD(2, D_801F59EC);
+    GFX_AddDitheredDrawMode(6U, GetTPage(TPAGE_DEPTH_15BIT, 2, 320, 320) & HALF_MASK);
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    prim->r0 = prim->r1 = D_801F59EC;
+    prim->g0 = prim->g1 = 0;
+    prim->b0 = prim->b1 = D_801F59EC;
+    prim->r2 = prim->r3 = D_801F59EC;
+    prim->g2 = prim->g3 = 0;
+    prim->b2 = prim->b3 = D_801F59EC;
+    setXY4(prim, 0, 0, SCREEN_WIDTH, 0, 0, 320, SCREEN_WIDTH, 320);
+    SetSemiTrans((POLY_G4*)g_GfxPrimCursor, 1);
+    GFX_AddPrim(2U, sizeof(POLY_G4));
 }
-#else
-INCLUDE_ASM(func_801F2EA0);
-#endif

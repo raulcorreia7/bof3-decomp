@@ -1,10 +1,12 @@
 #include "area001_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F2CD4(void) {
+MATCH void func_801F2CD4(void) {
     u8 actor_slot;
 
-    if (g_FrameCount & 0x3) {
+    if (g_ScriptVars[2] < 7) {
+        return;
+    }
+    if (g_FrameCount & 0x7) {
         return;
     }
     actor_slot                  = Actor_FindFreeSpawned();
@@ -14,13 +16,6 @@ NON_MATCHING void func_801F2CD4(void) {
     }
     g_SpawnedActors[actor_slot].header.flags                = 1;
     g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type       = 0xB;
-    g_SpawnedActors[g_ScratchPad.cells.bytes[0]].counter_1C = 6;
-    if (g_ScriptVars[2] < 0x14) {
-        g_SpawnedActors[g_ScratchPad.cells.bytes[0]].unk_07 = 1;
-    } else {
-        g_SpawnedActors[g_ScratchPad.cells.bytes[0]].unk_07 = 3;
-    }
+    g_SpawnedActors[g_ScratchPad.cells.bytes[0]].counter_1C = 5;
+    g_SpawnedActors[g_ScratchPad.cells.bytes[0]].unk_07     = 3;
 }
-#else
-INCLUDE_ASM(func_801F2CD4);
-#endif
