@@ -113,12 +113,7 @@ MATCH void func_801EF1C8(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        D_1F800014[0].vx = 0;
-        D_1F800014[0].vy = 0;
-        D_1F800014[1].vx = D_1F800014[2].vx;
-        D_1F800014[1].vy = D_1F800014[2].vy;
-        D_1F800014[2].vx = FIXED_MUL(rsin(i << 8), GLOW_RING_INNER);
-        D_1F800014[2].vy = FIXED_MUL(rcos(i << 8), GLOW_RING_INNER);
+        GFX_STEP_TRIANGLE_FAN(i << 8, GLOW_RING_INNER);
         RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
         setRGB0(prim, GLOW_RING_RED, GLOW_RING_GREEN, GLOW_RING_BLUE);
         setRGB1(prim, 1, 1, 1);

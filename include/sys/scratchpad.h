@@ -72,6 +72,16 @@ extern SVECTOR D_1F800014[4];
 /* The same four vectors read a halfword at a time. */
 extern s16     D_1F800014_HALF[];
 
+/* Advance the triangle fan on the scratchpad one step: vertex 0 stays at the origin, vertex 1 takes
+ * the old rim point and vertex 2 moves to the rim point at `angle`, `radius` away. */
+#define GFX_STEP_TRIANGLE_FAN(angle, radius)             \
+    D_1F800014[0].vx = 0;                                \
+    D_1F800014[0].vy = 0;                                \
+    D_1F800014[1].vx = D_1F800014[2].vx;                 \
+    D_1F800014[1].vy = D_1F800014[2].vy;                 \
+    D_1F800014[2].vx = FIXED_MUL(rsin(angle), (radius)); \
+    D_1F800014[2].vy = FIXED_MUL(rcos(angle), (radius))
+
 /* Scratchpad base + 1; battle/battle/03 and etc/game/00 write it directly. */
 extern u8  D_1F800001;
 /* ScratchPad.cells.halves[3]: the staged y coordinate that func_801B13BC writes, and the phase angle

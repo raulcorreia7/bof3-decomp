@@ -168,12 +168,7 @@ MATCH void func_801EF678(void) {
     D_1F800014[2].vx           = FIXED_MUL(rsin(0), 128U);
     D_1F800014[2].vy           = FIXED_MUL(rcos(0), 128U);
     for (i = 1; i <= 16; i++) {
-        D_1F800014[0].vx = 0;
-        D_1F800014[0].vy = 0;
-        D_1F800014[1].vx = D_1F800014[2].vx;
-        D_1F800014[1].vy = D_1F800014[2].vy;
-        D_1F800014[2].vx = FIXED_MUL(rsin(i << 8), 128U);
-        D_1F800014[2].vy = FIXED_MUL(rcos(i << 8), 128U);
+        GFX_STEP_TRIANGLE_FAN(i << 8, 128U);
         prim             = (POLY_G3*)g_GfxPrimCursor;
         D_1F800014[2].vz = 0;
         D_1F800014[1].vz = 0;
