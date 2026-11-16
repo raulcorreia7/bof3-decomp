@@ -26,13 +26,13 @@ MATCH void func_801EEC70(void) {
     }
     /* Copies colours 1 to 15 of CLUT 1 of arena palette row 26 into the work copy with STP set, then clears colour 0. */
     i   = 1;
-    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
-    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW));
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
     for (; i < 16; i++) {
-        dst[i + 32] = src[i + 32] | 0x8000;
+        dst[i + 32] = src[i + 32] | PSX_COLOR_STP_BIT;
     }
-    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW + AREA_PALETTE_UNIT) = 0;
-    g_GfxPalettePending                                                          = 1;
+    *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW) + AREA_PALETTE_UNIT) = 0;
+    g_GfxPalettePending                                                                   = 1;
     SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
     Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
 }

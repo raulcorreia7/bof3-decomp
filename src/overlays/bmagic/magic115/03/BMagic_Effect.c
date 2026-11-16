@@ -26,10 +26,10 @@ MATCH void func_801EEC80(void) {
     g_Task->timer = GFX_AllocPaletteFade(actor, 0, 0, 0, 1);
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
     for (; i < 16; i++) {
-        dst[i] = src[i] | 0x8000;
+        dst[i] = src[i] | PSX_COLOR_STP_BIT;
     }
-    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = *MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
-    g_GfxPalettePending                                      = 1;
+    *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)) = *MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
+    g_GfxPalettePending                                               = 1;
     SND_QueueSelectionEffect(0x100);
     g_Task->param.unk_0B = 1;
     g_Task->unk_09       = 0;

@@ -18,7 +18,7 @@ MATCH void Area_ApplyPaletteTint(s32 column_mask, s32 row_mask, s32 red, s32 gre
     u16  cell;
 
     plane = 3;
-    dst   = (u16*)(AREA_PALETTE_WORK + 3 * AREA_PALETTE_ROW);
+    dst   = (u16*)(AREA_PALETTE_UPLOAD_ROW(3));
     src   = (u16*)AREA_PALETTE_ARENA_33E00;
     for (; plane < 15; plane++) {
         if (row_mask & 0x1) {
@@ -59,7 +59,7 @@ MATCH void Area_ApplyPaletteTint(s32 column_mask, s32 row_mask, s32 red, s32 gre
                                 b = 0x1F;
                             }
                         }
-                        d[row * 16 + cell_index] = (s[row * 16 + cell_index] & 0x8000) | (b << 10) | (g << 5) | r;
+                        d[row * 16 + cell_index] = (s[row * 16 + cell_index] & PSX_COLOR_STP_BIT) | (b << 10) | (g << 5) | r;
                     }
                 }
                 column_mask /= 2;

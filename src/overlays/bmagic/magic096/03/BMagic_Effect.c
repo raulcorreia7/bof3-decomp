@@ -30,7 +30,7 @@ MATCH void func_801EEC84(void) {
     do {
         *dst++ = *src++;
         i++;
-    } while (i < 256);
+    } while (i < AREA_PALETTE_COLORS);
     g_GfxPalettePending = 1;
     SND_QueueSelectionEffect(0x100);
 }

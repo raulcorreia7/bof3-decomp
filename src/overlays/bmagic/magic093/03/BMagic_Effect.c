@@ -61,8 +61,8 @@ MATCH void func_801EED04(void) {
         g_Task->param.unk_0B++;
     }
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
-    for (; i < 256; i++) {
-        *dst++ = *src++ | 0x8000;
+    for (; i < AREA_PALETTE_COLORS; i++) {
+        *dst++ = *src++ | PSX_COLOR_STP_BIT;
     }
     g_GfxPalettePending = 1;
     SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x00));

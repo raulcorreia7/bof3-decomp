@@ -38,8 +38,8 @@ MATCH void func_801EED8C(void) {
     func_800AFD9C();
     g_Task->pos.z.fixed += TO_COORD(192);
     BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
-    MEM(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = MEM(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
-    g_GfxPalettePending                                 = 1;
+    MEM(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)) = MEM(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
+    g_GfxPalettePending                                          = 1;
     SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
     g_Task->unk_09       = 0;
     g_Task->param.unk_0B = 0;

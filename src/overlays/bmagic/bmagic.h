@@ -17,6 +17,11 @@
 #define BMAGIC_LAYER_OVER_BATTLERS   (GFX_LAYER_BATTLE_SCENE - 1) /* in front of the battlers */
 #define BMAGIC_LAYER_BEHIND_BATTLERS (GFX_LAYER_BATTLE_SCENE + 1) /* behind the battlers */
 
+/* The visible colours of palette row 26 (BATL_OVR): in the arena, and in the copy the engine uploads. A battle effect copies the arena
+ * colours over with the STP bit set and clears the transparent entry 0 of g_BattleEffectPalette. */
+#define BATTLE_PALETTE_SOURCE_COLORS MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW) + AREA_PALETTE_FIRST_VISIBLE_COLOR * sizeof(u16))
+#define BATTLE_EFFECT_PALETTE_COLORS MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW) + AREA_PALETTE_FIRST_VISIBLE_COLOR * sizeof(u16))
+
 /* The bytes a sparkle ray reserves in its cell packet. */
 #define BMAGIC_RAY_CELL_SIZE         32
 
@@ -279,16 +284,16 @@ static inline void BMagic_AdvanceEffectStep(u8 limit) {
 /* Zero `i`, point `dst` at palette row 26 (the BATL_OVR bank) in the working palette and `src` at
  * the same row in the arena. A statement macro: the member declares its pointers and index, and
  * the setup order is retail's. */
-#define BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i)                     \
-    (i)   = 0;                                                       \
-    (dst) = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW); \
-    (src) = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW)
+#define BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i)                              \
+    (i)   = 0;                                                                \
+    (dst) = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)); \
+    (src) = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW))
 
 /* Set the top bit of every halfword of that row in the working palette. */
 #define BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i) \
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);    \
-    for (; (i) < 256; (i)++) {                   \
-        (dst)[i] = (src)[i] | 0x8000u;           \
+    for (; (i) < AREA_PALETTE_COLORS; (i)++) {   \
+        (dst)[i] = (src)[i] | PSX_COLOR_STP_BIT; \
     }
 
 /* Swing the area camera pitch by 20 each tick, up on odd timer values and down

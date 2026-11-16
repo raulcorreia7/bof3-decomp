@@ -48,13 +48,13 @@ MATCH void func_801EED44(void) {
     work->pos.z.part.integer = pose;
 
     for (index = 0; index < 16; index++) {
-        MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW)[index] = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW)[index] | 0x8000;
+        MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))[index] = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW))[index] | PSX_COLOR_STP_BIT;
     }
 
-    effect                                                     = D_801EC2E0;
-    saved                                                      = g_Task;
-    MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW)[0] = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW)[0];
-    g_Task                                                     = BattleEffect_GetTarget(effect);
+    effect                                                              = D_801EC2E0;
+    saved                                                               = g_Task;
+    MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))[0] = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW))[0];
+    g_Task                                                              = BattleEffect_GetTarget(effect);
     Actor_SelectScript(1);
     g_Task = saved;
     saved->header.mode++;

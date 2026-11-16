@@ -26,7 +26,7 @@ MATCH void func_801F3E60(s32 shift) {
             red    = (s32)(color & 0x1F) >> shift;
             green  = (s32)((color & 0xFFFFu) >> 5 & 0x1F) >> shift;
             blue   = (s32)((color & 0xFFFFu) >> 10 & 0x1F) >> shift;
-            *out++ = (u16)((color & 0x8000u) | (blue << 10) | (green << 5) | red);
+            *out++ = (u16)((color & PSX_COLOR_STP_BIT) | (blue << 10) | (green << 5) | red);
             i++;
         } while (i < 0x100);
 

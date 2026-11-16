@@ -81,15 +81,25 @@
                                         * reader: reached through the base */
 /* The working copy of the palette banks (g_GraphicsPaletteDst): palette animations and fades write it, and the pending
  * flag g_GfxPalettePending asks the next frame to upload it. */
-#define AREA_PALETTE_WORK   0x80037800u
+#define AREA_PALETTE_WORK                0x80037800u
 /* The script tables g_Scripts alternates between: the field's, the battle's and the battle magic's. */
-#define AREA_SCRIPT_TABLE   0x800D3800u
-#define BATTLE_SCRIPT_TABLE 0x800F0800u
-#define BMAGIC_SCRIPT_TABLE 0x800C3800u
-#define AREA_PALETTE_UNIT   0x40u  /* one CLUT entry */
-#define AREA_PALETTE_ROW    0x200u /* one upload row (32 rows) */
-#define AREA_PALETTE_COLORS 256u   /* colour words of one upload row */
-#define AREA_PALETTE_ROWS   32u    /* rows of one palette bank */
+#define AREA_SCRIPT_TABLE                0x800D3800u
+#define BATTLE_SCRIPT_TABLE              0x800F0800u
+#define BMAGIC_SCRIPT_TABLE              0x800C3800u
+#define AREA_PALETTE_UNIT                0x40u  /* one CLUT entry */
+#define AREA_PALETTE_ROW                 0x200u /* one upload row (32 rows) */
+#define AREA_PALETTE_COLORS              256    /* colour words of one upload row */
+#define AREA_PALETTE_ROWS                32u    /* rows of one palette bank */
+
+/* The palette bank rows the BMAGIC and BATTLE families own: 26 is the BATL_OVR bank, 2 the BMAGIC/BATTLE slice at
+ * AREA_PALETTE_ARENA_33C00. */
+#define AREA_PALETTE_BATL_OVR_ROW        26
+#define AREA_PALETTE_BMAGIC_ROW          2
+/* Entry 0 of a palette cell is the transparent colour (the battle effects clear it); the visible colours start at entry 1. */
+#define AREA_PALETTE_FIRST_VISIBLE_COLOR 1
+/* Row `row` of the working palette and of the arena copy it is rebuilt from. */
+#define AREA_PALETTE_UPLOAD_ROW(row)     (AREA_PALETTE_WORK + (row) * AREA_PALETTE_ROW)
+#define AREA_PALETTE_ARENA_ROW(row)      (AREA_PALETTE_ARENA + (row) * AREA_PALETTE_ROW)
 
 /* One palette upload row: 256 colour words. */
 typedef struct PaletteRow {

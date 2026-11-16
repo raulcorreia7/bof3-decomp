@@ -46,7 +46,7 @@ MATCH void func_801EEC98(void) {
     g_BattleEffectBattler->header.flags |= ACTOR_FLAG_HIDDEN;
     g_Battle.state |= BATTLE_STATE_DAMAGE_APPLIED;
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
-    for (; i < 256; i++) {
+    for (; i < AREA_PALETTE_COLORS; i++) {
         *dst++ = *src++;
     }
     g_GfxPalettePending = 1;

@@ -47,10 +47,10 @@ MATCH void func_801EED04(void) {
         }
     }
     for (i = 1; i < 16; i++) {
-        MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW)[i] = MEM_PTR(u16, AREA_PALETTE_ARENA)[i] | 0x8000;
+        MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))[i] = MEM_PTR(u16, AREA_PALETTE_ARENA)[i] | PSX_COLOR_STP_BIT;
     }
-    g_GfxPalettePending                                      = 1;
-    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = *MEM_PTR(u16, AREA_PALETTE_ARENA);
+    g_GfxPalettePending                                               = 1;
+    *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)) = *MEM_PTR(u16, AREA_PALETTE_ARENA);
     g_Task->header.mode += 1;
 }
 

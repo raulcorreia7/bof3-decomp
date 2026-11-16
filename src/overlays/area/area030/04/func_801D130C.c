@@ -24,7 +24,7 @@ MATCH void func_801D130C(void) {
         row    = ((entry >> 3) << 9) + palette;
         color  = *(u16*)(offset + (((entry & 0x7) << 6) + row));
         i += 1;
-        dst[96] = color | 0x8000;
+        dst[96] = color | PSX_COLOR_STP_BIT;
         dst += 1;
     } while (i < 31);
 

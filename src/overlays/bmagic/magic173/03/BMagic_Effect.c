@@ -32,7 +32,7 @@ MATCH void func_801EEC5C(void) {
         g_Task->param.unk_0B += 1;
     }
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
-    for (; i < 256; i++) {
+    for (; i < AREA_PALETTE_COLORS; i++) {
         *dst++ = *src++;
     }
     g_GfxPalettePending = 1;

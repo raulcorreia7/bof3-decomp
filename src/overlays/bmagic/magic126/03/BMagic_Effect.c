@@ -47,8 +47,8 @@ MATCH void func_801EECE4(void) {
         g_Task->param.unk_0B += 1;
     }
     SND_QueueSelectionEffect(0x102);
-    for (i = 0; i < 256; i++) {
-        MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW)[i] = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW)[i] | 0x8000;
+    for (i = 0; i < AREA_PALETTE_COLORS; i++) {
+        MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))[i] = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW))[i] | PSX_COLOR_STP_BIT;
     }
     g_GfxPalettePending = 1;
 }

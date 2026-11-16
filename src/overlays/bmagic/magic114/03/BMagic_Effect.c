@@ -34,7 +34,7 @@ MATCH void func_801EEDA0(void) {
     row_dst = g_AreaPaletteCopy->rows[2].colors;
     row_src = g_AreaPaletteArena->rows[2].colors;
     for (; i < AREA_PALETTE_COLORS; i++) {
-        *row_dst = *row_src++ | 0x8000;
+        *row_dst = *row_src++ | PSX_COLOR_STP_BIT;
         *dst     = *src++;
         row_dst += 1;
         dst += 1;

@@ -30,12 +30,12 @@ MATCH void func_801EEC5C(void) {
         g_Task->param.unk_0B += 1;
     }
     i   = 1;
-    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
-    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
+    dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW));
     for (; i < 16; i++) {
-        dst[i + AREA_PALETTE_UNIT / sizeof(u16)] = src[i + AREA_PALETTE_UNIT / sizeof(u16)] | 0x8000;
+        dst[i + AREA_PALETTE_UNIT / sizeof(u16)] = src[i + AREA_PALETTE_UNIT / sizeof(u16)] | PSX_COLOR_STP_BIT;
     }
-    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW + AREA_PALETTE_UNIT) = 0;
+    *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW) + AREA_PALETTE_UNIT) = 0;
 
     g_GfxPalettePending = 1;
     SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));

@@ -39,15 +39,15 @@ MATCH void BMagic_SpawnBurnFlames(void) {
         g_Task->param.unk_0B++;
     }
     i   = 1;
-    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
-    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
+    dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW));
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
     for (; i < 16; i++) {
-        dst[i]      = src[i] | 0x8000;
-        dst[i + 16] = src[i + 16] | 0x8000;
+        dst[i]      = src[i] | PSX_COLOR_STP_BIT;
+        dst[i + 16] = src[i + 16] | PSX_COLOR_STP_BIT;
     }
-    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW)        = 0;
-    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW + 0x20) = 0;
-    g_GfxPalettePending                                             = 1;
+    *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))        = 0;
+    *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW) + 0x20) = 0;
+    g_GfxPalettePending                                                      = 1;
     SND_QueueSelectionEffect(0x100);
     g_Task->unk_09 = 0;
     g_Task->header.mode += 1;

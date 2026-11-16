@@ -30,19 +30,19 @@ MATCH void func_801EEC94(void) {
     g_Task->param.unk_0B += 1;
     g_Task->param.unk_0B += 1;
     /* Copies arena palette rows 26 and 2 into the work copy with STP set, then restores the color 0 of each. */
-    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
-    src = MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
-    for (i = 0; i < 256; i++) {
-        dst[i] = src[i] | 0x8000;
+    dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW));
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
+    for (i = 0; i < AREA_PALETTE_COLORS; i++) {
+        dst[i] = src[i] | PSX_COLOR_STP_BIT;
     }
-    dst = MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW);
+    dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW));
     src = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
     for (i = 0; i < 16; i++) {
-        dst[i] = src[i] | 0x8000;
+        dst[i] = src[i] | PSX_COLOR_STP_BIT;
     }
-    g_GfxPalettePending                                      = 1;
-    *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW) = *MEM_PTR(u16, AREA_PALETTE_ARENA + 26 * AREA_PALETTE_ROW);
-    *MEM_PTR(u16, AREA_PALETTE_WORK + 2 * AREA_PALETTE_ROW)  = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
+    g_GfxPalettePending                                               = 1;
+    *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)) = *MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
+    *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW))   = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
     SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
 }
 
