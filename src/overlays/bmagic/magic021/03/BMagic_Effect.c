@@ -32,11 +32,7 @@ MATCH void func_801EED30(void) {
     u8            active;
     u32           i;
 
-    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
-        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
-    }
+    BMAGIC_CLEAR_EFFECTS(i);
     g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
     func_800AEF98(0xC, 2);

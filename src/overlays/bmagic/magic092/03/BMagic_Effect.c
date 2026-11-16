@@ -35,11 +35,7 @@ MATCH void func_801EED04(void) {
     u8  battler;
 
     count = 0;
-    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
-        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
-    }
+    BMAGIC_CLEAR_EFFECTS(i);
     g_Task->param.unk_0B = 0;
     if (g_Battle.target_selector & 0x40) {
         for (i = 0; i < 8; i++) {

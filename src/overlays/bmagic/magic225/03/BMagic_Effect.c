@@ -36,11 +36,7 @@ MATCH void func_801EED28(void) {
     u32          slot;
     PartyMember* work;
 
-    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
-        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
-        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
-    }
+    BMAGIC_CLEAR_EFFECTS(i);
     Battle_CenterCamera();
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 24;

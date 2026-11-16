@@ -186,6 +186,14 @@ static inline void BMagic_ResetLocalWork(void) {
     g_Task->unk_04       = 0;
 }
 
+/* Free every row of the image's effect slot table, counting with `i`. */
+#define BMAGIC_CLEAR_EFFECTS(i)                       \
+    for ((i) = 0; (i) < BMAGIC_EFFECT_COUNT; (i)++) { \
+        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;      \
+        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;      \
+        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;      \
+    }
+
 /* Run the task handler the spad task byte selects. */
 static inline void BMagic_DispatchTaskPair(Callback first, Callback second) {
     Callback handlers[2] = {first, second};
