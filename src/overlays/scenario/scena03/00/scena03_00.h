@@ -8,19 +8,19 @@
 #include "overlays/scenario/scenario.h"
 #include "engine/game/00/game_00.h"
 
-/* The line record func_801F88FC draws at +0x0C of the task row: five
- * halfwords it rotates and projects, then the line colour. */
+/* The line record func_801F88FC draws at +0x0C of the task row: the radius and the two angles of
+ * its direction, a scale and a colour multiplier for each end. */
 typedef struct Scena03Line {
-    s16       unk_00; /* +0x00 */
-    s16       unk_02; /* +0x02 */
-    s16       unk_04; /* +0x04 */
-    s16       unk_06; /* +0x06 */
-    s16       unk_08; /* +0x08 */
-    ColorRGB8 color;  /* +0x0A */
+    s16       radius;      /* +0x00 */
+    s16       yaw;         /* +0x02 */
+    s16       pitch;       /* +0x04 */
+    s16       start_scale; /* +0x06 */
+    s16       end_scale;   /* +0x08 */
+    ColorRGB8 color;       /* +0x0A */
 } Scena03Line;
 
 ASSERT_SIZE(Scena03Line, 0x0E);
-ASSERT_OFFSET(Scena03Line, unk_06, 0x06);
+ASSERT_OFFSET(Scena03Line, start_scale, 0x06);
 ASSERT_OFFSET(Scena03Line, color, 0x0A);
 
 /* The head of the task row this scene reads as its line record. */
@@ -64,7 +64,6 @@ extern s8       D_80144EA0;
 extern u8       D_801468E4[];
 extern u32      D_801F6C00;
 /* D_801FCF24 */
-extern Callback g_SceneEntityDispatch[];
 extern u8       D_801FCF30[];
 extern s16      D_801FCF40;
 extern s16      D_801FCF42;
@@ -79,7 +78,6 @@ extern Callback D_801FCFD4[];
 extern Callback D_801FCFE0[];
 
 /* D_801FD00C */
-extern SceneFunc g_SceneActorDispatch[];
 
 s32 func_801FC5A4(void);
 
