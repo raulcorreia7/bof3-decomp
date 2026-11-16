@@ -266,4 +266,7 @@ void Area_DrawSpawnSlot(AreaSpawnSlot* slot);
 void Area_EndTurn(void);
 u8   Area_StartTurn(s32 direction, s32 previous);
 
+/* func_801F4A34 (area104/14), func_801F4F78 (area121/14) */
+s32 Actor_FacingToward(s32 x, s32 y, u8 row);
+
 #endif
