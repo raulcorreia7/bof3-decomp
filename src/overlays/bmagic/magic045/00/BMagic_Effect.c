@@ -8,8 +8,7 @@ MATCH void func_801EEC04(void) {
     ACTOR_RUN_MODE_HANDLER(func_801EEC5C, func_801EEE58);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EEC5C(void) {
+MATCH void func_801EEC5C(void) {
     u8   first;
     u16* dst;
     u16* src;
@@ -29,9 +28,9 @@ NON_MATCHING void func_801EEC5C(void) {
         g_BattleEffects[first & BYTE_MASK].target.party = g_Task;
         g_BattleEffects[first & BYTE_MASK].header.mode  = 0;
         slot                                            = Battle_AllocEffect(1, 0x31) & BYTE_MASK;
+        g_BattleEffects[slot].target.party              = g_Task;
         g_BattleEffects[slot].unk_0B                    = first;
         g_BattleEffects[slot].header.mode               = 1;
-        g_BattleEffects[slot].target.party              = g_Task;
         g_GfxPalettePending                             = 1;
         first                                           = 0;
         dst                                             = MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW);
@@ -45,9 +44,6 @@ NON_MATCHING void func_801EEC5C(void) {
         g_Task->header.mode += 1;
     }
 }
-#else
-INCLUDE_ASM(func_801EEC5C);
-#endif
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
 
