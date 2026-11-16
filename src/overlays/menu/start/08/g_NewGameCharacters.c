@@ -1,5 +1,6 @@
 #include "start_08.h"
 
+// clang-format off
 /* The characters a new game starts with, by CharacterIndex: Party_InitDefaults (0x801D15C0) copies the first seven into
  * g_Characters and Whelp into its own slot. */
 Character g_NewGameCharacters[CHARACTER_COUNT] = {

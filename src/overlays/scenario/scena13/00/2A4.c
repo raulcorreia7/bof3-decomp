@@ -346,7 +346,22 @@ MATCH void func_801FB414(void) {
 
 INCLUDE_ASM(func_801FB464);
 
-INCLUDE_ASM(func_801FBA34);
+MATCH s32 func_801FBA34(s32 x, s32 y) {
+    if (LOHU(g_GameAreaId) == AREA_ID_DRAGNIER_SURFACE && D_80143F03 == 0 && SYS_TestFlag(g_SceneFlags, 0x1C) != 0 && SYS_TestFlag(g_SceneFlags, 0x1D) == 0 && (x >> 16) == 0x2E &&
+        (u32)((y >> 16) - 0x1F) < 4) {
+        Game_SetScriptActive();
+        g_SceneState.state_04 = 8;
+        g_SceneState.step_05  = 0;
+        return 1;
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_COLONY_OUTSIDE && D_80143F03 == 5 && SYS_TestFlag(g_SceneFlags, 0xA) == 0) {
+        if ((u32)((x >> 16) - 0x40) < 2 && (y >> 16) == 0x6A) {
+            SYS_SetFlag(g_SceneFlags, 0xA);
+            Area_SetCellPalette(0x40, 0x6B);
+        }
+    }
+    return 0;
+}
 
 MATCH void Scene_JoinPartyRyuAdultPecoMomo(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_PECO, 0);
