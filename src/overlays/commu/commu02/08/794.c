@@ -1866,31 +1866,25 @@ MATCH void func_801D7BE8(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D7C6C(void) {
+MATCH void func_801D7C6C(void) {
     s32 drawn;
-    s32 i;
-    s32 offset;
-    s32 x;
-    s32 y;
+    u32 i;
     u8  step;
 
     drawn      = 0;
     step       = D_801DB0C4 + 1;
     D_801DB0C4 = step;
-    Menu_DrawHeaderBar(0x14, (0x10 - ((step & BYTE_MASK) * 8)) & 0xFFF8, 0x118, 0x13, g_WindowStyle);
-    i      = 0;
-    offset = 0;
-    do {
-        if (((u8*)g_Characters)[offset + 7] & 1) {
-            y = (((drawn & BYTE_MASK) >> 1) * 0x38) + 0x30;
-            x = (((drawn & 1) == 0) ? 0x18 : 0xA8) - ((u8)D_801DB0C4 * 0x28);
-            func_801D90D8(x, y, D_801DB0C4 & BYTE_MASK, 0);
+    Menu_DrawHeaderBar(MENU_HEADER_X, (0x10 - step * 8) & 0xFFF8, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
+    for (i = 0; i < 7; i++) {
+        if (g_Characters[i].party_flags & PARTY_FLAG_JOINED) {
+            if ((drawn & 1) == 0) {
+                func_801D90D8(0x18 - D_801DB0C4 * 40, (((u8)drawn >> 1) * 0x38) + 0x30, (u8)i, 0);
+            } else {
+                func_801D90D8(D_801DB0C4 * 40 + 0xA8, (((u8)drawn >> 1) * 0x38) + 0x30, (u8)i, 0);
+            }
             drawn++;
         }
-        i++;
-        offset += sizeof(Character);
-    } while (i < 7);
+    }
     if (D_801DB0C4 == 4) {
         Message_StartAreaMessage(0xF7);
         g_GameStateIndex = GAME_REQUEST_MESSAGE;
@@ -1898,9 +1892,6 @@ NON_MATCHING void func_801D7C6C(void) {
         D_801F294D       = 0;
     }
 }
-#else
-INCLUDE_ASM(func_801D7C6C);
-#endif
 
 /* func_801D7DD4 */
 MATCH void Menu_StartFairyEndMessage(void) {
