@@ -35,7 +35,7 @@ NON_MATCHING void Party_RemoveMember(s32 character_id) {
             goto search1;
     found1:;
     }
-    g_PartyBattleOrder[slot] = 0xFF;
+    g_PartyBattleOrder[slot] = FORMATION_SLOT_EMPTY;
     if (slot < (s32)g_Game.party_size - 1) {
         cur  = &D_80144F5E[slot];
         prev = cur - 1;

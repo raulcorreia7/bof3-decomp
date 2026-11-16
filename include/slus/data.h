@@ -5,6 +5,7 @@
 #include "types.h"
 #include "common/util.h"
 #include "area/area.h"
+#include "scenario/party.h"
 
 /* Set: the battle end does not stop the BGM or the sound sequences. */
 #define BATTLE_OPT_KEEP_BGM 0x40
@@ -42,7 +43,8 @@ extern u8          g_PartyFormation;
  * character's special master was given. The master menu sets them, the start menu arms a choice
  * panel for each and the shop enables item classes 11, 13 and 14 from them. */
 extern u8          g_PartyMenuFlags;
-extern u8          g_PartyBattleOrder[];
+/* The battle order: one character id per party slot, FORMATION_SLOT_EMPTY for an empty one. */
+extern u8          g_PartyBattleOrder[PARTY_SLOT_COUNT];
 /* One bit per ability id: set once a party member has learned the ability, from a master or by watching an enemy. */
 extern u32         g_LearnedAbilities[BIT_ARRAY_WORDS(BYTE_VALUE_COUNT)];
 /* One bit per enemy kind byte: set once Identify has examined that kind. */
