@@ -9,6 +9,6 @@
 
 extern Callback D_801F3B44[];
 
-void func_801F2ED4(s32 arg0, s32 arg1);
+void func_801F2ED4(u16 radius, u16 color);
 
 #endif
