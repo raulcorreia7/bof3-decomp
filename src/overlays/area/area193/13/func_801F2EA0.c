@@ -5,8 +5,7 @@ MATCH void func_801F2EA0(void) {
         case 0:
             break;
         case 10:
-            Message_StartAreaMessage(0x1C);
-            g_GameStateIndex       = GAME_REQUEST_MESSAGE;
+            MESSAGE_START_WAIT(0x1C);
             g_SceneEventState.step = 0xB;
             break;
         case 12:
@@ -48,8 +47,7 @@ MATCH void func_801F2EA0(void) {
             break;
         case 20:
             if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-                Message_StartAreaMessage(SYS_TestFlag(&g_Scenario2Flags[0x60], 3) ? 0x25 : 0x20);
-                g_GameStateIndex       = GAME_REQUEST_MESSAGE;
+                MESSAGE_START_WAIT(SYS_TestFlag(&g_Scenario2Flags[0x60], 3) ? 0x25 : 0x20);
                 g_SceneEventState.step = 0x15;
             }
             break;

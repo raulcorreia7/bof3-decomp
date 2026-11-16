@@ -3,8 +3,7 @@
 MATCH void func_801F2D0C(void) {
     switch (g_SceneEventState.step) {
         case 10:
-            Message_StartAreaMessage(0x2D);
-            g_GameStateIndex       = GAME_REQUEST_MESSAGE;
+            MESSAGE_START_WAIT(0x2D);
             g_SceneEventState.step = 11;
             break;
         case 12:

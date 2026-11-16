@@ -35,9 +35,8 @@ MATCH void func_801F5E4C(void) {
                 } else {
                     message = 3;
                 }
-                Message_StartAreaMessage(message);
-                g_GameStateIndex = GAME_REQUEST_MESSAGE;
-                step             = &g_SceneEventStep;
+                MESSAGE_START_WAIT(message);
+                step = &g_SceneEventStep;
                 (*step)++;
             }
             break;

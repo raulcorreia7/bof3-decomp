@@ -22,8 +22,7 @@ MATCH void func_801F3B4C(void) {
             break;
         case 2:
             if (!WINDOW_EFFECT_BUSY()) {
-                Message_StartAreaMessage(1);
-                g_GameStateIndex       = GAME_REQUEST_MESSAGE;
+                MESSAGE_START_WAIT(1);
                 g_SceneEventState.step = 3;
             }
             break;
@@ -44,8 +43,7 @@ MATCH void func_801F3B4C(void) {
             }
             break;
         case 20:
-            Message_StartAreaMessage(2);
-            g_GameStateIndex       = GAME_REQUEST_MESSAGE;
+            MESSAGE_START_WAIT(2);
             g_SceneEventState.step = 0x15;
             break;
         case 21:

@@ -58,8 +58,7 @@ MATCH void Scene_StartShopSave(void) {
         case 10:
             id = g_SceneEventState.selection;
             if ((u8)id != GAME_NONE) {
-                Message_StartAreaMessage(id);
-                g_GameStateIndex = GAME_REQUEST_MESSAGE;
+                MESSAGE_START_WAIT(id);
             }
             g_SceneEventState.step = 11;
             break;

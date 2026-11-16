@@ -19,9 +19,8 @@ MATCH void func_801F390C(void) {
             return;
         case 2:
             if (WINDOW_EFFECT_IDLE()) {
-                Message_StartAreaMessage(1);
-                g_GameStateIndex = GAME_REQUEST_MESSAGE;
-                *state           = 3;
+                MESSAGE_START_WAIT(1);
+                *state = 3;
             }
             return;
         case 3:

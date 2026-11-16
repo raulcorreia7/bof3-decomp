@@ -7,8 +7,7 @@ MATCH void func_801F3264(void) {
         g_Task->tint.bytes.rgb.green += 6;
         g_Task->tint.bytes.rgb.blue += 6;
     } else {
-        Message_StartAreaMessage(31);
-        g_GameStateIndex    = GAME_REQUEST_MESSAGE;
+        MESSAGE_START_WAIT(31);
         g_Task->header.mode = 2;
     }
     Area_DrawScreenTint();

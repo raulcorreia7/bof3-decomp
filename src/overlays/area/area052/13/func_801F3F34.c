@@ -28,8 +28,7 @@ MATCH void func_801F3F34(void) {
             break;
 
         case 10:
-            Message_StartAreaMessage(57);
-            g_GameStateIndex       = GAME_REQUEST_MESSAGE;
+            MESSAGE_START_WAIT(57);
             g_SceneEventState.step = 11;
             break;
 
