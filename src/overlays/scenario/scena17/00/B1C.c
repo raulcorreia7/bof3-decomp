@@ -59,12 +59,12 @@ MATCH void func_801F78D8(void) {
 }
 
 MATCH void func_801F78E0(void) {
-    SYS_DISPATCH_BYTE(D_801F9758, (s8)D_80146874);
+    SYS_DISPATCH_BYTE(D_801F9758, (s8)g_SceneState.state_04);
     func_801F8EF0();
 }
 
 MATCH void func_801F7924(void) {
-    u8* step;
+    s8* step;
 
     if (g_UiWindowEffectBusy == 0) {
         g_AreaScrollTargetX = TO_COORD(176);
@@ -74,15 +74,15 @@ MATCH void func_801F7924(void) {
         SND_RequestBGM(0x96);
         UI_SetMode(UI_MODE_FADE_IN);
         func_801F88CC(0, 0x80);
-        step = &D_80146874;
+        step = &g_SceneState.state_04;
         *step += 1;
     }
 }
 
 MATCH void func_801F79AC(void) {
     if ((g_UiWindowEffectBusy == 0) && (EMI_IsReady() != 0)) {
-        D_80146875 = 0x5A;
-        D_80146874 += 1;
+        g_SceneState.step_05 = 0x5A;
+        g_SceneState.state_04 += 1;
     }
     func_801F88CC(0, 0x80);
 }
@@ -90,12 +90,12 @@ MATCH void func_801F79AC(void) {
 MATCH void func_801F7A08(void) {
     u8* timer;
 
-    timer = &D_80146875;
+    timer = &g_SceneState.step_05;
     *timer -= 1;
     if (*timer == 0) {
         SND_PlayBGM(0x96, 0x64, 0x8);
         *timer = 30;
-        D_80146874 += 1;
+        g_SceneState.state_04 += 1;
     }
     func_801F88CC(0, 0x80);
 }
@@ -104,17 +104,17 @@ MATCH void func_801F7A84(void) {
     u8* timer;
     u8  count;
 
-    timer  = &D_80146875;
+    timer  = &g_SceneState.step_05;
     count  = *timer - 1;
     *timer = count;
     if (count == 0) {
-        g_AreaScrollTargetX  = TO_COORD(148);
-        g_AreaCameraStep     = 0x20;
-        *timer               = 128;
-        g_AreaCameraAngle.vx = -0x16A;
-        g_AreaCameraAngle.vz = 512;
-        g_AreaDrawFlags      = AREA_DRAW_ALL_FLAGS;
-        D_80146874           = D_80146874 + 1;
+        g_AreaScrollTargetX   = TO_COORD(148);
+        g_AreaCameraStep      = 0x20;
+        *timer                = 128;
+        g_AreaCameraAngle.vx  = -0x16A;
+        g_AreaCameraAngle.vz  = 512;
+        g_AreaDrawFlags       = AREA_DRAW_ALL_FLAGS;
+        g_SceneState.state_04 = g_SceneState.state_04 + 1;
     }
     func_801F88CC(0, 0x80);
 }
@@ -122,30 +122,30 @@ MATCH void func_801F7A84(void) {
 MATCH void func_801F7B20(void) {
     u8* timer;
 
-    timer = &D_80146875;
+    timer = &g_SceneState.step_05;
     *timer -= 1;
     func_801F88CC(1, *timer);
     if (*timer == 0) {
-        D_80146874 += 1;
+        g_SceneState.state_04 += 1;
     }
 }
 
 MATCH void func_801F7B88(void) {
-    u8* step;
+    s8* step;
 
     if (!g_AreaCameraMoving) {
-        step                = &D_80146874;
+        step                = &g_SceneState.state_04;
         g_AreaScrollTargetX = TO_COORD(140);
         *step += 1;
     }
 }
 
 MATCH void func_801F7BC0(void) {
-    u8* step;
+    s8* step;
 
     g_AreaCameraAngle.vx -= 5;
     if (g_AreaCameraMoving == 0) {
-        step                = &D_80146874;
+        step                = &g_SceneState.state_04;
         g_AreaScrollTargetX = TO_COORD(84);
         D_80146867          = 0xA;
         *step += 1;
@@ -153,10 +153,10 @@ MATCH void func_801F7BC0(void) {
 }
 
 MATCH void func_801F7C14(void) {
-    u8* step;
+    s8* step;
 
     if (g_AreaCameraMoving == 0 && D_80146867 == 0x14) {
-        step                = &D_80146874;
+        step                = &g_SceneState.state_04;
         g_AreaCameraStep    = 0x10;
         g_AreaScrollTargetX = TO_COORD(60);
         *step += 1;
@@ -164,11 +164,11 @@ MATCH void func_801F7C14(void) {
 }
 
 MATCH void func_801F7C6C(void) {
-    u8* step;
+    s8* step;
 
     if (g_AreaCameraMoving == 0) {
         Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
-        step                = &D_80146874;
+        step                = &g_SceneState.state_04;
         g_AreaScrollTargetX = TO_COORD(46);
         *step += 1;
     } else if (g_FrameCount & 0x1) {
@@ -177,16 +177,16 @@ MATCH void func_801F7C6C(void) {
 }
 
 /* The script counter is read and written through one materialized address (a0), so the increment
- * store lands in the jump's delay slot; a direct D_80146874 += 1 reloads the address per access. */
+ * store lands in the jump's delay slot; a direct g_SceneState.state_04 += 1 reloads the address per access. */
 MATCH void func_801F7D08(void) {
     s32 height;
-    u8* step;
+    s8* step;
 
     if (g_AreaCameraMoving == 0) {
         Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
         g_AreaScrollTargetX    = TO_COORD(38);
         g_AreaCameraHeightStep = ((Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight) / 128);
-        step                   = &D_80146874;
+        step                   = &g_SceneState.state_04;
         g_AreaSceneMode        = 1;
         *step                  = *step + 1;
         return;
@@ -199,11 +199,11 @@ MATCH void func_801F7D08(void) {
 }
 
 MATCH void func_801F7DF4(void) {
-    u8* state;
+    s8* state;
 
     if (g_AreaCameraMoving == 0) {
         Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
-        state                  = &D_80146874;
+        state                  = &g_SceneState.state_04;
         g_AreaCameraStep       = 0x10;
         g_AreaScrollTargetX    = TO_COORD(25);
         g_AreaCameraHeightStep = 0;
@@ -215,10 +215,10 @@ MATCH void func_801F7DF4(void) {
 }
 
 MATCH void func_801F7E9C(void) {
-    u8* step;
+    s8* step;
 
     if (g_AreaCameraMoving == 0) {
-        step            = &D_80146874;
+        step            = &g_SceneState.state_04;
         g_AreaSceneMode = 2;
         *step           = *step + 1;
     } else {
@@ -230,10 +230,10 @@ MATCH void func_801F7E9C(void) {
 }
 
 MATCH void func_801F7F04(void) {
-    u8* step;
+    s8* step;
 
     if (D_80146867 == 0x64) {
-        step            = &D_80146874;
+        step            = &g_SceneState.state_04;
         g_AreaSceneMode = 3;
         *step += 1;
     }
@@ -245,8 +245,8 @@ MATCH void func_801F7F3C(void) {
     height             = g_AreaCameraHeight + 0x10;
     g_AreaCameraHeight = height;
     if (height >= 3265U) {
-        D_80146875 = 0xF;
-        D_80146874 += 1;
+        g_SceneState.step_05 = 0xF;
+        g_SceneState.state_04 += 1;
     }
     g_AreaCameraRefreshCount = 2;
 }
@@ -255,12 +255,12 @@ MATCH void func_801F7F94(void) {
     u8* timer;
     u8  count;
 
-    timer  = &D_80146875;
+    timer  = &g_SceneState.step_05;
     count  = *timer - 1;
     *timer = count;
     if (count == 0) {
         UI_SetMode(UI_MODE_LONG_FADE_OUT);
-        D_80146874 = D_80146874 + 1;
+        g_SceneState.state_04 = g_SceneState.state_04 + 1;
     }
 }
 
@@ -273,26 +273,26 @@ MATCH void func_801F7FF0(void) {
         bgm = &g_SndBGMId;
         row = *bgm * 4;
         SND_StopSequence(g_SelectionCues[row], g_SelectionSequences[row]);
-        stage           = &D_80146873;
-        *bgm            = 0xFF;
-        g_AreaDrawFlags = 0;
-        g_AreaSceneMode = 6;
-        D_80146874      = 0;
-        *stage          = *stage + 1;
+        stage                 = &D_80146873;
+        *bgm                  = 0xFF;
+        g_AreaDrawFlags       = 0;
+        g_AreaSceneMode       = 6;
+        g_SceneState.state_04 = 0;
+        *stage                = *stage + 1;
     }
 }
 
 MATCH void func_801F8088(void) {
-    SYS_DISPATCH_BYTE(D_801F9798, (s8)D_80146874);
+    SYS_DISPATCH_BYTE(D_801F9798, (s8)g_SceneState.state_04);
     func_801F8EF0();
 }
 
 /* func_801F80CC */
 MATCH void Scene_StartEndingXa(void) {
-    u8* step;
+    s8* step;
 
     SND_StartXAStream(8, 1);
-    step               = &D_80146874;
+    step               = &g_SceneState.state_04;
     g_EndingRollLine   = 0;
     g_EndingRollScroll = 0;
     *step += 1;
@@ -301,12 +301,12 @@ MATCH void Scene_StartEndingXa(void) {
 /* func_801F8110 */
 MATCH void Scene_WaitEndingXa(void) {
     u8  ready;
-    u8* step;
+    s8* step;
 
     ready = Scene_UpdateEndingRoll();
     if ((u8)SND_IsXAIdle() && ready) {
         UI_SetMode(UI_MODE_LONG_FADE_OUT);
-        step  = &D_80146874;
+        step  = &g_SceneState.state_04;
         *step = *step + 1;
     }
 }
@@ -315,9 +315,9 @@ MATCH void func_801F8170(void) {
     s8* stage;
 
     if (g_UiWindowEffectBusy == 0) {
-        stage      = &D_80146873;
-        D_80146874 = 0;
-        *stage     = *stage + 1;
+        stage                 = &D_80146873;
+        g_SceneState.state_04 = 0;
+        *stage                = *stage + 1;
     } else {
         Scene_UpdateEndingRoll();
     }
@@ -330,7 +330,7 @@ MATCH void func_801F81BC(void) {
 MATCH void func_801F81F8(void) {
     /* FAKE: the two words size the frame like retail. */
     s32 unused[2];
-    u8* step;
+    s8* step;
 
     g_AreaScrollTargetX = TO_COORD(37) + COORD_HALF;
     g_AreaScrollTargetY = TO_COORD(27);
@@ -339,14 +339,14 @@ MATCH void func_801F81F8(void) {
     SYS_ThreadWait(1);
     g_AreaDrawFlags = 0x1F;
     SND_PlayBGM(0xA0, 0x64, 0x8);
-    step = &D_80146874;
+    step = &g_SceneState.state_04;
     *step += 1;
 }
 
 MATCH void func_801F8274(void) {
     if (g_UiWindowEffectBusy == 0) {
-        D_80146875 = 0;
-        D_80146874 += 1;
+        g_SceneState.step_05 = 0;
+        g_SceneState.state_04 += 1;
     }
     func_801F8B10(0, 0xFF);
 }
@@ -355,12 +355,12 @@ MATCH void func_801F82C0(void) {
     u8* timer;
     u8  value;
 
-    timer  = &D_80146875;
+    timer  = &g_SceneState.step_05;
     value  = *timer + 1;
     *timer = value;
     if (value == 50) {
         *timer = 150;
-        D_80146874 += 1;
+        g_SceneState.state_04 += 1;
         func_801F8B10(0x1F4, 0xFF);
     } else {
         func_801F8B10(value * 10, 0xFF);
@@ -370,11 +370,11 @@ MATCH void func_801F82C0(void) {
 MATCH void func_801F833C(void) {
     u8* timer;
 
-    timer = &D_80146875;
+    timer = &g_SceneState.step_05;
     *timer -= 1;
     if (*timer == 0) {
         D_80146867 = 0x6E;
-        D_80146874 += 1;
+        g_SceneState.state_04 += 1;
         *timer = 70;
     }
     func_801F8B10(0x1F4, 0xFF);
@@ -384,11 +384,11 @@ MATCH void func_801F83A8(void) {
     u8* timer;
     u8  count;
 
-    timer  = &D_80146875;
+    timer  = &g_SceneState.step_05;
     count  = *timer - 1;
     *timer = count;
     if (count == 0) {
-        D_80146874 = D_80146874 + 1;
+        g_SceneState.state_04 = g_SceneState.state_04 + 1;
     }
     func_801F8B10(0x1F4, 0xFF);
 }
@@ -397,12 +397,12 @@ MATCH void func_801F8404(void) {
     u8* timer;
     u8  value;
 
-    timer  = &D_80146875;
+    timer  = &g_SceneState.step_05;
     value  = *timer + 2;
     *timer = value;
     if (value >= 0x46) {
         *timer = 0;
-        D_80146874 += 1;
+        g_SceneState.state_04 += 1;
         func_801F8B10(0x4B0, 0xFF);
     } else {
         func_801F8B10(value * 10 + 0x1F4, 0xFF);
@@ -413,12 +413,12 @@ MATCH void func_801F8480(void) {
     u8* timer;
     u32 value;
 
-    timer  = &D_80146875;
+    timer  = &g_SceneState.step_05;
     value  = *timer + 2;
     *timer = value;
     if ((u8)value >= 127) {
         *timer = 0;
-        D_80146874 += 1;
+        g_SceneState.state_04 += 1;
         func_801F8B10(0x4B0, 0x80);
     } else {
         func_801F8B10(0x4B0, (u8)~value);
@@ -429,14 +429,14 @@ MATCH void func_801F84F4(void) {
     u8* timer;
     u8  value;
 
-    timer  = &D_80146875;
+    timer  = &g_SceneState.step_05;
     value  = *timer + 1;
     *timer = value;
     if (value >= 128) {
         D_80146867 = 0x3C;
         *timer     = 30;
         D_801F9DD8 = 0;
-        D_80146874 += 1;
+        g_SceneState.state_04 += 1;
         EMI_LoadArchive(0x260);
         func_801F8FAC(0xE0, 0xBE, 0x80, 1);
     } else {
@@ -453,13 +453,13 @@ MATCH void func_801F8594(void) {
         D_801F9DD8 = 1;
     }
     if (EMI_IsReady() != 0) {
-        timer = &D_80146875;
+        timer = &g_SceneState.step_05;
         *timer -= 1;
         if (*timer == 0) {
             count = &D_80146867;
             *count -= 1;
             if (*count == 0) {
-                D_80146874 += 1;
+                g_SceneState.state_04 += 1;
             } else {
                 *timer = 30;
             }
@@ -470,12 +470,12 @@ MATCH void func_801F8594(void) {
 }
 
 MATCH void func_801F8664(void) {
-    u8* state;
+    s8* state;
 
     if ((g_InputPressed & PADRdown) || D_801F9DD8 != 0) {
         SND_StartDecrescendo(g_SelectionCues[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4], 100, 16);
         UI_SetMode(UI_MODE_LONG_FADE_OUT);
-        state = &D_80146874;
+        state = &g_SceneState.state_04;
         (*state)++;
     }
     func_801F8B10(0x4B0, 0x80);
@@ -483,7 +483,7 @@ MATCH void func_801F8664(void) {
 }
 
 MATCH void func_801F8710(void) {
-    u8* state;
+    s8* state;
     u8* bgm;
 
     if (g_UiWindowEffectBusy == 0) {
@@ -494,7 +494,7 @@ MATCH void func_801F8710(void) {
         g_AreaDrawFlags = 0;
         Message_StartAreaMessage(1);
         g_GameStateIndex = GAME_REQUEST_MESSAGE;
-        state            = &D_80146874;
+        state            = &g_SceneState.state_04;
         (*state)++;
     }
     func_801F8B10(0x4B0, 0x80);
@@ -503,8 +503,8 @@ MATCH void func_801F8710(void) {
 
 MATCH void func_801F87D0(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-        if (D_80146875 == 0) {
-            D_80146874 += 1;
+        if (g_SceneState.step_05 == 0) {
+            g_SceneState.state_04 += 1;
             return;
         }
         SND_Exit();
@@ -778,8 +778,8 @@ MATCH void Scene_EnterSaveMenu(void) {
     D_8014865C                    = -2;
     g_Game.members[0].pos.y.fixed = TO_COORD_HALF(33);
     D_80146873                    = 0;
-    D_80146874                    = 0;
-    D_80146875                    = 0;
+    g_SceneState.state_04         = 0;
+    g_SceneState.step_05          = 0;
     g_MenuStep.step               = 0;
     D_80148698                    = 1;
     D_80148699                    = 0;
