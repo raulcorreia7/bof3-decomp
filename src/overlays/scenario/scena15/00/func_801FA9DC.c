@@ -18,7 +18,7 @@ MATCH void func_801FA9DC(void) {
                 u8* flags;
 
                 SYS_SetFlag(D_80144EF8, 1);
-                func_8019FA28(0xBD, 0x10000000, 0x14000000, 2);
+                func_8019FA28(0xBD, TO_COORD(0x1000), TO_COORD(0x1400), 2);
                 flags                = &g_SceneState.flags_01;
                 D_8014504B           = 2;
                 D_80144F54           = 0;
