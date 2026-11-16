@@ -108,32 +108,33 @@ MATCH void func_801EF300(void) {
 
     count          = g_Task->unk_09 + 1;
     g_Task->unk_09 = count;
-    if (count == 16) {
-        if ((g_Task->param.unk_0B & 1) != 0) {
-            g_Task->unk_0C = -TO_COORD(2);
-            g_Task->unk_10 = -TO_COORD(1);
-        } else {
-            g_Task->unk_0C = -TO_COORD(2);
-            g_Task->unk_10 = TO_COORD(1);
-        }
-        func_801DD350(g_Task);
-        g_Task->pos.x.fixed = g_Battle.selected_actor->pos.x.fixed + g_Task->unk_0C;
-        g_Task->pos.y.fixed = g_Battle.selected_actor->pos.y.fixed + g_Task->unk_10;
-        g_Task->pos.z.fixed = g_Battle.selected_actor->pos.z.fixed;
-        if ((g_Task->param.unk_0B & 1) != 0) {
-            g_Task->unk_0C = 0;
-            g_Task->unk_10 = ONE;
-        } else {
-            g_Task->unk_0C = 0;
-            g_Task->unk_10 = -ONE;
-        }
-        func_801DD350(g_Task);
-        if (g_Task->param.unk_0B == 0) {
-            SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
-        }
-        g_Task->unk_09 = 16;
-        g_Task->header.step += 1;
+    if ((count & BYTE_MASK) != 0x10) {
+        return;
     }
+    if ((g_Task->param.unk_0B & 1) != 0) {
+        g_Task->unk_0C = -0x20000;
+        g_Task->unk_10 = -0x10000;
+    } else {
+        g_Task->unk_0C = -0x20000;
+        g_Task->unk_10 = 0x10000;
+    }
+    func_801DD350(g_Task);
+    g_Task->pos.x.fixed = g_Battle.selected_actor->pos.x.fixed + g_Task->unk_0C;
+    g_Task->pos.y.fixed = g_Battle.selected_actor->pos.y.fixed + g_Task->unk_10;
+    g_Task->pos.z.fixed = g_Battle.selected_actor->pos.z.fixed;
+    if ((g_Task->param.unk_0B & 1) != 0) {
+        g_Task->unk_0C = 0;
+        g_Task->unk_10 = 0x1000;
+    } else {
+        g_Task->unk_0C = 0;
+        g_Task->unk_10 = -0x1000;
+    }
+    func_801DD350(g_Task);
+    if (g_Task->param.unk_0B == 0) {
+        SND_QueueSelectionEffect(0x101);
+    }
+    g_Task->unk_09 = 0x10;
+    g_Task->header.step += 1;
 }
 
 MATCH void func_801EF460(void) {
