@@ -537,8 +537,7 @@ NON_MATCHING void func_801F88CC(u8 semi, s32 color) {
 
     if (semi != 0) {
         tpage = getTPage(2, 2, 704, 0);
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-        GFX_AddPrim(2, sizeof(DR_MODE));
+        GFX_ADD_LAYER_DRAW_MODE(2, tpage);
         tile = (TILE*)g_GfxPrimCursor;
         setlen(tile, 3);
         setcode(tile, 0x60);
@@ -551,8 +550,7 @@ NON_MATCHING void func_801F88CC(u8 semi, s32 color) {
         GFX_AddPrim(2, sizeof(TILE));
     }
     tpage = getTPage(2, 1, 704, 0);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_LAYER_DRAW_MODE(2, tpage);
     sprite = (SPRT*)g_GfxPrimCursor;
     setSprt(sprite);
     SetSemiTrans(sprite, semi);
@@ -563,8 +561,7 @@ NON_MATCHING void func_801F88CC(u8 semi, s32 color) {
     setRGB0(sprite, color, color, color);
     GFX_AddPrim(2, sizeof(SPRT));
     tpage = getTPage(2, 1, 960, 0);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_LAYER_DRAW_MODE(2, tpage);
     sprite = (SPRT*)g_GfxPrimCursor;
     setSprt(sprite);
     SetSemiTrans(sprite, semi);
@@ -609,8 +606,7 @@ NON_MATCHING void func_801F8B10(s32 scale, s32 shade) {
     SetRotMatrix(&mtx);
     SetTransMatrix(&mtx);
     mode = getTPage(0, 2, 0, 0);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mode, NULL);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(2, mode);
     for (i = 0; i < 32;) {
         a                = i << 7;
         D_1F800014[0].vx = 0;
@@ -688,8 +684,7 @@ MATCH void func_801F8FAC(s32 x, s32 y, s32 color, u8 semi_trans) {
         return;
     }
     tpage = getTPage(1, 1, 832, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_LAYER_DRAW_MODE(2, tpage);
     sprite = (SPRT*)g_GfxPrimCursor;
     setSprt(sprite);
     SetSemiTrans(sprite, semi_trans);
@@ -741,8 +736,7 @@ MATCH void Scene_DrawEndingRollLine(s16 x, s16 y, u8* text) {
 
     color = 0;
     tpage = getTPage(0, 1, 960, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_ADD_DRAW_MODE(tpage);
     while (*text != 0) {
         switch (*text) {
             case '!':

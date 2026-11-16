@@ -207,8 +207,7 @@ MATCH void func_801F7DCC(s32 red, s32 green, s32 blue) {
     s32      tpage;
 
     tpage = getTPage(1, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(7, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(7, tpage);
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     setXY4(prim, 0, 0, SCREEN_WIDTH - 1, 0, 0, SCREEN_HEIGHT - 1, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);

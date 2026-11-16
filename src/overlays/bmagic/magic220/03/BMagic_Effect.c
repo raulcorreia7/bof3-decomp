@@ -220,8 +220,7 @@ MATCH void func_801EF9F0(void) {
     s32      tpage;
 
     tpage = getTPage(0, 2, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     D_1F800000.cells.halves[0] = g_Task->param.unk_0B;
     D_1F800000.cells.halves[5] = LOB(g_Task->unk_5D) * 4;
     setVector(&D_1F800014[2], FIXED_MUL(rsin(0), D_1F800000.cells.halves[0]), FIXED_MUL(rcos(0), D_1F800000.cells.halves[0]), 0);

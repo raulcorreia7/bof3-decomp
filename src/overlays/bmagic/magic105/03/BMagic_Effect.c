@@ -286,8 +286,7 @@ MATCH void func_801EFCF0(void) {
     }
     for (; count != 0; count--) {
         tpage = getTPage(g_Task->unk_28 != 0, g_Task->unk_5C, 832, 256);
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-        GFX_AddPrim((u8)g_Task->unk_29, sizeof(DR_MODE));
+        GFX_ADD_LAYER_DRAW_MODE((u8)g_Task->unk_29, tpage);
         prim = (SPRT*)g_GfxPrimCursor;
         SetSprt(prim);
         setWH(prim, D_801F0080[cell[0] & 0xF][0], D_801F0080[cell[0] & 0xF][1]);

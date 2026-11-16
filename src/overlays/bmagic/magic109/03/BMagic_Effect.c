@@ -167,8 +167,7 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
     GFX_AddPrim(3U, sizeof(DR_MOVE));
     /* The mesh's page at VRAM (832, 256), in the encoding the current graph type reads. */
     mesh_tpage = getTPage(2, 0, 832, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mesh_tpage, NULL);
-    GFX_AddPrim(3U, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3U, mesh_tpage);
     for (segment = 0; segment < 16; segment++) {
         rim_angle             = segment << 8;
         D_801EF9F8[segment].x = FIXED_MUL(rsin(rim_angle), g_Task->unk_09);

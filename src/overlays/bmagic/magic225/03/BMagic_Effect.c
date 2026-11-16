@@ -240,8 +240,7 @@ MATCH void func_801EF7D4(s32 x, s32 y, s32 radius, s32 color) {
     s32      i;
 
     tpage = getTPage(0, 2, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim((u8)g_Task->unk_29, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE((u8)g_Task->unk_29, tpage);
     D_1F800000_WORD[0] = (s16)radius;
     D_1F800000_WORD[1] = (s16)radius + (s16)radius / 2;
     D_1F800000_WORD[3] = g_Task->unk_09 * 4;
@@ -277,8 +276,7 @@ MATCH void func_801EFCA0(void) {
     volatile s32* shade;
 
     tpage = getTPage(0, g_Task->param.unk_0B, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim((u8)g_Task->unk_29, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE((u8)g_Task->unk_29, tpage);
     prim = (POLY_F4*)g_GfxPrimCursor;
     SetPolyF4(prim);
     SetSemiTrans(prim, g_Task->param.unk_0B);

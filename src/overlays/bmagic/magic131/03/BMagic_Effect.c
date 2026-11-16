@@ -14,8 +14,7 @@ MATCH void func_801EEC24(void) {
     __builtin_memcpy(handlers, D_801EEC04, sizeof(handlers));
     SYS_DISPATCH_BYTE(handlers, g_Task->header.mode);
     tpage = getTPage(0, 2, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
     for (i = 0; i < ARRAY_COUNT(D_801F1CA0); i++) {
         if (D_801F1CA0[i].header.flags & BMAGIC_EFFECT_IN_USE) {
             saved_battler         = g_BattleEffectBattler;
@@ -26,8 +25,7 @@ MATCH void func_801EEC24(void) {
         }
     }
     tpage = getTPage(0, 0, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
 }
 
 MATCH void func_801EEDEC(void) {
@@ -552,8 +550,7 @@ MATCH void func_801F0DF4(void) {
     s32       u;
 
     tpage = getTPage(0, g_Task->param.unk_0B, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     D_1F800000.cells.halves[0] = g_Task->unk_14;
     D_1F800000.cells.halves[4] = g_Task->unk_09 << 3;
     D_1F800000.cells.halves[5] = g_Task->unk_09 << 3;

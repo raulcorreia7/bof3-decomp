@@ -374,8 +374,7 @@ MATCH void func_801F0274(void) {
     u8           enemy;
 
     tpage = getTPage(0, 1, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
     for (j = 0; j < 3; j++) {
         for (i = 0; i < 8; i++) {
             enemy = i;
@@ -494,8 +493,7 @@ NON_MATCHING void func_801F0974(void) {
 
     D_1F800000.cells.halves[0] = (g_FrameCount & 0x3F) + 0x100;
     tpage                      = getTPage(1, 2, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     prim             = GFX_BeginPolyG3(1);
     D_1F800014[0].vx = 0;
     D_1F800014[0].vy = 0;

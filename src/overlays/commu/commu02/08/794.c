@@ -1983,8 +1983,7 @@ MATCH void func_801D875C(s16 x, s16 y, s32 index) {
     } else {
         tpage = 0x1E;
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_ADD_DRAW_MODE(tpage);
     sprt = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprt);
     sprt->x0   = x;
@@ -2400,8 +2399,7 @@ NON_MATCHING void func_801D97C8(s32 unused, s32 x, s32 y) {
     } else {
         tpage = 0x2F;
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_ADD_DRAW_MODE(tpage);
 
     clut = GetClut(0x30, 0x1E0);
     Menu_DrawPanelIcon((s16)(left + 0x0E), (s16)(y + 6), 0x1D, 0, clut, 0x7F);

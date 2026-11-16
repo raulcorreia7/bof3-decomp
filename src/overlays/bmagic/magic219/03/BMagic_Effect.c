@@ -224,8 +224,7 @@ MATCH void func_801EF71C(void) {
     s32      tpage;
 
     tpage = getTPage(0, 2, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
     MAGIC219_RING_RADIUS = g_Task->timer << 4;
     setVector(&D_1F800014[2], FIXED_MUL(rsin(0), MAGIC219_RING_RADIUS), FIXED_MUL(rcos(0), MAGIC219_RING_RADIUS), 0);
     D_1F800014[1].vz = 0;
