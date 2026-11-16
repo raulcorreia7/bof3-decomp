@@ -37,7 +37,7 @@ MATCH void func_801E05EC(void) {
 
         /* FAKE: volatile byte view keeps the reload separate from the branch
          * test load. */
-        countdown         = VOL(u8, work->timer);
+        countdown         = FAKE_VOLATILE(u8, work->timer);
         position_x        = work->pos.x.fixed;
         delta_x           = work->unk_0C;
         position_y        = work->pos.y.fixed;

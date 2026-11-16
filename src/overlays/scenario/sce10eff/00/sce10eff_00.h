@@ -19,26 +19,26 @@
  * bare statement macro: the member declares `work`, `counter`, `angle`,
  * `angle_cell` and `velocity`. Kept: as an inline the frame shrinks 4 bytes
  * (ra at 16(sp), retail 20(sp)); the do/while form moves bytes. */
-#define SCENE_PROJECT_ORBIT_STEP(depth)                            \
-    g_Task->ticker++;                                              \
-                                                                   \
-    work                          = g_Task;                        \
-    counter                       = work->orbit_counter + 1;       \
-    VOL(s32, work->orbit_counter) = counter;                       \
-    angle                         = SCE10EFF_ORBIT_ANGLE(counter); \
-    angle_cell                    = &D_1F800004;                   \
-    *angle_cell                   = angle;                         \
-    g_ScratchPad                  = (depth);                       \
-                                                                   \
-    velocity     = rcos(angle) * g_ScratchPad;                     \
-    work         = g_Task;                                         \
-    work->proj.x = D_801D2744->proj.x + velocity;                  \
-                                                                   \
-    velocity       = rsin(*angle_cell) * g_ScratchPad;             \
-    g_Task->proj.y = D_801D2744->proj.y + velocity;                \
-                                                                   \
-    if (TIMER_EXPIRED(g_Task->timer)) {                            \
-        g_Task->step_index++;                                      \
+#define SCENE_PROJECT_ORBIT_STEP(depth)                                      \
+    g_Task->ticker++;                                                        \
+                                                                             \
+    work                                    = g_Task;                        \
+    counter                                 = work->orbit_counter + 1;       \
+    FAKE_VOLATILE(s32, work->orbit_counter) = counter;                       \
+    angle                                   = SCE10EFF_ORBIT_ANGLE(counter); \
+    angle_cell                              = &D_1F800004;                   \
+    *angle_cell                             = angle;                         \
+    g_ScratchPad                            = (depth);                       \
+                                                                             \
+    velocity     = rcos(angle) * g_ScratchPad;                               \
+    work         = g_Task;                                                   \
+    work->proj.x = D_801D2744->proj.x + velocity;                            \
+                                                                             \
+    velocity       = rsin(*angle_cell) * g_ScratchPad;                       \
+    g_Task->proj.y = D_801D2744->proj.y + velocity;                          \
+                                                                             \
+    if (TIMER_EXPIRED(g_Task->timer)) {                                      \
+        g_Task->step_index++;                                                \
     }
 
 /* Projected scenario bands: func_801D0FAC draws at the source origin;

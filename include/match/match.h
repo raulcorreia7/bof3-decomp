@@ -32,9 +32,9 @@
  *   3. adjust temporary lifetimes and declaration order;
  *   4. correct casts and expression grouping;
  *   5. match compiler/version/flags per translation unit (build description);
- *   6. FAKE_VOLATILE_PTR when it affects required codegen;
+ *   6. FAKE_VOLATILE and FAKE_VOLATILE_PTR when it affects required codegen;
  *   7. FAKE_BARRIER, FAKE_ORDER_*, FAKE_STACK_PADS, FAKE_HOLD;
- *   8. FAKE_REG, FAKE_OPAQUE, FAKE_USE, FAKE_CLOBBER_*;
+ *   8. FAKE_REG, FAKE_OPAQUE, FAKE_USE, FAKE_CLOBBER;
  *   9. inline ASM as the final escape hatch.
  *
  * The whole vocabulary is gated by MATCHING: live in the canonical matching
@@ -59,6 +59,9 @@
  * the reload, without declaring a volatile object or local. */
 #define FAKE_VOLATILE_PTR(type, expr) (volatile type*)(expr)
 
+/* Volatile access to an existing object. */
+#define FAKE_VOLATILE(type, x)        (*FAKE_VOLATILE_PTR(type, &(x)))
+
 /* Register-level operand constraints. FAKE_OPAQUE hides x's value from the
  * optimizer (it may have changed), so the compiler keeps x in a register;
  * FAKE_USE forces x live in a register at this point. */
@@ -69,6 +72,7 @@
 #define FAKE_BARRIER()
 #define FAKE_REG(type, name, reg)     type name
 #define FAKE_VOLATILE_PTR(type, expr) (type*)(expr)
+#define FAKE_VOLATILE(type, x)        (*(type*)&(x))
 #define FAKE_OPAQUE(x)
 #define FAKE_USE(x)
 #endif
@@ -84,40 +88,18 @@
  * adjacent FAKE: note with the best pure-C match % and the rewrites tried. */
 #define FAKE_HOLD(name, value)   name = (value)
 
-/* Volatile access to an existing object. */
-#define VOL(type, x)             (*(volatile type*)&(x))
-
 /*
  * Register-clobber barriers for MIPS delay-slot ordering.
  *
  * These constrain caller-register scheduling for a C-generated instruction,
  * including jal/branch delay-slot placement and fixed-address reload ordering.
  * They do not emit or select an opcode; use them only after the disassembly diff
- * shows the required register and placement. One macro per register in use.
+ * shows the required register and placement. `reg` is a GCC MIPS register name: FAKE_CLOBBER("a1").
  */
 #if defined(__GNUC__) && defined(MATCHING)
-#define FAKE_CLOBBER_A1() __asm__ __volatile__("" : : : "a1")
-#define FAKE_CLOBBER_A2() __asm__ __volatile__("" : : : "a2")
-#define FAKE_CLOBBER_A3() __asm__ __volatile__("" : : : "a3")
+#define FAKE_CLOBBER(reg) __asm__ __volatile__("" : : : reg)
 #else
-#define FAKE_CLOBBER_A1()
-#define FAKE_CLOBBER_A2()
-#define FAKE_CLOBBER_A3()
-#endif
-
-/*
- * Basic-block boundary that holds one statement in place in the instruction
- * schedule. Use ONLY when the byte diff proves the scheduler reorders that
- * statement against a neighbor without it. Pure textual expansion, identical
- * to the literal do/while spelling; every use must still pass the byte check.
- */
-#if defined(MATCHING)
-#define FAKE_ORDER_LOCK(stmt) \
-    do {                      \
-        stmt;                 \
-    } while (0)
-#else
-#define FAKE_ORDER_LOCK(stmt) stmt
+#define FAKE_CLOBBER(reg)
 #endif
 
 /*
@@ -134,6 +116,21 @@
 #else
 #define FAKE_ORDER_LOCK_BEGIN {
 #define FAKE_ORDER_LOCK_END   }
+#endif
+
+/*
+ * Basic-block boundary that holds one statement (the pair below around a single statement) in place in the instruction
+ * schedule. Use ONLY when the byte diff proves the scheduler reorders that
+ * statement against a neighbor without it. Pure textual expansion, identical
+ * to the literal do/while spelling; every use must still pass the byte check.
+ */
+#if defined(MATCHING)
+#define FAKE_ORDER_LOCK(stmt) \
+    FAKE_ORDER_LOCK_BEGIN     \
+        stmt;                 \
+    FAKE_ORDER_LOCK_END
+#else
+#define FAKE_ORDER_LOCK(stmt) stmt
 #endif
 
 /*

@@ -249,7 +249,7 @@ MATCH void func_801EFCF4(void) {
     Battle_ProjectRange();
     work         = g_Task;
     counter      = work->unk_09 + 1;
-    drop         = (VOL(u8, work->unk_09) - 8) / 2;
+    drop         = (FAKE_VOLATILE(u8, work->unk_09) - 8) / 2;
     work->unk_09 = counter;
     work->unk_30.half -= drop;
     if ((counter & BYTE_MASK) == 0x1C) {

@@ -197,13 +197,13 @@ MATCH void func_801D12A8(void) {
     g_Task->timer  = 0;
     g_Task->band   = 0;
 
-    work                          = g_Task;
-    counter                       = work->orbit_seed << 5;
-    VOL(s32, work->orbit_counter) = counter;
-    angle                         = SCE10EFF_ORBIT_ANGLE(counter);
-    angle_cell                    = &D_1F800004;
-    *angle_cell                   = angle;
-    g_ScratchPad                  = 0x20;
+    work                                    = g_Task;
+    counter                                 = work->orbit_seed << 5;
+    FAKE_VOLATILE(s32, work->orbit_counter) = counter;
+    angle                                   = SCE10EFF_ORBIT_ANGLE(counter);
+    angle_cell                              = &D_1F800004;
+    *angle_cell                             = angle;
+    g_ScratchPad                            = 0x20;
 
     velocity     = rcos(angle) * g_ScratchPad;
     work         = g_Task;
@@ -240,13 +240,13 @@ MATCH void func_801D1544(void) {
 
     g_Task->ticker++;
 
-    work                          = g_Task;
-    counter                       = work->orbit_counter + 1;
-    VOL(s32, work->orbit_counter) = counter;
-    angle                         = SCE10EFF_ORBIT_ANGLE(counter);
-    angle_cell                    = &D_1F800004;
-    *angle_cell                   = angle;
-    g_ScratchPad                  = 0x20;
+    work                                    = g_Task;
+    counter                                 = work->orbit_counter + 1;
+    FAKE_VOLATILE(s32, work->orbit_counter) = counter;
+    angle                                   = SCE10EFF_ORBIT_ANGLE(counter);
+    angle_cell                              = &D_1F800004;
+    *angle_cell                             = angle;
+    g_ScratchPad                            = 0x20;
 
     velocity     = rcos(angle) * g_ScratchPad;
     work         = g_Task;
@@ -406,13 +406,13 @@ MATCH void func_801D1DE0(void) {
     g_Task->timer  = 0;
     g_Task->band   = 0;
 
-    work                          = g_Task;
-    counter                       = (work->orbit_seed << 5) + 0x10;
-    angle                         = SCE10EFF_ORBIT_ANGLE(counter);
-    VOL(s32, work->orbit_counter) = counter;
-    angle_cell                    = &D_1F800004;
-    *angle_cell                   = angle;
-    g_ScratchPad                  = 0x18;
+    work                                    = g_Task;
+    counter                                 = (work->orbit_seed << 5) + 0x10;
+    angle                                   = SCE10EFF_ORBIT_ANGLE(counter);
+    FAKE_VOLATILE(s32, work->orbit_counter) = counter;
+    angle_cell                              = &D_1F800004;
+    *angle_cell                             = angle;
+    g_ScratchPad                            = 0x18;
 
     velocity       = rcos(angle) * g_ScratchPad;
     g_Task->proj.x = D_801D2744->proj.x + velocity;

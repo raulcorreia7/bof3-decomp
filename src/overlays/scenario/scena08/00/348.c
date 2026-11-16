@@ -1027,7 +1027,7 @@ NON_MATCHING void func_801FA3E4(void) {
         if (g_GameCellType == 2 && !SYS_TestFlag(g_SceneFlags, 6)) {
             Game_SetScriptActive();
             Scene_SetupParty(3);
-            Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX = TO_COORD_HALF(81), VOL(s32, g_AreaScrollTargetY) = TO_COORD_HALF(30)));
+            Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX = TO_COORD_HALF(81), FAKE_VOLATILE(s32, g_AreaScrollTargetY) = TO_COORD_HALF(30)));
             Area_InitMapRenderer();
             D_801468FF            = 13;
             D_80146997            = 14;
@@ -1092,14 +1092,14 @@ NON_MATCHING void func_801FA3E4(void) {
                     SYS_ThreadWait(1);
                 }
                 Scene_SetupParty(0);
-                Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX = TO_COORD_HALF(41), VOL(s32, g_AreaScrollTargetY) = TO_COORD(13)));
+                Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX = TO_COORD_HALF(41), FAKE_VOLATILE(s32, g_AreaScrollTargetY) = TO_COORD(13)));
                 Area_InitMapRenderer();
                 SYS_SetFlag(g_SceneFlags, 17);
             }
             if (SYS_TestFlag(g_SceneFlags, 19) && !SYS_TestFlag(g_SceneFlags, 20)) {
                 Game_SetScriptActive();
                 Scene_SetupParty(2);
-                Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX = TO_COORD_HALF(10), VOL(s32, g_AreaScrollTargetY) = TO_COORD(20)));
+                Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX = TO_COORD_HALF(10), FAKE_VOLATILE(s32, g_AreaScrollTargetY) = TO_COORD(20)));
                 Area_InitMapRenderer();
                 SYS_SetFlag(g_SceneFlags, 20);
                 g_SceneState.state_04 = 10;
