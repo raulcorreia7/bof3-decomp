@@ -1,3 +1,7 @@
 #include "area191_13.h"
 
-INCLUDE_ASM(func_801F3658);
+#include "overlays/area/func_801F3658.h"
+
+MATCH u8 func_801F3658(s32 x, s32 y) {
+    AREA_START_ENTRY_EVENT(0x35);
+}
