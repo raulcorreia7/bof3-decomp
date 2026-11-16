@@ -1,8 +1,7 @@
 #include "area077_14.h"
 
 /* Draws the trail ribbon: one fading quad per pair of neighbouring slot edges. */
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F43C8(void) {
+MATCH void func_801F43C8(void) {
     DVECTOR   first;
     DVECTOR   second;
     MATRIX    matrix;
@@ -32,8 +31,8 @@ NON_MATCHING void func_801F43C8(void) {
         prim->y0 = first.vy;
         prim->x1 = second.vx;
         prim->y1 = second.vy;
-        setRGB0(prim, shade, shade / 2, shade / 2);
-        setRGB1(prim, shade, shade / 2, shade / 2);
+        prim->r0 = prim->r1 = shade;
+        prim->g0 = prim->b0 = prim->g1 = prim->b1 = shade / 2;
         Area_ProjectPoint(&slot->edges[0].vx, &first);
         Area_ProjectPoint(&slot->edges[1].vx, &second);
         shade--;
@@ -41,11 +40,8 @@ NON_MATCHING void func_801F43C8(void) {
         prim->y2 = first.vy;
         prim->x3 = second.vx;
         prim->y3 = second.vy;
-        setRGB2(prim, shade, shade / 2, shade / 2);
-        setRGB3(prim, shade, shade / 2, shade / 2);
+        prim->r2 = prim->r3 = shade;
+        prim->g2 = prim->b2 = prim->g3 = prim->b3 = shade / 2;
         GFX_AddPrim(1, sizeof(POLY_G4));
     } while (i < AREA_SLOT_COUNT - 1);
 }
-#else
-INCLUDE_ASM(func_801F43C8);
-#endif
