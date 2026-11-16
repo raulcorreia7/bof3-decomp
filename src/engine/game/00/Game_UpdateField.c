@@ -67,8 +67,8 @@ MATCH void Game_UpdateField(void) {
             g_MenuStep.sub_step = 0;
             g_MenuStep.state    = 0;
             break;
-        case GAME_REQUEST_STATUS_MENU:
-            g_GameEntryState    = GAME_STATE_STATUS_MENU;
+        case GAME_REQUEST_SHISU_MENU:
+            g_GameEntryState    = GAME_STATE_SHISU_MENU;
             g_GameEntrySubstate = 0;
             g_MenuStep.step     = 0;
             g_MenuStep.sub_step = 0;

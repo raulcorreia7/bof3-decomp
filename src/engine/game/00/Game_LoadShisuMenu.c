@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void Game_LoadStatusMenu(void) {
+MATCH void Game_LoadShisuMenu(void) {
     u16* ent;
     u16  ev;
 

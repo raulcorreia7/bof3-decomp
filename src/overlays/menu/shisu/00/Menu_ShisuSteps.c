@@ -6,19 +6,19 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 /* The shisu overlay entry: the shared menu step byte selects the handler. */
 MATCH void func_801D0D80(void) {
-    SYS_DISPATCH_BYTE(g_MenuStatusSteps, g_MenuStep.step);
+    SYS_DISPATCH_BYTE(g_MenuShisuSteps, g_MenuStep.step);
 }
 
 MATCH void func_801D0DBC(void) {
     func_801D1CA4();
-    g_MenuStatusItems.unk_09  = 0;
-    g_MenuStatusItems.unk_0A  = 0;
-    g_MenuStatusItems.unk_08  = 0;
-    g_MenuStatusItems.used[0] = 0;
-    g_MenuStatusItems.used[1] = 0;
-    g_MenuStatusItems.used[2] = 0;
-    g_MenuStatusItems.used[3] = 0;
-    g_MenuStatusItems.unk_0B  = func_801D1E60();
+    g_MenuShisuIngredients.unk_09  = 0;
+    g_MenuShisuIngredients.unk_0A  = 0;
+    g_MenuShisuIngredients.unk_08  = 0;
+    g_MenuShisuIngredients.used[0] = 0;
+    g_MenuShisuIngredients.used[1] = 0;
+    g_MenuShisuIngredients.used[2] = 0;
+    g_MenuShisuIngredients.used[3] = 0;
+    g_MenuShisuIngredients.unk_0B  = func_801D1E60();
     func_801D27BC();
     {
         u8* step = &g_MenuStep.step;
@@ -31,7 +31,7 @@ MATCH void func_801D0DBC(void) {
 }
 
 MATCH void func_801D0E4C(void) {
-    SYS_DISPATCH_BYTE(g_MenuStatusStep1Steps, g_MenuStep.sub_step);
+    SYS_DISPATCH_BYTE(g_MenuShisuStep1Steps, g_MenuStep.sub_step);
 }
 
 MATCH void func_801D0E88(void) {
@@ -55,7 +55,7 @@ MATCH void func_801D0EC4(void) {
 }
 
 MATCH void func_801D0F24(void) {
-    SYS_DISPATCH_BYTE(g_MenuStatusStep3Steps, g_MenuStep.sub_step);
+    SYS_DISPATCH_BYTE(g_MenuShisuStep3Steps, g_MenuStep.sub_step);
 }
 
 MATCH void func_801D0F60(void) {
@@ -84,11 +84,11 @@ MATCH void func_801D0FAC(void) {
 }
 
 MATCH void func_801D1018(void) {
-    if (g_MenuStatusItems.unk_08 != 0) {
-        Item_Remove(ITEM_CAT_ITEM, ITEM_MACKEREL, g_MenuStatusItems.used[0], 0);
-        Item_Remove(ITEM_CAT_ITEM, ITEM_SHALY_SEED, g_MenuStatusItems.used[1], 0);
-        Item_Remove(ITEM_CAT_ITEM, ITEM_VINEGAR, g_MenuStatusItems.used[2], 0);
-        Item_Remove(ITEM_CAT_ITEM, ITEM_HORSERADISH, g_MenuStatusItems.used[3], 0);
+    if (g_MenuShisuIngredients.unk_08 != 0) {
+        Item_Remove(ITEM_CAT_ITEM, ITEM_MACKEREL, g_MenuShisuIngredients.used[0], 0);
+        Item_Remove(ITEM_CAT_ITEM, ITEM_SHALY_SEED, g_MenuShisuIngredients.used[1], 0);
+        Item_Remove(ITEM_CAT_ITEM, ITEM_VINEGAR, g_MenuShisuIngredients.used[2], 0);
+        Item_Remove(ITEM_CAT_ITEM, ITEM_HORSERADISH, g_MenuShisuIngredients.used[3], 0);
         g_SceneState.step_05 = 0x14;
         func_801D1EE8();
         if (D_801DA044 >= 0x33) {
@@ -122,7 +122,7 @@ MATCH void func_801D1018(void) {
 
 MATCH void func_801D11A4(void) {
     Menu_DrawClutStrip(D_80144953);
-    g_MenuStatusStep2Steps[g_MenuStep.sub_step]();
+    g_MenuShisuStep2Steps[g_MenuStep.sub_step]();
 }
 
 /* Reads the status item input, advances the step and places the panel task. */
@@ -136,25 +136,25 @@ MATCH void func_801D11F4(void) {
     buttons = INPUT_REPEATED(*input, INPUT_DIRECTIONAL);
     if (buttons & (PADLright | PADLleft)) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
-        g_MenuStatusItems.unk_09 ^= 1;
-        D_80148364 = g_MenuStatusItems.unk_09 + 0x2B;
+        g_MenuShisuIngredients.unk_09 ^= 1;
+        D_80148364 = g_MenuShisuIngredients.unk_09 + 0x2B;
     } else if (buttons & PADLup) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
-        D_80148364               = 0x2A;
-        g_MenuStatusItems.unk_0A = 3;
+        D_80148364                    = 0x2A;
+        g_MenuShisuIngredients.unk_0A = 3;
         g_MenuStep.sub_step++;
     } else if (buttons & PADLdown) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
-        D_80148364               = 0x2A;
-        g_MenuStatusItems.unk_0A = 0;
+        D_80148364                    = 0x2A;
+        g_MenuShisuIngredients.unk_0A = 0;
         g_MenuStep.sub_step++;
     } else if (*input & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        if (g_MenuStatusItems.unk_09 != 0) {
+        if (g_MenuShisuIngredients.unk_09 != 0) {
             goto advance;
         }
-        if (g_MenuStatusItems.unk_08 < 8) {
-            if (g_MenuStatusItems.unk_08 == 0) {
-                if (g_MenuStatusItems.used[0] != 0 && g_MenuStatusItems.used[1] != 0) {
+        if (g_MenuShisuIngredients.unk_08 < 8) {
+            if (g_MenuShisuIngredients.unk_08 == 0) {
+                if (g_MenuShisuIngredients.used[0] != 0 && g_MenuShisuIngredients.used[1] != 0) {
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
                     g_MenuStep.sub_step += 2;
                     g_MenuStep.state = g_MenuStep.state; /* FAKE: retail reloads and stores state. */
@@ -164,7 +164,7 @@ MATCH void func_801D11F4(void) {
                 }
             } else {
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
-                g_MenuStatusItems.unk_08++;
+                g_MenuShisuIngredients.unk_08++;
             }
         } else {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
@@ -180,9 +180,9 @@ MATCH void func_801D11F4(void) {
     }
 
     g_MenuPanelTasks[0].active = 1;
-    D_80148334                 = D_8014837C + g_MenuStatusItems.unk_09 * 48;
+    D_80148334                 = D_8014837C + g_MenuShisuIngredients.unk_09 * 48;
     D_80148336                 = D_8014837E + 4;
-    if (g_MenuStatusItems.unk_08 != 0) {
+    if (g_MenuShisuIngredients.unk_08 != 0) {
         D_801DA0FC = D_801DA084 + D_801DA088 * 0xA00;
     }
     func_801D2C0C();
@@ -194,7 +194,7 @@ INCLUDE_ASM(func_801D14C0);
 MATCH void func_801D1898(void) {
     Callback handler;
 
-    handler = g_MenuStatusStep2Sub2Steps[g_MenuStep.state];
+    handler = g_MenuShisuStep2Sub2Steps[g_MenuStep.state];
     handler();
     func_801D2C0C();
     func_801D2DA8();
@@ -353,7 +353,7 @@ NON_MATCHING void func_801D1B58(void) {
         D_801DA0A5 = D_801D9EF0[4];
         D_801DA0A6 = D_801D9EF0[5];
         D_801DA0A7 = D_801D9EF0[6];
-        g_MenuStatusItems.unk_08 += 1;
+        g_MenuShisuIngredients.unk_08 += 1;
         D_80148651 -= 2;
     }
 }
@@ -362,10 +362,10 @@ INCLUDE_ASM(func_801D1B58);
 #endif
 
 MATCH void func_801D1CA4(void) {
-    g_MenuStatusItems.held[0] = Item_Count(ITEM_CAT_ITEM, ITEM_MACKEREL, 0);
-    g_MenuStatusItems.held[1] = Item_Count(ITEM_CAT_ITEM, ITEM_SHALY_SEED, 0);
-    g_MenuStatusItems.held[2] = Item_Count(ITEM_CAT_ITEM, ITEM_VINEGAR, 0);
-    g_MenuStatusItems.held[3] = Item_Count(ITEM_CAT_ITEM, ITEM_HORSERADISH, 0);
+    g_MenuShisuIngredients.held[0] = Item_Count(ITEM_CAT_ITEM, ITEM_MACKEREL, 0);
+    g_MenuShisuIngredients.held[1] = Item_Count(ITEM_CAT_ITEM, ITEM_SHALY_SEED, 0);
+    g_MenuShisuIngredients.held[2] = Item_Count(ITEM_CAT_ITEM, ITEM_VINEGAR, 0);
+    g_MenuShisuIngredients.held[3] = Item_Count(ITEM_CAT_ITEM, ITEM_HORSERADISH, 0);
 }
 
 #ifdef NON_MATCHING
@@ -398,7 +398,7 @@ NON_MATCHING void func_801D1D1C(void) {
     g_MenuPanelTasks[3].handler    = 1;
     g_MenuPanelTasks[3].state      = 2;
     g_MenuPanelTasks[3].unk_0A     = 0xFF;
-    g_MenuPanelTasks[3].item_table = (s32)&g_MenuStatusItems;
+    g_MenuPanelTasks[3].item_table = (s32)&g_MenuShisuIngredients;
 }
 #else
 INCLUDE_ASM(func_801D1D1C);
@@ -479,7 +479,7 @@ NON_MATCHING void func_801D27BC(void) {
     D_801DA07C = *scroll_x;
     D_801DA080 = y;
     height     = Area_SampleHeight(x, y);
-    D_801DA084 = (height << 16) - MENU_STATUS_HEIGHT_BIAS;
+    D_801DA084 = (height << 16) - MENU_SHISU_HEIGHT_BIAS;
 
     record      = *record_cell;
     D_801DA114  = record + 2;
@@ -497,7 +497,7 @@ NON_MATCHING void func_801D27BC(void) {
     D_801DA0F8  = *scroll_y;
     D_801DA110  = next_record[1];
     height      = Area_SampleHeight(*scroll_x, *scroll_y);
-    D_801DA0FC  = (height << 16) + MENU_STATUS_HEIGHT_BIAS;
+    D_801DA0FC  = (height << 16) + MENU_SHISU_HEIGHT_BIAS;
 }
 #else
 INCLUDE_ASM(func_801D27BC);
@@ -508,7 +508,7 @@ NON_MATCHING s32 func_801D2978(void) {
     s8 amount;
     u8 saved[3];
 
-    amount = g_MenuStatusItems.used[1] - g_MenuStatusItems.unk_08;
+    amount = g_MenuShisuIngredients.used[1] - g_MenuShisuIngredients.unk_08;
     if (amount <= 0) {
         amount = 1;
     }
@@ -520,18 +520,18 @@ NON_MATCHING s32 func_801D2978(void) {
     saved[0] = D_801DA0A5;
     saved[1] = D_801DA0A6;
     saved[2] = D_801DA0A7;
-    if (g_MenuStatusItems.used[2] * 3 < 0xFF - saved[0]) {
-        D_801DA0A5 = saved[0] + g_MenuStatusItems.used[2] * 3;
+    if (g_MenuShisuIngredients.used[2] * 3 < 0xFF - saved[0]) {
+        D_801DA0A5 = saved[0] + g_MenuShisuIngredients.used[2] * 3;
     } else {
         D_801DA0A5 = 0xFF;
     }
-    if (g_MenuStatusItems.used[2] * 3 < 0xFF - D_801DA0A6) {
-        D_801DA0A6 += g_MenuStatusItems.used[2] * 3;
+    if (g_MenuShisuIngredients.used[2] * 3 < 0xFF - D_801DA0A6) {
+        D_801DA0A6 += g_MenuShisuIngredients.used[2] * 3;
     } else {
         D_801DA0A6 = 0xFF;
     }
-    if (g_MenuStatusItems.used[2] * 3 < D_801DA0A7) {
-        D_801DA0A7 -= g_MenuStatusItems.used[2] * 3;
+    if (g_MenuShisuIngredients.used[2] * 3 < D_801DA0A7) {
+        D_801DA0A7 -= g_MenuShisuIngredients.used[2] * 3;
     } else {
         D_801DA0A7 = 0;
     }

@@ -21,7 +21,7 @@ typedef enum OverlayId {
     ETC_OVERLAY_START   = 18, /* START.EMI#8, start menu */
     ETC_OVERLAY_SHOP    = 19, /* SHOP.EMI#0, shop program */
     ETC_OVERLAY_BATE    = 20, /* BATE.EMI#0, draws an ability list (screen unconfirmed) */
-    ETC_OVERLAY_SHISU   = 21, /* SHISU.EMI#0, status menu */
+    ETC_OVERLAY_SHISU   = 21, /* SHISU.EMI#0, the scena11 shisu screen */
     ETC_OVERLAY_COMMU00 = 24, /* COMMU00.EMI#0, fairy communication minigame */
     ETC_OVERLAY_COMMU01 = 25, /* COMMU01.EMI#7 */
     ETC_OVERLAY_COMMU02 = 26, /* COMMU02.EMI#8 */

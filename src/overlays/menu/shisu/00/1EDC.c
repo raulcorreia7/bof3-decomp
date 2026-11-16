@@ -10,26 +10,26 @@ MATCH void func_801D2ADC(void) {
     u8* green;
     u8* blue;
 
-    D_801DA100 = D_801D9688[g_MenuStatusItems.unk_0B];
+    D_801DA100 = D_801D9688[g_MenuShisuIngredients.unk_0B];
     saved[0]   = D_801DA11D;
     saved[1]   = D_801DA11E;
     saved[2]   = D_801DA11F;
-    if (D_801DA11D > g_MenuStatusItems.used[3] * 3) {
-        D_801DA11D -= g_MenuStatusItems.used[3] * 3;
+    if (D_801DA11D > g_MenuShisuIngredients.used[3] * 3) {
+        D_801DA11D -= g_MenuShisuIngredients.used[3] * 3;
     } else {
         D_801DA11D = 0;
     }
     green = &D_801DA11E;
-    if (0xFF - *green > g_MenuStatusItems.used[3] * 3) {
-        shade = *green + g_MenuStatusItems.used[3] * 3;
+    if (0xFF - *green > g_MenuShisuIngredients.used[3] * 3) {
+        shade = *green + g_MenuShisuIngredients.used[3] * 3;
     } else {
         shade = -1;
     }
     *green = shade;
     FAKE_BARRIER(); /* FAKE: keeps the tint store ahead of the next color's address. */
     blue = &D_801DA11F;
-    if (*blue > g_MenuStatusItems.used[3] * 3) {
-        *blue -= g_MenuStatusItems.used[3] * 3;
+    if (*blue > g_MenuShisuIngredients.used[3] * 3) {
+        *blue -= g_MenuShisuIngredients.used[3] * 3;
     } else {
         *blue = 0;
     }
@@ -119,7 +119,7 @@ MATCH void func_801D2E80(void) {
     s32  delta;
 
     target = (Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16) + D_801DA088 * 0xA00;
-    delta  = (Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16) + MENU_STATUS_HEIGHT_BIAS - target;
+    delta  = (Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16) + MENU_SHISU_HEIGHT_BIAS - target;
     follow = &D_801DA0FC;
     *follow -= delta / 16;
     if (*follow < target) {
@@ -144,7 +144,7 @@ MATCH void func_801D2F68(void) {
 }
 
 MATCH void func_801D2F9C(void) {
-    SYS_DISPATCH_TASK(g_MenuStatusTaskSteps, 2, g_MenuCurrentPanel);
+    SYS_DISPATCH_TASK(g_MenuShisuTaskSteps, 2, g_MenuCurrentPanel);
 }
 
 MATCH void func_801D2FE0(void) {
@@ -157,7 +157,7 @@ MATCH void Menu_DrawPanelCursor(void) {
 MATCH void func_801D3018(void) {
     s16 id;
 
-    g_MenuStatusTask1Steps[g_MenuCurrentPanel->state]();
+    g_MenuShisuTask1Steps[g_MenuCurrentPanel->state]();
     Menu_DrawHeaderBar(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     id = (s16)g_MenuCurrentPanel->u.message.id;
     if (id != 0) {
@@ -181,8 +181,8 @@ MATCH void func_801D3124(void) {
 }
 
 /* func_801D3164 */
-MATCH void Menu_StatusCommandsPanel(void) {
-    g_MenuStatusTask2Steps[g_MenuCurrentPanel->state]();
+MATCH void Menu_ShisuCommandsPanel(void) {
+    g_MenuShisuTask2Steps[g_MenuCurrentPanel->state]();
     Menu_DrawCommandRow(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, g_MenuCurrentPanel->unk_0A, g_MenuCurrentPanel->unk_0B, 0);
 }
 
@@ -203,7 +203,7 @@ MATCH void Menu_SetPosY(void) {
 }
 
 MATCH void func_801D324C(void) {
-    g_MenuStatusTask3Steps[g_MenuCurrentPanel->state]();
+    g_MenuShisuTask3Steps[g_MenuCurrentPanel->state]();
     func_801D3320(g_MenuCurrentPanel);
 }
 

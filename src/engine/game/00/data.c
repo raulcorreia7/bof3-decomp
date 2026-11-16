@@ -25,9 +25,9 @@ u8 s_PaletteSlotStrides[8] = {0x10, 0x00, 0x20, 0x40, 0x80, 0xCC, 0xCC, 0xCC};
 Callback g_GameCampMenuLoad[3] = {Game_LoadCampMenu, func_801E3E88, func_801E1680};
 
 Callback g_GameStates[12] = {Game_NewGame,          Game_UpdateAreaLoad, Game_UpdateField,   Game_UpdateMenu,        func_801979D4,         Game_UpdateBattle,
-                             Game_UpdateCameraLook, Game_UpdateShop,     Game_UpdateFishing, Game_UpdateAbilityMenu, Game_UpdateStatusMenu, Game_UpdateSceneCamera};
+                             Game_UpdateCameraLook, Game_UpdateShop,     Game_UpdateFishing, Game_UpdateAbilityMenu, Game_UpdateShisuMenu, Game_UpdateSceneCamera};
 
-Callback g_GameMenuSubstates[3] = {Game_LoadMenuOverlay, Game_UpdateMenuFrame, Game_ReturnFromMenu};
+Callback g_GameMenuSubstates[3] = {Game_LoadMenu, Game_UpdateMenuFrame, Game_ReturnFromMenu};
 
 u8 s_DirectionJitters[4] = {0xFF, 0x00, 0x01, 0x00};
 
@@ -41,7 +41,7 @@ Callback g_GameFishingSubstates[4] = {func_801984E8, func_801E0BD0, func_801985C
 
 Callback g_MenuAbilityOpen[3] = {Game_LoadAbilityMenu, Game_UpdateAbilityMenuFrame, Game_ReturnFromAbilityMenu};
 
-Callback g_MenuStatusOpen[3] = {Game_LoadStatusMenu, Game_UpdateStatusMenuFrame, Game_ReturnFromStatusMenu};
+Callback g_MenuShisuOpen[3] = {Game_LoadShisuMenu, Game_UpdateShisuMenuFrame, Game_ReturnFromShisuMenu};
 
 Callback g_GameSceneCameraSubstates[3] = {func_80198B00, func_80198B44, func_80198B6C};
 

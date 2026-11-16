@@ -397,7 +397,7 @@ the player sees, the PlayStation `Scratchpad`, an SDK name.
 
 - A table is the plural of what its index selects, in game terms: `g_Weapons`, `g_AreaEncounters`,
   `g_BattleTurnPhases`, `g_SceneEvents`.
-- A sequence is named for what happens: `g_MenuStatusOpen`.
+- A sequence is named for what happens.
 - No `Table`, `Array`, `Set`, `Pool`, `Funcs`, `Steps`, `Handlers` or `Callback` word for a data
   table, and no wrapper type. A player-visible menu list keeps `List`; a map's grid data keeps
   `Map` (`MapCell`, `AreaMapBundle`).
@@ -451,24 +451,24 @@ two systems have their own thing under one noun. `B` in a disc label marks the b
 
 ### Disc words
 
-| Disc label               | Game term                                                                                     |
-| ------------------------ | --------------------------------------------------------------------------------------------- |
-| `BATTLE`                 | battle program                                                                                |
-| `BENEMY`                 | `Enemy`                                                                                       |
-| `BMAGIC`, `MAGIC#`       | magic (`BMagic_` in battle)                                                                   |
-| `PLCHAR`, `BPLCHAR`      | character archive                                                                             |
-| `PLP###`                 | code of one party: the three digits name its characters (`PLP012`: Ryu, Nina, Garr)           |
-| `COMMU00` to `COMMU05`   | Fairy Village: the village program (`COMMU00`) and its event scripts (`COMMU01` to `COMMU05`) |
-| `BATE`                   | ability menu (`Game_LoadAbilityMenu` loads it)                                                |
-| `SHISU`                  | status menu (`Game_LoadStatusMenu` loads it)                                                  |
-| `SISYOU` (師匠)          | `Master` menu                                                                                 |
-| `SHOP`                   | shop program                                                                                  |
-| `START`                  | start menu                                                                                    |
-| `GAME` (slot 0 / slot 1) | engine `game`; `title` screen                                                                 |
-| `SCENA##`, `SCE##EF*`    | scene controller, scene effect                                                                |
-| `WORLD##/AREA###`        | area code                                                                                     |
-| `SLUS_004.22`            | main executable                                                                               |
-| `LOGO/LOGO.EXE`          | logo player                                                                                   |
+| Disc label               | Game term                                                                                             |
+| ------------------------ | ----------------------------------------------------------------------------------------------------- |
+| `BATTLE`                 | battle program                                                                                        |
+| `BENEMY`                 | `Enemy`                                                                                               |
+| `BMAGIC`, `MAGIC#`       | magic (`BMagic_` in battle)                                                                           |
+| `PLCHAR`, `BPLCHAR`      | character archive                                                                                     |
+| `PLP###`                 | code of one party: the three digits name its characters (`PLP012`: Ryu, Nina, Garr)                   |
+| `COMMU00` to `COMMU05`   | Fairy Village: the village program (`COMMU00`) and its event scripts (`COMMU01` to `COMMU05`)         |
+| `BATE`                   | ability menu (`Game_LoadAbilityMenu` loads it)                                                        |
+| `SHISU`                  | the scena11 shisu screen, where the player mixes the four ingredients (`Game_LoadShisuMenu` loads it) |
+| `SISYOU` (師匠)          | `Master` menu                                                                                         |
+| `SHOP`                   | shop program                                                                                          |
+| `START`                  | start menu                                                                                            |
+| `GAME` (slot 0 / slot 1) | engine `game`; `title` screen                                                                         |
+| `SCENA##`, `SCE##EF*`    | scene controller, scene effect                                                                        |
+| `WORLD##/AREA###`        | area code                                                                                             |
+| `SLUS_004.22`            | main executable                                                                                       |
+| `LOGO/LOGO.EXE`          | logo player                                                                                           |
 
 Archive families (`BGM`, `BENEMY`, `BOSS`, `BMAGIC`, `BPLCHAR`, `PLCHAR`, `ETC`, `SCENARIO`) name
 shipped containers, not code folders. Where each disc label lives in the tree: [tree](layout.md#tree).
