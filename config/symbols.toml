@@ -335,6 +335,8 @@ g_BMagicEffectModes = { addr = 0x801F04B4, source = "Handlers of magic001 (Nue S
 
 ["emi/bmagic/magic002/00"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_AllocEffect = { addr = 0x801E590C, type = "func", source = "Claims a free battle effect slot of the given size class and returns its index." }
+g_BattleEffects = { addr = 0x801EC330, type = "BattleEffect", size = 0x78, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
 BMagic_DispatchMode = { addr = 0x801EEC18, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic002." }
 Effect_StartPlaying = { addr = 0x801EEE30, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic002." }
 
@@ -4905,6 +4907,7 @@ Area_DrawRingQuads = { addr = 0x801F2F60, type = "func", source = "Draws the two
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 
 ["emi/world01/area049/13"]
+D_1F800034_U16 = { addr = 0x1F800034, type = "u16", source = "The projected screen coordinates at 0x1F800034 read as unsigned halfwords x and y, the output RotTransPers writes.", alias = true }
 Area_FindFreeWorkRow = { addr = 0x801178C4, type = "func", source = "Finds the first work-window row whose byte is zero or returns NULL." }
 func_80117C38 = { addr = 0x80117C38, type = "func", source = "Adds 1 to header.step of the running task (Scene_AdvanceActorStep); the same body is unnamed in magic064, scena07 (four times), area108 (twice) and area197, so no shared name fits." }
 

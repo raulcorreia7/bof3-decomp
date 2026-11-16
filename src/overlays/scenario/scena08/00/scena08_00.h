@@ -27,7 +27,6 @@ extern u8       D_80146875;
 extern u16      D_80146876;
 extern u32      D_801F6C00;
 /* D_801FE894 */
-extern Callback g_SceneEntityDispatch[];
 extern Callback D_801FE8A0[];
 extern Callback D_801FE8D0[];
 extern Callback D_801FE8D8[];
@@ -66,17 +65,16 @@ extern Callback D_801FE910[];
 extern Callback D_801FE938[];
 extern Callback D_801FE964[];
 
-extern Callback  D_801FE970[];
-extern u8        D_801FE9A0[];
+extern Callback D_801FE970[];
+extern u8       D_801FE9A0[];
 /* D_801FE9C0 */
-extern SceneFunc g_SceneActorDispatch[];
-extern u16       D_801FE9EC[];
-extern u8        D_801FEA6C;
-extern u8        D_801FEA70;
-extern s32       D_801FEA74;
-extern s32       D_801FEA78;
-extern Callback  jtbl_801F6C8C[11];
-extern Callback  jtbl_801F6CE4[16];
+extern u16      D_801FE9EC[];
+extern u8       D_801FEA6C;
+extern u8       D_801FEA70;
+extern s32      D_801FEA74;
+extern s32      D_801FEA78;
+extern Callback jtbl_801F6C8C[11];
+extern Callback jtbl_801F6CE4[16];
 
 void func_801FE800(void);
 

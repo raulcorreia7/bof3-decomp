@@ -12,11 +12,7 @@ NON_MATCHING void func_801F3278(void) {
     z                 = task->pos.z.fixed;
     height            = z + 8;
     task->pos.z.fixed = height;
-    if (height < 0x100) {
-        top = height;
-    } else {
-        top = 0x100;
-    }
+    top               = MIN(height, 0x100);
 
     bottom = z - 0x18;
     if (bottom < 0) {
