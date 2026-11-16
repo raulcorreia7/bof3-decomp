@@ -237,7 +237,9 @@ extern s16             D_80148628; /* the computed bar length; func_801D8188 sto
 extern u16             D_8014862A; /* the second bar length; func_801D8188 stores it with sh at 0x801D8210 */
 extern u8              D_80148653;
 extern u8              D_80148654;
-/* D_80148656, the party cursor, has no declaration here: its readers split between lb and lbu, so each unit keeps its own view. */
+/* D_80148656, the party cursor, has no plain declaration here: its readers split between lb and lbu, so each unit keeps its own view. */
+extern s8              g_SkillOrderPartySlot; /* the D_80148656 slot where the skill-order list keeps the chosen row */
+extern u8              D_801485E7;            /* set while the skill-order list is up */
 extern s8              D_80148658[6];
 extern u8              D_8014865F;
 extern u8              D_80148660;

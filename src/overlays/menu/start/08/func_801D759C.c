@@ -1,8 +1,5 @@
 #include "start_08.h"
 
-extern s8 D_80148656; /* local: s8 read; the battle rows read it unsigned */
-extern u8 D_801485E7; /* local: only this unit reads it */
-
 #ifdef NON_MATCHING
 /* Update of the start menu's skill-order list: the party slot and the ability
  * group cursors, the description of the selected skill, and the confirm that
@@ -78,8 +75,8 @@ NON_MATCHING void func_801D759C(void) {
     if (task->unk_0A != previous) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }
-    chosen     = &D_80148656;
-    *chosen    = task->unk_0A;
+    chosen  = &g_SkillOrderPartySlot;
+    *chosen = task->unk_0A;
     if ((g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
         D_8014857C = s_SkillOrderCursors[*chosen][D_8014857B];

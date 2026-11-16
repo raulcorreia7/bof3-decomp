@@ -1,8 +1,6 @@
 #include "start_08.h"
 
 #ifdef NON_MATCHING
-extern s8 D_80148656;
-
 NON_MATCHING void func_801D78FC(void) {
     SkillOrder*    skill_order;
     MenuPanelTask* task;
@@ -46,7 +44,7 @@ NON_MATCHING void func_801D78FC(void) {
             if ((s8)skill_order->ability_group < 0) {
                 skill_order->ability_group = 3;
             }
-            skill_order->cursor = s_SkillOrderCursors[D_80148656][skill_order->ability_group];
+            skill_order->cursor = s_SkillOrderCursors[g_SkillOrderPartySlot][skill_order->ability_group];
         } else if (buttons & PADLright) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
             skill_order->ability_group++;
@@ -54,7 +52,7 @@ NON_MATCHING void func_801D78FC(void) {
             if (skill_order->ability_group >= 4) {
                 skill_order->ability_group = 0;
             }
-            skill_order->cursor = s_SkillOrderCursors[D_80148656][skill_order->ability_group];
+            skill_order->cursor = s_SkillOrderCursors[g_SkillOrderPartySlot][skill_order->ability_group];
         }
     }
 
@@ -69,7 +67,7 @@ NON_MATCHING void func_801D78FC(void) {
     if (old_cursor != skill_order->cursor) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
-    s_SkillOrderCursors[D_80148656][skill_order->ability_group] = skill_order->cursor;
+    s_SkillOrderCursors[g_SkillOrderPartySlot][skill_order->ability_group] = skill_order->cursor;
 
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         abilities = Party_GetAbilities(skill_order->party_slot, skill_order->ability_group, 0);
