@@ -6,8 +6,8 @@ NON_MATCHING void func_801F2C84(void) {
     s16 height;
 
     height                   = Area_SampleHeight(g_Task->vx, g_Task->vy);
-    g_Task->vz               = TO_COORD(height) + 0x1000000;
-    g_Task->gravity          = TO_COORD(height) + 0x1000000;
+    g_Task->vz               = TO_COORD(height) + TO_COORD(256);
+    g_Task->gravity          = TO_COORD(height) + TO_COORD(256);
     COORD_INT(g_Task->pos.z) = height;
     g_Task->state_70.word    = 0;
     if (SYS_TestFlag(g_SceneEventFlags, 0xB) == 0) {
