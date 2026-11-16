@@ -15,6 +15,10 @@ extern u8 D_801F398C[];
 
 extern u8 D_801F5C08[];
 
+/* The facing and event flag of each six-byte trigger-box row. */
+extern u8 D_801F5C0C[];
+extern u8 D_801F5C0D[];
+
 extern u16 D_801F5CD4[];
 
 extern u16 D_801F5CD8[];
@@ -38,5 +42,9 @@ extern u8 D_801F5CDF[];
     }
 
 s32 func_8019601C();
+
+/* The area-change flag handover; the trigger box containing a party member, or 0xFF. */
+void func_801F2C80(void);
+s32  func_801F2D00(u8 member);
 
 #endif
