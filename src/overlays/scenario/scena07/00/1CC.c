@@ -88,7 +88,7 @@ MATCH void func_801F7050(void) {
 }
 
 MATCH void func_801F70F8(void) {
-    Chain_Update(SCENA07_PANEL_ROWS);
+    MotionTrail_Update(SCENA07_PANEL_ROWS);
     func_801F8BE8(SCENA07_PANEL_ROWS);
     g_Task->pos.x.fixed -= TO_COORD(1);
     g_Task->pos.y.fixed += 0; /* FAKE: retail reloads and stores y with no change. */
@@ -103,7 +103,7 @@ MATCH void func_801F70F8(void) {
 }
 
 MATCH void func_801F71C0(void) {
-    Chain_Update(SCENA07_PANEL_ROWS);
+    MotionTrail_Update(SCENA07_PANEL_ROWS);
     func_801F8BE8(SCENA07_PANEL_ROWS);
     if (--g_Task->timer == 0) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
@@ -364,7 +364,7 @@ MATCH void func_801F7E68(void) {
 
     D_800E4C1E = 0xC0;
     for (i = 0; i < 32; i++) {
-        Chain_Update(SCENA07_PANEL_ROWS);
+        MotionTrail_Update(SCENA07_PANEL_ROWS);
     }
     if (g_Task->unk_06 != 0) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
@@ -373,7 +373,7 @@ MATCH void func_801F7E68(void) {
 }
 
 MATCH void func_801F7EF8(void) {
-    Chain_Update(SCENA07_PANEL_ROWS);
+    MotionTrail_Update(SCENA07_PANEL_ROWS);
     func_801F8BE8(SCENA07_PANEL_ROWS);
     g_Task->pos.x.fixed += g_Task->vx;
     g_Task->pos.y.fixed += g_Task->vy;
@@ -385,7 +385,7 @@ MATCH void func_801F7EF8(void) {
 }
 
 MATCH void func_801F7FA4(void) {
-    Chain_Update(SCENA07_PANEL_ROWS);
+    MotionTrail_Update(SCENA07_PANEL_ROWS);
     func_801F8BE8(SCENA07_PANEL_ROWS);
     if (--g_Task->timer == 0) {
         if (g_Task->unk_06 == 0) {
@@ -549,7 +549,7 @@ MATCH void func_801F8804(u8 shade) {
     GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
 }
 
-#include "shared/Chain_Update.h"
+#include "shared/MotionTrail_Update.h"
 
 INCLUDE_ASM(func_801F8BE8);
 

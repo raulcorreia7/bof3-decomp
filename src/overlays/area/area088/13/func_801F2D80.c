@@ -3,7 +3,7 @@
 MATCH void func_801F2D80(void) {
     u8 remaining;
 
-    Chain_Update((u8*)AREA_WORK);
+    MotionTrail_Update((u8*)AREA_WORK);
     func_801F3258((u8*)AREA_WORK);
     ACTOR_COUNT_DOWN(remaining, timer);
     if (!(remaining & BYTE_MASK)) {

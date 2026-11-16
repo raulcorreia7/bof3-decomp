@@ -240,7 +240,7 @@ MATCH void func_801F7A9C(void) {
 
 MATCH void func_801F7AD0(void) {
     SYS_DISPATCH_TASK(D_801FE8E4, 2, g_Task);
-    Chain_Update(MEM_PTR(void, 0x800E48E0u));
+    MotionTrail_Update(MEM_PTR(void, 0x800E48E0u));
     func_801F90C8(MEM_PTR(void, 0x800E48E0u));
 }
 
@@ -699,7 +699,7 @@ MATCH void func_801F8D4C(FallingSpark* spark) {
     }
 }
 
-#include "shared/Chain_Update.h"
+#include "shared/MotionTrail_Update.h"
 
 INCLUDE_ASM(func_801F90C8);
 
