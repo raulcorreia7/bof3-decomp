@@ -2,6 +2,7 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING u8 func_801BDD58(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* record) {
+    /* FAKE: plain C gives the record t0 and pos_x a0; 46 rows measured without the pins. */
     FAKE_REG(s32, px, "t0");
     FAKE_REG(Actor*, rec, "a0");
     s32 x;
@@ -9,6 +10,7 @@ NON_MATCHING u8 func_801BDD58(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* rec
     s32 dist;
     s32 bound;
 
+    /* FAKE: the entry copy sinks to its reader without this use. */
     px = pos_x;
     FAKE_USE(px);
     rec  = record;
