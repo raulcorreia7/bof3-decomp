@@ -10,6 +10,12 @@
 /* The camera view rotation the refresh compares against. */
 extern SVECTOR D_801492E0;
 
+/* The marker screen-y source flag and the y it holds. */
+extern s32 D_80145EA4;
+extern s16 D_80145EC0;
+/* The sorted object pointer list and its count. */
+extern s32 D_8014828C[];
+
 /* The scratchpad work row the entry paths read. */
 
 /* The character work record, viewed as bytes here. */
