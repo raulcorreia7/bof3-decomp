@@ -274,7 +274,7 @@ MATCH void func_801FE438(void) {
 #include "overlays/scenario/Scene_RebuildRyuGarrParty.h"
 
 MATCH void func_801FE5B0(void) {
-    g_Characters[g_CharSlot[5]].unk_07 &= 254;
+    g_Characters[g_CharSlot[5]].party_flags &= 254;
     Party_RemoveMember(CHAR_ID_MOMO);
     Party_LoadPalettes();
 }
