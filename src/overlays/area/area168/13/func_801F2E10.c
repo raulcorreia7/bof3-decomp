@@ -1,7 +1,6 @@
 #include "area168_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F2E10(s32* first, s32* second) {
+MATCH void func_801F2E10(s32* first, s32* second) {
     LINE_F2* line;
     u16      size[2];
     u16      scale[2];
@@ -18,7 +17,7 @@ NON_MATCHING void func_801F2E10(s32* first, s32* second) {
     SetSemiTrans(line, 0);
     Area_ProjectPoint(first, (DVECTOR*)&line->x0);
     Area_ProjectPoint(second, (DVECTOR*)&line->x1);
-    setRGB0(line, D_801F4B2C[g_Task->unk_06 * 3], D_801F4B2C[g_Task->unk_06 * 3 + 1], D_801F4B2C[g_Task->unk_06 * 3 + 2]);
+    setRGB0(line, D_801F4B2C[g_Task->unk_06 * 3], D_801F4B2D[g_Task->unk_06 * 3], D_801F4B2E[g_Task->unk_06 * 3]);
     Area_AddCellPrim(g_Task->vx, g_Task->vy, 1, sizeof(LINE_F2));
     angle   = ratan2(line->y1 - line->y0, line->x1 - line->x0);
     size[0] = 64;
@@ -29,6 +28,3 @@ NON_MATCHING void func_801F2E10(s32* first, s32* second) {
     radius2 = scale[0] + (g_FrameCount & 1);
     func_801F3040(line->x0, line->y0, radius1, angle + ANGLE_90, line->x1, line->y1, radius2, angle + ANGLE_270);
 }
-#else
-INCLUDE_ASM(func_801F2E10);
-#endif

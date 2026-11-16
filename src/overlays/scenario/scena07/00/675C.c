@@ -131,14 +131,14 @@ MATCH void func_801FDBCC(void) {
 
 MATCH void func_801FDBF4(void) {
     Party_RemoveMember(CHAR_ID_GARR);
-    g_Characters[g_CharSlot[CHAR_ID_NINA_YOUNG]].unk_07 &= 0xFE;
+    g_Characters[g_CharSlot[CHAR_ID_NINA_YOUNG]].party_flags &= 0xFE;
     /* FAKE: the slot map is const here, so the retail empty load delay needs the barrier. */
     FAKE_BARRIER();
-    g_Characters[g_CharSlot[CHAR_ID_MOMO]].unk_07 &= 0xFE;
+    g_Characters[g_CharSlot[CHAR_ID_MOMO]].party_flags &= 0xFE;
     /* FAKE: the slot map is const here, so the retail empty load delay needs the barrier. */
     FAKE_BARRIER();
-    g_Characters[g_CharSlot[CHAR_ID_PECO]].unk_07 &= 0xFE;
+    g_Characters[g_CharSlot[CHAR_ID_PECO]].party_flags &= 0xFE;
     /* FAKE: the slot map is const here, so the retail empty load delay needs the barrier. */
     FAKE_BARRIER();
-    g_Characters[g_CharSlot[CHAR_ID_GARR]].unk_07 &= 0xFE;
+    g_Characters[g_CharSlot[CHAR_ID_GARR]].party_flags &= 0xFE;
 }

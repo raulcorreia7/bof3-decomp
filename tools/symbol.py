@@ -604,7 +604,8 @@ def rename(args: argparse.Namespace) -> int:
         path = ROOT / name
         if path.name == f"{old}.c":
             add_move(path)
-    check_scope = scope if address else ["src", "include", "config"]
+    # The edits are the files the scope allows; --local and --scope limit the check with them.
+    check_scope = scope
     if not repair:
         check_rename(old, edits, check_scope, bool(address))
     apply_rename(edits, moves, old, check_scope, bool(address), verify=not repair)
