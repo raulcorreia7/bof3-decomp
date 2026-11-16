@@ -91,7 +91,7 @@ MATCH s32 func_801EEF3C(void) {
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF1F4(void) {
-    BMAGIC_DISPATCH_AND_DRAW(D_801F0754, func_801EF4C0);
+    BMAGIC_DISPATCH_AND_DRAW(D_801F0754, BMagic_DrawDome);
 }
 
 #include "overlays/bmagic/Effect_CopyBattlerCoords.h"
@@ -125,8 +125,8 @@ MATCH void func_801EF37C(void) {
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF4C0(void) {
+/* func_801EF4C0 */
+MATCH void BMagic_DrawDome(void) {
     POLY_GT4* prim;
     long      depth;
     long      flag;
@@ -183,8 +183,7 @@ NON_MATCHING void func_801EF4C0(void) {
                           &depth, &flag);
             prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x340, 0x100);
             prim->clut  = GetClut(0, 0x1FA);
-            setUV4(prim, i * 8, (band - 16) * 8 + 32 + g_Task->timer * 4, i * 8 + 8, (band - 16) * 8 + 32 + g_Task->timer * 4, i * 8, g_Task->timer * 4 + (band - 16) * 8 + 0x28, i * 8 + 8,
-                   g_Task->timer * 4 + (band - 16) * 8 + 0x28);
+            setUV4(prim, i * 8, (band - 16) * 8 + 0x20, i * 8 + 8, (band - 16) * 8 + 0x20, i * 8, (band - 16) * 8 + 0x28, i * 8 + 8, (band - 16) * 8 + 0x28);
             setRGB0(prim, LOHU(g_ScratchPad.cells.halves[4]), LOHU(g_ScratchPad.cells.halves[4]), LOHU(g_ScratchPad.cells.halves[4]));
             setRGB1(prim, LOHU(g_ScratchPad.cells.halves[4]), LOHU(g_ScratchPad.cells.halves[4]), LOHU(g_ScratchPad.cells.halves[4]));
             setRGB2(prim, LOHU(g_ScratchPad.cells.halves[3]), LOHU(g_ScratchPad.cells.halves[3]), LOHU(g_ScratchPad.cells.halves[3]));
@@ -193,9 +192,6 @@ NON_MATCHING void func_801EF4C0(void) {
         }
     }
 }
-#else
-INCLUDE_ASM(func_801EF4C0);
-#endif
 
 MATCH void func_801EFA50(void) {
     BMAGIC_DISPATCH_AND_DRAW(D_801F0760, func_801EFC74);
