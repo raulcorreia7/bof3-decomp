@@ -24,7 +24,7 @@ segments:
       - [0x2A8, c, func_800C1AA8]
       - [0x2EC, c, func_800C1AEC]
       - [0x344, c, func_800C1B44]
-      - [0x388, c, Boss_FinishDefeat]
+      - [0x388, c, Boss_EndDefeat]
       - [0x408, c, func_800C1C08]
       - [0x440, c, func_800C1C40]
       - [0x448, c, func_800C1C48]

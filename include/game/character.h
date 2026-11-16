@@ -32,7 +32,7 @@
 #define CHARACTER_SPRITES_SECTION_COUNT 3
 #define CHARACTER_PALETTE_COLORS        32
 
-/* The highest fatigue level a character reaches: Char_DrainFatigue raises the byte only below it. */
+/* The highest fatigue level a character reaches: Char_AddFatigue raises the byte only below it. */
 #define CHARACTER_FATIGUE_MAX           9
 
 /* The ailments the engine cures when a battle ends (the game's own strings

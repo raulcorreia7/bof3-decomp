@@ -10,7 +10,7 @@ segments:
       - [0x0, .data, g_AreaModuleId]
       - [0x4, c, Area_EnterWyndiaTeleporter]
       - [0x30, c, Actor_RunAreaStep]
-      - [0x64, c, Area_CheckStepTrigger]
+      - [0x64, c, Area_TestStepTrigger]
       - [0x118, c, func_801F2D18]
       - [0x15C, c, Actor_SnapToGround]
       - [0x1A8, c, Area_DrawLinkedLightPillar]

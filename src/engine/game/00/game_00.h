@@ -578,7 +578,7 @@ void    func_80197F48(void);
 void    Game_UpdateCameraLook(void);
 void    func_801981B4(void);
 /* func_801981D4 */
-void    Game_FinishCameraLook(void);
+void    Game_EndCameraLook(void);
 void    Game_UpdateShop(void);
 void    Game_LoadShopOverlay(void);
 void    Game_ReturnFromShop(void);

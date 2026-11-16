@@ -15,7 +15,7 @@ static Scene00Tables D_801FC980_Tables = {
     {
         func_801F913C,
         (Callback)Scene_DispatchActor,
-        (Callback)Scene_CheckStepTrigger,
+        (Callback)Scene_TestStepTrigger,
         (Callback)func_801FC8F4,
     },
     0,
@@ -2357,7 +2357,7 @@ MATCH void func_801FC810(void) {
 
 /* Step trigger: entry_08 of the scenario, called by Area_IsStepBlocked with its handler_x (x >> 16 is compared with the
  * column). A hit starts a scripted scene and returns 1; a nonzero result blocks the step. */
-MATCH s32 Scene_CheckStepTrigger(s32 x) { /* func_801FC818 */
+MATCH s32 Scene_TestStepTrigger(s32 x) { /* func_801FC818 */
     if ((g_GameAreaId == AREA_ID_DAUNA_MINE_WORKER) && ((x >> 16) == 43) && (SYS_TestFlag(g_SceneFlags, 6) != 0)) {
         g_SceneState.state_04 = 7;
         g_SceneState.step_05  = 0;

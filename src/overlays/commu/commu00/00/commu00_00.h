@@ -300,7 +300,7 @@ void func_801F1684(void);
 void func_801F16F8(void);
 void Fairy_LoadCommu01(void);
 /* func_801F17A4 */
-void Fairy_FinishEventLoad(void);
+void Fairy_EndEventLoad(void);
 void Fairy_ReloadPartySprites(void);
 void func_801F1874(void);
 void Fairy_GrantGift(void);

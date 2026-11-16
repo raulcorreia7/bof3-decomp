@@ -20,7 +20,7 @@ segments:
       - [0x60, c, func_800C1860]
       - [0xA4, c, func_800C18A4]
       - [0xFC, c, func_800C18FC]
-      - [0x140, c, Boss_FinishDefeat]
+      - [0x140, c, Boss_EndDefeat]
       - [0x1C0, c, func_800C19C0]
       - [0x204, c, func_800C1A04]
       - [0x24C, c, func_800C1A4C]

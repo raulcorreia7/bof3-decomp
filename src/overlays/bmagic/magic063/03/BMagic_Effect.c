@@ -159,7 +159,7 @@ MATCH void func_801EF1C8(void) {
     g_Task->header.step++;
 }
 
-#include "overlays/bmagic/Effect_FinishOnZeroTick.h"
+#include "overlays/bmagic/Effect_EndOnZeroTick.h"
 
 MATCH void func_801EF340(void) {
     SYS_DISPATCH_TASK(g_BMagicEffectModes + 1, 1, g_BMagicOrbit);

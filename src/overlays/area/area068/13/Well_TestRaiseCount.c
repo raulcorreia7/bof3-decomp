@@ -1,7 +1,7 @@
 #include "area068_13.h"
 
 /* func_801F3764 */
-MATCH void Well_CheckRaiseCount(void) {
+MATCH void Well_TestRaiseCount(void) {
     u16 lower;
     u16 raise;
 

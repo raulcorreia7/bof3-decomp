@@ -598,7 +598,7 @@ extern void        func_801D3C88(void);
 extern void        func_801D3CC4(void);
 extern void        func_801D3E80(void);
 /* func_801D3F6C */
-extern void        Battle_FinishEffectLoad(void);
+extern void        Battle_EndEffectLoad(void);
 extern void        func_801D3FEC(void);
 extern void        func_801D4028(void);
 extern void        func_801D409C(void);
@@ -865,7 +865,7 @@ extern void        func_801E51DC(void);
 /* func_801E531C */
 void               Battle_RollEnemyDrops(void);
 /* func_801E5768 */
-void               Battle_HandleDesertDefeat(void);
+void               Battle_RunDesertDefeat(void);
 void               func_801E57C8(void);
 /* func_801E5824 */
 void               Battle_UpdateEffects(void);

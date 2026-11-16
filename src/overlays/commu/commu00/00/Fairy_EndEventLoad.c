@@ -4,7 +4,7 @@
  * latch, while the four bytes D_801F294C..D_801F294F have no reader. */
 
 /* func_801F17A4 */
-MATCH void Fairy_FinishEventLoad(void) {
+MATCH void Fairy_EndEventLoad(void) {
     if (EMI_IsReady()) {
         GFX_ResetPalette();
         g_GfxPalettePending = 1;

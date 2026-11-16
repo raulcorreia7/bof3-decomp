@@ -13,6 +13,6 @@ extern void (*D_801F3304[])(void);
 /* Drains the copied position against the image's wall list. */
 void Area_DrawLightPillar(s32* pos);
 
-/* The first row of the trigger band in the shared Area_CheckStepTrigger body. */
+/* The first row of the trigger band in the shared Area_TestStepTrigger body. */
 
 #endif
