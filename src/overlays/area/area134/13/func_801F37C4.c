@@ -1,18 +1,9 @@
 #include "area134_13.h"
 
 MATCH void func_801F37C4(void) {
-    Actor* row;
-    u8*    work;
-    s32    i;
+    u8* work;
 
-    i    = 0;
-    work = (u8*)g_Task;
-    TASK_SET(&g_Actors[1]);
-    row = &g_Actors[1];
-    do {
-        row->pos.x.fixed += 0x4000;
-        i++;
-    } while ((u8)i < 4);
+    work    = Area_AdvanceRow(1);
     work[1] = 5;
     g_Task  = work;
 }
