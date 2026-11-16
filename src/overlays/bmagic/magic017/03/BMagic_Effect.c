@@ -63,7 +63,34 @@ MATCH void func_801EF058(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF11C);
+MATCH void func_801EF11C(void) {
+    s8 tint;
+    u8 count;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if (count != 0) {
+        return;
+    }
+    g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    tint           = -64;
+    g_Task->unk_5C = 1;
+    g_Task->unk_2B = 1;
+    g_Task->unk_5D = tint;
+    g_Task->unk_5E = tint;
+    g_Task->unk_5F = tint;
+    g_Task->unk_27 = g_BattleEffectBattler->unk_27;
+    if ((g_Task->param.unk_0B & 1) == 0) {
+        g_Task->unk_0C = 0;
+        g_Task->unk_10 = -ONE;
+    } else {
+        g_Task->unk_0C = 0;
+        g_Task->unk_10 = ONE;
+    }
+    func_801DD350(g_Task);
+    g_Task->unk_09 = 16;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EF248(void) {
     g_Task->pos.x.fixed += g_Task->unk_0C;
@@ -76,7 +103,38 @@ MATCH void func_801EF248(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF300);
+MATCH void func_801EF300(void) {
+    u8 count;
+
+    count          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = count;
+    if (count == 16) {
+        if ((g_Task->param.unk_0B & 1) != 0) {
+            g_Task->unk_0C = -TO_COORD(2);
+            g_Task->unk_10 = -TO_COORD(1);
+        } else {
+            g_Task->unk_0C = -TO_COORD(2);
+            g_Task->unk_10 = TO_COORD(1);
+        }
+        func_801DD350(g_Task);
+        g_Task->pos.x.fixed = g_Battle.selected_actor->pos.x.fixed + g_Task->unk_0C;
+        g_Task->pos.y.fixed = g_Battle.selected_actor->pos.y.fixed + g_Task->unk_10;
+        g_Task->pos.z.fixed = g_Battle.selected_actor->pos.z.fixed;
+        if ((g_Task->param.unk_0B & 1) != 0) {
+            g_Task->unk_0C = 0;
+            g_Task->unk_10 = ONE;
+        } else {
+            g_Task->unk_0C = 0;
+            g_Task->unk_10 = -ONE;
+        }
+        func_801DD350(g_Task);
+        if (g_Task->param.unk_0B == 0) {
+            SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
+        }
+        g_Task->unk_09 = 16;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EF460(void) {
     PartyMember* task;
