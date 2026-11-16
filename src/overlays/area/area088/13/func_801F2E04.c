@@ -1,7 +1,7 @@
 #include "area088_13.h"
 
 MATCH void func_801F2E04(void) {
-    func_801F2F28(MEM_PTR(u8, AREA_WORK));
+    Chain_Update(MEM_PTR(u8, AREA_WORK));
     func_801F3258(MEM_PTR(u8, AREA_WORK));
     D_800E4B3E -= 6;
     if (--g_Task->timer == 0) {

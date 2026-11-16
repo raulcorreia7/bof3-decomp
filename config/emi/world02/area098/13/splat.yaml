@@ -39,7 +39,7 @@ segments:
       - [0x16E8, c, func_801F42E8]
       - [0x1890, c, func_801F4490]
       - [0x1AEC, c, GFX_DrawColorFan]
-      - [0x1CE8, c, func_801F48E8]
+      - [0x1CE8, c, Area_DrawYellowLine]
       - [0x1FC0, c, func_801F4BC0]
       - [0x2144, c, func_801F4D44]
       - [0x2180, c, Area_FindFreeWorkRow]

@@ -77,24 +77,8 @@ extern Callback jtbl_801F6CE4[16];
 void func_801FE800(void);
 
 void func_801F8964(FallingSpark* spark);
-void func_801F8D98(void* table);
-
-/* A chain of 32 screen-projected points with the direction between neighbours. */
-typedef struct ChainNode {
-    s32 pos[3];
-    u8  pad_0C[4];
-    s16 screen[2];
-    s16 angle;
-    s16 size;
-} ChainNode;
-
-typedef struct Chain {
-    ChainNode node[32];
-    u16       dir[31];
-    u16       size;
-} Chain;
-
-u32 MATH_AverageAngle(u16 a, u16 b);
+/* func_801F8D98 */
+void Chain_Update(void* table);
 
 void func_801F90C8(void* table);
 void func_801FA32C(void);

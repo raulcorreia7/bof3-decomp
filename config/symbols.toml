@@ -4437,6 +4437,7 @@ Scene_DispatchEntity = { addr = 0x801F6DCC, type = "func", source = "dispatches 
 func_801F6DD4 = { addr = 0x801F6DD4, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
 Scene_InitSpark = { addr = 0x801F83D0, type = "func", source = "Starts one spark at a random point near the actor position, falling from rest; one body shared by scena07 and scena08." }
 Actor_Wait = { addr = 0x801F8730, type = "func", source = "Counts the actor wait byte down reloads it at zero and advances the handler index." }
+Chain_Update = { addr = 0x801F88B8, type = "func", source = "Pushes the task position onto a chain of 32 nodes, projects every node to the screen with its size and sets each node's angle from the directions between its neighbours." }
 MATH_AverageAngle = { addr = 0x801F8F40, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
 GFX_DrawFan = { addr = 0x801F8F90, type = "func", source = "Draws a fan of eight semi-transparent POLY_G3 triangles from a screen point, the centre corner shaded by the colour byte; one body shared by scena07, scena08 and area088" }
 Scene_DispatchActor = { addr = 0x801FD3BC, type = "func", source = "dispatches a scenario actor to its callback handler" }
@@ -4461,6 +4462,7 @@ Scene_DispatchEntity = { addr = 0x801F6F48, type = "func", source = "dispatches 
 func_801F6F50 = { addr = 0x801F6F50, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
 Scene_InitSpark = { addr = 0x801F8B50, type = "func", source = "Starts one spark at a random point near the actor position, falling from rest; one body shared by scena07 and scena08." }
 Actor_Wait = { addr = 0x801F8D18, type = "func", source = "Counts the actor wait byte down reloads it at zero and advances the handler index." }
+Chain_Update = { addr = 0x801F8D98, type = "func", source = "Pushes the task position onto a chain of 32 nodes, projects every node to the screen with its size and sets each node's angle from the directions between its neighbours." }
 MATH_AverageAngle = { addr = 0x801F9420, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
 GFX_DrawFan = { addr = 0x801F9470, type = "func", source = "Draws a fan of eight semi-transparent POLY_G3 triangles from a screen point, the centre corner shaded by the colour byte; one body shared by scena07, scena08 and area088" }
 Scene_DispatchActor = { addr = 0x801FE018, type = "func", source = "dispatches a scenario actor to its callback handler" }
@@ -5345,6 +5347,7 @@ g_WorldMapCloudTexture = { addr = 0x801F580C, source = "Texture window of the cl
 ["emi/world02/area088/13"]
 g_SceneEventStep_u8 = { addr = 0x801448EC, type = "u8", alias = true, source = "The scene event step byte (0x801448EC) as a u8 array; Fishing_ShowLocation and func_801F3EE8 read and step it." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Chain_Update = { addr = 0x801F2F28, type = "func", source = "Pushes the task position onto a chain of 32 nodes, projects every node to the screen with its size and sets each node's angle from the directions between its neighbours." }
 MATH_AverageAngle = { addr = 0x801F35B0, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
 GFX_DrawFan = { addr = 0x801F3600, type = "func", source = "Draws a fan of eight semi-transparent POLY_G3 triangles from a screen point, the centre corner shaded by the colour byte; one body shared by scena07, scena08 and area088" }
 Message_ClearOnCancel = { addr = 0x801F3764, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
@@ -5412,6 +5415,7 @@ g_MenuMasterSubStep = { addr = 0x801D4286, source = "Current sub-step of the mas
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_UpdateSpawn = { addr = 0x801F3AA8, type = "func", source = "Runs one frame of the spawn work: claims a slot every fourth frame of g_Task +0x06, runs the per-image AREA_SPAWN_TICK and the slot pass, decrements the timer at g_Task +0x09 and installs the pending spawn (coordinates +0x64/+0x68/+0x6C to +0x18/+0x1C/gravity, -0x1000/-0x400 into +0x0C/+0x10, spawn index +0x01 advanced) when it reaches zero (func_801F3AA8 in area098/13, func_801F3598 in area188/13)." }
 GFX_DrawColorFan = { addr = 0x801F46EC, type = "func", source = "Draws a ring of 32 semi-transparent triangles around a projected point, the radius the point projected at the given size plus the frame parity, the centre corner coloured by the low three bits of the flags; one body shared by sce15ef0 and area098." }
+Area_DrawYellowLine = { addr = 0x801F48E8, type = "func", source = "Draws a yellow line from one point to another: two one-pixel-offset gradient quads with the colour byte intensity on the red and green channels, then up to eight dots stepped back along the line." }
 Area_FindFreeWorkRow = { addr = 0x801F4D80, type = "func", source = "Finds the first work-window row whose byte is zero or returns NULL." }
 Area_ClearWorkColumn = { addr = 0x801F5240, type = "func", source = "Zeroes byte 0 of each of the 0x80 work rows, 0x14 bytes apart." }
 Area_ClaimSpawnSlot = { addr = 0x801F526C, type = "func", source = "Claims the first free of the eight spawn slots at the work window: sets it active and copies the actor position, with the image's life, radius and centre shade; the area098, area172 and area188 scene steps call it every fourth frame (unk_06 & 3 == 0) before Area_UpdateSpawnSlots." }
@@ -6410,6 +6414,7 @@ Scene_ClearEventState = { addr = 0x801F2CA4, type = "func", source = "Ends the s
 ["emi/world04/area188/13"]
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x38, source = "The switch table of func_801F4B80: 14 jump targets of its jr dispatch." }
 Area_UpdateSpawn = { addr = 0x801F3598, type = "func", source = "Runs one frame of the spawn work: claims a slot every fourth frame (unk_06 & 3 is 0), runs AREA_SPAWN_TICK and Area_UpdateSpawnSlots, counts the timer down and, at 0, copies the coordinates at +0x64, +0x68 and +0x6C into +0x18, +0x1C and gravity, sets vx to -0x1000 and vy to -0x400 and adds 1 to header.mode (byte 0x01)." }
+Area_DrawYellowLine = { addr = 0x801F3ADC, type = "func", source = "Draws a yellow line from one point to another: two one-pixel-offset gradient quads with the colour byte intensity on the red and green channels, then up to eight dots stepped back along the line." }
 Area_ClearWorkColumn = { addr = 0x801F3DB4, type = "func", source = "Zeroes byte 0 of each of the 0x80 work rows, 0x14 bytes apart." }
 Area_ClaimSpawnSlot = { addr = 0x801F3DE0, type = "func", source = "Claims the first free of the eight spawn slots at the work window: sets it active and copies the actor position, with the image's life, radius and centre shade; the area098, area172 and area188 scene steps call it every fourth frame (unk_06 & 3 == 0) before Area_UpdateSpawnSlots." }
 Area_UpdateSpawnSlots = { addr = 0x801F3E7C, type = "func", source = "Ages every active spawn slot: counts the life byte down, shrinks the radius halfword the draw reads as the disc radius, frees the slot at zero and calls Area_DrawSpawnSlot; returns whether any slot was active, the scene steps ignore it." }

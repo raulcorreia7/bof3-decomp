@@ -1,6 +1,5 @@
-#include "area188_13.h"
-
-MATCH void func_801F3ADC(s32* from, s32* to, u8 intensity) {
+/* Area_DrawYellowLine (func_801F3ADC in area188, func_801F48E8 in area098). Every change must verify every member. */
+MATCH void Area_DrawYellowLine(s32* from, s32* to, u8 intensity) {
     POLY_G4* prim;
     TILE_1*  segment;
     Point3l  current;
