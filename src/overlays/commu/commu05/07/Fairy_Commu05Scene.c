@@ -29,7 +29,54 @@ MATCH void func_801D0C4C(void) {
     D_801F294C += 1;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D0D4C(void) {
+    u8* counts;
+    u8  page;
+    u8  remaining;
+    u8  total;
+
+    counts    = (u8*)&D_801D19F0;
+    remaining = counts[4];
+    page      = 0;
+    while (remaining >= counts[page]) {
+        remaining -= counts[page];
+        page++;
+    }
+    func_801D1724(0x20, 0x18);
+    switch (page) {
+        case 0:
+            func_801D1048(0x28, 0x28, remaining);
+            break;
+        case 1:
+            func_801D129C(0x28, 0x28, remaining);
+            break;
+        default:
+            func_801D14C8(0x28, 0x28, remaining);
+            break;
+    }
+    total = counts[0] + counts[1] + counts[2];
+    if (g_InputPressed & PADRright) {
+        counts[4] += 1;
+        if ((s8)counts[4] >= total) {
+            counts[4] = 0;
+        }
+    }
+    if (g_InputPressed & PADLleft) {
+        counts[4] -= 1;
+        if ((s8)counts[4] < 0) {
+            counts[4] = total - 1;
+        }
+    }
+    TEXT_Format(g_UiFormatBuffer, D_801D0C04, (s8)counts[4] + 1, total);
+    UI_DrawGlyphString(0xEE, 0x2C, 0, g_UiFormatBuffer);
+    if (g_InputPressed & (g_InputMasks[INPUT_SLOT_CONFIRM] | g_InputMasks[INPUT_SLOT_CANCEL])) {
+        D_801F294C += 1;
+    }
+}
+#else
 INCLUDE_ASM(func_801D0D4C);
+#endif
 
 MATCH void func_801D0F34(void) {
     /* FAKE: retail reads g_SceneEventState.step as u8[]. */

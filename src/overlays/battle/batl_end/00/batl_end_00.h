@@ -5,6 +5,8 @@
 #include <stdio.h>
 
 extern u16        D_801463B0;
+extern u16        D_801463B4;
+extern u8         D_8014835F;
 extern s16        D_80148628;
 extern u16        D_8014862A;
 extern u8         D_8014862D;
@@ -20,6 +22,8 @@ extern const char D_801EEC04[];
 extern const char D_801EEC4C[];
 extern const char D_801EEC50[];
 u8                func_801EEDA8(void);
+/* Sets the panel row the reward list opens on. */
+void              func_801DE9A8(u8 row);
 s32               func_801EF6C0(void);
 u16               func_801EF928(u8 id, u8 flag);
 extern void       func_801EFE5C(void);

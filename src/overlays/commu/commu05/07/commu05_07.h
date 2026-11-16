@@ -20,6 +20,12 @@ typedef struct {
 
 extern Commu05State D_801D19F0;
 
+void        func_801D1048(s16 x, s16 y, u8 group);
+void        func_801D129C(s16 x, s16 y, u8 group);
+void        func_801D14C8(s32 x, s32 y, s32 group);
+void        func_801D1724(u16 x, u16 y);
+extern char D_801D0C04[];
+
 /* g_EmiOverlayHeader */
 /* D_801D1950 */
 extern Callback g_Commu05States[COMMU05_STEP_COUNT];
