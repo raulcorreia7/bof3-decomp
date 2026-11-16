@@ -1157,7 +1157,8 @@ void                    func_80159A00(void);
 void                    func_80159A20(void);
 void                    func_80159A90(void);
 void                    func_80159B38(void);
-extern void             func_80159B9C(s16 x, s16 y, u8 w, u8 h);
+/* func_80159B9C */
+extern void             UI_DrawPanelBox(s16 x, s16 y, u8 w, u8 h);
 void                    func_80159FA0(s32 x, s32 y, u8 width, u8 height);
 extern void             func_8015A098(void);
 extern void             func_8015A170(void);
@@ -1238,7 +1239,7 @@ static inline void Slus_DrawPanelBox(void) {
     MenuPanelTask* panel;
 
     panel = g_MenuCurrentPanel;
-    func_80159B9C((s16)panel->pos.x >> 4, (s16)panel->pos.y >> 4, (u8)(panel->u.grow.width >> 4), (u8)(panel->u.grow.height >> 4));
+    UI_DrawPanelBox((s16)panel->pos.x >> 4, (s16)panel->pos.y >> 4, (u8)(panel->u.grow.width >> 4), (u8)(panel->u.grow.height >> 4));
 }
 
 void SYS_Main(void);
