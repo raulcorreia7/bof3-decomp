@@ -1,3 +1,4 @@
+#define TASK_VOLATILE
 #include "battle_15.h"
 
 /* The enemy record the enemy id is read from. */
@@ -9,12 +10,13 @@
 #ifdef NON_MATCHING
 NON_MATCHING void Battle_InitEnemy(s32 enemy_slot, u16 enemy_index, s32 x, s32 y) {
     EnemyBattler* enemy;
+    EnemyBattler* first;
     u16           unit_id;
     s32           unit_offset;
 
-    enemy = &g_BattleEnemyBattlers[enemy_slot & BYTE_MASK];
-    TASK_SET(enemy);
-    enemy->header.flags = 1;
+    first = &g_BattleEnemyBattlers[enemy_slot & BYTE_MASK];
+    TASK_SET(first);
+    first->header.flags = 1;
     unit_offset         = (enemy_index & HALF_MASK) * BATTLE_ENEMY_RECORD_SIZE;
     unit_id             = FIELD(u16, &D_800E405E, unit_offset);
     if (unit_id == 717 || unit_id == 737) {
