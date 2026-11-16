@@ -3,7 +3,7 @@
 MATCH void func_801F2D0C(void) {
     switch (g_SceneEventState.step) {
         case 10:
-            MESSAGE_START_WAIT(0x2D);
+            MESSAGE_START_WAIT(AREA150_MSG_WAIT_FOR_NIGHT);
             g_SceneEventState.step = 11;
             break;
         case 12:
@@ -32,7 +32,7 @@ MATCH void func_801F2D0C(void) {
         case 20:
             if (g_GameStateIndex == GAME_REQUEST_IDLE) {
                 if (SYS_TestFlag(D_80144EF8, 3)) {
-                    Message_StartAreaMessage(0x25);
+                    Message_StartAreaMessage(AREA150_MSG_DESERT_LIFE);
                 } else {
                     Message_StartAreaMessage(0x20);
                 }

@@ -17,7 +17,7 @@ MATCH void func_801F38DC(void) {
         case 1:
             request = &g_GameStateIndex;
             if (*request == GAME_REQUEST_IDLE) {
-                Message_StartAreaMessage(0xB5);
+                Message_StartAreaMessage(AREA037_MSG_READY);
                 *request = GAME_REQUEST_MESSAGE;
                 *state   = *state + 1;
             }

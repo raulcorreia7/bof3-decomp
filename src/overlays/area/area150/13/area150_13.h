@@ -6,8 +6,12 @@
 
 #include "overlays/area/world03.h"
 
+/* The desert scenes' lines. */
+#define AREA150_MSG_DESERT_LIFE    37
+#define AREA150_MSG_WAIT_FOR_NIGHT 45
+
 /* FAKE: the call passes the count as s32, the width the real prototype (u8) lacks. */
-#define Item_Add ((bool (*)(s32, s32, s32, s32))Item_Add)
+#define Item_Add                   ((bool (*)(s32, s32, s32, s32))Item_Add)
 
 /* The scenario state byte the hit path sets. */
 

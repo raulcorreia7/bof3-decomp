@@ -7,6 +7,10 @@
 #include "overlays/area/world04.h"
 #include "area/spad.h"
 
+/* The exit prompts the walk paths ask before leaving. */
+#define AREA189_MSG_RETURN_TO_CAMP  2
+#define AREA189_MSG_RETURN_TO_OASIS 3
+
 /* The camera view rotation the refresh compares against. */
 extern SVECTOR D_801492E0;
 

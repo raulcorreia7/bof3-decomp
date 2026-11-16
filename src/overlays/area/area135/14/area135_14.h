@@ -9,6 +9,12 @@
 #include "area/spad.h"
 #include "scenario/party.h"
 
+/* The lines the lift and ID-card scene shows. */
+#define AREA135_MSG_ID_CARD_FOUND         129
+#define AREA135_MSG_PLATFORM_PROGRAM_HELP 131
+#define AREA135_MSG_PLATFORM_ACTIVATED    132
+#define AREA135_MSG_CATWALK_OCCUPIED      135
+
 extern u8 D_801F69AF;
 /* The area flag byte the request step sets. */
 extern u8 D_80143FBC;
