@@ -372,4 +372,54 @@ MATCH void func_80117DF0(void) {
     func_80117E78(128 - ((Actor*)g_Task)->timer, 0);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_80117E78(s32 brightness, s32 unused) {
+    POLY_FT4* primitive;
+    SVECTOR*  corner;
+    s32       row;
+    s32       col;
+    s32       half;
+    s32       sum;
+    long      depth;
+    long      flag;
+
+    corner = D_1F800014;
+    for (row = D_801181D4[COORD_INT(g_Task->pos.x)][1]; row < D_801181D4[COORD_INT(g_Task->pos.x)][3]; row++) {
+        for (col = D_801181D4[COORD_INT(g_Task->pos.x)][0]; col < D_801181D4[COORD_INT(g_Task->pos.x)][2]; col++) {
+            sum = row + col;
+            if (sum & 1) {
+                corner->vx = ((col - 0x80) << 7) + 0x40;
+                corner->vy = ((row - 0x80) << 7) + 0x40;
+                corner->vz = -0x340;
+                RotTransPers(corner, (long*)D_1F800034_U16, &depth, &flag);
+                half = 3 - ((g_FrameCount / 3 + sum) & 7);
+                if (half < 0) {
+                    half = -half;
+                }
+                half += 24;
+                primitive = (POLY_FT4*)g_GfxPrimCursor;
+                SetPolyFT4(primitive);
+                SetShadeTex(primitive, 0);
+                primitive->x0 = D_1F800034_U16[0] - half;
+                primitive->y0 = D_1F800034_U16[1] - half;
+                primitive->x1 = D_1F800034_U16[0] + half;
+                primitive->y1 = D_1F800034_U16[1] - half;
+                primitive->x2 = D_1F800034_U16[0] - half;
+                primitive->y2 = D_1F800034_U16[1] + half;
+                primitive->x3 = D_1F800034_U16[0] + half;
+                primitive->y3 = D_1F800034_U16[1] + half;
+                SetSemiTrans(primitive, 1);
+                setUV4(primitive, 224, 48, 255, 48, 224, 79, 255, 79);
+                primitive->clut  = getClut(80, STAGE_PALETTE_Y + 3);
+                primitive->tpage = getTPage(0, 1, 704, 256);
+                primitive->r0    = brightness / 2;
+                primitive->g0    = brightness;
+                primitive->b0    = brightness / 2;
+                Area_AddCellPrim(col << 16, row << 16, 1, sizeof(POLY_FT4));
+            }
+        }
+    }
+}
+#else
 INCLUDE_ASM(func_80117E78);
+#endif
