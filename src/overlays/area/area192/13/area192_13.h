@@ -14,7 +14,6 @@ extern u8 D_801F3890[];
 extern u8 D_801F38C0[];
 /* The area counter and the area flag store the selection pass reads. */
 extern u8 D_80144F56;
-extern u8 D_80144EF8[];
 /* func_801F326C: the table of character ids has five entries; each message table
  * holds a row of nine entries per character, one per area column 0 to 8. */
 #define CAMP_MESSAGE_CHARACTER_COUNT 5

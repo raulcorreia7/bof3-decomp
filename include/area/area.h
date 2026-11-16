@@ -512,4 +512,7 @@ void Scene_ClearActor();
 extern Point2u g_FlockVelocity[4];
 extern u8      g_FlockScript[4][2];
 
+/* The area bytes the area and scena15 images read as one array. */
+extern u8 D_80144EF8[];
+
 #endif
