@@ -336,7 +336,68 @@ MATCH void func_801EFBF8(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EFC74(void) {
+    u8           half;
+    PartyMember* battler;
+    PartyMember* ring_battler;
+    PartyMember* spark_battler;
+    u8           i;
+    u8           slot;
+    u8           timer;
+
+    Actor_StepAnimOnce();
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (timer != 0) {
+        return;
+    }
+    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+    func_800A9610(g_Battle.target_selector, 16);
+    slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
+    battler                            = g_BattleEffectBattler;
+    g_BattleEffects[slot].header.mode  = 2;
+    g_BattleEffects[slot].target.party = battler;
+    g_BattleEffectBattler->param.unk_0B += 1;
+    slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
+    battler                            = g_BattleEffectBattler;
+    g_BattleEffects[slot].header.mode  = 3;
+    g_BattleEffects[slot].target.party = battler;
+    g_BattleEffectBattler->param.unk_0B += 1;
+    for (i = 0; i < 8; i++) {
+        slot = func_801F1A58();
+        if (slot == GAME_NONE) {
+            continue;
+        }
+        ring_battler                 = g_BattleEffectBattler;
+        D_801F1CA0[slot].header.mode = 0;
+        D_801F1CA0[slot].header.step = 0;
+        D_801F1CA0[slot].unk_07      = i;
+        D_801F1CA0[slot].battler     = ring_battler;
+        g_BattleEffectBattler->param.unk_0B += 1;
+    }
+    for (i = 0; i < 28; i++) {
+        slot = func_801F1A58();
+        if (slot == GAME_NONE) {
+            continue;
+        }
+        spark_battler                = g_BattleEffectBattler;
+        D_801F1CA0[slot].header.mode = 1;
+        D_801F1CA0[slot].header.step = 0;
+        D_801F1CA0[slot].unk_07      = i;
+        D_801F1CA0[slot].battler     = spark_battler;
+        half                         = i & 0xF;
+        if (i < 16) {
+            half >>= 1;
+        }
+        D_801F1CA0[slot].unk_26 = half + 1;
+        g_BattleEffectBattler->param.unk_0B += 1;
+    }
+    g_Task->header.step++;
+}
+#else
 INCLUDE_ASM(func_801EFC74);
+#endif
 
 MATCH void func_801EFEF0(void) {
     if (Actor_StepAnimOnce() != 0u) {
