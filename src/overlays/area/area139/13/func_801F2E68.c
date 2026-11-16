@@ -1,30 +1,35 @@
 #include "area139_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F2E68(void) {
-    DVECTOR start;
-    DVECTOR end;
-    s32     point[3];
-    MATRIX  camera;
+/* Sweeps the platform actor two steps from its start cell and raises the scene flag. */
+MATCH void func_801F2E68(void) {
+    u8 i;
 
-    g_Task->pos.x.fixed = TO_COORD(24) + COORD_HALF;
-    g_Task->pos.y.fixed = TO_COORD(18);
-    g_Task->pos.z.fixed = (Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16) + TO_COORD(0x800);
-    g_Task->screen_x    = 0x80;
-    g_Task->screen_y    = 0x180;
-    g_Task->unk_32      = 0;
-    g_Task->timer       = 8;
-    g_Task->header.mode++;
-    Area_SetCameraMatrix(&camera);
-    point[0] = g_Task->pos.x.fixed;
-    point[1] = g_Task->pos.y.fixed;
-    point[2] = g_Task->pos.z.fixed;
-    Area_ProjectPoint(point, &start);
-    point[2] -= TO_COORD(256);
-    Area_ProjectPoint(point, &end);
-    g_Task->unk_32 = ratan2(end.vy - start.vy, end.vx - start.vx) + 0x400;
-    SND_PlayCue(0x202);
+    g_Task->unk_06             = 0;
+    g_Task->vx                 = TO_COORD_HALF(61);
+    g_Task->unk_1C             = TO_COORD(68);
+    g_Task->vy                 = TO_COORD(68);
+    g_Task->pos.z.part.integer = Area_SampleHeight((g_Task->vx + g_Task->unk_18) / 2, g_Task->vy);
+    func_801F308C(1);
+
+    for (i = 0; i < 2; i++) {
+        g_Task->unk_18      = g_Task->vx + TO_COORD(2);
+        g_Task->pos.x.fixed = (g_Task->vx + g_Task->unk_18) / 2;
+        g_Task->pos.y.fixed = g_Task->vy;
+        g_Task->gravity     = TO_COORD(g_Task->pos.z.part.integer + 256);
+        g_Task->vz          = g_Task->gravity;
+        func_801F3288(&g_Task->vx, &g_Task->unk_18);
+
+        g_Task->gravity = TO_COORD(g_Task->pos.z.part.integer + 512);
+        g_Task->vz      = g_Task->gravity;
+        func_801F3288(&g_Task->vx, &g_Task->unk_18);
+        func_801F3A7C(&g_Task->vx, &g_Task->unk_18);
+
+        g_Task->vx = g_Task->unk_18;
+        g_Task->unk_18 += TO_COORD(2);
+    }
+
+    if (SYS_TestFlag(g_SceneEventFlags, 0x5D) == 0) {
+        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 6));
+        g_Task->header.mode = 3;
+    }
 }
-#else
-INCLUDE_ASM(func_801F2E68);
-#endif
