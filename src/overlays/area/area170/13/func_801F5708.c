@@ -7,7 +7,7 @@ MATCH void func_801F5708(void) {
     work = g_Task;
     if (SYS_TestFlag(g_SceneEventFlags, 121) != 0) {
         request = 1;
-    } else if (Item_Add(ITEM_CAT_WEAPON, WEAPON_HE_SHELLS, 1, 0) == 0) {
+    } else if (Item_Add(ITEM_CATEGORY_WEAPON, WEAPON_HE_SHELLS, 1, 0) == 0) {
         request = 3;
     } else {
         SYS_SetFlag(g_SceneEventFlags, 121);

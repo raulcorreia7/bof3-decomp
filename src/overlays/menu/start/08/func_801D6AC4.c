@@ -30,7 +30,7 @@ MATCH void func_801D6AC4(u8 character) {
         item   = D_801C8940[i];
         power  = g_Weapons[item].power;
         weight = g_Weapons[item].weight;
-        if (((Item_GetEquipability(ITEM_CAT_WEAPON, item) >> character) & 0x1) &&
+        if (((Item_GetEquipability(ITEM_CATEGORY_WEAPON, item) >> character) & 0x1) &&
             (g_EquipPreview[EQUIP_SLOT_WEAPON] == 0 || bestWeight > weight || (bestWeight == weight && (best < power || (best == power && item < g_EquipPreview[EQUIP_SLOT_WEAPON]))))) {
             g_EquipPreview[EQUIP_SLOT_WEAPON] = item;
             best                              = g_Weapons[item].power;
@@ -47,7 +47,7 @@ MATCH void func_801D6AC4(u8 character) {
             armor  = &g_Armors[item];
             power  = armor->power;
             weight = armor->weight;
-            if (armor->type - ITEM_TYPE_SHIELD == i - EQUIP_SLOT_SHIELD && ((Item_GetEquipability(ITEM_CAT_ARMOR, item) >> character) & 0x1) &&
+            if (armor->type - ITEM_TYPE_SHIELD == i - EQUIP_SLOT_SHIELD && ((Item_GetEquipability(ITEM_CATEGORY_ARMOR, item) >> character) & 0x1) &&
                 (g_EquipPreview[i] == 0 || bestWeight > weight || (bestWeight == weight && (best < power || (best == power && item < g_EquipPreview[EQUIP_SLOT_WEAPON]))))) {
                 g_EquipPreview[i] = item;
                 /* Retail reloads the weight into the power value here. */

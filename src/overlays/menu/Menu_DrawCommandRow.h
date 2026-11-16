@@ -23,7 +23,7 @@ MATCH void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused) {
         if (g_MenuCommandRows[row][1 + i] == 0x12 && (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) == 0) {
             color = MENU_SHADE_DIM;
         }
-        if (g_MenuCommandRows[row][1 + i] == 8 && (u8)Item_VitalHas(VITAL_ITEM_FOUNTAIN_PEN) == 0 && (Item_Count(ITEM_CAT_ITEM, ITEM_SKILL_INK, 0) & HALF_MASK) == 0) {
+        if (g_MenuCommandRows[row][1 + i] == 8 && (u8)Item_VitalHas(VITAL_ITEM_FOUNTAIN_PEN) == 0 && (Item_Count(ITEM_CATEGORY_ITEM, ITEM_SKILL_INK, 0) & HALF_MASK) == 0) {
             color = MENU_SHADE_DIM;
         }
         label       = g_MenuCommandLabels[g_MenuCommandRows[row][1 + i]];

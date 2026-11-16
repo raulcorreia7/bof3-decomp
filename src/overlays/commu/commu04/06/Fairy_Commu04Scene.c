@@ -68,13 +68,13 @@ MATCH void func_801D12C8(void) {
     Menu_ResetPanelTasks();
     /* kept: retail indexes g_FairyJobs by the selection at every use; a FairyJob local shrinks the image by 0x50 bytes. */
     switch (g_FairyJobs[g_SceneEventState.selection].unk_03 & 0xF) {
-        case ITEM_CAT_ITEM:
+        case ITEM_CATEGORY_ITEM:
             flags = g_Items[g_FairyJobs[g_SceneEventState.selection].record_state].flags;
             break;
-        case ITEM_CAT_WEAPON:
+        case ITEM_CATEGORY_WEAPON:
             flags = g_Weapons[g_FairyJobs[g_SceneEventState.selection].record_state].header.flags;
             break;
-        case ITEM_CAT_ARMOR:
+        case ITEM_CATEGORY_ARMOR:
             flags = g_Armors[g_FairyJobs[g_SceneEventState.selection].record_state].header.flags;
             break;
         default:

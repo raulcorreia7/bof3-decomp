@@ -9,7 +9,7 @@ MATCH void func_801FB6C4(void) {
         case 0:
             g_ScriptVars[0] = 0x15;
             SYS_SetFlag(g_SceneFlags, 0x27);
-            Item_Remove(ITEM_CAT_VITAL, VITAL_ITEM_WALLET, 1, 0);
+            Item_Remove(ITEM_CATEGORY_VITAL, VITAL_ITEM_WALLET, 1, 0);
             g_SceneState.step_05 = 1;
             break;
         case 1:
@@ -22,7 +22,7 @@ MATCH void func_801FB6C4(void) {
         case 10:
             g_ScriptVars[0] = 0x14;
             SYS_SetFlag(g_SceneFlags, 0x26);
-            Item_Add(ITEM_CAT_VITAL, VITAL_ITEM_WALLET, 1, 0);
+            Item_Add(ITEM_CATEGORY_VITAL, VITAL_ITEM_WALLET, 1, 0);
             Game_ClearScriptActive();
             SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
             SCENE_RETURN_TO_START();

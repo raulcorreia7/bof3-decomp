@@ -17,27 +17,27 @@ MATCH void func_801D639C(void) {
     switch (g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A) {
         case EQUIP_SLOT_WEAPON:
         default:
-            group_index = ITEM_CAT_WEAPON;
+            group_index = ITEM_CATEGORY_WEAPON;
             choice      = record + 0xE;
             break;
         case EQUIP_SLOT_SHIELD:
-            group_index = ITEM_CAT_ARMOR;
+            group_index = ITEM_CATEGORY_ARMOR;
             choice      = record + 0xF;
             break;
         case EQUIP_SLOT_HELMET:
-            group_index = ITEM_CAT_ARMOR;
+            group_index = ITEM_CATEGORY_ARMOR;
             choice      = record + 0x10;
             break;
         case EQUIP_SLOT_ARMOR:
-            group_index = ITEM_CAT_ARMOR;
+            group_index = ITEM_CATEGORY_ARMOR;
             choice      = record + 0x11;
             break;
         case EQUIP_SLOT_ACCESSORY_1:
-            group_index = ITEM_CAT_ACCESSORY;
+            group_index = ITEM_CATEGORY_ACCESSORY;
             choice      = record + 0x12;
             break;
         case EQUIP_SLOT_ACCESSORY_2:
-            group_index = ITEM_CAT_ACCESSORY;
+            group_index = ITEM_CATEGORY_ACCESSORY;
             choice      = record + 0x13;
             break;
     }

@@ -446,7 +446,7 @@ MATCH u8 Fishing_ShopTradeBlocked(s32 slot, s32 amount) {
             return false;
         }
         limit = (u8(*)[8]) & D_801E2F7E[0][3];
-        if ((Item_Count(ITEM_CAT_ITEM, (value + 0x38), 0) & HALF_MASK) < limit[D_801E3134[g_GameEntryFacing][slot & BYTE_MASK]][i] * (amount & BYTE_MASK)) {
+        if ((Item_Count(ITEM_CATEGORY_ITEM, (value + 0x38), 0) & HALF_MASK) < limit[D_801E3134[g_GameEntryFacing][slot & BYTE_MASK]][i] * (amount & BYTE_MASK)) {
             return true;
         }
     }
@@ -484,11 +484,11 @@ MATCH void Fishing_ShopDrawNeeded(void) {
         if (D_801E2F7E[D_801E3134[g_GameEntryFacing][slot]][i] == GAME_NONE) {
             break;
         }
-        value = Item_GetRecord(ITEM_CAT_ITEM, (u8)((D_801E2F7E[D_801E3134[g_GameEntryFacing][slot]][i] + 0x38) & BYTE_MASK));
+        value = Item_GetRecord(ITEM_CATEGORY_ITEM, (u8)((D_801E2F7E[D_801E3134[g_GameEntryFacing][slot]][i] + 0x38) & BYTE_MASK));
         UI_DrawText(173, (0x58 + i * 13), 0, Game_ReadCommand((u8*)value) & BYTE_MASK, (u8*)value);
         TEXT_Format(g_UiFormatBuffer, D_800F5000.format, D_801E2F81[D_801E3134[g_GameEntryFacing][slot]][i] * (s8)s_ListItemId);
         UI_DrawGlyphString(272, (0x5C + i * 13), 0, g_UiFormatBuffer);
-        cost = Item_Count(ITEM_CAT_ITEM, (D_801E2F7E[D_801E3134[g_GameEntryFacing][slot]][i] + 0x38) & BYTE_MASK, 0);
+        cost = Item_Count(ITEM_CATEGORY_ITEM, (D_801E2F7E[D_801E3134[g_GameEntryFacing][slot]][i] + 0x38) & BYTE_MASK, 0);
         if (cost < D_801E2F81[D_801E3134[g_GameEntryFacing][slot]][i]) {
             UI_DrawText(173, (0xA4 + i * 13), 7, Game_ReadCommand((u8*)value) & BYTE_MASK, (u8*)value);
             TEXT_Format(g_UiFormatBuffer, D_800F5000.format, cost);
@@ -625,6 +625,6 @@ MATCH void Fishing_ShopTakeTradeItems(void) {
         }
         p       = D_801E2F7E[list_index] + 3;
         new_var = p[i] * ((s8)s_ListItemId);
-        Item_Remove(ITEM_CAT_ITEM, (D_801E2F7E[D_801E3134[g_GameEntryFacing][s_ListCursor & 0xF]][i] + 0x38) & BYTE_MASK, new_var & BYTE_MASK, 0);
+        Item_Remove(ITEM_CATEGORY_ITEM, (D_801E2F7E[D_801E3134[g_GameEntryFacing][s_ListCursor & 0xF]][i] + 0x38) & BYTE_MASK, new_var & BYTE_MASK, 0);
     }
 }

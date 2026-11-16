@@ -12,7 +12,7 @@ MATCH bool Fishing_FishStacksFull(void) {
     count = 0;
     while (fish <= ITEM_MACKEREL) {
         for (i = 0; i < INV_SLOTS_PER_CATEGORY; i++) {
-            if (g_InventoryIds[ITEM_CAT_ITEM][i] == fish && g_InventoryCounts[ITEM_CAT_ITEM][i] == ITEM_STACK_MAX) {
+            if (g_InventoryIds[ITEM_CATEGORY_ITEM][i] == fish && g_InventoryCounts[ITEM_CATEGORY_ITEM][i] == ITEM_STACK_MAX) {
                 count++;
             }
         }

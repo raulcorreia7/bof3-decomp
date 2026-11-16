@@ -43,7 +43,7 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
             }
             row_shade = shade;
             held      = 1;
-            if (task->unk_0A != ITEM_CAT_VITAL) {
+            if (task->unk_0A != ITEM_CATEGORY_VITAL) {
                 held = *counts;
             }
             if (row == task->flags || row == task->unk_0C) {
@@ -66,7 +66,7 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
     length  = Game_ReadCommand(*title);
     title_x = length * 4 - 78;
     UI_DrawText(task->pos.x - title_x, task->pos.y + 7, -(task->unk_09 != 0) & MENU_SHADE_DIM, 16, *title);
-    sprintf(g_UiFormatBuffer, g_MenuInventoryCountFormat, Item_CountHeld(task->unk_0A) & BYTE_MASK, task->unk_0A != ITEM_CAT_VITAL ? INV_SLOTS_PER_CATEGORY : INV_VITAL_ITEM_SLOTS);
+    sprintf(g_UiFormatBuffer, g_MenuInventoryCountFormat, Item_CountHeld(task->unk_0A) & BYTE_MASK, task->unk_0A != ITEM_CATEGORY_VITAL ? INV_SLOTS_PER_CATEGORY : INV_VITAL_ITEM_SLOTS);
     UI_DrawGlyphString(task->pos.x + 85, task->pos.y + 122, -(task->unk_09 != 0) & MENU_SHADE_DIM, g_UiFormatBuffer);
 
     UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->u.list.tabs & MENU_LIST_FLAG_TAB_2) ? s_BattleAbilityLine1FlagRun : s_BattleAbilityLine1Run, 1);

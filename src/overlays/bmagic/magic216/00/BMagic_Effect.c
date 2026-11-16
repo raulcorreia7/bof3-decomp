@@ -95,17 +95,17 @@ MATCH void func_801EEF58(void) {
 
 MATCH void func_801EEF98(s32 index, s32 category) {
     switch (category & BYTE_MASK) {
-        case ITEM_CAT_ITEM:
+        case ITEM_CATEGORY_ITEM:
         default:
             SYS_CopyString(g_TextVariables, g_Items[index & BYTE_MASK].name, 12);
             break;
-        case ITEM_CAT_WEAPON:
+        case ITEM_CATEGORY_WEAPON:
             SYS_CopyString(g_TextVariables, g_Weapons[index & BYTE_MASK].header.name, 12);
             break;
-        case ITEM_CAT_ARMOR:
+        case ITEM_CATEGORY_ARMOR:
             SYS_CopyString(g_TextVariables, g_Armors[index & BYTE_MASK].header.name, 12);
             break;
-        case ITEM_CAT_ACCESSORY:
+        case ITEM_CATEGORY_ACCESSORY:
             SYS_CopyString(g_TextVariables, g_Accessories[index & BYTE_MASK].header.name, 12);
             break;
     }

@@ -27,14 +27,14 @@ MATCH s32 Item_Count(u8 category, u8 item_id, u8 mode) {
         record = &g_Characters[i];
         if (record->party_flags & 0x1) {
             switch (category) {
-                case ITEM_CAT_ITEM:
+                case ITEM_CATEGORY_ITEM:
                 default:
                     break;
-                case ITEM_CAT_WEAPON:
+                case ITEM_CATEGORY_WEAPON:
                     if (record->equip.weapon == item_id)
                         count++;
                     break;
-                case ITEM_CAT_ARMOR:
+                case ITEM_CATEGORY_ARMOR:
                     if (record->equip.shield == item_id)
                         count++;
                     if (record->equip.helmet == item_id)
@@ -42,7 +42,7 @@ MATCH s32 Item_Count(u8 category, u8 item_id, u8 mode) {
                     if (record->equip.armor == item_id)
                         count++;
                     break;
-                case ITEM_CAT_ACCESSORY:
+                case ITEM_CATEGORY_ACCESSORY:
                     if (record->equip.accessories[0] == item_id)
                         count++;
                     if (record->equip.accessories[1] == item_id)
@@ -51,7 +51,7 @@ MATCH s32 Item_Count(u8 category, u8 item_id, u8 mode) {
             }
         }
     }
-    if (category == ITEM_CAT_ACCESSORY) {
+    if (category == ITEM_CATEGORY_ACCESSORY) {
         if (g_FishingRod == item_id)
             count++;
         if (g_FishingLure == item_id)

@@ -14,22 +14,22 @@ MATCH void Shop_Equip(u8 character_id, u8 slot, u8 item_id) {
     switch (slot) {
         default:
         case EQUIP_SLOT_WEAPON:
-            SHOP_SWAP_EQUIPMENT(ITEM_CAT_WEAPON, weapon);
+            SHOP_SWAP_EQUIPMENT(ITEM_CATEGORY_WEAPON, weapon);
             break;
         case EQUIP_SLOT_SHIELD:
-            SHOP_SWAP_EQUIPMENT(ITEM_CAT_ARMOR, shield);
+            SHOP_SWAP_EQUIPMENT(ITEM_CATEGORY_ARMOR, shield);
             break;
         case EQUIP_SLOT_HELMET:
-            SHOP_SWAP_EQUIPMENT(ITEM_CAT_ARMOR, helmet);
+            SHOP_SWAP_EQUIPMENT(ITEM_CATEGORY_ARMOR, helmet);
             break;
         case EQUIP_SLOT_ARMOR:
-            SHOP_SWAP_EQUIPMENT(ITEM_CAT_ARMOR, armor);
+            SHOP_SWAP_EQUIPMENT(ITEM_CATEGORY_ARMOR, armor);
             break;
         case EQUIP_SLOT_ACCESSORY_1:
-            SHOP_SWAP_EQUIPMENT(ITEM_CAT_ACCESSORY, accessories[0]);
+            SHOP_SWAP_EQUIPMENT(ITEM_CATEGORY_ACCESSORY, accessories[0]);
             break;
         case EQUIP_SLOT_ACCESSORY_2:
-            SHOP_SWAP_EQUIPMENT(ITEM_CAT_ACCESSORY, accessories[1]);
+            SHOP_SWAP_EQUIPMENT(ITEM_CATEGORY_ACCESSORY, accessories[1]);
             break;
     }
 }

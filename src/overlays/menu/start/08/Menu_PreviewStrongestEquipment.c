@@ -23,9 +23,9 @@ MATCH void Menu_PreviewStrongestEquipment(u8 character) {
     g_EquipPreview[EQUIP_SLOT_WEAPON] = *slots[EQUIP_SLOT_WEAPON];
     best                              = g_Weapons[g_EquipPreview[EQUIP_SLOT_WEAPON]].power;
     for (i = 0; i < INV_SLOTS_PER_CATEGORY; i++) {
-        item  = D_801C893C[ITEM_CAT_WEAPON][i];
+        item  = D_801C893C[ITEM_CATEGORY_WEAPON][i];
         power = g_Weapons[item].power;
-        if (((Item_GetEquipability(ITEM_CAT_WEAPON, item) >> character) & 0x1) && (best < power || (best == power && item < g_EquipPreview[EQUIP_SLOT_WEAPON]))) {
+        if (((Item_GetEquipability(ITEM_CATEGORY_WEAPON, item) >> character) & 0x1) && (best < power || (best == power && item < g_EquipPreview[EQUIP_SLOT_WEAPON]))) {
             g_EquipPreview[EQUIP_SLOT_WEAPON] = item;
             best                              = g_Weapons[item].power;
         }
@@ -35,10 +35,10 @@ MATCH void Menu_PreviewStrongestEquipment(u8 character) {
         g_EquipPreview[i] = *slots[i];
         best              = g_Armors[g_EquipPreview[i]].power;
         for (j = 0; j < INV_SLOTS_PER_CATEGORY; j++) {
-            item  = D_801C893C[ITEM_CAT_ARMOR][j];
+            item  = D_801C893C[ITEM_CATEGORY_ARMOR][j];
             armor = &g_Armors[item];
             power = armor->power;
-            if (armor->type == ITEM_TYPE_OF_SLOT(i) && ((Item_GetEquipability(ITEM_CAT_ARMOR, item) >> character) & 0x1) && (best < power || (best == power && item < g_EquipPreview[i]))) {
+            if (armor->type == ITEM_TYPE_OF_SLOT(i) && ((Item_GetEquipability(ITEM_CATEGORY_ARMOR, item) >> character) & 0x1) && (best < power || (best == power && item < g_EquipPreview[i]))) {
                 g_EquipPreview[i] = item;
                 best              = g_Armors[item].power;
             }

@@ -65,17 +65,17 @@ typedef enum ItemTest {
 
 /* The inventory category code Item_GetRecord resolves a record from. */
 typedef enum ItemCategory {
-    ITEM_CAT_ITEM      = 0,
-    ITEM_CAT_WEAPON    = 1,
-    ITEM_CAT_ARMOR     = 2,
-    ITEM_CAT_ACCESSORY = 3,
-    ITEM_CAT_VITAL     = 4,
-    ITEM_CAT_EMPTY     = 0xFF,
+    ITEM_CATEGORY_ITEM      = 0,
+    ITEM_CATEGORY_WEAPON    = 1,
+    ITEM_CATEGORY_ARMOR     = 2,
+    ITEM_CATEGORY_ACCESSORY = 3,
+    ITEM_CATEGORY_VITAL     = 4,
+    ITEM_CATEGORY_EMPTY     = 0xFF,
 } ItemCategory;
 
 typedef struct VitalItem {
     u8  name[ITEM_NAME_LENGTH];
-    u16 description; /* Item_GetDescription, category ITEM_CAT_VITAL */
+    u16 description; /* Item_GetDescription, category ITEM_CATEGORY_VITAL */
     u16 unk_0E;      /* no reader */
 } VitalItem;
 
@@ -90,7 +90,7 @@ typedef struct Item {
     u8  name[ITEM_NAME_LENGTH];
     u8  flags;       /* ItemFlags */
     u8  type;        /* ItemType; every item row is ITEM_TYPE_ITEM */
-    u16 description; /* Item_GetDescription, category ITEM_CAT_ITEM */
+    u16 description; /* Item_GetDescription, category ITEM_CATEGORY_ITEM */
     u16 price;
 } Item;
 
@@ -122,7 +122,7 @@ typedef struct Weapon {
     u8         sound; /* cue-table index in battle/battle/15 func_800AB834 and func_800AB910 */
     u8         power;
     u8         unk_13;      /* no reader */
-    u16        description; /* Item_GetDescription, category ITEM_CAT_WEAPON */
+    u16        description; /* Item_GetDescription, category ITEM_CATEGORY_WEAPON */
     u16        price;
 } Weapon;
 
@@ -145,7 +145,7 @@ typedef struct Armor {
     u8         weight;
     u8         power;
     u8         unk_11;      /* no reader */
-    u16        description; /* Item_GetDescription, category ITEM_CAT_ARMOR */
+    u16        description; /* Item_GetDescription, category ITEM_CATEGORY_ARMOR */
     u16        price;
 } Armor;
 
@@ -164,7 +164,7 @@ typedef struct Accessory {
     ItemHeader header;
     u8         type; /* ItemType: accessory, fishing lure or rod; the low nibble selects the icon */
     u8         weight;
-    u16        description; /* Item_GetDescription, category ITEM_CAT_ACCESSORY */
+    u16        description; /* Item_GetDescription, category ITEM_CATEGORY_ACCESSORY */
     u16        price;
 } Accessory;
 
@@ -266,7 +266,7 @@ typedef struct ManilloStock {
 
 ASSERT_SIZE(ManilloStock, MANILLO_STOCK_STRIDE);
 
-/* The item table ids (category ITEM_CAT_ITEM). Names from the GAME.EMI record tables. */
+/* The item table ids (category ITEM_CATEGORY_ITEM). Names from the GAME.EMI record tables. */
 typedef enum ItemId {
     ITEM_NOTHING       = 0,
     ITEM_GREEN_APPLE   = 1,
@@ -362,7 +362,7 @@ typedef enum ItemId {
     ITEM_WATER_JUG     = 91,
 } ItemId;
 
-/* The weapon table ids (category ITEM_CAT_WEAPON). Names from the GAME.EMI record tables. */
+/* The weapon table ids (category ITEM_CATEGORY_WEAPON). Names from the GAME.EMI record tables. */
 typedef enum WeaponId {
     WEAPON_NOTHING        = 0,
     WEAPON_DAGGER         = 1,
@@ -449,7 +449,7 @@ typedef enum WeaponId {
     WEAPON_BEAST_SPEAR    = 82,
 } WeaponId;
 
-/* The armor table ids (category ITEM_CAT_ARMOR). Names from the GAME.EMI record tables. */
+/* The armor table ids (category ITEM_CATEGORY_ARMOR). Names from the GAME.EMI record tables. */
 typedef enum ArmorId {
     ARMOR_NOTHING           = 0,
     ARMOR_CLOTHING          = 1,
@@ -521,7 +521,7 @@ typedef enum ArmorId {
     ARMOR_MANLY_CLOTHES     = 67,
 } ArmorId;
 
-/* The accessory table ids (category ITEM_CAT_ACCESSORY: accessories, fishing lures and rods). Names from the GAME.EMI record tables. */
+/* The accessory table ids (category ITEM_CATEGORY_ACCESSORY: accessories, fishing lures and rods). Names from the GAME.EMI record tables. */
 typedef enum AccessoryId {
     ACCESSORY_NOTHING      = 0,
     ACCESSORY_TITAN_BELT   = 1,
@@ -577,7 +577,7 @@ typedef enum AccessoryId {
     ACCESSORY_MASTERS_ROD  = 51,
 } AccessoryId;
 
-/* The vital item table ids (category ITEM_CAT_VITAL). Names from the GAME.EMI record tables. */
+/* The vital item table ids (category ITEM_CATEGORY_VITAL). Names from the GAME.EMI record tables. */
 typedef enum VitalItemId {
     VITAL_ITEM_NOTHING      = 0,
     VITAL_ITEM_FLIER        = 1,
