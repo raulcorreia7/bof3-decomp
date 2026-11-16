@@ -10,6 +10,8 @@
 #include "scenario/party.h"
 
 extern u8 D_801F69AF;
+/* The area flag byte the request step sets. */
+extern u8 D_80143FBC;
 extern u8 D_801F6BC0;
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
@@ -83,9 +85,11 @@ extern u8         D_801F6248[][4];
 
 extern Callback D_801F6258[];
 extern u8       D_801F626C[];
-/* The x/y entry-coordinate pairs the request step indexes. */
+/* The x and y entry coordinates the request step indexes. */
 extern u8       D_801F6AAC[];
+extern u8       D_801F6AAD[];
 extern u8       D_801F6AB4[];
+extern u8       D_801F6AB5[];
 /* The x/y byte pairs the step compares the position against. */
 extern u8       D_801F6B2C[];
 extern u8       D_801F6B2D[];
