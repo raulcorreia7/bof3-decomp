@@ -101,7 +101,41 @@ MATCH void func_801EF2A0(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF2F0(s32 stat_index) {
+    BattleTurn* turn;
+    s8*         cell;
+    u8          selector;
+    s32         value;
+    s8          power;
+
+    FAKE_STACK_PADS(u8, 8); /* FAKE: retail frames 0x28 with no other stack use; plain C gives 0x20 (36 rows both ways). */
+    selector = g_Battle.target_selector;
+    if (selector < BATTLE_PARTY_CHARACTERS_COUNT) {
+        turn = &g_Game.members[selector].u.turn;
+    } else {
+        turn = &ENEMY_COMBATANT(selector).turn;
+    }
+    g_Battle.target_record               = turn;
+    g_Battle.target_record->hp_change    = 0;
+    g_Battle.target_record->ap_change    = 0;
+    g_Battle.target_record->target_flags = 0;
+    power                                = (s8)g_Abilities[g_Battle.action_id].power;
+    cell                                 = (s8*)g_BattleTargetRecord + (u8)stat_index;
+    value                                = cell[sizeof(BattleTurn)] + power;
+    if (value > 100) {
+        cell[sizeof(BattleTurn)] = 100;
+    } else if (value < -100) {
+        cell[sizeof(BattleTurn)] = -100;
+    } else {
+        cell[sizeof(BattleTurn)] += power;
+        Battle_RescaleStats(g_Battle.target_selector);
+    }
+}
+
+#else
 INCLUDE_ASM(func_801EF2F0);
+#endif
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
