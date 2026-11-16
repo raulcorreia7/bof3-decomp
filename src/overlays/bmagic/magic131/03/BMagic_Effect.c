@@ -486,6 +486,16 @@ NON_MATCHING void func_801F06B4(void) {
     u8        i;
     s16       angle;
 
+    if (GetGraphType() == 1) {
+        tpage = 0xA5;
+    } else if (GetGraphType() == 2) {
+        tpage = 0xA5;
+    } else {
+        tpage = 0x35;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(3, sizeof(DR_MODE));
+
     g_ScratchPad.cells.halves[4] = (s8)g_Task->unk_5D * 8;
     g_ScratchPad.cells.halves[5] = (s8)g_Task->unk_5D * 8;
     g_ScratchPad.cells.halves[6] = (s8)g_Task->unk_5D * 8;
