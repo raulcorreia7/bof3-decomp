@@ -5,8 +5,6 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern SVECTOR D_1F800014[];
-
 /* The scratch words func_801F0164 sums the screen x, y and height of the living targets into, and their count; the
  * effect view names only halfwords there, so the words go through the scratch math word view. */
 #define MAGIC096_SUM_X     D_1F800000.view.scenario.math_00

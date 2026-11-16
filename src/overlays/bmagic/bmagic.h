@@ -2,6 +2,7 @@
 #define BMAGIC_FAMILY_H
 
 #include "common/vector.h"
+#include "sys/scratchpad.h"
 #include "game.h"
 #include "gfx/prim.h"
 #include "overlays/battle/battle.h"
@@ -385,7 +386,6 @@ typedef struct BMagicRingShade {
 
 /* The four scratch vectors the effect draws project their corners from; the flat name keeps the retail
  * bytes, the scratchpad view does not. */
-extern SVECTOR D_1F800014[];
 
 /* Pointers to character-indexed archive ids, one row of two per g_Battle.dragon_form; the caller picks
  * the row's column and g_EmiLoadedCharacterIndex picks the id. */
