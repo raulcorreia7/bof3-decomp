@@ -57,13 +57,13 @@ MATCH u32 Battle_ApplyDamage(u8 attacker_slot, u8 target_slot) {
     }
     if (attacker_slot < 3 && g_Game.members[attacker_slot].unk_13A[2] == 5 && damage != 0) {
         if (g_Game.members[attacker_slot].chr.equip.weapon == WEAPON_SLEEP_SHELLS && !func_800A3DF8(attacker_slot, target_slot)) {
-            func_800A31E0(target_slot, 0x40);
+            Battle_AddStatus(target_slot, 0x40);
         }
         if (g_Game.members[attacker_slot].chr.equip.weapon == WEAPON_FLASH_SHELLS && !func_800A3DF8(attacker_slot, target_slot)) {
-            func_800A31E0(target_slot, 8);
+            Battle_AddStatus(target_slot, 8);
         }
         if (g_Game.members[attacker_slot].chr.equip.weapon == WEAPON_GAS_SHELLS && !func_800A3DF8(attacker_slot, target_slot)) {
-            func_800A31E0(target_slot, 0x20);
+            Battle_AddStatus(target_slot, 0x20);
         }
     }
     return (s16)damage;

@@ -33,9 +33,9 @@ MATCH void Battle_LoadEndOverlay(void) {
                     g_Game.members[i].chr.hp        = g_Game.members[i].chr.stats.max_hp;
                     g_Game.members[i].chr.ap        = g_Game.members[i].chr.stats.max_ap;
                     g_Game.members[i].chr.willpower = g_Game.members[i].chr.stats.willpower;
-                    func_800A36F0(i, g_Game.members[i].chr.status & ~STATUS_KO);
+                    Battle_CureStatus(i, g_Game.members[i].chr.status & ~STATUS_KO);
                 }
-                func_800A36F0(i, g_Game.members[i].chr.status & STATUS_CURE_MASK);
+                Battle_CureStatus(i, g_Game.members[i].chr.status & STATUS_CURE_MASK);
                 GFX_FreePaletteFadeTarget(work);
                 Battle_GetTurnCursor(i);
                 i += 1u;

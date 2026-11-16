@@ -317,7 +317,7 @@ typedef struct BattleEnemy {
     u8 unk_00[0x118];
 } BattleEnemy;
 
-/* The same cell read without the reload is g_BattleWorkCell: func_800A36F0's
+/* The same cell read without the reload is g_BattleWorkCell: Battle_CureStatus's
  * save/restore keeps the plain word. A second name is the only form that keeps
  * the retail `lui`/`sw` pairs; the address is an `alias:true` row of the image's table in config/symbols.toml. */
 extern u32 g_BattleWorkCell;
@@ -841,10 +841,12 @@ s16         Battle_GetFireResistance(u8 battler_index, u16 element_mask);
 s16         func_800A2EF0(u8 battler_index, u16 element_mask);
 /* func_800A30E8 */
 s32         Battle_CalcHeal(u8 unused, u8 battler_index);
-void        func_800A31E0(u8 selection_kind, u16 input_mask);
+/* func_800A31E0 */
+void        Battle_AddStatus(u8 battler_index, u16 status_mask);
 bool        func_800A3638(s32 battler_index, s32 compare_value);
 u8          func_800A36BC(s32 battler_index, s32 compare_value);
-u16         func_800A36F0(u8 battler_index, u16 flags);
+/* func_800A36F0 */
+u16         Battle_CureStatus(u8 battler_index, u16 status_mask);
 extern void Battle_SetTarget(s16 delta, u8 battler_index);
 u8          Battle_PickAbility(u8 battler_index, u8 selection_kind);
 u8          func_800A3C9C(u8 battler_index, u8 selection_kind);

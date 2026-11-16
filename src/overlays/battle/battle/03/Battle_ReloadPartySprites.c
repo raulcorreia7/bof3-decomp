@@ -20,7 +20,7 @@ MATCH void Battle_ReloadPartySprites(void) {
     i = 0u;
     if (g_BattlePartyCount != 0u) {
         do {
-            func_800A36F0(i, g_Game.members[i].chr.status & STATUS_CURE_MASK);
+            Battle_CureStatus(i, g_Game.members[i].chr.status & STATUS_CURE_MASK);
             GFX_FreePaletteFadeTarget(&g_Game.members[i]);
             i += 1u;
         } while (i < g_Battle.party_count);

@@ -18,7 +18,7 @@ MATCH void func_8009E07C(void) {
     if (status != 0) {
         state                             = &g_Battle.target;
         g_Battle.target_record->hp_change = -1;
-        func_800A36F0(*state, 0x4000U);
+        Battle_CureStatus(*state, 0x4000U);
         if (*state < 3u) {
             g_Battle.living_party_count += 1;
         } else {

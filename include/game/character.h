@@ -34,7 +34,7 @@
 
 /* The ailments the engine cures when a battle ends (the game's own strings
  * call status removal "cure"): Battle_ReloadPartySprites and Battle_LoadEndOverlay pass a
- * battler's status & this mask to func_800A36F0; STATUS_KO, STATUS_POISONED
+ * battler's status & this mask to Battle_CureStatus; STATUS_KO, STATUS_POISONED
  * and STATUS_CONFUSED persist. The (u16) keeps the complement a 16-bit
  * immediate (andi) in Battle_ReloadPartySprites's schedule. */
 #define STATUS_CURE_MASK                ((u16) ~(STATUS_KO | STATUS_POISONED | STATUS_CONFUSED))
