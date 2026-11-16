@@ -52,6 +52,7 @@ bool func_801F5EA8(void);
 s32  func_801F5F3C(void);
 void func_801F2DE0(void);
 void func_801F3514(void);
+void func_801F4150(s32 shade, s32 x);
 void func_801F3800(void);
 s16  func_801F4A04(s32 x, s32 y);
 void func_801F559C(void);
