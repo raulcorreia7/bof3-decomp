@@ -3,8 +3,7 @@
 MATCH void func_801F2D00(void) {
     u8 mode;
 
-    mode          = g_Task->timer - 1;
-    g_Task->timer = mode;
+    ACTOR_COUNT_DOWN(mode, timer);
     if (mode & BYTE_MASK) {
         g_Task->tint.bytes.rgb.red += 1;
         g_Task->tint.bytes.rgb.green += 1;

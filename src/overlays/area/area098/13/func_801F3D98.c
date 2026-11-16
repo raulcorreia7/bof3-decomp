@@ -7,8 +7,7 @@ MATCH void func_801F3D98(void) {
     g_Task->unk_03 -= 8;
     Area_UpdateSpawnSlots();
     Area_DrawYellowLine(&g_Task->unk_18, &g_Task->pos.x, g_Task->unk_03);
-    remaining     = g_Task->timer - 1;
-    g_Task->timer = remaining;
+    ACTOR_COUNT_DOWN(remaining, timer);
     if (!(remaining & BYTE_MASK)) {
         Actor_Clear();
     }

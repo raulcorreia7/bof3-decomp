@@ -6,8 +6,7 @@ MATCH void func_801F2D4C(void) {
     s32    timer;
     s8     step;
 
-    timer         = g_Task->timer - 1;
-    g_Task->timer = timer;
+    ACTOR_COUNT_DOWN(timer, timer);
     if (!(timer & BYTE_MASK)) {
         Message_StartAreaMessage(1);
         work              = g_Task;

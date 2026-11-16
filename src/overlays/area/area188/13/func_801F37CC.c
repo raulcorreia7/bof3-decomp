@@ -16,8 +16,7 @@ MATCH void func_801F37CC(void) {
         if (g_Task->timer == 16) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x16));
         }
-        mode          = g_Task->timer - 1;
-        g_Task->timer = mode;
+        ACTOR_COUNT_DOWN(mode, timer);
         if (!(mode & BYTE_MASK)) {
             g_Task->unk_03 = 0x80;
             g_Task->header.mode += 1;

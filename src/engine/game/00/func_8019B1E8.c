@@ -6,8 +6,7 @@ MATCH void func_8019B1E8(void) {
     u8     flag;
 
     if (Actor_StepAnimOnce() & BYTE_MASK) {
-        count         = g_Task->timer - 1;
-        g_Task->timer = count;
+        ACTOR_COUNT_DOWN(count, timer);
         if ((count & BYTE_MASK) == 0) {
             g_Task->header.mode = 2;
         }

@@ -19,8 +19,7 @@ MATCH void func_801F3BD4(void) {
     task->unk_18 += task->vx;
     task->unk_03 -= 4;
     task->unk_1C += task->vy;
-    remaining     = g_Task->timer - 1;
-    g_Task->timer = remaining;
+    ACTOR_COUNT_DOWN(remaining, timer);
     if (!(remaining & 0xFF)) {
         g_Task->timer = 128;
         g_Task->header.mode += 1;
