@@ -13,6 +13,8 @@
 extern u8   D_80144908[];
 extern u32  D_801F6C00;
 extern char D_801F6C04[];
+extern char D_801F6C08[];
+extern char D_801F6C10[];
 extern u8   D_80146875;
 
 /* A scene rectangle the panel draws: position and size. */

@@ -254,7 +254,7 @@ MATCH void func_801D1758(SpriteSpark* spark) {
     SetTile1(dot);
     SetSemiTrans(dot, 1);
     setXY0(dot, xy.vx, xy.vy);
-    if (spark->unk_3 != 0) {
+    if (spark->blink != 0) {
         setRGB0(dot, 128, 128, 128);
     } else {
         setRGB0(dot, 128, 0, 0);
@@ -266,7 +266,7 @@ MATCH void func_801D1758(SpriteSpark* spark) {
     setXY0(box, xy.vx - 1, xy.vy - 1);
     box->w = 3;
     box->h = 3;
-    if (spark->unk_3 != 0) {
+    if (spark->blink != 0) {
         setRGB0(box, 32, 32, 32);
     } else {
         setRGB0(box, 32, 0, 0);
@@ -288,10 +288,10 @@ MATCH s32 func_801D18CC(void) {
     i     = 0;
     do {
         if (spark->active != 0) {
-            step          = spark->unk_14 + 0x20000;
-            spark->unk_14 = step;
+            step          = spark->z_step + 0x20000;
+            spark->z_step = step;
             spark->z += step;
-            spark->unk_3 ^= 1;
+            spark->blink ^= 1;
             func_801D1758(spark);
             life        = spark->life - 1;
             spark->life = life;
