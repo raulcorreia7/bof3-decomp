@@ -2,7 +2,6 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801F3570(void) {
-    u8* palette;
     s32 x;
     s32 y;
     s32 column;
@@ -10,12 +9,11 @@ NON_MATCHING s32 func_801F3570(void) {
 
     row = 0;
     do {
-        y       = row + 0x20;
-        palette = D_801F4960[row];
-        column  = 0;
+        y      = row + 0x20;
+        column = 0;
         do {
             x = column + 0x94;
-            if ((func_801F30B8(x, y) & BYTE_MASK) != palette[column]) {
+            if ((func_801F30B8(x, y) & BYTE_MASK) != D_801F4960[row][column]) {
                 return 0;
             }
             column += 1;
