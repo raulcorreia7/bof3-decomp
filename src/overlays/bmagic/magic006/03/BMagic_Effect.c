@@ -423,13 +423,8 @@ MATCH void func_801F0790(void) {
     D_1F800014[0].vz = 0;
 
     for (i = 1; i <= 16; i++) {
-        prim             = GFX_BeginPolyG3(1);
-        D_1F800014[0].vx = 0;
-        D_1F800014[0].vy = 0;
-        D_1F800014[1].vx = D_1F800014[2].vx;
-        D_1F800014[1].vy = D_1F800014[2].vy;
-        D_1F800014[2].vx = FIXED_MUL(rsin(i << 8), D_1F800000.cells.halves[0]);
-        D_1F800014[2].vy = FIXED_MUL(rcos(i << 8), D_1F800000.cells.halves[0]);
+        prim = GFX_BeginPolyG3(1);
+        GFX_STEP_TRIANGLE_FAN(i << 8, D_1F800000.cells.halves[0]);
         RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
         setRGB0(prim, D_1F800000.cells.halves[5], D_1F800000.cells.halves[6], D_1F800000.cells.halves[7]);
         setRGB1(prim, 1, 1, 1);
