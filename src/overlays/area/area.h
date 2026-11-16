@@ -15,6 +15,7 @@
 #include "common/facing.h"
 #include "scenario/runtime.h"
 #include "common/util.h"
+#include "shared/WorldSpin.h"
 
 /* One cell of a payload's data tables: `offset` is the table's byte offset and
  * `index` the byte offset of the row. */
@@ -248,7 +249,7 @@ void Area_DrawHud(s16 x, s16 y);
 void Actor_StopMoving(void);
 void Area_ClearWorkColumn(void);
 u8*  Area_FindFreeWorkRow(void);
-void Area_InitSpin(void* spin);
+void Area_InitSpin(WorldSpin* spin);
 void Area_UpdateRunGauge(void);
 void Area_ClaimSpawnSlot(void);
 s32  Area_UpdateSpawnSlots(void);

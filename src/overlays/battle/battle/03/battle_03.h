@@ -193,7 +193,6 @@ extern volatile u32    D_80145FB8[][80];
 extern u8              D_80145FC6;
 extern u8              D_80145FC7;
 extern u8              D_80145FC9;
-extern u8              D_801462E7;
 extern u8              D_801462F6[];
 extern u8              D_80146304; /* oscillation direction latch */
 extern u8              D_80146308; /* UI oscillator byte */
