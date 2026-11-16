@@ -26,6 +26,11 @@ extern u8 D_801F6AA0[];
 extern u8 D_801F6B10[];
 extern u8 D_801F6B18[];
 
+/* The three x then three y corners of each of the four triangles the torch flame draws. */
+extern u16 D_801F6B2C[][6];
+/* The word the torch flame's palette swap writes each eighth frame. */
+extern u16 D_800396C6;
+
 void func_801F5418(s32 value, s32 flag);
 void func_801F555C(s16 x, s16 y, u8 row);
 
