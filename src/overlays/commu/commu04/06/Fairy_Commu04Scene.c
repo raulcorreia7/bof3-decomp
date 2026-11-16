@@ -82,8 +82,8 @@ MATCH void func_801D12C8(void) {
             break;
     }
 
-    /* Bit 3 is ITEM_TARGET_ALL on an item and an equipability flag on the other three tables. */
-    if (flags & 0x8) {
+    /* The copy shop handles the unsellable rows like the vital items. */
+    if (flags & ITEM_UNSELLABLE) {
         Message_StartAreaMessage(MSG_235);
         D_801F294D = 6;
     } else {

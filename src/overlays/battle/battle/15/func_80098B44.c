@@ -4,7 +4,7 @@ MATCH void func_80098B44(void) {
     u32 flags;
 
     flags = Item_GetFlags(g_MenuPanelTasks[16].unk_0A, D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C]);
-    if ((flags & 0x20u) != 0u) {
+    if ((flags & ITEM_SHOW_NAME) != 0u) {
         g_BattleActorTurn->command.target = Battle_TargetNext(3);
         g_Battle.ui_state                 = 1u;
     } else if (func_8009AF7C() != 0u) {

@@ -1,8 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* returns byte 1 of the record `category`/`item` selects: 18-byte rows of D_801C8970 (category 0 and others), 24-byte
- * D_801C90E9 (category 1), 22-byte D_801C98B1 (category 2), 20-byte D_801C9E89 (category 3); category 4 returns 0.
- * Item_GetEquipability and Item_GetIcon read bytes 0 and 2. */
+/* The flags byte of the row: 18-byte item rows from D_801C8970, 24-byte weapon rows from D_801C90E9, 22-byte armor
+ * rows from D_801C98B1, 20-byte accessory rows from D_801C9E89; a vital item has none. Item_GetEquipability and
+ * Item_GetIcon read the equipability and type bytes of the same rows. */
 MATCH u32 Item_GetFlags(u32 category, u32 item) {
     switch (category & BYTE_MASK) {
         case ITEM_CAT_ITEM:

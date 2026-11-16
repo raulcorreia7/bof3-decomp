@@ -6,8 +6,8 @@ MATCH void func_80099E80(void) {
 
     packed = g_Game.members[g_BattleMessageSlot[5] & BYTE_MASK].u.turn.command.id;
     flags  = Item_GetFlags(packed >> 8, packed & BYTE_MASK);
-    if ((flags & 0x40) != 0) {
-        if ((flags & 0x10) != 0) {
+    if ((flags & ITEM_SHOW_ANIMATION) != 0) {
+        if ((flags & ITEM_STORY_ITEM) != 0) {
             g_Battle.ui_step = 9;
         } else {
             g_Battle.ui_step = 8;
@@ -16,10 +16,10 @@ MATCH void func_80099E80(void) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
         return;
     }
-    if ((flags & 0x80) != 0) {
+    if ((flags & ITEM_USABLE_MENU) != 0) {
         g_BattleActorTurn->command.target = BATTLE_TARGET_BOTH_SIDES;
-    } else if ((flags & 0x10) != 0) {
-        if ((flags & 0x20) != 0) {
+    } else if ((flags & ITEM_STORY_ITEM) != 0) {
+        if ((flags & ITEM_SHOW_NAME) != 0) {
             g_BattleActorTurn->command.target = BATTLE_TARGET_ENEMY_SIDE;
         } else {
             g_BattleActorTurn->command.target = BATTLE_TARGET_PARTY_SIDE;
