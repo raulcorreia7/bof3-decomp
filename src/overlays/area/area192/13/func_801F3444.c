@@ -14,7 +14,7 @@ MATCH void func_801F3444(void) {
         return;
     }
     if (!SYS_TestFlag(flags + 0x576, 0xA)) {
-        if (fatigue < 9) {
+        if (fatigue < CHARACTER_FATIGUE_MAX) {
             if (fatigue < 5) {
                 mode = D_80144F56 >= 5;
             } else {
