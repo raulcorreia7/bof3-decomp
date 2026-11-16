@@ -11,7 +11,7 @@ segments:
       - [0x4, c, func_801F2C04]
       - [0x48, c, func_801F2C48]
       - [0x88, c, func_801F2C88]
-      - [0x118, c, func_801F2D18]
+      - [0x118, c, Area_SetCameraZOffset]
       - [0x138, c, Area_ResetCameraOffsetZ]
       - [0x154, c, func_801F2D54]
       - [0x1E4, c, func_801F2DE4]

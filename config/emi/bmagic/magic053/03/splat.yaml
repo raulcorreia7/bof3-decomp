@@ -17,7 +17,7 @@ segments:
     align: 4
     subsegments:
       - [0x1948, bin, D_801F0548]
-      - [0x1950, bin, D_801F0550]
+      - [0x1950, bin, g_BMagicEffectModes]
       - [0x1954, bin, D_801F0554]
       - [0x1968, bin, D_801F0568]
       - [0x196C, bin, D_801F056C]

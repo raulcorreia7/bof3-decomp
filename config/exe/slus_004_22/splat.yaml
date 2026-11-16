@@ -1018,11 +1018,11 @@ segments:
       - [0xEBEB8, .rodata, g_BGMTracks]
       - [0xEC14C, .rodata, data_8018214C]
       - [0xEC1D0, .rodata, Actor_Run]
-      - [0xEC1E0, .data, data_801821E0]
-      - {start: 0xEDAB0, type: data, name: data_80183AB0, linker_section_order: .data}
+      - [0xEC1E0, .data, g_VabProgramOffsets]
+      - {start: 0xEDAB0, type: data, name: _spu_RXX, linker_section_order: .data}
       - [0xEDB0C, o, toolchains/psyq/3.7/libspu/s_ini, .data]
       - {start: 0xEDF80, type: data, name: data_80183F80, linker_section_order: .data}
-      - {start: 0xEDF8C, type: data, name: data_80183F8C, linker_section_order: .data}
+      - {start: 0xEDF8C, type: data, name: _spu_rev_startaddr, linker_section_order: .data}
       - [0xEE284, o, toolchains/psyq/3.7/libspu/s_n2p, .data]
       - {start: 0xEE408, type: data, name: data_80184408, linker_section_order: .data}
       - [0xEE440, o, toolchains/psyq/3.7/libsnd/ssstart, .data]
@@ -1038,7 +1038,7 @@ segments:
       - [0xEF6F8, o, toolchains/psyq/3.7/libcd/sys, .data]
       - {start: 0xEF778, type: data, name: data_80185778, linker_section_order: .data}
       - [0xEFA94, o, toolchains/psyq/3.7/libcd/cdread, .data]
-      - {start: 0xEFAC4, type: data, name: data_80185AC4, linker_section_order: .data}
+      - {start: 0xEFAC4, type: data, name: rsin_tbl, linker_section_order: .data}
       - [0xF05F8, o, toolchains/psyq/3.7/libgte/mtx_006, .data]
       - [0xF0908, bin, sdk_cstbl_data]
   - [0xF4908, o, toolchains/psyq/3.7/libgte/ratan, .data]
