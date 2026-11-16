@@ -155,16 +155,8 @@ void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 shade_mo
 void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 s32  Char_GetExpForLevel(s32 character, s32 level);
 
-extern FormationLayout g_MenuFormations[FORMATION_COUNT];
-extern FormationOrder  g_MenuFormationOrder;
-extern s32             g_MenuFormationArrow[3][2];
-extern s32             g_MenuFormationArrowTurned[3][2];
-extern s32             g_MenuFormationSpots[PARTY_SLOT_COUNT][2];
-extern u8              g_MenuFormationFrameLeft[];
-extern u8              g_MenuFormationFrameMiddle[];
-extern u8              g_MenuFormationFrameRight[];
-void                   Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle);
-void                   Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
+void Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle);
+void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
 
 void func_801AF930(s16 x, s16 y, u8 palette_index, u8 icon_index, volatile Ability* ability, u8 stat_value, u8 sprite_flag);
 bool func_801AF494(u8 test, u8 character_id, u8 category, u8 item_id);
