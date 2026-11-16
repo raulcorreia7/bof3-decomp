@@ -69,7 +69,7 @@ NON_MATCHING void func_801FB268(void) {
                     g_SpawnedActors[LOB(g_SceneState.unk_03)].type        = 0x22;
                     g_SpawnedActors[LOB(g_SceneState.unk_03)].pos.x.fixed = 0x230000;
                     g_SpawnedActors[LOB(g_SceneState.unk_03)].pos.y.fixed = 0x4F0000;
-                    g_SpawnedActors[LOB(g_SceneState.unk_03)].pos.z.fixed = 0x4800000;
+                    g_SpawnedActors[LOB(g_SceneState.unk_03)].pos.z.fixed = TO_COORD(0x480);
                 }
             }
             g_SceneState.step_05 = 7;
