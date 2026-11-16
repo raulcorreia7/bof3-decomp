@@ -3428,6 +3428,7 @@ g_MenuMasterScrollOffset = { addr = 0x801D4289, source = "Scroll offset of the m
 g_MenuMasterCursor = { addr = 0x801D428A, source = "indexes the 0x140-byte stock rows" }
 
 ["emi/etc/start/08"]
+g_SndMono_nv = { addr = 0x80144951, type = "u8", source = "The g_SndMono byte under a plain view of its own; the start menu's settings step toggles it through one pointer.", alias = true }
 jtbl_801D0C04 = { addr = 0x801D0C04, type = "Callback", source = "The switch table of func_801D5A28: the jump targets of its jr dispatch." }
 jtbl_801D0C1C = { addr = 0x801D0C1C, type = "Callback", source = "The switch table of func_801D639C: the jump targets of its jr dispatch." }
 jtbl_801D0C34 = { addr = 0x801D0C34, type = "Callback", source = "The switch table of func_801D9274: the jump targets of its jr dispatch." }
