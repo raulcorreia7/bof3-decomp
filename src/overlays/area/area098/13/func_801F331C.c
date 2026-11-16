@@ -6,7 +6,7 @@ MATCH void func_801F331C(void) {
     u16       i;
     u8        timer;
 
-    dot = MEM_PTR(TrailDot, 0x800E6800);
+    dot = AREA_TRAIL_DOTS;
     for (i = 0; i < D_801F651C; dot++, i++) {
         if (dot->active != 0) {
             if (g_Task->unk_06 == 0) {

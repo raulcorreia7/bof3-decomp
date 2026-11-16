@@ -13,7 +13,7 @@ MATCH void func_801F3124(void) {
         order[i] = i & 1;
     }
 
-    dot = MEM_PTR(TrailDot, 0x800E6800);
+    dot = AREA_TRAIL_DOTS;
     j   = 0;
     for (i = 0; i < D_801F651C; i++) {
         if ((i & 0xF) == 0) {
