@@ -13,9 +13,9 @@ MATCH s32 Area_UpdateSpawnSlots(void) {
     for (i = 0; i < AREA_SPAWN_SLOT_COUNT; i++) {
         if (slot->active != 0) {
             active = 1;
-            life   = slot->life_02 - 1;
-            slot->radius_14 -= AREA_SPAWN_SLOT_RADIUS_STEP;
-            slot->life_02 = life;
+            life   = slot->life - 1;
+            slot->radius -= AREA_SPAWN_SLOT_RADIUS_STEP;
+            slot->life = life;
             if (life == 0) {
                 slot->active = 0;
             }

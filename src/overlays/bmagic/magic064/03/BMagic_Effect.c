@@ -546,8 +546,8 @@ MATCH void func_801F103C(void) {
     g_AreaTileOriginX = (g_AreaScrollTargetX >> 16) - 24;
     g_AreaTileOriginY = (g_AreaScrollTargetY >> 16) + 3;
     D_8014933D        = 0;
-    if (g_AreaMapBundle.scroll_1E != 0) {
-        g_AreaTileRemainderY = g_AreaMapBundle.scroll_1E;
+    if (g_AreaMapBundle.scroll != 0) {
+        g_AreaTileRemainderY = g_AreaMapBundle.scroll;
     } else {
         g_AreaTileRemainderY = -g_AreaCameraHeight * 2;
     }

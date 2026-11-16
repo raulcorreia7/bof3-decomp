@@ -63,7 +63,7 @@ typedef union WorldMapBattlefields {
 
 /* Scene handler block behind g_SceneScenes: one entry per dispatch slot. */
 typedef struct SceneSlots {
-    Callback entry_00;
+    Callback entry;
     void (*entry_04)(void*);
     s8 (*entry_08)(s32, s32);
     s8 (*entry_0C)(s32, s32);
@@ -96,7 +96,7 @@ typedef struct AreaHandler {
     Callback handler_08;
     Callback handler_0C;
     Callback handler_10;
-    u8*      map_points_14;
+    u8*      map_points;
     u8       area_id;
     u8       pad_19[3];
 } AreaHandler;

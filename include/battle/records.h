@@ -502,13 +502,13 @@ typedef union PanelCounter {
 /* The field's view of the 0x14 bytes where a battle row keeps its queued turn: the menu and scene code reuse them
  * as panel and mode counters while no battle runs. */
 typedef struct FieldMode {
-    u8           flags_118;     /* 0x00 bit 0x80 restores the saved word */
-    u8           countdown_119; /* 0x01 frame countdown, reloaded with 0x28 or 0x0A */
+    u8           flags_118; /* 0x00 bit 0x80 restores the saved word */
+    u8           countdown; /* 0x01 frame countdown, reloaded with 0x28 or 0x0A */
     u8           pad_02[2];
     PanelCounter counter_11C; /* 0x04 panel step counter */
     u8           pad_05;
     u8           kind_11E;  /* 0x06 record kind */
-    u8           wait_11F;  /* 0x07 shared wait countdown */
+    u8           wait;      /* 0x07 shared wait countdown */
     u16          value_120; /* 0x08 copied into the record's 0x7C */
     u16          unk_122;   /* 0x0A lowered by 2 per step; @source: write:func_801F3B9C@0x801F3B9C */
     u32          index_124; /* 0x0C slot index passed to the selector */
@@ -526,7 +526,7 @@ ASSERT_OFFSET(FieldMode, mode_12B, 0x13);
 /* The field's view of the eight cells after the turn: the flags that gate the entry check and the entity slot. */
 typedef struct FieldEntry {
     PanelCounter flags_12C; /* 0x00 bit 0x01/0x08 gate the entry check */
-    u8           slot_12D;  /* 0x01 entity slot index */
+    u8           slot;      /* 0x01 entity slot index */
     u8           pad_02[6];
 } FieldEntry;
 

@@ -13,7 +13,7 @@ MATCH u8 func_801F38B0(void) {
         if (D_801F4A88[0] != 0u) {
             if (g_Task->header.mode == 0) {
                 ((AreaSpawnSlot*)D_801F4A88)->pos.x.fixed += 8192;
-                ((AreaSpawnSlot*)D_801F4A88)->radius_14 += 8;
+                ((AreaSpawnSlot*)D_801F4A88)->radius += 8;
                 D_801F4A88[3] -= 2;
             } else {
                 ((AreaSpawnSlot*)D_801F4A88)->pos.x.fixed += 8192;

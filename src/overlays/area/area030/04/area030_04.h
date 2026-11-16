@@ -91,8 +91,8 @@ typedef union FishingStateSlotLow {
 } FishingStateSlotLow;
 
 typedef struct FishingStateSlot {
-    FishingStateSlotLow low_38;
-    s16                 slot_3A; /* the accessory slot of the selected row; func_801D8364 */
+    FishingStateSlotLow low;
+    s16                 slot; /* the accessory slot of the selected row; func_801D8364 */
 } FishingStateSlot;
 
 ASSERT_SIZE(FishingStateSlot, 4);
@@ -177,8 +177,8 @@ typedef struct FishingState {
     u32                           unk_44;
     u8                            counter_48;
     u8                            counter_49;
-    u8                            column_4A; /* the table column the row is read from */
-    u8                            row_4B;    /* the table row the entry comes from */
+    u8                            column; /* the table column the row is read from */
+    u8                            row_4B; /* the table row the entry comes from */
     u8                            pad_4C[0x4];
     /* 0x50 */ FishingItemPointer item_50;
     /* 0x54 */ FishingItemPointer text_54;
@@ -195,7 +195,7 @@ typedef struct FishingState {
 } FishingState;
 
 ASSERT_OFFSET(FishingState, y_38, 0x38);
-STATIC_ASSERT(FishingState_slot_3A, DECOMP_OFFSETOF(FishingState, y_38.half.slot_3A) == 0x3A);
+STATIC_ASSERT(FishingState_slot_3A, DECOMP_OFFSETOF(FishingState, y_38.half.slot) == 0x3A);
 
 /* The 0x24-byte fishing scene cue rows at g_FishingSpecies, indexed by the work's
  * cue_index_06 and selected by the g_FishingPromptSets queue table. value_00 is the

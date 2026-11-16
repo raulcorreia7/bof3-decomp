@@ -50,7 +50,7 @@ MATCH void Area_UpdateCamera(void) {
     }
     if (g_AreaCameraMoving != 0) {
         g_AreaCameraHeight += g_AreaCameraHeightStep;
-        if (g_AreaMapBundle.scroll_1E == 0) {
+        if (g_AreaMapBundle.scroll == 0) {
             g_AreaTileRemainderY -= g_AreaCameraHeightStep * 2;
         }
         g_AreaCameraRefreshCount = 2;

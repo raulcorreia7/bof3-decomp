@@ -25,8 +25,8 @@ NON_MATCHING void func_801F3560(AreaSpawnSlot* slot) {
 
     object = &slot->pos.x.fixed;
     Area_ProjectPoint(object, &screen);
-    size[0] = VOL(u16, slot->radius_14);
-    size[1] = VOL(u16, slot->radius_14);
+    size[0] = VOL(u16, slot->radius);
+    size[1] = VOL(u16, slot->radius);
     Game_ProjectWorldPoint(object, size, size);
 
     setXY4(primitive, screen.vx - ((s16)size[0] >> 1), screen.vy - ((s16)size[1] >> 1), (screen.vx - ((s16)size[0] >> 1)) + size[0], screen.vy - ((s16)size[1] >> 1), screen.vx - ((s16)size[0] >> 1),
@@ -34,7 +34,7 @@ NON_MATCHING void func_801F3560(AreaSpawnSlot* slot) {
     setUV4(primitive, 224, 48, 255, 48, 224, 79, 255, 79);
     primitive->clut  = GetClut(160, STAGE_PALETTE_Y + 3);
     primitive->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 704, 256);
-    flags            = slot->core_shade_16;
+    flags            = slot->core_shade;
     red              = 0;
     if ((flags & 4) != 0) {
         red = VOL(u8, slot->unk_03);

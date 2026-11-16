@@ -6,9 +6,9 @@ MATCH void func_801B6BC8(void) {
     u8     flags;
     u8     delay;
 
-    delay = g_GameState->u.field.countdown_119;
+    delay = g_GameState->u.field.countdown;
     if (delay != 0) {
-        g_GameState->u.field.countdown_119 = (delay - 1);
+        g_GameState->u.field.countdown = (delay - 1);
         return;
     }
     sel = func_801A8D38(&g_GameState->u.field.flags_118, g_GameState->u.field.index_124);
@@ -62,9 +62,9 @@ MATCH void func_801B6BC8(void) {
         }
         work = g_Task;
         if (work->timer != 0) {
-            delay = g_GameState->u.field.wait_11F;
+            delay = g_GameState->u.field.wait;
             if (delay != 0) {
-                g_GameState->u.field.wait_11F = (delay - 1);
+                g_GameState->u.field.wait = (delay - 1);
             }
             g_Task->direction_08 = sel;
             g_Task->unk_03       = 2;

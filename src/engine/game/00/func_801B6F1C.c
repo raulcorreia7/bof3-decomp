@@ -12,13 +12,13 @@ MATCH void func_801B6F1C(void) {
         Actor_UpdateMovement();
         return;
     }
-    wait = g_Game.current->u.field.wait_11F;
+    wait = g_Game.current->u.field.wait;
     if (wait == 0) {
         func_801B6BC8();
         return;
     }
-    saved                            = g_Task->vz;
-    g_Game.current->u.field.wait_11F = (wait - 1);
+    saved                        = g_Task->vz;
+    g_Game.current->u.field.wait = (wait - 1);
     func_801C24D0();
     flags = g_Game.current->u.field.flags_118;
     if (flags & 0x80) {

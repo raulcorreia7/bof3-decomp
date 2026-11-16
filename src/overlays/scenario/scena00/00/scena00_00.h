@@ -142,7 +142,7 @@ typedef struct Scene00Tables {
     Callback       handlers_90[15]; /* 0x090 D_801FCA10; D_801FCA1C at +0x0C */
     u8             table_CC[16];    /* 0x0CC D_801FCA4C */
     u8             table_DC[8];     /* 0x0DC D_801FCA5C */
-    u8             pairs_E4[16][2]; /* 0x0E4 D_801FCA64/D_801FCA65 */
+    u8             pairs[16][2];    /* 0x0E4 D_801FCA64/D_801FCA65 */
 } Scene00Tables;
 
 ASSERT_SIZE(Scene00Tables, 0x104);

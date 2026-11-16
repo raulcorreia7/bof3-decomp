@@ -11,9 +11,9 @@ typedef struct GameSpawn {
     s32 y_04;
     s32 z_08;
     s32 pad_0C;
-    s32 vx_10;
-    s32 vy_14;
-    s32 vz_18;
+    s32 vx;
+    s32 vy;
+    s32 vz;
     s32 pad_1C;
 } GameSpawn;
 
@@ -30,13 +30,13 @@ MATCH void func_8019DC6C(void) {
     do {
         func_8019DAA0((s32*)rec, state->offset_02, state->count_00);
         if (g_Task->timer >= 12u) {
-            rec->x_00 += rec->vx_10 * 2;
-            rec->y_04 += rec->vy_14 * 2;
-            rec->z_08 += rec->vz_18 * 2;
+            rec->x_00 += rec->vx * 2;
+            rec->y_04 += rec->vy * 2;
+            rec->z_08 += rec->vz * 2;
         } else {
-            rec->x_00 += rec->vx_10;
-            rec->y_04 += rec->vy_14;
-            rec->z_08 += rec->vz_18;
+            rec->x_00 += rec->vx;
+            rec->y_04 += rec->vy;
+            rec->z_08 += rec->vz;
         }
         rec += 1;
         i++;

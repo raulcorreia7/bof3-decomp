@@ -8,6 +8,6 @@ MATCH void func_801DB04C(void) {
         D_8014421C = g_FishingRodRow->unk_07;
     } else {
         D_801E31F8 = 1;
-        D_8014421C = g_FishingRodRow->cursor_return_speed_04;
+        D_8014421C = g_FishingRodRow->cursor_return_speed;
     }
 }

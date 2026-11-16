@@ -30,25 +30,25 @@ ASSERT_OFFSET(ScriptState, cursor, 0x0A);
  * phase, cursor and flag fields; the other units read only its first byte. */
 typedef struct MessageState {
     u8  state_00;     /* 0x00 */
-    u8  selection_01; /* 0x01 */
+    u8  selection;    /* 0x01 */
     u8  pad_02[2];    /* 0x02 */
     u16 flags_04;     /* 0x04 */
     u8  count_06;     /* 0x06 */
     u8  pad_07[5];    /* 0x07 */
-    s32 entry_0C;     /* 0x0C */
+    s32 entry;        /* 0x0C */
     s32 cursor_10;    /* 0x10 */
     u8  pad_14[4];    /* 0x14 */
-    u8  phase_18;     /* 0x18 */
+    u8  phase;        /* 0x18 */
     u8  index_19;     /* 0x19 */
     u8  pad_1A[0x0E]; /* 0x1A */
-    u16 scroll_28;    /* 0x28 */
+    u16 scroll;       /* 0x28 */
 } MessageState;
 
 ASSERT_SIZE(MessageState, 0x2C);
 ASSERT_OFFSET(MessageState, state_00, 0x00);
 ASSERT_OFFSET(MessageState, count_06, 0x06);
 ASSERT_OFFSET(MessageState, cursor_10, 0x10);
-ASSERT_OFFSET(MessageState, scroll_28, 0x28);
+ASSERT_OFFSET(MessageState, scroll, 0x28);
 
 typedef struct AreaDrawState {
     u8 actor_count;

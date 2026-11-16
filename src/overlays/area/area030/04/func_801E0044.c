@@ -28,10 +28,10 @@ MATCH void func_801E0044(void) {
         checked->motion_34.half.unk_34 = value;
         checked->pos_x_0C              = 0;
         checked->cursor_10             = 0;
-        value                          = checked->y_38.half.low_38.pos_low_38;
+        value                          = checked->y_38.half.low.pos_low_38;
         value &= 0x8000;
-        checked->y_38.half.low_38.pos_low_38 = value;
-        ended->mode_index_02                 = 0;
+        checked->y_38.half.low.pos_low_38 = value;
+        ended->mode_index_02              = 0;
     }
     Actor_StepAnimLoop();
 }

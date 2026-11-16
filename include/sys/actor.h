@@ -248,7 +248,7 @@ typedef struct Actor {
     u32            unk_88;            /* 0x88 */
     ActorTail      ext;               /* 0x8C - see ActorTail */
     u16            roll_90;           /* 0x90 */
-    u8             facing_92;         /* 0x92 - the facing direction: the fishing code writes
+    u8             facing;            /* 0x92 - the facing direction: the fishing code writes
                                 *        `rand() & 3` and turns the row by it
                                 *        (emi/world00/area030/04 func_801DE5EC) */
     u8             unk_93;            /* 0x93 */
@@ -279,7 +279,7 @@ ASSERT_OFFSET(Actor, walk_dest_x, 0x80);
 ASSERT_OFFSET(Actor, walk_dest_y, 0x84);
 ASSERT_OFFSET(Actor, unk_88, 0x88);
 ASSERT_OFFSET(Actor, ext, 0x8C);
-ASSERT_OFFSET(Actor, facing_92, 0x92);
+ASSERT_OFFSET(Actor, facing, 0x92);
 
 /* D_80146884 */
 extern Actor* g_CurrentActor; /* 0x80146884 */

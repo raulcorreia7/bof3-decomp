@@ -3,7 +3,7 @@
 /* Draws the area-030 accessory rows: the accessory icons of every
  * slot with their count text and the frame behind them. */
 /* RESIDUAL: 47.01%; retail frame 0x78, current frame 0x70, and the
- * call sequence differ. FISHING_STATE->y_38.half.slot_3A is the typed s16 at
+ * call sequence differ. FISHING_STATE->y_38.half.slot is the typed s16 at
  * offset 0x3A. resume: reproduce the retail control-flow and frame shape. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
@@ -72,7 +72,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
                 }
             drawn: /* the count text is drawn once, from either path */
                 if (FISHING_STATE->step_14 == index) {
-                    FISHING_STATE->y_38.half.slot_3A = (s16)slot;
+                    FISHING_STATE->y_38.half.slot = (s16)slot;
                 }
                 bar_y += 13;
                 row_y += 13;

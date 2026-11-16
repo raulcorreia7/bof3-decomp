@@ -14,7 +14,7 @@ NON_MATCHING void Fishing_LureCast(void) {
     work->y_38.pos_y                     = D_80145EC8 - COORD_HALF;
     FISHING_STATE->bounce_3C.half.key_3E = (s16)(Area_SampleHeight(work->motion_34.unk_34, work->y_38.pos_y) + 0x100);
 
-    value                       = g_FishingRodRow->max_distance_02 * D_801440BC / 255 + 8;
+    value                       = g_FishingRodRow->max_distance * D_801440BC / 255 + 8;
     FISHING_STATE->cursor_10    = value;
     FISHING_STATE->cue_index_06 = (u8)(value / 15);
     if (FISHING_STATE->cue_index_06 >= 4) {
