@@ -32,9 +32,10 @@ extern u16 D_80104002;
 extern u8  D_8010402C[];
 
 /* The per-cell tile bytes and the cell primitives. */
-extern u8 D_801F57CC[];
-extern u8 D_801F584C[];
-extern u8 D_801F64B8[];
+extern u8  D_801F57CC[];
+extern u8  D_801F584C[];
+extern u32 D_801F58C8[];
+extern u8  D_801F64B8[];
 
 extern void func_801F3994(void);
 
@@ -45,6 +46,6 @@ void func_801F3698(s16 x0, s16 y0, s16 x1, s16 y1, u16 x2, u16 y2, u8 r, u8 g, u
 void func_801F3774(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b, u8 semi_trans);
 void func_801F3838(u16 line_index);
 void func_801F388C(s32 x, s32 y, s8 kind);
-void func_801F4640(s32 arg0);
+void func_801F4640(s32 sample_height);
 
 #endif
