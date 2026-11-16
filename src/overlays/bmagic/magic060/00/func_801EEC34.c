@@ -228,17 +228,10 @@ MATCH void func_801EF590(u8* text, s32 x, s32 y) {
         setRGB0(prim, 0x80, 0x80, 0x80);
         setTPage(prim, 0, 1, 0x3C0, 0);
         setClut(prim, 0, 0x1E0);
-        code     = *text - 0x30;
-        u        = (code % 31) * 8;
-        v        = (code / 31) * 12 + 0x48;
-        prim->u0 = u;
-        prim->v0 = v;
-        prim->v1 = v;
-        prim->u1 = u + 8;
-        prim->u2 = u;
-        prim->v2 = v + 0xC;
-        prim->u3 = u + 8;
-        prim->v3 = v + 0xC;
+        code = *text - 0x30;
+        u    = (code % 31) * 8;
+        v    = (code / 31) * 12 + 0x48;
+        setUV4(prim, u, v, u + 8, v, u, v + 0xC, u + 8, v + 0xC);
         if (*text != 0xFF) {
             GFX_AddPrim(2, sizeof(POLY_FT4));
         }
@@ -294,17 +287,10 @@ MATCH void func_801EF924(u8* text, s32 x, s32 y) {
         setRGB0(prim, 0x80, 0x80, 0x80);
         setTPage(prim, 0, 1, 0x3C0, 0);
         setClut(prim, 0, 0x1E0);
-        code     = *text - 0x30;
-        u        = (code % 31) * 8;
-        v        = (code / 31) * 12 + 0x48;
-        prim->u0 = u;
-        prim->v0 = v;
-        prim->v1 = v;
-        prim->u1 = u + 8;
-        prim->u2 = u;
-        prim->v2 = v + 0xC;
-        prim->u3 = u + 8;
-        prim->v3 = v + 0xC;
+        code = *text - 0x30;
+        u    = (code % 31) * 8;
+        v    = (code / 31) * 12 + 0x48;
+        setUV4(prim, u, v, u + 8, v, u, v + 0xC, u + 8, v + 0xC);
         if (*text != 0xFF) {
             GFX_AddPrim(2, sizeof(POLY_FT4));
         }
@@ -345,15 +331,8 @@ NON_MATCHING void func_801EFB00(u16 value, s32 x, s32 y) {
         }
         value -= digit * scale;
         scale /= 10;
-        u        = digit * 12 + 72;
-        prim->u0 = u;
-        prim->v0 = 24;
-        prim->u1 = u + 12;
-        prim->v1 = 24;
-        prim->u2 = u;
-        prim->v2 = 36;
-        prim->u3 = u + 12;
-        prim->v3 = 36;
+        u = digit * 12 + 72;
+        setUV4(prim, u, 24, u + 12, 24, u, 36, u + 12, 36);
         if (started != 0 || scale == 0) {
             GFX_AddPrim(2, sizeof(POLY_FT4));
         }

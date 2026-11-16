@@ -223,10 +223,9 @@ NON_MATCHING void func_801EF750(void) {
 
         phase     = (D_801EFD6C[i] + g_Task->unk_09) & 0x3F;
         params[2] = phase << 6;
-        prim->x0  = params[3] + FIXED_MUL(rsin(phase << 6), params[7]);
-        prim->y0  = params[4] + FIXED_MUL(rcos(params[2]), params[7]);
-        prim->x2  = params[3] + FIXED_MUL(rsin(params[2]), params[0]);
-        prim->y2  = params[4] + FIXED_MUL(rcos(params[2]), params[0]);
+        setXY0(prim, params[3] + FIXED_MUL(rsin(phase << 6), params[7]), params[4] + FIXED_MUL(rcos(params[2]), params[7]));
+        prim->x2 = params[3] + FIXED_MUL(rsin(params[2]), params[0]);
+        prim->y2 = params[4] + FIXED_MUL(rcos(params[2]), params[0]);
 
         phase        = (D_801EFD6C[i + 1] + g_Task->unk_09) & 0x3F;
         params[2]    = phase << 6;

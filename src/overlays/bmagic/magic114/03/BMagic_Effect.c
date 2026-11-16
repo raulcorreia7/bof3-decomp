@@ -200,16 +200,10 @@ NON_MATCHING void func_801EF280(s32* values) {
 
     values[mode] = RotAverage3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &p, &flag);
 
-    shade    = &shades[(mode & 1) | ((mode & 4) >> 1)];
-    prim->r0 = shade->red;
-    prim->g0 = shade->green;
-    prim->b0 = shade->blue;
-    prim->r1 = shade->red;
-    prim->g1 = shade->green;
-    prim->b1 = shade->blue;
-    prim->r2 = shade->red;
-    prim->g2 = shade->green;
-    prim->b2 = shade->tip_blue;
+    shade = &shades[(mode & 1) | ((mode & 4) >> 1)];
+    setRGB0(prim, shade->red, shade->green, shade->blue);
+    setRGB1(prim, shade->red, shade->green, shade->blue);
+    setRGB2(prim, shade->red, shade->green, shade->tip_blue);
 
     if (g_Task->header.mode == 2) {
         frame_count = g_FrameCount;
@@ -235,13 +229,9 @@ NON_MATCHING void func_801EF280(s32* values) {
             case 6:
                 shade = &shades[(mode & 1) | ((mode & 4) >> 1)];
                 if ((mode & 1) != 0) {
-                    prim->r1 = shade->red + shade->red_step * g_Task->unk_09;
-                    prim->g1 = shade->green + shade->green_step * g_Task->unk_09;
-                    prim->b1 = shade->blue + shade->blue_step * g_Task->unk_09;
+                    setRGB1(prim, shade->red + shade->red_step * g_Task->unk_09, shade->green + shade->green_step * g_Task->unk_09, shade->blue + shade->blue_step * g_Task->unk_09);
                 } else {
-                    prim->r0 = shade->red + shade->red_step * g_Task->unk_09;
-                    prim->g0 = shade->green + shade->green_step * g_Task->unk_09;
-                    prim->b0 = shade->blue + shade->blue_step * g_Task->unk_09;
+                    setRGB0(prim, shade->red + shade->red_step * g_Task->unk_09, shade->green + shade->green_step * g_Task->unk_09, shade->blue + shade->blue_step * g_Task->unk_09);
                 }
                 break;
         }
