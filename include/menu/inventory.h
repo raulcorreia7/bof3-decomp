@@ -32,8 +32,23 @@ extern u8 g_InventoryCounts[4][INV_SLOTS_PER_CATEGORY];
 /* D_8014544C */
 extern u8 g_VitalItemIds[INV_VITAL_ITEM_SLOTS];
 
+/* The five list titles the inventory and equip menus draw. */
+extern u8* g_MenuInventoryTitles[5];
+extern u8* g_MenuEquipTitles[5];
+
 /* The equip choices each item offers: the ids and how many follow. */
 extern u8 g_MenuEquipChoiceIds[];
 extern u8 g_MenuEquipChoiceCounts[];
+
+/* The inventory and equip panels' sprite and label tables. */
+extern char g_MenuNextExpBlank[];
+extern u8   g_MenuInventoryTab1OffSprites[];
+extern u8   g_MenuInventoryTab1OnSprites[];
+extern u8   g_MenuEquipStatLabels[];
+extern u8   g_MenuEquipCompareLabels[];
+extern u8   g_MenuEquipCompareSprites[];
+extern u8   g_MenuEquipSlotIcons[];
+extern u8   g_MenuEquipStatSprites[];
+extern u8   g_SaveSlotFrameSprites[];
 
 #endif

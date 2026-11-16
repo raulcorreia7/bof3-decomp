@@ -30,7 +30,6 @@ extern char g_MenuExperienceFormat[];
 extern char g_MenuExperienceBlank[];
 extern char g_MenuZennyFormat[];
 /* D_801D0C48 */
-extern char g_MenuNextExpBlank[];
 extern char g_MenuClockFormat[];
 extern u8   D_80144DF5;
 extern u8   D_80144DF6;
@@ -107,15 +106,6 @@ extern u8       g_MenuListTab2OffSprites[];
 extern u8       g_MenuListTab2OnSprites[];
 extern u8*      D_801C893C[];
 extern u8*      D_801C8950[];
-extern u8*      g_MenuInventoryTitles[5];
-extern u8       g_MenuInventoryTab1OffSprites[];
-extern u8*      g_MenuEquipTitles[5];
-extern u8       g_MenuEquipStatLabels[];
-extern u8       g_MenuEquipCompareLabels[];
-extern u8       g_MenuEquipCompareSprites[];
-extern u8       g_MenuEquipSlotIcons[];
-extern u8       g_MenuEquipStatSprites[];
-extern u8       g_MenuInventoryTab1OnSprites[];
 /* D_801D896C */
 extern u8       g_MenuListTab1OffSprites[];
 /* D_801D8978 */
@@ -123,7 +113,6 @@ extern u8       g_MenuListTab1OnSprites[];
 /* D_801D8984 */
 extern u8       D_801D8984[];
 /* D_801D8A3C */
-extern u8       g_SaveSlotFrameSprites[];
 extern u8       D_801D8B84[];
 /* D_801D8E80 */
 extern u8*      g_MenuAbilityListNames[];
