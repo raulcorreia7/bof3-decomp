@@ -81,16 +81,16 @@
 /* Run the gated cell test and arm the work record on a hit. Kept: it returns
  * from the member and takes the flag value after a branch; tested as an inline,
  * the bytes move. */
-#define GAME_ARM_WORK_ON_CELL_HIT(code, new_step)                                                                         \
-    if ((g_Game.flags & 0x400) == 0) {                                                                                    \
-        if ((func_801C39D8(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, code, 0) & BYTE_MASK) != 0) { \
-            g_Task->header.mode = 2;                                                                                      \
-            g_Task->header.step = new_step;                                                                               \
-            g_Task->unk_03      = 0;                                                                                      \
-            g_Task->unk_04      = 0;                                                                                      \
-            return 1;                                                                                                     \
-        }                                                                                                                 \
-    }                                                                                                                     \
+#define GAME_ARM_WORK_ON_CELL_HIT(code, new_step)                                                                             \
+    if ((g_Game.flags & 0x400) == 0) {                                                                                        \
+        if ((Game_TestMapCells(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, code, 0) & BYTE_MASK) != 0) { \
+            g_Task->header.mode = 2;                                                                                          \
+            g_Task->header.step = new_step;                                                                                   \
+            g_Task->unk_03      = 0;                                                                                          \
+            g_Task->unk_04      = 0;                                                                                          \
+            return 1;                                                                                                         \
+        }                                                                                                                     \
+    }                                                                                                                         \
     return 0;
 
 /* Test the map cells around a 16.16 point for the wanted code. Kept: the two
@@ -801,7 +801,8 @@ u8*     func_801A4844(u8* script);
 void    func_801A4914(void);
 /* func_801A4990 */
 void    Actor_SetOptionFlags(u8* script);
-void    func_801A4AA8(void);
+/* func_801A4AA8 */
+void    Actor_ResetMotion(void);
 void    func_801A4B80(s32 index);
 u8*     func_801A4BF8(u8* script);
 void    func_801A50C0(u8* script);
@@ -947,7 +948,8 @@ bool  func_801B5884(void);
 bool  func_801B5910(void);
 /* func_801B5AE4 */
 s8    Game_FindRockAhead(s32 route_index, s32 route_flags);
-void  func_801B5BDC(u8 route_index);
+/* func_801B5BDC */
+void  Actor_RequestRoute(u8 route_index);
 void* func_801B5C54(void);
 /* func_801B5EBC */
 bool  Game_RequestPersonalAction(void);
@@ -1029,7 +1031,8 @@ bool  func_801BB6F0(s32 command);
 s32   func_801BB760(s32 x, s32 y);
 s32   func_801BB7B0(s32 selector);
 s32   Area_IsStepTooHigh(s16 from_x0, s16 from_x1, s16 from_y0, s16 from_y1, u8 probe_mode);
-void  func_801BB8E8(u8 arg_a, u8 arg_b, u8 arg_c);
+/* func_801BB8E8 */
+void  Actor_SnapFacing(u8 arg_a, u8 arg_b, u8 arg_c);
 bool  func_801BB934(s32 first_index, s32 second_index, s8 route_value, s32 expected_value);
 void  func_801BBBC8(s16 from_x, s16 from_y);
 void  func_801BBE48(void);
@@ -1099,10 +1102,12 @@ bool  func_801C3790(s32 mode_byte);
 bool  func_801C37DC(s32 mode_byte);
 void  func_801C3828(void);
 s32   func_801C38F4(s32 record_index, s32 field_mode, s32 wanted_id);
-u8    func_801C39D8(s32 pos_x, s32 pos_y, s32 flag, s32 wanted_code, u8 mask_cells);
+/* func_801C39D8 */
+u8    Game_TestMapCells(s32 pos_x, s32 pos_y, s32 flag, s32 wanted_code, u8 mask_cells);
 u8    func_801C3A18(s32 pos_x, s32 pos_y, u8 wanted_code, u8 mask_cells);
 s32   func_801C3B78(s32 pos_x, s32 pos_y, s32 wanted_code, s32 mask_cells);
-s32   func_801C3E40(s32 pos_x, s32 pos_y, s32 probe_flag, s16 probe_range);
+/* func_801C3E40 */
+s32   Game_TestPlacement(s32 pos_x, s32 pos_y, s32 probe_flag, s16 probe_range);
 bool  func_801C3E80(s32 pos_x, s32 pos_y, s32 probe_flag);
 s32   func_801C4040(s32 pos_x, s32 pos_y, s16 probe_range);
 s32   func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range);
@@ -1626,7 +1631,8 @@ static inline void Game_RollAreaSetup(s32 actor_slot) {
     }
 }
 
-s32 func_801A20F8(s16 cell_x, s16 cell_y);
+/* func_801A20F8 */
+s32 Area_IsCellBlocked(s16 cell_x, s16 cell_y);
 
 s32 func_801B1B2C(s32 x, s32 y, s32 probe_kind, s32 flags);
 

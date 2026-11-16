@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801BB8E8(u8 arg_a, u8 arg_b, u8 arg_c) {
+/* func_801BB8E8 */
+MATCH void Actor_SnapFacing(u8 arg_a, u8 arg_b, u8 arg_c) {
     Actor* work;
     u8     current;
 

@@ -254,7 +254,7 @@ segments:
       - [0x101CC, c, Fishing_DrawSprite]
       - [0x102D0, c, Fishing_DrawCatchBar]
       - [0x1034C, c, Fishing_DrawCatchIcon]
-      - [0x10404, c, func_801E1004]
+      - [0x10404, c, Fishing_DrawCatchRow]
       - [0x10720, c, Fishing_DrawRank]
       - [0x10A2C, c, Fishing_DrawIconRow]
       - [0x10ADC, c, Fishing_DrawDimScreen]

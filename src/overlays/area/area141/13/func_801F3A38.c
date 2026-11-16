@@ -5,7 +5,7 @@ MATCH void func_801F3A38(void) {
     if (g_MessageChoice == 0) {
         Game_SetScriptActive();
         Area_StartScrollRoute(3);
-        func_801F4300(D_801F4DBC, 0);
+        Area_SetCellRun(D_801F4DBC, 0);
         g_SceneEventState.mode = 0x34;
         g_SceneEventState.step = 0x32;
         g_MessageRequest       = MSG_005;

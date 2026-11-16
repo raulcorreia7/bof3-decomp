@@ -1,6 +1,7 @@
 #include "area077_14.h"
 
-MATCH void func_801F529C(s32 src_x, s32 src_y, s32 dst_x, s32 dst_y) {
+/* func_801F529C */
+MATCH void Area_CopyPaletteRow(s32 src_x, s32 src_y, s32 dst_x, s32 dst_y) {
     u32  base;
     s32* src;
     s32* dst;

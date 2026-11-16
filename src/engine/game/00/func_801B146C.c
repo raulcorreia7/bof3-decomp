@@ -48,7 +48,7 @@ MATCH void func_801B146C(void) {
         if (state_flags & AREA_LOAD_FLAG_WORLD_MAP) {
             work_c = g_Task;
             if ((Area_GetCellCode(COORD_INT(work_c->pos.x), COORD_INT(work_c->pos.y)) & BYTE_MASK) == 0xAF) {
-                func_801B5BDC(g_Task->direction_08);
+                Actor_RequestRoute(g_Task->direction_08);
                 Game_RequestAreaChange(g_GameEntryAreaId, g_GameEntryPosX, g_GameEntryPosY, g_GameEntryFacing);
                 g_GameEntryMode   = 0;
                 g_GameRequestKind = 0xC;
@@ -56,7 +56,7 @@ MATCH void func_801B146C(void) {
             }
             if (g_Game.walk_flags & 0x2000) {
                 g_Game.flags |= GAME_FLAG_SCRIPT_ACTIVE;
-                func_801B5BDC(g_Task->direction_08);
+                Actor_RequestRoute(g_Task->direction_08);
                 goto block_46; /* re-arm the frame flags */
             }
             work_d = g_Task;
@@ -75,7 +75,7 @@ MATCH void func_801B146C(void) {
         }
     block_24:
         work_g = g_Task;
-        if (func_801C39D8(work_g->pos.x.fixed, work_g->pos.y.fixed, work_g->state_70.byte, 0xA7, 0U) & BYTE_MASK) {
+        if (Game_TestMapCells(work_g->pos.x.fixed, work_g->pos.y.fixed, work_g->state_70.byte, 0xA7, 0U) & BYTE_MASK) {
             work_h = g_Task;
             func_801A0048(COORD_INT(work_h->pos.x), COORD_INT(work_h->pos.y));
             g_GameStateIndex = GAME_REQUEST_AREA_CHANGE;
@@ -124,7 +124,7 @@ MATCH void func_801B146C(void) {
         if (!(Game_RequestRockKick(level_flag) & BYTE_MASK)) {
             work_k = g_Task;
             if (((s32 (*)(s32, s32))func_801A79A4)(work_k->pos.x.fixed, work_k->pos.y.fixed) != 0) {
-                func_801B5BDC(g_Task->direction_08);
+                Actor_RequestRoute(g_Task->direction_08);
                 goto block_46; /* re-arm the frame flags */
             }
             func_801C329C();
@@ -132,7 +132,7 @@ MATCH void func_801B146C(void) {
                 func_801B0568();
                 return;
             }
-            func_801B5BDC(g_Task->direction_08);
+            Actor_RequestRoute(g_Task->direction_08);
             g_Game.current->u.field.mode_12B.u8_value = 0;
         block_46:
             g_Task->header.step = 1;

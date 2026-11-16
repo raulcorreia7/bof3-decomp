@@ -22,11 +22,11 @@ NON_MATCHING s32 func_801A1C5C(s32 x, s32 y, s32 route, s32 unused) {
             xhi   = sx >> 16;
             yhi   = ((u32)sy) >> 16;
             y_low = yhi;
-            sum   = func_801A20F8(xhi & HALF_MASK, y_low);
-            part  = sum + func_801A20F8((xhi + 1) & HALF_MASK, y_low);
+            sum   = Area_IsCellBlocked(xhi & HALF_MASK, y_low);
+            part  = sum + Area_IsCellBlocked((xhi + 1) & HALF_MASK, y_low);
             sum   = part;
             if (!(sx & HALF_MASK)) {
-                sum = part + func_801A20F8((xhi - 1) & HALF_MASK, y_low);
+                sum = part + Area_IsCellBlocked((xhi - 1) & HALF_MASK, y_low);
             }
             sum += (func_801A21EC(sx, sy) + func_801A21EC(sx + COORD_HALF, sy)) + func_801A21EC(sx - COORD_HALF, sy);
             break;
@@ -35,20 +35,20 @@ NON_MATCHING s32 func_801A1C5C(s32 x, s32 y, s32 route, s32 unused) {
             if (sy & HALF_MASK) {
                 xcell = sx >> 16;
                 ycell = ((sy >> 16) + 1) & HALF_MASK;
-                sum   = func_801A20F8(xcell & HALF_MASK, ycell);
-                part  = sum + func_801A20F8((xcell + 1) & HALF_MASK, ycell);
+                sum   = Area_IsCellBlocked(xcell & HALF_MASK, ycell);
+                part  = sum + Area_IsCellBlocked((xcell + 1) & HALF_MASK, ycell);
                 sum   = part;
                 if (!(sx & HALF_MASK)) {
-                    sum = part + func_801A20F8((xcell - 1) & HALF_MASK, ycell);
+                    sum = part + Area_IsCellBlocked((xcell - 1) & HALF_MASK, ycell);
                 }
             } else {
                 xhi  = sx >> 16;
                 yhi  = ((u32)sy) >> 16;
-                sum  = func_801A20F8(xhi & HALF_MASK, yhi);
-                part = sum + func_801A20F8((xhi + 1) & HALF_MASK, yhi);
+                sum  = Area_IsCellBlocked(xhi & HALF_MASK, yhi);
+                part = sum + Area_IsCellBlocked((xhi + 1) & HALF_MASK, yhi);
                 sum  = part;
                 if (!(sx & HALF_MASK)) {
-                    sum = part + func_801A20F8((xhi - 1) & HALF_MASK, yhi);
+                    sum = part + Area_IsCellBlocked((xhi - 1) & HALF_MASK, yhi);
                 }
             }
             sum += (func_801A21EC(sx, sy) + func_801A21EC(sx + COORD_HALF, sy)) + func_801A21EC(sx - COORD_HALF, sy);
@@ -68,12 +68,12 @@ NON_MATCHING s32 func_801A1C5C(s32 x, s32 y, s32 route, s32 unused) {
         check_y:
             yhi = sy >> 16;
 
-            sum        = func_801A20F8(cell, yhi & HALF_MASK);
+            sum        = Area_IsCellBlocked(cell, yhi & HALF_MASK);
             y_low_word = yhi;
-            part       = sum + func_801A20F8(cell, (y_low_word + 1) & HALF_MASK);
+            part       = sum + Area_IsCellBlocked(cell, (y_low_word + 1) & HALF_MASK);
             sum        = part;
             if (!(sy & HALF_MASK)) {
-                sum = part + func_801A20F8(cell, (y_low_word - 1) & HALF_MASK);
+                sum = part + Area_IsCellBlocked(cell, (y_low_word - 1) & HALF_MASK);
             }
             sum += (func_801A21EC(sx, sy) + func_801A21EC(sx, sy + COORD_HALF)) + func_801A21EC(sx, sy - COORD_HALF);
             break;

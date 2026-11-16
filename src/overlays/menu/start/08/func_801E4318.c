@@ -3,12 +3,12 @@
 /* sig-kept: the retail caller passes the tile and kind as words. */
 #define func_801E7720 ((void (*)(s32, u8))func_801E7720)
 
-void func_801E7608(void);
+void Menu_DrawBackdrop(void);
 
 MATCH void func_801E4318(void) {
     u8* step;
 
-    func_801E7608();
+    Menu_DrawBackdrop();
     WinDrawCueText(70, 190, 0xA8);
     step = &D_80148654;
     func_801E7720(0xBE, *step);

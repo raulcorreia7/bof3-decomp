@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801A4AA8(void) {
+/* func_801A4AA8 */
+MATCH void Actor_ResetMotion(void) {
     Actor* step;
     Actor* motion;
     Actor* animation;

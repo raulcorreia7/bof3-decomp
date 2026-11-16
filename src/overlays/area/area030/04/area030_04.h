@@ -761,7 +761,8 @@ s32  Fishing_TotalScore(void);
 void Fishing_DrawCatchBar(s16 panel_x, s16 panel_y);
 /* func_801E0F4C */
 void Fishing_DrawCatchIcon(s16 sprite_x, s16 sprite_y, u8 icon_index);
-void func_801E1004(s32 item, s32 count, s32 column);
+/* func_801E1004 */
+void Fishing_DrawCatchRow(s32 item, s32 count, s32 column);
 /* func_801E1320 */
 void Fishing_DrawRank(s16 x, s16 y);
 void Fishing_DrawIconRow(s16 cell_x, s16 cell_y, u16 icon_index);

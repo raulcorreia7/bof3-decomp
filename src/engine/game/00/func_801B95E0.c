@@ -47,9 +47,9 @@ NON_MATCHING s32 func_801B95E0(void) {
                             return 0;
                         }
                         if (pad[1] == 0x10) {
-                            func_801BB8E8(2, 4, 3);
+                            Actor_SnapFacing(2, 4, 3);
                         } else if (PAD_C == 0x10) {
-                            func_801BB8E8(4, 6, 5);
+                            Actor_SnapFacing(4, 6, 5);
                         } else {
                             g_Task->direction_08 = (WDIR + 1) & 7;
                         }
@@ -63,12 +63,12 @@ NON_MATCHING s32 func_801B95E0(void) {
                         }
                         if ((PAD_B & 0xF0) == 0xA0) {
                             WDIR = dir;
-                            func_801BB8E8(4, 6, 5);
+                            Actor_SnapFacing(4, 6, 5);
                             return func_801BB7B0(9) & BYTE_MASK;
                         }
                         if ((PAD_C & 0xF0) == 0xA0) {
                             WDIR = dir;
-                            func_801BB8E8(2, 4, 3);
+                            Actor_SnapFacing(2, 4, 3);
                             return func_801BB7B0(0xA) & BYTE_MASK;
                         }
                     }
@@ -78,7 +78,7 @@ NON_MATCHING s32 func_801B95E0(void) {
                     }
                     probe = Area_ReadStepHeight(STEP_TILE_X(x), y << 0x10, 3) << 0x10;
                     if (PAD_FLAG != 0 && (probe >> 0x10) >= 0x41) {
-                        func_801BB8E8(4, 6, 5);
+                        Actor_SnapFacing(4, 6, 5);
                         return 1;
                     }
                     ret = 3;
@@ -92,7 +92,7 @@ NON_MATCHING s32 func_801B95E0(void) {
                     if ((probe >> 0x10) < 0x41) {
                         return ret;
                     }
-                    func_801BB8E8(2, 4, 3);
+                    Actor_SnapFacing(2, 4, 3);
                     return 1;
                 }
             }
@@ -102,17 +102,17 @@ NON_MATCHING s32 func_801B95E0(void) {
             v     = func_801B9F08(2, 4, 0);
             PAD_A = v;
             if (v == 0x70) {
-                func_801BB8E8(4, 6, 5);
+                Actor_SnapFacing(4, 6, 5);
                 return 7;
             }
             if (v == 0x10 || v == 0x20) {
-                func_801BB8E8(2, 4, 3);
+                Actor_SnapFacing(2, 4, 3);
             }
             if ((PAD_A & 0xF0) != 0xA0) {
                 return 3;
             }
             if (!(WDIR & AREA_LOAD_FLAG_WORLD_MAP)) {
-                func_801BB8E8(4, 6, 5);
+                Actor_SnapFacing(4, 6, 5);
             }
             return func_801BB7B0(8) & BYTE_MASK;
         }
@@ -120,20 +120,20 @@ NON_MATCHING s32 func_801B95E0(void) {
         v     = func_801B9F08(3, 5, 0);
         PAD_A = v;
         if (v == 0x70) {
-            func_801BB8E8(2, 4, 3);
+            Actor_SnapFacing(2, 4, 3);
             return 7;
         }
         if (v == 0xB0) {
             return 6;
         }
         if (v == 0x10 || v == 0x20) {
-            func_801BB8E8(4, 6, 5);
+            Actor_SnapFacing(4, 6, 5);
         }
         if ((PAD_A & 0xF0) != 0xA0) {
             return 3;
         }
         if (!(WDIR & AREA_LOAD_FLAG_WORLD_MAP)) {
-            func_801BB8E8(2, 4, 3);
+            Actor_SnapFacing(2, 4, 3);
         }
         return func_801BB7B0(8) & BYTE_MASK;
     }

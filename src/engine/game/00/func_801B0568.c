@@ -23,7 +23,7 @@ MATCH void func_801B0568(void) {
             return;
         }
         if (!(Game_GetInput() & BYTE_MASK)) {
-            func_801B5BDC(g_Task->direction_08);
+            Actor_RequestRoute(g_Task->direction_08);
             g_Game.current->u.field.counter_11C.u8_value = 3U;
             g_Game.current->u.field.mode_12B.s8_value    = 0;
             Actor_ClearVelocity();
@@ -68,7 +68,7 @@ MATCH void func_801B0568(void) {
         case_0:
             if ((Area_GetActorFacingStepX() << 0x18) != 0) {
                 g_Game.current->u.field.mode_12B.s8_value = 0;
-                func_801B5BDC(g_Task->direction_08);
+                Actor_RequestRoute(g_Task->direction_08);
                 goto block_35; /* shares the state-1 tail */
             }
             g_Task->param.unk_0B = 0;
@@ -97,7 +97,7 @@ MATCH void func_801B0568(void) {
                     g_Game.walk_flags |= AREA_WALK_TRANSITION;
                 }
             }
-            func_801B5BDC((g_Task->direction_08 + 8) & BYTE_MASK);
+            Actor_RequestRoute((g_Task->direction_08 + 8) & BYTE_MASK);
             tmp6        = g_Task;
             tmp6->timer = (tmp6->timer - 1);
             Actor_UpdateMovement();
@@ -111,7 +111,7 @@ MATCH void func_801B0568(void) {
             g_Game.current->u.field.mode_12B.s8_value    = 0;
             g_Game.current->u.field.counter_11C.u8_value = 3U;
             g_Task->timer                                = 0U;
-            func_801B5BDC(g_Task->direction_08);
+            Actor_RequestRoute(g_Task->direction_08);
             g_Game.current->u.field.mode_12B.s8_value = 0;
         block_35:
             g_Task->header.step = 1;
@@ -170,7 +170,7 @@ MATCH void func_801B0568(void) {
             g_Game.current->u.field.counter_11C.u8_value = 3U;
             g_Task->timer                                = 0U;
             g_Task->param.unk_0B                         = 0;
-            func_801B5BDC(g_Task->direction_08);
+            Actor_RequestRoute(g_Task->direction_08);
             g_Game.current->u.field.mode_12B.s8_value = 0;
             return;
         }

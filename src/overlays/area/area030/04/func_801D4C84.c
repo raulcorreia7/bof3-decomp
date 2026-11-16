@@ -10,9 +10,9 @@ MATCH void func_801D4C84(void) {
     FISHING_STATE->step_timer_09++;
     Fishing_DrawCatchBar(0, FISHING_CATCH_BAR_Y);
     if (g_FishingBestCatch[FISHING_STATE->bounce_3C.half.key_3E] != 0) {
-        func_801E1004(FISHING_STATE->bounce_3C.half.key_3E & BYTE_MASK, g_FishingBestCatch[FISHING_STATE->bounce_3C.half.key_3E], 0);
+        Fishing_DrawCatchRow(FISHING_STATE->bounce_3C.half.key_3E & BYTE_MASK, g_FishingBestCatch[FISHING_STATE->bounce_3C.half.key_3E], 0);
     } else {
-        func_801E1004(0xFF, 0, 0);
+        Fishing_DrawCatchRow(0xFF, 0, 0);
     }
     if (FISHING_STATE->counter_08 == 0) {
         if (g_FishingBestCatch[FISHING_STATE->bounce_3C.half.key_3E] != 0) {

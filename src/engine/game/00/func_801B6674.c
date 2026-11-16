@@ -19,7 +19,7 @@ NON_MATCHING bool func_801B6674(void) {
                 }
             }
             if (!(status & AREA_LOAD_FLAG_NO_ACTOR_SCRIPT)) {
-                func_801B5BDC(g_Task->direction_08);
+                Actor_RequestRoute(g_Task->direction_08);
             }
             func_801B690C();
             g_Game.walk_flags = g_Game.walk_flags & ~AREA_WALK_TRANSITION;
@@ -44,7 +44,7 @@ NON_MATCHING bool func_801B6674(void) {
             return 0;
         }
         if (!(g_GameRequestFlags & AREA_LOAD_FLAG_NO_ACTOR_SCRIPT)) {
-            func_801B5BDC(g_Task->direction_08);
+            Actor_RequestRoute(g_Task->direction_08);
         }
         D_8014504A += 1;
         g_Game.walk_flags = g_Game.walk_flags & ~AREA_WALK_TRANSITION;
@@ -57,7 +57,7 @@ NON_MATCHING bool func_801B6674(void) {
     if ((g_InputPressed & g_InputMasks[WORLD_INPUT_LOCATION_GUIDE]) && ((u8)(temp + 0x60) < 2)) {
         g_SceneEventState.mode = 0x1B;
         if (!(status & AREA_LOAD_FLAG_NO_ACTOR_SCRIPT)) {
-            func_801B5BDC(g_Task->direction_08);
+            Actor_RequestRoute(g_Task->direction_08);
         }
         ACTOR_CLEAR_STEP();
         return 1;

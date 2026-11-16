@@ -1,9 +1,9 @@
 #include "start_08.h"
 
-void func_801E7608(void);
+void Menu_DrawBackdrop(void);
 
 MATCH void func_801E441C(void) {
-    func_801E7608();
+    Menu_DrawBackdrop();
     func_801E6D88(0);
     if (g_UiWindowChannel & FRONTEND_FLAG_CONFIRM) {
         if ((D_801ED86C != 0) && (g_InputPressed & (PADLup | PADLdown))) {

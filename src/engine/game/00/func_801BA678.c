@@ -99,7 +99,7 @@ NON_MATCHING s32 func_801BA678(void) {
                         val17 = 4;
                         val19 = 3;
                     block_20:
-                        func_801BB8E8(val15, val17, val19);
+                        Actor_SnapFacing(val15, val17, val19);
                         goto block_21; /* retail branch */
                     }
                     if (!(func_801BB1B8(2) & BYTE_MASK)) {
@@ -107,13 +107,13 @@ NON_MATCHING s32 func_801BA678(void) {
                             (((spad[2] & 0xF0) != 0xA0) || ((tmp20 = g_Task->direction_08, val9 = 0xA, (tmp20 != 3)) && (tmp20 != 7)))) {
                             if ((spad[1] & 0xF0) == 0xA0) {
                                 g_Task->direction_08 = val20;
-                                func_801BB8E8(4U, 6U, 5U);
+                                Actor_SnapFacing(4U, 6U, 5U);
                                 val9 = 9;
                                 goto block_109; /* retail branch */
                             }
                             if ((spad[2] & 0xF0) == 0xA0) {
                                 g_Task->direction_08 = val20;
-                                func_801BB8E8(2U, 4U, 3U);
+                                Actor_SnapFacing(2U, 4U, 3U);
                                 val9 = 0xA;
                                 goto block_109; /* retail branch */
                             }
@@ -132,13 +132,13 @@ NON_MATCHING s32 func_801BA678(void) {
             switch (tmp10) { /* switch 1; irregular */
                 case 0x10:   /* switch 1 */
                 case 0x20:   /* switch 1 */
-                    func_801BB8E8(4U, 6U, 5U);
+                    Actor_SnapFacing(4U, 6U, 5U);
                     /* fallthrough */
                 default: /* switch 1 */
                     if ((SP_REF(u8, 0x8u) & 0xF0) == 0xA0) {
                         val9 = 8;
                         if (!(1 & g_Task->direction_08)) {
-                            func_801BB8E8(2U, 4U, 3U);
+                            Actor_SnapFacing(2U, 4U, 3U);
                             val9 = 8;
                         }
                         goto block_109; /* retail branch */
@@ -149,13 +149,13 @@ NON_MATCHING s32 func_801BA678(void) {
                         tmp4 = FIELD(u16, tmp25, 0x3Au);
                         val7 = 1;
                         if (Area_IsStepTooHigh(val0, val0, tmp4, (s16)(tmp4 + 1), val7) & BYTE_MASK) {
-                            func_801BB8E8(4U, 6U, 5U);
+                            Actor_SnapFacing(4U, 6U, 5U);
                         }
                         tmp26 = g_Task;
                         if (!(1 & FIELD(u8, tmp26, 0x8u))) {
                             tmp5 = FIELD(u16, tmp26, 0x3Au);
                             if (Area_IsStepTooHigh(val0, val0, tmp5, (s16)(tmp5 - 1), val7) & BYTE_MASK) {
-                                func_801BB8E8(4U, 6U, 5U);
+                                Actor_SnapFacing(4U, 6U, 5U);
                                 return 3;
                             }
                             goto block_114; /* retail branch */
@@ -171,13 +171,13 @@ NON_MATCHING s32 func_801BA678(void) {
             switch (tmp11) { /* switch 2; irregular */
                 case 0x10:   /* switch 2 */
                 case 0x20:   /* switch 2 */
-                    func_801BB8E8(2U, 4U, 3U);
+                    Actor_SnapFacing(2U, 4U, 3U);
                     /* fallthrough */
                 default: /* switch 2 */
                     if ((SP_REF(u8, 0x8u) & 0xF0) == 0xA0) {
                         val9 = 8;
                         if (!(1 & g_Task->direction_08)) {
-                            func_801BB8E8(4U, 6U, 5U);
+                            Actor_SnapFacing(4U, 6U, 5U);
                             val9 = 8;
                         }
                         goto block_109; /* retail branch */
@@ -188,13 +188,13 @@ NON_MATCHING s32 func_801BA678(void) {
                         tmp0 = FIELD(u16, tmp27, 0x36u);
                         val7 = 3;
                         if (Area_IsStepTooHigh(tmp0, (s16)(tmp0 + 1), val0, val0, val7) & BYTE_MASK) {
-                            func_801BB8E8(2U, 4U, 3U);
+                            Actor_SnapFacing(2U, 4U, 3U);
                         }
                         tmp28 = g_Task;
                         if (!(1 & FIELD(u8, tmp28, 0x8u))) {
                             tmp1 = FIELD(u16, tmp28, 0x36u);
                             if (Area_IsStepTooHigh(tmp1, (s16)(tmp1 - 1), val0, val0, val7) & BYTE_MASK) {
-                                func_801BB8E8(2U, 4U, 3U);
+                                Actor_SnapFacing(2U, 4U, 3U);
                                 return 3;
                             }
                             goto block_114; /* retail branch */

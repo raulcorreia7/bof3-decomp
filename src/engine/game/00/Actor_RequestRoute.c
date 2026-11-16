@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801B5BDC(u8 route_index) {
+/* func_801B5BDC */
+MATCH void Actor_RequestRoute(u8 route_index) {
     u32 index;
 
     if (!(g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP)) {

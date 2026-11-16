@@ -23,7 +23,7 @@ MATCH s32 func_801FC1D0(s32 member_index) {
     actor          = &g_Actors[actor_index];
     SPAD(0u)->task = actor;
     g_CurrentActor = actor;
-    func_801A4AA8();
+    Actor_ResetMotion();
     Area_SelectSceneRecord(0x67);
     g_Task->header.flags = 1;
 

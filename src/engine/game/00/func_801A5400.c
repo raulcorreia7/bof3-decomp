@@ -20,7 +20,7 @@ MATCH void func_801A5400(u8* script) {
         g_Task                    = slot_record;
         g_CurrentActor            = slot_record;
         FIELD(u16, counter, 0x2u) = data[0x2] | (data[0x1] << 8);
-        func_801A4AA8();
+        Actor_ResetMotion();
         Area_SelectSceneRecord(FIELD(u16, counter, 0x2u));
         g_Task->header.flags           = ACTOR_FLAG_IN_USE;
         coord_record                   = g_Task;

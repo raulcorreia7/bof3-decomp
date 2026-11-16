@@ -5,7 +5,7 @@ MATCH void func_801E411C(void) {
     s32  packed;
     u8   next_state;
 
-    func_801E7608();
+    Menu_DrawBackdrop();
     UI_DrawText(70, 190, 0, 255U, Message_GetText(0xA8));
     flag_word = (u16*)&g_UiWindowChannel;
     *flag_word |= 2;

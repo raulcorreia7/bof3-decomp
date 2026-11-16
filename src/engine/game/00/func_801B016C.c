@@ -32,7 +32,7 @@ MATCH void func_801B016C(void) {
         g_Task->header.flags |= ACTOR_FLAG_HIDDEN;
         g_Task->header.mode = 0xD;
     } else {
-        func_801B5BDC(g_Task->direction_08);
+        Actor_RequestRoute(g_Task->direction_08);
         g_Task->header.mode = g_Task->header.mode + 1;
     }
     ACTOR_CLEAR_STEP();
