@@ -5,8 +5,9 @@ typedef struct BattleRecordHead {
     u8 bytes[32];
 } BattleRecordHead;
 
+/* func_800AED5C */
 #ifdef NON_MATCHING
-NON_MATCHING u8 func_800AED5C(s32 selector, u32 battler_index) {
+NON_MATCHING u8 Battle_CanTarget(s32 selector, u32 battler_index) {
     u8*         dst;
     u8*         src;
     u32         index;
@@ -40,5 +41,5 @@ NON_MATCHING u8 func_800AED5C(s32 selector, u32 battler_index) {
     return result;
 }
 #else
-INCLUDE_ASM(func_800AED5C);
+INCLUDE_ASM(Battle_CanTarget);
 #endif

@@ -53,7 +53,7 @@ NON_MATCHING void func_801EEDFC(void) {
     if (g_Task->param.unk_0B != 0) {
         return;
     }
-    if ((func_800AED5C(3, g_Battle.target_selector) & BYTE_MASK) != 0) {
+    if ((Battle_CanTarget(3, g_Battle.target_selector) & BYTE_MASK) != 0) {
         slot = Battle_AllocEffect(1, 72) & BYTE_MASK;
         work = g_Task;
         type = 3;

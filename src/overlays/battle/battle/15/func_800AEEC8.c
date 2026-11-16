@@ -14,7 +14,7 @@ NON_MATCHING s32 func_800AEEC8(s32 arg0, u8 arg1) {
     } else {
         selector = D_800B6BF0[arg0 & 3];
     }
-    status = func_800AED5C(selector, slot);
+    status = Battle_CanTarget(selector, slot);
     if ((u8)status == 0) {
         mode = 8;
     }

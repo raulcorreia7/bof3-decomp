@@ -471,7 +471,7 @@ segments:
       - [0x17F88, c, func_800AE788]
       - [0x1802C, c, func_800AE82C]
       - [0x181C4, c, func_800AE9C4]
-      - [0x1855C, c, func_800AED5C]
+      - [0x1855C, c, Battle_CanTarget]
       - [0x186C8, c, func_800AEEC8]
       - [0x18798, c, func_800AEF98]
       - [0x18814, c, func_800AF014]

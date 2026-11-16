@@ -91,7 +91,7 @@ MATCH void func_801EEE8C(void) {
 }
 
 /* Spawn three effects on each unblocked battler of the selected side: kind j + 4 where
- * func_800AED5C accepts the battler for selector j, kind 8 otherwise. */
+ * Battle_CanTarget accepts the battler for selector j, kind 8 otherwise. */
 MATCH void func_801EEF8C(void) {
     s32 i;
     s32 j;
@@ -106,7 +106,7 @@ MATCH void func_801EEF8C(void) {
                     j       = 0;
                     battler = i + BATTLE_PARTY_CHARACTERS_COUNT;
                     do {
-                        if (func_800AED5C(D_800B6BF0[j & BYTE_MASK], battler & BYTE_MASK) & BYTE_MASK) {
+                        if (Battle_CanTarget(D_800B6BF0[j & BYTE_MASK], battler & BYTE_MASK) & BYTE_MASK) {
                             slot = Battle_AllocEffect(1, 2);
                             if (slot != 0xFF) {
                                 g_BattleEffects[slot].target.party = g_Task;
@@ -138,7 +138,7 @@ MATCH void func_801EEF8C(void) {
                 if (!(Battle_SlotIsBlocked(i & BYTE_MASK) & BYTE_MASK)) {
                     j = 0;
                     do {
-                        if (func_800AED5C(D_800B6BF0[j & BYTE_MASK], i & BYTE_MASK) & BYTE_MASK) {
+                        if (Battle_CanTarget(D_800B6BF0[j & BYTE_MASK], i & BYTE_MASK) & BYTE_MASK) {
                             slot = Battle_AllocEffect(1, 2);
                             if (slot != 0xFF) {
                                 g_BattleEffects[slot].target.party = g_Task;

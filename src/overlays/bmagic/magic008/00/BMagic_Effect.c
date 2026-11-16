@@ -285,7 +285,7 @@ MATCH void func_801F0018(void) {
         g_Task->pos.x.fixed = actor->pos.x.fixed;
         g_Task->pos.y.fixed = actor->pos.y.fixed;
         g_Task->pos.z.fixed = actor->pos.z.fixed;
-        if (func_800AED5C(D_800B6BF0[g_Task->unk_04 & 3], g_Battle.target_selector) & BYTE_MASK) {
+        if (Battle_CanTarget(D_800B6BF0[g_Task->unk_04 & 3], g_Battle.target_selector) & BYTE_MASK) {
             slot                               = Battle_AllocEffect(1, 72);
             g_BattleEffects[slot].target.party = g_Task;
             g_BattleEffects[slot].unk_04       = g_Task->unk_04;
