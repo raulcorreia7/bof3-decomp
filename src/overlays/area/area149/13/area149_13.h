@@ -28,6 +28,6 @@ extern Callback D_801F4580[];
 
 /* The overlay's companion step the wrapper enters. */
 /* The sprite-span step the handler enters. */
-void func_801F3140(s32 span);
+void func_801F3140(s8 span);
 
 #endif
