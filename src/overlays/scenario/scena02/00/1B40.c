@@ -8,5 +8,3 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 INCLUDE_ASM(func_801F8740);
-
-INCLUDE_ASM(func_801F8C78);
