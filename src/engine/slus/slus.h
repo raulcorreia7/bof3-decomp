@@ -1223,7 +1223,7 @@ extern void             func_80167428(void);
 void                    SND_QuitSpu(void);
 extern const ObjectFunc g_BundleRecordOpcodes[]; /* interior of g_BundleOpcodes (index 3); a separate symbol keeps func_801584A4 matching */
 extern u8               D_8017F90D;
-void                    func_801A17A0(u8* entry_record);
+s32                     func_801A17A0(u8* entry_record);
 void                    func_801D0C04(void);
 extern s32              func_801F2C04(void);
 
