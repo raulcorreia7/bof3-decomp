@@ -527,14 +527,14 @@ MATCH s32 func_801F88C4(void) {
     return 0;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F88CC(u8 semi, s32 color) {
+/* func_801F88CC */
+MATCH void func_801F88CC(s32 semi, s32 color) {
     SPRT* sprite;
     TILE* tile;
     s32   tpage;
     s32   shade;
 
-    if (semi != 0) {
+    if ((u8)semi != 0) {
         tpage = getTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_SUB, 704, 0);
         GFX_ADD_LAYER_DRAW_MODE(2, tpage);
         tile = (TILE*)g_GfxPrimCursor;
@@ -552,7 +552,7 @@ NON_MATCHING void func_801F88CC(u8 semi, s32 color) {
     GFX_ADD_LAYER_DRAW_MODE(2, tpage);
     sprite = (SPRT*)g_GfxPrimCursor;
     setSprt(sprite);
-    SetSemiTrans(sprite, semi);
+    SetSemiTrans(sprite, (u8)semi);
     sprite->w = 0x100;
     setXY0(sprite, 0, 0);
     sprite->h = 0xF0;
@@ -563,7 +563,7 @@ NON_MATCHING void func_801F88CC(u8 semi, s32 color) {
     GFX_ADD_LAYER_DRAW_MODE(2, tpage);
     sprite = (SPRT*)g_GfxPrimCursor;
     setSprt(sprite);
-    SetSemiTrans(sprite, semi);
+    SetSemiTrans(sprite, (u8)semi);
     setXY0(sprite, 0x100, 0);
     sprite->w = 0x40;
     sprite->h = 0xF0;
@@ -571,9 +571,6 @@ NON_MATCHING void func_801F88CC(u8 semi, s32 color) {
     setRGB0(sprite, color, color, color);
     GFX_AddPrim(2, sizeof(SPRT));
 }
-#else
-INCLUDE_ASM(func_801F88CC);
-#endif
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F8B10(s32 scale, s32 shade) {
