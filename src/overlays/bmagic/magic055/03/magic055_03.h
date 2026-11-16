@@ -5,8 +5,6 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern SVECTOR D_1F800014[];
-
 extern ActorEffectSteps D_801EEC04;
 extern Callback         D_801EFC64[];
 
