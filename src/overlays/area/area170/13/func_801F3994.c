@@ -17,19 +17,18 @@ NON_MATCHING void func_801F3994(void) {
 
     hidden = SYS_TestFlag(g_SceneEventFlags, 0x7E) == 0;
     row    = 0;
-    bundle = (u8*)&g_AreaMapBundle;
+    bundle = MEM_PTR(u8, MAP_BUNDLE_BASE);
     do {
         col = 0;
         do {
             sum = 0;
             if (hidden != 0) {
                 for (k = 0; (u8)k < 3; k++) {
-                    index   = D_801F5990[(u8)k] + col;
-                    wrapped = index;
-                    if ((u8)wrapped >= 9) {
-                        wrapped = index - 9;
+                    index = D_801F5990[(u8)k] + col;
+                    if ((u8)index >= 9) {
+                        index = index - 9;
                     }
-                    sum += D_801F58D0[(u8)k * 63 + (u8)row * 9 + (u8)wrapped];
+                    sum += D_801F58D0[(u8)k * 63 + (u8)row * 9 + (u8)index];
                 }
                 if ((u8)sum != 0) {
                     sum = 1;
