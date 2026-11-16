@@ -12,7 +12,8 @@
 extern u8 D_801F69AF;
 /* The area flag byte the request step sets. */
 extern u8 D_80143FBC;
-extern u8 D_801F6BC0;
+/* D_801F6BC0 */
+extern u8 g_SceneActorSlot;
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
