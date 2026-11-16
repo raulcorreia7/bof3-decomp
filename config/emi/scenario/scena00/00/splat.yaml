@@ -15,8 +15,8 @@ segments:
     align: 4
     section_order: [.rodata, .text, .data, .bss]
     subsegments:
-      - [0x8, .rodata, 8]
-      - [0x1C0, c, 8]
-      - [0x5D80, .data, 8]
+      - [0x8, .rodata, 1C0]
+      - [0x1C0, c, 1C0]
+      - [0x5D80, .data, 1C0]
       - [0x5E8C, bin, world_data_blob_b]
   - [0x6F70]

@@ -17,7 +17,7 @@ segments:
       - [0x4D4, c, Area_Update]
       - [0x818, c, func_801F3418]
       - [0x85C, c, func_801F345C]
-      - [0x8C8, c, func_801F34C8]
+      - [0x8C8, c, Actor_AdvanceTimer]
       - [0x918, c, func_801F3518]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
