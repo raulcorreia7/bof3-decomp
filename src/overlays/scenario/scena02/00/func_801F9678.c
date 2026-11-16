@@ -44,5 +44,3 @@ MATCH void func_801F9678(void) {
             break;
     }
 }
-
-INCLUDE_ASM(func_801F9800);
