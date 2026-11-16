@@ -1108,16 +1108,16 @@ NON_MATCHING void func_801FA3E4(void) {
         }
     }
     if (LOHU(g_GameAreaId) == 2 && SYS_TestFlag(g_SceneFlags, 6) && !SYS_TestFlag(g_SceneFlags, 7)) {
-        slot                   = Actor_FindFreeSpawned();
-        D_1F800000.view.raw[0] = slot;
-        g_AreaCameraAngle.vx   = -0x23C;
+        slot                      = Actor_FindFreeSpawned();
+        D_1F800000.cells.bytes[0] = slot;
+        g_AreaCameraAngle.vx      = -0x23C;
         if (slot != GAME_NONE) {
-            g_SpawnedActors[slot].header.flags                     = 1;
-            g_SpawnedActors[D_1F800000.view.raw[0]].type           = 0x13;
-            g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.x = -0x302;
-            g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.y = g_AreaCameraAngle.vy;
-            g_SpawnedActors[D_1F800000.view.raw[0]].camera_angle.z = g_AreaCameraAngle.vz;
-            g_SpawnedActors[D_1F800000.view.raw[0]].layer          = 0xFF;
+            g_SpawnedActors[slot].header.flags                        = 1;
+            g_SpawnedActors[D_1F800000.cells.bytes[0]].type           = 0x13;
+            g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.x = -0x302;
+            g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
+            g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.z = g_AreaCameraAngle.vz;
+            g_SpawnedActors[D_1F800000.cells.bytes[0]].layer          = 0xFF;
         }
     }
     if (LOHU(g_GameAreaId) == 3) {

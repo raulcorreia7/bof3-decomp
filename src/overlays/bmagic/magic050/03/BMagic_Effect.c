@@ -113,9 +113,9 @@ MATCH void func_801EF898(void) {
     s32     i;
     s32     tpage;
 
-    D_1F800000.view.scenario.math_00 = g_Task->timer * 3;
-    D_1F800000.view.scenario.math_08 = g_Task->unk_09 * 6;
-    D_1F800000.view.scenario.math_0C = g_Task->unk_09;
+    D_1F800000.cells.words[0] = g_Task->timer * 3;
+    D_1F800000.cells.words[2] = g_Task->unk_09 * 6;
+    D_1F800000.cells.words[3] = g_Task->unk_09;
     for (i = 0; i < 16; i++) {
         tpage = getTPage(0, 1, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
@@ -123,11 +123,11 @@ MATCH void func_801EF898(void) {
         prim = (TILE_1*)g_GfxPrimCursor;
         SetTile1(prim);
         SetSemiTrans(prim, 1);
-        setXY0(prim, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), D_1F800000.view.scenario.math_00), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), D_1F800000.view.scenario.math_00));
+        setXY0(prim, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), D_1F800000.cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), D_1F800000.cells.words[0]));
         if (g_Battle.action_id == 50) {
-            setRGB0(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_0C);
+            setRGB0(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[2], D_1F800000.cells.words[3]);
         } else {
-            setRGB0(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_0C, D_1F800000.view.scenario.math_08);
+            setRGB0(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[3], D_1F800000.cells.words[2]);
         }
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(TILE_1));
     }

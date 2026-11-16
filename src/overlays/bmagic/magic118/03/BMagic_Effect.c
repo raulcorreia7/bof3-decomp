@@ -143,32 +143,32 @@ MATCH void BMagic_DrawBurnSprites(void) {
     s32       x;
     s32       y;
 
-    D_1F800000.view.effect.params[5] = g_Task->param.unk_0B * 8;
-    D_1F800000.view.effect.params[0] = g_Task->unk_09 * 4;
-    D_1F800000.view.effect.params[3] = g_Task->unk_14 + 0x20;
-    D_1F800000.view.effect.params[4] = (g_FrameCount & 0xF) << 8;
-    D_1F800014[1].vx                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[1].vy                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[1].vz                 = -(D_1F800000.view.effect.params[3] + FIXED_MUL(rsin(0), 0x20));
-    D_1F800014[3].vx                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[3].vy                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[3].vz                 = 0;
+    D_1F800000.cells.halves[5] = g_Task->param.unk_0B * 8;
+    D_1F800000.cells.halves[0] = g_Task->unk_09 * 4;
+    D_1F800000.cells.halves[3] = g_Task->unk_14 + 0x20;
+    D_1F800000.cells.halves[4] = (g_FrameCount & 0xF) << 8;
+    D_1F800014[1].vx           = FIXED_MUL(rcos(0), D_1F800000.cells.halves[0]);
+    D_1F800014[1].vy           = FIXED_MUL(rsin(0), D_1F800000.cells.halves[0]);
+    D_1F800014[1].vz           = -(D_1F800000.cells.halves[3] + FIXED_MUL(rsin(0), 0x20));
+    D_1F800014[3].vx           = FIXED_MUL(rcos(0), D_1F800000.cells.halves[0]);
+    D_1F800014[3].vy           = FIXED_MUL(rsin(0), D_1F800000.cells.halves[0]);
+    D_1F800014[3].vz           = 0;
     for (i = 1; i <= 32; i++) {
-        D_1F800000.view.effect.params[4] = ((i + g_FrameCount) & 0xF) << 8;
-        D_1F800014[0].vx                 = D_1F800014[1].vx;
-        D_1F800014[0].vy                 = D_1F800014[1].vy;
-        D_1F800014[0].vz                 = D_1F800014[1].vz;
-        D_1F800014[1].vx                 = FIXED_MUL(rcos(i << 7), D_1F800000.view.effect.params[0]);
-        D_1F800014[1].vy                 = FIXED_MUL(rsin(i << 7), D_1F800000.view.effect.params[0]);
-        D_1F800014[1].vz                 = -(D_1F800000.view.effect.params[3] + FIXED_MUL(rsin(D_1F800000.view.effect.params[4]), 0x20));
-        D_1F800014[2].vx                 = D_1F800014[3].vx;
-        D_1F800014[2].vy                 = D_1F800014[3].vy;
-        D_1F800014[2].vz                 = 0;
-        D_1F800014[3].vx                 = FIXED_MUL(rcos(i << 7), D_1F800000.view.effect.params[0]);
-        D_1F800014[3].vy                 = FIXED_MUL(rsin(i << 7), D_1F800000.view.effect.params[0]);
-        D_1F800014[3].vz                 = 0;
-        x                                = (D_1F800014[1].vx << 9) + g_Task->pos.x.fixed;
-        y                                = (D_1F800014[1].vx << 9) + g_Task->pos.y.fixed;
+        D_1F800000.cells.halves[4] = ((i + g_FrameCount) & 0xF) << 8;
+        D_1F800014[0].vx           = D_1F800014[1].vx;
+        D_1F800014[0].vy           = D_1F800014[1].vy;
+        D_1F800014[0].vz           = D_1F800014[1].vz;
+        D_1F800014[1].vx           = FIXED_MUL(rcos(i << 7), D_1F800000.cells.halves[0]);
+        D_1F800014[1].vy           = FIXED_MUL(rsin(i << 7), D_1F800000.cells.halves[0]);
+        D_1F800014[1].vz           = -(D_1F800000.cells.halves[3] + FIXED_MUL(rsin(D_1F800000.cells.halves[4]), 0x20));
+        D_1F800014[2].vx           = D_1F800014[3].vx;
+        D_1F800014[2].vy           = D_1F800014[3].vy;
+        D_1F800014[2].vz           = 0;
+        D_1F800014[3].vx           = FIXED_MUL(rcos(i << 7), D_1F800000.cells.halves[0]);
+        D_1F800014[3].vy           = FIXED_MUL(rsin(i << 7), D_1F800000.cells.halves[0]);
+        D_1F800014[3].vz           = 0;
+        x                          = (D_1F800014[1].vx << 9) + g_Task->pos.x.fixed;
+        y                          = (D_1F800014[1].vx << 9) + g_Task->pos.y.fixed;
         if (GetGraphType() == 1 || GetGraphType() == 2) {
             tpage = 0xA5;
         } else {
@@ -181,8 +181,8 @@ MATCH void BMagic_DrawBurnSprites(void) {
         SetSemiTrans(prim, 1);
         setRGB0(prim, 1, 1, 1);
         setRGB1(prim, 1, 1, 1);
-        setRGB2(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[5]);
-        setRGB3(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[5]);
+        setRGB2(prim, D_1F800000.cells.halves[5], D_1F800000.cells.halves[5], D_1F800000.cells.halves[5]);
+        setRGB3(prim, D_1F800000.cells.halves[5], D_1F800000.cells.halves[5], D_1F800000.cells.halves[5]);
         prim->tpage = GetTPage(0, 1, 0x340, 0x100);
         prim->clut  = GetClut(0, 0x1FA);
         setUV4(prim, i << 3, g_Task->timer * 4 + 0x20, (i << 3) + 8, g_Task->timer * 4 + 0x20, i << 3, g_Task->timer * 4 + 0x28, (i << 3) + 8, g_Task->timer * 4 + 0x28);
@@ -195,9 +195,9 @@ MATCH void BMagic_DrawBurnSprites(void) {
 
 /* The dark ring scratch: the inner and outer radius and the inner-edge shade, then the quad corners
  * (D_1F800014). */
-#define DARK_RING_INNER D_1F800000.view.effect.params[1]
-#define DARK_RING_OUTER D_1F800000.view.effect.params[2]
-#define DARK_RING_SHADE D_1F800000.view.effect.params[5]
+#define DARK_RING_INNER D_1F800000.cells.halves[1]
+#define DARK_RING_OUTER D_1F800000.cells.halves[2]
+#define DARK_RING_SHADE D_1F800000.cells.halves[5]
 
 /* A ring of 32 subtractive quads from radius 128 to 192 that darkens toward its inner edge by six times the
  * effect counter (byte 0x09), then the draw mode back to plain blending. */
@@ -247,10 +247,10 @@ MATCH void BMagic_DrawBurnFlameTris(void) {
     tpage = getTPage(0, 2, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
-    D_1F800000.view.effect.params[0] = 0x80;
-    D_1F800000.view.effect.params[5] = g_Task->unk_09 * 4;
-    D_1F800000.view.effect.params[6] = g_Task->unk_09 * 6;
-    setVector(&D_1F800014[2], FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]), 0);
+    D_1F800000.cells.halves[0] = 0x80;
+    D_1F800000.cells.halves[5] = g_Task->unk_09 * 4;
+    D_1F800000.cells.halves[6] = g_Task->unk_09 * 6;
+    setVector(&D_1F800014[2], FIXED_MUL(rsin(0), D_1F800000.cells.halves[0]), FIXED_MUL(rcos(0), D_1F800000.cells.halves[0]), 0);
     D_1F800014[1].vz = 0;
     D_1F800014[0].vz = 0;
 
@@ -260,12 +260,12 @@ MATCH void BMagic_DrawBurnFlameTris(void) {
         D_1F800014[0].vy = 0;
         D_1F800014[1].vx = D_1F800014[2].vx;
         D_1F800014[1].vy = D_1F800014[2].vy;
-        D_1F800014[2].vx = FIXED_MUL(rsin(i << 7), D_1F800000.view.effect.params[0]);
-        D_1F800014[2].vy = FIXED_MUL(rcos(i << 7), D_1F800000.view.effect.params[0]);
+        D_1F800014[2].vx = FIXED_MUL(rsin(i << 7), D_1F800000.cells.halves[0]);
+        D_1F800014[2].vy = FIXED_MUL(rcos(i << 7), D_1F800000.cells.halves[0]);
         RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
-        setRGB0(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
-        setRGB1(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[6]);
-        setRGB2(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[6]);
+        setRGB0(prim, D_1F800000.cells.halves[5], D_1F800000.cells.halves[5], D_1F800000.cells.halves[6]);
+        setRGB1(prim, D_1F800000.cells.halves[5], D_1F800000.cells.halves[6], D_1F800000.cells.halves[6]);
+        setRGB2(prim, D_1F800000.cells.halves[5], D_1F800000.cells.halves[6], D_1F800000.cells.halves[6]);
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
 
