@@ -32,6 +32,6 @@ MATCH void func_801F3AB0(void) {
             *MEM_PTR(Character, dst_off + (u32)dst_base) = src_base[g_CharSlot[g_PartyFieldOrder[count]]];
             dst_off += BATTLE_PARTY_STRIDE;
             count += 1;
-        } while (count < g_PartySize);
+        } while (count < g_PartySize); /* kept: g_Game.party_size here adds a load. */
     }
 }
