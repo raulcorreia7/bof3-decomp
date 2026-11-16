@@ -12,10 +12,10 @@
         long     flag;                                                                                                                                                            \
         s32      i;                                                                                                                                                               \
                                                                                                                                                                                   \
-        D_1F800014[1].vx = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[1]);                                                                                                  \
-        D_1F800014[1].vy = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[1]);                                                                                                  \
-        D_1F800014[3].vx = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);                                                                                                  \
-        D_1F800014[3].vy = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);                                                                                                  \
+        D_1F800014[1].vx = FIXED_MUL(rsin(0), D_1F800000.cells.halves[1]);                                                                                                        \
+        D_1F800014[1].vy = FIXED_MUL(rcos(0), D_1F800000.cells.halves[1]);                                                                                                        \
+        D_1F800014[3].vx = FIXED_MUL(rsin(0), D_1F800000.cells.halves[0]);                                                                                                        \
+        D_1F800014[3].vy = FIXED_MUL(rcos(0), D_1F800000.cells.halves[0]);                                                                                                        \
         D_1F800014[3].vz = 0;                                                                                                                                                     \
         D_1F800014[2].vz = 0;                                                                                                                                                     \
         D_1F800014[1].vz = 0;                                                                                                                                                     \
@@ -26,17 +26,17 @@
             SetSemiTrans(prim, 1);                                                                                                                                                \
             D_1F800014[0].vx = D_1F800014[1].vx;                                                                                                                                  \
             D_1F800014[0].vy = D_1F800014[1].vy;                                                                                                                                  \
-            D_1F800014[1].vx = FIXED_MUL(rsin(i << 6), D_1F800000.view.effect.params[1]);                                                                                         \
-            D_1F800014[1].vy = FIXED_MUL(rcos(i << 6), D_1F800000.view.effect.params[1]);                                                                                         \
+            D_1F800014[1].vx = FIXED_MUL(rsin(i << 6), D_1F800000.cells.halves[1]);                                                                                               \
+            D_1F800014[1].vy = FIXED_MUL(rcos(i << 6), D_1F800000.cells.halves[1]);                                                                                               \
             D_1F800014[2].vx = D_1F800014[3].vx;                                                                                                                                  \
             D_1F800014[2].vy = D_1F800014[3].vy;                                                                                                                                  \
-            D_1F800014[3].vx = FIXED_MUL(rsin(i << 6), D_1F800000.view.effect.params[0]);                                                                                         \
-            D_1F800014[3].vy = FIXED_MUL(rcos(i << 6), D_1F800000.view.effect.params[0]);                                                                                         \
+            D_1F800014[3].vx = FIXED_MUL(rsin(i << 6), D_1F800000.cells.halves[0]);                                                                                               \
+            D_1F800014[3].vy = FIXED_MUL(rcos(i << 6), D_1F800000.cells.halves[0]);                                                                                               \
             RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag); \
             setRGB0(prim, 1, 1, 1);                                                                                                                                               \
             setRGB1(prim, 1, 1, 1);                                                                                                                                               \
-            setRGB2(prim, D_1F800000.view.effect.params[(shade_slot)], D_1F800000.view.effect.params[(shade_slot)], D_1F800000.view.effect.params[(shade_slot)]);                 \
-            setRGB3(prim, D_1F800000.view.effect.params[(shade_slot)], D_1F800000.view.effect.params[(shade_slot)], D_1F800000.view.effect.params[(shade_slot)]);                 \
+            setRGB2(prim, D_1F800000.cells.halves[(shade_slot)], D_1F800000.cells.halves[(shade_slot)], D_1F800000.cells.halves[(shade_slot)]);                                   \
+            setRGB3(prim, D_1F800000.cells.halves[(shade_slot)], D_1F800000.cells.halves[(shade_slot)], D_1F800000.cells.halves[(shade_slot)]);                                   \
             GFX_AddPrim((layer), sizeof(POLY_G4));                                                                                                                                \
         }                                                                                                                                                                         \
     } while (0)

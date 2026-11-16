@@ -114,11 +114,11 @@ MATCH void func_801FA8B8(void) {
             if (*g_ScriptVars != 0x25) {
                 break;
             }
-            slot                   = Actor_FindFreeSpawned();
-            D_1F800000.view.raw[0] = slot;
+            slot                      = Actor_FindFreeSpawned();
+            D_1F800000.cells.bytes[0] = slot;
             if (slot != GAME_NONE) {
-                g_SpawnedActors[D_1F800000.view.raw[0]].header.flags = 1;
-                g_SpawnedActors[D_1F800000.view.raw[0]].type         = 0x9A;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].header.flags = 1;
+                g_SpawnedActors[D_1F800000.cells.bytes[0]].type         = 0x9A;
             }
             D_80146875 = 3;
             break;
