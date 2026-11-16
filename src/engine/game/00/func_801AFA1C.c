@@ -5,10 +5,12 @@ NON_MATCHING void func_801AFA1C(u8* marks, u8 thumb_top, s16 x, s16 y, u8 thumb_
     s32       i;
     TILE*     tile;
     POLY_FT4* poly;
-    s32       top;
+    u16       top;
+    u16       n;
 
     i = 0;
-    if (total != 0) {
+    n = total;
+    if (n != 0) {
         do {
             if (marks[(u16)i] != 0) {
                 tile = (TILE*)g_GfxPrimCursor;
