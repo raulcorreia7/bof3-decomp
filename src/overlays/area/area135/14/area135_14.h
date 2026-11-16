@@ -75,14 +75,19 @@ extern u8   D_801F6248[][4];
 
 extern Callback D_801F6258[];
 extern u8       D_801F626C[];
+/* The part words the box run's floor and wall quads are queued with: the tag in the high half and
+ * the first tile of each face in the low. */
+#define AREA135_FLOOR_PART_WORD ((0x2350u << 16) | 0x0125u)
+#define AREA135_WALL_PART_WORD  ((0x2380u << 16) | 0x0126u)
+
 /* The x and y entry coordinates the request step indexes. */
-extern u8       D_801F6AAC[];
-extern u8       D_801F6AAD[];
-extern u8       D_801F6AB4[];
-extern u8       D_801F6AB5[];
+extern u8 D_801F6AAC[];
+extern u8 D_801F6AAD[];
+extern u8 D_801F6AB4[];
+extern u8 D_801F6AB5[];
 /* The x/y byte pairs the step compares the position against. */
-extern u8       D_801F6B2C[];
-extern u8       D_801F6B2D[];
+extern u8 D_801F6B2C[];
+extern u8 D_801F6B2D[];
 
 /* One authored camera-pan row: the cell the watched actor stands on, the cell
  * the scroll moves to and the direction the actor turns. */

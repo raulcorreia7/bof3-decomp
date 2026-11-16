@@ -302,7 +302,7 @@ MATCH void func_801EF924(u8* text, s32 x, s32 y) {
 NON_MATCHING void func_801EFB00(u16 value, s32 x, s32 y) {
     POLY_FT4* prim;
     s32       digit;
-    u32       scale;
+    u16       scale;
     s32       i;
     s32       mode;
     s32       started;
@@ -322,13 +322,13 @@ NON_MATCHING void func_801EFB00(u16 value, s32 x, s32 y) {
         setRGB0(prim, 128, 128, 128);
         setTPage(prim, TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
         setClut(prim, 0, 0x1E0);
-        digit = (u32)value / (u16)scale;
+        digit = value / scale;
         if (digit != 0) {
             started = 1;
         }
         value -= digit * scale;
         scale /= 10;
-        u = digit * 12 + 72;
+        u = (digit + 6) * 12;
         setUV4(prim, u, 24, u + 12, 24, u, 36, u + 12, 36);
         if (started != 0 || scale == 0) {
             GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_FT4));
