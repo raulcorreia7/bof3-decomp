@@ -291,10 +291,10 @@ typedef union BattleWorkHalfOrByte90 {
  * selected battler slot (the row index is slot - 3) and battle/battle/15 reads it
  * as the panel's slide mode (0 moves the panel right), so the cell carries
  * both readings. */
-typedef union BattlePanelCell0A {
+typedef union BattlePanelSlot {
     u8 slot;
     u8 mode;
-} BattlePanelCell0A;
+} BattlePanelSlot;
 
 /* The byte view of a battle panel task's +0x12 and +0x14 cells. battle/battle/15
  * reads those cells as bytes (Battle_DrawCommandList, func_800B0F9C) and as
@@ -323,21 +323,21 @@ ASSERT_OFFSET(BattlePanelByteCells, rows, 0x14);
  * battle/battle/15 reads the first 0x0C bytes only, and reads the x and y cells
  * signed, because the panel slides to negative screen positions. */
 typedef struct BattlePanelTask {
-    u8                unk_00[3]; /* +0x00 */
-    u8                state;     /* +0x03 short-menu state word */
-    ScreenCoord       x;         /* +0x04 the panel x; battle/battle/15 reads it signed */
-    ScreenCoord       y;         /* +0x06 the panel y; battle/battle/15 reads it signed */
-    u8                unk_08;
-    u8                unk_09;
-    BattlePanelCell0A cell_0A; /* +0x0A the selected battler slot, or the slide mode */
-    u8                ratio;   /* +0x0B enemy value * 0x37 / divisor, floored at 1 */
-    u8                unk_0C;
-    u8                cursor;    /* +0x0D cleared on panel entry */
-    u8                pad_0E[4]; /* +0x0E .. +0x11 */
-    u16               row_base;  /* +0x12 the panel list's first row (Battle_DrawCommandList) */
-    u16               hp;        /* +0x14 copied from EnemyBattler.hp; the HP bar's numerator */
-    u8                pad_16[6]; /* +0x16 .. +0x1B */
-    u16               max_hp;    /* +0x1C copied from EnemyBattler.stats.max_hp; the HP bar's divisor */
+    u8              unk_00[3]; /* +0x00 */
+    u8              state;     /* +0x03 short-menu state word */
+    ScreenCoord     x;         /* +0x04 the panel x; battle/battle/15 reads it signed */
+    ScreenCoord     y;         /* +0x06 the panel y; battle/battle/15 reads it signed */
+    u8              unk_08;
+    u8              unk_09;
+    BattlePanelSlot cell_0A; /* +0x0A the selected battler slot, or the slide mode */
+    u8              ratio;   /* +0x0B enemy value * 0x37 / divisor, floored at 1 */
+    u8              unk_0C;
+    u8              cursor;    /* +0x0D cleared on panel entry */
+    u8              pad_0E[4]; /* +0x0E .. +0x11 */
+    u16             row_base;  /* +0x12 the panel list's first row (Battle_DrawCommandList) */
+    u16             hp;        /* +0x14 copied from EnemyBattler.hp; the HP bar's numerator */
+    u8              pad_16[6]; /* +0x16 .. +0x1B */
+    u16             max_hp;    /* +0x1C copied from EnemyBattler.stats.max_hp; the HP bar's divisor */
 } BattlePanelTask;
 
 ASSERT_SIZE(BattlePanelTask, 0x1E);
