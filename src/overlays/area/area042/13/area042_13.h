@@ -19,15 +19,7 @@ extern u8 D_801F52D0[];
 extern u8 D_801F52E0[];
 extern u8 D_801F52E8[];
 
-/* The cell each of the payload's eighteen quads is drawn at: x, y and a signed z. */
-typedef struct AreaQuadCell {
-    u8 x;
-    u8 y;
-    s8 z;
-} AreaQuadCell;
-
-ASSERT_SIZE(AreaQuadCell, 3);
-
+/* The cell each of the payload's eighteen quads is drawn at. */
 extern AreaQuadCell D_801F52F4[];
 
 /* The payload's eighteen quad cells, three bytes each. */

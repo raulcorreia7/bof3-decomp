@@ -25,6 +25,16 @@
  * loader checks against the archive TOC (@source: wiki:formats/emi#code-overlays). */
 #define AREA_MODULE_ID(area)                             (52 + (area))
 
+/* One cell of a payload's quad table: the map cell the quad sits on, as x and y, and the signed
+ * depth of its base. Every area's floor payload carries such a table. */
+typedef struct AreaQuadCell {
+    u8 x;
+    u8 y;
+    s8 z;
+} AreaQuadCell;
+
+ASSERT_SIZE(AreaQuadCell, 3);
+
 /* One panel marker row selected by a controller mask: the mask, the panel
  * step it selects and an unused byte. */
 typedef struct WorldMapMarker {
