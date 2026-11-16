@@ -233,11 +233,13 @@ extern u16             D_801485BC;
 extern u16             D_801485BE;
 extern u8              D_801485DD;
 extern u8              D_801485DE;
+extern u8              D_801485E7;
 extern s16             D_80148628; /* the computed bar length; func_801D8188 stores it with sh at 0x801D81FC */
 extern u16             D_8014862A; /* the second bar length; func_801D8188 stores it with sh at 0x801D8210 */
 extern u8              D_80148653;
 extern u8              D_80148654;
 /* D_80148656, the party cursor, has no declaration here: its readers split between lb and lbu, so each unit keeps its own view. */
+extern s8              g_PartyCursor;
 extern s8              D_80148658[6];
 extern u8              D_8014865F;
 extern u8              D_80148660;
@@ -859,15 +861,6 @@ static inline Character* Start_PickPartyRecord(s32 character_index, s32 record_i
 }
 
 void Menu_DrawCharacterPortrait(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 shade_mode);
-
-extern FormationLayout g_MenuFormations[FORMATION_COUNT];
-extern FormationOrder  g_MenuFormationOrder;
-extern s32             g_MenuFormationArrow[3][2];
-extern s32             g_MenuFormationArrowTurned[3][2];
-extern s32             g_MenuFormationSpots[PARTY_SLOT_COUNT][2];
-extern u8              g_MenuFormationFrameLeft[];
-extern u8              g_MenuFormationFrameMiddle[];
-extern u8              g_MenuFormationFrameRight[];
 
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
 void func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
