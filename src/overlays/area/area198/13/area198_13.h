@@ -55,6 +55,8 @@ extern Callback D_801F4324[17];
 extern u8       D_801F4368[];
 
 extern Callback D_801F43EC[];
+/* The actor script ids the phase starts, one per phase. */
+extern u8       D_801F43AC[];
 /* The spark trail the spawn starts. */
 extern u8       D_801F43C0[];
 
