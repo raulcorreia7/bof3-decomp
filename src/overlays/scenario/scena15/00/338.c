@@ -658,7 +658,70 @@ MATCH void Scene_ClearActor(void) {
     Actor_Clear();
 }
 
-INCLUDE_ASM(func_801F9020);
+MATCH void func_801F9020(Coord* position, s32* step) {
+    LINE_F4* line4;
+    LINE_F2* line2;
+    s32      point[3];
+    DVECTOR  screen[4];
+
+    FAKE_STACK_PADS(u8, 0x20); /* FAKE: retail keeps the point and screen rows in a 96-byte frame. */
+
+    point[0] = position[0].fixed + step[0];
+    point[1] = position[1].fixed + step[1];
+    point[2] = position[2].fixed + step[2];
+    Area_ProjectPoint(point, &screen[0]);
+
+    if (!(g_Task->unk_06 & 1)) {
+        point[0] = position[0].fixed - step[0];
+        point[1] = position[1].fixed + step[1];
+    } else {
+        point[0] = position[0].fixed + step[0];
+        point[1] = position[1].fixed - step[1];
+    }
+    point[2] = position[2].fixed + step[2];
+    FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
+    Area_ProjectPoint(point, &screen[1]);
+
+    if (!(g_Task->unk_06 & 1)) {
+        point[0] = position[0].fixed + step[0];
+        point[1] = position[1].fixed - step[1];
+    } else {
+        point[0] = position[0].fixed - step[0];
+        point[1] = position[1].fixed + step[1];
+    }
+    point[2] = position[2].fixed - step[2];
+    FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
+    Area_ProjectPoint(point, &screen[2]);
+
+    point[0] = position[0].fixed - step[0];
+    point[1] = position[1].fixed - step[1];
+    point[2] = position[2].fixed - step[2];
+    Area_ProjectPoint(point, &screen[3]);
+
+    line4 = (LINE_F4*)g_GfxPrimCursor;
+    SetLineF4(line4);
+    SetSemiTrans(line4, 0);
+    line4->x0 = screen[0].vx;
+    line4->y0 = screen[0].vy;
+    line4->x1 = screen[1].vx;
+    line4->y1 = screen[1].vy;
+    line4->x2 = screen[3].vx;
+    line4->y2 = screen[3].vy;
+    line4->x3 = screen[2].vx;
+    line4->y3 = screen[2].vy;
+    setRGB0(line4, 0xFF, 0xFF, 0xFF);
+    Area_AddCellPrim(position[0].fixed, position[1].fixed, 0, sizeof(LINE_F4));
+
+    line2 = (LINE_F2*)g_GfxPrimCursor;
+    SetLineF2(line2);
+    SetSemiTrans(line2, 0);
+    line2->x0 = screen[0].vx;
+    line2->y0 = screen[0].vy;
+    line2->x1 = screen[2].vx;
+    line2->y1 = screen[2].vy;
+    setRGB0(line2, 0xFF, 0xFF, 0xFF);
+    Area_AddCellPrim(position[0].fixed, position[1].fixed, 0, sizeof(LINE_F2));
+}
 
 MATCH void func_801F92F0(Coord* position, s32* step) {
     POLY_F4* poly;
