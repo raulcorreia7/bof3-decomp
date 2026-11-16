@@ -205,7 +205,10 @@ UTF-8, no trailing spaces, a fixed key order, and the row order the file keeps. 
 quoting. `config/attempts.jsonl` holds the failed attempts and `config/sdk/library-units.jsonl` the
 SDK units. An attempts row carries exactly `function`, `tried`, `first_diff`, `score`, in that
 order: `tools/worklist.py` reads those keys directly, and `tools/check_markers.py` fails on another
-key set or another order. The build graph that `tools/split.py` prints for `meson.build` is the
+key set or another order. The rows stay in `function` order, with each function's rows in the order
+they were tried, so two branches that add rows merge cleanly: `tools/attempts.py add` writes a row
+at its place and `tools/attempts.py sort` restores the order after a merge interleaved rows. The
+build graph that `tools/split.py` prints for `meson.build` is the
 exception: it stays tab-separated, because Meson has no JSON parser and it is a pipe, not a file.
 
 ## Compiler chain

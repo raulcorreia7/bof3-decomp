@@ -90,7 +90,10 @@ INCLUDE_ASM(func_<ADDR>);
 Every unmatched function keeps its closest draft under `NON_MATCHING`; it must compile with
 `-DNON_MATCHING`. Record its attempts in `config/attempts.jsonl`, never in source: the object states
 the form reached and the first differing instruction, and `check-markers` refuses a new draft
-without one. A later pass starts from that draft and replaces it only with a closer one.
+without one. The rows stay in `function` order; add one with
+`tools/attempts.py add --function <target>@0x<ADDR> --tried ... --first-diff ... --score ...`, which
+writes it after the function's last row or at its place. A later pass starts from that draft and
+replaces it only with a closer one.
 
 ### Status markers
 
