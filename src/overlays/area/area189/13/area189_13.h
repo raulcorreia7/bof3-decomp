@@ -16,7 +16,6 @@ extern SVECTOR D_1F800014[];
 /* The character work record, viewed as bytes here. */
 
 /* The area-flag bit store and the global flag byte. */
-extern u8  D_80144EF8[];
 extern u16 D_80146876;
 /* Steps until the next encounter, rolled by Area_RollEncounterThreshold. */
 extern u16 D_80145FB8;

@@ -28,8 +28,6 @@ void        func_801F4138(s16 x, s16 y, s16 radius, s16 color0, s16 color1);
 void        func_801F47F0(void);
 void        func_801F4E8C(s32 x, s32 y);
 
-extern u8 D_80144EF8[];
-
 #define AREA_SPAWN_SLOT_LIFE        0x20
 #define AREA_SPAWN_SLOT_RADIUS      0x180
 #define AREA_SPAWN_SLOT_CORE_SHADE  g_Task->tint.bytes.rgb.red
