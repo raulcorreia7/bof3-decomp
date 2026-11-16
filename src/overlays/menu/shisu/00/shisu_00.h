@@ -39,40 +39,40 @@ extern char g_SaveCardPortLabelFirst[];
 /* D_801D0D7C */
 extern char g_SaveCardPortLabelSecond[];
 /* Entries of the handler tables. */
-#define MENU_SHISU_STEP_COUNT        5
-#define MENU_SHISU_TASK_COUNT        4
-#define MENU_SHISU_STEP1_COUNT       2
-#define MENU_SHISU_STEP2_COUNT       3
-#define MENU_SHISU_STEP2_SUB2_COUNT  5
-#define MENU_SHISU_STEP3_COUNT       2
-#define MENU_SHISU_TASK1_STATE_COUNT 3
-#define MENU_SHISU_TASK2_STATE_COUNT 3
-#define MENU_SHISU_TASK3_STATE_COUNT 3
+#define SHISU_STEP_COUNT        5
+#define SHISU_TASK_COUNT        4
+#define SHISU_STEP1_COUNT       2
+#define SHISU_STEP2_COUNT       3
+#define SHISU_STEP2_SUB2_COUNT  5
+#define SHISU_STEP3_COUNT       2
+#define SHISU_TASK1_STATE_COUNT 3
+#define SHISU_TASK2_STATE_COUNT 3
+#define SHISU_TASK3_STATE_COUNT 3
 
-/* The height the shisu screen display settles above the ground it follows, in 16.16. */
-#define MENU_SHISU_HEIGHT_BIAS       (512 << 16)
+/* How far above and below the ground the topping and base models start, in 16.16. */
+#define SHISU_HEIGHT_BIAS       (512 << 16)
 
 /* The overlay's step and sub-step handler pools; the tables are views into one
  * callback run, selected by the shared menu step byte. */
 /* D_801D96DC */
-extern Callback g_MenuShisuSteps[MENU_SHISU_STEP_COUNT];
+extern Callback g_ShisuSteps[SHISU_STEP_COUNT];
 /* D_801D96F0 */
-extern Callback g_MenuShisuStep1Steps[MENU_SHISU_STEP1_COUNT];
+extern Callback g_ShisuStep1Steps[SHISU_STEP1_COUNT];
 /* D_801D96F8 */
-extern Callback g_MenuShisuStep3Steps[MENU_SHISU_STEP3_COUNT];
+extern Callback g_ShisuStep3Steps[SHISU_STEP3_COUNT];
 /* D_801D9700 */
-extern Callback g_MenuShisuStep2Steps[MENU_SHISU_STEP2_COUNT];
+extern Callback g_ShisuStep2Steps[SHISU_STEP2_COUNT];
 /* D_801D970C */
-extern Callback g_MenuShisuStep2Sub2Steps[MENU_SHISU_STEP2_SUB2_COUNT];
+extern Callback g_ShisuStep2Sub2Steps[SHISU_STEP2_SUB2_COUNT];
 extern Callback D_801D9720[];
 extern Callback D_801D9734[];
-extern Callback g_MenuShisuTaskSteps[MENU_SHISU_TASK_COUNT];
+extern Callback g_ShisuTaskSteps[SHISU_TASK_COUNT];
 /* D_801D975C */
-extern Callback g_MenuShisuTask1Steps[MENU_SHISU_TASK1_STATE_COUNT];
+extern Callback g_ShisuTask1Steps[SHISU_TASK1_STATE_COUNT];
 /* D_801D9768 */
-extern Callback g_MenuShisuTask2Steps[MENU_SHISU_TASK2_STATE_COUNT];
+extern Callback g_ShisuTask2Steps[SHISU_TASK2_STATE_COUNT];
 /* D_801D9774 */
-extern Callback g_MenuShisuTask3Steps[MENU_SHISU_TASK3_STATE_COUNT];
+extern Callback g_ShisuTask3Steps[SHISU_TASK3_STATE_COUNT];
 extern u8       g_MenuCaptionRight[];
 extern u8       g_MenuClockCaption[];
 extern u8       g_MenuCommandFrame[];
@@ -98,7 +98,7 @@ extern u8       g_MenuEquipRowIcons[];
 /* D_801D9B64 */
 extern u8       g_MenuLabelEquip[];
 extern u8       g_MenuPortraitAtlas[];
-extern u32      D_801D9688[];
+extern u32      g_ShisuScales[];
 extern u8       D_801D9BA8[];
 extern u8       g_MenuCaptionIcon[];
 extern u8       g_MenuClockColon[];
@@ -113,8 +113,8 @@ extern s32      D_801DA098;
 extern s32*     D_801DA09C;
 extern s32      D_801DA0AC;
 extern s32      D_801DA0B0;
-extern s32      D_801DA0B4;
-extern s32      D_801DA088;
+extern s32      g_ShisuBaseAngle;
+extern s32      g_ShisuBaseScale;
 extern u8       D_801DA0C1;
 extern s32      D_801DA0F4;
 extern s32      D_801DA0F8;
@@ -122,7 +122,7 @@ extern s32      D_801DA0FC;
 extern u8       D_801DA108;
 extern s32      D_801DA110;
 extern s32*     D_801DA114;
-extern s32      D_801DA12C;
+extern s32      g_ShisuToppingAngle;
 extern s32      D_801DA124;
 extern s32      D_801DA128;
 extern s32*     D_801F501C;
@@ -166,10 +166,10 @@ s32  Char_GetExpForLevel(s32 character, s32 level);
 typedef struct ShisuIngredients {
     /* 0x00 */ u8 held[4];
     /* 0x04 */ u8 used[4];
-    /* 0x08 */ u8 unk_08; /* nonzero commits the use */
-    /* 0x09 */ u8 unk_09;
-    /* 0x0A */ u8 unk_0A;
-    /* 0x0B */ u8 unk_0B;
+    /* 0x08 */ u8 rounds;       /* mixing rounds done, at most 8; nonzero commits the use */
+    /* 0x09 */ u8 command;      /* 0 mixes, 1 leaves: left and right flip it */
+    /* 0x0A */ u8 cursor;       /* the ingredient row the list opens on: up picks 3, down 0 */
+    /* 0x0B */ u8 topping_size; /* the topping's g_ShisuScales index, 9-16 from D_80144FF9 */
 } ShisuIngredients;
 
 ASSERT_OFFSET(ShisuIngredients, used, 0x04);
@@ -186,27 +186,27 @@ extern u8               D_80144FF9;
 extern s16              D_80148364;
 extern u8               D_8014839C;
 /* D_801DA028 */
-extern ShisuIngredients g_MenuShisuIngredients;
+extern ShisuIngredients g_ShisuIngredients;
 extern s32              D_801DA034;
 extern s32              D_801DA038;
 extern s32              D_801DA03C;
 extern s32              D_801DA040;
 extern s32              D_801DA044;
-extern u8               D_801DA0A5;
-extern u8               D_801DA0A6;
-extern u8               D_801DA0A7;
+extern u8               g_ShisuBaseR;
+extern u8               g_ShisuBaseG;
+extern u8               g_ShisuBaseB;
 extern u8               D_801DA04E;
 extern s32              D_801DA084;
-extern s32              D_801DA088;
+extern s32              g_ShisuBaseScale;
 extern s32              D_801DA0FC;
 extern u8               D_801DA0C0;
 extern u8               D_801DA0C6;
-extern u32              D_801DA100;
+extern u32              g_ShisuToppingScale;
 /* kept: the tint bytes stay separate globals; one array shares their base register and leaves
    func_801D2ADC eight bytes short. */
-extern u8               D_801DA11D;
-extern u8               D_801DA11E;
-extern u8               D_801DA11F;
+extern u8               g_ShisuToppingR;
+extern u8               g_ShisuToppingG;
+extern u8               g_ShisuToppingB;
 
 /* The clut strip tables of this overlay, bound in config/symbols.toml. */
 extern UvRect g_MenuClutStripCells[];

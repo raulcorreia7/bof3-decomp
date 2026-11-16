@@ -10,33 +10,33 @@ MATCH void func_801D2ADC(void) {
     u8* green;
     u8* blue;
 
-    D_801DA100 = D_801D9688[g_MenuShisuIngredients.unk_0B];
-    saved[0]   = D_801DA11D;
-    saved[1]   = D_801DA11E;
-    saved[2]   = D_801DA11F;
-    if (D_801DA11D > g_MenuShisuIngredients.used[3] * 3) {
-        D_801DA11D -= g_MenuShisuIngredients.used[3] * 3;
+    g_ShisuToppingScale = g_ShisuScales[g_ShisuIngredients.topping_size];
+    saved[0]            = g_ShisuToppingR;
+    saved[1]            = g_ShisuToppingG;
+    saved[2]            = g_ShisuToppingB;
+    if (g_ShisuToppingR > g_ShisuIngredients.used[3] * 3) {
+        g_ShisuToppingR -= g_ShisuIngredients.used[3] * 3;
     } else {
-        D_801DA11D = 0;
+        g_ShisuToppingR = 0;
     }
-    green = &D_801DA11E;
-    if (0xFF - *green > g_MenuShisuIngredients.used[3] * 3) {
-        shade = *green + g_MenuShisuIngredients.used[3] * 3;
+    green = &g_ShisuToppingG;
+    if (0xFF - *green > g_ShisuIngredients.used[3] * 3) {
+        shade = *green + g_ShisuIngredients.used[3] * 3;
     } else {
         shade = -1;
     }
     *green = shade;
     FAKE_BARRIER(); /* FAKE: keeps the tint store ahead of the next color's address. */
-    blue = &D_801DA11F;
-    if (*blue > g_MenuShisuIngredients.used[3] * 3) {
-        *blue -= g_MenuShisuIngredients.used[3] * 3;
+    blue = &g_ShisuToppingB;
+    if (*blue > g_ShisuIngredients.used[3] * 3) {
+        *blue -= g_ShisuIngredients.used[3] * 3;
     } else {
         *blue = 0;
     }
     func_801D2308(&D_801DA0C0);
-    D_801DA11D = saved[0];
-    D_801DA11E = saved[1];
-    D_801DA11F = saved[2];
+    g_ShisuToppingR = saved[0];
+    g_ShisuToppingG = saved[1];
+    g_ShisuToppingB = saved[2];
 }
 
 MATCH void func_801D2C0C(void) {
@@ -49,13 +49,13 @@ MATCH void func_801D2C48(void) {
 MATCH void func_801D2C50(void) {
     s32* value;
 
-    value = &D_801DA0B4;
+    value = &g_ShisuBaseAngle;
     *value += 0x20;
     func_801D2978();
 }
 
 MATCH void func_801D2C84(void) {
-    s32* value = &D_801DA0B4;
+    s32* value = &g_ShisuBaseAngle;
 
     if ((*value & 0xFFF) != 0) {
         *value     = (*value + 0x40) & 0xFC0;
@@ -96,13 +96,13 @@ MATCH void func_801D2DE4(void) {
 MATCH void func_801D2DEC(void) {
     s32* value;
 
-    value = &D_801DA12C;
+    value = &g_ShisuToppingAngle;
     *value -= 0x20;
     func_801D2ADC();
 }
 
 MATCH void func_801D2E20(void) {
-    s32* value = &D_801DA12C;
+    s32* value = &g_ShisuToppingAngle;
 
     if ((*value & 0xFFF) != 0) {
         *value     = (*value - 0x40) & 0xFC0;
@@ -118,8 +118,8 @@ MATCH void func_801D2E80(void) {
     s32  target;
     s32  delta;
 
-    target = (Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16) + D_801DA088 * 0xA00;
-    delta  = (Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16) + MENU_SHISU_HEIGHT_BIAS - target;
+    target = (Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16) + g_ShisuBaseScale * 0xA00;
+    delta  = (Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16) + SHISU_HEIGHT_BIAS - target;
     follow = &D_801DA0FC;
     *follow -= delta / 16;
     if (*follow < target) {
@@ -138,13 +138,13 @@ MATCH void func_801D2F48(void) {
 MATCH void func_801D2F68(void) {
     s32* value;
 
-    value = &D_801DA12C;
+    value = &g_ShisuToppingAngle;
     *value += 0x20;
     func_801D2ADC();
 }
 
 MATCH void func_801D2F9C(void) {
-    SYS_DISPATCH_TASK(g_MenuShisuTaskSteps, 2, g_MenuCurrentPanel);
+    SYS_DISPATCH_TASK(g_ShisuTaskSteps, 2, g_MenuCurrentPanel);
 }
 
 MATCH void func_801D2FE0(void) {
@@ -157,7 +157,7 @@ MATCH void Menu_DrawPanelCursor(void) {
 MATCH void func_801D3018(void) {
     s16 id;
 
-    g_MenuShisuTask1Steps[g_MenuCurrentPanel->state]();
+    g_ShisuTask1Steps[g_MenuCurrentPanel->state]();
     Menu_DrawHeaderBar(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     id = (s16)g_MenuCurrentPanel->u.message.id;
     if (id != 0) {
@@ -181,8 +181,8 @@ MATCH void func_801D3124(void) {
 }
 
 /* func_801D3164 */
-MATCH void Menu_ShisuCommandsPanel(void) {
-    g_MenuShisuTask2Steps[g_MenuCurrentPanel->state]();
+MATCH void Shisu_UpdateCommandPanel(void) {
+    g_ShisuTask2Steps[g_MenuCurrentPanel->state]();
     Menu_DrawCommandRow(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, g_MenuCurrentPanel->unk_0A, g_MenuCurrentPanel->unk_0B, 0);
 }
 
@@ -203,7 +203,7 @@ MATCH void Menu_SetPosY(void) {
 }
 
 MATCH void func_801D324C(void) {
-    g_MenuShisuTask3Steps[g_MenuCurrentPanel->state]();
+    g_ShisuTask3Steps[g_MenuCurrentPanel->state]();
     func_801D3320(g_MenuCurrentPanel);
 }
 
