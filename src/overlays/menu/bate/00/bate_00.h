@@ -21,45 +21,44 @@ extern s16 D_801483AC;
 
 #define g_SceneState (*(struct SceneState*)&g_SceneState)
 
-extern s8            D_80144DE4;
-extern u8            D_80144DF2;
-extern u8            D_80144DF3;
-extern u8            D_80144DF4;
-extern char          g_MenuStatFormat[];
-extern char          g_MenuExperienceFormat[];
-extern char          g_MenuExperienceBlank[];
-extern char          g_MenuZennyFormat[];
+extern s8   D_80144DE4;
+extern u8   D_80144DF2;
+extern u8   D_80144DF3;
+extern u8   D_80144DF4;
+extern char g_MenuStatFormat[];
+extern char g_MenuExperienceFormat[];
+extern char g_MenuExperienceBlank[];
+extern char g_MenuZennyFormat[];
 /* D_801D0C48 */
-extern char          g_MenuNextExpBlank[];
-extern char          g_MenuClockFormat[];
-extern u8            D_80144DF5;
-extern u8            D_80144DF6;
-extern u8            D_80144DF7;
+extern char g_MenuNextExpBlank[];
+extern char g_MenuClockFormat[];
+extern u8   D_80144DF5;
+extern u8   D_80144DF6;
+extern u8   D_80144DF7;
 /* The item category of each equipment slot. */
-extern u8            D_801D875C[];
-extern u8*           D_801D8744[4];
-extern u16           D_801D8ECC[];
-extern u8            D_80148338;
-extern s8            D_80148511;
-extern u8            D_80148656;
-extern s8            D_80148658;
-extern u8            D_8018E244;
+extern u8   D_801D875C[];
+extern u8*  D_801D8744[4];
+extern u16  D_801D8ECC[];
+extern u8   D_80148338;
+extern s8   D_80148511;
+extern u8   D_80148656;
+extern s8   D_80148658;
+extern u8   D_8018E244;
 /* g_EmiOverlayHeader */
-extern OverlayHeader g_EmiOverlayHeader;
 /* D_801D0D80 */
-extern u8            g_SaveSlotLevelFormat[];
+extern u8   g_SaveSlotLevelFormat[];
 /* D_801D0D84 */
-extern u8            g_SaveSlotTimeFormat[];
-extern u8            g_MenuCaptionRight[];
-extern u8            g_MenuClockCaption[];
-extern u8            g_MenuCommandFrame[];
-extern u8            g_MenuCommandFrameSelected[];
+extern u8   g_SaveSlotTimeFormat[];
+extern u8   g_MenuCaptionRight[];
+extern u8   g_MenuClockCaption[];
+extern u8   g_MenuCommandFrame[];
+extern u8   g_MenuCommandFrameSelected[];
 /* D_801D0D90 */
-extern u8            g_SaveSlotTimeColon[];
+extern u8   g_SaveSlotTimeColon[];
 /* D_801D0D94 */
-extern u8            g_SaveCardPortLabelFirst[];
+extern u8   g_SaveCardPortLabelFirst[];
 /* D_801D0D98 */
-extern u8            g_SaveCardPortLabelSecond[];
+extern u8   g_SaveCardPortLabelSecond[];
 
 /* The eighth character record is the equipment menu's work record. */
 #define MENU_BATE_CHARACTER_RECORD 7
