@@ -22,7 +22,42 @@ MATCH void func_801F6FAC(void) {
     g_Task->header.mode = 1;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F7068(void) {
+    u8  i;
+    u8  reached;
+    u32 limit;
+    u32 width;
+    u32 height;
+
+    i       = 0;
+    reached = 0;
+    for (; i < 3; i++) {
+        limit = g_Task->timer << 4;
+        width = D_801FE7CC[i].width;
+        if (limit < width) {
+            width = limit;
+        } else {
+            reached++;
+        }
+        height = D_801FE7CC[i].height;
+        if (limit < height) {
+            height = limit;
+        } else {
+            reached++;
+        }
+        if (!((g_Task->option_flags >> i) & 1)) {
+            func_80159FA0(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)width, (u8)height);
+        }
+    }
+    g_Task->timer++;
+    if (reached == 6) {
+        g_Task->header.mode = 2;
+    }
+}
+#else
 INCLUDE_ASM(func_801F7068);
+#endif
 
 INCLUDE_ASM(func_801F719C);
 
