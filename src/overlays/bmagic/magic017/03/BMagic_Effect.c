@@ -109,7 +109,39 @@ MATCH void func_801EF248(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF300);
+MATCH void func_801EF300(void) {
+    u8 count;
+
+    count          = g_Task->unk_09 + 1;
+    g_Task->unk_09 = count;
+    if ((count & BYTE_MASK) != 0x10) {
+        return;
+    }
+    if ((g_Task->param.unk_0B & 1) != 0) {
+        g_Task->unk_0C = -0x20000;
+        g_Task->unk_10 = -0x10000;
+    } else {
+        g_Task->unk_0C = -0x20000;
+        g_Task->unk_10 = 0x10000;
+    }
+    func_801DD350(g_Task);
+    g_Task->pos.x.fixed = g_Battle.selected_actor->pos.x.fixed + g_Task->unk_0C;
+    g_Task->pos.y.fixed = g_Battle.selected_actor->pos.y.fixed + g_Task->unk_10;
+    g_Task->pos.z.fixed = g_Battle.selected_actor->pos.z.fixed;
+    if ((g_Task->param.unk_0B & 1) != 0) {
+        g_Task->unk_0C = 0;
+        g_Task->unk_10 = 0x1000;
+    } else {
+        g_Task->unk_0C = 0;
+        g_Task->unk_10 = -0x1000;
+    }
+    func_801DD350(g_Task);
+    if (g_Task->param.unk_0B == 0) {
+        SND_QueueSelectionEffect(0x101);
+    }
+    g_Task->unk_09 = 0x10;
+    g_Task->header.step += 1;
+}
 
 MATCH void func_801EF460(void) {
     PartyMember* task;
