@@ -44,6 +44,7 @@ ASSERT_SIZE(AreaSlot, 0x34);
 extern u8  D_801F6250[];
 extern u8  D_801F6278[];
 extern u8  D_801F627D[];
+extern u8  D_801F6298[];
 extern u8  D_801F62A0[];
 extern u8  D_801F62EC[];
 /* The two 4-byte trigger records, one byte view per field so each read keeps its
@@ -60,6 +61,8 @@ extern u8  D_801F6B40[];
 extern u8  D_801F6B48[];
 extern u8  D_801F6B50[];
 extern u8  D_801F6B58[];
+/* The twelve signed offset pairs the script row's entry byte selects. */
+extern s8  D_801F6B60[][2];
 extern u8  D_801F6B6C;
 extern u8  D_801F6B70;
 extern u8  D_801F6B74;
@@ -79,6 +82,9 @@ void       func_801F30E8(s16 x0, s16 y0, s16 x1, s16 y1);
 void       func_801F3BC4(s16 x, s16 y, s16 w, s16 h);
 
 void func_801F529C(s32 src_x, s32 src_y, s32 dst_x, s32 dst_y);
+
+/* The resident scenario dispatcher that runs the motion helper the scratchpad work byte 0x04 selects. */
+s8 func_801FD34C(ScriptState* entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags);
 
 extern void func_801F54B8(void);
 

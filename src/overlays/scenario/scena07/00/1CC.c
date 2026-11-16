@@ -22,12 +22,12 @@ MATCH void func_801F6E54(void) {
 }
 
 MATCH void func_801F6E90(void) {
-    u8* row;
+    FallingSpark* spark;
 
     if ((g_Task->vx & 0x7) == 0) {
-        row = func_801F8394();
-        if (row != NULL) {
-            Scene_InitSpark((FallingSpark*)row);
+        spark = func_801F8394();
+        if (spark != NULL) {
+            Scene_InitSpark(spark);
         }
     }
     func_801F85D8();
@@ -243,13 +243,13 @@ NON_MATCHING void func_801F78B0(void) {
     FAKE_STACK_PADS(u8, 0x10);
 
     g_Task->pos.z.fixed = TO_COORD(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
-    buffer              = &D_800E4C24;
+    buffer              = MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424);
     D_801FDFC0          = buffer;
     buffer->x           = g_Task->pos.x.fixed;
     buffer->y           = g_Task->pos.y.fixed;
     buffer->angle       = 0;
     buffer->z           = g_Task->pos.z.fixed + TO_COORD(0x200);
-    func_801F90F4(buffer);
+    func_801F90F4(MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424));
     g_Task->vx = 0x28;
     g_Task->header.step++;
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x09));
@@ -280,13 +280,13 @@ MATCH void func_801F7A30(void) {
 }
 
 MATCH void func_801F7AB0(void) {
-    u8* row;
+    FallingSpark* spark;
 
     func_801F9330(D_801FDFC0);
     if (g_Task->vx >= 9) {
-        row = func_801F8394();
-        if (((g_Task->vx & 3) == 0) && (row != NULL)) {
-            func_801F8478(row);
+        spark = func_801F8394();
+        if (((g_Task->vx & 3) == 0) && (spark != NULL)) {
+            func_801F8478(spark);
         }
     }
     func_801F85D8();
@@ -315,13 +315,13 @@ NON_MATCHING void func_801F7BE0(void) {
     g_Task->pos.x.fixed = g_Game.members[0].pos.x.fixed;
     g_Task->pos.y.fixed = g_Game.members[0].pos.y.fixed;
     g_Task->pos.z.fixed = TO_COORD(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
-    buffer              = &D_800E4C24;
+    buffer              = MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424);
     buffer->x           = g_Task->pos.x.fixed;
     D_801FDFC0          = buffer;
     buffer->y           = g_Task->pos.y.fixed;
     buffer->angle       = 0x800;
     buffer->z           = g_Task->pos.z.fixed + TO_COORD(0x200);
-    func_801F90F4(buffer);
+    func_801F90F4(MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424));
     g_Task->vx = 0x28;
     g_Task->header.step++;
 }
@@ -420,35 +420,35 @@ MATCH void func_801F81B4(void) {
 
 #include "shared/GFX_DrawProjectedDisc.h"
 
-MATCH void func_801F81D4(u8* row) {
-    GFX_DRAW_PROJECTED_DISC((s32*)(row + 0x0C), row[3], 0x20, 1);
+MATCH void func_801F81D4(FallingSpark* spark) {
+    GFX_DRAW_PROJECTED_DISC(&spark->x, spark->fade, 0x20, 1);
 }
 
 MATCH void func_801F8358(void) {
-    u8* p;
-    u8  i;
+    FallingSpark* spark;
+    u8            i;
 
-    p = MEM_PTR(u8, AREA_WORK);
-    i = 0;
+    spark = MEM_PTR(FallingSpark, AREA_WORK);
+    i     = 0;
     do {
-        p[0] = 0;
+        spark->active = 0;
         i++;
-        p += 0x1C;
+        spark++;
     } while (i < 8);
     D_801FDFC4 = 0;
     D_801FDFC8 = 0;
 }
 
-MATCH u8* func_801F8394(void) {
-    u8* p;
-    u8  i;
+MATCH FallingSpark* func_801F8394(void) {
+    FallingSpark* spark;
+    u8            i;
 
-    p = MEM_PTR(u8, AREA_WORK);
+    spark = MEM_PTR(FallingSpark, AREA_WORK);
     for (i = 0; i < 8; i++) {
-        if (p[SCRATCH_ROW_OFFSET] == 0) {
-            return p;
+        if (spark->active == 0) {
+            return spark;
         }
-        p += SCRATCH_ROW_STRIDE;
+        spark++;
     }
     return NULL;
 }
@@ -456,58 +456,56 @@ MATCH u8* func_801F8394(void) {
 #include "overlays/scenario/Scene_InitSpark.h"
 
 /* Starts a spark row at a random point of a sphere around the actor, raised 512 units. */
-MATCH void func_801F8478(u8* row) {
-    s32* cell;
-    u16  yaw;
-    u16  pitch;
-    s16  radius;
+MATCH void func_801F8478(FallingSpark* spark) {
+    u16 yaw;
+    u16 pitch;
+    s16 radius;
 
-    cell    = (s32*)row;
-    row[0]  = 1;
-    row[1]  = 0;
-    row[2]  = 8;
-    row[3]  = 0;
-    cell[2] = 0;
-    row[4]  = 1;
-    yaw     = rand() & 0x7FF;
-    pitch   = rand() & 0xFFF;
-    radius  = ((rand() % 2) << 12) | (rand() & 0xFFF);
-    cell[3] = g_Task->pos.x.fixed + ((radius * ((rsin(yaw) * rcos(pitch)) >> 12)) >> 8);
-    cell[4] = g_Task->pos.y.fixed + ((radius * ((rsin(yaw) * rsin(pitch)) >> 12)) >> 8);
-    cell[5] = g_Task->pos.z.fixed + radius * rcos(yaw) + TO_COORD(512);
+    spark->active      = 1;
+    spark->kind        = 0;
+    spark->life        = 8;
+    spark->fade        = 0;
+    spark->speed       = 0;
+    spark->life_reload = 1;
+    yaw                = rand() & 0x7FF;
+    pitch              = rand() & 0xFFF;
+    radius             = ((rand() % 2) << 12) | (rand() & 0xFFF);
+    spark->x           = g_Task->pos.x.fixed + ((radius * ((rsin(yaw) * rcos(pitch)) >> 12)) >> 8);
+    spark->y           = g_Task->pos.y.fixed + ((radius * ((rsin(yaw) * rsin(pitch)) >> 12)) >> 8);
+    spark->z           = g_Task->pos.z.fixed + radius * rcos(yaw) + TO_COORD(512);
 }
 
 MATCH u8 func_801F85D8(void) {
-    u8     active;
-    u8*    rec;
-    s32    i;
-    MATRIX matrix;
+    u8            active;
+    FallingSpark* spark;
+    s32           i;
+    MATRIX        matrix;
 
     active = 0;
     GFX_AddDitheredDrawMode(1, GetTPage(0, 1, FONT_TPAGE_X, FONT_TPAGE_Y));
     Area_SetCameraMatrix(&matrix);
-    rec = MEM_PTR(u8, AREA_WORK);
-    i   = 0;
+    spark = MEM_PTR(FallingSpark, AREA_WORK);
+    i     = 0;
     do {
-        if (rec[0] != 0) {
-            D_801FDDF0[rec[1]](rec);
+        if (spark->active != 0) {
+            D_801FDDF0[spark->kind](spark);
             active = 1;
-            func_801F81D4(rec);
+            func_801F81D4(spark);
         }
         i++;
-        rec += SCRATCH_ROW_STRIDE;
+        spark++;
     } while ((u32)(i & BYTE_MASK) < 8);
     return active;
 }
 
-MATCH void func_801F86BC(u8* row) {
+MATCH void func_801F86BC(FallingSpark* spark) {
     u8 next;
 
-    row[3] += 6;
-    if (--row[2] == 0) {
-        next   = row[1] + 1;
-        row[2] = row[4];
-        row[1] = next;
+    spark->fade += 6;
+    if (--spark->life == 0) {
+        next        = spark->kind + 1;
+        spark->life = spark->life_reload;
+        spark->kind = next;
         if (D_801FDFC4 == 0) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x00));
             D_801FDFC4 = 1;
@@ -559,7 +557,46 @@ INCLUDE_ASM(func_801F8BE8);
 
 #include "shared/GFX_DrawFan.h"
 
-INCLUDE_ASM(func_801F90F4);
+MATCH void func_801F90F4(Scena07BurstBuffer* buffer) {
+    s32    dir[3];
+    s32    pos[3];
+    MATRIX camera;
+    u16    phase;
+    s8     i;
+    s8     row;
+    s32    light;
+
+    Area_SetCameraMatrix(&camera);
+    buffer->unk_514 = 0;
+    buffer->unk_518 = 0x1000;
+    buffer->unk_51C = 0x1000;
+    VectorNormal(&buffer->unk_514, &buffer->unk_514);
+    phase = 0;
+    for (i = 0; i < 32; i++) {
+        dir[0] = (rsin(buffer->angle) * rcos(phase)) >> 12;
+        dir[1] = (rsin(buffer->angle) * rsin(phase)) >> 12;
+        dir[2] = rcos(buffer->angle);
+        light  = buffer->unk_514 * dir[0] + buffer->unk_518 * dir[1] + buffer->unk_51C * dir[2];
+        if (light <= 0) {
+            buffer->shade[0][i] = 0x70;
+        } else {
+            light = SquareRoot0(light);
+            if (light >= 0x1000) {
+                light = 0xFFF;
+            }
+            buffer->shade[0][i] = ((light & 0xF00) >> 5) + 7;
+        }
+        pos[0] = buffer->x + (dir[0] << 5);
+        pos[1] = buffer->y + (dir[1] << 5);
+        pos[2] = buffer->z + (dir[2] << 13);
+        Area_ProjectPoint(pos, &buffer->points[0][i]);
+        for (row = 1; row < 8; row++) {
+            buffer->points[row][i] = buffer->points[0][i];
+            buffer->shade[row][i]  = buffer->shade[0][i];
+        }
+        phase += 0x80;
+    }
+}
 
 INCLUDE_ASM(func_801F9330);
 
@@ -695,7 +732,59 @@ INCLUDE_ASM(func_801F9EFC);
 
 INCLUDE_ASM(func_801FA01C);
 
-INCLUDE_ASM(func_801FA38C);
+MATCH void func_801FA38C(void) {
+    s32      pos[3];
+    MATRIX   camera;
+    u16      i;
+    u8       tone;
+    POLY_G4* poly;
+    u8*      shade;
+    u16*     quad;
+    DVECTOR* screen;
+    s16*     vertex;
+    s16*     depth;
+
+    Area_SetCameraMatrix(&camera);
+    screen = MEM_PTR(DVECTOR, AREA_WORK + 0x206C);
+    vertex = MEM_PTR(s16, AREA_WORK + 0x115C);
+    for (i = 0, depth = MEM_PTR(s16, AREA_WORK + 0x1160); i < 482; i++) {
+        pos[0] = g_Task->pos.x.fixed + (vertex[0] << 5);
+        pos[1] = g_Task->pos.y.fixed + (depth[-1] << 5);
+        pos[2] = g_Task->pos.z.fixed + (depth[0] << 13) + TO_COORD(0x200);
+        Area_ProjectPoint(pos, screen);
+        vertex += 4;
+        depth += 4;
+        screen++;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 960, 0), 0);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    quad   = MEM_PTR(u16, AREA_WORK + 0x27F4);
+    shade  = MEM_PTR(u8, AREA_WORK + 0x37F4);
+    screen = MEM_PTR(DVECTOR, AREA_WORK + 0x206C);
+    for (i = 0; i < 512; i++) {
+        poly = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(poly);
+        SetSemiTrans(poly, 1);
+        poly->x0 = screen[quad[0]].vx;
+        poly->y0 = screen[quad[0]].vy;
+        poly->x1 = screen[quad[1]].vx;
+        poly->y1 = screen[quad[1]].vy;
+        poly->x2 = screen[quad[2]].vx;
+        poly->y2 = screen[quad[2]].vy;
+        poly->x3 = screen[quad[3]].vx;
+        poly->y3 = screen[quad[3]].vy;
+        tone     = shade[quad[0]];
+        poly->r0 = poly->g0 = poly->b0 = tone;
+        tone                           = shade[quad[1]];
+        poly->r1 = poly->g1 = poly->b1 = tone;
+        tone                           = shade[quad[2]];
+        poly->r2 = poly->g2 = poly->b2 = tone;
+        tone                           = shade[quad[3]];
+        poly->r3 = poly->g3 = poly->b3 = tone;
+        quad += 4;
+        GFX_AddPrim(1, sizeof(POLY_G4));
+    }
+}
 
 MATCH void func_801FA65C(void) {
     SYS_DISPATCH_BYTE(D_801FDE10, D_80146872);
