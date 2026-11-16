@@ -357,7 +357,7 @@ MATCH void func_801FBE10(void) {
 }
 
 MATCH void func_801FBF18(void) {
-    g_Characters[g_CharSlot[10]].unk_07 &= 0xFE;
+    g_Characters[g_CharSlot[10]].party_flags &= 0xFE;
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_NINA_ADULT, 0);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
