@@ -5,9 +5,9 @@ NON_MATCHING void func_800C19CC(void) {
     PartyMember* task;
     u32          effect_slot;
     s32          enemy;
-    WorkChunk*   src;
-    WorkChunk*   dst;
-    WorkChunk*   end;
+    CopyWords16* src;
+    CopyWords16* dst;
+    CopyWords16* end;
 
     task = g_Task;
     if ((FIELD(u32, task, 0) & 0xFFFF00) != 0x10700 || task->unk_09 != 0) {
@@ -15,10 +15,10 @@ NON_MATCHING void func_800C19CC(void) {
     }
 
     effect_slot = Battle_AllocEffect(3, 4);
-    dst         = (WorkChunk*)&g_BattleEffects[effect_slot & BYTE_MASK];
+    dst         = (CopyWords16*)&g_BattleEffects[effect_slot & BYTE_MASK];
     enemy       = g_Battle.active_battler;
     enemy -= 3;
-    src = (WorkChunk*)&g_BattleEnemyBattlers[enemy];
+    src = (CopyWords16*)&g_BattleEnemyBattlers[enemy];
     end = src + 7;
     do {
         *dst = *src;
@@ -26,7 +26,7 @@ NON_MATCHING void func_800C19CC(void) {
         dst += 1;
     } while (src != end);
     /* FAKE: keeps the tail word store before slot setup. */
-    FAKE_ORDER_LOCK(dst->w0 = src->w0);
+    FAKE_ORDER_LOCK(dst->w[0] = src->w[0]);
 
     g_BattleEffects[effect_slot & BYTE_MASK].header.mode   = 0;
     g_BattleEffects[effect_slot & BYTE_MASK].header.step   = 0;

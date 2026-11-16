@@ -1,27 +1,24 @@
 #include "engine/slus/slus.h"
-
-typedef struct OverlayCallbackGroup {
-    u32 values[4];
-} OverlayCallbackGroup;
+#include "common/copy.h"
 
 /* snapshots the target-local EMI callback table and invokes the
  * callback selected by the current loader mode.
  */
 MATCH void EMI_CdUpdate(void) {
-    OverlayCallbackGroup*       dst;
-    const OverlayCallbackGroup* src;
-    const OverlayCallbackGroup* end;
-    u32                         callbacks[9];
+    CopyWords16*       dst;
+    const CopyWords16* src;
+    const CopyWords16* end;
+    u32                callbacks[9];
 
-    dst = (OverlayCallbackGroup*)callbacks;
-    src = (const OverlayCallbackGroup*)g_EmiCDSteps;
+    dst = (CopyWords16*)callbacks;
+    src = (const CopyWords16*)g_EmiCDSteps;
     end = src + 2;
     do {
         *dst = *src;
         src++;
         dst++;
     } while (src != end);
-    *(u32*)(dst) = src->values[0];
+    *(u32*)(dst) = src->w[0];
 
     ((Callback)callbacks[D_8014648A])();
 }

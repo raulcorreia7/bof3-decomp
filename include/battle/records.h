@@ -18,6 +18,7 @@
 
 #include "battle/handlers.h"
 #include "common/handler.h"
+#include "common/copy.h"
 #include "common/fixed.h"
 #include "common/vector.h"
 #include "game/character.h"
@@ -76,25 +77,6 @@ typedef struct BattleWorkImage {
 } BattleWorkImage;
 
 ASSERT_SIZE(BattleWorkImage, 0x74);
-
-/* Four words, the copy unit of a battler's work record. */
-typedef struct WorkChunk {
-    s32 w0;
-    s32 w1;
-    s32 w2;
-    s32 w3;
-} WorkChunk;
-
-ASSERT_SIZE(WorkChunk, 0x10);
-
-/* Half of a Stats record: max_hp to unk_0C (+0x00) or willpower to
- * critical_chance (+0x10). The retail copies each half with an unaligned word
- * pair from a byte pointer, so the two halves stay one 16-byte type. */
-typedef struct BattleStatBlockPart {
-    u8 bytes[0x10];
-} BattleStatBlockPart;
-
-ASSERT_SIZE(BattleStatBlockPart, 0x10);
 
 /* Record behind the g_Battle.action cell; +0x01 is the action kind and +0x02 the action id. */
 typedef struct BattleAction {

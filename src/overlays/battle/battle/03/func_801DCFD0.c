@@ -1,29 +1,21 @@
 #include "battle_03.h"
 
-/* A 16-byte row of four 32-bit words. */
-typedef struct BattleRecordChunk {
-    s32 w0;
-    s32 w1;
-    s32 w2;
-    s32 w3;
-} BattleRecordChunk;
-
 MATCH void func_801DCFD0(void) {
-    BattleRecordChunk* src;
-    BattleRecordChunk* dst;
-    BattleRecordChunk* end;
-    u32                index;
-    s32                slot_offset;
-    u8                 row;
+    CopyWords16* src;
+    CopyWords16* dst;
+    CopyWords16* end;
+    u32          index;
+    s32          slot_offset;
+    u8           row;
 
     index = 0;
     if (g_Game.party_size != 0) {
         do {
             row         = index & BYTE_MASK;
             slot_offset = row * BATTLE_PARTY_STRIDE;
-            dst         = (BattleRecordChunk*)(&g_Characters[g_Game.members[row].character_index]);
-            src         = (BattleRecordChunk*)(D_80145F04 + slot_offset);
-            end         = (BattleRecordChunk*)(((u8*)src) + 0xA0u);
+            dst         = (CopyWords16*)(&g_Characters[g_Game.members[row].character_index]);
+            src         = (CopyWords16*)(D_80145F04 + slot_offset);
+            end         = (CopyWords16*)(((u8*)src) + 0xA0u);
             do {
                 *dst = *src;
                 src += 1;

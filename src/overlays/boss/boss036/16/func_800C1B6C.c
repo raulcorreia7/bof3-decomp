@@ -8,9 +8,9 @@ NON_MATCHING void func_800C1B6C(void) {
     s32           enemy_index;
     u8*           effect_base;
     EnemyBattler* enemy_base;
-    WorkChunk*    src;
-    WorkChunk*    dst;
-    WorkChunk*    end;
+    CopyWords16*  src;
+    CopyWords16*  dst;
+    CopyWords16*  end;
 
     if ((FIELD(u32, g_Task, 0) & 0xFFFF00) == 0x10700) {
         effect_slot   = Battle_AllocEffect(3, 3);
@@ -22,12 +22,12 @@ NON_MATCHING void func_800C1B6C(void) {
         /* FAKE: retail reads the effect base after the active enemy. */
         FAKE_BARRIER();
         effect_base = (u8*)g_BattleEffects;
-        dst         = (WorkChunk*)(effect_base + effect_offset);
+        dst         = (CopyWords16*)(effect_base + effect_offset);
         enemy_base  = g_BattleEnemyBattlers;
         /* FAKE: retail reads the enemy base before applying the party offset. */
         FAKE_BARRIER();
         enemy_index -= BATTLE_PARTY_CHARACTERS_COUNT;
-        src = (WorkChunk*)&enemy_base[enemy_index];
+        src = (CopyWords16*)&enemy_base[enemy_index];
         end = src + 7;
         do {
             *dst = *src;
@@ -35,7 +35,7 @@ NON_MATCHING void func_800C1B6C(void) {
             dst += 1;
         } while (src != end);
         /* FAKE: hold tail store before tail. */
-        FAKE_ORDER_LOCK(dst->w0 = src->w0);
+        FAKE_ORDER_LOCK(dst->w[0] = src->w[0]);
         g_BattleEffects[effect_index].header.mode   = 0;
         g_BattleEffects[effect_index].header.step   = 0;
         g_BattleEffects[effect_index].unk_06        = 3;
