@@ -379,11 +379,11 @@ MATCH void func_801F8490(void) {
     Scena03Work* work;
 
     work                   = SCN_LINE;
-    work->line.unk_00      = 0x600;
-    work->line.unk_06      = 0x100;
-    work->line.unk_08      = 0x100;
-    work->line.unk_02      = rand() & 0x700;
-    work->line.unk_04      = rand() & 0xF00;
+    work->line.radius      = 0x600;
+    work->line.start_scale = 0x100;
+    work->line.end_scale   = 0x100;
+    work->line.yaw         = rand() & 0x700;
+    work->line.pitch       = rand() & 0xF00;
     work->line.color.blue  = 255;
     work->line.color.green = 255;
     work->line.color.red   = 255;
@@ -402,16 +402,16 @@ MATCH void func_801F853C(void) {
 
     work = SCN_LINE;
     func_801F88FC(&work->line);
-    value             = work->line.unk_06 - 0x10;
-    work->line.unk_06 = value;
+    value                  = work->line.start_scale - 0x10;
+    work->line.start_scale = value;
     if (value < 0) {
-        work->line.unk_06 = 0;
+        work->line.start_scale = 0;
     }
-    if (work->line.unk_06 < 0x80) {
-        work->line.unk_08 -= 0x10;
+    if (work->line.start_scale < 0x80) {
+        work->line.end_scale -= 0x10;
     }
-    if (work->line.unk_08 < 0) {
-        work->line.unk_06 = 0;
+    if (work->line.end_scale < 0) {
+        work->line.start_scale = 0;
         g_Task->header.mode += 1;
     }
 }
@@ -462,7 +462,47 @@ MATCH void func_801F88DC(void) {
     Actor_Clear();
 }
 
-INCLUDE_ASM(func_801F88FC);
+MATCH void func_801F88FC(Scena03Line* line) {
+    VECTOR   point;
+    VECTOR   rot;
+    VECTOR   prev;
+    MATRIX   camera;
+    LINE_G2* primitive;
+    s16      scale;
+    s8       i;
+
+    GFX_AddDitheredDrawMode(1, GetTPage(0, 1, 0x3C0, 0));
+    i      = 0;
+    rot.vx = (rsin(line->yaw) * rcos(line->pitch)) >> 8;
+    rot.vy = (rsin(line->yaw) * rsin(line->pitch)) >> 8;
+    rot.vz = rcos(line->yaw) << 4;
+    Area_SetCameraMatrix(&camera);
+    do {
+        primitive = (LINE_G2*)g_GfxPrimCursor;
+        SetLineG2(primitive);
+        SetSemiTrans(primitive, 1);
+
+        scale    = (line->radius * line->start_scale) >> 8;
+        point.vx = g_Game.members[0].pos.x.fixed + ((scale * rot.vx) >> 8);
+        point.vy = g_Game.members[0].pos.y.fixed + ((scale * rot.vy) >> 8);
+        point.vz = g_Game.members[0].pos.z.fixed + (scale * rot.vz);
+        Area_ProjectPoint(&point.vx, (DVECTOR*)&primitive->x0);
+        setRGB0(primitive, (line->start_scale * line->color.red) >> 8, (line->start_scale * line->color.green) >> 8, (line->start_scale * line->color.blue) >> 8);
+
+        scale    = (line->radius * line->end_scale) >> 8;
+        point.vx = g_Game.members[0].pos.x.fixed + ((scale * rot.vx) >> 8);
+        point.vy = g_Game.members[0].pos.y.fixed + ((scale * rot.vy) >> 8);
+        point.vz = g_Game.members[0].pos.z.fixed + (scale * rot.vz);
+        Area_ProjectPoint(&point.vx, (DVECTOR*)&primitive->x1);
+        setRGB1(primitive, (line->end_scale * line->color.red) >> 8, (line->end_scale * line->color.green) >> 8, (line->end_scale * line->color.blue) >> 8);
+        GFX_AddPrim(1, sizeof(LINE_G2));
+
+        i++;
+        prev   = rot;
+        rot.vx = -prev.vy;
+        rot.vy = prev.vx;
+    } while (i < 4);
+}
 
 #include "shared/GFX_DrawShadedDisc.h"
 

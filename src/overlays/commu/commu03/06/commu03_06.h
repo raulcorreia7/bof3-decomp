@@ -7,7 +7,6 @@
 #include "shared/etc.h"
 
 /* g_EmiOverlayHeader */
-extern OverlayHeader g_EmiOverlayHeader;
 /* Entries of the handler tables. */
 #define COMMU03_STEP_COUNT  3
 #define COMMU03_STEP0_COUNT 2
@@ -30,6 +29,8 @@ extern u16      D_800104E2;
 extern u8       D_801D1948;
 extern s16      D_801D1940;
 extern u8       D_801D1918[];
+/* g_FairyRooms + 3: the selected room's cue count. */
+extern u8       D_801457AB[];
 
 /* The overlay's state byte the guarded step advances. */
 

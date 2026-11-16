@@ -57,7 +57,6 @@ extern s32   D_80146144;
 extern void* D_80146250;
 extern u8    D_80146865;
 extern u8    D_80146866;
-extern u8    D_80146867;
 extern u8    D_80146110;
 extern u8    D_80146875;
 extern Actor D_80146920;

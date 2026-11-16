@@ -27,7 +27,6 @@ extern u8       D_800E5502;
 /* Main-RAM flag bank whose bit 0x2C gates the trigger search, and the scene mode byte
  * the trigger records are matched against. */
 extern u8       D_80144EB8[];
-extern u8       D_80145E98;
 
 /* One of the 64 slots at AREA_WORK, 0x34 bytes each. */
 typedef struct AreaSlot {
