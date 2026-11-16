@@ -20,9 +20,9 @@ MATCH s32 func_801FC1D0(s32 member_index) {
         return 0;
     }
 
-    actor                        = &g_Actors[actor_index];
-    SPAD(0u)->view.area.work_ptr = actor;
-    g_CurrentActor               = actor;
+    actor          = &g_Actors[actor_index];
+    SPAD(0u)->task = actor;
+    g_CurrentActor = actor;
     func_801A4AA8();
     Area_SelectSceneRecord(0x67);
     g_Task->header.flags = 1;

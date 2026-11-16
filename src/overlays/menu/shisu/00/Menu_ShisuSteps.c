@@ -244,7 +244,57 @@ NON_MATCHING void func_801D1964(void) {
 INCLUDE_ASM(func_801D1964);
 #endif
 
+#ifdef NON_MATCHING
+/* Fades the six tint channels up to the fade level. */
+NON_MATCHING void func_801D1A20(void) {
+    u8* fade;
+    s32 level;
+    u8  value;
+
+    fade  = &D_80148654;
+    level = *fade;
+    value = D_801D9EF0[0];
+    if (value < (u8)level) {
+        value = level;
+    }
+    D_801DA11D = value;
+    value      = D_801D9EF0[1];
+    if (value < (u8)level) {
+        value = level;
+    }
+    D_801DA11E = value;
+    value      = D_801D9EF0[2];
+    if (value < (u8)level) {
+        value = level;
+    }
+    D_801DA11F = value;
+    value      = D_801D9EF0[4];
+    if (value < (u8)level) {
+        value = level;
+    }
+    D_801DA0A5 = value;
+    value      = D_801D9EF0[5];
+    if (value < (u8)level) {
+        value = level;
+    }
+    D_801DA0A6 = value;
+    value      = D_801D9EF0[6];
+    if (value < (u8)level) {
+        value = level;
+    }
+    D_801DA0A7 = value;
+    if ((u8)level == 0x80) {
+        SND_PlayCue(0x200);
+    }
+    *fade = *fade + 8;
+    if (*fade == 0) {
+        *fade = 0xF8;
+        D_80148652 += 1;
+    }
+}
+#else
 INCLUDE_ASM(func_801D1A20);
+#endif
 
 INCLUDE_ASM(func_801D1B58);
 

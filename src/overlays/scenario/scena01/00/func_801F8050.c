@@ -130,10 +130,10 @@ MATCH void func_801F8050(void) {
                 break;
             case 7:
                 if (!SYS_TestFlag(g_SceneFlags, 1)) {
-                    D_1F800000.view.raw[0] = Actor_FindFreeSpawned();
-                    if (D_1F800000.view.raw[0] != GAME_NONE) {
-                        g_SpawnedActors[D_1F800000.view.raw[0]].header.flags = 1;
-                        g_SpawnedActors[D_1F800000.view.raw[0]].type         = 0x12;
+                    D_1F800000.cells.bytes[0] = Actor_FindFreeSpawned();
+                    if (D_1F800000.cells.bytes[0] != GAME_NONE) {
+                        g_SpawnedActors[D_1F800000.cells.bytes[0]].header.flags = 1;
+                        g_SpawnedActors[D_1F800000.cells.bytes[0]].type         = 0x12;
                     }
                     g_SceneState.state_04 = 2;
                 }
@@ -242,10 +242,10 @@ MATCH void func_801F8050(void) {
                 }
                 break;
             case 3:
-                D_1F800000.view.raw[0] = Actor_FindFreeSpawned();
-                if (D_1F800000.view.raw[0] != GAME_NONE) {
-                    g_SpawnedActors[D_1F800000.view.raw[0]].header.flags = 1;
-                    g_SpawnedActors[D_1F800000.view.raw[0]].type         = 0x11;
+                D_1F800000.cells.bytes[0] = Actor_FindFreeSpawned();
+                if (D_1F800000.cells.bytes[0] != GAME_NONE) {
+                    g_SpawnedActors[D_1F800000.cells.bytes[0]].header.flags = 1;
+                    g_SpawnedActors[D_1F800000.cells.bytes[0]].type         = 0x11;
                     func_801C1DF0(2);
                 }
                 break;

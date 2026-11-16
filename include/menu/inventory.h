@@ -32,4 +32,8 @@ extern u8 g_InventoryCounts[4][INV_SLOTS_PER_CATEGORY];
 /* D_8014544C */
 extern u8 g_VitalItemIds[INV_VITAL_ITEM_SLOTS];
 
+/* The equip choices each item offers: the ids and how many follow. */
+extern u8 g_MenuEquipChoiceIds[];
+extern u8 g_MenuEquipChoiceCounts[];
+
 #endif
