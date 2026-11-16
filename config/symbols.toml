@@ -674,7 +674,6 @@ BMagic_DispatchEffectMode = { addr = 0x801EEE70, type = "func", source = "Runs t
 g_BMagicEffectModes = { addr = 0x801EF818, source = "Handlers of magic048 (Dream Breath), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic050/03"]
-D_1F800000_WORD = { addr = 0x1F800000, type = "s32", source = "The scratchpad base 0x1F800000 as one word: func_801EF4C4 stages a ring radius there for its rsin and rcos scaling.", alias = true }
 Battle_ApplyDamageFlags = { addr = 0x800A9610, source = "Applies the damage flags to the selected battlers.", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }

@@ -5,7 +5,6 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern s32      D_1F800000_WORD[];
 extern Callback D_801EFAF0[];
 extern u8       D_801EFA90[];
 /* The 16.16 offsets added to the area scroll target, one row per effect level. */

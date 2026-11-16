@@ -172,14 +172,14 @@ NON_MATCHING void func_801EF4C4(void) {
     s32      i;
     s32      tpage;
 
-    D_1F800000.view.scenario.math_00 = g_Task->timer;
-    D_1F800000.view.scenario.math_04 = g_Task->timer + (u32)g_Task->timer / 2;
+    D_1F800000.cells.words[0] = g_Task->timer;
+    D_1F800000.cells.words[1] = g_Task->timer + (u32)g_Task->timer / 2;
     if (g_Battle.action_id == 50) {
-        D_1F800000_WORD[2] = g_Task->unk_09 << 2;
+        SPAD(0)->cells.words[2] = g_Task->unk_09 << 2;
     } else {
-        D_1F800000.view.scenario.math_08 = g_Task->unk_09 * 6;
+        D_1F800000.cells.words[2] = g_Task->unk_09 * 6;
     }
-    D_1F800000.view.scenario.math_0C = g_Task->unk_09;
+    D_1F800000.cells.words[3] = g_Task->unk_09;
     for (i = 0; i < 16; i++) {
         tpage = getTPage(0, 1, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
@@ -187,16 +187,16 @@ NON_MATCHING void func_801EF4C4(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        setXY4(prim, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), D_1F800000.view.scenario.math_00), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), D_1F800000.view.scenario.math_00),
-               g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), D_1F800000.view.scenario.math_00), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), D_1F800000.view.scenario.math_00),
-               g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), D_1F800000.view.scenario.math_04), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), D_1F800000.view.scenario.math_04),
-               g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), D_1F800000.view.scenario.math_04), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), D_1F800000.view.scenario.math_04));
+        setXY4(prim, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), D_1F800000.cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), D_1F800000.cells.words[0]),
+               g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), D_1F800000.cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), D_1F800000.cells.words[0]),
+               g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), D_1F800000.cells.words[1]), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), D_1F800000.cells.words[1]),
+               g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), D_1F800000.cells.words[1]), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), D_1F800000.cells.words[1]));
         if (g_Battle.action_id == 50) {
-            setRGB0(prim, D_1F800000.view.scenario.math_0C, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_0C);
-            setRGB1(prim, D_1F800000.view.scenario.math_0C, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_0C);
+            setRGB0(prim, D_1F800000.cells.words[3], D_1F800000.cells.words[2], D_1F800000.cells.words[3]);
+            setRGB1(prim, D_1F800000.cells.words[3], D_1F800000.cells.words[2], D_1F800000.cells.words[3]);
         } else {
-            setRGB0(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_0C, D_1F800000.view.scenario.math_08);
-            setRGB1(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_0C, D_1F800000.view.scenario.math_08);
+            setRGB0(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[3], D_1F800000.cells.words[2]);
+            setRGB1(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[3], D_1F800000.cells.words[2]);
         }
         setRGB2(prim, 1, 1, 1);
         setRGB3(prim, 1, 1, 1);
