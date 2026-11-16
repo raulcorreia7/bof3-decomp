@@ -26,6 +26,7 @@ void func_801F2DA0(void* arg0, s32 arg1, s32 arg2);
 void func_801F4604(s32 cell_x, s32 cell_y, s32 tile_value);
 
 void func_801A4BC0(s32 arg0, s32 arg1, s32 arg2);
+void func_801AC768(ScriptState* cursor_state, s32 mode_byte, s32 value_18, s32 value_1C, s32 extra_value);
 
 void func_801AC768(ScriptState* state, s32 mode_byte, s32 value_18, s32 value_1C, s32 extra_value);
 

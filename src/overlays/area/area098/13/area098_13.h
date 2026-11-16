@@ -6,7 +6,6 @@
 
 #include "overlays/area/world02.h"
 #include "area/spad.h"
-#include "shared/CaptureSize.h"
 
 /* The work-window byte offset and row stride this overlay scans. */
 #define SCRATCH_ROW_OFFSET    0x00
@@ -118,7 +117,17 @@ void func_801F4FEC(AreaBurstSlot* slot);
 void func_801F4DBC(AreaBurstSlot* slot);
 void func_801F5580(s32 arg0);
 
+/* One row of the screen-capture table: the region the trail dots copy from. */
+typedef struct CaptureRect {
+    u16 x; /* 0x0 */
+    u16 y; /* 0x2 */
+    s16 w; /* 0x4 */
+    s16 h; /* 0x6 */
+} CaptureRect;
+
+ASSERT_SIZE(CaptureRect, 8);
+
 extern u8          D_801F6520;
-extern CaptureSize D_801F5F5C[];
+extern CaptureRect D_801F5F58[];
 
 #endif
