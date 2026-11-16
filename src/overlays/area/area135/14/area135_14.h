@@ -140,10 +140,8 @@ void UI_DrawPanelBox();
 /* func_80159FA0; no prototype, as above. */
 void UI_DrawBoxOutline();
 /* The engine places a work row from a spawn record. */
-void func_801A6C98(u8* record);
 /* The owner is src/engine/game/00/game_00.h; that header is not visible to this
  * overlay. */
-u8   func_801ABD68(s32 pos_x, s32 pos_y, s32 step_count, void* deltas);
 
 extern SceneTrigger D_801F6BA8[];
 /* The party spawn record func_801A6C98 places when the area request returns. */

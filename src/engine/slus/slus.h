@@ -1116,9 +1116,7 @@ void                    Area_LoadCellColumnPrev(void);
 /* func_80152D9C */
 void                    Area_LoadCellColumnNext(void);
 /* func_80152E94 */
-void                    Area_LoadCellRowsPrev(void);
 /* func_80152FB0 */
-void                    Area_LoadCellRowsNext(void);
 extern s32              func_801530D0(void);
 extern void             func_80153CC4(void);
 /* The cell record the tile-ring draw is working on. */
@@ -1161,7 +1159,6 @@ void                    func_80159B38(void);
 /* func_80159B9C */
 extern void             UI_DrawPanelBox(s16 x, s16 y, u8 w, u8 h);
 /* func_80159FA0 */
-void                    UI_DrawBoxOutline(s32 x, s32 y, u8 width, u8 height);
 extern void             func_8015A098(void);
 extern void             func_8015A170(void);
 extern void             func_8015A1D8(void);
@@ -1265,8 +1262,6 @@ void UI_DispatchLocalMode(void);
 void GFX_RunBlackFade(s32 delta, s32 semi_trans, s32 order);
 
 void GFX_RunWhiteFade(s32 delta, s32 semi_trans, s32 order);
-
-void func_80154438(void);
 
 void SND_UpdateVoiceStatus(void);
 

@@ -8,9 +8,6 @@
 #include "sys/exe.h"
 #include "area/spad.h"
 
-void func_8015D104(s32 slot, s32 amount);
-void SND_StartVolumeSweep(s32 voice);
-
 /* The scene starter func_801FD178 and func_801FD208 share: both scene flags 6 set and 9 clear raise
  * an event flag, start the script and arm the timer, else return -1. Every change must keep both
  * members matching. */

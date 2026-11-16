@@ -39,7 +39,5 @@ void func_801F4CD0(void);
 /* The work bound lookup of the party row's trigger box. */
 u8   func_801F4C08(u8 member);
 /* The resident field-step helpers the party sync calls. */
-void func_801C2538(void);
-void func_801C2710(void);
 
 #endif
