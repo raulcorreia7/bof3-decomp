@@ -844,13 +844,7 @@ MATCH void func_801D3EFC(s16 x, s16 y, u8 ordinal) {
     SPRT_16* sprite;
     u8       icon;
 
-    if (GetGraphType() == 1) {
-        page = 0x2E;
-    } else if (GetGraphType() == 2) {
-        page = 0x2E;
-    } else {
-        page = 0x1E;
-    }
+    page = getTPage(0, 0, 896, 256);
     GFX_SET_DRAW_MODE(page);
     GFX_AddPrim(1, sizeof(DR_MODE));
 
@@ -874,13 +868,7 @@ MATCH void func_801D4030(s16 x, s16 y, u8 piece) {
     s32   page;
     SPRT* sprite;
 
-    if (GetGraphType() == 1) {
-        page = 0x2E;
-    } else if (GetGraphType() == 2) {
-        page = 0x2E;
-    } else {
-        page = 0x1E;
-    }
+    page = getTPage(0, 0, 896, 256);
     GFX_SET_DRAW_MODE(page);
     GFX_AddPrim(1, sizeof(DR_MODE));
 

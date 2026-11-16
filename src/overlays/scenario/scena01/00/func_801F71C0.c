@@ -206,13 +206,7 @@ MATCH void func_801F7DCC(s32 red, s32 green, s32 blue) {
     POLY_G4* prim;
     s32      tpage;
 
-    if (GetGraphType() == 1) {
-        tpage = 0x225;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x225;
-    } else {
-        tpage = 0x95;
-    }
+    tpage = getTPage(1, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(7, sizeof(DR_MODE));
     prim = (POLY_G4*)g_GfxPrimCursor;

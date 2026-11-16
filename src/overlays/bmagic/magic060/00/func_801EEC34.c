@@ -212,13 +212,7 @@ MATCH void func_801EF590(u8* text, s32 x, s32 y) {
     s16       u;
     s16       v;
 
-    if (GetGraphType() == 1) {
-        mode = 0x25;
-    } else if (GetGraphType() == 2) {
-        mode = 0x25;
-    } else {
-        mode = 0x15;
-    }
+    mode = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mode, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     if (*text == 0) {
@@ -284,13 +278,7 @@ MATCH void func_801EF924(u8* text, s32 x, s32 y) {
     s16       u;
     s16       v;
 
-    if (GetGraphType() == 1) {
-        mode = 0x25;
-    } else if (GetGraphType() == 2) {
-        mode = 0x25;
-    } else {
-        mode = 0x15;
-    }
+    mode = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mode, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     if (*text == 0) {
@@ -337,13 +325,7 @@ NON_MATCHING void func_801EFB00(u16 value, s32 x, s32 y) {
     s16       u;
     s32       y1;
 
-    if (GetGraphType() == 1) {
-        mode = 0x25;
-    } else if (GetGraphType() == 2) {
-        mode = 0x25;
-    } else {
-        mode = 0x15;
-    }
+    mode = getTPage(0, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mode, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     started = 0;
