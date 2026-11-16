@@ -8,7 +8,7 @@
 #include "area/map.h"
 #include "sys/actor.h"
 #include "scenario/effect.h"
-#include "scenario/overlay.h"
+#include "sys/emi.h"
 #include "scenario/runtime.h"
 #include "sys/cd.h"
 

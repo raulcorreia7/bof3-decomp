@@ -34,19 +34,19 @@ typedef struct AreaCost {
 
 /* Payload prologue: the loader-verified module id and the "*%2d" format the
  * cost printers pass to sprintf. */
-typedef struct EMIOverlayHead {
-    u32  id;        /* 0x00 */
-    char format[5]; /* 0x04 "*%2d" */
-    u8   unk_09[3];
-} EMIOverlayHead;
+typedef struct FishingShopOverlayHeader {
+    OverlayHeader overlay;   /* 0x00 */
+    char          format[5]; /* 0x04 "*%2d" */
+    u8            unk_09[3];
+} FishingShopOverlayHeader;
 
 /* Data, in address order. */
-extern EMIOverlayHead D_800F5000;
-extern AreaCost       D_801E2F7C[];
-extern u8             D_801E2F7D[];
-extern u8             D_801E2F7E[][8];
-extern u8             D_801E2F81[][8];
-extern u8             D_801E3134[][10];
+extern FishingShopOverlayHeader D_800F5000;
+extern AreaCost                 D_801E2F7C[];
+extern u8                       D_801E2F7D[];
+extern u8                       D_801E2F7E[][8];
+extern u8                       D_801E2F81[][8];
+extern u8                       D_801E3134[][10];
 
 /* func_800F5048 */
 void Fishing_ShopOpen(void);
