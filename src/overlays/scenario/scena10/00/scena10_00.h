@@ -15,7 +15,12 @@ extern u32  D_801F6C00;
 extern char D_801F6C04[];
 extern char D_801F6C08[];
 extern char D_801F6C10[];
+extern u8   D_80146866;
+extern u8   D_80146874;
 extern u8   D_80146875;
+extern u16  D_80146876;
+extern u8   D_80181BD7;
+extern s16  D_801492DA;
 
 /* A scene rectangle the panel draws: position and size. */
 typedef struct Scena10Rect {
@@ -75,6 +80,23 @@ extern u16 D_801FE964[5];
 extern u8  D_801FE970[3];
 extern u16 D_801FE974[3];
 /* D_801FE97C */
+
+/* The two end-of-pan actors of func_801FC900: spawn a type 0x13 actor on layer 0x40 with the given x and z scene rotation and the current y. */
+#define SCENA10_SPAWN_ANGLED_ACTOR(angle_x, angle_z)                                \
+    do {                                                                            \
+        u8 slot;                                                                    \
+                                                                                    \
+        slot                      = Actor_FindFreeSpawned();                        \
+        D_1F800000.cells.bytes[0] = slot;                                           \
+        if (slot != GAME_NONE) {                                                    \
+            g_SpawnedActors[slot].header.flags                        = 1;          \
+            g_SpawnedActors[D_1F800000.cells.bytes[0]].type           = 0x13;       \
+            g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.x = (angle_x);  \
+            g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.y = D_801492DA; \
+            g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.z = (angle_z);  \
+            g_SpawnedActors[D_1F800000.cells.bytes[0]].layer          = 0x40;       \
+        }                                                                           \
+    } while (0)
 
 /* The actor-start members of 3D8C.c: start the actor, then raise a scene flag. They differ only in the three constants. */
 #define SCENA10_ACTOR_START(scene, step, flag) \
