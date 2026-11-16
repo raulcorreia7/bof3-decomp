@@ -22,16 +22,15 @@ extern Callback D_800C2744[];
 extern Callback D_800C2774[];
 
 /* The enemy-work mode dispatch each installer publishes at unk_E4. */
-void                func_800C1D74(s32 mode);
-void                func_800C1E60(s32 mode);
-void                func_800C1F4C(s32 mode);
+void func_800C1D74(s32 mode);
+void func_800C1E60(s32 mode);
+void func_800C1F4C(s32 mode);
 /* The mode handler sets the image installs into the battle hooks; the
  * addresses are in [emi/boss/boss008/16] of config/symbols.toml. */
-void                Boss_ChooseBattleEnding4(void);
-void                Boss_EndBattle4(void);
-void                func_800C236C(u8 phase);
+void Boss_ChooseBattleEnding4(void);
+void Boss_EndBattle4(void);
+void func_800C236C(u8 phase);
 /* D_801EB630 */
-extern EnemyBattler g_BattleEnemyBattlers[];
 
 /* The end-of-battle setup of one enemy slot. It takes the slot's record into the scratchpad and finds scene
  * record 0x83; the finish plays script 0 and copies the halfwords at +0x58 and +0x5A of the first enemy record. A

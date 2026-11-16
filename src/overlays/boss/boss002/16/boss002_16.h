@@ -6,19 +6,18 @@
 
 #include "overlays/boss/boss.h"
 
-extern u8           D_800C1F9C[];
-extern u16          D_800C1FAC[];
-extern u16          D_800C1FB4[];
-extern Callback     D_800C1FBC[];
-extern Callback     D_800C1FEC[];
-extern Callback     D_800C1FF4[];
-extern Callback     D_800C2000[];
-extern Callback     D_800C2030[];
-extern Callback     D_800C2048[];
-extern Callback     D_800C2054[];
-extern Callback     D_800C2084[];
+extern u8       D_800C1F9C[];
+extern u16      D_800C1FAC[];
+extern u16      D_800C1FB4[];
+extern Callback D_800C1FBC[];
+extern Callback D_800C1FEC[];
+extern Callback D_800C1FF4[];
+extern Callback D_800C2000[];
+extern Callback D_800C2030[];
+extern Callback D_800C2048[];
+extern Callback D_800C2054[];
+extern Callback D_800C2084[];
 /* D_801EB630 */
-extern EnemyBattler g_BattleEnemyBattlers[];
 
 /* The mode handler sets the image installs into the battle hooks; the
  * addresses are in [emi/boss/boss002/16] of config/symbols.toml. */

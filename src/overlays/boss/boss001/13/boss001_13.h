@@ -26,7 +26,6 @@ extern Callback     D_800C2270[];
  * include/battle/records.h, which does not name this halfword yet. */
 extern volatile u16 D_801463BE;
 /* D_801EB630 */
-extern EnemyBattler g_BattleEnemyBattlers[];
 
 /* The three battle hooks the image installs; the addresses are in
  * [emi/boss/boss001/13] of config/symbols.toml. */
