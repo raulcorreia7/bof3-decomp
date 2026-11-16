@@ -219,6 +219,9 @@ typedef struct AbilitySet {
 
 ASSERT_SIZE(AbilitySet, 0x28);
 
+/* Character.unk_07, the party flags: bit 0 marks the rows Party_JoinMember joins. */
+#define PARTY_FLAG_JOINED 0x01
+
 typedef struct Character {
     u8         name[CHARACTER_NAME_LENGTH];
     u8         character_id; /* CharacterId */

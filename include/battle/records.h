@@ -920,6 +920,23 @@ ASSERT_SIZE(BattlePhase, 3);
 ASSERT_OFFSET(BattlePhase, step, 0x01);
 ASSERT_OFFSET(BattlePhase, sub_step, 0x02);
 
+/* Battle sprite cell record consumed by func_800AF8F0, func_800AF9D4 and
+ * func_800AFB48: +0x24 bit 2 selects the second cell bank, +0x27 is
+ * the quotient/remainder source and +0x28 indexes D_800B6C28/D_800B6C30/
+ * D_800B6C38. */
+typedef struct BattleSpriteCell {
+    u8 pad_00[0x24]; /* +0x00 .. +0x23 */
+    u8 flags_24;     /* +0x24 bit 2 selects the +0x10 bank */
+    u8 pad_25[2];    /* +0x25 .. +0x26 */
+    u8 cell_value;   /* +0x27 quotient/remainder source */
+    u8 bank_index;   /* +0x28 cell-table index */
+} BattleSpriteCell;
+
+ASSERT_OFFSET(BattleSpriteCell, flags_24, 0x24);
+ASSERT_OFFSET(BattleSpriteCell, cell_value, 0x27);
+ASSERT_OFFSET(BattleSpriteCell, bank_index, 0x28);
+ASSERT_SIZE(BattleSpriteCell, 0x29);
+
 /* The battle state word g_Battle.state, read and written by both battle overlays
  * and the boss/bmagic handlers. Bit 3 (0x0008) is set by func_801D277C and
  * func_8009B828 and cleared by Battle_WaitVoiceSlots; no reader is known, so

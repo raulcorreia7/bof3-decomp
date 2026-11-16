@@ -38,6 +38,8 @@ u32         func_800AF66C(BattleRange* range, u32 extent);
 /* func_800AF764 */
 void        Battle_ProjectRange(void);
 void        func_800AF814(u32 battler_index);
+/* func_800AF8F0 */
+void        func_800AF8F0(BattleSpriteCell* record);
 void        func_800AFC98(s32 effect_0, s32 effect_1);
 /* func_800AFD9C */
 void        Battle_CenterCamera(void);

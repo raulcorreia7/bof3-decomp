@@ -149,8 +149,8 @@ MATCH void func_801F8188(void) {
             g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
             /* FAKE: retail reads g_CharSlot as u8[]. */
             char_slots = (u8*)g_CharSlot;
-            g_Characters[char_slots[CHAR_ID_PECO]].party_flags |= 1;
-            g_Characters[char_slots[CHAR_ID_GARR]].party_flags |= 1;
+            g_Characters[char_slots[CHAR_ID_PECO]].party_flags |= PARTY_FLAG_JOINED;
+            g_Characters[char_slots[CHAR_ID_GARR]].party_flags |= PARTY_FLAG_JOINED;
             Game_RequestAreaChange(AREA_ID_WYNDIA_WORLD_MAP, TO_COORD(34), TO_COORD(42), FACING_RIGHT);
             break;
         case 15:

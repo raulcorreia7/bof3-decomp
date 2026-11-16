@@ -56,9 +56,9 @@ MATCH void func_801FC380(void) {
         case 4:
             if (g_ScriptVars[0] == 0x4) {
                 g_SceneState.step_05 = 5;
-                g_Characters[CHAR_INDEX_NINA].party_flags |= 1;
-                g_Characters[CHAR_INDEX_MOMO].party_flags |= 1;
-                g_Characters[CHAR_INDEX_PECO].party_flags |= 1;
+                g_Characters[CHAR_INDEX_NINA].party_flags |= PARTY_FLAG_JOINED;
+                g_Characters[CHAR_INDEX_MOMO].party_flags |= PARTY_FLAG_JOINED;
+                g_Characters[CHAR_INDEX_PECO].party_flags |= PARTY_FLAG_JOINED;
                 switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {
                     case 1:
                         Scene_RunScenario(3);

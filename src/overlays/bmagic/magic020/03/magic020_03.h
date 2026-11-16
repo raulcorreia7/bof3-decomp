@@ -24,7 +24,6 @@ extern Magic020Steps       D_801EEC1C;
 extern u8                  D_801EFEC4[];
 
 u32  func_800AFB48(PartyMember* battler);
-void func_800AF8F0(PartyMember* battler);
 void func_801EFBA0(void);
 
 void func_801EFD10(void);

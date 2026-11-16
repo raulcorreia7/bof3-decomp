@@ -34,7 +34,6 @@ extern Callback            D_801EEC68[];
 extern u8                  D_801F1640[][2];
 /* The battle/battle/15 sprite-cell routines, called with a battler or the effect work record. */
 u32                        func_800AFB48(PartyMember* record);
-void                       func_800AF8F0(PartyMember* record);
 void                       func_800AFAB8(PartyMember* record);
 /* The seven step handlers of the magic015 landing effect (func_801F0C30). */
 extern Callback            D_801EEC84[];
