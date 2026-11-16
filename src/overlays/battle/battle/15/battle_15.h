@@ -534,7 +534,6 @@ extern u16                               D_801460EA;
 extern u8                                D_801460F2;
 /* FAKE: g_Battle.ui_step as a global of its own; the sites that use it match only with a separate symbol. */
 extern volatile u8                       g_BattleUIStep;
-extern volatile u8                       D_801462E7;
 
 extern BattleSelectionState D_801462F0_state;
 /* FAKE: g_Battle.active_battler as a global of its own; the sites that use it match only with a separate symbol. */
