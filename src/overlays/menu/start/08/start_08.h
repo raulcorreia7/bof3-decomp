@@ -837,7 +837,7 @@ void             func_801EAF18(void);
 void             func_801EAF58(void);
 extern u8        D_801EC3E0[]; /* 6-byte rows: entry count, then up to five entries */
 extern s32       D_801EC488;
-extern s32       D_801EC4A4;
+extern u8        D_801EC4A4[]; /* 6-byte rows: entry count, then up to five entries */
 extern s32       D_801EC548;
 extern s32       D_801EC54A;
 extern s32       D_801EC54C;
