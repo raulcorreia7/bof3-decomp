@@ -1,17 +1,4 @@
-/* A chain of 32 screen-projected points with the direction between neighbours. */
-typedef struct ChainNode {
-    s32 pos[3];
-    u8  pad_0C[4];
-    s16 screen[2];
-    s16 angle;
-    s16 size;
-} ChainNode;
-
-typedef struct Chain {
-    ChainNode node[32];
-    u16       dir[31];
-    u16       size;
-} Chain;
+#include "area/effects.h"
 
 u32 MATH_AverageAngle(u16 a, u16 b);
 

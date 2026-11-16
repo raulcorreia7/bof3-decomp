@@ -15,7 +15,7 @@
 #include "common/facing.h"
 #include "scenario/runtime.h"
 #include "common/util.h"
-#include "shared/WorldSpin.h"
+#include "area/effects.h"
 
 /* One cell of a payload's data tables: `offset` is the table's byte offset and
  * `index` the byte offset of the row. */

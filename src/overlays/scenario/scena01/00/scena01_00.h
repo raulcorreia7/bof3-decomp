@@ -7,7 +7,7 @@
 #include "overlays/scenario/scenario.h"
 #include "sys/exe.h"
 #include "area/spad.h"
-#include "shared/AreaSpark.h"
+#include "area/effects.h"
 
 extern u8 D_80144E90[];
 

@@ -44,7 +44,7 @@ s32  Area_StepSparkEmitters(void);
 /* The draw step that reads the three-word work position. */
 void Area_DrawLightPillar(s32* pos);
 
-#include "shared/SparkEmitter.h"
+#include "area/effects.h"
 
 void       func_801F2DB8(SpriteSpark* spark);
 /* The number of sprite sparks the spark step updated this frame. */

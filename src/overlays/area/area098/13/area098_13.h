@@ -16,7 +16,7 @@
 #define SCRATCH_COLUMN_STRIDE 0x18
 #define SCRATCH_COLUMN_COUNT  8
 
-#include "shared/WorldSpin.h"
+#include "area/effects.h"
 
 #define AREA_SPIN_RADIUS     16
 #define AREA_SPIN_PITCH      (RANDOM_MASK(0x7FF) - 0x400)

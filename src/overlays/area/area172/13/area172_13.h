@@ -6,7 +6,7 @@
 
 #include "overlays/area/world04.h"
 #include "area/spad.h"
-#include "shared/WorldSpin.h"
+#include "area/effects.h"
 
 #define AREA_SPIN_RADIUS     24
 #define AREA_SPIN_PITCH      (RANDOM_MASK(0x7FF) - 0x400)
