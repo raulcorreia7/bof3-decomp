@@ -1,4 +1,4 @@
-#define GAME_SCRATCH_BASE_SCALAR
+#define FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
 #include "battle_03.h"
 
 /* Record views: the scale-index byte sits at record offset 0xA4 of the local

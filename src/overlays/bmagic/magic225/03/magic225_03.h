@@ -3,7 +3,7 @@
 
 /* The bmagic/magic225/03 overlay. Only this image includes the file. */
 
-#define BATTLE_PARTY_CELL_RECORD
+#define FAKE_DECL_BATTLE_PARTY_CELL_RECORD
 
 #include "overlays/bmagic/bmagic.h"
 #include "overlays/battle/battle/15/battle_15.h"

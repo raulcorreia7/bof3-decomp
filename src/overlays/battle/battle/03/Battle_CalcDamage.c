@@ -1,4 +1,4 @@
-#define GAME_SCRATCH_BASE_SCALAR
+#define FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
 #include "battle_03.h"
 
 /* computes one hit's damage: the element id defaults to the attacker's weapon,

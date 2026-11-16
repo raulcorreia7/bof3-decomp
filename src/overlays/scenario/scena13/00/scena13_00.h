@@ -4,8 +4,8 @@
 /* The scenario/scena13/00 overlay's local declarations. Only this image
  * includes the file. */
 
-#define GRAPHICS_PALETTE_PENDING_VOLATILE
-#define GAME_SCRATCH_BASE_SCALAR
+#define FAKE_DECL_GRAPHICS_PALETTE_PENDING_VOLATILE
+#define FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
 #include "overlays/scenario/scenario.h"
 #include "engine/game/00/game_00.h"
 

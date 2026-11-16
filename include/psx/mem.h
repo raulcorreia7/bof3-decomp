@@ -62,9 +62,9 @@
 /* retail addresses */
 /* Scratchpad work pointer at 0x1F800044. Each mode reads it through its own pointee type: a header defines a
  * `g_Task` view macro, `((T *)g_Task)`, for its type. A unit that must re-read the cell
- * after every store defines TASK_VOLATILE before its first include. `struct Task` is incomplete: no
+ * after every store defines FAKE_DECL_TASK_VOLATILE before its first include. `struct Task` is incomplete: no
  * member is reachable without a view. TASK_BYTES is the byte view for a record with no type. */
-#ifdef TASK_VOLATILE
+#ifdef FAKE_DECL_TASK_VOLATILE
 /* D_1F800044 */
 extern struct Task* volatile g_Task;
 #else

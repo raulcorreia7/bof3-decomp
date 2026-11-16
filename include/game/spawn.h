@@ -6,13 +6,13 @@
 
 /* The scratchpad base shared by the entity-spawn routines of the game and
  * world overlays. A unit that reads it as plain bytes defines
- * GAME_SCRATCH_BASE_SCALAR before its first include and takes the byte array;
+ * FAKE_DECL_GAME_SCRATCH_BASE_SCALAR before its first include and takes the byte array;
  * the ScratchPad record is the default. A use that needs another width keeps a
  * FAKE: cast. */
-#ifdef GAME_SCRATCH_BASE_SCALAR
+#ifdef FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
 /* g_ScratchPad */
 extern u8 g_ScratchPad[];
-#elif defined(GAME_SCRATCH_BASE_WORD)
+#elif defined(FAKE_DECL_GAME_SCRATCH_BASE_WORD)
 /* g_ScratchPad */
 extern s32 g_ScratchPad;
 #else

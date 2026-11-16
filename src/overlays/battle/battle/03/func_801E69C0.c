@@ -1,4 +1,4 @@
-#define GAME_SCRATCH_BASE_SCALAR
+#define FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
 #include "battle_03.h"
 
 MATCH void func_801E69C0(void) {

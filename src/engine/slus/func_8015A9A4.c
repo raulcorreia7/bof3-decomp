@@ -1,4 +1,4 @@
-#define TASK_VOLATILE
+#define FAKE_DECL_TASK_VOLATILE
 #include "engine/slus/slus.h"
 #include <inline_c.h>
 

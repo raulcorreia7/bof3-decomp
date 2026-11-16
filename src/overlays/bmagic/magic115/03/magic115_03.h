@@ -4,7 +4,7 @@
 /* The bmagic/magic115/03 overlay. Only this image includes the file. */
 
 /* The scratchpad base here is the 32-bit word the effect angles orbit on. */
-#define GAME_SCRATCH_BASE_WORD
+#define FAKE_DECL_GAME_SCRATCH_BASE_WORD
 
 #include "overlays/bmagic/bmagic.h"
 

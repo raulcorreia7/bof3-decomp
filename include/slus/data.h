@@ -57,8 +57,8 @@ extern u8  D_8014546C[ABILITY_STOCK_SLOT_COUNT];
 extern u8  D_801454F4[][3];
 extern u32 D_80145548;
 /* A unit that must re-read the cell after every store (etc/game/00) defines
- * GRAPHICS_PALETTE_PENDING_VOLATILE before its first include. */
-#ifdef GRAPHICS_PALETTE_PENDING_VOLATILE
+ * FAKE_DECL_GRAPHICS_PALETTE_PENDING_VOLATILE before its first include. */
+#ifdef FAKE_DECL_GRAPHICS_PALETTE_PENDING_VOLATILE
 /* D_80145988 */
 extern volatile u8 g_GfxPalettePending; /* 0x80145988 */
 #else
@@ -91,8 +91,8 @@ extern u8  g_BattleSubStep;
 /* FAKE: g_Battle.state as a global of its own; the sites that use it match only with a separate symbol. */
 extern u16 g_BattleState;
 /* The bytes the battle code index; the bmagic images that copy its record
- * define BATTLE_PARTY_CELL_RECORD before their first include. */
-#ifdef BATTLE_PARTY_CELL_RECORD
+ * define FAKE_DECL_BATTLE_PARTY_CELL_RECORD before their first include. */
+#ifdef FAKE_DECL_BATTLE_PARTY_CELL_RECORD
 extern struct PartyMember* D_8014637C;
 #else
 extern u8* D_8014637C;
@@ -143,8 +143,8 @@ static inline void Camera_SetModelMatrix(SVECTOR* rot, MATRIX* matrix) {
 
 /* D_80149308 */
 /* A unit that must re-read the target after storing it defines
- * AREA_SCROLL_TARGET_VOLATILE before its first include. */
-#ifdef AREA_SCROLL_TARGET_VOLATILE
+ * FAKE_DECL_AREA_SCROLL_TARGET_VOLATILE before its first include. */
+#ifdef FAKE_DECL_AREA_SCROLL_TARGET_VOLATILE
 extern volatile s32 g_AreaScrollTargetX;
 #else
 extern s32 g_AreaScrollTargetX;

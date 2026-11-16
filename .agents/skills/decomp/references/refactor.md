@@ -57,7 +57,7 @@ A shared body follows these rules:
 - Bodies that differ share a name only as a role: every member fills the same slot (one installer
   or caller, one signature), and the row's `source` describes the shared role. Otherwise each body takes its own
   name.
-- A per-unit compile switch (`TASK_VOLATILE`) stays in the thin `.c`, above the image-header
+- A per-unit compile switch (`FAKE_DECL_TASK_VOLATILE`) stays in the thin `.c`, above the image-header
   include.
 - A value that differs per image is a named setting in the image header. A body that needs more
   than one or two settings, or a macro knot, stays per image.

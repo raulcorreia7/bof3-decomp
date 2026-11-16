@@ -1,5 +1,5 @@
 /* Dropping the volatile cell changes the code: retail reloads it. */
-#define TASK_VOLATILE
+#define FAKE_DECL_TASK_VOLATILE
 #include "battle_15.h"
 
 MATCH void func_800ADD44(void) {

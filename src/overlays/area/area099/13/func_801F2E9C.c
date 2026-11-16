@@ -1,4 +1,4 @@
-#define TASK_VOLATILE
+#define FAKE_DECL_TASK_VOLATILE
 #include "area099_13.h"
 
 MATCH void func_801F2E9C(void) {

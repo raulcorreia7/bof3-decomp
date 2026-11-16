@@ -1,5 +1,5 @@
 /* Every step re-reads the scratchpad cell. */
-#define TASK_VOLATILE
+#define FAKE_DECL_TASK_VOLATILE
 #include "area165_13.h"
 
 #include "overlays/area/func_801F2C48.h"

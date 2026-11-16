@@ -1,5 +1,5 @@
 /* The direction store re-reads the scratchpad cell. */
-#define TASK_VOLATILE
+#define FAKE_DECL_TASK_VOLATILE
 #include "area173_14.h"
 
 MATCH void func_801F4A4C(void) {

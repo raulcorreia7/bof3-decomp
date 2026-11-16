@@ -356,7 +356,7 @@ MATCH void func_801F05AC(void) {
     rand();
     work = g_Task;
     work->unk_2E.half -= 1;
-    FAKE_BARRIER(); /* FAKE: reloads the g_Task cell after the store, as retail does; plain C caches it (0x78 vs 0x8C), TASK_VOLATILE re-reads each use (0x84) and moves seven other functions. */
+    FAKE_BARRIER(); /* FAKE: reloads the g_Task cell after the store, as retail does; plain C caches it (0x78 vs 0x8C), FAKE_DECL_TASK_VOLATILE re-reads each use (0x84) and moves seven other functions. */
     next = g_Task;
     next->unk_09 += 4;
     next->unk_30.half -= 1;
@@ -378,7 +378,7 @@ MATCH void func_801F0638(void) {
     rand();
     next = g_Task;
     next->unk_2E.half -= 1;
-    FAKE_BARRIER(); /* FAKE: reloads the g_Task cell before the timer, as retail does; plain C caches it (0x88 vs 0xA0), TASK_VOLATILE re-reads each use (0x98) and moves seven other functions. */
+    FAKE_BARRIER(); /* FAKE: reloads the g_Task cell before the timer, as retail does; plain C caches it (0x88 vs 0xA0), FAKE_DECL_TASK_VOLATILE re-reads each use (0x98) and moves seven other functions. */
     state        = g_Task;
     timer        = state->timer - 1;
     state->timer = timer;
