@@ -43,7 +43,6 @@ void func_801F3800(void);
 s16  func_801F4A04(s32 x, s32 y);
 void func_801F559C(void);
 /* func_801F5F20 */
-void Actor_ClearVelocity(void);
 void func_801F5600(void);
 
 extern Callback D_801F62F4[];
