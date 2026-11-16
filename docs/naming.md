@@ -59,10 +59,10 @@ void PartyAddItem(u16 itemId, u8 nCount);    /* no tag, camelCase, Hungarian */
 Every function, global, static, constant and macro carries the tag of the system that owns it.
 System tags are capitals, as SDL writes them; game tags are words.
 
-| Kind   | Tags                                                                                                                                                                                                                | Global word                                                                         |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| System | `SYS_ GFX_ SND_ DISC_ EMI_ SAVE_ STRING_ UI_ INPUT_ MATH_ LZ77_`: engine, platform and I/O                                                                                                                          | `g_Sys`, `g_Gfx`, `g_Snd`, `g_Disc`, `g_Emi`, `g_Save`, `g_Text`, `g_Ui`, `g_Input` |
-| Game   | `Battle_ BMagic_ Boss_ Enemy_ Party_ Char_ PlChar_ Area_ WorldMap_ Actor_ Scene_ Menu_ Shop_ Master_ Fairy_ FairyCasino_ FairyNickname_ FairyCopyShop_ Well_ Fishing_ Game_ Message_ Effect_ Item_ Logo_ Resource_` | the tag without `_`: `g_Battle`, `g_WorldMap`                                       |
+| Kind   | Tags                                                                                                                                                                                                                                                                | Global word                                                                         |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| System | `SYS_ GFX_ SND_ DISC_ EMI_ SAVE_ STRING_ UI_ INPUT_ MATH_ LZ77_`: engine, platform and I/O                                                                                                                                                                          | `g_Sys`, `g_Gfx`, `g_Snd`, `g_Disc`, `g_Emi`, `g_Save`, `g_Text`, `g_Ui`, `g_Input` |
+| Game   | `Battle_ BMagic_ Boss_ Enemy_ Party_ Char_ PlChar_ Area_ WorldMap_ Actor_ Scene_ Menu_ Shop_ Master_ Fairy_ FairyCasino_ FairyNickname_ FairyCopyShop_ FairyMusician_ FairyFortuneTeller_ FairySinger_ Well_ Fishing_ Game_ Message_ Effect_ Item_ Logo_ Resource_` | the tag without `_`: `g_Battle`, `g_WorldMap`                                       |
 
 A constant or macro takes the tag in capitals: `BATTLE_`, `BMAGIC_`, `PLCHAR_`, `WORLDMAP_`,
 `SCENE_`, `FISHING_`. `MATH_` names only the game's own math routines; `LZ77_` names the decoder.
@@ -71,17 +71,20 @@ A constant or macro takes the tag in capitals: `BATTLE_`, `BMAGIC_`, `PLCHAR_`, 
 one resident map engine runs every area, and the world map is 11 AREA images whose map-load entry
 sets bit 0 of `flag_32`.
 
-| Tag              | Code                                                                      |
-| ---------------- | ------------------------------------------------------------------------- |
-| `Area_`          | The map engine and the area maps: towns, dungeons and the world map alike |
-| `WorldMap_`      | Code and data only the world-map areas use                                |
-| `Char_`          | Character records, stats and ids                                          |
-| `PlChar_`        | The player-character overlay; the disc label is `PLCHAR`                  |
-| `Fishing_`       | The fishing pond and its shop                                             |
-| `FairyCasino_`   | The casino scene in the fairy village                                     |
-| `FairyNickname_` | The nickname scene in the fairy village                                   |
-| `FairyCopyShop_` | The copy shop scene in the fairy village                                  |
-| `Well_`          | The well minigame                                                         |
+| Tag                   | Code                                                                      |
+| --------------------- | ------------------------------------------------------------------------- |
+| `Area_`               | The map engine and the area maps: towns, dungeons and the world map alike |
+| `WorldMap_`           | Code and data only the world-map areas use                                |
+| `Char_`               | Character records, stats and ids                                          |
+| `PlChar_`             | The player-character overlay; the disc label is `PLCHAR`                  |
+| `Fishing_`            | The fishing pond and its shop                                             |
+| `FairyCasino_`        | The casino scene in the fairy village                                     |
+| `FairyNickname_`      | The nickname scene in the fairy village                                   |
+| `FairyCopyShop_`      | The copy shop scene in the fairy village                                  |
+| `FairyMusician_`      | The musician's scene in the fairy village                                 |
+| `FairyFortuneTeller_` | The fortune teller's scene in the fairy village                           |
+| `FairySinger_`        | The singer's scene in the fairy village                                   |
+| `Well_`               | The well minigame                                                         |
 
 `World_`, `PAD_`, `Mem_`, `Matrix_`, `Data`, `Info` and `Work` are not tags. The world-map code is
 `WorldMap_`, the pad wrapper is `INPUT_`, the memory helper is `SYS_` and the matrix helpers are

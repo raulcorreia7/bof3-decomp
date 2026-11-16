@@ -6,9 +6,9 @@ MATCH void func_801CE770(void) {
 
     if ((g_Task->direction_08 & 1) == 0) {
         g_Task->direction_08 = (g_Task->direction_08 - 1) & 7;
-        if ((u8)Char_ProbeFacingCell() == 0) {
+        if ((u8)PlChar_ProbeFacingCell() == 0) {
             g_Task->direction_08 = (g_Task->direction_08 + 2) & 7;
-            if ((u8)Char_ProbeFacingCell() == 0) {
+            if ((u8)PlChar_ProbeFacingCell() == 0) {
                 g_Task->direction_08 = (g_Task->direction_08 - 2) & 7;
             }
         }

@@ -1,0 +1,31 @@
+/* Advances the script after staging the palette. Check every including image after changes. */
+MATCH void PlChar_AdvancePaletteScript(void) {
+    u8 done;
+    u8 state;
+
+    done = 0;
+    if (g_Task->param.unk_0B == 1) {
+        GFX_LoadPalette((g_Task->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
+        g_Task->param.unk_0B = 2;
+    }
+    state = g_Task->param.unk_0B;
+    if (state != 0) {
+        if (state == 2) {
+            if (Actor_StepAnimOnce() & 0xFF) {
+                Actor_SelectScript(g_Task->direction_08);
+                g_Task->param.unk_0B = 3;
+            }
+        } else {
+            Actor_StepAnimLoop();
+        }
+        if (g_GameStateIndex == GAME_REQUEST_IDLE) {
+            done = 1;
+        }
+    } else if (Actor_StepAnimOnce() & 0xFF) {
+        done = 1;
+    }
+    if (done & 0xFF) {
+        g_Task->unk_2B                            = 0;
+        g_Game.current->u.field.mode_12B.s8_value = 0;
+    }
+}
