@@ -507,4 +507,8 @@ void Actor_TrackFocus(void);
 void GFX_DrawShadedDisc(s16, s16, s16, u8, u8);
 void Scene_ClearActor();
 
+/* The flock tables the area flocks share: four velocities and their script rows. */
+extern Point2u g_FlockVelocity[4];
+extern u8      g_FlockScript[4][2];
+
 #endif
