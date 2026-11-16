@@ -7,11 +7,8 @@ typedef union MapCellHeights {
     u8  bytes[4];
 } MapCellHeights;
 
-/* The four signed height bytes of a map cell word. */
-#define CELL_H0(word) (((word) << 24) >> 24)
-#define CELL_H1(word) (((word) << 16) >> 24)
-#define CELL_H2(word) (((word) << 8) >> 24)
-#define CELL_H3(word) ((word) >> 24)
+/* The signed height of corner 0 to 3 of a map cell word: one byte each, corner 0 lowest. */
+#define MAP_CELL_CORNER_HEIGHT(word, corner) (((word) << (3 - (corner)) * BYTE_WIDTH) >> 3 * BYTE_WIDTH)
 
 /* Draws the wall quads between a map cell and its left or upper neighbour; the record's byte 3 picks one side or both. */
 MATCH void func_80157CE4(u8* record, s32 cell_x, s32 cell_y) {
@@ -50,21 +47,21 @@ MATCH void func_80157CE4(u8* record, s32 cell_x, s32 cell_y) {
         v1.vx = v3.vx = (side & 1) ? cell_x : cell_x + 128;
         v1.vy = v3.vy = cell_y + ((side & 1) << 7);
         if (side & 1) {
-            if ((CELL_H0(cell[0].word) < CELL_H1(cell[-1].word)) || (CELL_H3(cell[-1].word) > CELL_H2(cell[0].word))) {
-                v2.vz = -(CELL_H1(cell[-1].word) << 4);
-                v3.vz = -(CELL_H3(cell[-1].word) << 4);
+            if ((MAP_CELL_CORNER_HEIGHT(cell[0].word, 0) < MAP_CELL_CORNER_HEIGHT(cell[-1].word, 1)) || (MAP_CELL_CORNER_HEIGHT(cell[-1].word, 3) > MAP_CELL_CORNER_HEIGHT(cell[0].word, 2))) {
+                v2.vz = -(MAP_CELL_CORNER_HEIGHT(cell[-1].word, 1) << 4);
+                v3.vz = -(MAP_CELL_CORNER_HEIGHT(cell[-1].word, 3) << 4);
             } else {
-                v2.vz = -(CELL_H0(cell[0].word) << 4);
+                v2.vz = -(MAP_CELL_CORNER_HEIGHT(cell[0].word, 0) << 4);
                 v3.vz = -((s8)cell->halves[1] << 4);
             }
         } else {
             other = cell - g_AreaMapBundle.width;
-            if ((CELL_H0(cell[0].word) < CELL_H2(other[0].word)) || (CELL_H3(other[0].word) > CELL_H1(cell[0].word))) {
-                v2.vz = -(CELL_H2(other[0].word) << 4);
+            if ((MAP_CELL_CORNER_HEIGHT(cell[0].word, 0) < MAP_CELL_CORNER_HEIGHT(other[0].word, 2)) || (MAP_CELL_CORNER_HEIGHT(other[0].word, 3) > MAP_CELL_CORNER_HEIGHT(cell[0].word, 1))) {
+                v2.vz = -(MAP_CELL_CORNER_HEIGHT(other[0].word, 2) << 4);
                 v3.vz = -((s8)other->bytes[3] << 4);
             } else {
-                v2.vz = -(CELL_H0(cell[0].word) << 4);
-                v3.vz = -(CELL_H1(cell[0].word) << 4);
+                v2.vz = -(MAP_CELL_CORNER_HEIGHT(cell[0].word, 0) << 4);
+                v3.vz = -(MAP_CELL_CORNER_HEIGHT(cell[0].word, 1) << 4);
             }
         }
         v0.vz = v2.vz - 128;

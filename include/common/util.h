@@ -18,6 +18,9 @@
 #define BYTE_MASK                0xFF
 #define HALF_MASK                0xFFFF
 
+/* The width of a byte in bits, for shifting a byte field of a word. */
+#define BYTE_WIDTH               8
+
 /* The number of values a byte id can take. */
 #define BYTE_VALUE_COUNT         256
 
