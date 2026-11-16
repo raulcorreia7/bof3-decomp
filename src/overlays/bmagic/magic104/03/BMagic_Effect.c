@@ -165,28 +165,28 @@ MATCH void func_801EF370(void) {
     s32      x;
     s32      y;
 
-    D_1F800000.view.effect.params[0] = g_Task->unk_09 * 30;
+    D_1F800000.cells.halves[0] = g_Task->unk_09 * 30;
     if (g_Task->header.step >= 2) {
-        D_1F800000.view.effect.params[0] = (g_Task->unk_09 - 8) * 15 + 240;
+        D_1F800000.cells.halves[0] = (g_Task->unk_09 - 8) * 15 + 240;
     }
-    D_1F800000.view.effect.params[2] = 24;
+    D_1F800000.cells.halves[2] = 24;
     if (g_Task->header.step >= 2) {
-        D_1F800000.view.effect.params[2] -= (g_Task->unk_09 - 8) / 2;
+        D_1F800000.cells.halves[2] -= (g_Task->unk_09 - 8) / 2;
     }
-    for (k = D_1F800000.view.effect.params[2]; k > 16; k--) {
-        setVector(&D_1F800014[1], FIXED_MUL(rsin(0), FIXED_MUL(rcos((k - 1) << 7), D_1F800000.view.effect.params[0])),
-                  FIXED_MUL(rcos(0), FIXED_MUL(rcos((k - 1) << 7), D_1F800000.view.effect.params[0])), D_1F800014[0].vz = (u32)(rsin((k - 1) << 7) * D_1F800000.view.effect.params[0]) >> 12);
-        setVector(&D_1F800014[3], FIXED_MUL(rsin(0), FIXED_MUL(rcos(k << 7), D_1F800000.view.effect.params[0])), FIXED_MUL(rcos(0), FIXED_MUL(rcos(k << 7), D_1F800000.view.effect.params[0])),
-                  D_1F800014[2].vz = (u32)(rsin(k << 7) * D_1F800000.view.effect.params[0]) >> 12);
+    for (k = D_1F800000.cells.halves[2]; k > 16; k--) {
+        setVector(&D_1F800014[1], FIXED_MUL(rsin(0), FIXED_MUL(rcos((k - 1) << 7), D_1F800000.cells.halves[0])), FIXED_MUL(rcos(0), FIXED_MUL(rcos((k - 1) << 7), D_1F800000.cells.halves[0])),
+                  D_1F800014[0].vz = (u32)(rsin((k - 1) << 7) * D_1F800000.cells.halves[0]) >> 12);
+        setVector(&D_1F800014[3], FIXED_MUL(rsin(0), FIXED_MUL(rcos(k << 7), D_1F800000.cells.halves[0])), FIXED_MUL(rcos(0), FIXED_MUL(rcos(k << 7), D_1F800000.cells.halves[0])),
+                  D_1F800014[2].vz = (u32)(rsin(k << 7) * D_1F800000.cells.halves[0]) >> 12);
         for (i = 1; i <= 16; i++) {
             D_1F800014[0].vx = D_1F800014[1].vx;
             D_1F800014[0].vy = D_1F800014[1].vy;
-            D_1F800014[1].vx = FIXED_MUL(rsin(i << 8), FIXED_MUL(rcos((k - 1) << 7), D_1F800000.view.effect.params[0]));
-            D_1F800014[1].vy = FIXED_MUL(rcos(i << 8), FIXED_MUL(rcos((k - 1) << 7), D_1F800000.view.effect.params[0]));
+            D_1F800014[1].vx = FIXED_MUL(rsin(i << 8), FIXED_MUL(rcos((k - 1) << 7), D_1F800000.cells.halves[0]));
+            D_1F800014[1].vy = FIXED_MUL(rcos(i << 8), FIXED_MUL(rcos((k - 1) << 7), D_1F800000.cells.halves[0]));
             D_1F800014[2].vx = D_1F800014[3].vx;
             D_1F800014[2].vy = D_1F800014[3].vy;
-            D_1F800014[3].vx = FIXED_MUL(rsin(i << 8), FIXED_MUL(rcos(k << 7), D_1F800000.view.effect.params[0]));
-            D_1F800014[3].vy = FIXED_MUL(rcos(i << 8), FIXED_MUL(rcos(k << 7), D_1F800000.view.effect.params[0]));
+            D_1F800014[3].vx = FIXED_MUL(rsin(i << 8), FIXED_MUL(rcos(k << 7), D_1F800000.cells.halves[0]));
+            D_1F800014[3].vy = FIXED_MUL(rcos(i << 8), FIXED_MUL(rcos(k << 7), D_1F800000.cells.halves[0]));
             x                = (D_1F800014[3].vx << 9) + g_Task->pos.x.fixed;
             y                = (D_1F800014[3].vy << 9) + g_Task->pos.y.fixed;
             tpage            = getTPage(1, 1, 320, 256);
@@ -252,10 +252,10 @@ MATCH void func_801EFB2C(void) {
     s32      y;
     s32      radius;
 
-    radius                           = rcos(0x800) * 30;
-    D_1F800000.view.effect.params[0] = radius * g_Task->unk_09 >> 12;
-    D_1F800014[2].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[2].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
+    radius                     = rcos(0x800) * 30;
+    D_1F800000.cells.halves[0] = radius * g_Task->unk_09 >> 12;
+    D_1F800014[2].vx           = FIXED_MUL(rsin(0), D_1F800000.cells.halves[0]);
+    D_1F800014[2].vy           = FIXED_MUL(rcos(0), D_1F800000.cells.halves[0]);
     for (i = 1; i <= 32; i++) {
         D_1F800014[0].vx = 0;
         D_1F800014[0].vy = 0;
@@ -263,8 +263,8 @@ MATCH void func_801EFB2C(void) {
         D_1F800014[1].vx = D_1F800014[2].vx;
         D_1F800014[1].vy = D_1F800014[2].vy;
         D_1F800014[1].vz = 0;
-        D_1F800014[2].vx = FIXED_MUL(rsin(i << 8), D_1F800000.view.effect.params[0]);
-        D_1F800014[2].vy = FIXED_MUL(rcos(i << 8), D_1F800000.view.effect.params[0]);
+        D_1F800014[2].vx = FIXED_MUL(rsin(i << 8), D_1F800000.cells.halves[0]);
+        D_1F800014[2].vy = FIXED_MUL(rcos(i << 8), D_1F800000.cells.halves[0]);
         D_1F800014[2].vz = 0;
         x                = (D_1F800014[2].vx >> 9) + g_Task->pos.x.fixed;
         y                = (D_1F800014[2].vy >> 9) + g_Task->pos.y.fixed;
@@ -275,8 +275,8 @@ MATCH void func_801EFB2C(void) {
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
         if (g_Task->header.step == 3) {
-            D_1F800000.view.effect.params[3] = 65 - g_Task->timer * 8;
-            setRGB0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], 1);
+            D_1F800000.cells.halves[3] = 65 - g_Task->timer * 8;
+            setRGB0(prim, D_1F800000.cells.halves[3], D_1F800000.cells.halves[3], 1);
         } else {
             setRGB0(prim, 64, 64, 1);
         }
@@ -298,15 +298,15 @@ MATCH void func_801EFE34(void) {
     s32      tpage;
     s32      radius;
 
-    radius                           = rcos(0x800) * 34;
-    D_1F800000.view.effect.params[0] = radius * (g_Task->unk_09 + 1) >> 12;
-    radius                           = rcos(0x800) * 34;
-    D_1F800000.view.effect.params[1] = radius * g_Task->unk_09 >> 12;
-    D_1F800014[1].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[1].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[3].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[1]);
-    D_1F800014[3].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[1]);
-    tpage                            = getTPage(0, 1, 320, 256);
+    radius                     = rcos(0x800) * 34;
+    D_1F800000.cells.halves[0] = radius * (g_Task->unk_09 + 1) >> 12;
+    radius                     = rcos(0x800) * 34;
+    D_1F800000.cells.halves[1] = radius * g_Task->unk_09 >> 12;
+    D_1F800014[1].vx           = FIXED_MUL(rsin(0), D_1F800000.cells.halves[0]);
+    D_1F800014[1].vy           = FIXED_MUL(rcos(0), D_1F800000.cells.halves[0]);
+    D_1F800014[3].vx           = FIXED_MUL(rsin(0), D_1F800000.cells.halves[1]);
+    D_1F800014[3].vy           = FIXED_MUL(rcos(0), D_1F800000.cells.halves[1]);
+    tpage                      = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
     for (i = 1; i <= 32; i++) {
@@ -316,19 +316,19 @@ MATCH void func_801EFE34(void) {
         D_1F800014[0].vx = D_1F800014[1].vx;
         D_1F800014[0].vy = D_1F800014[1].vy;
         D_1F800014[0].vz = 0;
-        D_1F800014[1].vx = FIXED_MUL(rsin(i << 8), D_1F800000.view.effect.params[0]);
-        D_1F800014[1].vy = FIXED_MUL(rcos(i << 8), D_1F800000.view.effect.params[0]);
+        D_1F800014[1].vx = FIXED_MUL(rsin(i << 8), D_1F800000.cells.halves[0]);
+        D_1F800014[1].vy = FIXED_MUL(rcos(i << 8), D_1F800000.cells.halves[0]);
         D_1F800014[1].vz = 0;
         D_1F800014[2].vx = D_1F800014[3].vx;
         D_1F800014[2].vy = D_1F800014[3].vy;
         D_1F800014[2].vz = 0;
-        D_1F800014[3].vx = FIXED_MUL(rsin(i << 8), D_1F800000.view.effect.params[1]);
-        D_1F800014[3].vy = FIXED_MUL(rcos(i << 8), D_1F800000.view.effect.params[1]);
+        D_1F800014[3].vx = FIXED_MUL(rsin(i << 8), D_1F800000.cells.halves[1]);
+        D_1F800014[3].vy = FIXED_MUL(rcos(i << 8), D_1F800000.cells.halves[1]);
         D_1F800014[3].vz = 0;
         if (g_Task->unk_09 > 8) {
-            D_1F800000.view.effect.params[3] = 33 - (g_Task->unk_09 - 8) * 2;
-            setRGB0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
-            setRGB1(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
+            D_1F800000.cells.halves[3] = 33 - (g_Task->unk_09 - 8) * 2;
+            setRGB0(prim, D_1F800000.cells.halves[3], D_1F800000.cells.halves[3], D_1F800000.cells.halves[3]);
+            setRGB1(prim, D_1F800000.cells.halves[3], D_1F800000.cells.halves[3], D_1F800000.cells.halves[3]);
         } else {
             setRGB0(prim, 32, 32, 32);
             setRGB1(prim, 32, 32, 32);
@@ -389,25 +389,25 @@ MATCH void func_801F03C4(void) {
     s32      x;
     s32      y;
 
-    D_1F800000.view.effect.params[0] = g_Task->unk_09 * 8;
+    D_1F800000.cells.halves[0] = g_Task->unk_09 * 8;
     for (band = 4; band < 12; band++) {
-        D_1F800014[1].vx = FIXED_MUL(rsin(0), FIXED_MUL(rcos(band << 8), D_1F800000.view.effect.params[0]));
-        D_1F800014[1].vy = FIXED_MUL(rcos(0), FIXED_MUL(rcos(band << 8), D_1F800000.view.effect.params[0]));
-        D_1F800014[1].vz = FIXED_MUL(rsin(band << 8), D_1F800000.view.effect.params[0]);
-        D_1F800014[3].vx = FIXED_MUL(rsin(0), FIXED_MUL(rcos((band + 1) << 8), D_1F800000.view.effect.params[0]));
-        D_1F800014[3].vy = FIXED_MUL(rcos(0), FIXED_MUL(rcos((band + 1) << 8), D_1F800000.view.effect.params[0]));
-        D_1F800014[3].vz = FIXED_MUL(rsin((band + 1) << 8), D_1F800000.view.effect.params[0]);
+        D_1F800014[1].vx = FIXED_MUL(rsin(0), FIXED_MUL(rcos(band << 8), D_1F800000.cells.halves[0]));
+        D_1F800014[1].vy = FIXED_MUL(rcos(0), FIXED_MUL(rcos(band << 8), D_1F800000.cells.halves[0]));
+        D_1F800014[1].vz = FIXED_MUL(rsin(band << 8), D_1F800000.cells.halves[0]);
+        D_1F800014[3].vx = FIXED_MUL(rsin(0), FIXED_MUL(rcos((band + 1) << 8), D_1F800000.cells.halves[0]));
+        D_1F800014[3].vy = FIXED_MUL(rcos(0), FIXED_MUL(rcos((band + 1) << 8), D_1F800000.cells.halves[0]));
+        D_1F800014[3].vz = FIXED_MUL(rsin((band + 1) << 8), D_1F800000.cells.halves[0]);
         for (i = 1; i <= 8; i++) {
             D_1F800014[0].vx = D_1F800014[1].vx;
             D_1F800014[0].vy = D_1F800014[1].vy;
             D_1F800014[0].vz = D_1F800014[1].vz;
-            setVector(&D_1F800014[1], FIXED_MUL(rsin(i << 9), FIXED_MUL(rcos(band << 8), D_1F800000.view.effect.params[0])),
-                      FIXED_MUL(rcos(i << 9), FIXED_MUL(rcos(band << 8), D_1F800000.view.effect.params[0])), FIXED_MUL(rsin(band << 8), D_1F800000.view.effect.params[0]));
+            setVector(&D_1F800014[1], FIXED_MUL(rsin(i << 9), FIXED_MUL(rcos(band << 8), D_1F800000.cells.halves[0])), FIXED_MUL(rcos(i << 9), FIXED_MUL(rcos(band << 8), D_1F800000.cells.halves[0])),
+                      FIXED_MUL(rsin(band << 8), D_1F800000.cells.halves[0]));
             D_1F800014[2].vx = D_1F800014[3].vx;
             D_1F800014[2].vy = D_1F800014[3].vy;
             D_1F800014[2].vz = D_1F800014[3].vz;
-            setVector(&D_1F800014[3], FIXED_MUL(rsin(i << 9), FIXED_MUL(rcos((band + 1) << 8), D_1F800000.view.effect.params[0])),
-                      FIXED_MUL(rcos(i << 9), FIXED_MUL(rcos((band + 1) << 8), D_1F800000.view.effect.params[0])), FIXED_MUL(rsin((band + 1) << 8), D_1F800000.view.effect.params[0]));
+            setVector(&D_1F800014[3], FIXED_MUL(rsin(i << 9), FIXED_MUL(rcos((band + 1) << 8), D_1F800000.cells.halves[0])),
+                      FIXED_MUL(rcos(i << 9), FIXED_MUL(rcos((band + 1) << 8), D_1F800000.cells.halves[0])), FIXED_MUL(rsin((band + 1) << 8), D_1F800000.cells.halves[0]));
             x     = (D_1F800014[3].vx << 9) + g_Task->pos.x.fixed;
             y     = (D_1F800014[3].vy << 9) + g_Task->pos.y.fixed;
             tpage = getTPage(1, 1, 320, 256);

@@ -160,29 +160,27 @@ MATCH void func_801EF3A0(void) {
     PartyMember* work;
     u8           row;
 
-    work                             = g_Task;
-    row                              = work->unk_04;
-    D_1F800000.view.effect.params[2] = D_801F005C[row][0] - (D_801F005C[row][0] >> 6) * work->timer;
-    D_1F800000.view.effect.params[3] = D_801F005C[row][1] - (D_801F005C[row][1] >> 6) * work->timer;
-    D_1F800000.view.effect.params[4] = D_801F005C[row][2] - (D_801F005C[row][2] >> 6) * work->timer;
-    D_1F800000.view.effect.params[5] = D_801F005C[row + 1][0] - (D_801F005C[row + 1][0] >> 6) * work->timer;
-    D_1F800000.view.effect.params[6] = D_801F005C[row + 1][1] - (D_801F005C[row + 1][1] >> 6) * work->timer;
-    D_1F800000.view.effect.params[7] = D_801F005C[row + 1][2] - (D_801F005C[row + 1][2] >> 6) * work->timer;
+    work                       = g_Task;
+    row                        = work->unk_04;
+    D_1F800000.cells.halves[2] = D_801F005C[row][0] - (D_801F005C[row][0] >> 6) * work->timer;
+    D_1F800000.cells.halves[3] = D_801F005C[row][1] - (D_801F005C[row][1] >> 6) * work->timer;
+    D_1F800000.cells.halves[4] = D_801F005C[row][2] - (D_801F005C[row][2] >> 6) * work->timer;
+    D_1F800000.cells.halves[5] = D_801F005C[row + 1][0] - (D_801F005C[row + 1][0] >> 6) * work->timer;
+    D_1F800000.cells.halves[6] = D_801F005C[row + 1][1] - (D_801F005C[row + 1][1] >> 6) * work->timer;
+    D_1F800000.cells.halves[7] = D_801F005C[row + 1][2] - (D_801F005C[row + 1][2] >> 6) * work->timer;
     setVector(&D_1F800014[0], (u32)rsin(g_Task->unk_0C) >> 6, (u32)rcos(g_Task->unk_0C) >> 6, 0);
     setVector(&D_1F800014[1], (u32)rsin(g_Task->unk_10) >> 6, (u32)rcos(g_Task->unk_10) >> 6, 0);
     for (i = 1; i < g_Task->unk_09 + 1; i++) {
-        D_1F800000.view.effect.params[1] = -FIXED_MUL(rsin(i << 6), 384);
-        D_1F800014[2].vx                 = D_1F800014[0].vx;
-        D_1F800014[2].vy                 = D_1F800014[0].vy;
-        D_1F800014[2].vz                 = D_1F800014[0].vz;
-        D_1F800014[3].vx                 = D_1F800014[1].vx;
-        D_1F800014[3].vy                 = D_1F800014[1].vy;
-        D_1F800014[3].vz                 = D_1F800014[1].vz;
-        D_1F800000.view.effect.params[0] = (i << 6) + 64;
-        setVector(&D_1F800014[0], FIXED_MUL(rsin(g_Task->unk_0C), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(g_Task->unk_0C), D_1F800000.view.effect.params[0]),
-                  D_1F800000.view.effect.params[1]);
-        setVector(&D_1F800014[1], FIXED_MUL(rsin(g_Task->unk_10), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(g_Task->unk_10), D_1F800000.view.effect.params[0]),
-                  D_1F800000.view.effect.params[1]);
+        D_1F800000.cells.halves[1] = -FIXED_MUL(rsin(i << 6), 384);
+        D_1F800014[2].vx           = D_1F800014[0].vx;
+        D_1F800014[2].vy           = D_1F800014[0].vy;
+        D_1F800014[2].vz           = D_1F800014[0].vz;
+        D_1F800014[3].vx           = D_1F800014[1].vx;
+        D_1F800014[3].vy           = D_1F800014[1].vy;
+        D_1F800014[3].vz           = D_1F800014[1].vz;
+        D_1F800000.cells.halves[0] = (i << 6) + 64;
+        setVector(&D_1F800014[0], FIXED_MUL(rsin(g_Task->unk_0C), D_1F800000.cells.halves[0]), FIXED_MUL(rcos(g_Task->unk_0C), D_1F800000.cells.halves[0]), D_1F800000.cells.halves[1]);
+        setVector(&D_1F800014[1], FIXED_MUL(rsin(g_Task->unk_10), D_1F800000.cells.halves[0]), FIXED_MUL(rcos(g_Task->unk_10), D_1F800000.cells.halves[0]), D_1F800000.cells.halves[1]);
         x     = (D_1F800014[0].vx << 9) + g_Task->pos.x.fixed;
         y     = (D_1F800014[0].vy << 9) + g_Task->pos.y.fixed;
         tpage = getTPage(0, 1, 320, 256);
@@ -191,10 +189,10 @@ MATCH void func_801EF3A0(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        setRGB0(prim, D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[4]);
-        setRGB1(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
-        setRGB2(prim, D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[4]);
-        setRGB3(prim, D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[7]);
+        setRGB0(prim, D_1F800000.cells.halves[2], D_1F800000.cells.halves[3], D_1F800000.cells.halves[4]);
+        setRGB1(prim, D_1F800000.cells.halves[5], D_1F800000.cells.halves[6], D_1F800000.cells.halves[7]);
+        setRGB2(prim, D_1F800000.cells.halves[2], D_1F800000.cells.halves[3], D_1F800000.cells.halves[4]);
+        setRGB3(prim, D_1F800000.cells.halves[5], D_1F800000.cells.halves[6], D_1F800000.cells.halves[7]);
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         Area_AddCellPrim(x, y, 2, sizeof(POLY_G4));
     }
@@ -217,19 +215,19 @@ MATCH void func_801EF930(void) {
     s32          height;
     PartyMember* work;
 
-    cell                                = &D_1F800000.view.area.entry_data;
-    *cell                               = ((u32)(rsin(g_Task->unk_09 << 6) * 3) >> 4);
-    D_1F800000.view.area.entity_counter = (g_Task->unk_09 << 6) + 0x40;
-    g_Task->pos.x.fixed                 = BATTLE_ACTIVE_WORK->pos.x.fixed + ((rsin(g_Task->unk_10) * D_1F800000.view.area.entity_counter) >> 3);
-    g_Task->pos.y.fixed                 = BATTLE_ACTIVE_WORK->pos.y.fixed + ((rcos(g_Task->unk_10) * D_1F800000.view.area.entity_counter) >> 3);
-    COORD_INT(g_Task->pos.z)            = (COORD_INT(BATTLE_ACTIVE_WORK->pos.z) + *cell) - 0x20;
-    height                              = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
-    work                                = g_Task;
-    work->unk_25                        = 0x1D;
-    work->unk_14                        = height >> 16;
-    g_Task->unk_26                      = 0;
-    g_Task->unk_27                      = 0xA0;
-    g_Task->unk_28                      = 0;
+    cell                       = &D_1F800000.cells.halves[1];
+    *cell                      = ((u32)(rsin(g_Task->unk_09 << 6) * 3) >> 4);
+    D_1F800000.cells.halves[0] = (g_Task->unk_09 << 6) + 0x40;
+    g_Task->pos.x.fixed        = BATTLE_ACTIVE_WORK->pos.x.fixed + ((rsin(g_Task->unk_10) * D_1F800000.cells.halves[0]) >> 3);
+    g_Task->pos.y.fixed        = BATTLE_ACTIVE_WORK->pos.y.fixed + ((rcos(g_Task->unk_10) * D_1F800000.cells.halves[0]) >> 3);
+    COORD_INT(g_Task->pos.z)   = (COORD_INT(BATTLE_ACTIVE_WORK->pos.z) + *cell) - 0x20;
+    height                     = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
+    work                       = g_Task;
+    work->unk_25               = 0x1D;
+    work->unk_14               = height >> 16;
+    g_Task->unk_26             = 0;
+    g_Task->unk_27             = 0xA0;
+    g_Task->unk_28             = 0;
     g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     tint                = -0x40;
     g_Task->unk_5D      = tint;

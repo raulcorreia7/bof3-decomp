@@ -28,10 +28,10 @@ MATCH void func_801F3254(void) {
             break;
         case 2:
             if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-                input                               = &g_InputHeld;
-                held                                = *input;
-                D_1F800000.view.area.entity_counter = held;
-                *input                              = held & 0xFFF;
+                input                      = &g_InputHeld;
+                held                       = *input;
+                D_1F800000.cells.halves[0] = held;
+                *input                     = held & 0xFFF;
                 *input |= D_801F4984[held >> 12] << 12;
             }
             func_801F37D4();

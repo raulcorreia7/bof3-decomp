@@ -304,8 +304,8 @@ INCLUDE_ASM(func_801F8C00);
 INCLUDE_ASM(func_801F95B8);
 
 MATCH void func_801F9FC4(void) {
-    D_1F800000.view.area.entity_counter = Actor_FindFreeField();
-    if (D_1F800000.view.area.entity_counter != 255) {
+    D_1F800000.cells.halves[0] = Actor_FindFreeField();
+    if (D_1F800000.cells.halves[0] != 255) {
         func_801A4D54(D_801FE938);
     }
 }
