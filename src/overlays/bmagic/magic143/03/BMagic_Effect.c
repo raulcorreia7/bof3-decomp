@@ -96,7 +96,125 @@ MATCH void func_801EF054(void) {
 
 #include "overlays/bmagic/Effect_SetActorMatrixRolled.h"
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF23C(s32 band_height, u16 radius, u16 jitter_mask) {
+    POLY_G4* prim;
+    long     p;
+    long     flag;
+    s32      depth;
+    s32      draw_mode;
+    s32      i;
+
+    SPAD(0u)->cells.words[0] = (s16)radius / 2;
+    SPAD(0u)->cells.words[1] = (g_Task->param.unk_0B & 0xF) << 8;
+    SPAD(0u)->cells.words[2] = g_Task->timer * 8;
+    SPAD(0u)->cells.words[3] = g_Task->timer * 13;
+
+    g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(SPAD(0u)->cells.halves[2]), SPAD(0u)->cells.halves[0]);
+    g_ScratchPadVectors[0].vz = 0;
+    depth                     = -0x30;
+    draw_mode                 = 0xA5;
+    if (GetGraphType() != 1) {
+        if (GetGraphType() != 2) {
+            draw_mode = 0x35;
+        }
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, draw_mode, 0);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    for (i = 1; i < 24; i++) {
+        SPAD(0u)->cells.words[1] = ((g_Task->param.unk_0B + i) & 0xF) << 8;
+        if RANDOM_MASK (1) {
+            SPAD(0u)->cells.halves[0] = (s16)radius + (jitter_mask & rand());
+        } else {
+            SPAD(0u)->cells.halves[0] = (s16)radius - (jitter_mask & rand());
+        }
+
+        g_ScratchPadVectors[2].vx = 0;
+        g_ScratchPadVectors[2].vy = g_ScratchPadVectors[0].vy;
+        g_ScratchPadVectors[2].vz = g_ScratchPadVectors[0].vz;
+        g_ScratchPadVectors[3].vx = 0;
+        g_ScratchPadVectors[3].vy = g_ScratchPadVectors[0].vy - band_height;
+        g_ScratchPadVectors[3].vz = g_ScratchPadVectors[0].vz;
+        setVector(&g_ScratchPadVectors[0], 0, FIXED_MUL(rsin(SPAD(0u)->cells.halves[2]), SPAD(0u)->cells.halves[0]), depth);
+        g_ScratchPadVectors[1].vx = 0;
+        g_ScratchPadVectors[1].vy = g_ScratchPadVectors[0].vy - band_height;
+        g_ScratchPadVectors[1].vz = depth;
+        prim                      = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        setRGB0(prim, SPAD(0u)->cells.words[2], SPAD(0u)->cells.words[2], SPAD(0u)->cells.words[2]);
+        setRGB1(prim, SPAD(0u)->cells.words[3], SPAD(0u)->cells.words[3], SPAD(0u)->cells.words[2]);
+        setRGB2(prim, SPAD(0u)->cells.words[2], SPAD(0u)->cells.words[2], SPAD(0u)->cells.words[2]);
+        setRGB3(prim, SPAD(0u)->cells.words[3], SPAD(0u)->cells.words[3], SPAD(0u)->cells.words[2]);
+        if (i == 1) {
+            setRGB2(prim, 1, 1, 1);
+            setRGB3(prim, 1, 1, 1);
+        }
+        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p,
+                      &flag);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        g_ScratchPadVectors[0].vy -= band_height;
+        g_ScratchPadVectors[1].vy -= band_height;
+        g_ScratchPadVectors[2].vy -= band_height;
+        g_ScratchPadVectors[3].vy -= band_height;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        setRGB0(prim, SPAD(0u)->cells.words[3], SPAD(0u)->cells.words[3], SPAD(0u)->cells.words[2]);
+        setRGB1(prim, 1, 1, 1);
+        setRGB2(prim, SPAD(0u)->cells.words[3], SPAD(0u)->cells.words[3], SPAD(0u)->cells.words[2]);
+        setRGB3(prim, 1, 1, 1);
+        if (i == 1) {
+            setRGB2(prim, 1, 1, 1);
+            setRGB3(prim, 1, 1, 1);
+        }
+        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p,
+                      &flag);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        g_ScratchPadVectors[0].vy += band_height;
+        g_ScratchPadVectors[1].vy += band_height;
+        g_ScratchPadVectors[2].vy += band_height;
+        g_ScratchPadVectors[3].vy += band_height;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        setRGB0(prim, SPAD(0u)->cells.words[3], SPAD(0u)->cells.words[3], SPAD(0u)->cells.words[2]);
+        setRGB1(prim, SPAD(0u)->cells.words[2], SPAD(0u)->cells.words[2], SPAD(0u)->cells.words[2]);
+        setRGB2(prim, SPAD(0u)->cells.words[3], SPAD(0u)->cells.words[3], SPAD(0u)->cells.words[2]);
+        setRGB3(prim, SPAD(0u)->cells.words[2], SPAD(0u)->cells.words[2], SPAD(0u)->cells.words[2]);
+        if (i == 1) {
+            setRGB2(prim, 1, 1, 1);
+            setRGB3(prim, 1, 1, 1);
+        }
+        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p,
+                      &flag);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        g_ScratchPadVectors[0].vy += band_height;
+        g_ScratchPadVectors[1].vy += band_height;
+        g_ScratchPadVectors[2].vy += band_height;
+        g_ScratchPadVectors[3].vy += band_height;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        setRGB0(prim, 1, 1, 1);
+        setRGB1(prim, SPAD(0u)->cells.words[3], SPAD(0u)->cells.words[3], SPAD(0u)->cells.words[2]);
+        setRGB2(prim, 1, 1, 1);
+        setRGB3(prim, SPAD(0u)->cells.words[3], SPAD(0u)->cells.words[3], SPAD(0u)->cells.words[2]);
+        if (i == 1) {
+            setRGB2(prim, 1, 1, 1);
+            setRGB3(prim, 1, 1, 1);
+        }
+        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p,
+                      &flag);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
+        depth -= 0x30;
+        g_ScratchPadVectors[0].vy -= band_height * 2;
+    }
+}
+
+#else
 INCLUDE_ASM(func_801EF23C);
+#endif
 
 #include "overlays/bmagic/Effect_DrawBolt.h"
 
