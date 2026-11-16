@@ -732,7 +732,59 @@ INCLUDE_ASM(func_801F9EFC);
 
 INCLUDE_ASM(func_801FA01C);
 
-INCLUDE_ASM(func_801FA38C);
+MATCH void func_801FA38C(void) {
+    s32      pos[3];
+    MATRIX   camera;
+    u16      i;
+    u8       tone;
+    POLY_G4* poly;
+    u8*      shade;
+    u16*     quad;
+    DVECTOR* screen;
+    s16*     vertex;
+    s16*     depth;
+
+    Area_SetCameraMatrix(&camera);
+    screen = MEM_PTR(DVECTOR, AREA_WORK + 0x206C);
+    vertex = MEM_PTR(s16, AREA_WORK + 0x115C);
+    for (i = 0, depth = MEM_PTR(s16, AREA_WORK + 0x1160); i < 482; i++) {
+        pos[0] = g_Task->pos.x.fixed + (vertex[0] << 5);
+        pos[1] = g_Task->pos.y.fixed + (depth[-1] << 5);
+        pos[2] = g_Task->pos.z.fixed + (depth[0] << 13) + TO_COORD(0x200);
+        Area_ProjectPoint(pos, screen);
+        vertex += 4;
+        depth += 4;
+        screen++;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 960, 0), 0);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    quad   = MEM_PTR(u16, AREA_WORK + 0x27F4);
+    shade  = MEM_PTR(u8, AREA_WORK + 0x37F4);
+    screen = MEM_PTR(DVECTOR, AREA_WORK + 0x206C);
+    for (i = 0; i < 512; i++) {
+        poly = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(poly);
+        SetSemiTrans(poly, 1);
+        poly->x0 = screen[quad[0]].vx;
+        poly->y0 = screen[quad[0]].vy;
+        poly->x1 = screen[quad[1]].vx;
+        poly->y1 = screen[quad[1]].vy;
+        poly->x2 = screen[quad[2]].vx;
+        poly->y2 = screen[quad[2]].vy;
+        poly->x3 = screen[quad[3]].vx;
+        poly->y3 = screen[quad[3]].vy;
+        tone     = shade[quad[0]];
+        poly->r0 = poly->g0 = poly->b0 = tone;
+        tone                           = shade[quad[1]];
+        poly->r1 = poly->g1 = poly->b1 = tone;
+        tone                           = shade[quad[2]];
+        poly->r2 = poly->g2 = poly->b2 = tone;
+        tone                           = shade[quad[3]];
+        poly->r3 = poly->g3 = poly->b3 = tone;
+        quad += 4;
+        GFX_AddPrim(1, sizeof(POLY_G4));
+    }
+}
 
 MATCH void func_801FA65C(void) {
     SYS_DISPATCH_BYTE(D_801FDE10, D_80146872);
