@@ -28,17 +28,17 @@ MATCH void Battle_UpdateMenuPanel(void) {
     handlers[BATTLE_PANEL_TASK->state]();
 
     task = BATTLE_PANEL_TASK;
-    row  = D_801EB35C + task->cell_0A.slot * 0x118;
+    row  = D_801EB35C + task->selection.slot * 0x118;
     func_801EA1E0(&task->ratio, (row + 0x2C), &task->max_hp, &task->hp, (row + 0x20), &task->cursor, &task->pad_16[2], &task->unk_08);
 
-    if (Battle_SlotIsBlocked(BATTLE_PANEL_TASK->cell_0A.slot) != 0) {
+    if (Battle_SlotIsBlocked(BATTLE_PANEL_TASK->selection.slot) != 0) {
         panel = BATTLE_PANEL_TASK;
         if (panel->cursor == 0) {
             panel->state = 3;
         }
     }
 
-    slot   = BATTLE_PANEL_TASK->cell_0A.slot - 3;
+    slot   = BATTLE_PANEL_TASK->selection.slot - 3;
     offset = slot * 0x118;
     if (g_BattleEnemyBattlers[slot].hp < (g_BattleEnemyBattlers[slot].stats.max_hp >> 2)) {
         /* Retail reads the status through its own address, not the EnemyBattler row. */
