@@ -129,14 +129,9 @@ typedef struct Area108Trigger {
 
 ASSERT_SIZE(Area108Trigger, 0x04);
 
-extern Area108Trigger D_801F63CC[];
+/* The trigger cell count the stage event walks. */
+#define AREA108_TRIGGER_COUNT 4
 
-/* Field views of the actor slot table g_SpawnedActors, one cell per field it fills here. */
-extern u8  D_80143FC8[];
-extern u8  D_80143FC9[];
-extern u8  D_80143FCD[];
-extern u8  D_80143FD3[];
-extern u16 D_80143FFE[];
-extern u16 D_80144002[];
+extern Area108Trigger D_801F63CC[];
 
 #endif
