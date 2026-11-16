@@ -132,7 +132,7 @@ MATCH void func_801EF308(void) {
 MATCH void func_801EF358(void) {
     PartyMember* work;
     PartyMember* active;
-    s32          count;
+    u8           count;
 
     work = g_Task;
     work->unk_09 += 4;
