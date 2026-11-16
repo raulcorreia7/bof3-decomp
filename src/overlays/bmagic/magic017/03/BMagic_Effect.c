@@ -63,7 +63,40 @@ MATCH void func_801EF058(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF11C(void) {
+    s8  tint;
+    s32 dy;
+    u8  count;
+
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if ((count & BYTE_MASK) != 0) {
+        return;
+    }
+    g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    tint           = -0x40;
+    g_Task->unk_5C = 1;
+    g_Task->unk_2B = 1;
+    g_Task->unk_5D = tint;
+    g_Task->unk_5E = tint;
+    g_Task->unk_5F = tint;
+    g_Task->unk_27 = g_BattleEffectBattler->unk_27;
+    if ((g_Task->param.unk_0B & 1) == 0) {
+        dy = -0x1000;
+    } else {
+        dy = 0x1000;
+    }
+    g_Task->unk_0C = 0;
+    g_Task->unk_10 = dy;
+    FAKE_BARRIER(); /* FAKE: retail reloads the g_Task cell for the velocity call; plain C reuses the copy. */
+    func_801DD350(g_Task);
+    g_Task->unk_09 = 0x10;
+    g_Task->header.step += 1;
+}
+#else
 INCLUDE_ASM(func_801EF11C);
+#endif
 
 MATCH void func_801EF248(void) {
     g_Task->pos.x.fixed += g_Task->unk_0C;

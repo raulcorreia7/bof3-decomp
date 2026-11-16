@@ -175,10 +175,10 @@ class Prepared:
 
 
 def prepare_link(root: Path, target: str) -> Prepared:
-    """Prune and place one target's inputs, rewriting its Splat linker script in place.
+    """Prune and place one target's inputs from Splat's linker script, which it only reads.
 
     Placement wrappers go under ``build/p2/<target>/placements``. The result is
-    the same on every run while the sources and the config stay as they are.
+    the same on every run while Splat's output, the sources and the config stay as they are.
     """
     root = Path(root).resolve()
     target = normalize_target_id(target).value
@@ -215,7 +215,6 @@ def prepare_link(root: Path, target: str) -> Prepared:
     )
     for source, text in wrappers.items():
         write_if_changed(root / source, text)
-    write_if_changed(linker_script, updated)
     return Prepared(updated, _object_paths(updated), sources)
 
 
