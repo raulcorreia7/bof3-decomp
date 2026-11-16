@@ -35,7 +35,7 @@ MATCH void func_801FCCF4(void) {
 MATCH void func_801FCCFC(void) {
     u8* state;
 
-    state = &D_80146875;
+    state = &g_SceneState.step_05;
     switch (*state) {
         case 0:
             MESSAGE_START_WAIT(24);
@@ -44,10 +44,10 @@ MATCH void func_801FCCFC(void) {
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                D_80146865 = 0;
-                D_80146866 = 0;
-                *state     = 0;
-                D_80146874 = 0;
+                g_ScriptVars[1]       = 0;
+                g_ScriptVars[2]       = 0;
+                *state                = 0;
+                g_SceneState.state_04 = 0;
             }
             return;
     }
@@ -56,7 +56,7 @@ MATCH void func_801FCCFC(void) {
 MATCH void func_801FCD9C(void) {
     u8* state;
 
-    state = &D_80146875;
+    state = &g_SceneState.step_05;
     switch (*state) {
         case 0:
             MESSAGE_START_WAIT(52);
@@ -65,8 +65,8 @@ MATCH void func_801FCD9C(void) {
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                *state     = 0;
-                D_80146874 = 0x6;
+                *state                = 0;
+                g_SceneState.state_04 = 0x6;
             }
             return;
     }
@@ -75,7 +75,7 @@ MATCH void func_801FCD9C(void) {
 MATCH void func_801FCE30(void) {
     u8* state;
 
-    state = &D_80146875;
+    state = &g_SceneState.step_05;
     switch (*state) {
         case 0:
             MESSAGE_START_WAIT(52);
@@ -84,8 +84,8 @@ MATCH void func_801FCE30(void) {
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                *state     = 0;
-                D_80146874 = 0;
+                *state                = 0;
+                g_SceneState.state_04 = 0;
             }
             return;
     }

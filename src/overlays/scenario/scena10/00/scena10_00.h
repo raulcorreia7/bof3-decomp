@@ -15,10 +15,6 @@ extern u32  D_801F6C00;
 extern char D_801F6C04[];
 extern char D_801F6C08[];
 extern char D_801F6C10[];
-extern u8   D_80146866;
-extern u8   D_80146874;
-extern u8   D_80146875;
-extern u16  D_80146876;
 extern u8   D_80181BD7;
 extern s16  D_801492DA;
 

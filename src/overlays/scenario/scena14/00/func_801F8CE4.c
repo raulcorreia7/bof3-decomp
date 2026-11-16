@@ -37,7 +37,7 @@ MATCH void func_801F8CE4(void) {
             g_SceneState.step_05 = 0xB;
             break;
         case 11:
-            if (D_80146867 != 0x18) {
+            if (g_ScriptVars[3] != 0x18) {
                 break;
             }
             UI_SetMode(0);
@@ -127,7 +127,7 @@ MATCH void func_801F8CE4(void) {
             g_SceneState.step_05 = 0x16;
             break;
         case 22:
-            D_80146867 = 0x20;
+            g_ScriptVars[3] = 0x20;
             Game_RequestAreaChange(AREA_ID_MYRIA_STATION_WORKERS, TO_COORD(40), TO_COORD(99), 0x8A);
             g_GameEntryMode      = GAME_NONE;
             g_GameRequestKind    = GAME_NONE;
@@ -144,7 +144,7 @@ MATCH void func_801F8CE4(void) {
             g_SceneState.step_05 = 0x18;
             break;
         case 24:
-            mode = &D_80146867;
+            mode = &g_ScriptVars[3];
             if (*mode != 0x31) {
                 break;
             }

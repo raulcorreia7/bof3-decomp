@@ -99,9 +99,6 @@ extern void func_801F5940(void);
 
 extern u8 D_8014554C[];
 
-extern u8 D_80146865;
-extern u8 D_80146875;
-
 void func_801F40D0(s32 unused);
 void func_801F4220(AreaStreakSlot* slot);
 u8   func_801F42E8(void);

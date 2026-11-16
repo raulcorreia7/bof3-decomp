@@ -7,11 +7,11 @@ MATCH void func_801F2D54(void) {
     g_MessageRequest = D_801F41C0[choice];
     if (choice == 0) {
         Game_SetScriptActive();
-        D_80146875      = 0x28;
-        g_ScriptVars[0] = 0;
-        D_80146865      = 0;
-        D_80146866      = 0;
-        D_80146867      = 0;
-        D_80146874      = 8;
+        g_SceneState.step_05  = 0x28;
+        g_ScriptVars[0]       = 0;
+        g_ScriptVars[1]       = 0;
+        g_ScriptVars[2]       = 0;
+        g_ScriptVars[3]       = 0;
+        g_SceneState.state_04 = 8;
     }
 }

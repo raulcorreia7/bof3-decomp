@@ -31,7 +31,6 @@ extern u16          D_80145F18;
  * g_Battle.selection_latch. func_800C1E34 tests the boss flag bits 3 and 5 together through it. */
 extern u32          D_801462EC;
 extern volatile u8  D_80146322;
-extern s8           D_80146875;
 extern u8           D_80148603;
 extern u8           D_801FE4E4;
 extern u8           D_801FE4EC[];

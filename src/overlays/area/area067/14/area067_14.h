@@ -7,10 +7,6 @@
 #include "overlays/area/world01.h"
 #include "area/spad.h"
 
-extern u8    D_80146865;
-extern u8    D_80146866;
-extern u8    D_80146874;
-extern u8    D_80146875;
 extern void* D_80146954;
 extern u8    D_801F4644[];
 extern u8    D_801F464C[];

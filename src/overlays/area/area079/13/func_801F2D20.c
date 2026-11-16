@@ -6,22 +6,22 @@ MATCH void func_801F2D20(void) {
     g_MessageRequest = D_801F4C70[choice];
     switch (choice) {
         case 0:
-            D_80146867 = 11;
+            g_ScriptVars[3] = 11;
             break;
         case 1:
-            D_80146867 = 12;
+            g_ScriptVars[3] = 12;
             break;
         case 2:
-            D_80146867 = 13;
+            g_ScriptVars[3] = 13;
             break;
         case 3:
-            D_80146867 = 14;
+            g_ScriptVars[3] = 14;
             break;
         case 4:
-            D_80146867 = 15;
+            g_ScriptVars[3] = 15;
             break;
         case 5:
-            D_80146867 = 16;
+            g_ScriptVars[3] = 16;
             break;
     }
 }

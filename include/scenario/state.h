@@ -52,7 +52,6 @@ ASSERT_OFFSET(SceneState, timer_06, 0x06);
 /* The scenario record the overlays switch on. */
 /* D_80146870 */
 /* The byte nine bytes before g_SceneState; the field readers still name it by address. */
-extern u8         D_80146867;
 extern SceneState g_SceneState; /* 0x80146870 */
 /* state_04 and step_05 as one halfword (step in the high byte); area085 and
  * area105 compare the pair with one lhu. */

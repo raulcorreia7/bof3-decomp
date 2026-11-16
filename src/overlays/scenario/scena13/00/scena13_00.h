@@ -28,9 +28,6 @@ void func_801F9E70(u16 phase);
 extern u8 D_801FBF78[];
 
 extern u8        D_801FBF98[];
-extern u8        D_80146874;
-extern u8        D_80146875;
-extern u16       D_80146876;
 extern u16       D_80146258;
 extern u8        D_801460FB;
 extern u8        D_8014623B;

@@ -84,11 +84,11 @@ MATCH void func_801FB66C(void) {
             if (g_ScriptVars[0] != 5) {
                 break;
             }
-            g_SceneState.step_05 = 11;
-            D_80146876           = 0;
+            g_SceneState.step_05  = 11;
+            g_SceneState.timer_06 = 0;
             break;
         case 11:
-            timer = &D_80146876;
+            timer = &g_SceneState.timer_06;
             (*timer)++;
             if (*timer >= 200) {
                 SND_PlayCue(0x209);
@@ -145,7 +145,7 @@ MATCH void func_801FB66C(void) {
                 break;
             }
             g_SceneState.step_05 = 24;
-            D_80146866           = 2;
+            g_ScriptVars[2]      = 2;
             switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {
                 case 1:
                     Game_RequestAreaChange(0x51, TO_COORD(197), TO_COORD(14), 0x86);

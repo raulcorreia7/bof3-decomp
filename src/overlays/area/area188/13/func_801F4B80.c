@@ -43,7 +43,7 @@ MATCH void func_801F4B80(void) {
             }
             break;
         case 12:
-            if (D_80146867 == 0x28) {
+            if (g_ScriptVars[3] == 0x28) {
                 if (g_SceneEventState.selection == 0) {
                     Game_RequestAreaChange(AREA_ID_BLACK_SHIP, TO_COORD(51), TO_COORD(71), AREA_ENTRY_MAP_LOADING | FACING_LEFT);
                 } else {
@@ -53,7 +53,7 @@ MATCH void func_801F4B80(void) {
             }
             break;
         case 13:
-            if (D_80146867 == 0) {
+            if (g_ScriptVars[3] == 0) {
                 Game_ClearScriptActive();
                 g_SceneEventState.mode      = SCENE_EVENT_NONE;
                 g_SceneEventState.step      = 0;

@@ -25,7 +25,7 @@ NON_MATCHING void func_801F3460(void) {
             }
             break;
         case 2:
-            D_80146867       = 0x20;
+            g_ScriptVars[3]  = 0x20;
             g_SceneEventMode = 0;
             *step            = 0;
             Game_RequestAreaChange(AREA_ID_MYRIA_STATION_WORKERS, TO_COORD(40), TO_COORD(99), 0x81);
@@ -48,7 +48,7 @@ NON_MATCHING void func_801F3460(void) {
             }
             break;
         case 12:
-            D_80146867       = 0x20;
+            g_ScriptVars[3]  = 0x20;
             g_SceneEventMode = 0;
             *step            = 0;
             Game_RequestAreaChange(AREA_ID_CAER_XHAN_LIFT_AREA, TO_COORD(10), TO_COORD(25), 0x81);

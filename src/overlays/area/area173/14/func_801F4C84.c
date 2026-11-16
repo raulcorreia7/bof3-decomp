@@ -7,7 +7,7 @@ MATCH void func_801F4C84(void) {
             g_SceneEventState.step = 1;
             break;
         case 1:
-            if (D_80146867 == 0x18) {
+            if (g_ScriptVars[3] == 0x18) {
                 if (D_80143F03 == 2) {
                     Game_RequestAreaChange(AREA_ID_LOOP_ELEVATOR, TO_COORD(4) + COORD_HALF, TO_COORD(10), AREA_ENTRY_MAP_LOADING);
                 } else {
@@ -19,7 +19,7 @@ MATCH void func_801F4C84(void) {
             }
             break;
         case 10:
-            if (D_80146867 == 0x20) {
+            if (g_ScriptVars[3] == 0x20) {
                 g_AreaSceneMode        = 1;
                 D_801448EE             = 0x1E;
                 g_SceneEventState.step = 0xB;
@@ -27,12 +27,12 @@ MATCH void func_801F4C84(void) {
             break;
         case 11:
             if (--LOHU(D_801448EE) == 0) {
-                D_80146867             = 0x24;
+                g_ScriptVars[3]        = 0x24;
                 g_SceneEventState.step = 0xC;
             }
             break;
         case 12:
-            if (D_80146867 == 0) {
+            if (g_ScriptVars[3] == 0) {
                 SYS_ClearFlag(g_SceneEventFlags, 0x58);
                 g_SceneEventState.mode = 0;
                 g_SceneEventState.step = 0;

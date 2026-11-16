@@ -6,8 +6,6 @@
 
 #include "overlays/scenario/scenario.h"
 
-extern u8       D_80146865;
-extern u8       D_80146866;
 void            Shop_DispatchStep(void);
 extern s8       D_80146873;
 extern u8       D_80143BB4;

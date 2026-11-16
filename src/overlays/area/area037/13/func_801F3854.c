@@ -9,9 +9,9 @@ MATCH void func_801F3854(void) {
         MESSAGE_REQUEST_CLEAR();
     } else if (choice == 1) {
         MESSAGE_REQUEST_CLEAR();
-        D_80146867 = 0x64;
+        g_ScriptVars[3] = 0x64;
     } else if (choice == 2) {
         MESSAGE_REQUEST_CLEAR();
-        D_80146867 = 0x5F;
+        g_ScriptVars[3] = 0x5F;
     }
 }

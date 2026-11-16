@@ -15,8 +15,6 @@ typedef enum Boss034Flags {
     BOSS034_FLAG_WERETIGER_GRANTED   = 1 << 1,
 } Boss034Flags;
 
-extern s8 D_80146875;
-
 extern u8       D_800C26B8[];
 extern u16      D_800C26C4[];
 extern Callback D_800C2714[];

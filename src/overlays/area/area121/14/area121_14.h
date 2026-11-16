@@ -26,10 +26,6 @@ extern u8       D_801F6800[]; /* one four-byte sprite cell per id: w, h, u0, v0 
 extern WorldMapMarker D_801F6858[6];
 #define AREA_HUD_MASK_TABLE D_801F6858
 extern s8       g_GameRequestKind;
-extern s8       D_80146865;
-extern s8       D_80146866;
-extern s8       D_80146874;
-extern s8       D_80146875;
 extern Callback D_801F6870[];
 extern Callback D_801F6894[];
 extern Callback D_801F689C[];

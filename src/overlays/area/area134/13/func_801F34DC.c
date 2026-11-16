@@ -14,8 +14,8 @@ NON_MATCHING void func_801F34DC(void) {
     FIELD(s32, work, 0x34) = D_80145EC4 - edge;
     g_Task                 = work;
     TASK_SET(g_Game.members);
-    g_Task     = work;
-    D_80146875 = 0x1E;
+    g_Task               = work;
+    g_SceneState.step_05 = 0x1E;
     Actor_Clear();
 }
 #else

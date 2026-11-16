@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F9148(void) {
-    u8* step = &D_80146875;
+    u8* step = &g_SceneState.step_05;
 
     switch (*step) {
         case 0:
@@ -20,12 +20,12 @@ MATCH void func_801F9148(void) {
                 *step = 4;
                 SYS_SetFlag(g_SceneFlags, 24);
                 if (SYS_TestFlag(g_SceneFlags, 23) == 0) {
-                    D_80146866 = 4;
+                    g_ScriptVars[2] = 4;
                     Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, 0x270000, 0xAD0000, FACING_RIGHT);
                     g_GamePrevSelection = 0xFF;
                 }
                 if (SYS_TestFlag(g_SceneFlags, 22) == 0) {
-                    D_80146866 = 1;
+                    g_ScriptVars[2] = 1;
                     Game_RequestAreaChange(AREA_ID_CONTEST_OUTER, 0x270000, 0xAD0000, 0x83);
                     g_GamePrevSelection = 0xFF;
                 }
@@ -36,12 +36,12 @@ MATCH void func_801F9148(void) {
                 SYS_SetFlag(g_SceneFlags, 25);
                 SYS_SetFlag(g_SceneFlags, 20);
                 SYS_SetFlag(g_SceneFlags, 26);
-                D_80146865 = 0;
-                D_80146866 = 0;
-                D_80146867 = 0;
+                g_ScriptVars[1] = 0;
+                g_ScriptVars[2] = 0;
+                g_ScriptVars[3] = 0;
                 Game_ClearScriptActive();
-                *step      = 0;
-                D_80146874 = 0;
+                *step                 = 0;
+                g_SceneState.state_04 = 0;
             }
             break;
     }
@@ -50,7 +50,7 @@ MATCH void func_801F9148(void) {
 MATCH void func_801F92EC(void) {
     u8* state;
 
-    state = &D_80146875;
+    state = &g_SceneState.step_05;
     switch (*state) {
         case 0:
             MESSAGE_START_WAIT(0);
@@ -59,8 +59,8 @@ MATCH void func_801F92EC(void) {
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                *state     = 0;
-                D_80146874 = 0;
+                *state                = 0;
+                g_SceneState.state_04 = 0;
             }
             return;
     }

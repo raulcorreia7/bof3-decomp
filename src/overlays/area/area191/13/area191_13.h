@@ -10,8 +10,6 @@
 /* The scenario state byte and its flag word. */
 
 /* The game-overlay state bytes the request paths write. */
-extern u8 D_80146874;
-extern u8 D_80146875;
 /* The scratchpad work row. */
 /* The state dispatch table in the trailing payload. */
 extern u8 D_801F3C54[];

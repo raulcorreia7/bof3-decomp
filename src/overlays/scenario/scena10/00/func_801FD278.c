@@ -120,7 +120,7 @@ MATCH void func_801FDA0C(Actor* actor) {
     Game_SetScriptActive();
     Scene_SetupParty(1);
     SYS_SetFlag(g_SceneFlags, 21);
-    state = &D_80146875;
+    state = &g_SceneState.step_05;
     *state += 1;
     actor->unk_7E += 1;
 }

@@ -21,8 +21,8 @@ MATCH void func_801FD48C(void) {
     if (SYS_TestFlag(g_SceneFlags, 20) == 0) {
         *g_ScriptVars = 0;
         Game_SetScriptActive();
-        D_80146875 = 0;
-        D_80146874 = 0x12;
+        g_SceneState.step_05  = 0;
+        g_SceneState.state_04 = 0x12;
         SYS_SetFlag(g_SceneFlags, 20U);
     }
 }

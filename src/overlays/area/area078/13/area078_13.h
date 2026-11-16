@@ -7,10 +7,5 @@
 #include "overlays/area/world02.h"
 
 extern u16 D_801F4184[];
-extern u8  D_80146865;
-extern u8  D_80146866;
-extern u8  D_80146874;
-extern u8  D_80146875;
-extern u16 D_80146876;
 
 #endif

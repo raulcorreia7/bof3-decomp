@@ -7,15 +7,15 @@ MATCH void func_801F2C1C(void) {
     switch (choice) {
         case 2:
             Game_SetScriptActive();
-            D_80146875 = 10;
+            g_SceneState.step_05 = 10;
             break;
         case 3:
             Game_SetScriptActive();
-            D_80146875 = 30;
+            g_SceneState.step_05 = 30;
             break;
         case 4:
             Game_SetScriptActive();
-            D_80146875 = 20;
+            g_SceneState.step_05 = 20;
             break;
         case 0:
         case 1:
@@ -23,9 +23,9 @@ MATCH void func_801F2C1C(void) {
         default:
             return;
     }
-    g_ScriptVars[0] = 0;
-    D_80146865      = 0;
-    D_80146866      = 0;
-    D_80146867      = 0;
-    D_80146874      = 8;
+    g_ScriptVars[0]       = 0;
+    g_ScriptVars[1]       = 0;
+    g_ScriptVars[2]       = 0;
+    g_ScriptVars[3]       = 0;
+    g_SceneState.state_04 = 8;
 }

@@ -12,8 +12,6 @@
 /* The character work record, viewed as bytes here. */
 
 /* The area-flag bit store. */
-extern s8                  D_80146874;
-extern s8                  D_80146875;
 /* D_801F4A2C */
 extern PartyMemberMessages g_PartyMemberMessages[7];
 /* The state handler banks the step dispatchers index. */

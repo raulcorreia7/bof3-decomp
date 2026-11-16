@@ -1029,12 +1029,12 @@ NON_MATCHING void func_801FA3E4(void) {
             Scene_SetupParty(3);
             Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX = TO_COORD_HALF(81), VOL(s32, g_AreaScrollTargetY) = TO_COORD_HALF(30)));
             Area_InitMapRenderer();
-            D_801468FF    = 13;
-            D_80146997    = 14;
-            D_80146889[0] = 4;
-            D_80146921    = 4;
-            D_80146874    = 4;
-            D_80146875    = 10;
+            D_801468FF            = 13;
+            D_80146997            = 14;
+            D_80146889[0]         = 4;
+            D_80146921            = 4;
+            g_SceneState.state_04 = 4;
+            g_SceneState.step_05  = 10;
         }
     }
     if (LOHU(g_GameAreaId) == 2 && SYS_TestFlag(g_SceneFlags, 6) && !SYS_TestFlag(g_SceneFlags, 7)) {
@@ -1059,19 +1059,19 @@ NON_MATCHING void func_801FA3E4(void) {
     }
     if (LOHU(g_GameAreaId) == 12 && !SYS_TestFlag(g_SceneFlags, 12) && SYS_TestFlag(g_SceneFlags, 11)) {
         Game_SetScriptActive();
-        g_AreaDrawFlags = 0;
-        D_80146874      = 8;
-        D_80146875      = 0;
-        D_801FEA70      = D_80145E98;
-        D_801FEA74      = D_80145EC4;
-        D_801FEA78      = D_80145EC8;
+        g_AreaDrawFlags       = 0;
+        g_SceneState.state_04 = 8;
+        g_SceneState.step_05  = 0;
+        D_801FEA70            = D_80145E98;
+        D_801FEA74            = D_80145EC4;
+        D_801FEA78            = D_80145EC8;
     }
     if (LOHU(g_GameAreaId) == 15) {
         if (SYS_TestFlag(g_SceneFlags, 14) && !SYS_TestFlag(g_SceneFlags, 15)) {
             Game_SetScriptActive();
-            g_ScriptVars[0] = 0;
-            D_80146874      = 9;
-            D_80146875      = 0;
+            g_ScriptVars[0]       = 0;
+            g_SceneState.state_04 = 9;
+            g_SceneState.step_05  = 0;
             Scene_RunScenario(4);
             Scene_SetupParty(10);
         }
@@ -1084,7 +1084,7 @@ NON_MATCHING void func_801FA3E4(void) {
         } while (i < 11);
     }
     if (LOHU(g_GameAreaId) == 21 && D_80143F03 == 0) {
-        D_80146867 = 0;
+        g_ScriptVars[3] = 0;
         if (SYS_TestFlag(g_SceneFlags, 15)) {
             if (!SYS_TestFlag(g_SceneFlags, 17)) {
                 SND_RequestBGM(0x74);
@@ -1102,8 +1102,8 @@ NON_MATCHING void func_801FA3E4(void) {
                 Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX = TO_COORD_HALF(10), VOL(s32, g_AreaScrollTargetY) = TO_COORD(20)));
                 Area_InitMapRenderer();
                 SYS_SetFlag(g_SceneFlags, 20);
-                D_80146874 = 10;
-                D_80146875 = 10;
+                g_SceneState.state_04 = 10;
+                g_SceneState.step_05  = 10;
             }
         }
     }
@@ -1113,9 +1113,9 @@ NON_MATCHING void func_801FA3E4(void) {
                 Game_SetScriptActive();
                 g_AreaDrawFlags = 0;
                 Scene_SetupParty(0);
-                D_80146874 = 1;
-                D_80146875 = 0;
-                D_80146876 = 150;
+                g_SceneState.state_04 = 1;
+                g_SceneState.step_05  = 0;
+                g_SceneState.timer_06 = 150;
             }
         }
         if (D_80143F03 == 1) {
@@ -1153,7 +1153,7 @@ INCLUDE_ASM(func_801FABA0);
 MATCH void func_801FB168(void) {
     u8* step;
 
-    step = &D_80146875;
+    step = &g_SceneState.step_05;
     switch (*step) {
         case 0:
             D_80147ACF = 3;
@@ -1161,18 +1161,18 @@ MATCH void func_801FB168(void) {
             *step      = 1;
             break;
         case 1:
-            if (D_80146867 == 0x12) {
-                D_80146876 = 0x10;
-                *step      = 2;
+            if (g_ScriptVars[3] == 0x12) {
+                g_SceneState.timer_06 = 0x10;
+                *step                 = 2;
             }
             break;
         case 2:
-            if (D_80146876-- == 0) {
+            if (g_SceneState.timer_06-- == 0) {
                 SYS_SetFlag(g_SceneFlags, 3);
                 D_801448EE             = 1;
                 g_SceneEventState.mode = 5;
                 g_SceneEventState.step = 3;
-                D_80146874             = 0;
+                g_SceneState.state_04  = 0;
                 *step                  = 0;
             }
             break;

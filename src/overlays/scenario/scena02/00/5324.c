@@ -10,14 +10,14 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801FBF24(void) {
     u8* state;
 
-    state = &D_80146866;
+    state = &g_ScriptVars[2];
     if (*state == 3) {
         Game_SetScriptActive();
         return;
     }
     Game_ClearScriptActive();
-    D_80146867 = 0;
-    D_80146875 = 8;
+    g_ScriptVars[3]      = 0;
+    g_SceneState.step_05 = 8;
     *state += 1;
 }
 
@@ -104,39 +104,39 @@ MATCH void func_801FC9CC(void) {
     if (g_PartyFieldOrder[0] == 0 || g_PartyFieldOrder[0] == 3) {
         if ((u32)((u16)D_80145EC6 - 0x44) < 2 && D_80145ECA == 0x3F && D_80145EDB == 0x42 && D_80145E98 == 1) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x0B));
-            D_80146875 = 0x1E;
-            D_80146874 = 0x1A;
+            g_SceneState.step_05  = 0x1E;
+            g_SceneState.state_04 = 0x1A;
         }
         if (D_80145EC6 == 0x46) {
             if (D_80145ECA == 0x3E && D_80145EDB == 0x45 && D_80145E98 == 7) {
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x0B));
-                D_80146875 = 0x1E;
-                D_80146874 = 0x1A;
+                g_SceneState.step_05  = 0x1E;
+                g_SceneState.state_04 = 0x1A;
             }
         }
         if (D_80145EC6 == 0x44 && D_80145ECA == 0x3E && D_80145EDB == 0x43 && D_80145E98 == 3) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x0B));
-            D_80146875 = 0x1E;
-            D_80146874 = 0x1A;
+            g_SceneState.step_05  = 0x1E;
+            g_SceneState.state_04 = 0x1A;
         }
     }
 }
 
 MATCH void func_801FCB54(void) {
-    g_ScriptVars[0] = 31;
-    D_80146865      = 0;
-    D_80146866      = 0;
-    D_80146867      = 0;
-    D_80146875      = 0;
-    D_80146874      = 7;
+    g_ScriptVars[0]       = 31;
+    g_ScriptVars[1]       = 0;
+    g_ScriptVars[2]       = 0;
+    g_ScriptVars[3]       = 0;
+    g_SceneState.step_05  = 0;
+    g_SceneState.state_04 = 7;
 }
 
 MATCH void func_801FCB94(void) {
-    g_ScriptVars[0] = 0;
-    D_80146865      = 0;
-    D_80146866      = 0;
-    D_80146867      = 0;
-    D_80146875      = 0;
+    g_ScriptVars[0]      = 0;
+    g_ScriptVars[1]      = 0;
+    g_ScriptVars[2]      = 0;
+    g_ScriptVars[3]      = 0;
+    g_SceneState.step_05 = 0;
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
 }
 
@@ -147,13 +147,13 @@ MATCH void func_801FCBDC(s32 delta) {
     u8  frame;
     u8  frame_2;
 
-    state = &D_80146865;
+    state = &g_ScriptVars[1];
     switch (*state) {
         case 0:
             amount                   = delta & BYTE_MASK;
             g_AreaCameraRefreshCount = 2;
-            frame                    = D_80146867 + 1;
-            D_80146867               = frame;
+            frame                    = g_ScriptVars[3] + 1;
+            g_ScriptVars[3]          = frame;
             g_AreaCameraOffsetY      = g_AreaCameraOffsetY + amount;
             g_AreaCameraOffsetY      = g_AreaCameraOffsetX + amount;
             if (frame == 2) {
@@ -161,22 +161,22 @@ MATCH void func_801FCBDC(s32 delta) {
                 g_AreaCameraOffsetX      = 0;
                 g_AreaCameraRefreshCount = 2;
                 *state                   = 1;
-                D_80146867               = 0;
+                g_ScriptVars[3]          = 0;
                 return;
             }
             return;
         case 1:
             amount_2                 = delta & BYTE_MASK;
             g_AreaCameraRefreshCount = 2;
-            frame_2                  = D_80146867 + 1;
-            D_80146867               = frame_2;
+            frame_2                  = g_ScriptVars[3] + 1;
+            g_ScriptVars[3]          = frame_2;
             g_AreaCameraOffsetY      = g_AreaCameraOffsetY - amount_2;
             g_AreaCameraOffsetY      = g_AreaCameraOffsetX + amount_2;
             if (frame_2 == 2) {
                 g_AreaCameraOffsetY      = 0;
                 g_AreaCameraOffsetX      = 0;
                 g_AreaCameraRefreshCount = 2;
-                D_80146867               = 0;
+                g_ScriptVars[3]          = 0;
                 *state                   = 0;
             }
             break;
@@ -219,10 +219,10 @@ MATCH void func_801FD164(void) {
     if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
         g_GameFlags ^= 0x36;
         Game_SetScriptActive();
-        D_80146875 = 5;
-        D_80146865 = 0;
-        D_80146866 = 0;
-        D_80146874 = 4;
+        g_SceneState.step_05  = 5;
+        g_ScriptVars[1]       = 0;
+        g_ScriptVars[2]       = 0;
+        g_SceneState.state_04 = 4;
     }
 }
 
@@ -230,10 +230,10 @@ MATCH void func_801FD1DC(void) {
     if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
         g_GameFlags ^= 0x36;
         Game_SetScriptActive();
-        D_80146875 = 7;
-        D_80146865 = 0;
-        D_80146866 = 0;
-        D_80146874 = 4;
+        g_SceneState.step_05  = 7;
+        g_ScriptVars[1]       = 0;
+        g_ScriptVars[2]       = 0;
+        g_SceneState.state_04 = 4;
     }
 }
 

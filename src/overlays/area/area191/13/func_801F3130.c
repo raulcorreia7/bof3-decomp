@@ -10,6 +10,6 @@ MATCH void func_801F3130(void) {
     work->unk_7E++;
     /* FAKE: retail keeps the request stores below the actor store. */
     FAKE_BARRIER();
-    D_80146874 = 2;
-    D_80146875 = 0x19;
+    g_SceneState.state_04 = 2;
+    g_SceneState.step_05  = 0x19;
 }
