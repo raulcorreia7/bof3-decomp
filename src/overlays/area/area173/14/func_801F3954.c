@@ -1,19 +1,19 @@
 #include "area173_14.h"
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801F3954(s32 arg0) {
+NON_MATCHING void func_801F3954(s32 frame) {
     AreaPart* row;
     POLY_FT4* prim;
     long      depth;
     long      flag;
-    s32       frame;
+    s32       row_index;
     s32       k;
 
-    frame = D_801F52E8[arg0 * 2];
-    if (frame >= D_801F52E9[arg0 * 2]) {
+    row_index = D_801F52E8[frame * 2];
+    if (row_index >= D_801F52E9[frame * 2]) {
         return;
     }
-    row = &D_801F4F14[frame];
+    row = &D_801F4F14[row_index];
     do {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
@@ -28,9 +28,9 @@ NON_MATCHING void func_801F3954(s32 arg0) {
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         func_80155560(row->cell, prim, 1);
         Area_AddCellPrim((row->x << 16) + (D_1F800038 << 9), row->y << 16, 0, sizeof(POLY_FT4));
-        frame++;
+        row_index++;
         row++;
-    } while (frame < D_801F52E9[arg0 * 2]);
+    } while (row_index < D_801F52E9[frame * 2]);
 }
 #else
 INCLUDE_ASM(func_801F3954);
