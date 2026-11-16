@@ -45,6 +45,7 @@ void func_801F31C8(AreaRippleQuad* quad);
 void func_801F3394(AreaRippleQuad* quad);
 void func_801F358C(AreaRippleQuad* quad);
 void func_801F3AD8(AreaRippleQuad* quad);
+void func_801F38A0(s16* row);
 s16* func_801F3A9C(void);
 void func_801F3D54(s16* row);
 
