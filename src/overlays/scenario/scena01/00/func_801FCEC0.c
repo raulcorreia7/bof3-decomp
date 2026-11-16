@@ -25,8 +25,7 @@ NON_MATCHING void func_801FCEC0(void) {
                 vars[0]         = 0;
                 g_ScriptVars[1] = 0;
                 g_ScriptVars[2] = 0;
-                Game_ClearScriptActive();
-                SCENE_RETURN_TO_START();
+                goto scene_return;
             }
             break;
         }
@@ -64,8 +63,7 @@ NON_MATCHING void func_801FCEC0(void) {
         case 0x18:
             if (g_ScriptVars[0] == 1) {
                 SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
-                Game_ClearScriptActive();
-                SCENE_RETURN_TO_START();
+                goto scene_return;
             }
             break;
         case 2:
@@ -83,15 +81,13 @@ NON_MATCHING void func_801FCEC0(void) {
                 g_ScriptVars[0] = 0;
                 g_ScriptVars[1] = 0;
                 g_ScriptVars[2] = 0;
-                Game_ClearScriptActive();
-                SCENE_RETURN_TO_START();
+                goto scene_return;
             }
             break;
         case 3:
             if (g_GameStateIndex == 0) {
                 SCRIPT_VARS_CLEAR_ALL();
-                Game_ClearScriptActive();
-                SCENE_RETURN_TO_START();
+                goto scene_return;
             }
             break;
         case 5: {
@@ -111,11 +107,14 @@ NON_MATCHING void func_801FCEC0(void) {
                 vars[0]         = 0;
                 g_ScriptVars[1] = 0;
                 g_ScriptVars[2] = 0;
-                Game_ClearScriptActive();
-                SCENE_RETURN_TO_START();
+                goto scene_return;
             }
             break;
         }
+        scene_return:
+            Game_ClearScriptActive();
+            SCENE_RETURN_TO_START();
+            break;
         case 0xA:
             if (WINDOW_EFFECT_BUSY()) {
                 break;
