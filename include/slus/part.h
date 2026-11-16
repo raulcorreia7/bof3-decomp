@@ -38,4 +38,6 @@ typedef union ScenePart {
     } pick;
 } ScenePart;
 
+ASSERT_SIZE(ScenePart, 0x4);
+
 #endif

@@ -425,6 +425,8 @@ typedef struct BMagicRingShade {
     u8 blue;
 } BMagicRingShade;
 
+ASSERT_SIZE(BMagicRingShade, 0x2);
+
 /* The four scratch vectors the effect draws project their corners from; the flat name keeps the retail
  * bytes, the scratchpad view does not. */
 

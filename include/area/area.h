@@ -255,6 +255,8 @@ typedef struct AreaCell {
     u16 prim_id; /* low 12 bits: the g_AreaCellPrims row; upper bits are flags */
 } AreaCell;
 
+ASSERT_SIZE(AreaCell, 0x4);
+
 extern AreaCell g_AreaCells[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
 extern u16      g_AreaCellGrid[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
 /* Zero in the load image: 0x400 rows of one POLY_FT4 per display buffer
@@ -437,6 +439,8 @@ typedef struct AreaRing {
     DVECTOR screen_center;            /* 0x28 */
     DVECTOR screen[AREA_RING_POINTS]; /* 0x2C - one screen position per ring point */
 } AreaRing;
+
+ASSERT_SIZE(AreaRing, 0x6C);
 
 ASSERT_OFFSET(AreaRing, radius, 0x20);
 ASSERT_OFFSET(AreaRing, screen, 0x2C);

@@ -52,6 +52,8 @@ typedef struct FormationOrder {
     u8 members[PARTY_SLOT_COUNT];
 } FormationOrder;
 
+ASSERT_SIZE(FormationOrder, 0x3);
+
 /* D_80144F50 */
 extern u32 g_Zenny;
 /* Stored character id -> character-record slot (Observed:
