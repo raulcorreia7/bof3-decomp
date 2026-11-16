@@ -4,26 +4,26 @@
 MATCH void func_801A7E54(void) {
     u8* flag;
 
-    switch (g_SceneEventStep) {
+    switch (g_SceneEventState.step) {
         case 0:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_SetScriptActive();
-                g_SceneEventStep = 1;
+                g_SceneEventState.step = 1;
             }
             break;
         case 1:
-            func_801BE1B0(s_SceneStateStepArgs[g_SceneEventSelection]);
-            g_SceneEventStep = 2;
+            func_801BE1B0(s_SceneStateStepArgs[g_SceneEventState.selection]);
+            g_SceneEventState.step = 2;
             break;
         case 2:
             if (g_ScriptVars[3] == 0x20) {
-                D_801448EE       = 0x10;
-                g_SceneEventStep = 3;
+                D_801448EE             = 0x10;
+                g_SceneEventState.step = 3;
             }
             break;
         case 3:
             if (--(*(u16*)&D_801448EE) == 0) {
-                switch (g_SceneEventSelection) {
+                switch (g_SceneEventState.selection) {
                     case 0:
                     case 4:
                         Game_RequestAreaChange(AREA_ID_DAUNA_MINE_ZOMBIE_DRAGON, TO_COORD(17), TO_COORD(89), AREA_ENTRY_MAP_LOADING | FACING_DOWN);
@@ -37,7 +37,7 @@ MATCH void func_801A7E54(void) {
                         Game_RequestAreaChange(AREA_ID_DAUNA_MINE_INTRO, TO_COORD(62), TO_COORD(5), AREA_ENTRY_MAP_LOADING | FACING_UP);
                         break;
                 }
-                g_SceneEventStep = 4;
+                g_SceneEventState.step = 4;
             }
             break;
         case 4:
@@ -47,9 +47,9 @@ MATCH void func_801A7E54(void) {
                 Game_ClearScriptActive();
                 SYS_ClearFlag(g_SceneEventFlags, 30);
                 SYS_ClearFlag(g_SceneEventFlags, 31);
-                g_SceneEventMode      = SCENE_EVENT_NONE;
-                g_SceneEventStep      = 0;
-                g_SceneEventSelection = 0;
+                g_SceneEventState.mode      = SCENE_EVENT_NONE;
+                g_SceneEventState.step      = 0;
+                g_SceneEventState.selection = 0;
             }
             break;
     }

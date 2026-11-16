@@ -104,7 +104,7 @@ MATCH void func_801F4414(void) {
     active = &D_80147CC8;
     *active |= 1;
     Game_SetScriptActive();
-    g_SceneEventMode = 0xC;
-    g_SceneEventStep = 0;
-    D_801448EE       = 0xF;
+    g_SceneEventState.mode = 0xC;
+    g_SceneEventState.step = 0;
+    D_801448EE             = 0xF;
 }

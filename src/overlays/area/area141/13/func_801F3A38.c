@@ -6,9 +6,9 @@ MATCH void func_801F3A38(void) {
         Game_SetScriptActive();
         Area_StartScrollRoute(3);
         func_801F4300(D_801F4DBC, 0);
-        g_SceneEventMode = 0x34;
-        g_SceneEventStep = 0x32;
-        g_MessageRequest = 5;
+        g_SceneEventState.mode = 0x34;
+        g_SceneEventState.step = 0x32;
+        g_MessageRequest       = 5;
     } else {
         g_MessageRequest = 6;
     }

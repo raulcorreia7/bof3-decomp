@@ -1,11 +1,12 @@
 #include "game_00.h"
 
+/* FAKE: the step increment stays on the mode symbol; both spellings name the same byte. */
 MATCH void func_801A852C(void) {
     s8* state;
     s32 bit_index;
     s32 seed;
 
-    state = &g_SceneEventStep;
+    state = &g_SceneEventState.step;
     switch (*state) {
         case 0:
             Game_SetScriptActive();
@@ -16,8 +17,8 @@ MATCH void func_801A852C(void) {
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                g_SceneEventMode = SCENE_EVENT_NONE;
-                *state           = 0;
+                g_SceneEventState.mode = SCENE_EVENT_NONE;
+                *state                 = 0;
             }
             break;
         case 2:
@@ -41,8 +42,8 @@ MATCH void func_801A852C(void) {
                 Game_RequestAreaChange(seed & HALF_MASK, TO_COORD(67), TO_COORD(22), FACING_DOWN_RIGHT);
                 g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
                 Game_ClearScriptActive();
-                g_SceneEventMode = SCENE_EVENT_NONE;
-                g_SceneEventStep = 0;
+                g_SceneEventState.mode = SCENE_EVENT_NONE;
+                g_SceneEventState.step = 0;
             }
             break;
     }

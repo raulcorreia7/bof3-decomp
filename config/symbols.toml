@@ -6618,6 +6618,7 @@ g_ScrollHeight = { addr = 0x80143F86, type = "s16", source = "Ground height unde
 g_SpawnedActors = { addr = 0x80143FC8, size = 0x910, source = "The actor slots." }
 g_SaveData = { addr = 0x801448D8, size = 0x10B0, alias = true, source = "The save data." }
 g_SceneEventMode = { addr = 0x801448EB, type = "s8", source = "Current scene event." }
+g_SceneEventState = { addr = 0x801448EB, type = "SceneEventState", source = "g_SceneEventMode at 0x801448EB as the live scene event: mode selects the g_SceneEvents handler, step advances inside it and selection is the entry it works on.", alias = true }
 g_SceneEventStep = { addr = 0x801448EC, type = "s8", source = "Fairy_EndCommuScene adds one to it, Fishing_ShowLocation steps it from 0 to 1, Scene_ClearEventState clears it" }
 g_SceneEventSelection = { addr = 0x801448ED, type = "u8", source = "The entry the scene event works on: the fairy job index in Fairy_GrantGift and Fairy_RollExploreReward, the master id in the sisyou menu, a copy of active_ui[5] in the commu00 cursor functions." }
 g_SavedScriptVars = { addr = 0x801448F8, size = 0x4, source = "Script variables kept in the save." }

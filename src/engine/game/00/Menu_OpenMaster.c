@@ -1,5 +1,6 @@
 #include "game_00.h"
 
+/* FAKE: the step dispatch and its two pointer increments keep the symbol spelling; the record member moved them. */
 MATCH void Menu_OpenMaster(void) {
     switch (g_SceneEventStep) {
         case 0:
@@ -34,9 +35,9 @@ MATCH void Menu_OpenMaster(void) {
             if (EMI_IsReady() != 0) {
                 g_AreaWalkFlags &= ~AREA_WALK_BUSY_ALL;
                 Game_ClearScriptActive();
-                g_SceneEventMode      = SCENE_EVENT_NONE;
-                g_SceneEventStep      = 0;
-                g_SceneEventSelection = 0;
+                g_SceneEventState.mode      = SCENE_EVENT_NONE;
+                g_SceneEventStep            = 0;
+                g_SceneEventState.selection = 0;
                 return;
             }
             break;

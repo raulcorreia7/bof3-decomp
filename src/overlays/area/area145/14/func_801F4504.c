@@ -13,8 +13,8 @@ MATCH u8 func_801F4504(u8 x, u8 y) {
     }
     if (SYS_TestFlag(D_80144EF0, 9)) {
         Game_SetScriptActive();
-        g_SceneEventMode = 0x14;
-        g_SceneEventStep = D_801F5CC0[i].step;
+        g_SceneEventState.mode = 0x14;
+        g_SceneEventState.step = D_801F5CC0[i].step;
         return 1;
     }
     return 0;

@@ -21,7 +21,7 @@ MATCH s32 func_801F4914(s32 x, s32 y) {
     }
     SYS_ToggleFlag(g_SceneEventFlags, D_801F68B4[i * 4 + 3]);
     Game_SetScriptActive();
-    g_SceneEventMode = 0x20;
-    g_SceneEventStep = 5;
+    g_SceneEventState.mode = 0x20;
+    g_SceneEventState.step = 5;
     return 1;
 }

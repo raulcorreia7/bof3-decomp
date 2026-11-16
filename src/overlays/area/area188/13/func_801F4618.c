@@ -4,6 +4,6 @@ MATCH void func_801F4618(void) {
     MESSAGE_REQUEST_CLEAR();
     if (MENU_SELECTION_IDLE()) {
         Scene_StartEvent(0x2B, 0);
-        g_SceneEventSelection = 0;
+        g_SceneEventState.selection = 0;
     }
 }

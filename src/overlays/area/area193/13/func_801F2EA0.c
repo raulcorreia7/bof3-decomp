@@ -1,13 +1,13 @@
 #include "area193_13.h"
 
 MATCH void func_801F2EA0(void) {
-    switch (g_SceneEventStep) {
+    switch (g_SceneEventState.step) {
         case 0:
             break;
         case 10:
             Message_StartAreaMessage(0x1C);
-            g_GameStateIndex = GAME_REQUEST_MESSAGE;
-            g_SceneEventStep = 0xB;
+            g_GameStateIndex       = GAME_REQUEST_MESSAGE;
+            g_SceneEventState.step = 0xB;
             break;
         case 12:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -19,13 +19,13 @@ MATCH void func_801F2EA0(void) {
                 D_8014504B = 2;
                 D_80144F57 = 0xF0;
                 g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
-                D_80144F54       = 0;
-                D_80144F56       = 0;
-                D_80146880       = 0;
-                D_80146881       = 0;
-                g_SceneEventMode = SCENE_EVENT_NONE;
-                g_SceneEventStep = 0;
-                flag             = &g_SceneState.flags_01;
+                D_80144F54             = 0;
+                D_80144F56             = 0;
+                D_80146880             = 0;
+                D_80146881             = 0;
+                g_SceneEventState.mode = SCENE_EVENT_NONE;
+                g_SceneEventState.step = 0;
+                flag                   = &g_SceneState.flags_01;
                 *flag |= 1;
             }
             break;
@@ -35,29 +35,29 @@ MATCH void func_801F2EA0(void) {
                 Game_ClearScriptActive();
                 Game_RequestAreaChange(AREA_ID_KOMBINAT_WORLD_MAP, TO_COORD(0x16), TO_COORD(0x15), FACING_RIGHT);
                 g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
-                g_SceneEventMode = SCENE_EVENT_NONE;
-                g_SceneEventStep = 0;
+                g_SceneEventState.mode = SCENE_EVENT_NONE;
+                g_SceneEventState.step = 0;
             }
             break;
         case 16:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                g_SceneEventMode = SCENE_EVENT_NONE;
-                g_SceneEventStep = 0;
+                g_SceneEventState.mode = SCENE_EVENT_NONE;
+                g_SceneEventState.step = 0;
             }
             break;
         case 20:
             if (g_GameStateIndex == GAME_REQUEST_IDLE) {
                 Message_StartAreaMessage(SYS_TestFlag(&g_Scenario2Flags[0x60], 3) ? 0x25 : 0x20);
-                g_GameStateIndex = GAME_REQUEST_MESSAGE;
-                g_SceneEventStep = 0x15;
+                g_GameStateIndex       = GAME_REQUEST_MESSAGE;
+                g_SceneEventState.step = 0x15;
             }
             break;
         case 21:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Char_RebuildPartyStats();
                 SND_StartXAStream(0, 1);
-                g_SceneEventStep = 0x16;
+                g_SceneEventState.step = 0x16;
             }
             break;
         case 22:
@@ -71,8 +71,8 @@ MATCH void func_801F2EA0(void) {
                 g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
                 SYS_ClearFlag(flags, 3);
                 SYS_ClearFlag(flags + 0x30, 0x8A);
-                g_SceneEventMode = SCENE_EVENT_NONE;
-                g_SceneEventStep = 0;
+                g_SceneEventState.mode = SCENE_EVENT_NONE;
+                g_SceneEventState.step = 0;
             }
             break;
     }

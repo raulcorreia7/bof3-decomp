@@ -2,6 +2,7 @@
 
 /* Panel-lock flag owned by the main executable. */
 
+/* FAKE: retail materializes the byte address at each read; the record member reuses one. */
 MATCH void func_801D2614(void) {
     s32 step;
 

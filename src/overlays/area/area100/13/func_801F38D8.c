@@ -4,10 +4,10 @@ MATCH void func_801F38D8(void) {
     SpawnedActor* slot;
     u8            index;
 
-    switch (g_SceneEventStep) {
+    switch (g_SceneEventState.step) {
         case 0:
             Area_StartScrollRoute(0);
-            g_SceneEventStep = 1;
+            g_SceneEventState.step = 1;
             break;
         case 1:
             if (g_ScriptVars[0] == 1) {
@@ -19,30 +19,30 @@ MATCH void func_801F38D8(void) {
                     slot->pos.x.fixed  = 0x460000;
                     slot->pos.y.fixed  = 0x340000;
                 }
-                D_801448EE       = 0x1E;
-                g_SceneEventStep = 2;
+                D_801448EE             = 0x1E;
+                g_SceneEventState.step = 2;
             }
             break;
         case 2: {
             u16* timer = &D_801448EE;
 
             if (TIMER_EXPIRED(*timer)) {
-                g_SceneEventStep = 3;
+                g_SceneEventState.step = 3;
                 g_ScriptVars[0]++;
             }
         } break;
         case 3:
             if (g_ScriptVars[0] == 0) {
                 Message_StartAreaMessage(3);
-                g_GameStateIndex = GAME_REQUEST_MESSAGE;
-                g_SceneEventStep = 4;
+                g_GameStateIndex       = GAME_REQUEST_MESSAGE;
+                g_SceneEventState.step = 4;
             }
             break;
         case 4:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                g_SceneEventMode = SCENE_EVENT_NONE;
-                g_SceneEventStep = 0;
+                g_SceneEventState.mode = SCENE_EVENT_NONE;
+                g_SceneEventState.step = 0;
             }
             break;
     }

@@ -180,7 +180,7 @@ typedef struct SceneTrigger {
 /* The body of a scene trigger check `u8 f(u8 x, u8 y)`: the party at (x, y) facing the leader's way stands on one of
  * the `count` triggers of `table`. It starts the scene event `mode` at the trigger's step and returns 1, else returns
  * 0. A block statement macro: it declares a local, so it is the first statement of the function. */
-#define AREA_START_SCENE_TRIGGER(table, count, mode)                                                           \
+#define AREA_START_SCENE_TRIGGER(table, count, scene_mode)                                                     \
     s32 i;                                                                                                     \
                                                                                                                \
     for (i = 0; i < (count); i++) {                                                                            \
@@ -192,8 +192,8 @@ typedef struct SceneTrigger {
         return 0;                                                                                              \
     }                                                                                                          \
     Game_SetScriptActive();                                                                                    \
-    g_SceneEventMode = (mode);                                                                                 \
-    g_SceneEventStep = (table)[i].step;                                                                        \
+    g_SceneEventState.mode = (scene_mode);                                                                     \
+    g_SceneEventState.step = (table)[i].step;                                                                  \
     return 1
 
 /* Whether a step to (x, y) enters the trigger band that starts at `first_row`: with the scene ready it clears

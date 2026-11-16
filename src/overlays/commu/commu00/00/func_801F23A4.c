@@ -6,14 +6,14 @@
 MATCH void func_801F23A4(void) {
     s8* variant;
 
-    variant = &g_SceneEventStep;
+    variant = &g_SceneEventState.step;
     switch (*variant) {
         case 0:
             D_801F2945 = g_SndBGMId;
             SND_StopSequence(((u8*)g_SelectionCues)[D_801F2945 * 4], g_SelectionSequences[D_801F2945 * 4]);
             SND_StartXAStream(D_801F2944 == 0 ? 8 : 10, 1);
             /* FAKE: the original spells this increment off the neighboring mode
-             * byte, so the switch's cached g_SceneEventStep address is not reused; both
+             * byte, so the switch's cached g_SceneEventState.step address is not reused; both
              * expressions resolve to 0x801448EC. */
             ((s8*)&g_SceneEventMode)[1] += 1;
             break;

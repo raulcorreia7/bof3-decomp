@@ -3,7 +3,7 @@
 MATCH void func_801F4BC0(void) {
     s8* state;
 
-    state = &g_SceneEventStep;
+    state = &g_SceneEventState.step;
     switch (*state) {
         case 0:
             func_801BE1B0(1);
@@ -13,8 +13,8 @@ MATCH void func_801F4BC0(void) {
             if (D_80146867 == 0x14) {
                 SYS_SetFlag(state + 0x63C, 0x4E);
                 Game_RequestAreaChange(AREA_ID_EDEN_TEEPO_FIGHT, TO_COORD(10), TO_COORD(5), AREA_ENTRY_MAP_LOADING | FACING_RIGHT);
-                g_SceneEventMode = SCENE_EVENT_NONE;
-                *state           = 0;
+                g_SceneEventState.mode = SCENE_EVENT_NONE;
+                *state                 = 0;
             }
             break;
         case 5:
@@ -25,8 +25,8 @@ MATCH void func_801F4BC0(void) {
             if (D_80146867 == 0x14) {
                 SYS_SetFlag(state + 0x63C, 0x4E);
                 Game_RequestAreaChange(AREA_ID_EDEN_TEEPO_FIGHT, TO_COORD(38), TO_COORD(54), AREA_ENTRY_MAP_LOADING | FACING_UP_RIGHT);
-                g_SceneEventMode = SCENE_EVENT_NONE;
-                *state           = 0;
+                g_SceneEventState.mode = SCENE_EVENT_NONE;
+                *state                 = 0;
             }
             break;
     }

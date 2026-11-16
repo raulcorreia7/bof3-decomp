@@ -4,7 +4,7 @@ MATCH void func_801F38DC(void) {
     s8* state;
     u8* request;
 
-    state = &g_SceneEventStep;
+    state = &g_SceneEventState.step;
     switch (*state) {
         case 0:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -32,9 +32,9 @@ MATCH void func_801F38DC(void) {
         case 3:
             if (WINDOW_EFFECT_IDLE()) {
                 Game_ClearScriptActive();
-                g_SceneEventMode = SCENE_EVENT_NONE;
-                *state           = 0;
-                D_80146867       = 0;
+                g_SceneEventState.mode = SCENE_EVENT_NONE;
+                *state                 = 0;
+                D_80146867             = 0;
             }
             break;
     }

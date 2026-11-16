@@ -9,7 +9,7 @@ MATCH void func_801F16F8(void) {
     state = &g_GameStateIndex;
     if (*state != GAME_REQUEST_MESSAGE) {
         if (g_MessageRequest == 0xF9) {
-            variant = &g_SceneEventStep;
+            variant = &g_SceneEventState.step;
             *variant += 1;
         } else {
             Message_StartAreaMessage(0xF8);

@@ -53,8 +53,8 @@ MATCH void func_801F3CD0(void) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
             SYS_SetFlag(g_SceneEventFlags, 0x98);
             Game_ClearScriptActive();
-            g_SceneEventMode      = 0;
-            g_SceneEventSelection = 0;
+            g_SceneEventState.mode      = 0;
+            g_SceneEventState.selection = 0;
             break;
     }
 }

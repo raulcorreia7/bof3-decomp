@@ -2,6 +2,6 @@
 
 MATCH void func_801F2D48(void) {
     Game_SetScriptActive();
-    g_SceneEventMode      = SCENE_EVENT_MASTER;
-    g_SceneEventSelection = 6;
+    g_SceneEventState.mode      = SCENE_EVENT_MASTER;
+    g_SceneEventState.selection = 6;
 }

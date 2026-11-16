@@ -1,5 +1,6 @@
 #include "area148_13.h"
 
+/* FAKE: the scene event reads stay on the symbol cells; as record members they moved the schedule. */
 MATCH void func_801F3C24(void) {
     s8*  event_mode;
     u8*  selection;

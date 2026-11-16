@@ -23,8 +23,8 @@ MATCH s32 func_801F33A8(s32 x, s32 y) {
     SYS_ToggleFlag(g_SceneEventFlags, D_801F3FC7[i * 5]);
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0));
     Game_SetScriptActive();
-    next_mode        = D_801F3FC8[i * 5];
-    g_SceneEventStep = 0;
-    g_SceneEventMode = next_mode;
+    next_mode              = D_801F3FC8[i * 5];
+    g_SceneEventState.step = 0;
+    g_SceneEventState.mode = next_mode;
     return 1;
 }

@@ -7,7 +7,7 @@ MATCH s32 func_801F42F4(s32 entry_x, s32 entry_y) {
         }
         if ((entry_y >> 16) >= 10 && (entry_y >> 16) <= 11) {
             Game_SetScriptActive();
-            g_SceneEventStep = 5;
+            g_SceneEventState.step = 5;
         }
     }
     return 0;

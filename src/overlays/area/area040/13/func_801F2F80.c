@@ -6,14 +6,14 @@ NON_MATCHING void func_801F2F80(void) {
     if (MENU_SELECTION_IDLE()) {
         if (g_Game.members[0].chr.character_id == 2) {
             g_MessageRequest = 0x3C;
-        } else if (g_SceneEventMode == 0) {
+        } else if (g_SceneEventState.mode == 0) {
             Game_SetScriptActive();
-            g_SceneEventMode = 0x10;
-            g_SceneEventStep = 0;
+            g_SceneEventState.mode = 0x10;
+            g_SceneEventState.step = 0;
         }
     } else {
-        g_SceneEventMode = 0;
-        g_SceneEventStep = 0;
+        g_SceneEventState.mode = 0;
+        g_SceneEventState.step = 0;
         g_GameFlags &= ~0x1006;
     }
 }
