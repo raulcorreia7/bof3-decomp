@@ -36,7 +36,7 @@ segments:
       - [0x1380, c, func_801F3F80]
       - [0x13C0, c, func_801F3FC0]
       - [0x1450, c, func_801F4050]
-      - [0x1524, c, func_801F4124]
+      - [0x1524, c, Area_SkipScriptIfAdultRyu]
       - [0x1564, c, func_801F4164]
       - [0x15F4, c, func_801F41F4]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.

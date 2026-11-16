@@ -188,7 +188,7 @@ segments:
     align: 4
     section_order: [.data, .text, .rodata, .bss]
     subsegments:
-      - [0x7E0, .data, D_80195FE0]
+      - [0x7E0, .data, s_FairyConstructionThresholds]
       - [0x81C, c, Actor_FindFreeSpawned]
       - [0x870, c, Actor_Clear]
       - [0x8C0, c, Actor_Free]

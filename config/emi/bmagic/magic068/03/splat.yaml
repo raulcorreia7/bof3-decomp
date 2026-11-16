@@ -20,6 +20,6 @@ segments:
       - [0x109C, bin, D_801EFC9F]
       - [0x10A4, bin, D_801EFCA6]
       - [0x10A8, bin, D_801EFCA8]
-      - [0x10C8, bin, D_801EFCC8]
+      - [0x10C8, bin, g_BMagicEffectModes]
       - [0x10CC, bin, D_801EFCCC]
   - [0x10DC]

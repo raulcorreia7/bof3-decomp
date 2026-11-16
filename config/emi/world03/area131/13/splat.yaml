@@ -24,7 +24,7 @@ segments:
       - [0x2D0, c, func_801F2ED0]
       - [0x2EC, c, func_801F2EEC]
       - [0x308, c, func_801F2F08]
-      - [0x31C, c, func_801F2F1C]
+      - [0x31C, c, Scene_ClearEventState]
       - [0x354, c, func_801F2F54]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
