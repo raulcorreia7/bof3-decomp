@@ -22,8 +22,8 @@ MATCH s32 Area_StepSparkEmitters(void) {
                         spark->x      = emitter->x + ((rand() & 0xFF) << 8) - 0x10000;
                         spark->y      = emitter->y + ((rand() & 0xFF) << 8) - 0x10000;
                         spark->z      = emitter->z;
-                        spark->unk_14 = 0;
-                        spark->unk_3  = rand() & 1;
+                        spark->z_step = 0;
+                        spark->blink  = rand() & 1;
                     }
                 }
                 emitter->timer = rand() & 7;
