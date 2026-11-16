@@ -1229,8 +1229,7 @@ MATCH void func_801D50AC(void) {
     D_801F294D += 1;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D50E4(void) {
+MATCH void func_801D50E4(void) {
     s32 selection_offset;
     u8  bgm;
     u8  state;
@@ -1238,9 +1237,10 @@ NON_MATCHING void func_801D50E4(void) {
     if (g_UiWindowEffectBusy != 0) {
         return;
     }
-    bgm              = g_SndBGMId;
-    g_AreaDrawFlags  = 0;
-    D_801DB0CC       = bgm;
+    bgm             = g_SndBGMId;
+    g_AreaDrawFlags = 0;
+    D_801DB0CC      = bgm;
+    FAKE_BARRIER(); /* FAKE: keeps the two flag stores ahead of the track table loads. */
     selection_offset = bgm * BGM_TRACK_SIZE;
     SND_StopSequence(g_SelectionCues[selection_offset], g_SelectionSequences[selection_offset]);
     SND_RequestBGM(0x67);
@@ -1252,9 +1252,6 @@ NON_MATCHING void func_801D50E4(void) {
     D_801F294D = 0;
     D_801F294C = state + 1;
 }
-#else
-INCLUDE_ASM(func_801D50E4);
-#endif
 
 MATCH void func_801D5194(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event2Step1Funcs, D_801F294D);

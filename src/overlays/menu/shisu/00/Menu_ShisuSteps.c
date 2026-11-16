@@ -249,40 +249,45 @@ INCLUDE_ASM(func_801D1964);
 NON_MATCHING void func_801D1A20(void) {
     u8* fade;
     s32 level;
-    u8  value;
+    u16 value0;
+    u16 value1;
+    u16 value2;
+    u16 value3;
+    u16 value4;
+    u16 value5;
 
-    fade  = &D_80148654;
-    level = *fade;
-    value = D_801D9EF0[0];
-    if (value < (u8)level) {
-        value = level;
+    fade   = &D_80148654;
+    level  = *fade;
+    value0 = D_801D9EF0[0];
+    if (value0 < (u8)level) {
+        value0 = level;
     }
-    g_ShisuToppingR = value;
-    value           = D_801D9EF0[1];
-    if (value < (u8)level) {
-        value = level;
+    g_ShisuToppingR = value0;
+    value1          = D_801D9EF0[1];
+    if (value1 < (u8)level) {
+        value1 = level;
     }
-    g_ShisuToppingG = value;
-    value           = D_801D9EF0[2];
-    if (value < (u8)level) {
-        value = level;
+    g_ShisuToppingG = value1;
+    value2          = D_801D9EF0[2];
+    if (value2 < (u8)level) {
+        value2 = level;
     }
-    g_ShisuToppingB = value;
-    value           = D_801D9EF0[4];
-    if (value < (u8)level) {
-        value = level;
+    g_ShisuToppingB = value2;
+    value3          = D_801D9EF0[4];
+    if (value3 < (u8)level) {
+        value3 = level;
     }
-    g_ShisuBaseR = value;
-    value        = D_801D9EF0[5];
-    if (value < (u8)level) {
-        value = level;
+    g_ShisuBaseR = value3;
+    value4       = D_801D9EF0[5];
+    if (value4 < (u8)level) {
+        value4 = level;
     }
-    g_ShisuBaseG = value;
-    value        = D_801D9EF0[6];
-    if (value < (u8)level) {
-        value = level;
+    g_ShisuBaseG = value4;
+    value5       = D_801D9EF0[6];
+    if (value5 < (u8)level) {
+        value5 = level;
     }
-    g_ShisuBaseB = value;
+    g_ShisuBaseB = value5;
     if ((u8)level == 0x80) {
         SND_PlayCue(0x200);
     }
