@@ -12,14 +12,14 @@ MATCH void func_800A15DC(void) {
     Battle_MarkDamageApplied();
     battlerPtr = &g_Battle.active_battler;
     if ((battler = LOBU(*battlerPtr)) < 3U) {
-        g_Game.members[battler].u.turn.action_flags.value |= COMBATANT_FLAG_MEDITATION;
+        g_Game.members[battler].u.turn.action_flags.value |= BATTLER_ACTION_MEDITATION;
         playerIndex = *battlerPtr;
         counter     = g_Game.members[playerIndex].unk_139;
         if (counter < 2U) {
             g_Game.members[playerIndex].unk_139 = counter + 1;
         }
     } else {
-        ENEMY_COMBATANT(battler).turn.action_flags.value |= COMBATANT_FLAG_MEDITATION;
+        ENEMY_COMBATANT(battler).turn.action_flags.value |= BATTLER_ACTION_MEDITATION;
         enemy_index = *battlerPtr - 3;
         counter     = g_BattleEnemyBattlers[enemy_index].unk_115;
         if (counter < 2U) {

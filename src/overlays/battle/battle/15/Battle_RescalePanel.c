@@ -31,13 +31,13 @@ MATCH void Battle_RescalePanel(BattlePanelRecord* rec, s32 slot) {
     rec->unk_31 = rec->unk_51;
     rec->unk_33 = rec->unk_53;
 
-    if (g_Game.members[party_slot].u.turn.action_flags.volatile_value & COMBATANT_FLAG_DRAGON_FORM_QUEUED) {
+    if (g_Game.members[party_slot].u.turn.action_flags.volatile_value & BATTLER_ACTION_DRAGON_FORM_QUEUED) {
         g_Game.members[party_slot].chr.stats.power = g_Game.members[party_slot].chr.stats.power * 3;
     }
-    if (g_Game.members[party_slot].u.turn.action_flags.volatile_value & COMBATANT_FLAG_CHARGING) {
+    if (g_Game.members[party_slot].u.turn.action_flags.volatile_value & BATTLER_ACTION_CHARGING) {
         g_Game.members[party_slot].chr.stats.power = g_Game.members[party_slot].chr.stats.power * 3;
     }
-    if (g_Game.members[party_slot].u.turn.action_flags.volatile_value & COMBATANT_FLAG_SELECTION_BONUS) {
+    if (g_Game.members[party_slot].u.turn.action_flags.volatile_value & BATTLER_ACTION_SELECTION_BONUS) {
         u16 total;
         u16 bonus;
 
@@ -46,7 +46,7 @@ MATCH void Battle_RescalePanel(BattlePanelRecord* rec, s32 slot) {
         g_Game.members[party_slot].chr.stats.defense = 0;
         g_Game.members[party_slot].chr.stats.power   = total + bonus;
     }
-    if (g_Game.members[party_slot].u.turn.action_flags.volatile_value & COMBATANT_FLAG_DRAGON_FORM) {
+    if (g_Game.members[party_slot].u.turn.action_flags.volatile_value & BATTLER_ACTION_DRAGON_FORM) {
         if (g_Battle.dragon_form == 0x16) {
             g_Game.members[party_slot].chr.stats.evasion         = g_Game.members[party_slot].chr.stats.evasion + 0x1E;
             g_Game.members[party_slot].chr.stats.critical_chance = g_Game.members[party_slot].chr.stats.critical_chance + 0x1E;
@@ -57,10 +57,10 @@ MATCH void Battle_RescalePanel(BattlePanelRecord* rec, s32 slot) {
 
     table_row = slot & BYTE_MASK;
 
-    if (g_Game.members[table_row].u.turn.action_flags.volatile_value & COMBATANT_FLAG_HOLY_RESIST_ZERO) {
+    if (g_Game.members[table_row].u.turn.action_flags.volatile_value & BATTLER_ACTION_HOLY_RESIST_ZERO) {
         g_Game.members[table_row].chr.stats.resistances[RES_INDEX_HOLY] = 0;
     }
-    if (g_Game.members[table_row].u.turn.action_flags.volatile_value & COMBATANT_FLAG_FIRE_RESIST_ZERO) {
+    if (g_Game.members[table_row].u.turn.action_flags.volatile_value & BATTLER_ACTION_FIRE_RESIST_ZERO) {
         g_Game.members[table_row].chr.stats.resistances[RES_INDEX_FIRE] = 0;
     }
     g_Game.members[table_row].chr.stats.power   = func_801DE0AC(g_Game.members[table_row].chr.stats.power, 0x64);

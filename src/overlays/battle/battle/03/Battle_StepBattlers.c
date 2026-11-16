@@ -47,7 +47,7 @@ MATCH s32 Battle_StepBattlers(void) {
                 }
             } else {
             clear:
-                g_Game.members[index].u.turn.action_flags.volatile_value &= ~COMBATANT_FLAG_ACTION_UNK_5;
+                g_Game.members[index].u.turn.action_flags.volatile_value &= ~BATTLER_ACTION_UNK_5;
             }
         }
         index += 1;

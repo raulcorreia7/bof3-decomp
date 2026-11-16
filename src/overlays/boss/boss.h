@@ -40,7 +40,7 @@ static inline void Boss_StartEnemyScriptAction(u8* script, ModeFunc handler, u16
     work         = g_BattleCurrentEnemy;
     work->script = script;
     work->unk_E4 = handler;
-    work->turn.action_flags.value |= COMBATANT_FLAG_MODE_HANDLER_ACTION;
+    work->turn.action_flags.value |= BATTLER_ACTION_OWN_MODE;
     work->unk_E8 = steps;
     ACTOR_SET_MODE(2);
     Actor_StepAnimLoop();

@@ -10,19 +10,19 @@ MATCH void func_800A26F0(void) {
     Battle_MarkDamageApplied();
     for (slot = 0u; slot < BATTLE_PARTY_CHARACTERS_COUNT; slot++) {
         if ((Battle_SlotIsBlocked(slot) & BYTE_MASK) == 0u) {
-            g_Game.members[g_Battle.target].u.turn.action_flags.value &= ~COMBATANT_FLAG_SELECTED;
+            g_Game.members[g_Battle.target].u.turn.action_flags.value &= ~BATTLER_ACTION_SELECTED;
         }
     }
 
     for (slot = 3u; slot < 11u; slot++) {
         if ((Battle_SlotIsBlocked(slot) & BYTE_MASK) == 0u) {
-            ENEMY_COMBATANT(g_Battle.target).turn.action_flags.value &= ~COMBATANT_FLAG_SELECTED;
+            ENEMY_COMBATANT(g_Battle.target).turn.action_flags.value &= ~BATTLER_ACTION_SELECTED;
         }
     }
 
     if (LOBU(g_Battle.target) < 3u) {
-        g_Game.members[LOBU(g_Battle.target)].u.turn.action_flags.value |= COMBATANT_FLAG_SELECTED;
+        g_Game.members[LOBU(g_Battle.target)].u.turn.action_flags.value |= BATTLER_ACTION_SELECTED;
         return;
     }
-    ENEMY_COMBATANT(LOBU(g_Battle.target)).turn.action_flags.value |= COMBATANT_FLAG_SELECTED;
+    ENEMY_COMBATANT(LOBU(g_Battle.target)).turn.action_flags.value |= BATTLER_ACTION_SELECTED;
 }

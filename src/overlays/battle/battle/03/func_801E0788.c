@@ -15,7 +15,7 @@ MATCH void func_801E0788(void) {
         g_Task->unk_09 = 30;
         g_Task->unk_03 = 1;
         g_Task->unk_04 = 0;
-    } else if (w->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) {
+    } else if (w->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM) {
         half = &g_Battle.state;
         if ((*half & 0x4000) && (D_801463CA == g_Task->slot)) {
             *half &= 0xBFFF;
@@ -40,8 +40,8 @@ MATCH void func_801E0788(void) {
         }
         w2                 = g_Game.current;
         w2->u.turn.counter = 0;
-        w2->u.turn.action_flags.value &= ~(COMBATANT_FLAG_ALWAYS_HITS | COMBATANT_FLAG_DAMAGE_HALVED | COMBATANT_FLAG_HOLY_RESIST_ZERO | COMBATANT_FLAG_SELECTION_BONUS |
-                                           COMBATANT_FLAG_FIRE_RESIST_ZERO | COMBATANT_FLAG_CHARGING | COMBATANT_FLAG_SELECTED);
+        w2->u.turn.action_flags.value &= ~(BATTLER_ACTION_ALWAYS_HITS | BATTLER_ACTION_DAMAGE_HALVED | BATTLER_ACTION_HOLY_RESIST_ZERO | BATTLER_ACTION_SELECTION_BONUS |
+                                           BATTLER_ACTION_FIRE_RESIST_ZERO | BATTLER_ACTION_CHARGING | BATTLER_ACTION_SELECTED);
         g_GameState->counter_136      = 0;
         g_Game.current->counter_137   = 0;
         g_Game.current->focus_counter = 0;
@@ -54,7 +54,7 @@ MATCH void func_801E0788(void) {
         if ((*half2 & 0x4000) && (D_801463CA == g_Task->slot)) {
             *half2 &= 0xBFFF;
         }
-        if (g_Game.current->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM_QUEUED) {
+        if (g_Game.current->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM_QUEUED) {
             g_Task->unk_03 = 4;
         } else {
             Battle_ClearSlotPending(g_Task->slot);

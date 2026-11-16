@@ -40,7 +40,7 @@ NON_MATCHING void Battle_GetPanelPosX(void) {
     D_801485E0 = g_MenuPanelTasks[16].pos.x + 7u;
     D_801485E2 = g_MenuPanelTasks[16].pos.y + ((g_MenuPanelTasks[16].unk_0C - g_MenuPanelTasks[16].u.addr.unk_10) * 13 + 0x1A);
     trigger    = INPUT_GetRepeatedButtons((s32)(g_InputPressed & (INPUT_DIRECTIONAL | PADL1 | PADR1)));
-    if ((g_BattleActorTurn->action_flags.value & (COMBATANT_FLAG_DRAGON_FORM | COMBATANT_FLAG_DRAGON_FORM_CONTROLLED)) != (u32)COMBATANT_FLAG_DRAGON_FORM) {
+    if ((g_BattleActorTurn->action_flags.value & (BATTLER_ACTION_DRAGON_FORM | BATTLER_ACTION_DRAGON_FORM_CONTROLLED)) != (u32)BATTLER_ACTION_DRAGON_FORM) {
         if ((trigger & PADLleft) != 0) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
             g_MenuPanelTasks[16].unk_09 = 0x32u;

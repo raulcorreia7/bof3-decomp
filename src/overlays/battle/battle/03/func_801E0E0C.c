@@ -19,7 +19,7 @@ MATCH u8 func_801E0E0C(void) {
         if ((g_Game.members[index].u.turn.damage_flags.value & BATTLER_DAMAGE_WILLPOWER_SURVIVED) != 0u) {
             return 0u;
         }
-        if ((g_Game.members[index].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) != 0u) {
+        if ((g_Game.members[index].u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM) != 0u) {
             return 0u;
         }
         if ((flags_80 & STATUS_KO) != 0u) {

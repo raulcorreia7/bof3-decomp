@@ -9,9 +9,9 @@ MATCH void Battle_HalveDamage(void) {
     Battle_MarkDamageApplied();
 
     if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
-        g_Game.members[g_Battle.target].u.turn.action_flags.value |= COMBATANT_FLAG_DAMAGE_HALVED;
+        g_Game.members[g_Battle.target].u.turn.action_flags.value |= BATTLER_ACTION_DAMAGE_HALVED;
         return;
     }
 
-    ENEMY_COMBATANT(g_Battle.target).turn.action_flags.value |= COMBATANT_FLAG_DAMAGE_HALVED;
+    ENEMY_COMBATANT(g_Battle.target).turn.action_flags.value |= BATTLER_ACTION_DAMAGE_HALVED;
 }

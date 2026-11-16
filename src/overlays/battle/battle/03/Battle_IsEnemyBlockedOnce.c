@@ -9,7 +9,7 @@ MATCH u8 Battle_IsEnemyBlockedOnce(void) {
         return 1u;
     }
 
-    if ((battle_global[0x63CEu] != 0u) && ((ew->turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u)) {
+    if ((battle_global[0x63CEu] != 0u) && ((ew->turn.action_flags.value & BATTLER_ACTION_SUPPRESSION_EXEMPT) == 0u)) {
         return 1u;
     }
 

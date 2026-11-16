@@ -417,7 +417,7 @@ MATCH void func_801F0274(void) {
         if (Battle_SlotIsBlocked((u8)(i + BATTLE_PARTY_CHARACTERS_COUNT)) == 0 && g_Battle.active_battler != i + BATTLE_PARTY_CHARACTERS_COUNT &&
             g_Battle.target_selector != i + BATTLE_PARTY_CHARACTERS_COUNT) {
             if (g_BattleEnemyBattlers[i].stats.intelligence < 2 || (g_BattleEnemyBattlers[i].status & STATUS_CONFUSED) ||
-                (g_BattleEnemyBattlers[i].turn.action_flags.value & COMBATANT_FLAG_CHARGING)) {
+                (g_BattleEnemyBattlers[i].turn.action_flags.value & BATTLER_ACTION_CHARGING)) {
                 slot                               = Battle_AllocEffect(1, 57) & BYTE_MASK;
                 work                               = g_BattleEffectBattler;
                 g_BattleEffects[slot].header.mode  = 2;
@@ -431,8 +431,8 @@ MATCH void func_801F0274(void) {
     }
     for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         if (Battle_SlotIsBlocked((u8)i) == 0 && g_Battle.active_battler != i && g_Battle.target_selector != i) {
-            if (g_Game.members[i].chr.stats.intelligence < 2 || (g_Game.members[i].chr.status & STATUS_CONFUSED) || (g_Game.members[i].u.turn.action_flags.value & COMBATANT_FLAG_CHARGING) ||
-                (g_Game.members[i].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM_QUEUED)) {
+            if (g_Game.members[i].chr.stats.intelligence < 2 || (g_Game.members[i].chr.status & STATUS_CONFUSED) || (g_Game.members[i].u.turn.action_flags.value & BATTLER_ACTION_CHARGING) ||
+                (g_Game.members[i].u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM_QUEUED)) {
                 slot                               = Battle_AllocEffect(1, 57) & BYTE_MASK;
                 work                               = g_BattleEffectBattler;
                 g_BattleEffects[slot].header.mode  = 2;

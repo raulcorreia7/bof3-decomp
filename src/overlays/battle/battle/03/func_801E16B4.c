@@ -8,7 +8,7 @@ MATCH void func_801E16B4(void) {
         work  = g_Game.current;
         state = work->u.turn.command.type;
         if (state == 4) {
-            if (!(work->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
+            if (!(work->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM)) {
                 if (!(func_801DDF50(work->chr.character_id, D_801463CD) & BYTE_MASK)) {
                     g_Task->unk_09 = 0x1E;
                 } else {
@@ -25,7 +25,7 @@ MATCH void func_801E16B4(void) {
         }
         if (!(D_801CA71C[g_Battle.action_id].mask & 0x800)) {
             work = g_Game.current;
-            if (work->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) {
+            if (work->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM) {
                 g_Task->unk_09 = D_801EB23C[g_Battle.dragon_form];
             } else {
                 g_Task->unk_09 = g_BattleCharacterStepIds[work->chr.character_id];

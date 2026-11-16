@@ -86,12 +86,12 @@ MATCH void func_801DFCB4(void) {
     *pending = 0;
     if (tail_work->u.turn.hp_change > 0) {
         if (tail_work->chr.hp == 0) {
-            if (tail_work->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) {
+            if (tail_work->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM) {
                 tail_work->chr.status |= STATUS_KO;
             } else {
                 tail_work->chr.status = STATUS_KO;
             }
-            if (!(g_Game.current->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
+            if (!(g_Game.current->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM)) {
                 Battle_PlayEffectCue(1);
             }
             GFX_FreePaletteFadeTarget(g_Task);

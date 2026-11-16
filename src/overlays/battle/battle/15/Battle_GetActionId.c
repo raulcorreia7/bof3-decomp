@@ -43,14 +43,14 @@ MATCH s16 Battle_GetActionId(u8 unused, u8 battler_index, u16 base_value, u8 ele
     }
 
     if (BATTLER_IS_PLAYER(battler_index)) {
-        if (g_Game.members[battler_index].u.turn.action_flags.value & COMBATANT_FLAG_DAMAGE_HALVED) {
+        if (g_Game.members[battler_index].u.turn.action_flags.value & BATTLER_ACTION_DAMAGE_HALVED) {
             damage /= 2;
         }
         if (g_Game.members[battler_index].u.turn.damage_flags.value & BATTLER_DAMAGE_IMMUNE) {
             damage = 0;
         }
     } else {
-        if (g_BattleEnemyBattlers[battler_index - 3u].turn.action_flags.value & COMBATANT_FLAG_DAMAGE_HALVED) {
+        if (g_BattleEnemyBattlers[battler_index - 3u].turn.action_flags.value & BATTLER_ACTION_DAMAGE_HALVED) {
             damage /= 2;
         }
         if (g_BattleEnemyBattlers[battler_index - 3u].turn.damage_flags.value & BATTLER_DAMAGE_IMMUNE) {

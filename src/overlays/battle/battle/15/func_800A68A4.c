@@ -18,26 +18,26 @@ MATCH void func_800A68A4(void) {
     }
     battler = &g_Battle.active_battler;
     g_Game.members[*battler].u.turn.damage_flags.volatile_value &= ~(BATTLER_DAMAGE_REPRISAL | BATTLER_DAMAGE_IMMUNE);
-    g_Game.members[*battler].u.turn.action_flags.volatile_value &= ~(COMBATANT_FLAG_ALWAYS_HITS | COMBATANT_FLAG_DAMAGE_HALVED | COMBATANT_FLAG_HOLY_RESIST_ZERO | COMBATANT_FLAG_SELECTION_BONUS |
-                                                                     COMBATANT_FLAG_FIRE_RESIST_ZERO | COMBATANT_FLAG_CHARGING | COMBATANT_FLAG_SELECTED);
+    g_Game.members[*battler].u.turn.action_flags.volatile_value &= ~(BATTLER_ACTION_ALWAYS_HITS | BATTLER_ACTION_DAMAGE_HALVED | BATTLER_ACTION_HOLY_RESIST_ZERO | BATTLER_ACTION_SELECTION_BONUS |
+                                                                     BATTLER_ACTION_FIRE_RESIST_ZERO | BATTLER_ACTION_CHARGING | BATTLER_ACTION_SELECTED);
     Battle_RescaleStats(*battler);
     index                                                    = *battler;
     flags                                                    = g_Game.members[index].u.turn.action_flags.volatile_value;
     D_800B6F58                                               = 0;
     D_800B6F5C                                               = 0;
-    g_Game.members[index].u.turn.action_flags.volatile_value = flags | COMBATANT_FLAG_DRAGON_FORM;
+    g_Game.members[index].u.turn.action_flags.volatile_value = flags | BATTLER_ACTION_DRAGON_FORM;
     slot                                                     = func_800A6C2C();
     if (slot != GAME_NONE) {
         func_800A7C14(slot);
         D_800B6F58 = slot + 4;
         if ((u8)(slot + 4) == DRAGON_FORM_BERSERK_KAISER) {
-            g_Game.members[*battler].u.turn.action_flags.value |= COMBATANT_FLAG_DRAGON_FORM_BERSERK;
+            g_Game.members[*battler].u.turn.action_flags.value |= BATTLER_ACTION_DRAGON_FORM_BERSERK;
         }
         if (D_800B6F58 == DRAGON_FORM_FAILURE_KAISER) {
-            g_Game.members[*battler].u.turn.action_flags.value |= COMBATANT_FLAG_DRAGON_FORM_CONTROLLED;
+            g_Game.members[*battler].u.turn.action_flags.value |= BATTLER_ACTION_DRAGON_FORM_CONTROLLED;
         }
         if (D_800B6F58 == DRAGON_FORM_TRUE_KAISER) {
-            g_Game.members[*battler].u.turn.action_flags.value |= COMBATANT_FLAG_DRAGON_FORM_CONTROLLED;
+            g_Game.members[*battler].u.turn.action_flags.value |= BATTLER_ACTION_DRAGON_FORM_CONTROLLED;
         }
     } else {
         func_800A6E14(0xFF);

@@ -33,7 +33,7 @@ MATCH void Battle_RescaleStats(u8 slot) {
         if (g_BattleEnemyBattlers[slot].turn.action_flags.value & 0x4000) {
             g_BattleEnemyBattlers[slot].stats.power = g_BattleEnemyBattlers[slot].stats.power * 3;
         }
-        if (g_BattleEnemyBattlers[slot].turn.action_flags.value & COMBATANT_FLAG_SELECTION_BONUS) {
+        if (g_BattleEnemyBattlers[slot].turn.action_flags.value & BATTLER_ACTION_SELECTION_BONUS) {
             u16 total;
             u16 bonus;
 
@@ -46,10 +46,10 @@ MATCH void Battle_RescaleStats(u8 slot) {
         g_BattleEnemyBattlers[slot].stats.defense = func_801DE0AC(g_BattleEnemyBattlers[slot].stats.defense, 100);
     }
 
-    if (g_BattleEnemyBattlers[slot].turn.action_flags.value & COMBATANT_FLAG_HOLY_RESIST_ZERO) {
+    if (g_BattleEnemyBattlers[slot].turn.action_flags.value & BATTLER_ACTION_HOLY_RESIST_ZERO) {
         g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_HOLY] = 0;
     }
-    if (g_BattleEnemyBattlers[slot].turn.action_flags.value & COMBATANT_FLAG_FIRE_RESIST_ZERO) {
+    if (g_BattleEnemyBattlers[slot].turn.action_flags.value & BATTLER_ACTION_FIRE_RESIST_ZERO) {
         g_BattleEnemyBattlers[slot].stats.resistances[RES_INDEX_FIRE] = 0;
     }
 }

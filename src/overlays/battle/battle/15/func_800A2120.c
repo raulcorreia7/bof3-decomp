@@ -9,9 +9,9 @@ MATCH void func_800A2120(void) {
     Battle_MarkDamageApplied();
     battler = LOBU(g_Battle.active_battler);
     if (BATTLER_IS_PLAYER(battler)) {
-        g_Game.members[battler].u.turn.action_flags.value |= COMBATANT_FLAG_SELECTION_BONUS;
+        g_Game.members[battler].u.turn.action_flags.value |= BATTLER_ACTION_SELECTION_BONUS;
     } else {
-        ENEMY_COMBATANT(battler).turn.action_flags.value |= COMBATANT_FLAG_SELECTION_BONUS;
+        ENEMY_COMBATANT(battler).turn.action_flags.value |= BATTLER_ACTION_SELECTION_BONUS;
     }
     Battle_RescaleStats(g_Battle.target);
 }

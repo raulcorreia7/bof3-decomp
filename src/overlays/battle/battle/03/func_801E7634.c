@@ -18,7 +18,7 @@ MATCH void func_801E7634(void) {
         GFX_LoadPalette((g_Task->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0);
         func_801DDAB4(g_Game.members[g_Task->slot].chr.status);
         GFX_UploadPaletteRows();
-        g_Game.current->u.turn.action_flags.value &= ~COMBATANT_FLAG_DRAGON_FORM_QUEUED;
+        g_Game.current->u.turn.action_flags.value &= ~BATTLER_ACTION_DRAGON_FORM_QUEUED;
         func_801E0B64();
         g_Task = saved;
         saved->header.mode++;

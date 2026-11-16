@@ -262,7 +262,7 @@ typedef struct BattleTurn {
     u8                choice; /* the menu choice stored with the command */
     u8                unk_0B;
     BattlerFlags      damage_flags; /* BattlerDamageFlags */
-    BattlerFlags      action_flags; /* BattleBattlerActionFlags */
+    BattlerFlags      action_flags; /* BattlerActionFlags */
 } BattleTurn;
 
 ASSERT_SIZE(BattleTurn, 0x14);
@@ -665,27 +665,27 @@ typedef enum BattlerDamageFlags {
  * resistance; bit 14 charges the action; bit 15 marks a preemptive turn; bit 16
  * marks the berserk Kaiser form; bit 17 lets the player steer a Kaiser form,
  * otherwise the command cursor stays locked. */
-typedef enum BattleBattlerActionFlags {
-    COMBATANT_FLAG_DRAGON_FORM_QUEUED     = 1 << 0,
-    COMBATANT_FLAG_DRAGON_FORM            = 1 << 1,
-    COMBATANT_FLAG_ABILITY_ALT_POSE       = 1 << 2,
-    COMBATANT_FLAG_MODE_HANDLER_ACTION    = 1 << 3,
-    COMBATANT_FLAG_SUPPRESSION_EXEMPT     = 1 << 4,
-    COMBATANT_FLAG_ACTION_UNK_5           = 1 << 5,
-    COMBATANT_FLAG_POWER_BOOST            = 1 << 6,
-    COMBATANT_FLAG_MEDITATION             = 1 << 7,
-    COMBATANT_FLAG_ALWAYS_HITS            = 1 << 8,
-    COMBATANT_FLAG_DAMAGE_HALVED          = 1 << 9,
-    COMBATANT_FLAG_SELECT_EXCLUDED        = 1 << 10,
-    COMBATANT_FLAG_HOLY_RESIST_ZERO       = 1 << 11,
-    COMBATANT_FLAG_SELECTION_BONUS        = 1 << 12,
-    COMBATANT_FLAG_FIRE_RESIST_ZERO       = 1 << 13,
-    COMBATANT_FLAG_CHARGING               = 1 << 14,
-    COMBATANT_FLAG_PREEMPTIVE_TURN        = 1 << 15,
-    COMBATANT_FLAG_DRAGON_FORM_BERSERK    = 1 << 16,
-    COMBATANT_FLAG_DRAGON_FORM_CONTROLLED = 1 << 17,
-    COMBATANT_FLAG_SELECTED               = 1 << 18,
-} BattleBattlerActionFlags;
+typedef enum BattlerActionFlags {
+    BATTLER_ACTION_DRAGON_FORM_QUEUED     = 1 << 0,
+    BATTLER_ACTION_DRAGON_FORM            = 1 << 1,
+    BATTLER_ACTION_ABILITY_ALT_POSE       = 1 << 2,
+    BATTLER_ACTION_OWN_MODE               = 1 << 3,
+    BATTLER_ACTION_SUPPRESSION_EXEMPT     = 1 << 4,
+    BATTLER_ACTION_UNK_5                  = 1 << 5,
+    BATTLER_ACTION_POWER_BOOST            = 1 << 6,
+    BATTLER_ACTION_MEDITATION             = 1 << 7,
+    BATTLER_ACTION_ALWAYS_HITS            = 1 << 8,
+    BATTLER_ACTION_DAMAGE_HALVED          = 1 << 9,
+    BATTLER_ACTION_SELECT_EXCLUDED        = 1 << 10,
+    BATTLER_ACTION_HOLY_RESIST_ZERO       = 1 << 11,
+    BATTLER_ACTION_SELECTION_BONUS        = 1 << 12,
+    BATTLER_ACTION_FIRE_RESIST_ZERO       = 1 << 13,
+    BATTLER_ACTION_CHARGING               = 1 << 14,
+    BATTLER_ACTION_PREEMPTIVE_TURN        = 1 << 15,
+    BATTLER_ACTION_DRAGON_FORM_BERSERK    = 1 << 16,
+    BATTLER_ACTION_DRAGON_FORM_CONTROLLED = 1 << 17,
+    BATTLER_ACTION_SELECTED               = 1 << 18,
+} BattlerActionFlags;
 
 /* BattleTurn.target_flags: what a hit did to its target. The HP bits (0, 2, 4) and the AP bits (1, 3, 5)
  * mirror each other: a hit starts with HIT_HP and HIT_HP_LANDED set, the miss rolls clear the LANDED bit, and a heal that
