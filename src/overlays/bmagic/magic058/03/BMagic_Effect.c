@@ -220,13 +220,13 @@ MATCH void func_801EF74C(void) {
     s32      i;
     s32      tpage;
 
-    D_1F800000.view.effect.params[0] = g_Task->unk_0C + 0x80;
-    D_1F800000.view.effect.params[1] = g_Task->unk_0C;
-    D_1F800014[1].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[1].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[3].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[1]);
-    D_1F800014[3].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[1]);
-    tpage                            = getTPage(0, 1, 320, 256);
+    D_1F800000.cells.halves[0] = g_Task->unk_0C + 0x80;
+    D_1F800000.cells.halves[1] = g_Task->unk_0C;
+    D_1F800014[1].vx           = FIXED_MUL(rsin(0), D_1F800000.cells.halves[0]);
+    D_1F800014[1].vy           = FIXED_MUL(rcos(0), D_1F800000.cells.halves[0]);
+    D_1F800014[3].vx           = FIXED_MUL(rsin(0), D_1F800000.cells.halves[1]);
+    D_1F800014[3].vy           = FIXED_MUL(rcos(0), D_1F800000.cells.halves[1]);
+    tpage                      = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
 
@@ -235,9 +235,9 @@ MATCH void func_801EF74C(void) {
         D_1F800014[0].vx = D_1F800014[1].vx;
         D_1F800014[0].vy = D_1F800014[1].vy;
         D_1F800014[0].vz = 0;
-        setVector(&D_1F800014[1], FIXED_MUL(rsin(i << 6), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(i << 6), D_1F800000.view.effect.params[0]), 0);
+        setVector(&D_1F800014[1], FIXED_MUL(rsin(i << 6), D_1F800000.cells.halves[0]), FIXED_MUL(rcos(i << 6), D_1F800000.cells.halves[0]), 0);
         setVector(&D_1F800014[2], D_1F800014[3].vx, D_1F800014[3].vy, 0);
-        setVector(&D_1F800014[3], FIXED_MUL(rsin(i << 6), D_1F800000.view.effect.params[1]), FIXED_MUL(rcos(i << 6), D_1F800000.view.effect.params[1]), 0);
+        setVector(&D_1F800014[3], FIXED_MUL(rsin(i << 6), D_1F800000.cells.halves[1]), FIXED_MUL(rcos(i << 6), D_1F800000.cells.halves[1]), 0);
         setRGB0(prim, 0x60, 0x60, 0x60);
         setRGB1(prim, 0x60, 0x60, 0x60);
         setRGB2(prim, 1, 1, 1);
@@ -258,14 +258,14 @@ MATCH void func_801EFA78(void) {
     s32      i;
     s32      tpage;
 
-    D_1F800000.view.effect.params[2] = g_Task->timer * 6;
-    D_1F800000.view.effect.params[0] = g_Task->unk_0C + 0x40;
-    D_1F800000.view.effect.params[1] = g_Task->unk_0C;
-    D_1F800014[1].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[1].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[0]);
-    D_1F800014[3].vx                 = FIXED_MUL(rsin(0), D_1F800000.view.effect.params[1]);
-    D_1F800014[3].vy                 = FIXED_MUL(rcos(0), D_1F800000.view.effect.params[1]);
-    tpage                            = getTPage(0, 1, 320, 256);
+    D_1F800000.cells.halves[2] = g_Task->timer * 6;
+    D_1F800000.cells.halves[0] = g_Task->unk_0C + 0x40;
+    D_1F800000.cells.halves[1] = g_Task->unk_0C;
+    D_1F800014[1].vx           = FIXED_MUL(rsin(0), D_1F800000.cells.halves[0]);
+    D_1F800014[1].vy           = FIXED_MUL(rcos(0), D_1F800000.cells.halves[0]);
+    D_1F800014[3].vx           = FIXED_MUL(rsin(0), D_1F800000.cells.halves[1]);
+    D_1F800014[3].vy           = FIXED_MUL(rcos(0), D_1F800000.cells.halves[1]);
+    tpage                      = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
 
@@ -274,11 +274,11 @@ MATCH void func_801EFA78(void) {
         D_1F800014[0].vx = D_1F800014[1].vx;
         D_1F800014[0].vy = D_1F800014[1].vy;
         D_1F800014[0].vz = 0;
-        setVector(&D_1F800014[1], FIXED_MUL(rsin(i << 8), D_1F800000.view.effect.params[0]), FIXED_MUL(rcos(i << 8), D_1F800000.view.effect.params[0]), 0);
+        setVector(&D_1F800014[1], FIXED_MUL(rsin(i << 8), D_1F800000.cells.halves[0]), FIXED_MUL(rcos(i << 8), D_1F800000.cells.halves[0]), 0);
         setVector(&D_1F800014[2], D_1F800014[3].vx, D_1F800014[3].vy, 0);
-        setVector(&D_1F800014[3], FIXED_MUL(rsin(i << 8), D_1F800000.view.effect.params[1]), FIXED_MUL(rcos(i << 8), D_1F800000.view.effect.params[1]), 0);
-        setRGB0(prim, D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2]);
-        setRGB1(prim, D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2], D_1F800000.view.effect.params[2]);
+        setVector(&D_1F800014[3], FIXED_MUL(rsin(i << 8), D_1F800000.cells.halves[1]), FIXED_MUL(rcos(i << 8), D_1F800000.cells.halves[1]), 0);
+        setRGB0(prim, D_1F800000.cells.halves[2], D_1F800000.cells.halves[2], D_1F800000.cells.halves[2]);
+        setRGB1(prim, D_1F800000.cells.halves[2], D_1F800000.cells.halves[2], D_1F800000.cells.halves[2]);
         setRGB2(prim, 1, 1, 1);
         setRGB3(prim, 1, 1, 1);
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
