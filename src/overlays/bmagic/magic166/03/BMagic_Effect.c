@@ -32,12 +32,7 @@ MATCH void func_801EEC04(void) {
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF34(void) {
-    SYS_DISPATCH_BYTE(D_801EF71C, g_Task->header.step);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        func_801EF284();
-        func_801EF380();
-        PopMatrix();
-    }
+    BMAGIC_DISPATCH_AND_DRAW_IN_OWN_MATRIX(D_801EF71C, func_801EF284, func_801EF380);
 }
 
 /* At the ticker's zero, places the effect on the battler offset by the angle byte 0x0B and starts its fall from a random tint row. */

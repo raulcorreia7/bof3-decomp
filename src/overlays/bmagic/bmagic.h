@@ -78,6 +78,20 @@ ASSERT_SIZE(BattleEffectTargetColumn, BATTLE_EFFECT_STRIDE);
     SYS_DISPATCH_BYTE(table, g_Task->header.step); \
     BMAGIC_DRAW_IF_RUNNING(draw)
 
+/* Draw while the effect task is in use and past its setup step, in a matrix the
+ * effect builds itself: set_matrix pushes it and PopMatrix restores. */
+#define BMAGIC_DRAW_IF_RUNNING_IN_OWN_MATRIX(set_matrix, draw)   \
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) { \
+        set_matrix();                                            \
+        draw();                                                  \
+        PopMatrix();                                             \
+    }
+
+/* Run the step handler the table gives, then draw the running effect in its own matrix. */
+#define BMAGIC_DISPATCH_AND_DRAW_IN_OWN_MATRIX(table, set_matrix, draw) \
+    SYS_DISPATCH_BYTE(table, g_Task->header.step);                      \
+    BMAGIC_DRAW_IF_RUNNING_IN_OWN_MATRIX(set_matrix, draw)
+
 /* The battler the target selector names: a party row below
  * BATTLE_PARTY_CHARACTERS_COUNT, else an enemy row. A statement macro: the
  * member declares u8 selector and PartyMember* battler. */
