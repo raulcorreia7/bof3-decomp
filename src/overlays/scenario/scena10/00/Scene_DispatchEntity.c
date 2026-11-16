@@ -172,7 +172,35 @@ MATCH void func_801F79E8(u16 x, u16 y) {
 
 INCLUDE_ASM(func_801F7AD4);
 
-INCLUDE_ASM(func_801F7C34);
+MATCH void func_801F7C34(void) {
+    Scena10Rect* rect;
+    POLY_FT4*    poly;
+
+    rect = &D_801FE7CC[6];
+    UI_DrawWindow(rect->x, rect->y, rect->width, rect->height, 0, g_WindowStyle);
+    poly = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(poly);
+    poly->tpage = GetTPage(0, 0, 704, 256);
+    poly->clut  = GetClut(32, 483);
+    setRGB0(poly, 128, 128, 128);
+    poly->x0 = rect->x;
+    poly->y0 = rect->y;
+    poly->x1 = rect->x + (rect->width + 0xFFFF);
+    poly->y1 = rect->y;
+    poly->x2 = rect->x;
+    poly->y2 = rect->y + rect->height;
+    poly->x3 = rect->x + (rect->width + 0xFFFF);
+    poly->y3 = rect->y + rect->height;
+    poly->u0 = 0xC0;
+    poly->v0 = 0x50;
+    poly->u1 = rect->width + 0xBF;
+    poly->v1 = 0x50;
+    poly->u2 = 0xC0;
+    poly->v2 = rect->height + 0x50;
+    poly->u3 = rect->width + 0xBF;
+    poly->v3 = rect->height + 0x50;
+    GFX_AddPrim(1, sizeof(POLY_FT4));
+}
 
 /* Draw the "Choose parts" window with its item list and cursor, then place and step the cursor actor. */
 MATCH void func_801F7DDC(void) {
