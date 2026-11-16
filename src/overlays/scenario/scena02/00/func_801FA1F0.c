@@ -42,7 +42,7 @@ MATCH void func_801FA1F0(void) {
             break;
         case 15:
             if (D_801460FB != 7) {
-                func_801BE1B0(2);
+                Scene_SetupParty(2);
                 g_SceneState.step_05 = 0x10;
             }
             break;

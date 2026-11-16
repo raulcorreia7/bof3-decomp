@@ -37,7 +37,7 @@ MATCH void func_801F3B4C(void) {
         case 10:
             if (g_Game.members[0].u.field.mode_12B.u8_value == 0) {
                 Game_ClearScriptActive();
-                func_801BE1B0(0);
+                Scene_SetupParty(0);
                 g_SceneEventState.mode = SCENE_EVENT_NONE;
                 g_SceneEventState.step = 0;
             }

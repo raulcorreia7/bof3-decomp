@@ -16,7 +16,7 @@ NON_MATCHING void func_801F4470(void) {
         g_SceneEventState.step      = 0;
         g_SceneState.state_04       = 5;
         g_SceneState.step_05        = 0;
-        func_801BE1B0(5);
+        Scene_SetupParty(5);
         g_ScriptVars[0] = 30;
     }
 }

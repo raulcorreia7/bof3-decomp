@@ -15,7 +15,7 @@ MATCH void func_801F9874(void) {
                 g_GameStateIndex     = GAME_REQUEST_MESSAGE;
                 g_SceneState.step_05 = 1;
             } else {
-                func_801BE1B0(0);
+                Scene_SetupParty(0);
                 Message_StartAreaMessage(8);
                 g_GameStateIndex     = GAME_REQUEST_MESSAGE;
                 g_SceneState.step_05 = 2;

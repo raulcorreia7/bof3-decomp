@@ -10,7 +10,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801F9BD0(void) {
     switch (g_SceneState.step_05) {
         case 0:
-            func_801BE1B0(g_PartyFieldOrder[0] == 0 ? 8 : 9);
+            Scene_SetupParty(g_PartyFieldOrder[0] == 0 ? 8 : 9);
             g_SceneState.step_05 = 1;
             break;
         case 1:
@@ -40,7 +40,7 @@ MATCH void func_801F9BD0(void) {
             break;
         case 5:
             if (g_ScriptVars[0] == 0x44) {
-                func_801BE1B0(g_PartyFieldOrder[0] == 0 ? 23 : 24);
+                Scene_SetupParty(g_PartyFieldOrder[0] == 0 ? 23 : 24);
                 g_SceneState.step_05 = 6;
             }
             break;

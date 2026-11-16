@@ -9,7 +9,7 @@ MATCH void func_801F8F34(void) {
     switch (g_SceneState.step_05) {
         case 0:
             Area_StartScrollRoute(0);
-            func_801BE1B0(0);
+            Scene_SetupParty(0);
             g_SceneState.step_05 = 1;
             break;
         case 1:
@@ -61,7 +61,7 @@ MATCH void func_801F8F34(void) {
             g_SceneState.state_04 = 0;
             break;
         case 10:
-            func_801BE1B0(1);
+            Scene_SetupParty(1);
             Area_StartScrollRoute(5);
             g_SceneState.step_05 = 0xB;
             break;

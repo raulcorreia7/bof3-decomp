@@ -11,7 +11,7 @@ MATCH void func_801F9134(void) {
     switch (g_SceneState.step_05) {
         case 0:
             Game_SetScriptActive();
-            func_801BE1B0(3);
+            Scene_SetupParty(3);
             g_SceneState.step_05 = 1;
             break;
         case 1:
@@ -35,7 +35,7 @@ MATCH void func_801F9134(void) {
             }
             break;
         case 5:
-            func_801BE1B0(4);
+            Scene_SetupParty(4);
             g_SceneState.step_05 = 6;
             break;
         case 6:
@@ -58,7 +58,7 @@ MATCH void func_801F9134(void) {
             break;
         case 9:
             if (g_ScriptVars[0] == 0x11) {
-                func_801BE1B0(0x12);
+                Scene_SetupParty(0x12);
                 g_SceneState.step_05 = 10;
             }
             break;

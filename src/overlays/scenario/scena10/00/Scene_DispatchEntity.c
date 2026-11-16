@@ -271,7 +271,7 @@ INCLUDE_ASM(func_801F7FA0);
 
 MATCH void func_801F8550(void) {
     Game_SetScriptActive();
-    func_801BE1B0(0);
+    Scene_SetupParty(0);
     g_AreaScrollTargetX = 0x490000;
     g_AreaScrollTargetY = 0x560000;
     func_80153DE8();

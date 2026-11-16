@@ -122,7 +122,7 @@ MATCH void func_801F9320(void) {
             goto clear_script;
         case 30:
             g_ScriptVars[0] = 0;
-            func_801BE1B0(3);
+            Scene_SetupParty(3);
             g_SceneState.step_05 = 0x1F;
             break;
         case 31:

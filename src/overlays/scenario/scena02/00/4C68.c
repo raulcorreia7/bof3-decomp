@@ -16,7 +16,7 @@ MATCH void func_801FB868(void) {
             counter = &D_80146867;
             if (*counter == 0x4B) {
                 func_801C601C(2);
-                func_801BE1B0(0xF);
+                Scene_SetupParty(0xF);
                 g_SceneState.step_05 = 2;
             }
             (*counter)++;
@@ -36,13 +36,13 @@ MATCH void func_801FB868(void) {
             g_ScriptVars[0] = 0x37;
             switch (g_PartyFieldOrder[0]) {
                 case 0:
-                    func_801BE1B0(0x10);
+                    Scene_SetupParty(0x10);
                     break;
                 case 3:
-                    func_801BE1B0(0x1A);
+                    Scene_SetupParty(0x1A);
                     break;
                 case 4:
-                    func_801BE1B0(0x19);
+                    Scene_SetupParty(0x19);
                     break;
             }
             g_SceneState.step_05 = 6;
@@ -81,7 +81,7 @@ MATCH void func_801FB868(void) {
             func_801FCECC(0x99);
             SND_StopSequence(0, 0);
             g_ScriptVars[0] = 0x41;
-            func_801BE1B0(0x11);
+            Scene_SetupParty(0x11);
             func_801C601C(3);
             g_SceneState.step_05 = 0x15;
             break;
@@ -106,23 +106,23 @@ MATCH void func_801FB868(void) {
         case 25:
             switch (g_Game.members[0].facing) {
                 case 0:
-                    func_801BE1B0(0x16);
+                    Scene_SetupParty(0x16);
                     g_SceneState.step_05 = 0x1A;
                     break;
                 case 1:
-                    func_801BE1B0(0x14);
+                    Scene_SetupParty(0x14);
                     g_SceneState.step_05 = 0x1A;
                     break;
                 case 2:
-                    func_801BE1B0(0x17);
+                    Scene_SetupParty(0x17);
                     g_SceneState.step_05 = 0x1A;
                     break;
                 case 3:
-                    func_801BE1B0(0x13);
+                    Scene_SetupParty(0x13);
                     g_SceneState.step_05 = 0x1A;
                     break;
                 case 7:
-                    func_801BE1B0(0x15);
+                    Scene_SetupParty(0x15);
                     g_SceneState.step_05 = 0x1A;
                     break;
             }

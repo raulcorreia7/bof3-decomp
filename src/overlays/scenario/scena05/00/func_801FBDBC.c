@@ -113,7 +113,7 @@ MATCH void func_801FBDBC(void) {
             if (g_ScriptVars[0] != 0xC) {
                 break;
             }
-            func_801BE1B0(3);
+            Scene_SetupParty(3);
             SND_PlayBGM(0x6A, 0x64, 0x10);
             g_SceneState.step_05 = 12;
             break;

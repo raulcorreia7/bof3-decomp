@@ -68,7 +68,7 @@ MATCH void func_801FDE64(void* entity) {
     actor = entity;
     Game_SetScriptActive();
     SYS_SetFlag(g_SceneFlags, 13);
-    func_801BE1B0(11);
+    Scene_SetupParty(11);
     actor->unk_7E = actor->unk_7E + 1;
 }
 
@@ -78,7 +78,7 @@ MATCH void func_801FDEB4(void* entity) {
     actor = entity;
     Game_SetScriptActive();
     SYS_SetFlag(g_SceneFlags, 14);
-    func_801BE1B0(12);
+    Scene_SetupParty(12);
     actor->unk_7E = actor->unk_7E + 1;
 }
 
@@ -97,7 +97,7 @@ MATCH void func_801FDF4C(void* entity) {
     actor = entity;
     Game_SetScriptActive();
     SYS_SetFlag(g_SceneFlags, 16);
-    func_801BE1B0(14);
+    Scene_SetupParty(14);
     actor->unk_7E = actor->unk_7E + 1;
 }
 
@@ -107,7 +107,7 @@ MATCH void func_801FDF9C(void* entity) {
     actor = entity;
     Game_SetScriptActive();
     SYS_SetFlag(g_SceneFlags, 15);
-    func_801BE1B0(13);
+    Scene_SetupParty(13);
     actor->unk_7E = actor->unk_7E + 1;
 }
 

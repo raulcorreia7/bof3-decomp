@@ -11,7 +11,7 @@ MATCH void func_801F8770(void) {
                 Message_StartAreaMessage(0);
                 g_GameStateIndex = GAME_REQUEST_MESSAGE;
                 Area_StartScrollRoute(0);
-                func_801BE1B0(0);
+                Scene_SetupParty(0);
                 g_SceneState.step_05 = 1;
             }
             break;

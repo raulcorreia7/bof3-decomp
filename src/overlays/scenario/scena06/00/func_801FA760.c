@@ -9,7 +9,7 @@ MATCH void func_801FA760(void) {
         case 0:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 g_ScriptVars[0] = 1;
-                func_801BE1B0(7);
+                Scene_SetupParty(7);
                 g_SceneState.step_05 = 1;
             }
             break;
@@ -35,7 +35,7 @@ MATCH void func_801FA760(void) {
             }
             break;
         case 5:
-            func_801BE1B0(8);
+            Scene_SetupParty(8);
             SYS_SetFlag(g_SceneFlags, 0x24);
             g_SceneState.step_05 = 6;
             break;

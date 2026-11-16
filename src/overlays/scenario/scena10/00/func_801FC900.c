@@ -16,7 +16,7 @@ MATCH void func_801FC900(void) {
 
         case 1:
             if (g_GameStateIndex != 2 && g_InputHeld != 0) {
-                func_801BE1B0(0);
+                Scene_SetupParty(0);
                 D_80146876 = 0x1E;
                 D_80146875 = 2;
                 D_801FE9DC = 1;

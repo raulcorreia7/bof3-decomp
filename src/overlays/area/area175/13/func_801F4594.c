@@ -6,6 +6,6 @@ MATCH void func_801F4594(Actor* actor) {
     actor->unk_77      = 0xD;
     actor->unk_7E      = 0;
     SYS_SetFlag(g_SceneEventFlags, 149);
-    func_801BE1B0(4);
+    Scene_SetupParty(4);
     g_ScriptVars[0] = 0;
 }

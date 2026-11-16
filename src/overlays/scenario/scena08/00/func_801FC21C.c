@@ -9,7 +9,7 @@ MATCH void func_801FC21C(void) {
     switch (g_SceneState.step_05) {
         case 0:
             if (g_SceneState.timer_06-- == 0) {
-                func_801BE1B0(0);
+                Scene_SetupParty(0);
                 g_SceneState.step_05 = 1;
             }
             break;

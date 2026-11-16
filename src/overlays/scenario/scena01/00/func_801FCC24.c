@@ -13,7 +13,7 @@ MATCH void func_801FCC24(void) {
             SND_StopSequence(0, 0);
             SND_PlayBGM(26, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             g_GameFlags |= 0x80;
-            func_801BE1B0(0xB);
+            Scene_SetupParty(0xB);
             g_SceneState.step_05 = 1;
             break;
         case 1:

@@ -3063,6 +3063,7 @@ Party_CountOrder = { addr = 0x801BDB7C, type = "func", source = "Returns the num
 Actor_FindInRange = { addr = 0x801BDE14, type = "func", source = "walks the g_Actors rows and returns the first actor the range test accepts, else -1" }
 Area_GetActorFacingStepX = { addr = 0x801BDF08, type = "func", source = "the body returns g_FacingSteps[work->direction_08].x" }
 Game_GetPartySize = { addr = 0x801BE0C0, type = "func", source = "the body returns g_Game.party_size" }
+Scene_SetupParty = { addr = 0x801BE1B0, type = "func", source = "Sets up the party of area scene entry scene: checks the party against the entry, orders the members, places them (func_801BE574), optionally locks the scroll or starts the scroll route, and sets the script-active and map-loading flags. Returns 1 when the party does not fit the entry, else 0." }
 Party_SwapMembers = { addr = 0x801BE738, type = "func", source = "Swaps two party members: swaps their battler rows with Party_SwapBattlerRows, reloads both g_Game.members rows from g_Characters and restages their palettes." }
 Party_SwapBattlerRows = { addr = 0x801BE920, type = "func", source = "Swaps two g_Game.members rows: id (+0x79), words +0x0C to +0x14 and bytes +0x118 and +0x119, also +0x08, +0x29, +0x34, +0x38, +0x3C and +0x12C when skip_state is 0, then writes 0xFF to +0x4B of both." }
 Battle_LoadPartyScripts = { addr = 0x801BEE5C, type = "func", source = "Loads the script record of each party member (the knocked-out record for a KO member, the route record for the scroll direction otherwise) into the battle script window at 0x800F0800. Called by Battle_LoadPartySprites." }
@@ -3159,7 +3160,7 @@ g_SceneScenes = { addr = 0x801C8454, size = 0x50, source = "Handler tables of th
 g_SceneStates = { addr = 0x801C84A4, size = 0x8, source = "Scene update callbacks, indexed by the scene state byte D_801448EA by Game_UpdateScene." }
 s_EventFlagsReset = { addr = 0x801C84AC, size = 0x10, source = "Scene_ResetEventState copies these 16 mode bytes to g_SceneEventFlags" }
 g_SceneEvents = { addr = 0x801C84BC, size = 0x100, source = "Scene event callbacks, indexed by the scene event byte D_801448EB by Scene_UpdateEvent." }
-s_SceneStateStepArgs = { addr = 0x801C85BC, size = 0x8, source = "Argument of each scene state step; func_801A7E54 passes the entry for D_801448ED to func_801BE1B0." }
+s_SceneStateStepArgs = { addr = 0x801C85BC, size = 0x8, source = "Argument of each scene state step; func_801A7E54 passes the entry for D_801448ED to Scene_SetupParty." }
 D_801C85C4 = { addr = 0x801C85C4, size = 0x2C, source = "The 11 area handlers (Fishing_ShowLocation four times) that func_801A839C runs by the area handler index." }
 g_SceneObjects = { addr = 0x801C85F0, size = 0x108, source = "Scene object callbacks, indexed by the callback_index of the actor by Scene_DispatchObject." }
 D_801C86F8 = { addr = 0x801C86F8, size = 0xE0, source = "The per-area hook table: each row holds an area id, a position and the handler Game_CallArea calls when the party enters." }

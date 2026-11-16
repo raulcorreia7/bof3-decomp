@@ -8,7 +8,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801F97F8(void) {
     switch (g_SceneState.step_05) {
         case 0:
-            func_801BE1B0(1);
+            Scene_SetupParty(1);
             g_ScriptVars[0]      = 0xA;
             g_SceneState.step_05 = 1;
             break;

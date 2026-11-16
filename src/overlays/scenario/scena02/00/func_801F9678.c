@@ -11,13 +11,13 @@ MATCH void func_801F9678(void) {
     switch (g_SceneState.step_05) {
         case 0:
             g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
-            func_801BE1B0(26);
+            Scene_SetupParty(26);
             Area_StartScrollRoute(1);
             g_SceneState.step_05 = 1;
             break;
         case 1:
             if (g_ScriptVars[0] == 0x15) {
-                func_801BE1B0(5);
+                Scene_SetupParty(5);
                 g_SceneState.step_05 = 2;
             }
             break;
@@ -30,7 +30,7 @@ MATCH void func_801F9678(void) {
             break;
         case 3:
             if (g_ScriptVars[0] == 0x20) {
-                func_801BE1B0(21);
+                Scene_SetupParty(21);
                 g_SceneState.step_05 = 4;
             }
             break;

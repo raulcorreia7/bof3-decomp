@@ -177,10 +177,10 @@ MATCH void func_801FB66C(void) {
             g_SceneState.step_05 = 26;
             switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {
                 case 1:
-                    func_801BE1B0(8);
+                    Scene_SetupParty(8);
                     break;
                 case 2:
-                    func_801BE1B0(7);
+                    Scene_SetupParty(7);
                     break;
             }
             break;

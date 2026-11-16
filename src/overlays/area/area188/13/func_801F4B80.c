@@ -38,7 +38,7 @@ MATCH void func_801F4B80(void) {
             break;
         case 11:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                func_801BE1B0(6);
+                Scene_SetupParty(6);
                 g_SceneEventState.step = 0xC;
             }
             break;

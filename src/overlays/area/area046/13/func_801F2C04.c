@@ -21,7 +21,7 @@ MATCH void func_801F2C04(void) {
             break;
 
         case 10:
-            func_801BE1B0(1);
+            Scene_SetupParty(1);
             *step = 11;
             break;
 

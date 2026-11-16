@@ -12,13 +12,13 @@ MATCH void func_801F778C(void) {
             g_SceneState.step_05 = 1;
             switch (D_80145E98) {
                 case 6:
-                    func_801BE1B0(3);
+                    Scene_SetupParty(3);
                     break;
                 case 7:
-                    func_801BE1B0(1);
+                    Scene_SetupParty(1);
                     break;
                 case 0:
-                    func_801BE1B0(4);
+                    Scene_SetupParty(4);
                     break;
             }
             break;

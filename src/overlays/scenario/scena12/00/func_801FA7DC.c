@@ -39,7 +39,7 @@ MATCH void func_801FA7DC(void) {
         case 10:
             Game_SetScriptActive();
             g_GameFlags |= 8;
-            func_801BE1B0(0x10);
+            Scene_SetupParty(0x10);
             g_SceneState.step_05 = 0xB;
             return;
         case 11: {

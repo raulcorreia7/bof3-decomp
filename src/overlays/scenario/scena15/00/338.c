@@ -954,7 +954,7 @@ MATCH void func_801FA6BC(u8 point) {
     g_AreaScrollTargetY = LOH(D_801FE608[row + 2]) << 8;
     func_80153DE8();
     g_Game.unk_3CE[2] = 0;
-    func_801BE1B0(0);
+    Scene_SetupParty(0);
     x = LOH(D_801FE608[row + 4]) << 8;
     y = LOH(D_801FE608[row + 6]) << 8;
     g_Game.walk_flags &= ~AREA_WALK_ACCEPT_LOCK;

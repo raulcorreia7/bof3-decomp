@@ -14,7 +14,7 @@ MATCH void func_801FAA68(void) {
         case 1:
             if (g_ScriptVars[0] == 2) {
                 SYS_SetFlag(g_SceneFlags, 0x1A);
-                func_801BE1B0(2);
+                Scene_SetupParty(2);
                 g_SceneState.step_05 = 2;
             }
             break;

@@ -7,7 +7,7 @@ MATCH void func_801F37F4(void) {
     if (sel == 0) {
         MESSAGE_REQUEST_CLEAR();
         g_ScriptVars[3] = 0x64;
-        func_801BE1B0(3);
+        Scene_SetupParty(3);
     } else {
         g_MessageRequest = 0xBD;
         g_ScriptVars[3]  = 0;

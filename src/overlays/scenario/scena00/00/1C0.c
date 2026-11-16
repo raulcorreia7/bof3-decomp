@@ -1005,7 +1005,7 @@ MATCH void func_801F92DC(void) {
 
     selection = g_GameAreaId;
     if (selection == 1) {
-        func_801BE1B0(0U);
+        Scene_SetupParty(0U);
         if (g_ScriptVars[2] == 0) {
             slot        = Actor_FindFreeSpawned();
             *D_1F800000 = slot;
@@ -1073,7 +1073,7 @@ MATCH void func_801F92DC(void) {
             SYS_SetFlag(g_SceneFlags, 1U);
             next_state = 3;
         } else {
-            func_801BE1B0(0U);
+            Scene_SetupParty(0U);
             next_state = 9;
         }
         g_SceneState.state_04 = next_state;
@@ -1112,7 +1112,7 @@ MATCH void func_801F9644(void) {
         }
         if (SYS_TestFlag(g_SceneFlags, 10) == 0) {
             SYS_SetFlag(g_SceneFlags, 10U);
-            func_801BE1B0(0U);
+            Scene_SetupParty(0U);
             g_AreaScrollTargetX    = TO_COORD(38);
             g_AreaScrollTargetY[0] = TO_COORD(27) + COORD_HALF;
         }
@@ -1140,7 +1140,7 @@ MATCH void func_801F9868(void) {
                     Area_AdvanceScroll(1152);
                     g_AreaCameraOffsetZ  = 0x480;
                     g_AreaCameraAngle.vz = 848;
-                    func_801BE1B0(0U);
+                    Scene_SetupParty(0U);
                     Area_StartScrollRoute(0);
                     free_slot   = Actor_FindFreeSpawned();
                     slot        = free_slot & BYTE_MASK;
@@ -1169,7 +1169,7 @@ MATCH void func_801F9868(void) {
                     if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
                         g_AreaDrawFlags      = AREA_DRAW_ALL_FLAGS;
                         g_ScriptVarsReq.word = 0;
-                        func_801BE1B0(1U);
+                        Scene_SetupParty(1U);
                         return;
                     }
                     Game_ClearScriptActive();
@@ -1748,7 +1748,7 @@ MATCH void func_801FA7D8(void) {
             scene = &g_ScriptVarsReq.byte;
             (*scene)++;
             Game_ClearScriptActive();
-            func_801BE1B0(6u);
+            Scene_SetupParty(6u);
             g_SceneState.state_04 = 0u;
             g_SceneState.step_05  = 0u;
             break;
@@ -1767,7 +1767,7 @@ MATCH void func_801FAF6C(void) {
 
         case 10:
             Game_SetScriptActive();
-            func_801BE1B0(3);
+            Scene_SetupParty(3);
             SYS_SetFlag(g_SceneFlags, 7);
             g_SceneState.step_05 = 0xB;
             break;
@@ -1790,7 +1790,7 @@ MATCH void func_801FAF6C(void) {
         case 20:
             if (D_80145E91[0] != 2) {
                 Game_SetScriptActive();
-                func_801BE1B0(4);
+                Scene_SetupParty(4);
                 SYS_SetFlag(g_SceneFlags, 8);
                 g_SceneState.step_05 = 0x15;
             }
@@ -1807,7 +1807,7 @@ MATCH void func_801FAF6C(void) {
         case 30:
             if (D_80145E91[0] != 2) {
                 Game_SetScriptActive();
-                func_801BE1B0(5);
+                Scene_SetupParty(5);
                 SYS_SetFlag(g_SceneFlags, 9);
                 g_SceneState.step_05 = 0x1F;
             }
@@ -1844,7 +1844,7 @@ MATCH void func_801FB204(void) {
     switch (g_SceneState.step_05) {
         case 0:
             g_ScriptVarsReq.byte = 0xA;
-            func_801BE1B0(1);
+            Scene_SetupParty(1);
             Area_StartScrollRoute(1);
             g_SceneState.step_05 = 1;
             break;
@@ -1950,7 +1950,7 @@ MATCH void func_801FB620(void) {
     state = &g_SceneState.step_05;
     if (*state == 0) {
         SYS_SetFlag(g_SceneFlags, 6);
-        func_801BE1B0(2);
+        Scene_SetupParty(2);
         g_SceneState.state_04 = 0;
         *state                = 0;
     }

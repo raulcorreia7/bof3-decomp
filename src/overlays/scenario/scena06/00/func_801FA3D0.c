@@ -38,7 +38,7 @@ MATCH void func_801FA3D0(void) {
             g_SceneState.step_05 = 6;
             break;
         case 7:
-            func_801BE1B0(14);
+            Scene_SetupParty(14);
             g_SceneState.step_05 = 10;
             SYS_SetFlag(g_SceneFlags, 31);
             Game_RequestAreaChange(AREA_ID_BEYD_TRAINING, TO_COORD(24), TO_COORD(60), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_UP_RIGHT);
@@ -55,7 +55,7 @@ MATCH void func_801FA3D0(void) {
             Game_RequestAreaChange(AREA_ID_RHAPALA_WORLD_MAP, TO_COORD(49), TO_COORD(45), FACING_DOWN_RIGHT);
             break;
         case 15:
-            func_801BE1B0(11);
+            Scene_SetupParty(11);
             g_SceneState.step_05 = 16;
             break;
         case 16:
@@ -86,7 +86,7 @@ MATCH void func_801FA3D0(void) {
             }
             break;
         case 20:
-            func_801BE1B0(13);
+            Scene_SetupParty(13);
             g_SceneState.step_05 = 21;
             break;
         case 21:

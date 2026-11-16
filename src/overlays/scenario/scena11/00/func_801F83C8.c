@@ -17,7 +17,7 @@ MATCH void func_801F83C8(void) {
         case 0:
             if (g_GameStateIndex != 2) {
                 g_ScriptVars[0] = 1;
-                func_801BE1B0(1);
+                Scene_SetupParty(1);
                 g_SceneState.step_05 = 1;
             }
             break;
@@ -49,7 +49,7 @@ MATCH void func_801F83C8(void) {
             break;
         case 4:
             if (g_ScriptVars[0] == 3) {
-                func_801BE1B0(3);
+                Scene_SetupParty(3);
                 g_SceneState.step_05 = 2;
             } else if (g_ScriptVars[0] == 0x14) {
                 g_SceneState.step_05 = 5;
@@ -136,7 +136,7 @@ MATCH void func_801F83C8(void) {
             TASK_SET(&g_Game.members[0]);
             D_80145FA8 &= 0xBF;
             SND_FadeOutSequence(0, 1, 4, 0x1E);
-            func_801BE1B0(5);
+            Scene_SetupParty(5);
             g_SceneState.step_05 = 0x10;
             break;
         case 0x10:
@@ -209,7 +209,7 @@ MATCH void func_801F83C8(void) {
                 g_SceneState.state_04 = 0;
             } else {
                 *progress = 0;
-                func_801BE1B0(9);
+                Scene_SetupParty(9);
                 g_SceneState.step_05 = 0x29;
             }
             break;
@@ -229,7 +229,7 @@ MATCH void func_801F83C8(void) {
         }
         case 0x2A:
             if (g_ScriptVars[0] == 3) {
-                func_801BE1B0(3);
+                Scene_SetupParty(3);
                 g_SceneState.step_05 = 2;
             } else if (g_ScriptVars[0] == 0x14) {
                 g_SceneState.step_05 = 5;

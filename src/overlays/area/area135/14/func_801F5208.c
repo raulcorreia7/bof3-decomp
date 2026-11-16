@@ -13,6 +13,6 @@ MATCH s32 func_801F5208(s32 x, s32 y) {
     if ((u8)func_801F603C(x, y) == 0) {
         return 0;
     }
-    func_801BE1B0(0);
+    Scene_SetupParty(0);
     return 1;
 }

@@ -14,7 +14,7 @@ MATCH void func_801F9354(void) {
         case 0:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 *g_ScriptVars = 1;
-                func_801BE1B0(0xC);
+                Scene_SetupParty(0xC);
                 *step = 1;
             }
             break;
@@ -58,7 +58,7 @@ MATCH void func_801FA08C(void) {
     switch (*step) {
         case 0:
             if (D_8014623B != 2) {
-                func_801BE1B0(0);
+                Scene_SetupParty(0);
                 *step = 1;
             }
             break;
@@ -99,7 +99,7 @@ MATCH void func_801FA8B8(void) {
                 break;
             }
             D_80146258 |= 8;
-            func_801BE1B0(5);
+            Scene_SetupParty(5);
             func_801C601C(1);
             D_80146875 = 1;
             break;
@@ -107,7 +107,7 @@ MATCH void func_801FA8B8(void) {
             if (*g_ScriptVars != 2) {
                 break;
             }
-            func_801BE1B0(6);
+            Scene_SetupParty(6);
             D_80146875 = 2;
             break;
         case 2:
@@ -135,7 +135,7 @@ MATCH void func_801FA8B8(void) {
                 break;
             }
             *g_ScriptVars = 0;
-            func_801BE1B0(9);
+            Scene_SetupParty(9);
             UI_SetMode(4);
             D_80146875 = 5;
             break;
@@ -183,7 +183,7 @@ MATCH void func_801FA8B8(void) {
             if (*g_ScriptVars != 0x0A) {
                 goto clear_script_state;
             }
-            func_801BE1B0(8);
+            Scene_SetupParty(8);
             D_80146875 = 0x16;
             break;
         case 22:
@@ -257,7 +257,7 @@ MATCH void func_801FBC78(void) {
 
     switch (*step) {
         case 0:
-            func_801BE1B0(2);
+            Scene_SetupParty(2);
             *step = 1;
             break;
         case 1:
@@ -276,7 +276,7 @@ MATCH void func_801FBD0C(void) {
 
     timer = &D_80146875;
     if (*timer == 0 && g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-        func_801BE1B0(1);
+        Scene_SetupParty(1);
         D_80146874 = 0;
         *timer     = 0;
     }

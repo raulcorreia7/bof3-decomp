@@ -57,7 +57,7 @@ MATCH void func_801F9DF4(void) {
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
-            func_801BE1B0(6);
+            Scene_SetupParty(6);
             Area_StartScrollRoute(2);
             g_SceneState.step_05 = 11;
             break;

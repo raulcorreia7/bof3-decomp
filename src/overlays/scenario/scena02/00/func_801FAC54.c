@@ -57,7 +57,7 @@ MATCH void func_801FAC54(void) {
                 break;
             }
             D_80146258 |= 8;
-            func_801BE1B0(1);
+            Scene_SetupParty(1);
             g_SceneState.step_05 = 0xF;
             break;
         case 15:

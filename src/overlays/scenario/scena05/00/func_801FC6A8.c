@@ -19,7 +19,7 @@ MATCH void func_801FC6A8(void) {
             next            = 1;
             g_ScriptVars[0] = next;
             SYS_SetFlag(g_SceneFlags, 0x3A);
-            func_801BE1B0(3);
+            Scene_SetupParty(3);
             Area_StartScrollRoute(0);
             *state = next;
             break;

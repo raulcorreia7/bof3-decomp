@@ -11,7 +11,7 @@ MATCH void func_801F7C6C(void) {
         case 0:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 g_ScriptVars[0] = 1;
-                func_801BE1B0(3);
+                Scene_SetupParty(3);
                 g_SceneState.step_05 = 1;
             }
             break;
@@ -42,15 +42,15 @@ MATCH void func_801F7C6C(void) {
                 g_ScriptVars[0] = 0xF;
                 switch (g_Game.members[0].facing) {
                     case FACING_UP_RIGHT:
-                        func_801BE1B0(4);
+                        Scene_SetupParty(4);
                         g_SceneState.step_05 = 11;
                         break;
                     case FACING_RIGHT:
-                        func_801BE1B0(5);
+                        Scene_SetupParty(5);
                         g_SceneState.step_05 = 11;
                         break;
                     case FACING_DOWN_RIGHT:
-                        func_801BE1B0(6);
+                        Scene_SetupParty(6);
                         g_SceneState.step_05 = 11;
                         break;
                 }
@@ -68,7 +68,7 @@ MATCH void func_801F7C6C(void) {
         case 15:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 g_ScriptVars[0] = 0x19;
-                func_801BE1B0(8);
+                Scene_SetupParty(8);
                 g_SceneState.step_05 = 16;
             }
             break;

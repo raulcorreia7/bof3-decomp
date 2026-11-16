@@ -545,7 +545,7 @@ MATCH void func_801F817C(void) {
                 D_80146874 = 1;
                 D_80146875 = 7;
                 Scene_RunScenario(1);
-                func_801BE1B0(1);
+                Scene_SetupParty(1);
             }
         }
         if (SYS_TestFlag(g_SceneFlags, 4) != 0) {
@@ -569,7 +569,7 @@ MATCH void func_801F817C(void) {
             SYS_SetFlag(g_SceneFlags, 1);
             g_ScriptVarsWord = 0;
             Scene_RunScenario(0);
-            func_801BE1B0(0);
+            Scene_SetupParty(0);
         }
         if (SYS_TestFlag(g_SceneFlags, 3) != 0) {
             if (SYS_TestFlag(g_SceneFlags, 4) == 0) {
@@ -584,7 +584,7 @@ MATCH void func_801F817C(void) {
             if (SYS_TestFlag(g_SceneFlags, 6) == 0) {
                 SYS_SetFlag(g_SceneFlags, 6);
                 D_80143F1D = 5;
-                func_801BE1B0(3);
+                Scene_SetupParty(3);
             }
             if (SYS_TestFlag(g_SceneFlags, 7) == 0) {
                 Area_SetCellCode(0x83, 6, 0x51);

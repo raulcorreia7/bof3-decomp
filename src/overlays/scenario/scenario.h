@@ -29,7 +29,7 @@ s8 func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
 
 /* Hand a scene over to the actor routine of `scene`: enter mode 4 with the given state and clear the actor's word at +0x7E. */
 #define SCENE_START_ACTOR(actor, scene, step) \
-    func_801BE1B0(scene);                     \
+    Scene_SetupParty(scene);                  \
     (actor)->header.mode = 4;                 \
     (actor)->unk_78      = 2;                 \
     (actor)->unk_77      = (step);            \

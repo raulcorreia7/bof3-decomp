@@ -4,8 +4,9 @@
 #define SP_SLOTS  ((u8*)&D_1F800004)
 #define SP_TAKEN  ((u8*)&D_1F800008)
 
+/* func_801BE1B0 */
 #ifdef NON_MATCHING
-NON_MATCHING s32 func_801BE1B0(u32 index) {
+NON_MATCHING s32 Scene_SetupParty(u32 scene) {
     u8** lists;
     u8*  ids;
     u8   command;
@@ -17,7 +18,7 @@ NON_MATCHING s32 func_801BE1B0(u32 index) {
     s32  j;
 
     lists   = FIELD(u8*, GAME_TILE_RUN(g_GameAreaId), 0x14);
-    ids     = lists[(u8)index];
+    ids     = lists[(u8)scene];
     cmds    = *ids++;
     command = cmds;
     kind    = command & 0xC0;
@@ -83,5 +84,5 @@ NON_MATCHING s32 func_801BE1B0(u32 index) {
     return 0;
 }
 #else
-INCLUDE_ASM(func_801BE1B0);
+INCLUDE_ASM(Scene_SetupParty);
 #endif

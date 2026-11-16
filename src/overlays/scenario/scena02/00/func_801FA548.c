@@ -23,7 +23,7 @@ MATCH void func_801FA548(void) {
             break;
         case 2:
             if (g_ScriptVars[0] == 1) {
-                func_801BE1B0(5);
+                Scene_SetupParty(5);
                 g_SceneState.step_05 = 3;
             }
             break;
@@ -88,7 +88,7 @@ MATCH void func_801FA548(void) {
             if (g_ScriptVars[0] == 0x23) {
                 SND_StopSequence(0, 0);
                 SND_StopSequence(0, 1);
-                func_801BE1B0(6);
+                Scene_SetupParty(6);
                 g_SceneState.step_05 = 0x14;
             }
             break;
