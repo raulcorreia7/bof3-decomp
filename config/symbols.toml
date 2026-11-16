@@ -837,6 +837,7 @@ Effect_CountUpAndStep = { addr = 0x801EF588, type = "func", source = "Counts the
 Effect_StepWhileTickUnderThree = { addr = 0x801EF5D8, type = "func", source = "Advances header.step (byte 0x02) while the ticker (byte 0x0B) of g_BattleEffectBattler is under 3 in magic062 (Celerity)." }
 Effect_TickOnTimerZero = { addr = 0x801EF61C, type = "func", source = "Counts the effect timer (byte 0x09) down by 1 per frame; at zero lowers the ticker (byte 0x0B) of g_BattleEffectBattler and clears the effect in magic062 (Celerity)." }
 Effect_CountDownAndStep = { addr = 0x801EFC00, type = "func", source = "Counts the effect counter (byte 0x0A) down and advances header.step (byte 0x02) at zero in magic062 (Celerity)." }
+Effect_LaunchFromRing = { addr = 0x801EFC4C, type = "func", source = "Counts the effect down, then places it on a ring of 22 units around its battler at the angle stored in the work byte 0x0B and launches it upward (rise 0x40, gravity -4, 12-frame timer) in magic062." }
 g_BMagicEffectModes = { addr = 0x801F0C10, source = "Handlers of magic062 (Celerity), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic063/03"]
@@ -1116,6 +1117,7 @@ Effect_CountUpAndStep = { addr = 0x801EF630, type = "func", source = "Counts the
 Effect_StepWhileTickUnderThree = { addr = 0x801EF680, type = "func", source = "Advances header.step (byte 0x02) while the ticker (byte 0x0B) of g_BattleEffectBattler is under 3 in magic082 (Steroids, Magic Belt, Protect…)." }
 Effect_TickOnTimerZero = { addr = 0x801EF6C4, type = "func", source = "Counts the effect timer (byte 0x09) down by 1 per frame; at zero lowers the ticker (byte 0x0B) of g_BattleEffectBattler and clears the effect in magic082 (Steroids, Magic Belt, Protect…)." }
 Effect_CountDownAndStep = { addr = 0x801EFD74, type = "func", source = "Counts the effect counter (byte 0x0A) down and advances header.step (byte 0x02) at zero in magic082 (Steroids, Magic Belt, Protect…)." }
+Effect_LaunchFromRing = { addr = 0x801EFDC0, type = "func", source = "Counts the effect down, then places it on a ring of 22 units around its battler at the angle stored in the work byte 0x0B and launches it upward (rise 0x40, gravity -4, 12-frame timer) in magic082." }
 g_BMagicEffectModes = { addr = 0x801F0D14, source = "Handlers of magic082 (Steroids, Magic Belt, Protect…), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic083/03"]
@@ -1132,6 +1134,7 @@ BMagic_DispatchEffectMode = { addr = 0x801EF108, type = "func", source = "Runs t
 Effect_StepOnZeroTick = { addr = 0x801EF528, type = "func", source = "Advances header.step (byte 0x02) when the effect ticker (byte 0x0B) is zero in magic083 (Shield)." }
 Effect_TickOnZeroTick = { addr = 0x801EF744, type = "func", source = "When the effect ticker (byte 0x0B) is zero lowers the ticker of g_BattleEffectBattler and clears the effect in magic083 (Shield)." }
 Effect_SetActorMatrix = { addr = 0x801EF794, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic083 (Shield)." }
+Effect_LaunchFromRing = { addr = 0x801EFEDC, type = "func", source = "Counts the effect down, then places it on a ring of 22 units around its battler at the angle stored in the work byte 0x0B and launches it upward (rise 0x40, gravity -4, 12-frame timer) in magic083." }
 BMagic_SetXFixed = { addr = 0x801F0BA8, type = "func", source = "the body stores into g_Task->pos.x.fixed" }
 BMagic_AllocEffect = { addr = 0x801F0DC0, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 24 slots are in use in magic083 (Shield)." }
 Actor_Clear = { addr = 0x801F0E24, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
@@ -6230,7 +6233,7 @@ Area_ResetCameraOffsetY = { addr = 0x801F4930, type = "func", source = "Zeroes g
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_SetCellTexture = { addr = 0x801F3378, type = "func", source = "Sets a cell primitive's clut, texture page, corner UVs and shade from the packed cell texture word." }
 Actor_ClearVelocity = { addr = 0x801F5F20, type = "func", source = "Zeroes the velocity members of the current g_Task (+0x0C, +0x10 and vz) that Actor_ApplyVelocity integrates into x and y." }
-Actor_ClearVelocity_area189 = { addr = 0x801F5F20, type = "func", source = "Link-only name for the area189 copy of Actor_ClearVelocity; the engine copy at 0x801C5798 is visible to the area189 link too, so a draft cannot resolve the bare name. Same body and reason as func_801F4158_area168.", alias = true }
+Actor_ClearVelocity_801F5F20 = { addr = 0x801F5F20, type = "func", source = "Link-only name for the area189 copy of Actor_ClearVelocity; the engine copy at 0x801C5798 is visible to the area189 link too, so a draft cannot resolve the bare name.", alias = true }
 Char_DrainFatigue = { addr = 0x801F6024, type = "func", source = "Adds 1 to the fatigue of each of the seven g_Characters while it is below 9 and rebuilds that character's stats with Char_RebuildStats." }
 
 ["emi/world04/area191/13"]
@@ -6268,7 +6271,7 @@ Actor_BeginScriptFromAreaTableAtStart = { addr = 0x801F2F04, type = "func", sour
 Actor_FreePalette = { addr = 0x801F2FD4, type = "func", source = "Frees the palette slots owned by the running task g_Task through GFX_FreePaletteSlotOwner; the same body is Actor_FreePalette in area085." }
 Area_FreePaletteOnChange = { addr = 0x801F35A4, type = "func", source = "Frees the task's palette slot on area change, otherwise rewinds the script cursor to wait." }
 Area_RoundSpriteCoordinate = { addr = 0x801F3DCC, type = "func", source = "Returns pair >> 16, rounded up by 1 when step is not negative and the low halfword of pair is nonzero." }
-Area_RoundSpriteCoordinate_area198 = { addr = 0x801F3DCC, source = "Link-only name for the area198 copy of Area_RoundSpriteCoordinate; the same body at 0x8014CE48 is visible to the area198 link. Coordinator instruction, as func_801F4158_area168.", alias = true }
+Area_RoundSpriteCoordinate_801F3DCC = { addr = 0x801F3DCC, source = "Link-only name for the area198 copy of Area_RoundSpriteCoordinate; the same body at 0x8014CE48 is visible to the area198 link.", alias = true }
 
 ["emi/world04/area199/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
