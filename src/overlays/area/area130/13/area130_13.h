@@ -7,7 +7,7 @@
 #include "overlays/area/world03.h"
 #include "area/spad.h"
 
-#include "shared/WorldSpin.h"
+#include "area/effects.h"
 
 #include <string.h>
 

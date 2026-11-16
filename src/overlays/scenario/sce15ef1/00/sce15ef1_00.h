@@ -5,7 +5,7 @@
  * includes the file. */
 
 #include "overlays/scenario/scenario.h"
-#include "shared/WorldSpin.h"
+#include "area/effects.h"
 #include "area/spad.h"
 
 #define AREA_SPIN_RADIUS     16

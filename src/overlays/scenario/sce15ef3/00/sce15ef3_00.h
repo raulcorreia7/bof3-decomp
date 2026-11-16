@@ -7,7 +7,7 @@
 #include "overlays/scenario/scenario.h"
 #include "area/spad.h"
 
-#include "shared/SparkEmitter.h"
+#include "area/effects.h"
 
 #define SPARK_EMITTER_COUNT 8
 

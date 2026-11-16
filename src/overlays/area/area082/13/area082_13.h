@@ -6,7 +6,7 @@
 
 #include "overlays/area/world02.h"
 #include "area/spad.h"
-#include "shared/AreaSpark.h"
+#include "area/effects.h"
 
 /* The gate keeper's two refusals: the Patriarch's permission and the holy
  * ground's special permission. */

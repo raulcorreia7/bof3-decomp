@@ -1,4 +1,4 @@
-#include "shared/AreaSpark.h"
+#include "area/effects.h"
 
 /* Adds a falling spark at a random angle around the work position, at most the work screen width away. */
 /* func_801F7AE4 (scena01), func_801F75D8 (scena15), func_801F393C (area082) */

@@ -7,7 +7,7 @@
 #include "overlays/area/world04.h"
 #include "area/spad.h"
 
-#include "shared/WorldSpin.h"
+#include "area/effects.h"
 #include "overlays/area/Area_DrawDimQuad.h"
 
 /* The card reader's reply. */

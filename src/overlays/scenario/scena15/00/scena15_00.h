@@ -7,7 +7,7 @@
 #include "overlays/scenario/scenario.h"
 #include "area/spad.h"
 #include "battle/records.h"
-#include "shared/AreaSpark.h"
+#include "area/effects.h"
 
 /* The sprite quad func_801F7FFC and func_801F81D8 draw: a 24 by 48 quad at (x, y) whose texture window is centred
  * on the work record's screen position. They differ only in the vertex colours. */

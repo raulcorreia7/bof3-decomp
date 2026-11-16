@@ -8,7 +8,7 @@
 #include "common/vector.h"
 #include "overlays/area/AreaSprite.h"
 #include "overlays/area/world00.h"
-#include "shared/WorldSpin.h"
+#include "area/effects.h"
 
 #define WORLD00_AREA024_WORK_BASE      MEM_PTR(volatile AreaSprite, AREA_WORK)
 #define WORLD00_AREA024_SPIN_WORK_BASE MEM_PTR(u8, 0x800E5000u)
