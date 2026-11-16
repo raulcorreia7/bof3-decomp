@@ -330,15 +330,16 @@ ASSERT_SIZE(WindowTextRow, 0x06);
  * `rate` indexes the D_801CD1B8 pair table (Area_RollEncounterThreshold), `kind` is returned by func_801A0348, and
  * func_801A0380 uses `seed` directly when `pick` is 0, else `seed` indexes the D_80181E40 picker. */
 typedef struct {
-    u8 x0;
-    u8 y0;
-    u8 x1;
-    u8 y1;
-    u8 rate;
-    u8 kind;
-    u8 seed;
-    u8 pick;
+    Cell2 min;
+    Cell2 max;
+    u8    rate;
+    u8    kind;
+    u8    seed;
+    u8    pick;
 } EncounterZone;
+
+ASSERT_OFFSET(EncounterZone, min, 0x00);
+ASSERT_OFFSET(EncounterZone, max, 0x02);
 
 ASSERT_SIZE(EncounterZone, MAP_ZONE_SIZE);
 
