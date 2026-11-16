@@ -25,7 +25,8 @@ NON_MATCHING s16 func_801F35E0(s32 origin_x, s32 origin_y, s16 scroll_x, s16 scr
     }
     offset                  = ((s16)radius * rsin((u16)((u32)angle >> 6))) >> 12;
     y                       = offset + 0x24;
-    MEM(s16, AREA_WORK + 2) = origin_y + y;
+    MEM(s16, AREA_WORK + 2) = origin_y;
+    MEM(s16, AREA_WORK + 2) += y;
     return offset;
 }
 #else

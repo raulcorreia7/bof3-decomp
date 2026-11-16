@@ -102,6 +102,7 @@ extern Callback g_MenuBateStep2Sub2Funcs[MENU_BATE_STEP2_SUB2_COUNT];
 extern Callback g_MenuBateStep3Funcs[MENU_BATE_STEP3_COUNT];
 /* D_801D8770 */
 extern Callback g_MenuBateStep3Sub0Funcs[MENU_BATE_STEP3_SUB0_COUNT];
+extern u8       D_801D8778[];
 /* D_801D893C */
 extern u8       g_MenuListTab2OffSprites[];
 /* D_801D8954 */

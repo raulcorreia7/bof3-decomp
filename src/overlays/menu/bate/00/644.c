@@ -307,7 +307,34 @@ MATCH void func_801D211C(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D2190(void) {
+    s8*           selected;
+    volatile s32* tally;
+    s32           value;
+    s32           maximum;
+
+    Menu_DrawClutStrip(D_80144953);
+    func_801D2304(55, 55);
+    selected = &D_80148658;
+    tally    = D_801D8F00;
+    if (*selected < 6) {
+        tally[*selected] += D_801D8778[*selected];
+        value   = tally[*selected];
+        maximum = D_801D8EE8[*selected];
+        if ((u32)value < (u32)maximum && LOBU(g_InputPressed) == 0) {
+            return;
+        }
+        tally[*selected] = maximum;
+        *selected        = LOBU(*selected) + 1;
+    } else if (LOBU(g_InputPressed) != 0) {
+        UI_SetMode(UI_MODE_FAST_FADE_OUT);
+        D_80148651++;
+    }
+}
+#else
 INCLUDE_ASM(func_801D2190);
+#endif
 
 MATCH void func_801D2298(void) {
     if (g_UiWindowEffectBusy == 0) {
