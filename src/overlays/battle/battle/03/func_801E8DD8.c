@@ -31,7 +31,7 @@ MATCH void func_801E8DD8(void) {
         g_Task->unk_2E.half = *(u16*)((slot + 0x2Eu)) + offset_x;
         row                 = slot[5];
         row -= 3;
-        offset_y            = ENCOUNTER_ENEMIES[g_BattleEnemyBattlers[row].kind].height;
+        offset_y            = ENCOUNTER_ENEMIES[g_BattleEnemyBattlers[row].type].height;
         g_Task->unk_30.half = *(u16*)((slot + 0x30u)) - offset_y - 8u;
         g_Task->depth       = *(u16*)((slot + 0x32u));
     }

@@ -9,7 +9,7 @@ MATCH void Battle_LoadEnemyBattler(u8 slot, u8 enemy_index) {
         g_BattleEnemyBattlers[slot].name[i] = ENCOUNTER_ENEMIES[enemy_index].name[i];
     }
 
-    g_BattleEnemyBattlers[slot].enemy_id.byte.kind   = ENCOUNTER_ENEMIES[enemy_index].enemy_id.byte.kind;
+    g_BattleEnemyBattlers[slot].enemy_id.byte.type   = ENCOUNTER_ENEMIES[enemy_index].enemy_id.byte.type;
     g_BattleEnemyBattlers[slot].enemy_id.byte.family = ENCOUNTER_ENEMIES[enemy_index].enemy_id.byte.family;
     g_BattleEnemyBattlers[slot].choice_ai            = ENCOUNTER_ENEMIES[enemy_index].choice_ai;
     g_BattleEnemyBattlers[slot].event_flags          = ENCOUNTER_ENEMIES[enemy_index].event_flags;
@@ -44,7 +44,7 @@ MATCH void Battle_LoadEnemyBattler(u8 slot, u8 enemy_index) {
 
     g_BattleEnemyBattlers[slot].unk_F0                  = ENCOUNTER_ENEMIES[enemy_index].unk_84[0];
     g_BattleEnemyBattlers[slot].unk_F1                  = ENCOUNTER_ENEMIES[enemy_index].unk_84[1];
-    g_BattleEnemyBattlers[slot].kind                    = enemy_index;
+    g_BattleEnemyBattlers[slot].type                    = enemy_index;
     g_BattleEnemyBattlers[slot].turn.counter            = 0;
     g_BattleEnemyBattlers[slot].turn.damage_flags.value = g_BattleEnemyBattlers[slot].turn.action_flags.value = 0;
     g_BattleEnemyBattlers[slot].unk_112                                                                       = 0;

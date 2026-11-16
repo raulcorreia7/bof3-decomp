@@ -26,7 +26,7 @@ MATCH void func_801EEC80(void) {
     g_Task->unk_09 = 2;
     work           = g_Task;
     rect.x         = work->unk_2E.half - work->unk_09;
-    rect.y         = work->unk_30.half - work->unk_09 + g_FrameBufferIndex * 240;
+    rect.y         = work->unk_30.half - work->unk_09 + g_GfxBufferIndex * 240;
     rect.h = rect.w = work->unk_09 * 2;
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, 0x340, 0x100);
     GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(DR_MOVE));
@@ -160,7 +160,7 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
     }
     mesh_task = g_Task;
     move.x    = mesh_task->unk_2E.half - mesh_task->unk_09;
-    move.y    = (mesh_task->unk_30.half - mesh_task->unk_09) + (g_FrameBufferIndex * SCREEN_HEIGHT);
+    move.y    = (mesh_task->unk_30.half - mesh_task->unk_09) + (g_GfxBufferIndex * SCREEN_HEIGHT);
     diameter  = mesh_task->unk_09 * 2;
     move.h = move.w = diameter;
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &move, 0x340, 0x100);

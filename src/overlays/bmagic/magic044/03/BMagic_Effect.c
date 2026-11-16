@@ -72,7 +72,7 @@ MATCH void func_801EEEFC(void) {
         g_Task->unk_10 = 0;
         g_Task->unk_14 = TO_COORD(0x100);
     } else {
-        switch (ENEMY_COMBATANT(g_Battle.active_battler).enemy_id.byte.kind) {
+        switch (ENEMY_COMBATANT(g_Battle.active_battler).enemy_id.byte.type) {
             case 0x99:
             default:
                 g_Task->unk_0C = 0x2000;

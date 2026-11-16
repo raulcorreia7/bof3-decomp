@@ -16,17 +16,17 @@ MATCH void SYS_Main(void) {
     for (;;) {
         VSync(2);
         rand();
-        PutDispEnv((DISPENV*)g_GfxCurrentDisplayFrame);
-        PutDrawEnv((DRAWENV*)(g_GfxCurrentDisplayFrame + 0x14));
+        PutDispEnv((DISPENV*)g_GfxCurrentBuffer);
+        PutDrawEnv((DRAWENV*)(g_GfxCurrentBuffer + 0x14));
         GFX_UploadPalette();
         GFX_UpdateTransferQueue();
-        DrawOTag((u_long*)(g_GfxCurrentDisplayFrame + 0x8C));
+        DrawOTag((u_long*)(g_GfxCurrentBuffer + 0x8C));
         SYS_UpdateKeyState();
         SND_UpdateVoiceStatus();
 
-        g_FrameBufferIndex ^= 1;
-        work                     = g_GfxDisplayFrames + g_FrameBufferIndex * 0x90;
-        g_GfxCurrentDisplayFrame = work;
+        g_GfxBufferIndex ^= 1;
+        work               = g_GfxBuffers + g_GfxBufferIndex * 0x90;
+        g_GfxCurrentBuffer = work;
         ClearOTagR((u_long*)(work + 0x70), 8);
         SYS_PrepareFrame();
 

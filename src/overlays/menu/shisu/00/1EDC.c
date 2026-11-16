@@ -610,7 +610,7 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
     y    = panel->pos.y;
     do {
         if (*list != 0) {
-            locked = (u8)func_801AF5B0(panel->kind, D_80148656, *list) == 0;
+            locked = (u8)func_801AF5B0(panel->type, D_80148656, *list) == 0;
             shade  = locked ? MENU_SHADE_DIM : MENU_SHADE_NORMAL;
             if (n == panel->drawn_cursor) {
                 shade = MENU_SHADE_SELECTED;

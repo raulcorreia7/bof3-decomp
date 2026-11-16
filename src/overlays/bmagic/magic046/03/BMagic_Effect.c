@@ -148,7 +148,7 @@ MATCH void func_801EF3B8(void) {
     Battle_CenterCamera();
     angle          = ratan2(g_Task->pos.x.fixed - g_BattleEffectBattler->pos.x.fixed, g_Task->pos.y.fixed - g_BattleEffectBattler->pos.y.fixed);
     g_Task->facing = g_BattleEffectBattler->facing;
-    switch (g_BattleEnemyBattlers[g_Battle.active_battler - 3].enemy_id.byte.kind) {
+    switch (g_BattleEnemyBattlers[g_Battle.active_battler - 3].enemy_id.byte.type) {
         /* FAKE: retail compare tree needs a third case above 0x72 on the default body; the bytes keep no value for it. */
         case 0x73:
         default:

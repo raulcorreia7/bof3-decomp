@@ -237,7 +237,7 @@ typedef union EnemyIdCode {
     u16 value;
 
     struct {
-        u8 kind;
+        u8 type;
         u8 family;
     } byte;
 } EnemyIdCode;

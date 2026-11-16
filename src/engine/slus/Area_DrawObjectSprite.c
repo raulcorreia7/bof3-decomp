@@ -49,7 +49,7 @@ MATCH void Area_DrawObjectSprite(void) {
         GFX_AddPrim(g_Task->draw_layer, sizeof(DR_AREA));
         g_Task->screen_x += 0x340;
         y                = g_Task->screen_y + 0x10;
-        g_Task->screen_y = y + (g_FrameBufferIndex ^ 0x1) * 0xF0;
+        g_Task->screen_y = y + (g_GfxBufferIndex ^ 0x1) * 0xF0;
     }
     list  = g_Task->range_54.table + g_Task->unk_5A;
     count = *list;
@@ -152,7 +152,7 @@ MATCH void Area_DrawObjectSprite(void) {
     if (g_Task->active_flags & 0x8) {
         RECT* rect = (RECT*)g_GfxPrimCursor;
         g_GfxPrimCursor += sizeof(RECT);
-        *rect = *(RECT*)(g_GfxCurrentDisplayFrame + 0x14);
+        *rect = *(RECT*)(g_GfxCurrentBuffer + 0x14);
         SetDrawArea((DR_AREA*)g_GfxPrimCursor, rect);
         GFX_AddPrim(g_Task->draw_layer, sizeof(DR_AREA));
     }

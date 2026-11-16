@@ -18,13 +18,13 @@ MATCH void Area_DrawCellQuad(s32 mask, s32 index) {
         SetPolyF4(primitive);
         switch (bit) {
             case 1:
-                record = &g_AreaCellPrims[index][g_FrameBufferIndex];
+                record = &g_AreaCellPrims[index][g_GfxBufferIndex];
                 break;
             case 2:
-                record = &g_AreaCellPrims[g_AreaCellPrims[index][1].pad2][g_FrameBufferIndex];
+                record = &g_AreaCellPrims[g_AreaCellPrims[index][1].pad2][g_GfxBufferIndex];
                 break;
             default:
-                record = &g_AreaCellPrims[g_AreaCellPrims[index][1].pad1][g_FrameBufferIndex];
+                record = &g_AreaCellPrims[g_AreaCellPrims[index][1].pad1][g_GfxBufferIndex];
                 break;
         }
         *(u32*)&primitive->x0 = *(u32*)&record->x0;

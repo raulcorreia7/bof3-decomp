@@ -12,7 +12,7 @@ MATCH void func_801E3A44(void) {
         if (BATTLE_IS_SCRIPTED()) {
             Battle_PlayEnemyCue(*g_BattleCurrentEnemy->unk_E8);
         } else {
-            SND_PlayCue((g_BattleCurrentEnemy->kind * 2) | 0x600);
+            SND_PlayCue((g_BattleCurrentEnemy->type * 2) | 0x600);
         }
         g_Task->header.step = g_Task->header.step + 1;
     }

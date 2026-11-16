@@ -1,7 +1,7 @@
 #ifndef BATTLE_HANDLERS_H
 #define BATTLE_HANDLERS_H
 
-#include "common/handler.h"
+#include "common/callback.h"
 
 /* The moments of a boss encounter at which battle/battle/03 calls the boss overlay's g_Battle.boss_event_hook. */
 typedef enum BossEvent {

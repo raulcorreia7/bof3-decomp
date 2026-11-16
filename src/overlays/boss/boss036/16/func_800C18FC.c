@@ -3,7 +3,7 @@
 MATCH void func_800C18FC(void) {
     u8 kind;
 
-    kind           = g_BattleCurrentEnemy->kind;
+    kind           = g_BattleCurrentEnemy->type;
     g_Task->unk_09 = MEM_PTR(u8, 0x800E40CEu)[kind * 0x88u];
     Battle_RequestEnemyScript(2);
     func_801E30F8();

@@ -1,5 +1,5 @@
-#ifndef COMMON_HANDLER_H
-#define COMMON_HANDLER_H
+#ifndef COMMON_CALLBACK_H
+#define COMMON_CALLBACK_H
 
 #include "types.h"
 

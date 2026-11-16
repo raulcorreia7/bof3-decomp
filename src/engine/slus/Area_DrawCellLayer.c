@@ -25,7 +25,7 @@ MATCH void Area_DrawCellLayer(s32 layer) {
     s32  cell_y;
     u32  header;
 
-    offset = g_FrameBufferIndex * 8 + layer * 0x30;
+    offset = g_GfxBufferIndex * 8 + layer * 0x30;
     entry  = *(u32*)(D_80142CC0 + offset);
     if (entry != 0) {
         packet = (u32*)D_801459E8;

@@ -24,7 +24,7 @@ MATCH void Battle_DefeatEnemy(void) {
         if (((g_Battle.state & BATTLE_STATE_OVER) != 0) && (D_801463CA == g_Task->slot)) {
             g_Battle.state &= ~BATTLE_STATE_OVER;
         }
-        func_800AD074(g_BattleCurrentEnemy->enemy_id.byte.kind);
+        func_800AD074(g_BattleCurrentEnemy->enemy_id.byte.type);
         GFX_FreePaletteFadeTarget(g_Task);
         g_BattleCurrentEnemy->turn.damage_flags.value &= ~(BATTLER_DAMAGE_UNK_4 | BATTLER_DAMAGE_UNK_5 | BATTLER_DAMAGE_TAKEN);
         Battle_ClearSlotPending(g_Task->slot);

@@ -444,7 +444,7 @@ MATCH void func_801F8108(s32 x, s32 y) {
     width   = 64;
     height  = 128;
     rect.x  = x - 64;
-    frame_y = g_FrameBufferIndex * 240 - 64;
+    frame_y = g_GfxBufferIndex * 240 - 64;
     rect.y  = y + frame_y;
     rect.w  = width;
     rect.h  = height;
@@ -452,7 +452,7 @@ MATCH void func_801F8108(s32 x, s32 y) {
     GFX_AddPrim(2, sizeof(DR_MOVE));
 
     rect.x  = x;
-    frame_y = g_FrameBufferIndex * 240 - 64;
+    frame_y = g_GfxBufferIndex * 240 - 64;
     rect.y  = y + frame_y;
     rect.w  = width;
     rect.h  = height;

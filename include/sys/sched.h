@@ -1,7 +1,7 @@
 #ifndef SYSTEM_SCHED_H
 #define SYSTEM_SCHED_H
 
-#include "common/handler.h"
+#include "common/callback.h"
 #include "psx/mem.h"
 #include "types.h"
 

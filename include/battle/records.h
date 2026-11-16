@@ -17,7 +17,7 @@
  * decides: the comment on each member records which unit reads it. */
 
 #include "battle/handlers.h"
-#include "common/handler.h"
+#include "common/callback.h"
 #include "common/copy.h"
 #include "common/fixed.h"
 #include "common/vector.h"
@@ -402,7 +402,7 @@ typedef struct EnemyBattler {
     EnemyDrop   drops[2];
     Stats       stats; /* +0xA0 the live stats; the capture cap and the hit math read it */
     Stats       base;  /* +0xC0 the stats before buffs */
-    u8          kind;
+    u8          type;
     u8          triggered_events; /* +0xE1 one bit per event packet already applied */
     s8          panel_offset_x;   /* +0xE2 added to the panel's screen x, as the party's g_BattlePanelOffsets entry */
     s8          panel_offset_y;   /* +0xE3 added to the panel's screen y */
@@ -451,7 +451,7 @@ ASSERT_OFFSET(EnemyBattler, zenny, 0x84);
 ASSERT_OFFSET(EnemyBattler, exp, 0x86);
 ASSERT_OFFSET(EnemyBattler, stats, 0xA0);
 ASSERT_OFFSET(EnemyBattler, base, 0xC0);
-ASSERT_OFFSET(EnemyBattler, kind, 0xE0);
+ASSERT_OFFSET(EnemyBattler, type, 0xE0);
 ASSERT_OFFSET(EnemyBattler, turn, 0xF4);
 ASSERT_OFFSET(EnemyBattler, unk_E8, 0xE8);
 

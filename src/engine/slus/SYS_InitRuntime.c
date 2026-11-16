@@ -8,12 +8,12 @@ MATCH void SYS_InitRuntime(void) {
 
     SYS_InitHardware();
     SYS_InitDisplay();
-    work = g_GfxDisplayFrames;
+    work = g_GfxBuffers;
     SYS_ResetDisplayFrame(work);
     SYS_ResetDisplayFrame(work + 0x90);
     SYS_ThreadInit();
-    g_FrameBufferIndex       = 0;
-    g_GfxCurrentDisplayFrame = work;
+    g_GfxBufferIndex   = 0;
+    g_GfxCurrentBuffer = work;
     GFX_ClearRect(0, 0, 1024, 512);
     DrawSync(0);
     SetDispMask(1);

@@ -228,7 +228,7 @@ MATCH void func_801EF564(void) {
             g_Task->unk_30.half = y - D_801EB109[g_Game.members[slot].chr.character_id * 2];
         }
     } else {
-        g_Task->unk_30.half = y - ENCOUNTER_ENEMIES[g_BattleEnemyBattlers[slot - BATTLE_PARTY_CHARACTERS_COUNT].kind].height;
+        g_Task->unk_30.half = y - ENCOUNTER_ENEMIES[g_BattleEnemyBattlers[slot - BATTLE_PARTY_CHARACTERS_COUNT].type].height;
     }
     g_Task->unk_09 = 0;
     g_Task->header.step += 1;

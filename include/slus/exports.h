@@ -11,7 +11,7 @@
 #include "menu/gameui.h"
 #include "slus/functions.h"
 #include "battle/records.h"
-#include "common/handler.h"
+#include "common/callback.h"
 #include "sys/sched.h"
 #include <rand.h>
 
@@ -75,11 +75,11 @@ extern u8           g_UiTitleInputGate;
 /* D_80143D40 */
 extern Thread*      g_SysCurrentThread;
 /* D_80143D44 */
-extern u8           g_FrameBufferIndex;
+extern u8           g_GfxBufferIndex;
 /* D_80143D48 */
-extern u8           g_GfxDisplayFrames[];
+extern u8           g_GfxBuffers[];
 /* D_80143E68 */
-extern u8*          g_GfxCurrentDisplayFrame;
+extern u8*          g_GfxCurrentBuffer;
 /* D_80143E6C */
 extern u32          g_FrameCount;
 /* D_80143EF8 */

@@ -272,7 +272,7 @@ MATCH void func_801F7AEC(void) {
 
         task     = g_Task;
         tile->x0 = task->screen_x + 0x334;
-        tile->y0 = (u16)(task->screen_y + (((g_FrameBufferIndex ^ 1) * 0xF0) - 0x15));
+        tile->y0 = (u16)(task->screen_y + (((g_GfxBufferIndex ^ 1) * 0xF0) - 0x15));
     }
     tile->w  = 0x18;
     tile->h  = 0x30;
@@ -283,7 +283,7 @@ MATCH void func_801F7AEC(void) {
 
     cursor          = g_GfxPrimCursor;
     g_GfxPrimCursor = cursor + sizeof(RECT);
-    memcpy(cursor, g_GfxCurrentDisplayFrame + 0x14, sizeof(RECT));
+    memcpy(cursor, g_GfxCurrentBuffer + 0x14, sizeof(RECT));
     SetDrawArea((DR_AREA*)g_GfxPrimCursor, (RECT*)cursor);
     GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(DR_AREA));
 

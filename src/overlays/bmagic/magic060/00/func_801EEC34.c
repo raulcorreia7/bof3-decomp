@@ -123,7 +123,7 @@ MATCH void func_801EEF50(void) {
 MATCH void Effect_MarkTargetIdentified(void) {
     u8 id;
 
-    id = ENEMY_COMBATANT(g_Battle.target_selector).enemy_id.byte.kind;
+    id = ENEMY_COMBATANT(g_Battle.target_selector).enemy_id.byte.type;
     BIT_ARRAY_SET(g_IdentifiedEnemies, id);
 }
 
@@ -131,7 +131,7 @@ MATCH void Effect_MarkTargetIdentified(void) {
 MATCH bool Effect_TargetIsIdentified(void) {
     u8 id;
 
-    id = ENEMY_COMBATANT(g_Battle.target_selector).enemy_id.byte.kind;
+    id = ENEMY_COMBATANT(g_Battle.target_selector).enemy_id.byte.type;
     return BIT_ARRAY_TEST(g_IdentifiedEnemies, id) != 0;
 }
 
