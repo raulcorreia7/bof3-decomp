@@ -50,4 +50,6 @@ void func_801F3FF8(s16 x, s16 y);
 
 #include "overlays/area/world_cloud.h"
 
+void func_801A4BC0(s32 column, s32 row, s32 code);
+
 #endif

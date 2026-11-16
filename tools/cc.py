@@ -13,8 +13,8 @@ names the split assembly that `INCLUDE_ASM` pulls in. A source under `src/` also
 --empty-on-failure  hide the compiler's output; a source that does not compile leaves an
                     empty object and succeeds (draft objects for the report)
 
-Objects are cached in ~/.cache/bof3-cc (BOF3_CC_CACHE_DIR moves it), keyed on the preprocessed
-source, the arguments and the hashes of GCC, maspsx, DMPSX and the assembler, so every worktree
+Objects are cached in ~/.cache/bof3-cc/<first two key digits>/ (BOF3_CC_CACHE_DIR moves it),
+keyed on the preprocessed source, the arguments and the hashes of GCC, maspsx, DMPSX and the assembler, so every worktree
 shares them; the first compiler of a key writes it and the rest wait for its object.
 BOF3_CC_CACHE=0 turns the cache off.
 
@@ -290,7 +290,7 @@ def take_cached(plan, stored, build_dir):
 
 def store_cached(stored, plan, deps):
     """Write one object and its depfile into the cache; a later writer replaces both."""
-    os.makedirs(CACHE_DIR, exist_ok=True)
+    os.makedirs(os.path.dirname(stored), exist_ok=True)
     unique = f"{os.getpid()}.tmp"
     shutil.copyfile(plan["output"], f"{stored}.o{unique}")
     with open(f"{stored}.dep{unique}", "w", encoding="utf-8") as out:
@@ -314,10 +314,11 @@ def cached_compile(plan, gcc_args, env, tmp, build_dir):
         if status == 0 and plan["depfile"]:
             write_depfile(plan, deps, build_dir)
         return status
-    stored = os.path.join(CACHE_DIR, key)
+    # One subdirectory per two hex digits: a flat directory of millions of entries fills ext4's index.
+    stored = os.path.join(CACHE_DIR, key[:2], key)
     if take_cached(plan, stored, build_dir):
         return 0
-    os.makedirs(CACHE_DIR, exist_ok=True)
+    os.makedirs(os.path.dirname(stored), exist_ok=True)
     with open(f"{stored}.lock", "a") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)
         if take_cached(plan, stored, build_dir):
