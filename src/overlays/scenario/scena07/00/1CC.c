@@ -557,7 +557,46 @@ INCLUDE_ASM(func_801F8BE8);
 
 #include "shared/GFX_DrawFan.h"
 
-INCLUDE_ASM(func_801F90F4);
+MATCH void func_801F90F4(Scena07BurstBuffer* buffer) {
+    s32    dir[3];
+    s32    pos[3];
+    MATRIX camera;
+    u16    phase;
+    s8     i;
+    s8     row;
+    s32    light;
+
+    Area_SetCameraMatrix(&camera);
+    buffer->unk_514 = 0;
+    buffer->unk_518 = 0x1000;
+    buffer->unk_51C = 0x1000;
+    VectorNormal(&buffer->unk_514, &buffer->unk_514);
+    phase = 0;
+    for (i = 0; i < 32; i++) {
+        dir[0] = (rsin(buffer->angle) * rcos(phase)) >> 12;
+        dir[1] = (rsin(buffer->angle) * rsin(phase)) >> 12;
+        dir[2] = rcos(buffer->angle);
+        light  = buffer->unk_514 * dir[0] + buffer->unk_518 * dir[1] + buffer->unk_51C * dir[2];
+        if (light <= 0) {
+            buffer->shade[0][i] = 0x70;
+        } else {
+            light = SquareRoot0(light);
+            if (light >= 0x1000) {
+                light = 0xFFF;
+            }
+            buffer->shade[0][i] = ((light & 0xF00) >> 5) + 7;
+        }
+        pos[0] = buffer->x + (dir[0] << 5);
+        pos[1] = buffer->y + (dir[1] << 5);
+        pos[2] = buffer->z + (dir[2] << 13);
+        Area_ProjectPoint(pos, &buffer->points[0][i]);
+        for (row = 1; row < 8; row++) {
+            buffer->points[row][i] = buffer->points[0][i];
+            buffer->shade[row][i]  = buffer->shade[0][i];
+        }
+        phase += 0x80;
+    }
+}
 
 INCLUDE_ASM(func_801F9330);
 
