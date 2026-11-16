@@ -27,6 +27,8 @@ extern PartyMemberMessages g_PartyMemberMessages[3];
 
 /* The selection-arm and work-reset calls shared with the field. */
 /* The bounds step and the choice query the handlers enter. */
+/* The two-quad join between two segments of the marker line. */
+void func_801F311C(s16 x0, s16 y0, s16 x1, s16 y1);
 void func_801F332C(s32* first, s32* second);
 /* The semi-transparent quad that joins the two marker fans. */
 void func_801F3618(s16 x1, s16 y1, s16 radius1, u16 angle1, s16 x2, s16 y2, s16 radius2, u16 angle2);
