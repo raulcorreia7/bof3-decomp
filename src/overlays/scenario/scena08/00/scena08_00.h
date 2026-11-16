@@ -75,7 +75,7 @@ void func_801FE800(void);
 
 void func_801F8964(FallingSpark* spark);
 /* func_801F8D98 */
-void Chain_Update(void* table);
+void MotionTrail_Update(void* table);
 
 void func_801F90C8(void* table);
 void func_801FA32C(void);

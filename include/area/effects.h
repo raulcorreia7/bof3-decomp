@@ -1,7 +1,7 @@
 #ifndef AREA_EFFECTS_H
 #define AREA_EFFECTS_H
 
-/* The work records of the area effects the area and scenario overlays share: sparks, the spin effect and the chain. */
+/* The work records of the area effects the area and scenario overlays share: sparks, the spin effect and the motion trail. */
 
 #include "common/vector.h"
 #include "area/area.h"
@@ -83,20 +83,29 @@ ASSERT_OFFSET(SpinEffect, spin_angle, 0x24);
 ASSERT_OFFSET(SpinEffect, scale, 0x28);
 ASSERT_OFFSET(SpinEffect, fade, 0x2A);
 
-/* A chain of 32 screen-projected points with the direction between neighbours. */
-typedef struct ChainNode {
-    s32 pos[3];
-    u8  pad_0C[4];
-    s16 screen[2];
-    s16 angle;
-    s16 size;
-} ChainNode;
+/* One sample of a motion trail: a world position and where it lands on the screen. */
+typedef struct MotionTrailNode {
+    VECTOR pos;    /* the task position when the sample was taken */
+    Pos2   screen; /* pos projected to the screen */
+    s16    angle;  /* the heading the trail has at this node */
+    s16    size;   /* the projected size */
+} MotionTrailNode;
 
-typedef struct Chain {
-    ChainNode node[32];
-    u16       dir[31];
-    u16       size;
-} Chain;
+ASSERT_SIZE(MotionTrailNode, 0x18);
+ASSERT_OFFSET(MotionTrailNode, screen, 0x10);
+ASSERT_OFFSET(MotionTrailNode, angle, 0x14);
+
+#define MOTION_TRAIL_LENGTH 32
+
+/* A fixed history of the task's last positions: MotionTrail_Update pushes the newest at the front and drops the oldest. */
+typedef struct MotionTrail {
+    MotionTrailNode node[MOTION_TRAIL_LENGTH];
+    u16             dir[MOTION_TRAIL_LENGTH - 1]; /* screen heading from each node to the next */
+    u16             size;                         /* the world size every node projects */
+} MotionTrail;
+
+ASSERT_SIZE(MotionTrail, 0x340);
+ASSERT_OFFSET(MotionTrail, dir, 0x300);
 
 /* A falling spark particle: the area and scenario spark tables (area197 at AREA_WORK,
  * scena09 at AREA_WORK + 0x800) fall it by its velocity, bounce it off the ground and
