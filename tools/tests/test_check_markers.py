@@ -1,9 +1,17 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 import pytest
 
 import check_markers
-from check_markers import check_hand_units, check_text, draft_ref, has_hand_asm
+from check_markers import (
+    attempt_problems,
+    check_hand_units,
+    check_text,
+    draft_ref,
+    has_hand_asm,
+)
 
 
 def problems(text: str) -> list[str]:
@@ -185,3 +193,45 @@ def test_a_draft_without_an_attempts_object_fails(
 ) -> None:
     assert _land(monkeypatch, tmp_path, "", capsys) == 1
     assert "emi/bmagic/magic058/03@0x801EFDD4" in capsys.readouterr().err
+
+
+def _attempt_rows(tmp_path, *rows: str) -> Path:
+    (tmp_path / "config").mkdir()
+    (tmp_path / "config/attempts.jsonl").write_text(
+        "".join(row + "\n" for row in rows), encoding="utf-8"
+    )
+    return tmp_path
+
+
+def test_attempt_rows_any_spacing_pass(tmp_path) -> None:
+    root = _attempt_rows(
+        tmp_path,
+        '{"function":"a@0x1","tried":"t","first_diff":"d","score":null}',
+        '{"function": "b@0x2", "tried": "t", "first_diff": "", "score": "2 rows"}',
+        '{"function":  "c@0x3",  "tried": "t", "first_diff": "", "score": null}',
+    )
+    assert attempt_problems(root) == []
+
+
+def test_an_attempt_row_with_other_keys_or_order_names_its_line(tmp_path) -> None:
+    root = _attempt_rows(
+        tmp_path,
+        '{"function":"a@0x1","tried":"t","first_diff":"d","score":null}',
+        '{"function":"b@0x2","tried":"t","result":"MATCH"}',
+        '{"function":"c@0x3","tried":"t","score":null,"first_diff":""}',
+    )
+    path = root / "config/attempts.jsonl"
+    assert attempt_problems(root) == [
+        f"{path}:2: keys ['function', 'tried', 'result'] instead of "
+        "['function', 'tried', 'first_diff', 'score']",
+        f"{path}:3: keys ['function', 'tried', 'score', 'first_diff'] instead of "
+        "['function', 'tried', 'first_diff', 'score']",
+    ]
+
+
+def test_a_malformed_attempts_row_fails_the_diff_check(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    row = '{"function": "emi/bmagic/magic058/03@0x801EFDD4", "tried": "t", "result": "MATCH"}\n'
+    assert _land(monkeypatch, tmp_path, row, capsys) == 1
+    assert ":1: keys ['function', 'tried', 'result']" in capsys.readouterr().err
