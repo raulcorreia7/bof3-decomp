@@ -62,7 +62,35 @@ NON_MATCHING void func_801F7068(void) {
 INCLUDE_ASM(func_801F7068);
 #endif
 
-INCLUDE_ASM(func_801F719C);
+MATCH void func_801F719C(void) {
+    u8 i;
+
+    i = 0;
+    do {
+        if (((g_Task->option_flags >> i) & 1) == 0) {
+            func_80159B9C(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)D_801FE7CC[i].width, (u8)D_801FE7CC[i].height);
+        }
+        i++;
+    } while (i < 3);
+    if ((g_Task->option_flags & 1) == 0) {
+        g_Task->screen_x = (u16)D_801FE7CC[0].x + D_801FE804[0];
+        g_Task->screen_y = (u16)D_801FE7CC[0].y + D_801FE804[1];
+        Actor_StepAnimLoop();
+        Area_AddActor();
+    }
+    if (((g_Task->option_flags >> 1) & 1) == 0) {
+        sprintf((char*)g_UiFormatBuffer, D_801F6C04, Item_GetRecord(0, g_Task->unk_06));
+        UI_DrawText((s16)((u16)D_801FE7CC[1].x + 4), (s16)((u16)D_801FE7CC[1].y + 2), 0, 8, g_UiFormatBuffer);
+        sprintf((char*)g_UiFormatBuffer, D_801F6C08, (u16)Item_Count(0, g_Task->unk_06, 0));
+        UI_DrawText((s16)((u16)D_801FE7CC[1].x + 0x48), (s16)((u16)D_801FE7CC[1].y + 2), 0, 2, g_UiFormatBuffer);
+    }
+    func_801F781C((u16)D_801FE7CC[2].x + 1, (u16)D_801FE7CC[2].y + 1, 0x80, 0x68);
+    if (g_Task->unk_0A != 0) {
+        g_Task->unk_0A--;
+    } else if (g_InputHeld != 0) {
+        g_Task->header.mode = 3;
+    }
+}
 
 INCLUDE_ASM(func_801F73EC);
 
@@ -173,7 +201,31 @@ MATCH void func_801F79E8(u16 x, u16 y) {
     GFX_AddPrim(1, sizeof(POLY_FT4));
 }
 
-INCLUDE_ASM(func_801F7AD4);
+MATCH void func_801F7AD4(void) {
+    Scena10Rect* rect;
+    u8*          record;
+    u8           count;
+    u8           color;
+    s16          x;
+    s16          y;
+    u8           i;
+
+    rect = &D_801FE7CC[4];
+    UI_DrawWindow(rect->x, rect->y, rect->width, rect->height, 0, g_WindowStyle);
+    x = rect->x + 8;
+    y = rect->y + 4;
+    i = 0;
+    do {
+        record = Item_GetRecord(0, (u8)(i + 0x4E));
+        count  = (u8)Item_Count(0, (u8)(i + 0x4E), 0);
+        color  = -(count == 0) & 7;
+        UI_DrawText(x, y, color, (u8)Game_ReadCommand(record), record);
+        sprintf((char*)g_UiFormatBuffer, D_801F6C10, count);
+        UI_DrawGlyphString(x + 0x5A, y + 3, color, g_UiFormatBuffer);
+        i++;
+        y += 0xF;
+    } while (i < 8);
+}
 
 /* Draw rectangle 6: a styled window with the rectangle as one textured quad. */
 MATCH void func_801F7C34(void) {
