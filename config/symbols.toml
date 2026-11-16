@@ -288,7 +288,7 @@ D_800B51E8 = { addr = 0x800B51E8, size = 0x10, source = "Four pairs of halfwords
 g_BattleActionSelection = { addr = 0x800B6510, type = "u8", size = 0xE8, source = "Battle action row selector: the action id (the ability index, low byte of g_BattleActionId) picks a row of g_BattleSelections." }
 g_BattleSelections = { addr = 0x800B65F8, source = "Battle selection rows." }
 D_800B6BF0 = { addr = 0x800B6BF0, size = 0x4, source = "Four bytes the effects index by selector." }
-g_BattlePanelUV = { addr = 0x800B6C04, type = "BattlePanelTexture", source = "Texture coordinates of the battle panel quads." }
+g_BattlePanelUV = { addr = 0x800B6C04, source = "Texture coordinates of the battle panel quads." }
 s_BattleCellRowCount = { addr = 0x800B6C28, source = "Battle_SetCellPaletteStp, Battle_ClearCellPaletteStp and Battle_CopyCellPalette bound the sprite-cell row copy at this byte times 16" }
 s_BattleCellRowDivisor = { addr = 0x800B6C30, source = "Battle_SetCellPaletteStp, Battle_ClearCellPaletteStp, Battle_ClearCellPaletteEntry and Battle_CopyCellPalette divide the sprite cell value by this byte" }
 s_BattleCellRowScale = { addr = 0x800B6C38, source = "Battle_SetCellPaletteStp, Battle_ClearCellPaletteStp, Battle_ClearCellPaletteEntry and Battle_CopyCellPalette scale the cell remainder by this byte for the palette bank offset" }
@@ -7194,7 +7194,7 @@ g_AreaDrawState = { addr = 0x8014832C, size = 0x4, alias = true, source = "Area 
 g_AreaDrawFlags = { addr = 0x8014832E, source = "Flags that select the area draw passes." }
 g_MenuPanelTasks = { addr = 0x80148330, source = "The menu panel tasks." }
 g_BattleMessageState = { addr = 0x801483C3, type = "u8", source = "State of the battle message window." }
-g_BattleChoicePanel = { addr = 0x80148570, type = "BattleChoicePanel", source = "The battle choice panel." }
+g_BattleChoicePanel = { addr = 0x80148570, source = "The battle choice panel." }
 g_BattleChoicePhase = { addr = 0x80148573, type = "u8", source = "Phase of the battle choice panel." }
 g_BattleListCursor = { addr = 0x8014859F, type = "u8", source = "Cursor row of the battle list." }
 g_BattlePanelMode = { addr = 0x801485BB, type = "u8", source = "Current battle panel mode." }
@@ -7218,7 +7218,7 @@ g_MessageState = { addr = 0x801490A0, source = "State of the message window." }
 g_UiWindowStep = { addr = 0x801490A1, type = "u8", source = "Step of the window script." }
 g_MessageChoiceMode = { addr = 0x801490A2, source = "Mode of the message choice." }
 g_MessageChoiceStep = { addr = 0x801490A3, source = "Step of the message choice." }
-g_UiWindowChannel = { addr = 0x801490A4, type = "WindowChannel", source = "The window channel record." }
+g_UiWindowChannel = { addr = 0x801490A4, type = "u16", source = "The window channel record." }
 g_MessageStateTimer = { addr = 0x801490A6, source = "Timer of the message state." }
 g_MessageRequest = { addr = 0x801490A8, type = "u16", source = "Message requested by the answer step." }
 g_MessageChoiceTimer = { addr = 0x801490AA, source = "Timer of the message choice." }
@@ -8190,17 +8190,17 @@ g_SpriteCellCluts = { addr = 0x8017F8D4, source = "CLUTs of the sprite cells." }
 g_BundleOpcodes = { addr = 0x8017F8F0, source = "Handlers of the area bundle opcodes." }
 g_BundleRecordOpcodes = { addr = 0x8017F8FC, source = "Handlers of the area bundle records." }
 g_MenuPanelOrigins = { addr = 0x8017F90C, source = "Origins of the menu panels." }
-g_AreaLoads = { addr = 0x8017F974, type = "AreaLoad", source = "The area load records." }
+g_AreaLoads = { addr = 0x8017F974, source = "Pointers to the 200 AreaLoad records, indexed by area id." }
 g_AreaEncounterZones = { addr = 0x8017FC94, source = "The area encounter zones." }
 g_EncounterZones = { addr = 0x80181164, source = "Encounter zone lists, one per map." }
 g_SceneFlagPairs = { addr = 0x80181484, source = "Two flag bytes per scene id; Area_SelectSceneRecord copies the pair of the matched scene id into the task." }
-g_FacingOffsets = { addr = 0x80181AC0, type = "FacingStep", source = "8 facing offsets of two words each, added to a position by the plchar route walkers" }
+g_FacingOffsets = { addr = 0x80181AC0, type = "Offset2", source = "8 facing offsets of two words each, added to a position by the plchar route walkers" }
 g_CharSlot = { addr = 0x80181B10, size = 12, source = "Character slot map." }
-g_FacingSteps = { addr = 0x80181B94, type = "FacingStep", source = "8 facing steps, PlChar_ProbeFacingCell adds step x and y to a position" }
+g_FacingSteps = { addr = 0x80181B94, type = "Offset2", source = "8 facing steps, PlChar_ProbeFacingCell adds step x and y to a position" }
 g_FacingStepY = { addr = 0x80181B98, source = "Y steps of the facing directions." }
 g_RouteSpeedScale = { addr = 0x80181BD4, source = "8 speed scales the route walkers multiply a step by" }
 s_LoaderRecordBytes = { addr = 0x80181D98, source = "Record list bytes of the loader." }
-g_SelectionCues = { addr = 0x80181EBA, type = "SelectionCue", source = "Sound cues of the selections." }
+g_SelectionCues = { addr = 0x80181EBA, source = "Sound cues of the selections." }
 g_SelectionSequences = { addr = 0x80181EBB, source = "Sequence byte of each g_BGMTracks row (+0x03, read with a 4-byte row stride), the partner of g_SelectionCues; consumers keep these byte views because a typed g_BGMTracks access moves the generated bytes." }
 s_ScriptCopyBlock = { addr = 0x8018216C, source = "Copy block of the script interpreter." }
 g_AreaScriptTests = { addr = 0x8018217C, source = "Condition tests of the area setup stream." }
