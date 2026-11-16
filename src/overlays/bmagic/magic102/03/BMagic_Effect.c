@@ -8,17 +8,17 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/func_801EEC14.h"
 
-#ifdef NON_MATCHING
 /* The effect's start: the caster's facing picks the target cell, every battler,
  * field actor and actor slot stores its height over the ground, the parts of the
  * cells around the target take the 0x28..0x2B commands this overlay draws, and the
  * effect clears its grid and queues the selection sound. */
-NON_MATCHING void func_801EEC80(void) {
+MATCH void func_801EEC80(void) {
     ScenePart* part;
     ScenePart* end;
     s32        i;
     s32        j;
     u16        cell;
+    s32        offset;
 
     if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
         if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
@@ -33,8 +33,9 @@ NON_MATCHING void func_801EEC80(void) {
             D_801F0CBC = D_8014637C->facing ^ 2;
         }
     }
-    D_801F0CC4           = g_AreaTargetCellX + (s8)D_801F0C94[D_801F0CBC * 2];
-    D_801F0CC8           = g_AreaTargetCellY + (s8)D_801F0C94[D_801F0CBC * 2 + 1];
+    offset               = D_801F0CBC * 2;
+    D_801F0CC4           = g_AreaTargetCellX + (s8)D_801F0C94[offset];
+    D_801F0CC8           = g_AreaTargetCellY + (s8)D_801F0C94[offset + 1];
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;
     for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
@@ -107,9 +108,6 @@ NON_MATCHING void func_801EEC80(void) {
     SND_QueueSelectionEffect(0x100);
     g_Task->header.mode += 1;
 }
-#else
-INCLUDE_ASM(func_801EEC80);
-#endif
 
 /* Counts this effect's steps; at the tick limit it re-arms the counter, steps
  * the magic, and flips the area camera's vertical offset with the frame parity. */
