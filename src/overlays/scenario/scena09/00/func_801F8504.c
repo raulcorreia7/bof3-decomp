@@ -12,7 +12,7 @@ MATCH void func_801F8504(void) {
             }
             D_80146258 |= 8;
             func_801C601C(1);
-            func_801BE1B0(5);
+            Scene_SetupParty(5);
             D_80146875 = 2;
             break;
         case 2:

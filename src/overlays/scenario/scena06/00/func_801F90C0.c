@@ -10,7 +10,7 @@ MATCH void func_801F90C0(void) {
 
     switch (g_SceneState.step_05) {
         case 0:
-            func_801BE1B0(3);
+            Scene_SetupParty(3);
             g_SceneState.step_05 = 1;
             break;
         case 1:
@@ -114,7 +114,7 @@ MATCH void func_801F90C0(void) {
             Scene_ClearScriptState(&g_SceneState.step_05);
             break;
         case 20:
-            func_801BE1B0(6);
+            Scene_SetupParty(6);
             Area_StartScrollRoute(1);
             g_SceneState.step_05 = 21;
             break;

@@ -20,13 +20,13 @@ MATCH void func_801F4B60(void) {
                 cue = 8;
                 break;
         }
-        func_801BE1B0(cue);
+        Scene_SetupParty(cue);
     } else {
         if (*selector == 0) {
-            func_801BE1B0(0);
+            Scene_SetupParty(0);
         }
         if (*selector == 2) {
-            func_801BE1B0(2);
+            Scene_SetupParty(2);
         }
     }
     Game_ClearScriptActive();

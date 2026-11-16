@@ -1,4 +1,4 @@
-/* Rewinds the script cursor when the spawned actor at (0x41, 0x3A) is in use, or when the first party member is in field mode 0x12B; otherwise calls func_801BE1B0(0). */
+/* Rewinds the script cursor when the spawned actor at (0x41, 0x3A) is in use, or when the first party member is in field mode 0x12B; otherwise calls Scene_SetupParty(0). */
 /* func_801F30E8 (area095/13), func_801F3078 (area096/13) */
 #define AREA_REWIND_CURSOR_FOR_SPAWNED_ACTOR_BODY()                                                                                                                    \
     u8 i;                                                                                                                                                              \
@@ -14,5 +14,5 @@
         g_ScriptState->cursor -= 2;                                                                                                                                    \
         Game_SetScriptActive();                                                                                                                                        \
     } else {                                                                                                                                                           \
-        func_801BE1B0(0);                                                                                                                                              \
+        Scene_SetupParty(0);                                                                                                                                           \
     }

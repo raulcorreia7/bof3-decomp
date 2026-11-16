@@ -6,7 +6,7 @@ MATCH void func_801F4B58(void) {
 
     switch (g_SceneEventState.step) {
         case 0:
-            func_801BE1B0(0);
+            Scene_SetupParty(0);
             g_SceneEventState.step = 1;
             break;
         case 1:
@@ -17,7 +17,7 @@ MATCH void func_801F4B58(void) {
             }
             break;
         case 5:
-            func_801BE1B0(1);
+            Scene_SetupParty(1);
             g_SceneEventState.step = 6;
             break;
         case 6:
@@ -28,7 +28,7 @@ MATCH void func_801F4B58(void) {
             }
             break;
         case 10:
-            func_801BE1B0(4);
+            Scene_SetupParty(4);
             g_SceneEventState.step = 0xB;
             break;
         case 11:
@@ -39,7 +39,7 @@ MATCH void func_801F4B58(void) {
             }
             break;
         case 15:
-            func_801BE1B0(5);
+            Scene_SetupParty(5);
             g_SceneEventState.step = 0x10;
             break;
         case 16:
@@ -50,7 +50,7 @@ MATCH void func_801F4B58(void) {
             }
             break;
         case 20:
-            func_801BE1B0(8);
+            Scene_SetupParty(8);
             g_SceneEventState.step = 0x15;
             break;
         case 21:
@@ -61,7 +61,7 @@ MATCH void func_801F4B58(void) {
             }
             break;
         case 25:
-            func_801BE1B0(9);
+            Scene_SetupParty(9);
             g_SceneEventState.step = 0x1A;
             break;
         case 26:
@@ -165,7 +165,7 @@ MATCH void func_801F4B58(void) {
             break;
         case 52:
             Game_ClearScriptActive();
-            func_801BE1B0(0xC);
+            Scene_SetupParty(0xC);
             g_SceneEventState.step = 0x35;
             break;
         case 53:

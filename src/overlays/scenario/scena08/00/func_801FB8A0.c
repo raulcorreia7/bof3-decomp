@@ -9,7 +9,7 @@ MATCH void func_801FB8A0(void) {
     switch (g_SceneState.step_05) {
         case 0:
             g_ScriptVars[0] = 0x0A;
-            func_801BE1B0(1);
+            Scene_SetupParty(1);
             g_SceneState.step_05 = 1;
             break;
         case 1:
@@ -22,7 +22,7 @@ MATCH void func_801FB8A0(void) {
             break;
         case 2:
             if (g_Actors[g_ScriptVars[3]].header.flags & ACTOR_FLAG_OFFSCREEN) {
-                func_801BE1B0(2);
+                Scene_SetupParty(2);
                 g_SceneState.state_04 = 0;
                 g_SceneState.step_05  = 0;
             }

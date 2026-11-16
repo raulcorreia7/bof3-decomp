@@ -11,7 +11,7 @@ MATCH void func_801FD400(void) {
     switch (g_SceneState.step_05) {
         case 0:
             Game_ClearScriptActive();
-            func_801BE1B0(1);
+            Scene_SetupParty(1);
             g_SceneState.state_04 = 0;
             g_SceneState.step_05  = 0;
             break;

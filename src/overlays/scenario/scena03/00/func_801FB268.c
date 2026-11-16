@@ -20,7 +20,7 @@ NON_MATCHING void func_801FB268(void) {
                 break;
             }
             g_ScriptVars[0] = 0;
-            func_801BE1B0(4);
+            Scene_SetupParty(4);
             g_SceneState.step_05 = 1;
             break;
         case 1:

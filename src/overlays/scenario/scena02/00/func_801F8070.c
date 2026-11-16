@@ -23,7 +23,7 @@ MATCH void func_801F8070(void) {
             }
             break;
         case 5:
-            func_801BE1B0(1);
+            Scene_SetupParty(1);
             g_SceneState.step_05 = 6;
             break;
         case 6:
@@ -41,7 +41,7 @@ MATCH void func_801F8070(void) {
             }
             break;
         case 7:
-            func_801BE1B0(2);
+            Scene_SetupParty(2);
             g_SceneState.step_05 = 8;
             break;
         case 8:

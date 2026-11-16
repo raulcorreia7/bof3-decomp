@@ -9,7 +9,7 @@ MATCH void func_801FA9DC(void) {
         case 0:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 g_ScriptVars[0] = 0;
-                func_801BE1B0(1);
+                Scene_SetupParty(1);
                 g_SceneState.step_05 = 1;
             }
             break;

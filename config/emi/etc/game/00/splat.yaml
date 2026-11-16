@@ -752,7 +752,7 @@ segments:
       - [0x28614, c, Actor_FindInRange]
       - [0x28708, c, Area_GetActorFacingStepX]
       - [0x288C0, c, Game_GetPartySize]
-      - [0x289B0, c, func_801BE1B0]
+      - [0x289B0, c, Scene_SetupParty]
       - [0x28D74, c, func_801BE574]
       - [0x28F10, c, func_801BE710]
       - [0x28F38, c, Party_SwapMembers]

@@ -513,7 +513,7 @@ MATCH void func_801F37E4(void) {
             }
             break;
         case 1:
-            func_801BE1B0(1);
+            Scene_SetupParty(1);
             g_SceneEventState.step = 2;
             break;
         case 2:

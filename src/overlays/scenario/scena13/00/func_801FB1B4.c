@@ -15,7 +15,7 @@ MATCH void func_801FB1B4(void) {
             if (D_8014623B != 0) {
                 break;
             }
-            func_801BE1B0(0xA);
+            Scene_SetupParty(0xA);
             SYS_SetFlag(g_SceneFlags, 0x1D);
             D_80146874 = 0;
             D_80146875 = 0;

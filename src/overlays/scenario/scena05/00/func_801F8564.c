@@ -34,7 +34,7 @@ MATCH void func_801F8564(void) {
             break;
         case 7:
             if (g_ScriptVars[0] == 0x14) {
-                func_801BE1B0(0);
+                Scene_SetupParty(0);
                 D_80146875 = 8;
             }
             break;

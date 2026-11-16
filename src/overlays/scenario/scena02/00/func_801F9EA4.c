@@ -71,7 +71,7 @@ MATCH void func_801F9EA4(void) {
             Game_SetScriptActive();
             g_GameFlags |= 8;
             SYS_SetFlag(g_SceneFlags, 0x18);
-            func_801BE1B0(0x11);
+            Scene_SetupParty(0x11);
             g_SceneState.step_05 = 0xB;
             break;
         case 11:

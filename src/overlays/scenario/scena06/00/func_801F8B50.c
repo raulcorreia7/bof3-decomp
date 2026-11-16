@@ -13,7 +13,7 @@ MATCH void func_801F8B50(void) {
             break;
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                func_801BE1B0(0);
+                Scene_SetupParty(0);
                 g_SceneState.step_05 = 2;
             }
             break;
@@ -68,7 +68,7 @@ MATCH void func_801F8B50(void) {
             break;
         case 11:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                func_801BE1B0(2);
+                Scene_SetupParty(2);
                 g_SceneState.step_05 = 12;
             }
             break;
@@ -86,7 +86,7 @@ MATCH void func_801F8B50(void) {
             break;
         case 21:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                func_801BE1B0(0);
+                Scene_SetupParty(0);
                 g_SceneState.step_05 = 22;
             }
             break;

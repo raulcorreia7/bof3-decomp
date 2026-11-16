@@ -20,12 +20,12 @@ MATCH u16 func_801FD3C0(void) {
 
 MATCH void func_801FD4A4(void) {
     Game_SetScriptActive();
-    func_801BE1B0(1);
+    Scene_SetupParty(1);
 }
 
 MATCH void func_801FD4CC(void) {
     Game_SetScriptActive();
-    func_801BE1B0(4);
+    Scene_SetupParty(4);
 }
 
 MATCH void func_801FD4F4(void) {
@@ -118,7 +118,7 @@ MATCH void func_801FDA0C(Actor* actor) {
     u8* state;
 
     Game_SetScriptActive();
-    func_801BE1B0(1);
+    Scene_SetupParty(1);
     SYS_SetFlag(g_SceneFlags, 21);
     state = &D_80146875;
     *state += 1;

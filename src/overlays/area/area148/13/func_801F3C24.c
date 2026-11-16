@@ -10,7 +10,7 @@ MATCH void func_801F3C24(void) {
 
     switch (g_SceneEventStep) {
         case 0:
-            func_801BE1B0(0);
+            Scene_SetupParty(0);
             g_SceneEventStep = 1;
             break;
         case 1:

@@ -12,7 +12,7 @@ MATCH void func_801FAFA8(void) {
     switch (g_SceneState.step_05) {
         case 0:
             EMI_LoadArchive(0x291);
-            func_801BE1B0(4);
+            Scene_SetupParty(4);
             g_SceneState.step_05 = 1;
             break;
         case 1:
@@ -52,7 +52,7 @@ MATCH void func_801FAFA8(void) {
             if (!(g_SpawnedActors[D_801FE748].header.flags & 1)) {
                 i = 5;
                 do {
-                    r = func_801BE1B0((u8)i);
+                    r = Scene_SetupParty((u8)i);
                     i++;
                     if ((u8)r == 0) {
                         break;
@@ -91,14 +91,14 @@ MATCH void func_801FAFA8(void) {
             Game_ClearScriptActive();
             g_AreaSceneMode = 2;
             SYS_SetFlag(g_SceneFlags, 1);
-            func_801BE1B0(9);
+            Scene_SetupParty(9);
             g_SceneState.state_04 = 0;
             g_SceneState.step_05  = 0;
             break;
         case 20:
             func_801FDC6C(0x440000, 0x20000, 4, 0xFF, 0);
             g_ScriptVars[0] = 1;
-            func_801BE1B0(1);
+            Scene_SetupParty(1);
             g_SceneState.step_05 = 0x15;
             break;
         case 21:
@@ -155,7 +155,7 @@ MATCH void func_801FAFA8(void) {
             break;
         case 30:
             func_801FDC6C(0x520000, 0x2F0000, 5, 2, 0);
-            func_801BE1B0(3);
+            Scene_SetupParty(3);
             g_SceneState.step_05 = 0x1F;
             break;
         case 31:
@@ -169,7 +169,7 @@ MATCH void func_801FAFA8(void) {
             break;
         case 40:
             g_ScriptVars[0] = 0xA;
-            func_801BE1B0(4);
+            Scene_SetupParty(4);
             g_SceneState.step_05 = 0x29;
             break;
         case 41:

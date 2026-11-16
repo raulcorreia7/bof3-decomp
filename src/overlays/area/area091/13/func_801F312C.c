@@ -13,7 +13,7 @@ MATCH void func_801F312C(void) {
         } else {
             value = 1;
         }
-        func_801BE1B0(value);
+        Scene_SetupParty(value);
         g_AreaScrollTargetX = TO_COORD(31) + COORD_HALF;
         g_AreaScrollTargetY = TO_COORD(26);
         g_Task              = actor;

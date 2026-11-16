@@ -18,7 +18,7 @@ MATCH void func_801F5708(void) {
     }
     Message_Request(request);
 done:
-    func_801BE1B0(13);
+    Scene_SetupParty(13);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
     TASK_SET(work);
 }

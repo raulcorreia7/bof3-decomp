@@ -8,7 +8,7 @@ MATCH void func_801F30BC(void) {
         case 0:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                func_801BE1B0(6);
+                Scene_SetupParty(6);
                 SYS_SetFlag(state + 0x63C, 136);
                 goto done;
             }

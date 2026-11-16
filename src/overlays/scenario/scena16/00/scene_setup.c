@@ -164,7 +164,7 @@ MATCH void func_801F6F30(void) {
         SYS_SetFlag(g_SceneFlags, 2);
     } else if (SYS_TestFlag(g_SceneFlags, 10) == 0) {
         SYS_SetFlag(g_SceneFlags, 10);
-        func_801BE1B0(0u);
+        Scene_SetupParty(0u);
         SCENA16_D_80149308 = 0x260000u;
         SCENA16_D_8014930C = 0x1B8000u;
     }

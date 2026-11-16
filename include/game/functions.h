@@ -160,8 +160,9 @@ s8    Actor_FindInRange(s32 pos_x, s32 pos_y, s32 range_mode);
 /* Game_GetPartySize */
 /* func_801BE0C0 */
 s8    Game_GetPartySize(s32 pos_x, s32 pos_y, s32 range_mode);
+/* Scene_SetupParty */
 /* func_801BE1B0 */
-s32   func_801BE1B0(u32 index);
+s32   Scene_SetupParty(u32 scene);
 /* func_801BFE34 */
 void  func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode);
 /* func_801C1254 */

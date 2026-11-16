@@ -11,7 +11,7 @@ MATCH void func_801F3254(void) {
             Game_ClearScriptActive();
             /* The event flags sit 0x63C bytes past the step byte. */
             if (SYS_TestFlag(step + 0x63C, 0x27) == 0) {
-                func_801BE1B0(4);
+                Scene_SetupParty(4);
                 *step = 1;
                 /* The flag word has no named bits 12 and 1-2; the load sets them. */
                 g_GameFlags |= 0x1000;

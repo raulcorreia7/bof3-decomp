@@ -6,7 +6,7 @@ MATCH void func_801F4BC0(void) {
     state = &g_SceneEventState.step;
     switch (*state) {
         case 0:
-            func_801BE1B0(1);
+            Scene_SetupParty(1);
             *state = 1;
             break;
         case 1:
@@ -18,7 +18,7 @@ MATCH void func_801F4BC0(void) {
             }
             break;
         case 5:
-            func_801BE1B0(0);
+            Scene_SetupParty(0);
             *state = 6;
             break;
         case 6:

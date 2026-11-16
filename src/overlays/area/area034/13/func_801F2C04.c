@@ -21,7 +21,7 @@ resume:
     if (g_MessageChoice != 2 && g_SceneState.scenario_id == 8 && SYS_TestFlag(g_SceneFlags, 3) == 0) {
         g_SceneEventState.mode = 0;
         Game_SetScriptActive();
-        func_801BE1B0(2);
+        Scene_SetupParty(2);
         g_SceneState.state_04 = 2;
         g_SceneState.step_05  = 0;
     }

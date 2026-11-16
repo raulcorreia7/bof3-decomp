@@ -12,7 +12,7 @@ MATCH void func_801F40C0(void) {
         case 0:
             active = 1;
             Game_ClearScriptActive();
-            func_801BE1B0(0);
+            Scene_SetupParty(0);
             flags                    = g_GameFlags;
             g_Game.members[0].unk_48 = active;
             g_GameFlags              = flags | 0x1270;

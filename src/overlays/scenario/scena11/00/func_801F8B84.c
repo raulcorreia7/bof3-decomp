@@ -12,7 +12,7 @@ MATCH void func_801F8B84(void) {
                 break;
             }
             g_ScriptVars[0] = 1;
-            func_801BE1B0(1);
+            Scene_SetupParty(1);
             g_SceneState.step_05 = 1;
             break;
         case 1: {

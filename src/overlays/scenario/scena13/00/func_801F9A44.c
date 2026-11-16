@@ -64,7 +64,7 @@ MATCH void func_801F9A44(void) {
                 break;
             }
             Game_ClearScriptActive();
-            func_801BE1B0(1);
+            Scene_SetupParty(1);
             D_80146874 = 0;
             D_80146875 = 0;
             break;
@@ -80,7 +80,7 @@ MATCH void func_801F9A44(void) {
             if (*countdown != 0) {
                 break;
             }
-            func_801BE1B0(2);
+            Scene_SetupParty(2);
             Area_SetCellPalette(0xA, 8);
             D_80146875 = 0xC;
             break;

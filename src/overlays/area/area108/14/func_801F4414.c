@@ -33,7 +33,7 @@ MATCH void func_801F4414(void) {
                     mask |= 1 << (i - 1);
                 }
             }
-            func_801BE1B0(mask);
+            Scene_SetupParty(mask);
             if (!SYS_TestFlag(g_SceneEventFlags, 0x18)) {
                 g_CurrentActor->unk_77 = 1;
             } else if (!SYS_TestFlag(g_SceneEventFlags, 0x19)) {
@@ -52,7 +52,7 @@ MATCH void func_801F4414(void) {
                     mask |= 1 << (i - 1);
                 }
             }
-            func_801BE1B0(mask);
+            Scene_SetupParty(mask);
             step                   = index + 4;
             g_CurrentActor->unk_77 = step;
             break;
@@ -63,7 +63,7 @@ MATCH void func_801F4414(void) {
                     mask |= 1 << (i - 1);
                 }
             }
-            func_801BE1B0(mask);
+            Scene_SetupParty(mask);
             func_801F55F0(0);
             step                   = index + 4;
             g_CurrentActor->unk_77 = step;
@@ -75,7 +75,7 @@ MATCH void func_801F4414(void) {
                     mask |= 1 << (i - 1);
                 }
             }
-            func_801BE1B0(mask);
+            Scene_SetupParty(mask);
             step                   = index + 4;
             g_CurrentActor->unk_77 = step;
             break;
@@ -86,7 +86,7 @@ MATCH void func_801F4414(void) {
                     mask |= 1 << (i - 1);
                 }
             }
-            func_801BE1B0(mask);
+            Scene_SetupParty(mask);
             if (SYS_TestFlag(g_SceneEventFlags, 0x1B)) {
                 g_CurrentActor->unk_77 = 9;
             } else {

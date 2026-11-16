@@ -56,7 +56,7 @@ MATCH void func_801FA8EC(void) {
             }
             break;
         case 7:
-            func_801BE1B0(0);
+            Scene_SetupParty(0);
             g_SceneState.step_05 = 8;
             break;
         case 8:

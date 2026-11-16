@@ -72,7 +72,7 @@ NON_MATCHING void func_801BFB34(void) {
             Actor_SelectScript(g_Task->direction_08);
         }
     } else {
-        func_801BE1B0(g_Game.battle_order);
+        Scene_SetupParty(g_Game.battle_order);
         func_80199440();
     }
 }

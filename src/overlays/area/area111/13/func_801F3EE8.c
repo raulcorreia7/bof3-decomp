@@ -9,7 +9,7 @@ MATCH void func_801F3EE8(void) {
         case 2:
         case 4:
         case 6:
-            func_801BE1B0(0);
+            Scene_SetupParty(0);
             D_801448EE             = 10;
             g_SceneEventState.step = 10;
             break;

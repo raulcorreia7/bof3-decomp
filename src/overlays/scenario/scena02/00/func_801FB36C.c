@@ -21,13 +21,13 @@ MATCH void func_801FB36C(void) {
             g_ScriptVars[0] = 1;
             switch (g_PartyFieldOrder[0]) {
                 case 0:
-                    func_801BE1B0(0xC);
+                    Scene_SetupParty(0xC);
                     break;
                 case 3:
-                    func_801BE1B0(0x1C);
+                    Scene_SetupParty(0x1C);
                     break;
                 case 4:
-                    func_801BE1B0(0x1B);
+                    Scene_SetupParty(0x1B);
                     break;
             }
             g_SceneState.step_05 = 2;

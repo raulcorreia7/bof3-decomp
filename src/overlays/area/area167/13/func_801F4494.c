@@ -7,7 +7,7 @@ MATCH void func_801F4494(void) {
 
     switch (g_SceneEventState.step) {
         case 0:
-            func_801BE1B0(0);
+            Scene_SetupParty(0);
             g_SceneEventState.step = 1;
             break;
         case 1:
@@ -34,7 +34,7 @@ MATCH void func_801F4494(void) {
             break;
         case 10:
             if (D_80146867 == 0x64) {
-                func_801BE1B0(5);
+                Scene_SetupParty(5);
                 g_SceneEventState.step = 0xB;
             }
             break;
@@ -62,12 +62,12 @@ MATCH void func_801F4494(void) {
             break;
         case 20:
             if (D_80146867 == 0x44) {
-                func_801BE1B0(2);
+                Scene_SetupParty(2);
                 g_SceneEventState.step = 0x18;
             }
             break;
         case 21:
-            func_801BE1B0(8);
+            Scene_SetupParty(8);
             g_SceneEventState.step = 0x18;
             break;
         case 24:
