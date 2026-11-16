@@ -6,8 +6,10 @@
 #include "overlays/bmagic/bmagic.h"
 
 /* battle/battle/15: the sprite cell of a battle record, and its copies into the cell rows. */
-u32  func_800AFB48(void* record);
-void func_800AFAB8(void* record);
+/* func_800AFB48 */
+u32  Battle_CopyCellPalette(void* record);
+/* func_800AFAB8 */
+void Battle_ClearCellPaletteEntry(void* record);
 
 #define MAGIC001_STEP_COUNT 11
 

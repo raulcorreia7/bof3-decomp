@@ -920,8 +920,8 @@ ASSERT_SIZE(BattlePhase, 3);
 ASSERT_OFFSET(BattlePhase, step, 0x01);
 ASSERT_OFFSET(BattlePhase, sub_step, 0x02);
 
-/* Battle sprite cell record consumed by func_800AF8F0, func_800AF9D4 and
- * func_800AFB48: +0x24 bit 2 selects the second cell bank, +0x27 is
+/* Battle sprite cell record consumed by Battle_SetCellPaletteStp, Battle_ClearCellPaletteStp
+ * and Battle_CopyCellPalette: +0x24 bit 2 selects the second cell bank, +0x27 is
  * the quotient/remainder source and +0x28 indexes D_800B6C28/D_800B6C30/
  * D_800B6C38. */
 typedef struct BattleSpriteCell {

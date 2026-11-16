@@ -55,10 +55,10 @@ MATCH void func_801EEC94(void) {
     *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW)        = 0;
     *MEM_PTR(u16, AREA_PALETTE_WORK + 26 * AREA_PALETTE_ROW + 0x20) = 0;
     g_GfxPalettePending                                             = 1;
-    g_Task->unk_27                                                  = func_800AFB48(g_BattleEffectBattler);
+    g_Task->unk_27                                                  = Battle_CopyCellPalette(g_BattleEffectBattler);
     g_Task->unk_28                                                  = g_BattleEffectBattler->unk_28;
     g_Task->unk_24                                                  = g_BattleEffectBattler->unk_24;
-    func_800AF8F0(g_Task);
+    Battle_SetCellPaletteStp(g_Task);
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
 }
 

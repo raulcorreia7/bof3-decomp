@@ -72,11 +72,11 @@ MATCH void func_801EF0B8(void) {
     g_BattleEffects[index & BYTE_MASK].header.step   = 0;
     g_BattleEffects[index & BYTE_MASK].handler_index = 31;
     g_BattleEffects[index & BYTE_MASK].target.party  = work;
-    g_Task->unk_27                                   = func_800AFB48(g_BattleEffectBattler);
+    g_Task->unk_27                                   = Battle_CopyCellPalette(g_BattleEffectBattler);
     g_Task->unk_28                                   = g_BattleEffectBattler->unk_28;
     g_Task->unk_24                                   = g_BattleEffectBattler->unk_24;
-    func_800AF8F0(g_Task);
-    func_800AFAB8(g_Task);
+    Battle_SetCellPaletteStp(g_Task);
+    Battle_ClearCellPaletteEntry(g_Task);
 }
 
 MATCH void func_801EF324(void) {
@@ -122,10 +122,10 @@ MATCH void func_801EF3F0(void) {
         g_BattleEffects[index & BYTE_MASK].target.party  = work;
         g_Task->param.unk_0B++;
     }
-    g_Task->unk_27 = func_800AFB48(g_BattleEffectBattler);
+    g_Task->unk_27 = Battle_CopyCellPalette(g_BattleEffectBattler);
     g_Task->unk_28 = g_BattleEffectBattler->unk_28;
     g_Task->unk_24 = g_BattleEffectBattler->unk_24;
-    func_800AF8F0(g_Task);
+    Battle_SetCellPaletteStp(g_Task);
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
 }
 

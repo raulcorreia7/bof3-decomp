@@ -32,10 +32,10 @@ MATCH void func_801EEC98(void) {
         g_BattleEffects[index & BYTE_MASK].target.party  = work;
         g_Task->param.unk_0B++;
     }
-    g_Task->unk_27 = func_800AFB48(g_BattleEffectBattler);
+    g_Task->unk_27 = Battle_CopyCellPalette(g_BattleEffectBattler);
     g_Task->unk_28 = g_BattleEffectBattler->unk_28;
     g_Task->unk_24 = g_BattleEffectBattler->unk_24;
-    func_800AF8F0(g_Task);
+    Battle_SetCellPaletteStp(g_Task);
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
     SND_QueueSelectionEffect(0x100);
 }

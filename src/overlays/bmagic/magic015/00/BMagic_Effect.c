@@ -47,10 +47,10 @@ MATCH void func_801EED0C(void) {
     g_BattleEffects[index & BYTE_MASK].target.party  = owner;
     g_Task->param.unk_0B++;
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
-    g_Task->unk_27 = func_800AFB48(g_BattleEffectBattler);
+    g_Task->unk_27 = Battle_CopyCellPalette(g_BattleEffectBattler);
     g_Task->unk_28 = g_BattleEffectBattler->unk_28;
     g_Task->unk_24 = g_BattleEffectBattler->unk_24;
-    func_800AF8F0(g_Task);
+    Battle_SetCellPaletteStp(g_Task);
 }
 
 #include "overlays/bmagic/Effect_RestorePaletteAndReleaseActive.h"
@@ -76,11 +76,11 @@ MATCH void func_801EF2B4(void) {
 
     g_Task->facing = g_BattleEffectBattler->facing;
     WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
-    g_Task->unk_27 = func_800AFB48(g_BattleEffectBattler);
+    g_Task->unk_27 = Battle_CopyCellPalette(g_BattleEffectBattler);
     g_Task->unk_28 = g_BattleEffectBattler->unk_28;
     g_Task->unk_24 = g_BattleEffectBattler->unk_24;
-    func_800AF8F0(g_Task);
-    func_800AFAB8(g_Task);
+    Battle_SetCellPaletteStp(g_Task);
+    Battle_ClearCellPaletteEntry(g_Task);
     func_800AEF98(8, 2);
     g_Task->param.unk_0B = 0;
     for (i = 0; i < 3; i++) {
@@ -136,11 +136,11 @@ MATCH void func_801EF6B0(void) {
     g_BattleEffects[index & BYTE_MASK].handler_index = 35;
     g_BattleEffects[index & BYTE_MASK].arg.unk_09    = 0;
     g_BattleEffects[index & BYTE_MASK].target.party  = work;
-    g_Task->unk_27                                   = func_800AFB48(g_BattleEffectBattler);
+    g_Task->unk_27                                   = Battle_CopyCellPalette(g_BattleEffectBattler);
     g_Task->unk_28                                   = g_BattleEffectBattler->unk_28;
     g_Task->unk_24                                   = g_BattleEffectBattler->unk_24;
-    func_800AF8F0(g_Task);
-    func_800AFAB8(g_Task);
+    Battle_SetCellPaletteStp(g_Task);
+    Battle_ClearCellPaletteEntry(g_Task);
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_Task->header.mode++;
 }

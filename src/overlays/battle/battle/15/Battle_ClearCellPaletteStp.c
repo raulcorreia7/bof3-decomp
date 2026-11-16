@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-MATCH void func_800AF8F0(BattleSpriteCell* record) {
+/* func_800AF9D4 */
+MATCH void Battle_ClearCellPaletteStp(BattleSpriteCell* record) {
     u8  index;
     u32 quotient;
     u32 remainder;
@@ -23,7 +24,7 @@ MATCH void func_800AF8F0(BattleSpriteCell* record) {
     }
     for (i = 1; i < (s_BattleCellRowCount[record->bank_index] << 4); i++) {
         clut = (u32)g_GraphicsPaletteDst + ((base & BYTE_MASK) << 9);
-        *(u16*)(clut + ((product & BYTE_MASK) + i) * 2) |= 0x8000;
+        *(u16*)(clut + ((product & BYTE_MASK) + i) * 2) &= 0x7FFF;
     }
     g_GfxPalettePending = 1;
 }

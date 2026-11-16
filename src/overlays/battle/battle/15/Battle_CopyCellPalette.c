@@ -1,6 +1,7 @@
 #include "battle_15.h"
 
-MATCH void func_800AF9D4(BattleSpriteCell* record) {
+/* func_800AFB48 */
+MATCH u32 Battle_CopyCellPalette(BattleSpriteCell* record) {
     u8  index;
     u32 quotient;
     u32 remainder;
@@ -21,9 +22,10 @@ MATCH void func_800AF9D4(BattleSpriteCell* record) {
     if (record->flags_24 & 0x4) {
         base = quotient + 0x10;
     }
-    for (i = 1; i < (s_BattleCellRowCount[record->bank_index] << 4); i++) {
-        clut = (u32)g_GraphicsPaletteDst + ((base & BYTE_MASK) << 9);
-        *(u16*)(clut + ((product & BYTE_MASK) + i) * 2) &= 0x7FFF;
+    for (i = 0; i < (s_BattleCellRowCount[record->bank_index] << 4); i++) {
+        clut                        = (u32)g_GraphicsPaletteDst + ((base & BYTE_MASK) << 9);
+        *(u16*)(0x80037C00 + i * 2) = *(u16*)(clut + ((product & BYTE_MASK) + i) * 2);
     }
     g_GfxPalettePending = 1;
+    return (s_BattleCellRowDivisor[record->bank_index] * 2) & 0xFE;
 }
