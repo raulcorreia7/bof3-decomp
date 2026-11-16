@@ -31,7 +31,9 @@ above its definition and declaration. A named symbol is one name in every image:
 `--image` its row is renamed in every table that has it. An address name is unique only per
 image, so give `--image` once per image that holds the twin; `--local` limits the files to those
 images' `src/` and `config/` folders (`--scope` to the given paths). The resident images
-(`exe/slus_004_22`, `emi/etc/game/00`) are visible everywhere and rename with no scope.
+(`exe/slus_004_22`, `emi/etc/game/00`) are visible everywhere and rename with no scope. The new
+name follows the same scope: a readable name must occur nowhere in the tree, an address-form name
+only in the image and the images its link sees.
 
 Every layout row that names `OLD` follows the rename, the unit file is moved with it, and a
 `--scope` that leaves the layout or the unit outside is refused rather than leaving a stale name.
@@ -298,6 +300,36 @@ def under_scope(path: Path, scope: list[str]) -> bool:
     )
 
 
+def link_owners(image: str) -> list[str]:
+    """The images one image's link reads names from: itself, the residents and its owners."""
+    try:
+        return symbols.link_owners(ROOT, image)
+    except (OSError, KeyError, TypeError, ValueError):
+        return [image]
+
+
+def address_clash(name: str, images: list[str]) -> str | None:
+    """Why an address name cannot be used again, or None when its address is free.
+
+    An address name spells its own address, so another image may hold it for its own symbol
+    there, and a reference to it names the same symbol. Only a use in the image itself or a
+    visible table row with another address collides; comments and strings name nothing.
+    """
+    pattern = re.compile(r"\b" + re.escape(name) + r"\b")
+    address = symbols.address_of(name)
+    for image in images:
+        own = [f"src/{source_folder(image)}", f"config/{image}"]
+        for path in grep_files(name, [f for f in own if (ROOT / f).is_dir()]):
+            text = (ROOT / path).read_text(encoding="utf-8", errors="replace")
+            if pattern.search(ctext.mask(text)):
+                return path
+        for owner in link_owners(image):
+            for row in symbols.target_rows(ROOT, owner):
+                if row.name == name and row.addr != address:
+                    return f"[{owner}] {name} is 0x{row.addr:08X}"
+    return None
+
+
 def rename_layout_row(text: str, row: RowRef, new: str) -> str:
     """Return ``text`` with one layout row named ``new``; a row already renamed stays."""
     lines = text.split("\n")
@@ -493,7 +525,11 @@ def rename(args: argparse.Namespace) -> int:
                 body = row.source.read_text(encoding="utf-8", errors="replace")
                 live = live or bool(re.search(r"\b" + re.escape(old) + r"\b", body))
     repair = bool(rows) and not live
-    clash = grep_files(new, scope)
+    if symbols.ADDRESS_NAME.fullmatch(new):
+        use = address_clash(new, images)
+        clash = [use] if use else []
+    else:
+        clash = grep_files(new, scope)
     if clash and not repair:
         document = tomllib.loads(text)
         allowed = bool(address) and any(
