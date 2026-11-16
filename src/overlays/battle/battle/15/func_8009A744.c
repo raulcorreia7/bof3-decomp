@@ -10,17 +10,21 @@ NON_MATCHING void func_8009A744(void) {
     u8* row;
     u8* cell;
     u8  value;
+    u8  party_position;
+    u8  character_index;
     /* FAKE: the slot counter takes retail's s1 home (pure-C best 46.40%). */
     FAKE_REG(u8, i, "s1");
     u8 j;
 
-    base     = &g_Characters[MEM_PTR(u8, g_CharSlot)[g_PartyBattleOrder[D_801485C4]]];
-    slots[0] = base + 0xE;
-    slots[1] = base + 0xF;
-    slots[2] = base + 0x10;
-    slots[3] = base + 0x11;
-    slots[4] = base + 0x12;
-    slots[5] = base + 0x13;
+    party_position  = g_PartyBattleOrder[D_801485C4];
+    character_index = g_CharSlot[party_position];
+    base            = (u8*)&g_Characters[character_index];
+    slots[0]        = base + 0xE;
+    slots[1]        = base + 0xF;
+    slots[2]        = base + 0x10;
+    slots[3]        = base + 0x11;
+    slots[4]        = base + 0x12;
+    slots[5]        = base + 0x13;
     for (i = 0; i < 6; i++) {
         value = s_BattleEquipment[i];
         if (value != 0) {
