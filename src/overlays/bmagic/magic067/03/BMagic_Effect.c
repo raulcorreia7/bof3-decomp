@@ -13,10 +13,14 @@ MATCH void func_801EEC24(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EEC94(void) {
-    u32  slot;
-    u16* src;
-    u16* dst;
-    u32  i;
+    BattleEffect*    effect;
+    BattleWorkImage* row;
+    PartyMember*     work;
+    u32              slot;
+    u32              enemy;
+    u16*             src;
+    u16*             dst;
+    u32              i;
 
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0x18;
@@ -27,32 +31,38 @@ NON_MATCHING void func_801EEC94(void) {
     g_BattleEffects[slot].unk_08       = g_BattleEffectBattler->facing;
     g_Task->param.unk_0B += 1;
     slot                               = Battle_AllocEffect(1, 0x13) & BYTE_MASK;
-    i                                  = 0;
-    dst                                = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW));
-    src                                = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BMAGIC_ROW));
+    work                               = g_Task;
     g_BattleEffects[slot].header.mode  = 1;
-    g_BattleEffects[slot].target.party = (PartyMember*)g_Task;
+    g_BattleEffects[slot].target.party = work;
     g_Task->param.unk_0B += 1;
+    i   = 0;
+    dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW));
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BMAGIC_ROW));
     for (; i < 0x100; i++) {
-        *dst++ = *src++ | PSX_COLOR_STP_BIT;
+        dst[i] = src[i] | PSX_COLOR_STP_BIT;
     }
-    dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW));
-    src = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
-    for (i = 0; i < 0x10; i++) {
+    BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
+    for (; i < 0x10; i++) {
         dst[0]    = src[0];
         dst[0x10] = src[0x10];
         dst++;
         src++;
     }
     g_GfxPalettePending = 1;
-    if (g_Battle.encounter != 0 && g_BattleEnemyBattlers[g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT].unk_F0 == 0x29) {
-        slot = Battle_AllocEffect(1, 0x13) & BYTE_MASK;
-        memcpy(&g_BattleEffects[slot], &g_BattleEnemyBattlers[g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT], 0x74);
-        g_BattleEffects[slot].header.mode   = 3;
-        g_BattleEffects[slot].unk_06        = 1;
-        g_BattleEffects[slot].header.step   = 0;
-        g_BattleEffects[slot].handler_index = 0x13;
-        g_BattleEffects[slot].arg.unk_09    = 0;
+    if (g_Battle.encounter != 0) {
+        enemy = g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT;
+        if (g_BattleEnemyBattlers[enemy].unk_F0 == 0x29) {
+            slot                                = Battle_AllocEffect(1, 0x13) & BYTE_MASK;
+            effect                              = &g_BattleEffects[slot];
+            enemy                               = g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT;
+            row                                 = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
+            *(BattleWorkImage*)effect           = *row;
+            g_BattleEffects[slot].header.mode   = 3;
+            g_BattleEffects[slot].unk_06        = 1;
+            g_BattleEffects[slot].header.step   = 0;
+            g_BattleEffects[slot].handler_index = 0x13;
+            g_BattleEffects[slot].arg.unk_09    = 0;
+        }
     }
 }
 #else
