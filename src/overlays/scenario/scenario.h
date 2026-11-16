@@ -159,4 +159,8 @@ ASSERT_OFFSET(FallingSpark, unk_18, 0x18);
 
 FallingSpark* func_801F8394(void);
 
+/* The two dispatch tables the scenario step code indexes. */
+extern SceneFunc g_SceneActorDispatch[];
+extern Callback  g_SceneEntityDispatch[];
+
 #endif

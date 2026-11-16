@@ -64,8 +64,3 @@ MATCH void func_801F7A9C(void) {
 
 MATCH void func_801F7C30(void) {
 }
-
-INCLUDE_ASM(func_801F7C38);
-
-MATCH void func_801F8068(void) {
-}
