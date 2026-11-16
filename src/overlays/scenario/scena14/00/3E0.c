@@ -246,7 +246,84 @@ NON_MATCHING s32 func_801FB648(s32 x, s32 y) {
 INCLUDE_ASM(func_801FB648);
 #endif
 
-INCLUDE_ASM(func_801FB84C);
+MATCH s32 func_801FB84C(s32 x, s32 y) {
+    if (LOHU(g_GameAreaId) == AREA_ID_RYU_DREAM_FIRST) {
+        if (D_80143F03 == 0) {
+            if (!SYS_TestFlag(g_SceneFlags, 21)) {
+                if (x < TO_COORD_HALF(79) && (u32)((y >> 16) - 7) < 8) {
+                    Game_SetScriptActive();
+                    D_80146874 = 7;
+                    D_80146875 = 0;
+                }
+            } else if (!SYS_TestFlag(g_SceneFlags, 22)) {
+                if (x < TO_COORD_HALF(73) && (u32)((y >> 16) - 9) < 4) {
+                    Game_SetScriptActive();
+                    D_80146874 = 7;
+                    D_80146875 = 1;
+                }
+            } else if (!SYS_TestFlag(g_SceneFlags, 23)) {
+                if (x < TO_COORD_HALF(64) && (u32)((y >> 16) - 9) < 4) {
+                    Game_SetScriptActive();
+                    D_80146874 = 7;
+                    D_80146875 = 2;
+                }
+            }
+        }
+        if (D_80143F03 == 1 && SYS_TestFlag(g_SceneEventFlags, 0x7A)) {
+            if (!SYS_TestFlag(g_SceneFlags, 25)) {
+                if (x < TO_COORD_HALF(57) && (u32)((y >> 16) - 0x31) < 4) {
+                    Game_SetScriptActive();
+                    D_80146874 = 7;
+                    D_80146875 = 3;
+                }
+            } else if (!SYS_TestFlag(g_SceneFlags, 26)) {
+                if (x < TO_COORD_HALF(45) && (u32)((y >> 16) - 0x31) < 4) {
+                    Game_SetScriptActive();
+                    D_80146874 = 7;
+                    D_80146875 = 4;
+                }
+            }
+        }
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_RYU_DREAM_LAST) {
+        if (D_80143F03 == 1) {
+            if (!SYS_TestFlag(g_SceneFlags, 28) && y < TO_COORD_HALF(29) && (u32)((x >> 16) - 0x13) < 4) {
+                Game_SetScriptActive();
+                D_80146874 = 7;
+                D_80146875 = 5;
+            }
+        }
+        if (D_80143F03 == 3 && !SYS_TestFlag(g_SceneFlags, 31) && x < TO_COORD_HALF(44) && (u32)((y >> 16) - 0x26) < 4) {
+            Game_SetScriptActive();
+            SND_StopSequence(0, 0);
+            SND_RequestBGM(0x9F);
+            D_80146874 = 7;
+            D_80146875 = 10;
+        }
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_CAER_XHAN_LIFT_AREA && D_80143F03 == 0 && !SYS_TestFlag(g_SceneFlags, 17) && (y >> 16) == 0x1C && (u32)((x >> 16) - 0x12) < 3) {
+        Game_SetScriptActive();
+        D_80146874 = 4;
+        D_80146875 = 10;
+        return 1;
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_EDEN_TEEPO_FIGHT && D_80143F03 == 0) {
+        if (!SYS_TestFlag(g_SceneFlags, 19) && x < TO_COORD_HALF(11) && (u32)((y >> 16) - 0x3F) < 2) {
+            Game_SetScriptActive();
+            D_80146874 = 6;
+            D_80146875 = 10;
+        }
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_DESERT_CAMP_FIRST && D_80143F03 == 0) {
+        if ((u32)((x >> 16) - 0x1D) < 5 && (u32)((y >> 16) - 0x14) < 2 && SYS_TestFlag(g_SceneFlags, 8) && !SYS_TestFlag(g_SceneFlags, 9)) {
+            Game_SetScriptActive();
+            D_80146874 = 2;
+            D_80146875 = 0x1D;
+            return 1;
+        }
+    }
+    return 0;
+}
 
 MATCH void Scene_JoinPartyRyuAdultReiNinaAdult(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_REI, 0);
