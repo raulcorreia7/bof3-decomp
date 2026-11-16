@@ -27,7 +27,7 @@ void               func_801A4BC0(s32 column, s32 row, s32 code);
 /* g_ScratchPadVectors */
 extern SVECTOR     g_ScratchPadVectors[];
 /* The shadow spread multiplier this pass indexes by the step code. */
-extern volatile u8 D_801F4BB4;
+extern volatile u8 D_801F4BB4[];
 /* The two step tables this pass indexes by the menu selection. */
 extern u8          D_801F4F94[];
 extern u8          D_801F4F95[];
