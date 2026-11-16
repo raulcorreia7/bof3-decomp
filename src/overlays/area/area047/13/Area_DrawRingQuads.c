@@ -1,6 +1,5 @@
 #include "area047_13.h"
 
-/* func_801F2F60 */
 MATCH void Area_DrawRingQuads(AreaRingRow* row) {
     DVECTOR  screen;
     DVECTOR  size;
