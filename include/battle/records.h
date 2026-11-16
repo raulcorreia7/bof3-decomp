@@ -1136,6 +1136,8 @@ extern PartyMember*  g_BattleEffectBattler;
 /* D_801EB4E8 */
 extern EnemyBattler* g_BattleCurrentEnemy;
 extern u8            D_801EB6B2[];
+/* The selection slot byte; battle/battle/15 re-reads it through a pointer. */
+extern volatile u8   D_801462E7;
 /* Enemy battler work record (stride 0x118, indexed by slot - 3). */
 extern EnemyBattler  g_BattleEnemyBattlers[];
 /* The last battle's stat gains, which the bate stat screen adds to its character. */

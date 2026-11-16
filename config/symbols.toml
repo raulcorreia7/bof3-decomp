@@ -807,6 +807,7 @@ Effect_TickOnTimerZero = { addr = 0x801F00D0, type = "func", source = "Counts th
 g_BMagicEffectModes = { addr = 0x801F0BB0, source = "Handlers of magic060 (Identify), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic062/03"]
+D_1F800000_HALF = { addr = 0x1F800000, type = "s16", source = "The scratchpad base 0x1F800000 as signed halfwords; func_801F00EC stages the ring radius there for its rsin and rcos scaling.", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
@@ -1084,6 +1085,7 @@ g_BMagicEffectModes = { addr = 0x801EFA84, source = "Handlers of magic081 (Rotte
 D_801EFA8C = { addr = 0x801EFA8C, source = "Effect slot table of the magic081 effect, scanned by BMagic_AllocEffect." }
 
 ["emi/bmagic/magic082/03"]
+D_1F800000_HALF = { addr = 0x1F800000, type = "s16", source = "The scratchpad base 0x1F800000 as signed halfwords; func_801F0260 stages the ring radius there for its rsin and rcos scaling.", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
@@ -1103,6 +1105,7 @@ Effect_CountDownAndStep = { addr = 0x801EFD74, type = "func", source = "Counts t
 g_BMagicEffectModes = { addr = 0x801F0D14, source = "Handlers of magic082 (Steroids, Magic Belt, Protect…), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic083/03"]
+D_1F800000_HALF = { addr = 0x1F800000, type = "s16", source = "The scratchpad base 0x1F800000 as signed halfwords; func_801F038C stages the ring radius there for its rsin and rcos scaling.", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
@@ -3425,6 +3428,7 @@ g_MenuMasterScrollOffset = { addr = 0x801D4289, source = "Scroll offset of the m
 g_MenuMasterCursor = { addr = 0x801D428A, source = "indexes the 0x140-byte stock rows" }
 
 ["emi/etc/start/08"]
+g_SndMono_nv = { addr = 0x80144951, type = "u8", source = "The g_SndMono byte under a plain view of its own; the start menu's settings step toggles it through one pointer.", alias = true }
 g_PartyCursor = { addr = 0x80148656, type = "s8", size = 0x1, source = "Party slot the start menu's ability and skill lists read.", alias = true }
 jtbl_801D0C04 = { addr = 0x801D0C04, type = "Callback", source = "The switch table of func_801D5A28: the jump targets of its jr dispatch." }
 jtbl_801D0C1C = { addr = 0x801D0C1C, type = "Callback", source = "The switch table of func_801D639C: the jump targets of its jr dispatch." }

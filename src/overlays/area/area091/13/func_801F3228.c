@@ -4,6 +4,10 @@
 NON_MATCHING void func_801F3228(void) {
     Actor* task;
     s32    i;
+    u8     cell;
+    u32    row;
+    u32    col;
+    u32    addr;
     u16*   colors;
 
     if (g_AreaCameraMoving == 0) {
@@ -16,7 +20,11 @@ NON_MATCHING void func_801F3228(void) {
         g_Task->unk_04++;
         i = 0;
         do {
-            colors    = (u16*)((u8*)g_AreaPaletteCopy->rows[((Actor*)g_Task)->unk_27 >> 3].colors + (((Actor*)g_Task)->unk_27 & 7) * AREA_PALETTE_UNIT);
+            cell      = ((Actor*)g_Task)->unk_27;
+            row       = (cell >> 3) * AREA_PALETTE_ROW;
+            col       = (cell & 7) * AREA_PALETTE_UNIT;
+            addr      = AREA_PALETTE_WORK + row + col;
+            colors    = MEM_PTR(u16, addr);
             colors[i] = 0;
             i++;
         } while (i < 32);
