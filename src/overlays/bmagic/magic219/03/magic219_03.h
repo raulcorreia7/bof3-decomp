@@ -9,9 +9,9 @@
 
 /* The ring radius, a word at scratch 0x00: the effect view names only halfwords there, so the word goes through
  * the scratch math word view. */
-#define MAGIC219_RING_RADIUS D_1F800000.cells.words[0]
+#define MAGIC219_RING_RADIUS g_ScratchPad.cells.words[0]
 /* The orbit angle, the word after it. */
-#define MAGIC219_ORBIT_ANGLE D_1F800000.cells.words[1]
+#define MAGIC219_ORBIT_ANGLE g_ScratchPad.cells.words[1]
 
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
 extern Callback     D_801EFA04[];

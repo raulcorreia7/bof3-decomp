@@ -39,7 +39,7 @@ MATCH void func_801F4768(void) {
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetShadeTex(prim, 0);
-    quad     = D_1F800014;
+    quad     = g_ScratchPadVectors;
     q1       = quad + 1;
     q2       = quad + 2;
     q3       = quad + 3;

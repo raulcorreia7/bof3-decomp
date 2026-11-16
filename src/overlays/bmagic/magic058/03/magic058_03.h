@@ -7,7 +7,7 @@
 
 extern u8  D_801EC2E4;
 /* The scratchpad base read as a halfword: the radius the range test uses. */
-extern s16 D_1F800000_HALF;
+extern s16 g_ScratchPadHalves;
 
 #define MAGIC058_STEP_COUNT 3
 

@@ -20,7 +20,7 @@ MATCH u32 Battle_ScaleDamage(u32 unused, u8 battler_index, s32 damage_value) {
     damage = damage_value << 8;
     value  = (0x100 - ((damage / 0x3E800) << 17)) >> 8;
     CLAMP_MIN(value, 0xCD);
-    scratch = (u16*)D_1F800000;
+    scratch = (u16*)g_ScratchPad;
     damage  = ((damage * value) >> 8) * D_801EAFA0[RANDOM_MASK(7u)] >> 8;
     flags   = *scratch;
     mask    = flags & 0x1Fu;

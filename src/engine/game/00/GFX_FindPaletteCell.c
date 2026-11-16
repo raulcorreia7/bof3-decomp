@@ -10,8 +10,8 @@ MATCH u8 GFX_FindPaletteCell(u8 value) {
         entry  = D_80145D54[row];
         do {
             if (entry[column] == value) {
-                ((u8*)&D_1F800000)[0] = row;
-                ((u8*)&D_1F800000)[1] = column;
+                ((u8*)&g_ScratchPad)[0] = row;
+                ((u8*)&g_ScratchPad)[1] = column;
                 return value;
             }
             column++;

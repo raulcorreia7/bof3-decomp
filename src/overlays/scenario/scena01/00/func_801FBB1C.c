@@ -41,16 +41,16 @@ MATCH void func_801FBB1C(void) {
             break;
         case 4:
             if (g_ScriptVars[0] == 5) {
-                slot                      = Actor_FindFreeSpawned();
-                D_1F800000.cells.bytes[0] = slot;
+                slot                        = Actor_FindFreeSpawned();
+                g_ScratchPad.cells.bytes[0] = slot;
                 if ((slot & BYTE_MASK) != GAME_NONE) {
-                    g_SpawnedActors[slot].header.flags                        = 1;
-                    g_SpawnedActors[D_1F800000.cells.bytes[0]].type           = 0x13;
-                    g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.x = g_AreaCameraAngle.vx;
-                    g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                    g_SpawnedActors[D_1F800000.cells.bytes[0]].camera_angle.z = 0xE3;
-                    g_SpawnedActors[D_1F800000.cells.bytes[0]].layer          = 0x40;
-                    g_SceneState.step_05                                      = 5;
+                    g_SpawnedActors[slot].header.flags                          = 1;
+                    g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type           = 0x13;
+                    g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.x = g_AreaCameraAngle.vx;
+                    g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
+                    g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = 0xE3;
+                    g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x40;
+                    g_SceneState.step_05                                        = 5;
                 }
             }
             break;

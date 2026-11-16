@@ -74,7 +74,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
                     s16* counter;
                     s32  step;
 
-                    counter    = (s16*)&D_1F800000;
+                    counter    = (s16*)&g_ScratchPad;
                     *counter   = COORD_INT(g_Task->pos.z);
                     D_1F800002 = (s16)((*(table + state->index_0A + 3) << 8) | *(table + state->index_0A + 4));
                     Area_SetFacingOffsetX(value);

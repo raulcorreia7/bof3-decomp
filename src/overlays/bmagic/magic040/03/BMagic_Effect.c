@@ -159,17 +159,17 @@ MATCH void func_801EF600(u8 start, u16 radius) {
     s32      tpage;
     u8       i;
 
-    D_1F800000.cells.halves[0] = g_Task->unk_2E.half;
-    D_1F800000.cells.halves[1] = g_Task->unk_30.half;
-    tpage                      = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
+    g_ScratchPad.cells.halves[0] = g_Task->unk_2E.half;
+    g_ScratchPad.cells.halves[1] = g_Task->unk_30.half;
+    tpage                        = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_AddDitheredDrawMode(3, tpage);
     for (i = start; i < start + 32; i += 8) {
         line = (LINE_G2*)g_GfxPrimCursor;
         SetLineG2(line);
         SetSemiTrans(line, 1);
-        D_1F800000.cells.halves[4] = (i & 0x1F) << 7;
-        setXY2(line, D_1F800000.cells.halves[0], D_1F800000.cells.halves[1], D_1F800000.cells.halves[0] + ((rcos(D_1F800000.cells.halves[4]) * radius) >> 12),
-               D_1F800000.cells.halves[1] + ((rsin(D_1F800000.cells.halves[4]) * radius) >> 12));
+        g_ScratchPad.cells.halves[4] = (i & 0x1F) << 7;
+        setXY2(line, g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1], g_ScratchPad.cells.halves[0] + ((rcos(g_ScratchPad.cells.halves[4]) * radius) >> 12),
+               g_ScratchPad.cells.halves[1] + ((rsin(g_ScratchPad.cells.halves[4]) * radius) >> 12));
         setRGB0(line, 0x80, 0x70, 0x60);
         setRGB1(line, 1, 1, 1);
         GFX_AddPrim(3, sizeof(LINE_G2));

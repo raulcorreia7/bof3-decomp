@@ -12,8 +12,8 @@ MATCH u8 GFX_MarkPaletteCells(u8 mode, u8 value, u8 search) {
         value  = 0xFF;
     }
 
-    row    = ((u8*)&D_1F800000)[0];
-    column = ((u8*)&D_1F800000)[1];
+    row    = ((u8*)&g_ScratchPad)[0];
+    column = ((u8*)&g_ScratchPad)[1];
     switch (mode) {
         case PALETTE_TYPE_ROW:
             D_80145D54[row][column + 0xF] = value;

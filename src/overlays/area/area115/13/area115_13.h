@@ -10,7 +10,8 @@
 #include "area/spad.h"
 #include <rand.h>
 
-extern SVECTOR       D_1F800014[];
+/* g_ScratchPadVectors */
+extern SVECTOR       g_ScratchPadVectors[];
 extern u8            D_801F4D7C[]; /* key rows: u16 key + byte mode, stride 4 */
 extern WorldMapPoint D_801F4D90[];
 extern u16           D_801F4E90[5][16];

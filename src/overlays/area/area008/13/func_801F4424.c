@@ -17,12 +17,12 @@
 MATCH void func_801F4424(void) {
     u8 actor_slot;
 
-    actor_slot    = Actor_FindFreeSpawned();
-    D_1F800000[0] = actor_slot;
+    actor_slot      = Actor_FindFreeSpawned();
+    g_ScratchPad[0] = actor_slot;
     if (actor_slot == GAME_NONE) {
         return;
     }
     g_SpawnedActors[actor_slot].header.flags = 1;
-    g_SpawnedActors[D_1F800000[0]].type      = 0x54;
-    g_SpawnedActors[D_1F800000[0]].link      = ((s32)(-((g_CurrentActor - (s32)g_Actors) * 0xD79435E5)) >> 3);
+    g_SpawnedActors[g_ScratchPad[0]].type    = 0x54;
+    g_SpawnedActors[g_ScratchPad[0]].link    = ((s32)(-((g_CurrentActor - (s32)g_Actors) * 0xD79435E5)) >> 3);
 }

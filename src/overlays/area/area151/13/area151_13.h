@@ -14,7 +14,8 @@
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
-extern SVECTOR  D_1F800014[];
+/* g_ScratchPadVectors */
+extern SVECTOR  g_ScratchPadVectors[];
 /* The world-area state byte tested by the work handlers. */
 extern u8       D_801F4CE8[];
 /* The request selector and the area request slot. */

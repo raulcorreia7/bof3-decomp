@@ -29,12 +29,12 @@ MATCH void func_801F40C0(void) {
             break;
         case 2:
             if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-                held                                          = &g_InputHeld;
-                input                                         = *held;
-                low_buttons                                   = input & 0x0FFF;
-                ((Area140InputSnapshot*)&D_1F800000)->buttons = input;
-                button_index                                  = input >> 12;
-                *held                                         = low_buttons;
+                held                                            = &g_InputHeld;
+                input                                           = *held;
+                low_buttons                                     = input & 0x0FFF;
+                ((Area140InputSnapshot*)&g_ScratchPad)->buttons = input;
+                button_index                                    = input >> 12;
+                *held                                           = low_buttons;
                 low_buttons |= D_801F47C4[0x2B0 + button_index] << 12;
                 *held = low_buttons;
             }

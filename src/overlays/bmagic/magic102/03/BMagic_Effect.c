@@ -450,9 +450,9 @@ MATCH void Area_DrawGroundSceneSprite(u8* record, s32 origin_x, s32 origin_y) {
     if ((Area_TestCondition(FIELD(s16, record, 0x0)) << 24) == 0) {
         return;
     }
-    setVector(D_1F800014, ((origin_x - 0x80) << 0x7) + FIELD(s8, record, 7) * 2, ((origin_y - 0x80) << 7) + FIELD(s8, record, 0x6) * 2,
-              -Area_SampleHeight((D_1F800014->vx + AREA_CELL_ORIGIN) << 9, (D_1F800014->vy + AREA_CELL_ORIGIN) << 9) / 2);
-    z = RotTransPers(D_1F800014, (long*)D_1F800034_U16, &depth, &flag);
+    setVector(g_ScratchPadVectors, ((origin_x - 0x80) << 0x7) + FIELD(s8, record, 7) * 2, ((origin_y - 0x80) << 7) + FIELD(s8, record, 0x6) * 2,
+              -Area_SampleHeight((g_ScratchPadVectors->vx + AREA_CELL_ORIGIN) << 9, (g_ScratchPadVectors->vy + AREA_CELL_ORIGIN) << 9) / 2);
+    z = RotTransPers(g_ScratchPadVectors, (long*)D_1F800034_U16, &depth, &flag);
     if (((u32)(D_1F800034_U16[0] + 0x3C) & HALF_MASK) >= 0x1B9) {
         return;
     }

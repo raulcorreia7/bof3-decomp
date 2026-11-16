@@ -13,8 +13,8 @@ MATCH void Effect_DrawBolt(void) {
     s32      page;
     s32      i;
 
-    d          = &D_1F800000;
-    vec        = D_1F800014_HALF;
+    d          = &g_ScratchPad;
+    vec        = g_ScratchPadVectorHalves;
     d[0]       = BOLT_RADIUS;
     D_1F800004 = ((g_Task->param.unk_0B + 2) & 0xF) << 8;
     D_1F80000C = g_Task->timer;
@@ -34,11 +34,11 @@ MATCH void Effect_DrawBolt(void) {
             primitive = (LINE_G2*)g_GfxPrimCursor;
             SetLineG2(primitive);
             SetSemiTrans(primitive, 1);
-            RotTransPers(D_1F800014, (long*)&primitive->x0, &p, &flag);
+            RotTransPers(g_ScratchPadVectors, (long*)&primitive->x0, &p, &flag);
             if RANDOM_MASK (1) {
-                D_1F800000 = RANDOM_MASK(BOLT_FLICKER_MASK) + BOLT_FLICKER_BASE;
+                g_ScratchPad = RANDOM_MASK(BOLT_FLICKER_MASK) + BOLT_FLICKER_BASE;
             } else {
-                D_1F800000 = BOLT_FLICKER_BASE - RANDOM_MASK(BOLT_FLICKER_MASK);
+                g_ScratchPad = BOLT_FLICKER_BASE - RANDOM_MASK(BOLT_FLICKER_MASK);
             }
             page     = ((g_Task->param.unk_0B + i + 2) & 0xF) << 8;
             point[0] = 0;

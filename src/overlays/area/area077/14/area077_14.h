@@ -18,8 +18,9 @@
  * table A, the 0x80 neutral colour byte and clut row 0x1E4. */
 #define AREA_SPIN_QUAD_WORD  ((0x2180u << 16) | 0x0133u)
 
-/* The four corner vectors RotTransPers4 projects; D_1F800014 forwards. */
-extern SVECTOR  D_1F800014[];
+/* The four corner vectors RotTransPers4 projects; g_ScratchPadVectors forwards. */
+/* g_ScratchPadVectors */
+extern SVECTOR  g_ScratchPadVectors[];
 extern s16      D_800E4800;
 extern WorldPos D_80146954;
 extern u16      D_800E5500;

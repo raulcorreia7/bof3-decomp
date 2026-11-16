@@ -10,7 +10,7 @@
  * addressed through byte offsets because the headers declare them as scalars. */
 
 MATCH void func_801A57F0(u8* script) {
-    s16*   counter = (s16*)&D_1F800000;
+    s16*   counter = (s16*)&g_ScratchPad;
     s32    coord_x;
     s32    coord_y;
     s16    slot;
@@ -74,5 +74,5 @@ MATCH void func_801A57F0(u8* script) {
 
     func_801A4914();
 
-    (VOL(u16, D_1F800000)) = (VOL(u16, D_1F800000)) + 1;
+    (VOL(u16, g_ScratchPad)) = (VOL(u16, g_ScratchPad)) + 1;
 }

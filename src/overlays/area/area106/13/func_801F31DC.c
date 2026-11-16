@@ -27,12 +27,13 @@ NON_MATCHING void func_801F31DC(s32 depth, s32 height) {
         SetShadeTex(prim, 0);
         row = n;
         for (j = 0; j < 4; j++) {
-            D_1F800014[j].vx = (D_801F3F34[row] << 7) + x_base;
-            D_1F800014[j].vy = (D_801F3F35[row] << 7) + y_base;
-            D_1F800014[j].vz = z_base - D_801F3F36[row] * depth;
+            g_ScratchPadVectors[j].vx = (D_801F3F34[row] << 7) + x_base;
+            g_ScratchPadVectors[j].vy = (D_801F3F35[row] << 7) + y_base;
+            g_ScratchPadVectors[j].vz = z_base - D_801F3F36[row] * depth;
             row += 3;
         }
-        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (s32*)((u8*)prim + 8), (s32*)((u8*)prim + 0x10), (s32*)((u8*)prim + 0x18), (s32*)((u8*)prim + 0x20), &p, &flag);
+        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (s32*)((u8*)prim + 8), (s32*)((u8*)prim + 0x10), (s32*)((u8*)prim + 0x18),
+                      (s32*)((u8*)prim + 0x20), &p, &flag);
         Area_ApplyTileToQuad((height << 16) | AREA106_QUAD_PART_WORD, prim, 1);
         GFX_AddPrim(5, sizeof(POLY_FT4));
         n += 12;

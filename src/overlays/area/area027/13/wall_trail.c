@@ -386,7 +386,7 @@ MATCH POLY_FT4* func_801F3480(const Pos3s* point, s32 angle, u32 texture) {
     SetPolyFT4(primitive);
     SetShadeTex(primitive, 0);
 
-    quad       = D_1F800014;
+    quad       = g_ScratchPadVectors;
     q1         = quad + 1;
     q2         = quad + 2;
     q3         = quad + 3;

@@ -250,14 +250,14 @@ MATCH void func_801EF55C(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(0, tpage);
-    D_1F800000.cells.words[0] = 0xE8;
-    D_1F800000.cells.words[1] = g_Task->unk_09;
+    g_ScratchPad.cells.words[0] = 0xE8;
+    g_ScratchPad.cells.words[1] = g_Task->unk_09;
     for (i = 0; i < 6; i++) {
         if ((g_Task->param.unk_0B >> i) & 1) {
             prim = (TILE*)g_GfxPrimCursor;
             SetTile(prim);
-            setXY0(prim, D_1F800000.cells.words[0], D_1F800000.cells.words[1]);
-            D_1F800000.cells.words[0] += 10;
+            setXY0(prim, g_ScratchPad.cells.words[0], g_ScratchPad.cells.words[1]);
+            g_ScratchPad.cells.words[0] += 10;
             setWH(prim, 8, 12);
             setRGB0(prim, D_801EFCA4[i][0], D_801EFCA4[i][1], D_801EFCA4[i][2]);
             GFX_AddPrim(0, sizeof(TILE));
@@ -266,7 +266,7 @@ MATCH void func_801EF55C(void) {
     if (g_Task->param.unk_0B == 0) {
         prim = (TILE*)g_GfxPrimCursor;
         SetTile(prim);
-        setXY0(prim, D_1F800000.cells.words[0], D_1F800000.cells.words[1]);
+        setXY0(prim, g_ScratchPad.cells.words[0], g_ScratchPad.cells.words[1]);
         setWH(prim, 8, 12);
         setRGB0(prim, 0x60, 0x60, 0x60);
         GFX_AddPrim(0, sizeof(TILE));

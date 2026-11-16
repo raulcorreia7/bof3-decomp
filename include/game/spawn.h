@@ -10,11 +10,14 @@
  * the ScratchPad record is the default. A use that needs another width keeps a
  * FAKE: cast. */
 #ifdef GAME_SCRATCH_BASE_SCALAR
-extern u8 D_1F800000[];
+/* g_ScratchPad */
+extern u8 g_ScratchPad[];
 #elif defined(GAME_SCRATCH_BASE_WORD)
-extern s32 D_1F800000;
+/* g_ScratchPad */
+extern s32 g_ScratchPad;
 #else
-extern ScratchPad D_1F800000;
+/* g_ScratchPad */
+extern ScratchPad g_ScratchPad;
 #endif
 /* Id byte column of the 0x98-byte entity work rows. */
 extern u8 D_8014691A[];

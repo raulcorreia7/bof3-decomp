@@ -117,35 +117,36 @@ MATCH void func_801EF234(void) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
-    D_1F800000.cells.halves[1] = g_Task->unk_09 * 4;
-    D_1F800000.cells.halves[2] = g_Task->unk_09 * 6;
+    g_ScratchPad.cells.halves[1] = g_Task->unk_09 * 4;
+    g_ScratchPad.cells.halves[2] = g_Task->unk_09 * 6;
     if (g_Task->unk_09 >= 9) {
-        D_1F800000.cells.halves[2] += rand() & 0xF;
+        g_ScratchPad.cells.halves[2] += rand() & 0xF;
     }
-    D_1F800000.cells.halves[3] = g_Task->timer * 8;
-    D_1F800000.cells.halves[4] = g_Task->timer * 4;
-    /* FAKE: the first corner through the scratchpad view keeps the base register on the second corner, as retail does; through D_1F800014 it moves to the first. */
-    D_1F800000.vectors[0].vx   = 0;
-    setVector(&D_1F800014[1], 0, FIXED_MUL(rcos(0), D_1F800000.cells.halves[2]), FIXED_MUL(rsin(0), D_1F800000.cells.halves[2]));
-    D_1F800014[2].vx = 0;
-    setVector(&D_1F800014[3], 0, FIXED_MUL(rcos(0), D_1F800000.cells.halves[1]), FIXED_MUL(rsin(0), D_1F800000.cells.halves[1]));
+    g_ScratchPad.cells.halves[3] = g_Task->timer * 8;
+    g_ScratchPad.cells.halves[4] = g_Task->timer * 4;
+    /* FAKE: the first corner through the scratchpad view keeps the base register on the second corner, as retail does; through g_ScratchPadVectors it moves to the first. */
+    g_ScratchPad.vectors[0].vx   = 0;
+    setVector(&g_ScratchPadVectors[1], 0, FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[2]), FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[2]));
+    g_ScratchPadVectors[2].vx = 0;
+    setVector(&g_ScratchPadVectors[3], 0, FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[1]), FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[1]));
     for (i = 1; i <= 32; i++) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        D_1F800014[0].vy = D_1F800014[1].vy;
-        D_1F800014[0].vz = D_1F800014[1].vz;
-        D_1F800014[1].vy = FIXED_MUL(rcos(i << 7), D_1F800000.cells.halves[2]);
-        D_1F800014[1].vz = FIXED_MUL(rsin(i << 7), D_1F800000.cells.halves[2]);
-        D_1F800014[2].vy = D_1F800014[3].vy;
-        D_1F800014[2].vz = D_1F800014[3].vz;
-        D_1F800014[3].vy = FIXED_MUL(rcos(i << 7), D_1F800000.cells.halves[1]);
-        D_1F800014[3].vz = FIXED_MUL(rsin(i << 7), D_1F800000.cells.halves[1]);
+        g_ScratchPadVectors[0].vy = g_ScratchPadVectors[1].vy;
+        g_ScratchPadVectors[0].vz = g_ScratchPadVectors[1].vz;
+        g_ScratchPadVectors[1].vy = FIXED_MUL(rcos(i << 7), g_ScratchPad.cells.halves[2]);
+        g_ScratchPadVectors[1].vz = FIXED_MUL(rsin(i << 7), g_ScratchPad.cells.halves[2]);
+        g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy;
+        g_ScratchPadVectors[2].vz = g_ScratchPadVectors[3].vz;
+        g_ScratchPadVectors[3].vy = FIXED_MUL(rcos(i << 7), g_ScratchPad.cells.halves[1]);
+        g_ScratchPadVectors[3].vz = FIXED_MUL(rsin(i << 7), g_ScratchPad.cells.halves[1]);
         setRGB0(prim, 1, 1, 1);
         setRGB1(prim, 1, 1, 1);
-        setRGB2(prim, D_1F800000.cells.halves[3], D_1F800000.cells.halves[4], D_1F800000.cells.halves[4]);
-        setRGB3(prim, D_1F800000.cells.halves[3], D_1F800000.cells.halves[4], D_1F800000.cells.halves[4]);
-        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        setRGB2(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[4]);
+        setRGB3(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[4]);
+        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
+                      &depth, &flag);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
     }
 }
@@ -168,9 +169,9 @@ MATCH void func_801EF6A0(void) {
     s32* party_sum;
 
     /* The effect takes the mean z of the unblocked battlers on the targeted side; the scratchpad keeps the sum and the count. */
-    sum                       = &D_1F800000.cells.words[0];
-    D_1F800000.cells.words[1] = 0;
-    *sum                      = 0;
+    sum                         = &g_ScratchPad.cells.words[0];
+    g_ScratchPad.cells.words[1] = 0;
+    *sum                        = 0;
     if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
         i         = 0;
         enemy_sum = sum;
@@ -190,5 +191,5 @@ MATCH void func_801EF6A0(void) {
             }
         }
     }
-    COORD_INT(g_Task->pos.z) = D_1F800000.cells.words[0] / D_1F800000.cells.words[1];
+    COORD_INT(g_Task->pos.z) = g_ScratchPad.cells.words[0] / g_ScratchPad.cells.words[1];
 }

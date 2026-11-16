@@ -10,7 +10,7 @@ MATCH void Actor_TrackFocus(void) {
     Actor*   work;
     Actor*   item;
 
-    vertex                 = D_1F800014;
+    vertex                 = g_ScratchPadVectors;
     screen                 = D_1F800034;
     vertex->vx             = (s16)((g_Game.members[0].pos.x.fixed >> 9) - 0x4000);
     SP_REF(s16, 0x16)      = (s16)((g_Game.members[0].pos.y.fixed >> 9) - 0x4000);

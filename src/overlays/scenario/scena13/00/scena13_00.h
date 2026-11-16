@@ -59,9 +59,9 @@ extern u8        D_801FBFEC;
                 return;                                                 \
             }                                                           \
             g_Actors[second_index].header.flags = 1;                    \
-            *(s16*)D_1F800000                   = (u8)first;            \
+            *(s16*)g_ScratchPad                 = (u8)first;            \
             func_801A65A0(script);                                      \
-            *(s16*)D_1F800000 = (u8)second;                             \
+            *(s16*)g_ScratchPad = (u8)second;                           \
             func_801A65A0((script) + 0x10);                             \
         }                                                               \
     } while (0)

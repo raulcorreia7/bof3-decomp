@@ -39,18 +39,18 @@ MATCH void func_801F9F0C(void) {
         }
         case 3:
             g_AreaSceneMode = 1;
-            D_1F800000[0]   = Actor_FindFreeSpawned();
-            if ((D_1F800000[0] & 0xFF) == 0xFF) {
+            g_ScratchPad[0] = Actor_FindFreeSpawned();
+            if ((g_ScratchPad[0] & 0xFF) == 0xFF) {
                 break;
             }
-            g_SpawnedActors[D_1F800000[0]].header.flags   = 1;
-            g_SpawnedActors[D_1F800000[0]].type           = 0x13;
-            g_SpawnedActors[D_1F800000[0]].camera_angle.x = -0x370;
-            g_SpawnedActors[D_1F800000[0]].camera_angle.y = g_AreaCameraAngle.vy;
-            g_SpawnedActors[D_1F800000[0]].camera_angle.z = 0x200;
-            g_SpawnedActors[D_1F800000[0]].layer          = 4;
-            g_SceneState.step_05                          = 4;
-            g_ScriptVars[3]                               = D_1F800000[0];
+            g_SpawnedActors[g_ScratchPad[0]].header.flags   = 1;
+            g_SpawnedActors[g_ScratchPad[0]].type           = 0x13;
+            g_SpawnedActors[g_ScratchPad[0]].camera_angle.x = -0x370;
+            g_SpawnedActors[g_ScratchPad[0]].camera_angle.y = g_AreaCameraAngle.vy;
+            g_SpawnedActors[g_ScratchPad[0]].camera_angle.z = 0x200;
+            g_SpawnedActors[g_ScratchPad[0]].layer          = 4;
+            g_SceneState.step_05                            = 4;
+            g_ScriptVars[3]                                 = g_ScratchPad[0];
             break;
         case 4: {
             u8* record_index = &g_ScriptVars[3];
@@ -223,14 +223,14 @@ MATCH void func_801F9F0C(void) {
             if (*progress != 3) {
                 break;
             }
-            D_1F800000[0] = Actor_FindFreeSpawned();
-            if ((D_1F800000[0] & 0xFF) == 0xFF) {
+            g_ScratchPad[0] = Actor_FindFreeSpawned();
+            if ((g_ScratchPad[0] & 0xFF) == 0xFF) {
                 break;
             }
-            g_SpawnedActors[D_1F800000[0]].header.flags = 1;
-            g_SpawnedActors[D_1F800000[0]].type         = 0x7A;
-            *progress                                   = 4;
-            g_SceneState.step_05                        = 0x13;
+            g_SpawnedActors[g_ScratchPad[0]].header.flags = 1;
+            g_SpawnedActors[g_ScratchPad[0]].type         = 0x7A;
+            *progress                                     = 4;
+            g_SceneState.step_05                          = 0x13;
             break;
         }
         case 19:

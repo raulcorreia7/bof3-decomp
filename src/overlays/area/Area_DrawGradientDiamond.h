@@ -24,7 +24,7 @@ MATCH void Area_DrawGradientDiamond(s16 x, s16 y) {
     SetRotMatrix(&matrix);
     SetTransMatrix(&matrix);
 
-    scratch   = D_1F800014;
+    scratch   = g_ScratchPadVectors;
     primitive = (u32)g_GfxPrimCursor;
 
     q1 = scratch + 1;

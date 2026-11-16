@@ -172,10 +172,10 @@ MATCH void func_801EF698(void) {
         height = 0x40;
         half_w = 0x18;
     }
-    prim                       = (POLY_FT4*)g_GfxPrimCursor;
-    D_1F800000.cells.halves[3] = g_Task->unk_09 << 3;
-    x                          = g_Task->unk_2E.half;
-    y                          = g_Task->unk_30.half;
+    prim                         = (POLY_FT4*)g_GfxPrimCursor;
+    g_ScratchPad.cells.halves[3] = g_Task->unk_09 << 3;
+    x                            = g_Task->unk_2E.half;
+    y                            = g_Task->unk_30.half;
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
     setXY4(prim, x - half_w, y - height, x + half_w, y - height, x - half_w, y, x + half_w, y);
@@ -186,7 +186,7 @@ MATCH void func_801EF698(void) {
     } else {
         setUVWH(prim, 0x78, 8, 48, 64);
     }
-    setRGB0(prim, D_1F800000.cells.halves[3], D_1F800000.cells.halves[3], D_1F800000.cells.halves[3]);
+    setRGB0(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
 }
 
@@ -209,7 +209,7 @@ MATCH void func_801EFA60(void) {
             SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
         }
         g_Task->unk_0C      = 8;
-        angle               = &D_1F800000.cells.halves[2];
+        angle               = &g_ScratchPad.cells.halves[2];
         phase               = g_Task->param.unk_0B & 0xF;
         *angle              = phase << 8;
         g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin(phase << 8) * g_Task->unk_0C;

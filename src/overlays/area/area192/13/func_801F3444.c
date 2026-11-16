@@ -29,8 +29,8 @@ MATCH void func_801F3444(void) {
         mode = 2;
     }
     for (i = 0; i < 6; i++) {
-        slot                       = Actor_FindFreeField();
-        D_1F800000.cells.halves[0] = slot;
+        slot                         = Actor_FindFreeField();
+        g_ScratchPad.cells.halves[0] = slot;
         if (slot != GAME_NONE) {
             func_801A4D54(D_801F3A08[mode] + i * 17);
         }

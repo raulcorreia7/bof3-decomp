@@ -22,7 +22,7 @@ NON_MATCHING void func_801F2F44(s32 steps) {
     x       = (COORD_INT(g_Task->pos.x) - 0x80) << 7;
     y       = (COORD_INT(g_Task->pos.y) - 0x80) << 7;
     height  = -(COORD_INT(g_Task->pos.z) / 2);
-    corners = D_1F800014;
+    corners = g_ScratchPadVectors;
     i       = 0;
     order   = 0;
     for (; i < 8; i++) {

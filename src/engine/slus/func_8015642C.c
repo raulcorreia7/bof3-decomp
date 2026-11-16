@@ -26,17 +26,17 @@ NON_MATCHING void func_8015642C(u8* obj, s32 x, s32 y) {
     } else {
         order = g_AreaDrawMode;
     }
-    index                   = (FIELD(u8, obj, 3u) & 0xF) - 1;
-    *(s32*)(D_1F800000)     = (x - 0x81) << 7;
-    *(s32*)(D_1F800000 + 4) = (y - 0x80) << 7;
-    z                       = (s16) - (Area_SampleHeight((x - 1) << 0x10, y << 0x10) / 2);
-    screen                  = D_1F800034;
-    *(s32*)(D_1F800000 + 8) = z;
-    D_1F800014[2].vx = D_1F800014[3].vx = *(s32*)(D_1F800000);
-    D_1F800014[2].vy = D_1F800014[3].vy = *(s32*)(D_1F800000 + 4);
-    D_1F800014[1].vz = D_1F800014[3].vz = z;
-    D_1F800014[0].vz = D_1F800014[2].vz = z - D_8017F880[index];
-    RotTransPers3(&D_1F800014[2], &D_1F800014[3], &D_1F800014[0], (s32*)screen, (s32*)(screen + 2), (s32*)(screen + 4), &depth, &flag);
+    index                     = (FIELD(u8, obj, 3u) & 0xF) - 1;
+    *(s32*)(g_ScratchPad)     = (x - 0x81) << 7;
+    *(s32*)(g_ScratchPad + 4) = (y - 0x80) << 7;
+    z                         = (s16) - (Area_SampleHeight((x - 1) << 0x10, y << 0x10) / 2);
+    screen                    = D_1F800034;
+    *(s32*)(g_ScratchPad + 8) = z;
+    g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx = *(s32*)(g_ScratchPad);
+    g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy = *(s32*)(g_ScratchPad + 4);
+    g_ScratchPadVectors[1].vz = g_ScratchPadVectors[3].vz = z;
+    g_ScratchPadVectors[0].vz = g_ScratchPadVectors[2].vz = z - D_8017F880[index];
+    RotTransPers3(&g_ScratchPadVectors[2], &g_ScratchPadVectors[3], &g_ScratchPadVectors[0], (s32*)screen, (s32*)(screen + 2), (s32*)(screen + 4), &depth, &flag);
     if (((u16)(screen[0] + 0x50) < 0x1E1U) && (D_1F800034[3] >= -0x14) && (D_1F800034[1] < 0x105)) {
         for (part = 0; part < g_SpriteCellPartCounts[index]; part++) {
             bottom = &((u8*)g_SpriteCellBottomV)[index * 2];
@@ -68,10 +68,11 @@ NON_MATCHING void func_8015642C(u8* obj, s32 x, s32 y) {
                 top++;
             }
             for (j = 0; j < 4; j++) {
-                D_1F800014[j].vx = ((u16(*)[6])D_8017F7A8)[index][part * 2 + (j >> 1)] + *(s32*)(D_1F800000);
-                D_1F800014[j].vy = ((u16(*)[6])D_8017F814)[index][part * 2 + (j >> 1)] + *(s32*)(D_1F800000 + 4);
+                g_ScratchPadVectors[j].vx = ((u16(*)[6])D_8017F7A8)[index][part * 2 + (j >> 1)] + *(s32*)(g_ScratchPad);
+                g_ScratchPadVectors[j].vy = ((u16(*)[6])D_8017F814)[index][part * 2 + (j >> 1)] + *(s32*)(g_ScratchPad + 4);
             }
-            RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (s32*)&prim[0].x0, (s32*)&prim[0].x1, (s32*)&prim[1].x0, (s32*)&prim[1].x1, &depth, &flag);
+            RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (s32*)&prim[0].x0, (s32*)&prim[0].x1, (s32*)&prim[1].x0,
+                          (s32*)&prim[1].x1, &depth, &flag);
         }
     }
 }

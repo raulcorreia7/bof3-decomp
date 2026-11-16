@@ -9,7 +9,8 @@
 
 void func_801F358C(void);
 
-extern SVECTOR  D_1F800014[];
+/* g_ScratchPadVectors */
+extern SVECTOR  g_ScratchPadVectors[];
 extern u8       D_801F6980[];
 extern Callback D_801F6A64[];
 extern u8       D_801F6A78[];

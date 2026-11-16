@@ -40,7 +40,8 @@ extern u8 D_801F52E9[][2];
 extern AreaPart D_801F4F14[];
 
 /* The four corner vectors RotTransPers4 projects. */
-extern SVECTOR D_1F800014[];
+/* g_ScratchPadVectors */
+extern SVECTOR g_ScratchPadVectors[];
 /* The projected quad's origin: x then y. */
 extern s16     D_1F800034[2];
 extern s16     D_1F800036;

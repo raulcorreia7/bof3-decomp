@@ -9,7 +9,7 @@ MATCH void func_801F2EFC(void) {
     long      flag;
 
     i    = 0;
-    quad = D_1F800014;
+    quad = g_ScratchPadVectors;
     do {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);

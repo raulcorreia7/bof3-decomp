@@ -3,7 +3,7 @@
 /* Entity spawn counter in scratchpad (signed 16-bit slot index). */
 
 MATCH void func_801A5EFC(u8* script) {
-    s16*   counter = (s16*)&D_1F800000;
+    s16*   counter = (s16*)&g_ScratchPad;
     s16    slot;
     Actor* work;
 
@@ -63,5 +63,5 @@ MATCH void func_801A5EFC(u8* script) {
 
     func_801A4914();
 
-    (VOL(u16, D_1F800000)) = (VOL(u16, D_1F800000)) + 1;
+    (VOL(u16, g_ScratchPad)) = (VOL(u16, g_ScratchPad)) + 1;
 }

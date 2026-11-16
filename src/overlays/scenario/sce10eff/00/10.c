@@ -203,13 +203,13 @@ MATCH void func_801D12A8(void) {
     angle                         = SCE10EFF_ORBIT_ANGLE(counter);
     angle_cell                    = &D_1F800004;
     *angle_cell                   = angle;
-    D_1F800000                    = 0x20;
+    g_ScratchPad                  = 0x20;
 
-    velocity     = rcos(angle) * D_1F800000;
+    velocity     = rcos(angle) * g_ScratchPad;
     work         = g_Task;
     work->proj.x = D_801D2744->proj.x + velocity;
 
-    velocity        = rsin(*angle_cell) * D_1F800000;
+    velocity        = rsin(*angle_cell) * g_ScratchPad;
     source          = D_801D2744;
     scratch         = g_Task;
     scratch->proj.y = source->proj.y + velocity;
@@ -246,13 +246,13 @@ MATCH void func_801D1544(void) {
     angle                         = SCE10EFF_ORBIT_ANGLE(counter);
     angle_cell                    = &D_1F800004;
     *angle_cell                   = angle;
-    D_1F800000                    = 0x20;
+    g_ScratchPad                  = 0x20;
 
-    velocity     = rcos(angle) * D_1F800000;
+    velocity     = rcos(angle) * g_ScratchPad;
     work         = g_Task;
     work->proj.x = D_801D2744->proj.x + velocity;
 
-    velocity       = rsin(*angle_cell) * D_1F800000;
+    velocity       = rsin(*angle_cell) * g_ScratchPad;
     g_Task->proj.y = D_801D2744->proj.y + velocity;
 
     if (TIMER_EXPIRED(g_Task->band)) {
@@ -278,8 +278,8 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
     s32              shade;
     s32              i;
     work        = g_Task;
-    depth_cell  = &D_1F800000;
-    prev        = &D_1F800014[2];
+    depth_cell  = &g_ScratchPad;
+    prev        = &g_ScratchPadVectors[2];
     quad        = prev - 2;
     *depth_cell = 0x10;
     D_1F800004  = (work->ticker & 0xF) << 8;
@@ -327,10 +327,10 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
         RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)&primitive->x0, (long*)&primitive->x1, (long*)&primitive->x2, (long*)&primitive->x3, &depth, &flag);
         if (primitive->y2 > 0) {
             GFX_AddPrim(2, sizeof(POLY_G4));
-            D_1F800014[0].vy -= band_height;
-            D_1F800014[1].vy -= band_height;
-            D_1F800014[2].vy -= band_height;
-            D_1F800014[3].vy -= band_height;
+            g_ScratchPadVectors[0].vy -= band_height;
+            g_ScratchPadVectors[1].vy -= band_height;
+            g_ScratchPadVectors[2].vy -= band_height;
+            g_ScratchPadVectors[3].vy -= band_height;
             primitive = GFX_BeginPolyG4(1);
             setRGB0(primitive, shade, ramp[0], 1);
             setRGB1(primitive, 1, 1, 1);
@@ -343,10 +343,10 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
             }
             RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)&primitive->x0, (long*)&primitive->x1, (long*)&primitive->x2, (long*)&primitive->x3, &depth, &flag);
             GFX_AddPrim(2, sizeof(POLY_G4));
-            D_1F800014[0].vy += ((s16)band_height) * 2;
-            D_1F800014[1].vy += ((s16)band_height) * 2;
-            D_1F800014[2].vy += ((s16)band_height) * 2;
-            D_1F800014[3].vy += ((s16)band_height) * 2;
+            g_ScratchPadVectors[0].vy += ((s16)band_height) * 2;
+            g_ScratchPadVectors[1].vy += ((s16)band_height) * 2;
+            g_ScratchPadVectors[2].vy += ((s16)band_height) * 2;
+            g_ScratchPadVectors[3].vy += ((s16)band_height) * 2;
             primitive = GFX_BeginPolyG4(1);
             setRGB0(primitive, shade, ramp[0], 1);
             setRGB1(primitive, ramp[0], ramp[0], ramp[0]);
@@ -359,10 +359,10 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
             }
             RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)&primitive->x0, (long*)&primitive->x1, (long*)&primitive->x2, (long*)&primitive->x3, &depth, &flag);
             GFX_AddPrim(2, sizeof(POLY_G4));
-            D_1F800014[0].vy += band_height;
-            D_1F800014[1].vy += band_height;
-            D_1F800014[2].vy += band_height;
-            D_1F800014[3].vy += band_height;
+            g_ScratchPadVectors[0].vy += band_height;
+            g_ScratchPadVectors[1].vy += band_height;
+            g_ScratchPadVectors[2].vy += band_height;
+            g_ScratchPadVectors[3].vy += band_height;
             primitive = GFX_BeginPolyG4(1);
             setRGB0(primitive, 1, 1, 1);
             setRGB1(primitive, shade, ramp[0], 1);
@@ -375,7 +375,7 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
             }
             RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)&primitive->x0, (long*)&primitive->x1, (long*)&primitive->x2, (long*)&primitive->x3, &depth, &flag);
             GFX_AddPrim(2, sizeof(POLY_G4));
-            D_1F800014[0].vy -= ((s16)band_height) * 2;
+            g_ScratchPadVectors[0].vy -= ((s16)band_height) * 2;
         }
         i++;
     } while (i < 18);
@@ -412,12 +412,12 @@ MATCH void func_801D1DE0(void) {
     VOL(s32, work->orbit_counter) = counter;
     angle_cell                    = &D_1F800004;
     *angle_cell                   = angle;
-    D_1F800000                    = 0x18;
+    g_ScratchPad                  = 0x18;
 
-    velocity       = rcos(angle) * D_1F800000;
+    velocity       = rcos(angle) * g_ScratchPad;
     g_Task->proj.x = D_801D2744->proj.x + velocity;
 
-    velocity       = rsin(*angle_cell) * D_1F800000;
+    velocity       = rsin(*angle_cell) * g_ScratchPad;
     g_Task->proj.y = D_801D2744->proj.y + velocity;
 
     g_Task->proj_z = D_801D2744->proj_z;

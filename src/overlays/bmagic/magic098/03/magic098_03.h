@@ -5,12 +5,12 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-/* The scratch words D_1F800000 read as halfwords: the bolt radius, angle, flicker and segment count. */
-extern s16 D_1F800000_HALF[];
+/* The scratch words g_ScratchPad read as halfwords: the bolt radius, angle, flicker and segment count. */
+extern s16 g_ScratchPadHalves[];
 extern s16 D_1F800002;
 extern s16 D_1F800004;
 extern s16 D_1F800008;
-/* The bolt point D_1F800014, also read as halfwords. */
+/* The bolt point g_ScratchPadVectors, also read as halfwords. */
 
 void func_801EF5D4(s16 band_height, u16 radius, u16 jitter_mask);
 void func_801EFE24(void);

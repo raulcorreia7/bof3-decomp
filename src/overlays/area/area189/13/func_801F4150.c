@@ -21,7 +21,7 @@ MATCH void func_801F4150(s32 shade, s32 x) {
         SetShadeTex(prim, 0);
         SetSemiTrans(prim, 1);
         setXYWH(prim, x, 0x48, 0x4E, 0x1E);
-        setRGB0(prim, D_1F800014[i].vx * shade / 0x80, D_1F800014[i].vy * shade / 0x80, D_1F800014[i].vz * shade / 0x80);
+        setRGB0(prim, g_ScratchPadVectors[i].vx * shade / 0x80, g_ScratchPadVectors[i].vy * shade / 0x80, g_ScratchPadVectors[i].vz * shade / 0x80);
         prim->tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 448, 256);
         prim->clut  = getClut(0, i + 0x1E6);
         setUVWH(prim, i * 0x50, 0xC0, 0x4F, 0x1F);

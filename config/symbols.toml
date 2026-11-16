@@ -563,7 +563,7 @@ BMagic_DispatchEffectMode = { addr = 0x801EF398, type = "func", source = "Runs t
 g_BMagicEffectModes = { addr = 0x801EFEB8, source = "Handlers of magic020 (Disembowel), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic021/03"]
-D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true }
+g_ScratchPadHalves = { addr = 0x1F800000, type = "s16", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
@@ -860,7 +860,7 @@ g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect wor
 BMagic_DispatchMode = { addr = 0x801EEC50, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic057 (Bone Dance)." }
 
 ["emi/bmagic/magic058/03"]
-D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true, source = "ScratchPad.cells.halves at 0x1F800000 as signed halfwords; the magic effects read and set its first halfword as a vertical offset." }
+g_ScratchPadHalves = { addr = 0x1F800000, type = "s16", alias = true, source = "ScratchPad.cells.halves at 0x1F800000 as signed halfwords; the magic effects read and set its first halfword as a vertical offset." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
@@ -907,7 +907,7 @@ Effect_TickOnTimerZero = { addr = 0x801F00D0, type = "func", source = "Counts th
 g_BMagicEffectModes = { addr = 0x801F0BB0, source = "Handlers of magic060 (Identify), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic062/03"]
-D_1F800000_HALF = { addr = 0x1F800000, type = "s16", source = "The scratchpad base 0x1F800000 as signed halfwords; func_801F00EC stages the ring radius there for its rsin and rcos scaling.", alias = true }
+g_ScratchPadHalves = { addr = 0x1F800000, type = "s16", source = "The scratchpad base 0x1F800000 as signed halfwords; func_801F00EC stages the ring radius there for its rsin and rcos scaling.", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_RescaleStats = { addr = 0x800A9BD8, source = "Rescales one battler stats.", alias = true }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
@@ -1217,7 +1217,7 @@ g_BMagicEffectModes = { addr = 0x801EFA84, source = "Handlers of magic081 (Rotte
 D_801EFA8C = { addr = 0x801EFA8C, source = "Effect slot table of the magic081 effect, scanned by BMagic_AllocEffect." }
 
 ["emi/bmagic/magic082/03"]
-D_1F800000_HALF = { addr = 0x1F800000, type = "s16", source = "The scratchpad base 0x1F800000 as signed halfwords; func_801F0260 stages the ring radius there for its rsin and rcos scaling.", alias = true }
+g_ScratchPadHalves = { addr = 0x1F800000, type = "s16", source = "The scratchpad base 0x1F800000 as signed halfwords; func_801F0260 stages the ring radius there for its rsin and rcos scaling.", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_CanTarget = { addr = 0x800AED5C, type = "func", source = "Tells whether the battler can be a target of the selector: it makes the battler the current target, runs the selector's target test and restores the target; true when the test passes. battle/15 owns the body." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
@@ -1241,7 +1241,7 @@ Effect_LaunchFromRing = { addr = 0x801EFDC0, type = "func", source = "Counts the
 g_BMagicEffectModes = { addr = 0x801F0D14, source = "Handlers of magic082 (Steroids, Magic Belt, Protect…), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
 
 ["emi/bmagic/magic083/03"]
-D_1F800000_HALF = { addr = 0x1F800000, type = "s16", source = "The scratchpad base 0x1F800000 as signed halfwords; func_801F038C stages the ring radius there for its rsin and rcos scaling.", alias = true }
+g_ScratchPadHalves = { addr = 0x1F800000, type = "s16", source = "The scratchpad base 0x1F800000 as signed halfwords; func_801F038C stages the ring radius there for its rsin and rcos scaling.", alias = true }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
@@ -1420,8 +1420,8 @@ D_801F0498 = { addr = 0x801F0498, source = "Per-index byte of the magic096 effec
 g_BMagicEffectModes = { addr = 0x801F04A8, source = "Handlers of magic096 (Blizzard), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic097/03"]
-D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true, source = "ScratchPad.cells.halves at 0x1F800000 as signed halfwords; the magic effects read and set its first halfword as a vertical offset." }
-D_1F800014_HALF = { addr = 0x1F800014, type = "s16", alias = true, source = "ScratchPad.vectors read as signed halfwords: the four projected SVECTORs RotTransPers4 writes." }
+g_ScratchPadHalves = { addr = 0x1F800000, type = "s16", alias = true, source = "ScratchPad.cells.halves at 0x1F800000 as signed halfwords; the magic effects read and set its first halfword as a vertical offset." }
+g_ScratchPadVectorHalves = { addr = 0x1F800014, type = "s16", alias = true, source = "ScratchPad.vectors read as signed halfwords: the four projected SVECTORs RotTransPers4 writes." }
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
@@ -1440,8 +1440,8 @@ Effect_DrawBolt = { addr = 0x801F0568, type = "func", source = "Draws the lightn
 g_BMagicEffectModes = { addr = 0x801F0AC0, source = "Handlers of magic097 (Jolt), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic098/03"]
-D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true, source = "ScratchPad.cells.halves at 0x1F800000 as signed halfwords; the magic effects read and set its first halfword as a vertical offset." }
-D_1F800014_HALF = { addr = 0x1F800014, type = "s16", alias = true, source = "ScratchPad.vectors read as signed halfwords: the four projected SVECTORs RotTransPers4 writes." }
+g_ScratchPadHalves = { addr = 0x1F800000, type = "s16", alias = true, source = "ScratchPad.cells.halves at 0x1F800000 as signed halfwords; the magic effects read and set its first halfword as a vertical offset." }
+g_ScratchPadVectorHalves = { addr = 0x1F800014, type = "s16", alias = true, source = "ScratchPad.vectors read as signed halfwords: the four projected SVECTORs RotTransPers4 writes." }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
@@ -1459,7 +1459,7 @@ Effect_SetActorMatrixRolled = { addr = 0x801EF520, type = "func", source = "Sets
 g_BMagicEffectModes = { addr = 0x801F0340, source = "Handlers of magic098 (Lightning), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic099/03"]
-D_1F800014_HALF = { addr = 0x1F800014, type = "s16", alias = true, source = "ScratchPad.vectors read as signed halfwords: the four projected SVECTORs RotTransPers4 writes." }
+g_ScratchPadVectorHalves = { addr = 0x1F800014, type = "s16", alias = true, source = "ScratchPad.vectors read as signed halfwords: the four projected SVECTORs RotTransPers4 writes." }
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_RescaleStats = { addr = 0x800A9BD8, alias = true, source = "Rescales one battler's stats." }
@@ -1620,7 +1620,7 @@ g_BMagicEffectModes = { addr = 0x801F046C, source = "Handlers of magic110 (Ragna
 D_801F04A4 = { addr = 0x801F04A4, type = "Offset2", size = 0x30, source = "Six points." }
 
 ["emi/bmagic/magic111/03"]
-D_1F800000_HALF = { addr = 0x1F800000, type = "s16", alias = true, source = "ScratchPad.cells.halves at 0x1F800000 as signed halfwords; the magic effects read and set its first halfword as a vertical offset." }
+g_ScratchPadHalves = { addr = 0x1F800000, type = "s16", alias = true, source = "ScratchPad.cells.halves at 0x1F800000 as signed halfwords; the magic effects read and set its first halfword as a vertical offset." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
@@ -1819,7 +1819,7 @@ Actor_Clear = { addr = 0x801F0588, type = "func", source = "Clears the effect wo
 g_BMagicEffectModes = { addr = 0x801F05D8, source = "Handlers of magic125 (DivineBreath), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic126/03"]
-D_1F800000_HALF = { addr = 0x1F800000, type = "s16", source = "ScratchPad.cells.halves at 0x1F800000 as signed halfwords; the magic effects read and set its first halfword as a vertical offset.", alias = true }
+g_ScratchPadHalves = { addr = 0x1F800000, type = "s16", source = "ScratchPad.cells.halves at 0x1F800000 as signed halfwords; the magic effects read and set its first halfword as a vertical offset.", alias = true }
 Battle_ApplyDamageFlags = { addr = 0x800A9610, alias = true, source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
@@ -1954,7 +1954,7 @@ Effect_TickDownAndClear = { addr = 0x801EF6F8, type = "func", source = "Lowers t
 g_BMagicEffectModes = { addr = 0x801EF72C, source = "Handlers of magic138 (Main Cannon), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic143/03"]
-D_1F800014_HALF = { addr = 0x1F800014, type = "s16", alias = true, source = "ScratchPad.vectors read as signed halfwords: the four projected SVECTORs RotTransPers4 writes." }
+g_ScratchPadVectorHalves = { addr = 0x1F800014, type = "s16", alias = true, source = "ScratchPad.vectors read as signed halfwords: the four projected SVECTORs RotTransPers4 writes." }
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
@@ -6874,7 +6874,7 @@ jtbl_801EB43C = { addr = 0x801EB43C, type = "Callback", size = 0x4, source = "Th
 s_LogoCDVolume = { addr = 0x801EB470, source = "CdMix attenuator bytes of the movie audio: left volume at 0, right volume at 2, cross-channel 0 at 1 and 3." }
 
 ["exe/slus_004_22"]
-D_1F800000 = { addr = 0x1F800000, source = "ScratchPad at 0x1F800000: the work cells at 0x00 read as bytes, halfwords or words by mode, the scene pointer at 0x10, the RotTransPers4 vectors at 0x14 and the work record at 0x44." }
+g_ScratchPad = { addr = 0x1F800000, source = "The PlayStation scratchpad at 0x1F800000 as one record: the work cells at 0x00 read as bytes, halfwords or words, the pointer cell at 0x10, the RotTransPers4 vectors at 0x14 and the task pointer at 0x44." }
 D_1F800002 = { addr = 0x1F800002, source = "ScratchPad.cells.halves[1]: the spawn record's packed word and the area entity entry data (GAME_ENTITY_ENTRY_DATA)." }
 D_1F800004 = { addr = 0x1F800004, source = "ScratchPad.cells.words[1]: a map-coordinate counter (func_801B13BC) and the party archive load's temporary word." }
 D_1F800006 = { addr = 0x1F800006, source = "ScratchPad.cells.halves[3]: the second map-coordinate counter (func_801B13BC)." }
@@ -6883,7 +6883,7 @@ D_1F80000A = { addr = 0x1F80000A, source = "ScratchPad.cells.halves[5]: the stag
 D_1F80000C = { addr = 0x1F80000C, source = "ScratchPad.cells.words[3]: the staged y bias flag, the tile-window half-width (func_801530D0) and the scene math word." }
 D_1F80000E = { addr = 0x1F80000E, source = "ScratchPad.cells.halves[7]: the staged y source halfword (func_801B13BC)." }
 D_1F800010 = { addr = 0x1F800010, source = "ScratchPad.unk_10: scena00 points the cell at the area load record's rotation offset and steps the camera through it." }
-D_1F800014 = { addr = 0x1F800014, source = "ScratchPad.vectors: the four SVECTORs RotTransPers4 projects; the area sprite and effect passes write the vertices and the engine's sprite draw reads the corners back as D_1F800034." }
+g_ScratchPadVectors = { addr = 0x1F800014, source = "ScratchPad.vectors: the four SVECTORs RotTransPers4 projects; the area sprite and effect passes write the vertices." }
 D_1F80001C = { addr = 0x1F80001C, type = "SVECTOR", source = "ScratchPad.vectors[1]: the second corner vector RotTransPers4 projects, written on its own by the tile-ring draw (func_801530D0)." }
 D_1F800024 = { addr = 0x1F800024, type = "SVECTOR", source = "ScratchPad.vectors[2]: the third corner vector RotTransPers4 projects, written on its own by the tile-ring draw (func_801530D0)." }
 D_1F80002C = { addr = 0x1F80002C, type = "SVECTOR", source = "ScratchPad.vectors[3]: the fourth corner vector RotTransPers4 projects, written on its own by the tile-ring draw (func_801530D0)." }

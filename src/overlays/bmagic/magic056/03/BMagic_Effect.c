@@ -164,23 +164,23 @@ MATCH void func_801EFC74(void) {
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256), 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
     if (g_Task->header.step >= 2) {
-        D_1F800000.cells.halves[0] = ((g_Task->unk_09 * 4 + 0x210) * rcos(0x800)) >> 12;
+        g_ScratchPad.cells.halves[0] = ((g_Task->unk_09 * 4 + 0x210) * rcos(0x800)) >> 12;
     } else {
-        scale                      = rcos(0x800) * 48;
-        D_1F800000.cells.halves[0] = (scale * g_Task->unk_09) >> 12;
+        scale                        = rcos(0x800) * 48;
+        g_ScratchPad.cells.halves[0] = (scale * g_Task->unk_09) >> 12;
     }
-    D_1F800000.cells.halves[3] = g_Task->timer * 8;
-    D_1F800000.cells.halves[4] = g_Task->timer * 6;
-    setVector(&D_1F800014[2], FIXED_MUL(rsin(0), D_1F800000.cells.halves[0]), FIXED_MUL(rcos(0), D_1F800000.cells.halves[0]), 0);
-    D_1F800014[1].vz = 0;
-    D_1F800014[0].vz = 0;
+    g_ScratchPad.cells.halves[3] = g_Task->timer * 8;
+    g_ScratchPad.cells.halves[4] = g_Task->timer * 6;
+    setVector(&g_ScratchPadVectors[2], FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]), FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]), 0);
+    g_ScratchPadVectors[1].vz = 0;
+    g_ScratchPadVectors[0].vz = 0;
     for (i = 1; i <= 16; i++) {
         prim = GFX_BeginPolyG3(1);
-        GFX_STEP_TRIANGLE_FAN(i << 8, D_1F800000.cells.halves[0]);
-        setRGB0(prim, D_1F800000.cells.halves[4], D_1F800000.cells.halves[3], D_1F800000.cells.halves[3]);
+        GFX_STEP_TRIANGLE_FAN(i << 8, g_ScratchPad.cells.halves[0]);
+        setRGB0(prim, g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
         setRGB1(prim, 0, 0, 0);
         setRGB2(prim, 0, 0, 0);
-        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+        RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
 }

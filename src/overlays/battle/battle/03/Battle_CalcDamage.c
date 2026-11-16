@@ -16,12 +16,12 @@ MATCH s16 Battle_CalcDamage(u8 attacker_slot, u8 target_slot, u16 element_id) {
     spread = g_BattleDamageSpread;
     if (element_id == BATTLE_ELEMENT_FROM_WEAPON) {
         if (BATTLER_IS_PLAYER(attacker_slot)) {
-            *(u16*)D_1F800000 = g_Weapons[g_Game.members[attacker_slot].chr.equip.weapon].element;
+            *(u16*)g_ScratchPad = g_Weapons[g_Game.members[attacker_slot].chr.equip.weapon].element;
         } else {
-            *(u16*)D_1F800000 = 0;
+            *(u16*)g_ScratchPad = 0;
         }
     } else {
-        *(u16*)D_1F800000 = element_id;
+        *(u16*)g_ScratchPad = element_id;
     }
     if (BATTLER_IS_PLAYER(attacker_slot)) {
         if (g_Game.members[attacker_slot].u.turn.action_flags.value & COMBATANT_FLAG_POWER_BOOST) {

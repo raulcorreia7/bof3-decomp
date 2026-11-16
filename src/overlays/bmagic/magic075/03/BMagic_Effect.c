@@ -85,7 +85,7 @@ MATCH void func_801EF0D0(void) {
     g_Task->unk_09 = count;
     if (count == 0) {
         angle                      = (g_Task->param.unk_0B & 0x7) << 9;
-        angle_cell                 = &D_1F800000;
+        angle_cell                 = &g_ScratchPad;
         *angle_cell                = angle;
         g_Task->pos.x.fixed        = g_BattleEffectBattler->pos.x.fixed + ((rsin(angle) * 0xA000) >> 12);
         g_Task->pos.y.fixed        = g_BattleEffectBattler->pos.y.fixed + ((rcos(*angle_cell) * 0xA000) >> 12);

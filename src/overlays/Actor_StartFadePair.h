@@ -17,7 +17,7 @@
         g_Actors[g_Task->unk_03].header.flags = 0;                        \
         return;                                                           \
     }                                                                     \
-    scratch                               = (s16*)D_1F800000;             \
+    scratch                               = (s16*)g_ScratchPad;           \
     data                                  = (u8*)DATA;                    \
     g_Actors[g_Task->unk_04].header.flags = 1;                            \
     work                                  = g_Task;                       \

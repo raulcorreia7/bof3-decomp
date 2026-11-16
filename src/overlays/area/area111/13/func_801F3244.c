@@ -18,7 +18,7 @@ MATCH void func_801F3244(void) {
     SetPolyFT4(prim);
     SetShadeTex(prim, 0);
 
-    quad     = D_1F800014;
+    quad     = g_ScratchPadVectors;
     corner1  = quad + 1;
     corner2  = quad + 2;
     corner3  = quad + 3;

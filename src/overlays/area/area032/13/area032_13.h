@@ -8,7 +8,8 @@
 #include "overlays/area/world00.h"
 #include "area/spad.h"
 
-extern SVECTOR  D_1F800014[];
+/* g_ScratchPadVectors */
+extern SVECTOR  g_ScratchPadVectors[];
 extern u8       D_801468E4[];
 extern Callback D_801F3F80[];
 

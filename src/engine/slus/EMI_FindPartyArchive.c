@@ -16,11 +16,11 @@ MATCH u8 EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c) {
     u8*       current;
     const u8* archive;
 
-    loaded        = &g_EmiLoadedCharacterIndex;
-    party         = D_1F800000;
-    *party        = member_a;
-    D_1F800000[1] = member_b;
-    D_1F800000[2] = member_c;
+    loaded          = &g_EmiLoadedCharacterIndex;
+    party           = g_ScratchPad;
+    *party          = member_a;
+    g_ScratchPad[1] = member_b;
+    g_ScratchPad[2] = member_c;
     if (*loaded != GAME_NONE) {
         for (i = 0; i < 3; i++, party++) {
             member = *party;
@@ -44,18 +44,18 @@ MATCH u8 EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c) {
     i     = 0;
     count = 0;
     do {
-        if (D_1F800000[i] != GAME_NONE) {
+        if (g_ScratchPad[i] != GAME_NONE) {
             count++;
         }
         i++;
     } while (i < 3);
-    swap = &D_1F800000[4];
+    swap = &g_ScratchPad[4];
     for (i = 0; i < 2; i++) {
         for (j = i + 1; j < 3; j++) {
-            if (D_1F800000[j] < D_1F800000[i]) {
-                *swap         = D_1F800000[i];
-                D_1F800000[i] = D_1F800000[j];
-                D_1F800000[j] = *swap;
+            if (g_ScratchPad[j] < g_ScratchPad[i]) {
+                *swap           = g_ScratchPad[i];
+                g_ScratchPad[i] = g_ScratchPad[j];
+                g_ScratchPad[j] = *swap;
             }
         }
     }
@@ -66,14 +66,14 @@ MATCH u8 EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c) {
     i     = 0;
     do {
         for (j = (u8)first; j < (u8)last; j++) {
-            if (D_1F800000[slot] == D_80181B34[j][i]) {
+            if (g_ScratchPad[slot] == D_80181B34[j][i]) {
                 if (slot == (u8)count - 1) {
                     found = j;
                     break;
                 }
                 first = j;
                 for (; j < 19; j++) {
-                    if (D_1F800000[slot] != D_80181B34[j][i]) {
+                    if (g_ScratchPad[slot] != D_80181B34[j][i]) {
                         break;
                     }
                 }

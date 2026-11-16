@@ -12,7 +12,7 @@ MATCH void func_801F3704(void) {
     long      flag;
 
     i      = 0;
-    quad   = D_1F800014;
+    quad   = g_ScratchPadVectors;
     vz     = -0x88;
     cell_y = D_801F4364 + 1;
     cell_x = cell_y - 1;

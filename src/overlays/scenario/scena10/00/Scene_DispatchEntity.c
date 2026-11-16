@@ -304,8 +304,8 @@ INCLUDE_ASM(func_801F8C00);
 INCLUDE_ASM(func_801F95B8);
 
 MATCH void func_801F9FC4(void) {
-    D_1F800000.cells.halves[0] = Actor_FindFreeField();
-    if (D_1F800000.cells.halves[0] != 255) {
+    g_ScratchPad.cells.halves[0] = Actor_FindFreeField();
+    if (g_ScratchPad.cells.halves[0] != 255) {
         func_801A4D54(D_801FE938);
     }
 }

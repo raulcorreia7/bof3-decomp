@@ -126,20 +126,20 @@ MATCH void func_801EF424(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
-    D_1F800000_WORD[0] = g_Task->timer * 12;
-    D_1F800014[2].vx   = FIXED_MUL(rsin(0), D_1F800000_WORD[0]);
-    D_1F800014[2].vy   = FIXED_MUL(rcos(0), D_1F800000_WORD[0]);
+    D_1F800000_WORD[0]        = g_Task->timer * 12;
+    g_ScratchPadVectors[2].vx = FIXED_MUL(rsin(0), D_1F800000_WORD[0]);
+    g_ScratchPadVectors[2].vy = FIXED_MUL(rcos(0), D_1F800000_WORD[0]);
 
     for (i = 1; i <= 32; i++) {
-        D_1F800014[0].vx = 0;
-        D_1F800014[0].vy = 0;
-        D_1F800014[1].vx = D_1F800014[2].vx;
-        D_1F800014[1].vy = D_1F800014[2].vy;
-        setVector(&D_1F800014[2], FIXED_MUL(rsin(i << 7), D_1F800000_WORD[0]), FIXED_MUL(rcos(i << 7), D_1F800000_WORD[0]), 0);
-        D_1F800014[1].vz = 0;
-        D_1F800014[0].vz = 0;
-        prim             = GFX_BeginPolyG3(1);
-        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+        g_ScratchPadVectors[0].vx = 0;
+        g_ScratchPadVectors[0].vy = 0;
+        g_ScratchPadVectors[1].vx = g_ScratchPadVectors[2].vx;
+        g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy;
+        setVector(&g_ScratchPadVectors[2], FIXED_MUL(rsin(i << 7), D_1F800000_WORD[0]), FIXED_MUL(rcos(i << 7), D_1F800000_WORD[0]), 0);
+        g_ScratchPadVectors[1].vz = 0;
+        g_ScratchPadVectors[0].vz = 0;
+        prim                      = GFX_BeginPolyG3(1);
+        RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
         setRGB0(prim, g_Task->unk_09 * 6, g_Task->unk_09 * 6, g_Task->unk_09 * 4);
         setRGB1(prim, g_Task->unk_09 * 4, g_Task->unk_09 * 4, g_Task->unk_09 * 2);
         setRGB2(prim, prim->r1, prim->g1, prim->b1);
@@ -232,39 +232,40 @@ MATCH void func_801EF9E0(void) {
     D_1F800000_WORD[3] = g_Task->timer << 4;
     spark              = g_FrameCount & 7;
     next               = (g_FrameCount + 1) & 7;
-    setVector(&D_1F800014[3], FIXED_MUL(rcos(0), D_1F800000_WORD[0]), FIXED_MUL(rsin(0), D_1F800000_WORD[0]), 0);
+    setVector(&g_ScratchPadVectors[3], FIXED_MUL(rcos(0), D_1F800000_WORD[0]), FIXED_MUL(rsin(0), D_1F800000_WORD[0]), 0);
     for (i = 1; i <= 64; i++) {
         if ((i & 7) == spark || (i & 7) == next || g_Task->header.step == 0) {
-            D_1F800014[0].vx = FIXED_MUL(rcos((i - 1) << 6), D_1F800000_WORD[1]);
-            D_1F800014[0].vy = FIXED_MUL(rsin((i - 1) << 6), D_1F800000_WORD[1]);
-            D_1F800014[0].vz = 0;
-            setVector(&D_1F800014[1], FIXED_MUL(rcos(i << 6), D_1F800000_WORD[1]), FIXED_MUL(rsin(i << 6), D_1F800000_WORD[1]), 0);
-            setVector(&D_1F800014[2], D_1F800014[3].vx, D_1F800014[3].vy, 0);
-            setVector(&D_1F800014[3], FIXED_MUL(rcos(i << 6), D_1F800000_WORD[0]), FIXED_MUL(rsin(i << 6), D_1F800000_WORD[0]), 0);
+            g_ScratchPadVectors[0].vx = FIXED_MUL(rcos((i - 1) << 6), D_1F800000_WORD[1]);
+            g_ScratchPadVectors[0].vy = FIXED_MUL(rsin((i - 1) << 6), D_1F800000_WORD[1]);
+            g_ScratchPadVectors[0].vz = 0;
+            setVector(&g_ScratchPadVectors[1], FIXED_MUL(rcos(i << 6), D_1F800000_WORD[1]), FIXED_MUL(rsin(i << 6), D_1F800000_WORD[1]), 0);
+            setVector(&g_ScratchPadVectors[2], g_ScratchPadVectors[3].vx, g_ScratchPadVectors[3].vy, 0);
+            setVector(&g_ScratchPadVectors[3], FIXED_MUL(rcos(i << 6), D_1F800000_WORD[0]), FIXED_MUL(rsin(i << 6), D_1F800000_WORD[0]), 0);
         } else {
-            wave             = ((i + g_FrameCount) & 0x1F) << 7;
-            D_1F800014[0].vx = FIXED_MUL(rcos((i - 1) << 6), D_1F800000_WORD[0]);
-            D_1F800014[0].vy = FIXED_MUL(rsin((i - 1) << 6), D_1F800000_WORD[0]);
-            D_1F800014[0].vz = -(D_1F800000_WORD[3] + FIXED_MUL(rsin(wave), 32));
-            D_1F800014[1].vx = FIXED_MUL(rcos(i << 6), D_1F800000_WORD[0]);
-            D_1F800014[1].vy = FIXED_MUL(rsin(i << 6), D_1F800000_WORD[0]);
-            D_1F800014[1].vz = -(D_1F800000_WORD[3] + FIXED_MUL(rsin(wave), 32));
-            D_1F800014[2].vx = D_1F800014[3].vx;
-            D_1F800014[2].vy = D_1F800014[3].vy;
-            D_1F800014[2].vz = 0;
-            D_1F800014[3].vx = D_1F800014[1].vx;
-            D_1F800014[3].vy = D_1F800014[1].vy;
-            D_1F800014[3].vz = 0;
-            x                = (D_1F800014[3].vx << 9) + g_Task->pos.x.fixed;
-            y                = (D_1F800014[3].vy << 9) + g_Task->pos.y.fixed;
-            tpage            = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
+            wave                      = ((i + g_FrameCount) & 0x1F) << 7;
+            g_ScratchPadVectors[0].vx = FIXED_MUL(rcos((i - 1) << 6), D_1F800000_WORD[0]);
+            g_ScratchPadVectors[0].vy = FIXED_MUL(rsin((i - 1) << 6), D_1F800000_WORD[0]);
+            g_ScratchPadVectors[0].vz = -(D_1F800000_WORD[3] + FIXED_MUL(rsin(wave), 32));
+            g_ScratchPadVectors[1].vx = FIXED_MUL(rcos(i << 6), D_1F800000_WORD[0]);
+            g_ScratchPadVectors[1].vy = FIXED_MUL(rsin(i << 6), D_1F800000_WORD[0]);
+            g_ScratchPadVectors[1].vz = -(D_1F800000_WORD[3] + FIXED_MUL(rsin(wave), 32));
+            g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx;
+            g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy;
+            g_ScratchPadVectors[2].vz = 0;
+            g_ScratchPadVectors[3].vx = g_ScratchPadVectors[1].vx;
+            g_ScratchPadVectors[3].vy = g_ScratchPadVectors[1].vy;
+            g_ScratchPadVectors[3].vz = 0;
+            x                         = (g_ScratchPadVectors[3].vx << 9) + g_Task->pos.x.fixed;
+            y                         = (g_ScratchPadVectors[3].vy << 9) + g_Task->pos.y.fixed;
+            tpage                     = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
             Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
         }
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
+                      &depth, &flag);
         if ((i & 7) == spark || (i & 7) == next || g_Task->header.step == 0) {
             setRGB0(prim, 1, 1, 1);
             setRGB1(prim, 1, 1, 1);
@@ -318,16 +319,17 @@ MATCH void func_801F01A8(void) {
     long     depth;
     long     flag;
 
-    setVector(&D_1F800014[0], D_1F800014[1].vx = D_1F800014[2].vx = rsin(g_Task->param.unk_0B << 9) >> 5, D_1F800014[1].vy = D_1F800014[2].vy = rcos(g_Task->param.unk_0B << 9) >> 5, 32);
-    D_1F800014[1].vz = 24;
-    D_1F800014[2].vz = 0;
-    tpage            = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
+    setVector(&g_ScratchPadVectors[0], g_ScratchPadVectors[1].vx = g_ScratchPadVectors[2].vx = rsin(g_Task->param.unk_0B << 9) >> 5,
+              g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy = rcos(g_Task->param.unk_0B << 9) >> 5, 32);
+    g_ScratchPadVectors[1].vz = 24;
+    g_ScratchPadVectors[2].vz = 0;
+    tpage                     = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     prim = (LINE_G3*)g_GfxPrimCursor;
     SetLineG3(prim);
     SetSemiTrans(prim, 1);
-    RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+    RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
     setRGB0(prim, 0x40, 0x40, 0x40);
     setRGB1(prim, 0xC0, 0x80, 0x80);
     setRGB2(prim, 1, 1, 1);

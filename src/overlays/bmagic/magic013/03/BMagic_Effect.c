@@ -334,10 +334,10 @@ MATCH void func_801F0164(void) {
     prim = (POLY_F3*)g_GfxPrimCursor;
     SetPolyF3(prim);
     SetSemiTrans(prim, 1);
-    setVector(&D_1F800014[0], (u32)rsin(0) >> 8, (u32)rcos(0) >> 8, 0);
-    setVector(&D_1F800014[1], (u32)rsin(DEG(120)) >> 8, (u32)rcos(DEG(120)) >> 8, 0);
-    setVector(&D_1F800014[2], (u32)rsin(DEG(240)) >> 8, (u32)rcos(DEG(240)) >> 8, 0);
-    RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+    setVector(&g_ScratchPadVectors[0], (u32)rsin(0) >> 8, (u32)rcos(0) >> 8, 0);
+    setVector(&g_ScratchPadVectors[1], (u32)rsin(DEG(120)) >> 8, (u32)rcos(DEG(120)) >> 8, 0);
+    setVector(&g_ScratchPadVectors[2], (u32)rsin(DEG(240)) >> 8, (u32)rcos(DEG(240)) >> 8, 0);
+    RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
     setRGB0(prim, (rand() & 0xF) * g_Task->unk_09, (rand() & 0xF) * g_Task->unk_09, (rand() & 0xF) * g_Task->unk_09);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_F3));
 }
