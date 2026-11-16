@@ -121,8 +121,8 @@ NON_MATCHING void func_801F7678(s32 shade_arg) {
 
     Area_SetCameraMatrix(&matrix);
     angle    = 0;
-    point[0] = g_Task->pos.x.fixed + ((rcos(0) * FIELD(s16, g_Task, 0x2E)) >> 4);
-    point[1] = g_Task->pos.y.fixed + ((rsin(0) * FIELD(s16, g_Task, 0x2E)) >> 4);
+    point[0] = g_Task->pos.x.fixed + ((FIELD(s16, g_Task, 0x2E) * rcos(0)) >> 4);
+    point[1] = g_Task->pos.y.fixed + ((FIELD(s16, g_Task, 0x2E) * rsin(0)) >> 4);
     point[2] = g_Task->pos.z.fixed;
     Area_ProjectPoint(point, &inner);
     point[2] = g_Task->pos.z.fixed + (FIELD(s16, g_Task, 0x30) << 16);
@@ -132,8 +132,8 @@ NON_MATCHING void func_801F7678(s32 shade_arg) {
         last_inner = inner;
         last_outer = outer;
         angle += AREA_RING_ANGLE_STEP;
-        point[0] = g_Task->pos.x.fixed + ((rcos((u16)angle) * FIELD(s16, g_Task, 0x2E)) >> 4);
-        point[1] = g_Task->pos.y.fixed + ((rsin((u16)angle) * FIELD(s16, g_Task, 0x2E)) >> 4);
+        point[0] = g_Task->pos.x.fixed + ((FIELD(s16, g_Task, 0x2E) * rcos((u16)angle)) >> 4);
+        point[1] = g_Task->pos.y.fixed + ((FIELD(s16, g_Task, 0x2E) * rsin((u16)angle)) >> 4);
         point[2] = g_Task->pos.z.fixed;
         Area_ProjectPoint(point, &inner);
         point[2] = g_Task->pos.z.fixed + (FIELD(s16, g_Task, 0x30) << 16);
@@ -143,7 +143,7 @@ NON_MATCHING void func_801F7678(s32 shade_arg) {
         Area_AddCellPrim(point[0], point[1], 0, sizeof(DR_MODE));
         prim = GFX_BeginPolyG4(1);
         setXY4(prim, last_inner.vx, last_inner.vy, last_outer.vx, last_outer.vy, inner.vx, inner.vy, outer.vx, outer.vy);
-        color = (shade & BYTE_MASK) * ((u32)shade_arg & BYTE_MASK) >> 8;
+        color = ((u32)shade_arg & BYTE_MASK) * (shade & BYTE_MASK) >> 8;
         setRGB0(prim, color, color, color);
         setRGB1(prim, color, color, color);
         if ((u8)(i - 4) >= 8) {
@@ -151,7 +151,7 @@ NON_MATCHING void func_801F7678(s32 shade_arg) {
         } else {
             shade -= 8;
         }
-        color = (shade & BYTE_MASK) * ((u32)shade_arg & BYTE_MASK) >> 8;
+        color = ((u32)shade_arg & BYTE_MASK) * shade >> 8;
         setRGB2(prim, color, color, color);
         setRGB3(prim, color, color, color);
         Area_AddCellPrim(point[0], point[1], 0, sizeof(POLY_G4));
