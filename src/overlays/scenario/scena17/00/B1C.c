@@ -292,9 +292,9 @@ MATCH void Scene_StartEndingXa(void) {
     u8* step;
 
     SND_StartXAStream(8, 1);
-    step       = &D_80146874;
-    D_801F9DD0 = 0;
-    D_801F9DD4 = 0;
+    step               = &D_80146874;
+    g_EndingRollLine   = 0;
+    g_EndingRollScroll = 0;
     *step += 1;
 }
 
@@ -303,7 +303,7 @@ MATCH void Scene_WaitEndingXa(void) {
     u8  ready;
     u8* step;
 
-    ready = func_801F938C();
+    ready = Scene_UpdateEndingRoll();
     if ((u8)SND_IsXAIdle() && ready) {
         UI_SetMode(UI_MODE_LONG_FADE_OUT);
         step  = &D_80146874;
@@ -319,7 +319,7 @@ MATCH void func_801F8170(void) {
         D_80146874 = 0;
         *stage     = *stage + 1;
     } else {
-        func_801F938C();
+        Scene_UpdateEndingRoll();
     }
 }
 
@@ -445,7 +445,29 @@ MATCH void func_801F84F4(void) {
     func_801F8B10(0x4B0, 0x80);
 }
 
-INCLUDE_ASM(func_801F8594);
+MATCH void func_801F8594(void) {
+    u8* timer;
+    u8* count;
+
+    if (g_InputPressed & PADRdown) {
+        D_801F9DD8 = 1;
+    }
+    if (EMI_IsReady() != 0) {
+        timer = &D_80146875;
+        *timer -= 1;
+        if (*timer == 0) {
+            count = &D_80146867;
+            *count -= 1;
+            if (*count == 0) {
+                D_80146874 += 1;
+            } else {
+                *timer = 30;
+            }
+        }
+    }
+    func_801F8B10(0x4B0, 0x80);
+    func_801F8FAC(0xE0, 0xBE, 0x80, 1);
+}
 
 MATCH void func_801F8664(void) {
     u8* state;
@@ -650,9 +672,81 @@ MATCH void func_801F9160(s16 x, s16 y) {
     GFX_AddPrim(1, sizeof(SPRT));
 }
 
-INCLUDE_ASM(func_801F91F0);
+/* func_801F91F0 */
+MATCH void Scene_DrawEndingRollLine(s16 x, s16 y, u8* text) {
+    u8  color;
+    u8  glyph;
+    s32 tpage;
+    s32 idx;
+    s32 t;
 
-INCLUDE_ASM(func_801F938C);
+    color = 0;
+    if (GetGraphType() == 1) {
+        tpage = 0xAF;
+    } else if (GetGraphType() == 2) {
+        tpage = 0xAF;
+    } else {
+        tpage = 0x3F;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
+    GFX_AddPrim(1, sizeof(DR_MODE));
+    while (*text != 0) {
+        switch (*text) {
+            case '!':
+                text++;
+                color = *text - '0';
+                break;
+            case '#':
+                text++;
+                idx   = *text + 4;
+                glyph = idx;
+                func_801F90BC(x, y, color, glyph);
+                x += g_EndingGlyphWidth[glyph];
+                break;
+            case ' ':
+                x += 12;
+                break;
+            case '@':
+                func_801F9160(x, y);
+                x += 0x58;
+                break;
+            default:
+                t = *text - 0x41;
+                if ((u8)t < 26) {
+                    idx = t;
+                } else {
+                    idx = *text - 0x47;
+                }
+                glyph = idx;
+                func_801F90BC(x, y, color, glyph);
+                x += g_EndingGlyphWidth[glyph];
+                break;
+        }
+        text++;
+    }
+}
+
+/* func_801F938C */
+MATCH bool Scene_UpdateEndingRoll(void) {
+    s32 i;
+    u8* text;
+
+    for (i = 0; i < 16; i++) {
+        text = g_EndingRollText[g_EndingRollLine + i];
+        if (text != (u8*)-1 && text != NULL) {
+            Scene_DrawEndingRollLine(16, i * 22 - g_EndingRollScroll, text);
+        }
+    }
+    if (g_EndingRollText[g_EndingRollLine] != (u8*)-1) {
+        g_EndingRollScroll += 1;
+        if (g_EndingRollScroll == 22) {
+            g_EndingRollScroll = 0;
+            g_EndingRollLine += 1;
+        }
+        return 0;
+    }
+    return 1;
+}
 
 /* func_801F9490 */
 MATCH void Scene_RunSaveMenu(void) {

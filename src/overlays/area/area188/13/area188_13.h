@@ -11,6 +11,8 @@
 #include "overlays/area/Area_DrawDimQuad.h"
 
 /* The per-scene y limit bytes the walk step reads, in 16.16 units. */
+extern u8 D_801F688C[];
+extern u8 D_801F688D[];
 extern u8 D_801F6898[];
 
 #define AREA_SPIN_RADIUS     16
@@ -37,6 +39,7 @@ extern u8       D_801F689C;
 extern u8       D_801F68A0;
 
 /* The game-overlay state bytes the cancel path resets. */
+extern u8 D_8014865F;
 
 #define AREA_SPAWN_SLOT_LIFE        0x10
 #define AREA_SPAWN_SLOT_RADIUS      0x100
@@ -47,7 +50,7 @@ void func_801F44B4(void);
 /* The per-image spawn step Area_UpdateSpawn runs between the slot claim and the slot pass. */
 #define AREA_SPAWN_TICK func_801F44B4
 
-void func_801F38E0(void* arg0, s32 arg1, s32 arg2);
+void func_801F38E0(void* position, s32 radius, s32 colors);
 void func_801F3ADC(void* arg0, void* arg1, s32 arg2);
 void func_801F40F4(s32 arg0);
 

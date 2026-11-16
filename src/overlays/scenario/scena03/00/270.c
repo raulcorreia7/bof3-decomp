@@ -45,11 +45,11 @@ MATCH void func_801F6EB4(void) {
     g_Actors[work[4]].pos.y.fixed += ONE;
     g_Actors[work[3]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     g_Actors[g_Task->unk_04].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    cell                                      = (u8*)g_Task;
-    cell4                                     = cell[4];
-    cell3                                     = cell[3];
-    FIELD(u8, D_801468E4, cell4 * ACTOR_SIZE) = 0;
-    FIELD(u8, D_801468E4, cell3 * ACTOR_SIZE) = 0;
+    cell                           = (u8*)g_Task;
+    cell4                          = cell[4];
+    cell3                          = cell[3];
+    D_801468E4[cell4 * ACTOR_SIZE] = 0;
+    D_801468E4[cell3 * ACTOR_SIZE] = 0;
     GFX_AllocPaletteFade(&g_Actors[work[3]], 15, 0, 0, 1);
     GFX_AllocPaletteFade(&g_Actors[work[4]], 0, 0, 15, 1);
     g_Task->timer       = 4;
@@ -159,15 +159,15 @@ MATCH void func_801F7BB0(void) {
 }
 
 MATCH void func_801F7C50(void) {
-    s32* temp_s0;
-    u8   temp_v0;
+    s32* ptr;
+    u8   value;
 
-    temp_s0 = &g_Task->vx;
-    func_801F7FFC((Scena03Quad*)temp_s0);
-    func_801F8170(temp_s0);
-    temp_v0       = g_Task->timer - 1;
-    g_Task->timer = temp_v0;
-    if (!(temp_v0 & BYTE_MASK)) {
+    ptr = &g_Task->vx;
+    func_801F7FFC((Scena03Quad*)ptr);
+    func_801F8170(ptr);
+    value         = g_Task->timer - 1;
+    g_Task->timer = value;
+    if (!(value & BYTE_MASK)) {
         g_Task->timer = 128;
         g_Task->header.mode += 1;
     }
@@ -213,11 +213,11 @@ MATCH void func_801F7DF0(void) {
 }
 
 MATCH void func_801F7E34(void) {
-    void* work;
+    Actor* work;
 
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 9));
-    work                  = SP_REF(void*, 0x44);
-    FIELD(u8, work, 0x1u) = (FIELD(u8, work, 0x1u) + 1);
+    work = SPAD(0u)->view.area.work_ptr;
+    work->header.mode += 1;
 }
 
 MATCH void func_801F7E6C(void) {
@@ -348,21 +348,21 @@ MATCH void func_801F8328(void) {
 }
 
 MATCH void func_801F8370(void) {
-    SpawnedActor* temp_v0;
-    s32           temp_v1;
-    u8            temp_v0_2;
+    SpawnedActor* actor;
+    s32           actor_index;
+    u8            remaining;
 
     if (g_Task->timer & 0x4) {
-        temp_v1 = func_8019601C() & BYTE_MASK;
-        if (temp_v1 != 0xFF) {
-            temp_v0               = &g_SpawnedActors[temp_v1];
-            temp_v0->header.flags = 1;
-            temp_v0->type         = 0x24;
+        actor_index = func_8019601C() & BYTE_MASK;
+        if (actor_index != 0xFF) {
+            actor               = &g_SpawnedActors[actor_index];
+            actor->header.flags = 1;
+            actor->type         = 0x24;
         }
     }
-    temp_v0_2     = g_Task->timer - 1;
-    g_Task->timer = temp_v0_2;
-    if (!(temp_v0_2 & BYTE_MASK)) {
+    remaining     = g_Task->timer - 1;
+    g_Task->timer = remaining;
+    if (!(remaining & BYTE_MASK)) {
         g_Task->header.mode += 1;
     }
 }
@@ -483,378 +483,3 @@ MATCH void func_801F92F4(void) {
 
 MATCH void func_801F9330(void) {
 }
-
-INCLUDE_ASM(func_801F9338);
-
-MATCH void func_801F97F8(void) {
-    switch (g_SceneState.step_05) {
-        case 0:
-            func_801BE1B0(1);
-            g_ScriptVars[0]      = 0xA;
-            g_SceneState.step_05 = 1;
-            break;
-
-        case 1:
-            if (g_ScriptVars[0] == 0x28) {
-                g_SceneState.state_04 = 1;
-                g_SceneState.step_05  = 1;
-            }
-            break;
-    }
-}
-
-INCLUDE_ASM(func_801F9880);
-
-INCLUDE_ASM(func_801FA0A4);
-
-INCLUDE_ASM(func_801FA34C);
-
-INCLUDE_ASM(func_801FABA8);
-
-INCLUDE_ASM(func_801FB268);
-
-INCLUDE_ASM(func_801FB8A4);
-
-MATCH s32 func_801FC1D0(s32 member_index) {
-    s32    actor_index;
-    s16    height;
-    u8     option_flags;
-    Actor* actor;
-    Actor* task;
-    Actor* task2;
-    Actor* task3;
-    Actor* task4;
-
-    actor_index = Actor_FindFreeField() & BYTE_MASK;
-    if (actor_index == GAME_NONE) {
-        return 0;
-    }
-
-    actor                 = &g_Actors[actor_index];
-    SP_REF(Actor*, 0x44u) = actor;
-    g_CurrentActor        = actor;
-    func_801A4AA8();
-    Area_SelectSceneRecord(0x67);
-    g_Task->header.flags = 1;
-
-    task                              = g_Task;
-    task->pos.x.fixed                 = COORD_HALF + g_Game.members[(u8)member_index].pos.x.fixed;
-    g_Actors[actor_index].walk_dest_x = task->pos.x.fixed;
-    task->pos.y.fixed                 = g_Game.members[(u8)member_index].pos.y.fixed;
-    g_Actors[actor_index].walk_dest_y = task->pos.y.fixed;
-    g_Actors[actor_index].unk_88      = 0;
-
-    height                        = Area_SampleHeight(task->pos.x.fixed, task->pos.y.fixed);
-    task2                         = g_Task;
-    task2->header.mode            = 4;
-    task2->pos.z.part.integer     = height;
-    g_Task->header.step           = 0;
-    g_Task->direction_08          = 0;
-    g_Task->unk_06                = 0;
-    actor->ext.bounds.half_height = 0;
-    g_Actors[actor_index].unk_77  = 2;
-    g_Actors[actor_index].unk_78  = 2;
-
-    g_Actors[actor_index].ext.bounds.half_width = 0;
-    g_Actors[actor_index].unk_7C                = 0;
-    option_flags                                = 0x88;
-    Actor_SetOptionFlags(&option_flags);
-    g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    task3                       = g_Task;
-    task3->tint.bytes.rgb.blue  = 0;
-    task3->tint.bytes.rgb.green = 0;
-    task3->tint.bytes.rgb.red   = 0;
-    task4                       = g_Task;
-    task4->tint.bytes.flags     = 1;
-    func_801A4914();
-    return 1;
-}
-
-MATCH void func_801FC3B4(void) {
-    SCENA03_NUDGE_SCROLL(D_801FD004, 3);
-}
-
-MATCH void func_801FC410(void) {
-    SCENA03_NUDGE_SCROLL(D_801FD008, 1);
-}
-
-#include "overlays/scenario/Scene_DispatchActor.h"
-
-MATCH void func_801FC4AC(void* entity, void* bits) {
-    Game_SetScriptActive();
-    SYS_SetFlag(bits, 20U);
-    g_SceneState.state_04 = 4;
-    g_SceneState.step_05  = 0;
-}
-
-MATCH void func_801FC4F4(void* entity, void* flags) {
-    Scene_SetFlagThenContinue(flags, 0x10);
-}
-
-MATCH void func_801FC520(void* entity, void* flags) {
-    Scene_SetFlagThenContinue(flags, 0x11);
-}
-
-MATCH void func_801FC54C(void* entity, void* flags) {
-    Scene_SetFlagThenContinue(flags, 0x12);
-}
-
-MATCH void func_801FC578(void* entity, void* flags) {
-    Scene_SetFlagThenContinue(flags, 0x13);
-}
-
-MATCH s32 func_801FC5A4(void) {
-    if ((D_80144EA2 & 0xF) == 0xF) {
-        Game_SetScriptActive();
-        g_SceneState.step_05  = 6;
-        g_SceneState.timer_06 = 30;
-        return 1;
-    }
-    return 0;
-}
-
-MATCH void func_801FC5FC(void) {
-    Item_VitalAdd(VITAL_ITEM_FLIER);
-    Message_StartAreaMessage(47);
-    g_GameStateIndex = GAME_REQUEST_MESSAGE;
-    SND_PauseBGM(g_SndBGMId);
-    SND_StartXAStream(2, 1);
-    while (!(SND_IsXAIdle() & BYTE_MASK)) {
-        func_801992B8();
-        SYS_ThreadWait(1U);
-    }
-    SND_ResumeBGM(g_SndBGMId);
-}
-
-MATCH void func_801FC688(void) {
-}
-
-MATCH s32 func_801FC690(void) {
-    Game_SetScriptActive();
-    g_SceneState.state_04 = 6;
-    g_SceneState.step_05  = 0;
-    return 0;
-}
-
-MATCH s32 func_801FC6C4(void) {
-    Game_SetScriptActive();
-    g_SceneState.timer_06 = 30;
-    g_SceneState.state_04 = 7;
-    g_SceneState.step_05  = 0;
-    return 0;
-}
-
-MATCH s8 func_801FC704(s32 entry_x, s32 entry_y) {
-    /* kept: the LOHU halfword compare matches retail; the plain u16 lvalue adds four bytes. */
-    switch (LOHU(g_GameAreaId)) {
-        case AREA_ID_WYNDIA_LOWER:
-            return func_801FC944(entry_x, entry_y);
-        case AREA_ID_WYNDIA_CASTLE_BASEMENT:
-            return func_801FC8AC(entry_x, entry_y);
-        case AREA_ID_GENMEL:
-            return func_801FCAB8(entry_x, entry_y);
-        case AREA_ID_MOUNT_MYRNEG:
-            return func_801FC7EC(entry_x, entry_y);
-        case AREA_ID_EYGNOCK_ROAD:
-            return func_801FC9DC(entry_x, entry_y);
-        case AREA_ID_MOUNT_BOUMORE_FIRST:
-            return func_801FCB4C(entry_x, entry_y);
-    }
-    return 0;
-}
-
-MATCH s32 func_801FC7EC(s32 entry_x, s32 entry_y) {
-    u8 var_v0;
-
-    if (SYS_TestFlag(g_SceneFlags, 1) == 0) {
-        if (SYS_TestFlag(g_SceneFlags, 0) == 0) {
-            if (((entry_x >> 0x10) - 2) < 3U) {
-                if (entry_y == TO_COORD(6)) {
-                    var_v0 = 2;
-                    goto block_9;
-                }
-            }
-        } else if ((SYS_TestFlag(g_SceneFlags, 0) != 0) && (((entry_x >> 0x10) - 3) < 2U)) {
-            if (entry_y == TO_COORD(4)) {
-                var_v0 = 1;
-            block_9:
-                g_SceneState.state_04 = var_v0;
-            }
-        }
-    }
-    return 0;
-}
-
-MATCH s32 func_801FC8AC(s32 entry_x, s32 entry_y) {
-    if (SYS_TestFlag(g_SceneFlags, 7) == 0) {
-        if (((entry_y >> 0x10) - 7) < 2U) {
-            if (entry_x == TO_COORD(92)) {
-                SYS_SetFlag(g_SceneFlags, 7U);
-                g_SceneState.state_04 = 3;
-                g_SceneState.step_05  = 0xA;
-                return 1;
-            }
-            return 0;
-        }
-        return 0;
-    }
-    return 0;
-}
-
-MATCH s8 func_801FC944(s32 entry_x, s32 entry_y) {
-    if (SYS_TestFlag(g_SceneFlags, 21) == 0) {
-        if (entry_y == TO_COORD(65) + COORD_HALF) {
-            if (((entry_x >> 0x10) - 32) < 4U) {
-                g_SceneState.state_04 = 4;
-                g_SceneState.step_05  = 5;
-                return Scene_ShowMessage(0x33);
-            }
-            return 0;
-        }
-        return 0;
-    }
-    return 0;
-}
-
-MATCH s8 func_801FC9DC(s32 entry_x, s32 entry_y) {
-    if (SYS_TestFlag(g_SceneFlags, 24) == 0) {
-        if (entry_x == TO_COORD(58) + COORD_HALF) {
-            if (((entry_y >> 0x10) - 60) >= 2U) {
-                goto block_4;
-            }
-            goto block_9;
-        }
-    block_4:
-        if (entry_y == TO_COORD(2) + COORD_HALF) {
-            if (((entry_x >> 0x10) - 31) >= 2U) {
-                goto block_7;
-            }
-            goto block_9;
-        }
-    block_7:
-        if (entry_y == TO_COORD(76) + COORD_HALF) {
-            if (((entry_x >> 0x10) - 31) < 2U) {
-            block_9:
-                g_SceneState.state_04 = 5;
-                g_SceneState.step_05  = 0;
-                return Scene_ShowMessage(0x12);
-            }
-            /* Duplicate return node #11. Try simplifying control flow for better match */
-            return 0;
-        }
-        /* Duplicate return node #11. Try simplifying control flow for better match */
-        return 0;
-    }
-    return 0;
-}
-
-MATCH s8 func_801FCAB8(s32 entry_x, s32 entry_y) {
-    if (SYS_TestFlag(g_SceneFlags, 26) != 0) {
-        if ((entry_x >> 0x10) == 21) {
-            if (((entry_y >> 0x10) - 52) < 2U) {
-                g_SceneState.state_04 = 5;
-                g_SceneState.step_05  = 0x10;
-                return Scene_ShowMessage(0x1F);
-            }
-        }
-    }
-    return 0;
-}
-
-MATCH s8 func_801FCB4C(s32 entry_x, s32 entry_y) {
-    if (SYS_TestFlag(g_SceneFlags, 0x1B) == 0) {
-        if (D_80143F03 != 2) {
-            return 0;
-        }
-        if (entry_x != TO_COORD(10) + COORD_HALF) {
-            return 0;
-        }
-        if (((entry_y >> 16) - 36) >= 2U) {
-            return 0;
-        }
-        g_ScriptVars[1]       = 1;
-        g_SceneState.state_04 = 6;
-        g_SceneState.step_05  = 5;
-        return Scene_ShowMessage(0xC);
-    }
-    if (D_80143F03 == 3 && entry_y == TO_COORD(11) + COORD_HALF && ((entry_x >> 16) - 5) < 2U) {
-        if (SYS_TestFlag(g_SceneFlags, 0x1C) == 0) {
-            Game_SetScriptActive();
-            g_SceneState.step_05  = 0xF;
-            g_SceneState.state_04 = 6;
-            return 1;
-        } else {
-            g_SceneState.step_05  = 0xD;
-            g_SceneState.state_04 = 6;
-            return Scene_ShowMessage(0x11);
-        }
-    }
-    return 0;
-}
-
-#include "overlays/scenario/Scene_ShowMessage.h"
-
-MATCH s32 func_801FCCDC(s32 x, s32 y) {
-    if (MEM(u16, GAME_AREA_ID_ADDR) == AREA_ID_MOUNT_BOUMORE_SECOND) {
-        return func_801FCD1C(x, y);
-    }
-    return 0;
-}
-
-MATCH s8 func_801FCD1C(s32 x, s32 y) {
-    if (SYS_TestFlag(g_SceneFlags, 30) == 0) {
-        if (y == TO_COORD(73)) {
-            if (((x >> 16) - 14) < 4U) {
-                Game_SetScriptActive();
-                g_SceneState.state_04 = 8;
-                g_SceneState.step_05  = 2;
-                g_SceneState.timer_06 = 30;
-                return 1;
-            }
-        }
-    }
-    return 0;
-}
-
-/* needs: D_801FD030 and D_801FD038 declarations. */
-MATCH s32 func_801FCDB4(s32 arg0, s32 arg1) {
-    s8  index;
-    s32 result;
-
-    index = func_801A7AD8(&D_801FD030, 1, arg0, arg1);
-    if (index >= 0) {
-        SYS_DISPATCH_BYTE(D_801FD038, index);
-        result = 1;
-    } else {
-        result = -1;
-    }
-    return result;
-}
-
-MATCH void func_801FCE18(void) {
-    Message_StartAreaMessage(25);
-    g_GameStateIndex = GAME_REQUEST_MESSAGE;
-    Game_SetScriptActive();
-    g_SceneState.timer_06 = 30;
-    g_SceneState.state_04 = 7;
-    g_SceneState.step_05  = 0;
-}
-
-MATCH void func_801FCE6C(void) {
-    EMI_LoadPartyArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR, 0);
-    g_PartyFieldOrder[0]  = 255;
-    D_80144F5B            = 255;
-    D_80144F5C            = 255;
-    g_PartyBattleOrder[0] = 255;
-    D_80144F5E[0]         = 255;
-    D_80144F5F            = 255;
-    g_Game.party_size     = 0;
-    Party_JoinMember(CHAR_ID_RYU_YOUNG);
-}
-
-/* func_801FCEDC */
-MATCH void Party_JoinNinaYoung(void) {
-    Party_JoinMember(CHAR_ID_NINA_YOUNG);
-}
-
-#include "overlays/scenario/Scene_RemoveNina.h"

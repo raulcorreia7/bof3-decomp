@@ -1,0 +1,39 @@
+#include "area171_13.h"
+
+/* func_801F2CA0 */
+MATCH void Area_StartEntryCell(void) {
+    Actor* work;
+    Actor* cell;
+    Actor* row;
+    u16*   point;
+    s32    entry;
+    s32    pair;
+    s32    height;
+    s32    z;
+
+    work                     = g_Task;
+    entry                    = COORD_INT(work->pos.x);
+    pair                     = entry * 2;
+    work->pos.x.part.integer = AREA_PAYLOAD_FIELD(D_801F3F5C, u8, 0x20, pair);
+    work->pos.y.part.integer = AREA_PAYLOAD_FIELD(D_801F3F5C, u8, 0x21, pair);
+    height                   = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
+
+    z                        = -height / 2;
+    point                    = (u16*)&D_801F3F5C[0x14 + pair];
+    cell                     = g_Task;
+    cell->pos.z.part.integer = z - *point;
+    cell->unk_32             = *point;
+    cell->vx                 = (s32)(AREA_PAYLOAD_FIELD(D_801F3F5C, u8, 0x1C, entry) << 24);
+    cell->header.step += 1;
+    cell->screen_y = 0;
+
+    row = g_Task;
+    if (abs(g_Game.members[0].pos.x.fixed - (TO_COORD(COORD_INT(row->pos.x) + 1) | COORD_HALF)) <= COORD_HALF) {
+        if (abs(g_Game.members[0].pos.y.fixed - TO_COORD(COORD_INT(row->pos.y))) <= TO_COORD(1) || abs(g_Game.members[0].pos.y.fixed - TO_COORD(COORD_INT(row->pos.y) + 1)) <= TO_COORD(1)) {
+            row->screen_y    = 0xC0;
+            row->header.step = 3;
+        }
+    }
+
+    func_801F3070(1);
+}

@@ -19,6 +19,12 @@ extern u16 D_801F5CD4[];
 
 extern u16 D_801F5CD8[];
 
+/* The cell pair, facing and cue id of the nine trigger slots; each row starts at a multiple of 4. */
+extern u8 D_801F5CDC[];
+extern u8 D_801F5CDD[];
+extern u8 D_801F5CDE[];
+extern u8 D_801F5CDF[];
+
 /* A bare statement macro, used as a member's whole body. Clear the interaction bit; when the party confirmed
  * (the leader is character 6), run the script and store the two step bytes. */
 #define AREA_INTERACT_CONFIRM(step_next)                                      \

@@ -174,7 +174,7 @@ void func_801AFA1C(u8* marks, u8 thumb_top, s16 x, s16 y, u8 thumb_size, u8 tota
 /* func_801D73B4 */
 void Menu_DrawAbilityList(MenuListPanel* panel);
 
-void func_801D2304(s32 arg0, s32 arg1);
+void func_801D2304(s32 x, s32 y);
 void func_801D259C(void);
 void func_801D31B0(s16 x, s16 y, u8 index, u8 flag);
 

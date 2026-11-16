@@ -8,6 +8,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x0, .data, D_801D0C00]
+      - [0x4, .rodata, func_801D5A28]
       - [0x1C, .rodata, func_801D639C]
       - [0x34, .rodata, func_801D9274]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
@@ -18,7 +19,7 @@ segments:
     align: 4
     section_order: [.data, .rodata]
     subsegments:
-      - [0x4C, .data, D_801D0C4C]
+      - [0x4C, .data, g_MenuStatFormat]
       - [0x154, .rodata, Menu_DrawEquipStatWindow]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_2a
@@ -28,7 +29,7 @@ segments:
     align: 4
     section_order: [.data, .rodata]
     subsegments:
-      - [0x188, .data, D_801D0D88]
+      - [0x188, .data, g_MenuInventoryCountFormat]
       - [0x194, .rodata, Menu_DrawEquipChoiceWindow]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_2b
@@ -38,7 +39,7 @@ segments:
     align: 4
     section_order: [.data, .rodata]
     subsegments:
-      - [0x1AC, .data, D_801D0DAC]
+      - [0x1AC, .data, g_SaveSlotLevelFormat]
       - [0x1C8, .rodata, func_801E1C20]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_3
@@ -403,7 +404,7 @@ segments:
       - [0x19C40, c, func_801EA840]
       - [0x19C80, c, func_801EA880]
       - [0x19CC0, c, func_801EA8C0]
-      - [0x19D00, c, func_801EA900]
+      - [0x19D00, c, Menu_SlidePanelLeft2]
       - [0x19D40, c, func_801EA940]
       - [0x19D94, c, func_801EA994]
       - [0x19DD4, c, func_801EA9D4]
@@ -420,5 +421,5 @@ segments:
     align: 1
     subalign: 1
     subsegments:
-      - [0x1A914, .data, D_801EB514]
+      - [0x1A914, .data, g_NewGameCharacters]
   - [0x1CCE2]

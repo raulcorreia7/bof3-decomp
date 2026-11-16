@@ -7,9 +7,6 @@
 #include "overlays/scenario/scenario.h"
 #include "sys/exe.h"
 
-/* The four script variable bytes read as one word. */
-#define g_ScriptVarsWord (*(s32*)&g_ScriptVars)
-
 extern u8 D_80146865;
 extern u8 D_80145E98;
 extern u8 D_80146866;
@@ -20,6 +17,7 @@ extern u8 D_80146874;
 extern u8 D_80146875;
 
 extern u32       D_801F6C00;
+extern u8        D_801460FB;
 extern u8        D_801FE26C[];
 extern Callback  D_801FE288[];
 extern Callback  D_801FE294[];
