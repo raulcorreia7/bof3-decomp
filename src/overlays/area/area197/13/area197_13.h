@@ -48,7 +48,7 @@ void func_801F2E74(SparkParticle* spark);
 #define AREA_DROP_ROWS       (AREA_WORK + AREA_SPARK_ROW_COUNT * sizeof(SparkParticle))
 
 /* One dropped spark: it falls and bounces like an SparkParticle. */
-typedef struct AreaDropRow {
+typedef struct AreaDropParticle {
     u8   active; /* 0x00 - 0 marks a free row */
     u8   unk_01; /* 0x01 */
     u8   life;   /* 0x02 - frames left */
@@ -59,10 +59,10 @@ typedef struct AreaDropRow {
     u8   pad_10[4];
     Pos3 pos; /* 0x14 */
     u8   pad_20[4];
-} AreaDropRow;
+} AreaDropParticle;
 
-ASSERT_SIZE(AreaDropRow, 0x24);
-ASSERT_OFFSET(AreaDropRow, pos, 0x14);
+ASSERT_SIZE(AreaDropParticle, 0x24);
+ASSERT_OFFSET(AreaDropParticle, pos, 0x14);
 
 void func_801F32A4(Actor* actor);
 

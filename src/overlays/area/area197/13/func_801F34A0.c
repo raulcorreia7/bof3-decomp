@@ -6,10 +6,10 @@ u16        end;
 Pos3*      from;
 Pos3*      to;
 {
-    AreaDropRow* row;
-    u16          slot;
+    AreaDropParticle* row;
+    u16               slot;
 
-    row = &((AreaDropRow*)AREA_DROP_ROWS)[start];
+    row = &((AreaDropParticle*)AREA_DROP_ROWS)[start];
     for (slot = start; slot < end; slot++) {
         row->pos.x  = ((RANDOM_MASK(0xFFF) << 8) % (to->x - from->x)) + from->x;
         row->pos.z  = ((RANDOM_MASK(0xFFF) << 16) % (to->z - from->z)) + from->z;
