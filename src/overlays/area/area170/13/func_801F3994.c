@@ -2,22 +2,22 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F3994(void) {
-    u8*  bundle;
-    u32* cell;
-    u8   hidden;
-    s32  row;
-    s32  col;
-    s32  k;
-    u8   sum;
-    s32  index;
-    s32  wrapped;
-    s32  cell_index;
-    s32  cell_id;
-    s32  width;
+    u8*         bundle;
+    u32*        cell;
+    volatile u8 hidden;
+    s32         row;
+    s32         col;
+    s32         k;
+    u8          sum;
+    s32         index;
+    s32         wrapped;
+    s32         cell_index;
+    s32         cell_id;
+    s32         width;
 
     hidden = SYS_TestFlag(g_SceneEventFlags, 0x7E) == 0;
-    bundle = (u8*)&g_AreaMapBundle;
     row    = 0;
+    bundle = (u8*)&g_AreaMapBundle;
     do {
         col = 0;
         do {
@@ -36,9 +36,9 @@ NON_MATCHING void func_801F3994(void) {
                 }
             }
             func_801A4BC0((u8)col + 0x16, (u8)row + 0x8E, D_801F584C[(u8)row * 9 + (u8)col] * (u8)sum);
-            width      = MEM(u8, 0x80104000);
+            width      = *bundle;
             cell_index = LOHU(D_8010402C[D_80104002 * 4 + ((u8)row + 0x8E) * width * 2 + (u8)col * 2]);
-            cell       = (u32*)(MEM_PTR(u8, 0x80104000) + ((width * D_80104001 + 1) / 2) * 4 + D_80104002 * 4 + cell_index * 4);
+            cell       = (u32*)(bundle + ((width * D_80104001 + 1) / 2) * 4 + D_80104002 * 4 + cell_index * 4);
             *cell      = *cell & ~0xFF;
             *cell |= D_801F57CC[sum * 63 + (u8)row * 9 + (u8)col];
             cell_id = Area_GetCellId((u8)col + 0x16, (u8)row + 0x8E);
