@@ -16,7 +16,7 @@ segments:
     vram: 0x801F0A78
     align: 4
     subsegments:
-      - [0x1E78, bin, D_801F0A7A]
+      - [0x1E78, bin, D_801F0A78]
       - [0x1E84, bin, D_801F0A84]
       - [0x1E98, bin, D_801F0A98]
       - [0x1E9C, bin, D_801F0A9C]
@@ -25,10 +25,10 @@ segments:
       - [0x1ED8, bin, D_801F0AD8]
       - [0x1F00, bin, g_BMagicEffectModes]
       - [0x1F04, bin, D_801F0B04]
-      - [0x1F10, bin, D_801F0B12]
-      - [0x1F14, bin, D_801F0B16]
+      - [0x1F10, bin, D_801F0B10]
+      - [0x1F14, bin, D_801F0B14]
       - [0x1F38, bin, D_801F0B3A]
       - [0x1F3C, bin, D_801F0B3C]
-      - [0x1F40, bin, D_801F0B43]
+      - [0x1F40, bin, D_801F0B40]
       - [0x1FAC, bin, D_801F0BAC]
   - [0x2E38]
