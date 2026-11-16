@@ -77,6 +77,8 @@ extern u8  D_801F5CDE[];
  * index, the stage length and the next stage code in each four-byte record. */
 extern u8  D_801F5CEC[];
 extern u8  D_801F5CFC[];
+extern u8  D_801F5D0C[];
+extern u8  D_801F5D1C[];
 
 u8 func_801F4DA4(u32 frame);
 u8 func_801F4EDC(u16 t, u32 stage);
