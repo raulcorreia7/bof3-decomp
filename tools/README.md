@@ -140,7 +140,7 @@ tools/alloc_priority.py src/engine/slus/func_801530D0.c func_801530D0
 
 ## m2c sweep
 
-`tools/m2c_sweep.py` drafts open functions with m2c, runs each draft through `tools/try_body.py` and keeps the exact ones, writing `build/m2c_sweep/results.jsonl` (target, status, differing, variant) and, with `--jsonl`, one object per printed line; `tools/seed.py <target>@<func>` writes the same drafts, the twins, callers and callees into `work/<image>/<ADDR>/` for one function. Both give m2c a typed work cell: the context declares `g_SpadView`, a pointer to the mode's work record (the type the unit casts `g_Task` to, else the image family's record), and the assembly reads `0x1F800044` through it, so drafts name members instead of `->unkN`. The draft spells the cell `g_Task`, or `((T *)g_Task)` where the unit defines no view macro. A context without a complete record keeps the raw cell. The `--help` text lists the options.
+`tools/m2c_sweep.py` drafts open functions with m2c (`--jobs` runs at a time, 8 by default; `--seed` picks the `--sample`, 1 by default), runs each draft through `tools/try_body.py` and keeps the exact ones, writing `build/m2c_sweep/results.jsonl` (target, status, differing, variant) and, with `--jsonl`, one object per printed line; `tools/seed.py <target>@<func>` writes the same drafts, the twins, callers and callees into `work/<image>/<ADDR>/` for one function. Both give m2c a typed work cell: the context declares `g_SpadView`, a pointer to the mode's work record (the type the unit casts `g_Task` to, else the image family's record), and the assembly reads `0x1F800044` through it, so drafts name members instead of `->unkN`. The draft spells the cell `g_Task`, or `((T *)g_Task)` where the unit defines no view macro. A context without a complete record keeps the raw cell. The `--help` text lists the options.
 
 ## Body generators
 
@@ -162,7 +162,7 @@ body; a `SKIP` function moves on to the template or plain route.
 ## Duplicates and names
 
 `dups.py near` groups functions with alike opcodes across all images and names the matched template of
-each assembly function; `near --full` writes one row per assembly function with its cheapest template
+each assembly function (`--threshold` is the least opcode similarity, 0.9 by default; `--min-words` the shortest function, 6 instructions by default); `near --full` writes one row per assembly function with its cheapest template
 and `diff_count`, the instructions that differ (jump targets ignored), cheapest first. `shared-names`
 lists one name that several bodies use, worst first. `split-names` lists byte-equal bodies that carry
 several names. All print tab-separated rows, or one JSON object per line with `--jsonl`.
