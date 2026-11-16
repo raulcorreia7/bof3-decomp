@@ -286,8 +286,9 @@ MATCH void func_801D3320(MenuPanelTask* task) {
     } while (i < 0x11);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shaded, s32 unused) {
+/* Draws one party member's status window from g_Characters: portrait, name, level, the poison
+ * and confusion labels, HP, AP and the experience bar. */
+MATCH void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shaded, s32 unused) {
     Character* records;
     Character* stats;
     u32        clut;
@@ -304,7 +305,7 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s
     FAKE_ORDER_LOCK_BEGIN
         records = (Character*)CHARACTER_BLOCK->records;
         stats   = &records[character_index];
-        Menu_DrawCharacterPortrait(px + 0x56, py + 2, stats->character_id, (u8)shaded == 0 ? (stats->status >> 6) & 2 : 1);
+        Menu_DrawCharacterPortrait((px + 0x56) & HALF_MASK, (py + 2) & HALF_MASK, stats->character_id, (u8)shaded == 0 ? (stats->status >> 6) & 2 : 1);
         text_clut = clut & BYTE_MASK;
         UI_DrawText(x + 20, y + 3, text_clut, 5, stats);
     FAKE_ORDER_LOCK_END;
@@ -368,10 +369,6 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s
     px = 0;
     py = 0;
 }
-
-#else
-INCLUDE_ASM(Menu_DrawCharacterWindow);
-#endif
 
 #include "overlays/menu/Menu_DrawStatPanel.h"
 

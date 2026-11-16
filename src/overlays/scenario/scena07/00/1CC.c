@@ -728,7 +728,39 @@ MATCH void func_801F9E10(u8* row) {
     cell[3] = cell[7];
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING u8 func_801F9EFC(void) {
+    SceneEffectRow* row;
+    MATRIX          matrix;
+    s32             tpage;
+    u8              i;
+    u8              ran = 0;
+
+    tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage & HALF_MASK, NULL);
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
+    Area_SetCameraMatrix(&matrix);
+    row = (SceneEffectRow*)(AREA_WORK + 0x95C);
+    for (i = 0; i < 64; i++, row++) {
+        if (row->active != 0) {
+            if (func_801F9A80(row) & BYTE_MASK) {
+                func_801F9BDC(row);
+            }
+            row->unk_2 -= 1;
+            row->unk_14 += 0x2000;
+            row->unk_18 += 0x100000;
+            row->unk_C += row->unk_18;
+            if ((u8)row->unk_2 == 0) {
+                row->active = 0;
+            }
+            ran = 1;
+        }
+    }
+    return ran;
+}
+#else
 INCLUDE_ASM(func_801F9EFC);
+#endif
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801FA01C(void) {

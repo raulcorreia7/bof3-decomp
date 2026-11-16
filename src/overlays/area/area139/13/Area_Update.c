@@ -1,8 +1,9 @@
 #include "area139_13.h"
 #include "overlays/area/Area_FloorQuad.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void Area_Update(void) {
+/* Draws the area139 floor quad: the cell primitive, the four corner vectors the GTE projects and
+ * the tile words, then the next frame's cell primitive. */
+MATCH void Area_Update(void) {
     POLY_FT4* prim;
     long      depth;
     long      flag;
@@ -12,15 +13,13 @@ NON_MATCHING void Area_Update(void) {
     s32       x1;
     s32       tpage;
 
-    if (GetGraphType() == 1) {
-        tpage = 0x225;
-    } else if (GetGraphType() == 2) {
+    if ((GetGraphType() == 1) || (GetGraphType() == 2)) {
         tpage = 0x225;
     } else {
         tpage = 0x95;
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, NULL);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, -2, sizeof(POLY_FT4));
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, -2, sizeof(DR_MODE));
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetShadeTex(prim, 0);
@@ -46,6 +45,3 @@ NON_MATCHING void Area_Update(void) {
     Area_ApplyTileToQuad((g_Task->direction_08 << 21) | AREA_FLOOR_QUAD_PART | (s16)g_Task->screen_x, prim, 1);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, -2, sizeof(POLY_FT4));
 }
-#else
-INCLUDE_ASM(Area_Update);
-#endif
