@@ -13,6 +13,8 @@
 extern u8   D_80144908[];
 extern u32  D_801F6C00;
 extern char D_801F6C04[];
+extern char D_801F6C08[];
+extern char D_801F6C10[];
 extern u8   D_80146875;
 
 /* A scene rectangle the panel draws: position and size. */
@@ -102,5 +104,6 @@ extern SceneFunc g_SceneActorDispatch[];
 void func_801F6FAC(void);
 void func_801F781C(u16 x, u16 y, u16 width, u16 height);
 void func_801F79E8(u16 x, u16 y);
+u16  func_801FD278(void);
 
 #endif

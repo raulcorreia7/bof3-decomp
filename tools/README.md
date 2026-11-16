@@ -169,6 +169,9 @@ several names. All print tab-separated rows, or one JSON object per line with `-
 writes JSON Lines with each group's `members`; `classify.py` reads and writes that form and
 marks each member asm, shared (a header body or a call) or pasted, so the rows left are the copies to
 fold. `ripwire src --clones` lists token-normalized duplicate C bodies.
+`dup_decls.py` lists an `extern` declaration written the same way in three or more headers,
+widest first: a repeated declaration is a seam whose text belongs at the declaration's owner
+(`--min` changes the count, `--json` prints one row per seam).
 
 ## Lookup
 
