@@ -25,6 +25,15 @@
 extern u8 D_801F57BC[];
 extern s8 D_801F58D0[];
 extern u8 D_801F5990[];
+
+/* The map bundle's height and grid offset, and the cell table after it. */
+extern u8  D_80104001;
+extern u16 D_80104002;
+extern u8  D_8010402C[];
+
+/* The per-cell tile bytes and the cell primitives. */
+extern u8 D_801F57CC[];
+extern u8 D_801F584C[];
 extern u8 D_801F64B8[];
 
 extern void func_801F3994(void);

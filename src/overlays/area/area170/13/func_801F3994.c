@@ -1,3 +1,53 @@
 #include "area170_13.h"
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F3994(void) {
+    u32* cell;
+    u8   hidden;
+    s32  row;
+    s32  col;
+    s32  k;
+    u8   sum;
+    s32  index;
+    s32  wrapped;
+    s32  cell_index;
+    s32  cell_id;
+    s32  width;
+
+    hidden = SYS_TestFlag(g_SceneEventFlags, 0x7E) == 0;
+    row    = 0;
+    do {
+        col = 0;
+        do {
+            sum = 0;
+            if (hidden != 0) {
+                for (k = 0; (u8)k < 3; k++) {
+                    index   = D_801F5990[(u8)k] + col;
+                    wrapped = index;
+                    if ((u8)wrapped >= 9) {
+                        wrapped = index - 9;
+                    }
+                    sum += D_801F58D0[(u8)k * 63 + (u8)row * 9 + (u8)wrapped];
+                }
+                if ((u8)sum != 0) {
+                    sum = 1;
+                }
+            }
+            func_801A4BC0((u8)col + 0x16, (u8)row + 0x8E, D_801F584C[(u8)row * 9 + (u8)col] * (u8)sum);
+            width      = MEM(u8, 0x80104000);
+            cell_index = LOHU(D_8010402C[D_80104002 * 4 + ((u8)row + 0x8E) * width * 2 + (u8)col * 2]);
+            cell       = (u32*)(MEM_PTR(u8, 0x80104000) + ((width * D_80104001 + 1) / 2) * 4 + D_80104002 * 4 + cell_index * 4);
+            *cell      = *cell & ~0xFF;
+            *cell |= D_801F57CC[sum * 63 + (u8)row * 9 + (u8)col];
+            cell_id = Area_GetCellId((u8)col + 0x16, (u8)row + 0x8E);
+            if (cell_id != 0) {
+                func_80155560(*cell, &g_AreaCellPrims[cell_id * 80], 2);
+            }
+            col++;
+        } while ((u8)col < 9);
+        row++;
+    } while ((u8)row < 7);
+}
+#else
 INCLUDE_ASM(func_801F3994);
+#endif
