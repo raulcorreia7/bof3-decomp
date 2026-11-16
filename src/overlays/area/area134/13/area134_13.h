@@ -32,6 +32,26 @@ extern s32      D_801F5858[];
 s32 func_801F49A0(void);
 
 /* The request bytes the selection clear tests. */
+/* Steps the given actor's x by a quarter cell four times and returns the work the step
+ * replaced; the ten x step functions of this overlay differ only in the actor index and
+ * the code they store through the returned pointer. The two y steps loop twice, so they
+ * keep their own body. */
+static inline u8* Area_AdvanceRow(s32 actor_index) {
+    Actor* actor;
+    u8*    work;
+    s32    i;
+
+    i    = 0;
+    work = (u8*)g_Task;
+    TASK_SET(&g_Actors[actor_index]);
+    actor = &g_Actors[actor_index];
+    do {
+        actor->pos.x.fixed += 0x4000;
+        i++;
+    } while ((u8)i < 4);
+    return work;
+}
+
 /* Spawn an actor record at the focus point and copy the work position into it. */
 static inline void World_SpawnActorAtFocus(void) {
     SpawnedActor* slot;
