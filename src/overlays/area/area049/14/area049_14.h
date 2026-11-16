@@ -19,6 +19,13 @@ extern u16 D_801F5CD4[];
 
 extern u16 D_801F5CD8[];
 
+/* The scene trigger rows func_801F3194 scans: cell x, cell y, the party facing it
+ * needs and the scene flag it toggles. */
+extern u8 D_801F5CDC[];
+extern u8 D_801F5CDD[];
+extern u8 D_801F5CDE[];
+extern u8 D_801F5CDF[];
+
 /* A bare statement macro, used as a member's whole body. Clear the interaction bit; when the party confirmed
  * (the leader is character 6), run the script and store the two step bytes. */
 #define AREA_INTERACT_CONFIRM(step_next)                                      \
