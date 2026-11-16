@@ -12,8 +12,8 @@ NON_MATCHING void func_801F4470(void) {
         g_Actors[*p].unk_7E         = 0;
         g_Actors[D_801F58D0].unk_77 = 5;
         g_Actors[D_801F58D0].unk_7E = 0;
-        g_SceneEventMode            = 0;
-        g_SceneEventStep            = 0;
+        g_SceneEventState.mode      = 0;
+        g_SceneEventState.step      = 0;
         g_SceneState.state_04       = 5;
         g_SceneState.step_05        = 0;
         func_801BE1B0(5);

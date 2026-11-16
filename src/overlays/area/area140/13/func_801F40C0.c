@@ -8,7 +8,7 @@ MATCH void func_801F40C0(void) {
     u16  low_buttons;
     u8   button_index;
 
-    switch (g_SceneEventStep) {
+    switch (g_SceneEventState.step) {
         case 0:
             active = 1;
             Game_ClearScriptActive();
@@ -17,13 +17,13 @@ MATCH void func_801F40C0(void) {
             g_Game.members[0].unk_48 = active;
             g_GameFlags              = flags | 0x1270;
             SYS_SetFlag(g_SceneEventFlags, 102);
-            g_SceneEventStep = active;
+            g_SceneEventState.step = active;
             break;
         case 1:
             if (g_AreaCameraOffsetZ != 1664) {
                 g_AreaCameraOffsetZ += 64;
             } else {
-                g_SceneEventStep = 2;
+                g_SceneEventState.step = 2;
             }
             g_AreaCameraRefreshCount = 2;
             break;
@@ -40,14 +40,14 @@ MATCH void func_801F40C0(void) {
             }
             break;
         case 5:
-            g_ScriptVars[3]  = 1;
-            g_SceneEventStep = 6;
+            g_ScriptVars[3]        = 1;
+            g_SceneEventState.step = 6;
             break;
         case 6:
             if (g_AreaCameraOffsetZ != 0) {
                 g_AreaCameraOffsetZ -= 64;
             } else {
-                g_SceneEventStep = 7;
+                g_SceneEventState.step = 7;
             }
             Game_SetScriptActive();
             g_AreaCameraRefreshCount = 2;
@@ -59,19 +59,19 @@ MATCH void func_801F40C0(void) {
             g_GameFlags              = flags & 0xED8F;
             SYS_ClearFlag(g_SceneEventFlags, 102);
             func_801B3CCC(0);
-            g_SceneEventMode = SCENE_EVENT_NONE;
-            g_SceneEventStep = 0;
+            g_SceneEventState.mode = SCENE_EVENT_NONE;
+            g_SceneEventState.step = 0;
             break;
         case 10:
             Message_StartAreaMessage(1);
-            g_GameStateIndex = GAME_REQUEST_MESSAGE;
-            g_SceneEventStep = 11;
+            g_GameStateIndex       = GAME_REQUEST_MESSAGE;
+            g_SceneEventState.step = 11;
             break;
         case 11:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                g_SceneEventMode = SCENE_EVENT_NONE;
-                g_SceneEventStep = 0;
+                g_SceneEventState.mode = SCENE_EVENT_NONE;
+                g_SceneEventState.step = 0;
             }
             break;
     }

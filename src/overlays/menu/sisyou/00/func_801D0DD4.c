@@ -24,7 +24,7 @@ MATCH void func_801D0DD4(s32 message_id, s32 confirm) {
 
     if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
         item = g_Game.members[g_MenuMasterCursor].character_index;
-        if (g_Characters[item].master_id == g_SceneEventSelection) {
+        if (g_Characters[item].master_id == g_SceneEventState.selection) {
             if ((confirm & BYTE_MASK) == 0) {
                 goto play_stop; /* both row-state cases share this exit */
             }

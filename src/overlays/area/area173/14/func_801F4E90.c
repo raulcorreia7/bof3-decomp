@@ -2,7 +2,7 @@
 
 MATCH void func_801F4E90(void) {
     if (SYS_TestFlag(g_SceneEventFlags, 88) != 0) {
-        g_SceneEventMode = 0x26;
-        g_SceneEventStep = 0xA;
+        g_SceneEventState.mode = 0x26;
+        g_SceneEventState.step = 0xA;
     }
 }

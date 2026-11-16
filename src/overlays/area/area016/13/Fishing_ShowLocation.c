@@ -18,7 +18,7 @@ MATCH void Fishing_ShowLocation(void) {
     u8             blank;
     u32            id;
 
-    state = &g_SceneEventStep;
+    state = &g_SceneEventState.step;
     switch (*state) {
         case 0:
             Game_SetScriptActive();
@@ -80,15 +80,15 @@ MATCH void Fishing_ShowLocation(void) {
                 Message_StartAreaMessage((s16)(index + 22));
             }
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
-            (*(u8*)&g_SceneEventStep)++;
+            (*(u8*)&g_SceneEventState.step)++;
             break;
 
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                g_SceneEventMode      = SCENE_EVENT_NONE;
-                *state                = 0;
-                g_SceneEventSelection = 0;
+                g_SceneEventState.mode      = SCENE_EVENT_NONE;
+                *state                      = 0;
+                g_SceneEventState.selection = 0;
             }
             break;
     }

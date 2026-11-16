@@ -41,7 +41,7 @@ extern WorldMapMarker D_801F6234[6];
 #define AREA_HUD_MASK_TABLE D_801F6234
 
 extern u16 D_800E4B3E;
-/* g_SceneEventStep read unsigned: Fishing_ShowLocation steps it with a byte load. */
+/* g_SceneEventState.step read unsigned: Fishing_ShowLocation steps it with a byte load. */
 extern u8  g_SceneEventStep_u8[];
 /* Key rows: column 0 is matched against g_GameContextSeed; column g_SceneState is the message Fishing_ShowLocation
  * starts. */

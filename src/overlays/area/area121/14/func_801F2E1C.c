@@ -6,7 +6,7 @@ MATCH void func_801F2E1C(void) {
     s8* step;
     u8* counter;
 
-    step = &g_SceneEventStep;
+    step = &g_SceneEventState.step;
     switch (*step) {
         case 0:
             Game_SetScriptActive();
@@ -18,16 +18,16 @@ MATCH void func_801F2E1C(void) {
             }
             Message_StartAreaMessage((s16)(i + 1));
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
-            counter          = (u8*)&g_SceneEventStep;
+            counter          = (u8*)&g_SceneEventState.step;
             *counter += 1;
             break;
 
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                g_SceneEventMode      = 0;
-                *step                 = 0;
-                g_SceneEventSelection = 0;
+                g_SceneEventState.mode      = 0;
+                *step                       = 0;
+                g_SceneEventState.selection = 0;
             }
             break;
     }

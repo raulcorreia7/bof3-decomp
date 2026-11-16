@@ -90,7 +90,7 @@ void func_801F431C(void);
                     g_ScriptState->cursor += 3;                              \
                     /* FAKE: keeps the step store after the cursor store. */ \
                     FAKE_BARRIER();                                          \
-                    g_SceneEventStep = 45;                                   \
+                    g_SceneEventState.step = 45;                             \
                 }                                                            \
             }                                                                \
         }                                                                    \

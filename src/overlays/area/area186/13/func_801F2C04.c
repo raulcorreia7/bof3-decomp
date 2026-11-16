@@ -2,7 +2,7 @@
 
 MATCH void func_801F2C04(void) {
     u16 count;
-    s8* step = &g_SceneEventStep;
+    s8* step = &g_SceneEventState.step;
 
     switch (*step) {
         case 0:
@@ -33,8 +33,8 @@ MATCH void func_801F2C04(void) {
             D_801448EE = count;
             if (count == 0) {
                 Game_RequestAreaChange(0xAD, 0x120000, 0x460000, 0x81);
-                g_SceneEventMode = 0;
-                *step            = 0;
+                g_SceneEventState.mode = 0;
+                *step                  = 0;
             }
             break;
         case 10:
@@ -65,8 +65,8 @@ MATCH void func_801F2C04(void) {
             D_801448EE = count;
             if (count == 0) {
                 Game_RequestAreaChange(0xAD, 0x310000, 0x600000, 0x82);
-                g_SceneEventMode = 0;
-                *step            = 0;
+                g_SceneEventState.mode = 0;
+                *step                  = 0;
             }
             break;
     }

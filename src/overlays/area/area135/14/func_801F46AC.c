@@ -32,8 +32,8 @@ MATCH void func_801F46AC(void) {
         y &= 65535;
         y |= (hi + 1) << 16;
     } while (row < 2);
-    selection             = func_801F5C60(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
-    g_SceneEventSelection = selection;
+    selection                   = func_801F5C60(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    g_SceneEventState.selection = selection;
     if (selection != 0xFF) {
         func_801F5BCC(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) + 0x280);
     } else {

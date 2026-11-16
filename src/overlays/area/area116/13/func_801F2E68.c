@@ -2,7 +2,7 @@
 
 MATCH s32 func_801F2E68(void) {
     Game_SetScriptActive();
-    g_SceneEventMode      = SCENE_EVENT_MASTER;
-    g_SceneEventSelection = 8;
+    g_SceneEventState.mode      = SCENE_EVENT_MASTER;
+    g_SceneEventState.selection = 8;
     return 0;
 }

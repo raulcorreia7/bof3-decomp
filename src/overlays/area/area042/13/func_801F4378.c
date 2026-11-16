@@ -7,9 +7,9 @@ MATCH void func_801F4378(void) {
     u16 seconds;
     u16 hundredths;
 
-    switch (g_SceneEventStep) {
+    switch (g_SceneEventState.step) {
         case 0: {
-            u8* selection = &g_SceneEventSelection;
+            u8* selection = &g_SceneEventState.selection;
 
             if (*selection != 0) {
                 timer      = g_SaveData.scene_event_timer;
@@ -26,10 +26,10 @@ MATCH void func_801F4378(void) {
         }
         /* fallthrough */
         case 1:
-            g_AreaScrollTargetX = TO_COORD(21);
-            g_AreaScrollTargetY = TO_COORD(25);
-            g_AreaCameraStep    = 0x40;
-            g_SceneEventStep    = 2;
+            g_AreaScrollTargetX    = TO_COORD(21);
+            g_AreaScrollTargetY    = TO_COORD(25);
+            g_AreaCameraStep       = 0x40;
+            g_SceneEventState.step = 2;
             break;
 
         case 2:
@@ -44,14 +44,14 @@ MATCH void func_801F4378(void) {
                     g_SpawnedActors[g_SaveData.scene_event.selection].camera_angle.z = g_AreaCameraAngle.vz;
                     g_SpawnedActors[g_SaveData.scene_event.selection].layer          = 0x10;
                 }
-                g_SceneEventStep = 3;
+                g_SceneEventState.step = 3;
             }
             break;
 
         case 3:
             if ((g_SpawnedActors[g_SaveData.scene_event.selection].header.flags & ACTOR_FLAG_IN_USE) == 0) {
                 SYS_SetFlag(g_SaveData.scene_event_flags, 0x11);
-                g_SceneEventStep = 9;
+                g_SceneEventState.step = 9;
             }
             break;
 
@@ -65,15 +65,15 @@ MATCH void func_801F4378(void) {
                 g_SpawnedActors[g_SaveData.scene_event.selection].camera_angle.z = g_AreaCameraAngle.vz;
                 g_SpawnedActors[g_SaveData.scene_event.selection].layer          = 0x10;
             }
-            g_SceneEventStep = 5;
+            g_SceneEventState.step = 5;
             break;
 
         case 5:
             if ((g_SpawnedActors[g_SaveData.scene_event.selection].header.flags & ACTOR_FLAG_IN_USE) == 0) {
-                g_AreaCameraStep    = 0x40;
-                g_SceneEventStep    = 6;
-                g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;
-                g_AreaScrollTargetY = g_Game.members[0].pos.y.fixed;
+                g_AreaCameraStep       = 0x40;
+                g_SceneEventState.step = 6;
+                g_AreaScrollTargetX    = g_Game.members[0].pos.x.fixed;
+                g_AreaScrollTargetY    = g_Game.members[0].pos.y.fixed;
             }
             break;
 
@@ -82,8 +82,8 @@ MATCH void func_801F4378(void) {
                 SYS_ClearFlag(g_SaveData.scene_event_flags, 0x0B);
                 Game_ClearScriptActive();
                 g_AreaCameraStep             = 0;
-                g_SceneEventMode             = SCENE_EVENT_NONE;
-                g_SceneEventStep             = 0;
+                g_SceneEventState.mode       = SCENE_EVENT_NONE;
+                g_SceneEventState.step       = 0;
                 g_SaveData.scene_event_timer = 0;
                 g_GameFlags &= 0xFFDF;
             }
@@ -107,8 +107,8 @@ MATCH void func_801F4378(void) {
             SYS_ClearFlag(g_SaveData.scene_event_flags, 0x13);
             SYS_ClearFlag(g_SaveData.scene_event_flags, 0x14);
             SYS_ClearFlag(g_SaveData.scene_event_flags, 0x15);
-            g_SceneEventMode             = SCENE_EVENT_NONE;
-            g_SceneEventStep             = 0;
+            g_SceneEventState.mode       = SCENE_EVENT_NONE;
+            g_SceneEventState.step       = 0;
             g_SaveData.scene_event_timer = 0;
             g_GameFlags &= 0xFFDF;
             break;

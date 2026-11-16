@@ -10,10 +10,10 @@ MATCH void Menu_ApplyMasterMode(void) {
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
         return;
     }
-    value = g_MenuMasterActorModes[g_SceneEventSelection];
+    value = g_MenuMasterActorModes[g_SceneEventState.selection];
     if (value != GAME_NONE) {
         g_Actors[g_ScriptVars[3]].header.mode = value;
     }
     g_MenuMasterStep = 0;
-    g_SceneEventStep++;
+    g_SceneEventState.step++;
 }

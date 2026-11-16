@@ -8,7 +8,7 @@ MATCH void func_801F3720(void) {
     work->param.unk_0B -= 4;
     work->pos.z.fixed += 4;
     if (g_Task->pos.z.fixed >= -0x7F) {
-        g_SceneEventStep = 4;
+        g_SceneEventState.step = 4;
         Actor_Clear();
     }
 }

@@ -9,13 +9,13 @@ MATCH void func_801F4230(Actor* actor) {
         case 0xC001:
             Game_SetScriptActive();
             Char_RebuildPartyStats();
-            g_SceneEventMode = 0x34;
-            g_SceneEventStep = 0;
+            g_SceneEventState.mode = 0x34;
+            g_SceneEventState.step = 0;
             break;
         case 0xC002:
             Game_SetScriptActive();
-            g_SceneEventMode = 0x34;
-            g_SceneEventStep = 10;
+            g_SceneEventState.mode = 0x34;
+            g_SceneEventState.step = 10;
             break;
     }
 }

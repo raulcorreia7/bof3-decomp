@@ -2,10 +2,10 @@
 static inline void WorldMap_SelectEventStep(void) {
     MESSAGE_REQUEST_CLEAR();
     if (g_MessageChoice == 0) {
-        g_SceneEventStep = 2;
+        g_SceneEventState.step = 2;
     } else if (g_MessageChoice == 1) {
-        g_SceneEventStep = 0xA;
+        g_SceneEventState.step = 0xA;
     } else {
-        g_SceneEventStep = 0x14;
+        g_SceneEventState.step = 0x14;
     }
 }

@@ -5,7 +5,7 @@ MATCH void func_801F2C7C(void) {
     u8* record;
     u8  i;
 
-    state = &g_SceneEventStep;
+    state = &g_SceneEventState.step;
     switch (*state) {
         case 0:
             g_ScriptVars[0] = 0xA;
@@ -27,17 +27,17 @@ MATCH void func_801F2C7C(void) {
                 } else {
                     Message_Request(3);
                 }
-                g_GameStateIndex = GAME_REQUEST_MESSAGE;
-                g_SceneEventStep = 2;
+                g_GameStateIndex       = GAME_REQUEST_MESSAGE;
+                g_SceneEventState.step = 2;
             }
             break;
 
         case 2:
             if (g_GameStateIndex != *state) {
                 Game_ClearScriptActive();
-                g_ScriptVars[0]  = 0;
-                g_SceneEventMode = 0;
-                *state           = 0;
+                g_ScriptVars[0]        = 0;
+                g_SceneEventState.mode = 0;
+                *state                 = 0;
             }
             break;
     }

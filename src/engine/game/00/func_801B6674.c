@@ -29,7 +29,7 @@ NON_MATCHING bool func_801B6674(void) {
             Game_RequestAreaChange(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);
             return 1;
         }
-        g_SceneEventMode = 0x37;
+        g_SceneEventState.mode = 0x37;
         ACTOR_CLEAR_STEP();
         return 1;
     }
@@ -58,7 +58,7 @@ NON_MATCHING bool func_801B6674(void) {
         return 1;
     }
     if ((g_InputPressed & g_InputMasks[WORLD_INPUT_LOCATION_GUIDE]) && ((u8)(temp + 0x60) < 2)) {
-        g_SceneEventMode = 0x1B;
+        g_SceneEventState.mode = 0x1B;
         if (!(status & AREA_LOAD_FLAG_NO_ACTOR_SCRIPT)) {
             func_801B5BDC(g_Task->direction_08);
         }

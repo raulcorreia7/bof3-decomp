@@ -2,7 +2,7 @@
 MATCH void Message_RunAreaMessage(void) {
     s8* state;
 
-    state = &g_SceneEventStep;
+    state = &g_SceneEventState.step;
     switch (*state) {
         case 0:
             Game_SetScriptActive();
@@ -13,9 +13,9 @@ MATCH void Message_RunAreaMessage(void) {
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                g_SceneEventMode      = SCENE_EVENT_NONE;
-                *state                = 0;
-                g_SceneEventSelection = 0;
+                g_SceneEventState.mode      = SCENE_EVENT_NONE;
+                *state                      = 0;
+                g_SceneEventState.selection = 0;
             }
             return;
     }

@@ -3,7 +3,7 @@
 MATCH void func_801F390C(void) {
     s8* state;
 
-    state = &g_SceneEventStep;
+    state = &g_SceneEventState.step;
     switch (*state) {
         case 0:
             UI_SetMode(8);
@@ -28,8 +28,8 @@ MATCH void func_801F390C(void) {
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
                 SYS_SetFlag(state + 0x63C, 116);
-                g_SceneEventMode = 0;
-                *state           = 0;
+                g_SceneEventState.mode = 0;
+                *state                 = 0;
             }
             break;
     }

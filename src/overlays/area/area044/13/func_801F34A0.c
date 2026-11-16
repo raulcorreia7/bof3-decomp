@@ -1,6 +1,7 @@
 #include "area044_13.h"
 #include "menu/save_data.h"
 
+/* FAKE: the scene event reads stay on the symbol cells; as record members they moved the schedule. */
 MATCH void func_801F34A0(void) {
     u8 state;
     u8 state_type;

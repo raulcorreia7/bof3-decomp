@@ -406,7 +406,7 @@ MATCH void func_801D25CC(void) {
         }
     } else if (EMI_IsReady() != 0) {
         SND_PlayBGM(D_801DB0CC, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
-        step  = &g_SceneEventStep;
+        step  = &g_SceneEventState.step;
         *step = *step + 1;
     }
 }
@@ -1042,7 +1042,7 @@ MATCH void func_801D4840(void) {
         }
     } else if (EMI_IsReady() != 0) {
         SND_PlayBGM(D_801DB0CC, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
-        step  = &g_SceneEventStep;
+        step  = &g_SceneEventState.step;
         *step = *step + 1;
     }
 }

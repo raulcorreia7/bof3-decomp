@@ -25,7 +25,7 @@ MATCH void func_801FB3DC(void) {
 MATCH void func_801FB414(void) {
     SYS_SetFlag(g_SceneFlags, 28);
     Scene_StartEvent(44, 0);
-    g_SceneEventSelection = 17;
+    g_SceneEventState.selection = 17;
 }
 
 INCLUDE_ASM(func_801FB464);

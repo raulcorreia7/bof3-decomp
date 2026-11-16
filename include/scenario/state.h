@@ -17,6 +17,19 @@ typedef enum SceneStateFlags {
     SCENE_STATE_CHAPTER_ADVANCE = 1 << 7, /* set by Scene_RequestChapterAdvance; func_8019FAA0 steps the scenario */
 } SceneStateFlags;
 
+/* The scene event the overlays step through: mode selects the g_SceneEvents handler, step advances inside it and
+ * selection is the entry it works on (a fairy job, a master, a menu cursor). SaveData keeps a copy. */
+typedef struct SceneEventState {
+    s8 mode;
+    s8 step;
+    u8 selection;
+} SceneEventState;
+
+ASSERT_SIZE(SceneEventState, 3);
+
+/* The live scene event; the overlay entries set mode and selection and the handlers dispatch on step. */
+extern SceneEventState g_SceneEventState; /* g_SceneEventMode */
+
 typedef struct SceneState {
     s8  scenario_id;
     u8  flags_01;

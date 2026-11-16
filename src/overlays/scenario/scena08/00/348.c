@@ -1239,11 +1239,11 @@ MATCH void func_801FB168(void) {
         case 2:
             if (D_80146876-- == 0) {
                 SYS_SetFlag(g_SceneFlags, 3);
-                D_801448EE       = 1;
-                g_SceneEventMode = 5;
-                g_SceneEventStep = 3;
-                D_80146874       = 0;
-                *step            = 0;
+                D_801448EE             = 1;
+                g_SceneEventState.mode = 5;
+                g_SceneEventState.step = 3;
+                D_80146874             = 0;
+                *step                  = 0;
             }
             break;
     }

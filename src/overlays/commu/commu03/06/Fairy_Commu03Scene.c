@@ -219,6 +219,6 @@ INCLUDE_ASM(func_801D1714);
 MATCH void func_801D18AC(void) {
     u8* state;
 
-    state = &g_SceneEventStep;
+    state = &g_SceneEventState.step;
     *state += 1;
 }

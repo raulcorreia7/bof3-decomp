@@ -3,7 +3,7 @@
 MATCH void func_801F2F54(void) {
     s8* state;
 
-    state = &g_SceneEventStep;
+    state = &g_SceneEventState.step;
     switch (*state) {
         case 0:
             Game_SetScriptActive();

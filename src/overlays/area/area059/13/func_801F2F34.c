@@ -36,8 +36,8 @@ MATCH s32 func_801F2F34(void) {
         step >>= 3;
         D_80146867 = (s8)step;
     FAKE_ORDER_LOCK_END;
-    step                  = 5;
-    g_SceneEventMode      = request;
-    g_SceneEventSelection = step;
+    step                        = 5;
+    g_SceneEventState.mode      = request;
+    g_SceneEventState.selection = step;
     return 0;
 }

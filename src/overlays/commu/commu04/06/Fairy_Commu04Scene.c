@@ -68,18 +68,18 @@ MATCH void func_801D12C8(void) {
 
     Menu_ResetPanelTasks();
     /* kept: retail indexes g_FairyJobs by the selection at every use; a FairyJob local shrinks the image by 0x50 bytes. */
-    switch (g_FairyJobs[g_SceneEventSelection].unk_03 & 0xF) {
+    switch (g_FairyJobs[g_SceneEventState.selection].unk_03 & 0xF) {
         case ITEM_CAT_ITEM:
-            flags = g_Items[g_FairyJobs[g_SceneEventSelection].record_state].flags;
+            flags = g_Items[g_FairyJobs[g_SceneEventState.selection].record_state].flags;
             break;
         case ITEM_CAT_WEAPON:
-            flags = g_Weapons[g_FairyJobs[g_SceneEventSelection].record_state].header.flags;
+            flags = g_Weapons[g_FairyJobs[g_SceneEventState.selection].record_state].header.flags;
             break;
         case ITEM_CAT_ARMOR:
-            flags = g_Armors[g_FairyJobs[g_SceneEventSelection].record_state].header.flags;
+            flags = g_Armors[g_FairyJobs[g_SceneEventState.selection].record_state].header.flags;
             break;
         default:
-            flags = g_Accessories[g_FairyJobs[g_SceneEventSelection].record_state].header.flags;
+            flags = g_Accessories[g_FairyJobs[g_SceneEventState.selection].record_state].header.flags;
             break;
     }
 
@@ -88,7 +88,7 @@ MATCH void func_801D12C8(void) {
         Message_StartAreaMessage(0xEB);
         D_801F294D = 6;
     } else {
-        record = Item_GetRecord(g_FairyJobs[g_SceneEventSelection].unk_03, g_FairyJobs[g_SceneEventSelection].record_state);
+        record = Item_GetRecord(g_FairyJobs[g_SceneEventState.selection].unk_03, g_FairyJobs[g_SceneEventState.selection].record_state);
         for (i = 0; i < ITEM_NAME_LENGTH; i++) {
             g_TextVariables[0][i] = record[i];
         }
@@ -106,7 +106,7 @@ MATCH void func_801D1568(void) {
     u8  job_index;
 
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-        selection = &g_SceneEventSelection;
+        selection = &g_SceneEventState.selection;
         Item_Remove(g_FairyJobs[*selection].unk_03, g_FairyJobs[*selection].record_state, 1, 0);
         g_FairyJobs[*selection].unk_03 |= 0x10;
         step      = D_801F294C;
