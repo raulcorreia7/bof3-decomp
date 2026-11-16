@@ -120,7 +120,6 @@ extern s8 D_80146872;
 void      func_801D16DC(void);
 void      func_801F7180();
 void      func_801F78CC();
-u8*       func_801F8394();
 s32       func_801F8398();
 s32       func_801F83A0();
 void      func_801F845C();
@@ -157,5 +156,7 @@ ASSERT_OFFSET(FallingSpark, x, 0x0C);
 ASSERT_OFFSET(FallingSpark, y, 0x10);
 ASSERT_OFFSET(FallingSpark, z, 0x14);
 ASSERT_OFFSET(FallingSpark, unk_18, 0x18);
+
+FallingSpark* func_801F8394(void);
 
 #endif

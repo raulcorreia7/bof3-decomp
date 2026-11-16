@@ -262,3 +262,116 @@ def test_success_preserves_a_subsequent_process_index_lock(
     monkeypatch.setattr(symbol.os, "replace", publish_then_lock)
     assert symbol.main(["rename", "Old", "New"]) == 0
     assert lock.read_text() == "another process\n"
+
+
+LAYOUT = """sha1: 0
+segments:
+  - name: main
+    type: code
+    start: 0x0
+    vram: 0x80000000
+    align: 4
+    subsegments:
+"""
+
+
+def set_files(root: Path, files: dict[str, str | None]) -> None:
+    """Replace fixture files; ``None`` deletes one, and the result is staged."""
+    for name, text in files.items():
+        path = root / name
+        if text is None:
+            path.unlink(missing_ok=True)
+        else:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(text)
+    symbol.git("add", "-A")
+
+
+def test_a_rename_renames_the_layout_rows_and_moves_the_unit(repo: Path) -> None:
+    set_files(
+        repo,
+        {
+            "config/exe/a/splat.yaml": LAYOUT
+            + "      - [0x0, c, Old]\n      - [0x10, .rodata, Old]\n"
+        },
+    )
+    assert symbol.main(["rename", "Old", "New"]) == 0
+    assert (repo / "src/a/New.c").is_file()
+    assert not (repo / "src/a/Old.c").exists()
+    text = (repo / "config/exe/a/splat.yaml").read_text()
+    assert "[0x0, c, New]" in text
+    assert "[0x10, .rodata, New]" in text
+
+
+def test_a_named_symbol_repairs_its_address_row_and_unit_file(repo: Path) -> None:
+    set_files(
+        repo,
+        {
+            "config/exe/a/splat.yaml": LAYOUT + "      - [0x0, c, func_80000000]\n",
+            "config/symbols.toml": '["exe/a"]\nNew = { addr = 0x80000000, type = "func", source = "test purpose" }\n',
+            "src/a/func_80000000.c": "MATCH void New(void) {}\n",
+            "src/a/Old.c": None,
+            "include/a.h": None,
+        },
+    )
+    assert (
+        symbol.main(["rename", "func_80000000", "New", "--image", "exe/a", "--local"])
+        == 0
+    )
+    assert (repo / "src/a/New.c").read_text() == "MATCH void New(void) {}\n"
+    assert not (repo / "src/a/func_80000000.c").exists()
+    assert "[0x0, c, New]" in (repo / "config/exe/a/splat.yaml").read_text()
+    assert tomllib.loads((repo / "config/symbols.toml").read_text()) == {
+        "exe/a": {
+            "New": {
+                "addr": 0x80000000,
+                "type": "func",
+                "source": "test purpose",
+            }
+        }
+    }
+
+
+def test_a_repair_refuses_a_unit_that_defines_another_name(repo: Path) -> None:
+    set_files(
+        repo,
+        {
+            "config/exe/a/splat.yaml": LAYOUT + "      - [0x0, c, func_80000000]\n",
+            "config/symbols.toml": '["exe/a"]\nOther = { addr = 0x80000000, type = "func", source = "x" }\n',
+            "src/a/func_80000000.c": "MATCH void Stale_Name(void) {}\n",
+            "src/a/Old.c": None,
+            "include/a.h": None,
+        },
+    )
+    before = snapshot(repo)
+    with pytest.raises(SystemExit, match="does not define Other"):
+        symbol.main(["rename", "func_80000000", "Other", "--image", "exe/a", "--local"])
+    assert snapshot(repo) == before
+
+
+def test_an_offset_row_takes_its_own_offset(repo: Path) -> None:
+    set_files(
+        repo,
+        {
+            "config/exe/a/splat.yaml": LAYOUT
+            + "      - [0x10C, .rodata, 1EFC]\n      - [0x1EDC, c, 1EFC]\n",
+            "config/symbols.toml": '["exe/a"]\n',
+            "src/a/1EFC.c": "MATCH void func_80001EDC(void) {}\n",
+            "src/a/Old.c": None,
+            "include/a.h": None,
+        },
+    )
+    assert symbol.main(["rename", "1EFC", "1EDC", "--image", "exe/a", "--local"]) == 0
+    assert (repo / "src/a/1EDC.c").is_file()
+    assert not (repo / "src/a/1EFC.c").exists()
+    text = (repo / "config/exe/a/splat.yaml").read_text()
+    assert "[0x10C, .rodata, 1EDC]" in text
+    assert "[0x1EDC, c, 1EDC]" in text
+
+
+def test_a_layout_row_outside_the_scope_is_refused(repo: Path) -> None:
+    set_files(repo, {"config/exe/a/splat.yaml": LAYOUT + "      - [0x0, c, Old]\n"})
+    before = snapshot(repo)
+    with pytest.raises(SystemExit, match="names Old; add its folder to --scope"):
+        symbol.main(["rename", "Old", "New", "--scope", "src/a", "include"])
+    assert snapshot(repo) == before

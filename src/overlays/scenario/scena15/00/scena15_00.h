@@ -30,7 +30,8 @@ extern Callback D_801FE5A0[];
 extern Callback D_801FE5B0[];
 extern Callback D_801FE5C0[];
 
-void             func_801F71B0(u8 arg);
+/* func_801F71B0 */
+void             Scene_DrawLightPillar(u8 fade);
 void             func_801F752C(AreaSpark* spark);
 /* func_801F75D8 */
 void             Area_AddSpark(void);
