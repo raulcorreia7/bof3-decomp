@@ -137,7 +137,22 @@ MATCH void func_801F79E8(u16 x, u16 y) {
 
 INCLUDE_ASM(func_801F7AD4);
 
-INCLUDE_ASM(func_801F7C34);
+/* Draw rectangle 6: a styled window with the rectangle as one textured quad. */
+MATCH void func_801F7C34(void) {
+    POLY_FT4*    prim;
+    Scena10Rect* rect;
+
+    rect = &D_801FE7CC[6];
+    func_801AE3F0((u16)rect->x, (u16)rect->y, rect->width, rect->height, 0, g_WindowStyle);
+    prim = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(prim);
+    prim->tpage = GetTPage(0, 0, 704, 256);
+    setClut(prim, 32, 483);
+    setRGB0(prim, 0x80, 0x80, 0x80);
+    setXY4(prim, (u16)rect->x, (u16)rect->y, (u16)rect->x + (rect->width - 1), (u16)rect->y, (u16)rect->x, (u16)rect->y + rect->height, (u16)rect->x + (rect->width - 1), (u16)rect->y + rect->height);
+    setUV4(prim, 0xC0, 0x50, (u8)rect->width + 0xBF, 0x50, 0xC0, (u8)rect->height + 0x50, (u8)rect->width + 0xBF, (u8)rect->height + 0x50);
+    GFX_AddPrim(1, sizeof(POLY_FT4));
+}
 
 /* Draw the "Choose parts" window with its item list and cursor, then place and step the cursor actor. */
 MATCH void func_801F7DDC(void) {
