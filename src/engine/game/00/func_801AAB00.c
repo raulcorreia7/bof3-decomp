@@ -103,7 +103,7 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
                 }
                 g_Task->direction_08 = want & 7;
                 if (Actor_GetOwner() != 1) {
-                    func_8015BAC4(g_Task->direction_08);
+                    Actor_DispatchSelectorScript(g_Task->direction_08);
                 } else {
                     Actor_SelectScript(g_Task->direction_08);
                 }
@@ -146,7 +146,7 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
                 }
                 g_Task->direction_08 = val & 7;
                 if (Actor_GetOwner() != 1) {
-                    func_8015BAC4(g_Task->direction_08);
+                    Actor_DispatchSelectorScript(g_Task->direction_08);
                 } else {
                     Actor_SelectScript(g_Task->direction_08);
                 }

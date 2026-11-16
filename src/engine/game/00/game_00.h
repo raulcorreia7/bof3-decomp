@@ -1584,7 +1584,7 @@ static inline void Game_RollAreaSetup(s32 actor_slot) {
 
     choice = (u32)RANDOM_MASK(0xF);
     if ((g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
-        func_8015BAC4((u8)((g_Game.members[0].facing ^ 4) & 7));
+        Actor_DispatchSelectorScript((u8)((g_Game.members[0].facing ^ 4) & 7));
     }
     g_Game.flags |= GAME_FLAG_SCRIPT_ACTIVE;
     if ((g_CurrentActor->unk_94 & 0x80) == 0) {

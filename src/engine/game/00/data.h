@@ -101,7 +101,7 @@ typedef struct AreaHandler {
     u8       pad_19[3];
 } AreaHandler;
 
-/* D_801C7F5C[11] spans 0x134 bytes up to D_801C8090. */
+/* g_AreaHandlers[11] spans 0x134 bytes up to D_801C8090. */
 ASSERT_SIZE(AreaHandler, 0x1C);
 
 typedef u8 (*ActorActionFunc)(void* entity, u8 param, s32 phase);
@@ -109,11 +109,11 @@ typedef void (*ActorWorkFunc)(s32 fallback_index, s32 index);
 
 /* D_801C7B74 */
 extern Step2                s_BattleScrollCellSteps[4];
-extern AreaHandler          D_801C7F5C[11];
+extern AreaHandler          g_AreaHandlers[11];
 extern ActorActionFunc      D_801C83BC[7];
 extern ObjectFunc           D_801C83D8[11];
 extern SceneSlots*          g_SceneScenes[20];
-extern AreaHooks            D_801C86F8;
+extern AreaHooks            g_AreaHooks;
 extern ActorWorkFunc        D_801C890C[11];
 extern u8*                  D_801C893C[5];
 extern u8*                  D_801C8950[5];

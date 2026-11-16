@@ -12,5 +12,5 @@ MATCH void func_801A4914(void) {
         Actor_SelectScript(g_Task->direction_08);
         return;
     }
-    func_8015BAC4(work->direction_08);
+    Actor_DispatchSelectorScript(work->direction_08);
 }

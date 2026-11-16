@@ -216,7 +216,7 @@ extern Callback  D_801C81B0[2];
 extern Callback  D_801C81B8[2];
 extern Callback  D_801C81C0[3];
 extern Callback  D_801C81CC[4];
-extern Callback  D_801C81DC[105];
+extern Callback  g_TaskModeHandlers[105];
 /* D_801C8380 */
 extern u8        s_EntityModes[4];
 extern u16       D_801C8384[28];

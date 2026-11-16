@@ -10,7 +10,7 @@ MATCH void SAVE_DrawPortTabs(s16 x, s16 y, u32 tab_flags, u8 port, u8 variant) {
     u8* texture;
 
     Menu_DrawFilledPanel(x, y, 7, 4);
-    func_801644D8(20, (u16)(x + 7), (u16)(y + 5), 16, 16, 128);
+    UI_DrawIconCell(20, (u16)(x + 7), (u16)(y + 5), 16, 16, 128);
     shade = 0x1C;
     if (variant == 0) {
         shade = 0x1B;

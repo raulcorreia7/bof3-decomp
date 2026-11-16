@@ -12,7 +12,7 @@ MATCH void Game_LoadShopOverlay(void) {
             g_GameStateIndex    = GAME_REQUEST_IDLE;
             if (!(work->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
                 work->direction_08 = work->unk_79;
-                func_8015BAC4(g_Task->direction_08);
+                Actor_DispatchSelectorScript(g_Task->direction_08);
                 work->interaction_flags = (work->interaction_flags | ACTOR_FLAG_MOVING);
             }
             work->interaction_flags = (work->interaction_flags & ~ACTOR_FLAG_SCRIPT_PENDING);
