@@ -69,6 +69,8 @@ ASSERT_OFFSET(ScratchPad, unk_48, 0x048);
 
 /* ScratchPad.vectors as the symbol the area, bmagic and scenario code names directly. */
 extern SVECTOR D_1F800014[4];
+/* The same four vectors read a halfword at a time. */
+extern s16     D_1F800014_HALF[];
 
 /* Scratchpad base + 1; battle/battle/03 and etc/game/00 write it directly. */
 extern u8  D_1F800001;

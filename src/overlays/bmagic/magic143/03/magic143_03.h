@@ -16,7 +16,6 @@
 
 /* The bolt point D_1F800014, also read as halfwords, and the scratch words of the bolt: the segment length, the
  * swing angle, the flicker and the segment count. */
-extern s16 D_1F800014_HALF[];
 extern s32 D_1F800008;
 extern s32 D_1F80000C;
 extern s32 D_1F800004;

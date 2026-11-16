@@ -12,7 +12,6 @@ extern s16 D_1F800002;
 extern s16 D_1F800004;
 extern s16 D_1F800008;
 /* The bolt point D_1F800014, also read as halfwords. */
-extern s16 D_1F800014_HALF[];
 
 /* The height in pixels of the band each bolt segment spans. */
 #define MAGIC097_BAND_HEIGHT 12
