@@ -9,7 +9,6 @@ NON_MATCHING void func_801F2DCC(void) {
     u8           bounds;
     u8           kind;
     u16          one;
-    u8*          flags;
 
     if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE && g_GameAreaId != g_GameEntryAreaId) {
         func_801F2C80();
@@ -21,14 +20,13 @@ NON_MATCHING void func_801F2DCC(void) {
     i     = 0;
     if (g_PartySize != 0) {
         do {
-            flags = &g_Scenario2Flags[0x38];
             /* FAKE: the loop pass gives retail's BIT mask constant a saved register; pure C re-loads 1 in each block. */
             FAKE_HOLD(one, 1);
             index       = i & 0xFF;
             record      = &g_Game.members[index];
             g_GameState = record;
             TASK_SET(record);
-            if (SYS_TestFlag(flags, 0x25) != 0 || SYS_TestFlag(&g_Scenario2Flags[0x18], 0x3A) != 0 || (bounds = func_801F2D00((u8)index)) == 0xFF) {
+            if (SYS_TestFlag(&g_Scenario2Flags[0x38], 0x25) != 0 || SYS_TestFlag(&g_Scenario2Flags[0x18], 0x3A) != 0 || (bounds = func_801F2D00((u8)index)) == 0xFF) {
                 if (((saved->param.unk_0B >> index) & 1) != 0) {
                     saved->param.unk_0B &= ~(one << index);
                     g_AreaWalkFlags &= ~(one << index);
