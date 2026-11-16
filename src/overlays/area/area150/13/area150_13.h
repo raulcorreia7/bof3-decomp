@@ -18,7 +18,6 @@ extern u16 D_801F3804[];
 extern u16 D_801F3808[];
 
 /* The scenario flag bytes the step tests, sets and clears. */
-extern u8  D_80144EF8[];
 extern u16 D_80144F54;
 extern u8  D_80144F56;
 extern u8  D_80144F57;
