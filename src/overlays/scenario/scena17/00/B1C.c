@@ -536,13 +536,7 @@ NON_MATCHING void func_801F88CC(u8 semi, s32 color) {
     s32   shade;
 
     if (semi != 0) {
-        if (GetGraphType() == 1) {
-            tpage = 0x50B;
-        } else if (GetGraphType() == 2) {
-            tpage = 0x50B;
-        } else {
-            tpage = 0x14B;
-        }
+        tpage = getTPage(2, 2, 704, 0);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
         GFX_AddPrim(2, sizeof(DR_MODE));
         tile = (TILE*)g_GfxPrimCursor;
@@ -556,13 +550,7 @@ NON_MATCHING void func_801F88CC(u8 semi, s32 color) {
         tile->h = SCREEN_HEIGHT;
         GFX_AddPrim(2, sizeof(TILE));
     }
-    if (GetGraphType() == 1) {
-        tpage = 0x48B;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x48B;
-    } else {
-        tpage = 0x12B;
-    }
+    tpage = getTPage(2, 1, 704, 0);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
@@ -574,13 +562,7 @@ NON_MATCHING void func_801F88CC(u8 semi, s32 color) {
     setUV0(sprite, 0, 0);
     setRGB0(sprite, color, color, color);
     GFX_AddPrim(2, sizeof(SPRT));
-    if (GetGraphType() == 1) {
-        tpage = 0x48F;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x48F;
-    } else {
-        tpage = 0x12F;
-    }
+    tpage = getTPage(2, 1, 960, 0);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
     GFX_AddPrim(2, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
@@ -758,13 +740,7 @@ MATCH void Scene_DrawEndingRollLine(s16 x, s16 y, u8* text) {
     s32 t;
 
     color = 0;
-    if (GetGraphType() == 1) {
-        tpage = 0xAF;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xAF;
-    } else {
-        tpage = 0x3F;
-    }
+    tpage = getTPage(0, 1, 960, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
     GFX_AddPrim(1, sizeof(DR_MODE));
     while (*text != 0) {
