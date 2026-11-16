@@ -409,7 +409,6 @@ extern s32                D_80010004;
 extern EMIDecodeContext   D_800327A0[];
 extern u8                 D_800E3800;
 
-extern u16                   g_AreaCellGrid[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
 extern u8                    D_80142CC0[];
 extern u8                    D_80142CE0[];
 extern u32                   D_80143740[];

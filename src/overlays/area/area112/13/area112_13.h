@@ -25,4 +25,12 @@ extern u8  D_801F420C[];
 /* The ground height of each cell, by cell column. */
 extern u16 D_801F4210[];
 
+/* The answer cells: x, y, the flag mask and the flag the answer toggles. */
+extern u8 D_801F4908[];
+extern u8 D_801F4909[];
+extern u8 D_801F490A[];
+extern u8 D_801F490B[];
+/* The first four answer flags, cleared by the low four mask bits and set by the high four. */
+extern u8 D_801F4928[];
+
 #endif

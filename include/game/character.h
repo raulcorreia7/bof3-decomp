@@ -223,7 +223,7 @@ typedef struct Character {
     u8         name[CHARACTER_NAME_LENGTH];
     u8         character_id; /* CharacterId */
     u8         level;
-    u8         unk_07; /* party-row flags byte; bit 0 selects the rows func_801E0F78 lists */
+    u8         party_flags; /* bit 0 selects the rows func_801E0F78 lists */
     u32        exp;
     u16        status; /* StatusFlags */
     Equipment  equip;
