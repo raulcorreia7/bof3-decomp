@@ -71,10 +71,10 @@ MATCH void func_801EED30(void) {
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF020(void) {
-    BMagicEffectFuncs handlers;
+    BMagicEffectSteps handlers;
 
     handlers = D_801EEC10;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0) {
         Area_AddGridActor();
     }

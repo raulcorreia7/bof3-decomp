@@ -7,9 +7,9 @@
 /* FAKE: barrier holds the handler-pointer stores after the ra spill so the
  * prologue store stays in the second slot. */
 MATCH void func_80151A98(void) {
-    Table2 table = {{func_80151B08, func_80151B50}};
+    ChoiceSteps table = {{func_80151B08, func_80151B50}};
 
-    table.handlers[g_MessageChoiceStep]();
+    table.steps[g_MessageChoiceStep]();
     if (g_MessageChoiceTimer != 0xFFFFu) {
         g_MessageChoiceTimer -= 1;
     }

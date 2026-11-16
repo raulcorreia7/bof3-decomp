@@ -57,7 +57,7 @@ MATCH void func_801EF058(void) {
     Magic017Steps handlers;
 
     handlers = D_801EEC10;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Area_AddGridActor();
     }

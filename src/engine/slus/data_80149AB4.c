@@ -1,6 +1,6 @@
 #include "slus.h"
 
-const Table6 g_MessageChoiceModes = {{
+const MessageChoiceSteps g_MessageChoiceModes = {{
     func_80151964,
     UI_UpdateChoice,
     func_80151A98,

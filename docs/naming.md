@@ -378,7 +378,7 @@ usually the name. The same holds for `Ref`, `View`, `Window`, `Row`, `Scratch`, 
 | shape          | `Record`, `Rec`, `Entry`, `Row`, `Block`, `Chunk`, `Raw` | the thing itself: `BattlePanel`, not `BattlePanelRecord`                                                   |
 | a second view  | `View`, `As<Type>`                                       | a union member named by role; a byte or half of one value is `LOBU(x)`, `LOH(x)` (`include/common/util.h`) |
 | nothing        | `Data`, `Info`, `Obj`, `Object`, `Work`, `Misc`          | what it holds: `FishingState`, not `Area030Work`                                                           |
-| a number       | `Table6`, `Area016`, `Callback3`                         | what the index selects (`g_BattleCommands`); the place or system once proven (`Fishing`, `Town`)           |
+| a number       | `MessageChoiceSteps`, `Area016`, `Callback3`             | what the index selects (`g_BattleCommands`); the place or system once proven (`Fishing`, `Town`)           |
 | a category     | `Kind`, `Class`                                          | `Type`: `BattleOwnerType`, not `BattleOwnerKind`                                                           |
 | a saved key    | `Ptr`, `Buf`, `Tmp`, `Cur`, `Num`, `Idx`, `Cnt`, `Obj`   | the word: `index`, `count`, `buffer`, `current`, the thing a pointer names                                 |
 | a callable     | `Handler`, `Proc`, `Routine`, `Cb`                       | the action the function runs; `Func` for a table element, `Callback` for `void (*)(void)`                  |

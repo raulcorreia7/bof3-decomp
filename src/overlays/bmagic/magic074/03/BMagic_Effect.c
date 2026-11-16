@@ -38,7 +38,7 @@ MATCH void func_801EED18(void) {
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEFE0(void) {
-    BMagicEffectFuncs handlers;
+    BMagicEffectSteps handlers;
 
     BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC04, header.step);
 }

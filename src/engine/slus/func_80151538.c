@@ -4,8 +4,8 @@
  * the entry selected by the selection byte g_UiWindowStep.
  */
 MATCH void func_80151538(void) {
-    Table6 handlers;
+    MessageChoiceSteps handlers;
 
     handlers = D_80149A9C;
-    handlers.handlers[g_UiWindowStep]();
+    handlers.steps[g_UiWindowStep]();
 }

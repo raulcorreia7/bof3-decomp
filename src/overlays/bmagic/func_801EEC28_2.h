@@ -1,7 +1,7 @@
 /* Runs the effect step the task mode selects, then runs every sparkle in use, with g_BattleEffectBattler set to the battler of that sparkle. */
 /* func_801EEC28 (magic070), func_801EEC28 (magic071), func_801EEC28 (magic072) */
 MATCH void func_801EEC28(void) {
-    BMagicEffectFuncs handlers;
+    BMagicEffectSteps handlers;
     PartyMember*      active;
     u8                i;
 

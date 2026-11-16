@@ -115,7 +115,7 @@ MATCH void func_801EF070(void) {
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF254(void) {
-    BMagicEffectFuncs handlers;
+    BMagicEffectSteps handlers;
 
     BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC14, header.step);
 }

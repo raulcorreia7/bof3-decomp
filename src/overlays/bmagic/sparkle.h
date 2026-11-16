@@ -18,7 +18,7 @@
 /* The colour rows of each kind. */
 #define EFFECT_SPARKLE_COLORS  D_801F015C
 
-extern BMagicEffectFuncs  D_801EEC04;
+extern BMagicEffectSteps  D_801EEC04;
 extern SparkleEffectSteps D_801EEC1C;
 /* The launch offset of each sparkle row from the screen point of the battler. */
 extern Pos2               D_801F00BC[];

@@ -1,6 +1,6 @@
 #include "slus.h"
 
-const HandlerTable g_MessageSteps = {{
+const MessageSteps g_MessageSteps = {{
     func_80152370,
     func_801523D0,
     func_80152420,

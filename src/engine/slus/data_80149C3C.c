@@ -12,7 +12,7 @@ const u32 g_EmiCDSteps[9] = {
     (u32)EMI_CdIdle,
 };
 
-const SystemDispatchFuncs g_EmiRingSlotHandlers = {{
+const EmiRingSteps g_EmiRingSteps = {{
     (u32)func_80163230,
     (u32)EMI_CopySectorToScratchpad,
     (u32)EMI_DecompressSector,

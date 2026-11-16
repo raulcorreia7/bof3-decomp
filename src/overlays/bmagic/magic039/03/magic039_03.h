@@ -12,7 +12,7 @@ typedef struct Magic039Steps {
 } Magic039Steps;
 
 extern Magic039Steps     D_801EEC28;
-extern BMagicEffectFuncs D_801EEC10;
+extern BMagicEffectSteps D_801EEC10;
 
 void func_801EF758(void);
 

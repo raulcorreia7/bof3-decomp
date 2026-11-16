@@ -5,7 +5,7 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern BMagicEffectFuncs D_801EEC04;
+extern BMagicEffectSteps D_801EEC04;
 
 extern s16 D_1F800008;
 /* The outer radius of each blade func_801EF478 draws, indexed by half its angle step. */

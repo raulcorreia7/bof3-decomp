@@ -5,8 +5,8 @@
  * the table's 16 entries.
  */
 MATCH void Message_DispatchStep(void) {
-    HandlerTable table;
+    MessageSteps table;
 
     table = g_MessageSteps;
-    table.handlers[g_MessageWindow.step_id - 0x80]();
+    table.steps[g_MessageWindow.step_id - 0x80]();
 }

@@ -23,10 +23,10 @@ INCLUDE_ASM(func_801EEC98);
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF19C(void) {
-    BMagicEffectFuncs handlers;
+    BMagicEffectSteps handlers;
 
     handlers = D_801EEC14;
-    SYS_DISPATCH_BYTE(handlers.handlers, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (g_Task->header.flags != 0) {
         Area_AddGridActor();
     }

@@ -9,11 +9,11 @@
 #define MAGIC008_STEP_COUNT       10
 
 typedef struct Magic008EarlySteps {
-    Callback handlers[MAGIC008_EARLY_STEP_COUNT];
+    Callback steps[MAGIC008_EARLY_STEP_COUNT];
 } Magic008EarlySteps;
 
 typedef struct Magic008Steps {
-    Callback handlers[MAGIC008_STEP_COUNT];
+    Callback steps[MAGIC008_STEP_COUNT];
 } Magic008Steps;
 
 #define MAGIC008_FIRST_STEP_COUNT 4
@@ -35,7 +35,7 @@ typedef struct Magic008ThirdSteps {
 } Magic008ThirdSteps;
 
 extern Magic008FirstSteps D_801EEC04;
-extern BMagicEffectFuncs  D_801EEC58;
+extern BMagicEffectSteps  D_801EEC58;
 
 extern Magic008SecondSteps D_801EEC14;
 extern Magic008ThirdSteps  D_801EEC70;
@@ -44,7 +44,7 @@ extern Magic008FirstSteps  D_801EEC30;
 extern Magic008SecondSteps D_801EEC40;
 extern Magic008SecondSteps D_801EEC4C;
 extern Magic008FirstSteps  D_801EEC84;
-extern BMagicEffectFuncs   D_801EEC94;
+extern BMagicEffectSteps   D_801EEC94;
 
 extern Magic008EarlySteps D_801EECAC;
 extern Magic008Steps      D_801EECC8;
