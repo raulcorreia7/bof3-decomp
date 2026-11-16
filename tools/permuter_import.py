@@ -96,7 +96,8 @@ def main() -> int:
     prelude = work / "prelude.inc"
     target_asm = work / "target.s"
     write_atomic(prelude, '.include "macro.inc"\n.set noat\n.set noreorder\n')
-    compiler = f"{sys.executable} {ROOT}/tools/cc.py {compiler_flags} -O2 -DNON_MATCHING -DBOF3_ASM_MATCH=0 -c"
+    # A host cpp defaults to C23, which hides the types.h bool typedef from the permuter's parser.
+    compiler = f"{sys.executable} {ROOT}/tools/cc.py {compiler_flags} -O2 -DNON_MATCHING -DBOF3_ASM_MATCH=0 -U__STDC_VERSION__ -c"
     write_atomic(
         settings,
         settings_toml(
