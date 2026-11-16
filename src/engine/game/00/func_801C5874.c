@@ -57,7 +57,7 @@ MATCH void func_801C5874(void) {
         }
         g_AreaScrollTargetX = g_PartyX;
         g_AreaScrollTargetY = g_PartyY;
-        func_80153DE8();
+        Area_InitMapRenderer();
         D_80143F50 = 0;
     } else {
         if (base[-1] & 0x20) {

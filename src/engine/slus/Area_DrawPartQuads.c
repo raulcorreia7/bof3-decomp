@@ -35,7 +35,7 @@ MATCH void Area_DrawPartQuads(ScenePart* parts, s32 shift_x, s32 shift_y) {
                 setVector(&verts[i], shift_x + p[i].vertex.x * 2, shift_y + p[i].vertex.y * 2, p[i].raw);
             }
             gte_ldv3c(&verts[1]);
-            func_80155560(parts[n + 4].raw, prim, 1);
+            Area_ApplyTileToQuad(parts[n + 4].raw, prim, 1);
             gte_rtpt();
             if (parts[n + 4].raw & 0x4000) {
                 /* Per-arm: keeps the constant's load inside the loop. */

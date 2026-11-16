@@ -33,7 +33,7 @@ NON_MATCHING void Area_Update(void) {
     D_1F800014[1].vz = -Area_SampleHeight(x1, y1) / 2 + 0x40;
     D_1F800014[3].vz = -Area_SampleHeight(x1, y1) / 2 + 0x180;
     RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
-    func_80155560((g_Task->direction_08 << 21) | AREA_FLOOR_QUAD_PART | (s16)g_Task->screen_x, prim, 1);
+    Area_ApplyTileToQuad((g_Task->direction_08 << 21) | AREA_FLOOR_QUAD_PART | (s16)g_Task->screen_x, prim, 1);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, -2, sizeof(POLY_FT4));
 }
 #else

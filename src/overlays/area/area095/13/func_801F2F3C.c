@@ -24,7 +24,7 @@ NON_MATCHING void func_801F2F3C(s32 depth, s32 height) {
         quad[0].vz = quad[1].vz = quad[2].vz = quad[3].vz = depth;
         quad[2].vy = quad[3].vy = ((*cell_y - 0x80) << 7) + (height - AREA_CELL_HALF);
         RotTransPers4(&quad[0], &quad[1], &quad[2], &quad[3], (s32*)((u8*)prim + 8), (s32*)((u8*)prim + 0x10), (s32*)((u8*)prim + 0x18), (s32*)((u8*)prim + 0x20), &p, &flag);
-        func_80155560(AREA095_QUAD_PART_WORD | (height << 16), prim, 1);
+        Area_ApplyTileToQuad(AREA095_QUAD_PART_WORD | (height << 16), prim, 1);
         Area_AddCellPrim(*cell_x << 16, *cell_y << 16, D_801F3696[i * 3], sizeof(POLY_FT4));
         i++;
         cell_y += 3;

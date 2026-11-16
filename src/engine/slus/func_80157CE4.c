@@ -71,7 +71,7 @@ MATCH void func_80157CE4(u8* record, s32 cell_x, s32 cell_y) {
         v1.vz = v3.vz - 128;
         RotTransPers4(&v0, &v1, &v2, &v3, (s32*)(prim + 8), (s32*)(prim + 0x10), (s32*)(prim + 0x18), (s32*)(prim + 0x20), &p, &flag);
         count--;
-        func_80155560(D_8017F8E0[side], prim, 1);
+        Area_ApplyTileToQuad(D_8017F8E0[side], prim, 1);
         side++;
         GFX_AddPrim(g_AreaDrawMode, sizeof(POLY_FT4));
     }

@@ -19,6 +19,6 @@ MATCH void func_801F54B8(void) {
     D_1F800014[0].vz = D_1F800014[1].vz = COORD_INT(g_Task->pos.z) - 0x30;
     D_1F800014[2].vz = D_1F800014[3].vz = COORD_INT(g_Task->pos.z) + 0x30;
     RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
-    func_80155560(AREA_SPIN_QUAD_WORD, prim, 1);
+    Area_ApplyTileToQuad(AREA_SPIN_QUAD_WORD, prim, 1);
     Area_AddCellPrim(0x5D0000, 0x340000, 0, 0x28);
 }

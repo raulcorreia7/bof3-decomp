@@ -1865,7 +1865,7 @@ MATCH void func_801FB204(void) {
                 g_AreaScrollTargetX    = TO_COORD(47);
                 g_PartyY[0]            = TO_COORD(29);
                 g_AreaScrollTargetY[0] = TO_COORD(29);
-                func_80153DE8();
+                Area_InitMapRenderer();
                 D_80143F84.raw = TO_COORD(1408);
                 Area_AdvanceScroll(1408);
                 g_AreaCameraAngle.vx  = -778;

@@ -137,7 +137,8 @@ void         UI_UpdateChoice(void);
 extern void  UI_DrawWaitMarker(s16 x, s16 y);
 /* func_801527E4 */
 extern void  Area_UpdateCamera(void);
-void         func_80153DE8(void);
+/* func_80153DE8 */
+void         Area_InitMapRenderer(void);
 /* func_80154698 */
 extern void  Area_RefreshCellGrid(void);
 /* func_8015477C */
@@ -160,7 +161,8 @@ void         Area_StoreHeight(s32 x, s32 y, u8 value);
 s32          Area_SetCellPalette(s32 x, s32 y);
 /* func_80155218 */
 u8           Area_ClearCellPalette(s32 x, s32 y);
-extern s32   func_80155560(u32 part_word, void* prim, s32 mode);
+/* func_80155560 */
+extern s32   Area_ApplyTileToQuad(u32 part_word, void* prim, s32 mode);
 /* func_801558F0 */
 s32          Area_GetCellId(s32 x, s32 y);
 /* func_801559AC */

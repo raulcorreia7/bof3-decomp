@@ -53,7 +53,7 @@ MATCH void func_801DE944(void) {
         if (!(g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE)) {
             g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;
             g_AreaScrollTargetY = g_Game.members[0].pos.y.fixed;
-            func_80153DE8();
+            Area_InitMapRenderer();
         }
     } else {
         TASK_SET((actor - 0x79));
@@ -81,7 +81,7 @@ MATCH void func_801DE944(void) {
         if (!(g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE)) {
             g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;
             g_AreaScrollTargetY = g_Game.members[0].pos.y.fixed;
-            func_80153DE8();
+            Area_InitMapRenderer();
         }
     }
     if (g_GameAreaId == AREA_ID_BEYD_TRAINING) {
@@ -98,7 +98,7 @@ MATCH void func_801DE944(void) {
         }
         g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;
         g_AreaScrollTargetY = g_Game.members[0].pos.y.fixed;
-        func_80153DE8();
+        Area_InitMapRenderer();
     }
     UI_SetMode(UI_MODE_FAST_FADE_IN);
     step = &g_MenuStep.state;

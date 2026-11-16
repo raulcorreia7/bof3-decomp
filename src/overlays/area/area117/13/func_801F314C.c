@@ -29,6 +29,6 @@ MATCH void func_801F314C(void) {
     D_1F800014[1].vz                    = -Area_SampleHeight(x1, y1) / 2 + 0x40;
     D_1F800014[3].vz                    = -Area_SampleHeight(x1, y1) / 2 + 0x180;
     RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
-    func_80155560((0x2550 << 16) | 0x123, prim, 1);
+    Area_ApplyTileToQuad((0x2550 << 16) | 0x123, prim, 1);
     GFX_AddPrim(6, sizeof(POLY_FT4));
 }

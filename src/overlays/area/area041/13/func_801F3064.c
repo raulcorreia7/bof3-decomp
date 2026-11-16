@@ -26,6 +26,6 @@ MATCH void func_801F3064(void) {
     corner2->vz = corner3->vz = -0xE0;
 
     RotTransPers4(quad, corner1, corner2, corner3, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
-    func_80155560((0xBD50u << 16) | 0x00F9u, prim, 1);
+    Area_ApplyTileToQuad((0xBD50u << 16) | 0x00F9u, prim, 1);
     Area_AddCellPrim((g_Task->pos.x.fixed + AREA_CELL_ORIGIN) << 9, (g_Task->pos.y.fixed + 0x40C0) << 9, 1, sizeof(POLY_FT4));
 }

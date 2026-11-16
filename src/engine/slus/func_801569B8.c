@@ -49,7 +49,7 @@ MATCH void func_801569B8(u8* record, s32 cell_x, s32 cell_y) {
         corners[3].vx          = cell_x + spread + sway;
         SPAD(0)->vectors[3].vy = cell_y + spread - sway;
         RotTransPers4(&corners[1], &corners[2], &corners[3], &corners[0], (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, (long*)&prim->x0, &p, &flag);
-        func_80155560((((7 - i) * 8 + (7 - phase)) / 4) << 19 | 0xBA009124, prim, 1);
+        Area_ApplyTileToQuad((((7 - i) * 8 + (7 - phase)) / 4) << 19 | 0xBA009124, prim, 1);
         GFX_AddPrim(g_AreaDrawMode, sizeof(POLY_FT4));
         z -= 0x40;
         wave += 8;

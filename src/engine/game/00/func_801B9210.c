@@ -21,7 +21,7 @@ MATCH void func_801B9210(void) {
             g_AreaScrollTargetX = v;
             v                   = g_Task->pos.y.fixed;
             g_AreaScrollTargetY = v;
-            func_80153DE8();
+            Area_InitMapRenderer();
         }
     }
     saved                = g_Task->direction_08;

@@ -25,7 +25,7 @@ NON_MATCHING void func_801F37B8(s32 mode, s32 value) {
             j++;
         } while (j < 4);
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
-        func_80155560(D_801F5080[mode * 3 + i], prim, 1);
+        Area_ApplyTileToQuad(D_801F5080[mode * 3 + i], prim, 1);
         i++;
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, (s8)value, sizeof(POLY_FT4));
     } while (i < 3);

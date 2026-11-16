@@ -1,4 +1,4 @@
-/* The area floor quad: one textured POLY_FT4 laid flat at the actor's cell, its long side along x or y as direction_08 picks, and its corners lifted to the terrain by Area_SampleHeight. Each member passes the sprite word for func_80155560; area160 and area162 to area165 share Area_UpdateFloorQuad.h. A statement macro, not a static inline: the word is read after RotTransPers4, and an inline argument would load it first. */
+/* The area floor quad: one textured POLY_FT4 laid flat at the actor's cell, its long side along x or y as direction_08 picks, and its corners lifted to the terrain by Area_SampleHeight. Each member passes the sprite word for Area_ApplyTileToQuad; area160 and area162 to area165 share Area_UpdateFloorQuad.h. A statement macro, not a static inline: the word is read after RotTransPers4, and an inline argument would load it first. */
 
 #define AREA_DRAW_FLOOR_QUAD(sprite)                                                                                                                                          \
     do {                                                                                                                                                                      \
@@ -33,6 +33,6 @@
         D_1F800014[1].vz = -Area_SampleHeight(x1, y1) / 2 + 0x40;                                                                                                             \
         D_1F800014[3].vz = -Area_SampleHeight(x1, y1) / 2 + 0x180;                                                                                                            \
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag); \
-        func_80155560((sprite), prim, 1);                                                                                                                                     \
+        Area_ApplyTileToQuad((sprite), prim, 1);                                                                                                                              \
         GFX_AddPrim(6, sizeof(POLY_FT4));                                                                                                                                     \
     } while (0)

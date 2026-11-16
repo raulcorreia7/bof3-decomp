@@ -292,7 +292,7 @@ MATCH void func_801EFEFC(ScenePart* parts, s32 shift_x, s32 shift_y) {
                 verts[i].vz = func_801F0ADC(verts[i].vx, verts[i].vy) + p[i].raw;
             }
             gte_ldv3c(&verts[1]);
-            func_80155560(parts[n + 4].raw, prim, 1);
+            Area_ApplyTileToQuad(parts[n + 4].raw, prim, 1);
             gte_rtpt();
             if (parts[n + 4].raw & 0x4000) {
                 /* Per-arm: keeps the constant's load inside the loop. */
@@ -428,7 +428,7 @@ MATCH void func_801F0488(ScenePart* part_list, s32 x, s32 y) {
         }
 
         RotTransPers4(&uv[1], &uv[2], &uv[3], &uv[0], (long*)(&prim->x1), (long*)(&prim->x2), (long*)(&prim->x3), (long*)(&prim->x0), &p, &flag);
-        func_80155560(part_list[part_word_offset + 5].raw, prim, 1);
+        Area_ApplyTileToQuad(part_list[part_word_offset + 5].raw, prim, 1);
         GFX_AddPrim(g_AreaDrawMode, sizeof(*prim));
         PopMatrix();
     }
@@ -484,7 +484,7 @@ MATCH void Area_DrawGroundSceneSprite(u8* record, s32 origin_x, s32 origin_y) {
     prim->y0 = prim->y1 = y;
     y += FIELD(s8, frame, 0xB) * 1125 / z;
     prim->y2 = prim->y3 = y;
-    func_80155560(FIELD(u32, frame, 0xC), prim, 1);
+    Area_ApplyTileToQuad(FIELD(u32, frame, 0xC), prim, 1);
     GFX_AddPrim(g_AreaDrawMode, sizeof(POLY_FT4));
 }
 

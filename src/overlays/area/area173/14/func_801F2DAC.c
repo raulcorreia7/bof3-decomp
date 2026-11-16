@@ -24,7 +24,7 @@ NON_MATCHING void func_801F2DAC(void) {
         *entry     = (value & ~0xFFu) | (i + 0xE6);
         id         = Area_GetCellId(i + 0x11, 0x61);
         if (id != 0) {
-            func_80155560(*entry, &g_AreaCellPrims[id][0], 2);
+            Area_ApplyTileToQuad(*entry, &g_AreaCellPrims[id][0], 2);
         }
     }
     g_Task->header.step++;

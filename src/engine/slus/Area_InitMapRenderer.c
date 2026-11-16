@@ -5,8 +5,9 @@
  * 0x38 by 0x1C cell table, fills the identity draw order and builds the first view through func_80154438, func_80157F98
  * and func_80158B24.
  */
+/* func_80153DE8 */
 #ifdef NON_MATCHING
-NON_MATCHING void func_80153DE8(void) {
+NON_MATCHING void Area_InitMapRenderer(void) {
     POLY_FT4* poly;
     u16*      order;
     u8*       prim;
@@ -99,5 +100,5 @@ NON_MATCHING void func_80153DE8(void) {
     Area_IndexCells();
 }
 #else
-INCLUDE_ASM(func_80153DE8);
+INCLUDE_ASM(Area_InitMapRenderer);
 #endif

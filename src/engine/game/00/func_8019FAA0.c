@@ -45,7 +45,7 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
 
     func_801BFF9C(entry_x, entry_y, (u32)entry_facing);
     D_80143F03 = func_801A0348(g_AreaTargetCellX, g_AreaTargetCellY);
-    func_80153DE8();
+    Area_InitMapRenderer();
 
     entry = (AreaLoad*)g_AreaLoads[g_GameAreaId];
     if (entry->matrix != 0) {

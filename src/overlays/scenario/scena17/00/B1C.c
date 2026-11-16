@@ -69,7 +69,7 @@ MATCH void func_801F7924(void) {
     if (g_UiWindowEffectBusy == 0) {
         g_AreaScrollTargetX = TO_COORD(176);
         g_AreaScrollTargetY = TO_COORD(19) + COORD_HALF;
-        func_80153DE8();
+        Area_InitMapRenderer();
         g_AreaSceneMode = 4;
         SND_RequestBGM(0x96);
         UI_SetMode(UI_MODE_FADE_IN);
@@ -334,7 +334,7 @@ MATCH void func_801F81F8(void) {
 
     g_AreaScrollTargetX = TO_COORD(37) + COORD_HALF;
     g_AreaScrollTargetY = TO_COORD(27);
-    func_80153DE8();
+    Area_InitMapRenderer();
     UI_SetMode(UI_MODE_FADE_IN);
     SYS_ThreadWait(1);
     g_AreaDrawFlags = 0x1F;
