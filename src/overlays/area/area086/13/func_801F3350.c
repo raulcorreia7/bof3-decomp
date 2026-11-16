@@ -7,13 +7,15 @@ NON_MATCHING s32 func_801F3350(s32 x, s32 y) {
     s32 row;
     s32 x0;
     s32 y0;
+    u8* facing;
 
-    i   = 0;
-    off = 0;
+    i = 0;
     x &= BYTE_MASK;
     y &= BYTE_MASK;
+    facing = &g_Game.members[0].facing;
+    off    = 0;
     for (; i < 3; i++, off += 4) {
-        if (x == D_801F3CEC[off] && y == D_801F3CED[off] && D_801F3CEE[off] == g_Game.members[0].facing) {
+        if (x == D_801F3CEC[off] && y == D_801F3CED[off] && D_801F3CEE[off] == *facing) {
             break;
         }
     }

@@ -119,7 +119,41 @@ MATCH void func_801D129C(s16 x, s16 y, u8 group) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D14C8(s32 x, s32 y, s32 group) {
+    s32 i;
+    s32 j;
+    s32 k;
+    u8  kind;
+    u8  queue_row;
+    u16 text_offset;
+    u8* text;
+
+    text_offset = MEM(u16, (u8*)AREA_MESSAGE_TABLE + 0x1D8);
+    UI_DrawText((s16)(x + 0x52), (s16)y, 0, 0xFF, (u8*)((u8*)AREA_MESSAGE_TABLE + text_offset));
+
+    i = group;
+    i &= 0xFF;
+    i *= 8;
+    j = 0;
+    while (i < g_FairyVillageUpdateCount) {
+        kind = ((u8*)&g_FairyVillageUpdateCount)[i * 2 + 3];
+        if (((u16*)((u8*)g_Commu05States + 0x2C))[kind * 2 + 1] != 0) {
+            queue_row = ((u8*)&g_FairyVillageUpdateCount)[i * 2 + 4];
+            for (k = 0; k < 8; k++) {
+                g_TextVariables[0][k] = D_801457E8[queue_row][k];
+            }
+            g_TextVariables[0][5] = 0;
+        }
+        text = (u8*)((u8*)AREA_MESSAGE_TABLE + (((u16*)((u8*)g_Commu05States + 0x2C))[kind * 2] << 1));
+        UI_DrawText((s16)(x + 0x14), (s16)(y + j * 0x10 + 0x1C), 0, 0xFF, text);
+        i++;
+        j++;
+    }
+}
+#else
 INCLUDE_ASM(func_801D14C8);
+#endif
 
 MATCH void func_801D1670(s16 x, s16 y, u16 u, u16 v, u8 width) {
     SPRT* sprite;
