@@ -1,15 +1,15 @@
-/* Finds the first empty 0x18 record in the 256-entry sprite work table at 0x800E4800, or NULL. */
+/* Finds the first empty row in the sprite work table at AREA_WORK, or NULL. */
 /* func_801F2D7C (area143), func_801D171C (sce15ef3) */
-MATCH u8* Area_FindFreeSpriteRow(void) {
-    u8* p;
-    u16 i;
+MATCH SpriteSpark* Area_FindFreeSpriteRow(void) {
+    SpriteSpark* spark;
+    u16          i;
 
-    p = MEM_PTR(u8, AREA_WORK);
-    for (i = 0; i < 256; i++) {
-        if (p[0] == 0) {
-            return p;
+    spark = MEM_PTR(SpriteSpark, AREA_WORK);
+    for (i = 0; i < SPRITE_SPARK_COUNT; i++) {
+        if (spark->active == 0) {
+            return spark;
         }
-        p += 0x18;
+        spark++;
     }
     return NULL;
 }
