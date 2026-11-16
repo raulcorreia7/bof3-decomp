@@ -2,8 +2,7 @@
 
 #include "overlays/area/func_801F2C48.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F3424(void) {
+MATCH void func_801F3424(void) {
     Actor* work;
     Actor* cell;
     Actor* row;
@@ -20,11 +19,9 @@ NON_MATCHING void func_801F3424(void) {
     cell->pos.y.part.integer   = AREA168_ENTRY_TABLE(u8, 0x51, pair);
     height                     = Area_SampleHeight(cell->pos.x.fixed, cell->pos.y.fixed);
     g_Task->pos.z.part.integer = -height / 2 - AREA168_ENTRY_TABLE(u16, 0x30, pair);
+    g_Task->gravity            = AREA168_ENTRY_TABLE(s32, 0x3C, entry * 4);
     g_Task->screen_y           = 0;
     g_Task->header.step += 1;
-    AREA_ENTRY_CELL_AWAY_STEP(192, 1)
+    AREA_ENTRY_CELL_AWAY_STEP(0x80, 1)
     Area_Update();
 }
-#else
-INCLUDE_ASM(func_801F3424);
-#endif

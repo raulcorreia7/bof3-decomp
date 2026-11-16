@@ -14,8 +14,8 @@ NON_MATCHING void func_801F4DF0(s32 x, s32 y, s16 radius, u16 angle) {
         setXY2(prim, x, y, x + FIXED_MUL(radius, rcos(angle)), y + FIXED_MUL(radius, rsin(angle)));
         angle += ANGLE_45 / 2;
         prim->x2 = x + FIXED_MUL(radius, rcos(angle));
-        prim->y2 = y + FIXED_MUL(radius, rsin(angle));
         i += 1;
+        prim->y2 = y + FIXED_MUL(radius, rsin(angle));
         setRGB0(prim, D_801F6138[g_Task->unk_06 * 3], D_801F6139[g_Task->unk_06 * 3], D_801F613A[g_Task->unk_06 * 3]);
         setRGB1(prim, 0, 0, 0);
         setRGB2(prim, 0, 0, 0);
