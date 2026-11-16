@@ -9,6 +9,9 @@ sits under ``#ifdef NON_MATCHING`` like a draft, is required for every function 
 ``asm/*/hand/`` and is allowed nowhere else; ``--diff`` lets that switch land in a file that holds one.
 ``--diff REF`` lets a new draft land when ``config/attempts.jsonl`` holds an object for its function
 (``<image>@0x<ADDR>``), so every unmatched function keeps its closest draft with its record.
+Every row of that file is one JSON object per line with exactly ``function``, ``tried``,
+``first_diff``, ``score``, in that order, which are the keys ``tools/worklist.py`` reads; a row
+with other keys or another order fails here.
 Status markers never take a ``FAKE:`` note.
 The one exception is a ``static inline`` helper in a header, which is not a lifted function. PsyQ
 stubs such as ``__main`` carry ``MATCH`` like any other definition.
@@ -38,6 +41,8 @@ ROOT = Path(__file__).resolve().parent.parent
 
 MARKERS = ("MATCH", "NON_MATCHING", "HAND_ASM")
 DRAFT_MARKERS = ("NON_MATCHING", "HAND_ASM")
+#: The keys of a `config/attempts.jsonl` row, in order.
+ATTEMPT_KEYS = ("function", "tried", "first_diff", "score")
 TOKEN = re.compile(
     r"""
       (?P<comment>/\*.*?\*/|//[^\n]*)
@@ -312,6 +317,41 @@ def attempted(root: Path | None = None) -> set[str]:
     return {json.loads(row)["function"] for row in rows if row.strip()}
 
 
+def attempt_problems(root: Path | None = None) -> list[str]:
+    """Each `config/attempts.jsonl` row outside the schema, as `path:line: problem`."""
+    path = (root or ROOT) / "config/attempts.jsonl"
+    if not path.exists():
+        return []
+    found: list[str] = []
+    for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+        if not line.strip():
+            continue
+        try:
+            row = json.loads(line)
+        except json.JSONDecodeError as error:
+            found.append(f"{path}:{number}: not JSON: {error.msg}")
+            continue
+        if not isinstance(row, dict) or tuple(row) != ATTEMPT_KEYS:
+            keys = tuple(row) if isinstance(row, dict) else (type(row).__name__,)
+            found.append(
+                f"{path}:{number}: keys {list(keys)} instead of {list(ATTEMPT_KEYS)}"
+            )
+    return found
+
+
+def report_attempts(problems: list[str]) -> bool:
+    """Print each malformed attempts row and the count; True when there is one."""
+    for problem in problems:
+        print(problem, file=sys.stderr)
+    if problems:
+        print(
+            f"check-markers: {len(problems)} row(s) of config/attempts.jsonl "
+            "outside the schema",
+            file=sys.stderr,
+        )
+    return bool(problems)
+
+
 def main(argv: list[str]) -> int:
     if argv and argv[0] in ("-h", "--help"):
         print(__doc__.strip())
@@ -320,6 +360,8 @@ def main(argv: list[str]) -> int:
         if len(argv) != 2:
             print("usage: python3 tools/check_markers.py --diff REF", file=sys.stderr)
             return 2
+        if report_attempts(attempt_problems()):
+            return 1
         bad, known = 0, attempted()
         for path, line, text in added_lines(argv[1]):
             if re.match(r"\s*#\s*if(?:def)?\s+NON_MATCHING\b", text):
@@ -354,11 +396,13 @@ def main(argv: list[str]) -> int:
         )
     for problem in problems:
         print(problem, file=sys.stderr)
+    malformed_rows = report_attempts(attempt_problems())
     if problems:
         print(
             f"check-markers: {len(problems)} definition(s) without exactly one marker",
             file=sys.stderr,
         )
+    if problems or malformed_rows:
         return 1
     print(f"check-markers: {len(paths)} files, every definition carries one marker")
     return 0
