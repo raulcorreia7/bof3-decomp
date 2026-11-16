@@ -35,14 +35,24 @@ ASSERT_SIZE(AreaPart, 0x14);
 ASSERT_OFFSET(AreaPart, cells, 0x02);
 ASSERT_OFFSET(AreaPart, cell, 0x10);
 
-/* The part rows one frame draws, from the first row index to the row after the last. */
-extern u8 D_801F52E8[];
-extern u8 D_801F52E9[];
+/* Each sweep frame's first and last cell row. */
+extern u8 D_801F52E8[][2];
+extern u8 D_801F52E9[][2];
 
+/* The part rows: the cell pair, four vertex cells and the part word, 20 bytes each. */
 extern AreaPart D_801F4F14[];
 
 /* The four corner vectors RotTransPers4 projects. */
 extern SVECTOR D_1F800014[];
+
+/* The part-row bytes the draw addresses by offset: the base y, the four corner triples and the part word. */
+extern u8  D_801F4F15[];
+extern u8  D_801F4F16[];
+extern u8  D_801F4F17[];
+extern u8  D_801F4F18[];
+extern u8  D_801F4F24[];
+/* The cell pair a part draw stages, then the drawer's own x and z offsets, as unsigned halfwords. */
+extern u16 D_1F800034_U16[4];
 
 /* The payload's first words: the per-state handler pointers. */
 extern u8                  D_801F4ED4[];

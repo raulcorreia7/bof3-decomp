@@ -1,25 +1,28 @@
 #include "area189_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F518C(void) {
-    Actor* work;
-    u8*    state = &g_GameStateIndex;
-    s32    x;
-    s32    y;
+/* Runs one step of the talk-and-turn phase: the pad's turn step decides whether the
+ * camera angle advances, the actor walks into the exit cells, or the area message
+ * starts. Message path 2 writes the state byte through its pointer, path 3 by name. */
+MATCH void func_801F518C(void) {
+    u8*  state;
+    u16* angle;
+    s32  x;
+    s32  y;
 
-    if ((g_Game.flags & 0x100) != 0) {
+    if (GAME_SCRIPT_ACTIVE()) {
         return;
     }
-    if ((g_Game.walk_flags & 0x40) != 0) {
+    if (g_Game.walk_flags & AREA_WALK_ENTRY_PENDING) {
         return;
     }
-    if (*state != 0) {
+    state = &g_GameStateIndex;
+    if (*state != GAME_REQUEST_IDLE) {
         return;
     }
-    if ((func_801F5D6C() & BYTE_MASK) != 0) {
+    if (func_801F5D6C() & BYTE_MASK) {
         return;
     }
-    if ((func_801F5EA8() & BYTE_MASK) != 0) {
+    if (func_801F5EA8() & BYTE_MASK) {
         return;
     }
     switch (func_801F5F3C() & BYTE_MASK) {
@@ -28,38 +31,30 @@ NON_MATCHING void func_801F518C(void) {
             func_801F5D20();
             break;
         case 1:
-            g_Game.current->u.field.mode_12B.s8_value = 1;
-            g_AreaCameraAngle.vz += (s8)g_Task->param.unk_0B;
-            g_AreaCameraAngle.vz &= 0xFFF;
-            g_Task->header.step = 4;
+            g_Game.current->u.field.mode_12B.u8_value = 1;
+            angle                                     = &D_801492DC;
+            *angle                                    = (*angle + (s8)g_Task->param.unk_0B) & 0xFFF;
+            g_Task->header.step                       = 4;
             break;
         case 2:
             func_801F54B0();
-            work = g_Task;
-            x    = work->pos.x.fixed + work->vx * work->timer;
-            y    = work->pos.y.fixed + work->vy * work->timer;
-            if ((u32)((x >> 24) - 0x10) < 5) {
-                if ((y >> 24) >= 0x18) {
-                    Message_StartAreaMessage(2);
-                    *state = 2;
-                    func_801F5D20();
-                    break;
-                }
-            }
-            if (SYS_TestFlag(D_80144EF8, 4) != 0 && (u32)((x >> 24) - 0x15) < 5 && (y >> 24) < 0xF) {
-                Message_StartAreaMessage(3);
-                *state = 2;
+            x = g_Task->pos.x.fixed + g_Task->vx * g_Task->timer;
+            y = g_Task->pos.y.fixed + g_Task->vy * g_Task->timer;
+            if ((u32)((x >> 24) - 0x10) < 5 && (y >> 24) >= 0x18) {
+                Message_StartAreaMessage(2);
+                *state = GAME_REQUEST_MESSAGE;
                 func_801F5D20();
-                break;
+                return;
+            } else if (SYS_TestFlag(D_80144EF8, 4) && (u32)((x >> 24) - 0x15) < 5 && (y >> 24) < 0xF) {
+                Message_StartAreaMessage(3);
+                g_GameStateIndex = GAME_REQUEST_MESSAGE;
+                func_801F5D20();
+                return;
             }
-            work = g_Task;
-            work->timer -= 1;
+            g_Task->timer--;
             func_801F559C();
-            g_Game.current->u.field.mode_12B.s8_value = 1;
+            g_Game.current->u.field.mode_12B.u8_value = 1;
             g_Task->header.step                       = 3;
             break;
     }
 }
-#else
-INCLUDE_ASM(func_801F518C);
-#endif
