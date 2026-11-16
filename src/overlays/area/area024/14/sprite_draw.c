@@ -258,7 +258,7 @@ MATCH void func_801F2DD8(void) {
     Actor_Clear();
 }
 
-MATCH void func_801F2DF8(const void* sprite) {
+MATCH void func_801F2DF8(const AreaSprite* sprite) {
     DVECTOR           screen;
     u16               size[2];
     volatile s16      buf[8];
@@ -266,8 +266,8 @@ MATCH void func_801F2DF8(const void* sprite) {
     s32*              object;
     POLY_FT4*         primitive;
 
-    work      = (const AreaSprite*)sprite;
-    object    = (s32*)((const u8*)sprite + 4u);
+    work      = sprite;
+    object    = (s32*)&sprite->origin;
     primitive = (POLY_FT4*)g_GfxPrimCursor;
 
     SetPolyFT4(primitive);
@@ -288,11 +288,11 @@ MATCH void func_801F2DF8(const void* sprite) {
     Area_AddCellPrim(VOL(s32, work->origin.x), VOL(s32, work->origin.y), 2, sizeof(POLY_FT4));
 }
 
-MATCH void func_801F2FD4(void* sprite) {
+MATCH void func_801F2FD4(AreaSprite* sprite) {
     AreaSprite*              work;
     volatile Area024Scratch* scratch;
 
-    work           = (AreaSprite*)sprite;
+    work           = sprite;
     scratch        = WORLD00_AREA024_SCRATCH_PTR;
     work->origin.x = scratch->pos.x;
     work->origin.y = scratch->pos.y;
@@ -314,7 +314,7 @@ MATCH void func_801F3080(void) {
     i          = 0u;
 
     do {
-        func_801F2FD4((void*)D_801F5B00);
+        func_801F2FD4((AreaSprite*)D_801F5B00);
         D_801F5B00++;
         i += 1u;
     } while (i < 8u);
@@ -334,7 +334,7 @@ MATCH s32 func_801F30EC(void) {
     do {
         if (D_801F5B00->flags != 0u) {
             D_801F4214[D_801F5B00->flags_01]();
-            func_801F2DF8((void*)D_801F5B00);
+            func_801F2DF8((AreaSprite*)D_801F5B00);
             result = 1;
         }
 

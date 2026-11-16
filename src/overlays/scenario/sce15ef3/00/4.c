@@ -218,6 +218,7 @@ MATCH void func_801D16BC(void) {
     Actor_Clear();
 }
 
+/* kept: retail steps the row and tail pointers apart; a SpriteSpark walk changes the bytes. */
 MATCH void func_801D16DC(void) {
     s32   index;
     s8*   row;
@@ -273,7 +274,38 @@ MATCH void func_801D1758(SpriteSpark* spark) {
     Area_AddCellPrim(spark->x, spark->y, 0, sizeof(TILE));
 }
 
-INCLUDE_ASM(func_801D18CC);
+MATCH s32 func_801D18CC(void) {
+    SpriteSpark* spark;
+    MATRIX       camera;
+    s32          active;
+    s32          step;
+    u16          i;
+    u8           life;
+
+    active = 0;
+    Area_SetCameraMatrix(&camera);
+    spark = MEM_PTR(SpriteSpark, AREA_WORK);
+    i     = 0;
+    do {
+        if (spark->active != 0) {
+            step          = spark->unk_14 + 0x20000;
+            spark->unk_14 = step;
+            spark->z += step;
+            spark->unk_3 ^= 1;
+            func_801D1758(spark);
+            life        = spark->life - 1;
+            spark->life = life;
+            active      = 1;
+            if (life == 0) {
+                spark->active = 0;
+                spark->unk_1  = 0;
+            }
+        }
+        spark++;
+        i++;
+    } while (i < SPRITE_SPARK_COUNT);
+    return active;
+}
 
 #include "shared/Area_SeedSparkEmitters.h"
 

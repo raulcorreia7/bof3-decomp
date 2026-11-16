@@ -1,5 +1,6 @@
 #include "start_08.h"
 
+// clang-format off
 char g_SaveSlotLevelFormat[4] = "%2d";
 char g_SaveSlotTimeFormat[12] = "%02d %02d";
 char g_SaveSlotTimeColon[4] = "  :";
