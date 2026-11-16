@@ -165,3 +165,26 @@ def function_addresses(text: str, names: Mapping[str, int] = NO_NAMES) -> set[in
     found = set(function_claims(text, names))
     found.update(int(m["address"], 16) for m in DEFINITION_RE.finditer(text))
     return found
+
+
+MARKED_NAME_RE = re.compile(
+    r"^[ \t]*(?:MATCH|NON_MATCHING)\b[^(]*?\b([A-Za-z_]\w*)\s*\(", re.MULTILINE
+)
+ASM_DEFINITION_RE = re.compile(
+    r"^[ \t]*(?:#\s*else[ \t]*)?(?:MATCH[ \t]+)?INCLUDE_ASM\s*\(\s*"
+    r"(?:[^,()]+,\s*)?([A-Za-z_]\w*)\s*\)",
+    re.MULTILINE,
+)
+
+
+def unit_definitions(path: Path) -> set[str]:
+    """Return the function names a unit defines, the quoted headers it includes followed."""
+    text = source_text(path)
+    return c_definitions(path) | {
+        match.group(1) for match in ASM_DEFINITION_RE.finditer(text)
+    }
+
+
+def c_definitions(path: Path) -> set[str]:
+    """Return the functions a unit defines in C, the quoted headers it includes followed."""
+    return {match.group(1) for match in MARKED_NAME_RE.finditer(source_text(path))}
