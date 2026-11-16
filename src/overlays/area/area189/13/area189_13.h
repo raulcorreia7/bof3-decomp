@@ -11,7 +11,6 @@
 extern SVECTOR D_801492E0;
 
 /* The scratchpad work row the entry paths read. */
-extern SVECTOR D_1F800014[];
 
 /* The character work record, viewed as bytes here. */
 
