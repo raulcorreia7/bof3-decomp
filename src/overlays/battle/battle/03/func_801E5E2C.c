@@ -41,7 +41,7 @@ loop:
     }
     kind = slot->target.party->slot;
     if (kind < 3) {
-        g_Game.members[kind].u.turn.damage_flags.value |= COMBATANT_FLAG_DAMAGE_NUMBER;
+        g_Game.members[kind].u.turn.damage_flags.value |= BATTLER_DAMAGE_NUMBER;
     } else {
         ENEMY_COMBATANT(kind).turn.damage_flags.value |= 0x80;
     }

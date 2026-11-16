@@ -110,10 +110,10 @@ MATCH s16 Battle_CalcDamage(u8 attacker_slot, u8 target_slot, u16 element_id) {
         damage = 1;
     }
     if (BATTLER_IS_PLAYER(target_slot)) {
-        if (g_Game.members[target_slot].u.turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+        if (g_Game.members[target_slot].u.turn.damage_flags.value & BATTLER_DAMAGE_IMMUNE) {
             damage = 0;
         }
-    } else if (ENEMY_COMBATANT(target_slot).turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+    } else if (ENEMY_COMBATANT(target_slot).turn.damage_flags.value & BATTLER_DAMAGE_IMMUNE) {
         damage = 0;
     }
     if (damage >= 10000) {

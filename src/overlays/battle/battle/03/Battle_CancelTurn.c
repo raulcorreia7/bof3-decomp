@@ -8,7 +8,7 @@ MATCH void Battle_CancelTurn(u8 battler_index) {
     u8 index;
 
     if (BATTLER_IS_PLAYER(battler_index)) {
-        g_Game.members[battler_index].u.turn.damage_flags.value &= ~COMBATANT_FLAG_DEFENDING;
+        g_Game.members[battler_index].u.turn.damage_flags.value &= ~BATTLER_DAMAGE_DEFENDING;
         g_Game.members[battler_index].u.turn.command.type = 0u;
         g_Game.members[battler_index].u.turn.action_flags.value &= ~COMBATANT_FLAG_ABILITY_ALT_POSE;
     } else {

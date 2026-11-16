@@ -18,10 +18,10 @@ MATCH void Battle_MarkDamageApplied(void) {
     battler_index = LOBU(g_Battle.target);
     *pFlag        = flag | BATTLE_STATE_DAMAGE_APPLIED;
     if (BATTLER_IS_PLAYER(battler_index)) {
-        g_Game.members[battler_index].u.turn.damage_flags.volatile_value |= COMBATANT_FLAG_DAMAGE_ROW_PRESENT;
+        g_Game.members[battler_index].u.turn.damage_flags.volatile_value |= BATTLER_DAMAGE_ROW_PRESENT;
         g_Game.members[g_Battle.target].u.turn.target_flags &= ~BATTLE_HIT_HP;
     } else {
-        ENEMY_COMBATANT(battler_index).turn.damage_flags.volatile_value |= COMBATANT_FLAG_DAMAGE_ROW_PRESENT;
+        ENEMY_COMBATANT(battler_index).turn.damage_flags.volatile_value |= BATTLER_DAMAGE_ROW_PRESENT;
         ENEMY_COMBATANT(g_Battle.target).turn.target_flags &= ~0x1u;
     }
 }

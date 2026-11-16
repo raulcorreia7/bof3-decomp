@@ -11,11 +11,11 @@ MATCH u32 Battle_ApplyDamage(u8 attacker_slot, u8 target_slot) {
     }
     damage = Battle_CalcDamage(attacker_slot, target_slot, BATTLE_ELEMENT_FROM_WEAPON);
     if (BATTLER_IS_PLAYER(target_slot)) {
-        if (g_Game.members[target_slot].u.turn.damage_flags.value & COMBATANT_FLAG_HURT_REACTION) {
+        if (g_Game.members[target_slot].u.turn.damage_flags.value & BATTLER_DAMAGE_HURT_REACTION) {
             damage = g_Game.members[target_slot].chr.hp;
             Battle_QueueEvent(1, 0, 0, 30, D_801EB075);
             g_BattleMessageState = 1;
-            g_Game.members[target_slot].u.turn.damage_flags.value &= ~COMBATANT_FLAG_HURT_REACTION;
+            g_Game.members[target_slot].u.turn.damage_flags.value &= ~BATTLER_DAMAGE_HURT_REACTION;
         }
         if (damage > 0) {
             if (damage < g_Game.members[target_slot].chr.hp) {
@@ -24,7 +24,7 @@ MATCH u32 Battle_ApplyDamage(u8 attacker_slot, u8 target_slot) {
                 if (damage - g_Game.members[target_slot].chr.hp < g_Game.members[target_slot].chr.willpower) {
                     if (!(g_Game.members[target_slot].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM_QUEUED) &&
                         !(g_Game.members[target_slot].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
-                        g_Game.members[target_slot].u.turn.damage_flags.value |= COMBATANT_FLAG_WILLPOWER_SURVIVED;
+                        g_Game.members[target_slot].u.turn.damage_flags.value |= BATTLER_DAMAGE_WILLPOWER_SURVIVED;
                     }
                 }
                 g_Game.members[target_slot].chr.hp = 0;
@@ -36,11 +36,11 @@ MATCH u32 Battle_ApplyDamage(u8 attacker_slot, u8 target_slot) {
             g_Game.members[target_slot].u.turn.target_flags |= BATTLE_HIT_HP_MAX;
         }
     } else if (ENEMY_COMBATANT(target_slot).hp != 65535) {
-        if ((ENEMY_COMBATANT(target_slot).turn.damage_flags.value & COMBATANT_FLAG_HURT_REACTION) && ENEMY_COMBATANT(target_slot).hp <= 32767) {
+        if ((ENEMY_COMBATANT(target_slot).turn.damage_flags.value & BATTLER_DAMAGE_HURT_REACTION) && ENEMY_COMBATANT(target_slot).hp <= 32767) {
             damage = ENEMY_COMBATANT(target_slot).hp;
             Battle_QueueEvent(1, 0, 0, 30, D_801EB075);
             g_BattleMessageState = 1;
-            ENEMY_COMBATANT(target_slot).turn.damage_flags.value &= ~COMBATANT_FLAG_HURT_REACTION;
+            ENEMY_COMBATANT(target_slot).turn.damage_flags.value &= ~BATTLER_DAMAGE_HURT_REACTION;
         }
         if (damage > 0) {
             if (damage < ENEMY_COMBATANT(target_slot).hp) {

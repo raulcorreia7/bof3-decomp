@@ -9,7 +9,7 @@ MATCH void func_801E3638(void) {
 
     D_801EB3FC[g_Task->header.step]();
     if (g_BattleCurrentEnemy->status & STATUS_CONFUSED) {
-        if (g_BattleCurrentEnemy->turn.damage_flags.value & COMBATANT_FLAG_UNK_11) {
+        if (g_BattleCurrentEnemy->turn.damage_flags.value & BATTLER_DAMAGE_UNK_11) {
             if (++g_BattleEffects[g_Task->slot].arg.sway >= 12) {
                 g_BattleCurrentEnemy->turn.damage_flags.value ^= 0x800;
             }
@@ -25,7 +25,7 @@ MATCH void func_801E3638(void) {
             work->pos.y.fixed = g_BattleEffects[work->slot].pos.y.fixed + (g_BattleEffects[work->slot].arg.sway << 9);
         }
     }
-    if (!(g_BattleCurrentEnemy->turn.damage_flags.value & COMBATANT_FLAG_SKIP_ACTION_STEP)) {
+    if (!(g_BattleCurrentEnemy->turn.damage_flags.value & BATTLER_DAMAGE_SKIP_ACTION_STEP)) {
         Battle_IsEnemyBlocked();
     }
 }

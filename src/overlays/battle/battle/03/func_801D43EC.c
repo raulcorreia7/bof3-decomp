@@ -41,7 +41,7 @@ MATCH void func_801D43EC(void) {
                 flags                         = g_BattleEnemyBattlers[slot].turn.damage_flags.value;
                 *(BattleStatBlock*)D_801EC308 = *(BattleStatBlock*)&g_BattleEnemyBattlers[slot].stats;
             }
-            Battle_QueueEvent(1, 0, 0, 0xF, (flags & COMBATANT_FLAG_REPRISAL) ? (u8*)&D_801EB08F : (u8*)&D_801EB04E);
+            Battle_QueueEvent(1, 0, 0, 0xF, (flags & BATTLER_DAMAGE_REPRISAL) ? (u8*)&D_801EB08F : (u8*)&D_801EB04E);
             g_BattleMessageState    = 1;
             g_Battle.phase.step     = 0;
             g_Battle.phase.sub_step = 1;

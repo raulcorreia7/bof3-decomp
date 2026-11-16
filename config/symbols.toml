@@ -58,7 +58,7 @@ Battle_StepBattlers = { addr = 0x801D62D8, type = "func", source = "Steps the lo
 Battle_GetActionLock = { addr = 0x801D64C4, type = "func", source = "the body returns g_Battle.action_lock" }
 Battle_WaitVoiceSlots = { addr = 0x801D656C, type = "func", source = "Waits for the voice slots to clear." }
 Battle_UpdateResult = { addr = 0x801D6774, type = "func", source = "Battle mode 5: runs the g_BattleStep handler of the battle result." }
-Battle_LoadEndOverlay = { addr = 0x801D6A14, type = "func", source = "Finishes the battle setup pass: returns while a party battler has COMBATANT_FLAG_FORM_EFFECT_PLAYING, steps g_BattleSubStep back when g_BattleRowCursor differs from g_BattlePartyCount, otherwise on no defeat revives or cures each party battler, sets g_BattleStep to 2 or 1 by the result flags and starts the EMI_SLOT_BATL_END load." }
+Battle_LoadEndOverlay = { addr = 0x801D6A14, type = "func", source = "Finishes the battle setup pass: returns while a party battler has BATTLER_DAMAGE_FORM_EFFECT_PLAYING, steps g_BattleSubStep back when g_BattleRowCursor differs from g_BattlePartyCount, otherwise on no defeat revives or cures each party battler, sets g_BattleStep to 2 or 1 by the result flags and starts the EMI_SLOT_BATL_END load." }
 Battle_WaitAreaReload = { addr = 0x801D716C, type = "func", source = "Step after Battle_ReloadAreaAudio in the D_801EABB8 step table: when EMI_IsReady, moves the battle phase to step 4 with sub_step 0." }
 Battle_WriteBackParty = { addr = 0x801D7350, type = "func", source = "Copies the party's battle state back to the field characters." }
 Battle_SetPartyCount = { addr = 0x801D750C, type = "func", source = "the body stores into g_Battle.party_count" }

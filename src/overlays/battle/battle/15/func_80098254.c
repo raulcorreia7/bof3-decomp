@@ -6,7 +6,7 @@ MATCH void func_80098254(void) {
     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
     g_Battle.selection_latch        = 0;
     g_BattleActorTurn->command.type = 0;
-    g_BattleActorTurn->damage_flags.value |= COMBATANT_FLAG_COMMAND_ENTERED;
+    g_BattleActorTurn->damage_flags.value |= BATTLER_DAMAGE_COMMAND_ENTERED;
 
     BATTLE_ACTIVE_ROW->header.mode = 2;
     counter                        = g_Battle.command_count;

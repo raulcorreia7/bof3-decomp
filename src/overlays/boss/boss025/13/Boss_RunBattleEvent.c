@@ -17,8 +17,8 @@ MATCH u8 Boss_RunBattleEvent(u32 mode) {
                     battler = g_Battle.turn_order[g_Battle.turn_cursor - 1];
                     if (BATTLER_IS_PLAYER(battler)) {
                         damage_flags = g_Game.members[battler].u.turn.damage_flags.value;
-                        if (!(damage_flags & COMBATANT_FLAG_COMMAND_ENTERED)) {
-                            if (!(damage_flags & COMBATANT_FLAG_DEFENDING)) {
+                        if (!(damage_flags & BATTLER_DAMAGE_COMMAND_ENTERED)) {
+                            if (!(damage_flags & BATTLER_DAMAGE_DEFENDING)) {
                                 g_Battle.outcome.result |= 4;
                                 g_Battle.boss_flags |= 4;
                             }

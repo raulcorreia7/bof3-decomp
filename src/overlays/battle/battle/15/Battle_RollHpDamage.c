@@ -25,11 +25,11 @@ MATCH s16 Battle_RollHpDamage(s32 divisor) {
     battler = (*(u8*)&g_Battle.target);
     base    = BATTLER_IS_PLAYER(battler);
     if (base) {
-        if (g_Game.members[battler].u.turn.damage_flags.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+        if (g_Game.members[battler].u.turn.damage_flags.volatile_value & BATTLER_DAMAGE_IMMUNE) {
             return 0;
         }
     } else {
-        if (ENEMY_COMBATANT(battler).turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+        if (ENEMY_COMBATANT(battler).turn.damage_flags.value & BATTLER_DAMAGE_IMMUNE) {
             return 0;
         }
     }

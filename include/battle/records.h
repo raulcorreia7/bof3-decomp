@@ -279,7 +279,7 @@ typedef struct BattleTurn {
     u8                counter;
     u8                choice; /* the menu choice stored with the command */
     u8                unk_0B;
-    BattlerFlags      damage_flags; /* BattleBattlerDamageFlags */
+    BattlerFlags      damage_flags; /* BattlerDamageFlags */
     BattlerFlags      action_flags; /* BattleBattlerActionFlags */
 } BattleTurn;
 
@@ -657,24 +657,24 @@ ASSERT_OFFSET(PartyMember, character_index, 0x13C);
  * and countdown; bit 8 makes the hit lethal and queues the reaction cue; bit 9
  * marks a damage row present; bit 12 skips the action gate; bit 15 counters;
  * bit 16 zeroes damage and the HP-bar numerator. */
-typedef enum BattleBattlerDamageFlags {
-    COMBATANT_FLAG_COMMAND_ENTERED     = 1 << 0,
-    COMBATANT_FLAG_DEFENDING           = 1 << 1,
-    COMBATANT_FLAG_WILLPOWER_SURVIVED  = 1 << 2,
-    COMBATANT_FLAG_UNK_3               = 1 << 3,
-    COMBATANT_FLAG_UNK_4               = 1 << 4,
-    COMBATANT_FLAG_UNK_5               = 1 << 5,
-    COMBATANT_FLAG_DAMAGED             = 1 << 6,
-    COMBATANT_FLAG_DAMAGE_NUMBER       = 1 << 7,
-    COMBATANT_FLAG_HURT_REACTION       = 1 << 8,
-    COMBATANT_FLAG_DAMAGE_ROW_PRESENT  = 1 << 9,
-    COMBATANT_FLAG_UNK_11              = 1 << 11,
-    COMBATANT_FLAG_SKIP_ACTION_STEP    = 1 << 12,
-    COMBATANT_FLAG_FORM_EFFECT_PLAYING = 1 << 13,
-    COMBATANT_FLAG_UNK_14              = 1 << 14,
-    COMBATANT_FLAG_REPRISAL            = 1 << 15,
-    COMBATANT_FLAG_DAMAGE_IMMUNE       = 1 << 16,
-} BattleBattlerDamageFlags;
+typedef enum BattlerDamageFlags {
+    BATTLER_DAMAGE_COMMAND_ENTERED     = 1 << 0,
+    BATTLER_DAMAGE_DEFENDING           = 1 << 1,
+    BATTLER_DAMAGE_WILLPOWER_SURVIVED  = 1 << 2,
+    BATTLER_DAMAGE_UNK_3               = 1 << 3,
+    BATTLER_DAMAGE_UNK_4               = 1 << 4,
+    BATTLER_DAMAGE_UNK_5               = 1 << 5,
+    BATTLER_DAMAGE_TAKEN               = 1 << 6,
+    BATTLER_DAMAGE_NUMBER              = 1 << 7,
+    BATTLER_DAMAGE_HURT_REACTION       = 1 << 8,
+    BATTLER_DAMAGE_ROW_PRESENT         = 1 << 9,
+    BATTLER_DAMAGE_UNK_11              = 1 << 11,
+    BATTLER_DAMAGE_SKIP_ACTION_STEP    = 1 << 12,
+    BATTLER_DAMAGE_FORM_EFFECT_PLAYING = 1 << 13,
+    BATTLER_DAMAGE_UNK_14              = 1 << 14,
+    BATTLER_DAMAGE_REPRISAL            = 1 << 15,
+    BATTLER_DAMAGE_IMMUNE              = 1 << 16,
+} BattlerDamageFlags;
 
 /* The action/pending word: `action_flags` of the enemy row, `action_flags` of the
  * player row. Bit 3 marks a mode handler action installed; bit 4 keeps the row

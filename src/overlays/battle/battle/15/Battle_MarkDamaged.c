@@ -14,7 +14,7 @@ MATCH void Battle_MarkDamaged(u8 target_mask) {
             for (i = 0; (u32)(i & BYTE_MASK) < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
                 index = i & BYTE_MASK;
                 if ((Battle_SlotIsBlocked(index) & BYTE_MASK) == 0) {
-                    g_Game.members[index].u.turn.damage_flags.value |= COMBATANT_FLAG_DAMAGED;
+                    g_Game.members[index].u.turn.damage_flags.value |= BATTLER_DAMAGE_TAKEN;
                 }
             }
         }
@@ -22,16 +22,16 @@ MATCH void Battle_MarkDamaged(u8 target_mask) {
             for (i = 3; (u32)(i & BYTE_MASK) < COMBATANT_COUNT; i++) {
                 index = i & BYTE_MASK;
                 if ((Battle_SlotIsBlocked(index) & BYTE_MASK) == 0) {
-                    ENEMY_COMBATANT(index).turn.damage_flags.value |= COMBATANT_FLAG_DAMAGED;
+                    ENEMY_COMBATANT(index).turn.damage_flags.value |= BATTLER_DAMAGE_TAKEN;
                 }
             }
         }
     } else {
         index = target_mask & BYTE_MASK;
         if (index < 3U) {
-            g_Game.members[index].u.turn.damage_flags.value |= COMBATANT_FLAG_DAMAGED;
+            g_Game.members[index].u.turn.damage_flags.value |= BATTLER_DAMAGE_TAKEN;
             return;
         }
-        ENEMY_COMBATANT(index).turn.damage_flags.value |= COMBATANT_FLAG_DAMAGED;
+        ENEMY_COMBATANT(index).turn.damage_flags.value |= BATTLER_DAMAGE_TAKEN;
     }
 }

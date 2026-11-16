@@ -49,7 +49,7 @@ MATCH void func_801DEFE4(void) {
         }
         return;
     }
-    if (work->u.turn.damage_flags.value & COMBATANT_FLAG_DEFENDING) {
+    if (work->u.turn.damage_flags.value & BATTLER_DAMAGE_DEFENDING) {
         Actor_RequestScript(g_Task->facing + 0x14);
         return;
     }

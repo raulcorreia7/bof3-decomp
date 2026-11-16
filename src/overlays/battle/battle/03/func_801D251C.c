@@ -7,7 +7,7 @@ MATCH void func_801D251C(void) {
     g_BattleActorTurn->command.type   = BATTLE_COMMAND_DEFEND;
     g_BattleActorTurn->command.target = g_BattleMessageSlot[5];
     otherRecord                       = g_BattleMessageSlot;
-    g_BattleActorTurn->damage_flags.value |= COMBATANT_FLAG_DEFENDING;
+    g_BattleActorTurn->damage_flags.value |= BATTLER_DAMAGE_DEFENDING;
     *(s8*)(otherRecord + 1) = 2;
     counter                 = (u8*)&g_Battle.command_count;
     count                   = *counter;

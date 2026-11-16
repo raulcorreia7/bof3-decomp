@@ -50,7 +50,7 @@ MATCH void func_801E7BA0(void) {
     g_Game.members[g_Task->slot].facing      = facing;
     g_Game.members[g_Task->slot].unk_48      = 2;
     g_Game.members[g_Task->slot].scale.x     = 0;
-    g_Game.members[g_Task->slot].u.turn.damage_flags.value |= COMBATANT_FLAG_FORM_EFFECT_PLAYING;
+    g_Game.members[g_Task->slot].u.turn.damage_flags.value |= BATTLER_DAMAGE_FORM_EFFECT_PLAYING;
     g_BattleEffects[g_Task->slot].pos.x.fixed = g_EncounterParty[g_Task->slot].x.fixed;
     g_BattleEffects[g_Task->slot].pos.y.fixed = g_EncounterParty[g_Task->slot].y.fixed;
     g_BattleEffects[g_Task->slot].pos.z.fixed = Area_SampleHeight(g_BattleEffects[g_Task->slot].pos.x.fixed, g_BattleEffects[g_Task->slot].pos.y.fixed) << 16;

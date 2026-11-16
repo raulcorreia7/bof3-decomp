@@ -41,7 +41,7 @@ MATCH void func_801DF3F8(void) {
         PartyMember* battler = g_Game.current;
 
         if (HAS_STATUS(*battler, STATUS_CONFUSED)) {
-            if (battler->u.turn.damage_flags.value & COMBATANT_FLAG_UNK_11) {
+            if (battler->u.turn.damage_flags.value & BATTLER_DAMAGE_UNK_11) {
                 PartyMember* work = g_Task;
                 s8           level;
 
@@ -88,7 +88,7 @@ MATCH void func_801DF3F8(void) {
     store_coord_y:
         actor->pos.y.fixed = y_pos;
     }
-    if (!(g_Game.current->u.turn.damage_flags.value & COMBATANT_FLAG_SKIP_ACTION_STEP)) {
+    if (!(g_Game.current->u.turn.damage_flags.value & BATTLER_DAMAGE_SKIP_ACTION_STEP)) {
         func_801DEDE4();
     }
 }
