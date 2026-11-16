@@ -44,6 +44,7 @@ ASSERT_SIZE(AreaSlot, 0x34);
 extern u8  D_801F6250[];
 extern u8  D_801F6278[];
 extern u8  D_801F627D[];
+extern u8  D_801F6298[];
 extern u8  D_801F62A0[];
 extern u8  D_801F62EC[];
 /* The two 4-byte trigger records, one byte view per field so each read keeps its
