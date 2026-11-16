@@ -11,12 +11,10 @@
 extern SVECTOR D_801492E0;
 
 /* The scratchpad work row the entry paths read. */
-extern SVECTOR D_1F800014[];
 
 /* The character work record, viewed as bytes here. */
 
 /* The area-flag bit store and the global flag byte. */
-extern u8  D_80144EF8[];
 extern u16 D_80146876;
 /* Steps until the next encounter, rolled by Area_RollEncounterThreshold. */
 extern u16 D_80145FB8;
@@ -51,6 +49,11 @@ void func_801F3514(void);
 void func_801F3800(void);
 s16  func_801F4A04(s32 x, s32 y);
 void func_801F559C(void);
+void func_801F5D20(void);
+bool func_801F5D6C(void);
+bool func_801F5EA8(void);
+s32  func_801F5F3C(void);
+void func_801F54B0(void);
 /* func_801F5F20 */
 void func_801F5600(void);
 

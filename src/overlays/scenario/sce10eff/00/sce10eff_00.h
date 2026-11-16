@@ -76,8 +76,6 @@ extern s32              D_1F800004;
 extern s32              D_1F800008;
 extern s32              D_1F80000C;
 extern SVECTOR          D_1F800014[];
-extern s16              D_1F800016;
-extern s16              D_1F800018;
 extern Callback         D_801D2708[SCN_EFFECT_STATE_STEP_COUNT];
 extern Callback         D_801D2714[];
 extern Callback         D_801D2724[];
