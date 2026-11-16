@@ -35,7 +35,7 @@ extern u8   D_801D40AC;
 extern u32  D_801D40B0;
 extern u32  D_801D40B4;
 
-extern WorldSpin g_WorldSpins[];
+extern SpinEffect g_WorldSpins[];
 
 void func_801D147C(s32* pos, s16 origin, s32 flags);
 void func_801D1678(s32* from, s32* to, u8 intensity);

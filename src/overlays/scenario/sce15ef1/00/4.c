@@ -47,9 +47,9 @@ MATCH void func_801D0D54(void) {
 }
 
 MATCH void func_801D0DD8(void) {
-    WorldSpin* spin;
-    u8         timer;
-    u8         i;
+    SpinEffect* spin;
+    u8          timer;
+    u8          i;
 
     g_Task->unk_6C += TO_COORD(12);
     g_Task->screen_x -= 6;
@@ -121,10 +121,10 @@ MATCH void func_801D0FEC(void) {
 }
 
 MATCH void func_801D106C(void) {
-    Actor*     work;
-    WorldSpin* spin;
-    u8         timer;
-    u8         i;
+    Actor*      work;
+    SpinEffect* spin;
+    u8          timer;
+    u8          i;
 
     if ((g_Task->unk_06++ & 0x3) == 0) {
         func_801D19C8();
@@ -365,15 +365,15 @@ MATCH s32 func_801D1A60(void) {
 
 #include "shared/Area_DrawSpawnSlot.h"
 
-MATCH void func_801D1CD4(const WorldSpin* spin) {
-    WorldSpin* work;
-    POLY_G3*   primitive;
-    s32        point[3];
-    s16        fade;
-    s16        tmp;
-    s16        shade;
+MATCH void func_801D1CD4(const SpinEffect* spin) {
+    SpinEffect* work;
+    POLY_G3*    primitive;
+    s32         point[3];
+    s16         fade;
+    s16         tmp;
+    s16         shade;
 
-    work      = (WorldSpin*)spin;
+    work      = (SpinEffect*)spin;
     primitive = (POLY_G3*)g_GfxPrimCursor;
 
     SetPolyG3(primitive);
@@ -417,10 +417,10 @@ MATCH void func_801D1CD4(const WorldSpin* spin) {
 #include "shared/Area_InitSpin.h"
 
 MATCH void func_801D2088(void) {
-    MATRIX     matrix;
-    WorldSpin* spin;
-    u16*       angle;
-    s32        i;
+    MATRIX      matrix;
+    SpinEffect* spin;
+    u16*        angle;
+    s32         i;
 
     GFX_AddDitheredDrawMode(2, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
     Area_SetCameraMatrix(&matrix);
@@ -432,7 +432,7 @@ MATCH void func_801D2088(void) {
         spin += 1;
         *angle += 16;
         i += 1;
-        angle += sizeof(WorldSpin) / sizeof(*angle);
+        angle += sizeof(SpinEffect) / sizeof(*angle);
     } while ((i & BYTE_MASK) < 0x20U);
 }
 

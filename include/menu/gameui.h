@@ -226,7 +226,7 @@ typedef enum GameRequest {
     g_GameStateIndex = GAME_REQUEST_MESSAGE
 
 /* The rows of g_GameStates, the full-screen modes Game_RunMain runs. */
-typedef enum GameEntryState {
+typedef enum GameMode {
     GAME_STATE_NEW_GAME     = 0,
     GAME_STATE_AREA_LOAD    = 1,
     GAME_STATE_FIELD        = 2,
@@ -239,9 +239,9 @@ typedef enum GameEntryState {
     GAME_STATE_ABILITY_MENU = 9,
     GAME_STATE_STATUS_MENU  = 10,
     GAME_STATE_SCENE_CAMERA = 11,
-} GameEntryState;
+} GameMode;
 
-/* The main state machine index, a GameEntryState value. */
+/* The main state machine index, a GameMode value. */
 /* D_80143B90 */
 extern u16 g_GameEntryState;
 /* The request code, a GameRequest value. */

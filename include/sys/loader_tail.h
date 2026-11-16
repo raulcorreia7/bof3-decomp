@@ -26,11 +26,11 @@ typedef struct ScriptRef {
 ASSERT_SIZE(ScriptRef, 0x04);
 
 /* Entry of D_80181E40: a record list inside D_80181D98 and a count. */
-typedef struct Rec8_80181E40 {
+typedef struct ScriptRefList {
     const u8* list;
     u32       count;
-} Rec8_80181E40;
+} ScriptRefList;
 
-ASSERT_SIZE(Rec8_80181E40, 0x08);
+ASSERT_SIZE(ScriptRefList, 0x08);
 
 #endif

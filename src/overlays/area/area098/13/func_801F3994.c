@@ -1,9 +1,9 @@
 #include "area098_13.h"
 
 MATCH void func_801F3994(void) {
-    WorldSpin* spin;
-    u8         timer;
-    u8         i;
+    SpinEffect* spin;
+    u8          timer;
+    u8          i;
 
     g_Task->unk_6C += 0xC0000;
     g_Task->screen_x -= 6;
@@ -17,7 +17,7 @@ MATCH void func_801F3994(void) {
         g_Task->pos.x.fixed = g_Task->unk_64;
         g_Task->pos.y.fixed = g_Task->unk_68;
         g_Task->pos.z.fixed = g_Task->unk_6C;
-        spin                = MEM_PTR(WorldSpin, AREA_WORK + 0xC0);
+        spin                = MEM_PTR(SpinEffect, AREA_WORK + 0xC0);
         i                   = 0;
         do {
             Area_InitSpin(spin);

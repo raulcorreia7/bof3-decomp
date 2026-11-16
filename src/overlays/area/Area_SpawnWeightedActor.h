@@ -1,12 +1,12 @@
-typedef Cell2 AreaSpawnPosition;
+typedef Cell2 AreaSpawnCell;
 
-ASSERT_SIZE(AreaSpawnPosition, 2);
-ASSERT_OFFSET(AreaSpawnPosition, x, 0);
-ASSERT_OFFSET(AreaSpawnPosition, y, 1);
+ASSERT_SIZE(AreaSpawnCell, 2);
+ASSERT_OFFSET(AreaSpawnCell, x, 0);
+ASSERT_OFFSET(AreaSpawnCell, y, 1);
 
-extern u16               D_80145FB8;
-extern AreaSpawnPosition g_AreaSpawnPositions[];
-extern u8                g_AreaSpawnWeights[];
+extern u16           D_80145FB8;
+extern AreaSpawnCell g_AreaSpawnPositions[];
+extern u8            g_AreaSpawnWeights[];
 
 MATCH void Area_SpawnWeightedActor(void) {
     u8  roll;

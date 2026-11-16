@@ -1,14 +1,14 @@
 #include "area172_13.h"
 
-MATCH void func_801F3BFC(const WorldSpin* spin) {
-    WorldSpin* work;
-    POLY_G3*   primitive;
-    s32        point[3];
-    s16        fade;
-    s16        tmp;
-    s16        shade;
+MATCH void func_801F3BFC(const SpinEffect* spin) {
+    SpinEffect* work;
+    POLY_G3*    primitive;
+    s32         point[3];
+    s16         fade;
+    s16         tmp;
+    s16         shade;
 
-    work      = (WorldSpin*)spin;
+    work      = (SpinEffect*)spin;
     primitive = (POLY_G3*)g_GfxPrimCursor;
 
     SetPolyG3(primitive);

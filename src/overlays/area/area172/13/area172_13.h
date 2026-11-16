@@ -39,7 +39,7 @@ extern s32 D_80143F84;
 #define AREA_SPAWN_SLOT_RADIUS_STEP 0xC
 
 void func_801F36C0(void* position, s32 radius, s32 colors);
-void func_801F3BFC(const WorldSpin* spin);
+void func_801F3BFC(const SpinEffect* spin);
 void func_801F3FAC(void);
 
 void func_801F4F70(s32 x, s32 y);

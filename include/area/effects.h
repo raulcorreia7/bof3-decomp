@@ -62,7 +62,7 @@ ASSERT_OFFSET(SpriteSpark, z_step, 0x14);
 #define g_SparkEmitters ((SparkEmitter*)(AREA_WORK + 0x1800))
 
 /* The spin-effect work record the overlay's sprite pass draws. */
-typedef struct WorldSpin {
+typedef struct SpinEffect {
     Pos3               origin;
     u8                 unk_0C[4];
     /* 0x10 */ SVECTOR vertex_a;   /* the first rotated vertex offset */
@@ -73,15 +73,15 @@ typedef struct WorldSpin {
     s16                unk_26;
     /* 0x28 */ s16     scale; /* the vertex scale */
     /* 0x2A */ s16     fade;  /* the triangle fade */
-} WorldSpin;
+} SpinEffect;
 
-ASSERT_SIZE(WorldSpin, 0x2C);
-ASSERT_OFFSET(WorldSpin, origin, 0x00);
-ASSERT_OFFSET(WorldSpin, vertex_a, 0x10);
-ASSERT_OFFSET(WorldSpin, vertex_b, 0x18);
-ASSERT_OFFSET(WorldSpin, spin_angle, 0x24);
-ASSERT_OFFSET(WorldSpin, scale, 0x28);
-ASSERT_OFFSET(WorldSpin, fade, 0x2A);
+ASSERT_SIZE(SpinEffect, 0x2C);
+ASSERT_OFFSET(SpinEffect, origin, 0x00);
+ASSERT_OFFSET(SpinEffect, vertex_a, 0x10);
+ASSERT_OFFSET(SpinEffect, vertex_b, 0x18);
+ASSERT_OFFSET(SpinEffect, spin_angle, 0x24);
+ASSERT_OFFSET(SpinEffect, scale, 0x28);
+ASSERT_OFFSET(SpinEffect, fade, 0x2A);
 
 /* A chain of 32 screen-projected points with the direction between neighbours. */
 typedef struct ChainNode {

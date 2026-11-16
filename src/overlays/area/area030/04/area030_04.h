@@ -305,9 +305,9 @@ typedef struct FishingIcon {
     u8 second;
 } FishingIcon;
 
-typedef struct FishingIconData {
+typedef struct FishingIcons {
     FishingIcon records[13];
-} FishingIconData;
+} FishingIcons;
 
 typedef struct FishingThreshold {
     u16 thresholds[13];
@@ -365,7 +365,7 @@ extern char                  D_801D0C14[];
 extern FishingAnchors        D_801D0C30;
 extern char                  D_801D0C38[];
 /* D_801D0C3C */
-extern FishingIconData       g_FishingRankIcons;
+extern FishingIcons          g_FishingRankIcons;
 extern FishingThreshold      D_801D0C70;
 extern u8                    D_801D0C8C[];
 extern Callback              D_801E1CD4[];

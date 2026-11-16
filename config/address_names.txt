@@ -2,13 +2,13 @@
 include/slus/exports.h	g_ExceptionTitle
 include/slus/exports.h	g_ExceptionCauseNames
 include/slus/exports.h	g_LogoExePath
-include/sys/loader_tail.h	Rec8_80181E40
+include/sys/loader_tail.h	ScriptRefList
 src/engine/slus/SYS_ShowException.c	g_ExceptionTitle
 src/engine/slus/SYS_ShowException.c	g_ExceptionCauseNames
 src/engine/slus/SYS_StartLogo.c	g_LogoExePath
 src/engine/slus/data_80149800.c	g_LogoExePath
 src/engine/slus/data_8017F53C.c	Rec_8017F5B4
-src/engine/slus/data_80181CA8.c	Rec8_80181E40
+src/engine/slus/data_80181CA8.c	ScriptRefList
 src/engine/slus/slus.h	Rec_8017F5B4
 src/overlays/area/area008/13/D_801F2C04.c	WORLD00_AREA008_D_801F2C04
 src/overlays/area/area008/13/D_801F2C04.c	WORLD00_AREA008_D_801F2C10

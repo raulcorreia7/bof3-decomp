@@ -2,16 +2,16 @@
 
 /* func_801F2CD8 */
 MATCH void Area_UpdateSpin(void) {
-    u8         scratch[0x20];
-    WorldSpin* spin;
-    u8         index;
-    u8         timer;
+    u8          scratch[0x20];
+    SpinEffect* spin;
+    u8          index;
+    u8          timer;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100), 0);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     Area_SetCameraMatrix(scratch);
 
-    spin  = (WorldSpin*)AREA_WORK;
+    spin  = (SpinEffect*)AREA_WORK;
     index = 0;
     do {
         Area_DrawSpinTriangle(spin);

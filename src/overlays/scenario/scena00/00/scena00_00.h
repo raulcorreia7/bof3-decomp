@@ -154,7 +154,7 @@ typedef struct SceneEffectSlot {
 
 ASSERT_SIZE(SceneEffectSlot, 0x30);
 
-/* Cell `k` of the slot at byte offset `slot` in a SceneFx table. Retail addresses each
+/* Cell `k` of the slot at byte offset `slot` in a SceneSampleEffect table. Retail addresses each
  * cell from the slot offset; indexing the table by slot number reorders the frame setup. */
 #define SCENE_EFFECT_CELL(table, slot, k) (((SceneEffectSlot*)((u8*)(table) + (slot)))->cell[k])
 
@@ -162,66 +162,66 @@ ASSERT_SIZE(SceneEffectSlot, 0x30);
  * D_80147BD8 and func_801FC3A0 steps it every frame. `accum` is the 16.16 sample,
  * `delta` its per-frame step and `life_step` the amount taken off the cell's
  * lifetime. */
-typedef struct SceneFx {
+typedef struct SceneSampleEffect {
     SceneEffectSlot delta[SCENE_EFFECT_SLOT_COUNT];
     SceneEffectSlot accum[SCENE_EFFECT_SLOT_COUNT];
     SceneEffectSlot life_step[SCENE_EFFECT_SLOT_COUNT];
-} SceneFx;
+} SceneSampleEffect;
 
-ASSERT_SIZE(SceneFx, 0x10E0);
+ASSERT_SIZE(SceneSampleEffect, 0x10E0);
 
 /* One row of the per-slot effect arrays. */
 
 extern s16* volatile D_1F800010;
-extern u8             g_GameRequestKind;
-extern AreaScroll     D_80143F84;
+extern u8                g_GameRequestKind;
+extern AreaScroll        D_80143F84;
 /* D_801448FC */
 /* D_801448FF */
 /* D_80144900 */
 /* D_80144904 */
-extern u8             D_80145518[][4];
-extern u8             D_80146890;
-extern s32            D_801468A0;
-extern s32            D_801468A4;
-extern s32            D_801469EC;
-extern s32            D_801469F0;
-extern u8             D_80147A58[];
-extern u16            D_80147A86;
-extern u16            D_80147A88;
+extern u8                D_80145518[][4];
+extern u8                D_80146890;
+extern s32               D_801468A0;
+extern s32               D_801468A4;
+extern s32               D_801469EC;
+extern s32               D_801469F0;
+extern u8                D_80147A58[];
+extern u16               D_80147A86;
+extern u16               D_80147A88;
 /* One s32; the array form is kept because the scalar form changes the bytes of 8.c. */
-extern s32            g_AreaFocusY[];
-extern u16            D_80147A96;
-extern s32            D_80147ABC;
-extern s32            D_80147AC0;
-extern u32            D_80147B28;
-extern s32            D_80147BA0;
-extern s32            D_80147BA4;
-extern u8*            D_80147BD8;
-extern s8*            D_80147BDC;
-extern s32            D_80147BEC[];
-extern s32            D_80147BF0[];
-extern u8             D_80147C21;
-extern s32            D_80147C38;
-extern s32            D_80147C3C;
-extern s32            D_80147C54;
-extern s32            D_80147C58;
-extern SceneLineColor D_801F6C04;
-extern Callback       D_801FC980[];
-extern Callback       D_801FC988[];
-extern Callback       D_801FC99C[];
-extern Callback       D_801FC9AC[];
-extern Callback       D_801FC9D4[];
-extern s8             D_801FC9E8;
-extern s8             D_801FC9E9;
-extern s8             D_801FC9EC[];
-extern Callback       D_801FCA10[];
-extern Callback       D_801FCA1C[];
-extern u8             D_801FCA4C[];
-extern u8             D_801FCA5C[];
-extern u8             D_801FCA64[];
-extern u8             D_801FCA65[];
+extern s32               g_AreaFocusY[];
+extern u16               D_80147A96;
+extern s32               D_80147ABC;
+extern s32               D_80147AC0;
+extern u32               D_80147B28;
+extern s32               D_80147BA0;
+extern s32               D_80147BA4;
+extern u8*               D_80147BD8;
+extern s8*               D_80147BDC;
+extern s32               D_80147BEC[];
+extern s32               D_80147BF0[];
+extern u8                D_80147C21;
+extern s32               D_80147C38;
+extern s32               D_80147C3C;
+extern s32               D_80147C54;
+extern s32               D_80147C58;
+extern SceneLineColor    D_801F6C04;
+extern Callback          D_801FC980[];
+extern Callback          D_801FC988[];
+extern Callback          D_801FC99C[];
+extern Callback          D_801FC9AC[];
+extern Callback          D_801FC9D4[];
+extern s8                D_801FC9E8;
+extern s8                D_801FC9E9;
+extern s8                D_801FC9EC[];
+extern Callback          D_801FCA10[];
+extern Callback          D_801FCA1C[];
+extern u8                D_801FCA4C[];
+extern u8                D_801FCA5C[];
+extern u8                D_801FCA64[];
+extern u8                D_801FCA65[];
 /* D_801FCA90 */
-extern SceneFx        g_SceneEffect;
+extern SceneSampleEffect g_SceneEffect;
 
 void func_80164020();
 void func_801F6E04(void);

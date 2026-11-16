@@ -55,19 +55,19 @@ ASSERT_OFFSET(SceneBox, far, 0x18);
 typedef VECTOR ScenePathPoint;
 
 /* The work area: the area focus point, then the path points. */
-typedef struct ScenePathWork {
+typedef struct ScenePath {
     s32            x;      /* 0x00 */
     s32            y;      /* 0x04 */
     s32            z;      /* 0x08 */
     s32            unk_0C; /* 0x0C */
     ScenePathPoint points[8];
-} ScenePathWork;
+} ScenePath;
 
 ASSERT_SIZE(ScenePathPoint, 0x10);
 ASSERT_OFFSET(ScenePathPoint, vy, 0x04);
 ASSERT_OFFSET(ScenePathPoint, vz, 0x08);
-ASSERT_SIZE(ScenePathWork, 0x90);
-ASSERT_OFFSET(ScenePathWork, points, 0x10);
+ASSERT_SIZE(ScenePath, 0x90);
+ASSERT_OFFSET(ScenePath, points, 0x10);
 
 /* The eight 16-byte path points the scene's quad draws from: func_801F7084 stamps the box's eight
  * corners into D_801FA240 and func_801F732C draws them. */

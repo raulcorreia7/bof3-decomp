@@ -258,7 +258,7 @@ void Area_DrawHud(s16 x, s16 y);
 void Actor_StopMoving(void);
 void Area_ClearWorkColumn(void);
 u8*  Area_FindFreeWorkRow(void);
-void Area_InitSpin(WorldSpin* spin);
+void Area_InitSpin(SpinEffect* spin);
 void Area_UpdateRunGauge(void);
 void Area_ClaimSpawnSlot(void);
 s32  Area_UpdateSpawnSlots(void);

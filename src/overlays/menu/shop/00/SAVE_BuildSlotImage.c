@@ -1,7 +1,7 @@
 #include "shop_00.h"
 
 /* Save fields written over the unused bytes at SaveData+0xCA0. */
-typedef struct ShopWorkRecord {
+typedef struct SaveSlotSummary {
     u8        name[CHARACTER_NAME_LENGTH];
     u8        party_order[PARTY_SLOT_COUNT];
     u8        field_08;
@@ -11,26 +11,26 @@ typedef struct ShopWorkRecord {
     GameClock field_0C;
     u8        pad_10[4];
     s32       field_14;
-} ShopWorkRecord;
+} SaveSlotSummary;
 
-ASSERT_SIZE(ShopWorkRecord, 0x18);
+ASSERT_SIZE(SaveSlotSummary, 0x18);
 
 #ifdef NON_MATCHING
 NON_MATCHING void SAVE_BuildSlotImage(void) {
-    s32             mode;
-    s32             slot;
-    s32             i;
-    s32             j;
-    s32             name_index;
-    s32             col;
-    u16             n;
-    u16             sum;
-    u32             count;
-    u8*             dst;
-    u8*             src;
-    u16*            masks;
-    SaveData*       work;
-    ShopWorkRecord* row;
+    s32              mode;
+    s32              slot;
+    s32              i;
+    s32              j;
+    s32              name_index;
+    s32              col;
+    u16              n;
+    u16              sum;
+    u32              count;
+    u8*              dst;
+    u8*              src;
+    u16*             masks;
+    SaveData*        work;
+    SaveSlotSummary* row;
 
     SAVE_FormatSlot();
     func_801EF27C(1, 0x13, g_UiFormatBuffer);
@@ -52,7 +52,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
         masks[j] = g_InputMasks[j];
         n        = n + 1;
     } while ((u32)n < 9U);
-    row = (ShopWorkRecord*)&work->unk_C84[0x1C];
+    row = (SaveSlotSummary*)&work->unk_C84[0x1C];
     strncpy((s8*)row->name, (s8*)work->characters[0].name, CHARACTER_NAME_LENGTH);
     slot = 0;
     col  = 0 & HALF_MASK;
