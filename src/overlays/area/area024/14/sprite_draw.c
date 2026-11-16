@@ -271,7 +271,7 @@ MATCH void func_801F2DF8(const AreaSprite* sprite) {
     primitive = (POLY_FT4*)g_GfxPrimCursor;
 
     SetPolyFT4(primitive);
-    SetSemiTrans(primitive, 1);
+    PSX_SET_SEMI_TRANSPARENT(primitive);
 
     Area_ProjectPoint(object, &screen);
     size[0] = FAKE_VOLATILE(u16, work->half_size);
@@ -511,7 +511,7 @@ MATCH void func_801F3944(const SpinEffect* spin) {
     primitive = (POLY_G3*)g_GfxPrimCursor;
 
     SetPolyG3(primitive);
-    SetSemiTrans(primitive, 1);
+    PSX_SET_SEMI_TRANSPARENT(primitive);
     Area_ProjectPoint(&work->origin.x, POLY_XY(primitive, 0));
 
     point[0] = ((rcos(work->spin_angle) * work->vertex_a.vx - rsin(work->spin_angle) * work->vertex_a.vy) >> 8) * work->scale;
@@ -662,7 +662,7 @@ MATCH s32 func_801F3E48(u8 shade) {
         prim = (LINE_F4*)g_GfxPrimCursor;
         src++;
         SetLineF4(prim);
-        SetSemiTrans(prim, 1);
+        PSX_SET_SEMI_TRANSPARENT(prim);
         setRGB0(prim, shade, shade, shade);
 
         setVector(&verts[0], *src++, *src++, *src++);

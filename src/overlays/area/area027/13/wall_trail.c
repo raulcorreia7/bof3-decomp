@@ -255,7 +255,7 @@ MATCH void func_801F2F0C(const void* trail) {
     do {
         primitive = (LINE_G2*)g_GfxPrimCursor;
         SetLineG2(primitive);
-        SetSemiTrans(primitive, 1);
+        PSX_SET_SEMI_TRANSPARENT(primitive);
         index = i & BYTE_MASK;
 
         setXY2(primitive, *(s16*)(((const u8*)work + (index << 2) + 24)), *(s16*)(((const u8*)work + (index << 2) + 26)), *(s16*)(((const u8*)work + ((index + 1) << 2) + 24)),

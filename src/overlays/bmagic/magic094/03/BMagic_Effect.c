@@ -149,7 +149,7 @@ MATCH void func_801EF710(void) {
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
-        SetSemiTrans(prim, 1);
+        PSX_SET_SEMI_TRANSPARENT(prim);
         setXY0(prim, g_BattleEffectBattler->unk_2E.half, g_BattleEffectBattler->unk_30.half);
         angle    = i << 7;
         prim->x1 = g_BattleEffectBattler->unk_2E.half + FIXED_MUL(rsin(angle), D_1F800000_WORD[0]);

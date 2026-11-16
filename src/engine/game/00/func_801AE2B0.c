@@ -22,7 +22,7 @@ MATCH void func_801AE2B0(s16 quad_x, s16 quad_y, s32 quad_width, s32 quad_height
     GFX_AddDrawMode(getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
     prim = (POLY_F4*)g_GfxPrimCursor;
     SetPolyF4(prim);
-    SetSemiTrans(prim, 1);
+    PSX_SET_SEMI_TRANSPARENT(prim);
     setRGB0(prim, shade, shade, 0);
     setXY0(prim, x, y);
     width_plus_1  = (width & BYTE_MASK) + 1;

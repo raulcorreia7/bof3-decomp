@@ -20,7 +20,7 @@ MATCH void func_801F4F0C(s32* center, s32 radius, u16 angle, s32 offset_x, s32 o
         Area_AddCellPrim(center[0] + offset_x, center[1] + offset_y, 0, 0x18);
         packet = (POLY_F3*)g_GfxPrimCursor;
         SetPolyF3(packet);
-        SetSemiTrans(packet, 1);
+        PSX_SET_SEMI_TRANSPARENT(packet);
         setXY2(packet, (u16)screen0.vx, (u16)screen0.vy, (u16)screen1.vx, (u16)screen1.vy);
         angle += 0x100;
         point[0] = center[0] + FIXED_MUL(radius, rcos(angle));
@@ -29,7 +29,7 @@ MATCH void func_801F4F0C(s32* center, s32 radius, u16 angle, s32 offset_x, s32 o
         Area_ProjectPoint(point, &screen1);
         packet->x2 = (u16)screen1.vx;
         packet->y2 = (u16)screen1.vy;
-        setRGB0(packet, 128, 128, 128);
+        PSX_SET_NEUTRAL_RGB(packet);
         Area_AddCellPrim(center[0] + offset_x, center[1] + offset_y, 0, 0x18);
     } while (((i & BYTE_MASK)) < 4u);
 }

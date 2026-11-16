@@ -33,7 +33,7 @@ NON_MATCHING void func_801D95C4(u16 x, u16 y, u16 w, u16 h, u8 shade) {
     prim->y1 = (prim->y0 = y_origin + h);
     prim->y2 = y;
     setRGB0(prim, r, g, b);
-    SetSemiTrans(prim, 1);
+    PSX_SET_SEMI_TRANSPARENT(prim);
     GFX_AddPrim(2, sizeof(LINE_F3));
 
     if (shade != 0) {
@@ -49,7 +49,7 @@ NON_MATCHING void func_801D95C4(u16 x, u16 y, u16 w, u16 h, u8 shade) {
     prim->y0 = y + h;
     prim->y2 = (prim->y1 = y);
     setRGB0(prim, r, g, b);
-    SetSemiTrans(prim, 1);
+    PSX_SET_SEMI_TRANSPARENT(prim);
     GFX_AddPrim(2, sizeof(LINE_F3));
 }
 #else

@@ -226,7 +226,7 @@ MATCH void func_801EF4E8(void) {
         setVector(&g_ScratchPadVectors[3], FIXED_MUL(rsin(g_ScratchPad.cells.halves[5]), g_ScratchPad.cells.halves[1]), FIXED_MUL(rcos(g_ScratchPad.cells.halves[5]), g_ScratchPad.cells.halves[1]), 0);
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
-        SetSemiTrans(prim, 1);
+        PSX_SET_SEMI_TRANSPARENT(prim);
         setRGB0(prim, g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2]);
         setRGB1(prim, g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2]);
         setRGB2(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);

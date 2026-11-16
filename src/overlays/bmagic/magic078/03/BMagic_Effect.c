@@ -160,7 +160,7 @@ MATCH void func_801EFE14(LINE_F4* prim, s32* out, SVECTOR v0, SVECTOR v1, SVECTO
     long flag;
 
     SetLineF4(prim);
-    SetSemiTrans(prim, 1);
+    PSX_SET_SEMI_TRANSPARENT(prim);
     setRGB0(prim, 0x40, 0x40, 0xC0);
     *out = RotAverage4(&v0, &v1, &v2, &v3, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p, &flag);
 }
@@ -307,7 +307,7 @@ NON_MATCHING void func_801F02FC(void) {
             Area_AddCellPrim(x, y, 2, sizeof(DR_MODE));
             prim = (POLY_F4*)g_GfxPrimCursor;
             SetPolyF4(prim);
-            SetSemiTrans(prim, 1);
+            PSX_SET_SEMI_TRANSPARENT(prim);
             RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                           &depth, &flag);
             if (g_Task->header.step < 5) {

@@ -78,7 +78,7 @@ MATCH void func_801D218C(void) {
             GFX_AddDitheredDrawMode(2, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256));
             primitive = (LINE_G2*)g_GfxPrimCursor;
             SetLineG2(primitive);
-            SetSemiTrans(primitive, 1);
+            PSX_SET_SEMI_TRANSPARENT(primitive);
             RotTransPers((SVECTOR*)g_ScratchPadVectors, (long*)&primitive->x0, &p, &flag);
             if RANDOM_MASK (1) {
                 g_ScratchPad = RANDOM_MASK(0x3F) + 0x80;

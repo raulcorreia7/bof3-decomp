@@ -90,7 +90,7 @@ MATCH void func_80167910(void) {
         g_ScratchPadVectors[2].vz = 0;
         prim                      = (POLY_G3*)g_GfxPrimCursor;
         setPolyG3(prim);
-        SetSemiTrans(prim, 1);
+        PSX_SET_SEMI_TRANSPARENT(prim);
         RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &p, &sxy2);
         setRGB0(prim, 0x80, 0x80, 0x80);
         setRGB1(prim, 0, 0, 0);

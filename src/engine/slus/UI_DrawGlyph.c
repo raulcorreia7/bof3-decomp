@@ -49,7 +49,7 @@ MATCH void UI_DrawGlyph(s32 color, u8* text) {
         GLYPH->x3 = (s16)GLYPH_RIGHT;
         GLYPH->y3 = (s16)GLYPH_BOTTOM;
         SetPolyFT4(GLYPH);
-        SetSemiTrans(g_GfxPrimCursor, 1);
+        PSX_SET_SEMI_TRANSPARENT(g_GfxPrimCursor);
         GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
     }
     g_MessageWindow.text.x += (u16)WINDOW->window.cue_counter;

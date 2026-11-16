@@ -329,7 +329,7 @@ MATCH void func_801EFA80(void) {
     Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
-    SetSemiTrans(prim, 1);
+    PSX_SET_SEMI_TRANSPARENT(prim);
     g_Task->unk_0C = 0;
     g_Task->unk_10 = -0x1000;
     Effect_RotatePosition(g_Task);
@@ -452,7 +452,7 @@ MATCH void func_801F0004(void) {
     for (i = 1; i < g_Task->unk_14 && i < 56; i++) {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
-        SetSemiTrans(prim, 1);
+        PSX_SET_SEMI_TRANSPARENT(prim);
         g_ScratchPadVectors[0].vx = g_ScratchPadVectors[2].vx;
         g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy;
         g_ScratchPadVectors[0].vz = g_ScratchPadVectors[2].vz;
@@ -612,7 +612,7 @@ MATCH void func_801F093C(void) {
         }
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
-        SetSemiTrans(prim, 1);
+        PSX_SET_SEMI_TRANSPARENT(prim);
         g_ScratchPadVectors[0].vx = g_ScratchPadVectors[1].vx;
         g_ScratchPadVectors[0].vy = g_ScratchPadVectors[1].vy;
         g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx;
@@ -748,7 +748,7 @@ NON_MATCHING void func_801F0FBC(void) {
             Area_AddCellPrim(x, y, z, sizeof(DR_MODE));
             prim = (LINE_F2*)g_GfxPrimCursor;
             SetLineF2(prim);
-            SetSemiTrans(prim, 1);
+            PSX_SET_SEMI_TRANSPARENT(prim);
             g_ScratchPadVectors[0].vx = FIXED_MUL(rcos(i << 6) * 16, radius);
             g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(i << 6) * 16, radius);
             g_ScratchPadVectors[0].vz = 0;

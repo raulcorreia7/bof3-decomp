@@ -16,7 +16,7 @@ MATCH void UI_DrawWaitMarker(s16 x, s16 y) {
         setWH(prim, 8, 8);
         setXY0(prim, x, y);
         setUV0(prim, 208, 248);
-        SetSemiTrans(prim, 1);
+        PSX_SET_SEMI_TRANSPARENT(prim);
         GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
     }
 }

@@ -20,7 +20,7 @@ MATCH void func_801D8248(s16 x, s16 y, u8 height) {
     prim->v0    = 154;
     prim->v1    = 154;
     prim->y0    = y;
-    setRGB0(prim, 128, 128, 128);
+    PSX_SET_NEUTRAL_RGB(prim);
     bottom   = prim->y0;
     prim->y1 = y;
     prim->x2 = prim->x0;

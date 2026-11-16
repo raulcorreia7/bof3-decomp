@@ -151,7 +151,7 @@ MATCH void func_801EF5F4(void) {
         g_ScratchPad.cells.halves[4] = ((g_BMagicOrbit->unk_0B + D_801EF9F4[i]) & 0xF) << 8;
         prim                         = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
-        SetSemiTrans(prim, 1);
+        PSX_SET_SEMI_TRANSPARENT(prim);
         g_ScratchPadVectors[1].vx = FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
         g_ScratchPadVectors[1].vy = FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
         setVector(&g_ScratchPadVectors[2], FIXED_MUL(rsin(g_ScratchPad.cells.halves[3]), g_ScratchPad.cells.halves[1]), FIXED_MUL(rcos(g_ScratchPad.cells.halves[3]), g_ScratchPad.cells.halves[1]),

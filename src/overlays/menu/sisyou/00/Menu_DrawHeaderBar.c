@@ -29,7 +29,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
-    SetSemiTrans(primitive, 1);
+    PSX_SET_SEMI_TRANSPARENT(primitive);
     clut_x = (((s32)window_style) << 5) + 0x10;
     ;
     setXY0(primitive, left, top);
@@ -63,7 +63,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     primitive  = (POLY_FT4*)g_GfxPrimCursor;
     odd_width  = (width - 3) & 1;
     SetPolyFT4(primitive);
-    SetSemiTrans(primitive, 1);
+    PSX_SET_SEMI_TRANSPARENT(primitive);
     setXY4(primitive, (s16)(x + 2), top, (s16)(((s16)(x + 2)) + half_width), top, (s16)(x + 2), bottom_y, (s16)(((s16)(x + 2)) + half_width), bottom_y);
     setUV4(primitive, 0, 0, (u8)half_inner, 0, 0, bottom_v, (u8)half_inner, bottom_v);
     setRGB0(primitive, 172, 172, 172);
@@ -74,7 +74,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     odd_width_u16 = (u16)odd_width;
     primitive     = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
-    SetSemiTrans(primitive, 1);
+    PSX_SET_SEMI_TRANSPARENT(primitive);
     primitive->y0 = top;
     base_x        = (s16)(x + half_width);
     primitive->x0 = (s16)(base_x + 2);
@@ -92,7 +92,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
-    SetSemiTrans(primitive, 1);
+    PSX_SET_SEMI_TRANSPARENT(primitive);
     primitive->y2 = bottom_y;
     primitive->v2 = bottom_v;
     edge_x        = (s16)(x + width_plus_1);

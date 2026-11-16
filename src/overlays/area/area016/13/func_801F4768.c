@@ -71,7 +71,7 @@ MATCH void func_801F4768(void) {
             prim = (POLY_FT4*)g_GfxPrimCursor;
             SetPolyFT4(prim);
             SetShadeTex(prim, 0);
-            SetSemiTrans(prim, 1);
+            PSX_SET_SEMI_TRANSPARENT(prim);
             *(u32*)&prim->x0 = *(u32*)&cell->x0;
             *(u32*)&prim->x1 = *(u32*)&cell->x1;
             *(u32*)&prim->x2 = *(u32*)&cell->x2;

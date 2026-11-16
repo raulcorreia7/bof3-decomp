@@ -184,7 +184,7 @@ MATCH void func_801EF3A0(void) {
         Area_AddCellPrim(x, y, 2, sizeof(DR_MODE));
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
-        SetSemiTrans(prim, 1);
+        PSX_SET_SEMI_TRANSPARENT(prim);
         setRGB0(prim, g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[4]);
         setRGB1(prim, g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6], g_ScratchPad.cells.halves[7]);
         setRGB2(prim, g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[4]);

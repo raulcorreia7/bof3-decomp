@@ -201,7 +201,7 @@ MATCH void func_801F01A4(void) {
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
-    SetSemiTrans(prim, 1);
+    PSX_SET_SEMI_TRANSPARENT(prim);
     g_ScratchPad.cells.halves[0] = 32;
     setXY4(prim, g_Task->unk_2E.half + FIXED_MUL(rcos(3328), g_ScratchPad.cells.halves[0]), g_Task->unk_30.half + FIXED_MUL(rsin(3328), g_ScratchPad.cells.halves[0]),
            g_Task->unk_2E.half + FIXED_MUL(rcos(2560), g_ScratchPad.cells.halves[0]), g_Task->unk_30.half + FIXED_MUL(rsin(2560), g_ScratchPad.cells.halves[0]),
