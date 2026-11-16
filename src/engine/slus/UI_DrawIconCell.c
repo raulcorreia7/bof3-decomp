@@ -5,7 +5,7 @@
 #ifdef NON_MATCHING
 /* The 16x16 icon cell at index in the sprite sheet, drawn as a textured quad at (x, y) with the
  * given width, height and shade; the clut row comes from a per-index table. */
-HAND_ASM void func_801644D8(s32 index, s32 x, s32 y, s32 width, s32 height, s32 shade) {
+HAND_ASM void UI_DrawIconCell(s32 index, s32 x, s32 y, s32 width, s32 height, s32 shade) {
     POLY_FT4* prim;
     u8        slot = index;
 
@@ -44,5 +44,5 @@ HAND_ASM void func_801644D8(s32 index, s32 x, s32 y, s32 width, s32 height, s32 
     GFX_AddPrim(1, sizeof(POLY_FT4));
 }
 #else
-INCLUDE_ASM(func_801644D8);
+INCLUDE_ASM(UI_DrawIconCell);
 #endif

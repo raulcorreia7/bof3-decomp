@@ -231,7 +231,8 @@ void         SYS_SetFlag(void* bits, u8 bit_index);
 void         SYS_ClearFlag(void* bits, u8 bit_index);
 /* func_8015B5D4 */
 s32          SYS_TestFlag(void* bits, s32 bit_index);
-extern void  func_8015BAC4(u8 selector);
+/* func_8015BAC4 */
+extern void  Actor_DispatchSelectorScript(u8 selector);
 /* func_8015B5F4 */
 void         SYS_ToggleFlag(void* bits, u8 bit_index);
 /* func_8015BC14 */
@@ -397,8 +398,9 @@ void         LZ77_DecodeBegin(u8* dst);
 /* func_80164064 */
 s32          LZ77_DecodeStep(void);
 /* Main-exe functions called by this overlay. */
+/* UI_DrawIconCell */
 /* func_801644D8 */
-void         func_801644D8(s32 index, s32 x, s32 y, s32 width, s32 height, s32 shade);
+void         UI_DrawIconCell(s32 index, s32 x, s32 y, s32 width, s32 height, s32 shade);
 /* func_801647C4 */
 void         Menu_DrawCursorSprite(u16 x, u16 y, s32 unused);
 /* func_80164A44 */

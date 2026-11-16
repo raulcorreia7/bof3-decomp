@@ -257,7 +257,7 @@ Callback g_ActorTypes[187] = {func_8019A210,
                               func_801F32C0,
                               func_801F7BA8};
 
-AreaHandler D_801C7F5C[11] = {
+AreaHandler g_AreaHandlers[11] = {
     {func_801F2EEC, func_801F45CC, func_801F4178, func_801F341C, func_801F4768, &D_801F4DA0, AREA_ID_YRAAL_WORLD_MAP, {0, 0, 0}},
     {func_801F2E20, func_801F4500, func_801F40AC, func_801F3350, func_801F469C, &D_801F4CC8, AREA_ID_YRAAL_WORLD_MAP_BEFORE_NUE, {0, 0, 0}},
     {func_801F2EEC, func_801F45CC, func_801F4178, func_801F341C, func_801F4768, &D_801F4DA4, AREA_ID_WYNDIA_WORLD_MAP, {0, 0, 0}},
@@ -319,7 +319,7 @@ Callback D_801C81C0[3] = {func_8019EB38, func_8019EC20, func_8019ED40};
 
 Callback D_801C81CC[4] = {func_8019F310, func_8019F384, func_8019F430, func_8019F4F8};
 
-Callback D_801C81DC[105] = {
+Callback g_TaskModeHandlers[105] = {
     func_8019F9D0,           func_801F7D04,           func_8019A370,           func_8019A370,           func_801F3120,           func_801F4CDC,           (Callback)func_801F2C04,
     (Callback)func_801F2C04, func_801F31AC,           (Callback)func_801F2C04, func_801F37B0,           func_801F35FC,           (Callback)func_801F3944, func_801F3D60,
     func_801F2C1C,           func_801F3014,           func_801F2E98,           (Callback)func_801F2C04, (Callback)func_801F2C04, func_801F33B4,           func_80117A30,
@@ -412,7 +412,7 @@ SceneFunc g_SceneObjects[66] = {
     (SceneFunc)&D_801F4288, (SceneFunc)&D_801F3184,   (SceneFunc)&D_801F15B8,   (SceneFunc)func_801F2CA8,
     (SceneFunc)&D_801F4594, (SceneFunc)&D_801F3C9C};
 
-AreaHooks D_801C86F8 = {
+AreaHooks g_AreaHooks = {
     {{AREA_ID_MOMO_TOWER_UPPER, {0, 0, 0}, func_801F33A8},      {AREA_ID_DAUNA_MINE_ZOMBIE_DRAGON, {0, 0, 0}, func_801F4F60}, {AREA_ID_PLANT, {0, 0, 0}, func_801F3194},
      {AREA_ID_LIGHTHOUSE_INSIDE, {0, 0, 0}, func_801F5880},     {AREA_ID_STEEL_BEACH_FREIGHTER, {0, 0, 0}, func_801F3350},    {AREA_ID_DUMP, {0, 0, 0}, func_801F3E14},
      {AREA_ID_BLACK_SHIP_EARLY, {0, 0, 0}, func_801F5130},      {AREA_ID_COLONY_OUTSIDE, {0, 0, 0}, func_801F4504},           {AREA_ID_FAIRY_VILLAGE_DOLPHIN, {0, 0, 0}, func_801F4528},

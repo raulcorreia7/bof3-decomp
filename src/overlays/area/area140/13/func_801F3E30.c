@@ -24,7 +24,7 @@ NON_MATCHING void func_801F3E30(void) {
                 }
             }
         } else {
-            func_8015BAC4(g_Task->direction_08);
+            Actor_DispatchSelectorScript(g_Task->direction_08);
         }
         index = (g_Task->direction_08 & 0x7) >> 1;
         if ((g_InputPressed & g_InputMasks[INPUT_SLOT_ACTION]) != 0) {

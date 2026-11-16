@@ -24,9 +24,9 @@ MATCH u32 func_801A06D8(void) {
                         g_Actors[i].unk_79 = g_Task->direction_08 & 0x7;
                         if (!(g_Task->option_flags & ACTOR_OPT_KEEP_FACING)) {
                             g_Task->direction_08 = (g_Game.members[0].facing ^ 0x4) & 0x7;
-                            func_8015BAC4(g_Task->direction_08);
+                            Actor_DispatchSelectorScript(g_Task->direction_08);
                         } else {
-                            func_8015BAC4(g_Task->direction_08 & 0x7);
+                            Actor_DispatchSelectorScript(g_Task->direction_08 & 0x7);
                         }
                         if (g_Task->header.mode == 0xA) {
                             g_Actors[i].unk_79 |= 1;
@@ -49,7 +49,7 @@ MATCH u32 func_801A06D8(void) {
             flags = g_Actors[i].interaction_flags;
             if (!(flags & 0x40)) {
                 if (flags & ACTOR_FLAG_MOVING) {
-                    func_8015BAC4(g_Task->direction_08);
+                    Actor_DispatchSelectorScript(g_Task->direction_08);
                     g_Actors[i].interaction_flags &= ~ACTOR_FLAG_MOVING;
                 } else if (!(g_Task->option_flags & ACTOR_OPT_WAIT_STREAM)) {
                     n = g_Actors[i].unk_78 - 2 < 0 ? 0 : g_Actors[i].unk_78 - 2;

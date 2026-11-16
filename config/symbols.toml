@@ -3099,7 +3099,7 @@ Menu_DrawPanelCursor = { addr = 0x80199678, type = "func", source = "Draws the m
 Menu_SlidePanelLeft = { addr = 0x8019973C, type = "func", source = "Moves the master panel 0x20 pixels left and clamps its x at 0x98." }
 Actor_DispatchAll = { addr = 0x8019A0E4, type = "func", source = "Runs g_ActorTypes[type] for each of the g_SpawnedActors entries whose header.flags is set." }
 Game_FindArea = { addr = 0x8019A194, type = "func", source = "Returns the index of the AreaHandler whose key_18 equals g_GameAreaId, or GAME_AREA_HANDLER_COUNT (11) when none matches." }
-Game_GetAreaMapPoints = { addr = 0x8019A1D4, type = "func", source = "Returns map_points_14 of the current area handler row (D_801C7F5C indexed by Game_FindArea); func_801B690C searches those rows by actor cell." }
+Game_GetAreaMapPoints = { addr = 0x8019A1D4, type = "func", source = "Returns map_points_14 of the current area handler row (g_AreaHandlers indexed by Game_FindArea); func_801B690C searches those rows by actor cell." }
 Area_GetVx = { addr = 0x8019C344, type = "func", source = "the body returns g_Task->vx" }
 Game_RequestAreaChange = { addr = 0x8019FA28, type = "func", source = "Requests an area change: stores the entry seed and position in g_GameContextSeed, g_GameEntryPosX and g_GameEntryPosY and sets g_GameStateIndex to 5." }
 Area_SetXFixed = { addr = 0x801A253C, type = "func", source = "the body stores into g_Task->pos.x.fixed" }
@@ -3125,7 +3125,7 @@ Menu_OpenMaster = { addr = 0x801A7CF0, type = "func", source = "Scene event 4: l
 Scene_StartShopSave = { addr = 0x801A802C, type = "func", source = "Scene event 10: calls UI_SetMode, plays an XA stream and sets g_GameEntryState to 7, the shop entry state." }
 Message_RunAreaMessage = { addr = 0x801A82F8, type = "func", source = "Starts area message 0xD8, waits until g_GameStateIndex leaves 2, then clears the script-active flag and the scene event byte D_801448EB." }
 Scene_DispatchObject = { addr = 0x801A86D4, type = "func", source = "Runs the g_SceneObjects callback selected by unk_7A of the actor, with the actor and g_SceneEventFlags." }
-Game_CallArea = { addr = 0x801A8CB4, type = "func", source = "Finds the entry of g_GameAreaId in the 28-entry area handler table D_801C86F8 and calls its handler with the two coordinates; returns 0 when the area has none. Called by Game_CallScenario." }
+Game_CallArea = { addr = 0x801A8CB4, type = "func", source = "Finds the entry of g_GameAreaId in the 28-entry area handler table g_AreaHooks and calls its handler with the two coordinates; returns 0 when the area has none. Called by Game_CallScenario." }
 Area_MoveActorRoute = { addr = 0x801ABBA8, type = "func", source = "samples the height along the route, paces it with g_RouteSpeedScale and moves the actor" }
 Char_GetExp = { addr = 0x801ADDD4, type = "func", source = "the body returns g_LevelGrowth[(u8)char_id][new_level].exp" }
 UI_DrawWindow = { addr = 0x801AE3F0, type = "func", source = "Draws a window from x with a left cap and a body stretched to width, height rows tall, with the palette column of the style argument; flags 0x80 and 0x20 trim the top and the bottom." }
@@ -3223,8 +3223,8 @@ g_MenuTaskStates = { addr = 0x801C7C24, size = 0x10, source = "4 handlers of the
 D_801C7C34 = { addr = 0x801C7C34, size = 0x28, source = "The five menu category names ITEM, WEAPON, ARMOR, OPTION and VITAL, padded to eight bytes; D_801C7C5C points at each row." }
 D_801C7C5C = { addr = 0x801C7C5C, size = 0x14, source = "Pointers to the five menu category names D_801C7C34, picked by func_801999F8 through the menu task's unk_0A." }
 g_ActorTypes = { addr = 0x801C7C70, size = 0x2EC, source = "187 actor handlers, indexed by the type of each active g_SpawnedActors entry by Actor_DispatchAll; they live in the resident image and in the shared, area and scenario windows." }
-D_801C7F5C = { addr = 0x801C7F5C, size = 0x134, source = "The 11 field handler rows of the world areas: four step handlers, a map-point table, the area id and the camera entry; Game_FindArea picks the row and its callers run each handler." }
-D_801C7F74 = { addr = 0x801C7F74, size = 0x1, alias = true, source = "The first byte of D_801C7F5C, the handler id Game_FindArea compares as it scans the area rows." }
+g_AreaHandlers = { addr = 0x801C7F5C, type = "AreaHandler", size = 0x134, source = "area-specific handlers and map points selected by Game_FindArea" }
+D_801C7F74 = { addr = 0x801C7F74, size = 0x1, alias = true, source = "The first byte of g_AreaHandlers, the handler id Game_FindArea compares as it scans the area rows." }
 D_801C8090 = { addr = 0x801C8090, size = 0xC, source = "The three mode handlers func_8019A3FC, func_8019A53C and func_8019A7D4 that func_8019A3B8 runs by g_Task->header.mode." }
 s_SceneHandlerIds = { addr = 0x801C809C, size = 0x8, source = "Scene handler id by entry; func_8019A3FC passes the entry for g_Task->unk_06 to the scene handler dispatcher." }
 D_801C80A4 = { addr = 0x801C80A4, size = 0x18, source = "The six handlers func_8019A53C runs by g_Task->unk_06: five share func_8019A580, one is func_8019A6AC and one func_8019A630." }
@@ -3248,7 +3248,7 @@ D_801C81B0 = { addr = 0x801C81B0, size = 0x8, source = "The two step handlers fu
 D_801C81B8 = { addr = 0x801C81B8, size = 0x8, source = "The two step handlers func_8019E95C and func_8019EA60 that func_8019E918 runs by g_Task->header.step." }
 D_801C81C0 = { addr = 0x801C81C0, size = 0xC, source = "The three mode handlers func_8019EB38, func_8019EC20 and func_8019ED40 that func_8019EAF4 runs by g_Task->header.mode." }
 D_801C81CC = { addr = 0x801C81CC, size = 0x10, source = "The four mode handlers func_8019F310, func_8019F384, func_8019F430 and func_8019F4F8 that func_8019F2CC runs by g_Task->header.mode." }
-D_801C81DC = { addr = 0x801C81DC, size = 0x1A4, source = "The 105 mode handlers that func_8019F98C runs by g_Task->header.mode; the entries are the scene and area step functions." }
+g_TaskModeHandlers = { addr = 0x801C81DC, type = "Callback", size = 0x1A4, source = "callbacks selected by the current task mode" }
 s_EntityModes = { addr = 0x801C8380, size = 0x4, source = "Entity mode byte by scene entry mode, read by func_8019FF88." }
 D_801C8384 = { addr = 0x801C8384, size = 0x38, source = "The 28 entity seed values func_801A02E8 compares against the entity's seed byte." }
 D_801C83BC = { addr = 0x801C83BC, size = 0x1C, source = "The seven actor step handlers func_801A0AE4 and the rows it builds run by the actor's header.step; the first four share func_801A225C." }
@@ -3266,7 +3266,7 @@ g_SceneEvents = { addr = 0x801C84BC, size = 0x100, source = "Scene event callbac
 s_SceneStateStepArgs = { addr = 0x801C85BC, size = 0x8, source = "Argument of each scene state step; func_801A7E54 passes the entry for D_801448ED to Scene_SetupParty." }
 D_801C85C4 = { addr = 0x801C85C4, size = 0x2C, source = "The 11 area handlers (Fishing_ShowLocation four times) that func_801A839C runs by the area handler index." }
 g_SceneObjects = { addr = 0x801C85F0, size = 0x108, source = "Scene object callbacks, indexed by the callback_index of the actor by Scene_DispatchObject." }
-D_801C86F8 = { addr = 0x801C86F8, size = 0xE0, source = "The per-area hook table: each row holds an area id, a position and the handler Game_CallArea calls when the party enters." }
+g_AreaHooks = { addr = 0x801C86F8, type = "AreaHooks", size = 0xE0, source = "per-area callbacks selected by Game_CallArea" }
 s_TalkMessageIds = { addr = 0x801C87D8, size = 0x24, source = "Message id by talk id and party slot, read by func_801A8F94." }
 s_ScriptOpcodeOffsets = { addr = 0x801C87FC, size = 0x100, source = "Offset each script opcode adds to the cursor; func_801AC8F0 advances by it." }
 D_801C88FC = { addr = 0x801C88FC, size = 0x8, source = "The two tint-lighten handlers func_801ACA14 and func_801ACAC0 that actor script stage 0x88 runs through func_801AC9D0." }
@@ -7390,6 +7390,7 @@ Game_IsScriptVar3Equal = { addr = 0x8015BA04, type = "func", source = "Tests whe
 Game_SetScriptVar = { addr = 0x8015BA2C, type = "func", source = "Sets a script variable." }
 Game_IsScriptVarEqual = { addr = 0x8015BA50, type = "func", source = "Compares a script variable with a value." }
 Game_IncScriptVar = { addr = 0x8015BA84, type = "func", source = "Increments a script variable." }
+Actor_DispatchSelectorScript = { addr = 0x8015BAC4, type = "func", source = "Dispatches the actor script selected by the selector, task mode, and current actor context." }
 Area_TurnCameraX = { addr = 0x8015BBA4, type = "func", source = "Turns the camera around the x axis." }
 Area_StepCameraX = { addr = 0x8015BC14, type = "func", source = "Steps the camera x angle." }
 Area_TurnCameraY = { addr = 0x8015BCA4, type = "func", source = "Turns the camera around the y axis." }
@@ -7499,6 +7500,7 @@ SND_FadeCDVolume = { addr = 0x80163F50, type = "func", source = "Steps the latch
 LZ77_DecodeBegin = { addr = 0x80164028, type = "func", source = "Starts decoding an EMI entry." }
 LZ77_DecodeStep = { addr = 0x80164064, type = "func", source = "Decodes one step of the EMI stream." }
 func_801642D0 = { addr = 0x801642D0, type = "func", source = "The restore tail of the handwritten dispatcher func_801642CC: it restores $s0-$s7 from the $t0 context base and returns." }
+UI_DrawIconCell = { addr = 0x801644D8, type = "func", source = "Draws one indexed icon cell as a textured quad with its selected texture page and palette." }
 Menu_DrawCursorSprite = { addr = 0x801647C4, type = "func", source = "Draws the menu cursor sprite." }
 Char_ApplyMaster = { addr = 0x801648A0, type = "func", source = "Applies the character's master bonuses." }
 Char_RebuildStats = { addr = 0x80164A44, type = "func", source = "Rebuilds the stats of a character from base, fatigue and equipment." }

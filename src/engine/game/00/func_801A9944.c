@@ -34,7 +34,7 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
     switch (opcode) {
         case 0xE1:
             state->unk_05 = g_Task->direction_08;
-            func_8015BAC4((target_bytes + state->cursor)[1]);
+            Actor_DispatchSelectorScript((target_bytes + state->cursor)[1]);
             state->unk_08 = (target_bytes + state->cursor)[2];
             func_801A17A0((u8*)state);
             state->flag_00 = ((state->flag_00 & ~ACTOR_FLAG_SCRIPT_REQUEST) | ACTOR_FLAG_SCRIPT_PENDING);
@@ -44,7 +44,7 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
             state->unk_05  = g_Task->direction_08;
             state->flag_00 = (state->flag_00 | ACTOR_FLAG_MOVING);
             selection      = g_Game.members[0].facing ^ 0x4;
-            func_8015BAC4(selection);
+            Actor_DispatchSelectorScript(selection);
             goto block_5; /* E0 and E3 share the operand-read tail */
         case 0xE3:
             state->unk_05 = (g_Task->direction_08 & 0x7);

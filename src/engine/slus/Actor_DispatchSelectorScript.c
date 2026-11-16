@@ -5,7 +5,8 @@
  * (0xFF) or runs func_8014D6DC (table byte 5 or 6) or func_8014D6B8 while work[0x4B] differs. Mode 6 sends the selector
  * itself through func_8014D8D4.
  */
-MATCH void func_8015BAC4(u8 selector) {
+/* func_8015BAC4 */
+MATCH void Actor_DispatchSelectorScript(u8 selector) {
     Actor* work;
     Actor* frame;
     u8     context;
