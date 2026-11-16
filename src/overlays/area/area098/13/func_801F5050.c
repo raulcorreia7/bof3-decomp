@@ -18,8 +18,7 @@ NON_MATCHING void func_801F5050(u8 shade) {
     Area_ProjectPoint(point, &screen0);
     point[2] = TO_COORD(1280);
     Area_ProjectPoint(point, &screen1);
-    i = 0;
-    do {
+    for (i = 0; i < 4; i++) {
         point[0] += TO_COORD(1);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK, 0);
         Area_AddCellPrim(point[0], point[1], 0, sizeof(DR_MODE));
@@ -42,8 +41,7 @@ NON_MATCHING void func_801F5050(u8 shade) {
         packet->g0 = shade;
         packet->b0 = shade;
         Area_AddCellPrim(point[0], point[1], 0, sizeof(POLY_F4));
-        i++;
-    } while (i < 4);
+    }
 }
 #else
 INCLUDE_ASM(func_801F5050);

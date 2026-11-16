@@ -1,7 +1,6 @@
 #include "area145_14.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F2F30(s32* first, s32* second) {
+MATCH void func_801F2F30(s32* first, s32* second) {
     DVECTOR  screen;
     VECTOR   vertex;
     MATRIX   camera;
@@ -38,7 +37,7 @@ NON_MATCHING void func_801F2F30(s32* first, s32* second) {
         vertex.vz = vz;
         vertex.vy += delta >> 4;
         if (i < 16) {
-            vertex.vz = vertex.vz - 0x800000 + ((rand() & 0xFFF) << 12);
+            vertex.vz = vertex.vz - (0x800000 - ((rand() & 0xFFF) << 12));
         }
         Area_ProjectPoint(&vertex.vx, &screen);
         prim->x1 = screen.vx;
@@ -49,6 +48,3 @@ NON_MATCHING void func_801F2F30(s32* first, s32* second) {
         i++;
     } while (i < 17);
 }
-#else
-INCLUDE_ASM(func_801F2F30);
-#endif

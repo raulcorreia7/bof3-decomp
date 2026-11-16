@@ -9,9 +9,9 @@ NON_MATCHING void func_801D53AC(void) {
     u16 id;
 
     Menu_DrawClutStrip(D_80144953);
-    y                                                           = (u16)g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.y + 4;
     id                                                          = D_801EC440[(s8)D_801ED620];
     x                                                           = (u16)g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.x + (s8)D_801ED620 * 0x30;
+    y                                                           = (u16)g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.y + 4;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = y;
     g_MenuPanelTasks[MENU_START_PANEL_ITEMS].flags              = 1;

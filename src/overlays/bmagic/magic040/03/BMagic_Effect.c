@@ -186,4 +186,35 @@ MATCH void func_801EF7FC(void) {
     EFFECT_DRAW_GLOW_FAN(g_Task->timer, 0x80);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EFA3C(void) {
+    LINE_F2* line;
+    s32      tpage;
+    s32      i;
+
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
+    i                            = 0;
+    g_ScratchPad.cells.halves[0] = g_Task->unk_2E.half;
+    g_ScratchPad.cells.halves[1] = g_Task->unk_30.half;
+    g_ScratchPad.cells.halves[5] = g_Task->timer;
+    g_ScratchPad.cells.halves[2] = g_Task->unk_09;
+    for (i = 0; i < 32; i++) {
+        line = (LINE_F2*)g_GfxPrimCursor;
+        SetLineF2(line);
+        SetSemiTrans(line, 1);
+        g_ScratchPad.cells.halves[4] = i << 7;
+        line->x0                     = g_ScratchPad.cells.halves[0] + ((rsin((s16)(i << 7)) * g_ScratchPad.cells.halves[2]) >> 12);
+        line->y0                     = g_ScratchPad.cells.halves[1] + ((rcos(g_ScratchPad.cells.halves[4]) * g_ScratchPad.cells.halves[2]) >> 12);
+        g_ScratchPad.cells.halves[4] = (i + 1) << 7;
+        line->x1                     = g_ScratchPad.cells.halves[0] + ((rsin((s16)((i + 1) << 7)) * g_ScratchPad.cells.halves[2]) >> 12);
+        line->y1                     = g_ScratchPad.cells.halves[1] + ((rcos(g_ScratchPad.cells.halves[4]) * g_ScratchPad.cells.halves[2]) >> 12);
+        setRGB0(line, g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[5]);
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(LINE_F2));
+    }
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
+}
+#else
 INCLUDE_ASM(func_801EFA3C);
+#endif
