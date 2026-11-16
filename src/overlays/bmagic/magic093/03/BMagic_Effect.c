@@ -172,7 +172,6 @@ MATCH void func_801EF600(void) {
     s16 phase;
     u8  mask;
     u8  count;
-    s16 phase;
 
     angle                            = g_Task->unk_09 * 8 - (g_Task->timer - 0xC0);
     D_1F800000.view.effect.params[0] = angle;

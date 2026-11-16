@@ -373,7 +373,7 @@ MATCH void func_80117DF0(void) {
 }
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_80117E78(s32 brightness, s32 arg1) {
+NON_MATCHING void func_80117E78(s32 brightness, s32 unused) {
     POLY_FT4* primitive;
     SVECTOR*  corner;
     s32       row;

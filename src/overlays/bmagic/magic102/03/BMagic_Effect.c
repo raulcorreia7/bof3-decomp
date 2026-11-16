@@ -236,13 +236,13 @@ NON_MATCHING void func_801EFD7C(void) {
                             *record &= 0xFFFFFF;
                         }
                         if ((u32)*record >> 24 == 0x29) {
-                            *record = (*record & 0xFFFFFF) | 0x21000000;
+                            *record = (*record & 0xFFFFFF) | ((u32)0x21 << 24);
                         }
                         if ((u8)(*record >> 24) == 0x2A) {
-                            *record = (*record & 0xFFFFFF) | 0x22000000;
+                            *record = (*record & 0xFFFFFF) | ((u32)0x22 << 24);
                         }
                         if ((u8)(*record >> 24) == 0x2B) {
-                            *record = (*record & 0xFFFFFF) | 0x27000000;
+                            *record = (*record & 0xFFFFFF) | ((u32)0x27 << 24);
                         }
                         record += ((u8*)record)[2];
                     } while (record != end);
