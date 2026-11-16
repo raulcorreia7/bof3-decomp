@@ -98,4 +98,55 @@ typedef struct Chain {
     u16       size;
 } Chain;
 
+/* A falling spark particle: the area and scenario spark tables (area197 at AREA_WORK,
+ * scena09 at AREA_WORK + 0x800) fall it by its velocity, bounce it off the ground and
+ * fade it while its life runs. */
+typedef struct SparkParticle {
+    u8   active; /* 0x00 - 0 marks a free spark */
+    u8   unk_01; /* 0x01 */
+    u8   life;   /* 0x02 - frames left; clears the spark at 0 */
+    u8   shade;  /* 0x03 - fades to black as the spark dies */
+    u8   frame;  /* 0x04 - indexes the draw routine's corner table */
+    u8   pad_05[3];
+    s32  vx; /* 0x08 */
+    s32  vy; /* 0x0C */
+    s32  vz; /* 0x10 - the fall speed and the bounce */
+    u8   pad_14[4];
+    Pos3 pos;       /* 0x18 */
+    u8   pad_24[4]; /* 0x24 */
+} SparkParticle;
+
+ASSERT_SIZE(SparkParticle, 0x28);
+ASSERT_OFFSET(SparkParticle, vx, 0x08);
+ASSERT_OFFSET(SparkParticle, vz, 0x10);
+ASSERT_OFFSET(SparkParticle, pos, 0x18);
+
+/* The second and third vertex of a spark triangle relative to its projected first
+ * vertex, in screen space. */
+typedef struct TriangleOffset {
+    u16 dx1;
+    u16 dy1;
+    u16 dx2;
+    u16 dy2;
+} TriangleOffset;
+
+ASSERT_SIZE(TriangleOffset, 8);
+ASSERT_OFFSET(TriangleOffset, dy1, 0x02);
+ASSERT_OFFSET(TriangleOffset, dx2, 0x04);
+ASSERT_OFFSET(TriangleOffset, dy2, 0x06);
+
+/* One 10-byte point of a dot trail (area098 at AREA_WORK + 0x2000, sce15ef1 at
+ * AREA_WORK + 0x5A00). */
+typedef struct TrailDot {
+    u8  active; /* 0x00 - flips every frame it is processed */
+    u8  life;   /* 0x01 */
+    u16 color;  /* 0x02 - 5-5-5 */
+    s16 x;      /* 0x04 */
+    s16 y;      /* 0x06 */
+    s8  dx;     /* 0x08 */
+    s8  dy;     /* 0x09 */
+} TrailDot;
+
+ASSERT_SIZE(TrailDot, 10);
+
 #endif

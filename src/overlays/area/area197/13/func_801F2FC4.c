@@ -1,13 +1,13 @@
 #include "area197_13.h"
 
 MATCH s32 func_801F2FC4(void) {
-    AreaSparkRow* spark;
-    s32           alive;
-    u16           i;
-    u8            life;
+    SparkParticle* spark;
+    s32            alive;
+    u16            i;
+    u8             life;
 
     alive = 0;
-    spark = MEM_PTR(AreaSparkRow, AREA_WORK);
+    spark = MEM_PTR(SparkParticle, AREA_WORK);
     i     = 0;
     do {
         if (spark->active != 0) {

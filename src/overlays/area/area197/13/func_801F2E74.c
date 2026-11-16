@@ -1,6 +1,6 @@
 #include "area197_13.h"
 
-MATCH void func_801F2E74(AreaSparkRow* spark) {
+MATCH void func_801F2E74(SparkParticle* spark) {
     POLY_F3* poly;
     FAKE_STACK_PADS(u8, 48); /* FAKE: retail frame reserves 48 bytes no statement uses. */
 

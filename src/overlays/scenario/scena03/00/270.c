@@ -302,9 +302,9 @@ MATCH void func_801F7FFC(Scena03Quad* quad) {
                 break;
         }
         ApplyMatrixLV(&mat, &in, &out);
-        quad->corner[i].x = quad->x + out.vx;
-        quad->corner[i].y = quad->y + out.vy;
-        quad->corner[i].z = quad->z + (out.vz << 8);
+        quad->corner[i].vx = quad->x + out.vx;
+        quad->corner[i].vy = quad->y + out.vy;
+        quad->corner[i].vz = quad->z + (out.vz << 8);
         i++;
     } while (i < 4);
 }
