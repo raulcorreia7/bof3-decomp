@@ -115,7 +115,8 @@ extern u8 D_80144F5B;
 extern u8 D_80144F5C;
 extern u8 D_80144F5E;
 extern u8 D_80144F5F;
-/* The four script-variable bytes as one word; the byte view makes a store reload the area id. */
+/* kept: the four script-variable bytes as one word; the byte view makes a store reload the area id, and the
+ * g_ScriptVarsWord global of game/script.h shifts the image. */
 #define g_ScriptVarsWord (*(s32*)&g_ScriptVars)
 
 extern u8  D_80143F1D;
