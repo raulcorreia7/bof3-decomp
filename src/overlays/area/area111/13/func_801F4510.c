@@ -1,26 +1,23 @@
 #include "area111_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F4510(s32 step) {
-    u8 x;
-    u8 y;
-    u8 value;
+MATCH void func_801F4510(s32 direction) {
+    u8 row;
+    u8 column;
     u8 selection;
 
-    x = (g_Game.members[0].pos.x.part.integer - 11) / 2;
-    y = (g_Game.members[0].pos.y.part.integer - 177) / 2;
-    if (x & 1) {
-        value = D_801F5C18[y][x / 2] & 0xF;
+    row    = (g_Game.members[0].pos.y.part.integer - 177) / 2;
+    column = (g_Game.members[0].pos.x.part.integer - 11) / 2;
+
+    if ((column & 1) != 0) {
+        selection = D_801F5C18[row][column >> 1] & 0xF;
     } else {
-        value = D_801F5C18[y][x / 2] >> 4;
+        selection = D_801F5C18[row][column >> 1] >> 4;
     }
-    selection                          = value - 1;
+
+    selection -= 1;
     g_SceneEventSelection              = selection;
     g_SceneEventMode                   = 0x11;
-    g_SceneEventStep                   = step;
-    D_80147A58[selection].direction_08 = step;
+    g_SceneEventStep                   = direction;
+    D_80147A58[selection].direction_08 = direction;
     Game_SetScriptActive();
 }
-#else
-INCLUDE_ASM(func_801F4510);
-#endif
