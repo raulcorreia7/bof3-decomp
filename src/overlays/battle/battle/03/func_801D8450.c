@@ -22,10 +22,10 @@ MATCH void func_801D8450(u32 panel_index) {
     g     = PSX_COLOR_G(color) << 3;
     b     = PSX_COLOR_B(color) << 3;
     Battle_DrawWindowTile(x, (y + 2), 5, 1);
-    func_801D9AB4(x, y, 10, 1);
-    func_801D9AB4(x, (y + 0x11), 11, 1);
-    func_801DA5A8((x + 2), (y + 2), (x + 0x25), (y + 2), r, g, b);
-    func_801DA5A8((x + 2), (y + 3), (x + 2), (y + 0x10), r, g, b);
+    Battle_DrawPanelShape(x, y, 10, 1);
+    Battle_DrawPanelShape(x, (y + 0x11), 11, 1);
+    Battle_DrawPanelLine((x + 2), (y + 2), (x + 0x25), (y + 2), r, g, b);
+    Battle_DrawPanelLine((x + 2), (y + 3), (x + 2), (y + 0x10), r, g, b);
     func_801DA4B4((x + 0x25), (y + 2), (x + 0x25), (y + 0x10), r, g, b);
     func_801DA4B4((x + 2), (y + 0x10), (x + 0x25), (y + 0x10), r, g, b);
     UI_DrawText((x + 8), (y + 3), 0, 8, (u8*)(D_801EAEB0 + index * 2u));

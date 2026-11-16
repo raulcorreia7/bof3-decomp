@@ -148,13 +148,13 @@ NON_MATCHING s32 func_801BA678(void) {
                         val0 = val7;
                         tmp4 = FIELD(u16, tmp25, 0x3Au);
                         val7 = 1;
-                        if (func_801BB86C(val0, val0, tmp4, (s16)(tmp4 + 1), val7) & BYTE_MASK) {
+                        if (Area_IsStepTooHigh(val0, val0, tmp4, (s16)(tmp4 + 1), val7) & BYTE_MASK) {
                             func_801BB8E8(4U, 6U, 5U);
                         }
                         tmp26 = g_Task;
                         if (!(1 & FIELD(u8, tmp26, 0x8u))) {
                             tmp5 = FIELD(u16, tmp26, 0x3Au);
-                            if (func_801BB86C(val0, val0, tmp5, (s16)(tmp5 - 1), val7) & BYTE_MASK) {
+                            if (Area_IsStepTooHigh(val0, val0, tmp5, (s16)(tmp5 - 1), val7) & BYTE_MASK) {
                                 func_801BB8E8(4U, 6U, 5U);
                                 return 3;
                             }
@@ -187,13 +187,13 @@ NON_MATCHING s32 func_801BA678(void) {
                         val0 = val8;
                         tmp0 = FIELD(u16, tmp27, 0x36u);
                         val7 = 3;
-                        if (func_801BB86C(tmp0, (s16)(tmp0 + 1), val0, val0, val7) & BYTE_MASK) {
+                        if (Area_IsStepTooHigh(tmp0, (s16)(tmp0 + 1), val0, val0, val7) & BYTE_MASK) {
                             func_801BB8E8(2U, 4U, 3U);
                         }
                         tmp28 = g_Task;
                         if (!(1 & FIELD(u8, tmp28, 0x8u))) {
                             tmp1 = FIELD(u16, tmp28, 0x36u);
-                            if (func_801BB86C(tmp1, (s16)(tmp1 - 1), val0, val0, val7) & BYTE_MASK) {
+                            if (Area_IsStepTooHigh(tmp1, (s16)(tmp1 - 1), val0, val0, val7) & BYTE_MASK) {
                                 func_801BB8E8(2U, 4U, 3U);
                                 return 3;
                             }
@@ -237,7 +237,7 @@ NON_MATCHING s32 func_801BA678(void) {
                             val2           = val1 + 1;
                             collision_axis = 3;
                         }
-                        if (func_801BB86C(val1, val2, val3, val5, collision_axis) & BYTE_MASK) {
+                        if (Area_IsStepTooHigh(val1, val2, val3, val5, collision_axis) & BYTE_MASK) {
                             goto block_74; /* retail branch */
                         }
                         return 3;
@@ -268,12 +268,12 @@ NON_MATCHING s32 func_801BA678(void) {
                                                 val0 = val7;
                                                 tmp6 = FIELD(u16, g_Task, 0x3Au);
                                                 val7 = 1;
-                                                if (func_801BB86C(val0, val0, tmp6, tmp6 + 1, val7) & BYTE_MASK) {
+                                                if (Area_IsStepTooHigh(val0, val0, tmp6, tmp6 + 1, val7) & BYTE_MASK) {
                                                     g_Task->direction_08 = FACING_UP;
                                                     return 1;
                                                 }
                                                 tmp7 = FIELD(u16, g_Task, 0x3Au);
-                                                if (func_801BB86C(val0, val0, tmp7, tmp7 + (-1), val7) & BYTE_MASK) {
+                                                if (Area_IsStepTooHigh(val0, val0, tmp7, tmp7 + (-1), val7) & BYTE_MASK) {
                                                     g_Task->direction_08 = FACING_DOWN;
                                                     return 1;
                                                 }
@@ -327,12 +327,12 @@ NON_MATCHING s32 func_801BA678(void) {
                                             }
                                             val0 = val8;
                                             tmp2 = FIELD(u16, g_Task, 0x36u);
-                                            if (func_801BB86C(tmp2, (s16)(tmp2 + 1), val0, val0, val7) & BYTE_MASK) {
+                                            if (Area_IsStepTooHigh(tmp2, (s16)(tmp2 + 1), val0, val0, val7) & BYTE_MASK) {
                                                 g_Task->direction_08 = FACING_LEFT;
                                                 return 1;
                                             }
                                             tmp3 = FIELD(u16, g_Task, 0x36u);
-                                            if (func_801BB86C(tmp3, (s16)(tmp3 - 1), val0, val0, val7) & BYTE_MASK) {
+                                            if (Area_IsStepTooHigh(tmp3, (s16)(tmp3 - 1), val0, val0, val7) & BYTE_MASK) {
                                                 g_Task->direction_08 = FACING_RIGHT;
                                                 return 1;
                                             }

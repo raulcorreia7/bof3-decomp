@@ -6,7 +6,7 @@ MATCH s32 func_801C364C(s32 wanted_code, s32 cell_code, s32 find_facing) {
     s32 result;
     s32 enabled;
 
-    if (func_801C472C(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, wanted_code & BYTE_MASK, 0) & BYTE_MASK) {
+    if (Area_TestCellCorners(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, wanted_code & BYTE_MASK, 0) & BYTE_MASK) {
         return 0;
     }
     enabled = find_facing & BYTE_MASK;

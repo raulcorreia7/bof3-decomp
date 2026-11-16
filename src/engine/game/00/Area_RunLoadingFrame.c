@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void func_801992B8(void) {
+MATCH void Area_RunLoadingFrame(void) {
     Area_UpdateCamera();
     Area_UpdateParty();
     func_801BDAB8();

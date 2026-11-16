@@ -31,8 +31,8 @@ NON_MATCHING void Battle_SetPartyCount(s32 x, s32 y) {
     GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
     var_s0 = x << 0x10;
     var_s0 = (s16)x;
-    func_801D9AB4(var_s0, (s16)y, ((g_Battle.party_count * 2) + 0xA) & 0xFE, 1);
-    func_801D9AB4(var_s0, (s16)(y + 0x18), ((g_Battle.party_count * 2) + 0xB) & BYTE_MASK, 1);
+    Battle_DrawPanelShape(var_s0, (s16)y, ((g_Battle.party_count * 2) + 0xA) & 0xFE, 1);
+    Battle_DrawPanelShape(var_s0, (s16)(y + 0x18), ((g_Battle.party_count * 2) + 0xB) & BYTE_MASK, 1);
     Battle_DrawWindowTile(var_s0, (s16)(y + 2), (g_Battle.party_count + 0xD) & BYTE_MASK, 1U);
     var_s4     = x;
     var_s5     = 0;
@@ -53,11 +53,11 @@ NON_MATCHING void Battle_SetPartyCount(s32 x, s32 y) {
             var_s1 = (var_s0 + 0xD) * 0x24;
             func_801D9E9C((s16)var_s2, var_s7, (u16)((u8*)&D_8014833B)[var_s1], (u16)((u8*)&D_8014833D)[var_s1], 0);
             if (*(D_80145F22 + (var_s0 * BATTLE_PARTY_STRIDE)) != 0) {
-                func_801DA5A8((s16)var_s2, var_s7, (s16)(var_s4 + (g_MenuPanelTasks[var_s0 + 0xD].unk_0C + 0x14)), var_s7, 0x64U, 0U, 0xC8U);
+                Battle_DrawPanelLine((s16)var_s2, var_s7, (s16)(var_s4 + (g_MenuPanelTasks[var_s0 + 0xD].unk_0C + 0x14)), var_s7, 0x64U, 0U, 0xC8U);
                 temp_v0_153 = ((u8*)&D_8014833E)[var_s1];
                 if (temp_v0_153 != 0) {
                     temp_a2_160 = g_MenuPanelTasks[var_s0 + 0xD].unk_0C;
-                    func_801DA5A8((s16)(var_s4 + (temp_a2_160 + 0x14)), var_s7, (s16)(temp_v0_153 + (temp_a2_160 + var_s3)), var_s7, 0xC8U, 0U, 0U);
+                    Battle_DrawPanelLine((s16)(var_s4 + (temp_a2_160 + 0x14)), var_s7, (s16)(temp_v0_153 + (temp_a2_160 + var_s3)), var_s7, 0xC8U, 0U, 0U);
                 }
             }
             temp_v1_181 = *(D_80145F10 + ((var_s5 & BYTE_MASK) * BATTLE_PARTY_STRIDE));
@@ -102,11 +102,11 @@ NON_MATCHING void Battle_SetPartyCount(s32 x, s32 y) {
             var_s2 = var_s4 + 0x5D;
             var_s2 <<= 0x10;
             var_s2 = var_s2 >> 0x10;
-            func_801DA5A8((s16)var_s3, (s16)var_s1, (s16)var_s2, (s16)var_s1, (u8)u, (u8)v_tex, (u8)var_fp);
+            Battle_DrawPanelLine((s16)var_s3, (s16)var_s1, (s16)var_s2, (s16)var_s1, (u8)u, (u8)v_tex, (u8)var_fp);
             var_s0 = var_s6 + 0x17;
             var_s0 <<= 0x10;
             var_s0 = (s16)(var_s0 >> 0x10);
-            func_801DA5A8((s16)var_s3, (s16)(var_s6 + 3), (s16)var_s3, var_s0, (u8)u, (u8)v_tex, (u8)var_fp);
+            Battle_DrawPanelLine((s16)var_s3, (s16)(var_s6 + 3), (s16)var_s3, var_s0, (u8)u, (u8)v_tex, (u8)var_fp);
             func_801DA4B4((s16)var_s2, (s16)var_s1, (s16)var_s2, var_s0, (u8)u, (u8)v_tex, (u8)var_fp);
             func_801DA4B4((s16)var_s3, var_s0, (s16)var_s2, var_s0, (u8)u, (u8)v_tex, (u8)var_fp);
             var_s4 += 0x5E;

@@ -1,6 +1,6 @@
 #include "battle_03.h"
 
-MATCH void func_801DA5A8(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b) {
+MATCH void Battle_DrawPanelLine(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b) {
     LINE_F2* primitive;
 
     GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));

@@ -141,18 +141,18 @@ MATCH void func_801EF174(void) {
     /* kept: retail reloads the target row at each access; a PartyMember* local changes the bytes. */
     id                                                        = g_Game.members[g_Battle.target_selector].chr.character_id;
     g_Game.members[g_Battle.target_selector].chr.character_id = CHAR_ID_RYU_YOUNG;
-    func_801EF590(g_Game.members[g_Battle.target_selector].chr.name, 112, 48);
+    Effect_DrawText(g_Game.members[g_Battle.target_selector].chr.name, 112, 48);
     g_Game.members[g_Battle.target_selector].chr.character_id = id;
     func_801EF76C(D_801F0B64, 90, 68);
     func_801EF76C(D_801F0B7C, 128, 68);
-    func_801EF590(D_801F0B8C, 112, 80);
-    func_801EF590(D_801F0B88, 156, 100);
-    func_801EF590(D_801F0B6C, 176, 100);
-    func_801EF590(D_801F0B88, 156, 120);
-    func_801EF590(D_801F0B70, 176, 120);
+    Effect_DrawText(D_801F0B8C, 112, 80);
+    Effect_DrawText(D_801F0B88, 156, 100);
+    Effect_DrawText(D_801F0B6C, 176, 100);
+    Effect_DrawText(D_801F0B88, 156, 120);
+    Effect_DrawText(D_801F0B70, 176, 120);
     func_801EF76C(D_801F0B74, 90, 138);
-    func_801EF590(D_801F0B8C, 112, 152);
-    func_801EF590(D_801F0B8C, 112, 172);
+    Effect_DrawText(D_801F0B8C, 112, 152);
+    Effect_DrawText(D_801F0B8C, 112, 172);
 }
 
 MATCH void func_801EF2DC(void) {
@@ -162,15 +162,15 @@ MATCH void func_801EF2DC(void) {
     if (g_BattleEnemyBattlers[slot].unk_7F != 0) {
         func_801EF924(g_BattleEnemyBattlers[slot].name, 112, 48);
         func_801EFB00(g_BattleEnemyBattlers[slot].exp, 112, 100);
-        func_801EF590(D_801F0B6C, 176, 100);
+        Effect_DrawText(D_801F0B6C, 176, 100);
         func_801EFB00(g_BattleEnemyBattlers[slot].zenny, 112, 120);
     } else {
         func_801EF924(g_BattleEnemyBattlers[slot].name, 112, 48);
-        func_801EF590(D_801F0B88, 156, 100);
-        func_801EF590(D_801F0B6C, 176, 100);
-        func_801EF590(D_801F0B88, 156, 120);
+        Effect_DrawText(D_801F0B88, 156, 100);
+        Effect_DrawText(D_801F0B6C, 176, 100);
+        Effect_DrawText(D_801F0B88, 156, 120);
     }
-    func_801EF590(D_801F0B70, 176, 120);
+    Effect_DrawText(D_801F0B70, 176, 120);
     func_801EF76C(D_801F0B74, 90, 138);
     func_801EF470(g_BattleEnemyBattlers[slot].drops[0].item & BYTE_MASK, g_BattleEnemyBattlers[slot].drops[0].item >> 8, 152);
     func_801EF470(g_BattleEnemyBattlers[slot].drops[1].item & BYTE_MASK, g_BattleEnemyBattlers[slot].drops[1].item >> 8, 172);
@@ -198,11 +198,11 @@ MATCH void func_801EF470(u8 item_id, u8 category, s32 y) {
         }
         UI_DrawText(112, (s16)y, 0, Game_ReadCommand(record) & BYTE_MASK, record);
     } else {
-        func_801EF590(D_801F0B8C, 112, (s16)y);
+        Effect_DrawText(D_801F0B8C, 112, (s16)y);
     }
 }
 
-MATCH void func_801EF590(u8* text, s32 x, s32 y) {
+MATCH void Effect_DrawText(u8* text, s32 x, s32 y) {
     POLY_FT4* prim;
     s32       mode;
     s32       x1;

@@ -27,7 +27,7 @@ MATCH void Scene_Start(u8 scenario_index) {
 
     while (!EMI_IsReady()) {
         if ((g_GameAreaId != none_sel) && (g_GameStateIndex != ready_phase)) {
-            func_801992B8();
+            Area_RunLoadingFrame();
         }
         SYS_ThreadWait(1u);
     }

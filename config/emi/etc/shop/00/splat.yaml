@@ -262,7 +262,7 @@ segments:
       - [0x11A50, c, func_801E2650]
       - [0x11B24, c, func_801E2724]
       - [0x11BBC, c, func_801E27BC]
-      - [0x11C00, c, func_801E2800]
+      - [0x11C00, c, Shop_IdleStep]
       - [0x11C08, c, Menu_MessagePanel]
       - [0x11D48, c, func_801E2948]
       - [0x11D88, c, func_801E2988]

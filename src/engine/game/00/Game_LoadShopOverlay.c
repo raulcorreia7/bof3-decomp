@@ -23,7 +23,7 @@ MATCH void Game_LoadShopOverlay(void) {
     }
     EMI_LoadArchive(EMI_SLOT_SHOP);
     while (EMI_IsReady() == 0) {
-        func_801992B8();
+        Area_RunLoadingFrame();
         SYS_ThreadWait(1u);
     }
     GFX_CopyPalette(1u);

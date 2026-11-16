@@ -19,46 +19,46 @@ MATCH void func_800A78B8(void) {
         count++;
     }
     if (D_800B6F60 > 0) {
-        count = func_800A7B40(0, count);
+        count = Battle_AppendComboIds(0, count);
         if (D_800B6F69 > 0) {
-            count = func_800A7B40(5, count);
+            count = Battle_AppendComboIds(5, count);
         }
         if (D_800B6F63 > 0) {
-            count = func_800A7B40(0xE, count);
+            count = Battle_AppendComboIds(0xE, count);
         }
     }
     if (D_800B6F61 > 0) {
-        count = func_800A7B40(1, count);
+        count = Battle_AppendComboIds(1, count);
         if (D_800B6F69 > 0) {
-            count = func_800A7B40(6, count);
+            count = Battle_AppendComboIds(6, count);
         }
     }
     if (D_800B6F62 > 0) {
-        count = func_800A7B40(2, count);
+        count = Battle_AppendComboIds(2, count);
         if (D_800B6F69 > 0) {
-            count = func_800A7B40(7, count);
+            count = Battle_AppendComboIds(7, count);
         }
     }
     if (D_800B6F63 > 0) {
-        count = func_800A7B40(3, count);
+        count = Battle_AppendComboIds(3, count);
         if (D_800B6F69 > 0) {
-            count = func_800A7B40(8, count);
+            count = Battle_AppendComboIds(8, count);
         }
     }
     if (D_800B6F64 > 0) {
-        count = func_800A7B40(4, count);
+        count = Battle_AppendComboIds(4, count);
         if (D_800B6F69 > 0) {
-            count = func_800A7B40(9, count);
+            count = Battle_AppendComboIds(9, count);
         }
     }
     if (D_800B6F6C > 0) {
-        count = func_800A7B40(0xC, count);
+        count = Battle_AppendComboIds(0xC, count);
     }
     if (D_800B6F6B > 0) {
-        count = func_800A7B40(0xB, count);
+        count = Battle_AppendComboIds(0xB, count);
     }
     if (D_800B6F69 > 0) {
-        count = func_800A7B40(0xD, count);
+        count = Battle_AppendComboIds(0xD, count);
     }
     FIELD(u8, dst + count, 0x70u) = 0xD9;
     for (count++; count < 10; count++) {

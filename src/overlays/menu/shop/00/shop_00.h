@@ -629,7 +629,7 @@ void func_801E262C(void);
 void func_801E2650(void);
 void func_801E2724(void);
 void func_801E27BC(void);
-void func_801E2800(void);
+void Shop_IdleStep(void);
 /* func_801E2808 */
 void Menu_MessagePanel(void);
 void func_801E2948(void);

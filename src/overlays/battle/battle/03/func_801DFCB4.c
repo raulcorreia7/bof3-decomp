@@ -92,11 +92,11 @@ MATCH void func_801DFCB4(void) {
                 tail_work->chr.status = STATUS_KO;
             }
             if (!(g_Game.current->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
-                func_801DD858(1);
+                Battle_PlayEffectCue(1);
             }
             GFX_FreePaletteFadeTarget(g_Task);
         } else {
-            func_801DD858(0);
+            Battle_PlayEffectCue(0);
         }
     }
     check_work = g_Game.current;

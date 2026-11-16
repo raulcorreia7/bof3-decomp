@@ -11,7 +11,7 @@ typedef union MapCellHeights {
 #define MAP_CELL_CORNER_HEIGHT(word, corner) (((word) << (3 - (corner)) * BYTE_WIDTH) >> 3 * BYTE_WIDTH)
 
 /* Draws the wall quads between a map cell and its left or upper neighbour; the record's byte 3 picks one side or both. */
-MATCH void func_80157CE4(u8* record, s32 cell_x, s32 cell_y) {
+MATCH void Area_DrawCellSides(u8* record, s32 cell_x, s32 cell_y) {
     SVECTOR         v0;
     SVECTOR         v1;
     SVECTOR         v2;

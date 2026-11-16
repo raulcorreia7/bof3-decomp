@@ -4,7 +4,7 @@
  * cursor offsets g_AreaGridRowCursor/g_AreaGridColCursor; when the low 12 bits of the prim_id of the rotated
  * g_AreaCells entry are set they go to func_80156ED4 with the slot byte minus 0x10. */
 
-MATCH void func_80156E00(u8* unit, s32 x, s32 y) {
+MATCH void Area_DrawCellAtPoint(u8* unit, s32 x, s32 y) {
     s32 dx;
     s32 dy;
     s32 row;
