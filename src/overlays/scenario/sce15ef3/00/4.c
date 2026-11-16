@@ -395,7 +395,61 @@ MATCH void func_801D1D20(WorldPos* pos, s32* step, u8 red, u8 green) {
     } while (i < 16);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D1FF8(Pos3* pos, s16 radius_x_arg, s16 radius_y_arg, u16 angle_arg, u8 color_arg, u8 shade_arg) {
+    MATRIX   camera;
+    DVECTOR  center;
+    DVECTOR  size;
+    DVECTOR  scale;
+    POLY_G3* prim;
+    s16      radius_x;
+    s16      radius_y;
+    s16      next_radius_x;
+    s16      next_radius_y;
+    s32      color_value;
+    s32      shade_value;
+    u16      angle;
+    u16      next_angle;
+    u8       phase;
+    u8       color_byte;
+    u8       shade_byte;
+
+    color_value = color_arg;
+    shade_value = shade_arg;
+    color_byte  = color_value;
+    shade_byte  = shade_value;
+    Area_SetCameraMatrix(&camera);
+    Area_ProjectPoint((s32*)pos, &center);
+    size.vx = radius_x_arg;
+    size.vy = radius_y_arg;
+    Game_ProjectWorldPoint(pos, &size, &scale);
+    phase = g_FrameCount & 1;
+    scale.vx += phase;
+    scale.vy += phase;
+    angle = 0;
+    do {
+        radius_x      = (scale.vx * rcos(angle)) >> 12;
+        radius_y      = (scale.vy * rsin(angle)) >> 12;
+        next_angle    = angle + (ONE / 16);
+        next_radius_x = (scale.vx * rcos(next_angle)) >> 12;
+        next_radius_y = (scale.vy * rsin(next_angle)) >> 12;
+        prim          = GFX_BeginPolyG3(1);
+        prim->x0      = center.vx;
+        prim->y0      = center.vy;
+        prim->x1      = center.vx + ((radius_x * rcos(angle_arg) - radius_y * rsin(angle_arg)) >> 12);
+        prim->y1      = center.vy + ((radius_x * rsin(angle_arg) + radius_y * rcos(angle_arg)) >> 12);
+        prim->x2      = center.vx + ((next_radius_x * rcos(angle_arg) + next_radius_y * rsin(angle_arg)) >> 12);
+        prim->y2      = center.vy + ((next_radius_x * rsin(angle_arg) - next_radius_y * rcos(angle_arg)) >> 12);
+        setRGB0(prim, color_byte, color_byte, phase ? color_byte : 0);
+        setRGB1(prim, shade_byte, shade_byte, phase ? shade_byte : 0);
+        setRGB2(prim, shade_byte, shade_byte, phase ? shade_byte : 0);
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G3));
+        angle = next_angle;
+    } while (angle < ONE);
+}
+#else
 INCLUDE_ASM(func_801D1FF8);
+#endif
 
 /* func_801D230C */
 MATCH void Scene_SetXFixed(void) {
