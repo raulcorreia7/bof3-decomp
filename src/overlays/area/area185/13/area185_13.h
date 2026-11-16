@@ -14,7 +14,6 @@
 /* The work pointer the drawing pass reads its position from. */
 
 /* The scratchpad vectors the rotating-tile pass builds. */
-extern SVECTOR D_1F800014[];
 /* The actor-record byte the request handler tests. */
 /* The game-overlay mode byte the handlers set. */
 /* The frame counter and the game-overlay record pointer. */

@@ -757,6 +757,7 @@ extern PartyMember* g_GameState;
 extern PartyMember  g_BattlePartyBattlers[3];
 extern u8           g_PartySize;
 extern u16          g_GameFlags;
+extern u8           D_80145E98;
 extern u16          g_AreaWalkFlags;
 /* The mode byte of each 0x24-byte owner record; the kind byte sits at +0x07. */
 extern u8           D_80148333[];

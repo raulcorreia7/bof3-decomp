@@ -119,7 +119,59 @@ MATCH void func_801EF10C(void) {
     g_Task->header.step += 1;
 }
 
-INCLUDE_ASM(func_801EF310);
+MATCH void func_801EF310(void) {
+    PartyMember* work;
+    PartyMember* owner;
+    PartyMember* battler;
+    u8           count;
+    u8           i;
+    u32          index;
+    u8           shade;
+    u8           slot;
+
+    work = g_Task;
+    work->pos.x.fixed += work->unk_0C;
+    work->pos.y.fixed += work->unk_10;
+    work->unk_14 -= work->unk_20;
+    work->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + work->unk_14;
+    work->param.unk_0B += 6;
+    if ((g_FrameCount & 3) == 0) {
+        slot = BMagic_AllocEffect();
+        if (slot != GAME_NONE) {
+            owner                                  = g_Task;
+            BMAGIC_EFFECT_SLOTS[slot].header.mode  = 1;
+            BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = 1;
+            BMAGIC_EFFECT_SLOTS[slot].target.party = owner;
+            g_Task->unk_04 += 1;
+        }
+    }
+    count          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = count;
+    if ((count & BYTE_MASK) != 0) {
+        return;
+    }
+    i = 0;
+    do {
+        slot = BMagic_AllocEffect();
+        if (slot != GAME_NONE) {
+            battler                                = g_BattleEffectBattler;
+            BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
+            BMAGIC_EFFECT_SLOTS[slot].target.party = battler;
+            index                                  = i;
+            shade                                  = D_801F0C58[index >> 3];
+            BMAGIC_EFFECT_SLOTS[slot].unk_0B       = index & 7;
+            BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = (index >> 3) * 3 + 1;
+            BMAGIC_EFFECT_SLOTS[slot].unk_5D       = shade;
+            BMAGIC_EFFECT_SLOTS[slot].unk_0A       = D_801F0C5C[index >> 3];
+            g_BattleEffectBattler->param.unk_0B += 1;
+        }
+        i++;
+    } while (i < 0x20);
+    g_AreaCameraAngle.vx += 0x14;
+    SND_QueueSelectionEffect(0x101);
+    g_Task->unk_09 = 8;
+    g_Task->header.step += 1;
+}
 
 /* func_801EF540 */
 MATCH void Effect_SwingCameraAngle(void) {
