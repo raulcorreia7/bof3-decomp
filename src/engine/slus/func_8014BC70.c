@@ -140,7 +140,7 @@ NON_MATCHING void func_8014BC70(void) {
                 do {
                     for (other = last; other >= (row + 1); other--) {
                         if ((s16)D_80147D08[other - 1].z < (s16)D_80147D08[other].z) {
-                            MATH_SwapVectors((struct Vec3W*)&D_80147D08[other], (struct Vec3W*)&D_80147CFC[other]);
+                            MATH_SwapVectors((Pos3*)&D_80147D08[other], (Pos3*)&D_80147CFC[other]);
                         }
                     }
                     row++;

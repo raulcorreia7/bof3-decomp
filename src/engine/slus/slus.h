@@ -378,12 +378,6 @@ typedef union OverlaySlotCursor {
 
 typedef s8 (*GameFunc)(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, s32 flags);
 
-struct Vec3W {
-    s32 w0;
-    s32 w1;
-    s32 w2;
-};
-
 /* Data. */
 
 /* Retail data D_80180000-D_801DFFFF and scratchpad (one declaration each). */
@@ -1013,7 +1007,7 @@ extern u8                    D_801F6AD0;
 extern const MenuPanelFuncs  g_MenuPanels;
 
 /* func_8014C47C */
-void                    MATH_SwapVectors(struct Vec3W* a, struct Vec3W* b);
+void                    MATH_SwapVectors(Pos3* a, Pos3* b);
 extern void             Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut);
 /* func_8014DB98 */
 extern void             Actor_StageAnimStep(void);
