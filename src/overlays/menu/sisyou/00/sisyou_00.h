@@ -37,6 +37,10 @@ enum MasterMessage {
     MASTER_MESSAGE_DISMISSED,
     MASTER_MESSAGE_DISMISSED_MORE_QUERY,
     MASTER_MESSAGE_SKILL_LEARNED,
+    /* The party-list captions and the yes/no prompt the panel drawers show. */
+    MASTER_MESSAGE_PICK_APPRENTICE = 0xF, /* "Who shall apprentice?" */
+    MASTER_MESSAGE_PICK_QUITTER,          /* "Who wants to quit?" */
+    MASTER_MESSAGE_CONFIRM,               /* "Is this OK? Yes No" */
 };
 
 /* The absolute message Deis answers with while the party cannot meet her yet. */
