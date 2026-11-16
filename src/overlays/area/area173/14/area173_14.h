@@ -44,6 +44,18 @@ extern AreaPart D_801F4F14[];
 
 /* The four corner vectors RotTransPers4 projects. */
 extern SVECTOR D_1F800014[];
+/* The projected quad's origin: x then y. */
+extern s16     D_1F800034[2];
+extern s16     D_1F800036;
+
+/* The two boards func_801F3FBC draws: the scroll factor of each mode, the
+ * four corner vertex offsets of each of the three runs, and the texture word
+ * of each part. */
+extern u8  D_801F530C[];
+extern u8  D_801F5310[];
+extern u8  D_801F5312[];
+extern u8  D_801F5314[];
+extern u32 D_801F5358[];
 
 /* The part-row bytes the draw addresses by offset: the base y, the four corner triples and the part word. */
 extern u8  D_801F4F15[];
