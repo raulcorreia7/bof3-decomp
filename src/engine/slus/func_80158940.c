@@ -30,7 +30,7 @@ MATCH void func_80158940(void* obj) {
     s32           point_x;
     s32           point_y;
 
-    if (g_AreaDrawMode == 4) {
+    if (g_AreaDrawMode == GFX_LAYER_BATTLE_SCENE) {
         return;
     }
     count = cursor->header.count - 1;

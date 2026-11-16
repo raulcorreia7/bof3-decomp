@@ -11,7 +11,7 @@ MATCH void func_801F332C(s32* first, s32* second) {
     s16     radius1;
     s16     radius2;
 
-    GFX_AddDitheredDrawMode(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
+    GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     Area_SetCameraMatrix(&matrix);
     /* Each point keeps a full SVECTOR: the projection fills the SDK's two-word result. */
     Area_ProjectPoint(first, (DVECTOR*)&screen[0]);

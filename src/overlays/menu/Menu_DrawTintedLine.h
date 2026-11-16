@@ -25,5 +25,5 @@ MATCH void Menu_DrawTintedLine(s16 line_x0, s16 line_y0, s16 line_x1, s16 line_y
     SetSemiTrans(primitive, 1);
     setRGB0(primitive, color0, color1, color2);
     setXY2(primitive, x0, y0, x1, y1);
-    GFX_AddPrim(1, sizeof(LINE_F2));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F2));
 }

@@ -225,7 +225,7 @@ NON_MATCHING void func_801EF7F8(void) {
     long     flag;
     s32      i;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(0, 1, 320, 256), 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     SPAD(0u)->cells.halves[0] = g_Task->timer * 16 + 16;
     SPAD(0u)->cells.halves[1] = g_Task->timer * 16 + 0x80;

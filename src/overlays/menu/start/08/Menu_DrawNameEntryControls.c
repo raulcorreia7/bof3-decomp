@@ -67,7 +67,7 @@ MATCH s32 Menu_DrawNameEntryControls(u8 page, s32 x, s32 y) {
     top  = y;
 
     /* The window. */
-    GFX_AddDitheredDrawMode(1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
+    GFX_AddDitheredDrawMode(GFX_LAYER_UI, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
     UI_DrawWindow(x + CONTROLS_WINDOW_INSET, y + CONTROLS_WINDOW_INSET, CONTROLS_WINDOW_WIDTH, CONTROLS_WINDOW_HEIGHT, 0, g_WindowStyle);
 
     /* The panel sprite. */
@@ -81,7 +81,7 @@ MATCH s32 Menu_DrawNameEntryControls(u8 page, s32 x, s32 y) {
     setWH(sprite, rect[2], rect[3]);
     setClut(sprite, CONTROLS_SPRITE_CLUT_X, CONTROLS_SPRITE_CLUT_Y);
     setRGB0(sprite, CONTROLS_SPRITE_SHADE, CONTROLS_SPRITE_SHADE, CONTROLS_SPRITE_SHADE);
-    GFX_AddPrim(1, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
     /* The command labels. */
     for (row = 0; row < NAME_ENTRY_COMMAND_COUNT; row++) {

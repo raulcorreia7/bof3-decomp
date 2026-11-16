@@ -20,7 +20,7 @@ MATCH void Area_DrawGouraudQuad(u32* record) {
         if (((s32)x_limit >= (s32)(packed & BYTE_MASK)) && ((s32)y_limit >= (s32)((packed >> 8) & BYTE_MASK)) && ((s32)((packed >> 16) & BYTE_MASK) >= (s32)x_limit) &&
             ((s32)(packed >> 24) >= (s32)y_limit)) {
             tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
-            GFX_AddDitheredDrawMode(7, tpage);
+            GFX_AddDitheredDrawMode(GFX_LAYER_BACKDROP, tpage);
             primitive = GFX_BeginPolyG4(0);
             setXY4(primitive, 0, 0, SCREEN_WIDTH, 0, 0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT);
             if (D_8014933C != 0) {
@@ -30,7 +30,7 @@ MATCH void Area_DrawGouraudQuad(u32* record) {
             }
             setRGB0(primitive, primitive->r1 = (*(u32*)src & 0x1F) * 8, primitive->g1 = (*(u32*)src >> 2) & 0xF8, primitive->b1 = (*(u32*)src >> 7) & 0xF8);
             setRGB2(primitive, primitive->r3 = (*(u16*)(src + 2) & 0x1F) * 8, primitive->g3 = (*(u32*)src >> 18) & 0xF8, primitive->b3 = (*(u32*)src >> 23) & 0xF8);
-            GFX_AddPrim(7, sizeof(POLY_G4));
+            GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(POLY_G4));
         }
     }
 }

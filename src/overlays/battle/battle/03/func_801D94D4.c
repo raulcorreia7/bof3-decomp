@@ -29,7 +29,7 @@ MATCH void func_801D94D4(s32 x, u32 y, s32 clut_index, s32 text_value) {
             setWH(packet, 6, 5);
             packet->u0 = digit * 6u - 80u;
             SetSprt(packet);
-            GFX_AddPrim(1, sizeof(SPRT));
+            GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
         }
 
         x += 5;

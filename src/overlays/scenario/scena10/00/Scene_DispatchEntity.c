@@ -171,7 +171,7 @@ MATCH void func_801F781C(u16 x, u16 y, u16 width, u16 height) {
     setRGB0(prim, 0x80, 0x80, 0x80);
     setXY4(prim, x, y, x + width, y, x, y + height, x + width, y + height);
     setUV4(prim, 0, 0x98, 0x80, 0x98, 0, 0xFF, 0x80, 0xFF);
-    GFX_AddPrim(1, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
     i = 0;
     do {
         count = D_80144908[i];
@@ -198,7 +198,7 @@ MATCH void func_801F79E8(u16 x, u16 y) {
     setRGB0(prim, 0x80, 0x80, 0x80);
     setXY4(prim, x, y, x + 16, y, x, y + 16, x + 16, y + 16);
     setUV4(prim, 0xB0, 0x50, 0xC0, 0x50, 0xB0, 0x60, 0xC0, 0x60);
-    GFX_AddPrim(1, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 }
 
 MATCH void func_801F7AD4(void) {
@@ -241,7 +241,7 @@ MATCH void func_801F7C34(void) {
     setRGB0(prim, 0x80, 0x80, 0x80);
     setXY4(prim, (u16)rect->x, (u16)rect->y, (u16)rect->x + (rect->width - 1), (u16)rect->y, (u16)rect->x, (u16)rect->y + rect->height, (u16)rect->x + (rect->width - 1), (u16)rect->y + rect->height);
     setUV4(prim, 0xC0, 0x50, (u8)rect->width + 0xBF, 0x50, 0xC0, (u8)rect->height + 0x50, (u8)rect->width + 0xBF, (u8)rect->height + 0x50);
-    GFX_AddPrim(1, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 }
 
 /* Draw the "Choose parts" window with its item list and cursor, then place and step the cursor actor. */

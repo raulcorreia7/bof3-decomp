@@ -10,5 +10,5 @@ MATCH void func_801F3BC4(s16 x, s16 y, s16 w, s16 h) {
     setXY0(tile, x, y);
     setWH(tile, w, h);
     tile->b0 = D_801F6B74;
-    GFX_AddPrim(1, 16);
+    GFX_AddPrim(GFX_LAYER_UI, 16);
 }

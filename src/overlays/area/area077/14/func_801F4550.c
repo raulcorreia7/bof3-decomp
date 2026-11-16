@@ -3,7 +3,7 @@
 MATCH void func_801F4550(s32* pos, s16 radius) {
     MATRIX matrix;
 
-    GFX_AddDitheredDrawMode(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
+    GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
     Area_SetCameraMatrix(&matrix);
     func_801F462C(pos, radius >> 2, 0x20, 0);
     func_801F462C(pos, (radius * 2) >> 2, 0x20, 0);

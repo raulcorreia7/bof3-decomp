@@ -31,5 +31,5 @@ MATCH void func_801D8248(s16 x, s16 y, u8 height) {
     prim->u3 = prim->u1;
     prim->v2 = prim->v0 + 4;
     prim->v3 = prim->v2;
-    GFX_AddPrim(1, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 }

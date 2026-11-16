@@ -23,7 +23,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     window->x       = 0;
     setWH(window, 16, 16);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), window);
-    GFX_AddPrim(1u, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
 
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
@@ -58,7 +58,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     width1      = width + 1;
     width1_u    = width1;
     prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddPrim(1u, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 
     half = ((s32)width1_u - 4) >> 1;
     prim = (POLY_FT4*)g_GfxPrimCursor;
@@ -72,7 +72,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     prim->clut  = GetClut(clut_x, STAGE_PALETTE_Y + 1);
     odd_u       = odd;
     prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddPrim(1u, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
@@ -89,7 +89,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     setRGB0(prim, 172, 172, 172);
     prim->clut  = GetClut(clut_x, STAGE_PALETTE_Y + 1);
     prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddPrim(1u, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
@@ -118,7 +118,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     prim->v3 -= 3;
     prim->clut  = GetClut(clut_x, STAGE_PALETTE_Y + 1);
     prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddPrim(1u, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 
     window          = (RECT*)g_GfxPrimCursor;
     g_GfxPrimCursor = (u8*)(window + 1);
@@ -126,7 +126,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     window->y       = 0;
     setWH(window, 256, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), window);
-    GFX_AddPrim(1u, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     func_801AEBA0(inner, y + 2, width - 4, height - 4, 0);
 }
 #else

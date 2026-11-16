@@ -5,17 +5,17 @@ MATCH void func_801EF47C(s32 x) {
     POLY_G4* poly;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
 
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     setXY0(tile, x + 32, 48);
     setWH(tile, 168, 24);
     setRGB0(tile, 0, 0, 0);
-    GFX_AddPrim(1, sizeof(TILE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
 
     poly = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(poly);
@@ -25,5 +25,5 @@ MATCH void func_801EF47C(s32 x) {
     setRGB3(poly, 0xFF, 0xFF, 0xFF);
     setXY4(poly, x, 48, x + 34, 48, x, 72, x + 34, 72);
     SetSemiTrans(poly, 1);
-    GFX_AddPrim(1, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
 }

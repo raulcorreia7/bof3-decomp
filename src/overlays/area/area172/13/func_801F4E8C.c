@@ -17,7 +17,7 @@ NON_MATCHING void func_801F4E8C(s32 x, s32 y) {
     prim->clut  = GetClut(0, 0x1EB);
     prim->tpage = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 0x300, 0x100);
     setRGB0(prim, 0x80, 0x80, 0x80);
-    GFX_AddPrim(1, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 }
 #else
 INCLUDE_ASM(func_801F4E8C);

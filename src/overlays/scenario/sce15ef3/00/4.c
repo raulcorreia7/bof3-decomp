@@ -349,7 +349,7 @@ MATCH void func_801D1D20(WorldPos* pos, s32* step, u8 red, u8 green) {
     u16      angle16;
     u8       i;
 
-    GFX_AddDitheredDrawMode(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 896, 256) & HALF_MASK);
+    GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 896, 256) & HALF_MASK);
 
     angle    = 65024;
     point[0] = pos->x.fixed + ((((rcos((u16)angle) * 5) << 6) >> 4));
@@ -390,7 +390,7 @@ MATCH void func_801D1D20(WorldPos* pos, s32* step, u8 red, u8 green) {
         setRGB1(prim, green, green, green);
         setRGB2(prim, red, red, red);
         setRGB3(prim, green, green, green);
-        GFX_AddPrim(1, sizeof(POLY_G4));
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
         i++;
     } while (i < 16);
 }
@@ -404,7 +404,7 @@ MATCH void Scene_SetXFixed(void) {
     s16  y;
     u16  angle;
 
-    GFX_AddDitheredDrawMode(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 896, 256));
+    GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 896, 256));
     pos.x = g_Task->pos.x.fixed;
     pos.y = g_Task->pos.y.fixed;
     pos.z = g_Task->pos.z.fixed;
@@ -425,7 +425,7 @@ MATCH void Scene_DrawRedFade(u8 red) {
     setXY0(prim, 0, 0);
     prim->h = SCREEN_HEIGHT;
     setRGB0(prim, red, 0, 0);
-    GFX_AddPrim(1, sizeof(TILE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
 }
 
 #include "overlays/scenario/Scene_DrawScanBar.h"

@@ -189,7 +189,7 @@ MATCH void func_801EF5B0(void) {
     s32       tpage;
 
     tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     g_ScratchPad.cells.halves[0] = g_Task->unk_20;
     g_ScratchPad.cells.halves[1] = (g_Task->param.unk_0B & 0x3F) << 7;
     if (g_Task->header.step == 4) {
@@ -216,10 +216,10 @@ MATCH void func_801EF5B0(void) {
         setUV4(prim, 8, g_ScratchPad.cells.halves[3], 248, g_ScratchPad.cells.halves[3], 8, g_ScratchPad.cells.halves[3] + 16, 248, g_ScratchPad.cells.halves[3] + 16);
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                       &depth, &flag);
-        GFX_AddPrim(2, sizeof(POLY_FT4));
+        GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_FT4));
     }
     tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
 }
 
 /* Draw the two magic132 breath bands as shaded quads along the sine wave of the effect ticker,
@@ -233,7 +233,7 @@ MATCH void func_801EF914(void) {
     s32      phase;
 
     tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     if (g_Task->header.step == 4) {
         g_ScratchPad.cells.halves[2] = (g_Task->unk_1C / 2) << 3;
     } else {
@@ -278,8 +278,8 @@ MATCH void func_801EF914(void) {
         }
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                       &depth, &flag);
-        GFX_AddPrim(2, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_G4));
     }
     tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
 }

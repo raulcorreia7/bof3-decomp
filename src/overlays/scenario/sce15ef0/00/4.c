@@ -140,7 +140,7 @@ NON_MATCHING void func_801D1220(s32 value) {
         Area_ProjectPoint(front, (DVECTOR*)&prim->x2);
         Area_ProjectPoint(back, (DVECTOR*)&prim->x3);
         setRGB0(prim, value, value, value);
-        GFX_AddPrim(1, sizeof(POLY_F4));
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_F4));
         i++;
     } while (i < 8);
 }

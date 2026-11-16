@@ -181,7 +181,7 @@ MATCH void func_801EF844(void) {
     long     flag;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_AddDitheredDrawMode(5, tpage);
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
     g_ScratchPad.cells.halves[3] = g_Task->unk_09 * 5;
     g_ScratchPad.cells.halves[4] = D_801F0ED4[g_Task->unk_04][0] * g_Task->unk_09;
     g_ScratchPad.cells.halves[5] = D_801F0ED4[g_Task->unk_04][1] * g_Task->unk_09;
@@ -203,10 +203,10 @@ MATCH void func_801EF844(void) {
         setRGB0(poly, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
         setRGB1(poly, g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6]);
         setRGB2(poly, g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6]);
-        GFX_AddPrim(5, sizeof(POLY_G3));
+        GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(POLY_G3));
     }
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_AddDitheredDrawMode(5, tpage);
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
 }
 
 MATCH void func_801EFB24(void) {
@@ -217,7 +217,7 @@ MATCH void func_801EFB24(void) {
     long     flag;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_AddDitheredDrawMode(5, tpage);
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
     g_ScratchPad.cells.halves[4] = D_801F0EE0[g_Task->unk_04][0] * g_Task->unk_09;
     g_ScratchPad.cells.halves[5] = D_801F0EE0[g_Task->unk_04][1] * g_Task->unk_09;
     g_ScratchPad.cells.halves[6] = D_801F0EE0[g_Task->unk_04][2] * g_Task->unk_09;
@@ -245,10 +245,10 @@ MATCH void func_801EFB24(void) {
         setRGB1(poly, g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6]);
         setRGB2(poly, 1, 1, 1);
         setRGB3(poly, 1, 1, 1);
-        GFX_AddPrim(5, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(POLY_G4));
     }
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_AddDitheredDrawMode(5, tpage);
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
 }
 
 MATCH void func_801EFE54(void) {

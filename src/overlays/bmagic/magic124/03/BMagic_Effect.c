@@ -14,7 +14,7 @@ MATCH void func_801EEC14(void) {
     handlers = D_801EEC04;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_AddDitheredDrawMode(3, tpage);
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
         if (BMAGIC_EFFECT_SLOTS[i].header.flags & BMAGIC_EFFECT_IN_USE) {
             saved_task            = g_Task;
@@ -28,7 +28,7 @@ MATCH void func_801EEC14(void) {
     }
     func_801EF0B0();
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_AddDitheredDrawMode(3, tpage);
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
 }
 
 MATCH void func_801EEDD8(void) {
@@ -96,7 +96,7 @@ MATCH void func_801EF0B0(void) {
         setRGB0(poly, red, green, blue);
         setRGB1(poly, 1, 1, 1);
         setRGB2(poly, 1, 1, 1);
-        GFX_AddPrim(3, sizeof(POLY_G3));
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G3));
         i++;
     } while (i < 8);
 }
@@ -259,7 +259,7 @@ MATCH void func_801F03E0(void) {
         setRGB0(poly, centre, centre, centre);
         setRGB1(poly, red, green, blue);
         setRGB2(poly, red, green, blue);
-        GFX_AddPrim(3, sizeof(POLY_G3));
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G3));
         i++;
     } while (i < 8);
 }
@@ -290,7 +290,7 @@ MATCH void func_801F05B4(void) {
         setRGB1(poly, 1, 1, 1);
         setRGB2(poly, red, green, blue);
         setRGB3(poly, red, green, blue);
-        GFX_AddPrim(3, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
         i++;
     } while (i < 8);
 }

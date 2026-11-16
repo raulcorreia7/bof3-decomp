@@ -46,7 +46,7 @@ MATCH void func_801EF1E8(void) {
     s32      tpage;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
@@ -60,9 +60,9 @@ MATCH void func_801EF1E8(void) {
     D_1F80000C = g_Task->unk_09 * 8;
     setRGB0(prim, prim->r3 = D_1F80000C, prim->g3 = D_1F80000C, prim->b3 = D_1F80000C);
     setRGB1(prim, prim->r2 = *dark, prim->g2 = *dark, prim->b2 = *dark);
-    GFX_AddPrim(2, sizeof(POLY_G4));
+    GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_G4));
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
 }
 
 MATCH void func_801EF3C0(void) {
@@ -138,7 +138,7 @@ MATCH void func_801EF7A8(void) {
     s32       tpage;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     g_ScratchPad.cells.words[0] = 0x4A;
     prim                        = (POLY_FT4*)g_GfxPrimCursor;
     g_ScratchPad.cells.words[2] = g_Task->timer * 8;
@@ -160,7 +160,7 @@ MATCH void func_801EF7A8(void) {
     prim->clut                  = GetClut(g_Task->param.unk_0B, 506);
     setUV4(prim, 8, (g_Task->unk_09 & 3) * 32 + 8, 0x98, (g_Task->unk_09 & 3) * 32 + 8, 8, (g_Task->unk_09 & 3) * 32 + 0x28, 0x98, (g_Task->unk_09 & 3) * 32 + 0x28);
     setRGB0(prim, g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[2]);
-    GFX_AddPrim(3, sizeof(POLY_FT4));
+    GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_FT4));
 }
 
 /* func_801EFB78 */

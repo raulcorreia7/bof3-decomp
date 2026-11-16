@@ -8,7 +8,7 @@ MATCH void Area_DrawSpark(AreaSparkSlot* spark) {
     POLY_G4* poly;
     s8       i;
 
-    GFX_AddDitheredDrawMode(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
+    GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     Area_SetCameraMatrix(&camera);
     i = 2;
     do {
@@ -33,7 +33,7 @@ MATCH void Area_DrawSpark(AreaSparkSlot* spark) {
     line->x1 = spark->pos_trail[0].vx;
     line->y1 = spark->pos_trail[0].vy;
     setRGB0(line, color.r, color.g, color.b);
-    GFX_AddPrim(1, sizeof(LINE_F2));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F2));
 
     for (i = 0; i < 3; i++) {
         poly = (POLY_G4*)g_GfxPrimCursor;
@@ -54,6 +54,6 @@ MATCH void Area_DrawSpark(AreaSparkSlot* spark) {
         poly->y3 = spark->pos_trail[i + 1].vy;
         setRGB2(poly, color.r, color.g, color.b);
         setRGB3(poly, color.r, color.g, color.b);
-        GFX_AddPrim(1, sizeof(POLY_G4));
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
     }
 }

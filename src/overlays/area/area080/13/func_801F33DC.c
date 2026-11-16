@@ -6,7 +6,7 @@ MATCH void func_801F33DC(AreaRing* ring) {
     u8       i;
     u8       j;
 
-    GFX_AddDitheredDrawMode(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
+    GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     for (i = 0; i < AREA_RING_POINTS; i++) {
         j = (i + 1) & (AREA_RING_POINTS - 1);
         if (func_801AFF90((Pos2*)&ring->screen_base, (Pos2*)&ring->screen[i], (Pos2*)&ring->screen[j]) > 0) {
@@ -18,7 +18,7 @@ MATCH void func_801F33DC(AreaRing* ring) {
             poly->b0 = shade;
             poly->g0 = shade;
             poly->r0 = shade;
-            GFX_AddPrim(1, sizeof(POLY_F3));
+            GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_F3));
         }
     }
 }

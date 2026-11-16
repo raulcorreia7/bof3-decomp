@@ -16,6 +16,6 @@ MATCH void func_801F34C8(s16 x, s16 y, s16 radius, u16 angle) {
         setRGB0(packet, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, 0);
         setRGB1(packet, 0, 0, 0);
         setRGB2(packet, 0, 0, 0);
-        GFX_AddPrim(1u, sizeof(POLY_G3));
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G3));
     } while (i < 8);
 }

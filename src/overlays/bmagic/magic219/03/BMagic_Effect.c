@@ -224,7 +224,7 @@ MATCH void func_801EF71C(void) {
     s32      tpage;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(5, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
     MAGIC219_RING_RADIUS = g_Task->timer << 4;
     setVector(&g_ScratchPadVectors[2], FIXED_MUL(rsin(0), MAGIC219_RING_RADIUS), FIXED_MUL(rcos(0), MAGIC219_RING_RADIUS), 0);
     g_ScratchPadVectors[1].vz = 0;
@@ -238,7 +238,7 @@ MATCH void func_801EF71C(void) {
         setRGB0(prim, 0x60, 0x60, 0x60);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);
-        GFX_AddPrim(5, sizeof(POLY_G3));
+        GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(POLY_G3));
     }
 }
 

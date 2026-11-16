@@ -42,7 +42,7 @@ MATCH void Area_DrawRingQuads(AreaRingRow* row) {
             setRGB1(prim, 0, 0, 0);
             setRGB2(prim, row->shade, row->shade, row->shade);
             setRGB3(prim, row->shade, row->shade, row->shade);
-            GFX_AddPrim(1, sizeof(POLY_G4));
+            GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
             angle = next;
         } while ((u16)angle < ONE);
         pass++;

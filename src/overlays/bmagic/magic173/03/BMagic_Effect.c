@@ -190,7 +190,7 @@ MATCH void func_801EF4EC(void) {
     s32      next;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     i = g_Task->param.unk_0B;
     while (BMagic_Trail[g_Task->unk_04][i].x == -1) {
         i++;
@@ -231,10 +231,10 @@ MATCH void func_801EF4EC(void) {
         g_ScratchPad.cells.halves[3] = 0x61 - i * 12;
         setRGB1(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], 1);
         setRGB3(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], 1);
-        GFX_AddPrim(3, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
     }
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
 }
 
 /* Draws the trail as a ribbon twelve units wide in two passes, one side of the centreline each: the outer edge near
@@ -246,7 +246,7 @@ MATCH void func_801EFA34(void) {
     s32      next;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     g_ScratchPad.cells.halves[0] = 0xC;
     i                            = g_Task->param.unk_0B;
     while (BMagic_Trail[g_Task->unk_04][i].x == -1) {
@@ -285,7 +285,7 @@ MATCH void func_801EFA34(void) {
         g_ScratchPad.cells.halves[3] = 0x61 - i * 12;
         setRGB1(prim, 1, 1, 1);
         setRGB3(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
-        GFX_AddPrim(3, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
     }
     i = g_Task->param.unk_0B;
     while (BMagic_Trail[g_Task->unk_04][i].x == -1) {
@@ -324,10 +324,10 @@ MATCH void func_801EFA34(void) {
         g_ScratchPad.cells.halves[3] = 0x81 - (i << 4);
         setRGB1(prim, 1, 1, 1);
         setRGB3(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
-        GFX_AddPrim(3, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
     }
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
 }
 
 /* func_801F02B0 */
@@ -394,7 +394,7 @@ MATCH void func_801F075C(void) {
     s32      tpage;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     g_ScratchPad.cells.halves[0] = (rand() & 3) + 28;
     g_ScratchPad.cells.halves[3] = g_Task->unk_09 * 6;
     for (i = 0; i < 8; i++) {
@@ -407,6 +407,6 @@ MATCH void func_801F075C(void) {
         setRGB0(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);
-        GFX_AddPrim(3, sizeof(POLY_G3));
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G3));
     }
 }

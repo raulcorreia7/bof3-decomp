@@ -336,7 +336,7 @@ MATCH void Fishing_ShopDrawBackdrop(void) {
     ((RECT*)cursor)->w = 32;
     tpage              = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, (RECT*)cursor);
-    GFX_AddPrim(7, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(DR_MODE));
     for (i = 0; i < 2; i++) {
         s32 quad_tpage;
 
@@ -355,7 +355,7 @@ MATCH void Fishing_ShopDrawBackdrop(void) {
         setRGB0(((POLY_FT4*)cursor), 64, 64, 64);
         ((POLY_FT4*)cursor)->x2 = ((POLY_FT4*)cursor)->x0;
         ((POLY_FT4*)cursor)->x3 = ((POLY_FT4*)cursor)->x1;
-        GFX_AddPrim(7, sizeof(POLY_FT4));
+        GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(POLY_FT4));
     }
     cursor             = g_GfxPrimCursor;
     g_GfxPrimCursor    = cursor + 8;
@@ -365,7 +365,7 @@ MATCH void Fishing_ShopDrawBackdrop(void) {
     ((RECT*)cursor)->w = 256;
     tpage              = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, (RECT*)cursor);
-    GFX_AddPrim(7, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(DR_MODE));
 }
 
 /* func_800F606C */

@@ -6,7 +6,7 @@ MATCH void func_801F2CB0(void) {
     AreaSpinEffect* row;
     u8              i;
 
-    GFX_AddDitheredDrawMode(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
+    GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
     pos.x = g_Task->pos.x.fixed;
     pos.y = g_Task->pos.y.fixed;
     pos.z = g_Task->pos.z.fixed;

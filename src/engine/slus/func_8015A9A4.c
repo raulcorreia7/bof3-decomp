@@ -40,7 +40,7 @@ NON_MATCHING void func_8015A9A4(void) {
     task->unk_32  = key;
     key           = (actor->unk_32 + ((((u8*)actor->range_54.table)[1] << 24) >> 24)) << 8;
     actor->unk_32 = key;
-    if (g_AreaDrawMode == 4) {
+    if (g_AreaDrawMode == GFX_LAYER_BATTLE_SCENE) {
         if (D_8014933F != 0) {
             low = actor->pos.x.fixed >> 15;
         } else {

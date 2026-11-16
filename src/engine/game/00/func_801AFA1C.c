@@ -22,7 +22,7 @@ NON_MATCHING void func_801AFA1C(u8* marks, u8 thumb_top, s16 x, s16 y, u8 thumb_
                 tile->y0 = y + (track_size * (u16)i) / total + 3;
                 tile->w  = 3;
                 tile->h  = y + (track_size * ((u16)i + 1)) / total + 3 - tile->y0;
-                GFX_AddPrim(1, sizeof(TILE));
+                GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
             }
             i++;
         } while ((u16)i < total);
@@ -51,7 +51,7 @@ NON_MATCHING void func_801AFA1C(u8* marks, u8 thumb_top, s16 x, s16 y, u8 thumb_
     poly->r0    = 0x80;
     poly->g0    = 0x80;
     poly->b0    = 0x80;
-    GFX_AddPrim(1, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 }
 #else
 INCLUDE_ASM(func_801AFA1C);

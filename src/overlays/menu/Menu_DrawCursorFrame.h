@@ -36,7 +36,7 @@ MATCH void Menu_DrawCursorFrame(u16 x, u16 y, s32 width, s32 height, u8 color, s
     SetLineF3(line3);
     setXY3(line3, x + 4, y, x, y + 4, x, y + height - 1);
     setRGB0(line3, rgb[2], rgb[1], rgb[0]);
-    GFX_AddPrim(1, sizeof(LINE_F3));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F3));
 
     line4 = (LINE_F4*)g_GfxPrimCursor;
     SetLineF4(line4);
@@ -47,5 +47,5 @@ MATCH void Menu_DrawCursorFrame(u16 x, u16 y, s32 width, s32 height, u8 color, s
     line4->y2 = y + height - 1;
     line4->x1 = (line4->x2 = x + width_copy - 1);
     setRGB0(line4, rgb[2], rgb[1], rgb[0]);
-    GFX_AddPrim(1, sizeof(LINE_F4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F4));
 }

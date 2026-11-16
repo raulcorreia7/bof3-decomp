@@ -45,7 +45,7 @@ NON_MATCHING void func_80167E00(void) {
             } else {
                 TASK_SLOT->unk_29 = g_AreaDrawMode;
             }
-        } else if (g_AreaDrawMode == 4) {
+        } else if (g_AreaDrawMode == GFX_LAYER_BATTLE_SCENE) {
             continue;
         }
         if (TASK_SLOT->unk_06 == 10) {

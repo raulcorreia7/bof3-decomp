@@ -8,11 +8,17 @@
 #include "overlays/battle/battle.h"
 #include "sys/task.h"
 
-#define BMAGIC_PHASE_ANGLE(phase) ((phase) << 6)
-#define BMAGIC_PHASE_MASK         0x3F
+#define BMAGIC_PHASE_ANGLE(phase)    ((phase) << 6)
+#define BMAGIC_PHASE_MASK            0x3F
+
+/* The ordering-table layers a battle magic effect draws on, relative to the battlers: Battle_InitEnemy files them on
+ * GFX_LAYER_BATTLE_SCENE and the party takes g_AreaDrawMode (4 in battle). A lower layer is in front. */
+#define BMAGIC_LAYER_FOREGROUND      2 /* in front of the effects on layer 3 */
+#define BMAGIC_LAYER_OVER_BATTLERS   3 /* in front of the battlers */
+#define BMAGIC_LAYER_BEHIND_BATTLERS 5 /* behind the battlers */
 
 /* The bytes a sparkle ray reserves in its cell packet. */
-#define BMAGIC_RAY_CELL_SIZE      32
+#define BMAGIC_RAY_CELL_SIZE         32
 
 /* Per-slot column views over the 0x78-byte effect slots: the trailing padding
  * carries the slot stride so each column keeps its own field base. */

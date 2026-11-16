@@ -105,7 +105,7 @@ MATCH void func_801EF4B0(void) {
     s32*     shade;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_AddDitheredDrawMode(5, tpage);
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
     g_ScratchPadVectors[2].vx = (rsin(0) * 3U) >> 6;
     g_ScratchPadVectors[2].vy = (rcos(0) * 3U) >> 6;
     for (i = 1; i < 17; i++) {
@@ -124,10 +124,10 @@ MATCH void func_801EF4B0(void) {
         setRGB0(poly, *shade, *shade, *shade);
         setRGB1(poly, *shade, *shade / 2, 1);
         setRGB2(poly, *shade, *shade / 2, 1);
-        GFX_AddPrim(5, sizeof(POLY_G3));
+        GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(POLY_G3));
     }
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_AddDitheredDrawMode(5, tpage);
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
 }
 
 MATCH void func_801EF708(void) {
@@ -139,7 +139,7 @@ MATCH void func_801EF708(void) {
     s32*     shade;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_AddDitheredDrawMode(5, tpage);
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
     g_ScratchPadVectors[1].vx = (rsin(0) * 3U) >> 6;
     g_ScratchPadVectors[1].vy = (rcos(0) * 3U) >> 6;
     g_ScratchPadVectors[3].vx = (u32)rsin(0) >> 4;
@@ -165,10 +165,10 @@ MATCH void func_801EF708(void) {
         setRGB1(poly, *shade, *shade / 2, 1);
         setRGB2(poly, 1, 1, 1);
         setRGB3(poly, 1, 1, 1);
-        GFX_AddPrim(5, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(POLY_G4));
     }
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_AddDitheredDrawMode(5, tpage);
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
 }
 
 MATCH void func_801EF9B8(void) {

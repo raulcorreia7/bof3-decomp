@@ -14,7 +14,7 @@ MATCH void func_801F6390(void) {
         return;
     }
     tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(7, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_BACKDROP, tpage);
     poly = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(poly);
     SetSemiTrans(poly, 0);
@@ -31,5 +31,5 @@ MATCH void func_801F6390(void) {
     poly->g2 = 0xFF;
     poly->r3 = 0xFF;
     poly->r2 = 0xFF;
-    GFX_AddPrim(7, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(POLY_G4));
 }

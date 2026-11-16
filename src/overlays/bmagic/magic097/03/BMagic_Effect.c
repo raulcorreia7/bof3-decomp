@@ -201,7 +201,7 @@ NON_MATCHING void func_801EFE04(s16 band_height, u16 radius, u16 jitter_mask) {
     g_ScratchPad.cells.halves[6] = band_height - RANDOM_MASK(3);
     g_ScratchPadVectors[0].vy    = FIXED_MUL(rsin(g_ScratchPad.cells.halves[1]), g_ScratchPad.cells.halves[0]);
     g_ScratchPadVectors[0].vz    = 0;
-    tpage                        = getTPage(0, 1, 320, 256);
+    tpage                        = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     for (i = 1; i < 18; i++) {

@@ -11,7 +11,7 @@ MATCH void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 sh
     entry = g_MenuPortraitAtlas + (atlas_index & BYTE_MASK) * 4;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 896, 256);
-    GFX_AddDitheredDrawMode(1, tpage);
+    GFX_AddDitheredDrawMode(GFX_LAYER_UI, tpage);
 
     sprt = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprt);
@@ -36,5 +36,5 @@ MATCH void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 sh
     clut = getClut(entry[2], entry[3] + 0x1E0);
     setWH(sprt, 40, 48);
     sprt->clut = clut;
-    GFX_AddPrim(1, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 }

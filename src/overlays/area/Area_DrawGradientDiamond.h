@@ -80,6 +80,6 @@ MATCH void Area_DrawGradientDiamond(s16 x, s16 y) {
            (s16)((s16)((POLY_G4*)primitive)->x2 - 0x9E) + x, (s16)((s16)((POLY_G4*)primitive)->y2 - 0x76) + y, (s16)((s16)((POLY_G4*)primitive)->x3 - 0x9E) + x,
            (s16)((s16)((POLY_G4*)primitive)->y3 - 0x76) + y);
 
-    GFX_AddPrim(1u, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
     PopMatrix();
 }

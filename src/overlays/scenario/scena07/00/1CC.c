@@ -482,7 +482,7 @@ MATCH u8 func_801F85D8(void) {
     MATRIX        matrix;
 
     active = 0;
-    GFX_AddDitheredDrawMode(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
+    GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     Area_SetCameraMatrix(&matrix);
     spark = MEM_PTR(FallingSpark, AREA_WORK);
     i     = 0;
@@ -539,14 +539,14 @@ MATCH void func_801F8764(FallingSpark* spark) {
 MATCH void func_801F8804(u8 shade) {
     TILE* tile;
 
-    GFX_AddDitheredDrawMode(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, FONT_TPAGE_X, FONT_TPAGE_Y));
+    GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, FONT_TPAGE_X, FONT_TPAGE_Y));
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
     setXY0(tile, 0, 0);
     setWH(tile, 320, 240);
     setRGB0(tile, shade, shade, shade);
-    GFX_AddPrim(1, sizeof(TILE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
 }
 
 #include "shared/Chain_Update.h"
@@ -633,7 +633,7 @@ MATCH s32 func_801F9A80(SceneEffectRow* row) {
     poly->x3 = screen.vx + 1;
     poly->y3 = screen.vy;
     setRGB0(poly, 0x40, 0x40, 0x40);
-    GFX_AddPrim(1, sizeof(POLY_F4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_F4));
     return landed;
 }
 
@@ -675,7 +675,7 @@ MATCH void func_801F9BDC(SceneEffectRow* row) {
         setRGB0(prim, 64, 64, 64);
         setRGB1(prim, 0, 0, 0);
         setRGB2(prim, 0, 0, 0);
-        GFX_AddPrim(1, sizeof(POLY_G3));
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G3));
     } while (i < 16);
 }
 
@@ -869,7 +869,7 @@ MATCH void func_801FA38C(void) {
         screen++;
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     quad   = MEM_PTR(u16, AREA_WORK + 0x27F4);
     shade  = MEM_PTR(u8, AREA_WORK + 0x37F4);
     screen = MEM_PTR(DVECTOR, AREA_WORK + 0x206C);
@@ -894,7 +894,7 @@ MATCH void func_801FA38C(void) {
         tone                           = shade[quad[3]];
         poly->r3 = poly->g3 = poly->b3 = tone;
         quad += 4;
-        GFX_AddPrim(1, sizeof(POLY_G4));
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
     }
 }
 

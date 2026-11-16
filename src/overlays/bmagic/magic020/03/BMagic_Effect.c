@@ -308,7 +308,7 @@ MATCH void func_801EFD10(void) {
 MATCH void func_801EFD88(void) {
     TILE* tile;
 
-    GFX_AddDitheredDrawMode(2, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_FOREGROUND, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
@@ -318,6 +318,6 @@ MATCH void func_801EFD88(void) {
     tile->h      = SCREEN_HEIGHT;
     SCREEN_SHADE = g_Task->unk_09 * 15;
     setRGB0(tile, SCREEN_SHADE, SCREEN_SHADE, SCREEN_SHADE);
-    GFX_AddPrim(2, sizeof(TILE));
-    GFX_AddDitheredDrawMode(2, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256));
+    GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(TILE));
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_FOREGROUND, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256));
 }

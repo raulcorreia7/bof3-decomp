@@ -46,7 +46,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     val3 = (u16)stack_18;
     val6 = (u16)stack_20;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, 0xF, (RECT*)val7);
-    GFX_AddPrim(1U, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     val7 = g_GfxPrimCursor;
     SetPolyFT4((POLY_FT4*)val7);
     SetSemiTrans(val7, 1);
@@ -86,7 +86,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
         GetGraphType();
     }
     FIELD(s16, val7, 0x16u) = 0xF;
-    GFX_AddPrim(1U, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
     val3     = (u16)((s32)((val3 & HALF_MASK) - 4) >> 1);
     val7     = g_GfxPrimCursor;
     stack_48 = (stack_28 - 3) & 1;
@@ -119,7 +119,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
         GetGraphType();
     }
     FIELD(s16, val7, 0x16u) = 0xF;
-    GFX_AddPrim(1U, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
     val7 = g_GfxPrimCursor;
     SetPolyFT4((POLY_FT4*)val7);
     SetSemiTrans(val7, 1);
@@ -151,7 +151,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
         GetGraphType();
     }
     FIELD(s16, val7, 0x16u) = 0xF;
-    GFX_AddPrim(1U, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
     val7 = g_GfxPrimCursor;
     SetPolyFT4((POLY_FT4*)val7);
     SetSemiTrans(val7, 1);
@@ -187,7 +187,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
         GetGraphType();
     }
     FIELD(s16, val7, 0x16u) = 0xF;
-    GFX_AddPrim(1U, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
     val7                   = g_GfxPrimCursor;
     g_GfxPrimCursor        = val7 + 8;
     *(s16*)(val7)          = 0;
@@ -198,7 +198,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
         GetGraphType();
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, 0xF, (RECT*)val7);
-    GFX_AddPrim(1U, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     func_801AEBA0((s16)val2, (s16)(stack_20 + 2), (s16)(stack_28 - 4), (s16)(stack_30 - 4), 0);
 }
 #else

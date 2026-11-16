@@ -28,7 +28,7 @@ MATCH void UI_DrawPanelBox(s16 x, s16 y, u8 w, u8 h) {
     tile->h = tile_h;
     setRGB0(tile, 0, 0, 0);
     SetSemiTrans(tile, 1);
-    GFX_AddPrim(1, sizeof(TILE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
 
     rect = (RECT*)g_GfxPrimCursor;
     g_GfxPrimCursor += 8;
@@ -36,7 +36,7 @@ MATCH void UI_DrawPanelBox(s16 x, s16 y, u8 w, u8 h) {
     rect->x = 0;
     rect->w = rect->h = 16;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), rect);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
 
     poly = (POLY_GT4*)g_GfxPrimCursor;
     SetPolyGT4(poly);
@@ -46,7 +46,7 @@ MATCH void UI_DrawPanelBox(s16 x, s16 y, u8 w, u8 h) {
     setXY4(poly, x, y, x + tile_w, y, x, y + tile_h, x + tile_w, y + tile_h);
     setUV4(poly, 0, 0, w, 0, 0, h, w, h);
     SetSemiTrans(poly, 1);
-    GFX_AddPrim(1, sizeof(POLY_GT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_GT4));
 
     rect = (RECT*)g_GfxPrimCursor;
     g_GfxPrimCursor += 8;
@@ -54,7 +54,7 @@ MATCH void UI_DrawPanelBox(s16 x, s16 y, u8 w, u8 h) {
     rect->x = 0;
     rect->w = rect->h = 256;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 0), rect);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
 
     line = (LINE_F4*)g_GfxPrimCursor;
     SetLineF4(line);
@@ -62,7 +62,7 @@ MATCH void UI_DrawPanelBox(s16 x, s16 y, u8 w, u8 h) {
     right  = x + width;
     bottom = y + height;
     setXY4(line, x - 1, y - 1, right + 1, y - 1, right + 1, bottom + 1, x - 1, bottom + 1);
-    GFX_AddPrim(1, sizeof(LINE_F4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F4));
 
     UI_DrawLine(x - 1, y - 1, x - 1, bottom + 1, 200);
     UI_DrawLine(x - 2, y, x - 2, bottom, 140);

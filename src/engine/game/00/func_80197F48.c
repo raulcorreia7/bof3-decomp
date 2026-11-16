@@ -8,7 +8,7 @@ MATCH void func_80197F48(void) {
 
     changed = 0;
     if (g_AreaCameraMoving == 0 && EMI_IsReady() != 0) {
-        g_AreaDrawMode = 6;
+        g_AreaDrawMode = GFX_LAYER_FIELD_SCENE;
         Party_BuildBattlers(PARTY_ORDER_FIELD);
         func_801BFB34();
         flags            = &g_Battle.outcome.options;

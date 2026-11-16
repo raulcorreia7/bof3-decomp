@@ -666,14 +666,14 @@ MATCH void func_801F8EF0(void) {
     setRGB0(prim, 0, 0, 0);
     setXY0(prim, 0, 0);
     setWH(prim, width, height);
-    GFX_AddPrim(1, sizeof(TILE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
 
     prim = (TILE*)g_GfxPrimCursor;
     setTile(prim);
     setRGB0(prim, 0, 0, 0);
     setXY0(prim, 0, 0xD2);
     setWH(prim, width, height);
-    GFX_AddPrim(1, sizeof(TILE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
 }
 
 MATCH void func_801F8FAC(s32 x, s32 y, s32 color, u8 semi_trans) {
@@ -706,7 +706,7 @@ NON_MATCHING void func_801F90BC(s16 x, s16 y, u32 clut, u32 uv) {
     setXY0(prim, x, y);
     prim->clut = (clut & 0x3F) | 0x7B80;
     setUV0(prim, (uv & 0xF) << 4, uv & 0xF0);
-    GFX_AddPrim(1, sizeof(SPRT_16));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT_16));
 }
 #else
 INCLUDE_ASM(func_801F90BC);
@@ -723,7 +723,7 @@ MATCH void func_801F9160(s16 x, s16 y) {
     setXY0(prim, x, y);
     prim->u0 = 0;
     setWH(prim, 0x58, 0x12);
-    GFX_AddPrim(1, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 }
 
 /* func_801F91F0 */

@@ -12,7 +12,7 @@ MATCH void func_801EEC04(void) {
 
     BMagic_DispatchTaskPair(func_801EEDAC, Effect_MarkDamagedOnZeroTick);
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
 
     for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
         if (BMAGIC_EFFECT_SLOTS[i].header.flags & BMAGIC_EFFECT_IN_USE) {
@@ -27,7 +27,7 @@ MATCH void func_801EEC04(void) {
     }
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
 }
 
 MATCH void func_801EEDAC(void) {
@@ -192,7 +192,7 @@ MATCH void func_801EF584(void) {
         setRGB0(prim, 1, 1, 0xC0);
         setRGB1(prim, 0xE0, 0xE0, 0xE0);
         setRGB2(prim, 0xE0, 0xE0, 0xE0);
-        GFX_AddPrim(3, sizeof(POLY_G3));
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G3));
     }
 }
 
@@ -240,7 +240,7 @@ NON_MATCHING void func_801EF750(void) {
         prim->g3 = 0x20;
         prim->y3 = y_origin + FIXED_MUL(y3_cosine, inner_radius);
 
-        GFX_AddPrim(3, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
     }
 }
 #else
@@ -288,7 +288,7 @@ NON_MATCHING void func_801EF9E0(void) {
         setRGB0(prim, shade, shade, 0xC0);
         setRGB1(prim, 0xC0, 0xC0, 0xC0);
         setRGB2(prim, shade, shade, 0xC0);
-        GFX_AddPrim(3, sizeof(POLY_G3));
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G3));
     }
 }
 #else

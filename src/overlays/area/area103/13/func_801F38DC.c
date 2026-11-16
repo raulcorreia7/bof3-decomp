@@ -62,6 +62,6 @@ MATCH void func_801F38DC(void) {
         setRGB0(prim, 128, 128, 128);
         prim->tpage = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
         prim->clut  = GetClut(0, 487);
-        GFX_AddPrim(1, sizeof(POLY_FT4));
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
     }
 }

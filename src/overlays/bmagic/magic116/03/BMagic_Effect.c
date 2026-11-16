@@ -80,7 +80,7 @@ MATCH void func_801EEE7C(BMagicStreakSegment* segment) {
     Area_ProjectPoint(point, POLY_XY(prim, 3));
     setRGB0(prim, prim->r1 = segment->head_red, prim->g1 = segment->head_green, prim->b1 = segment->head_blue);
     setRGB2(prim, prim->r3 = segment->tail_red, prim->g3 = segment->tail_green, prim->b3 = segment->tail_blue);
-    GFX_AddPrim(3, sizeof(POLY_G4));
+    GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
 }
 
 MATCH BMagicStreakSegment* func_801EEFB8(void) {
@@ -140,7 +140,7 @@ MATCH u8 func_801EF118(void) {
 
     drawn = 0;
     GFX_SET_DRAW_MODE(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100) & HALF_MASK);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(DR_MODE));
     func_801AFE18();
     for (record = D_801EF2A8, i = 0; i < 128; record++, i++) {
         if (record->active != 0) {

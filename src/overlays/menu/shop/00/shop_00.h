@@ -732,7 +732,7 @@ static inline void MenuClearScreenTile(void) {
     setXY0(prim, 0, 0);
     prim->h = 240;
     setRGB0(prim, 0, 0, 0);
-    GFX_AddPrim(1, sizeof(TILE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
 }
 
 /* Counts the cue counter down and steps the shop when it reaches zero.

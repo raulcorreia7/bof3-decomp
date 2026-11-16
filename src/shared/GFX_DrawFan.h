@@ -21,6 +21,6 @@ MATCH void GFX_DrawFan(Pos2* point, s16 radius, u16 angle, u8 colour) {
         prim->b1 = 0;
         prim->g1 = 0;
         prim->r1 = 0;
-        GFX_AddPrim(1, sizeof(POLY_G3));
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G3));
     } while (i < 8);
 }

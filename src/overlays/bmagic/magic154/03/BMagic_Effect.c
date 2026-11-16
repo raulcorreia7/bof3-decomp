@@ -81,7 +81,7 @@ MATCH void func_801EEFE0(void) {
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF104(void) {
-    GFX_AddDitheredDrawMode(3, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_BYTE(g_BMagicEffectModes + 2, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {

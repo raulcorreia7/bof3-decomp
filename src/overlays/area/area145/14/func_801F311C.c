@@ -16,7 +16,7 @@ MATCH void func_801F311C(s16 x0, s16 y0, s16 x1, s16 y1) {
     setRGB1(prim, 0, 0, 0);
     setRGB2(prim, 64, 64, 64);
     setRGB3(prim, 0, 0, 0);
-    GFX_AddPrim(1, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
     prim     = GFX_CURSOR(POLY_G4);
     /* The second quad starts as the first with the other side of the normal. */
     prim[0]  = prim[-1];
@@ -24,5 +24,5 @@ MATCH void func_801F311C(s16 x0, s16 y0, s16 x1, s16 y1) {
     prim->y1 = y0 - normal.vy;
     prim->x3 = x1 - normal.vx;
     prim->y3 = y1 - normal.vy;
-    GFX_AddPrim(1, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
 }

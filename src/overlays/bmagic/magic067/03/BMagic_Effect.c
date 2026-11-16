@@ -191,7 +191,7 @@ MATCH void func_801EF79C(void) {
     s32       tpage;
 
     tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     g_ScratchPad.cells.halves[1] = 128;
     g_ScratchPad.cells.halves[0] = g_Task->unk_09;
     g_ScratchPad.cells.halves[2] = 512;
@@ -242,10 +242,10 @@ MATCH void func_801EF79C(void) {
         setUV4(prim, 0, g_ScratchPad.cells.halves[7], 255, g_ScratchPad.cells.halves[7], 0, g_ScratchPad.cells.halves[7] + 3, 255, g_ScratchPad.cells.halves[7] + 3);
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                       &depth, &flag);
-        GFX_AddPrim(2, sizeof(POLY_GT4));
+        GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_GT4));
     }
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
 }
 
 MATCH void func_801EFF24(void) {
@@ -266,7 +266,7 @@ MATCH void func_801EFF24(void) {
 MATCH void func_801F00C4(void) {
     POLY_G4* prim;
 
-    GFX_AddDitheredDrawMode(2, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_FOREGROUND, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
@@ -279,8 +279,8 @@ MATCH void func_801F00C4(void) {
     g_ScratchPad.cells.halves[1] = g_Task->unk_09 * 8;
     setRGB0(prim, prim->r3 = g_ScratchPad.cells.halves[0], prim->g3 = g_ScratchPad.cells.halves[0], prim->b3 = g_ScratchPad.cells.halves[0]);
     setRGB1(prim, prim->r2 = g_ScratchPad.cells.halves[1], prim->g2 = g_ScratchPad.cells.halves[1], prim->b2 = g_ScratchPad.cells.halves[1]);
-    GFX_AddPrim(2, sizeof(POLY_G4));
-    GFX_AddDitheredDrawMode(2, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256));
+    GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_G4));
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_FOREGROUND, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256));
 }
 
 MATCH void func_801F02A0(void) {

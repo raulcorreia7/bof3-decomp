@@ -14,7 +14,7 @@ MATCH void func_801EEC24(void) {
     __builtin_memcpy(handlers, D_801EEC04, sizeof(handlers));
     SYS_DISPATCH_BYTE(handlers, g_Task->header.mode);
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     for (i = 0; i < ARRAY_COUNT(D_801F1CA0); i++) {
         if (D_801F1CA0[i].header.flags & BMAGIC_EFFECT_IN_USE) {
             saved_battler         = g_BattleEffectBattler;
@@ -25,7 +25,7 @@ MATCH void func_801EEC24(void) {
         }
     }
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
 }
 
 MATCH void func_801EEDEC(void) {
@@ -423,7 +423,7 @@ MATCH void func_801F030C(void) {
     s32      shade;
     s32      tpage;
 
-    EFFECT_DRAW_FULL_SCREEN_QUAD(2);
+    EFFECT_DRAW_FULL_SCREEN_QUAD(BMAGIC_LAYER_FOREGROUND);
 }
 
 MATCH void func_801F0438(void) {
@@ -517,13 +517,13 @@ NON_MATCHING void func_801F06B4(void) {
             g_ScratchPadVectors[3].vy    = FIXED_MUL(rcos(g_ScratchPad.cells.halves[3]), g_ScratchPad.cells.halves[2]);
             x                            = (g_ScratchPadVectors[3].vx << 9) + g_Task->pos.x.fixed;
             y                            = (g_ScratchPadVectors[3].vy << 9) + g_Task->pos.y.fixed;
-            tpage                        = getTPage(1, 1, 320, 256);
+            tpage                        = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
             Area_AddCellPrim(x, y, 1, sizeof(DR_MODE));
             poly = (POLY_FT4*)g_GfxPrimCursor;
             SetPolyFT4(poly);
             SetSemiTrans(poly, 1);
-            poly->tpage = GetTPage(1, 1, 0x340, 0x100);
+            poly->tpage = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 0x340, 0x100);
             poly->clut  = GetClut(0, 0x1FA);
             setUV4(poly, ((i & 1) + (ring - 1) / 4 * 2) << 6, FIELD(u8, D_801F1C08, 0xB + ring - 1), (((i & 1) + (ring - 1) / 4 * 2) << 6) + 0x3F, FIELD(u8, D_801F1C08, 0xB + ring - 1),
                    ((i & 1) + (ring - 1) / 4 * 2) << 6, FIELD(u8, D_801F1C08, 0x13 + ring - 1) - 1 + FIELD(u8, D_801F1C08, 0xB + ring - 1), (((i & 1) + (ring - 1) / 4 * 2) << 6) + 0x3F,
@@ -613,7 +613,7 @@ MATCH void func_801F0DF4(void) {
     s32       u;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, g_Task->param.unk_0B, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     g_ScratchPad.cells.halves[0] = g_Task->unk_14;
     g_ScratchPad.cells.halves[4] = g_Task->unk_09 << 3;
     g_ScratchPad.cells.halves[5] = g_Task->unk_09 << 3;
@@ -644,7 +644,7 @@ MATCH void func_801F0DF4(void) {
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                       &depth, &flag);
         if (i < 7 || i > 14) {
-            GFX_AddPrim(3, sizeof(POLY_FT4));
+            GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_FT4));
         }
     }
 }
@@ -768,7 +768,7 @@ MATCH void func_801F1844(void) {
         setRGB0(prim, shade, shade, shade);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);
-        GFX_AddPrim(2, sizeof(POLY_G3));
+        GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_G3));
     }
 }
 

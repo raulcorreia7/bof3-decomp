@@ -57,7 +57,7 @@ NON_MATCHING void Area_AddGridActor(void) {
     }
     sort           = g_Task->unk_32 << 8;
     g_Task->unk_32 = sort;
-    if (g_AreaDrawMode == 4) {
+    if (g_AreaDrawMode == GFX_LAYER_BATTLE_SCENE) {
         if (D_8014933F != 0) {
             sort |= (g_Task->pos.x.fixed >> 15) & BYTE_MASK;
         } else {

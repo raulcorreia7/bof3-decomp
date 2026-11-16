@@ -41,7 +41,7 @@ HAND_ASM void UI_DrawIconCell(s32 index, s32 x, s32 y, s32 width, s32 height, s3
         prim->tpage         = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 896, 256);
     }
     prim->clut = (D_80149C78[slot] & 0x3F) | 0x7800;
-    GFX_AddPrim(1, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 }
 #else
 INCLUDE_ASM(UI_DrawIconCell);

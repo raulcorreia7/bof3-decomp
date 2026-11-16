@@ -127,7 +127,7 @@ MATCH void func_801EF330(void) {
     u8       b;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
@@ -156,9 +156,9 @@ MATCH void func_801EF330(void) {
     g                     = g_Task->unk_09 * (FIXED_MUL(rsin(g_ScratchPadHalves[0]), 6) + 8);
     b                     = g_Task->unk_09 * (FIXED_MUL(rsin(D_1F800002), 6) + 8);
     setRGB3(prim, r, g, b);
-    GFX_AddPrim(3, sizeof(POLY_G4));
+    GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
 }
 
 MATCH void func_801EF7F8(void) {
@@ -190,5 +190,5 @@ MATCH void func_801EF970(void) {
     s32      shade;
     s32      tpage;
 
-    EFFECT_DRAW_FULL_SCREEN_QUAD(3);
+    EFFECT_DRAW_FULL_SCREEN_QUAD(BMAGIC_LAYER_OVER_BATTLERS);
 }

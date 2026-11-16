@@ -46,5 +46,5 @@ MATCH void func_801F3BFC(const WorldSpin* spin) {
     setRGB1(primitive, 0, 0, 0);
     setRGB2(primitive, 0, 0, 0);
 
-    GFX_AddPrim(1u, sizeof(POLY_G3));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G3));
 }

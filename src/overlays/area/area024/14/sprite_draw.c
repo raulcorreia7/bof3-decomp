@@ -545,7 +545,7 @@ MATCH void func_801F3944(const WorldSpin* spin) {
     setRGB1(primitive, 0, 0, 0);
     setRGB2(primitive, 0, 0, 0);
 
-    GFX_AddPrim(1u, sizeof(POLY_G3));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G3));
 }
 
 MATCH void func_801F3BE4(WorldSpin* spin) {
@@ -677,7 +677,7 @@ MATCH s32 func_801F3E48(u8 shade) {
         RotTransPers(&verts[3], (long*)&prim->x2, &depth, &flag);
 
         if (func_801F4158((DVECTOR*)&prim->x0, (DVECTOR*)&prim->x1, (DVECTOR*)&prim->x2) > 0 || func_801F4158((DVECTOR*)&prim->x2, (DVECTOR*)&prim->x3, (DVECTOR*)&prim->x0) > 0) {
-            GFX_AddPrim(1u, sizeof(LINE_F4));
+            GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F4));
         }
         i++;
     }

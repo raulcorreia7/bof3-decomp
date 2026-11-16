@@ -26,5 +26,5 @@ MATCH void func_801AEA80(s32 sprite_x, s32 sprite_y, s32 texture_index, s32 shad
             break;
     }
     sprite->clut = clut;
-    GFX_AddPrim(1U, sizeof(SPRT_8));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT_8));
 }

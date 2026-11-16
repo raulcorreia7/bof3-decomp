@@ -49,7 +49,7 @@ NON_MATCHING void func_801D9E9C(s16 arg0, s16 arg1, u16 arg2, u16 arg3, s8 arg4)
     val7->v2 = 223;
     val7->u3 = val4;
     val7->v3 = 223;
-    GFX_AddPrim(1U, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
     val7 = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(val7);
     val7->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
@@ -74,7 +74,7 @@ NON_MATCHING void func_801D9E9C(s16 arg0, s16 arg1, u16 arg2, u16 arg3, s8 arg4)
     val7->v2 = 223;
     val7->u3 = 159;
     val7->v3 = 223;
-    GFX_AddPrim(1U, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 }
 #else
 INCLUDE_ASM(func_801D9E9C);

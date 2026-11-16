@@ -312,7 +312,7 @@ MATCH void func_801F7FFC(Scena03Quad* quad) {
 MATCH void func_801F8170(s32* vertices) {
     MATRIX camera;
 
-    GFX_AddDitheredDrawMode(1u, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
+    GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     Area_SetCameraMatrix(&camera);
     func_801F8200(vertices, 0, 1, 2);
     func_801F8200(vertices, 0, 3, 2);
@@ -334,7 +334,7 @@ MATCH void func_801F8200(s32* vertices, s32 v0, s32 v1, s32 v2) {
     setRGB0(primitive, 0x40, 0x40, 0x40);
     setRGB1(primitive, 0, 0, 0);
     setRGB2(primitive, 0x80, 0x80, 0x80);
-    GFX_AddPrim(1u, sizeof(POLY_G3));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G3));
 }
 
 MATCH void func_801F82E4(void) {
@@ -471,7 +471,7 @@ MATCH void func_801F88FC(Scena03Line* line) {
     s16      scale;
     s8       i;
 
-    GFX_AddDitheredDrawMode(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
+    GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     i      = 0;
     rot.vx = (rsin(line->yaw) * rcos(line->pitch)) >> 8;
     rot.vy = (rsin(line->yaw) * rsin(line->pitch)) >> 8;
@@ -495,7 +495,7 @@ MATCH void func_801F88FC(Scena03Line* line) {
         point.vz = g_Game.members[0].pos.z.fixed + (scale * rot.vz);
         Area_ProjectPoint(&point.vx, (DVECTOR*)&primitive->x1);
         setRGB1(primitive, (line->end_scale * line->color.red) >> 8, (line->end_scale * line->color.green) >> 8, (line->end_scale * line->color.blue) >> 8);
-        GFX_AddPrim(1, sizeof(LINE_G2));
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_G2));
 
         i++;
         prev   = rot;

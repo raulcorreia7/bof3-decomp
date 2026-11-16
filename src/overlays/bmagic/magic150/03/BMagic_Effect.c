@@ -123,7 +123,7 @@ MATCH void func_801EF040(void) {
         setRGB0(prim, 128, 0, 0);
         /* FAKE: retail tests the whole return register, as for a call with no prototype; the shared s16 prototype adds a sign extension. */
         if (((s32 (*)(Pos2*, Pos2*, Pos2*))func_801AFF90)((Pos2*)&prim->x0, (Pos2*)&prim->x1, (Pos2*)&prim->x2) < 0) {
-            GFX_AddPrim(1, sizeof(POLY_F4));
+            GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_F4));
         }
     }
 }
@@ -158,7 +158,7 @@ MATCH void func_801EF324(Magic150SpanPair* pair) {
     setRGB1(quad, 0, 0, 0);
     setRGB2(quad, 64, 64, 0);
     setRGB3(quad, 0, 0, 0);
-    GFX_AddPrim(1, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
 
     quad     = GFX_CURSOR(POLY_G4);
     *quad    = quad[-1];
@@ -166,14 +166,14 @@ MATCH void func_801EF324(Magic150SpanPair* pair) {
     quad->y1 = pair->previous.screen[2].vy;
     quad->x3 = pair->current.screen[2].vx;
     quad->y3 = pair->current.screen[2].vy;
-    GFX_AddPrim(1, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
 
     line = GFX_CURSOR(LINE_F2);
     SetLineF2(line);
     SetSemiTrans(line, 1);
     setXY2(line, pair->previous.screen[1].vx, pair->previous.screen[1].vy, pair->current.screen[1].vx, pair->current.screen[1].vy);
     setRGB0(line, 32, 32, 0);
-    GFX_AddPrim(1, sizeof(LINE_F2));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F2));
 }
 
 /* Draws the beam along its path: 128 segments, each 1/32 turn further round the path
@@ -250,7 +250,7 @@ MATCH void func_801EF790(s32 x, s32 y, s16 radius, u8 colour, u8 alpha) {
         setRGB0(prim, colour, 0, 0);
         setRGB1(prim, alpha, 0, 0);
         setRGB2(prim, alpha, 0, 0);
-        GFX_AddPrim(1, sizeof(POLY_G3));
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G3));
     }
 }
 

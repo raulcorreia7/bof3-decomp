@@ -24,5 +24,5 @@ MATCH void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags) {
     }
 
     setRGB0(sprt, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
-    GFX_AddPrim(1, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 }

@@ -16,4 +16,4 @@
     SetPolyF3(poly);                                            \
     setXY3(poly, (X), (Y), (X) - 4, (Y) - 4, (X) + 4, (Y) - 4); \
     setRGB0(poly, 0, colour, 0);                                \
-    GFX_AddPrim(1, sizeof(POLY_F3))
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_F3))

@@ -688,7 +688,7 @@ MATCH void BMagic_DrawGlowRingInner(void) {
     long     flag;
     s32      i;
 
-    GFX_AddDitheredDrawMode(4, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
+    GFX_AddDitheredDrawMode(GFX_LAYER_BATTLE_SCENE, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     GLOW_RING_INNER           = g_Task->unk_14;
     GLOW_RING_OUTER           = g_Task->unk_14 + 0x40;
     GLOW_RING_SHADE           = g_Task->unk_09 * 15;
@@ -714,7 +714,7 @@ MATCH void BMagic_DrawGlowRingInner(void) {
         setRGB1(prim, GLOW_RING_SHADE, GLOW_RING_SHADE, GLOW_RING_SHADE);
         setRGB2(prim, 1, 1, 1);
         setRGB3(prim, 1, 1, 1);
-        GFX_AddPrim(4, sizeof(POLY_G4));
+        GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, sizeof(POLY_G4));
     }
 }
 
@@ -725,7 +725,7 @@ MATCH void BMagic_DrawGlowRingOuter(void) {
     long     flag;
     s32      i;
 
-    GFX_AddDitheredDrawMode(4, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
+    GFX_AddDitheredDrawMode(GFX_LAYER_BATTLE_SCENE, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     GLOW_RING_INNER           = g_Task->unk_14 + 0x40;
     GLOW_RING_OUTER           = g_Task->unk_14 + 0x80;
     GLOW_RING_SHADE           = g_Task->unk_09 * 15;
@@ -751,6 +751,6 @@ MATCH void BMagic_DrawGlowRingOuter(void) {
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, GLOW_RING_SHADE, GLOW_RING_SHADE, GLOW_RING_SHADE);
         setRGB3(prim, GLOW_RING_SHADE, GLOW_RING_SHADE, GLOW_RING_SHADE);
-        GFX_AddPrim(4, sizeof(POLY_G4));
+        GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, sizeof(POLY_G4));
     }
 }

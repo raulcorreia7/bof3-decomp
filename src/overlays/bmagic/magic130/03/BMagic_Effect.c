@@ -120,7 +120,7 @@ MATCH void func_801EF1E0(void) {
 
 MATCH void func_801EF284(void) {
     SYS_DISPATCH_BYTE(D_801EFA5C, g_Task->header.step);
-    GFX_AddDitheredDrawMode(2, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
+    GFX_AddDitheredDrawMode(BMAGIC_LAYER_FOREGROUND, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         func_801EF4D4();
         func_801EF730();
@@ -178,7 +178,7 @@ MATCH void func_801EF4D4(void) {
         setRGB0(prim, g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2]);
         setRGB1(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[5]);
         setRGB2(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[5]);
-        GFX_AddPrim(2, sizeof(POLY_G3));
+        GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_G3));
     }
 }
 
@@ -207,6 +207,6 @@ MATCH void func_801EF730(void) {
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[5]);
         setRGB3(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[5]);
-        GFX_AddPrim(2, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_G4));
     }
 }

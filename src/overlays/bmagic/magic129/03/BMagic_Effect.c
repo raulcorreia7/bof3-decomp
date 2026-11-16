@@ -163,7 +163,7 @@ MATCH void func_801EF54C(void) {
     u8       i;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     power                        = (s8)g_Task->unk_5D;
     g_ScratchPad.cells.halves[1] = 8;
     grey                         = power * 15;
@@ -211,7 +211,7 @@ MATCH void func_801EF54C(void) {
             setRGB0(prim, 1, 1, 1);
             setRGB1(prim, 1, 1, 1);
         }
-        GFX_AddPrim(2, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_G4));
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
@@ -236,7 +236,7 @@ MATCH void func_801EF54C(void) {
             setRGB0(prim, 1, 1, 1);
             setRGB1(prim, 1, 1, 1);
         }
-        GFX_AddPrim(2, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_G4));
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
@@ -261,7 +261,7 @@ MATCH void func_801EF54C(void) {
             setRGB0(prim, 1, 1, 1);
             setRGB1(prim, 1, 1, 1);
         }
-        GFX_AddPrim(2, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_G4));
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
@@ -285,10 +285,10 @@ MATCH void func_801EF54C(void) {
             setRGB0(prim, 1, 1, 1);
             setRGB1(prim, 1, 1, 1);
         }
-        GFX_AddPrim(2, sizeof(POLY_G4));
+        GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_G4));
     }
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
 }
 
 MATCH void func_801EFF40(void) {
