@@ -11,7 +11,7 @@ MATCH void func_801E1888(void) {
     count = work->unk_09;
     if (count == 0) {
         Battle_PlayEffectCue(5);
-        if ((g_Game.current->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) && ((g_Battle.dragon_form & BYTE_MASK) != 4) && ((u32)((short)g_Battle.dragon_form - 7) >= 2)) {
+        if ((g_Game.current->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM) && ((g_Battle.dragon_form & BYTE_MASK) != 4) && ((u32)((short)g_Battle.dragon_form - 7) >= 2)) {
             Battle_PlayEffectCue(3);
         }
         g_Task->header.step = g_Task->header.step + 1;

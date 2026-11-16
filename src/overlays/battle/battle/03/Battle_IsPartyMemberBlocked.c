@@ -12,7 +12,7 @@ MATCH u8 Battle_IsPartyMemberBlocked(void) {
         return 1u;
     }
 
-    if ((*(global_base + 0x63CE) != 0u) && ((battle_work->u.turn.action_flags.value & COMBATANT_FLAG_SUPPRESSION_EXEMPT) == 0u)) {
+    if ((*(global_base + 0x63CE) != 0u) && ((battle_work->u.turn.action_flags.value & BATTLER_ACTION_SUPPRESSION_EXEMPT) == 0u)) {
         return 1u;
     }
 

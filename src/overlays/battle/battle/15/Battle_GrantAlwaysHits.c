@@ -9,8 +9,8 @@ MATCH void Battle_GrantAlwaysHits(void) {
     Battle_MarkDamageApplied();
     battler = LOBU(g_Battle.active_battler);
     if (BATTLER_IS_PLAYER(battler)) {
-        g_Game.members[battler].u.turn.action_flags.value |= COMBATANT_FLAG_ALWAYS_HITS;
+        g_Game.members[battler].u.turn.action_flags.value |= BATTLER_ACTION_ALWAYS_HITS;
         return;
     }
-    ENEMY_COMBATANT(battler).turn.action_flags.value |= COMBATANT_FLAG_ALWAYS_HITS;
+    ENEMY_COMBATANT(battler).turn.action_flags.value |= BATTLER_ACTION_ALWAYS_HITS;
 }

@@ -19,7 +19,7 @@ MATCH u32 Battle_RollHitOnEnemy(s16 damage, u8 attacker, u8 target) {
         ENEMY_COMBATANT(target).turn.target_flags &= ~BATTLE_HIT_HP_LANDED;
         return 0;
     }
-    if (attacker < 3 && (g_Game.members[attacker].u.turn.action_flags.value & COMBATANT_FLAG_ALWAYS_HITS)) {
+    if (attacker < 3 && (g_Game.members[attacker].u.turn.action_flags.value & BATTLER_ACTION_ALWAYS_HITS)) {
         return damage;
     }
     if ((ENEMY_COMBATANT(target).event_flags & ENEMY_EVENT_EVADE) && (RANDOM_MASK(2))) {

@@ -17,7 +17,7 @@ NON_MATCHING void func_801DA7D4(void) {
     total   = 0;
     maximum = 0;
     for (index = 3; index < 11; index++) {
-        if (D_801463BA == 0 || (g_BattleEnemyBattlers[index - 3].turn.action_flags.value & COMBATANT_FLAG_PREEMPTIVE_TURN)) {
+        if (D_801463BA == 0 || (g_BattleEnemyBattlers[index - 3].turn.action_flags.value & BATTLER_ACTION_PREEMPTIVE_TURN)) {
             if (func_801DB9E4(index)) {
                 agility = g_BattleEnemyBattlers[index - 3].stats.agility;
                 total += agility;
@@ -30,7 +30,7 @@ NON_MATCHING void func_801DA7D4(void) {
 
     total = 0;
     for (index = 0; index < BATTLE_COMMAND_MAX; index++) {
-        if (D_801463BA == 0 || (g_Game.members[index].u.turn.action_flags.volatile_value & COMBATANT_FLAG_PREEMPTIVE_TURN)) {
+        if (D_801463BA == 0 || (g_Game.members[index].u.turn.action_flags.volatile_value & BATTLER_ACTION_PREEMPTIVE_TURN)) {
             if (func_801DB844(index)) {
                 entries[total].index = index;
                 entries[total].value = g_Game.members[index].chr.stats.agility;

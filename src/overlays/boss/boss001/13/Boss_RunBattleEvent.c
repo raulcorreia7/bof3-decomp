@@ -16,7 +16,7 @@ MATCH u8 Boss_RunBattleEvent(u32 mode) {
             g_BattleEnemyBattlers[0].stats.max_hp = 1;
             g_BattleEnemyBattlers[1].hp           = 1;
             g_BattleEnemyBattlers[1].stats.max_hp = 1;
-            g_Game.members[0].u.turn.action_flags.value &= ~COMBATANT_FLAG_DRAGON_FORM;
+            g_Game.members[0].u.turn.action_flags.value &= ~BATTLER_ACTION_DRAGON_FORM;
             break;
         case BOSS_EVENT_RESTART_BEGIN:
             if ((g_Battle.state & BATTLE_STATE_REPRISAL_PENDING) && (g_Battle.target_selector == 0)) {
@@ -37,7 +37,7 @@ MATCH u8 Boss_RunBattleEvent(u32 mode) {
             }
             break;
         case BOSS_EVENT_BATTLE_RESET:
-            g_Game.members[0].u.turn.action_flags.value |= COMBATANT_FLAG_DRAGON_FORM;
+            g_Game.members[0].u.turn.action_flags.value |= BATTLER_ACTION_DRAGON_FORM;
             break;
     }
     return 0;

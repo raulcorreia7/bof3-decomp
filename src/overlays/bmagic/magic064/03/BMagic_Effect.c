@@ -241,7 +241,7 @@ MATCH void func_801EF69C(void) {
         return;
     }
 
-    g_Game.members[g_Battle.active_battler].u.turn.action_flags.value |= COMBATANT_FLAG_DRAGON_FORM_QUEUED;
+    g_Game.members[g_Battle.active_battler].u.turn.action_flags.value |= BATTLER_ACTION_DRAGON_FORM_QUEUED;
     g_Game.members[g_Battle.active_battler].counter_136 = 0;
     g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
     Battle_MarkDamaged(g_Battle.target_selector);

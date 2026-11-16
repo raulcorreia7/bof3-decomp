@@ -137,7 +137,7 @@ MATCH void func_801EF1C0(void) {
         return;
     }
     for (i = 0; i < g_Game.party_size; i++) {
-        if (g_Game.members[i].chr.character_id == CHAR_ID_REI && (g_Game.members[i].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM_QUEUED)) {
+        if (g_Game.members[i].chr.character_id == CHAR_ID_REI && (g_Game.members[i].u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM_QUEUED)) {
             found = 1;
         }
     }

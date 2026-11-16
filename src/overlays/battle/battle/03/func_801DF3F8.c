@@ -73,7 +73,7 @@ MATCH void func_801DF3F8(void) {
                 goto store_coord_y;
             }
         }
-    } else if ((g_Battle.state & BATTLE_STATE_RELOAD_PARTY) && (g_Game.current->u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM)) {
+    } else if ((g_Battle.state & BATTLE_STATE_RELOAD_PARTY) && (g_Game.current->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM)) {
         PartyMember* work = g_Task;
 
         s32 x = g_EncounterOriginX;

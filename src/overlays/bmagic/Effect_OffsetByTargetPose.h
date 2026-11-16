@@ -7,7 +7,7 @@
     Battle_ProjectRange();                                                                 \
     slot = LOBU(g_Battle.target_selector);                                                 \
     if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {                                            \
-        if (g_Game.members[slot].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) { \
+        if (g_Game.members[slot].u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM) { \
             work = g_Task;                                                                 \
             kind = FORM_KINDS[g_Battle.dragon_form];                                       \
             if (work->facing == 0 || work->facing == 3) {                                  \

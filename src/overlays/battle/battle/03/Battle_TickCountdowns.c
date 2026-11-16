@@ -16,7 +16,7 @@ MATCH void Battle_TickCountdowns(void) {
     local_table = g_Game.members;
     do {
         if (Battle_GetActionLock(index) == 0u) {
-            if ((g_Game.members[index].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM_QUEUED) != 0u) {
+            if ((g_Game.members[index].u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM_QUEUED) != 0u) {
                 u8 loaded = g_Game.members[index].counter_136;
                 u8 count  = loaded;
                 if (count < 6u) {
@@ -32,7 +32,7 @@ MATCH void Battle_TickCountdowns(void) {
                     local_table[index].counter_137 = count;
                 }
             }
-            if ((g_Game.members[index].u.turn.action_flags.value & COMBATANT_FLAG_CHARGING) != 0u) {
+            if ((g_Game.members[index].u.turn.action_flags.value & BATTLER_ACTION_CHARGING) != 0u) {
                 u8 loaded = g_Game.members[index].counter_136;
                 u8 count  = loaded;
                 if (count < 3u) {
@@ -49,7 +49,7 @@ MATCH void Battle_TickCountdowns(void) {
     do {
         if (Battle_GetActionLock(index) == 0u) {
             enemy_index = index - 3u;
-            if ((g_BattleEnemyBattlers[enemy_index].turn.action_flags.value & COMBATANT_FLAG_CHARGING) != 0u) {
+            if ((g_BattleEnemyBattlers[enemy_index].turn.action_flags.value & BATTLER_ACTION_CHARGING) != 0u) {
                 u8 loaded = g_BattleEnemyBattlers[enemy_index].unk_112;
                 u8 count  = loaded;
                 if (count < 3u) {

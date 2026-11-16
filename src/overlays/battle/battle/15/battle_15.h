@@ -59,7 +59,7 @@
         u8  result;                                                                                       \
         battler = *(u8*)&g_Battle.active_battler;                                                         \
         if (battler < 3u) {                                                                               \
-            if ((g_Game.members[battler].u.turn.action_flags.value & COMBATANT_FLAG_DRAGON_FORM) != 0u) { \
+            if ((g_Game.members[battler].u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM) != 0u) { \
                 result = flagged[g_Battle.dragon_form];                                                   \
             } else {                                                                                      \
                 result = player[g_Game.members[battler].chr.character_id];                                \

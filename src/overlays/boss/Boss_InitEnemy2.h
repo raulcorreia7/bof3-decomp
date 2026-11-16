@@ -5,7 +5,7 @@ MATCH void Boss_InitEnemy2(void) {
     work         = g_BattleCurrentEnemy;
     work->script = D_800C1B1C;
     work->unk_E4 = func_800C18AC;
-    work->turn.action_flags.value |= COMBATANT_FLAG_MODE_HANDLER_ACTION;
+    work->turn.action_flags.value |= BATTLER_ACTION_OWN_MODE;
     work->unk_E8 = D_800C1B28;
     ACTOR_SET_MODE(2);
     Actor_StepAnimLoop();

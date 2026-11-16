@@ -24,17 +24,17 @@ MATCH s16 Battle_CalcDamage(u8 attacker_slot, u8 target_slot, u16 element_id) {
         *(u16*)g_ScratchPad = element_id;
     }
     if (BATTLER_IS_PLAYER(attacker_slot)) {
-        if (g_Game.members[attacker_slot].u.turn.action_flags.value & COMBATANT_FLAG_POWER_BOOST) {
+        if (g_Game.members[attacker_slot].u.turn.action_flags.value & BATTLER_ACTION_POWER_BOOST) {
             power = &D_801EC30C;
             *power += (*power * g_Game.members[attacker_slot].focus_counter) >> 1;
             g_Game.members[attacker_slot].focus_counter = 0;
-            g_Game.members[attacker_slot].u.turn.action_flags.value &= ~COMBATANT_FLAG_POWER_BOOST;
+            g_Game.members[attacker_slot].u.turn.action_flags.value &= ~BATTLER_ACTION_POWER_BOOST;
         }
-    } else if (ENEMY_COMBATANT(attacker_slot).turn.action_flags.value & COMBATANT_FLAG_POWER_BOOST) {
+    } else if (ENEMY_COMBATANT(attacker_slot).turn.action_flags.value & BATTLER_ACTION_POWER_BOOST) {
         power                                  = &D_801EC30C;
         *power                                 = (*power * ENEMY_COMBATANT(attacker_slot).unk_114) >> 1;
         ENEMY_COMBATANT(attacker_slot).unk_114 = 0;
-        ENEMY_COMBATANT(attacker_slot).turn.action_flags.value &= ~COMBATANT_FLAG_POWER_BOOST;
+        ENEMY_COMBATANT(attacker_slot).turn.action_flags.value &= ~BATTLER_ACTION_POWER_BOOST;
     }
     damage = Battle_RollBaseDamage(attacker_slot, target_slot, 0);
     if (BATTLER_IS_PLAYER(attacker_slot) && !BATTLER_IS_PLAYER(target_slot)) {

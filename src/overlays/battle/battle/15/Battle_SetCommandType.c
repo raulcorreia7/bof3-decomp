@@ -11,8 +11,8 @@ MATCH void Battle_SetCommandType(void) {
     g_BattleActorTurn->command.type = BATTLE_COMMAND_ABILITY;
     func_80097EC0();
     flags = g_BattleActorTurn->action_flags.value;
-    if (flags & COMBATANT_FLAG_DRAGON_FORM) {
-        if (!(flags & COMBATANT_FLAG_DRAGON_FORM_CONTROLLED)) {
+    if (flags & BATTLER_ACTION_DRAGON_FORM) {
+        if (!(flags & BATTLER_ACTION_DRAGON_FORM_CONTROLLED)) {
             g_MenuPanelTasks[16].unk_0B = 2u;
         }
     }

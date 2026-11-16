@@ -38,7 +38,7 @@ MATCH void func_801E25E0(u8 battler) {
             }
             break;
     }
-    if ((g_BattleEnemyBattlers[battler].status & 0x20) || (g_BattleEnemyBattlers[battler].turn.action_flags.value & COMBATANT_FLAG_CHARGING)) {
+    if ((g_BattleEnemyBattlers[battler].status & 0x20) || (g_BattleEnemyBattlers[battler].turn.action_flags.value & BATTLER_ACTION_CHARGING)) {
         g_Battle.action_type = 1;
         if (func_800A9304(battler + 3)) {
             /* FAKE: retail passes the masked slot, which the s8 prototype would sign-extend. */

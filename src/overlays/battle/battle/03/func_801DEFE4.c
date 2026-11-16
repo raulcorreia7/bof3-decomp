@@ -71,7 +71,7 @@ MATCH void func_801DEFE4(void) {
             return;
         case 4:
             battler = g_Game.current;
-            if (battler->u.turn.action_flags.value & COMBATANT_FLAG_ABILITY_ALT_POSE) {
+            if (battler->u.turn.action_flags.value & BATTLER_ACTION_ABILITY_ALT_POSE) {
                 Actor_RequestScript(g_Task->facing + 0x38);
             } else if (D_801CA71C[battler->u.turn.command.id].mask & 0x800) {
                 Actor_RequestScript(g_Task->facing + 0x8);
