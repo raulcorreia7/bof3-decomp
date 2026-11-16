@@ -8,13 +8,12 @@
 
 #define g_Task ((Actor*)g_Task)
 
-extern u32       D_801F6C00;
-extern Callback  D_801FAEC0[];
-extern u8        D_801FAECC[];
-extern Callback  D_801FAEF0[];
-extern Callback  D_801FAEFC[];
+extern u32      D_801F6C00;
+extern Callback D_801FAEC0[];
+extern u8       D_801FAECC[];
+extern Callback D_801FAEF0[];
+extern Callback D_801FAEFC[];
 /* D_801FAF24 */
-extern SceneFunc g_SceneActorDispatch[];
 
 extern u8  D_80145E98;
 extern u8  D_80145F09;
