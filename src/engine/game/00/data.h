@@ -4,15 +4,15 @@
 /* The game overlay's data tables: sprite rectangles, map hooks, world routes and
  * the handler rows its frontend walks. Only this image includes the file. */
 
-#define GAME_AREA_HANDLER_COUNT   11
+#define GAME_AREA_HANDLER_COUNT      11
 
 /* Cells in the square-spiral search order around a formation: the centre, then rings one to three, and a closing centre. */
 /* Camera directions and the scroll step of one cell quarter. */
-#define CAMERA_DIR_COUNT          4
-#define CAMERA_SCROLL_STEP        4
+#define CAMERA_DIR_COUNT             4
+#define CAMERA_SCROLL_STEP           4
 
-#define ENTITY_SPAWN_OFFSET_COUNT 50
-#define ENTITY_SPAWN_SEARCH_COUNT (ENTITY_SPAWN_OFFSET_COUNT - 1)
+#define ENCOUNTER_SPAWN_OFFSET_COUNT 50
+#define ENTITY_SPAWN_SEARCH_COUNT    (ENCOUNTER_SPAWN_OFFSET_COUNT - 1)
 
 /* Eight-byte area entry: the area id it applies to, then the map id and the
  * x and y that func_801B6470 stages for the transition. */
@@ -125,7 +125,7 @@ extern WorldMapBattlefields D_801CD224;
 extern WorldMapDestination D_801CD24C[WORLD_MAP_DESTINATION_COUNT];
 extern SlotSource          D_801CD4AC[5];
 extern Step2               s_CameraScrollDeltas[CAMERA_DIR_COUNT];
-extern Step2               s_EntitySpawnOffsets[ENTITY_SPAWN_OFFSET_COUNT];
+extern Step2               s_EncounterSpawnOffsets[ENCOUNTER_SPAWN_OFFSET_COUNT];
 /* D_801CD620 */
 extern Offset2             s_EncounterEnemyOffsets[36];
 /* D_801CD740 */

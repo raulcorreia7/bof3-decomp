@@ -11,7 +11,7 @@ NON_MATCHING void func_801F2DCC(void) {
     u16          one;
     u8*          flags;
 
-    if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE && g_GameAreaId != g_GameContextSeed) {
+    if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE && g_GameAreaId != g_GameEntryAreaId) {
         func_801F2C80();
         return;
     }

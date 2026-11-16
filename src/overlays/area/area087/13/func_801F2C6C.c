@@ -24,7 +24,7 @@ MATCH void func_801F2C6C(void) {
             pos = &D_80145EC6;
             if ((Area_GetCellCode(pos[0], D_80145ECA) & BYTE_MASK) == 0xA1) {
                 for (index = 0; index < 10; index++) {
-                    if (g_GameContextSeed == D_801F55D8[index][0]) {
+                    if (g_GameEntryAreaId == D_801F55D8[index][0]) {
                         break;
                     }
                 }

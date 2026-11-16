@@ -92,7 +92,7 @@ MATCH void func_801B0568(void) {
                     func_801B6418();
                     g_GameEntryPosX   = TO_COORD(25);
                     g_GameEntryPosY   = TO_COORD(25);
-                    g_GameContextKind = 4;
+                    g_GameEntryFacing = 4;
                     g_Task->unk_06    = 4U;
                     g_Game.walk_flags |= AREA_WALK_TRANSITION;
                 }

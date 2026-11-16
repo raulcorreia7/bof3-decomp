@@ -155,11 +155,11 @@ typedef struct BattleSlot {
     u8 gate_03;
 } BattleSlot;
 
-typedef struct BattleSelectionContext {
+typedef struct BattleTargetSelection {
     u8   sel;
     u8   unk_01[0x0B];
     s16* record;
-} BattleSelectionContext;
+} BattleTargetSelection;
 
 typedef struct BattleHandlerQuad {
     Callback handlers[4];
@@ -1134,11 +1134,11 @@ static inline void BattleSelectionDelta(s32 mode) {
     /* FAKE: retail keeps the cell address in $s0 across both selection calls;
      * without the pin GCC rematerialises it after each call and the function
      * measured 0xC short. */
-    FAKE_REG(BattleSelectionContext*, ctx, "s0");
+    FAKE_REG(BattleTargetSelection*, ctx, "s0");
     BattleTurn* result;
     u16         value;
 
-    ctx = (BattleSelectionContext*)&g_Battle.target;
+    ctx = (BattleTargetSelection*)&g_Battle.target;
     if (ctx->sel < 3u) {
         value                                                        = Battle_RollHpDamage(mode);
         (*(volatile BattleTurn**)&g_Battle.target_record)->hp_change = (s16)(value - g_Game.members[ctx->sel].chr.stats.defense);

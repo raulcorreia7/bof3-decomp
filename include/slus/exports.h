@@ -86,9 +86,9 @@ extern u32          g_FrameCount;
 extern s32          g_SysLastVSync;
 extern s32          D_80143EFC;
 /* D_80143F10 */
-extern u16          g_GameContextSeed;
+extern u16          g_GameEntryAreaId;
 /* D_80143F1C */
-extern u8           g_GameContextKind;
+extern u8           g_GameEntryFacing;
 /* 0x80144xxx: party and menu state. */
 extern u16          D_80143F20;
 

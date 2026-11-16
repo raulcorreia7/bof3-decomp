@@ -319,7 +319,7 @@ extern Callback  D_801CD570[5];
 extern u8        D_801CD584[56];
 /* D_801CD5BC */
 /* D_801CD770 */
-extern u8        s_EntitySpawnChances[8];
+extern u8        s_EncounterSpawnChances[8];
 /* D_801CD78C */
 extern u8        s_BattleModeRecords[224];
 extern u8        D_801CD78D[];

@@ -23,7 +23,7 @@ ASSERT_OFFSET(WorldMapMessageRow, messages, 0x00);
         switch (*step) {                                                              \
             case 0:                                                                   \
                 Game_SetScriptActive();                                               \
-                seed = g_GameContextSeed;                                             \
+                seed = g_GameEntryAreaId;                                             \
                 for (i = 0; i < (count); i++) {                                       \
                     if (seed == (table)[i].seed) {                                    \
                         break;                                                        \

@@ -86,24 +86,24 @@ found:
         hi   = *(u16*)(base + 2);
         seed = *(u16*)base;
         hi <<= 8;
-        g_GameContextSeed = seed;
+        g_GameEntryAreaId = seed;
         mid               = *(u16*)(base + 4);
         g_GameEntryPosX   = hi & mask;
         mid <<= 8;
         g_GameEntryPosY = mid & mask;
         kind            = base[8];
     } else {
-        g_GameContextSeed = entry->key;
+        g_GameEntryAreaId = entry->key;
         g_GameEntryPosX   = ((u32)entry->index << 8) & mask;
         g_GameEntryPosY   = ((u32)entry->alt << 8) & mask;
         kind              = entry->kind;
     }
-    g_GameContextKind = kind;
-    reread            = g_GameContextKind;
+    g_GameEntryFacing = kind;
+    reread            = g_GameEntryFacing;
     SP_REF(s8, 0x01u) = (s8)((reread >> 4) & 7);
-    g_GameContextKind = reread & 0x8F;
+    g_GameEntryFacing = reread & 0x8F;
     func_801A02E8();
-    func_801A0380((u32)D_80143F16, (u32)D_80143F1A, g_GameContextSeed);
+    func_801A0380((u32)D_80143F16, (u32)D_80143F1A, g_GameEntryAreaId);
     return false;
 }
 #else

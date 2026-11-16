@@ -97,8 +97,8 @@ MATCH void Fishing_ShopChooseItem(void) {
     }
     if ((g_InputPressed & g_InputMasks[FISHING_INPUT_CAST]) != 0) {
         if (Fishing_ShopTradeBlocked(s_ListCursor, 1) == 0) {
-            total = Item_Count(D_801E2F7D[D_801E3134[g_GameContextKind][(s8)s_ListCursor] << 3], D_801E2F7C[D_801E3134[g_GameContextKind][(s8)s_ListCursor]].cost_00, 0) +
-                    Item_Count(D_801E2F7D[D_801E3134[g_GameContextKind][(s8)s_ListCursor] << 3], D_801E2F7C[D_801E3134[g_GameContextKind][(s8)s_ListCursor]].cost_00, 1);
+            total = Item_Count(D_801E2F7D[D_801E3134[g_GameEntryFacing][(s8)s_ListCursor] << 3], D_801E2F7C[D_801E3134[g_GameEntryFacing][(s8)s_ListCursor]].cost_00, 0) +
+                    Item_Count(D_801E2F7D[D_801E3134[g_GameEntryFacing][(s8)s_ListCursor] << 3], D_801E2F7C[D_801E3134[g_GameEntryFacing][(s8)s_ListCursor]].cost_00, 1);
             if (total >= 99) {
                 s_ListCursor |= 0x80;
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
@@ -124,7 +124,7 @@ tail:
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     if (((s8)s_ListCursor & 0xC0) == 0) {
         WinDrawCueText(0x18, 0x14,
-                       Item_GetDescription(D_801E2F7D[D_801E3134[g_GameContextKind][(s8)s_ListCursor] << 3], D_801E2F7C[D_801E3134[g_GameContextKind][(s8)s_ListCursor]].cost_00) & HALF_MASK);
+                       Item_GetDescription(D_801E2F7D[D_801E3134[g_GameEntryFacing][(s8)s_ListCursor] << 3], D_801E2F7C[D_801E3134[g_GameEntryFacing][(s8)s_ListCursor]].cost_00) & HALF_MASK);
     }
     Fishing_ShopDrawTradeList(0);
 }
@@ -166,8 +166,8 @@ MATCH void Fishing_ShopChooseQuantity(void) {
     while (Fishing_ShopTradeBlocked(s1, s_ListItemId) != 0) {
         s_ListItemId = s_ListItemId - 1;
     }
-    s0 = Item_Count(D_801E2F7C[D_801E3134[g_GameContextKind][s1]].cost_01, D_801E2F7C[D_801E3134[g_GameContextKind][s1]].cost_00, 0) +
-         Item_Count(D_801E2F7C[D_801E3134[g_GameContextKind][s1]].cost_01, D_801E2F7C[D_801E3134[g_GameContextKind][s1]].cost_00, 1);
+    s0 = Item_Count(D_801E2F7C[D_801E3134[g_GameEntryFacing][s1]].cost_01, D_801E2F7C[D_801E3134[g_GameEntryFacing][s1]].cost_00, 0) +
+         Item_Count(D_801E2F7C[D_801E3134[g_GameEntryFacing][s1]].cost_01, D_801E2F7C[D_801E3134[g_GameEntryFacing][s1]].cost_00, 1);
     s0 &= BYTE_MASK;
     while (1) {
         if (s0 + (s8)s_ListItemId < 100) {
@@ -215,7 +215,7 @@ MATCH void Fishing_ShopConfirm(void) {
         } else {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 5));
             s_ListCursor &= 0xBF;
-            Item_Add(D_801E2F7D[D_801E3134[g_GameContextKind][(s8)s_ListCursor] * 8], D_801E2F7C[D_801E3134[g_GameContextKind][(s8)s_ListCursor]].cost_00, s_ListItemId, 0);
+            Item_Add(D_801E2F7D[D_801E3134[g_GameEntryFacing][(s8)s_ListCursor] * 8], D_801E2F7C[D_801E3134[g_GameEntryFacing][(s8)s_ListCursor]].cost_00, s_ListItemId, 0);
             Fishing_ShopTakeTradeItems();
             s_ListItemId = 1;
             s_Step       = 0;
@@ -225,7 +225,7 @@ MATCH void Fishing_ShopConfirm(void) {
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
 
     if (s_Step == 2) {
-        src = Item_GetRecord(D_801E2F7D[D_801E3134[g_GameContextKind][s_ListCursor & 0xF] * 8], D_801E2F7C[D_801E3134[g_GameContextKind][s_ListCursor & 0xF]].cost_00);
+        src = Item_GetRecord(D_801E2F7D[D_801E3134[g_GameEntryFacing][s_ListCursor & 0xF] * 8], D_801E2F7C[D_801E3134[g_GameEntryFacing][s_ListCursor & 0xF]].cost_00);
         for (i = 0; i < 12; i++) {
             g_TextVariables[0][i] = src[i];
         }
@@ -379,21 +379,21 @@ MATCH void Fishing_ShopDrawTradeList(s32 draw_all) {
     Fishing_ShopDrawListWindow(20, 56, n);
     UI_DrawText(54, 62, (u8)(n * 7), 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MESSAGE_TRADE_ITEM_LABEL));
     for (i = 0; i < s_ShopItemCount; i++) {
-        h = Item_GetRecord(D_801E2F7D[D_801E3134[g_GameContextKind][i] * (new_var = 8)], ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var]);
+        h = Item_GetRecord(D_801E2F7D[D_801E3134[g_GameEntryFacing][i] * (new_var = 8)], ((u8*)D_801E2F7C)[D_801E3134[g_GameEntryFacing][i] * new_var]);
         w = Fishing_ShopTradeBlocked(i & BYTE_MASK, 1);
         if ((draw_all & BYTE_MASK) != 0) {
             UI_DrawText(37, (0x51 + (i * 13)), 7, Game_ReadCommand((u8*)h) & BYTE_MASK, (u8*)h);
-            Fishing_ShopDrawItemIcon(28, (s16)(0x54 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var], D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], 1);
+            Fishing_ShopDrawItemIcon(28, (s16)(0x54 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameEntryFacing][i] * new_var], D_801E2F7D[D_801E3134[g_GameEntryFacing][i] * new_var], 1);
         } else if (i == ((s8)s_ListCursor)) {
             if ((w & BYTE_MASK) == 0) {
                 UI_DrawText(37, (0x51 + (i * 13)), 7, Game_ReadCommand((u8*)h) & BYTE_MASK, (u8*)h);
-                Fishing_ShopDrawItemIcon(28, (s16)(0x54 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var], D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], 1);
+                Fishing_ShopDrawItemIcon(28, (s16)(0x54 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameEntryFacing][i] * new_var], D_801E2F7D[D_801E3134[g_GameEntryFacing][i] * new_var], 1);
             }
             UI_DrawText(37, (0x4F + (i * 13)), (u8)(w * 7), Game_ReadCommand((u8*)h) & BYTE_MASK, (u8*)h);
-            Fishing_ShopDrawItemIcon(28, (s16)(0x52 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var], D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], w & BYTE_MASK);
+            Fishing_ShopDrawItemIcon(28, (s16)(0x52 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameEntryFacing][i] * new_var], D_801E2F7D[D_801E3134[g_GameEntryFacing][i] * new_var], w & BYTE_MASK);
         } else {
             UI_DrawText(37, (0x51 + (i * 13)), (u8)(w * 7), Game_ReadCommand((u8*)h) & BYTE_MASK, (u8*)h);
-            Fishing_ShopDrawItemIcon(28, (s16)(0x54 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameContextKind][i] * new_var], D_801E2F7D[D_801E3134[g_GameContextKind][i] * new_var], w & BYTE_MASK);
+            Fishing_ShopDrawItemIcon(28, (s16)(0x54 + (i * 13)), ((u8*)D_801E2F7C)[D_801E3134[g_GameEntryFacing][i] * new_var], D_801E2F7D[D_801E3134[g_GameEntryFacing][i] * new_var], w & BYTE_MASK);
         }
     }
 }
@@ -441,12 +441,12 @@ MATCH u8 Fishing_ShopTradeBlocked(s32 slot, s32 amount) {
     u8(*limit)[8];
 
     for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
-        value = D_801E2F7E[D_801E3134[g_GameContextKind][slot & BYTE_MASK]][i];
+        value = D_801E2F7E[D_801E3134[g_GameEntryFacing][slot & BYTE_MASK]][i];
         if (value == GAME_NONE) {
             return false;
         }
         limit = (u8(*)[8]) & D_801E2F7E[0][3];
-        if ((Item_Count(ITEM_CAT_ITEM, (value + 0x38), 0) & HALF_MASK) < limit[D_801E3134[g_GameContextKind][slot & BYTE_MASK]][i] * (amount & BYTE_MASK)) {
+        if ((Item_Count(ITEM_CAT_ITEM, (value + 0x38), 0) & HALF_MASK) < limit[D_801E3134[g_GameEntryFacing][slot & BYTE_MASK]][i] * (amount & BYTE_MASK)) {
             return true;
         }
     }
@@ -458,7 +458,7 @@ MATCH u8 Fishing_ShopItemCount(void) {
     u8 index;
 
     for (index = 0; index < 10; index++) {
-        if (D_801E3134[g_GameContextKind][index] == GAME_NONE) {
+        if (D_801E3134[g_GameEntryFacing][index] == GAME_NONE) {
             break;
         }
     }
@@ -481,15 +481,15 @@ MATCH void Fishing_ShopDrawNeeded(void) {
         return;
     }
     for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
-        if (D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] == GAME_NONE) {
+        if (D_801E2F7E[D_801E3134[g_GameEntryFacing][slot]][i] == GAME_NONE) {
             break;
         }
-        value = Item_GetRecord(ITEM_CAT_ITEM, (u8)((D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & BYTE_MASK));
+        value = Item_GetRecord(ITEM_CAT_ITEM, (u8)((D_801E2F7E[D_801E3134[g_GameEntryFacing][slot]][i] + 0x38) & BYTE_MASK));
         UI_DrawText(173, (0x58 + i * 13), 0, Game_ReadCommand((u8*)value) & BYTE_MASK, (u8*)value);
-        TEXT_Format(g_UiFormatBuffer, D_800F5000.format, D_801E2F81[D_801E3134[g_GameContextKind][slot]][i] * (s8)s_ListItemId);
+        TEXT_Format(g_UiFormatBuffer, D_800F5000.format, D_801E2F81[D_801E3134[g_GameEntryFacing][slot]][i] * (s8)s_ListItemId);
         UI_DrawGlyphString(272, (0x5C + i * 13), 0, g_UiFormatBuffer);
-        cost = Item_Count(ITEM_CAT_ITEM, (D_801E2F7E[D_801E3134[g_GameContextKind][slot]][i] + 0x38) & BYTE_MASK, 0);
-        if (cost < D_801E2F81[D_801E3134[g_GameContextKind][slot]][i]) {
+        cost = Item_Count(ITEM_CAT_ITEM, (D_801E2F7E[D_801E3134[g_GameEntryFacing][slot]][i] + 0x38) & BYTE_MASK, 0);
+        if (cost < D_801E2F81[D_801E3134[g_GameEntryFacing][slot]][i]) {
             UI_DrawText(173, (0xA4 + i * 13), 7, Game_ReadCommand((u8*)value) & BYTE_MASK, (u8*)value);
             TEXT_Format(g_UiFormatBuffer, D_800F5000.format, cost);
             UI_DrawGlyphString(272, (0xA8 + i * 13), 7, g_UiFormatBuffer);
@@ -550,25 +550,25 @@ MATCH void Fishing_ShopDrawQuantity(void) {
     slot = s_ListCursor & 0xF;
     Fishing_ShopDrawQuantityWindow(20, 100);
 
-    entry = D_801E3134[g_GameContextKind][slot];
+    entry = D_801E3134[g_GameEntryFacing][slot];
     value = Item_GetRecord(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00);
     UI_DrawText(33, 104, 0, Game_ReadCommand((u8*)value) & BYTE_MASK, (u8*)value);
 
     TEXT_Format(g_UiFormatBuffer, D_800F5000.format, (s8)s_ListItemId);
     UI_DrawGlyphString(132, 108, 0, g_UiFormatBuffer);
 
-    entry = D_801E3134[g_GameContextKind][slot];
+    entry = D_801E3134[g_GameEntryFacing][slot];
     Fishing_ShopDrawItemIcon(24, 108, D_801E2F7C[entry].cost_00, D_801E2F7C[entry].cost_01, 0);
 
     UI_DrawText(33, 124, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MESSAGE_NONE_OWNED));
 
-    entry = D_801E3134[g_GameContextKind][slot];
+    entry = D_801E3134[g_GameEntryFacing][slot];
     TEXT_Format(g_UiFormatBuffer, D_800F5000.format, Item_Count(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00, 0) & HALF_MASK);
     UI_DrawGlyphString(132, 128, 0, g_UiFormatBuffer);
 
     UI_DrawText(33, 136, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_SHOP_MESSAGE_NONE_EQUIPPED));
 
-    entry = D_801E3134[g_GameContextKind][slot];
+    entry = D_801E3134[g_GameEntryFacing][slot];
     TEXT_Format(g_UiFormatBuffer, D_800F5000.format, Item_Count(D_801E2F7C[entry].cost_01, D_801E2F7C[entry].cost_00, 1) & HALF_MASK);
     UI_DrawGlyphString(132, 140, 0, g_UiFormatBuffer);
 }
@@ -619,12 +619,12 @@ MATCH void Fishing_ShopTakeTradeItems(void) {
     unsigned char new_var;
     u8*           p;
     for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
-        list_index = D_801E3134[g_GameContextKind][(s8)s_ListCursor];
+        list_index = D_801E3134[g_GameEntryFacing][(s8)s_ListCursor];
         if (D_801E2F7E[list_index][i] == GAME_NONE) {
             break;
         }
         p       = D_801E2F7E[list_index] + 3;
         new_var = p[i] * ((s8)s_ListItemId);
-        Item_Remove(ITEM_CAT_ITEM, (D_801E2F7E[D_801E3134[g_GameContextKind][s_ListCursor & 0xF]][i] + 0x38) & BYTE_MASK, new_var & BYTE_MASK, 0);
+        Item_Remove(ITEM_CAT_ITEM, (D_801E2F7E[D_801E3134[g_GameEntryFacing][s_ListCursor & 0xF]][i] + 0x38) & BYTE_MASK, new_var & BYTE_MASK, 0);
     }
 }

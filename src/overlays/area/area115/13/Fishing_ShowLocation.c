@@ -24,7 +24,7 @@ MATCH void Fishing_ShowLocation(void) {
             pos = &D_80145EC6;
             if ((Area_GetCellCode(pos[0], D_80145ECA) & BYTE_MASK) == 0xA1) {
                 for (index = 0; index < 5; index++) {
-                    if (g_GameContextSeed == D_801F4E90[index][0]) {
+                    if (g_GameEntryAreaId == D_801F4E90[index][0]) {
                         break;
                     }
                 }

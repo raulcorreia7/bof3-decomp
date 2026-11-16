@@ -12,7 +12,7 @@ MATCH s32 func_801F3210(void) {
             if (step != 1) {
                 goto tail;
             }
-            if (scratch->unk_18 == g_GameContextSeed) {
+            if (scratch->unk_18 == g_GameEntryAreaId) {
                 goto tail;
             }
         }

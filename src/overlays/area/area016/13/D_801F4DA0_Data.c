@@ -144,7 +144,7 @@ WorldMapPoint D_801F4DA0[137] = {
     {0x00, 0x00, 0x00, 0x00},
 };
 
-/* Key rows: column 0 is matched against g_GameContextSeed, columns 1-15 are the
+/* Key rows: column 0 is matched against g_GameEntryAreaId, columns 1-15 are the
  * values. */
 u16 D_801F4FC4[9][16] = {
     {3, 5, 5, 5, 5, 5, 5, 5, 13, 5, 5, 5, 5, 5, 5, 5},

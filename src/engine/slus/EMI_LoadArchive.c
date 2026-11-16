@@ -27,7 +27,7 @@ MATCH void EMI_LoadArchive(u32 emi_id) {
         ring_index += 1;
     } while (ring_index < EMI_CALLBACK_SLOT_COUNT);
 
-    if (g_EmiServiceMode == 2) {
+    if (g_EmiStreamMode == 2) {
         if (CdSync(1, D_80146498) != CdlNoIntr) {
             if ((D_80146498[0] & (CdlStatPlay | CdlStatSeek | CdlStatRead)) != 0) {
                 D_8014648B = 1;
@@ -35,9 +35,9 @@ MATCH void EMI_LoadArchive(u32 emi_id) {
         }
     }
 
-    max_lba          = D_8014685C;
-    current_lba      = D_80146858;
-    g_EmiServiceMode = 1;
+    max_lba         = D_8014685C;
+    current_lba     = D_80146858;
+    g_EmiStreamMode = 1;
     if (max_lba < current_lba) {
         D_8014685C = current_lba;
     }

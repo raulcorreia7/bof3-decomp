@@ -107,7 +107,7 @@ segments:
       - [0xB4EE0, c, SYS_StartLogo]
       - [0xB4FC0, c, SYS_UpdateKeyState]
       - [0xB5020, c, SYS_PrepareFrame]
-      - [0xB50F0, c, SYS_SubmitFrame]
+      - [0xB50F0, c, SYS_LinkOt]
       - [0xB517C, c, SYS_CaptureDrawTime]
       - [0xB51A4, c, SYS_InitCard]
       - [0xB533C, c, SYS_ThreadStopAll]

@@ -13,7 +13,7 @@ void        SYS_UpdateKeyState(void);
 /* func_8014B020 */
 void        SYS_PrepareFrame(void);
 /* func_8014B0F0 */
-void        SYS_SubmitFrame(void);
+void        SYS_LinkOt(void);
 /* func_8014B17C */
 void        SYS_CaptureDrawTime(void);
 /* func_8014B1A4 */

@@ -21,8 +21,8 @@ MATCH bool func_801B6470(void) {
             world_id = MEM(u16, GAME_AREA_ID_ADDR);
             for (i = 0; i < WORLD_MAP_DESTINATION_COUNT; i++) {
                 if (world_id == D_801CD24C[i].area_id) {
-                    g_GameContextKind = 4;
-                    g_GameContextSeed = D_801CD24C[i].map_id;
+                    g_GameEntryFacing = 4;
+                    g_GameEntryAreaId = D_801CD24C[i].map_id;
                     g_GameEntryPosX   = D_801CD24C[i].pos.x << 16;
                     g_GameEntryPosY   = D_801CD24C[i].pos.y << 16;
                     return 1;
@@ -32,11 +32,11 @@ MATCH bool func_801B6470(void) {
         }
         index             = D_8014933C == 0 ? 3 : 0;
         map_id            = s_AreaScenePositions[index];
-        g_GameContextSeed = map_id;
+        g_GameEntryAreaId = map_id;
         x                 = s_AreaScenePositions[index + 1];
         g_GameEntryPosX   = x << 16;
         y                 = s_AreaScenePositions[index + 2];
-        g_GameContextKind = 4;
+        g_GameEntryFacing = 4;
         g_GameEntryPosY   = y << 16;
         return 1;
     }

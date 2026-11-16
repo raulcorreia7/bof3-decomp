@@ -44,7 +44,7 @@ extern WorldMapMarker D_801F6234[6];
 extern u16 D_800E4B3E;
 /* g_SceneEventState.step read unsigned: Fishing_ShowLocation steps it with a byte load. */
 extern u8  g_SceneEventStep_u8[];
-/* Key rows: column 0 is matched against g_GameContextSeed; column g_SceneState is the message Fishing_ShowLocation
+/* Key rows: column 0 is matched against g_GameEntryAreaId; column g_SceneState is the message Fishing_ShowLocation
  * starts. */
 extern u16 D_801F6090[7][16];
 /* Three fishing spots of 12 bytes: the spot id, then the 11 fish ids its board lists (0xFF ends the list). */

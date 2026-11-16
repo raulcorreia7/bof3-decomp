@@ -3,7 +3,7 @@
 /* links the active frame's eight ordering-table heads to their
  * packet chains with the PsyQ AddPrims helper.
  */
-MATCH void SYS_SubmitFrame(void) {
+MATCH void SYS_LinkOt(void) {
     s32   index;
     u32** ordering_table;
     u8*   packet;

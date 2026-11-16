@@ -18,7 +18,7 @@ MATCH s32 Area_RollEncounterEnemies(s32 candidate_id) {
         id        = *(u8*)(id_table + slot);
         entry->id = id;
         if (id != GAME_NONE) {
-            if ((RANDOM_MASK(0xF) + 1) <= s_EntitySpawnChances[slot]) {
+            if ((RANDOM_MASK(0xF) + 1) <= s_EncounterSpawnChances[slot]) {
                 entry->active = 1;
                 kept += 1;
             } else {

@@ -43,7 +43,7 @@ NON_MATCHING void Fishing_SpawnFish(void) {
     column    = 0;
     row_index = 0;
     do {
-        count = *(COUNT_TABLE + g_GameContextKind * FISHING_SPAWN_COLUMNS + column);
+        count = *(COUNT_TABLE + g_GameEntryFacing * FISHING_SPAWN_COLUMNS + column);
         if ((s32)count > 0) {
             row_offset = row_index * FISHING_ROW_STRIDE;
             do {

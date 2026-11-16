@@ -28,8 +28,8 @@ MATCH bool Area_PlaceEncounterEnemies(void) {
                 i   = (i + 1) & 0x3;
             }
             for (i = 0; i < ENTITY_SPAWN_SEARCH_COUNT; i++) {
-                entry->pos.x = g_EncounterOriginX + x + (s_EntitySpawnOffsets[i].dx << 15);
-                entry->pos.y = g_EncounterOriginY + y + (s_EntitySpawnOffsets[i].dy << 15);
+                entry->pos.x = g_EncounterOriginX + x + (s_EncounterSpawnOffsets[i].dx << 15);
+                entry->pos.y = g_EncounterOriginY + y + (s_EncounterSpawnOffsets[i].dy << 15);
                 if ((func_801C7518(entry->pos.x, entry->pos.y, kind->reach) & BYTE_MASK) && (func_801C6EE0((u8)index, entry->pos.x, entry->pos.y, kind->reach) & BYTE_MASK)) {
                     D_801CD8C4++;
                     break;

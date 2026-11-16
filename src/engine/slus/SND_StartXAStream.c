@@ -16,7 +16,7 @@ MATCH void SND_StartXAStream(s32 key, s32 unused) {
     D_80146832        = 0;
     D_80146820        = 0;
     D_8014681C        = 0;
-    g_EmiServiceMode  = 2;
+    g_EmiStreamMode   = 2;
     g_EmiStreamState  = 0;
     SND_ResolveXAStream(key);
     CdIntToPos(D_8014680C, (CdlLOC*)((u8*)req + 0x20));

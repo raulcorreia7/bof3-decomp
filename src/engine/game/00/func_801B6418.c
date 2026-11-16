@@ -8,7 +8,7 @@ MATCH void func_801B6418(void) {
     offset   = 0;
 loop:
     if (world_id == *(u16*)(&D_801CD224.bytes[offset])) {
-        g_GameContextSeed = *(u16*)(&D_801CD226[offset]);
+        g_GameEntryAreaId = *(u16*)(&D_801CD226[offset]);
         goto end; /* the routing table entry matched */
     }
     offset += 4;

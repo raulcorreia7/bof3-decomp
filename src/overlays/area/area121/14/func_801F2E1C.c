@@ -10,7 +10,7 @@ MATCH void func_801F2E1C(void) {
     switch (*step) {
         case 0:
             Game_SetScriptActive();
-            seed = g_GameContextSeed;
+            seed = g_GameEntryAreaId;
             for (i = 0; i < 4; i++) {
                 if (seed == D_801F67BC[i]) {
                     break;

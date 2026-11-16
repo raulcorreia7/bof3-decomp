@@ -44,7 +44,7 @@ MATCH void Game_ReturnFromMenu(void) {
             D_80145044 = g_Game.members[0].pos.y.fixed;
             D_80145048 = g_GameAreaId;
             D_8014504B = (g_Game.members[0].facing + s_DirectionJitters[RANDOM_MASK(3)]) & 0xF;
-            Game_RequestAreaChange(g_GameContextSeed, g_GameEntryPosX, g_GameEntryPosY, g_GameContextKind);
+            Game_RequestAreaChange(g_GameEntryAreaId, g_GameEntryPosX, g_GameEntryPosY, g_GameEntryFacing);
         } else {
             u8* clear = &D_8014504A;
 
