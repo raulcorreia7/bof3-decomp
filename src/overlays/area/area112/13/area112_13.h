@@ -10,6 +10,21 @@
 /* The scenario flag byte the answer path tests. */
 extern u8 D_80144EF0[];
 
+/* A trigger cell of the area's flag switch. */
+typedef struct AreaFlagCell {
+    /* 0x0 */ u8 x;
+    /* 0x1 */ u8 y;
+    /* 0x2 */ u8 direction_flags; /* bits 0-3 clear a direction's scene flag, bits 4-7 set it */
+    /* 0x3 */ u8 flag_id;
+} AreaFlagCell;
+
+ASSERT_SIZE(AreaFlagCell, 4);
+
+/* The four trigger cells of the area's flag switch. */
+extern AreaFlagCell D_801F4908[4];
+/* The scene flag of each direction the trigger cells select. */
+extern u8           D_801F4928[4];
+
 /* The battle record rows whose first byte is the slot tag. */
 extern u8                  D_801F41F8[];
 /* D_801F48FC */

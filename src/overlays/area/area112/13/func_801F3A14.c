@@ -1,3 +1,42 @@
 #include "area112_13.h"
 
-INCLUDE_ASM(func_801F3A14);
+/* Runs the flag switch of the cell the party stands on: the first matching row
+ * whose leader is not facing right sets its scene flag and the direction flags
+ * its bits name. */
+MATCH u8 func_801F3A14(u8 x, u8 y) {
+    s32 i;
+    s32 j;
+
+    for (i = 0; i < 4; i++) {
+        if (x == D_801F4908[i].x && y == D_801F4908[i].y && g_Game.members[0].facing != FACING_RIGHT) {
+            break;
+        }
+    }
+    if (i == 4) {
+        return 0;
+    }
+    if (SYS_TestFlag(g_SceneEventFlags, 0x1C) != 0) {
+        return 0;
+    }
+    if (SYS_TestFlag(g_SceneEventFlags, D_801F4908[i].flag_id) != 0) {
+        return 0;
+    }
+    if ((func_801F3CF0() & BYTE_MASK) != 0) {
+        Scene_StartEvent(SCENE_EVENT_SHOP_SAVE, 10);
+        g_SceneEventSelection = 0x15;
+        return 0;
+    }
+    for (j = 0; j < 8; j++) {
+        if ((D_801F4908[i].direction_flags >> j) & 1) {
+            if (j < 4) {
+                SYS_ClearFlag(g_SceneEventFlags, D_801F4928[j & 0x3]);
+            } else {
+                SYS_SetFlag(g_SceneEventFlags, D_801F4928[j & 0x3]);
+            }
+        }
+    }
+    SYS_SetFlag(g_SceneEventFlags, D_801F4908[i].flag_id);
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0));
+    func_8019ABB0(0xF);
+    return 1;
+}

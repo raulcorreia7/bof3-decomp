@@ -69,6 +69,25 @@ ASSERT_SIZE(AreaStreakSlot, 0x38);
 extern u8 D_801F6510;
 extern u8 D_801F6514;
 
+/* The dot trail the area leaves behind AREA_WORK, 10 bytes a point; this image
+ * reads the screen position unsigned. */
+typedef struct SceneDot {
+    u8  active; /* 0x00 - flips every frame the dot is processed */
+    u8  life;   /* 0x01 */
+    u16 color;  /* 0x02 - 5-5-5 */
+    u16 x;      /* 0x04 */
+    u16 y;      /* 0x06 */
+    s8  dx;     /* 0x08 */
+    s8  dy;     /* 0x09 */
+} SceneDot;
+
+ASSERT_SIZE(SceneDot, 10);
+
+/* The dot trail: D_801F651C points of 10 bytes at AREA_WORK + 0x2000. */
+#define SCENE_DOT_TRAIL MEM_PTR(SceneDot, AREA_WORK + 0x2000)
+
+extern u16 D_801F651C;
+
 /* The per-image spawn step Area_UpdateSpawn runs between the slot claim and the slot pass. */
 #define AREA_SPAWN_TICK             func_801F5940
 

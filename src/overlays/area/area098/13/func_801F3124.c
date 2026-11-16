@@ -1,3 +1,49 @@
 #include "area098_13.h"
 
-INCLUDE_ASM(func_801F3124);
+/* Arms the dot trail: the shuffled order decides which dots show, and each dot
+ * gets a random step and life, pulled back along its step when the trail runs. */
+MATCH void func_801F3124(void) {
+    u8        order[16];
+    SceneDot* dot;
+    u16       i;
+    u16       j;
+    u8        a;
+    u8        b;
+    u8        tmp;
+
+    for (i = 0; i < 16; i++) {
+        order[i] = i & 1;
+    }
+
+    dot = SCENE_DOT_TRAIL;
+    j   = 0;
+    for (i = 0; i < D_801F651C; i++) {
+        if ((i & 0xF) == 0) {
+            j = 0;
+            do {
+                a = rand() & 0xF;
+                j++;
+                b        = rand() & 0xF;
+                tmp      = order[b];
+                order[b] = order[a];
+                order[a] = tmp;
+            } while (j < 16);
+            j = 0;
+        }
+        dot->active = order[j++];
+        dot->dx     = (rand() & 0x1F) - 16;
+        dot->dy     = (rand() & 0x1F) - 16;
+        if (g_Task->unk_06 == 0) {
+            dot->life = (rand() & 0x1E) + 10;
+            dot->x -= dot->dx * dot->life;
+            dot->y -= dot->dy * dot->life;
+        } else {
+            dot->life = 40 - (rand() & 0x1E);
+        }
+        dot++;
+    }
+
+    g_Task->timer = 80;
+    g_Task->header.mode++;
+    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
+}
