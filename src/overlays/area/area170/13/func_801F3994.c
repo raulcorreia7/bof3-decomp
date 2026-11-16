@@ -16,7 +16,7 @@ NON_MATCHING void func_801F3994(void) {
     s32  width;
 
     hidden = SYS_TestFlag(g_SceneEventFlags, 0x7E) == 0;
-    bundle = MEM_PTR(u8, 0x80104000);
+    bundle = (u8*)&g_AreaMapBundle;
     row    = 0;
     do {
         col = 0;
