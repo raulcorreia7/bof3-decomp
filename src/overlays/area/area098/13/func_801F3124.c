@@ -1,10 +1,8 @@
 #include "area098_13.h"
 
-/* Arms the dot trail: the shuffled order decides which dots show, and each dot
- * gets a random step and life, pulled back along its step when the trail runs. */
 MATCH void func_801F3124(void) {
     u8        order[16];
-    SceneDot* dot;
+    TrailDot* dot;
     u16       i;
     u16       j;
     u8        a;
@@ -15,7 +13,7 @@ MATCH void func_801F3124(void) {
         order[i] = i & 1;
     }
 
-    dot = SCENE_DOT_TRAIL;
+    dot = AREA_TRAIL_DOTS;
     j   = 0;
     for (i = 0; i < D_801F651C; i++) {
         if ((i & 0xF) == 0) {

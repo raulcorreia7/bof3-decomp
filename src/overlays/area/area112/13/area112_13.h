@@ -10,21 +10,6 @@
 /* The scenario flag byte the answer path tests. */
 extern u8 D_80144EF0[];
 
-/* A trigger cell of the area's flag switch. */
-typedef struct AreaFlagCell {
-    /* 0x0 */ u8 x;
-    /* 0x1 */ u8 y;
-    /* 0x2 */ u8 direction_flags; /* bits 0-3 clear a direction's scene flag, bits 4-7 set it */
-    /* 0x3 */ u8 flag_id;
-} AreaFlagCell;
-
-ASSERT_SIZE(AreaFlagCell, 4);
-
-/* The four trigger cells of the area's flag switch. */
-extern AreaFlagCell D_801F4908[4];
-/* The scene flag of each direction the trigger cells select. */
-extern u8           D_801F4928[4];
-
 /* The battle record rows whose first byte is the slot tag. */
 extern u8                  D_801F41F8[];
 /* D_801F48FC */
@@ -39,5 +24,20 @@ void Area_DrawLightPillar(s32* pos);
 extern u8  D_801F420C[];
 /* The ground height of each cell, by cell column. */
 extern u16 D_801F4210[];
+
+/* An answer cell: the cell x and y, the flag mask and the flag the answer toggles. */
+typedef struct AnswerCell {
+    /* 0x0 */ u8 x;
+    /* 0x1 */ u8 y;
+    /* 0x2 */ u8 flag_mask; /* low four bits clear a direction flag, high four set it */
+    /* 0x3 */ u8 flag_id;
+} AnswerCell;
+
+ASSERT_SIZE(AnswerCell, 4);
+
+/* The four answer cells of the area. */
+extern AnswerCell D_801F4908[4];
+/* The first four answer flags, cleared by the low four mask bits and set by the high four. */
+extern u8         D_801F4928[4];
 
 #endif

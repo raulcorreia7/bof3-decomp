@@ -1,13 +1,12 @@
 #include "area098_13.h"
 
-/* Steps the dot trail: moves and draws each live dot, then clears the actor once
- * the countdown reaches zero. */
 MATCH void func_801F331C(void) {
-    SceneDot* dot;
+    TrailDot* dot;
     TILE_1*   tile;
     u16       i;
+    u8        timer;
 
-    dot = SCENE_DOT_TRAIL;
+    dot = AREA_TRAIL_DOTS;
     for (i = 0; i < D_801F651C; dot++, i++) {
         if (dot->active != 0) {
             if (g_Task->unk_06 == 0) {
@@ -33,7 +32,9 @@ MATCH void func_801F331C(void) {
         }
         dot->active ^= 1;
     }
-    if (--g_Task->timer == 0) {
+    timer         = g_Task->timer - 1;
+    g_Task->timer = timer;
+    if (timer == 0) {
         Actor_Clear();
     }
 }

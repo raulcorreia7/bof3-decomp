@@ -1,8 +1,7 @@
 #include "area112_13.h"
 
-/* Runs the flag switch of the cell the party stands on: the first matching row
- * whose leader is not facing right sets its scene flag and the direction flags
- * its bits name. */
+/* Runs the answer cell the party stands on: the first cell whose leader is not
+ * facing right sets its scene flag and the direction flags its mask names. */
 MATCH u8 func_801F3A14(u8 x, u8 y) {
     s32 i;
     s32 j;
@@ -27,7 +26,7 @@ MATCH u8 func_801F3A14(u8 x, u8 y) {
         return 0;
     }
     for (j = 0; j < 8; j++) {
-        if ((D_801F4908[i].direction_flags >> j) & 1) {
+        if ((D_801F4908[i].flag_mask >> j) & 1) {
             if (j < 4) {
                 SYS_ClearFlag(g_SceneEventFlags, D_801F4928[j & 0x3]);
             } else {
