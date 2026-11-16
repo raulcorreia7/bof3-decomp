@@ -35,8 +35,9 @@ NON_MATCHING void func_801D759C(void) {
     input      = INPUT_GetRepeatedButtons(g_InputPressed & 0xF000);
     D_8014857C = 0xFF;
     D_8014857D = 0xFF;
-    count      = Party_CountOrder(PARTY_ORDER_FIELD);
     task       = &g_MenuPanelTasks[16];
+    /* FAKE: retail keeps the whole return word; the u8 prototype extends it. */
+    count      = ((s32 (*)(s32))Party_CountOrder)(PARTY_ORDER_FIELD);
     previous   = D_8014857A;
     if ((input & PADLup) != 0) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
@@ -47,8 +48,9 @@ NON_MATCHING void func_801D759C(void) {
         }
     } else if ((input & PADLdown) != 0) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        limit = (u8)count;
+        limit--;
         slot       = D_8014857A + 1;
-        limit      = (u8)count - 1;
         D_8014857A = slot;
         if (limit < (u8)slot) {
             D_8014857A = 0;
