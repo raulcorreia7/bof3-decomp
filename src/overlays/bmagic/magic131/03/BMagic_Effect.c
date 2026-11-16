@@ -58,7 +58,34 @@ MATCH void func_801EEDEC(void) {
     SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EEF64(void) {
+    s32 form;
+    u32 archive;
+    u8  timer;
+
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (timer == 0) {
+        form    = g_Battle.dragon_form;
+        archive = 0x124;
+        switch (form) {
+            case 6: /* Form 6 keeps the default archive; the arm keeps retail's range guard. */
+                break;
+            case 7:
+                archive = 0x123;
+                break;
+            case 8:
+                archive = 0x122;
+                break;
+        }
+        EMI_LoadArchive(archive);
+        g_Task->header.mode += 1;
+    }
+}
+#else
 INCLUDE_ASM(func_801EEF64);
+#endif
 
 MATCH void func_801EF000(void) {
     u16          i;
