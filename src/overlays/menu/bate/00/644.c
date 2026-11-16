@@ -165,20 +165,31 @@ MATCH void func_801D1AB8(u16* base, u16* current, u16* trial, u8* change, u8* eq
 /* The item tables hold this address; the reads around it name it one byte at a time. */
 
 NON_MATCHING void func_801D1C90(void) {
-    u8 i;
+    /* FAKE: these homes match the retail index scan and selected-field store. */
+    FAKE_REG(u8, i, "a0");
+    FAKE_REG(u8, terminator, "a2");
+    FAKE_REG(u8*, task, "v1");
+    FAKE_REG(u8*, selected, "a1");
+    u8 value;
 
-    g_MenuPanelTasks[0].handler = 2;
-    g_MenuPanelTasks[0].mode    = 2;
-    g_MenuPanelTasks[0].state   = 2;
-    g_MenuPanelTasks[0].active  = 1;
-    g_MenuPanelTasks[0].pos.x   = 0x140;
-    g_MenuPanelTasks[0].pos.y   = 0x3E;
-    for (i = 0; i < 3; i++) {
-        if (g_PartyFieldOrder[i] == 0 || g_PartyFieldOrder[i] == 7) {
+    i                          = 0;
+    terminator                 = 7;
+    task                       = (u8*)&g_MenuPanelTasks[0].handler;
+    selected                   = task + 0xB;
+    *task                      = 2;
+    g_MenuPanelTasks[0].mode   = 2;
+    g_MenuPanelTasks[0].state  = 2;
+    g_MenuPanelTasks[0].active = 1;
+    g_MenuPanelTasks[0].pos.x  = 0x140;
+    g_MenuPanelTasks[0].pos.y  = 0x3E;
+    do {
+        value = g_PartyFieldOrder[i];
+        if (value == 0 || value == terminator) {
+            *selected = i;
             break;
         }
-    }
-    g_MenuPanelTasks[0].unk_0C        = i;
+        i++;
+    } while (i < 3);
     g_MenuPanelTasks[1].pos.x         = -0xAA;
     g_MenuPanelTasks[1].pos.y         = 0x3E;
     g_MenuPanelTasks[1].unk_0C        = 7;

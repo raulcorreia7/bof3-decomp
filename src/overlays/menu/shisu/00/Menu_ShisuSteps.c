@@ -296,7 +296,70 @@ NON_MATCHING void func_801D1A20(void) {
 INCLUDE_ASM(func_801D1A20);
 #endif
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D1B58(void) {
+    u8* fade;
+    u8  level;
+    u8  value0;
+    u8  value1;
+    u8  value2;
+    u8  value3;
+    u8  value4;
+    u8  value5;
+
+    fade  = &D_80148654;
+    level = *fade;
+
+    value0 = D_801D9EF0[0];
+    if (value0 < level) {
+        value0 = level;
+    }
+    D_801DA11D = value0;
+    value1     = D_801D9EF0[1];
+    if (value1 < level) {
+        value1 = level;
+    }
+    D_801DA11E = value1;
+    value2     = D_801D9EF0[2];
+    if (value2 < level) {
+        value2 = level;
+    }
+    D_801DA11F = value2;
+    value3     = D_801D9EF0[4];
+    if (value3 < level) {
+        value3 = level;
+    }
+    D_801DA0A5 = value3;
+    value4     = D_801D9EF0[5];
+    if (value4 < level) {
+        value4 = level;
+    }
+    D_801DA0A6 = value4;
+    value5     = D_801D9EF0[6];
+    if (value5 < level) {
+        value5 = level;
+    }
+    D_801DA0A7 = value5;
+
+    level -= 8;
+    *fade = level;
+    if ((u8)level == 0) {
+        D_801DA0C1 = 5;
+        D_801DA049 = 1;
+        D_80148652 = 0;
+        D_801DA11D = D_801D9EF0[0];
+        D_801DA11E = D_801D9EF0[1];
+        D_801DA11F = D_801D9EF0[2];
+        D_801DA0A5 = D_801D9EF0[4];
+        D_801DA0A6 = D_801D9EF0[5];
+        D_801DA0A7 = D_801D9EF0[6];
+        g_MenuStatusItems.unk_08 += 1;
+        D_80148651 -= 2;
+    }
+}
+#else
 INCLUDE_ASM(func_801D1B58);
+#endif
 
 MATCH void func_801D1CA4(void) {
     g_MenuStatusItems.held[0] = Item_Count(ITEM_CAT_ITEM, ITEM_MACKEREL, 0);
@@ -379,6 +442,65 @@ INCLUDE_ASM(func_801D1EE8);
 
 INCLUDE_ASM(func_801D2308);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D27BC(void) {
+    s32** record_cell;
+    s32*  scroll_x;
+    s32*  scroll_y;
+    s32*  record;
+    s32*  next_record;
+    s32   x;
+    s32   y;
+    s32   height;
+    s32   bias;
+    s8    initial;
+
+    record_cell = &D_801F501C;
+    x           = g_AreaScrollTargetX;
+    scroll_x    = &g_AreaScrollTargetX;
+    scroll_y    = &g_AreaScrollTargetY;
+    bias        = 0x1000;
+    record      = *record_cell;
+    D_801DA09C  = record;
+    record      = D_801DA09C;
+    y           = *scroll_y;
+    D_801DA098  = record[1];
+
+    D_801DA049 = 0;
+    D_801DA090 = 0;
+    D_801DA088 = bias;
+    D_801DA0AC = 0;
+    D_801DA0B0 = 0;
+    D_801DA0B4 = 0;
+    initial    = -0x80;
+    D_801DA0A5 = initial;
+    D_801DA0A6 = initial;
+    D_801DA0A7 = initial;
+    D_801DA07C = *scroll_x;
+    D_801DA080 = y;
+    height     = Area_SampleHeight(x, y);
+    D_801DA084 = (height << 16) - MENU_STATUS_HEIGHT_BIAS;
+
+    record      = *record_cell;
+    D_801DA114  = record + 2;
+    next_record = D_801DA114;
+    D_801DA0C1  = 0;
+    D_801DA108  = 0;
+    D_801DA100  = bias;
+    D_801DA124  = 0;
+    D_801DA128  = 0;
+    D_801DA12C  = 0;
+    D_801DA11D  = initial;
+    D_801DA11E  = initial;
+    D_801DA11F  = initial;
+    D_801DA0F4  = *scroll_x;
+    D_801DA0F8  = *scroll_y;
+    D_801DA110  = next_record[1];
+    height      = Area_SampleHeight(*scroll_x, *scroll_y);
+    D_801DA0FC  = (height << 16) + MENU_STATUS_HEIGHT_BIAS;
+}
+#else
 INCLUDE_ASM(func_801D27BC);
+#endif
 
 INCLUDE_ASM(func_801D2978);

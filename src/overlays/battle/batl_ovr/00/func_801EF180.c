@@ -1,10 +1,11 @@
 #include "batl_ovr_00.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF180(s32 shade) {
+MATCH void func_801EF180(s32 shade) {
     SPRT* sprt;
-    s16   y;
-    s16   x;
+    /* FAKE: keeps the first two sprites' y coordinate in retail register s2. */
+    FAKE_REG(s16, y, "s2");
+    /* FAKE: keeps the last two sprites' x coordinate in retail register s1. */
+    FAKE_REG(s16, x, "s1");
 
     y = 60;
     x = 272;
@@ -48,6 +49,3 @@ NON_MATCHING void func_801EF180(s32 shade) {
     SetSprt(sprt);
     GFX_AddPrim(2, sizeof(SPRT));
 }
-#else
-INCLUDE_ASM(func_801EF180);
-#endif

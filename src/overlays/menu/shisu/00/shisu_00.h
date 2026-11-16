@@ -106,11 +106,26 @@ extern u8*      g_MenuCommandLabels[];
 extern u8       g_MenuCommandRows[][5];
 extern char*    D_801D9EA4[];
 extern u8       D_801DA049;
+extern s32      D_801DA07C;
+extern s32      D_801DA080;
+extern u8       D_801DA090;
+extern s32      D_801DA098;
+extern s32*     D_801DA09C;
+extern s32      D_801DA0AC;
+extern s32      D_801DA0B0;
 extern s32      D_801DA0B4;
 extern s32      D_801DA088;
 extern u8       D_801DA0C1;
+extern s32      D_801DA0F4;
+extern s32      D_801DA0F8;
 extern s32      D_801DA0FC;
+extern u8       D_801DA108;
+extern s32      D_801DA110;
+extern s32*     D_801DA114;
 extern s32      D_801DA12C;
+extern s32      D_801DA124;
+extern s32      D_801DA128;
+extern s32*     D_801F501C;
 
 extern const char g_MenuInventoryCountFormat[];
 

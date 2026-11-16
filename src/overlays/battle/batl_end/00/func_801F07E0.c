@@ -1,7 +1,5 @@
 #include "batl_end_00.h"
 
-u32 Char_GetExpToNextLevel(s32 slot);
-
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F07E0(void) {
     u8  i;
