@@ -93,8 +93,7 @@ NON_MATCHING void func_801D3A24(void) {
         }
     }
     if (done) {
-        Message_StartAreaMessage((s16)(g_MenuMasterMessageIds[g_SceneEventSelection] + MASTER_MESSAGE_SKILL_LEARNED));
-        g_GameStateIndex = GAME_REQUEST_MESSAGE;
+        MESSAGE_START_WAIT((s16)(g_MenuMasterMessageIds[g_SceneEventSelection] + MASTER_MESSAGE_SKILL_LEARNED));
     }
     g_MenuMasterSubStep += 1;
 }

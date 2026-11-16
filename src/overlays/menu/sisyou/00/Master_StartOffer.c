@@ -3,7 +3,6 @@
 /* Panel-lock flag owned by the main executable. */
 
 MATCH void Master_StartOffer(void) {
-    Message_StartAreaMessage((s16)(g_MenuMasterMessageIds[g_SceneEventState.selection] + MASTER_MESSAGE_OFFER));
-    g_GameStateIndex = GAME_REQUEST_MESSAGE;
+    MESSAGE_START_WAIT((s16)(g_MenuMasterMessageIds[g_SceneEventState.selection] + MASTER_MESSAGE_OFFER));
     g_MenuMasterSubStep++;
 }

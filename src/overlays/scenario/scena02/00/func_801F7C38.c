@@ -117,9 +117,7 @@ MATCH void func_801F7C38(void) {
                 break;
             }
             SND_PlayBGM(0x11, 0x64, 8);
-            Message_StartAreaMessage(0xA);
-            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-            g_SceneState.step_05 = 0x23;
+            SCENE_MESSAGE_WAIT(0xA, 0x23);
             break;
         case 35:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {

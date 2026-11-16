@@ -25,9 +25,7 @@ MATCH void func_801F7C6C(void) {
             }
             break;
         case 5:
-            Message_StartAreaMessage(0x42);
-            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-            g_SceneState.step_05 = 6;
+            SCENE_MESSAGE_WAIT(0x42, 6);
             break;
         case 6:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {

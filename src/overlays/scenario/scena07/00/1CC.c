@@ -922,9 +922,8 @@ MATCH void func_801FAA70(void) {
     switch (*step) {
         case 0:
             if (g_UiWindowEffectBusy == 0) {
-                Message_StartAreaMessage(1);
-                g_GameStateIndex = GAME_REQUEST_MESSAGE;
-                *step            = 1;
+                MESSAGE_START_WAIT(1);
+                *step = 1;
             }
             break;
         case 1:

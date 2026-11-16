@@ -41,9 +41,8 @@ MATCH void func_801FC778(void) {
     state = &D_80146875;
     switch (*state) {
         case 0:
-            Message_StartAreaMessage(76);
-            g_GameStateIndex = GAME_REQUEST_MESSAGE;
-            *state           = 1;
+            MESSAGE_START_WAIT(76);
+            *state = 1;
             return;
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
