@@ -1,4 +1,4 @@
-#define TASK_VOLATILE
+#define FAKE_DECL_TASK_VOLATILE
 #include "area042_13.h"
 
 #ifdef NON_MATCHING

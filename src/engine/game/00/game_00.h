@@ -5,8 +5,8 @@
  * area and handler tables, and the prototypes its units share. Only this image
  * includes the file; the data tables are in data.h. */
 
-#define GRAPHICS_PALETTE_PENDING_VOLATILE
-#define GAME_REQUEST_FLAGS_VOLATILE
+#define FAKE_DECL_GRAPHICS_PALETTE_PENDING_VOLATILE
+#define FAKE_DECL_GAME_REQUEST_FLAGS_VOLATILE
 #include "shared/etc.h"
 
 #include "shared.h"

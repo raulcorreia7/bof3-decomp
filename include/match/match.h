@@ -146,6 +146,21 @@
 #endif
 
 /*
+ * Declaration switches. A unit that needs a global declared with another type than
+ * the shared header gives it defines one of these before its first include; the
+ * header then declares that global the other way. Each one stands for a view the
+ * retail code takes of the global, and each is a matching workaround like the rest
+ * of the FAKE_ family, so a new one is added here and in the header that tests it.
+ *
+ *   FAKE_DECL_TASK_VOLATILE                     psx/mem.h        g_Task read after every store
+ *   FAKE_DECL_GAME_SCRATCH_BASE_SCALAR / _WORD  game/spawn.h     g_ScratchPad as a byte array or a word
+ *   FAKE_DECL_BATTLE_PARTY_CELL_RECORD          slus/data.h      D_8014637C as a PartyMember pointer
+ *   FAKE_DECL_GRAPHICS_PALETTE_PENDING_VOLATILE slus/data.h      the pending palette flag read as volatile
+ *   FAKE_DECL_AREA_SCROLL_TARGET_VOLATILE       slus/data.h      the scroll target read as volatile
+ *   FAKE_DECL_GAME_REQUEST_FLAGS_VOLATILE       menu/gameui.h    the request flags read as volatile
+ */
+
+/*
  * Unmatched code/data inclusion for C source. `ASM_DIR` is the image's one asm folder, passed as
  * `-DASM_DIR="asm/<target>"` (or its `hand` subfolder for authored assembly).
  */

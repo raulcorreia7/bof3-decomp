@@ -293,7 +293,7 @@ macro, not a second `extern`. A cast macro that names the object itself keeps th
   `include/psx/mem.h`. `struct Task` is incomplete, so no member is reachable without a view. Each
   mode header views the cell as its work record through a cast macro. Code with no record type reads
   bytes through `TASK_BYTES[n]`, and assigns the cell with `(struct Task *)`. An image that reads
-  it as `volatile` defines `TASK_VOLATILE` before the first include.
+  it as `volatile` defines `FAKE_DECL_TASK_VOLATILE` before the first include.
 - Task header: every record the cell points at starts with the same three bytes: `flags` (0x00),
   `mode` (0x01) and `step` (0x02). A type with a `u8` there uses these names, not `unk_01` or
   `state_02`. Per-object scratch (fishing, a boss) is a union at the record's tail, one view per
@@ -306,12 +306,12 @@ header reads the macro when it is first included; a later `#define` changes noth
 declarations has one name and gives a different qualifier or width, so a pair is not a duplicate to
 merge, and the macro is not a setting to move into a header.
 
-| Macro                               | Header                  | Selects                                               |
-| ----------------------------------- | ----------------------- | ----------------------------------------------------- |
-| `TASK_VOLATILE`                     | `include/psx/mem.h`     | `volatile` view of `g_Task`                           |
-| `SCRIPT_VARS_VOLATILE`              | `include/game/script.h` | `volatile u8 g_ScriptVars`                            |
-| `GRAPHICS_PALETTE_PENDING_VOLATILE` | `include/slus/data.h`   | `volatile u8 g_GfxPalettePending`                     |
-| `GAME_SCRATCH_BASE_SCALAR`          | `include/game/spawn.h`  | `u8 g_ScratchPad[]` in place of the `ScratchPad` view |
+| Macro                                         | Header                  | Selects                                               |
+| --------------------------------------------- | ----------------------- | ----------------------------------------------------- |
+| `FAKE_DECL_TASK_VOLATILE`                     | `include/psx/mem.h`     | `volatile` view of `g_Task`                           |
+| `SCRIPT_VARS_VOLATILE`                        | `include/game/script.h` | `volatile u8 g_ScriptVars`                            |
+| `FAKE_DECL_GRAPHICS_PALETTE_PENDING_VOLATILE` | `include/slus/data.h`   | `volatile u8 g_GfxPalettePending`                     |
+| `FAKE_DECL_GAME_SCRATCH_BASE_SCALAR`          | `include/game/spawn.h`  | `u8 g_ScratchPad[]` in place of the `ScratchPad` view |
 
 ## Unit files
 

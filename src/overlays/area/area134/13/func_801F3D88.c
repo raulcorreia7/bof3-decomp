@@ -1,5 +1,5 @@
 /* The dispatch dance keeps every work-cell write. */
-#define TASK_VOLATILE
+#define FAKE_DECL_TASK_VOLATILE
 #include "area134_13.h"
 
 #ifdef NON_MATCHING

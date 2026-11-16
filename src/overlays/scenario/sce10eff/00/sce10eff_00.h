@@ -2,7 +2,7 @@
 #define OVERLAY_SCENARIO_SCE10EFF_00_H
 
 /* The scratchpad base here is the 32-bit depth word. */
-#define GAME_SCRATCH_BASE_WORD
+#define FAKE_DECL_GAME_SCRATCH_BASE_WORD
 #include "common/vector.h"
 #include "overlays/scenario/scenario.h"
 #include "menu/gameui.h"

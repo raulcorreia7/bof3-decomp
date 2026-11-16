@@ -1,4 +1,4 @@
-#define AREA_SCROLL_TARGET_VOLATILE
+#define FAKE_DECL_AREA_SCROLL_TARGET_VOLATILE
 #include "scena17_00.h"
 #include "area/map.h"
 #include "shared/etc.h"

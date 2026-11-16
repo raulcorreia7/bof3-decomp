@@ -4,7 +4,7 @@
 /* The bmagic/magic143/03 overlay. Only this image includes the file. */
 
 /* The scratchpad base here is the 32-bit depth word. */
-#define GAME_SCRATCH_BASE_WORD
+#define FAKE_DECL_GAME_SCRATCH_BASE_WORD
 
 #include "overlays/bmagic/bmagic.h"
 #include "slus/functions.h"

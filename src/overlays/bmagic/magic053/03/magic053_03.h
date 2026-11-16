@@ -4,7 +4,7 @@
 /* The bmagic/magic053/03 overlay. Only this image includes the file. */
 
 /* The acting battler cell is read as its record. */
-#define BATTLE_PARTY_CELL_RECORD
+#define FAKE_DECL_BATTLE_PARTY_CELL_RECORD
 #include "overlays/bmagic/bmagic.h"
 #include "sys/scene.h"
 

@@ -1,4 +1,4 @@
-#define GAME_SCRATCH_BASE_SCALAR
+#define FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
 #include "game_00.h"
 
 MATCH u8 func_801B4BE4(u8 mode, u8 code) {

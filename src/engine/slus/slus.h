@@ -6,7 +6,7 @@
  * subsystem headers own the cross-image names; only this executable includes
  * this file. */
 
-#define GAME_SCRATCH_BASE_SCALAR
+#define FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
 #include "common/vector.h"
 #include "game.h"
 #include "sys/cd.h"
