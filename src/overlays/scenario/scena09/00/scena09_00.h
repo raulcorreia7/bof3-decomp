@@ -7,20 +7,19 @@
 #include "overlays/scenario/scenario.h"
 #include "area/spad.h"
 
-extern u8       D_80144908[];
-extern u8       D_80145F09;
-extern u8       D_80146865;
-extern u8       D_80146866;
-extern u8       D_80146867;
-extern u8       D_8014623B;
-extern u8       D_80146874;
-extern u8       D_80146875;
-extern u16      D_80146876;
-extern u16      D_80146258;
-extern u16      D_8014625A;
-extern u32      D_801F6C00;
+extern u8  D_80144908[];
+extern u8  D_80145F09;
+extern u8  D_80146865;
+extern u8  D_80146866;
+extern u8  D_80146867;
+extern u8  D_8014623B;
+extern u8  D_80146874;
+extern u8  D_80146875;
+extern u16 D_80146876;
+extern u16 D_80146258;
+extern u16 D_8014625A;
+extern u32 D_801F6C00;
 /* D_801FE384 */
-extern Callback g_SceneEntityDispatch[];
 
 /* The triangle rows func_801F7424 offsets the projected point by: the second
  * and third vertex relative to the first, in screen space. */
@@ -71,7 +70,6 @@ s32  func_801F75BC(void);
 void func_801F76D0(void);
 
 /* D_801FE434 */
-extern SceneFunc g_SceneActorDispatch[];
 
 extern u8 D_801FE474;
 extern s8 (*D_801FE4BC[])(void);
