@@ -1,3 +1,32 @@
 #include "area139_13.h"
 
-INCLUDE_ASM(func_801F3288);
+MATCH void func_801F3288(s32* first, s32* second) {
+    LINE_F2* line;
+    u16      size[2];
+    u16      scale[2];
+    MATRIX   camera;
+    s32      angle;
+    u16      radius1;
+    u16      radius2;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 960, 0), 0);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
+    Area_SetCameraMatrix(&camera);
+    line = (LINE_F2*)g_GfxPrimCursor;
+    SetLineF2(line);
+    SetSemiTrans(line, 0);
+    Area_ProjectPoint(first, (DVECTOR*)&line->x0);
+    Area_ProjectPoint(second, (DVECTOR*)&line->x1);
+    setRGB0(line, D_801F442C[g_Task->unk_06 * 3], D_801F442D[g_Task->unk_06 * 3], D_801F442E[g_Task->unk_06 * 3]);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(LINE_F2));
+    angle   = ratan2(line->y1 - line->y0, line->x1 - line->x0);
+    size[0] = 64;
+    size[1] = 0;
+    Game_ProjectWorldPoint(first, size, scale);
+    radius1 = scale[0] + (g_FrameCount & 1);
+    Game_ProjectWorldPoint(second, size, scale);
+    radius2 = scale[0] + (g_FrameCount & 1);
+    func_801F36DC(line->x0, line->y0, radius1, angle + ANGLE_90, line->x1, line->y1, radius2, angle + ANGLE_270);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 1, 960, 0), 0);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
+}

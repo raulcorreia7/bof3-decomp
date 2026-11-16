@@ -93,6 +93,25 @@ extern u8       D_801F6AB5[];
 /* The x/y byte pairs the step compares the position against. */
 extern u8       D_801F6B2C[];
 extern u8       D_801F6B2D[];
+
+/* One authored camera-pan row: the cell the watched actor stands on, the cell
+ * the scroll moves to and the direction the actor turns. */
+typedef struct Area135CameraPan {
+    u8 x;         /* 0x00 */
+    u8 y;         /* 0x01 */
+    u8 x_half;    /* 0x02 the target x lands half a cell on */
+    u8 target_x;  /* 0x03 */
+    u8 y_half;    /* 0x04 */
+    u8 target_y;  /* 0x05 */
+    u8 direction; /* 0x06 */
+} Area135CameraPan;
+
+ASSERT_SIZE(Area135CameraPan, 0x7);
+ASSERT_OFFSET(Area135CameraPan, target_x, 0x03);
+ASSERT_OFFSET(Area135CameraPan, direction, 0x06);
+
+extern Area135CameraPan D_801F6ABC[];
+
 extern Callback D_801F6B34[];
 extern Callback D_801F6B40[];
 void            func_801F37C4(void);
@@ -116,6 +135,9 @@ void func_80159B9C(s32 x, s32 y, s32 w, s32 h);
 void func_80159FA0(s32 x, s32 y, s32 width, s32 height);
 /* The engine places a work row from a spawn record. */
 void func_801A6C98(u8* record);
+/* The owner is src/engine/game/00/game_00.h; that header is not visible to this
+ * overlay. */
+u8   func_801ABD68(s32 pos_x, s32 pos_y, s32 step_count, void* deltas);
 
 extern SceneTrigger D_801F6BA8[];
 /* The party spawn record func_801A6C98 places when the area request returns. */
