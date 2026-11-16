@@ -103,7 +103,7 @@ void            func_801F3264(void);
 void            Actor_SetScreenOrigin(void);
 /* func_801F3360 */
 void            Actor_ZoomOut(void);
-void            func_801F33A8(void);
+/* func_801F33A8 */
 extern u8       D_801F2DD4[];
 void            Area_StartDirectionalScript(Actor* actor);
 void            func_801F34E0(void);
