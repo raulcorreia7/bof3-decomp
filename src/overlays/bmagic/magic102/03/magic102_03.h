@@ -14,8 +14,6 @@ extern SVECTOR D_1F800014[];
 /* D_1F800034 read unsigned: the screen x and y RotTransPers writes. */
 extern u16     D_1F800034_U16[2];
 
-extern u16 g_AreaCellGrid[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
-
 s32 func_801F0ADC(s32 x, s32 y);
 
 extern Magic010SharedSteps D_801EEC04;

@@ -860,15 +860,6 @@ static inline Character* Start_PickPartyRecord(s32 character_index, s32 record_i
 
 void Menu_DrawCharacterPortrait(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 shade_mode);
 
-extern FormationLayout g_MenuFormations[FORMATION_COUNT];
-extern FormationOrder  g_MenuFormationOrder;
-extern s32             g_MenuFormationArrow[3][2];
-extern s32             g_MenuFormationArrowTurned[3][2];
-extern s32             g_MenuFormationSpots[PARTY_SLOT_COUNT][2];
-extern u8              g_MenuFormationFrameLeft[];
-extern u8              g_MenuFormationFrameMiddle[];
-extern u8              g_MenuFormationFrameRight[];
-
 void func_801AF930(s32 x, s32 y, u8 palette_index, u8 icon_index, u8* command_stream, u8 stat_value, u8 sprite_flag);
 void func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
 

@@ -291,7 +291,28 @@ MATCH void func_801EFB8C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFCE4);
+MATCH void func_801EFCE4(void) {
+    s32 phase;
+
+    if (--g_Task->unk_09 == 0) {
+        g_Task->unk_0C                   = 5 * ONE;
+        g_Task->unk_18                   = ONE / 8;
+        g_Task->unk_14                   = TO_COORD(8);
+        g_Task->unk_20                   = TO_COORD(4);
+        D_1F800000.view.effect.params[0] = g_Task->unk_0C;
+        phase                            = (g_Task->param.unk_0B & 7) * 8 + g_Task->unk_09;
+        D_1F800000.view.effect.params[2] = BMAGIC_PHASE_ANGLE(phase);
+        g_Task->pos.x.fixed              = g_BattleEffectBattler->pos.x.fixed + FIXED_MUL(rsin((s16)BMAGIC_PHASE_ANGLE(phase)), D_1F800000.view.effect.params[0]);
+        g_Task->pos.y.fixed              = g_BattleEffectBattler->pos.y.fixed + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
+        g_Task->pos.z.fixed              = g_BattleEffectBattler->pos.z.fixed;
+        g_Task->unk_5D                   = (rand() & 7) + 5;
+        g_Task->unk_5E                   = (rand() & 7) + 5;
+        g_Task->unk_5F                   = (rand() & 7) + 5;
+        g_Task->unk_09                   = 0;
+        g_Task->timer                    = 24;
+        g_Task->header.step += 1;
+    }
+}
 
 /* Orbits the effect around its battler, the radius shrinking each frame, and releases the battler once the radius is gone. */
 MATCH void func_801EFE8C(void) {

@@ -7,8 +7,6 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-INCLUDE_ASM(func_801F936C);
-
 MATCH void func_801F9678(void) {
     switch (g_SceneState.step_05) {
         case 0:

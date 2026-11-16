@@ -108,6 +108,7 @@ ASSERT_OFFSET(Scena07BurstBuffer, unk_514, 0x514);
 
 extern Scena07BurstBuffer  D_800E4C24;
 extern Scena07BurstBuffer* D_801FDFC0;
+void                       func_801F90F4(Scena07BurstBuffer* buffer);
 void                       func_801F9330(Scena07BurstBuffer* buffer);
 
 /* The burst rotation step func_801F7960 and func_801F7C9C share: draw the burst buffer, turn it by
