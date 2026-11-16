@@ -707,7 +707,59 @@ MATCH void func_801F92F0(Coord* position, s32* step) {
     Area_AddCellPrim(origin[0].fixed, origin[1].fixed, 0, sizeof(POLY_F4));
 }
 
-INCLUDE_ASM(func_801F9500);
+MATCH void func_801F9500(WorldPos* pos, s32* vx) {
+    POLY_FT4*          prim;
+    Scena15SpriteCell* cell;
+    s32                point[3];
+
+    FAKE_STACK_PADS(u8, 0x10); /* FAKE: retail keeps the point row in a 72-byte frame. */
+
+    cell = D_801FE5E8;
+    if (g_Task->unk_06 & 0x4) {
+        cell++;
+    }
+    prim = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(prim);
+    SetSemiTrans(prim, 1);
+
+    if (!(g_Task->unk_06 & 1)) {
+        point[0] = pos->x.fixed - vx[0];
+        point[1] = pos->y.fixed + vx[1];
+    } else {
+        point[0] = pos->x.fixed + vx[0];
+        point[1] = pos->y.fixed - vx[1];
+    }
+    point[2] = pos->z.fixed + vx[2];
+    FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
+    Area_ProjectPoint(point, (DVECTOR*)&prim->x0);
+
+    point[0] = pos->x.fixed + vx[0];
+    point[1] = pos->y.fixed + vx[1];
+    point[2] = pos->z.fixed + vx[2];
+    Area_ProjectPoint(point, (DVECTOR*)&prim->x1);
+
+    point[0] = pos->x.fixed - vx[0];
+    point[1] = pos->y.fixed - vx[1];
+    point[2] = pos->z.fixed - vx[2];
+    Area_ProjectPoint(point, (DVECTOR*)&prim->x2);
+
+    if (!(g_Task->unk_06 & 1)) {
+        point[0] = pos->x.fixed + vx[0];
+        point[1] = pos->y.fixed - vx[1];
+    } else {
+        point[0] = pos->x.fixed - vx[0];
+        point[1] = pos->y.fixed + vx[1];
+    }
+    point[2] = pos->z.fixed - vx[2];
+    FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
+    Area_ProjectPoint(point, (DVECTOR*)&prim->x3);
+
+    setUV4(prim, cell->u, cell->v, cell->u + 0x18, cell->v, cell->u, cell->v + 0x10, cell->u + 0x18, cell->v + 0x10);
+    prim->tpage = GetTPage(1, 1, cell->page_x, cell->page_y);
+    setClut(prim, 0xA0, 0x1F0);
+    setRGB0(prim, 0x20, 0x20, 0x20);
+    Area_AddCellPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_FT4));
+}
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
@@ -759,7 +811,55 @@ NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
 INCLUDE_ASM(func_801F97CC);
 #endif
 
-INCLUDE_ASM(func_801F9A20);
+MATCH void func_801F9A20(WorldPos* pos, s32* vx) {
+    POLY_F4* poly;
+    s32      point[3];
+
+    FAKE_STACK_PADS(u8, 0x20); /* FAKE: retail keeps the point row in an 88-byte frame. */
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 0, 0x3C0, 0) & 0xFFFF, 0);
+    Area_AddCellPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(DR_MODE));
+    poly = (POLY_F4*)g_GfxPrimCursor;
+    SetPolyF4(poly);
+    SetSemiTrans(poly, 1);
+
+    point[0] = pos->x.fixed + vx[0];
+    point[1] = pos->y.fixed + vx[1];
+    point[2] = pos->z.fixed + vx[2];
+    Area_ProjectPoint(point, (DVECTOR*)&poly->x0);
+
+    if (!(g_Task->unk_06 & 1)) {
+        point[0] = pos->x.fixed - vx[0];
+        point[1] = pos->y.fixed + vx[1];
+    } else {
+        point[0] = pos->x.fixed + vx[0];
+        point[1] = pos->y.fixed - vx[1];
+    }
+    point[2] = pos->z.fixed + vx[2];
+    FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
+    Area_ProjectPoint(point, (DVECTOR*)&poly->x1);
+
+    if (!(g_Task->unk_06 & 1)) {
+        point[0] = pos->x.fixed + vx[0];
+        point[1] = pos->y.fixed - vx[1];
+    } else {
+        point[0] = pos->x.fixed - vx[0];
+        point[1] = pos->y.fixed + vx[1];
+    }
+    point[2] = pos->z.fixed - vx[2];
+    FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
+    Area_ProjectPoint(point, (DVECTOR*)&poly->x2);
+
+    point[0] = pos->x.fixed - vx[0];
+    point[1] = pos->y.fixed - vx[1];
+    point[2] = pos->z.fixed - vx[2];
+    Area_ProjectPoint(point, (DVECTOR*)&poly->x3);
+
+    poly->r0 = (g_Task->unk_06 & 2) != 0 ? 0x80 : 0;
+    poly->g0 = (g_Task->unk_06 & 2) == 0 ? 0x80 : 0;
+    poly->b0 = 0;
+    Area_AddCellPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_F4));
+}
 
 MATCH void func_801F9CAC(void) {
     SYS_DISPATCH_BYTE(D_801FE66C, D_80146872);
