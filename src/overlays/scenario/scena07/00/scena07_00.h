@@ -65,7 +65,6 @@ extern u8              D_801FDDA4[];
 extern u8              D_801FDE8C[];
 extern u8              D_801FDF7C[];
 /* D_801FDF8C */
-extern SceneFunc       g_SceneActorDispatch[];
 extern u8              D_801FDFC4;
 
 /* The record D_801FDFBC points at: a world position the burst draws around and its size. */
@@ -106,6 +105,12 @@ ASSERT_OFFSET(Scena07BurstBuffer, shade, 0x410);
 ASSERT_OFFSET(Scena07BurstBuffer, angle, 0x510);
 ASSERT_OFFSET(Scena07BurstBuffer, unk_514, 0x514);
 
+extern s16                 D_800E595C;
+extern s16                 D_800E595E;
+extern s16                 D_800E5960;
+extern s32                 D_800E81D8;
+extern s32                 D_800E81DC;
+extern s32                 D_800E81E0;
 extern Scena07BurstBuffer  D_800E4C24;
 extern Scena07BurstBuffer* D_801FDFC0;
 void                       func_801F90F4(Scena07BurstBuffer* buffer);
@@ -172,7 +177,6 @@ u8   func_801F9EFC(void);
 u8*  func_801F9DD4(void);
 
 /* D_801FDD14 */
-extern Callback g_SceneEntityDispatch[];
 
 extern u8       D_80144DF2;
 extern u8       D_80144DF5;

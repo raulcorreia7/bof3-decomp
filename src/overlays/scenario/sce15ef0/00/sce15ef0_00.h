@@ -36,9 +36,8 @@ ASSERT_OFFSET(Sce15ef0Work, origin_x, 0x2E);
 ASSERT_OFFSET(Sce15ef0Work, pos, 0x34);
 ASSERT_OFFSET(Sce15ef0Work, color_r, 0x5D);
 
-extern u32      D_801D0C00;
+extern u32 D_801D0C00;
 /* D_801D1F88 */
-extern Callback g_SceneEntityDispatch[];
 
 void func_801D1220(s32 value);
 void func_801D1690(s16 x1, s16 y1, s16 radius1, u16 angle1, s16 x2, s16 y2, s16 radius2, u16 angle2);
