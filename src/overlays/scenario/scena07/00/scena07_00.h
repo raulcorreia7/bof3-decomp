@@ -105,6 +105,12 @@ ASSERT_OFFSET(Scena07BurstBuffer, shade, 0x410);
 ASSERT_OFFSET(Scena07BurstBuffer, angle, 0x510);
 ASSERT_OFFSET(Scena07BurstBuffer, unk_514, 0x514);
 
+extern s16                 D_800E595C;
+extern s16                 D_800E595E;
+extern s16                 D_800E5960;
+extern s32                 D_800E81D8;
+extern s32                 D_800E81DC;
+extern s32                 D_800E81E0;
 extern Scena07BurstBuffer  D_800E4C24;
 extern Scena07BurstBuffer* D_801FDFC0;
 void                       func_801F90F4(Scena07BurstBuffer* buffer);
