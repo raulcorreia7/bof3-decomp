@@ -6,11 +6,15 @@
 
 #include "overlays/area/world03.h"
 
+/* FAKE: the call passes the count as s32, the width the real prototype (u8) lacks. */
+#define Item_Add ((bool (*)(s32, s32, s32, s32))Item_Add)
+
 /* The scenario state byte the hit path sets. */
 
 /* The game-overlay state byte the request writes. */
 
-/* The request value table indexed by the selection byte. */
+/* The request value tables indexed by the selection byte. */
+extern u16 D_801F3804[];
 extern u16 D_801F3808[];
 
 /* The scenario flag bytes the step tests, sets and clears. */

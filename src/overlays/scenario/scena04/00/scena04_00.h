@@ -145,7 +145,6 @@ extern s32 g_AreaFocusY;
 
 extern u32      D_801F6C00;
 /* D_801FA180 */
-extern Callback g_SceneEntityDispatch[];
 extern Callback D_801FA198[];
 extern s32      D_801FA1A4[];
 extern s32      D_801FA1C4[];
@@ -160,16 +159,15 @@ void            func_801F75BC(u8 weight, u8 shade);
  * eight corners into D_801FA240 and func_801F732C draws them. */
 extern ScenePathPoint D_801FA240[];
 
-extern Callback  D_801FA1E4[];
-extern Callback  D_801FA204[];
-extern Callback  D_801FA210[];
-extern s8        D_801FA220[];
+extern Callback D_801FA1E4[];
+extern Callback D_801FA204[];
+extern Callback D_801FA210[];
+extern s8       D_801FA220[];
 /* D_801FA224 */
-extern SceneFunc g_SceneActorDispatch[];
 /* D_801FA228 */
-extern u8        g_ScenePositions;
+extern u8       g_ScenePositions;
 /* D_801FA230 */
-extern Callback  g_ScenePositionDispatch[];
+extern Callback g_ScenePositionDispatch[];
 
 void func_801F7EC0();
 

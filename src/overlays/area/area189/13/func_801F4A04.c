@@ -1,10 +1,13 @@
 #include "area189_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING s16 func_801F4A04(s32 x, s32 y) {
+/* Bilinear height of the map cell at the 16.16 point from its four corner heights. */
+MATCH s16 func_801F4A04(s32 x, s32 y) {
     s32   cell_x;
     s32   cell_y;
     u8    block;
+    s32   row;
+    s32   col;
+    s32   cell_index;
     u32   packed;
     s8    c0;
     s8    c1;
@@ -19,7 +22,10 @@ NON_MATCHING s16 func_801F4A04(s32 x, s32 y) {
     y_pos.fixed = y + COORD_HALF;
     cell_y      = y_pos.part.integer;
     block       = D_801F6138[(cell_y & 0xF0) | ((cell_x & 0xF0) >> 4)];
-    packed      = MEM_PTR(u32, MAP_BUNDLE_BASE + AREA_MAP_BUNDLE_SIZE)[((block & 0xF0) | (cell_y & 0xF)) * 0x60 + ((block & 0xF) << 4 | (cell_x & 0xF))];
+    row         = cell_y & 0xF;
+    col         = cell_x & 0xF;
+    cell_index  = ((block & 0xF0) | row) * 0x60 + ((block & 0xF) << 4 | col);
+    packed      = MEM_PTR(u32, MAP_BUNDLE_BASE + AREA_MAP_BUNDLE_SIZE)[cell_index];
 
     c0 = (s8)packed;
     c1 = (s8)(packed >> 8);
@@ -33,6 +39,3 @@ NON_MATCHING s16 func_801F4A04(s32 x, s32 y) {
     }
     return height << 5;
 }
-#else
-INCLUDE_ASM(func_801F4A04);
-#endif
