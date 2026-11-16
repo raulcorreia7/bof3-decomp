@@ -165,8 +165,9 @@ MATCH void func_801D1938(void) {
 NON_MATCHING void func_801D1A50(void) {
     u16* input;
     u16  repeated;
-    s32  selection;
     s32  slot;
+
+    FAKE_STACK_PADS(u8, 1); /* FAKE: retail reserves 8 unused stack bytes. */
 
     input    = &g_InputPressed;
     repeated = INPUT_GetRepeatedButtons(*input & 0xA000);
@@ -190,17 +191,16 @@ NON_MATCHING void func_801D1A50(void) {
             }
         }
     } else if (*input & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        selection = D_801DB0B8;
-        if (selection == 2) {
+        if (D_801DB0B8 == 2) {
             SND_PlayCue(0x104);
             SND_PlayCue(0x102);
             D_801DB0C4 = 0;
             D_801F294D++;
         } else if ((slot = LOB(D_801DB0B4)) < 8) {
-            D_801DB080[10 + slot] = selection;
+            D_801DB080[10 + slot] = (u8)D_801DB0B8;
             D_801DB0B4++;
             SND_PlayCue(0x103);
-            if (D_801DB0B4 == 8) {
+            if ((s8)D_801DB0B4 == 8) {
                 D_801DB0B8 = 2;
             }
         }

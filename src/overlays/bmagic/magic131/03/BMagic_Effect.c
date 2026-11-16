@@ -541,8 +541,6 @@ NON_MATCHING void func_801F06B4(void) {
     long      depth;
     long      flag;
     s32       tpage;
-    s32       x;
-    s32       y;
     u8        ring;
     u8        i;
     s16       angle;
@@ -574,9 +572,9 @@ NON_MATCHING void func_801F06B4(void) {
         g_ScratchPadVectors[1].vy    = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[1]);
         g_ScratchPadVectors[0].vz    = -FIXED_MUL(rsin(ring << 8), g_ScratchPad.cells.halves[0]);
         g_ScratchPadVectors[1].vz    = g_ScratchPadVectors[0].vz;
-        for (i = 1; i < 33; i++) {
+        for (i = 1; i < 17; i++) {
             angle = i;
-            angle &= 0x1F;
+            angle &= 0xF;
             g_ScratchPad.cells.halves[3] = angle << 7;
             g_ScratchPadVectors[0].vx    = g_ScratchPadVectors[1].vx;
             g_ScratchPadVectors[0].vy    = g_ScratchPadVectors[1].vy;
@@ -586,12 +584,7 @@ NON_MATCHING void func_801F06B4(void) {
             g_ScratchPadVectors[2].vy    = g_ScratchPadVectors[3].vy;
             g_ScratchPadVectors[3].vx    = FIXED_MUL(rsin(g_ScratchPad.cells.halves[3]), g_ScratchPad.cells.halves[2]);
             g_ScratchPadVectors[3].vy    = FIXED_MUL(rcos(g_ScratchPad.cells.halves[3]), g_ScratchPad.cells.halves[2]);
-            x                            = (g_ScratchPadVectors[3].vx << 9) + g_Task->pos.x.fixed;
-            y                            = (g_ScratchPadVectors[3].vy << 9) + g_Task->pos.y.fixed;
-            tpage                        = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
-            SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-            Area_AddCellPrim(x, y, 1, sizeof(DR_MODE));
-            poly = (POLY_FT4*)g_GfxPrimCursor;
+            poly                         = (POLY_FT4*)g_GfxPrimCursor;
             SetPolyFT4(poly);
             SetSemiTrans(poly, 1);
             poly->tpage = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 0x340, 0x100);
@@ -602,7 +595,9 @@ NON_MATCHING void func_801F06B4(void) {
             RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3,
                           &depth, &flag);
             setRGB0(poly, g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6]);
-            Area_AddCellPrim(x, y, 1, sizeof(POLY_FT4));
+            if ((u8)(i - 10) >= 2) {
+                GFX_AddPrim(3, sizeof(POLY_FT4));
+            }
         }
     }
 }

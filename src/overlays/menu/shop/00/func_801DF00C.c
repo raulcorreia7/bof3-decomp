@@ -5,10 +5,10 @@ NON_MATCHING void func_801DF00C(s32 x, s32 y) {
     Character* record;
     s32        base_x;
     s32        base_y;
-    s32        row;
-    s32        highlight;
-    s32        clut;
-    s32        flags;
+    u8         row;
+    u8         highlight;
+    u8         clut;
+    u8         flags;
     s32        text_x;
     s32        sprite_x;
     u32        row_y;
