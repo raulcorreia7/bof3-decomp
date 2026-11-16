@@ -1,10 +1,5 @@
 #include "battle_15.h"
 
-typedef struct BattleEnemyFlag118 {
-    u32 flags;
-    u8  pad_04[0x114];
-} BattleEnemyFlag118;
-
 /* sets the selection-suppress bit for the active battler and
  *           advances its pending-count byte while below two.
  */
