@@ -193,7 +193,6 @@ extern volatile u32    D_80145FB8[][80];
 extern u8              D_80145FC6;
 extern u8              D_80145FC7;
 extern u8              D_80145FC9;
-extern u8              D_801462E7;
 extern u8              D_801462F6[];
 extern u8              D_80146304; /* oscillation direction latch */
 extern u8              D_80146308; /* UI oscillator byte */
@@ -431,7 +430,7 @@ extern Callback         D_801EB210[];
 extern Callback         D_801EB218[];
 extern Callback         D_801EB224[];
 /* D_801EB230 */
-extern u8               s_BattleCharacterStepIds[];
+extern u8               g_BattleCharacterStepIds[0x28];
 extern u8               D_801EB23C[];
 extern Callback         D_801EB258[];
 extern Callback         D_801EB26C[];

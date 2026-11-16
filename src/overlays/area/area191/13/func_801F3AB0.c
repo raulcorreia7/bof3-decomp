@@ -13,7 +13,7 @@ MATCH void func_801F3AB0(void) {
     buffer_ptr = buffer;
     count      = 0;
     do {
-        if (g_Characters[count].unk_07 & 0x1) {
+        if (g_Characters[count].party_flags & 0x1) {
             g_Characters[count].status = 0;
             g_Characters[count].hp     = g_Characters[count].stats.max_hp;
             g_Characters[count].ap     = g_Characters[count].stats.max_ap;
@@ -28,10 +28,10 @@ MATCH void func_801F3AB0(void) {
         dst_base = D_80145F04;
         dst_off  = 0;
         do {
-            /* kept: the offset-first sum keeps retail's addu operand order. */
+            /* kept: D_80145F04 is g_Game.members[0].chr; the member form and the offset-first sum change the bytes. */
             *MEM_PTR(Character, dst_off + (u32)dst_base) = src_base[g_CharSlot[g_PartyFieldOrder[count]]];
             dst_off += BATTLE_PARTY_STRIDE;
             count += 1;
-        } while (count < g_PartySize);
+        } while (count < g_PartySize); /* kept: g_Game.party_size here adds a load. */
     }
 }

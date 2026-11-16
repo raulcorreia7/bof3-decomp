@@ -17,13 +17,13 @@ segments:
     align: 4
     subsegments:
       - [0x1448, bin, g_BMagicEffectModes]
-      - [0x144C, bin, D_801F004E]
-      - [0x145C, bin, D_801F005E]
+      - [0x144C, bin, D_801F004C]
+      - [0x145C, bin, D_801F005C]
       - [0x1474, bin, D_801F0074]
       - [0x1478, bin, D_801F0078]
-      - [0x1480, bin, D_801F0081]
-      - [0x14A0, bin, D_801F00A2]
-      - [0x14A8, bin, D_801F00A9]
+      - [0x1480, bin, D_801F0080]
+      - [0x14A0, bin, D_801F00A0]
+      - [0x14A8, bin, D_801F00A8]
       - [0x14B0, bin, D_801F00B0]
       - [0x1514, bin, D_801F0114]
   - [0x32A0]

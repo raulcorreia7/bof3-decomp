@@ -68,7 +68,7 @@ segments:
     vram: 0x800C2640
     align: 4
     subsegments:
-      - [0xE40, bin, D_800C2642]
+      - [0xE40, bin, D_800C2640]
       - [0xE4C, bin, D_800C264C]
       - [0xE58, bin, D_800C2658]
       - [0xE60, bin, D_800C2660]
