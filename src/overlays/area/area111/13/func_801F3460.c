@@ -1,26 +1,26 @@
 #include "area111_13.h"
 
 #ifdef NON_MATCHING
-NON_MATCHING s32 func_801F3460(void) {
+NON_MATCHING void func_801F3460(void) {
     s16 x;
     s16 y;
-    s8  step;
-    u8  facing;
+    s8  offset;
+    s32 facing;
     u8  value;
 
     x = (g_Task->pos.x.part.integer - 11) >> 1;
     y = (g_Task->pos.y.part.integer - 177) >> 1;
     func_801F4604(x, y, 0x10);
     facing = g_Task->direction_08 & 7;
-    step   = 0;
+    offset = 0;
     for (;;) {
-        x += (s8)D_80181B00[facing * 2];
+        x += D_80181B00[facing * 2];
         if ((u16)x >= 7) {
-            goto done;
+            break;
         }
-        y += (s8)D_80181B01[facing * 2];
+        y += D_80181B01[facing * 2];
         if ((u16)y >= 7) {
-            goto done;
+            break;
         }
         if (x & 1) {
             value = D_801F5C18[y][x / 2] & 0xF;
@@ -30,11 +30,10 @@ NON_MATCHING s32 func_801F3460(void) {
         if (value != 0) {
             break;
         }
-        step += 4;
+        offset += 4;
     }
-done:
-    if (step != 0) {
-        g_ScriptState->unk_07 = step + 1;
+    if (offset != 0) {
+        g_ScriptState->unk_07 = offset + 1;
     }
     g_Task->vz = 0;
     func_801F4604(x, y, 0);
