@@ -4,8 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801FADFC(void) {
+MATCH void func_801FADFC(void) {
     switch (g_SceneState.step_05) {
         case 0:
             if (g_InputHeld != 0) {
@@ -37,6 +36,3 @@ NON_MATCHING void func_801FADFC(void) {
             break;
     }
 }
-#else
-INCLUDE_ASM(func_801FADFC);
-#endif
