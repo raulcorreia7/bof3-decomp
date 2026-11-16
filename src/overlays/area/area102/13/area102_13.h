@@ -8,14 +8,11 @@
 #include "area/spad.h"
 #include "sys/scratchpad.h"
 
-extern SVECTOR D_1F800014[];
-extern s16     D_1F800016;
-extern s16     D_1F800018;
-extern u8      D_801F3930[];
-extern u8      D_801F3944[];
-extern u8      D_801F3948[];
+extern u8 D_801F3930[];
+extern u8 D_801F3944[];
+extern u8 D_801F3948[];
 /* The countdowns the cell byte pair selects. */
-extern u8      D_801F395C[];
+extern u8 D_801F395C[];
 
 s32 func_801F3194();
 
