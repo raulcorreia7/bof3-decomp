@@ -43,12 +43,7 @@ MATCH void func_801EEC5C(void) {
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEE5C(void) {
-    SYS_DISPATCH_BYTE(D_801EF774, g_Task->header.step);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        Effect_SetActorMatrix();
-        func_801EF250();
-        PopMatrix();
-    }
+    BMAGIC_DISPATCH_AND_DRAW(D_801EF774, func_801EF250);
 }
 
 MATCH void func_801EEEE4(void) {

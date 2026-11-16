@@ -367,11 +367,7 @@ MATCH void func_801F04F4(void) {
 
     handlers = D_801EEC28;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        Effect_SetActorMatrix();
-        func_801F0790();
-        PopMatrix();
-    }
+    BMAGIC_DRAW_IF_RUNNING(func_801F0790);
 }
 
 MATCH void func_801F05A4(void) {

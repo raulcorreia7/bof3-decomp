@@ -76,9 +76,7 @@ MATCH void BMagic_ApplyBurnDamage(void) {
 MATCH void BMagic_UpdateBurnSprites(void) {
     SYS_DISPATCH_BYTE(D_801EFCD4, g_Task->header.mode);
     if (g_Task->header.flags != 0 && g_Task->header.mode != 0) {
-        Effect_SetActorMatrix();
-        BMagic_DrawBurnSprites();
-        PopMatrix();
+        BMAGIC_DRAW_IN_ACTOR_MATRIX(BMagic_DrawBurnSprites);
     }
 }
 

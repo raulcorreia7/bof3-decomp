@@ -97,9 +97,7 @@ MATCH void func_801EF1D4(void) {
     handlers = D_801EEC1C;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (ACTOR_IN_USE(*g_Task) && g_Task->header.step != 0) {
-        Effect_SetActorMatrix();
-        func_801EF670();
-        PopMatrix();
+        BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801EF670);
     }
 }
 
@@ -152,9 +150,7 @@ MATCH void func_801EF3D0(void) {
     handlers = D_801EEC28;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
     if (ACTOR_IN_USE(*g_Task) && g_Task->header.step != 0) {
-        Effect_SetActorMatrix();
-        func_801EFAB8();
-        PopMatrix();
+        BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801EFAB8);
     }
 }
 

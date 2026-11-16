@@ -67,9 +67,7 @@ MATCH void func_801EEDB8(void) {
 MATCH void func_801EEF00(void) {
     SYS_DISPATCH_BYTE(D_801F006C, g_Task->header.step);
     if (BATTLE_ACTIVE_WORK->param.unk_0B != 0xFF) {
-        Effect_SetActorMatrix();
-        func_801EF158();
-        PopMatrix();
+        BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801EF158);
     }
 }
 

@@ -162,11 +162,7 @@ MATCH s32 func_801EF34C(void) {
 
 MATCH void func_801EF524(void) {
     SYS_DISPATCH_BYTE(D_801F0030, g_Task->header.step);
-    if (g_Task->header.flags != 0) {
-        Effect_SetActorMatrix();
-        func_801EF68C();
-        PopMatrix();
-    }
+    BMAGIC_DRAW_IF_ALIVE(func_801EF68C);
 }
 
 #include "overlays/bmagic/Effect_CountUpAndStep.h"

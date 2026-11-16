@@ -191,9 +191,7 @@ MATCH void func_801EFF84(void) {
     GFX_AddPrim(4, 0xC);
 
     if (g_Task->header.step != 0) {
-        Effect_SetActorMatrix();
-        func_801F02FC();
-        PopMatrix();
+        BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801F02FC);
     }
 
     SYS_DISPATCH_BYTE(D_801F08C4, g_Task->header.step);

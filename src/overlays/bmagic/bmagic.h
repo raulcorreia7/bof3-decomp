@@ -49,6 +49,29 @@ ASSERT_SIZE(BattleEffectTargetColumn, BATTLE_EFFECT_STRIDE);
 
 #define BMAGIC_SET_ACTOR_MATRIX() BMAGIC_SET_ACTOR_MATRIX_SPAN(g_Task)
 
+/* Draw one part of an effect inside its actor matrix: set it, draw, restore. */
+#define BMAGIC_DRAW_IN_ACTOR_MATRIX(draw) \
+    Effect_SetActorMatrix();              \
+    draw();                               \
+    PopMatrix()
+
+/* Draw while the effect task is in use. */
+#define BMAGIC_DRAW_IF_ALIVE(draw)         \
+    if (g_Task->header.flags != 0) {       \
+        BMAGIC_DRAW_IN_ACTOR_MATRIX(draw); \
+    }
+
+/* Draw while the effect task is in use and past its setup step. */
+#define BMAGIC_DRAW_IF_RUNNING(draw)                             \
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) { \
+        BMAGIC_DRAW_IN_ACTOR_MATRIX(draw);                       \
+    }
+
+/* Run the step handler the table gives, then draw the effect while it is running. */
+#define BMAGIC_DISPATCH_AND_DRAW(table, draw)      \
+    SYS_DISPATCH_BYTE(table, g_Task->header.step); \
+    BMAGIC_DRAW_IF_RUNNING(draw)
+
 /* The battler the target selector names: a party row below
  * BATTLE_PARTY_CHARACTERS_COUNT, else an enemy row. A statement macro: the
  * member declares u8 selector and PartyMember* battler. */

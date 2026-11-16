@@ -91,12 +91,7 @@ MATCH s32 func_801EEF3C(void) {
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF1F4(void) {
-    SYS_DISPATCH_BYTE(D_801F0754, g_Task->header.step);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        Effect_SetActorMatrix();
-        func_801EF4C0();
-        PopMatrix();
-    }
+    BMAGIC_DISPATCH_AND_DRAW(D_801F0754, func_801EF4C0);
 }
 
 #include "overlays/bmagic/Effect_CopyBattlerCoords.h"
@@ -133,12 +128,7 @@ MATCH void func_801EF37C(void) {
 INCLUDE_ASM(func_801EF4C0);
 
 MATCH void func_801EFA50(void) {
-    SYS_DISPATCH_BYTE(D_801F0760, g_Task->header.step);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        Effect_SetActorMatrix();
-        func_801EFC74();
-        PopMatrix();
-    }
+    BMAGIC_DISPATCH_AND_DRAW(D_801F0760, func_801EFC74);
 }
 
 MATCH void Effect_CopyBattlerCoords2(void) {
