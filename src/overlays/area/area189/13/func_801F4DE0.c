@@ -24,7 +24,7 @@ NON_MATCHING void func_801F4DE0(void) {
     g_AreaCameraRefreshCount = 4;
     match                    = 0;
     g_Task->pos.z.fixed      = func_801F4A04(work->pos.x.fixed, work->pos.y.fixed) << 16;
-    Actor_ClearVelocity_area189();
+    Actor_ClearVelocity_801F5F20();
     g_Task->active_flags = 0;
     g_Task->unk_4B       = 0;
     g_EncounterSteps     = 0;

@@ -44,7 +44,7 @@ ASSERT_SIZE(SpriteOffset, 8);
 extern SpriteOffset D_801F43D4[];
 
 /* This image's copy of the sprite coordinate rounding (link-only name: the slus copy shares it). */
-s32 Area_RoundSpriteCoordinate_area198(s32 pair, s32 step);
+s32 Area_RoundSpriteCoordinate_801F3DCC(s32 pair, s32 step);
 
 /* The scene seeds, one per scene index. */
 extern AreaSceneSeed D_801F43D8[];

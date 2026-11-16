@@ -470,6 +470,10 @@ Every symbol has one declaration ([lowest scope wins](layout.md#lowest-scope-win
 address is a cast macro, not a second `extern`. A rename never deletes a fact: the comment moves
 with the name.
 
+A copy of a function in another image keeps its name. When the same link sees both copies (an overlay
+copy of an exe function), the copy takes `<Name>_<ADDR>` at its own address, and its row is an alias
+row whose `source` names the copy it duplicates. Never `_<image>`.
+
 ## Grep
 
 `git grep -w NAME` finds every use and its evidence, so each fact has one spelling and sits on one
