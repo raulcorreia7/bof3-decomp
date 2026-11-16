@@ -1,6 +1,6 @@
 #include "area091_13.h"
 
-void func_801F3228(void) {
+MATCH void func_801F3228(void) {
     Actor* task;
     s32    i;
     u8     cell;
