@@ -16,6 +16,8 @@
 /* The state handler banks the step dispatchers index. */
 extern u8 D_801F3DFC[];
 extern s8 D_801F43B0[];
+/* The script steps the scene entry starts, one per count phase. */
+extern u8 D_801F43AC[];
 
 /* A scene seed: the scene record the actor selects, the script it starts and
  * four bytes the entry does not read. */

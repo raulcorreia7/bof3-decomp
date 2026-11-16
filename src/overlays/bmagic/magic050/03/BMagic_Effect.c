@@ -85,7 +85,29 @@ MATCH void func_801EEF4C(void) {
     }
 }
 
-INCLUDE_ASM(func_801EEFDC);
+MATCH void func_801EEFDC(void) {
+    PartyMember* work;
+    PartyMember* next;
+    u8           timer;
+
+    timer          = g_Task->unk_09 - 1;
+    g_Task->unk_09 = timer;
+    if (timer == 0) {
+        next         = g_Task;
+        next->unk_0C = D_801EFAA0[next->param.unk_0B].x;
+        next->unk_10 = D_801EFAA0[next->param.unk_0B].y;
+        func_801DD350(next);
+        work              = g_Task;
+        work->pos.x.fixed = g_AreaScrollTargetX + work->unk_0C;
+        work->pos.y.fixed = g_AreaScrollTargetY + work->unk_10;
+        if (work->param.unk_0B == 0) {
+            Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
+        }
+        g_Task->unk_09 = 32;
+        g_Task->timer  = 2;
+        g_Task->header.step += 1;
+    }
+}
 
 #include "overlays/bmagic/Effect_CountUpTimerByTwoAndStep.h"
 
@@ -104,18 +126,95 @@ MATCH void func_801EF138(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF1B0);
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF1B0(void) {
+    POLY_G3*    prim;
+    ScratchPad* spad;
+    s32         i;
+    s32         tpage;
 
+    D_1F800000.cells.words[0] = g_Task->timer;
+    if (g_Battle.action_id == 50) {
+        D_1F800000.cells.words[2] = g_Task->unk_09 * 3;
+    } else {
+        D_1F800000.cells.words[2] = g_Task->unk_09 * 5;
+    }
+    D_1F800000.cells.words[3] = g_Task->unk_09;
+    spad                      = &D_1F800000;
+    for (i = 0; i < 16; i++) {
+        tpage = getTPage(0, 1, 320, 256);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+        prim = (POLY_G3*)g_GfxPrimCursor;
+        SetPolyG3(prim);
+        SetSemiTrans(prim, 1);
+        setXY3(prim, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), spad->cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), spad->cells.words[0]),
+               g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), spad->cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), spad->cells.words[0]));
+        if (g_Battle.action_id == 50) {
+            setRGB0(prim, spad->cells.words[3], spad->cells.words[2], spad->cells.words[2]);
+            setRGB1(prim, spad->cells.words[2], spad->cells.words[2], 1);
+            setRGB2(prim, spad->cells.words[2], spad->cells.words[2], 1);
+        } else {
+            setRGB0(prim, spad->cells.words[3], 1, spad->cells.words[2]);
+            setRGB1(prim, spad->cells.words[2], spad->cells.words[3], spad->cells.words[2]);
+            setRGB2(prim, spad->cells.words[2], spad->cells.words[3], spad->cells.words[2]);
+        }
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
+    }
+}
+#else
+INCLUDE_ASM(func_801EF1B0);
+#endif
+
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF4C4(void) {
+    POLY_G4* prim;
+    s32      i;
+    s32      tpage;
+
+    D_1F800000.cells.words[0] = g_Task->timer;
+    D_1F800000.cells.words[1] = g_Task->timer + (u32)g_Task->timer / 2;
+    if (g_Battle.action_id == 50) {
+        SPAD(0)->cells.words[2] = g_Task->unk_09 << 2;
+    } else {
+        D_1F800000.cells.words[2] = g_Task->unk_09 * 6;
+    }
+    D_1F800000.cells.words[3] = g_Task->unk_09;
+    for (i = 0; i < 16; i++) {
+        tpage = getTPage(0, 1, 320, 256);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        setXY4(prim, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), D_1F800000.cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), D_1F800000.cells.words[0]),
+               g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), D_1F800000.cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), D_1F800000.cells.words[0]),
+               g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), D_1F800000.cells.words[1]), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), D_1F800000.cells.words[1]),
+               g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), D_1F800000.cells.words[1]), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), D_1F800000.cells.words[1]));
+        if (g_Battle.action_id == 50) {
+            setRGB0(prim, D_1F800000.cells.words[3], D_1F800000.cells.words[2], D_1F800000.cells.words[3]);
+            setRGB1(prim, D_1F800000.cells.words[3], D_1F800000.cells.words[2], D_1F800000.cells.words[3]);
+        } else {
+            setRGB0(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[3], D_1F800000.cells.words[2]);
+            setRGB1(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[3], D_1F800000.cells.words[2]);
+        }
+        setRGB2(prim, 1, 1, 1);
+        setRGB3(prim, 1, 1, 1);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
+    }
+}
+#else
 INCLUDE_ASM(func_801EF4C4);
+#endif
 
 MATCH void func_801EF898(void) {
     TILE_1* prim;
     s32     i;
     s32     tpage;
 
-    D_1F800000.view.scenario.math_00 = g_Task->timer * 3;
-    D_1F800000.view.scenario.math_08 = g_Task->unk_09 * 6;
-    D_1F800000.view.scenario.math_0C = g_Task->unk_09;
+    D_1F800000.cells.words[0] = g_Task->timer * 3;
+    D_1F800000.cells.words[2] = g_Task->unk_09 * 6;
+    D_1F800000.cells.words[3] = g_Task->unk_09;
     for (i = 0; i < 16; i++) {
         tpage = getTPage(0, 1, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
@@ -123,11 +222,11 @@ MATCH void func_801EF898(void) {
         prim = (TILE_1*)g_GfxPrimCursor;
         SetTile1(prim);
         SetSemiTrans(prim, 1);
-        setXY0(prim, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), D_1F800000.view.scenario.math_00), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), D_1F800000.view.scenario.math_00));
+        setXY0(prim, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), D_1F800000.cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), D_1F800000.cells.words[0]));
         if (g_Battle.action_id == 50) {
-            setRGB0(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_0C);
+            setRGB0(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[2], D_1F800000.cells.words[3]);
         } else {
-            setRGB0(prim, D_1F800000.view.scenario.math_08, D_1F800000.view.scenario.math_0C, D_1F800000.view.scenario.math_08);
+            setRGB0(prim, D_1F800000.cells.words[2], D_1F800000.cells.words[3], D_1F800000.cells.words[2]);
         }
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(TILE_1));
     }

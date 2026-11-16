@@ -6,20 +6,20 @@ MATCH void func_801F2C04(void) {
     MESSAGE_REQUEST_CLEAR();
     switch (g_MessageChoice) {
         case 0:
-            g_SceneEventSelection = 5;
+            g_SceneEventState.selection = 5;
             break;
         case 1:
-            g_SceneEventSelection = 4;
+            g_SceneEventState.selection = 4;
             break;
         default:
             goto resume;
     }
-    step  = &g_SceneEventMode;
+    step  = &g_SceneEventState.mode;
     *step = 5;
     SYS_SetFlag(step + 0x63D, 30);
 resume:
     if (g_MessageChoice != 2 && g_SceneState.scenario_id == 8 && SYS_TestFlag(g_SceneFlags, 3) == 0) {
-        g_SceneEventMode = 0;
+        g_SceneEventState.mode = 0;
         Game_SetScriptActive();
         func_801BE1B0(2);
         g_SceneState.state_04 = 2;

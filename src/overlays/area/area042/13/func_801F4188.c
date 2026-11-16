@@ -9,10 +9,10 @@ NON_MATCHING s32 func_801F4188(void) {
     if (SYS_TestFlag(g_SceneEventFlags, 0x12) && SYS_TestFlag(g_SceneEventFlags, 0x13) && SYS_TestFlag(g_SceneEventFlags, 0x14) && SYS_TestFlag(g_SceneEventFlags, 0x15) &&
         !SYS_TestFlag(g_SceneEventFlags, 0x11)) {
         Game_SetScriptActive();
-        g_SceneEventStep      = 0;
-        g_SceneEventMode      = 7;
-        g_SceneEventSelection = 0x3C;
-        phase                 = g_SaveData.scene_event_timer / 30;
+        g_SceneEventState.step      = 0;
+        g_SceneEventState.mode      = 7;
+        g_SceneEventState.selection = 0x3C;
+        phase                       = g_SaveData.scene_event_timer / 30;
         if (phase >= 6) {
             D_801F56F8 = 2;
         } else if (phase == 5) {

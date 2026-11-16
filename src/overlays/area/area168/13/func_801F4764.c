@@ -6,7 +6,7 @@ MATCH void func_801F4764(void) {
     MESSAGE_REQUEST_CLEAR();
     if (g_MessageChoice == 3) {
         Scene_StartEvent(SCENE_EVENT_SHOP_SAVE, 0x5);
-        g_SceneEventSelection = 0xFF;
+        g_SceneEventState.selection = 0xFF;
     }
     record                    = (u8*)g_ScriptWorkRecord;
     FIELD(s32, record, 0x18U) = D_801F4F94[g_MessageChoice * 2];

@@ -187,7 +187,7 @@ static inline void MasterMenuRequestMasterMessage(u8* state, s32 offset) {
     if (*state == GAME_REQUEST_MESSAGE) {
         return;
     }
-    Message_StartAreaMessage((s16)(g_MenuMasterMessageIds[g_SceneEventSelection] + offset));
+    Message_StartAreaMessage((s16)(g_MenuMasterMessageIds[g_SceneEventState.selection] + offset));
     *state = GAME_REQUEST_MESSAGE;
     g_MenuMasterSubStep++;
 }
@@ -197,7 +197,7 @@ static inline void MasterMenuRunActivePanelMessage(u8* state) {
     if (*state == GAME_REQUEST_MESSAGE) {
         return;
     }
-    Message_StartAreaMessage((s16)(g_MenuMasterMessageIds[g_SceneEventSelection] + MASTER_MESSAGE_FAREWELL));
+    Message_StartAreaMessage((s16)(g_MenuMasterMessageIds[g_SceneEventState.selection] + MASTER_MESSAGE_FAREWELL));
     *state           = GAME_REQUEST_MESSAGE;
     g_MenuMasterStep = 6;
 }

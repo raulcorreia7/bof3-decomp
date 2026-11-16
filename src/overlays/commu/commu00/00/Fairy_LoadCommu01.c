@@ -4,6 +4,6 @@ MATCH void Fairy_LoadCommu01(void) {
     s8* state;
 
     EMI_LoadArchive(EMI_SLOT_COMMU01);
-    state = &g_SceneEventStep;
+    state = &g_SceneEventState.step;
     *state += 1;
 }

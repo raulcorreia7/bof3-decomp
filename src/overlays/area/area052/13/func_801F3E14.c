@@ -14,11 +14,11 @@ MATCH u8 func_801F3E14(u8 x, u8 y) {
         return 0;
     }
     Game_SetScriptActive();
-    mode             = &g_SceneEventMode;
-    *mode            = 15;
-    g_SceneEventStep = D_801F5114[i].step;
+    mode                   = &g_SceneEventState.mode;
+    *mode                  = 15;
+    g_SceneEventState.step = D_801F5114[i].step;
     if (func_801F3D44() & BYTE_MASK) {
-        g_SceneEventStep = 10;
+        g_SceneEventState.step = 10;
     } else {
         SYS_ToggleFlag(mode + 0x63D, D_801F5114[i].flag);
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));

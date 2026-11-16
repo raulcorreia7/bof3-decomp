@@ -45,7 +45,53 @@ MATCH void func_801D0DEC(void) {
     SYS_DISPATCH_BYTE(g_Commu03Step1Funcs, D_801F294D);
 }
 
-INCLUDE_ASM(func_801D0E28);
+MATCH void func_801D0E28(void) {
+    volatile u16* pad;
+    s32           index;
+    s32           count;
+    s32           bgm_offset;
+    u16           buttons;
+    u16           held;
+    s16           cue;
+
+    index   = g_SceneEventSelection;
+    count   = D_801457AB[(g_FairyJobs[index].type - 1) << 3];
+    pad     = &g_InputPressed;
+    buttons = INPUT_REPEATED(*pad, PADLleft | PADLright);
+    if (buttons != 0) {
+        if ((buttons & PADLright) != 0) {
+            D_801D1940 = D_801D1940 + 1;
+            if (count < (s16)D_801D1940) {
+                D_801D1940 = 0;
+            }
+        } else if ((buttons & PADLleft) != 0) {
+            D_801D1940 = D_801D1940 - 1;
+            if ((s16)D_801D1940 < 0) {
+                D_801D1940 = count;
+            }
+        }
+        func_801D1250(0x32, 0x28);
+    } else {
+        held = *pad;
+        if ((held & PADRdown) != 0) {
+            if (g_SndBGMId != BGM_NONE) {
+                bgm_offset = g_SndBGMId * 4;
+                SND_StopSequence(*(g_SelectionCues + bgm_offset), *(g_SelectionSequences + bgm_offset));
+            }
+            cue = D_801D1918[D_801D1940];
+            if (g_SndBGMId == cue) {
+                g_SndBGMId = BGM_NONE;
+            } else {
+                SND_RequestBGM(cue);
+                D_801F294D += 1;
+            }
+        } else if ((held & PADRup) != 0) {
+            D_801F294D = 0;
+            D_801F294C += 1;
+        }
+        func_801D1250(0x32, 0x28);
+    }
+}
 
 MATCH void func_801D1000(void) {
     if (EMI_IsReady()) {
@@ -101,11 +147,78 @@ MATCH void func_801D1184(void) {
 
 INCLUDE_ASM(func_801D1250);
 
+#ifdef NON_MATCHING
+/* Draws one 8x8 glyph quad per byte of the string, eight pixels apart, skipping
+ * spaces. */
+NON_MATCHING void func_801D1714(s16 x, s16 y, u32 clut, u8* text) {
+    POLY_FT4* poly;
+    u8*       p;
+    s16       X;
+    s16       Y;
+    s32       t1;
+    s32       t2;
+    u16       color;
+    u8        c;
+    u8        u;
+    u8        v;
+
+    p     = text;
+    X     = x;
+    Y     = y;
+    color = (clut & 0x3F) | STAGE_PALETTE_CLUT;
+    c     = *p;
+    while (c != 0) {
+        if (c != ' ') {
+            poly = (POLY_FT4*)g_GfxPrimCursor;
+            SetPolyFT4(poly);
+            poly->x0 = X + 4;
+            poly->x1 = X + 0xC;
+            poly->y1 = poly->y0 = Y;
+            poly->x2            = poly->x0 - 4;
+            poly->y3 = poly->y2 = poly->y0 + 8;
+            poly->x3            = poly->x1 - 4;
+            c                   = *p;
+            t1                  = c - ' ';
+            if (t1 < 0) {
+                t2 = c - 1;
+            } else {
+                t2 = t1;
+            }
+            u        = (t1 - ((t2 >> 5) << 5)) << 3;
+            poly->u0 = u;
+            poly->u1 = u + 7;
+            poly->u2 = poly->u0;
+            poly->u3 = poly->u1;
+            c        = *p;
+            t1       = c - ' ';
+            if (t1 < 0) {
+                t2 = c - 1;
+            } else {
+                t2 = t1;
+            }
+            v          = (t2 >> 5) << 3;
+            poly->v0   = v;
+            poly->v1   = poly->v0;
+            poly->r0   = 0x80;
+            poly->g0   = 0x80;
+            poly->b0   = 0x80;
+            poly->clut = color;
+            poly->v3 = poly->v2 = poly->v1 + 8;
+            poly->tpage         = getTPage(0, 0, 0x3C0, 0);
+            GFX_AddPrim(1, sizeof(POLY_FT4));
+        }
+        p += 1;
+        X += 8;
+        c = *p;
+    }
+}
+#else
 INCLUDE_ASM(func_801D1714);
+#endif
 
 MATCH void func_801D18AC(void) {
     u8* state;
 
-    state = &g_SceneEventStep;
+    state = &g_SceneEventState.step;
     *state += 1;
 }

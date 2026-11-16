@@ -10,9 +10,8 @@
 #include "slus/functions.h"
 #include "slus/part.h"
 
-extern SVECTOR D_1F800014[];
 /* D_1F800034 read unsigned: the screen x and y RotTransPers writes. */
-extern u16     D_1F800034_U16[2];
+extern u16 D_1F800034_U16[2];
 
 s32 func_801F0ADC(s32 x, s32 y);
 
@@ -32,8 +31,8 @@ extern u8  D_801F0CBC;
 extern u8  D_801F0CC0;
 extern s16 D_801F0CC4;
 extern s16 D_801F0CC8;
-/* The target cell offset of each facing: a signed x and y byte at facing * 2, read unsigned. */
-extern u8  D_801F0C94[8];
+/* The target cell offset of each facing: a signed x and y byte at facing * 2. */
+extern s8  D_801F0C94[8];
 /* Per facing pair (D_801F0CBC >> 1): the divisor of the rise at each step from the target cell. */
 extern u8  D_801F0C9C[2][15];
 extern s8  D_801F0CCC[17][15];

@@ -22,5 +22,3 @@ MATCH void func_801FB300(void) {
         g_SceneState.state_04 = 0;
     }
 }
-
-INCLUDE_ASM(func_801FB36C);

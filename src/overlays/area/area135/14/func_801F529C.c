@@ -9,7 +9,7 @@ MATCH void func_801F529C(void) {
     u16  countdown;
     u16* timer;
 
-    switch (g_SceneEventStep) {
+    switch (g_SceneEventState.step) {
         case 0:
             game_state = &g_GameStateIndex;
             if (*game_state != GAME_REQUEST_MESSAGE) {
@@ -18,7 +18,7 @@ MATCH void func_801F529C(void) {
                 *game_state = GAME_REQUEST_MESSAGE;
                 SND_PauseBGM(g_SndBGMId);
                 SND_StartXAStream(2, 1);
-                g_SceneEventStep = 1;
+                g_SceneEventState.step = 1;
             }
             break;
         case 1:
@@ -26,8 +26,8 @@ MATCH void func_801F529C(void) {
             if (xa_idle != 0 && g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 SND_ResumeBGM(g_SndBGMId);
                 Game_ClearScriptActive();
-                g_SceneEventMode = SCENE_EVENT_NONE;
-                g_SceneEventStep = 0;
+                g_SceneEventState.mode = SCENE_EVENT_NONE;
+                g_SceneEventState.step = 0;
             }
             break;
         case 5:
@@ -38,8 +38,8 @@ MATCH void func_801F529C(void) {
             } else {
                 SYS_ToggleFlag(g_SceneEventFlags, 42);
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
-                D_801448EE       = 10;
-                g_SceneEventStep = 6;
+                D_801448EE             = 10;
+                g_SceneEventState.step = 6;
             }
             break;
         case 6:
@@ -47,43 +47,43 @@ MATCH void func_801F529C(void) {
             countdown = *timer;
             if (countdown == 0) {
                 Game_ClearScriptActive();
-                g_SceneEventMode = SCENE_EVENT_NONE;
-                g_SceneEventStep = 0;
+                g_SceneEventState.mode = SCENE_EVENT_NONE;
+                g_SceneEventState.step = 0;
             } else {
                 *timer = countdown - 1;
             }
             break;
         case 10:
             if (SYS_TestFlag(g_SceneEventFlags, 12)) {
-                sprintf(g_TextVariables, D_801F2C04, g_SceneEventSelection);
+                sprintf(g_TextVariables, D_801F2C04, g_SceneEventState.selection);
                 Message_StartAreaMessage(132);
             } else {
                 Message_StartAreaMessage(131);
                 SYS_SetFlag(g_SceneEventFlags, 12);
             }
         message_request:
-            g_GameStateIndex = GAME_REQUEST_MESSAGE;
-            g_SceneEventStep = 11;
+            g_GameStateIndex       = GAME_REQUEST_MESSAGE;
+            g_SceneEventState.step = 11;
             break;
         case 11:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                g_SceneEventMode = SCENE_EVENT_NONE;
-                g_SceneEventStep = 0;
+                g_SceneEventState.mode = SCENE_EVENT_NONE;
+                g_SceneEventState.step = 0;
             }
             break;
         case 20:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 func_801F6168(g_RouteSpeedScale[3] << 3);
                 g_AreaCameraHeightStep = 0;
-                g_SceneEventStep       = 21;
+                g_SceneEventState.step = 21;
             }
             break;
         case 21:
             if (g_AreaCameraMoving == 0) {
                 func_801F61A8(139);
                 g_SpawnedActors[D_801F6BC0].header.mode = 2;
-                g_SceneEventStep                        = 22;
+                g_SceneEventState.step                  = 22;
                 g_AreaCameraStep                        = g_RouteSpeedScale[3] << 3;
             }
             break;
@@ -92,8 +92,8 @@ MATCH void func_801F529C(void) {
                 func_801F61A8(140);
                 g_SpawnedActors[D_801F6BC0].header.mode = 3;
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 9));
-                g_ScriptVars[3]  = 10;
-                g_SceneEventStep = 23;
+                g_ScriptVars[3]        = 10;
+                g_SceneEventState.step = 23;
             }
             break;
         case 23:
@@ -101,12 +101,12 @@ MATCH void func_801F529C(void) {
             if (g_ScriptVars[3] == 11) {
                 func_801F61A8(141);
                 g_SpawnedActors[D_801F6BC0].header.mode = 2;
-                g_SceneEventStep                        = 24;
+                g_SceneEventState.step                  = 24;
             }
             break;
         case 24:
             if (g_InputPressed & PADRdown) {
-                g_SceneEventStep = 25;
+                g_SceneEventState.step = 25;
             }
             break;
         case 25:
@@ -114,21 +114,21 @@ MATCH void func_801F529C(void) {
                 func_801F61A8(142);
                 g_SpawnedActors[D_801F6BC0].header.mode = 3;
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 9));
-                g_ScriptVars[3]  = 12;
-                g_SceneEventStep = 26;
+                g_ScriptVars[3]        = 12;
+                g_SceneEventState.step = 26;
             }
             break;
         case 26:
             func_801F6168(0);
             if (g_ScriptVars[3] == 13) {
                 g_SpawnedActors[D_801F6BC0].header.mode = 4;
-                g_SceneEventStep                        = 27;
+                g_SceneEventState.step                  = 27;
             }
             break;
         case 27:
             func_801F6168(0);
             if (g_ScriptVars[3] == 16) {
-                selection = &g_SceneEventSelection;
+                selection = &g_SceneEventState.selection;
                 if (*selection != GAME_NONE) {
                     /* FAKE: each actor write reloads the selection byte; plain C measures 474 of 490 instructions. */
                     g_Actors[*selection].header.mode = 7;
@@ -139,32 +139,32 @@ MATCH void func_801F529C(void) {
                     FAKE_BARRIER();
                     g_Actors[*selection].unk_7E += 3;
                     FAKE_BARRIER();
-                    g_SceneEventStep = 28;
+                    g_SceneEventState.step = 28;
                 } else {
                     func_801F61A8(143);
-                    g_SceneEventStep = 30;
+                    g_SceneEventState.step = 30;
                 }
             }
             break;
         case 28:
             if (g_ScriptVars[3] == 17) {
-                u8* flags        = &D_801F69AF;
-                flag_bits        = *flags;
-                g_SceneEventStep = 29;
-                *flags           = flag_bits | 0x10;
+                u8* flags              = &D_801F69AF;
+                flag_bits              = *flags;
+                g_SceneEventState.step = 29;
+                *flags                 = flag_bits | 0x10;
             }
             break;
         case 29:
             func_801F6168(0);
             if (g_ScriptVars[3] == 18) {
                 u8* flags                        = &D_801F69AF;
-                selection                        = &g_SceneEventSelection;
+                selection                        = &g_SceneEventState.selection;
                 g_Actors[*selection].header.mode = 4;
                 g_Actors[*selection].active_flags &= ~0x20;
                 g_Actors[*selection].unk_7E += 1;
                 *flags &= ~0x10;
                 func_801F61A8(143);
-                g_SceneEventStep = 30;
+                g_SceneEventState.step = 30;
             }
             break;
         case 30:
@@ -174,16 +174,16 @@ MATCH void func_801F529C(void) {
                 g_AreaScrollTargetY                     = g_Game.members[0].pos.y.fixed;
                 g_AreaCameraStep                        = g_RouteSpeedScale[3] << 3;
                 g_SpawnedActors[D_801F6BC0].header.mode = 5;
-                g_SceneEventStep                        = 31;
+                g_SceneEventState.step                  = 31;
             }
             break;
         case 31:
             if (g_AreaCameraMoving == 0) {
                 Game_ClearScriptActive();
-                g_ScriptVars[3]       = 0;
-                g_SceneEventMode      = SCENE_EVENT_NONE;
-                g_SceneEventStep      = 0;
-                g_SceneEventSelection = 0;
+                g_ScriptVars[3]             = 0;
+                g_SceneEventState.mode      = SCENE_EVENT_NONE;
+                g_SceneEventState.step      = 0;
+                g_SceneEventState.selection = 0;
             }
             break;
     }

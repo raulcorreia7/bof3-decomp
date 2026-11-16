@@ -9,7 +9,7 @@ MATCH void func_801D2CA4(void) {
     u8* edp;
 
     if (g_MenuMasterBannerLock != 0) {
-        Message_StartAreaMessage((s16)(g_MenuMasterMessageIds[g_SceneEventSelection] + MASTER_MESSAGE_FAREWELL));
+        Message_StartAreaMessage((s16)(g_MenuMasterMessageIds[g_SceneEventState.selection] + MASTER_MESSAGE_FAREWELL));
         g_GameStateIndex    = GAME_REQUEST_MESSAGE;
         g_MenuMasterStep    = 6;
         g_MenuMasterSubStep = 0;
@@ -22,7 +22,7 @@ MATCH void func_801D2CA4(void) {
             i += 1;
         } while (i < 5);
         D_801490DD                                                                             = 0;
-        edp                                                                                    = &g_SceneEventSelection;
+        edp                                                                                    = &g_SceneEventState.selection;
         g_Characters[g_Game.members[g_MenuMasterCursor].character_index].master_id             = *edp;
         g_Characters[g_Game.members[g_MenuMasterCursor].character_index].master_level          = g_Characters[g_Game.members[g_MenuMasterCursor].character_index].level;
         g_Characters[g_Game.members[g_MenuMasterCursor].character_index].level_up_modifiers[0] = g_MenuMasterStats[*edp].hp_bonus;

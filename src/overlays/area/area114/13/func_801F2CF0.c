@@ -1,5 +1,6 @@
 #include "area114_13.h"
 
+/* FAKE: the scene event reads stay on the symbol cells; as record members they moved the schedule. */
 MATCH void func_801F2CF0(void) {
     switch (g_SceneEventStep) {
         case 0:

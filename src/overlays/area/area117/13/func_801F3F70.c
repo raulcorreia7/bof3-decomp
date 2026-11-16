@@ -2,5 +2,5 @@
 
 MATCH void func_801F3F70(void) {
     Scene_StartEvent(0x2C, 0);
-    g_SceneEventSelection = 5;
+    g_SceneEventState.selection = 5;
 }

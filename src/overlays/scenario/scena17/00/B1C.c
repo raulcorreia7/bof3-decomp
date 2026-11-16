@@ -597,7 +597,84 @@ NON_MATCHING void func_801F88CC(u8 semi, s32 color) {
 INCLUDE_ASM(func_801F88CC);
 #endif
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F8B10(s32 scale, s32 shade) {
+    SVECTOR  rot;
+    SVECTOR  axis;
+    MATRIX   mtx;
+    long     flag;
+    long     p;
+    long     sxy;
+    POLY_G3* tri;
+    POLY_F4* quad;
+    u16      radius;
+    s32      i;
+    s32      a;
+    s32      b;
+    u8       col;
+    s32      mode;
+
+    radius = scale;
+    col    = shade;
+    PushMatrix();
+    setVector(&axis, 0, 0, 0);
+    rot.vz = -Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) / 2;
+    rot.vx = (g_AreaScrollTargetX >> 9) - 0x4000;
+    rot.vy = (g_AreaScrollTargetY >> 9) - 0x4000;
+    RotTransMatrix(&rot, mtx, &flag);
+    RotMatrix(&axis, &mtx);
+    MulMatrix2(&g_CameraMatrix, &mtx);
+    SetRotMatrix(&mtx);
+    SetTransMatrix(&mtx);
+    mode = getTPage(0, 2, 0, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mode, NULL);
+    GFX_AddPrim(2, sizeof(DR_MODE));
+    for (i = 0; i < 32;) {
+        a                = i << 7;
+        D_1F800014[0].vx = 0;
+        D_1F800014[0].vy = 0;
+        D_1F800014[0].vz = 0;
+        D_1F800014[1].vx = (s16)FIXED_MUL(radius, rcos(a));
+        D_1F800014[1].vy = (s16)FIXED_MUL(radius, rsin(a));
+        D_1F800014[1].vz = 0;
+        i++;
+        b                = i << 7;
+        D_1F800014[2].vx = (s16)FIXED_MUL(radius, rcos(b));
+        D_1F800014[2].vy = (s16)FIXED_MUL(radius, rsin(b));
+        D_1F800014[2].vz = 0;
+        tri              = (POLY_G3*)g_GfxPrimCursor;
+        setPolyG3(tri);
+        SetSemiTrans(tri, 1);
+        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&tri->x0, (long*)&tri->x1, (long*)&tri->x2, &p, &sxy);
+        setRGB0(tri, 0, 0, 0);
+        setRGB1(tri, col, col, col);
+        setRGB2(tri, col, col, col);
+        GFX_AddPrim(2, sizeof(POLY_G3));
+        D_1F800014[0].vx = 0;
+        D_1F800014[0].vy = 0;
+        D_1F800014[0].vz = 0;
+        D_1F800014[1].vx = (s16)((u32)(rcos(a) * 25) >> 6);
+        D_1F800014[1].vy = (s16)((u32)(rsin(a) * 25) >> 6);
+        D_1F800014[1].vz = 0;
+        D_1F800014[2].vx = (s16)((u32)(rcos(b) * 25) >> 6);
+        D_1F800014[2].vy = (s16)((u32)(rsin(b) * 25) >> 6);
+        D_1F800014[2].vz = 0;
+        quad             = (POLY_F4*)g_GfxPrimCursor;
+        setPolyF4(quad);
+        SetSemiTrans(quad, 1);
+        RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&quad->x0, (long*)&quad->x2, (long*)&quad->x3, &p, &sxy);
+        quad->x0 = tri->x1;
+        quad->x1 = tri->x2;
+        quad->y0 = tri->y1;
+        quad->y1 = tri->y2;
+        setRGB0(quad, col, col, col);
+        GFX_AddPrim(2, sizeof(POLY_F4));
+    }
+    PopMatrix();
+}
+#else
 INCLUDE_ASM(func_801F8B10);
+#endif
 
 MATCH void func_801F8EF0(void) {
     TILE* prim;

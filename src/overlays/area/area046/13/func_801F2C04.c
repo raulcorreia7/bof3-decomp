@@ -1,7 +1,7 @@
 #include "area046_13.h"
 
 MATCH void func_801F2C04(void) {
-    s8* step = &g_SceneEventStep;
+    s8* step = &g_SceneEventState.step;
     u8* script_var;
 
     switch (*step) {
@@ -15,9 +15,9 @@ MATCH void func_801F2C04(void) {
                 break;
             }
             Game_ClearScriptActive();
-            *script_var      = 0;
-            g_SceneEventMode = SCENE_EVENT_NONE;
-            *step            = 0;
+            *script_var            = 0;
+            g_SceneEventState.mode = SCENE_EVENT_NONE;
+            *step                  = 0;
             break;
 
         case 10:
@@ -28,8 +28,8 @@ MATCH void func_801F2C04(void) {
         case 11:
             if (g_ScriptVars[1] == 0) {
                 Game_ClearScriptActive();
-                g_SceneEventMode = SCENE_EVENT_NONE;
-                *step            = 0;
+                g_SceneEventState.mode = SCENE_EVENT_NONE;
+                *step                  = 0;
             }
             break;
     }

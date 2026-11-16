@@ -93,7 +93,7 @@
 /* Unsigned view: the cell is declared s8, but the original reads and writes it
  * unsigned (lbu/sb). */
 /* FAKE: retail reads the state byte unsigned. */
-#define FAIRY_EVENT_STEP                      (*(u8*)&g_SceneEventStep)
+#define FAIRY_EVENT_STEP                      (*(u8*)&g_SceneEventState.step)
 
 /* Variant row: message id and item id followed by the pending count. */
 typedef struct FairyVariant {

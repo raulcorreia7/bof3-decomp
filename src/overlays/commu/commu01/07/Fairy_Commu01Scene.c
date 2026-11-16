@@ -26,7 +26,7 @@ MATCH void func_801D0CAC(void) {
 
     pad = g_InputPressed;
     if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
-        counter    = (u8*)&g_SceneEventStep;
+        counter    = (u8*)&g_SceneEventState.step;
         D_801D4E0C = 0xFFFF;
         *counter += 1;
     } else if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
@@ -39,7 +39,7 @@ MATCH void func_801D0CAC(void) {
         switch (mode) {
             case 0:
             case 2:
-                if (Fairy_GetJobActive(g_SceneEventSelection) != 0) {
+                if (Fairy_GetJobActive(g_SceneEventState.selection) != 0) {
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
                     func_801D49C4();
                     D_801F294C++;
@@ -48,7 +48,7 @@ MATCH void func_801D0CAC(void) {
                 }
                 break;
             case 1:
-                if (D_801F286D[g_GameAreaId] < g_SceneEventSelection) {
+                if (D_801F286D[g_GameAreaId] < g_SceneEventState.selection) {
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
                 } else {
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
@@ -61,10 +61,10 @@ MATCH void func_801D0CAC(void) {
                 break;
         }
     } else {
-        func_801D3B0C(&g_SceneEventSelection);
+        func_801D3B0C(&g_SceneEventState.selection);
     }
     func_801D3038();
-    func_801D36FC(g_SceneEventSelection, 0);
+    func_801D36FC(g_SceneEventState.selection, 0);
 }
 
 MATCH void func_801D0E44(void) {
@@ -98,10 +98,10 @@ MATCH void func_801D0EBC(void) {
     } else if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
         D_801D4E0C = 0x44;
-        D_801D4E28 = g_SceneEventSelection;
+        D_801D4E28 = g_SceneEventState.selection;
         D_801F294D++;
     } else {
-        count     = Fairy_GetJobActive(g_SceneEventSelection);
+        count     = Fairy_GetJobActive(g_SceneEventState.selection);
         direction = INPUT_REPEATED(*pad_word, (PADLleft | PADLright));
         ordinal   = D_801D4E24;
         if (direction & PADLright) {
@@ -120,7 +120,7 @@ MATCH void func_801D0EBC(void) {
         }
     }
     func_801D3038();
-    row = &g_SceneEventSelection;
+    row = &g_SceneEventState.selection;
     func_801D36FC(*row, 1);
     if (*row == 0) {
         ordinal = D_801D4E24;
@@ -165,7 +165,7 @@ MATCH void func_801D1158(void) {
         func_801D4AAC(row);
     }
     func_801D3038();
-    row = &g_SceneEventSelection;
+    row = &g_SceneEventState.selection;
     func_801D36FC(*row, 1);
     func_801D36FC(D_801D4E28, 0);
     if ((committed & BYTE_MASK) == 0) {
@@ -179,7 +179,7 @@ MATCH void func_801D1158(void) {
             y          = (*row - 9) * 54 + (line * 7 + line_inset);
             func_801D3984(col * 8 + 0xFA, (s16)y, 1);
         }
-        func_801D28A4(0xA0, 0x3E, func_801D3AA0(g_SceneEventSelection, D_801D4E24), 1);
+        func_801D28A4(0xA0, 0x3E, func_801D3AA0(g_SceneEventState.selection, D_801D4E24), 1);
     }
 }
 
@@ -207,10 +207,10 @@ MATCH void func_801D1364(void) {
         row = D_801D4E24;
         if (row != 0) {
             D_801D4E0C = 68;
-            D_801D4E28 = g_SceneEventSelection;
+            D_801D4E28 = g_SceneEventState.selection;
             D_801F294D++;
         } else {
-            room = g_SceneEventSelection - 1;
+            room = g_SceneEventState.selection - 1;
             if (g_FairyRooms[room * 8] == 0) {
                 D_801D4E28 = 0;
             } else {
@@ -225,7 +225,7 @@ MATCH void func_801D1364(void) {
     } else {
         buttons = INPUT_REPEATED(g_InputPressed, (PADLright | PADLleft));
         old_row = D_801D4E24;
-        count   = Fairy_GetJobActive(g_SceneEventSelection);
+        count   = Fairy_GetJobActive(g_SceneEventState.selection);
         if (buttons & PADLleft) {
             D_801D4E24--;
             if ((s8)D_801D4E24 < 0) {
@@ -243,7 +243,7 @@ MATCH void func_801D1364(void) {
     }
 
     func_801D3038();
-    selection = &g_SceneEventSelection;
+    selection = &g_SceneEventState.selection;
     func_801D36FC(*selection, 1);
     func_801D4694(&x, &y, *selection, D_801D4E24);
     row = D_801D4E24;
@@ -275,7 +275,7 @@ MATCH void func_801D1630(void) {
         func_801D4AAC(&D_801D4E28);
     }
     func_801D3038();
-    selection = &g_SceneEventSelection;
+    selection = &g_SceneEventState.selection;
     func_801D36FC(*selection, 1);
     func_801D36FC(D_801D4E28, 0);
     if (!(result & BYTE_MASK)) {
@@ -309,7 +309,7 @@ MATCH void func_801D1778(void) {
         if (kind == 0xFF) {
             func_801D4B58();
         } else {
-            rooms_offset = (g_SceneEventSelection - 1) * 8;
+            rooms_offset = (g_SceneEventState.selection - 1) * 8;
             if (srow == g_FairyRooms[rooms_offset] - 4) {
                 D_801D4E2C = g_FairyRooms[rooms_offset + 1];
             } else {
@@ -344,7 +344,7 @@ MATCH void func_801D1778(void) {
         D_801D4E0C = D_801D4BB8[srow];
     }
     func_801D3038();
-    cursor = &g_SceneEventSelection;
+    cursor = &g_SceneEventState.selection;
     func_801D36FC(*cursor, 1);
     func_801D4694(&x, &y, *cursor, 0);
     func_801D3984(x, y, 1);
@@ -375,7 +375,7 @@ MATCH void func_801D1A94(void) {
             func_801D4B58();
         } else {
             srow         = D_801D4E28;
-            rooms_offset = (g_SceneEventSelection - 1) * 8;
+            rooms_offset = (g_SceneEventState.selection - 1) * 8;
             if (srow == g_FairyRooms[rooms_offset] - 4) {
                 D_801D4E30 = g_FairyRooms[rooms_offset + 2];
             } else {
@@ -407,7 +407,7 @@ MATCH void func_801D1A94(void) {
         }
     }
     func_801D3038();
-    cursor = &g_SceneEventSelection;
+    cursor = &g_SceneEventState.selection;
     func_801D36FC(*cursor, 1);
     func_801D4694(&x, &y, *cursor, 0);
     func_801D3984(x, y, 1);
@@ -444,7 +444,7 @@ MATCH void func_801D1E48(void) {
         }
     }
     func_801D3038();
-    row = &g_SceneEventSelection;
+    row = &g_SceneEventState.selection;
     func_801D36FC(*row, 1);
     func_801D4694(&x, &y, *row, 0);
     func_801D3984(x, y, 1);
@@ -881,13 +881,13 @@ MATCH s32 func_801D482C(s32 ordinal_offset) {
             }
         case 0:
         case 2:
-            if ((s8)D_801D4E28 == g_SceneEventSelection) {
+            if ((s8)D_801D4E28 == g_SceneEventState.selection) {
                 break;
             }
             D_801D4DF4                        = D_801D4E00;
             D_801D4DF8                        = D_801D4E04;
             D_801D4DFC                        = D_801D4E08;
-            slot                              = func_801D3AA0(g_SceneEventSelection, D_801D4E24 - ordinal_offset);
+            slot                              = func_801D3AA0(g_SceneEventState.selection, D_801D4E24 - ordinal_offset);
             g_FairyJobs[slot].type            = D_801D4E28;
             anchor                            = g_BattleCount;
             g_FairyJobs[slot].record_state    = 0;
@@ -913,7 +913,7 @@ MATCH void func_801D49C4(void) {
     u16 room_text_id;
 
     memcpy(text_ids, D_801D0C18, sizeof(text_ids));
-    row = g_SceneEventSelection;
+    row = g_SceneEventState.selection;
     if ((row & BYTE_MASK) == 0) {
         text_id = 0x6A;
     } else if ((row & BYTE_MASK) >= 9) {
@@ -946,7 +946,7 @@ MATCH void func_801D4AAC(u8* room) {
     u16 row_text_id;
 
     row = *room;
-    if (row == g_SceneEventSelection) {
+    if (row == g_SceneEventState.selection) {
         text_id = 0x44;
     } else if (row == 0) {
         text_id = 0x69;

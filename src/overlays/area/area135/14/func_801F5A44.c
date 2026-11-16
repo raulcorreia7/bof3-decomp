@@ -5,7 +5,7 @@ MATCH void func_801F5A44(void) {
         if (D_80143F06 == 1) {
             func_801A6C98(D_801F6BB0);
             SYS_ClearFlag(g_SceneEventFlags, 0xC);
-            g_SceneEventSelection = 0;
+            g_SceneEventState.selection = 0;
         }
         D_80147CB8[3 * 0x10] |= 1;
     }

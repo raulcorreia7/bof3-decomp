@@ -1,10 +1,10 @@
 #include "area037_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F38DC(void) {
+MATCH void func_801F38DC(void) {
     s8* state;
+    u8* request;
 
-    state = &g_SceneEventStep;
+    state = &g_SceneEventState.step;
     switch (*state) {
         case 0:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -15,10 +15,11 @@ NON_MATCHING void func_801F38DC(void) {
             }
             break;
         case 1:
-            if (g_GameStateIndex == GAME_REQUEST_IDLE) {
+            request = &g_GameStateIndex;
+            if (*request == GAME_REQUEST_IDLE) {
                 Message_StartAreaMessage(0xB5);
-                g_GameStateIndex = GAME_REQUEST_MESSAGE;
-                *state           = *state + 1;
+                *request = GAME_REQUEST_MESSAGE;
+                *state   = *state + 1;
             }
             break;
         case 2:
@@ -31,13 +32,10 @@ NON_MATCHING void func_801F38DC(void) {
         case 3:
             if (WINDOW_EFFECT_IDLE()) {
                 Game_ClearScriptActive();
-                g_SceneEventMode = SCENE_EVENT_NONE;
-                *state           = 0;
-                D_80146867       = 0;
+                g_SceneEventState.mode = SCENE_EVENT_NONE;
+                *state                 = 0;
+                D_80146867             = 0;
             }
             break;
     }
 }
-#else
-INCLUDE_ASM(func_801F38DC);
-#endif

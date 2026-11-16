@@ -8,17 +8,18 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/func_801EEC14.h"
 
-#ifdef NON_MATCHING
 /* The effect's start: the caster's facing picks the target cell, every battler,
  * field actor and actor slot stores its height over the ground, the parts of the
  * cells around the target take the 0x28..0x2B commands this overlay draws, and the
  * effect clears its grid and queues the selection sound. */
-NON_MATCHING void func_801EEC80(void) {
+MATCH void func_801EEC80(void) {
     ScenePart* part;
     ScenePart* end;
+    u16*       run;
     s32        i;
     s32        j;
     u16        cell;
+    s32        offset;
 
     if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
         if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
@@ -33,8 +34,9 @@ NON_MATCHING void func_801EEC80(void) {
             D_801F0CBC = D_8014637C->facing ^ 2;
         }
     }
-    D_801F0CC4           = g_AreaTargetCellX + (s8)D_801F0C94[D_801F0CBC * 2];
-    D_801F0CC8           = g_AreaTargetCellY + (s8)D_801F0C94[D_801F0CBC * 2 + 1];
+    offset               = D_801F0CBC * 2;
+    D_801F0CC4           = g_AreaTargetCellX + D_801F0C94[offset];
+    D_801F0CC8           = g_AreaTargetCellY + D_801F0C94[offset + 1];
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;
     for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
@@ -70,7 +72,8 @@ NON_MATCHING void func_801EEC80(void) {
                 continue;
             }
             part = (ScenePart*)((u8*)MAP_BUNDLE_BASE + g_AreaMapBundle.record_region_24 * 4 + cell * 4);
-            end  = (ScenePart*)((u8*)part + (*(u16*)((u8*)part - 2) * 4 - 4));
+            run  = (u16*)part - 1;
+            end  = (ScenePart*)((u8*)part + (*run * 4 - 4));
             while (part != end) {
                 if (PART_COMMAND(part->raw) == 0x00) {
                     part->raw = PART_COMMAND_SET(part->raw, 0x28);
@@ -107,9 +110,6 @@ NON_MATCHING void func_801EEC80(void) {
     SND_QueueSelectionEffect(0x100);
     g_Task->header.mode += 1;
 }
-#else
-INCLUDE_ASM(func_801EEC80);
-#endif
 
 /* Counts this effect's steps; at the tick limit it re-arms the counter, steps
  * the magic, and flips the area camera's vertical offset with the frame parity. */
@@ -216,7 +216,48 @@ MATCH void func_801EF2B8(void) {
     }
 }
 
-INCLUDE_ASM(func_801EFD7C);
+/* The effect's end: the cells around the target get back the commands the start replaced with 0x28..0x2B. */
+MATCH void func_801EFD7C(void) {
+    ScenePart* part;
+    ScenePart* end;
+    u16*       run;
+    s32        i;
+    s32        j;
+    u16        cell;
+
+    for (i = 0; i < AREA_CELL_GRID_ROWS; i++) {
+        for (j = 0; j < AREA_CELL_GRID_COLS; j++) {
+            cell = g_AreaCellGrid[i][j];
+            if (cell == 0) {
+                continue;
+            }
+            part = (ScenePart*)((u8*)MAP_BUNDLE_BASE + g_AreaMapBundle.record_region_24 * 4 + cell * 4);
+            run  = (u16*)part - 1;
+            end  = (ScenePart*)((u8*)part + (*run * 4 - 4));
+            while (part != end) {
+                if (PART_COMMAND(part->raw) == 0x28) {
+                    part->raw = PART_COMMAND_SET(part->raw, 0x00);
+                }
+                if (PART_COMMAND(part->raw) == 0x29) {
+                    part->raw = PART_COMMAND_SET(part->raw, 0x21);
+                }
+                if (PART_COMMAND(part->raw) == 0x2A) {
+                    part->raw = PART_COMMAND_SET(part->raw, 0x22);
+                }
+                if (PART_COMMAND(part->raw) == 0x2B) {
+                    part->raw = PART_COMMAND_SET(part->raw, 0x27);
+                }
+
+                part += part->head.count;
+            }
+        }
+    }
+    g_AreaCameraOffsetY = 0;
+    func_800A9820(g_Battle.target_selector);
+    g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+    func_801E5988();
+    g_AreaCameraRefreshCount = 2;
+}
 
 /* Draws the textured quads of the five-record parts at parts like the resident Area_DrawPartQuads, but each vertex
  * depth adds func_801F0ADC of its x and y. */
@@ -450,4 +491,45 @@ MATCH void Area_DrawGroundSceneSprite(u8* record, s32 origin_x, s32 origin_y) {
     GFX_AddPrim(g_AreaDrawMode, sizeof(POLY_FT4));
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING s32 func_801F0ADC(s32 x, s32 y) {
+    /* FAKE: retail reserves 8 unused frame bytes. */
+    FAKE_STACK_PADS(u8, 8);
+
+    s32 col;
+    s32 row;
+    s32 sum;
+    if (D_801F0CBC & 1) {
+        col = ((y + 0x4000) >> 6) - D_801F0CC8 * 2;
+        row = ((x + 0x4000) >> 6) - D_801F0CC4 * 2;
+    } else {
+        col = ((x + 0x4000) >> 6) - D_801F0CC4 * 2;
+        row = ((y + 0x4000) >> 6) - D_801F0CC8 * 2;
+    }
+    if (col < 0 || col >= 0x1C || row < 0 || row >= 0x20) {
+        return 0;
+    }
+    if (((col | row) & 1) == 0) {
+        sum = D_801F0DCC[(row >> 1) + 1][(col >> 1)] + D_801F0DCC[(row >> 1)][(col >> 1) + 1];
+        return -(sum << 3);
+    } else if (col & 1) {
+        if ((row & 1) == 0) {
+            sum = D_801F0DCC[(row >> 1) + 1][(col >> 1) + 1] + D_801F0DCC[(row >> 1)][(col >> 1) + 1];
+            return -(sum << 3);
+        } else {
+            sum = D_801F0DCC[(row >> 1) + 1][(col >> 1) + 1];
+            return -(sum << 4);
+        }
+    } else {
+        if (row & 1) {
+            sum = D_801F0DCC[(row >> 1) + 1][(col >> 1) + 1] + D_801F0DCC[(row >> 1) + 1][(col >> 1)];
+            return -(sum << 3);
+        } else {
+            sum = D_801F0DCC[(row >> 1) + 1][(col >> 1) + 1];
+            return -(sum << 4);
+        }
+    }
+}
+#else
 INCLUDE_ASM(func_801F0ADC);
+#endif

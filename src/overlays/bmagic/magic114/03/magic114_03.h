@@ -8,6 +8,8 @@
 extern Callback D_801EEC04[];
 extern Callback D_801F1230[];
 extern s32      D_801F11F4[][2];
+extern s16      D_1F800016;
+extern s16      D_1F800018;
 
 void func_800AF0F8(s32 pos_x, s32 pos_y, s32* values, u8* base, u8 count, u8 size, u8 seed);
 void func_801EF128(void);

@@ -2,7 +2,6 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801F3570(void) {
-    u8* palette;
     s32 x;
     s32 y;
     s32 column;
@@ -10,12 +9,11 @@ NON_MATCHING s32 func_801F3570(void) {
 
     row = 0;
     do {
-        y       = row + 0x20;
-        palette = D_801F4960[row];
-        column  = 0;
+        y      = row + 0x20;
+        column = 0;
         do {
             x = column + 0x94;
-            if ((func_801F30B8(x, y) & BYTE_MASK) != palette[column]) {
+            if ((func_801F30B8(x, y) & BYTE_MASK) != D_801F4960[row][column]) {
                 return 0;
             }
             column += 1;
@@ -28,7 +26,7 @@ NON_MATCHING s32 func_801F3570(void) {
     func_801A4BC0(0x93, 0x1C, 0xA1);
     func_801A4BC0(0x92, 0x1D, 0xC0);
     func_801A4BC0(0x93, 0x1D, 0xC0);
-    g_SceneEventStep = 0xA;
+    g_SceneEventState.step = 0xA;
     Area_SetCellPalette(0x92, 0x1D);
     SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
     return 1;

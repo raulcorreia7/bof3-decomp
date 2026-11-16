@@ -27,24 +27,25 @@ MATCH void func_801EEC04(void) {
 
 INCLUDE_ASM(func_801EED0C);
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF118(void) {
-    u8 angle;
+/* Moves the effect one step around a circle. */
+MATCH void func_801EF118(void) {
+    u8           angle;
+    s16*         cell;
+    PartyMember* work;
 
-    angle               = g_Task->unk_09 + 1;
-    g_Task->unk_09      = angle;
-    D_1F80000E          = angle << 4;
-    g_Task->pos.x.fixed = g_Task->unk_18 + (rsin(angle << 4) << 6);
-    g_Task->pos.y.fixed = g_Task->unk_1C + (rcos(D_1F80000E) << 6);
+    work                = g_Task;
+    cell                = (s16*)&D_1F80000E;
+    angle               = work->unk_09 + 1;
+    work->unk_09        = angle;
+    *cell               = angle << 4;
+    g_Task->pos.x.fixed = g_Task->unk_18 + (rsin((s16)(angle << 4)) << 6);
+    g_Task->pos.y.fixed = g_Task->unk_1C + (rcos(*cell) << 6);
     if (g_Task->param.unk_0B == 0) {
         func_800A9820(g_Battle.target_selector);
         g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
         func_801E5988();
     }
 }
-#else
-INCLUDE_ASM(func_801EF118);
-#endif
 
 /* func_801EF1E0 */
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
@@ -136,11 +137,11 @@ MATCH void func_801EFE8C(void) {
 
     SYS_DISPATCH_BYTE(D_801F0684, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        angle                            = &D_1F800000.view.effect.params[7];
-        *angle                           = ((g_Task->unk_09 * 3) & 0x3F) << 6;
-        D_1F800000.view.effect.params[0] = g_Task->unk_0C + ((rsin((g_FrameCount & 0xF) << 6) * 16) >> 12);
-        g_Task->pos.x.fixed              = g_BattleEffectBattler->pos.x.fixed + ((rcos(*angle) * D_1F800000.view.effect.params[0]) >> 3);
-        g_Task->pos.y.fixed              = g_BattleEffectBattler->pos.y.fixed + ((rsin(*angle) * D_1F800000.view.effect.params[0]) >> 3);
+        angle                      = &D_1F800000.cells.halves[7];
+        *angle                     = ((g_Task->unk_09 * 3) & 0x3F) << 6;
+        D_1F800000.cells.halves[0] = g_Task->unk_0C + ((rsin((g_FrameCount & 0xF) << 6) * 16) >> 12);
+        g_Task->pos.x.fixed        = g_BattleEffectBattler->pos.x.fixed + ((rcos(*angle) * D_1F800000.cells.halves[0]) >> 3);
+        g_Task->pos.y.fixed        = g_BattleEffectBattler->pos.y.fixed + ((rsin(*angle) * D_1F800000.cells.halves[0]) >> 3);
         g_Task->pos.y.fixed += (rcos((g_FrameCount & 0x3F) << 6) * 128) >> 3;
         Battle_ProjectRange();
         func_801F01A4();
@@ -201,16 +202,16 @@ MATCH void func_801F01A4(void) {
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
-    D_1F800000.view.effect.params[0] = 32;
-    setXY4(prim, g_Task->unk_2E.half + FIXED_MUL(rcos(3328), D_1F800000.view.effect.params[0]), g_Task->unk_30.half + FIXED_MUL(rsin(3328), D_1F800000.view.effect.params[0]),
-           g_Task->unk_2E.half + FIXED_MUL(rcos(2560), D_1F800000.view.effect.params[0]), g_Task->unk_30.half + FIXED_MUL(rsin(2560), D_1F800000.view.effect.params[0]),
-           g_Task->unk_2E.half + FIXED_MUL(rcos(512), D_1F800000.view.effect.params[0]), g_Task->unk_30.half + FIXED_MUL(rsin(512), D_1F800000.view.effect.params[0]),
-           g_Task->unk_2E.half + FIXED_MUL(rcos(1536), D_1F800000.view.effect.params[0]), g_Task->unk_30.half + FIXED_MUL(rsin(1536), D_1F800000.view.effect.params[0]));
+    D_1F800000.cells.halves[0] = 32;
+    setXY4(prim, g_Task->unk_2E.half + FIXED_MUL(rcos(3328), D_1F800000.cells.halves[0]), g_Task->unk_30.half + FIXED_MUL(rsin(3328), D_1F800000.cells.halves[0]),
+           g_Task->unk_2E.half + FIXED_MUL(rcos(2560), D_1F800000.cells.halves[0]), g_Task->unk_30.half + FIXED_MUL(rsin(2560), D_1F800000.cells.halves[0]),
+           g_Task->unk_2E.half + FIXED_MUL(rcos(512), D_1F800000.cells.halves[0]), g_Task->unk_30.half + FIXED_MUL(rsin(512), D_1F800000.cells.halves[0]),
+           g_Task->unk_2E.half + FIXED_MUL(rcos(1536), D_1F800000.cells.halves[0]), g_Task->unk_30.half + FIXED_MUL(rsin(1536), D_1F800000.cells.halves[0]));
     prim->tpage = GetTPage(0, 1, 832, 256);
     prim->clut  = GetClut(0, 506);
     setUVWH(prim, 0, 0, 31, 32);
-    D_1F800000.view.effect.params[6] = g_Task->timer * g_Task->param.unk_0B;
-    setRGB0(prim, D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[6], D_1F800000.view.effect.params[6]);
+    D_1F800000.cells.halves[6] = g_Task->timer * g_Task->param.unk_0B;
+    setRGB0(prim, D_1F800000.cells.halves[6], D_1F800000.cells.halves[6], D_1F800000.cells.halves[6]);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_FT4));
 }
 

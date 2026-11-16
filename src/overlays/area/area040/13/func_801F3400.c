@@ -16,7 +16,7 @@ NON_MATCHING s32 func_801F3400(s32 x, s32 y) {
     if (SYS_TestFlag(g_SceneEventFlags, 0x27) != 0) {
         return 0;
     }
-    if (g_SceneEventMode != 0x10) {
+    if (g_SceneEventState.mode != 0x10) {
         return 0;
     }
     func_801F369C();

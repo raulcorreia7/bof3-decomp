@@ -2,18 +2,18 @@
 #include "menu/save_data.h"
 
 MATCH void func_801F3F34(void) {
-    switch (g_SceneEventStep) {
+    switch (g_SceneEventState.step) {
         case 0:
             g_ScriptVars[3]              = 1;
             g_SaveData.scene_event_timer = 16;
-            g_SceneEventStep             = 1;
+            g_SceneEventState.step       = 1;
             D_801F5071                   = 0;
             break;
 
         case 1:
             if (--g_SaveData.scene_event_timer < 4) {
-                g_ScriptVars[3]  = 0;
-                g_SceneEventStep = 2;
+                g_ScriptVars[3]        = 0;
+                g_SceneEventState.step = 2;
             }
             break;
 
@@ -22,22 +22,22 @@ MATCH void func_801F3F34(void) {
                 SYS_ClearFlag(g_SaveData.scene_event_flags, 0x24);
                 D_801F5071 = -1;
                 Game_ClearScriptActive();
-                g_SceneEventMode = SCENE_EVENT_NONE;
-                g_SceneEventStep = 0;
+                g_SceneEventState.mode = SCENE_EVENT_NONE;
+                g_SceneEventState.step = 0;
             }
             break;
 
         case 10:
             Message_StartAreaMessage(57);
-            g_GameStateIndex = GAME_REQUEST_MESSAGE;
-            g_SceneEventStep = 11;
+            g_GameStateIndex       = GAME_REQUEST_MESSAGE;
+            g_SceneEventState.step = 11;
             break;
 
         case 11:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                g_SceneEventMode = SCENE_EVENT_NONE;
-                g_SceneEventStep = 0;
+                g_SceneEventState.mode = SCENE_EVENT_NONE;
+                g_SceneEventState.step = 0;
             }
             break;
 
@@ -45,13 +45,13 @@ MATCH void func_801F3F34(void) {
             g_ScriptVars[3]              = 10;
             g_SaveData.scene_event_timer = 16;
             D_801F5071                   = 0;
-            g_SceneEventStep             = 21;
+            g_SceneEventState.step       = 21;
             break;
 
         case 21:
             if (--g_SaveData.scene_event_timer < 4) {
-                g_ScriptVars[3]  = 0;
-                g_SceneEventStep = 22;
+                g_ScriptVars[3]        = 0;
+                g_SceneEventState.step = 22;
             }
             break;
 
@@ -60,8 +60,8 @@ MATCH void func_801F3F34(void) {
                 SYS_ClearFlag(g_SaveData.scene_event_flags, 0x26);
                 D_801F5071 = -1;
                 Game_ClearScriptActive();
-                g_SceneEventMode = SCENE_EVENT_NONE;
-                g_SceneEventStep = 0;
+                g_SceneEventState.mode = SCENE_EVENT_NONE;
+                g_SceneEventState.step = 0;
             }
             break;
 
@@ -69,13 +69,13 @@ MATCH void func_801F3F34(void) {
             g_ScriptVars[3]              = 20;
             g_SaveData.scene_event_timer = 16;
             D_801F5071                   = 0;
-            g_SceneEventStep             = 41;
+            g_SceneEventState.step       = 41;
             break;
 
         case 41:
             if (--g_SaveData.scene_event_timer < 4) {
-                g_ScriptVars[3]  = 0;
-                g_SceneEventStep = 42;
+                g_ScriptVars[3]        = 0;
+                g_SceneEventState.step = 42;
             }
             break;
 
@@ -84,20 +84,20 @@ MATCH void func_801F3F34(void) {
                 SYS_ClearFlag(g_SaveData.scene_event_flags, 0x25);
                 D_801F5071 = -1;
                 Game_ClearScriptActive();
-                g_SceneEventMode = SCENE_EVENT_NONE;
-                g_SceneEventStep = 0;
+                g_SceneEventState.mode = SCENE_EVENT_NONE;
+                g_SceneEventState.step = 0;
             }
             break;
 
         case 45:
-            g_ScriptVars[3]  = 0;
-            g_SceneEventStep = 46;
+            g_ScriptVars[3]        = 0;
+            g_SceneEventState.step = 46;
             break;
 
         case 46:
             if (g_ScriptVars[3] == 30) {
                 func_801F3D24();
-                g_SceneEventStep = 47;
+                g_SceneEventState.step = 47;
             }
             break;
 
@@ -112,7 +112,7 @@ MATCH void func_801F3F34(void) {
                 Area_StoreHeight(135, 18, 0);
                 Area_SetCellCode(135, 18, 16);
                 g_SaveData.scene_event_timer = 10;
-                g_SceneEventStep             = 41;
+                g_SceneEventState.step       = 41;
             }
             break;
     }

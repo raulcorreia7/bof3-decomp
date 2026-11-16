@@ -5,7 +5,7 @@ MATCH void func_801F3254(void) {
     u16* input;
     s8*  step;
 
-    step = &g_SceneEventStep;
+    step = &g_SceneEventState.step;
     switch (*step) {
         case 0:
             Game_ClearScriptActive();
@@ -28,18 +28,18 @@ MATCH void func_801F3254(void) {
             break;
         case 2:
             if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-                input                               = &g_InputHeld;
-                held                                = *input;
-                D_1F800000.view.area.entity_counter = held;
-                *input                              = held & 0xFFF;
+                input                      = &g_InputHeld;
+                held                       = *input;
+                D_1F800000.cells.halves[0] = held;
+                *input                     = held & 0xFFF;
                 *input |= D_801F4984[held >> 12] << 12;
             }
             func_801F37D4();
             break;
     }
-    if (g_GameAreaId != 0x28 || g_SceneEventStep == 10 || D_80143F03 != 6) {
-        g_SceneEventMode = 0;
-        g_SceneEventStep = 0;
+    if (g_GameAreaId != 0x28 || g_SceneEventState.step == 10 || D_80143F03 != 6) {
+        g_SceneEventState.mode = 0;
+        g_SceneEventState.step = 0;
         g_GameFlags &= ~0x1006;
     }
 }

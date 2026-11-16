@@ -197,7 +197,45 @@ MATCH void func_801EF7A0(void) {
     }
 }
 
-INCLUDE_ASM(func_801EF7FC);
+MATCH void func_801EF7FC(void) {
+    POLY_G3* prim;
+    s32      tpage;
+    s32      i;
+    u8       red;
+    u8       green;
+    u8       blue;
+    u8       green_edge;
+
+    tpage = getTPage(0, 1, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    D_1F800000.cells.halves[2] = 0;
+    red                        = g_Task->timer * 12;
+    green                      = g_Task->timer * 11;
+    green_edge                 = g_Task->timer * 8;
+    blue                       = g_Task->timer * 4;
+    D_1F800000.cells.halves[0] = g_Task->unk_09 * 2;
+    D_1F800000.cells.halves[4] = g_Task->unk_2E.half;
+    D_1F800000.cells.halves[5] = g_Task->unk_30.half;
+    i                          = 0;
+    do {
+        prim = (POLY_G3*)g_GfxPrimCursor;
+        SetPolyG3(prim);
+        SetSemiTrans(prim, 1);
+        prim->x0                   = D_1F800000.cells.halves[4];
+        prim->y0                   = D_1F800000.cells.halves[5];
+        prim->x1                   = D_1F800000.cells.halves[4] + FIXED_MUL(rsin(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
+        prim->y1                   = D_1F800000.cells.halves[5] + FIXED_MUL(rcos(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
+        D_1F800000.cells.halves[2] = (i + 1) << 8;
+        prim->x2                   = D_1F800000.cells.halves[4] + FIXED_MUL(rsin(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
+        prim->y2                   = D_1F800000.cells.halves[5] + FIXED_MUL(rcos(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
+        setRGB0(prim, red, green, blue);
+        setRGB1(prim, red, green_edge, blue);
+        setRGB2(prim, red, green_edge, blue);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
+        i++;
+    } while (i < 16);
+}
 
 /* Draw the magic021 ring as sixteen shaded quads between two radii around the effect,
  * tinted on the inner edge by the timer and dark on the outer one. */
@@ -213,27 +251,27 @@ MATCH void func_801EFA48(void) {
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     i = 0;
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
-    D_1F800000.view.effect.params[2] = 0;
-    red                              = g_Task->timer * 12;
-    green                            = g_Task->timer * 6;
-    blue                             = g_Task->timer * 4;
-    D_1F800000.view.effect.params[0] = g_Task->unk_09 * 2;
-    D_1F800000.view.effect.params[1] = g_Task->unk_09 * 3;
-    D_1F800000.view.effect.params[4] = g_Task->unk_2E.half;
-    D_1F800000.view.effect.params[5] = g_Task->unk_30.half;
+    D_1F800000.cells.halves[2] = 0;
+    red                        = g_Task->timer * 12;
+    green                      = g_Task->timer * 6;
+    blue                       = g_Task->timer * 4;
+    D_1F800000.cells.halves[0] = g_Task->unk_09 * 2;
+    D_1F800000.cells.halves[1] = g_Task->unk_09 * 3;
+    D_1F800000.cells.halves[4] = g_Task->unk_2E.half;
+    D_1F800000.cells.halves[5] = g_Task->unk_30.half;
     do {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        setXY0(prim, D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]),
-               D_1F800000.view.effect.params[5] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]));
-        prim->x2                         = D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[1]);
-        prim->y2                         = D_1F800000.view.effect.params[5] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[1]);
-        D_1F800000.view.effect.params[2] = (i + 1) << 8;
-        prim->x1                         = D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-        prim->y1                         = D_1F800000.view.effect.params[5] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-        prim->x3                         = D_1F800000.view.effect.params[4] + FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[1]);
-        prim->y3                         = D_1F800000.view.effect.params[5] + FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[1]);
+        setXY0(prim, D_1F800000.cells.halves[4] + FIXED_MUL(rsin(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]),
+               D_1F800000.cells.halves[5] + FIXED_MUL(rcos(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]));
+        prim->x2                   = D_1F800000.cells.halves[4] + FIXED_MUL(rsin(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[1]);
+        prim->y2                   = D_1F800000.cells.halves[5] + FIXED_MUL(rcos(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[1]);
+        D_1F800000.cells.halves[2] = (i + 1) << 8;
+        prim->x1                   = D_1F800000.cells.halves[4] + FIXED_MUL(rsin(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
+        prim->y1                   = D_1F800000.cells.halves[5] + FIXED_MUL(rcos(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
+        prim->x3                   = D_1F800000.cells.halves[4] + FIXED_MUL(rsin(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[1]);
+        prim->y3                   = D_1F800000.cells.halves[5] + FIXED_MUL(rcos(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[1]);
         setRGB0(prim, red, green, blue);
         setRGB1(prim, red, green, blue);
         setRGB2(prim, 1, 1, 1);

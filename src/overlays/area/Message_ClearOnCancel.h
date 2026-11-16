@@ -6,7 +6,7 @@
    func_801F2C0C (area131), func_801F2C5C (area187), func_801F3764 (area088) */
 MATCH void Message_ClearOnCancel(void) {
     if (MENU_SELECTION_IDLE()) {
-        g_SceneEventStep = 2;
+        g_SceneEventState.step = 2;
     }
     MESSAGE_REQUEST_CLEAR();
 }

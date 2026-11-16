@@ -9,8 +9,9 @@
 
 extern u8 D_80144908[];
 
-extern u8 D_801FC4C0;
-extern u8 D_80144F5F;
+extern u8  D_801FC4C0;
+extern u8  D_80144F5F;
+extern u16 D_80144F54;
 
 extern u8 D_80145FF4;
 extern u8 D_80146134;
@@ -26,8 +27,7 @@ extern u32      D_801F6C00;
 extern Callback D_801FC418[];
 extern Callback D_801FC424[];
 
-extern s8        D_801FC44C[];
+extern s8 D_801FC44C[];
 /* D_801FC468 */
-extern SceneFunc g_SceneActorDispatch[];
 
 #endif

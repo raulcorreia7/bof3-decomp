@@ -5,6 +5,23 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+/* The 32-bit cells at +0x14 and +0x20 of each effect slot, read as columns. */
+typedef struct BattleEffectWordColumn {
+    s32 value;
+    u8  pad[BATTLE_EFFECT_STRIDE - sizeof(s32)];
+} BattleEffectWordColumn;
+
+extern BattleEffectWordColumn D_801EC344[];
+extern BattleEffectWordColumn D_801EC350[];
+
+/* The 16-bit cell at +0x58 of each effect slot, read as a column. */
+typedef struct BattleEffectHalfColumn {
+    u16 value;
+    u8  pad[BATTLE_EFFECT_STRIDE - sizeof(u16)];
+} BattleEffectHalfColumn;
+
+extern BattleEffectHalfColumn D_801EC388[];
+
 extern BattleEffect* D_801EC2E0;
 
 void func_801EF030(s32 x, s32 y, u16 radius, s32 phase);

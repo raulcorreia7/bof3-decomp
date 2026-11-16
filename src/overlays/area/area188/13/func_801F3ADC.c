@@ -1,3 +1,70 @@
 #include "area188_13.h"
 
-INCLUDE_ASM(func_801F3ADC);
+MATCH void func_801F3ADC(s32* from, s32* to, u8 intensity) {
+    POLY_G4* prim;
+    TILE_1*  segment;
+    Point3l  current;
+    Point3l  step;
+    DVECTOR  projected;
+    s32      phase;
+    u8       i;
+
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    SetSemiTrans(prim, 1);
+    Area_ProjectPoint(from, &projected);
+    prim->x0 = projected.vx + 1;
+    prim->y0 = projected.vy - 1;
+    prim->x1 = projected.vx;
+    prim->y1 = projected.vy;
+    Area_ProjectPoint(to, &projected);
+    prim->x2 = projected.vx + 1;
+    prim->y2 = projected.vy - 1;
+    prim->x3 = projected.vx;
+    prim->y3 = projected.vy;
+    setRGB0(prim, 0, 0, 0);
+    setRGB1(prim, intensity, intensity, 0);
+    setRGB2(prim, 0, 0, 0);
+    setRGB3(prim, intensity, intensity, 0);
+    GFX_AddPrim(2, sizeof(POLY_G4));
+
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    SetSemiTrans(prim, 1);
+    Area_ProjectPoint(from, &projected);
+    prim->x0 = projected.vx;
+    prim->y0 = projected.vy;
+    prim->x1 = projected.vx - 1;
+    prim->y1 = projected.vy + 1;
+    Area_ProjectPoint(to, &projected);
+    prim->x2 = projected.vx;
+    prim->y2 = projected.vy;
+    prim->x3 = projected.vx - 1;
+    prim->y3 = projected.vy + 1;
+    setRGB0(prim, intensity, intensity, 0);
+    setRGB1(prim, 0, 0, 0);
+    setRGB2(prim, intensity, intensity, 0);
+    setRGB3(prim, 0, 0, 0);
+    GFX_AddPrim(2, sizeof(POLY_G4));
+
+    step.x    = -0x1000;
+    step.y    = -0x400;
+    phase     = g_FrameCount & 0xF;
+    current.x = to[0] + step.x * phase;
+    current.y = to[1] + step.y * phase;
+    current.z = to[2];
+    for (i = 0; i < 8; i++) {
+        if (current.x < from[0]) {
+            break;
+        }
+        Area_ProjectPoint(&current.x, &projected);
+        segment = (TILE*)g_GfxPrimCursor;
+        SetTile1(segment);
+        SetSemiTrans(segment, 1);
+        setXY0(segment, projected.vx, projected.vy);
+        setRGB0(segment, intensity, intensity, 0);
+        GFX_AddPrim(2, 12);
+        current.x += -0x10000;
+        current.y += -0x4000;
+    }
+}

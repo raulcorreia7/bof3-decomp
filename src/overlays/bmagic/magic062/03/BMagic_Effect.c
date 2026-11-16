@@ -101,7 +101,37 @@ MATCH void func_801EF2A0(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF2F0(s32 stat) {
+    u8  change;
+    s32 delta;
+    s32 value;
+    /* FAKE: retail frame reserves 8 bytes no statement uses. */
+    FAKE_STACK_PADS(u8, 8);
+
+    if (g_Battle.target_selector < BATTLE_PARTY_CHARACTERS_COUNT) {
+        g_Battle.target_record = &g_Game.members[g_Battle.target_selector].u.turn;
+    } else {
+        g_Battle.target_record = &ENEMY_COMBATANT(g_Battle.target_selector).turn;
+    }
+    g_Battle.target_record->hp_change    = 0;
+    g_Battle.target_record->ap_change    = 0;
+    g_Battle.target_record->target_flags = 0;
+    change                               = D_801CA71B[g_Battle.action_id * BATTLE_TYPE_STRIDE];
+    value                                = ((s8*)g_Battle.target_record)[0x14 + (u8)stat];
+    delta                                = value + (s8)change;
+    if (delta > 100) {
+        ((s8*)g_Battle.target_record)[0x14 + (u8)stat] = 100;
+    } else if (delta < -100) {
+        ((s8*)g_Battle.target_record)[0x14 + (u8)stat] = -100;
+    } else {
+        ((s8*)g_Battle.target_record)[0x14 + (u8)stat] = value + (s8)change;
+        Battle_RescaleStats(g_Battle.target_selector);
+    }
+}
+#else
 INCLUDE_ASM(func_801EF2F0);
+#endif
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
@@ -134,12 +164,12 @@ MATCH void func_801EF678(void) {
     tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     GFX_AddPrim(5, sizeof(DR_MODE));
-    D_1F800000.view.effect.params[3] = g_Task->unk_09 * 5;
-    D_1F800000.view.effect.params[4] = ((rand() & 3) + 3) * g_Task->unk_09;
-    D_1F800000.view.effect.params[5] = ((rand() & 3) + 3) * g_Task->unk_09;
-    D_1F800000.view.effect.params[6] = ((rand() & 3) + 3) * g_Task->unk_09;
-    D_1F800014[2].vx                 = FIXED_MUL(rsin(0), 128U);
-    D_1F800014[2].vy                 = FIXED_MUL(rcos(0), 128U);
+    D_1F800000.cells.halves[3] = g_Task->unk_09 * 5;
+    D_1F800000.cells.halves[4] = ((rand() & 3) + 3) * g_Task->unk_09;
+    D_1F800000.cells.halves[5] = ((rand() & 3) + 3) * g_Task->unk_09;
+    D_1F800000.cells.halves[6] = ((rand() & 3) + 3) * g_Task->unk_09;
+    D_1F800014[2].vx           = FIXED_MUL(rsin(0), 128U);
+    D_1F800014[2].vy           = FIXED_MUL(rcos(0), 128U);
     for (i = 1; i <= 16; i++) {
         D_1F800014[0].vx = 0;
         D_1F800014[0].vy = 0;
@@ -154,9 +184,9 @@ MATCH void func_801EF678(void) {
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
         RotTransPers3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
-        setRGB0(prim, D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3], D_1F800000.view.effect.params[3]);
-        setRGB1(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
-        setRGB2(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
+        setRGB0(prim, D_1F800000.cells.halves[3], D_1F800000.cells.halves[3], D_1F800000.cells.halves[3]);
+        setRGB1(prim, D_1F800000.cells.halves[4], D_1F800000.cells.halves[5], D_1F800000.cells.halves[6]);
+        setRGB2(prim, D_1F800000.cells.halves[4], D_1F800000.cells.halves[5], D_1F800000.cells.halves[6]);
         GFX_AddPrim(5, sizeof(POLY_G3));
     }
     tpage = getTPage(0, 0, 320, 256);
@@ -195,8 +225,8 @@ MATCH void func_801EF934(void) {
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
         RotTransPers4(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], &D_1F800014[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
-        setRGB0(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
-        setRGB1(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
+        setRGB0(prim, D_1F800000.cells.halves[4], D_1F800000.cells.halves[5], D_1F800000.cells.halves[6]);
+        setRGB1(prim, D_1F800000.cells.halves[4], D_1F800000.cells.halves[5], D_1F800000.cells.halves[6]);
         setRGB2(prim, 1, 1, 1);
         setRGB3(prim, 1, 1, 1);
         GFX_AddPrim(5, sizeof(POLY_G4));
@@ -212,7 +242,32 @@ MATCH void func_801EFBBC(void) {
 
 #include "overlays/bmagic/Effect_CountDownAndStep.h"
 
-INCLUDE_ASM(func_801EFC4C);
+MATCH void func_801EFC4C(void) {
+    s16*         angle_cell;
+    PartyMember* work;
+    PartyMember* battler;
+    u8           angle;
+    s32          dy;
+
+    if (--g_Task->unk_09 == 0) {
+        angle_cell          = &D_1F800004;
+        angle               = g_Task->param.unk_0B & 0x1F;
+        *angle_cell         = angle << 7;
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + ((rsin(angle << 7) * 0xB0) >> 3);
+        dy                  = (rcos(*angle_cell) * 0xB0) >> 3;
+        battler             = g_BattleEffectBattler;
+        work                = g_Task;
+        work->pos.y.fixed   = battler->pos.y.fixed + dy;
+        work->pos.z.fixed   = battler->pos.z.fixed;
+        work->unk_14        = 0x40;
+        work->unk_20        = -4;
+        work->unk_09        = 0;
+        g_Task->timer       = 0xC;
+        g_Task->unk_0C      = 1;
+        g_Task->unk_10      = 0;
+        g_Task->header.step += 1;
+    }
+}
 
 MATCH void func_801EFD80(void) {
     s32          timer;
@@ -350,30 +405,30 @@ MATCH void func_801F026C(void) {
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     first = g_GfxPrimCursor;
     for (i = g_Task->unk_09; i < g_Task->unk_09 + 32; i += 8) {
-        D_1F800000.view.effect.params[1] = 0x50;
-        D_1F800000.view.effect.params[0] = 0x30;
-        D_1F800000.view.effect.params[7] = (i - g_Task->unk_09) / 8;
-        D_1F800000.view.effect.params[4] = D_801F0BA4[g_Task->unk_04][D_1F800000.view.effect.params[7]][0];
-        D_1F800000.view.effect.params[5] = D_801F0BA4[g_Task->unk_04][D_1F800000.view.effect.params[7]][1];
-        D_1F800000.view.effect.params[6] = D_801F0BA4[g_Task->unk_04][D_1F800000.view.effect.params[7]][2];
-        D_1F800014[0].vx                 = 0;
-        D_1F800014[0].vy                 = 0;
-        D_1F800014[0].vz                 = D_1F800000.view.effect.params[1];
-        D_1F800000.view.effect.params[2] = (i & 0x1F) << 7;
-        D_1F800014[1].vx                 = FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-        D_1F800014[1].vy                 = FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-        D_1F800014[1].vz                 = 0;
-        D_1F800000.view.effect.params[2] = ((i + 8) & 0x1F) << 7;
-        D_1F800014[2].vx                 = FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-        D_1F800014[2].vy                 = FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-        D_1F800014[2].vz                 = 0;
-        prim                             = (POLY_G3*)g_GfxPrimCursor;
+        D_1F800000.cells.halves[1] = 0x50;
+        D_1F800000.cells.halves[0] = 0x30;
+        D_1F800000.cells.halves[7] = (i - g_Task->unk_09) / 8;
+        D_1F800000.cells.halves[4] = D_801F0BA4[g_Task->unk_04][D_1F800000.cells.halves[7]][0];
+        D_1F800000.cells.halves[5] = D_801F0BA4[g_Task->unk_04][D_1F800000.cells.halves[7]][1];
+        D_1F800000.cells.halves[6] = D_801F0BA4[g_Task->unk_04][D_1F800000.cells.halves[7]][2];
+        D_1F800014[0].vx           = 0;
+        D_1F800014[0].vy           = 0;
+        D_1F800014[0].vz           = D_1F800000.cells.halves[1];
+        D_1F800000.cells.halves[2] = (i & 0x1F) << 7;
+        D_1F800014[1].vx           = FIXED_MUL(rsin(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
+        D_1F800014[1].vy           = FIXED_MUL(rcos(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
+        D_1F800014[1].vz           = 0;
+        D_1F800000.cells.halves[2] = ((i + 8) & 0x1F) << 7;
+        D_1F800014[2].vx           = FIXED_MUL(rsin(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
+        D_1F800014[2].vy           = FIXED_MUL(rcos(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
+        D_1F800014[2].vz           = 0;
+        prim                       = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 0);
         depths[(i - g_Task->unk_09) / 8] = RotAverage3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &p, &flag);
-        setRGB0(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
-        setRGB1(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
-        setRGB2(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
+        setRGB0(prim, D_1F800000.cells.halves[4], D_1F800000.cells.halves[5], D_1F800000.cells.halves[6]);
+        setRGB1(prim, D_1F800000.cells.halves[4], D_1F800000.cells.halves[5], D_1F800000.cells.halves[6]);
+        setRGB2(prim, D_1F800000.cells.halves[4], D_1F800000.cells.halves[5], D_1F800000.cells.halves[6]);
         g_GfxPrimCursor += sizeof(POLY_G3);
     }
     x = g_Task->pos.x.fixed;
@@ -381,28 +436,28 @@ MATCH void func_801F026C(void) {
     func_800AF0F8(x, y, depths, first, 4, sizeof(POLY_G3), 2);
     first = g_GfxPrimCursor;
     for (i = g_Task->unk_09; i < g_Task->unk_09 + 32; i += 8) {
-        D_1F800000.view.effect.params[7] = (i - g_Task->unk_09) / 8;
-        D_1F800000.view.effect.params[4] = D_801F0BD4[g_Task->unk_04][D_1F800000.view.effect.params[7]][0];
-        D_1F800000.view.effect.params[5] = D_801F0BD4[g_Task->unk_04][D_1F800000.view.effect.params[7]][1];
-        D_1F800000.view.effect.params[6] = D_801F0BD4[g_Task->unk_04][D_1F800000.view.effect.params[7]][2];
-        D_1F800014[0].vx                 = 0;
-        D_1F800014[0].vy                 = 0;
-        D_1F800014[0].vz                 = -D_1F800000.view.effect.params[1];
-        D_1F800000.view.effect.params[2] = (i & 0x1F) << 7;
-        D_1F800014[1].vx                 = FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-        D_1F800014[1].vy                 = FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-        D_1F800014[1].vz                 = 0;
-        D_1F800000.view.effect.params[2] = ((i + 8) & 0x1F) << 7;
-        D_1F800014[2].vx                 = FIXED_MUL(rsin(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-        D_1F800014[2].vy                 = FIXED_MUL(rcos(D_1F800000.view.effect.params[2]), D_1F800000.view.effect.params[0]);
-        D_1F800014[2].vz                 = 0;
-        prim                             = (POLY_G3*)g_GfxPrimCursor;
+        D_1F800000.cells.halves[7] = (i - g_Task->unk_09) / 8;
+        D_1F800000.cells.halves[4] = D_801F0BD4[g_Task->unk_04][D_1F800000.cells.halves[7]][0];
+        D_1F800000.cells.halves[5] = D_801F0BD4[g_Task->unk_04][D_1F800000.cells.halves[7]][1];
+        D_1F800000.cells.halves[6] = D_801F0BD4[g_Task->unk_04][D_1F800000.cells.halves[7]][2];
+        D_1F800014[0].vx           = 0;
+        D_1F800014[0].vy           = 0;
+        D_1F800014[0].vz           = -D_1F800000.cells.halves[1];
+        D_1F800000.cells.halves[2] = (i & 0x1F) << 7;
+        D_1F800014[1].vx           = FIXED_MUL(rsin(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
+        D_1F800014[1].vy           = FIXED_MUL(rcos(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
+        D_1F800014[1].vz           = 0;
+        D_1F800000.cells.halves[2] = ((i + 8) & 0x1F) << 7;
+        D_1F800014[2].vx           = FIXED_MUL(rsin(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
+        D_1F800014[2].vy           = FIXED_MUL(rcos(D_1F800000.cells.halves[2]), D_1F800000.cells.halves[0]);
+        D_1F800014[2].vz           = 0;
+        prim                       = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 0);
         depths[(i - g_Task->unk_09) / 8] = RotAverage3(&D_1F800014[0], &D_1F800014[1], &D_1F800014[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &p, &flag);
-        setRGB0(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
-        setRGB1(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
-        setRGB2(prim, D_1F800000.view.effect.params[4], D_1F800000.view.effect.params[5], D_1F800000.view.effect.params[6]);
+        setRGB0(prim, D_1F800000.cells.halves[4], D_1F800000.cells.halves[5], D_1F800000.cells.halves[6]);
+        setRGB1(prim, D_1F800000.cells.halves[4], D_1F800000.cells.halves[5], D_1F800000.cells.halves[6]);
+        setRGB2(prim, D_1F800000.cells.halves[4], D_1F800000.cells.halves[5], D_1F800000.cells.halves[6]);
         g_GfxPrimCursor += sizeof(POLY_G3);
     }
     x = g_Task->pos.x.fixed;
@@ -410,4 +465,28 @@ MATCH void func_801F026C(void) {
     func_800AF0F8(x, y, depths, first, 4, sizeof(POLY_G3), 2);
 }
 
-INCLUDE_ASM(func_801F0910);
+MATCH void func_801F0910(s32 shade) {
+    POLY_G3* prim;
+    s32      i;
+    s32      tpage;
+
+    D_1F800000.cells.halves[0] = shade;
+    D_1F800000.cells.halves[4] = D_801F0C04[g_Task->unk_04][0];
+    D_1F800000.cells.halves[5] = D_801F0C04[g_Task->unk_04][1];
+    D_1F800000.cells.halves[6] = D_801F0C04[g_Task->unk_04][2];
+    for (i = 0; i < 8; i++) {
+        tpage = getTPage(0, 1, 320, 256);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+        prim = (POLY_G3*)g_GfxPrimCursor;
+        SetPolyG3(prim);
+        SetSemiTrans(prim, 1);
+        setXY3(prim, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), D_1F800000.cells.halves[0]),
+               g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), D_1F800000.cells.halves[0]), g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 9), D_1F800000.cells.halves[0]),
+               g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 9), D_1F800000.cells.halves[0]));
+        setRGB0(prim, D_1F800000.cells.halves[4], D_1F800000.cells.halves[5], D_1F800000.cells.halves[6]);
+        setRGB1(prim, 1, 1, 1);
+        setRGB2(prim, 1, 1, 1);
+        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
+    }
+}

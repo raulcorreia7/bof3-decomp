@@ -3,7 +3,7 @@
 MATCH void func_801F4ABC(void) {
     s8* mode;
 
-    mode = &g_SceneEventMode;
+    mode = &g_SceneEventState.mode;
     if (*mode == 0x33) {
         *mode = 0x25;
     }

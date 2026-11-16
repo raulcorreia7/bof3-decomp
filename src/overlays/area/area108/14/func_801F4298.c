@@ -13,17 +13,17 @@ MATCH void func_801F4298(void) {
     }
     return;
 block_3:
-    flags  = &g_SceneEventSelection;
+    flags  = &g_SceneEventState.selection;
     *flags = 3;
     flags += 0x63B;
     flag = 0x1E;
     goto block_5;
 block_4:
-    flags  = &g_SceneEventSelection;
+    flags  = &g_SceneEventState.selection;
     *flags = 2;
     flags += 0x63B;
     flag = 0x1F;
 block_5:
     SYS_SetFlag(flags, flag);
-    g_SceneEventMode = 5;
+    g_SceneEventState.mode = 5;
 }

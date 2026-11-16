@@ -4,7 +4,7 @@ MATCH void func_801F4B60(void) {
     u8* selector;
     u32 cue;
 
-    selector = &g_SceneEventSelection;
+    selector = &g_SceneEventState.selection;
     if (*selector == 1) {
         switch (D_8014686B) {
             case 8:
@@ -30,7 +30,7 @@ MATCH void func_801F4B60(void) {
         }
     }
     Game_ClearScriptActive();
-    g_SceneEventMode      = 0;
-    g_SceneEventStep      = 0;
-    g_SceneEventSelection = 0;
+    g_SceneEventState.mode      = 0;
+    g_SceneEventState.step      = 0;
+    g_SceneEventState.selection = 0;
 }
