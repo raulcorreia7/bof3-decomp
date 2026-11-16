@@ -13,7 +13,7 @@ MATCH u8 Boss_RunBattleEvent2(u32 mode) {
                 }
             }
             if ((g_Battle.target_selector == 3) || (g_Battle.target_selector & BATTLE_TARGET_BOTH_SIDES)) {
-                if (!(g_BattleEnemyBattlers[0].turn.damage_flags.value & COMBATANT_FLAG_DEFENDING)) {
+                if (!(g_BattleEnemyBattlers[0].turn.damage_flags.value & BATTLER_DAMAGE_DEFENDING)) {
                     hp_change = g_BattleEnemyBattlers[0].turn.hp_change;
                     if (hp_change > 0) {
                         D_801FE4E8 += hp_change;
@@ -34,7 +34,7 @@ MATCH u8 Boss_RunBattleEvent2(u32 mode) {
             g_BattleEnemyBattlers[0].header.mode       = 2;
             g_BattleEnemyBattlers[0].header.step       = 0;
             g_BattleEnemyBattlers[0].turn.command.type = BATTLE_COMMAND_DEFEND;
-            g_BattleEnemyBattlers[0].turn.damage_flags.value |= COMBATANT_FLAG_DEFENDING;
+            g_BattleEnemyBattlers[0].turn.damage_flags.value |= BATTLER_DAMAGE_DEFENDING;
             break;
         case BOSS_EVENT_TURN_END:
             if (D_801463D0 == 21) {

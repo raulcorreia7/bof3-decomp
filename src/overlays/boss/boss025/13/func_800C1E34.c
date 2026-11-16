@@ -2,7 +2,7 @@
 
 MATCH void func_800C1E34(void) {
     if ((D_801462EC & 0x2800) != 0x800) {
-        if (g_BattleCurrentEnemy->turn.damage_flags.value & COMBATANT_FLAG_DEFENDING) {
+        if (g_BattleCurrentEnemy->turn.damage_flags.value & BATTLER_DAMAGE_DEFENDING) {
             Battle_RequestEnemyScript(8);
         } else {
             Battle_RequestEnemyScript(0);

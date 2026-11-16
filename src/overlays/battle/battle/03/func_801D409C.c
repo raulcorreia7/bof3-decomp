@@ -28,7 +28,7 @@ MATCH void func_801D409C(void) {
             action_ref = g_Battle.action;
             mask       = D_801CA71C[action_ref->unk_02].mask;
             if (mask & 0x200) {
-                if (!(g_Game.members[*state - 1].u.turn.damage_flags.value & COMBATANT_FLAG_UNK_3)) {
+                if (!(g_Game.members[*state - 1].u.turn.damage_flags.value & BATTLER_DAMAGE_UNK_3)) {
                     continue;
                 }
                 g_Game.members[*state - 1].u.turn.damage_flags.value &= clear_flag;
@@ -42,7 +42,7 @@ MATCH void func_801D409C(void) {
                 Battle_AddMessage(1, 0, Message_GetText(BATTLE_TEXT_LEARNED));
                 return;
             }
-            if (g_Game.members[*state - 1].u.turn.damage_flags.value & COMBATANT_FLAG_UNK_3) {
+            if (g_Game.members[*state - 1].u.turn.damage_flags.value & BATTLER_DAMAGE_UNK_3) {
                 g_Game.members[*state - 1].u.turn.damage_flags.value &= clear_flag;
                 Battle_AddMessage(1, 0, Message_GetText(BATTLE_TEXT_CANT_LEARN));
                 return;

@@ -18,7 +18,7 @@ MATCH void func_801E8558(void) {
     }
     stage->unk_48 = 0;
     work          = g_BattleEffectBattler;
-    g_Game.members[work->slot].u.turn.damage_flags.value &= ~COMBATANT_FLAG_FORM_EFFECT_PLAYING;
+    g_Game.members[work->slot].u.turn.damage_flags.value &= ~BATTLER_DAMAGE_FORM_EFFECT_PLAYING;
     g_Game.members[work->slot].u.turn.action_flags.value &=
         ~(COMBATANT_FLAG_DRAGON_FORM | COMBATANT_FLAG_ABILITY_ALT_POSE | COMBATANT_FLAG_DRAGON_FORM_BERSERK | COMBATANT_FLAG_DRAGON_FORM_CONTROLLED);
     Effect_Reset();

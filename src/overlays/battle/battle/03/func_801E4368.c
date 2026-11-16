@@ -14,7 +14,7 @@ MATCH u8 func_801E4368(void) {
         if ((BATTLE_CURRENT_ENEMY_PTR->event_flags & ENEMY_EVENT_REPRISAL) == 0u) {
             return 0u;
         }
-        if ((BATTLE_CURRENT_ENEMY_PTR->turn.damage_flags.value & COMBATANT_FLAG_REPRISAL) != 0u) {
+        if ((BATTLE_CURRENT_ENEMY_PTR->turn.damage_flags.value & BATTLER_DAMAGE_REPRISAL) != 0u) {
             return 1u;
         }
         if ((RANDOM_PERCENT()) < 0x46) {

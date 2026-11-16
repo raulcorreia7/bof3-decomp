@@ -6,7 +6,7 @@ MATCH void Battle_ReloadPartySprites(void) {
     i = 0u;
     if (g_BattlePartyCount != 0u) {
         do {
-            if ((g_Game.members[i].u.turn.damage_flags.value & COMBATANT_FLAG_FORM_EFFECT_PLAYING) != 0u) {
+            if ((g_Game.members[i].u.turn.damage_flags.value & BATTLER_DAMAGE_FORM_EFFECT_PLAYING) != 0u) {
                 return;
             }
             i += 1u;

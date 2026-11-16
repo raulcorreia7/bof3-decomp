@@ -9,8 +9,8 @@ MATCH void Battle_GrantDamageImmunity(void) {
     Battle_MarkDamageApplied();
     battler = LOBU(g_Battle.active_battler);
     if (BATTLER_IS_PLAYER(battler)) {
-        g_Game.members[battler].u.turn.damage_flags.value |= COMBATANT_FLAG_DAMAGE_IMMUNE;
+        g_Game.members[battler].u.turn.damage_flags.value |= BATTLER_DAMAGE_IMMUNE;
         return;
     }
-    ENEMY_COMBATANT(battler).turn.damage_flags.value |= COMBATANT_FLAG_DAMAGE_IMMUNE;
+    ENEMY_COMBATANT(battler).turn.damage_flags.value |= BATTLER_DAMAGE_IMMUNE;
 }

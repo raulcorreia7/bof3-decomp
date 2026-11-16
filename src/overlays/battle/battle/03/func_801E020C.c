@@ -39,14 +39,14 @@ MATCH void func_801E020C(void) {
             *half = (*half & ~BATTLE_STATE_REPRISAL_PENDING) | BATTLE_STATE_REPRISAL_DONE;
         }
         Battle_ClearSlotPending(g_Task->slot);
-        g_Game.current->u.turn.damage_flags.value &= ~(COMBATANT_FLAG_UNK_4 | COMBATANT_FLAG_UNK_5 | COMBATANT_FLAG_DAMAGED);
+        g_Game.current->u.turn.damage_flags.value &= ~(BATTLER_DAMAGE_UNK_4 | BATTLER_DAMAGE_UNK_5 | BATTLER_DAMAGE_TAKEN);
         if ((func_801E0E0C() & BYTE_MASK) != 0) {
             /* FAKE: flag pointer; the direct store scores 97.37%. */
             volatile u8* flag;
             flag = &g_Battle.outcome.result;
             *flag |= 1;
         }
-        g_Game.current->u.turn.damage_flags.value &= ~COMBATANT_FLAG_DAMAGE_ROW_PRESENT;
+        g_Game.current->u.turn.damage_flags.value &= ~BATTLER_DAMAGE_ROW_PRESENT;
         g_Task->header.mode = 2;
         g_Task->header.step = 0;
     }

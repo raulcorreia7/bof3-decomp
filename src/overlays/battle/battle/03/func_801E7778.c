@@ -18,7 +18,7 @@ MATCH void func_801E7778(void) {
     } else {
         work->unk_48                                    = 0;
         index                                           = g_BattleEffectBattler->slot;
-        value                                           = g_Game.members[index].u.turn.damage_flags.value & ~COMBATANT_FLAG_FORM_EFFECT_PLAYING;
+        value                                           = g_Game.members[index].u.turn.damage_flags.value & ~BATTLER_DAMAGE_FORM_EFFECT_PLAYING;
         g_Game.members[index].u.turn.damage_flags.value = value;
         Effect_Reset();
     }

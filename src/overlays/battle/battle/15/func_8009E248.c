@@ -12,14 +12,14 @@ NON_MATCHING void func_8009E248(void) {
     id = g_Battle.active_battler;
     if (!(Battle_PickAbility(id, g_Battle.target) & BYTE_MASK)) {
         if (BATTLER_IS_PLAYER(g_Battle.target)) {
-            if (!(g_Game.members[g_Battle.target].u.turn.damage_flags.volatile_value & COMBATANT_FLAG_DAMAGE_IMMUNE)) {
+            if (!(g_Game.members[g_Battle.target].u.turn.damage_flags.volatile_value & BATTLER_DAMAGE_IMMUNE)) {
                 hp = g_Game.members[g_Battle.target].chr.hp;
             } else {
                 hp = 0;
             }
         } else {
             enemy = g_Battle.target - 3;
-            if (g_BattleEnemyBattlers[enemy].turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_IMMUNE) {
+            if (g_BattleEnemyBattlers[enemy].turn.damage_flags.value & BATTLER_DAMAGE_IMMUNE) {
                 hp = 0;
             } else {
                 hp = g_BattleEnemyBattlers[enemy].hp;

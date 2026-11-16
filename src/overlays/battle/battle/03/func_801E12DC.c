@@ -11,13 +11,13 @@ MATCH void func_801E12DC(void) {
 
     i = 0;
     while (i < g_Battle.party_count) {
-        if ((g_Game.members[i].u.turn.damage_flags.value & COMBATANT_FLAG_FORM_EFFECT_PLAYING) != 0u) {
+        if ((g_Game.members[i].u.turn.damage_flags.value & BATTLER_DAMAGE_FORM_EFFECT_PLAYING) != 0u) {
             return;
         }
         i++;
     }
     work = g_Game.current;
-    work->u.turn.damage_flags.value |= COMBATANT_FLAG_FORM_EFFECT_PLAYING;
+    work->u.turn.damage_flags.value |= BATTLER_DAMAGE_FORM_EFFECT_PLAYING;
     if (work->chr.character_id == CHAR_ID_REI) {
         slot = Battle_AllocEffect(0, 11) & BYTE_MASK;
     } else {

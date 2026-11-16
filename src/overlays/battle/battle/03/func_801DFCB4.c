@@ -38,7 +38,7 @@ MATCH void func_801DFCB4(void) {
     if (HAS_STATUS(*stats_work, 0x800)) {
         D_801EC2EE = 1;
     }
-    if (stats_work->u.turn.damage_flags.value & COMBATANT_FLAG_COMMAND_ENTERED) {
+    if (stats_work->u.turn.damage_flags.value & BATTLER_DAMAGE_COMMAND_ENTERED) {
         D_801EC303 = (D_801EC303 + 25 >= 100) ? 100 : D_801EC303 + 25;
     }
     switch (LOBU(g_Battle.action_type)) {
@@ -55,7 +55,7 @@ MATCH void func_801DFCB4(void) {
         g_Task->header.step = 3;
         return;
     }
-    if (!(g_Game.current->u.turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_ROW_PRESENT)) {
+    if (!(g_Game.current->u.turn.damage_flags.value & BATTLER_DAMAGE_ROW_PRESENT)) {
         switch (LOBU(g_Battle.action_type)) {
             case BATTLE_ACTION_ITEM:
                 if (!(Item_GetFlags(LOHU(g_Battle.action_id) >> 8, LOHU(g_Battle.action_id) & BYTE_MASK) & 0x4)) {

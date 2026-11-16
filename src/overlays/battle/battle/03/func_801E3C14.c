@@ -49,7 +49,7 @@ MATCH void func_801E3C14(void) {
         g_Task->header.step = 3;
         return;
     }
-    if (!(g_BattleCurrentEnemy->turn.damage_flags.value & COMBATANT_FLAG_DAMAGE_ROW_PRESENT)) {
+    if (!(g_BattleCurrentEnemy->turn.damage_flags.value & BATTLER_DAMAGE_ROW_PRESENT)) {
         if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ATTACK) {
             Battle_RequestEnemyScript(4);
         }

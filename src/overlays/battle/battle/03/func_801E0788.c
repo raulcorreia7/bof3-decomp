@@ -11,7 +11,7 @@ MATCH void func_801E0788(void) {
     Battle_GetTurnCursor(g_Task->slot);
     Battle_CancelTurn(g_Task->slot);
     w = g_Game.current;
-    if (w->u.turn.damage_flags.value & COMBATANT_FLAG_WILLPOWER_SURVIVED) {
+    if (w->u.turn.damage_flags.value & BATTLER_DAMAGE_WILLPOWER_SURVIVED) {
         g_Task->unk_09 = 30;
         g_Task->unk_03 = 1;
         g_Task->unk_04 = 0;
@@ -59,7 +59,7 @@ MATCH void func_801E0788(void) {
         } else {
             Battle_ClearSlotPending(g_Task->slot);
             w                            = g_Game.current;
-            flags                        = w->u.turn.damage_flags.value & ~(COMBATANT_FLAG_UNK_4 | COMBATANT_FLAG_UNK_5 | COMBATANT_FLAG_DAMAGED);
+            flags                        = w->u.turn.damage_flags.value & ~(BATTLER_DAMAGE_UNK_4 | BATTLER_DAMAGE_UNK_5 | BATTLER_DAMAGE_TAKEN);
             w->u.turn.damage_flags.value = flags & ~0x200;
             g_Task->header.mode          = 3;
             g_Task->header.step          = 0;

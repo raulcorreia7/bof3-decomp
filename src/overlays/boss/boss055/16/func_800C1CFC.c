@@ -7,7 +7,7 @@ MATCH void func_800C1CFC(void) {
     Battle_DefeatEnemy();
     GFX_FreePaletteSlotOwner(g_Task);
     work = g_BattleCurrentEnemy;
-    work->turn.damage_flags.value |= COMBATANT_FLAG_SKIP_ACTION_STEP;
+    work->turn.damage_flags.value |= BATTLER_DAMAGE_SKIP_ACTION_STEP;
     g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
     ACTOR_SET_MODE(2);
     g_Task->header.step = 0;
