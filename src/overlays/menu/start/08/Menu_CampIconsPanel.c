@@ -2,6 +2,6 @@
 
 /* func_801E9304 */
 MATCH void Menu_CampIconsPanel(void) {
-    g_MenuStartCampIconsStates[g_MenuCurrentPanel->state]();
+    g_MenuStartCampIconsSteps[g_MenuCurrentPanel->state]();
     Menu_DrawCampIcons();
 }

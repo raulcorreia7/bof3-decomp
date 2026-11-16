@@ -144,7 +144,7 @@ MATCH void func_801D2F68(void) {
 }
 
 MATCH void func_801D2F9C(void) {
-    SYS_DISPATCH_TASK(g_MenuStatusTaskFuncs, 2, g_MenuCurrentPanel);
+    SYS_DISPATCH_TASK(g_MenuStatusTaskSteps, 2, g_MenuCurrentPanel);
 }
 
 MATCH void func_801D2FE0(void) {
@@ -157,7 +157,7 @@ MATCH void Menu_DrawPanelCursor(void) {
 MATCH void func_801D3018(void) {
     s16 id;
 
-    g_MenuStatusTask1StateFuncs[g_MenuCurrentPanel->state]();
+    g_MenuStatusTask1Steps[g_MenuCurrentPanel->state]();
     Menu_DrawHeaderBar(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     id = (s16)g_MenuCurrentPanel->u.message.id;
     if (id != 0) {
@@ -182,7 +182,7 @@ MATCH void func_801D3124(void) {
 
 /* func_801D3164 */
 MATCH void Menu_StatusCommandsPanel(void) {
-    g_MenuStatusTask2StateFuncs[g_MenuCurrentPanel->state]();
+    g_MenuStatusTask2Steps[g_MenuCurrentPanel->state]();
     Menu_DrawCommandRow(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, g_MenuCurrentPanel->unk_0A, g_MenuCurrentPanel->unk_0B, 0);
 }
 
@@ -203,7 +203,7 @@ MATCH void Menu_SetPosY(void) {
 }
 
 MATCH void func_801D324C(void) {
-    g_MenuStatusTask3StateFuncs[g_MenuCurrentPanel->state]();
+    g_MenuStatusTask3Steps[g_MenuCurrentPanel->state]();
     func_801D3320(g_MenuCurrentPanel);
 }
 

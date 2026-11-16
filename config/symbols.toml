@@ -3486,7 +3486,7 @@ g_SaveCardPortLabelSecond = { addr = 0x801D0D7C, source = "Label of memory card 
 func_801D0D80 = { addr = 0x801D0D80, type = "func", source = "Entry of the Shisu menu: dispatches on the menu step byte g_MenuStep.step through the D_801D96DC handlers." }
 Menu_SetState = { addr = 0x801D18E4, type = "func", source = "the body stores into g_MenuStep.state" }
 Menu_DrawPanelCursor = { addr = 0x801D2FE8, type = "func", source = "Draws the menu panel cursor at the x and y of the current task root through Menu_DrawCursorSprite." }
-Menu_StatusCommandsPanel = { addr = 0x801D3164, type = "func", source = "Entry at 0x801D9754 of the shisu step table: runs the g_MenuStatusTask2StateFuncs handler of the panel state and draws the command row, like Menu_CommandsPanel in the start menu." }
+Menu_StatusCommandsPanel = { addr = 0x801D3164, type = "func", source = "Entry at 0x801D9754 of the shisu step table: runs the g_MenuStatusTask2Steps handler of the panel state and draws the command row, like Menu_CommandsPanel in the start menu." }
 Menu_SetPosY = { addr = 0x801D320C, type = "func", source = "the body stores into g_MenuCurrentPanel->pos.y" }
 Menu_SetPosX = { addr = 0x801D32E0, type = "func", source = "the body stores into g_MenuCurrentPanel->pos.x" }
 Menu_DrawCharacterWindow = { addr = 0x801D376C, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
@@ -3521,15 +3521,15 @@ Menu_DrawPanelFrame = { addr = 0x801D8850, type = "func", source = "Draws the 8-
 Menu_DrawEquipChoiceWindow = { addr = 0x801D8A78, type = "func", source = "Draws the equip list: gathers the inventory rows of the equipment slot's category (unk_09) that the party member can equip, armor only of the slot's type, into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts, then draws them with the category title, the choice count and the scroll bar." }
 SAVE_DrawSlotRow = { addr = 0x801D91B0, type = "func", source = "Draws one save slot row: the window, the party icons, the name, the level, the play time and the experience line; a NULL row draws only the window." }
 SAVE_DrawPortTabs = { addr = 0x801D94B0, type = "func", source = "Draws the memory card port panel: the title, the two port tabs and the cursor at the selected port." }
-g_MenuStatusStates = { addr = 0x801D96DC, source = "the shisu overlay step handlers, indexed by the menu step byte" }
-g_MenuStatusStep1Funcs = { addr = 0x801D96F0, source = "2 sub-step handlers of step 1 of the status menu, called by func_801D0E4C (the step 1 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
-g_MenuStatusStep3Funcs = { addr = 0x801D96F8, source = "2 sub-step handlers of step 3 of the status menu, called by func_801D0F24 (the step 3 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
-g_MenuStatusStep2Funcs = { addr = 0x801D9700, source = "3 sub-step handlers of step 2 of the status menu, called by func_801D11A4 (the step 2 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
-g_MenuStatusStep2Sub2Funcs = { addr = 0x801D970C, source = "5 handlers of sub-step 2 of step 2 of the status menu, called by func_801D1898 (the sub-step 2 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
-g_MenuStatusTaskFuncs = { addr = 0x801D974C, source = "Task state handlers of the status menu, dispatched by SYS_DISPATCH_TASK." }
-g_MenuStatusTask1StateFuncs = { addr = 0x801D975C, source = "the state handlers of panel task mode 1, indexed by the panel task state" }
-g_MenuStatusTask2StateFuncs = { addr = 0x801D9768, source = "the state handlers of panel task mode 2, indexed by the panel task state" }
-g_MenuStatusTask3StateFuncs = { addr = 0x801D9774, source = "the state handlers of panel task mode 3, indexed by the panel task state" }
+g_MenuStatusSteps = { addr = 0x801D96DC, source = "the shisu overlay step handlers, indexed by the menu step byte" }
+g_MenuStatusStep1Steps = { addr = 0x801D96F0, source = "2 sub-step handlers of step 1 of the status menu, called by func_801D0E4C (the step 1 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_MenuStatusStep3Steps = { addr = 0x801D96F8, source = "2 sub-step handlers of step 3 of the status menu, called by func_801D0F24 (the step 3 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_MenuStatusStep2Steps = { addr = 0x801D9700, source = "3 sub-step handlers of step 2 of the status menu, called by func_801D11A4 (the step 2 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_MenuStatusStep2Sub2Steps = { addr = 0x801D970C, source = "5 handlers of sub-step 2 of step 2 of the status menu, called by func_801D1898 (the sub-step 2 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_MenuStatusTaskSteps = { addr = 0x801D974C, source = "Task state handlers of the status menu, dispatched by SYS_DISPATCH_TASK." }
+g_MenuStatusTask1Steps = { addr = 0x801D975C, source = "the state handlers of panel task mode 1, indexed by the panel task state" }
+g_MenuStatusTask2Steps = { addr = 0x801D9768, source = "the state handlers of panel task mode 2, indexed by the panel task state" }
+g_MenuStatusTask3Steps = { addr = 0x801D9774, source = "the state handlers of panel task mode 3, indexed by the panel task state" }
 D_801D97A4 = { addr = 0x801D97A4, source = "Sprite run drawn by Menu_DrawCharacterWindow: it follows D_801D979C, the play time caption, by 8 bytes." }
 g_MenuStatFrameLeft = { addr = 0x801D9834, source = "Sprite run of the left end of the stat panel border, drawn by Menu_DrawStatPanel." }
 g_MenuStatFrameMiddle = { addr = 0x801D9860, source = "Sprite run repeated 16 times along the stat panel border, drawn by Menu_DrawStatPanel." }
@@ -3892,7 +3892,7 @@ Menu_StartNewGame = { addr = 0x801E2584, type = "func", source = "Starts a new g
 Menu_DrawOptionRow = { addr = 0x801E2898, type = "func", source = "Draws one row of the options menu (rows 0 to 5): a window grown by the selection step, the option name centred at x + 58 (Msg Speed, Window Clr, Background, Sound, Autorun or Controller) and the divider line." }
 Menu_DrawGlyphAt = { addr = 0x801E33E8, type = "func", source = "Draws the glyph of one text code as a POLY_FT4 from the 21-per-row glyph atlas and returns the cursor past the code; bytes 0x12 and 0x13 select the second atlas page, 0x15 adds 0x64 and codes from 0x5B add 0x23." }
 Menu_SetGlyphPage = { addr = 0x801E3E34, type = "func", source = "Selects the texture page at VRAM x 960 and the given y for the glyph draw. Called by Menu_DrawGlyphAt." }
-Menu_UpdateCamp = { addr = 0x801E462C, type = "func", source = "Slot 2 of g_MenuCampSubstates, before Menu_ExitCamp: runs the D_801ED138[g_MenuStartStep] handler and draws the area scene through Area_DrawScene." }
+Menu_UpdateCamp = { addr = 0x801E462C, type = "func", source = "Slot 2 of g_MenuCampSteps, before Menu_ExitCamp: runs the D_801ED138[g_MenuStartStep] handler and draws the area scene through Area_DrawScene." }
 SAVE_RunLoadVerify = { addr = 0x801E5A00, type = "func", source = "Reads the save file through SAVE_AccessFile, copies the image to D_801448D8 and compares the masked byte sum with the stored word D_800C1A70." }
 SAVE_RunLoadRestore = { addr = 0x801E5FD4, type = "func", source = "Restores the game from the loaded save: g_InputMasks from D_80145594, g_Game.party_size from Party_CountOrder(0), the PLP and PL archives of g_EmiLoadedCharacterIndex, then Party_BuildBattlers(0)." }
 Menu_ExitCamp = { addr = 0x801E62A8, type = "func", source = "Camp menu step 4: calls Char_RebuildStats on each of the eight g_Characters entries, then replaces the callback with Game_RunMain." }
@@ -3927,17 +3927,17 @@ Menu_CommandsPanel = { addr = 0x801EA0B0, type = "func", source = "panel mode 13
 Menu_DrawPanelCursor = { addr = 0x801EA198, type = "func", source = "Draws the menu panel cursor at the x and y of the current task root through Menu_DrawCursorSprite." }
 Menu_EquipComparePanel = { addr = 0x801EA50C, type = "func", source = "panel mode 16 of the start menu: the equipment compare window" }
 Menu_AbilitiesPanel = { addr = 0x801EA698, type = "func", source = "panel mode 17 of the start menu: the ten-row ability list" }
-Menu_EquipChoicePanel = { addr = 0x801EA7EC, type = "func", source = "Panel mode handler in g_MenuStartPanelModes: runs the g_MenuStartPanel18StateFuncs handler of the panel state and draws Menu_DrawEquipChoiceWindow." }
+Menu_EquipChoicePanel = { addr = 0x801EA7EC, type = "func", source = "Panel mode handler in g_MenuStartPanelModes: runs the g_MenuStartPanel18Steps handler of the panel state and draws Menu_DrawEquipChoiceWindow." }
 Menu_SlidePanelLeft2 = { addr = 0x801EA900, type = "func", source = "Moves the master panel 0x20 pixels left and clamps its x at 0x98; same bytes as Menu_SlidePanelLeft at 0x801EA070." }
 g_NewGameCharacters = { addr = 0x801EB514, size = 0x520, source = "The eight base character records a new game starts with (Ryu, Nina, Garr, Teepo, Rei, Momo, Peco and Whelp); Party_InitDefaults copies them into g_Characters." }
 g_NewGameWillpowerCurves = { addr = 0x801EBA34, size = 0x10, source = "Per starting character, the level divisor and base of its starting willpower: Party_InitDefaults computes level * 16 / divisor + base." }
 s_CampMenuPanelIds = { addr = 0x801EC354, source = "Panel ids of the seven start menu panel slots that func_801E9350 draws." }
-g_MenuStartStates = { addr = 0x801EC35C, source = "the 9 step handlers of the start menu, called by Menu_DispatchStep and indexed by the menu step byte g_MenuStep.step" }
-g_MenuStartStep6Funcs = { addr = 0x801EC394, source = "5 sub-step handlers of step 6 of the start menu, called by func_801D2410 (the step 6 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
-g_MenuStartStep2Funcs = { addr = 0x801EC3A8, source = "11 sub-step handlers of step 2 of the start menu, called by func_801D2DAC (the step 2 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_MenuStartSteps = { addr = 0x801EC35C, source = "the 9 step handlers of the start menu, called by Menu_DispatchStep and indexed by the menu step byte g_MenuStep.step" }
+g_MenuStartStep6Steps = { addr = 0x801EC394, source = "5 sub-step handlers of step 6 of the start menu, called by func_801D2410 (the step 6 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_MenuStartStep2Steps = { addr = 0x801EC3A8, source = "11 sub-step handlers of step 2 of the start menu, called by func_801D2DAC (the step 2 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
 s_EquipSlotCategories = { addr = 0x801EC458, source = "func_801D6E6C uses these cue ids for the six party slot sound updates" }
-g_MenuStartStep5Funcs = { addr = 0x801EC518, source = "6 sub-step handlers of step 5 of the start menu, called by func_801D970C (the step 5 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
-g_MenuStartStep5Sub2Funcs = { addr = 0x801EC530, source = "3 handlers of sub-step 2 of step 5 of the start menu, called by func_801D9AF0 (the sub-step 2 handler of step 5) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_MenuStartStep5Steps = { addr = 0x801EC518, source = "6 sub-step handlers of step 5 of the start menu, called by func_801D970C (the step 5 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_MenuStartStep5Sub2Steps = { addr = 0x801EC530, source = "3 handlers of sub-step 2 of step 5 of the start menu, called by func_801D9AF0 (the sub-step 2 handler of step 5) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
 g_MenuStatFrameLeft = { addr = 0x801EC628, source = "Sprite run of the left end of the stat panel border, drawn by Menu_DrawStatPanel." }
 g_MenuStatFrameMiddle = { addr = 0x801EC654, source = "Sprite run repeated 16 times along the stat panel border, drawn by Menu_DrawStatPanel." }
 g_MenuStatFrameRight = { addr = 0x801EC660, source = "Sprite run of the right end of the stat panel border, drawn by Menu_DrawStatPanel." }
@@ -3988,25 +3988,25 @@ s_PanelIconSelectors = { addr = 0x801ED1D8, source = "func_801E7210 reads the th
 s_PanelIconValues = { addr = 0x801ED1F0, source = "func_801E7210 fills the panel icon bytes from this value table" }
 g_SaveRecordTypeCommands = { addr = 0x801ED2D4, source = "func_801E8C9C picks the record-kind handler through this table" }
 g_MenuStartPanelModes = { addr = 0x801ED330, source = "the MenuStart panel handlers, indexed by the panel task mode; the dispatcher of each is one entry" }
-g_MenuStartCharacterStates = { addr = 0x801ED384, source = "the state handlers of panel mode 0, indexed by the panel task state" }
-g_MenuStartZennyStates = { addr = 0x801ED3B0, source = "the state handlers of panel mode 1, indexed by the panel task state" }
-g_MenuStartPlayTimeStates = { addr = 0x801ED3BC, source = "the state handlers of panel mode 2, indexed by the panel task state" }
-g_MenuStartCampIconsStates = { addr = 0x801ED3C8, source = "the state handlers of panel mode 3, indexed by the panel task state" }
-g_MenuStartTitleStates = { addr = 0x801ED3D4, source = "the state handlers of panel mode 4, indexed by the panel task state" }
-g_MenuStartStatsStates = { addr = 0x801ED3E0, source = "the state handlers of panel mode 5, indexed by the panel task state" }
-g_MenuStartEquipmentStates = { addr = 0x801ED3FC, source = "the state handlers of panel mode 6, indexed by the panel task state" }
-g_MenuStartPanel7StateFuncs = { addr = 0x801ED408, source = "the state handlers of panel mode 7, indexed by the panel task state" }
-g_MenuStartPanel8StateFuncs = { addr = 0x801ED414, source = "the state handlers of panel mode 8, indexed by the panel task state" }
-g_MenuStartMessageStates = { addr = 0x801ED420, source = "the state handlers of panel mode 9, indexed by the panel task state" }
+g_MenuStartCharacterSteps = { addr = 0x801ED384, source = "the state handlers of panel mode 0, indexed by the panel task state" }
+g_MenuStartZennySteps = { addr = 0x801ED3B0, source = "the state handlers of panel mode 1, indexed by the panel task state" }
+g_MenuStartPlayTimeSteps = { addr = 0x801ED3BC, source = "the state handlers of panel mode 2, indexed by the panel task state" }
+g_MenuStartCampIconsSteps = { addr = 0x801ED3C8, source = "the state handlers of panel mode 3, indexed by the panel task state" }
+g_MenuStartTitleSteps = { addr = 0x801ED3D4, source = "the state handlers of panel mode 4, indexed by the panel task state" }
+g_MenuStartStatsSteps = { addr = 0x801ED3E0, source = "the state handlers of panel mode 5, indexed by the panel task state" }
+g_MenuStartEquipmentSteps = { addr = 0x801ED3FC, source = "the state handlers of panel mode 6, indexed by the panel task state" }
+g_MenuStartPanel7Steps = { addr = 0x801ED408, source = "the state handlers of panel mode 7, indexed by the panel task state" }
+g_MenuStartPanel8Steps = { addr = 0x801ED414, source = "the state handlers of panel mode 8, indexed by the panel task state" }
+g_MenuStartMessageSteps = { addr = 0x801ED420, source = "the state handlers of panel mode 9, indexed by the panel task state" }
 g_MenuStartCursorFrames = { addr = 0x801ED42C, size = 0x10, source = "The width and height of the frame the cursor-frame panel draws, indexed by the panel's frame kind" }
-g_MenuStartPanel11StateFuncs = { addr = 0x801ED43C, source = "the state handlers of panel mode 11, indexed by the panel task state" }
-g_MenuStartInventoryStates = { addr = 0x801ED448, source = "the state handlers of panel mode 12, indexed by the panel task state" }
-g_MenuStartCommandsStates = { addr = 0x801ED45C, source = "the state handlers of panel mode 13, indexed by the panel task state" }
-g_MenuStartEquipCompareStates = { addr = 0x801ED58C, source = "the state handlers of panel mode 16, indexed by the panel task state" }
-g_MenuStartAbilitiesStates = { addr = 0x801ED5A0, source = "the state handlers of panel mode 17, indexed by the panel task state" }
-g_MenuStartPanel18StateFuncs = { addr = 0x801ED5B4, source = "the state handlers of panel mode 18, indexed by the panel task state" }
-g_MenuStartPanel19StateFuncs = { addr = 0x801ED5C8, source = "the state handlers of panel mode 19, indexed by the panel task state" }
-g_MenuStartPanel20StateFuncs = { addr = 0x801ED5E4, source = "the state handlers of panel mode 20, indexed by the panel task state" }
+g_MenuStartPanel11Steps = { addr = 0x801ED43C, source = "the state handlers of panel mode 11, indexed by the panel task state" }
+g_MenuStartInventorySteps = { addr = 0x801ED448, source = "the state handlers of panel mode 12, indexed by the panel task state" }
+g_MenuStartCommandsSteps = { addr = 0x801ED45C, source = "the state handlers of panel mode 13, indexed by the panel task state" }
+g_MenuStartEquipCompareSteps = { addr = 0x801ED58C, source = "the state handlers of panel mode 16, indexed by the panel task state" }
+g_MenuStartAbilitiesSteps = { addr = 0x801ED5A0, source = "the state handlers of panel mode 17, indexed by the panel task state" }
+g_MenuStartPanel18Steps = { addr = 0x801ED5B4, source = "the state handlers of panel mode 18, indexed by the panel task state" }
+g_MenuStartPanel19Steps = { addr = 0x801ED5C8, source = "the state handlers of panel mode 19, indexed by the panel task state" }
+g_MenuStartPanel20Steps = { addr = 0x801ED5E4, source = "the state handlers of panel mode 20, indexed by the panel task state" }
 s_PartyCharacterIds = { addr = 0x801ED610, source = "The three party character ids that func_801D177C and func_801D21F4 keep." }
 g_EquipPreview = { addr = 0x801ED63C, source = "Six equipment ids of the character being tried on: func_801D6FBC copies them here and replaces the slot being tried, func_801D6E6C commits them." }
 g_MenuFormationArrowTurned = { addr = 0x801ED6A8, source = "The ground arrow corners turned by the preview angle, x at twice the scale of y." }
