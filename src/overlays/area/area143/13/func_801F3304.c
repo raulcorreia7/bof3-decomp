@@ -1,8 +1,7 @@
 #include "area143_13.h"
 #include "game/functions.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F3304(void) {
+MATCH void func_801F3304(void) {
     s32 current;
     s32 height;
     s32 top;
@@ -70,7 +69,7 @@ NON_MATCHING void func_801F3304(void) {
         value = point5;
     }
     point5 = value;
-    point6 = height - 0xC0;
+    point6 = g_Task->pos.z.fixed - 0xC0;
     if (point6 < 0) {
         point6 = 0;
     }
@@ -79,7 +78,7 @@ NON_MATCHING void func_801F3304(void) {
         value = point6;
     }
     point6 = value;
-    point7 = height - 0xE0;
+    point7 = g_Task->pos.z.fixed - 0xE0;
     if (point7 < 0) {
         point7 = 0;
     }
@@ -88,7 +87,7 @@ NON_MATCHING void func_801F3304(void) {
         value = point7;
     }
     point7 = value;
-    point8 = height - 0x100;
+    point8 = g_Task->pos.z.fixed - 0x100;
     if (point8 < 0) {
         point8 = 0;
     }
@@ -116,6 +115,3 @@ NON_MATCHING void func_801F3304(void) {
         func_80196070();
     }
 }
-#else
-INCLUDE_ASM(func_801F3304);
-#endif
