@@ -41,12 +41,14 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
 
     byte = table[state->index_0A];
     switch (byte) {
-        case ACTOR_SCRIPT_STAGE_SET_SCRIPT_ACTIVE:
-            g_Game.flags |= GAME_FLAG_SCRIPT_ACTIVE;
+        case ACTOR_SCRIPT_STAGE_SET_SCRIPT_ACTIVE: {
+            (*(volatile u16*)&g_Game.flags) |= GAME_FLAG_SCRIPT_ACTIVE;
             break;
-        case ACTOR_SCRIPT_STAGE_CLEAR_SCRIPT_ACTIVE:
-            g_Game.flags &= ~GAME_FLAG_SCRIPT_ACTIVE;
+        }
+        case ACTOR_SCRIPT_STAGE_CLEAR_SCRIPT_ACTIVE: {
+            (*(volatile u16*)&g_Game.flags) &= ~GAME_FLAG_SCRIPT_ACTIVE;
             break;
+        }
         case ACTOR_SCRIPT_STAGE_FADE_WHITE:
             state->flags |= ACTOR_FLAG_FADE_WHITE;
             break;

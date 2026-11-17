@@ -43,7 +43,7 @@ NON_MATCHING u8 func_801B0E44(void) {
             result = Area_ReadStepHeight(*(s32*)&D_1F800008, SP_REF(s32, 0xC), g_Task->direction_08);
             func_801B13BC();
             if (((u8*)pos2)[-8] != 0) {
-                if ((s16)result >= 0x41) {
+                if (result >= 0x41) {
                     if (!(func_801A0048(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK) && (g_Task == (void*)g_Game.members)) {
                         if (Area_SetCellPalette(D_80145EC6, D_80145ECA) & BYTE_MASK) {
                             SND_PlaySE(D_801CD0F4[((u8*)pos2)[-7]]);
@@ -81,7 +81,7 @@ NON_MATCHING u8 func_801B0E44(void) {
             pos3   = (s32*)&D_1F800008;
             result = Area_ReadStepHeight(pos3[0], pos3[1], g_Task->direction_08);
             if (SP_REF(u8, 0x0) != 0) {
-                if ((s16)result >= 0x41) {
+                if (result >= 0x41) {
                     g_AreaCameraStep     = 0;
                     g_Task->direction_08 = saved_dir;
                     return 1;
