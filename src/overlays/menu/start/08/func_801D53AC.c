@@ -5,15 +5,13 @@ NON_MATCHING void func_801D53AC(void) {
     s32 pressed;
     u8  old;
     u16 x;
-    u16 y;
     u16 id;
 
     Menu_DrawClutStrip(D_80144953);
     id                                                          = D_801EC440[(s8)D_801ED620];
     x                                                           = (u16)g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.x + (s8)D_801ED620 * 0x30;
-    y                                                           = (u16)g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.y + 4;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = y;
+    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.y + 4;
     g_MenuPanelTasks[MENU_START_PANEL_ITEMS].flags              = 1;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = x;
     g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B          = 0xFF;
