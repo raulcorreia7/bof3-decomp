@@ -10,6 +10,7 @@ NON_MATCHING void func_801BFB34(void) {
     s32          size;
     s32          count;
     s32          value;
+    u8*          party_size;
     /* FAKE: unused frame, 32 bytes. */
     FAKE_STACK_PADS(u8, 32);
 
@@ -54,7 +55,8 @@ NON_MATCHING void func_801BFB34(void) {
             g_Game.members[i].pos.y.fixed        = value;
             g_Game.members[i].pos.z.part.integer = Area_ReadHeight(g_Game.members[i].pos.x.fixed, value);
             i++;
-            size = g_Game.party_size;
+            party_size = &g_Game.party_size;
+            size       = *party_size;
         } while (i < size);
     }
     if (!(g_Battle.outcome.options & 0x80)) {
