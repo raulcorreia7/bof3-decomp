@@ -37,7 +37,7 @@ typedef struct Thread {
     u32      unk_0C;
     u32      open_arg;
     u8       pad_14[0x30];
-    u32      open_arg_2;
+    u32      stack;
     u8       pad_48[0x38];
 } Thread;
 
