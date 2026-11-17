@@ -4,8 +4,9 @@
  * count and the per-slot rows, then hands the first live battler the work
  * pointer.
  */
+/* func_801D1228 */
 #ifdef NON_MATCHING
-NON_MATCHING void func_801D1228(void) {
+NON_MATCHING void Battle_Reset(void) {
     u8* work_row;
     u8* src;
     u8* dest;
@@ -151,5 +152,5 @@ NON_MATCHING void func_801D1228(void) {
     g_Battle.phase.step += 1;
 }
 #else
-INCLUDE_ASM(func_801D1228);
+INCLUDE_ASM(Battle_Reset);
 #endif

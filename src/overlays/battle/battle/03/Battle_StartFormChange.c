@@ -3,7 +3,8 @@
 /* sets the selected local record flag, advances its state, and moves
  * the shared battle work counter forward.
  */
-MATCH void func_801E7888(void) {
+/* func_801E7888 */
+MATCH void Battle_StartFormChange(void) {
     PartyMember* work;
     u8           selection;
 

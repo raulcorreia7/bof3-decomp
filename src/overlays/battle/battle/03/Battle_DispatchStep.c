@@ -2,7 +2,7 @@
 
 /* func_801D11D8 */
 MATCH void Battle_DispatchStep(void) {
-    Callback handlers[2] = {func_801D1228, Battle_DispatchEntrance};
+    Callback handlers[2] = {Battle_Reset, Battle_DispatchEntrance};
 
     handlers[g_Battle.phase.step]();
 }

@@ -8,7 +8,8 @@
  * sits in the return-jump delay slot, which the assembler's delay-slot
  * filling only moves for a non-volatile store.
  */
-MATCH void func_801E8D04(void) {
+/* func_801E8D04 */
+MATCH void Battle_EndFormRestore(void) {
     u32 value;
 
     BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;

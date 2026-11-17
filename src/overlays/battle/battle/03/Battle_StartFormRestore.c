@@ -1,53 +1,21 @@
 #include "battle_03.h"
 
-/* Once the loader is ready, rebuilds the acting party battler from its template and refreshes its panel and palette. */
-MATCH void func_801E7BA0(void) {
+/* Rebuilds the acting party battler from its template in place and shows it again. */
+/* func_801E8684 */
+MATCH void Battle_StartFormRestore(void) {
     PartyMember* saved;
-    u8           slot;
-    u8           facing;
-    u8           i;
     u8*          cells;
+    u8           i;
 
-    if (!EMI_IsReady()) {
-        return;
-    }
-    GFX_FreePaletteFadeTarget(&g_Game.members[g_BattleEffectBattler->slot]);
-    if (g_Battle.flags & BATTLE_STATE_RELOAD_PARTY) {
-        g_Battle.living_party_count = 0;
-        g_Battle.party_count        = D_801463CF;
-        for (i = 0; i < g_Battle.party_count; i++) {
-            if (!(s_BattleBattlerTemplates[i].chr.status & 0x4000)) {
-                g_Battle.living_party_count++;
-            }
-        }
-        D_8014835E = g_Battle.party_count;
-        D_80148358 = s_BattleBattlerStepIds[g_Battle.party_count + 0x2B];
-        for (i = 1; i < g_Battle.party_count; i++) {
-            g_BattleEffects[(u8)Battle_AllocEffect(0, 0x11)].target.party = &g_Game.members[i];
-        }
-    }
-
-    saved       = g_Task;
-    g_Task      = g_BattleEffectBattler;
-    g_GameState = &g_Game.members[g_Task->slot];
-    if (g_Game.members[g_Task->slot].chr.character_id == CHAR_ID_RYU_ADULT || g_Game.members[g_Task->slot].chr.character_id == CHAR_ID_RYU_YOUNG) {
-        D_801EB4C8 = g_Game.members[g_Task->slot].chr.ap;
-        D_801EB4CC = g_Game.members[g_Task->slot].chr.status;
-        D_801EB4D0 = g_Game.members[g_Task->slot].u.turn.damage_flags.value;
-        D_801EB4D4 = g_Game.members[g_Task->slot].u.turn.action_flags.value;
-        D_801EB4CC &= ~0x4000;
-        D_801EB4D0 &= 0xFFFE7FFF;
-        D_801EB4D4 &= 0xFFF884FD;
-    }
-
-    slot                                     = g_Task->slot;
-    facing                                   = g_Game.members[slot].facing;
-    g_Game.members[slot]                     = s_BattleBattlerTemplates[slot];
+    saved                                    = g_Task;
+    g_Task                                   = g_BattleEffectBattler;
+    g_GameState                              = &g_Game.members[g_Task->slot];
+    g_Task->scale.x                          = 0;
+    g_Game.members[g_Task->slot]             = s_BattleBattlerTemplates[g_Task->slot];
     g_Game.members[g_Task->slot].header.mode = 6;
     g_Game.members[g_Task->slot].header.step = 4;
     g_Game.members[g_Task->slot].unk_03      = 4;
     g_Game.members[g_Task->slot].unk_04      = 1;
-    g_Game.members[g_Task->slot].facing      = facing;
     g_Game.members[g_Task->slot].unk_48      = 2;
     g_Game.members[g_Task->slot].scale.x     = 0;
     g_Game.members[g_Task->slot].u.turn.damage_flags.value |= BATTLER_DAMAGE_FORM_EFFECT_PLAYING;
@@ -75,14 +43,7 @@ MATCH void func_801E7BA0(void) {
     GFX_LoadPalette((u8*)(BATTLE_ACTION_BLOCK_TABLE + (g_Task->slot << 6)), 0);
     func_801DDAB4(g_Game.members[g_Task->slot].chr.status);
     GFX_UploadPaletteRows();
-    if (g_Battle.flags & BATTLE_STATE_RELOAD_PARTY) {
-        D_801454F5[0] = D_801463D4;
-        D_801454F6[0] = D_801463D5;
-    } else {
-        D_801454F5[g_Task->slot * 3] = D_801463D4;
-        D_801454F6[g_Task->slot * 3] = D_801463D5;
-    }
+    g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
     g_Task = saved;
-    g_Battle.flags &= ~BATTLE_STATE_RELOAD_PARTY;
     saved->header.mode++;
 }
