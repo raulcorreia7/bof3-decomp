@@ -8,6 +8,46 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EEC7C(void) {
+    BattleEffect*    slot;
+    BattleWorkImage* row;
+    u16*             dst;
+    u16*             src;
+    u8               index;
+    s32              i;
+
+    g_Task->param.unk_0B = 0;
+    g_Task->unk_09       = 0x18;
+    g_Task->header.mode += 1;
+    index                               = Battle_AllocEffect(1, 0x4B);
+    g_BattleEffects[index].header.mode  = 0;
+    g_BattleEffects[index].target.party = g_Task;
+    g_BattleEffects[index].unk_08       = g_BattleEffectBattler->facing;
+
+    g_Task->param.unk_0B += 1;
+    index                               = Battle_AllocEffect(1, 0x4B);
+    g_BattleEffects[index].header.mode  = 1;
+    g_BattleEffects[index].target.party = g_Task;
+
+    g_Task->param.unk_0B += 1;
+    BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
+    for (; i < AREA_PALETTE_COLORS; i++) {
+        *dst++ = *src++ | PSX_COLOR_STP_BIT;
+    }
+    g_GfxPalettePending = 1;
+    if (g_Battle.encounter != 0) {
+        if (g_BattleEnemyBattlers[(u8)(g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT)].unk_F0 == 0x29) {
+            index                   = Battle_AllocEffect(1, 0x4B);
+            slot                    = &g_BattleEffects[index];
+            row                     = (BattleWorkImage*)&g_BattleEnemyBattlers[(u8)(g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT)];
+            *(BattleWorkImage*)slot = *row;
+            slot->header.mode       = 2;
+            slot->unk_06            = 1;
+            slot->step_index        = 0x4B;
+            slot->header.step       = 0;
+            slot->arg.unk_09        = 0;
+            slot->unk_29            = 3;
+        }
+    }
 }
 #else
 INCLUDE_ASM(func_801EEC7C);
