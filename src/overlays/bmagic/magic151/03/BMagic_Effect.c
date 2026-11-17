@@ -163,7 +163,12 @@ MATCH void func_801EF388(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF484(void) {
+}
+#else
 INCLUDE_ASM(func_801EF484);
+#endif
 
 MATCH void func_801EF938(void) {
     if (g_Task->param.unk_0B == 2) {
