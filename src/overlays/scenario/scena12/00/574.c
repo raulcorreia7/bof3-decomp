@@ -322,7 +322,20 @@ MATCH void func_801F7F64(void) {
     D_80146872 = 1;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F7F78(void) {
+    switch (g_SceneState.step_05) {
+        case 0:
+            Game_ClearScriptActive();
+            g_SceneState.step_05 = 1;
+            break;
+        default:
+            break;
+    }
+}
+#else
 INCLUDE_ASM(func_801F7F78);
+#endif
 
 MATCH void func_801F886C(void) {
     SYS_DISPATCH_BYTE(D_801FD1C4, g_SceneState.state_04);
