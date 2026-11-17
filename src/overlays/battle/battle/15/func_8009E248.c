@@ -4,13 +4,11 @@
  */
 #ifdef NON_MATCHING
 NON_MATCHING void func_8009E248(void) {
-    s32 id;
     s32 enemy;
     s16 hp_bar;
     u16 hp;
 
-    id = g_Battle.active_battler;
-    if (!(Battle_PickAbility(id, g_Battle.target) & BYTE_MASK)) {
+    if (!(Battle_PickAbility(g_Battle.active_battler, g_Battle.target) & BYTE_MASK)) {
         if (BATTLER_IS_PLAYER(g_Battle.target)) {
             if (!(g_Game.members[g_Battle.target].u.turn.damage_flags.volatile_value & BATTLER_DAMAGE_IMMUNE)) {
                 hp = g_Game.members[g_Battle.target].chr.hp;
@@ -28,17 +26,17 @@ NON_MATCHING void func_8009E248(void) {
         hp_bar                            = hp / 5;
         g_Battle.target_record->hp_change = hp_bar;
         g_Battle.action->unk_08           = 1;
-        if (id < 3) {
-            if (g_Game.members[id].chr.stats.max_hp < g_Game.members[id].chr.hp + hp_bar) {
+        if (g_Battle.active_battler < 3) {
+            if (g_Game.members[g_Battle.active_battler].chr.stats.max_hp < g_Game.members[g_Battle.active_battler].chr.hp + hp_bar) {
                 g_Battle.action->unk_08 |= 4;
             }
-            Battle_QueueAction((s16)-Char_AddPoints(&g_Game.members[id].chr.hp, g_Game.members[id].chr.stats.max_hp, hp_bar), id);
+            Battle_QueueAction((s16)-Char_AddPoints(&g_Game.members[g_Battle.active_battler].chr.hp, g_Game.members[g_Battle.active_battler].chr.stats.max_hp, hp_bar), g_Battle.active_battler);
         } else {
-            enemy = id - 3;
+            enemy = g_Battle.active_battler - 3;
             if (g_BattleEnemyBattlers[enemy].stats.max_hp < g_BattleEnemyBattlers[enemy].hp + hp_bar) {
                 g_Battle.action->unk_08 |= 4;
             }
-            Battle_QueueAction((s16)-Char_AddPoints(&g_BattleEnemyBattlers[enemy].hp, g_BattleEnemyBattlers[enemy].stats.max_hp, hp_bar), id);
+            Battle_QueueAction((s16)-Char_AddPoints(&g_BattleEnemyBattlers[enemy].hp, g_BattleEnemyBattlers[enemy].stats.max_hp, hp_bar), g_Battle.active_battler);
         }
         g_Battle.action->unk_08 = 0;
         return;
