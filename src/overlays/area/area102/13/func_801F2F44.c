@@ -26,6 +26,7 @@ NON_MATCHING void func_801F2F44(s32 steps) {
     i       = 0;
     order   = 0;
     for (; i < 8; i++) {
+        FAKE_OPAQUE(steps);
         prim = g_GfxPrimCursor;
         SetPolyFT4(prim);
         SetShadeTex(prim, 0);
