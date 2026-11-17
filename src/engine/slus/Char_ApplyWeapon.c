@@ -4,10 +4,9 @@
  * Weapon.power and .weight, then by the weapon's own bonus to the stat block.
  */
 MATCH void Char_ApplyWeapon(Character* character) {
-    /* FAKE: record pinned to s1; the retail allocation keeps kind in s2. */
-    FAKE_REG(Character*, record, "s1");
-    Stats* stats;
-    u8     kind;
+    Character* record;
+    Stats*     stats;
+    u8         kind;
 
     record = character;
     kind   = record->equip.weapon;
