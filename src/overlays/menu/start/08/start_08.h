@@ -323,8 +323,8 @@ extern u8             s_CampMenuPanelIds[8];
 /* Entries of the step handler tables. */
 #define MENU_START_STEP_COUNT          9
 #define MENU_START_STEP2_COUNT         11
-#define MENU_START_STEP5_COUNT         6
-#define MENU_START_STEP5_SUB2_COUNT    3
+#define MENU_PARTY_STEP_COUNT          6
+#define MENU_FORMATION_STEP_COUNT      3
 #define MENU_START_STEP6_COUNT         5
 
 /* Entries of the panel handler tables. */
@@ -368,9 +368,9 @@ extern Callback D_801EC498[];
 extern Callback D_801EC4B0[5];
 extern Callback D_801EC4C4[];
 /* D_801EC518 */
-extern Callback g_MenuStartStep5Steps[MENU_START_STEP5_COUNT];
+extern Callback g_MenuPartySteps[MENU_PARTY_STEP_COUNT];
 /* D_801EC530 */
-extern Callback g_MenuStartStep5Sub2Steps[MENU_START_STEP5_SUB2_COUNT];
+extern Callback g_MenuFormationSteps[MENU_FORMATION_STEP_COUNT];
 extern Callback D_801EC53C[];
 extern Callback D_801EC578[];
 extern Callback D_801EC58C[];
@@ -578,18 +578,22 @@ void        func_801D9110(void);
 extern void Menu_SwapBytes3(u8* first, u8* second);
 /* func_801D9350 */
 extern void Menu_PackSkills(void);
-void        func_801D970C(void);
+/* func_801D970C */
+void        Menu_RunPartyScreen(void);
 /* func_801D9748 */
 void        Menu_OpenPartyScreen(void);
 /* func_801D98BC */
 void        Menu_ChoosePartyCommand(void);
-void        func_801D9AF0(void);
+/* func_801D9AF0 */
+void        Menu_RunFormation(void);
 void        func_801D9B2C(void);
 /* func_801D9BDC */
 void        Menu_UpdateFormation(void);
 void        func_801DA27C(void);
-void        func_801DA320(void);
-void        func_801DA984(void);
+/* func_801DA320 */
+void        Menu_RunPartyChange(void);
+/* func_801DA984 */
+void        Menu_ClosePartyScreen(void);
 /* func_801DAA68 */
 void        Menu_OpenFormationScreen(void);
 void        Menu_SwapBytes4(u8* first, u8* second);
@@ -929,7 +933,8 @@ void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 shade_mo
 void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 
 void func_801D9304(s32 step_index);
-u8   func_801DB04C(void);
+/* func_801DB04C */
+u8   Menu_SwapPartyMembers(void);
 
 /* Step the master panel up 16 pixels and stop it at y 62. The member declares task. */
 #define MENU_STEP_PANEL_UP()          \

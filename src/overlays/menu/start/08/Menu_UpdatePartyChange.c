@@ -1,7 +1,8 @@
 #include "start_08.h"
 
+/* func_801DA474 */
 #ifdef NON_MATCHING
-NON_MATCHING void func_801DA474(void) {
+NON_MATCHING void Menu_UpdatePartyChange(void) {
     u8*          panel_data;
     s32          input;
     s32          index;
@@ -81,7 +82,7 @@ NON_MATCHING void func_801DA474(void) {
             D_8014865D = *(u8*)&D_80148659;
             return;
         }
-        result     = func_801DB04C();
+        result     = Menu_SwapPartyMembers();
         D_801ED69C = result;
         SND_PlaySE(result == GAME_NONE ? EMI_CUE_ID(SND_BANK_COMMON, 3) : EMI_CUE_ID(SND_BANK_COMMON, 7));
         D_8014865A = 0x7F;
@@ -106,5 +107,5 @@ NON_MATCHING void func_801DA474(void) {
     }
 }
 #else
-INCLUDE_ASM(func_801DA474);
+INCLUDE_ASM(Menu_UpdatePartyChange);
 #endif
