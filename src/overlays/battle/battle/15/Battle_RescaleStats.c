@@ -8,7 +8,7 @@
 /* func_800A9BD8 */
 MATCH void Battle_RescaleStats(u8 slot) {
     if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
-        Battle_RescalePanel((BattlePanelRecord*)&D_80145F04[slot * BATTLE_PARTY_STRIDE], slot);
+        Battle_RescalePanel((Character*)&D_80145F04[slot * BATTLE_PARTY_STRIDE], slot);
     } else {
         slot -= BATTLE_PARTY_CHARACTERS_COUNT;
 

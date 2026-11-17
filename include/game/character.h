@@ -246,7 +246,15 @@ typedef struct Character {
     u8         unk_8B[0x19];
 } Character;
 
+ASSERT_OFFSET(Character, stats, 0x1C);
+ASSERT_OFFSET(Character, base, 0x3C);
 ASSERT_SIZE(Character, PARTY_RECORD_STRIDE);
+STATIC_ASSERT(Character_stats_power, DECOMP_OFFSETOF(Character, stats.power) == 0x20);
+STATIC_ASSERT(Character_stats_resistances, DECOMP_OFFSETOF(Character, stats.resistances) == 0x2B);
+STATIC_ASSERT(Character_stats_reprisal_chance, DECOMP_OFFSETOF(Character, stats.reprisal_chance) == 0x35);
+STATIC_ASSERT(Character_base_power, DECOMP_OFFSETOF(Character, base.power) == 0x40);
+STATIC_ASSERT(Character_base_resistances, DECOMP_OFFSETOF(Character, base.resistances) == 0x4B);
+STATIC_ASSERT(Character_base_reprisal_chance, DECOMP_OFFSETOF(Character, base.reprisal_chance) == 0x55);
 
 /* The block from the window-style byte 0x80144952 through the eight character
  * records at 0x80144968. The menu drawers read the style byte and then index a

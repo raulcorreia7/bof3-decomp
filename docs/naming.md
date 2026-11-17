@@ -379,7 +379,7 @@ usually the name. The same holds for `Ref`, `View`, `Window`, `Row`, `Scratch`, 
 | The word leaks | Words                                                    | Write instead                                                                                              |
 | -------------- | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | width          | `Byte`, `Half`, `Word`, `Bytes`, `Words`                 | the role; `unk_<OFF>` until it is known                                                                    |
-| shape          | `Record`, `Rec`, `Entry`, `Row`, `Block`, `Chunk`, `Raw` | the thing itself: `BattlePanel`, not `BattlePanelRecord`                                                   |
+| shape          | `Record`, `Rec`, `Entry`, `Row`, `Block`, `Chunk`, `Raw` | the thing itself: `BattlePanel`, not `BattlePanelRow`                                                      |
 | a second view  | `View`, `As<Type>`                                       | a union member named by role; a byte or half of one value is `LOBU(x)`, `LOH(x)` (`include/common/util.h`) |
 | nothing        | `Data`, `Info`, `Obj`, `Object`, `Work`, `Misc`          | what it holds: `FishingState`, not `Area030Work`                                                           |
 | a number       | `Table6`, `Area016`, `Callback3`                         | what the index selects (`g_BattleCommands`); the place or system once proven (`Fishing`, `Town`)           |
