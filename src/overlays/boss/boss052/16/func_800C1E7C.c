@@ -8,7 +8,7 @@ MATCH void func_800C1E7C(void) {
     delay = work->timer;
     if (delay != 0xFF) {
         if (delay == 0) {
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_ENEMY, 3));
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_ENEMY, 3));
             ((Actor*)g_Task)->timer = 255;
         } else {
             work->timer = delay - 1;

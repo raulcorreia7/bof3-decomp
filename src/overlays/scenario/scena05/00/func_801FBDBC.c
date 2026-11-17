@@ -41,7 +41,7 @@ MATCH void func_801FBDBC(void) {
             g_SceneState.step_05 = 4;
             SYS_SetFlag(g_SceneFlags, 0x2E);
             g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
-            SND_PlayCue(0x208);
+            SND_PlaySE(0x208);
             switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {
                 case 1:
                     Game_RequestAreaChange(0x50, TO_COORD(129), TO_COORD(7), 0x85);
@@ -97,7 +97,7 @@ MATCH void func_801FBDBC(void) {
             if (g_ScriptVars[0] != 7) {
                 break;
             }
-            SND_PlayCue(0x209);
+            SND_PlaySE(0x209);
             SND_PlayBGM(0x66, 0x64, 8);
             g_SceneState.step_05 = 10;
             break;

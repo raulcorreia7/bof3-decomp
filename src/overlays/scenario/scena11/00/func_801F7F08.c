@@ -77,7 +77,7 @@ MATCH void func_801F7F08(void) {
             if (g_GameStateIndex == 2) {
                 break;
             }
-            SND_PlayCue(0x106);
+            SND_PlaySE(0x106);
             g_SceneState.step_05 = 0x32;
             break;
         case 0x14:
@@ -85,7 +85,7 @@ MATCH void func_801F7F08(void) {
                 g_SceneState.step_05 = 0x32;
                 break;
             }
-            SND_PlayCue(0x106);
+            SND_PlaySE(0x106);
             Message_StartAreaMessage(MSG_000);
             g_GameStateIndex     = 2;
             g_SceneState.step_05 = 0x15;

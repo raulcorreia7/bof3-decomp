@@ -573,7 +573,7 @@ MATCH void func_801F8AA0(void) {
         if (!(g_Task->unk_06 & 0x4)) {
             cue = 0x207;
         }
-        SND_PlayCue(cue);
+        SND_PlaySE(cue);
     }
 }
 
@@ -645,7 +645,7 @@ MATCH void func_801F8EA8(void) {
         if (!(g_Task->unk_06 & 0x4)) {
             cue = 0x208;
         }
-        SND_PlayCue(cue);
+        SND_PlaySE(cue);
     }
 }
 

@@ -2,7 +2,7 @@
 
 /* steps the status counter and issues the pending CD command.
  */
-MATCH void SND_XaStatePauseResult(void) {
+MATCH void SND_XAStatePauseResult(void) {
     s8* flag;
 
     flag = &D_8014682E;

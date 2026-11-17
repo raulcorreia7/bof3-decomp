@@ -36,7 +36,7 @@ MATCH void func_801F8C0C(void) {
         case 3:
             if (g_ScriptVars[0] == 1) {
                 UI_SetMode(0xF);
-                SND_PlayCue(0x201);
+                SND_PlaySE(0x201);
                 g_SceneState.step_05 = 4;
             }
             break;

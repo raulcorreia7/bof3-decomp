@@ -11,7 +11,7 @@ MATCH void EMI_CdUpdate(void) {
     u32                callbacks[9];
 
     dst = (CopyWords16*)callbacks;
-    src = (const CopyWords16*)g_EmiCDSteps;
+    src = (const CopyWords16*)g_EmiCdSteps;
     end = src + 2;
     do {
         *dst = *src;

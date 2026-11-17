@@ -288,7 +288,7 @@ MATCH void func_801F8088(void) {
 }
 
 /* func_801F80CC */
-MATCH void Scene_StartEndingXa(void) {
+MATCH void Scene_StartEndingXA(void) {
     s8* step;
 
     SND_StartXAStream(8, 1);
@@ -299,7 +299,7 @@ MATCH void Scene_StartEndingXa(void) {
 }
 
 /* func_801F8110 */
-MATCH void Scene_WaitEndingXa(void) {
+MATCH void Scene_WaitEndingXA(void) {
     u8  ready;
     s8* step;
 

@@ -32,7 +32,7 @@ extern void SND_QueueSelectionEffect(s32 cue_id);
 /* func_8015D7C8 */
 void        SND_QueueCueVolume(s32 cue_id, s32 left_index, s32 right_index);
 /* func_8015DF18 */
-void        SND_PlayCue(u16 cue_id);
+void        SND_PlaySE(u16 se_id);
 /* func_80161808 */
 void        SND_SetBankLayout(u32 layout);
 /* func_80161B24 */
@@ -58,23 +58,23 @@ void        SND_StoreXASyncResult(s32 intr, u8* result);
 /* func_801638B0 */
 void        SND_UpdateXA(void);
 /* func_801639B8 */
-void        SND_XaStateIdle(void);
+void        SND_XAStateIdle(void);
 /* func_801639D0 */
-void        SND_XaStateSeek(void);
+void        SND_XAStateSeek(void);
 /* func_80163A54 */
-void        SND_XaStateSeekResult(void);
+void        SND_XAStateSeekResult(void);
 /* func_80163AF0 */
-void        SND_XaStateRead(void);
+void        SND_XAStateRead(void);
 /* func_80163B74 */
-void        SND_XaStateReadProgress(void);
+void        SND_XAStateReadProgress(void);
 /* func_80163C58 */
-void        SND_XaStateReadResult(void);
+void        SND_XAStateReadResult(void);
 /* func_80163D20 */
-void        SND_XaStatePause(void);
+void        SND_XAStatePause(void);
 /* func_80163D80 */
-void        SND_XaStatePauseResult(void);
+void        SND_XAStatePauseResult(void);
 /* func_80163E3C */
-void        SND_XaStateWaitSync(void);
+void        SND_XAStateWaitSync(void);
 /* func_80163E88 */
 bool        SND_HasXACDError(void);
 /* func_80163EA0 */

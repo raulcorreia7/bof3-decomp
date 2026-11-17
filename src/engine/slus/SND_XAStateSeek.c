@@ -2,7 +2,7 @@
 
 /* syncs the CD reader, sets the read mode, then seeks while idle.
  */
-MATCH void SND_XaStateSeek(void) {
+MATCH void SND_XAStateSeek(void) {
     u8 mode;
 
     mode = CdlModeSpeed | CdlModeRT | CdlModeSF;

@@ -33,8 +33,8 @@ MATCH void func_801CE770(void) {
         if (SP_REF(u8, 0x0u) != 0 && dist >= 65 && COORD_INT(g_Task->pos.z) < Area_ReadHeight(x, y)) {
             g_Task->unk_2B = 0;
         }
-        /* FAKE: retail reads SND_PlayCue as void(s32). */
-        ((void (*)(s32))SND_PlayCue)(g_Task->unk_2C + 0x100);
+        /* FAKE: retail reads SND_PlaySE as void(s32). */
+        ((void (*)(s32))SND_PlaySE)(g_Task->unk_2C + 0x100);
         Actor_RequestScript((g_Task->direction_08 - 1) / 2 + 0x42);
         g_Task->unk_0A = 5;
     }

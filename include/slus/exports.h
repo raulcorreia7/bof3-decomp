@@ -33,8 +33,8 @@ typedef enum SceneEventMode {
     SCENE_EVENT_SHOP_SAVE = 10,
 } SceneEventMode;
 
-/* The rows of g_XaStates, the steps of one XA stream: seek, read, pause. */
-typedef enum SNDXaState {
+/* The rows of g_XAStates, the steps of one XA stream: seek, read, pause. */
+typedef enum XAState {
     SND_XA_STATE_IDLE          = 0,
     SND_XA_STATE_SEEK          = 1,
     SND_XA_STATE_SEEK_RESULT   = 2,
@@ -44,7 +44,7 @@ typedef enum SNDXaState {
     SND_XA_STATE_PAUSE         = 6,
     SND_XA_STATE_PAUSE_RESULT  = 7,
     SND_XA_STATE_WAIT_SYNC     = 8,
-} SNDXaState;
+} XAState;
 
 /* The area message table offset the HUD value text reads (AREA_MESSAGE_TABLE slot 4). */
 extern u16          D_80010008;

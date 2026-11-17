@@ -70,20 +70,20 @@ NON_MATCHING void func_801DA474(void) {
         }
     }
     if (old_side != *(u8*)D_80148658 || old_row != *(u8*)&D_80148659) {
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         s8* face = (s8*)&D_8014865A;
 
         if (*face == 0x7F) {
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
             *face      = *(u8*)D_80148658;
             D_8014865D = *(u8*)&D_80148659;
             return;
         }
         result     = func_801DB04C();
         D_801ED69C = result;
-        SND_PlayCue(result == GAME_NONE ? EMI_CUE_ID(SND_BANK_COMMON, 3) : EMI_CUE_ID(SND_BANK_COMMON, 7));
+        SND_PlaySE(result == GAME_NONE ? EMI_CUE_ID(SND_BANK_COMMON, 3) : EMI_CUE_ID(SND_BANK_COMMON, 7));
         D_8014865A = 0x7F;
         D_8014865D = 0x7F;
         return;
@@ -91,7 +91,7 @@ NON_MATCHING void func_801DA474(void) {
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         s8* face;
 
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
         face = (s8*)&D_8014865A;
         if (*face != 0x7F) {
             *face      = 0x7F;

@@ -54,25 +54,25 @@ NON_MATCHING void func_801DE4C8(void) {
         }
     }
     if (prev_side != D_80148658 || prev_index != D_80148659) {
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
     if (g_InputMasks[MENU_INPUT_CONFIRM] & g_InputPressed) {
         cursor = &D_8014865A;
         if (*cursor == 0x7F) {
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
             *cursor    = (u8)D_80148658;
             D_8014865D = (u8)D_80148659;
             return;
         }
         result     = func_801DF478();
         D_801E6254 = result;
-        SND_PlayCue(result == GAME_NONE ? 0x103 : 0x107);
+        SND_PlaySE(result == GAME_NONE ? 0x103 : 0x107);
         D_8014865A = 0x7F;
         D_8014865D = 0x7F;
         return;
     }
     if (g_InputMasks[MENU_INPUT_CANCEL] & g_InputPressed) {
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
         cursor = &D_8014865A;
         if (*cursor != 0x7F) {
             *cursor    = 0x7F;

@@ -12,7 +12,7 @@ MATCH u8 func_801F4CF0(u16 frame) {
     }
     func_801F5190(0x428000, 0x638000, y, 0x638000);
     if (frame == 5) {
-        SND_PlayCue(0x206);
+        SND_PlaySE(0x206);
     }
     if (frame >= 5) {
         result = func_801F4DA4(frame);

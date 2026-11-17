@@ -35,7 +35,7 @@ MATCH void func_801FA548(void) {
         case 4:
             if (g_ScriptVars[0] == 0xE) {
                 SND_StartXAStream(1, 1);
-                SND_PlayCue(0x203);
+                SND_PlaySE(0x203);
                 g_ScriptVars[1]      = 0;
                 g_ScriptVars[3]      = 0;
                 g_SceneState.step_05 = 5;
@@ -50,12 +50,12 @@ MATCH void func_801FA548(void) {
                 g_ScriptVars[3]          = 0;
                 g_ScriptVars[0]          = 0x15;
                 g_SceneState.step_05     = 0xF;
-                SND_PlayCue(0x204);
+                SND_PlaySE(0x204);
             }
             break;
         case 15:
             if (g_ScriptVars[0] == 0x19) {
-                SND_PlayCue(0x201);
+                SND_PlaySE(0x201);
                 UI_SetMode(0xF);
                 g_SceneState.step_05 = 0x10;
             }

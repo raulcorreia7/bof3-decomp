@@ -48,7 +48,7 @@ MATCH void func_801FA6BC(void) {
             break;
         case 6:
             if (g_ScriptVars[0] == 0x24) {
-                SND_PlayCue(0x207);
+                SND_PlaySE(0x207);
                 Battle_StartScripted(0x24);
                 g_SceneState.step_05 = 7;
             }

@@ -3,7 +3,7 @@
 /* steps the pending dispatch timer, else arms the next mode.
  */
 
-MATCH void SND_XaStateSeekResult(void) {
+MATCH void SND_XAStateSeekResult(void) {
     if (D_8014682E < 0) {
         g_EmiServiceState = SND_XA_STATE_SEEK;
         if ((((s16)D_80146820++ < 6) == 0) || (SND_HasXACDError() != 0)) {

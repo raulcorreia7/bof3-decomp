@@ -9,7 +9,7 @@ MATCH void Well_ReadSwishInput(void) {
         g_InputPressed == (PADLdown | PADLright) || g_InputPressed == (PADLup | PADLleft) || g_InputPressed == (PADLdown | PADLleft)) {
         input              = &g_InputPressed;
         g_WellSwishButtons = *input;
-        SND_PlayCue(WELL_CUE_SWISH);
+        SND_PlaySE(WELL_CUE_SWISH);
         switch (*input) {
             case PADLup:
             case (PADLup | PADLright):

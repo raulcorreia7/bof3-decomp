@@ -5,7 +5,7 @@ MATCH void func_801F37EC(void) {
 
     if (g_AreaSceneMode == 2) {
         SYS_ClearFlag(g_SceneEventFlags, 129);
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 6));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 6));
         slot       = &D_1F800038;
         *slot      = -0x180;
         D_1F80003A = 0;

@@ -2,7 +2,7 @@
 
 /* polls CD sync, then issues the filter/read commands.
  */
-MATCH void SND_XaStateRead(void) {
+MATCH void SND_XAStateRead(void) {
     if ((CdSync(1, NULL) != CdlNoIntr) && (CdControl(CdlSetfilter, &D_80146834, NULL) != 0)) {
         D_8014682E = 0;
         /* Param is the word at 0x80146838 (sibling reaches it as D_80146824[0x14]);

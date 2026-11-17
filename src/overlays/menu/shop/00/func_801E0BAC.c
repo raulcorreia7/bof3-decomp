@@ -63,20 +63,20 @@ NON_MATCHING void func_801E0BAC(void) {
     }
     cursor_ptr = &D_801483CB;
     if (old != cursor_ptr[0]) {
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
     if (D_801483CD == 0) {
         if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
             if (cursor_ptr[1] == GAME_NONE) {
                 if (D_8014546C[cursor_ptr[0]] != 0) {
-                    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
+                    SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
                     cursor_ptr[1] = cursor_ptr[0];
                     return;
                 }
-                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
+                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
                 return;
             }
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
             slot                      = D_8014546C[cursor_ptr[0]];
             swapped                   = D_8014546C[cursor_ptr[1]];
             D_8014546C[cursor_ptr[1]] = slot;
@@ -85,7 +85,7 @@ NON_MATCHING void func_801E0BAC(void) {
             return;
         }
         if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
             if (cursor_ptr[1] == GAME_NONE) {
                 D_801483EF = 0xFF;
                 g_MenuStep.state -= 1;

@@ -22,7 +22,7 @@ MATCH void func_801F9338(void) {
                 if (slot != GAME_NONE) {
                     g_SpawnedActors[slot].header.flags                = 1;
                     g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type = 0x14;
-                    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
+                    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
                 }
                 g_SceneState.step_05 = 2;
             }
@@ -38,7 +38,7 @@ MATCH void func_801F9338(void) {
                 if (slot != GAME_NONE) {
                     g_SpawnedActors[slot].header.flags                = 1;
                     g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type = 0x14;
-                    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
+                    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
                 }
                 g_SceneState.step_05 = 3;
             }
@@ -54,7 +54,7 @@ MATCH void func_801F9338(void) {
                 if (slot != GAME_NONE) {
                     g_SpawnedActors[slot].header.flags                = 1;
                     g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type = 0x14;
-                    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
+                    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
                 }
                 g_SceneState.step_05 = 4;
             }

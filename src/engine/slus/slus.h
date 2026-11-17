@@ -635,7 +635,7 @@ extern const struct MenuPanelSteps D_80149B3C;
 extern const struct MenuPanelSteps D_80149B50;
 extern const struct MenuPanelSteps D_80149B64;
 extern const VECTOR                D_80149BF0;
-extern const u32                   g_EmiCDSteps[];
+extern const u32                   g_EmiCdSteps[];
 extern const EmiRingSteps          g_EmiRingSteps;
 extern const char                  D_80149F9C[];
 extern const char                  D_80149FAC[];
@@ -709,11 +709,11 @@ extern u32                         g_SndBankHeaderSize[3][7];
 extern u32                         g_SndBankSequenceSize[3][7];
 extern DiscLba                     g_EmiSlotLbas[];
 /* D_80183230 */
-extern u32                         g_XaStreamSlots[3];
+extern u32                         g_XAStreamSlots[3];
 /* D_8018323C */
-extern u32                         g_XaCues[3];
+extern u32                         g_XACues[3];
 extern u32                         g_EmiEntryTypes[11];
-extern u32                         g_XaStates[55];
+extern u32                         g_XAStates[55];
 extern u32                         D_80183A1C[17];
 extern u32                         D_80183A60[4];
 extern u16                         D_80183A70[];

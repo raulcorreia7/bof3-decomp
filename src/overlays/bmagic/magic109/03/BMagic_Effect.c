@@ -22,7 +22,7 @@ MATCH void func_801EEC80(void) {
         Effect_Reset();
         return;
     }
-    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
     g_Task->unk_09 = 2;
     work           = g_Task;
     rect.x         = work->unk_2E.half - work->unk_09;

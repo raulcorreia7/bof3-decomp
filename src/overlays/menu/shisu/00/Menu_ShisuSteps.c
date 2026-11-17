@@ -135,16 +135,16 @@ MATCH void func_801D11F4(void) {
     input   = &g_InputPressed;
     buttons = INPUT_REPEATED(*input, INPUT_DIRECTIONAL);
     if (buttons & (PADLright | PADLleft)) {
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
         g_ShisuIngredients.command ^= 1;
         D_80148364 = g_ShisuIngredients.command + 0x2B;
     } else if (buttons & PADLup) {
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
         D_80148364                = 0x2A;
         g_ShisuIngredients.cursor = 3;
         g_MenuStep.sub_step++;
     } else if (buttons & PADLdown) {
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
         D_80148364                = 0x2A;
         g_ShisuIngredients.cursor = 0;
         g_MenuStep.sub_step++;
@@ -155,23 +155,23 @@ MATCH void func_801D11F4(void) {
         if (g_ShisuIngredients.rounds < 8) {
             if (g_ShisuIngredients.rounds == 0) {
                 if (g_ShisuIngredients.used[0] != 0 && g_ShisuIngredients.used[1] != 0) {
-                    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
+                    SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
                     g_MenuStep.sub_step += 2;
                     g_MenuStep.state = g_MenuStep.state; /* FAKE: retail reloads and stores state. */
                 } else {
-                    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
+                    SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
                     D_80148364 = 0x31;
                 }
             } else {
-                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
+                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
                 g_ShisuIngredients.rounds++;
             }
         } else {
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
         }
     } else if (*input & g_InputMasks[MENU_INPUT_CANCEL]) {
     advance:
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
         step                       = &g_MenuStep.step;
         cur                        = *step;
         g_MenuPanelTasks[0].active = 0;
@@ -289,7 +289,7 @@ NON_MATCHING void func_801D1A20(void) {
     }
     g_ShisuBaseB = value5;
     if ((u8)level == 0x80) {
-        SND_PlayCue(0x200);
+        SND_PlaySE(0x200);
     }
     *fade = *fade + 8;
     if (*fade == 0) {

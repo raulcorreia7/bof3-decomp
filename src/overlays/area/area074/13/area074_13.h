@@ -11,6 +11,6 @@ extern u32 D_80144F94;
 
 /* FAKE: the cue dispatcher takes the id as a word; the slus prototype narrows it to u16,
  * and the caller here adds 0x100 to a halfword before the call. */
-#define SND_PLAY_CUE_ID ((void (*)(s32))SND_PlayCue)
+#define SND_PLAY_CUE_ID ((void (*)(s32))SND_PlaySE)
 
 #endif

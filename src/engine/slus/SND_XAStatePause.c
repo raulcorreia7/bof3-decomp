@@ -3,7 +3,7 @@
 /* Pauses the CD reader once synced, then clears the dispatch timer. */
 /* pauses the CD reader when the status counter expires.
  */
-MATCH void SND_XaStatePause(void) {
+MATCH void SND_XAStatePause(void) {
     D_8014682E = 0;
     SND_FadeCDVolume(0);
     if ((CdSync(1, NULL) != CdlNoIntr) && (CdPause() != 0)) {

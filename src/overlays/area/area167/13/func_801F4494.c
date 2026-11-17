@@ -21,7 +21,7 @@ MATCH void func_801F4494(void) {
             }
             break;
         case 5:
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 4));
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 4));
             g_SceneEventState.step = 6;
             D_801448EE             = 0xA;
             break;
@@ -53,7 +53,7 @@ MATCH void func_801F4494(void) {
         case 12:
             if (g_ScriptVars[3] == 0) {
                 if (g_GameCellType == 0) {
-                    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 6));
+                    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 6));
                 }
                 g_ScriptVars[2]        = 0;
                 g_SceneEventState.mode = 0;
@@ -89,7 +89,7 @@ MATCH void func_801F4494(void) {
                     SYS_SetFlag(g_SceneEventFlags, 0x49);
                 }
                 if (g_GameCellType == 0) {
-                    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 5));
+                    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 5));
                 }
                 SYS_SetFlag(g_SceneEventFlags, 0x4A);
                 g_SceneEventState.step = 0xC;

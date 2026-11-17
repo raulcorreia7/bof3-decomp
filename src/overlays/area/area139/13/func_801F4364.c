@@ -20,6 +20,6 @@ MATCH s32 func_801F4364(s32 x, s32 y) {
         return 0;
     }
     SYS_ToggleFlag(g_SceneEventFlags, D_801F45E4[i * 4 + 3]);
-    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 4));
+    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 4));
     return 1;
 }

@@ -148,16 +148,16 @@ MATCH void func_801F7590(void) {
             g_Task->header.step++;
         }
         g_Task->header.step &= 7;
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 6));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 6));
         g_Task->unk_06 = (g_Task->header.step & 7) + 0x4E;
         Actor_SelectScript(g_Task->unk_06 - 0x4E);
     }
     if (g_InputPressed & PADRleft) {
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 9));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 9));
         g_Task->unk_0A      = 20;
         g_Task->header.mode = 2;
     } else if (g_InputPressed & PADRup) {
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 12));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 12));
         g_Task->header.mode = 3;
     } else if (g_InputPressed & PADRdown) {
         if (Item_Count(ITEM_CATEGORY_ITEM, g_Task->unk_06, 0) & 0xFFFF) {
@@ -165,9 +165,9 @@ MATCH void func_801F7590(void) {
                 D_80144908[g_Task->header.step]++;
             }
             Item_Remove(ITEM_CATEGORY_ITEM, g_Task->unk_06, 1, 0);
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 10));
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 10));
         } else {
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 13));
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 13));
         }
     }
 }
@@ -181,7 +181,7 @@ MATCH void func_801F7758(void) {
     if (g_Task->unk_0A != 0) {
         g_Task->unk_0A--;
     } else if (g_InputPressed != 0) {
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 12));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 12));
         g_Task->header.mode = 1;
     }
 }
@@ -368,16 +368,16 @@ NON_MATCHING void func_801F7FA0(void) {
     if (g_GameAreaId == 0x83) {
         if (SYS_TestFlag(g_SceneFlags, 0x12) != 0) {
             if (g_GameCellType != 0) {
-                SND_PlayCue(0x205);
+                SND_PlaySE(0x205);
                 D_801FE9DC = 1;
             } else {
-                SND_PlayCue(0x204);
+                SND_PlaySE(0x204);
                 D_801FE9DC = 0;
             }
         }
     }
     if ((g_GameAreaId == 0x84) && (g_GameCellType == 1) && (SYS_TestFlag(g_SceneFlags, 0x14) == 0)) {
-        SND_PlayCue(0x204);
+        SND_PlaySE(0x204);
         D_801FE9DC                 = 1;
         FIELD(s16, &D_801492DA, 2) = 0x302;
         slot                       = func_8019601C();
@@ -492,7 +492,7 @@ NON_MATCHING void func_801F86D8(void) {
             }
             UI_SetMode(5);
             g_AreaDrawFlags = 0x1F;
-            SND_PlayCue(0x20C);
+            SND_PlaySE(0x20C);
             g_SceneState.step_05 = 7;
             break;
         case 7:
@@ -609,7 +609,7 @@ NON_MATCHING void func_801F8C00(void) {
             break;
         case 7:
             SND_StopSequence(0, 2);
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 2));
             g_SceneState.step_05 = 8;
             break;
         case 8:
@@ -617,7 +617,7 @@ NON_MATCHING void func_801F8C00(void) {
                 break;
             }
             SND_PlayBGM(0x24, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
             g_SceneState.step_05 = 9;
             g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
             break;
@@ -775,7 +775,7 @@ NON_MATCHING void func_801F95B8(void) {
             break;
         case 7:
             SND_StopSequence(0, 2);
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 2));
             g_SceneState.step_05 = 8;
             break;
         case 8:
@@ -783,7 +783,7 @@ NON_MATCHING void func_801F95B8(void) {
                 break;
             }
             SND_PlayBGM(0x24, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
             g_SceneState.step_05 = 9;
             g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
             break;

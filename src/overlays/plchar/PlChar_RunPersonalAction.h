@@ -14,21 +14,21 @@ MATCH void PlChar_RunPersonalAction(void) {
         g_Task->unk_0A--;
         if (g_Task->unk_0A == 0) {
             if (CHAR_PERSONAL_ACTION_HAS_CUE) {
-                /* FAKE: retail reads SND_PlayCue as void(s32). */
-                ((void (*)(s32))SND_PlayCue)(g_Task->unk_2C + 0x100);
+                /* FAKE: retail reads SND_PlaySE as void(s32). */
+                ((void (*)(s32))SND_PlaySE)(g_Task->unk_2C + 0x100);
             }
             slot = ((s8 (*)(void))Game_FindRockAhead)();
             if (slot != -1) {
                 u8 direction;
 
                 if (CHAR_PERSONAL_ACTION_HAS_CUE) {
-                    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 11));
+                    SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 11));
                 }
                 direction                    = g_Task->direction_08;
                 g_SpawnedActors[slot].unk_0A = 1;
                 g_SpawnedActors[slot].unk_08 = direction;
                 if (!CHAR_PERSONAL_ACTION_HAS_CUE) {
-                    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 11));
+                    SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 11));
                 }
                 g_Task->unk_06 = slot;
                 g_Task->unk_03++;
@@ -38,7 +38,7 @@ MATCH void PlChar_RunPersonalAction(void) {
                 hit = Actor_FindInRange(x, y, 0);
                 if (hit != slot) {
                     g_Actors[hit].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;
-                    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 11));
+                    SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 11));
                 }
                 cell_x = x >> 16;
                 cell_y = y >> 16;

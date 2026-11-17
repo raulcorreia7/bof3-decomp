@@ -3,5 +3,5 @@
 MATCH void func_801F3F24(void) {
     g_AreaSceneMode = 1;
     Area_SetCellPalette(28, 74);
-    SND_PlayCue(265);
+    SND_PlaySE(265);
 }

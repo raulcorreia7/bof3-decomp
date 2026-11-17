@@ -144,7 +144,7 @@ MATCH void func_801F9F0C(void) {
             if (*progress != 2) {
                 break;
             }
-            SND_PlayCue(0x20C);
+            SND_PlaySE(0x20C);
             *progress            = 0;
             g_ScriptVars[2]      = 4;
             g_ScriptVars[1]      = 6;

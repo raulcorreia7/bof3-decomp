@@ -3,13 +3,13 @@
 /* dispatches a cue's bank and record, updates interpolated channel
  * values, and keys the requested SPU voices.
  */
-MATCH void SND_PlayCue(u16 cue_id) {
+MATCH void SND_PlaySE(u16 se_id) {
     s32 scaled;
     s32 next;
 
-    D_8018B408 = EMI_CUE_ID_BANK(cue_id);
-    D_8018B404 = EMI_CUE_ID_INDEX(cue_id);
-    ((void (*)(void))g_SndCueReaders[EMI_CUE_ID_BANK(cue_id)])();
+    D_8018B408 = EMI_CUE_ID_BANK(se_id);
+    D_8018B404 = EMI_CUE_ID_INDEX(se_id);
+    ((void (*)(void))g_SndCueReaders[EMI_CUE_ID_BANK(se_id)])();
 
     if (D_8018B3F4 == 0x80) {
         switch (D_8018B3E4) {
@@ -63,7 +63,7 @@ MATCH void SND_PlayCue(u16 cue_id) {
                 break;
         }
 
-        if ((cue_id & 0xF000) == 0) {
+        if ((se_id & 0xF000) == 0) {
             D_8018B3D8 = 0x17FF;
             D_8018B3DC = 0x17FF;
         }

@@ -43,7 +43,7 @@ MATCH void func_801F71FC(void) {
             count = 0;                                                                              \
             value += 1;                                                                             \
             if (SYS_TestFlag(g_SceneFlags, 0x14) != 0) {                                            \
-                SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 10));                                         \
+                SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 10));                                          \
             }                                                                                       \
         }                                                                                           \
         bits = high << 15;                                                                          \
@@ -256,7 +256,7 @@ MATCH void func_801F7BEC(void) {
     actor              = g_Task;
     actor->screen_x    = 0;
     actor->header.mode = actor->header.mode + 1;
-    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 21));
+    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 21));
 }
 
 #ifdef NON_MATCHING
@@ -282,7 +282,7 @@ NON_MATCHING void func_801F7C24(void) {
     func_801F7E34(&g_Task->pos.x.fixed, &g_Task->vx, 0x40);
     g_Task->screen_x += 1;
     if ((s16)g_Task->screen_x == 330) {
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 22));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 22));
         g_Task->header.mode += 1;
     }
 }

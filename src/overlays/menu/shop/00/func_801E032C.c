@@ -38,14 +38,14 @@ MATCH void func_801E032C(void) {
     }
     index = &D_801483A7;
     if (previous != *index) {
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
     D_801483A8 = 0xFF;
     cell       = (u8*)&g_Characters[D_801483A6] + DECOMP_OFFSETOF(Character, abilities.skill) + *index;
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         u8* step;
 
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
         D_801483A8 = *index;
         step       = &D_80148652;
         (*step)++;
@@ -53,19 +53,19 @@ MATCH void func_801E032C(void) {
     }
     if (g_InputPressed & PADRleft) {
         if (*cell != 0) {
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
             Char_AddAbility(*cell, 0, 1, 0);
             *cell = 0;
             return;
         }
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
         return;
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         u8* step;
 
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 2));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
         D_8014837B           = 2;
         D_8014839F           = 4;
         D_801483A8           = 0xFF;

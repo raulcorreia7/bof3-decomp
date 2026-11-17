@@ -127,7 +127,7 @@ MATCH void func_801D10AC(void) {
     point[2] -= TO_COORD(256);
     Area_ProjectPoint(point, &end);
     g_Task->unk_32 = ratan2(end.vy - start.vy, end.vx - start.vx) + 0x400;
-    SND_PlayCue(0x202);
+    SND_PlaySE(0x202);
 }
 
 MATCH void func_801D11C8(void) {

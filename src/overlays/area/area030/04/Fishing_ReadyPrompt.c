@@ -6,7 +6,7 @@
 MATCH void Fishing_ReadyPrompt(void) {
     if (D_80144125 == 0 && D_8014403D == 1) {
         FISHING_STATE->step_timer_09 = 4;
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 2));
         FISHING_STATE->sub_index_03 += 1;
     }
     Fishing_DrawDimScreen();

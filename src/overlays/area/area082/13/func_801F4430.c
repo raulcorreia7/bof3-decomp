@@ -30,7 +30,7 @@ NON_MATCHING void func_801F4430(void) {
     SetTransMatrix(&matrix);
 
     if (g_Task->param.unk_0B != 0) {
-        SND_PlayCue(g_Task->param.unk_0B + 0x201);
+        SND_PlaySE(g_Task->param.unk_0B + 0x201);
         g_Task->param.unk_0B = 0;
         tile                 = (1U << 28) | (3U << 24) | (1U << 15) | (TPAGE_ABR_ADD << 12) | 0x0F;
     } else {

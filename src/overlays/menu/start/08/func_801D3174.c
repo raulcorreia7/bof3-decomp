@@ -37,7 +37,7 @@ MATCH void func_801D3174(void) {
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + offset;
     trigger                                                     = INPUT_REPEATED(pad, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if (trigger & PADLleft) {
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
         g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.tabs                 = 0x32;
         s_ChoiceMenuCursors[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A] = D_80148510;
         s_ChoiceMenuValues[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A]  = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
@@ -51,7 +51,7 @@ MATCH void func_801D3174(void) {
     }
     if (trigger & PADLright) {
         g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.tabs = 0x31;
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
         s_ChoiceMenuCursors[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A] = D_80148510;
         s_ChoiceMenuValues[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A]  = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
         step_up                                                              = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A + 1;
@@ -106,7 +106,7 @@ MATCH void func_801D3174(void) {
     s_ChoiceMenuCursors[base[0xA]] = base[0xC];
     s_ChoiceMenuValues[base[0xA]]  = base[0xB];
     if (old_cursor != base[0xC]) {
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
     row  = D_801C893C[base[0xA]] + base[0xC];
     pair = D_801C8950[base[0xA]] + base[0xC];
@@ -115,14 +115,14 @@ MATCH void func_801D3174(void) {
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (*row != 0) {
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
             if (D_801ED618 == 0) {
                 if ((Item_PassesTest(base[8], CHAR_ID_RYU_YOUNG, base[0xA], *row) & BYTE_MASK) != 0) {
                     entry = *row;
                     if (g_Items[entry].flags & ITEM_STORY_ITEM) {
                         result = func_801E8C9C(0, entry, 0) & BYTE_MASK;
                         if (result == 0 || result == 4) {
-                            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
+                            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
                             if (TIMER_EXPIRED(*pair)) {
                                 *row = 0;
                             }
@@ -159,10 +159,10 @@ MATCH void func_801D3174(void) {
         } else {
         /* Failure path of the confirm mask queues the error cue. */
         fail:
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
         }
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
         count = &g_MenuStep.sub_step;
         *count -= 1;
     }

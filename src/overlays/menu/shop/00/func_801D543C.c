@@ -90,7 +90,7 @@ MATCH void func_801D543C(void) {
         (((g_SaveCardStatus == SAVE_STATUS_CREATED) || (g_SaveCardStatus == SAVE_STATUS_SAVED)) && (timer_p = &D_80148654, next = *timer_p - 1, *timer_p = next, ((next & BYTE_MASK) == 0)))) {
         D_80148654 = 0;
         if ((g_SaveCardStatus != SAVE_STATUS_SAVED) && (g_SaveCardStatus != SAVE_STATUS_CREATED)) {
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 4));
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
         }
         g_MenuStep.state = panel_timer;
     }
