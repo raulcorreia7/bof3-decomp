@@ -27,7 +27,7 @@ NON_MATCHING void func_800A0EC4(void) {
             row_offset                         = *state * BATTLE_PARTY_STRIDE;
             D_80145F1E[row_offset]             = D_80145F1E[row_offset] + 1;
         }
-        Char_RebuildStats((g_Game.members[*state].character_index * PARTY_RECORD_STRIDE) + (u8*)&g_Characters);
+        Char_RebuildStats(&g_Characters[g_Game.members[*state].character_index]);
         index = 0;
         if (g_Battle.party_count != 0) {
             do {
@@ -67,10 +67,10 @@ NON_MATCHING void func_800A0EC4(void) {
         member = *state - 3;
         value  = g_BattleEnemyBattlers[member].stats.max_hp;
         if (value != 0xFFFF) {
-            rate = ((u16*)&D_800E4068)[g_BattleEnemyBattlers[member].kind * 68] / 10;
+            rate = ((u16*)&D_800E4068)[g_BattleEnemyBattlers[member].type * 68] / 10;
             if ((u32)(rate & HALF_MASK) < value) {
                 g_BattleEnemyBattlers[member].stats.max_hp = value - rate;
-                g_BattleEnemyBattlers[member].base.max_hp -= ((u16*)&D_800E4068)[g_BattleEnemyBattlers[member].kind * 68] / 10;
+                g_BattleEnemyBattlers[member].base.max_hp -= ((u16*)&D_800E4068)[g_BattleEnemyBattlers[member].type * 68] / 10;
                 value = g_BattleEnemyBattlers[member].stats.max_hp;
                 if (value < g_BattleEnemyBattlers[member].hp) {
                     g_BattleEnemyBattlers[member].hp = value;
