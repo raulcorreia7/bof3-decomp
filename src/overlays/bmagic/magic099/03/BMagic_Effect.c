@@ -204,7 +204,12 @@ MATCH void func_801EF7D8(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF8F0(s32 effect_kind, s32 effect_index, s16 effect_angle) {
+}
+#else
 INCLUDE_ASM(func_801EF8F0);
+#endif
 
 MATCH void func_801F0008(void) {
     D_801F09C0[g_Task->header.step]();

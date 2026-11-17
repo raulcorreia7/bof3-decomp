@@ -7,4 +7,9 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801FB5BC(void) {
+}
+#else
 INCLUDE_ASM(func_801FB5BC);
+#endif

@@ -36,7 +36,12 @@ MATCH void func_801D0CF4(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D0D4C(void) {
+}
+#else
 INCLUDE_ASM(func_801D0D4C);
+#endif
 
 MATCH void func_801D11DC(void) {
     if (D_801D1774 < 4U) {

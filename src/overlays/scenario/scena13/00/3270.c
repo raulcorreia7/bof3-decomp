@@ -40,7 +40,12 @@ NON_MATCHING void func_801F9F18(void) {
 INCLUDE_ASM(func_801F9F18);
 #endif
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801FA844(void) {
+}
+#else
 INCLUDE_ASM(func_801FA844);
+#endif
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801FAFA0(s32 message, s32 frames) {
