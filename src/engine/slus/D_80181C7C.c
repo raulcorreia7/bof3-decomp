@@ -7,7 +7,7 @@
  * by the scratchpad work index.
  */
 
-const ScriptRef *const D_80181C7C[11] = {
+const ScriptEntry *const D_80181C7C[11] = {
     &D_80181BDC[0],  &D_80181BDC[10], &D_80181BDC[15], &D_80181BDC[20], &D_80181BDC[21], &D_80181BDC[29],
     &D_80181BDC[30], &D_80181BDC[31], &D_80181BDC[34], &D_80181BDC[35], &D_80181BDC[39],
 };

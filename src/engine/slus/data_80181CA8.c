@@ -28,7 +28,7 @@ const u8 s_LoaderRecordBytes[168] = {
     0xFF, 0x14, 0x77, 0x4D, 0x00, 0x00, 0x00, 0x00, 0xFF, 0x14, 0x77, 0x71, 0x00, 0x00, 0x00, 0x00,
 };
 
-const ScriptRefList D_80181E40[15] = {
+const ScriptList D_80181E40[15] = {
     {s_LoaderRecordBytes + 0x18, 1}, {s_LoaderRecordBytes + 0x24, 1}, {s_LoaderRecordBytes + 0x2C, 1},
     {s_LoaderRecordBytes + 0x34, 1}, {s_LoaderRecordBytes + 0x3C, 1}, {s_LoaderRecordBytes + 0x44, 3},
     {s_LoaderRecordBytes + 0x50, 2}, {s_LoaderRecordBytes + 0x5C, 1}, {s_LoaderRecordBytes + 0x64, 1},
