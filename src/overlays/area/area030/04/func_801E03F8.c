@@ -30,7 +30,7 @@ NON_MATCHING void func_801E03F8(void) {
     } else if (pos_x > 0x13FFFF && FISHING_STATE->pos_x_0C > 0) {
         FISHING_STATE->pos_x_0C = -FISHING_STATE->pos_x_0C;
     }
-    row_facing  = FISHING_ROW->facing;
+    row_facing  = FISHING_ROW->fish_row;
     entry_face  = D_801E2AD3[FISHING_STATE->cue_index_06 * 0x24];
     upper_limit = (TO_COORD(62) - row_facing * TO_COORD(12)) + entry_face * TO_COORD(15);
     lower_limit = (TO_COORD(50) - row_facing * TO_COORD(12)) - entry_face * TO_COORD(15);

@@ -4,11 +4,13 @@
 #include "types.h"
 #include "common/callback.h"
 
-/* The interrupt-callback pair behind D_8018DB44 (SLUS_004.22) and D_801EB654
- * (LOGO.EXE): two callback slots and the trailing word. */
+/* The interrupt-callback pair SetPatchPad enqueues (SLUS_004.22 and LOGO.EXE):
+ * two callback slots and the trailing word it clears. */
+typedef Callback InterruptCallbacks[2];
+
 typedef struct InterruptHooks {
-    s32 (*callbacks[2])(void);
-    s32 pad;
+    InterruptCallbacks callbacks;
+    s32                pad; /* cleared when SetPatchPad queues the pair, never read by game code */
 } InterruptHooks;
 
 ASSERT_SIZE(InterruptHooks, 0x0C);
