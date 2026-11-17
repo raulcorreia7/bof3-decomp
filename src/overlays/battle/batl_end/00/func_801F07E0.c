@@ -1,7 +1,6 @@
 #include "batl_end_00.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F07E0(void) {
+MATCH void func_801F07E0(void) {
     u8 i;
     /* FAKE: retail keeps the row coordinate in s5 across the panel call. */
     FAKE_REG(u8, y, "s5");
@@ -32,6 +31,3 @@ NON_MATCHING void func_801F07E0(void) {
         } while (i < g_Battle.party_count);
     }
 }
-#else
-INCLUDE_ASM(func_801F07E0);
-#endif

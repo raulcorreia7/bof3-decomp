@@ -18,9 +18,9 @@ NON_MATCHING void func_801F35A0(void) {
         return;
     }
     column_fixed   = TO_COORD(0x11);
+    i              = 0;
     initial_column = 0x11;
     row            = 0x29;
-    i              = 0;
     do {
         Area_StoreHeight(initial_column + (i & BYTE_MASK), row, 0);
         Area_SetCellCode(initial_column + (i & BYTE_MASK), row, (g_Task->unk_18 >> ((i & BYTE_MASK) * 8)) & 0xFF);
