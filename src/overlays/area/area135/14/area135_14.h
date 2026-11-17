@@ -109,6 +109,8 @@ extern Area135CameraPan D_801F6ABC[];
 
 extern Callback D_801F6B34[];
 extern Callback D_801F6B40[];
+/* Sets a texture window rectangle and adds it to the area cell. */
+void            func_801F3004(s32 x, s32 y, s32 width, s32 height);
 void            func_801F37C4(void);
 void            func_801F3830(s32 texture, s32 cell);
 void            func_801F3CA8(void);
