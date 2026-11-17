@@ -10,5 +10,5 @@ MATCH void func_801F3698(s16 x0, s16 y0, s16 x1, s16 y1, u16 x2, u16 y2, u8 r, u
     prim->x2 = x2;
     prim->y2 = y2;
     setRGB0(prim, r, g, b);
-    GFX_AddPrim(2, sizeof(POLY_F3));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_F3));
 }

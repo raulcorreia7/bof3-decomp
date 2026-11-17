@@ -16,7 +16,7 @@ MATCH void Menu_DrawItemRow(s32 x0, s32 y0, s32 item, s32 selection) {
     mode       = selection & BYTE_MASK;
     palette    = (u8)((0u - (u32)(mode != 0)) & 7);
     item_index = item & BYTE_MASK;
-    UI_DrawWindowOutline((s16)(x0 + 2), (s16)(y0 + 2), 0x86, 0x2A, 0xF1);
+    UI_DrawWindowOutline((s16)(x0 + 2), (s16)(y0 + 2), 0x86, 0x2A, UI_WINDOW_OUTLINE_OPEN_ALL | UI_WINDOW_OUTLINE_BLEND);
     row_off = item_index * PARTY_RECORD_STRIDE;
     stats   = (Stats*)((u8*)&g_Characters[0].stats + row_off);
     TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, stats->power);
@@ -33,7 +33,7 @@ MATCH void Menu_DrawItemRow(s32 x0, s32 y0, s32 item, s32 selection) {
     UI_DrawText((s16)(x0 + 5), (s16)(y0 + 16), (s32)palette, 4U, &g_MenuPortraitAtlas[0x36]);
     UI_DrawText((s16)(x0 + 75), (s16)(y0 + 3), (s32)palette, 4U, &g_MenuPortraitAtlas[0x3C]);
     UI_DrawText((s16)(x0 + 75), (s16)(y0 + 16), (s32)palette, 4U, &g_MenuPortraitAtlas[0x42]);
-    UI_DrawWindowOutline((s16)(x0 + 0x33), (s16)(y0 + 0x2E), 0x56, 0x14, 0xF1);
+    UI_DrawWindowOutline((s16)(x0 + 0x33), (s16)(y0 + 0x2E), 0x56, 0x14, UI_WINDOW_OUTLINE_OPEN_ALL | UI_WINDOW_OUTLINE_BLEND);
     icon_x = (x0 + 0x36) & HALF_MASK;
     Menu_DrawIcon(icon_x, (y0 + 0x30) & HALF_MASK, 4U, mode);
     TEXT_Format(g_UiFormatBuffer, g_MenuZennyFormat, (s32)g_Characters[item_index].exp);

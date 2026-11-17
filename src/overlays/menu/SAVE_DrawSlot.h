@@ -18,7 +18,7 @@ MATCH void SAVE_DrawSlot(u8 index, s32 left, s32 top, MenuListRow* row) {
                 Menu_DrawPortrait((u16)(left + 0x56 + i * 0x29), (u16)(y + 2), icon, 0);
             }
         }
-        UI_DrawText((x + 21), (y + 3), 0, 5, (u8*)row);
+        UI_DrawText((x + 21), (y + 3), 0, CHARACTER_NAME_LENGTH, (u8*)row);
         TEXT_Format(g_UiFormatBuffer, g_SaveSlotLevelFormat, row->unk_00[8]);
         UI_DrawGlyphString((x + 31), (y + 24), 0, g_UiFormatBuffer);
         TEXT_Format(g_UiFormatBuffer, g_SaveSlotTimeFormat, row->unk_00[0xC], row->unk_00[0xD]);
@@ -28,7 +28,7 @@ MATCH void SAVE_DrawSlot(u8 index, s32 left, s32 top, MenuListRow* row) {
         UI_DrawGlyphString(label_x, (y + 39), 0, (u8*)&g_SaveSlotTimeColon);
         Menu_DrawExperienceLine((x + 0x14), (y + 0x12), 0, row->unk_00[8], *(s32*)(row->unk_00 + 0x10));
     }
-    UI_DrawSpriteRun(x, y, g_SaveSlotFrameSprites, row->unk_00[0x14] && row ? 2 : 0);
+    UI_DrawSpriteRun(x, y, g_SaveSlotFrameSprites, row->unk_00[0x14] && row ? UI_SPRITE_ALT_CLUT : 0);
     if (row != NULL && row->unk_00[0x14] != 0) {
         UI_DrawSprite((x + 50), (y + 22), 0x3D, 0);
     }

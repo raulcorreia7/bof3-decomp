@@ -43,7 +43,7 @@ MATCH void func_801F77B4(void) {
         rect.w = SCREEN_WIDTH;
         rect.h = SCREEN_HEIGHT;
         SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, 0x2C0, 0);
-        GFX_AddPrim(5, sizeof(DR_MOVE));
+        GFX_AddPrim(GFX_LAYER_SCENE_BACK, sizeof(DR_MOVE));
     }
     g_AreaDrawFlags = 0;
     SND_SetBankLayout(2);
@@ -536,7 +536,7 @@ MATCH void func_801F88CC(s32 semi, s32 color) {
 
     if ((u8)semi != 0) {
         tpage = getTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_SUB, 704, 0);
-        GFX_ADD_LAYER_DRAW_MODE(2, tpage);
+        GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, tpage);
         tile = (TILE*)g_GfxPrimCursor;
         setlen(tile, 3);
         setcode(tile, 0x60);
@@ -546,10 +546,10 @@ MATCH void func_801F88CC(s32 semi, s32 color) {
         tile->w = SCREEN_WIDTH;
         setXY0(tile, 0, 0);
         tile->h = SCREEN_HEIGHT;
-        GFX_AddPrim(2, sizeof(TILE));
+        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(TILE));
     }
     tpage = getTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_ADD, 704, 0);
-    GFX_ADD_LAYER_DRAW_MODE(2, tpage);
+    GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, tpage);
     sprite = (SPRT*)g_GfxPrimCursor;
     setSprt(sprite);
     SetSemiTrans(sprite, (u8)semi);
@@ -558,9 +558,9 @@ MATCH void func_801F88CC(s32 semi, s32 color) {
     sprite->h = 0xF0;
     setUV0(sprite, 0, 0);
     setRGB0(sprite, color, color, color);
-    GFX_AddPrim(2, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(SPRT));
     tpage = getTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_ADD_LAYER_DRAW_MODE(2, tpage);
+    GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, tpage);
     sprite = (SPRT*)g_GfxPrimCursor;
     setSprt(sprite);
     SetSemiTrans(sprite, (u8)semi);
@@ -569,7 +569,7 @@ MATCH void func_801F88CC(s32 semi, s32 color) {
     sprite->h = 0xF0;
     setUV0(sprite, 0, 0);
     setRGB0(sprite, color, color, color);
-    GFX_AddPrim(2, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(SPRT));
 }
 
 #ifdef NON_MATCHING
@@ -602,7 +602,7 @@ NON_MATCHING void func_801F8B10(s32 scale, s32 shade) {
     SetRotMatrix(&mtx);
     SetTransMatrix(&mtx);
     mode = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 0, 0);
-    GFX_ADD_DITHERED_DRAW_MODE(2, mode);
+    GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, mode);
     for (i = 0; i < 32;) {
         a                         = i << 7;
         g_ScratchPadVectors[0].vx = 0;
@@ -623,7 +623,7 @@ NON_MATCHING void func_801F8B10(s32 scale, s32 shade) {
         setRGB0(tri, 0, 0, 0);
         setRGB1(tri, col, col, col);
         setRGB2(tri, col, col, col);
-        GFX_AddPrim(2, sizeof(POLY_G3));
+        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G3));
         g_ScratchPadVectors[0].vx = 0;
         g_ScratchPadVectors[0].vy = 0;
         g_ScratchPadVectors[0].vz = 0;
@@ -642,7 +642,7 @@ NON_MATCHING void func_801F8B10(s32 scale, s32 shade) {
         quad->y0 = tri->y1;
         quad->y1 = tri->y2;
         setRGB0(quad, col, col, col);
-        GFX_AddPrim(2, sizeof(POLY_F4));
+        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_F4));
     }
     PopMatrix();
 }
@@ -680,7 +680,7 @@ MATCH void func_801F8FAC(s32 x, s32 y, s32 color, u8 semi_trans) {
         return;
     }
     tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 832, 256);
-    GFX_ADD_LAYER_DRAW_MODE(2, tpage);
+    GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, tpage);
     sprite = (SPRT*)g_GfxPrimCursor;
     setSprt(sprite);
     SetSemiTrans(sprite, semi_trans);
@@ -689,7 +689,7 @@ MATCH void func_801F8FAC(s32 x, s32 y, s32 color, u8 semi_trans) {
     setUV0(sprite, 0, 0);
     sprite->clut = getClut(0, 493);
     setRGB0(sprite, color, color, color);
-    GFX_AddPrim(2, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(SPRT));
 }
 
 #ifdef NON_MATCHING

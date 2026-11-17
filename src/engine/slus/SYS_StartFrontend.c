@@ -15,7 +15,7 @@ MATCH void SYS_StartFrontend(void) {
     /* FAKE: retail keeps the clear pointer in v1. */
     FAKE_REG(u8*, clear, "v1");
 
-    GFX_ClearRect(0, 0, 1024, 512);
+    GFX_ClearRect(0, 0, GFX_VRAM_WIDTH, GFX_VRAM_HEIGHT);
     SYS_ThreadWait(1U);
     SND_Init();
     SND_SetBankLayout(0U);

@@ -14,7 +14,7 @@ MATCH void func_801984E8(void) {
     rect.h = 120;
     rect.y = (g_GfxBufferIndex * SCREEN_HEIGHT) + 80;
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, 0x340, 0x100);
-    GFX_AddPrim(5u, sizeof(DR_MOVE));
+    GFX_AddPrim(GFX_LAYER_SCENE_BACK, sizeof(DR_MOVE));
     func_801E0BD0();
     g_EncounterSteps = 0;
     g_GameStateIndex = GAME_REQUEST_IDLE;

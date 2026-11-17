@@ -50,7 +50,7 @@ MATCH void func_800AE9C4(u8 texture_index) {
            ((Pos2u*)&g_BattlePanelUV[tex_offset])->y, ((Pos2u*)&g_BattlePanelUV[tex_offset])->x, ((BattlePanelGeometry*)BATTLE_WORK)->height + ((Pos2u*)&g_BattlePanelUV[tex_offset])->y,
            ((Pos2u*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH, ((BattlePanelGeometry*)BATTLE_WORK)->height + ((Pos2u*)&g_BattlePanelUV[tex_offset])->y);
     setRGB0(primitive, 1, 1, 1);
-    GFX_AddPrim(2, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_FT4));
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
     panel2 = (BattlePanelGeometry*)BATTLE_WORK;
@@ -64,5 +64,5 @@ MATCH void func_800AE9C4(u8 texture_index) {
            ((Pos2u*)&g_BattlePanelUV[tex_offset])->y, ((Pos2u*)&g_BattlePanelUV[tex_offset])->x, ((BattlePanelGeometry*)BATTLE_WORK)->height + ((Pos2u*)&g_BattlePanelUV[tex_offset])->y,
            ((Pos2u*)&g_BattlePanelUV[tex_offset])->x + BATTLE_PANEL_WIDTH, ((BattlePanelGeometry*)BATTLE_WORK)->height + ((Pos2u*)&g_BattlePanelUV[tex_offset])->y);
     setRGB0(primitive, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
-    GFX_AddPrim(2, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_FT4));
 }

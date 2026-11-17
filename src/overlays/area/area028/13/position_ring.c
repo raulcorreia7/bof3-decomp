@@ -171,7 +171,7 @@ MATCH void func_801F2D3C(void) {
     setXY0(prim, D_801F3E00->screen.x, D_801F3E00->screen.y);
     shade    = -0x40 - (D_801F3E00->scale - 0x80) * 0xC0 / 512;
     prim->b0 = (prim->g0 = (prim->r0 = shade));
-    GFX_AddPrim(3u, sizeof(TILE_1));
+    GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(TILE_1));
 }
 
 #undef WORLD_RING_HALFWORD
@@ -294,7 +294,7 @@ MATCH void func_801F318C(s16 radius) {
         setRGB1(primitive, 0u, 0u, 0u);
         setRGB2(primitive, 0u, 0u, 0u);
 
-        GFX_AddPrim(3u, sizeof(POLY_G3));
+        GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_G3));
         i += 1;
     } while (i < 32);
 }

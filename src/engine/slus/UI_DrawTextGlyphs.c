@@ -53,7 +53,7 @@ MATCH u8* UI_DrawTextGlyphs(u8 palette, u8 byte_count, u8* text) {
                 break;
             case STRING_VAR:
                 str++;
-                UI_DrawTextGlyphs(current_palette & BYTE_MASK, 0x20, &g_TextVariables[*str][0]);
+                UI_DrawTextGlyphs(current_palette & BYTE_MASK, TEXT_VARIABLE_LENGTH, &g_TextVariables[*str][0]);
                 break;
             case STRING_SPACE:
                 D_80145ACA += 8;

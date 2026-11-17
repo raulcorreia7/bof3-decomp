@@ -61,11 +61,11 @@ MATCH void func_801999F8(MenuPanelTask* task) {
     slotp  = &D_801C7C5C[task->unk_0A];
     value  = Game_ReadCommand(*slotp) & BYTE_MASK;
     offset = (value * 4) - 0x4E;
-    UI_DrawText((task->pos.x - offset), (task->pos.y + 0x7), -(task->unk_09 != 0) & 7, 16, *slotp);
+    UI_DrawText((task->pos.x - offset), (task->pos.y + 0x7), -(task->unk_09 != 0) & 7, MENU_LABEL_LENGTH, *slotp);
     TEXT_Format(g_UiFormatBuffer, D_80195858, Item_CountHeld(task->unk_0A) & BYTE_MASK, (task->unk_0A != 4) ? 0x80 : 0x20);
     UI_DrawGlyphString((task->pos.x + 85), (task->pos.y + 146), -(task->unk_09 != 0) & 0x7, g_UiFormatBuffer);
-    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->u.list.tabs & 0x2) != 0 ? s_MenuLine1FlagRun : s_MenuLine1Run, 1);
-    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->u.list.tabs & 0x1) != 0 ? s_MenuLine2FlagRun : s_MenuLine2Run, 1);
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->u.list.tabs & 0x2) != 0 ? s_MenuLine1FlagRun : s_MenuLine1Run, UI_SPRITE_ALT_PAGE);
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->u.list.tabs & 0x1) != 0 ? s_MenuLine2FlagRun : s_MenuLine2Run, UI_SPRITE_ALT_PAGE);
     field = task->u.list.tabs;
     if ((field & 0xF0) == 0) {
         task->u.list.tabs = 0;
@@ -73,24 +73,24 @@ MATCH void func_801999F8(MenuPanelTask* task) {
         task->u.list.tabs = field - 0x10;
     }
     for (i = 0; i < 10; i++) {
-        UI_DrawSprite((task->pos.x + (i + 5) * 8), task->pos.y, 1, 1);
+        UI_DrawSprite((task->pos.x + (i + 5) * 8), task->pos.y, 1, UI_SPRITE_ALT_PAGE);
     }
     for (i = 0; i < 15; i++) {
-        UI_DrawSprite(task->pos.x, (task->pos.y + (i + 3) * 8), 4, 1);
+        UI_DrawSprite(task->pos.x, (task->pos.y + (i + 3) * 8), 4, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite((task->pos.x + 144), (task->pos.y + 24), 0x16, 1);
+    UI_DrawSprite((task->pos.x + 144), (task->pos.y + 24), 0x16, UI_SPRITE_ALT_PAGE);
     for (i = 0; i < 12; i++) {
-        UI_DrawSprite((task->pos.x + 144), (task->pos.y + (i + 5) * 8), 0x17, 1);
+        UI_DrawSprite((task->pos.x + 144), (task->pos.y + (i + 5) * 8), 0x17, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite((task->pos.x + 144), (task->pos.y + 136), 0x18, 1);
-    UI_DrawSprite(task->pos.x, (task->pos.y + 144), 0x19, 1);
+    UI_DrawSprite((task->pos.x + 144), (task->pos.y + 136), 0x18, UI_SPRITE_ALT_PAGE);
+    UI_DrawSprite(task->pos.x, (task->pos.y + 144), 0x19, UI_SPRITE_ALT_PAGE);
     for (i = 0; i < 9; i++) {
-        UI_DrawSprite((task->pos.x + (i + 1) * 8), (task->pos.y + 144), 0x1A, 1);
+        UI_DrawSprite((task->pos.x + (i + 1) * 8), (task->pos.y + 144), 0x1A, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite((task->pos.x + 80), (task->pos.y + 144), 0x1B, 1);
+    UI_DrawSprite((task->pos.x + 80), (task->pos.y + 144), 0x1B, UI_SPRITE_ALT_PAGE);
     for (i = 0; i < 6; i++) {
-        UI_DrawSprite((task->pos.x + (i + 11) * 8), (task->pos.y + 144), 0x1C, 1);
+        UI_DrawSprite((task->pos.x + (i + 11) * 8), (task->pos.y + 144), 0x1C, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite((task->pos.x + 136), (task->pos.y + 144), 0x1D, 1);
+    UI_DrawSprite((task->pos.x + 136), (task->pos.y + 144), 0x1D, UI_SPRITE_ALT_PAGE);
     func_801AFA1C(D_801C893C[task->unk_0A], task->unk_0B, (task->pos.x + 0x90), (task->pos.y + 0x18), 9, (task->unk_0A != 4) ? 0x80 : 0x20, 0x74);
 }

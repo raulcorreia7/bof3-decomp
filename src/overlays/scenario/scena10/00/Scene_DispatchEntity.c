@@ -276,9 +276,9 @@ MATCH void func_801F7C34(void) {
 
 /* Draw the "Choose parts" window with its item list and cursor, then place and step the cursor actor. */
 MATCH void func_801F7DDC(void) {
-    UI_DrawWindow(D_801FE7CC[3].x, D_801FE7CC[3].y, D_801FE7CC[3].width, D_801FE7CC[3].height, 2, g_WindowStyle);
+    UI_DrawWindow(D_801FE7CC[3].x, D_801FE7CC[3].y, D_801FE7CC[3].width, D_801FE7CC[3].height, UI_WINDOW_STYLE_TRANSLUCENT, g_WindowStyle);
     sprintf(g_UiFormatBuffer, D_801F6C04, D_801FE874);
-    UI_DrawText((u16)D_801FE7CC[3].x + 8, D_801FE7CC[3].y + 2, 0, 12, g_UiFormatBuffer);
+    UI_DrawText((u16)D_801FE7CC[3].x + 8, D_801FE7CC[3].y + 2, 0, ITEM_NAME_LENGTH, g_UiFormatBuffer);
     func_801F7AD4();
     Menu_DrawCursorSprite(D_801FE808[0], (u16)(D_801FE808[1] + (g_Task->header.step & 7) * 15), 0);
     func_801F7C34();

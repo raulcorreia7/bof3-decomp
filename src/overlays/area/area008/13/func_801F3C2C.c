@@ -15,6 +15,6 @@ MATCH void func_801F3C2C(void) {
     buf[0] = STRING_PERIOD;
     buf[1] = STRING_END;
 
-    UI_DrawText(151, 53, 0, 255u, buf);
-    UI_DrawText(151, 57, 0, 255u, buf);
+    UI_DrawText(151, 53, 0, TEXT_LENGTH_MAX, buf);
+    UI_DrawText(151, 57, 0, TEXT_LENGTH_MAX, buf);
 }

@@ -8,7 +8,7 @@ MATCH u8 func_801F42E8(void) {
 
     Area_SetCameraMatrix(&matrix);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256), NULL);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(DR_MODE));
     drawn = 0;
     slot  = MEM_PTR(AreaStreakSlot, AREA_WORK);
     for (i = 0; i < 24; slot++, i++) {

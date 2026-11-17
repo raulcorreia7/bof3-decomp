@@ -71,7 +71,7 @@ MATCH void func_801170D8(AreaSprite* sprite) {
     primitive->r0 = red;
     primitive->g0 = green;
     primitive->b0 = blue;
-    GFX_AddPrim(2, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_FT4));
 }
 
 MATCH void func_801172D0(void) {
@@ -111,7 +111,7 @@ MATCH u8 func_80117410(void) {
 
     Area_SetCameraMatrix(scratch);
     GFX_SET_DRAW_MODE(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
-    GFX_AddPrim(2, 12);
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, 12);
 
     result     = 0;
     D_801181DC = MEM_PTR(AreaSprite, AREA_WORK);
@@ -259,7 +259,7 @@ MATCH u8 func_80117900(void) {
 
     Area_SetCameraMatrix(scratch);
     GFX_SET_DRAW_MODE(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
-    GFX_AddPrim(2, 12);
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, 12);
 
     result     = 0;
     D_801181DC = MEM_PTR(AreaSprite, AREA_WORK);

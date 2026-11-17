@@ -10,7 +10,7 @@ NON_MATCHING void func_801F5050(u8 shade) {
     u8       i;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(DR_MODE));
     Area_SetCameraMatrix(scratch);
     point[0] = g_Task->pos.x.fixed - TO_COORD(2);
     point[1] = g_Task->pos.y.fixed;

@@ -7,7 +7,7 @@ MATCH void func_801E14A8(s32 x, s32 y, u8 flags, u8 row, u8 active) {
     u8* resource;
 
     Menu_DrawFilledPanel(x, y, 7, 4);
-    UI_DrawIconCell(20, (x + 7) & HALF_MASK, (y + 5) & HALF_MASK, 16, 16, 0x80);
+    UI_DrawIconCell(20, (x + 7) & HALF_MASK, (y + 5) & HALF_MASK, UI_ICON_CELL_SIZE, UI_ICON_CELL_SIZE, GFX_COLOR_NEUTRAL);
     WinDrawCueText((x + 42), (y + 7), active == 0 ? 0x1B : 0x1C);
     color    = -((flags & 0x1) == 0) & 0x7;
     resource = Message_GetText(0x85);

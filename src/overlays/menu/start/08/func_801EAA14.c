@@ -60,7 +60,7 @@ NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
             }
             val3 = val7 & BYTE_MASK;
             Menu_DrawCharacterPortrait((u16)stack_30, val6, FIELD(u8, val11, 0x5u), val9);
-            UI_DrawText((s16)(val5 + 20), (s16)(val4 + 1), val3, 5U, val11);
+            UI_DrawText((s16)(val5 + 20), (s16)(val4 + 1), val3, CHARACTER_NAME_LENGTH, val11);
             val6 = val4 + 0x15;
             Menu_DrawIcon((val5 + 2) & HALF_MASK, val6 & HALF_MASK, 3U, val10);
             TEXT_Format(g_UiFormatBuffer, D_801D0F18, FIELD(u8, val11, 0x6u));
@@ -94,7 +94,7 @@ NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
                     val2 = val3;
                 }
             block_21:
-                UI_DrawTextString(val0, val6, val2, 0x10, D_801ED5DC);
+                UI_DrawTextString(val0, val6, val2, MENU_LABEL_LENGTH, D_801ED5DC);
                 val1 = val5 + 2;
             }
             val6 = val10 & BYTE_MASK;

@@ -30,10 +30,10 @@ MATCH void Menu_DrawNameEntryGrid(u8 page, s16 grid_x, s32 grid_y) {
                         UI_DrawText(x, y, 4, 5, labels.back);
                         break;
                     case NAME_ENTRY_QUIT:
-                        UI_DrawText(x, y, 2, 5, labels.quit);
+                        UI_DrawText(x, y, UI_TEXT_HIGHLIGHT, 5, labels.quit);
                         break;
                     case NAME_ENTRY_START:
-                        UI_DrawText(x, y, 2, 5, labels.start);
+                        UI_DrawText(x, y, UI_TEXT_HIGHLIGHT, 5, labels.start);
                         break;
                 }
             } else if (col != 11 || row < 3) {

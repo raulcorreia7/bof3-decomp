@@ -43,13 +43,13 @@ MATCH void Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 item_ki
             UI_DrawGlyphString(x + MENU_EQUIP_STAT_VALUE_X, y + i * MENU_EQUIP_STAT_ROW_HEIGHT + MENU_EQUIP_STAT_VALUE_Y, flags[i], g_UiFormatBuffer);
         }
     } else {
-        clut = MENU_SHADE_DIM;
+        clut = UI_TEXT_DIM;
         TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, character->stats.power);
-        UI_DrawGlyphString(x + MENU_EQUIP_STAT_VALUE_X, y + EQUIP_STAT_ROW_POWER * MENU_EQUIP_STAT_ROW_HEIGHT + MENU_EQUIP_STAT_VALUE_Y, MENU_SHADE_DIM, g_UiFormatBuffer);
+        UI_DrawGlyphString(x + MENU_EQUIP_STAT_VALUE_X, y + EQUIP_STAT_ROW_POWER * MENU_EQUIP_STAT_ROW_HEIGHT + MENU_EQUIP_STAT_VALUE_Y, UI_TEXT_DIM, g_UiFormatBuffer);
         TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, character->stats.defense);
-        UI_DrawGlyphString(x + MENU_EQUIP_STAT_VALUE_X, y + EQUIP_STAT_ROW_DEFENSE * MENU_EQUIP_STAT_ROW_HEIGHT + MENU_EQUIP_STAT_VALUE_Y, MENU_SHADE_DIM, g_UiFormatBuffer);
+        UI_DrawGlyphString(x + MENU_EQUIP_STAT_VALUE_X, y + EQUIP_STAT_ROW_DEFENSE * MENU_EQUIP_STAT_ROW_HEIGHT + MENU_EQUIP_STAT_VALUE_Y, UI_TEXT_DIM, g_UiFormatBuffer);
         TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, character->stats.agility);
-        UI_DrawGlyphString(x + MENU_EQUIP_STAT_VALUE_X, y + EQUIP_STAT_ROW_AGILITY * MENU_EQUIP_STAT_ROW_HEIGHT + MENU_EQUIP_STAT_VALUE_Y, MENU_SHADE_DIM, g_UiFormatBuffer);
+        UI_DrawGlyphString(x + MENU_EQUIP_STAT_VALUE_X, y + EQUIP_STAT_ROW_AGILITY * MENU_EQUIP_STAT_ROW_HEIGHT + MENU_EQUIP_STAT_VALUE_Y, UI_TEXT_DIM, g_UiFormatBuffer);
     }
     Menu_DrawCharacterPortrait((x + MENU_EQUIP_STAT_PORTRAIT_X) & HALF_MASK, (y + MENU_EQUIP_STAT_PORTRAIT_Y) & HALF_MASK, character->character_id, shaded);
     for (i = 0; i < MENU_EQUIP_STAT_ROWS; i++) {

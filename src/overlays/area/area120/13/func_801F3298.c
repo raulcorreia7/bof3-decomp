@@ -43,7 +43,7 @@ MATCH void func_801F3298(void) {
                 prim->r0 = (tile->color & 0x1F) << 3;
                 prim->g0 = (tile->color & 0x3E0) >> 2;
                 prim->b0 = (tile->color & 0x7C00) >> 7;
-                GFX_AddPrim(2, sizeof(TILE_1));
+                GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(TILE_1));
                 missed = 0;
             }
             tile++;

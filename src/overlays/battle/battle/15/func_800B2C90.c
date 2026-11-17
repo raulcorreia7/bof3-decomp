@@ -43,7 +43,7 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
                 if ((icon_x == task->flags) || (icon_x == task->unk_0C)) {
                     icon &= BYTE_MASK;
                     if (icon != 7) {
-                        UI_DrawAbilityRow((s16)(task->pos.x + 7), (s16)(row_y + 0x1A), 7U, ability_id & BYTE_MASK, ability_obj, ability_kind & BYTE_MASK, 1);
+                        UI_DrawAbilityRow((s16)(task->pos.x + 7), (s16)(row_y + 0x1A), UI_TEXT_DIM, ability_id & BYTE_MASK, ability_obj, ability_kind & BYTE_MASK, 1);
                     }
                     icon_y = (s16)(row_y + 0x18);
                 } else {
@@ -66,17 +66,17 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
     selection += 0x4E;
     selection -= strlen(text_table) * 4;
     selection <<= 0x10;
-    UI_DrawText((s16)((s32)selection >> 16), (s16)(task->pos.y + 7), 0, 0x10U, text_table);
+    UI_DrawText((s16)((s32)selection >> 16), (s16)(task->pos.y + 7), 0, MENU_LABEL_LENGTH, text_table);
     name_table = &s_BattleAbilityLine1Run;
     if (task->unk_09 & 2) {
         name_table = &s_BattleAbilityLine1FlagRun;
     }
-    UI_DrawSpriteRun((s16)task->pos.x, (s16)task->pos.y, name_table, 1);
+    UI_DrawSpriteRun((s16)task->pos.x, (s16)task->pos.y, name_table, UI_SPRITE_ALT_PAGE);
     name_table = &s_BattleAbilityLine2Run;
     if (task->unk_09 & 1) {
         name_table = &s_BattleAbilityLine2FlagRun;
     }
-    UI_DrawSpriteRun((s16)task->pos.x, (s16)task->pos.y, name_table, 1);
+    UI_DrawSpriteRun((s16)task->pos.x, (s16)task->pos.y, name_table, UI_SPRITE_ALT_PAGE);
     ability_kind = task->unk_09;
     if (!(ability_kind & 0xF0)) {
         task->unk_09 = 0;
@@ -87,32 +87,32 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
     do {
         selection = index;
         index += 1;
-        UI_DrawSprite((s16)(task->pos.x + ((selection + 5) * 8)), (s16)task->pos.y, 1, 1);
+        UI_DrawSprite((s16)(task->pos.x + ((selection + 5) * 8)), (s16)task->pos.y, 1, UI_SPRITE_ALT_PAGE);
     } while (index < 10);
     index = 0;
     do {
         selection = index;
         index += 1;
-        UI_DrawSprite((s16)task->pos.x, (s16)(task->pos.y + ((selection + 3) * 8)), 4, 1);
+        UI_DrawSprite((s16)task->pos.x, (s16)(task->pos.y + ((selection + 3) * 8)), 4, UI_SPRITE_ALT_PAGE);
     } while (index < 12);
     index = 0;
-    UI_DrawSprite((s16)(task->pos.x + 144), (s16)(task->pos.y + 24), 0x16, 1);
+    UI_DrawSprite((s16)(task->pos.x + 144), (s16)(task->pos.y + 24), 0x16, UI_SPRITE_ALT_PAGE);
     do {
         selection = index;
         index += 1;
-        UI_DrawSprite((s16)(task->pos.x + 144), (s16)(task->pos.y + ((selection + 5) * 8)), 0x17, 1);
+        UI_DrawSprite((s16)(task->pos.x + 144), (s16)(task->pos.y + ((selection + 5) * 8)), 0x17, UI_SPRITE_ALT_PAGE);
     } while (index < 9);
     index = 0;
-    UI_DrawSprite((s16)(task->pos.x + 144), (s16)(task->pos.y + 112), 0x18, 1);
-    UI_DrawSprite((s16)task->pos.x, (s16)(task->pos.y + 120), 0x19, 1);
+    UI_DrawSprite((s16)(task->pos.x + 144), (s16)(task->pos.y + 112), 0x18, UI_SPRITE_ALT_PAGE);
+    UI_DrawSprite((s16)task->pos.x, (s16)(task->pos.y + 120), 0x19, UI_SPRITE_ALT_PAGE);
     do {
         selection = index;
         index += 1;
-        UI_DrawSprite((s16)(task->pos.x + ((selection + 1) * 8)), (s16)(task->pos.y + 120), 0x1A, 1);
+        UI_DrawSprite((s16)(task->pos.x + ((selection + 1) * 8)), (s16)(task->pos.y + 120), 0x1A, UI_SPRITE_ALT_PAGE);
     } while (index < 17);
     if ((s16)task->u.addr.unk_14 != 0) {
-        UI_DrawSprite((s16)(task->pos.x + 8), (s16)task->pos.y, 0x32, 1);
-        UI_DrawSprite((s16)(task->pos.x + 144), (s16)task->pos.y, 0x33, 1);
+        UI_DrawSprite((s16)(task->pos.x + 8), (s16)task->pos.y, 0x32, UI_SPRITE_ALT_PAGE);
+        UI_DrawSprite((s16)(task->pos.x + 144), (s16)task->pos.y, 0x33, UI_SPRITE_ALT_PAGE);
     }
     func_801AFA1C(Party_GetAbilities((u32)task->unk_0A, (u32)task->unk_0B, 1U), (u8)task->u.battle.cursor, (s16)(task->pos.x + 0x90), (s16)(task->pos.y + 0x18), 7, 0xA, 0x5C);
 }

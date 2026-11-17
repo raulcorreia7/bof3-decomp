@@ -13,7 +13,7 @@ MATCH void Fishing_DrawDimScreen(void) {
     primitive->g0 = 32;
     primitive->r0 = 32;
     setXY0(primitive, 0, 0);
-    setWH(primitive, 320, 240);
+    setWH(primitive, SCREEN_WIDTH, SCREEN_HEIGHT);
     SetSemiTrans(primitive, 1);
-    GFX_AddPrim(2, sizeof(TILE));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(TILE));
 }

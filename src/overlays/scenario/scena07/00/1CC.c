@@ -544,7 +544,7 @@ MATCH void func_801F8804(u8 shade) {
     SetTile(tile);
     SetSemiTrans(tile, 1);
     setXY0(tile, 0, 0);
-    setWH(tile, 320, 240);
+    setWH(tile, SCREEN_WIDTH, SCREEN_HEIGHT);
     setRGB0(tile, shade, shade, shade);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
 }

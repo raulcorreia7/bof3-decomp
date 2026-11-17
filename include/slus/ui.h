@@ -3,6 +3,17 @@
 
 #include "types.h"
 
+/* The text colour cells of stage palette row 0: the low nibble of a UI_DrawText palette, the
+ * cell argument of the other drawers. */
+enum {
+    UI_TEXT_NORMAL    = 0,
+    UI_TEXT_HIGHLIGHT = 2,
+    UI_TEXT_DIM       = 7,
+};
+
+/* The width and height of one UI_DrawIconCell icon. */
+#define UI_ICON_CELL_SIZE 16
+
 /* The executable's window and menu text functions, in address order. */
 /* func_8014ECAC */
 void        UI_SetMode(u16 local_mode);

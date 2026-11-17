@@ -36,10 +36,10 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
                 unusable = true;
             }
             dim   = unusable;
-            shade = -dim & MENU_SHADE_DIM;
+            shade = -dim & UI_TEXT_DIM;
             row   = task->unk_0B + i;
             if (row == task->flags) {
-                shade = MENU_SHADE_SELECTED;
+                shade = UI_TEXT_HIGHLIGHT;
             }
             row_shade = shade;
             held      = 1;
@@ -47,8 +47,8 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
                 held = *counts;
             }
             if (row == task->flags || row == task->unk_0C) {
-                if (row_shade != MENU_SHADE_DIM) {
-                    func_801AF800(task->pos.x + 7, (s16)(y + 26), MENU_SHADE_DIM, task->unk_0A, *ids, held, true);
+                if (row_shade != UI_TEXT_DIM) {
+                    func_801AF800(task->pos.x + 7, (s16)(y + 26), UI_TEXT_DIM, task->unk_0A, *ids, held, true);
                 }
                 func_801AF800(task->pos.x + 7, (s16)(y + 24), row_shade, task->unk_0A, *ids, held, dim);
             } else {
@@ -65,12 +65,12 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
     title   = &g_MenuInventoryTitles[task->unk_0A];
     length  = Game_ReadCommand(*title);
     title_x = length * 4 - 78;
-    UI_DrawText(task->pos.x - title_x, task->pos.y + 7, -(task->unk_09 != 0) & MENU_SHADE_DIM, 16, *title);
+    UI_DrawText(task->pos.x - title_x, task->pos.y + 7, -(task->unk_09 != 0) & UI_TEXT_DIM, MENU_LABEL_LENGTH, *title);
     sprintf(g_UiFormatBuffer, g_MenuInventoryCountFormat, Item_CountHeld(task->unk_0A) & BYTE_MASK, task->unk_0A != ITEM_CATEGORY_VITAL ? INV_SLOTS_PER_CATEGORY : INV_VITAL_ITEM_SLOTS);
-    UI_DrawGlyphString(task->pos.x + 85, task->pos.y + 122, -(task->unk_09 != 0) & MENU_SHADE_DIM, g_UiFormatBuffer);
+    UI_DrawGlyphString(task->pos.x + 85, task->pos.y + 122, -(task->unk_09 != 0) & UI_TEXT_DIM, g_UiFormatBuffer);
 
-    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->u.list.tabs & MENU_LIST_FLAG_TAB_2) ? s_BattleAbilityLine1FlagRun : s_BattleAbilityLine1Run, 1);
-    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->u.list.tabs & MENU_LIST_FLAG_TAB_1) ? s_BattleAbilityLine2FlagRun : s_BattleAbilityLine2Run, 1);
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->u.list.tabs & MENU_LIST_FLAG_TAB_2) ? s_BattleAbilityLine1FlagRun : s_BattleAbilityLine1Run, UI_SPRITE_ALT_PAGE);
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->u.list.tabs & MENU_LIST_FLAG_TAB_1) ? s_BattleAbilityLine2FlagRun : s_BattleAbilityLine2Run, UI_SPRITE_ALT_PAGE);
     tabs = task->u.list.tabs;
     if ((tabs & MENU_LIST_FRAME_MASK) == 0) {
         task->u.list.tabs = 0;
@@ -79,25 +79,25 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
     }
 
     for (i = 0; i < 10; i++) {
-        UI_DrawSprite(task->pos.x + (i + 5) * 8, task->pos.y, 1, 1);
+        UI_DrawSprite(task->pos.x + (i + 5) * 8, task->pos.y, 1, UI_SPRITE_ALT_PAGE);
     }
     for (i = 0; i < 12; i++) {
-        UI_DrawSprite(task->pos.x, task->pos.y + (i + 3) * 8, 4, 1);
+        UI_DrawSprite(task->pos.x, task->pos.y + (i + 3) * 8, 4, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite(task->pos.x + 144, task->pos.y + 24, 0x16, 1);
+    UI_DrawSprite(task->pos.x + 144, task->pos.y + 24, 0x16, UI_SPRITE_ALT_PAGE);
     for (i = 0; i < 9; i++) {
-        UI_DrawSprite(task->pos.x + 144, task->pos.y + (i + 5) * 8, 0x17, 1);
+        UI_DrawSprite(task->pos.x + 144, task->pos.y + (i + 5) * 8, 0x17, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite(task->pos.x + 144, task->pos.y + 112, 0x18, 1);
-    UI_DrawSprite(task->pos.x, task->pos.y + 120, 0x19, 1);
+    UI_DrawSprite(task->pos.x + 144, task->pos.y + 112, 0x18, UI_SPRITE_ALT_PAGE);
+    UI_DrawSprite(task->pos.x, task->pos.y + 120, 0x19, UI_SPRITE_ALT_PAGE);
     for (i = 0; i < 9; i++) {
-        UI_DrawSprite(task->pos.x + (i + 1) * 8, task->pos.y + 120, 0x1A, 1);
+        UI_DrawSprite(task->pos.x + (i + 1) * 8, task->pos.y + 120, 0x1A, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite(task->pos.x + 80, task->pos.y + 120, 0x1B, 1);
+    UI_DrawSprite(task->pos.x + 80, task->pos.y + 120, 0x1B, UI_SPRITE_ALT_PAGE);
     for (i = 0; i < 6; i++) {
-        UI_DrawSprite(task->pos.x + (i + 11) * 8, task->pos.y + 120, 0x1C, 1);
+        UI_DrawSprite(task->pos.x + (i + 11) * 8, task->pos.y + 120, 0x1C, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite(task->pos.x + 136, task->pos.y + 120, 0x1D, 1);
+    UI_DrawSprite(task->pos.x + 136, task->pos.y + 120, 0x1D, UI_SPRITE_ALT_PAGE);
 
     func_801AFA1C(D_801C893C[task->unk_0A], task->unk_0B, task->pos.x + 144, task->pos.y + 24, 7, INV_SLOTS_PER_CATEGORY, 92);
 }

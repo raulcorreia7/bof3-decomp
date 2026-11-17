@@ -238,7 +238,7 @@ MATCH void func_801D147C(s32* pos, s16 origin, s32 flags) {
         setRGB0(primitive, (flags & 4) << 5, (flags & 2) << 6, (flags & 1) << 7);
         setRGB1(primitive, 0, 0, 0);
         setRGB2(primitive, 0, 0, 0);
-        GFX_AddPrim(2u, sizeof(POLY_G3));
+        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G3));
         i += 1;
     } while ((i & BYTE_MASK) < 32U);
 }
@@ -268,7 +268,7 @@ MATCH void func_801D1678(s32* from, s32* to, u8 intensity) {
     setRGB1(prim, intensity, intensity, 0);
     setRGB2(prim, 0, 0, 0);
     setRGB3(prim, intensity, intensity, 0);
-    GFX_AddPrim(2, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G4));
 
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
@@ -287,7 +287,7 @@ MATCH void func_801D1678(s32* from, s32* to, u8 intensity) {
     setRGB1(prim, 0, 0, 0);
     setRGB2(prim, intensity, intensity, 0);
     setRGB3(prim, 0, 0, 0);
-    GFX_AddPrim(2, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G4));
 
     step.vx    = g_Task->unk_64;
     step.vy    = g_Task->unk_68;
@@ -303,7 +303,7 @@ MATCH void func_801D1678(s32* from, s32* to, u8 intensity) {
         SetSemiTrans(segment, 1);
         setXY0(segment, projected.vx, projected.vy);
         setRGB0(segment, intensity, intensity, 0);
-        GFX_AddPrim(2, 12);
+        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, 12);
         current.vx += g_Task->unk_64 << 4;
         current.vy += g_Task->unk_68 << 4;
         current.vz += g_Task->unk_6C << 4;
@@ -411,7 +411,7 @@ MATCH void func_801D1CD4(const SpinEffect* spin) {
     setRGB1(primitive, 0, 0, 0);
     setRGB2(primitive, 0, 0, 0);
 
-    GFX_AddPrim(2u, sizeof(POLY_G3));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G3));
 }
 
 #include "shared/Area_InitSpin.h"
@@ -643,7 +643,7 @@ MATCH void func_801D2934(void) {
             tile->r0 = (dot->color & 0x1F) << 3;
             tile->g0 = (dot->color & 0x3E0) >> 2;
             tile->b0 = (dot->color & 0x7C00) >> 7;
-            GFX_AddPrim(2u, sizeof(TILE_1));
+            GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(TILE_1));
         }
         dot->active ^= 1;
     }
@@ -912,7 +912,7 @@ MATCH void func_801D34F0(void) {
             tile->r0 = (dot->color & 0x1F) << 3;
             tile->g0 = (dot->color & 0x3E0) >> 2;
             tile->b0 = (dot->color & 0x7C00) >> 7;
-            GFX_AddPrim(2, sizeof(TILE_1));
+            GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(TILE_1));
         }
         dot->active ^= 1;
     }
@@ -938,7 +938,7 @@ MATCH void func_801D36BC(s32* point, s32 orange_radius, s32 black_radius) {
     u8       i;
 
     tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100);
-    GFX_ADD_LAYER_DRAW_MODE(2, tpage);
+    GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, tpage);
     Area_SetCameraMatrix(&camera);
     vertex.vx = point[0] + (orange_radius << 4);
     vertex.vy = point[1];
@@ -970,7 +970,7 @@ MATCH void func_801D36BC(s32* point, s32 orange_radius, s32 black_radius) {
         setRGB1(prim, 0, 0, 0);
         setRGB2(prim, 0xFF, 0x7F, 0);
         setRGB3(prim, 0, 0, 0);
-        GFX_AddPrim(2, sizeof(POLY_G4));
+        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G4));
         i++;
     } while (i < 32);
 }

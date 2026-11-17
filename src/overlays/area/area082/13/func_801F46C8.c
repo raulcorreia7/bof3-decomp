@@ -11,7 +11,7 @@ NON_MATCHING void func_801F46C8(s32 turn, s32 count, s32 angle, s32 height) {
         tpage = 0x35;
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(5, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_SCENE_BACK, sizeof(DR_MODE));
     PopMatrix();
 }
 #else

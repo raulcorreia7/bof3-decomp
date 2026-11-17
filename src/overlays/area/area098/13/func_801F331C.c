@@ -28,7 +28,7 @@ MATCH void func_801F331C(void) {
             tile->r0 = (dot->color & 0x1F) << 3;
             tile->g0 = (dot->color & 0x3E0) >> 2;
             tile->b0 = (dot->color & 0x7C00) >> 7;
-            GFX_AddPrim(2, sizeof(TILE_1));
+            GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(TILE_1));
         }
         dot->active ^= 1;
     }

@@ -1,6 +1,9 @@
 #ifndef GAME_TEXT_H
 #define GAME_TEXT_H
 
+/* The bytes in one g_TextVariables row: UI_DrawTextGlyphs reads a variable string as one row. */
+#define TEXT_VARIABLE_LENGTH   0x20
+
 /* The string piece that writes each control code into a text record. */
 #define T_END                  "\x00"
 #define T_NEWLINE              "\x01"

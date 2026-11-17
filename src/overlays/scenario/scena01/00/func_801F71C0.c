@@ -17,7 +17,7 @@ MATCH void func_801F729C(void) {
     POLY_G4* prim;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_SUB, 0x140, 0) & 0xFFFF, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(DR_MODE));
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
@@ -34,9 +34,9 @@ MATCH void func_801F729C(void) {
     prim->g2 = 0;
     prim->b3 = 0;
     prim->b2 = 0;
-    GFX_AddPrim(2, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G4));
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_QUARTER, 0x140, 0x140) & 0xFFFF, 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(DR_MODE));
 }
 
 MATCH void func_801F73B8(void) {
@@ -226,13 +226,13 @@ MATCH void func_801F7EDC(void) {
 
     tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_SET_DRAW_MODE(tpage);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(DR_MODE));
     prim = (POLY_F4*)g_GfxPrimCursor;
     SetPolyF4(prim);
     SetSemiTrans(prim, 1);
     setXYWH(prim, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     setRGB0(prim, (s16)g_Task->screen_x / 8, 0, 0);
-    GFX_AddPrim(3, sizeof(POLY_F4));
+    GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_F4));
 }
 
 MATCH void func_801F7FC4(void) {

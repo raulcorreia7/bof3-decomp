@@ -47,7 +47,7 @@ MATCH void func_801D11DC(void) {
     if (D_801D1774 < 4U) {
         D_801D1774 += 1;
     }
-    UI_DrawWindow(0x14, (0x12 - (D_801D1774 * 12)) & 0xFFFE, 0x118, 0x13, 0xF2, g_WindowStyle);
+    UI_DrawWindow(0x14, (0x12 - (D_801D1774 * 12)) & 0xFFFE, 0x118, 0x13, UI_WINDOW_OPEN_ALL | UI_WINDOW_STYLE_TRANSLUCENT, g_WindowStyle);
     UI_DrawWindowOutline(0x16, 0x14 - (D_801D1774 * 12), 0x113, 0xF, 0);
     if (g_MenuPanelTasks[0].state == 0) {
         Menu_ResetPanelTasks();
@@ -64,7 +64,7 @@ MATCH void func_801D12C8(void) {
     if (D_801D1774 < 4U) {
         D_801D1774 += 1;
     }
-    UI_DrawWindow(0x14, (0x12 - (D_801D1774 * 12)) & 0xFFFE, 0x118, 0x13, 0xF2, g_WindowStyle);
+    UI_DrawWindow(0x14, (0x12 - (D_801D1774 * 12)) & 0xFFFE, 0x118, 0x13, UI_WINDOW_OPEN_ALL | UI_WINDOW_STYLE_TRANSLUCENT, g_WindowStyle);
     UI_DrawWindowOutline(0x16, 0x14 - (D_801D1774 * 12), 0x113, 0xF, 0);
     if (g_MenuPanelTasks[0].state != 0) {
         return;

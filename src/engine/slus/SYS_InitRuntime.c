@@ -14,7 +14,7 @@ MATCH void SYS_InitRuntime(void) {
     SYS_ThreadInit();
     g_GfxBufferIndex   = 0;
     g_GfxCurrentBuffer = work;
-    GFX_ClearRect(0, 0, 1024, 512);
+    GFX_ClearRect(0, 0, GFX_VRAM_WIDTH, GFX_VRAM_HEIGHT);
     DrawSync(0);
     SetDispMask(1);
     SYS_PrepareFrame();

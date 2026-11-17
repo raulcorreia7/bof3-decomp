@@ -16,7 +16,7 @@ MATCH void func_801F3308(s32 x, s32 y, s32 z, s32 semitrans) {
     Area_ProjectPoint(pos, (DVECTOR*)&p->x1);
     setRGB0(p, g_Task->tint.bytes.rgb.red, 0, 0);
     SetSemiTrans(p, semitrans & BYTE_MASK);
-    GFX_AddPrim(3, 0x10);
+    GFX_AddPrim(GFX_LAYER_EFFECT, 0x10);
 
     p = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(p);
@@ -29,6 +29,6 @@ MATCH void func_801F3308(s32 x, s32 y, s32 z, s32 semitrans) {
     pos[2] = z;
     Area_ProjectPoint(pos, (DVECTOR*)&p->x1);
     setRGB0(p, g_Task->tint.bytes.rgb.red, 0, 0);
-    GFX_AddPrim(3, 0x10);
+    GFX_AddPrim(GFX_LAYER_EFFECT, 0x10);
     SetSemiTrans(p, semitrans & BYTE_MASK);
 }

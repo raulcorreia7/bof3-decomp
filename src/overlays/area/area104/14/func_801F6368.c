@@ -24,7 +24,7 @@ NON_MATCHING void func_801F6368(void) {
     } else {
         tpage = 0x35;
     }
-    GFX_ADD_LAYER_DRAW_MODE(2, tpage);
+    GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, tpage);
 
     radius = 8 - ((g_FrameCount >> 1) & 7);
     shade  = ~(radius * 0x1E);
@@ -41,7 +41,7 @@ NON_MATCHING void func_801F6368(void) {
         prim->x2 = centre_x + ((radius * rcos(i * 0xAA)) >> 12);
         prim->y2 = centre_y + ((radius * rsin(i * 0xAA)) >> 12);
         setRGB0(prim, shade, 0, 0);
-        GFX_AddPrim(2, sizeof(POLY_G3));
+        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G3));
     } while (i < 0x18);
 }
 #else

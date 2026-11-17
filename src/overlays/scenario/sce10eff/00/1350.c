@@ -94,7 +94,7 @@ MATCH void func_801D218C(void) {
             setRGB0(primitive, cell[1], cell[1], 32);
             cell[1] = (rand() + 0x40) & 0x3F;
             setRGB1(primitive, cell[1], cell[1], 0x20);
-            GFX_AddPrim(2, sizeof(LINE_G2));
+            GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(LINE_G2));
             i++;
         } while (i < cell[2]);
     }
@@ -111,7 +111,7 @@ MATCH void func_801D240C(void) {
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
     i         = 0;
     angle_ptr = &g_ScratchPad;
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(DR_MODE));
 
     do {
         primitive = GFX_BeginPolyG3(1);
@@ -127,7 +127,7 @@ MATCH void func_801D240C(void) {
         setRGB0(primitive, g_Task->band * 8, g_Task->band * 8, g_Task->band * 6);
         setRGB1(primitive, 1, 1, 1);
         setRGB2(primitive, 1, 1, 1);
-        GFX_AddPrim(2, sizeof(POLY_G3));
+        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G3));
     } while (i < 8);
 }
 

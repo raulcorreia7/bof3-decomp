@@ -447,7 +447,7 @@ MATCH void func_801F8108(s32 x, s32 y) {
     rect.w  = width;
     rect.h  = height;
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, 832, 256);
-    GFX_AddPrim(2, sizeof(DR_MOVE));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(DR_MOVE));
 
     rect.x  = x;
     frame_y = g_GfxBufferIndex * 240 - 64;
@@ -455,7 +455,7 @@ MATCH void func_801F8108(s32 x, s32 y) {
     rect.w  = width;
     rect.h  = height;
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, 832, 384);
-    GFX_AddPrim(2, sizeof(DR_MOVE));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(DR_MOVE));
 }
 
 MATCH void func_801F81F4(u16 value) {
@@ -504,7 +504,7 @@ NON_MATCHING void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
         setRGB1(prim, 0x60, 0x60, 0x60);
         setRGB2(prim, 0x40, 0x40, 0x80);
         setRGB3(prim, 0x60, 0x60, 0x60);
-        GFX_AddPrim(2, sizeof(POLY_GT4));
+        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_GT4));
 
         prim = (POLY_GT4*)g_GfxPrimCursor;
         SetPolyGT4(prim);
@@ -523,7 +523,7 @@ NON_MATCHING void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
         setRGB1(prim, 0x80, 0x40, 0x40);
         setRGB2(prim, 0x60, 0x60, 0x60);
         setRGB3(prim, 0x80, 0x40, 0x40);
-        GFX_AddPrim(2, sizeof(POLY_GT4));
+        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_GT4));
     }
 }
 #else
@@ -583,7 +583,7 @@ NON_MATCHING void func_801F85F0(s16 x, s16 y, s16 radius) {
         setRGB2(prim, 0x40, 0x40, 0x80);
         setRGB3(prim, 0x60, 0x60, 0x60);
         prim->tpage = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
-        GFX_AddPrim(2, sizeof(POLY_GT4));
+        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_GT4));
 
         prim = (POLY_GT4*)g_GfxPrimCursor;
         SetPolyGT4(prim);
@@ -606,7 +606,7 @@ NON_MATCHING void func_801F85F0(s16 x, s16 y, s16 radius) {
         setRGB2(prim, 0x60, 0x60, 0x60);
         setRGB3(prim, 0x80, 0x40, 0x40);
         prim->tpage = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
-        GFX_AddPrim(2, sizeof(POLY_GT4));
+        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_GT4));
     } while (count < 16);
 }
 #else

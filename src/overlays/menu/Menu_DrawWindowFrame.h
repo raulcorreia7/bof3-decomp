@@ -97,10 +97,10 @@ MATCH void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height) {
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
 
     /* the corners */
-    UI_DrawSprite(x, y, 0x23, 1);
+    UI_DrawSprite(x, y, 0x23, UI_SPRITE_ALT_PAGE);
     columns = width - 2;
-    UI_DrawSprite(x + columns * 8, y, 0x26, 1);
+    UI_DrawSprite(x + columns * 8, y, 0x26, UI_SPRITE_ALT_PAGE);
     rows = height - 2;
-    UI_DrawSprite(x, y + rows * 8, 0x27, 1);
-    UI_DrawSprite(x + columns * 8, y + rows * 8, 0x29, 1);
+    UI_DrawSprite(x, y + rows * 8, 0x27, UI_SPRITE_ALT_PAGE);
+    UI_DrawSprite(x + columns * 8, y + rows * 8, 0x29, UI_SPRITE_ALT_PAGE);
 }

@@ -22,7 +22,7 @@ MATCH void func_8014F024(void) {
     g_AreaCameraRefreshCount = 2;
 
     do {
-        GFX_UpdateScreenFade(&level, -0x400, 1, 0U, 2U);
+        GFX_UpdateScreenFade(&level, -0x400, 1, GFX_LAYER_TOP, TPAGE_ABR_SUB);
         SYS_ThreadWait(1U);
         iterations++;
     } while (iterations < 5);
@@ -32,7 +32,7 @@ MATCH void func_8014F024(void) {
     second_coordinate = coordinates + 2;
     do {
         if (masked_status == 0) {
-            status = GFX_UpdateScreenFade(&level, -0x400, 1, 0U, 2U);
+            status = GFX_UpdateScreenFade(&level, -0x400, 1, GFX_LAYER_TOP, TPAGE_ABR_SUB);
         }
         first_value              = *coordinates;
         second_value             = coordinates[2];

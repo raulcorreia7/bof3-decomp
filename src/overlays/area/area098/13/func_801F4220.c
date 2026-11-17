@@ -14,5 +14,5 @@ MATCH void func_801F4220(AreaStreakSlot* slot) {
     prim->y1 = xy.vy;
     setRGB0(prim, slot->head_shade, slot->head_shade >> 1, 0);
     setRGB1(prim, slot->tail_shade, slot->tail_shade >> 1, 0);
-    GFX_AddPrim(2, sizeof(LINE_G2));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(LINE_G2));
 }

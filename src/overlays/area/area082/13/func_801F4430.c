@@ -67,7 +67,7 @@ NON_MATCHING void func_801F4430(void) {
             y = screen_y;
         }
         Area_ApplyTileToQuad(((u32)(y & -8) << 16) | tile, prim, 1);
-        GFX_AddPrim(5, 0x28);
+        GFX_AddPrim(GFX_LAYER_SCENE_BACK, 0x28);
         i++;
     } while (i < 4);
 

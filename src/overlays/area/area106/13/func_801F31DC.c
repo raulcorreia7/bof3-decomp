@@ -15,7 +15,7 @@ NON_MATCHING void func_801F31DC(s32 depth, s32 height) {
     long      flag;
 
     tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_LAYER_DRAW_MODE(5, tpage);
+    GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_SCENE_BACK, tpage);
 
     x_base = -0x37C0;
     y_base = -0x2DC0;
@@ -35,7 +35,7 @@ NON_MATCHING void func_801F31DC(s32 depth, s32 height) {
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (s32*)((u8*)prim + 8), (s32*)((u8*)prim + 0x10), (s32*)((u8*)prim + 0x18),
                       (s32*)((u8*)prim + 0x20), &p, &flag);
         Area_ApplyTileToQuad((height << 16) | AREA106_QUAD_PART_WORD, prim, 1);
-        GFX_AddPrim(5, sizeof(POLY_FT4));
+        GFX_AddPrim(GFX_LAYER_SCENE_BACK, sizeof(POLY_FT4));
         n += 12;
     }
 }
