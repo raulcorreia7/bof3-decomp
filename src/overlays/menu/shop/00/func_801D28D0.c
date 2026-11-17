@@ -56,14 +56,14 @@ MATCH void func_801D28D0(void) {
             panel->group_cursor = (panel->group_cursor - 1);
         }
         if ((panel->group_cursor) < (panel->group_first)) {
-            panel->confirm_gate = 0xF0;
+            panel->confirm_timer = 0xF0;
         }
     } else if (buttons & PADLdown) {
         if (old_cursor < 0x7FU) {
             panel->group_cursor = (panel->group_cursor + 1);
         }
         if ((panel->group_cursor) >= (panel->group_first + 9)) {
-            panel->confirm_gate = 0x10;
+            panel->confirm_timer = 0x10;
         }
     } else if (buttons & PADL1) {
         row_limit = panel->group_first & BYTE_MASK;
@@ -93,7 +93,7 @@ MATCH void func_801D28D0(void) {
     if (old_cursor != panel->group_cursor) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
-    if (panel->confirm_gate == 0) {
+    if (panel->confirm_timer == 0) {
         if ((g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
             selected_item      = (g_ShopItemId = D_801C893C[panel->group][panel->group_cursor]);
             g_ShopItemCategory = panel->group;

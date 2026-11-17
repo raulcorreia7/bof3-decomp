@@ -63,7 +63,7 @@ MATCH void func_801D3D00(void) {
     if (cursor != panel->group_cursor) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
-    if (panel->confirm_gate == 0) {
+    if (panel->confirm_timer == 0) {
         if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
             if (panel->drawn_cursor == GAME_NONE) {
                 SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));

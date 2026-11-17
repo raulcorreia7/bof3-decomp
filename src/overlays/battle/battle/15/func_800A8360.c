@@ -19,7 +19,7 @@ MATCH void func_800A8360(void) {
         D_8014857D          = 0xFFu;
     FAKE_ORDER_LOCK_END;
     D_80148574                        = -0xAA;
-    g_MenuPanelTasks[16].handler      = eight;
+    g_MenuPanelTasks[16].panel        = eight;
     g_MenuPanelTasks[16].unk_0A       = 0u;
     g_MenuPanelTasks[16].unk_0B       = 0u;
     g_MenuPanelTasks[16].unk_0C       = 0u;

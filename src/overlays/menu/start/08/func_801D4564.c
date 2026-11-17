@@ -62,7 +62,7 @@ MATCH void func_801D4564(void) {
     if (cursor != panel->group_cursor) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
-    if (panel->confirm_gate == 0) {
+    if (panel->confirm_timer == 0) {
         if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
             SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
             state_counter       = &D_80148651;

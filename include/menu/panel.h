@@ -89,8 +89,8 @@ typedef struct MenuChoicePanel {
     u8    group_cursor; /* 0x0C: the cursor's entry */
     u8    drawn_cursor; /* 0x0D: the drawn cursor, 0xFF when none */
     u8    pad_0E[0x02];
-    u16   unk_10;       /* 0x10: 0x31 or 0x32 after a cursor move; role unknown */
-    s16   confirm_gate; /* 0x12: non-zero closes the confirm step */
+    u16   unk_10;        /* 0x10: 0x31 or 0x32 after a cursor move; role unknown */
+    s16   confirm_timer; /* 0x12: non-zero closes the confirm step */
 } MenuChoicePanel;
 
 ASSERT_OFFSET(MenuChoicePanel, pos, 0x04);
@@ -98,13 +98,13 @@ ASSERT_OFFSET(MenuChoicePanel, group, 0x0A);
 ASSERT_OFFSET(MenuChoicePanel, group_first, 0x0B);
 ASSERT_OFFSET(MenuChoicePanel, group_cursor, 0x0C);
 ASSERT_OFFSET(MenuChoicePanel, drawn_cursor, 0x0D);
-ASSERT_OFFSET(MenuChoicePanel, confirm_gate, 0x12);
+ASSERT_OFFSET(MenuChoicePanel, confirm_timer, 0x12);
 ASSERT_SIZE(MenuChoicePanel, MENU_CHOICE_PANEL_SIZE);
 
 /* What a list panel lists: the shop's item list reads a price discount (and
  * dims the whole list when it is set), the ability lists read whose abilities
  * and which kind (Party_GetAbilities' arguments). */
-typedef union MenuListSource {
+typedef union MenuListParams {
     struct {
         u8 dimmed;        /* non-zero draws every row greyed out */
         u8 price_percent; /* Shop_ApplyPercent's percent */
@@ -114,9 +114,9 @@ typedef union MenuListSource {
         u8 member; /* the party formation index */
         u8 type;   /* AbilityType: also the index of the list name */
     } abilities;
-} MenuListSource;
+} MenuListParams;
 
-ASSERT_SIZE(MenuListSource, 2);
+ASSERT_SIZE(MenuListParams, 2);
 
 /* The widest menu label or title, in glyphs. */
 #define MENU_LABEL_LENGTH 16
@@ -147,12 +147,12 @@ enum {
  * is unknown; 0x24, the names pointer, is the last known cell. */
 typedef struct MenuListPanel {
     u8             pad_00[4];
-    Pos2u          pos;         /* 0x04 */
-    u8             use_context; /* 0x08 the ability list passes it to func_801AF5B0: 1 outside battle, 2 in battle */
-    u8             flags;       /* 0x09 bit 0 and bit 1 pick the cursor; the high nibble counts the frame down */
-    MenuListSource source;      /* 0x0A */
-    u8             unk_0C;      /* 0x0C a row the drawer draws an icon for */
-    u8             selected;    /* 0x0D the selected row; the drawer shades it 2 */
+    Pos2u          pos;      /* 0x04 */
+    u8             type;     /* 0x08 the ability list passes it to func_801AF5B0: 1 outside battle, 2 in battle */
+    u8             flags;    /* 0x09 bit 0 and bit 1 pick the cursor; the high nibble counts the frame down */
+    MenuListParams source;   /* 0x0A */
+    u8             unk_0C;   /* 0x0C a row the drawer draws an icon for */
+    u8             selected; /* 0x0D the selected row; the drawer shades it 2 */
     u8             pad_0E[2];
     s16            unk_10; /* 0x10 tested against zero for the extra frame marks */
     u8             pad_12[0xE];
@@ -163,17 +163,17 @@ ASSERT_SIZE(MenuListPanel, 0x24);
 
 /* Views of MenuPanelTask cells 0x10..0x1F. */
 typedef struct MenuPanelGrow {
-    u16 width;   /* 0x10 current width, 12.4 fixed point */
-    u16 height;  /* 0x12 current height, 12.4 fixed point */
-    u16 step_x;  /* 0x14 width added per frame */
-    u16 step_y;  /* 0x16 height added per frame */
-    u16 final_x; /* 0x18 the x the panel settles at */
-    u16 final_y; /* 0x1A the y the panel settles at */
+    u16 w;        /* 0x10 current width, 12.4 fixed point */
+    u16 h;        /* 0x12 current height, 12.4 fixed point */
+    u16 step_x;   /* 0x14 width added per frame */
+    u16 step_y;   /* 0x16 height added per frame */
+    u16 target_x; /* 0x18 the x the panel settles at */
+    u16 target_y; /* 0x1A the y the panel settles at */
 } MenuPanelGrow;
 
 typedef struct MenuPanelMessage {
-    u16 id;    /* 0x10 the message the bar draws, 0 for none */
-    u16 width; /* 0x12 the bar's width */
+    u16 id; /* 0x10 the message the bar draws, 0 for none */
+    u16 w;  /* 0x12 the bar's width */
 } MenuPanelMessage;
 
 typedef struct MenuPanelList {
@@ -196,7 +196,7 @@ typedef struct MenuPanelBattle {
 } MenuPanelBattle;
 
 /* Cells read by address where the bytes change from use to use. */
-typedef struct MenuPanelAddr {
+typedef struct MenuPanelRaw {
     u16 unk_10;
     u16 unk_12;
     u16 unk_14;
@@ -205,15 +205,15 @@ typedef struct MenuPanelAddr {
     u16 unk_1A;
     u16 unk_1C;
     u16 unk_1E;
-} MenuPanelAddr;
+} MenuPanelRaw;
 
 /* One of the 22 panel task records: the panel's position, state, layer and
  * item-table base. The battle overlays read the first 0x0C bytes through
  * BattlePanelTask (battle/records.h). */
 typedef struct MenuPanelTask {
-    u8    active;  /* set to open the panel, cleared to close it */
-    u8    handler; /* Menu_UpdatePanelTasks calls g_MenuPanels.handlers[handler] */
-    u8    mode;    /* the panel's own mode: g_MenuPanelModes[mode], the slide target choice, and the battle mode_00 */
+    u8    active; /* set to open the panel, cleared to close it */
+    u8    panel;  /* Menu_UpdatePanelTasks calls g_MenuPanels.handlers[panel] */
+    u8    mode;   /* the panel's own mode: g_MenuPanelModes[mode], the slide target choice, and the battle mode_00 */
     u8    state;
     /* x and y are screen positions. Most readers load them with lhu; the slide
      * code compares them as s16 and stores signed constants through LOH, so the
@@ -236,7 +236,7 @@ typedef struct MenuPanelTask {
         MenuPanelList    list;    /* the list windows: tab marks and scroll */
         MenuPanelIcons   icons;   /* the camp menu icon row */
         MenuPanelBattle  battle;  /* the battle panels: cursor, first row and the HP/AP bars */
-        MenuPanelAddr    addr;    /* cells whose purpose is not read yet, by address */
+        MenuPanelRaw     addr;    /* cells whose purpose is not read yet, by address */
     } u;
 
     s32 item_table; /* 0x20: the panel's item-table base; the retail loads it with a word */

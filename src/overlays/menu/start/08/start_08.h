@@ -435,8 +435,8 @@ extern Callback g_MenuStartPanel8Steps[MENU_START_PANEL8_STATE_COUNT];
 extern Callback g_MenuStartMessageSteps[MENU_START_PANEL9_STATE_COUNT];
 
 typedef struct CursorFrameSize {
-    u16 width;
-    u16 height;
+    u16 w;
+    u16 h;
 } CursorFrameSize;
 
 ASSERT_SIZE(CursorFrameSize, 4);

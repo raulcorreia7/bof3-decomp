@@ -15,9 +15,9 @@ MATCH u8 Menu_OpenPanelTask(u8 panel_index, u8 handler_index) {
     status = panel_index;
     /* FAKE: keep the success status live across the slot stores. */
     FAKE_USE(status);
-    g_MenuPanelTasks[index].active  = 1;
-    g_MenuPanelTasks[index].handler = handler_index;
-    g_MenuPanelTasks[index].mode    = 0;
-    g_MenuPanelTasks[index].state   = 0;
+    g_MenuPanelTasks[index].active = 1;
+    g_MenuPanelTasks[index].panel  = handler_index;
+    g_MenuPanelTasks[index].mode   = 0;
+    g_MenuPanelTasks[index].state  = 0;
     return status;
 }

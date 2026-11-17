@@ -16,7 +16,7 @@ MATCH void func_801D14EC(void) {
             LOH(panel->pos.x) = MENU_PANEL_HIDDEN_X;
             panel->pos.y      = i * 54 + 62;
             panel->active     = 1;
-            panel->handler    = 7;
+            panel->panel      = 7;
             panel->mode       = 5;
             panel->state      = 2;
             panel->unk_0B     = 0;

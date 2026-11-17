@@ -38,9 +38,9 @@ MATCH void func_80159050(void) {
     }
     task->pos.y = next_y * 16;
 
-    task                = (MenuPanelTask*)g_MenuCurrentPanel;
-    task->u.grow.width  = 0;
-    task->u.grow.height = 0;
+    task           = (MenuPanelTask*)g_MenuCurrentPanel;
+    task->u.grow.w = 0;
+    task->u.grow.h = 0;
     task->state += 1;
     task->u.grow.step_x = ((task->unk_0A * 0x10) / 5);
     task->u.grow.step_y = ((task->unk_0B * 0x10) / 5);

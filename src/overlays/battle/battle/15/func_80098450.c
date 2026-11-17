@@ -50,14 +50,14 @@ MATCH void func_80098450(void) {
             panel->group_cursor = (old_cursor - 1);
         }
         if (panel->group_cursor < panel->group_first) {
-            panel->confirm_gate = 0xF0;
+            panel->confirm_timer = 0xF0;
         }
     } else if ((trigger & PADLdown) != 0) {
         if (old_cursor < 0x7Fu) {
             panel->group_cursor = (old_cursor + 1);
         }
         if (panel->group_first + 7 <= panel->group_cursor) {
-            panel->confirm_gate = 0x10;
+            panel->confirm_timer = 0x10;
         }
     } else if ((trigger & PADL1) != 0) {
         if (panel->group_first == 0u) {
@@ -85,7 +85,7 @@ MATCH void func_80098450(void) {
     }
     handle                                   = Message_GetText(Item_GetDescription(g_MenuPanelTasks[16].unk_0A, D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C]) & HALF_MASK);
     D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = handle;
-    if (((MenuChoicePanel*)g_BattleChoicePanel)->confirm_gate != 0) {
+    if (((MenuChoicePanel*)g_BattleChoicePanel)->confirm_timer != 0) {
         return;
     }
     if ((trigger & PADLup) != 0 && old_cursor == 0u) {

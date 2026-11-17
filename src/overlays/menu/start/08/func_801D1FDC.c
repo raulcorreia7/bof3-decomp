@@ -18,24 +18,24 @@ MATCH void func_801D1FDC(void) {
 
         panel->unk_0A = i;
         i += 1;
-        panel->handler = 6;
-        panel->active  = 1;
-        panel->mode    = MENU_START_MODE_CHARACTER;
-        panel->state   = 0;
-        panel->pos.x   = 98;
-        panel->pos.y   = index * 0x36 + 0x3E;
-        panel->unk_0B  = 0;
-        panel->unk_0C  = 0;
+        panel->panel  = 6;
+        panel->active = 1;
+        panel->mode   = MENU_START_MODE_CHARACTER;
+        panel->state  = 0;
+        panel->pos.x  = 98;
+        panel->pos.y  = index * 0x36 + 0x3E;
+        panel->unk_0B = 0;
+        panel->unk_0C = 0;
     }
-    panel          = &g_MenuPanelTasks[7];
-    panel->handler = 6;
-    panel->mode    = MENU_START_MODE_ZENNY;
-    panel->state   = 0;
-    panel->active  = 1;
+    panel         = &g_MenuPanelTasks[7];
+    panel->panel  = 6;
+    panel->mode   = MENU_START_MODE_ZENNY;
+    panel->state  = 0;
+    panel->active = 1;
     panel++;
     g_MenuPanelTasks[7].pos.x = 200;
     g_MenuPanelTasks[7].pos.y = 16;
-    panel->handler            = 6;
+    panel->panel              = 6;
     panel->mode               = MENU_START_MODE_PLAY_TIME;
     panel->state              = 0;
     panel->active             = 1;
@@ -43,7 +43,7 @@ MATCH void func_801D1FDC(void) {
     panel->mode          = MENU_START_MODE_CAMP_ICONS;
     D_80148454           = 0x10;
     D_80148456           = 0x10;
-    panel->handler       = 6;
+    panel->panel         = 6;
     panel->state         = 0;
     panel->active        = 1;
     panel->pos.x         = 104;

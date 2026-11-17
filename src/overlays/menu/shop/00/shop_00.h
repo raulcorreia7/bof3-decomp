@@ -71,7 +71,7 @@
     } while (0)
 
 ASSERT_OFFSET(MenuListPanel, pos, 0x04);
-ASSERT_OFFSET(MenuListPanel, use_context, 0x08);
+ASSERT_OFFSET(MenuListPanel, type, 0x08);
 ASSERT_OFFSET(MenuListPanel, flags, 0x09);
 ASSERT_OFFSET(MenuListPanel, source, 0x0A);
 ASSERT_OFFSET(MenuListPanel, unk_0C, 0x0C);
