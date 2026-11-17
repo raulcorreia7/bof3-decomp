@@ -212,46 +212,46 @@ static u8 D_801F4224[6364] = {
 static volatile AreaSprite* D_801F5B00 = 0;
 
 MATCH void func_801F2C14(void) {
-    SYS_DISPATCH_BYTE(D_801F4200, WORLD00_AREA024_SCRATCH_PTR->dispatch);
+    SYS_DISPATCH_BYTE(D_801F4200, WORLD00_AREA024_SCRATCH_PTR->header.mode);
 }
 
 MATCH void func_801F2C58(void) {
     func_801F3D0C();
     func_801F3080();
     func_801F3314();
-    ((AreaScratch*)g_Task)->step_count = 0;
-    ((AreaScratch*)g_Task)->dispatch++;
+    ((Actor*)g_Task)->timer = 0;
+    ((Actor*)g_Task)->header.mode++;
 }
 
 MATCH void func_801F2CB0(void) {
-    func_801F3E48(((AreaScratch*)g_Task)->step_count);
-    ((AreaScratch*)g_Task)->step_count = (((AreaScratch*)g_Task)->step_count + 2u);
-    if (((AreaScratch*)g_Task)->step_count >= 128u) {
+    func_801F3E48(((Actor*)g_Task)->timer);
+    ((Actor*)g_Task)->timer = (((Actor*)g_Task)->timer + 2u);
+    if (((Actor*)g_Task)->timer >= 128u) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 6));
         SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 14));
         SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
-        ((AreaScratch*)g_Task)->step_count = 0;
-        ((AreaScratch*)g_Task)->dispatch++;
+        ((Actor*)g_Task)->timer = 0;
+        ((Actor*)g_Task)->header.mode++;
     }
 }
 
 MATCH void func_801F2D5C(void) {
-    AreaScratch* scratch;
+    Actor* scratch;
 
     func_801F3D5C();
     func_801F362C();
     if ((func_801F30EC() & BYTE_MASK) == 0) {
-        scratch = (AreaScratch*)WORLD00_AREA024_SCRATCH_PTR;
-        scratch->dispatch++;
+        scratch = (Actor*)WORLD00_AREA024_SCRATCH_PTR;
+        scratch->header.mode++;
     }
 }
 
 MATCH void func_801F2DB4(void) {
-    AreaScratch* scratch;
+    Actor* scratch;
 
-    scratch    = (AreaScratch*)g_Task;
+    scratch    = (Actor*)g_Task;
     D_80147A58 = 0;
-    scratch->dispatch++;
+    scratch->header.mode++;
 }
 
 MATCH void func_801F2DD8(void) {
@@ -289,14 +289,14 @@ MATCH void func_801F2DF8(const AreaSprite* sprite) {
 }
 
 MATCH void func_801F2FD4(AreaSprite* sprite) {
-    AreaSprite*           work;
-    volatile AreaScratch* scratch;
+    AreaSprite*     work;
+    volatile Actor* scratch;
 
     work           = sprite;
     scratch        = WORLD00_AREA024_SCRATCH_PTR;
-    work->origin.x = scratch->pos.x;
-    work->origin.y = scratch->pos.y;
-    work->origin.z = scratch->pos.z;
+    work->origin.x = scratch->pos.x.fixed;
+    work->origin.y = scratch->pos.y.fixed;
+    work->origin.z = scratch->pos.z.fixed;
     setVector(&work->normal, RANDOM_MASK(0xFF) - 0x80, RANDOM_MASK(0xFF) - 0x80, RANDOM_MASK(0x7F));
     VectorNormal(&work->normal, &work->normal);
     work->flags     = 1u;
@@ -549,16 +549,16 @@ MATCH void func_801F3944(const SpinEffect* spin) {
 }
 
 MATCH void func_801F3BE4(SpinEffect* spin) {
-    volatile AreaScratch* scratch;
-    SpinEffect*           work;
-    MATRIX                matrix;
-    s16                   rot[3];
+    volatile Actor* scratch;
+    SpinEffect*     work;
+    MATRIX          matrix;
+    s16             rot[3];
 
     work           = spin;
     scratch        = WORLD00_AREA024_SCRATCH_PTR;
-    work->origin.x = scratch->pos.x;
-    work->origin.y = scratch->pos.y;
-    work->origin.z = scratch->pos.z;
+    work->origin.x = scratch->pos.x.fixed;
+    work->origin.y = scratch->pos.y.fixed;
+    work->origin.z = scratch->pos.z.fixed;
 
     rot[0] = RANDOM_MASK(0xFFF);
     rot[1] = RANDOM_MASK(0x3FF);
@@ -613,7 +613,7 @@ MATCH void func_801F3D5C(void) {
         func_801F3944(work);
         work->spin_angle = (work->spin_angle + 16);
 
-        if (WORLD00_AREA024_SCRATCH_PTR->step_count < 4u) {
+        if (WORLD00_AREA024_SCRATCH_PTR->timer < 4u) {
             work->fade = (work->fade + 0x20);
         } else {
             work->fade = (work->fade - 2);
@@ -628,21 +628,21 @@ MATCH void func_801F3D5C(void) {
 #undef g_Task
 
 MATCH s32 func_801F3E48(u8 shade) {
-    SVECTOR               verts[4];
-    VECTOR                vec;
-    MATRIX                matrix;
-    MATRIX                matrix2;
-    MATRIX*               mtxp;
-    long                  depth;
-    long                  flag;
-    u16                   count;
-    volatile AreaScratch* saved;
-    u16*                  src;
-    LINE_F4*              prim;
-    u16                   i;
+    SVECTOR         verts[4];
+    VECTOR          vec;
+    MATRIX          matrix;
+    MATRIX          matrix2;
+    MATRIX*         mtxp;
+    long            depth;
+    long            flag;
+    u16             count;
+    volatile Actor* saved;
+    u16*            src;
+    LINE_F4*        prim;
+    u16             i;
 
     vec   = D_801F2C04;
-    saved = (volatile AreaScratch*)g_Task;
+    saved = (volatile Actor*)g_Task;
     TASK_SET(&D_80147A58);
     PushMatrix();
 

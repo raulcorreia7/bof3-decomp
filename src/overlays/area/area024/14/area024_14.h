@@ -17,9 +17,9 @@
 #define WORLD00_AREA024_VERTEX_DST     MEM_PTR(volatile u8, 0x800E4BC8u)
 #define WORLD00_AREA024_PTR_7AA8       MEM(volatile u8*, 0x80147AA8u)
 #define WORLD00_AREA024_PTR_7AAC       MEM(volatile u8*, 0x80147AACu)
-#define WORLD00_AREA024_SCRATCH_PTR    SP_REF(volatile AreaScratch*, 0x44u)
+#define WORLD00_AREA024_SCRATCH_PTR    SP_REF(volatile Actor*, 0x44u)
 
-#define g_Task                         ((volatile AreaScratch*)g_Task)
+#define g_Task                         ((volatile Actor*)g_Task)
 
 /* Per-sprite transform state at 0x800E4940 (0x18-byte stride): the halfword
  * translation base at +0x00 and the rotation angles at +0x10. */
