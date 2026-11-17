@@ -15,7 +15,7 @@ MATCH void SYS_ThreadRun(void) {
             switch (g_SysCurrentThread->state) {
                 case SYS_THREAD_OPEN:
                     EnterCriticalSection();
-                    g_SysCurrentThread->thread_id = OpenTh((long (*)())g_SysCurrentThread->entry, g_SysCurrentThread->open_arg, g_SysCurrentThread->open_arg_2);
+                    g_SysCurrentThread->thread_id = OpenTh((long (*)())g_SysCurrentThread->entry, g_SysCurrentThread->open_arg, g_SysCurrentThread->stack);
                     ExitCriticalSection();
                     goto dispatch; /* a freshly opened thread switches in at once, like a forced switch */
 
