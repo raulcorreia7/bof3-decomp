@@ -50,7 +50,6 @@
 #define MSG_045 45
 #define MSG_047 47
 #define MSG_048 48
-#define MSG_049 49
 #define MSG_050 50
 #define MSG_051 51
 #define MSG_052 52
@@ -65,7 +64,6 @@
 #define MSG_063 63
 #define MSG_064 64
 #define MSG_066 66
-#define MSG_068 68
 #define MSG_073 73
 #define MSG_075 75
 #define MSG_076 76
@@ -82,7 +80,6 @@
 #define MSG_097 97
 #define MSG_098 98
 #define MSG_099 99
-#define MSG_100 100
 #define MSG_101 101
 #define MSG_108 108
 #define MSG_109 109
@@ -115,8 +112,6 @@
 #define MSG_136 136
 #define MSG_137 137
 #define MSG_138 138
-#define MSG_146 146
-#define MSG_147 147
 #define MSG_148 148
 #define MSG_149 149
 #define MSG_150 150
