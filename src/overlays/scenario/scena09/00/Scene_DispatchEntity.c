@@ -62,10 +62,10 @@ MATCH s32 func_801F75BC(void) {
         if (row->active == 0) {
             continue;
         }
-        row->pos.x += row->vx;
-        row->pos.y += row->vy;
-        row->pos.z += row->vz;
-        row->vz -= 0x40000;
+        row->pos.x += row->velocity.vx;
+        row->pos.y += row->velocity.vy;
+        row->pos.z += row->velocity.vz;
+        row->velocity.vz -= 0x40000;
         row->shade -= 4;
         row->frame = rand() & 7;
         life       = row->life - 1;
@@ -90,21 +90,21 @@ MATCH void func_801F76D0(void) {
     i     = 0;
     do {
         if (g_Task->unk_06 == 0) {
-            spark->pos.x = ((rand() & 0x1FF) << 8) + 0x120000;
-            spark->pos.y = ((rand() & 0x1FF) << 8) + 0x2E8000;
-            spark->pos.z = TO_COORD(2112) - ((spark->pos.x - 0x120000) << 7);
-            spark->vx    = (spark->pos.x - 0x130000) >> 4;
-            spark->vy    = (spark->pos.y - 0x2F8000) >> 4;
-            spark->vz    = (-(rand() & 0xFF)) << 5;
-            spark->vx -= 0x800;
+            spark->pos.x       = ((rand() & 0x1FF) << 8) + 0x120000;
+            spark->pos.y       = ((rand() & 0x1FF) << 8) + 0x2E8000;
+            spark->pos.z       = TO_COORD(2112) - ((spark->pos.x - 0x120000) << 7);
+            spark->velocity.vx = (spark->pos.x - 0x130000) >> 4;
+            spark->velocity.vy = (spark->pos.y - 0x2F8000) >> 4;
+            spark->velocity.vz = (-(rand() & 0xFF)) << 5;
+            spark->velocity.vx -= 0x800;
         } else {
-            spark->pos.x = ((rand() & 0x1FF) << 8) + 0x78000;
-            spark->pos.y = ((rand() & 0x1FF) << 8) + 0x318000;
-            spark->pos.z = TO_COORD(2112) - ((spark->pos.y - 0x318000) << 7);
-            spark->vx    = (spark->pos.x - 0x88000) >> 4;
-            spark->vy    = (spark->pos.y - 0x328000) >> 4;
-            spark->vz    = (-(rand() & 0xFF)) << 5;
-            spark->vy    = -0x800;
+            spark->pos.x       = ((rand() & 0x1FF) << 8) + 0x78000;
+            spark->pos.y       = ((rand() & 0x1FF) << 8) + 0x318000;
+            spark->pos.z       = TO_COORD(2112) - ((spark->pos.y - 0x318000) << 7);
+            spark->velocity.vx = (spark->pos.x - 0x88000) >> 4;
+            spark->velocity.vy = (spark->pos.y - 0x328000) >> 4;
+            spark->velocity.vz = (-(rand() & 0xFF)) << 5;
+            spark->velocity.vy = -0x800;
         }
         spark->active = 1;
         spark->life   = 0x18;

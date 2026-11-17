@@ -28,27 +28,21 @@ ASSERT_SIZE(AreaSpark, 0x14);
 
 /* One 0x14-byte emitter of the table at AREA_WORK + 0x1800: it spawns two sparks each time its timer runs out. */
 typedef struct SparkEmitter {
-    u8  active; /* +0x00 */
-    u8  unk_1;  /* +0x01 */
-    u8  unk_2;  /* +0x02 */
-    u8  timer;  /* +0x03 */
-    s32 x;      /* +0x04 */
-    s32 y;      /* +0x08 */
-    s32 z;      /* +0x0C */
-    s32 unk_10; /* +0x10 */
+    u8     active; /* +0x00 */
+    u8     unk_01; /* +0x01 */
+    u8     unk_02; /* +0x02 */
+    u8     timer;  /* +0x03 */
+    VECTOR pos;    /* +0x04 */
 } SparkEmitter;
 
 /* One 0x18-byte row of the sprite work table at AREA_WORK. */
 typedef struct SpriteSpark {
-    u8  active; /* +0x00 */
-    u8  unk_1;  /* +0x01 */
-    u8  life;   /* +0x02 */
-    u8  blink;  /* +0x03 - per-frame colour phase: the draw is grey when set, red otherwise */
-    s32 x;      /* +0x04 */
-    s32 y;      /* +0x08 */
-    s32 z;      /* +0x0C */
-    s32 unk_10; /* +0x10 */
-    s32 z_step; /* +0x14 - rises by 0x20000 per update and is added to z */
+    u8     active; /* +0x00 */
+    u8     unk_01; /* +0x01 */
+    u8     life;   /* +0x02 */
+    u8     blink;  /* +0x03 - per-frame colour phase: the draw is grey when set, red otherwise */
+    VECTOR pos;    /* +0x04 */
+    s32    z_step; /* +0x14 - rises by 0x20000 per update and is added to z */
 } SpriteSpark;
 
 /* The sprite work table at AREA_WORK holds this many SpriteSpark rows. */
@@ -113,22 +107,18 @@ ASSERT_SIZE(Trail, 0x340);
  * scena09 at AREA_WORK + 0x800) fall it by its velocity, bounce it off the ground and
  * fade it while its life runs. */
 typedef struct SparkParticle {
-    u8   active; /* 0x00 - 0 marks a free spark */
-    u8   unk_01; /* 0x01 */
-    u8   life;   /* 0x02 - frames left; clears the spark at 0 */
-    u8   shade;  /* 0x03 - fades to black as the spark dies */
-    u8   frame;  /* 0x04 - indexes the draw routine's corner table */
-    u8   pad_05[3];
-    s32  vx; /* 0x08 */
-    s32  vy; /* 0x0C */
-    s32  vz; /* 0x10 - the fall speed and the bounce */
-    u8   pad_14[4];
-    Pos3 pos;       /* 0x18 */
-    u8   pad_24[4]; /* 0x24 */
+    u8     active; /* 0x00 - 0 marks a free spark */
+    u8     unk_01; /* 0x01 */
+    u8     life;   /* 0x02 - frames left; clears the spark at 0 */
+    u8     shade;  /* 0x03 - fades to black as the spark dies */
+    u8     frame;  /* 0x04 - indexes the draw routine's corner table */
+    u8     pad_05[3];
+    VECTOR velocity;  /* 0x08 */
+    Pos3   pos;       /* 0x18 */
+    u8     pad_24[4]; /* 0x24 */
 } SparkParticle;
 
-ASSERT_OFFSET(SparkParticle, vx, 0x08);
-ASSERT_OFFSET(SparkParticle, vz, 0x10);
+ASSERT_OFFSET(SparkParticle, velocity, 0x08);
 ASSERT_OFFSET(SparkParticle, pos, 0x18);
 ASSERT_SIZE(SparkParticle, 0x28);
 

@@ -18,7 +18,7 @@ MATCH s32 func_801F2EF0(void) {
             D_801F5310++;
             step          = spark->z_step + 0x20000;
             spark->z_step = step;
-            spark->z += step;
+            spark->pos.vz += step;
             spark->blink ^= 1;
             func_801F2DB8(spark);
             life        = spark->life - 1;
@@ -26,7 +26,7 @@ MATCH s32 func_801F2EF0(void) {
             active      = 1;
             if (life == 0) {
                 spark->active = 0;
-                spark->unk_1  = 0;
+                spark->unk_01 = 0;
             }
         }
         spark++;
