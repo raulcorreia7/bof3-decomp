@@ -22,13 +22,13 @@ NON_MATCHING void func_801F53F0(s32 radius) {
     g_ScratchPadVectors[0].vz = z;
     RotTransPers(g_ScratchPadVectors, (long*)D_1F800034_U16, &depth, &flag);
 
-    tpage     = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
+    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
+
     scale     = radius << 2;
     shade     = scale ^ 0x3F;
     alternate = shade << 1;
-
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
     for (i = 0; i < 64; i++) {
         tile = (TILE_1*)g_GfxPrimCursor;
         SetTile1(tile);
