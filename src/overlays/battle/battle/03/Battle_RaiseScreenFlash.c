@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801E64B4(void) {
+/* func_801E64B4 */
+MATCH void Battle_RaiseScreenFlash(void) {
     BattleEffect* slot;
     s32           value;
 

@@ -153,7 +153,7 @@ ASSERT_SIZE(BattleSelectionType, 0x14);
 
 /* The word at +0x60 of a queued slot. battle/battle/15 stores the action's target
  * index there (func_800AAEBC) and battle/battle/03 reads the low halfword of it to
- * draw the capture count (func_801E5CA4 loads it with `lhu` and hands it to
+ * draw the capture count (Battle_UpdateDamageNumber loads it with `lhu` and hands it to
  * func_801D9684), so the cell carries both widths. */
 typedef union BattleTargetIndex {
     s32 target_index;  /* the action's target index, as battle/battle/15 stores it */

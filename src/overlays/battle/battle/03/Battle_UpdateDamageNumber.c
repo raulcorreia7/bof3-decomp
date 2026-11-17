@@ -1,11 +1,12 @@
 #include "battle_03.h"
 
-MATCH void func_801E5CA4(void) {
-    BattleNumberEffectSteps handlers;
+/* func_801E5CA4 */
+MATCH void Battle_UpdateDamageNumber(void) {
+    BattleDamageNumberSteps handlers;
     BattleEffect*           slot;
     BattleEffect*           work;
 
-    handlers = D_801D0EF4;
+    handlers = g_BattleDamageNumberSteps;
     handlers.steps[D_801EC2E0->header.mode]();
     if (ACTOR_IN_USE(*g_Task)) {
         switch (D_801EC2E0->unk_07) {

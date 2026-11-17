@@ -7,17 +7,17 @@
 extern void func_801EA254(void), func_801EA530(void);
 
 /* 0x801D0F20 */
-BattleEffect0Steps D_801D0F20 = {
-    (Callback)func_801E6420,
-    (Callback)func_801E64B4,
-    (Callback)func_801E65F8,
+BattleScreenFlashSteps g_BattleScreenFlashSteps = {
+    (Callback)Battle_StartScreenFlash,
+    (Callback)Battle_RaiseScreenFlash,
+    (Callback)Battle_LowerScreenFlash,
 };
 
 /* 0x801D0F2C */
-BattleEffect1Steps D_801D0F2C = {
-    (Callback)func_801E6990,
-    (Callback)func_801E69C0,
-    (Callback)func_801E6A54,
+BattleScreenFadeSteps g_BattleScreenFadeSteps = {
+    (Callback)Battle_StartScreenFade,
+    (Callback)Battle_RaiseScreenFade,
+    (Callback)Battle_HoldScreenFade,
 };
 
 /* 0x801D0F38 */
@@ -28,8 +28,8 @@ BattleEffect2Steps D_801D0F38 = {
 };
 
 /* 0x801D0F44 */
-BattleEffect3Steps D_801D0F44 = {
-    (Callback)func_801E6D28, (Callback)func_801E6E54, (Callback)func_801E6FA0, (Callback)func_801E6FB0, (Callback)func_801E71EC,
+BattleAilmentActorSteps g_BattleAilmentActorSteps = {
+    (Callback)Battle_WaitAilment, (Callback)Battle_StartAilmentActor, (Callback)Battle_RestartAilmentActor, (Callback)Battle_RunAilmentActor, (Callback)Battle_WaitAilmentEffect,
 };
 
 /* 0x801D0F58 */

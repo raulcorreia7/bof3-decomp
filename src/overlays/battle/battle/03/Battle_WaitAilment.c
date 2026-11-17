@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801E6D28(void) {
+/* func_801E6D28 */
+MATCH void Battle_WaitAilment(void) {
     u8*  field;
     u16* row_flags;
     u32  flags;

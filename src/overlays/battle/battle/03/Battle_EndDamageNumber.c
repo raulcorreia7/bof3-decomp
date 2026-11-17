@@ -4,7 +4,8 @@
  * 0x80 bit of the flag record selected by the slot owner's index before running
  * the queued step.
  */
-MATCH void func_801E61F0(void) {
+/* func_801E61F0 */
+MATCH void Battle_EndDamageNumber(void) {
     BattleEffect* work;
     u8            count;
     u8            index;

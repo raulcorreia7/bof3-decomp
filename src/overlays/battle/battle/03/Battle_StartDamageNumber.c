@@ -1,7 +1,8 @@
 #include "battle_03.h"
 
+/* func_801E5E2C */
 #ifdef NON_MATCHING
-NON_MATCHING void func_801E5E2C(void) {
+NON_MATCHING void Battle_StartDamageNumber(void) {
     BattleEffect* slot;
     PartyMember*  source;
     u8            digits;
@@ -51,5 +52,5 @@ loop:
     slot->header.mode += 1;
 }
 #else
-INCLUDE_ASM(func_801E5E2C);
+INCLUDE_ASM(Battle_StartDamageNumber);
 #endif

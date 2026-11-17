@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801E6420(void) {
+/* func_801E6420 */
+MATCH void Battle_StartScreenFlash(void) {
     BattleEffect* slot;
 
     Battle_QueueEvent(1, 0, 0, 30, BATTLER_IS_PLAYER(g_Battle.active_battler) ? D_801EB05B : D_801EB068);

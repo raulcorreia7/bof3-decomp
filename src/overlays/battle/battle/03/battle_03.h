@@ -233,23 +233,23 @@ typedef struct BattleEventSteps {
     Callback steps[BATTLE_EVENT_STEP_COUNT];
 } BattleEventSteps;
 
-#define BATTLE_NUMBER_EFFECT_STEP_COUNT 5
+#define BATTLE_DAMAGE_NUMBER_STEP_COUNT 5
 
-typedef struct BattleNumberEffectSteps {
-    Callback steps[BATTLE_NUMBER_EFFECT_STEP_COUNT];
-} BattleNumberEffectSteps;
+typedef struct BattleDamageNumberSteps {
+    Callback steps[BATTLE_DAMAGE_NUMBER_STEP_COUNT];
+} BattleDamageNumberSteps;
 
-#define BATTLE_EFFECT0_STEP_COUNT 3
+#define BATTLE_SCREEN_FLASH_STEP_COUNT 3
 
-typedef struct BattleEffect0Steps {
-    Callback steps[BATTLE_EFFECT0_STEP_COUNT];
-} BattleEffect0Steps;
+typedef struct BattleScreenFlashSteps {
+    Callback steps[BATTLE_SCREEN_FLASH_STEP_COUNT];
+} BattleScreenFlashSteps;
 
-#define BATTLE_EFFECT1_STEP_COUNT 3
+#define BATTLE_SCREEN_FADE_STEP_COUNT 3
 
-typedef struct BattleEffect1Steps {
-    Callback steps[BATTLE_EFFECT1_STEP_COUNT];
-} BattleEffect1Steps;
+typedef struct BattleScreenFadeSteps {
+    Callback steps[BATTLE_SCREEN_FADE_STEP_COUNT];
+} BattleScreenFadeSteps;
 
 #define BATTLE_EFFECT2_STEP_COUNT 3
 
@@ -257,11 +257,11 @@ typedef struct BattleEffect2Steps {
     Callback steps[BATTLE_EFFECT2_STEP_COUNT];
 } BattleEffect2Steps;
 
-#define BATTLE_EFFECT3_STEP_COUNT 5
+#define BATTLE_AILMENT_ACTOR_STEP_COUNT 5
 
-typedef struct BattleEffect3Steps {
-    Callback steps[BATTLE_EFFECT3_STEP_COUNT];
-} BattleEffect3Steps;
+typedef struct BattleAilmentActorSteps {
+    Callback steps[BATTLE_AILMENT_ACTOR_STEP_COUNT];
+} BattleAilmentActorSteps;
 
 #define BATTLE_EFFECT4_STEP_COUNT 5
 
@@ -318,16 +318,20 @@ extern DropChances              g_BattleDropChances;
 /* D_801D0CC0 */
 extern BattleEffectStageSteps   g_BattleEffectStages;
 /* D_801D0CD0 */
-extern BattleEffectStage0Steps  g_BattleEffectStage0Funcs;
+extern BattleEffectStage0Steps  g_BattleEffectStage0Steps;
 /* D_801D0D1C */
-extern BattleEffectStage1Steps  g_BattleEffectStage1Funcs;
+extern BattleEffectStage1Steps  g_BattleEffectStage1Steps;
 /* D_801D0ED4 */
-extern BattleEffectStage3Steps  g_BattleEffectStage3Funcs;
-extern BattleNumberEffectSteps  D_801D0EF4;
-extern BattleEffect0Steps       D_801D0F20;
-extern BattleEffect1Steps       D_801D0F2C;
+extern BattleEffectStage3Steps  g_BattleEffectStage3Steps;
+/* D_801D0EF4 */
+extern BattleDamageNumberSteps  g_BattleDamageNumberSteps;
+/* D_801D0F20 */
+extern BattleScreenFlashSteps   g_BattleScreenFlashSteps;
+/* D_801D0F2C */
+extern BattleScreenFadeSteps    g_BattleScreenFadeSteps;
 extern BattleEffect2Steps       D_801D0F38;
-extern BattleEffect3Steps       D_801D0F44;
+/* D_801D0F44 */
+extern BattleAilmentActorSteps  g_BattleAilmentActorSteps;
 extern BattleEffect4Steps       D_801D0F58;
 extern BattleSavedPreviewModes  D_801D0F6C;
 /* D_801D0F80 */
@@ -873,34 +877,54 @@ extern void        func_801E5AEC(void);
 void               func_801E5AF4(void);
 extern void        func_801E5B8C(void);
 extern void        func_801E5C1C(void);
-extern void        func_801E5CA4(void);
-extern void        func_801E5E2C(void);
-extern void        func_801E6088(void);
-extern void        func_801E60DC(void);
-extern void        func_801E6154(void);
-extern void        func_801E61F0(void);
+/* func_801E5CA4 */
+extern void        Battle_UpdateDamageNumber(void);
+/* func_801E5E2C */
+extern void        Battle_StartDamageNumber(void);
+/* func_801E6088 */
+extern void        Battle_HoldDamageNumber(void);
+/* func_801E60DC */
+extern void        Battle_RiseDamageNumber(void);
+/* func_801E6154 */
+extern void        Battle_BounceDamageNumber(void);
+/* func_801E61F0 */
+extern void        Battle_EndDamageNumber(void);
 void               Battle_DrawRollingDigits(u8 palette);
-extern void        func_801E63C0(void);
-extern void        func_801E6420(void);
-extern void        func_801E64B4(void);
-extern void        func_801E65F8(void);
+/* func_801E63C0 */
+extern void        Battle_UpdateScreenFlash(void);
+/* func_801E6420 */
+extern void        Battle_StartScreenFlash(void);
+/* func_801E64B4 */
+extern void        Battle_RaiseScreenFlash(void);
+/* func_801E65F8 */
+extern void        Battle_LowerScreenFlash(void);
 extern void        func_801E6724(void);
 void               func_801E679C(void);
 void               func_801E68EC(void);
-extern void        func_801E6930(void);
-extern void        func_801E6990(void);
-extern void        func_801E69C0(void);
-extern void        func_801E6A54(void);
+/* func_801E6930 */
+extern void        Battle_UpdateScreenFade(void);
+/* func_801E6990 */
+extern void        Battle_StartScreenFade(void);
+/* func_801E69C0 */
+extern void        Battle_RaiseScreenFade(void);
+/* func_801E6A54 */
+extern void        Battle_HoldScreenFade(void);
 extern void        func_801E6AA0(void);
 extern void        func_801E6B28(void);
 extern void        func_801E6BC8(void);
 extern void        func_801E6C20(void);
-void               func_801E6C84(void);
-extern void        func_801E6D28(void);
-extern void        func_801E6E54(void);
-extern void        func_801E6FA0(void);
-extern void        func_801E6FB0(void);
-extern void        func_801E71EC(void);
+/* func_801E6C84 */
+void               Battle_UpdateAilmentActor(void);
+/* func_801E6D28 */
+extern void        Battle_WaitAilment(void);
+/* func_801E6E54 */
+extern void        Battle_StartAilmentActor(void);
+/* func_801E6FA0 */
+extern void        Battle_RestartAilmentActor(void);
+/* func_801E6FB0 */
+extern void        Battle_RunAilmentActor(void);
+/* func_801E71EC */
+extern void        Battle_WaitAilmentEffect(void);
 void               func_801E72A8(void);
 void               func_801E72F4(void);
 void               func_801E74B8(void);

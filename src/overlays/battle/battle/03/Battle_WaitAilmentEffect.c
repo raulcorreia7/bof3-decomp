@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801E71EC(void) {
+/* func_801E71EC */
+MATCH void Battle_WaitAilmentEffect(void) {
     u8* field;
     u32 flags;
     u8  index;

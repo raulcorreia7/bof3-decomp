@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801E6154(void) {
+/* func_801E6154 */
+MATCH void Battle_BounceDamageNumber(void) {
     BattleEffect* work;
     BattleEffect* new_var;
 

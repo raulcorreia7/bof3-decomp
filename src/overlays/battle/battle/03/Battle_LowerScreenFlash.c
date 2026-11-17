@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801E65F8(void) {
+/* func_801E65F8 */
+MATCH void Battle_LowerScreenFlash(void) {
     BattleEffect* slot;
     s32           value;
     u8            count;
