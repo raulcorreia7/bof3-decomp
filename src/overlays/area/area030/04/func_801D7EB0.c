@@ -27,9 +27,8 @@ NON_MATCHING void func_801D7EB0(s32 x, s32 y) {
     buffer     = g_UiFormatBuffer;
     slot_list  = (u8*)MEM_PTR(u8, (u8*)&g_WindowStyle + FISHING_ACCESSORY_SLOT_OFFSET);
     UI_DrawWindow(x, (y + 1) & HALF_MASK, 139, 158, UI_WINDOW_OPEN_ALL, g_WindowStyle);
-    for (slot = 0; slot < FISHING_ACCESSORY_SLOT_COUNT; slot++) {
+    for (slot = 0; slot < FISHING_ACCESSORY_SLOT_COUNT; slot++, slot_list++) {
         if (g_Accessories[*slot_list].type != ITEM_TYPE_FISHING_ROD) {
-            slot_list++;
             continue;
         }
         work = (FishingState*)(void*)g_Task;
@@ -56,7 +55,6 @@ NON_MATCHING void func_801D7EB0(s32 x, s32 y) {
         icon_y += FISHING_ACCESSORY_ROW_HEIGHT;
         row_offset += FISHING_ACCESSORY_ROW_HEIGHT;
         row += 1;
-        slot_list++;
     }
     work                = (FishingState*)(void*)g_Task;
     work->step_delta_18 = row;

@@ -2,10 +2,10 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F50F0(void) {
-    /* Kept volatile: the track loop's stores leave retail order without it. */
-    volatile SceneSampleTrack* track;
-    u8                         i;
-    u8                         index;
+    SceneSampleTrack* track;
+    u8                i;
+    u8                index;
+    s8                weight2;
 
     switch (g_SceneEventState.step) {
         case 0:
@@ -82,18 +82,19 @@ NON_MATCHING void func_801F50F0(void) {
                 track = D_801F629C;
                 if (D_801F6298 > 0) {
                     do {
+                        weight2 = (s8)(track->weight[2] >> 8);
                         track->sample[0] += (s8)(track->weight[0] >> 8);
                         track->sample[1] += (s8)(track->weight[1] >> 8);
-                        track->sample[2] += (s8)(track->weight[2] >> 8);
+                        track->sample[2] += weight2;
                         track->sample[3] += (s8)(track->weight[0] >> 8);
                         track->sample[4] += (s8)(track->weight[1] >> 8);
-                        track->sample[5] += (s8)(track->weight[2] >> 8);
+                        track->sample[5] += weight2;
                         track->sample[6] += (s8)(track->weight[0] >> 8);
                         track->sample[7] += (s8)(track->weight[1] >> 8);
-                        track->sample[8] += (s8)(track->weight[2] >> 8);
+                        track->sample[8] += weight2;
                         track->sample[9] += (s8)(track->weight[0] >> 8);
                         track->sample[10] += (s8)(track->weight[1] >> 8);
-                        track->sample[11] += (s8)(track->weight[2] >> 8);
+                        track->sample[11] += weight2;
                         i++;
                         track++;
                     } while (i < D_801F6298);

@@ -8,8 +8,8 @@ NON_MATCHING void func_801F2DA0(void* position, s32 radius1, s32 radius2) {
     MATRIX   camera;
     POLY_G4* prim;
     s32*     pos;
-    s32      turn;
-    s32      i;
+    u16      turn;
+    u8       i;
     s32      sine;
     u16      angle;
 
