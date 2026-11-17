@@ -65,7 +65,7 @@ System tags are capitals, as SDL writes them; game tags are words.
 | Game   | `Battle_ BMagic_ Boss_ Enemy_ Party_ Char_ PlChar_ Area_ WorldMap_ Actor_ Scene_ Menu_ Shop_ Master_ Fairy_ FairyCasino_ FairyNickname_ FairyCopyShop_ FairyMusician_ FairyFortuneTeller_ FairySinger_ Well_ Fishing_ Game_ Message_ Effect_ Item_ Logo_ Resource_` | the tag without `_`: `g_Battle`, `g_WorldMap`                                       |
 
 A constant or macro takes the tag in capitals: `BATTLE_`, `BMAGIC_`, `PLCHAR_`, `WORLDMAP_`,
-`SCENE_`, `FISHING_`. `MATH_` names only the game's own math routines; `LZ77_` names the decoder.
+`SCENE_`, `FISHING_`. `MATH_` names only the game's own math routines (`MATH_TBL`, the EMI archive magic, is a container tag and not a math word); `LZ77_` names the decoder.
 
 `Field`, `World` and `Etc` are not tags. The disc has `BIN/WORLD##/AREA###` and no other map word:
 one resident map engine runs every area, and the world map is 11 AREA images whose map-load entry
