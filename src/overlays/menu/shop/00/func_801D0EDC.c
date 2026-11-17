@@ -37,7 +37,7 @@ MATCH void func_801D0EDC(void) {
         row->status = flags;
         count++;
         row++;
-    } while ((u8)count < CHARACTER_COUNT);
+    } while ((u8)count < CHAR_INDEX_COUNT);
 
     g_MenuStep.sub_step = 0;
     g_MenuStep.state    = 0;

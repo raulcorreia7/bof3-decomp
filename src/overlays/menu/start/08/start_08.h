@@ -317,8 +317,8 @@ typedef struct WillpowerCurve {
     u8 base;
 } WillpowerCurve;
 
-extern Character      g_NewGameCharacters[CHARACTER_COUNT];
-extern WillpowerCurve g_NewGameWillpowerCurves[CHARACTER_COUNT];
+extern Character      g_NewGameCharacters[CHAR_INDEX_COUNT];
+extern WillpowerCurve g_NewGameWillpowerCurves[CHAR_INDEX_COUNT];
 extern u8             s_CampMenuPanelIds[8];
 /* Entries of the step handler tables. */
 #define MENU_START_STEP_COUNT          9

@@ -23,7 +23,7 @@ MATCH s32 Item_Count(u8 category, u8 item_id, u8 mode) {
         return 0;
     }
     count = 0;
-    for (i = 0; i < CHARACTER_COUNT; i++) {
+    for (i = 0; i < CHAR_INDEX_COUNT; i++) {
         record = &g_Characters[i];
         if (record->party_flags & 0x1) {
             switch (category) {

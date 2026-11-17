@@ -22,7 +22,7 @@ MATCH void func_801F3548(void) {
         }
         record += 1;
         count += 1;
-    } while (count < CHARACTER_COUNT);
+    } while (count < CHAR_INDEX_COUNT);
 
     /* Signed gate: retail tests the party byte with blez. */
     count = 0;

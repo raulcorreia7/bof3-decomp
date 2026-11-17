@@ -19,7 +19,7 @@ MATCH void func_801F3AB0(void) {
             g_Characters[count].ap     = g_Characters[count].stats.max_ap;
         }
         count += 1;
-    } while (count < CHARACTER_COUNT);
+    } while (count < CHAR_INDEX_COUNT);
 
     /* kept: the byte loads unsigned; the signed `> 0` test becomes `blez`. */
     count = 0;
