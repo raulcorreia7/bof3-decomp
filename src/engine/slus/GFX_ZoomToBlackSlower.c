@@ -4,7 +4,8 @@
  * stepping the two g_AreaCameraAngle.vx coordinates up by 0xB and the g_AreaCameraOffsetZ count
  * down by 0x32 each pass and re-arming the callback count.
  */
-MATCH void func_8014F24C(void) {
+/* func_8014F24C */
+MATCH void GFX_ZoomToBlackSlower(void) {
     s32  flag;
     u16* level;
     u16  value;
@@ -30,7 +31,7 @@ loop:
         FAKE_ORDER_LOCK(g_AreaCameraOffsetZ = countdown);
         level[2] = second_coordinate + 0xB;
         SYS_ThreadWait(1);
-        /* Retail keeps this spin as a goto loop (as in func_8014F460). */
+        /* Retail keeps this spin as a goto loop (as in GFX_SpinToBlack). */
         goto loop;
     }
     SYS_ThreadExit();

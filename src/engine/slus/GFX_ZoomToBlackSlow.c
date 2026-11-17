@@ -4,7 +4,8 @@
  * distance cell down while the step reports incomplete; then releases the
  * thread.
  */
-MATCH void func_8014EF80(void) {
+/* func_8014EF80 */
+MATCH void GFX_ZoomToBlackSlow(void) {
     s32  flag;
     u16* level;
     u16  value;
@@ -30,7 +31,7 @@ loop:
         FAKE_ORDER_LOCK(g_AreaCameraOffsetZ = countdown);
         level[2] = second_coordinate + 0xB;
         SYS_ThreadWait(1);
-        /* Retail keeps this spin as a goto loop (as in func_8014F460). */
+        /* Retail keeps this spin as a goto loop (as in GFX_SpinToBlack). */
         goto loop;
     }
 
