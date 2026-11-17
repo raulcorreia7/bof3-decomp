@@ -141,9 +141,9 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
             gte_rtps();
             gte_stsxy(&quad->ft4.x0);
             gte_stszotz(&z);
-            otz           = z;
-            sort_list->z  = otz;
-            sort_list->z0 = otz;
+            otz                 = z;
+            sort_list->z        = otz;
+            sort_list->tagged_z = otz;
 
             gte_ldv0(&g_ScratchPadVectors[1]);
             gte_rtps();
