@@ -901,7 +901,78 @@ MATCH void func_801D3C30(void) {
     func_801D32A0(0xCC, 0x3C, 0);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D3E44(void) {
+    s8  selected;
+    u8  same_count;
+    u8  pair_count;
+    s32 i;
+    s32 j;
+    s32 idx;
+    u8* record;
+
+    selected   = (s8)D_801DB0B4;
+    same_count = 0;
+    i          = 0;
+    do {
+        if (D_801DB080[(s32)selected * 5 + 3 + i] == D_801DB080[i]) {
+            same_count++;
+        }
+        i++;
+    } while (i < 3);
+
+    pair_count = 0;
+    i          = 0;
+    do {
+        j = 0;
+        do {
+            if (D_801DB080[(s32)selected * 5 + 3 + i] == D_801DB080[j]) {
+                pair_count++;
+            }
+            j++;
+        } while (j < 3);
+        i++;
+    } while (i < 3);
+
+    D_801DB080[(s32)selected * 5 + 6] = same_count;
+    D_801DB080[(s32)selected * 5 + 7] = pair_count;
+    if (same_count == 3) {
+        sprintf((char*)g_TextVariables[0], D_801D0C20, selected + 1);
+        sprintf((char*)&g_TextVariables[0][0x20], D_801D0C20, pair_count);
+        Message_StartAreaMessage(0x81);
+        D_801F294D++;
+    } else {
+        sprintf((char*)g_TextVariables[0], D_801D0C20, selected + 1);
+        D_801DB0B8 = rand() & 3;
+        if (D_801DB0B8 < 3) {
+            D_801DB0B8 -= rand() & 3;
+            if (D_801DB0B8 < 0) {
+                D_801DB0B8 = 0;
+            } else if (D_801DB0B8 >= 3) {
+                D_801DB0B8 = 2;
+            }
+        }
+        idx    = ((s8)D_801DB0B4 * 3 + (s8)D_801DB0B8) * 2 + D_801448F2 * 48;
+        record = Item_GetRecord(D_801DAD00[0][idx + 1], D_801DAD00[0][idx]);
+        i      = 0;
+        do {
+            g_TextVariables[0][0x20 + i] = record[i];
+            i++;
+        } while (i < 12);
+        g_TextVariables[0][0x2C] = 0;
+        Message_StartAreaMessage(0x82);
+    }
+    D_801F294D       = 7;
+    g_GameStateIndex = GAME_REQUEST_MESSAGE;
+    func_801D4AE0(16, 24, 0);
+    func_801D4F88(104, 64, 0);
+    func_801D4EA4(104, 120, D_801DB0B4, 0);
+    func_801D3184(204, 16);
+    func_801D32A0(204, 60, 0);
+}
+#else
 INCLUDE_ASM(func_801D3E44);
+#endif
 
 MATCH void func_801D4158(void) {
     u8* state;
@@ -1112,6 +1183,9 @@ INCLUDE_ASM(func_801D4910);
 #endif
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D4AE0(s16 x, s16 y, u8 flag) {
+    s32 left_x;
+    s32 middle_x;
+    s32 right_x;
     s32 i;
     s32 dy;
     s32 gy;
@@ -1119,6 +1193,9 @@ NON_MATCHING void func_801D4AE0(s16 x, s16 y, u8 flag) {
     u8  k;
     s8  sel;
 
+    left_x   = x + 6;
+    middle_x = x + 0x2F;
+    right_x  = x + 0x43;
     UI_DrawWindow(x, y, 0x52, 0x7A, 0, g_WindowStyle);
     func_801D4910(x, y);
     dy = 7;
@@ -1130,35 +1207,35 @@ NON_MATCHING void func_801D4AE0(s16 x, s16 y, u8 flag) {
             if (flag == 0) {
                 sprintf(g_UiFormatBuffer, D_801DAD60);
                 ry = y + dy;
-                UI_DrawAsciiString(x + 6, ry, 0, g_UiFormatBuffer);
+                UI_DrawAsciiString(left_x, ry, 0, g_UiFormatBuffer);
                 sprintf(g_UiFormatBuffer, D_801DAD64);
-                UI_DrawAsciiString(x + 0x2F, ry, UI_TEXT_HIGHLIGHT, g_UiFormatBuffer);
+                UI_DrawAsciiString(middle_x, ry, UI_TEXT_HIGHLIGHT, g_UiFormatBuffer);
             } else {
                 sprintf(g_UiFormatBuffer, D_801D0C24, D_801DB080[k], D_801DB080[k + 1], D_801DB080[k + 2]);
                 ry = y + dy;
-                UI_DrawAsciiString(x + 6, ry, 0, g_UiFormatBuffer);
+                UI_DrawAsciiString(left_x, ry, 0, g_UiFormatBuffer);
                 sprintf(g_UiFormatBuffer, D_801D0C20, D_801DB080[k + 3]);
-                UI_DrawAsciiString(x + 0x2F, ry, UI_TEXT_HIGHLIGHT, g_UiFormatBuffer);
+                UI_DrawAsciiString(middle_x, ry, UI_TEXT_HIGHLIGHT, g_UiFormatBuffer);
                 sprintf(g_UiFormatBuffer, D_801D0C20, D_801DB080[k + 4]);
             }
-            UI_DrawAsciiString(x + 0x43, ry, 1, g_UiFormatBuffer);
+            UI_DrawAsciiString(right_x, ry, 1, g_UiFormatBuffer);
             UI_DrawGlyphString(x + 0x39, y + gy, 0, D_801D0C2C);
         } else if (i < sel) {
             sprintf(g_UiFormatBuffer, D_801D0C24, D_801DB080[k], D_801DB080[k + 1], D_801DB080[k + 2]);
             ry = y + dy;
-            UI_DrawAsciiString(x + 6, ry, 0, g_UiFormatBuffer);
+            UI_DrawAsciiString(left_x, ry, 0, g_UiFormatBuffer);
             sprintf(g_UiFormatBuffer, D_801D0C20, D_801DB080[k + 3]);
-            UI_DrawAsciiString(x + 0x2F, ry, UI_TEXT_HIGHLIGHT, g_UiFormatBuffer);
+            UI_DrawAsciiString(middle_x, ry, UI_TEXT_HIGHLIGHT, g_UiFormatBuffer);
             sprintf(g_UiFormatBuffer, D_801D0C20, D_801DB080[k + 4]);
-            UI_DrawAsciiString(x + 0x43, ry, 1, g_UiFormatBuffer);
+            UI_DrawAsciiString(right_x, ry, 1, g_UiFormatBuffer);
             UI_DrawGlyphString(x + 0x39, y + gy, 0, D_801D0C2C);
         } else {
             sprintf(g_UiFormatBuffer, D_801DAD60);
             ry = y + dy;
-            UI_DrawAsciiString(x + 6, ry, UI_TEXT_DIM, g_UiFormatBuffer);
+            UI_DrawAsciiString(left_x, ry, UI_TEXT_DIM, g_UiFormatBuffer);
             sprintf(g_UiFormatBuffer, D_801DAD64);
-            UI_DrawAsciiString(x + 0x2F, ry, UI_TEXT_DIM, g_UiFormatBuffer);
-            UI_DrawAsciiString(x + 0x43, ry, UI_TEXT_DIM, g_UiFormatBuffer);
+            UI_DrawAsciiString(middle_x, ry, UI_TEXT_DIM, g_UiFormatBuffer);
+            UI_DrawAsciiString(right_x, ry, UI_TEXT_DIM, g_UiFormatBuffer);
             UI_DrawGlyphString(x + 0x39, y + gy, UI_TEXT_DIM, D_801D0C2C);
         }
         gy += 14;
@@ -2362,11 +2439,13 @@ NON_MATCHING void func_801D90D8(s32 x, s32 y, s32 character, s32 frame_mode) {
     s32 index;
     s32 x_copy;
     s32 y_copy;
+    u16 window_top;
     u8* window_style;
     u8* text;
 
     window_style = &g_WindowStyle;
-    UI_DrawWindow((u16)(x + 3), (u16)(y + 3), 0x7D, 0x2D, 0, *window_style);
+    window_top   = (u16)(y + 3);
+    UI_DrawWindow((u16)(x + 3), window_top, 0x7D, 0x2D, 0, *window_style);
     character = (u8)character;
     index     = ((((character << 2) + character) << 3) + character) << 2;
     Menu_DrawPortrait((u16)(x + 6), (u16)(y + 2), ((Character*)((u8*)g_Characters + index))->character_id, 0);
@@ -2431,6 +2510,7 @@ NON_MATCHING void func_801D9348(s32 x, s32 y, s32 color, s32 frame_mode) {
     u8       rgb[3];
     u8       base;
     u8       i;
+    s16      line3_x0;
     s32      width_copy;
     s32      state;
     s32      mask;
@@ -2460,9 +2540,10 @@ NON_MATCHING void func_801D9348(s32 x, s32 y, s32 color, s32 frame_mode) {
     }
 
     x += 2;
-    line3 = (LINE_F3*)g_GfxPrimCursor;
+    line3    = (LINE_F3*)g_GfxPrimCursor;
+    line3_x0 = x + 4;
     SetLineF3(line3);
-    setXY3(line3, x + 4, y, x, y + 4, x, y + 0x34);
+    setXY3(line3, line3_x0, y, x, y + 4, x, y + 0x34);
     setRGB0(line3, rgb[2], rgb[1], rgb[0]);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F3));
 
