@@ -517,12 +517,7 @@ NON_MATCHING void func_801D1EE8(void) {
 INCLUDE_ASM(func_801D1EE8);
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D2308(void* record) {
-}
-#else
 INCLUDE_ASM(func_801D2308);
-#endif
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D27BC(void) {
