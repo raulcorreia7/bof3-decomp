@@ -7,12 +7,12 @@ NON_MATCHING void func_801F37D4(void) {
     s32      id;
     s32      x;
     u8       i;
-    u8       j;
+    s32      j;
 
     for (i = 0; i < 4; i++) {
         j = 0;
         for (; j < 4; j++) {
-            if ((u8)Area_GetCellCode((u8)(j + 0x94), (s16)(i + 0x20)) != 0x50) {
+            if ((u8)Area_GetCellCode((j & BYTE_MASK) + 0x94, (s16)(i + 0x20)) != 0x50) {
                 continue;
             }
             x  = (u8)j + 0x94;
