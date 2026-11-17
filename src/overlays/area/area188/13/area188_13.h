@@ -10,9 +10,12 @@
 #include "area/effects.h"
 #include "overlays/area/Area_DrawDimQuad.h"
 
-/* The per-scene y limit bytes the walk step reads, in 16.16 units. */
+/* The shop panel byte the confirmed answer clears. */
+extern u8 D_8014865F;
+/* The two bytes of the answer pair table, one entry per choice. */
 extern u8 D_801F688C[];
 extern u8 D_801F688D[];
+/* The per-scene y limit bytes the walk step reads, in 16.16 units. */
 extern u8 D_801F6898[];
 
 #define AREA_SPIN_RADIUS     16
@@ -20,9 +23,6 @@ extern u8 D_801F6898[];
 #define AREA_SPIN_SCALE_MASK 0x2
 #define AREA_SPIN_SCALE_BASE 3
 #define AREA_SPIN_FADE       0x20
-
-/* The game-overlay state bytes the cancel path resets. */
-extern u8 D_8014865F;
 
 /* The party position in 16.16 fixed point: x, y and the ground height. */
 
