@@ -32,8 +32,8 @@
 
 /* Fixed-address function pointer. function_type is a function-pointer typedef:
  *
- *     typedef void (*Handler)(void);
- *     FUNCTION_AT(Handler, 0x80123456u)();
+ *     typedef void (*Callback)(void);
+ *     FUNCTION_AT(Callback, 0x80123456u)();
  */
 #define FUNCTION_AT(function_type, address) ((function_type)(address))
 

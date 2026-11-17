@@ -210,7 +210,7 @@ def test_a_new_name_with_a_rejected_word_is_an_offender(name: str) -> None:
         "Thread",
         "ColorRGB8",
         "Offset2",
-        "BattleCommandFunc",
+        "BattleCommandCallback",
         "Message_WindowOpen",
         "Item_Add",
     ],

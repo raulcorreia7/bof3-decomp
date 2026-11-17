@@ -26,15 +26,15 @@ void func_801F9E70(u16 phase);
 
 extern u8 D_801460FB;
 
-extern u8        D_8014623B;
-extern u16       D_80146258;
-extern u32       D_80147B5C;
-extern u8        D_801FBF78[];
-extern u8        D_801FBF98[];
+extern u8                 D_8014623B;
+extern u16                D_80146258;
+extern u32                D_80147B5C;
+extern u8                 D_801FBF78[];
+extern u8                 D_801FBF98[];
 /* D_801FBFB8 */
-extern SceneFunc g_SceneActorDispatch[];
+extern SceneActorCallback g_SceneActorDispatch[];
 /* A byte the scene handlers store and reload. */
-extern u8        D_801FBFEC;
+extern u8                 D_801FBFEC;
 
 /* Reserve two actor slots and start the same pair of scripts on them; the second script sits 0x10 bytes after the first. */
 #define SCENE_START_SCRIPT_PAIR(script)                                 \

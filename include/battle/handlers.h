@@ -18,7 +18,7 @@ typedef enum BossEvent {
 /* The hook's reply to BOSS_EVENT_TURN_END while the boss still runs its own event. */
 #define BOSS_EVENT_PENDING 0xFF
 
-typedef u8 (*BossEventFunc)(u32 event);
+typedef u8 (*BossEventCallback)(u32 event);
 
 /* func_800AC844 */
 void        Battle_ShowActorEntry(u8 entry_id);

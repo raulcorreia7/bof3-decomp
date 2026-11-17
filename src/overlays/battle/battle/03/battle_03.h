@@ -42,7 +42,7 @@
  * block for the selected entry; no lifted caller names those seven words yet,
  * so they keep the panel-task spelling and the selector pointer it also
  * receives. No generic entry carries this contract. */
-typedef void (*BattlePanelForwardFunc)(s32 panel_arg0, s32 panel_arg1, s32 panel_arg2, s32 panel_arg3, s32 panel_arg4, s32 panel_arg5, s32 panel_arg6, u8* selector);
+typedef void (*BattlePanelTaskCallback)(s32 panel_arg0, s32 panel_arg1, s32 panel_arg2, s32 panel_arg3, s32 panel_arg4, s32 panel_arg5, s32 panel_arg6, u8* selector);
 
 /* The panel task's kind byte (+0x02) selects one of these eight update
  * routines; Battle_UpdatePanel copies the table and dispatches. */
@@ -160,7 +160,7 @@ typedef struct {
 /* The panel task forwarder func_801EA1E0 calls the routine its selector names
  * with the caller's seven words. */
 typedef struct {
-    BattlePanelForwardFunc steps[3];
+    BattlePanelTaskCallback steps[3];
 } BattlePanelTaskSteps;
 
 /* Overlay data and routines the sources use; names are the retail addresses. */

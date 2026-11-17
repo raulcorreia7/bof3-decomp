@@ -8,7 +8,7 @@
 
 extern u8  D_80146871;
 extern u8* g_EncounterZones[];
-/* Handler tables the step bytes select. */
+/* Step tables the step bytes select. */
 extern void (*D_801F40F0[])(void);
 
 extern u8 D_801F40F8[];

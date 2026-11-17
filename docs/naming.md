@@ -126,7 +126,7 @@ game's own records owns keeps its meaning (`Callback`, `Bank`, `Slot`, `Cell`); 
 | Size                          | `Size`                                      | Bytes of storage a record, buffer or primitive takes                                    | `Len` for bytes                                                                                                                        |
 | Length                        | `Length`                                    | The number of elements or characters in a run                                           | `Len`                                                                                                                                  |
 | Max and limit                 | `Max`, `Limit`                              | The largest value of a quantity; a bound one operation stays within                     | —                                                                                                                                      |
-| Function-pointer element      | `<Thing>Func`                               | A function pointer stored in a table, typed for one signature                           | `Handler`, `Proc`, `Routine`, `Fn`, `Cb`                                                                                               |
+| Function-pointer element      | `<Role>Callback`                            | A function pointer typed for one signature, named for what the pointed-to function does | `Handler`, `Func`, `Proc`, `Routine`, `Fn`, `Cb`                                                                                       |
 | Callback type                 | `Callback`                                  | The no-argument `void (*)(void)` entry                                                  | —                                                                                                                                      |
 | Scheduler thread              | `Thread`                                    | One cooperative task the main loop runs each frame                                      | `CallbackSlot`, `Callback` for the slot                                                                                                |
 | Event hook                    | `Hook`                                      | A function pointer the engine calls at one event                                        | `Callback` for the pointer                                                                                                             |
@@ -385,7 +385,7 @@ usually the name. The same holds for `Ref`, `View`, `Window`, `Row`, `Scratch`, 
 | a number       | `Table6`, `Area016`, `Callback3`                         | what the index selects (`g_BattleCommands`); the place or system once proven (`Fishing`, `Town`)           |
 | a category     | `Kind`, `Class`                                          | `Type`: `BattleOwnerType`, not `BattleOwnerKind`                                                           |
 | a saved key    | `Ptr`, `Buf`, `Tmp`, `Cur`, `Num`, `Idx`, `Cnt`, `Obj`   | the word: `index`, `count`, `buffer`, `current`, the thing a pointer names                                 |
-| a callable     | `Handler`, `Proc`, `Routine`, `Cb`                       | the action the function runs; `Func` for a table element, `Callback` for `void (*)(void)`                  |
+| a callable     | `Handler`, `Proc`, `Routine`, `Cb`                       | the action the function runs; `<Role>Callback` for a pointer type, `Callback` for `void (*)(void)`         |
 
 One exception: a record that exists only to make a struct assignment give the retail block move
 is a copy unit from `include/common/copy.h` (`Cpy16`, `Cpy16u`), named for its size and
@@ -413,10 +413,10 @@ the player sees, the PlayStation `Scratchpad`, an SDK name.
 **Do**
 
 ```c
-typedef void (*BattleCommandFunc)(Battler* battler);
+typedef void (*BattleCommandCallback)(Battler* battler);
 
 extern Weapon            g_Weapons[WEAPON_COUNT];
-extern BattleCommandFunc g_BattleCommands[BATTLE_COMMAND_COUNT];
+extern BattleCommandCallback g_BattleCommands[BATTLE_COMMAND_COUNT];
 ```
 
 **Don't**

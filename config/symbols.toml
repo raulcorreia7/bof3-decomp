@@ -1022,7 +1022,7 @@ Battle_AllocEffect = { addr = 0x801E590C, type = "func", alias = true, source = 
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
-D_801EEC50 = { addr = 0x801EEC50, type = "Magic064SecondSteps", size = 0x0c, source = "Handler table of the magic064 effect, run by header.step (byte 0x02)." }
+D_801EEC50 = { addr = 0x801EEC50, type = "Magic064SecondSteps", size = 0x0c, source = "Step table of the magic064 effect, run by header.step (byte 0x02)." }
 BMagic_DispatchMode = { addr = 0x801EEC7C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic064 (Weretiger)." }
 Effect_ClearTimerNextStep = { addr = 0x801F0DA8, type = "func", source = "Clears the effect timer (byte 0x09) and runs the next-step routine in magic064 (Weretiger)." }
 BMagic_ProjectCell = { addr = 0x801F12B8, type = "func", source = "Projects the map cell a projected point lands on." }
@@ -3391,7 +3391,7 @@ D_801C842A = { addr = 0x801C842A, size = 0x1, alias = true, source = "The second
 D_801C8434 = { addr = 0x801C8434, size = 0x8, source = "The two fade handlers Game_StartFadeWhite and func_801A3648 that func_801A3594 runs by g_Task->unk_04." }
 D_801C843C = { addr = 0x801C843C, size = 0x8, source = "The two fade handlers Game_StartFadeBlack and func_801A386C that func_801A37D4 runs by g_Task->unk_04." }
 s_ScriptOpcodeLengths = { addr = 0x801C8444, size = 0x10, source = "Length in bytes of each script opcode; the script walkers (func_801A4374, func_801A46E8, func_801A4798, func_801A4844, func_801A4BF8) advance the cursor by it." }
-g_SceneScenes = { addr = 0x801C8454, size = 0x50, source = "Handler tables of the scenarios, indexed by g_SceneState.scenario_id by Game_UpdateScenario." }
+g_SceneScenes = { addr = 0x801C8454, size = 0x50, source = "Step tables of the scenarios, indexed by g_SceneState.scenario_id by Game_UpdateScenario." }
 g_SceneSteps = { addr = 0x801C84A4, size = 0x8, source = "Scene update callbacks, indexed by the scene state byte D_801448EA by Game_UpdateScene." }
 s_EventFlagsReset = { addr = 0x801C84AC, size = 0x10, source = "Scene_ResetEventState copies these 16 mode bytes to g_SceneEventFlags" }
 g_SceneEvents = { addr = 0x801C84BC, size = 0x100, source = "Scene event callbacks, indexed by the scene event byte D_801448EB by Scene_UpdateEvent." }
@@ -7230,7 +7230,7 @@ g_BattleTarget = { addr = 0x80146394, type = "u8", source = "Target battler of t
 g_BattleTargetRecord = { addr = 0x801463A0, type = "BattleTurn", source = "Result cells of the target battler; the target_record member of g_Battle.", alias = true }
 g_BattleChooseEndingHook = { addr = 0x801463A4, type = "Callback", source = "Hook that chooses how the battle ends; the choose_ending_hook member of g_Battle.", alias = true }
 g_BattleEndHook = { addr = 0x801463A8, type = "Callback", source = "Hook that runs when the battle ends; the end_hook member of g_Battle.", alias = true }
-g_BossBattleEventHook = { addr = 0x801463AC, type = "BossEventFunc", source = "Hook that handles boss battle events; the boss_event_hook member of g_Battle.", alias = true }
+g_BossBattleEventHook = { addr = 0x801463AC, type = "BossEventCallback", source = "Hook that handles boss battle events; the boss_event_hook member of g_Battle.", alias = true }
 g_BattleActionId = { addr = 0x801463C0, type = "u16", source = "selected action/command id indexes D_801CA71C (src/overlays/battle/Battle_RollHitChance.h 22) and g_BattleActionSelection (func_801D3E80.c 14) written with the command id (func_8009F278.c 5); the action_id member of g_Battle.", alias = true }
 g_BattleGenes = { addr = 0x801463C4, type = "u8", size = 0x3, source = "The three genes chosen for Accession; the genes member of g_Battle.", alias = true }
 g_BattleGeneCount = { addr = 0x801463C7, type = "u8", source = "Number of genes chosen for Accession; the gene_count member of g_Battle.", alias = true }

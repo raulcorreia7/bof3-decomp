@@ -342,15 +342,15 @@ u16 D_801C8384[28] = {0x0010, 0x0021, 0x002D, 0x0041, 0x0057, 0x0058, 0x0068, 0x
                       0x0098, 0x0000, 0x0004, 0x0003, 0x0002, 0x0001, 0x0000, 0x0101, 0x0102, 0x0103,
                       0x0004, 0x0006, 0x0002, 0x0005, 0x0000, 0x0105, 0x0102, 0x0106};
 
-ActorActionFunc D_801C83BC[7] = {(ActorActionFunc)func_801A225C, (ActorActionFunc)func_801A225C,
-                                 (ActorActionFunc)func_801A225C, (ActorActionFunc)func_801A225C,
-                                 (ActorActionFunc)func_801A22CC, (ActorActionFunc)func_801A239C,
-                                 (ActorActionFunc)func_801A246C};
+ActorStepCallback D_801C83BC[7] = {(ActorStepCallback)func_801A225C, (ActorStepCallback)func_801A225C,
+                                 (ActorStepCallback)func_801A225C, (ActorStepCallback)func_801A225C,
+                                 (ActorStepCallback)func_801A22CC, (ActorStepCallback)func_801A239C,
+                                 (ActorStepCallback)func_801A246C};
 
-ObjectFunc D_801C83D8[11] = {(ObjectFunc)func_801A0AE4, (ObjectFunc)func_801A0CFC, (ObjectFunc)func_801A0F24,
-                             (ObjectFunc)func_801A114C, (ObjectFunc)func_801A1384, (ObjectFunc)func_801A271C,
-                             (ObjectFunc)func_801A1A24, (ObjectFunc)func_801A3410, (ObjectFunc)Game_DispatchFadeWhite,
-                             (ObjectFunc)Game_DispatchFadeBlack, (ObjectFunc)func_801A3B7C};
+ActorModeCallback D_801C83D8[11] = {(ActorModeCallback)func_801A0AE4, (ActorModeCallback)func_801A0CFC, (ActorModeCallback)func_801A0F24,
+                             (ActorModeCallback)func_801A114C, (ActorModeCallback)func_801A1384, (ActorModeCallback)func_801A271C,
+                             (ActorModeCallback)func_801A1A24, (ActorModeCallback)func_801A3410, (ActorModeCallback)Game_DispatchFadeWhite,
+                             (ActorModeCallback)Game_DispatchFadeBlack, (ActorModeCallback)func_801A3B7C};
 
 u8 s_EntityRouteIndices[8][4] = {{0x03, 0x05, 0x07, 0x01}, {0x05, 0x01, 0x07, 0x03}, {0x07, 0x05, 0x03, 0x01},
                                  {0x01, 0x07, 0x05, 0x03}, {0x07, 0x01, 0x03, 0x05}, {0x03, 0x01, 0x07, 0x05},
@@ -393,24 +393,24 @@ u8 s_SceneStateStepArgs[8] = {0x00, 0x00, 0x04, 0x04, 0x00, 0x00, 0x00, 0x00};
 Callback D_801C85C4[11] = {Fishing_ShowLocation, func_801F2D18,        Fishing_ShowLocation, func_801F2C6C,        func_801F2C6C, func_801F3798,
                            func_801F2F0C,        Fishing_ShowLocation, func_801F2E1C,        Fishing_ShowLocation, func_801F2CA8};
 
-SceneFunc g_SceneObjects[66] = {
-    (SceneFunc)&D_801F2D28, (SceneFunc)func_801A8714, (SceneFunc)&D_801F1294,   (SceneFunc)&D_801F1318,
-    (SceneFunc)&D_801F13B8, (SceneFunc)&D_801F1444,   (SceneFunc)&D_801F1484,   (SceneFunc)&D_801F14C4,
-    (SceneFunc)&D_801F14F8, (SceneFunc)&D_801F1538,   (SceneFunc)&D_801F12C8,   (SceneFunc)&D_801F1578,
-    (SceneFunc)&D_801F15F8, (SceneFunc)&D_801F3B9C,   (SceneFunc)func_801F2C90, (SceneFunc)&D_801F2F08,
-    (SceneFunc)&D_801F3B20, (SceneFunc)&D_801F4168,   (SceneFunc)&D_801F4674,   (SceneFunc)&D_801F5698,
-    (SceneFunc)&D_801F56E0, (SceneFunc)&D_801F2D38,   (SceneFunc)&D_801F2DE0,   (SceneFunc)&D_801F2D70,
-    (SceneFunc)&D_801F2F34, (SceneFunc)&D_801F3F48,   (SceneFunc)&D_801F2E68,   (SceneFunc)&D_801F2D48,
-    (SceneFunc)&D_801F2E94, (SceneFunc)&D_801F4250,   (SceneFunc)&D_801F3BEC,   (SceneFunc)&D_801F45E4,
-    (SceneFunc)&D_801F2D50, (SceneFunc)&D_801F3F70,   (SceneFunc)&D_801F599C,   (SceneFunc)&D_801F58F4,
-    (SceneFunc)&D_801F3140, (SceneFunc)func_801F2C04, (SceneFunc)func_801F2C04, (SceneFunc)&D_801F2C68,
-    (SceneFunc)&D_801F439C, (SceneFunc)&D_801F3FF4,   (SceneFunc)func_801F2C04, (SceneFunc)&D_801F2DA0,
-    (SceneFunc)&D_801F5EBC, (SceneFunc)&D_801F3A34,   (SceneFunc)func_801F3A6C, (SceneFunc)&D_801F3AA4,
-    (SceneFunc)&D_801F3ADC, (SceneFunc)&D_801F35BC,   (SceneFunc)&D_801F3E00,   (SceneFunc)&D_801F2DC4,
-    (SceneFunc)&D_801F346C, (SceneFunc)func_801F2C04, (SceneFunc)&D_801F2DA8,   (SceneFunc)&D_801F3F24,
-    (SceneFunc)&D_801F5708, (SceneFunc)&D_801F4230,   (SceneFunc)func_801F3070, (SceneFunc)&D_801F4288,
-    (SceneFunc)&D_801F4288, (SceneFunc)&D_801F3184,   (SceneFunc)&D_801F15B8,   (SceneFunc)func_801F2CA8,
-    (SceneFunc)&D_801F4594, (SceneFunc)&D_801F3C9C};
+SceneActorCallback g_SceneObjects[66] = {
+    (SceneActorCallback)&D_801F2D28, (SceneActorCallback)func_801A8714, (SceneActorCallback)&D_801F1294,   (SceneActorCallback)&D_801F1318,
+    (SceneActorCallback)&D_801F13B8, (SceneActorCallback)&D_801F1444,   (SceneActorCallback)&D_801F1484,   (SceneActorCallback)&D_801F14C4,
+    (SceneActorCallback)&D_801F14F8, (SceneActorCallback)&D_801F1538,   (SceneActorCallback)&D_801F12C8,   (SceneActorCallback)&D_801F1578,
+    (SceneActorCallback)&D_801F15F8, (SceneActorCallback)&D_801F3B9C,   (SceneActorCallback)func_801F2C90, (SceneActorCallback)&D_801F2F08,
+    (SceneActorCallback)&D_801F3B20, (SceneActorCallback)&D_801F4168,   (SceneActorCallback)&D_801F4674,   (SceneActorCallback)&D_801F5698,
+    (SceneActorCallback)&D_801F56E0, (SceneActorCallback)&D_801F2D38,   (SceneActorCallback)&D_801F2DE0,   (SceneActorCallback)&D_801F2D70,
+    (SceneActorCallback)&D_801F2F34, (SceneActorCallback)&D_801F3F48,   (SceneActorCallback)&D_801F2E68,   (SceneActorCallback)&D_801F2D48,
+    (SceneActorCallback)&D_801F2E94, (SceneActorCallback)&D_801F4250,   (SceneActorCallback)&D_801F3BEC,   (SceneActorCallback)&D_801F45E4,
+    (SceneActorCallback)&D_801F2D50, (SceneActorCallback)&D_801F3F70,   (SceneActorCallback)&D_801F599C,   (SceneActorCallback)&D_801F58F4,
+    (SceneActorCallback)&D_801F3140, (SceneActorCallback)func_801F2C04, (SceneActorCallback)func_801F2C04, (SceneActorCallback)&D_801F2C68,
+    (SceneActorCallback)&D_801F439C, (SceneActorCallback)&D_801F3FF4,   (SceneActorCallback)func_801F2C04, (SceneActorCallback)&D_801F2DA0,
+    (SceneActorCallback)&D_801F5EBC, (SceneActorCallback)&D_801F3A34,   (SceneActorCallback)func_801F3A6C, (SceneActorCallback)&D_801F3AA4,
+    (SceneActorCallback)&D_801F3ADC, (SceneActorCallback)&D_801F35BC,   (SceneActorCallback)&D_801F3E00,   (SceneActorCallback)&D_801F2DC4,
+    (SceneActorCallback)&D_801F346C, (SceneActorCallback)func_801F2C04, (SceneActorCallback)&D_801F2DA8,   (SceneActorCallback)&D_801F3F24,
+    (SceneActorCallback)&D_801F5708, (SceneActorCallback)&D_801F4230,   (SceneActorCallback)func_801F3070, (SceneActorCallback)&D_801F4288,
+    (SceneActorCallback)&D_801F4288, (SceneActorCallback)&D_801F3184,   (SceneActorCallback)&D_801F15B8,   (SceneActorCallback)func_801F2CA8,
+    (SceneActorCallback)&D_801F4594, (SceneActorCallback)&D_801F3C9C};
 
 AreaHooks g_AreaHooks = {
     {{AREA_ID_MOMO_TOWER_UPPER, {0, 0, 0}, func_801F33A8},      {AREA_ID_DAUNA_MINE_ZOMBIE_DRAGON, {0, 0, 0}, func_801F4F60}, {AREA_ID_PLANT, {0, 0, 0}, func_801F3194},
@@ -448,11 +448,11 @@ Callback D_801C88FC[2] = {func_801ACA14, func_801ACAC0};
 
 Callback D_801C8904[2] = {func_801ACC08, func_801ACCD8};
 
-ActorWorkFunc g_FieldActions[11] = {
-    (ActorWorkFunc)FieldAction_RunSteps, (ActorWorkFunc)FieldAction_RunReact, (ActorWorkFunc)FieldAction_None,
-    (ActorWorkFunc)FieldAction_RunAltSteps, (ActorWorkFunc)FieldAction_NoneAlt, (ActorWorkFunc)FieldAction_RunFadeSteps,
-    (ActorWorkFunc)FieldAction_RunAltSteps, (ActorWorkFunc)FieldAction_RunSteps, (ActorWorkFunc)FieldAction_RunReact,
-    (ActorWorkFunc)FieldAction_RunSteps, (ActorWorkFunc)FieldAction_NoneAlt};
+FieldActionCallback g_FieldActions[11] = {
+    (FieldActionCallback)FieldAction_RunSteps, (FieldActionCallback)FieldAction_RunReact, (FieldActionCallback)FieldAction_None,
+    (FieldActionCallback)FieldAction_RunAltSteps, (FieldActionCallback)FieldAction_NoneAlt, (FieldActionCallback)FieldAction_RunFadeSteps,
+    (FieldActionCallback)FieldAction_RunAltSteps, (FieldActionCallback)FieldAction_RunSteps, (FieldActionCallback)FieldAction_RunReact,
+    (FieldActionCallback)FieldAction_RunSteps, (FieldActionCallback)FieldAction_NoneAlt};
 
 u8 g_FindZenny[4] = {0x00, 0x00, 0x01, 0x0A};
 

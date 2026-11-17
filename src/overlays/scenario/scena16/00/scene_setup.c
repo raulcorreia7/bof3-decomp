@@ -4,11 +4,11 @@
 #define SCN_MODE_HANDLER_FIRST  5
 #define SCN_STATE_HANDLER_FIRST 8
 
-typedef void (*SceneEventFunc)(void* record, u32 state);
+typedef void (*SceneEventCallback)(void* record, u32 state);
 
 typedef struct SceneEventDispatch {
-    Callback       callbacks[13];
-    SceneEventFunc events[3];
+    Callback           callbacks[13];
+    SceneEventCallback events[3];
 } SceneEventDispatch;
 
 ASSERT_SIZE(SceneEventDispatch, 0x40);

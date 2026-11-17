@@ -2340,12 +2340,12 @@ MATCH void func_801FC3A0(void) {
 }
 
 /* The scenario entity-handler table, indexed by byte 0x7A of the entity record. */
-static SceneFunc s_SceneActorDispatch[] = {(SceneFunc)func_801FC810, (SceneFunc)Scene_ClearParty};
+static SceneActorCallback s_SceneActorDispatch[] = {(SceneActorCallback)func_801FC810, (SceneActorCallback)Scene_ClearParty};
 
 /* func_801FC7D0. Not Scene_DispatchActor.h: that body reads the global g_SceneActorDispatch, and this table is file-local. */
 MATCH void Scene_DispatchActor(void* entity) {
-    SceneFunc handler;
-    u8        index;
+    SceneActorCallback handler;
+    u8                 index;
 
     index   = ((Actor*)entity)->callback_index;
     handler = s_SceneActorDispatch[index];

@@ -241,7 +241,10 @@ typedef struct GameSlotByteColumn {
 ASSERT_SIZE(GameSlotByteColumn, ACTOR_SIZE);
 
 /* Route step handler: advances one script cursor and reports a byte result. */
-typedef s32 (*TailFunc)(u8* pc);
+typedef s32 (*RouteStepCallback)(u8* cursor);
+
+/* An area script call: the area load record names the routine. */
+typedef void (*AreaScriptCallback)(void* area);
 
 typedef struct CellPaletteIndices {
     u8 cells[9];
@@ -407,7 +410,7 @@ extern u8                   D_8018214C[];          /* 0x8018214C */
 extern u8                   s_ScriptCopyBlock[16]; /* 0x8018216C */
 /* D_8018217C */
 extern u8                   g_AreaScriptTests; /* 0x8018217C */
-extern TailFunc             D_801821C0[];
+extern RouteStepCallback    D_801821C0[];
 extern u8                   D_8018E268[];
 extern char                 D_80195858[]; /* 0x80195858 */
 extern char                 D_80195860[]; /* 0x80195860 */

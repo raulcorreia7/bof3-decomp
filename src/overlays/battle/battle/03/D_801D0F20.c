@@ -95,9 +95,9 @@ BattleMemberPanelSteps g_BattleMemberPanelSteps = {
 /* 0x801D0FEC */
 /* D_801D0FEC */
 BattlePanelTaskSteps g_BattlePanelTaskForwarders = {
-    (BattlePanelForwardFunc)func_801EA254,
-    (BattlePanelForwardFunc)func_801EA530,
-    (BattlePanelForwardFunc)func_801EA59C,
+    (BattlePanelTaskCallback)func_801EA254,
+    (BattlePanelTaskCallback)func_801EA530,
+    (BattlePanelTaskCallback)func_801EA59C,
 };
 
 /* 0x801D0FF8 */

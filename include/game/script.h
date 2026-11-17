@@ -7,7 +7,7 @@
 #define SCRIPT_VAR_MASK  0x0C
 #define SCRIPT_VAR_SHIFT 2
 
-typedef u8 (*ScriptFunc)(u8** cursor);
+typedef u8 (*ScriptOpCallback)(u8** cursor);
 
 /* The script variable bytes at 0x80146864. */
 extern u8  g_ScriptVars[4];

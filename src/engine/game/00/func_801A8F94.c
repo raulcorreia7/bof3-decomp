@@ -2,12 +2,12 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
-    s32         left;
-    s32         sel;
-    s32         dist;
-    s8          step;
-    void*       obj;
-    ObjectFunc* table;
+    s32                 left;
+    s32                 sel;
+    s32                 dist;
+    s8                  step;
+    void*               obj;
+    AreaScriptCallback* table;
 
     sel = seed;
     for (;;) {
@@ -36,7 +36,7 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                         break;
                     case 3:
                         obj   = g_AreaLoads[g_GameAreaId];
-                        table = FIELD(ObjectFunc*, obj, 0x3Cu);
+                        table = FIELD(AreaScriptCallback*, obj, 0x3Cu);
                         table[base[state->cursor + 1]](obj);
                         sel = g_Task->direction;
                         state->cursor += 2;

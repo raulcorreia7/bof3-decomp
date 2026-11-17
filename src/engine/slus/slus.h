@@ -301,7 +301,8 @@ typedef struct EmiRingSteps {
 
 ASSERT_SIZE(EmiRingSteps, 0x18);
 
-typedef void (*CellFunc)(u8* record, s32 cell_x, s32 cell_y);
+typedef void (*BundleOpcodeCallback)(void* record);
+typedef void (*CellDrawCallback)(u8* record, s32 cell_x, s32 cell_y);
 
 /* Record of the D_8017F5B4 table; no field meaning is proven. */
 typedef struct {
@@ -374,7 +375,7 @@ typedef union OverlaySlotCursor {
     EMITocEntry* slots; /* 0x00 */
 } OverlaySlotCursor;
 
-typedef s8 (*GameFunc)(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, s32 flags);
+typedef s8 (*ActorMovementCallback)(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, s32 flags);
 
 /* Data. */
 
@@ -654,13 +655,13 @@ extern const u16                   D_8017F56C[10];
 extern const Rec_8017F5B4          D_8017F5B4[27];
 /* D_8017F628 */
 extern const u16                   g_AnswerMessages[32];
-extern const CellFunc              D_8017F668[77];
+extern const CellDrawCallback      D_8017F668[77];
 extern const s16                   D_8017F7A8[54];
 extern const s16                   D_8017F814[54];
 extern const u16                   D_8017F880[10];
 extern const u32                   D_8017F8E0[4];
 /* D_8017F8F0 */
-extern const ObjectFunc            g_BundleOpcodes[7];
+extern const BundleOpcodeCallback  g_BundleOpcodes[7];
 extern u8                          D_8017F91C;
 extern u8                          D_8017F91D;
 extern const u16                   D_8017F92C[2];
@@ -792,11 +793,11 @@ extern u8                          D_8018B4AC;
 extern u32                         D_8018B4B0;
 extern void (*D_8018E7D4)(s16 voice);
 extern void (*D_8018E988)(s16 voice);
-extern s8  D_8018E98C;
-extern u32 D_80190C60; /* end of the BSS stup2 clears */
-extern u8  D_801C839C[];
-extern u8  D_801C839D[];
-extern void (*D_801C83D8[])(u8*);
+extern s8                    D_8018E98C;
+extern u32                   D_80190C60; /* end of the BSS stup2 clears */
+extern u8                    D_801C839C[];
+extern u8                    D_801C839D[];
+extern ActorModeCallback     D_801C83D8[];
 extern u8*                   D_801C893C[];
 extern u8*                   D_801C8950[];
 /* The five row tables of choice resources. Each symbol is a byte scalar, so its
@@ -1006,243 +1007,243 @@ extern u8                    D_801F6AD0;
 extern const MenuPanelFuncs  g_MenuPanels;
 
 /* func_8014C47C */
-void                    MATH_SwapVectors(Pos3* a, Pos3* b);
-extern void             Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut);
+void                              MATH_SwapVectors(Pos3* a, Pos3* b);
+extern void                       Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut);
 /* func_8014DB98 */
-extern void             Actor_StageAnimStep(void);
+extern void                       Actor_StageAnimStep(void);
 /* Retail function prototypes (one declaration each). */
-s8                      func_8014DE78(void);
-extern void             GFX_ExpandRgb555(u32* pixels, RECT rect);
-extern void             GFX_DecodeLzss(u32* packed, RECT rect);
+s8                                func_8014DE78(void);
+extern void                       GFX_ExpandRgb555(u32* pixels, RECT rect);
+extern void                       GFX_DecodeLzss(u32* packed, RECT rect);
 /* func_8014EDF0 */
-void                    GFX_FadeToBlack(void);
+void                              GFX_FadeToBlack(void);
 /* func_8014EE18 */
-void                    GFX_FadeFromBlack(void);
+void                              GFX_FadeFromBlack(void);
 /* func_8014EE40 */
-void                    GFX_FadeToBlackFast(void);
+void                              GFX_FadeToBlackFast(void);
 /* func_8014EE68 */
-void                    GFX_FadeFromBlackFast(void);
+void                              GFX_FadeFromBlackFast(void);
 /* func_8014EE90 */
-void                    GFX_FadeToBlackSlow(void);
+void                              GFX_FadeToBlackSlow(void);
 /* func_8014EEB8 */
-void                    GFX_FadeFromBlackSlow(void);
+void                              GFX_FadeFromBlackSlow(void);
 /* func_8014EEE0 */
-void                    GFX_FadeToBlackFront(void);
+void                              GFX_FadeToBlackFront(void);
 /* func_8014EF08 */
-void                    GFX_FadeFromBlackFront(void);
+void                              GFX_FadeFromBlackFront(void);
 /* func_8014EF30 */
-void                    GFX_FadeToWhite(void);
+void                              GFX_FadeToWhite(void);
 /* func_8014EF58 */
-void                    GFX_FadeFromWhite(void);
+void                              GFX_FadeFromWhite(void);
 /* func_8014EF80 */
-void                    GFX_ZoomToBlackSlow(void);
+void                              GFX_ZoomToBlackSlow(void);
 /* func_8014F024 */
-void                    GFX_ZoomFromBlackSlow(void);
-void                    func_8014F16C(void);
+void                              GFX_ZoomFromBlackSlow(void);
+void                              func_8014F16C(void);
 /* func_8014F1AC */
-void                    GFX_FadeToBlackSlower(void);
+void                              GFX_FadeToBlackSlower(void);
 /* func_8014F1D4 */
-void                    GFX_FadeFromBlackSlower(void);
+void                              GFX_FadeFromBlackSlower(void);
 /* func_8014F1FC */
-void                    GFX_FadeToWhiteSlower(void);
+void                              GFX_FadeToWhiteSlower(void);
 /* func_8014F224 */
-void                    GFX_FadeFromWhiteSlower(void);
+void                              GFX_FadeFromWhiteSlower(void);
 /* func_8014F24C */
-void                    GFX_ZoomToBlackSlower(void);
-void                    func_8014F2F0(void);
+void                              GFX_ZoomToBlackSlower(void);
+void                              func_8014F2F0(void);
 /* func_8014F438 */
-void                    GFX_FadeToBlackSlowest(void);
+void                              GFX_FadeToBlackSlowest(void);
 /* func_8014F460 */
-void                    GFX_SpinToBlack(void);
-extern void             func_8014FB80(s16 x, s16 y, u16 clut, u8 shade);
+void                              GFX_SpinToBlack(void);
+extern void                       func_8014FB80(s16 x, s16 y, u16 clut, u8 shade);
 /* func_801507BC */
-extern void             Message_DispatchState(void);
+extern void                       Message_DispatchState(void);
 /* func_8015083C */
-void                    Message_RunScript(void);
-void                    func_80150E48(void);
-void                    func_80150E98(void);
-void                    func_80150F08(void);
-void                    func_80150F3C(void);
-void                    func_80150F8C(void);
-void                    func_8015102C(void);
-void                    func_801510DC(void);
-void                    func_8015115C(void);
-void                    func_801511C8(void);
-void                    func_80151334(void);
-void                    Message_DispatchAnswerStep(void);
+void                              Message_RunScript(void);
+void                              func_80150E48(void);
+void                              func_80150E98(void);
+void                              func_80150F08(void);
+void                              func_80150F3C(void);
+void                              func_80150F8C(void);
+void                              func_8015102C(void);
+void                              func_801510DC(void);
+void                              func_8015115C(void);
+void                              func_801511C8(void);
+void                              func_80151334(void);
+void                              Message_DispatchAnswerStep(void);
 /* func_8015142C */
-void                    Message_RestartRequest(void);
-void                    func_80151480(void);
-void                    Message_StartRequest(void);
-void                    func_80151538(void);
-void                    func_801515F4(void);
-void                    func_80151710(void);
-void                    func_801517AC(void);
-void                    func_80151820(void);
-void                    func_80151844(void);
-void                    func_80151894(void);
+void                              Message_RestartRequest(void);
+void                              func_80151480(void);
+void                              Message_StartRequest(void);
+void                              func_80151538(void);
+void                              func_801515F4(void);
+void                              func_80151710(void);
+void                              func_801517AC(void);
+void                              func_80151820(void);
+void                              func_80151844(void);
+void                              func_80151894(void);
 /* func_801518F4 */
-void                    Message_DispatchChoiceMode(void);
-void                    func_80151964(void);
+void                              Message_DispatchChoiceMode(void);
+void                              func_80151964(void);
 /* func_801519F8 */
-void                    UI_NextChoice(void);
+void                              UI_NextChoice(void);
 /* func_80151A48 */
-void                    UI_PrevChoice(void);
-void                    func_80151A98(void);
-extern void             func_80151B08(void);
-extern void             func_80151B50(void);
-void                    func_80151D3C(void);
-void                    func_80151D8C(void);
-void                    func_80151DCC(void);
-void                    UI_DrawGlyph(s32 color, u8* text);
-void                    Message_DispatchStep(void);
-void                    func_80152370(void);
-void                    func_801523D0(void);
-void                    func_80152420(void);
-void                    func_80152470(void);
-void                    func_801524C0(void);
-void                    Message_SetAnswerMessage5(void);
-void                    Message_SetAnswerMessage6(void);
-void                    Message_SetAnswerMessage7(void);
-void                    Message_SetAnswerMessage8(void);
-void                    Message_SetAnswerMessage9(void);
-void                    Message_SetAnswerMessage10(void);
-void                    Message_SetAnswerMessage11(void);
-void                    Message_SetAnswerMessage12(void);
-void                    Message_SetAnswerMessage13(void);
-void                    Message_SetAnswerMessage14(void);
-void                    Message_SetAnswerMessage15(void);
+void                              UI_PrevChoice(void);
+void                              func_80151A98(void);
+extern void                       func_80151B08(void);
+extern void                       func_80151B50(void);
+void                              func_80151D3C(void);
+void                              func_80151D8C(void);
+void                              func_80151DCC(void);
+void                              UI_DrawGlyph(s32 color, u8* text);
+void                              Message_DispatchStep(void);
+void                              func_80152370(void);
+void                              func_801523D0(void);
+void                              func_80152420(void);
+void                              func_80152470(void);
+void                              func_801524C0(void);
+void                              Message_SetAnswerMessage5(void);
+void                              Message_SetAnswerMessage6(void);
+void                              Message_SetAnswerMessage7(void);
+void                              Message_SetAnswerMessage8(void);
+void                              Message_SetAnswerMessage9(void);
+void                              Message_SetAnswerMessage10(void);
+void                              Message_SetAnswerMessage11(void);
+void                              Message_SetAnswerMessage12(void);
+void                              Message_SetAnswerMessage13(void);
+void                              Message_SetAnswerMessage14(void);
+void                              Message_SetAnswerMessage15(void);
 /* func_80152C9C */
-void                    Area_LoadCellColumnPrev(void);
+void                              Area_LoadCellColumnPrev(void);
 /* func_80152D9C */
-void                    Area_LoadCellColumnNext(void);
+void                              Area_LoadCellColumnNext(void);
 /* The cell record the tile-ring draw is working on. */
-extern s8*              D_1F800010;
+extern s8*                        D_1F800010;
 /* func_80152E94 */
 /* func_80152FB0 */
-extern s32              func_801530D0(void);
-extern void             func_80153CC4(void);
-extern void             func_80153D34(void);
-extern void             Area_GetCell(s32 px, s32 py, AreaCell* out);
-extern s32              Area_UploadCell(s32 column, s32 row, POLY_FT4* context, s32 slot);
-extern u16              Area_AllocCellPrimRow(void);
-extern void             Area_RequestCellRows(AreaCell* entry);
-extern void             Area_FreeCellPrimRow(u16 row_id);
-void                    Area_DrawPartQuads(ScenePart* parts, s32 shift_x, s32 shift_y);
-void                    func_8015642C(u8* obj, s32 x, s32 y);
-void                    func_8015684C(u8* record, s32 cell_x, s32 cell_y);
-void                    func_801569B8(u8* record, s32 cell_x, s32 cell_y);
-void                    Area_DrawPartAnimation(ScenePart* parts, s32 origin_x, s32 origin_y);
-void                    Area_DrawCellAtPoint(u8* unit, s32 x, s32 y);
-void                    Area_DrawGouraudQuads(ScenePart* parts, s32 shift_x, s32 shift_y);
-void                    func_8015763C(void);
-void                    func_80157644(u32* record);
-void                    func_801576A0(u32* record);
-void                    func_801576FC(u8* record);
-void                    Area_DrawCellSides(u8* record, s32 cell_x, s32 cell_y);
-void                    func_801583BC(void* obj);
-void                    func_80158830(void* obj);
-void                    func_80158940(void* obj);
+extern s32                        func_801530D0(void);
+extern void                       func_80153CC4(void);
+extern void                       func_80153D34(void);
+extern void                       Area_GetCell(s32 px, s32 py, AreaCell* out);
+extern s32                        Area_UploadCell(s32 column, s32 row, POLY_FT4* context, s32 slot);
+extern u16                        Area_AllocCellPrimRow(void);
+extern void                       Area_RequestCellRows(AreaCell* entry);
+extern void                       Area_FreeCellPrimRow(u16 row_id);
+void                              Area_DrawPartQuads(ScenePart* parts, s32 shift_x, s32 shift_y);
+void                              func_8015642C(u8* obj, s32 x, s32 y);
+void                              func_8015684C(u8* record, s32 cell_x, s32 cell_y);
+void                              func_801569B8(u8* record, s32 cell_x, s32 cell_y);
+void                              Area_DrawPartAnimation(ScenePart* parts, s32 origin_x, s32 origin_y);
+void                              Area_DrawCellAtPoint(u8* unit, s32 x, s32 y);
+void                              Area_DrawGouraudQuads(ScenePart* parts, s32 shift_x, s32 shift_y);
+void                              func_8015763C(void);
+void                              func_80157644(u32* record);
+void                              func_801576A0(u32* record);
+void                              func_801576FC(u8* record);
+void                              Area_DrawCellSides(u8* record, s32 cell_x, s32 cell_y);
+void                              func_801583BC(void* obj);
+void                              func_80158830(void* obj);
+void                              func_80158940(void* obj);
 /* func_80158F80 */
-void                    Menu_UpdateMessagePanel(void);
+void                              Menu_UpdateMessagePanel(void);
 /* func_80158FE0 */
-void                    Menu_UpdateMessageWindow(void);
+void                              Menu_UpdateMessageWindow(void);
 /* func_80159050 */
-void                    Menu_OpenMessagePanel(void);
+void                              Menu_OpenMessagePanel(void);
 /* func_8015920C */
-void                    Menu_GrowMessagePanel(void);
+void                              Menu_GrowMessagePanel(void);
 /* func_80159510 */
-void                    Menu_DrawMessagePanel(void);
+void                              Menu_DrawMessagePanel(void);
 /* func_80159580 */
-void                    Menu_ShrinkMessagePanel(void);
-void                    Menu_ClosePanel(void);
+void                              Menu_ShrinkMessagePanel(void);
+void                              Menu_ClosePanel(void);
 /* func_801598F4 */
-void                    Menu_UpdateMessageChoice(void);
+void                              Menu_UpdateMessageChoice(void);
 /* func_80159964 */
-void                    Menu_OpenMessageChoice(void);
+void                              Menu_OpenMessageChoice(void);
 /* func_8015999C */
-void                    Menu_DrawMessageChoice(void);
+void                              Menu_DrawMessageChoice(void);
 /* func_80159A00 */
-void                    Menu_ReleaseMessagePanel(void);
+void                              Menu_ReleaseMessagePanel(void);
 /* func_80159A20 */
-void                    Menu_UpdateMessagePreset(void);
+void                              Menu_UpdateMessagePreset(void);
 /* func_80159A90 */
-void                    Menu_OpenMessagePreset(void);
+void                              Menu_OpenMessagePreset(void);
 /* func_80159B38 */
-void                    Menu_DrawMessagePreset(void);
+void                              Menu_DrawMessagePreset(void);
 /* func_80159B9C */
-extern void             UI_DrawPanelBox(s16 x, s16 y, u8 w, u8 h);
+extern void                       UI_DrawPanelBox(s16 x, s16 y, u8 w, u8 h);
 /* func_80159FA0 */
 /* func_8015A098 */
-extern void             Menu_DrawMessagePresetRows(void);
-extern void             func_8015A170(void);
+extern void                       Menu_DrawMessagePresetRows(void);
+extern void                       func_8015A170(void);
 /* func_8015A1D8 */
-extern void             Menu_DrawMessagePresetCursor(void);
+extern void                       Menu_DrawMessagePresetCursor(void);
 /* func_8015A264 */
-extern void             Menu_DrawMessageChoiceCursor(void);
+extern void                       Menu_DrawMessageChoiceCursor(void);
 /* func_8015A2B0 */
-void                    UI_DrawLine(s16 start_x, s16 start_y, s16 end_x, s16 end_y, u8 gray);
-extern u8*              UI_DrawTextAt(s32 x, s32 y, u8* text);
+void                              UI_DrawLine(s16 start_x, s16 start_y, s16 end_x, s16 end_y, u8 gray);
+extern u8*                        UI_DrawTextAt(s32 x, s32 y, u8* text);
 /* func_8015A554 */
-void                    Menu_LayoutMessageChoice(void);
-extern void             func_8015A9A4(void);
-s8                      func_8015AD00(PanelSortItem* sort_list);
-void                    func_8015B2AC(s16* out, s32* in);
-s32                     Game_IsScenarioEqual(u8** cursor);
-s32                     Game_IsAreaEqual(u8** cursor);
-s32                     Game_TestSceneFlag(u8** cursor);
-s32                     func_8015B6A8(u8** cursor);
-s32                     func_8015B6D0(u8** cursor);
-s32                     func_8015B6F8(u8** cursor);
+void                              Menu_LayoutMessageChoice(void);
+extern void                       func_8015A9A4(void);
+s8                                func_8015AD00(PanelSortItem* sort_list);
+void                              func_8015B2AC(s16* out, s32* in);
+s32                               Game_IsScenarioEqual(u8** cursor);
+s32                               Game_IsAreaEqual(u8** cursor);
+s32                               Game_TestSceneFlag(u8** cursor);
+s32                               func_8015B6A8(u8** cursor);
+s32                               func_8015B6D0(u8** cursor);
+s32                               func_8015B6F8(u8** cursor);
 /* func_8015B73C */
-s32                     Game_IsLeaderEqual(u8** cursor);
-s32                     Game_TestEventFlag(u8** cursor);
-s32                     Game_HasVitalItem(u8** cursor);
-s32                     Game_IsScenarioAtMost(u8** cursor);
-s32                     func_8015B7F0(u8** cursor);
-s32                     func_8015B83C(u8** cursor);
-s32                     Game_IsScriptVar0Equal(u8** cursor);
-s32                     Game_IsScriptVar1Equal(u8** cursor);
-s32                     Game_IsScriptVar2Equal(u8** cursor);
-s32                     Game_IsScriptVar3Equal(u8** cursor);
-s32                     Game_SetScriptVar(u8* operand);
-s32                     Game_IsScriptVarEqual(u8* operand);
-s32                     Game_IncScriptVar(u8* operand);
-s32                     func_8015BABC(void);
+s32                               Game_IsLeaderEqual(u8** cursor);
+s32                               Game_TestEventFlag(u8** cursor);
+s32                               Game_HasVitalItem(u8** cursor);
+s32                               Game_IsScenarioAtMost(u8** cursor);
+s32                               func_8015B7F0(u8** cursor);
+s32                               func_8015B83C(u8** cursor);
+s32                               Game_IsScriptVar0Equal(u8** cursor);
+s32                               Game_IsScriptVar1Equal(u8** cursor);
+s32                               Game_IsScriptVar2Equal(u8** cursor);
+s32                               Game_IsScriptVar3Equal(u8** cursor);
+s32                               Game_SetScriptVar(u8* operand);
+s32                               Game_IsScriptVarEqual(u8* operand);
+s32                               Game_IncScriptVar(u8* operand);
+s32                               func_8015BABC(void);
 /* func_8015E994 */
-void                    SND_ReadCueBank0(void);
+void                              SND_ReadCueBank0(void);
 /* func_8015EFAC */
-void                    SND_ReadCueBank1(void);
+void                              SND_ReadCueBank1(void);
 /* func_8015F5C8 */
-void                    SND_ReadCueBank2(void);
+void                              SND_ReadCueBank2(void);
 /* func_8015FBE4 */
-void                    SND_ReadCueBank3(void);
+void                              SND_ReadCueBank3(void);
 /* func_80160200 */
-void                    SND_ReadCueBank4(void);
+void                              SND_ReadCueBank4(void);
 /* func_8016081C */
-void                    SND_ReadCueBank5(void);
+void                              SND_ReadCueBank5(void);
 /* func_80160E38 */
-void                    SND_ReadCueBank6(void);
-extern void             func_80161454(u32 index);
-void                    func_80163230(void);
-void                    func_80163698(void);
-u8*                     func_801642F4(u8* dst, const u8* src, u32 count);
-void                    Char_ApplyMaster(Character* character);
+void                              SND_ReadCueBank6(void);
+extern void                       func_80161454(u32 index);
+void                              func_80163230(void);
+void                              func_80163698(void);
+u8*                               func_801642F4(u8* dst, const u8* src, u32 count);
+void                              Char_ApplyMaster(Character* character);
 /* Retail calls this executable makes into its own units and the overlays. */
-void                    Char_ApplyWeapon(Character* character);
-void                    Char_ApplyArmor(Character* character);
-void                    Char_ApplyAccessories(Character* character);
-void                    EMI_LoadPartyCode(u8 member_a, u8 member_b, u8 member_c);
-void                    EMI_LoadParty(u8 member_a, u8 member_b, u8 member_c, u8 family);
-u8                      EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c);
-extern void             func_80167428(void);
+void                              Char_ApplyWeapon(Character* character);
+void                              Char_ApplyArmor(Character* character);
+void                              Char_ApplyAccessories(Character* character);
+void                              EMI_LoadPartyCode(u8 member_a, u8 member_b, u8 member_c);
+void                              EMI_LoadParty(u8 member_a, u8 member_b, u8 member_c, u8 family);
+u8                                EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c);
+extern void                       func_80167428(void);
 /* func_8016BA04 */
-void                    SND_QuitSpu(void);
-extern const ObjectFunc g_BundleRecordOpcodes[]; /* interior of g_BundleOpcodes (index 3); a separate symbol keeps func_801584A4 matching */
-extern u8               D_8017F90D;
-s32                     func_801A17A0(u8* entry_record);
-void                    func_801D0C04(void);
-extern s32              func_801F2C04(void);
+void                              SND_QuitSpu(void);
+extern const BundleOpcodeCallback g_BundleRecordOpcodes[]; /* interior of g_BundleOpcodes (index 3); a separate symbol keeps func_801584A4 matching */
+extern u8                         D_8017F90D;
+s32                               func_801A17A0(u8* entry_record);
+void                              func_801D0C04(void);
+extern s32                        func_801F2C04(void);
 
 /* Pause or replay the sequence player for the selected sound entry. */
 static inline void Snd_ToggleSequencePlayer(void (*action)(short, short), s32 cue_id) {

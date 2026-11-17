@@ -1,14 +1,14 @@
 #include "game_00.h"
 
 MATCH u8* func_801A4518(u8* script) {
-    ScriptFunc* handler;
-    s8          flag;
-    s32         lead;
-    u8          op;
+    ScriptOpCallback* handler;
+    s8                flag;
+    s32               lead;
+    u8                op;
 
     flag    = 1;
     lead    = *script;
-    handler = (ScriptFunc*)(&g_AreaScriptTests + ((lead << 24) >> 22));
+    handler = (ScriptOpCallback*)(&g_AreaScriptTests + ((lead << 24) >> 22));
     script += 1;
     for (;;) {
         op = *script;

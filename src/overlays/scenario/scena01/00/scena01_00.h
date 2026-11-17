@@ -13,12 +13,12 @@ extern u8 D_80144E90[];
 
 extern u8 D_80146871;
 
-extern u32       D_801F6C00;
-extern Callback  D_801FE26C[];
-extern u8        D_801FE280[];
-extern Callback  D_801FE29C[];
-extern Callback  D_801FE2A8[];
-extern SceneFunc D_801FE308[66];
+extern u32                D_801F6C00;
+extern Callback           D_801FE26C[];
+extern u8                 D_801FE280[];
+extern Callback           D_801FE29C[];
+extern Callback           D_801FE2A8[];
+extern SceneActorCallback D_801FE308[66];
 
 extern u8 D_801FE350;
 extern s8 (*D_801FE35C[])(void);

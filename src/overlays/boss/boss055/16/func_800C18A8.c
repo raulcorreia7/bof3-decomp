@@ -5,7 +5,7 @@ MATCH void func_800C18A8(void) {
 
     enemy           = g_BattleCurrentEnemy;
     g_Battle.unk_DE = 0;
-    EnemyBattler_SetScript(enemy, D_800C34F0, (ModeFunc)func_800C22F0, D_800C34FC);
+    EnemyBattler_SetScript(enemy, D_800C34F0, (EnemyScriptCallback)func_800C22F0, D_800C34FC);
     enemy->unk_29 = 6;
     enemy->turn.action_flags.value |= BATTLER_ACTION_OWN_MODE;
     Battle_RequestEnemyScript(0);
