@@ -349,7 +349,8 @@ extern u16          D_801481E6;
 /* D_80148210 */
 extern ScriptState* g_ScriptState;
 extern u8           D_8014832C;
-extern u8           D_8014832D;
+/* D_8014832D */
+extern u8           g_AreaGridActorCount;
 /* D_8014832E */
 extern u8           g_AreaDrawFlags;
 extern u8           D_8014833B;

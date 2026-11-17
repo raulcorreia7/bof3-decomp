@@ -91,7 +91,8 @@ void func_801F0EEC(u32 sprite, s32 blend, s32 color);
 void func_801F103C(void);
 
 extern u16 D_80149336;
-extern u8  D_8014933D;
+/* D_8014933D */
+extern u8  g_AreaCellPacketCount;
 
 void BMagic_ProjectCell(s32 px, s32 py, AreaCell* out);
 

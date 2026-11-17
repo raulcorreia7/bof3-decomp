@@ -12,8 +12,9 @@
  * screen box, given a packet pair (plus linked rows at +0x46/+0x4E) and linked into the ordering table by depth.
  * The scratch words behind SCRATCH(s32, 0xC) hold the window half-width.
  */
+/* func_801530D0 */
 #ifdef NON_MATCHING
-NON_MATCHING s32 func_801530D0(void) {
+NON_MATCHING s32 Area_DrawCellRing(void) {
     s32       sp10_row;
     s32       origin_x;
     s32       next_row;
@@ -55,12 +56,12 @@ NON_MATCHING s32 func_801530D0(void) {
     u8*       low_min;
     SVECTOR*  vert;
 
-    func_80153CC4();
-    tilt       = g_AreaCameraAngle.vz - 0x200;
-    tilt       = ABS(tilt);
-    origin_x   = g_AreaTileOriginX;
-    origin_y   = g_AreaTileOriginY;
-    D_8014933D = 0;
+    Area_ResetCellPacketLists();
+    tilt                  = g_AreaCameraAngle.vz - 0x200;
+    tilt                  = ABS(tilt);
+    origin_x              = g_AreaTileOriginX;
+    origin_y              = g_AreaTileOriginY;
+    g_AreaCellPacketCount = 0;
     D_8014933A &= 0xFE;
     ring              = (0x160 - tilt) / 50;
     SCRATCH(s32, 0xC) = ring;
@@ -200,9 +201,9 @@ NON_MATCHING s32 func_801530D0(void) {
                                 if ((low ^ 0x80) < *low_min) {
                                     *low_min = low ^ 0x80;
                                 }
-                                tmp = D_8014933D;
-                                D_8014933D += 1;
-                                D_80143740[tmp] = (s6 << 0x18) | (cell->prim_id & AREA_CELL_PRIM_MASK) | (*low_min << 0x10);
+                                tmp = g_AreaCellPacketCount;
+                                g_AreaCellPacketCount += 1;
+                                g_AreaCellPackets[tmp] = (s6 << 0x18) | (cell->prim_id & AREA_CELL_PRIM_MASK) | (*low_min << 0x10);
                             } else {
                                 LINK_PACKET(s6, g_GfxBufferIndex, &prim[g_GfxBufferIndex]);
                             }
@@ -255,8 +256,8 @@ NON_MATCHING s32 func_801530D0(void) {
         }
         s6 += 1;
     } while (s6 < 0x37);
-    func_80153D34();
+    Area_SortCellPackets();
 }
 #else
-INCLUDE_ASM(func_801530D0);
+INCLUDE_ASM(Area_DrawCellRing);
 #endif

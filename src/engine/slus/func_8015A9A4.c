@@ -70,10 +70,10 @@ NON_MATCHING void func_8015A9A4(void) {
         return;
     }
     actor->header.flags &= 0x7F;
-    count = D_8014832D;
+    count = g_AreaGridActorCount;
     if (count < 40) {
-        D_8014832D        = count + 1;
-        D_8014828C[count] = (s32)g_Task;
+        g_AreaGridActorCount    = count + 1;
+        g_AreaGridActors[count] = (s32)g_Task;
     }
 }
 #else

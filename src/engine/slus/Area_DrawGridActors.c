@@ -1,15 +1,16 @@
 #include "engine/slus/slus.h"
 
-/* The object list entry at index i: D_8014828C holds the object pointers. */
-#define OBJ(i)     ((u8*)D_8014828C[i])
+/* The queue entry at index: g_AreaGridActors holds the actor pointers. */
+#define OBJ(i)     ((u8*)g_AreaGridActors[i])
 #define OBJ_KEY(i) (*(u16*)(OBJ(i) + 0x32))
 
-/* draws every queued object per scene layer: sorts the object list by layer key and depth, then for each of the
- * 0x37 scenes merges the object list with the packet list D_80143740 by key and links each object (sorted by depth
+/* draws every queued grid actor per scene layer: sorts the actor queue by layer key and depth, then for each of the
+ * 0x37 scenes merges the actor queue with the packet list g_AreaCellPackets by key and links each actor (sorted by depth
  * through the panel sort rows) or packet into the ordering table.
  */
+/* func_8014BC70 */
 #ifdef NON_MATCHING
-NON_MATCHING void func_8014BC70(void) {
+NON_MATCHING void Area_DrawGridActors(void) {
     s32  layer;
     u8   var_s7;
     u8   var_s4;
@@ -46,7 +47,7 @@ NON_MATCHING void func_8014BC70(void) {
     u32  var_v1_169;
     u8*  entry;
 
-    count  = D_8014832D;
+    count  = g_AreaGridActorCount;
     var_s7 = 0;
     if ((count - 1) > 0) {
         do {
@@ -61,14 +62,14 @@ NON_MATCHING void func_8014BC70(void) {
                     if ((*(u16*)(a2 + 0x32) < *(u16*)(a3 + 0x32)) ||
                         ((*(u16*)(a2 + 0x32) == *(u16*)(a3 + 0x32)) && ((sum_a = *(s32*)(a2 + 0x34) + *(s32*)(a2 + 0x38), sum_b = *(s32*)(a3 + 0x34) + *(s32*)(a3 + 0x38), (sum_a < sum_b)) ||
                                                                         ((sum_a == sum_b) && (*(s32*)(a2 + 0x3C) < *(s32*)(a3 + 0x3C)))))) {
-                        Area_SwapObjects(var_t0_34, (u8)(var_s4 - 1));
+                        Area_SwapGridActors(var_t0_34, (u8)(var_s4 - 1));
                     }
                     var_s4 -= 1;
                     var_t0_34 = var_s4;
                 } while (var_t0_34 >= lowest);
             }
             var_s7 += 1;
-            count = D_8014832D;
+            count = g_AreaGridActorCount;
         } while (var_s7 < (count - 1));
     }
     tpage  = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
@@ -90,28 +91,28 @@ NON_MATCHING void func_8014BC70(void) {
             }
         }
         layer = var_s7;
-        while ((((OBJ_KEY(var_s4) >> 8) == layer) && (var_s4 < D_8014832D)) || (((D_80143740[var_fp] >> 0x18) == layer) && (var_fp < D_8014933D))) {
-            word = D_80143740[var_fp];
-            if ((((word >> 0x18) == layer) && (var_fp < D_8014933D) && (OBJ_KEY(var_s4) >= (word >> 0x10))) || (var_s4 == D_8014832D)) {
+        while ((((OBJ_KEY(var_s4) >> 8) == layer) && (var_s4 < g_AreaGridActorCount)) || (((g_AreaCellPackets[var_fp] >> 0x18) == layer) && (var_fp < g_AreaCellPacketCount))) {
+            word = g_AreaCellPackets[var_fp];
+            if ((((word >> 0x18) == layer) && (var_fp < g_AreaCellPacketCount) && (OBJ_KEY(var_s4) >= (word >> 0x10))) || (var_s4 == g_AreaGridActorCount)) {
                 if (g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) {
                     packet = var_fp;
-                    CatPrim(D_801459D0[g_AreaDrawMode], &g_AreaCellPrims[D_80143740[packet] & 0xFFF][g_GfxBufferIndex]);
-                    D_801459D0[g_AreaDrawMode] = (u32*)&g_AreaCellPrims[D_80143740[packet] & 0xFFF][g_GfxBufferIndex];
+                    CatPrim(D_801459D0[g_AreaDrawMode], &g_AreaCellPrims[g_AreaCellPackets[packet] & 0xFFF][g_GfxBufferIndex]);
+                    D_801459D0[g_AreaDrawMode] = (u32*)&g_AreaCellPrims[g_AreaCellPackets[packet] & 0xFFF][g_GfxBufferIndex];
                 }
                 var_fp += 1;
             }
             packet = var_fp;
-            var_s3 = &D_80143740[packet];
+            var_s3 = &g_AreaCellPackets[packet];
             var_s2 = OBJ_KEY(var_s4);
             rows   = 0;
             merged = var_s2 < *(u16*)((u8*)var_s3 + 2);
-            while (merged || (packet == D_8014933D)) {
+            while (merged || (packet == g_AreaCellPacketCount)) {
                 obj = OBJ(var_s4);
                 key = *(u16*)(obj + 0x32);
                 if ((((u32)(key << 0x10)) >> 0x18) != layer) {
                     break;
                 }
-                if (!(var_s4 < D_8014832D)) {
+                if (!(var_s4 < g_AreaGridActorCount)) {
                     break;
                 }
                 if (g_AreaDrawMode != GFX_LAYER_FIELD_SCENE) {
@@ -171,5 +172,5 @@ NON_MATCHING void func_8014BC70(void) {
     } while (var_s7 < 0x37U);
 }
 #else
-INCLUDE_ASM(func_8014BC70);
+INCLUDE_ASM(Area_DrawGridActors);
 #endif

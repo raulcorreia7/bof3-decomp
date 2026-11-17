@@ -1,7 +1,7 @@
 #!/bin/sh
 # Print what GCC 2.7.2 decided for one C file, pass by pass, from its own dumps.
 #
-#   tools/rtl_dump.sh <c file> [letters] [function]     tools/rtl_dump.sh src/engine/slus/func_801530D0.c lg func_801530D0
+#   tools/rtl_dump.sh <c file> [letters] [function]     tools/rtl_dump.sh src/engine/slus/Area_DrawCellRing.c lg Area_DrawCellRing
 #
 # Letters are GCC's -d flags (default lg): l local allocation (.lreg: each pseudo's uses, live
 # length and hard register), g global allocation and reload (.greg: allocation order, conflicts,
