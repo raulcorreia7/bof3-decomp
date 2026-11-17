@@ -52,6 +52,7 @@
 #define MSG_051 51
 #define MSG_052 52
 #define MSG_053 53
+#define MSG_054 54
 #define MSG_055 55
 #define MSG_056 56
 #define MSG_057 57

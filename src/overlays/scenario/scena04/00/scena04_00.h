@@ -129,6 +129,10 @@ extern u8  D_80146134;
 extern s32 D_80146954;
 extern s32 D_80146958;
 extern s32 D_8014695C;
+/* The start-menu panel: its value, its request flag and its step byte. */
+extern s8  D_8014865C;
+extern u8  D_80148698;
+extern u8  D_80148699;
 extern s16 D_801492DA;
 
 extern s16 D_801492DC;
@@ -149,6 +153,7 @@ extern Callback D_801FA1E4[];
 
 extern Callback D_801FA204[];
 extern Callback D_801FA210[];
+extern s8       D_801FA21C[];
 extern s8       D_801FA220[];
 /* D_801FA224 */
 /* D_801FA228 */
