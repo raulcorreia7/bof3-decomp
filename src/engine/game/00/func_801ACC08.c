@@ -10,11 +10,11 @@ MATCH void func_801ACC08(void) {
     *(u8*)(flags_set) |= 0x20;
     flags_clear = g_Task;
     *(u8*)(flags_clear) &= 0xBF;
-    g_Task->tint.signed_bytes.flags     = 1;
-    tint                                = g_Task;
-    tint->tint.signed_bytes.delta.blue  = -0x80;
-    tint->tint.signed_bytes.delta.green = -0x80;
-    tint->tint.signed_bytes.delta.red   = -0x80;
-    g_Task->unk_04                      = 1;
-    g_CurrentActor->unk_7E              = (g_CurrentActor->unk_7E - 1);
+    g_Task->tint.signed_bytes.flags = 1;
+    tint                            = g_Task;
+    tint->tint.signed_bytes.delta.b = -0x80;
+    tint->tint.signed_bytes.delta.g = -0x80;
+    tint->tint.signed_bytes.delta.r = -0x80;
+    g_Task->unk_04                  = 1;
+    g_CurrentActor->unk_7E          = (g_CurrentActor->unk_7E - 1);
 }

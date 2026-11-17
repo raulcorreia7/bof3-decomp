@@ -19,20 +19,20 @@ MATCH void func_801F3388(void) {
             g_SpawnedActors[index].header.flags = ACTOR_FLAG_IN_USE;
             g_SpawnedActors[index].type         = 0xAC;
         }
-        g_ScriptVars[1]                     = 0;
-        task                                = g_Task;
-        task->tint.signed_bytes.delta.blue  = -0x40;
-        task->tint.signed_bytes.delta.green = -0x40;
-        task->tint.signed_bytes.delta.red   = -0x40;
+        g_ScriptVars[1]                 = 0;
+        task                            = g_Task;
+        task->tint.signed_bytes.delta.b = -0x40;
+        task->tint.signed_bytes.delta.g = -0x40;
+        task->tint.signed_bytes.delta.r = -0x40;
     } else {
-        if (g_Task->tint.signed_bytes.delta.red != 0) {
-            g_Task->tint.signed_bytes.delta.red += 8;
+        if (g_Task->tint.signed_bytes.delta.r != 0) {
+            g_Task->tint.signed_bytes.delta.r += 8;
         }
-        if (g_Task->tint.signed_bytes.delta.green != 0) {
-            g_Task->tint.signed_bytes.delta.green += 8;
+        if (g_Task->tint.signed_bytes.delta.g != 0) {
+            g_Task->tint.signed_bytes.delta.g += 8;
         }
-        if (g_Task->tint.signed_bytes.delta.blue != 0) {
-            g_Task->tint.signed_bytes.delta.blue += 8;
+        if (g_Task->tint.signed_bytes.delta.b != 0) {
+            g_Task->tint.signed_bytes.delta.b += 8;
         }
     }
 }

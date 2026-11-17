@@ -6,7 +6,7 @@ MATCH void func_801AD9F0(void) {
     s8     count;
 
     work  = g_Task;
-    count = work->tint.signed_bytes.delta.red;
+    count = work->tint.signed_bytes.delta.r;
     if (count == 0) {
         if ((work->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
             Actor_DispatchSelectorScript(work->direction_08);
@@ -17,10 +17,10 @@ MATCH void func_801AD9F0(void) {
         area         = g_Task;
         area->unk_04 = 0;
     } else {
-        work->tint.signed_bytes.delta.red = (count + 0x10);
-        work                              = g_Task;
-        work->tint.bytes.rgb.blue         = (work->tint.bytes.rgb.blue + 0x10);
-        work                              = g_Task;
-        work->tint.bytes.rgb.green        = (work->tint.bytes.rgb.green + 0x10);
+        work->tint.signed_bytes.delta.r = (count + 0x10);
+        work                            = g_Task;
+        work->tint.bytes.rgb.b          = (work->tint.bytes.rgb.b + 0x10);
+        work                            = g_Task;
+        work->tint.bytes.rgb.g          = (work->tint.bytes.rgb.g + 0x10);
     }
 }

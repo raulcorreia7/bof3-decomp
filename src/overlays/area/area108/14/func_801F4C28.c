@@ -10,30 +10,30 @@ MATCH s32 func_801F4C28(void) {
     Actor* spad4;
 
     spad  = g_Task;
-    tuneA = spad->tint.signed_bytes.delta.red;
+    tuneA = spad->tint.signed_bytes.delta.r;
     if (tuneA < -0x30) {
-        spad->tint.signed_bytes.delta.red = (tuneA + 1);
+        spad->tint.signed_bytes.delta.r = (tuneA + 1);
     }
     spad2 = g_Task;
-    tuneB = spad2->tint.signed_bytes.delta.green;
+    tuneB = spad2->tint.signed_bytes.delta.g;
     if (tuneB < -0x30) {
-        spad2->tint.signed_bytes.delta.green = (tuneB + 1);
-        spad2                                = g_Task;
+        spad2->tint.signed_bytes.delta.g = (tuneB + 1);
+        spad2                            = g_Task;
     }
-    tuneC = spad2->tint.signed_bytes.delta.blue;
+    tuneC = spad2->tint.signed_bytes.delta.b;
     if (tuneC < -0x30) {
-        spad2->tint.signed_bytes.delta.blue = (tuneC + 1);
+        spad2->tint.signed_bytes.delta.b = (tuneC + 1);
     }
     if ((g_Task->tint.word & ~0xFF) == 0xD0D0D000) {
         GFX_FreePaletteFade(g_CurrentActor->unk_93);
-        spad3                       = g_Task;
-        spad3->header.flags         = (spad3->header.flags & 0xDF);
-        g_Task->tint.bytes.flags    = 0;
-        spad4                       = g_Task;
-        spad4->tint.bytes.rgb.blue  = 0;
-        spad4->tint.bytes.rgb.green = 0;
-        spad4->tint.bytes.rgb.red   = 0;
-        g_Task->unk_04              = 0;
+        spad3                    = g_Task;
+        spad3->header.flags      = (spad3->header.flags & 0xDF);
+        g_Task->tint.bytes.flags = 0;
+        spad4                    = g_Task;
+        spad4->tint.bytes.rgb.b  = 0;
+        spad4->tint.bytes.rgb.g  = 0;
+        spad4->tint.bytes.rgb.r  = 0;
+        g_Task->unk_04           = 0;
         return;
     }
     g_CurrentActor->unk_7E = (g_CurrentActor->unk_7E - 2);

@@ -31,8 +31,8 @@ MATCH void func_8019C954(void) {
         FIELD(s16, work, 0x3Eu) = counter;
         next[0x5E]              = 0;
     }
-    g_Task->tint.bytes.rgb.blue = 0;
-    g_Task->tint.bytes.flags    = 0;
+    g_Task->tint.bytes.rgb.b = 0;
+    g_Task->tint.bytes.flags = 0;
     Actor_SelectScript(0x4E);
     g_Task->header.mode = 2;
 }

@@ -384,14 +384,14 @@ MATCH void func_801F8490(void) {
     work->line.end_scale   = 0x100;
     work->line.yaw         = rand() & 0x700;
     work->line.pitch       = rand() & 0xF00;
-    work->line.color.blue  = 255;
-    work->line.color.green = 255;
-    work->line.color.red   = 255;
+    work->line.color.b     = 255;
+    work->line.color.g     = 255;
+    work->line.color.r     = 255;
     if (rand() & 1) {
-        work->line.color.red = 0;
+        work->line.color.r = 0;
     }
     if (rand() & 1) {
-        work->line.color.blue = 0;
+        work->line.color.b = 0;
     }
     g_Task->header.mode++;
 }
@@ -487,14 +487,14 @@ MATCH void func_801F88FC(Scena03Line* line) {
         point.vy = g_Game.members[0].pos.y.fixed + ((scale * rot.vy) >> 8);
         point.vz = g_Game.members[0].pos.z.fixed + (scale * rot.vz);
         Area_ProjectPoint(&point.vx, (DVECTOR*)&primitive->x0);
-        setRGB0(primitive, (line->start_scale * line->color.red) >> 8, (line->start_scale * line->color.green) >> 8, (line->start_scale * line->color.blue) >> 8);
+        setRGB0(primitive, (line->start_scale * line->color.r) >> 8, (line->start_scale * line->color.g) >> 8, (line->start_scale * line->color.b) >> 8);
 
         scale    = (line->radius * line->end_scale) >> 8;
         point.vx = g_Game.members[0].pos.x.fixed + ((scale * rot.vx) >> 8);
         point.vy = g_Game.members[0].pos.y.fixed + ((scale * rot.vy) >> 8);
         point.vz = g_Game.members[0].pos.z.fixed + (scale * rot.vz);
         Area_ProjectPoint(&point.vx, (DVECTOR*)&primitive->x1);
-        setRGB1(primitive, (line->end_scale * line->color.red) >> 8, (line->end_scale * line->color.green) >> 8, (line->end_scale * line->color.blue) >> 8);
+        setRGB1(primitive, (line->end_scale * line->color.r) >> 8, (line->end_scale * line->color.g) >> 8, (line->end_scale * line->color.b) >> 8);
         GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_G2));
 
         i++;

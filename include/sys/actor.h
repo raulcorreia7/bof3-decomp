@@ -54,10 +54,10 @@
 
 /* Clear the actor's three tint bytes: the row draws untinted. A bare statement
  * macro: use it as a whole statement, never under an unbraced `if`. */
-#define ACTOR_CLEAR_TINT()            \
-    g_Task->tint.bytes.rgb.red   = 0; \
-    g_Task->tint.bytes.rgb.green = 0; \
-    g_Task->tint.bytes.rgb.blue  = 0
+#define ACTOR_CLEAR_TINT()        \
+    g_Task->tint.bytes.rgb.r = 0; \
+    g_Task->tint.bytes.rgb.g = 0; \
+    g_Task->tint.bytes.rgb.b = 0
 
 /* `flags` bits. Bit 0 marks a row the update walks; bit 1 skips queuing the row's palette pair; bit 3 marks selection
  * voices queued on the row (@source: write:SND_QueueSelectionEffect@0x8015D71C, read:Area_AddActor@0x8014D4E0); bit 4 takes

@@ -53,7 +53,7 @@ NON_MATCHING void func_8019625C(void) {
                 green = (s8)((color >> 5) & 0x1Fu);
                 blue  = (s8)((color >> 10) & 0x1Fu);
 
-                red   = (s8)(red + entry->offset.red);
+                red   = (s8)(red + entry->offset.r);
                 value = red < 0;
                 if (value) {
                     red = 0;
@@ -61,14 +61,14 @@ NON_MATCHING void func_8019625C(void) {
                     red = 0x1F;
                 }
 
-                green = (s8)(green + entry->offset.green);
+                green = (s8)(green + entry->offset.g);
                 if (green < 0) {
                     green = 0;
                 } else if (green >= 0x20) {
                     green = 0x1F;
                 }
 
-                blue = (s8)(blue + entry->offset.blue);
+                blue = (s8)(blue + entry->offset.b);
                 if (blue < 0) {
                     blue = 0;
                 } else if (blue >= 0x20) {

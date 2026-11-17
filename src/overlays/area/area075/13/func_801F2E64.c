@@ -29,12 +29,12 @@ NON_MATCHING void func_801F2E64(s32 phase, s32 semi_trans) {
     prim->r0    = shade + 0x80;
     prim->g0    = shade + 0x80;
     prim->b0    = shade + 0x80;
-    shade       = g_Task->tint.bytes.rgb.red & 7;
+    shade       = g_Task->tint.bytes.rgb.r & 7;
     prim->u0    = shade;
     prim->v0    = shade;
-    prim->r0    = g_Task->tint.bytes.rgb.blue;
-    prim->g0    = g_Task->tint.bytes.rgb.blue;
-    prim->b0    = g_Task->tint.bytes.rgb.blue;
+    prim->r0    = g_Task->tint.bytes.rgb.b;
+    prim->g0    = g_Task->tint.bytes.rgb.b;
+    prim->b0    = g_Task->tint.bytes.rgb.b;
     SetSemiTrans(prim, semi_trans & 0xFF);
     SetShadeTex(prim, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));

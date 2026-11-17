@@ -13,9 +13,9 @@ MATCH void func_801B26E0(void) {
         do {
             TASK_SET(&g_Game.members[i]);
             if (g_Task->header.mode == 3) {
-                g_Task->tint.bytes.rgb.red   = -(level << 5);
-                g_Task->tint.bytes.rgb.green = g_Task->tint.bytes.rgb.red;
-                g_Task->tint.bytes.rgb.blue  = g_Task->tint.bytes.rgb.red;
+                g_Task->tint.bytes.rgb.r = -(level << 5);
+                g_Task->tint.bytes.rgb.g = g_Task->tint.bytes.rgb.r;
+                g_Task->tint.bytes.rgb.b = g_Task->tint.bytes.rgb.r;
             }
             i++;
         } while (i < g_PartySize);

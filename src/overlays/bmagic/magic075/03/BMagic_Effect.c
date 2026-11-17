@@ -41,9 +41,9 @@ MATCH void func_801EEC70(void) {
 }
 
 MATCH void func_801EEDE0(void) {
-    g_PaletteFades[g_Task->timer].offset.red   = g_Task->param.unk_0B * 2;
-    g_PaletteFades[g_Task->timer].offset.green = g_Task->param.unk_0B * 2;
-    g_PaletteFades[g_Task->timer].offset.blue  = g_Task->param.unk_0B * 2;
+    g_PaletteFades[g_Task->timer].offset.r = g_Task->param.unk_0B * 2;
+    g_PaletteFades[g_Task->timer].offset.g = g_Task->param.unk_0B * 2;
+    g_PaletteFades[g_Task->timer].offset.b = g_Task->param.unk_0B * 2;
     if (g_Task->param.unk_0B == 7) {
         g_Task->header.mode++;
     }
@@ -52,10 +52,10 @@ MATCH void func_801EEDE0(void) {
 MATCH void func_801EEEB0(void) {
     u16* flags;
 
-    g_PaletteFades[g_Task->timer].offset.red -= 2;
-    g_PaletteFades[g_Task->timer].offset.green -= 2;
-    g_PaletteFades[g_Task->timer].offset.blue -= 2;
-    if (g_PaletteFades[g_Task->timer].offset.red == 0) {
+    g_PaletteFades[g_Task->timer].offset.r -= 2;
+    g_PaletteFades[g_Task->timer].offset.g -= 2;
+    g_PaletteFades[g_Task->timer].offset.b -= 2;
+    if (g_PaletteFades[g_Task->timer].offset.r == 0) {
         GFX_FreePaletteFade(g_Task->timer);
         Battle_MarkDamaged(g_Battle.target_selector);
         BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING);

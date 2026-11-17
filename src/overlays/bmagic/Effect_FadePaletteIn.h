@@ -1,9 +1,9 @@
 /* Brightens the palette fade row indexed by the effect timer (work byte 0x0A) by one on each colour channel; when the effect ticker (work byte 0x09) reaches zero it advances the effect step. */
 /* func_801EF3D4 (magic073), func_801EF3C0 (magic074) */
 MATCH void Effect_FadePaletteIn(void) {
-    g_PaletteFades[g_Task->timer].offset.red++;
-    g_PaletteFades[g_Task->timer].offset.green++;
-    g_PaletteFades[g_Task->timer].offset.blue++;
+    g_PaletteFades[g_Task->timer].offset.r++;
+    g_PaletteFades[g_Task->timer].offset.g++;
+    g_PaletteFades[g_Task->timer].offset.b++;
     if (--g_Task->unk_09 == 0) {
         g_Task->header.step++;
     }

@@ -4,33 +4,33 @@ MATCH bool func_801C29A0(s8 tuning_delta) {
     s8  value;
     s16 next;
 
-    value = g_Task->tint.signed_bytes.delta.red;
+    value = g_Task->tint.signed_bytes.delta.r;
     if (value != -0x80) {
         next = value - tuning_delta;
         if (next < -0x80) {
-            g_Task->tint.signed_bytes.delta.red = -0x80;
+            g_Task->tint.signed_bytes.delta.r = -0x80;
         } else {
-            g_Task->tint.signed_bytes.delta.red = next;
+            g_Task->tint.signed_bytes.delta.r = next;
         }
     }
 
-    value = g_Task->tint.signed_bytes.delta.green;
+    value = g_Task->tint.signed_bytes.delta.g;
     if (value != -0x80) {
         next = value - tuning_delta;
         if (next < -0x80) {
-            g_Task->tint.signed_bytes.delta.green = -0x80;
+            g_Task->tint.signed_bytes.delta.g = -0x80;
         } else {
-            g_Task->tint.signed_bytes.delta.green = next;
+            g_Task->tint.signed_bytes.delta.g = next;
         }
     }
 
-    value = g_Task->tint.signed_bytes.delta.blue;
+    value = g_Task->tint.signed_bytes.delta.b;
     if (value != -0x80) {
         next = value - tuning_delta;
         if (next < -0x80) {
-            g_Task->tint.signed_bytes.delta.blue = -0x80;
+            g_Task->tint.signed_bytes.delta.b = -0x80;
         } else {
-            g_Task->tint.signed_bytes.delta.blue = next;
+            g_Task->tint.signed_bytes.delta.b = next;
         }
     }
 

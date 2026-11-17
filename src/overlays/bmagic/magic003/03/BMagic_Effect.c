@@ -316,7 +316,7 @@ MATCH void func_801EF7A8(void) {
         g_Task->unk_5D = -(g_Task->param.unk_0B << 4);
         g_Task->unk_5F = -(g_Task->param.unk_0B << 4);
         g_Task->unk_5E = -(g_Task->param.unk_0B << 4);
-        GFX_AllocPaletteFade(g_Task, D_801F0A78[g_Task->param.unk_0B].red, D_801F0A78[g_Task->param.unk_0B].green, D_801F0A78[g_Task->param.unk_0B].blue, 1);
+        GFX_AllocPaletteFade(g_Task, D_801F0A78[g_Task->param.unk_0B].r, D_801F0A78[g_Task->param.unk_0B].g, D_801F0A78[g_Task->param.unk_0B].b, 1);
         g_Task->header.step += 1;
     }
 }

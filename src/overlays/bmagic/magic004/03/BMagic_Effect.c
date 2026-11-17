@@ -105,9 +105,9 @@ MATCH void func_801EF1F0(void) {
     if ((s8)g_Task->unk_5F != 0) {
         g_Task->unk_5F -= 2;
     }
-    g_PaletteFades[g_Task->timer].offset.red   = g_Task->unk_5D;
-    g_PaletteFades[g_Task->timer].offset.green = g_Task->unk_5E;
-    g_PaletteFades[g_Task->timer].offset.blue  = g_Task->unk_5F;
+    g_PaletteFades[g_Task->timer].offset.r = g_Task->unk_5D;
+    g_PaletteFades[g_Task->timer].offset.g = g_Task->unk_5E;
+    g_PaletteFades[g_Task->timer].offset.b = g_Task->unk_5F;
     if ((LOWU(g_Task->unk_5C) & ~0xFF) == 0) {
         BMAGIC_SELECT_TARGET_BATTLER();
         GFX_FreePaletteFadeTarget(battler);

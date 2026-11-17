@@ -69,8 +69,8 @@ MATCH void func_801EEFA0(void) {
     FAKE_STACK_PADS(u8, 8);
     u8 timer;
 
-    g_PaletteFades[g_Task->timer].offset.red -= 1;
-    g_PaletteFades[g_Task->timer].offset.green -= 1;
+    g_PaletteFades[g_Task->timer].offset.r -= 1;
+    g_PaletteFades[g_Task->timer].offset.g -= 1;
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
@@ -86,9 +86,9 @@ MATCH void func_801EF0A8(void) {
     FAKE_STACK_PADS(u8, 8);
 
     actor = g_Battle.selected_actor;
-    g_PaletteFades[g_Task->timer].offset.red += 1;
-    g_PaletteFades[g_Task->timer].offset.green += 1;
-    if (g_PaletteFades[g_Task->timer].offset.red != 0) {
+    g_PaletteFades[g_Task->timer].offset.r += 1;
+    g_PaletteFades[g_Task->timer].offset.g += 1;
+    if (g_PaletteFades[g_Task->timer].offset.r != 0) {
         return;
     }
     actor->unk_5C = 0;

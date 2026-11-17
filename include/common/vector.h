@@ -79,23 +79,23 @@ typedef Pos3 Angle3;
 
 /* One red, green and blue level a byte wide, without the SDK's fourth byte; CVECTOR is the padded form. */
 typedef struct ColorRGB8 {
-    u8 red;
-    u8 green;
-    u8 blue;
+    u8 r;
+    u8 g;
+    u8 b;
 } ColorRGB8;
 
 /* Signed per-channel colour shift of a palette fade; each channel is added to the colours it fades. */
 typedef struct ColorDelta8 {
-    s8 red;
-    s8 green;
-    s8 blue;
+    s8 r;
+    s8 g;
+    s8 b;
 } ColorDelta8;
 
 /* One red, green and blue level a halfword wide. */
 typedef struct ColorRGB16 {
-    u16 red;
-    u16 green;
-    u16 blue;
+    u16 r;
+    u16 g;
+    u16 b;
 } ColorRGB16;
 
 ASSERT_SIZE(Coord3, 0x0C);
@@ -117,10 +117,10 @@ ASSERT_SIZE(Pos3, 0x0C);
 ASSERT_OFFSET(Pos3, y, 0x04);
 ASSERT_OFFSET(Pos3, z, 0x08);
 ASSERT_SIZE(ColorRGB8, 0x03);
-ASSERT_OFFSET(ColorRGB8, blue, 0x02);
+ASSERT_OFFSET(ColorRGB8, b, 0x02);
 ASSERT_SIZE(ColorDelta8, 0x03);
-ASSERT_OFFSET(ColorDelta8, blue, 0x02);
+ASSERT_OFFSET(ColorDelta8, b, 0x02);
 ASSERT_SIZE(ColorRGB16, 0x06);
-ASSERT_OFFSET(ColorRGB16, blue, 0x04);
+ASSERT_OFFSET(ColorRGB16, b, 0x04);
 
 #endif

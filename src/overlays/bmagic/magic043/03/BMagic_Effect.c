@@ -80,9 +80,9 @@ MATCH void func_801EEEF0(void) {
 MATCH void func_801EEF98(void) {
     u8 count;
 
-    g_PaletteFades[g_Task->timer].offset.red += 2;
-    g_PaletteFades[g_Task->timer].offset.green += 2;
-    g_PaletteFades[g_Task->timer].offset.blue += 2;
+    g_PaletteFades[g_Task->timer].offset.r += 2;
+    g_PaletteFades[g_Task->timer].offset.g += 2;
+    g_PaletteFades[g_Task->timer].offset.b += 2;
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (count == 0) {
@@ -97,9 +97,9 @@ MATCH void func_801EF0B4(void) {
     PartyMember* work;
     u8           count;
 
-    g_PaletteFades[g_Task->timer].offset.red -= 2;
-    g_PaletteFades[g_Task->timer].offset.green -= 2;
-    g_PaletteFades[g_Task->timer].offset.blue -= 2;
+    g_PaletteFades[g_Task->timer].offset.r -= 2;
+    g_PaletteFades[g_Task->timer].offset.g -= 2;
+    g_PaletteFades[g_Task->timer].offset.b -= 2;
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (count != 0) {

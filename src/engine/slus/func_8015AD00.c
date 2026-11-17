@@ -171,12 +171,12 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
 
             sort_list->work      = (u8*)g_Task;
             sort_list->primitive = p;
-            setRGB0(&quad->ft4, g_Task->tint.bytes.rgb.red, g_Task->tint.bytes.rgb.green, g_Task->tint.bytes.rgb.blue);
+            setRGB0(&quad->ft4, g_Task->tint.bytes.rgb.r, g_Task->tint.bytes.rgb.g, g_Task->tint.bytes.rgb.b);
             if ((g_Task->range_54.table[3] & 0x80) != 0) {
                 VectorNormalS(&normal, g_ScratchPadVectors);
-                color.r  = g_Task->tint.bytes.rgb.red;
-                color.g  = g_Task->tint.bytes.rgb.green;
-                color.b  = g_Task->tint.bytes.rgb.blue;
+                color.r  = g_Task->tint.bytes.rgb.r;
+                color.g  = g_Task->tint.bytes.rgb.g;
+                color.b  = g_Task->tint.bytes.rgb.b;
                 color.cd = quad->ft4.code;
                 NormalColorCol(g_ScratchPadVectors, &color, (CVECTOR*)&quad->ft4.r0);
             }

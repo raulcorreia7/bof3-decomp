@@ -6,9 +6,9 @@ MATCH void Area_SpawnSpinEffect(void) {
 
     g_Task->direction_08 = g_Game.members[0].facing;
     SYS_InitScratchpad(((AreaLoad*)g_AreaLoads[g_GameAreaId])->field_08 + 8);
-    g_Task->tint.signed_bytes.delta.red   = -0x80;
-    g_Task->tint.signed_bytes.delta.green = -0x80;
-    g_Task->tint.signed_bytes.delta.blue  = -0x80;
+    g_Task->tint.signed_bytes.delta.r = -0x80;
+    g_Task->tint.signed_bytes.delta.g = -0x80;
+    g_Task->tint.signed_bytes.delta.b = -0x80;
     g_Task->header.mode += 1;
     AREA_TURN_SYNC();
     if (g_GameAreaId == AREA_ID_TIDAL_CAVES_ENTRANCE && !Item_VitalHas(VITAL_ITEM_SEA_CHARTS)) {

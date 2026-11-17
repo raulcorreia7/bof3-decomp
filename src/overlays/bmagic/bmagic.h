@@ -440,8 +440,8 @@ extern BMagicEffect* D_801F17B4;
 
 /* The red and blue weight of one ring shade; the green follows the effect timer alone. */
 typedef struct BMagicTint {
-    u8 red;
-    u8 blue;
+    u8 r;
+    u8 b;
 } BMagicTint;
 
 ASSERT_SIZE(BMagicTint, 0x2);

@@ -26,9 +26,9 @@ MATCH void func_801F6EE8(void) {
 MATCH void func_801F6F24(void) {
     g_Task->timer -= 1;
     if (g_Task->timer != 0) {
-        g_Task->tint.bytes.rgb.red += 7;
-        g_Task->tint.bytes.rgb.green += 7;
-        g_Task->tint.bytes.rgb.blue += 7;
+        g_Task->tint.bytes.rgb.r += 7;
+        g_Task->tint.bytes.rgb.g += 7;
+        g_Task->tint.bytes.rgb.b += 7;
     } else {
         g_Task->header.mode = 2;
     }
@@ -73,11 +73,11 @@ MATCH void func_801F7198(void) {
 MATCH void func_801F71DC(void) {
     Actor* work;
 
-    work                       = g_Task;
-    work->tint.bytes.rgb.blue  = 0;
-    work->tint.bytes.rgb.green = 0;
-    work->tint.bytes.rgb.red   = 0;
-    g_Task->param.unk_0B       = 0x33;
+    work                   = g_Task;
+    work->tint.bytes.rgb.b = 0;
+    work->tint.bytes.rgb.g = 0;
+    work->tint.bytes.rgb.r = 0;
+    g_Task->param.unk_0B   = 0x33;
     MESSAGE_START_WAIT(g_Task->param.unk_0B);
     g_Task->header.mode = 1;
 }
@@ -94,9 +94,9 @@ MATCH void func_801F7248(void) {
 MATCH void func_801F72A0(void) {
     g_Task->timer -= 1;
     if (g_Task->timer != 0) {
-        g_Task->tint.bytes.rgb.red += 2;
-        g_Task->tint.bytes.rgb.green += 2;
-        g_Task->tint.bytes.rgb.blue += 2;
+        g_Task->tint.bytes.rgb.r += 2;
+        g_Task->tint.bytes.rgb.g += 2;
+        g_Task->tint.bytes.rgb.b += 2;
     } else {
         g_Task->timer       = 30;
         g_Task->header.mode = 3;
@@ -115,10 +115,10 @@ MATCH void func_801F735C(void) {
         work       = g_Task;
         message_id = work->param.unk_0B;
         if ((u8)message_id == 0x37) {
-            work->tint.signed_bytes.delta.blue  = -1;
-            work->tint.signed_bytes.delta.green = -1;
-            work->tint.signed_bytes.delta.red   = -1;
-            g_Task->header.mode                 = 4;
+            work->tint.signed_bytes.delta.b = -1;
+            work->tint.signed_bytes.delta.g = -1;
+            work->tint.signed_bytes.delta.r = -1;
+            g_Task->header.mode             = 4;
             g_ScriptVars[0] += 1;
         } else {
             MESSAGE_START_WAIT(message_id);
@@ -219,12 +219,12 @@ MATCH void func_801F7958(void) {
 
 MATCH void func_801F7A1C(void) {
     if (g_Task->timer != 0) {
-        g_Actors[g_Task->unk_03].tint.bytes.rgb.red += 8;
-        g_Actors[g_Task->unk_03].tint.bytes.rgb.green += 8;
-        g_Actors[g_Task->unk_03].tint.bytes.rgb.blue += 8;
-        g_Actors[g_Task->unk_04].tint.bytes.rgb.red += 8;
-        g_Actors[g_Task->unk_04].tint.bytes.rgb.green += 8;
-        g_Actors[g_Task->unk_04].tint.bytes.rgb.blue += 8;
+        g_Actors[g_Task->unk_03].tint.bytes.rgb.r += 8;
+        g_Actors[g_Task->unk_03].tint.bytes.rgb.g += 8;
+        g_Actors[g_Task->unk_03].tint.bytes.rgb.b += 8;
+        g_Actors[g_Task->unk_04].tint.bytes.rgb.r += 8;
+        g_Actors[g_Task->unk_04].tint.bytes.rgb.g += 8;
+        g_Actors[g_Task->unk_04].tint.bytes.rgb.b += 8;
         g_Task->timer--;
     } else {
         g_ScriptVars[0]++;

@@ -5,9 +5,9 @@ MATCH void func_801F2D00(void) {
 
     ACTOR_COUNT_DOWN(mode, timer);
     if (mode & BYTE_MASK) {
-        g_Task->tint.bytes.rgb.red += 1;
-        g_Task->tint.bytes.rgb.green += 1;
-        g_Task->tint.bytes.rgb.blue += 1;
+        g_Task->tint.bytes.rgb.r += 1;
+        g_Task->tint.bytes.rgb.g += 1;
+        g_Task->tint.bytes.rgb.b += 1;
     } else {
         MESSAGE_START_WAIT(MSG_134);
         g_Task->header.mode = 2;

@@ -71,11 +71,11 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
     setWH(sprite, g_SpriteSizes[sprite_cell->size & GFX_SPRITE_SIZE_MASK][0], g_SpriteSizes[sprite_cell->size & GFX_SPRITE_SIZE_MASK][1]);
     sprite->y0 = SPAD_CURSOR->screen_y + (s8)sprite_cell->y;
     setUV0(sprite, sprite_cell->u, SPAD_CURSOR->unk_26 + sprite_cell->v);
-    delta        = SPAD_CURSOR->tint.bytes.rgb.red - 0x80;
+    delta        = SPAD_CURSOR->tint.bytes.rgb.r - 0x80;
     sprite->r0   = delta;
-    delta        = SPAD_CURSOR->tint.bytes.rgb.green - 0x80;
+    delta        = SPAD_CURSOR->tint.bytes.rgb.g - 0x80;
     sprite->g0   = delta;
-    delta        = SPAD_CURSOR->tint.bytes.rgb.blue - 0x80;
+    delta        = SPAD_CURSOR->tint.bytes.rgb.b - 0x80;
     sprite->b0   = delta;
     sprite->clut = sprite_clut;
     delta        = sprite_mirror & BYTE_MASK;

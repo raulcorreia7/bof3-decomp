@@ -70,9 +70,9 @@ MATCH void func_801EF518(void) {
     } else {
         battler = (PartyMember*)((EnemyBattler*)g_BattleEnemies + unk04);
     }
-    g_PaletteFades[g_Task->timer].offset.red--;
-    g_PaletteFades[g_Task->timer].offset.green--;
-    g_PaletteFades[g_Task->timer].offset.blue--;
+    g_PaletteFades[g_Task->timer].offset.r--;
+    g_PaletteFades[g_Task->timer].offset.g--;
+    g_PaletteFades[g_Task->timer].offset.b--;
     if (--g_Task->unk_09 == 0) {
         func_80196718(battler);
         Battle_FadePoisonedBattler(g_Task->unk_04);

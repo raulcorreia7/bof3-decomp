@@ -135,11 +135,11 @@ MATCH void Area_DrawObjectSprite(void) {
             prim->v2    = prim->v0 + height - clip_y;
             prim->v1    = prim->v0;
             prim->v3    = prim->v2;
-            tint        = g_Task->tint.bytes.rgb.red - 0x80;
+            tint        = g_Task->tint.bytes.rgb.r - 0x80;
             prim->r0    = tint;
-            tint        = g_Task->tint.bytes.rgb.green - 0x80;
+            tint        = g_Task->tint.bytes.rgb.g - 0x80;
             prim->g0    = tint;
-            tint        = g_Task->tint.bytes.rgb.blue - 0x80;
+            tint        = g_Task->tint.bytes.rgb.b - 0x80;
             prim->b0    = tint;
             /* The page is assigned inside the macro: retail computes it once in each branch. */
             tpage       = getTPage(g_Task->unk_28 ? 1 : 0, g_Task->tint.bytes.flags, (page % 16) << 6, ((page = g_Task->unk_25 + page_offset) / 16) << 8);
