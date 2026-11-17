@@ -5,23 +5,15 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
     /* FAKE: register pins reproduce retail's s1/s2/s0/s3/s4 assignment; pinned 84.06%. */
     FAKE_REG(s32, sx, "s1");
     FAKE_REG(s32, sy, "s2");
-    /* FAKE: pins continue the assignment from the note above. */
+    /* FAKE: pin reproduces retail's result register. */
     FAKE_REG(s32, result, "s0");
+    /* FAKE: pins continue the assignment from the note above. */
     FAKE_REG(s32, s3, "s3");
     /* FAKE: pin continues the assignment from the note above. */
     FAKE_REG(s32, s4, "s4");
     sx = x;
     sy = y;
     switch (route & BYTE_MASK) {
-        case FACING_UP:
-            s3     = (s16)(sx >> 16);
-            s4     = ((u32)sy) >> 16;
-            result = Area_IsCellBlocked(s3 & HALF_MASK, s4);
-            if (sx & HALF_MASK) {
-                result += (Area_IsCellBlocked((s3 + 1) & HALF_MASK, s4) + func_801A223C(sx & 0xFFFF0000, sy)) + func_801A223C(sx + 0x8000, sy);
-            }
-            break;
-
         case FACING_DOWN:
             if (sy & HALF_MASK) {
                 s4     = (s16)(sx >> 16);
@@ -31,13 +23,17 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
                     s3 = ((sy >> 16) + 1) & HALF_MASK;
                     result += (Area_IsCellBlocked((s4 + 1) & HALF_MASK, s3) + func_801A223C(sx & 0xFFFF0000, sy)) + func_801A223C(sx + 0x8000, sy);
                 }
-            } else {
-                s3     = (s16)(sx >> 16);
-                s4     = ((u32)sy) >> 16;
-                result = Area_IsCellBlocked(s3 & HALF_MASK, s4);
-                if (sx & HALF_MASK) {
-                    result += (Area_IsCellBlocked((s3 + 1) & HALF_MASK, s4) + func_801A223C(sx & 0xFFFF0000, sy)) + func_801A223C(sx + 0x8000, sy);
-                }
+                break;
+            }
+            goto body_up;
+
+        case FACING_UP:
+        body_up:
+            s3     = (s16)(sx >> 16);
+            s4     = ((u32)sy) >> 16;
+            result = Area_IsCellBlocked(s3 & HALF_MASK, s4);
+            if (sx & HALF_MASK) {
+                result += (Area_IsCellBlocked((s3 + 1) & HALF_MASK, s4) + func_801A223C(sx & 0xFFFF0000, sy)) + func_801A223C(sx + 0x8000, sy);
             }
             break;
 

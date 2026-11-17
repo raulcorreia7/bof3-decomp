@@ -5,11 +5,11 @@
 #ifdef NON_MATCHING
 NON_MATCHING void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags) {
     u16 stack_20[4];
-    s16 val0;
+    s32 val0;
     s16 val1;
-    s16 val2;
+    s32 val2;
     s16 val3;
-    s16 val4;
+    s32 val4;
     s32 tmp0;
     s32 tmp1;
     s32 tmp2;
