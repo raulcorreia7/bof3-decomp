@@ -23,4 +23,7 @@ extern u8  D_801F68B4[];
 
 #define AREA167_ENTRY_TABLE(type, offset, index) AREA_PAYLOAD_FIELD(D_801F4A68, type, offset, index)
 
+/* The per-sprite-row screen scale of the quad's far edge: a signed byte a row. */
+#define AREA_ROW_SCALE_OFFSET                    0x34
+
 #endif
