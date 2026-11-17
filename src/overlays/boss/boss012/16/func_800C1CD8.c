@@ -7,7 +7,7 @@ NON_MATCHING void func_800C1CD8(s32 shade) {
     Actor*    task;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(2, 0, 0x340, 0x100), 0);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
 
     poly        = (POLY_FT4*)g_GfxPrimCursor;
     poly->tpage = GetTPage(2, 0, 0x340, 0x100);
@@ -23,7 +23,7 @@ NON_MATCHING void func_800C1CD8(s32 shade) {
     poly->y3 = task->unk_1C + task->gravity - 0x3C;
     setUV4(poly, 0, shade, 0x68, shade, 0, shade, 0x68, shade);
     SetPolyFT4(poly);
-    GFX_AddPrim(1, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 }
 #else
 INCLUDE_ASM(func_800C1CD8);

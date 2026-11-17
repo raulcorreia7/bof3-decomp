@@ -13,7 +13,7 @@ MATCH void func_801F3324(void) {
         return;
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256), NULL);
-    GFX_AddPrim(6, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_FIELD_SCENE, sizeof(DR_MODE));
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetShadeTex(prim, 0);
@@ -31,5 +31,5 @@ MATCH void func_801F3324(void) {
     RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
                   &flag);
     Area_ApplyTileToQuad((0x2550 << 16) | 0x127, prim, 1);
-    GFX_AddPrim(6, sizeof(POLY_FT4));
+    GFX_AddPrim(GFX_LAYER_FIELD_SCENE, sizeof(POLY_FT4));
 }

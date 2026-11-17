@@ -75,7 +75,7 @@ NON_MATCHING void func_8014BC70(void) {
     var_s7 = 0;
     var_s4 = 0;
     var_fp = 0;
-    GFX_ADD_LAYER_DRAW_MODE(6U, tpage);
+    GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_FIELD_SCENE, tpage);
     do {
         if (g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) {
             Area_DrawCellLayer(var_s7);

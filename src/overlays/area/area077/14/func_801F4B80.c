@@ -37,7 +37,7 @@ NON_MATCHING void func_801F4B80(void) {
     line->x1 = screen.vx;
     line->y1 = screen.vy;
     setRGB0(line, 0xC0, 0xC0, 0xC0);
-    GFX_AddPrim(1, 0x10);
+    GFX_AddPrim(GFX_LAYER_UI, 0x10);
     PopMatrix();
 }
 #else

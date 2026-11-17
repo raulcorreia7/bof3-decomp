@@ -43,7 +43,7 @@ NON_MATCHING void func_801F2F50(Pos3* pos, s16 radius_a, s16 radius_b, u16 angle
         }
         setRGB1(prim, shade_b, shade_b, shade_b);
         setRGB2(prim, shade_b, shade_b, shade_b);
-        GFX_AddPrim(1, sizeof(POLY_G3));
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G3));
         angle = next;
         i++;
     } while ((u16)i < 16);
