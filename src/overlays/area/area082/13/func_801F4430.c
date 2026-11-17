@@ -18,9 +18,9 @@ NON_MATCHING void func_801F4430(void) {
     pos.vx = g_Task->pos.x.fixed;
     pos.vy = g_Task->pos.y.fixed;
     pos.vz = g_Task->pos.z.fixed;
-    rot.vz = g_Task->unk_32;
     rot.vy = 0;
     rot.vx = 0;
+    rot.vz = g_Task->unk_32;
 
     PushMatrix();
     RotTransMatrix(&pos, matrix, &flag);
@@ -29,12 +29,13 @@ NON_MATCHING void func_801F4430(void) {
     SetRotMatrix(&matrix);
     SetTransMatrix(&matrix);
 
+    tile = (1U << 28) | (3U << 24) | (1U << 15) | (TPAGE_ABR_ADD << 12);
     if (g_Task->param.unk_0B != 0) {
         SND_PlaySE(g_Task->param.unk_0B + 0x201);
         g_Task->param.unk_0B = 0;
-        tile                 = (1U << 28) | (3U << 24) | (1U << 15) | (TPAGE_ABR_ADD << 12) | 0x0F;
+        tile |= 0x0F;
     } else {
-        tile = (1U << 28) | (3U << 24) | (1U << 15) | (TPAGE_ABR_ADD << 12) | (1U << 11) | 0x0C;
+        tile |= (1U << 11) | 0x0C;
     }
 
     quad = g_ScratchPadVectors;
