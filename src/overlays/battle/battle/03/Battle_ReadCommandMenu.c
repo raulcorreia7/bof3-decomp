@@ -1,7 +1,8 @@
 #include "battle_03.h"
 
+/* func_801D1E8C */
 #ifdef NON_MATCHING
-NON_MATCHING void func_801D1E8C(void) {
+NON_MATCHING void Battle_ReadCommandMenu(void) {
     PartyMember* temp_v0_66;
     u8*          state;
     u16*         pad;
@@ -130,5 +131,5 @@ NON_MATCHING void func_801D1E8C(void) {
     }
 }
 #else
-INCLUDE_ASM(func_801D1E8C);
+INCLUDE_ASM(Battle_ReadCommandMenu);
 #endif

@@ -3,8 +3,9 @@
 /* Starts the next queued battler: walks the live battler cursors, arms the
  * first one whose row is idle and queues its action step.
  */
+/* func_801D1D10 */
 #ifdef NON_MATCHING
-NON_MATCHING void func_801D1D10(void) {
+NON_MATCHING void Battle_NextCommandMember(void) {
     s8*          cursor;
     s8*          slot;
     volatile u8* flag;
@@ -44,5 +45,5 @@ NON_MATCHING void func_801D1D10(void) {
     }
 }
 #else
-INCLUDE_ASM(func_801D1D10);
+INCLUDE_ASM(Battle_NextCommandMember);
 #endif

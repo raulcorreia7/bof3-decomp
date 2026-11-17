@@ -1131,7 +1131,7 @@ extern u8            g_BattleEnemies[];
 /* The battler the running effect acts on: the pointer battle/battle/03 and the bmagic
  * overlays advance through the effect steps. It is a non-volatile view on
  * purpose: some retail stores rely on the plain form, for example the counter
- * store in the return-jump delay slot of func_801E8D04. */
+ * store in the return-jump delay slot of Battle_EndFormRestore. */
 extern PartyMember*  g_BattleEffectBattler;
 /* The selection slot byte; battle/battle/15 re-reads it through a pointer. */
 extern volatile u8   D_801462E7;

@@ -10,8 +10,7 @@ u32 D_801D0C00 = 0x10;
 /* 0x801D0C04 */
 /* D_801D0C04 */
 BattleModes g_BattlePhases = {
-    (Callback)Battle_DispatchStep, (Callback)func_801D1C54, (Callback)Battle_UpdateTurnSetup,
-    (Callback)Battle_UpdateTurns,       (Callback)Battle_UpdateRoundEnd, (Callback)Battle_UpdateResult,
+    (Callback)Battle_DispatchStep, (Callback)Battle_UpdateCommands, (Callback)Battle_UpdateTurnSetup, (Callback)Battle_UpdateTurns, (Callback)Battle_UpdateRoundEnd, (Callback)Battle_UpdateResult,
 };
 
 /* 0x801D0C1C */

@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801E72F4(void) {
+/* func_801E72F4 */
+MATCH void Battle_CopyBattlerGhost(void) {
     PartyMember* scratch;
 
     g_Task->header.flags = (g_BattleEffectBattler->header.flags | ACTOR_FLAG_SEMI_TRANSPARENT);

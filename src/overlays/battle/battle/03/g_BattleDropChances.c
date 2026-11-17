@@ -10,45 +10,45 @@ DropChances g_BattleDropChances = {
 };
 
 /* 0x801D0CC0: the queued slot's mode (+0x06, stored by Battle_AllocEffect)
- * selects one of these four stage handlers; Battle_UpdateEffects copies the
+ * selects one of these four effect handlers; Battle_UpdateEffects copies the
  * table and dispatches for every active slot. */
 /* D_801D0CC0 */
-BattleEffectStageSteps g_BattleEffectStages = {
-    (Callback)func_801E5AF4,
-    (Callback)func_801E5B8C,
+BattleEffectModes g_BattleEffectModes = {
+    (Callback)Battle_RunBattlerEffect,
+    (Callback)Battle_RunMagicEffect,
     (Callback)func_800ADFBC,
-    (Callback)func_801E5C1C,
+    (Callback)Battle_RunBossEffect,
 };
 
-/* 0x801D0CD0: mode 0's stage handler (func_801E5AF4) dispatches the queued
+/* 0x801D0CD0: mode 0 handler (Battle_RunBattlerEffect) dispatches the queued
  * slot's handler index (+0x05) here; 19 handlers, indices 0..0x12. */
 /* D_801D0CD0 */
-BattleEffectStage0Steps g_BattleEffectStage0Steps = {
+BattleBattlerEffectSteps g_BattleBattlerEffectSteps = {
     (Callback)func_801E5AEC,
     (Callback)Battle_UpdateDamageNumber,
     (Callback)Battle_UpdateScreenFlash,
-    (Callback)func_801E6724,
+    (Callback)Battle_UpdatePoseActor,
     (Callback)Battle_UpdateScreenFade,
     (Callback)func_801E6AA0,
     (Callback)Battle_UpdateAilmentActor,
-    (Callback)func_801E72A8,
+    (Callback)Battle_UpdateBattlerGhost,
     (Callback)func_800C2FF4,
     (Callback)func_800AD26C,
     (Callback)func_800AD69C,
     (Callback)func_801E74B8,
-    (Callback)func_801E7818,
+    (Callback)Battle_UpdateFormChange,
     (Callback)func_800AD9CC,
     (Callback)func_800ADCC4,
     (Callback)func_800A8540,
     (Callback)func_800A8C60,
-    (Callback)func_801E862C,
+    (Callback)Battle_UpdateFormRestore,
     (Callback)func_800A8D80,
 };
 
-/* 0x801D0D1C: mode 1's stage handler (func_801E5B8C) dispatches the queued
+/* 0x801D0D1C: mode 1 handler (Battle_RunMagicEffect) dispatches the queued
  * slot's handler index (+0x05) here; 110 handlers. */
 /* D_801D0D1C */
-BattleEffectStage1Steps g_BattleEffectStage1Steps = {
+BattleMagicEffectSteps g_BattleMagicEffectSteps = {
     (Callback)func_801E5AEC, (Callback)func_801EF2CC,       (Callback)func_800AE788, (Callback)func_801EF75C, (Callback)func_801EEF08, (Callback)func_801EF56C, (Callback)func_801EEE00,
     (Callback)func_801EF774, (Callback)func_801EF210,       (Callback)func_801EEFDC, (Callback)func_801EEE58, (Callback)func_801EF09C, (Callback)func_801EF16C, (Callback)func_801EEEE4,
     (Callback)func_801EEF84, (Callback)func_801EF010,       (Callback)func_801EF3F8, (Callback)func_801EEEBC, (Callback)func_801EFF44, (Callback)func_801EF2D0, (Callback)func_801EEF84,
@@ -67,10 +67,10 @@ BattleEffectStage1Steps g_BattleEffectStage1Steps = {
     (Callback)func_801EF668, (Callback)func_801EEF80,       (Callback)func_801EEFC0, (Callback)func_801EEE2C, (Callback)func_801EF04C,
 };
 
-/* 0x801D0ED4: mode 3's stage handler (func_801E5C1C) dispatches the queued
+/* 0x801D0ED4: mode 3 handler (Battle_RunBossEffect) dispatches the queued
  * slot's handler index (+0x05) here; eight handlers. */
 /* D_801D0ED4 */
-BattleEffectStage3Steps g_BattleEffectStage3Steps = {
+BattleBossEffectSteps g_BattleBossEffectSteps = {
     (Callback)func_801E5AEC, (Callback)func_801EEE64, (Callback)func_800C1BEC, (Callback)func_800C1EA0,
     (Callback)func_800C1D54, (Callback)func_800C26D4, (Callback)func_800C1E2C, (Callback)func_800C1AA8,
 };

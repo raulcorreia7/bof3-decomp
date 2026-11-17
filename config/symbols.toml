@@ -33,15 +33,16 @@ g_BattleEvents = { addr = 0x801D0C84, source = "Battle event handlers." }
 s_BattleCueIds = { addr = 0x801D0C98, source = "Picks a random battle cue id for the battle mode." }
 jtbl_801D0CA0 = { addr = 0x801D0CA0, type = "Callback", source = "The switch table of func_801DEFE4: the jump targets of its jr dispatch." }
 g_BattleDropChances = { addr = 0x801D0CB8, source = "Enemy item drop chances." }
-g_BattleEffectStages = { addr = 0x801D0CC0, source = "Battle effect stage handlers." }
-g_BattleEffectStage0Steps = { addr = 0x801D0CD0, source = "Battle effect handlers for the first effect stage, one per slot kind." }
-g_BattleEffectStage1Steps = { addr = 0x801D0D1C, source = "Battle effect handlers for the second effect stage, one per slot kind." }
-g_BattleEffectStage3Steps = { addr = 0x801D0ED4, source = "Battle effect handlers for the fourth effect stage, one per slot kind." }
+g_BattleEffectModes = { addr = 0x801D0CC0, source = "Battle effect mode handlers, indexed by the slot mode." }
+g_BattleBattlerEffectSteps = { addr = 0x801D0CD0, source = "Battle effect handlers for the battler effects (damage number, pose, ghost, form change), one per slot kind." }
+g_BattleMagicEffectSteps = { addr = 0x801D0D1C, source = "Battle effect handlers for the magic effects the bmagic overlays queue, one per slot kind." }
+g_BattleBossEffectSteps = { addr = 0x801D0ED4, source = "Battle effect handlers for the boss effects the boss overlays queue, one per slot kind." }
 g_BattleDamageNumberSteps = { addr = 0x801D0EF4, source = "The damage number effect's five step routines" }
-jtbl_801D0F0C = { addr = 0x801D0F0C, type = "Callback", source = "The switch table of Battle_UpdateDamageNumber: the jump targets of its jr dispatch." }
+jtbl_801D0F0C = { addr = 0x801D0F0C, type = "Callback", source = "The switch table of func_801E5CA4: the jump targets of its jr dispatch." }
 g_BattleScreenFlashSteps = { addr = 0x801D0F20, source = "The screen flash effect's three step routines" }
 g_BattleScreenFadeSteps = { addr = 0x801D0F2C, source = "The screen fade effect's three step routines" }
 g_BattleAilmentActorSteps = { addr = 0x801D0F44, source = "The ailment actor's five step routines" }
+g_BattleFormChangeSteps = { addr = 0x801D0F6C, source = "The form change effect's five step routines." }
 g_BattlePanelModes = { addr = 0x801D0F80, source = "Battle panel update handlers." }
 g_BattlePartyPanelSteps = { addr = 0x801D0FA0, source = "The party panel's three state steps." }
 g_BattleMenuRowsPanelSteps = { addr = 0x801D0FAC, source = "The menu rows panel's three state steps." }
@@ -53,12 +54,22 @@ g_BattleMessagePanelSteps = { addr = 0x801D1004, source = "The message panel's f
 Battle_Update = { addr = 0x801D1014, type = "func", source = "Runs one frame of battle." }
 Battle_DispatchMode = { addr = 0x801D112C, type = "func", source = "Runs the current battle mode." }
 Battle_DispatchStep = { addr = 0x801D11D8, type = "func", source = "Runs the current battle step." }
+Battle_Reset = { addr = 0x801D1228, type = "func", source = "Resets the battle state, the living party count and the per-slot rows." }
 Battle_DispatchEntrance = { addr = 0x801D17C4, type = "func", source = "Runs the current battle entrance step." }
 Battle_OpenPanels = { addr = 0x801D1828, type = "func", source = "Reserves battle stage panels for active battlers." }
 Battle_WaitForUI = { addr = 0x801D1AB4, type = "func", source = "Holds the battle entrance until the UI is ready." }
 Battle_InitPanels = { addr = 0x801D1AE8, type = "func", source = "Sets the battle panel widths." }
 Battle_EnterIntro = { addr = 0x801D1B94, type = "func", source = "Arms the intro panel and advances the battle mode once the loader is ready." }
+Battle_UpdateCommands = { addr = 0x801D1C54, type = "func", source = "Battle mode 1: runs the command step the battle step selects." }
+Battle_StartCommands = { addr = 0x801D1C90, type = "func", source = "Command step 0: clears the command count, then arms the commands or starts the first member." }
+Battle_NextCommandMember = { addr = 0x801D1D10, type = "func", source = "Command step 1: starts the next party member whose row is idle." }
+Battle_ReadCommandMenu = { addr = 0x801D1E8C, type = "func", source = "Command step 2: reads the menu input, cancel and row cursor." }
+Battle_UpdateCommandPanel = { addr = 0x801D22AC, type = "func", source = "Command step 3: runs the panel step the sub-step selects." }
+Battle_ShrinkCommandPanel = { addr = 0x801D22E8, type = "func", source = "Command panel step 0: narrows the slot's panel, then draws the panels." }
 Battle_DrawEntrances = { addr = 0x801D238C, type = "func", source = "Draws the battle entrances." }
+Battle_GrowCommandPanel = { addr = 0x801D2480, type = "func", source = "Command panel step 2: widens the slot's panel, then returns to command step 2." }
+Battle_RunCommand = { addr = 0x801D24D4, type = "func", source = "Command step 4: runs the command handler the sub-step selects." }
+Battle_StartDefend = { addr = 0x801D251C, type = "func", source = "Command handler: sets the actor's command to defend." }
 Battle_ArmCommands = { addr = 0x801D25A0, type = "func", source = "Arms the battler commands." }
 Battle_UpdateTurnSetup = { addr = 0x801D2740, type = "func", source = "Battle mode 2: runs the g_BattleStep handler of the turn setup (builds the turn order, announces the enemies, waits for the loader and enters mode 3)." }
 Battle_UpdateTurns = { addr = 0x801D2AA8, type = "func", source = "Battle mode 3: runs the g_BattleStep handler of the battlers' turns, and clears BATTLE_STATE_COMMAND_ARMED while the cancel button is held." }
@@ -74,7 +85,7 @@ Battle_GetActionLock = { addr = 0x801D64C4, type = "func", source = "the body re
 Battle_WaitVoiceSlots = { addr = 0x801D656C, type = "func", source = "Waits for the voice slots to clear." }
 Battle_UpdateResult = { addr = 0x801D6774, type = "func", source = "Battle mode 5: runs the g_BattleStep handler of the battle result." }
 Battle_LoadEndOverlay = { addr = 0x801D6A14, type = "func", source = "Finishes the battle setup pass: returns while a party battler has BATTLER_DAMAGE_FORM_EFFECT_PLAYING, steps g_BattleSubStep back when g_BattleRowCursor differs from g_BattlePartyCount, otherwise on no defeat revives or cures each party battler, sets g_BattleStep to 2 or 1 by the result flags and starts the EMI_SLOT_BATL_END load." }
-Battle_WaitAreaReload = { addr = 0x801D716C, type = "func", source = "Step after Battle_ReloadAreaAudio in the D_801EABB8 step table: when EMI_IsReady, moves the battle phase to step 4 with sub_step 0." }
+Battle_WaitAreaReload = { addr = 0x801D716C, type = "func", source = "Step after Battle_ReloadAreaAudio in the g_BattleCommandSteps table: when EMI_IsReady, moves the battle phase to step 4 with sub_step 0." }
 Battle_WriteBackParty = { addr = 0x801D7350, type = "func", source = "Copies the party's battle state back to the field characters." }
 Battle_DrawPartyPanel = { addr = 0x801D750C, type = "func", source = "the body stores into g_Battle.party_count" }
 Battle_DrawPanelRows = { addr = 0x801D7A40, type = "func", source = "Draws the queued battle panel rows." }
@@ -136,6 +147,9 @@ Battle_RunDesertDefeat = { addr = 0x801E5768, type = "func", source = "Installed
 Battle_UpdateEffects = { addr = 0x801E5824, type = "func", source = "Runs active battle effects." }
 Battle_AllocEffect = { addr = 0x801E590C, type = "func", source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "clears every timer, state and flag byte of the shared BattleEffect work record (0x00-0x06, 0x48, 0x5D-0x5F); every effect countdown calls it first" }
+Battle_RunBattlerEffect = { addr = 0x801E5AF4, type = "func", source = "Runs the battler effect handler the slot's step index selects." }
+Battle_RunMagicEffect = { addr = 0x801E5B8C, type = "func", source = "Runs the magic effect handler the slot's step index selects." }
+Battle_RunBossEffect = { addr = 0x801E5C1C, type = "func", source = "Runs the boss effect handler the slot's step index selects." }
 Battle_UpdateDamageNumber = { addr = 0x801E5CA4, type = "func", source = "Runs the damage number effect: its step, then the digits drawn over the target." }
 Battle_StartDamageNumber = { addr = 0x801E5E2C, type = "func", source = "Damage number step 0: places the number over the target, counts its digits and flags the target." }
 Battle_HoldDamageNumber = { addr = 0x801E6088, type = "func", source = "Damage number step 1: waits before the number rises." }
@@ -147,6 +161,9 @@ Battle_UpdateScreenFlash = { addr = 0x801E63C0, type = "func", source = "Runs th
 Battle_StartScreenFlash = { addr = 0x801E6420, type = "func", source = "Screen flash step 0: queues the action's text and sets the flash start values." }
 Battle_RaiseScreenFlash = { addr = 0x801E64B4, type = "func", source = "Screen flash step 1: pulls the camera back while the flash colour rises." }
 Battle_LowerScreenFlash = { addr = 0x801E65F8, type = "func", source = "Screen flash step 2: returns the camera while the flash colour falls, then ends the effect." }
+Battle_UpdatePoseActor = { addr = 0x801E6724, type = "func", source = "Runs the pose actor step: start, then play." }
+Battle_StartPoseActor = { addr = 0x801E679C, type = "func", source = "Pose actor step 0: picks the pose script by the effect's pose and the facing, and starts the actor." }
+Battle_PlayPoseActor = { addr = 0x801E68EC, type = "func", source = "Pose actor step 1: plays the pose animation and ends the effect when it is done." }
 Battle_UpdateScreenFade = { addr = 0x801E6930, type = "func", source = "Runs the screen fade effect step." }
 Battle_StartScreenFade = { addr = 0x801E6990, type = "func", source = "Screen fade step 0: zeroes the fade level." }
 Battle_RaiseScreenFade = { addr = 0x801E69C0, type = "func", source = "Screen fade step 1: fills the screen with the fade level and raises it to 0xFF." }
@@ -157,7 +174,17 @@ Battle_StartAilmentActor = { addr = 0x801E6E54, type = "func", source = "Ailment
 Battle_RestartAilmentActor = { addr = 0x801E6FA0, type = "func", source = "Ailment actor step 2: returns to step 0." }
 Battle_RunAilmentActor = { addr = 0x801E6FB0, type = "func", source = "Ailment actor step 3: plays the ailment actor until the ailment ends." }
 Battle_WaitAilmentEffect = { addr = 0x801E71EC, type = "func", source = "Ailment actor step 4: holds while an effect plays, then returns to step 0 or 3." }
+Battle_UpdateBattlerGhost = { addr = 0x801E72A8, type = "func", source = "Runs the battler ghost effect." }
+Battle_CopyBattlerGhost = { addr = 0x801E72F4, type = "func", source = "Copies the battler's pose, scale and position into a semi-transparent actor; ends outside the command phase." }
+Battle_UpdateFormChange = { addr = 0x801E7818, type = "func", source = "Runs the form change effect step." }
+Battle_StartFormChange = { addr = 0x801E7888, type = "func", source = "Form change step 0: flags the battler as changing form." }
+Battle_WaitFormChange = { addr = 0x801E78F0, type = "func", source = "Form change step 1: waits for the form change to be ready." }
 Battle_StartCharacterLoad = { addr = 0x801E7948, type = "func", source = "Starts the EMI load of the party sprite archive of g_EmiLoadedCharacterIndex (front or back by the facing of g_BattleEffectBattler; the BPLD and BPLU archives, or the 513 to 520 variants of the reload) and advances the mode." }
+Battle_RebuildFormBattler = { addr = 0x801E7BA0, type = "func", source = "Form change step 3: when the archive is loaded, rebuilds the party battler from its template." }
+Battle_EndFormChange = { addr = 0x801E8558, type = "func", source = "Form change step 4: fades the battler in, then clears its form change and dragon form flags." }
+Battle_UpdateFormRestore = { addr = 0x801E862C, type = "func", source = "Runs the form restore effect step." }
+Battle_StartFormRestore = { addr = 0x801E8684, type = "func", source = "Form restore step 0: rebuilds the party battler from its template in place." }
+Battle_EndFormRestore = { addr = 0x801E8D04, type = "func", source = "Form restore step 1: fades the battler in, then clears its form change and dragon form flags." }
 Battle_UpdatePanel = { addr = 0x801E9074, type = "func", source = "Runs the current battle panel task: its mode selects the update routine." }
 Battle_UpdatePartyPanel = { addr = 0x801E90FC, type = "func", source = "Party panel mode: runs the panel state step." }
 Battle_SlideInPartyPanel = { addr = 0x801E915C, type = "func", source = "Party panel state 0: slides the panel up to y 200, then draws it." }
@@ -186,6 +213,9 @@ Battle_SlideOutMessagePanel = { addr = 0x801EA9FC, type = "func", source = "Mess
 Battle_DrawMessagePanel = { addr = 0x801EAAB8, type = "func", source = "Draws the message panel frame and the current message." }
 Battle_AdvanceMessage = { addr = 0x801EAB38, type = "func", source = "Steps to the next message; true when the queue is drained." }
 Battle_CountMessageChars = { addr = 0x801EAB6C, type = "func", source = "Counts a message's characters, a code that takes an argument as one." }
+g_BattleCommandSteps = { addr = 0x801EABB8, source = "The command mode's five steps." }
+g_BattleCommandPanelSteps = { addr = 0x801EABD8, source = "The command panel's three steps." }
+g_BattleRunCommandSteps = { addr = 0x801EABE4, source = "The command handlers, eight per sub-step." }
 g_BattleRecallAbilities = { addr = 0x801EAC58, source = "Abilities that Recall can cast." }
 g_BattleMagicShuffleAbilities = { addr = 0x801EAC78, source = "Abilities that MagicShuffle and Trump can cast." }
 s_BattlePanelOffsets = { addr = 0x801EAE94, source = "Battle panel positions." }
@@ -205,7 +235,7 @@ g_BattleEnemies = { addr = 0x801EB2E8, alias = true, source = "The enemy battler
 s_BattlePartialPartyTargetWeights = { addr = 0x801EB394, source = "Target weights for a party with two active members." }
 s_BattleFullPartyTargetWeights = { addr = 0x801EB39C, source = "Target weights for a party with three active members." }
 s_BattleBattlerStepIds = { addr = 0x801EB494, source = "Step ids of the battlers." }
-g_BattleActorTurn = { addr = 0x801EB4D8, source = "the acting party battler's BattleTurn, set with g_BattleMessageSlot in func_801D1D10 (emi/battle/battle/03 owns the cell); the target pickers write command.target, command.type and command.id, func_801D251C sets the defending damage flag" }
+g_BattleActorTurn = { addr = 0x801EB4D8, source = "the acting party battler's BattleTurn, set with g_BattleMessageSlot in Battle_NextCommandMember (emi/battle/battle/03 owns the cell); the target pickers write command.target, command.type and command.id, Battle_StartDefend sets the defending damage flag" }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleCurrentEnemy = { addr = 0x801EB4E8, size = 0x4, source = "Enemy whose battle script is running." }
 g_BattleEventSlots = { addr = 0x801EB4F0, source = "Twelve-byte slots of the queued battle events; Battle_UpdateEvents runs the slot of each active event." }
@@ -214,8 +244,8 @@ D_801EB4F1 = { addr = 0x801EB4F1, alias = true, source = "Event kind of each bat
 D_801EB4F4 = { addr = 0x801EB4F4, alias = true, source = "Message text pointer of each battle event slot, drawn by the battle event panels." }
 D_801EB4FA = { addr = 0x801EB4FA, alias = true, source = "Text style argument of each battle event slot, zeroed when queued and passed to UI_DrawText by the event panels." }
 g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_CHARACTERS_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
-g_BattleMessageSlot = { addr = 0x801EBF08, size = 0x4, source = "Pointer to the battler row that the battle messages name; func_801D1D10 sets it to the acting party battler." }
-s_BattleBattlerTemplates = { addr = 0x801EBF20, type = "PartyMember", size = 0x3C0, source = "Work row templates of the party battlers: func_801E8684 copies row n into g_Game.members[n], and bit 0 of a row's first byte marks it active for func_801E7B34." }
+g_BattleMessageSlot = { addr = 0x801EBF08, size = 0x4, source = "Pointer to the battler row that the battle messages name; Battle_NextCommandMember sets it to the acting party battler." }
+s_BattleBattlerTemplates = { addr = 0x801EBF20, type = "PartyMember", size = 0x3C0, source = "Work row templates of the party battlers: Battle_StartFormRestore copies row n into g_Game.members[n], and bit 0 of a row's first byte marks it active for func_801E7B34." }
 s_BattleBattlerTemplateTails = { addr = 0x801EC048, alias = true, source = "row 0 turn.action_flags of s_BattleBattlerTemplates (+0x128); the tail global folded into the PartyMember rows in #503" }
 g_BattleEffects = { addr = 0x801EC330, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
 Effect_StartPlaying = { addr = 0x801EF00C, alias = true, source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic150 (Eye Beam)." }

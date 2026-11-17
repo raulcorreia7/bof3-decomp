@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801D1C90(void) {
+/* func_801D1C90 */
+MATCH void Battle_StartCommands(void) {
     int index = 0;
     func_801DB494();
     func_801DA7D4();

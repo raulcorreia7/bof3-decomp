@@ -38,8 +38,8 @@ BattleEffect4Steps D_801D0F58 = {
 };
 
 /* 0x801D0F6C */
-BattleSavedPreviewModes D_801D0F6C = {
-    (Callback)func_801E7888, (Callback)func_801E78F0, (Callback)Battle_StartCharacterLoad, (Callback)func_801E7BA0, (Callback)func_801E8558,
+BattleFormChangeSteps g_BattleFormChangeSteps = {
+    (Callback)Battle_StartFormChange, (Callback)Battle_WaitFormChange, (Callback)Battle_StartCharacterLoad, (Callback)Battle_RebuildFormBattler, (Callback)Battle_EndFormChange,
 };
 
 /* 0x801D0F80 */

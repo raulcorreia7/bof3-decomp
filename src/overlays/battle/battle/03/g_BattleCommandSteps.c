@@ -11,9 +11,8 @@
 /* In-overlay dispatch targets (split assembly units). */
 
 /* 0x801EABB8 */
-Callback D_801EABB8[5] = {
-    (Callback)func_801D1C90, (Callback)func_801D1D10, (Callback)func_801D1E8C,
-    (Callback)func_801D22AC, (Callback)func_801D24D4,
+Callback g_BattleCommandSteps[5] = {
+    (Callback)Battle_StartCommands, (Callback)Battle_NextCommandMember, (Callback)Battle_ReadCommandMenu, (Callback)Battle_UpdateCommandPanel, (Callback)Battle_RunCommand,
 };
 
 /* 0x801EABCC */
@@ -24,16 +23,16 @@ static u32 s_gap_801EABCC[3] = {
 };
 
 /* 0x801EABD8 */
-Callback D_801EABD8[3] = {
-    (Callback)func_801D22E8,
+Callback g_BattleCommandPanelSteps[3] = {
+    (Callback)Battle_ShrinkCommandPanel,
     (Callback)Battle_DrawEntrances,
-    (Callback)func_801D2480,
+    (Callback)Battle_GrowCommandPanel,
 };
 
 /* 0x801EABE4 */
-Callback D_801EABE4[8] = {
-    (Callback)Battle_RunAttackCommand, (Callback)Battle_RunAbilityCommand, (Callback)Battle_RunItemCommand, (Callback)func_800980A8,
-    (Callback)func_801D251C, (Callback)Battle_ArmCommands, (Callback)Battle_RunEscapeCommand, (Callback)func_800A4688,
+Callback g_BattleRunCommandSteps[8] = {
+    (Callback)Battle_RunAttackCommand, (Callback)Battle_RunAbilityCommand, (Callback)Battle_RunItemCommand,   (Callback)func_800980A8,
+    (Callback)Battle_StartDefend,      (Callback)Battle_ArmCommands,       (Callback)Battle_RunEscapeCommand, (Callback)func_800A4688,
 };
 
 /* 0x801EAC04 */
@@ -45,8 +44,7 @@ Callback D_801EAC04[3] = {
 
 /* 0x801EAC10 */
 Callback D_801EAC10[5] = {
-    (Callback)func_801D2B1C, (Callback)func_801D3014, (Callback)func_801D3C88,
-    (Callback)func_801D3FEC, (Callback)func_801D43EC,
+    (Callback)func_801D2B1C, (Callback)func_801D3014, (Callback)func_801D3C88, (Callback)func_801D3FEC, (Callback)func_801D43EC,
 };
 
 /* 0x801EAC24 */
@@ -57,8 +55,7 @@ Callback D_801EAC24[2] = {
 
 /* 0x801EAC2C */
 Callback D_801EAC2C[6] = {
-    (Callback)func_801D3050, (Callback)func_801D3168, (Callback)func_801D3050,
-    (Callback)func_801D31C0, (Callback)func_801D32C8, (Callback)func_801D3A28,
+    (Callback)func_801D3050, (Callback)func_801D3168, (Callback)func_801D3050, (Callback)func_801D31C0, (Callback)func_801D32C8, (Callback)func_801D3A28,
 };
 
 /* 0x801EAC44 */
@@ -80,8 +77,7 @@ Callback D_801EAC4C[3] = {
  * Burn entry weights the pick. */
 /* D_801EAC58 */
 volatile u8 g_BattleRecallAbilities[32] = {
-    0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76,
-    0x5B, 0x5B, 0x5E, 0x5E, 0x64, 0x61, 0x67, 0x5C, 0x5F, 0x65, 0x62, 0x46, 0x4B, 0x52, 0x54, 0x55,
+    0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x5B, 0x5B, 0x5E, 0x5E, 0x64, 0x61, 0x67, 0x5C, 0x5F, 0x65, 0x62, 0x46, 0x4B, 0x52, 0x54, 0x55,
 };
 
 /* 0x801EAC78: the abilities `MagicShuffle` (37) and `Trump` (140) cast at
@@ -90,8 +86,7 @@ volatile u8 g_BattleRecallAbilities[32] = {
  * repeated Burn entry weights the pick. */
 /* D_801EAC78 */
 volatile u8 g_BattleMagicShuffleAbilities[32] = {
-    0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x5B, 0x5B, 0x5E, 0x5E, 0x64, 0x61, 0x67, 0x5C,
-    0x5F, 0x65, 0x62, 0x66, 0x6A, 0x5D, 0x60, 0x46, 0x47, 0x4B, 0x52, 0x54, 0x55, 0x6B, 0x6C, 0x37,
+    0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x76, 0x5B, 0x5B, 0x5E, 0x5E, 0x64, 0x61, 0x67, 0x5C, 0x5F, 0x65, 0x62, 0x66, 0x6A, 0x5D, 0x60, 0x46, 0x47, 0x4B, 0x52, 0x54, 0x55, 0x6B, 0x6C, 0x37,
 };
 
 /* 0x801EAC98 */
@@ -131,8 +126,7 @@ Callback D_801EACC8[3] = {
 
 /* 0x801EACD4 */
 Callback D_801EACD4[5] = {
-    (Callback)func_801D67B0, (Callback)func_801D6C84, (Callback)func_801D6DE4,
-    (Callback)func_801D6EEC, (Callback)func_801D71A4,
+    (Callback)func_801D67B0, (Callback)func_801D6C84, (Callback)func_801D6DE4, (Callback)func_801D6EEC, (Callback)func_801D71A4,
 };
 
 /* 0x801EACE8 */
@@ -158,8 +152,7 @@ Callback D_801EAD00[3] = {
 
 /* 0x801EAD0C */
 Callback D_801EAD0C[5] = {
-    (Callback)func_801D67EC, (Callback)func_801D6818, (Callback)Battle_ReloadPartySprites,
-    (Callback)Battle_ReloadAreaAudio, (Callback)Battle_WaitAreaReload,
+    (Callback)func_801D67EC, (Callback)func_801D6818, (Callback)Battle_ReloadPartySprites, (Callback)Battle_ReloadAreaAudio, (Callback)Battle_WaitAreaReload,
 };
 
 /* 0x801EAD20 */
@@ -172,38 +165,32 @@ Callback D_801EAD20[4] = {
 
 /* 0x801EAD30 */
 s16 D_801EAD30[144] = {
-    2,  0, 103, 0, 0,  2, 105, 2, 1,  0, 104, 0, 3,  2, 102, 2, 2,  0, 74,  0, 0,   2, 76,  2, 1,   0, 75, 0, 3,   2,
-    73, 2, 2,   0, 70, 0, 0,   2, 72, 2, 1,   0, 71, 0, 3,   2, 69, 2, 2,   0, 102, 0, 0,   2, 104, 2, 1,  0, 103, 0,
-    3,  2, 101, 2, 2,  0, 278, 0, 0,  2, 280, 2, 1,  0, 279, 0, 3,  2, 277, 2, 2,   0, 38,  0, 0,   2, 40, 2, 1,   0,
-    39, 0, 3,   2, 37, 2, 2,   0, 94, 0, 0,   2, 96, 2, 1,   0, 95, 0, 3,   2, 93,  2, 2,   0, 188, 0, 0,  2, 190, 2,
-    1,  0, 189, 0, 3,  2, 187, 2, 2,  0, 282, 0, 0,  2, 284, 2, 1,  0, 283, 0, 3,   2, 281, 2,
+    2, 0, 103, 0, 0, 2, 105, 2, 1, 0, 104, 0, 3, 2, 102, 2, 2, 0, 74,  0, 0, 2, 76,  2, 1, 0, 75,  0, 3, 2, 73,  2, 2, 0, 70,  0, 0, 2, 72,  2, 1, 0, 71,  0, 3, 2, 69,  2,
+    2, 0, 102, 0, 0, 2, 104, 2, 1, 0, 103, 0, 3, 2, 101, 2, 2, 0, 278, 0, 0, 2, 280, 2, 1, 0, 279, 0, 3, 2, 277, 2, 2, 0, 38,  0, 0, 2, 40,  2, 1, 0, 39,  0, 3, 2, 37,  2,
+    2, 0, 94,  0, 0, 2, 96,  2, 1, 0, 95,  0, 3, 2, 93,  2, 2, 0, 188, 0, 0, 2, 190, 2, 1, 0, 189, 0, 3, 2, 187, 2, 2, 0, 282, 0, 0, 2, 284, 2, 1, 0, 283, 0, 3, 2, 281, 2,
 };
 
 /* 0x801EAE50 */
 u16 D_801EAE50[34] = {
-    0x0069, 0x000C, 0x0014, 0x0006, 0x0069, 0x000E, 0x0118, 0x000F, 0x0118, 0x00B4, 0x0028, 0x000F,
-    0x0048, 0x000F, 0x0000, 0x0000, 0x004C, 0x0011, 0x0038, 0x0006, 0x0068, 0x000F, 0x0141, 0x00F1,
-    0x0069, 0x0003, 0x0015, 0x0006, 0x0060, 0x0016, 0x00BE, 0x0016, 0x011C, 0x0016,
+    0x0069, 0x000C, 0x0014, 0x0006, 0x0069, 0x000E, 0x0118, 0x000F, 0x0118, 0x00B4, 0x0028, 0x000F, 0x0048, 0x000F, 0x0000, 0x0000, 0x004C,
+    0x0011, 0x0038, 0x0006, 0x0068, 0x000F, 0x0141, 0x00F1, 0x0069, 0x0003, 0x0015, 0x0006, 0x0060, 0x0016, 0x00BE, 0x0016, 0x011C, 0x0016,
 };
 
 /* 0x801EAE94 */
 /* D_801EAE94 */
 u8 s_BattlePanelOffsets[14][2] = {
-    {0x10, 0x10}, {0x10, 0x00}, {0x10, 0x20}, {0x00, 0x10}, {0x20, 0x10}, {0x00, 0x00}, {0x20, 0x00},
-    {0x00, 0x00}, {0x15, 0x12}, {0xA0, 0x3A}, {0x5D, 0x00}, {0xBB, 0x00}, {0x19, 0x01}, {0x00, 0x00},
+    {0x10, 0x10}, {0x10, 0x00}, {0x10, 0x20}, {0x00, 0x10}, {0x20, 0x10}, {0x00, 0x00}, {0x20, 0x00}, {0x00, 0x00}, {0x15, 0x12}, {0xA0, 0x3A}, {0x5D, 0x00}, {0xBB, 0x00}, {0x19, 0x01}, {0x00, 0x00},
 };
 
 /* 0x801EAEB0 */
 volatile u32 D_801EAEB0[14] = {
-    0x006B7441, 0x00000000, 0x006C6241, 0x00000000, 0x00657355, 0x00000000, 0x00617845,
-    0x00000000, 0x00666544, 0x00000000, 0x00676843, 0x00000000, 0x00637345, 0x00000000,
+    0x006B7441, 0x00000000, 0x006C6241, 0x00000000, 0x00657355, 0x00000000, 0x00617845, 0x00000000, 0x00666544, 0x00000000, 0x00676843, 0x00000000, 0x00637345, 0x00000000,
 };
 
 /* 0x801EAEE8 */
 BattlePanelFrame D_801EAEE8[7] = {
-    {108, 122, {0x97, 0x00, 0x76, 0x00}}, {140, 62, {0x9F, 0x00, 0x54, 0x00}},  {140, 142, {0x9F, 0x00, 0x8B, 0x00}},
-    {88, 101, {0x85, 0x00, 0x6F, 0x00}},  {191, 101, {0xBA, 0x00, 0x6F, 0x00}}, {88, 70, {0x82, 0x00, 0x52, 0x00}},
-    {191, 70, {0xBC, 0x00, 0x52, 0x00}},
+    {108, 122, {0x97, 0x00, 0x76, 0x00}}, {140, 62, {0x9F, 0x00, 0x54, 0x00}}, {140, 142, {0x9F, 0x00, 0x8B, 0x00}}, {88, 101, {0x85, 0x00, 0x6F, 0x00}},
+    {191, 101, {0xBA, 0x00, 0x6F, 0x00}}, {88, 70, {0x82, 0x00, 0x52, 0x00}},  {191, 70, {0xBC, 0x00, 0x52, 0x00}},
 };
 
 /* 0x801EAF20 */
@@ -252,8 +239,7 @@ s16 D_801EAFC0[8] = {
 
 /* 0x801EAFD0 */
 u16 D_801EAFD0[18] = {
-    0x0300, 0x0400, 0x0500, 0x0301, 0x0401, 0x0501, 0x0302, 0x0402, 0x0502,
-    0x0303, 0x0403, 0x0503, 0x0304, 0x0404, 0x0504, 0x0305, 0x0405, 0x0505,
+    0x0300, 0x0400, 0x0500, 0x0301, 0x0401, 0x0501, 0x0302, 0x0402, 0x0502, 0x0303, 0x0403, 0x0503, 0x0304, 0x0404, 0x0504, 0x0305, 0x0405, 0x0505,
 };
 
 /* 0x801EAFF4 */
@@ -274,18 +260,7 @@ u8 s_BattleStatusRecoveryChances[4] = {
 /* 0x801EB000 */
 /* D_801EB000 */
 u8 s_BattleActionNames[12][13] = {
-    "Attack",
-    T_SP T_NUM "\x1B" T_NUM "\x1C",
-    "Examine",
-    T_SP T_NUM "\x1F" T_NUM "\x20",
-    "Defend",
-    "Charge",
-    "Reprisal",
-    "Critical",
-    "Lucky" T_SP "Strike",
-    "Instant" T_SP "Kill",
-    "Escape",
-    "Counter",
+    "Attack", T_SP T_NUM "\x1B" T_NUM "\x1C", "Examine", T_SP T_NUM "\x1F" T_NUM "\x20", "Defend", "Charge", "Reprisal", "Critical", "Lucky" T_SP "Strike", "Instant" T_SP "Kill", "Escape", "Counter",
 };
 
 /* 0x801EB09C */
@@ -296,17 +271,14 @@ volatile u16 D_801EB09C[1][10] = {
 /* 0x801EB0B0 */
 /* D_801EB0B0 */
 s8 g_BattlePanelOffsets[88] = {
-    4,  -16, -4, -16, -4, -16, 4, -16, 0,  -16, 0, -16, 0,  -12, 0, -12, 0,  -25, 0, -25, 0,  -25,
-    0,  -25, 0,  -16, 0,  -16, 4, -16, -4, -16, 0, -30, 0,  -30, 0, -30, 0,  -30, 4, -16, -4, -16,
-    4,  -16, -4, -16, 4,  -6,  0, -6,  0,  -6,  0, -6,  -8, -20, 8, -20, -2, -12, 2, -12, 4,  -22,
-    -4, -22, 0,  -22, 0,  -22, 4, -16, 0,  -16, 0, -16, 0,  -16, 0, -18, 0,  -18, 0, -18, 0,  -18,
+    4, -16, -4, -16, -4, -16, 4, -16, 0, -16, 0, -16, 0,  -12, 0, -12, 0,  -25, 0, -25, 0, -25, 0,  -25, 0, -16, 0, -16, 4, -16, -4, -16, 0, -30, 0, -30, 0, -30, 0, -30, 4, -16, -4, -16,
+    4, -16, -4, -16, 4,  -6,  0, -6,  0, -6,  0, -6,  -8, -20, 8, -20, -2, -12, 2, -12, 4, -22, -4, -22, 0, -22, 0, -22, 4, -16, 0,  -16, 0, -16, 0, -16, 0, -18, 0, -18, 0, -18, 0,  -18,
 };
 
 /* 0x801EB108 */
 /* D_801EB108 */
 u8 s_BattlePanelYOffsets[20] = {
-    0x18, 0x18, 0x20, 0x1C, 0x34, 0x34, 0x1C, 0x1C, 0x2E, 0x2E,
-    0x26, 0x26, 0x14, 0x14, 0x28, 0x20, 0x28, 0x26, 0x00, 0x00,
+    0x18, 0x18, 0x20, 0x1C, 0x34, 0x34, 0x1C, 0x1C, 0x2E, 0x2E, 0x26, 0x26, 0x14, 0x14, 0x28, 0x20, 0x28, 0x26, 0x00, 0x00,
 };
 
 /* 0x801EB11C */
@@ -314,17 +286,15 @@ static u8 s_gap_801EB11C[4] = {0};
 
 /* 0x801EB120 */
 Callback D_801EB120[15] = {
-    (Callback)func_801DEF0C, (Callback)func_801DEFDC, (Callback)func_801DF3B8, (Callback)func_801DF3F8,
-    (Callback)func_801DF8AC, (Callback)func_801DFA1C, (Callback)func_801DFBDC, (Callback)func_801E1670,
-    (Callback)func_801E1990, (Callback)func_801E1B5C, (Callback)func_801E1B64, (Callback)func_801E1C78,
-    (Callback)func_801E1CD8, (Callback)func_801DF768, (Callback)func_801DF7EC,
+    (Callback)func_801DEF0C, (Callback)func_801DEFDC, (Callback)func_801DF3B8, (Callback)func_801DF3F8, (Callback)func_801DF8AC,
+    (Callback)func_801DFA1C, (Callback)func_801DFBDC, (Callback)func_801E1670, (Callback)func_801E1990, (Callback)func_801E1B5C,
+    (Callback)func_801E1B64, (Callback)func_801E1C78, (Callback)func_801E1CD8, (Callback)func_801DF768, (Callback)func_801DF7EC,
 };
 
 /* 0x801EB15C */
 Callback D_801EB15C[11] = {
-    (Callback)func_801DF914, (Callback)func_801DF914, (Callback)func_801DF914, (Callback)func_801DF914,
-    (Callback)func_801DF914, (Callback)func_801DF914, (Callback)func_801DF914, (Callback)func_801DF914,
-    (Callback)func_801DF914, (Callback)func_801DF914, (Callback)func_801DF914,
+    (Callback)func_801DF914, (Callback)func_801DF914, (Callback)func_801DF914, (Callback)func_801DF914, (Callback)func_801DF914, (Callback)func_801DF914,
+    (Callback)func_801DF914, (Callback)func_801DF914, (Callback)func_801DF914, (Callback)func_801DF914, (Callback)func_801DF914,
 };
 
 /* 0x801EB188 */
@@ -335,9 +305,8 @@ Callback D_801EB188[1] = {
 /* 0x801EB18C */
 /* D_801EB18C */
 u8 s_BattleCharacterSprites[0x28] = {
-    0x0D, 0x26, 0x19, 0x0A, 0x0A, 0x04, 0x23, 0x12, 0x0B, 0x0A, 0x20, 0x00, 0x21, 0x16,
-    0x10, 0x13, 0x12, 0x16, 0x21, 0x12, 0x12, 0x21, 0x00, 0x08, 0x10, 0x13, 0x11, 0x0D,
-    0x0D, 0x11, 0x11, 0x00, 0x00, 0x0F, 0x0F, 0x0C, 0x0C, 0x00, 0x00, 0x00,
+    0x0D, 0x26, 0x19, 0x0A, 0x0A, 0x04, 0x23, 0x12, 0x0B, 0x0A, 0x20, 0x00, 0x21, 0x16, 0x10, 0x13, 0x12, 0x16, 0x21, 0x12,
+    0x12, 0x21, 0x00, 0x08, 0x10, 0x13, 0x11, 0x0D, 0x0D, 0x11, 0x11, 0x00, 0x00, 0x0F, 0x0F, 0x0C, 0x0C, 0x00, 0x00, 0x00,
 };
 
 /* 0x801EB1B4 */
@@ -349,8 +318,7 @@ Callback g_BattleTaskSteps[2] = {
 
 /* 0x801EB1BC */
 Callback D_801EB1BC[6] = {
-    (Callback)func_801DFC20, (Callback)func_801DFC70, (Callback)func_801DFC20,
-    (Callback)func_801E046C, (Callback)func_801E0744, (Callback)func_801E1450,
+    (Callback)func_801DFC20, (Callback)func_801DFC70, (Callback)func_801DFC20, (Callback)func_801E046C, (Callback)func_801E0744, (Callback)func_801E1450,
 };
 
 /* 0x801EB1D4 */
@@ -362,14 +330,12 @@ Callback D_801EB1D4[3] = {
 
 /* 0x801EB1E0 */
 Callback D_801EB1E0[5] = {
-    (Callback)func_801E04B0, (Callback)func_801E0554, (Callback)func_801E05EC,
-    (Callback)func_801E06EC, (Callback)func_801E020C,
+    (Callback)func_801E04B0, (Callback)func_801E0554, (Callback)func_801E05EC, (Callback)func_801E06EC, (Callback)func_801E020C,
 };
 
 /* 0x801EB1F4 */
 Callback D_801EB1F4[7] = {
-    (Callback)func_801E0788, (Callback)func_801E0F0C, (Callback)func_801E1050, (Callback)func_801E10C8,
-    (Callback)func_801E1298, (Callback)func_801E10C8, (Callback)func_801E10C8,
+    (Callback)func_801E0788, (Callback)func_801E0F0C, (Callback)func_801E1050, (Callback)func_801E10C8, (Callback)func_801E1298, (Callback)func_801E10C8, (Callback)func_801E10C8,
 };
 
 /* 0x801EB210 */
@@ -395,15 +361,13 @@ Callback D_801EB224[3] = {
 /* 0x801EB230 */
 /* D_801EB230 */
 u8 g_BattleCharacterStepIds[0x28] = {
-    0x09, 0x19, 0x11, 0x0B, 0x18, 0x01, 0x30, 0x03, 0x25, 0x00, 0x21, 0x00, 0x21, 0x16,
-    0x14, 0x1F, 0x03, 0x16, 0x21, 0x03, 0x03, 0x21, 0x00, 0x16, 0x14, 0x1F, 0x0D, 0x17,
-    0x17, 0x11, 0x11, 0x00, 0x00, 0x30, 0x30, 0x12, 0x12, 0x00, 0x00, 0x00,
+    0x09, 0x19, 0x11, 0x0B, 0x18, 0x01, 0x30, 0x03, 0x25, 0x00, 0x21, 0x00, 0x21, 0x16, 0x14, 0x1F, 0x03, 0x16, 0x21, 0x03,
+    0x03, 0x21, 0x00, 0x16, 0x14, 0x1F, 0x0D, 0x17, 0x17, 0x11, 0x11, 0x00, 0x00, 0x30, 0x30, 0x12, 0x12, 0x00, 0x00, 0x00,
 };
 
 /* 0x801EB258 */
 Callback D_801EB258[5] = {
-    (Callback)func_801E19DC, (Callback)func_801E1A14, (Callback)func_801E1ADC,
-    (Callback)func_801E1AE4, (Callback)func_801E1B04,
+    (Callback)func_801E19DC, (Callback)func_801E1A14, (Callback)func_801E1ADC, (Callback)func_801E1AE4, (Callback)func_801E1B04,
 };
 
 /* 0x801EB26C */
@@ -437,22 +401,15 @@ Callback D_801EB294[1] = {
 
 /* 0x801EB298 */
 Callback D_801EB298[63] = {
-    (Callback)0x00000000u,   (Callback)func_800C1804, (Callback)func_800C1AA8, (Callback)func_800C1860,
-    (Callback)func_800C1820, (Callback)func_800C190C, (Callback)func_800C1820, (Callback)func_800C1B40,
-    (Callback)func_800C1804, (Callback)func_800C1CD8, (Callback)func_800C1DC4, (Callback)func_800C1EB0,
-    (Callback)func_800C1804, (Callback)func_800C181C, (Callback)func_800C1A34, (Callback)func_800C1804,
-    (Callback)func_800C1804, (Callback)func_800C1CC4, (Callback)func_800C1804, (Callback)func_800C19B4,
-    (Callback)func_800C19BC, (Callback)func_800C184C, (Callback)func_800C19E8, (Callback)func_800C1B84,
-    (Callback)func_800C181C, (Callback)func_800C19E4, (Callback)func_800C1CD8, (Callback)func_800C1804,
-    (Callback)func_800C1804, (Callback)func_800C1804, (Callback)func_800C1850, (Callback)func_800C1B6C,
-    (Callback)func_800C1D88, (Callback)func_800C1804, (Callback)func_800C1804, (Callback)func_800C1804,
-    (Callback)func_800C18F0, (Callback)func_800C1804, (Callback)func_800C1804, (Callback)func_800C1804,
-    (Callback)func_800C181C, (Callback)func_800C181C, (Callback)func_800C1950, (Callback)func_800C1810,
-    (Callback)func_800C1804, (Callback)func_800C1804, (Callback)func_800C1C58, (Callback)func_800C1804,
-    (Callback)func_800C1DB0, (Callback)func_800C1804, (Callback)func_800C1C98, (Callback)func_800C193C,
-    (Callback)func_800C1804, (Callback)func_800C18F0, (Callback)func_800C1A54, (Callback)func_800C18F0,
-    (Callback)func_800C18FC, (Callback)func_800C1810, (Callback)func_800C1814, (Callback)func_800C1810,
-    (Callback)func_800C18FC, (Callback)func_800C1838, (Callback)func_800C1864,
+    (Callback)0x00000000u,   (Callback)func_800C1804, (Callback)func_800C1AA8, (Callback)func_800C1860, (Callback)func_800C1820, (Callback)func_800C190C, (Callback)func_800C1820,
+    (Callback)func_800C1B40, (Callback)func_800C1804, (Callback)func_800C1CD8, (Callback)func_800C1DC4, (Callback)func_800C1EB0, (Callback)func_800C1804, (Callback)func_800C181C,
+    (Callback)func_800C1A34, (Callback)func_800C1804, (Callback)func_800C1804, (Callback)func_800C1CC4, (Callback)func_800C1804, (Callback)func_800C19B4, (Callback)func_800C19BC,
+    (Callback)func_800C184C, (Callback)func_800C19E8, (Callback)func_800C1B84, (Callback)func_800C181C, (Callback)func_800C19E4, (Callback)func_800C1CD8, (Callback)func_800C1804,
+    (Callback)func_800C1804, (Callback)func_800C1804, (Callback)func_800C1850, (Callback)func_800C1B6C, (Callback)func_800C1D88, (Callback)func_800C1804, (Callback)func_800C1804,
+    (Callback)func_800C1804, (Callback)func_800C18F0, (Callback)func_800C1804, (Callback)func_800C1804, (Callback)func_800C1804, (Callback)func_800C181C, (Callback)func_800C181C,
+    (Callback)func_800C1950, (Callback)func_800C1810, (Callback)func_800C1804, (Callback)func_800C1804, (Callback)func_800C1C58, (Callback)func_800C1804, (Callback)func_800C1DB0,
+    (Callback)func_800C1804, (Callback)func_800C1C98, (Callback)func_800C193C, (Callback)func_800C1804, (Callback)func_800C18F0, (Callback)func_800C1A54, (Callback)func_800C18F0,
+    (Callback)func_800C18FC, (Callback)func_800C1810, (Callback)func_800C1814, (Callback)func_800C1810, (Callback)func_800C18FC, (Callback)func_800C1838, (Callback)func_800C1864,
 };
 
 /* 0x801EB394 */
@@ -466,15 +423,13 @@ u8 s_BattlePartialPartyTargetWeights[3][2] = {
 /* 0x801EB39C */
 /* D_801EB39C */
 u8 s_BattleFullPartyTargetWeights[6][3] = {
-    {0x06, 0x06, 0x04}, {0x0A, 0x03, 0x03}, {0x06, 0x05, 0x05},
-    {0x08, 0x05, 0x03}, {0x06, 0x06, 0x04}, {0x08, 0x05, 0x03},
+    {0x06, 0x06, 0x04}, {0x0A, 0x03, 0x03}, {0x06, 0x05, 0x05}, {0x08, 0x05, 0x03}, {0x06, 0x06, 0x04}, {0x08, 0x05, 0x03},
 };
 
 /* 0x801EB3B0 */
 Callback D_801EB3B0[12] = {
-    (Callback)func_801E320C, (Callback)func_801E32AC, (Callback)func_801E35D8, (Callback)func_801E3638,
-    (Callback)func_801E3980, (Callback)func_801E3A00, (Callback)func_801E3B68, (Callback)func_801E4AE8,
-    (Callback)func_801E4D8C, (Callback)func_801E4F64, (Callback)func_801E52E8, (Callback)func_801E5288,
+    (Callback)func_801E320C, (Callback)func_801E32AC, (Callback)func_801E35D8, (Callback)func_801E3638, (Callback)func_801E3980, (Callback)func_801E3A00,
+    (Callback)func_801E3B68, (Callback)func_801E4AE8, (Callback)func_801E4D8C, (Callback)func_801E4F64, (Callback)func_801E52E8, (Callback)func_801E5288,
 };
 
 /* 0x801EB3E0 */
@@ -512,8 +467,7 @@ Callback D_801EB404[2] = {
 
 /* 0x801EB40C */
 Callback D_801EB40C[6] = {
-    (Callback)func_801E3BAC, (Callback)func_801E3BD0, (Callback)func_801E3BAC,
-    (Callback)func_801E4490, (Callback)func_801E4760, (Callback)func_801E4928,
+    (Callback)func_801E3BAC, (Callback)func_801E3BD0, (Callback)func_801E3BAC, (Callback)func_801E4490, (Callback)func_801E4760, (Callback)func_801E4928,
 };
 
 /* 0x801EB424 */
@@ -525,8 +479,7 @@ Callback D_801EB424[3] = {
 
 /* 0x801EB430 */
 Callback D_801EB430[5] = {
-    (Callback)func_801E44D4, (Callback)func_801E4544, (Callback)func_801E45DC,
-    (Callback)func_801E46EC, (Callback)func_801E414C,
+    (Callback)func_801E44D4, (Callback)func_801E4544, (Callback)func_801E45DC, (Callback)func_801E46EC, (Callback)func_801E414C,
 };
 
 /* 0x801EB444 */
@@ -573,9 +526,8 @@ static u8 s_gap_801EB484[16] = {
 /* 0x801EB494 */
 /* D_801EB494 */
 u8 s_BattleBattlerStepIds[48] = {
-    0xFF, 0xFF, 0xFF, 0x05, 0x04, 0xFF, 0x03, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
-    0x00, 0x01, 0x01, 0x02, 0x03, 0x04, 0x05, 0x05, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01,
-    0x02, 0x02, 0x03, 0x03, 0x04, 0x04, 0x05, 0x05, 0x06, 0x07, 0x08, 0x08, 0x70, 0x41, 0x12, 0x00,
+    0xFF, 0xFF, 0xFF, 0x05, 0x04, 0xFF, 0x03, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x01, 0x01, 0x02, 0x03, 0x04, 0x05, 0x05,
+    0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x02, 0x02, 0x03, 0x03, 0x04, 0x04, 0x05, 0x05, 0x06, 0x07, 0x08, 0x08, 0x70, 0x41, 0x12, 0x00,
 };
 
 /* 0x801EB4C4 */
@@ -623,7 +575,7 @@ static u8 s_gap_801EBF0C[0x14] = {0};
 
 /* 0x801EBF20 */
 /* D_801EBF20 */
-/* The party battler rows func_801E8684 copies into g_Game.members; func_801E7B34 and func_801D6818 read
+/* The party battler rows Battle_StartFormRestore copies into g_Game.members; func_801E7B34 and func_801D6818 read
  * their header.flags and turn.action_flags. */
 PartyMember s_BattleBattlerTemplates[BATTLE_PARTY_CHARACTERS_COUNT] = {0};
 

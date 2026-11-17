@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801D22E8(void) {
+/* func_801D22E8 */
+MATCH void Battle_ShrinkCommandPanel(void) {
     u8 value;
 
     value = g_Battle.panel_widths[g_Battle.panel_slot];

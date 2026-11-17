@@ -51,18 +51,18 @@ typedef struct {
 } BattlePanelModes;
 
 /* The queued slot's kind (+0x05) selects one of these eight handlers in slot
- * mode 3 (`g_BattleEffectStages` row 3); func_801E5C1C copies the
+ * mode 3 (`g_BattleEffectModes` row 3); Battle_RunBossEffect copies the
  * table and dispatches. */
 typedef struct {
     Callback steps[8];
-} BattleEffectStage3Steps;
+} BattleBossEffectSteps;
 
 /* The queued slot's kind (+0x05) selects one of these 110 handlers in slot
- * mode 1 (`g_BattleEffectStages` row 1); func_801E5B8C copies the
+ * mode 1 (`g_BattleEffectModes` row 1); Battle_RunMagicEffect copies the
  * table and dispatches. */
 typedef struct {
     Callback steps[110];
-} BattleEffectStage1Steps;
+} BattleMagicEffectSteps;
 
 /* The eight random damage percentages Battle_CalcDamage copies to the stack. */
 typedef struct DamageSpread {
@@ -93,10 +93,10 @@ typedef struct {
 } BattleEntranceSteps;
 
 /* The queued slot's mode (+0x06, stored by Battle_AllocEffect) selects one
- * of these four stage handlers, copied to the stack from 0x801D0CC0. */
+ * of these four effect handlers, copied to the stack from 0x801D0CC0. */
 typedef struct {
-    Callback steps[4];
-} BattleEffectStageSteps;
+    Callback modes[4];
+} BattleEffectModes;
 
 /* Drop chance per EnemyDrop.rate, out of 256: 0, 0, 1, 3, 7, 31, 127, 255. */
 typedef struct DropChances {
@@ -146,16 +146,16 @@ typedef struct BattleRank {
 } BattleRank;
 
 /* The queued slot's kind (+0x05) selects one of these 19 handlers in slot mode
- * 0 (`g_BattleEffectStages` row 0); func_801E5AF4 copies the table
+ * 0 (`g_BattleEffectModes` row 0); Battle_RunBattlerEffect copies the table
  * and dispatches. */
 typedef struct {
     Callback steps[19];
-} BattleEffectStage0Steps;
+} BattleBattlerEffectSteps;
 
-/* Fixed five-entry saved-preview/result handler table at 0x801D0F6C. */
+/* The form change effect's five step routines, at 0x801D0F6C. */
 typedef struct {
     Callback modes[5];
-} BattleSavedPreviewModes;
+} BattleFormChangeSteps;
 
 /* The panel task forwarder func_801EA1E0 calls the routine its selector names
  * with the caller's seven words. */
@@ -316,13 +316,13 @@ extern BattleEventSteps         g_BattleEvents;
 extern u8                       s_BattleCueIds[];
 extern DropChances              g_BattleDropChances;
 /* D_801D0CC0 */
-extern BattleEffectStageSteps   g_BattleEffectStages;
+extern BattleEffectModes        g_BattleEffectModes;
 /* D_801D0CD0 */
-extern BattleEffectStage0Steps  g_BattleEffectStage0Steps;
+extern BattleBattlerEffectSteps g_BattleBattlerEffectSteps;
 /* D_801D0D1C */
-extern BattleEffectStage1Steps  g_BattleEffectStage1Steps;
+extern BattleMagicEffectSteps   g_BattleMagicEffectSteps;
 /* D_801D0ED4 */
-extern BattleEffectStage3Steps  g_BattleEffectStage3Steps;
+extern BattleBossEffectSteps    g_BattleBossEffectSteps;
 /* D_801D0EF4 */
 extern BattleDamageNumberSteps  g_BattleDamageNumberSteps;
 /* D_801D0F20 */
@@ -333,7 +333,8 @@ extern BattleEffect2Steps       D_801D0F38;
 /* D_801D0F44 */
 extern BattleAilmentActorSteps  g_BattleAilmentActorSteps;
 extern BattleEffect4Steps       D_801D0F58;
-extern BattleSavedPreviewModes  D_801D0F6C;
+/* D_801D0F6C */
+extern BattleFormChangeSteps    g_BattleFormChangeSteps;
 /* D_801D0F80 */
 extern BattlePanelModes         g_BattlePanelModes;
 /* D_801D0FA0 */
@@ -354,10 +355,13 @@ extern BattlePanelTaskSteps     g_BattlePanelTaskForwarders;
 extern BattleEventPanelSteps    g_BattleEventPanelSteps;
 /* D_801D1004 */
 extern BattleMessagePanelSteps  g_BattleMessagePanelSteps;
-extern Callback                 D_801EABB8[];
+/* D_801EABB8 */
+extern Callback                 g_BattleCommandSteps[];
 extern s32                      D_801EABCC;
-extern Callback                 D_801EABD8[];
-extern Callback                 D_801EABE4[];
+/* D_801EABD8 */
+extern Callback                 g_BattleCommandPanelSteps[];
+/* D_801EABE4 */
+extern Callback                 g_BattleRunCommandSteps[];
 extern Callback                 D_801EAC04[];
 extern Callback                 D_801EAC10[];
 extern Callback                 D_801EAC24[];
@@ -467,7 +471,7 @@ extern Callback         D_801EB478[];
 /* D_801EB494 */
 extern u8               s_BattleBattlerStepIds[];
 /* Effect-type tables: the offset the effect starts at, and the cue byte per
- * type and step (func_801E679C). */
+ * type and step (Battle_StartPoseActor). */
 extern u8               D_801EB4A4[];
 extern u8               D_801EB4B0[];
 extern s32              D_801EB4BF;
@@ -549,7 +553,8 @@ void               Battle_Update(void);
 void               Battle_DispatchMode(void);
 /* func_801D11D8 */
 void               Battle_DispatchStep(void);
-extern void        func_801D1228(void);
+/* func_801D1228 */
+extern void        Battle_Reset(void);
 /* func_801D17C4 */
 void               Battle_DispatchEntrance(void);
 extern void        Battle_OpenPanels(void);
@@ -559,17 +564,26 @@ void               Battle_WaitForUI(void);
 void               Battle_InitPanels(void);
 /* func_801D1B94 */
 void               Battle_EnterIntro(void);
-extern void        func_801D1C54(void);
-extern void        func_801D1C90(void);
-extern void        func_801D1D10(void);
-extern void        func_801D1E8C(void);
-extern void        func_801D22AC(void);
-extern void        func_801D22E8(void);
+/* func_801D1C54 */
+extern void        Battle_UpdateCommands(void);
+/* func_801D1C90 */
+extern void        Battle_StartCommands(void);
+/* func_801D1D10 */
+extern void        Battle_NextCommandMember(void);
+/* func_801D1E8C */
+extern void        Battle_ReadCommandMenu(void);
+/* func_801D22AC */
+extern void        Battle_UpdateCommandPanel(void);
+/* func_801D22E8 */
+extern void        Battle_ShrinkCommandPanel(void);
 /* func_801D238C */
 extern void        Battle_DrawEntrances(void);
-extern void        func_801D2480(void);
-extern void        func_801D24D4(void);
-extern void        func_801D251C(void);
+/* func_801D2480 */
+extern void        Battle_GrowCommandPanel(void);
+/* func_801D24D4 */
+extern void        Battle_RunCommand(void);
+/* func_801D251C */
+extern void        Battle_StartDefend(void);
 /* func_801D25A0 */
 extern void        Battle_ArmCommands(void);
 /* func_801D2740 */
@@ -875,9 +889,12 @@ void               func_801E57C8(void);
 /* func_801E5824 */
 void               Battle_UpdateEffects(void);
 extern void        func_801E5AEC(void);
-void               func_801E5AF4(void);
-extern void        func_801E5B8C(void);
-extern void        func_801E5C1C(void);
+/* Battle_RunBattlerEffect */
+void               Battle_RunBattlerEffect(void);
+/* Battle_RunMagicEffect */
+extern void        Battle_RunMagicEffect(void);
+/* Battle_RunBossEffect */
+extern void        Battle_RunBossEffect(void);
 /* func_801E5CA4 */
 extern void        Battle_UpdateDamageNumber(void);
 /* func_801E5E2C */
@@ -899,9 +916,12 @@ extern void        Battle_StartScreenFlash(void);
 extern void        Battle_RaiseScreenFlash(void);
 /* func_801E65F8 */
 extern void        Battle_LowerScreenFlash(void);
-extern void        func_801E6724(void);
-void               func_801E679C(void);
-void               func_801E68EC(void);
+/* Battle_UpdatePoseActor */
+extern void        Battle_UpdatePoseActor(void);
+/* Battle_StartPoseActor */
+void               Battle_StartPoseActor(void);
+/* Battle_PlayPoseActor */
+void               Battle_PlayPoseActor(void);
 /* func_801E6930 */
 extern void        Battle_UpdateScreenFade(void);
 /* func_801E6990 */
@@ -926,25 +946,35 @@ extern void        Battle_RestartAilmentActor(void);
 extern void        Battle_RunAilmentActor(void);
 /* func_801E71EC */
 extern void        Battle_WaitAilmentEffect(void);
-void               func_801E72A8(void);
-void               func_801E72F4(void);
+/* Battle_UpdateBattlerGhost */
+void               Battle_UpdateBattlerGhost(void);
+/* Battle_CopyBattlerGhost */
+void               Battle_CopyBattlerGhost(void);
 void               func_801E74B8(void);
 extern void        func_801E7528(void);
 extern void        func_801E7558(void);
 extern void        func_801E75B0(void);
 extern void        func_801E7634(void);
 extern void        func_801E7778(void);
-void               func_801E7818(void);
-extern void        func_801E7888(void);
-extern void        func_801E78F0(void);
+/* func_801E7818 */
+void               Battle_UpdateFormChange(void);
+/* func_801E7888 */
+extern void        Battle_StartFormChange(void);
+/* func_801E78F0 */
+extern void        Battle_WaitFormChange(void);
 /* func_801E7948 */
 extern void        Battle_StartCharacterLoad(void);
 u8                 func_801E7B34(void);
-void               func_801E7BA0(void);
-extern void        func_801E8558(void);
-void               func_801E862C(void);
-extern void        func_801E8684(void);
-extern void        func_801E8D04(void);
+/* func_801E7BA0 */
+void               Battle_RebuildFormBattler(void);
+/* func_801E8558 */
+extern void        Battle_EndFormChange(void);
+/* func_801E862C */
+void               Battle_UpdateFormRestore(void);
+/* func_801E8684 */
+extern void        Battle_StartFormRestore(void);
+/* func_801E8D04 */
+extern void        Battle_EndFormRestore(void);
 void               func_801E8DD8(void);
 u8                 func_801E8FA8(void);
 /* func_801E9074 */

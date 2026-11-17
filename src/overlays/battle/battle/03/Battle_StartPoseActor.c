@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801E679C(void) {
+/* func_801E679C */
+MATCH void Battle_StartPoseActor(void) {
     PartyMember* work;
     u8*          table;
 

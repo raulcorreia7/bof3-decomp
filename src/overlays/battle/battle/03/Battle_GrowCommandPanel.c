@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801D2480(void) {
+/* func_801D2480 */
+MATCH void Battle_GrowCommandPanel(void) {
     u8 value;
 
     value = g_Battle.panel_widths[g_Battle.panel_slot];

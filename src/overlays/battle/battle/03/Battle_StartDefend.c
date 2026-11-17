@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801D251C(void) {
+/* func_801D251C */
+MATCH void Battle_StartDefend(void) {
     u8* counter;
     u8  count;
     u8* otherRecord;

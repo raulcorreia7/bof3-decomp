@@ -4,7 +4,8 @@
  * completion it clears the 0x48 byte, drops the 0x2000 flag on the owner's damage row and the low suppress bits, then
  * runs the queued step.
  */
-MATCH void func_801E8558(void) {
+/* func_801E8558 */
+MATCH void Battle_EndFormChange(void) {
     PartyMember* work;
     PartyMember* stage;
     u32          step;
