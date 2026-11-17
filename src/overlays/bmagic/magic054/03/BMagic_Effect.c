@@ -11,7 +11,12 @@ MATCH void func_801EEC2C(void) {
     SYS_DISPATCH_TASK(table.steps, 1, g_Task);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EEC98(void) {
+}
+#else
 INCLUDE_ASM(func_801EEC98);
+#endif
 
 #include "overlays/bmagic/Effect_Hit.h"
 
