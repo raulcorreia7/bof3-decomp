@@ -1,6 +1,7 @@
 #include "start_08.h"
 
-MATCH u8 func_801DB04C(void) {
+/* func_801DB04C */
+MATCH u8 Menu_SwapPartyMembers(void) {
     u8  i;
     u8  tmp;
     u8  member;

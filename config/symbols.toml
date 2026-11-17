@@ -4019,13 +4019,19 @@ Menu_SwapBytes3 = { addr = 0x801D933C, type = "func", source = "Swaps the two by
 Menu_PackSkills = { addr = 0x801D9350, type = "func", source = "moves the empty slots of the ability list to the end" }
 Menu_SortSkillsDescending = { addr = 0x801D942C, type = "func", source = "packs, then bubble-sorts the ability list in descending order of the ability row's byte 0" }
 Menu_SortSkillsAscending = { addr = 0x801D9548, type = "func", source = "packs, then bubble-sorts the ability list in ascending order of the ability row's byte 0" }
+Menu_RunPartyScreen = { addr = 0x801D970C, type = "func", source = "runs g_MenuPartySteps by sub_step (g_MenuStartSteps step 5)" }
 Menu_OpenPartyScreen = { addr = 0x801D9748, type = "func", source = "opens the party screen: description bar, two command cursor frames, the Formation/Party command row (g_MenuStartSteps step 5)" }
 Menu_ChoosePartyCommand = { addr = 0x801D98BC, type = "func", source = "left/right toggles the party screen command, confirm opens formation or the party change (world map only), cancel backs out" }
+Menu_RunFormation = { addr = 0x801D9AF0, type = "func", source = "runs the formation steps (open, move and swap, close) by state" }
 Menu_UpdateFormation = { addr = 0x801D9BDC, type = "func", source = "moves the formation cursor, picks and swaps two members (Menu_SwapBytes4 on g_PartyBattleOrder), confirms g_PartyFormation" }
+Menu_RunPartyChange = { addr = 0x801DA320, type = "func", source = "runs the party change steps by state: func_801DA35C, Menu_UpdatePartyChange, func_801DA8E0" }
+Menu_UpdatePartyChange = { addr = 0x801DA474, type = "func", source = "moves the cursor between the field party and the reserve list and picks two members to swap" }
+Menu_ClosePartyScreen = { addr = 0x801DA984, type = "func", source = "waits, hides the party panels and returns to the command menu (step 1)" }
 Menu_OpenFormationScreen = { addr = 0x801DAA68, type = "func", source = "opens the formation screen: description bar, member panels, then the formation grid (Menu_OpenFormation); sub_step 2" }
 Menu_SwapBytes4 = { addr = 0x801DAC08, type = "func", source = "Swaps the two bytes that two pointers address; the start callers pass entries of D_801C893C and D_801C8950, adjacent rows or mirrored pairs. Same bytes as Menu_SwapBytes at 0x801D4A30." }
 Menu_OpenFormation = { addr = 0x801DAC1C, type = "func", source = "builds the formation grid cells and panels from the party menu flags and picks g_PartyFormation's cell" }
 Menu_OpenPartyChange = { addr = 0x801DAE14, type = "func", source = "lists the characters outside the field order into the reserve list and opens its panel" }
+Menu_SwapPartyMembers = { addr = 0x801DB04C, type = "func", source = "swaps a field member with another or a reserve member, with their skill order rows" }
 Menu_DrawCharacterWindow = { addr = 0x801DB764, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
 Menu_DrawStatPanel = { addr = 0x801DBBCC, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intelligence and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
 Shop_DrawEquipment = { addr = 0x801DBF04, type = "func", source = "Draws the equipment panel of character record_index: the filled panel, the EQUIP caption, the emblem and six rows with the weapon, shield, helmet, armor and two accessories, each with its row icon." }
@@ -4108,8 +4114,8 @@ g_MenuStartSteps = { addr = 0x801EC35C, source = "the 9 step handlers of the sta
 g_MenuStartStep6Steps = { addr = 0x801EC394, source = "5 sub-step handlers of step 6 of the start menu, called by func_801D2410 (the step 6 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
 g_MenuStartStep2Steps = { addr = 0x801EC3A8, source = "11 sub-step handlers of step 2 of the start menu, called by func_801D2DAC (the step 2 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
 s_EquipSlotCategories = { addr = 0x801EC458, source = "func_801D6E6C uses these cue ids for the six party slot sound updates" }
-g_MenuStartStep5Steps = { addr = 0x801EC518, source = "6 sub-step handlers of step 5 of the start menu, called by func_801D970C (the step 5 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
-g_MenuStartStep5Sub2Steps = { addr = 0x801EC530, source = "3 handlers of sub-step 2 of step 5 of the start menu, called by func_801D9AF0 (the sub-step 2 handler of step 5) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_MenuPartySteps = { addr = 0x801EC518, source = "6 sub-step handlers of step 5 of the start menu, called by Menu_RunPartyScreen (the step 5 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_MenuFormationSteps = { addr = 0x801EC530, source = "3 handlers of sub-step 2 of step 5 of the start menu, called by Menu_RunFormation (the sub-step 2 handler of step 5) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
 g_MenuStatFrameLeft = { addr = 0x801EC628, source = "Sprite run of the left end of the stat panel border, drawn by Menu_DrawStatPanel." }
 g_MenuStatFrameMiddle = { addr = 0x801EC654, source = "Sprite run repeated 16 times along the stat panel border, drawn by Menu_DrawStatPanel." }
 g_MenuStatFrameRight = { addr = 0x801EC660, source = "Sprite run of the right end of the stat panel border, drawn by Menu_DrawStatPanel." }
@@ -4201,9 +4207,9 @@ g_SaveSlots = { addr = 0x801ED80C, size = 0x54, source = "The three visible rows
 g_MenuStartStep = { addr = 0x801ED860, source = "Current step of the start menu; func_801E4024 and func_801E4ED4 dispatch the D_801ED11C and D_801ED148 step tables by it, and each step handler adds 1 to advance." }
 s_ChoiceMenuValues = { addr = 0x801ED894, source = "Value of the choice menu per party slot, saved by func_801D3174." }
 s_ChoiceMenuCursors = { addr = 0x801ED89C, source = "Cursor of the choice menu per party slot, saved by func_801D3174." }
-s_SkillOrderCursors = { addr = 0x801ED8A8, source = "Skill order cursor per party slot and column, saved by Menu_ReorderSkills; func_801DB04C swaps the rows." }
-s_SkillOrderGroups = { addr = 0x801ED8B8, source = "The six skill order group bytes of each party slot, cleared by func_801D177C and swapped by func_801DB04C." }
-s_SkillOrderKinds = { addr = 0x801ED8D0, source = "The six skill order kind bytes of each party slot, cleared by func_801D177C and swapped by func_801DB04C." }
+s_SkillOrderCursors = { addr = 0x801ED8A8, source = "Skill order cursor per party slot and column, saved by Menu_ReorderSkills; Menu_SwapPartyMembers swaps the rows." }
+s_SkillOrderGroups = { addr = 0x801ED8B8, source = "The six skill order group bytes of each party slot, cleared by func_801D177C and swapped by Menu_SwapPartyMembers." }
+s_SkillOrderKinds = { addr = 0x801ED8D0, source = "The six skill order kind bytes of each party slot, cleared by func_801D177C and swapped by Menu_SwapPartyMembers." }
 SAVE_AccessFile = { addr = 0x801EEC30, type = "func", source = "Reads or writes the save file on the memory card: waits out the card status, loads the directory, opens the save file and transfers it through SAVE_TransferFile (body in start/09)." }
 func_801EFCA8 = { addr = 0x801EFCA8, type = "func", source = "The save-directory scan SAVE_ScanDirectory, which counts the save files whose name starts with the prefix; start/09 holds its body." }
 # START.EMI entry 9, streamed with entry 8 (boot-slice-1018 report, stage 5).

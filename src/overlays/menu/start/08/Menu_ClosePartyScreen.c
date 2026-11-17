@@ -1,6 +1,7 @@
 #include "start_08.h"
 
-MATCH void func_801DA984(void) {
+/* func_801DA984 */
+MATCH void Menu_ClosePartyScreen(void) {
     u8* counter;
     u8  count;
     u8  value;
