@@ -1,32 +1,17 @@
 #include "game_00.h"
 
-/* One 0x140-byte battle work row. Only the fields this unit reads are named. */
-typedef struct BattleWorkSlot {
-    u8  flags;
-    u8  mode;
-    u8  step;
-    u8  pad_03[0x31];
-    s32 x;
-    s32 y;
-    u8  pad_3C[0x34];
-    u8  speed;
-    u8  pad_71[0xBB];
-    u8  flags_12C;
-    u8  pad_12D[0x13];
-} BattleWorkSlot;
-
 #ifdef NON_MATCHING
 NON_MATCHING void func_801B1E24(void) {
-    BattleWorkSlot* rows;
-    BattleWorkSlot* row;
-    s32             i;
-    s8              prev;
-    s32             index;
-    s32             result;
-    s32             state;
-    s32             offset;
-    u8              value;
-    u8*             base;
+    PartyMember* rows;
+    PartyMember* row;
+    s32          i;
+    s8           prev;
+    s32          index;
+    s32          result;
+    s32          state;
+    s32          offset;
+    u8           value;
+    u8*          base;
     /* FAKE: unused frame, 8 bytes. */
     FAKE_STACK_PADS(u8, 8);
 
@@ -34,7 +19,7 @@ NON_MATCHING void func_801B1E24(void) {
     value = *base;
     i     = 0;
     if (g_Game.party_size != 0) {
-        rows = (BattleWorkSlot*)(base - 8);
+        rows = (PartyMember*)(base - 8);
         row  = rows;
         do {
             TASK_SET(row);
@@ -42,16 +27,16 @@ NON_MATCHING void func_801B1E24(void) {
             if (prev < 0) {
                 prev = g_Game.party_size - 1;
             }
-            if (!(rows->flags & 1) && prev != 0) {
+            if (!(rows->header.flags & 1) && prev != 0) {
                 index  = (prev - 1) * 2 + (value & BYTE_MASK) * 4;
-                result = func_801B1B2C(rows->x + (s_EntityPlacementOffsets[index] << 15), rows->y + (D_801CD08D[index] << 15), value & BYTE_MASK, row->speed);
-                if (((result & BYTE_MASK) != 0) && ((func_801B1C18(SP_REF(s32, 8), SP_REF(s32, 0xC), ((BattleWorkSlot*)g_Task)->speed) & 0xFF) != 0)) {
+                result = func_801B1B2C(rows->pos.x.fixed + (s_EntityPlacementOffsets[index] << 15), rows->pos.y.fixed + (D_801CD08D[index] << 15), value & BYTE_MASK, row->speed);
+                if (((result & BYTE_MASK) != 0) && ((func_801B1C18(SP_REF(s32, 8), SP_REF(s32, 0xC), ((PartyMember*)g_Task)->speed) & 0xFF) != 0)) {
                     goto found; /* first position test matched: run the row mark */
                 }
-                if (!(func_801B1B2C(D_80145EC4, D_80145EC8, value & BYTE_MASK, ((BattleWorkSlot*)g_Task)->speed) & 0xFF)) {
+                if (!(func_801B1B2C(D_80145EC4, D_80145EC8, value & BYTE_MASK, ((PartyMember*)g_Task)->speed) & 0xFF)) {
                     goto next; /* fallback position rejected: next row */
                 }
-            } else if (!(func_801B1B2C(rows->x, rows->y, value & BYTE_MASK, row->speed) & BYTE_MASK)) {
+            } else if (!(func_801B1B2C(rows->pos.x.fixed, rows->pos.y.fixed, value & BYTE_MASK, row->speed) & BYTE_MASK)) {
                 goto next; /* fallback position rejected: next row */
             }
         found:
