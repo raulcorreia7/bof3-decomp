@@ -23,7 +23,8 @@
 `config/` that holds a `splat.yaml`; any other id is refused.
 
 `rename` changes a function or global in every tracked file of the scope: the definition, each
-prototype and use, `config/` references, and the unit file `OLD.c` (`git mv`). It writes the
+prototype and use, `config/` references, and the unit file `OLD.c` (`git mv`). It never edits
+`config/attempts.jsonl`: the history keeps the names it was written with. It writes the
 row of config/symbols.toml: a new row for an address name (`--source` describes the symbol), or the
 renamed key of an existing row. Naming an address replaces the row already keyed with its address
 name, so no key repeats. An address name (`func_<ADDR>`, `D_<ADDR>`) stays in a comment
@@ -178,9 +179,28 @@ def git(*args: str, check: bool = True, env: dict[str, str] | None = None) -> st
     ).stdout
 
 
+HISTORY = (
+    "config/attempts.jsonl"  # failed-attempt rows keep the names they were written with
+)
+
+
 def grep_files(word: str, scope: list[str]) -> list[str]:
-    """Return the tracked files under ``scope`` that hold ``word`` as a whole word."""
-    names = git("grep", "-l", "-z", "-w", "-e", word, "--", *scope, check=False)
+    """Return the tracked files under ``scope`` that hold ``word`` as a whole word.
+
+    The attempts history is never listed: a rename does not edit it.
+    """
+    names = git(
+        "grep",
+        "-l",
+        "-z",
+        "-w",
+        "-e",
+        word,
+        "--",
+        *scope,
+        f":(exclude){HISTORY}",
+        check=False,
+    )
     return [name for name in names.split("\0") if name]
 
 
@@ -396,6 +416,8 @@ def check_rename(
     for name in names.rstrip("\0").split("\0"):
         path = ROOT / name
         if not name.startswith(("src/", "include/", "config/")) or not path.is_file():
+            continue
+        if name == HISTORY:
             continue
         data = edits[path].encode("utf-8") if path in edits else path.read_bytes()
         if address:
