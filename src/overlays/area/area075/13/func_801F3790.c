@@ -10,6 +10,6 @@ MATCH void func_801F3790(void) {
         D_801448EE             = 0x1E;
         g_ScriptVars[0]        = 0x14;
     } else {
-        g_MessageRequest = MSG_024;
+        g_MessageRequest = MSG_AREA075_FOREMAN_ASK_READY;
     }
 }

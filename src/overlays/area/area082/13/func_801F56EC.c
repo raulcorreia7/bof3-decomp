@@ -1,6 +1,6 @@
 #include "area082_13.h"
 
 MATCH void func_801F56EC(void) {
-    Message_StartAreaMessage(SYS_TestFlag(g_SceneFlags, 4) ? MSG_008 : MSG_003);
+    Message_StartAreaMessage(SYS_TestFlag(g_SceneFlags, 4) ? MSG_AREA082_ENTRY_DENIED_HOLY_GROUND : MSG_AREA082_ENTRY_DENIED_PERMIT);
     g_GameStateIndex = 2;
 }

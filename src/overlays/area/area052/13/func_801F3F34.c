@@ -28,7 +28,7 @@ MATCH void func_801F3F34(void) {
             break;
 
         case 10:
-            MESSAGE_START_WAIT(MSG_057);
+            MESSAGE_START_WAIT(MSG_AREA052_CONVEYOR_WARNING);
             g_SceneEventState.step = 11;
             break;
 
