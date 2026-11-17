@@ -8,7 +8,7 @@ segments:
     section_order: [.data, .rodata, .text, .bss]
     subsegments:
       - [0x0, .data, D_801F6C00]
-      - [0x4, .rodata, D_801F6C04]
+      - [0x4, .rodata, func_801FABD8]
       - [0x78, .rodata, D_801F6C78]
       - [0x7C, .rodata, func_801FB6DC]
       - [0x98, .rodata, D_801F6C98]
@@ -17,6 +17,7 @@ segments:
       - [0xD4, .rodata, D_801F6CD4]
       - [0x174, .rodata, func_801FD0DC]
       - [0x1CC, c, 1CC]
+      - [0x3FD8, c, func_801FABD8]
       - [0x4ADC, c, func_801FB6DC]
       - [0x4D14, c, 4D14]
       - [0x64DC, c, func_801FD0DC]
