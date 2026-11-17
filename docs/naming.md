@@ -440,7 +440,7 @@ Constants, enum values and macros are `TAG_UPPER_SNAKE`. The generic helpers in
 | Thing                 | Name                                                                                                                                                    |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Character id          | `character_id` (`CHAR_ID_*`, 11 values with forms)                                                                                                      |
-| Character data        | `Character`, `g_Characters[CHARACTER_COUNT]`, `g_CharSlot[id]`                                                                                          |
+| Character data        | `Character`, `g_Characters[CHAR_INDEX_COUNT]`, `g_CharSlot[id]`                                                                                         |
 | Party order           | `Party_` owns order: `g_PartyFieldOrder`, `g_PartyBattleOrder`, `g_PartyCount`                                                                          |
 | Battle participants   | `Battler`; `PartyMember`, `EnemyBattler`                                                                                                                |
 | Enemy definition      | `Enemy` (the BENEMY definition)                                                                                                                         |
