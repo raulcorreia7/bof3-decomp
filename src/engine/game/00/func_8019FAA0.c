@@ -54,12 +54,12 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
         *(Cpy8u*)D_801581E0 = *(Cpy8u*)s_ScriptCopyBlock;
     }
 
-    if ((g_SceneState.flags_01 & SCENE_STATE_CHAPTER_ADVANCE) != 0) {
-        counter                  = g_SceneState.scenario_id;
-        g_SceneState.scenario_id = (u8)(counter + 1);
+    if ((g_ScenarioState.flags_01 & SCENARIO_STATE_CHAPTER_ADVANCE) != 0) {
+        counter                     = g_ScenarioState.scenario_id;
+        g_ScenarioState.scenario_id = (u8)(counter + 1);
         if ((s8)(counter + 1) == 16) {
-            g_SceneState.scenario_id = (u8)(counter + 2);
-            Scene_Start(g_SceneState.scenario_id);
+            g_ScenarioState.scenario_id = (u8)(counter + 2);
+            Scene_Start(g_ScenarioState.scenario_id);
         }
     }
 
@@ -70,7 +70,7 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
         entry->callback();
 
     SYS_ClearFlag(g_SceneEventFlags, 0x1Cu);
-    g_SceneState.mode_02 = 1u;
+    g_ScenarioState.mode_02 = 1u;
     Game_UpdateScenario();
     func_801C05AC();
 

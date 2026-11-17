@@ -14,7 +14,7 @@ MATCH void Actor_SpawnFlock(void) {
     s32  coords[2];
     s32* cp;
 
-    if (g_SceneState.flags_01 & 1) {
+    if (g_ScenarioState.flags_01 & 1) {
         Actor_Clear();
         return;
     }

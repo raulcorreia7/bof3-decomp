@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801FABA8(void) {
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             break;
         case 1:

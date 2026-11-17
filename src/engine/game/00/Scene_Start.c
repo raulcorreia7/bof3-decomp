@@ -1,14 +1,14 @@
 #include "game_00.h"
 
 MATCH void Scene_Start(u8 scenario_index) {
-    SceneState* state;
-    u8*         base;
-    s32         index8;
-    u16         none_sel;
-    u8          ready_phase;
+    ScenarioState* state;
+    u8*            base;
+    s32            index8;
+    u16            none_sel;
+    u8             ready_phase;
 
     none_sel           = 0xFFFFu;
-    state              = &g_SceneState;
+    state              = &g_ScenarioState;
     state->scenario_id = scenario_index;
     index8             = ((s8)scenario_index) * 8;
     base               = g_SceneFlagWords;

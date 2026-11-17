@@ -6,7 +6,7 @@ MATCH void func_801F3054(void) {
         Scene_StartEvent(0x35, 0x1E);
     } else if (g_MessageChoice == 2) {
         Game_SetScriptActive();
-        g_SceneState.state_04 = 1;
-        g_SceneState.step_05  = 0x14;
+        g_ScenarioState.state_04 = 1;
+        g_ScenarioState.step_05  = 0x14;
     }
 }

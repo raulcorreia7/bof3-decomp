@@ -4,8 +4,8 @@
 MATCH void Fairy_AnswerWaitForNightfall(void) {
     MESSAGE_REQUEST_CLEAR();
     if (MENU_SELECTION_ARMED()) {
-        g_SceneState.step_05 = 2;
+        g_ScenarioState.step_05 = 2;
     } else {
-        g_SceneState.step_05 = 3;
+        g_ScenarioState.step_05 = 3;
     }
 }

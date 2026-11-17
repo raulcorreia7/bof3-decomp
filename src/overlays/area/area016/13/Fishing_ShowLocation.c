@@ -29,7 +29,7 @@ MATCH void Fishing_ShowLocation(void) {
                         break;
                     }
                 }
-                Message_StartAreaMessage((s16)D_801F4FC4[index][g_SceneState.scenario_id]);
+                Message_StartAreaMessage((s16)D_801F4FC4[index][g_ScenarioState.scenario_id]);
             } else {
                 at  = pos;
                 row = D_801F4DA0;

@@ -20,8 +20,8 @@
     g_ScriptVars[2] = 0;                                                            \
     g_ScriptVars[3] = 0;                                                            \
     SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 2));                                       \
-    g_SceneState.step_05  = timer;                                                  \
-    g_SceneState.timer_06 = 0;                                                      \
+    g_ScenarioState.step_05  = timer;                                               \
+    g_ScenarioState.timer_06 = 0;                                                   \
     return 1
 
 extern u32 D_801F6C00;
@@ -41,13 +41,13 @@ extern Callback jtbl_801F6DCC[5];
 void func_801F7660(s32 x, s32 y, s32 z, u16 angle);
 
 /* Start the scene script at state 13 with its variables and first step cleared. */
-#define SCENE_ENTER_STATE_13()  \
-    Game_SetScriptActive();     \
-    g_ScriptVars[0]       = 0;  \
-    g_ScriptVars[1]       = 0;  \
-    g_ScriptVars[2]       = 0;  \
-    g_ScriptVars[3]       = 0;  \
-    g_SceneState.step_05  = 0;  \
-    g_SceneState.state_04 = 13;
+#define SCENE_ENTER_STATE_13()     \
+    Game_SetScriptActive();        \
+    g_ScriptVars[0]          = 0;  \
+    g_ScriptVars[1]          = 0;  \
+    g_ScriptVars[2]          = 0;  \
+    g_ScriptVars[3]          = 0;  \
+    g_ScenarioState.step_05  = 0;  \
+    g_ScenarioState.state_04 = 13;
 
 #endif

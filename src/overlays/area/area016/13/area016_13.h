@@ -25,7 +25,7 @@ extern SVECTOR       g_ScratchPadVectors[];
  * volatile declaration. */
 extern WorldMapKey   D_801F4D7C[9];
 extern WorldMapPoint D_801F4DA0[137];
-/* Key rows: column 0 is matched against g_GameEntryAreaId; column g_SceneState is
+/* Key rows: column 0 is matched against g_GameEntryAreaId; column g_ScenarioState is
  * the value Fishing_ShowLocation passes on. */
 extern u16           D_801F4FC4[9][16];
 extern u8            D_801F50E4[28];

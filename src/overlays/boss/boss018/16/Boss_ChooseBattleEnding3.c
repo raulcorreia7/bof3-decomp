@@ -7,9 +7,9 @@ MATCH void Boss_ChooseBattleEnding3(void) {
         goto block_4;
     }
     if (g_Battle.boss_flags & 0x2) {
-        g_SceneState.step_05 = 0x1A;
+        g_ScenarioState.step_05 = 0x1A;
     } else {
-        g_SceneState.step_05 = 0x29;
+        g_ScenarioState.step_05 = 0x29;
     }
     Battle_EndVictory();
     goto block_11;
@@ -32,7 +32,7 @@ block_8:
 block_9:
     step = 0x1C;
 block_10:
-    g_SceneState.step_05 = step;
+    g_ScenarioState.step_05 = step;
     Boss_SetCharacterId();
     Battle_EndToArea();
 block_11:

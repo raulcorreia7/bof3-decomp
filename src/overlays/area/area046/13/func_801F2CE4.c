@@ -6,7 +6,7 @@ MATCH s32 func_801F2CE4(s32 entry_x, s32 entry_y) {
             Game_SetScriptActive();
             g_ScriptVars[1]        = 1;
             g_SceneEventState.mode = 0xB;
-            if (g_SceneState.scenario_id < 8) {
+            if (g_ScenarioState.scenario_id < 8) {
                 g_SceneEventState.step = 0;
                 return 1;
             }

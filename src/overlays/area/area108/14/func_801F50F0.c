@@ -112,10 +112,10 @@ NON_MATCHING void func_801F50F0(void) {
         } break;
         case 9:
             if (--LOHU(D_801448EE) == 0) {
-                g_SceneEventState.step = 0;
-                g_SceneEventState.mode = SCENE_EVENT_NONE;
-                g_SceneState.state_04  = 3;
-                g_SceneState.step_05   = 0;
+                g_SceneEventState.step   = 0;
+                g_SceneEventState.mode   = SCENE_EVENT_NONE;
+                g_ScenarioState.state_04 = 3;
+                g_ScenarioState.step_05  = 0;
             }
             break;
     }

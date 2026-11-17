@@ -13,10 +13,10 @@ MATCH void func_801F477C(void) {
     work->unk_1C = D_801F688D[g_MessageChoice * 2];
     FAKE_BARRIER(); /* FAKE: retail reads the choice again for the comparison. */
 
-    if (g_SceneState.scenario_id < 0xD && g_MessageChoice == 1) {
+    if (g_ScenarioState.scenario_id < 0xD && g_MessageChoice == 1) {
         D_8014865F = 0;
         Game_SetScriptActive();
-        g_SceneState.step_05  = 0x14;
-        g_SceneState.state_04 = 0x8;
+        g_ScenarioState.step_05  = 0x14;
+        g_ScenarioState.state_04 = 0x8;
     }
 }

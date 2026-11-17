@@ -4,7 +4,7 @@
 MATCH void Area_SetScenarioId(u8* script) {
     u16 op;
 
-    D_8014820C = (s8)g_SceneState.scenario_id;
+    D_8014820C = (s8)g_ScenarioState.scenario_id;
     op         = *script;
     while ((u8)op != GAME_NONE) {
         if (op < 0xF0U) {

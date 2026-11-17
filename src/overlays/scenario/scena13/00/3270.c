@@ -20,17 +20,17 @@ MATCH void func_801F9E70(u16 phase) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F9F18(void) {
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             Game_ClearScriptActive();
-            g_SceneState.step_05 = 1;
+            g_ScenarioState.step_05 = 1;
             break;
         case 1:
             if (g_ScriptVars[0] != 1) {
                 break;
             }
             SYS_SetFlag(g_SceneFlags, 0x20);
-            g_SceneState.step_05 = 2;
+            g_ScenarioState.step_05 = 2;
             break;
         default:
             break;
@@ -57,7 +57,7 @@ NON_MATCHING void func_801FAFA0(s32 message, s32 frames) {
     cell                                     = (u16*)g_ScratchPad.cells.bytes + 1;
     total                                    = frames * 0x1E - 1;
     limit                                    = total;
-    elapsed                                  = (u16)(total - g_SceneState.timer_06);
+    elapsed                                  = (u16)(total - g_ScenarioState.timer_06);
     *cell                                    = total;
     g_MessageRequest                         = message;
     *(volatile u16*)g_ScratchPad.cells.bytes = elapsed;

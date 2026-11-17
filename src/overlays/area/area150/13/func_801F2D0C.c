@@ -19,7 +19,7 @@ MATCH void func_801F2D0C(void) {
                 g_SceneEventState.mode = 0;
                 g_SceneEventState.step = 0;
                 g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
-                g_SceneState.flags_01 |= 1;
+                g_ScenarioState.flags_01 |= 1;
             }
             break;
         case 14:

@@ -31,7 +31,7 @@ MATCH void func_801F33C8(void) {
                 /* FAKE: statement boundary holds the step store above the counter loads. */
                 FAKE_ORDER_LOCK(g_SceneEventState.step = 0xA);
                 counter    = D_80144F56;
-                flag       = &g_SceneState.flags_01;
+                flag       = &g_ScenarioState.flags_01;
                 D_80144F54 = 0;
                 D_80146880 = 0;
                 D_80146881 = 0;
@@ -79,7 +79,7 @@ MATCH void func_801F33C8(void) {
                 *word = 0;
                 /* The scene-event flag block sits 0x122 bytes before the saved area byte. */
                 SYS_ClearFlag((u8*)word - 0x122, 0x77);
-                flag                   = &g_SceneState.flags_01;
+                flag                   = &g_ScenarioState.flags_01;
                 value                  = *flag;
                 g_SceneEventState.mode = SCENE_EVENT_NONE;
                 g_SceneEventState.step = 0;

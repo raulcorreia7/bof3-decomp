@@ -13,7 +13,7 @@ MATCH void func_801D61C0(void) {
         Message_StartAreaMessage(MSG_239);
         return;
     }
-    if (g_SceneState.scenario_id != 0xE || SYS_TestFlag(*g_SceneFlags, 5) == 0) {
+    if (g_ScenarioState.scenario_id != 0xE || SYS_TestFlag(*g_SceneFlags, 5) == 0) {
         SYS_SetFlag(g_SceneEventFlags, 119);
     }
     i = 0;

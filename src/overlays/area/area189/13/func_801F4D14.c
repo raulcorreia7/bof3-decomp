@@ -6,7 +6,7 @@ MATCH void func_801F4D14(void) {
 
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         Game_ClearScriptActive();
-        flags  = &g_SceneState.flags_01;
+        flags  = &g_ScenarioState.flags_01;
         *flags = *flags & 0xFE;
         if (g_SceneEventState.step != 0) {
             Game_RequestAreaChange(AREA_ID_OASIS, TO_COORD(24), TO_COORD(48), FACING_UP);

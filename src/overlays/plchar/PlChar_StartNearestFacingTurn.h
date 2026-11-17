@@ -4,7 +4,7 @@ MATCH void PlChar_StartNearestFacingTurn(void) {
     s32 to_back;
     s32 to_away;
 
-    if (g_SceneState.scenario_id == 15) {
+    if (g_ScenarioState.scenario_id == 15) {
         g_Game.current->u.field.mode.value = 0;
     } else {
         to_back = g_Task->direction - FACING_RIGHT;

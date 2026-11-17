@@ -13,7 +13,7 @@ typedef enum ActorScriptMotion {
     ACTOR_SCRIPT_MOTION_MOVE_SCRIPT_RAMP_Z  = 0xF3, /* args: [script_id] [steps] [z]; also ramp vz to z */
     ACTOR_SCRIPT_MOTION_SET_Z_VELOCITY      = 0xF4, /* args: [z] [steps]; vz to target, stop vx and vy */
     ACTOR_SCRIPT_MOTION_STOP_MOVING         = 0xF5, /* clear GAME_CURSOR_FLAG_MOVING */
-    ACTOR_SCRIPT_MOTION_SET_SCENE_STATE     = 0xF6, /* args: [value] -> g_SceneState.state_04 */
+    ACTOR_SCRIPT_MOTION_SET_SCENARIO_STATE  = 0xF6, /* args: [value] -> g_ScenarioState.state_04 */
     ACTOR_SCRIPT_MOTION_WALK_TO             = 0xF7, /* args: [x] [y] [steps]; step to the cell, z follows */
     ACTOR_SCRIPT_MOTION_SET_ACTOR_MODE      = 0xF8, /* args: [mode]; func_801AC768 stores mode and walk fields */
     ACTOR_SCRIPT_MOTION_WAIT_WALK_ROUTE     = 0xF9, /* args: [a] [b]; step the walk, wait while it runs */
@@ -160,8 +160,8 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
             state->index += 2;
             break;
         }
-        case ACTOR_SCRIPT_MOTION_SET_SCENE_STATE:
-            g_SceneState.state_04 = *(table + state->index + 1);
+        case ACTOR_SCRIPT_MOTION_SET_SCENARIO_STATE:
+            g_ScenarioState.state_04 = *(table + state->index + 1);
             /* Retail shares the +1 cursor advance with case 0xF8. */
             goto advance_one;
         case ACTOR_SCRIPT_MOTION_WALK_TO: {

@@ -45,7 +45,7 @@
 /* The tone a cue reader looked up last: D_8018B40C is the tone's offset inside
  * the VAB header at `vab_header` (a word of g_SndBankHeaders). */
 #define CUE_TONE(vab_header)       ((VagAtr*)(D_8018B40C + (vab_header)))
-#define g_SceneRecord              (*(RecordKey*)&g_SceneState)
+#define g_SceneRecord              (*(RecordKey*)&g_ScenarioState)
 #define g_CurrentActor             ((u8*)g_CurrentActor)
 
 /* Store the row entry the menu selection picks and latch the delay it selects.

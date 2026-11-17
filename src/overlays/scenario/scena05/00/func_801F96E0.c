@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F96E0(void) {
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             if (!(g_UiWindowChannel & FRONTEND_FLAG_CONFIRM)) {
                 break;
@@ -20,28 +20,28 @@ MATCH void func_801F96E0(void) {
                 default:
                     return;
             }
-            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-            g_SceneState.step_05 = 1;
+            g_GameStateIndex        = GAME_REQUEST_MESSAGE;
+            g_ScenarioState.step_05 = 1;
             break;
         case 1:
             if (g_ScriptVars[0] == 2) {
                 if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                    g_SceneState.step_05 = 2;
+                    g_ScenarioState.step_05 = 2;
                 }
                 break;
             }
             if (g_ScriptVars[0] == 0x0A) {
-                g_SceneState.step_05 = 4;
+                g_ScenarioState.step_05 = 4;
             }
             break;
         case 2:
-            SCENE_MESSAGE_WAIT(MSG_037, 3);
+            SCENARIO_MESSAGE_WAIT(MSG_037, 3);
             break;
         case 3:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
                 SCRIPT_VARS_CLEAR_ALL();
-                SCENE_RETURN_TO_START();
+                SCENARIO_RETURN_TO_START();
             }
             break;
         case 4:
@@ -49,7 +49,7 @@ MATCH void func_801F96E0(void) {
                 SYS_SetFlag(g_SceneFlags, 0x1A);
                 Game_ClearScriptActive();
                 SCRIPT_VARS_CLEAR_ALL();
-                SCENE_RETURN_TO_START();
+                SCENARIO_RETURN_TO_START();
             }
             break;
     }

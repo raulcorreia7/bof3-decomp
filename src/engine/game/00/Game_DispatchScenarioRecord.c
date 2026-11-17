@@ -7,7 +7,7 @@ MATCH void Game_DispatchScenarioRecord(void* record) {
     if (actor->unk_7C & 0x4000) {
         Scene_DispatchObject(actor);
     } else {
-        g_SceneScenes[g_SceneState.scenario_id]->record(actor);
+        g_ScenarioHandlers[g_ScenarioState.scenario_id]->record(actor);
     }
     actor->callback_index = GAME_NONE;
 }

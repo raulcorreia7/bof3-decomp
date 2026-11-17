@@ -13,7 +13,7 @@ MATCH void func_800C20A8(void) {
         }
         g_BattleResult |= BATTLE_RESULT_NO_BGM;
         Battle_EndVictory();
-        ending = &g_SceneState.step_05;
+        ending = &g_ScenarioState.step_05;
         *ending += 1;
         return;
     }

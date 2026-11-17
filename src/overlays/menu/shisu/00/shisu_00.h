@@ -12,7 +12,7 @@
 /* FAKE: the callers pass and read the cost as s32, the width the real prototype (u8) lacks. */
 #define Char_GetAbilityCost ((s32 (*)(s32, s32, s32))Char_GetAbilityCost)
 
-#define g_SceneState        (*(struct SceneState*)&g_SceneState)
+#define g_ScenarioState     (*(struct ScenarioState*)&g_ScenarioState)
 
 extern u8   D_80148656;
 /* g_EmiOverlayHeader */

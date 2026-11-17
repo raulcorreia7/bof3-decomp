@@ -21,7 +21,7 @@ MATCH void func_801F2C38(void) {
                         break;
                     }
                 }
-                Message_StartAreaMessage((s16)D_801F5338[index][g_SceneState.scenario_id]);
+                Message_StartAreaMessage((s16)D_801F5338[index][g_ScenarioState.scenario_id]);
             } else {
                 blank = 0x5C;
                 slot  = 0;

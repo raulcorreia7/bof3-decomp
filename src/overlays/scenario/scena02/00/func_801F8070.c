@@ -6,9 +6,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F8070(void) {
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
-            g_SceneState.step_05 = 1;
+            g_ScenarioState.step_05 = 1;
             Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR_AREA, TO_COORD(44), TO_COORD(67), AREA_ENTRY_MAP_LOADING);
             break;
         case 1:
@@ -17,20 +17,20 @@ MATCH void func_801F8070(void) {
                 Game_ClearScriptActive();
                 g_ScriptVars[1] = 0;
                 g_ScriptVars[2] = 0;
-                SCENE_RETURN_TO_START();
+                SCENARIO_RETURN_TO_START();
                 SYS_SetFlag(g_SceneFlags, 4);
             }
             break;
         case 5:
             Scene_SetupParty(1);
-            g_SceneState.step_05 = 6;
+            g_ScenarioState.step_05 = 6;
             break;
         case 6:
             if (g_ScriptVars[0] == 0x22) {
                 Game_ClearScriptActive();
                 g_ScriptVars[1] = 0;
                 g_ScriptVars[2] = 0;
-                SCENE_RETURN_TO_START();
+                SCENARIO_RETURN_TO_START();
                 SYS_SetFlag(g_SceneFlags, 5);
                 SYS_SetFlag(g_SceneFlags, 6);
                 g_GameFlags ^= 0x80;
@@ -40,15 +40,15 @@ MATCH void func_801F8070(void) {
             break;
         case 7:
             Scene_SetupParty(2);
-            g_SceneState.step_05 = 8;
+            g_ScenarioState.step_05 = 8;
             break;
         case 8:
             if (g_ScriptVars[0] == 0x22) {
                 Game_ClearScriptActive();
-                g_ScriptVars[1]       = 0;
-                g_ScriptVars[2]       = 0;
-                g_SceneState.state_04 = 0;
-                g_SceneState.step_05  = 0;
+                g_ScriptVars[1]          = 0;
+                g_ScriptVars[2]          = 0;
+                g_ScenarioState.state_04 = 0;
+                g_ScenarioState.step_05  = 0;
                 SYS_SetFlag(g_SceneFlags, 5);
                 SYS_SetFlag(g_SceneFlags, 6);
                 g_GameFlags ^= 0x80;

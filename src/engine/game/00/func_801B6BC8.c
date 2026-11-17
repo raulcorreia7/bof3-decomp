@@ -16,7 +16,7 @@ MATCH void func_801B6BC8(void) {
         flags = g_GameState->u.field.flags;
         if (flags & 0x8) {
             g_GameState->u.field.flags = (flags & 0xF7);
-            if (!(g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE)) {
+            if (!(g_ScenarioState.flags_01 & SCENARIO_STATE_SCRIPT_ACTIVE)) {
                 g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
             }
             Actor_RequestScript(g_Task->direction);

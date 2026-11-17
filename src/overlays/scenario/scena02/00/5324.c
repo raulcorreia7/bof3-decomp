@@ -16,8 +16,8 @@ MATCH void func_801FBF24(void) {
         return;
     }
     Game_ClearScriptActive();
-    g_ScriptVars[3]      = 0;
-    g_SceneState.step_05 = 8;
+    g_ScriptVars[3]         = 0;
+    g_ScenarioState.step_05 = 8;
     *state += 1;
 }
 
@@ -104,39 +104,39 @@ MATCH void func_801FC9CC(void) {
     if (g_PartyFieldOrder[0] == 0 || g_PartyFieldOrder[0] == 3) {
         if ((u32)((u16)D_80145EC6 - 0x44) < 2 && D_80145ECA == 0x3F && D_80145EDB == 0x42 && D_80145E98 == 1) {
             SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x0B));
-            g_SceneState.step_05  = 0x1E;
-            g_SceneState.state_04 = 0x1A;
+            g_ScenarioState.step_05  = 0x1E;
+            g_ScenarioState.state_04 = 0x1A;
         }
         if (D_80145EC6 == 0x46) {
             if (D_80145ECA == 0x3E && D_80145EDB == 0x45 && D_80145E98 == 7) {
                 SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x0B));
-                g_SceneState.step_05  = 0x1E;
-                g_SceneState.state_04 = 0x1A;
+                g_ScenarioState.step_05  = 0x1E;
+                g_ScenarioState.state_04 = 0x1A;
             }
         }
         if (D_80145EC6 == 0x44 && D_80145ECA == 0x3E && D_80145EDB == 0x43 && D_80145E98 == 3) {
             SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x0B));
-            g_SceneState.step_05  = 0x1E;
-            g_SceneState.state_04 = 0x1A;
+            g_ScenarioState.step_05  = 0x1E;
+            g_ScenarioState.state_04 = 0x1A;
         }
     }
 }
 
 MATCH void func_801FCB54(void) {
-    g_ScriptVars[0]       = 31;
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_ScriptVars[3]       = 0;
-    g_SceneState.step_05  = 0;
-    g_SceneState.state_04 = 7;
+    g_ScriptVars[0]          = 31;
+    g_ScriptVars[1]          = 0;
+    g_ScriptVars[2]          = 0;
+    g_ScriptVars[3]          = 0;
+    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.state_04 = 7;
 }
 
 MATCH void func_801FCB94(void) {
-    g_ScriptVars[0]      = 0;
-    g_ScriptVars[1]      = 0;
-    g_ScriptVars[2]      = 0;
-    g_ScriptVars[3]      = 0;
-    g_SceneState.step_05 = 0;
+    g_ScriptVars[0]         = 0;
+    g_ScriptVars[1]         = 0;
+    g_ScriptVars[2]         = 0;
+    g_ScriptVars[3]         = 0;
+    g_ScenarioState.step_05 = 0;
     SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 2));
 }
 
@@ -198,18 +198,18 @@ MATCH void func_801FD0C4(void) {
 
 MATCH void func_801FD0CC(void) {
     Game_SetScriptActive();
-    g_SceneState.step_05  = 7;
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_SceneState.state_04 = 11;
+    g_ScenarioState.step_05  = 7;
+    g_ScriptVars[1]          = 0;
+    g_ScriptVars[2]          = 0;
+    g_ScenarioState.state_04 = 11;
 }
 
 MATCH void func_801FD114(void) {
     Game_SetScriptActive();
-    g_SceneState.step_05  = 2;
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_SceneState.state_04 = 11;
+    g_ScenarioState.step_05  = 2;
+    g_ScriptVars[1]          = 0;
+    g_ScriptVars[2]          = 0;
+    g_ScenarioState.state_04 = 11;
 }
 
 MATCH void func_801FD15C(void) {
@@ -219,10 +219,10 @@ MATCH void func_801FD164(void) {
     if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
         g_GameFlags ^= 0x36;
         Game_SetScriptActive();
-        g_SceneState.step_05  = 5;
-        g_ScriptVars[1]       = 0;
-        g_ScriptVars[2]       = 0;
-        g_SceneState.state_04 = 4;
+        g_ScenarioState.step_05  = 5;
+        g_ScriptVars[1]          = 0;
+        g_ScriptVars[2]          = 0;
+        g_ScenarioState.state_04 = 4;
     }
 }
 
@@ -230,10 +230,10 @@ MATCH void func_801FD1DC(void) {
     if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
         g_GameFlags ^= 0x36;
         Game_SetScriptActive();
-        g_SceneState.step_05  = 7;
-        g_ScriptVars[1]       = 0;
-        g_ScriptVars[2]       = 0;
-        g_SceneState.state_04 = 4;
+        g_ScenarioState.step_05  = 7;
+        g_ScriptVars[1]          = 0;
+        g_ScriptVars[2]          = 0;
+        g_ScenarioState.state_04 = 4;
     }
 }
 
@@ -259,58 +259,58 @@ MATCH void func_801FD2B8(void) {
 
 MATCH void func_801FD2E0(void) {
     Game_SetScriptActive();
-    g_ScriptVars[0]       = 1;
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_SceneState.step_05  = 0;
-    g_SceneState.state_04 = 7;
+    g_ScriptVars[0]          = 1;
+    g_ScriptVars[1]          = 0;
+    g_ScriptVars[2]          = 0;
+    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.state_04 = 7;
 }
 
 MATCH void func_801FD330(void) {
     Game_SetScriptActive();
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_SceneState.step_05  = 0;
-    g_SceneState.state_04 = 11;
+    g_ScriptVars[1]          = 0;
+    g_ScriptVars[2]          = 0;
+    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.state_04 = 11;
 }
 
 MATCH void func_801FD374(void) {
     Game_SetScriptActive();
-    g_SceneState.step_05  = 5;
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_SceneState.state_04 = 11;
+    g_ScenarioState.step_05  = 5;
+    g_ScriptVars[1]          = 0;
+    g_ScriptVars[2]          = 0;
+    g_ScenarioState.state_04 = 11;
 }
 
 MATCH void func_801FD3BC(void) {
     Game_SetScriptActive();
-    g_ScriptVars[0]       = 20;
-    g_SceneState.step_05  = 20;
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_SceneState.state_04 = 2;
+    g_ScriptVars[0]          = 20;
+    g_ScenarioState.step_05  = 20;
+    g_ScriptVars[1]          = 0;
+    g_ScriptVars[2]          = 0;
+    g_ScenarioState.state_04 = 2;
 }
 
 MATCH void func_801FD40C(void) {
     Game_SetScriptActive();
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_SceneState.step_05  = 0;
-    g_SceneState.state_04 = 15;
+    g_ScriptVars[1]          = 0;
+    g_ScriptVars[2]          = 0;
+    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.state_04 = 15;
 }
 
 MATCH void func_801FD450(void) {
     Game_SetScriptActive();
-    g_SceneState.step_05  = 0xF;
-    g_SceneState.state_04 = 0x10;
+    g_ScenarioState.step_05  = 0xF;
+    g_ScenarioState.state_04 = 0x10;
     SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
 }
 
 MATCH void func_801FD490(void) {
     Game_SetScriptActive();
     SCRIPT_VARS_CLEAR_ALL();
-    g_SceneState.step_05  = 0;
-    g_SceneState.state_04 = 18;
+    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.state_04 = 18;
 }
 
 MATCH void func_801FD4E4(void) {
@@ -318,35 +318,35 @@ MATCH void func_801FD4E4(void) {
 
 MATCH void func_801FD4EC(void) {
     Game_SetScriptActive();
-    g_SceneState.step_05 = 0x1e;
+    g_ScenarioState.step_05 = 0x1e;
     SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
-    g_SceneState.state_04 = 2;
+    g_ScenarioState.state_04 = 2;
 }
 
 MATCH void func_801FD53C(void) {
     Game_SetScriptActive();
-    g_SceneState.step_05  = 0xA;
-    g_SceneState.state_04 = 0x1B;
+    g_ScenarioState.step_05  = 0xA;
+    g_ScenarioState.state_04 = 0x1B;
 }
 
 MATCH void func_801FD574(void) {
     Game_SetScriptActive();
-    g_SceneState.step_05  = 0;
-    g_SceneState.state_04 = 0x17;
+    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.state_04 = 0x17;
 }
 
 MATCH void func_801FD5A8(void) {
     Game_SetScriptActive();
     SCRIPT_VARS_CLEAR_ALL();
-    g_SceneState.step_05  = 0;
-    g_SceneState.state_04 = 25;
+    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.state_04 = 25;
 }
 
 MATCH void func_801FD5FC(void) {
     Game_SetScriptActive();
-    g_SceneState.step_05 = 10;
+    g_ScenarioState.step_05 = 10;
     SCRIPT_VARS_CLEAR_ALL();
-    g_SceneState.state_04 = 25;
+    g_ScenarioState.state_04 = 25;
     SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
 }
 
@@ -356,14 +356,14 @@ MATCH void func_801FD65C(void) {
 
 MATCH void func_801FD684(void) {
     Game_SetScriptActive();
-    g_SceneState.step_05  = 0x19;
-    g_SceneState.state_04 = 0x1A;
+    g_ScenarioState.step_05  = 0x19;
+    g_ScenarioState.state_04 = 0x1A;
 }
 
 MATCH void func_801FD6BC(void) {
     Game_SetScriptActive();
-    g_SceneState.step_05  = 5;
-    g_SceneState.state_04 = 0x1B;
+    g_ScenarioState.step_05  = 5;
+    g_ScenarioState.state_04 = 0x1B;
 }
 
 MATCH s32 func_801FD6F4(void) {

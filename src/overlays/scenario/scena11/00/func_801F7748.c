@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F7748(void) {
-    SYS_DISPATCH_BYTE(D_801FAEFC, g_SceneState.state_04);
+    SYS_DISPATCH_BYTE(D_801FAEFC, g_ScenarioState.state_04);
 }
 
 MATCH void func_801F7784(void) {

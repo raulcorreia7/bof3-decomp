@@ -17,7 +17,7 @@
  * payload (file offset 0x200, so the frame-relative offsets of menu/save.h are these plus 0x200) and
  * SAVE_RunLoadRestore copies it back. */
 typedef struct SaveData {
-    /* 0x000 */ SceneState      scene_state; /* a snapshot of g_SceneState */
+    /* 0x000 */ ScenarioState   scene_state; /* a snapshot of g_ScenarioState */
     /* 0x010 */ u8              unk_10[3];
     /* 0x013 */ SceneEventState scene_event;
     /* 0x016 */ u16             scene_event_timer; /* the scene event countdown, in thirtieths of a second */

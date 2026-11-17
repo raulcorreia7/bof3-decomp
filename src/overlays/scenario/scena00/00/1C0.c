@@ -968,15 +968,15 @@ MATCH void func_801F9178(void) {
     Scene_RunScenario(0);
     Game_RequestAreaChange(AREA_ID_DAUNA_MINE_WHELP, TO_COORD(99), TO_COORD(12), FACING_RIGHT);
     /* FAKE: place loop init early. */
-    i                     = 0;
-    state                 = &g_SaveAreaId;
-    table                 = (u8(*)[4])((u8*)state + 0xC04);
-    *state                = 0x18;
-    g_SaveEntryX          = TO_COORD(99);
-    g_SaveEntryY          = TO_COORD(12);
-    g_SaveEntryFacing     = FACING_RIGHT;
-    g_SceneState.state_04 = 5;
-    g_SceneState.step_05  = 0;
+    i                        = 0;
+    state                    = &g_SaveAreaId;
+    table                    = (u8(*)[4])((u8*)state + 0xC04);
+    *state                   = 0x18;
+    g_SaveEntryX             = TO_COORD(99);
+    g_SaveEntryY             = TO_COORD(12);
+    g_SaveEntryFacing        = FACING_RIGHT;
+    g_ScenarioState.state_04 = 5;
+    g_ScenarioState.step_05  = 0;
     for (i = 0; i < 6; i++) {
         for (j = 0; j < 4; j++) {
             table[i][j] = 0xFF;
@@ -1034,10 +1034,10 @@ MATCH void func_801F92DC(void) {
             }
         } else {
         block_8:
-            g_ScriptVars[2]      = 0;
-            g_SceneState.step_05 = 0;
+            g_ScriptVars[2]         = 0;
+            g_ScenarioState.step_05 = 0;
         }
-        g_SceneState.state_04 = 0xA;
+        g_ScenarioState.state_04 = 0xA;
     }
     func_801F9644();
     if (g_GameAreaId == AREA_ID_DAUNA_MINE_INTRO) {
@@ -1045,7 +1045,7 @@ MATCH void func_801F92DC(void) {
             g_AreaDrawFlags = 0;
             SYS_SetFlag(g_SceneFlags, 0U);
             Game_SetScriptActive();
-            g_SceneState.state_04 = 2;
+            g_ScenarioState.state_04 = 2;
         }
         if (g_GameCellType == 2) {
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
@@ -1059,9 +1059,9 @@ MATCH void func_801F92DC(void) {
         D_80147BA0 = 1;
         D_80147BA4 = 3;
         SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0));
-        g_SceneState.state_04 = 0xB;
-        g_SceneState.timer_06 = 20;
-        g_AreaDrawFlags       = 0;
+        g_ScenarioState.state_04 = 0xB;
+        g_ScenarioState.timer_06 = 20;
+        g_AreaDrawFlags          = 0;
     }
     if (g_GameAreaId == AREA_ID_TITLE_INTRO) {
         g_AreaCameraAngle.vx = 256;
@@ -1076,7 +1076,7 @@ MATCH void func_801F92DC(void) {
             Scene_SetupParty(0U);
             next_state = 9;
         }
-        g_SceneState.state_04 = next_state;
+        g_ScenarioState.state_04 = next_state;
     }
     D_80146872 = 2;
 }
@@ -1179,22 +1179,22 @@ MATCH void func_801F9868(void) {
             case 0:
                 g_ScriptVarsReq.word = 0;
                 if (SYS_TestFlag(g_SceneFlags, 6) == 0) {
-                    g_SceneState.state_04 = 8;
-                    g_SceneState.step_05  = 0;
+                    g_ScenarioState.state_04 = 8;
+                    g_ScenarioState.step_05  = 0;
                 }
                 break;
             case 2:
                 if (SYS_TestFlag(g_SceneFlags, 8) == 0) {
-                    g_ScriptVarsReq.word  = 0;
-                    g_SceneState.state_04 = 6;
-                    g_SceneState.step_05  = 0;
+                    g_ScriptVarsReq.word     = 0;
+                    g_ScenarioState.state_04 = 6;
+                    g_ScenarioState.step_05  = 0;
                 }
                 break;
             case 4:
                 if (SYS_TestFlag(g_SceneFlags, 9) == 0) {
-                    g_ScriptVarsReq.word  = 0;
-                    g_SceneState.state_04 = 6;
-                    g_SceneState.step_05  = 0;
+                    g_ScriptVarsReq.word     = 0;
+                    g_ScenarioState.state_04 = 6;
+                    g_ScenarioState.step_05  = 0;
                 }
                 break;
         }
@@ -1202,7 +1202,7 @@ MATCH void func_801F9868(void) {
 }
 
 MATCH void func_801F9B98(void) {
-    SYS_DISPATCH_BYTE(D_801FCA1C, g_SceneState.state_04);
+    SYS_DISPATCH_BYTE(D_801FCA1C, g_ScenarioState.state_04);
 }
 
 MATCH void func_801F9BD4(void) {
@@ -1216,7 +1216,7 @@ MATCH void func_801F9BDC(void) {
 MATCH void func_801F9BE4(void) {
     u16* counter;
 
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             if (WINDOW_EFFECT_BUSY()) {
                 break;
@@ -1224,13 +1224,13 @@ MATCH void func_801F9BE4(void) {
             SsSetMVol(0, 0);
             MESSAGE_START_WAIT(MSG_016);
             SND_PlayBGM(6, 0x5A, 8);
-            g_SceneState.timer_06 = 0;
-            g_SceneState.step_05  = 1;
+            g_ScenarioState.timer_06 = 0;
+            g_ScenarioState.step_05  = 1;
             g_GameFlags |= 0x80;
             break;
 
         case 1:
-            counter = &g_SceneState.timer_06;
+            counter = &g_ScenarioState.timer_06;
             SsSetMVol(*counter, *counter);
             if (*counter < 124) {
                 *counter = *counter + 1;
@@ -1243,9 +1243,9 @@ MATCH void func_801F9BE4(void) {
             Game_SetScriptActive();
             Party_HideBattlers();
             UI_SetMode(UI_MODE_FADE_IN);
-            g_ScriptVars[3]      = 1;
-            *counter             = 0;
-            g_SceneState.step_05 = 2;
+            g_ScriptVars[3]         = 1;
+            *counter                = 0;
+            g_ScenarioState.step_05 = 2;
             break;
 
         case 2:
@@ -1253,7 +1253,7 @@ MATCH void func_801F9BE4(void) {
                 break;
             }
             UI_SetMode(UI_MODE_FADE_OUT);
-            g_SceneState.step_05 = 3;
+            g_ScenarioState.step_05 = 3;
             break;
 
         case 3:
@@ -1261,7 +1261,7 @@ MATCH void func_801F9BE4(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            SCENE_MESSAGE_WAIT(MSG_017, 4);
+            SCENARIO_MESSAGE_WAIT(MSG_017, 4);
             break;
 
         case 4:
@@ -1269,15 +1269,15 @@ MATCH void func_801F9BE4(void) {
                 break;
             }
             Game_RequestAreaChange(AREA_ID_DAUNA_MINE_INTRO, TO_COORD(68), TO_COORD(8), FACING_DOWN);
-            g_SceneState.step_05 = 5;
+            g_ScenarioState.step_05 = 5;
             break;
 
         case 5:
             if (g_GameCellType != 2) {
                 break;
             }
-            g_AreaDrawFlags      = AREA_DRAW_ALL_FLAGS;
-            g_SceneState.step_05 = 6;
+            g_AreaDrawFlags         = AREA_DRAW_ALL_FLAGS;
+            g_ScenarioState.step_05 = 6;
             break;
 
         case 6:
@@ -1293,7 +1293,7 @@ MATCH void func_801F9BE4(void) {
                 g_SpawnedActors[g_ScratchPad[0]].camera_angle.z = g_AreaCameraAngle.vz;
                 g_SpawnedActors[g_ScratchPad[0]].layer          = 0x60;
             }
-            g_SceneState.step_05 = 7;
+            g_ScenarioState.step_05 = 7;
             break;
 
         case 7:
@@ -1303,8 +1303,8 @@ MATCH void func_801F9BE4(void) {
             Game_RequestAreaChange(AREA_ID_TITLE_INTRO, TO_COORD(7), TO_COORD(20), FACING_UP_LEFT);
             g_GameRequestKind = 0xFF;
             SND_FadeOutBGM(6, 0x5A, 0x40);
-            g_SceneState.state_04 = 3;
-            g_SceneState.step_05  = 0;
+            g_ScenarioState.state_04 = 3;
+            g_ScenarioState.step_05  = 0;
             break;
     }
 }
@@ -1313,7 +1313,7 @@ MATCH void func_801F9FB8(void) {
     u8* state;
     u8  id;
 
-    state = &g_SceneState.step_05;
+    state = &g_ScenarioState.step_05;
     switch (*state) {
         case 0:
             if (g_ScriptVars[2] == 0x30) {
@@ -1355,8 +1355,8 @@ MATCH void func_801F9FB8(void) {
             if (g_ScriptVars[2] == 0x38) {
                 SND_PlayBGM(2, 0x64, 0x20);
                 Game_RequestAreaChange(AREA_ID_DAUNA_MINE_WORKER, TO_COORD(52), TO_COORD(67), FACING_RIGHT);
-                g_SceneState.state_04 = 4;
-                *state                = 0;
+                g_ScenarioState.state_04 = 4;
+                *state                   = 0;
             }
             break;
     }
@@ -1365,26 +1365,26 @@ MATCH void func_801F9FB8(void) {
 MATCH void func_801FA27C(void) {
     u8 id;
 
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             if (WINDOW_EFFECT_BUSY()) {
                 break;
             }
-            SCENE_MESSAGE_WAIT(MSG_001, 1);
+            SCENARIO_MESSAGE_WAIT(MSG_001, 1);
             break;
 
         case 1:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
-            g_SceneState.step_05 = 2;
+            g_ScenarioState.step_05 = 2;
             break;
 
         case 2:
             if (g_ScriptVarsReq.byte != 3) {
                 break;
             }
-            SCENE_MESSAGE_WAIT(MSG_002, 3);
+            SCENARIO_MESSAGE_WAIT(MSG_002, 3);
             break;
 
         case 3:
@@ -1392,14 +1392,14 @@ MATCH void func_801FA27C(void) {
                 break;
             }
             MESSAGE_START_WAIT(MSG_003);
-            g_SceneState.timer_06 = 304;
-            g_SceneState.step_05  = 4;
+            g_ScenarioState.timer_06 = 304;
+            g_ScenarioState.step_05  = 4;
             break;
         case 4: {
             u16* counter;
             u16  count;
 
-            counter = &g_SceneState.timer_06;
+            counter = &g_ScenarioState.timer_06;
             count   = *counter;
             if (count != 0) {
                 count--;
@@ -1407,7 +1407,7 @@ MATCH void func_801FA27C(void) {
                 g_AreaCameraOffsetZ = (((304 - count) * 0x57943u) >> 16);
                 break;
             }
-            g_SceneState.step_05 = 5;
+            g_ScenarioState.step_05 = 5;
             break;
         }
 
@@ -1425,7 +1425,7 @@ MATCH void func_801FA27C(void) {
                 g_SpawnedActors[g_ScratchPad[0]].camera_angle.z = g_AreaCameraAngle.vz;
                 g_SpawnedActors[g_ScratchPad[0]].layer          = 0x60;
             }
-            g_SceneState.step_05 = 6;
+            g_ScenarioState.step_05 = 6;
             break;
 
         case 6:
@@ -1442,20 +1442,20 @@ MATCH void func_801FA27C(void) {
                 g_SpawnedActors[g_ScratchPad[0]].camera_angle.z = g_AreaCameraAngle.vz;
                 g_SpawnedActors[g_ScratchPad[0]].layer          = 0x20;
             }
-            g_SceneState.timer_06 = 512;
-            g_SceneState.step_05  = 7;
+            g_ScenarioState.timer_06 = 512;
+            g_ScenarioState.step_05  = 7;
             break;
 
         case 7: {
             u16* counter;
 
-            counter = &g_SceneState.timer_06;
+            counter = &g_ScenarioState.timer_06;
             if (*counter != 0) {
                 g_AreaCameraOffsetZ = ((*counter * 0xDu) >> 2);
                 (*counter)--;
                 break;
             }
-            g_SceneState.step_05 = 8;
+            g_ScenarioState.step_05 = 8;
             break;
         }
 
@@ -1464,7 +1464,7 @@ MATCH void func_801FA27C(void) {
                 break;
             }
             UI_SetMode(UI_MODE_FADE_OUT);
-            g_SceneState.step_05 = 9;
+            g_ScenarioState.step_05 = 9;
             break;
 
         case 9:
@@ -1474,7 +1474,7 @@ MATCH void func_801FA27C(void) {
             g_AreaDrawFlags = 0;
             MESSAGE_START_WAIT(MSG_004);
             SND_FadeOutBGM(2, 0x64, 0x20);
-            g_SceneState.step_05 = 0xA;
+            g_ScenarioState.step_05 = 0xA;
             break;
 
         case 10:
@@ -1482,8 +1482,8 @@ MATCH void func_801FA27C(void) {
                 break;
             }
             Game_RequestAreaChange(AREA_ID_DAUNA_MINE_WHELP, TO_COORD(99), TO_COORD(12), FACING_RIGHT);
-            g_SceneState.state_04 = 5;
-            g_SceneState.step_05  = 0;
+            g_ScenarioState.state_04 = 5;
+            g_ScenarioState.step_05  = 0;
             break;
     }
 }
@@ -1496,7 +1496,7 @@ MATCH void func_801FA7D8(void) {
     s32  distance;
     s32  delta;
 
-    if (((g_SceneState.step_05 - 4) < 3U) && ((g_FrameCount & 0xFu) == 0u)) {
+    if (((g_ScenarioState.step_05 - 4) < 3U) && ((g_FrameCount & 0xFu) == 0u)) {
         bit             = (1 << (RANDOM_MOD(3)));
         g_ScriptVars[3] = bit;
         if ((bit & BYTE_MASK) >= 2u) {
@@ -1504,22 +1504,22 @@ MATCH void func_801FA7D8(void) {
         }
     }
 
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             g_GameFlags |= 0x80u;
             SYS_SetFlag(g_SceneFlags, 0u);
             SYS_SetFlag(g_SceneFlags, 1u);
             SYS_SetFlag(g_SceneFlags, 2u);
             SYS_SetFlag(g_SceneFlags, 3u);
-            g_SceneState.timer_06 = 0x90u;
-            g_SceneState.step_05  = 1u;
+            g_ScenarioState.timer_06 = 0x90u;
+            g_ScenarioState.step_05  = 1u;
             return;
 
         case 1:
         case 2: {
             u16* counter;
 
-            counter = &g_SceneState.timer_06;
+            counter = &g_ScenarioState.timer_06;
             if (*counter != 0u) {
                 g_AreaCameraOffsetZ = ((u32)*counter << 0x13 >> 0x10);
                 (*counter)--;
@@ -1527,15 +1527,15 @@ MATCH void func_801FA7D8(void) {
             }
             g_AreaCameraRefreshCount = 2u;
             g_AreaCameraOffsetZ      = 0u;
-            g_SceneState.step_05     = 3u;
+            g_ScenarioState.step_05  = 3u;
             return;
         }
 
         case 3:
             if (g_ScriptVarsReq.byte == 0xCu) {
-                g_SceneState.timer_06 = 0x3Cu;
-                g_SceneState.step_05  = 4u;
-                D_80146866            = 0u;
+                g_ScenarioState.timer_06 = 0x3Cu;
+                g_ScenarioState.step_05  = 4u;
+                D_80146866               = 0u;
             }
             break;
 
@@ -1543,14 +1543,14 @@ MATCH void func_801FA7D8(void) {
             u16* counter;
             u8*  fade;
 
-            counter = &g_SceneState.timer_06;
+            counter = &g_ScenarioState.timer_06;
             if (*counter != 0u) {
                 (*counter)--;
             } else {
                 u8* scene;
 
-                g_SceneState.step_05 = 5u;
-                scene                = &g_ScriptVarsReq.byte;
+                g_ScenarioState.step_05 = 5u;
+                scene                   = &g_ScriptVarsReq.byte;
                 (*scene)++;
             }
             fade = &D_80146866;
@@ -1569,8 +1569,8 @@ MATCH void func_801FA7D8(void) {
             FAKE_REG(s32, index_raw, "v0");
 
             if (g_ScriptVarsReq.byte == 0x11u) {
-                g_SceneState.timer_06 = 0x3Cu;
-                g_SceneState.step_05  = 6u;
+                g_ScenarioState.timer_06 = 0x3Cu;
+                g_ScenarioState.step_05  = 6u;
             }
             if (D_80146866 == 0u) {
                 break;
@@ -1600,7 +1600,7 @@ MATCH void func_801FA7D8(void) {
             u16* counter;
             u8*  scene;
 
-            counter = &g_SceneState.timer_06;
+            counter = &g_ScenarioState.timer_06;
             if (*counter != 0u) {
                 (*counter)--;
                 return;
@@ -1616,9 +1616,9 @@ MATCH void func_801FA7D8(void) {
                 g_SpawnedActors[g_ScratchPad[0]].pos.z.fixed  = distance;
                 g_SpawnedActors[g_ScratchPad[0]].unk_29       = 0;
             }
-            *counter             = 0x84u;
-            g_SceneState.step_05 = 7u;
-            scene                = &g_ScriptVarsReq.byte;
+            *counter                = 0x84u;
+            g_ScenarioState.step_05 = 7u;
+            scene                   = &g_ScriptVarsReq.byte;
             (*scene)++;
             return;
         }
@@ -1626,11 +1626,11 @@ MATCH void func_801FA7D8(void) {
         case 7: {
             u16* counter;
 
-            counter = &g_SceneState.timer_06;
+            counter = &g_ScenarioState.timer_06;
             (*counter)--;
             if (*counter == 32u) {
                 UI_SetMode(8u);
-                g_SceneState.step_05 = 8u;
+                g_ScenarioState.step_05 = 8u;
                 return;
             }
             break;
@@ -1639,7 +1639,7 @@ MATCH void func_801FA7D8(void) {
         case 8: {
             u16* counter;
 
-            counter = &g_SceneState.timer_06;
+            counter = &g_ScenarioState.timer_06;
             if (*counter != 0u) {
                 (*counter)--;
                 if (WINDOW_EFFECT_IDLE()) {
@@ -1647,9 +1647,9 @@ MATCH void func_801FA7D8(void) {
                     return;
                 }
             } else {
-                g_ScriptVarsReq.byte = 0x14u;
-                *counter             = 0x40u;
-                g_SceneState.step_05 = 0xAu;
+                g_ScriptVarsReq.byte    = 0x14u;
+                *counter                = 0x40u;
+                g_ScenarioState.step_05 = 0xAu;
                 return;
             }
             break;
@@ -1658,8 +1658,8 @@ MATCH void func_801FA7D8(void) {
         case 9:
             if (g_ScriptVarsReq.byte == 0x14u) {
                 func_80164020(0u, 1u);
-                g_SceneState.timer_06 = 0x25Cu;
-                g_SceneState.step_05  = 0xAu;
+                g_ScenarioState.timer_06 = 0x25Cu;
+                g_ScenarioState.step_05  = 0xAu;
                 return;
             }
             break;
@@ -1667,23 +1667,23 @@ MATCH void func_801FA7D8(void) {
         case 10: {
             u16* counter;
 
-            counter = &g_SceneState.timer_06;
+            counter = &g_ScenarioState.timer_06;
             if (*counter != 0u) {
                 (*counter)--;
                 return;
             }
             SYS_SetFlag(g_SceneFlags, 4u);
             Game_RequestAreaChange(AREA_ID_DAUNA_MINE_WHELP, TO_COORD(99), TO_COORD(17), FACING_RIGHT);
-            g_GameRequestKind    = 9u;
-            g_GameEntryMode      = 0xFFu;
-            g_SceneState.step_05 = 0xBu;
+            g_GameRequestKind       = 9u;
+            g_GameEntryMode         = 0xFFu;
+            g_ScenarioState.step_05 = 0xBu;
             return;
         }
 
         case 11:
             if (WINDOW_EFFECT_IDLE()) {
-                g_ScriptVarsReq.byte = 1u;
-                g_SceneState.step_05 = 0xCu;
+                g_ScriptVarsReq.byte    = 1u;
+                g_ScenarioState.step_05 = 0xCu;
                 return;
             }
             break;
@@ -1691,15 +1691,15 @@ MATCH void func_801FA7D8(void) {
         case 12:
             if ((g_ScriptVarsReq.byte == 4u) && (EMI_IsReady() != 0)) {
                 SND_PlayBGM(3u, 0x69, 8);
-                g_SceneState.step_05 = 0xDu;
+                g_ScenarioState.step_05 = 0xDu;
                 return;
             }
             break;
 
         case 13:
             if (g_ScriptVarsReq.byte == 5u) {
-                g_SceneState.timer_06 = 0x20u;
-                g_SceneState.step_05  = 0xEu;
+                g_ScenarioState.timer_06 = 0x20u;
+                g_ScenarioState.step_05  = 0xEu;
                 return;
             }
             break;
@@ -1709,7 +1709,7 @@ MATCH void func_801FA7D8(void) {
             u16  count;
             s32* pos;
 
-            counter = &g_SceneState.timer_06;
+            counter = &g_ScenarioState.timer_06;
             count   = *counter;
             if (count != 0u) {
                 pos = &D_801469EC;
@@ -1719,7 +1719,7 @@ MATCH void func_801FA7D8(void) {
                 D_801469F0 -= delta;
                 return;
             }
-            g_SceneState.step_05 = 0xFu;
+            g_ScenarioState.step_05 = 0xFu;
             return;
         }
 
@@ -1728,7 +1728,7 @@ MATCH void func_801FA7D8(void) {
                 func_801BFE34(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed, 1u);
                 Battle_StartScripted(1u);
                 SYS_SetFlag(g_SceneFlags, 5u);
-                g_SceneState.step_05 = 0x10u;
+                g_ScenarioState.step_05 = 0x10u;
                 return;
             }
             break;
@@ -1740,8 +1740,8 @@ MATCH void func_801FA7D8(void) {
             (*scene)++;
             Game_ClearScriptActive();
             Scene_SetupParty(6u);
-            g_SceneState.state_04 = 0u;
-            g_SceneState.step_05  = 0u;
+            g_ScenarioState.state_04 = 0u;
+            g_ScenarioState.step_05  = 0u;
             break;
         }
 
@@ -1751,30 +1751,30 @@ MATCH void func_801FA7D8(void) {
 }
 
 MATCH void func_801FAF6C(void) {
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
-            g_SceneState.step_05 = D_801FCA5C[g_GameCellType];
+            g_ScenarioState.step_05 = D_801FCA5C[g_GameCellType];
             break;
 
         case 10:
             Game_SetScriptActive();
             Scene_SetupParty(3);
             SYS_SetFlag(g_SceneFlags, 7);
-            g_SceneState.step_05 = 0xB;
+            g_ScenarioState.step_05 = 0xB;
             break;
 
         case 11:
             if (g_ScriptVarsReq.byte == 0xB) {
                 func_801BFE34(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed, 4);
                 Battle_StartScripted(4);
-                g_SceneState.step_05 = 0xC;
+                g_ScenarioState.step_05 = 0xC;
             }
             break;
 
         case 13:
             g_ScriptVarsReq.byte++;
             Game_ClearScriptActive();
-            SCENE_RETURN_TO_START();
+            SCENARIO_RETURN_TO_START();
             break;
 
         case 20:
@@ -1782,7 +1782,7 @@ MATCH void func_801FAF6C(void) {
                 Game_SetScriptActive();
                 Scene_SetupParty(4);
                 SYS_SetFlag(g_SceneFlags, 8);
-                g_SceneState.step_05 = 0x15;
+                g_ScenarioState.step_05 = 0x15;
             }
             break;
 
@@ -1790,7 +1790,7 @@ MATCH void func_801FAF6C(void) {
             if (g_ScriptVarsReq.byte == 5) {
                 func_801BFE34(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed, 5);
                 Battle_StartScripted(5);
-                g_SceneState.step_05 = 0x16;
+                g_ScenarioState.step_05 = 0x16;
             }
             break;
 
@@ -1799,7 +1799,7 @@ MATCH void func_801FAF6C(void) {
                 Game_SetScriptActive();
                 Scene_SetupParty(5);
                 SYS_SetFlag(g_SceneFlags, 9);
-                g_SceneState.step_05 = 0x1F;
+                g_ScenarioState.step_05 = 0x1F;
             }
             break;
 
@@ -1807,22 +1807,22 @@ MATCH void func_801FAF6C(void) {
             if (g_ScriptVarsReq.byte == 4) {
                 func_801BFE34(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed, 6);
                 Battle_StartScripted(6);
-                g_SceneState.step_05 = 0x20;
+                g_ScenarioState.step_05 = 0x20;
             }
             break;
 
         case 23:
         case 33:
             Game_ClearScriptActive();
-            SCENE_RETURN_TO_START();
+            SCENARIO_RETURN_TO_START();
             g_ScriptVarsReq.byte++;
             break;
 
         case 50:
             Game_RequestAreaChange(AREA_ID_TITLE_INTRO, TO_COORD(4), TO_COORD(36), FACING_UP);
-            g_GamePrevSelection   = 4;
-            g_SceneState.state_04 = 0;
-            g_SceneState.step_05  = 0;
+            g_GamePrevSelection      = 4;
+            g_ScenarioState.state_04 = 0;
+            g_ScenarioState.step_05  = 0;
             break;
     }
 }
@@ -1830,19 +1830,19 @@ MATCH void func_801FAF6C(void) {
 MATCH void func_801FB204(void) {
     u8 slot;
 
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             g_ScriptVarsReq.byte = 0xA;
             Scene_SetupParty(1);
             Area_StartScrollRoute(1);
-            g_SceneState.step_05 = 1;
+            g_ScenarioState.step_05 = 1;
             break;
 
         case 1:
             if (g_ScriptVarsReq.byte == 0xD) {
                 func_801BFE34(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed, 7);
                 Battle_StartScripted(7);
-                g_SceneState.step_05 = 2;
+                g_ScenarioState.step_05 = 2;
             }
             break;
 
@@ -1851,7 +1851,7 @@ MATCH void func_801FB204(void) {
 
         case 3:
             g_GameFlags |= 0x180;
-            SCENE_MESSAGE_WAIT(MSG_014, 4);
+            SCENARIO_MESSAGE_WAIT(MSG_014, 4);
             break;
 
         case 4:
@@ -1866,11 +1866,11 @@ MATCH void func_801FB204(void) {
                 Area_InitMapRenderer();
                 D_80143F84.raw = TO_COORD(1408);
                 Area_AdvanceScroll(1408);
-                g_AreaCameraAngle.vx  = -778;
-                g_AreaCameraAngle.vz  = 384;
-                g_AreaCameraOffsetZ   = 0x480;
-                g_SceneState.timer_06 = 30;
-                g_SceneState.step_05  = 5;
+                g_AreaCameraAngle.vx     = -778;
+                g_AreaCameraAngle.vz     = 384;
+                g_AreaCameraOffsetZ      = 0x480;
+                g_ScenarioState.timer_06 = 30;
+                g_ScenarioState.step_05  = 5;
             }
             break;
 
@@ -1878,7 +1878,7 @@ MATCH void func_801FB204(void) {
             u16* countdown;
 
             if (WINDOW_EFFECT_IDLE()) {
-                countdown = &g_SceneState.timer_06;
+                countdown = &g_ScenarioState.timer_06;
                 if (TIMER_EXPIRED(*countdown)) {
                     Area_StartScrollRoute(2);
                     D_80143F84.raw = TO_COORD(1408);
@@ -1893,8 +1893,8 @@ MATCH void func_801FB204(void) {
                         g_SpawnedActors[g_ScratchPad[0]].camera_angle.z = 512;
                         g_SpawnedActors[g_ScratchPad[0]].layer          = 0x20;
                     }
-                    *countdown           = 0x20;
-                    g_SceneState.step_05 = 6;
+                    *countdown              = 0x20;
+                    g_ScenarioState.step_05 = 6;
                 }
             }
             break;
@@ -1903,12 +1903,12 @@ MATCH void func_801FB204(void) {
         case 6: {
             u16* countdown;
 
-            countdown = &g_SceneState.timer_06;
+            countdown = &g_ScenarioState.timer_06;
             if (*countdown != 0) {
                 (*countdown)--;
                 g_AreaCameraOffsetZ -= 0x24;
             } else {
-                g_SceneState.step_05 = 7;
+                g_ScenarioState.step_05 = 7;
                 g_ScriptVarsReq.byte++;
             }
             break;
@@ -1917,15 +1917,15 @@ MATCH void func_801FB204(void) {
         case 7:
             if (g_ScriptVarsReq.byte == 0x24) {
                 SND_PlayBGM(4, 0x69, 8);
-                g_SceneState.step_05 = 8;
+                g_ScenarioState.step_05 = 8;
             }
             break;
 
         case 8:
             if (g_ScriptVarsReq.byte == 0x25) {
                 Game_RequestAreaChange(AREA_ID_TITLE_INTRO, TO_COORD(4), TO_COORD(36), FACING_UP);
-                g_SceneState.state_04 = 0;
-                g_SceneState.step_05  = 0;
+                g_ScenarioState.state_04 = 0;
+                g_ScenarioState.step_05  = 0;
             }
             break;
     }
@@ -1934,35 +1934,35 @@ MATCH void func_801FB204(void) {
 MATCH void func_801FB620(void) {
     volatile u8* state;
 
-    state = &g_SceneState.step_05;
+    state = &g_ScenarioState.step_05;
     if (*state == 0) {
         SYS_SetFlag(g_SceneFlags, 6);
         Scene_SetupParty(2);
-        g_SceneState.state_04 = 0;
-        *state                = 0;
+        g_ScenarioState.state_04 = 0;
+        *state                   = 0;
     }
 }
 
 MATCH void func_801FB67C(void) {
     u8* state;
 
-    state = &g_SceneState.step_05;
+    state = &g_ScenarioState.step_05;
     switch (*state) {
         case 0:
             if (g_ScriptVars[2] == 0x71) {
-                g_SceneState.timer_06 = 60;
-                *state                = 2;
+                g_ScenarioState.timer_06 = 60;
+                *state                   = 2;
             }
             break;
         case 2:
-            if (g_SceneState.timer_06 != 0) {
-                g_SceneState.timer_06--;
+            if (g_ScenarioState.timer_06 != 0) {
+                g_ScenarioState.timer_06--;
             } else {
                 Game_RequestAreaChange(AREA_ID_DAUNA_MINE_ADULT, TO_COORD(15), TO_COORD(33), FACING_UP);
                 SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 6));
-                g_ScriptVarsReq.word  = 0;
-                *state                = 0;
-                g_SceneState.state_04 = 0xA;
+                g_ScriptVarsReq.word     = 0;
+                *state                   = 0;
+                g_ScenarioState.state_04 = 0xA;
             }
             break;
     }
@@ -1975,12 +1975,12 @@ MATCH void func_801FB67C(void) {
 MATCH void func_801FB744(void) {
     u8* state;
 
-    state = &g_SceneState.step_05;
+    state = &g_ScenarioState.step_05;
     switch (*state) {
         case 0:
             if (Area_StepCameraAngle(0x2D, 0xA) == 0) {
-                g_SceneState.timer_06 = 50;
-                *state                = 1;
+                g_ScenarioState.timer_06 = 50;
+                *state                   = 1;
             }
             break;
 
@@ -1993,8 +1993,8 @@ MATCH void func_801FB744(void) {
                 D_80147C58 = ((RANDOM_MASK(7) - 3) << 0xA) + (TO_COORD(21) + COORD_HALF);
             }
             if (*request == 3) {
-                if (g_SceneState.timer_06 != 0) {
-                    g_SceneState.timer_06--;
+                if (g_ScenarioState.timer_06 != 0) {
+                    g_ScenarioState.timer_06--;
                 } else {
                     Game_RequestAreaChange(AREA_ID_DAUNA_MINE_ADULT, TO_COORD(26), TO_COORD(22), FACING_UP);
                     *state = 2;
@@ -2014,9 +2014,9 @@ MATCH void func_801FB744(void) {
             if (g_ScriptVars[2] == 9) {
                 g_GameFlags &= 0xFF7F;
                 Game_RequestAreaChange(AREA_ID_NO_TEXT_25, TO_COORD(11) + COORD_HALF, TO_COORD(90), FACING_UP);
-                g_SceneState.state_04 = 0xB;
-                g_SceneState.timer_06 = 600;
-                *state                = 0;
+                g_ScenarioState.state_04 = 0xB;
+                g_ScenarioState.timer_06 = 600;
+                *state                   = 0;
             }
             break;
     }
@@ -2047,16 +2047,16 @@ MATCH void func_801FB924(void) {
         Area_RefreshCellGrid();
     }
 
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
-            counter = &g_SceneState.timer_06;
+            counter = &g_ScenarioState.timer_06;
             if (TIMER_EXPIRED(*counter)) {
                 g_ScriptVars[2] = 0x10;
                 g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
                 UI_SetMode(UI_MODE_FADE_IN);
                 SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
-                *counter             = 60;
-                g_SceneState.step_05 = 3;
+                *counter                = 60;
+                g_ScenarioState.step_05 = 3;
             }
             break;
 
@@ -2067,13 +2067,13 @@ MATCH void func_801FB924(void) {
         case 3: {
             u16* counter;
 
-            counter = &g_SceneState.timer_06;
+            counter = &g_ScenarioState.timer_06;
             if (*counter != 0) {
                 (*counter)--;
             } else {
-                g_ScriptVars[2]      = 0x11;
-                g_SceneState.step_05 = 4;
-                *counter             = 900;
+                g_ScriptVars[2]         = 0x11;
+                g_ScenarioState.step_05 = 4;
+                *counter                = 900;
             }
             break;
         }
@@ -2081,7 +2081,7 @@ MATCH void func_801FB924(void) {
         case 4: {
             u16 buttons;
 
-            counter = &g_SceneState.timer_06;
+            counter = &g_ScenarioState.timer_06;
             buttons = g_InputPressed;
             (*counter)--;
             if ((buttons & INPUT_DIRECTIONAL) != 0 || *counter == 0) {
@@ -2089,8 +2089,8 @@ MATCH void func_801FB924(void) {
                 g_ScriptVarsReq.byte = 0;
                 g_ScriptVars[2]      = 0x12;
                 func_801FBE88();
-                *counter             = 900;
-                g_SceneState.step_05 = 5;
+                *counter                = 900;
+                g_ScenarioState.step_05 = 5;
             }
             break;
         }
@@ -2123,14 +2123,14 @@ MATCH void func_801FB924(void) {
                 }
             }
             if (g_ScriptVars[1] >= 31) {
-                g_ScriptVars[2]       = 0x13;
-                g_SceneState.step_05  = 6;
-                g_SceneState.timer_06 = 0;
+                g_ScriptVars[2]          = 0x13;
+                g_ScenarioState.step_05  = 6;
+                g_ScenarioState.timer_06 = 0;
             }
-            timer = &g_SceneState.timer_06;
+            timer = &g_ScenarioState.timer_06;
             if (TIMER_EXPIRED(*timer)) {
-                g_ScriptVars[2]      = 0x13;
-                g_SceneState.step_05 = 6;
+                g_ScriptVars[2]         = 0x13;
+                g_ScenarioState.step_05 = 6;
             }
             break;
         }
@@ -2156,22 +2156,22 @@ MATCH void func_801FB924(void) {
             }
             SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 4));
             if (g_ScriptVars[2] == 0x15) {
-                counter[0]           = 0;
-                counter[1]           = 0;
-                g_SceneState.step_05 = 7;
+                counter[0]              = 0;
+                counter[1]              = 0;
+                g_ScenarioState.step_05 = 7;
             }
             break;
         }
 
         case 7:
             if (g_ScriptVars[2] == 0x17) {
-                g_SceneState.step_05 = 8;
+                g_ScenarioState.step_05 = 8;
             }
             break;
 
         case 8:
             UI_SetMode(UI_MODE_FADE_OUT);
-            g_SceneState.step_05 = 9;
+            g_ScenarioState.step_05 = 9;
             break;
 
         case 9:
@@ -2359,8 +2359,8 @@ MATCH void func_801FC810(void) {
  * column). A hit starts a scripted scene and returns 1; a nonzero result blocks the step. */
 MATCH s32 Scene_TestStepTrigger(s32 x) { /* func_801FC818 */
     if ((g_GameAreaId == AREA_ID_DAUNA_MINE_WORKER) && ((x >> 16) == 43) && (SYS_TestFlag(g_SceneFlags, 6) != 0)) {
-        g_SceneState.state_04 = 7;
-        g_SceneState.step_05  = 0;
+        g_ScenarioState.state_04 = 7;
+        g_ScenarioState.step_05  = 0;
     }
     if (g_GameAreaId == AREA_ID_DAUNA_MINE_WHELP) {
         if (g_GameCellType == 0) {
@@ -2369,8 +2369,8 @@ MATCH s32 Scene_TestStepTrigger(s32 x) { /* func_801FC818 */
                     return 0;
                 }
                 Game_SetScriptActive();
-                g_SceneState.state_04 = 6;
-                g_SceneState.step_05  = 0;
+                g_ScenarioState.state_04 = 6;
+                g_ScenarioState.step_05  = 0;
                 return 1;
             }
         }

@@ -61,16 +61,16 @@ typedef union WorldMapBattlefields {
     u8                  bytes[40];
 } WorldMapBattlefields;
 
-/* Scene handler block behind g_SceneScenes: one entry per dispatch slot. */
-typedef struct SceneSlots {
+/* The handlers of one scenario, behind g_ScenarioHandlers: update (+0x00), record, step_test, cell_test and call (+0x10). */
+typedef struct ScenarioHandlers {
     Callback update;
     void (*record)(void*);
     s8 (*step_test)(s32, s32);
     s8 (*cell_test)(s32, s32);
-    s8 (*callback)(s32, s32);
-} SceneSlots;
+    s8 (*call)(s32, s32);
+} ScenarioHandlers;
 
-ASSERT_SIZE(SceneSlots, 0x14);
+ASSERT_SIZE(ScenarioHandlers, 0x14);
 
 /* Four-byte battle party slot. Area_PlaceEncounterParty marks it active, stores its sort
  * key and orders the slots by that key. */
@@ -115,7 +115,7 @@ extern Step2                s_BattleScrollCellSteps[4];
 extern WorldMapRegion       g_WorldMapRegions[WORLD_MAP_REGION_COUNT];
 extern ActorStepCallback    D_801C83BC[7];
 extern ActorModeCallback    D_801C83D8[11];
-extern SceneSlots*          g_SceneScenes[20];
+extern ScenarioHandlers*    g_ScenarioHandlers[20];
 extern AreaHooks            g_AreaHooks;
 /* D_801C890C */
 extern FieldActionCallback  g_FieldActions[11];

@@ -11,7 +11,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801FCEC0(void) {
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0: {
             u8* vars;
 
@@ -19,7 +19,7 @@ NON_MATCHING void func_801FCEC0(void) {
             if (vars[0] == 0x64) {
                 vars[0] = 0;
                 UI_SetMode(UI_MODE_LONG_FADE_OUT);
-                g_SceneState.step_05 = 0x14;
+                g_ScenarioState.step_05 = 0x14;
             }
             if (vars[0] == 0x65) {
                 vars[0]         = 0;
@@ -35,18 +35,18 @@ NON_MATCHING void func_801FCEC0(void) {
             }
             g_AreaDrawFlags = 0;
             func_801C16B8();
-            g_SceneState.step_05 = 0x15;
+            g_ScenarioState.step_05 = 0x15;
             SND_FadeOutSequence(0, 0, 4, 0x1E);
             break;
         case 0x15:
             SND_StartXAStream(0, 1);
-            g_SceneState.step_05 = 0x16;
+            g_ScenarioState.step_05 = 0x16;
             break;
         case 0x16:
             if ((SND_IsXAIdle() & BYTE_MASK) == 0) {
                 break;
             }
-            g_SceneState.step_05 = 0x17;
+            g_ScenarioState.step_05 = 0x17;
             break;
         case 0x17:
             if (g_Game.party_size == 2) {
@@ -56,8 +56,8 @@ NON_MATCHING void func_801FCEC0(void) {
             } else {
                 break;
             }
-            g_ScriptVars[2]      = 8;
-            g_SceneState.step_05 = 0x18;
+            g_ScriptVars[2]         = 8;
+            g_ScenarioState.step_05 = 0x18;
             SND_PlayBGM(7, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             break;
         case 0x18:
@@ -71,12 +71,12 @@ NON_MATCHING void func_801FCEC0(void) {
                 break;
             }
             if (g_ScriptVars[0] == 0xC8) {
-                D_8014865C           = -2;
-                D_80148698           = 1;
-                g_GameEntryState     = GAME_MODE_SHOP;
-                g_MenuStep.step      = 0;
-                D_80148699           = 0;
-                g_SceneState.step_05 = 3;
+                D_8014865C              = -2;
+                D_80148698              = 1;
+                g_GameEntryState        = GAME_MODE_SHOP;
+                g_MenuStep.step         = 0;
+                D_80148699              = 0;
+                g_ScenarioState.step_05 = 3;
             } else if (g_ScriptVars[0] == 0xC9) {
                 g_ScriptVars[0] = 0;
                 g_ScriptVars[1] = 0;
@@ -94,7 +94,7 @@ NON_MATCHING void func_801FCEC0(void) {
             u8* step;
             u8* vars;
 
-            step = &g_SceneState.step_05;
+            step = &g_ScenarioState.step_05;
             vars = g_ScriptVars;
             if (vars[0] == 0x64) {
                 *step           = 1;
@@ -113,7 +113,7 @@ NON_MATCHING void func_801FCEC0(void) {
         }
         scene_return:
             Game_ClearScriptActive();
-            SCENE_RETURN_TO_START();
+            SCENARIO_RETURN_TO_START();
             break;
         case 0xA:
             if (WINDOW_EFFECT_BUSY()) {
@@ -121,18 +121,18 @@ NON_MATCHING void func_801FCEC0(void) {
             }
             g_AreaDrawFlags = 0;
             func_801C16B8();
-            g_SceneState.step_05 = 0xB;
+            g_ScenarioState.step_05 = 0xB;
             SND_FadeOutSequence(0, 0, 4, 0x1E);
             break;
         case 0xB:
             SND_StartXAStream(0, 1);
-            g_SceneState.step_05 = 0xC;
+            g_ScenarioState.step_05 = 0xC;
             break;
         case 0xC:
             if ((SND_IsXAIdle() & BYTE_MASK) == 0) {
                 break;
             }
-            g_SceneState.step_05 = 0xD;
+            g_ScenarioState.step_05 = 0xD;
             break;
         case 0xD:
             if (g_Game.party_size == 2) {
@@ -142,8 +142,8 @@ NON_MATCHING void func_801FCEC0(void) {
             } else {
                 break;
             }
-            g_ScriptVars[2]      = 8;
-            g_SceneState.step_05 = 0x18;
+            g_ScriptVars[2]         = 8;
+            g_ScenarioState.step_05 = 0x18;
             SND_PlayBGM(7, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             break;
     }

@@ -127,14 +127,14 @@ MATCH void func_801F790C(void) {
 INCLUDE_ASM(func_801F7920);
 
 MATCH void func_801F83D8(void) {
-    SYS_DISPATCH_BYTE(D_801FE3EC, g_SceneState.state_04);
+    SYS_DISPATCH_BYTE(D_801FE3EC, g_ScenarioState.state_04);
 }
 
 MATCH void func_801F8414(void) {
 }
 
 MATCH void func_801F841C(void) {
-    u8* step = &g_SceneState.step_05;
+    u8* step = &g_ScenarioState.step_05;
 
     switch (*step) {
         case 0:
@@ -150,8 +150,8 @@ MATCH void func_801F841C(void) {
             if (*g_ScriptVars == 0x11) {
                 SYS_SetFlag(g_SceneFlags, 1);
                 Game_ClearScriptActive();
-                *step                 = 0;
-                g_SceneState.state_04 = 0;
+                *step                    = 0;
+                g_ScenarioState.state_04 = 0;
             }
             break;
     }

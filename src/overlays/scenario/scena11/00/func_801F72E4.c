@@ -21,13 +21,13 @@ MATCH void func_801F72E4(void) {
                     break;
                 }
                 Game_SetScriptActive();
-                g_ScriptVars[0]       = 0;
-                g_ScriptVars[1]       = 0;
-                *sub                  = 0;
-                g_ScriptVars[3]       = 0;
-                g_AreaDrawFlags       = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 8;
+                g_ScriptVars[0]          = 0;
+                g_ScriptVars[1]          = 0;
+                *sub                     = 0;
+                g_ScriptVars[3]          = 0;
+                g_AreaDrawFlags          = 0;
+                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.state_04 = 8;
                 switch (g_EmiLoadedCharacterIndex & 0x7F) {
                     case 7:
                         func_801C1E3C(1);
@@ -164,12 +164,12 @@ MATCH void func_801F72E4(void) {
         }
     }
     if (g_GameAreaId == 0x2D || g_GameAreaId == 0x41 || g_GameAreaId == 0x57 || g_GameAreaId == 0x10 || g_GameAreaId == 0x73) {
-        g_ScriptVars[0]       = 0;
-        g_ScriptVars[1]       = 0;
-        g_ScriptVars[2]       = 0;
-        g_ScriptVars[3]       = 0;
-        g_SceneState.step_05  = 0;
-        g_SceneState.state_04 = 0;
+        g_ScriptVars[0]          = 0;
+        g_ScriptVars[1]          = 0;
+        g_ScriptVars[2]          = 0;
+        g_ScriptVars[3]          = 0;
+        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.state_04 = 0;
     }
-    g_SceneState.mode_02 = 2;
+    g_ScenarioState.mode_02 = 2;
 }

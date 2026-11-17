@@ -2,7 +2,7 @@
 
 MATCH void Boss_ChooseBattleEnding(void) {
     if BATTLE_IS_VICTORY () {
-        g_SceneState.step_05 = 0x10;
+        g_ScenarioState.step_05 = 0x10;
         Battle_EndVictory();
         g_SndBGMId = 0x8C;
     } else {

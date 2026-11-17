@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F7FB8(void) {
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             break;
         case 1:
@@ -104,7 +104,7 @@ MATCH void func_801F8850(void) {
     D_80146134 &= 0xFE;
     Game_RequestAreaChange(AREA_ID_DESERT_MANMO, TO_COORD(41) + COORD_HALF, TO_COORD(22) + COORD_HALF, AREA_ENTRY_MAP_LOADING);
     Game_SetScriptActive();
-    g_SceneState.state_04 = 2;
-    g_SceneState.step_05  = 0;
+    g_ScenarioState.state_04 = 2;
+    g_ScenarioState.step_05  = 0;
     D_80146871 &= 0xFE;
 }

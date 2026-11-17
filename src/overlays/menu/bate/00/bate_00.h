@@ -19,7 +19,7 @@ extern s16 D_80148388;
 extern s16 D_801483AC;
 extern u8  D_80148654;
 
-#define g_SceneState (*(struct SceneState*)&g_SceneState)
+#define g_ScenarioState (*(struct ScenarioState*)&g_ScenarioState)
 
 extern s8   D_80144DE4;
 extern u8   D_80144DF2;

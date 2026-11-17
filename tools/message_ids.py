@@ -5,7 +5,7 @@ A message id is an index into the area message table (include/menu/gameui.h). Th
 scan recognises the id argument of every call, macro and write that carries one:
 
     Message_StartAreaMessage, Message_Request, Scene_ShowMessage,
-    MESSAGE_START_WAIT, SCENE_MESSAGE_WAIT, SCENA14_START_AREA_MESSAGE,
+    MESSAGE_START_WAIT, SCENARIO_MESSAGE_WAIT, SCENA14_START_AREA_MESSAGE,
     WORLD_ARM_ANSWER_MESSAGE, WORLD_ARM_ANSWER_MESSAGE_IDLE,
     MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, ...),
     func_801D0DD4, func_801D10AC, and `g_MessageRequest = <id>`.
@@ -47,7 +47,7 @@ FIRST_ARG = (
     "Message_Request",
     "Scene_ShowMessage",
     "MESSAGE_START_WAIT",
-    "SCENE_MESSAGE_WAIT",
+    "SCENARIO_MESSAGE_WAIT",
     "SCENA14_START_AREA_MESSAGE",
     "WORLD_ARM_ANSWER_MESSAGE",
     "func_801D0DD4",

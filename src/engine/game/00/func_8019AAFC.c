@@ -5,8 +5,8 @@ MATCH void func_8019AAFC(void) {
     u8*    flags;
 
     work  = g_Task;
-    flags = &g_SceneState.flags_01;
+    flags = &g_ScenarioState.flags_01;
     setVector(&g_AreaCameraAngle, work->unk_64, work->unk_68, work->unk_6C);
-    *flags &= ~SCENE_STATE_CAMERA_MOVING;
+    *flags &= ~SCENARIO_STATE_CAMERA_MOVING;
     Actor_Clear();
 }

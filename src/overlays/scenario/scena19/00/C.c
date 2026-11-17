@@ -22,7 +22,7 @@ MATCH void func_801F6C54(void) {
 }
 
 MATCH void func_801F6C68(void) {
-    SYS_DISPATCH_BYTE(D_801F6DDC, g_SceneState.state_04);
+    SYS_DISPATCH_BYTE(D_801F6DDC, g_ScenarioState.state_04);
 }
 
 MATCH void func_801F6CA4(void) {

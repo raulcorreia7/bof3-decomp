@@ -8,8 +8,8 @@ MATCH void func_801F4B3C(void) {
             g_SceneEventState.mode = 0x23;
             g_SceneEventState.step = 5;
         } else {
-            g_SceneState.state_04 = 6;
-            g_SceneState.step_05  = 0;
+            g_ScenarioState.state_04 = 6;
+            g_ScenarioState.step_05  = 0;
         }
     }
 }

@@ -6,14 +6,14 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801FCD80(void) {
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 1:
             if (g_ScriptVars[0] != 4) {
                 break;
             }
             SYS_SetFlag(g_SceneFlags, 0x38);
-            g_GamePrevSelection  = 0x7B;
-            g_SceneState.step_05 = 1;
+            g_GamePrevSelection     = 0x7B;
+            g_ScenarioState.step_05 = 1;
             break;
         case 2:
             if (g_ScriptVars[0] != 0) {
@@ -42,8 +42,8 @@ NON_MATCHING void func_801FCD80(void) {
             break;
         case 5:
             Message_StartAreaMessage(0x3A);
-            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
-            g_SceneState.step_05 = 0xB;
+            g_GameStateIndex        = GAME_REQUEST_MESSAGE;
+            g_ScenarioState.step_05 = 0xB;
             break;
         default:
             break;

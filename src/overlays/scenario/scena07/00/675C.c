@@ -9,11 +9,11 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801FD35C(void) {
     u8* timer;
 
-    timer = &g_SceneState.step_05;
+    timer = &g_ScenarioState.step_05;
     if (*timer == 0 && g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         Game_ClearScriptActive();
-        g_SceneState.state_04 = 0;
-        *timer                = 0;
+        g_ScenarioState.state_04 = 0;
+        *timer                   = 0;
     }
 }
 
@@ -45,11 +45,11 @@ MATCH void func_801FD524(void) {
     g_ScriptVars[2] = 0;
     g_ScriptVars[3] = 0;
     if (SYS_TestFlag(D_80144EB8, 34) == 0) {
-        g_SceneState.step_05 = 0;
+        g_ScenarioState.step_05 = 0;
     } else {
-        g_SceneState.step_05 = 0x14;
+        g_ScenarioState.step_05 = 0x14;
     }
-    g_SceneState.state_04 = 7;
+    g_ScenarioState.state_04 = 7;
 }
 
 MATCH void func_801FD5A0(void) {
@@ -59,11 +59,11 @@ MATCH void func_801FD5A0(void) {
     g_ScriptVars[2] = 0;
     g_ScriptVars[3] = 0;
     if (SYS_TestFlag(D_80144EB8, 35)) {
-        g_SceneState.step_05 = 0x14;
+        g_ScenarioState.step_05 = 0x14;
     } else {
-        g_SceneState.step_05 = 0xA;
+        g_ScenarioState.step_05 = 0xA;
     }
-    g_SceneState.state_04 = 7;
+    g_ScenarioState.state_04 = 7;
 }
 
 MATCH SpawnedActor* func_801FD610(u8 mode) {
@@ -83,8 +83,8 @@ MATCH SpawnedActor* func_801FD610(u8 mode) {
 MATCH s32 func_801FD67C(s32 x, s32 y) {
     if ((g_GameAreaId == AREA_ID_URKAN_TAPA) && (SYS_TestFlag(g_SceneFlags, 4) != 0) && (SYS_TestFlag(g_SceneFlags, 7) == 0) && (x == 0x348000) && ((u32)((y >> 16) - 0x13) < 4U)) {
         Game_SetScriptActive();
-        g_SceneState.state_04 = 5;
-        g_SceneState.step_05  = 0;
+        g_ScenarioState.state_04 = 5;
+        g_ScenarioState.step_05  = 0;
         return 1;
     }
     if ((g_GameAreaId == AREA_ID_ANGEL_TOWER_OUTSIDE) && ((u32)((y >> 16) - 0x3C) < 5U) && ((u32)((x >> 16) - 0x22) < 4U)) {
@@ -102,9 +102,9 @@ MATCH s32 func_801FD67C(s32 x, s32 y) {
     }
     if ((g_GameAreaId == AREA_ID_ANGEL_TOWER_GARR_FIGHT) && (y == 0x1C8000) && ((u32)((x >> 16) - 0x25) < 2U) && (SYS_TestFlag(g_SceneFlags, 9) == 0)) {
         Message_StartAreaMessage(MSG_002);
-        g_GameStateIndex      = 2;
-        g_SceneState.state_04 = 6;
-        g_SceneState.step_05  = 5;
+        g_GameStateIndex         = 2;
+        g_ScenarioState.state_04 = 6;
+        g_ScenarioState.step_05  = 5;
         g_GameFlags |= 0x100;
         return 1;
     }
@@ -116,17 +116,17 @@ MATCH s32 func_801FD67C(s32 x, s32 y) {
         if (((u32)facing >= 2U) && (facing != 2) && ((y >> 16) >= 0x1E)) {
             Game_SetScriptActive();
             Message_StartAreaMessage(MSG_001);
-            g_GameStateIndex      = 2;
-            g_SceneState.state_04 = 8;
-            g_SceneState.step_05  = 0;
+            g_GameStateIndex         = 2;
+            g_ScenarioState.state_04 = 8;
+            g_ScenarioState.step_05  = 0;
             return 1;
         }
     }
     if ((g_GameAreaId == AREA_ID_FAIRY_VILLAGE_DOLPHIN) && (SYS_TestFlag(g_SceneFlags, 0) != 0) && (SYS_TestFlag(g_SceneFlags, 1) == 0) && ((u32)((y >> 16) - 0x20) < 5U) &&
         ((u32)((x >> 16) - 0x18) < 0x16U)) {
         Game_SetScriptActive();
-        g_SceneState.state_04 = 2;
-        g_SceneState.step_05  = 0;
+        g_ScenarioState.state_04 = 2;
+        g_ScenarioState.step_05  = 0;
         return 1;
     }
     return 0;
@@ -141,8 +141,8 @@ MATCH s32 func_801FD960(s32 x, s32 y) {
                 Game_SetScriptActive();
                 value = g_SndBGMId * 4;
                 SND_StartDecrescendo(g_SelectionCues[value], g_SelectionCues[value + 1], 0x64, 0x20);
-                g_SceneState.state_04 = 4;
-                g_SceneState.step_05  = 0;
+                g_ScenarioState.state_04 = 4;
+                g_ScenarioState.step_05  = 0;
                 return 1;
             }
         }
@@ -165,8 +165,8 @@ MATCH bool func_801FDA34(void) {
 
 MATCH void func_801FDAFC(void) {
     Game_SetScriptActive();
-    g_SceneState.state_04 = 6;
-    g_SceneState.step_05  = 0xA;
+    g_ScenarioState.state_04 = 6;
+    g_ScenarioState.step_05  = 0xA;
 }
 
 #include "overlays/scenario/Scene_SetPartyRyuYoungNinaYoungMomo.h"

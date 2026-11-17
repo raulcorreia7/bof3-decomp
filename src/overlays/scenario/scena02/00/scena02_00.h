@@ -81,17 +81,17 @@ void func_801FCBDC(s32 delta);
 
 /* D_80146258: the world input/scheduler lock word; retail reads and writes it as a halfword. */
 extern u16 D_80146258;
-/* D_80146871: g_SceneState.flags_01; retail folds its address into each access. */
+/* D_80146871: g_ScenarioState.flags_01; retail folds its address into each access. */
 extern u8  D_80146871;
 
 /* Starts the scene script 0x1A with the camera shake state cleared. */
-#define SCENA02_START_SCRIPT_1A() \
-    Game_SetScriptActive();       \
-    *g_ScriptVars         = 0x23; \
-    g_ScriptVars[1]       = 0;    \
-    g_ScriptVars[2]       = 0;    \
-    g_ScriptVars[3]       = 0;    \
-    g_SceneState.step_05  = 0;    \
-    g_SceneState.state_04 = 0x1A
+#define SCENA02_START_SCRIPT_1A()    \
+    Game_SetScriptActive();          \
+    *g_ScriptVars            = 0x23; \
+    g_ScriptVars[1]          = 0;    \
+    g_ScriptVars[2]          = 0;    \
+    g_ScriptVars[3]          = 0;    \
+    g_ScenarioState.step_05  = 0;    \
+    g_ScenarioState.state_04 = 0x1A
 
 #endif

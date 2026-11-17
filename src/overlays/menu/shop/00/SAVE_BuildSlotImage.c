@@ -34,7 +34,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
 
     SAVE_FormatSlot();
     func_801EF27C(1, 0x13, g_UiFormatBuffer);
-    g_SaveData.scene_state = g_SceneState;
+    g_SaveData.scene_state = g_ScenarioState;
     D_80144948             = 0;
     g_SavedScriptVars[0]   = g_ScriptVars[0];
     g_SavedScriptVars[1]   = g_ScriptVars[1];
