@@ -12,7 +12,7 @@ static Callback s_TitleSteps[8] = {
 MATCH void Game_RunTitle(void) { /* func_801D0C04 */
     g_UiTitleState    = 0u;
     g_UiTitleSubstate = 0u;
-    func_8014BA04();
+    SYS_ClearCurrentThread();
 
     for (;;) {
         SYS_ThreadWait(1);

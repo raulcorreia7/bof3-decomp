@@ -13,7 +13,7 @@ MATCH void Game_RunMain(void) {
 
     GAME_SEL_STATE->state    = 0u;
     GAME_SEL_STATE->substate = 0u;
-    func_8014BA04();
+    SYS_ClearCurrentThread();
     Menu_ResetPanelTasks();
 
     while (1) {

@@ -4,7 +4,8 @@
  * and biased by -0x4000, and the negated half of +0x3E) into the matrix translation, then RotMatrix composes the
  * angles at +0x64/+0x68/+0x6C.
  */
-MATCH void func_8015B410(void* matrix) {
+/* func_8015B410 */
+MATCH void Actor_BuildTransformMatrix(void* matrix) {
     SVECTOR vertex;
     SVECTOR rotation;
     long    flag;

@@ -3,7 +3,8 @@
 /* clears the eight halfwords ending at offset 0x6E and the 16-byte run at
  * offset 0x70 of the g_SysCurrentThread work area.
  */
-MATCH void func_8014BA04(void) {
+/* func_8014BA04 */
+MATCH void SYS_ClearCurrentThread(void) {
     u8* base;
     u8* p;
     s32 i;

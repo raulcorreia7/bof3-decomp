@@ -54,6 +54,6 @@ MATCH void func_8019CCB8(void) {
     }
 block_9:
     if (g_GameStateIndex != GAME_REQUEST_BATTLE) {
-        func_8015A944();
+        Actor_ProjectForDraw();
     }
 }

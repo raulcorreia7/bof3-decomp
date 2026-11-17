@@ -647,8 +647,8 @@ MATCH void func_801F8360(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         PushMatrix();
-        func_8015B410(&matrix);
-        func_8015B4B0(&matrix);
+        Actor_BuildTransformMatrix(&matrix);
+        Area_ApplyCameraMatrix(&matrix);
         if (i & 0x1) {
             RotTransPers3(&v0, &v1, &v2, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
         } else {
@@ -670,7 +670,7 @@ MATCH void func_801F8360(void) {
  * read of it stays its own load, as in the shipped image. */
 
 /* Scene_DrawTriangle saves the active effect's rotation across a triangle draw;
- * func_8015B410 passes the three angles to RotMatrix. */
+ * Actor_BuildTransformMatrix passes the three angles to RotMatrix. */
 typedef struct SceneRotation {
     Angle3 angle;
     s32    unk_0C; /* 0x0C */
@@ -710,8 +710,8 @@ MATCH void Scene_DrawTriangle(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
 
     SetPolyG3(prim);
     PushMatrix();
-    func_8015B410(&matrix);
-    func_8015B4B0(&matrix);
+    Actor_BuildTransformMatrix(&matrix);
+    Area_ApplyCameraMatrix(&matrix);
     RotTransPers3(&v0, &v1, &v2, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
     setRGB0(prim, SCN_TRI_SHADE_V0, SCN_TRI_SHADE_V0, SCN_TRI_SHADE_V0);
     setRGB1(prim, SCN_TRI_SHADE_V1, SCN_TRI_SHADE_V1, SCN_TRI_SHADE_V1);

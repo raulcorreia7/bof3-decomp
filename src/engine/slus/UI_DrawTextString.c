@@ -18,7 +18,7 @@ MATCH const u8* UI_DrawTextString(s16 x, s16 y, s32 palette, u8 byte_count, cons
 
     left = x;
     str  = (u8*)text;
-    func_8014FC00(0);
+    UI_AddTextDrawMode(0);
     clut  = (palette & 0xF) | STAGE_PALETTE_CLUT;
     index = ((u32)palette & 0xF0) >> 3;
     c     = *str;

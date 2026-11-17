@@ -12,11 +12,10 @@
 
 /* SLUS_004.22 data the overlays share, in address order. */
 extern u16         D_80033A08[];
-/* Main-executable RAM state that has no name yet. */
+/* Main-executable RAM state shared with overlays. */
 /* retail addresses */
 extern u16         D_800C1A70;
 extern volatile u8 D_80140000[];
-extern u8          D_80143BB0;
 /* D_80143F7C */
 extern u32         g_UiPopupRequest;
 extern u16         g_GameAreaId;

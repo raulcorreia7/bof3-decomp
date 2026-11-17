@@ -12,5 +12,7 @@ typedef SVECTOR CameraAngle;
 
 /* D_801492D8 */
 extern CameraAngle g_AreaCameraAngle; /* x, y, z scene rotation halfwords */
+/* D_801492E0 */
+extern CameraAngle g_AreaPreviousCameraAngle;
 
 #endif

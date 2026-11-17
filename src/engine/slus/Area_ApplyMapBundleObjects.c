@@ -3,8 +3,9 @@
 /* walks the bundle record list g_AreaMapBundle.object_list_28: a header of 0x8001 marks a palette entry whose low flag
  * bit is cleared, and its twelve-byte entries each write their payload word into the map row that the halfword table
  * and the entry's row and bits 14-19 select. */
+/* func_80154438 */
 #ifdef NON_MATCHING
-NON_MATCHING void func_80154438(void) {
+NON_MATCHING void Area_ApplyMapBundleObjects(void) {
     /* FAKE: unused frame, 16 bytes. */
     FAKE_STACK_PADS(u8, 16);
     u32* record;
@@ -72,5 +73,5 @@ NON_MATCHING void func_80154438(void) {
     }
 }
 #else
-INCLUDE_ASM(func_80154438);
+INCLUDE_ASM(Area_ApplyMapBundleObjects);
 #endif

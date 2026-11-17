@@ -13,7 +13,7 @@ MATCH void Area_UpdateParty(void) {
         g_Task = work;
 
         if (((work[0] & 0x1u) != 0u) && ((work[0] & 0x40u) == 0u)) {
-            func_8015A944();
+            Actor_ProjectForDraw();
         }
     }
 }

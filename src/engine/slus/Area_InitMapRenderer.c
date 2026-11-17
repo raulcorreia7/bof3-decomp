@@ -2,7 +2,7 @@
 
 /* initializes the field map renderer: sets the geometry screen, offset and back color, resets the 0x400 double
  * FT4 primitives, seeds the camera position and scroll state from g_AreaScrollTargetX/g_AreaScrollTargetY, clears the
- * 0x38 by 0x1C cell table, fills the identity draw order and builds the first view through func_80154438, func_80157F98
+ * 0x38 by 0x1C cell table, fills the identity draw order and builds the first view through Area_ApplyMapBundleObjects, func_80157F98
  * and func_80158B24.
  */
 /* func_80153DE8 */
@@ -34,7 +34,7 @@ NON_MATCHING void Area_InitMapRenderer(void) {
     *(s16*)(&g_AreaCameraAngle.vx) = -682;
     g_AreaCameraAngle.vy           = 0;
     g_AreaCameraAngle.vz           = ANGLE_45;
-    *(SVECTOR*)&D_801492E0         = *&g_AreaCameraAngle;
+    g_AreaPreviousCameraAngle      = g_AreaCameraAngle;
     g_AreaCellPrims[0][0].x0       = 0;
     g_AreaCellPrims[0][0].y0       = 0;
     g_AreaCellPrims[0][0].x1       = 0;
@@ -95,7 +95,7 @@ NON_MATCHING void Area_InitMapRenderer(void) {
     g_AreaCellPrimFreeIndex = 1;
     g_AreaGridColCursor     = 0x1B;
     g_AreaGridRowCursor     = 0x37;
-    func_80154438();
+    Area_ApplyMapBundleObjects();
     Area_RunBundleOpcodes();
     Area_IndexCells();
 }

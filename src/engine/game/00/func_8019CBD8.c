@@ -23,5 +23,5 @@ MATCH void func_8019CBD8(void) {
     g_Task->param.unk_0B = 0U;
     counter              = g_Task;
     counter->header.mode = (counter->header.mode + 1);
-    func_8015A944();
+    Actor_ProjectForDraw();
 }

@@ -11,7 +11,7 @@ MATCH void PlChar_AdvanceScript(void) {
             }
         } else {
             Actor_StepAnimLoop();
-            if (D_80143BB0 == 0) {
+            if (g_GameStateIndex == 0) {
                 done = 1;
             }
         }

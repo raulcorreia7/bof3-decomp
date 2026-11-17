@@ -794,7 +794,7 @@ MATCH bool Scene_UpdateEndingRoll(void) {
 /* func_801F9490 */
 MATCH void Scene_RunSaveMenu(void) {
     g_GameEntrySubstate = 0;
-    func_8014BA04();
+    SYS_ClearCurrentThread();
     Menu_ResetPanelTasks();
     while (1) {
         SYS_DISPATCH_BYTE(D_801F9DBC, g_GameEntrySubstate);

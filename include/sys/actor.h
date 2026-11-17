@@ -186,7 +186,7 @@ typedef struct Actor {
                                 *        source row the task came from; the script copy
                                 *        scales its staging offset by it; cleared at scene init */
     u8             unk_06;            /* 0x06 - commu00 calls it the live flag; 9 gates the draw-mode
-                                *        stamp, 10 calls func_8015A944 (func_80167E00) */
+                                *        stamp, 10 calls Actor_ProjectForDraw (func_80167E00) */
     u8             option_flags;      /* 0x07 - ActorOptionFlags */
     u8             direction_08;      /* 0x08 - commu00 calls it the cue resource */
     u8             timer;             /* 0x09 - counted up or down by the area step handlers */

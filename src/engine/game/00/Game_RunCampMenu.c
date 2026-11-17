@@ -5,7 +5,7 @@ MATCH void Game_RunCampMenu(void) {
 
     g_GameEntryState    = 0u;
     g_GameEntrySubstate = 0u;
-    func_8014BA04();
+    SYS_ClearCurrentThread();
     Menu_ResetPanelTasks();
 
     while (1) {

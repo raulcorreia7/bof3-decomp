@@ -16,7 +16,7 @@ MATCH void func_801A061C(void) {
             if (ACTOR_IN_USE(*entity)) {
                 if (kind == 10) {
                     index += 1;
-                    func_8015A944();
+                    Actor_ProjectForDraw();
                     continue;
                 }
                 if (kind != 9) {

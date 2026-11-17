@@ -5928,7 +5928,7 @@ Area_AddCameraOffsetY2 = { addr = 0x801F3170, source = "Adds 2 to g_AreaCameraOf
 
 ["emi/world03/area139/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Actor_AdvanceWhenPartyNear = { addr = 0x801F3C68, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when D_80143BB0 is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
+Actor_AdvanceWhenPartyNear = { addr = 0x801F3C68, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when g_GameStateIndex is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
 Actor_SlideScreenOffBottom = { addr = 0x801F3DA8, type = "func", source = "Subtracts 0x20 from the actor screen_y and adds 1 to header.step (byte 0x02) once it is below -0xFF; then runs Area_Update." }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F3E04, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08); then runs Area_Update." }
 Actor_SlideScreenUp = { addr = 0x801F3F14, type = "func", source = "Adds 0x20 to the actor screen_y; at 0 or above sets header.step (byte 0x02) to 1 and plays cue EMI_CUE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
@@ -6092,7 +6092,7 @@ WorldMap_WaveCells = { addr = 0x801F2C04, type = "func", source = "Waves the fou
 
 ["emi/world04/area157/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Actor_AdvanceWhenPartyNear = { addr = 0x801F2DEC, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when D_80143BB0 is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
+Actor_AdvanceWhenPartyNear = { addr = 0x801F2DEC, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when g_GameStateIndex is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
 Actor_SlideScreenX = { addr = 0x801F2F2C, type = "func", source = "Adds ACTOR_SCREEN_X_STEP to the screen origin of the work record and, once it reaches ACTOR_SCREEN_X_THRESHOLD, adds 1 to the step (byte 0x02); runs Area_Update." }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F2F88, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08); then runs Area_Update." }
 Actor_SlideScreenDown = { addr = 0x801F3098, type = "func", source = "Subtracts 0x20 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays cue EMI_CUE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
@@ -6100,7 +6100,7 @@ Area_Update = { addr = 0x801F3108, type = "func", source = "Sets header.step (by
 
 ["emi/world04/area158/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Actor_AdvanceWhenPartyNear = { addr = 0x801F2DB8, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when D_80143BB0 is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
+Actor_AdvanceWhenPartyNear = { addr = 0x801F2DB8, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when g_GameStateIndex is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
 Actor_SlideScreenOffBottom = { addr = 0x801F2EF8, type = "func", source = "Subtracts 0x20 from the actor screen_y and adds 1 to header.step (byte 0x02) once it is below -0xFF; then runs Area_Update." }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F2F54, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08); then runs Area_Update." }
 Actor_SlideScreenUp = { addr = 0x801F3064, type = "func", source = "Adds 0x20 to the actor screen_y; at 0 or above sets header.step (byte 0x02) to 1 and plays cue EMI_CUE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
@@ -6109,7 +6109,7 @@ Area_Update = { addr = 0x801F30D4, type = "func", source = "Sets header.step (by
 ["emi/world04/area160/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_UpdateEvent = { addr = 0x801F2C04, type = "func", source = "Runs the entry of D_801F3418 that header.step (byte 0x02) of the current g_Task selects." }
-Actor_AdvanceWhenPartyNear = { addr = 0x801F2DB8, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when D_80143BB0 is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
+Actor_AdvanceWhenPartyNear = { addr = 0x801F2DB8, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when g_GameStateIndex is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
 Actor_SlideScreenX = { addr = 0x801F2EF8, type = "func", source = "Adds ACTOR_SCREEN_X_STEP to the screen origin of the work record and, once it reaches ACTOR_SCREEN_X_THRESHOLD, adds 1 to the step (byte 0x02); runs Area_Update." }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F2F54, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08); then runs Area_Update." }
 Actor_SlideScreenDown = { addr = 0x801F3064, type = "func", source = "Subtracts 0x20 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays cue EMI_CUE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
@@ -6117,7 +6117,7 @@ Area_Update = { addr = 0x801F30D4, type = "func", source = "Sets header.step (by
 
 ["emi/world04/area161/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Actor_AdvanceWhenPartyNear = { addr = 0x801F2DB8, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when D_80143BB0 is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
+Actor_AdvanceWhenPartyNear = { addr = 0x801F2DB8, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when g_GameStateIndex is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
 Actor_SlideScreenOffBottom = { addr = 0x801F2EF8, type = "func", source = "Subtracts 0x20 from the actor screen_y and adds 1 to header.step (byte 0x02) once it is below -0xFF; then runs Area_Update." }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F2F54, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08); then runs Area_Update." }
 Actor_SlideScreenUp = { addr = 0x801F3064, type = "func", source = "Adds 0x20 to the actor screen_y; at 0 or above sets header.step (byte 0x02) to 1 and plays cue EMI_CUE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
@@ -6126,7 +6126,7 @@ Area_Update = { addr = 0x801F30D4, type = "func", source = "Sets header.step (by
 ["emi/world04/area162/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_UpdateEvent = { addr = 0x801F2C04, type = "func", source = "Runs the entry of D_801F3418 that header.step (byte 0x02) of the current g_Task selects." }
-Actor_AdvanceWhenPartyNear = { addr = 0x801F2DB8, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when D_80143BB0 is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
+Actor_AdvanceWhenPartyNear = { addr = 0x801F2DB8, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when g_GameStateIndex is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
 Actor_SlideScreenOffBottom = { addr = 0x801F2EF8, type = "func", source = "Subtracts 0x20 from the actor screen_y and adds 1 to header.step (byte 0x02) once it is below -0xFF; then runs Area_Update." }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F2F54, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08); then runs Area_Update." }
 Actor_SlideScreenUp = { addr = 0x801F3064, type = "func", source = "Adds 0x20 to the actor screen_y; at 0 or above sets header.step (byte 0x02) to 1 and plays cue EMI_CUE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
@@ -6135,7 +6135,7 @@ Area_Update = { addr = 0x801F30D4, type = "func", source = "Sets header.step (by
 ["emi/world04/area163/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_UpdateEvent = { addr = 0x801F2C04, type = "func", source = "Runs the entry of D_801F3418 that header.step (byte 0x02) of the current g_Task selects." }
-Actor_AdvanceWhenPartyNear = { addr = 0x801F2DB8, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when D_80143BB0 is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
+Actor_AdvanceWhenPartyNear = { addr = 0x801F2DB8, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when g_GameStateIndex is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
 Actor_SlideScreenX = { addr = 0x801F2EF8, type = "func", source = "Adds ACTOR_SCREEN_X_STEP to the screen origin of the work record and, once it reaches ACTOR_SCREEN_X_THRESHOLD, adds 1 to the step (byte 0x02); runs Area_Update." }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F2F54, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08); then runs Area_Update." }
 Actor_SlideScreenDown = { addr = 0x801F3064, type = "func", source = "Subtracts 0x20 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays cue EMI_CUE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
@@ -6144,7 +6144,7 @@ Area_Update = { addr = 0x801F30D4, type = "func", source = "Sets header.step (by
 ["emi/world04/area164/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_UpdateEvent = { addr = 0x801F2C04, type = "func", source = "Runs the entry of D_801F3418 that header.step (byte 0x02) of the current g_Task selects." }
-Actor_AdvanceWhenPartyNear = { addr = 0x801F2DB8, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when D_80143BB0 is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
+Actor_AdvanceWhenPartyNear = { addr = 0x801F2DB8, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when g_GameStateIndex is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
 Actor_SlideScreenX = { addr = 0x801F2EF8, type = "func", source = "Adds ACTOR_SCREEN_X_STEP to the screen origin of the work record and, once it reaches ACTOR_SCREEN_X_THRESHOLD, adds 1 to the step (byte 0x02); runs Area_Update." }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F2F54, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08); then runs Area_Update." }
 Actor_SlideScreenDown = { addr = 0x801F3064, type = "func", source = "Subtracts 0x20 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays cue EMI_CUE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
@@ -6152,7 +6152,7 @@ Area_Update = { addr = 0x801F30D4, type = "func", source = "Sets header.step (by
 
 ["emi/world04/area165/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Actor_AdvanceWhenPartyNear = { addr = 0x801F2DB8, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when D_80143BB0 is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
+Actor_AdvanceWhenPartyNear = { addr = 0x801F2DB8, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when g_GameStateIndex is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
 Actor_SlideScreenX = { addr = 0x801F2EF8, type = "func", source = "Adds ACTOR_SCREEN_X_STEP to the screen origin of the work record and, once it reaches ACTOR_SCREEN_X_THRESHOLD, adds 1 to the step (byte 0x02); runs Area_Update." }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F2F54, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08); then runs Area_Update." }
 Actor_SlideScreenDown = { addr = 0x801F3064, type = "func", source = "Subtracts 0x20 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays cue EMI_CUE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
@@ -6161,7 +6161,7 @@ Actor_AdvanceTimer = { addr = 0x801F34C8, type = "func", source = "Adds 1 to hea
 
 ["emi/world04/area166/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Actor_AdvanceWhenPartyNear = { addr = 0x801F2DB8, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when D_80143BB0 is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
+Actor_AdvanceWhenPartyNear = { addr = 0x801F2DB8, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when g_GameStateIndex is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
 Actor_SlideScreenOffBottom = { addr = 0x801F2EF8, type = "func", source = "Subtracts 0x20 from the actor screen_y and adds 1 to header.step (byte 0x02) once it is below -0xFF; then runs Area_Update." }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F2F54, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08); then runs Area_Update." }
 Actor_SlideScreenUp = { addr = 0x801F3064, type = "func", source = "Adds 0x20 to the actor screen_y; at 0 or above sets header.step (byte 0x02) to 1 and plays cue EMI_CUE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
@@ -6171,7 +6171,7 @@ Message_ClearRequest = { addr = 0x801F3634, type = "func", source = "Clears the 
 
 ["emi/world04/area167/13"]
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x84, source = "The switch table of func_801F4494: 33 jump targets of its jr dispatch." }
-Actor_AdvanceWhenPartyNear = { addr = 0x801F2EA0, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when D_80143BB0 is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
+Actor_AdvanceWhenPartyNear = { addr = 0x801F2EA0, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when g_GameStateIndex is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
 Actor_SlideScreenX = { addr = 0x801F2FE0, type = "func", source = "Adds ACTOR_SCREEN_X_STEP to the screen origin of the work record and, once it reaches ACTOR_SCREEN_X_THRESHOLD, adds 1 to the step (byte 0x02); runs Area_Update." }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F303C, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08); then runs Area_Update." }
 Actor_SlideScreenDown16 = { addr = 0x801F314C, type = "func", source = "Subtracts 0x10 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays cue EMI_CUE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
@@ -6181,7 +6181,7 @@ Actor_PlaceAtFocus = { addr = 0x801F4434, type = "func", source = "Copies D_8014
 
 ["emi/world04/area168/13"]
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x34, source = "The switch table of func_801F4A0C: 13 jump targets of its jr dispatch." }
-Actor_AdvanceWhenPartyNear = { addr = 0x801F35F8, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when D_80143BB0 is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
+Actor_AdvanceWhenPartyNear = { addr = 0x801F35F8, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when g_GameStateIndex is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
 Actor_SlideScreenX = { addr = 0x801F3738, type = "func", source = "Adds ACTOR_SCREEN_X_STEP to the screen origin of the work record and, once it reaches ACTOR_SCREEN_X_THRESHOLD, adds 1 to the step (byte 0x02); runs Area_Update." }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F3794, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08); then runs Area_Update." }
 Actor_SlideScreenDown16 = { addr = 0x801F38A4, type = "func", source = "Subtracts 0x10 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays cue EMI_CUE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
@@ -6193,7 +6193,7 @@ D_801F4B2E = { addr = 0x801F4B2E, type = "u8", source = "D_801F4B2C+0x2", alias 
 
 ["emi/world04/area169/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Actor_AdvanceWhenPartyNear = { addr = 0x801F2DCC, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when D_80143BB0 is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
+Actor_AdvanceWhenPartyNear = { addr = 0x801F2DCC, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when g_GameStateIndex is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
 Actor_SlideScreenX = { addr = 0x801F2F0C, type = "func", source = "Adds ACTOR_SCREEN_X_STEP to the screen origin of the work record and, once it reaches ACTOR_SCREEN_X_THRESHOLD, adds 1 to the step (byte 0x02); runs Area_Update." }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F2F68, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08); then runs Area_Update." }
 Actor_SlideScreenDown16 = { addr = 0x801F3078, type = "func", source = "Subtracts 0x10 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays cue EMI_CUE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
@@ -6201,7 +6201,7 @@ Area_Update = { addr = 0x801F30E8, type = "func", source = "Sets header.step (by
 
 ["emi/world04/area170/13"]
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0xF4, source = "The switch table of func_801F4B58: 61 jump targets of its jr dispatch." }
-Actor_AdvanceWhenPartyNear = { addr = 0x801F3DE8, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when D_80143BB0 is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
+Actor_AdvanceWhenPartyNear = { addr = 0x801F3DE8, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when g_GameStateIndex is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
 Actor_SlideScreenX = { addr = 0x801F3F28, type = "func", source = "Adds ACTOR_SCREEN_X_STEP to the screen origin of the work record and, once it reaches ACTOR_SCREEN_X_THRESHOLD, adds 1 to the step (byte 0x02); runs Area_Update." }
 Actor_AdvanceOutsidePartyCell = { addr = 0x801F3F84, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08)." }
 Actor_SlideScreenDown16 = { addr = 0x801F4080, type = "func", source = "Subtracts 0x10 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays cue EMI_CUE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
@@ -6238,7 +6238,7 @@ g_PartyMemberMessages = { addr = 0x801F5914, size = 0x18, source = "Tag and mess
 ["emi/world04/area174/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_UpdateShots = { addr = 0x801F2EC4, type = "func", source = "Updates the active shots: moves them by their velocities, re-aims them, ages and frees them, and draws each; returns whether any was active." }
-Actor_AdvanceWhenPartyNear = { addr = 0x801F363C, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when D_80143BB0 is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
+Actor_AdvanceWhenPartyNear = { addr = 0x801F363C, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays cue EMI_CUE_ID(2, 0) when g_GameStateIndex is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction_08)." }
 Actor_SlideScreenX = { addr = 0x801F377C, type = "func", source = "Adds ACTOR_SCREEN_X_STEP to the screen origin of the work record and, once it reaches ACTOR_SCREEN_X_THRESHOLD, adds 1 to the step (byte 0x02); runs Area_Update." }
 Actor_AdvanceWhenPartyAway = { addr = 0x801F37D8, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction_08); then runs Area_Update." }
 Actor_SlideScreenDown16 = { addr = 0x801F38E8, type = "func", source = "Subtracts 0x10 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays cue EMI_CUE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
@@ -7225,7 +7225,7 @@ g_SndBankSequences = { addr = 0x80148A34, size = 0x1C, source = "The address of 
 g_SndVabIds = { addr = 0x80148FB0, type = "s8", size = 0x7, source = "SND_Init seeds slot i with i and SND_Exit passes each to SsVabClose" }
 g_SelectionEffectVoices = { addr = 0x80148FC0, type = "s8", source = "Voices of the selection sound effects." }
 g_SndVoiceVolume = { addr = 0x80148FC8, type = "s8", size = 0x18, source = "SND_StartVolumeSweep passes [voice] to SsUtAutoVol as the start level and stores the target back" }
-g_SndVoiceTargetVolume = { addr = 0x80148FF8, type = "u8", size = 0x18, source = "SND_StartVolumeSweep passes [voice] as the end level; func_8015D104 lowers it clamped at zero" }
+g_SndVoiceTargetVolume = { addr = 0x80148FF8, type = "u8", size = 0x18, source = "SND_StartVolumeSweep passes [voice] as the end level; SND_DecreaseVoiceTargetVolume lowers it clamped at zero" }
 g_MessageState = { addr = 0x801490A0, source = "State of the message window." }
 g_UiWindowStep = { addr = 0x801490A1, type = "u8", source = "Step of the window script." }
 g_MessageChoiceMode = { addr = 0x801490A2, source = "Mode of the message choice." }
@@ -7239,7 +7239,7 @@ g_MessageWindow = { addr = 0x801490BC, source = "MenuState block the text, panel
 g_MessageChoice = { addr = 0x801490C7, source = "The player's choice in the message window." }
 g_TextVariables = { addr = 0x801490D8, type = "u8", size = 0x200, source = "Text variables." }
 g_AreaCameraAngle = { addr = 0x801492D8, size = 0x8, source = "Angle of the area camera." }
-D_801492E0 = { addr = 0x801492E0, type = "SVECTOR", source = "The camera angle of the previous frame: Area_UpdateCamera copies g_AreaCameraAngle here when the angle changes and counts three refreshes." }
+g_AreaPreviousCameraAngle = { addr = 0x801492E0, type = "SVECTOR", size = 0x8, source = "The previous frame camera angle copied from g_AreaCameraAngle when it changes." }
 g_CameraMatrix = { addr = 0x801492E8, type = "MATRIX", source = "View matrix of the camera." }
 g_AreaScrollTargetX = { addr = 0x80149308, type = "s32", source = "X scroll target of the area." }
 g_AreaTargetCellX = { addr = 0x8014930A, source = "Cell x of the area scroll target." }
@@ -7320,6 +7320,7 @@ SYS_ThreadWait = { addr = 0x8014B87C, type = "func", source = "Arms the current 
 SYS_ThreadExit = { addr = 0x8014B8B0, type = "func", source = "Empties the current thread, closes it, switches away." }
 SYS_ThreadClose = { addr = 0x8014B900, type = "func", source = "Empties one thread and closes it." }
 SYS_ThreadReplace = { addr = 0x8014B954, type = "func", source = "Replaces the running callback." }
+SYS_ClearCurrentThread = { addr = 0x8014BA04, type = "func", source = "Clears the current thread work area at offsets 0x60 through 0x7F." }
 Area_DrawScene = { addr = 0x8014BA54, type = "func", source = "Draws the area scene." }
 Area_SwapObjects = { addr = 0x8014BAB8, type = "func", source = "Swaps two objects of the draw list." }
 Area_SwapActors = { addr = 0x8014BAEC, type = "func", source = "Swaps two actors of the draw list." }
@@ -7384,6 +7385,7 @@ GFX_RunWhiteFade = { addr = 0x8014F5F0, type = "func", source = "Fades the scree
 GFX_UpdateScreenFade = { addr = 0x8014F704, type = "func", source = "Draws one step of a screen fade." }
 UI_DrawText = { addr = 0x8014F800, type = "func", source = "Draws a text record." }
 UI_DrawTextGlyphs = { addr = 0x8014F84C, type = "func", source = "Draws a text record's control bytes and glyphs through the shared sprite cursor." }
+UI_AddTextDrawMode = { addr = 0x8014FC00, type = "func", source = "Adds the draw mode used by the text and glyph renderers." }
 UI_DrawTextString = { addr = 0x8014FC90, type = "func", source = "Draws a glyph string." }
 UI_DrawAsciiString = { addr = 0x8014FF0C, type = "func", source = "Draws an ASCII string." }
 UI_DrawGlyphString = { addr = 0x80150098, type = "func", source = "Draws a glyph string." }
@@ -7428,6 +7430,7 @@ Area_LoadCellRowsNext = { addr = 0x80152FB0, type = "func", source = "Streams th
 Area_InitMapRenderer = { addr = 0x80153DE8, type = "func", source = "Initializes the field map renderer: sets the geometry screen, offset and back color, resets the 0x400 double FT4 primitives, seeds the camera and scroll state from the scroll target, clears the 0x38 by 0x1C cell table, fills the identity draw order and builds the first view." }
 Area_GetCell = { addr = 0x801541C0, type = "func", source = "Returns the area cell at panel coordinates." }
 Area_UploadCell = { addr = 0x80154294, type = "func", source = "Uploads an area cell." }
+Area_ApplyMapBundleObjects = { addr = 0x80154438, type = "func", source = "Applies each area map bundle object record to its selected map row." }
 Area_AllocCellPrimRow = { addr = 0x8015456C, type = "func", source = "Allocates a primitive row for an area cell." }
 Area_RequestCellRows = { addr = 0x801545B4, type = "func", source = "Queues the rows of an area cell." }
 Area_FreeCellPrimRow = { addr = 0x80154664, type = "func", source = "Frees a primitive row of the area cells." }
@@ -7479,7 +7482,9 @@ UI_DrawTextRows = { addr = 0x8015A170, type = "func", source = "Draws each row o
 UI_DrawLine = { addr = 0x8015A2B0, type = "func", source = "Draws a line." }
 UI_DrawTextAt = { addr = 0x8015A344, type = "func", source = "Draws message text at a position." }
 Area_UpdateParty = { addr = 0x8015A758, type = "func", source = "Runs the party in the area." }
+Actor_ProjectForDraw = { addr = 0x8015A944, type = "func", source = "Sets the actor draw layer, projects its position, and registers it when on screen." }
 SYS_InitScratchpad = { addr = 0x8015AC8C, type = "func", source = "comment: initializes the scratch work record for a new panel: marks it active, sets the mode (+0x24) and state (+0x48) bytes, seeds the +0x40/+0x44 scroll pair " }
+Actor_BuildTransformMatrix = { addr = 0x8015B410, type = "func", source = "Builds a matrix from the current actor position and rotation." }
 Area_ApplyCameraMatrix = { addr = 0x8015B4B0, type = "func", source = "composes a matrix with the camera matrix and loads it into the GTE" }
 Actor_FindScriptSlot = { addr = 0x8015B4F4, type = "func", source = "Resolves a script's actor reference to a slot: without bit 0x80 the low six bits plus 30, with it the code-th actor record whose first byte is 10. Called by Actor_ReadValue." }
 SYS_SetFlag = { addr = 0x8015B580, type = "func", source = "Sets a flag bit." }
@@ -7523,10 +7528,12 @@ Actor_ApplyVelocity = { addr = 0x8015C9CC, type = "func", source = "Moves an act
 Actor_FindFreeField = { addr = 0x8015CA48, type = "func", source = "Returns the index of the first g_Actors entry whose first byte is 0, or 0xFF when all ACTOR_COUNT are in use." }
 Actor_ReadState = { addr = 0x8015CA9C, type = "func", source = "Reads the script state of an actor." }
 Actor_ClaimSlot = { addr = 0x8015CB18, type = "func", source = "claims the free record slot, fills its header, id, step and halfword fields; comment says the same" }
+Actor_SpawnHelper = { addr = 0x8015CC00, type = "func", source = "Creates a helper actor from its script id, step, selection and position." }
 SND_Init = { addr = 0x8015CD00, type = "func", source = "Initializes the sound system." }
 SND_Start = { addr = 0x8015CE70, type = "func", source = "Starts the sound system." }
 SND_Exit = { addr = 0x8015CEBC, type = "func", source = "Shuts down the sound system." }
 SND_UpdateVoiceStatus = { addr = 0x8015D044, type = "func", source = "Updates the status of the sound voices." }
+SND_DecreaseVoiceTargetVolume = { addr = 0x8015D104, type = "func", source = "Subtracts from a voice target volume and clamps it at zero." }
 SND_LowerVoiceLevel = { addr = 0x8015D148, type = "func", source = "Lowers a voice level." }
 SND_RaiseVoiceLevel = { addr = 0x8015D1BC, type = "func", source = "Raises a voice level." }
 SND_StartVolumeSweep = { addr = 0x8015D228, type = "func", source = "starts a volume sweep from g_SndVoiceVolume to g_SndVoiceTargetVolume on the voice" }

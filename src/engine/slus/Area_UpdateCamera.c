@@ -86,9 +86,9 @@ MATCH void Area_UpdateCamera(void) {
     if (refilled != 0) {
         Area_IndexCells();
     }
-    if (g_AreaCameraAngle.vx != *(s16*)&D_801492E0 || g_AreaCameraAngle.vy != D_801492E2 || g_AreaCameraAngle.vz != D_801492E4) {
-        g_AreaCameraRefreshCount = 3;
-        *(SVECTOR*)&D_801492E0   = *&g_AreaCameraAngle;
+    if (g_AreaCameraAngle.vx != g_AreaPreviousCameraAngle.vx || g_AreaCameraAngle.vy != g_AreaPreviousCameraAngle.vy || g_AreaCameraAngle.vz != g_AreaPreviousCameraAngle.vz) {
+        g_AreaCameraRefreshCount  = 3;
+        g_AreaPreviousCameraAngle = g_AreaCameraAngle;
     }
     RotMatrix(&g_AreaCameraAngle, &g_CameraMatrix);
     setVector(&view, (u32)g_AreaCameraX >> 1, g_AreaCameraY >> 1, (u32)g_AreaCameraHeight >> 1);
