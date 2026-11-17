@@ -14,6 +14,7 @@ NON_MATCHING void func_801D7C10(s32 x, s32 y, s32 flags) {
     u8* strip;
 
     mask   = flags & BYTE_MASK;
+    y      = (s16)y;
     base_x = x;
     for (i = 0; i < 3; i++, base_x += 48) {
         slots[i] = (mask >> i) & 1;
