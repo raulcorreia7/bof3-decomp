@@ -102,7 +102,7 @@
     D_8018B3E0 = (cues)[cue];                                                                                 \
     program    = (cues)[cue + 1] & EMI_CUE_PROGRAM_MASK;                                                      \
     D_8018B308 = program;                                                                                     \
-    D_8018B3F4 = (cues)[cue + 1] & EMI_CUE_USE_CUE_VOLUME_FLAG;                                               \
+    D_8018B3F4 = (cues)[cue + 1] & EMI_SE_USE_SE_VOLUME_FLAG;                                                 \
     tone       = (cues)[cue + 2] >> 4;                                                                        \
     D_8018B310 = tone;                                                                                        \
     D_8018B3E8 = (cues)[cue + 2] & EMI_CUE_COMPARE_MASK;                                                      \

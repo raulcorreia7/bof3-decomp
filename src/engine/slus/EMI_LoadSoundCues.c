@@ -5,7 +5,7 @@
  */
 MATCH void EMI_LoadSoundCues(void) {
     if (EMI_LOADER_STEP == 0) {
-        g_EmiLoadArg = g_EmiBanks[D_80146483].cue_table;
+        g_EmiLoadArg = g_EmiBanks[D_80146483].se_records;
     }
 
     EMI_CopySector();
