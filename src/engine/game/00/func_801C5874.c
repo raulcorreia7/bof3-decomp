@@ -19,7 +19,7 @@ MATCH void func_801C5874(void) {
     }
     list       = FIELD(s32*, g_AreaLoads[g_GameAreaId], 0x1Cu);
     target     = list[D_80143FBF];
-    /* GameWork cell aliases the flag cluster at D_80143FBD - 0x75. */
+    /* The cells at D_80143FBD are g_Task's interaction_flags and timer. */
     g_Task     = (Actor*)(base - 0x75);
     sel        = func_801A8D38(base - 1, target);
     D_80143F50 = sel;
