@@ -4665,7 +4665,7 @@ Scene_DispatchEntity = { addr = 0x801F6DCC, type = "func", source = "dispatches 
 func_801F6DD4 = { addr = 0x801F6DD4, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
 Scene_InitSpark = { addr = 0x801F83D0, type = "func", source = "Starts one spark at a random point near the actor position, falling from rest; one body shared by scena07 and scena08." }
 Actor_Wait = { addr = 0x801F8730, type = "func", source = "Counts the actor wait byte down reloads it at zero and advances the handler index." }
-MotionTrail_Update = { addr = 0x801F88B8, type = "func", source = "Pushes the task position onto a chain of 32 nodes, projects every node to the screen with its size and sets each node's angle from the directions between its neighbours." }
+Trail_Update = { addr = 0x801F88B8, type = "func", source = "Pushes the task position onto a chain of 32 points, projects every point to the screen with its width, and sets each point's angle from the headings to its neighbours." }
 MATH_AverageAngle = { addr = 0x801F8F40, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
 GFX_DrawFan = { addr = 0x801F8F90, type = "func", source = "Draws a fan of eight semi-transparent POLY_G3 triangles from a screen point, the centre corner shaded by the colour byte; one body shared by scena07, scena08 and area088" }
 Scene_DispatchActor = { addr = 0x801FD3BC, type = "func", source = "dispatches a scenario actor to its callback handler" }
@@ -4690,7 +4690,7 @@ Scene_DispatchEntity = { addr = 0x801F6F48, type = "func", source = "dispatches 
 func_801F6F50 = { addr = 0x801F6F50, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
 Scene_InitSpark = { addr = 0x801F8B50, type = "func", source = "Starts one spark at a random point near the actor position, falling from rest; one body shared by scena07 and scena08." }
 Actor_Wait = { addr = 0x801F8D18, type = "func", source = "Counts the actor wait byte down reloads it at zero and advances the handler index." }
-MotionTrail_Update = { addr = 0x801F8D98, type = "func", source = "Pushes the task position onto a chain of 32 nodes, projects every node to the screen with its size and sets each node's angle from the directions between its neighbours." }
+Trail_Update = { addr = 0x801F8D98, type = "func", source = "Pushes the task position onto a chain of 32 points, projects every point to the screen with its width, and sets each point's angle from the headings to its neighbours." }
 MATH_AverageAngle = { addr = 0x801F9420, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
 GFX_DrawFan = { addr = 0x801F9470, type = "func", source = "Draws a fan of eight semi-transparent POLY_G3 triangles from a screen point, the centre corner shaded by the colour byte; one body shared by scena07, scena08 and area088" }
 Scene_DispatchActor = { addr = 0x801FE018, type = "func", source = "dispatches a scenario actor to its callback handler" }
@@ -5580,7 +5580,7 @@ g_WorldMapCloudTexture = { addr = 0x801F580C, source = "Texture window of the cl
 ["emi/world02/area088/13"]
 g_SceneEventStep_u8 = { addr = 0x801448EC, type = "u8", alias = true, source = "The scene event step byte (0x801448EC) as a u8 array; Fishing_ShowLocation and func_801F3EE8 read and step it." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-MotionTrail_Update = { addr = 0x801F2F28, type = "func", source = "Pushes the task position onto a chain of 32 nodes, projects every node to the screen with its size and sets each node's angle from the directions between its neighbours." }
+Trail_Update = { addr = 0x801F2F28, type = "func", source = "Pushes the task position onto a chain of 32 points, projects every point to the screen with its width, and sets each point's angle from the headings to its neighbours." }
 MATH_AverageAngle = { addr = 0x801F35B0, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
 GFX_DrawFan = { addr = 0x801F3600, type = "func", source = "Draws a fan of eight semi-transparent POLY_G3 triangles from a screen point, the centre corner shaded by the colour byte; one body shared by scena07, scena08 and area088" }
 Message_ClearOnCancel = { addr = 0x801F3764, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }

@@ -10,7 +10,7 @@ MATCH void func_801F2C48(void) {
     FAKE_BARRIER(); /* FAKE: keeps the D_800E4B3E store below the work stores */
     D_800E4B3E = 0x60;
     do {
-        MotionTrail_Update((u8*)AREA_WORK);
+        Trail_Update((Trail*)AREA_WORK);
         i += 1;
     } while ((i & BYTE_MASK) < 0x20U);
     g_Task->timer = 0;
