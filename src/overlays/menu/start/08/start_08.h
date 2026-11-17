@@ -472,8 +472,10 @@ extern u8              g_EquipPreview[EQUIP_SLOT_COUNT];
 extern s8              D_801ED648;
 /* The start overlay's slot rows (three bytes per slot) and its byte table;
  * every reader indexes or walks them as bytes. */
-extern u8              D_801ED680[];
-extern u8              D_801ED68C;
+/* D_801ED680 */
+extern u8              g_FormationCells[];
+/* D_801ED68C */
+extern u8              g_MenuPartyCommand;
 extern u8              D_801ED690[];
 extern u8              D_801ED694[][2];
 extern u8              D_801ED695[][2];
@@ -577,15 +579,19 @@ extern void Menu_SwapBytes3(u8* first, u8* second);
 /* func_801D9350 */
 extern void Menu_PackSkills(void);
 void        func_801D970C(void);
-void        func_801D9748(void);
-void        func_801D98BC(void);
+/* func_801D9748 */
+void        Menu_OpenPartyScreen(void);
+/* func_801D98BC */
+void        Menu_ChoosePartyCommand(void);
 void        func_801D9AF0(void);
 void        func_801D9B2C(void);
-void        func_801D9BDC(void);
+/* func_801D9BDC */
+void        Menu_UpdateFormation(void);
 void        func_801DA27C(void);
 void        func_801DA320(void);
 void        func_801DA984(void);
-void        func_801DAA68(void);
+/* func_801DAA68 */
+void        Menu_OpenFormationScreen(void);
 void        Menu_SwapBytes4(u8* first, u8* second);
 extern void func_801DB510(void);
 void        func_801DB550(void);
@@ -824,7 +830,8 @@ void             func_801D71EC(void);
 void             func_801D9664(void);
 void             func_801D96D4(void);
 void             Menu_DrawPlayTimeWindow(u16 panel_x, u16 panel_y);
-void             func_801DAE14(u16 buttons);
+/* func_801DAE14 */
+void             Menu_OpenPartyChange(u16 buttons);
 void             Menu_DrawPanelIcon(u16 icon_x, u16 icon_y, s32 icon_u, s32 icon_v, u16 icon_clut, u8 icon_shade);
 void             Menu_DrawEquipCompareWindow(u8 index, s32 x, s32 y, u8* patch, u8 hide_changes, MenuPanelTask* task);
 extern void      func_801E30FC(u16 row_x, u16 row_y, s32 row_flags);
@@ -871,12 +878,18 @@ extern s32       D_801ED608;
 extern s8        D_801ED654;
 extern u8        D_801ED660;
 extern u8        D_801ED664;
-extern s8        D_801ED668;
-extern s8        D_801ED66C;
-extern s8        D_801ED670;
-extern s8        D_801ED674;
-extern s8        D_801ED678;
-extern s8        D_801ED67C;
+/* D_801ED668 */
+extern s8        g_FormationCursorColumn;
+/* D_801ED66C */
+extern s8        g_FormationCursorRow;
+/* D_801ED670 */
+extern s8        g_FormationColumn;
+/* D_801ED674 */
+extern s8        g_FormationRow;
+/* D_801ED678 */
+extern s8        g_FormationPickColumn;
+/* D_801ED67C */
+extern s8        g_FormationPickRow;
 extern u8        D_801ED69C;
 extern u8        D_801ED7FC;
 extern u8        D_801ED878[];
@@ -910,7 +923,8 @@ void func_801E2E90(s32 x, s32 y, s32 row_index);
 void Menu_DrawBackdrop(void);
 void func_801E7720(s16 tile_x, s8 tile_kind);
 /* No prototype: the retail callers pass a byte the callee ignores. */
-void func_801DAC1C();
+/* func_801DAC1C */
+void Menu_OpenFormation();
 void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 shade_mode);
 void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 

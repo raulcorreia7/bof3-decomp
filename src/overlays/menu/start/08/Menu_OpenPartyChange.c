@@ -1,8 +1,9 @@
 /* best score 90.14 */
 #include "start_08.h"
 
+/* func_801DAE14 */
 #ifdef NON_MATCHING
-NON_MATCHING void func_801DAE14(u16 buttons) {
+NON_MATCHING void Menu_OpenPartyChange(u16 buttons) {
     s32          count;
     u8           n;
     s32          offset;
@@ -61,5 +62,5 @@ NON_MATCHING void func_801DAE14(u16 buttons) {
     D_801ED69C    = 0xFF;
 }
 #else
-INCLUDE_ASM(func_801DAE14);
+INCLUDE_ASM(Menu_OpenPartyChange);
 #endif
