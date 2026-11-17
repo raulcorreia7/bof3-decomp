@@ -75,11 +75,15 @@ extern u8 D_80145FC8;
 
 extern PanelOwner D_801ED9B0[];
 /* Prototypes the images of this group share. */
-void              func_80096A74(void);
-void              func_80096F00(void);
+/* func_80096A74 */
+void              Battle_RunAttackCommand(void);
+/* func_80096F00 */
+void              Battle_RunAbilityCommand(void);
 void              func_800980A8(void);
-void              func_8009834C(void);
-void              func_8009B274(void);
+/* func_8009834C */
+void              Battle_RunItemCommand(void);
+/* func_8009B274 */
+void              Battle_RunEscapeCommand(void);
 void              Battle_TriggerEnemyEvents(void);
 void              func_800A4688(void);
 void              func_800A8540(void);

@@ -9,7 +9,7 @@ MATCH void Battle_SetCommandType(void) {
     u8  message_slot;
 
     g_BattleActorTurn->command.type = BATTLE_COMMAND_ABILITY;
-    func_80097EC0();
+    Battle_InitAbilityPanel();
     flags = g_BattleActorTurn->action_flags.value;
     if (flags & BATTLER_ACTION_DRAGON_FORM) {
         if (!(flags & BATTLER_ACTION_DRAGON_FORM_CONTROLLED)) {

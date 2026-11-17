@@ -36,7 +36,7 @@ MATCH void func_801D277C(void) {
     }
     half_flags = &g_Battle.flags;
     *half_flags |= 8;
-    func_8009BFC4();
+    Battle_RunEnemyEvents();
     if ((*half_flags & BATTLE_STATE_COMMAND_ARMED) == 0) {
         EMI_LoadArchive(EMI_SLOT_BATL_SE);
     }

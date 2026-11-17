@@ -1,6 +1,6 @@
 #include "battle_15.h"
 
-void func_8009A744(void); /* extern */
+void Battle_ApplyEquipment(void); /* extern */
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_80099830(void) {
@@ -74,11 +74,11 @@ NON_MATCHING void func_80099830(void) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
         goto block_33; /* shared scroll/confirm join */
     }
-    func_8009AAE8();
+    Battle_PreviewEquipment();
     if (g_InputMasks[BATTLE_INPUT_CONFIRM] & *row_base) {
         if (choice != 0) {
             SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
-            func_8009A744();
+            Battle_ApplyEquipment();
         block_33:
             g_BattleListCursor = 0xFF;
             D_801485C3         = 0xFF;

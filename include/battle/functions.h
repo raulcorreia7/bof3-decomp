@@ -6,9 +6,11 @@
 
 /* The battle overlays' functions that the battle, bmagic and boss images call, in address order. */
 
-void        func_800975D4(void);
+/* func_800975D4 */
+void        Battle_ResetAbilitySelection(void);
 u8          func_80097EB8(void);
-void        func_800989B4(void);
+/* func_800989B4 */
+void        Battle_ResetItemSelection(void);
 u8          func_8009AF7C(void);
 void        func_800A4458(void);
 /* func_800A581C */

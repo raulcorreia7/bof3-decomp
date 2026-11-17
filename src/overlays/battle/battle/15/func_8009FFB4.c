@@ -2,5 +2,5 @@
 
 MATCH void func_8009FFB4(void) {
     Battle_CureStatus(g_Battle.target, 0xBFC);
-    func_8009DE8C();
+    Battle_HealFullHp();
 }

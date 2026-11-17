@@ -432,7 +432,7 @@ extern u16                               D_800E405E;
 extern u16                               D_800E4068;
 /* Playable-character record rows are byte-addressed; each typed row is 0xA4 bytes. */
 extern volatile u32                      D_80144F60[];
-extern u8                                D_801454FD; /* plain: func_80098450 stores it outside the volatile order */
+extern u8                                D_801454FD; /* plain: Battle_SelectItem stores it outside the volatile order */
 extern volatile u8                       D_801454FE;
 extern volatile u8                       D_801454FF;
 /* D_80145500 */
@@ -552,17 +552,22 @@ extern BattleTemplateStats       g_BattleTemplateStats[]; /* 0x801EC364 */
 void        func_80096F3C(void);
 void        func_80096F78(void);
 void        Battle_SetCommandType(void);
-void        Battle_GetPanelPosX(void);
-void        func_8009761C(void);
+void        Battle_ChooseAbility(void);
+/* func_8009761C */
+void        Battle_RouteAbilityTarget(void);
 void        func_8009773C(void);
 void        Battle_SetCommandId(void);
-void        func_80097844(void);
-void        func_800979E4(void);
+/* func_80097844 */
+void        Battle_SelectAbilityEnemyTarget(void);
+/* func_800979E4 */
+void        Battle_SelectAbilityPartyTarget(void);
 void        Battle_ResetSelectionLatch(void);
 void        Battle_SetPhaseStep(void);
 void        func_80097D1C(void);
-void        func_80097D58(void);
-void        func_80097DC0(void);
+/* func_80097D58 */
+void        Battle_SetAbilityTargetSide(void);
+/* func_80097DC0 */
+void        Battle_ToggleAbilityTargetSide(void);
 void        func_80097FE8(void);
 void        func_800980E4(void);
 void        func_80098144(void);
@@ -571,34 +576,47 @@ void        func_800982E4(void);
 void        Battle_GrantAlwaysHits(void);
 void        Battle_GrantDamageImmunity(void);
 void        Battle_GrantReprisal(void);
-void        func_8009DA94(void);
+/* func_8009DA94 */
+void        Battle_DealNoDamage(void);
 void        func_8009DAB4(void);
 void        func_8009DBA4(void);
 void        func_8009DC6C(void);
-void        func_8009DD20(void);
+/* func_8009DD20 */
+void        Battle_CurePoison(void);
 void        func_8009DD50(void);
-void        func_8009DE50(void);
-void        func_8009DE64(void);
-void        func_8009DE78(void);
+/* func_8009DE50 */
+void        Battle_Heal20Hp(void);
+/* func_8009DE64 */
+void        Battle_Heal40Hp(void);
+/* func_8009DE78 */
+void        Battle_Heal100Hp(void);
 void        func_8009DF70(void);
 void        func_8009DFBC(void);
-void        func_8009DFEC(void);
+/* func_8009DFEC */
+void        Battle_CureBlindness(void);
 void        func_8009E01C(void);
-void        func_8009E04C(void);
-void        func_8009E07C(void);
+/* func_8009E04C */
+void        Battle_CureAilments(void);
+/* func_8009E07C */
+void        Battle_ReviveOneHp(void);
 void        func_8009E184(void);
 void        func_8009E1E0(void);
-void        func_8009E200(void);
-void        func_8009E224(void);
-void        func_8009E248(void);
+/* func_8009E200 */
+void        Battle_Heal20Ap(void);
+/* func_8009E224 */
+void        Battle_Heal100Ap(void);
+/* func_8009E248 */
+void        Battle_DrainHp(void);
 void        func_8009E7C4(void);
 void        func_8009E7E4(void);
 /* func_8009E804 */
 void        Battle_InflictSleep(void);
 /* func_8009E824 */
 void        Battle_InflictConfusion(void);
-void        func_8009E844(void);
-void        func_8009E98C(void);
+/* func_8009E844 */
+void        Battle_ReviveQuarterHp(void);
+/* func_8009E98C */
+void        Battle_ReviveFullHp(void);
 void        func_8009EA30(void);
 void        func_8009EA8C(void);
 void        func_8009EACC(void);
@@ -709,18 +727,28 @@ void        func_800A2668(void);
 void        func_800A26F0(void);
 void        func_80098388(void);
 void        func_800983C4(void);
-void        func_80098408(void);
-void        func_80098450(void);
-void        func_800989FC(void);
+/* func_80098408 */
+void        Battle_StartItemCommand(void);
+/* func_80098450 */
+void        Battle_SelectItem(void);
+/* func_800989FC */
+void        Battle_RouteItemTarget(void);
 void        func_80098B08(void);
-void        func_80098B44(void);
-void        func_80098C18(void);
-void        func_80098DC4(void);
-void        func_80098FD4(void);
-void        func_80099114(void);
+/* func_80098B44 */
+void        Battle_StartItemTarget(void);
+/* func_80098C18 */
+void        Battle_SelectItemEnemyTarget(void);
+/* func_80098DC4 */
+void        Battle_SelectItemPartyTarget(void);
+/* func_80098FD4 */
+void        Battle_ConfirmItem(void);
+/* func_80099114 */
+void        Battle_CancelItem(void);
 void        func_80099178(void);
-void        func_800991B4(void);
-void        func_80099248(void);
+/* func_800991B4 */
+void        Battle_SetItemTargetSide(void);
+/* func_80099248 */
+void        Battle_ToggleItemTargetSide(void);
 void        func_80099328(void);
 void        func_80099364(void);
 void        func_80099568(void);
@@ -734,16 +762,20 @@ void        func_8009A254(void);
 void        func_8009A468(void);
 void        func_8009A518(void);
 void        func_8009A590(void);
-void        func_8009AF84(void);
-void        func_8009B20C(void);
-void        func_8009B2B0(void);
+/* func_8009AF84 */
+void        Battle_InitItemPanel(void);
+/* func_8009B20C */
+void        Battle_ClearMenuPanels(void);
+/* func_8009B2B0 */
+void        Battle_TryEscape(void);
 void        func_8009B44C(void);
 void        func_8009B488(void);
 void        func_8009B700(void);
 void        func_8009B794(void);
 void        func_8009B828(void);
 void        func_8009B964(void);
-u8          func_8009BACC(s32 diff);
+/* func_8009BACC */
+u8          Battle_CalcEscapeChance(s32 diff);
 bool        func_8009C794(s32 skip_slot, s32 row_index);
 /* func_8009C8AC */
 u8          Battle_ActionHasElement(u16 required_mask);
@@ -755,8 +787,10 @@ void        Battle_MergeEnemyPanels(void);
 void        Battle_ApplyAbilityDamage(void);
 /* func_8009DE18 */
 extern void Battle_ApplyHeal(void);
-void        func_8009DE8C(void);
-extern void func_8009E500(void);
+/* func_8009DE8C */
+void        Battle_HealFullHp(void);
+/* func_8009E500 */
+extern void Battle_DrainAp(void);
 /* func_8009F320 */
 void        Battle_HalveDamage(void);
 void        func_8009F6EC(void);
@@ -951,8 +985,10 @@ void Actor_SelectScript_keep_a1(u32 selector, u32 payload);
 #endif
 /* func_80097574 */
 bool        Battle_IsAbilityLocked(void);
-void        func_80097EC0(void);
-extern void func_8009AAE8(void);
+/* func_80097EC0 */
+void        Battle_InitAbilityPanel(void);
+/* func_8009AAE8 */
+extern void Battle_PreviewEquipment(void);
 void        func_8009B03C(void);
 void        func_8009B160(void);
 /* func_8009C994 */
@@ -1044,7 +1080,7 @@ static inline void BattleResetSelectionState(void) {
     battle_selection_state[0x62E1u] = 1u;
     battle_selection_state[0x62E2u] = 0u;
     battle_selection_state[0x62E3u] = 0u;
-    func_8009B20C();
+    Battle_ClearMenuPanels();
 }
 
 /* Roll a hit against the seeded threshold and the caller's rate table.

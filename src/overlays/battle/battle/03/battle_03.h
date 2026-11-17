@@ -495,7 +495,8 @@ extern u8    D_801EC2E4;
 extern Stats D_801EC2E8;
 
 /* func_8009BBE8 */
-void               func_8009BFC4(void);
+/* func_8009BFC4 */
+void               Battle_RunEnemyEvents(void);
 void               func_8009D198(void);
 u16                func_800A2AE0(u8 arg0);
 /* func_800A31E0 */
