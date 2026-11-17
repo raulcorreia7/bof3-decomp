@@ -133,6 +133,28 @@ in it.
 By group, the 191 files are: bmagic 120, scenario 27, plchar 19, area 8, commu 6, menu 5, title 3,
 battle 1, logo 2.
 
+### Translation units of an image
+
+An image's text run is one translation unit: `<archive>_<slot>.c` in the image folder (for example
+`src/overlays/area/area157/13/area157_13.c`) holds the image header include and one
+`#include "Name.c"` per function file, in link order. The function files stay as they are, so
+matching and review work per function, and the image's `splat.yaml` holds one `c` row for the run
+(`[0x4, c, area157_13]`). `tools/check_sources.py` counts a source that a row's unit includes as named.
+
+To convert an image:
+
+1. Check that the `c` rows of one segment are contiguous and every function is matched (no
+   `NON_MATCHING`, no `INCLUDE_ASM`, no file-scope `static`).
+2. Write `<archive>_<slot>.c` from the rows in order, and replace those rows by the one row at the
+   first offset.
+3. Run `meson setup --reconfigure build/meson`, then `ninja -C build/meson check-<image>` and the
+   full `pre-push`.
+
+The boundary is the text run: a `.data`, `.rodata` or `.bss` run, a draft or `INCLUDE_ASM` function,
+or the module-id word ends it. A function source that also feeds another row's section (a shared
+body with its own `.rodata`, as in `area175/13`) is not a clean run: the link fails with a section
+discarded from the shared object. Leave that image per function until the sources split.
+
 ### Definitions
 
 Each variable is defined exactly once, with its initializer, never in a header. A file lists
