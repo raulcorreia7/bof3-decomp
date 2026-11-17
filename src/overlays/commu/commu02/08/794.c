@@ -2558,7 +2558,7 @@ NON_MATCHING void func_801D97C8(s32 unused, s32 x, s32 y) {
     u16              column;
     u16              clut;
     s32              tpage;
-    s32              left;
+    u16              left;
 
     left   = x;
     labels = D_801DB038;
@@ -2612,8 +2612,8 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
 
     window.x = 112;
     window.y = 152;
-    window.w = 8;
     window.h = 8;
+    window.w = 8;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
@@ -2691,8 +2691,8 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
 
     window.x = 0;
     window.y = 0;
-    window.w = 256;
     window.h = 256;
+    window.w = 256;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
 
