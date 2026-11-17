@@ -231,7 +231,12 @@ MATCH void func_801EFBE4(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EFC44(void) {
+}
+#else
 INCLUDE_ASM(func_801EFC44);
+#endif
 
 MATCH void func_801F05C8(s32 step) {
     TILE_1*      primitive;

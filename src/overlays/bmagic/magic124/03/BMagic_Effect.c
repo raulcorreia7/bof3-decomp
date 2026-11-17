@@ -188,7 +188,12 @@ MATCH void func_801EF654(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF6E8(void) {
+}
+#else
 INCLUDE_ASM(func_801EF6E8);
+#endif
 
 MATCH void func_801F020C(void) {
     SYS_DISPATCH_BYTE(D_801F08F4, g_Task->header.step);

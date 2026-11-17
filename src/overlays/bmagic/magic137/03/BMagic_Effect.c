@@ -6,7 +6,12 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/BMagic_DispatchMode.h"
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EEC7C(void) {
+}
+#else
 INCLUDE_ASM(func_801EEC7C);
+#endif
 
 #include "overlays/bmagic/Effect_CountDownTimerCallSelector.h"
 

@@ -153,7 +153,12 @@ MATCH void func_801EF2CC(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF318(void) {
+}
+#else
 INCLUDE_ASM(func_801EF318);
+#endif
 
 MATCH void func_801EFE14(LINE_F4* prim, s32* out, SVECTOR v0, SVECTOR v1, SVECTOR v2, SVECTOR v3) {
     long p;

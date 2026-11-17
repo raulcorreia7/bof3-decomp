@@ -384,7 +384,12 @@ MATCH void func_801FD6FC(u8 character) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801FD780(void) {
+}
+#else
 INCLUDE_ASM(func_801FD780);
+#endif
 
 /* func_801FE178 */
 MATCH void Party_JoinRei(void) {

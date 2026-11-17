@@ -66,7 +66,7 @@ extern u16 D_80145A54[];
 s32  func_801F66D0(s16 cell_x, s16 cell_y);
 void func_801F656C(void);
 
-void func_801F4608(s32 arg0);
+void func_801F4608(s32 input);
 void func_801F5BB0(s32 arg0);
 
 extern const BGMTrack g_BGMTracks[BGM_TRACK_COUNT];

@@ -391,6 +391,11 @@ MATCH void func_801F894C(void) {
 MATCH void func_801F89FC(void) {
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F8A04(void) {
+}
+#else
 INCLUDE_ASM(func_801F8A04);
+#endif
 
 INCLUDE_ASM(func_801F9680);

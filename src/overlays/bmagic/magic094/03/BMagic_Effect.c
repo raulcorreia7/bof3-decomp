@@ -109,7 +109,12 @@ MATCH void func_801EF0FC(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF14C(void) {
+}
+#else
 INCLUDE_ASM(func_801EF14C);
+#endif
 
 MATCH void func_801EF654(void) {
     SVECTOR pos;

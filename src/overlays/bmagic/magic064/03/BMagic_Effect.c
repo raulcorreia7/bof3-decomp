@@ -275,7 +275,12 @@ MATCH void func_801EF89C(void) {
     table[g_Task->unk_03]();
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF8F4(void) {
+}
+#else
 INCLUDE_ASM(func_801EF8F4);
+#endif
 
 MATCH void func_801F001C(void) {
     Actor_StepAnimOnce();

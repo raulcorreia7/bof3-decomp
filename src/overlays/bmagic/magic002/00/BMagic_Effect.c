@@ -93,4 +93,9 @@ MATCH void func_801EF030(s32 x, s32 y, u16 radius, s32 phase) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF1FC(s16 x0, s16 y0, s16 x1, s16 y1, s16 x2, s16 y2) {
+}
+#else
 INCLUDE_ASM(func_801EF1FC);
+#endif

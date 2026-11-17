@@ -5,7 +5,12 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F9834(void) {
+}
+#else
 INCLUDE_ASM(func_801F9834);
+#endif
 
 MATCH u16 func_801FA904(u8* tags, u16* messages) {
     u8 i;
@@ -23,7 +28,12 @@ MATCH u16 func_801FA904(u8* tags, u16* messages) {
     return MESSAGE_NONE;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801FA9C8(void) {
+}
+#else
 INCLUDE_ASM(func_801FA9C8);
+#endif
 
 MATCH void func_801FB374(void) {
 }
