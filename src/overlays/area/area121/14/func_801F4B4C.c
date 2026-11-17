@@ -2,132 +2,123 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F4B4C(s32 input) {
-    s32    tmp0;
-    s32    not_zero;
-    s32    bit;
-    s32    tmp1;
-    s32    tmp2;
-    s32    val0;
-    u8     ret;
-    u8     tmp3;
-    u8     tmp4;
-    Actor* tmp5;
-    Actor* tmp6;
-    Actor* tmp7;
-    Actor* tmp8;
-    Actor* tmp9;
-    Actor* tmp10;
-    Actor* tmp11;
-    Actor* tmp12;
+    s32    step_result;
+    s32    facing_delta;
+    s32    adjusted_facing_delta;
+    u8     saved_facing;
+    u8     current_facing;
+    u8     candidate_facing;
+    u8     adjusted_facing;
+    Actor* task;
+    Actor* turned_task;
+    Actor* panel_task;
+    Actor* moving_task;
 
-    tmp5 = g_Task;
-    if (g_GameStateIndex == GAME_REQUEST_SCENE_CAMERA) {
-        tmp5->header.mode = 0xE;
-        goto block_26;
-    }
-    if (g_Game.walk_flags & AREA_WALK_TRANSITION) {
-        tmp5->header.mode   = 5;
-        g_Task->header.step = 0;
-        tmp9                = g_Task;
-        tmp9->param.unk_0B  = 0;
+    if (func_801F5268() & 0xFF) {
         return;
     }
-    bit = g_Game.walk_flags & AREA_WALK_LEADER_SWITCH_ACTIVE;
-    if (!bit && !(g_Game.walk_flags & AREA_WALK_MENU_ACTIVE)) {
-        ret = func_801C3790(1) & BYTE_MASK;
-        if (ret != 0) {
-            return;
+    if (g_Game.flags & GAME_FLAG_SCRIPT_ACTIVE) {
+        return;
+    }
+    if (g_Game.walk_flags & AREA_WALK_ENTRY_PENDING) {
+        return;
+    }
+    if (g_GameStateIndex != GAME_REQUEST_IDLE) {
+        return;
+    }
+    if (g_Task->unk_0A != 0) {
+        return;
+    }
+    if ((g_Game.input != 0) && !((g_Characters[g_Game.current->character_index].status & STATUS_CONFUSED))) {
+        g_Game.current->u.field.step_12A.s8_value = 0;
+    }
+    if (func_801B6674() & 0xFF) {
+        return;
+    }
+    if (Game_RequestMenuOnInput() & 0xFF) {
+        return;
+    }
+    if (func_801B6258() & 0xFF) {
+        return;
+    }
+    if (func_801F55EC() & 0xFF) {
+        return;
+    }
+    saved_facing = g_Task->direction_08;
+    if ((!(Actor_TurnByPad() & 0xFF) && !(g_InputHeld & g_InputMasks[WORLD_INPUT_RUN])) || (task = g_Task, (task->param.unk_0B == 0x40))) {
+        g_Task->direction_08                      = saved_facing;
+        g_Game.current->u.field.mode_12B.s8_value = 0;
+        Actor_StopMoving();
+        goto block_45;
+    }
+    if (g_InputHeld & g_InputMasks[WORLD_INPUT_RUN]) {
+        task->direction_08 = saved_facing;
+    }
+    current_facing  = g_Task->direction_08;
+    adjusted_facing = current_facing;
+    if (current_facing != saved_facing) {
+        facing_delta = (s8)saved_facing - (s8)adjusted_facing;
+        if (facing_delta < 0) {
+            facing_delta = -facing_delta;
         }
-        ret = func_801C37DC(1) & BYTE_MASK;
-        if (ret != 0) {
-            return;
-        }
-        {
-            {
-                if (*D_80145E91 == 0xA) {
-                    Actor_RequestScript(g_Task->direction_08);
-                    g_Task->header.mode = 7;
-                    goto block_26;
-                }
-                if ((func_801BD938() & BYTE_MASK) == 0) {
-                    tmp2 = func_801BC760() & BYTE_MASK;
-                    if (tmp2 < 5) {
-                        not_zero = tmp2 != 0;
-                        if (not_zero) {
-                            goto case_b;
-                        }
-                        if (tmp2 == 0) {
-                            goto case_a;
-                        }
-                        return;
-                    }
-                    if (tmp2 == 6) {
-                        goto case_6;
-                    }
-                    if (tmp2 < 6) {
-                        goto case_5;
-                    }
-                    return;
-                case_a:
-                    if ((Area_GetActorFacingStepX() << 0x18) != 0) {
-                        Actor_RequestScript(g_Task->direction_08);
-                        goto block_26;
-                    }
-                    if (!(g_Characters[g_Game.current->character_index].status & STATUS_CONFUSED)) {
-                        g_Game.current->u.field.step_12A.s8_value = 0;
-                    }
-                    func_801C2538();
-                    func_801C4C48();
-                    Actor_RequestScript((g_Task->direction_08 + 8) & BYTE_MASK);
-                    if (g_Game.current->chr.character_id == CHAR_ID_GARR) {
-                        tmp10 = g_Task;
-                        tmp3  = tmp10->timer;
-                        Area_ReadHeight(tmp10->pos.x.fixed + (tmp10->vx * tmp3), tmp10->pos.y.fixed + (tmp10->vy * tmp3));
-                    }
-                    tmp11        = g_Task;
-                    tmp11->timer = (tmp11->timer - 1);
-                    Actor_UpdateMovement();
-                    g_Game.current->u.field.mode_12B.s8_value = 1;
-                    tmp6                                      = g_Task;
-                    tmp6->header.step                         = 1;
-                    return;
-                case_b:
-                    Actor_ClearVelocity();
-                    Actor_RequestScript(g_Task->direction_08);
-                    g_Game.current->u.field.mode_12B.s8_value = 0;
-                block_26:
-                    tmp7              = g_Task;
-                    tmp7->header.step = 0;
-                    return;
-                case_5:
-                    g_Game.current->u.field.counter_11C.s8_value = 3;
-                    Actor_RequestScript(g_Task->direction_08);
-                    g_Game.current->u.field.mode_12B.s8_value = 4;
-                    g_Task->header.mode                       = 2;
-                    tmp8                                      = g_Task;
-                    tmp8->header.step                         = 3;
-                    return;
-                case_6:
-                    g_Game.current->u.field.counter_11C.s8_value = 3;
-                    Actor_RequestScript(g_Task->direction_08);
-                    g_Game.current->u.field.mode_12B.s8_value = 3;
-                    g_Task->header.mode                       = FIELD_TASK_MODE_CLIMB;
-                    tmp12                                     = g_Task;
-                    tmp4                                      = tmp12->direction_08;
-                    if ((tmp4 == FACING_UP) || (tmp4 == FACING_LEFT)) {
-                        tmp12->header.step = 0;
-                        return;
-                    }
-                    tmp12->header.step = 1;
-                    return;
-                }
-                return;
+        candidate_facing = saved_facing;
+        if (facing_delta >= 3) {
+            if ((s8)saved_facing < (s8)adjusted_facing) {
+                candidate_facing = saved_facing + 8;
+            } else {
+                adjusted_facing += 8;
             }
         }
+        adjusted_facing_delta = (s8)candidate_facing - (s8)adjusted_facing;
+        if (adjusted_facing_delta < 0) {
+            adjusted_facing_delta = -adjusted_facing_delta;
+        }
+        if (adjusted_facing_delta == 2) {
+            if ((s8)adjusted_facing < (s8)candidate_facing) {
+                g_Task->direction_08 = (u8)(saved_facing - 1);
+            } else {
+                g_Task->direction_08 = (u8)(saved_facing + 1);
+            }
+        }
+        turned_task               = g_Task;
+        turned_task->direction_08 = (u8)(turned_task->direction_08 & 7);
     }
-    return;
+    step_result = func_801B0E44() & 0xFF;
+    switch (step_result) { /* irregular */
+        case 0x0:
+            if ((func_801BDF08() << 0x18) != 0) {
+                g_Game.current->u.field.mode_12B.s8_value = 0;
+                g_Task->header.step                       = 0;
+                func_801F50F4();
+                return;
+            }
+            Area_UpdatePanelRun();
+            if ((g_Game.current->u.field.counter_11C.u8_value == 4) && (panel_task = g_Task, (panel_task->direction_08 != saved_facing))) {
+                panel_task->direction_08                  = saved_facing;
+                g_Game.current->u.field.mode_12B.s8_value = 0;
+            block_46:
+                g_Task->header.step = 0;
+            } else {
+                func_801C24D0();
+                func_801C4C48();
+                moving_task        = g_Task;
+                moving_task->timer = (u8)(moving_task->timer - 1);
+                func_801B0DFC();
+                g_Game.current->u.field.mode_12B.s8_value = 1;
+                g_Task->header.step                       = 1;
+                return;
+            }
+            break;
+        case 0x1:
+        case 0xFF:
+            g_Task->direction_08                         = saved_facing;
+            g_Game.current->u.field.mode_12B.s8_value    = 0;
+            g_Game.current->u.field.counter_11C.u8_value = 3U;
+        block_45:
+            g_Task->timer = 0U;
+            goto block_46;
+    }
 }
-
 #else
 INCLUDE_ASM(func_801F4B4C);
 #endif
