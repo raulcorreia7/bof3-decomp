@@ -39,14 +39,14 @@ MATCH void func_801D3884(void) {
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
-        g_MenuPanelTasks[14].handler = 6;
-        g_MenuPanelTasks[14].mode    = 0xF;
-        g_MenuPanelTasks[14].active  = 1;
-        g_MenuPanelTasks[14].pos.x   = 180;
-        g_MenuPanelTasks[14].pos.y   = 60;
-        g_MenuPanelTasks[14].unk_0B  = 0;
-        g_MenuPanelTasks[14].unk_0C  = 0xFF;
-        state                        = &g_MenuStep.state;
+        g_MenuPanelTasks[14].panel  = 6;
+        g_MenuPanelTasks[14].mode   = 0xF;
+        g_MenuPanelTasks[14].active = 1;
+        g_MenuPanelTasks[14].pos.x  = 180;
+        g_MenuPanelTasks[14].pos.y  = 60;
+        g_MenuPanelTasks[14].unk_0B = 0;
+        g_MenuPanelTasks[14].unk_0C = 0xFF;
+        state                       = &g_MenuStep.state;
         /* FAKE: scheduler hoists the state load past the stores. */
         FAKE_BARRIER();
         g_MenuPanelTasks[14].unk_0A = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A;

@@ -2,11 +2,11 @@
 
 extern u8 D_80148656;
 
-typedef struct Start08PanelHead {
+typedef struct Start08Panel {
     s16 unk_00;
     u8  pad_02[0x10E];
     u8  unk_110;
-} Start08PanelHead;
+} Start08Panel;
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D8390(void) {
@@ -61,15 +61,15 @@ NON_MATCHING void func_801D8390(void) {
     D_80148656 = slot[0xA];
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
-        state                        = &D_801485DC;
-        *state                       = 0;
-        g_MenuPanelTasks[18].handler = 6;
-        g_MenuPanelTasks[18].mode    = 0xF;
-        state[-0x24]                 = 1;
-        g_MenuPanelTasks[18].pos.x   = 0x28;
-        g_MenuPanelTasks[18].pos.y   = 0x3C;
-        g_BattleItemRow              = (g_MenuPanelTasks[16].unk_0B == 3) ? 6 : 5;
-        g_MenuPanelTasks[18].unk_0B  = 0;
+        state                       = &D_801485DC;
+        *state                      = 0;
+        g_MenuPanelTasks[18].panel  = 6;
+        g_MenuPanelTasks[18].mode   = 0xF;
+        state[-0x24]                = 1;
+        g_MenuPanelTasks[18].pos.x  = 0x28;
+        g_MenuPanelTasks[18].pos.y  = 0x3C;
+        g_BattleItemRow             = (g_MenuPanelTasks[16].unk_0B == 3) ? 6 : 5;
+        g_MenuPanelTasks[18].unk_0B = 0;
         g_MenuStep.state += 1;
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));

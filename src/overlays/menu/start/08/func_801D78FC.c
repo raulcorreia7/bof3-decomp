@@ -88,7 +88,7 @@ MATCH void func_801D78FC(void) {
             for (i = 0; i < Party_CountOrder(PARTY_ORDER_FIELD); i++) {
                 panel                         = &g_MenuPanelTasks[MENU_START_PANEL_ITEMS + i];
                 panel->unk_0A                 = i;
-                panel->handler                = 6;
+                panel->panel                  = 6;
                 panel->active                 = 1;
                 panel->state                  = 10;
                 panel->pos.x                  = 320;

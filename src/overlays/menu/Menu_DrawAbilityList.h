@@ -61,7 +61,7 @@ MATCH void Menu_DrawAbilityList(MenuListPanel* panel) {
     y    = panel->pos.y;
     do {
         if (*list != 0) {
-            locked = func_801AF5B0(panel->use_context, D_80148656, *list) == 0;
+            locked = func_801AF5B0(panel->type, D_80148656, *list) == 0;
             shade  = locked ? UI_TEXT_DIM : UI_TEXT_NORMAL;
             if (n == panel->selected) {
                 shade = UI_TEXT_HIGHLIGHT;

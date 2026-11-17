@@ -110,7 +110,7 @@ MATCH void func_801D3174(void) {
     }
     row  = D_801C893C[base[0xA]] + base[0xC];
     pair = D_801C8950[base[0xA]] + base[0xC];
-    if (((MenuChoicePanel*)base)->confirm_gate != 0) {
+    if (((MenuChoicePanel*)base)->confirm_timer != 0) {
         return;
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {

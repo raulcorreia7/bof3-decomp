@@ -54,7 +54,7 @@ NON_MATCHING void func_801D55B0(void) {
             }
             cursor_task->active                             = 0;
             g_MenuPanelTasks[MENU_START_PANEL_ITEMS].state  = 3;
-            g_MenuPanelTasks[14].handler                    = 6;
+            g_MenuPanelTasks[14].panel                      = 6;
             g_MenuPanelTasks[14].mode                       = 0x12;
             g_MenuPanelTasks[14].state                      = 4;
             g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = 0;

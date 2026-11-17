@@ -20,8 +20,8 @@ MATCH void func_80159A90(void) {
     y                    = *(u16*)((u8*)&D_8017F946 + (FAKE_VOLATILE(u8, *mode) * 4));
     panel->u.grow.step_x = 0xE3;
     panel->u.grow.step_y = 0x66;
-    panel->u.grow.width  = 0;
-    panel->u.grow.height = 0;
+    panel->u.grow.w      = 0;
+    panel->u.grow.h      = 0;
     panel->unk_0A        = 0x47;
     panel->pos.y         = ((y + 16) << 4);
 

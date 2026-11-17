@@ -5,7 +5,7 @@ MATCH void func_8019986C(void) {
     u8* color;
 
     g_MenuTaskSteps[g_MenuCurrentPanel->state]();
-    func_801D50E8(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, (s16)g_MenuCurrentPanel->u.message.width, 0x13, (s32)GAME_WINDOW_STYLE);
+    func_801D50E8(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, (s16)g_MenuCurrentPanel->u.message.w, 0x13, (s32)GAME_WINDOW_STYLE);
     value = (s16)g_MenuCurrentPanel->u.message.id;
     if (value != 0) {
         color = Message_GetText((u32)(u16)value);

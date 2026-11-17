@@ -174,7 +174,7 @@ NON_MATCHING void func_801D1C90(void) {
 
     i                          = 0;
     terminator                 = 7;
-    task                       = (u8*)&g_MenuPanelTasks[0].handler;
+    task                       = (u8*)&g_MenuPanelTasks[0].panel;
     selected                   = task + 0xB;
     *task                      = 2;
     g_MenuPanelTasks[0].mode   = 2;
@@ -205,26 +205,26 @@ NON_MATCHING void func_801D1C90(void) {
     g_MenuPanelTasks[0].unk_08        = 0;
     g_MenuPanelTasks[0].flags         = 0;
     g_MenuPanelTasks[0].u.addr.unk_10 = 0;
-    g_MenuPanelTasks[1].handler       = 2;
+    g_MenuPanelTasks[1].panel         = 2;
     g_MenuPanelTasks[1].mode          = 3;
     g_MenuPanelTasks[1].state         = 2;
     g_MenuPanelTasks[1].active        = 1;
     g_MenuPanelTasks[1].unk_0A        = 0;
     g_MenuPanelTasks[1].flags         = 1;
-    g_MenuPanelTasks[2].handler       = 2;
+    g_MenuPanelTasks[2].panel         = 2;
     g_MenuPanelTasks[2].mode          = 4;
     g_MenuPanelTasks[2].state         = 2;
     g_MenuPanelTasks[2].active        = 1;
     g_MenuPanelTasks[2].pos.y         = -0x14;
     g_MenuPanelTasks[2].u.addr.unk_10 = 0;
-    g_MenuPanelTasks[3].handler       = 2;
+    g_MenuPanelTasks[3].panel         = 2;
     g_MenuPanelTasks[3].mode          = 4;
     g_MenuPanelTasks[3].state         = 3;
     g_MenuPanelTasks[3].active        = 1;
     g_MenuPanelTasks[3].pos.y         = -0x14;
     g_MenuPanelTasks[3].u.addr.unk_10 = 0;
     g_MenuPanelTasks[3].u.addr.unk_12 = 0x80;
-    g_MenuPanelTasks[4].handler       = 2;
+    g_MenuPanelTasks[4].panel         = 2;
     g_MenuPanelTasks[4].mode          = 1;
     g_MenuPanelTasks[4].active        = 0;
 }

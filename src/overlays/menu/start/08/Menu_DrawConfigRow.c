@@ -18,24 +18,24 @@ typedef struct {
     u8         pad_4B[5];
     ConfigText chosen;
     ConfigText all;
-} WorkFields;
+} ConfigRowLabels;
 
 typedef union {
-    WorkFields fields;
-    s32        words[32];
-} WorkArea;
+    ConfigRowLabels fields;
+    s32             words[32];
+} ConfigRow;
 
 #ifdef NON_MATCHING
 NON_MATCHING void Menu_DrawConfigRow(s32 x, s32 y, s32 option_index, s32 select_step) {
-    WorkArea work;
-    s16      tmp0;
-    LINE_F2* line;
-    s32      val1;
-    s32      val2;
-    s32      val3;
-    s32      val4;
-    s32      val5;
-    s32      val6;
+    ConfigRow work;
+    s16       tmp0;
+    LINE_F2*  line;
+    s32       val1;
+    s32       val2;
+    s32       val3;
+    s32       val4;
+    s32       val5;
+    s32       val6;
 
     val2                    = x;
     val1                    = y;

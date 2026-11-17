@@ -9,11 +9,11 @@ MATCH void func_80159580(void) {
     MenuPanelTask* task;
     s32            count;
 
-    count              = 0;
-    task               = (MenuPanelTask*)g_MenuCurrentPanel;
-    task->u.grow.width = (task->u.grow.width - task->u.grow.step_x);
-    task->pos.x        = (task->pos.x + (s16)task->u.grow.step_x / 2);
-    if ((task->u.grow.width << 16) < 0) {
+    count          = 0;
+    task           = (MenuPanelTask*)g_MenuCurrentPanel;
+    task->u.grow.w = (task->u.grow.w - task->u.grow.step_x);
+    task->pos.x    = (task->pos.x + (s16)task->u.grow.step_x / 2);
+    if ((task->u.grow.w << 16) < 0) {
         switch (task->mode) {
             case 0:
                 if (task->flags & 0x2) {
@@ -30,12 +30,12 @@ MATCH void func_80159580(void) {
                 break;
         }
         count++;
-        g_MenuCurrentPanel->u.grow.width = 0;
+        g_MenuCurrentPanel->u.grow.w = 0;
     }
-    task                = (MenuPanelTask*)g_MenuCurrentPanel;
-    task->u.grow.height = (task->u.grow.height - task->u.grow.step_y);
-    task->pos.y         = (task->pos.y + (s16)task->u.grow.step_y / 2);
-    if ((task->u.grow.height << 16) < 0) {
+    task           = (MenuPanelTask*)g_MenuCurrentPanel;
+    task->u.grow.h = (task->u.grow.h - task->u.grow.step_y);
+    task->pos.y    = (task->pos.y + (s16)task->u.grow.step_y / 2);
+    if ((task->u.grow.h << 16) < 0) {
         switch (task->mode) {
             case 0:
                 if (task->flags & 0x2) {
@@ -52,14 +52,14 @@ MATCH void func_80159580(void) {
                 break;
         }
         count++;
-        g_MenuCurrentPanel->u.grow.height = 0;
+        g_MenuCurrentPanel->u.grow.h = 0;
     }
     if ((count & BYTE_MASK) == 2) {
         g_MenuCurrentPanel->state++;
         return;
     }
     if (!(g_MenuCurrentPanel->flags & 0x1)) {
-        UI_DrawBoxOutline((s16)g_MenuCurrentPanel->pos.x >> 4, (s16)g_MenuCurrentPanel->pos.y >> 4, (g_MenuCurrentPanel->u.grow.width >> 4), (g_MenuCurrentPanel->u.grow.height >> 4));
+        UI_DrawBoxOutline((s16)g_MenuCurrentPanel->pos.x >> 4, (s16)g_MenuCurrentPanel->pos.y >> 4, (g_MenuCurrentPanel->u.grow.w >> 4), (g_MenuCurrentPanel->u.grow.h >> 4));
     }
     if (g_MenuCurrentPanel->mode == 0) {
         UI_UpdateLayout();

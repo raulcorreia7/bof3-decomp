@@ -7,7 +7,7 @@ MATCH void Menu_ResetPanelTasks(void) {
 
     for (i = 0; i < MENU_PANEL_COUNT; i++) {
         g_MenuPanelTasks[i].active        = 0;
-        g_MenuPanelTasks[i].handler       = 0;
+        g_MenuPanelTasks[i].panel         = 0;
         g_MenuPanelTasks[i].mode          = 0;
         g_MenuPanelTasks[i].state         = 0;
         g_MenuPanelTasks[i].layer         = 0;
