@@ -89,7 +89,7 @@ NON_MATCHING void func_801FB270(void) {
             }
             break;
         case 8:
-            SND_PlayCue(0x20A);
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x0A));
             g_SceneState.step_05 = 9;
             break;
         case 9:
@@ -115,7 +115,7 @@ NON_MATCHING void func_801FB270(void) {
             }
             g_AreaDrawFlags = 0x1F;
             SND_ResumeBGM(0x6C);
-            SND_PlayCue(0x20B);
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x0B));
             g_ScriptVars[0]++;
             g_SceneState.step_05 = 12;
             break;
