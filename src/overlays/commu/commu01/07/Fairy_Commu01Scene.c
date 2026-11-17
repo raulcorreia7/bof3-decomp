@@ -626,9 +626,19 @@ MATCH void func_801D28A4(s16 x, s16 y, u8 slot, s32 selected) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D2D98(s16 x, s16 y, s32 width, u8 channel, u8 blink) {
+}
+#else
 INCLUDE_ASM(func_801D2D98);
+#endif
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D3038(void) {
+}
+#else
 INCLUDE_ASM(func_801D3038);
+#endif
 
 MATCH void func_801D3594(s16 x, s16 y) {
     s32 i;

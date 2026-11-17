@@ -18,7 +18,12 @@ MATCH void func_801F7014(void) {
     D_80146872 = 1;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F7028(void) {
+}
+#else
 INCLUDE_ASM(func_801F7028);
+#endif
 
 /* Averages each working palette colour's red, green and blue channels into a
  * grey level and keeps the mask bit, then marks the palette for upload. */

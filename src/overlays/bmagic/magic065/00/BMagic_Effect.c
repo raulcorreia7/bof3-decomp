@@ -6,7 +6,12 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/func_801EEC24.h"
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EEC90(void) {
+}
+#else
 INCLUDE_ASM(func_801EEC90);
+#endif
 
 MATCH void func_801EF08C(void) {
     u8 counter;

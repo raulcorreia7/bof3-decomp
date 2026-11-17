@@ -6,7 +6,12 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/Effect_RunSlots.h"
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EED18(void) {
+}
+#else
 INCLUDE_ASM(func_801EED18);
+#endif
 
 #include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
 

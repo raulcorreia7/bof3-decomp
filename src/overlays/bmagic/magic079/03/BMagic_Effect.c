@@ -183,7 +183,12 @@ MATCH void func_801EF348(void) {
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF458(void) {
+}
+#else
 INCLUDE_ASM(func_801EF458);
+#endif
 
 MATCH void func_801EFBEC(void) {
     BMAGIC_DISPATCH_AND_DRAW(D_801F035C, func_801F002C);

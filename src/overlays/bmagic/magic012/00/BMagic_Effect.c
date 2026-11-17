@@ -8,7 +8,12 @@ MATCH void func_801EEC04(void) {
     BMagic_DispatchTaskPair(func_801EEC5C, func_801EEEAC);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EEC5C(void) {
+}
+#else
 INCLUDE_ASM(func_801EEC5C);
+#endif
 
 MATCH void func_801EEEAC(void) {
     if (g_Task->param.unk_0B == 0) {

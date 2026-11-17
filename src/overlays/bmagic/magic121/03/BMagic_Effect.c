@@ -176,7 +176,12 @@ MATCH void func_801EF3A8(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void BMagic_DrawDragonBreath(void) {
+}
+#else
 INCLUDE_ASM(BMagic_DrawDragonBreath);
+#endif
 
 MATCH void func_801F0198(u8 count) {
     LINE_F2* line;

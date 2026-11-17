@@ -672,7 +672,12 @@ NON_MATCHING void func_801F14D0(s32 band_height, s16 radius, u16 jitter_mask) {
     }
 }
 #else
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F14D0(void) {
+}
+#else
 INCLUDE_ASM(func_801F14D0);
+#endif
 #endif
 
 MATCH void func_801F1C3C(void) {

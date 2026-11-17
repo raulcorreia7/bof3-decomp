@@ -25,7 +25,12 @@ MATCH void func_801EEC04(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EED0C(void) {
+}
+#else
 INCLUDE_ASM(func_801EED0C);
+#endif
 
 /* Moves the effect one step around a circle. */
 MATCH void func_801EF118(void) {
@@ -126,7 +131,12 @@ MATCH void func_801EF638(void) {
     Camera_SetModelMatrix(&rot, &matrix);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF70C(s32 phase, s32 radius) {
+}
+#else
 INCLUDE_ASM(func_801EF70C);
+#endif
 
 MATCH void func_801EFE48(void) {
     SYS_DISPATCH_TASK(g_BMagicEffectModes + 5, 1, g_Task);

@@ -72,7 +72,12 @@ MATCH void func_801F7640(void) {
     Actor_Clear();
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F7660(s32 x, s32 y, s32 z, u16 angle) {
+}
+#else
 INCLUDE_ASM(func_801F7660);
+#endif
 
 MATCH void func_801F7A78(void) {
     SYS_DISPATCH_BYTE(D_801FD5DC, D_80146872);
@@ -82,7 +87,12 @@ MATCH void func_801F7AB4(void) {
     D_80146872 = 1;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F7AC8(void) {
+}
+#else
 INCLUDE_ASM(func_801F7AC8);
+#endif
 
 MATCH void func_801F83EC(void) {
     SYS_DISPATCH_BYTE(D_801FD5E8, g_SceneState.state_04);

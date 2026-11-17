@@ -179,7 +179,12 @@ MATCH void func_801EF654(void) {
 
 #include "overlays/bmagic/Effect_CountDownByTwoFinishAtOne.h"
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF818(void) {
+}
+#else
 INCLUDE_ASM(func_801EF818);
+#endif
 
 MATCH void func_801EFF74(void) {
     PartyMember* work;
