@@ -28,10 +28,7 @@ NON_MATCHING void func_801F3070(s32 mode) {
         g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy = ((g_Task->pos.y.part.integer - 0x7F) << 7) + (g_Task->screen_y * (s8)D_801F3F84[i] + 0x40);
         g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy = ((g_Task->pos.y.part.integer - 0x80) << 7) + (g_Task->screen_y * (s8)D_801F3F84[i] - 0x40);
 
-        if (mode == 0) {
-            g_ScratchPadVectors[1].vz = g_ScratchPadVectors[3].vz = g_Task->unk_32;
-            g_ScratchPadVectors[0].vz = g_ScratchPadVectors[2].vz = g_Task->unk_32 - 0x180;
-        } else {
+        if (mode != 0) {
             x                         = (g_ScratchPadVectors[0].vx + 0x4000) << 9;
             y                         = (g_ScratchPadVectors[0].vy + 0x4000) << 9;
             g_ScratchPadVectors[0].vz = -Area_SampleHeight(x, y) / 2 - g_Task->pos.z.part.fraction - 0x180;
@@ -40,6 +37,9 @@ NON_MATCHING void func_801F3070(s32 mode) {
             y1                        = (g_ScratchPadVectors[1].vy + 0x4000) << 9;
             g_ScratchPadVectors[1].vz = -Area_SampleHeight(x, y1) / 2 - g_Task->pos.z.part.fraction - 0x180;
             g_ScratchPadVectors[3].vz = -Area_SampleHeight(x, y1) / 2 - g_Task->pos.z.part.fraction;
+        } else {
+            g_ScratchPadVectors[1].vz = g_ScratchPadVectors[3].vz = g_Task->unk_32;
+            g_ScratchPadVectors[0].vz = g_ScratchPadVectors[2].vz = g_Task->unk_32 - 0x180;
         }
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                       &depth, &flag);
