@@ -73,9 +73,9 @@ typedef enum ActorFlags {
     ACTOR_FLAG_OFFSCREEN          = 1 << 7,
 } ActorFlags;
 
-/* `active_flags` bit 6 marks the record active. */
+/* `active_flags` bit 6 marks a row whose fields are set and usable. */
 typedef enum ActorActiveFlags {
-    ACTOR_ACTIVE_FLAG = 1 << 6,
+    ACTOR_ACTIVE_READY = 1 << 6,
 } ActorActiveFlags;
 
 /* `interaction_flags` bits. Bit 0 runs the area interaction handler; bits 1 and 2 select
@@ -198,7 +198,7 @@ typedef struct Actor {
     s32             unk_18;            /* 0x18 - commu00 calls it variant_arg_0 */
     s32             unk_1C;            /* 0x1C - commu00 calls it variant_arg_1 */
     s32             gravity;           /* 0x20 added to vz each step */
-    u8              active_flags;      /* 0x24 - ActorActiveFlags; bit 0x40 marks the record active */
+    u8              active_flags;      /* 0x24 - ActorActiveFlags; bit 0x40 marks a usable row */
     u8              unk_25;            /* 0x25 - sprite: texture page of the sheet (Party_LoadMemberSprite) */
     u8              unk_26;            /* 0x26 - sprite: sheet row in the page; Party_RemoveMember stores other values */
     u8              unk_27;            /* 0x27 - sprite: CLUT selector (Area_BuildClut); battle number actors keep the
@@ -248,9 +248,9 @@ typedef struct Actor {
     u32             unk_88;            /* 0x88 */
     ActorTail       ext;               /* 0x8C - see ActorTail */
     u16             roll_90;           /* 0x90 */
-    u8              facing;            /* 0x92 - the facing direction: the fishing code writes
-                                *        `rand() & 3` and turns the row by it
-                                *        (emi/world00/area030/04 func_801DE5EC) */
+    u8              fish_row;          /* 0x92 - the pond row a fish swims in, 0-3; the
+                                *        y limits are 62 - fish_row * 12
+                                *        (area030/04 func_801DE5EC, func_801E03F8) */
     u8              unk_93;            /* 0x93 */
     u8              unk_94;            /* 0x94 */
     u8              unk_95;            /* 0x95 */
@@ -278,7 +278,7 @@ ASSERT_OFFSET(Actor, walk_dest_x, 0x80);
 ASSERT_OFFSET(Actor, walk_dest_y, 0x84);
 ASSERT_OFFSET(Actor, unk_88, 0x88);
 ASSERT_OFFSET(Actor, ext, 0x8C);
-ASSERT_OFFSET(Actor, facing, 0x92);
+ASSERT_OFFSET(Actor, fish_row, 0x92);
 ASSERT_SIZE(Actor, ACTOR_SIZE);
 
 /* D_80146884 */

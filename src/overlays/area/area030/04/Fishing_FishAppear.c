@@ -18,16 +18,16 @@ NON_MATCHING void Fishing_FishAppear(void) {
     FISHING_STATE->state_29       = 5;
     FISHING_STATE->step_timer_09  = 0;
     FISHING_STATE->saved_index_0B = 0;
-    FISHING_ROW->facing           = (u8)RANDOM_MASK(3);
+    FISHING_ROW->fish_row         = (u8)RANDOM_MASK(3);
     count                         = FISHING_ENTRY(FISHING_STATE->cue_index_06)->count_0A;
-    if ((u32)FISHING_ROW->facing < (u32)count) {
-        FISHING_ROW->facing = count;
+    if ((u32)FISHING_ROW->fish_row < (u32)count) {
+        FISHING_ROW->fish_row = count;
     }
-    FISHING_ROW->facing &= 3;
+    FISHING_ROW->fish_row &= 3;
     coord                           = TO_COORD(20);
     FISHING_STATE->motion_34.unk_34 = coord - (RANDOM_MASK(0xF) << 0x10);
     coord                           = TO_COORD(62);
-    coord -= FISHING_ROW->facing * TO_COORD(12);
+    coord -= FISHING_ROW->fish_row * TO_COORD(12);
     coord -= RANDOM_MASK(0xF) << 0x10;
     FISHING_STATE->y_38.pos_y            = coord;
     coord                                = -(D_801E2AD2[FISHING_STATE->cue_index_06 * sizeof(FishingSceneCue)] << 0x18);

@@ -11,7 +11,7 @@ MATCH void SYS_InitScratchpad(u8* panel) {
     u8     index;
 
     g_Task->header.flags = ACTOR_FLAG_IN_USE;
-    g_Task->active_flags = ACTOR_ACTIVE_FLAG;
+    g_Task->active_flags = ACTOR_ACTIVE_READY;
     g_Task->unk_48       = 1;
     work                 = g_Task;
     work->scale.x        = ONE;
