@@ -18,6 +18,7 @@ NON_MATCHING void func_801F3F5C(s32 part, s32 span, s32 phase_step, s32 offset) 
     s32       y;
     s32       step;
     s32       height;
+    s32       next_y;
     s32       tpage;
     s16*      row2_y;
     s16*      row3_y;
@@ -68,11 +69,12 @@ NON_MATCHING void func_801F3F5C(s32 part, s32 span, s32 phase_step, s32 offset) 
         g_ScratchPadVectors[2].vx = x;
         g_ScratchPadVectors[1].vx = x - i * step;
         g_ScratchPadVectors[3].vx = x - i * step;
+        next_y                    = y + step;
         if (i == 0) {
             g_ScratchPadVectors[0].vy = y + step - offset;
             g_ScratchPadVectors[1].vy = y - step - offset;
             *row2_y                   = y;
-            *row3_y                   = y + step;
+            *row3_y                   = next_y;
         } else {
             g_ScratchPadVectors[0].vy = y - offset;
             g_ScratchPadVectors[1].vy = y - offset;
