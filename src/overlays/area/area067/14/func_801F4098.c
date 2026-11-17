@@ -12,7 +12,7 @@ MATCH void func_801F4098(void) {
     y         = g_Game.members[2].unk_30.signed_half;
     x         = g_Game.members[2].unk_2E.signed_half;
     selection = D_801F4644[index];
-    result    = func_8015CC00(3, 0, selection, x, y, g_Game.members[2].pos.z.fixed);
+    result    = Actor_SpawnHelper(3, 0, selection, x, y, g_Game.members[2].pos.z.fixed);
     if ((u8)result != GAME_NONE) {
         g_Task->param.unk_0B = result;
     }

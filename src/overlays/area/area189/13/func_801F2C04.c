@@ -6,9 +6,9 @@ MATCH void func_801F2C04(void) {
 
     g_AreaCameraX = (0x800000 - g_AreaScrollTargetX) >> 8;
     g_AreaCameraY = (0x800000 - g_AreaScrollTargetY) >> 8;
-    if (g_AreaCameraAngle.vx != D_801492E0.vx || g_AreaCameraAngle.vy != D_801492E0.vy || g_AreaCameraAngle.vz != D_801492E0.vz) {
-        g_AreaCameraRefreshCount = 3;
-        D_801492E0               = g_AreaCameraAngle;
+    if (g_AreaCameraAngle.vx != g_AreaPreviousCameraAngle.vx || g_AreaCameraAngle.vy != g_AreaPreviousCameraAngle.vy || g_AreaCameraAngle.vz != g_AreaPreviousCameraAngle.vz) {
+        g_AreaCameraRefreshCount  = 3;
+        g_AreaPreviousCameraAngle = g_AreaCameraAngle;
     }
     RotMatrix(&g_AreaCameraAngle, &g_CameraMatrix);
     /* The view wraps around the cell grid origin into the 15-bit vertex range. */

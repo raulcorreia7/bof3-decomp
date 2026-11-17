@@ -49,7 +49,7 @@ NON_MATCHING void func_80167E00(void) {
             continue;
         }
         if (TASK_SLOT->unk_06 == 10) {
-            func_8015A944();
+            Actor_ProjectForDraw();
             continue;
         }
         for (slot = 0; slot < D_800E3800; slot++) {

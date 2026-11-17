@@ -54,7 +54,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
     vec = D_80149BF0;
     PushMatrix();
     count = g_Task->range_54.table[0];
-    func_8015B410(&m);
+    Actor_BuildTransformMatrix(&m);
     SetRotMatrix(&m);
     SetTransMatrix(&m);
     if (g_Task->unk_48 == 0) {

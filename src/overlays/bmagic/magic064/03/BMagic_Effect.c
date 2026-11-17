@@ -580,7 +580,7 @@ MATCH void func_801F103C(void) {
     g_AreaCellPrimFreeIndex = 1;
     g_AreaGridColCursor     = 0x1B;
     g_AreaGridRowCursor     = 0x37;
-    func_80154438();
+    Area_ApplyMapBundleObjects();
     Area_RunBundleOpcodes();
 }
 

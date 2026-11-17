@@ -21,5 +21,5 @@ MATCH void func_8019CEDC(void) {
         g_Task->param.unk_0B = 0;
         g_Task->header.mode  = 1;
     }
-    func_8015A944();
+    Actor_ProjectForDraw();
 }

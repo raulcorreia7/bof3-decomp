@@ -648,11 +648,11 @@ MATCH s32 func_801F3E48(u8 shade) {
 
     mtxp  = &matrix;
     count = (s8)*WORLD00_AREA024_PTR_7AAC;
-    func_8015B410(mtxp);
+    Actor_BuildTransformMatrix(mtxp);
     SetRotMatrix(mtxp);
     SetTransMatrix(mtxp);
     matrix2 = matrix;
-    func_8015B4B0(&matrix2);
+    Area_ApplyCameraMatrix(&matrix2);
 
     GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 896, 256));
 

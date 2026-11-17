@@ -20,21 +20,27 @@
 #include "slus/ui.h"
 
 volatile u8* func_800AC754(u8 entry_id);
-void         func_8014BA04(void);
+/* func_8014BA04 */
+void         SYS_ClearCurrentThread(void);
 /* func_8014FC00 */
-void         func_8014FC00(s32 mode);
-void         func_80154438(void);
-void         func_8015B410(void* matrix);
-void         func_8015B4B0(void* matrix);
+void         UI_AddTextDrawMode(s32 mode);
+/* func_80154438 */
+void         Area_ApplyMapBundleObjects(void);
 /* func_8015A944 */
-void         func_8015A944(void);
+void         Actor_ProjectForDraw(void);
+/* func_8015B410 */
+void         Actor_BuildTransformMatrix(void* matrix);
+/* func_8015B4B0 */
+void         Area_ApplyCameraMatrix(void* matrix);
 /* func_8015C058 */
 void         Game_ClearScriptActive(void);
 /* func_8015C088; int with no value returned (see its definition) */
 extern s32   Game_SetScriptActive(void);
 void         func_8015C214(s32 slot, u8 value);
-s32          func_8015CC00(u8 id, s32 step, s32 selection, s32 x, s32 y, s32 z);
-void         func_8015D104(s32 slot, s32 amount);
+/* func_8015CC00 */
+s32          Actor_SpawnHelper(u8 id, s32 step, s32 selection, s32 x, s32 y, s32 z);
+/* func_8015D104 */
+void         SND_DecreaseVoiceTargetVolume(s32 slot, s32 amount);
 /* formats a game-text buffer; PsyQ declares sprintf on char, the game keeps its text as u8 */
 #define TEXT_Format(dst, fmt, args...) sprintf((char*)(dst), (char*)(fmt), ##args)
 #define TEXT_FormatLiteral(dst, fmt)   sprintf((char*)(dst), (char*)(fmt))

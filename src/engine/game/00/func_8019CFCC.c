@@ -13,5 +13,5 @@ MATCH void func_8019CFCC(void) {
     }
     func_8019D800();
     func_8019DC6C();
-    func_8015A944();
+    Actor_ProjectForDraw();
 }

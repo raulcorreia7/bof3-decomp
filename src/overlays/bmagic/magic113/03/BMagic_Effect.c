@@ -103,7 +103,7 @@ MATCH void func_801EF1F8(void) {
     PartyMember* work;
     u8           facing;
 
-    func_8015D104(20, 16);
+    SND_DecreaseVoiceTargetVolume(20, 16);
     SND_StartVolumeSweep(20);
     if (g_Task->param.unk_0B == 5) {
         for (i = 0; i < 6; i++) {

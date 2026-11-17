@@ -7,7 +7,7 @@ MATCH bool func_801F55EC(void) {
     if ((g_Game.input & g_InputMasks[WORLD_INPUT_VIEW]) == 0) {
         return 0;
     }
-    D_80143BB0          = 4;
+    g_GameStateIndex    = 4;
     g_Task->header.step = 0;
     return 1;
 }

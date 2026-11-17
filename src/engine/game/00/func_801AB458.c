@@ -21,7 +21,7 @@ typedef enum ActorScriptStageOp {
     ACTOR_SCRIPT_STAGE_START_XA            = 0x89, /* args: [xa_id_u16]; SND_StartXAStream */
     ACTOR_SCRIPT_STAGE_SOUND_64020         = 0x8A, /* args: [id_u16]; the empty sound stub func_80164020 */
     ACTOR_SCRIPT_STAGE_WAIT_XA_IDLE        = 0x8B, /* wait while the XA stream is not idle */
-    ACTOR_SCRIPT_STAGE_SPAWN_HELPER        = 0x8C, /* args: [flag]; func_8015CC00 claims a slot at the actor */
+    ACTOR_SCRIPT_STAGE_SPAWN_HELPER        = 0x8C, /* args: [flag]; Actor_SpawnHelper claims a slot at the actor */
 } ActorScriptStageOp;
 
 #ifdef NON_MATCHING
@@ -137,7 +137,7 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
             flag               = table[state->index_0A + 1];
             slot               = g_Game.current->chr.character_id;
             work               = SCRATCH_WORK;
-            work->param.unk_0B = func_8015CC00(flag - 0x90, -((flag ^ 0x94) == 0) & 0xA, D_80181B28[g_CharSlot[slot]], work->pos.x.fixed, work->pos.y.fixed, work->pos.z.fixed);
+            work->param.unk_0B = Actor_SpawnHelper(flag - 0x90, -((flag ^ 0x94) == 0) & 0xA, D_80181B28[g_CharSlot[slot]], work->pos.x.fixed, work->pos.y.fixed, work->pos.z.fixed);
             state->index_0A += 1;
             break;
         }

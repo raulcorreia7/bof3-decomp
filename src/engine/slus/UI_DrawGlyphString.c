@@ -22,7 +22,7 @@ MATCH void UI_DrawGlyphString(s16 x, s16 y, u32 clut, const u8* text) {
     X  = x;
     Y  = y;
     cl = clut;
-    func_8014FC00(0);
+    UI_AddTextDrawMode(0);
     sprite  = (SPRT_8*)g_GfxPrimCursor;
     cl      = cl & 0x3Fu;
     color   = (cl | STAGE_PALETTE_CLUT);

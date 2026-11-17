@@ -4,7 +4,8 @@
  * and kind bytes, the caller's byte argument, two sign-extended byte fields and
  * three coordinate fields; a slot index of 0xFF is left untouched.
  */
-MATCH s32 func_8015CC00(u8 id, s32 step, s32 selection, s32 x, s32 y, s32 z) {
+/* func_8015CC00 */
+MATCH s32 Actor_SpawnHelper(u8 id, s32 step, s32 selection, s32 x, s32 y, s32 z) {
     s32 actor_slot;
     u32 offset;
 

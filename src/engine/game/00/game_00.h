@@ -552,7 +552,8 @@ void func_8015A7E8(void);
 s32  func_8015B870(u32 kind);
 void Party_ShowBattlers(void);
 s8   Actor_Run(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 landing_flags);
-s32  func_8015CC00();
+/* The retail callers pass the id unnarrowed; the shared prototype narrows it. */
+#define Actor_SpawnHelper ((s32 (*)())Actor_SpawnHelper)
 void func_8015D820(u16 cue_id, u16 index);
 void func_80164020();
 void Party_ResetBattlers(void);

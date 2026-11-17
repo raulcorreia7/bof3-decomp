@@ -20,7 +20,7 @@ MATCH u8* UI_DrawTextGlyphs(u8 palette, u8 byte_count, u8* text) {
     current_palette = palette;
     count           = byte_count;
     saved           = 0;
-    func_8014FC00(0);
+    UI_AddTextDrawMode(0);
     clut   = (palette & 0xF) | STAGE_PALETTE_CLUT;
     index  = (palette & 0xF0) >> 3;
     shade  = g_NumberRowShades[index];

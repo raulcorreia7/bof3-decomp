@@ -95,7 +95,7 @@ MATCH void func_801FB66C(void) {
                 *timer               = 0;
                 g_SceneState.step_05 = 12;
             }
-            func_8015D104(0x10, 4);
+            SND_DecreaseVoiceTargetVolume(0x10, 4);
             SND_StartVolumeSweep(0x10);
             if ((s8)g_SndVoiceTargetVolume[16] < 9) {
                 SND_PlayCue(0x209);

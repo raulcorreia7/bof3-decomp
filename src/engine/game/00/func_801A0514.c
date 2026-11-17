@@ -35,7 +35,7 @@ MATCH void func_801A0514(void) {
                     kind    = scratch->unk_06;
                     if (kind == 10) {
                         index += 1;
-                        func_8015A944();
+                        Actor_ProjectForDraw();
                         next_u8 = index & BYTE_MASK;
                     } else {
                         Area_AddGridActor();

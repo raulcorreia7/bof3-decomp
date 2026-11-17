@@ -10,7 +10,8 @@
  * mode: modes 1 and 2 take the shifted 0x300-bit form, every other mode the
  * 0x100/0x200-bit form, then the 12-byte primitive is appended at slot 1.
  */
-MATCH void func_8014FC00(s32 mode) {
+/* func_8014FC00 */
+MATCH void UI_AddTextDrawMode(s32 mode) {
     s32 draw_mode;
     u32 tpage;
 
