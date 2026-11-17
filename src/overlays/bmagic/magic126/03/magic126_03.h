@@ -16,7 +16,7 @@ extern Callback D_801F1278[];
 
 extern Callback D_801F1288[];
 
-extern BMagicRingShade D_801F1298[];
+extern BMagicTint D_801F1298[];
 
 extern Callback D_801F12AC[];
 

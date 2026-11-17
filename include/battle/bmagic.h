@@ -26,29 +26,29 @@ ASSERT_SIZE(EffectDispatchSteps, 0xC);
 /* The mode routines Effect_DrawActor runs before it draws the effect's actor. */
 #define ACTOR_EFFECT_STEP_COUNT 3
 
-typedef struct ActorEffectSteps {
+typedef struct BMagicActorSteps {
     Callback steps[ACTOR_EFFECT_STEP_COUNT];
-} ActorEffectSteps;
+} BMagicActorSteps;
 
-ASSERT_SIZE(ActorEffectSteps, 0xC);
+ASSERT_SIZE(BMagicActorSteps, 0xC);
 
 /* The step routines of the effect work record func_801EF37C advances. */
 #define BMAGIC_EFFECT_WORK_STEP_COUNT 3
 
-typedef struct BMagicEffectWorkSteps {
+typedef struct BMagicTaskSteps {
     Callback steps[BMAGIC_EFFECT_WORK_STEP_COUNT];
-} BMagicEffectWorkSteps;
+} BMagicTaskSteps;
 
-ASSERT_SIZE(BMagicEffectWorkSteps, 0xC);
+ASSERT_SIZE(BMagicTaskSteps, 0xC);
 
 /* The step routines of one sparkle of the sparkle pool. */
 #define SPARKLE_EFFECT_STEP_COUNT 3
 
-typedef struct SparkleEffectSteps {
+typedef struct BMagicSparkleSteps {
     Callback steps[SPARKLE_EFFECT_STEP_COUNT];
-} SparkleEffectSteps;
+} BMagicSparkleSteps;
 
-ASSERT_SIZE(SparkleEffectSteps, 0xC);
+ASSERT_SIZE(BMagicSparkleSteps, 0xC);
 
 /* One step list per shared dispatcher; the type takes the lowest-numbered spell of the images that include it. */
 #define MAGIC220_SHARED_STEP_COUNT 3

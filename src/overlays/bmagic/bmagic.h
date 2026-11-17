@@ -439,12 +439,12 @@ extern BMagicEffect* D_801F17B0;
 extern BMagicEffect* D_801F17B4;
 
 /* The red and blue weight of one ring shade; the green follows the effect timer alone. */
-typedef struct BMagicRingShade {
+typedef struct BMagicTint {
     u8 red;
     u8 blue;
-} BMagicRingShade;
+} BMagicTint;
 
-ASSERT_SIZE(BMagicRingShade, 0x2);
+ASSERT_SIZE(BMagicTint, 0x2);
 
 /* The four scratch vectors the effect draws project their corners from; the flat name keeps the retail
  * bytes, the scratchpad view does not. */

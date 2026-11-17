@@ -1,8 +1,8 @@
 /* Runs the step of the current effect work record D_801F17B0; one still in use after its first step draws its disc, and its rays on three frames in four. */
 /* func_801EF37C (magic162), func_801EF37C (magic168) */
 MATCH void func_801EF37C(void) {
-    BMagicEffectWorkSteps handlers;
-    u8                    radius;
+    BMagicTaskSteps handlers;
+    u8              radius;
 
     handlers = D_801EEC1C;
     handlers.steps[D_801F17B0->header.step]();
