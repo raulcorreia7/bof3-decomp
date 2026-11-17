@@ -4,7 +4,6 @@
 NON_MATCHING void func_801E206C(void) {
     u8* cursor;
     u16 sel;
-    u16 bits;
     s32 i;
     s32 keys;
 
@@ -52,8 +51,8 @@ NON_MATCHING void func_801E206C(void) {
         g_InputMasks[INPUT_SLOT_SPEAK] |= PADL2 | PADR2;
         g_InputMasks[INPUT_SLOT_CONFIRM] |= PADL2 | PADR2;
     }
-    bits = g_InputPressed;
-    keys = INPUT_GetRepeatedButtons(bits & INPUT_DIRECTIONAL);
+    sel  = g_InputPressed;
+    keys = INPUT_GetRepeatedButtons(sel & INPUT_DIRECTIONAL);
     if (keys & PADLup) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
         D_80148655 = D_80148655 - 1;
@@ -68,11 +67,11 @@ NON_MATCHING void func_801E206C(void) {
             SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
             D_80148655 = 8;
         }
-    } else if (bits & (PADLright | PADLleft)) {
+    } else if (sel & (PADLright | PADLleft)) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
         D_80148655 = 7;
         D_80148652 = D_80148652 - 1;
-    } else if (bits & PADstart) {
+    } else if (sel & PADstart) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
         D_80148655 = 0;
         D_80148652 = D_80148652 - 2;
