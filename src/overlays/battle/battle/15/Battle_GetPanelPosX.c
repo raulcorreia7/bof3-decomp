@@ -38,7 +38,7 @@ NON_MATCHING void Battle_GetPanelPosX(void) {
     sel        = (BattleSelectionScratch*)((u8*)&g_BattleChoicePhase - 3);
     D_801485DC = 1u;
     D_801485E0 = g_MenuPanelTasks[16].pos.x + 7u;
-    D_801485E2 = g_MenuPanelTasks[16].pos.y + ((g_MenuPanelTasks[16].unk_0C - g_MenuPanelTasks[16].u.addr.unk_10) * 13 + 0x1A);
+    D_801485E2 = g_MenuPanelTasks[16].pos.y + ((g_MenuPanelTasks[16].unk_0C - sel->scroll_base) * 13 + 0x1A);
     trigger    = INPUT_GetRepeatedButtons((s32)(g_InputPressed & (INPUT_DIRECTIONAL | PADL1 | PADR1)));
     if ((g_BattleActorTurn->action_flags.value & (BATTLER_ACTION_DRAGON_FORM | BATTLER_ACTION_DRAGON_FORM_CONTROLLED)) != (u32)BATTLER_ACTION_DRAGON_FORM) {
         if ((trigger & PADLleft) != 0) {
