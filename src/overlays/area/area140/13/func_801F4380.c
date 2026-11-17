@@ -4,6 +4,7 @@
 NON_MATCHING u8 func_801F4380(s32 x, s32 y) {
     s32 i;
     s32 base;
+    s32 table_offset;
     u8  flag;
     u8  kind;
     u8  count;
@@ -12,9 +13,8 @@ NON_MATCHING u8 func_801F4380(s32 x, s32 y) {
     u16 limit_y;
     u16 limit_x;
 
-    for (i = 0; i < 8; i++) {
-        base = i * 6;
-        if ((u8)x == D_801F4A84[base] && (u8)y == D_801F4A85[base] && (D_801F4A86[base] & 0xF) == g_Game.members[0].facing) {
+    for (i = 0, table_offset = 0; i < 8; i++, table_offset += 6) {
+        if ((u8)x == D_801F4A84[table_offset] && (u8)y == D_801F4A85[table_offset] && (D_801F4A86[table_offset] & 0xF) == g_Game.members[0].facing) {
             break;
         }
     }
@@ -29,7 +29,7 @@ NON_MATCHING u8 func_801F4380(s32 x, s32 y) {
     kind = D_801F4A89[base];
     if (kind != 0) {
         count = D_80146254;
-        if ((s8)count > 0) {
+        if (count > 0) {
             limit_y = D_801F4AB6[kind * 2];
             limit_x = D_801F4AB4[kind * 2];
             for (j = 0; j < count; j++) {
