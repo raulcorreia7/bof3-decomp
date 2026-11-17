@@ -22,7 +22,7 @@ MATCH void func_801C2018(void) {
     if ((SYS_TestFlag(input_bits, 4U) != 0) && (SYS_TestFlag(input_bits + 3, 4U) == 0) && (party_state[0x54F3] < 30U)) {
         party_state[0x54F3] = (party_state[0x54F3] + 1);
     }
-    if (g_SceneState.scenario_id >= 8) {
+    if (g_ScenarioState.scenario_id >= 8) {
         bit_index     = 246;
         gate_byte_ptr = &D_801455C3;
         if (*gate_byte_ptr != 0) {

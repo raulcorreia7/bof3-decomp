@@ -71,12 +71,12 @@
 
 /* Run the scenario dispatch entry. A bare statement macro: the member declares
  * `saved` and `result`, runs its fallback when `result` is 0 and restores
- * g_Task. Kept: `entry` is a member name of the scene table record, so it
+ * g_Task. Kept: `entry` is a member name of the scenario handler record, so it
  * cannot be an argument without an indirect call; the do/while form moves
  * bytes. */
-#define GAME_RUN_SCENARIO_ENTRY(entry)                                                 \
-    saved  = g_Task;                                                                   \
-    result = g_SceneScenes[(s32)g_SceneState.scenario_id]->entry(handler_x, handler_y)
+#define GAME_RUN_SCENARIO_ENTRY(entry)                                                         \
+    saved  = g_Task;                                                                           \
+    result = g_ScenarioHandlers[(s32)g_ScenarioState.scenario_id]->entry(handler_x, handler_y)
 
 /* Run the gated cell test and arm the work record on a hit. Kept: it returns
  * from the member and takes the flag value after a branch; tested as an inline,

@@ -542,8 +542,8 @@ MATCH void func_801F817C(void) {
                 SND_FadeOutBGM(g_SndBGMId, 0x64, 8);
                 SND_PlayBGM(0x3F, 0x64, 8);
                 Game_SetScriptActive();
-                g_SceneState.state_04 = 1;
-                g_SceneState.step_05  = 7;
+                g_ScenarioState.state_04 = 1;
+                g_ScenarioState.step_05  = 7;
                 Scene_RunScenario(1);
                 Scene_SetupParty(1);
             }
@@ -631,7 +631,7 @@ MATCH void func_801F817C(void) {
 }
 
 MATCH void func_801F863C(void) {
-    SYS_DISPATCH_BYTE(D_801FA210, g_SceneState.state_04);
+    SYS_DISPATCH_BYTE(D_801FA210, g_ScenarioState.state_04);
 }
 
 MATCH void func_801F8678(void) {

@@ -87,11 +87,11 @@ static inline void Scene_AdvanceActorMode(void) {
 
 /* Clear the scenario variables and the scene's step pair, so the scene restarts at its first step. */
 static inline void Scene_ClearScriptState(u8* step) {
-    g_ScriptVars[1]       = 0;
-    g_ScriptVars[2]       = 0;
-    g_ScriptVars[3]       = 0;
-    *step                 = 0;
-    g_SceneState.state_04 = 0;
+    g_ScriptVars[1]          = 0;
+    g_ScriptVars[2]          = 0;
+    g_ScriptVars[3]          = 0;
+    *step                    = 0;
+    g_ScenarioState.state_04 = 0;
 }
 
 /* The scenario request cell: the step machine stores and steps it as a byte,

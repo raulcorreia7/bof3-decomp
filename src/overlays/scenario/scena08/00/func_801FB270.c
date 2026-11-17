@@ -11,14 +11,14 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801FB270(void) {
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             *(u32*)g_ScriptVars = 0;
             func_801BE1B0(6);
-            g_AreaScrollTargetX  = D_80145EC4;
-            g_AreaScrollTargetY  = D_80145EC8;
-            g_AreaCameraStep     = g_RouteSpeedScale[4] << 3;
-            g_SceneState.step_05 = 1;
+            g_AreaScrollTargetX     = D_80145EC4;
+            g_AreaScrollTargetY     = D_80145EC8;
+            g_AreaCameraStep        = g_RouteSpeedScale[4] << 3;
+            g_ScenarioState.step_05 = 1;
             break;
         case 1:
             if (g_AreaCameraMoving != 0) {
@@ -28,8 +28,8 @@ NON_MATCHING void func_801FB270(void) {
             g_PartyY       = g_AreaScrollTargetY;
             g_ScrollHeight = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
             Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
-            g_ScriptVars[0]      = 1;
-            g_SceneState.step_05 = 2;
+            g_ScriptVars[0]         = 1;
+            g_ScenarioState.step_05 = 2;
             break;
         case 2: {
             u8            slot;
@@ -49,55 +49,55 @@ NON_MATCHING void func_801FB270(void) {
                 actor->pos.y.fixed  = TO_COORD_HALF(65);
                 actor->pos.z.fixed  = Area_SampleHeight(actor->pos.x.fixed, TO_COORD_HALF(65)) << 16;
             }
-            g_SceneState.step_05 = 3;
+            g_ScenarioState.step_05 = 3;
             break;
         }
         case 3:
             if (g_ScriptVars[0] != 6) {
                 break;
             }
-            g_SceneState.timer_06 = 0x20;
-            g_SceneState.step_05  = 4;
+            g_ScenarioState.timer_06 = 0x20;
+            g_ScenarioState.step_05  = 4;
             SND_StartDecrescendo(g_SelectionCues[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4], 0x64, 0x20);
             break;
         case 4:
-            if (g_SceneState.timer_06-- != 0) {
+            if (g_ScenarioState.timer_06-- != 0) {
                 break;
             }
             g_ScriptVars[0]++;
             func_801BFE34(0x1C8000, 0x418000, 0x20);
             SND_StopSequence(g_SelectionCues[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4]);
-            g_SceneState.step_05 = 5;
+            g_ScenarioState.step_05 = 5;
             break;
         case 5:
             if (g_ScriptVars[0] != 0xB) {
                 break;
             }
-            g_SceneState.timer_06 = 0x61;
-            g_SceneState.step_05  = 6;
+            g_ScenarioState.timer_06 = 0x61;
+            g_ScenarioState.step_05  = 6;
             break;
         case 6:
-            if (g_SceneState.timer_06-- == 0) {
-                g_SceneState.timer_06 = 0x20;
+            if (g_ScenarioState.timer_06-- == 0) {
+                g_ScenarioState.timer_06 = 0x20;
                 g_ScriptVars[0]++;
-                g_SceneState.step_05 = 7;
+                g_ScenarioState.step_05 = 7;
             }
             break;
         case 7:
-            if (g_SceneState.timer_06-- == 0) {
-                g_SceneState.step_05 = 8;
+            if (g_ScenarioState.timer_06-- == 0) {
+                g_ScenarioState.step_05 = 8;
             }
             break;
         case 8:
             SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x0A));
-            g_SceneState.step_05 = 9;
+            g_ScenarioState.step_05 = 9;
             break;
         case 9:
             if (g_UiWindowEffectBusy != 0) {
                 break;
             }
             g_ScriptVars[0]++;
-            g_SceneState.step_05 = 10;
+            g_ScenarioState.step_05 = 10;
             break;
         case 10:
             if (g_ScriptVars[0] != 0x17) {
@@ -106,8 +106,8 @@ NON_MATCHING void func_801FB270(void) {
             g_AreaDrawFlags = 0;
             SND_PauseBGM(0x6C);
             Message_StartAreaMessage(MSG_018);
-            g_GameStateIndex     = 2;
-            g_SceneState.step_05 = 11;
+            g_GameStateIndex        = 2;
+            g_ScenarioState.step_05 = 11;
             break;
         case 11:
             if (g_GameStateIndex == 2) {
@@ -117,14 +117,14 @@ NON_MATCHING void func_801FB270(void) {
             SND_ResumeBGM(0x6C);
             SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x0B));
             g_ScriptVars[0]++;
-            g_SceneState.step_05 = 12;
+            g_ScenarioState.step_05 = 12;
             break;
         case 12:
             if (g_ScriptVars[0] != 0x19) {
                 break;
             }
             func_801C7A54(0x20);
-            g_SceneState.step_05 = 13;
+            g_ScenarioState.step_05 = 13;
             break;
         case 13:
             EMI_LoadArchive(0x255);
@@ -134,7 +134,7 @@ NON_MATCHING void func_801FB270(void) {
             }
             func_801BE1B0(7);
             g_ScriptVars[0]++;
-            g_SceneState.step_05 = 15;
+            g_ScenarioState.step_05 = 15;
             break;
         case 14: {
             u8 slot;
@@ -148,22 +148,22 @@ NON_MATCHING void func_801FB270(void) {
                 g_SpawnedActors[slot].header.flags = 1;
                 g_SpawnedActors[slot].type         = 0x63;
             }
-            g_SceneState.timer_06 = 0x3C;
-            g_SceneState.step_05  = 16;
+            g_ScenarioState.timer_06 = 0x3C;
+            g_ScenarioState.step_05  = 16;
             break;
         }
         case 15:
-            if (g_SceneState.timer_06-- != 0) {
+            if (g_ScenarioState.timer_06-- != 0) {
                 break;
             }
             SND_PlayBGM(0x6D, 0x64, 0x10);
-            g_SceneState.timer_06 = 0xA;
+            g_ScenarioState.timer_06 = 0xA;
             g_ScriptVars[0]++;
-            g_SceneState.step_05 = 17;
+            g_ScenarioState.step_05 = 17;
             break;
         case 16:
-            if (g_SceneState.timer_06-- == 0) {
-                g_SceneState.step_05 = 18;
+            if (g_ScenarioState.timer_06-- == 0) {
+                g_ScenarioState.step_05 = 18;
             }
             break;
         case 17:
@@ -175,8 +175,8 @@ NON_MATCHING void func_801FB270(void) {
             SYS_SetFlag(g_SceneFlags, 4);
             D_80146258 &= ~GAME_FLAG_SCROLL_LOCK;
             Game_ClearScriptActive();
-            g_SceneState.state_04 = 0;
-            g_SceneState.step_05  = 0;
+            g_ScenarioState.state_04 = 0;
+            g_ScenarioState.step_05  = 0;
             break;
         case 18:
             break;

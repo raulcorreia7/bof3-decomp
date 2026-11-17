@@ -108,7 +108,7 @@ extern u8          D_801F294C;
 extern u8          D_801F294D;
 extern u8          D_801F294E;
 /* Bate and Shisu read scenario_id from the resident scenario record. */
-struct SceneState;
+struct ScenarioState;
 
 void        func_801D0C04(void);
 void        func_801D0C10(void);

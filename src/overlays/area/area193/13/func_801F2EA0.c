@@ -24,7 +24,7 @@ MATCH void func_801F2EA0(void) {
                 D_80146881             = 0;
                 g_SceneEventState.mode = SCENE_EVENT_NONE;
                 g_SceneEventState.step = 0;
-                flag                   = &g_SceneState.flags_01;
+                flag                   = &g_ScenarioState.flags_01;
                 *flag |= 1;
             }
             break;

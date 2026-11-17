@@ -12,7 +12,7 @@ MATCH void func_801A7E54(void) {
             }
             break;
         case 1:
-            Scene_SetupParty(s_SceneStateStepArgs[g_SceneEventState.selection]);
+            Scene_SetupParty(s_ScenarioStateStepArgs[g_SceneEventState.selection]);
             g_SceneEventState.step = 2;
             break;
         case 2:

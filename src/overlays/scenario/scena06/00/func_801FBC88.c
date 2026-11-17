@@ -19,6 +19,6 @@ MATCH void func_801FBC88(void) {
             Message_StartAreaMessage(MSG_020);
         }
     }
-    g_GameStateIndex     = 2;
-    g_SceneState.step_05 = 0xC;
+    g_GameStateIndex        = 2;
+    g_ScenarioState.step_05 = 0xC;
 }

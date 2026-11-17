@@ -10,9 +10,9 @@ NON_MATCHING void func_801FC45C(void) {
     u8  slot;
     u8* char_slots;
 
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
-            g_SceneState.step_05 = 1;
+            g_ScenarioState.step_05 = 1;
             Game_RequestAreaChange(AREA_ID_WYNDIA_HONEY_BALCONY, TO_COORD(113) + COORD_HALF, TO_COORD(9), AREA_ENTRY_MAP_LOADING);
             g_GamePrevSelection = 0xFF;
             break;
@@ -22,7 +22,7 @@ NON_MATCHING void func_801FC45C(void) {
             }
             g_ScriptVars[0] = 1;
             Area_StartScrollRoute(0);
-            g_SceneState.step_05 = 3;
+            g_ScenarioState.step_05 = 3;
             break;
         case 3:
             if (g_ScriptVars[0] != 3) {
@@ -38,7 +38,7 @@ NON_MATCHING void func_801FC45C(void) {
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = 292;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].scene_step     = 0x700;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x5A;
-                g_SceneState.step_05                                        = 4;
+                g_ScenarioState.step_05                                     = 4;
             }
             break;
         case 4:
@@ -46,7 +46,7 @@ NON_MATCHING void func_801FC45C(void) {
                 break;
             }
             SND_PlayBGM(0x27, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
-            g_SceneState.step_05 = 5;
+            g_ScenarioState.step_05 = 5;
             g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
             break;
         case 5:
@@ -62,13 +62,13 @@ NON_MATCHING void func_801FC45C(void) {
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = g_AreaCameraAngle.vz;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x1E;
-                g_SceneState.step_05                                        = 7;
+                g_ScenarioState.step_05                                     = 7;
             }
             break;
         case 7:
             SND_StopSequence(0, 2);
             SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 2));
-            g_SceneState.step_05 = 8;
+            g_ScenarioState.step_05 = 8;
             break;
         case 8:
             if (g_ScriptVars[0] != 0xC) {
@@ -76,7 +76,7 @@ NON_MATCHING void func_801FC45C(void) {
             }
             SND_PlayBGM(0x24, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
-            g_SceneState.step_05 = 9;
+            g_ScenarioState.step_05 = 9;
             g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
             break;
         case 9:
@@ -92,14 +92,14 @@ NON_MATCHING void func_801FC45C(void) {
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = g_AreaCameraAngle.vz;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x1E;
-                g_SceneState.step_05                                        = 10;
+                g_ScenarioState.step_05                                     = 10;
             }
             break;
         case 10:
             if (g_ScriptVars[0] != 0xE) {
                 break;
             }
-            g_SceneState.step_05 = 11;
+            g_ScenarioState.step_05 = 11;
             g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
             SYS_SetFlag(g_SceneFlags, 10);
             Game_RequestAreaChange(AREA_ID_CAMP_BEFORE_ANGEL_TOWER, TO_COORD(35), TO_COORD(41), AREA_ENTRY_MAP_LOADING);
@@ -115,7 +115,7 @@ NON_MATCHING void func_801FC45C(void) {
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = g_AreaCameraAngle.vz;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 2;
-                g_SceneState.step_05                                        = 12;
+                g_ScenarioState.step_05                                     = 12;
             }
             break;
         case 12:
@@ -131,14 +131,14 @@ NON_MATCHING void func_801FC45C(void) {
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = g_AreaCameraAngle.vz;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x78;
-                g_SceneState.step_05                                        = 13;
+                g_ScenarioState.step_05                                     = 13;
             }
             break;
         case 13:
             if (g_ScriptVars[0] != 2) {
                 break;
             }
-            g_SceneState.step_05 = 14;
+            g_ScenarioState.step_05 = 14;
             SYS_SetFlag(g_SceneFlags, 11);
             SYS_SetFlag(g_SceneFlags, 9);
             Item_VitalAdd(VITAL_ITEM_PASSPORT);
@@ -147,7 +147,7 @@ NON_MATCHING void func_801FC45C(void) {
             if (g_ScriptVars[0] != 0x32) {
                 break;
             }
-            g_SceneState.step_05 = 15;
+            g_ScenarioState.step_05 = 15;
             g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
             /* FAKE: retail reads g_CharSlot as u8[]. */
             char_slots = (u8*)g_CharSlot;
@@ -158,12 +158,12 @@ NON_MATCHING void func_801FC45C(void) {
         case 15:
             Char_RebuildPartyStats();
             Game_ClearScriptActive();
-            g_ScriptVars[0]       = 0;
-            g_ScriptVars[1]       = 0;
-            g_ScriptVars[2]       = 0;
-            g_ScriptVars[3]       = 0;
-            g_SceneState.step_05  = 0;
-            g_SceneState.state_04 = 0;
+            g_ScriptVars[0]          = 0;
+            g_ScriptVars[1]          = 0;
+            g_ScriptVars[2]          = 0;
+            g_ScriptVars[3]          = 0;
+            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.state_04 = 0;
             break;
     }
 }

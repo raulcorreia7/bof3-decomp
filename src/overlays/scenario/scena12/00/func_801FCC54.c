@@ -16,12 +16,12 @@ MATCH s32 func_801FCCBC(void) {
     g_ScriptVars[2] = 0;
     g_ScriptVars[3] = 0;
     if (g_Game.members[0].chr.character_id != CHAR_ID_MOMO) {
-        g_SceneState.step_05  = 0;
-        g_SceneState.state_04 = 5;
+        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.state_04 = 5;
         return 1;
     }
-    g_SceneState.step_05  = 5;
-    g_SceneState.state_04 = 5;
+    g_ScenarioState.step_05  = 5;
+    g_ScenarioState.state_04 = 5;
     return 1;
 }
 
@@ -33,11 +33,11 @@ MATCH s32 func_801FCD38(void) {
 MATCH s32 func_801FCD58(void) {
     if (SYS_TestFlag(g_SceneFlags, 42) == 0) {
         Game_SetScriptActive();
-        g_ScriptVars[0]       = 0;
-        g_ScriptVars[1]       = 0;
-        g_ScriptVars[3]       = 0;
-        g_SceneState.step_05  = 0;
-        g_SceneState.state_04 = 7;
+        g_ScriptVars[0]          = 0;
+        g_ScriptVars[1]          = 0;
+        g_ScriptVars[3]          = 0;
+        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.state_04 = 7;
         Area_SetCellPalette(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
         return 1;

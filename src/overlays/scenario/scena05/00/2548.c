@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F9148(void) {
-    u8* step = &g_SceneState.step_05;
+    u8* step = &g_ScenarioState.step_05;
 
     switch (*step) {
         case 0:
@@ -40,8 +40,8 @@ MATCH void func_801F9148(void) {
                 g_ScriptVars[2] = 0;
                 g_ScriptVars[3] = 0;
                 Game_ClearScriptActive();
-                *step                 = 0;
-                g_SceneState.state_04 = 0;
+                *step                    = 0;
+                g_ScenarioState.state_04 = 0;
             }
             break;
     }
@@ -50,7 +50,7 @@ MATCH void func_801F9148(void) {
 MATCH void func_801F92EC(void) {
     u8* state;
 
-    state = &g_SceneState.step_05;
+    state = &g_ScenarioState.step_05;
     switch (*state) {
         case 0:
             MESSAGE_START_WAIT(MSG_000);
@@ -59,8 +59,8 @@ MATCH void func_801F92EC(void) {
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                *state                = 0;
-                g_SceneState.state_04 = 0;
+                *state                   = 0;
+                g_ScenarioState.state_04 = 0;
             }
             return;
     }

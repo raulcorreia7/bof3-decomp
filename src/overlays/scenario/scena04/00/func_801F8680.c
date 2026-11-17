@@ -9,25 +9,25 @@ __asm__(".include \"include/match/macro.inc\"\n");
 NON_MATCHING void func_801F8680(void) {
     u8 slot;
 
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
             g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
-            g_SceneState.state_04 = 0;
-            g_SceneState.step_05  = 0;
+            g_ScenarioState.state_04 = 0;
+            g_ScenarioState.step_05  = 0;
             break;
         case 1: {
             u16* timer;
 
-            timer = &g_SceneState.timer_06;
+            timer = &g_ScenarioState.timer_06;
             if (*timer != 0) {
                 *timer = *timer - 1;
                 break;
             }
             Scene_SetupParty(0);
-            g_SceneState.step_05 = 2;
+            g_ScenarioState.step_05 = 2;
             break;
         }
         case 2:
@@ -36,51 +36,51 @@ NON_MATCHING void func_801F8680(void) {
             }
             Area_SetCellPalette(0x57, 0x12);
             SND_PlaySE(0x103);
-            g_SceneState.step_05 = 3;
+            g_ScenarioState.step_05 = 3;
             break;
         case 3:
             if (g_ScriptVars[0] != 2) {
                 break;
             }
-            slot                = Actor_FindFreeSpawned();
-            g_SceneState.unk_03 = slot;
+            slot                   = Actor_FindFreeSpawned();
+            g_ScenarioState.unk_03 = slot;
             if ((s8)slot != -1) {
-                g_SpawnedActors[(s8)slot].header.flags        = ACTOR_FLAG_IN_USE;
-                g_SpawnedActors[(s8)g_SceneState.unk_03].type = 0x29;
+                g_SpawnedActors[(s8)slot].header.flags           = ACTOR_FLAG_IN_USE;
+                g_SpawnedActors[(s8)g_ScenarioState.unk_03].type = 0x29;
             }
-            g_SceneState.step_05 = 4;
+            g_ScenarioState.step_05 = 4;
             break;
         case 4:
-            if ((g_SpawnedActors[(s8)g_SceneState.unk_03].header.flags & ACTOR_FLAG_IN_USE) != 0) {
+            if ((g_SpawnedActors[(s8)g_ScenarioState.unk_03].header.flags & ACTOR_FLAG_IN_USE) != 0) {
                 break;
             }
-            g_SceneState.timer_06 = 0x1E;
-            g_SceneState.step_05  = 5;
+            g_ScenarioState.timer_06 = 0x1E;
+            g_ScenarioState.step_05  = 5;
             break;
         case 5: {
             u16* timer;
 
-            timer = &g_SceneState.timer_06;
+            timer = &g_ScenarioState.timer_06;
             if (*timer != 0) {
                 *timer = *timer - 1;
                 break;
             }
             SND_PlaySE(0x200);
-            *timer               = 0x3C;
-            g_SceneState.step_05 = 6;
+            *timer                  = 0x3C;
+            g_ScenarioState.step_05 = 6;
             g_ScriptVars[0]++;
             break;
         }
         case 6:
-            if (g_SceneState.timer_06 != 0) {
-                g_AreaCameraHeight += D_801FA21C[g_SceneState.timer_06 & 3] * 0x40;
+            if (g_ScenarioState.timer_06 != 0) {
+                g_AreaCameraHeight += D_801FA21C[g_ScenarioState.timer_06 & 3] * 0x40;
                 g_AreaCameraRefreshCount = 2;
-                g_SceneState.timer_06--;
+                g_ScenarioState.timer_06--;
                 break;
             }
             Game_ClearScriptActive();
-            g_SceneState.state_04 = 0;
-            g_SceneState.step_05  = 0;
+            g_ScenarioState.state_04 = 0;
+            g_ScenarioState.step_05  = 0;
             g_ScriptVars[0]++;
             break;
         case 7:
@@ -89,12 +89,12 @@ NON_MATCHING void func_801F8680(void) {
             }
             SND_StartDecrescendo(0, 1, BGM_CUE_LEVEL_DEFAULT, 0x40);
             SND_StartXAStream(4, 1);
-            g_SceneState.step_05 = 8;
+            g_ScenarioState.step_05 = 8;
             break;
         case 8: {
             u16* timer;
 
-            timer = &g_SceneState.timer_06;
+            timer = &g_ScenarioState.timer_06;
             if (*timer != 0x80) {
                 g_AreaCameraOffsetZ      = *timer * 9;
                 g_AreaCameraRefreshCount = 2;
@@ -102,43 +102,43 @@ NON_MATCHING void func_801F8680(void) {
                 break;
             }
             SND_StopSequence(0, 1);
-            g_SceneState.step_05 = 9;
-            *timer               = *timer >> 1;
+            g_ScenarioState.step_05 = 9;
+            *timer                  = *timer >> 1;
             break;
         }
         case 9: {
             u16* timer;
 
-            timer = &g_SceneState.timer_06;
+            timer = &g_ScenarioState.timer_06;
             if (*timer != 0) {
                 *timer = *timer - 1;
                 break;
             }
-            SCENE_MESSAGE_WAIT(MSG_013, 10);
+            SCENARIO_MESSAGE_WAIT(MSG_013, 10);
             break;
         }
         case 10:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                g_SceneState.step_05 = 0xB;
+                g_ScenarioState.step_05 = 0xB;
             }
             break;
         case 11:
             if (g_UiWindowEffectBusy != 0) {
                 break;
             }
-            g_SceneState.timer_06 = 0x3C;
-            g_AreaDrawFlags       = 0;
-            g_SceneState.step_05  = 0xC;
+            g_ScenarioState.timer_06 = 0x3C;
+            g_AreaDrawFlags          = 0;
+            g_ScenarioState.step_05  = 0xC;
             break;
         case 12: {
             u16* timer;
 
-            timer = &g_SceneState.timer_06;
+            timer = &g_ScenarioState.timer_06;
             if (*timer != 0) {
                 *timer = *timer - 1;
                 break;
             }
-            SCENE_MESSAGE_WAIT(MSG_014, 13);
+            SCENARIO_MESSAGE_WAIT(MSG_014, 13);
             break;
         }
         case 13:
@@ -151,12 +151,12 @@ NON_MATCHING void func_801F8680(void) {
             g_AreaCameraOffsetZ      = 0;
             g_AreaCameraRefreshCount = 2;
             UI_SetMode(UI_MODE_FADE_IN);
-            g_SceneState.step_05 = 0xE;
+            g_ScenarioState.step_05 = 0xE;
             break;
         case 14:
             if (g_ScriptVars[0] == 0x23) {
                 UI_SetMode(UI_MODE_FADE_OUT);
-                g_SceneState.step_05 = 0xF;
+                g_ScenarioState.step_05 = 0xF;
             }
             break;
         case 15:
@@ -170,7 +170,7 @@ NON_MATCHING void func_801F8680(void) {
             g_AreaDrawFlags     = 0;
             g_AreaScrollTargetY = TO_COORD(0x21);
             Area_InitMapRenderer();
-            g_SceneState.step_05 = 0x10;
+            g_ScenarioState.step_05 = 0x10;
             break;
         case 16:
             if (SND_IsXAIdle() == 0) {
@@ -181,44 +181,44 @@ NON_MATCHING void func_801F8680(void) {
             g_ScriptVars[0]++;
             g_AreaDrawFlags = 0x1F;
             UI_SetMode(UI_MODE_FADE_IN);
-            g_SceneState.step_05 = 0x11;
+            g_ScenarioState.step_05 = 0x11;
             break;
         case 17:
             if (g_ScriptVars[0] != 0x2B) {
                 break;
             }
-            g_SceneState.timer_06 = 0xA;
-            g_AreaDrawFlags       = 0;
-            g_SceneState.step_05  = 0x12;
+            g_ScenarioState.timer_06 = 0xA;
+            g_AreaDrawFlags          = 0;
+            g_ScenarioState.step_05  = 0x12;
             break;
         case 18: {
             u16* timer;
 
-            timer = &g_SceneState.timer_06;
+            timer = &g_ScenarioState.timer_06;
             if (*timer != 0) {
                 *timer = *timer - 1;
                 break;
             }
             g_ScriptVars[0] = 0;
             Game_RequestAreaChange(AREA_ID_MOMO_TOWER_OUTSIDE, TO_COORD(0x1E), TO_COORD(0x24), FACING_RIGHT);
-            g_GamePrevSelection  = 0x54;
-            g_GameEntryMode      = 0xFF;
-            g_SceneState.step_05 = 0x13;
+            g_GamePrevSelection     = 0x54;
+            g_GameEntryMode         = 0xFF;
+            g_ScenarioState.step_05 = 0x13;
             break;
         }
         case 19:
             if (g_ScriptVars[0] != 1) {
                 break;
             }
-            g_SceneState.timer_06 = 0xA;
-            g_AreaDrawFlags       = 0;
-            g_SceneState.step_05  = 0x14;
+            g_ScenarioState.timer_06 = 0xA;
+            g_AreaDrawFlags          = 0;
+            g_ScenarioState.step_05  = 0x14;
             g_GameFlags |= 0x80;
             break;
         case 20: {
             u16* timer;
 
-            timer = &g_SceneState.timer_06;
+            timer = &g_ScenarioState.timer_06;
             if (*timer != 0) {
                 *timer = *timer - 1;
                 break;
@@ -227,8 +227,8 @@ NON_MATCHING void func_801F8680(void) {
             g_ScriptVars[0] = 0;
             SYS_SetFlag(g_SceneFlags, 4);
             Game_RequestAreaChange(AREA_ID_MOMO_TOWER_FIRST_FLOOR, TO_COORD(0xAC), TO_COORD(0x21), AREA_ENTRY_MAP_LOADING | FACING_UP_RIGHT);
-            g_GameEntryMode      = 0xFF;
-            g_SceneState.step_05 = 0x15;
+            g_GameEntryMode         = 0xFF;
+            g_ScenarioState.step_05 = 0x15;
             break;
         }
         case 21: {
@@ -241,7 +241,7 @@ NON_MATCHING void func_801F8680(void) {
             vars[0]         = 0;
             g_ScriptVars[1] = 1;
             Game_RequestAreaChange(AREA_ID_MOMO_TOWER_FIRST_FLOOR, TO_COORD(0x6C), TO_COORD(7), FACING_UP_LEFT);
-            g_SceneState.step_05 = 0x16;
+            g_ScenarioState.step_05 = 0x16;
             break;
         }
         case 22:
@@ -251,7 +251,7 @@ NON_MATCHING void func_801F8680(void) {
             g_ScriptVars[0] = 0;
             g_ScriptVars[1] = 2;
             Game_RequestAreaChange(AREA_ID_MOMO_TOWER_FIRST_FLOOR, TO_COORD(0x42), TO_COORD(6), FACING_UP_LEFT);
-            g_SceneState.step_05 = 0x17;
+            g_ScenarioState.step_05 = 0x17;
             break;
         case 23:
             if (g_ScriptVars[0] != 1) {
@@ -260,7 +260,7 @@ NON_MATCHING void func_801F8680(void) {
             g_ScriptVars[1] = 0;
             g_ScriptVars[0] = 0;
             Game_RequestAreaChange(AREA_ID_MOMO_TOWER_FIRST_FLOOR, TO_COORD(0xAC), TO_COORD(0x21), AREA_ENTRY_MAP_LOADING | FACING_RIGHT);
-            g_SceneState.step_05 = 0x18;
+            g_ScenarioState.step_05 = 0x18;
             break;
         case 24:
             if (g_ScriptVars[0] != 9) {
@@ -268,32 +268,32 @@ NON_MATCHING void func_801F8680(void) {
             }
             SND_StartDecrescendo(0, 3, BGM_CUE_LEVEL_DEFAULT, 0x10);
             SND_StartXAStream(3, 1);
-            g_SceneState.step_05 = 0x19;
+            g_ScenarioState.step_05 = 0x19;
             break;
         case 25:
             if (SND_IsXAIdle() == 0) {
                 break;
             }
-            g_SceneState.step_05 = 0x1B;
+            g_ScenarioState.step_05 = 0x1B;
             g_ScriptVars[0]++;
             break;
         case 26:
             if (!EMI_IsReady()) {
                 break;
             }
-            g_SceneState.step_05 = 0x1B;
+            g_ScenarioState.step_05 = 0x1B;
             g_ScriptVars[0]++;
             break;
         case 28:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
-            D_8014865C           = -2;
-            D_80148698           = 1;
-            g_GameEntryState     = 7;
-            g_MenuStep.step      = 0;
-            D_80148699           = 0;
-            g_SceneState.step_05 = 0x1D;
+            D_8014865C              = -2;
+            D_80148698              = 1;
+            g_GameEntryState        = 7;
+            g_MenuStep.step         = 0;
+            D_80148699              = 0;
+            g_ScenarioState.step_05 = 0x1D;
             break;
         case 29:
             if (g_GameEntryState != 2) {
@@ -303,8 +303,8 @@ NON_MATCHING void func_801F8680(void) {
             SND_PlayBGM(g_SndBGMId, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             g_ScriptVars[0] = 0;
             Game_ClearScriptActive();
-            g_SceneState.state_04 = 0;
-            g_SceneState.step_05  = 0;
+            g_ScenarioState.state_04 = 0;
+            g_ScenarioState.step_05  = 0;
             break;
     }
 }

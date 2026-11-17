@@ -20,7 +20,7 @@ extern SVECTOR g_ScratchPadVectors[];
 extern u8      D_801F4CE8[];
 
 /* Seed rows matched against g_GameEntryAreaId; column 0 is the seed, the
- * g_SceneState.scenario_id column is the message id. */
+ * g_ScenarioState.scenario_id column is the message id. */
 extern u16      D_801F5338[7][16];
 /* The fish ids the pond keeper shows, ended by GAME_NONE, and the "Manillo"
  * item text at +0x7. */

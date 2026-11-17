@@ -11,14 +11,14 @@ MATCH void func_801FB2F8(void) {
 }
 
 MATCH void func_801FB300(void) {
-    u8* step = &g_SceneState.step_05;
+    u8* step = &g_ScenarioState.step_05;
 
     if (*step == 0) {
         Party_AddZenny(0x32, 0);
         SYS_SetFlag(g_SceneFlags, 0x23);
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
         Game_ClearScriptActive();
-        *step                 = 0;
-        g_SceneState.state_04 = 0;
+        *step                    = 0;
+        g_ScenarioState.state_04 = 0;
     }
 }

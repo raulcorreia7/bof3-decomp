@@ -16,9 +16,9 @@ MATCH void func_801F2C1C(void) {
         case 2:
             D_8014865F = 0;
             Game_SetScriptActive();
-            g_SceneState.step_05  = 0x1E;
-            g_AreaDrawFlags       = 0;
-            g_SceneState.state_04 = 4;
+            g_ScenarioState.step_05  = 0x1E;
+            g_AreaDrawFlags          = 0;
+            g_ScenarioState.state_04 = 4;
             break;
         case 3:
         case 4:

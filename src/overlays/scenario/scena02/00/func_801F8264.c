@@ -10,7 +10,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801F8264(void) {
     u8* state;
 
-    state = &g_SceneState.step_05;
+    state = &g_ScenarioState.step_05;
     switch (*state) {
         case 0:
             MESSAGE_START_WAIT(MSG_062);
@@ -19,8 +19,8 @@ MATCH void func_801F8264(void) {
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                *state                = 0;
-                g_SceneState.state_04 = 0;
+                *state                   = 0;
+                g_ScenarioState.state_04 = 0;
             }
             return;
     }

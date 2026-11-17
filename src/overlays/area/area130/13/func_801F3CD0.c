@@ -3,7 +3,7 @@
 MATCH void func_801F3CD0(void) {
     u8* record;
 
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
@@ -42,7 +42,7 @@ MATCH void func_801F3CD0(void) {
             }
             g_TextVariables[0][ITEM_NAME_LENGTH] = 0;
             g_TextVariables[1][8]                = 0;
-            SCENE_MESSAGE_WAIT(MSG_073, 1);
+            SCENARIO_MESSAGE_WAIT(MSG_073, 1);
             break;
         case 1:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {

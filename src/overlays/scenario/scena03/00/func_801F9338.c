@@ -6,11 +6,11 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F9338(void) {
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             Scene_SetupParty(0);
-            g_ScriptVars[0]      = 1;
-            g_SceneState.step_05 = 1;
+            g_ScriptVars[0]         = 1;
+            g_ScenarioState.step_05 = 1;
             break;
 
         case 1: {
@@ -24,7 +24,7 @@ MATCH void func_801F9338(void) {
                     g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type = 0x14;
                     SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
                 }
-                g_SceneState.step_05 = 2;
+                g_ScenarioState.step_05 = 2;
             }
             break;
         }
@@ -40,7 +40,7 @@ MATCH void func_801F9338(void) {
                     g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type = 0x14;
                     SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
                 }
-                g_SceneState.step_05 = 3;
+                g_ScenarioState.step_05 = 3;
             }
             break;
         }
@@ -56,7 +56,7 @@ MATCH void func_801F9338(void) {
                     g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type = 0x14;
                     SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
                 }
-                g_SceneState.step_05 = 4;
+                g_ScenarioState.step_05 = 4;
             }
             break;
         }
@@ -67,9 +67,9 @@ MATCH void func_801F9338(void) {
                 SYS_SetFlag(&D_80145548, 0);
                 SYS_SetFlag(g_SceneFlags, 1);
                 Game_RequestAreaChange(AREA_ID_WYNDIA_WORLD_MAP, TO_COORD(0x28), TO_COORD(0x35), 0x86);
-                g_GamePrevSelection  = 0x2F;
-                g_GameRequestKind    = 0xFF;
-                g_SceneState.step_05 = 5;
+                g_GamePrevSelection     = 0x2F;
+                g_GameRequestKind       = 0xFF;
+                g_ScenarioState.step_05 = 5;
             }
             break;
 
@@ -86,16 +86,16 @@ MATCH void func_801F9338(void) {
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = 0x360;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0xF0;
             }
-            g_SceneState.timer_06 = 0x20;
-            g_SceneState.step_05  = 6;
+            g_ScenarioState.timer_06 = 0x20;
+            g_ScenarioState.step_05  = 6;
             break;
         }
 
         case 6:
-            if (g_SceneState.timer_06 != 0) {
-                g_SceneState.timer_06 -= 1;
+            if (g_ScenarioState.timer_06 != 0) {
+                g_ScenarioState.timer_06 -= 1;
             } else {
-                g_SceneState.step_05 = 7;
+                g_ScenarioState.step_05 = 7;
             }
             break;
 
@@ -104,10 +104,10 @@ MATCH void func_801F9338(void) {
                 SYS_SetFlag(g_SceneFlags, 2);
                 g_GameFlags |= 0x80;
                 Game_RequestAreaChange(AREA_ID_WYNDIA_CASTLE, TO_COORD(0x29), TO_COORD(0x27), 5);
-                g_GameRequestKind     = 0xFF;
-                g_GameEntryMode       = 0;
-                g_SceneState.state_04 = 3;
-                g_SceneState.step_05  = 0;
+                g_GameRequestKind        = 0xFF;
+                g_GameEntryMode          = 0;
+                g_ScenarioState.state_04 = 3;
+                g_ScenarioState.step_05  = 0;
             }
             break;
     }

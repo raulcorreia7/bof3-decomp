@@ -36,7 +36,7 @@ MATCH void SAVE_RunLoadRestore(void) {
             s8* dst;
 
             src = (u8*)&g_SaveData;
-            dst = &g_SceneState;
+            dst = &g_ScenarioState;
             memcpy(dst, src, 0x10);
             g_SceneFlags = (*dst * 8) + ((u8*)&g_SaveData + 0x5B0);
         }

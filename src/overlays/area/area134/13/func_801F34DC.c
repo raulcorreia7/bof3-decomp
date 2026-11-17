@@ -17,6 +17,6 @@ MATCH void func_801F34DC(void) {
         TASK_SET(g_Game.members);
         g_Task = work;
     } while (0);
-    g_SceneState.step_05 = scene_step;
+    g_ScenarioState.step_05 = scene_step;
     Actor_Clear();
 }

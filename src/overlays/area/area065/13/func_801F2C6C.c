@@ -28,7 +28,7 @@ MATCH void func_801F2C6C(void) {
                         break;
                     }
                 }
-                Message_StartAreaMessage((s16)D_801F50FC[index][g_SceneState.scenario_id]);
+                Message_StartAreaMessage((s16)D_801F50FC[index][g_ScenarioState.scenario_id]);
             } else {
                 at  = pos;
                 row = (WorldMapPoint*)D_801F4DE0;

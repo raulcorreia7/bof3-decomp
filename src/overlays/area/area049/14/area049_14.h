@@ -32,8 +32,8 @@ extern u8 D_801F5CDF[];
     if (g_Game.members[0].chr.character_id == 6) {                       \
         g_CurrentActor->interaction_flags &= ~ACTOR_INTERACTION_PENDING; \
         Game_SetScriptActive();                                          \
-        g_SceneState.state_04 = 4;                                       \
-        g_SceneState.step_05  = (step_next);                             \
+        g_ScenarioState.state_04 = 4;                                    \
+        g_ScenarioState.step_05  = (step_next);                          \
     } else {                                                             \
         g_CurrentActor->interaction_flags &= ~ACTOR_INTERACTION_PENDING; \
     }

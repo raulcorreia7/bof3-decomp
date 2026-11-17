@@ -20,7 +20,7 @@ MATCH void func_801A18C8(Actor* record) {
                 g_GameEntryState    = GAME_MODE_SHOP;
                 return;
             }
-            if ((g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE) == 0) {
+            if ((g_ScenarioState.flags_01 & SCENARIO_STATE_SCRIPT_ACTIVE) == 0) {
                 if ((g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
                     g_Task->direction = work->unk_79;
                     work->interaction_flags |= ACTOR_INTERACTION_MOVING;

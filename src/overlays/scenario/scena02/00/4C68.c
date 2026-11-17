@@ -5,10 +5,10 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801FB868(void) {
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x0B));
-            g_SceneState.step_05 = 1;
+            g_ScenarioState.step_05 = 1;
             break;
         case 1: {
             u8* counter;
@@ -17,7 +17,7 @@ MATCH void func_801FB868(void) {
             if (*counter == 0x4B) {
                 func_801C601C(2);
                 Scene_SetupParty(0xF);
-                g_SceneState.step_05 = 2;
+                g_ScenarioState.step_05 = 2;
             }
             (*counter)++;
             break;
@@ -28,7 +28,7 @@ MATCH void func_801FB868(void) {
                 g_ScriptVars[2] = 0;
                 g_ScriptVars[3] = 0;
                 Game_ClearScriptActive();
-                SCENE_RETURN_TO_START();
+                SCENARIO_RETURN_TO_START();
             }
             break;
         case 5:
@@ -44,13 +44,13 @@ MATCH void func_801FB868(void) {
                     Scene_SetupParty(0x19);
                     break;
             }
-            g_SceneState.step_05 = 6;
+            g_ScenarioState.step_05 = 6;
             break;
         case 6:
             if (g_ScriptVars[0] == 0x39) {
                 func_801FCD14(0x92);
-                g_SceneState.step_05 = 7;
-                g_ScriptVars[0]      = 0x3A;
+                g_ScenarioState.step_05 = 7;
+                g_ScriptVars[0]         = 0x3A;
             }
             break;
         case 7:
@@ -60,16 +60,16 @@ MATCH void func_801FB868(void) {
                 g_ScriptVars[2] = 0;
                 g_ScriptVars[3] = 0;
                 Game_ClearScriptActive();
-                SCENE_RETURN_TO_START();
+                SCENARIO_RETURN_TO_START();
             }
             break;
         case 15:
-            SCENE_MESSAGE_WAIT(MSG_127, 0xB);
+            SCENARIO_MESSAGE_WAIT(MSG_127, 0xB);
             break;
         case 11:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                SCENE_RETURN_TO_START();
+                SCENARIO_RETURN_TO_START();
             }
             break;
         case 20:
@@ -78,13 +78,13 @@ MATCH void func_801FB868(void) {
             g_ScriptVars[0] = 0x41;
             Scene_SetupParty(0x11);
             func_801C601C(3);
-            g_SceneState.step_05 = 0x15;
+            g_ScenarioState.step_05 = 0x15;
             break;
         case 21:
             if (g_ScriptVars[0] == 0x47) {
                 func_801BFE34(TO_COORD(64), TO_COORD_HALF(39), 0xF);
                 func_801C7A54(0xF);
-                g_SceneState.step_05 = 0x18;
+                g_ScenarioState.step_05 = 0x18;
             }
             break;
         case 24:
@@ -94,30 +94,30 @@ MATCH void func_801FB868(void) {
                 g_ScriptVars[2] = 0;
                 g_ScriptVars[3] = 0;
                 Game_ClearScriptActive();
-                SCENE_RETURN_TO_START();
+                SCENARIO_RETURN_TO_START();
             }
             break;
         case 25:
             switch (g_Game.members[0].facing) {
                 case 0:
                     Scene_SetupParty(0x16);
-                    g_SceneState.step_05 = 0x1A;
+                    g_ScenarioState.step_05 = 0x1A;
                     break;
                 case 1:
                     Scene_SetupParty(0x14);
-                    g_SceneState.step_05 = 0x1A;
+                    g_ScenarioState.step_05 = 0x1A;
                     break;
                 case 2:
                     Scene_SetupParty(0x17);
-                    g_SceneState.step_05 = 0x1A;
+                    g_ScenarioState.step_05 = 0x1A;
                     break;
                 case 3:
                     Scene_SetupParty(0x13);
-                    g_SceneState.step_05 = 0x1A;
+                    g_ScenarioState.step_05 = 0x1A;
                     break;
                 case 7:
                     Scene_SetupParty(0x15);
-                    g_SceneState.step_05 = 0x1A;
+                    g_ScenarioState.step_05 = 0x1A;
                     break;
             }
             break;
@@ -128,7 +128,7 @@ MATCH void func_801FB868(void) {
                 g_ScriptVars[2] = 0;
                 g_ScriptVars[3] = 0;
                 Game_ClearScriptActive();
-                SCENE_RETURN_TO_START();
+                SCENARIO_RETURN_TO_START();
             }
             break;
         case 30: {
@@ -137,7 +137,7 @@ MATCH void func_801FB868(void) {
             counter = &g_ScriptVars[3];
             if (++*counter >= 0x10) {
                 *counter = 0;
-                SCENE_RETURN_TO_START();
+                SCENARIO_RETURN_TO_START();
             }
             break;
         }

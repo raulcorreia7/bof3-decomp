@@ -6,24 +6,24 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801FA3A4(void) {
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 g_ScriptVars[0] = 1;
                 Scene_SetupParty(9);
-                g_SceneState.step_05 = 1;
+                g_ScenarioState.step_05 = 1;
             }
             break;
         case 1:
             if (g_ScriptVars[0] == 7) {
                 SYS_SetFlag(g_SceneFlags, 0x13);
                 Game_ClearScriptActive();
-                g_ScriptVars[0]       = 0;
-                g_ScriptVars[1]       = 0;
-                g_ScriptVars[2]       = 0;
-                g_ScriptVars[3]       = 0;
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                g_ScriptVars[0]          = 0;
+                g_ScriptVars[1]          = 0;
+                g_ScriptVars[2]          = 0;
+                g_ScriptVars[3]          = 0;
+                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.state_04 = 0;
             }
             break;
         case 2:
@@ -34,30 +34,30 @@ MATCH void func_801FA3A4(void) {
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 g_ScriptVars[0] = 1;
                 Scene_SetupParty(10);
-                g_SceneState.step_05 = 6;
+                g_ScenarioState.step_05 = 6;
             }
             break;
         case 6:
             if (g_ScriptVars[0] == 6) {
-                g_SceneState.step_05 = 7;
+                g_ScenarioState.step_05 = 7;
             }
             break;
         case 7:
             if (g_ScriptVars[0] == 0xF) {
                 UI_SetMode(4);
-                g_SceneState.step_05 = 8;
+                g_ScenarioState.step_05 = 8;
             }
             break;
         case 8:
             if (g_UiWindowEffectBusy == 0) {
                 g_AreaDrawFlags = 0;
-                SCENE_MESSAGE_WAIT(MSG_063, 9);
+                SCENARIO_MESSAGE_WAIT(MSG_063, 9);
             }
             break;
         case 9:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.state_04 = 0;
                 Scene_RequestChapterAdvance();
                 g_ScriptVars[2] = 2;
                 g_GameFlags ^= 0x16;

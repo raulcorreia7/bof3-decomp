@@ -259,8 +259,8 @@ MATCH void func_801F7DBC(void) {
     if (LOHU(g_GameAreaId) == AREA_ID_STEEL_BEACH_FREIGHTER) {
         if (g_GameCellType == 1 && g_GameLastAreaId == AREA_ID_RELAY_POINT_A_PORTAL && SYS_TestFlag(g_SceneFlags, 0xC) != 0 && SYS_TestFlag(g_SceneFlags, 0xD) == 0) {
             Game_SetScriptActive();
-            g_SceneState.state_04 = 4;
-            g_SceneState.step_05  = 0xA;
+            g_ScenarioState.state_04 = 4;
+            g_ScenarioState.step_05  = 0xA;
         }
         if (g_GameCellType == 0 && SYS_TestFlag(g_SceneFlags, 0xD) != 0 && SYS_TestFlag(g_SceneFlags, 0xE) == 0) {
             func_801C1DF0(4);
@@ -279,10 +279,10 @@ MATCH void func_801F7DBC(void) {
     }
     if (LOHU(g_GameAreaId) == AREA_ID_KOMBINAT_ARRIVAL && SYS_TestFlag(g_SceneFlags, 0) == 0) {
         func_801BE1B0(0);
-        g_AreaCameraAngle.vx  = -0x386;
-        g_AreaCameraAngle.vz  = 0x150;
-        g_SceneState.state_04 = 1;
-        g_SceneState.step_05  = 0;
+        g_AreaCameraAngle.vx     = -0x386;
+        g_AreaCameraAngle.vz     = 0x150;
+        g_ScenarioState.state_04 = 1;
+        g_ScenarioState.step_05  = 0;
     }
 
     if (LOHU(g_GameAreaId) == AREA_ID_DRAGNIER_SURFACE) {
@@ -324,16 +324,16 @@ MATCH void func_801F7DBC(void) {
         if (g_GameCellType == 2 && SYS_TestFlag(g_SceneFlags, 0x17) == 0) {
             SND_StartDecrescendo(0, 0, 0x64, 0x10);
             func_801BE1B0(0);
-            g_SceneState.state_04 = 7;
-            g_SceneState.step_05  = 0;
+            g_ScenarioState.state_04 = 7;
+            g_ScenarioState.step_05  = 0;
         }
     }
 
     if (LOHU(g_GameAreaId) == AREA_ID_COLONY_OUTSIDE) {
         if (g_GameCellType == 0 && SYS_TestFlag(g_SceneFlags, 7) == 0) {
             func_801BE1B0(5);
-            g_SceneState.state_04 = 3;
-            g_SceneState.step_05  = 0;
+            g_ScenarioState.state_04 = 3;
+            g_ScenarioState.step_05  = 0;
         }
         if (g_GameCellType == 4 && SYS_TestFlag(g_SceneFlags, 8) == 0) {
             func_801BE1B0(6);
@@ -363,11 +363,11 @@ MATCH void func_801F7DBC(void) {
             func_801F8D0C();
         }
     }
-    g_SceneState.mode_02 = 2;
+    g_ScenarioState.mode_02 = 2;
 }
 
 MATCH void func_801F8474(void) {
-    SYS_DISPATCH_BYTE(D_801FBF54, g_SceneState.state_04);
+    SYS_DISPATCH_BYTE(D_801FBF54, g_ScenarioState.state_04);
 }
 
 MATCH void func_801F84B0(void) {

@@ -58,8 +58,8 @@ MATCH void Scene_ShowEntityMessage(void* entity) {
 
 MATCH void func_801FDE2C(void) {
     Game_SetScriptActive();
-    g_SceneState.state_04 = 3;
-    g_SceneState.step_05  = 0x32;
+    g_ScenarioState.state_04 = 3;
+    g_ScenarioState.step_05  = 0x32;
 }
 
 MATCH void func_801FDE64(void* entity) {
@@ -124,22 +124,22 @@ MATCH s32 func_801FE024(s32 x, s32 y) {
         if (g_GameCellType == 1) {
             if (SYS_TestFlag(g_SceneFlags, 1) == 0 && y > TO_COORD(71)) {
                 Game_SetScriptActive();
-                g_SceneState.state_04 = 3;
-                g_SceneState.step_05  = 15;
+                g_ScenarioState.state_04 = 3;
+                g_ScenarioState.step_05  = 15;
             }
         }
         if (g_GameCellType == 2) {
             if (SYS_TestFlag(g_SceneEventFlags, 0x81) == 0 && (x >> 16) >= 45 && (u32)((y >> 16) - 120) < 8) {
                 Game_SetScriptActive();
-                g_SceneState.state_04 = 3;
-                g_SceneState.step_05  = 0;
+                g_ScenarioState.state_04 = 3;
+                g_ScenarioState.step_05  = 0;
             }
         }
     }
     if (g_GameAreaId == AREA_ID_MYRIA_STATION_MYRIA_ROOM && g_GameCellType == 0 && x == TO_COORD(65) + COORD_HALF && (u32)((y >> 16) - 34) < 3) {
         Game_SetScriptActive();
-        g_SceneState.state_04 = 4;
-        g_SceneState.step_05  = 0;
+        g_ScenarioState.state_04 = 4;
+        g_ScenarioState.step_05  = 0;
         return 1;
     }
     return 0;
@@ -150,36 +150,36 @@ MATCH s32 func_801FE18C(s32 x, s32 y) {
         if (SYS_TestFlag(g_SceneFlags, 2) == 0) {
             if (x > 4456447 && (u32)((y >> 16) - 3) < 2) {
                 Game_SetScriptActive();
-                g_SceneState.state_04 = 3;
-                g_SceneState.step_05  = 0x14;
+                g_ScenarioState.state_04 = 3;
+                g_ScenarioState.step_05  = 0x14;
             }
             return 0;
         }
         if (SYS_TestFlag(g_SceneFlags, 4) == 0) {
             if (x <= 5439488 && (u32)((y >> 16) - 0x2E) < 3) {
                 Game_SetScriptActive();
-                g_SceneState.state_04 = 3;
-                g_SceneState.step_05  = 0x1E;
+                g_ScenarioState.state_04 = 3;
+                g_ScenarioState.step_05  = 0x1E;
             }
             return 0;
         }
         if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
             if (y <= 3801088 && (u32)((x >> 16) - 0x23) < 4) {
                 Game_SetScriptActive();
-                g_SceneState.state_04 = 3;
-                g_SceneState.step_05  = 0x28;
+                g_ScenarioState.state_04 = 3;
+                g_ScenarioState.step_05  = 0x28;
             }
             return 0;
         }
         if (x == 3211264 && (u32)((y >> 16) - 0x27) < 2) {
             if (SYS_TestFlag(g_SceneFlags, 12) && SYS_TestFlag(g_SceneFlags, 14) && SYS_TestFlag(g_SceneFlags, 13) && SYS_TestFlag(g_SceneFlags, 15) && SYS_TestFlag(g_SceneFlags, 16)) {
                 Game_SetScriptActive();
-                g_SceneState.state_04 = 5;
-                g_SceneState.step_05  = 5;
+                g_ScenarioState.state_04 = 5;
+                g_ScenarioState.step_05  = 5;
             } else {
                 Game_SetScriptActive();
-                g_SceneState.state_04 = 5;
-                g_SceneState.step_05  = 0;
+                g_ScenarioState.state_04 = 5;
+                g_ScenarioState.step_05  = 0;
             }
         }
     }

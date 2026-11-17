@@ -529,11 +529,11 @@ NON_MATCHING void func_801F8E00(void) {
         g_AreaDrawFlags  = 0;
     }
     if (LOHU(g_GameAreaId) == AREA_ID_WYNDIA_CASTLE_BASEMENT && !SYS_TestFlag(g_SceneFlags, 3)) {
-        g_SceneState.timer_06 = 60;
-        g_AreaCameraAngle.vx  = -0x344;
-        g_ScriptVarsWord      = 0;
-        g_AreaCameraAngle.vy  = 0;
-        g_AreaCameraAngle.vz  = 0x10E;
+        g_ScenarioState.timer_06 = 60;
+        g_AreaCameraAngle.vx     = -0x344;
+        g_ScriptVarsWord         = 0;
+        g_AreaCameraAngle.vy     = 0;
+        g_AreaCameraAngle.vz     = 0x10E;
         Scene_SetupParty(0);
     }
     if (LOHU(g_GameAreaId) == AREA_ID_WYNDIA_WORLD_MAP && SYS_TestFlag(g_SceneFlags, 1) && !SYS_TestFlag(g_SceneFlags, 2)) {
@@ -570,8 +570,8 @@ NON_MATCHING void func_801F8E00(void) {
             D_80146258 |= 0x80;
             Scene_SetupParty(5);
             SYS_SetFlag(g_SceneFlags, 0x18);
-            g_SceneState.state_04 = 5;
-            g_SceneState.step_05  = 2;
+            g_ScenarioState.state_04 = 5;
+            g_ScenarioState.step_05  = 2;
         }
     }
     if (g_GameCellType == 1 && !SYS_TestFlag(g_SceneFlags, 0x17)) {
@@ -597,19 +597,19 @@ NON_MATCHING void func_801F8E00(void) {
             Scene_SetupParty(1);
             g_AreaDrawFlags = 0;
             SYS_SetFlag(g_SceneFlags, 0x1B);
-            g_SceneState.timer_06 = 30;
-            g_SceneState.state_04 = 6;
-            g_SceneState.step_05  = 6;
+            g_ScenarioState.timer_06 = 30;
+            g_ScenarioState.state_04 = 6;
+            g_ScenarioState.step_05  = 6;
         }
     }
-    g_SceneState.mode_02 = 2;
+    g_ScenarioState.mode_02 = 2;
 }
 #else
 INCLUDE_ASM(func_801F8E00);
 #endif
 
 MATCH void func_801F92F4(void) {
-    SYS_DISPATCH_BYTE(D_801FCFE0, g_SceneState.state_04);
+    SYS_DISPATCH_BYTE(D_801FCFE0, g_ScenarioState.state_04);
 }
 
 MATCH void func_801F9330(void) {

@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801FB1B4(void) {
     u8* progress;
 
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             if (D_801460FB != 0) {
                 break;
@@ -17,45 +17,45 @@ MATCH void func_801FB1B4(void) {
             }
             Scene_SetupParty(0xA);
             SYS_SetFlag(g_SceneFlags, 0x1D);
-            g_SceneState.state_04 = 0;
-            g_SceneState.step_05  = 0;
+            g_ScenarioState.state_04 = 0;
+            g_ScenarioState.step_05  = 0;
             break;
         case 4:
             Message_StartAreaMessage(MSG_001);
-            g_GameStateIndex     = 2;
-            g_SceneState.step_05 = 6;
+            g_GameStateIndex        = 2;
+            g_ScenarioState.step_05 = 6;
             break;
         case 5:
             Message_StartAreaMessage(MSG_078);
-            g_GameStateIndex     = 2;
-            g_SceneState.step_05 = 6;
+            g_GameStateIndex        = 2;
+            g_ScenarioState.step_05 = 6;
             break;
         case 6:
             if (g_GameStateIndex != 2) {
                 Game_ClearScriptActive();
-                g_SceneState.state_04 = 0;
-                g_SceneState.step_05  = 0;
+                g_ScenarioState.state_04 = 0;
+                g_ScenarioState.step_05  = 0;
             }
             break;
         case 8:
             progress = &g_ScriptVars[0];
             if (*progress == 0x28) {
-                *progress            = 0;
-                g_SceneState.step_05 = 0xA;
+                *progress               = 0;
+                g_ScenarioState.step_05 = 0xA;
             }
             break;
         case 10:
             if (g_GameStateIndex != 2) {
                 Game_RequestAreaChange(0x97, 0x360000, 0x1D0000, 3);
-                g_SceneState.step_05 = 0xB;
+                g_ScenarioState.step_05 = 0xB;
             }
             break;
         case 11:
             if (g_GameStateIndex == 0) {
                 SYS_SetFlag(g_SceneFlags, 0x1E);
                 Game_ClearScriptActive();
-                g_SceneState.state_04 = 0;
-                g_SceneState.step_05  = 0;
+                g_ScenarioState.state_04 = 0;
+                g_ScenarioState.step_05  = 0;
                 Scene_RequestChapterAdvance();
             }
             break;

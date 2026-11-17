@@ -5,7 +5,7 @@
 /* Refreshes the status-panel rows and the field-camera scroll: fills the row
  * buffer from the party records, then on scene 0x85 copies the per-row scroll
  * table and on scene 0x5C seeds a fixed scroll and its angle, priming
- * g_AreaScrollTargetX/0C unless the camera flag g_SceneState.flags_01 bit 6 is set.
+ * g_AreaScrollTargetX/0C unless the camera flag g_ScenarioState.flags_01 bit 6 is set.
  */
 MATCH void func_801DE944(void) {
     u8*  party;
@@ -50,7 +50,7 @@ MATCH void func_801DE944(void) {
             g_Game.members[0].pos.x.fixed += g_ShopFacingSteps[g_Game.members[0].facing].vx << 15;
             g_Game.members[0].pos.y.fixed += g_ShopFacingSteps[g_Game.members[0].facing].vy << 15;
         }
-        if (!(g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE)) {
+        if (!(g_ScenarioState.flags_01 & SCENARIO_STATE_SCRIPT_ACTIVE)) {
             g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;
             g_AreaScrollTargetY = g_Game.members[0].pos.y.fixed;
             Area_InitMapRenderer();
@@ -78,7 +78,7 @@ MATCH void func_801DE944(void) {
                 g_Game.members[i].pos.z.fixed = g_ShopBoatPartyPositions[i].vz;
             }
         }
-        if (!(g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE)) {
+        if (!(g_ScenarioState.flags_01 & SCENARIO_STATE_SCRIPT_ACTIVE)) {
             g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;
             g_AreaScrollTargetY = g_Game.members[0].pos.y.fixed;
             Area_InitMapRenderer();

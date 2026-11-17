@@ -13,13 +13,13 @@ MATCH void func_801FD1A4(void) {
     u16           countdown_value;
     u8            object_index;
 
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             if (g_ScriptVars[0] != 8) {
                 break;
             }
             Area_StartScrollRoute(0);
-            g_SceneState.step_05 = 1;
+            g_ScenarioState.step_05 = 1;
             g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
             break;
         case 1:
@@ -28,18 +28,18 @@ MATCH void func_801FD1A4(void) {
             if ((progress_value & 0xFF) != 0x14) {
                 break;
             }
-            *progress             = progress_value + 1;
-            g_SceneState.timer_06 = 0x78;
-            g_SceneState.step_05  = 2;
+            *progress                = progress_value + 1;
+            g_ScenarioState.timer_06 = 0x78;
+            g_ScenarioState.step_05  = 2;
             break;
         case 2:
-            countdown       = &g_SceneState.timer_06;
+            countdown       = &g_ScenarioState.timer_06;
             countdown_value = *countdown - 1;
             *countdown      = countdown_value;
             if (countdown_value != 0) {
                 break;
             }
-            g_SceneState.step_05 = 3;
+            g_ScenarioState.step_05 = 3;
             break;
         case 3:
             if (g_ScriptVars[0] != 0) {
@@ -53,7 +53,7 @@ MATCH void func_801FD1A4(void) {
             break;
         case 5:
             Scene_SetupParty(5);
-            g_SceneState.step_05 = 6;
+            g_ScenarioState.step_05 = 6;
             break;
         case 6:
             if (g_ScriptVars[0] != 5) {
@@ -67,11 +67,11 @@ MATCH void func_801FD1A4(void) {
                 record->type         = 0x5F;
                 record->header.mode  = 6;
             }
-            g_SceneState.timer_06 = 0x1E;
-            g_SceneState.step_05  = 7;
+            g_ScenarioState.timer_06 = 0x1E;
+            g_ScenarioState.step_05  = 7;
             break;
         case 7:
-            countdown       = &g_SceneState.timer_06;
+            countdown       = &g_ScenarioState.timer_06;
             countdown_value = *countdown - 1;
             *countdown      = countdown_value;
             if (countdown_value != 0) {
@@ -83,8 +83,8 @@ MATCH void func_801FD1A4(void) {
             SYS_SetFlag(g_SceneFlags, 0x10);
             Game_RequestAreaChange(0xF, TO_COORD_HALF(25), TO_COORD(81), 1);
         reset:
-            g_SceneState.state_04 = 0;
-            g_SceneState.step_05  = 0;
+            g_ScenarioState.state_04 = 0;
+            g_ScenarioState.step_05  = 0;
             break;
     }
 }

@@ -367,12 +367,12 @@ Callback D_801C843C[2] = {Game_StartFadeBlack, func_801A386C};
 u8 s_ScriptOpcodeLengths[16] = {0x11, 0x10, 0x13, 0x12, 0x11, 0x12, 0x10, 0x11,
                                 0x0C, 0x0D, 0x0E, 0x0E, 0x02, 0x04, 0x07, 0x00};
 
-SceneSlots* g_SceneScenes[20] = {
-    (SceneSlots*)&D_801FC9FC, (SceneSlots*)&D_801FE288, (SceneSlots*)&D_801FE274, (SceneSlots*)&D_801FCFC0,
-    (SceneSlots*)&D_801FA1F0, (SceneSlots*)&D_801FD5C8, (SceneSlots*)&D_801FE3C4, (SceneSlots*)&D_801FDDFC,
-    (SceneSlots*)&D_801FE950, (SceneSlots*)&D_801FE3CC, (SceneSlots*)&D_801FE880, (SceneSlots*)&D_801FAEDC,
-    (SceneSlots*)&D_801FD1A4, (SceneSlots*)&D_801FBF34, (SceneSlots*)&D_801FC404, (SceneSlots*)&D_801FE5F4,
-    (SceneSlots*)&D_801F8538, (SceneSlots*)&D_801F9728, (SceneSlots*)&D_801F6D58, (SceneSlots*)&D_801F6DBC};
+ScenarioHandlers* g_ScenarioHandlers[20] = {
+    (ScenarioHandlers*)&D_801FC9FC, (ScenarioHandlers*)&D_801FE288, (ScenarioHandlers*)&D_801FE274, (ScenarioHandlers*)&D_801FCFC0,
+    (ScenarioHandlers*)&D_801FA1F0, (ScenarioHandlers*)&D_801FD5C8, (ScenarioHandlers*)&D_801FE3C4, (ScenarioHandlers*)&D_801FDDFC,
+    (ScenarioHandlers*)&D_801FE950, (ScenarioHandlers*)&D_801FE3CC, (ScenarioHandlers*)&D_801FE880, (ScenarioHandlers*)&D_801FAEDC,
+    (ScenarioHandlers*)&D_801FD1A4, (ScenarioHandlers*)&D_801FBF34, (ScenarioHandlers*)&D_801FC404, (ScenarioHandlers*)&D_801FE5F4,
+    (ScenarioHandlers*)&D_801F8538, (ScenarioHandlers*)&D_801F9728, (ScenarioHandlers*)&D_801F6D58, (ScenarioHandlers*)&D_801F6DBC};
 
 Callback g_SceneSteps[2] = {Scene_ResetEventState, Scene_UpdateEvent};
 
@@ -388,7 +388,7 @@ Callback g_SceneEvents[64] = {func_801A7CE8, func_801F37E4, func_801F394C,      
                               func_801F3B4C, func_801F4F9C, func_801F4D14,       func_801F4164,           func_801F3D28,   func_801F33C8,           func_801F2E98,          func_801A852C,
                               func_801F30BC, func_801F2EA0, func_801F2D0C,       func_801F4A0C,           func_801F23A4,   func_801F3180,           func_801F2CF0,          func_801F3CD0};
 
-u8 s_SceneStateStepArgs[8] = {0x00, 0x00, 0x04, 0x04, 0x00, 0x00, 0x00, 0x00};
+u8 s_ScenarioStateStepArgs[8] = {0x00, 0x00, 0x04, 0x04, 0x00, 0x00, 0x00, 0x00};
 
 Callback D_801C85C4[11] = {Fishing_ShowLocation, func_801F2D18,        Fishing_ShowLocation, func_801F2C6C,        func_801F2C6C, func_801F3798,
                            func_801F2F0C,        Fishing_ShowLocation, func_801F2E1C,        Fishing_ShowLocation, func_801F2CA8};

@@ -18,11 +18,11 @@ MATCH void func_801F2C04(void) {
     *step = 5;
     SYS_SetFlag(step + 0x63D, 30);
 resume:
-    if (g_MessageChoice != 2 && g_SceneState.scenario_id == 8 && SYS_TestFlag(g_SceneFlags, 3) == 0) {
+    if (g_MessageChoice != 2 && g_ScenarioState.scenario_id == 8 && SYS_TestFlag(g_SceneFlags, 3) == 0) {
         g_SceneEventState.mode = 0;
         Game_SetScriptActive();
         Scene_SetupParty(2);
-        g_SceneState.state_04 = 2;
-        g_SceneState.step_05  = 0;
+        g_ScenarioState.state_04 = 2;
+        g_ScenarioState.step_05  = 0;
     }
 }

@@ -20,7 +20,7 @@ MATCH void func_801F3188(void) {
 
         if (g_GameAreaId == AREA_ID_BEFORE_MOUNT_GLAUS_BEFORE_NUE) {
             SYS_SetFlag(g_SceneEventFlags, 0x20);
-        } else if (g_SceneState.scenario_id < 7) {
+        } else if (g_ScenarioState.scenario_id < 7) {
             SYS_SetFlag(g_SceneEventFlags, 0x21);
         } else {
             SYS_SetFlag(g_SceneEventFlags, 0x22);

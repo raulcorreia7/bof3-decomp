@@ -7,7 +7,7 @@
 #include "overlays/area/world04.h"
 #include "area/spad.h"
 
-/* The scene state byte the update gates on. */
+/* The scenario state byte the update gates on. */
 /* The global state byte this entry tests. */
 /* The object pointer whose palette field this entry updates. */
 

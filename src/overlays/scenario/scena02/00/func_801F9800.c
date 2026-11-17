@@ -10,16 +10,16 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801F9800(void) {
     u8 slot;
 
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             Scene_SetupParty(6);
             Area_StartScrollRoute(2);
-            g_SceneState.step_05 = 1;
+            g_ScenarioState.step_05 = 1;
             break;
         case 1:
             if (g_ScriptVars[0] == 0x2B) {
                 func_801BFE34(TO_COORD(0x10), TO_COORD(7), 0xA);
-                g_SceneState.step_05 = 2;
+                g_ScenarioState.step_05 = 2;
             }
             break;
         case 2:
@@ -32,19 +32,19 @@ MATCH void func_801F9800(void) {
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = 0x260;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x14;
-                g_SceneState.step_05                                        = 3;
+                g_ScenarioState.step_05                                     = 3;
             }
             break;
         case 3:
             if (g_ScriptVars[0] == 0x2F) {
                 Battle_StartScripted(0xA);
-                g_SceneState.step_05 = 4;
+                g_ScenarioState.step_05 = 4;
             }
             break;
         case 4:
             if (g_ScriptVars[0] == 0x30) {
                 Scene_SetupParty(0x16);
-                g_SceneState.step_05 = 5;
+                g_ScenarioState.step_05 = 5;
             }
             break;
         case 5:
@@ -57,7 +57,7 @@ MATCH void func_801F9800(void) {
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = 0x200;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x14;
-                g_SceneState.step_05                                        = 6;
+                g_ScenarioState.step_05                                     = 6;
             }
             break;
         case 6:
@@ -66,7 +66,7 @@ MATCH void func_801F9800(void) {
                 SYS_SetFlag(g_SceneFlags, 0x13);
                 Game_ClearScriptActive();
                 SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
-                SCENE_RETURN_TO_START();
+                SCENARIO_RETURN_TO_START();
             }
             break;
     }

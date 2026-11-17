@@ -146,7 +146,7 @@ MATCH void func_801D1184(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D1250(s32 scene, s32 mode) {
-    g_SceneState.step_05 = scene + mode;
+    g_ScenarioState.step_05 = scene + mode;
 }
 #else
 INCLUDE_ASM(func_801D1250);

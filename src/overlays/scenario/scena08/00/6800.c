@@ -8,12 +8,12 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801FD400(void) {
     u8 slot;
 
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             Game_ClearScriptActive();
             Scene_SetupParty(1);
-            g_SceneState.state_04 = 0;
-            g_SceneState.step_05  = 0;
+            g_ScenarioState.state_04 = 0;
+            g_ScenarioState.step_05  = 0;
             break;
         case 10:
             slot                        = Actor_FindFreeSpawned();
@@ -25,7 +25,7 @@ MATCH void func_801FD400(void) {
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = 182;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x20;
-                g_SceneState.step_05                                        = 11;
+                g_ScenarioState.step_05                                     = 11;
             }
             break;
         case 11:
@@ -39,7 +39,7 @@ MATCH void func_801FD400(void) {
                     g_SpawnedActors[D_801FEA6C].camera_angle.y = g_AreaCameraAngle.vy;
                     g_SpawnedActors[D_801FEA6C].camera_angle.z = ANGLE_45;
                     g_SpawnedActors[D_801FEA6C].layer          = 0x20;
-                    g_SceneState.step_05                       = 12;
+                    g_ScenarioState.step_05                    = 12;
                 }
             }
             break;
@@ -47,8 +47,8 @@ MATCH void func_801FD400(void) {
             if ((g_SpawnedActors[D_801FEA6C].header.flags & ACTOR_FLAG_IN_USE) == 0) {
                 Game_ClearScriptActive();
                 SYS_SetFlag(g_SceneFlags, 0x14);
-                g_SceneState.state_04 = 0;
-                g_SceneState.step_05  = 0;
+                g_ScenarioState.state_04 = 0;
+                g_ScenarioState.step_05  = 0;
             }
             break;
     }
@@ -56,17 +56,17 @@ MATCH void func_801FD400(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801FD704(void) {
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             Game_ClearScriptActive();
-            g_SceneState.step_05 = 1;
+            g_ScenarioState.step_05 = 1;
             break;
         case 1:
             if (g_ScriptVars[0] != 1) {
                 break;
             }
             SYS_SetFlag(g_SceneFlags, 0x20);
-            g_SceneState.step_05 = 2;
+            g_ScenarioState.step_05 = 2;
             break;
         default:
             break;
@@ -93,23 +93,23 @@ MATCH void func_801FDF84(void) {
 MATCH void func_801FE058(void) {
     g_ScriptVars[0] = 0;
     Game_SetScriptActive();
-    g_SceneState.state_04 = 7;
-    g_SceneState.timer_06 = 32;
-    g_SceneState.step_05  = 0;
+    g_ScenarioState.state_04 = 7;
+    g_ScenarioState.timer_06 = 32;
+    g_ScenarioState.step_05  = 0;
 }
 
 MATCH void func_801FE0A0(void) {
     g_ScriptVars[0] = 0;
     Game_SetScriptActive();
-    g_SceneState.state_04 = 7;
-    g_SceneState.step_05  = 0xA;
+    g_ScenarioState.state_04 = 7;
+    g_ScenarioState.step_05  = 0xA;
 }
 
 MATCH void func_801FE0E0(void) {
     g_ScriptVars[0] = 0;
     Game_SetScriptActive();
-    g_SceneState.state_04 = 10;
-    g_SceneState.step_05  = 0;
+    g_ScenarioState.state_04 = 10;
+    g_ScenarioState.step_05  = 0;
     SYS_SetFlag(g_SceneFlags, 19);
 }
 
@@ -132,15 +132,15 @@ MATCH s32 func_801FE170(s32 x, s32 y) {
     if ((LOHU(g_GameAreaId) == AREA_ID_DAUNA_MINE_ADULT) && (x == TO_COORD(51) + COORD_HALF) && (((y >> 16) - 39) < 2U)) {
         if (SYS_TestFlag(g_SceneFlags, 6) == 0) {
             Game_SetScriptActive();
-            g_SceneState.state_04 = 4;
-            g_SceneState.step_05  = 5;
+            g_ScenarioState.state_04 = 4;
+            g_ScenarioState.step_05  = 5;
             return 1;
         }
         if (SYS_TestFlag(g_SceneFlags, 7) == 0) {
             Game_SetScriptActive();
-            *g_ScriptVars         = 0;
-            g_SceneState.state_04 = 5;
-            g_SceneState.step_05  = 0;
+            *g_ScriptVars            = 0;
+            g_ScenarioState.state_04 = 5;
+            g_ScenarioState.step_05  = 0;
             return 1;
         }
         goto block_7;

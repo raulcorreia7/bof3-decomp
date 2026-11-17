@@ -207,7 +207,7 @@ MATCH void func_801F7920(void) {
         g_Task->tint.bytes.rgb.g -= 2;
         g_Task->tint.bytes.rgb.b -= 2;
     } else {
-        counter           = &g_SceneState.step_05;
+        counter           = &g_ScenarioState.step_05;
         *counter          = *counter + 1;
         work->header.mode = 3;
     }
@@ -505,7 +505,7 @@ MATCH void func_801F8874(void) {
         work->tint.steps.delta.b = -1;
         work->tint.steps.delta.g = -1;
         work->tint.steps.delta.r = -1;
-        counter                  = &g_SceneState.step_05;
+        counter                  = &g_ScenarioState.step_05;
         *counter                 = *counter + 1;
         g_Task->header.mode      = 2;
     }
@@ -959,9 +959,9 @@ MATCH void func_801FA6BC(u8 point) {
     y = LOH(D_801FE608[row + 6]) << 8;
     g_Game.walk_flags &= ~AREA_WALK_ACCEPT_LOCK;
     func_801BFE34(x, y, D_801FE608[row + 9]);
-    g_AreaDrawMode        = GFX_LAYER_BATTLE_SCENE;
-    g_SceneState.state_04 = 2;
-    g_SceneState.step_05  = 0;
+    g_AreaDrawMode           = GFX_LAYER_BATTLE_SCENE;
+    g_ScenarioState.state_04 = 2;
+    g_ScenarioState.step_05  = 0;
 }
 
 #include "overlays/scenario/Scene_SpawnActor.h"
@@ -969,7 +969,7 @@ MATCH void func_801FA6BC(u8 point) {
 MATCH bool Scene_SpawnActor(u8 type, s16 angle_x, s16 angle_y, s16 angle_z, u8 layer, s32 scene_step){SCENE_SPAWN_ACTOR(D_801FE748)}
 
 MATCH void func_801FA998(void) {
-    SYS_DISPATCH_BYTE(D_801FE678, g_SceneState.state_04);
+    SYS_DISPATCH_BYTE(D_801FE678, g_ScenarioState.state_04);
 }
 
 MATCH void func_801FA9D4(void) {

@@ -12,8 +12,8 @@ MATCH s32 func_801F41F4(s32 entry_x, s32 entry_y) {
             return 0;
         }
         Game_SetScriptActive();
-        g_SceneState.state_04 = 5;
-        g_SceneState.step_05  = 0x14;
+        g_ScenarioState.state_04 = 5;
+        g_ScenarioState.step_05  = 0x14;
         return 1;
     }
     return 0;

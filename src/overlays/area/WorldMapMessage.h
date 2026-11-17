@@ -11,38 +11,38 @@ ASSERT_OFFSET(WorldMapMessageRow, seed, 0x00);
 ASSERT_OFFSET(WorldMapMessageRow, messages, 0x00);
 ASSERT_SIZE(WorldMapMessageRow, 0x20);
 
-#define WORLD_MAP_SHOW_MESSAGE(table, count)                                          \
-    {                                                                                 \
-        s32                 i;                                                        \
-        u16                 seed;                                                     \
-        WorldMapMessageRow* rows;                                                     \
-        s8*                 step;                                                     \
-        u8*                 counter;                                                  \
-                                                                                      \
-        step = &g_SceneEventState.step;                                               \
-        switch (*step) {                                                              \
-            case 0:                                                                   \
-                Game_SetScriptActive();                                               \
-                seed = g_GameEntryAreaId;                                             \
-                for (i = 0; i < (count); i++) {                                       \
-                    if (seed == (table)[i].seed) {                                    \
-                        break;                                                        \
-                    }                                                                 \
-                }                                                                     \
-                rows = (table);                                                       \
-                Message_StartAreaMessage(rows[i].messages[g_SceneState.scenario_id]); \
-                g_GameStateIndex = 2;                                                 \
-                counter          = (u8*)&g_SceneEventState.step;                      \
-                *counter += 1;                                                        \
-                break;                                                                \
-                                                                                      \
-            case 1:                                                                   \
-                if (g_GameStateIndex != 2) {                                          \
-                    Game_ClearScriptActive();                                         \
-                    g_SceneEventState.mode      = 0;                                  \
-                    *step                       = 0;                                  \
-                    g_SceneEventState.selection = 0;                                  \
-                }                                                                     \
-                break;                                                                \
-        }                                                                             \
+#define WORLD_MAP_SHOW_MESSAGE(table, count)                                             \
+    {                                                                                    \
+        s32                 i;                                                           \
+        u16                 seed;                                                        \
+        WorldMapMessageRow* rows;                                                        \
+        s8*                 step;                                                        \
+        u8*                 counter;                                                     \
+                                                                                         \
+        step = &g_SceneEventState.step;                                                  \
+        switch (*step) {                                                                 \
+            case 0:                                                                      \
+                Game_SetScriptActive();                                                  \
+                seed = g_GameEntryAreaId;                                                \
+                for (i = 0; i < (count); i++) {                                          \
+                    if (seed == (table)[i].seed) {                                       \
+                        break;                                                           \
+                    }                                                                    \
+                }                                                                        \
+                rows = (table);                                                          \
+                Message_StartAreaMessage(rows[i].messages[g_ScenarioState.scenario_id]); \
+                g_GameStateIndex = 2;                                                    \
+                counter          = (u8*)&g_SceneEventState.step;                         \
+                *counter += 1;                                                           \
+                break;                                                                   \
+                                                                                         \
+            case 1:                                                                      \
+                if (g_GameStateIndex != 2) {                                             \
+                    Game_ClearScriptActive();                                            \
+                    g_SceneEventState.mode      = 0;                                     \
+                    *step                       = 0;                                     \
+                    g_SceneEventState.selection = 0;                                     \
+                }                                                                        \
+                break;                                                                   \
+        }                                                                                \
     }

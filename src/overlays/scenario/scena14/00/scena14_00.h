@@ -15,7 +15,7 @@ extern u8  D_80145FF4;
 
 extern u8 D_80146134;
 
-/* kept: written as g_SceneState.flags_01, func_801F8850 changes size and the image symbols move. */
+/* kept: written as g_ScenarioState.flags_01, func_801F8850 changes size and the image symbols move. */
 extern u8 D_80146871;
 extern u8 D_801FC4C0;
 

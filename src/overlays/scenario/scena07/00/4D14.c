@@ -8,17 +8,17 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801FB914(void) {
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             Game_ClearScriptActive();
-            g_SceneState.step_05 = 1;
+            g_ScenarioState.step_05 = 1;
             break;
         case 1:
             if (g_ScriptVars[0] != 1) {
                 break;
             }
             SYS_SetFlag(g_SceneFlags, 0x20);
-            g_SceneState.step_05 = 2;
+            g_ScenarioState.step_05 = 2;
             break;
         default:
             break;
@@ -33,7 +33,7 @@ MATCH void func_801FC094(void) {
     u8 slot_index;
 
     for (i = 0; i < ARRAY_COUNT(D_801FDE40); i++) {
-        if (D_801FDE40[i].timer != g_SceneState.timer_06) {
+        if (D_801FDE40[i].timer != g_ScenarioState.timer_06) {
             continue;
         }
         slot_index = Actor_FindFreeSpawned();
@@ -52,7 +52,7 @@ MATCH void func_801FC094(void) {
 MATCH void func_801FC1C4(void) {
     u8* step;
 
-    step = &g_SceneState.step_05;
+    step = &g_ScenarioState.step_05;
     switch (*step) {
         case 0:
             func_8019FA28(0x35, 0x120000, 0x180000, 1);
@@ -70,8 +70,8 @@ MATCH void func_801FC1C4(void) {
                 func_8019FA28(0x58, 0x350000, 0x230000, 3);
                 g_GameFlags &= ~GAME_FLAG_SCROLL_LOCK;
                 Game_ClearScriptActive();
-                g_SceneState.state_04 = 0;
-                *step                 = 0;
+                g_ScenarioState.state_04 = 0;
+                *step                    = 0;
             }
             break;
     }
@@ -79,7 +79,7 @@ MATCH void func_801FC1C4(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801FC2D0(void) {
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             break;
         case 1:

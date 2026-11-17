@@ -39,9 +39,9 @@ MATCH s8 func_801F9DF4(s32 x, s32 y) {
                 Game_SetScriptActive();
                 SYS_SetFlag(g_SceneFlags, 2);
                 SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 4));
-                g_SceneState.timer_06 = 30;
-                g_SceneState.state_04 = 1;
-                g_SceneState.step_05  = 1;
+                g_ScenarioState.timer_06 = 30;
+                g_ScenarioState.state_04 = 1;
+                g_ScenarioState.step_05  = 1;
                 return 1;
             }
         }
@@ -51,21 +51,21 @@ MATCH s8 func_801F9DF4(s32 x, s32 y) {
         if (((x >> 16) - 0x57) < 4U && ((y >> 16) - 0xB) < 6U) {
             g_ScratchPad.cells.bytes[0] = g_Game.members[0].facing;
             if ((u8)(g_ScratchPad.cells.bytes[0] - 5) >= 2U && g_ScratchPad.cells.bytes[0] != 4) {
-                g_SceneState.state_04 = 1;
-                g_SceneState.step_05  = 0;
+                g_ScenarioState.state_04 = 1;
+                g_ScenarioState.step_05  = 0;
                 return Scene_ShowMessage(MSG_002);
             }
         }
         if (((y >> 16) - 0x18) < 2U && x == TO_COORD_HALF(77)) {
-            g_SceneState.state_04 = 1;
-            g_SceneState.step_05  = 0;
+            g_ScenarioState.state_04 = 1;
+            g_ScenarioState.step_05  = 0;
             return Scene_ShowMessage(MSG_003);
         }
         return 0;
     }
     if (SYS_TestFlag(g_SceneFlags, 7) == 0 && ((x >> 16) - 0x1F) < 3U && y == TO_COORD_HALF(36)) {
-        g_SceneState.state_04 = 1;
-        g_SceneState.step_05  = 0;
+        g_ScenarioState.state_04 = 1;
+        g_ScenarioState.step_05  = 0;
         return Scene_ShowMessage(MSG_038);
     }
     return 0;
@@ -77,9 +77,9 @@ MATCH s8 func_801F9DF4(s32 x, s32 y) {
 
 MATCH void func_801FA074(void) {
     Game_SetScriptActive();
-    g_SceneState.timer_06 = 0xA;
-    g_SceneState.state_04 = 2;
-    g_SceneState.step_05  = 0;
+    g_ScenarioState.timer_06 = 0xA;
+    g_ScenarioState.state_04 = 2;
+    g_ScenarioState.step_05  = 0;
 }
 
 MATCH void func_801FA0B4(void) {

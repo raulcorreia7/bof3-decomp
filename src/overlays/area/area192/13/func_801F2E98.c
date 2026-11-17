@@ -28,7 +28,7 @@ MATCH void func_801F2E98(void) {
 
                 SYS_SetFlag(g_SceneEventFlags, 0x82);
                 D_80144F54 = 0x1E0;
-                flag       = &g_SceneState.flags_01;
+                flag       = &g_ScenarioState.flags_01;
                 D_80146880 = 0;
                 D_80146881 = 0;
                 /* FAKE: barrier keeps the flag load below the zero stores. */
@@ -74,7 +74,7 @@ MATCH void func_801F2E98(void) {
                 *word = 0;
                 /* The scene-event flag block sits 0x122 bytes before the saved area byte. */
                 SYS_ClearFlag((u8*)word - 0x122, 0x77);
-                flag                   = &g_SceneState.flags_01;
+                flag                   = &g_ScenarioState.flags_01;
                 value                  = *flag;
                 g_SceneEventState.mode = SCENE_EVENT_NONE;
                 g_SceneEventState.step = 0;

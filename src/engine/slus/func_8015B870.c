@@ -22,12 +22,12 @@ MATCH s32 func_8015B870(u32 kind) {
         case 6:
             return g_ScriptVars[3];
         case 7:
-            /* FAKE: retail reads g_SceneState.state_04 as RecordKey. */
-            return (*(RecordKey*)&g_SceneState.state_04).sbyte;
+            /* FAKE: retail reads g_ScenarioState.state_04 as RecordKey. */
+            return (*(RecordKey*)&g_ScenarioState.state_04).sbyte;
         case 8:
             return g_GameCellType;
         case 9:
-            return g_SceneState.flags_01 & 0x1;
+            return g_ScenarioState.flags_01 & 0x1;
         case 10:
             return g_Task->script_pc;
         case 11:

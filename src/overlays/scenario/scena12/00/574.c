@@ -55,11 +55,11 @@ MATCH void func_801F7240(void) {
     SCENA12_STEP_COUNTER();
 }
 
-/* The statements of func_801F7348 and func_801F7518, byte-identical twins: unless a message is pending, the entry state is 4 or scene flag 0x2E is set, queue script step 5 with g_SceneState.step_05 = 0x19, raise the script-active flag and clear the work. */
+/* The statements of func_801F7348 and func_801F7518, byte-identical twins: unless a message is pending, the entry state is 4 or scene flag 0x2E is set, queue script step 5 with g_ScenarioState.step_05 = 0x19, raise the script-active flag and clear the work. */
 #define SCENA12_START_SCRIPT()                                                                                        \
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE && g_GameEntryState != 4 && SYS_TestFlag(g_SceneFlags, 0x2E) == 0) { \
-        g_SceneState.step_05  = 0x19;                                                                                 \
-        g_SceneState.state_04 = 5;                                                                                    \
+        g_ScenarioState.step_05  = 0x19;                                                                              \
+        g_ScenarioState.state_04 = 5;                                                                                 \
         g_GameFlags |= GAME_FLAG_SCRIPT_ACTIVE;                                                                       \
         Actor_Clear();                                                                                                \
     }
@@ -317,10 +317,10 @@ MATCH void func_801F7F64(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F7F78(void) {
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 0:
             Game_ClearScriptActive();
-            g_SceneState.step_05 = 1;
+            g_ScenarioState.step_05 = 1;
             break;
         default:
             break;
@@ -331,7 +331,7 @@ INCLUDE_ASM(func_801F7F78);
 #endif
 
 MATCH void func_801F886C(void) {
-    SYS_DISPATCH_BYTE(D_801FD1C4, g_SceneState.state_04);
+    SYS_DISPATCH_BYTE(D_801FD1C4, g_ScenarioState.state_04);
 }
 
 MATCH void func_801F88A8(void) {
@@ -341,7 +341,7 @@ MATCH void func_801F88B0(void) {
     u8* state;
     u8* script;
 
-    state = &g_SceneState.step_05;
+    state = &g_ScenarioState.step_05;
     switch (*state) {
         case 0xA:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -354,29 +354,29 @@ MATCH void func_801F88B0(void) {
             if (*script == 0xA) {
                 *script = 0;
                 Game_ClearScriptActive();
-                *state                = 0;
-                g_SceneState.state_04 = 0;
+                *state                   = 0;
+                g_ScenarioState.state_04 = 0;
             }
             return;
     }
 }
 
 MATCH void func_801F894C(void) {
-    switch (g_SceneState.step_05) {
+    switch (g_ScenarioState.step_05) {
         case 51:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                g_SceneState.step_05  = 0;
-                g_SceneState.state_04 = 0;
+                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.state_04 = 0;
             }
             break;
 
         case 50:
-            SCENE_MESSAGE_WAIT(MSG_006, 51);
+            SCENARIO_MESSAGE_WAIT(MSG_006, 51);
             break;
 
         case 60:
-            SCENE_MESSAGE_WAIT(MSG_007, 51);
+            SCENARIO_MESSAGE_WAIT(MSG_007, 51);
             break;
     }
 }

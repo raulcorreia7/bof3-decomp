@@ -7,8 +7,8 @@ MATCH void func_801F4350(void) {
         count = &g_ScriptWorkRecord->unk_7E;
         MESSAGE_REQUEST_CLEAR();
         *count += 1;
-        g_SceneState.state_04 = 0xD;
-        g_SceneState.step_05  = 8;
+        g_ScenarioState.state_04 = 0xD;
+        g_ScenarioState.step_05  = 8;
     } else {
         g_MessageRequest = MSG_053;
     }
