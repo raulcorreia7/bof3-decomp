@@ -53,10 +53,10 @@ NON_MATCHING void func_800A1D84(void) {
         Battle_ApplyFormationStats();
         if (g_Battle.party_count != 0) {
             do {
-                dst                         = i * BATTLE_PARTY_STRIDE + D_80145F20;
-                src                         = i * BATTLE_PARTY_STRIDE + (D_80145F20 + 0x20);
-                *(CopyBytes16*)(dst + 0x00) = *(CopyBytes16*)(src + 0x00);
-                *(CopyBytes16*)(dst + 0x10) = *(CopyBytes16*)(src + 0x10);
+                dst                    = i * BATTLE_PARTY_STRIDE + D_80145F20;
+                src                    = i * BATTLE_PARTY_STRIDE + (D_80145F20 + 0x20);
+                *(Cpy16u*)(dst + 0x00) = *(Cpy16u*)(src + 0x00);
+                *(Cpy16u*)(dst + 0x10) = *(Cpy16u*)(src + 0x10);
                 i += 1;
             } while ((u32)(i & BYTE_MASK) < (u8)g_Battle.party_count);
         }

@@ -4,11 +4,11 @@
  * battler blocks, copies the actor's stats and queues its message.
  */
 MATCH void func_801D43EC(void) {
-    CopyWords16 saved;
-    u16*        battle_flags;
-    u8          index;
-    s32         flags;
-    s32         slot;
+    Cpy16 saved;
+    u16*  battle_flags;
+    u8    index;
+    s32   flags;
+    s32   slot;
 
     battle_flags = &g_Battle.flags;
     if ((*battle_flags & 4) && D_801463C2 == 0) {
@@ -28,18 +28,18 @@ MATCH void func_801D43EC(void) {
             *battle_flags &= ~BATTLE_STATE_REPRISAL_DONE;
         }
         if (*battle_flags & BATTLE_STATE_REPRISAL_PENDING) {
-            saved                                    = *(CopyWords16*)&g_Battle.active_battler;
-            *(CopyWords16*)&g_Battle.active_battler  = *(CopyWords16*)&g_Battle.target_selector;
-            *(CopyWords16*)&g_Battle.target_selector = saved;
-            g_Battle.action_type                     = BATTLE_ACTION_ATTACK;
-            index                                    = g_Battle.active_battler;
+            saved                              = *(Cpy16*)&g_Battle.active_battler;
+            *(Cpy16*)&g_Battle.active_battler  = *(Cpy16*)&g_Battle.target_selector;
+            *(Cpy16*)&g_Battle.target_selector = saved;
+            g_Battle.action_type               = BATTLE_ACTION_ATTACK;
+            index                              = g_Battle.active_battler;
             if (index < 3) {
-                flags                     = g_Game.members[index].u.turn.damage_flags.value;
-                *(CopyBytes32*)D_801EC308 = *(CopyBytes32*)&g_Game.members[index].chr.stats;
+                flags                = g_Game.members[index].u.turn.damage_flags.value;
+                *(Cpy32u*)D_801EC308 = *(Cpy32u*)&g_Game.members[index].chr.stats;
             } else {
-                slot                      = index - 3;
-                flags                     = g_BattleEnemyBattlers[slot].turn.damage_flags.value;
-                *(CopyBytes32*)D_801EC308 = *(CopyBytes32*)&g_BattleEnemyBattlers[slot].stats;
+                slot                 = index - 3;
+                flags                = g_BattleEnemyBattlers[slot].turn.damage_flags.value;
+                *(Cpy32u*)D_801EC308 = *(Cpy32u*)&g_BattleEnemyBattlers[slot].stats;
             }
             Battle_QueueEvent(1, 0, 0, 0xF, (flags & BATTLER_DAMAGE_REPRISAL) ? (u8*)&D_801EB08F : (u8*)&D_801EB04E);
             g_BattleMessageState    = 1;

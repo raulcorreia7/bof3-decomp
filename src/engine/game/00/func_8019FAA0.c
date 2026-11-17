@@ -47,11 +47,11 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
     entry = (AreaLoad*)g_AreaLoads[g_GameAreaId];
     if (entry->matrix != 0) {
         SetColorMatrix((MATRIX*)entry->matrix);
-        entry                    = (AreaLoad*)g_AreaLoads[g_GameAreaId];
-        *(CopyBytes8*)D_801581E0 = *(CopyBytes8*)((u8*)entry->matrix + 0x20);
+        entry               = (AreaLoad*)g_AreaLoads[g_GameAreaId];
+        *(Cpy8u*)D_801581E0 = *(Cpy8u*)((u8*)entry->matrix + 0x20);
     } else {
         SetColorMatrix((MATRIX*)D_8018214C);
-        *(CopyBytes8*)D_801581E0 = *(CopyBytes8*)s_ScriptCopyBlock;
+        *(Cpy8u*)D_801581E0 = *(Cpy8u*)s_ScriptCopyBlock;
     }
 
     if ((g_SceneState.flags_01 & SCENE_STATE_CHAPTER_ADVANCE) != 0) {

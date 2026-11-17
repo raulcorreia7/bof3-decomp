@@ -10,26 +10,26 @@
  * and alignment are the whole contract, so the members carry no meaning. */
 
 /* Four aligned words: the 16-byte step of the block-move loop. */
-typedef struct CopyWords16 {
+typedef struct Cpy16 {
     u32 w[4];
-} CopyWords16;
+} Cpy16;
 
 /* 8, 16 and 32 bytes at byte alignment: copied with unaligned word pairs. */
-typedef struct CopyBytes8 {
+typedef struct Cpy8u {
     u8 b[8];
-} CopyBytes8;
+} Cpy8u;
 
-typedef struct CopyBytes16 {
+typedef struct Cpy16u {
     u8 b[16];
-} CopyBytes16;
+} Cpy16u;
 
-typedef struct CopyBytes32 {
+typedef struct Cpy32u {
     u8 b[32];
-} CopyBytes32;
+} Cpy32u;
 
-ASSERT_SIZE(CopyWords16, 0x10);
-ASSERT_SIZE(CopyBytes8, 0x8);
-ASSERT_SIZE(CopyBytes16, 0x10);
-ASSERT_SIZE(CopyBytes32, 0x20);
+ASSERT_SIZE(Cpy16, 0x10);
+ASSERT_SIZE(Cpy8u, 0x8);
+ASSERT_SIZE(Cpy16u, 0x10);
+ASSERT_SIZE(Cpy32u, 0x20);
 
 #endif

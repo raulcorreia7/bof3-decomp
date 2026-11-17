@@ -2,14 +2,14 @@
 
 MATCH void func_801E1EC0(void) {
     u32                   effect_slot;
-    CopyWords16*          src;
-    CopyWords16*          dst;
-    CopyWords16*          end;
+    Cpy16*                src;
+    Cpy16*                dst;
+    Cpy16*                end;
     volatile PartyMember* work;
 
     effect_slot = Battle_AllocEffect(0, 15);
-    dst         = (CopyWords16*)&g_BattleEffects[effect_slot & BYTE_MASK];
-    src         = (CopyWords16*)&BATTLE_ACTIVE_PARTY;
+    dst         = (Cpy16*)&g_BattleEffects[effect_slot & BYTE_MASK];
+    src         = (Cpy16*)&BATTLE_ACTIVE_PARTY;
     end         = src + 7;
     do {
         *dst = *src;

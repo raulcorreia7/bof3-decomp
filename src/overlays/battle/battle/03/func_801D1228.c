@@ -66,9 +66,9 @@ NON_MATCHING void func_801D1228(void) {
         row_offset = index * BATTLE_PARTY_STRIDE;
         src        = work_row + 0x90 + row_offset;
         if (ACTOR_IN_USE(g_Game.members[index])) {
-            dest                         = work_row + 0xB0 + row_offset;
-            *(CopyBytes16*)(dest)        = *(CopyBytes16*)(src);
-            *(CopyBytes16*)(dest + 0x10) = *(CopyBytes16*)(src + 0x10);
+            dest                    = work_row + 0xB0 + row_offset;
+            *(Cpy16u*)(dest)        = *(Cpy16u*)(src);
+            *(Cpy16u*)(dest + 0x10) = *(Cpy16u*)(src + 0x10);
             if ((u16) * (D_80145F18 + row_offset) < (u32)((u16) * (D_80145F20 + row_offset) >> 2)) {
                 flags = (s16)(*(u16*)(D_80145F10 + row_offset) | 0x2000);
             } else {
@@ -102,9 +102,9 @@ NON_MATCHING void func_801D1228(void) {
         row_offset = index * BATTLE_PARTY_STRIDE;
         dest       = D_80145F20 + row_offset;
         if (ACTOR_IN_USE(g_Game.members[index])) {
-            src                          = D_80145F20 + 0x20 + row_offset;
-            *(CopyBytes16*)(dest)        = *(CopyBytes16*)(src);
-            *(CopyBytes16*)(dest + 0x10) = *(CopyBytes16*)(src + 0x10);
+            src                     = D_80145F20 + 0x20 + row_offset;
+            *(Cpy16u*)(dest)        = *(Cpy16u*)(src);
+            *(Cpy16u*)(dest + 0x10) = *(Cpy16u*)(src + 0x10);
         }
         slot += 1;
         index = slot & BYTE_MASK;

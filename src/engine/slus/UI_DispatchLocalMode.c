@@ -6,13 +6,13 @@
  * mode. UI_SetMode arms this loop through CbRegister.
  */
 MATCH void UI_DispatchLocalMode(void) {
-    CopyWords16*       dst;
-    const CopyWords16* src;
-    const CopyWords16* end;
-    u32                callbacks[21];
+    Cpy16*       dst;
+    const Cpy16* src;
+    const Cpy16* end;
+    u32          callbacks[21];
 
-    dst = (CopyWords16*)callbacks;
-    src = (const CopyWords16*)g_UiLocalModes;
+    dst = (Cpy16*)callbacks;
+    src = (const Cpy16*)g_UiLocalModes;
     end = src + 5;
     do {
         *dst = *src;

@@ -5,13 +5,13 @@
  * callback selected by the current loader mode.
  */
 MATCH void EMI_CdUpdate(void) {
-    CopyWords16*       dst;
-    const CopyWords16* src;
-    const CopyWords16* end;
-    u32                callbacks[9];
+    Cpy16*       dst;
+    const Cpy16* src;
+    const Cpy16* end;
+    u32          callbacks[9];
 
-    dst = (CopyWords16*)callbacks;
-    src = (const CopyWords16*)g_EmiCdSteps;
+    dst = (Cpy16*)callbacks;
+    src = (const Cpy16*)g_EmiCdSteps;
     end = src + 2;
     do {
         *dst = *src;

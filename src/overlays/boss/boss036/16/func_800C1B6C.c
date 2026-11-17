@@ -7,9 +7,9 @@ MATCH void func_800C1B6C(void) {
     s32           enemy_index;
     u8*           effect_base;
     EnemyBattler* enemy_base;
-    CopyWords16*  src;
-    CopyWords16*  dst;
-    CopyWords16*  end;
+    Cpy16*        src;
+    Cpy16*        dst;
+    Cpy16*        end;
     u32*          record;
 
     record = (u32*)g_Task;
@@ -21,13 +21,13 @@ MATCH void func_800C1B6C(void) {
         FAKE_BARRIER();
         enemy_index = g_Battle.active_battler;
         effect_base = (u8*)g_BattleEffects;
-        dst         = (CopyWords16*)(effect_base + effect_offset);
+        dst         = (Cpy16*)(effect_base + effect_offset);
         enemy_base  = g_BattleEnemyBattlers;
         /* FAKE: retail reads the enemy base before applying the party offset. */
         FAKE_BARRIER();
         FAKE_BARRIER();
         enemy_index -= BATTLE_PARTY_CHARACTERS_COUNT;
-        src = (CopyWords16*)&enemy_base[enemy_index];
+        src = (Cpy16*)&enemy_base[enemy_index];
         end = src + 7;
         do {
             *dst = *src;
