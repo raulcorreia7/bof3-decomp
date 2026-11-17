@@ -50,11 +50,10 @@ NON_MATCHING void func_801EEC94(void) {
     }
     g_GfxPalettePending = 1;
     if (g_Battle.encounter != 0) {
-        enemy = g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT;
-        if (g_BattleEnemyBattlers[enemy].unk_F0 == 0x29) {
+        if (g_BattleEnemyBattlers[g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT].unk_F0 == 0x29) {
             slot                                = Battle_AllocEffect(1, 0x13) & BYTE_MASK;
-            effect                              = &g_BattleEffects[slot];
             enemy                               = g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT;
+            effect                              = &g_BattleEffects[slot];
             row                                 = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
             *(BattleWorkImage*)effect           = *row;
             g_BattleEffects[slot].header.mode   = 3;
