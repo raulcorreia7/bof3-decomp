@@ -1,0 +1,16 @@
+/* area157's code in link order: one translation unit for the whole .text run. */
+#include "area157_13.h"
+
+#include "func_801F2C04.c"
+#include "func_801F2C48.c"
+#include "Actor_AdvanceWhenPartyNear.c"
+#include "Actor_SlideScreenX.c"
+#include "Actor_AdvanceWhenPartyAway.c"
+#include "Actor_SlideScreenDown.c"
+#include "Area_Update.c"
+#include "func_801F3440.c"
+#include "func_801F3484.c"
+#include "func_801F35E0.c"
+#include "func_801F3718.c"
+#include "func_801F3760.c"
+#include "func_801F3864.c"

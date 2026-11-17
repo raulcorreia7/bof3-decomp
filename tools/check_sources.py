@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """Fail when a tracked source under src/ is not a row of its image's Splat layout.
 
-The layout rows are the build graph: a source no row names is never compiled. When it holds a
+The layout rows are the build graph: a source no row names is never compiled. A row's source may
+include function sources (a translation unit); those count as named. When it holds a
 function the image also defines, the build links the copy in the image's unit, and the progress
 report asks for an object that was never made.
 """
 
 from __future__ import annotations
 
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -45,6 +47,20 @@ def layout_names(document: dict) -> set[str]:
     return names
 
 
+#: A function source that a translation unit pulls in as ``#include "Name.c"``.
+INCLUDED_SOURCE = re.compile(r'^\s*#\s*include\s+"([^"/]+)\.c"', re.MULTILINE)
+
+
+def included(root: Path, folder: str, names: set[str]) -> set[str]:
+    """Return the source stems that the rows' own sources include as ``.c`` files."""
+    stems: set[str] = set()
+    for name in names:
+        source = root / "src" / folder / f"{name}.c"
+        if source.is_file():
+            stems.update(INCLUDED_SOURCE.findall(source.read_text(encoding="utf-8")))
+    return stems
+
+
 def images(root: Path) -> dict[str, tuple[str, set[str]]]:
     """Return each source folder under src/ with its layout and the source stems it names."""
     found: dict[str, tuple[str, set[str]]] = {}
@@ -53,9 +69,11 @@ def images(root: Path) -> dict[str, tuple[str, set[str]]]:
         src_path = document.get("options", {}).get("src_path")
         if not src_path:
             continue
-        found[src_path.removeprefix("src/")] = (
+        folder = src_path.removeprefix("src/")
+        names = layout_names(document)
+        found[folder] = (
             splat.relative_to(root).as_posix(),
-            layout_names(document),
+            names | included(root, folder, names),
         )
     return found
 

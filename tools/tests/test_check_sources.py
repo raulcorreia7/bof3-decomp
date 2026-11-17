@@ -57,3 +57,25 @@ def test_the_source_folder_comes_from_the_layout_options(tmp_path: Path) -> None
     assert images(tmp_path) == {
         "overlays/test/arc/00": ("config/emi/test/arc/00/splat.yaml", {"a"})
     }
+
+
+def test_a_source_a_unit_includes_counts_as_named(tmp_path: Path) -> None:
+    layout = tmp_path / "config/emi/test/arc/00/splat.yaml"
+    layout.parent.mkdir(parents=True)
+    layout.write_text(
+        "options:\n  src_path: src/overlays/test/arc/00\n"
+        "segments:\n"
+        "  - type: code\n"
+        "    start: 0\n"
+        "    subsegments:\n"
+        "      - [0x0, c, arc_00]\n"
+    )
+    unit = tmp_path / "src/overlays/test/arc/00/arc_00.c"
+    unit.parent.mkdir(parents=True)
+    unit.write_text('#include "arc_00.h"\n#include "first.c"\n#include "second.c"\n')
+    assert images(tmp_path) == {
+        "overlays/test/arc/00": (
+            "config/emi/test/arc/00/splat.yaml",
+            {"arc_00", "first", "second"},
+        )
+    }
