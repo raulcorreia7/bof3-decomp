@@ -309,15 +309,15 @@ MATCH void func_801D211C(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D2190(void) {
-    s8*           selected;
-    volatile s32* tally;
-    s32           value;
-    s32           maximum;
+    s8*  selected;
+    s32* tally;
+    s32  value;
+    s32  maximum;
 
     Menu_DrawClutStrip(D_80144953);
     func_801D2304(55, 55);
     selected = &D_80148658;
-    tally    = D_801D8F00;
+    tally    = FAKE_VOLATILE_PTR(s32, D_801D8F00);
     if (*selected < 6) {
         tally[*selected] += D_801D8778[*selected];
         value   = tally[*selected];
@@ -369,9 +369,9 @@ NON_MATCHING void func_801D2304(s32 x, s32 y) {
     do {
         UI_DrawText((s16)(left + 6), (s16)(top + (i << 5) + 0x1E), 0, 0xFF, Message_GetText(0xE8 + i));
         UI_DrawText((s16)(left + 0x94), (s16)(top + (i << 5) + 0x1E), 0, 0xFF, Message_GetText(0xEB + i));
-        sprintf(g_UiFormatBuffer, D_801D0C18, ((volatile s32*)D_801D8F00)[i]);
+        sprintf(g_UiFormatBuffer, D_801D0C18, FAKE_VOLATILE_PTR(s32, D_801D8F00)[i]);
         UI_DrawAsciiString((s16)(left + 0x1E), (s16)(top + (i << 5) + 0x2B), 0, g_UiFormatBuffer);
-        sprintf(g_UiFormatBuffer, D_801D0C1C, ((volatile s32*)D_801D8F0C)[i]);
+        sprintf(g_UiFormatBuffer, D_801D0C1C, FAKE_VOLATILE_PTR(s32, D_801D8F0C)[i]);
         UI_DrawAsciiString((s16)(left + 0x94), (s16)(top + (i << 5) + 0x2B), 0, g_UiFormatBuffer);
         func_801D26E0((s16)(left + 0x94), (s16)(top + (i << 5) + 0x2B));
         i++;
