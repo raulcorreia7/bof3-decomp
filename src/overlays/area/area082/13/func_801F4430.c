@@ -2,8 +2,8 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F4430(void) {
-    SVECTOR   pos;
     SVECTOR   rot;
+    SVECTOR   pos;
     MATRIX    matrix;
     long      flag;
     long      depth;
@@ -17,7 +17,7 @@ NON_MATCHING void func_801F4430(void) {
 
     pos.vx = g_Task->pos.x.fixed;
     pos.vy = g_Task->pos.y.fixed;
-    pos.vz = COORD_INT(g_Task->pos.z);
+    pos.vz = g_Task->pos.z.fixed;
     rot.vz = g_Task->unk_32;
     rot.vy = 0;
     rot.vx = 0;

@@ -1,13 +1,14 @@
 #include "area048_13.h"
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801F3AE4(s32 angle, s32 pos, s32 variant) {
+NON_MATCHING void func_801F3AE4(u32 angle, s32 pos, s32 variant) {
     SVECTOR   trans;
     SVECTOR   rot;
     MATRIX    matrix;
     long      flag;
     long      depth;
     POLY_FT4* prim;
+    u32*      entry;
     u32       word;
     s32       i;
     s32       j;
@@ -22,11 +23,12 @@ NON_MATCHING void func_801F3AE4(s32 angle, s32 pos, s32 variant) {
     PushMatrix();
     RotTransMatrix(&trans, matrix, &flag);
     Camera_SetModelMatrix(&rot, &matrix);
-    for (i = 0; i < 8; i++) {
+    entry = &D_801F4DF4[variant & 1];
+    for (i = 0; i < 8; i++, entry += 2) {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
         SetShadeTex(prim, 0);
-        word = D_801F4DF4[i * 2 + (variant & 1)];
+        word = *entry;
         if (word == 0) {
             continue;
         }
@@ -39,7 +41,7 @@ NON_MATCHING void func_801F3AE4(s32 angle, s32 pos, s32 variant) {
         }
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                       &depth, &flag);
-        word = D_801F4DF4[i * 2 + (variant & 1)];
+        word = *entry;
         if ((word & 0xF80000) == 0) {
             word |= (((angle >> 5) & 0x38) + 0x50) << 16;
         }
