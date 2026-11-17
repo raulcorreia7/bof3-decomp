@@ -2,7 +2,7 @@
 
 char D_80195F0C[4] = "%d";
 
-FieldSearchSpotAltSteps D_80195F10 = {
+ZennySpotAltSteps D_80195F10 = {
     func_801AD4DC,
     func_801AD0EC,
     func_801AD184,
