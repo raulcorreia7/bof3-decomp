@@ -5,7 +5,8 @@ extern s8 D_80148656;
 /* The stride of one D_801CA71E kind entry. */
 #define START08_TYPE_STRIDE 0x14
 
-MATCH void func_801D8908(void) {
+/* func_801D8908 */
+MATCH void Menu_ReorderSkills(void) {
     SkillOrder* rec;
     u8*         table;
     u8*         entry;
