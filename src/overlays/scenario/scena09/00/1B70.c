@@ -4,7 +4,12 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F8D30(void) {
+}
+#else
 INCLUDE_ASM(func_801F8D30);
+#endif
 
 MATCH void func_801F9354(void) {
     u8* step = &g_SceneState.step_05;
@@ -50,7 +55,12 @@ MATCH void func_801F9354(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F9498(void) {
+}
+#else
 INCLUDE_ASM(func_801F9498);
+#endif
 
 MATCH void func_801FA08C(void) {
     u8* step = &g_SceneState.step_05;
@@ -88,7 +98,12 @@ MATCH void func_801FA08C(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801FA1F0(void) {
+}
+#else
 INCLUDE_ASM(func_801FA1F0);
+#endif
 
 MATCH void func_801FA8B8(void) {
     u8 slot;
@@ -246,7 +261,12 @@ MATCH void func_801FAC88(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801FAE0C(void) {
+}
+#else
 INCLUDE_ASM(func_801FAE0C);
+#endif
 
 MATCH void func_801FBC78(void) {
     u8* step = &g_SceneState.step_05;
@@ -278,7 +298,12 @@ MATCH void func_801FBD0C(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801FBD6C(void) {
+}
+#else
 INCLUDE_ASM(func_801FBD6C);
+#endif
 
 MATCH void func_801FC588(void) {
 }
@@ -381,7 +406,12 @@ MATCH void func_801FC8E4(void) {
     g_SceneState.step_05  = 0x28;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801FC91C(void) {
+}
+#else
 INCLUDE_ASM(func_801FC91C);
+#endif
 
 MATCH s32 func_801FD278(void) {
     return 0;

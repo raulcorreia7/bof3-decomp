@@ -261,7 +261,12 @@ MATCH void func_801EF930(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801EF984(void) {
+}
+#else
 INCLUDE_ASM(func_801EF984);
+#endif
 
 MATCH void func_801EFCC8(void) {
     POLY_FT4* poly;

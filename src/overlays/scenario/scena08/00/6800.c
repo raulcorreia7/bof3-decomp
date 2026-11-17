@@ -132,7 +132,12 @@ block_7:
     return 0;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801FE2A0(void) {
+}
+#else
 INCLUDE_ASM(func_801FE2A0);
+#endif
 
 /* func_801FE698 */
 MATCH void Scene_SetPartyWhelp(void) {

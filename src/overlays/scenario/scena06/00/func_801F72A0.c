@@ -18,7 +18,12 @@ MATCH void func_801F72D4(void) {
     D_80146872 = 1;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F7300(void) {
+}
+#else
 INCLUDE_ASM(func_801F7300);
+#endif
 
 MATCH void func_801F7A00(void) {
     SYS_DISPATCH_BYTE(D_801FE3E4, g_SceneState.state_04);
