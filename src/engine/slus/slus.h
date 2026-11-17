@@ -200,9 +200,9 @@ ASSERT_SIZE(MenuState, 0x10);
 /* The spill offsets and the 0x40 extent are retail reads: the decoder stores s0-s7 with `sw s0..s7, 0x20..0x3C($t0)` on the context base. */
 typedef struct EMIDecodeContext {
     u8* dst;        /* 0x00 decompressed output cursor */
-    u32 unk04;      /* 0x04 not referenced by the decoder */
+    u32 unk_04;     /* 0x04 not referenced by the decoder */
     u8* src;        /* 0x08 input cursor; match source while state is 12 */
-    u32 unk0C;      /* 0x0C cleared by the initialiser, never read */
+    u32 unk_0C;     /* 0x0C cleared by the initialiser, never read */
     u32 state;      /* 0x10 resume state, stored as state * 4 (table offset) */
     u32 pending;    /* 0x14 saved control byte or pending run length */
     u8* limit;      /* 0x18 end of the scratchpad input window */
@@ -229,7 +229,7 @@ typedef struct SpriteCell {
 typedef struct PanelSortItem {
     u8* primitive; /* 0x00 */
     u16 z;         /* 0x04 - largest projected z of the quad; `lh` reads */
-    u16 z0;        /* 0x06 - copy of z; bit 15 is the live-row tag */
+    u16 tagged_z;  /* 0x06 - copy of z; bit 15 is the live-row tag */
     u8* work;      /* 0x08 */
 } PanelSortItem;
 
@@ -247,7 +247,7 @@ ASSERT_SIZE(PanelSortDepth, 0xC);
  * the rate byte at +0x12 and the volume/pan pair at +0x74/+0x76. Both models
  * end at 0xAC; the fields they cover do not overlap, so one record keeps both
  * spellings and the bytes between them stay unnamed. */
-typedef struct SoundSequence {
+typedef struct SoundVoice {
     u8  pad_00[4];    /* +0x00 */
     u8* cursor;       /* +0x04 byte stream cursor */
     u8  pad_08[0x0A]; /* +0x08 */
@@ -258,7 +258,7 @@ typedef struct SoundSequence {
     u8  pad_78[8];    /* +0x78 */
     s32 accum;        /* +0x80 */
     u8  pad_84[0x28]; /* +0x84 */
-} SoundSequence;
+} SoundVoice;
 
 /* Stack snapshots of the fixed dispatch tables the step handlers copy to the frame and index: Message_DispatchState/func_801510DC copy the eight-entry tables at g_MessageStateSteps/D_80149A7C, func_80151538/Message_DispatchChoiceMode the six-entry tables at D_80149A9C/g_MessageChoiceModes, func_8015196C/func_80151A98 build the two-entry tables on the stack, and g_MessageSteps is the sixteen-entry handler table Message_DispatchStep copies. */
 typedef struct {
