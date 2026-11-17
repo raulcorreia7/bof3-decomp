@@ -513,94 +513,95 @@ extern u8                                D_801460F2;
 /* FAKE: g_Battle.ui_step as a global of its own; the sites that use it match only with a separate symbol. */
 extern volatile u8                       g_BattleUIStep;
 
-extern BattleSelectionState D_801462F0_state;
+extern BattleSelectionState      D_801462F0_state;
 /* FAKE: g_Battle.active_battler as a global of its own; the sites that use it match only with a separate symbol. */
-extern volatile u8          g_BattleActiveBattler;
+extern volatile u8               g_BattleActiveBattler;
 /* Per-access views of a symbol at the same address, named by an `alias = true` row in config/symbols.toml (this image's
  * table or battle/battle/03's). Units that need retail's separate %hi/%lo pair for one cell use them; a cast of the
  * canonical symbol merges the pair and changes the bytes. */
-extern u8                   g_BattleActiveBattler_nv;
+extern u8                        g_BattleActiveBattler_nv;
 /* FAKE: g_Battle.target as a global of its own; the sites that use it match only with a separate symbol. */
-extern volatile u8          g_BattleTarget;
-extern u8                   g_BattleTarget_nv;
-extern u16                  D_801463B4;
-extern u8                   D_801463D6;
+extern volatile u8               g_BattleTarget;
+extern u8                        g_BattleTarget_nv;
+extern u16                       D_801463B4;
+extern u8                        D_801463D6;
 /* D_801463D8 */
 /* D_80148570 */
-extern volatile u8          g_BattleChoicePanel[];
+extern volatile u8               g_BattleChoicePanel[];
 /* First byte of g_BattleChoicePanel (0x80148570). The original stores it
  * through a scalar symbol, which emits the direct %lo store form; indexing the
  * array symbol would materialize its address in a register instead. */
 /* First byte of g_BattleChoicePanel (0x80148570); a scalar symbol emits the
  * direct %lo store form. */
-extern volatile u8          g_BattleSelectionHead;
-extern u8                   D_80148571;
-extern u8                   D_80148572;
-extern u16                  D_80148576;
-extern s16                  D_80148582;
-extern u8                   D_80148594;
-extern u8                   D_80148595;
-extern u8                   D_80148596;
-extern u16                  D_80148598;
-extern u16                  D_8014859A;
-extern u8                   D_8014859D;
-extern u8                   D_801485A1;
-extern volatile u8          D_801485B8;
-extern s8                   D_801485B9;
-extern s8                   D_801485BA;
-extern s16                  D_801485BC;
-extern s16                  D_801485BE;
-extern s8                   D_801485C5;
-extern s16                  D_801485CA;
-extern u8*                  D_801485D8;
-extern volatile u8          D_801485DD;
-extern volatile u8          D_801485DE;
-extern volatile u8          D_801485DF;
-extern volatile u16         D_801485EC;
-extern s16                  D_801485EE;
-extern volatile s16         D_80148628;
-extern volatile u16         D_8014862A;
-extern volatile u8          D_8014862F;
-extern volatile u8          D_80148654;
-extern u8                   D_80148656;
+extern volatile u8               g_BattleSelectionHead;
+extern u8                        D_80148571;
+extern u8                        D_80148572;
+extern u16                       D_80148576;
+extern s16                       D_80148582;
+extern u8                        D_80148594;
+extern u8                        D_80148595;
+extern u8                        D_80148596;
+extern u16                       D_80148598;
+extern u16                       D_8014859A;
+extern u8                        D_8014859D;
+extern u8                        D_801485A1;
+extern volatile u8               D_801485B8;
+extern s8                        D_801485B9;
+extern s8                        D_801485BA;
+extern s16                       D_801485BC;
+extern s16                       D_801485BE;
+extern s8                        D_801485C5;
+extern s16                       D_801485CA;
+extern u8*                       D_801485D8;
+extern volatile u8               D_801485DD;
+extern volatile u8               D_801485DE;
+extern volatile u8               D_801485DF;
+extern volatile u16              D_801485EC;
+extern s16                       D_801485EE;
+extern volatile s16              D_80148628;
+extern volatile u16              D_8014862A;
+extern volatile u8               D_8014862F;
+extern volatile u8               D_80148654;
+extern u8                        D_80148656;
 /* Proven game-RAM base for battle state (0x80140000). func_800A4458 already
  * references it through a local extern of this exact type. */
 /* Handle ring slot array: one u32 per 8-byte record (func_800A60DC writes
  * D_801EB5B4 + ((D_801EC328 - 1) & 0xF) * 8). */
-extern volatile u8          D_80150000[];
-extern u8*                  D_801C893C[];
-extern u8*                  D_801C8950[];
-extern char                 g_MenuInventoryCountFormat[];
-extern u8                   D_801C90ED[];
+extern volatile u8               D_80150000[];
+extern u8*                       D_801C893C[];
+extern u8*                       D_801C8950[];
+extern char                      g_MenuInventoryCountFormat[];
+extern u8                        D_801C90ED[];
 /* Selection-kind table base; byte 0 of each stride-0x14 entry holds the flags.
  */
 /* Selection-kind flag table base: byte 0 of the kind entry holds the flags. */
-extern u8                   D_801CA718[];
-extern u8                   D_801CA719[];
-extern u8                   D_801CAF13;
-extern u8                   D_801CD78E[];
-extern u32                  D_801EB082;
-extern u8                   D_801EB3DC[];
+extern u8                        D_801CA718[];
+extern u8                        D_801CA719[];
+extern u8                        D_801CAF13;
+extern u8                        D_801CD78E[];
+extern u32                       D_801EB082;
+extern u8                        D_801EB3DC[];
+extern BattleStatDisplayTemplate D_801EBEF0;
 /* Battler base halfwords, one u16 per 0x118-byte enemy row. */
-extern u8                   D_801EBEFA; /* Nine-slot affinity mirror in the high battle block. */
-extern u8                   D_801EBEFB;
-extern u8                   D_801EBEFC;
-extern u8                   D_801EBEFD;
-extern u8                   D_801EBEFE;
-extern u8                   D_801EBEFF;
-extern u8                   D_801EBF00;
-extern u8                   D_801EBF01;
-extern u8                   D_801EBF02;
+extern u8                        D_801EBEFA; /* Nine-slot affinity mirror in the high battle block. */
+extern u8                        D_801EBEFB;
+extern u8                        D_801EBEFC;
+extern u8                        D_801EBEFD;
+extern u8                        D_801EBEFE;
+extern u8                        D_801EBEFF;
+extern u8                        D_801EBF00;
+extern u8                        D_801EBF01;
+extern u8                        D_801EBF02;
 /* Alternate local work entries (stride 0x140) and their paired status words. */
-extern u8                   D_801EC2E8[];
-extern volatile s16         D_801EC2EE;
-extern volatile u16         D_801EC2F2;
-extern volatile u16         D_801EC30C;
-extern u16                  D_801EC30E;
-extern volatile u16         D_801EC310;
-extern volatile u16         D_801EC312;
+extern u8                        D_801EC2E8[];
+extern volatile s16              D_801EC2EE;
+extern volatile u16              D_801EC2F2;
+extern volatile u16              D_801EC30C;
+extern u16                       D_801EC30E;
+extern volatile u16              D_801EC310;
+extern volatile u16              D_801EC312;
 /* D_801EC364 */
-extern BattleTemplateStats  g_BattleTemplateStats[]; /* 0x801EC364 */
+extern BattleTemplateStats       g_BattleTemplateStats[]; /* 0x801EC364 */
 
 /* The battle program's handler tables call these functions. */
 void        func_80096F3C(void);
@@ -798,6 +799,7 @@ void        func_8009B794(void);
 void        func_8009B828(void);
 void        func_8009B964(void);
 u8          func_8009BACC(s32 diff);
+bool        func_8009C794(s32 skip_slot, s32 row_index);
 /* func_8009C8AC */
 u8          Battle_ActionHasElement(u16 required_mask);
 /* func_8009CCBC */
@@ -982,6 +984,8 @@ s32         func_801DD7D8(s32 low_bound, s32 high_bound, s32 current);
  * func_801DE0AC.c). Its retail body multiplies $a0 by $a1 and reads no other
  * argument, and every call site in this target passes two words, so the
  * helper takes two parameters. */
+/* Multiplies a permanent stat by its dragon form percentage. */
+s16         func_801DE0F8(s32 base, s32 percent);
 /* Multiplies its inputs and divides by 100. */
 s16         func_801DE144(s32 amount, s32 percent);
 /* func_801DE8C0 */

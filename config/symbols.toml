@@ -336,6 +336,7 @@ g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running e
 g_BattleEnemyBattlers = { addr = 0x801EB630, alias = true }
 D_801EB6DA = { addr = 0x801EB6DA, size = 0x2, source = "Halfword cell written by Battle_RescaleStats and read by func_8009F010" }
 D_801EB72C_rows = { addr = 0x801EB72C, alias = true, source = "enemy battler rows read through EnemyBattler fields since #495" }
+D_801EBEF0 = { addr = 0x801EBEF0, type = "BattleStatDisplayTemplate", size = 0x18, source = "Stat display template immediately before g_BattleMessageSlot; func_800A4458 reads it and func_800A7C14 writes the dragon form stats." }
 s_BattleBattlerTemplates = { addr = 0x801EBF20, alias = true }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
 g_BattleTemplateStats = { addr = 0x801EC364, source = "Template stat rows of the battlers." }
@@ -659,6 +660,7 @@ BMagic_DispatchEffectMode = { addr = 0x801EEF48, type = "func", source = "Runs t
 Effect_CountUpTimersAndStep = { addr = 0x801EF114, type = "func", source = "Counts the effect timer (byte 0x09) and counter (byte 0x0A) up and advances header.step (byte 0x02) when the counter reaches 16 in magic040 (Enlighten)." }
 Effect_CountUpAndStepAt32 = { addr = 0x801EF180, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 32 in magic040 (Enlighten)." }
 Effect_CountDownTimer = { addr = 0x801EF1D0, type = "func", source = "Raises the effect timer (byte 0x09) by 1, counts the effect counter (byte 0x0A) down and at zero lowers the active battler's ticker (byte 0x0B) and clears the effect in magic040 (Enlighten)." }
+BMagic_DrawShrinkingRing = { addr = 0x801EFA3C, type = "func", size = 0x230, source = "Draws 32 additive LINE_F2 segments in the shrinking gray ring around the effect in magic040 (Enlighten)." }
 g_BMagicEffectModes = { addr = 0x801EFC6C, source = "Handlers of magic040 (Enlighten), run by header.mode (byte 0x01)." }
 
 ["emi/bmagic/magic041/03"]

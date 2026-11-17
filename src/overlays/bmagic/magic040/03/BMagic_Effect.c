@@ -115,7 +115,7 @@ MATCH void func_801EF248(void) {
     handlers[g_Task->header.step]();
     if (g_Task->header.flags & 0x1) {
         if (g_Task->header.step != 0) {
-            func_801EFA3C();
+            BMagic_DrawShrinkingRing();
         }
     }
 }
@@ -186,8 +186,7 @@ MATCH void func_801EF7FC(void) {
     EFFECT_DRAW_GLOW_FAN(g_Task->timer, 0x80);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EFA3C(void) {
+MATCH void BMagic_DrawShrinkingRing(void) {
     LINE_F2* line;
     s32      tpage;
     s32      i;
@@ -215,6 +214,3 @@ NON_MATCHING void func_801EFA3C(void) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
 }
-#else
-INCLUDE_ASM(func_801EFA3C);
-#endif
