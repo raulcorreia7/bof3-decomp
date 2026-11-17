@@ -20,6 +20,7 @@ NON_MATCHING void func_801E2E90(s32 x, s32 y, s32 row_index) {
     LINE_F2*      line;
     s32           index;
     u8            icon;
+    s32           text_left;
     u32           sel = (u32)&g_WindowStyle;
 
     table = *(MenuPanelRows*)&D_801D0E28;
@@ -30,7 +31,8 @@ NON_MATCHING void func_801E2E90(s32 x, s32 y, s32 row_index) {
     UI_DrawWindow(x & HALF_MASK, y & HALF_MASK, 84, 16, 0, *(u8*)sel);
     icon = *row;
     row++;
-    UI_DrawText((s16)((x + 32) - icon * 4), (s16)(y + 1), 0, 6U, row);
+    text_left = x + 32;
+    UI_DrawText((s16)(text_left - icon * 4), (s16)(y + 1), 0, 6U, row);
     if (index != 1) {
         Message_GetText((u8)row_index + 0xCA);
     } else {
