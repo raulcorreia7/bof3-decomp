@@ -3934,7 +3934,11 @@ Menu_DispatchStep = { addr = 0x801D1740, type = "func", source = "Entry of the s
 Menu_SwapBytes = { addr = 0x801D4A30, type = "func", source = "Swaps the two bytes that two pointers address; the start callers pass entries of D_801C893C and D_801C8950, adjacent rows or mirrored pairs." }
 Menu_SwapBytes2 = { addr = 0x801D6668, type = "func", source = "Swaps the two bytes that two pointers address; the start callers pass entries of D_801C893C and D_801C8950, adjacent rows or mirrored pairs. Same bytes as Menu_SwapBytes at 0x801D4A30." }
 Menu_PreviewStrongestEquipment = { addr = 0x801D67D8, type = "func", source = "Fills g_EquipPreview for the party member at the slot: the weapon, shield, helmet and armor of most power in the inventory that the member can equip (a tie keeps the lower id), then the member's two accessories." }
+Menu_ReorderSkills = { addr = 0x801D8908, type = "func", source = "moves the skill list cursor and swaps two picked skills in a character's ability list (SkillOrder work area)" }
 Menu_SwapBytes3 = { addr = 0x801D933C, type = "func", source = "Swaps the two bytes that two pointers address; the start callers pass entries of D_801C893C and D_801C8950, adjacent rows or mirrored pairs. Same bytes as Menu_SwapBytes at 0x801D4A30." }
+Menu_PackSkills = { addr = 0x801D9350, type = "func", source = "moves the empty slots of the ability list to the end" }
+Menu_SortSkillsDescending = { addr = 0x801D942C, type = "func", source = "packs, then bubble-sorts the ability list in descending order of the ability row's byte 0" }
+Menu_SortSkillsAscending = { addr = 0x801D9548, type = "func", source = "packs, then bubble-sorts the ability list in ascending order of the ability row's byte 0" }
 Menu_SwapBytes4 = { addr = 0x801DAC08, type = "func", source = "Swaps the two bytes that two pointers address; the start callers pass entries of D_801C893C and D_801C8950, adjacent rows or mirrored pairs. Same bytes as Menu_SwapBytes at 0x801D4A30." }
 Menu_DrawCharacterWindow = { addr = 0x801DB764, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
 Menu_DrawStatPanel = { addr = 0x801DBBCC, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intelligence and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
@@ -4103,7 +4107,7 @@ g_SaveSlots = { addr = 0x801ED80C, size = 0x54, source = "The three visible rows
 g_MenuStartStep = { addr = 0x801ED860, source = "Current step of the start menu; func_801E4024 and func_801E4ED4 dispatch the D_801ED11C and D_801ED148 step tables by it, and each step handler adds 1 to advance." }
 s_ChoiceMenuValues = { addr = 0x801ED894, source = "Value of the choice menu per party slot, saved by func_801D3174." }
 s_ChoiceMenuCursors = { addr = 0x801ED89C, source = "Cursor of the choice menu per party slot, saved by func_801D3174." }
-s_SkillOrderCursors = { addr = 0x801ED8A8, source = "Skill order cursor per party slot and column, saved by func_801D8908; func_801DB04C swaps the rows." }
+s_SkillOrderCursors = { addr = 0x801ED8A8, source = "Skill order cursor per party slot and column, saved by Menu_ReorderSkills; func_801DB04C swaps the rows." }
 s_SkillOrderGroups = { addr = 0x801ED8B8, source = "The six skill order group bytes of each party slot, cleared by func_801D177C and swapped by func_801DB04C." }
 s_SkillOrderKinds = { addr = 0x801ED8D0, source = "The six skill order kind bytes of each party slot, cleared by func_801D177C and swapped by func_801DB04C." }
 SAVE_AccessFile = { addr = 0x801EEC30, type = "func", source = "Reads or writes the save file on the memory card: waits out the card status, loads the directory, opens the save file and transfers it through SAVE_TransferFile (body in start/09)." }

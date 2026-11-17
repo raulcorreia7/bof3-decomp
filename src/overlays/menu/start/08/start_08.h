@@ -70,8 +70,8 @@
     } while (0)
 
 /* The start menu's skill order screen, which runs in the battle selection
- * work area at 0x80148570: func_801D8908 moves the cursor and swaps two
- * skills, func_801D9350 packs the empty slots to the end. func_80166AE4
+ * work area at 0x80148570: Menu_ReorderSkills moves the cursor and swaps two
+ * skills, Menu_PackSkills packs the empty slots to the end. func_80166AE4
  * resolves the character's ability list by party slot and ability group. */
 typedef struct SkillOrder {
     u8 pad_00[0x0A];
@@ -574,7 +574,8 @@ void        func_801D902C(void);
 void        func_801D90A8(void);
 void        func_801D9110(void);
 extern void Menu_SwapBytes3(u8* first, u8* second);
-extern void func_801D9350(void);
+/* func_801D9350 */
+extern void Menu_PackSkills(void);
 void        func_801D970C(void);
 void        func_801D9748(void);
 void        func_801D98BC(void);

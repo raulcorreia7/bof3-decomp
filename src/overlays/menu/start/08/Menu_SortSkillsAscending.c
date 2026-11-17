@@ -4,9 +4,10 @@
  * shared with etc/shop/00 in include/menu/item.h. */
 
 /* Bubble-sorts the nine-entry item-id list the battle selection resolves by item-table byte 0,
- * after func_801D9350 has moved the empty entries to the end.
+ * after Menu_PackSkills has moved the empty entries to the end.
  */
-MATCH void func_801D9548(void) {
+/* func_801D9548 */
+MATCH void Menu_SortSkillsAscending(void) {
     u8* work;
     u8* row;
     u8  i;
@@ -14,7 +15,7 @@ MATCH void func_801D9548(void) {
     u8  cur;
     u8  nxt;
 
-    func_801D9350();
+    Menu_PackSkills();
     work = g_BattleChoicePanel;
     for (i = 0; i < 9; i++) {
         row = Party_GetAbilities(work[0xA], work[0xB], 0);

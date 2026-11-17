@@ -1,6 +1,7 @@
 #include "start_08.h"
 
-MATCH void func_801D9350(void) {
+/* func_801D9350 */
+MATCH void Menu_PackSkills(void) {
     SkillOrder* work;
     u8*         row;
     u8*         next;

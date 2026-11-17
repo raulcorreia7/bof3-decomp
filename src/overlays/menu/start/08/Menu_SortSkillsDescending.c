@@ -7,7 +7,8 @@
 /* Bubble-sorts the ten-entry party id list of the selection work record into descending order of
  * the item table's sort key, skipping zero entries.
  */
-MATCH void func_801D942C(void) {
+/* func_801D942C */
+MATCH void Menu_SortSkillsDescending(void) {
     u8* list;
     u8* next;
     u8* work;
@@ -17,7 +18,7 @@ MATCH void func_801D942C(void) {
     u8  nxt;
     s32 n;
 
-    func_801D9350();
+    Menu_PackSkills();
     work = g_BattleChoicePanel;
     i    = 0;
     j    = 0;
