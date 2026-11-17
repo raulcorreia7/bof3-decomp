@@ -211,8 +211,8 @@ static u8 s_gap_801EC4C4[84] = {
     0x00, 0x00, 0x00, 0x00, 0x9A, 0x00, 0xAA, 0x00, 0x01, 0x00, 0x00, 0x00, 0xE5, 0x00, 0xAA, 0x00,
     0x01, 0x00, 0x00, 0x00,
 };
-Callback g_MenuStartStep5Steps[MENU_START_STEP5_COUNT] = {func_801D9748, func_801D98BC, func_801D9AF0, func_801DA320, func_801DA984, func_801DAA68};
-Callback g_MenuStartStep5Sub2Steps[MENU_START_STEP5_SUB2_COUNT] = {func_801D9B2C, func_801D9BDC, func_801DA27C};
+Callback g_MenuStartStep5Steps[MENU_START_STEP5_COUNT] = {Menu_OpenPartyScreen, Menu_ChoosePartyCommand, func_801D9AF0, func_801DA320, func_801DA984, Menu_OpenFormationScreen};
+Callback g_MenuStartStep5Sub2Steps[MENU_START_STEP5_SUB2_COUNT] = {func_801D9B2C, Menu_UpdateFormation, func_801DA27C};
 static u8 s_gap_801EC53C[60] = {
     0x5C, 0xA3, 0x1D, 0x80, 0x74, 0xA4, 0x1D, 0x80, 0xE0, 0xA8, 0x1D, 0x80, 0x11, 0x00, 0x3E, 0x00,
     0x01, 0x00, 0x00, 0x00, 0x9D, 0x00, 0x41, 0x00, 0x03, 0x00, 0x00, 0x00, 0x11, 0x00, 0x74, 0x00,
@@ -581,7 +581,7 @@ static u8 s_gap_801ED688 = 0x00;
 static u8 s_gap_801ED689 = 0x00;
 static u8 s_gap_801ED68A = 0x00;
 static u8 s_gap_801ED68B = 0x00;
-u8 D_801ED68C = 0x00;
+u8 g_MenuPartyCommand = 0x00;
 static u8 s_gap_801ED68D = 0x00;
 static u8 s_gap_801ED68E = 0x00;
 static u8 s_gap_801ED68F = 0x00;

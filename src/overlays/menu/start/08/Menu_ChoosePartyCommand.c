@@ -1,16 +1,17 @@
 #include "start_08.h"
 
-MATCH void func_801D98BC(void) {
+/* func_801D98BC */
+MATCH void Menu_ChoosePartyCommand(void) {
     u16* pad;
     s32  prev;
     u8*  slot;
     u8*  cursor;
 
     Menu_DrawClutStrip(D_80144953);
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = D_801ED68C + 0x1F;
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = g_MenuPartyCommand + 0x1F;
     if (g_BattlePanelMode == 0) {
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
-        g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = g_MenuPanelTasks[18].pos.x + (D_801ED68C * 0x30);
+        g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = g_MenuPanelTasks[18].pos.x + (g_MenuPartyCommand * 0x30);
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y  = g_MenuPanelTasks[18].pos.y + 4;
     } else {
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
@@ -19,13 +20,13 @@ MATCH void func_801D98BC(void) {
     g_MenuPanelTasks[18].unk_0B = 0xFF;
     if (INPUT_REPEATED(*pad, (PADLright | PADLleft)) & (PADLright | PADLleft)) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
-        D_801ED68C ^= 1;
+        g_MenuPartyCommand ^= 1;
     }
     if (*pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        if (D_801ED68C == 0) {
-            func_801DAC1C(*pad);
+        if (g_MenuPartyCommand == 0) {
+            Menu_OpenFormation(*pad);
         } else if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) {
-            func_801DAE14(*pad);
+            Menu_OpenPartyChange(*pad);
         } else {
             SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
             return;
@@ -35,10 +36,10 @@ MATCH void func_801D98BC(void) {
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
         D_80148652                                       = 0;
         D_80148654                                       = 5;
-        g_MenuPanelTasks[18].unk_0B                      = D_801ED68C;
+        g_MenuPanelTasks[18].unk_0B                      = g_MenuPartyCommand;
         slot                                             = &D_80148651;
         prev                                             = *slot;
-        *slot                                            = D_801ED68C + (prev + 1);
+        *slot                                            = g_MenuPartyCommand + (prev + 1);
         return;
     }
     if (*pad & g_InputMasks[MENU_INPUT_CANCEL]) {

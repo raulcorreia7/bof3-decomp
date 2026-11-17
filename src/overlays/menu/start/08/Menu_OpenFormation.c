@@ -1,7 +1,8 @@
 #include "start_08.h"
 
+/* func_801DAC1C */
 #ifdef NON_MATCHING
-NON_MATCHING void func_801DAC1C(void) {
+NON_MATCHING void Menu_OpenFormation(void) {
     u8* table;
     u8* base;
     u8* panel;
@@ -32,7 +33,7 @@ NON_MATCHING void func_801DAC1C(void) {
     bit         = 1;
     panel_index = 0;
     for (row = 0; row < 3; row++) {
-        base  = D_801ED680;
+        base  = g_FormationCells;
         col   = 0;
         table = (u8*)(row * 3 + (s32)base);
         for (; col < 3; col++) {
@@ -63,13 +64,13 @@ NON_MATCHING void func_801DAC1C(void) {
             }
         }
     }
-    D_801ED678 = 0x7F;
-    D_801ED67C = 0x7F;
-    D_801ED668 = 0;
-    D_801ED66C = 0;
-    D_801ED670 = (g_PartyFormation & 1) + 1;
-    D_801ED674 = (u8)g_PartyFormation >> 1;
+    g_FormationPickColumn   = 0x7F;
+    g_FormationPickRow      = 0x7F;
+    g_FormationCursorColumn = 0;
+    g_FormationCursorRow    = 0;
+    g_FormationColumn       = (g_PartyFormation & 1) + 1;
+    g_FormationRow          = (u8)g_PartyFormation >> 1;
 }
 #else
-INCLUDE_ASM(func_801DAC1C);
+INCLUDE_ASM(Menu_OpenFormation);
 #endif

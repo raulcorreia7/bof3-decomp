@@ -1,6 +1,7 @@
 #include "start_08.h"
 
-MATCH void func_801DAA68(void) {
+/* func_801DAA68 */
+MATCH void Menu_OpenFormationScreen(void) {
     u8*            record;
     MenuPanelTask* rows;
     MenuPanelTask* panel;
@@ -44,7 +45,7 @@ MATCH void func_801DAA68(void) {
     }
 
     Menu_DrawClutStrip(D_80144953);
-    func_801DAC1C();
+    Menu_OpenFormation();
     g_MenuStep.sub_step = 2;
     g_MenuStep.state    = 0;
     D_80148654          = 5;

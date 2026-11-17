@@ -3939,7 +3939,13 @@ Menu_SwapBytes3 = { addr = 0x801D933C, type = "func", source = "Swaps the two by
 Menu_PackSkills = { addr = 0x801D9350, type = "func", source = "moves the empty slots of the ability list to the end" }
 Menu_SortSkillsDescending = { addr = 0x801D942C, type = "func", source = "packs, then bubble-sorts the ability list in descending order of the ability row's byte 0" }
 Menu_SortSkillsAscending = { addr = 0x801D9548, type = "func", source = "packs, then bubble-sorts the ability list in ascending order of the ability row's byte 0" }
+Menu_OpenPartyScreen = { addr = 0x801D9748, type = "func", source = "opens the party screen: description bar, two command cursor frames, the Formation/Party command row (g_MenuStartSteps step 5)" }
+Menu_ChoosePartyCommand = { addr = 0x801D98BC, type = "func", source = "left/right toggles the party screen command, confirm opens formation or the party change (world map only), cancel backs out" }
+Menu_UpdateFormation = { addr = 0x801D9BDC, type = "func", source = "moves the formation cursor, picks and swaps two members (Menu_SwapBytes4 on g_PartyBattleOrder), confirms g_PartyFormation" }
+Menu_OpenFormationScreen = { addr = 0x801DAA68, type = "func", source = "opens the formation screen: description bar, member panels, then the formation grid (Menu_OpenFormation); sub_step 2" }
 Menu_SwapBytes4 = { addr = 0x801DAC08, type = "func", source = "Swaps the two bytes that two pointers address; the start callers pass entries of D_801C893C and D_801C8950, adjacent rows or mirrored pairs. Same bytes as Menu_SwapBytes at 0x801D4A30." }
+Menu_OpenFormation = { addr = 0x801DAC1C, type = "func", source = "builds the formation grid cells and panels from the party menu flags and picks g_PartyFormation's cell" }
+Menu_OpenPartyChange = { addr = 0x801DAE14, type = "func", source = "lists the characters outside the field order into the reserve list and opens its panel" }
 Menu_DrawCharacterWindow = { addr = 0x801DB764, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
 Menu_DrawStatPanel = { addr = 0x801DBBCC, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intelligence and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
 Shop_DrawEquipment = { addr = 0x801DBF04, type = "func", source = "Draws the equipment panel of character record_index: the filled panel, the EQUIP caption, the emblem and six rows with the weapon, shield, helmet, armor and two accessories, each with its row icon." }
@@ -4095,6 +4101,14 @@ g_MenuStartPanel19Steps = { addr = 0x801ED5C8, source = "the state handlers of p
 g_MenuStartPanel20Steps = { addr = 0x801ED5E4, source = "the state handlers of panel mode 20, indexed by the panel task state" }
 s_PartyCharacterIds = { addr = 0x801ED610, source = "The three party character ids that func_801D177C and func_801D21F4 keep." }
 g_EquipPreview = { addr = 0x801ED63C, source = "Six equipment ids of the character being tried on: func_801D6FBC copies them here and replaces the slot being tried, func_801D6E6C commits them." }
+g_FormationCursorColumn = { addr = 0x801ED668, source = "formation cursor column: 0 is the member column, 1+ the formation cells (Menu_UpdateFormation)" }
+g_FormationCursorRow = { addr = 0x801ED66C, source = "formation cursor row (Menu_UpdateFormation)" }
+g_FormationColumn = { addr = 0x801ED670, source = "current formation column, (g_PartyFormation & 1) + 1 (Menu_OpenFormation)" }
+g_FormationRow = { addr = 0x801ED674, source = "current formation row, g_PartyFormation >> 1 (Menu_OpenFormation)" }
+g_FormationPickColumn = { addr = 0x801ED678, source = "column of the first picked cell, 0x7F until picked (Menu_UpdateFormation)" }
+g_FormationPickRow = { addr = 0x801ED67C, source = "row of the first picked cell, 0x7F until picked (Menu_UpdateFormation)" }
+g_FormationCells = { addr = 0x801ED680, source = "3x3 formation grid cell flags: column 0 member present, 1..2 cell usable (Menu_OpenFormation)" }
+g_MenuPartyCommand = { addr = 0x801ED68C, source = "selected party screen command: 0 formation, 1 party change (Menu_ChoosePartyCommand)" }
 g_MenuFormationArrowTurned = { addr = 0x801ED6A8, source = "The ground arrow corners turned by the preview angle, x at twice the scale of y." }
 g_MenuFormationSpots = { addr = 0x801ED6C0, source = "Each party member's formation offset turned by the preview angle; Menu_DrawFormationPreview sorts them back to front with the member order." }
 g_MenuEquipChoiceIds = { addr = 0x801ED6D8, source = "the item ids of the equip list: the inventory rows the party member can equip in the chosen slot, then zeros" }
