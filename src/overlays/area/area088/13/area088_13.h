@@ -52,7 +52,7 @@ extern u8  D_801F6170[36];
 extern u8  D_801F6194[]; /* the "Manillo" text at +0x10 */
 
 /* func_801F2F28 */
-void MotionTrail_Update(void* table);
+void Trail_Update(Trail* trail);
 
 void func_801F3258(u8* window);
 

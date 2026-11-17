@@ -18,7 +18,7 @@ segments:
       - [0x2C8, c, func_801F2EC8]
       - [0x2E8, c, func_801F2EE8]
       - [0x308, c, func_801F2F08]
-      - [0x328, c, MotionTrail_Update]
+      - [0x328, c, Trail_Update]
       - [0x658, c, func_801F3258]
       - [0x9B0, c, MATH_AverageAngle]
       - [0xA00, c, GFX_DrawFan]

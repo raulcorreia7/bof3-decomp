@@ -6,6 +6,7 @@
 
 #include "overlays/scenario/scenario.h"
 #include "engine/game/00/game_00.h"
+#include "area/effects.h"
 #include "area/spad.h"
 #include "overlays/area/AreaSprite.h"
 #define SCRATCH_ROW_STRIDE 0x28
@@ -42,6 +43,9 @@ ASSERT_SIZE(Scena08Billboard, 0x28);
 /* The SCENA08_SPARK_COUNT falling sparks at AREA_WORK; FallingSpark is in scenario.h. */
 #define SCENA08_SPARK_COUNT 8U
 
+/* The panel trail work record: the same 32-point record scena07 keeps at AREA_WORK + 0xE0. */
+#define SCENA08_TRAIL       MEM_PTR(Trail, AREA_WORK + 0xE0)
+
 extern void (*D_801FE8FC[])(FallingSpark* spark);
 
 void          func_801F7DE8(void);
@@ -75,7 +79,7 @@ void func_801FE800(void);
 
 void func_801F8964(FallingSpark* spark);
 /* func_801F8D98 */
-void MotionTrail_Update(void* table);
+void Trail_Update(Trail* trail);
 
 void func_801F90C8(void* table);
 void func_801FA32C(void);

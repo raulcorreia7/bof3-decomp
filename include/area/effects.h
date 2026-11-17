@@ -83,29 +83,31 @@ ASSERT_OFFSET(SpinEffect, scale, 0x28);
 ASSERT_OFFSET(SpinEffect, fade, 0x2A);
 ASSERT_SIZE(SpinEffect, 0x2C);
 
-/* One sample of a motion trail: a world position and where it lands on the screen. */
-typedef struct MotionTrailNode {
-    VECTOR pos;    /* the task position when the sample was taken */
+/* One point of a trail: a world position and where it lands on the screen. */
+typedef struct TrailPoint {
+    VECTOR pos;    /* the task position when the point was taken */
     Pos2   screen; /* pos projected to the screen */
-    s16    angle;  /* the heading the trail has at this node */
-    s16    size;   /* the projected size */
-} MotionTrailNode;
+    s16    angle;  /* the heading the trail has at this point */
+    s16    width;  /* the projected width */
+} TrailPoint;
 
-ASSERT_OFFSET(MotionTrailNode, screen, 0x10);
-ASSERT_OFFSET(MotionTrailNode, angle, 0x14);
-ASSERT_SIZE(MotionTrailNode, 0x18);
+ASSERT_OFFSET(TrailPoint, screen, 0x10);
+ASSERT_OFFSET(TrailPoint, angle, 0x14);
+ASSERT_SIZE(TrailPoint, 0x18);
 
-#define MOTION_TRAIL_LENGTH 32
+#define TRAIL_LENGTH        32
+#define TRAIL_HEADING_UNSET 0x1000
 
-/* A fixed history of the task's last positions: MotionTrail_Update pushes the newest at the front and drops the oldest. */
-typedef struct MotionTrail {
-    MotionTrailNode node[MOTION_TRAIL_LENGTH];
-    u16             dir[MOTION_TRAIL_LENGTH - 1]; /* screen heading from each node to the next */
-    u16             size;                         /* the world size every node projects */
-} MotionTrail;
+/* The record of the last 32 positions the glowing ribbon behind a moving object is drawn from:
+ * Trail_Update pushes the newest at the front and drops the oldest. */
+typedef struct Trail {
+    TrailPoint point[TRAIL_LENGTH];
+    u16        heading[TRAIL_LENGTH - 1]; /* screen heading from each point to the next */
+    u16        width;                     /* the world width every point projects */
+} Trail;
 
-ASSERT_OFFSET(MotionTrail, dir, 0x300);
-ASSERT_SIZE(MotionTrail, 0x340);
+ASSERT_OFFSET(Trail, heading, 0x300);
+ASSERT_SIZE(Trail, 0x340);
 
 /* A falling spark particle: the area and scenario spark tables (area197 at AREA_WORK,
  * scena09 at AREA_WORK + 0x800) fall it by its velocity, bounce it off the ground and
