@@ -10,7 +10,7 @@ judges it. A line per variant: `<tag> => MATCH`, `<tag> => N diff | <first diffe
 The first match stays in SOURCE.c and ends the run; otherwise SOURCE.c is restored and the last
 line is `best (N, tag)`. Run `check-<image>` on a match.
 
-    tools/try_variants.py exe/slus_004_22@0x801530D0 src/engine/slus/func_801530D0.c variants.py
+    tools/try_variants.py exe/slus_004_22@0x801530D0 src/engine/slus/Area_DrawCellRing.c variants.py
 """
 
 import argparse

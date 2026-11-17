@@ -48,10 +48,10 @@ NON_MATCHING void func_801F3514(void) {
         g_Task->screen_y = D_80145EC0;
     }
 
-    if (D_8014832D < 0x28) {
-        count             = D_8014832D;
-        D_8014832D        = count + 1;
-        D_8014828C[count] = (s32)g_Task;
+    if (g_AreaGridActorCount < 0x28) {
+        count                   = g_AreaGridActorCount;
+        g_AreaGridActorCount    = count + 1;
+        g_AreaGridActors[count] = (s32)g_Task;
     }
 
     if (g_AreaSceneMode == 2) {

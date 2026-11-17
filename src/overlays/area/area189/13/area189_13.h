@@ -21,7 +21,8 @@ extern s16 D_80145EC0;
 /* Steps until the next encounter, rolled by Area_RollEncounterThreshold. */
 extern u16 D_80145FB8;
 /* The sorted object pointer list and its count. */
-extern s32 D_8014828C[];
+/* D_8014828C */
+extern s32 g_AreaGridActors[];
 
 /* The party row table and the row field the drain pass reads. */
 

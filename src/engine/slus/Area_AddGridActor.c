@@ -77,9 +77,9 @@ NON_MATCHING void Area_AddGridActor(void) {
     FIELD(s32, g_Task, 0x60) = rot;
     FIELD(u16, g_Task, 0x2E) = (u16)sxy;
     FIELD(u16, g_Task, 0x30) = (u16)(sxy >> 16);
-    if (D_8014832D < 0x28) {
-        D_8014828C[D_8014832D] = (s32)g_Task;
-        D_8014832D++;
+    if (g_AreaGridActorCount < 0x28) {
+        g_AreaGridActors[g_AreaGridActorCount] = (s32)g_Task;
+        g_AreaGridActorCount++;
         if (g_Task->header.flags & ACTOR_FLAG_SELECTION_EFFECT) {
             func_80161454((u32)g_Task);
         }

@@ -223,7 +223,7 @@ typedef struct SpriteCell {
 } SpriteCell;
 
 /* The 0xC-byte panel sort rows at 0x80147CFC: func_8015AD00 fills one row per
- * quad, func_8014BC70 walks the list, and MATH_SwapVectors swaps two rows. The
+ * quad, Area_DrawGridActors walks the list, and MATH_SwapVectors swaps two rows. The
  * list's second row starts at 0x80147D08 and the depth word at 0x80147D0C, so
  * those addresses are interior views of the same rows. */
 typedef struct PanelSortItem {
@@ -406,7 +406,8 @@ extern u8                 D_800E3800;
 
 extern u8                    D_80142CC0[];
 extern u8                    D_80142CE0[];
-extern u32                   D_80143740[];
+/* D_80143740 */
+extern u32                   g_AreaCellPackets[];
 /* SLUS-only state: overlays declare these addresses with their own views, so
  * the registry does not emit them, except g_SysThreads. */
 /* D_80143B40 */
@@ -574,7 +575,8 @@ extern s32                   D_80148200;
 extern u8                    D_8014820C;
 /* The work-record table: func_8014D4E0 appends g_Task, func_8014BB20 sorts it by the s16 at +0x3E. */
 extern Actor*                D_80148214[];
-extern s32                   D_8014828C[];
+/* D_8014828C */
+extern s32                   g_AreaGridActors[];
 extern u8                    D_80148331[];
 extern u8                    D_80148332[];
 extern u8                    D_8014865B;
@@ -615,7 +617,8 @@ extern s32                         D_801492FC;
 extern s32                         D_80149300;
 extern s32                         D_80149304;
 extern u16                         D_80149336;
-extern u8                          D_8014933D;
+/* D_8014933D */
+extern u8                          g_AreaCellPacketCount;
 /* D_80149340 */
 extern u8                          D_80149341;
 extern const char                  D_80149990[];
@@ -645,7 +648,8 @@ extern const EmiRingSteps          g_EmiRingSteps;
 extern const char                  D_80149F9C[];
 extern const char                  D_80149FAC[];
 extern const u32                   D_8014AAB8[4];
-extern void                        func_8014BC70(void);
+/* func_8014BC70 */
+extern void                        Area_DrawGridActors(void);
 extern u8                          D_8016432C;
 /* D_8017F44C */
 extern const char                  D_8017F44C[];
@@ -1121,9 +1125,12 @@ void                              Area_LoadCellColumnNext(void);
 extern s8*                        D_1F800010;
 /* func_80152E94 */
 /* func_80152FB0 */
-extern s32                        func_801530D0(void);
-extern void                       func_80153CC4(void);
-extern void                       func_80153D34(void);
+/* func_801530D0 */
+extern s32                        Area_DrawCellRing(void);
+/* func_80153CC4 */
+extern void                       Area_ResetCellPacketLists(void);
+/* func_80153D34 */
+extern void                       Area_SortCellPackets(void);
 extern void                       Area_GetCell(s32 px, s32 py, AreaCell* out);
 extern s32                        Area_UploadCell(s32 column, s32 row, POLY_FT4* context, s32 slot);
 extern u16                        Area_AllocCellPrimRow(void);

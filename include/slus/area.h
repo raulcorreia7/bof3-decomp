@@ -9,7 +9,7 @@
 /* func_8014BA54 */
 extern void Area_DrawScene(void);
 /* func_8014BAB8 */
-void        Area_SwapObjects(s32 first, s32 second);
+void        Area_SwapGridActors(s32 first, s32 second);
 /* func_8014BAEC */
 extern void Area_SwapActors(s32 first, s32 second);
 /* func_8014BB20 */

@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
-MATCH void func_80153CC4(void) {
+/* func_80153CC4 */
+MATCH void Area_ResetCellPacketLists(void) {
     u32 base_t0;
     u32 level_t1;
     s32 count_a3;

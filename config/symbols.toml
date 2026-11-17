@@ -7189,13 +7189,13 @@ D_1F800004 = { addr = 0x1F800004, source = "ScratchPad.cells.words[1]: a map-coo
 D_1F800006 = { addr = 0x1F800006, source = "ScratchPad.cells.halves[3]: the second map-coordinate counter (func_801B13BC)." }
 D_1F800008 = { addr = 0x1F800008, source = "ScratchPad.cells.words[2]: the staged x coordinate and its per-axis bias flag (func_801B13BC, func_801B0E44)." }
 D_1F80000A = { addr = 0x1F80000A, source = "ScratchPad.cells.halves[5]: the staged x source halfword (func_801B13BC)." }
-D_1F80000C = { addr = 0x1F80000C, source = "ScratchPad.cells.words[3]: the staged y bias flag, the tile-window half-width (func_801530D0) and the scene math word." }
+D_1F80000C = { addr = 0x1F80000C, source = "ScratchPad.cells.words[3]: the staged y bias flag, the tile-window half-width (Area_DrawCellRing) and the scene math word." }
 D_1F80000E = { addr = 0x1F80000E, source = "ScratchPad.cells.halves[7]: the staged y source halfword (func_801B13BC)." }
 D_1F800010 = { addr = 0x1F800010, source = "ScratchPad.unk_10: scena00 points the cell at the area load record's rotation offset and steps the camera through it." }
 g_ScratchPadVectors = { addr = 0x1F800014, source = "ScratchPad.vectors: the four SVECTORs RotTransPers4 projects; the area sprite and effect passes write the vertices." }
-D_1F80001C = { addr = 0x1F80001C, type = "SVECTOR", source = "ScratchPad.vectors[1]: the second corner vector RotTransPers4 projects, written on its own by the tile-ring draw (func_801530D0)." }
-D_1F800024 = { addr = 0x1F800024, type = "SVECTOR", source = "ScratchPad.vectors[2]: the third corner vector RotTransPers4 projects, written on its own by the tile-ring draw (func_801530D0)." }
-D_1F80002C = { addr = 0x1F80002C, type = "SVECTOR", source = "ScratchPad.vectors[3]: the fourth corner vector RotTransPers4 projects, written on its own by the tile-ring draw (func_801530D0)." }
+D_1F80001C = { addr = 0x1F80001C, type = "SVECTOR", source = "ScratchPad.vectors[1]: the second corner vector RotTransPers4 projects, written on its own by the tile-ring draw (Area_DrawCellRing)." }
+D_1F800024 = { addr = 0x1F800024, type = "SVECTOR", source = "ScratchPad.vectors[2]: the third corner vector RotTransPers4 projects, written on its own by the tile-ring draw (Area_DrawCellRing)." }
+D_1F80002C = { addr = 0x1F80002C, type = "SVECTOR", source = "ScratchPad.vectors[3]: the fourth corner vector RotTransPers4 projects, written on its own by the tile-ring draw (Area_DrawCellRing)." }
 g_Task = { addr = 0x1F800044, size = 0x4, source = "ScratchPad.task: the work record the current overlay runs; each header types it with a g_Task view." }
 jtbl_800327B0 = { addr = 0x800327B0, type = "Callback", source = "The switch table of LZ77_DecodeStep: the jump targets of its jr dispatch." }
 D_80033A08 = { addr = 0x80033A08, type = "u16", source = "Window colors, 0x40 bytes per window style." }
@@ -7204,8 +7204,9 @@ g_AreaCells = { addr = 0x8012C000, size = 0x1880, source = "The area cells." }
 g_AreaCellPrims = { addr = 0x8012D880, size = 0x14000, source = "The primitives of the area cells." }
 g_AreaCellGrid = { addr = 0x80141880, type = "u16", size = 0xC40, source = "The grid of area cells." }
 g_AreaCellPrimFreeIds = { addr = 0x801424C0, type = "u16", size = 0x800, source = "Free primitive row ids of the area cells." }
-g_AreaCellPacketLists = { addr = 0x80142CC0, type = "AreaCellPacketList", alias = true, source = "D_80142CC0 as the cell ordering lists: per grid row, six lists of a first and a last packet. func_801530D0 appends to them by the last packet; func_8014BC70 splices a whole list in by its first and last." }
+g_AreaCellPacketLists = { addr = 0x80142CC0, type = "AreaCellPacketList", alias = true, source = "D_80142CC0 as the cell ordering lists: per grid row, six lists of a first and a last packet. Area_DrawCellRing appends to them by the last packet; Area_DrawGridActors splices a whole list in by its first and last." }
 D_80142CC4 = { addr = 0x80142CC4, alias = true, source = "The last-packet word of the first cell ordering list (g_AreaCellPacketLists[0][0].tail), which the cell draws index by byte offset." }
+g_AreaCellPackets = { addr = 0x80143740, source = "Cell packet words: layer in the top byte, depth in the high halfword, primitive index in the low bits." }
 g_SysThreads = { addr = 0x80143B40, type = "Thread", source = "The scheduler's thread records, indexed by thread index." }
 g_GameEntryState = { addr = 0x80143B90, source = "Game state the main loop runs next: Game_NewGame sets it to 1, Game_LoadShopOverlay to 2 and Game_UpdateAreaLoad to 8." }
 g_GameEntrySubstate = { addr = 0x80143B92, source = "Stage within the current game state; the state handlers read it to pick their stage and add 1 as they advance." }
@@ -7402,7 +7403,9 @@ D_80146910 = { addr = 0x80146910, size = 0x4, alias = true, source = "The Actor.
 g_AreaFocusY = { addr = 0x80147A90, source = "Y focus of the area." }
 g_ScriptWorkRecord = { addr = 0x80148208, type = "Actor", source = "The script work record." }
 g_ScriptState = { addr = 0x80148210, type = "ScriptState", source = "The script state." }
+g_AreaGridActors = { addr = 0x8014828C, source = "The grid actors queued for the frame, as task pointers." }
 g_AreaDrawState = { addr = 0x8014832C, size = 0x4, alias = true, source = "Area draw counts." }
+g_AreaGridActorCount = { addr = 0x8014832D, source = "Number of grid actors in the queue." }
 g_AreaDrawFlags = { addr = 0x8014832E, source = "Flags that select the area draw passes." }
 g_MenuPanelTasks = { addr = 0x80148330, source = "The menu panel tasks." }
 g_BattleMessageState = { addr = 0x801483C3, type = "u8", source = "State of the battle message window." }
@@ -7464,6 +7467,7 @@ g_AreaCameraRefreshCount = { addr = 0x80149333, type = "u8", source = "Frames th
 g_AreaCellPrimFreeIndex = { addr = 0x80149334, type = "u16", source = "Area_AllocCellPrimRow advances it past the popped id and Area_FreeCellPrimRow steps it back before storing; 0 means no id is left" }
 g_AreaTileRemainderY = { addr = 0x80149338, type = "s16", source = "Y remainder of the area tiles." }
 g_AreaSceneMode = { addr = 0x8014933B, type = "u8", source = "Mode of the area scene." }
+g_AreaCellPacketCount = { addr = 0x8014933D, source = "Number of words in the cell packet list." }
 g_AreaDrawMode = { addr = 0x8014933E, type = "u8", source = "Draw mode of the area." }
 g_AreaHeightOffsetEnabled = { addr = 0x80149340, source = "Enables the height offset of the area." }
 g_LogoExePath = { addr = 0x80149800, size = 0x14, source = "SYS_StartLogo passes this LOGO executable path to SYS_LoadExe" }
@@ -7526,9 +7530,10 @@ SYS_ThreadClose = { addr = 0x8014B900, type = "func", source = "Empties one thre
 SYS_ThreadReplace = { addr = 0x8014B954, type = "func", source = "Replaces the running callback." }
 SYS_ClearCurrentThread = { addr = 0x8014BA04, type = "func", source = "Clears the current thread work area at offsets 0x60 through 0x7F." }
 Area_DrawScene = { addr = 0x8014BA54, type = "func", source = "Draws the area scene." }
-Area_SwapObjects = { addr = 0x8014BAB8, type = "func", source = "Swaps two objects of the draw list." }
+Area_SwapGridActors = { addr = 0x8014BAB8, type = "func", source = "Swaps two objects of the draw list." }
 Area_SwapActors = { addr = 0x8014BAEC, type = "func", source = "Swaps two actors of the draw list." }
 Area_DrawActors = { addr = 0x8014BB20, type = "func", source = "Sorts and draws the area actors." }
+Area_DrawGridActors = { addr = 0x8014BC70, type = "func", source = "Draws the queued grid actors per scene layer, merged by depth with the cell packets." }
 MATH_SwapVectors = { addr = 0x8014C47C, type = "func", source = "swaps two 3-word vectors" }
 Area_DrawObjectSprite = { addr = 0x8014C4D4, type = "func", source = "Draws the sprite cells of an actor." }
 Area_RoundSpriteCoordinate = { addr = 0x8014CE48, type = "func", source = "Returns pair >> 16, rounded up by 1 when step is not negative and the low halfword of pair is nonzero." }
@@ -7638,6 +7643,9 @@ Area_LoadCellColumnPrev = { addr = 0x80152C9C, type = "func", source = "Streams 
 Area_LoadCellColumnNext = { addr = 0x80152D9C, type = "func", source = "Streams the cell column past the last one into the ring when the camera passes +0x200." }
 Area_LoadCellRowsPrev = { addr = 0x80152E94, type = "func", source = "Streams the two cell rows before the first one when the vertical remainder passes -0x200." }
 Area_LoadCellRowsNext = { addr = 0x80152FB0, type = "func", source = "Streams the two cell rows past the last one when the vertical remainder passes +0x200." }
+Area_DrawCellRing = { addr = 0x801530D0, type = "func", source = "Projects the visible window of the tile ring, builds each cell's packet pair and links it into the ordering table by depth." }
+Area_ResetCellPacketLists = { addr = 0x80153CC4, type = "func", source = "Empties the cell packet lists of the current frame buffer." }
+Area_SortCellPackets = { addr = 0x80153D34, type = "func", source = "Sorts the cell packet words by their depth halfword." }
 Area_InitMapRenderer = { addr = 0x80153DE8, type = "func", source = "Initializes the field map renderer: sets the geometry screen, offset and back color, resets the 0x400 double FT4 primitives, seeds the camera and scroll state from the scroll target, clears the 0x38 by 0x1C cell table, fills the identity draw order and builds the first view." }
 Area_GetCell = { addr = 0x801541C0, type = "func", source = "Returns the area cell at panel coordinates." }
 Area_UploadCell = { addr = 0x80154294, type = "func", source = "Uploads an area cell." }

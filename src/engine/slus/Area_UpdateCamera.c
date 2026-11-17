@@ -99,7 +99,7 @@ MATCH void Area_UpdateCamera(void) {
     SetRotMatrix(&g_CameraMatrix);
     SetTransMatrix(&g_CameraMatrix);
     if (g_AreaCameraRefreshCount != 0) {
-        func_801530D0();
+        Area_DrawCellRing();
         g_AreaCameraRefreshCount -= 1;
     }
 }
