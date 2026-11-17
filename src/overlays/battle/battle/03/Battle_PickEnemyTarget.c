@@ -27,21 +27,21 @@ MATCH u8 Battle_PickEnemyTarget(u8 enemy_index) {
             targeting_flags = g_Abilities[g_BattleEnemyBattlers[index].turn.command.id].targeting_flags;
             flags           = g_BattleEnemyBattlers[index].event_flags;
             if (flags & 1) {
-                if (targeting_flags & ABILITY_TARGET_ALL) {
-                    if (targeting_flags & ABILITY_TARGET_BOTH_SIDES) {
-                        if (!(targeting_flags & ABILITY_TARGET_SELECT)) {
+                if (targeting_flags & ABILITY_TARGET_FLAG_ALL) {
+                    if (targeting_flags & ABILITY_TARGET_FLAG_BOTH_SIDES) {
+                        if (!(targeting_flags & ABILITY_TARGET_FLAG_SELECT)) {
                             return 0xC0;
                         }
                     }
-                    if (targeting_flags & ABILITY_TARGET_OPPONENT) {
+                    if (targeting_flags & ABILITY_TARGET_FLAG_OPPONENT) {
                         return 0x40;
                     }
                     return 0x80;
                 }
-                if (!(targeting_flags & ABILITY_TARGET_SELECT)) {
+                if (!(targeting_flags & ABILITY_TARGET_FLAG_SELECT)) {
                     return index + 3;
                 }
-                if (targeting_flags & ABILITY_TARGET_OPPONENT) {
+                if (targeting_flags & ABILITY_TARGET_FLAG_OPPONENT) {
                     return func_801E2D4C(index);
                 }
                 if (flags & 0x10) {
@@ -49,21 +49,21 @@ MATCH u8 Battle_PickEnemyTarget(u8 enemy_index) {
                 }
                 return Battle_PickFormationTarget();
             }
-            if (targeting_flags & ABILITY_TARGET_ALL) {
-                if (targeting_flags & ABILITY_TARGET_BOTH_SIDES) {
-                    if (!(targeting_flags & ABILITY_TARGET_SELECT)) {
+            if (targeting_flags & ABILITY_TARGET_FLAG_ALL) {
+                if (targeting_flags & ABILITY_TARGET_FLAG_BOTH_SIDES) {
+                    if (!(targeting_flags & ABILITY_TARGET_FLAG_SELECT)) {
                         return 0xC0;
                     }
                 }
-                if (targeting_flags & ABILITY_TARGET_OPPONENT) {
+                if (targeting_flags & ABILITY_TARGET_FLAG_OPPONENT) {
                     return 0x80;
                 }
                 return 0x40;
             }
-            if (!(targeting_flags & ABILITY_TARGET_SELECT)) {
+            if (!(targeting_flags & ABILITY_TARGET_FLAG_SELECT)) {
                 return index + 3;
             }
-            if (targeting_flags & ABILITY_TARGET_OPPONENT) {
+            if (targeting_flags & ABILITY_TARGET_FLAG_OPPONENT) {
                 if (flags & 0x10) {
                     return func_801E2D90(index);
                 }

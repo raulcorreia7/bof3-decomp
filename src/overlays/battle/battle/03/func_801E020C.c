@@ -31,7 +31,7 @@ MATCH void func_801E020C(void) {
                     }
                 }
                 if ((LOBU(g_Battle.action_type) == BATTLE_ACTION_ABILITY) && ((D_801CA71C[g_Battle.action_id].mask & 0x800) != 0) && ((func_801DD448() & BYTE_MASK) != 0) &&
-                    ((D_801CA718[g_Battle.action_id][0] & ABILITY_TARGET_ALL) == 0)) {
+                    ((D_801CA718[g_Battle.action_id][0] & ABILITY_TARGET_FLAG_ALL) == 0)) {
                     g_Battle.state |= BATTLE_STATE_REPRISAL_PENDING;
                 }
             }
