@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801EA728(void) {
+/* func_801EA728 */
+MATCH void Battle_SlideInEventPanel(void) {
     MenuPanelTask* panel = g_MenuCurrentPanel;
     s16            state = panel->pos.y;
 

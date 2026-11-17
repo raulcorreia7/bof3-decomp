@@ -33,8 +33,14 @@ g_BattleEffectStage0Funcs = { addr = 0x801D0CD0, source = "Battle effect handler
 g_BattleEffectStage1Funcs = { addr = 0x801D0D1C, source = "Battle effect handlers for the second effect stage, one per slot kind." }
 g_BattleEffectStage3Funcs = { addr = 0x801D0ED4, source = "Battle effect handlers for the fourth effect stage, one per slot kind." }
 jtbl_801D0F0C = { addr = 0x801D0F0C, type = "Callback", source = "The switch table of func_801E5CA4: the jump targets of its jr dispatch." }
-g_BattlePanelFuncs = { addr = 0x801D0F80, source = "Battle panel update handlers." }
+g_BattlePanelModes = { addr = 0x801D0F80, source = "Battle panel update handlers." }
+g_BattlePartyPanelSteps = { addr = 0x801D0FA0, source = "The party panel's three state steps." }
+g_BattleMenuRowsPanelSteps = { addr = 0x801D0FAC, source = "The menu rows panel's three state steps." }
+g_BattleEnemyPanelSteps = { addr = 0x801D0FD0, source = "The enemy panel's four state steps." }
+g_BattleMemberPanelSteps = { addr = 0x801D0FE0, source = "The party member panel's three state steps." }
 g_BattlePanelTaskForwarders = { addr = 0x801D0FEC, source = "Forwarders that hand a battle panel task its arguments." }
+g_BattleEventPanelSteps = { addr = 0x801D0FF8, source = "The event panel's three state steps." }
+g_BattleMessagePanelSteps = { addr = 0x801D1004, source = "The message panel's four state steps." }
 Battle_Update = { addr = 0x801D1014, type = "func", source = "Runs one frame of battle." }
 Battle_DispatchMode = { addr = 0x801D112C, type = "func", source = "Runs the current battle mode." }
 Battle_DispatchStep = { addr = 0x801D11D8, type = "func", source = "Runs the current battle step." }
@@ -61,7 +67,7 @@ Battle_UpdateResult = { addr = 0x801D6774, type = "func", source = "Battle mode 
 Battle_LoadEndOverlay = { addr = 0x801D6A14, type = "func", source = "Finishes the battle setup pass: returns while a party battler has BATTLER_DAMAGE_FORM_EFFECT_PLAYING, steps g_BattleSubStep back when g_BattleRowCursor differs from g_BattlePartyCount, otherwise on no defeat revives or cures each party battler, sets g_BattleStep to 2 or 1 by the result flags and starts the EMI_SLOT_BATL_END load." }
 Battle_WaitAreaReload = { addr = 0x801D716C, type = "func", source = "Step after Battle_ReloadAreaAudio in the D_801EABB8 step table: when EMI_IsReady, moves the battle phase to step 4 with sub_step 0." }
 Battle_WriteBackParty = { addr = 0x801D7350, type = "func", source = "Copies the party's battle state back to the field characters." }
-Battle_SetPartyCount = { addr = 0x801D750C, type = "func", source = "the body stores into g_Battle.party_count" }
+Battle_DrawPartyPanel = { addr = 0x801D750C, type = "func", source = "the body stores into g_Battle.party_count" }
 Battle_DrawPanelRows = { addr = 0x801D7A40, type = "func", source = "Draws the queued battle panel rows." }
 Battle_DrawEnemyNamePanel = { addr = 0x801D8AE4, type = "func", source = "Draws the 0x4B-pixel name panel of enemy slot minus 3 at (x, y) in the window style colour, with the enemy name text when func_801DA69C allows it and an icon in place when its unk_7F is 1." }
 Battle_OpenPartyPanel = { addr = 0x801D9304, type = "func", source = "Opens panel task 1 for the party list: sizes it from the party count through D_801EAF27 and places it at x 0xF0. Called by Battle_OpenPanels." }
@@ -123,11 +129,34 @@ Battle_AllocEffect = { addr = 0x801E590C, type = "func", source = "Claims a free
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "clears every timer, state and flag byte of the shared BattleEffect work record (0x00-0x06, 0x48, 0x5D-0x5F); every effect countdown calls it first" }
 Battle_DrawRollingDigits = { addr = 0x801E62BC, type = "func", source = "Draws rolling digits." }
 Battle_StartCharacterLoad = { addr = 0x801E7948, type = "func", source = "Starts the EMI load of the party sprite archive of g_EmiLoadedCharacterIndex (front or back by the facing of g_BattleEffectBattler; the BPLD and BPLU archives, or the 513 to 520 variants of the reload) and advances the mode." }
+Battle_UpdatePanel = { addr = 0x801E9074, type = "func", source = "Runs the current battle panel task: its mode selects the update routine." }
+Battle_UpdatePartyPanel = { addr = 0x801E90FC, type = "func", source = "Party panel mode: runs the panel state step." }
+Battle_SlideInPartyPanel = { addr = 0x801E915C, type = "func", source = "Party panel state 0: slides the panel up to y 200, then draws it." }
+Battle_HoldPartyPanel = { addr = 0x801E91CC, type = "func", source = "Party panel state 1: draws the panel in place." }
+Battle_UpdateMenuRowsPanel = { addr = 0x801E91FC, type = "func", source = "Menu rows panel mode: runs the panel state step." }
 Battle_DrawMenuRows = { addr = 0x801E927C, type = "func", source = "Draws the battle menu panel rows." }
-Battle_UpdateMenuPanel = { addr = 0x801E960C, type = "func", source = "Updates the battle menu panel." }
-Battle_DispatchPanel = { addr = 0x801E9B18, type = "func", source = "Dispatches the battle panel handler." }
+Battle_AnimateMenuRows = { addr = 0x801E9390, type = "func", source = "Menu rows panel state 1: grows the selected row, shrinks the others, draws the rows." }
+Battle_UpdateEnemyPanel = { addr = 0x801E960C, type = "func", source = "Updates the battle menu panel." }
+Battle_StartEnemyPanel = { addr = 0x801E97A8, type = "func", source = "Enemy panel state 0: sets the gauge from the selected enemy's HP." }
+Battle_ShowEnemyPanel = { addr = 0x801E9910, type = "func", source = "Enemy panel state 1: draws the enemy name panel and lights it when targeted." }
+Battle_PlaceEnemyPanel = { addr = 0x801E99AC, type = "func", source = "Enemy panel state 2: places the panel over the enemy and drops it when the target changes." }
+Battle_UpdateMemberPanel = { addr = 0x801E9B18, type = "func", source = "Dispatches the battle panel handler." }
 Battle_SetPanelGauges = { addr = 0x801E9CA8, type = "func", source = "Sets the menu panel gauges." }
+Battle_ShowMemberPanel = { addr = 0x801E9F18, type = "func", source = "Member panel state 1: lights the panel when its member is targeted." }
 Battle_MovePanel = { addr = 0x801E9FDC, type = "func", source = "Moves the active menu panel." }
+Battle_LightPanel = { addr = 0x801EA174, type = "func", source = "Sets the current panel's lit flag and moves to its next state." }
+Battle_DimPanel = { addr = 0x801EA1A4, type = "func", source = "Clears the current panel's lit flag, restores its position and returns to its previous state." }
+Battle_UpdateEventPanel = { addr = 0x801EA650, type = "func", source = "Event panel mode: runs the state step and draws the queued event's text." }
+Battle_SlideInEventPanel = { addr = 0x801EA728, type = "func", source = "Event panel state 0: slides the panel down to y 0x12." }
+Battle_SlideOutEventPanel = { addr = 0x801EA774, type = "func", source = "Event panel state 2: slides the panel up, then clears the event flag and closes it." }
+Battle_UpdateMessagePanel = { addr = 0x801EA7DC, type = "func", source = "Message panel mode: runs the state step." }
+Battle_WaitMessage = { addr = 0x801EA848, type = "func", source = "Message panel state 0: waits for a queued message." }
+Battle_SlideInMessagePanel = { addr = 0x801EA894, type = "func", source = "Message panel state 1: slides the panel down to y 0x12 with the message." }
+Battle_HoldMessagePanel = { addr = 0x801EA8F4, type = "func", source = "Message panel state 2: shows the message until its timer ends or a button is pressed." }
+Battle_SlideOutMessagePanel = { addr = 0x801EA9FC, type = "func", source = "Message panel state 3: slides the panel up, then waits for the next message." }
+Battle_DrawMessagePanel = { addr = 0x801EAAB8, type = "func", source = "Draws the message panel frame and the current message." }
+Battle_AdvanceMessage = { addr = 0x801EAB38, type = "func", source = "Steps to the next message; true when the queue is drained." }
+Battle_CountMessageChars = { addr = 0x801EAB6C, type = "func", source = "Counts a message's characters, a code that takes an argument as one." }
 g_BattleRecallAbilities = { addr = 0x801EAC58, source = "Abilities that Recall can cast." }
 g_BattleMagicShuffleAbilities = { addr = 0x801EAC78, source = "Abilities that MagicShuffle and Trump can cast." }
 s_BattlePanelOffsets = { addr = 0x801EAE94, source = "Battle panel positions." }

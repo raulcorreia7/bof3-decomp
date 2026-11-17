@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801E915C(void) {
+/* func_801E915C */
+MATCH void Battle_SlideInPartyPanel(void) {
     MenuPanelTask* panel;
     s16            value;
 
@@ -12,5 +13,5 @@ MATCH void func_801E915C(void) {
     } else {
         panel->pos.y = (value - 4);
     }
-    Battle_SetPartyCount((s16)g_MenuCurrentPanel->pos.x, (s16)g_MenuCurrentPanel->pos.y);
+    Battle_DrawPartyPanel((s16)g_MenuCurrentPanel->pos.x, (s16)g_MenuCurrentPanel->pos.y);
 }

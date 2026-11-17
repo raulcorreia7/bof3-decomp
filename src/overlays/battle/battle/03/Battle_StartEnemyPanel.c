@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801E97A8(void) {
+/* func_801E97A8 */
+MATCH void Battle_StartEnemyPanel(void) {
     BattlePanelTask* task;
 
     BATTLE_PANEL_TASK->ratio = (ENEMY_COMBATANT(BATTLE_PANEL_TASK->selection.slot).hp * 0x37 / ENEMY_COMBATANT(BATTLE_PANEL_TASK->selection.slot).stats.max_hp);

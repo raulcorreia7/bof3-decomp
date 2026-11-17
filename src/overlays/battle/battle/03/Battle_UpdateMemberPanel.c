@@ -4,14 +4,14 @@
  * two bars and sets or clears its 0x2000 bit from the gauge fraction.
  */
 /* func_801E9B18 */
-MATCH void Battle_DispatchPanel(void) {
-    BattlePanel5Steps handlers;
-    u16               flags;
-    u32               offset;
-    u32               slot;
-    u8*               row;
+MATCH void Battle_UpdateMemberPanel(void) {
+    BattleMemberPanelSteps handlers;
+    u16                    flags;
+    u32                    offset;
+    u32                    slot;
+    u8*                    row;
 
-    handlers = D_801D0FE0;
+    handlers = g_BattleMemberPanelSteps;
     handlers.steps[BATTLE_PANEL_TASK->state]();
     row = D_80145F04 + BATTLE_PANEL_TASK->selection.slot * BATTLE_PARTY_STRIDE;
     func_801EA1E0((((u8*)g_MenuCurrentPanel) + 0xB), (row + 0x1C), (((u8*)g_MenuCurrentPanel) + 0x1C), (((u8*)g_MenuCurrentPanel) + 0x14), (row + 0x14), (((u8*)g_MenuCurrentPanel) + 0xD),

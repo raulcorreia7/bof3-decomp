@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH u8 func_801EAB38(void) {
+/* func_801EAB38 */
+MATCH u8 Battle_AdvanceMessage(void) {
     u8* const base = ((u8*)&D_801F0000);
     s16       target_offset;
     s16       index_offset;

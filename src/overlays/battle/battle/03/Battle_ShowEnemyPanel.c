@@ -1,16 +1,17 @@
 #include "battle_03.h"
 
-MATCH void func_801E9910(void) {
+/* func_801E9910 */
+MATCH void Battle_ShowEnemyPanel(void) {
     MenuPanelTask* panel;
 
     panel = g_MenuCurrentPanel;
     Battle_DrawEnemyNamePanel((s16)panel->pos.x, (s16)panel->pos.y, panel->unk_0A);
     if (g_Battle.selection_latch != 0u) {
         if (g_BattleActorTurn->command.target == BATTLE_PANEL_TASK->selection.slot) {
-            func_801EA174();
+            Battle_LightPanel();
         }
         if ((g_BattleActorTurn->command.target & BATTLE_TARGET_ENEMY_SIDE) != 0u) {
-            func_801EA174();
+            Battle_LightPanel();
         }
     }
 }

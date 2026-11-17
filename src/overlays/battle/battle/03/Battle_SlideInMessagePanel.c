@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801EA894(void) {
+/* func_801EA894 */
+MATCH void Battle_SlideInMessagePanel(void) {
     MenuPanelTask* panel;
     s16            state;
 
@@ -12,5 +13,5 @@ MATCH void func_801EA894(void) {
     } else {
         panel->pos.y = state + 8;
     }
-    func_801EAAB8();
+    Battle_DrawMessagePanel();
 }
