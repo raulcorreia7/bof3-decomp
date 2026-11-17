@@ -29,13 +29,13 @@ MATCH void func_801D543C(void) {
             panel_timer = 8;
             UI_DrawText(28, 22, 0, TEXT_LENGTH_MAX, Message_GetText(GAME_TEXT_NO_SAVE_FILE));
             SAVE_DrawPortTabs(98, 76, D_801E60F8, g_SaveCardPort, 1);
-            g_SaveSlotCount             = 3;
-            D_801E60FC                  = 0xF;
-            D_8014865B                  = 0;
-            g_SaveSlotFirst             = 0;
-            g_SaveSlots[2].source_index = GAME_NONE;
-            g_SaveSlots[1].source_index = GAME_NONE;
-            g_SaveSlots[0].source_index = GAME_NONE;
+            g_SaveSlotCount           = 3;
+            D_801E60FC                = 0xF;
+            D_8014865B                = 0;
+            g_SaveSlotFirst           = 0;
+            g_SaveSlots[2].card_index = GAME_NONE;
+            g_SaveSlots[1].card_index = GAME_NONE;
+            g_SaveSlots[0].card_index = GAME_NONE;
             break;
         case SAVE_STATUS_WRITE_FAILED:
             resource = 7;
@@ -56,13 +56,13 @@ MATCH void func_801D543C(void) {
             panel_timer = 8;
             UI_DrawText(28, 22, 0, TEXT_LENGTH_MAX, Message_GetText(GAME_TEXT_INIT_COMPLETE));
             SAVE_DrawPortTabs(98, 76, D_801E60F8, g_SaveCardPort, 1);
-            g_SaveSlotCount             = 3;
-            D_801E60FC                  = 0xF;
-            D_8014865B                  = 0;
-            g_SaveSlotFirst             = 0;
-            g_SaveSlots[2].source_index = GAME_NONE;
-            g_SaveSlots[1].source_index = GAME_NONE;
-            g_SaveSlots[0].source_index = GAME_NONE;
+            g_SaveSlotCount           = 3;
+            D_801E60FC                = 0xF;
+            D_8014865B                = 0;
+            g_SaveSlotFirst           = 0;
+            g_SaveSlots[2].card_index = GAME_NONE;
+            g_SaveSlots[1].card_index = GAME_NONE;
+            g_SaveSlots[0].card_index = GAME_NONE;
             break;
         case SAVE_STATUS_CREATED:
             MENU_DRAW_HEADER();

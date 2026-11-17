@@ -1,7 +1,7 @@
 #include "start_08.h"
 
 /* The staged shop row is a 0x1C-byte record and the byte at +0x15 marks the
- * row hidden (0xFF); g_SaveSlots[0].source_index is that byte of the first row, so the cursor's
+ * row hidden (0xFF); g_SaveSlots[0].card_index is that byte of the first row, so the cursor's
  * row sits one stride per index above it. */
 #define SHOP_ROW_STRIDE 0x1C
 
@@ -34,7 +34,7 @@ MATCH void func_801E5738(void) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        if (*(&g_SaveSlots[0].source_index + (g_SaveSlotFirst * SHOP_ROW_STRIDE)) != GAME_NONE) {
+        if (*(&g_SaveSlots[0].card_index + (g_SaveSlotFirst * SHOP_ROW_STRIDE)) != GAME_NONE) {
             SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
             D_8014865B = 1;
             g_MenuStartStep++;

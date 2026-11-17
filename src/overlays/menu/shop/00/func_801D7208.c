@@ -3,17 +3,17 @@
 /* Source record block of the row copy. */
 
 MATCH void func_801D7208(void) {
-    MenuListRow* row;
+    SaveSlotRow* row;
     u8*          first;
     u8           i;
     u8           j;
     s32          offset;
 
-    first                       = &g_SaveSlots[0].source_index;
-    g_SaveSlots[2].source_index = GAME_NONE;
-    g_SaveSlots[1].source_index = GAME_NONE;
-    *first                      = 0xFF;
-    row                         = g_SaveSlots;
+    first                     = &g_SaveSlots[0].card_index;
+    g_SaveSlots[2].card_index = GAME_NONE;
+    g_SaveSlots[1].card_index = GAME_NONE;
+    *first                    = 0xFF;
+    row                       = g_SaveSlots;
     for (j = 0; j < BATTLE_PARTY_CHARACTERS_COUNT; j++) {
         i = 0;
         if (g_SaveSlotCount != 0) {
@@ -21,8 +21,8 @@ MATCH void func_801D7208(void) {
                 offset = i * 24;
                 if ((&D_8018E9A1)[offset] - '0' == j) {
                     SAVE_AccessFile(1, &g_SaveCardDirectory[offset], 1, 0x1C, 0xEA0);
-                    *(MenuListRowWords*)row = *(MenuListRowWords*)0x800C26A0;
-                    row->source_index       = i;
+                    *(SaveSlotRowCopy*)row = *(SaveSlotRowCopy*)0x800C26A0;
+                    row->card_index        = i;
                 }
                 i++;
             } while (i < g_SaveSlotCount);

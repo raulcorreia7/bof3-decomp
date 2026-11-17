@@ -567,7 +567,7 @@ void Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 item_kind, u8
 void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height);
 /* func_801DC6FC */
 void Menu_DrawInventoryWindow(MenuPanelTask* task);
-void SAVE_DrawSlot(u8 index, s32 left, s32 top, MenuListRow* row);
+void SAVE_DrawSlot(u8 index, s32 left, s32 top, SaveSlotRow* row);
 void SAVE_DrawPortTabs(s16 x, s16 y, u32 tab_flags, u8 port, u8 variant);
 void func_801DE188(void);
 void func_801DE1C4(void);

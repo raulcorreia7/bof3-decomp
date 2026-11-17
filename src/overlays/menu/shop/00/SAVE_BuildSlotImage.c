@@ -4,13 +4,13 @@
 typedef struct SaveSlotSummary {
     u8        name[CHARACTER_NAME_LENGTH];
     u8        party_order[PARTY_SLOT_COUNT];
-    u8        field_08;
-    u8        field_09;
-    u8        field_0A;
+    u8        level;
+    u8        window_style;
+    u8        unk_0A;
     u8        pad_0B;
-    GameClock field_0C;
+    GameClock play_clock;
     u8        pad_10[4];
-    s32       field_14;
+    s32       event_flag;
 } SaveSlotSummary;
 
 ASSERT_SIZE(SaveSlotSummary, 0x18);
@@ -73,16 +73,16 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
         slot += 1;
         col = slot & HALF_MASK;
     } while ((u32)(slot & HALF_MASK) < 3U);
-    row->field_08 = work->characters[0].level;
-    row->field_0C = work->play_clock;
-    row->field_09 = work->window_style;
-    row->field_0A = work->unk_7B[0];
-    sum           = 0;
-    dst           = g_SaveBuffer;
-    src           = (u8*)work;
-    i             = 0;
-    row->field_14 = SYS_TestFlag(g_SceneEventFlags, 0x92U);
-    D_80145025    = (u8)g_Game.flags;
+    row->level        = work->characters[0].level;
+    row->play_clock   = work->play_clock;
+    row->window_style = work->window_style;
+    row->unk_0A       = work->unk_7B[0];
+    sum               = 0;
+    dst               = g_SaveBuffer;
+    src               = (u8*)work;
+    i                 = 0;
+    row->event_flag   = SYS_TestFlag(g_SceneEventFlags, 0x92U);
+    D_80145025        = (u8)g_Game.flags;
     do {
         i += 1;
         count = i & HALF_MASK;
