@@ -2,22 +2,21 @@
 #define FAKE_DECL_TASK_VOLATILE
 #include "area134_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F34DC(void) {
-    u8* work;
-    s32 edge;
+MATCH void func_801F34DC(void) {
+    u8     scene_step = 0x1E;
+    Actor* work;
+    s32    edge;
 
-    work                   = (u8*)g_Task;
-    edge                   = FIELD(s32, D_801468BC, 0x0);
-    g_Task                 = g_Actors;
-    g_GameState            = g_Game.members;
-    FIELD(s32, work, 0x34) = D_80145EC4 - edge;
-    g_Task                 = work;
-    TASK_SET(g_Game.members);
-    g_Task               = work;
-    g_SceneState.step_05 = 0x1E;
+    work              = g_Task;
+    edge              = g_Actors->pos.x.fixed;
+    g_Task            = g_Actors;
+    g_GameState       = g_Game.members;
+    work->pos.x.fixed = D_80145EC4 - edge;
+    g_Task            = work;
+    do {
+        TASK_SET(g_Game.members);
+        g_Task = work;
+    } while (0);
+    g_SceneState.step_05 = scene_step;
     Actor_Clear();
 }
-#else
-INCLUDE_ASM(func_801F34DC);
-#endif
