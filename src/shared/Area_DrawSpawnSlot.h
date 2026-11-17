@@ -35,6 +35,6 @@ MATCH void Area_DrawSpawnSlot(AreaSpawnSlot* slot) {
         primitive->r2 = rim;
         primitive->g1 = rim;
         primitive->r1 = rim;
-        GFX_AddPrim(2u, sizeof(POLY_G3));
+        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G3));
     } while ((u16)angle < ONE);
 }

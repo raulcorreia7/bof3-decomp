@@ -62,7 +62,7 @@ NON_MATCHING void func_801FAFA0(s32 message, s32 frames) {
     g_MessageRequest                         = message;
     *(volatile u16*)g_ScratchPad.cells.bytes = elapsed;
     if (elapsed < limit) {
-        UI_DrawText(0x50, 0x3C, 0, 0xFF, (MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, (u16)message) + 2));
+        UI_DrawText(0x50, 0x3C, 0, TEXT_LENGTH_MAX, (MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, (u16)message) + 2));
         elapsed = *(volatile u16*)g_ScratchPad.cells.bytes;
         if (elapsed < 0x20) {
             GFX_CopyPaletteCapped(elapsed & 0xFF);

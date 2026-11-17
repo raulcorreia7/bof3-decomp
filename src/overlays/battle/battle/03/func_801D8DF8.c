@@ -47,7 +47,7 @@ NON_MATCHING void func_801D8DF8(s32 panel_x, s32 panel_y, u32 index) {
         status_mode = (panel_status & 0xBFC) != 0;
     }
     battler_index = index & BYTE_MASK;
-    UI_DrawTextString((panel_x + 4), (panel_y + 2), status_mode, 5U, (const u8*)&g_Game.members[battler_index].chr);
+    UI_DrawTextString((panel_x + 4), (panel_y + 2), status_mode, CHARACTER_NAME_LENGTH, (const u8*)&g_Game.members[battler_index].chr);
     bar_status = g_Game.members[battler_index].chr.status;
     if (bar_status & 0x4000) {
         status_mode = 2;

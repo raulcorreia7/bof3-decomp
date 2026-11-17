@@ -25,7 +25,7 @@ MATCH void Area_DrawYellowLine(s32* from, s32* to, u8 intensity) {
     setRGB1(prim, intensity, intensity, 0);
     setRGB2(prim, 0, 0, 0);
     setRGB3(prim, intensity, intensity, 0);
-    GFX_AddPrim(2, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G4));
 
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
@@ -44,7 +44,7 @@ MATCH void Area_DrawYellowLine(s32* from, s32* to, u8 intensity) {
     setRGB1(prim, 0, 0, 0);
     setRGB2(prim, intensity, intensity, 0);
     setRGB3(prim, 0, 0, 0);
-    GFX_AddPrim(2, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G4));
 
     step.x    = -0x1000;
     step.y    = -0x400;
@@ -62,7 +62,7 @@ MATCH void Area_DrawYellowLine(s32* from, s32* to, u8 intensity) {
         SetSemiTrans(segment, 1);
         setXY0(segment, projected.vx, projected.vy);
         setRGB0(segment, intensity, intensity, 0);
-        GFX_AddPrim(2, 12);
+        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, 12);
         current.x += -0x10000;
         current.y += -0x4000;
     }

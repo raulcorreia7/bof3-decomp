@@ -18,5 +18,5 @@ MATCH void func_801F4160(s32 step, s32 shade) {
     RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
                   &flag);
     Area_ApplyTileToQuad(AREA108_QUAD_WORD + ((shade & 0xF8) << 16), prim, 1);
-    GFX_AddPrim(5, 0x28);
+    GFX_AddPrim(GFX_LAYER_SCENE_BACK, 0x28);
 }

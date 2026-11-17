@@ -55,14 +55,14 @@ NON_MATCHING void func_801F3514(void) {
 
     if (g_AreaSceneMode == 2) {
         tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_SUB, 448, 256);
-        GFX_ADD_LAYER_DRAW_MODE(3, tpage);
+        GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_EFFECT, tpage);
         tile = (TILE*)g_GfxPrimCursor;
         SetTile(tile);
         SetSemiTrans(tile, 1);
         setXY0(tile, 0, 0);
         setWH(tile, SCREEN_WIDTH, SCREEN_HEIGHT);
         setRGB0(tile, 0xFF, 0, 0);
-        GFX_AddPrim(3, sizeof(TILE));
+        GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(TILE));
         g_AreaSceneMode = 0;
     }
 }

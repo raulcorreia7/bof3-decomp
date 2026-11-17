@@ -3,6 +3,10 @@
 
 #include "types.h"
 
+/* The PSX VRAM, in pixels. */
+#define GFX_VRAM_WIDTH            1024
+#define GFX_VRAM_HEIGHT           512
+
 /* Palette row sizes and chunk geometry used by the area and graphics loaders
  * and the menu palette writers (@source: wiki:formats/graphics). */
 #define PAL_ROW_4BPP              0x20

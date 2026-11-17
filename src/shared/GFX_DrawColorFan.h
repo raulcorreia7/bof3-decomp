@@ -31,7 +31,7 @@ MATCH void GFX_DrawColorFan(s32* pos, s16 origin, s32 flags) {
         setRGB0(primitive, (flags & 4) << 5, (flags & 2) << 6, (flags & 1) << 7);
         setRGB1(primitive, 0, 0, 0);
         setRGB2(primitive, 0, 0, 0);
-        GFX_AddPrim(2u, sizeof(POLY_G3));
+        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G3));
         i += 1;
     } while ((i & BYTE_MASK) < 32U);
 }

@@ -60,7 +60,7 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     var_s1 = var_s7 + 3;
     var_s1 <<= 0x10;
     var_s1 = var_s1 >> 0x10;
-    UI_DrawTextString(var_a0_154, (s16)var_s1, 0, 8U, g_BattleEnemyBattlers[var_s4].name);
+    UI_DrawTextString(var_a0_154, (s16)var_s1, 0, ENEMY_NAME_LENGTH, g_BattleEnemyBattlers[var_s4].name);
     var_s0 = var_fp + 2;
     var_s0 <<= 0x10;
     var_s0      = var_s0 >> 0x10;

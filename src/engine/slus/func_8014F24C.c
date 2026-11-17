@@ -17,7 +17,7 @@ MATCH void func_8014F24C(void) {
     value = 0;
 
 loop:
-    if ((GFX_UpdateScreenFade(&value, 0x200, 1, 0, flag) & BYTE_MASK) == 0) {
+    if ((GFX_UpdateScreenFade(&value, 0x200, 1, GFX_LAYER_TOP, flag) & BYTE_MASK) == 0) {
         first_coordinate         = level[0];
         countdown                = g_AreaCameraOffsetZ;
         g_AreaCameraRefreshCount = flag;

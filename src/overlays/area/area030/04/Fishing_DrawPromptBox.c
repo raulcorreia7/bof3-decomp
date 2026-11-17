@@ -9,7 +9,7 @@ MATCH void Fishing_DrawPromptBox(s32 x, s32 y) {
 
     sy = y;
     sx = x;
-    UI_DrawWindow(sx, y + 1, 100, 56, 0x80, g_WindowStyle);
+    UI_DrawWindow(sx, y + 1, 100, 56, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
     Fishing_SetDrawMode(9, 1);
     Fishing_DrawSprite(37, 1, sx, sy);
     for (i = 0; i < 8; i++) {
@@ -24,7 +24,7 @@ MATCH void Fishing_DrawPromptBox(s32 x, s32 y) {
         Fishing_DrawSprite(49, 1, sx + 8 + i * 8, sy + 56);
     }
     Fishing_DrawSprite(50, 1, sx + 96, sy + 56);
-    UI_DrawText(sx + 35, sy + 6, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_FISH));
-    UI_DrawText(sx + 10, sy + 25, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_RETRY));
-    UI_DrawText(sx + 10, sy + 41, 0, 255, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_EXIT));
+    UI_DrawText(sx + 35, sy + 6, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_FISH));
+    UI_DrawText(sx + 10, sy + 25, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_RETRY));
+    UI_DrawText(sx + 10, sy + 41, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_EXIT));
 }

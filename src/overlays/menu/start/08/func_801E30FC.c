@@ -8,7 +8,7 @@ MATCH void func_801E30FC(u16 row_x, u16 row_y, s32 row_flags) {
     memcpy(data, s_RowCaptionTags, 0x18);
     y = row_y;
     if (row_flags & 0x20) {
-        UI_DrawText(row_x + 6, y + 1, 2, 3, data);
+        UI_DrawText(row_x + 6, y + 1, UI_TEXT_HIGHLIGHT, 3, data);
     } else if (row_flags & 0x40) {
         UI_DrawText(row_x + 6, y + 1, 1, 3, (data + 3));
     } else if (row_flags & 0x10) {

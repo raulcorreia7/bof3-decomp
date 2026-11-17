@@ -59,10 +59,10 @@ MATCH void Menu_DrawEquipChoiceWindow(MenuPanelTask* task) {
     for (i = 0; i < scroll_rows + 9; i++) {
         if (*ids != 0) {
             if (task->unk_0A + i == task->unk_0B) {
-                func_801AF800(task->pos.x + 7, (s16)(y + 26), MENU_SHADE_DIM, task->unk_08, *ids, *counts, true);
-                func_801AF800(task->pos.x + 7, (s16)(y + 24), MENU_SHADE_NORMAL, task->unk_08, *ids, *counts, false);
+                func_801AF800(task->pos.x + 7, (s16)(y + 26), UI_TEXT_DIM, task->unk_08, *ids, *counts, true);
+                func_801AF800(task->pos.x + 7, (s16)(y + 24), UI_TEXT_NORMAL, task->unk_08, *ids, *counts, false);
             } else {
-                func_801AF800(task->pos.x + 7, (s16)(y + 26), MENU_SHADE_NORMAL, task->unk_08, *ids, *counts, false);
+                func_801AF800(task->pos.x + 7, (s16)(y + 26), UI_TEXT_NORMAL, task->unk_08, *ids, *counts, false);
             }
         }
         ids++;
@@ -75,35 +75,35 @@ MATCH void Menu_DrawEquipChoiceWindow(MenuPanelTask* task) {
     title   = &g_MenuEquipTitles[task->unk_08];
     length  = Game_ReadCommand(*title);
     title_x = length * 4 - 78;
-    UI_DrawText(task->pos.x - title_x, task->pos.y + 7, MENU_SHADE_NORMAL, 16, *title);
+    UI_DrawText(task->pos.x - title_x, task->pos.y + 7, UI_TEXT_NORMAL, MENU_LABEL_LENGTH, *title);
     sprintf(g_UiFormatBuffer, g_MenuInventoryCountFormat, choices, INV_SLOTS_PER_CATEGORY);
-    UI_DrawGlyphString(task->pos.x + 85, task->pos.y + 146, MENU_SHADE_NORMAL, g_UiFormatBuffer);
+    UI_DrawGlyphString(task->pos.x + 85, task->pos.y + 146, UI_TEXT_NORMAL, g_UiFormatBuffer);
 
-    UI_DrawSpriteRun(task->pos.x, task->pos.y, g_MenuListTab2OffSprites, 1);
-    UI_DrawSpriteRun(task->pos.x, task->pos.y, g_MenuInventoryTab1OffSprites, 1);
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, g_MenuListTab2OffSprites, UI_SPRITE_ALT_PAGE);
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, g_MenuInventoryTab1OffSprites, UI_SPRITE_ALT_PAGE);
 
     for (i = 0; i < 10; i++) {
-        UI_DrawSprite(task->pos.x + (i + 5) * 8, task->pos.y, 1, 1);
+        UI_DrawSprite(task->pos.x + (i + 5) * 8, task->pos.y, 1, UI_SPRITE_ALT_PAGE);
     }
     for (i = 0; i < 15; i++) {
-        UI_DrawSprite(task->pos.x, task->pos.y + (i + 3) * 8, 4, 1);
+        UI_DrawSprite(task->pos.x, task->pos.y + (i + 3) * 8, 4, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite(task->pos.x + 144, task->pos.y + 24, 0x16, 1);
+    UI_DrawSprite(task->pos.x + 144, task->pos.y + 24, 0x16, UI_SPRITE_ALT_PAGE);
     for (i = 0; i < 12; i++) {
-        UI_DrawSprite(task->pos.x + 144, task->pos.y + (i + 5) * 8, 0x17, 1);
+        UI_DrawSprite(task->pos.x + 144, task->pos.y + (i + 5) * 8, 0x17, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite(task->pos.x + 144, task->pos.y + 136, 0x18, 1);
-    UI_DrawSprite(task->pos.x, task->pos.y + 144, 0x19, 1);
+    UI_DrawSprite(task->pos.x + 144, task->pos.y + 136, 0x18, UI_SPRITE_ALT_PAGE);
+    UI_DrawSprite(task->pos.x, task->pos.y + 144, 0x19, UI_SPRITE_ALT_PAGE);
     for (i = 0; i < 9; i++) {
-        UI_DrawSprite(task->pos.x + (i + 1) * 8, task->pos.y + 144, 0x1A, 1);
+        UI_DrawSprite(task->pos.x + (i + 1) * 8, task->pos.y + 144, 0x1A, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite(task->pos.x + 80, task->pos.y + 144, 0x1B, 1);
+    UI_DrawSprite(task->pos.x + 80, task->pos.y + 144, 0x1B, UI_SPRITE_ALT_PAGE);
     for (i = 0; i < 6; i++) {
-        UI_DrawSprite(task->pos.x + (i + 11) * 8, task->pos.y + 144, 0x1C, 1);
+        UI_DrawSprite(task->pos.x + (i + 11) * 8, task->pos.y + 144, 0x1C, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite(task->pos.x + 136, task->pos.y + 144, 0x1D, 1);
-    UI_DrawSprite(task->pos.x + 8, task->pos.y, 0x32, 1);
-    UI_DrawSprite(task->pos.x + 144, task->pos.y, 0x33, 1);
+    UI_DrawSprite(task->pos.x + 136, task->pos.y + 144, 0x1D, UI_SPRITE_ALT_PAGE);
+    UI_DrawSprite(task->pos.x + 8, task->pos.y, 0x32, UI_SPRITE_ALT_PAGE);
+    UI_DrawSprite(task->pos.x + 144, task->pos.y, 0x33, UI_SPRITE_ALT_PAGE);
 
     func_801AFA1C(g_MenuEquipChoiceIds, task->unk_0A, task->pos.x + 144, task->pos.y + 24, 9, INV_SLOTS_PER_CATEGORY, 116);
 }

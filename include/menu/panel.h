@@ -118,12 +118,8 @@ typedef union MenuListSource {
 
 ASSERT_SIZE(MenuListSource, 2);
 
-/* The text shade a menu row is drawn with (UI_DrawText and UI_DrawAbilityRow). */
-enum {
-    MENU_SHADE_NORMAL   = 0,
-    MENU_SHADE_SELECTED = 2,
-    MENU_SHADE_DIM      = 7,
-};
+/* The widest menu label or title, in glyphs. */
+#define MENU_LABEL_LENGTH 16
 
 /* The frame sprites of a panel border: the top edge and its corners, the side edges, and the flat bottom edge
  * that closes the short panels. */
@@ -281,7 +277,7 @@ static inline void MenuDrawPanelIcon(s16 x, s16 y, s32 u, s32 v, u16 clut, u8 co
     icon->g0   = color;
     icon->r0   = color;
     SetSemiTrans(icon, 0);
-    GFX_AddPrim(1, sizeof(SPRT_8));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT_8));
 }
 
 #endif

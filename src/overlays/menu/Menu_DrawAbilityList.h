@@ -14,7 +14,6 @@
 #define MENU_ABILITY_LIST_SHADOW_DY     2
 #define MENU_ABILITY_LIST_TITLE_X       78
 #define MENU_ABILITY_LIST_TITLE_Y       7
-#define MENU_ABILITY_LIST_TITLE_WIDTH   16
 #define MENU_ABILITY_LIST_RIGHT_X       144
 #define MENU_ABILITY_LIST_CELL          8
 #define MENU_ABILITY_LIST_TOP_CELLS     10
@@ -63,17 +62,17 @@ MATCH void Menu_DrawAbilityList(MenuListPanel* panel) {
     do {
         if (*list != 0) {
             locked = func_801AF5B0(panel->use_context, D_80148656, *list) == 0;
-            shade  = locked ? MENU_SHADE_DIM : MENU_SHADE_NORMAL;
+            shade  = locked ? UI_TEXT_DIM : UI_TEXT_NORMAL;
             if (n == panel->selected) {
-                shade = MENU_SHADE_SELECTED;
+                shade = UI_TEXT_HIGHLIGHT;
             }
             element = Char_GetAbilityElement(*list);
             ability = &g_Abilities[*list];
             /* needs: type: D_80148656 is read signed here and unsigned above */
             cost    = Char_GetAbilityCost(g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], *list, 0);
             if (n == panel->selected || n == panel->unk_0C) {
-                if (shade != MENU_SHADE_DIM) {
-                    UI_DrawAbilityRow(panel->pos.x + MENU_ABILITY_LIST_ICON_X, y + MENU_ABILITY_LIST_ROW_Y + MENU_ABILITY_LIST_SHADOW_DY, MENU_SHADE_DIM, element, ability, cost,
+                if (shade != UI_TEXT_DIM) {
+                    UI_DrawAbilityRow(panel->pos.x + MENU_ABILITY_LIST_ICON_X, y + MENU_ABILITY_LIST_ROW_Y + MENU_ABILITY_LIST_SHADOW_DY, UI_TEXT_DIM, element, ability, cost,
                                       MENU_ABILITY_LIST_ICON_DIMMED);
                 }
                 UI_DrawAbilityRow(panel->pos.x + MENU_ABILITY_LIST_ICON_X, y + MENU_ABILITY_LIST_ROW_Y, shade, element, ability, cost, locked);
@@ -87,8 +86,8 @@ MATCH void Menu_DrawAbilityList(MenuListPanel* panel) {
     } while (n < MENU_ABILITY_LIST_ROW_COUNT);
 
     x = panel->pos.x + MENU_ABILITY_LIST_TITLE_X;
-    UI_DrawText(x - strlen(g_MenuAbilityListNames[panel->source.abilities.type]) * MENU_ABILITY_LIST_GLYPH_HALF, panel->pos.y + MENU_ABILITY_LIST_TITLE_Y, MENU_SHADE_NORMAL,
-                MENU_ABILITY_LIST_TITLE_WIDTH, g_MenuAbilityListNames[panel->source.abilities.type]);
+    UI_DrawText(x - strlen(g_MenuAbilityListNames[panel->source.abilities.type]) * MENU_ABILITY_LIST_GLYPH_HALF, panel->pos.y + MENU_ABILITY_LIST_TITLE_Y, UI_TEXT_NORMAL, MENU_LABEL_LENGTH,
+                g_MenuAbilityListNames[panel->source.abilities.type]);
 
     UI_DrawSpriteRun(panel->pos.x, panel->pos.y, (panel->flags & MENU_LIST_FLAG_TAB_2) ? g_MenuListTab2OnSprites : g_MenuListTab2OffSprites, MENU_ABILITY_LIST_SPRITE_FLAGS);
     UI_DrawSpriteRun(panel->pos.x, panel->pos.y, (panel->flags & MENU_LIST_FLAG_TAB_1) ? g_MenuListTab1OnSprites : g_MenuListTab1OffSprites, MENU_ABILITY_LIST_SPRITE_FLAGS);

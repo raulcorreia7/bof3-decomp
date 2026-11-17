@@ -11,7 +11,7 @@ MATCH void func_801EF180(s32 shade) {
     x = 272;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 832, 256), 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(DR_MODE));
 
     sprt       = (SPRT*)g_GfxPrimCursor;
     sprt->clut = GetClut(0, 0x1FA);
@@ -23,7 +23,7 @@ MATCH void func_801EF180(s32 shade) {
     sprt->u0 = 0;
     sprt->h  = 160;
     SetSprt(sprt);
-    GFX_AddPrim(2, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(SPRT));
 
     sprt       = (SPRT*)g_GfxPrimCursor;
     sprt->clut = GetClut(0, 0x1FA);
@@ -35,7 +35,7 @@ MATCH void func_801EF180(s32 shade) {
     sprt->w  = 32;
     sprt->h  = 96;
     SetSprt(sprt);
-    GFX_AddPrim(2, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(SPRT));
 
     sprt       = (SPRT*)g_GfxPrimCursor;
     sprt->clut = GetClut(0, 0x1FA);
@@ -47,5 +47,5 @@ MATCH void func_801EF180(s32 shade) {
     sprt->w  = 32;
     sprt->h  = 64;
     SetSprt(sprt);
-    GFX_AddPrim(2, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(SPRT));
 }

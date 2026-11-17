@@ -44,19 +44,19 @@ MATCH void Shop_DrawItems(MenuListPanel* panel) {
         icon     = Item_GetIcon(group, item);
         resource = Item_GetRecord(group, item);
         if (panel->source.items.dimmed != 0 || g_Zenny < price) {
-            color = MENU_SHADE_DIM;
+            color = UI_TEXT_DIM;
             dim   = SHOP_ITEM_ICON_DIMMED;
         } else {
-            color = MENU_SHADE_NORMAL;
+            color = UI_TEXT_NORMAL;
             dim   = SHOP_ITEM_ICON_ENABLED;
         }
 
         TEXT_Format(g_UiFormatBuffer, D_801D0E88, price);
         if (index == panel->unk_0C) {
-            if (color == MENU_SHADE_NORMAL) {
+            if (color == UI_TEXT_NORMAL) {
                 func_801AEA80((u16)(panel->pos.x + SHOP_ITEM_LIST_ICON_X), (u16)(y + SHOP_ITEM_LIST_TEXT_DY), D_801E5E0C[(u8)icon], SHOP_ITEM_ICON_DIMMED);
-                UI_DrawText(panel->pos.x + SHOP_ITEM_LIST_NAME_X, y, MENU_SHADE_DIM, (u8)Game_ReadCommand(resource), resource);
-                UI_DrawGlyphString(panel->pos.x + SHOP_ITEM_LIST_PRICE_X, y + SHOP_ITEM_LIST_TEXT_DY, MENU_SHADE_DIM, g_UiFormatBuffer);
+                UI_DrawText(panel->pos.x + SHOP_ITEM_LIST_NAME_X, y, UI_TEXT_DIM, (u8)Game_ReadCommand(resource), resource);
+                UI_DrawGlyphString(panel->pos.x + SHOP_ITEM_LIST_PRICE_X, y + SHOP_ITEM_LIST_TEXT_DY, UI_TEXT_DIM, g_UiFormatBuffer);
             }
             y -= SHOP_ITEM_LIST_SELECTED_RISE;
         }

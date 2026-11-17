@@ -19,7 +19,7 @@ MATCH void func_801F302C(s32* first, s32* second, Actor* task) {
     Area_ProjectPoint(first, (DVECTOR*)&line->x0);
     Area_ProjectPoint(second, (DVECTOR*)&line->x1);
     setRGB0(line, D_801F4D5C[g_Task->unk_06 * 3], D_801F4D5D[g_Task->unk_06 * 3], D_801F4D5E[g_Task->unk_06 * 3]);
-    GFX_AddPrim(3, sizeof(LINE_F2));
+    GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(LINE_F2));
     angle   = ratan2(line->y1 - line->y0, line->x1 - line->x0);
     size[0] = 64;
     size[1] = 0;

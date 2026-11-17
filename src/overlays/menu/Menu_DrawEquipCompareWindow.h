@@ -24,7 +24,7 @@ MATCH void Menu_DrawEquipCompareWindow(u8 index, s32 x, s32 y, u8* patch, u8 hid
     UI_DrawWindow(x + 4, y + 4, MENU_EQUIP_COMPARE_WINDOW_WIDTH, MENU_EQUIP_COMPARE_WINDOW_HEIGHT, 0, CHARACTER_BLOCK->window_style);
     chr   = (Character*)CHARACTER_BLOCK->records[index];
     stats = &chr->stats;
-    UI_DrawText(x + 32, y + 7, 0, 5, chr->name);
+    UI_DrawText(x + 32, y + 7, 0, CHARACTER_NAME_LENGTH, chr->name);
     for (i = 0, label_y = y + 26; i < MENU_EQUIP_COMPARE_STATS; i++) {
         UI_DrawText(x + 5, label_y + i * 13, 0, 4, &g_MenuEquipCompareLabels[i * MENU_EQUIP_STAT_LABEL_SIZE]);
     }
@@ -63,35 +63,35 @@ MATCH void Menu_DrawEquipCompareWindow(u8 index, s32 x, s32 y, u8* patch, u8 hid
     for (i = 0; i < EQUIP_SLOT_COUNT; i++) {
         if (i == task->unk_0B) {
             func_801AEA80((u16)(left + 6), (u16)(top + (i * 13 + 87)), g_MenuEquipSlotIcons[i], 1);
-            UI_DrawText(left + 17, top + 85 + i * 13, MENU_SHADE_DIM, Game_ReadCommand(compare.names[i]) & BYTE_MASK, compare.names[i]);
+            UI_DrawText(left + 17, top + 85 + i * 13, UI_TEXT_DIM, Game_ReadCommand(compare.names[i]) & BYTE_MASK, compare.names[i]);
             func_801AEA80((u16)(left + 6), (u16)(top + i * 13 + 85), g_MenuEquipSlotIcons[i], 0);
-            UI_DrawText(left + 17, top + 85 + i * 13 - 2, MENU_SHADE_SELECTED, Game_ReadCommand(compare.names[i]) & BYTE_MASK, compare.names[i]);
+            UI_DrawText(left + 17, top + 85 + i * 13 - 2, UI_TEXT_HIGHLIGHT, Game_ReadCommand(compare.names[i]) & BYTE_MASK, compare.names[i]);
         } else if (i == task->unk_0A) {
             func_801AEA80((u16)(left + 6), (u16)(top + (i * 13 + 87)), g_MenuEquipSlotIcons[i], 1);
-            UI_DrawText(left + 17, top + 85 + i * 13, MENU_SHADE_DIM, Game_ReadCommand(compare.names[i]) & BYTE_MASK, compare.names[i]);
+            UI_DrawText(left + 17, top + 85 + i * 13, UI_TEXT_DIM, Game_ReadCommand(compare.names[i]) & BYTE_MASK, compare.names[i]);
             func_801AEA80((u16)(left + 6), (u16)(top + i * 13 + 85), g_MenuEquipSlotIcons[i], 0);
-            UI_DrawText(left + 17, top + 85 + i * 13 - 2, MENU_SHADE_NORMAL, Game_ReadCommand(compare.names[i]) & BYTE_MASK, compare.names[i]);
+            UI_DrawText(left + 17, top + 85 + i * 13 - 2, UI_TEXT_NORMAL, Game_ReadCommand(compare.names[i]) & BYTE_MASK, compare.names[i]);
         } else {
             func_801AEA80((u16)(left + 6), (u16)(top + (i * 13 + 87)), g_MenuEquipSlotIcons[i], 0);
-            UI_DrawText(left + 17, top + 85 + i * 13, MENU_SHADE_NORMAL, Game_ReadCommand(compare.names[i]) & BYTE_MASK, compare.names[i]);
+            UI_DrawText(left + 17, top + 85 + i * 13, UI_TEXT_NORMAL, Game_ReadCommand(compare.names[i]) & BYTE_MASK, compare.names[i]);
         }
     }
 
-    UI_DrawSpriteRun(left, top, g_MenuEquipCompareSprites, 1);
+    UI_DrawSpriteRun(left, top, g_MenuEquipCompareSprites, UI_SPRITE_ALT_PAGE);
     for (i = 0; i < 7; i++) {
-        UI_DrawSprite(left, top + (i + 3) * 8, 4, 1);
-        UI_DrawSprite(left + 120, top + (i + 3) * 8, 8, 1);
+        UI_DrawSprite(left, top + (i + 3) * 8, 4, UI_SPRITE_ALT_PAGE);
+        UI_DrawSprite(left + 120, top + (i + 3) * 8, 8, UI_SPRITE_ALT_PAGE);
     }
     for (i = 0; i < 9; i++) {
-        UI_DrawSprite(left, top + (i + 11) * 8, 4, 1);
-        UI_DrawSprite(left + 120, top + (i + 11) * 8, 8, 1);
+        UI_DrawSprite(left, top + (i + 11) * 8, 4, UI_SPRITE_ALT_PAGE);
+        UI_DrawSprite(left + 120, top + (i + 11) * 8, 8, UI_SPRITE_ALT_PAGE);
     }
     for (i = 0; i < 14; i++) {
-        UI_DrawSprite(left + (i + 1) * 8, top + 80, 0xE, 1);
-        UI_DrawSprite(left + (i + 1) * 8, top + 160, 0x11, 1);
+        UI_DrawSprite(left + (i + 1) * 8, top + 80, 0xE, UI_SPRITE_ALT_PAGE);
+        UI_DrawSprite(left + (i + 1) * 8, top + 160, 0x11, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite(left, top + 80, 0xD, 1);
-    UI_DrawSprite(left + 120, top + 80, 0xF, 1);
-    UI_DrawSprite(left, top + 160, 0x10, 1);
-    UI_DrawSprite(left + 120, top + 160, 0x12, 1);
+    UI_DrawSprite(left, top + 80, 0xD, UI_SPRITE_ALT_PAGE);
+    UI_DrawSprite(left + 120, top + 80, 0xF, UI_SPRITE_ALT_PAGE);
+    UI_DrawSprite(left, top + 160, 0x10, UI_SPRITE_ALT_PAGE);
+    UI_DrawSprite(left + 120, top + 160, 0x12, UI_SPRITE_ALT_PAGE);
 }

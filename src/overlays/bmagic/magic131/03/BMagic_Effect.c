@@ -553,7 +553,7 @@ NON_MATCHING void func_801F06B4(void) {
         tpage = 0x35;
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(DR_MODE));
 
     g_ScratchPad.cells.halves[4] = (s8)g_Task->unk_5D * 8;
     g_ScratchPad.cells.halves[5] = (s8)g_Task->unk_5D * 8;
@@ -596,7 +596,7 @@ NON_MATCHING void func_801F06B4(void) {
                           &depth, &flag);
             setRGB0(poly, g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6]);
             if ((u8)(i - 10) >= 2) {
-                GFX_AddPrim(3, sizeof(POLY_FT4));
+                GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_FT4));
             }
         }
     }

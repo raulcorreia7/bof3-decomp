@@ -168,7 +168,7 @@ MATCH void func_801D1370(s32* first, s32* second, s16 width) {
     Area_ProjectPoint(first, (DVECTOR*)&line->x0);
     Area_ProjectPoint(second, (DVECTOR*)&line->x1);
     setRGB0(line, 64, 0, 0);
-    GFX_AddPrim(3, sizeof(LINE_F2));
+    GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(LINE_F2));
     angle   = ratan2(line->y1 - line->y0, line->x1 - line->x0);
     size[0] = size[1] = width;
     Game_ProjectWorldPoint(first, size, scale);
@@ -197,7 +197,7 @@ MATCH void func_801D1540(s32 x, s32 y, s16 radius, u16 angle) {
         setRGB0(prim, 64, 0, 0);
         setRGB1(prim, 0, 0, 0);
         setRGB2(prim, 0, 0, 0);
-        GFX_AddPrim(3, sizeof(POLY_G3));
+        GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_G3));
     } while (i < 8);
 }
 
@@ -212,7 +212,7 @@ MATCH void func_801D1690(s16 x1, s16 y1, s16 radius1, u16 angle1, s16 x2, s16 y2
     setRGB1(poly, 64, 0, 0);
     setRGB2(poly, 0, 0, 0);
     setRGB3(poly, 0, 0, 0);
-    GFX_AddPrim(3, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_G4));
 
     poly++;
     memcpy(poly, poly - 1, sizeof(POLY_G4));
@@ -220,7 +220,7 @@ MATCH void func_801D1690(s16 x1, s16 y1, s16 radius1, u16 angle1, s16 x2, s16 y2
     poly->y2 = y1 + FIXED_MUL(radius1, rsin(angle1 + ANGLE_180));
     poly->x3 = x2 + FIXED_MUL(radius2, rcos(angle2));
     poly->y3 = y2 + FIXED_MUL(radius2, rsin(angle2));
-    GFX_AddPrim(3, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_G4));
 }
 
 MATCH void func_801D1914(s16 amount) {
@@ -260,7 +260,7 @@ MATCH void func_801D1C1C(s32* from, s32* to, u8 level) {
     u16      tpage;
 
     tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(2, tpage);
+    GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, tpage);
 
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
@@ -279,7 +279,7 @@ MATCH void func_801D1C1C(s32* from, s32* to, u8 level) {
     setRGB1(prim, level, level, 0);
     setRGB2(prim, 0, 0, 0);
     setRGB3(prim, level, level, 0);
-    GFX_AddPrim(2, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G4));
 
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
@@ -298,7 +298,7 @@ MATCH void func_801D1C1C(s32* from, s32* to, u8 level) {
     setRGB1(prim, 0, 0, 0);
     setRGB2(prim, 0, level, 0);
     setRGB3(prim, 0, 0, 0);
-    GFX_AddPrim(2, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G4));
 
     step.x    = (to[0] - from[0]) >> 6;
     step.y    = (to[1] - from[1]) >> 6;
@@ -317,7 +317,7 @@ MATCH void func_801D1C1C(s32* from, s32* to, u8 level) {
         SetSemiTrans(segment, 1);
         setXY0(segment, projected.vx, projected.vy - 1);
         setRGB0(segment, 0, level, 0);
-        GFX_AddPrim(2, sizeof(TILE_1));
+        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(TILE_1));
         current.x += step.x * 8;
         current.y += step.y * 8;
         current.z += step.z * 8;

@@ -362,13 +362,13 @@ NON_MATCHING void func_801D2304(s32 x, s32 y) {
 
     left = x;
     top  = y;
-    UI_DrawWindow((u16)(x - 4), (u16)(y - 8), 0xDC, 0x8C, 0xF0, g_WindowStyle);
+    UI_DrawWindow((u16)(x - 4), (u16)(y - 8), 0xDC, 0x8C, UI_WINDOW_OPEN_ALL, g_WindowStyle);
     Menu_DrawPanelFrame((s16)(x - 4), (s16)(y - 8), 26, 16);
-    UI_DrawText((s16)(x + 0x51), (s16)(y + 6), 0, 0xFF, Message_GetText(0xE7));
+    UI_DrawText((s16)(x + 0x51), (s16)(y + 6), 0, TEXT_LENGTH_MAX, Message_GetText(0xE7));
     i = 0;
     do {
-        UI_DrawText((s16)(left + 6), (s16)(top + (i << 5) + 0x1E), 0, 0xFF, Message_GetText(0xE8 + i));
-        UI_DrawText((s16)(left + 0x94), (s16)(top + (i << 5) + 0x1E), 0, 0xFF, Message_GetText(0xEB + i));
+        UI_DrawText((s16)(left + 6), (s16)(top + (i << 5) + 0x1E), 0, TEXT_LENGTH_MAX, Message_GetText(0xE8 + i));
+        UI_DrawText((s16)(left + 0x94), (s16)(top + (i << 5) + 0x1E), 0, TEXT_LENGTH_MAX, Message_GetText(0xEB + i));
         sprintf(g_UiFormatBuffer, D_801D0C18, FAKE_VOLATILE_PTR(s32, D_801D8F00)[i]);
         UI_DrawAsciiString((s16)(left + 0x1E), (s16)(top + (i << 5) + 0x2B), 0, g_UiFormatBuffer);
         sprintf(g_UiFormatBuffer, D_801D0C1C, FAKE_VOLATILE_PTR(s32, D_801D8F0C)[i]);
@@ -376,9 +376,9 @@ NON_MATCHING void func_801D2304(s32 x, s32 y) {
         func_801D26E0((s16)(left + 0x94), (s16)(top + (i << 5) + 0x2B));
         i++;
     } while (i < 3);
-    UI_DrawText((s16)(left + 0x5A), (s16)(top + 0x2B), 0, 0xFF, Message_GetText(0xF0));
-    UI_DrawText((s16)(left + 0x5A), (s16)(top + 0x4B), 0, 0xFF, Message_GetText(0xEF));
-    UI_DrawText((s16)(left + 0x5A), (s16)(top + 0x6B), 0, 0xFF, Message_GetText(0xEF));
+    UI_DrawText((s16)(left + 0x5A), (s16)(top + 0x2B), 0, TEXT_LENGTH_MAX, Message_GetText(0xF0));
+    UI_DrawText((s16)(left + 0x5A), (s16)(top + 0x4B), 0, TEXT_LENGTH_MAX, Message_GetText(0xEF));
+    UI_DrawText((s16)(left + 0x5A), (s16)(top + 0x6B), 0, TEXT_LENGTH_MAX, Message_GetText(0xEF));
 }
 #else
 INCLUDE_ASM(func_801D2304);
@@ -455,21 +455,21 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s
         stats   = &records[character_index];
         Menu_DrawCharacterPortrait(px + 0x56, py + 2, stats->character_id, (u8)shaded == 0 ? (stats->status >> 6) & 2 : 1);
         text_clut = clut & BYTE_MASK;
-        UI_DrawText(x + 20, y + 3, text_clut, 5, stats);
+        UI_DrawText(x + 20, y + 3, text_clut, CHARACTER_NAME_LENGTH, stats);
     FAKE_ORDER_LOCK_END;
     TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, stats->level);
     text_y = (s16)(y + 0x17);
     UI_DrawGlyphString(x + 22, text_y, text_clut, g_UiFormatBuffer);
     if ((LOWU(stats->status) & (STATUS_CONFUSED | STATUS_POISONED)) == (STATUS_CONFUSED | STATUS_POISONED)) {
         if (g_FrameCount & 0x20) {
-            UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, 0x10, D_801D8B18);
+            UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, MENU_LABEL_LENGTH, D_801D8B18);
         } else {
-            UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, 0x10, D_801D8B20);
+            UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, MENU_LABEL_LENGTH, D_801D8B20);
         }
     } else if (stats->status & STATUS_POISONED) {
-        UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, 0x10, D_801D8B18);
+        UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, MENU_LABEL_LENGTH, D_801D8B18);
     } else if (stats->status & STATUS_CONFUSED) {
-        UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, 0x10, D_801D8B20);
+        UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, MENU_LABEL_LENGTH, D_801D8B20);
     }
     if (stats->hp < (u32)(stats->stats.max_hp >> 2)) {
         stats->status |= STATUS_LOW_HP;

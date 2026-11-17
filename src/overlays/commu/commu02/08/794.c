@@ -643,7 +643,7 @@ INCLUDE_ASM(func_801D2FA4);
 #endif
 
 MATCH void func_801D3184(s32 x, s32 y) {
-    UI_DrawWindow(x + 1, y + 1, 0x6A, 0x28, 0x80, g_WindowStyle);
+    UI_DrawWindow(x + 1, y + 1, 0x6A, 0x28, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
     func_801D2FA4(x, y);
     UI_DrawText(x + 0x24, y + 7, 0, 4, D_801DACA8);
     sprintf(g_UiFormatBuffer, D_801D0C04, g_Zenny);
@@ -660,7 +660,7 @@ NON_MATCHING void func_801D32A0(s32 x, s32 y, u8 mode) {
     s16 ox;
     s32 oy;
 
-    UI_DrawWindow(x + 1, y + 1, 0x6A, 0x28, 0x80, g_WindowStyle);
+    UI_DrawWindow(x + 1, y + 1, 0x6A, 0x28, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
     func_801D2FA4(x, y);
     UI_DrawText(x + 0x2C, y + 7, 0, 3, D_801DACB0);
     x2 = x;
@@ -1132,13 +1132,13 @@ NON_MATCHING void func_801D4AE0(s16 x, s16 y, u8 flag) {
                 ry = y + dy;
                 UI_DrawAsciiString(x + 6, ry, 0, g_UiFormatBuffer);
                 sprintf(g_UiFormatBuffer, D_801DAD64);
-                UI_DrawAsciiString(x + 0x2F, ry, 2, g_UiFormatBuffer);
+                UI_DrawAsciiString(x + 0x2F, ry, UI_TEXT_HIGHLIGHT, g_UiFormatBuffer);
             } else {
                 sprintf(g_UiFormatBuffer, D_801D0C24, D_801DB080[k], D_801DB080[k + 1], D_801DB080[k + 2]);
                 ry = y + dy;
                 UI_DrawAsciiString(x + 6, ry, 0, g_UiFormatBuffer);
                 sprintf(g_UiFormatBuffer, D_801D0C20, D_801DB080[k + 3]);
-                UI_DrawAsciiString(x + 0x2F, ry, 2, g_UiFormatBuffer);
+                UI_DrawAsciiString(x + 0x2F, ry, UI_TEXT_HIGHLIGHT, g_UiFormatBuffer);
                 sprintf(g_UiFormatBuffer, D_801D0C20, D_801DB080[k + 4]);
             }
             UI_DrawAsciiString(x + 0x43, ry, 1, g_UiFormatBuffer);
@@ -1148,18 +1148,18 @@ NON_MATCHING void func_801D4AE0(s16 x, s16 y, u8 flag) {
             ry = y + dy;
             UI_DrawAsciiString(x + 6, ry, 0, g_UiFormatBuffer);
             sprintf(g_UiFormatBuffer, D_801D0C20, D_801DB080[k + 3]);
-            UI_DrawAsciiString(x + 0x2F, ry, 2, g_UiFormatBuffer);
+            UI_DrawAsciiString(x + 0x2F, ry, UI_TEXT_HIGHLIGHT, g_UiFormatBuffer);
             sprintf(g_UiFormatBuffer, D_801D0C20, D_801DB080[k + 4]);
             UI_DrawAsciiString(x + 0x43, ry, 1, g_UiFormatBuffer);
             UI_DrawGlyphString(x + 0x39, y + gy, 0, D_801D0C2C);
         } else {
             sprintf(g_UiFormatBuffer, D_801DAD60);
             ry = y + dy;
-            UI_DrawAsciiString(x + 6, ry, 7, g_UiFormatBuffer);
+            UI_DrawAsciiString(x + 6, ry, UI_TEXT_DIM, g_UiFormatBuffer);
             sprintf(g_UiFormatBuffer, D_801DAD64);
-            UI_DrawAsciiString(x + 0x2F, ry, 7, g_UiFormatBuffer);
-            UI_DrawAsciiString(x + 0x43, ry, 7, g_UiFormatBuffer);
-            UI_DrawGlyphString(x + 0x39, y + gy, 7, D_801D0C2C);
+            UI_DrawAsciiString(x + 0x2F, ry, UI_TEXT_DIM, g_UiFormatBuffer);
+            UI_DrawAsciiString(x + 0x43, ry, UI_TEXT_DIM, g_UiFormatBuffer);
+            UI_DrawGlyphString(x + 0x39, y + gy, UI_TEXT_DIM, D_801D0C2C);
         }
         gy += 14;
         dy += 14;
@@ -1408,8 +1408,8 @@ MATCH void func_801D5B2C(void) {
         i++;
     }
     g_UiFormatBuffer[i] = STRING_END;
-    UI_DrawText(0x32, 0x1E, 0, 0xFF, g_UiFormatBuffer);
-    UI_DrawText(0x32, 0x42, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 227 + (s8)D_801DB0B4));
+    UI_DrawText(0x32, 0x1E, 0, TEXT_LENGTH_MAX, g_UiFormatBuffer);
+    UI_DrawText(0x32, 0x42, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 227 + (s8)D_801DB0B4));
 }
 
 MATCH void func_801D5D5C(void) {
@@ -2033,7 +2033,7 @@ NON_MATCHING void func_801D8058(s32 left, s32 top) {
 
     x      = left;
     base_x = x;
-    UI_DrawWindow(x, top, 172, 26, 0x80, g_WindowStyle);
+    UI_DrawWindow(x, top, 172, 26, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
     func_801D7EF0((s16)x, (s16)top);
     count = Fairy_CountFairies() & BYTE_MASK;
     if (count > 0) {
@@ -2057,7 +2057,7 @@ MATCH void func_801D812C(void) {
     Menu_DrawHeaderBar(MENU_HEADER_X, 0x10, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     index = D_801DB0C8;
     if (index != 0xFFFF) {
-        UI_DrawText(0x1B, 0x13, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, index));
+        UI_DrawText(0x1B, 0x13, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, index));
     }
 }
 
@@ -2514,10 +2514,10 @@ NON_MATCHING void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg,
                         UI_DrawText((s16)x, (s16)y, 4, 5, tags + 5);
                         break;
                     case 3:
-                        UI_DrawText((s16)x, (s16)y, 2, 5, tags + 10);
+                        UI_DrawText((s16)x, (s16)y, UI_TEXT_HIGHLIGHT, 5, tags + 10);
                         break;
                     case 4:
-                        UI_DrawText((s16)x, (s16)y, 2, 5, tags + 15);
+                        UI_DrawText((s16)x, (s16)y, UI_TEXT_HIGHLIGHT, 5, tags + 15);
                         break;
                     default:
                         UI_DrawText((s16)x, (s16)y, 0, 1, cell);
@@ -2564,7 +2564,7 @@ NON_MATCHING void func_801D97C8(s32 unused, s32 x, s32 y) {
     labels = D_801DB038;
     UI_DrawWindow((u16)(x + 3), (u16)(y + 3), 0x4D, 0x2F, 0, g_WindowStyle);
     for (row = 0; row < 5; row++) {
-        UI_DrawTextString((s16)(x + 0x2A), (s16)(y + (row * 8) + 6), 0, 0x10, labels[row]);
+        UI_DrawTextString((s16)(x + 0x2A), (s16)(y + (row * 8) + 6), 0, MENU_LABEL_LENGTH, labels[row]);
     }
     for (row = 0; row < 5; row++) {
         for (column = 0; column < 3; column++) {
@@ -2696,12 +2696,12 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
 
-    UI_DrawSprite((s16)x, (s16)y, 0x23, 1);
+    UI_DrawSprite((s16)x, (s16)y, 0x23, UI_SPRITE_ALT_PAGE);
     columns = (u8)width - 2;
-    UI_DrawSprite((s16)(x + columns * 8), (s16)y, 0x26, 1);
+    UI_DrawSprite((s16)(x + columns * 8), (s16)y, 0x26, UI_SPRITE_ALT_PAGE);
     rows = (u8)height - 2;
-    UI_DrawSprite((s16)x, (s16)(y + rows * 8), 0x27, 1);
-    UI_DrawSprite((s16)(x + columns * 8), (s16)(y + rows * 8), 0x29, 1);
+    UI_DrawSprite((s16)x, (s16)(y + rows * 8), 0x27, UI_SPRITE_ALT_PAGE);
+    UI_DrawSprite((s16)(x + columns * 8), (s16)(y + rows * 8), 0x29, UI_SPRITE_ALT_PAGE);
 }
 #else
 INCLUDE_ASM(func_801D9B80);

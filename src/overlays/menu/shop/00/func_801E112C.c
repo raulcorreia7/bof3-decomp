@@ -28,7 +28,7 @@ MATCH void func_801E112C(MenuPanelTask* task) {
             level   = Char_GetAbilityElement(*kinds);
             shade   = (task->unk_0A + i == task->unk_0C + offset) * 2;
             if (task->unk_0A + i == task->unk_0B + offset || task->unk_0A + i == task->unk_0C + offset) {
-                UI_DrawAbilityRow((s16)(task->pos.x + 7), (s16)(y + 0x1A), 7, level, ability, ability->cost, 1);
+                UI_DrawAbilityRow((s16)(task->pos.x + 7), (s16)(y + 0x1A), UI_TEXT_DIM, level, ability, ability->cost, 1);
                 UI_DrawAbilityRow((s16)(task->pos.x + 7), (s16)(y + 0x18), shade, level, ability, ability->cost, 0);
             } else {
                 UI_DrawAbilityRow((s16)(task->pos.x + 7), (s16)(y + 0x1A), 0, level, ability, ability->cost, 0);
@@ -40,30 +40,30 @@ MATCH void func_801E112C(MenuPanelTask* task) {
     UI_DrawWindow((task->pos.x + 3) & HALF_MASK, (task->pos.y + 3) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_TOP_HEIGHT, task->unk_09, CHARACTER_BLOCK->window_style);
     UI_DrawWindow((task->pos.x + 3) & HALF_MASK, (task->pos.y + 146) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_BOTTOM_HEIGHT, task->unk_09, CHARACTER_BLOCK->window_style);
     title_x = (Game_ReadCommand(D_801E5D1C) & BYTE_MASK) * 4 - 0x4E;
-    UI_DrawText((task->pos.x - title_x), (task->pos.y + 7), 0, 0x10, D_801E5D1C);
+    UI_DrawText((task->pos.x - title_x), (task->pos.y + 7), 0, MENU_LABEL_LENGTH, D_801E5D1C);
     TEXT_Format(g_UiFormatBuffer, D_801D0E7C, Party_CountAbilities(CHAR_INDEX_RYU, 0xFF, 0) & BYTE_MASK, 0x80);
     UI_DrawGlyphString((task->pos.x + 85), (task->pos.y + 146), 0, g_UiFormatBuffer);
-    UI_DrawSpriteRun(task->pos.x, task->pos.y, D_801E5C78, 1);
-    UI_DrawSpriteRun(task->pos.x, task->pos.y, D_801E5C84, 1);
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, D_801E5C78, UI_SPRITE_ALT_PAGE);
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, D_801E5C84, UI_SPRITE_ALT_PAGE);
     for (i = 0; i < 10; i++) {
-        UI_DrawSprite(task->pos.x + (i + 5) * 8, task->pos.y, 1, 1);
+        UI_DrawSprite(task->pos.x + (i + 5) * 8, task->pos.y, 1, UI_SPRITE_ALT_PAGE);
     }
     for (i = 0; i < 15; i++) {
-        UI_DrawSprite(task->pos.x, task->pos.y + (i + 3) * 8, 4, 1);
+        UI_DrawSprite(task->pos.x, task->pos.y + (i + 3) * 8, 4, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite(task->pos.x + 144, task->pos.y + 24, 0x16, 1);
+    UI_DrawSprite(task->pos.x + 144, task->pos.y + 24, 0x16, UI_SPRITE_ALT_PAGE);
     for (i = 0; i < 12; i++) {
-        UI_DrawSprite(task->pos.x + 144, task->pos.y + (i + 5) * 8, 0x17, 1);
+        UI_DrawSprite(task->pos.x + 144, task->pos.y + (i + 5) * 8, 0x17, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite(task->pos.x + 144, task->pos.y + 136, 0x18, 1);
-    UI_DrawSprite(task->pos.x, task->pos.y + 144, 0x19, 1);
+    UI_DrawSprite(task->pos.x + 144, task->pos.y + 136, 0x18, UI_SPRITE_ALT_PAGE);
+    UI_DrawSprite(task->pos.x, task->pos.y + 144, 0x19, UI_SPRITE_ALT_PAGE);
     for (i = 0; i < 9; i++) {
-        UI_DrawSprite(task->pos.x + (i + 1) * 8, task->pos.y + 144, 0x1A, 1);
+        UI_DrawSprite(task->pos.x + (i + 1) * 8, task->pos.y + 144, 0x1A, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite(task->pos.x + 80, task->pos.y + 144, 0x1B, 1);
+    UI_DrawSprite(task->pos.x + 80, task->pos.y + 144, 0x1B, UI_SPRITE_ALT_PAGE);
     for (i = 0; i < 6; i++) {
-        UI_DrawSprite(task->pos.x + (i + 11) * 8, task->pos.y + 144, 0x1C, 1);
+        UI_DrawSprite(task->pos.x + (i + 11) * 8, task->pos.y + 144, 0x1C, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite(task->pos.x + 136, task->pos.y + 144, 0x1D, 1);
+    UI_DrawSprite(task->pos.x + 136, task->pos.y + 144, 0x1D, UI_SPRITE_ALT_PAGE);
     func_801AFA1C(D_8014546C, task->unk_0A, task->pos.x + 0x90, task->pos.y + 0x18, 9, 0x80, 0x74);
 }

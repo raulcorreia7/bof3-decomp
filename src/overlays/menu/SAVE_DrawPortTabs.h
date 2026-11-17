@@ -10,7 +10,7 @@ MATCH void SAVE_DrawPortTabs(s16 x, s16 y, u32 tab_flags, u8 port, u8 variant) {
     u8* texture;
 
     Menu_DrawFilledPanel(x, y, 7, 4);
-    UI_DrawIconCell(20, (u16)(x + 7), (u16)(y + 5), 16, 16, 128);
+    UI_DrawIconCell(20, (u16)(x + 7), (u16)(y + 5), UI_ICON_CELL_SIZE, UI_ICON_CELL_SIZE, GFX_COLOR_NEUTRAL);
     shade = 0x1C;
     if (variant == 0) {
         shade = 0x1B;
@@ -19,13 +19,13 @@ MATCH void SAVE_DrawPortTabs(s16 x, s16 y, u32 tab_flags, u8 port, u8 variant) {
     left    = (x + 6);
     UI_DrawText((x + 42), (y + 7), 0, TEXT_LENGTH_MAX, texture);
 
-    color = (tab_flags & MENU_LIST_FLAG_TAB_1) ? MENU_SHADE_NORMAL : MENU_SHADE_DIM;
+    color = (tab_flags & MENU_LIST_FLAG_TAB_1) ? UI_TEXT_NORMAL : UI_TEXT_DIM;
     UI_DrawText(left, (y + 25), color, TEXT_LENGTH_MAX, Message_GetText(0x85));
     right  = (x + 94);
     text_y = (y + 25);
     UI_DrawAsciiString(right, text_y, color, &g_SaveCardPortLabelFirst);
 
-    color = (tab_flags & MENU_LIST_FLAG_TAB_2) ? MENU_SHADE_NORMAL : MENU_SHADE_DIM;
+    color = (tab_flags & MENU_LIST_FLAG_TAB_2) ? UI_TEXT_NORMAL : UI_TEXT_DIM;
     UI_DrawText(left, (y + 41), color, TEXT_LENGTH_MAX, Message_GetText(0x85));
     text_y = (y + 41);
     UI_DrawAsciiString(right, text_y, color, &g_SaveCardPortLabelSecond);

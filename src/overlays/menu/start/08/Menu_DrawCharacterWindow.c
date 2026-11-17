@@ -19,21 +19,21 @@ MATCH void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shad
         stats   = &records[character_index];
         Menu_DrawCharacterPortrait(px + 0x56, py + 2, stats->character_id, (u8)shaded == 0 ? (stats->status >> 6) & 2 : 1);
         text_clut = clut & BYTE_MASK;
-        UI_DrawText(x + 20, y + 3, text_clut, 5, stats);
+        UI_DrawText(x + 20, y + 3, text_clut, CHARACTER_NAME_LENGTH, stats);
     FAKE_ORDER_LOCK_END;
     TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, stats->level);
     text_y = (s16)(y + 0x17);
     UI_DrawGlyphString(x + 22, text_y, text_clut, g_UiFormatBuffer);
     if ((LOWU(stats->status) & (STATUS_CONFUSED | STATUS_POISONED)) == (STATUS_CONFUSED | STATUS_POISONED)) {
         if (g_FrameCount & 0x20) {
-            UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, 0x10, D_801EC930);
+            UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, MENU_LABEL_LENGTH, D_801EC930);
         } else {
-            UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, 0x10, D_801EC938);
+            UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, MENU_LABEL_LENGTH, D_801EC938);
         }
     } else if (stats->status & STATUS_POISONED) {
-        UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, 0x10, D_801EC930);
+        UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, MENU_LABEL_LENGTH, D_801EC930);
     } else if (stats->status & STATUS_CONFUSED) {
-        UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, 0x10, D_801EC938);
+        UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, MENU_LABEL_LENGTH, D_801EC938);
     }
     if (stats->hp < (u32)(stats->stats.max_hp >> 2)) {
         stats->status |= STATUS_LOW_HP;

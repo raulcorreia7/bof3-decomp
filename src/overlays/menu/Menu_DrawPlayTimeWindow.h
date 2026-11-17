@@ -18,8 +18,8 @@ MATCH void Menu_DrawPlayTimeWindow(u16 panel_x, u16 panel_y) {
     TEXT_Format(g_UiFormatBuffer, g_MenuClockFormat, g_PlayClock.minutes);
     UI_DrawAsciiString(x + 60, text_y, 0, g_UiFormatBuffer);
     if (g_PlayClock.thirtieths < 0xF) {
-        UI_DrawTextString(x + 52, window_y, 0, 0xFF, g_MenuClockColon);
-        UI_DrawTextString(x + 52, y + 7, 0, 0xFF, g_MenuClockColon);
+        UI_DrawTextString(x + 52, window_y, 0, TEXT_LENGTH_MAX, g_MenuClockColon);
+        UI_DrawTextString(x + 52, y + 7, 0, TEXT_LENGTH_MAX, g_MenuClockColon);
     }
     UI_DrawSpriteRun(x, y, g_MenuClockCaption, 0);
     for (i = 0, row_x = x + 24; i < 6; i++) {

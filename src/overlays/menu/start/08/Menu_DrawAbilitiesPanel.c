@@ -32,7 +32,7 @@ MATCH void Menu_DrawAbilitiesPanel(MenuPanelTask* task) {
             ability = Char_GetAbilityCost(g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], *text, 0);
             if (n == task->flags || n == task->unk_0C) {
                 if ((u8)color != 7) {
-                    UI_DrawAbilityRow((s16)(task->pos.x + 7), (s16)(y + 0x1A), 7, level, entry, ability, 1);
+                    UI_DrawAbilityRow((s16)(task->pos.x + 7), (s16)(y + 0x1A), UI_TEXT_DIM, level, entry, ability, 1);
                 }
                 UI_DrawAbilityRow((s16)(task->pos.x + 7), (s16)(y + 0x18), color, level, entry, ability, disabled);
             } else {
@@ -41,9 +41,9 @@ MATCH void Menu_DrawAbilitiesPanel(MenuPanelTask* task) {
         }
     }
     label_x = task->pos.x + 0x4E - strlen((const char*)D_801ECC98[task->unk_0B]) * 4;
-    UI_DrawText(label_x, (task->pos.y + 7), 0, 16, (u8*)(D_801ECC98[task->unk_0B]));
-    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->unk_09 & 0x2) ? g_MenuListTab2OnSprites : g_MenuListTab2OffSprites, 1);
-    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->unk_09 & 0x1) ? g_MenuListTab1OnSprites : g_MenuListTab1OffSprites, 1);
+    UI_DrawText(label_x, (task->pos.y + 7), 0, MENU_LABEL_LENGTH, (u8*)(D_801ECC98[task->unk_0B]));
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->unk_09 & 0x2) ? g_MenuListTab2OnSprites : g_MenuListTab2OffSprites, UI_SPRITE_ALT_PAGE);
+    UI_DrawSpriteRun(task->pos.x, task->pos.y, (task->unk_09 & 0x1) ? g_MenuListTab1OnSprites : g_MenuListTab1OffSprites, UI_SPRITE_ALT_PAGE);
     flags = task->unk_09;
     if (!(flags & MENU_LIST_FRAME_MASK)) {
         task->unk_09 = 0;
@@ -51,22 +51,22 @@ MATCH void Menu_DrawAbilitiesPanel(MenuPanelTask* task) {
         task->unk_09 = flags - MENU_LIST_FRAME_STEP;
     }
     for (n = 0; n < 10; n++) {
-        UI_DrawSprite(task->pos.x + (n + 5) * 8, task->pos.y, 1, 1);
+        UI_DrawSprite(task->pos.x + (n + 5) * 8, task->pos.y, 1, UI_SPRITE_ALT_PAGE);
     }
     for (n = 0; n < 17; n++) {
-        UI_DrawSprite(task->pos.x, task->pos.y + (n + 3) * 8, 4, 1);
+        UI_DrawSprite(task->pos.x, task->pos.y + (n + 3) * 8, 4, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite(task->pos.x + 144, task->pos.y + 24, 0x20, 1);
+    UI_DrawSprite(task->pos.x + 144, task->pos.y + 24, 0x20, UI_SPRITE_ALT_PAGE);
     for (n = 0; n < 15; n++) {
-        UI_DrawSprite(task->pos.x + 144, task->pos.y + (n + 4) * 8, 0x21, 1);
+        UI_DrawSprite(task->pos.x + 144, task->pos.y + (n + 4) * 8, 0x21, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite(task->pos.x, task->pos.y + 160, 5, 1);
-    UI_DrawSprite(task->pos.x + 144, task->pos.y + 152, 0x22, 1);
+    UI_DrawSprite(task->pos.x, task->pos.y + 160, 5, UI_SPRITE_ALT_PAGE);
+    UI_DrawSprite(task->pos.x + 144, task->pos.y + 152, 0x22, UI_SPRITE_ALT_PAGE);
     if ((s16)task->u.list.tabs != 0) {
-        UI_DrawSprite(task->pos.x + 8, task->pos.y, 0x32, 1);
-        UI_DrawSprite(task->pos.x + 144, task->pos.y, 0x34, 1);
+        UI_DrawSprite(task->pos.x + 8, task->pos.y, 0x32, UI_SPRITE_ALT_PAGE);
+        UI_DrawSprite(task->pos.x + 144, task->pos.y, 0x34, UI_SPRITE_ALT_PAGE);
     }
     for (n = 0; n < 17; n++) {
-        UI_DrawSprite(task->pos.x + (n + 1) * 8, task->pos.y + 160, 6, 1);
+        UI_DrawSprite(task->pos.x + (n + 1) * 8, task->pos.y + 160, 6, UI_SPRITE_ALT_PAGE);
     }
 }

@@ -25,7 +25,7 @@ MATCH void Fishing_DrawHud(s16 panel_x, s16 panel_y) {
     TEXT_Format(g_UiFormatBuffer, D_801D0C04, value);
 
     if (value >= 0x32 && D_80145E92[0] == 0x4 && (g_FrameCount & 4) != 0) {
-        UI_DrawAsciiString((panel_x + 240), (panel_y + 26), 2, g_UiFormatBuffer);
+        UI_DrawAsciiString((panel_x + 240), (panel_y + 26), UI_TEXT_HIGHLIGHT, g_UiFormatBuffer);
     } else {
         UI_DrawAsciiString((panel_x + 240), (panel_y + 26), 0, g_UiFormatBuffer);
     }

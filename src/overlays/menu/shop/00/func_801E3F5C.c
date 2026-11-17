@@ -15,28 +15,28 @@ MATCH void func_801E3F5C(void* panel) {
 
     UI_DrawWindow((PANEL_X + 3), (PANEL_Y + 3), 101, *count * 16 + 25, 0, g_WindowStyle);
     UI_DrawText((PANEL_X + 39), (PANEL_Y + 7), 0, TEXT_LENGTH_MAX, (u8*)D_801E5EFC[0]);
-    UI_DrawSpriteRun(PANEL_X, PANEL_Y, D_801E5E7C, 1);
+    UI_DrawSpriteRun(PANEL_X, PANEL_Y, D_801E5E7C, UI_SPRITE_ALT_PAGE);
     i = 0;
     if (*count != 0) {
         do {
             color = D_801E5EFC[D_801E5F0D[i]];
             if (i == PANEL_PREV) {
                 row = i * 0x10 + 0x1A;
-                UI_DrawText((PANEL_X + 7), (PANEL_Y + row), 7, TEXT_LENGTH_MAX, (u8*)color);
-                UI_DrawText((PANEL_X + 7), (PANEL_Y + row - 2), 2, TEXT_LENGTH_MAX, (u8*)color);
+                UI_DrawText((PANEL_X + 7), (PANEL_Y + row), UI_TEXT_DIM, TEXT_LENGTH_MAX, (u8*)color);
+                UI_DrawText((PANEL_X + 7), (PANEL_Y + row - 2), UI_TEXT_HIGHLIGHT, TEXT_LENGTH_MAX, (u8*)color);
             } else if (i == PANEL_SEL) {
                 row = i * 0x10 + 0x1A;
-                UI_DrawText((PANEL_X + 7), (PANEL_Y + row), 7, TEXT_LENGTH_MAX, (u8*)color);
+                UI_DrawText((PANEL_X + 7), (PANEL_Y + row), UI_TEXT_DIM, TEXT_LENGTH_MAX, (u8*)color);
                 UI_DrawText((PANEL_X + 7), (PANEL_Y + row - 2), 0, TEXT_LENGTH_MAX, (u8*)color);
             } else {
                 row = i * 0x10 + 0x1A;
                 UI_DrawText((PANEL_X + 7), (PANEL_Y + row), 0, TEXT_LENGTH_MAX, (u8*)color);
             }
-            UI_DrawSpriteRun(PANEL_X, (PANEL_Y + (i * 2 + 3) * 8), D_801E5EA0, 1);
-            UI_DrawSpriteRun(PANEL_X, (PANEL_Y + (i * 2 + 4) * 8), D_801E5EA0, 1);
+            UI_DrawSpriteRun(PANEL_X, (PANEL_Y + (i * 2 + 3) * 8), D_801E5EA0, UI_SPRITE_ALT_PAGE);
+            UI_DrawSpriteRun(PANEL_X, (PANEL_Y + (i * 2 + 4) * 8), D_801E5EA0, UI_SPRITE_ALT_PAGE);
             i++;
         } while (i < D_801E5F0C);
     }
     row = i * 0x10 + 0x18;
-    UI_DrawSpriteRun(PANEL_X, (PANEL_Y + row), D_801E5EAC, 1);
+    UI_DrawSpriteRun(PANEL_X, (PANEL_Y + row), D_801E5EAC, UI_SPRITE_ALT_PAGE);
 }

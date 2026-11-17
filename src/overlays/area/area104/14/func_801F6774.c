@@ -14,7 +14,7 @@ NON_MATCHING void func_801F6774(void) {
     setUV4(prim, 0, 0, 0x40, 0, 0, 0x40, 0x40, 0x40);
     setXY4(prim, 255, 134, 300, 179, 210, 179, 255, 224);
     setRGB0(prim, 0x80, 0x80, 0x80);
-    GFX_AddPrim(2, 0x28);
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, 0x28);
 
     for (i = 0; i < 4; i++) {
         triangle = (POLY_F3*)g_GfxPrimCursor;
@@ -27,7 +27,7 @@ NON_MATCHING void func_801F6774(void) {
         triangle->y1 = D_801F6B2C[i][4];
         triangle->y2 = D_801F6B2C[i][5];
         setRGB0(triangle, 0, 0, 0xB8);
-        GFX_AddPrim(2, 0x14);
+        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, 0x14);
     }
 
     if ((g_FrameCount & 7) == 0) {

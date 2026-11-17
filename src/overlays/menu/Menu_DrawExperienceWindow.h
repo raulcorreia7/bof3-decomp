@@ -33,5 +33,5 @@
             TEXT_FormatLiteral(g_UiFormatBuffer, g_MenuExperienceBlank);                                                                                                       \
         }                                                                                                                                                                      \
         UI_DrawAsciiString((s16)(x + MENU_EXPERIENCE_VALUE_X), (s16)(y + MENU_EXPERIENCE_VALUE_Y), 0, g_UiFormatBuffer);                                                       \
-        UI_DrawSpriteRun(x, y, (sprites), 1);                                                                                                                                  \
+        UI_DrawSpriteRun(x, y, (sprites), UI_SPRITE_ALT_PAGE);                                                                                                                 \
     }

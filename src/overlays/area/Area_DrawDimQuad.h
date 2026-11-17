@@ -8,4 +8,4 @@
     setRGB2(prim, prim->r3 = (shade), prim->g3 = 0, prim->b3 = 0);                                          \
     setXY4(prim, 0, 0, SCREEN_WIDTH, 0, 0, 320, SCREEN_WIDTH, 320);                                         \
     SetSemiTrans((POLY_G4*)g_GfxPrimCursor, 1);                                                             \
-    GFX_AddPrim(2U, sizeof(POLY_G4))
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G4))

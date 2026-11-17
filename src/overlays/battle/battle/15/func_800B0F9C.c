@@ -47,7 +47,7 @@ MATCH void func_800B0F9C(void) {
         if (slot_a != GAME_NONE) {
             func_800B1DAC((g_MenuCurrentPanel->pos.x + 0x10), (g_MenuCurrentPanel->pos.y + (line_y + 0x18)), slot_a & 0x1F);
             line_y += 0x2D;
-            UI_DrawTextString((g_MenuCurrentPanel->pos.x + 16), (g_MenuCurrentPanel->pos.y + line_y), clut, 255,
+            UI_DrawTextString((g_MenuCurrentPanel->pos.x + 16), (g_MenuCurrentPanel->pos.y + line_y), clut, TEXT_LENGTH_MAX,
                               Message_GetText(D_800B4C90[g_BattleTargetRows[(s16)g_MenuCurrentPanel->u.battle.row_base + row].gate_03 & 0x1F]));
             TEXT_Format(g_UiFormatBuffer, D_80096A2C, sum & BYTE_MASK);
             UI_DrawGlyphString((g_MenuCurrentPanel->pos.x + 88), (g_MenuCurrentPanel->pos.y + line_y), clut, g_UiFormatBuffer);

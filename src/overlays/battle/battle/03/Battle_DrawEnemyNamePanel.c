@@ -31,7 +31,7 @@ MATCH void Battle_DrawEnemyNamePanel(s32 x, s32 y, s32 slot) {
         func_801D94D4((s16)(x + 0x24), (s16)(y + 0xC), 0, 0xFFFF);
     }
     if (func_801DA69C(index) != 0) {
-        UI_DrawTextString((panel_x + 4), (panel_y + 3), 0, 8, (const u8*)g_BattleEnemyBattlers[index].name);
+        UI_DrawTextString((panel_x + 4), (panel_y + 3), 0, ENEMY_NAME_LENGTH, (const u8*)g_BattleEnemyBattlers[index].name);
     }
     Battle_DrawPanelLine((panel_x + 2), (panel_y + 2), (panel_x + 0x49), (panel_y + 2), r, g, b);
     Battle_DrawPanelLine((panel_x + 2), (panel_y + 3), (panel_x + 2), (panel_y + 0x12), r, g, b);

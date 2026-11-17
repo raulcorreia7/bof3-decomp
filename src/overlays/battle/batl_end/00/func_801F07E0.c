@@ -18,11 +18,11 @@ NON_MATCHING void func_801F07E0(void) {
             if (g_Game.members[i].chr.level != 0x63) {
                 sprintf((char*)buffer, D_801EEC44, Char_GetExpToNextLevel(i));
                 UI_DrawAsciiString(0x50, y, 0, buffer);
-                UI_DrawText(0x85, y, 0, 0xFF, Message_GetText(0x15));
+                UI_DrawText(0x85, y, 0, TEXT_LENGTH_MAX, Message_GetText(0x15));
                 sprintf((char*)buffer, D_801EEC48, g_Game.members[i].chr.level + 1);
                 UI_DrawAsciiString(0x118, y, 0, buffer);
             } else {
-                UI_DrawText(0x55, y, 0, 0xFF, Message_GetText(0x41));
+                UI_DrawText(0x55, y, 0, TEXT_LENGTH_MAX, Message_GetText(0x41));
             }
             i++;
             y += 0x10;

@@ -14,7 +14,7 @@ NON_MATCHING void func_801F3280(s16 x1, s16 y1, s16 radius1, u16 angle1, s16 x2,
     setRGB1(prim, D_801F52C4[3 * g_Task->unk_06], D_801F52C5[3 * g_Task->unk_06], D_801F52C6[3 * g_Task->unk_06]);
     setRGB2(prim, 0, 0, 0);
     setRGB3(prim, 0, 0, 0);
-    GFX_AddPrim(3, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_G4));
 
     prim += 1;
     prim[0]  = prim[-1];
@@ -22,7 +22,7 @@ NON_MATCHING void func_801F3280(s16 x1, s16 y1, s16 radius1, u16 angle1, s16 x2,
     prim->y2 = y1 + FIXED_MUL(radius1, rsin(angle1 + ANGLE_180));
     prim->x3 = x2 + FIXED_MUL(radius2, rcos(angle2));
     prim->y3 = y2 + FIXED_MUL(radius2, rsin(angle2));
-    GFX_AddPrim(3, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_G4));
 }
 #else
 INCLUDE_ASM(func_801F3280);

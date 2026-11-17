@@ -1022,9 +1022,9 @@ MATCH void func_801D4178(s16 x, s16 y, u8 mode) {
     height = *count << 4;
     span   = height;
     if (mode == 0) {
-        UI_DrawWindow((u16)(x + 4), (u16)(y + 5), 0x30, span, 0x81, g_WindowStyle);
+        UI_DrawWindow((u16)(x + 4), (u16)(y + 5), 0x30, span, UI_WINDOW_OPEN_TOP_LEFT | UI_WINDOW_STYLE_DARK, g_WindowStyle);
     }
-    UI_DrawWindow((u16)x, (u16)y, 0x50, height | 1, 0x80, g_WindowStyle);
+    UI_DrawWindow((u16)x, (u16)y, 0x50, height | 1, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
     func_801D42DC((s16)x, (s16)(y - 1), span & 0xF0);
     i = 0;
     if (i < *count) {
@@ -1096,9 +1096,9 @@ MATCH s16 func_801D44E0(s16 x, s16 y, u8 kind, u8 mode) {
         y = 0xD4 - height;
     }
     if (mode == 0) {
-        UI_DrawWindow((u16)(x + 4), (u16)(y + 6), 0x30, span, 0x81, g_WindowStyle);
+        UI_DrawWindow((u16)(x + 4), (u16)(y + 6), 0x30, span, UI_WINDOW_OPEN_TOP_LEFT | UI_WINDOW_STYLE_DARK, g_WindowStyle);
     }
-    UI_DrawWindow((u16)x, (u16)y, 0x50, height | 1, 0x80, g_WindowStyle);
+    UI_DrawWindow((u16)x, (u16)y, 0x50, height | 1, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
     func_801D42DC((s16)x, (s16)(y - 1), span & 0xF0);
     i = 0;
     if (i < D_801D4DD4[kind].count) {

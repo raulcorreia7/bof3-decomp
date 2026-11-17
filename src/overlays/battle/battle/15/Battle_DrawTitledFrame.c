@@ -49,49 +49,49 @@ NON_MATCHING void Battle_DrawTitledFrame(s32 x, s16 y, s32 unused_a, s32 unused_
     style_text = s_BattleFrameTitles[style];
     y16 += 7;
     y16 <<= 0x10;
-    UI_DrawText((s16)(x16 - (((Game_ReadCommand(style_text) & BYTE_MASK) * 4) - 70)), (s16)(y16 >> 16), 0, 0x10U, style_text);
+    UI_DrawText((s16)(x16 - (((Game_ReadCommand(style_text) & BYTE_MASK) * 4) - 70)), (s16)(y16 >> 16), 0, MENU_LABEL_LENGTH, style_text);
     x16 <<= 0x10;
     x16  = x16 >> 0x10;
     temp = y_word >> 0x10;
-    UI_DrawSpriteRun((s16)x16, (s16)temp, &D_800B6D44, 1);
-    UI_DrawSpriteRun((s16)x16, (s16)temp, &D_800B6D50, 1);
+    UI_DrawSpriteRun((s16)x16, (s16)temp, &D_800B6D44, UI_SPRITE_ALT_PAGE);
+    UI_DrawSpriteRun((s16)x16, (s16)temp, &D_800B6D50, UI_SPRITE_ALT_PAGE);
     cell_i = 0 & BYTE_MASK;
     do {
-        UI_DrawSprite((s16)(origin_x + ((cell_i + 5) * 8)), y_word >> 16, 1, 1);
+        UI_DrawSprite((s16)(origin_x + ((cell_i + 5) * 8)), y_word >> 16, 1, UI_SPRITE_ALT_PAGE);
         i += 1;
         cell_i = i & BYTE_MASK;
     } while ((u32)(i & BYTE_MASK) < 8U);
     i    = 0;
     temp = origin_x << 0x10;
     do {
-        UI_DrawSprite((s16)origin_x, (s32)(s16)(origin_y + (((i & BYTE_MASK) + 3) * 8)), 4, 1);
+        UI_DrawSprite((s16)origin_x, (s32)(s16)(origin_y + (((i & BYTE_MASK) + 3) * 8)), 4, UI_SPRITE_ALT_PAGE);
         i += 1;
     } while ((u32)(i & BYTE_MASK) < 12U);
     temp = origin_x + 0x80;
     temp <<= 0x10;
-    UI_DrawSprite((s16)(temp >> 16), (s32)(s16)(origin_y + 24), 0x16, 1);
+    UI_DrawSprite((s16)(temp >> 16), (s32)(s16)(origin_y + 24), 0x16, UI_SPRITE_ALT_PAGE);
     i     = 0;
     col_x = temp >> 0x10;
     do {
-        UI_DrawSprite((s16)col_x, (s32)(s16)(origin_y + (((i & BYTE_MASK) + 5) * 8)), 0x17, 1);
+        UI_DrawSprite((s16)col_x, (s32)(s16)(origin_y + (((i & BYTE_MASK) + 5) * 8)), 0x17, UI_SPRITE_ALT_PAGE);
         i += 1;
         col_x = temp >> 0x10;
     } while ((u32)(i & BYTE_MASK) < 9U);
-    UI_DrawSprite((s16)(origin_x + 128), (s32)(s16)(origin_y + 112), 0x18, 1);
+    UI_DrawSprite((s16)(origin_x + 128), (s32)(s16)(origin_y + 112), 0x18, UI_SPRITE_ALT_PAGE);
     temp = origin_y + 0x78;
     temp <<= 0x10;
-    UI_DrawSprite((s16)origin_x, temp >> 16, 0x19, 1);
+    UI_DrawSprite((s16)origin_x, temp >> 16, 0x19, UI_SPRITE_ALT_PAGE);
     i     = 0;
     col_i = 0 & BYTE_MASK;
     do {
-        UI_DrawSprite((s16)(origin_x + ((col_i + 1) * 8)), temp >> 16, 0x1A, 1);
+        UI_DrawSprite((s16)(origin_x + ((col_i + 1) * 8)), temp >> 16, 0x1A, UI_SPRITE_ALT_PAGE);
         i += 1;
         col_i = i & BYTE_MASK;
     } while ((u32)(i & BYTE_MASK) < 15U);
     temp = origin_y << 0x10;
     temp = (s32)origin_y;
-    UI_DrawSprite((s16)(origin_x + 8), temp, 0x32, 1);
-    UI_DrawSprite((s16)(origin_x + 128), temp, 0x33, 1);
+    UI_DrawSprite((s16)(origin_x + 8), temp, 0x32, UI_SPRITE_ALT_PAGE);
+    UI_DrawSprite((s16)(origin_x + 128), temp, 0x33, UI_SPRITE_ALT_PAGE);
 }
 #else
 INCLUDE_ASM(Battle_DrawTitledFrame);

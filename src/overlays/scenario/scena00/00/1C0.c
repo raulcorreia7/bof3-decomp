@@ -871,7 +871,7 @@ MATCH void func_801F8BCC(void) {
     SetShadeTex(prim, 0);
     SetSemiTrans(prim, 1);
     if (g_AreaDrawFlags != 0) {
-        GFX_AddPrim(3U, sizeof(POLY_FT4));
+        GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_FT4));
     }
 }
 

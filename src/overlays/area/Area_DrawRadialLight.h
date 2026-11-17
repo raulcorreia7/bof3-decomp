@@ -37,7 +37,7 @@ static inline void Area_DrawRadialLight(void* position, s32 radius, s32 colors, 
         setRGB0(primitive, (flags & 4) << shift, (flags & 2) << (shift + 1), (flags & 1) << (shift + 2));
         setRGB1(primitive, 0, 0, 0);
         setRGB2(primitive, 0, 0, 0);
-        GFX_AddPrim(2u, sizeof(POLY_G3));
+        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G3));
         i += 1;
     } while ((i & BYTE_MASK) < 32U);
 }

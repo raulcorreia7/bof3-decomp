@@ -33,7 +33,7 @@
         setRGB1(prim, 0, 0, 0);                                                                      \
         setRGB2(prim, 0, 0, 0);                                                                      \
         i += 1;                                                                                      \
-        GFX_AddPrim(3, sizeof(POLY_G3));                                                             \
+        GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_G3));                                              \
     } while (i < 8)
 
 #endif

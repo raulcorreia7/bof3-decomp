@@ -10,7 +10,7 @@ MATCH void func_801E7720(s16 tile_x, s8 tile_kind) {
     SetTile(tile);
     PSX_SET_SEMI_TRANSPARENT(tile);
     setXY0(tile, 0, tile_x);
-    setWH(tile, 320, 13);
+    setWH(tile, SCREEN_WIDTH, 13);
     tile->b0 = tile_kind;
     tile->g0 = tile_kind;
     tile->r0 = tile_kind;

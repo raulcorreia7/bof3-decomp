@@ -58,7 +58,7 @@ MATCH void func_80167910(void) {
     if (!(g_Task->param.unk_0B & 0x1)) {
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
     } else {
-        GFX_AddPrim(3, sizeof(POLY_FT4));
+        GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_FT4));
     }
     PushMatrix();
     setVector(&axis, 0, 0, 0);
@@ -70,7 +70,7 @@ MATCH void func_80167910(void) {
     if (!(g_Task->param.unk_0B & 0x1)) {
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
     } else {
-        GFX_AddPrim(3, sizeof(DR_MODE));
+        GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(DR_MODE));
     }
     if (g_FrameCount & 0x8) {
         radius = (s16)(0x38 - ((~((u32)g_FrameCount >> 1) & 0x3) * 2));
@@ -98,7 +98,7 @@ MATCH void func_80167910(void) {
         if (!(g_Task->param.unk_0B & 0x1)) {
             Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_G3));
         } else {
-            GFX_AddPrim(3, sizeof(POLY_G3));
+            GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_G3));
         }
     }
     PopMatrix();

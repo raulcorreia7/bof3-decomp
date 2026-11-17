@@ -4,7 +4,7 @@ MATCH void func_801EF3B4(s32 shade) {
     SPRT* sprt;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 0x340, 0x100), 0);
-    GFX_AddPrim(2, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(DR_MODE));
 
     sprt       = (SPRT*)g_GfxPrimCursor;
     sprt->clut = GetClut(0, 0x1FA);
@@ -14,5 +14,5 @@ MATCH void func_801EF3B4(s32 shade) {
     setUV0(sprt, 0, 0);
     sprt->h = 0x18;
     SetSprt(sprt);
-    GFX_AddPrim(2, sizeof(SPRT));
+    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(SPRT));
 }

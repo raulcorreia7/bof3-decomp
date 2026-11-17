@@ -28,7 +28,7 @@ MATCH void SYS_StartLogo(void) {
     ClearOTag(ordering_table, 8);
     DrawOTag(ordering_table);
 
-    GFX_ClearRect(0, 0, 1024, 512);
+    GFX_ClearRect(0, 0, GFX_VRAM_WIDTH, GFX_VRAM_HEIGHT);
     DrawSync(0);
     SetDispMask(1);
 }
