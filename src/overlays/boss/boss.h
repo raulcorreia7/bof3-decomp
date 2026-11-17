@@ -24,7 +24,7 @@ extern Callback D_800C26CC[];
 extern Callback D_800C26FC[];
 
 /* Point the current boss enemy at its script, mode handler and action table, then start task mode 2. */
-static inline void Boss_StartEnemyScript(u8* script, ModeFunc handler, u16* steps) {
+static inline void Boss_StartEnemyScript(u8* script, EnemyScriptCallback handler, u16* steps) {
     EnemyBattler* work;
 
     work = g_BattleCurrentEnemy;
@@ -34,7 +34,7 @@ static inline void Boss_StartEnemyScript(u8* script, ModeFunc handler, u16* step
 }
 
 /* Boss_StartEnemyScript for a boss whose handler also runs the combatant's action. */
-static inline void Boss_StartEnemyScriptAction(u8* script, ModeFunc handler, u16* steps) {
+static inline void Boss_StartEnemyScriptAction(u8* script, EnemyScriptCallback handler, u16* steps) {
     EnemyBattler* work;
 
     work         = g_BattleCurrentEnemy;

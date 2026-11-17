@@ -349,77 +349,80 @@ ASSERT_OFFSET(BattlePanelTask, hp, 0x14);
 ASSERT_OFFSET(BattlePanelTask, max_hp, 0x1C);
 ASSERT_SIZE(BattlePanelTask, 0x1E);
 
+/* The enemy script routine; mode 0, 1 or 2 selects the phase. */
+typedef void (*EnemyScriptCallback)(s32 mode);
+
 typedef struct EnemyBattler {
-    TaskHeader  header; /* 0x00 */
-    u8          unk_03;
-    u8          unk_04;
-    u8          slot;   /* +0x05 battler slot; Battle_InitEnemy stores slot + 3 here */
-    u8          unk_06; /* +0x06 cleared when the slot is armed */
-    u8          unk_07; /* +0x07 cleared when the slot is armed */
-    u8          unk_08; /* +0x08 the battle index with its low bit flipped */
-    u8          pad_09[0x3];
-    s32         unk_0C; /* +0x0C cleared when the slot is armed */
-    s32         unk_10; /* +0x10 cleared when the slot is armed */
-    s32         unk_14; /* +0x14 cleared when the slot is armed */
-    s32         unk_18; /* +0x18 cleared when the slot is armed */
-    s32         unk_1C; /* +0x1C cleared when the slot is armed */
-    s32         unk_20; /* +0x20 cleared when the slot is armed */
-    u8          unk_24; /* +0x24 cleared when the slot is armed */
-    u8          pad_25[0x4];
-    u8          unk_29; /* +0x29 set to 4 when the slot is armed */
-    u8          pad_2A[0x1];
-    u8          unk_2B; /* +0x2B cleared when the slot is armed */
-    u8          pad_2C[0x2];
-    s16         unk_2E; /* +0x2E cleared when the slot is armed */
-    s16         unk_30; /* +0x30 cleared when the slot is armed */
-    s16         unk_32; /* +0x32 cleared when the slot is armed */
-    WorldPos    pos;    /* +0x34 the enemy's x, y and z; the slot setup stores the vertical span in z */
-    u8          pad_40[0x8];
-    u8          unk_48; /* +0x48 cleared when the slot is armed */
-    u8          pad_49[0x2];
-    u8          unk_4B; /* +0x4B set to 0xFF when the slot is armed */
-    u8          pad_4C[0xC];
-    u16         unk_58; /* +0x58 the halfword the boss end-of-battle setup copies to the spad record */
-    u16         unk_5A; /* +0x5A the halfword the boss end-of-battle setup copies to the spad record */
-    u8          unk_5C; /* +0x5C cleared when the slot is armed */
-    u8          unk_5D; /* +0x5D cleared when the slot is armed */
-    u8          unk_5E; /* +0x5E cleared when the slot is armed */
-    u8          unk_5F; /* +0x5F cleared when the slot is armed */
-    u8          pad_60[0x14];
-    u8          name[8]; /* +0x74 the 8-character enemy name, drawn as text by Battle_DrawEnemyNamePanel */
-    EnemyIdCode enemy_id;
-    u8          choice_ai;
-    u8          unk_7F;                    /* +0x7F battle/battle/03's cell; battle/battle/15 leaves it padded */
-    u16         event_flags;               /* +0x80 battle/battle/03's cell; battle/battle/15 leaves it padded */
-    u16         status;                    /* +0x82 StatusFlags; Battle_DefeatEnemy sets STATUS_KO when the enemy leaves the field */
-    u16         zenny;                     /* +0x84 added to the battle reward by Battle_DefeatEnemy */
-    u16         exp;                       /* +0x86 added to the battle reward by Battle_DefeatEnemy */
-    u16         level;                     /* +0x88 the turn-order ranking and the base damage read it */
-    u16         unk_8A;                    /* +0x8A set from the area scene record when the slot is armed */
-    u8          skills[ENEMY_SKILL_COUNT]; /* +0x8C the bytes func_8009C994 copies the event packet's tail into */
-    u16         hp;
-    u16         ap; /* +0x96 battle/battle/03's cell; battle/battle/15 leaves it padded */
-    EnemyDrop   drops[2];
-    Stats       stats; /* +0xA0 the live stats; the capture cap and the hit math read it */
-    Stats       base;  /* +0xC0 the stats before buffs */
-    u8          type;
-    u8          triggered_events; /* +0xE1 one bit per event packet already applied */
-    s8          panel_offset_x;   /* +0xE2 added to the panel's screen x, as the party's g_BattlePanelOffsets entry */
-    s8          panel_offset_y;   /* +0xE3 added to the panel's screen y */
-    ModeFunc    unk_E4;
-    u16*        unk_E8;
-    u8*         script;
-    u8          unk_F0;
-    u8          unk_F1;
-    u8          pad_F2[2];
-    BattleTurn  turn;                                          /* +0xF4 the action the enemy has queued and its outcome */
-    s8          stat_multipliers[ENEMY_STAT_MULTIPLIER_COUNT]; /* +0x108 the first four modify power, defense, agility and intelligence */
-    u8          pad_110[2];
-    u8          unk_112;
-    u8          unk_113;
-    u8          unk_114;
-    u8          unk_115;
-    u8          pad_116[0x2];
+    TaskHeader          header; /* 0x00 */
+    u8                  unk_03;
+    u8                  unk_04;
+    u8                  slot;   /* +0x05 battler slot; Battle_InitEnemy stores slot + 3 here */
+    u8                  unk_06; /* +0x06 cleared when the slot is armed */
+    u8                  unk_07; /* +0x07 cleared when the slot is armed */
+    u8                  unk_08; /* +0x08 the battle index with its low bit flipped */
+    u8                  pad_09[0x3];
+    s32                 unk_0C; /* +0x0C cleared when the slot is armed */
+    s32                 unk_10; /* +0x10 cleared when the slot is armed */
+    s32                 unk_14; /* +0x14 cleared when the slot is armed */
+    s32                 unk_18; /* +0x18 cleared when the slot is armed */
+    s32                 unk_1C; /* +0x1C cleared when the slot is armed */
+    s32                 unk_20; /* +0x20 cleared when the slot is armed */
+    u8                  unk_24; /* +0x24 cleared when the slot is armed */
+    u8                  pad_25[0x4];
+    u8                  unk_29; /* +0x29 set to 4 when the slot is armed */
+    u8                  pad_2A[0x1];
+    u8                  unk_2B; /* +0x2B cleared when the slot is armed */
+    u8                  pad_2C[0x2];
+    s16                 unk_2E; /* +0x2E cleared when the slot is armed */
+    s16                 unk_30; /* +0x30 cleared when the slot is armed */
+    s16                 unk_32; /* +0x32 cleared when the slot is armed */
+    WorldPos            pos;    /* +0x34 the enemy's x, y and z; the slot setup stores the vertical span in z */
+    u8                  pad_40[0x8];
+    u8                  unk_48; /* +0x48 cleared when the slot is armed */
+    u8                  pad_49[0x2];
+    u8                  unk_4B; /* +0x4B set to 0xFF when the slot is armed */
+    u8                  pad_4C[0xC];
+    u16                 unk_58; /* +0x58 the halfword the boss end-of-battle setup copies to the spad record */
+    u16                 unk_5A; /* +0x5A the halfword the boss end-of-battle setup copies to the spad record */
+    u8                  unk_5C; /* +0x5C cleared when the slot is armed */
+    u8                  unk_5D; /* +0x5D cleared when the slot is armed */
+    u8                  unk_5E; /* +0x5E cleared when the slot is armed */
+    u8                  unk_5F; /* +0x5F cleared when the slot is armed */
+    u8                  pad_60[0x14];
+    u8                  name[8]; /* +0x74 the 8-character enemy name, drawn as text by Battle_DrawEnemyNamePanel */
+    EnemyIdCode         enemy_id;
+    u8                  choice_ai;
+    u8                  unk_7F;                    /* +0x7F battle/battle/03's cell; battle/battle/15 leaves it padded */
+    u16                 event_flags;               /* +0x80 battle/battle/03's cell; battle/battle/15 leaves it padded */
+    u16                 status;                    /* +0x82 StatusFlags; Battle_DefeatEnemy sets STATUS_KO when the enemy leaves the field */
+    u16                 zenny;                     /* +0x84 added to the battle reward by Battle_DefeatEnemy */
+    u16                 exp;                       /* +0x86 added to the battle reward by Battle_DefeatEnemy */
+    u16                 level;                     /* +0x88 the turn-order ranking and the base damage read it */
+    u16                 unk_8A;                    /* +0x8A set from the area scene record when the slot is armed */
+    u8                  skills[ENEMY_SKILL_COUNT]; /* +0x8C the bytes func_8009C994 copies the event packet's tail into */
+    u16                 hp;
+    u16                 ap; /* +0x96 battle/battle/03's cell; battle/battle/15 leaves it padded */
+    EnemyDrop           drops[2];
+    Stats               stats; /* +0xA0 the live stats; the capture cap and the hit math read it */
+    Stats               base;  /* +0xC0 the stats before buffs */
+    u8                  type;
+    u8                  triggered_events; /* +0xE1 one bit per event packet already applied */
+    s8                  panel_offset_x;   /* +0xE2 added to the panel's screen x, as the party's g_BattlePanelOffsets entry */
+    s8                  panel_offset_y;   /* +0xE3 added to the panel's screen y */
+    EnemyScriptCallback unk_E4;
+    u16*                unk_E8;
+    u8*                 script;
+    u8                  unk_F0;
+    u8                  unk_F1;
+    u8                  pad_F2[2];
+    BattleTurn          turn;                                          /* +0xF4 the action the enemy has queued and its outcome */
+    s8                  stat_multipliers[ENEMY_STAT_MULTIPLIER_COUNT]; /* +0x108 the first four modify power, defense, agility and intelligence */
+    u8                  pad_110[2];
+    u8                  unk_112;
+    u8                  unk_113;
+    u8                  unk_114;
+    u8                  unk_115;
+    u8                  pad_116[0x2];
 } EnemyBattler;
 
 ASSERT_OFFSET(EnemyBattler, slot, 0x05);
@@ -456,7 +459,7 @@ ASSERT_OFFSET(EnemyBattler, turn, 0xF4);
 ASSERT_SIZE(EnemyBattler, 0x118);
 
 /* Point a boss enemy at its script, event handler and step table. */
-static inline void EnemyBattler_SetScript(EnemyBattler* enemy, u8* script, ModeFunc handler, u16* steps) {
+static inline void EnemyBattler_SetScript(EnemyBattler* enemy, u8* script, EnemyScriptCallback handler, u16* steps) {
     enemy->script = script;
     enemy->unk_E4 = handler;
     enemy->unk_E8 = steps;
@@ -992,55 +995,55 @@ typedef struct BattleState {
         GeneCursor gene;        /* the gene picker's cursor in Accession */
     } cursor;
 
-    /* 0x08 */ u16           flags; /* BattleStateFlags */
-    /* 0x0A */ u8            encounter;
-    /* 0x0B */ u8            unk_0B;
-    /* 0x0C */ u8            scroll_dir;
-    /* 0x0D */ u8            boss_flags;
-    /* 0x0E */ u8            unk_0E;
-    /* 0x0F */ u8            selection_latch;
-    /* 0x10 */ u8            party_count;
-    /* 0x11 */ u8            living_party_count;
-    /* 0x12 */ u8            enemy_count;
-    /* 0x13 */ u8            living_enemy_count;
-    /* 0x14 */ u8            panel_slot;
-    /* 0x15 */ u8            unk_15[7];
-    /* 0x1C */ u8            panel_widths[7];
-    /* 0x23 */ u8            command_count;
-    /* 0x24 */ u8            unk_24[8];
-    /* 0x2C */ u8            turn_order[11];
-    /* 0x37 */ u8            unk_37[11];
-    /* 0x42 */ u8            turn_cursor;
-    /* 0x43 */ u8            turn_count;
-    /* 0x44 */ BattleOutcome outcome;
-    /* 0x84 */ u8            unk_84[16];
-    /* 0x94 */ u8            active_battler;
-    /* 0x95 */ u8            action_type;
-    /* 0x96 */ u8            unk_96[10];
-    /* 0xA0 */ BattleAction* action;
-    /* 0xA4 */ u8            target_selector;
-    /* 0xA5 */ u8            unk_A5[7];
-    /* 0xAC */ PartyMember*  selected_actor;
-    /* 0xB0 */ u8            unk_B0[4];
-    /* 0xB4 */ u8            target;
-    /* 0xB5 */ u8            unk_B5[11];
-    /* 0xC0 */ BattleTurn*   target_record;
-    /* 0xC4 */ Callback      choose_ending_hook;
-    /* 0xC8 */ Callback      end_hook;
-    /* 0xCC */ BossEventFunc boss_event_hook;
-    /* 0xD0 */ u8            unk_D0[14];
-    /* 0xDE */ u16           unk_DE; /* boss055 reads the script index here; boss001 counts frames in it */
-    /* 0xE0 */ u16           action_id;
-    /* 0xE2 */ u8            unk_E2[2];
-    /* 0xE4 */ u8            genes[3];
-    /* 0xE7 */ u8            gene_count;
-    /* 0xE8 */ u8            unk_E8;
-    /* 0xE9 */ u8            dragon_form;
-    /* 0xEA */ u8            unk_EA[4];
-    /* 0xEE */ u8            action_lock;
-    /* 0xEF */ u8            unk_EF[9];
-    /* 0xF8 */ u16           pending_status;
-    /* 0xFA */ u8            unk_FA[6];
+    /* 0x08 */ u16               flags; /* BattleStateFlags */
+    /* 0x0A */ u8                encounter;
+    /* 0x0B */ u8                unk_0B;
+    /* 0x0C */ u8                scroll_dir;
+    /* 0x0D */ u8                boss_flags;
+    /* 0x0E */ u8                unk_0E;
+    /* 0x0F */ u8                selection_latch;
+    /* 0x10 */ u8                party_count;
+    /* 0x11 */ u8                living_party_count;
+    /* 0x12 */ u8                enemy_count;
+    /* 0x13 */ u8                living_enemy_count;
+    /* 0x14 */ u8                panel_slot;
+    /* 0x15 */ u8                unk_15[7];
+    /* 0x1C */ u8                panel_widths[7];
+    /* 0x23 */ u8                command_count;
+    /* 0x24 */ u8                unk_24[8];
+    /* 0x2C */ u8                turn_order[11];
+    /* 0x37 */ u8                unk_37[11];
+    /* 0x42 */ u8                turn_cursor;
+    /* 0x43 */ u8                turn_count;
+    /* 0x44 */ BattleOutcome     outcome;
+    /* 0x84 */ u8                unk_84[16];
+    /* 0x94 */ u8                active_battler;
+    /* 0x95 */ u8                action_type;
+    /* 0x96 */ u8                unk_96[10];
+    /* 0xA0 */ BattleAction*     action;
+    /* 0xA4 */ u8                target_selector;
+    /* 0xA5 */ u8                unk_A5[7];
+    /* 0xAC */ PartyMember*      selected_actor;
+    /* 0xB0 */ u8                unk_B0[4];
+    /* 0xB4 */ u8                target;
+    /* 0xB5 */ u8                unk_B5[11];
+    /* 0xC0 */ BattleTurn*       target_record;
+    /* 0xC4 */ Callback          choose_ending_hook;
+    /* 0xC8 */ Callback          end_hook;
+    /* 0xCC */ BossEventCallback boss_event_hook;
+    /* 0xD0 */ u8                unk_D0[14];
+    /* 0xDE */ u16               unk_DE; /* boss055 reads the script index here; boss001 counts frames in it */
+    /* 0xE0 */ u16               action_id;
+    /* 0xE2 */ u8                unk_E2[2];
+    /* 0xE4 */ u8                genes[3];
+    /* 0xE7 */ u8                gene_count;
+    /* 0xE8 */ u8                unk_E8;
+    /* 0xE9 */ u8                dragon_form;
+    /* 0xEA */ u8                unk_EA[4];
+    /* 0xEE */ u8                action_lock;
+    /* 0xEF */ u8                unk_EF[9];
+    /* 0xF8 */ u16               pending_status;
+    /* 0xFA */ u8                unk_FA[6];
 } BattleState;
 
 ASSERT_OFFSET(BattleState, phase, 0x00);

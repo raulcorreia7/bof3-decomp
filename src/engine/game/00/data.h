@@ -107,18 +107,18 @@ typedef struct WorldMapRegion {
 /* g_WorldMapRegions[11] spans 0x134 bytes up to D_801C8090. */
 ASSERT_SIZE(WorldMapRegion, 0x1C);
 
-typedef u8 (*ActorActionFunc)(void* entity, u8 param, s32 phase);
-typedef void (*ActorWorkFunc)(s32 fallback_index, s32 index);
+typedef u8 (*ActorStepCallback)(void* entity, u8 param, s32 phase);
+typedef void (*FieldActionCallback)(s32 character_id, s32 index);
 
 /* D_801C7B74 */
 extern Step2                s_BattleScrollCellSteps[4];
 extern WorldMapRegion       g_WorldMapRegions[WORLD_MAP_REGION_COUNT];
-extern ActorActionFunc      D_801C83BC[7];
-extern ObjectFunc           D_801C83D8[11];
+extern ActorStepCallback    D_801C83BC[7];
+extern ActorModeCallback    D_801C83D8[11];
 extern SceneSlots*          g_SceneScenes[20];
 extern AreaHooks            g_AreaHooks;
 /* D_801C890C */
-extern ActorWorkFunc        g_FieldActions[11];
+extern FieldActionCallback  g_FieldActions[11];
 extern u8*                  D_801C893C[5];
 extern u8*                  D_801C8950[5];
 extern ShopStock            g_GameShopStock[SHOP_COUNT];

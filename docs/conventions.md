@@ -540,7 +540,7 @@ u8 D_801E2F7C[] = { 0xC8, 0x00, 0x60, 0x00, 0xE8, 0x00, 0x78, 0x00, 0x08, 0x01, 
 ### Function tables
 
 A function table is an array of function pointers the game indexes to run one entry. Its element
-type is the mechanism (`<Thing>Func`, or `Callback` for `void (*)(void)`), one type per signature.
+type is the mechanism (`<Role>Callback` for what the function does in the game, or plain `Callback` for `void (*)(void)`), one type per signature.
 A struct wrapping the array exists only where a copier assigns the table to a stack local; it takes
 the table's job name, not its size.
 
@@ -554,7 +554,7 @@ because their counts match.
 
 ```c
 /* Battle commands by BattleCommand, run by Battle_DispatchCommand (0x801D3C40). */
-BattleCommandFunc g_BattleCommands[BATTLE_COMMAND_COUNT] = {
+BattleCommandCallback g_BattleCommands[BATTLE_COMMAND_COUNT] = {
     [BATTLE_COMMAND_ATTACK] = Battle_RunAttack,
     [BATTLE_COMMAND_DEFEND] = Battle_RunDefend,
 };

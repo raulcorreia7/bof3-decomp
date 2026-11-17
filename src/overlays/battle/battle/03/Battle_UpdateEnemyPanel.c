@@ -2,7 +2,6 @@
 
 /* Four state handlers; the binary keeps the table at this address and no
  * header declares it. */
-typedef void (*BattlePanelFunc)(void);
 
 /* 0x118-byte enemy work rows; the rows are anchors that the code addresses by
  * byte offset. The row's action points and cap are read through the
@@ -21,7 +20,7 @@ MATCH void Battle_UpdateEnemyPanel(void) {
     u32              slot;
     u32              offset;
     u16              flags;
-    BattlePanelFunc  handlers[4];
+    Callback         handlers[4];
 
     memcpy(handlers, g_BattleEnemyPanelSteps, sizeof(handlers));
 

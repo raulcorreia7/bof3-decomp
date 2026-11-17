@@ -6,7 +6,7 @@
 
 #include "overlays/area/world00.h"
 
-/* Handler table the step byte selects. */
+/* Step tables the step bytes selects. */
 extern void (*D_801F3304[])(void);
 
 /* The scratchpad work object's loader hook. */

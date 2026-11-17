@@ -5,8 +5,8 @@
  * func_801FB37C (scena14), func_801FDD80 (scena15), func_801F887C (scena17), func_801F6CAC (scena18),
  * func_801F6D10 (scena19) */
 MATCH void Scene_DispatchActor(void* entity) {
-    SceneFunc handler;
-    u8        index;
+    SceneActorCallback handler;
+    u8                 index;
 
     index   = ((Actor*)entity)->callback_index;
     handler = g_SceneActorDispatch[index];

@@ -162,7 +162,7 @@ ASSERT_SIZE(FallingSpark, 0x1C);
 FallingSpark* func_801F8394(void);
 
 /* The two dispatch tables the scenario step code indexes. */
-extern SceneFunc g_SceneActorDispatch[];
-extern Callback  g_SceneEntityDispatch[];
+extern SceneActorCallback g_SceneActorDispatch[];
+extern Callback           g_SceneEntityDispatch[];
 
 #endif

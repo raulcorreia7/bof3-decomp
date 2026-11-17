@@ -5,8 +5,8 @@
  * the small value tables read by Area_DrawCellSides and Menu_ShrinkMessagePanel.
  */
 
-const CellFunc D_8017F668[77] = {
-    (CellFunc)Area_DrawPartQuads,
+const CellDrawCallback D_8017F668[77] = {
+    (CellDrawCallback)Area_DrawPartQuads,
     func_8015642C,
     func_8015642C,
     func_8015642C,
@@ -22,7 +22,7 @@ const CellFunc D_8017F668[77] = {
     func_8015642C,
     func_8015642C,
     func_801569B8,
-    (CellFunc)Area_DrawPartAnimation,
+    (CellDrawCallback)Area_DrawPartAnimation,
     Area_DrawCellAtPoint,
     Area_DrawCellAtPoint,
     Area_DrawCellAtPoint,
@@ -30,7 +30,7 @@ const CellFunc D_8017F668[77] = {
     Area_DrawCellAtPoint,
     Area_DrawCellAtPoint,
     Area_DrawCellAtPoint,
-    (CellFunc)func_8015763C,
+    (CellDrawCallback)func_8015763C,
     Area_DrawCellAtPoint,
     Area_DrawCellAtPoint,
     Area_DrawCellAtPoint,
@@ -38,23 +38,23 @@ const CellFunc D_8017F668[77] = {
     Area_DrawCellAtPoint,
     Area_DrawCellAtPoint,
     Area_DrawCellAtPoint,
-    (CellFunc)func_8015763C,
-    (CellFunc)Area_DrawGouraudQuads,
+    (CellDrawCallback)func_8015763C,
+    (CellDrawCallback)Area_DrawGouraudQuads,
     Area_DrawParts,
-    (CellFunc)func_8015763C,
-    (CellFunc)func_80157644,
-    (CellFunc)func_801576A0,
-    (CellFunc)func_8015763C,
+    (CellDrawCallback)func_8015763C,
+    (CellDrawCallback)func_80157644,
+    (CellDrawCallback)func_801576A0,
+    (CellDrawCallback)func_8015763C,
     Area_DrawSceneSprite,
-    (CellFunc)&D_801EFEFC,
-    (CellFunc)&D_801F016C,
-    (CellFunc)&D_801F0488,
-    (CellFunc)&D_801F0778,
-    (CellFunc)func_8015763C,
-    (CellFunc)func_8015763C,
-    (CellFunc)func_8015763C,
-    (CellFunc)func_8015763C,
-    (CellFunc)func_8015763C,
+    (CellDrawCallback)&D_801EFEFC,
+    (CellDrawCallback)&D_801F016C,
+    (CellDrawCallback)&D_801F0488,
+    (CellDrawCallback)&D_801F0778,
+    (CellDrawCallback)func_8015763C,
+    (CellDrawCallback)func_8015763C,
+    (CellDrawCallback)func_8015763C,
+    (CellDrawCallback)func_8015763C,
+    (CellDrawCallback)func_8015763C,
     func_8015642C,
     func_8015642C,
     func_8015642C,
@@ -134,9 +134,9 @@ const u32 D_8017F8E0[4] = {
     0xBD810006,
 };
 
-const ObjectFunc g_BundleOpcodes[7] = {
-    (ObjectFunc)Area_ReadTintRecord,  func_801583BC, (ObjectFunc)Area_WriteCellRecord, (ObjectFunc)Area_AnimateClut,
-    (ObjectFunc)Area_DrawGouraudQuad, func_80158830, func_80158940,
+const BundleOpcodeCallback g_BundleOpcodes[7] = {
+    (BundleOpcodeCallback)Area_ReadTintRecord,  func_801583BC, (BundleOpcodeCallback)Area_WriteCellRecord, (BundleOpcodeCallback)Area_AnimateClut,
+    (BundleOpcodeCallback)Area_DrawGouraudQuad, func_80158830, func_80158940,
 };
 
 const u8 g_MenuPanelOrigins[32] = {

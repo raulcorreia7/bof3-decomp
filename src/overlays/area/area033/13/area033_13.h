@@ -21,7 +21,7 @@ extern u8 D_801F4CB0[];
 #define WORLD_MAP_MESSAGE_ROWS 6
 extern WorldMapMessageRow D_801F4EA4[WORLD_MAP_MESSAGE_ROWS];
 /* The work-step handler table indexed by the record's step byte. */
-/* Handler tables the step bytes select. */
+/* Step tables the step bytes select. */
 extern void (*D_801F4F78[])(void);
 extern void (*D_801F4F80[])(void);
 extern void (*D_801F4F90[])(void);
