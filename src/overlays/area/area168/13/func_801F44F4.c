@@ -6,9 +6,9 @@ MATCH void func_801F44F4(void) {
     s32  quad;
     s32* code;
 
-    entry                = g_Task->pos.x.part.integer;
-    pair                 = entry * 2;
-    g_Task->direction_08 = g_Task->pos.y.part.integer == 0;
+    entry             = g_Task->pos.x.part.integer;
+    pair              = entry * 2;
+    g_Task->direction = g_Task->pos.y.part.integer == 0;
 
     g_Task->pos.x.part.integer = AREA168_ENTRY_TABLE(u8, 0x50, pair);
     g_Task->pos.y.part.integer = AREA168_ENTRY_TABLE(u8, 0x51, pair);

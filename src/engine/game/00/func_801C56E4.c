@@ -5,10 +5,10 @@ MATCH void func_801C56E4(void) {
     Actor* work;
     Actor* state;
 
-    work               = g_Task;
-    work->direction_08 = (work->direction_08 ^ 0x4);
-    index              = 59;
-    if (g_Task->direction_08 == FACING_RIGHT) {
+    work            = g_Task;
+    work->direction = (work->direction ^ 0x4);
+    index           = 59;
+    if (g_Task->direction == FACING_RIGHT) {
         index = 58;
     }
     Actor_RequestScript(index);

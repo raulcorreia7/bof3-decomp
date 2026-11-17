@@ -10,7 +10,7 @@ MATCH void func_801F4614(void) {
     u8  next;
 
     saved_z             = g_Task->pos.z.fixed;
-    group               = (g_Task->direction_08 & 6) << 2;
+    group               = (g_Task->direction & 6) << 2;
     trail               = g_PartyTrailStep[g_Task->timer >> 3];
     g_Task->pos.z.fixed = g_Task->gravity;
     i                   = 0;

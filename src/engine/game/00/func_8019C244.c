@@ -9,7 +9,7 @@ MATCH s32 func_8019C244(void) {
     work = g_Task;
     x    = work->pos.x.fixed;
     y    = work->pos.y.fixed;
-    switch (work->direction_08) {
+    switch (work->direction) {
         case FACING_UP:
             if ((((u32)y >> 15) & 0x1) == 0) {
                 hi = y >> 16;

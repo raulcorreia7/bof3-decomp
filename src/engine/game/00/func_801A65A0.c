@@ -37,7 +37,7 @@ MATCH void func_801A65A0(u8* script) {
         record->header.mode      = script[8];
 
         g_Task->header.step                            = script[0xA];
-        g_Task->direction_08                           = script[0] & 0xF;
+        g_Task->direction                              = script[0] & 0xF;
         g_Task->unk_06                                 = script[0] >> 4;
         FIELD(u16, &D_80146914, *counter * ACTOR_SIZE) = script[2];
         FIELD(s16, &D_80146916, *counter * ACTOR_SIZE) = script[3];

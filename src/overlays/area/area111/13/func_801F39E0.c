@@ -10,7 +10,7 @@ MATCH void func_801F39E0(void) {
 
     y      = (D_80147A58[LOBU(g_Task->unk_18)].pos.y.part.integer - 177) / 2;
     x      = (D_80147A58[LOBU(g_Task->unk_18)].pos.x.part.integer - 11) / 2;
-    facing = g_Task->direction_08 & 7;
+    facing = g_Task->direction & 7;
     x += D_80181B00[facing * 2];
     y += D_80181B01[facing * 2];
     if (x >= 7) {
@@ -31,7 +31,7 @@ MATCH void func_801F39E0(void) {
     cursor = g_ScriptState->cursor;
     party  = (g_GameState - g_Game.members) + 1;
     func_801AC768(g_ScriptState, 7, selection, party, 0xC);
-    g_ScriptState->cursor              = cursor;
-    D_80147A58[selection].direction_08 = g_Task->direction_08 & 7;
+    g_ScriptState->cursor           = cursor;
+    D_80147A58[selection].direction = g_Task->direction & 7;
     g_ScriptState->cursor -= 6;
 }

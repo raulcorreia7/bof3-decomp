@@ -38,7 +38,7 @@ MATCH void func_801A5EFC(u8* script) {
     COORD_INT(g_Task->pos.z) = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
     g_Task->header.mode      = script[0xA];
     g_Task->header.step      = script[0xC];
-    g_Task->direction_08     = script[0] & 0xF;
+    g_Task->direction        = script[0] & 0xF;
     g_Task->unk_06           = script[0] >> 4;
 
     /* The headers declare the per-slot columns D_80146914 and D_80146916 as scalars. */

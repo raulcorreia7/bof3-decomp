@@ -115,10 +115,10 @@ MATCH void func_801F735C(void) {
         work       = g_Task;
         message_id = work->param.unk_0B;
         if ((u8)message_id == 0x37) {
-            work->tint.signed_bytes.delta.b = -1;
-            work->tint.signed_bytes.delta.g = -1;
-            work->tint.signed_bytes.delta.r = -1;
-            g_Task->header.mode             = 4;
+            work->tint.steps.delta.b = -1;
+            work->tint.steps.delta.g = -1;
+            work->tint.steps.delta.r = -1;
+            g_Task->header.mode      = 4;
             g_ScriptVars[0] += 1;
         } else {
             MESSAGE_START_WAIT(message_id);

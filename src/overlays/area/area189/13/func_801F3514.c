@@ -21,14 +21,14 @@ NON_MATCHING void func_801F3514(void) {
     }
 
     if (g_AreaSceneMode == 1) {
-        g_Task->tint.signed_bytes.delta.r = 0x7F;
-        g_Task->tint.signed_bytes.delta.g = -0x80;
-        g_Task->tint.signed_bytes.delta.b = -0x80;
-        g_AreaSceneMode                   = 0;
+        g_Task->tint.steps.delta.r = 0x7F;
+        g_Task->tint.steps.delta.g = -0x80;
+        g_Task->tint.steps.delta.b = -0x80;
+        g_AreaSceneMode            = 0;
     } else {
-        g_Task->tint.signed_bytes.delta.r = 0;
-        g_Task->tint.signed_bytes.delta.g = 0;
-        g_Task->tint.signed_bytes.delta.b = 0;
+        g_Task->tint.steps.delta.r = 0;
+        g_Task->tint.steps.delta.g = 0;
+        g_Task->tint.steps.delta.b = 0;
     }
 
     vertex                             = g_ScratchPadVectors;

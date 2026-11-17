@@ -32,7 +32,7 @@ MATCH void func_801B3A3C(void) {
         work              = g_Task;
         work->header.mode = 0x0Cu;
     } else {
-        Actor_RequestScript(g_Task->direction_08);
+        Actor_RequestScript(g_Task->direction);
         g_Task->header.mode = 1u;
     }
     ACTOR_CLEAR_STEP();

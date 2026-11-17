@@ -39,7 +39,7 @@ MATCH s32 func_801FC1D0(s32 member_index) {
     task2->header.mode            = 4;
     task2->pos.z.part.integer     = height;
     g_Task->header.step           = 0;
-    g_Task->direction_08          = 0;
+    g_Task->direction             = 0;
     g_Task->unk_06                = 0;
     actor->ext.bounds.half_height = 0;
     g_Actors[actor_index].unk_77  = 2;

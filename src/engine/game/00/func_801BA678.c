@@ -57,27 +57,27 @@ NON_MATCHING s32 func_801BA678(void) {
     void*  tmp28;
     void*  tmp29;
 
-    if ((0x400 & g_Game.flags) || ((tmp24 = g_Task, val20 = tmp24->direction_08, (tmp24->pos.x.fixed == 0)) && (tmp24->pos.y.fixed == 0))) {
+    if ((0x400 & g_Game.flags) || ((tmp24 = g_Task, val20 = tmp24->direction, (tmp24->pos.x.fixed == 0)) && (tmp24->pos.y.fixed == 0))) {
         return 1;
     }
-    tmp12 = *(D_80181B00 + (g_Task->direction_08 * 2));
+    tmp12 = *(D_80181B00 + (g_Task->direction * 2));
     val12 = (tmp12 == 1) ? 2 : tmp12;
     val7  = val12;
-    tmp13 = *(D_80181B01 + (g_Task->direction_08 * 2));
+    tmp13 = *(D_80181B01 + (g_Task->direction * 2));
     val11 = (tmp13 == 1) ? 2 : tmp13;
     tmp14 = FIELD(u16, g_Task, 0x36u);
     val4  = (s16)tmp14;
     val7  = val4 + val12;
     val8  = FIELD(u16, g_Task, 0x3Au) + val11;
-    if ((*(D_80181B00 + (g_Task->direction_08 * 2)) + 1) == 2) {
+    if ((*(D_80181B00 + (g_Task->direction * 2)) + 1) == 2) {
         val4 += 1;
     }
     val6 = COORD_INT(g_Task->pos.y);
-    if ((*(D_80181B01 + (g_Task->direction_08 * 2)) + 1) == 2) {
+    if ((*(D_80181B01 + (g_Task->direction * 2)) + 1) == 2) {
         val6 += 1;
     }
     func_801BBCCC(val7, val8, val4, val6);
-    tmp15 = g_Task->direction_08;
+    tmp15 = g_Task->direction;
     if (!(tmp15 & 1)) {
         if (COORD_FRAC(g_Task->pos.x) != 0) {
             if (COORD_FRAC(g_Task->pos.y) != 0) {
@@ -103,16 +103,16 @@ NON_MATCHING s32 func_801BA678(void) {
                         goto block_21; /* retail branch */
                     }
                     if (!(func_801BB1B8(2) & BYTE_MASK)) {
-                        if ((((spad[1] & 0xF0) != 0xA0) || ((tmp19 = g_Task->direction_08, val9 = 9, (tmp19 != 1)) && (tmp19 != 5))) &&
-                            (((spad[2] & 0xF0) != 0xA0) || ((tmp20 = g_Task->direction_08, val9 = 0xA, (tmp20 != 3)) && (tmp20 != 7)))) {
+                        if ((((spad[1] & 0xF0) != 0xA0) || ((tmp19 = g_Task->direction, val9 = 9, (tmp19 != 1)) && (tmp19 != 5))) &&
+                            (((spad[2] & 0xF0) != 0xA0) || ((tmp20 = g_Task->direction, val9 = 0xA, (tmp20 != 3)) && (tmp20 != 7)))) {
                             if ((spad[1] & 0xF0) == 0xA0) {
-                                g_Task->direction_08 = val20;
+                                g_Task->direction = val20;
                                 Actor_SnapFacing(4U, 6U, 5U);
                                 val9 = 9;
                                 goto block_109; /* retail branch */
                             }
                             if ((spad[2] & 0xF0) == 0xA0) {
-                                g_Task->direction_08 = val20;
+                                g_Task->direction = val20;
                                 Actor_SnapFacing(2U, 4U, 3U);
                                 val9 = 0xA;
                                 goto block_109; /* retail branch */
@@ -137,7 +137,7 @@ NON_MATCHING s32 func_801BA678(void) {
                 default: /* switch 1 */
                     if ((SP_REF(u8, 0x8u) & 0xF0) == 0xA0) {
                         val9 = 8;
-                        if (!(1 & g_Task->direction_08)) {
+                        if (!(1 & g_Task->direction)) {
                             Actor_SnapFacing(2U, 4U, 3U);
                             val9 = 8;
                         }
@@ -176,7 +176,7 @@ NON_MATCHING s32 func_801BA678(void) {
                 default: /* switch 2 */
                     if ((SP_REF(u8, 0x8u) & 0xF0) == 0xA0) {
                         val9 = 8;
-                        if (!(1 & g_Task->direction_08)) {
+                        if (!(1 & g_Task->direction)) {
                             Actor_SnapFacing(4U, 6U, 5U);
                             val9 = 8;
                         }
@@ -269,12 +269,12 @@ NON_MATCHING s32 func_801BA678(void) {
                                                 tmp6 = FIELD(u16, g_Task, 0x3Au);
                                                 val7 = 1;
                                                 if (Area_IsStepTooHigh(val0, val0, tmp6, tmp6 + 1, val7) & BYTE_MASK) {
-                                                    g_Task->direction_08 = FACING_UP;
+                                                    g_Task->direction = FACING_UP;
                                                     return 1;
                                                 }
                                                 tmp7 = FIELD(u16, g_Task, 0x3Au);
                                                 if (Area_IsStepTooHigh(val0, val0, tmp7, tmp7 + (-1), val7) & BYTE_MASK) {
-                                                    g_Task->direction_08 = FACING_DOWN;
+                                                    g_Task->direction = FACING_DOWN;
                                                     return 1;
                                                 }
                                                 goto block_114; /* retail branch */
@@ -328,12 +328,12 @@ NON_MATCHING s32 func_801BA678(void) {
                                             val0 = val8;
                                             tmp2 = FIELD(u16, g_Task, 0x36u);
                                             if (Area_IsStepTooHigh(tmp2, (s16)(tmp2 + 1), val0, val0, val7) & BYTE_MASK) {
-                                                g_Task->direction_08 = FACING_LEFT;
+                                                g_Task->direction = FACING_LEFT;
                                                 return 1;
                                             }
                                             tmp3 = FIELD(u16, g_Task, 0x36u);
                                             if (Area_IsStepTooHigh(tmp3, (s16)(tmp3 - 1), val0, val0, val7) & BYTE_MASK) {
-                                                g_Task->direction_08 = FACING_RIGHT;
+                                                g_Task->direction = FACING_RIGHT;
                                                 return 1;
                                             }
                                         block_114:

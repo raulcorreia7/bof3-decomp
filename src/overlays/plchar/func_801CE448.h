@@ -14,7 +14,7 @@ MATCH void func_801CE448(void) {
     }
     switch (g_Task->unk_04) {
         case 0x50:
-            direction = g_Task->direction_08;
+            direction = g_Task->direction;
             if (abs(direction - FACING_DOWN) > abs(direction - FACING_RIGHT)) {
                 g_Task->param.turn_step = Actor_GetTurnStep(FACING_RIGHT);
                 g_Task->unk_03          = FACING_RIGHT;

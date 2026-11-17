@@ -16,7 +16,7 @@
                                                                     \
         task = g_Task;                                              \
         FAKE_USE(task);                                             \
-        direction = task->direction_08;                             \
+        direction = task->direction;                                \
         FAKE_USE(direction);                                        \
         range_mode = 0;                                             \
         value      = g_FacingSteps[direction].x;                    \

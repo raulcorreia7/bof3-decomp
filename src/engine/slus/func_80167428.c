@@ -69,7 +69,7 @@ NON_MATCHING void func_80167428(void) {
     }
     if (!(func_801B0E44() & BYTE_MASK)) {
         actor = g_Task;
-        tmp0  = actor->direction_08 * 8;
+        tmp0  = actor->direction * 8;
         tmp2  = ((s32*)g_FacingSteps)[tmp0];
         tmp4  = D_80145EC4 - (actor->pos.x.fixed + tmp2);
         val2  = tmp4;

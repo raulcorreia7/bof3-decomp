@@ -13,7 +13,7 @@ MATCH void func_8019B4A0(void) {
             if ((func_8019C1E4() & BYTE_MASK) == 0) {
                 Area_SetCellCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y), g_Task->param.unk_0B);
                 g_Task->unk_0A = (u8)((g_Task->unk_0A + 1) >> 1);
-                vx             = g_FacingOffsets[g_Task->direction_08].x;
+                vx             = g_FacingOffsets[g_Task->direction].x;
                 span           = (g_Task->unk_0A - 1) * 0xC00;
                 g_Task->vx     = vx * 4;
                 if ((vx * 4) > 0) {
@@ -21,7 +21,7 @@ MATCH void func_8019B4A0(void) {
                 } else if ((vx * 4) < 0) {
                     g_Task->vx = vx * 4 - span;
                 }
-                vy         = g_FacingOffsets[g_Task->direction_08].y;
+                vy         = g_FacingOffsets[g_Task->direction].y;
                 g_Task->vy = vy * 4;
                 if ((vy * 4) > 0) {
                     g_Task->vy = vy * 4 + span;

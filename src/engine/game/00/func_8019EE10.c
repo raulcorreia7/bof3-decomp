@@ -15,7 +15,7 @@ MATCH void func_8019EE10(void) {
     work                      = g_Task;
     work->unk_25              = 0x1D;
     next                      = g_Task;
-    work->state_70.word       = 0;
+    work->voice_flags.raw     = 0;
     next->unk_26              = 0;
     ACTOR_CLEAR_TINT();
     g_Task->tint.bytes.flags = 0;

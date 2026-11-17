@@ -14,7 +14,7 @@ NON_MATCHING u8 func_801F5D6C(void) {
         D_80145044        = g_Task->pos.y.fixed;
         D_80145048        = g_GameAreaId;
         D_8014504A += 1;
-        D_8014504B = (g_Task->direction_08 + D_801F62F0[rand() & 3]) & 0xF;
+        D_8014504B = (g_Task->direction + D_801F62F0[rand() & 3]) & 0xF;
         Game_RequestAreaChange(g_GameEntryAreaId, g_GameEntryPosX, g_GameEntryPosY, g_GameEntryFacing);
         return 1;
     }

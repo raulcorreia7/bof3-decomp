@@ -66,15 +66,15 @@ MATCH void func_801D0EAC(void) {
 }
 
 MATCH void func_801D0EF0(void) {
-    g_Task->pos.x.fixed               = g_Game.members[2].pos.x.fixed;
-    g_Task->pos.y.fixed               = g_Game.members[2].pos.y.fixed;
-    g_Task->pos.z.fixed               = TO_COORD(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
-    g_Task->vx                        = g_Task->pos.x.fixed;
-    g_Task->vy                        = g_Task->pos.y.fixed;
-    g_Task->vz                        = g_Task->pos.z.fixed;
-    g_Task->tint.signed_bytes.delta.r = 0;
-    g_Task->tint.signed_bytes.delta.g = -0x80;
-    g_Task->timer                     = 0x20;
+    g_Task->pos.x.fixed        = g_Game.members[2].pos.x.fixed;
+    g_Task->pos.y.fixed        = g_Game.members[2].pos.y.fixed;
+    g_Task->pos.z.fixed        = TO_COORD(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
+    g_Task->vx                 = g_Task->pos.x.fixed;
+    g_Task->vy                 = g_Task->pos.y.fixed;
+    g_Task->vz                 = g_Task->pos.z.fixed;
+    g_Task->tint.steps.delta.r = 0;
+    g_Task->tint.steps.delta.g = -0x80;
+    g_Task->timer              = 0x20;
     g_Task->header.mode++;
 }
 

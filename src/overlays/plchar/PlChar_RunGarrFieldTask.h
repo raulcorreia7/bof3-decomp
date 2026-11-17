@@ -14,7 +14,7 @@ s32 PlChar_FollowerInReach(u8 index);
             g_SpawnedActors[actor_slot].link = 1;                                                                  \
             /* FAKE: retail reads SND_PlaySE as void(s32). */                                                      \
             ((void (*)(s32))SND_PlaySE)(g_Task->unk_2C + 0x100);                                                   \
-            Actor_RequestScript(g_Task->direction_08 + 8);                                                         \
+            Actor_RequestScript(g_Task->direction + 8);                                                            \
             g_GameState->u.field.counter_11C.u8_value = 2;                                                         \
             g_GameFlags |= 0x1000;                                                                                 \
             func_801C24D0();                                                                                       \
@@ -25,12 +25,12 @@ s32 PlChar_FollowerInReach(u8 index);
             return;                                                                                                \
         }                                                                                                          \
     } else {                                                                                                       \
-        pos_x = g_Task->pos.x.fixed + g_FacingSteps[g_Task->direction_08].x * 2;                                   \
-        pos_y = g_Task->pos.y.fixed + g_FacingSteps[g_Task->direction_08].y * 2;                                   \
+        pos_x = g_Task->pos.x.fixed + g_FacingSteps[g_Task->direction].x * 2;                                      \
+        pos_y = g_Task->pos.y.fixed + g_FacingSteps[g_Task->direction].y * 2;                                      \
         if ((g_GameState->status.field.flags_12C.u8_value & 0x01) == 0) {                                          \
             other_slot = (u8)Actor_FindInRange(pos_x, pos_y, 1);                                                   \
             if (other_slot != actor_slot) {                                                                        \
-                g_Actors[other_slot].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;                          \
+                g_Actors[other_slot].interaction_flags |= ACTOR_INTERACTION_PENDING;                               \
             }                                                                                                      \
         }                                                                                                          \
     }                                                                                                              \

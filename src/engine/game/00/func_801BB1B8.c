@@ -17,7 +17,7 @@ MATCH bool func_801BB1B8(void) {
             Actor_SnapFacing(4, 6, 5);
             return 0;
         }
-        g_Task->direction_08 = (g_Task->direction_08 + 1) & 0x7;
+        g_Task->direction = (g_Task->direction + 1) & 0x7;
     }
     return 0;
 }

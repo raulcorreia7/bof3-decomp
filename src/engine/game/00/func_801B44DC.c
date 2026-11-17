@@ -130,7 +130,7 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
                     if (((Area_GetCellCode((s16)tmp14, tmp1) & BYTE_MASK) == val7) ||
                         (tmp34 = g_Task, val1 = (FIELD(u8, tmp34, 0x8u) - 2) & 7, tmp3 = val1 * 2, tmp15 = FIELD(u16, tmp34, 0x36u) + (s8) * (D_80181B00 + tmp3), *(u16*)(&g_ScratchPad) = tmp15,
                          tmp2 = FIELD(u16, tmp34, 0x3Au) + (s8) * (D_80181B01 + tmp3), FIELD(s16, (&g_ScratchPad), 0x2u) = tmp2, ((Area_GetCellCode((s16)tmp15, tmp2) & BYTE_MASK) == val7))) {
-                        g_Task->direction_08 = (u8)val1;
+                        g_Task->direction = (u8)val1;
                         return 1U;
                     }
                     return 0U;
@@ -204,12 +204,12 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
                         }
                         goto loop_71; /* retail branch */
                     }
-                    g_Task->direction_08 = FACING_RIGHT;
+                    g_Task->direction = FACING_RIGHT;
                     return 1U;
                 }
                 goto loop_68; /* retail branch */
             }
-            g_Task->direction_08 = FACING_LEFT;
+            g_Task->direction = FACING_LEFT;
             return 1U;
         }
         if (tmp17 != 7) {
@@ -278,12 +278,12 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
                     }
                     goto loop_46; /* retail branch */
                 }
-                g_Task->direction_08 = FACING_DOWN;
+                g_Task->direction = FACING_DOWN;
                 return 1U;
             }
             goto loop_43; /* retail branch */
         }
-        g_Task->direction_08 = FACING_UP;
+        g_Task->direction = FACING_UP;
         return 1U;
     }
     return 0U;

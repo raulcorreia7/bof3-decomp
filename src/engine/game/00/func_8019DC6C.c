@@ -1,20 +1,14 @@
 #include "game_00.h"
 
 typedef struct GameSpawnState {
-    s8  count_00;
+    s8  count;
     s8  pad_01;
-    s16 offset_02;
+    s16 offset;
 } GameSpawnState;
 
 typedef struct GameSpawn {
-    s32 x_00;
-    s32 y_04;
-    s32 z_08;
-    s32 pad_0C;
-    s32 vx;
-    s32 vy;
-    s32 vz;
-    s32 pad_1C;
+    VECTOR pos;
+    VECTOR vel;
 } GameSpawn;
 
 MATCH void func_8019DC6C(void) {
@@ -28,22 +22,22 @@ MATCH void func_8019DC6C(void) {
     rec   = MEM_PTR(GameSpawn, 0x800E4D44u);
     i     = 0;
     do {
-        func_8019DAA0((s32*)rec, state->offset_02, state->count_00);
+        func_8019DAA0((s32*)rec, state->offset, state->count);
         if (g_Task->timer >= 12u) {
-            rec->x_00 += rec->vx * 2;
-            rec->y_04 += rec->vy * 2;
-            rec->z_08 += rec->vz * 2;
+            rec->pos.vx += rec->vel.vx * 2;
+            rec->pos.vy += rec->vel.vy * 2;
+            rec->pos.vz += rec->vel.vz * 2;
         } else {
-            rec->x_00 += rec->vx;
-            rec->y_04 += rec->vy;
-            rec->z_08 += rec->vz;
+            rec->pos.vx += rec->vel.vx;
+            rec->pos.vy += rec->vel.vy;
+            rec->pos.vz += rec->vel.vz;
         }
         rec += 1;
         i++;
     } while ((i & BYTE_MASK) < 8u);
     if (g_Task->timer >= 12u) {
-        state->offset_02 += 0x80;
+        state->offset += 0x80;
     } else {
-        state->count_00 -= 5;
+        state->count -= 5;
     }
 }

@@ -5,16 +5,16 @@ MATCH void func_801B7EF0(void) {
 
     COORD_INT(g_Task->pos.z) = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) + 0x200;
     value                    = 0x3D;
-    if (g_Task->direction_08 == FACING_RIGHT) {
+    if (g_Task->direction == FACING_RIGHT) {
         value = 0x3C;
     }
     Actor_RequestScript(value);
     if (g_Task->unk_05 != 0) {
         func_801C2438();
-        g_Task->tint.signed_bytes.delta.r = -0x80;
-        g_Task->tint.signed_bytes.delta.g = -0x80;
-        g_Task->tint.signed_bytes.delta.b = -0x80;
-        g_Task->tint.bytes.flags          = 1;
+        g_Task->tint.steps.delta.r = -0x80;
+        g_Task->tint.steps.delta.g = -0x80;
+        g_Task->tint.steps.delta.b = -0x80;
+        g_Task->tint.bytes.flags   = 1;
         g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
         g_Task->unk_04 = 7;
     } else {

@@ -23,19 +23,19 @@ MATCH void func_801B8A9C(void) {
 loop_top:
     work   = g_Task;
     route  = count;
-    route  = (work->direction_08 + route) & 0x7;
+    route  = (work->direction + route) & 0x7;
     word   = FAKE_VOLATILE(u32, FIELD(u32, work, 0x70u));
     offset = route * 2;
     pos_x  = work->pos.x.fixed + g_FacingSteps[route].x * (steps = (word & BYTE_MASK) + 1);
     pos_y  = work->pos.y.fixed + g_FacingStepY[offset] * steps;
-    if ((Game_TestPlacement(pos_x, pos_y, (u8)word, COORD_INT(g_Task->pos.z)) & BYTE_MASK) != 0u || (Area_TestCellCorners(pos_x, pos_y, g_Task->state_70.byte, 0xD0, 0) & BYTE_MASK) == 0u) {
+    if ((Game_TestPlacement(pos_x, pos_y, (u8)word, COORD_INT(g_Task->pos.z)) & BYTE_MASK) != 0u || (Area_TestCellCorners(pos_x, pos_y, g_Task->voice_flags.scene_flag, 0xD0, 0) & BYTE_MASK) == 0u) {
         count++;
         if (count < 8) {
             /* Retry the probe from the next direction. */
             goto loop_top;
         }
         found   = 1;
-        route   = g_Task->direction_08;
+        route   = g_Task->direction;
         vals[0] = COORD_INT(g_Task->pos.z);
         for (iter = 0; iter < 4; iter++) {
             index_copy = iter * 2 + 1;
@@ -56,5 +56,5 @@ loop_top:
             }
         }
     }
-    g_Task->direction_08 = route;
+    g_Task->direction = route;
 }

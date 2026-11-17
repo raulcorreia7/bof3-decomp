@@ -13,7 +13,7 @@ MATCH void func_801F3D3C(void) {
 
     target_x.fixed = D_80147A58[g_Task->unk_18].pos.x.fixed;
     target_y.fixed = D_80147A58[g_Task->unk_18].pos.y.fixed;
-    facing         = g_Task->direction_08 & 7;
+    facing         = g_Task->direction & 7;
     /* The facing step bytes count half cells. */
     target_x.part.integer += D_80181B00[facing * 2] << 1;
     target_y.part.integer += D_80181B01[facing * 2] << 1;

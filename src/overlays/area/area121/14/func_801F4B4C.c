@@ -44,17 +44,17 @@ NON_MATCHING void func_801F4B4C(s32 input) {
     if (func_801F55EC() & 0xFF) {
         return;
     }
-    saved_facing = g_Task->direction_08;
+    saved_facing = g_Task->direction;
     if ((!(Actor_TurnByPad() & 0xFF) && !(g_InputHeld & g_InputMasks[WORLD_INPUT_RUN])) || (task = g_Task, (task->param.unk_0B == 0x40))) {
-        g_Task->direction_08                      = saved_facing;
+        g_Task->direction                         = saved_facing;
         g_Game.current->u.field.mode_12B.s8_value = 0;
         Actor_StopMoving();
         goto block_45;
     }
     if (g_InputHeld & g_InputMasks[WORLD_INPUT_RUN]) {
-        task->direction_08 = saved_facing;
+        task->direction = saved_facing;
     }
-    current_facing  = g_Task->direction_08;
+    current_facing  = g_Task->direction;
     adjusted_facing = current_facing;
     if (current_facing != saved_facing) {
         facing_delta = (s8)saved_facing - (s8)adjusted_facing;
@@ -75,13 +75,13 @@ NON_MATCHING void func_801F4B4C(s32 input) {
         }
         if (adjusted_facing_delta == 2) {
             if ((s8)adjusted_facing < (s8)candidate_facing) {
-                g_Task->direction_08 = (u8)(saved_facing - 1);
+                g_Task->direction = (u8)(saved_facing - 1);
             } else {
-                g_Task->direction_08 = (u8)(saved_facing + 1);
+                g_Task->direction = (u8)(saved_facing + 1);
             }
         }
-        turned_task               = g_Task;
-        turned_task->direction_08 = (u8)(turned_task->direction_08 & 7);
+        turned_task            = g_Task;
+        turned_task->direction = (u8)(turned_task->direction & 7);
     }
     step_result = func_801B0E44() & 0xFF;
     switch (step_result) { /* irregular */
@@ -93,8 +93,8 @@ NON_MATCHING void func_801F4B4C(s32 input) {
                 return;
             }
             Area_UpdatePanelRun();
-            if ((g_Game.current->u.field.counter_11C.u8_value == 4) && (panel_task = g_Task, (panel_task->direction_08 != saved_facing))) {
-                panel_task->direction_08                  = saved_facing;
+            if ((g_Game.current->u.field.counter_11C.u8_value == 4) && (panel_task = g_Task, (panel_task->direction != saved_facing))) {
+                panel_task->direction                     = saved_facing;
                 g_Game.current->u.field.mode_12B.s8_value = 0;
             block_46:
                 g_Task->header.step = 0;
@@ -111,7 +111,7 @@ NON_MATCHING void func_801F4B4C(s32 input) {
             break;
         case 0x1:
         case 0xFF:
-            g_Task->direction_08                         = saved_facing;
+            g_Task->direction                            = saved_facing;
             g_Game.current->u.field.mode_12B.s8_value    = 0;
             g_Game.current->u.field.counter_11C.u8_value = 3U;
         block_45:

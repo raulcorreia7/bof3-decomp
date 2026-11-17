@@ -24,10 +24,10 @@ MATCH void Fairy_SpawnWorker(u8 source_index, u8 task_index) {
     COORD_FRAC(g_Task->pos.y) = 0;
     distance                  = Area_SampleHeight(*((u32*)(&COORD_FRAC(g_Task->pos.x))), *((u32*)(&COORD_FRAC(g_Task->pos.y))));
     COORD_INT(g_Task->pos.z)  = distance;
-    g_Task->direction_08      = D_801F25A4[variant_index][D_801F2928[variant_index]][2];
+    g_Task->direction         = D_801F25A4[variant_index][D_801F2928[variant_index]][2];
     g_Task->unk_48            = 0;
     Area_SelectSceneRecord(D_801F24FC[g_Task->unk_05 % 6]);
-    Actor_DispatchSelectorScript(g_Task->direction_08);
+    Actor_DispatchSelectorScript(g_Task->direction);
     switch (g_FairyRooms[variant_index * 8]) {
         case 0:
             func_801F0BF4(task_index);

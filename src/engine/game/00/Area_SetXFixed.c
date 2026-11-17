@@ -26,8 +26,8 @@ MATCH void Area_SetXFixed(Actor* entity) {
                 if ((entity->timer_75 & 0xFE) != 0) {
                     func_801A275C(&entity->interaction_flags);
                     if (!(g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
-                        g_Task->direction_08 &= 7;
-                        entity->interaction_flags |= ACTOR_FLAG_MOVING;
+                        g_Task->direction &= 7;
+                        entity->interaction_flags |= ACTOR_INTERACTION_MOVING;
                     }
                     if (!(entity->interaction_flags & 0x40)) {
                         state = (g_Task->script_pc < 8) ? 6 : 0;
@@ -42,9 +42,9 @@ MATCH void Area_SetXFixed(Actor* entity) {
     func_801A3D1C(&entity->interaction_flags);
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         if (g_Task->timer <= g_Task->unk_0A) {
-            flags = entity->interaction_flags | ACTOR_FLAG_SCRIPT_REQUEST;
+            flags = entity->interaction_flags | ACTOR_INTERACTION_SCRIPT_REQUEST;
         } else {
-            flags = entity->interaction_flags & ~ACTOR_FLAG_SCRIPT_REQUEST;
+            flags = entity->interaction_flags & ~ACTOR_INTERACTION_SCRIPT_REQUEST;
         }
         entity->interaction_flags = flags;
     }

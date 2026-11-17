@@ -13,7 +13,7 @@ MATCH void func_801F3424(void) {
     work                       = g_Task;
     entry                      = work->pos.x.part.integer;
     pair                       = entry * 2;
-    work->direction_08         = work->pos.y.part.integer == 0;
+    work->direction            = work->pos.y.part.integer == 0;
     cell                       = g_Task;
     cell->pos.x.part.integer   = AREA168_ENTRY_TABLE(u8, 0x50, pair);
     cell->pos.y.part.integer   = AREA168_ENTRY_TABLE(u8, 0x51, pair);

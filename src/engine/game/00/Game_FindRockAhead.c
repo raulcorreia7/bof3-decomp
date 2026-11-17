@@ -8,7 +8,7 @@ MATCH s8 Game_FindRockAhead(s32 route_index, s32 route_flags) {
     s32 pos_y;
 
     index = 0;
-    route = g_Task->direction_08;
+    route = g_Task->direction;
     pos_x = g_Task->pos.x.fixed + g_FacingSteps[route].x;
     pos_y = g_Task->pos.y.fixed + g_FacingSteps[route].y;
     do {

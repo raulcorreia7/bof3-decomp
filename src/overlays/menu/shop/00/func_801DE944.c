@@ -35,7 +35,7 @@ MATCH void func_801DE944(void) {
             do {
                 TASK_SET(((u8*)g_Game.members + row));
                 Party_LoadMemberSprite(((PartyMember*)((u8*)&g_Game.members[0] + row))->chr.character_id, (u8)i);
-                Actor_SelectScript(g_Task->direction_08);
+                Actor_SelectScript(g_Task->direction);
                 if (D_8014504A != 0) {
                     ACTOR_SET_MODE(0);
                     g_Task->header.step = 0;
@@ -62,7 +62,7 @@ MATCH void func_801DE944(void) {
         *(Character*)(actor - 5) = *(Character*)(party - 0x5F2);
         g_Task->unk_48           = 0;
         Party_LoadMemberSprite(g_Game.members[0].chr.character_id, 0);
-        Actor_SelectScript(g_Task->direction_08);
+        Actor_SelectScript(g_Task->direction);
         ACTOR_SET_MODE(0);
         g_Task->header.step = 0;
         g_Task->unk_03      = 0;

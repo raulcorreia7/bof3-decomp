@@ -23,7 +23,7 @@ MATCH void Area_Update(void) {
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetShadeTex(prim, 0);
-    if (g_Task->direction_08 != 0) {
+    if (g_Task->direction != 0) {
         g_ScratchPadVectors[0].vy = g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy = ((FIX_INT(g_Task->pos.y.fixed) - 0x80) << 7) | 0x40;
         g_ScratchPadVectors[0].vx = g_ScratchPadVectors[2].vx = ((FIX_INT(g_Task->pos.x.fixed) - 0x7F) << 7) - (g_Task->screen_y - 0x40);
         g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx = ((FIX_INT(g_Task->pos.x.fixed) - 0x80) << 7) - (g_Task->screen_y + 0x40);
@@ -42,6 +42,6 @@ MATCH void Area_Update(void) {
     g_ScratchPadVectors[3].vz = -Area_SampleHeight(x1, y1) / 2 + 0x180;
     RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
                   &flag);
-    Area_ApplyTileToQuad((g_Task->direction_08 << 21) | AREA_FLOOR_QUAD_PART | (s16)g_Task->screen_x, prim, 1);
+    Area_ApplyTileToQuad((g_Task->direction << 21) | AREA_FLOOR_QUAD_PART | (s16)g_Task->screen_x, prim, 1);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, -2, sizeof(POLY_FT4));
 }

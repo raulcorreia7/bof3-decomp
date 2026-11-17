@@ -15,7 +15,7 @@ MATCH void func_801A386C(void) {
     index = g_CurrentActor->unk_93;
     if ((g_PaletteFades[index].offset.b + g_PaletteFades[index].offset.g + g_PaletteFades[index].offset.r) == 3 * COLOR_CHANNEL_MAX) {
         GFX_FreePaletteFade(index);
-        GAME_WORK_AREA_PTR->interaction_flags = GAME_WORK_AREA_PTR->interaction_flags & ~ACTOR_FLAG_FADE_BLACK;
+        GAME_WORK_AREA_PTR->interaction_flags = GAME_WORK_AREA_PTR->interaction_flags & ~ACTOR_INTERACTION_FADE_BLACK;
         g_Task->header.mode                   = g_Task->unk_03;
         g_Task->unk_04                        = 0;
     }

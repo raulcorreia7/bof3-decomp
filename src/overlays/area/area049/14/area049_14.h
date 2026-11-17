@@ -28,14 +28,14 @@ extern u8 D_801F5CDF[];
 
 /* A bare statement macro, used as a member's whole body. Clear the interaction bit; when the party confirmed
  * (the leader is character 6), run the script and store the two step bytes. */
-#define AREA_INTERACT_CONFIRM(step_next)                                      \
-    if (g_Game.members[0].chr.character_id == 6) {                            \
-        g_CurrentActor->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING; \
-        Game_SetScriptActive();                                               \
-        g_SceneState.state_04 = 4;                                            \
-        g_SceneState.step_05  = (step_next);                                  \
-    } else {                                                                  \
-        g_CurrentActor->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING; \
+#define AREA_INTERACT_CONFIRM(step_next)                                 \
+    if (g_Game.members[0].chr.character_id == 6) {                       \
+        g_CurrentActor->interaction_flags &= ~ACTOR_INTERACTION_PENDING; \
+        Game_SetScriptActive();                                          \
+        g_SceneState.state_04 = 4;                                       \
+        g_SceneState.step_05  = (step_next);                             \
+    } else {                                                             \
+        g_CurrentActor->interaction_flags &= ~ACTOR_INTERACTION_PENDING; \
     }
 
 s32 func_8019601C();

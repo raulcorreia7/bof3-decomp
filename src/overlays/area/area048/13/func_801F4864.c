@@ -3,7 +3,7 @@
 MATCH void func_801F4864(void) {
     u8* counter;
 
-    g_CurrentActor->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;
+    g_CurrentActor->interaction_flags &= ~ACTOR_INTERACTION_PENDING;
     if (g_CharSlot[g_Game.members[0].chr.character_id] == 1) {
         counter = &D_8014686B;
         if (*counter < 8U) {

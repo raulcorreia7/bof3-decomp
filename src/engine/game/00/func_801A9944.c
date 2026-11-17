@@ -33,33 +33,33 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
     selection    = value;
     switch (opcode) {
         case 0xE1:
-            state->unk_05 = g_Task->direction_08;
+            state->unk_05 = g_Task->direction;
             Actor_DispatchSelectorScript((target_bytes + state->cursor)[1]);
             state->unk_08 = (target_bytes + state->cursor)[2];
             func_801A17A0((u8*)state);
-            state->flag_00 = ((state->flag_00 & ~ACTOR_FLAG_SCRIPT_REQUEST) | ACTOR_FLAG_SCRIPT_PENDING);
+            state->flag_00 = ((state->flag_00 & ~ACTOR_INTERACTION_SCRIPT_REQUEST) | ACTOR_INTERACTION_SCRIPT_PENDING);
             state->cursor  = (state->cursor + 2);
             return 0xFFU;
         case 0xE0:
-            state->unk_05  = g_Task->direction_08;
-            state->flag_00 = (state->flag_00 | ACTOR_FLAG_MOVING);
+            state->unk_05  = g_Task->direction;
+            state->flag_00 = (state->flag_00 | ACTOR_INTERACTION_MOVING);
             selection      = g_Game.members[0].facing ^ 0x4;
             Actor_DispatchSelectorScript(selection);
             goto block_5; /* E0 and E3 share the operand-read tail */
         case 0xE3:
-            state->unk_05 = (g_Task->direction_08 & 0x7);
+            state->unk_05 = (g_Task->direction & 0x7);
         block_5:
             next_cursor_e0e3 = state->cursor + 1;
             state->cursor    = next_cursor_e0e3;
             state->unk_08    = *(target_bytes + (next_cursor_e0e3 & HALF_MASK));
             func_801A17A0((u8*)state);
             state_flags    = state->flag_00;
-            updated_flags  = state_flags & ~ACTOR_FLAG_SCRIPT_REQUEST;
+            updated_flags  = state_flags & ~ACTOR_INTERACTION_SCRIPT_REQUEST;
             state->flag_00 = updated_flags;
             if (g_Task->option_flags & ACTOR_OPT_NO_SCRIPT_START) {
-                state->flag_00 = (state_flags & ~(ACTOR_FLAG_SCRIPT_REQUEST | ACTOR_FLAG_SCRIPT_PENDING));
+                state->flag_00 = (state_flags & ~(ACTOR_INTERACTION_SCRIPT_REQUEST | ACTOR_INTERACTION_SCRIPT_PENDING));
             } else {
-                state->flag_00 = (updated_flags | ACTOR_FLAG_SCRIPT_PENDING);
+                state->flag_00 = (updated_flags | ACTOR_INTERACTION_SCRIPT_PENDING);
             }
             goto block_29; /* every command that keeps the selection shares the return */
         case 0xE2:
@@ -94,7 +94,7 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
                 state->cursor = (state->cursor - 1);
                 result        = 0xFF;
                 if (Actor_GetOwner() == 2) {
-                    return g_Task->direction_08;
+                    return g_Task->direction;
                 }
                 return result;
             }
@@ -126,7 +126,7 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
             }
             return selection;
         case 0xEF:
-            state->flag_00 = (state->flag_00 | ACTOR_FLAG_MOVING);
+            state->flag_00 = (state->flag_00 | ACTOR_INTERACTION_MOVING);
             goto block_29; /* every command that keeps the selection shares the return */
         case 0xE4:
             spad_work_e4               = g_Task;

@@ -7,7 +7,7 @@ MATCH s32 func_801C5474(void) {
     work      = g_Task;
     countdown = work->timer;
     if (countdown == 0) {
-        Actor_RequestScript(work->direction_08);
+        Actor_RequestScript(work->direction);
         Actor_ClearVelocity();
         g_Game.current->u.field.mode_12B.u8_value = 0;
         g_Task->header.mode                       = 1;

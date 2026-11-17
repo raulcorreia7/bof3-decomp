@@ -4,7 +4,7 @@
  * advances it at 30 frames per second, and func_801F3C2C draws
  * seconds/hundredths. The work row's tint bytes hold it (0x5D and 0x5E). */
 MATCH void func_801F3AA8(void) {
-    (g_Task)->tint.signed_bytes.delta.r = 0;
-    (g_Task)->tint.signed_bytes.delta.g = 30;
-    (g_Task)->header.mode               = (g_Task)->header.mode + 1;
+    (g_Task)->tint.steps.delta.r = 0;
+    (g_Task)->tint.steps.delta.g = 30;
+    (g_Task)->header.mode        = (g_Task)->header.mode + 1;
 }

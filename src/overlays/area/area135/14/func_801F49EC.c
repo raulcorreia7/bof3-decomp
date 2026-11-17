@@ -7,15 +7,15 @@ NON_MATCHING void func_801F49EC(void) {
     s32    delta;
 
     count                 = func_801F5D1C();
-    g_Task->direction_08  = FACING_DOWN;
+    g_Task->direction     = FACING_DOWN;
     delta                 = g_Task->pos.y.fixed - TO_COORD_HALF(12);
     g_ScriptState->unk_07 = ((s32)((count << 17) - delta) >> 0xF);
     if ((s8)g_ScriptState->unk_07 < 0) {
         g_ScriptState->unk_07 = -g_ScriptState->unk_07;
-        g_Task->direction_08 ^= 4;
+        g_Task->direction ^= 4;
     }
     if (g_ScriptState->unk_07 != 0) {
-        Area_MoveActorRoute(g_ScriptState, g_Task->direction_08);
+        Area_MoveActorRoute(g_ScriptState, g_Task->direction);
         g_Task->vz = 0;
     }
     work = g_Task;

@@ -6,7 +6,7 @@
 /* Opcodes 0xF0 to 0xFF of the actor script table: the record group that moves
  * the task (or the camera, Actor_GetOwner() == 2) in z, walks it to a cell,
  * waits, and touches the cell palette. Named from the case bodies. */
-typedef enum ActorScriptMotionOp {
+typedef enum ActorScriptMotion {
     ACTOR_SCRIPT_MOTION_CLEAR_SCRIPT_ACTIVE = 0xF0, /* clear GAME_FLAG_SCRIPT_ACTIVE */
     ACTOR_SCRIPT_MOTION_SET_SCRIPT_ACTIVE   = 0xF1, /* set GAME_FLAG_SCRIPT_ACTIVE */
     ACTOR_SCRIPT_MOTION_MOVE_SCRIPT         = 0xF2, /* args: [script_id] [steps]; start the move script */
@@ -23,7 +23,7 @@ typedef enum ActorScriptMotionOp {
     ACTOR_SCRIPT_MOTION_WAIT_SCRIPT_READY   = 0xFD, /* wait while the script stream reports not ready */
     ACTOR_SCRIPT_MOTION_PLAY_CUE_ON_SCRIPT  = 0xFE, /* args: [cue] [pc]; play 0x200|cue when record changed */
     ACTOR_SCRIPT_MOTION_WAIT                = 0xFF, /* hold the cursor at this record */
-} ActorScriptMotionOp;
+} ActorScriptMotion;
 
 /* Entity spawn counter cell in scratchpad (signed 16-bit slot index). */
 /* The entry cell at 0x1F800002 is stored through D_1F800002 and read back signed. */
@@ -112,7 +112,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
             }
             state->index_0A += 2;
             work  = g_Task;
-            value = work->direction_08 & 0x7;
+            value = work->direction & 0x7;
             break;
         }
         case ACTOR_SCRIPT_MOTION_SET_Z_POSITION: {

@@ -38,5 +38,5 @@ MATCH void func_801F0718(u8 source_index, u8 task_index) {
     COORD_INT(g_Task->pos.z)  = distance;
     g_Task->unk_05            = source_index;
     Area_SelectSceneRecord(D_801F24FC[g_Task->unk_05 % 6]);
-    Actor_DispatchSelectorScript(g_Task->direction_08);
+    Actor_DispatchSelectorScript(g_Task->direction);
 }

@@ -9,7 +9,7 @@ MATCH void func_801F345C(void) {
     u8     state;
 
     scratch                 = g_Task;
-    scratch->direction_08   = COORD_INT(scratch->pos.y) == 0;
+    scratch->direction      = COORD_INT(scratch->pos.y) == 0;
     index                   = COORD_INT(scratch->pos.x) * 2;
     check                   = g_Task;
     next_x                  = D_801F35C0[index];

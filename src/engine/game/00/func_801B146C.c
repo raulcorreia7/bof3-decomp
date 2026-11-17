@@ -48,7 +48,7 @@ MATCH void func_801B146C(void) {
         if (state_flags & AREA_LOAD_FLAG_WORLD_MAP) {
             work_c = g_Task;
             if ((Area_GetCellCode(COORD_INT(work_c->pos.x), COORD_INT(work_c->pos.y)) & BYTE_MASK) == 0xAF) {
-                Actor_RequestRoute(g_Task->direction_08);
+                Actor_RequestRoute(g_Task->direction);
                 Game_RequestAreaChange(g_GameEntryAreaId, g_GameEntryPosX, g_GameEntryPosY, g_GameEntryFacing);
                 g_GameEntryMode   = 0;
                 g_GameRequestKind = 0xC;
@@ -56,7 +56,7 @@ MATCH void func_801B146C(void) {
             }
             if (g_Game.walk_flags & 0x2000) {
                 g_Game.flags |= GAME_FLAG_SCRIPT_ACTIVE;
-                Actor_RequestRoute(g_Task->direction_08);
+                Actor_RequestRoute(g_Task->direction);
                 goto block_46; /* re-arm the frame flags */
             }
             work_d = g_Task;
@@ -66,25 +66,25 @@ MATCH void func_801B146C(void) {
             }
             goto block_24; /* continue with the front request */
         }
-        if ((state_flags & 0x2) && ((work_f = g_Task, speed = work_f->state_70.byte, route_index2 = work_f->direction_08 * 2,
+        if ((state_flags & 0x2) && ((work_f = g_Task, speed = work_f->voice_flags.scene_flag, route_index2 = work_f->direction * 2,
                                      pos_x = work_f->pos.x.fixed + ((*(s32*)((u8*)g_FacingSteps + route_index2 * 4)) * speed), pos_y = work_f->pos.y.fixed + (g_FacingStepY[route_index2] * speed),
                                      (pos_x == TO_COORD(2)) || (pos_y == TO_COORD(2)) || (pos_x == ((g_AreaMapBundle.width - 3) << 0x10)) || (pos_y == ((g_AreaMapBundle.height - 3) << 0x10))))) {
-            Actor_RequestScript(g_Task->direction_08);
+            Actor_RequestScript(g_Task->direction);
             Game_RequestAreaChange(g_GameLastAreaId, g_GameLastX, g_GameLastY, FACING_DOWN_RIGHT);
             goto block_46; /* re-arm the frame flags */
         }
     block_24:
         work_g = g_Task;
-        if (Game_TestMapCells(work_g->pos.x.fixed, work_g->pos.y.fixed, work_g->state_70.byte, 0xA7, 0U) & BYTE_MASK) {
+        if (Game_TestMapCells(work_g->pos.x.fixed, work_g->pos.y.fixed, work_g->voice_flags.scene_flag, 0xA7, 0U) & BYTE_MASK) {
             work_h = g_Task;
             func_801A0048(COORD_INT(work_h->pos.x), COORD_INT(work_h->pos.y));
             g_GameStateIndex = GAME_REQUEST_AREA_CHANGE;
-            Actor_RequestScript(g_Task->direction_08);
+            Actor_RequestScript(g_Task->direction);
             goto block_46; /* re-arm the frame flags */
         }
         work_i = g_Task;
-        if (!(Area_TestCellCorners(work_i->pos.x.fixed, work_i->pos.y.fixed, work_i->state_70.byte, 0xA6, 0U) & BYTE_MASK)) {
-            Actor_RequestScript(g_Task->direction_08);
+        if (!(Area_TestCellCorners(work_i->pos.x.fixed, work_i->pos.y.fixed, work_i->voice_flags.scene_flag, 0xA6, 0U) & BYTE_MASK)) {
+            Actor_RequestScript(g_Task->direction);
             D_8014504A = 0;
             Game_RequestAreaChange(D_80145048, D_80145040, D_80145044, FACING_DOWN_RIGHT);
             return;
@@ -101,7 +101,7 @@ MATCH void func_801B146C(void) {
         }
         counter          = g_EncounterSteps;
         g_EncounterSteps = counter + 1;
-        route_id         = g_Task->direction_08;
+        route_id         = g_Task->direction;
         if ((route_id == FACING_UP_RIGHT) || (route_id == FACING_DOWN_LEFT)) {
             g_EncounterSteps = counter + 2;
         }
@@ -111,7 +111,7 @@ MATCH void func_801B146C(void) {
         if (!(g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) && !(g_Game.walk_flags & (0x20 | AREA_WALK_ENTRY_PENDING))) {
             if (Area_CanStartEncounter() & BYTE_MASK) {
                 g_Game.current->u.field.counter_11C.u8_value = 3U;
-                Actor_RequestScript(g_Task->direction_08);
+                Actor_RequestScript(g_Task->direction);
                 g_AreaWalkFlags |= AREA_WALK_TRANSITION;
                 g_Task->header.mode = 5;
                 ACTOR_CLEAR_STEP();
@@ -124,7 +124,7 @@ MATCH void func_801B146C(void) {
         if (!(Game_RequestRockKick(level_flag) & BYTE_MASK)) {
             work_k = g_Task;
             if (((s32 (*)(s32, s32))func_801A79A4)(work_k->pos.x.fixed, work_k->pos.y.fixed) != 0) {
-                Actor_RequestRoute(g_Task->direction_08);
+                Actor_RequestRoute(g_Task->direction);
                 goto block_46; /* re-arm the frame flags */
             }
             func_801C329C();
@@ -132,7 +132,7 @@ MATCH void func_801B146C(void) {
                 func_801B0568();
                 return;
             }
-            Actor_RequestRoute(g_Task->direction_08);
+            Actor_RequestRoute(g_Task->direction);
             g_Game.current->u.field.mode_12B.u8_value = 0;
         block_46:
             g_Task->header.step = 1;

@@ -16,17 +16,17 @@ NON_MATCHING void func_801F35B0(void) {
 
     i = 0;
     do {
-        column = COORD_INT(g_Task->pos.x) + g_Task->direction_08;
-        if (g_Task->direction_08 == 0) {
+        column = COORD_INT(g_Task->pos.x) + g_Task->direction;
+        if (g_Task->direction == 0) {
             column += i;
         }
         y      = COORD_INT(g_Task->pos.y);
-        offset = i * g_Task->direction_08;
-        row    = y + (g_Task->direction_08 != 0 ? offset : offset + 1);
+        offset = i * g_Task->direction;
+        row    = y + (g_Task->direction != 0 ? offset : offset + 1);
         map    = (AreaMapBundle*)MAP_BUNDLE_BASE;
         entry  = (u8*)(map->grid_off4_02 * 4 + (((map->width * map->height + 1) / 2) * 4 + (u32)map) + *(u16*)(column * 2 + (row * map->width * 2 + map->grid_off4_02 * 4) + (u32)map) * 4);
         id     = Area_GetCellId(column, row);
-        if (g_Task->direction_08 != 0) {
+        if (g_Task->direction != 0) {
             prim = g_AreaCellPrims[id][1].pad1;
             if (prim == 0) {
                 prim                        = Area_AllocCellPrimRow();
@@ -47,7 +47,7 @@ NON_MATCHING void func_801F35B0(void) {
     } while (i < 2);
     g_AreaCameraRefreshCount = 2;
     g_Task->header.step++;
-    func_801F3950(g_Task->direction_08, COORD_INT(g_Task->pos.z));
+    func_801F3950(g_Task->direction, COORD_INT(g_Task->pos.z));
 }
 #else
 INCLUDE_ASM(func_801F35B0);

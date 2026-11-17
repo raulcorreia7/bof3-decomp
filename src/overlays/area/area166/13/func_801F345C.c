@@ -8,7 +8,7 @@ MATCH void func_801F345C(void) {
 
     scratch                = g_Task;
     index                  = COORD_INT(scratch->pos.x);
-    scratch->direction_08  = (COORD_INT(scratch->pos.y) == 0);
+    scratch->direction     = (COORD_INT(scratch->pos.y) == 0);
     work                   = g_Task;
     COORD_INT(work->pos.x) = D_801F3748[index][0];
     COORD_INT(work->pos.y) = D_801F3748[index][1];

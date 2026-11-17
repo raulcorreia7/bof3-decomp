@@ -6,9 +6,9 @@ MATCH void PlChar_StartFacingTurn(void) {
     if (g_SceneState.scenario_id == 15) {
         g_Game.current->u.field.mode_12B.s8_value = 0;
     } else {
-        to_back = g_Task->direction_08 - FACING_RIGHT;
+        to_back = g_Task->direction - FACING_RIGHT;
         to_back = ABS(to_back);
-        to_away = g_Task->direction_08 - FACING_DOWN;
+        to_away = g_Task->direction - FACING_DOWN;
         to_away = ABS(to_away);
         if (to_away < to_back) {
             g_Task->param.turn_step = Actor_GetTurnStep(FACING_DOWN);

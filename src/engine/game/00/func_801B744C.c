@@ -6,10 +6,10 @@ MATCH void func_801B744C(void) {
     if (Actor_StepAnimOnce() & BYTE_MASK) {
         rate            = g_RouteSpeedScale[g_Game.current->u.field.counter_11C.u8_value];
         g_Task->timer   = 32 / rate;
-        g_Task->vx      = g_FacingOffsets[g_Task->direction_08].x * rate * (g_Task->state_70.byte + 1);
-        g_Task->vy      = g_FacingOffsets[g_Task->direction_08].y * rate * (g_Task->state_70.byte + 1);
-        g_Task->vz      = (g_Task->state_70.byte + 1) << 6;
-        g_Task->gravity = -((g_Task->state_70.byte + 1) * 8);
+        g_Task->vx      = g_FacingOffsets[g_Task->direction].x * rate * (g_Task->voice_flags.scene_flag + 1);
+        g_Task->vy      = g_FacingOffsets[g_Task->direction].y * rate * (g_Task->voice_flags.scene_flag + 1);
+        g_Task->vz      = (g_Task->voice_flags.scene_flag + 1) << 6;
+        g_Task->gravity = -((g_Task->voice_flags.scene_flag + 1) * 8);
         if (g_Task->unk_05 == 0) {
             s32 dx;
             s32 dy;
@@ -20,7 +20,7 @@ MATCH void func_801B744C(void) {
             MEM(s32, 0x8014930Cu) = g_Task->pos.y.fixed + dy;
             MEM(s16, 0x8014932Eu) = rate * 8;
         }
-        Actor_RequestScript((g_Task->direction_08 == FACING_RIGHT) ? 0x3AU : 0x3BU);
+        Actor_RequestScript((g_Task->direction == FACING_RIGHT) ? 0x3AU : 0x3BU);
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
         g_Task->timer -= 1;
         g_Task->vz += g_Task->gravity;

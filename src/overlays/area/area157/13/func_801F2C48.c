@@ -13,7 +13,7 @@ MATCH void func_801F2C48(void) {
     work->unk_0A             = ((u16)work->pos.y.part.integer >> 1) & 1;
     entry                    = work->pos.x.part.integer;
     pair                     = entry * 2;
-    g_Task->direction_08     = (g_Task->pos.y.part.integer ^ 1) & 1;
+    g_Task->direction        = (g_Task->pos.y.part.integer ^ 1) & 1;
     cell                     = g_Task;
     cell->pos.x.part.integer = AREA_PAYLOAD_FIELD(D_801F38CC, u8, 0x14, pair);
     cell->pos.y.part.integer = AREA_PAYLOAD_FIELD(D_801F38CC, u8, 0x15, pair);

@@ -44,7 +44,7 @@ MATCH void func_801D62DC(void) {
             do {
                 TASK_SET(((u8*)g_Game.members + i * BATTLE_PARTY_STRIDE));
                 Party_LoadMemberSprite(g_Game.members[i].chr.character_id, i);
-                Actor_SelectScript(g_Task->direction_08);
+                Actor_SelectScript(g_Task->direction);
                 offset                           = i * 0x10 + base;
                 ((ShopSelection*)g_Task)->unk_34 = FIELD(s32, &D_801E537C, offset);
                 ((ShopSelection*)g_Task)->unk_38 = FIELD(s32, &D_801E5380, offset);

@@ -36,7 +36,7 @@ MATCH void func_801A5400(u8* script) {
         COORD_INT(dist_record->pos.z) = dist;
         dist_record->header.mode      = data[0x8];
         g_Task->header.step           = data[0xA];
-        g_Task->direction_08          = data[0] & 0xF;
+        g_Task->direction             = data[0] & 0xF;
         g_Task->unk_06                = data[0] >> 4;
         g_Actors[*counter].unk_7C     = 0xFFFF;
         /* FAKE: forces the counter re-read before the next shadow store. */
@@ -54,7 +54,7 @@ MATCH void func_801A5400(u8* script) {
         g_Task->tint.bytes.flags = data[0x3] & 0xF;
         bits_record              = g_Task;
         bits_record->unk_2A      = (bits_record->option_flags >> ACTOR_OPT_NO_SCRIPT_START) & 0x1;
-        Actor_SelectScript(g_Task->direction_08);
+        Actor_SelectScript(g_Task->direction);
         cell_record_a = g_Task;
         Area_SetCellCode(COORD_INT(cell_record_a->pos.x), COORD_INT(cell_record_a->pos.y), 0x10);
         cell_record_b = g_Task;

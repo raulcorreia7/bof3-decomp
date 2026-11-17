@@ -11,13 +11,13 @@ MATCH void SYS_InitScratchpad(u8* panel) {
     u8     index;
 
     g_Task->header.flags = ACTOR_FLAG_IN_USE;
-    g_Task->active_flags = ACTOR_FLAG_ACTIVE;
+    g_Task->active_flags = ACTOR_ACTIVE_FLAG;
     g_Task->unk_48       = 1;
     work                 = g_Task;
     work->scale.x        = ONE;
     work->scale.y        = ONE;
     value                = FIELD(s32, panel, 0x4u);
-    index                = work->direction_08;
+    index                = work->direction;
     work->range_54.table = panel;
     work->unk_68         = 0;
     work->unk_64         = 0;

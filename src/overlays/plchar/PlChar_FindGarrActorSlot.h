@@ -14,7 +14,7 @@ MATCH s8 PlChar_FindGarrActorSlot(void) {
         return -1;
     }
 
-    direction = g_Task->direction_08;
+    direction = g_Task->direction;
     pos_x     = g_Task->pos.x.fixed + g_FacingSteps[direction].x;
     pos_y     = g_Task->pos.y.fixed + g_FacingStepY[direction * 2];
 

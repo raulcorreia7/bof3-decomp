@@ -17,13 +17,13 @@ MATCH void func_8019CCB8(void) {
             goto block_9;
         }
         if (g_Task->param.unk_0B != 0) {
-            g_Task->direction_08 = g_Game.members[0].facing;
-            g_Task->vx           = g_FacingOffsets[g_Task->direction_08].x * 2;
-            g_Task->vy           = g_FacingOffsets[g_Task->direction_08].y * 2;
-            g_Task->timer        = 16;
-            step                 = g_Task->timer;
-            move_x               = g_Task->pos.x.fixed;
-            move_y               = g_Task->pos.y.fixed;
+            g_Task->direction = g_Game.members[0].facing;
+            g_Task->vx        = g_FacingOffsets[g_Task->direction].x * 2;
+            g_Task->vy        = g_FacingOffsets[g_Task->direction].y * 2;
+            g_Task->timer     = 16;
+            step              = g_Task->timer;
+            move_x            = g_Task->pos.x.fixed;
+            move_y            = g_Task->pos.y.fixed;
             move_x += g_Task->vx * step;
             move_y += g_Task->vy * step;
             func_8019D4BC();

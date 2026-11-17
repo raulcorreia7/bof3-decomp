@@ -3,7 +3,7 @@ MATCH void PlChar_UpdateLinkedFacing(void) {
     u8 timer;
 
     if (Actor_StepAnimOnce() & BYTE_MASK) {
-        Actor_RequestScript(g_Task->direction_08);
+        Actor_RequestScript(g_Task->direction);
         g_Task->unk_03 = 2;
         return;
     }
@@ -11,7 +11,7 @@ MATCH void PlChar_UpdateLinkedFacing(void) {
     if (timer != 0) {
         g_Task->unk_0A = timer - 1;
         if (g_Task->unk_0A == 0) {
-            g_SpawnedActors[g_Task->param.actor_slot].unk_08 = g_Task->direction_08;
+            g_SpawnedActors[g_Task->param.actor_slot].unk_08 = g_Task->direction;
             if (g_Task->option_flags == 0) {
                 g_Task->option_flags = ACTOR_OPT_HIDDEN_ON_SPAWN;
             }

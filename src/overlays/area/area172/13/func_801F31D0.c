@@ -10,8 +10,8 @@ MATCH void func_801F31D0(void) {
     func_801F36C0(&g_Task->pos.x, (s16)g_Task->screen_x, 7);
     func_801F3FAC();
     Area_UpdateSpawnSlots();
-    if (g_Task->tint.signed_bytes.delta.r < 64) {
-        g_Task->tint.signed_bytes.delta.r++;
+    if (g_Task->tint.steps.delta.r < 64) {
+        g_Task->tint.steps.delta.r++;
     }
     spin = MEM_PTR(SpinEffect, AREA_WORK + 0xC0);
     for (i = 0; i < 32; i++) {
