@@ -31,12 +31,13 @@ NON_MATCHING void func_801F3514(void) {
         g_Task->tint.signed_bytes.delta.b = 0;
     }
 
-    vertex         = g_ScratchPadVectors;
-    screen         = D_1F800034;
-    g_Task->unk_32 = 0x3200;
-    vertex->vx     = (s16)(((((g_AreaScrollTargetX - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
-    D_1F800016     = (s16)(((((g_AreaScrollTargetY - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
-    D_1F800018     = (s16)(-D_80145ECE / 2);
+    vertex                             = g_ScratchPadVectors;
+    screen                             = D_1F800034;
+    /* FAKE: plain C scores 0x2E0/0x2EC; the volatile store keeps scroll reads after the task update. */
+    FAKE_VOLATILE(s16, g_Task->unk_32) = 0x3200;
+    vertex->vx                         = (s16)(((((g_AreaScrollTargetX - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
+    D_1F800016                         = (s16)(((((g_AreaScrollTargetY - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
+    D_1F800018                         = (s16)(-D_80145ECE / 2);
     RotTransPers(vertex, (long*)screen, &depth, &flag);
 
     g_Task->screen_x = 0xA0;

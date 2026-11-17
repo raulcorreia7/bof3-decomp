@@ -1,51 +1,55 @@
 #include "area030_04.h"
 
-/* Steps the battle cursor row: it nudges the cursor up or down while the actor stands inside the row
- * band, then draws the cursor line and the row marker. */
 /* func_801D2DC4 */
 #ifdef NON_MATCHING
 NON_MATCHING void Fishing_ReelGaugeUpdate(void) {
-    s16    marker_y_now;
-    s16    line;
-    s16    origin_y;
-    s16    gap;
-    s16    row_limit;
-    s16    origin_y_now;
-    s16    cursor_limit;
-    s16    marker_top;
-    s16    marker_y;
-    s16    line_y;
-    s16    marker_clamp;
-    s32    span;
-    s32    step_bytes;
-    s32    band;
-    s32    step;
-    s32    scroll;
-    s8     limit;
-    u8**   prim;
-    u8     row_flags;
-    u8     timer;
-    Actor* work;
-    void*  work_now;
-    void*  work_row;
+    s16             marker_y_now;
+    s16             line;
+    s16             origin_y;
+    s16             gap;
+    s16             row_limit;
+    s16             origin_y_now;
+    s16             cursor_limit;
+    s16             marker_top;
+    s16             marker_y;
+    s16             line_y;
+    s16             marker_clamp;
+    s32             span;
+    s32             step_bytes;
+    s32             band;
+    s32             step;
+    s32             scroll;
+    s8              limit;
+    u8**            prim;
+    u8              row_flags;
+    u8              timer;
+    register Actor* work;
+    void*           work_now;
+    void*           work_row;
 
     Fishing_SetDrawMode(0, 2);
     Fishing_DrawSprite(0x11, 2, 135, 180);
     work = g_Task;
-    if ((work->vy == 0) && ((origin_y = work->screen_y, limit = *(&D_80146892 + (g_FishingHookedFish * 0x98)), step = g_FishingRodRow->reel_cursor_size * 4, (((origin_y + step + 12) < limit) != 0)) ||
-                            (limit < ((origin_y - step) - 12)))) {
-        timer = work->timer;
-        if (timer >= 0xFU) {
-            if (limit < origin_y) {
-                work->vy = -1;
-            } else if (origin_y < limit) {
-                work->vy = 1;
+    if (work->vy != 0) {
+        work->timer = 0U;
+    } else {
+        origin_y = work->screen_y;
+        limit    = *(&D_80146892 + (g_FishingHookedFish * 0x98));
+        step     = g_FishingRodRow->reel_cursor_size * 4;
+        if (((origin_y + step + 12) < limit) || (limit < ((origin_y - step) - 12))) {
+            timer = work->timer;
+            if (timer >= 0xFU) {
+                if (limit < origin_y) {
+                    work->vy = -1;
+                } else if (origin_y < limit) {
+                    work->vy = 1;
+                }
+            } else {
+                work->timer = (u8)(timer + 1);
             }
         } else {
-            work->timer = (u8)(timer + 1);
+            work->timer = 0U;
         }
-    } else {
-        work->timer = 0U;
     }
     work_row                    = g_Task;
     origin_y_now                = (u16)(FIELD(s16, work_row, 0x30u)) + FIELD(s32, work_row, 0x10u);
