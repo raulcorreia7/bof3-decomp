@@ -34,8 +34,8 @@ ASSERT_SIZE(AreaEffectRow, 0x18);
 typedef struct AreaTriggerRect {
     u8 x;
     u8 y;
-    u8 width;
-    u8 height;
+    u8 w;
+    u8 h;
 } AreaTriggerRect;
 
 ASSERT_SIZE(AreaTriggerRect, 4);

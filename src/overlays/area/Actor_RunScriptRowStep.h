@@ -4,7 +4,7 @@
  * Members: area174/13 func_801F4810 and func_801F48EC. */
 #define ACTOR_RUN_SCRIPT_ROW_STEP(NEXT_DIRECTION)                                                \
     bank  = g_AreaLoads[g_GameAreaId];                                                           \
-    table = ((AreaLoad*)bank)->field_10;                                                         \
+    table = ((AreaLoad*)bank)->scripts;                                                          \
     row   = *(u8**)(table + g_ScriptState->script_index * 4);                                    \
     if (g_Task->direction != row[g_ScriptState->cursor + 2]) {                                   \
         g_Task->direction = (NEXT_DIRECTION) & 7;                                                \

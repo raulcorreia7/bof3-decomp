@@ -214,7 +214,7 @@ typedef enum AreaId {
 
 #define GAME_TABLE_ENTRY_SIZE  0x44
 
-/* AreaLoad.flag_32, the behaviors the area runs in place of the ordinary field
+/* AreaLoad.flags, the behaviors the area runs in place of the ordinary field
  * code. The game copies it to g_GameRequestFlags at area entry. */
 typedef enum AreaLoadFlags {
     AREA_LOAD_FLAG_WORLD_MAP       = 1 << 0, /* the area runs the world map */
@@ -229,9 +229,9 @@ typedef struct AreaLoad {
     /* 0x04 */ u8        pad_04[0x04];
     /* 0x08 */ u8*       field_08;
     /* 0x0C */ u8*       unk_0C;
-    /* 0x10 */ u8*       field_10;
+    /* 0x10 */ u8*       scripts;
     /* 0x14 */ u8        pad_14[0x1E];
-    /* 0x32 */ u8        flag_32;
+    /* 0x32 */ u8        flags;
     u8                   pad_33;
     /* 0x34 */ Callback* steps;
     /* 0x38 */ void*     matrix;
@@ -241,7 +241,7 @@ typedef struct AreaLoad {
 
 ASSERT_OFFSET(AreaLoad, handler, 0x00);
 ASSERT_OFFSET(AreaLoad, unk_0C, 0x0C);
-ASSERT_OFFSET(AreaLoad, flag_32, 0x32);
+ASSERT_OFFSET(AreaLoad, flags, 0x32);
 ASSERT_OFFSET(AreaLoad, steps, 0x34);
 ASSERT_OFFSET(AreaLoad, matrix, 0x38);
 ASSERT_OFFSET(AreaLoad, unk_3C, 0x3C);

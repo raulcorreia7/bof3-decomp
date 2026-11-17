@@ -58,15 +58,15 @@ MATCH void func_801170D8(AreaSprite* sprite) {
     flags            = sprite->unk_26;
     red              = 0;
     if (flags & 4) {
-        red = sprite->flags_03;
+        red = sprite->tick;
     }
     green = 0;
     if (flags & 2) {
-        green = sprite->flags_03;
+        green = sprite->tick;
     }
     blue = 0;
     if (flags & 1) {
-        blue = sprite->flags_03;
+        blue = sprite->tick;
     }
     primitive->r0 = red;
     primitive->g0 = green;
@@ -94,11 +94,11 @@ MATCH void func_801172D0(void) {
         D_801181DC->normal.vx = ((speed << 2) * rcos(angle)) >> 7;
         D_801181DC->normal.vy = ((speed << 2) * rsin(angle)) >> 7;
         D_801181DC->flags     = 1;
-        D_801181DC->flags_01  = 0;
+        D_801181DC->stage     = 0;
         D_801181DC->half_size = 0;
-        D_801181DC->flags_03  = 0x40;
+        D_801181DC->tick      = 0x40;
         D_801181DC->unk_26    = 7;
-        D_801181DC->flags_02  = 4;
+        D_801181DC->count     = 4;
         i++;
         D_801181DC++;
     } while (i < 16);
@@ -119,7 +119,7 @@ MATCH u8 func_80117410(void) {
 
     do {
         if (D_801181DC->flags != 0) {
-            D_80118194[D_801181DC->flags_01]();
+            D_80118194[D_801181DC->stage]();
             func_801170D8(D_801181DC);
             result = 1;
         }
@@ -134,14 +134,14 @@ MATCH void func_80117514(void) {
     AreaSprite* work = D_801181DC;
     u8          count;
 
-    count = work->flags_02 - 1;
+    count = work->count - 1;
     work->origin.x += work->normal.vx * 2;
     work->origin.y += work->normal.vy * 2;
-    work->flags_02 = count;
+    work->count = count;
     work->half_size += 0x80;
     if (!(count & BYTE_MASK)) {
-        ((AreaSprite*)D_801181DC)->flags_02 = 0x40;
-        ((AreaSprite*)D_801181DC)->flags_01++;
+        ((AreaSprite*)D_801181DC)->count = 0x40;
+        ((AreaSprite*)D_801181DC)->stage++;
     }
 }
 
@@ -150,9 +150,9 @@ MATCH void func_8011759C(void) {
     u8          count;
 
     work->origin.x += work->normal.vx;
-    work->flags_03--;
+    work->tick--;
     work->origin.y += work->normal.vy;
-    count = --((AreaSprite*)D_801181DC)->flags_02;
+    count = --((AreaSprite*)D_801181DC)->count;
     if (!(count & BYTE_MASK)) {
         ((AreaSprite*)D_801181DC)->flags = 0;
     }
@@ -269,9 +269,9 @@ MATCH u8 func_80117900(void) {
         work = D_801181DC;
         if (work->flags != 0) {
             work->origin.z += work->normal.vz;
-            work->flags_03 -= 6;
+            work->tick -= 6;
             work->half_size += 8;
-            count = --D_801181DC->flags_02;
+            count = --D_801181DC->count;
             if (!(count & BYTE_MASK)) {
                 D_801181DC->flags = 0;
             }

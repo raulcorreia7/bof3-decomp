@@ -35,7 +35,7 @@ void func_801F3950(s32 arg0, s32 arg1);
 typedef struct AreaStart {
     u8 x;
     u8 y;
-    u8 direction;
+    u8 facing;
     u8 param;
 } AreaStart;
 

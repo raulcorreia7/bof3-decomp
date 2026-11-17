@@ -36,7 +36,7 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
     }
 
     entry              = (AreaLoad*)g_AreaLoads[g_GameAreaId];
-    g_GameRequestFlags = entry->flag_32;
+    g_GameRequestFlags = entry->flags;
     GFX_ResetPalette();
     g_GfxPalettePending = 1u;
 

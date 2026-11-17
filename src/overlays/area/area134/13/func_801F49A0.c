@@ -27,7 +27,7 @@ MATCH s32 func_801F49A0(void) {
                 }
                 break;
             case 1:
-                work->flags_03 -= 8;
+                work->shade -= 8;
                 if ((work->unk_00[2] += 1) == 16) {
                     work->unk_00[1] += 1;
                 }

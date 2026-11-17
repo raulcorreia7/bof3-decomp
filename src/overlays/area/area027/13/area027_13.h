@@ -11,15 +11,6 @@
 /* Reset sentinel stored to g_MessageRequest by the request handlers. */
 #define RESET_SENTINEL 0xFFFF
 
-/* The wall-marker view of the work record: the angle at +0x0C and the byte
- * bumped once the angle passes 0x400. */
-typedef union AreaWallAngle {
-    s32 word;
-    s16 half;
-} AreaWallAngle;
-
-ASSERT_SIZE(AreaWallAngle, 4);
-
 /* g_ScratchPadVectors */
 extern SVECTOR  g_ScratchPadVectors[];
 extern Callback D_801F3ABC[];

@@ -219,37 +219,37 @@ MATCH void func_801F2C58(void) {
     func_801F3D0C();
     func_801F3080();
     func_801F3314();
-    ((Area024Scratch*)g_Task)->step_count = 0;
-    ((Area024Scratch*)g_Task)->dispatch++;
+    ((AreaScratch*)g_Task)->step_count = 0;
+    ((AreaScratch*)g_Task)->dispatch++;
 }
 
 MATCH void func_801F2CB0(void) {
-    func_801F3E48(((Area024Scratch*)g_Task)->step_count);
-    ((Area024Scratch*)g_Task)->step_count = (((Area024Scratch*)g_Task)->step_count + 2u);
-    if (((Area024Scratch*)g_Task)->step_count >= 128u) {
+    func_801F3E48(((AreaScratch*)g_Task)->step_count);
+    ((AreaScratch*)g_Task)->step_count = (((AreaScratch*)g_Task)->step_count + 2u);
+    if (((AreaScratch*)g_Task)->step_count >= 128u) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 6));
         SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 14));
         SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
-        ((Area024Scratch*)g_Task)->step_count = 0;
-        ((Area024Scratch*)g_Task)->dispatch++;
+        ((AreaScratch*)g_Task)->step_count = 0;
+        ((AreaScratch*)g_Task)->dispatch++;
     }
 }
 
 MATCH void func_801F2D5C(void) {
-    Area024Scratch* scratch;
+    AreaScratch* scratch;
 
     func_801F3D5C();
     func_801F362C();
     if ((func_801F30EC() & BYTE_MASK) == 0) {
-        scratch = (Area024Scratch*)WORLD00_AREA024_SCRATCH_PTR;
+        scratch = (AreaScratch*)WORLD00_AREA024_SCRATCH_PTR;
         scratch->dispatch++;
     }
 }
 
 MATCH void func_801F2DB4(void) {
-    Area024Scratch* scratch;
+    AreaScratch* scratch;
 
-    scratch    = (Area024Scratch*)g_Task;
+    scratch    = (AreaScratch*)g_Task;
     D_80147A58 = 0;
     scratch->dispatch++;
 }
@@ -283,14 +283,14 @@ MATCH void func_801F2DF8(const AreaSprite* sprite) {
     setUV4(primitive, 224u, 48u, 255u, 48u, 224u, 79u, 255u, 79u);
     setClut(primitive, 160, STAGE_PALETTE_Y + 3);
     primitive->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
-    setRGB0(primitive, FAKE_VOLATILE(u8, work->flags_03), FAKE_VOLATILE(u8, work->flags_03), FAKE_VOLATILE(u8, work->flags_03));
+    setRGB0(primitive, FAKE_VOLATILE(u8, work->tick), FAKE_VOLATILE(u8, work->tick), FAKE_VOLATILE(u8, work->tick));
 
     Area_AddCellPrim(FAKE_VOLATILE(s32, work->origin.x), FAKE_VOLATILE(s32, work->origin.y), 2, sizeof(POLY_FT4));
 }
 
 MATCH void func_801F2FD4(AreaSprite* sprite) {
-    AreaSprite*              work;
-    volatile Area024Scratch* scratch;
+    AreaSprite*           work;
+    volatile AreaScratch* scratch;
 
     work           = sprite;
     scratch        = WORLD00_AREA024_SCRATCH_PTR;
@@ -300,10 +300,10 @@ MATCH void func_801F2FD4(AreaSprite* sprite) {
     setVector(&work->normal, RANDOM_MASK(0xFF) - 0x80, RANDOM_MASK(0xFF) - 0x80, RANDOM_MASK(0x7F));
     VectorNormal(&work->normal, &work->normal);
     work->flags     = 1u;
-    work->flags_03  = 0x40u;
-    work->flags_01  = 0u;
+    work->tick      = 0x40u;
+    work->stage     = 0u;
     work->half_size = 0u;
-    work->flags_02  = 4u;
+    work->count     = 4u;
     work->normal.vz <<= 8;
 }
 
@@ -333,7 +333,7 @@ MATCH s32 func_801F30EC(void) {
 
     do {
         if (D_801F5B00->flags != 0u) {
-            D_801F4214[D_801F5B00->flags_01]();
+            D_801F4214[D_801F5B00->stage]();
             func_801F2DF8((AreaSprite*)D_801F5B00);
             result = 1;
         }
@@ -358,11 +358,11 @@ MATCH void func_801F3250(void) {
 }
 
 MATCH void func_801F32D4(void) {
-    ((AreaSprite*)D_801F5B00)->flags_01++;
+    ((AreaSprite*)D_801F5B00)->stage++;
 }
 
 MATCH void func_801F32F4(void) {
-    ((AreaSprite*)D_801F5B00)->flags_01++;
+    ((AreaSprite*)D_801F5B00)->stage++;
 }
 
 MATCH void func_801F3314(void) {
@@ -549,10 +549,10 @@ MATCH void func_801F3944(const SpinEffect* spin) {
 }
 
 MATCH void func_801F3BE4(SpinEffect* spin) {
-    volatile Area024Scratch* scratch;
-    SpinEffect*              work;
-    MATRIX                   matrix;
-    s16                      rot[3];
+    volatile AreaScratch* scratch;
+    SpinEffect*           work;
+    MATRIX                matrix;
+    s16                   rot[3];
 
     work           = spin;
     scratch        = WORLD00_AREA024_SCRATCH_PTR;
@@ -628,21 +628,21 @@ MATCH void func_801F3D5C(void) {
 #undef g_Task
 
 MATCH s32 func_801F3E48(u8 shade) {
-    SVECTOR                  verts[4];
-    VECTOR                   vec;
-    MATRIX                   matrix;
-    MATRIX                   matrix2;
-    MATRIX*                  mtxp;
-    long                     depth;
-    long                     flag;
-    u16                      count;
-    volatile Area024Scratch* saved;
-    u16*                     src;
-    LINE_F4*                 prim;
-    u16                      i;
+    SVECTOR               verts[4];
+    VECTOR                vec;
+    MATRIX                matrix;
+    MATRIX                matrix2;
+    MATRIX*               mtxp;
+    long                  depth;
+    long                  flag;
+    u16                   count;
+    volatile AreaScratch* saved;
+    u16*                  src;
+    LINE_F4*              prim;
+    u16                   i;
 
     vec   = D_801F2C04;
-    saved = (volatile Area024Scratch*)g_Task;
+    saved = (volatile AreaScratch*)g_Task;
     TASK_SET(&D_80147A58);
     PushMatrix();
 

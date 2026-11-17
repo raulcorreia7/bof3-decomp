@@ -25,7 +25,7 @@ MATCH void func_801F46EC(const void* sprite) {
     setUV4(primitive, 224u, 48u, 255u, 48u, 224u, 79u, 255u, 79u);
     setClut(primitive, 160, STAGE_PALETTE_Y + 3);
     primitive->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
-    shade            = FAKE_VOLATILE(u8, work->flags_03);
+    shade            = FAKE_VOLATILE(u8, work->shade);
     primitive->b0    = shade;
     primitive->g0    = shade;
     primitive->r0    = shade;

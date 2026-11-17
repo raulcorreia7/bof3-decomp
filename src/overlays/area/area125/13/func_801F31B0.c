@@ -12,7 +12,7 @@ MATCH void func_801F31B0(s32 slot) {
     sprite = (AreaQuadSprite*)Area_FindFreeWorkRow();
     if (sprite != NULL) {
         sprite->unk_00[0] = 1;
-        sprite->flags_03  = 0x20;
+        sprite->shade     = 0x20;
         sprite->unk_00[1] = 0;
         sprite->unk_00[2] = 0;
         sprite->half_size = 0x80;

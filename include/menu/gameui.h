@@ -247,7 +247,7 @@ extern u16 g_GameEntryState;
 /* The request code, a GameRequest value. */
 /* D_80143BB0 */
 extern u8  g_GameStateIndex;
-/* D_80143F02, a copy of the current AreaLoad.flag_32 (AreaLoadFlags). A unit
+/* D_80143F02, a copy of the current AreaLoad.flags (AreaLoadFlags). A unit
  * that reads it as volatile (etc/game/00) defines FAKE_DECL_GAME_REQUEST_FLAGS_VOLATILE
  * before its first include. */
 #ifdef FAKE_DECL_GAME_REQUEST_FLAGS_VOLATILE

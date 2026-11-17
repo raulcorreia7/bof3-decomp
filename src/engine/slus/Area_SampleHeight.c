@@ -46,7 +46,7 @@ NON_MATCHING s16 Area_SampleHeight(s32 x, s32 y) {
     x_coord &= ~0x7FFF;
     tmp1  = x_coord >> 0x10;
     tmp14 = (u8*)((tmp1 * 4) + ((tmp3 * 4) + (MAP_BUNDLE_BASE + 0x30)));
-    tmp13 = (u8*)((g_AreaMapBundle.height_off4_2A * 4) + (tmp1 + base) + tmp3);
+    tmp13 = (u8*)((g_AreaMapBundle.height_offset * 4) + (tmp1 + base) + tmp3);
     if (!((x_coord | y_coord) & HALF_MASK)) {
         tmp4  = *(s8*)(tmp13)*g_AreaHeightOffsetEnabled;
         tmp12 = *(u32*)(tmp14);

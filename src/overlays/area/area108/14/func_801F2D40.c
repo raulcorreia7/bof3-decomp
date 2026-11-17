@@ -25,7 +25,7 @@ MATCH void func_801F2D40(const void* sprite) {
     setUV4(primitive, 224u, 48u, 255u, 48u, 224u, 79u, 255u, 79u);
     setClut(primitive, 160, STAGE_PALETTE_Y + 3);
     primitive->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 704, 256);
-    setRGB0(primitive, FAKE_VOLATILE(u8, work->flags_03), FAKE_VOLATILE(u8, work->flags_03), FAKE_VOLATILE(u8, work->flags_03));
+    setRGB0(primitive, FAKE_VOLATILE(u8, work->tick), FAKE_VOLATILE(u8, work->tick), FAKE_VOLATILE(u8, work->tick));
 
     Area_AddCellPrim(FAKE_VOLATILE(s32, work->origin.x), FAKE_VOLATILE(s32, work->origin.y), 2, sizeof(POLY_FT4));
 }

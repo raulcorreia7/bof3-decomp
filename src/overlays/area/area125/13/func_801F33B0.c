@@ -17,14 +17,14 @@ MATCH s32 func_801F33B0(void) {
             handled = 1;
             switch (sprite->unk_00[1]) {
                 case 0:
-                    sprite->flags_03 += 4;
+                    sprite->shade += 4;
                     count = sprite->unk_00[2] += 1;
                     if (count == 0x10) {
                         sprite->unk_00[1] += 1;
                     }
                     break;
                 case 1:
-                    sprite->flags_03 -= 4;
+                    sprite->shade -= 4;
                     count = sprite->unk_00[2] += 1;
                     if (count == 0x20) {
                         sprite->unk_00[0] = 0;

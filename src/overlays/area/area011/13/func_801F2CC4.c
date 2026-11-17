@@ -9,7 +9,7 @@ MATCH void func_801F2CC4(void) {
     if (SYS_TestFlag(D_80144EF8, 20) != 0) {
         return;
     }
-    p = (u32*)(MAP_BUNDLE_BASE + (((AreaMapBundle*)MAP_BUNDLE_BASE)->list_base_22 << 2));
+    p = (u32*)(MAP_BUNDLE_BASE + (((AreaMapBundle*)MAP_BUNDLE_BASE)->record_list_offset << 2));
     if (*p == 0) {
         return;
     }

@@ -61,7 +61,7 @@ MATCH void func_801576FC(u8* record) {
             case 0:
                 map       = (AreaMapBundle*)MAP_BUNDLE_BASE;
                 size      = map->width * g_AreaMapBundle.height;
-                grid_off  = g_AreaMapBundle.grid_off4_02 * 4;
+                grid_off  = g_AreaMapBundle.grid_offset * 4;
                 image_off = ((size + 1) >> 1) * 4;
                 dst       = (u32*)(grid_off + ((u32)map + image_off));
                 index     = row * map->width * 2 + (grid_off + column * 2);

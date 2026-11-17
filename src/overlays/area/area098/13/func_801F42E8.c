@@ -17,9 +17,9 @@ MATCH u8 func_801F42E8(void) {
             func_801F4220(slot);
             switch (slot->kind) {
                 case 0:
-                    slot->head[0] += slot->vel[0];
-                    slot->head[1] += slot->vel[1];
-                    slot->head[2] += slot->vel[2];
+                    slot->head.x += slot->vel[0];
+                    slot->head.y += slot->vel[1];
+                    slot->head.z += slot->vel[2];
                     slot->head_shade -= 10;
                     if (--slot->life == 0) {
                         slot->life = 8;
@@ -27,9 +27,9 @@ MATCH u8 func_801F42E8(void) {
                     }
                     break;
                 case 1:
-                    slot->tail[0] += slot->vel[0];
-                    slot->tail[1] += slot->vel[1];
-                    slot->tail[2] += slot->vel[2];
+                    slot->tail.x += slot->vel[0];
+                    slot->tail.y += slot->vel[1];
+                    slot->tail.z += slot->vel[2];
                     slot->tail_shade -= 10;
                     if (--slot->life == 0) {
                         slot->active = 0;

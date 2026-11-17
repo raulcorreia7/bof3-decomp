@@ -18,7 +18,7 @@ MATCH void Area_WriteCellRecord(u8* cell) {
     map       = MAP_BUNDLE_BASE;
     src       = (u32*)(cell + 4);
     size      = *(u8*)map * g_AreaMapBundle.height;
-    grid_off  = g_AreaMapBundle.grid_off4_02 * 4;
+    grid_off  = g_AreaMapBundle.grid_offset * 4;
     image_off = ((size + 1) >> 1) * 4;
     dst       = (u32*)(grid_off + (map + image_off));
     index     = cell[0] * *(u8*)map * 2 + (grid_off + cell[1] * 2);
