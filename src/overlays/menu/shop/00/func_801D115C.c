@@ -11,8 +11,8 @@ MATCH void func_801D115C(void) {
     D_80148652 += 1;
     for (index = 0; index < D_8018E7CC[0]; index++) {
         offset = index * 2;
-        result = Item_GetIcon(*(D_8018E7CC + offset + 1), *(D_8018E7CC + offset + 2)) - 0xA;
-        if ((*(D_8018E7CC + offset + 1) != 0) && ((result & BYTE_MASK) >= 2U)) {
+        result = Item_GetIcon(*(D_8018E7CC + offset + 1), *(D_8018E7CC + offset + 2)) - ITEM_TYPE_FISHING_LURE;
+        if ((*(D_8018E7CC + offset + 1) != 0) && ((result & BYTE_MASK) >= ITEM_FISHING_GEAR_COUNT)) {
             D_801E6058 = 1;
             break;
         }

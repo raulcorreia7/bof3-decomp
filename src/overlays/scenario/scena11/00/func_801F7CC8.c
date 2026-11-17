@@ -31,7 +31,8 @@ MATCH void func_801F7CC8(void) {
             if (g_GameStateIndex == 2) {
                 break;
             }
-            if ((u16)Item_Count(0, 0x23, 0) == 0 || (u16)Item_Count(0, 0x24, 0) == 0 || (u16)Item_Count(0, 0x56, 0) == 0 || (u16)Item_Count(0, 0x4D, 0) == 0) {
+            if ((u16)Item_Count(ITEM_CATEGORY_ITEM, ITEM_SHALY_SEED, 0) == 0 || (u16)Item_Count(ITEM_CATEGORY_ITEM, ITEM_VINEGAR, 0) == 0 ||
+                (u16)Item_Count(ITEM_CATEGORY_ITEM, ITEM_HORSERADISH, 0) == 0 || (u16)Item_Count(ITEM_CATEGORY_ITEM, ITEM_MACKEREL, 0) == 0) {
                 g_SceneState.step_05 = 0xB;
             } else {
                 g_SceneState.step_05 = 0xF;

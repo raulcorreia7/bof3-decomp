@@ -60,8 +60,8 @@ MATCH void func_801F7F08(void) {
             g_SceneState.step_05 = 0x32;
             break;
         case 5:
-            if ((Item_Add(0, 0x23, 9, 0) & 0xFF) == 0) {
-                name = Item_GetRecord(0, 0x23);
+            if ((Item_Add(ITEM_CATEGORY_ITEM, ITEM_SHALY_SEED, 9, 0) & 0xFF) == 0) {
+                name = Item_GetRecord(ITEM_CATEGORY_ITEM, ITEM_SHALY_SEED);
                 strncpy((char*)g_TextVariables[0], (char*)name, 12);
                 D_801490E4[0] = 0;
                 Message_Request(MSG_003);
@@ -94,7 +94,7 @@ MATCH void func_801F7F08(void) {
             if (g_GameStateIndex == 2) {
                 break;
             }
-            Item_Add(0, 0x56, 1, 0);
+            Item_Add(ITEM_CATEGORY_ITEM, ITEM_HORSERADISH, 1, 0);
             g_SceneState.step_05 = 0x32;
             break;
         case 0x32:

@@ -165,8 +165,8 @@ MATCH void func_801F83C8(void) {
             if (g_ScriptVars[0] != 1) {
                 break;
             }
-            if ((Item_Add(0, 0x24, 4, 0) & 0xFF) == 0) {
-                strncpy((char*)g_TextVariables[0], (char*)Item_GetRecord(0, 0x24), 12);
+            if ((Item_Add(ITEM_CATEGORY_ITEM, ITEM_VINEGAR, 4, 0) & 0xFF) == 0) {
+                strncpy((char*)g_TextVariables[0], (char*)Item_GetRecord(ITEM_CATEGORY_ITEM, ITEM_VINEGAR), 12);
                 D_801490E4[0] = 0;
                 Message_StartAreaMessage(MSG_051);
                 g_GameStateIndex     = 2;

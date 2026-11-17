@@ -13,7 +13,7 @@ MATCH void func_801F529C(void) {
         case 0:
             game_state = &g_GameStateIndex;
             if (*game_state != GAME_REQUEST_MESSAGE) {
-                Item_VitalAdd(6);
+                Item_VitalAdd(VITAL_ITEM_ID_CARD);
                 Message_StartAreaMessage(MSG_129);
                 *game_state = GAME_REQUEST_MESSAGE;
                 SND_PauseBGM(g_SndBGMId);

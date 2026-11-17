@@ -5,12 +5,12 @@ MATCH void func_801F2C04(void) {
     u8  i;
 
     if (g_MessageChoice == 2) {
-        record = Item_GetRecord(1, 0x4D);
+        record = Item_GetRecord(ITEM_CATEGORY_WEAPON, WEAPON_HOMING_BOMB);
         for (i = 0; i < 12; i++) {
             g_TextVariables[0][i] = record[i];
         }
         D_801490E4[0] = 0;
-        if (Item_Add(1, 0x4D, 1, 0) & BYTE_MASK) {
+        if (Item_Add(ITEM_CATEGORY_WEAPON, WEAPON_HOMING_BOMB, 1, 0) & BYTE_MASK) {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x06));
             g_MessageRequest = MSG_011;
         } else {
