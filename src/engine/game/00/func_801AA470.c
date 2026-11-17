@@ -121,7 +121,7 @@ NON_MATCHING u8 func_801AA470(void* sub, s32 target, u8 value) {
         case 0xDE: {
             void* obj = g_AreaLoads[g_GameAreaId];
             (*(void (**)())((code[FIELD(u16, sub, 0xAu) + 1] * 4) + FIELD(s32, obj, 0x3Cu)))(obj);
-            value = g_Task->direction_08;
+            value = g_Task->direction;
             next  = FIELD(u16, sub, 0xAu) + 1;
             goto set_cursor;
         }

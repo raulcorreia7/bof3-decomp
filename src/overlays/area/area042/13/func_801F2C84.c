@@ -11,7 +11,7 @@ NON_MATCHING void func_801F2C84(void) {
     g_Task->vz               = value;
     g_Task->gravity          = value;
     COORD_INT(g_Task->pos.z) = height;
-    g_Task->state_70.word    = 0;
+    g_Task->voice_flags.raw  = 0;
     if (SYS_TestFlag(g_SceneEventFlags, 0xB) == 0) {
         g_Task->header.mode = 1;
     } else {

@@ -63,7 +63,7 @@ MATCH void func_801C329C(void) {
             if (slot != GAME_NONE) {
                 g_SpawnedActors[slot].header.flags     = 1;
                 g_SpawnedActors[slot].type             = 0x41;
-                g_SpawnedActors[slot].unk_08           = g_Task->direction_08;
+                g_SpawnedActors[slot].unk_08           = g_Task->direction;
                 COORD_INT(g_SpawnedActors[slot].pos.x) = g_Task->screen_x;
                 value30                                = g_Task->screen_y;
                 g_SpawnedActors[slot].unk_27           = 0;

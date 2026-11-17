@@ -175,7 +175,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
                 if (Area_GetWidth(FIELD(s16, tmp9, 0x36u), FIELD(s16, tmp9, 0x3Au)) & BYTE_MASK) {
                     g_Game.current->status.field.flags_12C.u8_value = (u8)(g_Game.current->status.field.flags_12C.u8_value & 0xFE);
                     g_Task->draw_layer                              = (u8)g_AreaDrawMode;
-                    g_Task->direction_08                            = (u8)stack_10;
+                    g_Task->direction                               = (u8)stack_10;
                 } else {
                     goto block_41; /* retail branch */
                 }

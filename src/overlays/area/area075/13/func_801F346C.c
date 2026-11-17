@@ -3,7 +3,7 @@
 MATCH void func_801F346C(void) {
     s8 blue;
 
-    blue = g_Task->tint.signed_bytes.delta.r;
+    blue = g_Task->tint.steps.delta.r;
     if (blue != -0x80) {
         g_Task->tint.bytes.rgb.r = blue - 8;
         g_Task->tint.bytes.rgb.g -= 8;

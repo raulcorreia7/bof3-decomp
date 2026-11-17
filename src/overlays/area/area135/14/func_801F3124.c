@@ -17,11 +17,11 @@ MATCH void func_801F3124(void) {
         func_801F3308(g_Task->pos.x.fixed, g_Task->pos.y.fixed, height, 1);
         g_Task->tint.bytes.rgb.r += 0x2A;
         if (g_Task->tint.bytes.rgb.r > 0x80) {
-            g_Task->tint.signed_bytes.delta.r = -0x80;
+            g_Task->tint.steps.delta.r = -0x80;
         }
         height -= TO_COORD(256);
     }
-    g_Task->tint.signed_bytes.delta.r = -1;
+    g_Task->tint.steps.delta.r = -1;
     func_801F3308(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->vz, 0);
     if (g_ScriptVars[3] == 0xE) {
         g_Task->header.mode = 1;

@@ -10,7 +10,7 @@ MATCH void func_801C2538(void) {
 
     /* Step size from route kind; rate from the shared selector bundle. */
     rate = g_RouteSpeedScale[g_Game.current->u.field.counter_11C.u8_value];
-    if ((g_Task->direction_08 == FACING_UP_RIGHT) || (g_Task->direction_08 == FACING_DOWN_LEFT)) {
+    if ((g_Task->direction == FACING_UP_RIGHT) || (g_Task->direction == FACING_DOWN_LEFT)) {
         step          = 0x20;
         g_Task->timer = step;
     } else {
@@ -21,12 +21,12 @@ MATCH void func_801C2538(void) {
     if ((g_Game.flags & 0x1000) != 0) {
         g_Task->timer *= 2;
     }
-    g_Task->vx = g_FacingOffsets[g_Task->direction_08].x * rate;
-    high       = g_FacingOffsets[g_Task->direction_08].y * rate;
+    g_Task->vx = g_FacingOffsets[g_Task->direction].x * rate;
+    high       = g_FacingOffsets[g_Task->direction].y * rate;
     g_Task->vy = high;
     pos_x      = g_Task->pos.x.fixed + g_Task->vx * g_Task->timer;
     pos_y      = g_Task->pos.y.fixed + high * g_Task->timer;
-    result     = Area_ReadStepHeight(pos_x, pos_y, g_Task->direction_08);
+    result     = Area_ReadStepHeight(pos_x, pos_y, g_Task->direction);
     if (SP_REF(volatile u8, 0x0u) != 0) {
         result = Area_ReadHeight(pos_x, pos_y);
     }

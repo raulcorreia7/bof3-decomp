@@ -9,19 +9,19 @@ MATCH void func_801F3FFC(void) {
 
     work = g_Task;
     COORD_INT(work->pos.z) -= 0x14;
-    tint_a = work->tint.signed_bytes.delta.r;
+    tint_a = work->tint.steps.delta.r;
     if (tint_a < -0x40) {
-        work->tint.signed_bytes.delta.r = tint_a + 2;
+        work->tint.steps.delta.r = tint_a + 2;
     }
     scratch = g_Task;
-    tint_b  = scratch->tint.signed_bytes.delta.g;
+    tint_b  = scratch->tint.steps.delta.g;
     if (tint_b < -0x40) {
-        scratch->tint.signed_bytes.delta.g = tint_b + 2;
-        scratch                            = g_Task;
+        scratch->tint.steps.delta.g = tint_b + 2;
+        scratch                     = g_Task;
     }
-    tint_c = scratch->tint.signed_bytes.delta.b;
+    tint_c = scratch->tint.steps.delta.b;
     if (tint_c < -0x40) {
-        scratch->tint.signed_bytes.delta.b = tint_c + 2;
+        scratch->tint.steps.delta.b = tint_c + 2;
     }
     if (COORD_INT(g_Task->pos.z) == 0xA00) {
         g_Task->header.flags &= ~0x20;

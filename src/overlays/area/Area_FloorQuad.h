@@ -1,4 +1,4 @@
-/* The area floor quad: one textured POLY_FT4 laid flat at the actor's cell, its long side along x or y as direction_08 picks, and its corners lifted to the terrain by Area_SampleHeight. Each member passes the sprite word for Area_ApplyTileToQuad; area160 and area162 to area165 share Area_UpdateFloorQuad.h. A statement macro, not a static inline: the word is read after RotTransPers4, and an inline argument would load it first. */
+/* The area floor quad: one textured POLY_FT4 laid flat at the actor's cell, its long side along x or y as direction picks, and its corners lifted to the terrain by Area_SampleHeight. Each member passes the sprite word for Area_ApplyTileToQuad; area160 and area162 to area165 share Area_UpdateFloorQuad.h. A statement macro, not a static inline: the word is read after RotTransPers4, and an inline argument would load it first. */
 
 #define AREA_DRAW_FLOOR_QUAD(sprite)                                                                                                                                                              \
     do {                                                                                                                                                                                          \
@@ -15,7 +15,7 @@
         prim = (POLY_FT4*)g_GfxPrimCursor;                                                                                                                                                        \
         SetPolyFT4(prim);                                                                                                                                                                         \
         SetShadeTex(prim, 0);                                                                                                                                                                     \
-        if (g_Task->direction_08 != 0) {                                                                                                                                                          \
+        if (g_Task->direction != 0) {                                                                                                                                                             \
             g_ScratchPadVectors[0].vy = g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy = ((FIX_INT(g_Task->pos.y.fixed) - 0x80) << 7) | 0x40;                  \
             g_ScratchPadVectors[0].vx = g_ScratchPadVectors[2].vx = ((FIX_INT(g_Task->pos.x.fixed) - 0x7F) << 7) - (g_Task->screen_y - 0x40);                                                     \
             g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx = ((FIX_INT(g_Task->pos.x.fixed) - 0x80) << 7) - (g_Task->screen_y + 0x40);                                                     \

@@ -49,8 +49,8 @@ MATCH void func_801A7330(const volatile u8* data) {
     /* FAKE: barrier pins the flags store before the route-index load. */
     FAKE_BARRIER();
 
-    g_Task->direction_08 = data[0] & 0xF;
-    g_Task->unk_06       = data[0] >> 4;
+    g_Task->direction = data[0] & 0xF;
+    g_Task->unk_06    = data[0] >> 4;
 
     D_80146900[*counter][0] = 0;
     D_8014691C[*counter][0] = 0x7F;

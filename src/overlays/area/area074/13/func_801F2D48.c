@@ -14,7 +14,7 @@ MATCH void func_801F2D48(void) {
     if (dir != 5 && dir != 1) {
         return;
     }
-    g_Task->direction_08 = dir;
+    g_Task->direction = dir;
     if (func_801A1AE4(g_CurrentActor)) {
         return;
     }

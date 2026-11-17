@@ -75,7 +75,7 @@ typedef enum ActorFlags {
 
 /* `active_flags` bit 6 marks the record active. */
 typedef enum ActorActiveFlags {
-    ACTOR_FLAG_ACTIVE = 1 << 6,
+    ACTOR_ACTIVE_FLAG = 1 << 6,
 } ActorActiveFlags;
 
 /* `interaction_flags` bits. Bit 0 runs the area interaction handler; bits 1 and 2 select
@@ -83,12 +83,12 @@ typedef enum ActorActiveFlags {
  * progress (set when a move starts, cleared on arrival); bit 4 starts the
  * map/message request; bit 5 dispatches the scenario record. */
 typedef enum ActorInteractionFlags {
-    ACTOR_FLAG_INTERACTION_PENDING = 1 << 0,
-    ACTOR_FLAG_FADE_WHITE          = 1 << 1,
-    ACTOR_FLAG_FADE_BLACK          = 1 << 2,
-    ACTOR_FLAG_MOVING              = 1 << 3,
-    ACTOR_FLAG_SCRIPT_REQUEST      = 1 << 4,
-    ACTOR_FLAG_SCRIPT_PENDING      = 1 << 5,
+    ACTOR_INTERACTION_PENDING        = 1 << 0,
+    ACTOR_INTERACTION_FADE_WHITE     = 1 << 1,
+    ACTOR_INTERACTION_FADE_BLACK     = 1 << 2,
+    ACTOR_INTERACTION_MOVING         = 1 << 3,
+    ACTOR_INTERACTION_SCRIPT_REQUEST = 1 << 4,
+    ACTOR_INTERACTION_SCRIPT_PENDING = 1 << 5,
 } ActorInteractionFlags;
 
 /* `option_flags`, the spawn record's option byte. Bit 0 hides the row at spawn; bit 1
@@ -108,7 +108,7 @@ typedef enum ActorOptionFlags {
  * integer. */
 typedef union ActorRange {
     s8* table;
-    u32 word;
+    u32 raw;
 } ActorRange;
 
 ASSERT_SIZE(ActorRange, 0x04);
@@ -117,7 +117,7 @@ ASSERT_SIZE(ActorRange, 0x04);
  * it whole to compare a packed tint, as unsigned bytes, and as the signed steps
  * the fade adds toward 0xC0 (emi/world00/area032/13 marker_work.c). */
 typedef union ActorTint {
-    s32 word;
+    s32 raw;
 
     struct {
         u8        flags;
@@ -127,7 +127,7 @@ typedef union ActorTint {
     struct {
         s8          flags;
         ColorDelta8 delta; /* 0x5D */
-    } signed_bytes;
+    } steps;
 
     struct {
         u16 unk_5C;
@@ -141,12 +141,12 @@ ASSERT_SIZE(ActorTint, 0x04);
  * packs voice numbers above the byte (SND_QueueSelectionEffect ORs them in,
  * Area_SelectSceneRecord masks and loads it); area code clears it or passes it
  * whole as the range mode of Game_GetPartySize. */
-typedef union ActorStateWord {
-    u32 word;
-    u8  byte;
-} ActorStateWord;
+typedef union ActorVoiceFlags {
+    u32 raw;
+    u8  scene_flag;
+} ActorVoiceFlags;
 
-ASSERT_SIZE(ActorStateWord, 0x04);
+ASSERT_SIZE(ActorVoiceFlags, 0x04);
 
 /* The role tail at +0x8C. Area code that tests the player's distance reads the half extents
  * of the box (func_801A1A58, func_801A2C94, func_801A2DB4); the pond fish rows keep the
@@ -179,86 +179,86 @@ typedef union ActorRole {
 ASSERT_SIZE(ActorRole, 1);
 
 typedef struct Actor {
-    TaskHeader     header;            /* 0x00 */
-    u8             unk_03;            /* 0x03 */
-    u8             unk_04;            /* 0x04 */
-    u8             unk_05;            /* 0x05 - region/scene index; commu00 calls it the
+    TaskHeader      header;            /* 0x00 */
+    u8              unk_03;            /* 0x03 */
+    u8              unk_04;            /* 0x04 */
+    u8              unk_05;            /* 0x05 - region/scene index; commu00 calls it the
                                 *        source row the task came from; the script copy
                                 *        scales its staging offset by it; cleared at scene init */
-    u8             unk_06;            /* 0x06 - commu00 calls it the live flag; 9 gates the draw-mode
+    u8              unk_06;            /* 0x06 - commu00 calls it the live flag; 9 gates the draw-mode
                                 *        stamp, 10 calls Actor_ProjectForDraw (func_80167E00) */
-    u8             option_flags;      /* 0x07 - ActorOptionFlags */
-    u8             direction_08;      /* 0x08 - commu00 calls it the cue resource */
-    u8             timer;             /* 0x09 - counted up or down by the area step handlers */
-    u8             unk_0A;            /* 0x0A */
-    ActorRole      param;             /* 0x0B */
-    s32            vx;                /* 0x0C added to x each step */
-    s32            vy;                /* 0x10 added to y each step */
-    s32            vz;                /* 0x14 signed vertical speed */
-    s32            unk_18;            /* 0x18 - commu00 calls it variant_arg_0 */
-    s32            unk_1C;            /* 0x1C - commu00 calls it variant_arg_1 */
-    s32            gravity;           /* 0x20 added to vz each step */
-    u8             active_flags;      /* 0x24 - ActorActiveFlags; bit 0x40 marks the record active */
-    u8             unk_25;            /* 0x25 - sprite: texture page of the sheet (Party_LoadMemberSprite) */
-    u8             unk_26;            /* 0x26 - sprite: sheet row in the page; Party_RemoveMember stores other values */
-    u8             unk_27;            /* 0x27 - sprite: CLUT selector (Area_BuildClut); battle number actors keep the
+    u8              option_flags;      /* 0x07 - ActorOptionFlags */
+    u8              direction;         /* 0x08 - commu00 calls it the cue resource */
+    u8              timer;             /* 0x09 - counted up or down by the area step handlers */
+    u8              unk_0A;            /* 0x0A */
+    ActorRole       param;             /* 0x0B */
+    s32             vx;                /* 0x0C added to x each step */
+    s32             vy;                /* 0x10 added to y each step */
+    s32             vz;                /* 0x14 signed vertical speed */
+    s32             unk_18;            /* 0x18 - commu00 calls it variant_arg_0 */
+    s32             unk_1C;            /* 0x1C - commu00 calls it variant_arg_1 */
+    s32             gravity;           /* 0x20 added to vz each step */
+    u8              active_flags;      /* 0x24 - ActorActiveFlags; bit 0x40 marks the record active */
+    u8              unk_25;            /* 0x25 - sprite: texture page of the sheet (Party_LoadMemberSprite) */
+    u8              unk_26;            /* 0x26 - sprite: sheet row in the page; Party_RemoveMember stores other values */
+    u8              unk_27;            /* 0x27 - sprite: CLUT selector (Area_BuildClut); battle number actors keep the
                                 *        value they draw here */
-    u8             unk_28;            /* 0x28 - sprite: palette kind, nonzero draws 8-bit (Area_BuildClut) */
-    u8             draw_layer;        /* 0x29 - the ordering-table layer GFX_AddPrim files its primitives in */
-    u8             unk_2A;            /* 0x2A - sprite: mirror flag, 0 or 1 (Area_DrawObjectSprite) */
-    u8             unk_2B;            /* 0x2B */
-    u16            unk_2C;            /* 0x2C */
-    u16            screen_x;          /* 0x2E - HUD banner and marker screen x */
-    u16            screen_y;          /* 0x30 - HUD banner and marker screen y */
-    s16            unk_32;            /* 0x32 - signed: every matched user loads it with lh */
-    WorldPos       pos;               /* 0x34; z integer is ground height */
-    SpriteScale    scale;             /* 0x40 16.16; 0x10000 is full size */
-    u8             unk_48;            /* 0x48 - commu00 calls it the reset flag */
-    u8             unk_49;            /* 0x49 */
-    u8             unk_4A;            /* 0x4A - sprite animation: ticks left in the step; fishing prompt rows hold
+    u8              unk_28;            /* 0x28 - sprite: palette kind, nonzero draws 8-bit (Area_BuildClut) */
+    u8              draw_layer;        /* 0x29 - the ordering-table layer GFX_AddPrim files its primitives in */
+    u8              unk_2A;            /* 0x2A - sprite: mirror flag, 0 or 1 (Area_DrawObjectSprite) */
+    u8              unk_2B;            /* 0x2B */
+    u16             unk_2C;            /* 0x2C */
+    u16             screen_x;          /* 0x2E - HUD banner and marker screen x */
+    u16             screen_y;          /* 0x30 - HUD banner and marker screen y */
+    s16             unk_32;            /* 0x32 - signed: every matched user loads it with lh */
+    WorldPos        pos;               /* 0x34; z integer is ground height */
+    SpriteScale     scale;             /* 0x40 16.16; 0x10000 is full size */
+    u8              unk_48;            /* 0x48 - commu00 calls it the reset flag */
+    u8              unk_49;            /* 0x49 */
+    u8              unk_4A;            /* 0x4A - sprite animation: ticks left in the step; fishing prompt rows hold
                                 *        the prompt column here */
-    u8             unk_4B;            /* 0x4B - the script-table record index */
-    s32            unk_4C;            /* 0x4C */
-    u8*            script;            /* 0x50 - sprite animation: the step list, (delay, frame) byte pairs
+    u8              unk_4B;            /* 0x4B - the script-table record index */
+    s32             unk_4C;            /* 0x4C */
+    u8*             script;            /* 0x50 - sprite animation: the step list, (delay, frame) byte pairs
                                 *        (Actor_SeekScript, Actor_StageAnimStep); the fishing record keeps its item
                                 *        pointer here */
-    ActorRange     range_54;          /* 0x54 - range record; +2 range, +3 bit 0x10 */
-    u16            script_pc;         /* 0x58 - sprite animation: byte position in the step list at script */
-    u16            unk_5A;            /* 0x5A - sprite animation: offset of the current frame's cells in the table at
+    ActorRange      range_54;          /* 0x54 - range record; +2 range, +3 bit 0x10 */
+    u16             script_pc;         /* 0x58 - sprite animation: byte position in the step list at script */
+    u16             unk_5A;            /* 0x5A - sprite animation: offset of the current frame's cells in the table at
                                 *        range_54 (Area_DrawObjectSprite) */
-    ActorTint      tint;              /* 0x5C */
-    s32            unk_60;            /* 0x60 */
-    s32            unk_64;            /* 0x64 */
-    s32            unk_68;            /* 0x68 */
-    s32            unk_6C;            /* 0x6C */
-    ActorStateWord state_70;          /* 0x70 - see ActorStateWord */
-    u8             interaction_flags; /* 0x74 - ActorInteractionFlags */
-    u8             timer_75;          /* 0x75 */
-    u8             pad_76;            /* 0x76 */
-    u8             unk_77;            /* 0x77 */
-    u8             unk_78;            /* 0x78 - commu00 names this variant_state, area008 its
+    ActorTint       tint;              /* 0x5C */
+    s32             unk_60;            /* 0x60 */
+    s32             unk_64;            /* 0x64 */
+    s32             unk_68;            /* 0x68 */
+    s32             unk_6C;            /* 0x6C */
+    ActorVoiceFlags voice_flags;       /* 0x70 - see ActorVoiceFlags */
+    u8              interaction_flags; /* 0x74 - ActorInteractionFlags */
+    u8              timer_75;          /* 0x75 */
+    u8              pad_76;            /* 0x76 */
+    u8              unk_77;            /* 0x77 */
+    u8              unk_78;            /* 0x78 - commu00 names this variant_state, area008 its
                                 *        state_78 */
-    u8             unk_79;            /* 0x79 */
-    u8             callback_index;    /* 0x7A - index of the scenario callback table; 0xFF is none */
-    u8             unk_7B;            /* 0x7B */
-    u16            unk_7C;            /* 0x7C - 16-bit signal; commu00 calls it the label id */
-    u16            unk_7E;            /* 0x7E */
-    s32            walk_dest_x;       /* 0x80 - x the walk ends at */
-    s32            walk_dest_y;       /* 0x84 - y the walk ends at */
-    u32            unk_88;            /* 0x88 */
-    ActorTail      ext;               /* 0x8C - see ActorTail */
-    u16            roll_90;           /* 0x90 */
-    u8             facing;            /* 0x92 - the facing direction: the fishing code writes
+    u8              unk_79;            /* 0x79 */
+    u8              callback_index;    /* 0x7A - index of the scenario callback table; 0xFF is none */
+    u8              unk_7B;            /* 0x7B */
+    u16             unk_7C;            /* 0x7C - 16-bit signal; commu00 calls it the label id */
+    u16             unk_7E;            /* 0x7E */
+    s32             walk_dest_x;       /* 0x80 - x the walk ends at */
+    s32             walk_dest_y;       /* 0x84 - y the walk ends at */
+    u32             unk_88;            /* 0x88 */
+    ActorTail       ext;               /* 0x8C - see ActorTail */
+    u16             roll_90;           /* 0x90 */
+    u8              facing;            /* 0x92 - the facing direction: the fishing code writes
                                 *        `rand() & 3` and turns the row by it
                                 *        (emi/world00/area030/04 func_801DE5EC) */
-    u8             unk_93;            /* 0x93 */
-    u8             unk_94;            /* 0x94 */
-    u8             unk_95;            /* 0x95 */
-    u8             pad_96[0x02];      /* 0x96-0x97 */
+    u8              unk_93;            /* 0x93 */
+    u8              unk_94;            /* 0x94 */
+    u8              unk_95;            /* 0x95 */
+    u8              pad_96[0x02];      /* 0x96-0x97 */
 } Actor;
 
 ASSERT_OFFSET(Actor, header, 0x00);
-ASSERT_OFFSET(Actor, direction_08, 0x08);
+ASSERT_OFFSET(Actor, direction, 0x08);
 ASSERT_OFFSET(Actor, param, 0x0B);
 ASSERT_OFFSET(Actor, vx, 0x0C);
 ASSERT_OFFSET(Actor, vy, 0x10);
@@ -269,7 +269,7 @@ ASSERT_OFFSET(Actor, active_flags, 0x24);
 ASSERT_OFFSET(Actor, pos, 0x34);
 ASSERT_OFFSET(Actor, range_54, 0x54);
 ASSERT_OFFSET(Actor, tint, 0x5C);
-ASSERT_OFFSET(Actor, state_70, 0x70);
+ASSERT_OFFSET(Actor, voice_flags, 0x70);
 ASSERT_OFFSET(Actor, interaction_flags, 0x74);
 ASSERT_OFFSET(Actor, unk_77, 0x77);
 ASSERT_OFFSET(Actor, callback_index, 0x7A);

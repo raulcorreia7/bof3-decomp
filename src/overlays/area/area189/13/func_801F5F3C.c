@@ -10,15 +10,15 @@ MATCH s32 func_801F5F3C(void) {
     }
     if (g_InputHeld & PADLright) {
         g_Task->unk_4B       = 2;
-        g_Task->direction_08 = g_Task->direction_08 + 1;
+        g_Task->direction    = g_Task->direction + 1;
         g_Task->param.unk_0B = 0xF0;
     } else if (g_InputHeld & PADLleft) {
         g_Task->unk_4B       = 3;
-        g_Task->direction_08 = g_Task->direction_08 - 1;
+        g_Task->direction    = g_Task->direction - 1;
         g_Task->param.unk_0B = 0x10;
     } else {
         return 0;
     }
-    g_Task->direction_08 &= 0xF;
+    g_Task->direction &= 0xF;
     return 1;
 }

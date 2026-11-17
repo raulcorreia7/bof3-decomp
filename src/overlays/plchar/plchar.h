@@ -24,8 +24,8 @@
 /* The same step with the two switch cases written in the given order: a member whose
  * retail switch tests the 0x41 facing first passes the 0x41 case first. */
 #define CHAR_RUN_STEP_CASES(FIRST_FACING, FIRST_SCRIPT, SECOND_FACING, SECOND_SCRIPT) \
-    if (g_Task->direction_08 == g_Task->unk_03) {                                     \
-        switch (g_Task->direction_08) {                                               \
+    if (g_Task->direction == g_Task->unk_03) {                                        \
+        switch (g_Task->direction) {                                                  \
             case FIRST_FACING:                                                        \
                 Actor_RequestScript(FIRST_SCRIPT);                                    \
                 break;                                                                \
@@ -37,52 +37,52 @@
     } else {                                                                          \
         g_Task->timer--;                                                              \
         if (g_Task->timer == 0) {                                                     \
-            g_Task->timer        = 2;                                                 \
-            g_Task->direction_08 = g_Task->direction_08 + g_Task->param.turn_step;    \
-            g_Task->direction_08 &= 7;                                                \
-            Actor_RequestScript(g_Task->direction_08);                                \
+            g_Task->timer     = 2;                                                    \
+            g_Task->direction = g_Task->direction + g_Task->param.turn_step;          \
+            g_Task->direction &= 7;                                                   \
+            Actor_RequestScript(g_Task->direction);                                   \
         }                                                                             \
     }
 
 /* Starts the character's walk route: picks the direction away from the work record's current route index with the resident selector (Actor_GetTurnStep), stores it in the direction byte at +0x03, arms the step timer at +0x09 and advances the task state at +0x02. The body of every PlChar_StartTurn member; each passes the two facing values it turns between. */
-#define CHAR_START_TURN(FACING_BACK, FACING_AWAY)                                            \
-    if (abs(g_Task->direction_08 - FACING_BACK) > abs(g_Task->direction_08 - FACING_AWAY)) { \
-        g_Task->param.turn_step = Actor_GetTurnStep(FACING_AWAY);                            \
-        g_Task->unk_03          = FACING_AWAY;                                               \
-    } else {                                                                                 \
-        g_Task->param.turn_step = Actor_GetTurnStep(FACING_BACK);                            \
-        g_Task->unk_03          = FACING_BACK;                                               \
-    }                                                                                        \
-    g_Task->timer = 2;                                                                       \
+#define CHAR_START_TURN(FACING_BACK, FACING_AWAY)                                      \
+    if (abs(g_Task->direction - FACING_BACK) > abs(g_Task->direction - FACING_AWAY)) { \
+        g_Task->param.turn_step = Actor_GetTurnStep(FACING_AWAY);                      \
+        g_Task->unk_03          = FACING_AWAY;                                         \
+    } else {                                                                           \
+        g_Task->param.turn_step = Actor_GetTurnStep(FACING_BACK);                      \
+        g_Task->unk_03          = FACING_BACK;                                         \
+    }                                                                                  \
+    g_Task->timer = 2;                                                                 \
     g_Task->header.step++
 
 /* Runs this image's turn preparation, requests the script of the character's current facing and sets the task to state 0xB, step 1. The body of every character's facing-turn start; each passes its preparation function. */
-#define CHAR_START_FACING_TURN(PREPARE)                         \
-    PREPARE();                                                  \
-    Actor_RequestScript((g_Task->direction_08 - 1) / 2 + 0x42); \
-    g_Task->unk_0A = 0xB;                                       \
+#define CHAR_START_FACING_TURN(PREPARE)                      \
+    PREPARE();                                               \
+    Actor_RequestScript((g_Task->direction - 1) / 2 + 0x42); \
+    g_Task->unk_0A = 0xB;                                    \
     g_Task->unk_03 = 1
 
-/* Chooses a direction and requests its script: steps direction_08 to a free neighbouring facing when it is even (CHECK reports whether the facing is free), then runs this image's turn preparation PREPARE and starts the facing script. The body of every PlChar_FaceFreeDirection; each passes its two functions. */
+/* Chooses a direction and requests its script: steps direction to a free neighbouring facing when it is even (CHECK reports whether the facing is free), then runs this image's turn preparation PREPARE and starts the facing script. The body of every PlChar_FaceFreeDirection; each passes its two functions. */
 /* PlChar_FaceFreeDirection (plp016 0x801CF7B4, plp026 0x801CFBD8, plp056 0x801CF9DC, plp267 0x801CEEB0, plp467
  * 0x801CE8D4, plp567 0x801CECB4, plp678 0x801CE6B8) */
-#define CHAR_FACE_FREE_DIRECTION(CHECK, PREPARE)                                \
-    u8 direction;                                                               \
-                                                                                \
-    direction = g_Task->direction_08;                                           \
-    if (!(direction & 1)) {                                                     \
-        g_Task->direction_08 = (direction - 1) & 7;                             \
-        if (!(CHECK() & 0xFF)) {                                                \
-            g_Task->direction_08 = (g_Task->direction_08 + 2) & 7;              \
-            if (!(CHECK() & 0xFF)) {                                            \
-                g_Task->direction_08 = (g_Task->direction_08 - 2) & 7;          \
-            }                                                                   \
-        }                                                                       \
-    }                                                                           \
-    PREPARE();                                                                  \
-    Actor_RequestScript((((s32)(g_Task->direction_08 - 1) / 2) + 0x42) & 0xFF); \
-    g_Task->param.unk_0B = 0;                                                   \
-    g_Task->unk_0A       = 0xB;                                                 \
+#define CHAR_FACE_FREE_DIRECTION(CHECK, PREPARE)                             \
+    u8 direction;                                                            \
+                                                                             \
+    direction = g_Task->direction;                                           \
+    if (!(direction & 1)) {                                                  \
+        g_Task->direction = (direction - 1) & 7;                             \
+        if (!(CHECK() & 0xFF)) {                                             \
+            g_Task->direction = (g_Task->direction + 2) & 7;                 \
+            if (!(CHECK() & 0xFF)) {                                         \
+                g_Task->direction = (g_Task->direction - 2) & 7;             \
+            }                                                                \
+        }                                                                    \
+    }                                                                        \
+    PREPARE();                                                               \
+    Actor_RequestScript((((s32)(g_Task->direction - 1) / 2) + 0x42) & 0xFF); \
+    g_Task->param.unk_0B = 0;                                                \
+    g_Task->unk_0A       = 0xB;                                              \
     g_Task->unk_03       = 1
 
 /* Probes facing clearance for the character's free-direction choice; sets g_Task->unk_2B to 0 when blocked. */
@@ -106,18 +106,18 @@
 /* Turns an even facing one step back, probes the clearance ahead and requests the script of the facing the character
  * now holds, then advances the step. The body of every plchar program's free-facing start. */
 /* func_801CF750 (plp015), func_801CEE4C (plp257), func_801CE870 (plp457), func_801CF37C (plp056), func_801CE654 (plp567 and plp578), func_801CFB74 (plp025) */
-#define CHAR_START_FREE_FACING                               \
-    s16 dist;                                                \
-    s32 x;                                                   \
-    s32 y;                                                   \
-    u8  direction;                                           \
-                                                             \
-    direction = g_Task->direction_08;                        \
-    if (!(direction & 1)) {                                  \
-        g_Task->direction_08 = (direction - 1) & 7;          \
-    }                                                        \
-    CHAR_PROBE_FACING_CLEARANCE(dist, x, y)                  \
-    Actor_RequestScript((g_Task->direction_08 >> 1) + 0x42); \
+#define CHAR_START_FREE_FACING                            \
+    s16 dist;                                             \
+    s32 x;                                                \
+    s32 y;                                                \
+    u8  direction;                                        \
+                                                          \
+    direction = g_Task->direction;                        \
+    if (!(direction & 1)) {                               \
+        g_Task->direction = (direction - 1) & 7;          \
+    }                                                     \
+    CHAR_PROBE_FACING_CLEARANCE(dist, x, y)               \
+    Actor_RequestScript((g_Task->direction >> 1) + 0x42); \
     g_Task->header.step++
 
 void PlChar_SpawnActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y);
@@ -189,8 +189,8 @@ s32 PlChar_ProbeCellSpawn(s16 x, s16 y);
 #define PLCHAR_PROBE_FACING_FOLLOWER(index)                                                                                \
     {                                                                                                                      \
         s32 i;                                                                                                             \
-        s32 x = g_SpawnedActors[index].pos.x.fixed + g_FacingSteps[g_Task->direction_08].x * 2;                            \
-        s32 y = g_SpawnedActors[index].pos.y.fixed + g_FacingSteps[g_Task->direction_08].y * 2;                            \
+        s32 x = g_SpawnedActors[index].pos.x.fixed + g_FacingSteps[g_Task->direction].x * 2;                               \
+        s32 y = g_SpawnedActors[index].pos.y.fixed + g_FacingSteps[g_Task->direction].y * 2;                               \
         for (i = 1; i < g_PartySize; i++) {                                                                                \
             if (func_801BDD58(x, y, COORD_INT(g_SpawnedActors[index].pos.z), 1, (Actor*)&g_Game.members[i]) & BYTE_MASK) { \
                 return 1;                                                                                                  \

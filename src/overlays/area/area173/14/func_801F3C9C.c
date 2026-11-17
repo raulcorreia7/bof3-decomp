@@ -15,7 +15,7 @@ MATCH void func_801F3C9C(void) {
     if (trigger == 0) {
         return;
     }
-    SYS_ClearFlag(g_SceneEventFlags, g_Task->direction_08);
+    SYS_ClearFlag(g_SceneEventFlags, g_Task->direction);
     if (g_GameStateIndex == GAME_REQUEST_IDLE) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0));
     }

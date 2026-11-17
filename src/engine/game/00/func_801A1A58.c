@@ -13,7 +13,7 @@ MATCH bool func_801A1A58(Actor* actor) {
     u8  route;
 
     entity = actor;
-    route  = entity->direction_08;
+    route  = entity->direction;
     /* FAKE: retail loads the route byte before the coordinate loads. */
     FAKE_BARRIER();
     dx = entity->pos.x.fixed;

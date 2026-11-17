@@ -7,21 +7,21 @@ MATCH void PlChar_WalkStep(void) {
     s32 x;
     s32 y;
 
-    if ((g_Task->direction_08 & 1) == 0) {
-        g_Task->direction_08 = (g_Task->direction_08 - 1) & 7;
+    if ((g_Task->direction & 1) == 0) {
+        g_Task->direction = (g_Task->direction - 1) & 7;
         if ((u8)PlChar_ProbeFacingCell() == 0) {
-            g_Task->direction_08 = (g_Task->direction_08 + 2) & 7;
+            g_Task->direction = (g_Task->direction + 2) & 7;
             if ((u8)PlChar_ProbeFacingCell() == 0) {
-                g_Task->direction_08 = (g_Task->direction_08 - 2) & 7;
+                g_Task->direction = (g_Task->direction - 2) & 7;
             }
         }
     }
-    x    = g_Task->pos.x.fixed + g_FacingSteps[g_Task->direction_08].x;
-    y    = g_Task->pos.y.fixed + g_FacingStepY[g_Task->direction_08 * 2];
+    x    = g_Task->pos.x.fixed + g_FacingSteps[g_Task->direction].x;
+    y    = g_Task->pos.y.fixed + g_FacingStepY[g_Task->direction * 2];
     dist = Area_ReadHeight(x, y) - COORD_INT(g_Task->pos.z);
-    Area_ReadStepHeight(x, y, g_Task->direction_08);
+    Area_ReadStepHeight(x, y, g_Task->direction);
     if (SP_REF(u8, 0x0u) != 0 && dist >= 65) {
-        Actor_RequestScript((g_Task->direction_08 - 1) / 2 + 0x46);
+        Actor_RequestScript((g_Task->direction - 1) / 2 + 0x46);
         g_Task->header.step++;
     } else {
         g_Task->unk_2B = 1;
@@ -39,7 +39,7 @@ MATCH void PlChar_WalkStep(void) {
         }
         /* FAKE: retail reads SND_PlaySE as void(s32). */
         ((void (*)(s32))SND_PlaySE)(g_Task->unk_2C + 0x100);
-        Actor_RequestScript((g_Task->direction_08 - 1) / 2 + 0x42);
+        Actor_RequestScript((g_Task->direction - 1) / 2 + 0x42);
         g_Task->unk_0A = 5;
     }
     g_Task->param.unk_0B = 0;

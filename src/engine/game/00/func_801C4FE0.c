@@ -13,10 +13,10 @@ MATCH s32 func_801C4FE0(void) {
     s32    moved;
 
     work    = g_Task;
-    step    = work->state_70.byte + 2;
-    next_x  = work->pos.x.fixed + g_FacingSteps[work->direction_08].x * step;
+    step    = work->voice_flags.scene_flag + 2;
+    next_x  = work->pos.x.fixed + g_FacingSteps[work->direction].x * step;
     x       = next_x;
-    next_y  = work->pos.y.fixed + g_FacingSteps[work->direction_08].y * step;
+    next_y  = work->pos.y.fixed + g_FacingSteps[work->direction].y * step;
     y       = next_y;
     counter = COORD_INT(work->pos.z);
     moved   = 0;
@@ -27,7 +27,7 @@ MATCH s32 func_801C4FE0(void) {
         COORD_INT(g_Task->pos.z) -= D_80181B88[slot];
     } else {
         COORD_INT(g_Task->pos.z) = Area_ReadHeight(x, y) - D_80181B70[g_Game.current->chr.character_id];
-        if (g_Task->direction_08 == FACING_LEFT) {
+        if (g_Task->direction == FACING_LEFT) {
             Actor_RequestScript(0x3C);
         } else {
             Actor_RequestScript(0x3D);

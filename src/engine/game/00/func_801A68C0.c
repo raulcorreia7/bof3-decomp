@@ -21,8 +21,8 @@ MATCH void func_801A68C0(u8* script) {
     GAME_WORK_AREA_PTR = &g_Actors[slot];
     rows               = g_Actors;
 
-    tile                 = FIELD(s32, g_AreaLoads[tile], 0x8u) + offset;
-    g_Task->direction_08 = script[0] & 0xF;
+    tile              = FIELD(s32, g_AreaLoads[tile], 0x8u) + offset;
+    g_Task->direction = script[0] & 0xF;
     Actor_ResetMotion();
     SYS_InitScratchpad((u8*)tile);
     func_801A4B80(4);
@@ -46,7 +46,7 @@ MATCH void func_801A68C0(u8* script) {
     g_Task->gravity          = 0;
     g_Task->unk_1C           = 0;
     g_Task->unk_18           = 0;
-    g_Task->state_70.word    = FIELD(u8, g_Task->range_54.table, 0x2u);
+    g_Task->voice_flags.raw  = FIELD(u8, g_Task->range_54.table, 0x2u);
 
     rows[*counter].unk_88                               = 0;
     rows[*counter].walk_dest_y                          = 0;
@@ -58,10 +58,10 @@ MATCH void func_801A68C0(u8* script) {
 
     Actor_SetOptionFlags(script + 8);
 
-    g_Task->tint.signed_bytes.delta.r = -0x80;
-    g_Task->tint.signed_bytes.delta.b = -0x80;
-    g_Task->tint.signed_bytes.delta.g = -0x80;
-    g_Task->tint.bytes.flags          = 2;
+    g_Task->tint.steps.delta.r = -0x80;
+    g_Task->tint.steps.delta.b = -0x80;
+    g_Task->tint.steps.delta.g = -0x80;
+    g_Task->tint.bytes.flags   = 2;
 
     if (D_80146900[*counter][0] == 0) {
         Area_SetCellCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y), 0x10);

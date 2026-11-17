@@ -12,7 +12,7 @@ MATCH void func_801A0F24(Actor* record) {
     Actor* spad_b;
 
     spad_a = g_Task;
-    saved  = spad_a->direction_08;
+    saved  = spad_a->direction;
     D_801C83BC[spad_a->header.step](record, 0, 1);
     spad_b = g_Task;
     if (spad_b->timer == 0) {
@@ -37,23 +37,23 @@ MATCH void func_801A0F24(Actor* record) {
             record->unk_7B -= 1;
         block_8:
             if (((result & BYTE_MASK) != GAME_NONE) && (spad_c = g_Task, (spad_c->timer != 0))) {
-                spad_c->unk_03       = spad_c->header.mode;
-                g_Task->header.mode  = 0xAU;
-                record->unk_79       = result & 0x7;
-                g_Task->direction_08 = (saved & 0x7);
-                spad_d               = g_Task;
-                spad_d->unk_0A       = 0;
-                spad_d->timer        = 0U;
+                spad_c->unk_03      = spad_c->header.mode;
+                g_Task->header.mode = 0xAU;
+                record->unk_79      = result & 0x7;
+                g_Task->direction   = (saved & 0x7);
+                spad_d              = g_Task;
+                spad_d->unk_0A      = 0;
+                spad_d->timer       = 0U;
                 func_801A3B7C(record);
                 spad_e = g_Task;
                 if (spad_e->header.mode != 0xA) {
-                    spad_e->direction_08 = saved;
+                    spad_e->direction = saved;
                     /* Shared tail: restore the route and run the step. */
                     goto block_13;
                 }
             } else {
-                g_Task->timer        = 0U;
-                g_Task->direction_08 = saved;
+                g_Task->timer     = 0U;
+                g_Task->direction = saved;
             block_13:
                 func_801A2AE4(record, saved);
                 /* Both paths finish through the idle handler. */

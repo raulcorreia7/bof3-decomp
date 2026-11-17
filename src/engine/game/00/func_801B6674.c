@@ -25,7 +25,7 @@ NON_MATCHING bool func_801B6674(void) {
             return 0;
         }
         if (!(status & AREA_LOAD_FLAG_NO_ACTOR_SCRIPT)) {
-            Actor_RequestRoute(g_Task->direction_08);
+            Actor_RequestRoute(g_Task->direction);
         }
         func_801B690C();
         entry_area   = g_GameEntryAreaId;
@@ -50,7 +50,7 @@ NON_MATCHING bool func_801B6674(void) {
             return 0;
         }
         if (!(g_GameRequestFlags & AREA_LOAD_FLAG_NO_ACTOR_SCRIPT)) {
-            Actor_RequestRoute(g_Task->direction_08);
+            Actor_RequestRoute(g_Task->direction);
         }
         entry_area   = g_GameEntryAreaId;
         entry_pos_x  = g_GameEntryPosX;
@@ -67,7 +67,7 @@ NON_MATCHING bool func_801B6674(void) {
     if ((g_InputPressed & g_InputMasks[WORLD_INPUT_LOCATION_GUIDE]) && ((u8)(cell_code + 0x60) < 2)) {
         g_SceneEventState.mode = 0x1B;
         if (!(status & AREA_LOAD_FLAG_NO_ACTOR_SCRIPT)) {
-            Actor_RequestRoute(g_Task->direction_08);
+            Actor_RequestRoute(g_Task->direction);
         }
         ACTOR_CLEAR_STEP();
         return 1;

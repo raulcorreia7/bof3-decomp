@@ -19,7 +19,7 @@ MATCH void func_801B6BC8(void) {
             if (!(g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE)) {
                 g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
             }
-            Actor_RequestScript(g_Task->direction_08);
+            Actor_RequestScript(g_Task->direction);
             g_Game.current->status.field.flags_12C.u8_value &= 0xFB;
             func_801C3204();
             g_Task->header.mode = 1;
@@ -33,8 +33,8 @@ MATCH void func_801B6BC8(void) {
         if (flags & 0x20) {
             if (!(g_Task->option_flags & ACTOR_OPT_NO_SCRIPT_START)) {
                 if (!(g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
-                    g_Task->direction_08 = sel;
-                    Actor_RequestScript(g_Task->direction_08);
+                    g_Task->direction = sel;
+                    Actor_RequestScript(g_Task->direction);
                 }
                 g_Task->unk_03 = 3;
                 return;
@@ -42,21 +42,21 @@ MATCH void func_801B6BC8(void) {
         }
         flags = g_GameState->u.field.flags_118;
         if (flags & 0x2) {
-            g_Task->direction_08 = sel;
+            g_Task->direction = sel;
             func_801C2438();
-            g_Task->tint.signed_bytes.delta.r = -0x40;
-            g_Task->tint.signed_bytes.delta.g = -0x40;
-            g_Task->tint.signed_bytes.delta.b = -0x40;
-            g_Task->tint.bytes.flags          = 1;
-            Actor_RequestScript(g_Task->direction_08);
+            g_Task->tint.steps.delta.r = -0x40;
+            g_Task->tint.steps.delta.g = -0x40;
+            g_Task->tint.steps.delta.b = -0x40;
+            g_Task->tint.bytes.flags   = 1;
+            Actor_RequestScript(g_Task->direction);
             g_Task->unk_03 = 4;
             return;
         }
         if (flags & 0x4) {
-            g_Task->direction_08 = sel;
+            g_Task->direction = sel;
             func_801C2438();
             g_Task->tint.bytes.flags = 1;
-            Actor_RequestScript(g_Task->direction_08);
+            Actor_RequestScript(g_Task->direction);
             g_Task->unk_03 = 5;
             return;
         }
@@ -66,14 +66,14 @@ MATCH void func_801B6BC8(void) {
             if (delay != 0) {
                 g_GameState->u.field.wait = (delay - 1);
             }
-            g_Task->direction_08 = sel;
-            g_Task->unk_03       = 2;
+            g_Task->direction = sel;
+            g_Task->unk_03    = 2;
             sel += 8;
             g_Task->timer = (g_Task->timer - 1);
             Actor_UpdateMovement();
         } else {
-            work->direction_08 = sel;
-            g_Task->unk_03     = 1;
+            work->direction = sel;
+            g_Task->unk_03  = 1;
         }
         if ((g_Game.current->u.field.flags_118 & 0x40) == 0) {
             Actor_RequestScript(sel);

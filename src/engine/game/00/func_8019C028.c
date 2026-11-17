@@ -6,7 +6,7 @@ MATCH bool func_8019C028(void) {
 
     slot = Actor_FindInRange(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0);
     if (slot != -1) {
-        g_Actors[slot].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;
+        g_Actors[slot].interaction_flags |= ACTOR_INTERACTION_PENDING;
     } else {
         other = Game_GetPartySize(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0);
         if (other == slot) {

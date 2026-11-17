@@ -15,5 +15,5 @@ MATCH void func_801F4A4C(void) {
     } else {
         work->pos.y.fixed = TO_COORD(122);
     }
-    g_Task->direction_08 = FACING_UP;
+    g_Task->direction = FACING_UP;
 }

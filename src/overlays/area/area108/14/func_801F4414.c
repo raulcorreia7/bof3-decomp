@@ -11,7 +11,7 @@ MATCH void func_801F4414(void) {
     u8* leader;
     u8* active;
 
-    g_CurrentActor->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;
+    g_CurrentActor->interaction_flags &= ~ACTOR_INTERACTION_PENDING;
     leader = &g_Game.members[0].chr.character_id;
     /* FAKE: the leader id's address must stay in a0 for the facing read at -0x71(a0); a plain
      * member load folds to an absolute lui/lbu and grows the body by 4 bytes (0x508 against 0x504). */

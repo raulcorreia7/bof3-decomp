@@ -3,7 +3,7 @@
 MATCH void func_801C4D1C(void) {
     u32 route;
 
-    route = g_Task->direction_08;
+    route = g_Task->direction;
     if (route == FACING_LEFT) {
         Actor_RequestScript(0x3C);
     } else {

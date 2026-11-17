@@ -27,5 +27,5 @@ MATCH void func_801A3410(void* work_index) {
     }
     func_801A1384(work_index);
     tail = g_Task;
-    tail->direction_08 &= 7;
+    tail->direction &= 7;
 }

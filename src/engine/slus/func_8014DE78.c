@@ -13,7 +13,7 @@ MATCH s8 func_8014DE78(void) {
         if (!ACTOR_IN_USE(g_Actors[i])) {
             continue;
         }
-        if (!(g_Actors[i].active_flags & ACTOR_FLAG_ACTIVE)) {
+        if (!(g_Actors[i].active_flags & ACTOR_ACTIVE_FLAG)) {
             continue;
         }
         if (g_Actors[i].unk_06 != 0xA) {

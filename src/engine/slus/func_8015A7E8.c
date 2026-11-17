@@ -30,7 +30,7 @@ MATCH void func_8015A7E8(void) {
                 continue;
             }
         }
-        if ((g_CurrentActor[0x74] & ACTOR_FLAG_INTERACTION_PENDING) != 0) {
+        if ((g_CurrentActor[0x74] & ACTOR_INTERACTION_PENDING) != 0) {
             func_801A3A08();
             continue;
         }

@@ -8,7 +8,7 @@ NON_MATCHING void func_801F3590(void) {
         return;
     }
     work = g_Task;
-    if (work->direction_08 != 0) {
+    if (work->direction != 0) {
         if (abs(g_Game.members[0].pos.y.fixed - (TO_COORD(COORD_INT(work->pos.y) + 1) | COORD_HALF)) > TO_COORD(2)) {
             goto advance;
         }

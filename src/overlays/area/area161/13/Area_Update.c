@@ -4,5 +4,5 @@
 
 /* func_801F30D4 */
 MATCH void Area_Update(void) {
-    AREA_DRAW_FLOOR_QUAD((g_Task->direction_08 << 21) | 0x150010F | (g_Task->direction_08 == 0 ? 0x10000 : 0));
+    AREA_DRAW_FLOOR_QUAD((g_Task->direction << 21) | 0x150010F | (g_Task->direction == 0 ? 0x10000 : 0));
 }

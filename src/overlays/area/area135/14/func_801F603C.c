@@ -20,7 +20,7 @@ NON_MATCHING s32 func_801F603C(s32 x, s32 y) {
         dx = -dx;
     }
 
-    range = (g_Task->state_70.byte + D_80147C90 + 2) << 15;
+    range = (g_Task->voice_flags.scene_flag + D_80147C90 + 2) << 15;
     if (dx < range) {
         result = abs(dy) < range;
     }

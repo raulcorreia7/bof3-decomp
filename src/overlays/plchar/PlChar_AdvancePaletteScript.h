@@ -12,7 +12,7 @@ MATCH void PlChar_AdvancePaletteScript(void) {
     if (state != 0) {
         if (state == 2) {
             if (Actor_StepAnimOnce() & 0xFF) {
-                Actor_SelectScript(g_Task->direction_08);
+                Actor_SelectScript(g_Task->direction);
                 g_Task->param.unk_0B = 3;
             }
         } else {

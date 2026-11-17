@@ -7,7 +7,7 @@ MATCH void func_801D42E4(void) {
     FishingState* work;
     FishingState* advanced;
 
-    g_Task->direction_08 = FACING_UP_LEFT;
+    g_Task->direction    = FACING_UP_LEFT;
     g_Task->unk_06       = 0;
     g_Task->option_flags = ACTOR_OPT_NO_TARGET;
     g_Task->timer        = 4;

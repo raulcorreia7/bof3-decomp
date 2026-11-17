@@ -18,7 +18,7 @@ NON_MATCHING u8 func_801BDD58(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* rec
     if (dist < 0) {
         dist = -dist;
     }
-    reach += rec->state_70.byte;
+    reach += rec->voice_flags.scene_flag;
     if (dist > (reach << 7) + 0x100) {
         return 0;
     }

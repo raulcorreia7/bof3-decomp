@@ -15,7 +15,7 @@ MATCH void Area_Update(void) {
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetShadeTex(prim, 0);
-    if (g_Task->direction_08 != 0) {
+    if (g_Task->direction != 0) {
         g_ScratchPadVectors[0].vy = g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy = ((FIX_INT(g_Task->pos.y.fixed) - 0x80) << 7) | 0x40;
         bias    = FAKE_VOLATILE(u8, D_801F38CC[AREA_ROW_SCALE_OFFSET + g_Task->unk_0A]); /* FAKE: retail loads the scale unsigned and sign-extends it apart; the volatile read keeps the two steps. */
         product = g_Task->screen_y * bias;
@@ -40,6 +40,6 @@ MATCH void Area_Update(void) {
     g_ScratchPadVectors[2].vz = g_ScratchPadVectors[3].vz = (u16)g_Task->pos.z.part.integer;
     RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
                   &flag);
-    Area_ApplyTileToQuad((0x150 << 16) | 0x117 | (g_Task->direction_08 << 21) | ((g_Task->unk_0A ^ (g_Task->direction_08 == 0)) << 16), prim, 1);
+    Area_ApplyTileToQuad((0x150 << 16) | 0x117 | (g_Task->direction << 21) | ((g_Task->unk_0A ^ (g_Task->direction == 0)) << 16), prim, 1);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, -2, sizeof(POLY_FT4));
 }

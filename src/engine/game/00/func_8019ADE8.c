@@ -13,7 +13,7 @@ MATCH void func_8019ADE8(void) {
     s32              z;
     GameRouteRequest request;
 
-    g_Task->direction_08 = g_Game.members[0].facing & 0x7;
+    g_Task->direction = g_Game.members[0].facing & 0x7;
     Area_SelectSceneRecord(0x18);
     g_Task->unk_48       = 0;
     g_Task->active_flags = 0;
@@ -31,6 +31,6 @@ MATCH void func_8019ADE8(void) {
     work2->tint.bytes.rgb.r = 0;
     request.unk_04          = 3;
     request.unk_00          = 0;
-    Area_MoveActorRoute(&request, g_Task->direction_08);
+    Area_MoveActorRoute(&request, g_Task->direction);
     func_8019AF1C();
 }

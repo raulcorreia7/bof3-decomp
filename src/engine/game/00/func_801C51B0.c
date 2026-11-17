@@ -10,7 +10,7 @@ MATCH void func_801C51B0(void) {
     field                                            = work->unk_05;
     g_GfxPalettePending                              = 1;
     *(u16*)(MEM_PTR(u8, 0x8003963Eu) + (field << 6)) = 0;
-    route                                            = work->direction_08;
+    route                                            = work->direction;
     /* FAKE: barrier keeps saved ra from sinking below work load. */
     FAKE_BARRIER();
     index = 52;

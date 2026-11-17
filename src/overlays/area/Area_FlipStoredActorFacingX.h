@@ -4,9 +4,9 @@ MATCH void Area_FlipStoredActorFacingX(void) {
     Actor* actor;
 
     actor = SP_REF(Actor*, 0x44);
-    if (actor->direction_08 == FACING_LEFT) {
-        actor->direction_08 = FACING_RIGHT;
+    if (actor->direction == FACING_LEFT) {
+        actor->direction = FACING_RIGHT;
     } else {
-        actor->direction_08 = FACING_LEFT;
+        actor->direction = FACING_LEFT;
     }
 }

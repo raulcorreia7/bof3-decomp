@@ -17,8 +17,8 @@ MATCH s32 Area_GetActorFacingStepX(void) {
 
     work   = g_Task;
     found  = 0;
-    step_x = g_FacingSteps[work->direction_08].x;
-    step_y = g_FacingStepY[work->direction_08 * 2];
+    step_x = g_FacingSteps[work->direction].x;
+    step_y = g_FacingStepY[work->direction * 2];
     pos_x  = work->pos.x.fixed + step_x;
     pos_y  = work->pos.y.fixed + step_y;
     if (g_Game.flags & 0x1000) {
@@ -34,7 +34,7 @@ MATCH s32 Area_GetActorFacingStepX(void) {
     for (i = 0, offset = 0; i < 34; i++, offset += ACTOR_SIZE) {
         if (((u8*)g_Actors)[offset] != 0 && !((&D_8014688F)[offset] & 0x80)) {
             rec = (Actor*)((u8*)g_Actors + offset);
-            if (func_801BDD58(pos_x, pos_y, dist, g_Task->state_70.byte, rec) & BYTE_MASK) {
+            if (func_801BDD58(pos_x, pos_y, dist, g_Task->voice_flags.scene_flag, rec) & BYTE_MASK) {
                 found        = 1;
                 rec->roll_90 = FIELD(u16, D_80146918, offset) + 1;
             }

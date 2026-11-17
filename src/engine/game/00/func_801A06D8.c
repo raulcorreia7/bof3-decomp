@@ -18,15 +18,15 @@ MATCH u32 func_801A06D8(void) {
                 continue;
             }
             SP_REF(s8, 0x3) = 0;
-            if (row->timer == 0 && (g_Actors[i].interaction_flags & ACTOR_FLAG_SCRIPT_PENDING)) {
-                if (g_Actors[i].interaction_flags & ACTOR_FLAG_SCRIPT_REQUEST) {
+            if (row->timer == 0 && (g_Actors[i].interaction_flags & ACTOR_INTERACTION_SCRIPT_PENDING)) {
+                if (g_Actors[i].interaction_flags & ACTOR_INTERACTION_SCRIPT_REQUEST) {
                     if ((s8)func_801A17A0(&g_Actors[i].interaction_flags) && !(g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
-                        g_Actors[i].unk_79 = g_Task->direction_08 & 0x7;
+                        g_Actors[i].unk_79 = g_Task->direction & 0x7;
                         if (!(g_Task->option_flags & ACTOR_OPT_KEEP_FACING)) {
-                            g_Task->direction_08 = (g_Game.members[0].facing ^ 0x4) & 0x7;
-                            Actor_DispatchSelectorScript(g_Task->direction_08);
+                            g_Task->direction = (g_Game.members[0].facing ^ 0x4) & 0x7;
+                            Actor_DispatchSelectorScript(g_Task->direction);
                         } else {
-                            Actor_DispatchSelectorScript(g_Task->direction_08 & 0x7);
+                            Actor_DispatchSelectorScript(g_Task->direction & 0x7);
                         }
                         if (g_Task->header.mode == 0xA) {
                             g_Actors[i].unk_79 |= 1;
@@ -35,7 +35,7 @@ MATCH u32 func_801A06D8(void) {
                 } else {
                     func_801A18C8(row);
                 }
-            } else if (g_CurrentActor->interaction_flags & ACTOR_FLAG_INTERACTION_PENDING) {
+            } else if (g_CurrentActor->interaction_flags & ACTOR_INTERACTION_PENDING) {
                 func_801A3A08();
                 continue;
             } else if (g_Actors[i].roll_90 >= 0x1F && g_Task->timer == 0) {
@@ -48,9 +48,9 @@ MATCH u32 func_801A06D8(void) {
             }
             flags = g_Actors[i].interaction_flags;
             if (!(flags & 0x40)) {
-                if (flags & ACTOR_FLAG_MOVING) {
-                    Actor_DispatchSelectorScript(g_Task->direction_08);
-                    g_Actors[i].interaction_flags &= ~ACTOR_FLAG_MOVING;
+                if (flags & ACTOR_INTERACTION_MOVING) {
+                    Actor_DispatchSelectorScript(g_Task->direction);
+                    g_Actors[i].interaction_flags &= ~ACTOR_INTERACTION_MOVING;
                 } else if (!(g_Task->option_flags & ACTOR_OPT_WAIT_STREAM)) {
                     n = g_Actors[i].unk_78 - 2 < 0 ? 0 : g_Actors[i].unk_78 - 2;
                     j = 0;

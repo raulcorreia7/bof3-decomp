@@ -34,17 +34,17 @@ NON_MATCHING s32 func_801BB2B8(s32 x0, s32 y0, s32 x1, s32 y1) {
     work       = g_Task;
 
     if (COORD_FRAC(work->pos.x) == 0) {
-        if (work->state_70.byte == 0)
+        if (work->voice_flags.scene_flag == 0)
             hx0 = (hx0 + (xpack.w & -0x10000)) / 2;
-    } else if (work->state_70.byte != 0) {
+    } else if (work->voice_flags.scene_flag != 0) {
         hx0 = (hx0 + (xpack.w & -0x10000)) / 2;
     }
 
     work = g_Task;
     if (COORD_FRAC(work->pos.y) == 0) {
-        if (work->state_70.byte == 0)
+        if (work->voice_flags.scene_flag == 0)
             hy0 = (hy0 + (ypack.w & -0x10000)) / 2;
-    } else if (work->state_70.byte != 0) {
+    } else if (work->voice_flags.scene_flag != 0) {
         hy0 = (hy0 + (ypack.w & -0x10000)) / 2;
     }
 

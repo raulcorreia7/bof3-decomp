@@ -9,8 +9,8 @@ MATCH void func_801B76F4(void) {
     if ((s16)COORD_INT(g_Task->pos.z) < dist) {
         COORD_INT(g_Task->pos.z) = dist;
         if (g_Task->vz < -0x80) {
-            Actor_RequestScript((g_Task->direction_08 >> 1) + 0x34);
-        } else if (g_Task->direction_08 == FACING_RIGHT) {
+            Actor_RequestScript((g_Task->direction >> 1) + 0x34);
+        } else if (g_Task->direction == FACING_RIGHT) {
             Actor_RequestScript(0x38);
         } else {
             Actor_RequestScript(0x39);

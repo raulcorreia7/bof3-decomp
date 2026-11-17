@@ -9,7 +9,7 @@ MATCH void Actor_SetOptionFlags(u8* script) {
         g_Task->header.flags |= ACTOR_FLAG_HIDDEN;
     }
     if (script[0] & 0x4) {
-        g_CurrentActor->interaction_flags &= ~ACTOR_FLAG_SCRIPT_PENDING;
+        g_CurrentActor->interaction_flags &= ~ACTOR_INTERACTION_SCRIPT_PENDING;
     }
     if (script[0] & 0x40) {
         g_Task->unk_48 = 0;

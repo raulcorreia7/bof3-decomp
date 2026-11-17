@@ -9,7 +9,7 @@
 #define g_CurrentActor ((void*)g_CurrentActor)
 
 static inline void Area_BeginChoiceScript(u8 choice) {
-    ((Actor*)g_CurrentActor)->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;
+    ((Actor*)g_CurrentActor)->interaction_flags &= ~ACTOR_INTERACTION_PENDING;
     Game_SetScriptActive();
     g_ScriptVars[0]       = choice;
     g_SceneState.state_04 = 4;

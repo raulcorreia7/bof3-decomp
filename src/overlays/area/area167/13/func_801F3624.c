@@ -11,10 +11,10 @@ MATCH void func_801F3624(void) {
     s32    quad;
     s32    z;
 
-    work               = g_Task;
-    entry              = work->pos.x.part.integer;
-    pair               = entry * 2;
-    work->direction_08 = work->pos.y.part.integer == 0;
+    work            = g_Task;
+    entry           = work->pos.x.part.integer;
+    pair            = entry * 2;
+    work->direction = work->pos.y.part.integer == 0;
 
     cell                     = g_Task;
     cell->pos.x.part.integer = AREA167_ENTRY_TABLE(u8, 0x18, pair);

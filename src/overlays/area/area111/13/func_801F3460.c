@@ -11,7 +11,7 @@ NON_MATCHING void func_801F3460(void) {
     x = (g_Task->pos.x.part.integer - 11) >> 1;
     y = (g_Task->pos.y.part.integer - 177) >> 1;
     func_801F4604(x, y, 0x10);
-    facing = g_Task->direction_08 & 7;
+    facing = g_Task->direction & 7;
     offset = 0;
     for (;;) {
         x += D_80181B00[facing * 2];

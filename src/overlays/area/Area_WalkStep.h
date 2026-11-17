@@ -19,7 +19,7 @@
     }                                                                                                                       \
     value2           = g_EncounterSteps;                                                                                    \
     g_EncounterSteps = value2 + 1;                                                                                          \
-    value3           = g_Task->direction_08;                                                                                \
+    value3           = g_Task->direction;                                                                                   \
     if ((value3 == 2) || (value3 == 6)) {                                                                                   \
         g_EncounterSteps = value2 + 2;                                                                                      \
     }                                                                                                                       \

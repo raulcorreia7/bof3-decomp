@@ -73,7 +73,7 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
             } else {
                 *(u8*)g_Task &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
             }
-            g_Task->tint.signed_bytes.flags = (code + CUR(sub))[1] & 3;
+            g_Task->tint.steps.flags = (code + CUR(sub))[1] & 3;
             CUR(sub) += 1;
             break;
         case 0xC6:
@@ -94,24 +94,24 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
         case 0xC8:
             next = CUR(sub) + 2;
             cmd  = code + CUR(sub);
-            slot = g_Task->direction_08;
+            slot = g_Task->direction;
             if (slot != cmd[1]) {
                 target = cmd[2];
                 want   = slot + 1;
                 if (!(target & 0x80)) {
                     want = slot - 1;
                 }
-                g_Task->direction_08 = want & 7;
+                g_Task->direction = want & 7;
                 if (Actor_GetOwner() != 1) {
-                    Actor_DispatchSelectorScript(g_Task->direction_08);
+                    Actor_DispatchSelectorScript(g_Task->direction);
                 } else {
-                    Actor_SelectScript(g_Task->direction_08);
+                    Actor_SelectScript(g_Task->direction);
                 }
                 FIELD(s8, sub, 0x1u) = target & 0xF;
                 next                 = CUR(sub) - 1;
             }
             CUR(sub) = next;
-            value    = g_Task->direction_08;
+            value    = g_Task->direction;
             break;
         case 0xC9:
             g_Task->unk_2B = (code + CUR(sub))[1];
@@ -137,23 +137,23 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
             GFX_FreePaletteFadeTarget(g_Task);
             break;
         case 0xCE:
-            cur  = g_Task->direction_08 & 7;
+            cur  = g_Task->direction & 7;
             want = g_Game.members[0].facing ^ 4;
             if (cur != want) {
                 val = cur + 1;
                 if (((want - cur) << 0x18) <= 0) {
                     val = cur - 1;
                 }
-                g_Task->direction_08 = val & 7;
+                g_Task->direction = val & 7;
                 if (Actor_GetOwner() != 1) {
-                    Actor_DispatchSelectorScript(g_Task->direction_08);
+                    Actor_DispatchSelectorScript(g_Task->direction);
                 } else {
-                    Actor_SelectScript(g_Task->direction_08);
+                    Actor_SelectScript(g_Task->direction);
                 }
                 FIELD(s8, sub, 0x1u) = 2;
                 CUR(sub) -= 1;
             }
-            value = g_Task->direction_08;
+            value = g_Task->direction;
             break;
     }
     return value;

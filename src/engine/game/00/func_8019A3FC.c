@@ -33,14 +33,14 @@ MATCH void func_8019A3FC(void) {
 
     if (g_Task->unk_06 == 3) {
         g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-        work                            = g_Task;
-        work->tint.bytes.flags          = 1;
-        work                            = g_Task;
-        work->tint.signed_bytes.delta.b = -8;
-        work->tint.signed_bytes.delta.g = -8;
-        work->tint.signed_bytes.delta.r = -8;
-        work                            = g_Task;
-        work->timer                     = 20;
+        work                     = g_Task;
+        work->tint.bytes.flags   = 1;
+        work                     = g_Task;
+        work->tint.steps.delta.b = -8;
+        work->tint.steps.delta.g = -8;
+        work->tint.steps.delta.r = -8;
+        work                     = g_Task;
+        work->timer              = 20;
     } else {
         g_Task->tint.bytes.flags = 0;
         ptr                      = g_Task;

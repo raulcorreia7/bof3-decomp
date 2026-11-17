@@ -11,7 +11,7 @@ MATCH u8 func_8019EEE4(void) {
     distance = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     slot     = Actor_FindInRange(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0);
     if (slot != -1) {
-        g_Actors[slot].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;
+        g_Actors[slot].interaction_flags |= ACTOR_INTERACTION_PENDING;
         return true;
     }
     if (COORD_INT(g_Game.members[0].pos.z) - distance >= 129) {

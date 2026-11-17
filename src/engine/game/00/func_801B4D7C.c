@@ -129,9 +129,9 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
                     if (val1 >= 2) {
                         val1 = val6 & BYTE_MASK;
                         val7 = 1;
-                        if (!(func_801B4BE4((g_Task->direction_08 + 2) & 7, (u8)val1) & BYTE_MASK)) {
+                        if (!(func_801B4BE4((g_Task->direction + 2) & 7, (u8)val1) & BYTE_MASK)) {
                             val7 = 0;
-                            if (func_801B4BE4((g_Task->direction_08 - 2) & 7, (u8)val1) & BYTE_MASK) {
+                            if (func_801B4BE4((g_Task->direction - 2) & 7, (u8)val1) & BYTE_MASK) {
                                 goto block_32; /* retail branch */
                             }
                         }
@@ -202,12 +202,12 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
                                 }
                                 goto loop_74; /* retail branch */
                             }
-                            g_Task->direction_08 = FACING_RIGHT;
+                            g_Task->direction = FACING_RIGHT;
                             return 1U;
                         }
                         goto loop_71; /* retail branch */
                     }
-                    g_Task->direction_08 = FACING_LEFT;
+                    g_Task->direction = FACING_LEFT;
                     return 1U;
                 }
                 return val7;
@@ -274,12 +274,12 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
                             }
                             goto loop_50; /* retail branch */
                         }
-                        g_Task->direction_08 = FACING_DOWN;
+                        g_Task->direction = FACING_DOWN;
                         return 1U;
                     }
                     goto loop_47; /* retail branch */
                 }
-                g_Task->direction_08 = FACING_UP;
+                g_Task->direction = FACING_UP;
                 return 1U;
             }
             return val7;

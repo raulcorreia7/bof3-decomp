@@ -8,7 +8,7 @@ MATCH u8 func_8019CAB4(void) {
     work = g_Task;
     id   = Actor_FindInRange(work->pos.x.fixed, work->pos.y.fixed, 0);
     if (id != -1) {
-        g_Actors[id].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;
+        g_Actors[id].interaction_flags |= ACTOR_INTERACTION_PENDING;
         return 1;
     }
     if (COORD_INT(g_Game.members[0].pos.z) + 64 < Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed)) {

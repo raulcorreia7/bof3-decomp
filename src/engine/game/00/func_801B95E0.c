@@ -5,7 +5,7 @@
 #define PAD_A          SP_REF(u8, 0x8)
 #define PAD_B          SP_REF(u8, 0x9)
 #define PAD_C          SP_REF(u8, 0xA)
-#define WDIR           g_Task->direction_08
+#define WDIR           g_Task->direction
 
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801B95E0(void) {
@@ -51,7 +51,7 @@ NON_MATCHING s32 func_801B95E0(void) {
                         } else if (PAD_C == 0x10) {
                             Actor_SnapFacing(4, 6, 5);
                         } else {
-                            g_Task->direction_08 = (WDIR + 1) & 7;
+                            g_Task->direction = (WDIR + 1) & 7;
                         }
                     }
                     if (!(g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP)) {
@@ -156,7 +156,7 @@ NON_MATCHING s32 func_801B95E0(void) {
         goto diag_south;
     }
     if (COORD_FRAC(g_Task->pos.y) == 0) {
-        if (g_Task->direction_08 & 2) {
+        if (g_Task->direction & 2) {
             return 3;
         }
         v     = func_801B9F08(2, 4, 0);

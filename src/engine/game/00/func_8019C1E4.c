@@ -6,7 +6,7 @@ MATCH s32 func_8019C1E4(void) {
     s32    y;
 
     work = g_Task;
-    x    = work->pos.x.fixed + g_FacingSteps[work->direction_08].x * 2;
-    y    = work->pos.y.fixed + g_FacingStepY[work->direction_08 * 2] * 2;
+    x    = work->pos.x.fixed + g_FacingSteps[work->direction].x * 2;
+    y    = work->pos.y.fixed + g_FacingStepY[work->direction * 2] * 2;
     return Area_GetVx(x, y) & BYTE_MASK;
 }

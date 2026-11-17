@@ -21,7 +21,7 @@ MATCH s32 func_801C4E14(void) {
         }
     } else {
         inactive = 1;
-        Actor_RequestScript(work->direction_08);
+        Actor_RequestScript(work->direction);
         g_Task->unk_0A = 4U;
     }
     Actor_StepAnimLoop();

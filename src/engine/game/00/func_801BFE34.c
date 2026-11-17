@@ -34,8 +34,8 @@ MATCH void func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode) {
             *(s32*)((u8*)g_EncounterParty + kind)       = g_Task->pos.x.fixed;
             *(s32*)((u8*)&g_EncounterParty[0].y + kind) = g_Task->pos.y.fixed;
             g_Task->unk_48                              = 0;
-            g_Task->direction_08                        = s_RouteIndexByMode[g_Battle.scroll_dir];
-            Actor_RequestScript(g_Task->direction_08);
+            g_Task->direction                           = s_RouteIndexByMode[g_Battle.scroll_dir];
+            Actor_RequestScript(g_Task->direction);
             offset += BATTLE_PARTY_STRIDE;
             count += 1;
         } while (count < g_Game.party_size);

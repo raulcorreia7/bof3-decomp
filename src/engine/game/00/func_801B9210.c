@@ -15,7 +15,7 @@ MATCH void func_801B9210(void) {
     if ((g_Task->pos.x.fixed & 0x7FFF) != 0 || (g_Task->pos.y.fixed & 0x7FFF) != 0) {
         g_Task->pos.x.fixed      = (g_Task->pos.x.fixed + 0x4800) & ~0x7FFF;
         g_Task->pos.y.fixed      = (g_Task->pos.y.fixed + 0x4800) & ~0x7FFF;
-        COORD_INT(g_Task->pos.z) = Area_ReadStepHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->direction_08);
+        COORD_INT(g_Task->pos.z) = Area_ReadStepHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->direction);
         if (g_Task->unk_05 == 0) {
             v                   = g_Task->pos.x.fixed;
             g_AreaScrollTargetX = v;
@@ -24,9 +24,9 @@ MATCH void func_801B9210(void) {
             Area_InitMapRenderer();
         }
     }
-    saved                = g_Task->direction_08;
-    g_Task->direction_08 = saved ^ 0x4;
-    mode                 = func_801B9598();
+    saved             = g_Task->direction;
+    g_Task->direction = saved ^ 0x4;
+    mode              = func_801B9598();
     if (mode == 1 || mode == 3) {
         if ((Area_GetActorFacingStepX() << 24) != 0) {
             g_Task->timer = 0;
@@ -40,9 +40,9 @@ MATCH void func_801B9210(void) {
         Actor_ClearVelocity();
     }
     Char_SetCharacterId(g_Task->param.unk_0B);
-    g_Task->direction_08 = saved;
-    g_Task->unk_0A       = 8;
-    Actor_RequestScript(g_Task->direction_08);
+    g_Task->direction = saved;
+    g_Task->unk_0A    = 8;
+    Actor_RequestScript(g_Task->direction);
     SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 8));
     g_Task->unk_03++;
 }

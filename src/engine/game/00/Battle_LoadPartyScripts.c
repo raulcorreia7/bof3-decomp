@@ -62,7 +62,7 @@ found:
                 }
             } else {
                 rec[0x08] = (sel + rec[0x0B]) & 0x7;
-                Actor_StageScript(g_Task->direction_08, 0, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0xA00);
+                Actor_StageScript(g_Task->direction, 0, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0xA00);
             }
             Actor_StepAnimLoop();
         }

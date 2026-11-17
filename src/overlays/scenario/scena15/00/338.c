@@ -202,8 +202,8 @@ MATCH void func_801F7920(void) {
     u8*    counter;
 
     work = g_Task;
-    if (work->tint.signed_bytes.delta.r != 0) {
-        work->tint.signed_bytes.delta.r -= 2;
+    if (work->tint.steps.delta.r != 0) {
+        work->tint.steps.delta.r -= 2;
         g_Task->tint.bytes.rgb.g -= 2;
         g_Task->tint.bytes.rgb.b -= 2;
     } else {
@@ -304,8 +304,8 @@ MATCH void func_801F7D1C(void) {
     } else {
         func_801F83AC(&pos);
         g_Task->timer += 8;
-        g_Task->tint.signed_bytes.delta.r = rsin(g_Task->timer << 4) >> 7;
-        g_Task->tint.signed_bytes.delta.g = rcos(g_Task->timer << 4) >> 7;
+        g_Task->tint.steps.delta.r = rsin(g_Task->timer << 4) >> 7;
+        g_Task->tint.steps.delta.g = rcos(g_Task->timer << 4) >> 7;
         func_801F7FFC(pos.x, pos.y);
     }
 }
@@ -314,18 +314,18 @@ MATCH void func_801F7E2C(void) {
     Pos2u pos;
 
     func_801F83AC(&pos);
-    if (g_Task->tint.signed_bytes.delta.r < 0x70) {
-        g_Task->tint.signed_bytes.delta.r += 2;
+    if (g_Task->tint.steps.delta.r < 0x70) {
+        g_Task->tint.steps.delta.r += 2;
     }
-    if (g_Task->tint.signed_bytes.delta.g < 0x30) {
-        g_Task->tint.signed_bytes.delta.g += 1;
+    if (g_Task->tint.steps.delta.g < 0x30) {
+        g_Task->tint.steps.delta.g += 1;
     }
     func_801F81D8(pos.x, pos.y);
     if (g_GameStateIndex == 3 || g_GameStateIndex == 1) {
         g_Actors[g_Task->param.actor_slot].active_flags &= 0xF7;
         g_Task->header.mode = 0;
     }
-    if ((g_Task->tint.word & 0xFFFF00) == 0x307000) {
+    if ((g_Task->tint.raw & 0xFFFF00) == 0x307000) {
         g_Task->unk_06      = 0;
         g_Task->header.mode = 1;
     }
@@ -335,14 +335,14 @@ MATCH void func_801F7F5C(void) {
     Pos2u pos;
 
     func_801F83AC(&pos);
-    if (g_Task->tint.signed_bytes.delta.r != 0) {
-        g_Task->tint.signed_bytes.delta.r -= 2;
+    if (g_Task->tint.steps.delta.r != 0) {
+        g_Task->tint.steps.delta.r -= 2;
     }
-    if (g_Task->tint.signed_bytes.delta.g != 0) {
-        g_Task->tint.signed_bytes.delta.g -= 1;
+    if (g_Task->tint.steps.delta.g != 0) {
+        g_Task->tint.steps.delta.g -= 1;
     }
     func_801F81D8(pos.x, pos.y);
-    if ((g_Task->tint.word & 0xFFFF00) == 0) {
+    if ((g_Task->tint.raw & 0xFFFF00) == 0) {
         Actor_Clear();
     }
 }
@@ -426,8 +426,8 @@ MATCH void func_801F8548(void) {
     u8*    counter;
 
     work = g_Task;
-    if (work->tint.signed_bytes.delta.r < 0x7C) {
-        work->tint.signed_bytes.delta.r += 4;
+    if (work->tint.steps.delta.r < 0x7C) {
+        work->tint.steps.delta.r += 4;
         g_Task->tint.bytes.rgb.g += 4;
         g_Task->tint.bytes.rgb.b += 4;
     } else {
@@ -447,8 +447,8 @@ MATCH void func_801F85F0(void) {
 MATCH void func_801F8618(void) {
     u8 i;
 
-    if (g_Task->tint.signed_bytes.delta.r != 0) {
-        g_Task->tint.signed_bytes.delta.r -= 2;
+    if (g_Task->tint.steps.delta.r != 0) {
+        g_Task->tint.steps.delta.r -= 2;
         g_Task->tint.bytes.rgb.g -= 2;
         g_Task->tint.bytes.rgb.b -= 2;
     } else {
@@ -469,7 +469,7 @@ MATCH void func_801F8704(void) {
     u8           i;
 
     actor = g_Task;
-    shade = -((s8)actor->tint.bytes.rgb.r / 2); /* kept: retail sign-extends the u8 load (lbu, sll, sra); signed_bytes emits lb. */
+    shade = -((s8)actor->tint.bytes.rgb.r / 2); /* kept: retail sign-extends the u8 load (lbu, sll, sra); steps emits lb. */
     for (i = 0; i < g_PartySize; i++) {
         if (g_Game.members[i].chr.character_id != CHAR_ID_RYU_ADULT) {
             member                   = &g_Game.members[i];
@@ -502,12 +502,12 @@ MATCH void func_801F8874(void) {
         g_Task->tint.bytes.rgb.g += 8;
         g_Task->tint.bytes.rgb.b += 8;
     } else {
-        work->tint.signed_bytes.delta.b = -1;
-        work->tint.signed_bytes.delta.g = -1;
-        work->tint.signed_bytes.delta.r = -1;
-        counter                         = &g_SceneState.step_05;
-        *counter                        = *counter + 1;
-        g_Task->header.mode             = 2;
+        work->tint.steps.delta.b = -1;
+        work->tint.steps.delta.g = -1;
+        work->tint.steps.delta.r = -1;
+        counter                  = &g_SceneState.step_05;
+        *counter                 = *counter + 1;
+        g_Task->header.mode      = 2;
     }
     func_801F79C4();
     func_801F8958();

@@ -17,7 +17,7 @@ MATCH void func_801F4270(void) {
                 g_Task->header.step = 0;
                 func_801ABD68(x, y, 16, g_ScriptState);
                 g_ScriptState->unk_07 = 1;
-                g_Task->direction_08  = D_801F6ABC[index].direction;
+                g_Task->direction     = D_801F6ABC[index].direction;
                 if ((u8*)g_Task == (u8*)&g_Game) {
                     g_AreaScrollTargetX = x;
                     g_AreaScrollTargetY = y;

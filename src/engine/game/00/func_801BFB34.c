@@ -64,14 +64,14 @@ NON_MATCHING void func_801BFB34(void) {
             member         = &g_Game.members[i];
             g_Game.current = member;
             TASK_SET(member);
-            g_Task->direction_08           = s_RouteIndexByMode[g_Battle.scroll_dir];
+            g_Task->direction              = s_RouteIndexByMode[g_Battle.scroll_dir];
             ((PartyMember*)g_Task)->unk_29 = 6;
             if (i != 0) {
                 ((PartyMember*)g_Task)->unk_07 = 0;
                 ((PartyMember*)g_Task)->pad_06 = ((PartyMember*)g_Task)->slot - 1;
             }
             func_801C3204();
-            Actor_SelectScript(g_Task->direction_08);
+            Actor_SelectScript(g_Task->direction);
         }
     } else {
         Scene_SetupParty(g_Game.battle_order);

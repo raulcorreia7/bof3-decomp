@@ -24,7 +24,7 @@ MATCH void func_801BD394(void) {
     x     = slot->pos.x.fixed + slot->vx * count;
     y     = slot->pos.y.fixed + slot->vy * count;
     range = TO_COORD(1) + COORD_HALF;
-    if (slot->state_70.byte != 0) {
+    if (slot->voice_flags.scene_flag != 0) {
         range = TO_COORD(2);
     }
     dx = work->pos.x.fixed - x;
@@ -44,7 +44,7 @@ MATCH void func_801BD394(void) {
         D_801CD1D8[g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK]();
     }
     if (g_Game.current->u.field.mode_12B.u8_value == 0) {
-        Actor_RequestScript(g_Task->direction_08);
+        Actor_RequestScript(g_Task->direction);
         g_Task->timer = 0;
         Party_ClearBattlerState(g_Task->unk_05);
         g_Task->header.mode  = 1;

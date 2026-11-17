@@ -7,7 +7,7 @@ MATCH void func_801F3F08(void) {
     scratch = g_Task;
     scratch->screen_y -= 0x10;
     if ((s16)scratch->screen_y <= 0) {
-        SYS_SetFlag(g_SceneEventFlags, scratch->direction_08);
+        SYS_SetFlag(g_SceneEventFlags, scratch->direction);
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 1));
         }

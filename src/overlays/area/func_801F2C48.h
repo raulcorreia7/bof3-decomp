@@ -2,7 +2,7 @@
  * is the row offset of the far side. The caller declares `row` and `screen_y`. */
 #define AREA_ENTRY_CELL_AWAY_STEP(screen_y_value, edge)                                                                    \
     row = g_Task;                                                                                                          \
-    if (row->direction_08 != 0) {                                                                                          \
+    if (row->direction != 0) {                                                                                             \
         if (abs(g_Game.members[0].pos.y.fixed - ((((s32)COORD_INT(row->pos.y) + (edge)) << 16) | 0x8000)) <= COORD_HALF) { \
             if (abs(g_Game.members[0].pos.x.fixed - ((s32)COORD_INT(row->pos.x) << 16)) <= TO_COORD(1) ||                  \
                 abs(g_Game.members[0].pos.x.fixed - (((s32)COORD_INT(row->pos.x) + 1) << 16)) <= TO_COORD(1)) {            \
@@ -36,7 +36,7 @@
     work                     = g_Task;                                      \
     entry                    = work->pos.x.part.integer;                    \
     pair                     = entry * 2;                                   \
-    work->direction_08       = work->pos.y.part.integer == 0;               \
+    work->direction          = work->pos.y.part.integer == 0;               \
     cell                     = g_Task;                                      \
     cell->pos.x.part.integer = AREA_PAYLOAD_FIELD(payload, u8, 0x14, pair); \
     cell->pos.y.part.integer = AREA_PAYLOAD_FIELD(payload, u8, 0x15, pair); \

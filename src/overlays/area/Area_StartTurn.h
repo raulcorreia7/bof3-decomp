@@ -19,14 +19,14 @@ MATCH u8 Area_StartTurn(s32 direction, s32 previous) {
     }
     if (current != target) {
         if (target < current) {
-            g_Task->vz           = -0x40;
-            g_Task->direction_08 = g_Task->direction_08 - 1;
+            g_Task->vz        = -0x40;
+            g_Task->direction = g_Task->direction - 1;
         } else {
-            g_Task->vz           = 0x40;
-            g_Task->direction_08 = g_Task->direction_08 + 1;
+            g_Task->vz        = 0x40;
+            g_Task->direction = g_Task->direction + 1;
         }
-        g_Task->direction_08 &= 7;
-        g_Game.members[0].facing = g_Task->direction_08;
+        g_Task->direction &= 7;
+        g_Game.members[0].facing = g_Task->direction;
         g_Task->timer            = 8;
         Area_UpdateTurn();
         g_Task->header.mode = 2;

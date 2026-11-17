@@ -6,7 +6,7 @@ MATCH void func_801F2EC0(void) {
     u8 i;
 
     if ((COORD_INT(g_Task->pos.x) == 8) && ((s16)g_Task->screen_x == 0x20)) {
-        g_Task->tint.signed_bytes.delta.r = -0x80;
+        g_Task->tint.steps.delta.r = -0x80;
     }
     /* FAKE: func_801F31EC reads two arguments; the shared area prototype gives none. */
     ((void (*)(s32, s32))func_801F31EC)(130, 10);

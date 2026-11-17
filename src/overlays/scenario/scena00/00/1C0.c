@@ -69,7 +69,7 @@ MATCH void func_801F6E04(void) {
 
     work  = SCN_EFFECT;
     index = work->channel_18;
-    value = ((Actor*)D_80147A58)[index].range_54.word;
+    value = ((Actor*)D_80147A58)[index].range_54.raw;
 
     work->step   = 1;
     work->unk_54 = value;

@@ -9,13 +9,13 @@ MATCH bool func_801A3AC8(Actor* record) {
     s32    pos_y;
 
     rec   = record;
-    route = rec->direction_08 & 0x7;
+    route = rec->direction & 0x7;
     pos_x = rec->pos.x.fixed + g_FacingSteps[route].x;
     x     = pos_x;
     pos_y = rec->pos.y.fixed + g_FacingStepY[route * 2];
     y     = pos_y;
-    if (Actor_FindInRange(x, y, g_Task->state_70.byte) == -1) {
-        return Game_GetPartySize(x, y, g_Task->state_70.byte) != -1;
+    if (Actor_FindInRange(x, y, g_Task->voice_flags.scene_flag) == -1) {
+        return Game_GetPartySize(x, y, g_Task->voice_flags.scene_flag) != -1;
     }
     return 1;
 }

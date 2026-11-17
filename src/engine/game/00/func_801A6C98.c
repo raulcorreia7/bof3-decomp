@@ -30,12 +30,12 @@ MATCH void func_801A6C98(u8* record) {
     Actor*       tail;
     Actor*       entry;
 
-    script               = record;
-    off                  = script[9] * 8;
-    g_Task               = &D_80147A58[script[0xB]];
-    g_CurrentActor       = &D_80147A58[script[0xB]];
-    src                  = *(u8**)((u8*)g_AreaLoads[g_GameAreaId] + 8) + off;
-    g_Task->direction_08 = script[0] & 0xF;
+    script            = record;
+    off               = script[9] * 8;
+    g_Task            = &D_80147A58[script[0xB]];
+    g_CurrentActor    = &D_80147A58[script[0xB]];
+    src               = *(u8**)((u8*)g_AreaLoads[g_GameAreaId] + 8) + off;
+    g_Task->direction = script[0] & 0xF;
 
     Actor_ResetMotion();
     func_801A4B80(script[0xB]);
@@ -56,16 +56,16 @@ MATCH void func_801A6C98(u8* record) {
     COORD_INT(g_Task->pos.z) = Area_SampleHeight(work->pos.x.fixed, y);
     data                     = (SpawnScript*)script;
 
-    work                = g_Task;
-    work->header.mode   = data->mode;
-    g_Task->header.step = data->step;
-    g_Task->unk_06      = (data->unk_00 >> 4) - 1;
-    tail                = g_Task;
-    shared              = tail->range_54.table;
-    tail->gravity       = 0;
-    tail->unk_1C        = 0;
-    tail->unk_18        = 0;
-    tail->state_70.word = *(u8*)((u8*)shared + 2);
+    work                  = g_Task;
+    work->header.mode     = data->mode;
+    g_Task->header.step   = data->step;
+    g_Task->unk_06        = (data->unk_00 >> 4) - 1;
+    tail                  = g_Task;
+    shared                = tail->range_54.table;
+    tail->gravity         = 0;
+    tail->unk_1C          = 0;
+    tail->unk_18          = 0;
+    tail->voice_flags.raw = *(u8*)((u8*)shared + 2);
 
     index                          = data->index;
     entry                          = &D_80147A58[index];
@@ -78,8 +78,8 @@ MATCH void func_801A6C98(u8* record) {
     D_80147A58[data->index].unk_94 = 0x7F;
 
     Actor_SetOptionFlags((u8*)data + 8);
-    g_Task->tint.signed_bytes.delta.r = -0x80;
-    g_Task->tint.signed_bytes.delta.b = -0x80;
-    g_Task->tint.signed_bytes.delta.g = -0x80;
-    g_Task->tint.bytes.flags          = 2;
+    g_Task->tint.steps.delta.r = -0x80;
+    g_Task->tint.steps.delta.b = -0x80;
+    g_Task->tint.steps.delta.g = -0x80;
+    g_Task->tint.bytes.flags   = 2;
 }

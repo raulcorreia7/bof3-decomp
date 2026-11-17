@@ -81,16 +81,16 @@
 /* Run the gated cell test and arm the work record on a hit. Kept: it returns
  * from the member and takes the flag value after a branch; tested as an inline,
  * the bytes move. */
-#define GAME_ARM_WORK_ON_CELL_HIT(code, new_step)                                                                             \
-    if ((g_Game.flags & 0x400) == 0) {                                                                                        \
-        if ((Game_TestMapCells(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->state_70.byte, code, 0) & BYTE_MASK) != 0) { \
-            g_Task->header.mode = 2;                                                                                          \
-            g_Task->header.step = new_step;                                                                                   \
-            g_Task->unk_03      = 0;                                                                                          \
-            g_Task->unk_04      = 0;                                                                                          \
-            return 1;                                                                                                         \
-        }                                                                                                                     \
-    }                                                                                                                         \
+#define GAME_ARM_WORK_ON_CELL_HIT(code, new_step)                                                                                      \
+    if ((g_Game.flags & 0x400) == 0) {                                                                                                 \
+        if ((Game_TestMapCells(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->voice_flags.scene_flag, code, 0) & BYTE_MASK) != 0) { \
+            g_Task->header.mode = 2;                                                                                                   \
+            g_Task->header.step = new_step;                                                                                            \
+            g_Task->unk_03      = 0;                                                                                                   \
+            g_Task->unk_04      = 0;                                                                                                   \
+            return 1;                                                                                                                  \
+        }                                                                                                                              \
+    }                                                                                                                                  \
     return 0;
 
 /* Test the map cells around a 16.16 point for the wanted code. Kept: the two

@@ -32,7 +32,7 @@ NON_MATCHING void func_801F2C48(void) {
         actor->active_flags |= 0x88;
         parent = g_Task;
         g_Task = actor;
-        Actor_SelectScript(actor->direction_08);
+        Actor_SelectScript(actor->direction);
         Area_AddGridActor();
         Actor_Clear();
         g_Task        = parent;

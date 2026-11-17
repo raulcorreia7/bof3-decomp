@@ -16,7 +16,7 @@ MATCH void func_801B036C(void) {
             g_Task->option_flags = 0;
             g_Task->unk_0A       = 2;
             g_Task->param.unk_0B = 0;
-            Actor_RequestRoute(g_Task->direction_08);
+            Actor_RequestRoute(g_Task->direction);
             g_Task->header.step = 1;
         }
     }

@@ -38,7 +38,7 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                         obj   = g_AreaLoads[g_GameAreaId];
                         table = FIELD(ObjectFunc*, obj, 0x3Cu);
                         table[base[state->cursor + 1]](obj);
-                        sel = g_Task->direction_08;
+                        sel = g_Task->direction;
                         state->cursor += 2;
                         break;
                     case 4:

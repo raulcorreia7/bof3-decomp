@@ -11,7 +11,7 @@ NON_MATCHING void func_801F3BC0(void) {
     offset = 0;
     x      = (g_Task->pos.x.part.integer - 11) >> 1;
     y      = (g_Task->pos.y.part.integer - 177) >> 1;
-    facing = g_Task->direction_08 & 7;
+    facing = g_Task->direction & 7;
     for (;;) {
         x += D_80181B00[facing * 2];
         if ((u8)x >= 7) {
@@ -33,7 +33,7 @@ NON_MATCHING void func_801F3BC0(void) {
     }
     if (offset) {
         g_ScriptState->unk_07 = offset + 1;
-        Area_SetFacingOffsetX(g_Task->direction_08);
+        Area_SetFacingOffsetX(g_Task->direction);
         g_AreaCameraHeightStep = 0;
         g_ScriptState->flag_00 |= 0x40;
         g_Task->vz               = 0;

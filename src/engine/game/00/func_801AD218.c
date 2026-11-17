@@ -9,10 +9,10 @@ MATCH void func_801AD218(void) {
         return;
     }
     if ((work->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
-        Actor_DispatchSelectorScript(work->direction_08);
+        Actor_DispatchSelectorScript(work->direction);
     }
     area = GAME_WORK_AREA_PTR;
-    area->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;
+    area->interaction_flags &= ~ACTOR_INTERACTION_PENDING;
     g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
     area         = g_Task;
     area->unk_04 = 0;

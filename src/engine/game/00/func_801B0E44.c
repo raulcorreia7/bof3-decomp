@@ -13,21 +13,21 @@ NON_MATCHING u8 func_801B0E44(void) {
     /* FAKE: retail's frame is 16 bytes larger than the statements need. */
     FAKE_STACK_PADS(s32, 16);
 
-    saved_dir = g_Task->direction_08;
+    saved_dir = g_Task->direction;
     result    = func_801B9598();
-    if ((g_Task->direction_08 == FACING_UP_RIGHT) || (g_Task->direction_08 == FACING_DOWN_LEFT)) {
+    if ((g_Task->direction == FACING_UP_RIGHT) || (g_Task->direction == FACING_DOWN_LEFT)) {
         g_Task->timer = 32;
     } else {
         g_Task->timer = 16;
     }
     divisor       = g_RouteSpeedScale[g_Game.current->u.field.counter_11C.u8_value];
     g_Task->timer = (u8)(g_Task->timer / (u32)(divisor & BYTE_MASK));
-    if (g_Task->state_70.byte == 0) {
-        SP_REF(s32, 0x8) = g_Task->pos.x.fixed + g_FacingOffsets[g_Task->direction_08].x * divisor * g_Task->timer;
-        SP_REF(s32, 0xC) = g_Task->pos.y.fixed + g_FacingOffsets[g_Task->direction_08].y * divisor * g_Task->timer;
+    if (g_Task->voice_flags.scene_flag == 0) {
+        SP_REF(s32, 0x8) = g_Task->pos.x.fixed + g_FacingOffsets[g_Task->direction].x * divisor * g_Task->timer;
+        SP_REF(s32, 0xC) = g_Task->pos.y.fixed + g_FacingOffsets[g_Task->direction].y * divisor * g_Task->timer;
     } else {
-        SP_REF(s32, 0x8) = g_Task->pos.x.fixed + g_FacingOffsets[g_Task->direction_08].x * divisor * g_Task->timer * 2;
-        SP_REF(s32, 0xC) = g_Task->pos.y.fixed + g_FacingOffsets[g_Task->direction_08].y * divisor * g_Task->timer * 2;
+        SP_REF(s32, 0x8) = g_Task->pos.x.fixed + g_FacingOffsets[g_Task->direction].x * divisor * g_Task->timer * 2;
+        SP_REF(s32, 0xC) = g_Task->pos.y.fixed + g_FacingOffsets[g_Task->direction].y * divisor * g_Task->timer * 2;
     }
     if (g_GameStateIndex != GAME_REQUEST_SCENE_CAMERA) {
         if (((s32 (*)(s32, s32))Area_IsStepBlocked)(SP_REF(s32, 0x8), SP_REF(s32, 0xC)) != 0) {
@@ -40,16 +40,16 @@ NON_MATCHING u8 func_801B0E44(void) {
     switch (result & BYTE_MASK) {
         case 2:
             pos2   = (s32*)&D_1F800008;
-            result = Area_ReadStepHeight(*(s32*)&D_1F800008, SP_REF(s32, 0xC), g_Task->direction_08);
+            result = Area_ReadStepHeight(*(s32*)&D_1F800008, SP_REF(s32, 0xC), g_Task->direction);
             func_801B13BC();
             if (((u8*)pos2)[-8] != 0) {
                 if (result >= 0x41) {
                     if (!(func_801A0048(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK) && (g_Task == (void*)g_Game.members)) {
                         if (Area_SetCellPalette(D_80145EC6, D_80145ECA) & BYTE_MASK) {
                             SND_PlaySE(D_801CD0F4[((u8*)pos2)[-7]]);
-                            Actor_RequestScript((g_Task->direction_08 >> 1) + 0x10);
+                            Actor_RequestScript((g_Task->direction >> 1) + 0x10);
                         } else {
-                            Actor_RequestScript(g_Task->direction_08);
+                            Actor_RequestScript(g_Task->direction);
                         }
                         g_GameStateIndex = GAME_REQUEST_AREA_CHANGE;
                     }
@@ -79,11 +79,11 @@ NON_MATCHING u8 func_801B0E44(void) {
             return 0;
         case 3:
             pos3   = (s32*)&D_1F800008;
-            result = Area_ReadStepHeight(pos3[0], pos3[1], g_Task->direction_08);
+            result = Area_ReadStepHeight(pos3[0], pos3[1], g_Task->direction);
             if (SP_REF(u8, 0x0) != 0) {
                 if (result >= 0x41) {
-                    g_AreaCameraStep     = 0;
-                    g_Task->direction_08 = saved_dir;
+                    g_AreaCameraStep  = 0;
+                    g_Task->direction = saved_dir;
                     return 1;
                 }
                 Area_ReadHeight(pos3[0], pos3[1]);

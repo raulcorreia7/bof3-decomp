@@ -22,11 +22,11 @@ MATCH void func_801C5558(void) {
 
     work                   = g_Task;
     count                  = COORD_INT(work->pos.z) + 16;
-    route                  = work->direction_08;
+    route                  = work->direction;
     COORD_INT(work->pos.z) = count;
 
     work   = g_Task;
-    step   = work->state_70.byte + 2;
+    step   = work->voice_flags.scene_flag + 2;
     /* FAKE: non-const view of the step table on the first read keeps retail's store order. */
     offs_x = (*(Offset2(*)[8])g_FacingSteps)[route].x * step;
     offs_y = g_FacingSteps[route].y * step;

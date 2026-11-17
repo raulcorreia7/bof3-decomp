@@ -84,18 +84,18 @@ MATCH void func_80161454(u32 index) {
         }
     }
     val4 = 8;
-    if (((s32)g_Task->state_70.word & 0x0FFFFF00) == 0x0FFFFF00) {
+    if (((s32)g_Task->voice_flags.raw & 0x0FFFFF00) == 0x0FFFFF00) {
         g_Task->header.flags &= 0xF7;
-        g_Task->state_70.word &= 0xF00000FF;
+        g_Task->voice_flags.raw &= 0xF00000FF;
         return;
     }
     do {
-        q    = ((s32)g_Task->state_70.word >> val4) & 0x1F;
+        q    = ((s32)g_Task->voice_flags.raw >> val4) & 0x1F;
         tmp4 = q;
         if (q != 0x1F) {
             val8 = SPU_KEYCH(tmp4);
             if (SpuGetKeyStatus(val8) == SPU_OFF) {
-                g_Task->state_70.word |= 0x1F << val4;
+                g_Task->voice_flags.raw |= 0x1F << val4;
             } else {
                 val3 |= val8;
             }

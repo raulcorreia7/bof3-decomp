@@ -5,8 +5,8 @@ MATCH void func_801B8A0C(void) {
 
     g_Game.current->u.field.counter_11C.s8_value = 3;
     work                                         = g_Task;
-    work->direction_08                           = work->param.unk_0B;
-    Actor_RequestScript(g_Task->direction_08);
+    work->direction                              = work->param.unk_0B;
+    Actor_RequestScript(g_Task->direction);
     g_Game.current->u.field.mode_12B.s8_value = 0;
     g_Task->header.mode                       = 1;
     g_Task->header.step                       = 0;

@@ -14,7 +14,7 @@ MATCH void func_801B7FE0(void) {
         store->timer            = 2;
         COORD_INT(store->pos.z) = value;
         g_Task->unk_0A          = 0;
-        Actor_RequestScript((g_Task->direction_08 == FACING_RIGHT) ? 7 : 1);
+        Actor_RequestScript((g_Task->direction == FACING_RIGHT) ? 7 : 1);
         g_Task->unk_04 = 9;
     }
     Actor_StepAnimLoop();

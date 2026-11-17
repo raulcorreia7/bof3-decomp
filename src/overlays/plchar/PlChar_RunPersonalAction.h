@@ -24,7 +24,7 @@ MATCH void PlChar_RunPersonalAction(void) {
                 if (CHAR_PERSONAL_ACTION_HAS_CUE) {
                     SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 11));
                 }
-                direction                    = g_Task->direction_08;
+                direction                    = g_Task->direction;
                 g_SpawnedActors[slot].unk_0A = 1;
                 g_SpawnedActors[slot].unk_08 = direction;
                 if (!CHAR_PERSONAL_ACTION_HAS_CUE) {
@@ -33,11 +33,11 @@ MATCH void PlChar_RunPersonalAction(void) {
                 g_Task->unk_06 = slot;
                 g_Task->unk_03++;
             } else {
-                x   = g_Task->pos.x.fixed + g_FacingSteps[g_Task->direction_08].x * 2;
-                y   = g_Task->pos.y.fixed + g_FacingStepY[g_Task->direction_08 * 2] * 2;
+                x   = g_Task->pos.x.fixed + g_FacingSteps[g_Task->direction].x * 2;
+                y   = g_Task->pos.y.fixed + g_FacingStepY[g_Task->direction * 2] * 2;
                 hit = Actor_FindInRange(x, y, 0);
                 if (hit != slot) {
-                    g_Actors[hit].interaction_flags |= ACTOR_FLAG_INTERACTION_PENDING;
+                    g_Actors[hit].interaction_flags |= ACTOR_INTERACTION_PENDING;
                     SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 11));
                 }
                 cell_x = x >> 16;

@@ -25,7 +25,7 @@ MATCH bool func_801B544C(void) {
     if (!(found & BYTE_MASK)) {
         if RANDOM_MASK (1) {
             g_Game.current->u.field.mode_12B.u8_value = 9;
-            Actor_RequestScript(g_Task->direction_08);
+            Actor_RequestScript(g_Task->direction);
             g_Task->timer       = 2;
             g_Task->header.mode = 6;
             ACTOR_CLEAR_STEP();

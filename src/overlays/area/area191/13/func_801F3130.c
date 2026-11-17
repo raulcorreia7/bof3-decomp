@@ -5,7 +5,7 @@ MATCH void func_801F3130(void) {
 
     Game_SetScriptActive();
     work = g_CurrentActor;
-    work->interaction_flags &= ~ACTOR_FLAG_INTERACTION_PENDING;
+    work->interaction_flags &= ~ACTOR_INTERACTION_PENDING;
     work = g_CurrentActor;
     work->unk_7E++;
     /* FAKE: retail keeps the request stores below the actor store. */

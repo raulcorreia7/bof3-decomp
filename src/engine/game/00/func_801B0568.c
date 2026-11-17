@@ -23,7 +23,7 @@ MATCH void func_801B0568(void) {
             return;
         }
         if (!(Game_GetInput() & BYTE_MASK)) {
-            Actor_RequestRoute(g_Task->direction_08);
+            Actor_RequestRoute(g_Task->direction);
             g_Game.current->u.field.counter_11C.u8_value = 3U;
             g_Game.current->u.field.mode_12B.s8_value    = 0;
             Actor_ClearVelocity();
@@ -68,7 +68,7 @@ MATCH void func_801B0568(void) {
         case_0:
             if ((Area_GetActorFacingStepX() << 0x18) != 0) {
                 g_Game.current->u.field.mode_12B.s8_value = 0;
-                Actor_RequestRoute(g_Task->direction_08);
+                Actor_RequestRoute(g_Task->direction);
                 goto block_35; /* shares the state-1 tail */
             }
             g_Task->param.unk_0B = 0;
@@ -97,7 +97,7 @@ MATCH void func_801B0568(void) {
                     g_Game.walk_flags |= AREA_WALK_TRANSITION;
                 }
             }
-            Actor_RequestRoute((g_Task->direction_08 + 8) & BYTE_MASK);
+            Actor_RequestRoute((g_Task->direction + 8) & BYTE_MASK);
             tmp6        = g_Task;
             tmp6->timer = (tmp6->timer - 1);
             Actor_UpdateMovement();
@@ -111,7 +111,7 @@ MATCH void func_801B0568(void) {
             g_Game.current->u.field.mode_12B.s8_value    = 0;
             g_Game.current->u.field.counter_11C.u8_value = 3U;
             g_Task->timer                                = 0U;
-            Actor_RequestRoute(g_Task->direction_08);
+            Actor_RequestRoute(g_Task->direction);
             g_Game.current->u.field.mode_12B.s8_value = 0;
         block_35:
             g_Task->header.step = 1;
@@ -119,11 +119,11 @@ MATCH void func_801B0568(void) {
             return;
         case_2:
             g_Game.current->u.field.counter_11C.u8_value = 3U;
-            Actor_RequestScript(g_Task->direction_08);
+            Actor_RequestScript(g_Task->direction);
             g_Task->header.mode = 2;
             g_Task->header.step = 4;
             tmp7                = g_Task;
-            tmp2                = tmp7->direction_08;
+            tmp2                = tmp7->direction;
             if ((tmp2 == FACING_UP) || (tmp2 == FACING_LEFT)) {
                 tmp7->unk_03 = 0;
             } else {
@@ -136,7 +136,7 @@ MATCH void func_801B0568(void) {
         case_3:
             val0                                         = 2;
             g_Game.current->u.field.counter_11C.u8_value = 2U;
-            Actor_RequestScript(g_Task->direction_08);
+            Actor_RequestScript(g_Task->direction);
             g_Task->header.mode                             = 2;
             g_Task->header.step                             = 5;
             g_Game.current->u.field.mode_12B.s8_value       = 2;
@@ -146,7 +146,7 @@ MATCH void func_801B0568(void) {
         case_5:
             val0                                         = 3;
             g_Game.current->u.field.counter_11C.u8_value = 3U;
-            Actor_RequestScript(g_Task->direction_08);
+            Actor_RequestScript(g_Task->direction);
             g_Game.current->u.field.mode_12B.s8_value = 4;
             g_Task->header.mode                       = 2;
             g_Task->header.step                       = 3;
@@ -154,11 +154,11 @@ MATCH void func_801B0568(void) {
         case_6:
             val0                                         = 3;
             g_Game.current->u.field.counter_11C.u8_value = 3U;
-            Actor_RequestScript(g_Task->direction_08);
+            Actor_RequestScript(g_Task->direction);
             g_Game.current->u.field.mode_12B.s8_value = 3;
             g_Task->header.mode                       = FIELD_TASK_MODE_CLIMB;
             tmp8                                      = g_Task;
-            tmp3                                      = tmp8->direction_08;
+            tmp3                                      = tmp8->direction;
             if ((tmp3 == FACING_UP) || (tmp3 == FACING_LEFT)) {
                 tmp8->header.step = 0;
                 return;
@@ -170,7 +170,7 @@ MATCH void func_801B0568(void) {
             g_Game.current->u.field.counter_11C.u8_value = 3U;
             g_Task->timer                                = 0U;
             g_Task->param.unk_0B                         = 0;
-            Actor_RequestRoute(g_Task->direction_08);
+            Actor_RequestRoute(g_Task->direction);
             g_Game.current->u.field.mode_12B.s8_value = 0;
             return;
         }

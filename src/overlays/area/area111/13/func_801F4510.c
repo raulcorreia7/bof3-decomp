@@ -15,9 +15,9 @@ MATCH void func_801F4510(s32 direction) {
     }
 
     selection -= 1;
-    g_SceneEventState.selection        = selection;
-    g_SceneEventState.mode             = 0x11;
-    g_SceneEventState.step             = direction;
-    D_80147A58[selection].direction_08 = direction;
+    g_SceneEventState.selection     = selection;
+    g_SceneEventState.mode          = 0x11;
+    g_SceneEventState.step          = direction;
+    D_80147A58[selection].direction = direction;
     Game_SetScriptActive();
 }

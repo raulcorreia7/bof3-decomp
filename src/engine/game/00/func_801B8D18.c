@@ -9,8 +9,8 @@ MATCH bool func_801B8D18(void) {
     s32 x;
     s32 y;
 
-    if (g_Task->state_70.byte == 0) {
-        if (g_Task->direction_08 == FACING_RIGHT) {
+    if (g_Task->voice_flags.scene_flag == 0) {
+        if (g_Task->direction == FACING_RIGHT) {
             if (COORD_FRAC(g_Task->pos.x) != 0) {
                 return false;
             }
@@ -28,7 +28,7 @@ MATCH bool func_801B8D18(void) {
             }
             return true;
         }
-        if (g_Task->direction_08 == FACING_DOWN) {
+        if (g_Task->direction == FACING_DOWN) {
             if (COORD_FRAC(g_Task->pos.y) != 0) {
                 return false;
             }
@@ -49,7 +49,7 @@ MATCH bool func_801B8D18(void) {
         return false;
     }
 
-    if (g_Task->direction_08 == FACING_RIGHT) {
+    if (g_Task->direction == FACING_RIGHT) {
         if (COORD_FRAC(g_Task->pos.x) == 0) {
             return false;
         }
@@ -72,7 +72,7 @@ MATCH bool func_801B8D18(void) {
         }
         return true;
     }
-    if (g_Task->direction_08 == FACING_DOWN) {
+    if (g_Task->direction == FACING_DOWN) {
         if (COORD_FRAC(g_Task->pos.y) == 0) {
             return false;
         }
