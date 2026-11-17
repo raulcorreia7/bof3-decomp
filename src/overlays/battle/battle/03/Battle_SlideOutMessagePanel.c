@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801EA9FC(void) {
+/* func_801EA9FC */
+MATCH void Battle_SlideOutMessagePanel(void) {
     s16 y;
 
     y = g_MenuCurrentPanel->pos.y;

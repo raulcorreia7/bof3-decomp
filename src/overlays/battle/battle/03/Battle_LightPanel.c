@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801EA174(void) {
+/* func_801EA174 */
+MATCH void Battle_LightPanel(void) {
     u8* volatile* root = BATTLE_PANEL_ROOT_BASE;
     u8*           task;
 

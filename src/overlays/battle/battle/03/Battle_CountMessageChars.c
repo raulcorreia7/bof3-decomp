@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH u8 func_801EAB6C(u8* message) {
+/* func_801EAB6C */
+MATCH u8 Battle_CountMessageChars(u8* message) {
     u8  count;
     u32 value;
 

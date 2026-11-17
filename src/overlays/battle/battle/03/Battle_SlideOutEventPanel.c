@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801EA774(void) {
+/* func_801EA774 */
+MATCH void Battle_SlideOutEventPanel(void) {
     MenuPanelTask* panel = g_MenuCurrentPanel;
     s16            state = panel->pos.y;
 

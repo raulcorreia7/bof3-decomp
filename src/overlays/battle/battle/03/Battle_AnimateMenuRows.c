@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801E9390(void) {
+/* func_801E9390 */
+MATCH void Battle_AnimateMenuRows(void) {
     u8*            mode;
     s32            i;
     s32            index;

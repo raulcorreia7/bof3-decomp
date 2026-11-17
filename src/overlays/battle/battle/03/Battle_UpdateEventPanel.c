@@ -1,10 +1,11 @@
 #include "battle_03.h"
 
-MATCH void func_801EA650(void) {
-    BattlePanel6Steps handlers;
-    u8                index;
+/* func_801EA650 */
+MATCH void Battle_UpdateEventPanel(void) {
+    BattleEventPanelSteps handlers;
+    u8                    index;
 
-    handlers = D_801D0FF8;
+    handlers = g_BattleEventPanelSteps;
     handlers.steps[g_MenuCurrentPanel->state]();
     func_801D7EB0((s16)g_MenuCurrentPanel->pos.x, (s16)g_MenuCurrentPanel->pos.y);
     index = BATTLE_PANEL_TASK->selection.slot;

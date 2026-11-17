@@ -2,7 +2,7 @@
 
 #ifdef NON_MATCHING
 /* func_801D750C */
-NON_MATCHING void Battle_SetPartyCount(s32 x, s32 y) {
+NON_MATCHING void Battle_DrawPartyPanel(s32 x, s32 y) {
     s32 u;
     s32 v_tex;
     s16 var_a0_255;
@@ -115,5 +115,5 @@ NON_MATCHING void Battle_SetPartyCount(s32 x, s32 y) {
     }
 }
 #else
-INCLUDE_ASM(Battle_SetPartyCount);
+INCLUDE_ASM(Battle_DrawPartyPanel);
 #endif

@@ -1,8 +1,9 @@
 #include "battle_03.h"
 
-MATCH void func_801E9074(void) {
+/* func_801E9074 */
+MATCH void Battle_UpdatePanel(void) {
     BattlePanelModes handlers;
 
-    handlers = g_BattlePanelFuncs;
+    handlers = g_BattlePanelModes;
     handlers.modes[g_MenuCurrentPanel->mode]();
 }

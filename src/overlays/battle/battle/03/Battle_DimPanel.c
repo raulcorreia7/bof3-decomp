@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801EA1A4(void) {
+/* func_801EA1A4 */
+MATCH void Battle_DimPanel(void) {
     u8* volatile* root;
     u8*           task;
     u8*           task2;

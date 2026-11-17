@@ -10,6 +10,6 @@ MATCH void func_801D22E8(void) {
         g_Battle.phase.sub_step += 1;
     }
     func_801D8450(g_Battle.panel_slot);
-    Battle_SetPartyCount(D_80148358, D_8014835A);
+    Battle_DrawPartyPanel(D_80148358, D_8014835A);
     Battle_DrawPanelRows(D_8014837C, D_8014837E);
 }

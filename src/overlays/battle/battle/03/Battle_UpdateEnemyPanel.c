@@ -14,7 +14,7 @@ typedef void (*BattlePanelFunc)(void);
  * enemy row's 0x2000 flag from the row's shutter counters.
  */
 /* func_801E960C */
-MATCH void Battle_UpdateMenuPanel(void) {
+MATCH void Battle_UpdateEnemyPanel(void) {
     BattlePanelTask* task;
     BattlePanelTask* panel;
     u8*              row;
@@ -23,7 +23,7 @@ MATCH void Battle_UpdateMenuPanel(void) {
     u16              flags;
     BattlePanelFunc  handlers[4];
 
-    memcpy(handlers, D_801D0FD0, sizeof(handlers));
+    memcpy(handlers, g_BattleEnemyPanelSteps, sizeof(handlers));
 
     handlers[BATTLE_PANEL_TASK->state]();
 

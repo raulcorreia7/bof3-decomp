@@ -4,7 +4,8 @@
  * value offsets, draws it, then drops the panel when the active selection slot
  * disagrees with the panel's row.
  */
-MATCH void func_801E99AC(void) {
+/* func_801E99AC */
+MATCH void Battle_PlaceEnemyPanel(void) {
     BattlePanelTask* panel;
     u8               row;
     s32              base;
@@ -34,5 +35,5 @@ MATCH void func_801E99AC(void) {
             return;
         }
     }
-    func_801EA1A4();
+    Battle_DimPanel();
 }

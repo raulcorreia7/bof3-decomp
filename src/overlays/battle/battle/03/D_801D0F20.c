@@ -29,40 +29,37 @@ BattleEffect2Steps D_801D0F38 = {
 
 /* 0x801D0F44 */
 BattleEffect3Steps D_801D0F44 = {
-    (Callback)func_801E6D28, (Callback)func_801E6E54, (Callback)func_801E6FA0,
-    (Callback)func_801E6FB0, (Callback)func_801E71EC,
+    (Callback)func_801E6D28, (Callback)func_801E6E54, (Callback)func_801E6FA0, (Callback)func_801E6FB0, (Callback)func_801E71EC,
 };
 
 /* 0x801D0F58 */
 BattleEffect4Steps D_801D0F58 = {
-    (Callback)func_801E7528, (Callback)func_801E7558, (Callback)func_801E75B0,
-    (Callback)func_801E7634, (Callback)func_801E7778,
+    (Callback)func_801E7528, (Callback)func_801E7558, (Callback)func_801E75B0, (Callback)func_801E7634, (Callback)func_801E7778,
 };
 
 /* 0x801D0F6C */
 BattleSavedPreviewModes D_801D0F6C = {
-    (Callback)func_801E7888, (Callback)func_801E78F0, (Callback)Battle_StartCharacterLoad,
-    (Callback)func_801E7BA0, (Callback)func_801E8558,
+    (Callback)func_801E7888, (Callback)func_801E78F0, (Callback)Battle_StartCharacterLoad, (Callback)func_801E7BA0, (Callback)func_801E8558,
 };
 
 /* 0x801D0F80 */
 /* D_801D0F80 */
-BattlePanelModes g_BattlePanelFuncs = {
-    (Callback)func_801E90FC, (Callback)func_801E91FC, (Callback)func_801E943C, (Callback)func_801E94D0,
-    (Callback)Battle_UpdateMenuPanel, (Callback)Battle_DispatchPanel, (Callback)func_801EA650, (Callback)func_801EA7DC,
+BattlePanelModes g_BattlePanelModes = {
+    (Callback)Battle_UpdatePartyPanel, (Callback)Battle_UpdateMenuRowsPanel, (Callback)func_801E943C,           (Callback)func_801E94D0,
+    (Callback)Battle_UpdateEnemyPanel, (Callback)Battle_UpdateMemberPanel,   (Callback)Battle_UpdateEventPanel, (Callback)Battle_UpdateMessagePanel,
 };
 
 /* 0x801D0FA0 */
-BattlePanel0Steps D_801D0FA0 = {
-    (Callback)func_801E915C,
-    (Callback)func_801E91CC,
+BattlePartyPanelSteps g_BattlePartyPanelSteps = {
+    (Callback)Battle_SlideInPartyPanel,
+    (Callback)Battle_HoldPartyPanel,
     (Callback)func_801EAB64,
 };
 
 /* 0x801D0FAC */
-BattlePanel1Steps D_801D0FAC = {
+BattleMenuRowsPanelSteps g_BattleMenuRowsPanelSteps = {
     (Callback)Battle_DrawMenuRows,
-    (Callback)func_801E9390,
+    (Callback)Battle_AnimateMenuRows,
     (Callback)func_801EAB64,
 };
 
@@ -81,17 +78,17 @@ BattlePanel3Steps D_801D0FC4 = {
 };
 
 /* 0x801D0FD0 */
-Callback D_801D0FD0[4] = {
-    (Callback)func_801E97A8,
-    (Callback)func_801E9910,
-    (Callback)func_801E99AC,
+Callback g_BattleEnemyPanelSteps[4] = {
+    (Callback)Battle_StartEnemyPanel,
+    (Callback)Battle_ShowEnemyPanel,
+    (Callback)Battle_PlaceEnemyPanel,
     (Callback)func_801EAB64,
 };
 
 /* 0x801D0FE0 */
-BattlePanel5Steps D_801D0FE0 = {
+BattleMemberPanelSteps g_BattleMemberPanelSteps = {
     (Callback)Battle_SetPanelGauges,
-    (Callback)func_801E9F18,
+    (Callback)Battle_ShowMemberPanel,
     (Callback)Battle_MovePanel,
 };
 
@@ -104,16 +101,16 @@ BattlePanelTaskSteps g_BattlePanelTaskForwarders = {
 };
 
 /* 0x801D0FF8 */
-BattlePanel6Steps D_801D0FF8 = {
-    (Callback)func_801EA728,
+BattleEventPanelSteps g_BattleEventPanelSteps = {
+    (Callback)Battle_SlideInEventPanel,
     (Callback)func_801EA76C,
-    (Callback)func_801EA774,
+    (Callback)Battle_SlideOutEventPanel,
 };
 
 /* 0x801D1004 */
-BattlePanel7Steps D_801D1004 = {
-    (Callback)func_801EA848,
-    (Callback)func_801EA894,
-    (Callback)func_801EA8F4,
-    (Callback)func_801EA9FC,
+BattleMessagePanelSteps g_BattleMessagePanelSteps = {
+    (Callback)Battle_WaitMessage,
+    (Callback)Battle_SlideInMessagePanel,
+    (Callback)Battle_HoldMessagePanel,
+    (Callback)Battle_SlideOutMessagePanel,
 };
