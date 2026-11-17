@@ -148,8 +148,9 @@ NON_MATCHING void func_801EF1B0(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        setXY3(prim, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), spad->cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), spad->cells.words[0]),
-               g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), spad->cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), spad->cells.words[0]));
+        setXY3(prim, g_Task->unk_2E.value, g_Task->unk_30.value, g_Task->unk_2E.value + FIXED_MUL(rsin(i << 8), spad->cells.words[0]),
+               g_Task->unk_30.value + FIXED_MUL(rcos(i << 8), spad->cells.words[0]), g_Task->unk_2E.value + FIXED_MUL(rsin((i + 1) << 8), spad->cells.words[0]),
+               g_Task->unk_30.value + FIXED_MUL(rcos((i + 1) << 8), spad->cells.words[0]));
         if (g_Battle.action_id == 50) {
             setRGB0(prim, spad->cells.words[3], spad->cells.words[2], spad->cells.words[2]);
             setRGB1(prim, spad->cells.words[2], spad->cells.words[2], 1);
@@ -189,10 +190,10 @@ NON_MATCHING void func_801EF4C4(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        setXY4(prim, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.words[0]),
-               g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), g_ScratchPad.cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), g_ScratchPad.cells.words[0]),
-               g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.words[1]), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.words[1]),
-               g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 8), g_ScratchPad.cells.words[1]), g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 8), g_ScratchPad.cells.words[1]));
+        setXY4(prim, g_Task->unk_2E.value + FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.words[0]), g_Task->unk_30.value + FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.words[0]),
+               g_Task->unk_2E.value + FIXED_MUL(rsin((i + 1) << 8), g_ScratchPad.cells.words[0]), g_Task->unk_30.value + FIXED_MUL(rcos((i + 1) << 8), g_ScratchPad.cells.words[0]),
+               g_Task->unk_2E.value + FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.words[1]), g_Task->unk_30.value + FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.words[1]),
+               g_Task->unk_2E.value + FIXED_MUL(rsin((i + 1) << 8), g_ScratchPad.cells.words[1]), g_Task->unk_30.value + FIXED_MUL(rcos((i + 1) << 8), g_ScratchPad.cells.words[1]));
         if (g_Battle.action_id == 50) {
             setRGB0(prim, g_ScratchPad.cells.words[3], g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[3]);
             setRGB1(prim, g_ScratchPad.cells.words[3], g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[3]);
@@ -224,7 +225,7 @@ MATCH void func_801EF898(void) {
         prim = (TILE_1*)g_GfxPrimCursor;
         SetTile1(prim);
         SetSemiTrans(prim, 1);
-        setXY0(prim, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.words[0]), g_Task->unk_30.half + FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.words[0]));
+        setXY0(prim, g_Task->unk_2E.value + FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.words[0]), g_Task->unk_30.value + FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.words[0]));
         if (g_Battle.action_id == 50) {
             setRGB0(prim, g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[3]);
         } else {

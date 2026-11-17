@@ -51,16 +51,16 @@ NON_MATCHING void func_801EEC94(void) {
     g_GfxPalettePending = 1;
     if (g_Battle.encounter != 0) {
         if (g_BattleEnemyBattlers[g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT].unk_F0 == 0x29) {
-            slot                                = Battle_AllocEffect(1, 0x13) & BYTE_MASK;
-            enemy                               = g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT;
-            effect                              = &g_BattleEffects[slot];
-            row                                 = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
-            *(BattleWorkImage*)effect           = *row;
-            g_BattleEffects[slot].header.mode   = 3;
-            g_BattleEffects[slot].unk_06        = 1;
-            g_BattleEffects[slot].header.step   = 0;
-            g_BattleEffects[slot].handler_index = 0x13;
-            g_BattleEffects[slot].arg.unk_09    = 0;
+            slot                              = Battle_AllocEffect(1, 0x13) & BYTE_MASK;
+            enemy                             = g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT;
+            effect                            = &g_BattleEffects[slot];
+            row                               = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
+            *(BattleWorkImage*)effect         = *row;
+            g_BattleEffects[slot].header.mode = 3;
+            g_BattleEffects[slot].unk_06      = 1;
+            g_BattleEffects[slot].header.step = 0;
+            g_BattleEffects[slot].step_index  = 0x13;
+            g_BattleEffects[slot].arg.unk_09  = 0;
         }
     }
 }

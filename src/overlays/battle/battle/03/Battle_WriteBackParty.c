@@ -43,6 +43,6 @@ MATCH void Battle_WriteBackParty(void) {
     g_Battle.phase.step          = 0;
     g_Battle.phase.sub_step      = 0;
     g_Battle.ui_step             = 0;
-    g_Battle.ui_state            = 0;
+    g_Battle.ui_mode             = 0;
     *counter                     = count + 1;
 }

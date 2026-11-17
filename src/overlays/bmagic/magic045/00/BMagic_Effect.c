@@ -17,7 +17,7 @@ MATCH void func_801EEC5C(void) {
     if ((g_Battle.target_selector < BATTLE_PARTY_CHARACTERS_COUNT && g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) ||
         (g_Battle.target_selector >= BATTLE_PARTY_CHARACTERS_COUNT && g_Battle.active_battler >= BATTLE_PARTY_CHARACTERS_COUNT)) {
         Battle_MarkDamaged(g_Battle.target_selector);
-        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+        g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
         Effect_Reset();
     } else {
         g_Task->facing                                  = g_BattleEffectBattler->facing;
@@ -81,7 +81,7 @@ MATCH void func_801EEF80(void) {
     g_Task->unk_5C           = 0;
     g_Task->unk_2A           = 0;
     g_Task->unk_29           = 4;
-    g_Task->unk_2C.half      = 0;
+    g_Task->unk_2C.value     = 0;
     g_Task->unk_2B           = 1;
     Actor_SelectScript(0);
     g_Task->unk_09 = 0;
@@ -167,14 +167,14 @@ MATCH void func_801EF4A4(void) {
     g_Task->unk_28             = 0;
     g_Task->unk_24             = 4;
     g_Task->header.flags |= 0x20;
-    g_Task->unk_5C      = 2;
-    g_Task->unk_5D      = c;
-    g_Task->unk_5E      = c;
-    g_Task->unk_5F      = c;
-    g_Task->unk_2A      = 0;
-    g_Task->unk_29      = 4;
-    g_Task->unk_2C.half = 0;
-    g_Task->unk_2B      = 0;
+    g_Task->unk_5C       = 2;
+    g_Task->unk_5D       = c;
+    g_Task->unk_5E       = c;
+    g_Task->unk_5F       = c;
+    g_Task->unk_2A       = 0;
+    g_Task->unk_29       = 4;
+    g_Task->unk_2C.value = 0;
+    g_Task->unk_2B       = 0;
     Actor_SelectScript(0U);
     g_Task->unk_09 = 0;
     g_Task->header.step += 1;

@@ -36,9 +36,9 @@ MATCH void func_801EEFC8(void) {
         func_801EF5C4(MAGIC097_BAND_HEIGHT, 96, 0x1F);
         Effect_DrawBolt();
         g_Task->param.unk_0B -= 8;
-        g_Task->unk_2E.half += 16;
+        g_Task->unk_2E.value += 16;
         func_801F083C();
-        g_Task->unk_2E.half -= 32;
+        g_Task->unk_2E.value -= 32;
         func_801F083C();
         PopMatrix();
     }

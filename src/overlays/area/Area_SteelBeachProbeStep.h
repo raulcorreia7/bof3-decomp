@@ -7,6 +7,6 @@
     func_801C24D0();                                                                                                                                                                     \
     g_Task->timer -= 1;                                                                                                                                                                  \
     Actor_UpdateMovement();                                                                                                                                                              \
-    g_Game.current->u.field.mode_12B.s8_value = 1;                                                                                                                                       \
-    g_Task->header.step                       = 1;                                                                                                                                       \
+    g_Game.current->u.field.mode.value = 1;                                                                                                                                              \
+    g_Task->header.step                = 1;                                                                                                                                              \
     return 1;

@@ -37,7 +37,7 @@ NON_MATCHING void func_801D1228(void) {
     g_Battle.cursor.panel_entry   = 0;
     D_801462E7                    = 0;
     g_Battle.panel_slot           = 0;
-    g_Battle.state                = 0;
+    g_Battle.flags                = 0;
     g_Battle.outcome.result       = 0;
     D_801463D0                    = 1;
     g_Battle.outcome.reward_zenny = 0;

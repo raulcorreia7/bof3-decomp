@@ -12,7 +12,7 @@ NON_MATCHING void func_801F2C6C(void) {
     if (g_GameEntryState == 4) {
         return;
     }
-    if ((u8)g_Game.members[2].u.field.mode_12B.s8_value == 2) {
+    if ((u8)g_Game.members[2].u.field.mode.value == 2) {
         return;
     }
     if (g_GameStateIndex == GAME_REQUEST_MENU) {

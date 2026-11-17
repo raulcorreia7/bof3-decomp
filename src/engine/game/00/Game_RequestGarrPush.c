@@ -12,8 +12,8 @@ MATCH bool Game_RequestGarrPush(void) {
     if (g_Task->param.unk_0B != GARR_PUSH_HOLD_FRAMES) {
         return 0;
     }
-    g_Task->header.mode                       = FIELD_TASK_MODE_PERSONAL_ACTION;
-    g_Task->header.step                       = 0;
-    g_Game.current->u.field.mode_12B.u8_value = GAME_PANEL_MODE_PERSONAL_ACTION;
+    g_Task->header.mode                         = FIELD_TASK_MODE_PERSONAL_ACTION;
+    g_Task->header.step                         = 0;
+    g_Game.current->u.field.mode.unsigned_value = GAME_PANEL_MODE_PERSONAL_ACTION;
     return 1;
 }

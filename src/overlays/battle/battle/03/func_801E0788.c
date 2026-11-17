@@ -16,7 +16,7 @@ MATCH void func_801E0788(void) {
         g_Task->unk_03 = 1;
         g_Task->unk_04 = 0;
     } else if (w->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM) {
-        half = &g_Battle.state;
+        half = &g_Battle.flags;
         if ((*half & 0x4000) && (D_801463CA == g_Task->slot)) {
             *half &= 0xBFFF;
         }
@@ -42,15 +42,15 @@ MATCH void func_801E0788(void) {
         w2->u.turn.counter = 0;
         w2->u.turn.action_flags.value &= ~(BATTLER_ACTION_ALWAYS_HITS | BATTLER_ACTION_DAMAGE_HALVED | BATTLER_ACTION_HOLY_RESIST_ZERO | BATTLER_ACTION_SELECTION_BONUS |
                                            BATTLER_ACTION_FIRE_RESIST_ZERO | BATTLER_ACTION_CHARGING | BATTLER_ACTION_SELECTED);
-        g_GameState->counter_136      = 0;
-        g_Game.current->counter_137   = 0;
-        g_Game.current->focus_counter = 0;
-        g_Game.current->unk_139       = 0;
+        g_GameState->charge_counter    = 0;
+        g_Game.current->status_counter = 0;
+        g_Game.current->focus_counter  = 0;
+        g_Game.current->unk_139        = 0;
         Battle_RescaleStats(g_Task->slot);
         if ((func_801E0E0C() & BYTE_MASK) || (g_Battle.living_party_count == 0)) {
             FAKE_VOLATILE(u8, g_Battle.outcome.result) |= BATTLE_RESULT_DEFEAT;
         }
-        half2 = &g_Battle.state;
+        half2 = &g_Battle.flags;
         if ((*half2 & 0x4000) && (D_801463CA == g_Task->slot)) {
             *half2 &= 0xBFFF;
         }

@@ -124,7 +124,7 @@ ASSERT_SIZE(BattleEffectTargetColumn, BATTLE_EFFECT_STRIDE);
     selector = (u8*)&g_Battle.target_selector;                                  \
     Battle_FadePoisonedBattler(*selector);                                      \
     Battle_MarkDamaged(*selector);                                              \
-    g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;                              \
+    g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;                              \
     Effect_Reset()
 
 /* The sway step of the effect work record WORK points to: phase_0C advances and

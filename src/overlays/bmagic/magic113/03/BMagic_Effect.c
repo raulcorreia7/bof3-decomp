@@ -19,7 +19,7 @@ MATCH void func_801EECE0(void) {
     if ((g_Battle.target_selector < BATTLE_PARTY_CHARACTERS_COUNT && g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) ||
         (g_Battle.target_selector >= BATTLE_PARTY_CHARACTERS_COUNT && g_Battle.active_battler >= BATTLE_PARTY_CHARACTERS_COUNT)) {
         Battle_MarkDamaged(g_Battle.target_selector);
-        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+        g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
         Effect_Reset();
     } else {
         i = 0;
@@ -450,18 +450,18 @@ MATCH void func_801F08B4(void) {
     g_Task->unk_27 = 0xA0;
     g_Task->unk_28 = 0;
     g_Task->header.flags |= 0x20;
-    tint              = -0x40;
-    g_Task->unk_5D    = tint;
-    g_Task->unk_5E    = tint;
-    g_Task->unk_5F    = tint;
-    g_Task->unk_5C    = 1;
-    g_Task->unk_2A    = g_Task->unk_04;
-    g_Task->unk_29    = 4;
-    g_Task->unk_24    = 4;
-    task              = g_Task;
-    task->unk_2B      = 1;
-    task->unk_2C.half = 0;
-    g_Task->unk_09    = 0;
+    tint               = -0x40;
+    g_Task->unk_5D     = tint;
+    g_Task->unk_5E     = tint;
+    g_Task->unk_5F     = tint;
+    g_Task->unk_5C     = 1;
+    g_Task->unk_2A     = g_Task->unk_04;
+    g_Task->unk_29     = 4;
+    g_Task->unk_24     = 4;
+    task               = g_Task;
+    task->unk_2B       = 1;
+    task->unk_2C.value = 0;
+    g_Task->unk_09     = 0;
     g_Task->header.step += 1;
     if (g_Task->param.unk_0B == 0) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x00));

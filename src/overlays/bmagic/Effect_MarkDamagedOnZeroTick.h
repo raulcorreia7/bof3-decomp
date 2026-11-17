@@ -12,7 +12,7 @@
 MATCH void Effect_MarkDamagedOnZeroTick(void) {
     if (g_Task->param.unk_0B == 0) {
         Battle_MarkDamaged(g_Battle.target_selector);
-        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+        g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
         Effect_Reset();
     }
 }

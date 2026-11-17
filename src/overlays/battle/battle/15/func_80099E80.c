@@ -12,7 +12,7 @@ MATCH void func_80099E80(void) {
         } else {
             g_Battle.ui_step = 8;
         }
-        g_Battle.ui_state = 0;
+        g_Battle.ui_mode = 0;
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
         return;
     }
@@ -27,6 +27,6 @@ MATCH void func_80099E80(void) {
     } else {
         g_BattleActorTurn->command.target = g_BattleMessageSlot[5];
     }
-    g_Battle.ui_step  = 8;
-    g_Battle.ui_state = 3;
+    g_Battle.ui_step = 8;
+    g_Battle.ui_mode = 3;
 }

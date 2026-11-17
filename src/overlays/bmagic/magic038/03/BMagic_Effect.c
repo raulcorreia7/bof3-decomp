@@ -125,16 +125,16 @@ MATCH void func_801EF1AC(void) {
         g_Task->unk_28              = 0;
         g_Task->unk_24              = 0;
         g_Task->header.flags |= 0x20;
-        g_Task->unk_5C    = 1;
-        tint              = -0x80;
-        g_Task->unk_5D    = tint;
-        g_Task->unk_5E    = tint;
-        g_Task->unk_5F    = tint;
-        g_Task->unk_2A    = 0;
-        g_Task->unk_29    = 4;
-        work              = g_Task;
-        work->unk_2B      = 0;
-        work->unk_2C.half = 0;
+        g_Task->unk_5C     = 1;
+        tint               = -0x80;
+        g_Task->unk_5D     = tint;
+        g_Task->unk_5E     = tint;
+        g_Task->unk_5F     = tint;
+        g_Task->unk_2A     = 0;
+        g_Task->unk_29     = 4;
+        work               = g_Task;
+        work->unk_2B       = 0;
+        work->unk_2C.value = 0;
         Actor_SelectScript(D_801EF9C0[g_Task->param.unk_0B]);
         g_Task->header.step += 1;
     }

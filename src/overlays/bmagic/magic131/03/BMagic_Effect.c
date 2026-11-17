@@ -233,28 +233,28 @@ MATCH void func_801EF7FC(void) {
         return;
     }
     if (g_Battle.scroll_dir == 0 || g_Battle.scroll_dir == 3) {
-        g_Task->unk_2E.half = 0x3D;
-        g_Task->unk_30.half = 0x46;
-        g_Task->unk_0C      = -4;
-        g_Task->unk_10      = -4;
-        g_Task->unk_18      = -1;
-        g_Task->unk_1C      = -1;
-        g_Task->unk_2A      = 1;
+        g_Task->unk_2E.value = 0x3D;
+        g_Task->unk_30.value = 0x46;
+        g_Task->unk_0C       = -4;
+        g_Task->unk_10       = -4;
+        g_Task->unk_18       = -1;
+        g_Task->unk_1C       = -1;
+        g_Task->unk_2A       = 1;
     } else {
-        g_Task->unk_2E.half = 0x103;
-        g_Task->unk_30.half = 0x46;
-        g_Task->unk_0C      = 4;
-        g_Task->unk_10      = -4;
-        g_Task->unk_18      = 1;
-        g_Task->unk_1C      = -1;
-        g_Task->unk_2A      = 0;
+        g_Task->unk_2E.value = 0x103;
+        g_Task->unk_30.value = 0x46;
+        g_Task->unk_0C       = 4;
+        g_Task->unk_10       = -4;
+        g_Task->unk_18       = 1;
+        g_Task->unk_1C       = -1;
+        g_Task->unk_2A       = 0;
     }
     work = g_Task;
     for (i = 0; i < 16; i++) {
         work->unk_0C += work->unk_18;
         work->unk_10 += work->unk_1C;
-        work->unk_2E.half += work->unk_0C;
-        work->unk_30.half += work->unk_10;
+        work->unk_2E.value += work->unk_0C;
+        work->unk_30.value += work->unk_10;
     }
     task           = g_Task;
     task->unk_0C   = ~task->unk_0C + 1;
@@ -269,13 +269,13 @@ MATCH void func_801EF7FC(void) {
     actor->scale.x = 0x10000;
     actor->scale.y = 0x10000;
     g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    g_Task->unk_5C      = 0;
-    g_Task->unk_5D      = 0;
-    g_Task->unk_5E      = 0;
-    g_Task->unk_5F      = 0;
-    g_Task->unk_29      = 2;
-    g_Task->unk_2C.half = 0;
-    g_Task->unk_2B      = 0;
+    g_Task->unk_5C       = 0;
+    g_Task->unk_5D       = 0;
+    g_Task->unk_5E       = 0;
+    g_Task->unk_5F       = 0;
+    g_Task->unk_29       = 2;
+    g_Task->unk_2C.value = 0;
+    g_Task->unk_2B       = 0;
     Actor_SelectScript(0);
     SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
     g_Task->unk_09 = 0x10;
@@ -285,8 +285,8 @@ MATCH void func_801EF7FC(void) {
 MATCH void func_801EFA68(void) {
     u8 count;
 
-    g_Task->unk_2E.half += g_Task->unk_0C;
-    g_Task->unk_30.half += g_Task->unk_10;
+    g_Task->unk_2E.value += g_Task->unk_0C;
+    g_Task->unk_30.value += g_Task->unk_10;
     g_Task->unk_0C += g_Task->unk_18;
     g_Task->unk_10 += g_Task->unk_1C;
     count          = g_Task->unk_09 - 1;
@@ -315,8 +315,8 @@ MATCH void func_801EFB64(void) {
     work->unk_0C += work->unk_18;
     work->unk_09 = timer;
     work->unk_10 += work->unk_1C;
-    work->unk_2E.half += work->unk_0C;
-    work->unk_30.half += work->unk_10;
+    work->unk_2E.value += work->unk_0C;
+    work->unk_30.value += work->unk_10;
     if (timer == 0) {
         g_Task->unk_09 = 0x24;
         g_Task->header.step += 1;
@@ -447,8 +447,8 @@ MATCH void func_801F0034(void) {
     work        = g_Task;
     timer       = work->timer - 1;
     work->timer = timer;
-    work->unk_2E.half += work->unk_0C;
-    work->unk_30.half += work->unk_10;
+    work->unk_2E.value += work->unk_0C;
+    work->unk_30.value += work->unk_10;
     if (!(timer & BYTE_MASK)) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         Effect_Reset();

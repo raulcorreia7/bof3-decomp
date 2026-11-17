@@ -31,10 +31,10 @@ MATCH void func_801F518C(void) {
             func_801F5D20();
             break;
         case 1:
-            g_Game.current->u.field.mode_12B.u8_value = 1;
-            angle                                     = &D_801492DC;
-            *angle                                    = (*angle + (s8)g_Task->param.unk_0B) & 0xFFF;
-            g_Task->header.step                       = 4;
+            g_Game.current->u.field.mode.unsigned_value = 1;
+            angle                                       = &D_801492DC;
+            *angle                                      = (*angle + (s8)g_Task->param.unk_0B) & 0xFFF;
+            g_Task->header.step                         = 4;
             break;
         case 2:
             func_801F54B0();
@@ -52,8 +52,8 @@ MATCH void func_801F518C(void) {
             }
             g_Task->timer--;
             func_801F559C();
-            g_Game.current->u.field.mode_12B.u8_value = 1;
-            g_Task->header.step                       = 3;
+            g_Game.current->u.field.mode.unsigned_value = 1;
+            g_Task->header.step                         = 3;
             break;
     }
 }

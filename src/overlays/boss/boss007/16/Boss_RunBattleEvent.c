@@ -6,7 +6,7 @@ MATCH u8 Boss_RunBattleEvent(u32 mode) {
 
     switch ((u8)mode) {
         case BOSS_EVENT_RESTART_BEGIN:
-            if ((g_Battle.state & BATTLE_STATE_REPRISAL_PENDING) && (g_Battle.target_selector == 0)) {
+            if ((g_Battle.flags & BATTLE_STATE_REPRISAL_PENDING) && (g_Battle.target_selector == 0)) {
                 g_BattleBossFlags |= 1;
             }
             break;

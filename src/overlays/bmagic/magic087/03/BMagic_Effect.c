@@ -192,13 +192,13 @@ MATCH void func_801EF580(s32 phase) {
         PSX_SET_SEMI_TRANSPARENT(prim);
         g_ScratchPad.cells.words[1] = ((g_Task->unk_04 + i + phase + 1) & 0x1F) << 7;
         offset                      = ((rsin(g_ScratchPad.cells.words[1]) * 8) >> 12) + 4;
-        setXY2(prim, g_Task->unk_2E.half - offset, g_Task->unk_30.half - (i + 1) * 8, prim->x0 + 8, g_Task->unk_30.half - (i + 1) * 8);
+        setXY2(prim, g_Task->unk_2E.value - offset, g_Task->unk_30.value - (i + 1) * 8, prim->x0 + 8, g_Task->unk_30.value - (i + 1) * 8);
         g_ScratchPad.cells.words[1] = ((g_Task->unk_04 + phase + i) & 0x1F) << 7;
         offset                      = ((rsin(g_ScratchPad.cells.words[1]) * 8) >> 12) + 4;
-        prim->x2                    = g_Task->unk_2E.half - offset;
-        prim->y2                    = g_Task->unk_30.half - i * 8;
+        prim->x2                    = g_Task->unk_2E.value - offset;
+        prim->y2                    = g_Task->unk_30.value - i * 8;
         prim->x3                    = prim->x2 + 8;
-        prim->y3                    = g_Task->unk_30.half - i * 8;
+        prim->y3                    = g_Task->unk_30.value - i * 8;
         setRGB2(prim, g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[2]);
         setRGB3(prim, g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[2]);
         if (i < 6) {

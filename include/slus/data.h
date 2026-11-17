@@ -87,7 +87,7 @@ extern u8  g_BattleMode;
 extern u8  g_BattleStep;
 /* FAKE: g_Battle.phase.sub_step as a global of its own; the sites that use it match only with a separate symbol. */
 extern u8  g_BattleSubStep;
-/* FAKE: g_Battle.state as a global of its own; the sites that use it match only with a separate symbol. */
+/* FAKE: g_Battle.flags as a global of its own; the sites that use it match only with a separate symbol. */
 extern u16 g_BattleState;
 /* The bytes the battle code index; the bmagic images that copy its record
  * define FAKE_DECL_BATTLE_PARTY_CELL_RECORD before their first include. */

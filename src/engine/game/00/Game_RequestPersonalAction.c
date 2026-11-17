@@ -15,6 +15,6 @@ MATCH bool Game_RequestPersonalAction(void) {
         return 0;
     g_Task->header.mode = FIELD_TASK_MODE_PERSONAL_ACTION;
     ACTOR_CLEAR_STEP();
-    g_Game.current->u.field.mode_12B.u8_value = GAME_PANEL_MODE_PERSONAL_ACTION;
+    g_Game.current->u.field.mode.unsigned_value = GAME_PANEL_MODE_PERSONAL_ACTION;
     return 1;
 }

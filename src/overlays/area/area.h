@@ -157,8 +157,8 @@ static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
 
     TASK_SET(&g_Game.members[slot]);
     index     = g_PartyFieldOrder[slot];
-    y         = g_Game.members[slot].unk_30.signed_half;
-    x         = g_Game.members[slot].unk_2E.signed_half;
+    y         = g_Game.members[slot].unk_30.signed_value;
+    x         = g_Game.members[slot].unk_2E.signed_value;
     selection = table[index];
     result    = Actor_ClaimSlot(kind, 0, selection, x, y);
     if ((u8)result != GAME_NONE) {

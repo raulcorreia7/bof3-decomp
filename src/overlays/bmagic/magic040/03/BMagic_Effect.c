@@ -157,8 +157,8 @@ MATCH void func_801EF600(u8 start, u16 radius) {
     s32      tpage;
     u8       i;
 
-    g_ScratchPad.cells.halves[0] = g_Task->unk_2E.half;
-    g_ScratchPad.cells.halves[1] = g_Task->unk_30.half;
+    g_ScratchPad.cells.halves[0] = g_Task->unk_2E.value;
+    g_ScratchPad.cells.halves[1] = g_Task->unk_30.value;
     tpage                        = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     for (i = start; i < start + 32; i += 8) {
@@ -194,8 +194,8 @@ MATCH void BMagic_DrawShrinkingRing(void) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     i                            = 0;
-    g_ScratchPad.cells.halves[0] = g_Task->unk_2E.half;
-    g_ScratchPad.cells.halves[1] = g_Task->unk_30.half;
+    g_ScratchPad.cells.halves[0] = g_Task->unk_2E.value;
+    g_ScratchPad.cells.halves[1] = g_Task->unk_30.value;
     g_ScratchPad.cells.halves[5] = g_Task->timer;
     g_ScratchPad.cells.halves[2] = g_Task->unk_09;
     for (i = 0; i < 32; i++) {

@@ -24,12 +24,12 @@ MATCH void func_801EED5C(void) {
     g_Task->header.mode += 1;
     Battle_SelectActiveBattlerScript(0xC, 2);
     BMAGIC_ALLOC_BATTLER_EFFECT();
-    work                                             = g_Task;
-    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
-    g_BattleEffects[index & BYTE_MASK].header.mode   = 0;
-    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
-    g_BattleEffects[index & BYTE_MASK].handler_index = 31;
-    g_BattleEffects[index & BYTE_MASK].target.party  = work;
+    work                                            = g_Task;
+    g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
+    g_BattleEffects[index & BYTE_MASK].header.mode  = 0;
+    g_BattleEffects[index & BYTE_MASK].header.step  = 0;
+    g_BattleEffects[index & BYTE_MASK].step_index   = 31;
+    g_BattleEffects[index & BYTE_MASK].target.party = work;
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
     SND_QueueSelectionEffect(0x100);
 }
@@ -66,15 +66,15 @@ MATCH void func_801EF0B8(void) {
     g_Task->header.mode += 1;
     Battle_SelectActiveBattlerScript(0xC, 2);
     BMAGIC_ALLOC_BATTLER_EFFECT();
-    work                                             = g_Task;
-    g_BattleEffects[index & BYTE_MASK].header.mode   = 1;
-    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
-    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
-    g_BattleEffects[index & BYTE_MASK].handler_index = 31;
-    g_BattleEffects[index & BYTE_MASK].target.party  = work;
-    g_Task->unk_27                                   = Battle_CopyCellPalette(g_BattleEffectBattler);
-    g_Task->unk_28                                   = g_BattleEffectBattler->unk_28;
-    g_Task->unk_24                                   = g_BattleEffectBattler->unk_24;
+    work                                            = g_Task;
+    g_BattleEffects[index & BYTE_MASK].header.mode  = 1;
+    g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
+    g_BattleEffects[index & BYTE_MASK].header.step  = 0;
+    g_BattleEffects[index & BYTE_MASK].step_index   = 31;
+    g_BattleEffects[index & BYTE_MASK].target.party = work;
+    g_Task->unk_27                                  = Battle_CopyCellPalette(g_BattleEffectBattler);
+    g_Task->unk_28                                  = g_BattleEffectBattler->unk_28;
+    g_Task->unk_24                                  = g_BattleEffectBattler->unk_24;
     Battle_SetCellPaletteStp(g_Task);
     Battle_ClearCellPaletteEntry(g_Task);
 }
@@ -85,7 +85,7 @@ MATCH void func_801EF324(void) {
     if (g_Task->param.unk_0B == 0xFF) {
         func_800AFC54();
         Battle_SelectActiveBattlerScript(4, 0);
-        battle_flags = &g_Battle.state;
+        battle_flags = &g_Battle.flags;
         *battle_flags |= 4;
         Effect_Reset();
     }
@@ -113,13 +113,13 @@ MATCH void func_801EF3F0(void) {
     Battle_SelectActiveBattlerScript(0xC, 2);
     for (i = 0; i < 3; i++) {
         BMAGIC_ALLOC_BATTLER_EFFECT();
-        work                                             = g_Task;
-        g_BattleEffects[index & BYTE_MASK].header.mode   = 3;
-        g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
-        g_BattleEffects[index & BYTE_MASK].header.step   = 0;
-        g_BattleEffects[index & BYTE_MASK].handler_index = 31;
-        g_BattleEffects[index & BYTE_MASK].unk_0B        = i;
-        g_BattleEffects[index & BYTE_MASK].target.party  = work;
+        work                                            = g_Task;
+        g_BattleEffects[index & BYTE_MASK].header.mode  = 3;
+        g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
+        g_BattleEffects[index & BYTE_MASK].header.step  = 0;
+        g_BattleEffects[index & BYTE_MASK].step_index   = 31;
+        g_BattleEffects[index & BYTE_MASK].unk_0B       = i;
+        g_BattleEffects[index & BYTE_MASK].target.party = work;
         g_Task->param.unk_0B++;
     }
     g_Task->unk_27 = Battle_CopyCellPalette(g_BattleEffectBattler);
@@ -161,12 +161,12 @@ MATCH void func_801EF7C8(void) {
     g_Task->header.mode += 1;
     Battle_SelectActiveBattlerScript(0xC, 2);
     BMAGIC_ALLOC_BATTLER_EFFECT();
-    work                                             = g_Task;
-    g_BattleEffects[index & BYTE_MASK].header.mode   = 4;
-    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
-    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
-    g_BattleEffects[index & BYTE_MASK].handler_index = 31;
-    g_BattleEffects[index & BYTE_MASK].target.party  = work;
+    work                                            = g_Task;
+    g_BattleEffects[index & BYTE_MASK].header.mode  = 4;
+    g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
+    g_BattleEffects[index & BYTE_MASK].header.step  = 0;
+    g_BattleEffects[index & BYTE_MASK].step_index   = 31;
+    g_BattleEffects[index & BYTE_MASK].target.party = work;
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
 }
 
@@ -203,12 +203,12 @@ MATCH void func_801EFAD4(void) {
     g_Task->header.mode += 1;
     Battle_SelectActiveBattlerScript(0xC, 2);
     BMAGIC_ALLOC_BATTLER_EFFECT();
-    work                                             = g_Task;
-    g_BattleEffects[index & BYTE_MASK].header.mode   = 5;
-    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
-    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
-    g_BattleEffects[index & BYTE_MASK].handler_index = 31;
-    g_BattleEffects[index & BYTE_MASK].target.party  = work;
+    work                                            = g_Task;
+    g_BattleEffects[index & BYTE_MASK].header.mode  = 5;
+    g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
+    g_BattleEffects[index & BYTE_MASK].header.step  = 0;
+    g_BattleEffects[index & BYTE_MASK].step_index   = 31;
+    g_BattleEffects[index & BYTE_MASK].target.party = work;
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
 }
 
@@ -254,12 +254,12 @@ MATCH void func_801EFD90(void) {
     g_Task->header.mode += 1;
     Battle_SelectActiveBattlerScript(0xC, 2);
     BMAGIC_ALLOC_BATTLER_EFFECT();
-    work                                             = g_Task;
-    g_BattleEffects[index & BYTE_MASK].header.mode   = 2;
-    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
-    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
-    g_BattleEffects[index & BYTE_MASK].handler_index = 31;
-    g_BattleEffects[index & BYTE_MASK].target.party  = work;
+    work                                            = g_Task;
+    g_BattleEffects[index & BYTE_MASK].header.mode  = 2;
+    g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
+    g_BattleEffects[index & BYTE_MASK].header.step  = 0;
+    g_BattleEffects[index & BYTE_MASK].step_index   = 31;
+    g_BattleEffects[index & BYTE_MASK].target.party = work;
     g_Task->param.unk_0B += 1;
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);

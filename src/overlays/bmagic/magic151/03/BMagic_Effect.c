@@ -104,9 +104,9 @@ MATCH void func_801EF138(void) {
     PartyMember* saved;
 
     if (EMI_IsReady()) {
-        if (g_Battle.state & BATTLE_STATE_OVER) {
+        if (g_Battle.flags & BATTLE_STATE_OVER) {
             if (g_Battle.unk_EA[0] == g_Battle.active_battler) {
-                g_Battle.state &= ~BATTLE_STATE_OVER;
+                g_Battle.flags &= ~BATTLE_STATE_OVER;
             }
         }
         saved  = g_Task;
@@ -172,7 +172,7 @@ INCLUDE_ASM(func_801EF484);
 
 MATCH void func_801EF938(void) {
     if (g_Task->param.unk_0B == 2) {
-        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+        g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
         g_Game.members[g_Battle.active_battler].u.turn.action_flags.value |= BATTLER_ACTION_UNK_5;
         g_Game.members[g_Battle.active_battler].u.turn.action_flags.value &= ~BATTLER_ACTION_ABILITY_ALT_POSE;
         Effect_Reset();

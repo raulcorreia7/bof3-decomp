@@ -118,15 +118,15 @@ MATCH void func_801EF0D8(void) {
         g_Task->facing = g_BattleEffectBattler->facing;
         Battle_CenterCamera();
         Battle_ProjectRange();
-        g_ScratchPad.cells.halves[6] = g_Task->unk_2E.half;
-        g_ScratchPad.cells.halves[7] = g_Task->unk_30.half;
+        g_ScratchPad.cells.halves[6] = g_Task->unk_2E.value;
+        g_ScratchPad.cells.halves[7] = g_Task->unk_30.value;
         func_800B0118();
         WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
         Battle_ProjectRange();
-        g_Task->unk_2E.half += g_Task->unk_0C;
-        g_Task->unk_30.half += g_Task->unk_10;
-        g_ScratchPad.cells.halves[4] = g_Task->unk_2E.half;
-        g_ScratchPad.cells.halves[5] = g_Task->unk_30.half;
+        g_Task->unk_2E.value += g_Task->unk_0C;
+        g_Task->unk_30.value += g_Task->unk_10;
+        g_ScratchPad.cells.halves[4] = g_Task->unk_2E.value;
+        g_ScratchPad.cells.halves[5] = g_Task->unk_30.value;
         angle                        = ratan2(g_ScratchPad.cells.halves[6] - g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[7] - g_ScratchPad.cells.halves[5]);
         work                         = g_Task;
         work->param.unk_0B           = 17;
@@ -167,8 +167,8 @@ MATCH void BMagic_DrawWhelpBreath(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
-    g_ScratchPad.cells.halves[4] = g_Task->unk_2E.half;
-    g_ScratchPad.cells.halves[5] = g_Task->unk_30.half;
+    g_ScratchPad.cells.halves[4] = g_Task->unk_2E.value;
+    g_ScratchPad.cells.halves[5] = g_Task->unk_30.value;
     g_ScratchPad.cells.halves[1] = g_Task->unk_14;
     for (i = 1; i < g_Task->timer + 1; i++) {
         g_ScratchPad.cells.halves[6] = g_ScratchPad.cells.halves[4];
@@ -251,16 +251,16 @@ MATCH void func_801EFDD4(void) {
 
     g_Task->facing = g_BattleEffectBattler->facing;
     WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
-    g_Task->unk_25    = 29;
-    g_Task->unk_26    = 0;
-    g_Task->unk_27    = 0xA1;
-    g_Task->unk_28    = 0;
-    g_Task->unk_2A    = g_BattleEffectBattler->facing & 1;
-    g_Task->unk_29    = 3;
-    g_Task->unk_24    = 4;
-    work              = g_Task;
-    work->unk_2B      = 0;
-    work->unk_2C.half = 0;
+    g_Task->unk_25     = 29;
+    g_Task->unk_26     = 0;
+    g_Task->unk_27     = 0xA1;
+    g_Task->unk_28     = 0;
+    g_Task->unk_2A     = g_BattleEffectBattler->facing & 1;
+    g_Task->unk_29     = 3;
+    g_Task->unk_24     = 4;
+    work               = g_Task;
+    work->unk_2B       = 0;
+    work->unk_2C.value = 0;
     switch (g_Task->param.unk_0B) {
         case 0:
             g_Task->header.step += 1;

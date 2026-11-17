@@ -34,12 +34,12 @@ MATCH void func_801EEC84(void) {
         row                     = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
         *(BattleWorkImage*)slot = *row;
     }
-    work                                             = g_Task;
-    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
-    g_BattleEffects[index & BYTE_MASK].header.mode   = 0;
-    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
-    g_BattleEffects[index & BYTE_MASK].handler_index = 84;
-    g_BattleEffects[index & BYTE_MASK].target.party  = work;
+    work                                            = g_Task;
+    g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
+    g_BattleEffects[index & BYTE_MASK].header.mode  = 0;
+    g_BattleEffects[index & BYTE_MASK].header.step  = 0;
+    g_BattleEffects[index & BYTE_MASK].step_index   = 84;
+    g_BattleEffects[index & BYTE_MASK].target.party = work;
     g_Task->param.unk_0B += 1;
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
 }

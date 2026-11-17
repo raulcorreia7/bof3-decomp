@@ -37,7 +37,7 @@ MATCH void func_801DEFE4(void) {
         Actor_RequestScript(g_Task->facing + 0x30);
         return;
     }
-    if (g_Battle.state & BATTLE_STATE_COMMAND_ARMED) {
+    if (g_Battle.flags & BATTLE_STATE_COMMAND_ARMED) {
         if (flags & STATUS_PARALYZED) {
             Actor_RequestScript(g_Task->facing + 0x4);
             return;

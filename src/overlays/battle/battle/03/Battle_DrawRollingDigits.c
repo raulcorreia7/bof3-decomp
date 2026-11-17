@@ -5,9 +5,9 @@
 /* Queued-slot fields driving the rolling digit display. */
 typedef struct {
     u8  pad_00[0x0A];
-    s8  digit;
+    s8  last_digit;
     u8  pad_0b[0x27];
-    s16 count;
+    s16 digit;
     u8  pad_34[2];
     u16 x;
     u8  pad_38[2];
@@ -22,13 +22,13 @@ MATCH void Battle_DrawRollingDigits(u8 palette) {
     s8               digit_index;
 
     view        = (BattleDigitRoll*)D_801EC2E0;
-    counter     = (view->count + 1);
-    view->count = counter % 10;
+    counter     = (view->digit + 1);
+    view->digit = counter % 10;
 
-    if ((digit_index = view->digit) >= 0) {
+    if ((digit_index = view->last_digit) >= 0) {
         do {
             loop_view     = (BattleDigitRoll*)D_801EC2E0;
-            current_digit = loop_view->count;
+            current_digit = loop_view->digit;
             Battle_DrawNumber((loop_view->x - digit_index * 8 - 12), loop_view->y, palette, ((current_digit + digit_index) % 10));
         } while (--digit_index >= 0);
     }

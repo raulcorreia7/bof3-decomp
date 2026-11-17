@@ -16,7 +16,7 @@ MATCH void func_801C0758(s32 x, s32 y, u8 kind) {
         index = 0;
     loop:
         {
-            if ((&g_Game.members[0].unk_70)[index] == 0) {
+            if ((&g_Game.members[0].speed)[index] == 0) {
                 *x_ptr = x;
                 *y_ptr = y;
             } else if ((g_Game.walk_flags & 0x4000) == 0) {

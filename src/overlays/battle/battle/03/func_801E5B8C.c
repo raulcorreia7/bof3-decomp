@@ -1,8 +1,8 @@
 #include "battle_03.h"
 
 MATCH void func_801E5B8C(void) {
-    BattleEffectStage1Funcs table;
+    BattleEffectStage1Steps table;
 
     table = g_BattleEffectStage1Funcs;
-    table.handlers[D_801EC2E0->handler_index]();
+    table.steps[D_801EC2E0->step_index]();
 }

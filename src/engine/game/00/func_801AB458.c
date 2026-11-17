@@ -104,10 +104,10 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
         }
         case ACTOR_SCRIPT_STAGE_SET_RECORD_INDEX:
             if (Actor_GetOwner() == 1) {
-                entry                             = g_AreaLoads[g_GameAreaId];
-                byte                              = table[state->index + 1];
-                list                              = *(u32**)((u8*)entry + 0x18);
-                g_Game.current->u.field.index_124 = list[byte];
+                entry                         = g_AreaLoads[g_GameAreaId];
+                byte                          = table[state->index + 1];
+                list                          = *(u32**)((u8*)entry + 0x18);
+                g_Game.current->u.field.index = list[byte];
             } else {
                 state->unk_03 = table[state->index + 1];
             }

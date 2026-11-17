@@ -101,10 +101,10 @@ MATCH void func_801EEEFC(void) {
     g_Task->unk_0C    = heading;
     g_Task->unk_10    = 0;
     Battle_ProjectRange();
-    BMagic_Trail[g_Task->unk_04][0].vx = g_Task->unk_2E.half;
-    BMagic_Trail[g_Task->unk_04][0].vy = g_Task->unk_30.half;
-    BMagic_Trail[g_Task->unk_04][1].vx = g_Task->unk_2E.half;
-    BMagic_Trail[g_Task->unk_04][1].vy = g_Task->unk_30.half;
+    BMagic_Trail[g_Task->unk_04][0].vx = g_Task->unk_2E.value;
+    BMagic_Trail[g_Task->unk_04][0].vy = g_Task->unk_30.value;
+    BMagic_Trail[g_Task->unk_04][1].vx = g_Task->unk_2E.value;
+    BMagic_Trail[g_Task->unk_04][1].vy = g_Task->unk_30.value;
     g_Task->param.unk_0B               = 0;
     g_Task->unk_09                     = 0x10;
     g_Task->timer                      = 1;
@@ -339,7 +339,7 @@ MATCH void func_801F0478(void) {
 
 MATCH void func_801F04F0(void) {
     Battle_ProjectRange();
-    g_Task->unk_30.half += 8;
+    g_Task->unk_30.value += 8;
     g_Task->unk_5D = (RANDOM_MASK(3)) + 1;
     g_Task->unk_5E = (RANDOM_MASK(3)) + 1;
     g_Task->unk_5F = (RANDOM_MASK(3)) + 1;
@@ -355,11 +355,11 @@ MATCH void func_801F05AC(void) {
 
     rand();
     work = g_Task;
-    work->unk_2E.half -= 1;
+    work->unk_2E.value -= 1;
     FAKE_BARRIER(); /* FAKE: reloads the g_Task cell after the store, as retail does; plain C caches it (0x78 vs 0x8C), FAKE_DECL_TASK_VOLATILE re-reads each use (0x84) and moves seven other functions. */
     next = g_Task;
     next->unk_09 += 4;
-    next->unk_30.half -= 1;
+    next->unk_30.value -= 1;
     state = g_Task;
     if (state->unk_09 == 0x10) {
         state->header.step++;
@@ -373,11 +373,11 @@ MATCH void func_801F0638(void) {
     u8           timer;
 
     work = g_Task;
-    work->unk_30.half -= 2;
+    work->unk_30.value -= 2;
     work->unk_09 += 1;
     rand();
     next = g_Task;
-    next->unk_2E.half -= 1;
+    next->unk_2E.value -= 1;
     FAKE_BARRIER(); /* FAKE: reloads the g_Task cell before the timer, as retail does; plain C caches it (0x88 vs 0xA0), FAKE_DECL_TASK_VOLATILE re-reads each use (0x98) and moves seven other functions. */
     state        = g_Task;
     timer        = state->timer - 1;
@@ -405,9 +405,9 @@ MATCH void func_801F06D8(void) {
     QUAD_RADIUS = g_Task->unk_09 * 2;
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
-    setXY4(prim, g_Task->unk_2E.half + FIXED_MUL(rcos(ANGLE_45), QUAD_RADIUS), g_Task->unk_30.half + FIXED_MUL(rsin(ANGLE_45), QUAD_RADIUS), g_Task->unk_2E.half + FIXED_MUL(rcos(1536), QUAD_RADIUS),
-           g_Task->unk_30.half + FIXED_MUL(rsin(1536), QUAD_RADIUS), g_Task->unk_2E.half + FIXED_MUL(rcos(3584), QUAD_RADIUS), g_Task->unk_30.half + FIXED_MUL(rsin(3584), QUAD_RADIUS),
-           g_Task->unk_2E.half + FIXED_MUL(rcos(2560), QUAD_RADIUS), g_Task->unk_30.half + FIXED_MUL(rsin(2560), QUAD_RADIUS));
+    setXY4(prim, g_Task->unk_2E.value + FIXED_MUL(rcos(ANGLE_45), QUAD_RADIUS), g_Task->unk_30.value + FIXED_MUL(rsin(ANGLE_45), QUAD_RADIUS),
+           g_Task->unk_2E.value + FIXED_MUL(rcos(1536), QUAD_RADIUS), g_Task->unk_30.value + FIXED_MUL(rsin(1536), QUAD_RADIUS), g_Task->unk_2E.value + FIXED_MUL(rcos(3584), QUAD_RADIUS),
+           g_Task->unk_30.value + FIXED_MUL(rsin(3584), QUAD_RADIUS), g_Task->unk_2E.value + FIXED_MUL(rcos(2560), QUAD_RADIUS), g_Task->unk_30.value + FIXED_MUL(rsin(2560), QUAD_RADIUS));
     setTPage(prim, TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 832, 256);
     setClut(prim, 32, 506);
     setUVWH(prim, 128, 32, 32, 32);

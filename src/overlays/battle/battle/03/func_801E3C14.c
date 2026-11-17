@@ -76,7 +76,7 @@ MATCH void func_801E3C14(void) {
     if (tail_work->turn.hp_change > 0) {
         if (tail_work->hp == 0) {
             g_Task->unk_09 = 0;
-            if (g_Battle.state & BATTLE_STATE_CRITICAL) {
+            if (g_Battle.flags & BATTLE_STATE_CRITICAL) {
                 GFX_AllocPaletteFade(g_Task, 16, 16, 16, 0);
             }
             g_BattleCurrentEnemy->status = STATUS_KO;
@@ -87,7 +87,7 @@ MATCH void func_801E3C14(void) {
     if (g_BattleCurrentEnemy->turn.hp_change < 0 || g_BattleCurrentEnemy->turn.ap_change < 0) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 6));
     }
-    if (!(g_Battle.state & BATTLE_STATE_DAMAGE_APPLIED)) {
+    if (!(g_Battle.flags & BATTLE_STATE_DAMAGE_APPLIED)) {
         action_type = g_BattleActionType_nv;
         if (action_type == BATTLE_ACTION_ATTACK) {
             func_800AB834();
@@ -98,7 +98,7 @@ MATCH void func_801E3C14(void) {
             func_800AB910();
         }
     }
-    flags = &g_Battle.state;
+    flags = &g_Battle.flags;
     *flags &= ~0x80;
     Battle_IsEnemyBlocked();
     g_Task->unk_03 += 1;

@@ -18,11 +18,11 @@ MATCH void func_800C238C(u8 mode, u8 index) {
     } while (src != end);
     /* FAKE: the final word completes the 0x74-byte record copy. */
     FAKE_ORDER_LOCK(dst->w[0] = src->w[0]);
-    g_BattleEffects[effect_slot & BYTE_MASK].unk_06        = 3;
-    g_BattleEffects[effect_slot & BYTE_MASK].handler_index = 5;
-    g_BattleEffects[effect_slot & BYTE_MASK].header.mode   = mode;
-    g_BattleEffects[effect_slot & BYTE_MASK].header.step   = 0;
-    g_BattleEffects[effect_slot & BYTE_MASK].arg.unk_09    = 0;
-    g_BattleEffects[effect_slot & BYTE_MASK].target.enemy  = g_BattleEnemyBattlers;
-    g_BattleEffects[effect_slot & BYTE_MASK].unk_29        = index;
+    g_BattleEffects[effect_slot & BYTE_MASK].unk_06       = 3;
+    g_BattleEffects[effect_slot & BYTE_MASK].step_index   = 5;
+    g_BattleEffects[effect_slot & BYTE_MASK].header.mode  = mode;
+    g_BattleEffects[effect_slot & BYTE_MASK].header.step  = 0;
+    g_BattleEffects[effect_slot & BYTE_MASK].arg.unk_09   = 0;
+    g_BattleEffects[effect_slot & BYTE_MASK].target.enemy = g_BattleEnemyBattlers;
+    g_BattleEffects[effect_slot & BYTE_MASK].unk_29       = index;
 }

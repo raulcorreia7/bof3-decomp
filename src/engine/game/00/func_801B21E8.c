@@ -34,7 +34,7 @@ NON_MATCHING void func_801B21E8(void) {
     FAKE_STACK_PADS(u8, 8);
 
     val3  = 3;
-    val14 = g_Game.current->status.field.flags_12C.u8_value;
+    val14 = g_Game.current->status.field.flags.unsigned_value;
     if (D_80145FD1 == 3) {
         Party_SwapBattlerRows(0, 1, 1);
         if (g_Game.party_size == 3) {
@@ -62,8 +62,8 @@ NON_MATCHING void func_801B21E8(void) {
                 g_Task         = tmp5;
                 g_Game.current = tmp5;
                 Party_LoadMemberSprite(FIELD(u8, tmp5, 0x79u), val4 & BYTE_MASK);
-                g_Game.current->status.field.flags_12C.u8_value = val14;
-                if (g_Game.current->status.field.flags_12C.u8_value & 1) {
+                g_Game.current->status.field.flags.unsigned_value = val14;
+                if (g_Game.current->status.field.flags.unsigned_value & 1) {
                     FIELD(s8, g_Task, 0x29u) = 4;
                 }
                 val11 = (u8*)g_Characters;

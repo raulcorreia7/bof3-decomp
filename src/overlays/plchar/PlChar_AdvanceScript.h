@@ -21,7 +21,7 @@ MATCH void PlChar_AdvanceScript(void) {
         }
     }
     if (done & BYTE_MASK) {
-        g_Task->unk_2B                            = 0;
-        g_Game.current->u.field.mode_12B.u8_value = 0;
+        g_Task->unk_2B                              = 0;
+        g_Game.current->u.field.mode.unsigned_value = 0;
     }
 }

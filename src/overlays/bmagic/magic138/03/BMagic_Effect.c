@@ -13,12 +13,12 @@ MATCH void func_801EEC88(void) {
     u16*         dst;
     u8           i;
 
-    work              = g_Task;
-    work->unk_2E.half = 240;
-    work->unk_30.half = 250;
-    i                 = 0;
-    dst               = g_AreaPaletteCopy->rows[26].colors;
-    src               = g_AreaPaletteArena->rows[26].colors;
+    work               = g_Task;
+    work->unk_2E.value = 240;
+    work->unk_30.value = 250;
+    i                  = 0;
+    dst                = g_AreaPaletteCopy->rows[26].colors;
+    src                = g_AreaPaletteArena->rows[26].colors;
     for (; i < 16; i++) {
         dst[i] = src[i];
     }
@@ -70,7 +70,7 @@ MATCH void func_801EEED8(void) {
     TASK_SET(saved_work);
     if (saved_work->param.unk_0B == 0) {
         Battle_MarkDamaged(g_Battle.target_selector);
-        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+        g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
         Effect_Reset();
     }
 }
@@ -95,41 +95,41 @@ MATCH void func_801EF04C(void) {
 
     if (g_Battle.active_battler < 3) {
         if (g_BattleEffectBattler->unk_09 & 1) {
-            left           = g_Task->unk_2E.signed_half - 40;
-            g_Task->unk_0C = ((g_Game.members[g_Battle.active_battler].unk_2E.signed_half - left) << 4) / 8;
-            g_Task->unk_10 = ((g_Game.members[g_Battle.active_battler].unk_30.signed_half - g_Task->unk_30.signed_half) << 4) / 8;
+            left           = g_Task->unk_2E.signed_value - 40;
+            g_Task->unk_0C = ((g_Game.members[g_Battle.active_battler].unk_2E.signed_value - left) << 4) / 8;
+            g_Task->unk_10 = ((g_Game.members[g_Battle.active_battler].unk_30.signed_value - g_Task->unk_30.signed_value) << 4) / 8;
         } else {
-            left           = g_Task->unk_2E.signed_half - 20;
-            g_Task->unk_0C = ((g_Game.members[g_Battle.active_battler].unk_2E.signed_half - left) << 4) / 8;
-            g_Task->unk_10 = ((g_Game.members[g_Battle.active_battler].unk_30.signed_half - g_Task->unk_30.signed_half) << 4) / 8;
+            left           = g_Task->unk_2E.signed_value - 20;
+            g_Task->unk_0C = ((g_Game.members[g_Battle.active_battler].unk_2E.signed_value - left) << 4) / 8;
+            g_Task->unk_10 = ((g_Game.members[g_Battle.active_battler].unk_30.signed_value - g_Task->unk_30.signed_value) << 4) / 8;
         }
     } else {
         if (g_BattleEffectBattler->unk_09 & 1) {
-            left           = g_Task->unk_2E.signed_half - 40;
+            left           = g_Task->unk_2E.signed_value - 40;
             g_Task->unk_0C = ((g_BattleEnemyBattlers[g_Battle.active_battler - 3].unk_2E - left) << 4) / 8;
-            g_Task->unk_10 = ((g_BattleEnemyBattlers[g_Battle.active_battler - 3].unk_30 - g_Task->unk_30.signed_half) << 4) / 8;
+            g_Task->unk_10 = ((g_BattleEnemyBattlers[g_Battle.active_battler - 3].unk_30 - g_Task->unk_30.signed_value) << 4) / 8;
         } else {
-            left           = g_Task->unk_2E.signed_half - 20;
+            left           = g_Task->unk_2E.signed_value - 20;
             g_Task->unk_0C = ((g_BattleEnemyBattlers[g_Battle.active_battler - 3].unk_2E - left) << 4) / 8;
-            g_Task->unk_10 = ((g_BattleEnemyBattlers[g_Battle.active_battler - 3].unk_30 - g_Task->unk_30.signed_half) << 4) / 8;
+            g_Task->unk_10 = ((g_BattleEnemyBattlers[g_Battle.active_battler - 3].unk_30 - g_Task->unk_30.signed_value) << 4) / 8;
         }
     }
-    g_Task->unk_18      = g_Task->unk_2E.signed_half << 4;
-    g_Task->unk_1C      = g_Task->unk_30.signed_half << 4;
-    g_Task->unk_25      = 30;
-    g_Task->unk_26      = 0;
-    g_Task->unk_48      = 1;
-    g_Task->unk_27      = 0xA0;
-    g_Task->unk_28      = 0;
-    g_Task->unk_24      = 0x84;
-    g_Task->unk_5D      = 0;
-    g_Task->unk_5E      = 0;
-    g_Task->unk_5F      = 0;
-    g_Task->unk_5C      = 0;
-    g_Task->unk_2A      = 0;
-    g_Task->unk_29      = 3;
-    g_Task->unk_2C.half = 0;
-    g_Task->unk_2B      = 0;
+    g_Task->unk_18       = g_Task->unk_2E.signed_value << 4;
+    g_Task->unk_1C       = g_Task->unk_30.signed_value << 4;
+    g_Task->unk_25       = 30;
+    g_Task->unk_26       = 0;
+    g_Task->unk_48       = 1;
+    g_Task->unk_27       = 0xA0;
+    g_Task->unk_28       = 0;
+    g_Task->unk_24       = 0x84;
+    g_Task->unk_5D       = 0;
+    g_Task->unk_5E       = 0;
+    g_Task->unk_5F       = 0;
+    g_Task->unk_5C       = 0;
+    g_Task->unk_2A       = 0;
+    g_Task->unk_29       = 3;
+    g_Task->unk_2C.value = 0;
+    g_Task->unk_2B       = 0;
     Actor_SelectScript((g_Battle.target_selector - 3) & 1);
     g_Task->unk_09 = 3;
     g_Task->header.step += 1;
@@ -138,28 +138,28 @@ MATCH void func_801EF04C(void) {
 MATCH void func_801EF3A0(void) {
     u8 slot;
 
-    g_Task->unk_2E.half = g_Task->unk_18 >> 4;
-    g_Task->unk_30.half = g_Task->unk_1C >> 4;
+    g_Task->unk_2E.value = g_Task->unk_18 >> 4;
+    g_Task->unk_30.value = g_Task->unk_1C >> 4;
     g_Task->unk_18 += g_Task->unk_0C;
     g_Task->unk_1C += g_Task->unk_10;
     if (g_Battle.active_battler < 3) {
-        if (g_Task->unk_30.signed_half < g_Game.members[g_Battle.active_battler].unk_30.signed_half - 20) {
+        if (g_Task->unk_30.signed_value < g_Game.members[g_Battle.active_battler].unk_30.signed_value - 20) {
             slot                               = Battle_AllocEffect(1, 0x56);
             g_BattleEffects[slot].header.mode  = 1;
             g_BattleEffects[slot].header.step  = 0;
-            g_BattleEffects[slot].unk_2E       = g_Task->unk_2E.half;
-            g_BattleEffects[slot].unk_30       = g_Task->unk_30.half;
+            g_BattleEffects[slot].unk_2E       = g_Task->unk_2E.value;
+            g_BattleEffects[slot].unk_30       = g_Task->unk_30.value;
             g_BattleEffects[slot].unk_0A       = g_Task->timer;
             g_BattleEffects[slot].target.party = g_BattleEffectBattler;
             g_Task->header.step += 1;
         }
     } else {
-        if (g_Task->unk_30.signed_half < g_BattleEnemyBattlers[g_Battle.active_battler - 3].unk_30 - 40) {
+        if (g_Task->unk_30.signed_value < g_BattleEnemyBattlers[g_Battle.active_battler - 3].unk_30 - 40) {
             slot                               = Battle_AllocEffect(1, 0x56);
             g_BattleEffects[slot].header.mode  = 1;
             g_BattleEffects[slot].header.step  = 0;
-            g_BattleEffects[slot].unk_2E       = g_Task->unk_2E.half;
-            g_BattleEffects[slot].unk_30       = g_Task->unk_30.half;
+            g_BattleEffects[slot].unk_2E       = g_Task->unk_2E.value;
+            g_BattleEffects[slot].unk_30       = g_Task->unk_30.value;
             g_BattleEffects[slot].unk_0A       = g_Task->timer;
             g_BattleEffects[slot].target.party = g_BattleEffectBattler;
             g_Task->header.step += 1;
@@ -186,16 +186,16 @@ MATCH void func_801EF52C(void) {
 
 MATCH void func_801EF5D0(void) {
     PartyMember* work;
-    g_Task->unk_29    = 0;
-    g_Task->unk_25    = 0x1D;
-    g_Task->unk_26    = 0;
-    g_Task->unk_24    = 0x84;
-    g_Task->unk_27    = 0xB4;
-    g_Task->unk_28    = 0;
-    work              = g_Task;
-    work->unk_2B      = 0;
-    work->unk_2C.half = 0;
-    g_Task->unk_2A    = 0;
+    g_Task->unk_29     = 0;
+    g_Task->unk_25     = 0x1D;
+    g_Task->unk_26     = 0;
+    g_Task->unk_24     = 0x84;
+    g_Task->unk_27     = 0xB4;
+    g_Task->unk_28     = 0;
+    work               = g_Task;
+    work->unk_2B       = 0;
+    work->unk_2C.value = 0;
+    g_Task->unk_2A     = 0;
     Actor_SelectScript(5);
     SND_PlaySE((g_Task->timer & 0x1) | 0x100);
     g_Task->header.step += 1;

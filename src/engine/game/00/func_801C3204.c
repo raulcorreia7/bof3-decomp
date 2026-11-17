@@ -5,7 +5,7 @@ MATCH void func_801C3204(void) {
 
     index = g_Game.current->character_index;
     if (g_Characters[index].status & STATUS_POISONED) {
-        g_Game.current->u.field.flags_118 = 0x0A;
+        g_Game.current->u.field.flags = 0x0A;
     }
     index = g_Game.current->character_index;
     if (g_Characters[index].status & STATUS_CONFUSED) {

@@ -474,9 +474,9 @@ MATCH void func_801F0A84(s32 radius) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        setXY3(prim, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), g_ScratchPad.cells.halves[0]),
-               g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), g_ScratchPad.cells.halves[0]), g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 9), g_ScratchPad.cells.halves[0]),
-               g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 9), g_ScratchPad.cells.halves[0]));
+        setXY3(prim, g_Task->unk_2E.value, g_Task->unk_30.value, g_Task->unk_2E.value + FIXED_MUL(rsin(i << 9), g_ScratchPad.cells.halves[0]),
+               g_Task->unk_30.value + FIXED_MUL(rcos(i << 9), g_ScratchPad.cells.halves[0]), g_Task->unk_2E.value + FIXED_MUL(rsin((i + 1) << 9), g_ScratchPad.cells.halves[0]),
+               g_Task->unk_30.value + FIXED_MUL(rcos((i + 1) << 9), g_ScratchPad.cells.halves[0]));
         setRGB0(prim, 0x80, 0x80, 0x80);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);

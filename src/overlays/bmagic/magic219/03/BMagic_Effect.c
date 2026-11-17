@@ -135,7 +135,7 @@ MATCH void func_801EF118(void) {
         g_Task->unk_5F       = 0;
         g_Task->unk_2A       = 0;
         g_Task->unk_29       = 4;
-        g_Task->unk_2C.half  = 0;
+        g_Task->unk_2C.value = 0;
         g_Task->unk_2B       = 0;
         Actor_SelectScript(0);
         g_Task->unk_18 = ratan2(g_Task->unk_0C - g_Task->pos.x.fixed, g_Task->unk_10 - g_Task->pos.y.fixed);

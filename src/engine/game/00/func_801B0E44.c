@@ -20,7 +20,7 @@ NON_MATCHING u8 func_801B0E44(void) {
     } else {
         g_Task->timer = 16;
     }
-    divisor       = g_RouteSpeedScale[g_Game.current->u.field.counter_11C.u8_value];
+    divisor       = g_RouteSpeedScale[g_Game.current->u.field.counter.unsigned_value];
     g_Task->timer = (u8)(g_Task->timer / (u32)(divisor & BYTE_MASK));
     if (g_Task->voice_flags.scene_flag == 0) {
         SP_REF(s32, 0x8) = g_Task->pos.x.fixed + g_FacingOffsets[g_Task->direction].x * divisor * g_Task->timer;

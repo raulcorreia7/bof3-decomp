@@ -8,7 +8,7 @@ MATCH void func_801BD5A4(void) {
     work = g_Task;
     switch (work->header.step) {
         case 0:
-            if (g_Game.members[0].u.field.mode_12B.u8_value != 8) {
+            if (g_Game.members[0].u.field.mode.unsigned_value != 8) {
                 work->header.mode = 1;
                 ACTOR_CLEAR_STEP();
             }

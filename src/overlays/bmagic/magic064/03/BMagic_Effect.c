@@ -119,13 +119,13 @@ MATCH void func_801EF0E0(void) {
     } while (src != end);
     /* FAKE: hold tail store before tail. */
     FAKE_ORDER_LOCK(dst->w[0] = src->w[0]);
-    g_BattleEffects[effect_slot & BYTE_MASK].target.party  = g_Task;
-    g_BattleEffects[effect_slot & BYTE_MASK].header.mode   = 0;
-    g_BattleEffects[effect_slot & BYTE_MASK].header.step   = 0;
-    g_BattleEffects[effect_slot & BYTE_MASK].unk_03        = 0;
-    g_BattleEffects[effect_slot & BYTE_MASK].unk_06        = 1;
-    g_BattleEffects[effect_slot & BYTE_MASK].handler_index = 58;
-    g_Task->unk_09                                         = 1;
+    g_BattleEffects[effect_slot & BYTE_MASK].target.party = g_Task;
+    g_BattleEffects[effect_slot & BYTE_MASK].header.mode  = 0;
+    g_BattleEffects[effect_slot & BYTE_MASK].header.step  = 0;
+    g_BattleEffects[effect_slot & BYTE_MASK].unk_03       = 0;
+    g_BattleEffects[effect_slot & BYTE_MASK].unk_06       = 1;
+    g_BattleEffects[effect_slot & BYTE_MASK].step_index   = 58;
+    g_Task->unk_09                                        = 1;
     g_Task->header.step += 1;
 }
 
@@ -157,7 +157,7 @@ MATCH void func_801EF2A4(void) {
     func_801F0EEC(3, 2, battler->unk_09);
     func_801F0EEC(2, 1, battler->unk_09);
     g_Task = battler;
-    if (g_BattleEffectBattler->unk_2C.half == 0) {
+    if (g_BattleEffectBattler->unk_2C.value == 0) {
         value = 0x242;
         if (g_BattleEffectBattler->facing < 2U) {
             value = 0x240;
@@ -242,8 +242,8 @@ MATCH void func_801EF69C(void) {
     }
 
     g_Game.members[g_Battle.active_battler].u.turn.action_flags.value |= BATTLER_ACTION_DRAGON_FORM_QUEUED;
-    g_Game.members[g_Battle.active_battler].counter_136 = 0;
-    g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+    g_Game.members[g_Battle.active_battler].charge_counter = 0;
+    g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
     Battle_MarkDamaged(g_Battle.target_selector);
     Effect_Reset();
 }
@@ -397,8 +397,8 @@ MATCH void func_801F04A0(void) {
     D_801F28B4->outer.fixed = TO_COORD(g_Task->param.unk_0B);
     D_801F28B4->inner_speed = 0x32000;
     D_801F28B4->outer_speed = 0x19800;
-    D_801F28B4->x           = BATTLE_ACTIVE_PARTY.unk_2E.signed_half + D_801F138C[BATTLE_ACTIVE_PARTY.facing][0];
-    D_801F28B4->y           = BATTLE_ACTIVE_PARTY.unk_30.signed_half + D_801F138C[BATTLE_ACTIVE_PARTY.facing][1];
+    D_801F28B4->x           = BATTLE_ACTIVE_PARTY.unk_2E.signed_value + D_801F138C[BATTLE_ACTIVE_PARTY.facing][0];
+    D_801F28B4->y           = BATTLE_ACTIVE_PARTY.unk_30.signed_value + D_801F138C[BATTLE_ACTIVE_PARTY.facing][1];
     D_801F28B4->mode += 1;
 }
 
@@ -518,12 +518,12 @@ MATCH void func_801F0EEC(u32 sprite, s32 blend, s32 color) {
     setRGB0(prim, color, color, color);
     if ((sprite & BYTE_MASK) < 2) {
         task     = g_Task;
-        prim->x0 = task->unk_2E.half - 32;
+        prim->x0 = task->unk_2E.value - 32;
     } else {
         task     = g_Task;
-        prim->x0 = task->unk_2E.half - 40;
+        prim->x0 = task->unk_2E.value - 40;
     }
-    prim->y0 = task->unk_30.half - 64;
+    prim->y0 = task->unk_30.value - 64;
     /* FAKE: the barrier keeps the prim copy out of the load delay, as retail. */
     FAKE_BARRIER();
     setUV0(prim, D_801F13A4[sprite & BYTE_MASK].x, D_801F13A4[sprite & BYTE_MASK].y);

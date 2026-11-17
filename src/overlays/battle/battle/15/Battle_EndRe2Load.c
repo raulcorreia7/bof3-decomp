@@ -7,6 +7,6 @@ MATCH void Battle_EndRe2Load(void) {
         g_GfxPalettePending     = 1;
         g_Battle.phase.sub_step = 1;
         g_Battle.ui_step        = 1;
-        g_Battle.ui_state       = 0;
+        g_Battle.ui_mode        = 0;
     }
 }

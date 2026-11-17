@@ -160,7 +160,7 @@ MATCH void func_801EF5BC(void) {
         g_Task->unk_24               = 4;
         work                         = g_Task;
         work->unk_2B                 = 1;
-        work->unk_2C.half            = 0;
+        work->unk_2C.value           = 0;
         Actor_SelectScript((g_Task->param.unk_0B % 3) & BYTE_MASK);
         g_Task->header.step++;
     }

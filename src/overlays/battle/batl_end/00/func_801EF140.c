@@ -34,7 +34,7 @@ NON_MATCHING void func_801EF140(void) {
     D_8014835D = height + 4;
     D_8014835E = g_Battle.cursor.gene.column;
     D_8014835F = D_801463B2;
-    g_Battle.ui_state -= 1;
+    g_Battle.ui_mode -= 1;
 }
 #else
 INCLUDE_ASM(func_801EF140);

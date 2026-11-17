@@ -8,11 +8,11 @@ MATCH void func_8009A0A4(void) {
 
     kind_index = g_Game.members[BATTLE_ACTIVE_ROW->slot].u.turn.command.id;
     if (g_InputPressed & g_InputMasks[BATTLE_INPUT_CANCEL]) {
-        g_Battle.ui_state = 4;
+        g_Battle.ui_mode = 4;
         return;
     }
     if (g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
-        g_Battle.ui_state = 3;
+        g_Battle.ui_mode = 3;
         return;
     }
     buttons = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
@@ -23,7 +23,7 @@ MATCH void func_8009A0A4(void) {
             } else {
                 g_BattleActorTurn->command.target = Battle_TargetNext(0);
             }
-            dest  = &g_Battle.ui_state;
+            dest  = &g_Battle.ui_mode;
             value = *dest + 1;
             *dest = value;
             SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));

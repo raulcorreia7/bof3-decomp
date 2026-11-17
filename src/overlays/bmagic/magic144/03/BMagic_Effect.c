@@ -196,15 +196,15 @@ MATCH void func_801EFF74(void) {
         Battle_ProjectRange();
         work = g_Task;
         if (work->param.unk_0B == 1) {
-            x = work->unk_2E.half - MAGIC092_STEP_X;
-            y = work->unk_30.half;
+            x = work->unk_2E.value - MAGIC092_STEP_X;
+            y = work->unk_30.value;
         } else {
-            x = work->unk_2E.half + MAGIC092_STEP_X;
-            y = work->unk_30.half;
+            x = work->unk_2E.value + MAGIC092_STEP_X;
+            y = work->unk_30.value;
         }
         y -= MAGIC092_RISE_Y;
-        work->unk_2E.half = x;
-        work->unk_30.half = y;
+        work->unk_2E.value = x;
+        work->unk_30.value = y;
         func_801F01D0();
     }
 }
@@ -233,9 +233,9 @@ MATCH void func_801F01D0(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        setXY3(prim, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), g_ScratchPad.cells.halves[0]),
-               g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), g_ScratchPad.cells.halves[0]), g_Task->unk_2E.half + FIXED_MUL(rsin((i + 1) << 9), g_ScratchPad.cells.halves[0]),
-               g_Task->unk_30.half + FIXED_MUL(rcos((i + 1) << 9), g_ScratchPad.cells.halves[0]));
+        setXY3(prim, g_Task->unk_2E.value, g_Task->unk_30.value, g_Task->unk_2E.value + FIXED_MUL(rsin(i << 9), g_ScratchPad.cells.halves[0]),
+               g_Task->unk_30.value + FIXED_MUL(rcos(i << 9), g_ScratchPad.cells.halves[0]), g_Task->unk_2E.value + FIXED_MUL(rsin((i + 1) << 9), g_ScratchPad.cells.halves[0]),
+               g_Task->unk_30.value + FIXED_MUL(rcos((i + 1) << 9), g_ScratchPad.cells.halves[0]));
         setRGB0(prim, g_ScratchPad.cells.halves[7], g_ScratchPad.cells.halves[7] / 5, g_ScratchPad.cells.halves[7] / 5);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);

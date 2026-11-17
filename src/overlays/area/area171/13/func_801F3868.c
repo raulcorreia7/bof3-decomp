@@ -30,9 +30,9 @@ MATCH void func_801F3868(void) {
                 }
                 saved->param.unk_0B |= BIT(index);
                 g_AreaWalkFlags |= BIT(index);
-                g_GameState->u.field.counter_11C.u8_value = 2;
-                ((PartyMember*)g_Task)->unk_09            = 0;
-                ((PartyMember*)g_Task)->facing            = D_801F4188[bounds].unk_04;
+                g_GameState->u.field.counter.unsigned_value = 2;
+                ((PartyMember*)g_Task)->unk_09              = 0;
+                ((PartyMember*)g_Task)->facing              = D_801F4188[bounds].unk_04;
                 Actor_RequestScript(((PartyMember*)g_Task)->facing);
                 goto next_record;
             }

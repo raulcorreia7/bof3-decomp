@@ -18,7 +18,7 @@ MATCH void func_800A65BC(void) {
     pad                                      = *pad_state;
     if (pad & g_InputMasks[BATTLE_INPUT_CANCEL]) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
-        state = (u8*)&g_Battle.ui_state;
+        state = (u8*)&g_Battle.ui_mode;
         *state += 1;
         return;
     }
@@ -27,14 +27,14 @@ MATCH void func_800A65BC(void) {
             SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
         } else {
             SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
-            g_Battle.ui_state = 2;
+            g_Battle.ui_mode = 2;
             return;
         }
     }
     if (g_InputPressed & PADRup) {
         if (g_BattleTargetRows[g_BattleTargetCursorCol + D_801485CA].gate_03 != GAME_NONE) {
             SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
-            g_Battle.ui_state = 2;
+            g_Battle.ui_mode = 2;
             return;
         }
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));

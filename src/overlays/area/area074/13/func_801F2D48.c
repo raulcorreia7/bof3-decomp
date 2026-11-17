@@ -29,5 +29,5 @@ MATCH void func_801F2D48(void) {
     } else {
         SYS_SetFlag(&g_Scenario2Flags[0x28], 6);
     }
-    SND_PLAY_CUE_ID(g_Game.members[0].unk_2C.half + 0x100);
+    SND_PLAY_CUE_ID(g_Game.members[0].unk_2C.value + 0x100);
 }

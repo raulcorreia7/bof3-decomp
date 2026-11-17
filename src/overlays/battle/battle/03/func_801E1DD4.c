@@ -10,7 +10,7 @@ MATCH void func_801E1DD4(void) {
     Battle_ClearSlotPending(g_Task->slot);
     work = g_Game.current;
     work->u.turn.damage_flags.volatile_value &= ~0x200u;
-    if ((g_Battle.state & BATTLE_STATE_REPRISAL_PENDING) == 0u) {
+    if ((g_Battle.flags & BATTLE_STATE_REPRISAL_PENDING) == 0u) {
         work->u.turn.command.type = 0;
     }
 }

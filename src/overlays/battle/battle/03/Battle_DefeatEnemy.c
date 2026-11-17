@@ -21,8 +21,8 @@ MATCH void Battle_DefeatEnemy(void) {
         if (new_var) {
             g_Battle.outcome.result |= BATTLE_RESULT_VICTORY;
         }
-        if (((g_Battle.state & BATTLE_STATE_OVER) != 0) && (D_801463CA == g_Task->slot)) {
-            g_Battle.state &= ~BATTLE_STATE_OVER;
+        if (((g_Battle.flags & BATTLE_STATE_OVER) != 0) && (D_801463CA == g_Task->slot)) {
+            g_Battle.flags &= ~BATTLE_STATE_OVER;
         }
         func_800AD074(g_BattleCurrentEnemy->enemy_id.byte.type);
         GFX_FreePaletteFadeTarget(g_Task);

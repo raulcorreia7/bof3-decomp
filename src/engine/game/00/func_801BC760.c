@@ -26,7 +26,7 @@ NON_MATCHING s32 func_801BC760(void) {
     dir    = g_Task->direction;
     goal_x = D_80145EC4 + (g_Game.members[0].unk_0C * g_Game.members[0].unk_09);
     goal_y = D_80145EC8 + (g_Game.members[0].unk_10 * g_Game.members[0].unk_09);
-    if (g_Game.members[g_Task->unk_05 ^ 3].u.field.mode_12B.u8_value != 9) {
+    if (g_Game.members[g_Task->unk_05 ^ 3].u.field.mode.unsigned_value != 9) {
         if (g_Task->unk_05 == 2) {
             if (D_80145FD6 == 0) {
                 g_Task->unk_06 = 1;
@@ -58,7 +58,7 @@ NON_MATCHING s32 func_801BC760(void) {
     near_a = tgt_x - (g_FacingSteps[row->facing].x * 2);
     tgt_y  = row->pos.y.fixed + (row->unk_10 * row->unk_09);
     near_b = tgt_y - (g_FacingSteps[row->facing].y * 2);
-    if (row->unk_70 != 0) {
+    if (row->speed != 0) {
         span = TO_COORD(2);
     }
     dx = g_Task->pos.x.fixed - tgt_x;
@@ -75,15 +75,15 @@ NON_MATCHING s32 func_801BC760(void) {
     dx = ABS(dx);
     if (dx <= TO_COORD(6) && (dy = g_Task->pos.y.fixed - near_b, dy = dy < 0 ? -dy : dy) <= TO_COORD(6)) {
         if (dx > TO_COORD(2) || dy > TO_COORD(2)) {
-            count = g_Game.members[g_Task->unk_06].u.field.counter_11C.u8_value + 1;
+            count = g_Game.members[g_Task->unk_06].u.field.counter.unsigned_value + 1;
         } else {
-            count = g_Game.members[g_Task->unk_06].u.field.counter_11C.u8_value;
+            count = g_Game.members[g_Task->unk_06].u.field.counter.unsigned_value;
         }
     } else {
         count = 5;
     }
-    g_Game.current->u.field.counter_11C.s8_value = count;
-    cnt2                                         = g_Game.current->u.field.counter_11C.s8_value;
+    g_Game.current->u.field.counter.value = count;
+    cnt2                                  = g_Game.current->u.field.counter.value;
     if (cnt2 >= 3U) {
         if (cnt2 >= 6U) {
             cnt2 = 5;
@@ -91,7 +91,7 @@ NON_MATCHING s32 func_801BC760(void) {
     } else {
         cnt2 = 3;
     }
-    g_Game.current->u.field.counter_11C.s8_value = cnt2;
+    g_Game.current->u.field.counter.value = cnt2;
     func_801BD290(near_a, near_b, (s8*)g_Task + 8);
     result = func_801BC4D0();
     if ((result & BYTE_MASK) != 1) {
@@ -122,8 +122,8 @@ NON_MATCHING s32 func_801BC760(void) {
                 *(u8*)g_Task |= ACTOR_FLAG_HIDDEN;
                 g_Task->pos.x.fixed = near_a;
                 g_Task->pos.y.fixed = near_b;
-                g_Game.current->status.field.flags_12C.s8_value &= 0xFE;
-                g_Game.current->status.field.flags_12C.s8_value |= (D_80145FBC & 1);
+                g_Game.current->status.field.flags.value &= 0xFE;
+                g_Game.current->status.field.flags.value |= (D_80145FBC & 1);
                 COORD_INT(g_Task->pos.z) = Area_ReadHeight(near_a, near_b);
                 g_Task->draw_layer       = g_Game.members[0].unk_29;
                 FIELD(s8, g_Task, 0x1u)  = 2;

@@ -8,7 +8,7 @@ MATCH void Area_InitScene(void) {
     Actor* work;
 
     g_Task->unk_05                          = 0;
-    g_Task->param.unk_0B                    = g_Game.members[0].status.field.flags_12C.u8_value;
+    g_Task->param.unk_0B                    = g_Game.members[0].status.field.flags.unsigned_value;
     *(u8*)&g_Game.current->u.turn.hp_change = 3; /* FAKE: retail stores the byte. */
     work                                    = g_Task;
     FIELD(u32, work, 0x34u)                 = g_Game.members[0].pos.x.fixed;

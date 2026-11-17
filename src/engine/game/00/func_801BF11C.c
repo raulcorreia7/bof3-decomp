@@ -31,7 +31,7 @@ MATCH bool func_801BF11C(void) {
                         break;
                     }
                 }
-                g_Game.current->status.field.flags_12C.u8_value &= 0xFE;
+                g_Game.current->status.field.flags.unsigned_value &= 0xFE;
                 g_Task->draw_layer       = g_AreaDrawMode;
                 g_Task->pos.x            = g_EncounterParty[order].x;
                 g_Task->pos.y            = g_EncounterParty[order].y;

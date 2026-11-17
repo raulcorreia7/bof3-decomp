@@ -35,10 +35,10 @@ MATCH void func_801C329C(void) {
         }
     }
     if ((found & BYTE_MASK) != 0) {
-        g_Game.current->u.field.flags_118--;
+        g_Game.current->u.field.flags--;
         found = 0;
-        if (g_Game.current->u.field.flags_118 == 0) {
-            g_Game.current->u.field.flags_118 = 0x0A;
+        if (g_Game.current->u.field.flags == 0) {
+            g_Game.current->u.field.flags = 0x0A;
             func_801C308C(1);
             if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) {
                 index = 0;

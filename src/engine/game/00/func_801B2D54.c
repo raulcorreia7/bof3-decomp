@@ -2,6 +2,6 @@
 
 MATCH void func_801B2D54(void) {
     if (Actor_StepAnimOnce() & BYTE_MASK) {
-        g_Game.current->u.field.mode_12B.s8_value = 0;
+        g_Game.current->u.field.mode.value = 0;
     }
 }

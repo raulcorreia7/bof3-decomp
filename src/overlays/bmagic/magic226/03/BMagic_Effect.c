@@ -89,22 +89,22 @@ MATCH void func_801EF10C(void) {
     g_Task->unk_10      = 0;
     g_Task->unk_20      = 0x300000;
     Effect_RotatePosition(g_Task);
-    g_Task->unk_25      = 0x1D;
-    g_Task->unk_26      = 0;
-    g_Task->unk_27      = 0x1A;
-    g_Task->unk_28      = 1;
-    g_Task->scale.x     = 0x10000;
-    g_Task->scale.y     = 0x10000;
-    g_Task->unk_48      = 0;
-    g_Task->unk_5D      = 0;
-    g_Task->unk_5E      = 0;
-    g_Task->unk_5F      = 0;
-    g_Task->unk_5C      = 0;
-    g_Task->unk_2A      = 0;
-    g_Task->unk_29      = 4;
-    g_Task->unk_2C.half = 0;
-    g_Task->unk_2B      = 0;
-    g_Task->unk_24      = 0;
+    g_Task->unk_25       = 0x1D;
+    g_Task->unk_26       = 0;
+    g_Task->unk_27       = 0x1A;
+    g_Task->unk_28       = 1;
+    g_Task->scale.x      = 0x10000;
+    g_Task->scale.y      = 0x10000;
+    g_Task->unk_48       = 0;
+    g_Task->unk_5D       = 0;
+    g_Task->unk_5E       = 0;
+    g_Task->unk_5F       = 0;
+    g_Task->unk_5C       = 0;
+    g_Task->unk_2A       = 0;
+    g_Task->unk_29       = 4;
+    g_Task->unk_2C.value = 0;
+    g_Task->unk_2B       = 0;
+    g_Task->unk_24       = 0;
     Actor_SelectScript(0);
     g_Task->unk_04       = 0;
     g_Task->param.unk_0B = 0;
@@ -289,10 +289,10 @@ MATCH void func_801F01B8(void) {
     prim                         = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
-    setXY4(prim, g_Task->unk_2E.half + FIXED_MUL(rcos(512), g_ScratchPad.cells.halves[0]), g_Task->unk_30.half + FIXED_MUL(rsin(512), g_ScratchPad.cells.halves[0]),
-           g_Task->unk_2E.half + FIXED_MUL(rcos(1536), g_ScratchPad.cells.halves[0]), g_Task->unk_30.half + FIXED_MUL(rsin(1536), g_ScratchPad.cells.halves[0]),
-           g_Task->unk_2E.half + FIXED_MUL(rcos(3584), g_ScratchPad.cells.halves[0]), g_Task->unk_30.half + FIXED_MUL(rsin(3584), g_ScratchPad.cells.halves[0]),
-           g_Task->unk_2E.half + FIXED_MUL(rcos(2560), g_ScratchPad.cells.halves[0]), g_Task->unk_30.half + FIXED_MUL(rsin(2560), g_ScratchPad.cells.halves[0]));
+    setXY4(prim, g_Task->unk_2E.value + FIXED_MUL(rcos(512), g_ScratchPad.cells.halves[0]), g_Task->unk_30.value + FIXED_MUL(rsin(512), g_ScratchPad.cells.halves[0]),
+           g_Task->unk_2E.value + FIXED_MUL(rcos(1536), g_ScratchPad.cells.halves[0]), g_Task->unk_30.value + FIXED_MUL(rsin(1536), g_ScratchPad.cells.halves[0]),
+           g_Task->unk_2E.value + FIXED_MUL(rcos(3584), g_ScratchPad.cells.halves[0]), g_Task->unk_30.value + FIXED_MUL(rsin(3584), g_ScratchPad.cells.halves[0]),
+           g_Task->unk_2E.value + FIXED_MUL(rcos(2560), g_ScratchPad.cells.halves[0]), g_Task->unk_30.value + FIXED_MUL(rsin(2560), g_ScratchPad.cells.halves[0]));
     prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 832, 256);
     prim->clut  = GetClut(0, 482);
     setUVWH(prim, 0, 128, 32, 32);

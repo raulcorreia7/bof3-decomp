@@ -5,7 +5,7 @@ MATCH void func_801DFB64(void) {
     u16           half;
 
     if (Battle_IsPartyMemberBlocked() != 0u) {
-        gate = &g_Battle.state;
+        gate = &g_Battle.flags;
         if ((*gate & BATTLE_STATE_CRITICAL) != 0u) {
             Battle_AllocEffect(0, 2);
         }

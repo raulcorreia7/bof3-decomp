@@ -28,7 +28,7 @@ MATCH void func_801EEEAC(void) {
                 ENEMY_COMBATANT(g_Battle.active_battler).hp = 1;
             }
         }
-        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+        g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
         Effect_Reset();
     }
 }
@@ -81,7 +81,7 @@ MATCH void func_801EF188(void) {
     }
     Battle_StepRangeToward(pos, 0x40);
     if (func_800AF66C((BattleRange*)target, 0x8000)) {
-        g_Battle.state |= BATTLE_STATE_DAMAGE_APPLIED;
+        g_Battle.flags |= BATTLE_STATE_DAMAGE_APPLIED;
         Battle_MarkDamaged(g_Task->unk_03);
         SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_AREA, 0x03));
         g_Task->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - g_Task->pos.x.fixed, g_BattleEffectBattler->pos.y.fixed - g_Task->pos.y.fixed);
@@ -186,17 +186,17 @@ MATCH void func_801EF79C(u8 unused, s32 semi) {
     SetPolyFT4(prim);
     SetSemiTrans(prim, trans);
     g_ScratchPad.cells.words[2] = ((g_Task->timer + 13) & 0xF) << 8;
-    setXY0(prim, g_Task->unk_2E.half + FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]),
-           g_Task->unk_30.half + FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]));
+    setXY0(prim, g_Task->unk_2E.value + FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]),
+           g_Task->unk_30.value + FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]));
     g_ScratchPad.cells.words[2] = ((g_Task->timer + 11) & 0xF) << 8;
-    prim->x1                    = g_Task->unk_2E.half + FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
-    prim->y1                    = g_Task->unk_30.half + FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
+    prim->x1                    = g_Task->unk_2E.value + FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
+    prim->y1                    = g_Task->unk_30.value + FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
     g_ScratchPad.cells.words[2] = ((g_Task->timer + 3) & 0xF) << 8;
-    prim->x2                    = g_Task->unk_2E.half + FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
-    prim->y2                    = g_Task->unk_30.half + FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
+    prim->x2                    = g_Task->unk_2E.value + FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
+    prim->y2                    = g_Task->unk_30.value + FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
     g_ScratchPad.cells.words[2] = ((g_Task->timer + 5) & 0xF) << 8;
-    prim->x3                    = g_Task->unk_2E.half + FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
-    prim->y3                    = g_Task->unk_30.half + FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
+    prim->x3                    = g_Task->unk_2E.value + FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
+    prim->y3                    = g_Task->unk_30.value + FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
     prim->tpage                 = GetTPage(TPAGE_DEPTH_8BIT, trans, 832, 256);
     prim->clut                  = GetClut(0, 506);
     setUV4(prim, g_Task->param.unk_0B << 5, 0, (g_Task->param.unk_0B << 5) + 31, 0, g_Task->param.unk_0B << 5, 64, (g_Task->param.unk_0B << 5) + 31, 64);

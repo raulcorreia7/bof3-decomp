@@ -33,8 +33,8 @@ void            func_801F0908(void);
     GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(DR_MODE));                                                                                                                           \
     g_ScratchPad.cells.halves[0] = 16;                                                                                                                                                  \
     g_ScratchPad.cells.halves[2] = ANGLE;                                                                                                                                               \
-    x                            = g_Task->unk_2E.half;                                                                                                                                 \
-    y                            = g_Task->unk_30.half;                                                                                                                                 \
+    x                            = g_Task->unk_2E.value;                                                                                                                                \
+    y                            = g_Task->unk_30.value;                                                                                                                                \
     g_ScratchPad.cells.halves[3] = g_Task->unk_09 * 6;                                                                                                                                  \
     i                            = 1;                                                                                                                                                   \
     do {                                                                                                                                                                                \

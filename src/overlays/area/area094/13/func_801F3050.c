@@ -10,8 +10,8 @@ MATCH void func_801F3050(void) {
 
     TASK_SET((u8*)g_Game.members);
     index     = g_PartyFieldOrder[0];
-    y         = g_Game.members[0].unk_30.signed_half;
-    x         = g_Game.members[0].unk_2E.signed_half;
+    y         = g_Game.members[0].unk_30.signed_value;
+    x         = g_Game.members[0].unk_2E.signed_value;
     selection = (D_801F3504 + 8)[index];
     result    = Actor_ClaimSlot(4, 0, selection, x, y);
     if ((u8)result != GAME_NONE) {

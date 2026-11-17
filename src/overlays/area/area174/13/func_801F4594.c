@@ -5,7 +5,7 @@ MATCH void func_801F4594(void) {
     Actor* other;
     u8*    record;
 
-    record = (u8*)(g_GameState->u.field.index_124);
+    record = (u8*)(g_GameState->u.field.index);
     record += g_ScriptState->cursor;
     if (g_ScriptVars[0] < record[2]) {
         work = g_Task;

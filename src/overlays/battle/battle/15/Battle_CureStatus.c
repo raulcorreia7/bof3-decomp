@@ -3,8 +3,8 @@
 /* Non-volatile scratchpad work cell (0x1F800044), read/saved/restored around
  * the update exactly as the loader expects. */
 
-/* Applies the battler's status masks, updates shared defence values when the
- * magic-defence bit changes, and restores the active work pointer. */
+/* Applies the battler's status masks, updates shared defense values when the
+ * magic-defense bit changes, and restores the active work pointer. */
 /* func_800A36F0 */
 MATCH u16 Battle_CureStatus(u8 battler_index, u16 status_mask) {
     u16 status;
@@ -50,13 +50,13 @@ MATCH u16 Battle_CureStatus(u8 battler_index, u16 status_mask) {
         status &= ~STATUS_CONFUSED;
         slot = battler_index;
         if (BATTLER_IS_PLAYER(battler_index)) {
-            g_Game.members[slot].pos.x.fixed = g_BattleTemplateStats[slot].defence[0];
-            g_Game.members[slot].pos.y.fixed = g_BattleTemplateStats[slot].defence[1];
-            g_Game.members[slot].pos.z.fixed = g_BattleTemplateStats[slot].defence[2];
+            g_Game.members[slot].pos.x.fixed = g_BattleTemplateStats[slot].defense[0];
+            g_Game.members[slot].pos.y.fixed = g_BattleTemplateStats[slot].defense[1];
+            g_Game.members[slot].pos.z.fixed = g_BattleTemplateStats[slot].defense[2];
         } else {
-            ENEMY_COMBATANT(slot).pos.x.fixed = g_BattleTemplateStats[slot].defence[0];
-            ENEMY_COMBATANT(slot).pos.y.fixed = g_BattleTemplateStats[slot].defence[1];
-            ENEMY_COMBATANT(slot).pos.z.fixed = g_BattleTemplateStats[slot].defence[2];
+            ENEMY_COMBATANT(slot).pos.x.fixed = g_BattleTemplateStats[slot].defense[0];
+            ENEMY_COMBATANT(slot).pos.y.fixed = g_BattleTemplateStats[slot].defense[1];
+            ENEMY_COMBATANT(slot).pos.z.fixed = g_BattleTemplateStats[slot].defense[2];
         }
     }
 

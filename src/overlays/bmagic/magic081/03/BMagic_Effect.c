@@ -97,7 +97,7 @@ MATCH void func_801EEF88(void) {
     g_Task = saved_work;
     if (saved_work->param.unk_0B == 0) {
         Battle_MarkDamaged(g_Battle.target_selector);
-        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+        g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
         Effect_Reset();
     }
 }
@@ -158,7 +158,7 @@ MATCH void func_801EF18C(void) {
 #include "overlays/bmagic/Effect_TickOnZeroTick.h"
 
 MATCH void func_801EF2F0(void) {
-    if (g_Battle.state & BATTLE_STATE_EFFECT_PLAYING) {
+    if (g_Battle.flags & BATTLE_STATE_EFFECT_PLAYING) {
         Effect_Reset();
     } else {
         Battle_CenterCamera();
@@ -246,8 +246,8 @@ MATCH void func_801EF6A0(void) {
     }
     shade                        = &g_ScratchPad.cells.halves[4];
     *shade                       = 0x80;
-    g_ScratchPad.cells.halves[2] = g_Task->unk_2E.half;
-    g_ScratchPad.cells.halves[3] = g_Task->unk_30.half;
+    g_ScratchPad.cells.halves[2] = g_Task->unk_2E.value;
+    g_ScratchPad.cells.halves[3] = g_Task->unk_30.value;
     setXY4(prim, g_ScratchPad.cells.halves[2] + FIXED_MUL(rsin(0xC00), g_ScratchPad.cells.halves[0]), g_ScratchPad.cells.halves[3] + FIXED_MUL(rcos(0xC00), g_ScratchPad.cells.halves[0]),
            g_ScratchPad.cells.halves[2] + FIXED_MUL(rsin(0x800), g_ScratchPad.cells.halves[0]), g_ScratchPad.cells.halves[3] + FIXED_MUL(rcos(0x800), g_ScratchPad.cells.halves[0]),
            g_ScratchPad.cells.halves[2] + FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]), g_ScratchPad.cells.halves[3] + FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]),

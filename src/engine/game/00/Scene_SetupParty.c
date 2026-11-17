@@ -34,7 +34,7 @@ NON_MATCHING s32 Scene_SetupParty(u32 scene) {
                 size = g_Game.party_size;
                 for (j = 0; j < size; j++) {
                     if (g_Game.members[j].chr.character_id == ids[i]) {
-                        SP_VALUES[i] = (u8)g_Game.members[j].unk_2C.half;
+                        SP_VALUES[i] = (u8)g_Game.members[j].unk_2C.value;
                         SP_SLOTS[i]  = j;
                         SP_TAKEN[j]  = 0xFF;
                         break;
@@ -46,7 +46,7 @@ NON_MATCHING s32 Scene_SetupParty(u32 scene) {
                 size = g_Game.party_size;
                 for (j = 0; j < size; j++) {
                     if (SP_TAKEN[j] != GAME_NONE) {
-                        SP_VALUES[i] = (u8)g_Game.members[j].unk_2C.half;
+                        SP_VALUES[i] = (u8)g_Game.members[j].unk_2C.value;
                         SP_SLOTS[i]  = j;
                         SP_TAKEN[j]  = 0xFF;
                         break;

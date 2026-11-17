@@ -9,20 +9,20 @@ MATCH void func_800A87D4(void) {
 
     index = Battle_AllocEffect(0, 18);
     if ((index & BYTE_MASK) != GAME_NONE) {
-        slot                                             = (BattleWorkImage*)&g_BattleEffects[index & BYTE_MASK];
+        slot                                            = (BattleWorkImage*)&g_BattleEffects[index & BYTE_MASK];
         /* one struct copy (the 16-byte block-move loop), read through the non-volatile cell */
-        *slot                                            = *(BattleWorkImage*)g_BattleWorkCell;
-        g_BattleEffects[index & BYTE_MASK].unk_06        = 0;
-        g_BattleEffects[index & BYTE_MASK].handler_index = 0x12;
-        g_BattleEffects[index & BYTE_MASK].header.mode   = 0;
-        g_BattleEffects[index & BYTE_MASK].header.step   = 0;
-        g_BattleEffects[index & BYTE_MASK].unk_03        = 0;
-        g_BattleEffects[index & BYTE_MASK].unk_04        = 0;
-        g_BattleEffects[index & BYTE_MASK].header.flags  = g_BattleEffects[index & BYTE_MASK].header.flags & 0xBF;
-        work                                             = TASK_BYTES;
-        g_BattleEffects[index & BYTE_MASK].target.bytes  = work;
-        g_BattleEffects[index & BYTE_MASK].unk_0B        = work[0xB];
-        work                                             = TASK_BYTES;
+        *slot                                           = *(BattleWorkImage*)g_BattleWorkCell;
+        g_BattleEffects[index & BYTE_MASK].unk_06       = 0;
+        g_BattleEffects[index & BYTE_MASK].step_index   = 0x12;
+        g_BattleEffects[index & BYTE_MASK].header.mode  = 0;
+        g_BattleEffects[index & BYTE_MASK].header.step  = 0;
+        g_BattleEffects[index & BYTE_MASK].unk_03       = 0;
+        g_BattleEffects[index & BYTE_MASK].unk_04       = 0;
+        g_BattleEffects[index & BYTE_MASK].header.flags = g_BattleEffects[index & BYTE_MASK].header.flags & 0xBF;
+        work                                            = TASK_BYTES;
+        g_BattleEffects[index & BYTE_MASK].target.bytes = work;
+        g_BattleEffects[index & BYTE_MASK].unk_0B       = work[0xB];
+        work                                            = TASK_BYTES;
         if (work[0xB] != 0) {
             work[0xB]--;
         }

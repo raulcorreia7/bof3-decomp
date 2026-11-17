@@ -2,7 +2,7 @@
 
 /* func_801D1014 */
 MATCH void Battle_Update(void) {
-    s32 status = g_Battle.state;
+    s32 status = g_Battle.flags;
 
     if (!(status & BATTLE_STATE_WINDOW_BUSY) && ((g_MenuPanelTasks[0].active == 0) || (g_Battle.phase.mode == BATTLE_MODE_RESULT)) &&
         ((g_Battle.outcome.event_flags & 0x2) == 0 || (g_Battle.phase.mode == BATTLE_MODE_RESULT))) {

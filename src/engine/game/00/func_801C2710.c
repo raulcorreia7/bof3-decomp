@@ -12,7 +12,7 @@ MATCH void func_801C2710(void) {
     } else {
         g_AreaCameraStep = 8;
     }
-    index               = g_Game.current->u.field.counter_11C.u8_value;
+    index               = g_Game.current->u.field.counter.unsigned_value;
     product             = g_AreaCameraStep * g_RouteSpeedScale[index];
     state               = (u8*)g_Task;
     g_AreaCameraStep    = product;

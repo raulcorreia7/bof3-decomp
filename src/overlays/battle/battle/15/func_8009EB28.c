@@ -16,7 +16,7 @@ MATCH void func_8009EB28(void) {
     u32 enemy;
     s16 value;
 
-    flagp   = &g_Battle.state;
+    flagp   = &g_Battle.flags;
     flag    = *flagp;
     battler = (*(u8*)&g_Battle.active_battler);
     *flagp  = flag | BATTLE_STATE_DAMAGE_APPLIED;

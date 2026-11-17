@@ -28,9 +28,9 @@ MATCH void func_801BBE98(void) {
     g_Task->tint.bytes.rgb.b = 0;
     g_Task->tint.bytes.flags = 2;
 
-    g_Game.current->u.field.counter_11C.s8_value = 3;
-    g_Game.current->u.field.mode_12B.s8_value    = 0;
-    g_Game.current->u.field.step_12A.s8_value    = 0;
+    g_Game.current->u.field.counter.value = 3;
+    g_Game.current->u.field.mode.value    = 0;
+    g_Game.current->u.field.step.value    = 0;
 
     Actor_SelectScript(g_Task->direction);
 

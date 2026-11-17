@@ -7,5 +7,5 @@ MATCH void func_80096B24(void) {
     value                             = g_BattleUIState;
     g_Battle.selection_latch          = 1;
     g_InputRepeatButtons              = 0;
-    g_Battle.ui_state                 = value + 1;
+    g_Battle.ui_mode                  = value + 1;
 }

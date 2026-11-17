@@ -42,7 +42,7 @@ NON_MATCHING void func_80099B74(void) {
         D_801483C0          = 1;
         D_801485DC          = 0;
         g_Battle.ui_step    = 1;
-        g_Battle.ui_state   = 0;
+        g_Battle.ui_mode    = 0;
         return;
     }
     if (keys & g_InputMasks[BATTLE_INPUT_CONFIRM]) {

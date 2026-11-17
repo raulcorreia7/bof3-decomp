@@ -13,7 +13,7 @@ MATCH void Battle_MarkDamageApplied(void) {
     volatile u16* pFlag;
     u16           flag;
 
-    pFlag         = &g_Battle.state;
+    pFlag         = &g_Battle.flags;
     flag          = *pFlag;
     battler_index = LOBU(g_Battle.target);
     *pFlag        = flag | BATTLE_STATE_DAMAGE_APPLIED;

@@ -56,7 +56,7 @@ void        Menu_UpdatePanelTasks(void);
 /* func_80158E20 */
 void        Menu_ClearPanel(void);
 /* func_80158DB8 */
-u8          Menu_OpenPanelTask(u8 panel_index, u8 handler_index);
+u8          Menu_OpenPanelTask(u8 panel_index, u8 step_index);
 /* func_80158E50 */
 void        Menu_ResetPanelTasks(void);
 void        UI_DrawBoxOutline(s32 x, s32 y, u8 width, u8 height);

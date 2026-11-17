@@ -12,7 +12,7 @@ MATCH void func_8019FF88(s32 entry_mode, s32 entry_index, s32 entry_flags) {
     D_80146264 = entry_index;
     D_80146268 = entry_flags;
     for (i = 0; i < g_PartySize; i++) {
-        g_Game.members[i].u.field.mode_12B.u8_value = s_EntityModes[entry_mode & BYTE_MASK];
-        g_Game.members[i].status.field.flags_12C.u8_value |= 0x2;
+        g_Game.members[i].u.field.mode.unsigned_value = s_EntityModes[entry_mode & BYTE_MASK];
+        g_Game.members[i].status.field.flags.unsigned_value |= 0x2;
     }
 }

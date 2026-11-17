@@ -17,27 +17,27 @@ MATCH void Battle_TickCountdowns(void) {
     do {
         if (Battle_GetActionLock(index) == 0u) {
             if ((g_Game.members[index].u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM_QUEUED) != 0u) {
-                u8 loaded = g_Game.members[index].counter_136;
+                u8 loaded = g_Game.members[index].charge_counter;
                 u8 count  = loaded;
                 if (count < 6u) {
                     count += 1u;
-                    local_table[index].counter_136 = count;
+                    local_table[index].charge_counter = count;
                 }
             }
             if (HAS_STATUS(g_Game.members[index], 0x800u)) {
-                u8 loaded = g_Game.members[index].counter_137;
+                u8 loaded = g_Game.members[index].status_counter;
                 u8 count  = loaded;
                 if (count < 6u) {
                     count += 1u;
-                    local_table[index].counter_137 = count;
+                    local_table[index].status_counter = count;
                 }
             }
             if ((g_Game.members[index].u.turn.action_flags.value & BATTLER_ACTION_CHARGING) != 0u) {
-                u8 loaded = g_Game.members[index].counter_136;
+                u8 loaded = g_Game.members[index].charge_counter;
                 u8 count  = loaded;
                 if (count < 3u) {
                     count += 1u;
-                    local_table[index].counter_136 = count;
+                    local_table[index].charge_counter = count;
                 }
             }
         }

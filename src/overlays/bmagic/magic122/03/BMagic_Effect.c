@@ -87,8 +87,8 @@ MATCH void func_801EEF2C(void) {
         Battle_ProjectRange();
         work                         = g_Task;
         battler                      = g_BattleEffectBattler;
-        g_ScratchPad.cells.halves[6] = work->unk_2E.half;
-        g_ScratchPad.cells.halves[7] = work->unk_30.half;
+        g_ScratchPad.cells.halves[6] = work->unk_2E.value;
+        g_ScratchPad.cells.halves[7] = work->unk_30.value;
         WorldPos_Copy(&work->pos, &battler->pos);
         Battle_ProjectRange();
         if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
@@ -113,10 +113,10 @@ MATCH void func_801EEF2C(void) {
                     break;
             }
         }
-        g_Task->unk_2E.half += g_Task->unk_0C;
-        g_Task->unk_30.half += g_Task->unk_10;
-        g_ScratchPad.cells.halves[4] = g_Task->unk_2E.half;
-        g_ScratchPad.cells.halves[5] = g_Task->unk_30.half;
+        g_Task->unk_2E.value += g_Task->unk_0C;
+        g_Task->unk_30.value += g_Task->unk_10;
+        g_ScratchPad.cells.halves[4] = g_Task->unk_2E.value;
+        g_ScratchPad.cells.halves[5] = g_Task->unk_30.value;
         g_Task->unk_14               = ratan2(g_ScratchPad.cells.halves[6] - g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[7] - g_ScratchPad.cells.halves[5]);
         g_Task->unk_04               = 16;
         g_Task->param.unk_0B         = 17;
@@ -156,8 +156,8 @@ MATCH void func_801EF324(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
-    g_ScratchPad.cells.halves[4] = g_Task->unk_2E.half;
-    g_ScratchPad.cells.halves[5] = g_Task->unk_30.half;
+    g_ScratchPad.cells.halves[4] = g_Task->unk_2E.value;
+    g_ScratchPad.cells.halves[5] = g_Task->unk_30.value;
     g_ScratchPad.cells.halves[1] = g_Task->unk_14;
     for (i = 1; i < g_Task->timer + 1; i++) {
         g_ScratchPad.cells.halves[6] = g_ScratchPad.cells.halves[4];
@@ -242,8 +242,8 @@ NON_MATCHING void func_801EFBA8(void) {
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
     GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(DR_MODE));
-    g_ScratchPad.cells.halves[4] = g_Task->unk_2E.half;
-    g_ScratchPad.cells.halves[5] = g_Task->unk_30.half;
+    g_ScratchPad.cells.halves[4] = g_Task->unk_2E.value;
+    g_ScratchPad.cells.halves[5] = g_Task->unk_30.value;
     g_ScratchPad.cells.halves[1] = g_Task->unk_14;
     iteration                    = 1;
     if (iteration < g_Task->timer + 1) {

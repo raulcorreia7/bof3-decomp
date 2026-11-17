@@ -22,11 +22,11 @@ MATCH void Battle_QueueAction(s16 amount, u8 battler_index) {
     }
 
     if (amount < 0) {
-        g_BattleEffects[action_slot].word_60.target_index = ABS(amount);
-        g_BattleEffects[action_slot].unk_27               = 6u;
+        g_BattleEffects[action_slot].target_index.target_index = ABS(amount);
+        g_BattleEffects[action_slot].unk_27                    = 6u;
     } else {
-        g_BattleEffects[action_slot].word_60.target_index = amount;
-        g_BattleEffects[action_slot].unk_27               = 0u;
+        g_BattleEffects[action_slot].target_index.target_index = amount;
+        g_BattleEffects[action_slot].unk_27                    = 0u;
     }
 
     if (!(target_flags & BATTLE_HIT_HP)) {

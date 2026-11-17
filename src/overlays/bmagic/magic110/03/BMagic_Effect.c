@@ -157,15 +157,15 @@ MATCH void func_801EF528(void) {
     PartyMember* work;
     PartyMember* next;
 
-    work              = g_Task;
-    work->unk_2E.half = 0xA0;
-    work->unk_25      = 0x1D;
-    next              = g_Task;
-    work->unk_30.half = 0x12C;
-    next->unk_26      = 0;
-    g_Task->unk_27    = 0x1A;
-    g_Task->unk_28    = 1;
-    g_Task->unk_24    = 0x80;
+    work               = g_Task;
+    work->unk_2E.value = 0xA0;
+    work->unk_25       = 0x1D;
+    next               = g_Task;
+    work->unk_30.value = 0x12C;
+    next->unk_26       = 0;
+    g_Task->unk_27     = 0x1A;
+    g_Task->unk_28     = 1;
+    g_Task->unk_24     = 0x80;
     {
         PartyMember* task;
 
@@ -174,14 +174,14 @@ MATCH void func_801EF528(void) {
         task->scale.x = 0x30000;
         task->scale.y = 0xC000;
     }
-    g_Task->unk_5D      = 0;
-    g_Task->unk_5E      = 0;
-    g_Task->unk_5F      = 0;
-    g_Task->unk_5C      = 0;
-    g_Task->unk_2A      = 0;
-    g_Task->unk_29      = 2;
-    g_Task->unk_2C.half = 0;
-    g_Task->unk_2B      = 1;
+    g_Task->unk_5D       = 0;
+    g_Task->unk_5E       = 0;
+    g_Task->unk_5F       = 0;
+    g_Task->unk_5C       = 0;
+    g_Task->unk_2A       = 0;
+    g_Task->unk_29       = 2;
+    g_Task->unk_2C.value = 0;
+    g_Task->unk_2B       = 1;
     Actor_SelectScript(0);
     g_Task->header.step += 1;
 }
@@ -189,9 +189,9 @@ MATCH void func_801EF528(void) {
 MATCH void func_801EF648(void) {
     PartyMember* work;
 
-    g_Task->unk_2E.half = (RANDOM_MASK(3)) + 0x9F;
-    work                = g_Task;
-    work->unk_30.half -= 2;
+    g_Task->unk_2E.value = (RANDOM_MASK(3)) + 0x9F;
+    work                 = g_Task;
+    work->unk_30.value -= 2;
     work->scale.y += 0x2000;
     if (work->scale.y > 0x17FFF) {
         work->header.step++;
@@ -201,9 +201,9 @@ MATCH void func_801EF648(void) {
 MATCH void func_801EF6B4(void) {
     u16 position;
 
-    g_Task->unk_2E.half = RANDOM_MASK(3) + 0x9F;
-    position            = g_Task->unk_30.half - 4;
-    g_Task->unk_30.half = position;
+    g_Task->unk_2E.value = RANDOM_MASK(3) + 0x9F;
+    position             = g_Task->unk_30.value - 4;
+    g_Task->unk_30.value = position;
     if ((s16)position < 178) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         g_Task->header.step += 1;
@@ -213,9 +213,9 @@ MATCH void func_801EF6B4(void) {
 MATCH void func_801EF740(void) {
     u16 position;
 
-    g_Task->unk_2E.half = RANDOM_MASK(3) + 0x9F;
-    position            = g_Task->unk_30.half - 2;
-    g_Task->unk_30.half = position;
+    g_Task->unk_2E.value = RANDOM_MASK(3) + 0x9F;
+    position             = g_Task->unk_30.value - 2;
+    g_Task->unk_30.value = position;
     if ((s16)position < 128) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         Effect_Reset();

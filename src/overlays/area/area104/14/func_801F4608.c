@@ -74,7 +74,7 @@ NON_MATCHING void func_801F4608(s32 input) {
                         goto block_26;
                     }
                     if (!(g_Characters[g_Game.current->character_index].status & STATUS_CONFUSED)) {
-                        g_Game.current->u.field.step_12A.s8_value = 0;
+                        g_Game.current->u.field.step.value = 0;
                     }
                     func_801C2538();
                     func_801C4C48();
@@ -87,33 +87,33 @@ NON_MATCHING void func_801F4608(s32 input) {
                     tmp11        = g_Task;
                     tmp11->timer = (tmp11->timer - 1);
                     Actor_UpdateMovement();
-                    g_Game.current->u.field.mode_12B.s8_value = 1;
-                    tmp6                                      = g_Task;
-                    tmp6->header.step                         = 1;
+                    g_Game.current->u.field.mode.value = 1;
+                    tmp6                               = g_Task;
+                    tmp6->header.step                  = 1;
                     return;
                 case_b:
                     Actor_ClearVelocity();
                     Actor_RequestScript(g_Task->direction);
-                    g_Game.current->u.field.mode_12B.s8_value = 0;
+                    g_Game.current->u.field.mode.value = 0;
                 block_26:
                     tmp7              = g_Task;
                     tmp7->header.step = 0;
                     return;
                 case_5:
-                    g_Game.current->u.field.counter_11C.s8_value = 3;
+                    g_Game.current->u.field.counter.value = 3;
                     Actor_RequestScript(g_Task->direction);
-                    g_Game.current->u.field.mode_12B.s8_value = 4;
-                    g_Task->header.mode                       = 2;
-                    tmp8                                      = g_Task;
-                    tmp8->header.step                         = 3;
+                    g_Game.current->u.field.mode.value = 4;
+                    g_Task->header.mode                = 2;
+                    tmp8                               = g_Task;
+                    tmp8->header.step                  = 3;
                     return;
                 case_6:
-                    g_Game.current->u.field.counter_11C.s8_value = 3;
+                    g_Game.current->u.field.counter.value = 3;
                     Actor_RequestScript(g_Task->direction);
-                    g_Game.current->u.field.mode_12B.s8_value = 3;
-                    g_Task->header.mode                       = FIELD_TASK_MODE_CLIMB;
-                    tmp12                                     = g_Task;
-                    tmp4                                      = tmp12->direction;
+                    g_Game.current->u.field.mode.value = 3;
+                    g_Task->header.mode                = FIELD_TASK_MODE_CLIMB;
+                    tmp12                              = g_Task;
+                    tmp4                               = tmp12->direction;
                     if ((tmp4 == FACING_UP) || (tmp4 == FACING_LEFT)) {
                         tmp12->header.step = 0;
                         return;

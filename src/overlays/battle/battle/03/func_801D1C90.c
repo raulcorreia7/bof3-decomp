@@ -5,7 +5,7 @@ MATCH void func_801D1C90(void) {
     func_801DB494();
     func_801DA7D4();
     g_Battle.command_count = index;
-    if (g_Battle.state & BATTLE_STATE_COMMAND_ARMED) {
+    if (g_Battle.flags & BATTLE_STATE_COMMAND_ARMED) {
         func_801DD29C();
         g_Battle.phase.mode = BATTLE_MODE_TURN_SETUP;
         return;

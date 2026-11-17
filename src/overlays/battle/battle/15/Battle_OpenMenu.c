@@ -47,6 +47,6 @@ MATCH void Battle_OpenMenu(void) {
     g_Battle.gene_count         = 0;
     *D_801463B8                 = 0;
     Battle_SetGeneCount();
-    g_Battle.ui_state = 0;
+    g_Battle.ui_mode  = 0;
     g_BattleUIStep_nv = g_BattleUIStep_nv + 1;
 }

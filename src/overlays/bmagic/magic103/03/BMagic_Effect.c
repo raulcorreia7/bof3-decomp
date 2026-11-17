@@ -251,7 +251,7 @@ MATCH void func_801EFCF4(void) {
     counter      = work->unk_09 + 1;
     drop         = (FAKE_VOLATILE(u8, work->unk_09) - 8) / 2;
     work->unk_09 = counter;
-    work->unk_30.half -= drop;
+    work->unk_30.value -= drop;
     if ((counter & BYTE_MASK) == 0x1C) {
         g_Task->header.step += 1;
     }
@@ -261,7 +261,7 @@ MATCH void func_801EFD74(void) {
     u8 counter;
 
     Battle_ProjectRange();
-    g_Task->unk_30.half -= (g_Task->unk_09 - 8) / 2;
+    g_Task->unk_30.value -= (g_Task->unk_09 - 8) / 2;
     if ((g_Task->unk_09 & BYTE_MASK) != 0x2C) {
         g_Task->unk_09 = g_Task->unk_09 + 1;
     }
@@ -293,8 +293,8 @@ MATCH void func_801EFE20(void) {
     g_ScratchPad.cells.halves[3] = g_Task->timer * 8;
     g_ScratchPad.cells.halves[4] = g_Task->timer * 7;
     g_ScratchPad.cells.halves[5] = g_Task->timer * 4;
-    g_ScratchPad.cells.halves[6] = g_Task->unk_2E.half;
-    g_ScratchPad.cells.halves[7] = g_Task->unk_30.half;
+    g_ScratchPad.cells.halves[6] = g_Task->unk_2E.value;
+    g_ScratchPad.cells.halves[7] = g_Task->unk_30.value;
     setXY4(prim, g_ScratchPad.cells.halves[6] + FIXED_MUL(rsin((u8)(g_Task->unk_09 + 0x80) << 4), g_ScratchPad.cells.halves[0]),
            g_ScratchPad.cells.halves[7] + FIXED_MUL(rcos((u8)(g_Task->unk_09 + 0x80) << 4), g_ScratchPad.cells.halves[0]),
            g_ScratchPad.cells.halves[6] + FIXED_MUL(rsin((u8)(g_Task->unk_09 + 0x40) << 4), g_ScratchPad.cells.halves[0]),

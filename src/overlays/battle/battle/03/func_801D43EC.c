@@ -10,7 +10,7 @@ MATCH void func_801D43EC(void) {
     s32         flags;
     s32         slot;
 
-    battle_flags = &g_Battle.state;
+    battle_flags = &g_Battle.flags;
     if ((*battle_flags & 4) && D_801463C2 == 0) {
         *battle_flags &= 0xD7FB;
         g_Battle.phase.step     = 0;

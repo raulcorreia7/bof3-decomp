@@ -20,7 +20,7 @@ MATCH void func_801B6F1C(void) {
     saved                        = g_Task->vz;
     g_Game.current->u.field.wait = (wait - 1);
     func_801C24D0();
-    flags = g_Game.current->u.field.flags_118;
+    flags = g_Game.current->u.field.flags;
     if (flags & 0x80) {
         g_Task->vz = saved;
     }

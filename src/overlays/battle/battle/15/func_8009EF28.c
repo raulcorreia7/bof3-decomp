@@ -18,7 +18,7 @@ MATCH void func_8009EF28(void) {
 
     if (RANDOM_MASK(0x7F) < 0x20) {
         battler_index                     = g_BattleActiveBattler;
-        half                              = (volatile u16*)&g_Battle.state;
+        half                              = (volatile u16*)&g_Battle.flags;
         flag_value                        = *half;
         selection_kind                    = g_Battle.target;
         updated                           = flag_value | BATTLE_STATE_CRITICAL;

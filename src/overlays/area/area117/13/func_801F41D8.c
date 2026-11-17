@@ -31,8 +31,8 @@ MATCH void func_801F41D8(void) {
                 if ((((g_GameFlags | g_AreaWalkFlags) >> index) & 1) != 0) {
                     goto next_record;
                 }
-                g_GameState->u.field.counter_11C.u8_value = 2;
-                ((PartyMember*)g_Task)->unk_09            = 0;
+                g_GameState->u.field.counter.unsigned_value = 2;
+                ((PartyMember*)g_Task)->unk_09              = 0;
                 saved->param.unk_0B |= BIT(index);
                 g_AreaWalkFlags |= BIT(index);
                 ((PartyMember*)g_Task)->facing = D_801F5590[bounds * 6];

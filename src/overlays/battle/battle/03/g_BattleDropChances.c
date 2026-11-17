@@ -13,7 +13,7 @@ DropChances g_BattleDropChances = {
  * selects one of these four stage handlers; Battle_UpdateEffects copies the
  * table and dispatches for every active slot. */
 /* D_801D0CC0 */
-BattleEffectStages g_BattleEffectStages = {
+BattleEffectStageSteps g_BattleEffectStages = {
     (Callback)func_801E5AF4,
     (Callback)func_801E5B8C,
     (Callback)func_800ADFBC,
@@ -23,7 +23,7 @@ BattleEffectStages g_BattleEffectStages = {
 /* 0x801D0CD0: mode 0's stage handler (func_801E5AF4) dispatches the queued
  * slot's handler index (+0x05) here; 19 handlers, indices 0..0x12. */
 /* D_801D0CD0 */
-BattleEffectStage0Funcs g_BattleEffectStage0Funcs = {
+BattleEffectStage0Steps g_BattleEffectStage0Funcs = {
     (Callback)func_801E5AEC, (Callback)func_801E5CA4, (Callback)func_801E63C0, (Callback)func_801E6724, (Callback)func_801E6930, (Callback)func_801E6AA0, (Callback)func_801E6C84,
     (Callback)func_801E72A8, (Callback)func_800C2FF4, (Callback)func_800AD26C, (Callback)func_800AD69C, (Callback)func_801E74B8, (Callback)func_801E7818, (Callback)func_800AD9CC,
     (Callback)func_800ADCC4, (Callback)func_800A8540, (Callback)func_800A8C60, (Callback)func_801E862C, (Callback)func_800A8D80,
@@ -32,7 +32,7 @@ BattleEffectStage0Funcs g_BattleEffectStage0Funcs = {
 /* 0x801D0D1C: mode 1's stage handler (func_801E5B8C) dispatches the queued
  * slot's handler index (+0x05) here; 110 handlers. */
 /* D_801D0D1C */
-BattleEffectStage1Funcs g_BattleEffectStage1Funcs = {
+BattleEffectStage1Steps g_BattleEffectStage1Funcs = {
     (Callback)func_801E5AEC, (Callback)func_801EF2CC,       (Callback)func_800AE788, (Callback)func_801EF75C, (Callback)func_801EEF08, (Callback)func_801EF56C, (Callback)func_801EEE00,
     (Callback)func_801EF774, (Callback)func_801EF210,       (Callback)func_801EEFDC, (Callback)func_801EEE58, (Callback)func_801EF09C, (Callback)func_801EF16C, (Callback)func_801EEEE4,
     (Callback)func_801EEF84, (Callback)func_801EF010,       (Callback)func_801EF3F8, (Callback)func_801EEEBC, (Callback)func_801EFF44, (Callback)func_801EF2D0, (Callback)func_801EEF84,
@@ -54,7 +54,7 @@ BattleEffectStage1Funcs g_BattleEffectStage1Funcs = {
 /* 0x801D0ED4: mode 3's stage handler (func_801E5C1C) dispatches the queued
  * slot's handler index (+0x05) here; eight handlers. */
 /* D_801D0ED4 */
-BattleEffectStage3Funcs g_BattleEffectStage3Funcs = {
+BattleEffectStage3Steps g_BattleEffectStage3Funcs = {
     (Callback)func_801E5AEC, (Callback)func_801EEE64, (Callback)func_800C1BEC, (Callback)func_800C1EA0,
     (Callback)func_800C1D54, (Callback)func_800C26D4, (Callback)func_800C1E2C, (Callback)func_800C1AA8,
 };

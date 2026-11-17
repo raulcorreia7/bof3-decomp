@@ -2,7 +2,7 @@
 #include "area/spad.h"
 
 MATCH void func_800C1978(s32 mode) {
-    g_Battle.state |= BATTLE_STATE_EFFECT_LOADING;
+    g_Battle.flags |= BATTLE_STATE_EFFECT_LOADING;
     Actor_StepAnimOnce();
     GFX_ClearRect(832, 256, 128, 256);
     SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_ENEMY, 1));

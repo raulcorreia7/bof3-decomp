@@ -475,9 +475,9 @@ MATCH void BMagic_SetXFixed(s32 radius) {
         poly = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(poly);
         SetSemiTrans(poly, 1);
-        setXY3(poly, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + ((rsin(i << 9) * g_ScratchPad.cells.halves[0]) >> 12),
-               g_Task->unk_30.half + ((rcos(i << 9) * g_ScratchPad.cells.halves[0]) >> 12), g_Task->unk_2E.half + ((rsin((i + 1) << 9) * g_ScratchPad.cells.halves[0]) >> 12),
-               g_Task->unk_30.half + ((rcos((i + 1) << 9) * g_ScratchPad.cells.halves[0]) >> 12));
+        setXY3(poly, g_Task->unk_2E.value, g_Task->unk_30.value, g_Task->unk_2E.value + ((rsin(i << 9) * g_ScratchPad.cells.halves[0]) >> 12),
+               g_Task->unk_30.value + ((rcos(i << 9) * g_ScratchPad.cells.halves[0]) >> 12), g_Task->unk_2E.value + ((rsin((i + 1) << 9) * g_ScratchPad.cells.halves[0]) >> 12),
+               g_Task->unk_30.value + ((rcos((i + 1) << 9) * g_ScratchPad.cells.halves[0]) >> 12));
         setRGB0(poly, 0x80, 0x80, 0x80);
         setRGB1(poly, 1, 1, 1);
         setRGB2(poly, 1, 1, 1);

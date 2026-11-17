@@ -63,7 +63,7 @@ MATCH void Battle_SelectAbility(void) {
     }
     g_Battle.row_cursor = 0;
     if (!(func_800AA368() & BYTE_MASK)) {
-        g_Battle.state |= 0x20;
+        g_Battle.flags |= 0x20;
     }
     g_Battle.ui_step += 1;
 }

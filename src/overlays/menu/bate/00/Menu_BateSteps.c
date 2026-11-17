@@ -103,7 +103,7 @@ MATCH void func_801D1044(void) {
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x03));
         step       = &g_MenuStep.state;
-        D_8014833B = D_8014833A->kind_00;
+        D_8014833B = D_8014833A->type;
         D_8014835F = D_8014835E;
         (*step)++;
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {

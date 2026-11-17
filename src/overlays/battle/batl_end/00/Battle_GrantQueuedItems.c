@@ -14,6 +14,6 @@ MATCH void Battle_GrantQueuedItems(void) {
         g_Battle.phase.step     = 4;
         g_Battle.phase.sub_step = 0;
         g_Battle.ui_step        = 0;
-        g_Battle.ui_state       = 0;
+        g_Battle.ui_mode        = 0;
     }
 }

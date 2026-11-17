@@ -9,7 +9,7 @@ MATCH void func_801F2C40(void) {
     /* FAKE: retail reads SND_PlaySE as void(s32). */
     ((void (*)(s32))SND_PlaySE)(g_Task->unk_2C + 0x100);
     Actor_RequestScript(((g_Task->direction - 1) / 2) + 0x42);
-    g_Game.current->u.field.flags_118 |= 0x40;
+    g_Game.current->u.field.flags |= 0x40;
     slot                     = Actor_FindFreeSpawned();
     g_Task->param.actor_slot = slot;
     if (g_Task->param.actor_slot != GAME_NONE) {

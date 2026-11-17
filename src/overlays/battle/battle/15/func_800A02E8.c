@@ -11,7 +11,7 @@ MATCH void func_800A02E8(void) {
     battler = *(u8*)&g_Battle.target;
     if ((g_Game.members[battler].u.turn.action_flags.value & (BATTLER_ACTION_DRAGON_FORM_QUEUED | BATTLER_ACTION_DRAGON_FORM)) == 0u) {
         if (BATTLER_IS_PLAYER(battler)) {
-            g_Game.members[battler].counter_137 = 0u;
+            g_Game.members[battler].status_counter = 0u;
         }
         if (func_800A4238(0x800) == 0u) {
             Battle_MarkDamageApplied();

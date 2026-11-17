@@ -232,7 +232,7 @@ MATCH void func_801EF4EC(void) {
     s8 val;
 
     if (D_801EC2E4 == 0) {
-        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+        g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
         Effect_Reset();
         return;
     }
@@ -339,8 +339,8 @@ MATCH void func_801EFA48(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
-    setXY4(prim, g_Task->unk_2E.half - 12, g_Task->unk_30.half - 12, g_Task->unk_2E.half + 12, g_Task->unk_30.half - 12, g_Task->unk_2E.half - 12, g_Task->unk_30.half + 12, g_Task->unk_2E.half + 12,
-           g_Task->unk_30.half + 12);
+    setXY4(prim, g_Task->unk_2E.value - 12, g_Task->unk_30.value - 12, g_Task->unk_2E.value + 12, g_Task->unk_30.value - 12, g_Task->unk_2E.value - 12, g_Task->unk_30.value + 12,
+           g_Task->unk_2E.value + 12, g_Task->unk_30.value + 12);
     setRGB0(prim, 128, 128, 128);
     prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     prim->clut  = GetClut(0, 480);

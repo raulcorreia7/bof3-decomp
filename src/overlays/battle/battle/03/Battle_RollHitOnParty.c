@@ -16,7 +16,7 @@ MATCH u32 Battle_RollHitOnParty(s16 damage, u32 battler_index, u32 target_index)
     FAKE_REG(u32, enemy_index, "v0");
 
     index = target_index;
-    if ((g_Battle.state & BATTLE_STATE_CRITICAL) != 0u) {
+    if ((g_Battle.flags & BATTLE_STATE_CRITICAL) != 0u) {
         return (s32)damage;
     }
 

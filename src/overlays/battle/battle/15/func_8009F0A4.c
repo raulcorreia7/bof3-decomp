@@ -17,7 +17,7 @@ MATCH void func_8009F0A4(void) {
     /* FAKE: pin the clamped level to retail v0. */
     FAKE_REG(u8, level, "v0");
 
-    flags      = &g_Battle.state;
+    flags      = &g_Battle.flags;
     flag_value = *flags;
     /* FAKE: non-volatile alias of g_Battle.active_battler; the volatile read emits an andi
      * after lbu that retail does not carry. */

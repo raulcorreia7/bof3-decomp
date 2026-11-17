@@ -326,22 +326,22 @@ MATCH void func_801EFEE8(void) {
         } else {
             g_Task->unk_14 -= rand() & 0xFF;
         }
-        g_Task->unk_25      = 0x1D;
-        g_Task->unk_26      = 0x80;
-        g_Task->scale.x     = 0x10000;
-        g_Task->scale.y     = 0x10000;
-        g_Task->unk_48      = 2;
-        g_Task->unk_27      = 2;
-        g_Task->unk_28      = 1;
-        g_Task->unk_24      = 0;
-        g_Task->unk_5C      = 0;
-        g_Task->unk_5D      = 0;
-        g_Task->unk_5E      = 0;
-        g_Task->unk_5F      = 0;
-        g_Task->unk_2A      = g_Task->facing & 1;
-        g_Task->unk_29      = 2;
-        g_Task->unk_2C.half = 0;
-        g_Task->unk_2B      = 1;
+        g_Task->unk_25       = 0x1D;
+        g_Task->unk_26       = 0x80;
+        g_Task->scale.x      = 0x10000;
+        g_Task->scale.y      = 0x10000;
+        g_Task->unk_48       = 2;
+        g_Task->unk_27       = 2;
+        g_Task->unk_28       = 1;
+        g_Task->unk_24       = 0;
+        g_Task->unk_5C       = 0;
+        g_Task->unk_5D       = 0;
+        g_Task->unk_5E       = 0;
+        g_Task->unk_5F       = 0;
+        g_Task->unk_2A       = g_Task->facing & 1;
+        g_Task->unk_29       = 2;
+        g_Task->unk_2C.value = 0;
+        g_Task->unk_2B       = 1;
         Actor_SelectScript(0);
         task         = g_Task;
         task->unk_09 = 16;

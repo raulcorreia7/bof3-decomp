@@ -39,9 +39,9 @@ MATCH void func_801B2DDC(void) {
                 if (result != 0xFFFF) {
                     Message_StartAreaMessage(result & 0xFFF);
                 }
-                g_Game.current->u.field.kind_11E  = g_CurrentActor->callback_index;
-                state                             = g_Task;
-                g_Game.current->u.field.value_120 = FIELD(u16, sel, 0x4u);
+                g_Game.current->u.field.type  = g_CurrentActor->callback_index;
+                state                         = g_Task;
+                g_Game.current->u.field.value = FIELD(u16, sel, 0x4u);
                 state->header.step++;
         }
         g_Task->header.step++;

@@ -103,7 +103,7 @@ MATCH void func_801DFCB4(void) {
     if (check_work->u.turn.hp_change < 0 || check_work->u.turn.ap_change < 0) {
         SND_QueueSelectionEffect(0x206);
     }
-    if (!(g_Battle.state & BATTLE_STATE_DAMAGE_APPLIED)) {
+    if (!(g_Battle.flags & BATTLE_STATE_DAMAGE_APPLIED)) {
         action_type = g_BattleActionType_nv;
         if (action_type == BATTLE_ACTION_ATTACK) {
             func_800AB834();
@@ -113,7 +113,7 @@ MATCH void func_801DFCB4(void) {
             func_800AB834();
             func_800AB910();
         }
-        flags = &g_Battle.state;
+        flags = &g_Battle.flags;
         *flags &= ~0x80;
     }
     func_801DEDE4();

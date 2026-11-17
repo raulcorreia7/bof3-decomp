@@ -226,16 +226,16 @@ MATCH void func_801EF930(void) {
     g_Task->unk_27               = 0xA0;
     g_Task->unk_28               = 0;
     g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    tint                = -0x40;
-    g_Task->unk_5D      = tint;
-    g_Task->unk_5E      = tint;
-    g_Task->unk_5F      = tint;
-    g_Task->unk_5C      = 1;
-    g_Task->unk_2A      = 0;
-    g_Task->unk_29      = 3;
-    g_Task->unk_24      = 4;
-    g_Task->unk_2C.half = 0;
-    g_Task->unk_2B      = 0;
+    tint                 = -0x40;
+    g_Task->unk_5D       = tint;
+    g_Task->unk_5E       = tint;
+    g_Task->unk_5F       = tint;
+    g_Task->unk_5C       = 1;
+    g_Task->unk_2A       = 0;
+    g_Task->unk_29       = 3;
+    g_Task->unk_24       = 4;
+    g_Task->unk_2C.value = 0;
+    g_Task->unk_2B       = 0;
     Actor_SelectScript((RANDOM_MASK(1)) + 1);
     g_Task->timer = RANDOM_MASK(0x3F);
     g_Task->header.step += 1;
@@ -271,10 +271,10 @@ MATCH void func_801EFCF0(void) {
     if (g_Task->header.flags & 0x40) {
         return;
     }
-    if ((u16)(g_Task->unk_2E.half + 0x40) >= 0x1C1) {
+    if ((u16)(g_Task->unk_2E.value + 0x40) >= 0x1C1) {
         return;
     }
-    if ((u16)(g_Task->unk_30.half + 0x40) >= 0x171) {
+    if ((u16)(g_Task->unk_30.value + 0x40) >= 0x171) {
         return;
     }
     head  = (u8*)g_Task->unk_54 + g_Task->unk_5A;
@@ -300,10 +300,10 @@ MATCH void func_801EFCF0(void) {
         shade      = g_Task->unk_5F - 0x80;
         prim->b0   = shade;
         if ((cell[0] & 0x80) && (work = g_Task, (u8)work->unk_2A != 0)) {
-            setXY0(prim, work->unk_2E.half - (s8)cell[1] - prim->w, work->unk_30.half + (s8)cell[2]);
+            setXY0(prim, work->unk_2E.value - (s8)cell[1] - prim->w, work->unk_30.value + (s8)cell[2]);
         } else {
             task = g_Task;
-            setXY0(prim, task->unk_2E.half + (s8)cell[1], task->unk_30.half + (s8)cell[2]);
+            setXY0(prim, task->unk_2E.value + (s8)cell[1], task->unk_30.value + (s8)cell[2]);
         }
         SetSemiTrans(prim, (g_Task->header.flags >> 5) & 1);
         GFX_AddPrim((u8)g_Task->unk_29, sizeof(SPRT));

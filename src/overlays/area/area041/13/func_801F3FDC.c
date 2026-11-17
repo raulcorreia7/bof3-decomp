@@ -5,9 +5,9 @@ MATCH void func_801F3FDC(void) {
 
     cur = g_Game.current;
     g_Task->pos.x.fixed += g_Task->vx;
-    g_PaletteFades[cur->unk_13D].offset.r -= 2;
-    g_PaletteFades[g_Game.current->unk_13D].offset.g -= 2;
-    g_PaletteFades[g_Game.current->unk_13D].offset.b -= 2;
+    g_PaletteFades[cur->palette_fade].offset.r -= 2;
+    g_PaletteFades[g_Game.current->palette_fade].offset.g -= 2;
+    g_PaletteFades[g_Game.current->palette_fade].offset.b -= 2;
     g_Task->unk_0A--;
     if (g_Task->unk_0A == 0) {
         g_Task->unk_04 = 0;

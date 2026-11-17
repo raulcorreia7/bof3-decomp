@@ -9,5 +9,5 @@ MATCH void Battle_SetPhaseStep(void) {
 
     g_Battle.phase.sub_step = 1u;
     g_Battle.ui_step        = 0u;
-    g_Battle.ui_state       = 1u;
+    g_Battle.ui_mode        = 1u;
 }

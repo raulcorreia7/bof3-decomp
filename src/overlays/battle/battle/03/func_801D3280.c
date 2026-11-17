@@ -5,6 +5,6 @@ MATCH void func_801D3280(void) {
         g_Battle.phase.step     = 3;
         g_Battle.phase.sub_step = 0;
         g_Battle.ui_step        = 0;
-        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+        g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
     }
 }

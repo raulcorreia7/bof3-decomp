@@ -103,7 +103,7 @@ MATCH void func_801D5024(void) {
                 battle_flags = g_BattleState;
                 counter += 1;
                 battle_flags &= 0xFFFB;
-                g_Battle.state          = battle_flags;
+                g_Battle.flags          = battle_flags;
                 g_Battle.phase.sub_step = counter;
             }
             return;

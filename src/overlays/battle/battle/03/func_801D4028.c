@@ -6,7 +6,7 @@
 MATCH void func_801D4028(void) {
     u8 next;
 
-    if ((g_Battle.state & BATTLE_STATE_EFFECT_PLAYING) != 0) {
+    if ((g_Battle.flags & BATTLE_STATE_EFFECT_PLAYING) != 0) {
         if (D_801463C2 == 0) {
             if ((func_800AA8FC() & BYTE_MASK) != 0) {
                 g_Battle.row_cursor = 0;

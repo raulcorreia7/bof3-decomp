@@ -3,7 +3,7 @@
 /* arms every idle battler slot and starts the battle phase when the
  * battle scene has not been entered yet.
  */
-/* FAKE: retail reads g_Battle.state as volatile. */
+/* FAKE: retail reads g_Battle.flags as volatile. */
 MATCH void func_8009B828(void) {
     u8 i;
     u8 flags;
@@ -28,6 +28,6 @@ MATCH void func_8009B828(void) {
         g_BattleSubStep = 0;
         g_BattleUIStep  = 0;
         g_BattleUIState = 0;
-        LOHU(*(volatile u16*)&g_Battle.state) |= 8;
+        LOHU(*(volatile u16*)&g_Battle.flags) |= 8;
     }
 }

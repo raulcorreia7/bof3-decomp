@@ -18,7 +18,7 @@ MATCH void func_801D3624(void) {
     u16 mode;
     s32 kind;
 
-    setup_flags = &g_Battle.state;
+    setup_flags = &g_Battle.flags;
     if ((*setup_flags & 0x20) == 0) {
         return;
     }
@@ -38,15 +38,15 @@ MATCH void func_801D3624(void) {
             g_Battle.selected_actor = work;
             /* Retail builds this pointer as base + 0x118 + row * 0x140. */
             D_80146390              = &g_Game.members[kind_index].u.turn.command;
-            D_80146386              = work->unk_2E.half + g_BattlePanelOffsets[g_Game.members[kind_index].chr.character_id * 8 + work->facing * 2];
-            D_80146388              = work->unk_30.half + D_801EB0B1[g_Game.members[kind_index].chr.character_id * 8 + work->facing * 2];
+            D_80146386              = work->unk_2E.value + g_BattlePanelOffsets[g_Game.members[kind_index].chr.character_id * 8 + work->facing * 2];
+            D_80146388              = work->unk_30.value + D_801EB0B1[g_Game.members[kind_index].chr.character_id * 8 + work->facing * 2];
         } else {
             row_offset              = kind_index * 0x118;
             work                    = (PartyMember*)(g_BattleEnemies + row_offset);
             D_80146390              = g_BattleEnemies + 0xF4 + row_offset;
             g_Battle.selected_actor = work;
-            D_80146386              = work->unk_2E.half + ENEMY_COMBATANT(kind_index).panel_offset_x;
-            D_80146388              = work->unk_30.half + ENEMY_COMBATANT(kind_index).panel_offset_y;
+            D_80146386              = work->unk_2E.value + ENEMY_COMBATANT(kind_index).panel_offset_x;
+            D_80146388              = work->unk_30.value + ENEMY_COMBATANT(kind_index).panel_offset_y;
         }
         D_8014638A = work->depth;
     }
