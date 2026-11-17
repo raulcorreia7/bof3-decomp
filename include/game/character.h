@@ -14,14 +14,13 @@
 #include "game/enemy.h"
 #include "game/records.h"
 
-#define CHARACTER_BLOCK_RECORDS 0x16
+#define CHARACTER_BLOCK_RECORDS                                                           0x16
 
 /* The block at its retail address; an image header declares g_WindowStyle. */
-#define CHARACTER_BLOCK         ((CharacterRoster*)&g_WindowStyle)
+#define CHARACTER_BLOCK                                                                   ((CharacterRoster*)&g_WindowStyle)
 
 /* Char_GetExp applies the six stat gains and learns both abilities. */
-#define LEVEL_OBJECT(exp, hp, ap, power, defense, agility, intelligence, ability, extra_ability)                   \
-    {(exp), (hp), (ap), ((power) << 4) | (defense), ((agility) << 4) | (intelligence), (ability), (extra_ability)}
+#define LEVEL(exp, hp, ap, power, defense, agility, intelligence, ability, extra_ability) {(exp), (hp), (ap), ((power) << 4) | (defense), ((agility) << 4) | (intelligence), (ability), (extra_ability)}
 
 /* The character sprites container loaded at 0x8003B800 (PLxxx archives;
  * @source: wiki:formats/character): a table of section offsets relative to the container.
@@ -29,18 +28,18 @@
  * record at +0x4C. A section starts with a count and the offset of its palette
  * table; the table is a list of offsets, each to CHARACTER_PALETTE_COLORS
  * 16-bit colors, which GFX_LoadPalette copies to two VRAM staging rows. */
-#define CHARACTER_SPRITES_SECTION_COUNT 3
-#define CHARACTER_PALETTE_COLORS        32
+#define CHARACTER_SPRITES_SECTION_COUNT                                                   3
+#define CHARACTER_PALETTE_COLORS                                                          32
 
 /* The highest fatigue level a character reaches: Char_AddFatigue raises the byte only below it. */
-#define CHARACTER_FATIGUE_MAX           9
+#define CHARACTER_FATIGUE_MAX                                                             9
 
 /* The ailments the engine cures when a battle ends (the game's own strings
  * call status removal "cure"): Battle_ReloadPartySprites and Battle_LoadEndOverlay pass a
  * battler's status & this mask to Battle_CureStatus; STATUS_KO, STATUS_POISONED
  * and STATUS_CONFUSED persist. The (u16) keeps the complement a 16-bit
  * immediate (andi) in Battle_ReloadPartySprites's schedule. */
-#define STATUS_CURE_MASK                ((u16) ~(STATUS_KO | STATUS_POISONED | STATUS_CONFUSED))
+#define STATUS_CURE_MASK                                                                  ((u16) ~(STATUS_KO | STATUS_POISONED | STATUS_CONFUSED))
 
 /* Equipment bits: the characters that may use a weapon or armor record
  * (Item.equipability). */

@@ -87,7 +87,7 @@ ASSERT_OFFSET(VitalItem, description, 0x0C);
 ASSERT_OFFSET(VitalItem, unk_0E, 0x0E);
 ASSERT_SIZE(VitalItem, VITAL_ITEM_STRIDE);
 
-#define VITAL_ITEM_OBJECT(name, description) {name, (description), 0}
+#define VITAL_ITEM(name, description) {name, (description), 0}
 
 typedef struct Item {
     u8  name[ITEM_NAME_LENGTH];
@@ -104,7 +104,7 @@ ASSERT_OFFSET(Item, description, 0x0E);
 ASSERT_OFFSET(Item, price, 0x10);
 ASSERT_SIZE(Item, ITEM_STRIDE);
 
-#define ITEM_OBJECT(name, flags, type, description, price) {name, (flags), (type), (description), (price)}
+#define ITEM(name, flags, type, description, price) {name, (flags), (type), (description), (price)}
 
 /* The header the Weapon, Armor and Accessory rows open with. */
 typedef struct ItemHeader {
@@ -139,7 +139,7 @@ ASSERT_OFFSET(Weapon, description, 0x14);
 ASSERT_OFFSET(Weapon, price, 0x16);
 ASSERT_SIZE(Weapon, WEAPON_STRIDE);
 
-#define WEAPON_OBJECT(name, equipability, header_flags, type, element, weight, sound, power, description, price)       \
+#define WEAPON(name, equipability, header_flags, type, element, weight, sound, power, description, price)              \
     {{name, (equipability), (header_flags)}, (type), (element), (weight), (sound), (power), 0, (description), (price)}
 
 typedef struct Armor {
@@ -161,7 +161,7 @@ ASSERT_OFFSET(Armor, description, 0x12);
 ASSERT_OFFSET(Armor, price, 0x14);
 ASSERT_SIZE(Armor, ARMOR_STRIDE);
 
-#define ARMOR_OBJECT(name, equipability, header_flags, type, weight, power, description, price) {{name, (equipability), (header_flags)}, (type), (weight), (power), 0, (description), (price)}
+#define ARMOR(name, equipability, header_flags, type, weight, power, description, price) {{name, (equipability), (header_flags)}, (type), (weight), (power), 0, (description), (price)}
 
 typedef struct Accessory {
     ItemHeader header;
@@ -239,11 +239,11 @@ ASSERT_SIZE(ShopStock, SHOP_STRIDE);
 
 #define SHOP_ITEM(item_type, item_index) {(item_type), (item_index)}
 
-#define SHOP_OBJECT(item_count, slot0, slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9, slot10) \
-    {                                                                                                         \
-        (item_count), {                                                                                       \
-            slot0, slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9, slot10                      \
-        }                                                                                                     \
+#define SHOP_STOCK(item_count, slot0, slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9, slot10) \
+    {                                                                                                        \
+        (item_count), {                                                                                      \
+            slot0, slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9, slot10                     \
+        }                                                                                                    \
     }
 
 typedef struct Chest {

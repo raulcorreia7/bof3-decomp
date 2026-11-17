@@ -1,4 +1,4 @@
-/* Draw the equipment panel: the six equipped objects, each with its sprite, and the EQUIP caption.toml. */
+/* Draw the equipment panel: the six equipped items, each with its sprite, and the EQUIP caption.toml. */
 
 /* Layout in pixels: the panel in frame cells, the caption and its icon, and the equipment rows. */
 #define MENU_EQUIPMENT_PANEL_WIDTH  9
@@ -17,7 +17,7 @@
 
 /* 0x801D2F64 (bate), 0x801D3F0C (shisu), 0x801D8A0C (shop), 0x801DBF04 (start) */
 MATCH void Shop_DrawEquipment(s16 x, s16 y, u8 record_index) {
-    const volatile void* objects[MENU_EQUIPMENT_ROW_COUNT];
+    const volatile void* items[MENU_EQUIPMENT_ROW_COUNT];
     Character*           record;
     u16                  row_y;
     u8                   row;
@@ -27,16 +27,16 @@ MATCH void Shop_DrawEquipment(s16 x, s16 y, u8 record_index) {
     UI_DrawText((s16)(x + MENU_EQUIPMENT_CAPTION_X), (s16)(y + MENU_EQUIPMENT_CAPTION_Y), 0, TEXT_LENGTH_MAX, g_MenuLabelEquip);
     UI_DrawIconCell(0, (s32)(u16)(x + MENU_EQUIPMENT_EMBLEM_X), (s32)(u16)(y + MENU_EQUIPMENT_EMBLEM_Y), MENU_EQUIPMENT_EMBLEM_SIZE, MENU_EQUIPMENT_EMBLEM_SIZE, GFX_COLOR_NEUTRAL);
 
-    objects[0] = &g_Weapons[record->equip.weapon];
-    objects[1] = &g_Armors[record->equip.shield];
-    objects[2] = &g_Armors[record->equip.helmet];
-    objects[3] = &g_Armors[record->equip.armor];
-    objects[4] = &g_Accessories[record->equip.accessories[0]];
-    objects[5] = &g_Accessories[record->equip.accessories[1]];
+    items[0] = &g_Weapons[record->equip.weapon];
+    items[1] = &g_Armors[record->equip.shield];
+    items[2] = &g_Armors[record->equip.helmet];
+    items[3] = &g_Armors[record->equip.armor];
+    items[4] = &g_Accessories[record->equip.accessories[0]];
+    items[5] = &g_Accessories[record->equip.accessories[1]];
 
     for (row = 0; row < MENU_EQUIPMENT_ROW_COUNT; row++) {
         row_y = (u16)(y + (row * MENU_EQUIPMENT_ROW_HEIGHT + MENU_EQUIPMENT_FIRST_ROW_Y));
         func_801AEA80((s32)(u16)(x + MENU_EQUIPMENT_ROW_ICON_X), (s32)(u16)(row_y + MENU_EQUIPMENT_ROW_ICON_DY), g_MenuEquipRowIcons[row], 0);
-        UI_DrawText((s16)(x + MENU_EQUIPMENT_ROW_NAME_X), (s16)row_y, 0, Game_ReadCommand((u8*)objects[row]) & BYTE_MASK, (u8*)objects[row]);
+        UI_DrawText((s16)(x + MENU_EQUIPMENT_ROW_NAME_X), (s16)row_y, 0, Game_ReadCommand((u8*)items[row]) & BYTE_MASK, (u8*)items[row]);
     }
 }
