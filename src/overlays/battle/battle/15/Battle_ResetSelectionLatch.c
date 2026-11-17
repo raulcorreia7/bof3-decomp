@@ -9,7 +9,7 @@ MATCH void Battle_ResetSelectionLatch(void) {
 
     g_Battle.command_count += 1u;
     D_801EB5B1[((D_801EC328 - 1) & 0xF) * 8] = 1u;
-    func_8009B20C();
+    Battle_ClearMenuPanels();
     g_Battle.phase.step     = 1;
     g_Battle.phase.sub_step = 0;
     g_Battle.ui_step        = 0;

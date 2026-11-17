@@ -84,7 +84,7 @@ typedef struct BattleAction {
     u8  type; /* +0x01 mirrors g_Battle.action_type */
     u16 unk_02;
     u8  pad_04[4];
-    u8  unk_08; /* +0x08 step byte: func_8009E248 sets 1, func_8009E500 sets 2 */
+    u8  unk_08; /* +0x08 step byte: Battle_DrainHp sets 1, Battle_DrainAp sets 2 */
 } BattleAction;
 
 ASSERT_OFFSET(BattleAction, type, 0x01);

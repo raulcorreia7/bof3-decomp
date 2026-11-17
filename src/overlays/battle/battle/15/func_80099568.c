@@ -3,7 +3,7 @@
 /* First byte of g_BattleChoicePanel (0x80148570); a scalar symbol emits the
  * direct %lo store form instead of materializing the array address. */
 
-bool func_8009AC18(void);
+bool Battle_Unequip(void);
 
 MATCH void func_80099568(void) {
     /* FAKE: stack_scratch reserves the retail 0x28 frame; no instruction
@@ -45,7 +45,7 @@ MATCH void func_80099568(void) {
         return;
     }
     if ((held & PADRleft) != 0u) {
-        if ((func_8009AC18() & BYTE_MASK) != 0) {
+        if ((Battle_Unequip() & BYTE_MASK) != 0) {
             SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
             return;
         }

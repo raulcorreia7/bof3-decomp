@@ -32,8 +32,8 @@ Callback D_801EABD8[3] = {
 
 /* 0x801EABE4 */
 Callback D_801EABE4[8] = {
-    (Callback)func_80096A74, (Callback)func_80096F00, (Callback)func_8009834C, (Callback)func_800980A8,
-    (Callback)func_801D251C, (Callback)Battle_ArmCommands, (Callback)func_8009B274, (Callback)func_800A4688,
+    (Callback)Battle_RunAttackCommand, (Callback)Battle_RunAbilityCommand, (Callback)Battle_RunItemCommand, (Callback)func_800980A8,
+    (Callback)func_801D251C, (Callback)Battle_ArmCommands, (Callback)Battle_RunEscapeCommand, (Callback)func_800A4688,
 };
 
 /* 0x801EAC04 */
