@@ -454,22 +454,6 @@ ASSERT_OFFSET(AreaRing, radius, 0x20);
 ASSERT_OFFSET(AreaRing, screen, 0x2C);
 ASSERT_SIZE(AreaRing, 0x6C);
 
-/* The 0x40-byte task scratch the area dispatch steps: the dispatch byte at
- * +0x01, the step counter at +0x09 and the work position at +0x34. */
-typedef struct AreaScratch {
-    u8   unk_00[0x01]; /* 0x00 */
-    u8   dispatch;     /* 0x01 - indexes the step table */
-    u8   unk_02[0x07];
-    u8   step_count; /* 0x09 */
-    u8   unk_0A[0x2A];
-    Pos3 pos; /* 0x34 */
-} AreaScratch;
-
-ASSERT_OFFSET(AreaScratch, dispatch, 0x01);
-ASSERT_OFFSET(AreaScratch, step_count, 0x09);
-ASSERT_OFFSET(AreaScratch, pos, 0x34);
-ASSERT_SIZE(AreaScratch, 0x40);
-
 /* The AREA028 slot row: 0x10 bytes. The program keeps 32 of them at
  * `0x800E4800` (`@0x801F2F5C`, `@0x801F3004`, `@0x801F3060` walk them with
  * that stride) and the ring projection reads the active one. */
