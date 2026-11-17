@@ -87,21 +87,18 @@ NON_MATCHING void func_801DC93C(void) {
     frame_now = g_Task->unk_03;
     if (frame_now == 2) {
         row_mod = D_80144286 & 3;
-        switch (row_mod) { /* irregular */
-            default:
-                if (row_mod != frame_now) {
-                } else {
-                    message_id = FISHING_MESSAGE_HOW_TO_FISH;
-                block_39:
-                    UI_DrawText(29, 20, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, message_id));
-                }
-                break;
-            case 0:
-                message_id = FISHING_MESSAGE_EQUIP_ROD_LURE;
-                goto block_39; /* shared selection join */
-            case 1:
-                message_id = FISHING_MSG_DATA_TITLE;
-                goto block_39; /* shared selection join */
+        if (row_mod == 1) {
+            message_id = FISHING_MSG_DATA_TITLE;
+            goto block_39; /* shared selection join */
+        }
+        if (row_mod < 2) {
+            message_id = FISHING_MESSAGE_EQUIP_ROD_LURE;
+            goto block_39; /* shared selection join */
+        }
+        if (row_mod == frame_now) {
+            message_id = FISHING_MESSAGE_HOW_TO_FISH;
+        block_39:
+            UI_DrawText(29, 20, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, message_id));
         }
         Menu_DrawCursorSprite((D_80144286 * 48) + 88, 46U, 0);
     }
