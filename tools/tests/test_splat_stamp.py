@@ -46,3 +46,19 @@ def test_changing_a_derived_option_changes_the_digest(tmp_path: Path) -> None:
     manifest = root / "config/exe/a/splat.yaml"
     manifest.write_text(SPLAT + "options:\n  src_path: src/engine/a\n")
     assert splat_input_digest(root, "exe/a") != before
+
+
+def test_a_layout_comment_keeps_the_digest(tmp_path: Path) -> None:
+    root = repo(tmp_path, "", "")
+    before = splat_input_digest(root, "exe/a")
+    manifest = root / "config/exe/a/splat.yaml"
+    manifest.write_text("# a note\n" + SPLAT)
+    assert splat_input_digest(root, "exe/a") == before
+
+
+def test_a_layout_segment_changes_the_digest(tmp_path: Path) -> None:
+    root = repo(tmp_path, "", "")
+    before = splat_input_digest(root, "exe/a")
+    manifest = root / "config/exe/a/splat.yaml"
+    manifest.write_text(SPLAT.replace("segments: []", "segments: [[0, bin, x]]"))
+    assert splat_input_digest(root, "exe/a") != before

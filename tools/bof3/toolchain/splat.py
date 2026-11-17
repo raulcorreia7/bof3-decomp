@@ -349,11 +349,15 @@ def splat_inputs(root: Path, target: str) -> list[Path]:
 def splat_input_digest(root: Path, target: str) -> str:
     """Digest over the paths and bytes Splat reads for one target and this post-processor."""
     digest = hashlib.sha1(Path(__file__).read_bytes())
+    layout = root / CONFIG / target / "splat.yaml"
     try:
-        _text, document = read_splat(root / CONFIG / target / "splat.yaml")
-        # The options the id derives (src_path, asm_path, ...) decide the output too.
-        digest.update(repr(sorted((document.get("options") or {}).items())).encode())
-    except (OSError, yaml.YAMLError):
+        _text, document = read_splat(layout)
+        # The parsed layout, not its bytes: a comment or blank-line edit changes no output. It
+        # holds the options the id derives (src_path, asm_path, ...) as well.
+        digest.update(repr(document).encode())
+    except yaml.YAMLError:
+        digest.update(layout.read_bytes())
+    except OSError:
         pass
     # The target's own rows decide the names of its split functions only when its
     # ``symbol_owners`` list it; hashing them here means an edit to one target's rows
@@ -364,6 +368,8 @@ def splat_input_digest(root: Path, target: str) -> str:
                 f"{entry.name} {entry.addr:x} {entry.type} {entry.size}\n".encode()
             )
     for path in sorted(splat_inputs(root, target)):
+        if path == layout:
+            continue
         digest.update(path.relative_to(root).as_posix().encode())
         digest.update(hashlib.sha1(path.read_bytes()).digest())
     return digest.hexdigest()
