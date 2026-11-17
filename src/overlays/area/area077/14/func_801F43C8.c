@@ -13,7 +13,7 @@ MATCH void func_801F43C8(void) {
 
     tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 960, 0);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage & HALF_MASK, 0);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     Area_SetCameraMatrix(&matrix);
     Area_ProjectPoint(&MEM_PTR(AreaSlot, AREA_WORK)->edges[0].vx, &first);
     Area_ProjectPoint(&MEM_PTR(AreaSlot, AREA_WORK)->edges[1].vx, &second);
@@ -42,6 +42,6 @@ MATCH void func_801F43C8(void) {
         prim->y3 = second.vy;
         prim->r2 = prim->r3 = shade;
         prim->g2 = prim->b2 = prim->g3 = prim->b3 = shade / 2;
-        GFX_AddPrim(1, sizeof(POLY_G4));
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
     } while (i < AREA_SLOT_COUNT - 1);
 }

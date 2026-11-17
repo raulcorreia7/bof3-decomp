@@ -8,5 +8,5 @@ MATCH void func_801F3D18(s32 column) {
     rect.w = 8;
     rect.h = 0x78;
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, D_801F5358[COORD_INT(g_Task->pos.x)] + 0x1C0, 0x160);
-    GFX_AddPrim(6, 0x18);
+    GFX_AddPrim(GFX_LAYER_FIELD_SCENE, 0x18);
 }

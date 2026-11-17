@@ -10,7 +10,7 @@ MATCH void func_801F2EA0(void) {
             D_801F59E8 = 0;
         }
     }
-    GFX_AddDitheredDrawMode(6U, GetTPage(TPAGE_DEPTH_15BIT, 2, 320, 320) & HALF_MASK);
+    GFX_AddDitheredDrawMode(GFX_LAYER_FIELD_SCENE, GetTPage(TPAGE_DEPTH_15BIT, 2, 320, 320) & HALF_MASK);
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     prim->r0 = prim->r1 = D_801F59EC;

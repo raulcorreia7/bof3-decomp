@@ -8,7 +8,7 @@ MATCH void Area_DrawGradient(s32 colors) {
     u8       topRed, topGreen, topBlue, bottomRed, bottomGreen, bottomBlue;
 
     texturePage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(6, texturePage);
+    GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_FIELD_SCENE, texturePage);
     polygon = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(polygon);
     topRed      = (packedColors & 31) << 3;
@@ -24,7 +24,7 @@ MATCH void Area_DrawGradient(s32 colors) {
     polygon->r2 = polygon->r3 = bottomRed;
     polygon->g2 = polygon->g3 = bottomGreen;
     polygon->b2 = polygon->b3 = bottomBlue;
-    GFX_AddPrim(6, sizeof(POLY_G4));
+    GFX_AddPrim(GFX_LAYER_FIELD_SCENE, sizeof(POLY_G4));
     texturePage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
-    GFX_ADD_LAYER_DRAW_MODE(6, texturePage);
+    GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_FIELD_SCENE, texturePage);
 }

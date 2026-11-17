@@ -10,5 +10,5 @@ MATCH void func_801F4E70(s32 frame) {
     rect.w = 32;
     rect.h = 64;
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, g_Task->param.unk_0B * 48 + 576, 256);
-    GFX_AddPrim(6, 24);
+    GFX_AddPrim(GFX_LAYER_FIELD_SCENE, 24);
 }
