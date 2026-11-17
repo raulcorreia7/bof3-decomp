@@ -1,79 +1,60 @@
 #include "battle_03.h"
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801D9E9C(s16 arg0, s16 arg1, u16 arg2, u16 arg3, s8 arg4) {
-    s16       tmp0;
-    s16       tmp1;
-    s16       tmp2;
-    s16       tmp3;
-    s16       tmp4;
-    s16       val0;
-    s16       val1;
-    s32       val2;
-    s8        val3;
-    s8        val4;
-    u16       val5;
-    u16       val6;
-    POLY_FT4* val7;
-    u8        val8;
+NON_MATCHING void func_801D9E9C(s32 x, s32 y, s32 width, s32 second_width, u8 second) {
+    POLY_FT4* poly;
+    u8        u;
+    u8        v;
+    u8        c;
 
-    val7 = (POLY_FT4*)g_GfxPrimCursor;
-    val8 = (u8)arg4;
-    val1 = arg0;
-    val0 = arg1;
-    val5 = arg2;
-    val6 = arg3;
-    SetPolyFT4(val7);
-    val7->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
-    val2        = 0xB0;
-    if (val8 == 0) {
-        val2 = 0xE0;
-    }
-    val7->clut = GetClut(val2, STAGE_PALETTE_Y);
-    val3       = 0x80;
-    tmp2       = val1 + (val5 & BYTE_MASK);
-    tmp4       = val0 + 7;
-    setRGB0(val7, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
-    setXY4(val7, val1, val0, tmp2, val0, val1, tmp4, tmp2, tmp4);
-    if (val8 == 0) {
-        val3 = 0x90;
-        val4 = 0x97;
+    poly = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(poly);
+    poly->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
+    poly->clut  = GetClut(!second ? 0xE0 : 0xB0, STAGE_PALETTE_Y);
+    u           = 0x80;
+    setRGB0(poly, u, u, u);
+    setXY4(poly, x, y, x + (width & BYTE_MASK), y, x, y + 7, x + (width & BYTE_MASK), y + 7);
+    if (!second) {
+        u = 0x90;
+        v = 0x97;
     } else {
-        val4 = 0x87;
+        v = 0x87;
     }
-    val7->v0 = 216;
-    val7->v1 = 216;
-    val7->u0 = val3;
-    val7->u1 = val4;
-    val7->u2 = val3;
-    val7->v2 = 223;
-    val7->u3 = val4;
-    val7->v3 = 223;
+    c        = 0xD8;
+    poly->v0 = c;
+    poly->v1 = c;
+    poly->u0 = u;
+    poly->u1 = v;
+    poly->u2 = u;
+    c        = 0xDF;
+    poly->v2 = c;
+    poly->u3 = v;
+    poly->v3 = c;
     GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
-    val7 = (POLY_FT4*)g_GfxPrimCursor;
-    SetPolyFT4(val7);
-    val7->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
-    val7->clut  = GetClut(176, STAGE_PALETTE_Y);
-    setRGB0(val7, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
-    tmp0     = val1 + (val5 & BYTE_MASK);
-    tmp3     = (val6 & BYTE_MASK) + tmp0;
-    val7->x0 = tmp0;
-    val7->x2 = tmp0;
-    tmp1     = val0 + 7;
-    val7->y2 = tmp1;
-    val7->y3 = tmp1;
-    val7->x1 = tmp3;
-    val7->x3 = tmp3;
-    val7->v0 = 216;
-    val7->v1 = 216;
-    val7->y0 = val0;
-    val7->y1 = val0;
-    val7->u0 = 152;
-    val7->u1 = 159;
-    val7->u2 = 152;
-    val7->v2 = 223;
-    val7->u3 = 159;
-    val7->v3 = 223;
+
+    poly = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(poly);
+    poly->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
+    poly->clut  = GetClut(0xB0, STAGE_PALETTE_Y);
+    setRGB0(poly, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
+    poly->x0 = x + (width & BYTE_MASK);
+    poly->x2 = x + (width & BYTE_MASK);
+    poly->y2 = y + 7;
+    poly->y3 = y + 7;
+    poly->x1 = x + (width & BYTE_MASK) + (second_width & BYTE_MASK);
+    poly->x3 = x + (width & BYTE_MASK) + (second_width & BYTE_MASK);
+    c        = 0xD8;
+    poly->v0 = c;
+    poly->v1 = c;
+    poly->y0 = y;
+    poly->y1 = y;
+    poly->u0 = 0x98;
+    poly->u1 = 0x9F;
+    poly->u2 = 0x98;
+    c        = 0xDF;
+    poly->v2 = c;
+    poly->u3 = 0x9F;
+    poly->v3 = c;
     GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 }
 #else

@@ -37,7 +37,7 @@ NON_MATCHING void func_801F3954(s32 frame) {
             i++;
             FIELD(u16, g_ScratchPadVectors, offset)     = (slot[0] + D_801F4F16[entry] * 64) + slot[2];
             FIELD(u16, g_ScratchPadVectors, offset + 2) = slot[1] + D_801F4F17[entry] * 64;
-            FIELD(u16, g_ScratchPadVectors, offset + 4) = (slot[3] + 0x180) - D_801F4F18[entry] * 64;
+            FIELD(u16, g_ScratchPadVectors, offset + 4) = (u16)(slot[3] + 0x180) - D_801F4F18[entry] * 64;
             offset += 8;
             entry += 3;
         } while (i < 4);

@@ -26,8 +26,7 @@ NON_MATCHING void func_801DF9EC(void) {
         D_801E6260 ^= 1;
     }
     if (*pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        selected = (s8)D_801E6260;
-        if (selected != 0) {
+        if (*(s8*)&D_801E6260 != 0) {
             has_item = Item_VitalHas(VITAL_ITEM_FOUNTAIN_PEN);
             if (has_item == 0) {
                 item_count = Item_Count(ITEM_CATEGORY_ITEM, ITEM_SKILL_INK, 0);
@@ -37,7 +36,10 @@ NON_MATCHING void func_801DF9EC(void) {
                 }
             }
             has_item = Item_VitalHas(VITAL_ITEM_FOUNTAIN_PEN);
-            if (has_item != 0) {
+            if (has_item == 0) {
+                D_80148651++;
+                D_8014865B = 1;
+            } else {
                 SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 2));
                 g_MenuPanelTasks[2].mode    = 13;
                 g_MenuPanelTasks[2].pos.x   = -150;
@@ -63,8 +65,6 @@ NON_MATCHING void func_801DF9EC(void) {
                 D_80148654                 = 5;
                 return;
             }
-            D_8014865B = 1;
-            D_80148651++;
         } else {
             SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
             SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 2));
