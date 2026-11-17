@@ -2,13 +2,16 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F07E0(void) {
-    u8  i;
-    u8  y;
+    u8 i;
+    /* FAKE: retail keeps the row coordinate in s5 across the panel call. */
+    FAKE_REG(u8, y, "s5");
     u8* buffer;
     u8* text;
 
     y = 0x2C;
     func_801F039C(0x14, 0x28, 0x118, g_MenuCurrentPanel->unk_09);
+    /* FAKE: keep the row coordinate live across the panel call. */
+    FAKE_USE(y);
     if (g_Battle.party_count != 0) {
         i      = 0;
         buffer = (u8*)g_TextVariables[2];
