@@ -5,8 +5,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F8D30(void) {
+MATCH void func_801F8D30(void) {
     u8 slot;
     u8 counter;
 
@@ -161,6 +160,3 @@ NON_MATCHING void func_801F8D30(void) {
             break;
     }
 }
-#else
-INCLUDE_ASM(func_801F8D30);
-#endif
