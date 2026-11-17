@@ -11,6 +11,8 @@ NON_MATCHING void func_801F35B0(void) {
     s32            prim;
     s32            row_id;
     u8*            entry;
+    /* FAKE: keeps the map row coordinate in a1 while the loop product takes v0; the plain ternary is 3 rows off. */
+    FAKE_REG(s32, y, "a1");
 
     i = 0;
     do {
@@ -18,8 +20,9 @@ NON_MATCHING void func_801F35B0(void) {
         if (g_Task->direction_08 == 0) {
             column += i;
         }
+        y      = COORD_INT(g_Task->pos.y);
         offset = i * g_Task->direction_08;
-        row    = COORD_INT(g_Task->pos.y) + (g_Task->direction_08 != 0 ? offset : offset + 1);
+        row    = y + (g_Task->direction_08 != 0 ? offset : offset + 1);
         map    = (AreaMapBundle*)MAP_BUNDLE_BASE;
         entry  = (u8*)(map->grid_off4_02 * 4 + (((map->width * map->height + 1) / 2) * 4 + (u32)map) + *(u16*)(column * 2 + (row * map->width * 2 + map->grid_off4_02 * 4) + (u32)map) * 4);
         id     = Area_GetCellId(column, row);
