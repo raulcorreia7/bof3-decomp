@@ -203,7 +203,7 @@ NON_MATCHING s32 func_801FDA6C(s32 x, s32 y) {
         if (SYS_TestFlag(g_SceneFlags, 6) == 0) {
             if (x == 0x548000 && (u32)((y >> 16) - 28) < 2U) {
                 Game_SetScriptActive();
-                SND_PlayCue(0x202);
+                SND_PlaySE(0x202);
                 g_SceneState.state_04 = 21;
                 return 1;
             }

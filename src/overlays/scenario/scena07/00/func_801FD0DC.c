@@ -33,7 +33,7 @@ MATCH void func_801FD0DC(void) {
                 g_TextVariables[0][ITEM_NAME_LENGTH] = 0;
                 MESSAGE_START_WAIT(MSG_148);
                 SYS_SetFlag(g_SceneFlags, 0x22);
-                SND_PlayCue(0x106);
+                SND_PlaySE(0x106);
                 g_SceneState.step_05 = 0x15;
             }
             break;
@@ -63,7 +63,7 @@ MATCH void func_801FD0DC(void) {
                 g_TextVariables[1][ITEM_NAME_LENGTH] = 0;
                 MESSAGE_START_WAIT(MSG_149);
                 SYS_SetFlag(g_SceneFlags, 0x23);
-                SND_PlayCue(0x106);
+                SND_PlaySE(0x106);
                 g_SceneState.step_05 = 0x15;
             }
             break;

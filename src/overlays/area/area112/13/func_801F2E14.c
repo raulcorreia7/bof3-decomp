@@ -6,8 +6,8 @@ MATCH void func_801F2E14(void) {
         g_Task->header.step++;
         COORD_INT(g_Task->pos.y) = 8;
         func_801F2EA8();
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x02));
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x01));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x02));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x01));
     }
     func_801F3274();
 }

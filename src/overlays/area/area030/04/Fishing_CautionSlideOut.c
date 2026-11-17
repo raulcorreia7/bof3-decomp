@@ -13,7 +13,7 @@ MATCH void Fishing_CautionSlideOut(void) {
     Fishing_DrawCautionBox((s16)(68 - FISHING_STATE->step_timer_09 * 80), 78);
 
     if (FISHING_STATE->step_timer_09 == 4) {
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 2));
         record               = FISHING_STATE;
         record->cue_index_06 = 1;
         record               = FISHING_STATE;

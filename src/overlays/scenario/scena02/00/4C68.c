@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801FB868(void) {
     switch (g_SceneState.step_05) {
         case 0:
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x0B));
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x0B));
             g_SceneState.step_05 = 1;
             break;
         case 1: {

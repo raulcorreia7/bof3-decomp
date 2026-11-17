@@ -82,7 +82,7 @@ MATCH void func_801F83C8(void) {
             g_GameState = &g_Game.members[0];
             TASK_SET(&g_Game.members[0]);
             D_80145FA8 &= 0xBF;
-            SND_PlayCue(0x201);
+            SND_PlaySE(0x201);
             SND_FadeOutSequence(0, 1, 4, 0x1E);
             g_SceneState.step_05 = 9;
             break;
@@ -174,7 +174,7 @@ MATCH void func_801F83C8(void) {
             } else {
                 Message_StartAreaMessage(MSG_050);
                 g_GameStateIndex = 2;
-                SND_PlayCue(0x106);
+                SND_PlaySE(0x106);
                 g_SceneState.step_05 = 0x14;
             }
             break;

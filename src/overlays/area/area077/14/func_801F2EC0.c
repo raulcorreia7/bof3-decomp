@@ -19,7 +19,7 @@ MATCH void func_801F2EC0(void) {
         }
         func_801F35E0(130, 10, g_Task->screen_x, g_Task->screen_y, g_Task->unk_32, COORD_INT(g_Task->pos.x));
         if ((s16)g_Task->screen_x == 2) {
-            SND_PlayCue(0x205);
+            SND_PlaySE(0x205);
         }
         i++;
     } while (i < 2);

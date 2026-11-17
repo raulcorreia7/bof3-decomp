@@ -341,7 +341,7 @@ MATCH void func_80117C58(void) {
     u32 slot;
 
     if (SYS_TestFlag(D_80144ED0, D_801181D0[COORD_INT(g_Task->pos.x)]) != 0) {
-        SND_PlayCue(0x20A);
+        SND_PlaySE(0x20A);
         slot = Actor_FindFreeSpawned() & BYTE_MASK;
         if (slot != GAME_NONE) {
             g_SpawnedActors[slot].header.flags = ACTOR_FLAG_IN_USE;

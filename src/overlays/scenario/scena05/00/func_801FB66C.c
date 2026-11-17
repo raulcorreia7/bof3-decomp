@@ -69,7 +69,7 @@ MATCH void func_801FB66C(void) {
             break;
         case 8:
             SND_StopSequence(0, 0);
-            SND_PlayCue(0x208);
+            SND_PlaySE(0x208);
             g_SndVoiceTargetVolume[16] = 0x7F;
             g_SndVoiceVolume[16]       = 0;
             g_SceneState.step_05       = 9;
@@ -91,14 +91,14 @@ MATCH void func_801FB66C(void) {
             timer = &g_SceneState.timer_06;
             (*timer)++;
             if (*timer >= 200) {
-                SND_PlayCue(0x209);
+                SND_PlaySE(0x209);
                 *timer               = 0;
                 g_SceneState.step_05 = 12;
             }
             SND_DecreaseVoiceTargetVolume(0x10, 4);
             SND_StartVolumeSweep(0x10);
             if ((s8)g_SndVoiceTargetVolume[16] < 9) {
-                SND_PlayCue(0x209);
+                SND_PlaySE(0x209);
                 *timer               = 0;
                 g_SceneState.step_05 = 12;
             }
@@ -128,7 +128,7 @@ MATCH void func_801FB66C(void) {
             }
             break;
         case 16:
-            SND_PlayCue(0x208);
+            SND_PlaySE(0x208);
             g_SceneState.step_05 = 21;
             break;
         case 21:
@@ -161,7 +161,7 @@ MATCH void func_801FB66C(void) {
             if (g_ScriptVars[0] != 6) {
                 break;
             }
-            SND_PlayCue(0x209);
+            SND_PlaySE(0x209);
             Battle_StartScripted(0x15);
             g_SceneState.step_05 = 25;
             break;

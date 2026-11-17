@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* marks the four selection voice slots free (-1), queues cue cue_id through SND_PlayCue (which keys the
+/* marks the four selection voice slots free (-1), queues cue cue_id through SND_PlaySE (which keys the
  * voices on), then packs the voice numbers' low five bits into the work record's state word at +0x70 (bits 8, 13, 18,
  * 23) and sets ACTOR_FLAG_SELECTION_EFFECT in its flag byte.
  */
@@ -13,7 +13,7 @@ MATCH void SND_QueueSelectionEffect(s32 cue_id) {
     D_8018B344 = -1;
     D_8018B36C = -1;
     D_8018B394 = -1;
-    SND_PlayCue(cue_id);
+    SND_PlaySE(cue_id);
     packed = (*(u8*)&D_8018B31C & 0x1F) << 8;
     packed |= (*(u8*)&D_8018B344 & 0x1F) << 13;
     packed |= (*(u8*)&D_8018B36C & 0x1F) << 18;

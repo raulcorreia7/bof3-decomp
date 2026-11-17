@@ -7,7 +7,7 @@ MATCH s32 func_801F2CE4(void) {
     tick          = g_Task->timer;
     g_Task->timer = tick + 1;
     if (tick == 0) {
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x00));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x00));
     }
     MotionTrail_Update((u8*)AREA_WORK);
     func_801F3258((u8*)AREA_WORK);

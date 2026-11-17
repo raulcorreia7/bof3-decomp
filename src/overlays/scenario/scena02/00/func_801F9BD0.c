@@ -21,7 +21,7 @@ MATCH void func_801F9BD0(void) {
             break;
         case 2:
             if (g_ScriptVars[0] == 0x41) {
-                SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 4));
+                SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 4));
                 g_SceneState.step_05 = 3;
             }
             break;

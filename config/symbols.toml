@@ -113,7 +113,7 @@ Battle_PickLowestHpTarget = { addr = 0x801E2CA4, type = "func", source = "Return
 Battle_PickFormationTarget = { addr = 0x801E2E30, type = "func", source = "Picks a random live target by formation weight." }
 Battle_IsEnemyBlocked = { addr = 0x801E30F8, type = "func", source = "returns 1 while the current enemy is paralyzed, sleeping or suppressed, else steps its animation loop" }
 Battle_IsEnemyBlockedOnce = { addr = 0x801E3160, type = "func", source = "the enemy form of func_801DEE4C: status and suppression checks, then one animation step" }
-Battle_PlayEnemyCue = { addr = 0x801E52F0, type = "func", source = "Plays the cue id through SND_PlayCue unless it is the 0xFFFF none value; the callers pass the enemy cue words EnemyBattler.unk_E8 in scripted battles, where other battles play cue 0x600 + kind * 2 instead." }
+Battle_PlayEnemyCue = { addr = 0x801E52F0, type = "func", source = "Plays the cue id through SND_PlaySE unless it is the 0xFFFF none value; the callers pass the enemy cue words EnemyBattler.unk_E8 in scripted battles, where other battles play cue 0x600 + kind * 2 instead." }
 Battle_RollEnemyDrops = { addr = 0x801E531C, type = "func", source = "Rolls and collects item drops from a defeated enemy." }
 Battle_DefeatEnemy = { addr = 0x801E54EC, type = "func", source = "Defeats an enemy and collects its rewards." }
 Battle_TriggerCritical = { addr = 0x801E5704, type = "func", source = "When the current enemy has ENEMY_EVENT_CRITICAL and a random bit is set, raises BATTLE_STATE_CRITICAL and allocates battle effect 2; called by func_801E3B04 and the boss028, boss033, boss051 and boss055 handlers." }
@@ -1235,7 +1235,7 @@ g_BattleEffectPalette = { addr = 0x8003AC00, type = "u16", size = 0x200, alias =
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 Battle_CenterCamera = { addr = 0x800AFD9C, type = "func", source = "Centres the battle camera on the living battlers." }
-SND_QueueSelectionEffect = { addr = 0x8015D71C, alias = true, source = "Marks the four effect voice slots free and queues the cue through SND_PlayCue." }
+SND_QueueSelectionEffect = { addr = 0x8015D71C, alias = true, source = "Marks the four effect voice slots free and queues the cue through SND_PlaySE." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -1991,7 +1991,7 @@ g_ScratchPadVectorHalves = { addr = 0x1F800014, type = "s16", alias = true, sour
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
-SND_QueueSelectionEffect = { addr = 0x8015D71C, alias = true, source = "Marks the four effect voice slots free and queues the cue through SND_PlayCue." }
+SND_QueueSelectionEffect = { addr = 0x8015D71C, alias = true, source = "Marks the four effect voice slots free and queues the cue through SND_PlaySE." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
@@ -4909,21 +4909,21 @@ Scene_ClearParty = { addr = 0x801F84AC, type = "func", source = "Resets the part
 
 ["emi/scenario/scena17/00"]
 Scene_EnterSaveArea = { addr = 0x801F7750, type = "func", source = "resets the palette, enables area drawing and requests the end-game save area, then advances the scene mode" }
-Scene_StartEndingXa = { addr = 0x801F80CC, type = "func", source = "starts XA stream 8, resets the stream counters and advances the scene step" }
-Scene_WaitEndingXa = { addr = 0x801F8110, type = "func", source = "waits for the ending XA stream and scene ready state, then starts the long fade out and advances the scene step" }
+Scene_StartEndingXA = { addr = 0x801F80CC, type = "func", source = "starts XA stream 8, resets the stream counters and advances the scene step" }
+Scene_WaitEndingXA = { addr = 0x801F8110, type = "func", source = "waits for the ending XA stream and scene ready state, then starts the long fade out and advances the scene step" }
 Scene_DispatchActor = { addr = 0x801F887C, type = "func", source = "dispatches a scenario actor to its callback handler" }
-Scene_DrawEndingRollLine = { addr = 0x801F91F0, type = "func", source = "ending roll lines set up by Scene_StartEndingXa and drawn as scrolling text: draws one text line from glyph codes" }
-Scene_UpdateEndingRoll = { addr = 0x801F938C, type = "func", source = "ending roll lines set up by Scene_StartEndingXa and drawn as scrolling text: draws 16 lines, scrolls one pixel, true at the end" }
+Scene_DrawEndingRollLine = { addr = 0x801F91F0, type = "func", source = "ending roll lines set up by Scene_StartEndingXA and drawn as scrolling text: draws one text line from glyph codes" }
+Scene_UpdateEndingRoll = { addr = 0x801F938C, type = "func", source = "ending roll lines set up by Scene_StartEndingXA and drawn as scrolling text: draws 16 lines, scrolls one pixel, true at the end" }
 Scene_RunSaveMenu = { addr = 0x801F9490, type = "func", source = "replaces the callback with a loop that resets menu panel tasks and dispatches the save menu step table" }
 Scene_EnterSaveMenu = { addr = 0x801F9504, type = "func", source = "The save menu's first step: clears the save flags, places the party at the Dragnier surface save point, loads the shop archive and advances the substate." }
 Scene_UpdateSaveMenu = { addr = 0x801F9654, type = "func", source = "updates menu panel tasks and dispatches the shop step" }
 Scene_ExitToTitle = { addr = 0x801F967C, type = "func", source = "clears scene script variables, exits sound and replaces the callback with the frontend start" }
 Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F96D4, type = "func", source = "Streams the EMI family for young Ryu, Teepo and Rei, empties g_Game.party_size and joins the three with Party_JoinMember." }
 g_SceneActorDispatch = { addr = 0x801F97D8, source = "scenario actor dispatch table" }
-g_EndingGlyphWidth = { addr = 0x801F97DC, source = "ending roll lines set up by Scene_StartEndingXa and drawn as scrolling text: advance width per glyph" }
-g_EndingRollText = { addr = 0x801F981C, source = "ending roll lines set up by Scene_StartEndingXa and drawn as scrolling text: line text table, -1 ends it" }
-g_EndingRollLine = { addr = 0x801F9DD0, source = "ending roll lines set up by Scene_StartEndingXa and drawn as scrolling text: first visible line" }
-g_EndingRollScroll = { addr = 0x801F9DD4, source = "ending roll lines set up by Scene_StartEndingXa and drawn as scrolling text: pixel offset within the line" }
+g_EndingGlyphWidth = { addr = 0x801F97DC, source = "ending roll lines set up by Scene_StartEndingXA and drawn as scrolling text: advance width per glyph" }
+g_EndingRollText = { addr = 0x801F981C, source = "ending roll lines set up by Scene_StartEndingXA and drawn as scrolling text: line text table, -1 ends it" }
+g_EndingRollLine = { addr = 0x801F9DD0, source = "ending roll lines set up by Scene_StartEndingXA and drawn as scrolling text: first visible line" }
+g_EndingRollScroll = { addr = 0x801F9DD4, source = "ending roll lines set up by Scene_StartEndingXA and drawn as scrolling text: pixel offset within the line" }
 
 ["emi/scenario/scena18/00"]
 Scene_DispatchActor = { addr = 0x801F6CAC, type = "func", source = "dispatches a scenario actor to its callback handler" }
@@ -7277,7 +7277,7 @@ g_MessageChoiceModes = { addr = 0x80149AB4, size = 0x18, alias = true, source = 
 g_MessageSteps = { addr = 0x80149ACC, size = 0x40, alias = true, source = "Message answer step handlers." }
 jtbl_80149B78 = { addr = 0x80149B78, type = "Callback", source = "The switch table of UI_DrawTextAt: the jump targets of its jr dispatch." }
 jtbl_80149C00 = { addr = 0x80149C00, type = "Callback", source = "The switch table of func_8015B870: the jump targets of its jr dispatch." }
-g_EmiCDSteps = { addr = 0x80149C3C, alias = true, source = "CD step handlers of the EMI loader." }
+g_EmiCdSteps = { addr = 0x80149C3C, alias = true, source = "CD step handlers of the EMI loader." }
 g_EmiRingSteps = { addr = 0x80149C60, alias = true, source = "EMI_UpdateStream copies it" }
 jtbl_80149C90 = { addr = 0x80149C90, type = "Callback", source = "The switch table of Char_ApplyMaster: the jump targets of its jr dispatch." }
 jtbl_80149CC8 = { addr = 0x80149CC8, type = "Callback", source = "The switch table of Char_PreviewEquip: the jump targets of its jr dispatch." }
@@ -7347,7 +7347,7 @@ Actor_StageAnimStep = { addr = 0x8014DB98, type = "func", source = "Stages the n
 Actor_SelectSprite = { addr = 0x8014DC08, type = "func", source = "Selects a sprite record of the actor: its sheet, animation and mirror." }
 Area_SelectSceneRecord = { addr = 0x8014DD3C, type = "func", source = "Finds a scene record by id." }
 Actor_ReadValue = { addr = 0x8014DFE8, type = "func", source = "Reads a field record value for the actor." }
-SYS_ReadCD = { addr = 0x8014E0A8, type = "func", source = "Reads sectors from the CD." }
+SYS_ReadCd = { addr = 0x8014E0A8, type = "func", source = "Reads sectors from the CD." }
 SYS_LoadExe = { addr = 0x8014E0FC, type = "func", source = "Loads the logo executable from the CD." }
 GFX_UploadPalette = { addr = 0x8014E22C, type = "func", source = "Uploads the palette to video memory when it changed." }
 GFX_ResetPalette = { addr = 0x8014E284, type = "func", source = "Resets the palette." }
@@ -7546,10 +7546,10 @@ SND_StartDecrescendo = { addr = 0x8015D4F8, type = "func", source = "Starts a de
 SND_FadeOutSequence = { addr = 0x8015D554, type = "func", source = "Fades out a sound sequence." }
 SND_StopAllSequences = { addr = 0x8015D5D8, type = "func", source = "Stops all four voices of every live selection effect." }
 SND_TestEffectVoicesBusy = { addr = 0x8015D660, type = "func", source = "Returns 1 when no effect voice is free; otherwise returns 0 and writes the entry index and seq of the first voice of the sep table whose seq slot reports end-of-sequence." }
-SND_QueueSelectionEffect = { addr = 0x8015D71C, type = "func", source = "Marks the four effect voice slots free and queues the cue through SND_PlayCue." }
+SND_QueueSelectionEffect = { addr = 0x8015D71C, type = "func", source = "Marks the four effect voice slots free and queues the cue through SND_PlaySE." }
 SND_QueueCueVolume = { addr = 0x8015D7C8, type = "func", source = "Queues a sound cue with its volume." }
 SND_QueueProximityCue = { addr = 0x8015DC08, type = "func", source = "Plays the proximity cue of the area." }
-SND_PlayCue = { addr = 0x8015DF18, type = "func", source = "Dispatches a cue's bank and record, updates the interpolated channel values and keys the requested voices." }
+SND_PlaySE = { addr = 0x8015DF18, type = "func", source = "Dispatches a cue's bank and record, updates the interpolated channel values and keys the requested voices." }
 SND_ReadCueBank0 = { addr = 0x8015E994, type = "func", source = "Reads a cue of sound bank 0 into voice slots (entry 0 of g_SndCueReaders)." }
 SND_ReadCueBank1 = { addr = 0x8015EFAC, type = "func", source = "Reads a cue of sound bank 1 into voice slots (entry 1 of g_SndCueReaders)." }
 SND_ReadCueBank2 = { addr = 0x8015F5C8, type = "func", source = "Reads a cue of sound bank 2 into voice slots (entry 2 of g_SndCueReaders)." }
@@ -7602,15 +7602,15 @@ SND_StartXAStream = { addr = 0x801636A0, type = "func", source = "Starts loading
 SND_ResolveXAStream = { addr = 0x80163744, type = "func", source = "Resolves one loader entry from its packed key and latches the base and scaled entry bounds." }
 SND_StoreXASyncResult = { addr = 0x80163858, type = "func", source = "Callback that reads the result of an XA stream command." }
 SND_UpdateXA = { addr = 0x801638B0, type = "func", source = "Runs the current XA audio state." }
-SND_XaStateIdle = { addr = 0x801639B8, type = "func", source = "XA audio state: idle." }
-SND_XaStateSeek = { addr = 0x801639D0, type = "func", source = "XA audio state: seeking." }
-SND_XaStateSeekResult = { addr = 0x80163A54, type = "func", source = "State 2, negative status retries state 1 or moves to 8, success goes to state 3." }
-SND_XaStateRead = { addr = 0x80163AF0, type = "func", source = "State 3, sets the CD filter and issues CdlReadS, accepted goes to state 4." }
-SND_XaStateReadProgress = { addr = 0x80163B74, type = "func", source = "XA audio state: reading progress." }
-SND_XaStateReadResult = { addr = 0x80163C58, type = "func", source = "XA audio state: read result." }
-SND_XaStatePause = { addr = 0x80163D20, type = "func", source = "State 6, issues CdlPause, accepted goes to state 7." }
-SND_XaStatePauseResult = { addr = 0x80163D80, type = "func", source = "State 7, negative retries state 6 or 8, success resets to state 0 and sets progress 3." }
-SND_XaStateWaitSync = { addr = 0x80163E3C, type = "func", source = "State 8, waits for CdSync, completion returns to state 6." }
+SND_XAStateIdle = { addr = 0x801639B8, type = "func", source = "XA audio state: idle." }
+SND_XAStateSeek = { addr = 0x801639D0, type = "func", source = "XA audio state: seeking." }
+SND_XAStateSeekResult = { addr = 0x80163A54, type = "func", source = "State 2, negative status retries state 1 or moves to 8, success goes to state 3." }
+SND_XAStateRead = { addr = 0x80163AF0, type = "func", source = "State 3, sets the CD filter and issues CdlReadS, accepted goes to state 4." }
+SND_XAStateReadProgress = { addr = 0x80163B74, type = "func", source = "XA audio state: reading progress." }
+SND_XAStateReadResult = { addr = 0x80163C58, type = "func", source = "XA audio state: read result." }
+SND_XAStatePause = { addr = 0x80163D20, type = "func", source = "State 6, issues CdlPause, accepted goes to state 7." }
+SND_XAStatePauseResult = { addr = 0x80163D80, type = "func", source = "State 7, negative retries state 6 or 8, success resets to state 0 and sets progress 3." }
+SND_XAStateWaitSync = { addr = 0x80163E3C, type = "func", source = "State 8, waits for CdSync, completion returns to state 6." }
 SND_HasXACDError = { addr = 0x80163E88, type = "func", source = "Tells whether the CD reported an error." }
 SND_IsXAIdle = { addr = 0x80163EA0, type = "func", source = "Tells whether the CD is idle." }
 SND_SetCDVolume = { addr = 0x80163EB0, type = "func", source = "Latches the level and halves the four CdMix output bytes when the mode flag is set." }
@@ -8231,10 +8231,10 @@ g_SndBankHeaderSize = { addr = 0x8018239C, source = "Header size of each sound b
 g_SndBankSequenceSize = { addr = 0x801823F0, source = "Sequence size of each sound bank." }
 g_EmiSlotLbas = { addr = 0x80182444, source = "EMI_GetArchiveSector returns its entry for a slot id" }
 g_EmiHeaderTag = { addr = 0x80183224, source = "Tag of the EMI header." }
-g_XaStreamSlots = { addr = 0x80183230, source = "Slot ids of the XA streams." }
-g_XaCues = { addr = 0x8018323C, source = "Cue tables of the XA stream groups." }
+g_XAStreamSlots = { addr = 0x80183230, source = "Slot ids of the XA streams." }
+g_XACues = { addr = 0x8018323C, source = "Cue tables of the XA stream groups." }
 g_EmiEntryTypes = { addr = 0x80183248, source = "Handlers of the EMI entry types." }
-g_XaStates = { addr = 0x80183274, source = "Handlers of the XA audio states." }
+g_XAStates = { addr = 0x80183274, source = "Handlers of the XA audio states." }
 _spu_RXX = { addr = 0x80183AB0, source = "LIBSPU spu.o _spu_RXX, 24 bytes equal retail, the pointer to SPU_V0_VOL_L the sound code drives" }
 _spu_tsa = { addr = 0x80183AC8, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
 _spu_transMode = { addr = 0x80183ACC, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }

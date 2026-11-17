@@ -19,7 +19,7 @@
     Game_SetScriptActive();                                                         \
     g_ScriptVars[2] = 0;                                                            \
     g_ScriptVars[3] = 0;                                                            \
-    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));                                      \
+    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 2));                                       \
     g_SceneState.step_05  = timer;                                                  \
     g_SceneState.timer_06 = 0;                                                      \
     return 1

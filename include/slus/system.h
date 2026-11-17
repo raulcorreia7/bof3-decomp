@@ -37,7 +37,7 @@ void        SYS_ThreadClose(s32 thread_index);
 /* func_8014B954 */
 extern void SYS_ThreadReplace(Callback entry);
 /* func_8014E0A8 */
-extern s32  SYS_ReadCD(s32 size, void* buffer, s32 sectors);
+extern s32  SYS_ReadCd(s32 size, void* buffer, s32 sectors);
 /* func_8014E640 */
 s32         INPUT_GetRepeatedButtons(s32 button_mask);
 /* func_8014EA80 */

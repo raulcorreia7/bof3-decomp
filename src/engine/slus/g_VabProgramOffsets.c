@@ -260,13 +260,13 @@ u32 D_80183178[43] = {
 
 char g_EmiHeaderTag[12] = "MATH_TBL";
 
-u32 g_XaStreamSlots[3] = {
+u32 g_XAStreamSlots[3] = {
     0x000002A9,
     0x000001B2,
     0x000002AA,
 };
 
-u32 g_XaCues[3] = {
+u32 g_XACues[3] = {
     (u32)&D_801839C4,
     (u32)&D_801832C4,
     (u32)&D_80183298,
@@ -278,16 +278,16 @@ u32 g_EmiEntryTypes[11] = {
     (u32)EMI_LoadSoundCues, (u32)EMI_LoadSequence, (u32)EMI_LoadSequence,
 };
 
-u32 g_XaStates[55] = {
-    (u32)SND_XaStateIdle,
-    (u32)SND_XaStateSeek,
-    (u32)SND_XaStateSeekResult,
-    (u32)SND_XaStateRead,
-    (u32)SND_XaStateReadProgress,
-    (u32)SND_XaStateReadResult,
-    (u32)SND_XaStatePause,
-    (u32)SND_XaStatePauseResult,
-    (u32)SND_XaStateWaitSync,
+u32 g_XAStates[55] = {
+    (u32)SND_XAStateIdle,
+    (u32)SND_XAStateSeek,
+    (u32)SND_XAStateSeekResult,
+    (u32)SND_XAStateRead,
+    (u32)SND_XAStateReadProgress,
+    (u32)SND_XAStateReadResult,
+    (u32)SND_XAStatePause,
+    (u32)SND_XAStatePauseResult,
+    (u32)SND_XAStateWaitSync,
     0x00478000,
     0x003F8000,
     0x003D8000,

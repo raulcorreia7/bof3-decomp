@@ -43,5 +43,5 @@ MATCH void func_801F3124(void) {
 
     g_Task->timer = 80;
     g_Task->header.mode++;
-    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
+    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 2));
 }

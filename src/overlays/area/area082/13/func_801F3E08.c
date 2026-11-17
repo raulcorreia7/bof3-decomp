@@ -42,6 +42,6 @@ MATCH void func_801F3E08(void) {
     g_Task->timer++;
     if (g_Task->timer >= 8) {
         g_Task->header.step++;
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0));
     }
 }

@@ -9,7 +9,7 @@ NON_MATCHING void func_801F3200(void) {
         return;
     }
 
-    SND_PlayCue(0x208);
+    SND_PlaySE(0x208);
     if ((D_80144EA1 & 0x7F) != 0x7F) {
         return;
     }

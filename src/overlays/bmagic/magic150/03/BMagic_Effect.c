@@ -16,7 +16,7 @@ MATCH void func_801EECA4(void) {
     func_801EF6B0();
     g_Task->unk_09 = 0x3C;
     g_Task->header.mode += 1;
-    SND_PlayCue(0x100);
+    SND_PlaySE(0x100);
 }
 
 MATCH void func_801EED60(void) {
@@ -51,7 +51,7 @@ MATCH void func_801EEE24(void) {
     if (timer == 0) {
         g_Task->unk_09 = 120;
         g_Task->header.mode += 1;
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
     }
 }
 
@@ -67,7 +67,7 @@ MATCH void func_801EEEC4(void) {
         g_Task->unk_09 = 4;
         g_Task->header.mode += 1;
         Battle_MarkDamaged(g_Battle.target_selector);
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
     }
 }
 

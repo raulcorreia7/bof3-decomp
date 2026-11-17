@@ -170,7 +170,7 @@ MATCH void func_801FA8B8(void) {
             }
             UI_SetMode(5);
             g_AreaDrawFlags = 0x1F;
-            SND_PlayCue(0x20C);
+            SND_PlaySE(0x20C);
             g_SceneState.step_05 = 7;
             break;
         case 7:
@@ -671,7 +671,7 @@ MATCH s32 func_801FDB1C(void) {
 MATCH s32 func_801FDBA8(void) {
     if (SYS_TestFlag(g_SceneFlags, 0x3D) == 0) {
         SYS_SetFlag(g_SceneFlags, 0x3D);
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x03));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x03));
         return 1;
     }
 

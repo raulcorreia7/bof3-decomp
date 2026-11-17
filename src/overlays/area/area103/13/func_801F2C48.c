@@ -5,6 +5,6 @@ MATCH void func_801F2C48(void) {
     g_Task->timer  = 128;
     g_Task->unk_0A = 0;
     g_Task->header.mode++;
-    SND_PlayCue(512);
-    SND_PlayCue(522);
+    SND_PlaySE(512);
+    SND_PlaySE(522);
 }

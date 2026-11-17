@@ -16,7 +16,7 @@ MATCH void func_801D0C48(void) {
     work->timer    = 8;
     work->screen_x = 0;
     g_Task->header.mode += 1;
-    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 11));
+    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 11));
 }
 
 MATCH void func_801D0CC0(void) {
@@ -117,7 +117,7 @@ MATCH void func_801D0FEC(void) {
     func_801D1A60();
     g_Task->timer = 32;
     g_Task->header.mode += 1;
-    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x09));
+    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x09));
 }
 
 MATCH void func_801D106C(void) {
@@ -186,7 +186,7 @@ MATCH void func_801D12A0(void) {
         g_Task->unk_03 = 0x80;
         g_Task->timer  = 8;
         g_Task->header.mode += 1;
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x0A));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x0A));
     }
 }
 
@@ -609,7 +609,7 @@ MATCH void func_801D26BC(void) {
 
     g_Task->timer = 80;
     g_Task->header.mode++;
-    SND_PlayCue(0x20C);
+    SND_PlaySE(0x20C);
 }
 
 MATCH void func_801D2934(void) {
@@ -672,7 +672,7 @@ MATCH void func_801D2BA8(void) {
     work->unk_18 = 0;
     work->unk_1C = 0;
     g_Task->header.mode++;
-    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 8));
+    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 8));
 }
 
 MATCH void func_801D2C00(void) {
@@ -721,7 +721,7 @@ MATCH void func_801D2C94(void) {
     pairs[1]   = -pairs[1];
     state      = g_Task;
     state->header.mode++;
-    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 8));
+    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 8));
 }
 
 MATCH void func_801D2D5C(void) {
@@ -887,7 +887,7 @@ MATCH void func_801D32F4(void) {
 
     g_Task->timer = 80;
     g_Task->header.mode++;
-    SND_PlayCue(0x20C);
+    SND_PlaySE(0x20C);
 }
 
 /* Step the dot trail: move and draw each live dot, then advance when the countdown ends. */

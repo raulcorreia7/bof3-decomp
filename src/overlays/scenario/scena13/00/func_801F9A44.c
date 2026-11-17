@@ -14,8 +14,8 @@ MATCH void func_801F9A44(void) {
     switch (g_SceneState.step_05) {
         case 0:
             SND_FadeOutBGM(g_SndBGMId, 0x64, 8);
-            SND_PlayCue(0x208);
-            SND_PlayCue(0x207);
+            SND_PlaySE(0x208);
+            SND_PlaySE(0x207);
             g_SceneState.step_05 = 1;
             break;
         case 1:
@@ -51,8 +51,8 @@ MATCH void func_801F9A44(void) {
             break;
         }
         case 5:
-            SND_PlayCue(0x20A);
-            SND_PlayCue(0x209);
+            SND_PlaySE(0x20A);
+            SND_PlaySE(0x209);
             SND_PlayBGM(g_SndBGMId, 0x6E, 0x20);
             g_SceneState.timer_06 = 0x30;
             g_SceneState.step_05  = 6;
@@ -69,8 +69,8 @@ MATCH void func_801F9A44(void) {
             g_SceneState.step_05  = 0;
             break;
         case 10:
-            SND_PlayCue(0x20A);
-            SND_PlayCue(0x209);
+            SND_PlaySE(0x20A);
+            SND_PlaySE(0x209);
             g_SceneState.timer_06 = 0x1E;
             g_SceneState.step_05  = 0xB;
             break;

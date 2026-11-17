@@ -27,7 +27,7 @@ MATCH void func_801EED7C(void) {
     g_Task  = battler;
     Actor_RequestScript((battler->facing + 0x38) & BYTE_MASK);
     g_Task = saved;
-    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+    SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
     g_Task->param.unk_0B = 0;
     g_Task->header.step += 1;
 }
@@ -95,7 +95,7 @@ MATCH void func_801EEFF8(void) {
     g_BattleEffects[effect_slot].header.mode  = 1;
     g_BattleEffects[effect_slot].target.party = task;
     g_Task->param.unk_0B &= 0xFE;
-    SND_PlayCue(0x101);
+    SND_PlaySE(0x101);
     g_Task->header.step++;
 }
 
@@ -190,7 +190,7 @@ MATCH void func_801EF3C8(void) {
         func_801DDAB4(g_Game.members[g_Battle.active_battler].chr.status);
         GFX_UploadPaletteRows();
         g_Task->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
-        SND_PlayCue(0x102);
+        SND_PlaySE(0x102);
         battler->header.step += 1;
     }
     g_Task = battler;

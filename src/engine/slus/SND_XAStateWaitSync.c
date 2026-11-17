@@ -2,7 +2,7 @@
 
 /* syncs the CD reader and stores the pending result word.
  */
-MATCH void SND_XaStateWaitSync(void) {
+MATCH void SND_XAStateWaitSync(void) {
     s16* base;
 
     base  = &D_8014681C;

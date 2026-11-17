@@ -37,7 +37,7 @@ NON_MATCHING void func_801F3460(void) {
     }
     g_Task->vz = 0;
     func_801F4604(x, y, 0);
-    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 3));
+    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
 }
 #else
 INCLUDE_ASM(func_801F3460);

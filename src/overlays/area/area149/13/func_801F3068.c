@@ -3,7 +3,7 @@
 MATCH void func_801F3068(void) {
     if (g_AreaCameraOffsetZ == 0) {
         *g_ScriptVars = 0x14;
-        SND_PlayCue(1);
+        SND_PlaySE(1);
         g_Task->unk_04++;
     }
     if (D_80147A8C < g_AreaScrollTargetX + TO_COORD(2)) {

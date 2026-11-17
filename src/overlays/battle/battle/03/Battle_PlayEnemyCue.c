@@ -6,6 +6,6 @@ MATCH void Battle_PlayEnemyCue(u16 cue_id) {
 
     masked_id = cue_id & HALF_MASK;
     if (masked_id != 0xFFFFu) {
-        SND_PlayCue(masked_id);
+        SND_PlaySE(masked_id);
     }
 }

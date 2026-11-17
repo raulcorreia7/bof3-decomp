@@ -3,19 +3,19 @@
 MATCH void func_801A96E4(ScriptState* state, u8* base) {
     switch (*(base + state->cursor)) {
         case 0xB0:
-            SND_PlayCue(*(base + state->cursor + 1));
+            SND_PlaySE(*(base + state->cursor + 1));
             state->cursor += 1;
             break;
         case 0xB1:
-            SND_PlayCue(*(base + state->cursor + 1) | 0x100);
+            SND_PlaySE(*(base + state->cursor + 1) | 0x100);
             state->cursor += 1;
             break;
         case 0xB2:
-            SND_PlayCue(*(base + state->cursor + 1) | 0x200);
+            SND_PlaySE(*(base + state->cursor + 1) | 0x200);
             state->cursor += 1;
             break;
         case 0xB3:
-            SND_PlayCue(*(base + state->cursor + 1) | 0x300);
+            SND_PlaySE(*(base + state->cursor + 1) | 0x300);
             state->cursor += 1;
             break;
         case 0xB4:

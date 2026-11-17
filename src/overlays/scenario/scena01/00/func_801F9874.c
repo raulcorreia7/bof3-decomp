@@ -26,7 +26,7 @@ MATCH void func_801F9874(void) {
             break;
         case 2:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                SND_PlayCue(0x103);
+                SND_PlaySE(0x103);
                 g_SceneState.step_05 = 10;
                 g_GameFlags |= 0x1E;
             }

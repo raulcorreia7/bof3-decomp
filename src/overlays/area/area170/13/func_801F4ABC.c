@@ -10,12 +10,12 @@ MATCH void func_801F4ABC(void) {
     func_801F3994();
     if (g_GameLastCellType == 2) {
         if (g_GameCellType == 1) {
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x0C));
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x0C));
         }
     }
     if (g_GameLastCellType == 3) {
         if (g_GameCellType == 2) {
-            SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x0C));
+            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x0C));
         }
     }
 }

@@ -197,7 +197,7 @@ MATCH void func_801EF5D0(void) {
     work->unk_2C.half = 0;
     g_Task->unk_2A    = 0;
     Actor_SelectScript(5);
-    SND_PlayCue((g_Task->timer & 0x1) | 0x100);
+    SND_PlaySE((g_Task->timer & 0x1) | 0x100);
     g_Task->header.step += 1;
 }
 

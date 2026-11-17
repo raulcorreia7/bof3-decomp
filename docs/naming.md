@@ -8,7 +8,7 @@ with no fact keeps its address name (`func_<ADDR>`, `D_<ADDR>`, `unk_<OFF>`).
 
 | Thing                                    | Form                        | Example                                  |
 | ---------------------------------------- | --------------------------- | ---------------------------------------- |
-| system function                          | `TAG_PascalName`            | `SND_PlayCue`, `EMI_Init`                |
+| system function                          | `TAG_PascalName`            | `SND_PlaySE`, `EMI_Init`                 |
 | game function                            | `Tag_PascalName`            | `Battle_ApplyDamage`, `Item_Add`         |
 | global                                   | `g_` + tag word + name      | `g_BattleActors`, `g_SndVolume`          |
 | file static                              | `s_` + tag word + name      | `s_BattleDamageScale`                    |
@@ -470,6 +470,7 @@ two systems have their own thing under one noun. `B` in a disc label marks the b
 | `SHOP`                   | shop program                                                                                      |
 | `START`                  | start menu                                                                                        |
 | `GAME` (slot 0 / slot 1) | engine `game`; `title` screen                                                                     |
+| `BGM###`, `COMN_SE`      | music (`BGM`), sound effect (`SE`)                                                                |
 | `SCENA##`, `SCE##EF*`    | scene controller, scene effect                                                                    |
 | `WORLD##/AREA###`        | area code                                                                                         |
 | `SLUS_004.22`            | main executable                                                                                   |
@@ -510,6 +511,12 @@ US English in prose and in names, as the US game text spells it: `color`, `behav
 `defense`. The project's own words, used in place of the game text's: `Fairy` (`Fairy`, `FAIRY_*`)
 for "Faerie". Retail text keeps its spelling (`ITEM_FAERIE_TIARA`, "Faerie Tiara"). SDK names keep
 theirs (`CdlPause`, `SpuSetKey`).
+
+Acronyms follow the SDK library their value belongs to, and are capitals otherwise. The drive is
+`Cd` (libcd: `SYS_ReadCd`, `g_EmiCdSteps`), the sound library is `Snd` in a type (`SndBank`,
+libsnd's `SndVolume`), and `XA`, `HP`, `AP`, `BGM` and `SE` are capitals (`SND_IsXAIdle`,
+`SND_XAStateIdle`). `SE` is the disc's word for a sound effect, as `BGM` is for music
+(`BIN/BATTLE/BATL_SE`, `COMN_SE`): `SND_PlaySE(u16 se_id)`.
 
 ## Renames
 

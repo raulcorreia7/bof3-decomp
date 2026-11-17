@@ -8,7 +8,7 @@ NON_MATCHING void func_801F3600(void) {
     if ((g_FrameCount & 7) == 0) {
         if (g_ScriptVars[0] >= 3) {
             if ((g_Task->param.unk_0B & 7) == 0) {
-                SND_PlayCue(0);
+                SND_PlaySE(0);
             }
             func_801F36B4();
             if (g_ScriptVars[0] >= 4) {

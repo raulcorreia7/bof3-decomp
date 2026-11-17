@@ -3,7 +3,7 @@
 
 /* One VAB bank's sound-effect cue table from an EMI type-8 entry: 4-byte
  * records naming an SPU voice, a VAB program and a tone. The dispatcher
- * `SND_PlayCue` (`0x8015DF18`) splits a cue id into bank and record index, then
+ * `SND_PlaySE` (`0x8015DF18`) splits a cue id into bank and record index, then
  * calls that bank's reader through `g_SndCueReaders[bank]`; the reader keys the
  * record's voices.
  *
@@ -30,12 +30,12 @@
 
 /* The sound banks, by what each holds. Banks 3 to 5 hold the party character
  * forms and have no cue site. */
-typedef enum SNDBank {
+typedef enum SndBank {
     SND_BANK_MUSIC  = 0,
     SND_BANK_COMMON = 1,
     SND_BANK_AREA   = 2,
     SND_BANK_ENEMY  = 6,
-} SNDBank;
+} SndBank;
 
 /* The cue id: bank in bits 8-11, record index in bits 0-7. */
 #define EMI_CUE_ID_BANK_SHIFT   8

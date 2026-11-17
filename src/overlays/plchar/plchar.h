@@ -137,12 +137,12 @@ void PlChar_SpawnLinkedActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y, s32 code)
         if ((RANDOM_MASK(7)) >= 6) {                                            \
             CALLEE(4, x, y, cell & BYTE_MASK);                                  \
         }                                                                       \
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 11));                           \
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 11));                            \
         return 1;                                                               \
     }                                                                           \
     if ((u8)(cell + 0xA) < 2) {                                                 \
         CALLEE(0, x, y, cell & BYTE_MASK);                                      \
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 11));                           \
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 11));                            \
         roll = RANDOM_MASK(0xF);                                                \
         if (roll < 7) {                                                         \
             CALLEE(3, x, y, cell & BYTE_MASK);                                  \
@@ -152,7 +152,7 @@ void PlChar_SpawnLinkedActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y, s32 code)
             }                                                                   \
             D_801490E4[0] = 0;                                                  \
             if (Item_Add(ITEM_CATEGORY_ITEM, ITEM_BERRIES, 1, 0) & BYTE_MASK) { \
-                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));                    \
+                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));                     \
                 Message_Request(MSG_002);                                       \
             } else {                                                            \
                 Message_Request(MSG_003);                                       \

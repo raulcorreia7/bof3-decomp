@@ -60,7 +60,7 @@ MATCH void func_801F73FC(void) {
     Area_ClearWorkColumn();
 
     g_Task->header.mode += 1;
-    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 2));
+    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 2));
 }
 
 MATCH void func_801F7480(void) {

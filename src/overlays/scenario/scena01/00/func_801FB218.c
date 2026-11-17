@@ -46,8 +46,8 @@ MATCH void func_801FB218(void) {
         case 11:
             if (g_ScriptVars[0] == 0x14) {
                 g_SceneState.step_05 = 0xC;
-                SND_PlayCue(0x205);
-                SND_PlayCue(0x206);
+                SND_PlaySE(0x205);
+                SND_PlaySE(0x206);
                 g_ScriptVars[2] = 5;
                 if (SYS_TestFlag(g_SceneFlags, 0x12) == 0) {
                     g_SceneState.step_05 = 0xC;

@@ -14,8 +14,8 @@ static inline void PlChar_ClaimHelperSlotStep(void) {
         g_SpawnedActors[g_Task->param.actor_slot].type         = 0x1B;
     }
     Actor_RequestScript((g_Task->direction_08 >> 1) + 0x42);
-    /* FAKE: retail reads SND_PlayCue as void(s32). */
-    ((void (*)(s32))SND_PlayCue)(g_Task->unk_2C + 0x100);
+    /* FAKE: retail reads SND_PlaySE as void(s32). */
+    ((void (*)(s32))SND_PlaySE)(g_Task->unk_2C + 0x100);
     g_Task->header.step++;
 }
 

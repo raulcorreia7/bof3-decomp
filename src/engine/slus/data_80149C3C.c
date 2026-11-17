@@ -1,6 +1,6 @@
 #include "slus.h"
 
-const u32 g_EmiCDSteps[9] = {
+const u32 g_EmiCdSteps[9] = {
     (u32)EMI_CdIdle,
     (u32)EMI_CdSetSpeed,
     (u32)EMI_CdSeek,

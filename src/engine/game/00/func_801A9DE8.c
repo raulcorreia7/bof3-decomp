@@ -155,7 +155,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
                 /* FAKE: counter store before work read. */
                 FAKE_BARRIER();
                 if ((work->script_pc != mode) && (mode == *(table + state->index_0A + 2)))
-                    SND_PlayCue((u16)(0x200u | *(table + state->index_0A + 1)));
+                    SND_PlaySE((u16)(0x200u | *(table + state->index_0A + 1)));
             }
             state->index_0A += 2;
             break;
@@ -198,7 +198,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
         }
         queue_cue:
             if (result != 0)
-                SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 3));
+                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
             return value;
         case ACTOR_SCRIPT_MOTION_WAIT:
             state->index_0A--;

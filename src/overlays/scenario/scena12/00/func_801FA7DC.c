@@ -59,7 +59,7 @@ MATCH void func_801FA7DC(void) {
             }
             *progress            = 5;
             g_SceneState.step_05 = 0xD;
-            SND_PlayCue(0x20E);
+            SND_PlaySE(0x20E);
             SND_PlayBGM(0x8F, 0x64, 8);
             return;
         }

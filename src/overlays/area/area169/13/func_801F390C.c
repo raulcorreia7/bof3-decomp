@@ -11,7 +11,7 @@ MATCH void func_801F390C(void) {
             return;
         case 1:
             if (WINDOW_EFFECT_IDLE()) {
-                SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0x02));
+                SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x02));
                 Char_RebuildPartyStats();
                 UI_SetMode(9);
                 *state = 2;

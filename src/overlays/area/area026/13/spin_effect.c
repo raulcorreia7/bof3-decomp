@@ -257,7 +257,7 @@ MATCH void func_801F2C94(void) {
     count        = (work2->timer - 1);
     work2->timer = count;
     if (count == 0) {
-        SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 13));
+        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 13));
         work3 = g_Task;
         work3->header.mode++;
     }
@@ -384,7 +384,7 @@ MATCH void func_801F31C4(void) {
 /* func_801F31EC */
 MATCH void Scene_GiveEgg(void) {
     Item_Add(ITEM_CATEGORY_VITAL, VITAL_ITEM_EGG, 1, 0);
-    SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 6));
+    SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
     SYS_SetFlag(g_SceneFlags, 51u);
 }
 

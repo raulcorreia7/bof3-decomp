@@ -169,7 +169,7 @@ def test_the_ratchet_passes_on_the_baseline_and_fails_on_a_new_or_a_stale_name(
 
 
 def test_camel_and_underscore_names_split_into_words() -> None:
-    assert check_names.split_words("SND_PlayCue") == ["snd", "play", "cue"]
+    assert check_names.split_words("SND_PlaySE") == ["snd", "play", "se"]
     assert check_names.split_words("g_PartyCount") == ["g", "party", "count"]
     assert check_names.split_words("ColorRGB8") == ["color", "rgb", "8"]
     assert check_names.split_words("UPoint2D") == ["u", "point", "2", "d"]

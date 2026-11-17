@@ -15,5 +15,5 @@ MATCH void func_801F30C0(void) {
     setVector(work, x, y, z);
     work->unk_1C = z;
     work2->header.mode++;
-    SND_PlayCue(0x207);
+    SND_PlaySE(0x207);
 }

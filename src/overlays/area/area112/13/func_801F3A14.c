@@ -35,7 +35,7 @@ MATCH u8 func_801F3A14(u8 x, u8 y) {
         }
     }
     SYS_SetFlag(g_SceneEventFlags, D_801F4908[i].flag_id);
-    SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 0));
+    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0));
     func_8019ABB0(0xF);
     return 1;
 }
