@@ -30,7 +30,7 @@ NON_MATCHING u8 func_801B0E44(void) {
         SP_REF(s32, 0xC) = g_Task->pos.y.fixed + g_FacingOffsets[g_Task->direction_08].y * divisor * g_Task->timer * 2;
     }
     if (g_GameStateIndex != GAME_REQUEST_SCENE_CAMERA) {
-        if (Area_IsStepBlocked(SP_REF(s32, 0x8), SP_REF(s32, 0xC)) != 0) {
+        if (((s32 (*)(s32, s32))Area_IsStepBlocked)(SP_REF(s32, 0x8), SP_REF(s32, 0xC)) != 0) {
             result = 0;
             if (g_Task->header.mode == 2) {
                 return 0xFF;
