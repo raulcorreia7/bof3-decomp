@@ -165,10 +165,10 @@ MATCH s32 func_801FDA64(void) {
     return 0;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING s32 func_801FDA6C(s32 x, s32 y) {
+/* func_801FDA6C */
+MATCH s32 Scenario_TryStartPositionEvent(s32 x, s32 y) {
     if (g_GameAreaId == AREA_ID_CEDAR_WOODS_HOUSE_BEFORE_NUE) {
-        if (SYS_TestFlag(g_SceneFlags, 28) == 0 && x == 0x698000 && (u32)((y >> 16) - 6) < 2U) {
+        if (SYS_TestFlag(g_SceneFlags, 28) == 0 && x == TO_COORD_HALF(105) && (u32)((y >> 16) - 6) < 2U) {
             Game_SetScriptActive();
             g_SceneState.step_05  = 0;
             g_SceneState.state_04 = 20;
@@ -177,20 +177,21 @@ NON_MATCHING s32 func_801FDA6C(s32 x, s32 y) {
     }
     if (g_GameAreaId == AREA_ID_MCNEIL_BEFORE_NUE) {
         if (SYS_TestFlag(g_SceneFlags, 27) == 0) {
-            if ((x == 0x10000 || x == 0x8000) && (u32)(y - 0x130000) <= 0x28000) {
+            if ((x == TO_COORD(1) || x == COORD_HALF) && (u32)(y - TO_COORD(19)) <= TO_COORD_HALF(2)) {
                 Game_SetScriptActive();
                 g_SceneState.step_05  = 10;
                 g_SceneState.state_04 = 11;
                 return 1;
-            } else if ((u32)(x - 0x150000) <= 0x18000) {
-                if (y == 0x10000 || y == 0x8000) {
+            } else if ((u32)(x - TO_COORD(21)) <= TO_COORD_HALF(1)) {
+                if (y == TO_COORD(1) || y == COORD_HALF) {
                     Game_SetScriptActive();
                     g_SceneState.step_05  = 10;
                     g_SceneState.state_04 = 11;
                     return 1;
                 }
-            } else if ((u32)(y - 0x180000) <= 0x18000) {
-                if (x == 0x270000 || x == 0x278000) {
+            }
+            if ((u32)(y - TO_COORD(24)) <= TO_COORD_HALF(1)) {
+                if (x == TO_COORD(39) || x == TO_COORD_HALF(39)) {
                     Game_SetScriptActive();
                     g_SceneState.step_05  = 10;
                     g_SceneState.state_04 = 11;
@@ -201,28 +202,28 @@ NON_MATCHING s32 func_801FDA6C(s32 x, s32 y) {
     }
     if (g_GameAreaId == AREA_ID_CEDAR_WOODS_BUNYAN_BEFORE_NUE) {
         if (SYS_TestFlag(g_SceneFlags, 6) == 0) {
-            if (x == 0x548000 && (u32)((y >> 16) - 28) < 2U) {
+            if (x == TO_COORD_HALF(84) && (u32)((y >> 16) - 28) < 2U) {
                 Game_SetScriptActive();
                 SND_PlaySE(0x202);
                 g_SceneState.state_04 = 21;
                 return 1;
             }
-        } else if (SYS_TestFlag(g_SceneFlags, 5) == 0 && (u32)(x - 0x558000) <= 0x10000 && (u32)(y - 0x1C0000) <= 0x18000) {
+        } else if (SYS_TestFlag(g_SceneFlags, 5) == 0 && (u32)(x - TO_COORD_HALF(85)) <= TO_COORD(1) && (u32)(y - TO_COORD(28)) <= TO_COORD_HALF(1)) {
             Game_SetScriptActive();
             g_GameFlags = (g_GameFlags ^ 6) & 0xFF7F;
-            func_8019FA28(8, 0x340000, 0x178000, 0x83);
+            func_8019FA28(8, TO_COORD(52), TO_COORD_HALF(23), 0x83);
             return 1;
         }
     }
     if (g_GameAreaId == AREA_ID_YRAAL_ROAD_BEFORE_NUE) {
-        if (SYS_TestFlag(g_SceneFlags, 27) != 0 && SYS_TestFlag(g_SceneFlags, 2) == 0 && (u32)(x - 0x1A0000) <= 0x28000 && (u32)(y - 0x1A0000) <= 0x38000) {
+        if (SYS_TestFlag(g_SceneFlags, 27) != 0 && SYS_TestFlag(g_SceneFlags, 2) == 0 && (u32)(x - TO_COORD(26)) <= TO_COORD_HALF(2) && (u32)(y - TO_COORD(26)) <= TO_COORD_HALF(3)) {
             Game_SetScriptActive();
             g_ScriptVars[0]       = 30;
             g_SceneState.step_05  = 0;
             g_SceneState.state_04 = 3;
             return 1;
         }
-        if (SYS_TestFlag(g_SceneFlags, 2) != 0 && SYS_TestFlag(g_SceneFlags, 3) == 0 && x == 0x160000 && (u32)(y - 0xC0000) <= 0x18000) {
+        if (SYS_TestFlag(g_SceneFlags, 2) != 0 && SYS_TestFlag(g_SceneFlags, 3) == 0 && x == TO_COORD(22) && (u32)(y - TO_COORD(12)) <= TO_COORD_HALF(1)) {
             Game_SetScriptActive();
             g_SceneState.step_05  = 10;
             g_ScriptVars[0]       = 0;
@@ -231,33 +232,33 @@ NON_MATCHING s32 func_801FDA6C(s32 x, s32 y) {
         }
     }
     if (g_GameAreaId == AREA_ID_MOUNT_GLAUS) {
-        if (SYS_TestFlag(g_SceneFlags, 10) == 0 && (u32)(y - 0xC8000) <= 0x10000 && (u32)(x - 0x480000) <= 0x18000) {
+        if (SYS_TestFlag(g_SceneFlags, 10) == 0 && (u32)(y - TO_COORD_HALF(12)) <= TO_COORD(1) && (u32)(x - TO_COORD(72)) <= TO_COORD_HALF(1)) {
             Game_SetScriptActive();
             g_ScriptVars[0] = 0;
             g_ScriptVars[2] = 7;
-            func_8019FA28(23, 0x180000, 0x180000, 0x82);
+            func_8019FA28(23, TO_COORD(24), TO_COORD(24), 0x82);
             return 1;
         }
     }
     if (g_GameAreaId == AREA_ID_NUE_CAVE) {
         if (SYS_TestFlag(g_SceneFlags, 12) != 0) {
             if (SYS_TestFlag(g_SceneFlags, 13) == 0) {
-                if ((u32)(y - 0x1F8000) <= 0x8000 && (u32)(x - 0x510000) <= 0x10000) {
+                if ((u32)(y - TO_COORD_HALF(31)) <= COORD_HALF && (u32)(x - TO_COORD(81)) <= TO_COORD(1)) {
                     g_ScriptVars[0]      = 0;
                     g_SceneState.step_05 = 8;
-                    func_8019FA28(22, 0x58000, 0x140000, 0x80);
+                    func_8019FA28(22, TO_COORD_HALF(5), TO_COORD(20), 0x80);
                     return 1;
                 }
             } else if (SYS_TestFlag(g_SceneFlags, 15) == 0) {
-                if ((x == 0x28000 || x == 0x300000) && (u32)(y - 0x70000) <= 0x18000) {
+                if ((x == TO_COORD_HALF(2) || x == TO_COORD(48)) && (u32)(y - TO_COORD(7)) <= TO_COORD_HALF(1)) {
                     Game_SetScriptActive();
                     g_ScriptVars[0]      = 0;
                     g_SceneState.step_05 = 11;
-                    func_8019FA28(22, 0x450000, 0xB8000, 0x81);
+                    func_8019FA28(22, TO_COORD(69), TO_COORD_HALF(11), 0x81);
                     return 1;
                 }
             } else {
-                if (SYS_TestFlag(g_SceneFlags, 18) == 0 && SYS_TestFlag(g_SceneFlags, 16) == 0 && x == 0x3D0000 && (u32)(y - 0xA0000) <= 0x18000) {
+                if (SYS_TestFlag(g_SceneFlags, 18) == 0 && SYS_TestFlag(g_SceneFlags, 16) == 0 && x == TO_COORD(61) && (u32)(y - TO_COORD(10)) <= TO_COORD_HALF(1)) {
                     Game_SetScriptActive();
                     g_SceneState.step_05 = 18;
                     return 1;
@@ -266,15 +267,12 @@ NON_MATCHING s32 func_801FDA6C(s32 x, s32 y) {
         }
     }
     if (g_GameAreaId == AREA_ID_BEFORE_MOUNT_GLAUS_BEFORE_NUE) {
-        if ((x == 0x10000 || x == 0x18000) && (u32)(y - 0x110000) <= 0x18000) {
+        if ((x == TO_COORD(1) || x == TO_COORD_HALF(1)) && (u32)(y - TO_COORD(17)) <= TO_COORD_HALF(1)) {
             SYS_SetFlag(g_SceneFlags, 24);
         }
     }
     return 0;
 }
-#else
-INCLUDE_ASM(func_801FDA6C);
-#endif
 
 MATCH s8 func_801FE03C(s32 x, s32 y) {
     SCENE_PROBE_POSITION(D_801FE350, 2, D_801FE35C);
