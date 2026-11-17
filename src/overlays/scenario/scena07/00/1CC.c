@@ -1154,5 +1154,3 @@ MATCH void func_801FAA70(void) {
             break;
     }
 }
-
-INCLUDE_ASM(func_801FABD8);
