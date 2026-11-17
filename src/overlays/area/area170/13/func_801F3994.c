@@ -3,6 +3,7 @@
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F3994(void) {
     u8*         bundle;
+    u8*         cell_base;
     u32*        cell;
     volatile u8 hidden;
     s32         row;
@@ -10,7 +11,7 @@ NON_MATCHING void func_801F3994(void) {
     s32         k;
     u8          sum;
     s32         index;
-    s32         wrapped;
+    u8          wrapped;
     s32         cell_index;
     s32         cell_id;
     s32         width;
@@ -24,11 +25,12 @@ NON_MATCHING void func_801F3994(void) {
             sum = 0;
             if (hidden != 0) {
                 for (k = 0; (u8)k < 3; k++) {
-                    index = D_801F5990[(u8)k] + col;
-                    if ((u8)index >= 9) {
-                        index = index - 9;
+                    index   = D_801F5990[(u8)k] + col;
+                    wrapped = (u8)index;
+                    if (wrapped >= 9) {
+                        wrapped = (u8)(index - 9);
                     }
-                    sum += D_801F58D0[(u8)k * 63 + (u8)row * 9 + (u8)index];
+                    sum += D_801F58D0[(u8)k * 63 + (u8)row * 9 + (u8)wrapped];
                 }
                 if ((u8)sum != 0) {
                     sum = 1;
@@ -36,8 +38,9 @@ NON_MATCHING void func_801F3994(void) {
             }
             func_801A4BC0((u8)col + 0x16, (u8)row + 0x8E, D_801F584C[(u8)row * 9 + (u8)col] * (u8)sum);
             width      = *bundle;
+            cell_base  = bundle + ((width * D_80104001 + 1) / 2) * 4 + D_80104002 * 4;
             cell_index = LOHU(D_8010402C[D_80104002 * 4 + ((u8)row + 0x8E) * width * 2 + (u8)col * 2]);
-            cell       = (u32*)(bundle + ((width * D_80104001 + 1) / 2) * 4 + D_80104002 * 4 + cell_index * 4);
+            cell       = (u32*)(cell_base + cell_index * 4);
             *cell      = *cell & ~0xFF;
             *cell |= D_801F57CC[sum * 63 + (u8)row * 9 + (u8)col];
             cell_id = Area_GetCellId((u8)col + 0x16, (u8)row + 0x8E);

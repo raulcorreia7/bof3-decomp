@@ -13,7 +13,6 @@ NON_MATCHING s32 func_800AA368(void) {
     u8            pick;
     u8            mask;
     u8            active;
-    u8            allowed;
     BattleAction* action;
 
     action = g_Battle.action;
@@ -23,39 +22,55 @@ NON_MATCHING s32 func_800AA368(void) {
         count = 0;
         for (slot = 0; slot < BATTLE_PARTY_CHARACTERS_COUNT; slot++) {
             if (mask != 0) {
-                allowed = (u8)func_800AA5F4(slot);
+                if ((u8)func_800AA5F4(slot) != 0) {
+                    goto accept_multi_candidate;
+                }
+                goto next_multi_candidate;
             } else {
-                allowed = (u8)func_800AA7A0(slot);
+                if ((u8)func_800AA7A0(slot) == 0) {
+                    goto next_multi_candidate;
+                }
             }
-            if (allowed != 0) {
-                candidates[count] = slot;
-                count++;
-            }
+        accept_multi_candidate:
+            candidates[count] = slot;
+            count++;
+        next_multi_candidate:;
         }
     } else {
         if (active < BATTLE_PARTY_CHARACTERS_COUNT) {
             if (mask != 0) {
-                allowed = (u8)func_800AA5F4(active);
-            } else {
-                allowed = (u8)func_800AA7A0(active);
+                if ((u8)func_800AA5F4(active) != 0) {
+                    goto direct_selected;
+                }
+                count = 0;
+                goto collect_fallback;
             }
-            if (allowed != 0) {
-                g_Game.members[g_Battle.target_selector].u.turn.damage_flags.volatile_value |= BATTLE_SLOT_SELECTED;
-                D_80145E91[g_Battle.target_selector * BATTLE_PARTY_STRIDE] = BATTLE_SLOT_COMMAND;
-                return 1;
+            if ((u8)func_800AA7A0(active) == 0) {
+                count = 0;
+                goto collect_fallback;
             }
+        direct_selected:
+            g_Game.members[g_Battle.target_selector].u.turn.damage_flags.volatile_value |= BATTLE_SLOT_SELECTED;
+            D_80145E91[g_Battle.target_selector * BATTLE_PARTY_STRIDE] = BATTLE_SLOT_COMMAND;
+            return 1;
         }
         count = 0;
+    collect_fallback:
         for (slot = 0; slot < BATTLE_PARTY_CHARACTERS_COUNT; slot++) {
             if (mask != 0) {
-                allowed = (u8)func_800AA5F4(slot);
+                if ((u8)func_800AA5F4(slot) != 0) {
+                    goto accept_fallback_candidate;
+                }
+                goto next_fallback_candidate;
             } else {
-                allowed = (u8)func_800AA7A0(slot);
+                if ((u8)func_800AA7A0(slot) == 0) {
+                    goto next_fallback_candidate;
+                }
             }
-            if (allowed != 0) {
-                candidates[count] = slot;
-                count++;
-            }
+        accept_fallback_candidate:
+            candidates[count] = slot;
+            count++;
+        next_fallback_candidate:;
         }
     }
     if (count != 0) {
