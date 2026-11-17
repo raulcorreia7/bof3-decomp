@@ -4,7 +4,8 @@
  * the flag-keyed centre tables, clears both remaining distances, steps the panel state and derives each per-frame
  * step as a fifth of its centre.
  */
-MATCH void func_80159050(void) {
+/* func_80159050 */
+MATCH void Menu_OpenMessagePanel(void) {
     volatile u8* flags;
     /* FAKE: the merged panel pointer must survive the if/else in v1; the allocator
      * otherwise moves the branch stores off v1 (measured: a0, three sites). */

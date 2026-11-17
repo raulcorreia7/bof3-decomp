@@ -3,9 +3,10 @@
 /* dispatches through a stack copy of the five-entry table using the
  * menu panel task's state byte at +3.
  */
-MATCH void func_80159A20(void) {
+/* func_80158FE0 */
+MATCH void Menu_UpdateMessageWindow(void) {
     struct MenuPanelSteps table;
 
-    table = D_80149B64;
+    table = g_MessageWindowSteps;
     table.steps[g_MenuCurrentPanel->state]();
 }

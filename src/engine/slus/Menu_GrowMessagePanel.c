@@ -4,7 +4,8 @@
  * taking the axis target from the mode-keyed D_8017F9xx tables on expiry and
  * committing the panel position to the window driver.
  */
-MATCH void func_8015920C(void) {
+/* func_8015920C */
+MATCH void Menu_GrowMessagePanel(void) {
     MenuPanelTask* panel;
     u16            next_x;
     u16            next_y;

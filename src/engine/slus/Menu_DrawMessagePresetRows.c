@@ -11,7 +11,8 @@ typedef struct {
  * position, stepping each by the row's scale and threading the cursor through
  * UI_DrawTextAt.
  */
-MATCH void func_8015A098(void) {
+/* func_8015A098 */
+MATCH void Menu_DrawMessagePresetRows(void) {
     MenuPanelTask* panel;
     u8*            state;
     PanelRowIndex* rowp;

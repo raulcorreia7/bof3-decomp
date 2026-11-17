@@ -7312,6 +7312,10 @@ jtbl_80149A00 = { addr = 0x80149A00, type = "Callback", source = "The switch tab
 g_MessageStateSteps = { addr = 0x80149A5C, size = 0x20, alias = true, source = "Message state handlers." }
 g_MessageChoiceModes = { addr = 0x80149AB4, size = 0x18, alias = true, source = "Message choice handlers." }
 g_MessageSteps = { addr = 0x80149ACC, size = 0x40, alias = true, source = "Message answer step handlers." }
+g_MessagePanelModes = { addr = 0x80149B30, source = "Handlers of the three message panel modes: window, answer list, preset answer list." }
+g_MessageWindowSteps = { addr = 0x80149B3C, source = "Steps of the plain message panel: open, grow, draw, shrink, close." }
+g_MessageChoiceSteps = { addr = 0x80149B50, source = "Steps of the answer list panel: open, grow, draw, shrink, release." }
+g_MessagePresetSteps = { addr = 0x80149B64, source = "Steps of the preset answer list panel: open, grow, draw, shrink, release." }
 jtbl_80149B78 = { addr = 0x80149B78, type = "Callback", source = "The switch table of UI_DrawTextAt: the jump targets of its jr dispatch." }
 jtbl_80149C00 = { addr = 0x80149C00, type = "Callback", source = "The switch table of func_8015B870: the jump targets of its jr dispatch." }
 g_EmiCdSteps = { addr = 0x80149C3C, alias = true, source = "CD step handlers of the EMI loader." }
@@ -7434,6 +7438,7 @@ UI_ResetMessage = { addr = 0x80150304, type = "func", source = "Resets the front
 UI_UpdateLayout = { addr = 0x801503E0, type = "func", source = "Rebuilds the layout of the message window." }
 UI_DrawMessageScript = { addr = 0x80150470, type = "func", source = "Draws a message script." }
 Message_DispatchState = { addr = 0x801507BC, type = "func", source = "Runs the handler of the message window state." }
+Message_RunScript = { addr = 0x8015083C, type = "func", source = "Runs the message script at the cursor until an opcode ends the step, and sets the next message state." }
 UI_TickChoiceTimer = { addr = 0x80150E14, type = "func", source = "Counts the message state timer down and clears the state at zero." }
 UI_UpdateChoiceInput = { addr = 0x80151210, type = "func", source = "Handles the choice input and moves the choice cursor." }
 Message_DispatchAnswerStep = { addr = 0x8015136C, type = "func", source = "Runs the current answer step of the message." }
@@ -7512,12 +7517,29 @@ Menu_UpdatePanelTasks = { addr = 0x80158C80, type = "func", source = "Runs the m
 Menu_OpenPanelTask = { addr = 0x80158DB8, type = "func", source = "Arms a menu panel task." }
 Menu_ClearPanel = { addr = 0x80158E20, type = "func", source = "existing proposal: clears the menu panel" }
 Menu_ResetPanelTasks = { addr = 0x80158E50, type = "func", source = "SYS_StartFrontend clears the 22 g_MenuPanelTasks slots and g_MenuPanelMode" }
+Menu_UpdateMessagePanel = { addr = 0x80158F80, type = "func", source = "Panel handler 0 of g_MenuPanels, the message window panel: runs the handler of its mode from its table." }
+Menu_UpdateMessageWindow = { addr = 0x80158FE0, type = "func", source = "Mode 0 of the message panel, the plain window: runs the step of its state from its table." }
+Menu_OpenMessagePanel = { addr = 0x80159050, type = "func", source = "State 0 of the plain message panel: arms the size, the slide targets and the grow steps from the origin tables." }
+Menu_GrowMessagePanel = { addr = 0x8015920C, type = "func", source = "State 1 of every message panel mode: grows the box toward its size and draws it." }
+Menu_DrawMessagePanel = { addr = 0x80159510, type = "func", source = "State 2 of the plain message panel: draws the box and updates the layout." }
+Menu_ShrinkMessagePanel = { addr = 0x80159580, type = "func", source = "State 3 of every message panel mode: shrinks the box toward its centre and draws it." }
 Menu_ClosePanel = { addr = 0x801598B8, type = "func", source = "Clears the menu panel mode and resets the panel task when the layout update finishes." }
+Menu_UpdateMessageChoice = { addr = 0x801598F4, type = "func", source = "Mode 1 of the message panel, the answer list laid out from the message text: runs the step of its state from its table." }
+Menu_OpenMessageChoice = { addr = 0x80159964, type = "func", source = "State 0 of the answer list panel: lays out the rows from the message text and steps the panel." }
+Menu_DrawMessageChoice = { addr = 0x8015999C, type = "func", source = "State 2 of the answer list panel: draws the box, the text rows and the cursor." }
+Menu_ReleaseMessagePanel = { addr = 0x80159A00, type = "func", source = "State 4 of the answer list panels: clears the panel task." }
+Menu_UpdateMessagePreset = { addr = 0x80159A20, type = "func", source = "Mode 2 of the message panel, the answer list at a preset position: runs the step of its state from its table." }
+Menu_OpenMessagePreset = { addr = 0x80159A90, type = "func", source = "State 0 of the preset answer list panel: sets the position from the preset table and the grow steps." }
+Menu_DrawMessagePreset = { addr = 0x80159B38, type = "func", source = "State 2 of the preset answer list panel: draws the box, the rows and the cursor." }
 UI_DrawPanelBox = { addr = 0x80159B9C, type = "func", source = "Draws a window panel box at x, y of w by h tiles: a dark translucent tile, the window texture in the current style over it, a grey outline and a darker line outside each edge." }
 UI_DrawBoxOutline = { addr = 0x80159FA0, type = "func", source = "Draws the grey outline of the box at x, y of width by height: a closed line strip one pixel outside it, then its left edge again as a line." }
+Menu_DrawMessagePresetRows = { addr = 0x8015A098, type = "func", source = "Draws the text rows of the preset answer list panel at the preset row positions." }
 UI_DrawTextRows = { addr = 0x8015A170, type = "func", source = "Draws each row of the message window up to g_MessageWindow.last_row through UI_DrawTextAt, carrying the text cursor from row to row." }
+Menu_DrawMessagePresetCursor = { addr = 0x8015A1D8, type = "func", source = "Draws the cursor beside the selected row of the preset answer list panel." }
+Menu_DrawMessageChoiceCursor = { addr = 0x8015A264, type = "func", source = "Draws the cursor beside the selected row of the answer list panel." }
 UI_DrawLine = { addr = 0x8015A2B0, type = "func", source = "Draws a line." }
 UI_DrawTextAt = { addr = 0x8015A344, type = "func", source = "Draws message text at a position." }
+Menu_LayoutMessageChoice = { addr = 0x8015A554, type = "func", source = "Counts the rows of the message text and sizes the answer list panel from them." }
 Area_UpdateParty = { addr = 0x8015A758, type = "func", source = "Runs the party in the area." }
 Actor_ProjectForDraw = { addr = 0x8015A944, type = "func", source = "Sets the actor draw layer, projects its position, and registers it when on screen." }
 SYS_InitScratchpad = { addr = 0x8015AC8C, type = "func", source = "comment: initializes the scratch work record for a new panel: marks it active, sets the mode (+0x24) and state (+0x48) bytes, seeds the +0x40/+0x44 scroll pair " }

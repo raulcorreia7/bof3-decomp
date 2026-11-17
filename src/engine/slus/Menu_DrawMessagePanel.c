@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
-MATCH void func_80159510(void) {
+/* func_80159510 */
+MATCH void Menu_DrawMessagePanel(void) {
     MenuPanelTask* task;
     task = g_MenuCurrentPanel;
     if (!(task->flags & 0x1)) {

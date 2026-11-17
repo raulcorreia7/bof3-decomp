@@ -2,7 +2,7 @@
 
 /*
  * callback table read by func_80155B40, handler table g_BundleOpcodes and
- * the small value tables read by Area_DrawCellSides and func_80159580.
+ * the small value tables read by Area_DrawCellSides and Menu_ShrinkMessagePanel.
  */
 
 const CellFunc D_8017F668[77] = {
