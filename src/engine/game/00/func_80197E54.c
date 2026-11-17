@@ -14,7 +14,7 @@ MATCH void func_80197E54(void) {
         g_Battle.phase.step          = 0;
         g_Battle.phase.sub_step      = 0;
         g_Battle.ui_step             = 0;
-        g_Battle.ui_state            = 0;
+        g_Battle.ui_mode             = 0;
         g_Battle.party_count         = Party_CountOrder(PARTY_ORDER_BATTLE);
         state                        = &g_GameEntrySubstate;
         (*state)++;

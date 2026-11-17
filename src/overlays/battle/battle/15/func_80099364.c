@@ -31,12 +31,12 @@ NON_MATCHING void func_80099364(void) {
         *panel = D_8014862E;
         if (D_8014862E == 0u) {
             func_8009B160();
-            g_Battle.ui_state += 3u;
+            g_Battle.ui_mode += 3u;
         } else {
             func_8009B03C();
             D_8014859D = g_BattleItemRow;
             D_801485A0 = D_801485C4;
-            g_Battle.ui_state += 1u;
+            g_Battle.ui_mode += 1u;
         }
     } else if ((held & PADLdown) != 0u) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));

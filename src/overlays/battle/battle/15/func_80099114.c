@@ -7,6 +7,6 @@ MATCH void func_80099114(void) {
     g_Battle.phase.sub_step  = 2u;
     g_Battle.selection_latch = 0u;
 
-    g_Battle.ui_step  = 0u;
-    g_Battle.ui_state = 1u;
+    g_Battle.ui_step = 0u;
+    g_Battle.ui_mode = 1u;
 }

@@ -328,8 +328,8 @@ MATCH void func_801EFFC8(void) {
     s32      i;
 
     g_ScratchPad.cells.halves[0] = g_Task->timer;
-    g_ScratchPadVectors[0].vx    = g_Task->unk_2E.half + FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
-    g_ScratchPadVectors[0].vy    = g_Task->unk_30.half + FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]);
+    g_ScratchPadVectors[0].vx    = g_Task->unk_2E.value + FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
+    g_ScratchPadVectors[0].vy    = g_Task->unk_30.value + FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]);
     g_ScratchPad.cells.halves[3] = (s8)g_Task->unk_5D * 16;
     g_ScratchPad.cells.halves[4] = (s8)g_Task->unk_5E * 16;
     g_ScratchPad.cells.halves[5] = (s8)g_Task->unk_5F * 16;
@@ -337,10 +337,10 @@ MATCH void func_801EFFC8(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        setXY2(prim, g_Task->unk_2E.half, g_Task->unk_30.half, g_ScratchPadVectors[0].vx, g_ScratchPadVectors[0].vy);
-        g_ScratchPadVectors[0].vx = g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), g_ScratchPad.cells.halves[0]);
+        setXY2(prim, g_Task->unk_2E.value, g_Task->unk_30.value, g_ScratchPadVectors[0].vx, g_ScratchPadVectors[0].vy);
+        g_ScratchPadVectors[0].vx = g_Task->unk_2E.value + FIXED_MUL(rsin(i << 9), g_ScratchPad.cells.halves[0]);
         prim->x2                  = g_ScratchPadVectors[0].vx;
-        g_ScratchPadVectors[0].vy = g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), g_ScratchPad.cells.halves[0]);
+        g_ScratchPadVectors[0].vy = g_Task->unk_30.value + FIXED_MUL(rcos(i << 9), g_ScratchPad.cells.halves[0]);
         prim->y2                  = g_ScratchPadVectors[0].vy;
         setRGB0(prim, 0xF0, 0xF0, 0xF0);
         setRGB1(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[5]);
@@ -355,10 +355,10 @@ MATCH void func_801F020C(void) {
 
     g_ScratchPad.cells.halves[0] = g_Task->timer;
     g_ScratchPad.cells.halves[1] = g_Task->timer * 2;
-    g_ScratchPadVectors[0].vx    = g_Task->unk_2E.half + FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[1]);
-    g_ScratchPadVectors[0].vy    = g_Task->unk_30.half + FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[1]);
-    g_ScratchPadVectors[1].vx    = g_Task->unk_2E.half + FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
-    g_ScratchPadVectors[1].vy    = g_Task->unk_30.half + FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]);
+    g_ScratchPadVectors[0].vx    = g_Task->unk_2E.value + FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[1]);
+    g_ScratchPadVectors[0].vy    = g_Task->unk_30.value + FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[1]);
+    g_ScratchPadVectors[1].vx    = g_Task->unk_2E.value + FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
+    g_ScratchPadVectors[1].vy    = g_Task->unk_30.value + FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]);
     for (i = 1; i < 9; i++) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
@@ -366,13 +366,13 @@ MATCH void func_801F020C(void) {
         setXY0(prim, g_ScratchPadVectors[0].vx, g_ScratchPadVectors[0].vy);
         prim->x2                  = g_ScratchPadVectors[1].vx;
         prim->y2                  = g_ScratchPadVectors[1].vy;
-        g_ScratchPadVectors[0].vx = g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), g_ScratchPad.cells.halves[1]);
+        g_ScratchPadVectors[0].vx = g_Task->unk_2E.value + FIXED_MUL(rsin(i << 9), g_ScratchPad.cells.halves[1]);
         prim->x1                  = g_ScratchPadVectors[0].vx;
-        g_ScratchPadVectors[0].vy = g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), g_ScratchPad.cells.halves[1]);
+        g_ScratchPadVectors[0].vy = g_Task->unk_30.value + FIXED_MUL(rcos(i << 9), g_ScratchPad.cells.halves[1]);
         prim->y1                  = g_ScratchPadVectors[0].vy;
-        g_ScratchPadVectors[1].vx = g_Task->unk_2E.half + FIXED_MUL(rsin(i << 9), g_ScratchPad.cells.halves[0]);
+        g_ScratchPadVectors[1].vx = g_Task->unk_2E.value + FIXED_MUL(rsin(i << 9), g_ScratchPad.cells.halves[0]);
         prim->x3                  = g_ScratchPadVectors[1].vx;
-        g_ScratchPadVectors[1].vy = g_Task->unk_30.half + FIXED_MUL(rcos(i << 9), g_ScratchPad.cells.halves[0]);
+        g_ScratchPadVectors[1].vy = g_Task->unk_30.value + FIXED_MUL(rcos(i << 9), g_ScratchPad.cells.halves[0]);
         prim->y3                  = g_ScratchPadVectors[1].vy;
         setRGB0(prim, 1, 1, 1);
         setRGB1(prim, 1, 1, 1);

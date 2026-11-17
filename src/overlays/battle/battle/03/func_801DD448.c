@@ -13,7 +13,7 @@ MATCH u8 func_801DD448(void) {
     u16           gate_flags;
     u8            threshold;
 
-    gate       = &g_Battle.state;
+    gate       = &g_Battle.flags;
     gate_flags = *gate;
     if ((gate_flags & BATTLE_STATE_REPRISAL_PENDING) != 0u) {
         *gate = gate_flags & ~BATTLE_STATE_REPRISAL_PENDING;

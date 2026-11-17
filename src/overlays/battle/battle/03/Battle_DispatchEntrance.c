@@ -5,8 +5,8 @@
  */
 /* func_801D17C4 */
 MATCH void Battle_DispatchEntrance(void) {
-    BattleEntrances handlers;
+    BattleEntranceSteps handlers;
 
     handlers = g_BattleEntrances;
-    handlers.handlers[g_Battle.phase.sub_step]();
+    handlers.steps[g_Battle.phase.sub_step]();
 }

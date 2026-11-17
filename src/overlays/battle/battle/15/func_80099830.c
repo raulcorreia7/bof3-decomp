@@ -83,7 +83,7 @@ NON_MATCHING void func_80099830(void) {
             g_BattleListCursor = 0xFF;
             D_801485C3         = 0xFF;
             D_801485C5         = 1;
-            g_Battle.ui_state -= 1;
+            g_Battle.ui_mode -= 1;
             return;
         }
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));

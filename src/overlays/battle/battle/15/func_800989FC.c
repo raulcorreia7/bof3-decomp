@@ -23,6 +23,6 @@ MATCH void func_800989FC(void) {
     } else {
         g_BattleActorTurn->command.target = g_BattleMessageSlot[5];
     }
-    g_Battle.ui_step  = 4u;
-    g_Battle.ui_state = 3u;
+    g_Battle.ui_step = 4u;
+    g_Battle.ui_mode = 3u;
 }

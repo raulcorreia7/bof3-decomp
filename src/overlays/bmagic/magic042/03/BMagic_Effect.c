@@ -126,8 +126,8 @@ MATCH void func_801EF380(u8 start, u16 radius) {
     s32      tpage;
     u8       i;
 
-    g_ScratchPad.cells.halves[0] = g_Task->unk_2E.half;
-    g_ScratchPad.cells.halves[1] = g_Task->unk_30.half;
+    g_ScratchPad.cells.halves[0] = g_Task->unk_2E.value;
+    g_ScratchPad.cells.halves[1] = g_Task->unk_30.value;
     tpage                        = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     for (i = start; i < start + 32; i += 16) {
@@ -169,8 +169,8 @@ MATCH void func_801EF71C(u8 start, u16 radius) {
     s32      tpage;
     s16      i;
 
-    g_ScratchPad.cells.halves[0] = g_Task->unk_2E.half;
-    g_ScratchPad.cells.halves[1] = g_Task->unk_30.half;
+    g_ScratchPad.cells.halves[0] = g_Task->unk_2E.value;
+    g_ScratchPad.cells.halves[1] = g_Task->unk_30.value;
     tpage                        = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     for (i = start; i < start + 128; i += 32) {

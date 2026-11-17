@@ -20,12 +20,12 @@ MATCH void func_801EEC7C(void) {
     g_Task->header.mode += 1;
     index = Battle_AllocEffect(1, 87) & BYTE_MASK;
     Effect_CopyActiveBattlerToSlot(index);
-    work                                 = g_Task;
-    g_BattleEffects[index].header.mode   = 0;
-    g_BattleEffects[index].header.step   = 0;
-    g_BattleEffects[index].unk_06        = 1;
-    g_BattleEffects[index].handler_index = 87;
-    g_BattleEffects[index].target.party  = work;
+    work                                = g_Task;
+    g_BattleEffects[index].header.mode  = 0;
+    g_BattleEffects[index].header.step  = 0;
+    g_BattleEffects[index].unk_06       = 1;
+    g_BattleEffects[index].step_index   = 87;
+    g_BattleEffects[index].target.party = work;
     g_Task->param.unk_0B++;
     index                               = Battle_AllocEffect(1, 87) & BYTE_MASK;
     work                                = g_Task;

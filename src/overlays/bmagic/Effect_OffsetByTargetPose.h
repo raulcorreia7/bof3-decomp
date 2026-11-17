@@ -11,21 +11,21 @@
             work = g_Task;                                                                 \
             kind = FORM_KINDS[g_Battle.dragon_form];                                       \
             if (work->facing == 0 || work->facing == 3) {                                  \
-                work->unk_2E.half += FORM_OFFSETS[kind][work->facing >> 1].vx;             \
-                work->unk_30.half += FORM_OFFSETS[kind][work->facing >> 1].vy;             \
+                work->unk_2E.value += FORM_OFFSETS[kind][work->facing >> 1].vx;            \
+                work->unk_30.value += FORM_OFFSETS[kind][work->facing >> 1].vy;            \
             } else {                                                                       \
-                work->unk_2E.half -= FORM_OFFSETS[kind][work->facing >> 1].vx;             \
-                work->unk_30.half += FORM_OFFSETS[kind][work->facing >> 1].vy;             \
+                work->unk_2E.value -= FORM_OFFSETS[kind][work->facing >> 1].vx;            \
+                work->unk_30.value += FORM_OFFSETS[kind][work->facing >> 1].vy;            \
             }                                                                              \
         } else {                                                                           \
             work = g_Task;                                                                 \
             kind = g_Game.members[slot].chr.character_id;                                  \
             if (work->facing == 0 || work->facing == 3) {                                  \
-                work->unk_2E.half += CHARACTER_OFFSETS[kind][work->facing >> 1].vx;        \
-                work->unk_30.half += CHARACTER_OFFSETS[kind][work->facing >> 1].vy;        \
+                work->unk_2E.value += CHARACTER_OFFSETS[kind][work->facing >> 1].vx;       \
+                work->unk_30.value += CHARACTER_OFFSETS[kind][work->facing >> 1].vy;       \
             } else {                                                                       \
-                work->unk_2E.half -= CHARACTER_OFFSETS[kind][work->facing >> 1].vx;        \
-                work->unk_30.half += CHARACTER_OFFSETS[kind][work->facing >> 1].vy;        \
+                work->unk_2E.value -= CHARACTER_OFFSETS[kind][work->facing >> 1].vx;       \
+                work->unk_30.value += CHARACTER_OFFSETS[kind][work->facing >> 1].vy;       \
             }                                                                              \
         }                                                                                  \
     }

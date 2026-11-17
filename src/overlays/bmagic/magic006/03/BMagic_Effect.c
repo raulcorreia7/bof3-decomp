@@ -61,7 +61,7 @@ MATCH void func_801EEF28(void) {
         battler        = g_Battle.selected_actor;
         g_Task->unk_0C = ratan2(battler->pos.x.fixed - g_Task->pos.x.fixed, battler->pos.y.fixed - g_Task->pos.y.fixed);
         g_Task->unk_10 = 0;
-        g_Task->unk_14 = (ratan2((s16)battler->unk_2E.half - (s16)g_Task->unk_2E.half, (s16)battler->unk_30.half - (s16)g_Task->unk_30.half) - 0x200) & ANGLE_MASK;
+        g_Task->unk_14 = (ratan2((s16)battler->unk_2E.value - (s16)g_Task->unk_2E.value, (s16)battler->unk_30.value - (s16)g_Task->unk_30.value) - 0x200) & ANGLE_MASK;
         SND_QueueSelectionEffect(0x100);
         g_Task->unk_09 = 0x20;
         g_Task->header.step += 1;
@@ -161,8 +161,8 @@ MATCH void func_801EF478(void) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     g_ScratchPad.cells.halves[2] = 8;
-    g_ScratchPad.cells.halves[0] = g_Task->unk_2E.half;
-    g_ScratchPad.cells.halves[1] = g_Task->unk_30.half;
+    g_ScratchPad.cells.halves[0] = g_Task->unk_2E.value;
+    g_ScratchPad.cells.halves[1] = g_Task->unk_30.value;
     for (i = 2; i < 8; i += 2) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
@@ -240,8 +240,8 @@ MATCH void func_801EFB6C(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     g_ScratchPad.cells.halves[2] = 8;
     prim                         = (POLY_G4*)g_GfxPrimCursor;
-    g_ScratchPad.cells.halves[0] = g_Task->unk_2E.half;
-    g_ScratchPad.cells.halves[1] = g_Task->unk_30.half;
+    g_ScratchPad.cells.halves[0] = g_Task->unk_2E.value;
+    g_ScratchPad.cells.halves[1] = g_Task->unk_30.value;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
     g_ScratchPad.cells.halves[3] = 64;
@@ -344,8 +344,8 @@ MATCH void func_801F0308(void) {
 
     g_ScratchPad.cells.halves[2] = g_Task->unk_09;
     g_ScratchPad.cells.halves[3] = g_Task->timer;
-    g_ScratchPad.cells.halves[0] = g_Task->unk_2E.half;
-    g_ScratchPad.cells.halves[1] = g_Task->unk_30.half;
+    g_ScratchPad.cells.halves[0] = g_Task->unk_2E.value;
+    g_ScratchPad.cells.halves[1] = g_Task->unk_30.value;
     tpage                        = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));

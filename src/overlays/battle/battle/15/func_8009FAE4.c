@@ -6,7 +6,7 @@ MATCH void func_8009FAE4(void) {
     u8            a;
     u8            b;
 
-    flags      = &g_Battle.state;
+    flags      = &g_Battle.flags;
     value      = *flags;
     a          = g_Battle.active_battler;
     b          = g_Battle.target_selector;

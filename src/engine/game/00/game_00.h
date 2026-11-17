@@ -764,7 +764,7 @@ void    func_801A271C(void* record);
 /* Kept (): retail callers load $a0 in the jal delay slot (`addiu a0,s0,116`) and the callee never reads it; with (void)
  * that instruction is dropped (Area_SetXFixed) or the frame shrinks by 8 bytes (func_801A1384). */
 void    func_801A275C(void* unused);
-void    func_801A2788(s32 handler_index);
+void    func_801A2788(s32 step_index);
 void    func_801A27C4(Actor* entity);
 u8      func_801A2A04(Actor* entity);
 void    func_801A2AE4(Actor* entity, u8 route_flag);
@@ -853,7 +853,7 @@ void    func_801ACAC0(void);
 void    func_801ACBC4(void);
 void    func_801ACC08(void);
 void    func_801ACCD8(void);
-void    func_801ACE10(s32 handler_index);
+void    func_801ACE10(s32 step_index);
 void    func_801ACEBC(void);
 void    func_801ACF2C(void);
 void    func_801AD0EC(void);

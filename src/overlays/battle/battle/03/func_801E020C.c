@@ -15,14 +15,14 @@ MATCH void func_801E020C(void) {
     if ((work->header.step != 3) && (HAS_STATUS(*g_Game.current, STATUS_KO))) {
         /* FAKE: half pointer; the direct global scores 97.37%. */
         u16* half;
-        half = &g_Battle.state;
+        half = &g_Battle.flags;
         *half &= ~BATTLE_STATE_REPRISAL_PENDING;
         g_Task->header.mode = 6;
         g_Task->header.step = 4;
     } else {
         /* FAKE: half pointer; the direct global scores 82.24%. */
         u16* half;
-        half = &g_Battle.state;
+        half = &g_Battle.flags;
         if ((*half & BATTLE_STATE_REPRISAL_PENDING) == 0) {
             if ((g_Battle.target_selector & BATTLE_TARGET_BOTH_SIDES) == 0) {
                 if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ATTACK) {
@@ -32,7 +32,7 @@ MATCH void func_801E020C(void) {
                 }
                 if ((LOBU(g_Battle.action_type) == BATTLE_ACTION_ABILITY) && ((D_801CA71C[g_Battle.action_id].mask & 0x800) != 0) && ((func_801DD448() & BYTE_MASK) != 0) &&
                     ((D_801CA718[g_Battle.action_id][0] & ABILITY_TARGET_FLAG_ALL) == 0)) {
-                    g_Battle.state |= BATTLE_STATE_REPRISAL_PENDING;
+                    g_Battle.flags |= BATTLE_STATE_REPRISAL_PENDING;
                 }
             }
         } else {

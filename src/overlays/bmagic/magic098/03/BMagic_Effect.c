@@ -36,9 +36,9 @@ MATCH void func_801EEFC8(void) {
         g_Task->param.unk_0B += 6;
         func_801EF5D4(16, 128, 0x1F);
         g_Task->param.unk_0B -= 16;
-        g_Task->unk_2E.half += 24;
+        g_Task->unk_2E.value += 24;
         func_801F00C4();
-        g_Task->unk_2E.half -= 48;
+        g_Task->unk_2E.value -= 48;
         func_801F00C4();
         PopMatrix();
     }

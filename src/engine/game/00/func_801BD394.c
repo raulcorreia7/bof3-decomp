@@ -39,11 +39,11 @@ MATCH void func_801BD394(void) {
         }
     }
     if ((g_Game.walk_flags & (AREA_WALK_LEADER_SWITCH_ACTIVE | AREA_WALK_MENU_ACTIVE | AREA_WALK_TRANSITION)) || flag) {
-        g_Game.current->u.field.mode_12B.u8_value = 0;
+        g_Game.current->u.field.mode.unsigned_value = 0;
     } else {
         D_801CD1D8[g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK]();
     }
-    if (g_Game.current->u.field.mode_12B.u8_value == 0) {
+    if (g_Game.current->u.field.mode.unsigned_value == 0) {
         Actor_RequestScript(g_Task->direction);
         g_Task->timer = 0;
         Party_ClearBattlerState(g_Task->unk_05);

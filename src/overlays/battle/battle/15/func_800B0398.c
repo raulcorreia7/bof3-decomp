@@ -6,16 +6,16 @@ MATCH void func_800B0398(void) {
     func_800B0498();
     panel = BATTLE_PANEL_TASK;
     if (panel->selection.mode == 0) {
-        if (panel->x.signed_half < 0x43) {
-            panel->x.signed_half = 0x42;
+        if (panel->x.signed_value < 0x43) {
+            panel->x.signed_value = 0x42;
         } else {
-            panel->x.signed_half = panel->x.signed_half - 0x20;
+            panel->x.signed_value = panel->x.signed_value - 0x20;
         }
     } else {
-        if (panel->x.signed_half < 0x42) {
-            panel->x.signed_half = panel->x.signed_half + 0x20;
+        if (panel->x.signed_value < 0x42) {
+            panel->x.signed_value = panel->x.signed_value + 0x20;
         } else {
-            panel->x.signed_half = 0x42;
+            panel->x.signed_value = 0x42;
         }
     }
 }

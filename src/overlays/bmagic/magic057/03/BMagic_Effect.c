@@ -146,7 +146,7 @@ NON_MATCHING void func_801EF134(void) {
     g_Task->unk_5C             = 0;
     g_Task->unk_2A             = 0;
     g_Task->unk_29             = 4;
-    g_Task->unk_2C.half        = 0;
+    g_Task->unk_2C.value       = 0;
     Actor_SelectScript(0);
     g_Task->unk_09 = 3;
     g_Task->header.step += 1;
@@ -298,7 +298,7 @@ MATCH void func_801EF900(void) {
     g_Task->unk_5C         = 0;
     g_Task->unk_2A         = 0;
     g_Task->unk_29         = 4;
-    g_Task->unk_2C.half    = 0;
+    g_Task->unk_2C.value   = 0;
     Actor_SelectScript(0U);
     g_Task->header.step += 1;
 }

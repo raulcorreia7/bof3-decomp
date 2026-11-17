@@ -18,7 +18,7 @@ MATCH s32 Area_CanStartEncounter(void) {
     if (D_80145FB8 == 0) {
         return 0;
     }
-    if (g_Game.members[0].u.field.counter_11C.u8_value < 4) {
+    if (g_Game.members[0].u.field.counter.unsigned_value < 4) {
         value = ((u16)g_EncounterSteps * 7) / 10;
     } else {
         value = (u16)g_EncounterSteps;
@@ -26,7 +26,7 @@ MATCH s32 Area_CanStartEncounter(void) {
     if (value < D_80145FB8) {
         return 0;
     }
-    if (g_Game.members[0].status.field.flags_12C.u8_value & AREA_LOAD_FLAG_WORLD_MAP) {
+    if (g_Game.members[0].status.field.flags.unsigned_value & AREA_LOAD_FLAG_WORLD_MAP) {
         return 0;
     }
     if (!(g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) && D_80143EFC >= 0xF1) {

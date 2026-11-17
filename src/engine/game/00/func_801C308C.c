@@ -30,5 +30,5 @@ MATCH void func_801C308C(s32 arg) {
     /* FAKE: hold cue arg after store. */
     FAKE_BARRIER();
     SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 8));
-    g_Game.current->status.field.flags_12C.u8_value |= 8;
+    g_Game.current->status.field.flags.unsigned_value |= 8;
 }

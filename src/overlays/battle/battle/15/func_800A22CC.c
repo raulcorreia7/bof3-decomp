@@ -9,7 +9,7 @@ MATCH void func_800A22CC(void) {
     battler_index      = LOBU(*battler_index_cell);
     if (BATTLER_IS_PLAYER(battler_index)) {
         g_Game.members[battler_index].u.turn.action_flags.volatile_value |= BATTLER_ACTION_CHARGING;
-        g_Game.members[*battler_index_cell].counter_136 = 0;
+        g_Game.members[*battler_index_cell].charge_counter = 0;
     } else {
         ENEMY_COMBATANT(battler_index).turn.action_flags.value |= BATTLER_ACTION_CHARGING;
         ENEMY_COMBATANT(*battler_index_cell).unk_112 = 0;

@@ -16,8 +16,8 @@ MATCH void func_801EEC5C(void) {
     g_Task->pos.x.fixed                       = actor->pos.x.fixed;
     g_Task->pos.y.fixed                       = actor->pos.y.fixed;
     g_Task->pos.z.fixed                       = actor->pos.z.fixed;
-    g_Task->unk_2E.half                       = actor->unk_2E.half;
-    g_Task->unk_30.half                       = actor->unk_30.half - 16;
+    g_Task->unk_2E.value                      = actor->unk_2E.value;
+    g_Task->unk_30.value                      = actor->unk_30.value - 16;
     effect_slot                               = Battle_AllocEffect(1, 21) & BYTE_MASK;
     g_BattleEffects[effect_slot].target.party = g_Task;
     g_BattleEffects[effect_slot].unk_08       = actor->facing;
@@ -35,8 +35,8 @@ MATCH void func_801EED60(void) {
     u8*          selector;
     PartyMember* battler;
 
-    g_Task->unk_2E.half = g_BattleSelectedActor->unk_2E.half;
-    g_Task->unk_30.half = g_BattleSelectedActor->unk_30.half - 0x10;
+    g_Task->unk_2E.value = g_BattleSelectedActor->unk_2E.value;
+    g_Task->unk_30.value = g_BattleSelectedActor->unk_30.value - 0x10;
     if (g_Task->param.unk_0B == 0xFF) {
         BMAGIC_RELEASE_TARGET_AND_PLAY();
     }
@@ -155,13 +155,13 @@ MATCH void func_801EF710(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         PSX_SET_SEMI_TRANSPARENT(prim);
-        setXY0(prim, g_BattleEffectBattler->unk_2E.half, g_BattleEffectBattler->unk_30.half);
+        setXY0(prim, g_BattleEffectBattler->unk_2E.value, g_BattleEffectBattler->unk_30.value);
         angle    = i << 7;
-        prim->x1 = g_BattleEffectBattler->unk_2E.half + FIXED_MUL(rsin(angle), D_1F800000_WORD[0]);
-        prim->y1 = g_BattleEffectBattler->unk_30.half + FIXED_MUL(rcos(angle), D_1F800000_WORD[0]);
+        prim->x1 = g_BattleEffectBattler->unk_2E.value + FIXED_MUL(rsin(angle), D_1F800000_WORD[0]);
+        prim->y1 = g_BattleEffectBattler->unk_30.value + FIXED_MUL(rcos(angle), D_1F800000_WORD[0]);
         next     = (i + 1) << 7;
-        prim->x2 = g_BattleEffectBattler->unk_2E.half + FIXED_MUL(rsin(next), D_1F800000_WORD[0]);
-        prim->y2 = g_BattleEffectBattler->unk_30.half + FIXED_MUL(rcos(next), D_1F800000_WORD[0]);
+        prim->x2 = g_BattleEffectBattler->unk_2E.value + FIXED_MUL(rsin(next), D_1F800000_WORD[0]);
+        prim->y2 = g_BattleEffectBattler->unk_30.value + FIXED_MUL(rcos(next), D_1F800000_WORD[0]);
         setRGB0(prim, 0x20, 0x20, 0xC0);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);

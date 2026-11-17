@@ -15,7 +15,7 @@ MATCH void func_801C0AB4(void) {
         ((u8*)g_Game.members)[0] &= 0xBF;
         Party_ClearBattlerState(CHAR_INDEX_RYU);
         count_next = *counter + 1;
-        g_Game.members[0].status.field.flags_12C.u8_value &= 0xFD;
+        g_Game.members[0].status.field.flags.unsigned_value &= 0xFD;
         *counter = count_next;
         flag     = 1;
     } else {

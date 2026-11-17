@@ -22,24 +22,24 @@ MATCH void func_801EECC0(void) {
     for (i = 0; (u32)(i & BYTE_MASK) < 4; i++) {
         index = Battle_AllocEffect(1, 0x2E);
         Effect_CopyActiveBattlerToSlot(index);
-        g_BattleEffects[index & BYTE_MASK].target.party  = g_Task;
-        g_BattleEffects[index & BYTE_MASK].header.mode   = 1;
-        g_BattleEffects[index & BYTE_MASK].handler_index = 0x2E;
-        g_BattleEffects[index & BYTE_MASK].header.step   = 0;
-        g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
-        g_BattleEffects[index & BYTE_MASK].arg.unk_09    = (i ^ 3) + 1;
-        g_BattleEffects[index & BYTE_MASK].unk_0B        = i ^ 3;
+        g_BattleEffects[index & BYTE_MASK].target.party = g_Task;
+        g_BattleEffects[index & BYTE_MASK].header.mode  = 1;
+        g_BattleEffects[index & BYTE_MASK].step_index   = 0x2E;
+        g_BattleEffects[index & BYTE_MASK].header.step  = 0;
+        g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
+        g_BattleEffects[index & BYTE_MASK].arg.unk_09   = (i ^ 3) + 1;
+        g_BattleEffects[index & BYTE_MASK].unk_0B       = i ^ 3;
     }
     index = Battle_AllocEffect(1, 0x2E);
     Effect_CopyActiveBattlerToSlot(index);
-    g_BattleEffects[index & BYTE_MASK].target.party  = g_Task;
-    g_BattleEffects[index & BYTE_MASK].unk_06        = 1;
-    g_BattleEffects[index & BYTE_MASK].header.mode   = 0;
-    g_BattleEffects[index & BYTE_MASK].header.step   = 0;
-    g_BattleEffects[index & BYTE_MASK].handler_index = 0x2E;
-    g_Task->unk_27                                   = Battle_CopyCellPalette(g_BattleEffectBattler);
-    g_Task->unk_28                                   = g_BattleEffectBattler->unk_28;
-    g_Task->unk_24                                   = g_BattleEffectBattler->unk_24;
+    g_BattleEffects[index & BYTE_MASK].target.party = g_Task;
+    g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
+    g_BattleEffects[index & BYTE_MASK].header.mode  = 0;
+    g_BattleEffects[index & BYTE_MASK].header.step  = 0;
+    g_BattleEffects[index & BYTE_MASK].step_index   = 0x2E;
+    g_Task->unk_27                                  = Battle_CopyCellPalette(g_BattleEffectBattler);
+    g_Task->unk_28                                  = g_BattleEffectBattler->unk_28;
+    g_Task->unk_24                                  = g_BattleEffectBattler->unk_24;
     Battle_SetCellPaletteStp(g_Task);
     if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
         Battle_PlayActiveBattlerCue(2, 0);
@@ -271,15 +271,15 @@ MATCH void func_801EFBA0(void) {
         g_Task->pos.y.fixed = actor->pos.y.fixed;
         g_Task->pos.z.fixed = actor->pos.z.fixed;
         Battle_ProjectRange();
-        g_Task->unk_29    = 0;
-        g_Task->unk_25    = 0x1D;
-        g_Task->unk_26    = 0;
-        g_Task->unk_24    = 0x84;
-        work              = g_Task;
-        work->unk_2B      = 0;
-        work->unk_2C.half = 0;
-        g_Task->unk_28    = 0;
-        g_Task->unk_27    = D_801EFEC4[g_Task->param.unk_0B] + 0xB0;
+        g_Task->unk_29     = 0;
+        g_Task->unk_25     = 0x1D;
+        g_Task->unk_26     = 0;
+        g_Task->unk_24     = 0x84;
+        work               = g_Task;
+        work->unk_2B       = 0;
+        work->unk_2C.value = 0;
+        g_Task->unk_28     = 0;
+        g_Task->unk_27     = D_801EFEC4[g_Task->param.unk_0B] + 0xB0;
         if (g_Task->facing == 1 || g_Task->facing == 2) {
             g_Task->unk_2A = 1;
         } else {

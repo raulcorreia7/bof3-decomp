@@ -22,9 +22,9 @@ NON_MATCHING void func_801F44C4(void) {
     } else {
         g_ScriptState->cursor -= 2;
     }
-    g_PaletteFades[g_GameState->unk_13D].offset.r -= 2;
-    g_PaletteFades[g_GameState->unk_13D].offset.g -= 2;
-    g_PaletteFades[g_GameState->unk_13D].offset.b -= 2;
+    g_PaletteFades[g_GameState->palette_fade].offset.r -= 2;
+    g_PaletteFades[g_GameState->palette_fade].offset.g -= 2;
+    g_PaletteFades[g_GameState->palette_fade].offset.b -= 2;
     if (g_Task->tint.steps.delta.r != 0x40) {
         g_Task->tint.steps.delta.r += 4;
         g_Task->tint.bytes.rgb.g += 4;

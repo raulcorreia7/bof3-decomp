@@ -12,5 +12,5 @@ MATCH void func_801EECD0(void) {
     TEXT_Format(g_TextVariables, D_801EEC04, g_Battle.outcome.reward_exp);
     D_801EB4F4 = Message_GetText(5);
     EMI_GetArchiveId(g_EmiLoadedCharacterIndex & 0x7F, 0);
-    g_Battle.ui_state += 1;
+    g_Battle.ui_mode += 1;
 }

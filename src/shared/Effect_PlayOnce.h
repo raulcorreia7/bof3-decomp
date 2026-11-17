@@ -6,7 +6,7 @@
     Battle_MarkDamaged(g_Battle.target_selector);           \
     /* FAKE: keeps the flag load after the request call. */ \
     FAKE_BARRIER();                                         \
-    g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;          \
+    g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;          \
     Effect_Reset()
 
 MATCH void Effect_PlayOnce(void) {

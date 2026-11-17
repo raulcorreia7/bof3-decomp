@@ -174,8 +174,8 @@ MATCH void func_801EF698(void) {
     }
     prim                         = (POLY_FT4*)g_GfxPrimCursor;
     g_ScratchPad.cells.halves[3] = g_Task->unk_09 << 3;
-    x                            = g_Task->unk_2E.half;
-    y                            = g_Task->unk_30.half;
+    x                            = g_Task->unk_2E.value;
+    y                            = g_Task->unk_30.value;
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
     setXY4(prim, x - half_w, y - height, x + half_w, y - height, x - half_w, y, x + half_w, y);

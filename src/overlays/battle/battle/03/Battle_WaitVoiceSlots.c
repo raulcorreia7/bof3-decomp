@@ -30,9 +30,9 @@ MATCH void Battle_WaitVoiceSlots(void) {
         D_801483E4          = 0;
         g_Battle.phase.mode = BATTLE_MODE_RESULT;
         g_Battle.phase.step = 0;
-        g_Battle.state &= ~BATTLE_STATE_COMMAND_ARMED;
+        g_Battle.flags &= ~BATTLE_STATE_COMMAND_ARMED;
     } else {
-        if (!(g_Battle.state & BATTLE_STATE_COMMAND_ARMED)) {
+        if (!(g_Battle.flags & BATTLE_STATE_COMMAND_ARMED)) {
             for (i = 1; i < 7; i++) {
                 g_Battle.panel_widths[i] = 0;
             }
@@ -50,6 +50,6 @@ MATCH void Battle_WaitVoiceSlots(void) {
         g_Battle.phase.mode       = BATTLE_MODE_COMMANDS;
         g_Battle.phase.step       = 0;
         g_Battle.phase.sub_step   = 0;
-        g_Battle.state &= 0xFFF7;
+        g_Battle.flags &= 0xFFF7;
     }
 }

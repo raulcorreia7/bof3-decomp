@@ -110,10 +110,10 @@ typedef struct BattleWork {
     u16 unk_2E;
     u16 unk_30;
     u16 unk_32;
-    u32 range_axis_34;
-    u32 range_axis_38;
+    u32 range_x;
+    u32 range_y;
     u8  pad_3C[2]; /* +0x3C .. +0x3D */
-    u16 unk_3E;    /* +0x3E vertical span; Battle_ProjectRange projects it negated */
+    u16 unk3E;     /* +0x3E vertical span; Battle_ProjectRange projects it negated */
 } BattleWork;
 
 typedef struct BattleStatDisplayTemplate {
@@ -141,9 +141,9 @@ typedef struct BattlePlayerDamageStatus {
 
 ASSERT_SIZE(BattlePlayerDamageStatus, 0x140);
 
-typedef struct BattleLocalOffsetPair {
+typedef struct BattleLocalOffsets {
     s16 values[4][2];
-} BattleLocalOffsetPair;
+} BattleLocalOffsets;
 
 /* Declarations and record types this target owns; the units below carried
  * the same text in their own file-local copies.
@@ -289,9 +289,9 @@ typedef struct BattleSelectionState {
 } BattleSelectionState;
 
 /* Shared battle-template stats, one row (stride 0x78) per battler slot. The
- * magic-defence path copies three defence values out of this table. */
+ * magic-defense path copies three defense values out of this table. */
 typedef struct BattleTemplateStats {
-    u32 defence[3]; /* 0x00 */
+    u32 defense[3]; /* 0x00 */
     u8  pad_0C[0x6C];
 } BattleTemplateStats;
 
@@ -314,48 +314,48 @@ typedef struct BattleMenuPanelModes {
 
 #define BATTLE_MENU_PANEL0_STATE_COUNT 3
 
-typedef struct BattleMenuPanel0States {
-    Callback states[BATTLE_MENU_PANEL0_STATE_COUNT];
-} BattleMenuPanel0States;
+typedef struct BattleMenuPanel0Steps {
+    Callback steps[BATTLE_MENU_PANEL0_STATE_COUNT];
+} BattleMenuPanel0Steps;
 
 #define BATTLE_MENU_PANEL1_STATE_COUNT 3
 
-typedef struct BattleMenuPanel1States {
-    Callback states[BATTLE_MENU_PANEL1_STATE_COUNT];
-} BattleMenuPanel1States;
+typedef struct BattleMenuPanel1Steps {
+    Callback steps[BATTLE_MENU_PANEL1_STATE_COUNT];
+} BattleMenuPanel1Steps;
 
 #define BATTLE_MENU_PANEL2_STATE_COUNT 5
 
-typedef struct BattleMenuPanel2States {
-    Callback states[BATTLE_MENU_PANEL2_STATE_COUNT];
-} BattleMenuPanel2States;
+typedef struct BattleMenuPanel2Steps {
+    Callback steps[BATTLE_MENU_PANEL2_STATE_COUNT];
+} BattleMenuPanel2Steps;
 
 #define BATTLE_MENU_PANEL3_STATE_COUNT 3
 
-typedef struct BattleMenuPanel3States {
-    Callback states[BATTLE_MENU_PANEL3_STATE_COUNT];
-} BattleMenuPanel3States;
+typedef struct BattleMenuPanel3Steps {
+    Callback steps[BATTLE_MENU_PANEL3_STATE_COUNT];
+} BattleMenuPanel3Steps;
 
 #define BATTLE_MENU_PANEL4_STATE_COUNT 3
 
-typedef struct BattleMenuPanel4States {
-    Callback states[BATTLE_MENU_PANEL4_STATE_COUNT];
-} BattleMenuPanel4States;
+typedef struct BattleMenuPanel4Steps {
+    Callback steps[BATTLE_MENU_PANEL4_STATE_COUNT];
+} BattleMenuPanel4Steps;
 
 extern BattleEffectSteps                 D_80096994;
 extern BattleEffectSteps                 D_800969A0;
 extern BattleEffectSteps                 D_800969AC;
 extern BattleEffectSteps                 D_800969B8;
 extern BattleMenuPanelModes              D_800969E4;
-extern BattleMenuPanel0States            D_800969F8;
+extern BattleMenuPanel0Steps             D_800969F8;
 extern volatile u8                       D_80096A04[4];
-extern BattleMenuPanel1States            D_80096A08;
-extern BattleMenuPanel2States            D_80096A14;
+extern BattleMenuPanel1Steps             D_80096A08;
+extern BattleMenuPanel2Steps             D_80096A14;
 /* Main-executable battle state consumed by target-local lifts. */
 extern char                              D_80096A28[];
 extern char                              D_80096A2C[];
-extern BattleMenuPanel3States            D_80096A34;
-extern BattleMenuPanel4States            D_80096A40;
+extern BattleMenuPanel3Steps             D_80096A34;
+extern BattleMenuPanel4Steps             D_80096A40;
 extern Callback                          func_800B43B8[];
 extern Callback                          D_800B43D4[17];
 extern Callback                          D_800B4418[4];
@@ -428,7 +428,7 @@ extern u8                                D_800B6C40[12];
 extern u8                                D_800B6C4C[28];
 extern u8                                D_800B6C68[12];
 extern u8                                D_800B6C74[28];
-extern BattleLocalOffsetPair             D_800B6C90[7];
+extern BattleLocalOffsets                D_800B6C90[7];
 extern u8                                D_800B6D00[28];
 extern volatile u32                      D_800B6D1C[1];
 extern volatile u16                      D_800B6D20[4];
@@ -1217,6 +1217,6 @@ u8           Battle_SelectStepRule(void);
 #define BATTLE_ADD_MESSAGE_AND_STEP() \
     temp = Message_GetText(0x4000);   \
     Battle_AddMessage(2, 0xFF, temp); \
-    *(u8*)&g_Battle.ui_state += 1;
+    *(u8*)&g_Battle.ui_mode += 1;
 
 #endif

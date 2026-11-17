@@ -5,7 +5,7 @@
 MATCH void Effect_AddActor(void) {
     Actor_StepAnimLoop();
     Area_AddActor();
-    if (g_Battle.state & BATTLE_STATE_EFFECT_PLAYING) {
+    if (g_Battle.flags & BATTLE_STATE_EFFECT_PLAYING) {
         g_Task->header.step++;
     }
 }

@@ -14,7 +14,7 @@ MATCH void Char_SetCharacterId(u8 index) {
     Char_LoseHP(entry[0], g_Game.current->chr.character_id);
     Char_SpendAP(entry[1], g_Game.current->chr.character_id);
     if (entry[2] & 0x80) {
-        g_Game.current->u.field.flags_118 = 0x0A;
+        g_Game.current->u.field.flags = 0x0A;
     }
     if (entry[2] & 0x20) {
         g_Game.current->u.field.countdown = 0x28;

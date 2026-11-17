@@ -9,10 +9,10 @@ MATCH void Battle_ProjectRange(void) {
     BattleWork* store;
 
     work      = (BattleWork*)g_Task;
-    vec[0]    = ((s32)work->range_axis_34 >> 9) - 0x4000;
+    vec[0]    = ((s32)work->range_x >> 9) - 0x4000;
     primitive = (TILE_1*)g_GfxPrimCursor;
-    vec[1]    = ((s32)work->range_axis_38 >> 9) - 0x4000;
-    vec[2]    = -((s16)work->unk_3E / 2);
+    vec[1]    = ((s32)work->range_y >> 9) - 0x4000;
+    vec[2]    = -((s16)work->unk3E / 2);
     SetTile1(primitive);
     RotTransPers((SVECTOR*)vec, (long*)&primitive->x0, &flags[0], &flags[1]);
     store         = (BattleWork*)g_Task;

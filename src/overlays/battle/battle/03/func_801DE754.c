@@ -21,7 +21,7 @@ MATCH void func_801DE754(void) {
             g_MenuPanelTasks[0].state = 2;
         }
     } else {
-        sp                    = SPAD(0u);
-        D_8014833A[0].kind_00 = sp->cells.bytes[0];
+        sp                 = SPAD(0u);
+        D_8014833A[0].type = sp->cells.bytes[0];
     }
 }

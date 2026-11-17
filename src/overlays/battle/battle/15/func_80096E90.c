@@ -10,5 +10,5 @@ MATCH void func_80096E90(void) {
     g_Battle.phase.step     = 2u;
     g_Battle.phase.sub_step = 0u;
     g_Battle.ui_step        = 0u;
-    g_Battle.ui_state       = 0u;
+    g_Battle.ui_mode        = 0u;
 }

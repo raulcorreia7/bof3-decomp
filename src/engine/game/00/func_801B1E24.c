@@ -42,7 +42,7 @@ NON_MATCHING void func_801B1E24(void) {
             if (prev < 0) {
                 prev = g_Game.party_size - 1;
             }
-            if (!(rows->flags_12C & 1) && prev != 0) {
+            if (!(rows->flags & 1) && prev != 0) {
                 index  = (prev - 1) * 2 + (value & BYTE_MASK) * 4;
                 result = func_801B1B2C(rows->x + (s_EntityPlacementOffsets[index] << 15), rows->y + (D_801CD08D[index] << 15), value & BYTE_MASK, row->speed);
                 if (((result & BYTE_MASK) != 0) && ((func_801B1C18(SP_REF(s32, 8), SP_REF(s32, 0xC), ((BattleWorkSlot*)g_Task)->speed) & 0xFF) != 0)) {

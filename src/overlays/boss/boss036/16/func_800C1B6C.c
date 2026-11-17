@@ -36,11 +36,11 @@ MATCH void func_800C1B6C(void) {
         } while (src != end);
         /* FAKE: hold tail store before tail. */
         FAKE_ORDER_LOCK(dst->w[0] = src->w[0]);
-        g_BattleEffects[effect_index].header.mode   = 0;
-        g_BattleEffects[effect_index].header.step   = 0;
-        g_BattleEffects[effect_index].unk_06        = 3;
-        g_BattleEffects[effect_index].handler_index = 3;
-        g_BattleEffects[effect_index].arg.unk_09    = 0;
-        g_BattleEffects[effect_index].unk_29        = 3;
+        g_BattleEffects[effect_index].header.mode = 0;
+        g_BattleEffects[effect_index].header.step = 0;
+        g_BattleEffects[effect_index].unk_06      = 3;
+        g_BattleEffects[effect_index].step_index  = 3;
+        g_BattleEffects[effect_index].arg.unk_09  = 0;
+        g_BattleEffects[effect_index].unk_29      = 3;
     }
 }

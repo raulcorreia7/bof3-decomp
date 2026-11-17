@@ -9,7 +9,7 @@ MATCH u8 func_801DA69C(u32 enemy_index) {
     slot_kind   = g_BattleEnemyBattlers[enemy_index].enemy_id.byte.type;
     owner_index = 7;
     while (owner_index >= 0) {
-        if (D_8014833A[owner_index + 5].kind_00 == enemy_index + 3u) {
+        if (D_8014833A[owner_index + 5].type == enemy_index + 3u) {
             break;
         }
         owner_index -= 1;
@@ -26,7 +26,7 @@ MATCH u8 func_801DA69C(u32 enemy_index) {
         if (ui_mode == 3u) {
             continue;
         }
-        ui_kind = D_8014833A[scan_index + 5].kind_00;
+        ui_kind = D_8014833A[scan_index + 5].type;
         if (ENEMY_COMBATANT(ui_kind).enemy_id.byte.type == slot_kind) {
             return false;
         }

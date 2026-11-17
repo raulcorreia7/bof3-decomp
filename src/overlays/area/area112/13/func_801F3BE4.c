@@ -15,7 +15,7 @@ NON_MATCHING s32 func_801F3BE4(s32 x, s32 y) {
     if (count > 0) {
         do {
             if (g_Game.members[i].header.flags != 0) {
-                height = (g_Game.members[i].unk_70 + 2) << 15;
+                height = (g_Game.members[i].speed + 2) << 15;
                 dx     = g_Game.members[i].pos.x.fixed + g_Game.members[i].unk_0C * g_Game.members[i].unk_09 - (x << 16);
                 if (dx < 0) {
                     dx = -dx;

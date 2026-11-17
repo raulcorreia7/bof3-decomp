@@ -13,8 +13,8 @@ MATCH s32 func_800AF5FC(BattleRange* target, u32 extent) {
     work       = (BattleRange*)g_Task;
     span       = (work->unk3E + (extent >> 9)) - target->unk3E;
     half_value = extent >> 1;
-    first      = work->range_axis_34 + half_value - target->range_axis_34;
-    second     = work->range_axis_38 + half_value - target->range_axis_38;
+    first      = work->range_x + half_value - target->range_x;
+    second     = work->range_y + half_value - target->range_y;
     if (extent >= first && extent >= second) {
         result = (extent >> 8) >= (span & HALF_MASK);
     }

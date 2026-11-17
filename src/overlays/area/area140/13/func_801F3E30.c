@@ -15,7 +15,7 @@ NON_MATCHING void func_801F3E30(void) {
         x                 = COORD_INT(g_Task->pos.x) + (s8)shift_x;
         y                 = COORD_INT(g_Task->pos.y) + (s8)shift_y;
         if (g_Game.members[0].unk_09 != 0) {
-            if (g_Game.members[0].u.field.mode_12B.u8_value == 1) {
+            if (g_Game.members[0].u.field.mode.unsigned_value == 1) {
                 if ((func_801F4058(x, y) & BYTE_MASK) == 0) {
                     if (((u16)(x - 0x44) < 0xD) && ((u16)(y - 6) < 0xB)) {
                         g_ScriptState->unk_07 = 2;

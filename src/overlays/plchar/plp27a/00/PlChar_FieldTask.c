@@ -58,11 +58,11 @@ MATCH void func_801CF1C0(void){CHAR_RUN_FACING_PROBE()}
 #include "overlays/plchar/PlChar_ProbeFacingCell.h"
 
 MATCH void func_801CF858(void) {
-    g_Game.current->u.field.mode_12B.s8_value = 0;
+    g_Game.current->u.field.mode.value = 0;
 }
 
 MATCH void func_801CF868(void) {
-    g_Game.current->u.field.mode_12B.s8_value = 0;
+    g_Game.current->u.field.mode.value = 0;
 }
 
 MATCH void func_801CF878(void) {

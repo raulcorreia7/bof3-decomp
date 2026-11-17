@@ -8,11 +8,11 @@ MATCH void func_80097844(void) {
 
     held = g_InputPressed;
     if ((held & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
-        g_Battle.ui_state = 4u;
+        g_Battle.ui_mode = 4u;
         return;
     }
     if ((held & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
-        g_Battle.ui_state = 3u;
+        g_Battle.ui_mode = 3u;
         return;
     }
     /* FAKE: plain read of the message-slot selector: the volatile qualifier
@@ -22,7 +22,7 @@ MATCH void func_80097844(void) {
     entry   = Party_GetAbilities(message[0], g_MenuPanelTasks[16].unk_0B, 1);
     if ((D_801CA718[entry[g_MenuPanelTasks[16].unk_0C] * 0x14] & ABILITY_TARGET_FLAG_BOTH_SIDES) != 0u && (trigger & (PADLup | PADLdown)) != 0) {
         g_BattleActorTurn->command.target = Battle_TargetNext(0);
-        *(u8*)&g_Battle.ui_state += 1u;
+        *(u8*)&g_Battle.ui_mode += 1u;
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
         return;
     }

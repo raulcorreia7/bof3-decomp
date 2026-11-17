@@ -3,8 +3,8 @@
 MATCH void func_801B781C(void) {
     if ((Actor_StepAnimOnce() & BYTE_MASK) != 0 && (func_801C2AAC() & BYTE_MASK) == 0) {
         Actor_RequestScript(g_Task->direction);
-        g_Game.current->u.field.mode_12B.u8_value = 0;
-        g_Task->header.mode                       = 1;
+        g_Game.current->u.field.mode.unsigned_value = 0;
+        g_Task->header.mode                         = 1;
         ACTOR_CLEAR_STEP();
         g_Task->unk_03 = 0;
     }

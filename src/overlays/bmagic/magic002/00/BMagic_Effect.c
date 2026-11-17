@@ -9,18 +9,18 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801EEC78(void) {
     u32 index;
 
-    index                                       = Battle_AllocEffect(3, 1) & BYTE_MASK;
-    g_BattleEffects[index].header.mode          = 0;
-    g_BattleEffects[index].unk_0C               = g_Game.members[0].unk_2E.signed_half << 16;
-    g_BattleEffects[index].unk_10               = g_Game.members[0].unk_30.signed_half << 16;
-    D_801EC344[index].value                     = 0;
-    g_BattleEffects[index].unk_18               = 40;
-    g_BattleEffects[index].arg.unk_09           = 0;
-    g_BattleEffects[index].unk_1C               = ((g_Battle.selected_actor->unk_2E.signed_half - g_Game.members[0].unk_2E.signed_half) << 16) / 10;
-    D_801EC350[index].value                     = ((g_Battle.selected_actor->unk_30.signed_half - g_Game.members[0].unk_30.signed_half) << 16) / 10;
-    g_BattleEffects[index].word_60.target_index = 0x100;
-    D_801EC388[index].value                     = 0x100;
-    D_801EC2E0->target.effect                   = &g_BattleEffects[index];
+    index                                            = Battle_AllocEffect(3, 1) & BYTE_MASK;
+    g_BattleEffects[index].header.mode               = 0;
+    g_BattleEffects[index].unk_0C                    = g_Game.members[0].unk_2E.signed_value << 16;
+    g_BattleEffects[index].unk_10                    = g_Game.members[0].unk_30.signed_value << 16;
+    D_801EC344[index].value                          = 0;
+    g_BattleEffects[index].unk_18                    = 40;
+    g_BattleEffects[index].arg.unk_09                = 0;
+    g_BattleEffects[index].unk_1C                    = ((g_Battle.selected_actor->unk_2E.signed_value - g_Game.members[0].unk_2E.signed_value) << 16) / 10;
+    D_801EC350[index].value                          = ((g_Battle.selected_actor->unk_30.signed_value - g_Game.members[0].unk_30.signed_value) << 16) / 10;
+    g_BattleEffects[index].target_index.target_index = 0x100;
+    D_801EC388[index].value                          = 0x100;
+    D_801EC2E0->target.effect                        = &g_BattleEffects[index];
     g_Task->header.mode += 1;
 }
 

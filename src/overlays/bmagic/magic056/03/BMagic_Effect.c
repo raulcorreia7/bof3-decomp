@@ -39,12 +39,12 @@ MATCH void func_801EEC94(void) {
         row   = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
         *slot = *row;
     }
-    work                                 = g_Task;
-    g_BattleEffects[index].header.mode   = 3;
-    g_BattleEffects[index].unk_06        = 1;
-    g_BattleEffects[index].header.step   = 0;
-    g_BattleEffects[index].handler_index = 0x55;
-    g_BattleEffects[index].target.party  = work;
+    work                                = g_Task;
+    g_BattleEffects[index].header.mode  = 3;
+    g_BattleEffects[index].unk_06       = 1;
+    g_BattleEffects[index].header.step  = 0;
+    g_BattleEffects[index].step_index   = 0x55;
+    g_BattleEffects[index].target.party = work;
     g_Task->param.unk_0B += 1;
     dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW));
     src = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));

@@ -20,7 +20,7 @@ MATCH u8 func_800C1F30(u32 mode) {
             }
             break;
         case BOSS_EVENT_RESTART_END:
-            if (!(g_Battle.state & BATTLE_STATE_RELOAD_PARTY) && !(g_Battle.boss_flags & BOSS034_FLAG_FIRST_TURN_INSERTED) && !(g_Game.members[D_800C2778].chr.status & STATUS_LOW_HP)) {
+            if (!(g_Battle.flags & BATTLE_STATE_RELOAD_PARTY) && !(g_Battle.boss_flags & BOSS034_FLAG_FIRST_TURN_INSERTED) && !(g_Game.members[D_800C2778].chr.status & STATUS_LOW_HP)) {
                 g_Battle.boss_flags |= BOSS034_FLAG_FIRST_TURN_INSERTED;
                 Battle_InsertTurnFirst(D_800C2778);
             }

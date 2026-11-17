@@ -15,19 +15,19 @@ MATCH void func_800AD71C(void) {
         PartyMember* record;
         PartyMember* other;
 
-        record                     = (PartyMember*)g_Task;
-        record->unk_2B             = 0;
-        other                      = (PartyMember*)g_Task;
-        record->unk_2C.signed_half = 2;
-        other->unk_2A              = 0;
+        record                      = (PartyMember*)g_Task;
+        record->unk_2B              = 0;
+        other                       = (PartyMember*)g_Task;
+        record->unk_2C.signed_value = 2;
+        other->unk_2A               = 0;
     }
-    record              = (PartyMember*)g_Task;
-    record->pos.z.fixed = 0;
-    record->unk_2E.half = D_80148628 + 0x14;
-    count               = record->header.mode;
-    label               = D_8014862A;
-    record->header.mode = count + 1;
-    record->unk_30.half = label + 0x12;
+    record               = (PartyMember*)g_Task;
+    record->pos.z.fixed  = 0;
+    record->unk_2E.value = D_80148628 + 0x14;
+    count                = record->header.mode;
+    label                = D_8014862A;
+    record->header.mode  = count + 1;
+    record->unk_30.value = label + 0x12;
     Actor_SelectScript(0x13);
     Area_AddActor();
 }

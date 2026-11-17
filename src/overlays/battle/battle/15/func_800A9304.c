@@ -28,7 +28,7 @@ MATCH u8 func_800A9304(u8 slot) {
     s32 index;
     u8  action;
 
-    if (!(g_Battle.state & BATTLE_STATE_OVER)) {
+    if (!(g_Battle.flags & BATTLE_STATE_OVER)) {
         return true;
     }
     if (Battle_SlotIsBlocked(D_801463CB)) {

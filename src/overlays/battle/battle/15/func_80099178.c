@@ -1,5 +1,5 @@
 #include "battle_15.h"
 
 MATCH void func_80099178(void) {
-    D_800B446C[g_Battle.ui_state]();
+    D_800B446C[g_Battle.ui_mode]();
 }

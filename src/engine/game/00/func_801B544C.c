@@ -12,19 +12,19 @@ MATCH bool func_801B544C(void) {
     if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) {
         return false;
     }
-    g_Game.current->u.field.step_12A.u8_value++;
-    if (g_Game.current->u.field.step_12A.u8_value < 0xF1U) {
+    g_Game.current->u.field.step.unsigned_value++;
+    if (g_Game.current->u.field.step.unsigned_value < 0xF1U) {
         return false;
     }
-    g_Game.current->u.field.step_12A.u8_value = 0;
+    g_Game.current->u.field.step.unsigned_value = 0;
     for (i = 1; i < g_Game.party_size; i++) {
-        if (g_Game.members[i].u.field.mode_12B.u8_value == 9) {
+        if (g_Game.members[i].u.field.mode.unsigned_value == 9) {
             found = true;
         }
     }
     if (!(found & BYTE_MASK)) {
         if RANDOM_MASK (1) {
-            g_Game.current->u.field.mode_12B.u8_value = 9;
+            g_Game.current->u.field.mode.unsigned_value = 9;
             Actor_RequestScript(g_Task->direction);
             g_Task->timer       = 2;
             g_Task->header.mode = 6;

@@ -28,12 +28,12 @@ NON_MATCHING void func_800C19CC(void) {
     /* FAKE: keeps the tail word store before slot setup. */
     FAKE_ORDER_LOCK(dst->w[0] = src->w[0]);
 
-    g_BattleEffects[effect_slot & BYTE_MASK].header.mode   = 0;
-    g_BattleEffects[effect_slot & BYTE_MASK].header.step   = 0;
-    g_BattleEffects[effect_slot & BYTE_MASK].unk_06        = 3;
-    g_BattleEffects[effect_slot & BYTE_MASK].handler_index = 4;
-    g_BattleEffects[effect_slot & BYTE_MASK].arg.unk_09    = 0;
-    g_BattleEffects[effect_slot & BYTE_MASK].unk_29        = 4;
+    g_BattleEffects[effect_slot & BYTE_MASK].header.mode = 0;
+    g_BattleEffects[effect_slot & BYTE_MASK].header.step = 0;
+    g_BattleEffects[effect_slot & BYTE_MASK].unk_06      = 3;
+    g_BattleEffects[effect_slot & BYTE_MASK].step_index  = 4;
+    g_BattleEffects[effect_slot & BYTE_MASK].arg.unk_09  = 0;
+    g_BattleEffects[effect_slot & BYTE_MASK].unk_29      = 4;
 }
 #else
 INCLUDE_ASM(func_800C19CC);

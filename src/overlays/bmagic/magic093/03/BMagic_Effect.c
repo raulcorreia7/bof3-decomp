@@ -380,8 +380,8 @@ MATCH void func_801F01F0(void) {
     shade                        = g_Task->param.unk_0B * 8;
     g_ScratchPad.cells.halves[6] = g_Task->unk_09;
     g_ScratchPad.cells.halves[7] = g_Task->timer;
-    g_ScratchPad.cells.halves[3] = g_Task->unk_2E.half;
-    g_ScratchPad.cells.halves[4] = g_Task->unk_30.half;
+    g_ScratchPad.cells.halves[3] = g_Task->unk_2E.value;
+    g_ScratchPad.cells.halves[4] = g_Task->unk_30.value;
     tpage                        = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));

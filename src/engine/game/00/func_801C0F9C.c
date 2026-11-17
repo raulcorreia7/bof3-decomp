@@ -58,7 +58,7 @@ scan_slot:
             g_Game.members[*cursor].header.step = D_801CD4AC[source_row].unk_01;
             g_Game.members[*cursor].unk_03      = D_801CD4AC[source_row].unk_02;
             g_Game.members[*cursor].unk_04      = D_801CD4AC[source_row].unk_03;
-            g_Game.members[*cursor].status.field.flags_12C.u8_value &= 0xFD;
+            g_Game.members[*cursor].status.field.flags.unsigned_value &= 0xFD;
         }
         (*cursor)++;
         if (*cursor != g_Game.party_size) {

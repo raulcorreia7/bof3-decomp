@@ -11,16 +11,16 @@ MATCH void func_801E5A38(void) {
 
         n = index;
         index += 1u;
-        g_BattleEffects[n].header.flags  = 0u;
-        g_BattleEffects[n].handler_index = 0u;
-        g_BattleEffects[n].unk_06        = 0u;
-        g_BattleEffects[n].header.mode   = 0u;
-        g_BattleEffects[n].header.step   = 0u;
-        g_BattleEffects[n].unk_03        = 0u;
-        g_BattleEffects[n].unk_04        = 0u;
-        g_BattleEffects[n].unk_48        = 0u;
-        g_BattleEffects[n].unk_5D        = 0u;
-        g_BattleEffects[n].unk_5E        = 0u;
-        g_BattleEffects[n].unk_5F        = 0u;
+        g_BattleEffects[n].header.flags = 0u;
+        g_BattleEffects[n].step_index   = 0u;
+        g_BattleEffects[n].unk_06       = 0u;
+        g_BattleEffects[n].header.mode  = 0u;
+        g_BattleEffects[n].header.step  = 0u;
+        g_BattleEffects[n].unk_03       = 0u;
+        g_BattleEffects[n].unk_04       = 0u;
+        g_BattleEffects[n].unk_48       = 0u;
+        g_BattleEffects[n].unk_5D       = 0u;
+        g_BattleEffects[n].unk_5E       = 0u;
+        g_BattleEffects[n].unk_5F       = 0u;
     } while (index < BATTLE_EFFECT_COUNT);
 }

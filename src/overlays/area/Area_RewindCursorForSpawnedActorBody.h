@@ -10,7 +10,7 @@
     }                                                                                                                                                                  \
     if (i != ACTOR_SLOT_COUNT) {                                                                                                                                       \
         g_ScriptState->cursor -= 2;                                                                                                                                    \
-    } else if (g_Game.members[0].u.field.mode_12B.u8_value != 0) {                                                                                                     \
+    } else if (g_Game.members[0].u.field.mode.unsigned_value != 0) {                                                                                                   \
         g_ScriptState->cursor -= 2;                                                                                                                                    \
         Game_SetScriptActive();                                                                                                                                        \
     } else {                                                                                                                                                           \

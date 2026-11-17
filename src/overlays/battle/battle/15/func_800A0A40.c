@@ -9,7 +9,7 @@ MATCH void func_800A0A40(void) {
     u16           flag;
     u32           battler_index;
 
-    pFlag         = &g_Battle.state;
+    pFlag         = &g_Battle.flags;
     flag          = *pFlag;
     battler_index = (*(u8*)&g_Battle.active_battler);
     *pFlag        = flag | BATTLE_STATE_DAMAGE_APPLIED;

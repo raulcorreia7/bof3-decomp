@@ -20,7 +20,7 @@ MATCH void func_800A60DC(void) {
 
     if (pad & g_InputMasks[BATTLE_INPUT_CANCEL]) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
-        g_Battle.ui_state = 5;
+        g_Battle.ui_mode = 5;
         return;
     }
     if (pad & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
@@ -30,7 +30,7 @@ MATCH void func_800A60DC(void) {
             D_801463B4 = 0;
             state      = 3;
         }
-        g_Battle.ui_state = state;
+        g_Battle.ui_mode = state;
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
     }
 

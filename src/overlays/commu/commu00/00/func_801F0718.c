@@ -6,7 +6,7 @@
  * loads instead); variant_state and the distance pair go through the
  * g_Actors array expression while mode, state, unk_34/36/38/3a/3e,
  * source_index and resource_id go through the g_Task scratch pointer; the
- * unk_3A store precedes unk_38 and the unk_3E store precedes source_index. No
+ * unk_3A store precedes unk_38 and the unk3E store precedes source_index. No
  * .rodata table is involved, so the jump-table alignment residual of
  * Fairy_SpawnWorker cannot apply here. */
 /* Packed coordinate pair of each task slot, reached through its own byte view

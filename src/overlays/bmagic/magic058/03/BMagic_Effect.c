@@ -62,7 +62,7 @@ MATCH void func_801EEE78(void) {
 MATCH void func_801EEEDC(void) {
     if (D_801EC2E4 == 0) {
         Battle_MarkDamaged(g_Battle.target_selector);
-        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+        g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
         Effect_Reset();
     }
 }

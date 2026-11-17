@@ -4,15 +4,15 @@
  */
 /* func_801E5824 */
 MATCH void Battle_UpdateEffects(void) {
-    BattleEffectStages handlers;
-    Callback*          funcs;
-    BattleEffect*      effect;
-    PartyMember*       target;
-    s32                i;
+    BattleEffectStageSteps handlers;
+    Callback*              funcs;
+    BattleEffect*          effect;
+    PartyMember*           target;
+    s32                    i;
 
     handlers = g_BattleEffectStages;
     i        = 0;
-    funcs    = handlers.handlers;
+    funcs    = handlers.steps;
     effect   = g_BattleEffects;
     do {
         if (g_BattleEffects[i].header.flags != 0u) {

@@ -9,7 +9,7 @@ MATCH bool func_801C539C(void) {
     if (!(Actor_StepAnimOnce() & BYTE_MASK)) {
         return false;
     }
-    g_Game.current->u.field.counter_11C.s8_value = (g_Task->voice_flags.raw + 2);
+    g_Game.current->u.field.counter.value = (g_Task->voice_flags.raw + 2);
     func_801C2538();
     work          = g_Task;
     doubled       = work->timer * 2;

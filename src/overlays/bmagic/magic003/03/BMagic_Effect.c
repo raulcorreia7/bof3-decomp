@@ -31,8 +31,8 @@ MATCH void func_801EED14(void) {
         BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
         BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
     }
-    g_Task->unk_2E.half  = 160;
-    g_Task->unk_30.half  = 112;
+    g_Task->unk_2E.value = 160;
+    g_Task->unk_30.value = 112;
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 30;
     g_Task->timer        = 0;
@@ -162,7 +162,7 @@ MATCH void func_801EF268(void) {
     SND_QueueSelectionEffect(258);
     D_801463D6 = g_Task->timer;
     Battle_MarkDamaged(g_BattleTargetSelector);
-    g_BattleState = g_Battle.state | BATTLE_STATE_EFFECT_PLAYING;
+    g_BattleState = g_Battle.flags | BATTLE_STATE_EFFECT_PLAYING;
     Effect_Reset();
 }
 
@@ -374,15 +374,15 @@ MATCH void func_801EFB8C(void) {
         g_Task->pos.y.fixed = actor->pos.y.fixed;
         g_Task->pos.z.fixed = actor->pos.z.fixed;
         Battle_ProjectRange();
-        g_Task->unk_29    = 0;
-        g_Task->unk_25    = 0x1D;
-        g_Task->unk_26    = 0;
-        g_Task->unk_24    = 0x84;
-        work              = g_Task;
-        work->unk_2B      = 0;
-        work->unk_2C.half = 0;
-        g_Task->unk_28    = 0;
-        g_Task->unk_27    = D_801F0B04[g_Task->param.unk_0B] + 0xB0;
+        g_Task->unk_29     = 0;
+        g_Task->unk_25     = 0x1D;
+        g_Task->unk_26     = 0;
+        g_Task->unk_24     = 0x84;
+        work               = g_Task;
+        work->unk_2B       = 0;
+        work->unk_2C.value = 0;
+        g_Task->unk_28     = 0;
+        g_Task->unk_27     = D_801F0B04[g_Task->param.unk_0B] + 0xB0;
         if (g_Task->unk_04 & 1) {
             g_Task->unk_2A = 1;
         } else {
@@ -415,7 +415,7 @@ MATCH void func_801EFD4C(void) {
     D_801EC3A4[slot & BYTE_MASK].target.party = g_Task;
     image                                     = &g_BattleEffects[slot & BYTE_MASK];
     image->unk_06                             = 1;
-    image->handler_index                      = 1;
+    image->step_index                         = 1;
     image->header.mode                        = 0;
     image->header.step                        = 0;
     image->arg.unk_09                         = 1;
@@ -433,7 +433,7 @@ MATCH void func_801EFEC8(void) {
         D_801EC3A4[slot & BYTE_MASK].target.party = g_Task;
         image                                     = &g_BattleEffects[slot & BYTE_MASK];
         image->unk_06                             = 1;
-        image->handler_index                      = 1;
+        image->step_index                         = 1;
         image->header.mode                        = 1;
         image->header.step                        = 0;
         image->unk_0B                             = i;
@@ -474,8 +474,8 @@ MATCH void func_801F0164(s32 index) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     length = D_801F0A9C[(u8)index];
-    x      = g_Task->unk_2E.half - ((length >> 1) * 12 + (length & 1) * 6);
-    y      = g_Task->unk_30.half;
+    x      = g_Task->unk_2E.value - ((length >> 1) * 12 + (length & 1) * 6);
+    y      = g_Task->unk_30.value;
     for (i = 0; D_801F0AA0[(u8)index][i] != 0; i++) {
         glyph = D_801F0AA0[(u8)index][i] - 0x3F;
         if (D_801F0AA0[(u8)index][i] != 0xFF) {
@@ -506,8 +506,8 @@ MATCH void func_801F03F0(s32 dir) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     prim = (POLY_FT4*)g_GfxPrimCursor;
-    x    = g_Task->unk_2E.half;
-    y    = g_Task->unk_30.half;
+    x    = g_Task->unk_2E.value;
+    y    = g_Task->unk_30.value;
     SetPolyFT4(prim);
     setXYWH(prim, x, y, 12, 12);
     prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
@@ -533,8 +533,8 @@ MATCH void func_801F0550(s32 value) {
     tens = (u8)value / 10;
     ones = (u8)value % 10;
     prim = (POLY_FT4*)g_GfxPrimCursor;
-    x    = g_Task->unk_2E.half;
-    y    = g_Task->unk_30.half;
+    x    = g_Task->unk_2E.value;
+    y    = g_Task->unk_30.value;
     left = x - 66;
     SetPolyFT4(prim);
     setXY4(prim, left, y, x - 54, y, left, y + 12, x - 54, y + 12);
@@ -567,14 +567,14 @@ MATCH void func_801F07B0(s32 index) {
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
-    setXY0(tile, g_Task->unk_2E.half - (D_801F0B10[(u8)index].x + 4), g_Task->unk_30.half - (D_801F0B10[(u8)index].y + 4));
+    setXY0(tile, g_Task->unk_2E.value - (D_801F0B10[(u8)index].x + 4), g_Task->unk_30.value - (D_801F0B10[(u8)index].y + 4));
     setWH(tile, D_801F0B10[(u8)index].w + 8, D_801F0B10[(u8)index].h + 8);
     setRGB0(tile, 0x20, 0x20, 0x20);
     GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(TILE));
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
-    setXY0(tile, g_Task->unk_2E.half - (D_801F0B10[(u8)index].x + 6), g_Task->unk_30.half - (D_801F0B10[(u8)index].y + 6));
+    setXY0(tile, g_Task->unk_2E.value - (D_801F0B10[(u8)index].x + 6), g_Task->unk_30.value - (D_801F0B10[(u8)index].y + 6));
     setWH(tile, D_801F0B10[(u8)index].w + 12, D_801F0B10[(u8)index].h + 12);
     setRGB0(tile, 0x20, 0x20, 0x20);
     GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(TILE));

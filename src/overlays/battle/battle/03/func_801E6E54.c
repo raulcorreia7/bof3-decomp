@@ -21,7 +21,7 @@ MATCH void func_801E6E54(void) {
         work                 = g_Task;
         work->unk_2B         = 0;
         next                 = g_Task;
-        work->unk_2C.half    = 1;
+        work->unk_2C.value   = 1;
         next->unk_48         = 0;
         work                 = g_Task;
         work->scale.y        = 0x10000;

@@ -10,12 +10,12 @@ MATCH void func_801E414C(void) {
     Actor_StepAnimOnce();
     if ((g_BattleCurrentEnemy->status & STATUS_KO) != 0) {
         GFX_FreePaletteFadeTarget((void*)g_Task);
-        half = &g_Battle.state;
+        half = &g_Battle.flags;
         *half &= ~BATTLE_STATE_REPRISAL_PENDING;
         g_Task->header.mode = 6;
         g_Task->header.step = 4;
     } else {
-        half2 = &g_Battle.state;
+        half2 = &g_Battle.flags;
         if ((*half2 & BATTLE_STATE_REPRISAL_PENDING) != 0) {
             *half2 = (*half2 & ~BATTLE_STATE_REPRISAL_PENDING) | BATTLE_STATE_REPRISAL_DONE;
         } else if ((g_Battle.target_selector & BATTLE_TARGET_BOTH_SIDES) == 0) {
@@ -28,7 +28,7 @@ MATCH void func_801E414C(void) {
             action_type = *(u8*)&g_Battle.action_type;
             if ((action_type == BATTLE_ACTION_ABILITY) && ((FIELD(u16, &D_801CA71C, g_Battle.action_id * 0x14) & 0x800) != 0) && ((func_801E4368() & BYTE_MASK) != 0) &&
                 ((FIELD(u8, &D_801CA718, g_Battle.action_id * 0x14) & ABILITY_TARGET_FLAG_ALL) == 0)) {
-                g_Battle.state |= BATTLE_STATE_REPRISAL_PENDING;
+                g_Battle.flags |= BATTLE_STATE_REPRISAL_PENDING;
             }
         }
         Battle_ClearSlotPending(g_Task->slot);

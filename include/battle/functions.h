@@ -96,7 +96,7 @@ void        func_801E52E8(void);
 /* func_801E52F0 */
 void        Battle_PlayEnemyCue(u16 cue_id);
 /* func_801E590C */
-u32         Battle_AllocEffect(u32 mode, u32 handler_index);
+u32         Battle_AllocEffect(u32 mode, u32 step_index);
 /* func_801E5988 */
 void        Effect_Reset(void);
 extern void func_801E5A38(void);

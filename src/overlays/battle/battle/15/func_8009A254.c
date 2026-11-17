@@ -7,11 +7,11 @@ MATCH void func_8009A254(void) {
     /* First word of the record of the slot that owns the message panel. */
     slot_data = g_Game.members[BATTLE_ACTIVE_ROW->slot].u.turn.command.id;
     if (g_InputPressed & g_InputMasks[BATTLE_INPUT_CANCEL]) {
-        g_Battle.ui_state = 4;
+        g_Battle.ui_mode = 4;
         return;
     }
     if (g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
-        g_Battle.ui_state = 3;
+        g_Battle.ui_mode = 3;
         return;
     }
     input = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
@@ -19,7 +19,7 @@ MATCH void func_8009A254(void) {
         if (Item_GetFlags(slot_data >> 8, slot_data & BYTE_MASK) & ITEM_USABLE_MENU) {
             g_BattleActorTurn->command.target = Battle_TargetNext(3);
             {
-                u8* state = (u8*)&g_Battle.ui_state;
+                u8* state = (u8*)&g_Battle.ui_mode;
 
                 *state -= 1;
             }

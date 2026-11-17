@@ -16,7 +16,7 @@ MATCH void func_8009B9A0(void) {
         func_800ACF80();
         func_801D9484();
         func_801DE560(2u, 0u, 0u, 45u, Message_GetText(0x10));
-        cell = &g_Battle.ui_state;
+        cell = &g_Battle.ui_mode;
         cell[0] += 1;
     }
 }

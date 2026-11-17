@@ -93,7 +93,7 @@ MATCH s16 Battle_CalcDamage(u8 attacker_slot, u8 target_slot, u16 element_id) {
     if (flags & 0x2) {
         damage = (damage * spread.percent[RANDOM_MOD(8)]) / 100;
     }
-    if (g_Battle.state & BATTLE_STATE_CRITICAL) {
+    if (g_Battle.flags & BATTLE_STATE_CRITICAL) {
         damage = damage * 2 + (s16)Battle_RollBaseDamage(attacker_slot, target_slot, 1) / 4;
     }
     if (BATTLER_IS_PLAYER(target_slot) && g_PartyFormation == 2) {
@@ -105,7 +105,7 @@ MATCH s16 Battle_CalcDamage(u8 attacker_slot, u8 target_slot, u16 element_id) {
     if ((status & (STATUS_CONFUSED | STATUS_SLEEPING)) && damage == 0) {
         damage = 1;
     }
-    if ((g_Battle.state & BATTLE_STATE_CRITICAL) && damage == 0) {
+    if ((g_Battle.flags & BATTLE_STATE_CRITICAL) && damage == 0) {
         damage = 1;
     }
     if (BATTLER_IS_PLAYER(target_slot)) {

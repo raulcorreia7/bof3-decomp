@@ -134,11 +134,11 @@ ASSERT_SIZE(PanelOwner, 0x04);
 typedef struct BattleSelection {
     u16      id;
     u16      unk_02;
-    Callback handler;
+    Callback callback;
 } BattleSelection;
 
 ASSERT_OFFSET(BattleSelection, id, 0x00);
-ASSERT_OFFSET(BattleSelection, handler, 0x04);
+ASSERT_OFFSET(BattleSelection, callback, 0x04);
 ASSERT_SIZE(BattleSelection, 0x08);
 
 /* One entry of the selection-type table at 0x801CA71C: a mask halfword and the
@@ -188,7 +188,7 @@ typedef struct BattleEffect {
     TaskHeader          header; /* 0x00 */
     u8                  unk_03;
     u8                  unk_04;
-    u8                  handler_index; /* +0x05 indexes a mode's handler table; Battle_AllocEffect stores it */
+    u8                  step_index; /* +0x05 indexes a mode's handler table; Battle_AllocEffect stores it */
     u8                  unk_06;
     u8                  unk_07;
     u8                  unk_08;
@@ -219,7 +219,7 @@ typedef struct BattleEffect {
     u8                  unk_5D;
     u8                  unk_5E;
     u8                  unk_5F;
-    BattleTargetIndex   word_60; /* +0x60 the target index: a word, a low halfword */
+    BattleTargetIndex   target_index; /* +0x60 the target index: a word, a low halfword */
     u8                  pad_64[0x10];
     BattleEffectTarget  target; /* +0x74 the battler the effect acts on */
 } BattleEffect;
@@ -233,13 +233,13 @@ ASSERT_SIZE(BattleEffect, 0x78);
 
 /* Battle effect work records (stride 0x78). */
 extern BattleEffect g_BattleEffects[];
-ASSERT_OFFSET(BattleEffect, handler_index, 0x05);
+ASSERT_OFFSET(BattleEffect, step_index, 0x05);
 ASSERT_OFFSET(BattleEffect, unk_27, 0x27);
 ASSERT_OFFSET(BattleEffect, unk_29, 0x29);
 ASSERT_OFFSET(BattleEffect, unk_4B, 0x4B);
 ASSERT_OFFSET(BattleEffect, unk_4C, 0x4C);
 ASSERT_OFFSET(BattleEffect, unk_5C, 0x5C);
-ASSERT_OFFSET(BattleEffect, word_60, 0x60);
+ASSERT_OFFSET(BattleEffect, target_index, 0x60);
 ASSERT_OFFSET(BattleEffect, target, 0x74);
 
 /* A flag word of a battle work record. The overlays test and set bits through
@@ -276,16 +276,16 @@ ASSERT_SIZE(BattleTurn, 0x14);
  * negative screen positions (Actor names +0x2E/+0x30 screen_x and
  * screen_y). */
 typedef union ScreenCoord {
-    u16 half;
-    s16 signed_half;
+    u16 value;
+    s16 signed_value;
 } ScreenCoord;
 
 /* The cell at +0x90 of a local work record: battle/battle/03 reads the halfword, and
  * battle/battle/15 reads the low byte of it. */
-typedef union BattleWorkHalfOrByte90 {
+typedef union BattleLocalCell {
     u16 half;
     u8  value;
-} BattleWorkHalfOrByte90;
+} BattleLocalCell;
 
 /* The cell at +0x0A of a battle panel task. battle/battle/03 reads it as the
  * selected battler slot (the row index is slot - 3) and battle/battle/15 reads it
@@ -466,7 +466,7 @@ static inline void EnemyBattler_SetScript(EnemyBattler* enemy, u8* script, ModeF
  * (0x8014833A = 0x80148333 + 7, stride 0x24). Kept as its own name because the
  * units index it as an array; battle/battle/03 (func_801DA69C) names both walks. */
 typedef struct BattleOwner {
-    u8 kind_00;      /* 0x00 - record +0x07 of the owner table */
+    u8 type;         /* 0x00 - record +0x07 of the owner table */
     u8 pad_01[0x23]; /* 0x01-0x23 */
 } BattleOwner;
 
@@ -495,38 +495,38 @@ ASSERT_SIZE(BattlerParam, 1);
 
 /* A one-byte counter that field code reads signed or unsigned. */
 typedef union PanelCounter {
-    s8 s8_value;
-    u8 u8_value;
+    s8 value;
+    u8 unsigned_value;
 } PanelCounter;
 
 /* The field's view of the 0x14 bytes where a battle row keeps its queued turn: the menu and scene code reuse them
  * as panel and mode counters while no battle runs. */
 typedef struct FieldMode {
-    u8           flags_118; /* 0x00 bit 0x80 restores the saved word */
+    u8           flags;     /* 0x00 bit 0x80 restores the saved word */
     u8           countdown; /* 0x01 frame countdown, reloaded with 0x28 or 0x0A */
     u8           pad_02[2];
-    PanelCounter counter_11C; /* 0x04 panel step counter */
+    PanelCounter counter; /* 0x04 panel step counter */
     u8           pad_05;
-    u8           kind_11E;  /* 0x06 record kind */
-    u8           wait;      /* 0x07 shared wait countdown */
-    u16          value_120; /* 0x08 copied into the record's 0x7C */
-    u16          unk_122;   /* 0x0A lowered by 2 per step; @source: write:func_801F3B9C@0x801F3B9C */
-    u32          index_124; /* 0x0C slot index passed to the selector */
+    u8           type;    /* 0x06 record kind */
+    u8           wait;    /* 0x07 shared wait countdown */
+    u16          value;   /* 0x08 copied into the record's 0x7C */
+    u16          unk_122; /* 0x0A lowered by 2 per step; @source: write:func_801F3B9C@0x801F3B9C */
+    u32          index;   /* 0x0C slot index passed to the selector */
     u8           pad_10[2];
-    PanelCounter step_12A; /* 0x12 */
-    PanelCounter mode_12B; /* 0x13 panel mode */
+    PanelCounter step; /* 0x12 */
+    PanelCounter mode; /* 0x13 panel mode */
 } FieldMode;
 
-ASSERT_OFFSET(FieldMode, counter_11C, 0x04);
-ASSERT_OFFSET(FieldMode, value_120, 0x08);
-ASSERT_OFFSET(FieldMode, index_124, 0x0C);
-ASSERT_OFFSET(FieldMode, mode_12B, 0x13);
+ASSERT_OFFSET(FieldMode, counter, 0x04);
+ASSERT_OFFSET(FieldMode, value, 0x08);
+ASSERT_OFFSET(FieldMode, index, 0x0C);
+ASSERT_OFFSET(FieldMode, mode, 0x13);
 ASSERT_SIZE(FieldMode, 0x14);
 
 /* The field's view of the eight cells after the turn: the flags that gate the entry check and the entity slot. */
 typedef struct FieldEntry {
-    PanelCounter flags_12C; /* 0x00 bit 0x01/0x08 gate the entry check */
-    u8           slot;      /* 0x01 entity slot index */
+    PanelCounter flags; /* 0x00 bit 0x01/0x08 gate the entry check */
+    u8           slot;  /* 0x01 entity slot index */
     u8           pad_02[6];
 } FieldEntry;
 
@@ -581,7 +581,7 @@ typedef struct PartyMember {
     s32                 unk_60; /* +0x60 the cell Area_AddGridActor stores the rotation in; bmagic effects read its low halfword */
     s32                 unk_64; /* +0x64 the offset magic109 sweeps between -0x7F and 0x80 in steps of 8 */
     u8                  pad_68[8];
-    u8                  unk_70;
+    u8                  speed;
     u8                  pad_71[3];
     /* +0x74..+0x117 is a Character copy: func_801DD08C copies a
      * 0xA4-byte character record to this offset. */
@@ -600,13 +600,13 @@ typedef struct PartyMember {
     } status;
 
     u16 unk_134;
-    u8  counter_136;
-    u8  counter_137;
+    u8  charge_counter;
+    u8  status_counter;
     u8  focus_counter; /* +0x138 the Focus counter, 0..2; Battle_CalcDamage spends it as a power bonus */
     u8  unk_139;
     u8  unk_13A[2];
     u8  character_index; /* +0x13C the Character slot this battler was built from */
-    u8  unk_13D;         /* the palette fade index; @source: write:func_801AAB00@0x801AAB00 */
+    u8  palette_fade;    /* the palette fade index; @source: write:func_801AAB00@0x801AAB00 */
     u8  pad_13E[2];
 } PartyMember;
 
@@ -627,7 +627,7 @@ ASSERT_OFFSET(PartyMember, unk_2C, 0x2C);
 ASSERT_OFFSET(PartyMember, depth, 0x32);
 ASSERT_OFFSET(PartyMember, pos, 0x34);
 ASSERT_OFFSET(PartyMember, unk_60, 0x60);
-ASSERT_OFFSET(PartyMember, unk_70, 0x70);
+ASSERT_OFFSET(PartyMember, speed, 0x70);
 ASSERT_OFFSET(PartyMember, chr, 0x74);
 ASSERT_OFFSET(PartyMember, status, 0x12C);
 ASSERT_OFFSET(PartyMember, focus_counter, 0x138);
@@ -747,8 +747,8 @@ extern BattleOwner  D_8014833A[];
 
 typedef struct BattleRange {
     u8  unk_00[0x34];
-    u32 range_axis_34;
-    u32 range_axis_38;
+    u32 range_x;
+    u32 range_y;
     u8  pad_3C[2]; /* 0x3C */
     u16 unk3E;     /* 0x3E */
 } BattleRange;
@@ -775,7 +775,7 @@ ASSERT_SIZE(BattleRange, 0x40);
  * the member loses its 24-byte frame (first instruction differs in 17 members);
  * the do/while form moves bytes. */
 #define BATTLE_RAISE_STATE(flag) \
-    flags = &g_Battle.state;     \
+    flags = &g_Battle.flags;     \
     *flags |= (flag)
 
 /* The party rows 0-2 and enemy rows 3-10 share one battler index space. */
@@ -908,18 +908,18 @@ ASSERT_SIZE(BattlePhase, 3);
  * D_800B6C38. */
 typedef struct BattleSpriteCell {
     u8 pad_00[0x24]; /* +0x00 .. +0x23 */
-    u8 flags_24;     /* +0x24 bit 2 selects the +0x10 bank */
+    u8 flags;        /* +0x24 bit 2 selects the +0x10 bank */
     u8 pad_25[2];    /* +0x25 .. +0x26 */
     u8 cell_value;   /* +0x27 quotient/remainder source */
     u8 bank_index;   /* +0x28 cell-table index */
 } BattleSpriteCell;
 
-ASSERT_OFFSET(BattleSpriteCell, flags_24, 0x24);
+ASSERT_OFFSET(BattleSpriteCell, flags, 0x24);
 ASSERT_OFFSET(BattleSpriteCell, cell_value, 0x27);
 ASSERT_OFFSET(BattleSpriteCell, bank_index, 0x28);
 ASSERT_SIZE(BattleSpriteCell, 0x29);
 
-/* The battle state word g_Battle.state, read and written by both battle overlays
+/* The battle state word g_Battle.flags, read and written by both battle overlays
  * and the boss/bmagic handlers. Bit 3 (0x0008) is set by func_801D277C and
  * func_8009B828 and cleared by Battle_WaitVoiceSlots; no reader is known, so
  * it has no member. */
@@ -984,15 +984,15 @@ ASSERT_SIZE(GeneCursor, 2);
 /* The battle's state at 0x801462E0, from the phase tuple to the pending status. */
 typedef struct BattleState {
     /* 0x00 */ BattlePhase phase;
-    /* 0x03 */ u8          ui_step;  /* step of the battle UI */
-    /* 0x04 */ u8          ui_state; /* index of the battle UI state handler */
+    /* 0x03 */ u8          ui_step; /* step of the battle UI */
+    /* 0x04 */ u8          ui_mode; /* index of the battle UI state handler */
     /* 0x05 */ u8          row_cursor;
     /* 0x06 */ union {
         u8         panel_entry; /* the selected entry of the battle panel */
         GeneCursor gene;        /* the gene picker's cursor in Accession */
     } cursor;
 
-    /* 0x08 */ u16           state; /* BattleStateFlags */
+    /* 0x08 */ u16           flags; /* BattleStateFlags */
     /* 0x0A */ u8            encounter;
     /* 0x0B */ u8            unk_0B;
     /* 0x0C */ u8            scroll_dir;
@@ -1046,7 +1046,7 @@ typedef struct BattleState {
 ASSERT_OFFSET(BattleState, phase, 0x00);
 ASSERT_OFFSET(BattleState, ui_step, 0x03);
 ASSERT_OFFSET(BattleState, cursor, 0x06);
-ASSERT_OFFSET(BattleState, state, 0x08);
+ASSERT_OFFSET(BattleState, flags, 0x08);
 ASSERT_OFFSET(BattleState, encounter, 0x0A);
 ASSERT_OFFSET(BattleState, party_count, 0x10);
 ASSERT_OFFSET(BattleState, panel_slot, 0x14);

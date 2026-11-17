@@ -25,7 +25,7 @@ MATCH void Party_BuildBattlers(u32 order) {
         /* g_Characters is the 0xA4-byte character-record table; g_PartyFieldOrder is at +0x5F2. */
         record_base                       = (Character*)(g_PartyFieldOrder - 0x5F2);
         g_BattlePartyBattlers[i].chr      = record_base[kind];
-        g_BattlePartyBattlers[i].status.field.flags_12C.u8_value &= 0xFE;
+        g_BattlePartyBattlers[i].status.field.flags.unsigned_value &= 0xFE;
         if ((order & BYTE_MASK) != 0) {
             if ((g_Characters[g_Game.members[i].character_index].status & STATUS_POISONED) != 0) {
                 GFX_AllocPaletteFade((void*)g_Task, -4, -8, 0, 0);

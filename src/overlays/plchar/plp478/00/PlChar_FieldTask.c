@@ -13,7 +13,7 @@ MATCH void func_801CE404(void) {
 #include "overlays/plchar/PlChar_RunStepScript.h"
 
 MATCH void func_801CE610(void) {
-    g_Game.current->u.field.mode_12B.s8_value = 0;
+    g_Game.current->u.field.mode.value = 0;
 }
 
 MATCH void func_801CE620(void) {

@@ -11,11 +11,11 @@ MATCH void func_8009B700(void) {
         index            = g_Battle.scroll_dir;
         g_AreaCameraStep = 0x80;
         scroll_a         = &g_AreaTargetCellX;
-        *scroll_a -= g_BattleScrollDeltas[index].x;
-        counter           = g_Battle.ui_state;
-        delta             = g_BattleScrollDeltas[index].y;
-        g_Battle.ui_state = counter + 2;
-        scroll_b          = &g_AreaTargetCellY;
+        *scroll_a -= g_BattleScrollDeltas[index].dx;
+        counter          = g_Battle.ui_mode;
+        delta            = g_BattleScrollDeltas[index].dy;
+        g_Battle.ui_mode = counter + 2;
+        scroll_b         = &g_AreaTargetCellY;
         *scroll_b -= delta;
     }
 }

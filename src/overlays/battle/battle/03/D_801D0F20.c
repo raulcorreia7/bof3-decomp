@@ -47,34 +47,34 @@ BattleSavedPreviewModes D_801D0F6C = {
 
 /* 0x801D0F80 */
 /* D_801D0F80 */
-BattlePanelFuncs g_BattlePanelFuncs = {
+BattlePanelModes g_BattlePanelFuncs = {
     (Callback)func_801E90FC, (Callback)func_801E91FC, (Callback)func_801E943C, (Callback)func_801E94D0,
     (Callback)Battle_UpdateMenuPanel, (Callback)Battle_DispatchPanel, (Callback)func_801EA650, (Callback)func_801EA7DC,
 };
 
 /* 0x801D0FA0 */
-BattlePanel0States D_801D0FA0 = {
+BattlePanel0Steps D_801D0FA0 = {
     (Callback)func_801E915C,
     (Callback)func_801E91CC,
     (Callback)func_801EAB64,
 };
 
 /* 0x801D0FAC */
-BattlePanel1States D_801D0FAC = {
+BattlePanel1Steps D_801D0FAC = {
     (Callback)Battle_DrawMenuRows,
     (Callback)func_801E9390,
     (Callback)func_801EAB64,
 };
 
 /* 0x801D0FB8 */
-BattlePanel2States D_801D0FB8 = {
+BattlePanel2Steps D_801D0FB8 = {
     (Callback)func_801EAB64,
     (Callback)func_801E949C,
     (Callback)func_801EAB64,
 };
 
 /* 0x801D0FC4 */
-BattlePanel3States D_801D0FC4 = {
+BattlePanel3Steps D_801D0FC4 = {
     (Callback)func_801E9530,
     (Callback)func_801E9538,
     (Callback)func_801EAB64,
@@ -89,7 +89,7 @@ Callback D_801D0FD0[4] = {
 };
 
 /* 0x801D0FE0 */
-BattlePanel5States D_801D0FE0 = {
+BattlePanel5Steps D_801D0FE0 = {
     (Callback)Battle_SetPanelGauges,
     (Callback)func_801E9F18,
     (Callback)Battle_MovePanel,
@@ -97,21 +97,21 @@ BattlePanel5States D_801D0FE0 = {
 
 /* 0x801D0FEC */
 /* D_801D0FEC */
-BattlePanelTaskForwarders g_BattlePanelTaskForwarders = {
+BattlePanelTaskSteps g_BattlePanelTaskForwarders = {
     (BattlePanelForwardFunc)func_801EA254,
     (BattlePanelForwardFunc)func_801EA530,
     (BattlePanelForwardFunc)func_801EA59C,
 };
 
 /* 0x801D0FF8 */
-BattlePanel6States D_801D0FF8 = {
+BattlePanel6Steps D_801D0FF8 = {
     (Callback)func_801EA728,
     (Callback)func_801EA76C,
     (Callback)func_801EA774,
 };
 
 /* 0x801D1004 */
-BattlePanel7States D_801D1004 = {
+BattlePanel7Steps D_801D1004 = {
     (Callback)func_801EA848,
     (Callback)func_801EA894,
     (Callback)func_801EA8F4,

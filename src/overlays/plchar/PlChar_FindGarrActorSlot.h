@@ -10,7 +10,7 @@ MATCH s8 PlChar_FindGarrActorSlot(void) {
     if (member->chr.character_id != CHAR_ID_GARR) {
         return -1;
     }
-    if ((member->status.field.flags_12C.u8_value & 0x01) != 0) {
+    if ((member->status.field.flags.unsigned_value & 0x01) != 0) {
         return -1;
     }
 

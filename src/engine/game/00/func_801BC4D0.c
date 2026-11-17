@@ -14,7 +14,7 @@ MATCH s32 func_801BC4D0(void) {
     } else {
         g_Task->timer = 16;
     }
-    rate          = g_RouteSpeedScale[g_Game.current->u.field.counter_11C.u8_value];
+    rate          = g_RouteSpeedScale[g_Game.current->u.field.counter.unsigned_value];
     g_Task->timer = (g_Task->timer / (rate & BYTE_MASK));
     if (g_Task->voice_flags.scene_flag == 0) {
         SP_REF(s32, 0x8) = g_Task->pos.x.fixed + g_FacingOffsets[g_Task->direction].x * rate * g_Task->timer;

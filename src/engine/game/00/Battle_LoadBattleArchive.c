@@ -34,11 +34,11 @@ MATCH void Battle_LoadBattleArchive(void) {
     state                        = &g_GameEntrySubstate;
     counter                      = *state;
     g_Battle.outcome.event_flags = 0;
-    g_Battle.state               = 0;
+    g_Battle.flags               = 0;
     g_Battle.phase.mode          = BATTLE_MODE_ENTRANCE;
     g_Battle.phase.step          = 0;
     g_Battle.phase.sub_step      = 0;
     g_Battle.ui_step             = 0;
-    g_Battle.ui_state            = 0;
+    g_Battle.ui_mode             = 0;
     *state                       = counter + 1;
 }

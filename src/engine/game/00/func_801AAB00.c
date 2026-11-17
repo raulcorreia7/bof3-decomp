@@ -19,7 +19,7 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
             if (Actor_GetOwner() != 1) {
                 g_CurrentActor->unk_93 = GFX_AllocPaletteFade(g_Task, (code + CUR(sub))[1], (code + CUR(sub))[2], (code + CUR(sub))[3], (code + CUR(sub))[4]);
             } else {
-                g_Game.current->unk_13D = GFX_AllocPaletteFade(g_Task, (code + CUR(sub))[1], (code + CUR(sub))[2], (code + CUR(sub))[3], (code + CUR(sub))[4]);
+                g_Game.current->palette_fade = GFX_AllocPaletteFade(g_Task, (code + CUR(sub))[1], (code + CUR(sub))[2], (code + CUR(sub))[3], (code + CUR(sub))[4]);
             }
             CUR(sub) += 4;
             break;
@@ -32,10 +32,10 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
                 g_PaletteFades[g_CurrentActor->unk_93].offset.g += (code + CUR(sub))[2];
                 slot = g_CurrentActor->unk_93;
             } else {
-                slot = g_Game.current->unk_13D;
+                slot = g_Game.current->palette_fade;
                 g_PaletteFades[slot].offset.r += (code + CUR(sub))[1];
-                g_PaletteFades[g_Game.current->unk_13D].offset.g += (code + CUR(sub))[2];
-                slot = g_Game.current->unk_13D;
+                g_PaletteFades[g_Game.current->palette_fade].offset.g += (code + CUR(sub))[2];
+                slot = g_Game.current->palette_fade;
             }
             g_PaletteFades[slot].offset.b += (code + CUR(sub))[3];
             CUR(sub) += 3;
@@ -47,10 +47,10 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
                 g_PaletteFades[g_CurrentActor->unk_93].offset.g -= (code + CUR(sub))[2];
                 slot = g_CurrentActor->unk_93;
             } else {
-                slot = g_Game.current->unk_13D;
+                slot = g_Game.current->palette_fade;
                 g_PaletteFades[slot].offset.r -= (code + CUR(sub))[1];
-                g_PaletteFades[g_Game.current->unk_13D].offset.g -= (code + CUR(sub))[2];
-                slot = g_Game.current->unk_13D;
+                g_PaletteFades[g_Game.current->palette_fade].offset.g -= (code + CUR(sub))[2];
+                slot = g_Game.current->palette_fade;
             }
             g_PaletteFades[slot].offset.b -= (code + CUR(sub))[3];
             CUR(sub) += 3;

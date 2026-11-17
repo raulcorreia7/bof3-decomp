@@ -80,7 +80,7 @@ MATCH void func_801EEEC0(void) {
 MATCH void func_801EF03C(void) {
     if (g_Task->param.unk_0B == 7) {
         Battle_MarkDamaged(g_Battle.target_selector);
-        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+        g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
         Effect_Reset();
     }
 }

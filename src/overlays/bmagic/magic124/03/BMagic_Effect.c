@@ -41,8 +41,8 @@ MATCH void func_801EEDD8(void) {
     WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
     Battle_ProjectRange();
     func_800B0118();
-    g_Task->unk_2E.half += g_Task->unk_0C;
-    g_Task->unk_30.half += g_Task->unk_10;
+    g_Task->unk_2E.value += g_Task->unk_0C;
+    g_Task->unk_30.value += g_Task->unk_10;
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 8;
     g_Task->timer        = 16;
@@ -91,8 +91,8 @@ MATCH void func_801EF0B0(void) {
         poly = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(poly);
         SetSemiTrans(poly, 1);
-        setXY3(poly, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + ((rsin(i << 9) * radius) >> 12), g_Task->unk_30.half + ((rcos(i << 9) * radius) >> 12),
-               g_Task->unk_2E.half + ((rsin((i + 1) << 9) * radius) >> 12), g_Task->unk_30.half + ((rcos((i + 1) << 9) * radius) >> 12));
+        setXY3(poly, g_Task->unk_2E.value, g_Task->unk_30.value, g_Task->unk_2E.value + ((rsin(i << 9) * radius) >> 12), g_Task->unk_30.value + ((rcos(i << 9) * radius) >> 12),
+               g_Task->unk_2E.value + ((rsin((i + 1) << 9) * radius) >> 12), g_Task->unk_30.value + ((rcos((i + 1) << 9) * radius) >> 12));
         setRGB0(poly, red, green, blue);
         setRGB1(poly, 1, 1, 1);
         setRGB2(poly, 1, 1, 1);
@@ -140,11 +140,11 @@ MATCH void func_801EF3FC(void) {
         Battle_CenterCamera();
         Battle_ProjectRange();
         battler                      = g_BattleEffectBattler;
-        g_ScratchPad.cells.halves[6] = g_Task->unk_2E.half;
-        g_ScratchPad.cells.halves[7] = g_Task->unk_30.half;
-        g_ScratchPad.cells.halves[4] = g_Task->unk_2E.half = battler->unk_2E.half;
-        g_ScratchPad.cells.halves[5] = g_Task->unk_30.half = battler->unk_30.half;
-        g_Task->unk_14                                     = ratan2(g_ScratchPad.cells.halves[6] - g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[7] - g_ScratchPad.cells.halves[5]);
+        g_ScratchPad.cells.halves[6] = g_Task->unk_2E.value;
+        g_ScratchPad.cells.halves[7] = g_Task->unk_30.value;
+        g_ScratchPad.cells.halves[4] = g_Task->unk_2E.value = battler->unk_2E.value;
+        g_ScratchPad.cells.halves[5] = g_Task->unk_30.value = battler->unk_30.value;
+        g_Task->unk_14                                      = ratan2(g_ScratchPad.cells.halves[6] - g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[7] - g_ScratchPad.cells.halves[5]);
         if (g_Task->unk_04 & 1) {
             g_Task->unk_14 += (rand() & 7) << 6;
         } else {
@@ -259,8 +259,8 @@ MATCH void func_801F03E0(void) {
         poly = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(poly);
         SetSemiTrans(poly, 1);
-        setXY3(poly, g_Task->unk_2E.half, g_Task->unk_30.half, g_Task->unk_2E.half + ((rsin(i << 9) * radius) >> 12), g_Task->unk_30.half + ((rcos(i << 9) * radius) >> 12),
-               g_Task->unk_2E.half + ((rsin((i + 1) << 9) * radius) >> 12), g_Task->unk_30.half + ((rcos((i + 1) << 9) * radius) >> 12));
+        setXY3(poly, g_Task->unk_2E.value, g_Task->unk_30.value, g_Task->unk_2E.value + ((rsin(i << 9) * radius) >> 12), g_Task->unk_30.value + ((rcos(i << 9) * radius) >> 12),
+               g_Task->unk_2E.value + ((rsin((i + 1) << 9) * radius) >> 12), g_Task->unk_30.value + ((rcos((i + 1) << 9) * radius) >> 12));
         setRGB0(poly, centre, centre, centre);
         setRGB1(poly, red, green, blue);
         setRGB2(poly, red, green, blue);
@@ -288,9 +288,9 @@ MATCH void func_801F05B4(void) {
         poly = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(poly);
         SetSemiTrans(poly, 1);
-        setXY4(poly, g_Task->unk_2E.half + ((rsin(i << 9) * outer) >> 12), g_Task->unk_30.half + ((rcos(i << 9) * outer) >> 12), g_Task->unk_2E.half + ((rsin((i + 1) << 9) * outer) >> 12),
-               g_Task->unk_30.half + ((rcos((i + 1) << 9) * outer) >> 12), g_Task->unk_2E.half + ((rsin(i << 9) * inner) >> 12), g_Task->unk_30.half + ((rcos(i << 9) * inner) >> 12),
-               g_Task->unk_2E.half + ((rsin((i + 1) << 9) * inner) >> 12), g_Task->unk_30.half + ((rcos((i + 1) << 9) * inner) >> 12));
+        setXY4(poly, g_Task->unk_2E.value + ((rsin(i << 9) * outer) >> 12), g_Task->unk_30.value + ((rcos(i << 9) * outer) >> 12), g_Task->unk_2E.value + ((rsin((i + 1) << 9) * outer) >> 12),
+               g_Task->unk_30.value + ((rcos((i + 1) << 9) * outer) >> 12), g_Task->unk_2E.value + ((rsin(i << 9) * inner) >> 12), g_Task->unk_30.value + ((rcos(i << 9) * inner) >> 12),
+               g_Task->unk_2E.value + ((rsin((i + 1) << 9) * inner) >> 12), g_Task->unk_30.value + ((rcos((i + 1) << 9) * inner) >> 12));
         setRGB0(poly, 1, 1, 1);
         setRGB1(poly, 1, 1, 1);
         setRGB2(poly, red, green, blue);

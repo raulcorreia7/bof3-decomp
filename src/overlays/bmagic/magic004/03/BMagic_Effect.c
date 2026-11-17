@@ -29,12 +29,12 @@ MATCH void func_801EEC98(void) {
     func_801EF490();
     slot = Battle_AllocEffect(1, 70) & BYTE_MASK;
     Effect_CopyActiveBattlerToSlot(slot);
-    owner                               = g_Task;
-    g_BattleEffects[slot].header.mode   = 0;
-    g_BattleEffects[slot].header.step   = 0;
-    g_BattleEffects[slot].unk_06        = 1;
-    g_BattleEffects[slot].handler_index = 70;
-    g_BattleEffects[slot].target.party  = owner;
+    owner                              = g_Task;
+    g_BattleEffects[slot].header.mode  = 0;
+    g_BattleEffects[slot].header.step  = 0;
+    g_BattleEffects[slot].unk_06       = 1;
+    g_BattleEffects[slot].step_index   = 70;
+    g_BattleEffects[slot].target.party = owner;
     g_Task->param.unk_0B++;
     slot                               = Battle_AllocEffect(1, 70) & BYTE_MASK;
     parent                             = g_Task;
@@ -44,7 +44,7 @@ MATCH void func_801EEC98(void) {
     g_BattleEffects[slot].unk_04       = g_Task->unk_04;
     g_Task->param.unk_0B++;
     g_BattleEffectBattler->header.flags |= ACTOR_FLAG_HIDDEN;
-    g_Battle.state |= BATTLE_STATE_DAMAGE_APPLIED;
+    g_Battle.flags |= BATTLE_STATE_DAMAGE_APPLIED;
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
     for (; i < AREA_PALETTE_COLORS; i++) {
         *dst++ = *src++;
@@ -129,7 +129,7 @@ MATCH void func_801EF3E0(void) {
     if (!(Battle_SlotIsBlocked(g_Battle.target_selector) & BYTE_MASK) && battler->header.mode == 6) {
         return;
     }
-    g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+    g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
     Effect_Reset();
 }
 
@@ -251,14 +251,14 @@ MATCH void func_801EFBEC(void) {
         g_Task->unk_28 = 0;
         g_Task->unk_24 = 4;
     }
-    g_Task->unk_5D      = 0;
-    g_Task->unk_5E      = 0;
-    g_Task->unk_5F      = 0;
-    g_Task->unk_5C      = 0;
-    g_Task->unk_2A      = 0;
-    g_Task->unk_29      = 4;
-    g_Task->unk_2C.half = 0;
-    g_Task->unk_2B      = 1;
+    g_Task->unk_5D       = 0;
+    g_Task->unk_5E       = 0;
+    g_Task->unk_5F       = 0;
+    g_Task->unk_5C       = 0;
+    g_Task->unk_2A       = 0;
+    g_Task->unk_29       = 4;
+    g_Task->unk_2C.value = 0;
+    g_Task->unk_2B       = 1;
     Actor_SelectScript(0);
     g_Task->unk_09 = D_801EFE34[g_Task->unk_04];
     g_Task->header.step += 1;

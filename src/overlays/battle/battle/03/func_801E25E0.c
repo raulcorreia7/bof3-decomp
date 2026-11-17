@@ -7,7 +7,7 @@ MATCH void func_801E25E0(u8 battler) {
     EnemyBattler* enemy;
 
     g_Battle.action_type = (D_800B51F8[g_BattleEnemyBattlers[battler].choice_ai] >> ((rand() & 3) * 2)) & 3;
-    if ((g_Battle.state & BATTLE_STATE_OVER) && g_BattleEnemyBattlers[battler].stats.intelligence < 2) {
+    if ((g_Battle.flags & BATTLE_STATE_OVER) && g_BattleEnemyBattlers[battler].stats.intelligence < 2) {
         g_Battle.action_type = 0;
     }
     switch (g_Battle.action_type) {

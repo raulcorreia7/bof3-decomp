@@ -13,7 +13,7 @@ MATCH void func_801EEE4C(void) {
     }
     {
         /* Base held once for the read-modify-write, as in retail. */
-        u8* counter = (u8*)&g_Battle.ui_state;
+        u8* counter = (u8*)&g_Battle.ui_mode;
 
         *counter += 1;
     }

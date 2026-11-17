@@ -66,28 +66,28 @@ MATCH void func_801EEFC8(void) {
     PartyMember* work;
 
     if (--g_Task->unk_09 == 0) {
-        g_Task->unk_14      = TO_COORD(0x780);
-        g_Task->unk_20      = TO_COORD(96);
-        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
-        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
-        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + g_Task->unk_14;
-        g_Task->unk_25      = 0x1D;
-        g_Task->unk_26      = 0;
-        g_Task->unk_27      = 0x1A;
-        g_Task->unk_28      = 1;
-        work                = g_Task;
-        work->unk_48        = 2;
-        work->scale.x       = 0x10000;
-        work->scale.y       = 0x10000;
-        g_Task->unk_5D      = 0;
-        g_Task->unk_5E      = 0;
-        g_Task->unk_5F      = 0;
-        g_Task->unk_5C      = 0;
-        g_Task->unk_2A      = 0;
-        g_Task->unk_29      = 4;
-        g_Task->unk_2C.half = 0;
-        g_Task->unk_2B      = 1;
-        g_Task->unk_24      = 0;
+        g_Task->unk_14       = TO_COORD(0x780);
+        g_Task->unk_20       = TO_COORD(96);
+        g_Task->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
+        g_Task->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
+        g_Task->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed + g_Task->unk_14;
+        g_Task->unk_25       = 0x1D;
+        g_Task->unk_26       = 0;
+        g_Task->unk_27       = 0x1A;
+        g_Task->unk_28       = 1;
+        work                 = g_Task;
+        work->unk_48         = 2;
+        work->scale.x        = 0x10000;
+        work->scale.y        = 0x10000;
+        g_Task->unk_5D       = 0;
+        g_Task->unk_5E       = 0;
+        g_Task->unk_5F       = 0;
+        g_Task->unk_5C       = 0;
+        g_Task->unk_2A       = 0;
+        g_Task->unk_29       = 4;
+        g_Task->unk_2C.value = 0;
+        g_Task->unk_2B       = 1;
+        g_Task->unk_24       = 0;
         Actor_SelectScript(0U);
         g_Task->unk_09 = 0x10;
         g_Task->header.step += 1;
@@ -345,9 +345,9 @@ MATCH void func_801F0504(void) {
 MATCH void func_801F0584(void) {
     PartyMember* src;
 
-    src                 = g_BattleEffectBattler;
-    g_Task->unk_2E.half = src->unk_2E.half;
-    g_Task->unk_30.half = src->unk_30.half;
+    src                  = g_BattleEffectBattler;
+    g_Task->unk_2E.value = src->unk_2E.value;
+    g_Task->unk_30.value = src->unk_30.value;
     func_800A9610(g_Battle.target_selector, 16);
     g_Task->param.unk_0B = 8;
     g_Task->unk_09       = 0;
@@ -417,8 +417,8 @@ MATCH void func_801F07A8(void) {
     g_ScratchPad.cells.halves[5] = work->unk_09 * 15;
     g_ScratchPad.cells.halves[6] = work->unk_09 * 8;
     g_ScratchPad.cells.halves[7] = work->unk_09 * 8;
-    x                            = work->unk_2E.half - 0x100;
-    y                            = work->unk_30.half;
+    x                            = work->unk_2E.value - 0x100;
+    y                            = work->unk_30.value;
     for (i = 0; (u32)(i & BYTE_MASK) < 32; i++) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);

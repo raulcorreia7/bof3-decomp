@@ -41,8 +41,8 @@ MATCH s32 Area_GetActorFacingStepX(void) {
         }
     }
     if (found != 0) {
-        g_Game.current->u.field.counter_11C.u8_value = 3;
-        g_Task->timer                                = 0;
+        g_Game.current->u.field.counter.unsigned_value = 3;
+        g_Task->timer                                  = 0;
     }
     return found;
 }

@@ -237,8 +237,8 @@ MATCH void func_801EF7CC(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     g_ScratchPad.cells.halves[2] = 0;
     g_ScratchPad.cells.halves[0] = 16;
-    x                            = g_Task->unk_2E.half;
-    y                            = g_Task->unk_30.half;
+    x                            = g_Task->unk_2E.value;
+    y                            = g_Task->unk_30.value;
     g_ScratchPad.cells.halves[3] = g_Task->unk_09 * 12;
     g_ScratchPad.cells.halves[4] = g_Task->unk_09 * 2;
     g_ScratchPad.cells.halves[5] = g_Task->unk_09 * 2;
@@ -273,8 +273,8 @@ MATCH void func_801EFA2C(void) {
     g_ScratchPad.cells.halves[4] = g_Task->unk_09;
     g_ScratchPad.cells.halves[5] = g_Task->unk_09;
     g_ScratchPad.cells.halves[6] = g_Task->unk_09 * 14;
-    x                            = g_Task->unk_2E.half;
-    y                            = g_Task->unk_30.half;
+    x                            = g_Task->unk_2E.value;
+    y                            = g_Task->unk_30.value;
     for (i = 0; i < 16; i++) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
@@ -310,8 +310,8 @@ MATCH void func_801EFD04(void) {
     g_ScratchPad.cells.halves[4] = 1;
     g_ScratchPad.cells.halves[5] = g_Task->timer * 6;
     g_ScratchPad.cells.halves[6] = g_Task->timer * 8;
-    x                            = g_Task->unk_2E.half;
-    y                            = g_Task->unk_30.half;
+    x                            = g_Task->unk_2E.value;
+    y                            = g_Task->unk_30.value;
     for (i = 0; i < 16; i++) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
@@ -347,8 +347,8 @@ MATCH void func_801EFFE8(void) {
     g_ScratchPad.cells.halves[4] = 1;
     g_ScratchPad.cells.halves[5] = g_Task->timer * 5;
     g_ScratchPad.cells.halves[6] = g_Task->timer * 8;
-    x                            = g_Task->unk_2E.half;
-    y                            = g_Task->unk_30.half;
+    x                            = g_Task->unk_2E.value;
+    y                            = g_Task->unk_30.value;
     for (i = 0; i < 16; i++) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
@@ -402,8 +402,8 @@ MATCH void func_801F0908(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     g_ScratchPad.cells.halves[2] = 0;
     g_ScratchPad.cells.halves[0] = 24;
-    x                            = g_Task->unk_2E.half;
-    y                            = g_Task->unk_30.half;
+    x                            = g_Task->unk_2E.value;
+    y                            = g_Task->unk_30.value;
     g_ScratchPad.cells.halves[3] = g_Task->unk_09 * g_Task->param.unk_0B;
     g_ScratchPad.cells.halves[4] = g_Task->unk_09 * D_801F0B9C[g_Task->param.unk_0B].r;
     g_ScratchPad.cells.halves[5] = g_Task->unk_09;

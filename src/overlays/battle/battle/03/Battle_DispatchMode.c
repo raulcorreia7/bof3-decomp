@@ -2,7 +2,7 @@
 
 /* func_801D112C */
 MATCH void Battle_DispatchMode(void) {
-    BattlePhases handlers;
+    BattleModes handlers;
 
     handlers = g_BattlePhases;
     if (BATTLE_IS_SCRIPTED()) {
@@ -10,5 +10,5 @@ MATCH void Battle_DispatchMode(void) {
             g_Battle.boss_event_hook(BOSS_EVENT_TICK);
         }
     }
-    handlers.handlers[g_Battle.phase.mode]();
+    handlers.modes[g_Battle.phase.mode]();
 }

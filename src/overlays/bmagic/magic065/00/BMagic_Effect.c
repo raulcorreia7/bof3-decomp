@@ -34,7 +34,7 @@ MATCH void func_801EF134(void) {
 
     if (D_801EC2E4 == 0) {
         if (g_Task->timer == 56) {
-            item = g_Task->unk_2C.half;
+            item = g_Task->unk_2C.value;
             BMagic_SetTextItemName(item & BYTE_MASK, item >> 8);
         }
         func_801DE8C0(1, 0x1E, Message_GetText(g_Task->timer));
@@ -46,7 +46,7 @@ MATCH void func_801EF1CC(void) {
     u16* battle_flags;
 
     if (D_801EC2E4 == 0) {
-        battle_flags = &g_Battle.state;
+        battle_flags = &g_Battle.flags;
         *battle_flags |= 4;
         Effect_Reset();
     }

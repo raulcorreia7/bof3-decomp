@@ -6,7 +6,7 @@ MATCH void PlChar_PollScriptRequest(void) {
             g_Task->option_flags = 0;
         }
     } else if ((Actor_StepAnimOnce() & BYTE_MASK) && (g_SpawnedActors[g_Task->param.actor_slot].header.flags == 0)) {
-        g_Task->unk_2B                            = 0;
-        g_Game.current->u.field.mode_12B.s8_value = 0;
+        g_Task->unk_2B                     = 0;
+        g_Game.current->u.field.mode.value = 0;
     }
 }

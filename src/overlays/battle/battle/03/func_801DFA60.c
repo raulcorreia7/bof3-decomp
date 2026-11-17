@@ -14,7 +14,7 @@ MATCH void func_801DFA60(void) {
         if ((func_800A8F58() & BYTE_MASK) == 0) {
             chance = g_Game.current->chr.stats.critical_chance;
             if ((RANDOM_PERCENT()) < chance) {
-                gate = &g_Battle.state;
+                gate = &g_Battle.flags;
                 *gate |= 0x80;
                 Battle_PlayEffectCue(3);
             } else {

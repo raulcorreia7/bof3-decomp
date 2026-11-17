@@ -32,7 +32,7 @@ MATCH void func_801EECE4(void) {
 
     Battle_ProjectRange();
     ticks = g_Task->param.unk_0B;
-    g_Task->unk_2E.half -= 0x24;
+    g_Task->unk_2E.value -= 0x24;
     if (ticks != 0) {
         func_801EEF5C();
     } else {
@@ -42,7 +42,7 @@ MATCH void func_801EECE4(void) {
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
         Battle_MarkDamaged(g_Battle.target_selector);
-        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+        g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
         Effect_Reset();
     }
 }

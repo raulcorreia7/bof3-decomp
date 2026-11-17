@@ -35,10 +35,10 @@ MATCH void func_801B0C88(void) {
         }
     check_button:
         if (!(g_Game.walk_flags & 0x20)) {
-            g_Game.current->u.field.counter_11C.s8_value = 4;
+            g_Game.current->u.field.counter.value = 4;
             return;
         }
     store3:
-        g_Game.current->u.field.counter_11C.s8_value = 3;
+        g_Game.current->u.field.counter.value = 3;
     }
 }

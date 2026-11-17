@@ -11,16 +11,16 @@ MATCH void func_801B6BC8(void) {
         g_GameState->u.field.countdown = (delay - 1);
         return;
     }
-    sel = func_801A8D38(&g_GameState->u.field.flags_118, g_GameState->u.field.index_124);
+    sel = func_801A8D38(&g_GameState->u.field.flags, g_GameState->u.field.index);
     if (sel != GAME_NONE) {
-        flags = g_GameState->u.field.flags_118;
+        flags = g_GameState->u.field.flags;
         if (flags & 0x8) {
-            g_GameState->u.field.flags_118 = (flags & 0xF7);
+            g_GameState->u.field.flags = (flags & 0xF7);
             if (!(g_SceneState.flags_01 & SCENE_STATE_SCRIPT_ACTIVE)) {
                 g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
             }
             Actor_RequestScript(g_Task->direction);
-            g_Game.current->status.field.flags_12C.u8_value &= 0xFB;
+            g_Game.current->status.field.flags.unsigned_value &= 0xFB;
             func_801C3204();
             g_Task->header.mode = 1;
             ACTOR_CLEAR_STEP();
@@ -40,7 +40,7 @@ MATCH void func_801B6BC8(void) {
                 return;
             }
         }
-        flags = g_GameState->u.field.flags_118;
+        flags = g_GameState->u.field.flags;
         if (flags & 0x2) {
             g_Task->direction = sel;
             func_801C2438();
@@ -75,7 +75,7 @@ MATCH void func_801B6BC8(void) {
             work->direction = sel;
             g_Task->unk_03  = 1;
         }
-        if ((g_Game.current->u.field.flags_118 & 0x40) == 0) {
+        if ((g_Game.current->u.field.flags & 0x40) == 0) {
             Actor_RequestScript(sel);
         }
     }

@@ -30,7 +30,7 @@ NON_MATCHING void func_801E0F78(void) {
     g_MenuPanelTasks[1].pos.x   = 0x70;
     g_MenuPanelTasks[0].pos.y   = panel_y;
     g_MenuPanelTasks[1].pos.y   = panel_y;
-    D_8014833A[0].kind_00       = 0;
+    D_8014833A[0].type          = 0;
     g_MenuPanelTasks[1].panel   = handler;
     g_MenuPanelTasks[1].mode    = panel_state;
     g_MenuPanelTasks[1].state   = panel_state;

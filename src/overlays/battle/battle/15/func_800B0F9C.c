@@ -54,7 +54,7 @@ MATCH void func_800B0F9C(void) {
         }
     }
     step = g_Battle.ui_step;
-    if ((step == 6) && (g_Battle.ui_state != 5)) {
+    if ((step == 6) && (g_Battle.ui_mode != 5)) {
         cursor = g_MenuCurrentPanel->u.battle.cursor;
         func_800B1F04((g_MenuCurrentPanel->pos.x + 5) & HALF_MASK, (g_MenuCurrentPanel->pos.y + (cursor * 32 + 0x18)) & HALF_MASK, 121, 32, 0, step);
     } else {

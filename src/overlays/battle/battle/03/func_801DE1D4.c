@@ -33,14 +33,14 @@ MATCH void func_801DE1D4(void) {
             (&g_BattleEffects[(u8)slot])->target.enemy    = (EnemyBattler*)g_BattleEnemies + index;
             g_Task                                        = (EnemyBattler*)g_BattleEnemies + index;
         }
-        (&g_BattleEffects[(u8)slot])->handler_index = 7;
-        (&g_BattleEffects[(u8)slot])->unk_06        = 0;
-        (&g_BattleEffects[(u8)slot])->header.mode   = 0;
-        (&g_BattleEffects[(u8)slot])->header.step   = 0;
-        (&g_BattleEffects[(u8)slot])->unk_29        = 3;
-        (&g_BattleEffects[(u8)slot])->unk_5C        = 0;
-        (&g_BattleEffects[(u8)slot])->unk_5D        = 0;
-        (&g_BattleEffects[(u8)slot])->unk_5F        = 0;
-        (&g_BattleEffects[(u8)slot])->unk_5E        = 0;
+        (&g_BattleEffects[(u8)slot])->step_index  = 7;
+        (&g_BattleEffects[(u8)slot])->unk_06      = 0;
+        (&g_BattleEffects[(u8)slot])->header.mode = 0;
+        (&g_BattleEffects[(u8)slot])->header.step = 0;
+        (&g_BattleEffects[(u8)slot])->unk_29      = 3;
+        (&g_BattleEffects[(u8)slot])->unk_5C      = 0;
+        (&g_BattleEffects[(u8)slot])->unk_5D      = 0;
+        (&g_BattleEffects[(u8)slot])->unk_5F      = 0;
+        (&g_BattleEffects[(u8)slot])->unk_5E      = 0;
     }
 }

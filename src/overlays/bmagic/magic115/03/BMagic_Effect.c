@@ -89,7 +89,7 @@ MATCH void func_801EF130(void) {
     g_Task->unk_5C             = 0;
     g_Task->unk_2A             = 0;
     g_Task->unk_29             = 4;
-    g_Task->unk_2C.half        = 0;
+    g_Task->unk_2C.value       = 0;
     g_Task->unk_2B             = 0;
     Actor_SelectScript(0U);
     g_Task->unk_09 = 0xFF;
@@ -166,22 +166,22 @@ MATCH void func_801EF5F8(void) {
 }
 
 MATCH void func_801EF690(void) {
-    g_Task->unk_25      = 0x1D;
-    g_Task->unk_26      = 0;
-    g_Task->scale.x     = 0x10000;
-    g_Task->scale.y     = 0x10000;
-    g_Task->unk_48      = 1;
-    g_Task->unk_27      = 0xA0;
-    g_Task->unk_28      = 0;
-    g_Task->unk_24      = 4;
-    g_Task->unk_5D      = 0;
-    g_Task->unk_5E      = 0;
-    g_Task->unk_5F      = 0;
-    g_Task->unk_5C      = 0;
-    g_Task->unk_2A      = 0;
-    g_Task->unk_29      = 4;
-    g_Task->unk_2C.half = 0;
-    g_Task->unk_2B      = 0;
+    g_Task->unk_25       = 0x1D;
+    g_Task->unk_26       = 0;
+    g_Task->scale.x      = 0x10000;
+    g_Task->scale.y      = 0x10000;
+    g_Task->unk_48       = 1;
+    g_Task->unk_27       = 0xA0;
+    g_Task->unk_28       = 0;
+    g_Task->unk_24       = 4;
+    g_Task->unk_5D       = 0;
+    g_Task->unk_5E       = 0;
+    g_Task->unk_5F       = 0;
+    g_Task->unk_5C       = 0;
+    g_Task->unk_2A       = 0;
+    g_Task->unk_29       = 4;
+    g_Task->unk_2C.value = 0;
+    g_Task->unk_2B       = 0;
     Actor_SelectScript(1U);
     g_Task->header.step += 1;
 }

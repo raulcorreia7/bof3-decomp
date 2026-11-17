@@ -212,9 +212,9 @@ s32   Party_JoinMember(s32 char_id);
 void  Party_RemoveMember(s32 character_id);
 /* Scene_RunScenario */
 /* func_801C1DF0 */
-void  Scene_RunScenario(s32 handler_index);
+void  Scene_RunScenario(s32 step_index);
 /* func_801C1E3C */
-void  func_801C1E3C(s32 handler_index);
+void  func_801C1E3C(s32 step_index);
 /* func_801C2438 */
 void  func_801C2438(void);
 /* func_801C24D0 */

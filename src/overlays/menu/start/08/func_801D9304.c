@@ -1,5 +1,5 @@
 #include "start_08.h"
 
-MATCH void func_801D9304(s32 handler_index) {
-    D_801EC4C4[handler_index & BYTE_MASK]();
+MATCH void func_801D9304(s32 step_index) {
+    D_801EC4C4[step_index & BYTE_MASK]();
 }

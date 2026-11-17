@@ -53,6 +53,6 @@ MATCH void func_8009B488(void) {
             count++;
         } while ((u32)(count & BYTE_MASK) < g_Battle.party_count);
     }
-    phase = &g_Battle.ui_state;
+    phase = &g_Battle.ui_mode;
     *phase += 1;
 }

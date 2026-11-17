@@ -7,7 +7,7 @@ MATCH void Effect_CountDownAndMarkDamaged(void) {
     g_Task->unk_09 = timer;
     if (timer == 0) {
         Battle_MarkDamaged(g_Battle.target_selector);
-        g_Battle.state |= BATTLE_STATE_EFFECT_PLAYING;
+        g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
         Effect_Reset();
     }
 }
