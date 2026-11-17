@@ -15,11 +15,13 @@ NON_MATCHING void func_801D0F2C(u8 start) {
     s32 idx;
     u8* row;
 
-    g_SaveAreaId      = D_801EBA44[start].area;
-    g_SaveEntryX      = D_801EBA44[start].entry_x;
+    g_SaveAreaId = D_801EBA44[start].area;
+    g_SaveEntryX = D_801EBA44[start].entry_x;
+    /* FAKE: FAKE_ORDER_FENCE keeps the entry index ahead of the scratchpad address; retail forms the index first. */
+    FAKE_ORDER_FENCE();
+    sp                = SP(0);
     g_SaveEntryY      = D_801EBA44[start].entry_y;
     g_SaveEntryFacing = D_801EBA44[start].facing;
-    sp                = SP(0);
     src               = D_801EBA44[start].party;
     for (i = 0; i < 3; i++) {
         member = *src++;
