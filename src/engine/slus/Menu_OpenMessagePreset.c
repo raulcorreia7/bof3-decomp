@@ -4,7 +4,8 @@
  * lookup keyed by the D_801490CE byte, packs the panel's window fields and
  * advances its state byte.
  */
-MATCH void func_80159A90(void) {
+/* func_80159A90 */
+MATCH void Menu_OpenMessagePreset(void) {
     /* FAKE: pins panel to v1. */
     FAKE_REG(MenuPanelTask*, panel, "v1");
     u8* mode;

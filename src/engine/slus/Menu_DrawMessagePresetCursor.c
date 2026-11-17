@@ -5,7 +5,8 @@
  * entry the panel index byte D_801490C5 selects and that entry's scale halfword
  * times g_MessageChoice.
  */
-MATCH void func_8015A1D8(void) {
+/* func_8015A1D8 */
+MATCH void Menu_DrawMessagePresetCursor(void) {
     MenuPanelTask* panel;
     s32            index;
     s32            row_offset;

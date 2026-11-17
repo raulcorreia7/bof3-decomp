@@ -4,8 +4,9 @@
  * D_801490CF table and lays out the panel box from that count and
  * D_801490C6.
  */
+/* func_8015A554 */
 #ifdef NON_MATCHING
-NON_MATCHING void func_8015A554(void) {
+NON_MATCHING void Menu_LayoutMessageChoice(void) {
     u8* cursor;
     u8  flag;
     u8  count;
@@ -62,5 +63,5 @@ NON_MATCHING void func_8015A554(void) {
     }
 }
 #else
-INCLUDE_ASM(func_8015A554);
+INCLUDE_ASM(Menu_LayoutMessageChoice);
 #endif

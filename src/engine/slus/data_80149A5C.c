@@ -1,7 +1,7 @@
 #include "slus.h"
 
 const MessageStateSteps g_MessageStateSteps = {{
-    func_8015083C,
+    Message_RunScript,
     UI_TickChoiceTimer,
     func_80150E48,
     func_80150F3C,

@@ -1,7 +1,7 @@
 #include "slus.h"
 
 const MenuPanelFuncs g_MenuPanels = {{
-    func_80158F80,
+    Menu_UpdateMessagePanel,
     (Callback)0x801D2F9Cu,
     (Callback)0x80199558u,
     (Callback)0x801E9074u,

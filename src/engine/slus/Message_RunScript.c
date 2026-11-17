@@ -10,8 +10,9 @@
  * it in state 3, 3/4/7/8 call a sub-script (with its return cursor kept), 0xA queues a cue, 0xB ends the step in
  * state 1, 0xF/0x14/0x16 load per-channel fields, 0x10/0x11 toggle bit 0x10; other opcodes read the pad state.
  */
+/* func_8015083C */
 #ifdef NON_MATCHING
-NON_MATCHING void func_8015083C(void) {
+NON_MATCHING void Message_RunScript(void) {
     u8  loop;
     u8* chan;
     u8* s2;
@@ -167,5 +168,5 @@ NON_MATCHING void func_8015083C(void) {
     } while (loop);
 }
 #else
-INCLUDE_ASM(func_8015083C);
+INCLUDE_ASM(Message_RunScript);
 #endif

@@ -5,7 +5,8 @@
  * value; completing both axes steps the panel state, otherwise the box is
  * redrawn through UI_DrawBoxOutline.
  */
-MATCH void func_80159580(void) {
+/* func_80159580 */
+MATCH void Menu_ShrinkMessagePanel(void) {
     MenuPanelTask* task;
     s32            count;
 
