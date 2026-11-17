@@ -2,7 +2,7 @@
 
 typedef union PaletteTint {
     u32 raw;
-    s8  bytes[4];
+    s8  deltas[4];
 } PaletteTint;
 
 /* reads one palette-tint record: when its tag at +0 resolves through func_80155E7C it forwards the mask
@@ -27,9 +27,9 @@ MATCH void Area_ReadTintRecord(u8* record) {
     hi = masks >> 16;
     if (found) {
         value.raw = *(u32*)record;
-        red       = value.bytes[0];
-        green     = value.bytes[1];
-        blue      = value.bytes[2];
+        red       = value.deltas[0];
+        green     = value.deltas[1];
+        blue      = value.deltas[2];
     } else {
         blue  = 0;
         green = 0;
