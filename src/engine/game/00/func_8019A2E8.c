@@ -1,5 +1,5 @@
 #include "game_00.h"
 
-MATCH void func_8019A2E8(void) {
-    g_AreaHandlers[Game_FindArea() & BYTE_MASK].steps[3]();
+MATCH void WorldMap_StepScript(void) {
+    g_WorldMapRegions[WorldMap_FindRegion() & BYTE_MASK].script();
 }

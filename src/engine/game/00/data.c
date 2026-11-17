@@ -69,7 +69,7 @@ char D_801C7C34[5][8] = {"ITEM" T_END T_END T_END T_END, "WEAPON" T_END T_END, "
 u8* D_801C7C5C[5] = {(u8*)&D_801C7C34[0][0], (u8*)&D_801C7C34[1][0], (u8*)&D_801C7C34[2][0], (u8*)&D_801C7C34[3][0],
                      (u8*)&D_801C7C34[4][0]};
 
-Callback g_ActorTypes[187] = {func_8019A210,
+Callback g_ActorTypes[187] = {WorldMap_StepWalk,
                               func_801F6DC0,
                               func_801D0C98,
                               func_801D1B10,
@@ -83,7 +83,7 @@ Callback g_ActorTypes[187] = {func_8019A210,
                               func_801F8748,
                               func_801D2BF0,
                               func_801D3358,
-                              func_8019A258,
+                              WorldMap_StepEntry,
                               func_801D35CC,
                               func_801F8D70,
                               func_801F71C0,
@@ -91,7 +91,7 @@ Callback g_ActorTypes[187] = {func_8019A210,
                               func_8019A8B4,
                               func_801F6E70,
                               func_801F2C18,
-                              func_8019A2A0,
+                              WorldMap_StepFlock,
                               func_8019B364,
                               func_8019F98C,
                               func_8019A804,
@@ -157,7 +157,7 @@ Callback g_ActorTypes[187] = {func_8019A210,
                               func_801F3A64,
                               func_801F3064,
                               func_801F95D4,
-                              func_8019A2E8,
+                              WorldMap_StepScript,
                               func_801F2C30,
                               func_801F2C7C,
                               func_801F2CA0,
@@ -257,7 +257,7 @@ Callback g_ActorTypes[187] = {func_8019A210,
                               func_801F32C0,
                               func_801F7BA8};
 
-AreaSteps g_AreaHandlers[11] = {
+WorldMapRegion g_WorldMapRegions[WORLD_MAP_REGION_COUNT] = {
     {func_801F2EEC, func_801F45CC, func_801F4178, func_801F341C, func_801F4768, &D_801F4DA0, AREA_ID_YRAAL_WORLD_MAP, {0, 0, 0}},
     {func_801F2E20, func_801F4500, func_801F40AC, func_801F3350, func_801F469C, &D_801F4CC8, AREA_ID_YRAAL_WORLD_MAP_BEFORE_NUE, {0, 0, 0}},
     {func_801F2EEC, func_801F45CC, func_801F4178, func_801F341C, func_801F4768, &D_801F4DA4, AREA_ID_WYNDIA_WORLD_MAP, {0, 0, 0}},
@@ -320,7 +320,7 @@ Callback D_801C81C0[3] = {func_8019EB38, func_8019EC20, func_8019ED40};
 Callback D_801C81CC[4] = {func_8019F310, func_8019F384, func_8019F430, func_8019F4F8};
 
 Callback g_TaskModes[105] = {
-    func_8019F9D0,           func_801F7D04,           func_8019A370,           func_8019A370,           func_801F3120,           func_801F4CDC,           (Callback)func_801F2C04,
+    func_8019F9D0,           func_801F7D04,           WorldMap_DrawClouds,           WorldMap_DrawClouds,           func_801F3120,           func_801F4CDC,           (Callback)func_801F2C04,
     (Callback)func_801F2C04, func_801F31AC,           (Callback)func_801F2C04, func_801F37B0,           func_801F35FC,           (Callback)func_801F3944, func_801F3D60,
     func_801F2C1C,           func_801F3014,           func_801F2E98,           (Callback)func_801F2C04, (Callback)func_801F2C04, func_801F33B4,           func_80117A30,
     (Callback)func_801F2C04, func_801F3448,           func_801F3BD0,           func_801F4F00,           (Callback)func_801F2C04, func_801F52F8,           func_801F3F34,

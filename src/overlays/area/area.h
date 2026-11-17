@@ -45,12 +45,14 @@ typedef struct WorldMapMarker {
 
 ASSERT_SIZE(WorldMapMarker, 4);
 
-/* One 4-byte map point: the x and y bytes, then the class byte and a pad byte. */
+/* One 4-byte world map point: the cell x and y, then the destination area id
+ * (func_801B690C stores it in g_GameEntryAreaId) and the location kind (the
+ * Fishing_ShowLocation tables select their message set by it). */
 typedef struct WorldMapPoint {
-    u8 x;      /* 0x00 */
-    u8 y;      /* 0x01 */
-    u8 type;   /* 0x02 */
-    u8 unk_03; /* 0x03 */
+    u8 x;       /* 0x00 */
+    u8 y;       /* 0x01 */
+    u8 area_id; /* 0x02 */
+    u8 kind;    /* 0x03 */
 } WorldMapPoint;
 
 ASSERT_SIZE(WorldMapPoint, 4);

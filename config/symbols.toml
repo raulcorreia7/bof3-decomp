@@ -3171,8 +3171,8 @@ Game_UpdateShisuFrame = { addr = 0x80199418, type = "func", source = "Middle ent
 Menu_DrawPanelCursor = { addr = 0x80199678, type = "func", source = "Draws the menu panel cursor at the x and y of the current task root through Menu_DrawCursorSprite." }
 Menu_SlidePanelLeft = { addr = 0x8019973C, type = "func", source = "Moves the master panel 0x20 pixels left and clamps its x at 0x98." }
 Actor_DispatchAll = { addr = 0x8019A0E4, type = "func", source = "Runs g_ActorTypes[type] for each of the g_SpawnedActors entries whose header.flags is set." }
-Game_FindArea = { addr = 0x8019A194, type = "func", source = "Returns the index of the AreaHandler whose key_18 equals g_GameAreaId, or GAME_AREA_HANDLER_COUNT (11) when none matches." }
-Game_GetAreaMapPoints = { addr = 0x8019A1D4, type = "func", source = "Returns map_points_14 of the current area handler row (g_AreaHandlers indexed by Game_FindArea); func_801B690C searches those rows by actor cell." }
+WorldMap_FindRegion = { addr = 0x8019A194, type = "func", source = "Returns the index of the WorldMapRegion whose area id equals g_GameAreaId, or WORLD_MAP_REGION_COUNT (11) when none matches." }
+WorldMap_GetPoints = { addr = 0x8019A1D4, type = "func", source = "Returns map_points of the current world map region (g_WorldMapRegions indexed by WorldMap_FindRegion); func_801B690C searches those rows by actor cell." }
 Area_GetVx = { addr = 0x8019C344, type = "func", source = "the body returns g_Task->vx" }
 Game_RequestAreaChange = { addr = 0x8019FA28, type = "func", source = "Requests an area change: stores the area id and entry position in g_GameEntryAreaId, g_GameEntryPosX and g_GameEntryPosY and sets g_GameStateIndex to 5." }
 Area_IsCellBlocked = { addr = 0x801A20F8, type = "func", source = "Reports whether a map cell's terrain blocks movement." }
@@ -3305,8 +3305,8 @@ g_MenuTaskSteps = { addr = 0x801C7C24, size = 0x10, source = "4 handlers of the 
 D_801C7C34 = { addr = 0x801C7C34, size = 0x28, source = "The five menu category names ITEM, WEAPON, ARMOR, OPTION and VITAL, padded to eight bytes; D_801C7C5C points at each row." }
 D_801C7C5C = { addr = 0x801C7C5C, size = 0x14, source = "Pointers to the five menu category names D_801C7C34, picked by func_801999F8 through the menu task's unk_0A." }
 g_ActorTypes = { addr = 0x801C7C70, size = 0x2EC, source = "187 actor handlers, indexed by the type of each active g_SpawnedActors entry by Actor_DispatchAll; they live in the resident image and in the shared, area and scenario windows." }
-g_AreaHandlers = { addr = 0x801C7F5C, type = "AreaHandler", size = 0x134, source = "area-specific handlers and map points selected by Game_FindArea" }
-D_801C7F74 = { addr = 0x801C7F74, size = 0x1, alias = true, source = "The first byte of g_AreaHandlers, the handler id Game_FindArea compares as it scans the area rows." }
+g_WorldMapRegions = { addr = 0x801C7F5C, type = "WorldMapRegion", size = 0x134, source = "world map region steps and map points selected by WorldMap_FindRegion" }
+D_801C7F74 = { addr = 0x801C7F74, size = 0x1, alias = true, source = "The first byte of g_WorldMapRegions, the area id WorldMap_FindRegion compares as it scans the region rows." }
 D_801C8090 = { addr = 0x801C8090, size = 0xC, source = "The three mode handlers func_8019A3FC, func_8019A53C and func_8019A7D4 that func_8019A3B8 runs by g_Task->header.mode." }
 s_SceneHandlerIds = { addr = 0x801C809C, size = 0x8, source = "Scene handler id by entry; func_8019A3FC passes the entry for g_Task->unk_06 to the scene handler dispatcher." }
 D_801C80A4 = { addr = 0x801C80A4, size = 0x18, source = "The six handlers func_8019A53C runs by g_Task->unk_06: five share func_8019A580, one is func_8019A6AC and one func_8019A630." }
