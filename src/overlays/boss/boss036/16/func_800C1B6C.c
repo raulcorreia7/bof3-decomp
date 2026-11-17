@@ -1,7 +1,6 @@
 #include "boss036_16.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_800C1B6C(void) {
+MATCH void func_800C1B6C(void) {
     u32           effect_slot;
     u8            effect_index;
     u32           effect_offset;
@@ -11,20 +10,21 @@ NON_MATCHING void func_800C1B6C(void) {
     CopyWords16*  src;
     CopyWords16*  dst;
     CopyWords16*  end;
+    u32*          record;
 
-    if ((FIELD(u32, g_Task, 0) & 0xFFFF00) == 0x10700) {
+    record = (u32*)g_Task;
+    if ((record[0] & 0xFFFF00) == 0x10700) {
         effect_slot   = Battle_AllocEffect(3, 3);
         effect_index  = effect_slot & BYTE_MASK;
         effect_offset = effect_index * BATTLE_EFFECT_STRIDE;
         /* FAKE: retail reads the active enemy after computing the effect offset. */
         FAKE_BARRIER();
         enemy_index = g_Battle.active_battler;
-        /* FAKE: retail reads the effect base after the active enemy. */
-        FAKE_BARRIER();
         effect_base = (u8*)g_BattleEffects;
         dst         = (CopyWords16*)(effect_base + effect_offset);
         enemy_base  = g_BattleEnemyBattlers;
         /* FAKE: retail reads the enemy base before applying the party offset. */
+        FAKE_BARRIER();
         FAKE_BARRIER();
         enemy_index -= BATTLE_PARTY_CHARACTERS_COUNT;
         src = (CopyWords16*)&enemy_base[enemy_index];
@@ -44,6 +44,3 @@ NON_MATCHING void func_800C1B6C(void) {
         g_BattleEffects[effect_index].unk_29        = 3;
     }
 }
-#else
-INCLUDE_ASM(func_800C1B6C);
-#endif
