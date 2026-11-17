@@ -3,17 +3,17 @@
 #define g_Task ((PartyMember*)g_Task)
 
 MATCH void func_800C18E4(void) {
-    u32          slot;
-    s32          enemy;
-    CopyWords16* src;
-    CopyWords16* dst;
-    CopyWords16* end;
+    u32    slot;
+    s32    enemy;
+    Cpy16* src;
+    Cpy16* dst;
+    Cpy16* end;
 
     slot  = Battle_AllocEffect(3, 6);
-    dst   = (CopyWords16*)&g_BattleEffects[slot & BYTE_MASK];
+    dst   = (Cpy16*)&g_BattleEffects[slot & BYTE_MASK];
     enemy = g_Battle.active_battler;
     enemy -= 3;
-    src = (CopyWords16*)&g_BattleEnemyBattlers[enemy];
+    src = (Cpy16*)&g_BattleEnemyBattlers[enemy];
     end = src + 7;
     do {
         *dst = *src;

@@ -388,8 +388,8 @@ usually the name. The same holds for `Ref`, `View`, `Window`, `Row`, `Scratch`, 
 | a callable     | `Handler`, `Proc`, `Routine`, `Cb`                       | the action the function runs; `Func` for a table element, `Callback` for `void (*)(void)`                  |
 
 One exception: a record that exists only to make a struct assignment give the retail block move
-is a copy unit from `include/common/copy.h` (`CopyWords16`, `CopyBytes16`), named for its size and
-alignment because it has no role.
+is a copy unit from `include/common/copy.h` (`Cpy16`, `Cpy16u`), named for its size and
+alignment (`u` unaligned) because it has no role.
 
 A storage word stays when it is the game's or the hardware's own term: a save `Slot`, a menu `Row`
 the player sees, the PlayStation `Scratchpad`, an SDK name.

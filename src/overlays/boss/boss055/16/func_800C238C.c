@@ -1,15 +1,15 @@
 #include "boss055_16.h"
 
 MATCH void func_800C238C(u8 mode, u8 index) {
-    u32          effect_slot;
-    CopyWords16* src;
-    CopyWords16* dst;
+    u32    effect_slot;
+    Cpy16* src;
+    Cpy16* dst;
     /* FAKE: retail's loop limit uses t1. */
-    FAKE_REG(CopyWords16*, end, "t1");
+    FAKE_REG(Cpy16*, end, "t1");
 
     effect_slot = Battle_AllocEffect(3, 5);
-    dst         = (CopyWords16*)&g_BattleEffects[effect_slot & BYTE_MASK];
-    src         = (CopyWords16*)g_BattleEnemyBattlers;
+    dst         = (Cpy16*)&g_BattleEffects[effect_slot & BYTE_MASK];
+    src         = (Cpy16*)g_BattleEnemyBattlers;
     end         = src + 7;
     do {
         *dst = *src;

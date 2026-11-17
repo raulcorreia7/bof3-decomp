@@ -103,14 +103,14 @@ MATCH void func_801EF0D8(void) {
 }
 
 MATCH void func_801EF0E0(void) {
-    u32          effect_slot;
-    CopyWords16* src;
-    CopyWords16* dst;
-    CopyWords16* end;
+    u32    effect_slot;
+    Cpy16* src;
+    Cpy16* dst;
+    Cpy16* end;
 
     effect_slot = Battle_AllocEffect(1, 58);
-    dst         = (CopyWords16*)&g_BattleEffects[effect_slot & BYTE_MASK];
-    src         = (CopyWords16*)&BATTLE_ACTIVE_PARTY;
+    dst         = (Cpy16*)&g_BattleEffects[effect_slot & BYTE_MASK];
+    src         = (Cpy16*)&BATTLE_ACTIVE_PARTY;
     end         = src + 7;
     do {
         *dst = *src;

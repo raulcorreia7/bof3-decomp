@@ -24,8 +24,8 @@ NON_MATCHING u8 Battle_CanTarget(s32 selector, u32 battler_index) {
         src                    = (u8*)&g_BattleEnemyBattlers[index].stats;
         g_Battle.target        = battler_index;
     }
-    dst                = D_801EC2E8;
-    *(CopyBytes32*)dst = *(CopyBytes32*)src;
+    dst           = D_801EC2E8;
+    *(Cpy32u*)dst = *(Cpy32u*)src;
     if (func_800A40D0(selector & BYTE_MASK) != 0) {
         result = 0;
     } else {

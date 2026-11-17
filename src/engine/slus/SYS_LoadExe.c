@@ -22,11 +22,11 @@ MATCH s32 SYS_LoadExe(const char* path) {
         if (CdSearchFile(&file, (char*)current_path) != NULL) {
             CdControl(CdlSetloc, (u_char*)&file, NULL);
             if (SYS_ReadCd(EMI_SECTOR_SIZE, D_801459F8, sectors) == 0) {
-                CopyWords16* s = (CopyWords16*)D_801459F8;
-                CopyWords16* d = (CopyWords16*)D_80143E70;
-                CopyWords16* e = s + 8;
-                u32          w0;
-                u32          w1;
+                Cpy16* s = (Cpy16*)D_801459F8;
+                Cpy16* d = (Cpy16*)D_80143E70;
+                Cpy16* e = s + 8;
+                u32    w0;
+                u32    w1;
 
                 do {
                     *d++ = *s++;
