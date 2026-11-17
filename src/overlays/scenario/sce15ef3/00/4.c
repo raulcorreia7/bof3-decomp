@@ -271,8 +271,8 @@ MATCH void func_801D1758(SpriteSpark* spark) {
     FAKE_STACK_PADS(u8, 48);
 
     GFX_SET_DRAW_MODE(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
-    Area_AddCellPrim(spark->x, spark->y, 0, sizeof(DR_MODE));
-    Area_ProjectPoint(&spark->x, &xy);
+    Area_AddCellPrim(spark->pos.vx, spark->pos.vy, 0, sizeof(DR_MODE));
+    Area_ProjectPoint(&spark->pos.vx, &xy);
     dot = (TILE_1*)g_GfxPrimCursor;
     SetTile1(dot);
     SetSemiTrans(dot, 1);
@@ -282,7 +282,7 @@ MATCH void func_801D1758(SpriteSpark* spark) {
     } else {
         setRGB0(dot, 128, 0, 0);
     }
-    Area_AddCellPrim(spark->x, spark->y, 0, sizeof(TILE_1));
+    Area_AddCellPrim(spark->pos.vx, spark->pos.vy, 0, sizeof(TILE_1));
     box = (TILE*)g_GfxPrimCursor;
     SetTile(box);
     SetSemiTrans(box, 1);
@@ -294,7 +294,7 @@ MATCH void func_801D1758(SpriteSpark* spark) {
     } else {
         setRGB0(box, 32, 0, 0);
     }
-    Area_AddCellPrim(spark->x, spark->y, 0, sizeof(TILE));
+    Area_AddCellPrim(spark->pos.vx, spark->pos.vy, 0, sizeof(TILE));
 }
 
 MATCH s32 func_801D18CC(void) {
@@ -313,7 +313,7 @@ MATCH s32 func_801D18CC(void) {
         if (spark->active != 0) {
             step          = spark->z_step + 0x20000;
             spark->z_step = step;
-            spark->z += step;
+            spark->pos.vz += step;
             spark->blink ^= 1;
             func_801D1758(spark);
             life        = spark->life - 1;
@@ -321,7 +321,7 @@ MATCH s32 func_801D18CC(void) {
             active      = 1;
             if (life == 0) {
                 spark->active = 0;
-                spark->unk_1  = 0;
+                spark->unk_01 = 0;
             }
         }
         spark++;

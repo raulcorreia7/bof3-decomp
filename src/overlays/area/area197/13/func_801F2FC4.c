@@ -11,13 +11,13 @@ MATCH s32 func_801F2FC4(void) {
     i     = 0;
     do {
         if (spark->active != 0) {
-            spark->pos.x += spark->vx;
-            spark->pos.y += spark->vy;
-            spark->pos.z += spark->vz;
-            spark->vz -= TO_COORD(4);
+            spark->pos.x += spark->velocity.vx;
+            spark->pos.y += spark->velocity.vy;
+            spark->pos.z += spark->velocity.vz;
+            spark->velocity.vz -= TO_COORD(4);
             if (spark->pos.z < -TO_COORD(512)) {
-                spark->pos.z = -TO_COORD(512);
-                spark->vz    = -spark->vz;
+                spark->pos.z       = -TO_COORD(512);
+                spark->velocity.vz = -spark->velocity.vz;
             }
             spark->shade -= 2;
             spark->frame = rand() & 7;
