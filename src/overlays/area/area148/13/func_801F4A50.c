@@ -15,9 +15,9 @@ NON_MATCHING void func_801F4A50(s16 x0, s16 y0, s16 radius0, u16 angle0, s16 x1,
     GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_G4));
 
     poly++;
-    memcpy(poly, poly - 1, sizeof(POLY_G4));
-    poly->x1 = x0 + FIXED_MUL(radius0, rcos(angle0 + ANGLE_180));
-    poly->y1 = y0 + FIXED_MUL(radius0, rsin(angle0 + ANGLE_180));
+    poly[0]  = poly[-1];
+    poly->x2 = x0 + FIXED_MUL(radius0, rcos(angle0 + ANGLE_180));
+    poly->y2 = y0 + FIXED_MUL(radius0, rsin(angle0 + ANGLE_180));
     poly->x3 = x1 + FIXED_MUL(radius1, rcos(angle1));
     poly->y3 = y1 + FIXED_MUL(radius1, rsin(angle1));
     GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_G4));
