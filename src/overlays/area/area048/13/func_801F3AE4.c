@@ -9,8 +9,8 @@ NON_MATCHING void func_801F3AE4(s32 angle, s32 pos, s32 variant) {
     long      depth;
     POLY_FT4* prim;
     u32       word;
-    u8        i;
-    u8        j;
+    s32       i;
+    s32       j;
     s32       ofs;
 
     trans.vx = (pos >> 9) - 0x4000;
