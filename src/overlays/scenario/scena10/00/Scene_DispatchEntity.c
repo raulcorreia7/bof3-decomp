@@ -34,7 +34,7 @@ NON_MATCHING void func_801F7068(void) {
     i     = 0;
     count = 0;
     while (i < 3) {
-        width = D_801FE7CC[i].width;
+        width = D_801FE7CC[i].w;
         timer = g_Task->timer;
         limit = timer << 4;
         if (limit < width) {
@@ -42,7 +42,7 @@ NON_MATCHING void func_801F7068(void) {
         } else {
             count++;
         }
-        height = D_801FE7CC[i].height;
+        height = D_801FE7CC[i].h;
         if (limit < height) {
             height = limit;
         } else {
@@ -68,7 +68,7 @@ MATCH void func_801F719C(void) {
     i = 0;
     do {
         if (((g_Task->option_flags >> i) & 1) == 0) {
-            UI_DrawPanelBox(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)D_801FE7CC[i].width, (u8)D_801FE7CC[i].height);
+            UI_DrawPanelBox(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)D_801FE7CC[i].w, (u8)D_801FE7CC[i].h);
         }
         i++;
     } while (i < 3);
@@ -101,12 +101,12 @@ NON_MATCHING void func_801F73EC(void) {
 
     i = 0;
     do {
-        width = D_801FE7CC[i].width;
+        width = D_801FE7CC[i].w;
         limit = (u16)(g_Task->timer << 4);
         if (limit < width) {
             width = limit;
         }
-        height = D_801FE7CC[i].height;
+        height = D_801FE7CC[i].h;
         if (limit < height) {
             height = limit;
         }
@@ -176,7 +176,7 @@ MATCH void func_801F7758(void) {
     Scena10Rect* rect;
 
     rect = &D_801FE7CC[2];
-    UI_DrawPanelBox(rect->x, rect->y, (u8)rect->width, (u8)rect->height);
+    UI_DrawPanelBox(rect->x, rect->y, (u8)rect->w, (u8)rect->h);
     func_801F781C((u16)rect->x + 1, (u16)rect->y + 1, 128, 104);
     if (g_Task->unk_0A != 0) {
         g_Task->unk_0A--;
@@ -241,7 +241,7 @@ MATCH void func_801F7AD4(void) {
     u8           i;
 
     rect = &D_801FE7CC[4];
-    UI_DrawWindow(rect->x, rect->y, rect->width, rect->height, 0, g_WindowStyle);
+    UI_DrawWindow(rect->x, rect->y, rect->w, rect->h, 0, g_WindowStyle);
     x = rect->x + 8;
     y = rect->y + 4;
     i = 0;
@@ -263,20 +263,20 @@ MATCH void func_801F7C34(void) {
     Scena10Rect* rect;
 
     rect = &D_801FE7CC[6];
-    func_801AE3F0((u16)rect->x, (u16)rect->y, rect->width, rect->height, 0, g_WindowStyle);
+    func_801AE3F0((u16)rect->x, (u16)rect->y, rect->w, rect->h, 0, g_WindowStyle);
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 704, 256);
     setClut(prim, 32, 483);
     setRGB0(prim, 0x80, 0x80, 0x80);
-    setXY4(prim, (u16)rect->x, (u16)rect->y, (u16)rect->x + (rect->width - 1), (u16)rect->y, (u16)rect->x, (u16)rect->y + rect->height, (u16)rect->x + (rect->width - 1), (u16)rect->y + rect->height);
-    setUV4(prim, 0xC0, 0x50, (u8)rect->width + 0xBF, 0x50, 0xC0, (u8)rect->height + 0x50, (u8)rect->width + 0xBF, (u8)rect->height + 0x50);
+    setXY4(prim, (u16)rect->x, (u16)rect->y, (u16)rect->x + (rect->w - 1), (u16)rect->y, (u16)rect->x, (u16)rect->y + rect->h, (u16)rect->x + (rect->w - 1), (u16)rect->y + rect->h);
+    setUV4(prim, 0xC0, 0x50, (u8)rect->w + 0xBF, 0x50, 0xC0, (u8)rect->h + 0x50, (u8)rect->w + 0xBF, (u8)rect->h + 0x50);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 }
 
 /* Draw the "Choose parts" window with its item list and cursor, then place and step the cursor actor. */
 MATCH void func_801F7DDC(void) {
-    UI_DrawWindow(D_801FE7CC[3].x, D_801FE7CC[3].y, D_801FE7CC[3].width, D_801FE7CC[3].height, UI_WINDOW_STYLE_TRANSLUCENT, g_WindowStyle);
+    UI_DrawWindow(D_801FE7CC[3].x, D_801FE7CC[3].y, D_801FE7CC[3].w, D_801FE7CC[3].h, UI_WINDOW_STYLE_TRANSLUCENT, g_WindowStyle);
     sprintf(g_UiFormatBuffer, D_801F6C04, D_801FE874);
     UI_DrawText((u16)D_801FE7CC[3].x + 8, D_801FE7CC[3].y + 2, 0, ITEM_NAME_LENGTH, g_UiFormatBuffer);
     func_801F7AD4();
@@ -284,7 +284,7 @@ MATCH void func_801F7DDC(void) {
     func_801F7C34();
     g_Task->screen_x = D_801FE7CC[5].x + D_801FE804[0];
     g_Task->screen_y = D_801FE7CC[5].y + D_801FE804[1];
-    UI_DrawPanelBox(D_801FE7CC[5].x, D_801FE7CC[5].y, (u8)D_801FE7CC[5].width, (u8)D_801FE7CC[5].height);
+    UI_DrawPanelBox(D_801FE7CC[5].x, D_801FE7CC[5].y, (u8)D_801FE7CC[5].w, (u8)D_801FE7CC[5].h);
     Actor_StepAnimLoop();
     Area_AddActor();
 }

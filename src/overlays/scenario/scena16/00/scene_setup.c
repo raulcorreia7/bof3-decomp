@@ -7,23 +7,23 @@
 typedef void (*SceneEventFunc)(void* record, u32 state);
 
 typedef struct SceneEventDispatch {
-    Callback       prefix[13];
-    SceneEventFunc handlers[3];
+    Callback       callbacks[13];
+    SceneEventFunc events[3];
 } SceneEventDispatch;
 
 ASSERT_SIZE(SceneEventDispatch, 0x40);
-ASSERT_OFFSET(SceneEventDispatch, handlers, 0x34);
+ASSERT_OFFSET(SceneEventDispatch, events, 0x34);
 
-typedef union ScenarioSlots {
-    Callback           handlers[16];
+typedef union ScenarioCallbacks {
+    Callback           callbacks[16];
     SceneEventDispatch event;
-} ScenarioSlots;
+} ScenarioCallbacks;
 
-ASSERT_SIZE(ScenarioSlots, 0x40);
+ASSERT_SIZE(ScenarioCallbacks, 0x40);
 
 /* 16 handlers at 0x801F8538. func_801F6C90 and func_801F7144 select from
  * entries 5 and 8; func_801F8358 calls entries 13-15 as (record, state). */
-static ScenarioSlots D_801F8538 = {{
+static ScenarioCallbacks D_801F8538 = {{
     func_801F6C90,
     (Callback)func_801F8358,
     (Callback)func_801F83A0,
@@ -46,7 +46,7 @@ MATCH void func_801F6C90(void) {
     s8 mode;
 
     mode = D_80146872;
-    D_801F8538.handlers[SCN_MODE_HANDLER_FIRST + mode]();
+    D_801F8538.callbacks[SCN_MODE_HANDLER_FIRST + mode]();
 }
 
 MATCH void func_801F6CCC(void) {
@@ -174,7 +174,7 @@ MATCH void func_801F7144(void) {
     s8 state;
 
     state = g_SceneState.state_04;
-    D_801F8538.handlers[SCN_STATE_HANDLER_FIRST + state]();
+    D_801F8538.callbacks[SCN_STATE_HANDLER_FIRST + state]();
 }
 
 MATCH void func_801F7180(void) {
@@ -705,7 +705,7 @@ MATCH void func_801F8358(void* record) {
     u8 callback_index;
 
     callback_index = ((Actor*)record)->callback_index;
-    D_801F8538.event.handlers[callback_index](record, g_SceneFlags);
+    D_801F8538.event.events[callback_index](record, g_SceneFlags);
 }
 
 MATCH s32 func_801F8398(void) {

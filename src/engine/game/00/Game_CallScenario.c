@@ -10,7 +10,7 @@ MATCH s8 Game_CallScenario(u16 handler_arg0, u16 handler_arg1) {
     s8 result;
 
     saved   = g_Task;
-    handler = g_SceneScenes[g_SceneState.scenario_id]->entry_10;
+    handler = g_SceneScenes[g_SceneState.scenario_id]->callback;
     result  = -1;
     if (handler != NULL) {
         result = handler(handler_arg0, handler_arg1);
