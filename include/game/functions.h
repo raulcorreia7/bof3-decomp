@@ -103,7 +103,7 @@ void  Scene_LoadOverlay(void);
 /* func_801A782C */
 void  Game_UpdateScenario(void);
 /* func_801A7878 */
-void  Game_DispatchScenarioRecord(void* object);
+void  Game_DispatchScenarioRecord(void* record);
 /* func_801A78F8 */
 void  Scene_RequestChapterAdvance(void);
 /* func_801A7A34 */

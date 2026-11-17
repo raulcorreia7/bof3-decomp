@@ -454,7 +454,7 @@ MATCH void func_801F0654(void) {
 
 MATCH void func_801F0770(void) {
     PartyMember* work;
-    PartyMember* object;
+    PartyMember* member;
     PartyMember* flag;
     u8           countdown;
 
@@ -464,13 +464,13 @@ MATCH void func_801F0770(void) {
     work->unk_09             = countdown;
     work->pos.z.part.integer = (u16)work->pos.z.part.integer - 0xC0;
     if (countdown == 0x14) {
-        object          = g_Task;
-        object->unk_48  = 0;
+        member          = g_Task;
+        member->unk_48  = 0;
         flag            = g_Task;
-        object->unk_14  = 0x48;
-        object->unk_20  = -8;
-        object->scale.x = 0x10000;
-        object->scale.y = 0x10000;
+        member->unk_14  = 0x48;
+        member->unk_20  = -8;
+        member->scale.x = 0x10000;
+        member->scale.y = 0x10000;
         if (flag->param.unk_0B == 0) {
             Battle_MarkDamaged(g_Battle.target_selector);
             if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
