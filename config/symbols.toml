@@ -3123,9 +3123,12 @@ jtbl_80195E00 = { addr = 0x80195E00, type = "Callback", source = "The switch tab
 jtbl_80195E40 = { addr = 0x80195E40, type = "Callback", source = "The switch table of func_801AB458: the jump targets of its jr dispatch." }
 jtbl_80195E78 = { addr = 0x80195E78, type = "Callback", source = "The switch table of func_801AB8B0: the jump targets of its jr dispatch." }
 jtbl_80195EB8 = { addr = 0x80195EB8, type = "Callback", source = "The switch table of func_801ABA24: the jump targets of its jr dispatch." }
-jtbl_80195EEC = { addr = 0x80195EEC, type = "Callback", source = "The switch table of func_801ACF2C: the jump targets of its jr dispatch." }
-jtbl_80195F24 = { addr = 0x80195F24, type = "Callback", source = "The switch table of func_801AD4DC: the jump targets of its jr dispatch." }
-jtbl_80195F5C = { addr = 0x80195F5C, type = "Callback", source = "The switch table of func_801AD734: the jump targets of its jr dispatch." }
+g_FieldActionSteps = { addr = 0x80195ED4, source = "The field action's step table: roll, small find, large find, none, message." }
+jtbl_80195EEC = { addr = 0x80195EEC, type = "Callback", source = "The switch table of FieldAction_RollStep: the jump targets of its jr dispatch." }
+g_FieldActionAltSteps = { addr = 0x80195F10, source = "The alternate field action's step table." }
+jtbl_80195F24 = { addr = 0x80195F24, type = "Callback", source = "The switch table of FieldAction_RollAltStep: the jump targets of its jr dispatch." }
+g_FieldActionFadeSteps = { addr = 0x80195F44, source = "The fading field action's step table." }
+jtbl_80195F5C = { addr = 0x80195F5C, type = "Callback", source = "The switch table of FieldAction_RollFade: the jump targets of its jr dispatch." }
 jtbl_80195F7C = { addr = 0x80195F7C, type = "Callback", source = "The switch table of Item_PassesTest: the jump targets of its jr dispatch." }
 jtbl_80195F9C = { addr = 0x80195F9C, type = "Callback", source = "The switch table of func_801B0E44: the jump targets of its jr dispatch." }
 jtbl_80195FC0 = { addr = 0x80195FC0, type = "Callback", source = "The switch table of func_801BC4D0: the jump targets of its jr dispatch." }
@@ -3202,6 +3205,24 @@ Message_RunAreaMessage = { addr = 0x801A82F8, type = "func", source = "Starts ar
 Scene_DispatchObject = { addr = 0x801A86D4, type = "func", source = "Runs the g_SceneObjects callback selected by unk_7A of the actor, with the actor and g_SceneEventFlags." }
 Game_CallArea = { addr = 0x801A8CB4, type = "func", source = "Finds the entry of g_GameAreaId in the 28-entry area handler table g_AreaHooks and calls its handler with the two coordinates; returns 0 when the area has none. Called by Game_CallScenario." }
 Area_MoveActorRoute = { addr = 0x801ABBA8, type = "func", source = "samples the height along the route, paces it with g_RouteSpeedScale and moves the actor" }
+FieldAction_Run = { addr = 0x801ACE10, type = "func", source = "The party leader's field action: runs the area's action table entry, or the leader's own." }
+FieldAction_RunSteps = { addr = 0x801ACEBC, type = "func", source = "Runs the field action step table by the actor's step." }
+FieldAction_RollStep = { addr = 0x801ACF2C, type = "func", source = "Step 0 of the field action: rolls for a find, a miss ends the action." }
+FieldAction_FindSmall = { addr = 0x801AD0EC, type = "func", source = "Pays the small zenny find and shows its message." }
+FieldAction_FindLarge = { addr = 0x801AD184, type = "func", source = "Pays the large zenny find and shows its message." }
+FieldAction_End = { addr = 0x801AD218, type = "func", source = "Ends the field action: restores the actor's facing script and clears the pending flag." }
+FieldAction_WaitMessage = { addr = 0x801AD2CC, type = "func", source = "Waits for the find message to close, then ends the field action." }
+FieldAction_RunReact = { addr = 0x801AD35C, type = "func", source = "Runs the reaction step of a field action by the actor's step." }
+FieldAction_React = { addr = 0x801AD3B4, type = "func", source = "The actor reacts to the field action, then the action ends." }
+FieldAction_None = { addr = 0x801AD44C, type = "func", source = "A field action that only clears the pending flag." }
+FieldAction_RunAltSteps = { addr = 0x801AD46C, type = "func", source = "Runs the alternate field action step table by the actor's step." }
+FieldAction_RollAltStep = { addr = 0x801AD4DC, type = "func", source = "Step 0 of the alternate field action: rolls for a find." }
+FieldAction_NoneAlt = { addr = 0x801AD69C, type = "func", source = "A field action that only clears the pending flag; a second copy of FieldAction_None." }
+FieldAction_RunFadeSteps = { addr = 0x801AD6BC, type = "func", source = "Runs the fading field action step table by the actor's step." }
+FieldAction_RollFade = { addr = 0x801AD734, type = "func", source = "Step 0 of the fading field action: rolls for a find and darkens the actor's tint." }
+FieldAction_ShowFind = { addr = 0x801AD90C, type = "func", source = "Shows the zenny find message of the fading field action." }
+FieldAction_WaitMessageFade = { addr = 0x801AD9C4, type = "func", source = "Waits for the find message to close, then starts the fade." }
+FieldAction_Fade = { addr = 0x801AD9F0, type = "func", source = "Brightens the actor's tint back, then ends the field action." }
 Actor_SpawnSceneActor = { addr = 0x801ADAC0, type = "func", source = "spawns the type-0x19 scene actor at the task position with its selection from func_801ADC98 and links it to the task" }
 Char_GetExp = { addr = 0x801ADDD4, type = "func", source = "the body returns g_LevelGrowth[(u8)char_id][new_level].exp" }
 UI_DrawWindow = { addr = 0x801AE3F0, type = "func", source = "Draws a window from x with a left cap and a body stretched to width, height rows tall, with the palette column of the style argument; flags 0x80 and 0x20 trim the top and the bottom." }
@@ -3353,8 +3374,8 @@ s_TalkMessageIds = { addr = 0x801C87D8, size = 0x24, source = "Message id by tal
 s_ScriptOpcodeOffsets = { addr = 0x801C87FC, size = 0x100, source = "Offset each script opcode adds to the cursor; func_801AC8F0 advances by it." }
 D_801C88FC = { addr = 0x801C88FC, size = 0x8, source = "The two tint-lighten handlers func_801ACA14 and func_801ACAC0 that actor script stage 0x88 runs through func_801AC9D0." }
 D_801C8904 = { addr = 0x801C8904, size = 0x8, source = "The two tint-darken handlers func_801ACC08 and func_801ACCD8 that actor script stage 0x87 runs through func_801ACBC4." }
-D_801C890C = { addr = 0x801C890C, size = 0x2C, source = "The 11 actor work handlers func_801ACE10 runs by the work record's handler index." }
-s_SceneMessages = { addr = 0x801C8938, size = 0x4, source = "Message id by scene state; func_801AD90C reads the entry for the work pad_03." }
+g_FieldActions = { addr = 0x801C890C, source = "The field action of each party leader, by CharacterId." }
+g_FindZenny = { addr = 0x801C8938, size = 0x4, source = "The zenny a find pays, by step of the fading field action; FieldAction_ShowFind reads the entry." }
 D_801C893C = { addr = 0x801C893C, size = 0x14, source = "Pointers to the five item categories." }
 D_801C8950 = { addr = 0x801C8950, size = 0x14, source = "Pointers to the five item category inventory counts: four g_InventoryCounts rows and a null for the vital items; Item_Count and Item_Add pick one by category." }
 g_Items = { addr = 0x801C8964, size = 0x678, source = "The Item records of GAME.EMI that every image reads, 0x678 bytes." }

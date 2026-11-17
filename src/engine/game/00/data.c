@@ -448,13 +448,13 @@ Callback D_801C88FC[2] = {func_801ACA14, func_801ACAC0};
 
 Callback D_801C8904[2] = {func_801ACC08, func_801ACCD8};
 
-ActorWorkFunc D_801C890C[11] = {
-    (ActorWorkFunc)func_801ACEBC, (ActorWorkFunc)func_801AD35C, (ActorWorkFunc)func_801AD44C,
-    (ActorWorkFunc)func_801AD46C, (ActorWorkFunc)func_801AD69C, (ActorWorkFunc)func_801AD6BC,
-    (ActorWorkFunc)func_801AD46C, (ActorWorkFunc)func_801ACEBC, (ActorWorkFunc)func_801AD35C,
-    (ActorWorkFunc)func_801ACEBC, (ActorWorkFunc)func_801AD69C};
+ActorWorkFunc g_FieldActions[11] = {
+    (ActorWorkFunc)FieldAction_RunSteps, (ActorWorkFunc)FieldAction_RunReact, (ActorWorkFunc)FieldAction_None,
+    (ActorWorkFunc)FieldAction_RunAltSteps, (ActorWorkFunc)FieldAction_NoneAlt, (ActorWorkFunc)FieldAction_RunFadeSteps,
+    (ActorWorkFunc)FieldAction_RunAltSteps, (ActorWorkFunc)FieldAction_RunSteps, (ActorWorkFunc)FieldAction_RunReact,
+    (ActorWorkFunc)FieldAction_RunSteps, (ActorWorkFunc)FieldAction_NoneAlt};
 
-u8 s_SceneMessages[4] = {0x00, 0x00, 0x01, 0x0A};
+u8 g_FindZenny[4] = {0x00, 0x00, 0x01, 0x0A};
 
 u8* D_801C893C[5] = {g_InventoryIds[0], g_InventoryIds[1], g_InventoryIds[2], g_InventoryIds[3], g_VitalItemIds};
 

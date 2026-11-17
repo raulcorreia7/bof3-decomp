@@ -2,10 +2,10 @@
 
 char D_80195F0C[4] = "%d";
 
-ZennySpotAltSteps D_80195F10 = {
-    func_801AD4DC,
-    func_801AD0EC,
-    func_801AD184,
-    func_801AD218,
-    func_801AD2CC,
+FieldActionAltSteps g_FieldActionAltSteps = {
+    FieldAction_RollAltStep,
+    FieldAction_FindSmall,
+    FieldAction_FindLarge,
+    FieldAction_End,
+    FieldAction_WaitMessage,
 };

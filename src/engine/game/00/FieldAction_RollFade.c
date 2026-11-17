@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801AD734(void) {
+/* func_801AD734 */
+MATCH void FieldAction_RollFade(void) {
     Actor* work;
     u32    choice;
     s8     value;

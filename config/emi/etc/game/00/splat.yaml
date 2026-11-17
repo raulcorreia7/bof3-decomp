@@ -137,8 +137,8 @@ segments:
     align: 4
     section_order: [.data, .rodata]
     subsegments:
-      - [0x6D4, .data, D_80195ED4]
-      - [0x6EC, .rodata, func_801ACF2C]
+      - [0x6D4, .data, g_FieldActionSteps]
+      - [0x6EC, .rodata, FieldAction_RollStep]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_14
     type: code
@@ -148,7 +148,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x70C, .data, D_80195F0C]
-      - [0x724, .rodata, func_801AD4DC]
+      - [0x724, .rodata, FieldAction_RollAltStep]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_15
     type: code
@@ -157,8 +157,8 @@ segments:
     align: 4
     section_order: [.data, .rodata]
     subsegments:
-      - [0x744, .data, D_80195F44]
-      - [0x75C, .rodata, func_801AD734]
+      - [0x744, .data, g_FieldActionFadeSteps]
+      - [0x75C, .rodata, FieldAction_RollFade]
       - [0x77C, .rodata, Item_PassesTest]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_16
@@ -523,25 +523,25 @@ segments:
       - [0x173C4, c, func_801ACBC4]
       - [0x17408, c, func_801ACC08]
       - [0x174D8, c, func_801ACCD8]
-      - [0x17610, c, func_801ACE10]
+      - [0x17610, c, FieldAction_Run]
       - [0x1769C, c, func_801ACE9C]
-      - [0x176BC, c, func_801ACEBC]
-      - [0x1772C, c, func_801ACF2C]
-      - [0x178EC, c, func_801AD0EC]
-      - [0x17984, c, func_801AD184]
-      - [0x17A18, c, func_801AD218]
-      - [0x17ACC, c, func_801AD2CC]
-      - [0x17B5C, c, func_801AD35C]
-      - [0x17BB4, c, func_801AD3B4]
-      - [0x17C4C, c, func_801AD44C]
-      - [0x17C6C, c, func_801AD46C]
-      - [0x17CDC, c, func_801AD4DC]
-      - [0x17E9C, c, func_801AD69C]
-      - [0x17EBC, c, func_801AD6BC]
-      - [0x17F34, c, func_801AD734]
-      - [0x1810C, c, func_801AD90C]
-      - [0x181C4, c, func_801AD9C4]
-      - [0x181F0, c, func_801AD9F0]
+      - [0x176BC, c, FieldAction_RunSteps]
+      - [0x1772C, c, FieldAction_RollStep]
+      - [0x178EC, c, FieldAction_FindSmall]
+      - [0x17984, c, FieldAction_FindLarge]
+      - [0x17A18, c, FieldAction_End]
+      - [0x17ACC, c, FieldAction_WaitMessage]
+      - [0x17B5C, c, FieldAction_RunReact]
+      - [0x17BB4, c, FieldAction_React]
+      - [0x17C4C, c, FieldAction_None]
+      - [0x17C6C, c, FieldAction_RunAltSteps]
+      - [0x17CDC, c, FieldAction_RollAltStep]
+      - [0x17E9C, c, FieldAction_NoneAlt]
+      - [0x17EBC, c, FieldAction_RunFadeSteps]
+      - [0x17F34, c, FieldAction_RollFade]
+      - [0x1810C, c, FieldAction_ShowFind]
+      - [0x181C4, c, FieldAction_WaitMessageFade]
+      - [0x181F0, c, FieldAction_Fade]
       - [0x182C0, c, Actor_SpawnSceneActor]
       - [0x18498, c, func_801ADC98]
       - [0x184F4, c, func_801ADCF4]
