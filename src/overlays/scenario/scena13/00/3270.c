@@ -18,7 +18,27 @@ MATCH void func_801F9E70(u16 phase) {
     SpuSetVoiceVolume(0x10, volume, volume);
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F9F18(void) {
+    switch (g_SceneState.step_05) {
+        case 0:
+            Game_ClearScriptActive();
+            g_SceneState.step_05 = 1;
+            break;
+        case 1:
+            if (g_ScriptVars[0] != 1) {
+                break;
+            }
+            SYS_SetFlag(g_SceneFlags, 0x20);
+            g_SceneState.step_05 = 2;
+            break;
+        default:
+            break;
+    }
+}
+#else
 INCLUDE_ASM(func_801F9F18);
+#endif
 
 INCLUDE_ASM(func_801FA844);
 

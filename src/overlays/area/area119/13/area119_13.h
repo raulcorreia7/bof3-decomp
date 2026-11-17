@@ -35,7 +35,7 @@ static inline s32 Area119_Distance(s32 value, s32 point) {
 
 void func_801F3324(void);
 void func_801F369C(s32 level);
-void func_801F3F04(s32 arg0);
+void func_801F3F04(s32 depth);
 
 void func_801F301C(void);
 
