@@ -176,8 +176,8 @@ typedef struct AreaMapBundle {
     u16 byte_code_offset;   /* 0x14 - per-cell byte-code table (`g_AreaCellCodes`):
                                 *        (0x30 + width*height*4) / 4; equals
                                 *        width*height + 12 in 200/200 payloads */
-    u16 unk_16;             /* 0x16 - zero in 200/200, no reader */
-    u16 unk_18;             /* 0x18 - zero in 200/200, no reader */
+    u16 reserved_16;        /* 0x16 - zero in 200/200, no reader */
+    u16 reserved_18;        /* 0x18 - zero in 200/200, no reader */
     u16 color[2];           /* 0x1A-0x1D - runtime color words, written by the engine
                                 *            (`@0x801583BC` is the only header store) and
                                 *            read at `0x8010401A + (mask >> 3) * 2` */
@@ -185,12 +185,12 @@ typedef struct AreaMapBundle {
     u16 opcode_list_offset; /* 0x20 - record list, opcode byte & 0x3f */
     u16 record_list_offset; /* 0x22 - record list, opcode byte & 0x7f */
     u16 cell_record_offset; /* 0x24 - indexed by the 4-byte-unit ids in g_AreaCellGrid */
-    u16 unk_26;             /* 0x26 - zero in 200/200, no reader */
+    u16 reserved_26;        /* 0x26 - zero in 200/200, no reader */
     u16 object_list_28;     /* 0x28 - tag + body size, walked by the map interpreter */
     u16 height_offset;      /* 0x2A - height-byte table; u16[+0x2A]*4 == size in 187
                                 *        payloads, == size - width*height in the rest */
-    u16 unk_2C;             /* 0x2C - zero in 200/200, no reader */
-    u16 unk_2E;             /* 0x2E - zero in 200/200, no reader */
+    u16 reserved_2C;        /* 0x2C - zero in 200/200, no reader */
+    u16 reserved_2E;        /* 0x2E - zero in 200/200, no reader */
 } AreaMapBundle;
 
 ASSERT_SIZE(AreaMapBundle, AREA_MAP_BUNDLE_SIZE);
