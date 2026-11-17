@@ -1,8 +1,5 @@
 #include "engine/slus/slus.h"
-
-typedef struct {
-    s32 w[4];
-} Quad;
+#include "common/copy.h"
 
 /* copies one record, patches 6 bytes, recalculates it, then flags 4
  * field comparisons.
@@ -31,7 +28,7 @@ MATCH void func_80164EF8(s32 index, u8* patch, u8* flags, u16* values) {
     loc[2] = &copy.stats.intelligence;
     loc[3] = &copy.stats.agility;
     do {
-        *(Quad*)dst = *(Quad*)src;
+        *(CopyWords16*)dst = *(CopyWords16*)src;
         src += 4;
         dst += 4;
     } while (src != end);
