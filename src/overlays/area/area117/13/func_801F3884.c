@@ -11,24 +11,30 @@ NON_MATCHING void func_801F3884(s32 tile, s32 offset) {
     s32       x1;
     s32       y1;
     s32       lower;
+    s32       height;
+    s32       z;
+    SVECTOR*  vectors;
 
-    g_ScratchPadVectors[0].vx = g_ScratchPadVectors[1].vx = g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx = (((s32)g_Task->pos.x.part.integer - 0x80) << 7) + 0x40;
-    g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy = (((s32)g_Task->pos.y.part.integer - 0x80) << 7) + offset - 8;
-    g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy = (((s32)g_Task->pos.y.part.integer - 0x80) << 7) - offset + 8;
-    lower                                                 = offset - 0x40;
-    x                                                     = (g_ScratchPadVectors[0].vx + 0x4000) << 9;
-    y                                                     = (g_ScratchPadVectors[0].vy + 0x4000) << 9;
-    g_ScratchPadVectors[0].vz                             = -Area_SampleHeight(x, y) / 2 - lower + 8;
-    g_ScratchPadVectors[2].vz                             = -Area_SampleHeight(x, y) / 2 + (offset + 0x40);
-    x1                                                    = (g_ScratchPadVectors[1].vx + 0x4000) << 9;
-    y1                                                    = (g_ScratchPadVectors[1].vy + 0x4000) << 9;
-    g_ScratchPadVectors[1].vz                             = -Area_SampleHeight(x1, y1) / 2 - lower + 8;
-    g_ScratchPadVectors[3].vz                             = -Area_SampleHeight(x1, y1) / 2 + (offset + 0x40);
-    prim                                                  = (POLY_FT4*)g_GfxPrimCursor;
+    vectors       = g_ScratchPadVectors;
+    vectors[0].vx = vectors[1].vx = vectors[2].vx = vectors[3].vx = (((g_Task->pos.x.fixed >> 16) - 0x80) << 7) + 0x40;
+    vectors[0].vy = vectors[2].vy = (((g_Task->pos.y.fixed >> 16) - 0x80) << 7) + offset - 8;
+    vectors[1].vy = vectors[3].vy = (((g_Task->pos.y.fixed >> 16) - 0x80) << 7) - offset + 8;
+    x                             = (vectors[0].vx + 0x4000) << 9;
+    y                             = (vectors[0].vy + 0x4000) << 9;
+    z                             = -Area_SampleHeight(x, y) / 2;
+    lower                         = offset - 0x40;
+    vectors[0].vz                 = z - lower + 8;
+    z                             = -Area_SampleHeight(x, y) / 2;
+    offset += 0x40;
+    vectors[2].vz = z + offset;
+    x1            = (vectors[1].vx + 0x4000) << 9;
+    y1            = (vectors[1].vy + 0x4000) << 9;
+    vectors[1].vz = -Area_SampleHeight(x1, y1) / 2 - lower + 8;
+    vectors[3].vz = -Area_SampleHeight(x1, y1) / 2 + offset;
+    prim          = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetShadeTex(prim, 0);
-    RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
-                  &flag);
+    RotTransPers4(&vectors[0], &vectors[1], &vectors[2], &vectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
     Area_ApplyTileToQuad(((0x2750 << 16) | 0xF3) + tile, prim, 1);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
 }
