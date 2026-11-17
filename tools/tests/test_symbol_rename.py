@@ -468,3 +468,13 @@ def test_an_address_name_use_in_a_visible_image_is_not_a_clash(repo: Path) -> No
     assert symbol.main(["rename", "Old", "func_80000000", "--image", "exe/a"]) == 0
     assert (repo / "src/a/func_80000000.c").is_file()
     assert (repo / "src/b/uses.c").read_text() == "extern void func_80000000(void);\n"
+
+
+def test_rename_leaves_the_attempts_history_as_written(repo: Path) -> None:
+    history = repo / "config/attempts.jsonl"
+    row = '{"function": "exe/a@0x80000000", "tried": "Old did not match"}\n'
+    history.write_text(row)
+    symbol.git("add", "config/attempts.jsonl")
+    assert symbol.main(["rename", "Old", "New"]) == 0
+    assert history.read_text() == row
+    assert "New" in (repo / "src/a/New.c").read_text()
