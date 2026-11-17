@@ -61,11 +61,11 @@ MATCH void func_801A7330(const volatile u8* data) {
         g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     }
 
-    g_Task->tint.bytes.rgb.red   = 0;
-    g_Task->tint.bytes.rgb.blue  = 0;
-    g_Task->tint.bytes.rgb.green = 0;
-    g_Task->tint.bytes.flags     = data[3] & 0xF;
-    g_Task->draw_layer           = 6;
+    g_Task->tint.bytes.rgb.r = 0;
+    g_Task->tint.bytes.rgb.b = 0;
+    g_Task->tint.bytes.rgb.g = 0;
+    g_Task->tint.bytes.flags = data[3] & 0xF;
+    g_Task->draw_layer       = 6;
 
     rec                       = g_Task;
     g_Actors[*counter].unk_7C = 0;

@@ -117,10 +117,10 @@ MATCH void func_801EF134(void) {
 
 MATCH void func_801EF1F4(void) {
     g_Task->unk_09 += 1;
-    g_PaletteFades[g_Task->param.unk_0B].offset.red += 2;
-    g_PaletteFades[g_Task->param.unk_0B].offset.green += 2;
-    g_PaletteFades[g_Task->param.unk_0B].offset.blue += 2;
-    if (g_PaletteFades[g_Task->param.unk_0B].offset.red == 0x10) {
+    g_PaletteFades[g_Task->param.unk_0B].offset.r += 2;
+    g_PaletteFades[g_Task->param.unk_0B].offset.g += 2;
+    g_PaletteFades[g_Task->param.unk_0B].offset.b += 2;
+    if (g_PaletteFades[g_Task->param.unk_0B].offset.r == 0x10) {
         g_Task->header.step += 1;
     }
 }
@@ -128,10 +128,10 @@ MATCH void func_801EF1F4(void) {
 /* Counts the effect counter up and fades the palette row the effect claimed down to zero, then steps. */
 MATCH void func_801EF320(void) {
     g_Task->unk_09 += 1;
-    g_PaletteFades[g_Task->param.unk_0B].offset.red -= 2;
-    g_PaletteFades[g_Task->param.unk_0B].offset.green -= 2;
-    g_PaletteFades[g_Task->param.unk_0B].offset.blue -= 2;
-    if (g_PaletteFades[g_Task->param.unk_0B].offset.red == 0) {
+    g_PaletteFades[g_Task->param.unk_0B].offset.r -= 2;
+    g_PaletteFades[g_Task->param.unk_0B].offset.g -= 2;
+    g_PaletteFades[g_Task->param.unk_0B].offset.b -= 2;
+    if (g_PaletteFades[g_Task->param.unk_0B].offset.r == 0) {
         g_Task->header.step += 1;
     }
 }

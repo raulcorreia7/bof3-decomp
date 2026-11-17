@@ -20,13 +20,13 @@ MATCH void func_801BBE98(void) {
     work2 = g_Task;
     ret   = Area_ReadHeight(work2->pos.x.fixed, work2->pos.y.fixed);
 
-    work                        = g_Task;
-    work->tint.bytes.rgb.red    = 0;
-    ptr                         = g_Task;
-    COORD_INT(work->pos.z)      = ret;
-    ptr->tint.bytes.rgb.green   = 0;
-    g_Task->tint.bytes.rgb.blue = 0;
-    g_Task->tint.bytes.flags    = 2;
+    work                     = g_Task;
+    work->tint.bytes.rgb.r   = 0;
+    ptr                      = g_Task;
+    COORD_INT(work->pos.z)   = ret;
+    ptr->tint.bytes.rgb.g    = 0;
+    g_Task->tint.bytes.rgb.b = 0;
+    g_Task->tint.bytes.flags = 2;
 
     g_Game.current->u.field.counter_11C.s8_value = 3;
     g_Game.current->u.field.mode_12B.s8_value    = 0;

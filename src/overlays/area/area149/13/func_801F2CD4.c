@@ -7,11 +7,11 @@ MATCH void func_801F2CD4(void) {
     ACTOR_COUNT_DOWN(value2, timer);
     if (value2 & BYTE_MASK) {
         g_AreaCameraOffsetZ = g_AreaCameraOffsetZ - 0x2A;
-        value               = g_Task->tint.bytes.rgb.red;
+        value               = g_Task->tint.bytes.rgb.r;
         if (value != 0) {
-            g_Task->tint.bytes.rgb.red = value - 1;
-            g_Task->tint.bytes.rgb.green -= 1;
-            g_Task->tint.bytes.rgb.blue -= 1;
+            g_Task->tint.bytes.rgb.r = value - 1;
+            g_Task->tint.bytes.rgb.g -= 1;
+            g_Task->tint.bytes.rgb.b -= 1;
         }
     } else {
         g_AreaCameraOffsetZ = 0x400;

@@ -15,14 +15,14 @@ MATCH void func_8019E95C(void) {
     g_Task->unk_2B       = (g_Task->unk_2B + 1);
     g_Task->unk_48       = 1;
 
-    work                        = g_Task;
-    work->tint.bytes.rgb.red    = 0;
-    other                       = g_Task;
-    work->vy                    = -0x2000;
-    work->vx                    = 0;
-    work->vz                    = 64;
-    other->tint.bytes.rgb.green = 0;
-    g_Task->tint.bytes.rgb.blue = 0;
+    work                     = g_Task;
+    work->tint.bytes.rgb.r   = 0;
+    other                    = g_Task;
+    work->vy                 = -0x2000;
+    work->vx                 = 0;
+    work->vz                 = 64;
+    other->tint.bytes.rgb.g  = 0;
+    g_Task->tint.bytes.rgb.b = 0;
     Actor_SelectScript(0);
     g_Task->header.step = (g_Task->header.step + 1);
 }

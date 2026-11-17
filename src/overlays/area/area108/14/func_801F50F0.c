@@ -98,9 +98,9 @@ NON_MATCHING void func_801F50F0(void) {
                         track++;
                     } while (i < D_801F6298);
                 }
-                D_80147A58[0].tint.bytes.rgb.red -= 4;
-                D_80147A58[0].tint.bytes.rgb.green -= 4;
-                D_80147A58[0].tint.bytes.rgb.blue -= 4;
+                D_80147A58[0].tint.bytes.rgb.r -= 4;
+                D_80147A58[0].tint.bytes.rgb.g -= 4;
+                D_80147A58[0].tint.bytes.rgb.b -= 4;
             } else {
                 SYS_SetFlag(g_SceneEventFlags, 0x1D);
                 Area_SetCellPalette(0x20, 0x2F);

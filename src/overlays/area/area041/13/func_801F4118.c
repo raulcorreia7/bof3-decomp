@@ -5,7 +5,7 @@ MATCH void func_801F4118(void) {
 
     cur = g_Game.current;
     g_Task->pos.x.fixed += g_Task->vx;
-    g_PaletteFades[cur->unk_13D].offset.red += 2;
-    g_PaletteFades[g_Game.current->unk_13D].offset.green += 2;
-    g_PaletteFades[g_Game.current->unk_13D].offset.blue += 2;
+    g_PaletteFades[cur->unk_13D].offset.r += 2;
+    g_PaletteFades[g_Game.current->unk_13D].offset.g += 2;
+    g_PaletteFades[g_Game.current->unk_13D].offset.b += 2;
 }

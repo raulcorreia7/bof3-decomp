@@ -405,9 +405,9 @@ MATCH void func_801F0908(void) {
     x                            = g_Task->unk_2E.half;
     y                            = g_Task->unk_30.half;
     g_ScratchPad.cells.halves[3] = g_Task->unk_09 * g_Task->param.unk_0B;
-    g_ScratchPad.cells.halves[4] = g_Task->unk_09 * D_801F0B9C[g_Task->param.unk_0B].red;
+    g_ScratchPad.cells.halves[4] = g_Task->unk_09 * D_801F0B9C[g_Task->param.unk_0B].r;
     g_ScratchPad.cells.halves[5] = g_Task->unk_09;
-    g_ScratchPad.cells.halves[6] = g_Task->unk_09 * D_801F0B9C[g_Task->param.unk_0B].blue;
+    g_ScratchPad.cells.halves[6] = g_Task->unk_09 * D_801F0B9C[g_Task->param.unk_0B].b;
     for (i = 0; i < 16; i++) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);

@@ -140,9 +140,9 @@ MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
                 target_entry_ea = target_bytes + state->cursor;
                 GFX_AllocPaletteFade((u8*)spad_work_ea, target_entry_ea[1], target_entry_ea[2], target_entry_ea[3], target_entry_ea[4]);
             } else {
-                spad_work_ea->tint.bytes.rgb.red = (target_bytes + state->cursor)[1];
-                g_Task->tint.bytes.rgb.green     = (target_bytes + state->cursor)[2];
-                g_Task->tint.bytes.rgb.blue      = (target_bytes + state->cursor)[3];
+                spad_work_ea->tint.bytes.rgb.r = (target_bytes + state->cursor)[1];
+                g_Task->tint.bytes.rgb.g       = (target_bytes + state->cursor)[2];
+                g_Task->tint.bytes.rgb.b       = (target_bytes + state->cursor)[3];
             }
             next_cursor = state->cursor + 4;
         block_28:

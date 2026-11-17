@@ -35,9 +35,9 @@ MATCH void func_801EEC88(void) {
 }
 
 MATCH void func_801EEDD0(void) {
-    g_PaletteFades[g_Task->timer].offset.red++;
-    g_PaletteFades[g_Task->timer].offset.green++;
-    g_PaletteFades[g_Task->timer].offset.blue++;
+    g_PaletteFades[g_Task->timer].offset.r++;
+    g_PaletteFades[g_Task->timer].offset.g++;
+    g_PaletteFades[g_Task->timer].offset.b++;
     if (++g_Task->unk_09 == 16) {
         D_8014637C->unk_29 = 2;
         g_Task->header.mode++;
@@ -45,9 +45,9 @@ MATCH void func_801EEDD0(void) {
 }
 
 MATCH void func_801EEEF4(void) {
-    g_PaletteFades[g_Task->timer].offset.red--;
-    g_PaletteFades[g_Task->timer].offset.green--;
-    g_PaletteFades[g_Task->timer].offset.blue--;
+    g_PaletteFades[g_Task->timer].offset.r--;
+    g_PaletteFades[g_Task->timer].offset.g--;
+    g_PaletteFades[g_Task->timer].offset.b--;
     if (--g_Task->unk_09 == 0) {
         GFX_FreePaletteFadeTarget(D_8014637C);
         Battle_FadePoisonedBattler(g_Battle.active_battler);

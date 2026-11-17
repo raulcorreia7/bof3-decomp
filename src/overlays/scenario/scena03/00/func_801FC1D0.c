@@ -50,12 +50,12 @@ MATCH s32 func_801FC1D0(s32 member_index) {
     option_flags                                = 0x88;
     Actor_SetOptionFlags(&option_flags);
     g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    task3                       = g_Task;
-    task3->tint.bytes.rgb.blue  = 0;
-    task3->tint.bytes.rgb.green = 0;
-    task3->tint.bytes.rgb.red   = 0;
-    task4                       = g_Task;
-    task4->tint.bytes.flags     = 1;
+    task3                   = g_Task;
+    task3->tint.bytes.rgb.b = 0;
+    task3->tint.bytes.rgb.g = 0;
+    task3->tint.bytes.rgb.r = 0;
+    task4                   = g_Task;
+    task4->tint.bytes.flags = 1;
     func_801A4914();
     return 1;
 }

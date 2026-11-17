@@ -228,18 +228,18 @@ MATCH void func_801F3844(void) {
     work->header.flags |= 0x20;
     work = g_Task;
     work->header.flags &= 0xBF;
-    g_Task->tint.bytes.flags            = 1;
-    slot                                = g_Task;
-    slot->tint.signed_bytes.delta.blue  = -0x80;
-    slot->tint.signed_bytes.delta.green = -0x80;
-    slot->tint.signed_bytes.delta.red   = -0x80;
-    work                                = g_Task;
-    value                               = 0x2000;
-    work->vx                            = value;
-    value                               = work->pos.x.fixed;
-    work->unk_04                        = 1;
-    base                                = g_CurrentActor;
-    work->pos.x.fixed                   = value + 0x2000;
+    g_Task->tint.bytes.flags        = 1;
+    slot                            = g_Task;
+    slot->tint.signed_bytes.delta.b = -0x80;
+    slot->tint.signed_bytes.delta.g = -0x80;
+    slot->tint.signed_bytes.delta.r = -0x80;
+    work                            = g_Task;
+    value                           = 0x2000;
+    work->vx                        = value;
+    value                           = work->pos.x.fixed;
+    work->unk_04                    = 1;
+    base                            = g_CurrentActor;
+    work->pos.x.fixed               = value + 0x2000;
     base->unk_7E -= 2;
 }
 
@@ -247,26 +247,26 @@ MATCH void func_801F3920(void) {
     Actor* work;
     Actor* slot;
 
-    if (g_Task->tint.signed_bytes.delta.red < -0x40) {
-        g_Task->tint.signed_bytes.delta.red += 4;
+    if (g_Task->tint.signed_bytes.delta.r < -0x40) {
+        g_Task->tint.signed_bytes.delta.r += 4;
     }
-    if (g_Task->tint.signed_bytes.delta.green < -0x40) {
-        g_Task->tint.signed_bytes.delta.green += 4;
+    if (g_Task->tint.signed_bytes.delta.g < -0x40) {
+        g_Task->tint.signed_bytes.delta.g += 4;
     }
-    if (g_Task->tint.signed_bytes.delta.blue < -0x40) {
-        g_Task->tint.signed_bytes.delta.blue += 4;
+    if (g_Task->tint.signed_bytes.delta.b < -0x40) {
+        g_Task->tint.signed_bytes.delta.b += 4;
     }
     work = g_Task;
     if ((work->tint.word & ~0xFF) == 0xC0C0C000) {
         GFX_FreePaletteFade(g_CurrentActor->unk_93);
-        g_Task->header.flags                = (g_Task->header.flags & 0xDF);
-        g_Task->tint.bytes.flags            = 0;
-        slot                                = g_Task;
-        slot->tint.signed_bytes.delta.blue  = 0;
-        slot->tint.signed_bytes.delta.green = 0;
-        slot->tint.signed_bytes.delta.red   = 0;
-        g_Task->unk_04                      = 0;
-        g_CurrentActor->unk_78              = 2;
+        g_Task->header.flags            = (g_Task->header.flags & 0xDF);
+        g_Task->tint.bytes.flags        = 0;
+        slot                            = g_Task;
+        slot->tint.signed_bytes.delta.b = 0;
+        slot->tint.signed_bytes.delta.g = 0;
+        slot->tint.signed_bytes.delta.r = 0;
+        g_Task->unk_04                  = 0;
+        g_CurrentActor->unk_78          = 2;
     } else {
         work->pos.x.fixed += work->vx;
         g_CurrentActor->unk_7E -= 2;

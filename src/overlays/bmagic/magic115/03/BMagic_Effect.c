@@ -37,9 +37,9 @@ MATCH void func_801EEC80(void) {
 }
 
 MATCH void func_801EEDDC(void) {
-    g_PaletteFades[g_Task->timer].offset.red   = g_Task->unk_09 * 2;
-    g_PaletteFades[g_Task->timer].offset.green = g_Task->unk_09 * 2;
-    g_PaletteFades[g_Task->timer].offset.blue  = g_Task->unk_09 * 2;
+    g_PaletteFades[g_Task->timer].offset.r = g_Task->unk_09 * 2;
+    g_PaletteFades[g_Task->timer].offset.g = g_Task->unk_09 * 2;
+    g_PaletteFades[g_Task->timer].offset.b = g_Task->unk_09 * 2;
     if (g_Task->unk_09 >= 6) {
         g_Task->header.mode++;
     }
@@ -47,11 +47,11 @@ MATCH void func_801EEDDC(void) {
 
 MATCH void func_801EEEB0(void) {
     if (g_FrameCount & 1) {
-        g_PaletteFades[g_Task->timer].offset.red -= 1;
-        g_PaletteFades[g_Task->timer].offset.green -= 1;
-        g_PaletteFades[g_Task->timer].offset.blue -= 1;
+        g_PaletteFades[g_Task->timer].offset.r -= 1;
+        g_PaletteFades[g_Task->timer].offset.g -= 1;
+        g_PaletteFades[g_Task->timer].offset.b -= 1;
     }
-    if (g_PaletteFades[g_Task->timer].offset.red == 0) {
+    if (g_PaletteFades[g_Task->timer].offset.r == 0) {
         GFX_FreePaletteFade(g_Task->timer);
         g_Task->header.mode++;
     }

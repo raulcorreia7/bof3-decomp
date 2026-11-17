@@ -76,9 +76,9 @@ MATCH void func_801EF10C(void) {
     /* FAKE: retail frame reserves 0x10 bytes no statement uses; pure C differs only in the frame (0x18 against 0x28). */
     FAKE_STACK_PADS(u8, 0x10);
 
-    g_PaletteFades[g_Task->timer].offset.red -= 1;
-    g_PaletteFades[g_Task->timer].offset.green -= 1;
-    g_PaletteFades[g_Task->timer].offset.blue -= 1;
+    g_PaletteFades[g_Task->timer].offset.r -= 1;
+    g_PaletteFades[g_Task->timer].offset.g -= 1;
+    g_PaletteFades[g_Task->timer].offset.b -= 1;
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {

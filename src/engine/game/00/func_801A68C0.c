@@ -58,10 +58,10 @@ MATCH void func_801A68C0(u8* script) {
 
     Actor_SetOptionFlags(script + 8);
 
-    g_Task->tint.signed_bytes.delta.red   = -0x80;
-    g_Task->tint.signed_bytes.delta.blue  = -0x80;
-    g_Task->tint.signed_bytes.delta.green = -0x80;
-    g_Task->tint.bytes.flags              = 2;
+    g_Task->tint.signed_bytes.delta.r = -0x80;
+    g_Task->tint.signed_bytes.delta.b = -0x80;
+    g_Task->tint.signed_bytes.delta.g = -0x80;
+    g_Task->tint.bytes.flags          = 2;
 
     if (D_80146900[*counter][0] == 0) {
         Area_SetCellCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y), 0x10);

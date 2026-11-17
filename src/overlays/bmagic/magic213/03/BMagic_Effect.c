@@ -100,19 +100,19 @@ MATCH void func_801EF048(void) {
 }
 
 MATCH void func_801EF23C(void) {
-    g_PaletteFades[g_Task->timer].offset.red += 1;
-    g_PaletteFades[g_Task->timer].offset.green += 1;
-    g_PaletteFades[g_Task->timer].offset.blue += 1;
+    g_PaletteFades[g_Task->timer].offset.r += 1;
+    g_PaletteFades[g_Task->timer].offset.g += 1;
+    g_PaletteFades[g_Task->timer].offset.b += 1;
     if (--g_Task->unk_09 == 0) {
         g_Task->header.step++;
     }
 }
 
 MATCH void func_801EF348(void) {
-    g_PaletteFades[g_Task->timer].offset.red -= 1;
-    g_PaletteFades[g_Task->timer].offset.green -= 1;
-    g_PaletteFades[g_Task->timer].offset.blue -= 1;
-    if (g_PaletteFades[g_Task->timer].offset.red == 0) {
+    g_PaletteFades[g_Task->timer].offset.r -= 1;
+    g_PaletteFades[g_Task->timer].offset.g -= 1;
+    g_PaletteFades[g_Task->timer].offset.b -= 1;
+    if (g_PaletteFades[g_Task->timer].offset.r == 0) {
         GFX_FreePaletteFade(g_Task->timer);
         Battle_MarkDamaged(g_Task->unk_04);
         g_Task->header.step++;

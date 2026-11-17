@@ -115,10 +115,10 @@ MATCH void func_801EF2F8(void) {
     u8           base;
     u8           i;
 
-    if (g_PaletteFades[g_Task->timer].offset.red != 8) {
-        g_PaletteFades[g_Task->timer].offset.red++;
-        g_PaletteFades[g_Task->timer].offset.green++;
-        g_PaletteFades[g_Task->timer].offset.blue++;
+    if (g_PaletteFades[g_Task->timer].offset.r != 8) {
+        g_PaletteFades[g_Task->timer].offset.r++;
+        g_PaletteFades[g_Task->timer].offset.g++;
+        g_PaletteFades[g_Task->timer].offset.b++;
     }
     if (++g_Task->unk_09 == 16) {
         base                 = g_Task->param.unk_0B;
@@ -155,10 +155,10 @@ MATCH void func_801EF55C(void) {
         slot    = g_Task->unk_03;
         battler = &g_Game.members[slot];
     }
-    if (g_PaletteFades[g_Task->timer].offset.red != 0) {
-        g_PaletteFades[g_Task->timer].offset.red--;
-        g_PaletteFades[g_Task->timer].offset.green--;
-        g_PaletteFades[g_Task->timer].offset.blue--;
+    if (g_PaletteFades[g_Task->timer].offset.r != 0) {
+        g_PaletteFades[g_Task->timer].offset.r--;
+        g_PaletteFades[g_Task->timer].offset.g--;
+        g_PaletteFades[g_Task->timer].offset.b--;
     }
     if (--g_Task->unk_09 == 0) {
         GFX_FreePaletteFadeTarget(battler);

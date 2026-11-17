@@ -203,9 +203,9 @@ NON_MATCHING void func_801EF280(s32* values) {
     values[mode] = average;
 
     shade = &shades[(mode & 1) | ((mode & 4) >> 1)];
-    setRGB0(prim, shade->color.red, shade->color.green, shade->color.blue);
-    setRGB1(prim, shade->color.red, shade->color.green, shade->color.blue);
-    setRGB2(prim, shade->color.red, shade->color.green, shade->tip_blue);
+    setRGB0(prim, shade->color.r, shade->color.g, shade->color.b);
+    setRGB1(prim, shade->color.r, shade->color.g, shade->color.b);
+    setRGB2(prim, shade->color.r, shade->color.g, shade->tip_blue);
 
     if (g_Task->header.mode == 2) {
         frame_count = g_FrameCount;
@@ -231,9 +231,9 @@ NON_MATCHING void func_801EF280(s32* values) {
             case 6:
                 shade = &shades[(mode & 1) | ((mode & 4) >> 1)];
                 if ((mode & 1) != 0) {
-                    setRGB1(prim, shade->color.red + shade->red_step * g_Task->unk_09, shade->color.green + shade->green_step * g_Task->unk_09, shade->color.blue + shade->blue_step * g_Task->unk_09);
+                    setRGB1(prim, shade->color.r + shade->red_step * g_Task->unk_09, shade->color.g + shade->green_step * g_Task->unk_09, shade->color.b + shade->blue_step * g_Task->unk_09);
                 } else {
-                    setRGB0(prim, shade->color.red + shade->red_step * g_Task->unk_09, shade->color.green + shade->green_step * g_Task->unk_09, shade->color.blue + shade->blue_step * g_Task->unk_09);
+                    setRGB0(prim, shade->color.r + shade->red_step * g_Task->unk_09, shade->color.g + shade->green_step * g_Task->unk_09, shade->color.b + shade->blue_step * g_Task->unk_09);
                 }
                 break;
         }

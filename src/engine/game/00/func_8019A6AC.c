@@ -8,9 +8,9 @@ MATCH void func_8019A6AC(void) {
         g_Task->header.mode++;
         return;
     }
-    g_Task->tint.bytes.rgb.red -= 6;
-    g_Task->tint.bytes.rgb.green -= 6;
-    g_Task->tint.bytes.rgb.blue -= 6;
+    g_Task->tint.bytes.rgb.r -= 6;
+    g_Task->tint.bytes.rgb.g -= 6;
+    g_Task->tint.bytes.rgb.b -= 6;
     Actor_StepAnimLoop();
     work = g_Task;
     if (work->unk_05 == 6) {

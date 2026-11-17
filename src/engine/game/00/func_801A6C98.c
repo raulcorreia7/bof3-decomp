@@ -78,8 +78,8 @@ MATCH void func_801A6C98(u8* record) {
     D_80147A58[data->index].unk_94 = 0x7F;
 
     Actor_SetOptionFlags((u8*)data + 8);
-    g_Task->tint.signed_bytes.delta.red   = -0x80;
-    g_Task->tint.signed_bytes.delta.blue  = -0x80;
-    g_Task->tint.signed_bytes.delta.green = -0x80;
-    g_Task->tint.bytes.flags              = 2;
+    g_Task->tint.signed_bytes.delta.r = -0x80;
+    g_Task->tint.signed_bytes.delta.b = -0x80;
+    g_Task->tint.signed_bytes.delta.g = -0x80;
+    g_Task->tint.bytes.flags          = 2;
 }

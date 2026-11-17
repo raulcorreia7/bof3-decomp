@@ -235,19 +235,19 @@ MATCH void func_801EF564(void) {
 }
 
 MATCH void func_801EF724(void) {
-    g_PaletteFades[g_Task->timer].offset.red += 1;
-    g_PaletteFades[g_Task->timer].offset.green += 1;
-    g_PaletteFades[g_Task->timer].offset.blue += 1;
-    if (g_PaletteFades[g_Task->timer].offset.red == 16) {
+    g_PaletteFades[g_Task->timer].offset.r += 1;
+    g_PaletteFades[g_Task->timer].offset.g += 1;
+    g_PaletteFades[g_Task->timer].offset.b += 1;
+    if (g_PaletteFades[g_Task->timer].offset.r == 16) {
         g_Task->header.step += 1;
     }
 }
 
 MATCH void func_801EF834(void) {
-    g_PaletteFades[g_Task->timer].offset.red -= 1;
-    g_PaletteFades[g_Task->timer].offset.green -= 1;
-    g_PaletteFades[g_Task->timer].offset.blue -= 1;
-    if (g_PaletteFades[g_Task->timer].offset.red == 0) {
+    g_PaletteFades[g_Task->timer].offset.r -= 1;
+    g_PaletteFades[g_Task->timer].offset.g -= 1;
+    g_PaletteFades[g_Task->timer].offset.b -= 1;
+    if (g_PaletteFades[g_Task->timer].offset.r == 0) {
         if (g_Task->unk_04 == 0) {
             SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 2));
         }

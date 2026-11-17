@@ -17,16 +17,16 @@ MATCH s32 GFX_AllocPaletteFade(void* owner, s32 red, s32 green, s32 blue, s32 fa
             if ((PALETTE_OWNER(owner)->palette_type == PALETTE_TYPE_CELL) && ((PALETTE_OWNER(owner)->flags & 0x4) == 0)) {
                 g_PaletteFades[slot].flags = flagged;
             }
-            result                            = slot & BYTE_MASK;
-            g_PaletteFades[slot].step         = GFX_MarkPaletteCells(PALETTE_OWNER(owner)->palette_type, result, 1);
-            tmp_a                             = PALETTE_OWNER(owner)->saved_byte;
-            g_PaletteFades[slot].saved_byte   = tmp_a;
-            tmp_b                             = PALETTE_OWNER(owner)->palette_type;
-            g_PaletteFades[slot].target       = owner;
-            g_PaletteFades[slot].offset.red   = red;
-            g_PaletteFades[slot].offset.green = green;
-            g_PaletteFades[slot].offset.blue  = blue;
-            g_PaletteFades[slot].table_index  = tmp_b;
+            result                           = slot & BYTE_MASK;
+            g_PaletteFades[slot].step        = GFX_MarkPaletteCells(PALETTE_OWNER(owner)->palette_type, result, 1);
+            tmp_a                            = PALETTE_OWNER(owner)->saved_byte;
+            g_PaletteFades[slot].saved_byte  = tmp_a;
+            tmp_b                            = PALETTE_OWNER(owner)->palette_type;
+            g_PaletteFades[slot].target      = owner;
+            g_PaletteFades[slot].offset.r    = red;
+            g_PaletteFades[slot].offset.g    = green;
+            g_PaletteFades[slot].offset.b    = blue;
+            g_PaletteFades[slot].table_index = tmp_b;
             return result;
         }
     }

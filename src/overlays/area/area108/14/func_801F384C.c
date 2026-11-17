@@ -13,10 +13,10 @@ MATCH void func_801F384C(void) {
     if ((timer & BYTE_MASK) == 0) {
         Actor* task;
 
-        task                       = g_Task;
-        task->tint.bytes.rgb.blue  = 0x60;
-        task->tint.bytes.rgb.green = 0x60;
-        task->tint.bytes.rgb.red   = 0x60;
+        task                   = g_Task;
+        task->tint.bytes.rgb.b = 0x60;
+        task->tint.bytes.rgb.g = 0x60;
+        task->tint.bytes.rgb.r = 0x60;
         g_Task->header.mode++;
     }
 }

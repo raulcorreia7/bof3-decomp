@@ -16,10 +16,10 @@ MATCH void func_801B8394(void) {
     Actor_RequestScript(g_Task->direction_08 + 8);
     if (g_Task->unk_05 != 0) {
         func_801C2438();
-        g_Task->tint.signed_bytes.delta.red   = -0x80;
-        g_Task->tint.signed_bytes.delta.green = -0x80;
-        g_Task->tint.signed_bytes.delta.blue  = -0x80;
-        g_Task->tint.bytes.flags              = 1;
+        g_Task->tint.signed_bytes.delta.r = -0x80;
+        g_Task->tint.signed_bytes.delta.g = -0x80;
+        g_Task->tint.signed_bytes.delta.b = -0x80;
+        g_Task->tint.bytes.flags          = 1;
         g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
         g_Task->unk_03 = 3;
     } else {

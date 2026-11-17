@@ -16,19 +16,19 @@ MATCH void func_801F2FFC(void) {
     g_ScriptState->count_02++;
     work = g_Task;
     if (COORD_INT(work->pos.z) < -0x280) {
-        tint_a = work->tint.signed_bytes.delta.red;
+        tint_a = work->tint.signed_bytes.delta.r;
         if (tint_a >= -0x7F) {
-            work->tint.signed_bytes.delta.red = tint_a - 1;
-            work                              = g_Task;
+            work->tint.signed_bytes.delta.r = tint_a - 1;
+            work                            = g_Task;
         }
-        tint_b = work->tint.signed_bytes.delta.green;
+        tint_b = work->tint.signed_bytes.delta.g;
         if (tint_b >= -0x7F) {
-            work->tint.signed_bytes.delta.green = tint_b - 1;
+            work->tint.signed_bytes.delta.g = tint_b - 1;
         }
         work   = g_Task;
-        tint_c = work->tint.signed_bytes.delta.blue;
+        tint_c = work->tint.signed_bytes.delta.b;
         if (tint_c >= -0x7F) {
-            work->tint.signed_bytes.delta.blue = tint_c - 1;
+            work->tint.signed_bytes.delta.b = tint_c - 1;
         }
     }
     if (COORD_INT(g_Task->pos.z) == -0xA00) {

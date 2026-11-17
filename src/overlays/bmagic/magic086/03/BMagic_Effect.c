@@ -66,10 +66,10 @@ MATCH void func_801EF024(void) {
     PartyMember* battler;
 
     battler = g_Battle.selected_actor;
-    g_PaletteFades[g_Task->timer].offset.red--;
-    g_PaletteFades[g_Task->timer].offset.green--;
-    g_PaletteFades[g_Task->timer].offset.blue--;
-    if (g_PaletteFades[g_Task->timer].offset.red == 0) {
+    g_PaletteFades[g_Task->timer].offset.r--;
+    g_PaletteFades[g_Task->timer].offset.g--;
+    g_PaletteFades[g_Task->timer].offset.b--;
+    if (g_PaletteFades[g_Task->timer].offset.r == 0) {
         func_80196718(battler);
         Battle_FadePoisonedBattler(g_Battle.target_selector);
         g_Task->header.mode++;

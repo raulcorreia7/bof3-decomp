@@ -63,9 +63,9 @@ MATCH void func_801EEE14(void) {
 MATCH void func_801EEEB4(void) {
     u8 timer;
 
-    g_PaletteFades[g_Task->unk_09].offset.red += 2;
-    g_PaletteFades[g_Task->unk_09].offset.green += 1;
-    g_PaletteFades[g_Task->unk_09].offset.blue += 1;
+    g_PaletteFades[g_Task->unk_09].offset.r += 2;
+    g_PaletteFades[g_Task->unk_09].offset.g += 1;
+    g_PaletteFades[g_Task->unk_09].offset.b += 1;
     timer         = g_Task->timer + 1;
     g_Task->timer = timer;
     if (timer == 8) {
@@ -76,9 +76,9 @@ MATCH void func_801EEEB4(void) {
 #include "overlays/bmagic/Effect_NextStepOnWorkLastTick.h"
 
 MATCH void func_801EEFF8(void) {
-    g_PaletteFades[g_Task->unk_09].offset.red -= 2;
-    g_PaletteFades[g_Task->unk_09].offset.green -= 1;
-    g_PaletteFades[g_Task->unk_09].offset.blue -= 1;
+    g_PaletteFades[g_Task->unk_09].offset.r -= 2;
+    g_PaletteFades[g_Task->unk_09].offset.g -= 1;
+    g_PaletteFades[g_Task->unk_09].offset.b -= 1;
     if (--g_Task->timer == 0) {
         GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
         Battle_FadePoisonedBattler(g_Battle.target_selector);

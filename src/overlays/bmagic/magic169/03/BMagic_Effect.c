@@ -173,9 +173,9 @@ MATCH void func_801EF444(void) {
 MATCH void func_801EF4FC(void) {
     s32 cue;
 
-    g_PaletteFades[g_Task->timer].offset.red++;
-    g_PaletteFades[g_Task->timer].offset.green++;
-    g_PaletteFades[g_Task->timer].offset.blue++;
+    g_PaletteFades[g_Task->timer].offset.r++;
+    g_PaletteFades[g_Task->timer].offset.g++;
+    g_PaletteFades[g_Task->timer].offset.b++;
     if (--g_Task->unk_09 == 0) {
         cue = EMI_CUE_ID(SND_BANK_COMMON, 0x02);
         if (g_Task->unk_04 & 0x1) {
@@ -199,9 +199,9 @@ MATCH void func_801EF688(void) {
     FAKE_STACK_PADS(u8, 0x10);
 
     unk04 = g_Task->unk_04;
-    g_PaletteFades[g_Task->timer].offset.red -= 1;
-    g_PaletteFades[g_Task->timer].offset.green -= 1;
-    g_PaletteFades[g_Task->timer].offset.blue -= 1;
+    g_PaletteFades[g_Task->timer].offset.r -= 1;
+    g_PaletteFades[g_Task->timer].offset.g -= 1;
+    g_PaletteFades[g_Task->timer].offset.b -= 1;
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     battler        = &g_Game.members[unk04];

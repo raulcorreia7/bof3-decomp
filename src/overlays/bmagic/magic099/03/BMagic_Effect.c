@@ -43,9 +43,9 @@ MATCH void func_801EEC88(void) {
 }
 
 MATCH void func_801EEE70(void) {
-    g_PaletteFades[g_Task->timer].offset.red--;
-    g_PaletteFades[g_Task->timer].offset.green--;
-    g_PaletteFades[g_Task->timer].offset.blue--;
+    g_PaletteFades[g_Task->timer].offset.r--;
+    g_PaletteFades[g_Task->timer].offset.g--;
+    g_PaletteFades[g_Task->timer].offset.b--;
     if (--g_Task->unk_09 == 0) {
         Battle_ApplyDamageFlags(g_Battle.target_selector, 16);
         g_Task->header.mode++;

@@ -146,22 +146,22 @@ MATCH void func_801F082C(void) {
 
 MATCH void func_801F08B8(void) {
     if (g_FrameCount & 1) {
-        g_PaletteFades[g_Task->param.unk_0B].offset.red += 1;
-        g_PaletteFades[g_Task->param.unk_0B].offset.green += 1;
-        g_PaletteFades[g_Task->param.unk_0B].offset.blue += 1;
+        g_PaletteFades[g_Task->param.unk_0B].offset.r += 1;
+        g_PaletteFades[g_Task->param.unk_0B].offset.g += 1;
+        g_PaletteFades[g_Task->param.unk_0B].offset.b += 1;
     }
-    if (g_PaletteFades[g_Task->param.unk_0B].offset.red == 8) {
+    if (g_PaletteFades[g_Task->param.unk_0B].offset.r == 8) {
         g_Task->header.step += 1;
     }
 }
 
 MATCH void func_801F09E0(void) {
     if (g_FrameCount & 1) {
-        g_PaletteFades[g_Task->param.unk_0B].offset.red -= 1;
-        g_PaletteFades[g_Task->param.unk_0B].offset.green -= 1;
-        g_PaletteFades[g_Task->param.unk_0B].offset.blue -= 1;
+        g_PaletteFades[g_Task->param.unk_0B].offset.r -= 1;
+        g_PaletteFades[g_Task->param.unk_0B].offset.g -= 1;
+        g_PaletteFades[g_Task->param.unk_0B].offset.b -= 1;
     }
-    if (g_PaletteFades[g_Task->param.unk_0B].offset.red == 0) {
+    if (g_PaletteFades[g_Task->param.unk_0B].offset.r == 0) {
         g_Task->header.step = 1;
     }
     if (g_BattleEffectBattler->param.unk_0B & 0x80) {

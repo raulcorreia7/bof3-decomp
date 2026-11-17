@@ -3,9 +3,9 @@
 MATCH void func_801F2D70(void) {
     g_Task->timer -= 1;
     if (g_Task->timer != 0) {
-        g_Task->tint.bytes.rgb.red -= 4;
-        g_Task->tint.bytes.rgb.green -= 4;
-        g_Task->tint.bytes.rgb.blue -= 4;
+        g_Task->tint.bytes.rgb.r -= 4;
+        g_Task->tint.bytes.rgb.g -= 4;
+        g_Task->tint.bytes.rgb.b -= 4;
     } else {
         g_Task->timer       = 12;
         g_Task->header.mode = 3;
