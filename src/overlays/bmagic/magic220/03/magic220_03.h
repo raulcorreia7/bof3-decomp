@@ -42,8 +42,8 @@ extern BattleEffect D_801F0710[];
             }                                                                      \
         }                                                                          \
     }
-extern Magic220SharedSteps D_801EEC04;
-void                       func_801EFF60(void);
-void                       func_801F0334(void);
+extern Magic220Steps D_801EEC04;
+void                 func_801EFF60(void);
+void                 func_801F0334(void);
 
 #endif

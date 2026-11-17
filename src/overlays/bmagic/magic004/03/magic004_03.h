@@ -5,20 +5,20 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern Magic004SharedSteps D_801EEC04;
+extern Magic004Steps D_801EEC04;
 
-#define MAGIC004_STEP_COUNT 4
+#define MAGIC004_TASK_STEP_COUNT 4
 
-typedef struct Magic004Steps {
-    Callback steps[MAGIC004_STEP_COUNT];
-} Magic004Steps;
+typedef struct Magic004TaskSteps {
+    Callback steps[MAGIC004_TASK_STEP_COUNT];
+} Magic004TaskSteps;
 
-extern Magic004Steps D_801EEC18;
-extern u8            D_801EFE10[];
-extern u8            D_801EFE11[];
-extern u8            D_801EFE12[];
-extern u8            D_801EFE34[];
-extern u16           D_801EFE40[];
+extern Magic004TaskSteps D_801EEC18;
+extern u8                D_801EFE10[];
+extern u8                D_801EFE11[];
+extern u8                D_801EFE12[];
+extern u8                D_801EFE34[];
+extern u16               D_801EFE40[];
 
 /* D_801EFE60 */
 extern Callback BMagic_Steps[];

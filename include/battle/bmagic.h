@@ -51,45 +51,45 @@ typedef struct BMagicSparkleSteps {
 ASSERT_SIZE(BMagicSparkleSteps, 0xC);
 
 /* One step list per shared dispatcher; the type takes the lowest-numbered spell of the images that include it. */
-#define MAGIC220_SHARED_STEP_COUNT 3
+#define MAGIC220_STEP_COUNT 3
 
-typedef struct Magic220SharedSteps {
-    Callback steps[MAGIC220_SHARED_STEP_COUNT];
-} Magic220SharedSteps;
+typedef struct Magic220Steps {
+    Callback steps[MAGIC220_STEP_COUNT];
+} Magic220Steps;
 
-ASSERT_SIZE(Magic220SharedSteps, 0xC);
+ASSERT_SIZE(Magic220Steps, 0xC);
 
-#define MAGIC010_SHARED_STEP_COUNT 4
+#define MAGIC010_STEP_COUNT 4
 
-typedef struct Magic010SharedSteps {
-    Callback steps[MAGIC010_SHARED_STEP_COUNT];
-} Magic010SharedSteps;
+typedef struct Magic010Steps {
+    Callback steps[MAGIC010_STEP_COUNT];
+} Magic010Steps;
 
-ASSERT_SIZE(Magic010SharedSteps, 0x10);
+ASSERT_SIZE(Magic010Steps, 0x10);
 
-#define MAGIC068_SHARED_STEP_COUNT 5
+#define MAGIC068_STEP_COUNT 5
 
-typedef struct Magic068SharedSteps {
-    Callback steps[MAGIC068_SHARED_STEP_COUNT];
-} Magic068SharedSteps;
+typedef struct Magic068Steps {
+    Callback steps[MAGIC068_STEP_COUNT];
+} Magic068Steps;
 
-ASSERT_SIZE(Magic068SharedSteps, 0x14);
+ASSERT_SIZE(Magic068Steps, 0x14);
 
-#define MAGIC065_SHARED_STEP_COUNT 4
+#define MAGIC065_STEP_COUNT 4
 
-typedef struct Magic065SharedSteps {
-    Callback steps[MAGIC065_SHARED_STEP_COUNT];
-} Magic065SharedSteps;
+typedef struct Magic065Steps {
+    Callback steps[MAGIC065_STEP_COUNT];
+} Magic065Steps;
 
-ASSERT_SIZE(Magic065SharedSteps, 0x10);
+ASSERT_SIZE(Magic065Steps, 0x10);
 
-#define MAGIC004_SHARED_STEP_COUNT 5
+#define MAGIC004_STEP_COUNT 5
 
-typedef struct Magic004SharedSteps {
-    Callback steps[MAGIC004_SHARED_STEP_COUNT];
-} Magic004SharedSteps;
+typedef struct Magic004Steps {
+    Callback steps[MAGIC004_STEP_COUNT];
+} Magic004Steps;
 
-ASSERT_SIZE(Magic004SharedSteps, 0x14);
+ASSERT_SIZE(Magic004Steps, 0x14);
 
 /* A battle-effect module's head. The id word is the value the type-0 EMI
  * loader compares with the archive TOC; the three state callbacks follow and

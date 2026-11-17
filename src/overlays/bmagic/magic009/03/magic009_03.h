@@ -8,7 +8,7 @@
 /* The timer reloads from the second table. */
 #define EFFECT_TIMER_RELOAD func_800B0058
 
-extern Magic004SharedSteps D_801EEC04;
+extern Magic004Steps D_801EEC04;
 
 #define MAGIC009_STEP_COUNT 4
 

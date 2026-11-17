@@ -6,7 +6,7 @@
 #include "overlays/bmagic/bmagic.h"
 
 /* Battle flag and the request hand-off these overlays toggle. */
-extern Magic065SharedSteps D_801EEC04;
+extern Magic065Steps D_801EEC04;
 
 #define MAGIC117_STEP_COUNT 4
 

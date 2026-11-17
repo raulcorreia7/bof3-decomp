@@ -5,16 +5,16 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern u8                  D_801EC2E4;
-extern Magic065SharedSteps D_801EEC04;
+extern u8            D_801EC2E4;
+extern Magic065Steps D_801EEC04;
 
-#define MAGIC065_STEP_COUNT 4
+#define MAGIC065_TASK_STEP_COUNT 4
 
-typedef struct Magic065Steps {
-    Callback steps[MAGIC065_STEP_COUNT];
-} Magic065Steps;
+typedef struct Magic065TaskSteps {
+    Callback steps[MAGIC065_TASK_STEP_COUNT];
+} Magic065TaskSteps;
 
-extern Magic065Steps D_801EEC14;
+extern Magic065TaskSteps D_801EEC14;
 
 void func_801DE8C0(s32 arg0, s32 arg1, s32 arg2);
 void BMagic_SetTextItemName(u8 item_id, u8 category);

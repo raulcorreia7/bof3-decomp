@@ -7,7 +7,7 @@
 
 extern s32 D_1F800004;
 
-extern Magic010SharedSteps D_801EEC04;
+extern Magic010Steps D_801EEC04;
 
 extern Callback     D_801F03C0[];
 extern u8           D_801F03D4[];

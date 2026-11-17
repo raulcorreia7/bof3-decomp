@@ -7,7 +7,7 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern Magic010SharedSteps D_801EEC04;
+extern Magic010Steps D_801EEC04;
 
 /* The x and y offset of each of the eight spawned effects. */
 extern Offset2  D_801F08A8[];
