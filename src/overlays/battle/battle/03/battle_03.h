@@ -669,7 +669,7 @@ bool               Battle_EndRound(void);
 s32                Battle_StepBattlers(void);
 void               func_801EA59C(u8* counter, s16* budget_max, u32 unused_a, u32 unused_b, s16* share, u8* budget, s16* step, u8* clear_flag);
 void               func_801D9DBC(s16 x, s16 y, u8 template_index, u16 packed_color, u8 semi_trans);
-void               func_801D9E9C(s16 arg0, s16 arg1, u16 arg2, u16 arg3, s8 arg4);
+void               func_801D9E9C(s32 x, s32 y, s32 width, s32 second_width, u8 second);
 void               func_801DA078(s32 x, s32 y, s32 u_index);
 /* func_801DA408 */
 void               Battle_DrawLine(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b);

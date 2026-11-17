@@ -2,33 +2,32 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D8DF8(s32 panel_x, s32 panel_y, u32 index) {
-    s16 bar_border_y;
-    s16 shadow_component;
-    s32 status_text_y;
-    s32 battler_index;
+    s16 color_r;
+    s16 color_g;
+    s16 color_b;
     s32 status_mode;
     s32 draw_x;
-    s32 hp_text_y;
-    s32 panel_bottom_y;
+    s32 battler_index;
     s32 panel_left_x;
-    s32 shadow_blue;
     s32 panel_right_x;
+    s32 panel_bottom_y;
+    s32 bar_border_y;
+    s32 hp_text_y;
     s32 status_label_y;
+    s32 status_text_y;
     s32 status_value;
-    s32 shadow_green;
     u16 packed_color;
     u16 panel_status;
     u16 bar_status;
-    u8  blue_component;
-    u8  color_r;
-    u8  color_g;
-    u8  color_b;
+    u8  color_byte;
+    s8* style;
 
     GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
     draw_x = panel_x + 4;
     draw_x <<= 0x10;
     draw_x       = draw_x >> 0x10;
-    packed_color = *(u16*)(MEM_PTR(u8, 0x80033A08u) + ((g_WindowStyle << 6) | 0x20));
+    style        = &g_WindowStyle;
+    packed_color = *(u16*)(MEM_PTR(u8, 0x80033A08u) + ((((s32)*style) << 6) | 0x20));
     color_r      = (packed_color & 0x1F) * 8;
     color_g      = (packed_color >> 2) & 0xF8;
     color_b      = (packed_color >> 7) & 0xF8;
@@ -60,8 +59,8 @@ NON_MATCHING void func_801D8DF8(s32 panel_x, s32 panel_y, u32 index) {
     func_801DA078(panel_left_x & HALF_MASK, status_label_y & HALF_MASK, 0);
     hp_text_y = panel_y + 0xC;
     hp_text_y <<= 0x10;
-    hp_text_y      = hp_text_y >> 0x10;
-    blue_component = color_b;
+    hp_text_y  = hp_text_y >> 0x10;
+    color_byte = color_b;
     func_801D94D4((s16)(panel_x + 0x14), hp_text_y, status_mode, (u8)g_Game.members[battler_index].chr.hp);
     status_mode = ((u8)g_Game.members[battler_index].chr.status >> 0xD) & 0x2;
     TEXT_FormatLiteral(g_UiFormatBuffer, D_801D0C6C);
@@ -73,43 +72,34 @@ NON_MATCHING void func_801D8DF8(s32 panel_x, s32 panel_y, u32 index) {
     panel_left_x <<= 0x10;
     panel_left_x = panel_left_x >> 0x10;
     bar_border_y = panel_y + 2;
-    Battle_DrawPanelLine(panel_left_x, bar_border_y, (panel_x + 0x49), bar_border_y, color_r, color_g, blue_component);
-    Battle_DrawPanelLine(panel_left_x, (panel_y + 3), panel_left_x, (panel_y + 0x12), color_r, color_g, blue_component);
-    shadow_component = color_r - 0x10;
-    if (shadow_component < 0) {
+    Battle_DrawPanelLine(panel_left_x, bar_border_y, (panel_x + 0x49), bar_border_y, color_r, color_g, color_b);
+    Battle_DrawPanelLine(panel_left_x, (panel_y + 3), panel_left_x, (panel_y + 0x12), color_r, color_g, color_b);
+    color_r -= 0x10;
+    if (color_r < 0) {
         color_r = 0;
-    } else if (shadow_component >= 0x100) {
+    } else if (color_r >= 0x100) {
         color_r = 0xFF;
-    } else {
-        color_r = shadow_component;
     }
-    shadow_component = color_g - 0x10;
-    if (shadow_component < 0) {
+    color_g -= 0x10;
+    if (color_g < 0) {
         color_g = 0;
-    } else if (shadow_component >= 0x100) {
+    } else if (color_g >= 0x100) {
         color_g = 0xFF;
-    } else {
-        color_g = shadow_component;
     }
-    shadow_component = blue_component - 0x10;
-    if (shadow_component < 0) {
-        blue_component = 0;
-    } else if (shadow_component >= 0x100) {
-        blue_component = 0xFF;
-    } else {
-        blue_component = shadow_component;
+    color_b -= 0x10;
+    if (color_b < 0) {
+        color_b = 0;
+    } else if (color_b >= 0x100) {
+        color_b = 0xFF;
     }
-    shadow_blue   = blue_component;
     panel_right_x = panel_x + 0x49;
     panel_right_x <<= 0x10;
     panel_right_x  = panel_right_x >> 0x10;
     panel_bottom_y = panel_y + 0x12;
     panel_bottom_y <<= 0x10;
     panel_bottom_y = panel_bottom_y >> 0x10;
-    shadow_green   = color_g;
-    shadow_blue &= BYTE_MASK;
-    Battle_DrawLine(panel_right_x, (panel_y + 2), panel_right_x, panel_bottom_y, color_r, shadow_green, shadow_blue);
-    Battle_DrawLine((panel_x + 2), panel_bottom_y, panel_right_x, panel_bottom_y, color_r, shadow_green, shadow_blue);
+    Battle_DrawLine(panel_right_x, (panel_y + 2), panel_right_x, panel_bottom_y, color_r, color_g, color_b);
+    Battle_DrawLine((panel_x + 2), panel_bottom_y, panel_right_x, panel_bottom_y, color_r, color_g, color_b);
 }
 #else
 INCLUDE_ASM(func_801D8DF8);
