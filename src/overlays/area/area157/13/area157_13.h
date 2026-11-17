@@ -12,6 +12,9 @@
 #define ACTOR_SCREEN_X_STEP      0x20
 #define ACTOR_SCREEN_X_THRESHOLD 0x100
 
+/* The per-sprite-row screen scale of the quad's far edge: a signed byte a row. */
+#define AREA_ROW_SCALE_OFFSET    0x54
+
 /* The scratchpad cell holding this mode's work pointer. */
 
 /* The party position in 16.16 fixed point. */

@@ -55,4 +55,7 @@ extern u8 D_801F4B2D[];
 extern u8 D_801F4B2E[];
 extern u8 D_801F4B30[];
 
+/* The per-sprite-row screen scale of the quad's far edge: a signed byte a row. */
+#define AREA_ROW_SCALE_OFFSET 0x70
+
 #endif
