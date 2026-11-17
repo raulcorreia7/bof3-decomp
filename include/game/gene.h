@@ -11,7 +11,7 @@
 #define AFFINITY_COUNT          14
 
 /* Runtime dragon state: the selected id, the companion byte copied from
- * D_800B4D4C, and the signed affinity accumulator over AFFINITY_* columns. */
+ * D_800B4D4C, and the signed affinity accumulator over GENE_AFFINITY_* columns. */
 #define BATTLE_DRAGON_ID        0x800B6F58u
 #define BATTLE_DRAGON_COMPANION 0x800B6F5Cu
 #define BATTLE_GENE_AFFINITY    0x800B6F60u
@@ -77,20 +77,20 @@ typedef enum DragonForm {
 /* Affinity columns, in the order the dragon-id selection reads them: five
  * elements, then five stats, then the four form affinities. */
 typedef enum GeneAffinity {
-    AFFINITY_FLAME        = 0,
-    AFFINITY_FROST        = 1,
-    AFFINITY_THUNDER      = 2,
-    AFFINITY_SHADOW       = 3,
-    AFFINITY_RADIANCE     = 4,
-    AFFINITY_HP           = 5,
-    AFFINITY_POWER        = 6,
-    AFFINITY_DEFENSE      = 7,
-    AFFINITY_SPEED        = 8,
-    AFFINITY_INTELLIGENCE = 9,
-    AFFINITY_DRAGON       = 10,
-    AFFINITY_WARRIOR      = 11,
-    AFFINITY_COUNTER      = 12,
-    AFFINITY_BEHEMOTH     = 13,
+    GENE_AFFINITY_FLAME        = 0,
+    GENE_AFFINITY_FROST        = 1,
+    GENE_AFFINITY_THUNDER      = 2,
+    GENE_AFFINITY_SHADOW       = 3,
+    GENE_AFFINITY_RADIANCE     = 4,
+    GENE_AFFINITY_HP           = 5,
+    GENE_AFFINITY_POWER        = 6,
+    GENE_AFFINITY_DEFENSE      = 7,
+    GENE_AFFINITY_SPEED        = 8,
+    GENE_AFFINITY_INTELLIGENCE = 9,
+    GENE_AFFINITY_DRAGON       = 10,
+    GENE_AFFINITY_WARRIOR      = 11,
+    GENE_AFFINITY_COUNTER      = 12,
+    GENE_AFFINITY_BEHEMOTH     = 13,
 } GeneAffinity;
 
 typedef struct Gene {
@@ -114,11 +114,11 @@ ASSERT_SIZE(DragonPointers, DRAGON_POINTERS_SIZE);
 
 /* 0x800B4EE0: per-form multipliers plus nine resistances. */
 typedef struct DragonFormStats {
-    u8 mult[5];
-    u8 resist[RES_INDEX_COUNT];
+    u8 multipliers[5];
+    u8 resistances[RES_INDEX_COUNT];
 } DragonFormStats;
 
-ASSERT_OFFSET(DragonFormStats, resist, 0x05);
+ASSERT_OFFSET(DragonFormStats, resistances, 0x05);
 ASSERT_SIZE(DragonFormStats, DRAGON_FORM_STATS_SIZE);
 
 /* 0x800B4C7C: per-gene AP cost, 8-bit entries. */
