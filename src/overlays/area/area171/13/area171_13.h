@@ -13,6 +13,8 @@ extern u8 D_80144CAA;
 /* The payload's per-state handler table. */
 extern u8 D_801F3F5C[];
 
+/* The signed step scale the quad's height sample uses. */
+extern u8         D_801F3F84[];
 /* The quad's blue level by step, in units of 8. */
 extern u8         D_801F3F88[];
 extern TriggerBox D_801F4188[2];

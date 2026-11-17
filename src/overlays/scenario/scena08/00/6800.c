@@ -54,7 +54,27 @@ MATCH void func_801FD400(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801FD704(void) {
+    switch (g_SceneState.step_05) {
+        case 0:
+            Game_ClearScriptActive();
+            g_SceneState.step_05 = 1;
+            break;
+        case 1:
+            if (g_ScriptVars[0] != 1) {
+                break;
+            }
+            SYS_SetFlag(g_SceneFlags, 0x20);
+            g_SceneState.step_05 = 2;
+            break;
+        default:
+            break;
+    }
+}
+#else
 INCLUDE_ASM(func_801FD704);
+#endif
 
 MATCH void func_801FDF84(void) {
     g_Characters[CHAR_INDEX_REI].exp += 10000;
