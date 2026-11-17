@@ -10,6 +10,7 @@ NON_MATCHING void func_801D1228(void) {
     u8* src;
     u8* dest;
     u8* living_count;
+    u8* count_ptr;
     u8  slot;
     s32 index;
     s32 count;
@@ -21,15 +22,16 @@ NON_MATCHING void func_801D1228(void) {
     living_count  = &g_Battle.living_party_count;
     *living_count = 0;
     if (g_Battle.party_count != 0) {
+        count_ptr = living_count;
         do {
             if (!(Battle_SlotIsBlocked(slot & BYTE_MASK) & BYTE_MASK)) {
-                *living_count += 1;
+                *count_ptr += 1;
             }
             slot += 1;
         } while ((u32)(slot & BYTE_MASK) < (u8)g_Battle.party_count);
     }
-    *g_Battle.panel_widths        = 8;
     work_row                      = (u8*)g_Game.members;
+    *g_Battle.panel_widths        = 8;
     g_BattleMessageSlot           = work_row;
     g_Battle.row_cursor           = 0;
     g_Battle.cursor.panel_entry   = 0;
