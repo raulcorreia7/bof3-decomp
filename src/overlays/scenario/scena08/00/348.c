@@ -362,9 +362,7 @@ NON_MATCHING s32 func_801F7E14(void) {
     i     = 0;
     do {
         if (slot[0] != 0) {
-            if (data[1] != 1) {
-                drawn = 0;
-            }
+            drawn = 0;
             if (data[1] == 1) {
                 data[2] += step;
                 if (data[0] == 0) {

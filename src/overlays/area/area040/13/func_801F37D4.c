@@ -6,19 +6,17 @@ NON_MATCHING void func_801F37D4(void) {
     s32      shade;
     s32      id;
     s32      x;
-    s32      y;
     u8       i;
     u8       j;
 
     for (i = 0; i < 4; i++) {
         j = 0;
-        y = i + 0x20;
         for (; j < 4; j++) {
             if ((u8)Area_GetCellCode((u8)(j + 0x94), (s16)(i + 0x20)) != 0x50) {
                 continue;
             }
             x  = (u8)j + 0x94;
-            id = Area_GetCellId(x, y);
+            id = Area_GetCellId(x, i + 0x20);
             if (id == 0) {
                 continue;
             }
@@ -41,7 +39,7 @@ NON_MATCHING void func_801F37D4(void) {
             prim->b0 = shade;
             prim->g0 = shade;
             prim->r0 = shade;
-            Area_AddCellPrim(x << 16, y << 16, 0, sizeof(POLY_F4));
+            Area_AddCellPrim(x << 16, (i + 0x20) << 16, 0, sizeof(POLY_F4));
         }
     }
 }
