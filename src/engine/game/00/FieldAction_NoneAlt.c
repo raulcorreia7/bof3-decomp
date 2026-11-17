@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801AD44C(void) {
+/* func_801AD69C */
+MATCH void FieldAction_NoneAlt(void) {
     Actor* work;
 
     work = (Actor*)GAME_WORK_AREA_PTR;

@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801AD9F0(void) {
+/* func_801AD9F0 */
+MATCH void FieldAction_Fade(void) {
     Actor* work;
     Actor* area;
     s8     count;

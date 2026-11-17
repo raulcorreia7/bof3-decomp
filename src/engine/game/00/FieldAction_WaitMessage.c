@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801AD2CC(void) {
+/* func_801AD2CC */
+MATCH void FieldAction_WaitMessage(void) {
     Actor* work;
 
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {

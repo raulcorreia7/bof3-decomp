@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801AD0EC(void) {
+/* func_801AD0EC */
+MATCH void FieldAction_FindSmall(void) {
     s32 ui_mode;
 
     ui_mode = GAME_REQUEST_MESSAGE;

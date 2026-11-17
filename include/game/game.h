@@ -246,7 +246,7 @@ extern u8        s_ScriptOpcodeOffsets[256];
 extern Callback  D_801C88FC[2];
 extern Callback  D_801C8904[2];
 /* D_801C8938 */
-extern u8        s_SceneMessages[4];
+extern u8        g_FindZenny[4];
 extern u8        D_801CA624[232];
 extern u8        D_801CA71E[];
 /* D_801CD050 */

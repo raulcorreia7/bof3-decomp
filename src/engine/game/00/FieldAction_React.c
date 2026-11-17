@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801AD3B4(void) {
+/* func_801AD3B4 */
+MATCH void FieldAction_React(void) {
     u32 choice;
 
     choice = RANDOM_MASK(0xF);

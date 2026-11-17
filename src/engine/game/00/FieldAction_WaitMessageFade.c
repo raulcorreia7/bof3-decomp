@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801AD9C4(void) {
+/* func_801AD9C4 */
+MATCH void FieldAction_WaitMessageFade(void) {
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
         return;
     }

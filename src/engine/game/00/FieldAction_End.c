@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801AD218(void) {
+/* func_801AD218 */
+MATCH void FieldAction_End(void) {
     Actor*          work;
     volatile Actor* area;
 
