@@ -672,8 +672,8 @@ extern const EncounterZone         g_AreaEncounterZones[MAP_ZONE_COUNT];
 extern const EncounterZone* const  g_EncounterZones[MAP_ZONE_LIST_COUNT];
 /* D_80181484 */
 extern const SceneFlagPair         g_SceneFlagPairs[SCENE_FLAG_COUNT];
-extern const ScriptRef             D_80181BDC[40];
-extern const ScriptRef* const      D_80181C7C[11];
+extern const ScriptEntry           D_80181BDC[40];
+extern const ScriptEntry* const    D_80181C7C[11];
 extern const BGMTrack              g_BGMTracks[BGM_TRACK_COUNT];
 extern u8                          D_80182174;
 extern u8                          D_80182175;
