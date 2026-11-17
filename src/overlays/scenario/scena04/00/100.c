@@ -212,14 +212,14 @@ MATCH void func_801F747C(void) {
 
 #define KEY_WORD(off, n) (*(s32*)((u8*)D_801FA2C0 + (off) + (n) * 4))
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F75BC(u8 weight, u8 shade) {
+MATCH void func_801F75BC(u8 weight, u8 shade) {
     LINE_G2* line;
     s32      point[3];
     u8       i;
     u32      off;
     u32      flicker;
-    u32      tint;
+    u8       first_tint;
+    s16      tint;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
@@ -234,16 +234,16 @@ NON_MATCHING void func_801F75BC(u8 weight, u8 shade) {
         point[2] = (((KEY_WORD(off, 6) - KEY_WORD(off, 2)) * weight) >> 4) + KEY_WORD(off, 2);
         Area_ProjectPoint((s32*)((u8*)D_801FA2C0 + off), (DVECTOR*)&line->x0);
         Area_ProjectPoint(point, (DVECTOR*)&line->x1);
-        flicker = (g_FrameCount & 1) << 2;
-        setRGB0(line, ((flicker + 0x80) * shade) >> 8, ((flicker + 0x80) * shade) >> 8, (u8)(((flicker + 0x80) * shade) >> 8) >> 1);
-        tint = (flicker * shade) >> 8;
+        flicker    = (g_FrameCount & 1) << 2;
+        first_tint = (u8)(((flicker + 0x80) * shade) >> 8);
+        line->r0   = ((flicker + 0x80) * shade) >> 8;
+        line->g0   = ((flicker + 0x80) * shade) >> 8;
+        line->b0   = first_tint >> 1;
+        tint       = (flicker * shade) >> 8;
         setRGB1(line, tint, tint, (u8)tint >> 1);
         GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_G2));
     }
 }
-#else
-INCLUDE_ASM(func_801F75BC);
-#endif
 
 MATCH void func_801F77A8(void) {
     SYS_DISPATCH_TASK(D_801FA198, 1, g_Task);
