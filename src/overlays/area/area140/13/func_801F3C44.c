@@ -2,9 +2,11 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801F3C44(s32 x, s32 y) {
-    s32 target_x;
+    /* FAKE: the first distance check uses the x argument saved in t2. */
+    FAKE_REG(s32, target_x, "t2");
+    /* FAKE: retail keeps the party count in v0 for the initial branch. */
+    FAKE_REG(s32, count, "v0");
     s32 i;
-    s32 count;
     s32 dx;
     s32 dy;
     s32 height;
@@ -12,8 +14,10 @@ NON_MATCHING s32 func_801F3C44(s32 x, s32 y) {
     /* FAKE: retail reserves eight bytes of frame that no access explains. */
     FAKE_STACK_PADS(u8, 8);
     target_x = x;
-    count    = g_PartySize;
-    i        = 0;
+    /* FAKE: keep the saved x argument live across the count load. */
+    FAKE_USE(target_x);
+    count = g_PartySize;
+    i     = 0;
     if (count > 0) {
         do {
             if (g_Game.members[i].header.flags != 0) {
