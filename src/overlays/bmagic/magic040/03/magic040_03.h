@@ -17,7 +17,7 @@ extern Pos2          D_801EFCCC[][2];
 extern u8            D_801EFD24[];
 
 void func_801EF430(void* task);
-void func_801EFA3C(void);
+void BMagic_DrawShrinkingRing(void);
 void func_801EF7FC(void);
 void func_801EF600(u8 start, u16 radius);
 

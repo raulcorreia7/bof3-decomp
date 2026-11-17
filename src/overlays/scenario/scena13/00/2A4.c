@@ -255,7 +255,116 @@ MATCH void func_801F7D50(void) {
     D_80146872 = 1;
 }
 
-INCLUDE_ASM(func_801F7DBC);
+MATCH void func_801F7DBC(void) {
+    if (LOHU(g_GameAreaId) == AREA_ID_STEEL_BEACH_FREIGHTER) {
+        if (g_GameCellType == 1 && g_GameLastAreaId == AREA_ID_RELAY_POINT_A_PORTAL && SYS_TestFlag(g_SceneFlags, 0xC) != 0 && SYS_TestFlag(g_SceneFlags, 0xD) == 0) {
+            Game_SetScriptActive();
+            g_SceneState.state_04 = 4;
+            g_SceneState.step_05  = 0xA;
+        }
+        if (g_GameCellType == 0 && SYS_TestFlag(g_SceneFlags, 0xD) != 0 && SYS_TestFlag(g_SceneFlags, 0xE) == 0) {
+            func_801C1DF0(4);
+            func_801BE1B0(0);
+        }
+    }
+
+    if (LOHU(g_GameAreaId) == AREA_ID_URKAN_TAPA_WORLD_MAP && g_GameLastAreaId == AREA_ID_COLONY_OUTSIDE && SYS_TestFlag(g_SceneFlags, 0xB) == 0) {
+        g_AreaCameraAngle.vx = -0x2D6;
+        g_AreaCameraAngle.vz = 0x2F2;
+        g_AreaCameraOffsetZ  = 0x5DC;
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_RELAY_POINT_A_PORTAL && g_GameCellType == 4 && SYS_TestFlag(g_SceneFlags, 0xC) == 0) {
+        func_801BE1B0(2);
+        SYS_SetFlag(g_SceneFlags, 0xC);
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_KOMBINAT_ARRIVAL && SYS_TestFlag(g_SceneFlags, 0) == 0) {
+        func_801BE1B0(0);
+        g_AreaCameraAngle.vx  = -0x386;
+        g_AreaCameraAngle.vz  = 0x150;
+        g_SceneState.state_04 = 1;
+        g_SceneState.step_05  = 0;
+    }
+
+    if (LOHU(g_GameAreaId) == AREA_ID_DRAGNIER_SURFACE) {
+        if (g_GameCellType == 0) {
+            if (SYS_TestFlag(g_SceneFlags, 0x11) == 0) {
+                g_AreaCameraAngle.vx = -0x2C0;
+                g_AreaCameraAngle.vz = 0x10E;
+                D_801FBFEC           = func_8019601C();
+                if (D_801FBFEC != 0xFF) {
+                    g_SpawnedActors[D_801FBFEC].header.flags   = 1;
+                    g_SpawnedActors[D_801FBFEC].type           = 0x13;
+                    g_SpawnedActors[D_801FBFEC].camera_angle.x = -0x2AA;
+                    g_SpawnedActors[D_801FBFEC].camera_angle.y = g_AreaCameraAngle.vy;
+                    g_SpawnedActors[D_801FBFEC].camera_angle.z = 0x2C6;
+                    g_SpawnedActors[D_801FBFEC].layer          = 0xFF;
+                }
+            } else if (SYS_TestFlag(g_SceneFlags, 0x12) == 0) {
+                func_801F3E60(1);
+                g_AreaDrawFlags = 0;
+                SND_PlaySE(0x203);
+            } else if (SYS_TestFlag(g_SceneFlags, 0x13) == 0) {
+                func_801C1DF0(6);
+                func_801BE1B0(6);
+                SYS_SetFlag(g_SceneFlags, 0x13);
+            }
+        }
+        if (g_GameCellType == 2) {
+            if (SYS_TestFlag(g_SceneFlags, 0x11) == 0) {
+                func_801C1DF0(5);
+                func_801BE1B0(3);
+            } else if (SYS_TestFlag(g_SceneFlags, 0x12) == 0) {
+                func_801F3E60(0);
+            }
+        }
+    }
+
+    if (LOHU(g_GameAreaId) == AREA_ID_DRAGNIER_ELDER_FIGHT) {
+        SYS_SetFlag(g_SceneFlags, 0x1F);
+        if (g_GameCellType == 2 && SYS_TestFlag(g_SceneFlags, 0x17) == 0) {
+            SND_StartDecrescendo(0, 0, 0x64, 0x10);
+            func_801BE1B0(0);
+            g_SceneState.state_04 = 7;
+            g_SceneState.step_05  = 0;
+        }
+    }
+
+    if (LOHU(g_GameAreaId) == AREA_ID_COLONY_OUTSIDE) {
+        if (g_GameCellType == 0 && SYS_TestFlag(g_SceneFlags, 7) == 0) {
+            func_801BE1B0(5);
+            g_SceneState.state_04 = 3;
+            g_SceneState.step_05  = 0;
+        }
+        if (g_GameCellType == 4 && SYS_TestFlag(g_SceneFlags, 8) == 0) {
+            func_801BE1B0(6);
+            SYS_SetFlag(g_SceneFlags, 8);
+        }
+    }
+
+    if (LOHU(g_GameAreaId) == AREA_ID_KOMBINAT_CAMP) {
+        if (SYS_TestFlag(g_SceneFlags, 2) == 0) {
+            func_801C1DF0(1);
+            func_801BE1B0(0);
+            func_801F8C1C();
+            g_AreaCameraOffsetZ = -0xE00;
+            D_801FBFEC          = func_8019601C();
+            if (D_801FBFEC != 0xFF) {
+                g_SpawnedActors[D_801FBFEC].header.flags   = 1;
+                g_SpawnedActors[D_801FBFEC].type           = 0x31;
+                g_SpawnedActors[D_801FBFEC].camera_angle.x = -0x2AA;
+                g_SpawnedActors[D_801FBFEC].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[D_801FBFEC].camera_angle.z = 0x200;
+                g_SpawnedActors[D_801FBFEC].scene_step     = 0;
+                g_SpawnedActors[D_801FBFEC].layer          = 0x1E;
+            }
+        } else if (SYS_TestFlag(g_SceneFlags, 3) != 0 && SYS_TestFlag(g_SceneFlags, 4) == 0) {
+            func_801C1DF0(2);
+            func_801BE1B0(2);
+            func_801F8D0C();
+        }
+    }
+    g_SceneState.mode_02 = 2;
+}
 
 MATCH void func_801F8474(void) {
     SYS_DISPATCH_BYTE(D_801FBF54, g_SceneState.state_04);
