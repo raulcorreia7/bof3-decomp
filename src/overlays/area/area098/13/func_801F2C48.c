@@ -3,6 +3,7 @@
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F2C48(void) {
     u8            slot;
+    u8            option_flags;
     SpawnedActor* row;
     Actor*        actor;
     Actor*        parent;
@@ -12,7 +13,10 @@ NON_MATCHING void func_801F2C48(void) {
         D_801F6520 = g_Game.members[g_Task->option_flags].character_index != 0;
         row        = &g_SpawnedActors[slot];
         GFX_ClearRect(0x340, 0x100, 0x80, 0x100);
-        *row                = *(SpawnedActor*)&g_Game.members[g_Task->option_flags];
+        option_flags = g_Task->option_flags;
+        /* FAKE: retail leaves the task load's delay slot empty. */
+        FAKE_BARRIER();
+        *row                = *(SpawnedActor*)&g_Game.members[option_flags];
         actor               = (Actor*)row;
         actor->header.flags = 1;
         actor->header.mode  = 2;
