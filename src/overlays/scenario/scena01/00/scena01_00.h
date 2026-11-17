@@ -30,6 +30,8 @@ void func_801F7678(s32 arg0);
 /* func_801F7AE4 */
 void Area_AddSpark(void);
 
+void func_801FD28C(s32 variant);
+
 void func_801F7DCC(s32 red, s32 green, s32 blue);
 void func_801F7EDC(void);
 
