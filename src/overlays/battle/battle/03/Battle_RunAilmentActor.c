@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801E6FB0(void) {
+/* func_801E6FB0 */
+MATCH void Battle_RunAilmentActor(void) {
     u8 slot;
     /* FAKE: row index pinned to v0 so the product takes v1; pure-C best 95.10%, a 20-minute search found nothing. */
     FAKE_REG(s32, row, "v0");

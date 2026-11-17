@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801E69C0(void) {
+/* func_801E69C0 */
+MATCH void Battle_RaiseScreenFade(void) {
     u8 value;
     u8 next;
 

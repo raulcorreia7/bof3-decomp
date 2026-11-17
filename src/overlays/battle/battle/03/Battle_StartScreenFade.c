@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801E6990(void) {
+/* func_801E6990 */
+MATCH void Battle_StartScreenFade(void) {
     PartyMember* work;
 
     g_Task->unk_09 = 0;

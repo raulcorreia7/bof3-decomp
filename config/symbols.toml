@@ -29,10 +29,14 @@ s_BattleCueIds = { addr = 0x801D0C98, source = "Picks a random battle cue id for
 jtbl_801D0CA0 = { addr = 0x801D0CA0, type = "Callback", source = "The switch table of func_801DEFE4: the jump targets of its jr dispatch." }
 g_BattleDropChances = { addr = 0x801D0CB8, source = "Enemy item drop chances." }
 g_BattleEffectStages = { addr = 0x801D0CC0, source = "Battle effect stage handlers." }
-g_BattleEffectStage0Funcs = { addr = 0x801D0CD0, source = "Battle effect handlers for the first effect stage, one per slot kind." }
-g_BattleEffectStage1Funcs = { addr = 0x801D0D1C, source = "Battle effect handlers for the second effect stage, one per slot kind." }
-g_BattleEffectStage3Funcs = { addr = 0x801D0ED4, source = "Battle effect handlers for the fourth effect stage, one per slot kind." }
-jtbl_801D0F0C = { addr = 0x801D0F0C, type = "Callback", source = "The switch table of func_801E5CA4: the jump targets of its jr dispatch." }
+g_BattleEffectStage0Steps = { addr = 0x801D0CD0, source = "Battle effect handlers for the first effect stage, one per slot kind." }
+g_BattleEffectStage1Steps = { addr = 0x801D0D1C, source = "Battle effect handlers for the second effect stage, one per slot kind." }
+g_BattleEffectStage3Steps = { addr = 0x801D0ED4, source = "Battle effect handlers for the fourth effect stage, one per slot kind." }
+g_BattleDamageNumberSteps = { addr = 0x801D0EF4, source = "The damage number effect's five step routines" }
+jtbl_801D0F0C = { addr = 0x801D0F0C, type = "Callback", source = "The switch table of Battle_UpdateDamageNumber: the jump targets of its jr dispatch." }
+g_BattleScreenFlashSteps = { addr = 0x801D0F20, source = "The screen flash effect's three step routines" }
+g_BattleScreenFadeSteps = { addr = 0x801D0F2C, source = "The screen fade effect's three step routines" }
+g_BattleAilmentActorSteps = { addr = 0x801D0F44, source = "The ailment actor's five step routines" }
 g_BattlePanelModes = { addr = 0x801D0F80, source = "Battle panel update handlers." }
 g_BattlePartyPanelSteps = { addr = 0x801D0FA0, source = "The party panel's three state steps." }
 g_BattleMenuRowsPanelSteps = { addr = 0x801D0FAC, source = "The menu rows panel's three state steps." }
@@ -127,7 +131,27 @@ Battle_RunDesertDefeat = { addr = 0x801E5768, type = "func", source = "Installed
 Battle_UpdateEffects = { addr = 0x801E5824, type = "func", source = "Runs active battle effects." }
 Battle_AllocEffect = { addr = 0x801E590C, type = "func", source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "clears every timer, state and flag byte of the shared BattleEffect work record (0x00-0x06, 0x48, 0x5D-0x5F); every effect countdown calls it first" }
+Battle_UpdateDamageNumber = { addr = 0x801E5CA4, type = "func", source = "Runs the damage number effect: its step, then the digits drawn over the target." }
+Battle_StartDamageNumber = { addr = 0x801E5E2C, type = "func", source = "Damage number step 0: places the number over the target, counts its digits and flags the target." }
+Battle_HoldDamageNumber = { addr = 0x801E6088, type = "func", source = "Damage number step 1: waits before the number rises." }
+Battle_RiseDamageNumber = { addr = 0x801E60DC, type = "func", source = "Damage number step 2: lifts the number, then sets its bounce." }
+Battle_BounceDamageNumber = { addr = 0x801E6154, type = "func", source = "Damage number step 3: arcs the number until it falls back to its start height." }
+Battle_EndDamageNumber = { addr = 0x801E61F0, type = "func", source = "Damage number step 4: clears the target's damage number flag and ends the effect." }
 Battle_DrawRollingDigits = { addr = 0x801E62BC, type = "func", source = "Draws rolling digits." }
+Battle_UpdateScreenFlash = { addr = 0x801E63C0, type = "func", source = "Runs the screen flash effect step: a camera kick with a white (party) or red (enemy) fill." }
+Battle_StartScreenFlash = { addr = 0x801E6420, type = "func", source = "Screen flash step 0: queues the action's text and sets the flash start values." }
+Battle_RaiseScreenFlash = { addr = 0x801E64B4, type = "func", source = "Screen flash step 1: pulls the camera back while the flash colour rises." }
+Battle_LowerScreenFlash = { addr = 0x801E65F8, type = "func", source = "Screen flash step 2: returns the camera while the flash colour falls, then ends the effect." }
+Battle_UpdateScreenFade = { addr = 0x801E6930, type = "func", source = "Runs the screen fade effect step." }
+Battle_StartScreenFade = { addr = 0x801E6990, type = "func", source = "Screen fade step 0: zeroes the fade level." }
+Battle_RaiseScreenFade = { addr = 0x801E69C0, type = "func", source = "Screen fade step 1: fills the screen with the fade level and raises it to 0xFF." }
+Battle_HoldScreenFade = { addr = 0x801E6A54, type = "func", source = "Screen fade step 2: fills the screen with the held fade level." }
+Battle_UpdateAilmentActor = { addr = 0x801E6C84, type = "func", source = "Runs the ailment actor step while blind, silenced or asleep; not during the result." }
+Battle_WaitAilment = { addr = 0x801E6D28, type = "func", source = "Ailment actor step 0: waits until the effect battler is blind, silenced or asleep." }
+Battle_StartAilmentActor = { addr = 0x801E6E54, type = "func", source = "Ailment actor step 1: picks the ailment script and starts its actor." }
+Battle_RestartAilmentActor = { addr = 0x801E6FA0, type = "func", source = "Ailment actor step 2: returns to step 0." }
+Battle_RunAilmentActor = { addr = 0x801E6FB0, type = "func", source = "Ailment actor step 3: plays the ailment actor until the ailment ends." }
+Battle_WaitAilmentEffect = { addr = 0x801E71EC, type = "func", source = "Ailment actor step 4: holds while an effect plays, then returns to step 0 or 3." }
 Battle_StartCharacterLoad = { addr = 0x801E7948, type = "func", source = "Starts the EMI load of the party sprite archive of g_EmiLoadedCharacterIndex (front or back by the facing of g_BattleEffectBattler; the BPLD and BPLU archives, or the 513 to 520 variants of the reload) and advances the mode." }
 Battle_UpdatePanel = { addr = 0x801E9074, type = "func", source = "Runs the current battle panel task: its mode selects the update routine." }
 Battle_UpdatePartyPanel = { addr = 0x801E90FC, type = "func", source = "Party panel mode: runs the panel state step." }

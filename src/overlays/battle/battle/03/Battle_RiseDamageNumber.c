@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801E60DC(void) {
+/* func_801E60DC */
+MATCH void Battle_RiseDamageNumber(void) {
     BattleEffect* slot;
     BattleEffect* work;
     u8            count;

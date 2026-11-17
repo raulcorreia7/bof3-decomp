@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801E6E54(void) {
+/* func_801E6E54 */
+MATCH void Battle_StartAilmentActor(void) {
     PartyMember* work;
     /* FAKE: Pin the fresh work pointer to a0. */
     FAKE_REG(PartyMember*, next, "a0");

@@ -1,6 +1,7 @@
 #include "battle_03.h"
 
-MATCH void func_801E6A54(void) {
+/* func_801E6A54 */
+MATCH void Battle_HoldScreenFade(void) {
     volatile PartyMember* work;
     u8                    value;
 
