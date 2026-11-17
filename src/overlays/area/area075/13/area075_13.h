@@ -50,7 +50,7 @@ extern u8 D_801F58D2;
 
 extern u8 D_801F58D3;
 
-void func_801F4A50(s32, s32, s32, s32, s32);
+void func_801F4A50(s32 x, s32 y, s32 width, s32 height, s32 mode);
 
 void func_801F2E64(s32 phase, s32 semi_trans);
 
