@@ -212,7 +212,7 @@ segments:
       - [0xD7C8, c, Shop_StartFadeIn]
       - [0xD80C, c, func_801DE40C]
       - [0xD85C, c, func_801DE45C]
-      - [0xD8C8, c, func_801DE4C8]
+      - [0xD8C8, c, Shop_PickMember]
       - [0xDC50, c, func_801DE850]
       - [0xDC8C, c, func_801DE88C]
       - [0xDCE8, c, func_801DE8E8]

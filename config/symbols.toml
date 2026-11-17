@@ -3677,6 +3677,7 @@ Menu_DrawEquipChoiceWindow = { addr = 0x801DD578, type = "func", source = "Draws
 SAVE_DrawSlot = { addr = 0x801DDCB0, type = "func", source = "Draws one row of the stock list: its window, icons, name and the values formatted through g_MenuZennyFormat." }
 SAVE_DrawPortTabs = { addr = 0x801DDFB0, type = "func", source = "Draws the memory card port panel: the title, the two port tabs and the cursor at the selected port." }
 Shop_StartFadeIn = { addr = 0x801DE3C8, type = "func", source = "Starts the fast UI fade in once the window effect is idle and advances the shop step state; Menu_StartFadeIn does the same in the Bate menu." }
+Shop_PickMember = { addr = 0x801DE4C8, type = "func", source = "Cursor step of the party member swap: draws the pick prompt, moves the two-list cursor and records the chosen member." }
 Menu_SwapBytes5 = { addr = 0x801DF464, type = "func", source = "Swaps the two bytes that two pointers address; same bytes as Menu_SwapBytes at 0x801D7E08." }
 Menu_RunAbilityStockSort = { addr = 0x801E1B80, type = "func", source = "runs the stock command the cursor row selects through g_AbilityStockCommands" }
 Menu_SwapBytes6 = { addr = 0x801E1BB8, type = "func", source = "Swaps the two bytes that two pointers address; same bytes as Menu_SwapBytes at 0x801D7E08." }

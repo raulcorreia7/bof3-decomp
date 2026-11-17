@@ -8,7 +8,7 @@ u8 D_801E5BC8[0x24] = {
     0xA9, 0x00, 0x01, 0x00,
 };
 
-Callback g_ShopStep6Steps[SHOP_STEP6_COUNT] = {func_801DE1C4, func_801DE45C, func_801DE4C8, func_801DE850};
+Callback g_ShopStep6Steps[SHOP_STEP6_COUNT] = {func_801DE1C4, func_801DE45C, Shop_PickMember, func_801DE850};
 
 Callback g_ShopStep6Sub0Steps[SHOP_STEP6_SUB0_COUNT] = {func_801DE200, Shop_StartFadeIn, func_801DE40C};
 

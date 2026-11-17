@@ -575,7 +575,8 @@ void func_801DE200(void);
 void Shop_StartFadeIn(void);
 void func_801DE40C(void);
 void func_801DE45C(void);
-void func_801DE4C8(void);
+/* func_801DE4C8 */
+void Shop_PickMember(void);
 void func_801DE850(void);
 void func_801DE88C(void);
 void func_801DE8E8(void);

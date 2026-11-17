@@ -1,22 +1,20 @@
 #include "shop_00.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801DE4C8(void) {
+/* func_801DE4C8 */
+MATCH void Shop_PickMember(void) {
     u8  prev_index;
     u8  prev_side;
     u8* side;
-    u8* index;
-    s8* cursor;
     s32 buttons;
     u8  count;
     u8  result;
 
     func_801DF6A8();
     if (D_801E6254 == GAME_NONE) {
-        UI_DrawText(26, 20, 0, TEXT_LENGTH_MAX, Message_GetText(0x60));
+        UI_DrawText(26, 20, 0, TEXT_LENGTH_MAX, Message_GetText(MSG_096));
     } else {
         Message_SetVariable(0, 5, g_Characters[MEM_PTR(u8, g_CharSlot)[D_801E6254]].name);
-        UI_DrawText(26, 20, 0, TEXT_LENGTH_MAX, Message_GetText(0x61));
+        UI_DrawText(26, 20, 0, TEXT_LENGTH_MAX, Message_GetText(MSG_097));
     }
     buttons    = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
     count      = Party_CountOrder(PARTY_ORDER_FIELD);
@@ -36,42 +34,58 @@ NON_MATCHING void func_801DE4C8(void) {
         }
     }
     if (buttons & PADLup) {
+        u8* index;
+
         index = (u8*)&D_80148659;
         if ((s8)(*index -= 1) < 0) {
             *index = (D_80148658 == 0) ? count - 1 : D_801E6250 - 1;
         }
     } else if (buttons & PADLdown) {
+        u8* index;
         s32 value;
 
         index = (u8*)&D_80148659;
         value = (s8)(*index += 1);
         if (D_80148658 == 0) {
             if (count - 1 < value) {
-                D_80148659 = 0;
+                goto wrap_index;
             }
         } else if (D_801E6250 - 1 < value) {
-            D_80148659 = 0;
+            goto wrap_index;
         }
+        /* The jump keeps the two compare arms apart; gcc merges them into one otherwise. */
+        goto index_kept;
+    wrap_index:
+        D_80148659 = 0;
+    index_kept:;
     }
     if (prev_side != D_80148658 || prev_index != D_80148659) {
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
     }
-    if (g_InputMasks[MENU_INPUT_CONFIRM] & g_InputPressed) {
+    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        s8* cursor;
+        u8  chosen_side;
+        u8  chosen_index;
+
         cursor = &D_8014865A;
         if (*cursor == 0x7F) {
             SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
-            *cursor    = (u8)D_80148658;
-            D_8014865D = (u8)D_80148659;
+            chosen_side  = D_80148658;
+            chosen_index = D_80148659;
+            *cursor      = chosen_side;
+            D_8014865D   = chosen_index;
             return;
         }
         result     = func_801DF478();
         D_801E6254 = result;
-        SND_PlaySE(result == GAME_NONE ? 0x103 : 0x107);
+        SND_PlaySE(result == GAME_NONE ? EMI_CUE_ID(SND_BANK_COMMON, 3) : EMI_CUE_ID(SND_BANK_COMMON, 7));
         D_8014865A = 0x7F;
         D_8014865D = 0x7F;
         return;
     }
-    if (g_InputMasks[MENU_INPUT_CANCEL] & g_InputPressed) {
+    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+        s8* cursor;
+
         SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
         cursor = &D_8014865A;
         if (*cursor != 0x7F) {
@@ -84,6 +98,3 @@ NON_MATCHING void func_801DE4C8(void) {
         UI_SetMode(UI_MODE_FAST_FADE_OUT);
     }
 }
-#else
-INCLUDE_ASM(func_801DE4C8);
-#endif
