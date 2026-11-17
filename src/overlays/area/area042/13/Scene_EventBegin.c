@@ -1,8 +1,8 @@
 #include "area042_13.h"
 #include "menu/save_data.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING s32 func_801F4188(void) {
+/* func_801F4188 */
+MATCH s32 Scene_EventBegin(void) {
     u8 i;
     u8 phase;
 
@@ -25,13 +25,10 @@ NON_MATCHING s32 func_801F4188(void) {
                 g_Task = &g_Actors[i];
                 Actor_SelectScript(1);
                 g_Task = g_CurrentActor;
-                return 1;
+                break;
             }
         }
         return 1;
     }
     return 0;
 }
-#else
-INCLUDE_ASM(func_801F4188);
-#endif

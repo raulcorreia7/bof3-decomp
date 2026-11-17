@@ -38,7 +38,7 @@ segments:
       - [0x136C, c, func_801F3F6C]
       - [0x1420, c, func_801F4020]
       - [0x14D4, c, func_801F40D4]
-      - [0x1588, c, func_801F4188]
+      - [0x1588, c, Scene_EventBegin]
       - [0x1778, c, func_801F4378]
       - [0x1E18, c, func_801F4A18]
       - [0x1F0C, c, func_801F4B0C]
