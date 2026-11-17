@@ -5,10 +5,10 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern Magic010SharedSteps D_801EEC04;
-extern Callback            D_801F08F4[];
+extern Magic010Steps D_801EEC04;
+extern Callback      D_801F08F4[];
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
-extern BattleEffect        D_801F0900[];
+extern BattleEffect  D_801F0900[];
 #define BMAGIC_EFFECT_SLOTS D_801F0900
 #define BMAGIC_EFFECT_COUNT 64
 void func_800B0118(void);

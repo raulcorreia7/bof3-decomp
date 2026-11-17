@@ -195,7 +195,7 @@ MATCH void func_801EF490(void) {
 #include "overlays/bmagic/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF910(void) {
-    Magic004Steps handlers;
+    Magic004TaskSteps handlers;
 
     handlers = D_801EEC18;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);

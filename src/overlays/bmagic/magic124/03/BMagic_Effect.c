@@ -5,11 +5,11 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC14(void) {
-    Magic010SharedSteps handlers;
-    PartyMember*        saved_task;
-    PartyMember*        saved_battler;
-    s32                 tpage;
-    u8                  i;
+    Magic010Steps handlers;
+    PartyMember*  saved_task;
+    PartyMember*  saved_battler;
+    s32           tpage;
+    u8            i;
 
     handlers = D_801EEC04;
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);

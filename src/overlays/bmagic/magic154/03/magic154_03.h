@@ -5,7 +5,7 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern Magic065SharedSteps D_801EEC04;
+extern Magic065Steps D_801EEC04;
 
 #define MAGIC154_STEP_COUNT 4
 

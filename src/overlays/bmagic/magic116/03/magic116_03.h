@@ -5,8 +5,8 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern BattleEffect*       D_801EC2E0;
-extern Magic010SharedSteps D_801EEC04;
+extern BattleEffect* D_801EC2E0;
+extern Magic010Steps D_801EEC04;
 
 /* Draws every live streak segment and moves it one frame; returns 1 while any
  * segment is live. */

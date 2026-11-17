@@ -7,7 +7,7 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern Magic010SharedSteps D_801EEC04;
+extern Magic010Steps D_801EEC04;
 
 extern Callback D_801EF8C0[];
 

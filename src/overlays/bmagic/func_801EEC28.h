@@ -1,7 +1,7 @@
 /* Dispatches spad-work task 1 through the module head's five-handler table. */
 /* func_801EEC28 (magic004), func_801EEC28 (magic009) */
 MATCH void func_801EEC28(void) {
-    Magic004SharedSteps handlers;
+    Magic004Steps handlers;
 
     handlers = D_801EEC04;
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
