@@ -56,7 +56,7 @@ MATCH void func_801E3C14(void) {
         if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ITEM && !(Item_GetFlags(LOHU(g_Battle.action_id) >> 8, LOHU(g_Battle.action_id) & BYTE_MASK) & ITEM_TARGET_ENEMY_DEFAULT)) {
             Battle_RequestEnemyScript(4);
         }
-        if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ABILITY && !(D_801CA718[g_Battle.action_id][0] & ABILITY_TARGET_NO_HIT_REACT)) {
+        if (LOBU(g_Battle.action_type) == BATTLE_ACTION_ABILITY && !(D_801CA718[g_Battle.action_id][0] & ABILITY_TARGET_FLAG_NO_HIT_REACT)) {
             Battle_RequestEnemyScript(4);
         }
     }

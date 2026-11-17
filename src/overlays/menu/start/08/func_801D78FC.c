@@ -74,7 +74,7 @@ MATCH void func_801D78FC(void) {
                 SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
                 return;
             }
-            if (g_Abilities[ability_id].targeting_flags & ABILITY_TARGET_ALL) {
+            if (g_Abilities[ability_id].targeting_flags & ABILITY_TARGET_FLAG_ALL) {
                 result     = func_801E7D20(g_CharSlot[g_PartyFieldOrder[panel->unk_0A]], 0, Party_GetAbilities(panel->unk_0A, panel->unk_0B, 0)[panel->unk_0C], 0);
                 D_801ED654 = result;
                 if (result == 1 || result == 5) {

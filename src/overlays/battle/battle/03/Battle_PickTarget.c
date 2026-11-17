@@ -24,35 +24,35 @@ MATCH u8 Battle_PickTarget(void) {
     g_Battle.action_id                                = selected_kind;
     *(u16*)(((*(volatile u8**)&g_Battle.action) + 2)) = selected_kind;
 
-    if (targeting_flags & ABILITY_TARGET_ALL) {
-        if (targeting_flags & ABILITY_TARGET_BOTH_SIDES) {
-            if (!(targeting_flags & ABILITY_TARGET_SELECT)) {
+    if (targeting_flags & ABILITY_TARGET_FLAG_ALL) {
+        if (targeting_flags & ABILITY_TARGET_FLAG_BOTH_SIDES) {
+            if (!(targeting_flags & ABILITY_TARGET_FLAG_SELECT)) {
                 return 0xC0u;
             }
         }
 
         if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
-            if (targeting_flags & ABILITY_TARGET_OPPONENT) {
+            if (targeting_flags & ABILITY_TARGET_FLAG_OPPONENT) {
                 return 0x40u;
             }
             return 0x80u;
         }
 
-        if (targeting_flags & ABILITY_TARGET_OPPONENT) {
+        if (targeting_flags & ABILITY_TARGET_FLAG_OPPONENT) {
             return 0x80u;
         }
         return 0x40u;
     }
 
-    if (!(targeting_flags & ABILITY_TARGET_SELECT)) {
+    if (!(targeting_flags & ABILITY_TARGET_FLAG_SELECT)) {
         return g_Battle.active_battler;
     }
 
     if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
-        if (targeting_flags & ABILITY_TARGET_OPPONENT) {
+        if (targeting_flags & ABILITY_TARGET_FLAG_OPPONENT) {
             return func_800A955C();
         }
-    } else if (!(targeting_flags & ABILITY_TARGET_OPPONENT)) {
+    } else if (!(targeting_flags & ABILITY_TARGET_FLAG_OPPONENT)) {
         return func_800A955C();
     }
 

@@ -6,18 +6,18 @@ MATCH void func_8009761C(void) {
 
     entry = Party_GetAbilities(D_80148656, g_MenuPanelTasks[16].unk_0B, 1);
     flags = D_801CA718[entry[g_MenuPanelTasks[16].unk_0C] * 0x14];
-    if ((flags & ABILITY_TARGET_SELECT) != 0u) {
-        if ((flags & ABILITY_TARGET_ALL) != 0u) {
+    if ((flags & ABILITY_TARGET_FLAG_SELECT) != 0u) {
+        if ((flags & ABILITY_TARGET_FLAG_ALL) != 0u) {
             g_Battle.ui_step = 5u;
         } else {
             g_Battle.ui_step = 4u;
         }
         return;
     }
-    if ((flags & ABILITY_TARGET_BOTH_SIDES) != 0u) {
+    if ((flags & ABILITY_TARGET_FLAG_BOTH_SIDES) != 0u) {
         g_BattleActorTurn->command.target = BATTLE_TARGET_BOTH_SIDES;
-    } else if ((flags & ABILITY_TARGET_ALL) != 0u) {
-        if ((flags & ABILITY_TARGET_OPPONENT) != 0u) {
+    } else if ((flags & ABILITY_TARGET_FLAG_ALL) != 0u) {
+        if ((flags & ABILITY_TARGET_FLAG_OPPONENT) != 0u) {
             g_BattleActorTurn->command.target = BATTLE_TARGET_ENEMY_SIDE;
         } else {
             g_BattleActorTurn->command.target = BATTLE_TARGET_PARTY_SIDE;
