@@ -1,34 +1,34 @@
 #include "game_00.h"
 
-typedef struct WorkScript {
+typedef struct SpawnScript {
     u8 unk_00;
     u8 unk_01;
     u8 unk_02;
     u8 unk_03;
     u8 unk_04;
-    u8 unk_05;
+    u8 mode;
     u8 unk_06;
-    u8 unk_07;
+    u8 step;
     u8 unk_08;
     u8 unk_09;
     u8 unk_0A;
-    u8 unk_0B;
+    u8 index;
     u8 unk_0C;
     u8 unk_0D;
-} WorkScript;
+} SpawnScript;
 
 MATCH void func_801A6C98(u8* record) {
-    u8*         script;
-    WorkScript* data;
-    u8*         src;
-    Actor*      work;
-    void*       shared;
-    u32         x;
-    u32         y;
-    s32         off;
-    u8          index;
-    Actor*      tail;
-    Actor*      entry;
+    u8*          script;
+    SpawnScript* data;
+    u8*          src;
+    Actor*       work;
+    void*        shared;
+    u32          x;
+    u32          y;
+    s32          off;
+    u8           index;
+    Actor*       tail;
+    Actor*       entry;
 
     script               = record;
     off                  = script[9] * 8;
@@ -54,11 +54,11 @@ MATCH void func_801A6C98(u8* record) {
     }
     work->pos.y.fixed        = y;
     COORD_INT(g_Task->pos.z) = Area_SampleHeight(work->pos.x.fixed, y);
-    data                     = (WorkScript*)script;
+    data                     = (SpawnScript*)script;
 
     work                = g_Task;
-    work->header.mode   = data->unk_05;
-    g_Task->header.step = data->unk_07;
+    work->header.mode   = data->mode;
+    g_Task->header.step = data->step;
     g_Task->unk_06      = (data->unk_00 >> 4) - 1;
     tail                = g_Task;
     shared              = tail->range_54.table;
@@ -67,15 +67,15 @@ MATCH void func_801A6C98(u8* record) {
     tail->unk_18        = 0;
     tail->state_70.word = *(u8*)((u8*)shared + 2);
 
-    index                           = data->unk_0B;
-    entry                           = &D_80147A58[index];
-    entry->unk_88                   = 0;
-    entry->walk_dest_y              = 0;
-    D_80147A58[index].walk_dest_x   = 0;
-    D_80147A58[data->unk_0B].unk_77 = data->unk_0A;
-    D_80147A58[data->unk_0B].unk_78 = data->unk_06;
-    D_80147A58[data->unk_0B].unk_7C = (data->unk_0D | (data->unk_0C << 8));
-    D_80147A58[data->unk_0B].unk_94 = 0x7F;
+    index                          = data->index;
+    entry                          = &D_80147A58[index];
+    entry->unk_88                  = 0;
+    entry->walk_dest_y             = 0;
+    D_80147A58[index].walk_dest_x  = 0;
+    D_80147A58[data->index].unk_77 = data->unk_0A;
+    D_80147A58[data->index].unk_78 = data->unk_06;
+    D_80147A58[data->index].unk_7C = (data->unk_0D | (data->unk_0C << 8));
+    D_80147A58[data->index].unk_94 = 0x7F;
 
     Actor_SetOptionFlags((u8*)data + 8);
     g_Task->tint.signed_bytes.delta.red   = -0x80;
