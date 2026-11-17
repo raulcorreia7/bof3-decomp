@@ -7,9 +7,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/bmagic/func_801EEC20.h"
 
 MATCH void func_801EECA4(void) {
-    D_801EFA9C.origin[0] = D_801EC2E0->target.party->pos.x.fixed + 0x14000;
-    D_801EFA9C.origin[1] = D_801EC2E0->target.party->pos.y.fixed;
-    D_801EFA9C.origin[2] = D_801EC2E0->target.party->pos.z.fixed + (0x2C0 << 16);
+    D_801EFA9C.origin.vx = D_801EC2E0->target.party->pos.x.fixed + 0x14000;
+    D_801EFA9C.origin.vy = D_801EC2E0->target.party->pos.y.fixed;
+    D_801EFA9C.origin.vz = D_801EC2E0->target.party->pos.z.fixed + (0x2C0 << 16);
     D_801EFA9C.radius    = 0;
     D_801EFA9C.offset    = 0;
     D_801EFA9C.angle     = 0;
@@ -100,23 +100,23 @@ MATCH void func_801EF040(void) {
         prim = (POLY_F4*)g_GfxPrimCursor;
         SetPolyF4(prim);
         SetSemiTrans(prim, 1);
-        pos[0] = D_801EFA9C.origin[0];
-        pos[1] = D_801EFA9C.origin[1] + ((D_801EFA9C.radius * rcos(angle)) >> 4);
-        pos[2] = D_801EFA9C.origin[2] + ((D_801EFA9C.radius * rsin(angle)) << 4);
+        pos[0] = D_801EFA9C.origin.vx;
+        pos[1] = D_801EFA9C.origin.vy + ((D_801EFA9C.radius * rcos(angle)) >> 4);
+        pos[2] = D_801EFA9C.origin.vz + ((D_801EFA9C.radius * rsin(angle)) << 4);
         Area_ProjectPoint(pos, &screen);
         setXY0(prim, screen.vx, screen.vy);
-        pos[0] = D_801EFA9C.origin[0] + TO_COORD(16);
+        pos[0] = D_801EFA9C.origin.vx + TO_COORD(16);
         Area_ProjectPoint(pos, &screen);
         prim->x1 = screen.vx;
         prim->y1 = screen.vy;
         angle += 0x100;
-        pos[0] = D_801EFA9C.origin[0];
-        pos[1] = D_801EFA9C.origin[1] + ((D_801EFA9C.radius * rcos(angle)) >> 4);
-        pos[2] = D_801EFA9C.origin[2] + ((D_801EFA9C.radius * rsin(angle)) << 4);
+        pos[0] = D_801EFA9C.origin.vx;
+        pos[1] = D_801EFA9C.origin.vy + ((D_801EFA9C.radius * rcos(angle)) >> 4);
+        pos[2] = D_801EFA9C.origin.vz + ((D_801EFA9C.radius * rsin(angle)) << 4);
         Area_ProjectPoint(pos, &screen);
         prim->x2 = screen.vx;
         prim->y2 = screen.vy;
-        pos[0]   = D_801EFA9C.origin[0] + TO_COORD(16);
+        pos[0]   = D_801EFA9C.origin.vx + TO_COORD(16);
         Area_ProjectPoint(pos, &screen);
         prim->x3 = screen.vx;
         prim->y3 = screen.vy;
@@ -138,11 +138,11 @@ MATCH void func_801EF254(void) {
 /* Projects the point and the points half a unit to its left and right to the screen. */
 /* func_801EF2C0 */
 MATCH void BMagic_ProjectSpan(ProjectedSpan* span) {
-    Area_ProjectPoint(span->pos, &span->screen[1]);
-    span->pos[0] -= COORD_HALF;
-    Area_ProjectPoint(span->pos, &span->screen[0]);
-    span->pos[0] += TO_COORD(1);
-    Area_ProjectPoint(span->pos, &span->screen[2]);
+    Area_ProjectPoint(&span->pos.vx, &span->screen[1]);
+    span->pos.vx -= COORD_HALF;
+    Area_ProjectPoint(&span->pos.vx, &span->screen[0]);
+    span->pos.vx += TO_COORD(1);
+    Area_ProjectPoint(&span->pos.vx, &span->screen[2]);
 }
 
 /* Draws the beam segment between two projected spans: two gouraud quads join
@@ -186,10 +186,10 @@ MATCH void func_801EF4E0(void) {
 
     func_801AFE18();
     angle                     = D_801EFA9C.angle;
-    x                         = D_801EFA9C.origin[0];
-    D_801EFAF8.current.pos[0] = x;
-    D_801EFAF8.current.pos[1] = D_801EFA9C.origin[1] + ((D_801EFA9C.offset * rcos(angle)) >> 4);
-    D_801EFAF8.current.pos[2] = D_801EFA9C.origin[2] + ((D_801EFA9C.offset * rsin(angle)) << 4);
+    x                         = D_801EFA9C.origin.vx;
+    D_801EFAF8.current.pos.vx = x;
+    D_801EFAF8.current.pos.vy = D_801EFA9C.origin.vy + ((D_801EFA9C.offset * rcos(angle)) >> 4);
+    D_801EFAF8.current.pos.vz = D_801EFA9C.origin.vz + ((D_801EFA9C.offset * rsin(angle)) << 4);
     BMagic_ProjectSpan(&D_801EFAF8.current);
     step = 0x1000;
     i    = 0;
@@ -197,9 +197,9 @@ MATCH void func_801EF4E0(void) {
         D_801EFAF8.previous = D_801EFAF8.current;
         angle += 0x80;
         x += step;
-        D_801EFAF8.current.pos[0] = x + (rand() & 0xFFF) * 16 - 0x8000;
-        D_801EFAF8.current.pos[1] = D_801EFA9C.origin[1] + ((D_801EFA9C.offset * rcos(angle)) >> 4);
-        D_801EFAF8.current.pos[2] = D_801EFA9C.origin[2] + ((D_801EFA9C.offset * rsin(angle)) << 4);
+        D_801EFAF8.current.pos.vx = x + (rand() & 0xFFF) * 16 - 0x8000;
+        D_801EFAF8.current.pos.vy = D_801EFA9C.origin.vy + ((D_801EFA9C.offset * rcos(angle)) >> 4);
+        D_801EFAF8.current.pos.vz = D_801EFA9C.origin.vz + ((D_801EFA9C.offset * rsin(angle)) << 4);
         step += 0x40;
         i++;
         BMagic_ProjectSpan(&D_801EFAF8.current);
@@ -266,9 +266,9 @@ MATCH u8 func_801EF8EC(void) {
     D_801EFAF4 = D_801EFA9C.sparks;
     for (i = 0; i < 8; i++) {
         if (D_801EFAF4->active != 0) {
-            origin[0] = D_801EFA9C.origin[0];
-            origin[1] = D_801EFA9C.origin[1] + ((D_801EFAF4->offset * rcos(D_801EFAF4->angle)) >> 4);
-            origin[2] = D_801EFA9C.origin[2] + ((D_801EFAF4->offset * rsin(D_801EFAF4->angle)) << 4);
+            origin[0] = D_801EFA9C.origin.vx;
+            origin[1] = D_801EFA9C.origin.vy + ((D_801EFAF4->offset * rcos(D_801EFAF4->angle)) >> 4);
+            origin[2] = D_801EFA9C.origin.vz + ((D_801EFAF4->offset * rsin(D_801EFAF4->angle)) << 4);
             Area_ProjectPoint(origin, &screen);
             func_801EF790(screen.vx, screen.vy, D_801EFAF4->life, GFX_COLOR_NEUTRAL, 0);
             drawn              = 1;

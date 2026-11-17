@@ -27,8 +27,7 @@ ASSERT_SIZE(Magic150Spark, 0x08);
 /* The beam origin, the ring radius, the offset and angle that place the beam's
  * path, and the eight sparks the cursor walks. */
 typedef struct Magic150Beam {
-    s32           origin[3]; /* 0x00 */
-    u8            pad_0C[4];
+    VECTOR        origin; /* 0x00 */
     s16           radius; /* 0x10 */
     s16           offset; /* 0x12 */
     u16           angle;  /* 0x14 */
@@ -48,8 +47,7 @@ extern Magic150Spark* D_801EFAF4;
 
 /* A world point and the screen cells its left, centre and right projections land in. */
 typedef struct ProjectedSpan {
-    s32     pos[3];
-    u8      pad_0C[4];
+    VECTOR  pos;
     DVECTOR screen[3]; /* 0x10 left, 0x14 centre, 0x18 right */
 } ProjectedSpan;
 
