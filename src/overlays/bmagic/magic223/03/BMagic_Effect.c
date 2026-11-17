@@ -8,6 +8,60 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EED18(void) {
+    BattleEffectTargetColumn* targets;
+    PartyMember*              target;
+    u32                       i;
+    u32                       slot;
+    u16*                      palette;
+    u16*                      arena;
+
+    i = 0;
+    do {
+        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
+        i++;
+    } while (i < BMAGIC_EFFECT_COUNT);
+
+    g_Task->facing       = g_BattleEffectBattler->facing;
+    g_Task->pos.x        = g_BattleEffectBattler->pos.x;
+    g_Task->pos.y        = g_BattleEffectBattler->pos.y;
+    g_Task->pos.z        = g_BattleEffectBattler->pos.z;
+    g_Task->unk_09       = 8;
+    g_Task->param.unk_0B = 0;
+    g_Task->header.mode++;
+
+    slot                               = Battle_AllocEffect(1, 0x63) & BYTE_MASK;
+    target                             = g_Task;
+    g_BattleEffects[slot].header.mode  = 0;
+    g_BattleEffects[slot].target.party = target;
+    g_Task->param.unk_0B++;
+
+    for (i = 0; i < 0x30; i++) {
+        slot = BMagic_AllocEffect() & BYTE_MASK;
+        if (slot != BYTE_MASK) {
+            target                                = g_Task;
+            BMAGIC_EFFECT_SLOTS[slot].header.mode = 0;
+            BMAGIC_EFFECT_SLOTS[slot].unk_0B      = i;
+            targets                               = (BattleEffectTargetColumn*)&BMAGIC_EFFECT_SLOTS[13].unk_5C;
+            targets[slot].target.party            = target;
+            BMAGIC_EFFECT_SLOTS[slot].arg.unk_09  = ((i >> 3) << 4) + (rand() & 0xF) + 1;
+            g_Task->param.unk_0B++;
+        }
+    }
+
+    arena   = BATTLE_PALETTE_SOURCE_COLORS;
+    palette = BATTLE_EFFECT_PALETTE_COLORS;
+    for (i = 1; i < 0x10; i++) {
+        palette[0]  = arena[0] | 0x8000;
+        palette[16] = arena[16] | 0x8000;
+        palette++;
+        arena++;
+    }
+    BATTLE_EFFECT_PALETTE_COLORS[-1] = 0;
+    BATTLE_EFFECT_PALETTE_COLORS[15] = 0;
+    g_GfxPalettePending              = 1;
+    SND_QueueSelectionEffect(0x100);
 }
 #else
 INCLUDE_ASM(func_801EED18);

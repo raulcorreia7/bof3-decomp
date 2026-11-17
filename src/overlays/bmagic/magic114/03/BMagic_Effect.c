@@ -727,6 +727,7 @@ NON_MATCHING void func_801F0FBC(void) {
     long     depth;
     long     flag;
     s32      i;
+    s32      angle;
     s32      x;
     s32      y;
     s32      z;
@@ -753,12 +754,13 @@ NON_MATCHING void func_801F0FBC(void) {
             SetLineF2(prim);
             PSX_SET_SEMI_TRANSPARENT(prim);
             g_ScratchPadVectors[0].vx = FIXED_MUL(rcos(i << 6) * 16, radius);
-            g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(i << 6) * 16, radius);
+            angle                     = i;
+            g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(angle << 6) * 16, radius);
             g_ScratchPadVectors[0].vz = 0;
             RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x0, &depth, &flag);
             i++;
             g_ScratchPadVectors[0].vx = FIXED_MUL(rcos(i << 6) * 16, radius);
-            D_1F800016                = FIXED_MUL(rsin(i << 6) * 16, radius);
+            D_1F800016                = FIXED_MUL(radius, rsin(i << 6) * 16);
             D_1F800018                = 0;
             RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x1, &depth, &flag);
             setRGB0(prim, shade, shade, shade);
