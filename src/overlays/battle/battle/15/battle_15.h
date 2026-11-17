@@ -227,61 +227,6 @@ ASSERT_SIZE(BattleEnemyEvents, ENEMY_STRIDE);
 
 #define BATTLE_ENEMY_EVENTS MEM_PTR(BattleEnemyEvents, 0x800E407Cu)
 
-/* The player battler's panel record (D_80145F04, stride 0x140): the panel
- * block of the local battler row, whose +0x74 the record's address is.
- *
- * Battle_RescalePanel scales the four halfwords at +0x40 into the four halfwords at
- * +0x20, scales the four bytes at +0x55 into the four bytes at +0x35, and
- * mirrors the bytes at +0x4B..+0x53 into +0x2B..+0x33. */
-typedef struct BattlePanelRecord {
-    u8  pad_00[0x20];
-    s16 unk_20; /* the scaled stat quotes */
-    s16 unk_22;
-    s16 unk_24;
-    s16 unk_26;
-    u8  pad_28[0x3];
-    u8  unk_2B; /* the mirrored panel bytes */
-    u8  unk_2C;
-    u8  unk_2D;
-    u8  unk_2E;
-    u8  unk_2F;
-    u8  unk_30;
-    u8  unk_31;
-    u8  pad_32[0x1];
-    u8  unk_33;
-    u8  pad_34[0x1];
-    u8  unk_35; /* the scaled element gauges */
-    u8  unk_36;
-    u8  unk_37;
-    u8  unk_38;
-    u8  pad_39[0x7];
-    u16 unk_40; /* the stat quotes the panel scales */
-    u16 unk_42;
-    u16 unk_44;
-    u16 unk_46;
-    u8  pad_48[0x3];
-    u8  unk_4B; /* the panel bytes the record mirrors */
-    u8  unk_4C;
-    u8  unk_4D;
-    u8  unk_4E;
-    u8  unk_4F;
-    u8  unk_50;
-    u8  unk_51;
-    u8  pad_52[0x1];
-    u8  unk_53;
-    u8  pad_54[0x1];
-    u8  unk_55; /* the element gauges the panel scales */
-    u8  unk_56;
-    u8  unk_57;
-    u8  unk_58;
-} BattlePanelRecord;
-
-ASSERT_OFFSET(BattlePanelRecord, unk_20, 0x20);
-ASSERT_OFFSET(BattlePanelRecord, unk_35, 0x35);
-ASSERT_OFFSET(BattlePanelRecord, unk_40, 0x40);
-ASSERT_OFFSET(BattlePanelRecord, unk_55, 0x55);
-ASSERT_SIZE(BattlePanelRecord, 0x5A);
-
 typedef struct BattleSelectionState {
     volatile u8 active_count; /* +0x00 */
     volatile u8 unk_01[0xA3];
@@ -1020,7 +965,7 @@ bool        func_800A5D00(void);
 u8          func_800A6C2C(void);
 s32         Battle_AppendComboIds(u8 combination, u8 count);
 /* func_800A9FC4 */
-void        Battle_RescalePanel(BattlePanelRecord* rec, s32 slot);
+void        Battle_RescalePanel(Character* rec, s32 slot);
 bool        func_800AA5F4(s32 slot);
 bool        func_800AA7A0(u8 slot);
 /* func_800AD044 */

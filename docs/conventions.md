@@ -23,7 +23,7 @@ statements. A workaround stays only when the retail bytes need it, and its comme
 | `Tag_VerbObject`; a family of 3+ is `Tag_ObjectVerb`: `Message_WindowOpen`                                       | Glue the subject to the verb: `MessageSelectAnswerOpenMenu`   |
 | Keep the address name above a named definition: `/* func_801F2C04 */`                                            | Lose the `func_`/`D_` name a search from assembly needs       |
 | `snake_case` locals, parameters and members: `item_id`, `party_slot`                                             | Hungarian or camelCase: `pItem`, `nCount`, `itemId`           |
-| Name the role: `BattlePanel`, `coord_x`                                                                          | Name the storage: `BattlePanelRecord`, `half_3A`, `ByteView`  |
+| Name the role: `BattlePanel`, `coord_x`                                                                          | Name the storage: `BattlePanelRow`, `half_3A`, `ByteView`     |
 | Acronyms keep their capitals: `EnemyAIBlock`, `Char_RestoreHP`, `SND_IsXAIdle`                                   | Mixed case: `EnemyAiBlock`, `Char_RestoreHp`, `SND_IsXaIdle`  |
 | A type is an English noun phrase: `EnemyBattler`, `PartyMember`                                                  | The tag on a type: `BattlerEnemy`, `BattlerParty`             |
 | A slot is a filled position (`party_slot`); a fixed table position is an index (`CharacterIndex`)                | `CharacterSlot` for the record array's position               |
