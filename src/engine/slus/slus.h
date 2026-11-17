@@ -1026,14 +1026,18 @@ void                    GFX_FadeFromBlackFast(void);
 void                    GFX_FadeToBlackSlow(void);
 /* func_8014EEB8 */
 void                    GFX_FadeFromBlackSlow(void);
-void                    func_8014EEE0(void);
-void                    func_8014EF08(void);
+/* func_8014EEE0 */
+void                    GFX_FadeToBlackFront(void);
+/* func_8014EF08 */
+void                    GFX_FadeFromBlackFront(void);
 /* func_8014EF30 */
 void                    GFX_FadeToWhite(void);
 /* func_8014EF58 */
 void                    GFX_FadeFromWhite(void);
-void                    func_8014EF80(void);
-void                    func_8014F024(void);
+/* func_8014EF80 */
+void                    GFX_ZoomToBlackSlow(void);
+/* func_8014F024 */
+void                    GFX_ZoomFromBlackSlow(void);
 void                    func_8014F16C(void);
 /* func_8014F1AC */
 void                    GFX_FadeToBlackSlower(void);
@@ -1043,11 +1047,13 @@ void                    GFX_FadeFromBlackSlower(void);
 void                    GFX_FadeToWhiteSlower(void);
 /* func_8014F224 */
 void                    GFX_FadeFromWhiteSlower(void);
-void                    func_8014F24C(void);
+/* func_8014F24C */
+void                    GFX_ZoomToBlackSlower(void);
 void                    func_8014F2F0(void);
 /* func_8014F438 */
 void                    GFX_FadeToBlackSlowest(void);
-void                    func_8014F460(void);
+/* func_8014F460 */
+void                    GFX_SpinToBlack(void);
 extern void             func_8014FB80(s16 x, s16 y, u16 clut, u8 shade);
 /* func_801507BC */
 extern void             Message_DispatchState(void);

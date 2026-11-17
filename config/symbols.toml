@@ -7414,13 +7414,19 @@ GFX_FadeToBlackFast = { addr = 0x8014EE40, type = "func", source = "Fades the sc
 GFX_FadeFromBlackFast = { addr = 0x8014EE68, type = "func", source = "Fades the screen back in from black at the fast speed (scheduler thread)." }
 GFX_FadeToBlackSlow = { addr = 0x8014EE90, type = "func", source = "Fades the screen to black at the slow speed (scheduler thread)." }
 GFX_FadeFromBlackSlow = { addr = 0x8014EEB8, type = "func", source = "Fades the screen back in from black at the slow speed (scheduler thread)." }
+GFX_FadeToBlackFront = { addr = 0x8014EEE0, type = "func", source = "Screen effect 6: fades the screen to black on the front effect layer." }
+GFX_FadeFromBlackFront = { addr = 0x8014EF08, type = "func", source = "Screen effect 7: fades the screen back from black on the front effect layer." }
 GFX_FadeToWhite = { addr = 0x8014EF30, type = "func", source = "Fades the screen to white at the normal speed (scheduler thread)." }
 GFX_FadeFromWhite = { addr = 0x8014EF58, type = "func", source = "Fades the screen back in from white at the normal speed (scheduler thread)." }
+GFX_ZoomToBlackSlow = { addr = 0x8014EF80, type = "func", source = "Screen effect 10: fades to black at the slow rate while the camera spins and pulls in." }
+GFX_ZoomFromBlackSlow = { addr = 0x8014F024, type = "func", source = "Screen effect 11: fades in from black at the slow rate while the camera spins back and pulls out." }
 GFX_FadeToBlackSlower = { addr = 0x8014F1AC, type = "func", source = "Fades the screen to black at the slower speed (scheduler thread)." }
 GFX_FadeFromBlackSlower = { addr = 0x8014F1D4, type = "func", source = "Fades the screen back in from black at the slower speed (scheduler thread)." }
 GFX_FadeToWhiteSlower = { addr = 0x8014F1FC, type = "func", source = "Fades the screen to white at the slower speed (scheduler thread)." }
 GFX_FadeFromWhiteSlower = { addr = 0x8014F224, type = "func", source = "Fades the screen back in from white at the slower speed (scheduler thread)." }
+GFX_ZoomToBlackSlower = { addr = 0x8014F24C, type = "func", source = "Screen effect 17: fades to black at the slower rate while the camera spins and pulls in." }
 GFX_FadeToBlackSlowest = { addr = 0x8014F438, type = "func", source = "Fades the screen to black at the slowest speed (scheduler thread)." }
+GFX_SpinToBlack = { addr = 0x8014F460, type = "func", source = "Screen effect 20: fades to black while the camera rolls, then clears the tint bytes." }
 GFX_RunBlackFade = { addr = 0x8014F514, type = "func", source = "Fades the screen to black." }
 GFX_RunWhiteFade = { addr = 0x8014F5F0, type = "func", source = "Fades the screen to white." }
 GFX_UpdateScreenFade = { addr = 0x8014F704, type = "func", source = "Draws one step of a screen fade." }

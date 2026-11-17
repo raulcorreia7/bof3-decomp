@@ -4,7 +4,8 @@
  * the step reports completion, then clears the six tint bytes and releases the
  * thread.
  */
-MATCH void func_8014F460(void) {
+/* func_8014F460 */
+MATCH void GFX_SpinToBlack(void) {
     s32  flag;
     u16* level;
     u16  value;

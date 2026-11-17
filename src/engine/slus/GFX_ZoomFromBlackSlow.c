@@ -3,7 +3,8 @@
 /* initializes two coordinates and fades them toward an endpoint
  * while waiting for the scheduler.
  */
-MATCH void func_8014F024(void) {
+/* func_8014F024 */
+MATCH void GFX_ZoomFromBlackSlow(void) {
     u16  level;
     s32  iterations;
     s32  status;
