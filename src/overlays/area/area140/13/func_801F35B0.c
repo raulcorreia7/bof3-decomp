@@ -24,7 +24,7 @@ NON_MATCHING void func_801F35B0(void) {
         offset = i * g_Task->direction;
         row    = y + (g_Task->direction != 0 ? offset : offset + 1);
         map    = (AreaMapBundle*)MAP_BUNDLE_BASE;
-        entry  = (u8*)(map->grid_off4_02 * 4 + (((map->width * map->height + 1) / 2) * 4 + (u32)map) + *(u16*)(column * 2 + (row * map->width * 2 + map->grid_off4_02 * 4) + (u32)map) * 4);
+        entry  = (u8*)(map->grid_offset * 4 + (((map->width * map->height + 1) / 2) * 4 + (u32)map) + *(u16*)(column * 2 + (row * map->width * 2 + map->grid_offset * 4) + (u32)map) * 4);
         id     = Area_GetCellId(column, row);
         if (g_Task->direction != 0) {
             prim = g_AreaCellPrims[id][1].pad1;

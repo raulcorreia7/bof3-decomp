@@ -417,7 +417,7 @@ MATCH void func_801F802C(void) {
     work = (AreaSprite*)func_801F7DAC();
     if (work != NULL) {
         work->flags    = 1;
-        work->flags_02 = 0;
+        work->count    = 0;
         work->origin.x = g_Task->pos.x.fixed;
         work->origin.y = g_Task->pos.y.fixed;
         work->origin.z = g_Task->pos.z.fixed >> 8;

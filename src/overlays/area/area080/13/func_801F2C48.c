@@ -9,12 +9,12 @@ MATCH void func_801F2C48(void) {
 
     ring            = (AreaRing*)AREA_WORK;
     D_801F44A0      = ring;
-    ring->base[0]   = work->pos.x.fixed;
-    ring->base[1]   = work->pos.y.fixed;
-    ring->base[2]   = work->pos.z.fixed + TO_COORD(2048);
-    ring->center[0] = work->pos.x.fixed;
-    ring->center[1] = work->pos.y.fixed;
-    ring->center[2] = work->pos.z.fixed;
+    ring->base.vx   = work->pos.x.fixed;
+    ring->base.vy   = work->pos.y.fixed;
+    ring->base.vz   = work->pos.z.fixed + TO_COORD(2048);
+    ring->center.vx = work->pos.x.fixed;
+    ring->center.vy = work->pos.y.fixed;
+    ring->center.vz = work->pos.z.fixed;
     ring->unk_22    = 32;
     ring->unk_23    = 0;
     ring->radius    = 0;

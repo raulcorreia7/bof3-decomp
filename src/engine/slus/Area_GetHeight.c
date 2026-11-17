@@ -54,7 +54,7 @@ NON_MATCHING s32 Area_GetHeight(s32 x, s32 y, u8 mode) {
     tmp4  = x & ~0x7FFF;
     tmp0  = tmp4 >> 0x10;
     tmp23 = (u8*)((tmp0 * 4) + ((tmp2 * 4) + (bundle + 0x30)));
-    tmp22 = (u8*)((g_AreaMapBundle.height_off4_2A * 4) + (tmp0 + bundle) + tmp2);
+    tmp22 = (u8*)((g_AreaMapBundle.height_offset * 4) + (tmp0 + bundle) + tmp2);
     if (!((tmp4 | tmp5) & HALF_MASK)) {
         SP_REF(void*, 0x0) = 0;
         tmp3               = *(s8*)(tmp22)*g_AreaHeightOffsetEnabled;

@@ -41,7 +41,7 @@ MATCH s32 Area_SetCellPalette(s32 x, s32 y) {
         return 0;
     }
     map   = (u8*)MAP_BUNDLE_BASE;
-    entry = (u8*)(g_AreaMapBundle.record_region_24 * 4 + (s32)(map + cell * 4));
+    entry = (u8*)(g_AreaMapBundle.cell_record_offset * 4 + (s32)(map + cell * 4));
     end   = entry + (((*((u16*)(entry - 2))) * 4) - 4);
     if (entry != end) {
         do {

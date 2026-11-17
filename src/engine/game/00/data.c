@@ -257,7 +257,7 @@ Callback g_ActorTypes[187] = {func_8019A210,
                               func_801F32C0,
                               func_801F7BA8};
 
-AreaHandler g_AreaHandlers[11] = {
+AreaSteps g_AreaHandlers[11] = {
     {func_801F2EEC, func_801F45CC, func_801F4178, func_801F341C, func_801F4768, &D_801F4DA0, AREA_ID_YRAAL_WORLD_MAP, {0, 0, 0}},
     {func_801F2E20, func_801F4500, func_801F40AC, func_801F3350, func_801F469C, &D_801F4CC8, AREA_ID_YRAAL_WORLD_MAP_BEFORE_NUE, {0, 0, 0}},
     {func_801F2EEC, func_801F45CC, func_801F4178, func_801F341C, func_801F4768, &D_801F4DA4, AREA_ID_WYNDIA_WORLD_MAP, {0, 0, 0}},

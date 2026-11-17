@@ -40,7 +40,7 @@ ASSERT_SIZE(AreaQuadCell, 3);
 typedef struct WorldMapMarker {
     u16           mask;
     /* 0x02 */ u8 step;
-    u8            unk_03;
+    u8            pad_03;
 } WorldMapMarker;
 
 ASSERT_SIZE(WorldMapMarker, 4);
@@ -49,7 +49,7 @@ ASSERT_SIZE(WorldMapMarker, 4);
 typedef struct WorldMapPoint {
     u8 x;      /* 0x00 */
     u8 y;      /* 0x01 */
-    u8 unk_02; /* 0x02 */
+    u8 type;   /* 0x02 */
     u8 unk_03; /* 0x03 */
 } WorldMapPoint;
 

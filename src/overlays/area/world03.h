@@ -21,7 +21,7 @@
  * of the window, used by world00 to world02: it names +0x04 as its origin. */
 typedef struct AreaQuadSprite {
     u8      unk_00[3];
-    u8      flags_03;  /* the shade of the sprite */
+    u8      shade;     /* the shade of the sprite */
     u16     half_size; /* the projected half-size */
     u8      unk_06[2];
     Offset2 origin;
@@ -33,10 +33,23 @@ typedef struct AreaQuadSprite {
     s32     unk_24;
 } AreaQuadSprite;
 
-ASSERT_OFFSET(AreaQuadSprite, flags_03, 0x03);
+ASSERT_OFFSET(AreaQuadSprite, shade, 0x03);
 ASSERT_OFFSET(AreaQuadSprite, half_size, 0x04);
 ASSERT_OFFSET(AreaQuadSprite, origin, 0x08);
 ASSERT_SIZE(AreaQuadSprite, 0x28);
+
+/* A box of map cells: the first and last column and row, all included. */
+typedef struct CellBlock {
+    u8 x0;
+    u8 y0;
+    u8 x1;
+    u8 y1;
+} CellBlock;
+
+ASSERT_OFFSET(CellBlock, y0, 0x01);
+ASSERT_OFFSET(CellBlock, x1, 0x02);
+ASSERT_OFFSET(CellBlock, y1, 0x03);
+ASSERT_SIZE(CellBlock, 0x04);
 
 /* The global state byte the area update gates on. */
 

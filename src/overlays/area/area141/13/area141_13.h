@@ -36,28 +36,14 @@ extern u8           D_801F4DFC[];
 /* The game-overlay state bytes the cancel path resets. */
 extern u8 D_801F4E50[];
 
-/* A box of map cells: the first and last column and row, all included. The
- * upload step of func_801F2D2C reads one block per work x position. */
-typedef struct CellBox {
-    u8 x0;
-    u8 y0;
-    u8 x1;
-    u8 y1;
-} CellBox;
-
-ASSERT_OFFSET(CellBox, y0, 0x01);
-ASSERT_OFFSET(CellBox, x1, 0x02);
-ASSERT_OFFSET(CellBox, y1, 0x03);
-ASSERT_SIZE(CellBox, 0x04);
-
 /* The five-bit fade field of a cell entry: bit 19, filled up to CELL_FADE_MAX by the fade-in step. */
 #define CELL_FADE_SHIFT  19
 #define CELL_FADE_MAX    0x10
 /* The part-word bits the upload steps clear before a cell re-stages its rows. */
 #define CELL_UPLOAD_MASK (~(0x1F << CELL_FADE_SHIFT))
 
-extern CellBox  D_801F47D4[];
+extern CellBlock D_801F47D4[];
 /* The primitive rows one cell id selects, two per row. */
-extern POLY_FT4 g_AreaCellPrims[][2];
+extern POLY_FT4  g_AreaCellPrims[][2];
 
 #endif

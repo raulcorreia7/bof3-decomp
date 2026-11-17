@@ -36,14 +36,6 @@ void func_801F3588(u8* dst, u8* src, u16* state);
 /* The variant byte the cancel path stores in the game-overlay state. */
 #define AREA_RESET_VARIANT 0x04
 
-typedef struct Area108Scratch {
-    u8   unk_00[0x34];
-    Pos3 pos;
-} Area108Scratch;
-
-ASSERT_OFFSET(Area108Scratch, pos, 0x34);
-ASSERT_SIZE(Area108Scratch, 0x40);
-
 /* One placement row: a whole coordinate per axis and whether it sits half a cell on. */
 typedef struct AreaPosEntry {
     u8 x;

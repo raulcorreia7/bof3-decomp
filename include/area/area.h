@@ -170,10 +170,10 @@ ASSERT_SIZE(PaletteBank, AREA_PALETTE_ROWS* AREA_PALETTE_ROW);
 typedef struct AreaMapBundle {
     u8  width;              /* 0x00 - grid width in cells */
     u8  height;             /* 0x01 */
-    u16 grid_off4_02;       /* 0x02 - cell grid, 4-byte units:
+    u16 grid_offset;        /* 0x02 - cell grid, 4-byte units:
                                 *        (0x30 + width*height*4 + align4(width*height)) / 4 */
     u16 tile_offsets[4][2]; /* 0x04-0x13 - [selector][table], A then B */
-    u16 byte_code_off4_14;  /* 0x14 - per-cell byte-code table (`g_AreaCellCodes`):
+    u16 byte_code_offset;   /* 0x14 - per-cell byte-code table (`g_AreaCellCodes`):
                                 *        (0x30 + width*height*4) / 4; equals
                                 *        width*height + 12 in 200/200 payloads */
     u16 unk_16;             /* 0x16 - zero in 200/200, no reader */
@@ -182,12 +182,12 @@ typedef struct AreaMapBundle {
                                 *            (`@0x801583BC` is the only header store) and
                                 *            read at `0x8010401A + (mask >> 3) * 2` */
     u16 scroll;             /* 0x1E - shipped 0xF300-0xFA90 in 76/200, meaning open */
-    u16 list_base_20;       /* 0x20 - record list, opcode byte & 0x3f */
-    u16 list_base_22;       /* 0x22 - record list, opcode byte & 0x7f */
-    u16 record_region_24;   /* 0x24 - indexed by the 4-byte-unit ids in g_AreaCellGrid */
+    u16 opcode_list_offset; /* 0x20 - record list, opcode byte & 0x3f */
+    u16 record_list_offset; /* 0x22 - record list, opcode byte & 0x7f */
+    u16 cell_record_offset; /* 0x24 - indexed by the 4-byte-unit ids in g_AreaCellGrid */
     u16 unk_26;             /* 0x26 - zero in 200/200, no reader */
     u16 object_list_28;     /* 0x28 - tag + body size, walked by the map interpreter */
-    u16 height_off4_2A;     /* 0x2A - height-byte table; u16[+0x2A]*4 == size in 187
+    u16 height_offset;      /* 0x2A - height-byte table; u16[+0x2A]*4 == size in 187
                                 *        payloads, == size - width*height in the rest */
     u16 unk_2C;             /* 0x2C - zero in 200/200, no reader */
     u16 unk_2E;             /* 0x2E - zero in 200/200, no reader */
@@ -199,11 +199,11 @@ ASSERT_SIZE(AreaMapBundle, AREA_MAP_BUNDLE_SIZE);
 #define AREA_RECORD_TYPE_81   (0x81u << 24)
 ASSERT_OFFSET(AreaMapBundle, width, 0x00);
 ASSERT_OFFSET(AreaMapBundle, height, 0x01);
-ASSERT_OFFSET(AreaMapBundle, grid_off4_02, 0x02);
+ASSERT_OFFSET(AreaMapBundle, grid_offset, 0x02);
 ASSERT_OFFSET(AreaMapBundle, tile_offsets, 0x04);
-ASSERT_OFFSET(AreaMapBundle, byte_code_off4_14, 0x14);
-ASSERT_OFFSET(AreaMapBundle, list_base_20, 0x20);
-ASSERT_OFFSET(AreaMapBundle, height_off4_2A, 0x2A);
+ASSERT_OFFSET(AreaMapBundle, byte_code_offset, 0x14);
+ASSERT_OFFSET(AreaMapBundle, opcode_list_offset, 0x20);
+ASSERT_OFFSET(AreaMapBundle, height_offset, 0x2A);
 
 extern AreaMapBundle g_AreaMapBundle;
 
@@ -282,8 +282,8 @@ extern s16      g_AreaGridRowCursor;
 typedef struct AreaTileRect {
     u8 dv;
     u8 du;
-    u8 v_02;
-    s8 u_03; /* signed: `lb a0,3(a1)` at 0x80155670; 0x80 reads as -128 */
+    u8 v;
+    s8 u; /* signed: `lb a0,3(a1)` at 0x80155670; 0x80 reads as -128 */
 } AreaTileRect;
 
 ASSERT_SIZE(AreaTileRect, AREA_TILE_RECT_SIZE);
@@ -298,7 +298,7 @@ ASSERT_SIZE(AreaTileQuad, AREA_TILE_QUAD_SIZE);
 /* +0x20/+0x22 list entry header; the body follows as u32 words. */
 typedef struct AreaMapListHeader {
     u8 operand[2];
-    u8 word_count_02; /* includes this 4-byte header */
+    u8 size; /* includes this 4-byte header */
     u8 opcode;
 } AreaMapListHeader;
 
@@ -316,14 +316,14 @@ ASSERT_SIZE(AreaMapCellHeader, AREA_MAP_CELL_HEADER_SIZE);
 /* +0x28 object header; the body follows as body_words_02 words. */
 typedef struct AreaMapObjectHeader {
     u16 tag;
-    u16 body_words;
+    u16 body_size;
 } AreaMapObjectHeader;
 
 ASSERT_SIZE(AreaMapObjectHeader, AREA_MAP_OBJECT_HEADER_SIZE);
 
 /* `0x800D3800` - the area script table, a table of actor animation streams: a
  * `u32` directory, then per section a `u16` slot table followed by its
- * records. Each record is one stream (see `Actor_StageAnimStep`). `dir_bytes == 4 * L` is the
+ * records. Each record is one stream (see `Actor_StageAnimStep`). `dir_size == 4 * L` is the
  * directory's own size, not an entry count: read as a count it overruns the
  * payload (`WORLD00/AREA016.EMI` slot 4: `u32[0] = 28`, `u32[29] = 0x240018` in
  * 2,708 bytes). The only reader is `exe/slus_004_22@0x8014D6DC`, which reaches
@@ -332,16 +332,16 @@ ASSERT_SIZE(AreaMapObjectHeader, AREA_MAP_OBJECT_HEADER_SIZE);
  * `work+0x50`. The battle overlays swap `BATTLE_SCRIPT_TABLE` in for the duration of a
  * battle handler. */
 typedef struct AreaScripts {
-    u32 dir_bytes;      /* 0x00 - == 4 * L, the directory's own size */
-    u32 section_off[1]; /* 0x04 - L-1 entries, block-relative, strictly increasing */
+    u32 dir_size;          /* 0x00 - == 4 * L, the directory's own size */
+    u32 section_offset[1]; /* 0x04 - L-1 entries, block-relative, strictly increasing */
 } AreaScripts;
 
-/* One section: `slots_bytes == 2 * M`, and the distinct `record_off` values
+/* One section: `slot_size == 2 * M`, and the distinct `record_offset` values
  * increase strictly and tile the section, one stream each. The last section
  * runs to the end of the block. */
 typedef struct AreaScriptSection {
-    u16 slots_bytes;   /* 0x00 - == 2 * M */
-    u16 record_off[1]; /* 0x02 - M entries, relative to the section base */
+    u16 slot_size;        /* 0x00 - == 2 * M */
+    u16 record_offset[1]; /* 0x02 - M entries, relative to the section base */
 } AreaScriptSection;
 
 /* `0x800E3800` - the scene table: a `u32` count then 8-byte records.
@@ -371,7 +371,7 @@ typedef struct AreaActorDef {
 ASSERT_SIZE(AreaActorDef, AREA_ACTOR_DEF_SIZE);
 
 typedef struct AreaActorDefs {
-    u32          count_00;   /* 0x00 - == (size - 4) / 8 in 200/200, count 4-51 */
+    u32          count;      /* 0x00 - == (size - 4) / 8 in 200/200, count 4-51 */
     AreaActorDef records[1]; /* 0x04 */
 } AreaActorDefs;
 
@@ -438,10 +438,8 @@ ASSERT_SIZE(AreaSpawnSlot, 0x18);
 
 /* A ring of glow points around `center`: screen positions of the ring points, projected each frame. */
 typedef struct AreaRing {
-    s32     base[3];                  /* 0x00 */
-    s32     unk_0C;                   /* 0x0C */
-    s32     center[3];                /* 0x10 - the ring centre */
-    s32     unk_1C;                   /* 0x1C */
+    VECTOR  base;                     /* 0x00 */
+    VECTOR  center;                   /* 0x10 - the ring centre */
     s16     radius;                   /* 0x20 */
     u8      unk_22;                   /* 0x22 */
     u8      unk_23;                   /* 0x23 */
@@ -450,10 +448,27 @@ typedef struct AreaRing {
     DVECTOR screen[AREA_RING_POINTS]; /* 0x2C - one screen position per ring point */
 } AreaRing;
 
+ASSERT_OFFSET(AreaRing, base, 0x00);
+ASSERT_OFFSET(AreaRing, center, 0x10);
 ASSERT_OFFSET(AreaRing, radius, 0x20);
-
 ASSERT_OFFSET(AreaRing, screen, 0x2C);
 ASSERT_SIZE(AreaRing, 0x6C);
+
+/* The 0x40-byte task scratch the area dispatch steps: the dispatch byte at
+ * +0x01, the step counter at +0x09 and the work position at +0x34. */
+typedef struct AreaScratch {
+    u8   unk_00[0x01]; /* 0x00 */
+    u8   dispatch;     /* 0x01 - indexes the step table */
+    u8   unk_02[0x07];
+    u8   step_count; /* 0x09 */
+    u8   unk_0A[0x2A];
+    Pos3 pos; /* 0x34 */
+} AreaScratch;
+
+ASSERT_OFFSET(AreaScratch, dispatch, 0x01);
+ASSERT_OFFSET(AreaScratch, step_count, 0x09);
+ASSERT_OFFSET(AreaScratch, pos, 0x34);
+ASSERT_SIZE(AreaScratch, 0x40);
 
 /* The AREA028 slot row: 0x10 bytes. The program keeps 32 of them at
  * `0x800E4800` (`@0x801F2F5C`, `@0x801F3004`, `@0x801F3060` walk them with

@@ -36,18 +36,10 @@ void Area_DrawMatrixLightPillar(s32* pos);
 /* Claims an actor slot of type 0x3F, seeds its two points and returns 1 when no slot is free. */
 u8 func_801F5190(s32 x1, s32 y1, s32 x2, s32 y2);
 
-/* The two corner cells of each of the four areas the step covers. */
-typedef struct CellBox {
-    u8 x1;
-    u8 y1;
-    u8 x2;
-    u8 y2;
-} CellBox;
-
-extern CellBox  D_801F543C[4];
-extern Callback D_801F544C[];
-void            func_801F2F30(s32* first, s32* second);
-extern u8       D_80144EF0[];
+extern CellBlock D_801F543C[4];
+extern Callback  D_801F544C[];
+void             func_801F2F30(s32* first, s32* second);
+extern u8        D_80144EF0[];
 
 /* g_Game.current */
 extern PartyMember* D_80146250;

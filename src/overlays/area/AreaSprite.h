@@ -6,9 +6,9 @@
 
 typedef struct AreaSprite {
     u8     flags;
-    u8     flags_01;
-    u8     flags_02;
-    u8     flags_03;
+    u8     stage;
+    u8     count;
+    u8     tick;
     Pos3   origin;
     u8     unk_10[4];
     VECTOR normal;

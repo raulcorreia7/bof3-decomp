@@ -34,7 +34,7 @@ MATCH void Area_ClearCell(s32 x, s32 y) {
     col  = (col >= AREA_CELL_GRID_COLS) ? (col - AREA_CELL_GRID_COLS) : col;
     cell = g_AreaCellGrid[row][col];
     if (cell != 0) {
-        prim = (u8*)(g_AreaMapBundle.record_region_24 * 4 + (s32)((u8*)map + cell * 4));
+        prim = (u8*)(g_AreaMapBundle.cell_record_offset * 4 + (s32)((u8*)map + cell * 4));
         end  = prim + (*(u16*)(prim - 2) * 4 - 4);
         while (prim != end) {
             if ((*(u32*)prim & 0xFF000000) == 0x03000000 || (*(u32*)prim & 0xFF000000) == 0x09000000 || (*(u32*)prim & 0xFF000000) == 0x27000000) {

@@ -10,7 +10,7 @@ MATCH void func_801F48B0(void) {
     record->unk_00[0] = g_Task->unk_06;
     record->unk_00[1] = 0;
     record->unk_00[2] = 0;
-    record->flags_03  = 0x80;
+    record->shade     = 0x80;
     record->half_size = 0x80;
     record->origin.x  = g_Task->pos.x.fixed;
     record->origin.y  = g_Task->pos.y.fixed;

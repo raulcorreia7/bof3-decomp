@@ -29,7 +29,7 @@ MATCH void Area_IndexCells(void) {
         } while (column >= 0);
     }
 
-    record = (u8*)MAP_BUNDLE_BASE + g_AreaMapBundle.record_region_24 * 4;
+    record = (u8*)MAP_BUNDLE_BASE + g_AreaMapBundle.cell_record_offset * 4;
     if (*(u32*)record != 0) {
         table         = (u8*)&g_AreaCellGrid;
         origin_x      = g_AreaTileOriginX;
@@ -77,7 +77,7 @@ MATCH void Area_IndexCells(void) {
                     cell       = (s16*)((table_column * 2) + base);
                     /* FAKE: Preserve wrapped-index order. */
                     FAKE_BARRIER();
-                    record_index = g_AreaMapBundle.record_region_24;
+                    record_index = g_AreaMapBundle.cell_record_offset;
                     difference += record;
                     difference -= record_index * 4;
                     difference = (difference >> 2) + 1;

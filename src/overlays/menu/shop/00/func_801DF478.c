@@ -4,7 +4,7 @@ MATCH s32 func_801DF478(void) {
     u8  field_id;
     u8  standby_id;
     u8  slot;
-    s32 record_off;
+    s32 record_offset;
 
     if (D_80148658 == D_8014865A) {
         if (D_80148658 == 0) {
@@ -21,12 +21,12 @@ MATCH s32 func_801DF478(void) {
         field_id   = g_PartyFieldOrder[(s8)D_8014865D];
         standby_id = D_801E6244[D_80148659];
     }
-    record_off = g_CharSlot[field_id] * PARTY_RECORD_STRIDE;
-    if (((u8*)&g_Characters[0].party_flags)[record_off] & 0x2) {
+    record_offset = g_CharSlot[field_id] * PARTY_RECORD_STRIDE;
+    if (((u8*)&g_Characters[0].party_flags)[record_offset] & 0x2) {
         return field_id;
     }
-    record_off = g_CharSlot[standby_id] * PARTY_RECORD_STRIDE;
-    if (((u8*)&g_Characters[0].party_flags)[record_off] & 0x2) {
+    record_offset = g_CharSlot[standby_id] * PARTY_RECORD_STRIDE;
+    if (((u8*)&g_Characters[0].party_flags)[record_offset] & 0x2) {
         return standby_id;
     }
     SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));

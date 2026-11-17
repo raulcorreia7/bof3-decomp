@@ -7,13 +7,13 @@ MATCH void Area_ProjectRing(AreaRing* ring) {
     u8  i;
 
     Area_SetCameraMatrix(camera);
-    Area_ProjectPoint(ring->base, &ring->screen_base);
-    Area_ProjectPoint(ring->center, &ring->screen_center);
+    Area_ProjectPoint(&ring->base.vx, &ring->screen_base);
+    Area_ProjectPoint(&ring->center.vx, &ring->screen_center);
 
     for (i = 0, angle = 0; i < AREA_RING_POINTS; i++) {
-        point[0] = ring->center[0] + ((ring->radius * rcos((u16)angle)) >> 4);
-        point[1] = ring->center[1] + ((ring->radius * rsin((u16)angle)) >> 4);
-        point[2] = ring->center[2];
+        point[0] = ring->center.vx + ((ring->radius * rcos((u16)angle)) >> 4);
+        point[1] = ring->center.vy + ((ring->radius * rsin((u16)angle)) >> 4);
+        point[2] = ring->center.vz;
         Area_ProjectPoint(point, &ring->screen[i]);
         angle += AREA_RING_ANGLE_STEP;
     }

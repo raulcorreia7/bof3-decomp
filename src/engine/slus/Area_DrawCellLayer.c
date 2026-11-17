@@ -55,7 +55,7 @@ MATCH void Area_DrawCellLayer(s32 layer) {
             col  = (col == AREA_CELL_GRID_COLS - 1) ? 0 : col + 1;
             cell = row_base[col];
             if (cell != 0) {
-                record = (u8*)MAP_BUNDLE_BASE + g_AreaMapBundle.record_region_24 * 4 + cell * 4;
+                record = (u8*)MAP_BUNDLE_BASE + g_AreaMapBundle.cell_record_offset * 4 + cell * 4;
                 header = *(u32*)(record - 4);
                 end    = record + ((header >> 16) * 4 - 4);
                 cell_x = (header >> 8) & BYTE_MASK;

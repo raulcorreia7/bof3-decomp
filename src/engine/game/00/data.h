@@ -90,26 +90,22 @@ ASSERT_SIZE(PartySlot, 0x4);
  * +8, +0x0C and +0x10, and +0x14 points to the area's map points, four-byte rows (x, y,
  * context seed, context kind) that func_801B690C searches for the actor cell; Fishing_ShowLocation walks the same
  * rows. The only reader of the member is Game_GetAreaMapPoints; the rows are written by the data initialiser only. */
-typedef struct AreaHandler {
-    Callback handler_00;
-    Callback handler_04;
-    Callback handler_08;
-    Callback handler_0C;
-    Callback handler_10;
+typedef struct AreaSteps {
+    Callback steps[5];
     u8*      map_points;
     u8       area_id;
     u8       pad_19[3];
-} AreaHandler;
+} AreaSteps;
 
 /* g_AreaHandlers[11] spans 0x134 bytes up to D_801C8090. */
-ASSERT_SIZE(AreaHandler, 0x1C);
+ASSERT_SIZE(AreaSteps, 0x1C);
 
 typedef u8 (*ActorActionFunc)(void* entity, u8 param, s32 phase);
 typedef void (*ActorWorkFunc)(s32 fallback_index, s32 index);
 
 /* D_801C7B74 */
 extern Step2                s_BattleScrollCellSteps[4];
-extern AreaHandler          g_AreaHandlers[11];
+extern AreaSteps            g_AreaHandlers[11];
 extern ActorActionFunc      D_801C83BC[7];
 extern ObjectFunc           D_801C83D8[11];
 extern SceneSlots*          g_SceneScenes[20];

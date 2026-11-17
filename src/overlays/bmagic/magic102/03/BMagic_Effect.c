@@ -71,7 +71,7 @@ MATCH void func_801EEC80(void) {
             if (cell == 0) {
                 continue;
             }
-            part = (ScenePart*)((u8*)MAP_BUNDLE_BASE + g_AreaMapBundle.record_region_24 * 4 + cell * 4);
+            part = (ScenePart*)((u8*)MAP_BUNDLE_BASE + g_AreaMapBundle.cell_record_offset * 4 + cell * 4);
             run  = (u16*)part - 1;
             end  = (ScenePart*)((u8*)part + (*run * 4 - 4));
             while (part != end) {
@@ -231,7 +231,7 @@ MATCH void func_801EFD7C(void) {
             if (cell == 0) {
                 continue;
             }
-            part = (ScenePart*)((u8*)MAP_BUNDLE_BASE + g_AreaMapBundle.record_region_24 * 4 + cell * 4);
+            part = (ScenePart*)((u8*)MAP_BUNDLE_BASE + g_AreaMapBundle.cell_record_offset * 4 + cell * 4);
             run  = (u16*)part - 1;
             end  = (ScenePart*)((u8*)part + (*run * 4 - 4));
             while (part != end) {
