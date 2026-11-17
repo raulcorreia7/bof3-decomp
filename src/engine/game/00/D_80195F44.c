@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-FieldSearchSpotFadeSteps D_80195F44 = {
+ZennySpotFadeSteps D_80195F44 = {
     func_801AD734,
     func_801AD90C,
     func_801AD90C,
