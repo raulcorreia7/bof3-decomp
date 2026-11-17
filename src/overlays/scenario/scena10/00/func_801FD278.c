@@ -58,12 +58,12 @@ MATCH void func_801FD5C0(Actor* actor) {
             if (Item_Add(ITEM_CATEGORY_ITEM, g_Task->param.unk_0B, 1, 0)) {
                 /* FAKE: retail passes the bit index unmasked, as s32. */
                 ((void (*)(void*, s32))SYS_SetFlag)(g_SceneFlags, SCENE_TRIGGER_FLAG_BASE + D_801FE894[i].flag);
-                Message_Request(MSG_002);
+                Message_Request(MSG_SYSTEM_FOUND_ITEM);
                 SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
                 actor->unk_7E++;
                 Game_SetScriptActive();
             } else {
-                Message_Request(MSG_003);
+                Message_Request(MSG_SYSTEM_FOUND_ITEM_NO_ROOM);
             }
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             return;

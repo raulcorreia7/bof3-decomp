@@ -46,7 +46,7 @@ MATCH void func_801B2DDC(void) {
         }
         g_Task->header.step++;
     } else {
-        Message_Request(MSG_000);
+        Message_Request(MSG_SYSTEM_000);
     }
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
     g_Task->header.step++;

@@ -49,7 +49,7 @@ MATCH void func_801F7F08(void) {
             g_GameState = &g_Game.members[0];
             func_801C308C(0);
             Char_LoseHP(1, 6);
-            Message_Request(MSG_217);
+            Message_Request(MSG_SYSTEM_STUNG_BY_CATERPILLAR);
             g_GameStateIndex     = 2;
             g_SceneState.step_05 = 2;
             break;
@@ -64,7 +64,7 @@ MATCH void func_801F7F08(void) {
                 name = Item_GetRecord(ITEM_CATEGORY_ITEM, ITEM_SHALY_SEED);
                 strncpy((char*)g_TextVariables[0], (char*)name, 12);
                 D_801490E4[0] = 0;
-                Message_Request(MSG_003);
+                Message_Request(MSG_SYSTEM_FOUND_ITEM_NO_ROOM);
                 g_GameStateIndex     = 2;
                 g_SceneState.step_05 = 2;
             } else {

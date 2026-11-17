@@ -37,7 +37,7 @@ def test_sites_reads_every_site_and_skips_message_none() -> None:
 
 
 def test_render_sorts_and_pads() -> None:
-    text = message_ids.render({7: [], 100: []}, 3)
+    text = message_ids.render({None: {7: [], 100: []}}, 3)
     assert "#define MSG_007 7" in text
     assert "#define MSG_100 100" in text
     assert text.index("MSG_007") < text.index("MSG_100")
@@ -52,3 +52,35 @@ def test_rewrite_names_the_site_once() -> None:
         message_ids.rewrite_text("/* Message_Request(60) */", names)
         == "/* Message_Request(60) */"
     )
+
+
+def test_a_tagged_module_gets_its_names() -> None:
+    message_ids.TAG_NAMES.clear()
+    message_ids.TAG_NAMES["MSG_AREA037_ASK_REST"] = ("area037", 2)
+    try:
+        names = {2: "MSG_AREA037_ASK_REST", 7: "MSG_AREA037_007"}
+        assert (
+            message_ids.rewrite_text(
+                "Message_Request(MSG_002); Message_Request(7);", names
+            )
+            == "Message_Request(MSG_AREA037_ASK_REST); Message_Request(MSG_AREA037_007);"
+        )
+        assert message_ids.tag_name("area037", 7, None) == "MSG_AREA037_007"
+    finally:
+        message_ids.TAG_NAMES.clear()
+
+
+def test_message_request_reads_the_system_table() -> None:
+    message_ids.TAG_NAMES.clear()
+    message_ids.TAG_NAMES_SECTIONS.add("system")
+    try:
+        text = "Message_Request(5); Message_StartAreaMessage(5);"
+        out = message_ids.rewrite_text(
+            text, {5: "MSG_AREA037_005"}, {5: "MSG_SYSTEM_005"}
+        )
+        assert (
+            out
+            == "Message_Request(MSG_SYSTEM_005); Message_StartAreaMessage(MSG_AREA037_005);"
+        )
+    finally:
+        message_ids.TAG_NAMES_SECTIONS.clear()

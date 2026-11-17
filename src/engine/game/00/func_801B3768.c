@@ -19,7 +19,7 @@ MATCH void func_801B3768(void) {
     u32*   spawn_count;
 
     if (SYS_TestFlag(D_80144FC4, g_Actors[g_Game.current->status.field.slot].unk_05) != 0) {
-        Message_Request(MSG_001);
+        Message_Request(MSG_SYSTEM_NOTHING_FOUND);
     } else {
         packed   = g_Actors[g_Game.current->status.field.slot].unk_18;
         high     = packed >> 8;

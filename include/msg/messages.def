@@ -1,0 +1,35 @@
+/* The message ids by name: DEFINE_MESSAGE(ARCHIVE, id, TAG) names message `id` of the message
+ * table in the EMI archive ARCHIVE as MSG_<ARCHIVE>_<TAG>; a message with no tag yet is
+ * named by its number, DEFINE_MESSAGE(AREA037, 0x007, 007). SYSTEM holds the ids
+ * Message_Request reads from the system table (ETC/FIRST.EMI entry 11), valid in every area;
+ * every other id is read from the area table (entry 11 of the area's archive). A bank several archives share (AREA175..185) is
+ * listed once per archive, the same lines repeated.
+ * The TAG is 2-4 words that describe the message; the text itself is never tracked (extract it
+ * with `bof3 assets extract --only text`). One section per archive, one comment line each;
+ * tools/message_ids.py checks this file and seeds untagged lines. */
+
+/* SYSTEM */
+DEFINE_MESSAGE(SYSTEM, 0x000, 000)
+DEFINE_MESSAGE(SYSTEM, 0x001, NOTHING_FOUND)
+DEFINE_MESSAGE(SYSTEM, 0x002, FOUND_ITEM)
+DEFINE_MESSAGE(SYSTEM, 0x003, FOUND_ITEM_NO_ROOM)
+DEFINE_MESSAGE(SYSTEM, 0x005, FOUND_ZENNY)
+DEFINE_MESSAGE(SYSTEM, 0x0D0, ASK_WHAT_TO_DO)
+DEFINE_MESSAGE(SYSTEM, 0x0D1, ASK_WHAT_TO_DO_ALT)
+DEFINE_MESSAGE(SYSTEM, 0x0D5, ASK_SAVE_MORNING)
+DEFINE_MESSAGE(SYSTEM, 0x0D7, MEMORY_CARD_FULL)
+DEFINE_MESSAGE(SYSTEM, 0x0D8, NO_MEMORY_CARD)
+DEFINE_MESSAGE(SYSTEM, 0x0D9, STUNG_BY_CATERPILLAR)
+DEFINE_MESSAGE(SYSTEM, 0x0FA, FOUND_GENE)
+
+/* AREA037 */
+DEFINE_MESSAGE(AREA037, 0x05E, FOLLOW_ME)
+DEFINE_MESSAGE(AREA037, 0x060, DECLINED_COME_BACK)
+DEFINE_MESSAGE(AREA037, 0x072, ASK_SURE)
+DEFINE_MESSAGE(AREA037, 0x074, DECLINED_LET_ME_KNOW)
+DEFINE_MESSAGE(AREA037, 0x086, THANKS_GOOD_LUCK)
+DEFINE_MESSAGE(AREA037, 0x088, DECLINED_SEE_YOU)
+DEFINE_MESSAGE(AREA037, 0x09A, ACCEPTED_GOOD_LUCK)
+DEFINE_MESSAGE(AREA037, 0x09C, DECLINED_SEE_AROUND)
+DEFINE_MESSAGE(AREA037, 0x0B5, GAME_READY)
+DEFINE_MESSAGE(AREA037, 0x0BD, GAME_DECLINED_COME_BACK)

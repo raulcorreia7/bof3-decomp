@@ -198,6 +198,28 @@ typedef enum ItemId { ITEM_ID_HEALING_HERB = 1 } ItemId;
 void Item_Add(ItemId item, u8 count);                 /* an int where retail passes a u16 */
 ```
 
+### Message ids
+
+Two tables take ids. The area table (entry 11 of the area's EMI archive, loaded at 0x80010000) is read
+by `Message_StartAreaMessage`, `Scene_ShowMessage`, the answer macros and `MESSAGE_TABLE_TEXT`; each
+archive (`AREA037.EMI`, `SCENA06.EMI`) has its own, so one number names different messages in different
+archives. The system table (entry 11 of `ETC/FIRST.EMI`, at 0x8001A000) is read by `Message_Request` and is
+the same in every area. `include/msg/messages.def` names the ids, one line each,
+`DEFINE_MESSAGE(AREA037, 0x05E, FOLLOW_ME)`, one section per archive and a `SYSTEM` section for the
+system table. The tag is two to four words that describe the message; an id with no tag yet is named by its
+number (`0x007, 007`). Code writes `MSG_AREA037_FOLLOW_ME` or `MSG_SYSTEM_FOUND_ZENNY` anywhere:
+`include/msg/message_ids.h` turns the file into one enum, and `tools/message_ids.py` picks the table
+from the call (`Message_Request` is system). A bank that several archives share (AREA175 to AREA185,
+AREA079 to AREA081, AREA090 and AREA154, AREA157, AREA164 and AREA165, AREA191 and AREA192) gets one
+section per archive with the same lines repeated, so a name always says which archive it belongs to.
+Message text never enters the repo. To rename an id, edit its tag in `messages.def`, then run
+`tools/message_ids.py --rewrite`; `--check` fails on a use with no line, and `--seed` adds untagged lines.
+
+Modding the text: `bof3 assets extract --only text -o build` writes `build/text/BIN/<module>/<ARCHIVE>/11.json`
+and `11.txt` from your disc. Edit the JSON and run `bof3 assets import message 11.json -o 11.bin` to rebuild
+the table; export then import gives the original bytes for all 162 text tables of the disc.
+Ids not yet converted keep flat `MSG_nnn` names in `include/menu/message_ids.h`.
+
 ## Evidence
 
 A name needs evidence from a reader, writer, API argument or other source. Record the evidence in

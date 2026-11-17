@@ -55,7 +55,7 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Scan matched bodies for bare values      | `tools/symbol.py values --scan [--jsonl]`                                | [values](../docs/conventions.md#how-a-value-is-written)   |
 | Add a symbol row                         | `tools/symbol.py add <target> <Name> 0x<ADDR> --source "<description>"`     | [symbols](../docs/layout.md#symbols-and-the-link)    |
 | Check the symbol table                   | `tools/symbol.py check`                                                  | [symbols](../docs/layout.md#symbols-and-the-link)    |
-| Generate the message-id header           | `tools/message_ids.py` (`--check`, `--rewrite`, `--list`)                | [messages](../docs/conventions.md#how-a-value-is-written) |
+| Generate the message-id header           | `tools/message_ids.py` (`--check`, `--rewrite`, `--seed`, `--list`)    | [messages](../docs/conventions.md#message-ids)            |
 | Split a data unit                        | add a `[0xOFFSET, type, name]` row to `config/<target>/splat.yaml`       | [split](../docs/toolchain.md#split)                       |
 | Count readability debt, gate touched files | `tools/quality.py`, `--queue`, `--diff BASE`, `--markdown [--update]`                         | [quality](#quality)                                       |
 | Check type loss between two revisions    | `tools/typeloss.py HEAD~5 HEAD`                                          | `--help`                                                  |
@@ -241,7 +241,7 @@ the logs in `build/pre-push/`. CI runs it too. `BASE_REF` defaults to the newest
 | `addrs`         | a symbol address that `config/symbols.toml` records on `main` is gone                   | none       |
 | `kept`          | a named helper, define, global, type, member or function is lost or degraded            | none       |
 | `quality`       | a touched file gains casts, fake helpers, `func_`/`D_` names or pasted bodies           | none       |
-| `message-ids`   | `include/menu/message_ids.h` is stale for the literal message ids in `src/`              | none       |
+| `message-ids`   | `include/menu/message_ids.h` is stale, or a message id has no line in `include/msg/messages.def` | none       |
 | `subsystems`    | never fails; writes the debt table to `build/subsystems.md`                             | none       |
 
 `check-plain` skips a source whose plain preprocessed text compiled before: the keys are empty files
