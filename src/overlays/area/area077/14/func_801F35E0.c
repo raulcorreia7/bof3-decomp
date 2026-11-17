@@ -1,8 +1,7 @@
 #include "area077_14.h"
 
-#ifdef NON_MATCHING
 /* Appends the banner's leading point to the trail and returns the point's sine offset. */
-NON_MATCHING s16 func_801F35E0(s32 origin_x, s32 origin_y, s16 scroll_x, s16 scroll_y, s16 radius, s16 focus_x) {
+MATCH s16 func_801F35E0(s32 origin_x, s32 origin_y, s16 scroll_x, s16 scroll_y, s16 radius, s16 focus_x) {
     Pos2* current;
     Pos2* next;
     s16   offset;
@@ -29,6 +28,3 @@ NON_MATCHING s16 func_801F35E0(s32 origin_x, s32 origin_y, s16 scroll_x, s16 scr
     MEM(s16, AREA_WORK + 2) += y;
     return offset;
 }
-#else
-INCLUDE_ASM(func_801F35E0);
-#endif
