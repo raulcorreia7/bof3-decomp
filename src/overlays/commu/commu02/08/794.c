@@ -1728,7 +1728,12 @@ MATCH void func_801D6D18(void) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D6E70(void) {
+}
+#else
 INCLUDE_ASM(func_801D6E70);
+#endif
 
 MATCH void func_801D708C(void) {
     u16 cue;
