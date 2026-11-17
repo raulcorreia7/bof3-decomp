@@ -7,7 +7,6 @@
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D7C10(s32 x, s32 y, s32 flags) {
     u8  slots[3];
-    u8* slot;
     s32 base_x;
     s32 mask;
     s32 i;
@@ -17,11 +16,10 @@ NON_MATCHING void func_801D7C10(s32 x, s32 y, s32 flags) {
     mask   = flags & BYTE_MASK;
     base_x = x;
     for (i = 0; i < 3; i++, base_x += 48) {
-        slot  = &slots[i];
-        *slot = (mask >> i) & 1;
-        func_801D7D68(base_x, y, *slot);
+        slots[i] = (mask >> i) & 1;
+        func_801D7D68(base_x, y, slots[i]);
         if (mask == 0) {
-            *slot += 1;
+            slots[i]++;
         }
     }
     seven = 7;
