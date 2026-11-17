@@ -2,7 +2,7 @@
 
 /* 8-byte record copied to the stack; read back as halfwords. */
 MATCH void func_801C308C(s32 arg) {
-    GameSeed        seed;
+    PaletteColors   seed;
     volatile Actor* work;
     s32             index;
     s32             off;
@@ -24,7 +24,7 @@ MATCH void func_801C308C(s32 arg) {
         page                            = (sel >> 3) << 9;
         addr_dst                        = page + base_dst;
         row                             = (sel & 0x7) << 6;
-        *(u16*)(off + (row + addr_dst)) = seed.cells[arg & BYTE_MASK];
+        *(u16*)(off + (row + addr_dst)) = seed.colors[arg & BYTE_MASK];
     } while (index < 32);
     g_GfxPalettePending = 1;
     /* FAKE: hold cue arg after store. */

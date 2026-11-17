@@ -80,7 +80,7 @@ MATCH void func_801F936C(void) {
             if (g_ScriptVars[0] == 0xC8) {
                 D_8014865C           = -2;
                 D_80148698           = 1;
-                g_GameEntryState     = GAME_STATE_SHOP;
+                g_GameEntryState     = GAME_MODE_SHOP;
                 g_MenuStep.step      = 0;
                 D_80148699           = 0;
                 g_SceneState.step_05 = 3;
@@ -99,7 +99,7 @@ MATCH void func_801F936C(void) {
             if (g_ScriptVars[0] == 0xC8) {
                 D_8014865C           = -2;
                 D_80148698           = 1;
-                g_GameEntryState     = GAME_STATE_SHOP;
+                g_GameEntryState     = GAME_MODE_SHOP;
                 g_MenuStep.step      = 0;
                 D_80148699           = 0;
                 g_SceneState.step_05 = 3;

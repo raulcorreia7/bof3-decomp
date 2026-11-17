@@ -35,7 +35,7 @@ MATCH void func_80197F48(void) {
     func_801A06D8();
     Area_RunLoadingFrame();
     if (changed != 0) {
-        g_GameEntryState    = GAME_STATE_FIELD;
+        g_GameEntryState    = GAME_MODE_FIELD;
         g_GameEntrySubstate = 0;
         g_GameStateIndex    = GAME_REQUEST_IDLE;
     }

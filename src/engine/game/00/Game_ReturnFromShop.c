@@ -15,7 +15,7 @@ MATCH void Game_ReturnFromShop(void) {
         }
         func_801F03D0();
     }
-    g_GameEntryState    = GAME_STATE_FIELD;
+    g_GameEntryState    = GAME_MODE_FIELD;
     g_GameEntrySubstate = 0u;
     g_GameStateIndex    = GAME_REQUEST_IDLE;
     Area_RunFrame();

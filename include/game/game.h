@@ -90,7 +90,7 @@ typedef struct GameAreaState {
     /* 0x14 */ u32 request_x;
     /* 0x18 */ u32 request_y;
     /* 0x1C */ u8  request_facing;
-    /* 0x1D */ u8  request_kind;
+    /* 0x1D */ u8  request_type;
     /* 0x1E */ u8  entry_mode;
     /* 0x1F */ u8  prev_selection;
 } GameAreaState;
@@ -103,7 +103,7 @@ ASSERT_OFFSET(GameAreaState, request_area_id, 0x10);
 ASSERT_OFFSET(GameAreaState, request_x, 0x14);
 ASSERT_OFFSET(GameAreaState, request_y, 0x18);
 ASSERT_OFFSET(GameAreaState, request_facing, 0x1C);
-ASSERT_OFFSET(GameAreaState, request_kind, 0x1D);
+ASSERT_OFFSET(GameAreaState, request_type, 0x1D);
 ASSERT_OFFSET(GameAreaState, entry_mode, 0x1E);
 ASSERT_OFFSET(GameAreaState, prev_selection, 0x1F);
 ASSERT_SIZE(GameAreaState, 0x20);

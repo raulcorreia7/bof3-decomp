@@ -31,7 +31,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
     u8 byte;
     u8 result;
 
-    byte = table[state->index_0A];
+    byte = table[state->index];
     switch (byte) {
         case ACTOR_SCRIPT_MOTION_CLEAR_SCRIPT_ACTIVE:
             Game_ClearScriptActive();
@@ -42,8 +42,8 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
         case ACTOR_SCRIPT_MOTION_MOVE_SCRIPT: {
             u8 next;
 
-            value         = *(table + state->index_0A + 1);
-            next          = *(table + state->index_0A + 2);
+            value         = *(table + state->index + 1);
+            next          = *(table + state->index + 2);
             state->unk_07 = next;
             if (next != 0) {
                 if (Actor_GetOwner() != 2)
@@ -51,14 +51,14 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
                 else
                     Area_SetFacingOffsetX(value);
             }
-            state->index_0A += 2;
+            state->index += 2;
             break;
         }
         case ACTOR_SCRIPT_MOTION_MOVE_SCRIPT_RAMP_Z: {
             u8 next;
 
-            value         = *(table + state->index_0A + 1);
-            next          = *(table + state->index_0A + 2);
+            value         = *(table + state->index + 1);
+            next          = *(table + state->index + 2);
             state->unk_07 = next;
             if (next != 0) {
                 if (Actor_GetOwner() != 2) {
@@ -68,7 +68,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
                     Area_MoveActorRoute(state, value);
                     work     = g_Task;
                     den      = work->timer * state->unk_07;
-                    work->vz = ((s16)((*(table + state->index_0A + 3) << 8) | *(table + state->index_0A + 4)) - (s16)COORD_INT(work->pos.z)) / den;
+                    work->vz = ((s16)((*(table + state->index + 3) << 8) | *(table + state->index + 4)) - (s16)COORD_INT(work->pos.z)) / den;
                     state->flags |= GAME_CURSOR_FLAG_MOVING;
                 } else {
                     s16* counter;
@@ -76,28 +76,28 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
 
                     counter    = (s16*)&g_ScratchPad;
                     *counter   = COORD_INT(g_Task->pos.z);
-                    D_1F800002 = (s16)((*(table + state->index_0A + 3) << 8) | *(table + state->index_0A + 4));
+                    D_1F800002 = (s16)((*(table + state->index + 3) << 8) | *(table + state->index + 4));
                     Area_SetFacingOffsetX(value);
                     step       = (0x80 / g_AreaCameraStep) * D_80143FC3;
                     D_80143F5C = ((SP_REF(s16, 0x2u) - *counter) << 16) / step;
                     state->flags |= 0x40;
                 }
             }
-            state->index_0A += 4;
+            state->index += 4;
             break;
         }
         case ACTOR_SCRIPT_MOTION_SET_Z_VELOCITY: {
             Actor* work;
 
             state->flags |= GAME_CURSOR_FLAG_MOVING;
-            g_Task->timer = *(table + state->index_0A + 3);
+            g_Task->timer = *(table + state->index + 3);
             if (g_Task->timer == 0)
                 g_Task->timer = 1;
             work     = g_Task;
-            work->vz = ((s16)((*(table + state->index_0A + 1) << 8) | *(table + state->index_0A + 2)) - (s16)COORD_INT(work->pos.z)) / work->timer;
+            work->vz = ((s16)((*(table + state->index + 1) << 8) | *(table + state->index + 2)) - (s16)COORD_INT(work->pos.z)) / work->timer;
             work->vx = 0;
             work->vy = 0;
-            state->index_0A += 3;
+            state->index += 3;
             break;
         }
         case ACTOR_SCRIPT_MOTION_STOP_MOVING:
@@ -106,11 +106,11 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
         case ACTOR_SCRIPT_MOTION_WAIT_WALK_ROUTE: {
             Actor* work;
 
-            if ((func_801AC33C(*(table + state->index_0A + 1), *(table + state->index_0A + 2)) << 24) != 0) {
-                state->index_0A--;
+            if ((func_801AC33C(*(table + state->index + 1), *(table + state->index + 2)) << 24) != 0) {
+                state->index--;
                 return 0xFF;
             }
-            state->index_0A += 2;
+            state->index += 2;
             work  = g_Task;
             value = work->direction & 0x7;
             break;
@@ -119,8 +119,8 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
             u8     next;
             Actor* work;
 
-            value         = *(table + state->index_0A + 1);
-            next          = *(table + state->index_0A + 2);
+            value         = *(table + state->index + 1);
+            next          = *(table + state->index + 2);
             state->unk_07 = next;
             if (next != 0) {
                 if (Actor_GetOwner() != 2) {
@@ -134,15 +134,15 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
             }
             work                   = g_Task;
             work->vz               = 0;
-            COORD_INT(work->pos.z) = (u16)((*(table + state->index_0A + 3) << 8) | *(table + state->index_0A + 4));
-            state->index_0A += 4;
+            COORD_INT(work->pos.z) = (u16)((*(table + state->index + 3) << 8) | *(table + state->index + 4));
+            state->index += 4;
             break;
         }
         case ACTOR_SCRIPT_MOTION_WAIT_SCRIPT_READY:
             if (Actor_StepAnimOnce() != 0)
                 return value;
             g_Task->option_flags |= ACTOR_OPT_WAIT_STREAM;
-            state->index_0A--;
+            state->index--;
             break;
         case ACTOR_SCRIPT_MOTION_PLAY_CUE_ON_SCRIPT: {
             Actor* work;
@@ -154,33 +154,33 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
                 GAME_ENTITY_COUNTER = mode;
                 /* FAKE: counter store before work read. */
                 FAKE_BARRIER();
-                if ((work->script_pc != mode) && (mode == *(table + state->index_0A + 2)))
-                    SND_PlaySE((u16)(0x200u | *(table + state->index_0A + 1)));
+                if ((work->script_pc != mode) && (mode == *(table + state->index + 2)))
+                    SND_PlaySE((u16)(0x200u | *(table + state->index + 1)));
             }
-            state->index_0A += 2;
+            state->index += 2;
             break;
         }
         case ACTOR_SCRIPT_MOTION_SET_SCENE_STATE:
-            g_SceneState.state_04 = *(table + state->index_0A + 1);
+            g_SceneState.state_04 = *(table + state->index + 1);
             /* Retail shares the +1 cursor advance with case 0xF8. */
             goto advance_one;
         case ACTOR_SCRIPT_MOTION_WALK_TO: {
             s32 hi;
             s32 lo;
 
-            hi = (*(table + state->index_0A + 1) << 16) | (*(table + state->index_0A + 2) << 8);
-            lo = (*(table + state->index_0A + 3) << 16) | (*(table + state->index_0A + 4) << 8);
-            func_801ABD68(hi, lo, *(table + state->index_0A + 5), state);
-            value = *(table + state->index_0A + 6);
+            hi = (*(table + state->index + 1) << 16) | (*(table + state->index + 2) << 8);
+            lo = (*(table + state->index + 3) << 16) | (*(table + state->index + 4) << 8);
+            func_801ABD68(hi, lo, *(table + state->index + 5), state);
+            value = *(table + state->index + 6);
             if (Actor_GetOwner() == 1)
                 state->unk_07 = 1;
-            state->index_0A += 6;
+            state->index += 6;
             break;
         }
         case ACTOR_SCRIPT_MOTION_SET_ACTOR_MODE:
-            func_801AC768(state, *(table + state->index_0A + 1), *(table + state->index_0A + 2), *(table + state->index_0A + 3), *(table + state->index_0A + 4));
+            func_801AC768(state, *(table + state->index + 1), *(table + state->index + 2), *(table + state->index + 3), *(table + state->index + 4));
         advance_one:
-            state->index_0A += 1;
+            state->index += 1;
             break;
         case ACTOR_SCRIPT_MOTION_SET_CELL_PALETTE: {
             Actor* work;
@@ -201,7 +201,7 @@ MATCH u8 func_801A9DE8(GameCursorState* state, const u8* table, u8 value) {
                 SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
             return value;
         case ACTOR_SCRIPT_MOTION_WAIT:
-            state->index_0A--;
+            state->index--;
             return value;
     }
     return value;

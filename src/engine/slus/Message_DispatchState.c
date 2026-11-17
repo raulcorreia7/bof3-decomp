@@ -8,5 +8,5 @@ MATCH void Message_DispatchState(void) {
     MessageStateSteps handlers;
 
     handlers = g_MessageStateSteps;
-    handlers.steps[g_MessageState.state_00]();
+    handlers.steps[g_MessageState.state]();
 }

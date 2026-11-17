@@ -10,28 +10,28 @@ MATCH void func_8015102C(void) {
     u16 flags;
     s32 cursor;
 
-    count                   = g_MessageState.count_06;
-    g_MessageState.count_06 = count + 0xFF;
+    count                = g_MessageState.count;
+    g_MessageState.count = count + 0xFF;
     if (count != 0) {
         return;
     }
-    one                     = 1;
-    g_MessageState.count_06 = one;
-    phase                   = g_MessageState.phase + 1;
-    g_MessageState.phase    = phase;
+    one                  = 1;
+    g_MessageState.count = one;
+    phase                = g_MessageState.phase + 1;
+    g_MessageState.phase = phase;
     if ((phase & BYTE_MASK) == 7) {
-        if ((g_MessageState.state_00 == 4) || (g_MessageState.state_00 == 5)) {
+        if ((g_MessageState.state == 4) || (g_MessageState.state == 5)) {
             Message_StartRequest();
         } else {
             g_MessageState.selection = 0;
-            g_MessageState.state_00  = one;
-            cursor                   = g_MessageState.cursor_10;
-            g_MessageState.count_06  = 8;
+            g_MessageState.state     = one;
+            cursor                   = g_MessageState.cursor;
+            g_MessageState.count     = 8;
             g_MessageState.scroll    = 0;
-            g_MessageState.index_19  = 0;
+            g_MessageState.index     = 0;
             g_MessageState.phase     = 0;
             g_MessageState.entry     = cursor;
-            g_MessageState.flags_04 &= 0xFFF3;
+            g_MessageState.flags &= 0xFFF3;
         }
     }
 }

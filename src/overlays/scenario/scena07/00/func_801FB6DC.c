@@ -40,7 +40,7 @@ MATCH void func_801FB6DC(void) {
                 g_SceneState.flags_01 &= 0xFE;
                 SYS_SetFlag(g_SceneFlags, 2);
                 Game_RequestAreaChange(0xAF, TO_COORD(0x2D) + COORD_HALF, TO_COORD(0x5E), 0x83);
-                g_GameArea.request_kind = 0xFF;
+                g_GameArea.request_type = 0xFF;
                 g_GameArea.entry_mode   = 0xFF;
                 g_SceneState.step_05    = 5;
             }

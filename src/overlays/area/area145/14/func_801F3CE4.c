@@ -14,5 +14,5 @@ MATCH void func_801F3CE4(void) {
     delta                          = 0x200 / D_80147CBA[offset];
     state                          = g_ScriptState;
     FIELD(s32, D_80147CC4, offset) = delta;
-    state->flag_00 |= 8;
+    state->flags |= 8;
 }

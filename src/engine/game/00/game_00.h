@@ -111,7 +111,7 @@
 /* The work record the shared scene-timer body reads. */
 
 typedef enum TileRunFlags {
-    TILE_RUN_VERTICAL = 1 << 7,
+    TILE_RUN_FLAG_VERTICAL = 1 << 7,
 } TileRunFlags;
 
 /* `GameCursorState.flags` bit 7 marks a cursor still moving between cells. */
@@ -159,7 +159,7 @@ typedef struct TileRun {
     u8 x;
     u8 y;
     u8 flags; /* TileRunFlags */
-    u8 len;
+    u8 length;
     u8 unk_04[4];
 } TileRun;
 
@@ -186,13 +186,13 @@ typedef enum FieldSearchSpotState {
     FIELD_SEARCH_SPOT_STATE_COUNT
 } FieldSearchSpotState;
 
-typedef struct FieldSearchSpotStates {
-    Callback states[FIELD_SEARCH_SPOT_STATE_COUNT];
-} FieldSearchSpotStates;
+typedef struct FieldSearchSpotSteps {
+    Callback steps[FIELD_SEARCH_SPOT_STATE_COUNT];
+} FieldSearchSpotSteps;
 
-typedef struct FieldSearchSpotAltStates {
-    Callback states[FIELD_SEARCH_SPOT_STATE_COUNT];
-} FieldSearchSpotAltStates;
+typedef struct FieldSearchSpotAltSteps {
+    Callback steps[FIELD_SEARCH_SPOT_STATE_COUNT];
+} FieldSearchSpotAltSteps;
 
 /* The variant that fades the actor's tint back after the find. */
 typedef enum FieldSearchSpotFadeState {
@@ -205,9 +205,9 @@ typedef enum FieldSearchSpotFadeState {
     FIELD_SEARCH_SPOT_FADE_STATE_COUNT
 } FieldSearchSpotFadeState;
 
-typedef struct FieldSearchSpotFadeStates {
-    Callback states[FIELD_SEARCH_SPOT_FADE_STATE_COUNT];
-} FieldSearchSpotFadeStates;
+typedef struct FieldSearchSpotFadeSteps {
+    Callback steps[FIELD_SEARCH_SPOT_FADE_STATE_COUNT];
+} FieldSearchSpotFadeSteps;
 
 /* A spinning quad at 0x800E4800 + n * 0x38: a centre, a random rotation and four corner offsets that
  * func_8019D8C0 rotates and writes out as screen vertices. */
@@ -241,23 +241,23 @@ ASSERT_SIZE(GameSlotByteColumn, ACTOR_SIZE);
 /* Route step handler: advances one script cursor and reports a byte result. */
 typedef s32 (*TailFunc)(u8* pc);
 
-typedef struct GameSlots {
+typedef struct CellPaletteIndices {
     u8 cells[9];
-} GameSlots;
+} CellPaletteIndices;
 
-typedef struct GameMenuSlot {
+typedef struct CellEffect {
     u8 unk_00;
     u8 unk_01;
     u8 unk_02;
-} GameMenuSlot;
+} CellEffect;
 
-typedef struct GameMenuSlots {
-    GameMenuSlot entries[9];
-} GameMenuSlots;
+typedef struct CellEffects {
+    CellEffect entries[9];
+} CellEffects;
 
-typedef struct GameSeed {
-    u16 cells[4];
-} GameSeed;
+typedef struct PaletteColors {
+    u16 colors[4];
+} PaletteColors;
 
 typedef struct GameCursorState {
     u8  flags; /* GameCursorFlags */
@@ -267,282 +267,282 @@ typedef struct GameCursorState {
     u8  pad_05[2];
     u8  unk_07;
     u8  pad_08[2];
-    u16 index_0A;
+    u16 index;
 } GameCursorState;
 
 ASSERT_OFFSET(GameCursorState, unk_04, 0x04);
 ASSERT_SIZE(GameCursorState, 0x0C);
 
-extern u16                       D_1F800002; /* 0x1F800002; packed spawn record staging halfword */
-extern u8                        D_1F800003;
-extern u16                       D_1F800004; /* 0x1F800004 */
-extern s16                       D_1F800008; /* 0x1F800008 */
-extern u16                       D_1F80000A; /* 0x1F80000A */
-extern s16                       D_1F80000C; /* 0x1F80000C */
-extern u16                       D_1F80000E; /* 0x1F80000E */
-extern s8                        D_800E4D40; /* 0x800E4D40 */
-extern s16                       D_800E4D42; /* 0x800E4D42 */
-extern u8                        D_80143BB1;
-extern volatile u16              g_GameAreaId;
+extern u16                      D_1F800002; /* 0x1F800002; packed spawn record staging halfword */
+extern u8                       D_1F800003;
+extern u16                      D_1F800004; /* 0x1F800004 */
+extern s16                      D_1F800008; /* 0x1F800008 */
+extern u16                      D_1F80000A; /* 0x1F80000A */
+extern s16                      D_1F80000C; /* 0x1F80000C */
+extern u16                      D_1F80000E; /* 0x1F80000E */
+extern s8                       D_800E4D40; /* 0x800E4D40 */
+extern s16                      D_800E4D42; /* 0x800E4D42 */
+extern u8                       D_80143BB1;
+extern volatile u16             g_GameAreaId;
 /* D_80143F06 */
-extern volatile u8               g_GameLastCellType; /* 0x80143F06 */
+extern volatile u8              g_GameLastCellType; /* 0x80143F06 */
 /* D_80143F08 */
-extern volatile u32              g_GameLastX; /* 0x80143F08 */
+extern volatile u32             g_GameLastX; /* 0x80143F08 */
 /* D_80143F0C */
-extern volatile u32              g_GameLastY; /* 0x80143F0C */
-extern s16                       D_80143F16;  /* 0x80143F16; signed high halfword of the context bundle */
-extern s16                       D_80143F1A;  /* 0x80143F1A */
-extern volatile u8               g_GameRequestKind;
-extern s16                       D_80143F26; /* integer half of g_EncounterOriginX */
-extern s16                       D_80143F2A; /* integer half of g_EncounterOriginY */
+extern volatile u32             g_GameLastY; /* 0x80143F0C */
+extern s16                      D_80143F16;  /* 0x80143F16; signed high halfword of the context bundle */
+extern s16                      D_80143F1A;  /* 0x80143F1A */
+extern volatile u8              g_GameRequestKind;
+extern s16                      D_80143F26; /* integer half of g_EncounterOriginX */
+extern s16                      D_80143F2A; /* integer half of g_EncounterOriginY */
 /* Scene step byte, countdown halfword and the slot index cached in the
  * scratchpad byte at 0x1F800000. The read-modify-write sites go through a
  * pointer, which is the shape this target's exact siblings use; plain stores
  * keep the scalar spelling.
  */
-extern u8                        D_80143F49;
-extern volatile u8               D_80143F4A;
-extern volatile u8               D_80143F4B; /* 0x80143F4B */
-extern s8                        D_80143F4E; /* 0x80143F4E */
-extern u8                        D_80143F51;
-extern s32                       D_80143F5C;
-extern s32                       D_80143F84;
-extern s16                       g_ScrollHeight;
-extern u8                        D_80143FBC;
-extern u8                        D_80143FBD;
-extern u8                        D_80143FBF;
-extern u8                        D_80143FC1;
-extern u8                        D_80143FC3;
-extern s8                        D_801448E8; /* 0x801448E8 */
-extern s16                       D_801448EE; /* 0x801448EE */
-extern s16                       D_801448F0; /* 0x801448F0 */
-extern u8                        D_80144EE2;
-extern u8                        D_80144F5E[]; /* 0x80144F5E */
-extern u8                        D_80144FC4[]; /* 0x80144FC4; per-slot spawn-gate flag bytes */
-extern u8                        D_80145004[]; /* 0x80145004 */
-extern s32                       D_8014503C;   /* 0x8014503C */
-extern s8                        D_8014504B;   /* 0x8014504B */
-extern u8                        D_801457AB;
-extern u8                        D_80145E9B;
-extern u16                       D_80145EBC; /* 0x80145EBC */
-extern u32                       D_80145EDC; /* 0x80145EDC */
-extern u8                        D_80145F00; /* 0x80145F00 */
-extern u8                        D_80145FB4[];
-extern u16                       D_80145FB8; /* 0x80145FB8 */
-extern u8                        D_80145FD1;
-extern u8                        D_80145FD6;
-extern u8                        D_80145FDB;
-extern u8                        D_80146111;
-extern u8                        D_80146119;
-extern u8                        D_8014611B;
-extern s32                       D_8014611C;
-extern s32                       D_80146120;
-extern s32                       D_80146144;
-extern s32                       D_80146148;
-extern volatile u8               D_80146256;
-extern u8                        D_80146260;
-extern u8                        D_80146261;
-extern u8                        D_80146262;
-extern s32                       D_80146264; /* 0x80146264 */
-extern s16                       D_80146266; /* 0x80146266 */
-extern s32                       D_80146268; /* 0x80146268 */
-extern s16                       D_8014626A; /* 0x8014626A */
-extern u8                        D_8014626C;
-extern u8                        D_8014626E;
-extern u8                        D_8014626F;
-extern u8                        D_80146270;
-extern u8                        D_80146855;
-extern u8                        D_80146856;
-extern u16                       D_80146878;
-extern u8                        D_8014688F;
-extern u8                        D_80146893[]; /* 0x80146893 */
-extern GameSlotByteColumn        D_801468B1[];
-extern GameSlotWordColumn        D_801468B6[];
-extern GameSlotWordColumn        D_801468B8[];
-extern u8                        D_801468BE[]; /* 0x801468BE */
-extern u8                        D_801468C2[]; /* 0x801468C2 */
-extern s32                       D_801468C4;
+extern u8                       D_80143F49;
+extern volatile u8              D_80143F4A;
+extern volatile u8              D_80143F4B; /* 0x80143F4B */
+extern s8                       D_80143F4E; /* 0x80143F4E */
+extern u8                       D_80143F51;
+extern s32                      D_80143F5C;
+extern s32                      D_80143F84;
+extern s16                      g_ScrollHeight;
+extern u8                       D_80143FBC;
+extern u8                       D_80143FBD;
+extern u8                       D_80143FBF;
+extern u8                       D_80143FC1;
+extern u8                       D_80143FC3;
+extern s8                       D_801448E8; /* 0x801448E8 */
+extern s16                      D_801448EE; /* 0x801448EE */
+extern s16                      D_801448F0; /* 0x801448F0 */
+extern u8                       D_80144EE2;
+extern u8                       D_80144F5E[]; /* 0x80144F5E */
+extern u8                       D_80144FC4[]; /* 0x80144FC4; per-slot spawn-gate flag bytes */
+extern u8                       D_80145004[]; /* 0x80145004 */
+extern s32                      D_8014503C;   /* 0x8014503C */
+extern s8                       D_8014504B;   /* 0x8014504B */
+extern u8                       D_801457AB;
+extern u8                       D_80145E9B;
+extern u16                      D_80145EBC; /* 0x80145EBC */
+extern u32                      D_80145EDC; /* 0x80145EDC */
+extern u8                       D_80145F00; /* 0x80145F00 */
+extern u8                       D_80145FB4[];
+extern u16                      D_80145FB8; /* 0x80145FB8 */
+extern u8                       D_80145FD1;
+extern u8                       D_80145FD6;
+extern u8                       D_80145FDB;
+extern u8                       D_80146111;
+extern u8                       D_80146119;
+extern u8                       D_8014611B;
+extern s32                      D_8014611C;
+extern s32                      D_80146120;
+extern s32                      D_80146144;
+extern s32                      D_80146148;
+extern volatile u8              D_80146256;
+extern u8                       D_80146260;
+extern u8                       D_80146261;
+extern u8                       D_80146262;
+extern s32                      D_80146264; /* 0x80146264 */
+extern s16                      D_80146266; /* 0x80146266 */
+extern s32                      D_80146268; /* 0x80146268 */
+extern s16                      D_8014626A; /* 0x8014626A */
+extern u8                       D_8014626C;
+extern u8                       D_8014626E;
+extern u8                       D_8014626F;
+extern u8                       D_80146270;
+extern u8                       D_80146855;
+extern u8                       D_80146856;
+extern u16                      D_80146878;
+extern u8                       D_8014688F;
+extern u8                       D_80146893[]; /* 0x80146893 */
+extern GameSlotByteColumn       D_801468B1[];
+extern GameSlotWordColumn       D_801468B6[];
+extern GameSlotWordColumn       D_801468B8[];
+extern u8                       D_801468BE[]; /* 0x801468BE */
+extern u8                       D_801468C2[]; /* 0x801468C2 */
+extern s32                      D_801468C4;
 /* FAKE: column views of g_Actors for the spawn functions (+0x77 unk_77, +0x78 unk_78, +0x8C ext, +0x94 unk_94).
  * The member form shares one slot offset between the stores and shortens each function by 0x34 bytes. */
-extern u8                        D_801468FF;
-extern u8                        D_80146900[ENTITY_MAX][ACTOR_SIZE]; /* 0x80146900 */
+extern u8                       D_801468FF;
+extern u8                       D_80146900[ENTITY_MAX][ACTOR_SIZE]; /* 0x80146900 */
 /* FAKE: column views of g_Actors for func_801A65A0 and func_801A68C0, the only forms that match them. */
-extern u16                       D_80146904[ENTITY_MAX][ACTOR_SIZE / 2];       /* Actor.unk_7C */
-extern s32                       g_ActorWalkDestX[ENTITY_MAX][ACTOR_SIZE / 4]; /* Actor.walk_dest_x */
-extern s32                       g_ActorWalkDestY[ENTITY_MAX][ACTOR_SIZE / 4]; /* Actor.walk_dest_y */
-extern s32                       D_80146910[ENTITY_MAX][ACTOR_SIZE / 4];       /* Actor.unk_88 */
-extern u16                       D_80146914;
-extern u16                       D_80146918[][ACTOR_SIZE / 2];
-extern u8                        D_8014691C[ENTITY_MAX][ACTOR_SIZE]; /* 0x8014691C */
-extern Actor                     D_80147A58[];
-extern u8                        D_80147CB8[]; /* 0x80147CB8 */
-extern s8                        D_80147CB9[]; /* 0x80147CB9 */
-extern s8                        D_80147CBA[]; /* 0x80147CBA */
-extern u8                        D_80147CBB[]; /* 0x80147CBB */
-extern s32                       D_80147CBC[];
-extern s32                       D_80147CC0[];
-extern s32                       D_80147CC4[];
-extern u16                       D_801481D8;
-extern Pos3                      D_801481E8;   /* scene angle, 16.16 fixed point */
-extern Pos3                      D_801481F8;   /* per-frame step of D_801481E8 */
-extern s16                       D_8014820C;   /* 0x8014820C */
-extern s8                        D_80148654;   /* 0x80148654 */
-extern s8                        D_80148656;   /* 0x80148656 */
-extern s8                        D_801490E0;   /* 0x801490E0 */
-extern u8                        D_801581E0[]; /* 0x801581E0 */
-extern u8*                       g_EncounterZones[];
-extern Offset2                   g_FacingOffsets[]; /* 0x80181AC0 */
-extern s8                        D_80181B00[];
-extern s8                        D_80181B01[];
-extern u8                        D_80181B1C[];   /* 0x80181B1C */
-extern u8                        D_80181B28[];   /* 0x80181B28 */
-extern s16                       D_80181B70[];   /* 0x80181B70 */
-extern u32                       D_80181CA8[60]; /* 0x80181CA8 - the 60-word table the exe defines at src/engine/slus/data_80181CA8.c */
-extern s32                       D_80181CAC;
-extern u8                        D_80181E40[];          /* 0x80181E40 */
-extern u8                        D_80181E44[];          /* 0x80181E44 */
-extern u8                        D_8018214C[];          /* 0x8018214C */
-extern u8                        s_ScriptCopyBlock[16]; /* 0x8018216C */
+extern u16                      D_80146904[ENTITY_MAX][ACTOR_SIZE / 2];       /* Actor.unk_7C */
+extern s32                      g_ActorWalkDestX[ENTITY_MAX][ACTOR_SIZE / 4]; /* Actor.walk_dest_x */
+extern s32                      g_ActorWalkDestY[ENTITY_MAX][ACTOR_SIZE / 4]; /* Actor.walk_dest_y */
+extern s32                      D_80146910[ENTITY_MAX][ACTOR_SIZE / 4];       /* Actor.unk_88 */
+extern u16                      D_80146914;
+extern u16                      D_80146918[][ACTOR_SIZE / 2];
+extern u8                       D_8014691C[ENTITY_MAX][ACTOR_SIZE]; /* 0x8014691C */
+extern Actor                    D_80147A58[];
+extern u8                       D_80147CB8[]; /* 0x80147CB8 */
+extern s8                       D_80147CB9[]; /* 0x80147CB9 */
+extern s8                       D_80147CBA[]; /* 0x80147CBA */
+extern u8                       D_80147CBB[]; /* 0x80147CBB */
+extern s32                      D_80147CBC[];
+extern s32                      D_80147CC0[];
+extern s32                      D_80147CC4[];
+extern u16                      D_801481D8;
+extern Pos3                     D_801481E8;   /* scene angle, 16.16 fixed point */
+extern Pos3                     D_801481F8;   /* per-frame step of D_801481E8 */
+extern s16                      D_8014820C;   /* 0x8014820C */
+extern s8                       D_80148654;   /* 0x80148654 */
+extern s8                       D_80148656;   /* 0x80148656 */
+extern s8                       D_801490E0;   /* 0x801490E0 */
+extern u8                       D_801581E0[]; /* 0x801581E0 */
+extern u8*                      g_EncounterZones[];
+extern Offset2                  g_FacingOffsets[]; /* 0x80181AC0 */
+extern s8                       D_80181B00[];
+extern s8                       D_80181B01[];
+extern u8                       D_80181B1C[];   /* 0x80181B1C */
+extern u8                       D_80181B28[];   /* 0x80181B28 */
+extern s16                      D_80181B70[];   /* 0x80181B70 */
+extern u32                      D_80181CA8[60]; /* 0x80181CA8 - the 60-word table the exe defines at src/engine/slus/data_80181CA8.c */
+extern s32                      D_80181CAC;
+extern u8                       D_80181E40[];          /* 0x80181E40 */
+extern u8                       D_80181E44[];          /* 0x80181E44 */
+extern u8                       D_8018214C[];          /* 0x8018214C */
+extern u8                       s_ScriptCopyBlock[16]; /* 0x8018216C */
 /* D_8018217C */
-extern u8                        g_AreaScriptTests; /* 0x8018217C */
-extern TailFunc                  D_801821C0[];
-extern u8                        D_8018E268[];
-extern char                      D_80195858[]; /* 0x80195858 */
-extern char                      D_80195860[]; /* 0x80195860 */
-extern FieldSearchSpotStates     D_80195ED4;   /* 0x80195ED4 */
-extern char                      D_80195F0C[]; /* 0x80195F0C */
-extern FieldSearchSpotAltStates  D_80195F10;   /* 0x80195F10 */
-extern FieldSearchSpotFadeStates D_80195F44;   /* 0x80195F44 */
-extern char                      D_80195F90[];
-extern char                      D_80195F98[]; /* 0x80195F98 */
-extern char                      D_80195FBC[]; /* 0x80195FBC */
-extern GameSlots                 D_80195FEC;
-extern GameMenuSlots             D_80195FF8;
-extern GameSeed                  D_80196014;
-extern u8                        D_801F1294; /* 0x801F1294 */
-extern u8                        D_801F12C8; /* 0x801F12C8 */
-extern u8                        D_801F1318; /* 0x801F1318 */
-extern u8                        D_801F13B8; /* 0x801F13B8 */
-extern u8                        D_801F1444; /* 0x801F1444 */
-extern u8                        D_801F1484; /* 0x801F1484 */
-extern u8                        D_801F14C4; /* 0x801F14C4 */
-extern u8                        D_801F14F8; /* 0x801F14F8 */
-extern u8                        D_801F1538; /* 0x801F1538 */
-extern u8                        D_801F1578; /* 0x801F1578 */
-extern u8                        D_801F15B8; /* 0x801F15B8 */
-extern u8                        D_801F15F8; /* 0x801F15F8 */
-extern u8                        D_801F2C68; /* 0x801F2C68 */
-extern u8                        D_801F2D28; /* 0x801F2D28 */
-extern u8                        D_801F2D38; /* 0x801F2D38 */
-extern u8                        D_801F2D48; /* 0x801F2D48 */
-extern u8                        D_801F2D50; /* 0x801F2D50 */
-extern u8                        D_801F2D70; /* 0x801F2D70 */
-extern u8                        D_801F2DA0; /* 0x801F2DA0 */
-extern u8                        D_801F2DA8; /* 0x801F2DA8 */
-extern u8                        D_801F2DC4; /* 0x801F2DC4 */
-extern u8                        D_801F2DE0; /* 0x801F2DE0 */
-extern u8                        D_801F2E68; /* 0x801F2E68 */
-extern u8                        D_801F2E94; /* 0x801F2E94 */
-extern u8                        D_801F2F08; /* 0x801F2F08 */
-extern u8                        D_801F2F34; /* 0x801F2F34 */
-extern u8                        D_801F3140; /* 0x801F3140 */
-extern u8                        D_801F3184; /* 0x801F3184 */
-extern u8                        D_801F346C; /* 0x801F346C */
-extern u8                        D_801F35BC; /* 0x801F35BC */
-extern u8                        D_801F3A34; /* 0x801F3A34 */
-extern u8                        D_801F3AA4; /* 0x801F3AA4 */
-extern u8                        D_801F3ADC; /* 0x801F3ADC */
-extern u8                        D_801F3B20; /* 0x801F3B20 */
-extern u8                        D_801F3B9C; /* 0x801F3B9C */
-extern u8                        D_801F3BEC; /* 0x801F3BEC */
-extern u8                        D_801F3C9C; /* 0x801F3C9C */
-extern u8                        D_801F3E00; /* 0x801F3E00 */
-extern u8                        D_801F3F24; /* 0x801F3F24 */
-extern u8                        D_801F3F48; /* 0x801F3F48 */
-extern u8                        D_801F3F70; /* 0x801F3F70 */
-extern u8                        D_801F3FF4; /* 0x801F3FF4 */
-extern u8                        D_801F4168; /* 0x801F4168 */
-extern u8                        D_801F4230; /* 0x801F4230 */
-extern u8                        D_801F4250; /* 0x801F4250 */
-extern u8                        D_801F4288; /* 0x801F4288 */
-extern u8                        D_801F439C; /* 0x801F439C */
-extern u8                        D_801F4594; /* 0x801F4594 */
-extern u8                        D_801F45E4; /* 0x801F45E4 */
-extern u8                        D_801F4674; /* 0x801F4674 */
-extern u8                        D_801F4C48; /* 0x801F4C48 */
-extern u8                        D_801F4CC8; /* 0x801F4CC8 */
-extern u8                        D_801F4D04; /* 0x801F4D04 */
-extern u8                        D_801F4D90; /* 0x801F4D90 */
-extern u8                        D_801F4DA0; /* 0x801F4DA0 */
-extern u8                        D_801F4DA4; /* 0x801F4DA4 */
-extern u8                        D_801F4DD4; /* 0x801F4DD4 */
-extern u8                        D_801F4DE0; /* 0x801F4DE0 */
-extern u8                        D_801F5698; /* 0x801F5698 */
-extern u8                        D_801F56E0; /* 0x801F56E0 */
-extern u8                        D_801F5708; /* 0x801F5708 */
-extern u8                        D_801F58F4; /* 0x801F58F4 */
-extern u8                        D_801F591C; /* 0x801F591C */
-extern u8                        D_801F599C; /* 0x801F599C */
-extern u8                        D_801F5EBC; /* 0x801F5EBC */
-extern u8                        D_801F64E8; /* 0x801F64E8 */
-extern u8                        D_801F6D58; /* 0x801F6D58 */
-extern u8                        D_801F6D80; /* 0x801F6D80 */
-extern u8                        D_801F6D84; /* 0x801F6D84 */
-extern u8                        D_801F6DBC; /* 0x801F6DBC */
-extern u8                        D_801F6DE4; /* 0x801F6DE4 */
-extern u8                        D_801F6DE8; /* 0x801F6DE8 */
-extern u8                        D_801F8538; /* 0x801F8538 */
-extern u8                        D_801F8570; /* 0x801F8570 */
-extern u8                        D_801F8574; /* 0x801F8574 */
-extern u8                        D_801F9728; /* 0x801F9728 */
-extern u8                        D_801F9DC8; /* 0x801F9DC8 */
-extern u8                        D_801F9DCC; /* 0x801F9DCC */
-extern u8                        D_801FA1F0; /* 0x801FA1F0 */
-extern u8                        D_801FA234; /* 0x801FA234 */
-extern u8                        D_801FA23C; /* 0x801FA23C */
-extern u8                        D_801FAEDC; /* 0x801FAEDC */
-extern u8                        D_801FAF60; /* 0x801FAF60 */
-extern u8                        D_801FAF84; /* 0x801FAF84 */
-extern u8                        D_801FBF34; /* 0x801FBF34 */
-extern u8                        D_801FBFC8; /* 0x801FBFC8 */
-extern u8                        D_801FBFE8; /* 0x801FBFE8 */
-extern u8                        D_801FC404; /* 0x801FC404 */
-extern u8                        D_801FC488; /* 0x801FC488 */
-extern u8                        D_801FC4BC; /* 0x801FC4BC */
-extern u8                        D_801FC9FC; /* 0x801FC9FC */
-extern u8                        D_801FCA88; /* 0x801FCA88 */
-extern u8                        D_801FCFC0; /* 0x801FCFC0 */
-extern u8                        D_801FD03C; /* 0x801FD03C */
-extern u8                        D_801FD044; /* 0x801FD044 */
-extern u8                        D_801FD1A4; /* 0x801FD1A4 */
-extern u8                        D_801FD24C; /* 0x801FD24C */
-extern u8                        D_801FD274; /* 0x801FD274 */
-extern u8                        D_801FD5C8; /* 0x801FD5C8 */
-extern u8                        D_801FD67C; /* 0x801FD67C */
-extern u8                        D_801FD6A8; /* 0x801FD6A8 */
-extern u8                        D_801FDDFC; /* 0x801FDDFC */
-extern u8                        D_801FDFAC; /* 0x801FDFAC */
-extern u8                        D_801FDFB4; /* 0x801FDFB4 */
-extern u8                        D_801FE274; /* 0x801FE274 */
-extern u8                        D_801FE288; /* 0x801FE288 */
-extern u8                        D_801FE364; /* 0x801FE364 */
-extern u8                        D_801FE370; /* 0x801FE370 */
-extern u8                        D_801FE374; /* 0x801FE374 */
-extern u8                        D_801FE3C4; /* 0x801FE3C4 */
-extern u8                        D_801FE3CC; /* 0x801FE3CC */
-extern u8                        D_801FE49C; /* 0x801FE49C */
-extern u8                        D_801FE4C4; /* 0x801FE4C4 */
-extern u8                        D_801FE4F4; /* 0x801FE4F4 */
-extern u8                        D_801FE52C; /* 0x801FE52C */
-extern u8                        D_801FE5F4; /* 0x801FE5F4 */
-extern u8                        D_801FE724; /* 0x801FE724 */
-extern u8                        D_801FE734; /* 0x801FE734 */
-extern u8                        D_801FE880; /* 0x801FE880 */
-extern u8                        D_801FE950; /* 0x801FE950 */
-extern u8                        D_801FE9B0; /* 0x801FE9B0 */
-extern u8                        D_801FE9C8; /* 0x801FE9C8 */
-extern u8                        D_801FE9CC; /* 0x801FE9CC */
-extern u8                        D_801FE9E8; /* 0x801FE9E8 */
+extern u8                       g_AreaScriptTests; /* 0x8018217C */
+extern TailFunc                 D_801821C0[];
+extern u8                       D_8018E268[];
+extern char                     D_80195858[]; /* 0x80195858 */
+extern char                     D_80195860[]; /* 0x80195860 */
+extern FieldSearchSpotSteps     D_80195ED4;   /* 0x80195ED4 */
+extern char                     D_80195F0C[]; /* 0x80195F0C */
+extern FieldSearchSpotAltSteps  D_80195F10;   /* 0x80195F10 */
+extern FieldSearchSpotFadeSteps D_80195F44;   /* 0x80195F44 */
+extern char                     D_80195F90[];
+extern char                     D_80195F98[]; /* 0x80195F98 */
+extern char                     D_80195FBC[]; /* 0x80195FBC */
+extern CellPaletteIndices       D_80195FEC;
+extern CellEffects              D_80195FF8;
+extern PaletteColors            D_80196014;
+extern u8                       D_801F1294; /* 0x801F1294 */
+extern u8                       D_801F12C8; /* 0x801F12C8 */
+extern u8                       D_801F1318; /* 0x801F1318 */
+extern u8                       D_801F13B8; /* 0x801F13B8 */
+extern u8                       D_801F1444; /* 0x801F1444 */
+extern u8                       D_801F1484; /* 0x801F1484 */
+extern u8                       D_801F14C4; /* 0x801F14C4 */
+extern u8                       D_801F14F8; /* 0x801F14F8 */
+extern u8                       D_801F1538; /* 0x801F1538 */
+extern u8                       D_801F1578; /* 0x801F1578 */
+extern u8                       D_801F15B8; /* 0x801F15B8 */
+extern u8                       D_801F15F8; /* 0x801F15F8 */
+extern u8                       D_801F2C68; /* 0x801F2C68 */
+extern u8                       D_801F2D28; /* 0x801F2D28 */
+extern u8                       D_801F2D38; /* 0x801F2D38 */
+extern u8                       D_801F2D48; /* 0x801F2D48 */
+extern u8                       D_801F2D50; /* 0x801F2D50 */
+extern u8                       D_801F2D70; /* 0x801F2D70 */
+extern u8                       D_801F2DA0; /* 0x801F2DA0 */
+extern u8                       D_801F2DA8; /* 0x801F2DA8 */
+extern u8                       D_801F2DC4; /* 0x801F2DC4 */
+extern u8                       D_801F2DE0; /* 0x801F2DE0 */
+extern u8                       D_801F2E68; /* 0x801F2E68 */
+extern u8                       D_801F2E94; /* 0x801F2E94 */
+extern u8                       D_801F2F08; /* 0x801F2F08 */
+extern u8                       D_801F2F34; /* 0x801F2F34 */
+extern u8                       D_801F3140; /* 0x801F3140 */
+extern u8                       D_801F3184; /* 0x801F3184 */
+extern u8                       D_801F346C; /* 0x801F346C */
+extern u8                       D_801F35BC; /* 0x801F35BC */
+extern u8                       D_801F3A34; /* 0x801F3A34 */
+extern u8                       D_801F3AA4; /* 0x801F3AA4 */
+extern u8                       D_801F3ADC; /* 0x801F3ADC */
+extern u8                       D_801F3B20; /* 0x801F3B20 */
+extern u8                       D_801F3B9C; /* 0x801F3B9C */
+extern u8                       D_801F3BEC; /* 0x801F3BEC */
+extern u8                       D_801F3C9C; /* 0x801F3C9C */
+extern u8                       D_801F3E00; /* 0x801F3E00 */
+extern u8                       D_801F3F24; /* 0x801F3F24 */
+extern u8                       D_801F3F48; /* 0x801F3F48 */
+extern u8                       D_801F3F70; /* 0x801F3F70 */
+extern u8                       D_801F3FF4; /* 0x801F3FF4 */
+extern u8                       D_801F4168; /* 0x801F4168 */
+extern u8                       D_801F4230; /* 0x801F4230 */
+extern u8                       D_801F4250; /* 0x801F4250 */
+extern u8                       D_801F4288; /* 0x801F4288 */
+extern u8                       D_801F439C; /* 0x801F439C */
+extern u8                       D_801F4594; /* 0x801F4594 */
+extern u8                       D_801F45E4; /* 0x801F45E4 */
+extern u8                       D_801F4674; /* 0x801F4674 */
+extern u8                       D_801F4C48; /* 0x801F4C48 */
+extern u8                       D_801F4CC8; /* 0x801F4CC8 */
+extern u8                       D_801F4D04; /* 0x801F4D04 */
+extern u8                       D_801F4D90; /* 0x801F4D90 */
+extern u8                       D_801F4DA0; /* 0x801F4DA0 */
+extern u8                       D_801F4DA4; /* 0x801F4DA4 */
+extern u8                       D_801F4DD4; /* 0x801F4DD4 */
+extern u8                       D_801F4DE0; /* 0x801F4DE0 */
+extern u8                       D_801F5698; /* 0x801F5698 */
+extern u8                       D_801F56E0; /* 0x801F56E0 */
+extern u8                       D_801F5708; /* 0x801F5708 */
+extern u8                       D_801F58F4; /* 0x801F58F4 */
+extern u8                       D_801F591C; /* 0x801F591C */
+extern u8                       D_801F599C; /* 0x801F599C */
+extern u8                       D_801F5EBC; /* 0x801F5EBC */
+extern u8                       D_801F64E8; /* 0x801F64E8 */
+extern u8                       D_801F6D58; /* 0x801F6D58 */
+extern u8                       D_801F6D80; /* 0x801F6D80 */
+extern u8                       D_801F6D84; /* 0x801F6D84 */
+extern u8                       D_801F6DBC; /* 0x801F6DBC */
+extern u8                       D_801F6DE4; /* 0x801F6DE4 */
+extern u8                       D_801F6DE8; /* 0x801F6DE8 */
+extern u8                       D_801F8538; /* 0x801F8538 */
+extern u8                       D_801F8570; /* 0x801F8570 */
+extern u8                       D_801F8574; /* 0x801F8574 */
+extern u8                       D_801F9728; /* 0x801F9728 */
+extern u8                       D_801F9DC8; /* 0x801F9DC8 */
+extern u8                       D_801F9DCC; /* 0x801F9DCC */
+extern u8                       D_801FA1F0; /* 0x801FA1F0 */
+extern u8                       D_801FA234; /* 0x801FA234 */
+extern u8                       D_801FA23C; /* 0x801FA23C */
+extern u8                       D_801FAEDC; /* 0x801FAEDC */
+extern u8                       D_801FAF60; /* 0x801FAF60 */
+extern u8                       D_801FAF84; /* 0x801FAF84 */
+extern u8                       D_801FBF34; /* 0x801FBF34 */
+extern u8                       D_801FBFC8; /* 0x801FBFC8 */
+extern u8                       D_801FBFE8; /* 0x801FBFE8 */
+extern u8                       D_801FC404; /* 0x801FC404 */
+extern u8                       D_801FC488; /* 0x801FC488 */
+extern u8                       D_801FC4BC; /* 0x801FC4BC */
+extern u8                       D_801FC9FC; /* 0x801FC9FC */
+extern u8                       D_801FCA88; /* 0x801FCA88 */
+extern u8                       D_801FCFC0; /* 0x801FCFC0 */
+extern u8                       D_801FD03C; /* 0x801FD03C */
+extern u8                       D_801FD044; /* 0x801FD044 */
+extern u8                       D_801FD1A4; /* 0x801FD1A4 */
+extern u8                       D_801FD24C; /* 0x801FD24C */
+extern u8                       D_801FD274; /* 0x801FD274 */
+extern u8                       D_801FD5C8; /* 0x801FD5C8 */
+extern u8                       D_801FD67C; /* 0x801FD67C */
+extern u8                       D_801FD6A8; /* 0x801FD6A8 */
+extern u8                       D_801FDDFC; /* 0x801FDDFC */
+extern u8                       D_801FDFAC; /* 0x801FDFAC */
+extern u8                       D_801FDFB4; /* 0x801FDFB4 */
+extern u8                       D_801FE274; /* 0x801FE274 */
+extern u8                       D_801FE288; /* 0x801FE288 */
+extern u8                       D_801FE364; /* 0x801FE364 */
+extern u8                       D_801FE370; /* 0x801FE370 */
+extern u8                       D_801FE374; /* 0x801FE374 */
+extern u8                       D_801FE3C4; /* 0x801FE3C4 */
+extern u8                       D_801FE3CC; /* 0x801FE3CC */
+extern u8                       D_801FE49C; /* 0x801FE49C */
+extern u8                       D_801FE4C4; /* 0x801FE4C4 */
+extern u8                       D_801FE4F4; /* 0x801FE4F4 */
+extern u8                       D_801FE52C; /* 0x801FE52C */
+extern u8                       D_801FE5F4; /* 0x801FE5F4 */
+extern u8                       D_801FE724; /* 0x801FE724 */
+extern u8                       D_801FE734; /* 0x801FE734 */
+extern u8                       D_801FE880; /* 0x801FE880 */
+extern u8                       D_801FE950; /* 0x801FE950 */
+extern u8                       D_801FE9B0; /* 0x801FE9B0 */
+extern u8                       D_801FE9C8; /* 0x801FE9C8 */
+extern u8                       D_801FE9CC; /* 0x801FE9CC */
+extern u8                       D_801FE9E8; /* 0x801FE9E8 */
 
 void func_80117004(void);
 void func_80117610(void);

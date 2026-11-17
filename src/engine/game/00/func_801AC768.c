@@ -33,7 +33,7 @@ MATCH void func_801AC768(GameCursorState* cursor_state, s32 mode_byte, s32 value
                 cursor_state->unk_07 = 1;
             }
         advance:
-            cursor_state->index_0A = cursor_state->index_0A + 3;
+            cursor_state->index = cursor_state->index + 3;
             return;
         }
         ACTOR_CLEAR_STEP();

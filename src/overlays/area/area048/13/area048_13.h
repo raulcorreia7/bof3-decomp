@@ -51,11 +51,11 @@ static inline void Area_StartScriptedMove(u8 facing) {
     if (g_ScriptState->unk_07 != 0) {
         if (Actor_GetOwner() != 2) {
             Area_MoveActorRoute(g_ScriptState, g_Task->direction);
-            g_ScriptState->flag_00 |= 0x80;
+            g_ScriptState->flags |= 0x80;
         } else {
             Area_SetFacingOffsetX(g_Task->direction);
             g_AreaCameraHeightStep = 0;
-            g_ScriptState->flag_00 |= 0x40;
+            g_ScriptState->flags |= 0x40;
         }
     }
     g_Task->vz               = 0;

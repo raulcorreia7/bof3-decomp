@@ -4,15 +4,15 @@
  * s16 although the definition names it u16; the low halfword is identical. */
 
 MATCH s32 func_801AB8B0(GameCursorState* state, u8* table, s32 value) {
-    switch (table[state->index_0A]) {
+    switch (table[state->index]) {
         case 0x90:
         case 0x91:
         case 0x92:
         case 0x93:
         case 0x94:
         case 0x95:
-            g_Task->param.unk_0B = Actor_ClaimSlot(table[state->index_0A] - 0x90, (s8)table[state->index_0A + 1], (s8)table[state->index_0A + 2], (s16)g_Task->screen_x, (s16)g_Task->screen_y);
-            state->index_0A += 2;
+            g_Task->param.unk_0B = Actor_ClaimSlot(table[state->index] - 0x90, (s8)table[state->index + 1], (s8)table[state->index + 2], (s16)g_Task->screen_x, (s16)g_Task->screen_y);
+            state->index += 2;
             break;
         case 0x98:
         case 0x99:
@@ -21,12 +21,12 @@ MATCH s32 func_801AB8B0(GameCursorState* state, u8* table, s32 value) {
         case 0x9C:
         case 0x9D:
             g_Task->param.unk_0B =
-                Actor_SpawnHelper(table[state->index_0A] - 0x98, (s8)table[state->index_0A + 1], (s8)table[state->index_0A + 2], g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->pos.z.fixed);
-            state->index_0A += 2;
+                Actor_SpawnHelper(table[state->index] - 0x98, (s8)table[state->index + 1], (s8)table[state->index + 2], g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->pos.z.fixed);
+            state->index += 2;
             break;
         case 0x9F:
             if (ACTOR_IN_USE(g_SpawnedActors[g_Task->param.actor_slot])) {
-                state->index_0A -= 1;
+                state->index -= 1;
             }
             break;
         default:

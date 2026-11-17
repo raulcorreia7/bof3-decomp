@@ -35,7 +35,7 @@ MATCH void func_801F8070(void) {
                 SYS_SetFlag(g_SceneFlags, 6);
                 g_GameFlags ^= 0x80;
                 Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR_COURTYARD, TO_COORD(49), TO_COORD(75), AREA_ENTRY_MAP_LOADING | FACING_DOWN);
-                g_GameArea.request_kind = 1;
+                g_GameArea.request_type = 1;
             }
             break;
         case 7:
@@ -53,7 +53,7 @@ MATCH void func_801F8070(void) {
                 SYS_SetFlag(g_SceneFlags, 6);
                 g_GameFlags ^= 0x80;
                 Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR_COURTYARD, TO_COORD(49), TO_COORD(75), AREA_ENTRY_MAP_LOADING | FACING_DOWN);
-                g_GameArea.request_kind = 1;
+                g_GameArea.request_type = 1;
             }
             break;
     }

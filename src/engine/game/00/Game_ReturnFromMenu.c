@@ -59,6 +59,6 @@ MATCH void Game_ReturnFromMenu(void) {
         g_GameStateIndex = GAME_REQUEST_IDLE;
     }
     Menu_ResetPanelTasks();
-    g_GameEntryState    = GAME_STATE_FIELD;
+    g_GameEntryState    = GAME_MODE_FIELD;
     g_GameEntrySubstate = 0u;
 }

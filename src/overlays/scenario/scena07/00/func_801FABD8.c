@@ -44,7 +44,7 @@ MATCH void func_801FABD8(void) {
                 func_801C1DF0(0);
                 func_8019FA28(0xAF, 0x240000, 0x1E0000, 0x81);
                 g_GameArea.entry_mode   = 0xFF;
-                g_GameArea.request_kind = 0xFF;
+                g_GameArea.request_type = 0xFF;
                 g_SceneState.step_05    = 6;
             }
             break;

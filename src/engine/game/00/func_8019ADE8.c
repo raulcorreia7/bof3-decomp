@@ -1,9 +1,9 @@
 #include "game_00.h"
 
 typedef struct GameRouteRequest {
-    u8 unk_00;
+    u8 flags;
     u8 pad_01[3];
-    u8 unk_04;
+    u8 rate;
     u8 pad_05[0x0B];
 } GameRouteRequest;
 
@@ -29,8 +29,8 @@ MATCH void func_8019ADE8(void) {
     work2->tint.bytes.rgb.b = 0;
     work2->tint.bytes.rgb.g = 0;
     work2->tint.bytes.rgb.r = 0;
-    request.unk_04          = 3;
-    request.unk_00          = 0;
+    request.rate            = 3;
+    request.flags           = 0;
     Area_MoveActorRoute(&request, g_Task->direction);
     func_8019AF1C();
 }

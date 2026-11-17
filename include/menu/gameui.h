@@ -7,9 +7,9 @@
 
 /* Script interpreter state; the same 12-byte record in each handler. */
 typedef struct ScriptState {
-    u8  flag_00;
+    u8  flags;
     u8  unk_01;
-    u8  count_02;
+    u8  count;
     u8  script_index; /* 0x03 the row of the area script table to run */
     u8  unk_04;       /* 0x04 */
     u8  unk_05;       /* 0x05 */
@@ -29,24 +29,24 @@ ASSERT_SIZE(ScriptState, 0x0C);
 /* The front-end step record behind g_MessageState: func_8015102C walks the timer,
  * phase, cursor and flag fields; the other units read only its first byte. */
 typedef struct MessageState {
-    u8  state_00;     /* 0x00 */
+    u8  state;        /* 0x00 */
     u8  selection;    /* 0x01 */
     u8  pad_02[2];    /* 0x02 */
-    u16 flags_04;     /* 0x04 */
-    u8  count_06;     /* 0x06 */
+    u16 flags;        /* 0x04 */
+    u8  count;        /* 0x06 */
     u8  pad_07[5];    /* 0x07 */
     s32 entry;        /* 0x0C */
-    s32 cursor_10;    /* 0x10 */
+    s32 cursor;       /* 0x10 */
     u8  pad_14[4];    /* 0x14 */
     u8  phase;        /* 0x18 */
-    u8  index_19;     /* 0x19 */
+    u8  index;        /* 0x19 */
     u8  pad_1A[0x0E]; /* 0x1A */
     u16 scroll;       /* 0x28 */
 } MessageState;
 
-ASSERT_OFFSET(MessageState, state_00, 0x00);
-ASSERT_OFFSET(MessageState, count_06, 0x06);
-ASSERT_OFFSET(MessageState, cursor_10, 0x10);
+ASSERT_OFFSET(MessageState, state, 0x00);
+ASSERT_OFFSET(MessageState, count, 0x06);
+ASSERT_OFFSET(MessageState, cursor, 0x10);
 ASSERT_OFFSET(MessageState, scroll, 0x28);
 ASSERT_SIZE(MessageState, 0x2C);
 
@@ -227,18 +227,18 @@ typedef enum GameRequest {
 
 /* The rows of g_GameModes, the full-screen modes Game_RunMain runs. */
 typedef enum GameMode {
-    GAME_STATE_NEW_GAME     = 0,
-    GAME_STATE_AREA_LOAD    = 1,
-    GAME_STATE_FIELD        = 2,
-    GAME_STATE_MENU         = 3,
-    GAME_STATE_MESSAGE      = 4,
-    GAME_STATE_BATTLE       = 5,
-    GAME_STATE_CAMERA_LOOK  = 6,
-    GAME_STATE_SHOP         = 7,
-    GAME_STATE_FISHING      = 8,
-    GAME_STATE_ABILITY_MENU = 9,
-    GAME_STATE_SHISU        = 10,
-    GAME_STATE_SCENE_CAMERA = 11,
+    GAME_MODE_NEW_GAME     = 0,
+    GAME_MODE_AREA_LOAD    = 1,
+    GAME_MODE_FIELD        = 2,
+    GAME_MODE_MENU         = 3,
+    GAME_MODE_MESSAGE      = 4,
+    GAME_MODE_BATTLE       = 5,
+    GAME_MODE_CAMERA_LOOK  = 6,
+    GAME_MODE_SHOP         = 7,
+    GAME_MODE_FISHING      = 8,
+    GAME_MODE_ABILITY_MENU = 9,
+    GAME_MODE_SHISU        = 10,
+    GAME_MODE_SCENE_CAMERA = 11,
 } GameMode;
 
 /* The main state machine index, a GameMode value. */
