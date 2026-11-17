@@ -2,10 +2,7 @@
 #include "engine/slus/slus.h"
 #include <inline_c.h>
 
-/* projects the record's position through the GTE into screen halfwords at +0x2E/+0x30 and a depth word at +0x60;
- * clears or sets the record's off-screen flag (bit 7 of the first byte) and registers on-screen records in D_8014828C.
- */
-/* Reordered coordinate assignments leave the origin load difference at +0x0C; volatile reads and a barrier alter the prologue. */
+/* Projects the area position through the GTE and registers visible actors. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_8015A9A4(void) {
     SVECTOR vec;
