@@ -24,11 +24,11 @@ NON_MATCHING void func_801E03F8(void) {
     }
     pos_x = FISHING_STATE->motion_34.unk_34;
     if (pos_x <= TO_COORD(8)) {
-        FISHING_STATE->pos_x_0C = ABS(FISHING_STATE->pos_x_0C);
-    } else if (pos_x > 0x13FFFF) {
-        if (FISHING_STATE->pos_x_0C > 0) {
+        if (FISHING_STATE->pos_x_0C < 0) {
             FISHING_STATE->pos_x_0C = -FISHING_STATE->pos_x_0C;
         }
+    } else if (pos_x > 0x13FFFF && FISHING_STATE->pos_x_0C > 0) {
+        FISHING_STATE->pos_x_0C = -FISHING_STATE->pos_x_0C;
     }
     row_facing  = FISHING_ROW->facing;
     entry_face  = D_801E2AD3[FISHING_STATE->cue_index_06 * 0x24];

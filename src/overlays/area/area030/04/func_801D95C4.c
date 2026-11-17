@@ -10,14 +10,8 @@ NON_MATCHING void func_801D95C4(u16 x, u16 y, u16 w, u16 h, u8 shade) {
     u16      y_origin;
     u16      color;
     s32      mode;
-    s32      r;
-    s32      g;
-    s32      b;
 
     color = ((u16*)&D_80033A08)[(((u32)((*(s8*)&g_WindowStyle) << 6)) | 0x20) >> 1];
-    r     = (color & 0x1F) << 3;
-    g     = (color >> 2) & 0xF8;
-    b     = (color >> 7) & 0xF8;
 
     if (shade != 0) {
         mode = 7;
@@ -32,7 +26,7 @@ NON_MATCHING void func_801D95C4(u16 x, u16 y, u16 w, u16 h, u8 shade) {
     prim->x0 = x;
     prim->y1 = (prim->y0 = y_origin + h);
     prim->y2 = y;
-    setRGB0(prim, r, g, b);
+    setRGB0(prim, PSX_COLOR_R(color) << 3, PSX_COLOR_G(color) << 3, PSX_COLOR_B(color) << 3);
     PSX_SET_SEMI_TRANSPARENT(prim);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(LINE_F3));
 
@@ -48,7 +42,7 @@ NON_MATCHING void func_801D95C4(u16 x, u16 y, u16 w, u16 h, u8 shade) {
     prim->x1 = (prim->x0 = x);
     prim->y0 = y + h;
     prim->y2 = (prim->y1 = y);
-    setRGB0(prim, r, g, b);
+    setRGB0(prim, PSX_COLOR_R(color) << 3, PSX_COLOR_G(color) << 3, PSX_COLOR_B(color) << 3);
     PSX_SET_SEMI_TRANSPARENT(prim);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(LINE_F3));
 }

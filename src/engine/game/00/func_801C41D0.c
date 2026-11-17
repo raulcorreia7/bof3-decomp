@@ -49,7 +49,7 @@ NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
     if ((pos_y & HALF_MASK) == 0) {
         b = (((pos_y >> 16) - 1) << 16) | 0x8000;
         a = ((u32)pos_x >> 16) << 16;
-        if (BLOCKED(a, b, 1))
+        if (Area_ReadStepHeight(a, b, 1) + 1 > 0x41 && ((u8*)&g_ScratchPad)[0])
             return 1;
         a = (a & HALF_MASK) | (((pos_x >> 16) + 1) << 16);
         if (BLOCKED(a, b, 1))
