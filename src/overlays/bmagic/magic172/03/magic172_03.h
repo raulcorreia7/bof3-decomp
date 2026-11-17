@@ -10,7 +10,7 @@
 
 extern Callback D_801F0B90[];
 
-extern BMagicRingShade D_801F0B9C[];
+extern BMagicTint D_801F0B9C[];
 
 /* func_800AF3A0 */
 void            Battle_StepRangeToward(VECTOR pos, s16 step);

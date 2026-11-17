@@ -4,7 +4,7 @@ void func_801EF7B0(void);
 void Effect_SetActorMatrix(void);
 
 MATCH void Effect_DrawActor(void) {
-    ActorEffectSteps handlers = D_801EEC04;
+    BMagicActorSteps handlers = D_801EEC04;
 
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
     if (g_Task->header.flags != 0) {

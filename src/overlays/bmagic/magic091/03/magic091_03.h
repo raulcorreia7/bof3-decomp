@@ -8,7 +8,7 @@
 
 extern u16 g_BattleEffectPalette[];
 
-extern ActorEffectSteps D_801EEC04;
+extern BMagicActorSteps D_801EEC04;
 extern Callback         D_801EFC64[];
 
 #endif

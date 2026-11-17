@@ -19,12 +19,9 @@ typedef struct BMagicStreakSegment {
     /* 0x01 */ u8        unk_01;
     /* 0x02 */ u8        life;
     /* 0x03 */ u8        pad_03;
-    /* 0x04 */ Pos3      head;
-    /* 0x10 */ u8        pad_10[4];
-    /* 0x14 */ Pos3      tail;
-    /* 0x20 */ u8        pad_20[4];
-    /* 0x24 */ Pos3      velocity;
-    /* 0x30 */ u8        pad_30[4];
+    /* 0x04 */ VECTOR    head;
+    /* 0x14 */ VECTOR    tail;
+    /* 0x24 */ VECTOR    velocity;
     /* 0x34 */ ColorRGB8 head_color;
     /* 0x37 */ u8        pad_37;
     /* 0x38 */ ColorRGB8 tail_color;
