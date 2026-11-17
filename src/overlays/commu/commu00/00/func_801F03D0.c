@@ -2,22 +2,17 @@
 
 /* Cap byte of each table row lives in the module header, read signed. */
 
-/* The three label caps, copied as one record. */
-typedef struct LabelCaps {
-    s8 cap[3];
-} LabelCaps;
-
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F03D0(void) {
-    LabelCaps limits;
-    s32       row;
-    s32       count;
-    s32       i;
-    s32       value;
-    u16       candidate;
-    u8*       cap;
+    FairyVillageOverlayHeader* limits;
+    s32                        row;
+    s32                        count;
+    s32                        i;
+    s32                        value;
+    u16                        candidate;
+    u8*                        cap;
 
-    limits = *(LabelCaps*)D_801EEC08;
+    limits = (FairyVillageOverlayHeader*)D_801EEC08;
 
     for (row = 0; row < 3; row++) {
         for (count = 2; count >= 0; count--) {
@@ -27,7 +22,7 @@ NON_MATCHING void func_801F03D0(void) {
 
     for (row = 0; row < 3; row++) {
         count = 0;
-        cap   = (u8*)&limits.cap[row];
+        cap   = (u8*)&limits->label_cap[row];
         while (count < 3) {
             value = RANDOM_MASK(0x1F);
             for (;;) {
