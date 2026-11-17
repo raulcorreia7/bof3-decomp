@@ -626,12 +626,7 @@ MATCH void func_801D28A4(s16 x, s16 y, u8 slot, s32 selected) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D2D98(s16 x, s16 y, s32 width, u8 channel, u8 blink) {
-}
-#else
 INCLUDE_ASM(func_801D2D98);
-#endif
 
 #define FAIRY_OVERVIEW_GROUP_COUNT     3
 #define FAIRY_OVERVIEW_ROOM_COUNT      8
