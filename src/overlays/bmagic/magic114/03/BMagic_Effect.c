@@ -174,12 +174,12 @@ NON_MATCHING void func_801EF280(s32* values) {
     POLY_G3*             prim;
     long                 p;
     long                 flag;
+    s32                  average;
     u32                  frame_count;
     u32                  phase;
     u8                   state;
     u8                   mode;
 
-    mode = g_Task->param.unk_0B;
     prim = (POLY_G3*)g_GfxPrimCursor;
     SetPolyG3(prim);
 
@@ -191,13 +191,16 @@ NON_MATCHING void func_801EF280(s32* values) {
     g_ScratchPadVectors[1].vz = 0;
     g_ScratchPadVectors[2].vx = 0;
     g_ScratchPadVectors[2].vy = 0;
+    mode                      = g_Task->param.unk_0B;
     if (mode < 4) {
         g_ScratchPadVectors[2].vz = g_Task->timer * 3;
     } else {
         g_ScratchPadVectors[2].vz = -(g_Task->timer * 6) / 2;
     }
 
-    values[mode] = RotAverage3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &p, &flag);
+    average      = RotAverage3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &p, &flag);
+    mode         = g_Task->param.unk_0B;
+    values[mode] = average;
 
     shade = &shades[(mode & 1) | ((mode & 4) >> 1)];
     setRGB0(prim, shade->color.red, shade->color.green, shade->color.blue);

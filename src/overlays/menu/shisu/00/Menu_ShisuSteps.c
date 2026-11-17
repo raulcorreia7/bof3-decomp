@@ -443,7 +443,79 @@ MATCH s32 func_801D1E60(void) {
     return 16;
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D1EE8(void) {
+    s32 denominator;
+    s32 difference;
+    s32 numerator;
+    s32 scaled_difference;
+    s32 subtotal;
+    s32 total;
+
+    denominator       = g_ShisuIngredients.topping_size * 4;
+    difference        = g_ShisuIngredients.used[1] - g_ShisuIngredients.rounds;
+    scaled_difference = difference * 5;
+    if (denominator == 0) {
+        D_801DA034 = 0;
+    } else if (denominator - scaled_difference > 0) {
+        numerator  = scaled_difference * 100;
+        D_801DA034 = numerator / denominator;
+    } else {
+        numerator  = scaled_difference * 100;
+        D_801DA034 = 200 - (numerator / denominator);
+    }
+    if (D_801DA034 < 0) {
+        D_801DA034 = 0;
+    }
+
+    denominator       = g_ShisuIngredients.used[1];
+    scaled_difference = g_ShisuIngredients.used[2] * 4;
+    if (denominator == 0) {
+        D_801DA038 = 0;
+    } else if (denominator - scaled_difference > 0) {
+        numerator  = scaled_difference * 100;
+        D_801DA038 = numerator / denominator;
+    } else {
+        numerator  = scaled_difference * 100;
+        D_801DA038 = 200 - (numerator / denominator);
+    }
+    if (D_801DA038 < 0) {
+        D_801DA038 = 0;
+    }
+
+    if ((2 - g_ShisuIngredients.rounds) > 0) {
+        D_801DA03C = (g_ShisuIngredients.rounds * 25) + 50;
+    } else {
+        D_801DA03C = 150 - (g_ShisuIngredients.rounds * 25);
+    }
+    if (D_801DA03C < 0) {
+        D_801DA03C = 0;
+    }
+
+    denominator = g_ShisuIngredients.topping_size + g_ShisuIngredients.used[2];
+    difference  = (g_ShisuIngredients.used[1] - g_ShisuIngredients.rounds) + g_ShisuIngredients.used[3];
+    if (denominator == 0) {
+        D_801DA040 = 0;
+    } else if ((denominator - difference) > 0) {
+        D_801DA040 = (difference * 100) / denominator;
+    } else {
+        D_801DA040 = 200 - ((difference * 100) / denominator);
+    }
+    if (D_801DA040 < 0) {
+        D_801DA040 = 0;
+    }
+
+    subtotal   = g_ShisuIngredients.topping_size * (D_801DA034 * 10);
+    total      = subtotal + (g_ShisuIngredients.rounds * ((D_801DA038 * D_801DA03C) / 100));
+    D_801DA044 = 0;
+    D_801DA044 = subtotal;
+    D_801DA044 = total;
+    total      = (total + (D_801DA040 * 0x10)) / 100;
+    D_801DA044 = total;
+}
+#else
 INCLUDE_ASM(func_801D1EE8);
+#endif
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D2308(void* record) {
