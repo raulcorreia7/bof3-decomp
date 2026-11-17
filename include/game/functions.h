@@ -63,7 +63,7 @@ void  Menu_SlidePanelLeft(void);
 /* func_8019A0E4 */
 void  Actor_DispatchAll(void);
 /* func_8019A194 */
-u8    Game_FindArea(void);
+u8    WorldMap_FindRegion(void);
 /* func_8019ABB0 */
 void  func_8019ABB0(s32 mode);
 /* func_8019F75C */

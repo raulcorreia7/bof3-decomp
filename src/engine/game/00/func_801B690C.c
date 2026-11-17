@@ -9,7 +9,7 @@ MATCH void func_801B690C(void) {
         return;
     }
 
-    entry = Game_GetAreaMapPoints();
+    entry = WorldMap_GetPoints();
     work  = g_Task;
     for (;;) {
         if (COORD_INT(work->pos.x) != entry[0]) {

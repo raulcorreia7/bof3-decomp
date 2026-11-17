@@ -4,7 +4,7 @@
 /* The game overlay's data tables: sprite rectangles, map hooks, world routes and
  * the handler rows its frontend walks. Only this image includes the file. */
 
-#define GAME_AREA_HANDLER_COUNT      11
+#define WORLD_MAP_REGION_COUNT       11
 
 /* Cells in the square-spiral search order around a formation: the centre, then rings one to three, and a closing centre. */
 /* Camera directions and the scroll step of one cell quarter. */
@@ -85,27 +85,34 @@ ASSERT_OFFSET(PartySlot, active, 0x0);
 ASSERT_OFFSET(PartySlot, key, 0x1);
 ASSERT_SIZE(PartySlot, 0x4);
 
-/* 0x1C-byte front-end handler row. Game_FindArea returns the row whose key
- * byte at +0x18 matches the current world state; the handlers sit at +0, +4,
- * +8, +0x0C and +0x10, and +0x14 points to the area's map points, four-byte rows (x, y,
- * context seed, context kind) that func_801B690C searches for the actor cell; Fishing_ShowLocation walks the same
- * rows. The only reader of the member is Game_GetAreaMapPoints; the rows are written by the data initialiser only. */
-typedef struct AreaSteps {
-    Callback steps[5];
+/* One 0x1C-byte world map region row. WorldMap_FindRegion returns the row whose
+ * area id at +0x18 matches the current world state. Each row carries the five
+ * actor steps the region runs (the party's cell walk, the exit-cell entry, the
+ * bird flock, the region script and the cloud draw) and +0x14 points to the
+ * region's map points, four-byte rows (x, y, area id, kind) that func_801B690C
+ * searches for the actor cell; Fishing_ShowLocation walks the same rows. The
+ * only reader of the member is WorldMap_GetPoints; the rows are written by the
+ * data initialiser only. */
+typedef struct WorldMapRegion {
+    Callback walk;
+    Callback entry;
+    Callback flock;
+    Callback script;
+    Callback clouds;
     u8*      map_points;
     u8       area_id;
     u8       pad_19[3];
-} AreaSteps;
+} WorldMapRegion;
 
-/* g_AreaHandlers[11] spans 0x134 bytes up to D_801C8090. */
-ASSERT_SIZE(AreaSteps, 0x1C);
+/* g_WorldMapRegions[11] spans 0x134 bytes up to D_801C8090. */
+ASSERT_SIZE(WorldMapRegion, 0x1C);
 
 typedef u8 (*ActorActionFunc)(void* entity, u8 param, s32 phase);
 typedef void (*ActorWorkFunc)(s32 fallback_index, s32 index);
 
 /* D_801C7B74 */
 extern Step2                s_BattleScrollCellSteps[4];
-extern AreaSteps            g_AreaHandlers[11];
+extern WorldMapRegion       g_WorldMapRegions[WORLD_MAP_REGION_COUNT];
 extern ActorActionFunc      D_801C83BC[7];
 extern ObjectFunc           D_801C83D8[11];
 extern SceneSlots*          g_SceneScenes[20];
