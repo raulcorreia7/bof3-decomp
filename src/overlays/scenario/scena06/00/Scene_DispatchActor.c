@@ -369,7 +369,7 @@ MATCH s8 func_801FDD14(s32 x, s32 y) {
 }
 
 MATCH s32 func_801FDD7C(void) {
-    if (Item_Count(1, 0x47, 0) == 0) {
+    if (Item_Count(ITEM_CATEGORY_WEAPON, WEAPON_FLAME_CHRYSM, 0) == 0) {
         Game_SetScriptActive();
         g_ScriptVars[0]       = 0;
         g_ScriptVars[1]       = 0;

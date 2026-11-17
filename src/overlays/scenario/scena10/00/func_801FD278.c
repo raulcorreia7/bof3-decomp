@@ -52,10 +52,10 @@ MATCH void func_801FD5C0(Actor* actor) {
     i = 0;
     do {
         if (D_801FE894[i].x == COORD_INT(g_Task->pos.x) && D_801FE894[i].y == COORD_INT(g_Task->pos.y)) {
-            g_Task->param.unk_0B = D_801FE894[i].script + 0x4E;
-            strncpy(g_TextVariables[0], Item_GetRecord(0, g_Task->param.unk_0B), 12);
+            g_Task->param.unk_0B = D_801FE894[i].script + ITEM_PART_A;
+            strncpy(g_TextVariables[0], Item_GetRecord(ITEM_CATEGORY_ITEM, g_Task->param.unk_0B), 12);
             g_TextVariables[0][12] = 0;
-            if (Item_Add(0, g_Task->param.unk_0B, 1, 0)) {
+            if (Item_Add(ITEM_CATEGORY_ITEM, g_Task->param.unk_0B, 1, 0)) {
                 /* FAKE: retail passes the bit index unmasked, as s32. */
                 ((void (*)(void*, s32))SYS_SetFlag)(g_SceneFlags, SCENE_TRIGGER_FLAG_BASE + D_801FE894[i].flag);
                 Message_Request(MSG_002);

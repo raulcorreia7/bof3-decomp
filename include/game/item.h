@@ -48,6 +48,9 @@ typedef enum ItemType {
 /* The equipment slot that holds an item of kind ITEM_TYPE_WEAPON..ITEM_TYPE_ACCESSORY. */
 #define EQUIP_SLOT_OF_TYPE(kind) ((kind) - 1)
 
+/* The two accessory kinds that are fishing gear: ITEM_TYPE_FISHING_LURE and ITEM_TYPE_FISHING_ROD. */
+#define ITEM_FISHING_GEAR_COUNT  2U
+
 /* The item type that fits equipment slot EQUIP_SLOT_WEAPON..EQUIP_SLOT_ACCESSORY_1. */
 #define ITEM_TYPE_OF_SLOT(slot)  ((slot) + 1)
 

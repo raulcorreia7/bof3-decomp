@@ -51,7 +51,7 @@ MATCH void func_801F9874(void) {
                 Game_ClearScriptActive();
                 g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
                 g_GameFlags |= 0x80;
-                Item_Add(0, ITEM_PLATE, 1, 0);
+                Item_Add(ITEM_CATEGORY_ITEM, ITEM_PLATE, 1, 0);
             }
             break;
     }

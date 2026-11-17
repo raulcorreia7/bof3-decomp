@@ -28,15 +28,15 @@ NON_MATCHING void func_801DF9EC(void) {
     if (*pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         selected = (s8)D_801E6260;
         if (selected != 0) {
-            has_item = Item_VitalHas(15);
+            has_item = Item_VitalHas(VITAL_ITEM_FOUNTAIN_PEN);
             if (has_item == 0) {
-                item_count = Item_Count(0, 88, 0);
+                item_count = Item_Count(ITEM_CATEGORY_ITEM, ITEM_SKILL_INK, 0);
                 if (item_count == 0) {
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 7));
                     return;
                 }
             }
-            has_item = Item_VitalHas(15);
+            has_item = Item_VitalHas(VITAL_ITEM_FOUNTAIN_PEN);
             if (has_item != 0) {
                 SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 2));
                 g_MenuPanelTasks[2].mode    = 13;
@@ -89,7 +89,7 @@ NON_MATCHING void func_801DF9EC(void) {
         g_MenuPanelTasks[0].state   = 1;
         g_MenuPanelTasks[1].state   = 1;
         g_MenuPanelTasks[21].active = 0;
-        if (!Item_VitalHas(15)) {
+        if (!Item_VitalHas(VITAL_ITEM_FOUNTAIN_PEN)) {
             g_MenuPanelTasks[6].state = 1;
         }
         D_80148654 = 5;

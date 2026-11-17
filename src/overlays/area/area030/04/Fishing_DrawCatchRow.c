@@ -38,7 +38,7 @@ MATCH void Fishing_DrawCatchRow(s32 item, s32 count, s32 column) {
         }
     } else {
         i   = 0;
-        src = (u8*)g_Items + (((item & BYTE_MASK) + 0x38) * 18);
+        src = (u8*)g_Items + (((item & BYTE_MASK) + ITEM_JELLYFISH) * ITEM_STRIDE);
         while (i < 12) {
             *dst = *src;
             if (*src == 0) {

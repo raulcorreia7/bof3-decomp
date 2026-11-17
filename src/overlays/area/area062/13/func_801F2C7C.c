@@ -15,12 +15,12 @@ MATCH void func_801F2C7C(void) {
 
         case 1:
             if (g_ScriptVars[0] == 0xB) {
-                record = Item_GetRecord(0, 0x59);
+                record = Item_GetRecord(ITEM_CATEGORY_ITEM, ITEM_FLOWER_JEWEL);
                 for (i = 0; i < 12; i++) {
                     g_TextVariables[0][i] = record[i];
                 }
                 D_801490E4[0] = 0;
-                if (Item_Add(0, 0x59, 1, 0) & BYTE_MASK) {
+                if (Item_Add(ITEM_CATEGORY_ITEM, ITEM_FLOWER_JEWEL, 1, 0) & BYTE_MASK) {
                     SND_PlayCue(EMI_CUE_ID(SND_BANK_COMMON, 0x06));
                     Message_Request(MSG_002);
                     SYS_SetFlag(g_SceneEventFlags, 104);

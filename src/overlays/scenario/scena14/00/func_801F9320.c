@@ -129,7 +129,7 @@ MATCH void func_801F9320(void) {
             }
             SND_PauseBGM(g_SndBGMId);
             SND_StartXAStream(2, 1);
-            Item_VitalAdd(0xD);
+            Item_VitalAdd(VITAL_ITEM_CARD_KEY_B);
             SCENE_MESSAGE_WAIT(MSG_029, 0x20);
             break;
         case 32:

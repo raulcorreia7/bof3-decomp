@@ -79,9 +79,9 @@ MATCH void func_801F719C(void) {
         Area_AddActor();
     }
     if (((g_Task->option_flags >> 1) & 1) == 0) {
-        sprintf((char*)g_UiFormatBuffer, D_801F6C04, Item_GetRecord(0, g_Task->unk_06));
+        sprintf((char*)g_UiFormatBuffer, D_801F6C04, Item_GetRecord(ITEM_CATEGORY_ITEM, g_Task->unk_06));
         UI_DrawText((s16)((u16)D_801FE7CC[1].x + 4), (s16)((u16)D_801FE7CC[1].y + 2), 0, 8, g_UiFormatBuffer);
-        sprintf((char*)g_UiFormatBuffer, D_801F6C08, (u16)Item_Count(0, g_Task->unk_06, 0));
+        sprintf((char*)g_UiFormatBuffer, D_801F6C08, (u16)Item_Count(ITEM_CATEGORY_ITEM, g_Task->unk_06, 0));
         UI_DrawText((s16)((u16)D_801FE7CC[1].x + 0x48), (s16)((u16)D_801FE7CC[1].y + 2), 0, 2, g_UiFormatBuffer);
     }
     func_801F781C((u16)D_801FE7CC[2].x + 1, (u16)D_801FE7CC[2].y + 1, 0x80, 0x68);
@@ -160,11 +160,11 @@ MATCH void func_801F7590(void) {
         SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 12));
         g_Task->header.mode = 3;
     } else if (g_InputPressed & PADRdown) {
-        if (Item_Count(0, g_Task->unk_06, 0) & 0xFFFF) {
+        if (Item_Count(ITEM_CATEGORY_ITEM, g_Task->unk_06, 0) & 0xFFFF) {
             if (D_80144908[g_Task->header.step] < 100) {
                 D_80144908[g_Task->header.step]++;
             }
-            Item_Remove(0, g_Task->unk_06, 1, 0);
+            Item_Remove(ITEM_CATEGORY_ITEM, g_Task->unk_06, 1, 0);
             SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 10));
         } else {
             SND_PlayCue(EMI_CUE_ID(SND_BANK_AREA, 13));
@@ -246,8 +246,8 @@ MATCH void func_801F7AD4(void) {
     y = rect->y + 4;
     i = 0;
     do {
-        record = Item_GetRecord(0, (u8)(i + 0x4E));
-        count  = (u8)Item_Count(0, (u8)(i + 0x4E), 0);
+        record = Item_GetRecord(ITEM_CATEGORY_ITEM, (u8)(i + ITEM_PART_A));
+        count  = (u8)Item_Count(ITEM_CATEGORY_ITEM, (u8)(i + ITEM_PART_A), 0);
         color  = -(count == 0) & 7;
         UI_DrawText(x, y, color, (u8)Game_ReadCommand(record), record);
         sprintf((char*)g_UiFormatBuffer, D_801F6C10, count);
