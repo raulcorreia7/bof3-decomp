@@ -144,7 +144,13 @@ MATCH void func_801D1184(void) {
 
 #include "overlays/commu/Fairy_EndCommuScene.h"
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D1250(s32 scene, s32 mode) {
+    g_SceneState.step_05 = scene + mode;
+}
+#else
 INCLUDE_ASM(func_801D1250);
+#endif
 
 #ifdef NON_MATCHING
 /* Draws one 8x8 glyph quad per byte of the string, eight pixels apart, skipping

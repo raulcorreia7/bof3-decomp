@@ -12,7 +12,7 @@ extern u16 D_1F800034_U16[2];
 
 u8   Area_FindTaggedPartySlot(void);
 void func_801F482C(void);
-void func_801F49A0(s32 arg);
+void func_801F49A0(s32 phase);
 void func_801F4E70(s32 frame);
 /* The word the effect start stores over the actor's active_flags byte and the three bytes after it. */
 #define AREA_EFFECT_ACTIVE_WORD 16777216
