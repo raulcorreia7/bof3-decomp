@@ -30,39 +30,90 @@ MATCH void func_801FB414(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801FB464(s32 x, s32 y) {
-    if (g_GameAreaId == AREA_ID_JUNK_TOWN) {
-        if (SYS_TestFlag(g_SceneFlags, 8) && SYS_TestFlag(g_SceneFlags, 9) == 0 && y >= TO_COORD(48) && (u32)((x >> 16) - 28) < 5) {
-            Game_SetScriptActive();
-            SYS_SetFlag(g_SceneFlags, 9);
-            SYS_SetFlag(g_SceneEventFlags, 67);
-            g_ScriptVars[0] = 10;
-            return 1;
-        }
-    }
-    if (g_GameAreaId == AREA_ID_TIDAL_CAVES_OUTSIDE && g_GameCellType == 0 && SYS_TestFlag(g_SceneFlags, 53) == 0 && (y >> 16) >= 29) {
+    u8 cell_type;
+
+    if (LOHU(g_GameAreaId) == AREA_ID_STEEL_BEACH_FREIGHTER && g_GameCellType == 1 && SYS_TestFlag(g_SceneFlags, 14) == 0 && x == TO_COORD(66) + COORD_HALF && (u32)((y >> 16) - 58) < 2U) {
         Game_SetScriptActive();
-        g_SceneState.state_04 = 12;
+        g_SceneState.state_04 = 4;
         g_SceneState.step_05  = 0;
         return 1;
     }
-    if (g_GameAreaId == AREA_ID_CLIFF_GAIST && g_GameCellType == 5 && SYS_TestFlag(g_SceneFlags, 59) && SYS_TestFlag(g_SceneFlags, 60) == 0 && y == TO_COORD(116) + COORD_HALF && x == TO_COORD(37)) {
+    if (LOHU(g_GameAreaId) == AREA_ID_RELAY_POINT_A_PORTAL && g_GameCellType == 4 && SYS_TestFlag(g_SceneFlags, 15) == 0 && (u32)((x >> 16) - 54) < 3U && (u32)((y >> 16) - 50) < 4U &&
+        g_Game.members[0].facing != 0 && (u32)(g_Game.members[0].facing - 6) >= 2U) {
         Game_SetScriptActive();
-        g_SceneState.state_04 = 13;
-        g_SceneState.step_05  = 15;
+        g_SceneState.state_04 = 4;
+        g_SceneState.step_05  = 0;
+        return 1;
     }
-    if (g_GameAreaId == AREA_ID_MACHINE_GUILD_DOCK) {
-        if (SYS_TestFlag(g_SceneFlags, 10) == 0 && y > TO_COORD(42) - 1 && (u32)((x >> 16) - 32) < 5) {
+    if (LOHU(g_GameAreaId) == AREA_ID_STEEL_GRAVE && g_GameCellType == 0 && x == TO_COORD(3) + COORD_HALF && (u32)((y >> 16) - 6) < 3U) {
+        SYS_SetFlag(g_SceneFlags, 6);
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_DRAGNIER_SURFACE) {
+        if (g_GameCellType == 0 && SYS_TestFlag(g_SceneFlags, 20) == 0 && x == TO_COORD(59) + COORD_HALF && (u32)((y >> 16) - 31) < 4U) {
             Game_SetScriptActive();
-            g_SceneState.state_04 = 3;
+            g_SceneState.state_04 = 6;
             g_SceneState.step_05  = 0;
             return 1;
         }
-        if (SYS_TestFlag(g_SceneFlags, 11) && SYS_TestFlag(g_SceneFlags, 13) == 0 && y <= TO_COORD(55) && (u32)((x >> 16) - 31) < 2) {
+        if (g_GameCellType == 1 && SYS_TestFlag(g_SceneFlags, 29) != 0 && SYS_TestFlag(g_SceneFlags, 30) == 0 && x == TO_COORD(59) + COORD_HALF && (u32)((y >> 16) - 31) < 4U) {
             Game_SetScriptActive();
-            g_SceneState.state_04 = 4;
-            g_SceneState.step_05  = 10;
+            g_SceneState.state_04 = 8;
+            g_SceneState.step_05  = 5;
             return 1;
         }
+        if (g_GameCellType == 1 && SYS_TestFlag(g_SceneFlags, 17) == 0 && x == TO_COORD(66) + COORD_HALF && (u32)((y >> 16) - 100) < 3U) {
+            Game_SetScriptActive();
+            g_SceneState.state_04 = 6;
+            g_SceneState.step_05  = 0;
+            return 1;
+        }
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_DRAGNIER_ELDER_FIGHT) {
+        cell_type = g_GameCellType;
+        if (cell_type == 2 && (x >> 16) == 37 && (u32)((y >> 16) - 29) < 2U && (g_Game.members[0].facing == 0 || (u32)(g_Game.members[0].facing - 6) < 2U) && SYS_TestFlag(g_SceneFlags, 27) == 0) {
+            Game_SetScriptActive();
+            if (SYS_TestFlag(g_SceneFlags, 24) == 0) {
+                if (g_Game.members[0].chr.character_id == cell_type) {
+                    Scene_SetupParty((u32)g_SceneFlags);
+                }
+            } else if (SYS_TestFlag(g_SceneFlags, 25) == 0) {
+                if (g_Game.members[0].chr.character_id == 8) {
+                    Scene_SetupParty(4);
+                } else if (g_Game.members[0].chr.character_id == 5) {
+                    Scene_SetupParty(3);
+                } else {
+                    Scene_SetupParty(2);
+                }
+            } else if (SYS_TestFlag(g_SceneFlags, 26) == 0) {
+                if (g_Game.members[0].chr.character_id != 7) {
+                    Scene_SetupParty((u32)g_SceneFlags);
+                }
+            } else if (g_Game.members[0].chr.character_id == 7) {
+                Scene_SetupParty((u32)g_SceneFlags);
+            }
+            g_ScriptVars[0] = 1;
+            return 1;
+        }
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_COLONY_OUTSIDE && SYS_TestFlag(g_SceneEventFlags, 45) != 0 && SYS_TestFlag(g_SceneFlags, 11) == 0 && (u32)((x >> 16) - 10) < 2U && (u32)((y >> 16) - 98) < 3U &&
+        (g_Game.members[0].facing == 0 || (u32)(g_Game.members[0].facing - 6) < 2U)) {
+        g_ScriptVars[0] = 0;
+        Scene_SetupParty(9);
+        g_SceneState.state_04 = 3;
+        g_SceneState.step_05  = 20;
+        return 1;
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_KOMBINAT_WORLD_MAP && x == TO_COORD(20) + COORD_HALF && (u32)((y >> 16) - 18) < 9U) {
+        Game_SetScriptActive();
+        g_SceneState.state_04 = 8;
+        g_SceneState.step_05  = 4;
+        return 1;
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_KOMBINAT && g_GameCellType == 0 && SYS_TestFlag(g_SceneFlags, 2) == 0 && x == TO_COORD(2) + COORD_HALF && (u32)((y >> 16) - 48) < 2U) {
+        Game_SetScriptActive();
+        g_SceneState.state_04 = 2;
+        g_SceneState.step_05  = 0;
+        return 1;
     }
     return 0;
 }

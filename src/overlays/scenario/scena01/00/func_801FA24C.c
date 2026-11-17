@@ -11,103 +11,164 @@ __asm__(".include \"include/match/macro.inc\"\n");
 NON_MATCHING void func_801FA24C(void) {
     switch (g_SceneState.step_05) {
         case 0:
-            g_ScriptVars[0] = 0xA;
-            SCENE_MESSAGE_WAIT(MSG_024, 1);
+            if (g_Game.members[0].pos.x.part.integer == 0x1B && g_Game.members[0].pos.y.part.integer < 0x24) {
+                Game_SetScriptActive();
+                g_SceneState.timer_06      = 0;
+                g_SceneState.step_05       = 1;
+                g_ScriptVars[0]            = 1;
+                g_ScriptVars[3]            = 0;
+                g_SndVoiceTargetVolume[23] = 0x7F;
+                g_SndVoiceVolume[23]       = 0;
+                Scene_SetupParty(6);
+                func_801C601C(0);
+                g_AreaSceneMode = 1;
+            }
+            if (g_Game.members[0].pos.x.part.integer == 0x1C && g_Game.members[0].pos.y.part.integer < 0x24) {
+                Game_SetScriptActive();
+                g_SceneState.timer_06      = 0;
+                g_SceneState.step_05       = 1;
+                g_ScriptVars[0]            = 1;
+                g_ScriptVars[3]            = 0;
+                g_SndVoiceTargetVolume[23] = 0x7F;
+                g_SndVoiceVolume[23]       = 0;
+                Scene_SetupParty(6);
+                func_801C601C(0);
+                g_AreaSceneMode = 1;
+            }
             break;
         case 1:
-            if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
-                break;
+            if (g_ScriptVars[0] == 3 && Area_TurnCameraX(-0x5A, -2) == 0) {
+                g_SceneState.step_05 = 2;
             }
-            g_SceneState.step_05 = 2;
             break;
-        case 2: {
-            u8* vars;
+        case 2:
+            g_SceneState.timer_06++;
+            if (g_SceneState.timer_06 >= 110) {
+                g_ScriptVars[0]       = 5;
+                g_SceneState.timer_06 = 0;
+                g_SceneState.step_05  = 3;
+                SND_PlaySE(0x200);
+                g_AreaSceneMode = 2;
+            }
+            break;
+        case 3:
+            g_SceneState.timer_06++;
+            if (g_SceneState.timer_06 >= 180) {
+                SND_PlaySE(0x207);
+                g_SceneState.timer_06 = 0;
+                g_ScriptVars[0]       = 8;
+                g_SceneState.step_05  = 4;
+            }
+            break;
+        case 4:
+            if (Area_TurnCameraX(-0x3C, 2) == 0) {
+                g_SceneState.step_05 = 5;
+            }
+            break;
+        case 5:
+            g_SceneState.timer_06++;
+            if (g_SceneState.timer_06 >= 110) {
+                g_SceneState.timer_06 = 0;
+                g_SceneState.step_05  = 6;
+                g_ScriptVars[0]       = 15;
+            }
+            break;
+        case 6:
+            if (g_ScriptVars[0] == 0x12) {
+                g_ScriptVars[2]      = 3;
+                g_SceneState.step_05 = 14;
+                g_SceneState.flags_01 |= 1;
+                SYS_SetFlag(g_SceneFlags, 9);
+                func_8019FA28(0x17, TO_COORD(0x48), TO_COORD(6), 0x87);
+            }
+            break;
+        case 14:
+            if (g_ScriptVars[0] == 0x14) {
+                g_ScriptVars[2]      = 4;
+                g_SceneState.step_05 = 15;
+                func_8019FA28(0x17, TO_COORD(0x4B), TO_COORD(5), 0x88);
+            }
+            break;
+        case 15:
+            g_SceneState.timer_06 = 120;
+            SND_StopSequence(0, 0);
+            SND_StartXAStream(0, 1);
+            g_SceneState.step_05 = 16;
+        case 16: {
+            u16 timer;
 
-            vars = g_ScriptVars;
-            if (vars[0] == 0x14) {
-                Game_ClearScriptActive();
-                g_SceneState.step_05  = 0x1B;
-                g_ScriptVars[1]       = 0;
-                g_ScriptVars[2]       = 0;
-                g_SceneState.state_04 = 9;
-            } else {
-                g_SceneState.step_05 = 3;
-                SYS_ClearFlag(g_SceneFlags, 0x10);
-                vars[0] = 0xB;
+            timer                 = g_SceneState.timer_06;
+            g_SceneState.timer_06 = timer - 1;
+            if (timer == 0) {
+                SND_PlaySE(0x204);
+                Message_StartAreaMessage(0x13);
+                g_GameStateIndex     = 2;
+                g_SceneState.step_05 = 17;
             }
             break;
         }
-        case 3:
-            Scene_SetupParty(8);
-            g_SceneState.step_05 = 4;
-            break;
-        case 4:
-            g_SceneState.step_05 = 0xB;
-            break;
-        case 11:
-            if (g_ScriptVars[0] == 0x14) {
-                g_SceneState.step_05 = 0xC;
-                SND_PlaySE(0x205);
-                SND_PlaySE(0x206);
-                g_ScriptVars[2] = 5;
-                if (SYS_TestFlag(g_SceneFlags, 0x12) == 0) {
-                    g_SceneState.step_05 = 0xC;
-                    g_ScriptVars[2]      = 6;
-                    Game_RequestAreaChange(AREA_ID_MOUNT_GLAUS, TO_COORD(0xF), TO_COORD(0x28), 0x84);
-                } else if (SYS_TestFlag(g_SceneFlags, 0x14) == 0) {
-                    g_ScriptVars[2]      = 6;
-                    g_SceneState.step_05 = 0x1E;
-                    Game_RequestAreaChange(AREA_ID_MOUNT_GLAUS, TO_COORD(0xF), TO_COORD(0x28), 0x84);
-                } else {
-                    g_ScriptVars[2]      = 6;
-                    g_SceneState.step_05 = 0x14;
-                    Game_RequestAreaChange(AREA_ID_MOUNT_GLAUS, TO_COORD(0xF), TO_COORD(0x28), 0x85);
-                }
+        case 17:
+            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
+                UI_SetMode(0xE);
+                g_AreaDrawFlags      = 0x1F;
+                g_SceneState.step_05 = 18;
             }
             break;
-        case 12:
-            func_801C601C(3);
-            g_SceneState.step_05 = 0xD;
+        case 18:
+            if (g_UiWindowEffectBusy == 0) {
+                g_ScriptVars[0]      = 6;
+                g_SceneState.step_05 = 19;
+                func_801C16B8();
+                SND_PlayBGM(0x1D, 0x64, 8);
+                g_Game.flags |= 0x80;
+            }
             break;
-        case 13:
-            if (g_ScriptVars[0] == 0xA) {
+        case 19:
+            if (g_ScriptVars[0] == 0xB) {
                 Game_ClearScriptActive();
+                g_ScriptVars[2]       = 7;
+                g_ScriptVars[3]       = 0;
+                g_SceneState.step_05  = 0;
+                g_SceneState.state_04 = 8;
+            }
+            break;
+        case 55:
+            if (g_ScriptVars[0] == 0x1F) {
+                func_801C601C(1);
+                g_SceneState.step_05 = 56;
+            }
+            break;
+        case 56:
+            if (g_ScriptVars[0] == 0x20) {
+                func_801BFE34(TO_COORD(30), TO_COORD(26), 2);
+                func_801C601C(2);
+                g_SceneState.step_05 = 57;
+            }
+            break;
+        case 57:
+            if (g_ScriptVars[0] == 0x23) {
+                g_SceneState.step_05 = 58;
+                func_801C7A54(2);
+            }
+            break;
+        case 58:
+            if (g_ScriptVars[0] == 0x24) {
+                g_SceneState.step_05 = 59;
+                g_Game.flags ^= 0x80;
+            }
+            break;
+        case 59:
+            g_SceneState.step_05 = 60;
+            g_ScriptVars[0]      = 40;
+            break;
+        case 60:
+            if (g_ScriptVars[0] == 40) {
                 g_ScriptVars[1] = 0;
                 g_ScriptVars[2] = 0;
                 SCENE_RETURN_TO_START();
-            }
-            break;
-        case 20:
-            func_801C601C(6);
-            g_SceneState.step_05 = 0x15;
-            break;
-        case 21:
-            if (g_ScriptVars[0] == 8) {
-                func_801C601C(4);
-                g_SceneState.step_05 = 0x19;
-            }
-            break;
-        case 25:
-            if (g_ScriptVars[0] == 0xD) {
-                g_GameFlags ^= 0x80;
-                g_ScriptVars[1] = 0;
-                g_ScriptVars[2] = 0;
-                SCENE_RETURN_TO_START();
-                Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_HOUSE, TO_COORD(0x30), TO_COORD(1), 0);
-                g_GamePrevSelection = 0xFF;
-            }
-            break;
-        case 30:
-            func_801C601C(3);
-            g_SceneState.step_05 = 0x1F;
-            break;
-        case 31:
-            if (g_ScriptVars[0] == 0xA) {
-                g_ScriptVars[1] = 0;
-                g_ScriptVars[2] = 0;
-                SCENE_RETURN_TO_START();
-                Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_HOUSE, TO_COORD(0x30), TO_COORD(1), 0);
-                g_GamePrevSelection = 0xFF;
+                g_SceneState.timer_06 = 0;
+                Game_ClearScriptActive();
+                SYS_SetFlag(g_SceneFlags, 10);
             }
             break;
     }
