@@ -188,7 +188,7 @@ typedef struct Actor {
     u8              unk_06;            /* 0x06 - commu00 calls it the live flag; 9 gates the draw-mode
                                 *        stamp, 10 calls Actor_ProjectForDraw (func_80167E00) */
     u8              option_flags;      /* 0x07 - ActorOptionFlags */
-    u8              direction;         /* 0x08 - commu00 calls it the cue resource */
+    u8              direction;         /* 0x08 - the 1-based direction the actor faces; walk and draw scripts index by it */
     u8              timer;             /* 0x09 - counted up or down by the area step handlers */
     u8              unk_0A;            /* 0x0A */
     ActorRole       param;             /* 0x0B */

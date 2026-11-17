@@ -26,12 +26,12 @@ typedef enum AbilityFlags {
     ABILITY_AFFECTS_STATS = 1 << 4,
 } AbilityFlags;
 
-/* Ability targeting byte (record offset 0x0C): bit switches the battle selectors
- * (Battle_PickTarget, Battle_PickEnemyTarget) test. Without SELECT or ALL the
- * ability targets its user; OPPONENT is the other side from the user. */
+/* Ability usage and targeting byte (record offset 0x0C): bits 0-1 say where the ability is usable;
+ * the battle selectors (Battle_PickTarget, Battle_PickEnemyTarget) test the rest. Without SELECT or
+ * ALL the ability targets its user; OPPONENT is the other side from the user. */
 typedef enum AbilityTargetFlags {
-    ABILITY_TARGET_FLAG_FIELD        = 1 << 0, /* usable from the field menu */
-    ABILITY_TARGET_FLAG_BATTLE       = 1 << 1, /* usable in battle */
+    ABILITY_USABLE_IN_FIELD          = 1 << 0, /* usable from the field menu */
+    ABILITY_USABLE_IN_BATTLE         = 1 << 1, /* usable in battle */
     ABILITY_TARGET_FLAG_NO_HIT_REACT = 1 << 2, /* the target skips the generic hit reaction */
     ABILITY_TARGET_FLAG_UNK_3        = 1 << 3,
     ABILITY_TARGET_FLAG_ALL          = 1 << 4, /* a whole side */
@@ -60,12 +60,12 @@ typedef enum AbilityAim {
 
 /* Where an ability is usable, and the two low bits that change how it plays. */
 typedef enum AbilityUse {
-    ABILITY_USE_FIELD_UNK_3             = ABILITY_TARGET_FLAG_FIELD | ABILITY_TARGET_FLAG_UNK_3,
-    ABILITY_USE_BATTLE                  = ABILITY_TARGET_FLAG_BATTLE,
-    ABILITY_USE_BATTLE_NO_REACT         = ABILITY_TARGET_FLAG_BATTLE | ABILITY_TARGET_FLAG_NO_HIT_REACT,
-    ABILITY_USE_BATTLE_UNK_3            = ABILITY_TARGET_FLAG_BATTLE | ABILITY_TARGET_FLAG_UNK_3,
-    ABILITY_USE_BATTLE_NO_REACT_UNK_3   = ABILITY_TARGET_FLAG_BATTLE | ABILITY_TARGET_FLAG_NO_HIT_REACT | ABILITY_TARGET_FLAG_UNK_3,
-    ABILITY_USE_ANYWHERE_NO_REACT_UNK_3 = ABILITY_TARGET_FLAG_FIELD | ABILITY_USE_BATTLE_NO_REACT_UNK_3,
+    ABILITY_USE_FIELD_UNK_3             = ABILITY_USABLE_IN_FIELD | ABILITY_TARGET_FLAG_UNK_3,
+    ABILITY_USE_BATTLE                  = ABILITY_USABLE_IN_BATTLE,
+    ABILITY_USE_BATTLE_NO_REACT         = ABILITY_USABLE_IN_BATTLE | ABILITY_TARGET_FLAG_NO_HIT_REACT,
+    ABILITY_USE_BATTLE_UNK_3            = ABILITY_USABLE_IN_BATTLE | ABILITY_TARGET_FLAG_UNK_3,
+    ABILITY_USE_BATTLE_NO_REACT_UNK_3   = ABILITY_USABLE_IN_BATTLE | ABILITY_TARGET_FLAG_NO_HIT_REACT | ABILITY_TARGET_FLAG_UNK_3,
+    ABILITY_USE_ANYWHERE_NO_REACT_UNK_3 = ABILITY_USABLE_IN_FIELD | ABILITY_USE_BATTLE_NO_REACT_UNK_3,
 } AbilityUse;
 
 /* The targeting bytes of the shipped ability table. */
