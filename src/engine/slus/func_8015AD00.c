@@ -4,10 +4,10 @@
 /* One 0x28-byte textured-quad record of the table at work->unk_50: clut index,
  * four vertices, the face normal and four packed uv pairs. */
 typedef struct PanelPiece {
-    s16 clut;    /* 0x00 */
-    u16 v[4][3]; /* 0x02 */
-    s16 n[3];    /* 0x1A */
-    u16 uv[4];   /* 0x20 */
+    s16 clut;           /* 0x00 */
+    u16 vertices[4][3]; /* 0x02 */
+    s16 normal[3];      /* 0x1A */
+    u16 uv[4];          /* 0x20 */
 } PanelPiece;
 
 /* One 0x28-byte primitive this function builds at the primitive cursor: a
@@ -83,55 +83,55 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
             quad = (PanelQuadPrim*)p;
             SetPolyFT4(&quad->ft4);
 
-            vv = piece->v[0][0];
+            vv = piece->vertices[0][0];
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             g_ScratchPadVectors[0].vx = vv;
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->v[0][1];
+            vv = piece->vertices[0][1];
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             SP_REF(u16, 0x16u) = vv;
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->v[0][2];
+            vv = piece->vertices[0][2];
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             SP_REF(u16, 0x18u) = vv;
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->v[1][0];
+            vv = piece->vertices[1][0];
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             g_ScratchPadVectors[1].vx = vv;
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->v[1][1];
+            vv = piece->vertices[1][1];
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             SP_REF(u16, 0x1Eu) = vv;
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->v[1][2];
+            vv = piece->vertices[1][2];
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             SP_REF(u16, 0x20u) = vv;
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->v[2][0];
+            vv = piece->vertices[2][0];
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             g_ScratchPadVectors[2].vx = vv;
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->v[2][1];
+            vv = piece->vertices[2][1];
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             SP_REF(u16, 0x26u) = vv;
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->v[2][2];
+            vv = piece->vertices[2][2];
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             SP_REF(u16, 0x28u) = vv;
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->v[3][0];
+            vv = piece->vertices[3][0];
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             g_ScratchPadVectors[3].vx = vv;
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->v[3][1];
+            vv = piece->vertices[3][1];
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             SP_REF(u16, 0x2Eu) = vv;
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->v[3][2];
+            vv = piece->vertices[3][2];
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
             SP_REF(u16, 0x30u) = vv;
             FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            setVector(&normal, piece->n[0], piece->n[1], piece->n[2]);
+            setVector(&normal, piece->normal[0], piece->normal[1], piece->normal[2]);
             quad->halves.uv0 = piece->uv[0];
             quad->halves.uv1 = piece->uv[1];
             quad->halves.uv2 = piece->uv[2];
