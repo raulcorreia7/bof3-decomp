@@ -7,8 +7,10 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801FB268(void) {
-    u8 slot;
-    s8 staged;
+    u8           slot;
+    u8           staged_index;
+    s8           staged;
+    volatile u8* staged_slot;
 
     switch (g_SceneState.step_05) {
         case 0:
@@ -64,12 +66,15 @@ NON_MATCHING void func_801FB268(void) {
             if (g_ScriptVars[0] == 0x16) {
                 staged              = Actor_FindFreeSpawned();
                 g_SceneState.unk_03 = staged;
+                staged_slot         = &g_SceneState.unk_03;
                 if (staged != -1) {
-                    g_SpawnedActors[staged].header.flags                  = ACTOR_FLAG_IN_USE;
-                    g_SpawnedActors[LOB(g_SceneState.unk_03)].type        = 0x22;
-                    g_SpawnedActors[LOB(g_SceneState.unk_03)].pos.x.fixed = 0x230000;
-                    g_SpawnedActors[LOB(g_SceneState.unk_03)].pos.y.fixed = 0x4F0000;
-                    g_SpawnedActors[LOB(g_SceneState.unk_03)].pos.z.fixed = TO_COORD(0x480);
+                    g_SpawnedActors[staged].header.flags      = ACTOR_FLAG_IN_USE;
+                    staged_index                              = *staged_slot;
+                    g_SpawnedActors[staged_index].type        = 0x22;
+                    g_SpawnedActors[staged_index].pos.x.fixed = 0x230000;
+                    staged_index                              = *staged_slot;
+                    g_SpawnedActors[staged_index].pos.y.fixed = 0x4F0000;
+                    g_SpawnedActors[staged_index].pos.z.fixed = TO_COORD(0x480);
                 }
                 g_SceneState.step_05 = 7;
             }
