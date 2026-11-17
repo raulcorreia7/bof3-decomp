@@ -99,7 +99,7 @@ extern u8          g_SaveSlotFirst;
 /* D_801E6078 (shop), D_801ED808 (start) */
 extern u8          g_SaveSlotCount;
 /* D_801E6098 (shop), D_801ED80C (start) */
-extern MenuListRow g_SaveSlots[];
+extern SaveSlotRow g_SaveSlots[];
 /* The fairy roster: nine bytes a fairy, the five-byte name first. */
 extern u8          g_Fairies[][9];
 /* The active village UI record the fairy scenes hand to one another. */

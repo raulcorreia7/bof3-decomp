@@ -1,5 +1,5 @@
 /* Draws one save slot row: the window, the row icon and up to three party icons, the name, the level, the play time and the experience line; a NULL row draws only the window. */
-MATCH void SAVE_DrawSlot(u8 index, s32 left, s32 top, MenuListRow* row) {
+MATCH void SAVE_DrawSlot(u8 index, s32 left, s32 top, SaveSlotRow* row) {
     s16 x;
     s16 y;
     s16 label_x;

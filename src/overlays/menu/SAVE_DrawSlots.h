@@ -7,7 +7,7 @@
 #define SAVE_SLOT_FRAME_HEIGHT 52
 
 MATCH void SAVE_DrawSlots(s16 panel_x, s16 panel_y, u8 row_cursor) {
-    MenuListRow* row;
+    SaveSlotRow* row;
     s32          index;
     s32          x;
     s32          y;
@@ -19,7 +19,7 @@ MATCH void SAVE_DrawSlots(s16 panel_x, s16 panel_y, u8 row_cursor) {
         do {
             index = i;
             y     = (s16)(panel_y + SAVE_SLOT_INSET_Y + index * SAVE_SLOT_PITCH);
-            if (g_SaveSlots[index].source_index != GAME_NONE) {
+            if (g_SaveSlots[index].card_index != GAME_NONE) {
                 row = &g_SaveSlots[index];
             } else {
                 row = NULL;

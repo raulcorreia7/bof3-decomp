@@ -297,7 +297,7 @@ static struct {
     u8 pad_59[3];
 } __attribute__((packed)) sShopState = { 0 };
 
-MenuListRow g_SaveSlots[3] = { 0 };
+SaveSlotRow g_SaveSlots[3] = { 0 };
 
 static struct {
     u8 D_801E60EC;

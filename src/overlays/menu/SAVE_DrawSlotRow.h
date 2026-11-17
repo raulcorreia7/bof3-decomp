@@ -1,6 +1,6 @@
 /* Draws one save slot row: the window, the party icons, the name, the level, the play time and the experience line; a NULL row draws only the window. Each image defines its own g_SaveSlotLevelFormat, g_SaveSlotTimeFormat, g_SaveSlotTimeColon and g_SaveSlotFrameSprites. */
 /* func_801D8208 (bate), func_801D91B0 (shisu) */
-MATCH void SAVE_DrawSlotRow(u8 index, s32 left, s32 top, MenuListRow* row) {
+MATCH void SAVE_DrawSlotRow(u8 index, s32 left, s32 top, SaveSlotRow* row) {
     s16 x;
     s16 y;
     s16 label_x;
@@ -27,7 +27,7 @@ MATCH void SAVE_DrawSlotRow(u8 index, s32 left, s32 top, MenuListRow* row) {
         UI_DrawGlyphString(label_x, (y + 37), 0, g_UiFormatBuffer);
         UI_DrawGlyphString(label_x, (y + 36), 0, g_SaveSlotTimeColon);
         UI_DrawGlyphString(label_x, (y + 39), 0, g_SaveSlotTimeColon);
-        Menu_DrawExperienceLine((x + 0x14), (y + 0x12), 0, row->unk_00[8], ((MenuListRowWords*)row)->unk_10);
+        Menu_DrawExperienceLine((x + 0x14), (y + 0x12), 0, row->unk_00[8], ((SaveSlotRowCopy*)row)->unk_10);
     }
     UI_DrawSpriteRun(x, y, g_SaveSlotFrameSprites, row->unk_00[0x14] && row ? UI_SPRITE_ALT_CLUT : 0);
     if (row != NULL && row->unk_00[0x14] != 0) {

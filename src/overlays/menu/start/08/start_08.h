@@ -606,7 +606,7 @@ extern void Menu_DrawAbilitiesPanel(MenuPanelTask* task);
 extern void Menu_DrawEquipChoiceWindow(MenuPanelTask* task);
 extern void func_801E14A8(s32 x, s32 y, u8 flags, u8 row, u8 active);
 void        func_801E16BC(void);
-void        SAVE_DrawSlot(u8 slot, s32 x, s32 y, MenuListRow* row);
+void        SAVE_DrawSlot(u8 slot, s32 x, s32 y, SaveSlotRow* row);
 void        func_801E18D0(void);
 void        func_801E1C20(void);
 void        func_801E206C(void);
