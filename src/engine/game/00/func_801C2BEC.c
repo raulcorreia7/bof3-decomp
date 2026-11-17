@@ -1,9 +1,9 @@
 #include "game_00.h"
 
 MATCH void func_801C2BEC(void) {
-    u16       flags;
-    GameSlots table;
-    u8        index;
+    u16                flags;
+    CellPaletteIndices table;
+    u8                 index;
 
     flags = g_Game.flags;
 

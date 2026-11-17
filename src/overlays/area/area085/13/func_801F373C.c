@@ -5,7 +5,7 @@ MATCH void func_801F373C(void) {
     Area_SetFacingOffsetX(7);
     g_AreaCameraHeightStep = 0;
     g_Task->vz             = 0;
-    g_ScriptState->flag_00 |= 0x40;
+    g_ScriptState->flags |= 0x40;
     g_AreaScrollTargetY = TO_COORD(62);
     g_Task->pos.y.fixed = TO_COORD(62);
 }

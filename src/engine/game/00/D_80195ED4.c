@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 /* 0x80195ED4 */
-FieldSearchSpotStates D_80195ED4 = {
+FieldSearchSpotSteps D_80195ED4 = {
     func_801ACF2C,
     func_801AD0EC,
     func_801AD184,

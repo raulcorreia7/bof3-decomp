@@ -24,6 +24,6 @@ MATCH void func_801985C8(void) {
     if (selection != GAME_NONE && g_GamePrevSelection != selection) {
         SND_StopSequence(g_SelectionCues[selection * 4], g_SelectionSequences[selection * 4]);
     }
-    g_GameEntryState    = GAME_STATE_AREA_LOAD;
+    g_GameEntryState    = GAME_MODE_AREA_LOAD;
     g_GameEntrySubstate = 0;
 }

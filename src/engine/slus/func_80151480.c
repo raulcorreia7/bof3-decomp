@@ -7,7 +7,7 @@ MATCH void func_80151480(void) {
 
     if (D_80148357 == 4) {
         g_MenuPanelTasks[0].state = 4;
-        g_MessageState.state_00   = 2;
+        g_MessageState.state      = 2;
         g_UiWindowStep            = 1;
         h                         = &g_UiWindowChannel;
         *h |= FRONTEND_FLAG_MODE_LATCH;

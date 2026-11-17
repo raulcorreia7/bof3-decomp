@@ -9,11 +9,11 @@ MATCH void func_801F2FFC(void) {
 
     work = g_Task;
     COORD_INT(work->pos.z) -= 0x10;
-    count = g_ScriptState->count_02;
+    count = g_ScriptState->count;
     if (count < 0x80 && (count & 3) == 0) {
         Actor_BeginScript(D_801F43AC[(count >> 2) & 3], (u16)(work->script_pc - 2));
     }
-    g_ScriptState->count_02++;
+    g_ScriptState->count++;
     work = g_Task;
     if (COORD_INT(work->pos.z) < -0x280) {
         tint_a = work->tint.steps.delta.r;
@@ -37,6 +37,6 @@ MATCH void func_801F2FFC(void) {
     if (COORD_INT(g_Task->pos.z) >= -0xC7F) {
         g_ScriptState->cursor -= 2;
     } else {
-        g_ScriptState->count_02 = 0;
+        g_ScriptState->count = 0;
     }
 }

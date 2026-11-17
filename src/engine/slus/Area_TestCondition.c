@@ -21,7 +21,7 @@ MATCH s8 Area_TestCondition(s32 request) {
         return ((request & BYTE_MASK) ^ g_GameCellType) != 0;
     }
     if ((tag & 0xFF00) == 0xFC00) {
-        return (tag & 0x1) ^ ((g_GameStateIndex == GAME_REQUEST_CAMERA_LOOK) | (g_GameEntryState == GAME_STATE_SHOP));
+        return (tag & 0x1) ^ ((g_GameStateIndex == GAME_REQUEST_CAMERA_LOOK) | (g_GameEntryState == GAME_MODE_SHOP));
     }
     if ((tag & 0xFF00) == 0xFB00) {
         s32 bit = request & 0x1;

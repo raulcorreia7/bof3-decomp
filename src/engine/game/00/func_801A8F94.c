@@ -23,12 +23,12 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                         }
                         break;
                     case 2:
-                        if (state->count_02 == 0) {
-                            state->count_02 = base[state->cursor + 2];
-                            state->cursor   = (u16)(state->cursor + (s8)base[state->cursor + 1]);
+                        if (state->count == 0) {
+                            state->count  = base[state->cursor + 2];
+                            state->cursor = (u16)(state->cursor + (s8)base[state->cursor + 1]);
                         } else {
-                            state->count_02--;
-                            if (state->count_02 != 0)
+                            state->count--;
+                            if (state->count != 0)
                                 state->cursor = (u16)(state->cursor + (s8)base[state->cursor + 1]);
                             else
                                 state->cursor += 3;
@@ -117,7 +117,7 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                         break;
                     case 14:
                         left = base[state->cursor + 1];
-                        state->flag_00 |= 0x40;
+                        state->flags |= 0x40;
                         g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
                         if ((base[state->cursor + 3] & 1) != 0)
                             g_Task->header.flags |= ACTOR_FLAG_STEP_MOVE;
@@ -134,7 +134,7 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                         break;
                     case 15:
                         left = s_TalkMessageIds[base[state->cursor + 1] * 11 + g_Game.current->chr.character_id];
-                        state->flag_00 |= 0x40;
+                        state->flags |= 0x40;
                         g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
                         if ((base[state->cursor + 3] & 1) != 0)
                             g_Task->header.flags |= ACTOR_FLAG_STEP_MOVE;

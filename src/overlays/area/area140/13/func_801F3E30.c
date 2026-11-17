@@ -28,7 +28,7 @@ NON_MATCHING void func_801F3E30(void) {
         }
         index = (g_Task->direction & 0x7) >> 1;
         if ((g_InputPressed & g_InputMasks[INPUT_SLOT_ACTION]) != 0) {
-            g_ScriptState->flag_00 |= 0x40;
+            g_ScriptState->flags |= 0x40;
             g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
             Actor_SelectScript(D_801F4A6C[index * 2]);
             g_Task->unk_2A = D_801F4A6D[index * 2];

@@ -24,7 +24,7 @@ MATCH void* func_801B5C54(void) {
     /* Spelled run - -index: retail adds the scaled index before the base (&run[index] swaps the addu). */
     cur  = run - -index;
     for (; index >= 0; index--, cur--) {
-        sub = cur->len - 1;
+        sub = cur->length - 1;
         run = cur;
         for (; sub >= 0; sub--) {
             if (work->voice_flags.scene_flag == 0) {
@@ -54,8 +54,8 @@ MATCH void* func_801B5C54(void) {
                     limit = (COORD_FRAC(work->pos.y) != 0);
             }
             for (step = 0; step <= limit; step++) {
-                if (((run->flags & TILE_RUN_VERTICAL) && (x & BYTE_MASK) == run->x && (y & BYTE_MASK) == run->y + sub) ||
-                    (!(run->flags & TILE_RUN_VERTICAL) && (x & BYTE_MASK) == run->x + sub && (y & BYTE_MASK) == run->y))
+                if (((run->flags & TILE_RUN_FLAG_VERTICAL) && (x & BYTE_MASK) == run->x && (y & BYTE_MASK) == run->y + sub) ||
+                    (!(run->flags & TILE_RUN_FLAG_VERTICAL) && (x & BYTE_MASK) == run->x + sub && (y & BYTE_MASK) == run->y))
                     return run;
                 if ((work->direction == FACING_UP) || (work->direction == FACING_DOWN))
                     x += 1;

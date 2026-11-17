@@ -10,7 +10,7 @@ MATCH void func_801F439C(void) {
     row   = FIELD(u8*, table, g_ScriptState->script_index * 4);
     row += g_ScriptState->cursor;
     MESSAGE_START_WAIT(D_801F5388[row[2]]);
-    g_ScriptState->flag_00 &= ~0x10;
-    g_ScriptState->flag_00 |= 0x20;
+    g_ScriptState->flags &= ~0x10;
+    g_ScriptState->flags |= 0x20;
     g_ScriptState->cursor++;
 }

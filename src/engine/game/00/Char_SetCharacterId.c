@@ -2,12 +2,12 @@
 
 /* func_801C2E34 */
 MATCH void Char_SetCharacterId(u8 index) {
-    GameMenuSlots table;
-    u8*           entry;
-    s32           record_index1;
-    s32           record_index2;
-    s32           record_index3;
-    u8            flags;
+    CellEffects table;
+    u8*         entry;
+    s32         record_index1;
+    s32         record_index2;
+    s32         record_index3;
+    u8          flags;
 
     table = D_80195FF8;
     entry = (u8*)table.entries + index * 3;

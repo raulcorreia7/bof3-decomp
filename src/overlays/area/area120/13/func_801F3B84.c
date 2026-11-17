@@ -3,7 +3,7 @@
 MATCH void func_801F3B84(void) {
     s32 arg;
 
-    if (g_GameEntryState == GAME_STATE_BATTLE && g_GameEntrySubstate != g_GameEntryState) {
+    if (g_GameEntryState == GAME_MODE_BATTLE && g_GameEntrySubstate != g_GameEntryState) {
         g_Task->header.step -= 1;
     }
     if ((MEM(u32, g_Task->vx) & 0xFFFF00) == 0x20800) {

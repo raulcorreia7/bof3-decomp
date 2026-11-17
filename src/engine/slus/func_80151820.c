@@ -4,6 +4,6 @@
  */
 MATCH void func_80151820(void) {
     if (g_MenuPanelTasks[0].state == 2) {
-        g_MessageState.state_00 = 0;
+        g_MessageState.state = 0;
     }
 }
