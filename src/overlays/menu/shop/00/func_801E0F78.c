@@ -10,7 +10,7 @@ NON_MATCHING void func_801E0F78(void) {
     s32 panel_y;
 
     D_801E6258 = 0;
-    for (count = 0; count < CHARACTER_COUNT; count++) {
+    for (count = 0; count < CHAR_INDEX_COUNT; count++) {
         if (g_Characters[count].party_flags & PARTY_FLAG_JOINED) {
             D_801E6264[D_801E6258++] = count;
         }

@@ -5,7 +5,7 @@ MATCH void Menu_ExitCamp(void) {
     u8   i;
 
     if (WINDOW_EFFECT_IDLE()) {
-        for (i = 0; i < CHARACTER_COUNT; i++) {
+        for (i = 0; i < CHAR_INDEX_COUNT; i++) {
             func_801E7210(i);
             Char_RebuildStats(&g_Characters[i]);
         }
