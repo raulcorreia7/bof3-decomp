@@ -1,11 +1,16 @@
 #include "area040_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING s32 func_801F3400(s32 x, s32 y) {
-    s32 cell_x;
-    s32 cell_y;
+MATCH s32 func_801F3400(s32 x, s32 y) {
     s32 i;
     s32 j;
+    /* FAKE: un-pinned C leaves 6 rows different; keep the x range value in a0. */
+    FAKE_REG(s32, test_x, "a0");
+    /* FAKE: un-pinned C leaves 6 rows different; keep the y range value in a1. */
+    FAKE_REG(s32, test_y, "a1");
+    /* FAKE: un-pinned C leaves 6 rows different; preserve the accepted x in s0. */
+    FAKE_REG(s32, cell_x, "s0");
+    /* FAKE: un-pinned C leaves 6 rows different; preserve the accepted y in s1. */
+    FAKE_REG(s32, cell_y, "s1");
 
     if (g_GameCellType != 6) {
         return 0;
@@ -21,9 +26,11 @@ NON_MATCHING s32 func_801F3400(s32 x, s32 y) {
     }
     func_801F369C();
     FAKE_BARRIER(); /* FAKE: the retail bytes keep the cell shifts below this call. */
-    cell_x = x >> 16;
-    cell_y = y >> 16;
-    if ((u32)(cell_x - 0x94) < 4U && (u32)(cell_y - 0x20) < 4U) {
+    test_x = x >> 16;
+    test_y = y >> 16;
+    if ((u32)(test_x - 0x94) < 4U && (u32)(test_y - 0x20) < 4U) {
+        cell_x = test_x;
+        cell_y = test_y;
         if ((func_801F30B8(cell_x, cell_y) & BYTE_MASK) == 0) {
             Area_SetCellPalette(cell_x, cell_y);
         } else {
@@ -43,6 +50,3 @@ NON_MATCHING s32 func_801F3400(s32 x, s32 y) {
     }
     return 0;
 }
-#else
-INCLUDE_ASM(func_801F3400);
-#endif
