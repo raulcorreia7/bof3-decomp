@@ -20,16 +20,16 @@ extern char D_801F6C10[];
 
 /* A scene rectangle the panel draws: position and size. */
 typedef struct Scena10Rect {
-    s16 x;      /* 0x00 */
-    s16 y;      /* 0x02 */
-    u16 width;  /* 0x04 */
-    u16 height; /* 0x06 */
+    s16 x; /* 0x00 */
+    s16 y; /* 0x02 */
+    u16 w; /* 0x04 */
+    u16 h; /* 0x06 */
 } Scena10Rect;
 
 ASSERT_OFFSET(Scena10Rect, x, 0x00);
 ASSERT_OFFSET(Scena10Rect, y, 0x02);
-ASSERT_OFFSET(Scena10Rect, width, 0x04);
-ASSERT_OFFSET(Scena10Rect, height, 0x06);
+ASSERT_OFFSET(Scena10Rect, w, 0x04);
+ASSERT_OFFSET(Scena10Rect, h, 0x06);
 ASSERT_SIZE(Scena10Rect, 8);
 
 /* The panel draws entry 2. */
