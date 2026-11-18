@@ -79,7 +79,7 @@ extern PanelOwner D_801ED9B0[];
 void              Battle_RunAttackCommand(void);
 /* func_80096F00 */
 void              Battle_RunAbilityCommand(void);
-void              func_800980A8(void);
+void              Battle_RunExamineCommand(void);
 /* func_8009834C */
 void              Battle_RunItemCommand(void);
 /* func_8009B274 */

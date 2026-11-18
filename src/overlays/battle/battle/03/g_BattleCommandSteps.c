@@ -31,7 +31,7 @@ Callback g_BattleCommandPanelSteps[3] = {
 
 /* 0x801EABE4 */
 Callback g_BattleRunCommandSteps[8] = {
-    (Callback)Battle_RunAttackCommand, (Callback)Battle_RunAbilityCommand, (Callback)Battle_RunItemCommand,   (Callback)func_800980A8,
+    (Callback)Battle_RunAttackCommand, (Callback)Battle_RunAbilityCommand, (Callback)Battle_RunItemCommand,   (Callback)Battle_RunExamineCommand,
     (Callback)Battle_StartDefend,      (Callback)Battle_ArmCommands,       (Callback)Battle_RunEscapeCommand, (Callback)func_800A4688,
 };
 

@@ -303,7 +303,7 @@ extern BattleMenuPanel3Steps             D_80096A34;
 extern BattleMenuPanel4Steps             D_80096A40;
 extern Callback                          func_800B43B8[];
 extern Callback                          D_800B43D4[17];
-extern Callback                          D_800B4418[4];
+extern Callback                          g_BattleExamineSteps[4];
 extern Callback                          D_800B4428[12];
 extern Callback                          D_800B4458[5];
 extern Callback                          D_800B446C[4];
@@ -315,12 +315,17 @@ extern u8                                D_800B44B8[];
 extern Callback                          D_800B44C8[3];
 extern Callback                          D_800B44D4[4];
 extern Callback                          D_800B44E4[];
-extern u8                                D_800B45E0[96];
-extern u8                                D_800B4640[92];
-extern u8                                D_800B469C[72];
-extern u8                                D_800B46E4[40];
+/* D_800B45E0 */
+extern u8                                g_BattleItemEffectIds[96];
+/* D_800B4640 */
+extern u8                                g_BattleWeaponEffectIds[92];
+/* D_800B469C */
+extern u8                                g_BattleArmorEffectIds[72];
+/* D_800B46E4 */
+extern u8                                g_BattleAccessoryEffectIds[40];
 extern u8*                               D_800B470C[4];
-extern Callback                          D_800B471C[130];
+/* D_800B471C */
+extern Callback                          g_BattleItemEffects[130];
 extern u8                                g_BattleEscapeThresholds[];
 extern s8                                D_800B4924[];
 extern u16                               D_800B492C[16];
@@ -569,10 +574,14 @@ void        Battle_SetAbilityTargetSide(void);
 /* func_80097DC0 */
 void        Battle_ToggleAbilityTargetSide(void);
 void        func_80097FE8(void);
-void        func_800980E4(void);
-void        func_80098144(void);
-void        func_80098254(void);
-void        func_800982E4(void);
+/* func_800980E4 */
+void        Battle_StartExamineTarget(void);
+/* func_80098144 */
+void        Battle_SelectExamineEnemyTarget(void);
+/* func_80098254 */
+void        Battle_ConfirmExamine(void);
+/* func_800982E4 */
+void        Battle_CancelExamine(void);
 void        Battle_GrantAlwaysHits(void);
 void        Battle_GrantDamageImmunity(void);
 void        Battle_GrantReprisal(void);
@@ -590,11 +599,13 @@ void        Battle_Heal20Hp(void);
 void        Battle_Heal40Hp(void);
 /* func_8009DE78 */
 void        Battle_Heal100Hp(void);
-void        func_8009DF70(void);
+/* func_8009DF70 */
+void        Battle_CureStatusChance(void);
 void        func_8009DFBC(void);
 /* func_8009DFEC */
 void        Battle_CureBlindness(void);
-void        func_8009E01C(void);
+/* func_8009E01C */
+void        Battle_CurePetrification(void);
 /* func_8009E04C */
 void        Battle_CureAilments(void);
 /* func_8009E07C */
@@ -632,15 +643,20 @@ void        func_8009F0A4(void);
 void        func_8009F1BC(void);
 /* func_8009F258 */
 void        Battle_InflictSilence(void);
-void        func_8009F278(void);
-void        func_8009F2B0(void);
-void        func_8009F2E8(void);
+/* func_8009F278 */
+void        Battle_ApplyQuake(void);
+/* func_8009F2B0 */
+void        Battle_ApplyTyphoon(void);
+/* func_8009F2E8 */
+void        Battle_ApplyLightning(void);
 /* func_8009F3DC */
 void        Battle_ApplyMight(void);
 /* func_8009F414 */
 void        Battle_ApplyInferno(void);
-void        func_8009F44C(void);
-void        func_8009F484(void);
+/* func_8009F44C */
+void        Battle_ApplyBlizzard(void);
+/* func_8009F484 */
+void        Battle_ApplySirocco(void);
 /* func_8009F4BC */
 void        Battle_ApplyFlare(void);
 /* func_8009F4F4 */
@@ -649,11 +665,15 @@ void        Battle_ApplyProtect(void);
 void        Battle_ApplyWeaken(void);
 /* func_8009F564 */
 void        Battle_ApplyFireblast(void);
-void        func_8009F59C(void);
-void        func_8009F5D4(void);
-void        func_8009F60C(void);
+/* func_8009F59C */
+void        Battle_ApplyCyclone(void);
+/* func_8009F5D4 */
+void        Battle_ApplySilence(void);
+/* func_8009F60C */
+void        Battle_ApplyJolt(void);
 void        func_8009F644(void);
-void        func_8009F67C(void);
+/* func_8009F67C */
+void        Battle_ApplySimoon(void);
 /* func_8009F6B4 */
 void        Battle_ApplyBarrier(void);
 void        func_8009F758(void);
@@ -676,15 +696,22 @@ void        func_8009FA20(void);
 void        func_8009FAE4(void);
 void        func_8009FB38(void);
 void        func_8009FE10(void);
-void        func_8009FE70(void);
-void        func_8009FE84(void);
-void        func_8009FE98(void);
-void        func_8009FEAC(void);
+/* func_8009FE70 */
+void        Battle_Heal1Hp(void);
+/* func_8009FE84 */
+void        Battle_Heal80Hp(void);
+/* func_8009FE98 */
+void        Battle_Heal240Hp(void);
+/* func_8009FEAC */
+void        Battle_Heal5Ap(void);
 void        func_8009FED0(void);
 void        func_8009FEF4(void);
-void        func_8009FF7C(void);
-void        func_8009FFB4(void);
-void        func_8009FFE4(void);
+/* func_8009FF7C */
+void        Battle_ApplyMyollnir(void);
+/* func_8009FFB4 */
+void        Battle_FullRestore(void);
+/* func_8009FFE4 */
+void        Battle_Heal5Hp(void);
 void        func_8009FFF8(void);
 void        func_800A0000(void);
 void        func_800A0188(void);
@@ -693,9 +720,11 @@ void        func_800A02E8(void);
 void        func_800A042C(void);
 void        func_800A0564(void);
 void        func_800A0660(void);
-void        func_800A07D0(void);
+/* func_800A07D0 */
+void        Battle_DoubleRewards(void);
 void        func_800A0898(void);
-void        func_800A0920(void);
+/* func_800A0920 */
+void        Battle_StopTurns(void);
 void        func_800A0A04(void);
 void        func_800A0A40(void);
 void        func_800A0B2C(void);
@@ -718,7 +747,8 @@ void        func_800A2120(void);
 void        func_800A21D0(void);
 void        func_800A22CC(void);
 void        func_800A23CC(void);
-void        func_800A2404(void);
+/* func_800A2404 */
+void        Battle_ApplyDeath(void);
 void        func_800A243C(void);
 void        func_800A250C(void);
 void        func_800A2560(void);
@@ -750,17 +780,25 @@ void        Battle_SetItemTargetSide(void);
 /* func_80099248 */
 void        Battle_ToggleItemTargetSide(void);
 void        func_80099328(void);
-void        func_80099364(void);
-void        func_80099568(void);
-void        func_80099830(void);
-void        func_80099B74(void);
-void        func_80099E80(void);
+/* func_80099364 */
+void        Battle_ChooseEquipAction(void);
+/* func_80099568 */
+void        Battle_SelectEquipRow(void);
+/* func_80099830 */
+void        Battle_SelectEquipChoice(void);
+/* func_80099B74 */
+void        Battle_SelectEquipItem(void);
+/* func_80099E80 */
+void        Battle_RouteEquipItem(void);
 void        func_80099F90(void);
-void        func_80099FCC(void);
+/* func_80099FCC */
+void        Battle_SetEquipTarget(void);
 void        func_8009A0A4(void);
 void        func_8009A254(void);
-void        func_8009A468(void);
-void        func_8009A518(void);
+/* func_8009A468 */
+void        Battle_ConfirmEquipItem(void);
+/* func_8009A518 */
+void        Battle_CancelEquipItem(void);
 void        func_8009A590(void);
 /* func_8009AF84 */
 void        Battle_InitItemPanel(void);
@@ -769,10 +807,14 @@ void        Battle_ClearMenuPanels(void);
 /* func_8009B2B0 */
 void        Battle_TryEscape(void);
 void        func_8009B44C(void);
-void        func_8009B488(void);
-void        func_8009B700(void);
-void        func_8009B794(void);
-void        func_8009B828(void);
+/* func_8009B488 */
+void        Battle_StartEscapeScroll(void);
+/* func_8009B700 */
+void        Battle_ScrollEscapeOut(void);
+/* func_8009B794 */
+void        Battle_ScrollEscapeBack(void);
+/* func_8009B828 */
+void        Battle_FailEscape(void);
 void        func_8009B964(void);
 /* func_8009BACC */
 u8          Battle_CalcEscapeChance(s32 diff);
@@ -989,8 +1031,10 @@ bool        Battle_IsAbilityLocked(void);
 void        Battle_InitAbilityPanel(void);
 /* func_8009AAE8 */
 extern void Battle_PreviewEquipment(void);
-void        func_8009B03C(void);
-void        func_8009B160(void);
+/* func_8009B03C */
+void        Battle_InitEquipChangePanel(void);
+/* func_8009B160 */
+void        Battle_InitEquipUsePanel(void);
 /* func_8009C994 */
 extern void Battle_ApplyEnemyEvent(EnemyBattler* work_arg, BattleEventPacket* event);
 extern u8   Battle_EnemyEventTriggered(volatile EnemyBattler* enemy, s32 bit_index);

@@ -34,7 +34,7 @@ MATCH u8 func_801DB844(u32 battler_index) {
         if ((g_BattleEnemyBattlers[index].header.flags & 0x1u) == 0u) {
             return false;
         }
-        if ((g_BattleEnemyBattlers[index].status & (STATUS_PARALYZED | STATUS_CONFUSED | STATUS_SLEEPING | STATUS_UNK_8 | STATUS_KO)) != 0u) {
+        if ((g_BattleEnemyBattlers[index].status & (STATUS_PARALYZED | STATUS_CONFUSED | STATUS_SLEEPING | STATUS_PETRIFIED | STATUS_KO)) != 0u) {
             return false;
         }
         if (g_Battle.action_lock != 0u && (g_BattleEnemyBattlers[index].turn.action_flags.value & BATTLER_ACTION_SUPPRESSION_EXEMPT) == 0u) {
