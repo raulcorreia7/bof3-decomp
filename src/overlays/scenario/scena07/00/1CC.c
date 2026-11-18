@@ -551,7 +551,13 @@ MATCH void func_801F8804(u8 shade) {
 
 #include "shared/Trail_Update.h"
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F8BE8(void* table) {
+    (void)table;
+}
+#else
 INCLUDE_ASM(func_801F8BE8);
+#endif
 
 #include "shared/MATH_AverageAngle.h"
 

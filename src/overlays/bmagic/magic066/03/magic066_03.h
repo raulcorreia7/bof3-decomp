@@ -4,9 +4,12 @@
 /* The bmagic/magic066/03 overlay. Only this image includes the file. */
 
 #include "overlays/bmagic/bmagic.h"
-extern Callback D_801F006C[];
 
-extern u8 D_801F00B0[];
+extern Callback D_801F006C[];
+extern s32      D_801F008C[];
+extern s32      D_801F0090[];
+extern s32      D_801F0094[];
+extern u8       D_801F00B0[];
 
 void func_801EF984(void);
 
