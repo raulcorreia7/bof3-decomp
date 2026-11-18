@@ -5,7 +5,7 @@ MATCH void func_801F46D4(void) {
     u8*  counter;
 
     if (g_InputPressed & 0x40) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 2));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 2));
         timer = &D_801F58CA;
         *timer -= rand() % 2 + 4;
         g_SpawnedActors[D_801F58CE[1]].scene_step -= 1;

@@ -227,9 +227,9 @@ MATCH void func_801F2CB0(void) {
     func_801F3E48(((Actor*)g_Task)->timer);
     ((Actor*)g_Task)->timer = (((Actor*)g_Task)->timer + 2u);
     if (((Actor*)g_Task)->timer >= 128u) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 6));
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 14));
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 14));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
         ((Actor*)g_Task)->timer = 0;
         ((Actor*)g_Task)->header.mode++;
     }

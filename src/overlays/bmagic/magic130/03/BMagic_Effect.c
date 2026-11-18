@@ -37,8 +37,8 @@ MATCH void func_801EEC70(void) {
     }
     *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)) = *MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
     g_GfxPalettePending                                               = 1;
-    SND_QueueSelectionEffect(0x100);
-    SND_QueueSelectionEffect(0x101);
+    SND_QueueSelectionSE(0x100);
+    SND_QueueSelectionSE(0x101);
 }
 
 #include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"

@@ -46,7 +46,7 @@ MATCH void func_801D150C(void) {
             ptr -= 1;
         } while (i >= 0);
         func_801D2870();
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
         D_801DB0C4 = 3;
         D_801DB0B4 = 0;
         D_801F294E += 1;
@@ -134,7 +134,7 @@ MATCH void func_801D184C(void) {
     func_801D3184(0x26, 0x10);
     func_801D32A0(0xA8, 0x10, 0);
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x102));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x102));
         D_801DB0C4 = 4;
         D_801F294E += 1;
     }
@@ -302,7 +302,7 @@ MATCH void func_801D1FE4(void) {
     count      = D_801DB0C4 - 1;
     D_801DB0C4 = count;
     if (!(count & BYTE_MASK)) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
         D_801F294D += 1;
     }
 }
@@ -374,7 +374,7 @@ MATCH void func_801D2320(void) {
     } else if (D_801F294E == 0) {
         func_801D3184(0x26, 0x10);
         func_801D32A0(0xA8, 0x10, 0);
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
         D_801DB0C4 = 4;
         D_801F294E += 1;
     } else {
@@ -408,7 +408,7 @@ MATCH void func_801D24A8(void) {
         if (D_801F294E == 0) {
             func_801D3184(0x26, 0x10);
             func_801D32A0(0xA8, 0x10, 0);
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
             D_801DB0C4 = 0;
             D_801F294E += 1;
             return;
@@ -434,7 +434,7 @@ MATCH void func_801D25CC(void) {
     if (D_801F294D == 0) {
         if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
             bgm_offset = g_SndBGMId * 4;
-            SND_StopSequence(g_SelectionCues[bgm_offset], g_SelectionCues[bgm_offset + 1]);
+            SND_StopSequence(g_SelectionSepSlots[bgm_offset], g_SelectionSepSlots[bgm_offset + 1]);
             SND_RequestBGM(D_801DB0CC);
             D_801F294D += 1;
         }
@@ -567,7 +567,7 @@ MATCH void func_801D2CF8(s32 x, s32 y, s32 icon) {
 }
 
 MATCH void func_801D2E10(void) {
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
     MESSAGE_START_WAIT(MSG_114);
     D_801F294D = 0;
     D_801F294C++;
@@ -723,7 +723,7 @@ MATCH void func_801D35E0(void) {
     u8* sequences;
 
     D_801DB0CC = g_SndBGMId;
-    cues       = g_SelectionCues + g_SndBGMId * 4;
+    cues       = g_SelectionSepSlots + g_SndBGMId * 4;
     sequences  = g_SelectionSequences + g_SndBGMId * 4;
     SND_StopSequence(*cues, *sequences);
     SND_RequestBGM(BGM_COMMU02);
@@ -740,7 +740,7 @@ MATCH void func_801D364C(void) {
 
 MATCH void func_801D36A8(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
         D_801DB0C4 = 4;
         D_801DB07C = 0;
         D_801F294D += 1;
@@ -1092,7 +1092,7 @@ NON_MATCHING void func_801D448C(void) {
                     D_801F294D = 0;
                     D_801F294E = 0;
                 } else {
-                    SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 2));
+                    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
                     D_801DB0C4 = 0;
                     D_801F294E = 2;
                 }
@@ -1130,7 +1130,7 @@ MATCH void func_801D4840(void) {
     if (D_801F294D == 0) {
         if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
             bgm_offset = g_SndBGMId * 4;
-            SND_StopSequence(g_SelectionCues[bgm_offset], g_SelectionCues[bgm_offset + 1]);
+            SND_StopSequence(g_SelectionSepSlots[bgm_offset], g_SelectionSepSlots[bgm_offset + 1]);
             SND_RequestBGM(D_801DB0CC);
             D_801F294D += 1;
         }
@@ -1326,7 +1326,7 @@ MATCH void func_801D50E4(void) {
     D_801DB0CC      = bgm;
     FAKE_BARRIER(); /* FAKE: keeps the two flag stores ahead of the track table loads. */
     selection_offset = bgm * BGM_TRACK_SIZE;
-    SND_StopSequence(g_SelectionCues[selection_offset], g_SelectionSequences[selection_offset]);
+    SND_StopSequence(g_SelectionSepSlots[selection_offset], g_SelectionSequences[selection_offset]);
     SND_RequestBGM(0x67);
     while (EMI_IsReady() == 0) {
         SYS_ThreadWait(1);
@@ -1405,7 +1405,7 @@ MATCH void func_801D5978(void) {
 
     if (g_UiWindowEffectBusy == 0) {
         offset = g_SndBGMId * 4;
-        SND_StopSequence(g_SelectionCues[offset], g_SelectionCues[offset + 1]);
+        SND_StopSequence(g_SelectionSepSlots[offset], g_SelectionSepSlots[offset + 1]);
         SND_RequestBGM(D_801DB0CC);
     loop_2:
         if (EMI_IsReady() == 0) {
@@ -1511,7 +1511,7 @@ MATCH void func_801D5DF4(void) {
 /* func_801D5E30 */
 MATCH void Menu_ConfirmFairy(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 2));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
         D_801DB0C4 = 4;
         D_801DB0B4 = 0;
         D_801DB0C8 = 0xF0;
@@ -1539,16 +1539,16 @@ MATCH void func_801D5F7C(void) {
 
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         D_801DB0C8 = 0xF1;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x04));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x04));
         D_801DB0B8 = 0;
         D_801F294D += 1;
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x06));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x06));
         D_801F294D = 8;
     } else {
         pressed = INPUT_GetRepeatedButtons(g_InputPressed & 0xA000);
         if (pressed & HALF_MASK) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
         }
         if (pressed & PADLleft) {
             D_801DB0B4 -= 1;
@@ -1577,8 +1577,8 @@ MATCH void func_801D6124(void) {
             goto play_cue;
         }
         D_801DB0C8 = -1;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x04));
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x04));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
         D_801DB0C4 = 0;
         D_801F294D += 1;
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
@@ -1589,7 +1589,7 @@ MATCH void func_801D6124(void) {
         D_801F294D -= 1;
     } else if (INPUT_GetRepeatedButtons(g_InputPressed & 0xA000) & HALF_MASK) {
         D_801DB0B8 ^= 1;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
     }
     if (D_801DB0C8 != 0xFFFF) {
         func_801D812C();
@@ -1650,7 +1650,7 @@ MATCH void func_801D6448(void) {
 MATCH void func_801D64E0(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         if (D_801F2945 != 0) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
             D_801DB0C4 = 0;
             D_801F294E += 1;
         } else {
@@ -1821,8 +1821,8 @@ MATCH void func_801D708C(void) {
             goto play_cue;
         }
         D_801DB0C8 = -1;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x04));
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x04));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
         D_801DB0C4 = 0;
         D_801F294D += 1;
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
@@ -1833,7 +1833,7 @@ MATCH void func_801D708C(void) {
         D_801F294D -= 1;
     } else if (INPUT_GetRepeatedButtons(g_InputPressed & 0xA000) & HALF_MASK) {
         D_801DB0B8 ^= 1;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
     }
     if (D_801DB0C8 != 0xFFFF) {
         func_801D812C();
@@ -1919,7 +1919,7 @@ MATCH void func_801D74B0(void) {
 MATCH void func_801D7548(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         if (D_801F2945 != 0) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
             D_801DB0C4 = 0;
             D_801F294E += 1;
         } else {

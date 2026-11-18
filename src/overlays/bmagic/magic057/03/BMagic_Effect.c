@@ -27,8 +27,8 @@ MATCH void func_801EED98(void) {
     PartyMember* work;
     s32          slot;
 
-    SND_QueueSelectionEffect(0x101);
-    SND_QueueSelectionEffect(0x102);
+    SND_QueueSelectionSE(0x101);
+    SND_QueueSelectionSE(0x102);
     work   = g_Task;
     g_Task = D_801EC2E0->target.party;
     Actor_SelectScript(3U);
@@ -196,7 +196,7 @@ MATCH void func_801EF55C(void) {
 MATCH void func_801EF5BC(void) {
     g_Task->unk_09 = 0;
     g_Task->timer  = D_801EFADC[g_Task->unk_09];
-    SND_QueueSelectionEffect(256);
+    SND_QueueSelectionSE(256);
     g_Task->unk_10 = 0;
     g_Task->header.step++;
 }
@@ -215,7 +215,7 @@ MATCH void func_801EF620(void) {
         stage        = work->unk_09 + 1;
         work->unk_09 = stage;
         work->timer  = D_801EFADC[stage];
-        SND_QueueSelectionEffect(256);
+        SND_QueueSelectionSE(256);
         if (g_Task->unk_09 == 3) {
             g_BattleEffectBattler->header.step++;
             g_Task->timer = 0xFF;

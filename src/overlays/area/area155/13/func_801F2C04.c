@@ -11,7 +11,7 @@ MATCH void func_801F2C04(void) {
         }
         D_801490E4[0] = 0;
         if (Item_Add(ITEM_CATEGORY_WEAPON, WEAPON_HOMING_BOMB, 1, 0) & BYTE_MASK) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x06));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x06));
             g_MessageRequest = MSG_011;
         } else {
             g_MessageRequest = MSG_010;

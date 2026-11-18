@@ -57,7 +57,7 @@ MATCH void func_801EED1C(void) {
     }
     *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)) = 0;
     g_GfxPalettePending                                               = 1;
-    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
     g_Task->header.mode++;
 }
 

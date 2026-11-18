@@ -5,7 +5,7 @@ MATCH void func_801F2E1C(void) {
         if (abs(g_Game.members[0].pos.y.fixed - ((s32)COORD_INT(g_Task->pos.y) << 16)) <= TO_COORD(1) ||
             abs(g_Game.members[0].pos.y.fixed - (((s32)COORD_INT(g_Task->pos.y) + 1) << 16)) <= TO_COORD(1)) {
             if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0));
             }
             g_Task->header.step++;
         }

@@ -61,7 +61,7 @@ NON_MATCHING void func_801EED18(void) {
     BATTLE_EFFECT_PALETTE_COLORS[-1] = 0;
     BATTLE_EFFECT_PALETTE_COLORS[15] = 0;
     g_GfxPalettePending              = 1;
-    SND_QueueSelectionEffect(0x100);
+    SND_QueueSelectionSE(0x100);
 }
 #else
 INCLUDE_ASM(func_801EED18);

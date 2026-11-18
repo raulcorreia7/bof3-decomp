@@ -45,7 +45,7 @@ MATCH void func_801FC094(void) {
         g_SpawnedActors[slot_index].link             = 0x18;
         COORD_INT(g_SpawnedActors[slot_index].pos.x) = D_801FDE40[i].x;
         COORD_INT(g_SpawnedActors[slot_index].pos.y) = D_801FDE40[i].y;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 2) + i % 3);
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 2) + i % 3);
     }
 }
 

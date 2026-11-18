@@ -5,6 +5,6 @@ MATCH void func_801F4F28(void) {
     Area_DrawGradient(0x10001805);
     if (g_ScriptVars[0] == 0x35) {
         g_Task->header.step++;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x01));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x01));
     }
 }

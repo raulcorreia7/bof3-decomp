@@ -140,7 +140,7 @@ MATCH s32 func_801FD960(s32 x, s32 y) {
             if (((x >> 16) - 74) < 2U) {
                 Game_SetScriptActive();
                 value = g_SndBGMId * 4;
-                SND_StartDecrescendo(g_SelectionCues[value], g_SelectionCues[value + 1], 0x64, 0x20);
+                SND_StartDecrescendo(g_SelectionSepSlots[value], g_SelectionSepSlots[value + 1], 0x64, 0x20);
                 g_ScenarioState.state_04 = 4;
                 g_ScenarioState.step_05  = 0;
                 return 1;

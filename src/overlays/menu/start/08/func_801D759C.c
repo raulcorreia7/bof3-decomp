@@ -40,14 +40,14 @@ NON_MATCHING void func_801D759C(void) {
     count      = ((s32 (*)(s32))Party_CountOrder)(PARTY_ORDER_FIELD);
     previous   = D_8014857A;
     if ((input & PADLup) != 0) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
         slot       = D_8014857A - 1;
         D_8014857A = slot;
         if (slot < 0) {
             D_8014857A = count - 1;
         }
     } else if ((input & PADLdown) != 0) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
         limit = (u8)count;
         limit--;
         slot       = D_8014857A + 1;
@@ -59,13 +59,13 @@ NON_MATCHING void func_801D759C(void) {
     if (D_801ED648 != 2) {
         task->u.addr.unk_10 = 0;
         if ((input & PADLleft) != 0) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
             task->unk_09 = 0x32;
             if ((s8)--task->unk_0B < 0) {
                 task->unk_0B = 3;
             }
         } else if ((input & PADLright) != 0) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
             task->unk_09 = 0x31;
             if (++task->unk_0B >= 4) {
                 task->unk_0B = 0;
@@ -75,16 +75,16 @@ NON_MATCHING void func_801D759C(void) {
         task->u.addr.unk_10 = 1;
     }
     if (task->unk_0A != previous) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
     chosen  = &g_PartyCursor;
     *chosen = task->unk_0A;
     if ((g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
         D_8014857C = s_SkillOrderCursors[*chosen][D_8014857B];
         D_80148651++;
     } else if ((g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_801485DC = 0;
         D_80148651--;
     }

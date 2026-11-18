@@ -1,6 +1,6 @@
 #include "battle_03.h"
 
-MATCH void Battle_PlayEffectCue(u32 effect_index) {
+MATCH void Battle_PlayEffectSE(u32 effect_index) {
     u32 base;
     u32 addr;
 

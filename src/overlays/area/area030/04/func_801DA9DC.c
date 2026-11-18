@@ -16,7 +16,7 @@ NON_MATCHING void func_801DA9DC(void) {
         func_801DDE94(1);
     }
     if ((g_InputPressed & PADRup) && (D_80144199 == 0)) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
         FISHING_STATE->sub_index_03    = (u8)(FISHING_STATE->sub_index_03 + 1);
         D_801440B1                     = 0;
         g_SpawnedActors[0].header.mode = 0;
@@ -24,7 +24,7 @@ NON_MATCHING void func_801DA9DC(void) {
         return;
     }
     if (g_SpawnedActors[0].pos.y.fixed >= FISHING_CATCH_HEIGHT) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
         D_801440B1                     = 0;
         g_SpawnedActors[0].header.mode = 0;
         FISHING_STATE->mode_index_02   = 1;

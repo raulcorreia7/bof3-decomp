@@ -94,7 +94,7 @@ MATCH void func_801EF104(void) {
     if (timer != 0) {
         return;
     }
-    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
     g_Task->unk_09       = 0;
     g_Task->param.unk_0B = 0;
     for (i = 0; i < 12; i++) {

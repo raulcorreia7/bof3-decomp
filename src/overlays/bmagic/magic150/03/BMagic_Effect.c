@@ -51,7 +51,7 @@ MATCH void func_801EEE24(void) {
     if (timer == 0) {
         g_Task->unk_09 = 120;
         g_Task->header.mode += 1;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
 }
 
@@ -67,7 +67,7 @@ MATCH void func_801EEEC4(void) {
         g_Task->unk_09 = 4;
         g_Task->header.mode += 1;
         Battle_MarkDamaged(g_Battle.target_selector);
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
     }
 }
 

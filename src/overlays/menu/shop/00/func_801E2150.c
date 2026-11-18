@@ -47,25 +47,25 @@ MATCH void func_801E2150(void) {
         }
     }
     if (row != D_8014835F) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     if (D_8014835C == 0) {
         pad = g_InputPressed;
         if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
             if (D_80148361 != GAME_NONE) {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 2));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
                 func_801E2724();
                 D_80148357 = 3;
                 D_80148624 = 0;
                 D_80148654 = 8;
                 D_80148652 += 1;
             } else {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
             }
         } else if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 2));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
             g_MenuPanelTasks[0].state = 1;
             D_80148357                = 1;
             D_80148624                = 0;

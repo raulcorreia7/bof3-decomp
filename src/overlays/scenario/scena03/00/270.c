@@ -215,7 +215,7 @@ MATCH void func_801F7DF0(void) {
 MATCH void func_801F7E34(void) {
     Actor* work;
 
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 9));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 9));
     work = SPAD(0u)->task;
     work->header.mode += 1;
 }
@@ -344,7 +344,7 @@ MATCH void func_801F82E4(void) {
 MATCH void func_801F8328(void) {
     g_Task->timer = 96;
     g_Task->header.mode++;
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 4));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 4));
 }
 
 MATCH void func_801F8370(void) {
@@ -440,7 +440,7 @@ MATCH void func_801F87A4(void) {
 
     GFX_DrawShadedDisc((s16)g_Task->screen_x, (s16)g_Task->screen_y, (g_Task->timer & 0x1) | 0x3C, 0x80, 0);
     if (g_Task->timer == 215) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 8));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 8));
     }
     count         = g_Task->timer - 1;
     g_Task->timer = count;

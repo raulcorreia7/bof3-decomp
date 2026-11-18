@@ -189,15 +189,15 @@ MATCH void func_801F7188(void) {
         SCENA16_D_80143C30 = 0u;
         g_AreaDrawFlags    = 0u;
         func_801F845C();
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 19));
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 20));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 19));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 20));
         sel_ptr   = &g_SndBGMId;
         selection = *sel_ptr;
 
         if (selection != 0xFFu) {
             selection_offset = selection << 2;
             /* The const byte view: dropping the cast moves this call's loads. */
-            SND_StopSequence(((const u8*)(g_SelectionCues))[selection_offset], ((const u8*)(g_SelectionCues))[selection_offset + 1u]);
+            SND_StopSequence(((const u8*)(g_SelectionSepSlots))[selection_offset], ((const u8*)(g_SelectionSepSlots))[selection_offset + 1u]);
             *sel_ptr = 0xFFu;
         }
 

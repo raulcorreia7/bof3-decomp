@@ -28,9 +28,9 @@ void        SND_StopAllSequences(void);
 /* func_8015D660 */
 bool        SND_TestEffectVoicesBusy(u8* out_index, u8* out_seq);
 /* func_8015D71C */
-extern void SND_QueueSelectionEffect(s32 cue_id);
+extern void SND_QueueSelectionSE(s32 se_id);
 /* func_8015D7C8 */
-void        SND_QueueCueVolume(s32 cue_id, s32 left_index, s32 right_index);
+void        SND_QueueSeVolume(s32 se_id, s32 left_index, s32 right_index);
 /* func_8015DF18 */
 void        SND_PlaySE(u16 se_id);
 /* func_80161808 */

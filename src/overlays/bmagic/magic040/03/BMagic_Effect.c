@@ -39,7 +39,7 @@ MATCH void func_801EEC80(void) {
         i++;
     } while (i < 16);
     g_GfxPalettePending = 1;
-    SND_QueueSelectionEffect(0x100);
+    SND_QueueSelectionSE(0x100);
 }
 
 MATCH void func_801EEDFC(void) {

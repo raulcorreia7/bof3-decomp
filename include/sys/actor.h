@@ -60,7 +60,7 @@
     g_Task->tint.bytes.rgb.b = 0
 
 /* `flags` bits. Bit 0 marks a row the update walks; bit 1 skips queuing the row's palette pair; bit 3 marks selection
- * voices queued on the row (@source: write:SND_QueueSelectionEffect@0x8015D71C, read:Area_AddActor@0x8014D4E0); bit 4 takes
+ * voices queued on the row (@source: write:SND_QueueSelectionSE@0x8015D71C, read:Area_AddActor@0x8014D4E0); bit 4 takes
  * the advance-stream tail after the step deltas; bit 5 makes the row's primitives semi-transparent; bit 6 hides the row
  * from the draw, walkability and entity-lookup paths; bit 7 marks a row culled outside the window. */
 typedef enum ActorFlags {
@@ -138,7 +138,7 @@ typedef union ActorTint {
 ASSERT_SIZE(ActorTint, 0x04);
 
 /* The word at +0x70: the scene flag-table byte alone, or the whole word. The word
- * packs voice numbers above the byte (SND_QueueSelectionEffect ORs them in,
+ * packs voice numbers above the byte (SND_QueueSelectionSE ORs them in,
  * Area_SelectSceneRecord masks and loads it); area code clears it or passes it
  * whole as the range mode of Game_GetPartySize. */
 typedef union ActorVoiceFlags {

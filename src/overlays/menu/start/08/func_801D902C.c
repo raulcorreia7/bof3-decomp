@@ -7,7 +7,7 @@ MATCH void func_801D902C(void) {
     timer = &D_80148654;
     if (TIMER_EXPIRED(*timer)) {
         g_BattleChoicePhase = 2;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 2));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
         *timer = 7;
         D_80148652++;
     }

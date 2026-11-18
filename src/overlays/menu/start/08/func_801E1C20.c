@@ -20,7 +20,7 @@ MATCH void func_801E1C20(void) {
     switch ((s8)*selection - 2) {
         case 0:
             if (g_InputPressed & PADLright) {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
                 option  = &D_80144950;
                 next    = *option + 1;
                 *option = next;
@@ -28,7 +28,7 @@ MATCH void func_801E1C20(void) {
                     *option = 0;
                 }
             } else if (g_InputPressed & PADLleft) {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
                 option  = &D_80144950;
                 next    = *option - 1;
                 *option = next;
@@ -39,7 +39,7 @@ MATCH void func_801E1C20(void) {
             break;
         case 1:
             if (g_InputPressed & PADLright) {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
                 option  = &g_WindowStyle;
                 next    = *option + 1;
                 *option = next;
@@ -47,7 +47,7 @@ MATCH void func_801E1C20(void) {
                     *option = 0;
                 }
             } else if (g_InputPressed & PADLleft) {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
                 option  = &g_WindowStyle;
                 next    = *option - 1;
                 *option = next;
@@ -58,7 +58,7 @@ MATCH void func_801E1C20(void) {
             break;
         case 2:
             if (g_InputPressed & PADLleft) {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
                 option  = &D_80144953;
                 next    = *option - 1;
                 *option = next;
@@ -66,7 +66,7 @@ MATCH void func_801E1C20(void) {
                     *option = 3;
                 }
             } else if (g_InputPressed & PADLright) {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
                 option  = &D_80144953;
                 next    = *option + 1;
                 *option = next;
@@ -77,7 +77,7 @@ MATCH void func_801E1C20(void) {
             break;
         case 3:
             if (g_InputPressed & (PADLright | PADLleft)) {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
                 option  = &g_SndMono_nv;
                 next    = *option ^ 1;
                 *option = next;
@@ -90,7 +90,7 @@ MATCH void func_801E1C20(void) {
             break;
         case 4:
             if (g_InputPressed & (PADLright | PADLleft)) {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
                 option  = &g_AutoRun;
                 next    = *option ^ 1;
                 *option = next;
@@ -98,7 +98,7 @@ MATCH void func_801E1C20(void) {
             break;
         case 5:
             if (g_InputPressed & (g_InputMasks[MENU_INPUT_CONFIRM] | PADLright | PADLleft)) {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
                 D_80148655 = 8;
                 D_80148652++;
                 return;
@@ -108,7 +108,7 @@ MATCH void func_801E1C20(void) {
     pad   = &g_InputPressed;
     input = INPUT_REPEATED(*pad, INPUT_DIRECTIONAL);
     if (input & PADLup) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
         D_80148654 = 0;
         D_80148655--;
         if ((s8)D_80148655 < 2) {
@@ -116,7 +116,7 @@ MATCH void func_801E1C20(void) {
             D_80148652--;
         }
     } else if (input & PADLdown) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
         D_80148654 = 0;
         D_80148655++;
         if ((s8)D_80148655 >= 8) {
@@ -124,7 +124,7 @@ MATCH void func_801E1C20(void) {
             D_80148652--;
         }
     } else if (*pad & (g_InputMasks[MENU_INPUT_CANCEL] | PADstart)) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         step       = &D_80148652;
         D_80148655 = 0;
         (*step)--;

@@ -164,9 +164,9 @@ MATCH void func_801EF420(void) {
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
         if (g_Task->unk_04 & 1) {
-            SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
+            SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x01));
         } else {
-            SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+            SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
         }
         g_Task->unk_04 = 0;
         for (i = 0; i < 8; i++) {

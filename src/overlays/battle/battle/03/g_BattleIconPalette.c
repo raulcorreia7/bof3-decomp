@@ -28,6 +28,6 @@ BattleEventSteps g_BattleEvents = {
 };
 
 /* D_801D0C98 */
-u8 s_BattleCueIds[8] = {
+u8 s_BattleSeIds[8] = {
     0x00, 0x01, 0x02, 0x03, 0x04, 0x00, 0x00, 0x00,
 };

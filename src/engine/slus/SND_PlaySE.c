@@ -1,15 +1,15 @@
 #include "engine/slus/slus.h"
 
-/* dispatches a cue's bank and record, updates interpolated channel
+/* dispatches an SE's bank and record, updates interpolated channel
  * values, and keys the requested SPU voices.
  */
 MATCH void SND_PlaySE(u16 se_id) {
     s32 scaled;
     s32 next;
 
-    D_8018B408 = EMI_CUE_ID_BANK(se_id);
-    D_8018B404 = EMI_CUE_ID_INDEX(se_id);
-    ((void (*)(void))g_SndCueReaders[EMI_CUE_ID_BANK(se_id)])();
+    D_8018B408 = EMI_SE_ID_BANK(se_id);
+    D_8018B404 = EMI_SE_ID_INDEX(se_id);
+    ((void (*)(void))g_SndSeReaders[EMI_SE_ID_BANK(se_id)])();
 
     if (D_8018B3F4 == 0x80) {
         switch (D_8018B3E4) {
@@ -118,7 +118,7 @@ MATCH void SND_PlaySE(u16 se_id) {
             goto queue_standard23;
         }
         if (D_8018B3EC > D_8018B3E8) {
-            goto queue_array_guard; /* once per active cue */
+            goto queue_array_guard; /* once per active SE */
         }
         switch (D_8018B3E4) {
             case 3:
@@ -154,7 +154,7 @@ queue_special0:
     if (D_8018B3F4 == 0x80) {
         SsUtSetDetVVol(D_8018B31C, D_8018B3DC, D_8018B3DC);
     }
-    goto queue_update; /* shared active-cue update */
+    goto queue_update; /* shared active-SE update */
 
 queue_array_guard:
     if (g_SndVoiceStatus[D_8018B3F0] != 0) {

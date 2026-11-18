@@ -21,7 +21,7 @@ MATCH void func_8019DFB4(void) {
     world_id = g_GameAreaId;
     index    = 8;
 loop_1: /* scan the world-id table down from index 8 */
-    if (s_AreaCueIds[index] != world_id) {
+    if (s_AreaSeIds[index] != world_id) {
         index -= 1;
         if (index >= 0) {
             goto loop_1; /* keep scanning while the id does not match */

@@ -11,7 +11,7 @@ MATCH void func_801F40CC(void) {
     state = &D_801F58C3;
     index = state[0];
     if (D_801F58CA < 0x1F5) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 1));
         if (D_801F5890[index][2] != 0) {
             g_Task = &g_Actors[D_801F58D1];
             Actor_RequestScript(D_801F5890[index][2]);
@@ -39,7 +39,7 @@ MATCH void func_801F40CC(void) {
             Actor_RequestScript(D_801F5890[index][step]);
             g_Task->unk_2A = 0;
         }
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 1));
         result = 2;
     }
     D_801F58C0 = result;

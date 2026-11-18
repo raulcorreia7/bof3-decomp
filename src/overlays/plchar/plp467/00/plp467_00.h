@@ -11,7 +11,7 @@
 #define CHAR_CELL_PROBE              func_801CEE44
 #define CHAR_PERSONAL_ACTION_HAS_CUE 1
 
-/* The cue id multiplier of this image's rare spawn cue. */
+/* The SE id multiplier of this image's rare spawn cue. */
 #define CHAR_SPAWN_CUE_SCALE         20
 
 /* The tail callback table's entry count in this image. */

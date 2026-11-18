@@ -22,7 +22,7 @@ MATCH void Battle_SelectItemPartyTarget(void) {
         if ((Item_GetFlags(g_MenuPanelTasks[16].unk_0A, D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C]) & ITEM_USABLE_MENU) != 0u) {
             g_BattleActorTurn->command.target = Battle_TargetNext(3);
             *(u8*)&g_Battle.ui_mode -= 1u;
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
             return;
         }
     }
@@ -32,7 +32,7 @@ MATCH void Battle_SelectItemPartyTarget(void) {
         } else {
             g_BattleActorTurn->command.target = Battle_TargetNext(func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(+1)) & BYTE_MASK);
         }
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
     if ((trigger & PADLleft) != 0) {
         if ((func_8009AF7C() & BYTE_MASK) != 0u) {
@@ -40,6 +40,6 @@ MATCH void Battle_SelectItemPartyTarget(void) {
         } else {
             g_BattleActorTurn->command.target = Battle_TargetPrev(func_801DD7D8(g_Battle.party_count - 1, 0, ACTOR_TARGET_STEP(-1)) & BYTE_MASK);
         }
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
 }

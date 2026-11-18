@@ -7,7 +7,7 @@ MATCH void func_801D4970(void) {
     counter = &D_80148654;
     count   = *counter;
     if (count == 4) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 2));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
     }
     MENU_DRAW_HEADER();
     SAVE_DrawPortTabs(98 - *counter * 48, 76, D_801E60F8, g_SaveCardPort, 1);

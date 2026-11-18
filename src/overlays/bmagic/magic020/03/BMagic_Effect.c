@@ -8,7 +8,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/bmagic/Effect_CopyActiveBattlerToSlot.h"
 
 /* Start the magic020 effect: four copies of the caster in mode 1 (arg 4 down to 1), one more
- * in mode 0, then the caster sprite cell, and Battle_PlayActiveBattlerCue(2, 0) for a party caster. */
+ * in mode 0, then the caster sprite cell, and Battle_PlayActiveBattlerSE(2, 0) for a party caster. */
 MATCH void func_801EECC0(void) {
     u32 index;
     s32 i;
@@ -42,7 +42,7 @@ MATCH void func_801EECC0(void) {
     g_Task->unk_24                                  = g_BattleEffectBattler->unk_24;
     Battle_SetCellPaletteStp(g_Task);
     if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
-        Battle_PlayActiveBattlerCue(2, 0);
+        Battle_PlayActiveBattlerSE(2, 0);
     }
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
 }
@@ -58,7 +58,7 @@ MATCH void func_801EF0F8(void) {
         count          = g_Task->unk_09 + 4;
         g_Task->unk_09 = count;
         if (count == 16) {
-            SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
+            SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
             g_Task->param.unk_0B = 0;
             g_Task->header.mode += 1;
             for (i = 0; i < 8; i++) {

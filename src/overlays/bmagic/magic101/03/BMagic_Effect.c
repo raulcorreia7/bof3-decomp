@@ -46,7 +46,7 @@ MATCH void func_801EECCC(void) {
         g_Task->param.unk_0B += 1;
         counter += 1;
     } while (counter < 0x10);
-    SND_QueueSelectionEffect(0x100);
+    SND_QueueSelectionSE(0x100);
 }
 
 MATCH void func_801EEE68(void) {
@@ -174,7 +174,7 @@ MATCH void func_801EF580(void) {
         return;
     }
     if (g_Task->unk_04 == 0) {
-        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
     effectForFacing               = g_Task;
     effectForFacing->param.unk_0B = D_801EFCE0[effectForFacing->facing];

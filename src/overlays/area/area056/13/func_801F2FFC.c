@@ -14,6 +14,6 @@ MATCH void func_801F2FFC(void) {
         SYS_SetFlag(D_80144EA0, 14);
     }
     if (g_MessageChoice != 2) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x08));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x08));
     }
 }

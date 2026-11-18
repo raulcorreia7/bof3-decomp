@@ -22,17 +22,17 @@ MATCH void func_801D10AC(u32 message_id) {
         if (g_MenuMasterBannerLock != 0) {
             handler = g_MenuMasterSubStep - 1;
         } else {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 2));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
             handler = g_MenuMasterSubStep + 1;
         }
         g_MenuMasterSubStep = handler;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
     } else if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
         g_MenuMasterBannerLock = 1;
         g_MenuMasterSubStep    = g_MenuMasterSubStep - 1;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
     } else if (trig & HALF_MASK) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
         g_MenuMasterBannerLock ^= 1;
     }
 

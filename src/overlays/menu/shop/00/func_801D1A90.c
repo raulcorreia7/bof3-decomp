@@ -37,7 +37,7 @@ NON_MATCHING void func_801D1A90(void) {
         g_ShopItemCount = g_ShopItemCountMax;
     }
     if (cursor != g_ShopItemCount) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     if (buttons & PADLdown) {
         g_ShopItemCount -= 0xA;
@@ -51,18 +51,18 @@ NON_MATCHING void func_801D1A90(void) {
         g_ShopItemCount = g_ShopItemCountMax;
     }
     if (cursor != g_ShopItemCount) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (g_ShopItemCount != 0) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
             D_8014865B = 1;
             g_MenuStep.state += 1;
         } else {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
         }
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         (*(s8*)&g_MenuStep.state)--;
     }
 }

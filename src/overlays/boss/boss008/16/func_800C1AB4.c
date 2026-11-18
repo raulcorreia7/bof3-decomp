@@ -11,7 +11,7 @@ MATCH void func_800C1AB4(void) {
         spad          = g_Task;
         spad->scale.x = 0x10000;
         spad->scale.y = 0x10000;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_ENEMY, 2));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_ENEMY, 2));
         g_Task->unk_04++;
     } else {
         work->unk_09 += 4;

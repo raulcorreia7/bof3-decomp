@@ -74,7 +74,7 @@ MATCH void func_801EF328(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        Battle_PlayActiveBattlerCue(0, 4);
+        Battle_PlayActiveBattlerSE(0, 4);
         g_Task->header.step = g_Task->header.step + 1;
     }
 }

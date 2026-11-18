@@ -2,7 +2,7 @@
 
 /* func_80097C0C */
 MATCH void Battle_ResetSelectionLatch(void) {
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
     g_Battle.selection_latch        = 0;
     g_BattleActorTurn->command.type = BATTLE_COMMAND_ABILITY;
     g_BattleMessageSlot[1]          = 2;

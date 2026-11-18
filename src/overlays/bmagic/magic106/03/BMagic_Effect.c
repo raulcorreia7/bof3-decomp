@@ -58,8 +58,8 @@ MATCH void func_801EECE4(void) {
         D_801EF9F8[row + 8]   = 0x40 - growth;
         g_Task->param.unk_0B += 1;
     }
-    SND_QueueSelectionEffect(0x100);
-    SND_QueueSelectionEffect(0x101);
+    SND_QueueSelectionSE(0x100);
+    SND_QueueSelectionSE(0x101);
 }
 
 #include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"

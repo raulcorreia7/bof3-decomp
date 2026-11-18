@@ -71,21 +71,21 @@ MATCH void func_801D1244(void) {
     }
     cursor = &g_MenuPanelTasks[0].unk_0B;
     if (old_cursor != *cursor) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     if ((s16)g_MenuPanelTasks[0].u.addr.unk_10 == 0) {
         pad = g_InputPressed;
         if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
             if (g_MenuPanelTasks[0].flags != 0) {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
                 Menu_ApplyEquipment();
                 *cursor = GAME_NONE;
                 g_MenuStep.state -= 1;
             } else {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
             }
         } else if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
             *cursor = GAME_NONE;
             g_MenuStep.state -= 1;
         }

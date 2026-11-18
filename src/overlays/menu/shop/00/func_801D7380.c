@@ -7,7 +7,7 @@ MATCH void func_801D7380(void) {
 
     timer = &D_80148654;
     if (*timer == 6) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 2));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
     }
     func_801D8050(1);
     func_801D7E1C(D_80148656, (*timer << 5) + 0x98, 63, 0, 0xFF);

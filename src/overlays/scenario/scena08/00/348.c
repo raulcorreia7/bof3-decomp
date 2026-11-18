@@ -41,7 +41,7 @@ MATCH void func_801F707C(void) {
 MATCH void func_801F70C0(void) {
     u8 i;
 
-    SCENA08_SPARKLE_START(i, EMI_CUE_ID(SND_BANK_AREA, 0x08));
+    SCENA08_SPARKLE_START(i, EMI_SE_ID(SND_BANK_AREA, 0x08));
 }
 
 MATCH void func_801F7164(void) {
@@ -69,7 +69,7 @@ MATCH void func_801F7268(void) {
         g_Task->unk_2C -= 1;
     }
     if (g_Task->unk_5A == 2) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x0C));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x0C));
     }
     timer          = g_Task->unk_5A - 1;
     g_Task->unk_5A = timer;
@@ -90,7 +90,7 @@ MATCH void func_801F7320(void) {
     timer          = g_Task->unk_5A - 1;
     g_Task->unk_5A = timer;
     if (timer == 0) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 9));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 9));
         g_Task->unk_5A = 20;
         g_Task->header.mode++;
     }
@@ -105,7 +105,7 @@ MATCH void func_801F73D4(void) {
 MATCH void func_801F743C(void) {
     u8 i;
 
-    SCENA08_SPARKLE_START(i, EMI_CUE_ID(SND_BANK_AREA, 0x02));
+    SCENA08_SPARKLE_START(i, EMI_SE_ID(SND_BANK_AREA, 0x02));
 }
 
 MATCH void func_801F74E0(void) {
@@ -218,7 +218,7 @@ MATCH void func_801F79EC(void) {
     FallingSpark* spark;
 
     if (g_Task->unk_5A == 4) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x01));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x01));
     }
     if ((g_Task->unk_5A & 0x7) == 0) {
         spark = func_801F8B14();
@@ -251,7 +251,7 @@ MATCH void func_801F7B2C(void) {
     g_Task->pos.z = Area_SampleHeight(g_Task->pos.x.fixed, 4587520) << 16;
     g_Task->timer = 32;
     g_Task->header.step += 1;
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x02));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x02));
 }
 
 MATCH void func_801F7BA8(void) {
@@ -275,7 +275,7 @@ MATCH void func_801F7C08(void) {
         g_Task->pos.z = Area_SampleHeight(g_Task->pos.x.fixed, 7733248) << 16;
         g_Task->timer = 32;
         g_Task->header.step += 1;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x02));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x02));
     }
 }
 
@@ -780,8 +780,8 @@ MATCH void func_801F98E0(void) {
         g_Task->pos.z = 0x2C00000;
         g_Task->vz    = 8388608;
         g_Task->header.mode += 1;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x02));
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x03));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x02));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x03));
     }
 }
 
@@ -793,8 +793,8 @@ MATCH void func_801F995C(void) {
     if (g_Task->pos.x.fixed == 0x490000) {
         setVector(g_Task, 14563, 65536, 12116878);
         g_Task->header.mode += 1;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 2));
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 2));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
     }
 }
 
@@ -817,8 +817,8 @@ MATCH void func_801F9AC0(void) {
         g_Task->pos.z = Area_SampleHeight(g_Task->pos.x.fixed, 4915200) << 16;
         setVector(g_Task, 0xFFFF4925, 0xFFFF0000, 4993220);
         g_Task->header.mode += 1;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x02));
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x03));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x02));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x03));
     }
 }
 
@@ -842,8 +842,8 @@ MATCH void func_801F9C00(void) {
     work->pos.z.fixed = TO_COORD(2048);
     work->vz          = 0;
     work->header.mode += 1;
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 4));
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 5));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 4));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 5));
 }
 
 MATCH void func_801F9C58(void) {
@@ -865,7 +865,7 @@ MATCH void func_801F9CE0(void) {
     work->pos.z.fixed = TO_COORD(1536);
     work->vz          = 0;
     work->header.mode += 1;
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 10));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 10));
 }
 
 MATCH void func_801F9D30(void) {

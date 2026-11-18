@@ -16,7 +16,7 @@ MATCH void func_801F3188(void) {
         g_SpawnedActors[index].unk_06       = 0;
         g_SpawnedActors[index].unk_29       = 6;
 
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 2));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 2));
 
         if (g_GameAreaId == AREA_ID_BEFORE_MOUNT_GLAUS_BEFORE_NUE) {
             SYS_SetFlag(g_SceneEventFlags, 0x20);

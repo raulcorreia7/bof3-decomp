@@ -32,7 +32,7 @@ MATCH void func_801EEC84(void) {
         i++;
     } while (i < AREA_PALETTE_COLORS);
     g_GfxPalettePending = 1;
-    SND_QueueSelectionEffect(0x100);
+    SND_QueueSelectionSE(0x100);
 }
 
 MATCH void func_801EEDD8(void) {

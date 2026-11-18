@@ -42,7 +42,7 @@ MATCH void func_801DC248(void) {
         }
         SND_StopSequence(0, 1);
         SND_PlayBGM(0x28, 0x64, 8);
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
     }
     Actor_StepAnimLoop();
 }

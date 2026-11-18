@@ -134,7 +134,7 @@ MATCH void func_801EF1F0(void) {
         g_Task->unk_0C = 0x3000;
         g_Task->unk_10 = 0;
         Effect_RotatePosition(g_Task);
-        SND_QueueSelectionEffect(0x100);
+        SND_QueueSelectionSE(0x100);
         g_Task->header.step += 1;
     }
 }
@@ -151,7 +151,7 @@ MATCH void func_801EF36C(void) {
     if (count == limit) {
         if (--g_Task->timer == 0) {
             Battle_MarkDamaged(g_Battle.target_selector);
-            SND_QueueSelectionEffect(0x201);
+            SND_QueueSelectionSE(0x201);
             g_BattleEffectBattler->param.unk_0B -= 1;
             g_Task->header.step += 1;
         } else {

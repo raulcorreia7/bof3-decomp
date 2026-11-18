@@ -19,7 +19,7 @@ MATCH void func_801F3E18(void) {
     }
     if (found) {
         if (g_GameStateIndex == 0) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 2));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 2));
         }
         g_Task->header.step += 1;
     }

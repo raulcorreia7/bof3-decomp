@@ -29,7 +29,7 @@ MATCH void func_801EED2C(void) {
         g_Task        = saved;
         saved->unk_09 = 0x78;
         g_Task->header.mode++;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
     }
     g_Task = saved;
 }
@@ -44,7 +44,7 @@ MATCH void func_801EEDB0(void) {
     if (timer == 0) {
         g_Task->header.mode = g_Task->header.mode + 1;
         func_800A9820(g_Battle.target_selector);
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x01));
     }
 }
 

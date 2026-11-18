@@ -3,7 +3,7 @@
 MATCH void func_801F36A0(void) {
     if (SYS_TestFlag(g_SceneEventFlags, 90) != 0) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x08));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x08));
         }
         (g_Task)->header.step += 1;
     }

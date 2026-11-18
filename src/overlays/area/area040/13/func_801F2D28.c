@@ -5,6 +5,6 @@ MATCH void func_801F2D28(void) {
     if (MENU_SELECTION_IDLE()) {
         SYS_SetFlag(D_80144EA8, 11);
         func_801F2E78();
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
     }
 }

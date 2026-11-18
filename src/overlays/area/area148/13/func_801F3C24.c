@@ -86,7 +86,7 @@ MATCH void func_801F3C24(void) {
             break;
         case 20:
             SYS_ToggleFlag(g_SceneEventFlags, 106);
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 4));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 4));
             if (SYS_TestFlag(g_SceneEventFlags, 106)) {
                 Area_ApplyPaletteTint(0, 0x380, -6, -4, -4);
             } else {

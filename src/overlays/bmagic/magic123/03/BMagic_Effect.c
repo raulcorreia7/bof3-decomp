@@ -81,7 +81,7 @@ MATCH void func_801EEDAC(void) {
         BMAGIC_EFFECT_SLOTS[slot].target.party = owner;
         g_Task->param.unk_0B++;
     }
-    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
     Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
     g_Task->unk_09 = 0;
     g_Task->header.mode++;
@@ -135,9 +135,9 @@ MATCH void func_801EF28C(void) {
     if (--g_Task->unk_09 == 0) {
         if (g_FrameCount & 1) {
             if (g_Task->header.mode & 1) {
-                SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+                SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
             } else {
-                SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x01));
+                SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x01));
             }
         }
         g_Task->param.unk_0B = 0;

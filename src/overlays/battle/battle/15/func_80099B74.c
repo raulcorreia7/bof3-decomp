@@ -35,7 +35,7 @@ NON_MATCHING void func_80099B74(void) {
     pad                                                        = INPUT_REPEATED(*pad_state, (PADLup | PADLdown));
     keys                                                       = *pad_state;
     if (keys & g_InputMasks[BATTLE_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         g_BattlePanelMode   = 1;
         g_BattleChoicePhase = 3;
         D_80148624          = 0;
@@ -47,7 +47,7 @@ NON_MATCHING void func_80099B74(void) {
     }
     if (keys & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
         if (g_BattleTargetCursorCol != 0) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
             slot                                                                                  = FIELD(u8, g_BattleMessageSlot, 0x5u);
             g_Game.members[slot].u.turn.damage_flags.volatile_value                               = g_Game.members[slot].u.turn.damage_flags.volatile_value | BATTLER_DAMAGE_UNK_14;
             *(u16*)((u8*)D_80145FAA + FIELD(u8, g_BattleMessageSlot, 0x5u) * BATTLE_PARTY_STRIDE) = (u16)g_BattleTargetCursorCol;
@@ -62,11 +62,11 @@ NON_MATCHING void func_80099B74(void) {
             D_801483C0                                                                            = 1;
             g_Battle.ui_step                                                                      = 7;
         } else {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
         }
     }
     if ((pad & PADLup) != 0) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
         row_p  = &g_BattleItemRow;
         prev   = *row_p - 1;
         *row_p = prev;
@@ -75,7 +75,7 @@ NON_MATCHING void func_80099B74(void) {
         }
     }
     if ((pad & PADLdown) != 0) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
         row_p  = &g_BattleItemRow;
         next   = *row_p + 1;
         *row_p = next;

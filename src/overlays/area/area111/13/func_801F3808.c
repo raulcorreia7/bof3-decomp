@@ -26,7 +26,7 @@ NON_MATCHING void func_801F3808(void) {
     } else {
         D_801F5C18[y][x / 2] |= index << 4;
     }
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 4));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 4));
 }
 #else
 INCLUDE_ASM(func_801F3808);

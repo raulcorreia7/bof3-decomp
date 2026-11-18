@@ -8,7 +8,7 @@ MATCH void func_800C1950(void) {
     timer                          = ((PartyMember*)g_Task)->unk_09 - 1;
     ((PartyMember*)g_Task)->unk_09 = timer;
     if (!timer) {
-        Battle_PlayEnemyCue(*g_BattleCurrentEnemy->unk_E8);
+        Battle_PlayEnemySE(*g_BattleCurrentEnemy->unk_E8);
     }
     if (func_801E30F8() != 0) {
         index                               = Battle_AllocEffect(3, 2) & BYTE_MASK;

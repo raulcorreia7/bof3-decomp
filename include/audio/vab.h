@@ -2,14 +2,14 @@
 #define AUDIO_VAB_H
 
 /* A VAB bank: one instrument bank loaded from an EMI type-6 header and type-7
- * body. It is the sample side of the audio path: the type-8 cue table
- * (audio/cue.h) names tones in it, and the SEP packages drive the music. The
+ * body. It is the sample side of the audio path: the type-8 SE table
+ * (audio/se.h) names tones in it, and the SEP packages drive the music. The
  * bank holds up to 128 program records, each with 16 tone slots, and a live
  * slot names a sample in the body. The records themselves are the PsyQ SDK's:
  * `VabHdr` (32 bytes), `ProgAtr` (16 bytes) and `VagAtr` (32 bytes) from the
  * staged PsyQ 3.7 `libsnd.h`. This header owns the bank's layout around them and
  * the name mapping the specs use (@source: wiki:formats/audio#vab-bank). The main executable's
- * SsVabOpenHeadWithMode (0x80173CB0) reads the bank, and the seven cue readers
+ * SsVabOpenHeadWithMode (0x80173CB0) reads the bank, and the seven SE readers
  * index its tone table. */
 
 #include "types.h"

@@ -43,7 +43,7 @@ MATCH void func_801A96E4(ScriptState* state, u8* base) {
             state->cursor += 4;
             break;
         case 0xBC:
-            SND_QueueCueVolume(*(base + state->cursor + 2) | (*(base + state->cursor + 1) << 8), *(base + state->cursor + 3), *(base + state->cursor + 4));
+            SND_QueueSeVolume(*(base + state->cursor + 2) | (*(base + state->cursor + 1) << 8), *(base + state->cursor + 3), *(base + state->cursor + 4));
             state->cursor += 4;
             break;
         case 0xBD:

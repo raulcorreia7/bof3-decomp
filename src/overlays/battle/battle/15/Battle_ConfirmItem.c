@@ -5,7 +5,7 @@ MATCH void Battle_ConfirmItem(void) {
     u8* cursor;
     u8* group;
 
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
     cursor                          = &g_MenuPanelTasks[16].unk_0C;
     group                           = cursor - 2;
     g_Battle.selection_latch        = 0u;

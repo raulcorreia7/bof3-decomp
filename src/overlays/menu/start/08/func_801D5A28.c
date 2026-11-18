@@ -21,13 +21,13 @@ MATCH void func_801D5A28(void) {
     task->flags  = 1;
     task->unk_0B = 0xFF;
     if (buttons & PADLdown) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         *group += 1;
         if (*group >= EQUIP_SLOT_COUNT) {
             *group = 0;
         }
     } else if (buttons & PADLup) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         *group -= 1;
         if ((s8)*group < 0) {
             *group = 5;
@@ -35,13 +35,13 @@ MATCH void func_801D5A28(void) {
     }
     count = Party_CountOrder(PARTY_ORDER_FIELD);
     if (buttons & PADLleft) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         task->unk_0C -= 1;
         if ((s8)task->unk_0C < 0) {
             task->unk_0C = count - 1;
         }
     } else if (buttons & PADLright) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         task->unk_0C += 1;
         if ((s8)count - 1 < task->unk_0C) {
             task->unk_0C = 0;
@@ -82,7 +82,7 @@ MATCH void func_801D5A28(void) {
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         u8* step;
 
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
         D_80148533 = s_SkillOrderKinds[D_80148510][D_8014850E];
         step       = &D_80148651;
         D_8014850F = D_8014850E;
@@ -91,18 +91,18 @@ MATCH void func_801D5A28(void) {
     }
     if (g_InputPressed & PADRleft) {
         if (task->unk_0A != 0 && *choice != 0) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
             Item_Add(group_index, *choice, 1, 0);
             *choice = 0;
             Char_RebuildStats(record);
         } else {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
         }
         return;
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 2));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
         D_8014852B   = 3;
         /* Byte constraint: the three stores below use the absolute cells. */
         task         = &g_MenuPanelTasks[MENU_START_PANEL_ITEMS];

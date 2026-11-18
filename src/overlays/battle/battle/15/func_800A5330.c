@@ -50,7 +50,7 @@ NON_MATCHING void func_800A5330(void) {
             g_Battle.ui_mode     = 0;
             g_Battle.row_cursor &= 0x7F;
         }
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         return;
     }
 
@@ -58,7 +58,7 @@ NON_MATCHING void func_800A5330(void) {
         if (g_Battle.cursor.gene.row != -1) {
             cell = &D_800B7070[g_Battle.cursor.gene.row][g_Battle.cursor.gene.column];
             if (*cell == 0) {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
                 return;
             }
             if (g_Battle.gene_count < GENE_PICK_MAX) {
@@ -66,18 +66,18 @@ NON_MATCHING void func_800A5330(void) {
                 g_Battle.genes[g_Battle.gene_count] = g_Battle.cursor.gene.row * GENE_GRID_COLUMNS + g_Battle.cursor.gene.column;
                 g_Battle.gene_count++;
                 Battle_SetGeneCount();
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
                 if (g_Battle.gene_count == GENE_PICK_MAX) {
                     g_Battle.cursor.gene.row = -1;
                 }
             } else {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
             }
         } else if (g_Battle.gene_count != 0 && BATTLE_ACTIVE_ROW->chr.ap >= D_801463B8[0]) {
             g_Battle.ui_mode += 1;
             return;
         } else {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
         }
     }
 
@@ -101,20 +101,20 @@ NON_MATCHING void func_800A5330(void) {
 
     buttons = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
     if ((buttons & PADLup) && g_Battle.cursor.gene.row >= 0) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         g_Battle.cursor.gene.row--;
     }
     if ((buttons & PADLdown) && g_Battle.cursor.gene.row < GENE_GRID_ROWS - 1) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         g_Battle.cursor.gene.row++;
     }
     if (g_Battle.cursor.gene.row != -1) {
         if ((buttons & PADLright) && g_Battle.cursor.gene.column < GENE_GRID_COLUMNS - 1) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
             g_Battle.cursor.gene.column++;
         }
         if ((buttons & PADLleft) && g_Battle.cursor.gene.column != 0) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
             g_Battle.cursor.gene.column--;
         }
     }

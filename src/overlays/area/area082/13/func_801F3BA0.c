@@ -22,7 +22,7 @@ MATCH void func_801F3BA0(void) {
     task->vx                = 0;
     task->param.unk_0B      = 2;
     ((Actor*)g_Task)->timer = 0;
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 4));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 4));
     ((Actor*)g_Task)->header.step++;
     func_801F4430();
 }

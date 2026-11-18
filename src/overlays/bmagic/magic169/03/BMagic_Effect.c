@@ -40,7 +40,7 @@ MATCH void func_801EED8C(void) {
     BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
     MEM(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)) = MEM(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
     g_GfxPalettePending                                          = 1;
-    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
     g_Task->unk_09       = 0;
     g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
@@ -177,11 +177,11 @@ MATCH void func_801EF4FC(void) {
     g_PaletteFades[g_Task->timer].offset.g++;
     g_PaletteFades[g_Task->timer].offset.b++;
     if (--g_Task->unk_09 == 0) {
-        cue = EMI_CUE_ID(SND_BANK_COMMON, 0x02);
+        cue = EMI_SE_ID(SND_BANK_COMMON, 0x02);
         if (g_Task->unk_04 & 0x1) {
-            cue = EMI_CUE_ID(SND_BANK_COMMON, 0x01);
+            cue = EMI_SE_ID(SND_BANK_COMMON, 0x01);
         }
-        SND_QueueSelectionEffect(cue);
+        SND_QueueSelectionSE(cue);
         g_Task->header.step++;
     }
 }

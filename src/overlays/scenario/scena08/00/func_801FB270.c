@@ -58,7 +58,7 @@ NON_MATCHING void func_801FB270(void) {
             }
             g_ScenarioState.timer_06 = 0x20;
             g_ScenarioState.step_05  = 4;
-            SND_StartDecrescendo(g_SelectionCues[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4], 0x64, 0x20);
+            SND_StartDecrescendo(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4], 0x64, 0x20);
             break;
         case 4:
             if (g_ScenarioState.timer_06-- != 0) {
@@ -66,7 +66,7 @@ NON_MATCHING void func_801FB270(void) {
             }
             g_ScriptVars[0]++;
             func_801BFE34(0x1C8000, 0x418000, 0x20);
-            SND_StopSequence(g_SelectionCues[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4]);
+            SND_StopSequence(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4]);
             g_ScenarioState.step_05 = 5;
             break;
         case 5:
@@ -89,7 +89,7 @@ NON_MATCHING void func_801FB270(void) {
             }
             break;
         case 8:
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x0A));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x0A));
             g_ScenarioState.step_05 = 9;
             break;
         case 9:
@@ -115,7 +115,7 @@ NON_MATCHING void func_801FB270(void) {
             }
             g_AreaDrawFlags = 0x1F;
             SND_ResumeBGM(0x6C);
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x0B));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x0B));
             g_ScriptVars[0]++;
             g_ScenarioState.step_05 = 12;
             break;

@@ -31,7 +31,7 @@ MATCH void func_801EED5C(void) {
     g_BattleEffects[index & BYTE_MASK].step_index   = 31;
     g_BattleEffects[index & BYTE_MASK].target.party = work;
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
-    SND_QueueSelectionEffect(0x100);
+    SND_QueueSelectionSE(0x100);
 }
 
 MATCH void func_801EEF6C(void) {
@@ -354,14 +354,14 @@ MATCH void func_801F03FC(void) {
     g_Task->unk_09 = counter;
     if (!(counter & BYTE_MASK)) {
         Battle_MarkDamaged(g_Battle.target_selector);
-        Battle_PlayActiveBattlerCue(2, 4);
+        Battle_PlayActiveBattlerSE(2, 4);
         g_Task->header.step += 1;
     }
 }
 
 MATCH void func_801F047C(void) {
     if (Actor_StepAnimOnce() & BYTE_MASK) {
-        SND_QueueSelectionEffect(0x101);
+        SND_QueueSelectionSE(0x101);
         g_Task->unk_09 = 0xF;
         g_Task->header.step += 1;
     }
@@ -416,7 +416,7 @@ NON_MATCHING void func_801F05FC(void) {
     work->scale.x     = 0x18000;
     work->scale.y     = 0x28000;
     g_Task->unk_27    = g_BattleEffectBattler->unk_27;
-    SND_QueueSelectionEffect(0x100);
+    SND_QueueSelectionSE(0x100);
     g_Task->unk_09 = 0x20;
     g_Task->header.step += 1;
 }
@@ -446,7 +446,7 @@ MATCH void func_801F07D4(void) {
     g_Task->unk_09 = counter;
     if (!(counter & BYTE_MASK)) {
         Battle_MarkDamaged(g_Battle.target_selector);
-        Battle_PlayActiveBattlerCue(2, 4);
+        Battle_PlayActiveBattlerSE(2, 4);
         g_Task->unk_09 = 0x20;
         g_Task->header.step += 1;
     }
@@ -454,7 +454,7 @@ MATCH void func_801F07D4(void) {
 
 MATCH void func_801F0864(void) {
     if (Actor_StepAnimOnce() & BYTE_MASK) {
-        SND_QueueSelectionEffect(0x101);
+        SND_QueueSelectionSE(0x101);
         g_Task->unk_09 = 0x20;
         g_Task->header.step += 1;
     }
@@ -494,10 +494,10 @@ MATCH void func_801F0A20(void) {
     g_Task->unk_09 = value;
     if (!(value & BYTE_MASK)) {
         Actor_StepAnimOnce();
-        Battle_PlayActiveBattlerCue(2, 4);
+        Battle_PlayActiveBattlerSE(2, 4);
         g_Task->header.step += 1;
     } else if (Actor_StepAnimOnce() & BYTE_MASK) {
-        Battle_PlayActiveBattlerCue(2, 4);
+        Battle_PlayActiveBattlerSE(2, 4);
         g_Task->unk_09 = 0;
         g_Task->header.step += 1;
     }
@@ -587,7 +587,7 @@ MATCH void func_801F1090(void) {
         g_Task->unk_09      = value;
         if (!(value & BYTE_MASK)) {
             if (g_Task->param.unk_0B == 0) {
-                Battle_PlayActiveBattlerCue(2, 4);
+                Battle_PlayActiveBattlerSE(2, 4);
                 Battle_MarkDamaged(g_BattleTargetSelector);
             }
             g_Task->header.step += 1;
@@ -637,7 +637,7 @@ MATCH void func_801F1384(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        Battle_PlayActiveBattlerCue(2, 0);
+        Battle_PlayActiveBattlerSE(2, 0);
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Task->header.step += 1;
     }
@@ -685,7 +685,7 @@ MATCH void func_801F1804(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        Battle_PlayActiveBattlerCue(2, 0);
+        Battle_PlayActiveBattlerSE(2, 0);
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Task->header.step += 1;
     }

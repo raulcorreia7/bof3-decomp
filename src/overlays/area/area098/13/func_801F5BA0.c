@@ -15,5 +15,5 @@ MATCH void func_801F5BA0(void) {
     g_SpawnedActors[g_Task->param.actor_slot].unk_07       = 0;
     g_SpawnedActors[g_Task->param.actor_slot].unk_29       = 2;
     g_SpawnedActors[g_Task->param.actor_slot].layer        = 1;
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 6));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 6));
 }

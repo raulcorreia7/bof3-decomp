@@ -209,7 +209,7 @@ extern Callback           D_801C8154[4];
 extern Callback           D_801C8164[6];
 extern Callback           D_801C817C[4];
 /* D_801C818C */
-extern u8                 s_AreaCueIds[12];
+extern u8                 s_AreaSeIds[12];
 extern Callback           D_801C8198[2];
 extern Callback           D_801C81A0[4];
 extern Callback           D_801C81B0[2];
@@ -347,7 +347,7 @@ extern s32                D_801CD954;
 /* Selects a route direction away from the work record's current direction:
  * returns -1 when the current index lies in the selector's four-step span,
  * otherwise 1. */
-/* Awards the proximity reward: sound cue, area request, owned money. */
+/* Awards the proximity reward: sound SE, area request, owned money. */
 /* Returns a field record slot holding a body near (pos_x, pos_y), or -1. */
 
 #endif

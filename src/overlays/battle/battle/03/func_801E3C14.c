@@ -81,11 +81,11 @@ MATCH void func_801E3C14(void) {
             }
             g_BattleCurrentEnemy->status = STATUS_KO;
         } else if (BATTLE_IS_SCRIPTED()) {
-            Battle_PlayEnemyCue(tail_work->unk_E8[2]);
+            Battle_PlayEnemySE(tail_work->unk_E8[2]);
         }
     }
     if (g_BattleCurrentEnemy->turn.hp_change < 0 || g_BattleCurrentEnemy->turn.ap_change < 0) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 6));
     }
     if (!(g_Battle.flags & BATTLE_STATE_DAMAGE_APPLIED)) {
         action_type = g_BattleActionType_nv;

@@ -1,7 +1,7 @@
 #include "area030_04.h"
 
 /* Reacts to the confirm/cancel pad bits for the AREA030 prompt: the
- * confirm path clears the pending flag, queues cue 0x200, raises both sprite
+ * confirm path clears the pending flag, queues SE 0x200, raises both sprite
  * bytes, retires the panel and steps the work state to 2 with the probe height
  * reset; the cancel path clears the sub-state. Both paths then run the shared
  * per-frame tail. */
@@ -14,7 +14,7 @@ MATCH void Fishing_CastInput(void) {
 
     if ((g_InputPressed & g_InputMasks[FISHING_INPUT_CAST]) != 0) {
         D_801440C8 = 0;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0));
         D_801E31FC = 0xFF;
         D_801E31F8 = 0xFF;
         Actor_RequestScript(2);

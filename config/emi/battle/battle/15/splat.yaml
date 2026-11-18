@@ -491,7 +491,7 @@ segments:
       - [0x192B8, c, Battle_ClearCellPaletteEntry]
       - [0x19348, c, Battle_CopyCellPalette]
       - [0x19454, c, func_800AFC54]
-      - [0x19498, c, Battle_PlayActiveBattlerCue]
+      - [0x19498, c, Battle_PlayActiveBattlerSE]
       - [0x1959C, c, Battle_CenterCamera]
       - [0x19798, c, Battle_SelectStepRule]
       - [0x19858, c, func_800B0058]

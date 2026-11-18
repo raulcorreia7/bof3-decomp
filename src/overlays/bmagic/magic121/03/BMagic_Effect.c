@@ -47,7 +47,7 @@ MATCH void func_801EEC5C(void) {
     MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))[16] = 0;
     MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))[32] = 0;
     g_GfxPalettePending                                                  = 1;
-    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;
     g_Task->header.mode += 1;
