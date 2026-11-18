@@ -1,12 +1,13 @@
 #include "area172_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F44C4(void) {
+/* Caller-side view: retail narrows the result into the height local through
+ * the full word, so the call keeps its local s32 return view. */
+MATCH void func_801F44C4(void) {
     s16 height;
 
     g_Task->vz += g_Task->gravity;
     Actor_UpdateMovement();
-    height = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    height = ((s32 (*)(s32, s32))Area_ReadHeight)(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     if (COORD_INT(g_Task->pos.z) < height) {
         g_Task->header.flags &= ~0x20;
         g_Task->tint.bytes.flags = 0;
@@ -30,9 +31,6 @@ NON_MATCHING void func_801F44C4(void) {
         g_Task->tint.bytes.rgb.g += 4;
         g_Task->tint.bytes.rgb.b += 4;
     }
-    D_80143F84 = g_Task->pos.z.fixed;
+    D_80143F84.fixed = g_Task->pos.z.fixed;
     Area_AdvanceScroll(COORD_INT(g_Task->pos.z));
 }
-#else
-INCLUDE_ASM(func_801F44C4);
-#endif
