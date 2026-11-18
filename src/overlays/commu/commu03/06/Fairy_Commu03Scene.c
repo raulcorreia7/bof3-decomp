@@ -4,6 +4,8 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
+void func_801D1714(s16 x, s16 y, u32 clut, u8* text);
+
 /* The commu03 overlay entry: the shared commu step byte selects the handler. */
 MATCH void func_801D0C44(void) {
     SYS_DISPATCH_BYTE(g_Commu03Steps, D_801F294C);
@@ -146,7 +148,86 @@ MATCH void func_801D1184(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D1250(s32 scene, s32 mode) {
-    g_ScenarioState.step_05 = scene + mode;
+    s16       x;
+    s16       y;
+    s16       left;
+    s16       top;
+    s32       i;
+    s32       left_sum;
+    s32       right_sum;
+    s16       vol_l;
+    s16       vol_r;
+    s32       tpage;
+    POLY_FT4* prim;
+    s32       yoff;
+    u16*      text_offset;
+
+    x    = scene;
+    y    = mode;
+    left = x;
+    top  = y;
+    func_801AE3F0(left, top, 0xDC, 0x6E, 0xF0, g_WindowStyle);
+    func_801AED54(left + 4, top + 4, 0xD2, 0x66, 0);
+    func_801AED54(left + 8, top + 8, 0xCA, 0x5E, 0);
+    func_801AED54(left + 0x10, top + 0x12, 0xBC, 0x22, 1);
+
+    text_offset = (u16*)((u8*)AREA_MESSAGE_TABLE + D_800104E2);
+    if (g_SndBGMId == D_801D1918[D_801D1940]) {
+        UI_DrawText(left + 0x14, top + 0x17, 2, 0xFF, (u8*)AREA_MESSAGE_TABLE + *text_offset);
+    } else {
+        UI_DrawText(left + 0x14, top + 0x17, 0, 0xFF, (u8*)AREA_MESSAGE_TABLE + *text_offset);
+    }
+
+    func_801AE3F0(left + 0x48, top + 0x3C, 0x7C, 0xE, 1, g_WindowStyle);
+    func_801AED54(left + 0x48, top + 0x3C, 0x7C, 0xE, 1);
+
+    if (g_SndMono == 0) {
+        func_801D1714(left + 0x10, top + 0x40, 0, D_801D1904);
+    } else {
+        func_801D1714(left + 0x10, top + 0x40, 0, D_801D1908);
+    }
+    func_801D1714(left + 0x20, top + 0x54, 0, D_801D190C);
+    UI_DrawTextString(left + 0x44, top + 0x54, 0, 3, D_801D18F4);
+    UI_DrawTextString(left + 0x5C, top + 0x54, 3, 1, D_801D18F8);
+    UI_DrawTextString(left + 0x94, top + 0x54, 0, 3, D_801D18F4);
+    UI_DrawTextString(left + 0xAC, top + 0x54, 3, 1, D_801D18FC);
+
+    left_sum  = 0;
+    right_sum = 0;
+    for (i = 0; i < 24; i++) {
+        if (SpuGetKeyStatus(1 << i) != 0) {
+            SpuGetVoiceVolume(i, &vol_l, &vol_r);
+            left_sum += vol_l / 0x2D;
+            right_sum += vol_r / 0x2D;
+        }
+    }
+    if (left_sum < 0) {
+        left_sum = 0;
+    } else if (left_sum >= 0x7B) {
+        left_sum = 0x7A;
+    }
+    if (right_sum < 0) {
+        right_sum = 0;
+    } else if (right_sum >= 0x7B) {
+        right_sum = 0x7A;
+    }
+
+    for (i = 0; i < 2; i++) {
+        yoff = (i == 0) ? left_sum : right_sum;
+        prim = (POLY_FT4*)g_GfxPrimCursor;
+        SetPolyFT4(prim);
+        setXYWH(prim, left + 0x49, top + 0x3F + i * 4, yoff, 4);
+        setUVWH(prim, 0x98, 0xD8, 4, 8);
+        setRGB0(prim, 0x80, 0x80, 0x80);
+        prim->clut = 0x780B;
+        if (GetGraphType() == 1) {
+            tpage = 0xF;
+        } else {
+            tpage = 0xF;
+        }
+        prim->tpage = tpage;
+        GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
+    }
 }
 #else
 INCLUDE_ASM(func_801D1250);

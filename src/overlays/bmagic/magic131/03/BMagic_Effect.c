@@ -336,9 +336,7 @@ MATCH void func_801EFBF8(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EFC74(void) {
-    u8           half;
+MATCH void func_801EFC74(void) {
     PartyMember* battler;
     PartyMember* ring_battler;
     PartyMember* spark_battler;
@@ -386,18 +384,11 @@ NON_MATCHING void func_801EFC74(void) {
         D_801F1CA0[slot].header.step = 0;
         D_801F1CA0[slot].unk_07      = i;
         D_801F1CA0[slot].battler     = spark_battler;
-        half                         = i & 0xF;
-        if (i < 16) {
-            half >>= 1;
-        }
-        D_801F1CA0[slot].unk_26 = half + 1;
+        D_801F1CA0[slot].unk_26      = (i < 16) ? ((i & 0xF) >> 1) + 1 : (i & 0xF) + 1;
         g_BattleEffectBattler->param.unk_0B += 1;
     }
     g_Task->header.step++;
 }
-#else
-INCLUDE_ASM(func_801EFC74);
-#endif
 
 MATCH void func_801EFEF0(void) {
     if (Actor_StepAnimOnce() != 0u) {

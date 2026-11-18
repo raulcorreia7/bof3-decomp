@@ -5,9 +5,9 @@ NON_MATCHING void func_801F3258(u8* window) {
     TrailPoint* point;
     POLY_G4*    prim;
     POLY_G4*    copy;
-    u16         i;
     s32         colour;
     s32         shade;
+    s32         i;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x3C0, 0) & 0xFFFF, NULL);
     GFX_AddPrim(1, sizeof(DR_MODE));
