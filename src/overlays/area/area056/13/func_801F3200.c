@@ -1,10 +1,12 @@
 #include "area056_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F3200(void) {
+/* The cell's palette step: clears the pending message, plays the change sound, and applies the
+ * cell palette once the counter byte has run to 0x7F. */
+MATCH void func_801F3200(void) {
+    u8* kind;
+
     MESSAGE_REQUEST_CLEAR();
-    /* FAKE: pure C leaves the prologue first and the choice load ahead of the clear. */
-    FAKE_BARRIER();
+    kind = D_80145E92;
     if (g_MessageChoice != 0) {
         return;
     }
@@ -14,11 +16,8 @@ NON_MATCHING void func_801F3200(void) {
         return;
     }
 
-    *D_80145E91 = 2;
-    *D_80145E92 = 7;
-    *D_80145E93 = 0;
+    D_80145E91[0] = 2;
+    *kind         = 7;
+    D_80145E93[0] = 0;
     Area_SetCellPalette(D_80145EC6, D_80145ECA);
 }
-#else
-INCLUDE_ASM(func_801F3200);
-#endif
