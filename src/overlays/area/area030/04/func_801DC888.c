@@ -7,7 +7,7 @@ MATCH void func_801DC888(void) {
         SND_StartDecrescendo(0, 0, 0x14, 0x10);
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
         D_80144281 += 1;
-        FISHING_STATE->cue_index_06 = 0;
-        FISHING_STATE->sub_index_03 += 1;
+        FISHING_STATE->cue_index = 0;
+        FISHING_STATE->sub_index += 1;
     }
 }

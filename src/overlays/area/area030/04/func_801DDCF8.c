@@ -8,7 +8,7 @@ MATCH void func_801DDCF8(void) {
     if (WINDOW_EFFECT_IDLE()) {
         counter = &D_8014403D;
         *counter += 1;
-        FISHING_STATE->mode_index_02 = 1;
-        FISHING_STATE->sub_index_03  = 0;
+        FISHING_STATE->mode_index = 1;
+        FISHING_STATE->sub_index  = 0;
     }
 }

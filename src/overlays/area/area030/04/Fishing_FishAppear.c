@@ -12,36 +12,36 @@ NON_MATCHING void Fishing_FishAppear(void) {
     u8  count;
     s32 coord;
 
-    Area_SelectSceneRecord(FISHING_ENTRY(FISHING_STATE->cue_index_06)->value_00);
-    FISHING_STATE->active_flags   = 0;
-    FISHING_STATE->counter_48     = 2;
-    FISHING_STATE->state_29       = 5;
-    FISHING_STATE->step_timer_09  = 0;
-    FISHING_STATE->saved_index_0B = 0;
-    FISHING_ROW->fish_row         = (u8)RANDOM_MASK(3);
-    count                         = FISHING_ENTRY(FISHING_STATE->cue_index_06)->count_0A;
+    Area_SelectSceneRecord(FISHING_ENTRY(FISHING_STATE->cue_index)->scene_id);
+    FISHING_STATE->active_flags = 0;
+    FISHING_STATE->counter_48   = 2;
+    FISHING_STATE->state_29     = 5;
+    FISHING_STATE->step_timer   = 0;
+    FISHING_STATE->saved_index  = 0;
+    FISHING_ROW->fish_row       = (u8)RANDOM_MASK(3);
+    count                       = FISHING_ENTRY(FISHING_STATE->cue_index)->count;
     if ((u32)FISHING_ROW->fish_row < (u32)count) {
         FISHING_ROW->fish_row = count;
     }
     FISHING_ROW->fish_row &= 3;
-    coord                           = TO_COORD(20);
-    FISHING_STATE->motion_34.unk_34 = coord - (RANDOM_MASK(0xF) << 0x10);
-    coord                           = TO_COORD(62);
+    coord                        = TO_COORD(20);
+    FISHING_STATE->motion.unk_34 = coord - (RANDOM_MASK(0xF) << 0x10);
+    coord                        = TO_COORD(62);
     coord -= FISHING_ROW->fish_row * TO_COORD(12);
     coord -= RANDOM_MASK(0xF) << 0x10;
-    FISHING_STATE->y_38.pos_y            = coord;
-    coord                                = -(D_801E2AD2[FISHING_STATE->cue_index_06 * sizeof(FishingSceneCue)] << 0x18);
-    FISHING_STATE->bounce_3C.half.key_3E = (s16)((coord >> 0x10) - (RANDOM_MASK(7) << 5));
-    limit                                = Area_SampleHeight(FISHING_STATE->motion_34.unk_34, FISHING_STATE->y_38.pos_y);
-    if (FISHING_STATE->bounce_3C.half.key_3E == 0) {
-        FISHING_STATE->bounce_3C.half.key_3E = -0x20;
-    } else if (FISHING_STATE->bounce_3C.half.key_3E < limit) {
-        FISHING_STATE->bounce_3C.half.key_3E = limit;
+    FISHING_STATE->y_38.pos_y      = coord;
+    coord                          = -(D_801E2AD2[FISHING_STATE->cue_index * sizeof(FishingSceneCue)] << 0x18);
+    FISHING_STATE->bounce.half.key = (s16)((coord >> 0x10) - (RANDOM_MASK(7) << 5));
+    limit                          = Area_SampleHeight(FISHING_STATE->motion.unk_34, FISHING_STATE->y_38.pos_y);
+    if (FISHING_STATE->bounce.half.key == 0) {
+        FISHING_STATE->bounce.half.key = -0x20;
+    } else if (FISHING_STATE->bounce.half.key < limit) {
+        FISHING_STATE->bounce.half.key = limit;
     }
     FISHING_STATE->counter_08 = 4;
     FISHING_STATE->step_14    = 0;
     Actor_SelectScript(0);
-    FISHING_STATE->handler_index_01 += 1;
+    FISHING_STATE->handler_index += 1;
 }
 #else
 INCLUDE_ASM(Fishing_FishAppear);

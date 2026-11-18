@@ -7,11 +7,11 @@ MATCH void Fishing_CastGaugeInit(void) {
     FishingState* record;
     u8            value;
 
-    record                   = FISHING_STATE;
-    value                    = g_FishingRodRow->cast_power_speed;
-    record->pos_x_0C         = 0;
-    record->cursor_10        = 0;
-    record->unk_1C           = 0;
-    record->step_delta_18    = value;
-    record->handler_index_01 = (record->handler_index_01 + 1);
+    record                = FISHING_STATE;
+    value                 = g_FishingRodRow->cast_power_speed;
+    record->pos_x         = 0;
+    record->cursor_10     = 0;
+    record->unk_1C        = 0;
+    record->step_delta    = value;
+    record->handler_index = (record->handler_index + 1);
 }

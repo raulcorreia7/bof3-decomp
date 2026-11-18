@@ -12,11 +12,11 @@ MATCH void func_801D0E9C(void) {
     position        = work->cursor_10 + 8;
     work->cursor_10 = position;
     if (position >= 241) {
-        work->handler_index_01      = 1;
-        sub                         = FISHING_STATE;
-        work->cursor_10             = 0xF0;
-        sub->mode_index_02          = 0;
-        FISHING_STATE->sub_index_03 = 0;
+        work->handler_index      = 1;
+        sub                      = FISHING_STATE;
+        work->cursor_10          = 0xF0;
+        sub->mode_index          = 0;
+        FISHING_STATE->sub_index = 0;
     }
     Fishing_DrawHud(12, FISHING_STATE->cursor_10);
 }

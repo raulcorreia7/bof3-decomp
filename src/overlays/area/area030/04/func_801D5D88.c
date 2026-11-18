@@ -10,20 +10,20 @@ MATCH void func_801D5D88(void) {
 
     u8 mode;
 
-    mode = FISHING_STATE->step_timer_09;
+    mode = FISHING_STATE->step_timer;
     if (mode == 0) {
-        offset = FISHING_STATE->step_index_0A * 3;
+        offset = FISHING_STATE->step_index * 3;
         if (D_801E2008[offset] == GAME_NONE) {
-            FISHING_STATE->step_index_0A = D_801E2009[offset];
-            FISHING_STATE->pos_x_0C      = 0;
-            FISHING_STATE->step_delta_18 = 4;
-            FISHING_STATE->cue_index_06  = 0;
+            FISHING_STATE->step_index = D_801E2009[offset];
+            FISHING_STATE->pos_x      = 0;
+            FISHING_STATE->step_delta = 4;
+            FISHING_STATE->cue_index  = 0;
         }
-        Actor_SelectScript(D_801E2008[FISHING_STATE->step_index_0A * 3]);
-        FISHING_STATE->step_timer_09 = D_801E2009[FISHING_STATE->step_index_0A * 3];
-        FISHING_STATE->step_index_0A += 1;
+        Actor_SelectScript(D_801E2008[FISHING_STATE->step_index * 3]);
+        FISHING_STATE->step_timer = D_801E2009[FISHING_STATE->step_index * 3];
+        FISHING_STATE->step_index += 1;
     } else {
-        FISHING_STATE->step_timer_09 = mode - 1;
+        FISHING_STATE->step_timer = mode - 1;
         Actor_StepAnimLoop();
     }
     Area_AddActor();
@@ -32,25 +32,25 @@ MATCH void func_801D5D88(void) {
     Fishing_DrawSprite(22, 1, 188, 122);
     Fishing_DrawSprite(16, 1, 54, 128);
     work     = FISHING_STATE;
-    previous = work->step_index_0A - 1;
+    previous = work->step_index - 1;
     mode     = D_801E200A[previous * 3];
     if (mode == 0) {
-        scroll         = work->pos_x_0C + work->step_delta_18;
-        work->pos_x_0C = scroll;
-        if ((s32)work->step_delta_18 > 0) {
+        scroll      = work->pos_x + work->step_delta;
+        work->pos_x = scroll;
+        if ((s32)work->step_delta > 0) {
             if (scroll >= 97) {
-                work->pos_x_0C      = 0x60;
-                work->step_delta_18 = -work->step_delta_18;
+                work->pos_x      = 0x60;
+                work->step_delta = -work->step_delta;
             }
         } else if (scroll < 0) {
-            work->pos_x_0C      = 0;
-            work->step_delta_18 = -work->step_delta_18;
+            work->pos_x      = 0;
+            work->step_delta = -work->step_delta;
         }
     } else if (mode == 0x1 && !(g_FrameCount & 1)) {
-        work->cue_index_06 = work->cue_index_06 + 1;
+        work->cue_index = work->cue_index + 1;
     }
-    Fishing_DrawGaugeFill(57, 151, FISHING_STATE->pos_x_0C, 1);
-    TEXT_Format(g_UiFormatBuffer, D_801D0C04, FISHING_STATE->cue_index_06);
+    Fishing_DrawGaugeFill(57, 151, FISHING_STATE->pos_x, 1);
+    TEXT_Format(g_UiFormatBuffer, D_801D0C04, FISHING_STATE->cue_index);
     UI_DrawAsciiString(172, 148, 0, g_UiFormatBuffer);
     Area_AddActor();
 }

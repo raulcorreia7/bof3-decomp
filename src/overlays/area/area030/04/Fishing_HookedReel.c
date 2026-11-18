@@ -28,20 +28,20 @@ MATCH void Fishing_HookedReel(void) {
         SND_StopSequence(0, 1);
         SND_PlayBGM(0x2A, 0x64, 8);
         Actor_RequestScript(0xA);
-        FISHING_STATE->sub_index_03 = 3;
+        FISHING_STATE->sub_index = 3;
         return;
     }
     if (g_InputHeld & (PADLleft | PADLdown)) {
         if (g_InputPressed & (PADLleft | PADLdown)) {
-            D_801E31F8                   = 2;
-            FISHING_STATE->step_timer_09 = 8;
-            D_8014421C                   = g_FishingRodRow->cursor_left_speed;
+            D_801E31F8                = 2;
+            FISHING_STATE->step_timer = 8;
+            D_8014421C                = g_FishingRodRow->cursor_left_speed;
             Actor_RequestScript(8);
             goto counted; /* the pad press counts as one state change */
         }
         work = FISHING_STATE;
-        if (work->step_timer_09 != 0) {
-            work->step_timer_09 -= 1;
+        if (work->step_timer != 0) {
+            work->step_timer -= 1;
             Actor_StepAnimLoop();
         counted:
             D_80144216 += 1;

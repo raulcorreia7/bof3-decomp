@@ -4,5 +4,5 @@
  * the overlay's jump table. */
 /* func_801D20C8 */
 MATCH void Fishing_LureRun(void) {
-    g_FishingLureSteps[FISHING_STATE->handler_index_01]();
+    g_FishingLureSteps[FISHING_STATE->handler_index]();
 }

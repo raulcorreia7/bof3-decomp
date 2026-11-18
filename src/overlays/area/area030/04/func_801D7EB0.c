@@ -32,10 +32,10 @@ NON_MATCHING void func_801D7EB0(s32 x, s32 y) {
             continue;
         }
         work = (FishingState*)(void*)g_Task;
-        if (work->pos_x_0C == row) {
+        if (work->pos_x == row) {
             FIELD(s16, work, 0x36u) = slot;
         }
-        if (D_80145E94[0] == 2 && !(((work = (FishingState*)(void*)g_Task)->counter_07) & 1) && work->pos_x_0C == row) {
+        if (D_80145E94[0] == 2 && !(((work = (FishingState*)(void*)g_Task)->counter_07) & 1) && work->pos_x == row) {
             UI_DrawText(x + 5, (s16)icon_y, UI_TEXT_DIM, ITEM_NAME_LENGTH, (u8*)&g_Accessories[*slot_list]);
             UI_DrawText(x + 5, (s16)(y + 23 + row_offset), 0, ITEM_NAME_LENGTH, (u8*)&g_Accessories[*slot_list]);
             qty = g_InventoryCounts[3][slot];
@@ -56,10 +56,10 @@ NON_MATCHING void func_801D7EB0(s32 x, s32 y) {
         row_offset += FISHING_ACCESSORY_ROW_HEIGHT;
         row += 1;
     }
-    work                = (FishingState*)(void*)g_Task;
-    work->step_delta_18 = row;
-    if (work->pos_x_0C >= row) {
-        work->pos_x_0C = row == 0 ? 0 : row - 1;
+    work             = (FishingState*)(void*)g_Task;
+    work->step_delta = row;
+    if (work->pos_x >= row) {
+        work->pos_x = row == 0 ? 0 : row - 1;
     }
     func_801D90FC(x, y);
     func_801D8248(x + 128, y + 28, 114);

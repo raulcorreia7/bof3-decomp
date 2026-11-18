@@ -13,16 +13,16 @@ MATCH void func_801D42E4(void) {
     g_Task->timer        = 4;
     g_Task->unk_0A       = 0;
 
-    work                 = FISHING_STATE;
-    work->saved_index_0B = 0;
-    advanced             = FISHING_STATE;
+    work              = FISHING_STATE;
+    work->saved_index = 0;
+    advanced          = FISHING_STATE;
 
-    work->motion_34.unk_34 = 0;
-    work->y_38.pos_y       = 0;
-    work->bounce_3C.unk_3C = 0;
-    work->pos_x_0C         = 0;
-    work->cursor_10        = 0;
+    work->motion.unk_34 = 0;
+    work->y_38.pos_y    = 0;
+    work->bounce.unk_3C = 0;
+    work->pos_x         = 0;
+    work->cursor_10     = 0;
 
-    advanced->unk_2C           = 0xFFFF;
-    advanced->handler_index_01 = (advanced->handler_index_01 + 1);
+    advanced->unk_2C        = 0xFFFF;
+    advanced->handler_index = (advanced->handler_index + 1);
 }

@@ -20,24 +20,24 @@ MATCH void func_801DC0CC(void) {
 
     if ((g_InputPressed & (PADLup | PADLdown)) != 0) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
-        work               = FISHING_STATE;
-        work->cue_index_06 = (work->cue_index_06 ^ 0x1);
+        work            = FISHING_STATE;
+        work->cue_index = (work->cue_index ^ 0x1);
     } else if ((g_InputPressed & PADRdown) != 0) {
         cue = 0x103;
         SND_PlaySE(cue);
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
-        work               = FISHING_STATE;
-        work->sub_index_03 = (work->sub_index_03 + 1);
+        work            = FISHING_STATE;
+        work->sub_index = (work->sub_index + 1);
     } else if ((g_InputPressed & PADRup) != 0) {
-        cue                = 0x106;
-        work               = FISHING_STATE;
-        work->cue_index_06 = 1;
+        cue             = 0x106;
+        work            = FISHING_STATE;
+        work->cue_index = 1;
         SND_PlaySE(cue);
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
-        work               = FISHING_STATE;
-        work->sub_index_03 = (work->sub_index_03 + 1);
+        work            = FISHING_STATE;
+        work->sub_index = (work->sub_index + 1);
     }
-    Menu_DrawCursorSprite(32, FISHING_STATE->cue_index_06 * 12 + 182, 0);
+    Menu_DrawCursorSprite(32, FISHING_STATE->cue_index * 12 + 182, 0);
     Actor_StepAnimLoop();
     Fishing_DrawDimScreen();
 }

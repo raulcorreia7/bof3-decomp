@@ -36,15 +36,15 @@ MATCH void func_801D0F5C(void) {
     FISHING_STATE->unk_5C = 1;
 
     if (g_AreaTargetCellY >= 0x39) {
-        FISHING_STATE->mode_index_02 = 3;
-        FISHING_STATE->sub_index_03  = 2;
+        FISHING_STATE->mode_index = 3;
+        FISHING_STATE->sub_index  = 2;
     } else {
-        FISHING_STATE->saved_index_0B = FISHING_STATE->saved_value_27;
+        FISHING_STATE->saved_index = FISHING_STATE->saved_value_27;
         FISHING_STATE->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         FISHING_STATE->saved_value_27 = 0x7B;
         FISHING_STATE->tint_5D        = -0x80;
         FISHING_STATE->tint_5E        = -0x80;
         FISHING_STATE->tint_5F        = -0x80;
-        FISHING_STATE->sub_index_03   = (FISHING_STATE->sub_index_03 + 1);
+        FISHING_STATE->sub_index      = (FISHING_STATE->sub_index + 1);
     }
 }

@@ -11,11 +11,11 @@ MATCH void func_801DDEEC(void) {
     if (g_InputPressed & PADLdown) {
         record                      = FISHING_STATE;
         WORLD00_FISHING_DRAW_ENABLE = 1;
-        record->step_index_0A       = 8;
+        record->step_index          = 8;
     } else if (g_InputHeld & PADLdown) {
         record = FISHING_STATE;
-        if (record->step_index_0A != 0) {
-            record->step_index_0A -= 1;
+        if (record->step_index != 0) {
+            record->step_index -= 1;
             WORLD00_FISHING_DRAW_ENABLE = 1;
         } else {
             WORLD00_FISHING_DRAW_ENABLE = 0;

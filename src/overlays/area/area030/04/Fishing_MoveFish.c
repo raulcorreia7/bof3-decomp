@@ -10,8 +10,8 @@ MATCH void Fishing_MoveFish(void) {
     if (g_Task->timer != 0) {
         g_Task->timer = (u8)(g_Task->timer - 1u);
         work          = FISHING_STATE;
-        work->motion_34.unk_34 += work->pos_x_0C;
+        work->motion.unk_34 += work->pos_x;
         work->y_38.pos_y += work->cursor_10;
-        work->bounce_3C.half.key_3E = (u16)(work->bounce_3C.half.key_3E + work->step_14);
+        work->bounce.half.key = (u16)(work->bounce.half.key + work->step_14);
     }
 }

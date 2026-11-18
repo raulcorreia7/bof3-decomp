@@ -1,11 +1,11 @@
 #include "area030_04.h"
 
 /* Panel page fields of the scratchpad work record. */
-#define FISHING_PAGE_STEP     (FISHING_STATE->step_timer_09)
-#define FISHING_PAGE_CATEGORY (FISHING_STATE->saved_index_0B)
-#define FISHING_PAGE_FLAG     (FISHING_STATE->cue_index_06)
-#define FISHING_SLOT_HANDLER  (FISHING_STATE->mode_index_02)
-#define FISHING_PAGE_HANDLER  (FISHING_STATE->sub_index_03)
+#define FISHING_PAGE_STEP     (FISHING_STATE->step_timer)
+#define FISHING_PAGE_CATEGORY (FISHING_STATE->saved_index)
+#define FISHING_PAGE_FLAG     (FISHING_STATE->cue_index)
+#define FISHING_SLOT_HANDLER  (FISHING_STATE->mode_index)
+#define FISHING_PAGE_HANDLER  (FISHING_STATE->sub_index)
 
 /* Advances the AREA030 selection page: slides the page counter,
  * draws the page/selection rows for the current category entry, and on the

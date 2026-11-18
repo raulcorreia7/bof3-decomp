@@ -31,24 +31,24 @@ MATCH void func_801D3C74(void) {
     FishingState* anim;
     FishingState* timer;
 
-    work              = FISHING_STATE;
-    count             = work->step_index_0A;
-    work->origin_x_2E = (work->origin_x_2E - 2);
+    work           = FISHING_STATE;
+    count          = work->step_index;
+    work->origin_x = (work->origin_x - 2);
     if (count != 0) {
-        work->step_index_0A = (count - 1);
-        anim                = FISHING_STATE;
-        anim_count          = anim->step_index_0A;
-        color_offset        = *(D_801E1E80 + (anim->row_4B * FISHING_PALETTE_ROW_STRIDE)) * FISHING_COLOR_ENTRY_SIZE;
+        work->step_index = (count - 1);
+        anim             = FISHING_STATE;
+        anim_count       = anim->step_index;
+        color_offset     = *(D_801E1E80 + (anim->row_4B * FISHING_PALETTE_ROW_STRIDE)) * FISHING_COLOR_ENTRY_SIZE;
         func_801D9740(*(D_801E1F16 + color_offset), color_offset + D_801E1F14, (FISHING_PALETTE_WIDTH - (anim_count * FISHING_EXPAND_STEP_STRIDE)) & BYTE_MASK,
                       0x125 - ((FISHING_EXPAND_STEP_COUNT - anim_count) * FISHING_EXPAND_STEP_STRIDE));
     } else {
-        work->step_timer_09 = (work->step_timer_09 - 1);
-        timer               = FISHING_STATE;
-        if (timer->step_timer_09 == 0) {
+        work->step_timer = (work->step_timer - 1);
+        timer            = FISHING_STATE;
+        if (timer->step_timer == 0) {
             timer->column = (timer->column + 1);
             queue         = FISHING_STATE;
             queue_pos     = queue->column;
-            if ((queue_pos >= FISHING_QUEUE_COLUMN_COUNT) || (g_FishingPromptSets[queue->cue_index_06][queue_pos] == GAME_NONE)) {
+            if ((queue_pos >= FISHING_QUEUE_COLUMN_COUNT) || (g_FishingPromptSets[queue->cue_index][queue_pos] == GAME_NONE)) {
                 queue->column = 0U;
             }
             if (D_80144125 != 7) {
@@ -57,21 +57,21 @@ MATCH void func_801D3C74(void) {
                     g_SpawnedActors[entry].header.flags = 1;
                     g_SpawnedActors[entry].type         = 0xF;
                     g_SpawnedActors[entry].header.mode  = 8;
-                    g_SpawnedActors[entry].unk_06       = FISHING_STATE->cue_index_06;
+                    g_SpawnedActors[entry].unk_06       = FISHING_STATE->cue_index;
                     g_SpawnedActors[entry].unk_4A       = FISHING_STATE->column;
                     g_SpawnedActors[entry].link         = 0;
                 }
             }
-            flag                   = FISHING_STATE;
-            flag->handler_index_01 = (flag->handler_index_01 + 1);
+            flag                = FISHING_STATE;
+            flag->handler_index = (flag->handler_index + 1);
         }
         palette = FISHING_STATE;
         color   = *(D_801E1E80 + (palette->row_4B * FISHING_PALETTE_ROW_STRIDE));
         if (color != GAME_NONE) {
             color_index = color * FISHING_COLOR_ENTRY_SIZE;
-            UI_DrawText((palette->origin_x_2E + (palette->counter_49 * FISHING_PALETTE_WIDTH)), (D_80144154 + 2), *(D_801E1F16 + color_index), 1U, (color_index + D_801E1F14));
+            UI_DrawText((palette->origin_x + (palette->counter_49 * FISHING_PALETTE_WIDTH)), (D_80144154 + 2), *(D_801E1F16 + color_index), 1U, (color_index + D_801E1F14));
         }
     }
     draw = FISHING_STATE;
-    UI_DrawText(draw->origin_x_2E, (D_80144154 + 2), 0, draw->counter_49, draw->item_50.pointer);
+    UI_DrawText(draw->origin_x, (D_80144154 + 2), 0, draw->counter_49, draw->item.pointer);
 }

@@ -15,23 +15,23 @@ NON_MATCHING void func_801E03F8(void) {
     u8  entry_face;
     u8  row_facing;
 
-    FISHING_STATE->pos_x_0C  = g_FacingOffsets[FISHING_STATE->counter_08].x;
+    FISHING_STATE->pos_x     = g_FacingOffsets[FISHING_STATE->counter_08].x;
     FISHING_STATE->cursor_10 = g_FacingOffsets[FISHING_STATE->counter_08].y;
     direction                = FISHING_STATE->counter_08;
     if (direction == 2 || direction == 6) {
-        FISHING_STATE->pos_x_0C  = FISHING_STATE->pos_x_0C * 2;
+        FISHING_STATE->pos_x     = FISHING_STATE->pos_x * 2;
         FISHING_STATE->cursor_10 = FISHING_STATE->cursor_10 * 2;
     }
-    pos_x = FISHING_STATE->motion_34.unk_34;
+    pos_x = FISHING_STATE->motion.unk_34;
     if (pos_x <= TO_COORD(8)) {
-        if (FISHING_STATE->pos_x_0C < 0) {
-            FISHING_STATE->pos_x_0C = -FISHING_STATE->pos_x_0C;
+        if (FISHING_STATE->pos_x < 0) {
+            FISHING_STATE->pos_x = -FISHING_STATE->pos_x;
         }
-    } else if (pos_x > 0x13FFFF && FISHING_STATE->pos_x_0C > 0) {
-        FISHING_STATE->pos_x_0C = -FISHING_STATE->pos_x_0C;
+    } else if (pos_x > 0x13FFFF && FISHING_STATE->pos_x > 0) {
+        FISHING_STATE->pos_x = -FISHING_STATE->pos_x;
     }
     row_facing  = FISHING_ROW->fish_row;
-    entry_face  = D_801E2AD3[FISHING_STATE->cue_index_06 * 0x24];
+    entry_face  = D_801E2AD3[FISHING_STATE->cue_index * 0x24];
     upper_limit = (TO_COORD(62) - row_facing * TO_COORD(12)) + entry_face * TO_COORD(15);
     lower_limit = (TO_COORD(50) - row_facing * TO_COORD(12)) - entry_face * TO_COORD(15);
     if (upper_limit > 0x19FFFF) {
@@ -75,7 +75,7 @@ NON_MATCHING void func_801E03F8(void) {
         if (value < 0x401) {
             vy = vy * 2;
         }
-        if (FISHING_STATE->pos_x_0C != vx || FISHING_STATE->cursor_10 != vy) {
+        if (FISHING_STATE->pos_x != vx || FISHING_STATE->cursor_10 != vy) {
             continue;
         }
         break;

@@ -19,17 +19,17 @@ MATCH void Fishing_EntryBegin(void) {
     work->state_29 = 5;
 
     state    = FISHING_STATE;
-    distance = Area_SampleHeight(state->motion_34.unk_34, state->y_38.pos_y);
+    distance = Area_SampleHeight(state->motion.unk_34, state->y_38.pos_y);
 
-    panel                                = g_Game.current;
-    FISHING_STATE->bounce_3C.half.key_3E = distance;
-    flag                                 = panel[0x79];
+    panel                          = g_Game.current;
+    FISHING_STATE->bounce.half.key = distance;
+    flag                           = panel[0x79];
     if (flag == 0) {
         Actor_BeginScript(0xA, 2);
     } else {
         Actor_SelectScript(0xB);
     }
 
-    work               = FISHING_STATE;
-    work->sub_index_03 = (work->sub_index_03 + 1);
+    work            = FISHING_STATE;
+    work->sub_index = (work->sub_index + 1);
 }

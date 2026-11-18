@@ -4,5 +4,5 @@
  * jump table. */
 /* func_801D2978 */
 MATCH void Fishing_ActorRun(void) {
-    D_801E1D78[FISHING_STATE->handler_index_01]();
+    D_801E1D78[FISHING_STATE->handler_index]();
 }

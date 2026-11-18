@@ -6,8 +6,8 @@
 MATCH s32 func_801DDF7C(u16 request) {
     if ((g_InputPressed & request) != 0) {
         UI_SetMode(2);
-        FISHING_STATE->mode_index_02 = 8;
-        FISHING_STATE->sub_index_03  = 0;
+        FISHING_STATE->mode_index = 8;
+        FISHING_STATE->sub_index  = 0;
         return 1;
     }
     return 0;

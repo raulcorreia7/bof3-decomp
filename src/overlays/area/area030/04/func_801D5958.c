@@ -13,22 +13,22 @@ MATCH void func_801D5958(void) {
     s32           index;
 
     work = FISHING_STATE;
-    if (work->step_timer_09 == 0) {
-        index = work->step_index_0A * 2;
+    if (work->step_timer == 0) {
+        index = work->step_index * 2;
         if (D_801E1FE8[index] == GAME_NONE) {
-            work->step_index_0A = D_801E1FE9[index];
+            work->step_index = D_801E1FE9[index];
         }
 
         next = FISHING_STATE;
-        Actor_SelectScript(D_801E1FE8[next->step_index_0A * 2]);
+        Actor_SelectScript(D_801E1FE8[next->step_index * 2]);
 
-        cur                = FISHING_STATE;
-        cur->step_timer_09 = D_801E1FE9[cur->step_index_0A * 2];
+        cur             = FISHING_STATE;
+        cur->step_timer = D_801E1FE9[cur->step_index * 2];
 
-        cur                = FISHING_STATE;
-        cur->step_index_0A = (cur->step_index_0A + 1);
+        cur             = FISHING_STATE;
+        cur->step_index = (cur->step_index + 1);
     } else {
-        work->step_timer_09 = (work->step_timer_09 - 1);
+        work->step_timer = (work->step_timer - 1);
         Actor_StepAnimLoop();
     }
     Area_AddActor();

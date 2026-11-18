@@ -19,19 +19,19 @@ MATCH void Fishing_CastInput(void) {
         D_801E31F8 = 0xFF;
         Actor_RequestScript(2);
 
-        work                = FISHING_STATE;
-        work->y_38.pos_y    = TO_COORD(65);
-        work->step_timer_09 = 0;
+        work             = FISHING_STATE;
+        work->y_38.pos_y = TO_COORD(65);
+        work->step_timer = 0;
 
-        tail               = FISHING_STATE;
-        tail->sub_index_03 = 2;
+        tail            = FISHING_STATE;
+        tail->sub_index = 2;
     } else if ((g_InputPressed & g_InputMasks[FISHING_INPUT_CANCEL]) != 0 && D_80144125 == 0) {
-        state                = FISHING_STATE;
-        D_801440B1           = 0;
-        state->mode_index_02 = 1;
+        state             = FISHING_STATE;
+        D_801440B1        = 0;
+        state->mode_index = 1;
 
-        next               = FISHING_STATE;
-        next->sub_index_03 = 0;
+        next            = FISHING_STATE;
+        next->sub_index = 0;
     }
     Actor_StepAnimLoop();
 }

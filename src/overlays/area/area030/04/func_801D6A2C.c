@@ -12,16 +12,16 @@ MATCH void func_801D6A2C(void) {
         FishingState* record;
         FishingState* retired;
 
-        record                 = FISHING_STATE;
-        record->counter_48     = 0;
-        retired                = FISHING_STATE;
-        record->origin_x_2E    = 0xF0;
-        record->origin_y_30    = 0xBA;
-        retired->step_timer_09 = 0;
+        record              = FISHING_STATE;
+        record->counter_48  = 0;
+        retired             = FISHING_STATE;
+        record->origin_x    = 0xF0;
+        record->origin_y    = 0xBA;
+        retired->step_timer = 0;
     }
 
-    FISHING_STATE->step_index_0A = 0;
-    FISHING_STATE->cue_index_06  = 0;
+    FISHING_STATE->step_index = 0;
+    FISHING_STATE->cue_index  = 0;
 
     {
         FishingState* record;
@@ -30,7 +30,7 @@ MATCH void func_801D6A2C(void) {
         record            = FISHING_STATE;
         record->tint_5D   = 0;
         retired           = FISHING_STATE;
-        record->pos_x_0C  = 0x6A;
+        record->pos_x     = 0x6A;
         record->cursor_10 = 0x6A;
         retired->tint_5E  = 0;
     }
@@ -41,7 +41,7 @@ MATCH void func_801D6A2C(void) {
     {
         FishingState* record;
 
-        record               = FISHING_STATE;
-        record->sub_index_03 = (record->sub_index_03 + 1);
+        record            = FISHING_STATE;
+        record->sub_index = (record->sub_index + 1);
     }
 }

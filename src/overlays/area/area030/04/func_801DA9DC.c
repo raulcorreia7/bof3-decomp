@@ -11,13 +11,13 @@ NON_MATCHING void func_801DA9DC(void) {
     u32  capped;
     u32* follow_ptr;
 
-    if ((FISHING_STATE->cue_index_06 != 0) && (D_80144199 == 3)) {
-        FISHING_STATE->cue_index_06 = 0;
+    if ((FISHING_STATE->cue_index != 0) && (D_80144199 == 3)) {
+        FISHING_STATE->cue_index = 0;
         func_801DDE94(1);
     }
     if ((g_InputPressed & PADRup) && (D_80144199 == 0)) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
-        FISHING_STATE->sub_index_03    = (u8)(FISHING_STATE->sub_index_03 + 1);
+        FISHING_STATE->sub_index       = (u8)(FISHING_STATE->sub_index + 1);
         D_801440B1                     = 0;
         g_SpawnedActors[0].header.mode = 0;
         D_80144125                     = 7;
@@ -27,8 +27,8 @@ NON_MATCHING void func_801DA9DC(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
         D_801440B1                     = 0;
         g_SpawnedActors[0].header.mode = 0;
-        FISHING_STATE->mode_index_02   = 1;
-        FISHING_STATE->sub_index_03    = 0U;
+        FISHING_STATE->mode_index      = 1;
+        FISHING_STATE->sub_index       = 0U;
         return;
     }
     if (Area_SampleHeight(g_SpawnedActors[0].pos.x.fixed, g_SpawnedActors[0].pos.y.fixed) >= COORD_INT(g_SpawnedActors[0].pos.z)) {
@@ -41,9 +41,9 @@ NON_MATCHING void func_801DA9DC(void) {
             if ((s32)*follow_ptr < g_SpawnedActors[0].pos.y.fixed) {
                 *follow_ptr = (u32)g_SpawnedActors[0].pos.y.fixed;
             }
-            g_AreaCameraStep             = 0x10;
-            FISHING_STATE->mode_index_02 = 5;
-            FISHING_STATE->sub_index_03  = 0U;
+            g_AreaCameraStep          = 0x10;
+            FISHING_STATE->mode_index = 5;
+            FISHING_STATE->sub_index  = 0U;
             return;
         }
         COORD_INT(g_SpawnedActors[0].pos.z) = Area_SampleHeight(g_SpawnedActors[0].pos.x.fixed, g_SpawnedActors[0].pos.y.fixed);

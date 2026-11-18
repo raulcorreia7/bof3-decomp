@@ -13,10 +13,10 @@ MATCH void func_801D339C(void) {
     Area_SelectSceneRecord(0x2B);
 
     panel               = FISHING_STATE;
-    panel->origin_x_2E  = 0x186;
+    panel->origin_x     = 0x186;
     panel->active_flags = 0x80;
     other               = FISHING_STATE;
-    panel->origin_y_30  = 0x6E;
+    panel->origin_y     = 0x6E;
     other->counter_48   = 0;
 
     FISHING_STATE->state_29 = 2;
@@ -25,13 +25,13 @@ MATCH void func_801D339C(void) {
     FISHING_STATE->tint_5F  = 0;
     FISHING_STATE->state_2A = 0;
 
-    Actor_SelectScript(FISHING_STATE->cue_index_06);
+    Actor_SelectScript(FISHING_STATE->cue_index);
 
-    cue = D_801E1DA0[FISHING_STATE->cue_index_06];
+    cue = D_801E1DA0[FISHING_STATE->cue_index];
     if (cue != 0xFFFF) {
         SND_PlaySE(cue);
     }
 
-    state                   = FISHING_STATE;
-    state->handler_index_01 = (state->handler_index_01 + 1);
+    state                = FISHING_STATE;
+    state->handler_index = (state->handler_index + 1);
 }

@@ -7,25 +7,25 @@ MATCH void func_801D6CB0(void) {
     u8 steps;
     s8 direction;
 
-    steps = FISHING_STATE->step_timer_09;
+    steps = FISHING_STATE->step_timer;
     if (steps == 0) {
-        if (D_801E207C[FISHING_STATE->step_index_0A].anim_id == -1) {
-            FISHING_STATE->step_index_0A = D_801E207C[FISHING_STATE->step_index_0A].next_step;
+        if (D_801E207C[FISHING_STATE->step_index].animation_id == -1) {
+            FISHING_STATE->step_index = D_801E207C[FISHING_STATE->step_index].next_step;
         }
-        Actor_RequestScript(D_801E207C[FISHING_STATE->step_index_0A].anim_id & 0x7F);
-        FISHING_STATE->step_timer_09 = D_801E207C[FISHING_STATE->step_index_0A].next_step;
-        FISHING_STATE->step_index_0A = FISHING_STATE->step_index_0A + 1;
+        Actor_RequestScript(D_801E207C[FISHING_STATE->step_index].animation_id & 0x7F);
+        FISHING_STATE->step_timer = D_801E207C[FISHING_STATE->step_index].next_step;
+        FISHING_STATE->step_index = FISHING_STATE->step_index + 1;
     } else {
-        FISHING_STATE->step_timer_09 = steps - 1;
-        if (!(D_801E207C[FISHING_STATE->step_index_0A - 1].anim_id & 0x80)) {
+        FISHING_STATE->step_timer = steps - 1;
+        if (!(D_801E207C[FISHING_STATE->step_index - 1].animation_id & 0x80)) {
             Actor_StepAnimLoop();
         }
     }
-    FISHING_STATE->pos_x_0C += D_801E207C[FISHING_STATE->step_index_0A - 1].delta_x;
-    FISHING_STATE->cursor_10 += D_801E207C[FISHING_STATE->step_index_0A - 1].delta_y;
-    FISHING_STATE->cue_index_06 -= D_801E207C[FISHING_STATE->step_index_0A - 1].delta_x;
+    FISHING_STATE->pos_x += D_801E207C[FISHING_STATE->step_index - 1].delta_x;
+    FISHING_STATE->cursor_10 += D_801E207C[FISHING_STATE->step_index - 1].delta_y;
+    FISHING_STATE->cue_index -= D_801E207C[FISHING_STATE->step_index - 1].delta_x;
     direction = 1;
-    if (D_801E207C[FISHING_STATE->step_index_0A - 1].delta_y < 0) {
+    if (D_801E207C[FISHING_STATE->step_index - 1].delta_y < 0) {
         /* FAKE: keeps GCC from turning the flag into sge (nor/srl); 7 pure-C spellings stayed at 96.24%. */
         FAKE_BARRIER();
         direction = 0;

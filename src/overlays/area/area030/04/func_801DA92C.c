@@ -17,7 +17,7 @@ MATCH void func_801DA92C(void) {
     D_8014419E = 1;
     (*counter)++;
     D_80144199++;
-    FISHING_STATE->cue_index_06 = 1;
+    FISHING_STATE->cue_index = 1;
 
     do {
         *flags = 0;
@@ -28,10 +28,10 @@ MATCH void func_801DA92C(void) {
     state             = FISHING_STATE;
     state->counter_07 = 0;
 
-    work                 = FISHING_STATE;
-    work->saved_index_0B = 0;
+    work              = FISHING_STATE;
+    work->saved_index = 0;
     Actor_RequestScript(3);
 
-    tail               = FISHING_STATE;
-    tail->sub_index_03 = (tail->sub_index_03 + 1);
+    tail            = FISHING_STATE;
+    tail->sub_index = (tail->sub_index + 1);
 }

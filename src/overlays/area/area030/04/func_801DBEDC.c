@@ -16,7 +16,7 @@ MATCH void func_801DBEDC(void) {
     Fishing_DrawIconRow(8, FISHING_CATCH_ROW_Y, 66);
 
     if ((g_InputPressed & (PADRup | PADRdown)) != 0) {
-        FISHING_STATE->sub_index_03 = 0xE;
+        FISHING_STATE->sub_index = 0xE;
     }
     Actor_StepAnimLoop();
     Fishing_DrawDimScreen();

@@ -26,10 +26,8 @@ typedef enum FishingShopMessageId {
 
 /* Work-cost row: two cost bytes followed by two three-byte runs. */
 typedef struct AreaCost {
-    u8 cost_00;
-    u8 cost_01;
-    u8 run_02[3];
-    u8 run_05[3];
+    u8 cost[2];
+    u8 run[2][3];
 } AreaCost;
 
 /* Payload prologue: the loader-verified module id and the "*%2d" format the

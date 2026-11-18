@@ -8,30 +8,30 @@
 MATCH void func_801D4378(void) {
     s32 mask;
 
-    FISHING_STATE->step_timer_09--;
-    if (FISHING_STATE->step_timer_09 == 0) {
-        FISHING_STATE->saved_index_0B = 1;
+    FISHING_STATE->step_timer--;
+    if (FISHING_STATE->step_timer == 0) {
+        FISHING_STATE->saved_index = 1;
         if (!(FISHING_STATE->counter_07 & 0x1)) {
-            FISHING_STATE->handler_index_01++;
+            FISHING_STATE->handler_index++;
         } else {
-            FISHING_STATE->handler_index_01 = 4;
+            FISHING_STATE->handler_index = 4;
         }
     }
-    if (FISHING_STATE->saved_index_0B == 0) {
-        Fishing_DrawWindowFrame(MENU_HEADER_X, (MENU_HEADER_Y - FISHING_STATE->step_timer_09 * 16) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
-        func_801D7C10((u16)(FISHING_STATE->step_timer_09 * FISHING_SHOP_SLIDE_STEP + FISHING_SHOP_COLUMNS_X), FISHING_SHOP_COLUMNS_Y, 0);
+    if (FISHING_STATE->saved_index == 0) {
+        Fishing_DrawWindowFrame(MENU_HEADER_X, (MENU_HEADER_Y - FISHING_STATE->step_timer * 16) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
+        func_801D7C10((u16)(FISHING_STATE->step_timer * FISHING_SHOP_SLIDE_STEP + FISHING_SHOP_COLUMNS_X), FISHING_SHOP_COLUMNS_Y, 0);
     } else {
         Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
         mask = 0;
         if (D_80145E93[0] >= 3) {
-            mask = (1 << FISHING_STATE->cue_index_06) & BYTE_MASK;
+            mask = (1 << FISHING_STATE->cue_index) & BYTE_MASK;
         }
         func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
     }
-    func_801D88E0(FISHING_EQUIP_PANEL_X - FISHING_STATE->step_timer_09 * FISHING_SHOP_SLIDE_STEP, FISHING_PANEL_CONTENT_Y);
+    func_801D88E0(FISHING_EQUIP_PANEL_X - FISHING_STATE->step_timer * FISHING_SHOP_SLIDE_STEP, FISHING_PANEL_CONTENT_Y);
     if (!(FISHING_STATE->counter_07 & 0x1)) {
-        func_801D7EB0((s16)(FISHING_STATE->step_timer_09 * FISHING_SHOP_SLIDE_STEP + FISHING_ITEM_PANEL_X), FISHING_PANEL_CONTENT_Y);
+        func_801D7EB0((s16)(FISHING_STATE->step_timer * FISHING_SHOP_SLIDE_STEP + FISHING_ITEM_PANEL_X), FISHING_PANEL_CONTENT_Y);
     } else {
-        func_801D8364(FISHING_STATE->step_timer_09 * FISHING_SHOP_SLIDE_STEP + FISHING_ITEM_PANEL_X, FISHING_PANEL_CONTENT_Y);
+        func_801D8364(FISHING_STATE->step_timer * FISHING_SHOP_SLIDE_STEP + FISHING_ITEM_PANEL_X, FISHING_PANEL_CONTENT_Y);
     }
 }

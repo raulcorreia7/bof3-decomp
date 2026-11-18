@@ -29,7 +29,7 @@ MATCH s32 func_801E0770(void) {
         return result;
     }
     work = FISHING_STATE;
-    d    = -g_SpawnedActors[0].pos.x.fixed + work->motion_34.unk_34;
+    d    = -g_SpawnedActors[0].pos.x.fixed + work->motion.unk_34;
     if (d < 0) {
         d = -d;
     }
@@ -43,7 +43,7 @@ MATCH s32 func_801E0770(void) {
     if (d > limit) {
         return result;
     }
-    dz = work->bounce_3C.half.key_3E;
+    dz = work->bounce.half.key;
     dz = dz - COORD_INT(g_SpawnedActors[0].pos.z);
     dz = ABS(dz);
     return dz < 0x400;
