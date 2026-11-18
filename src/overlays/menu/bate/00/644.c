@@ -194,8 +194,8 @@ NON_MATCHING void func_801D1C90(void) {
     g_MenuPanelTasks[1].pos.y         = 0x3E;
     g_MenuPanelTasks[1].unk_0C        = 7;
     g_MenuPanelTasks[1].unk_0B        = 0xFF;
+    g_MenuPanelTasks[0].item_table    = (s32)D_801D8EE0;
     g_MenuPanelTasks[1].item_table    = (s32)D_801D8EE0;
-    g_MenuPanelTasks[2].item_table    = (s32)D_801D8EE0;
     g_MenuPanelTasks[2].pos.x         = 0x14;
     g_MenuPanelTasks[2].u.addr.unk_12 = 0x118;
     g_MenuPanelTasks[3].pos.x         = 0xA4;
