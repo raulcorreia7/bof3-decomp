@@ -641,108 +641,105 @@ INCLUDE_ASM(func_801D2D98);
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D3038(void) {
     TILE* tile;
-    u8*   text;
-    u8*   rooms;
-    u8*   room_icons;
+    u8*   buffer;
     s16   marker_x;
     s16   marker_y;
-    s32   group;
-    s32   room;
-    s32   job;
-    s32   active;
-    s32   room_type;
-    s32   room_column;
-    s32   room_row;
-    s32   room_x;
-    s32   room_y;
-    s32   ordinal;
     s32   shade;
+    s32   y;
+    s32   cell_x;
+    s32   cell_y;
+    u8    entry_row;
+    u8    row;
+    u8    column;
+    u8    room_type;
+    u8    ordinal;
+    u8    count;
+    u8    icon;
+    u8    active;
+    u8    group;
+    u8    room;
+    u8    job;
 
     UI_DrawWindow(0x14, 0x12, 0x118, 0x13, 0xF2, g_WindowStyle);
     UI_DrawWindowOutline(0x16, 0x14, 0x113, 0x0F, 0);
     if (D_801D4E0C != 0xFFFF) {
-        text = (u8*)D_80010000 + D_80010000[D_801D4E0C];
-        UI_DrawText(0x1D, 0x15, 0, 0xFF, text);
-    }
+        UI_DrawText(0x1D, 0x15, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801D4E0C));
 
-    if (D_801D4E0C == 0x3D) {
-        if (GetGraphType() != 1) {
-            GetGraphType();
+        if (D_801D4E0C == 0x3D) {
+            if (GetGraphType() != 1) {
+                GetGraphType();
+            }
+            SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 0, 0);
+            GFX_AddPrim(1, sizeof(DR_MODE));
+            shade = ((g_FrameCount & 8) ? (g_FrameCount & 6) : (~g_FrameCount & 6)) << 5 | 0x3F;
+            tile  = GFX_CURSOR(TILE);
+            SetTile(tile);
+            SetSemiTrans(tile, 1);
+            entry_row = D_801D4E18;
+            tile->y0  = 0x16;
+            tile->h   = 0x0C;
+            setRGB0(tile, shade, shade, 0);
+            tile->x0 = (entry_row << 5) + 0xF4;
+            tile->w  = 0x19 - entry_row * 8;
+            GFX_AddPrim(1, sizeof(TILE));
         }
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 0, 0);
-        GFX_AddPrim(1, sizeof(DR_MODE));
-        tile = GFX_CURSOR(TILE);
-        SetTile(tile);
-        SetSemiTrans(tile, 1);
-        shade = g_FrameCount;
-        if (shade & 8) {
-            shade &= 6;
-        } else {
-            shade = ~shade & 6;
-        }
-        shade    = (shade << 5) | 0x3F;
-        tile->x0 = 0x16;
-        tile->y0 = (D_801D4E18 << 5) + 0xF4;
-        tile->w  = 0x0C;
-        tile->h  = 0x0C;
-        setRGB0(tile, shade, shade, 0);
-        GFX_AddPrim(1, sizeof(TILE));
     }
 
     UI_DrawWindow(0x15, 0x2E, 0x114, 0xAA, 0x80, g_WindowStyle);
     func_801D3594(0x14, 0x2D);
     UI_DrawWindowOutline(0x20, 0x38, 0xA8, 0x10, 1);
 
-    active = Fairy_GetJobActive(0);
-    for (job = 0; job < active; job++) {
-        func_801D4030(0x24 + job * FAIRY_OVERVIEW_JOB_COLUMN_STEP, 0x3A, 1);
+    count = Fairy_GetJobActive(0);
+    for (icon = 0; icon < count; icon++) {
+        func_801D4030(0x24 + icon * FAIRY_OVERVIEW_JOB_COLUMN_STEP, 0x3A, 1);
     }
 
     for (group = 0; group < FAIRY_OVERVIEW_GROUP_COUNT; group++) {
-        room_y = group * FAIRY_OVERVIEW_JOB_ROW_STEP;
-        UI_DrawWindowOutline(0xF2, room_y + 0x36, 0x30, 0x30, 1);
-        func_801D4030(0xEF, room_y + 0x33, group + 3);
+        y = group * FAIRY_OVERVIEW_JOB_ROW_STEP;
+        UI_DrawWindowOutline(0xF2, y + 0x36, 0x30, 0x30, 1);
+        func_801D4030(0xEF, y + 0x33, group + 3);
         active = Fairy_GetJobActive(group + 9);
         for (job = 0; job < active; job++) {
-            func_801D4030(0xF6 + (job % FAIRY_OVERVIEW_JOB_COLUMNS) * FAIRY_OVERVIEW_JOB_COLUMN_STEP, room_y + 0x44 + (job / FAIRY_OVERVIEW_JOB_COLUMNS) * 7, 1);
+            column = job % FAIRY_OVERVIEW_JOB_COLUMNS;
+            row    = job / FAIRY_OVERVIEW_JOB_COLUMNS;
+            func_801D4030(0xF6 + column * FAIRY_OVERVIEW_JOB_COLUMN_STEP, y + 0x44 + row * 7, 1);
         }
     }
 
-    rooms      = (u8*)D_801457A9 - 1;
-    room_icons = (u8*)D_801D4C18;
     for (room = 0; room < FAIRY_OVERVIEW_ROOM_COUNT; room++) {
-        room_column = room % FAIRY_OVERVIEW_ROOM_COLUMNS;
-        room_row    = room / FAIRY_OVERVIEW_ROOM_COLUMNS;
-        room_x      = 0x20 + room_column * FAIRY_OVERVIEW_COLUMN_STEP;
-        room_y      = 0x6B + room_row * FAIRY_OVERVIEW_ROW_STEP;
-        UI_DrawWindowOutline(room_x, room_y, 0x28, 0x28, 1);
+        cell_x = (room % FAIRY_OVERVIEW_ROOM_COLUMNS) * FAIRY_OVERVIEW_COLUMN_STEP;
+        cell_y = (room / FAIRY_OVERVIEW_ROOM_COLUMNS) * FAIRY_OVERVIEW_ROW_STEP;
+        UI_DrawWindowOutline(cell_x + 0x20, cell_y + 0x6B, 0x28, 0x28, 1);
         if (room >= D_801F286D[g_GameAreaId]) {
-            UI_DrawWindow(room_x, room_y, 0x28, 0x28, 1, g_WindowStyle);
+            UI_DrawWindow(cell_x + 0x20, cell_y + 0x6B, 0x28, 0x28, 1, g_WindowStyle);
         } else {
-            func_801D4030(room_x, room_y, 0);
-            room_type = rooms[room * 8];
+            func_801D4030(cell_x + 0x1A, cell_y + 0x5B, 0);
+            room_type = g_FairyRooms[room * 8];
             if (room_type != 0) {
                 if (room_type == 5) {
-                    ordinal = room_icons[0x21] + D_801457A9[room][0];
+                    ordinal = ((u8*)D_801D4C18)[0x21] + D_801457A9[room][0];
                 } else {
-                    ordinal = room_icons[0x1C + room_type];
+                    ordinal = ((u8*)D_801D4C18)[0x1C + room_type];
                 }
-                func_801D3EFC(room_x + 2, room_y + 1, ordinal);
+                func_801D3EFC(cell_x + 0x22, cell_y + 0x6C, ordinal);
             }
             active = Fairy_GetJobActive(room + 1);
-            for (job = 1; job < active; job++) {
-                func_801D4694(&marker_x, &marker_y, room + 1, job);
-                func_801D4030(marker_x, marker_y, 1);
+            if (active != 0) {
+                for (job = 1; job <= active; job++) {
+                    func_801D4694(&marker_x, &marker_y, room + 1, job);
+                    func_801D4030(marker_x, marker_y, 1);
+                }
             }
         }
     }
 
     func_801D4030(0x30, 0x4C, 2);
-    sprintf((char*)g_UiFormatBuffer, D_801D0C10, D_801455C2);
-    UI_DrawAsciiString(0x50, 0x4C, 0, g_UiFormatBuffer);
-    UI_DrawText(0x78, 0x4C, 0, 7, room_icons + 0x18);
-    sprintf((char*)g_UiFormatBuffer, D_801D0C14, *((u8*)&D_801455C2 + 2));
-    UI_DrawAsciiString(0xB8, 0x4C, 0, g_UiFormatBuffer);
+    buffer = g_UiFormatBuffer;
+    sprintf((char*)buffer, D_801D0C10, D_801455C2);
+    UI_DrawAsciiString(0x50, 0x4C, 0, buffer);
+    UI_DrawText(0x78, 0x4C, 0, 7, (u8*)D_801D4C18 + 0x18);
+    sprintf((char*)buffer, D_801D0C14, *((u8*)&D_801455C2 + 2));
+    UI_DrawAsciiString(0xB8, 0x4C, 0, buffer);
 }
 #else
 INCLUDE_ASM(func_801D3038);

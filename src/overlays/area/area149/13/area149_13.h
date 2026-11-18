@@ -25,6 +25,8 @@ extern u8       D_80144EF8[];
 extern u16      D_80147A96;
 extern s8       D_80147AD0;
 extern s16      D_80147AD6;
+/* The event countdown D_801448EE, stepped and tested unsigned. */
+extern u16      D_801448EE_U16;
 /* The state handler tables the dispatchers index. */
 extern u8       D_801F37D0[];
 extern Callback D_801F4580[];

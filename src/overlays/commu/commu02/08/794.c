@@ -245,7 +245,7 @@ NON_MATCHING void func_801D1D68(void) {
     i          = (s8)D_801DB0B4 + 1;
     D_801DB0C4 = cnt;
     for (; i < 9; i++) {
-        func_801D2CF8(((i << 21) + 0x100000) >> 16, D_801DB0C4 * 40 + 0x6C, 0xFF);
+        func_801D2CF8((i * 0x200000 + 0x100000) >> 16, D_801DB0C4 * 40 + 0x6C, 0xFF);
     }
     func_801D2908(0x58, 0x44 - D_801DB0C4 * 40, 2);
     if (D_801DB0C4 == 4) {
