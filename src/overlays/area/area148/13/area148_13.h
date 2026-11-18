@@ -18,15 +18,20 @@
 
 /* The field focus point the work position copies. */
 /* D_80147A90 */
-extern s32      g_AreaFocusY;
+extern s32     g_AreaFocusY;
 /* The facing routes the projection reads, one Offset2 per spawn index. */
 /* D_80181AC0 */
-extern Offset2  g_FacingOffsets[];
+extern Offset2 g_FacingOffsets[];
 /* The state handler tables the dispatchers index. */
-extern u8       D_801F4FC4[];
+extern u8      D_801F4FC4[];
 /* The four scratch vectors RotTransPers4 projects. */
 /* g_ScratchPadVectors */
-extern SVECTOR  g_ScratchPadVectors[];
+extern SVECTOR g_ScratchPadVectors[];
+
+/* The part words Area_Update passes to Area_ApplyTileToQuad, one per unk_32 row;
+ * the two low bytes of the first word scale the two floor-part quads it draws. */
+extern u32      D_801F5018[];
+extern u8       D_801F5018_U8[];
 extern Callback D_801F5024[];
 
 /* The three part quads func_801F37B8 draws: their vertex offsets, the scroll
