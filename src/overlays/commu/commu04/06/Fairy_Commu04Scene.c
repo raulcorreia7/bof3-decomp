@@ -38,6 +38,11 @@ MATCH void func_801D0CF4(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D0D4C(void) {
+    if (D_801D1774 != 0) {
+        D_801D1774--;
+    }
+    UI_DrawWindow(0x14, (0x12 - (D_801D1774 * 12)) & 0xFFFE, 0x118, 0x13, 0xF2, g_WindowStyle);
+    UI_DrawWindowOutline(0x16, 0x14 - (D_801D1774 * 12), 0x113, 0xF, 0);
 }
 #else
 INCLUDE_ASM(func_801D0D4C);
