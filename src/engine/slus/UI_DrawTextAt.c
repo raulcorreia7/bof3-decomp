@@ -1,11 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* walks a message control stream (the switch is on the control byte) and draws the text it describes: control
- * bytes 1, 3-9 select the glyph source (item, character or party tables) and advance the cursor; returns the stream
- * position after the last byte it consumed.
- */
-#ifdef NON_MATCHING
-NON_MATCHING u8* UI_DrawTextAt(s32 x, s32 y, u8* text) {
+/* Draws the text described by a control stream and returns the byte after its terminator. */
+MATCH u8* UI_DrawTextAt(s32 x, s32 y, u8* text) {
     u8* saved;
     u8  flags;
     u8  count;
@@ -53,6 +49,7 @@ NON_MATCHING u8* UI_DrawTextAt(s32 x, s32 y, u8* text) {
                 break;
             case STRING_INSERT:
                 flags |= 1;
+                x = left;
                 p++;
                 saved = p;
                 count = 5;
@@ -71,14 +68,15 @@ NON_MATCHING u8* UI_DrawTextAt(s32 x, s32 y, u8* text) {
                 saved = p;
                 count = 16;
                 {
-                    u8 index;
+                    u8   index;
+                    u16* offsets;
 
-                    index = *p;
-                    p     = (u8*)(D_80010004 + SLUS_LOAD_ADDRESS);
-                    p += *(u16*)((index << 1) + (u32)p);
+                    index   = *p;
+                    p       = (u8*)(D_80010004 + SLUS_LOAD_ADDRESS);
+                    offsets = (u16*)((index << 1) + (u32)p);
+                    p += offsets[0];
                 }
                 break;
-            case STRING_PAGE:
             case STRING_NOP:
                 break;
             default:
@@ -99,6 +97,3 @@ NON_MATCHING u8* UI_DrawTextAt(s32 x, s32 y, u8* text) {
         p++;
     }
 }
-#else
-INCLUDE_ASM(UI_DrawTextAt);
-#endif
