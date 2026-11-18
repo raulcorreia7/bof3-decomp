@@ -484,12 +484,11 @@ MATCH void func_801F08AC(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F0974(void) {
+MATCH void func_801F0974(void) {
     POLY_G3* prim;
     long     depth;
     long     flag;
-    s32      angle;
+    u32      phase;
     s32      tpage;
 
     g_ScratchPad.cells.halves[0] = (g_FrameCount & 0x3F) + 0x100;
@@ -499,13 +498,13 @@ NON_MATCHING void func_801F0974(void) {
     g_ScratchPadVectors[0].vx = 0;
     g_ScratchPadVectors[0].vy = 0;
     g_ScratchPadVectors[0].vz = 0;
-    angle                     = BMAGIC_PHASE_ANGLE((D_801F0D08[g_Task->facing] - 6) & BMAGIC_PHASE_MASK);
-    g_ScratchPadVectors[1].vx = FIXED_MUL(rsin(angle), g_ScratchPad.cells.halves[0]);
-    g_ScratchPadVectors[1].vy = FIXED_MUL(rcos(angle), g_ScratchPad.cells.halves[0]);
+    phase                     = (D_801F0D08[g_Task->facing] - 6) & BMAGIC_PHASE_MASK;
+    g_ScratchPadVectors[1].vx = FIXED_MUL(rsin(BMAGIC_PHASE_ANGLE(phase)), g_ScratchPad.cells.halves[0]);
+    g_ScratchPadVectors[1].vy = FIXED_MUL(rcos(BMAGIC_PHASE_ANGLE(phase)), g_ScratchPad.cells.halves[0]);
     g_ScratchPadVectors[1].vz = 0;
-    angle                     = BMAGIC_PHASE_ANGLE((D_801F0D08[g_Task->facing] + 6) & BMAGIC_PHASE_MASK);
-    g_ScratchPadVectors[2].vx = FIXED_MUL(rsin(angle), g_ScratchPad.cells.halves[0]);
-    g_ScratchPadVectors[2].vy = FIXED_MUL(rcos(angle), g_ScratchPad.cells.halves[0]);
+    phase                     = (D_801F0D08[g_Task->facing] + 6) & BMAGIC_PHASE_MASK;
+    g_ScratchPadVectors[2].vx = FIXED_MUL(rsin(BMAGIC_PHASE_ANGLE(phase)), g_ScratchPad.cells.halves[0]);
+    g_ScratchPadVectors[2].vy = FIXED_MUL(rcos(BMAGIC_PHASE_ANGLE(phase)), g_ScratchPad.cells.halves[0]);
     g_ScratchPadVectors[2].vz = 0;
     setRGB0(prim, g_Task->unk_09 * 10 + 1, g_Task->unk_09 * 10 + 1, g_Task->unk_09 * 10 + 1);
     setRGB1(prim, 1, 1, 1);
@@ -513,8 +512,5 @@ NON_MATCHING void func_801F0974(void) {
     RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
     GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(POLY_G3));
 }
-#else
-INCLUDE_ASM(func_801F0974);
-#endif
 
 #include "overlays/bmagic/Effect_SetActorMatrix.h"

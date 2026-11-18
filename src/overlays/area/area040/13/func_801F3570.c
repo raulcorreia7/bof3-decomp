@@ -2,9 +2,9 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801F3570(void) {
-    s32 x;
+    s16 x;
     s32 y;
-    s32 column;
+    u8  column;
     s32 row;
 
     row = 0;

@@ -11,6 +11,7 @@ NON_MATCHING bool Battle_Unequip(void) {
     u8  character_index;
     u32 i;
     u32 row_offset;
+    u32 row_index;
     row      = (u8*)&g_Characters[g_CharSlot[g_PartyBattleOrder[D_801485C4]]];
     slots[0] = row + 0xE;
     slots[1] = row + 0xF;
@@ -30,7 +31,10 @@ NON_MATCHING bool Battle_Unequip(void) {
         i = 0;
         if (*count != 0) {
             do {
-                row_offset      = (u8)i * BATTLE_PARTY_STRIDE;
+                row_index  = (u8)i;
+                row_offset = row_index << 2;
+                row_offset += row_index;
+                row_offset <<= 6;
                 row             = (u8*)D_80145F04 + row_offset;
                 character_index = D_80145F04[row_offset + 0xC8];
                 cell            = (u8*)&g_Characters[character_index];

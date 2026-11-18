@@ -10,6 +10,7 @@ NON_MATCHING bool func_801F3CF0(void) {
     s32          y;
     s32          delta_x;
     s32          delta_y;
+    bool         found = false;
 
     party_size = g_Game.party_size;
     if (party_size <= 0) {
@@ -32,13 +33,14 @@ NON_MATCHING bool func_801F3CF0(void) {
                 delta_y = -delta_y;
             }
             if (delta_x < D_801F492E[offset] && delta_y < D_801F492F[offset]) {
-                return true;
+                found = true;
+                break;
             }
             offset += 4;
         } while (offset < 16);
         i++;
-    } while (i < party_size);
-    return false;
+    } while (i < party_size && !found);
+    return found;
 }
 #else
 INCLUDE_ASM(func_801F3CF0);

@@ -1,13 +1,14 @@
 #include "area118_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F3590(void) {
+MATCH void func_801F3590(void) {
     Actor* work;
 
     if (g_GameCellType == 0 && g_AreaSceneMode == g_Task->unk_0A) {
         return;
     }
     work = g_Task;
+    /* FAKE: keeps the work pseudo first in allocation, so the task pointer stays in a1 as retail has it. */
+    FAKE_USE(work);
     if (work->direction != 0) {
         if (abs(g_Game.members[0].pos.y.fixed - (TO_COORD(COORD_INT(work->pos.y) + 1) | COORD_HALF)) > TO_COORD(2)) {
             goto advance;
@@ -32,6 +33,3 @@ NON_MATCHING void func_801F3590(void) {
 advance:
     work->header.step = 4;
 }
-#else
-INCLUDE_ASM(func_801F3590);
-#endif
