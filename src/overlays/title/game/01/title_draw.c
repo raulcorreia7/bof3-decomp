@@ -38,7 +38,7 @@ MATCH void SND_StartSelectionEffect(void) { /* func_801D1134 */
     if (selection != 0xFFu) {
         u32 offset = selection << 2;
 
-        SND_StartDecrescendo(g_SelectionCues[offset], g_SelectionCues[offset + 1u], 100, 0x10);
+        SND_StartDecrescendo(g_SelectionSepSlots[offset], g_SelectionSepSlots[offset + 1u], 100, 0x10);
     }
 }
 
@@ -53,7 +53,7 @@ MATCH void SND_StopSelectionEffect(void) { /* func_801D1184 */
     if (selection != 0xFFu) {
         u32 offset = selection << 2;
 
-        SND_StopSequence(g_SelectionCues[offset], g_SelectionCues[offset + 1u]);
+        SND_StopSequence(g_SelectionSepSlots[offset], g_SelectionSepSlots[offset + 1u]);
         *selection_ptr = 0xFFu;
     }
 }

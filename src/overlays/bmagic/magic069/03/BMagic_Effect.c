@@ -50,7 +50,7 @@ MATCH void func_801EEC5C(void) {
         dst[i + 32] = src[i + 32];
     }
     g_GfxPalettePending = 1;
-    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
 }
 
 #include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
@@ -105,7 +105,7 @@ MATCH void func_801EF0C4(void) {
     g_Task->unk_2E.value -= step_next;
     if (g_Task->unk_0C == 0) {
         if (g_Task->param.unk_0B == 0) {
-            SND_QueueSelectionEffect(0x103);
+            SND_QueueSelectionSE(0x103);
             g_Task->header.step += 1;
             return;
         }
@@ -144,7 +144,7 @@ MATCH void func_801EF1D0(void) {
         }
     }
     if (g_BattleEffectBattler->param.unk_0B == 1) {
-        SND_QueueSelectionEffect(0x101);
+        SND_QueueSelectionSE(0x101);
         g_Task->unk_09 = 0x10;
         g_Task->header.step += 1;
     }
@@ -249,7 +249,7 @@ MATCH void func_801EF834(void) {
     g_PaletteFades[g_Task->timer].offset.b -= 1;
     if (g_PaletteFades[g_Task->timer].offset.r == 0) {
         if (g_Task->unk_04 == 0) {
-            SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 2));
+            SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 2));
         }
         GFX_FreePaletteFade(g_Task->timer);
         Battle_FadePoisonedBattler(g_Task->param.unk_0B);

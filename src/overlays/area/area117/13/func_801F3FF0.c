@@ -8,7 +8,7 @@ MATCH void func_801F3FF0(void) {
     if (choice >= 0) {
         if (choice < 5) {
             g_ScriptVars[0] = 10;
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 5));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 5));
         }
     }
 }

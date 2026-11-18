@@ -1,7 +1,7 @@
 #include "area077_14.h"
 
 /* Matches the two cell coordinates and the scene mode against the payload's two trigger
- * records, sets the matched record's flag on the scene event bank and queues cue 0x201. */
+ * records, sets the matched record's flag on the scene event bank and queues SE 0x201. */
 MATCH s32 func_801F5880(s32 x, s32 y) {
     s32 i;
     s32 off;
@@ -29,7 +29,7 @@ MATCH s32 func_801F5880(s32 x, s32 y) {
         return 0;
     }
     SYS_ToggleFlag(g_SceneEventFlags, D_801F6B17[i * 4]);
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x01));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x01));
     func_8019ABB0(0xF);
     return 1;
 }

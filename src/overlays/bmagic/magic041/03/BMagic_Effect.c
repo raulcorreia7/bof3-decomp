@@ -40,7 +40,7 @@ NON_MATCHING void func_801EECB0(void) {
     g_BattleEffects[slot].target.party = task;
     FAKE_BARRIER(); /* FAKE: retail re-reads the g_Task cell for the ticker; plain C keeps the copy. */
     g_Task->param.unk_0B++;
-    SND_QueueSelectionEffect(0x100);
+    SND_QueueSelectionSE(0x100);
 }
 #else
 INCLUDE_ASM(func_801EECB0);

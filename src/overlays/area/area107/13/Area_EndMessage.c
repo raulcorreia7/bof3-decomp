@@ -5,7 +5,7 @@
 MATCH void Area_EndMessage(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         Game_ClearScriptActive();
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 6));
         g_Task->header.mode = 0;
     }
 }

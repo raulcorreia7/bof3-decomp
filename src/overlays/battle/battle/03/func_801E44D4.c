@@ -13,6 +13,6 @@ MATCH void func_801E44D4(void) {
     Effect_RotatePosition(work);
     g_Task->timer = 4;
     Battle_IsEnemyBlocked();
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 5));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 5));
     g_Task->unk_03 += 1;
 }

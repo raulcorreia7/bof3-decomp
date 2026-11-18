@@ -31,16 +31,16 @@ MATCH void func_801D0DD4(s32 message_id, s32 confirm) {
                 goto play_stop; /* the complementary row state takes the same exit */
             }
         }
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
         g_MenuMasterSubStep += 1;
         g_MenuMasterBannerLock = 0;
         goto after_input; /* stock cue queued: skip the cursor/selection block */
     play_stop:
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
     } else if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
         g_MenuMasterBannerLock = 1;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 2));
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         g_MenuMasterSubStep = 4;
     } else {
         if (trig & PADLup) {
@@ -49,14 +49,14 @@ MATCH void func_801D0DD4(s32 message_id, s32 confirm) {
                 sel = g_Game.party_size;
             }
             g_MenuMasterCursor = sel - 1;
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
         } else if (trig & PADLdown) {
             if ((g_MenuMasterCursor & BYTE_MASK) == g_Game.party_size - 1) {
                 g_MenuMasterCursor = 0;
             } else {
                 g_MenuMasterCursor = g_MenuMasterCursor + 1;
             }
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
         }
     }
 after_input:

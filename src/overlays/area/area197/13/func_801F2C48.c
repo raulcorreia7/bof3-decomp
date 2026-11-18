@@ -34,7 +34,7 @@ MATCH void func_801F2C48(void) {
     func_801F3110(96, 128, &from, &to);
     func_801F34A0(96, 128, &from, &to);
 
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 7));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 7));
     g_Task->header.step = 0;
     g_Task->header.mode++;
 }

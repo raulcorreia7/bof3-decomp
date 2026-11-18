@@ -29,11 +29,11 @@ MATCH void func_801D2EAC(void) {
         }
     }
     if ((s8)cursor != D_801ED618) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B = D_801ED618;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
         if (D_801ED618 == 1) {
             u8* step = &D_80148651;
 
@@ -67,8 +67,8 @@ MATCH void func_801D2EAC(void) {
         }
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 2));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
         g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
         g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].state    = 1;
         g_MenuPanelTasks[MENU_START_PANEL_ITEMS].state       = 1;

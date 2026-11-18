@@ -1,7 +1,7 @@
 #include "slus.h"
 /*
  * selection rows indexed by id; SND_RequestBGM compares the halfword and
- * SND_PlayBGM reads the two bytes (g_SelectionCues, g_SelectionSequences).
+ * SND_PlayBGM reads the two bytes (g_SelectionSepSlots, g_SelectionSequences).
  */
 
 const BGMTrack g_BGMTracks[BGM_TRACK_COUNT] = {

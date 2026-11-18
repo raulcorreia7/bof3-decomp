@@ -9,7 +9,7 @@ MATCH void func_801F4634(void) {
             func_801A4BC0(g_Task->pos.x.part.integer, g_Task->pos.y.part.integer, 0xA1);
             func_801A4BC0(g_Task->pos.x.part.integer, g_Task->pos.y.part.integer + 1, 0xA1);
             if (*state == 0) {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0));
             }
             g_Task->header.step++;
         }

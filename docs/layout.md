@@ -212,7 +212,7 @@ reads the format includes it. The names match the wiki's format page and the Rus
 
 | Format                                                                                                                                                | Header                   |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| EMI archives, the disc file list, the LZ77 stream, SEP and BGM banks, the BGM selection table, cue tables, overlay headers, script tables             | ours, one per format     |
+| EMI archives, the disc file list, the LZ77 stream, SEP and BGM banks, the BGM selection table, SE tables, overlay headers, script tables              | ours, one per format     |
 | STR and XA sector geometry and the XA subheader (`str.h`)                                                                                             | ours: PsyQ leaves it out |
 | VAB (`VabHdr`, `ProgAtr`, `VagAtr`), TIM (`TIM_IMAGE`), CD positions and files (`CdlLOC`, `CdlFILTER`, `CdlFILE`), the STR sector header (`StHEADER`) | PsyQ's own type          |
 
@@ -253,8 +253,8 @@ void      EMI_Init(void);   /* code in a format header */
 | System: memory          | `include/sys/scratchpad.h`, `include/psx/mem.h`                                                     | RAM-backed system records, scratchpad views, memory-map access                 |
 | System: CD and files    | `include/sys/cd.h`                                                                                  | CD command, file and stream state                                              |
 | Graphics                | `include/gfx/*.h`                                                                                   | drawing primitives, VRAM records, graphics state                               |
-| Audio                   | `include/audio/*.h`                                                                                 | audio cues, VAB data, audio state                                              |
-| Disc and file formats   | `include/sys/{cd_format,emi,lz77,str}.h`, `include/audio/{bank,bgm,cue,sep,vab}.h`                  | one self-contained header per format ([format headers](#format-headers))       |
+| Audio                   | `include/audio/*.h`                                                                                 | audio SEs, VAB data, audio state                                               |
+| Disc and file formats   | `include/sys/{cd_format,emi,lz77,str}.h`, `include/audio/{bank,bgm,se,sep,vab}.h`                   | one self-contained header per format ([format headers](#format-headers))       |
 | Text                    | `include/game/{encoding,text}.h`                                                                    | text encodings, control codes, text records                                    |
 | Game records            | `include/game/*.h`                                                                                  | shared database records: items, abilities, characters, enemies, genes, fairies |
 | Menu                    | `include/menu/*.h`                                                                                  | menu panels, inventory, saves, shops                                           |

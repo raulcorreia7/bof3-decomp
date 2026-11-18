@@ -21,7 +21,7 @@ MATCH void func_801D7960(void) {
             *turns_left -= turns * 0xA;
             return;
         }
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_80148651 -= 2;
     }
 }

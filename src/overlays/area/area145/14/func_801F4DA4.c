@@ -36,7 +36,7 @@ MATCH u8 func_801F4DA4(u32 frame) {
         return 1;
     }
     if (t == D_801F5CDD[off]) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 6));
     }
     return func_801F4EDC(t, D_801F5CDE[off]);
 }

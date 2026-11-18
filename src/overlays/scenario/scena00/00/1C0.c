@@ -434,7 +434,7 @@ MATCH void func_801F7A5C(void) {
     work_state->channel_08       = 0;
     work_state->channel_07       = 0;
     work_state->channel_06       = 0;
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 14));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 14));
     SCN_EFFECT->step = 1;
 }
 
@@ -447,7 +447,7 @@ MATCH void func_801F7B0C(void) {
     step             = work->channel_18 + 8;
     work->channel_18 = step;
     if (step == 96) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 14));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 14));
         SCN_EFFECT->step = 2;
     }
 }
@@ -462,10 +462,10 @@ MATCH void func_801F7B80(void) {
     channel          = work->channel_1C + 0x10;
     work->channel_1C = channel;
     if (channel == 0x20) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 14));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 14));
     }
     if (SCN_EFFECT->channel_1C == 0xA0) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 14));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 14));
         SCN_EFFECT->step = 3;
     }
 }
@@ -479,7 +479,7 @@ MATCH void func_801F7C34(void) {
     work             = SCN_EFFECT;
     work->channel_0B = (work->channel_0B + 0x10);
     if (SCN_EFFECT->channel_0B == 0x60) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 14));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 14));
         SCN_EFFECT->step = 4;
     }
 }
@@ -494,7 +494,7 @@ MATCH void func_801F7CF0(void) {
     work             = SCN_EFFECT;
     work->channel_08 = (work->channel_08 + 8);
     if (SCN_EFFECT->channel_08 == 0x60) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 14));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 14));
         SCN_EFFECT->step = 5;
     }
 }
@@ -510,10 +510,10 @@ MATCH void func_801F7DC8(void) {
     work             = SCN_EFFECT;
     work->channel_0A = (work->channel_0A + 8);
     if (SCN_EFFECT->channel_0A == 0x10) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 14));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 14));
     }
     if (SCN_EFFECT->channel_0A == 0x60) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 14));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 14));
         SCN_EFFECT->step = 6;
     }
 }
@@ -530,10 +530,10 @@ MATCH void func_801F7EE0(void) {
     work             = SCN_EFFECT;
     work->channel_06 = (work->channel_06 + 8);
     if (SCN_EFFECT->channel_06 == 0x10) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 14));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 14));
     }
     if (SCN_EFFECT->channel_06 == 0x60) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 14));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 14));
         SCN_EFFECT->step = 7;
     }
 }
@@ -551,7 +551,7 @@ MATCH void func_801F8014(void) {
     work             = SCN_EFFECT;
     work->channel_07 = (work->channel_07 + 8);
     if (SCN_EFFECT->channel_07 == 0x60) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 14));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 14));
         SCN_EFFECT->step = 8;
     }
 }
@@ -572,12 +572,12 @@ MATCH void func_801F8140(void) {
     channel          = work->channel_20 + 8;
     work->channel_20 = channel;
     if (channel == 0x10) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 14));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 14));
     }
     if (SCN_EFFECT->channel_20 == 0x60) {
         u8* counter;
 
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
         counter = &g_ScriptVarsReq.byte;
         (*counter) += 1;
         SCN_EFFECT->step = 9;
@@ -1058,7 +1058,7 @@ MATCH void func_801F92DC(void) {
         D_801468A4 = 2;
         D_80147BA0 = 1;
         D_80147BA4 = 3;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0));
         g_ScenarioState.state_04 = 0xB;
         g_ScenarioState.timer_06 = 20;
         g_AreaDrawFlags          = 0;
@@ -1959,7 +1959,7 @@ MATCH void func_801FB67C(void) {
                 g_ScenarioState.timer_06--;
             } else {
                 Game_RequestAreaChange(AREA_ID_DAUNA_MINE_ADULT, TO_COORD(15), TO_COORD(33), FACING_UP);
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 6));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 6));
                 g_ScriptVarsReq.word     = 0;
                 *state                   = 0;
                 g_ScenarioState.state_04 = 0xA;
@@ -2054,7 +2054,7 @@ MATCH void func_801FB924(void) {
                 g_ScriptVars[2] = 0x10;
                 g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
                 UI_SetMode(UI_MODE_FADE_IN);
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
                 *counter                = 60;
                 g_ScenarioState.step_05 = 3;
             }
@@ -2154,7 +2154,7 @@ MATCH void func_801FB924(void) {
                 D_80146890 = (D_80146890 + 1) & 0x3;
                 Actor_RequestScript(D_80146890);
             }
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 4));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 4));
             if (g_ScriptVars[2] == 0x15) {
                 counter[0]              = 0;
                 counter[1]              = 0;
@@ -2215,7 +2215,7 @@ MATCH void func_801FBE88(void) {
         D_1F800010[1] -= 2;
         D_80147BF0[0] -= 0x40;
     }
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 4));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 4));
 }
 
 MATCH void func_801FC01C(void) {

@@ -37,7 +37,7 @@ MATCH void func_801F529C(void) {
                 goto message_request;
             } else {
                 SYS_ToggleFlag(g_SceneEventFlags, 42);
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
                 D_801448EE             = 10;
                 g_SceneEventState.step = 6;
             }
@@ -91,7 +91,7 @@ MATCH void func_801F529C(void) {
             if (g_InputHeld & PADRdown) {
                 func_801F61A8(140);
                 g_SpawnedActors[g_SceneActorSlot].header.mode = 3;
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 9));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 9));
                 g_ScriptVars[3]        = 10;
                 g_SceneEventState.step = 23;
             }
@@ -113,7 +113,7 @@ MATCH void func_801F529C(void) {
             if (g_InputHeld & PADRdown) {
                 func_801F61A8(142);
                 g_SpawnedActors[g_SceneActorSlot].header.mode = 3;
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 9));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 9));
                 g_ScriptVars[3]        = 12;
                 g_SceneEventState.step = 26;
             }

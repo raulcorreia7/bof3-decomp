@@ -3,7 +3,7 @@
 
 #include "types.h"
 #include "audio/bgm.h"
-#include "audio/cue.h"
+#include "audio/se.h"
 #include "sys/cd_format.h"
 #include "psx/psyq.h"
 #include "game/character.h"

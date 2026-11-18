@@ -67,7 +67,7 @@ NON_MATCHING void func_801FC45C(void) {
             break;
         case 7:
             SND_StopSequence(0, 2);
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 2));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 2));
             g_ScenarioState.step_05 = 8;
             break;
         case 8:
@@ -75,7 +75,7 @@ NON_MATCHING void func_801FC45C(void) {
                 break;
             }
             SND_PlayBGM(0x24, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
             g_ScenarioState.step_05 = 9;
             g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
             break;

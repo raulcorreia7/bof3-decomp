@@ -29,7 +29,7 @@ MATCH void func_801D2D64(void) {
         g_ShopItemCount = g_ShopItemCountMax;
     }
     if (previous != g_ShopItemCount) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
     if (input & PADLdown) {
         g_ShopItemCount -= 0xA;
@@ -43,16 +43,16 @@ MATCH void func_801D2D64(void) {
         g_ShopItemCount = g_ShopItemCountMax;
     }
     if (previous != g_ShopItemCount) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
         D_8014865B = 1;
         D_80148652 += 1;
         return;
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         (*(s8*)&D_80148652)--;
     }
 }

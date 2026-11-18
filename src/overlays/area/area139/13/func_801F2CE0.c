@@ -29,7 +29,7 @@ MATCH void func_801F2CE0(void) {
     }
 
     if (SYS_TestFlag(g_SceneEventFlags, 0x5C) != 0) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 6));
         g_Task->header.mode = 3;
     }
 }

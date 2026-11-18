@@ -5,7 +5,7 @@
 
 /* The EMI container: a sector-aligned archive with a header, a 16-byte TOC row
  * per entry, and one payload per entry. A TOC row's type says what the payload
- * is (a RAM copy, a packed payload, a graphics upload, a VAB header or body, a cue
+ * is (a RAM copy, a packed payload, a graphics upload, a VAB header or body, an SE
  * table, a sequence package) and its load argument is a destination or a
  * selector for that type. The main executable's loader copies or maps each
  * payload. Measured over all 880 US archives: @source: wiki:formats/emi. */
@@ -24,14 +24,14 @@
 #define EMI_PAYLOAD_FILL          0x5f   /* fill from a payload end to the next EMI_SECTOR_SIZE boundary */
 
 /* Entry slots inside one archive (disc names; @source: wiki:formats/emi). The archive kinds BENEMY, BGM,
- * BPLCHAR and PLCHAR start with the same three entries: the VAB header, the cue table or the sequence
+ * BPLCHAR and PLCHAR start with the same three entries: the VAB header, the SE table or the sequence
  * (slot 1, by kind) and the VAB body. The bank selectors are the load_arg of the VAB entries. */
-typedef enum EmiSoundSlot {
+typedef enum EMISoundSlot {
     EMI_SOUND_SLOT_VAB_HEADER = 0,
-    EMI_SOUND_SLOT_SE         = 1, /* BENEMY, BPLCHAR and PLCHAR: the cue table */
+    EMI_SOUND_SLOT_SE         = 1, /* BENEMY, BPLCHAR and PLCHAR: the SE table */
     EMI_SOUND_SLOT_SEQUENCE   = 1, /* BGM */
-    EMI_SOUND_SLOT_VAB_BODY   = 2, /* BGM: 3 when the archive also carries a cue table at 2 */
-} EmiSoundSlot;
+    EMI_SOUND_SLOT_VAB_BODY   = 2, /* BGM: 3 when the archive also carries an SE table at 2 */
+} EMISoundSlot;
 
 #define EMI_BENEMY_BANK              6
 #define EMI_BGM_BANK                 0
@@ -56,7 +56,7 @@ typedef enum EMIEntryType {
     EMI_ENTRY_GRAPHICS      = 3,  /* raw graphics upload; load_arg is the upload descriptor */
     EMI_ENTRY_VAB_HEADER    = 6,  /* VAB header; load_arg is the bank selector */
     EMI_ENTRY_VAB_BODY      = 7,  /* VAB body of the same bank */
-    EMI_ENTRY_CUES          = 8,  /* one VAB bank's cue table
+    EMI_ENTRY_SE            = 8,  /* one VAB bank's SE table
                                    * (@source: wiki:formats/audio#emi-type-8-cue-records) */
     EMI_ENTRY_SEQUENCE_COPY = 9,  /* sequence-side copy with type 10 (EMI_LoadSequence) */
     EMI_ENTRY_SEQUENCE      = 10, /* SEP sequence package (include/audio/sep.h) */

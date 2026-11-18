@@ -92,16 +92,16 @@ MATCH void func_801DFCB4(void) {
                 tail_work->chr.status = STATUS_KO;
             }
             if (!(g_Game.current->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM)) {
-                Battle_PlayEffectCue(1);
+                Battle_PlayEffectSE(1);
             }
             GFX_FreePaletteFadeTarget(g_Task);
         } else {
-            Battle_PlayEffectCue(0);
+            Battle_PlayEffectSE(0);
         }
     }
     check_work = g_Game.current;
     if (check_work->u.turn.hp_change < 0 || check_work->u.turn.ap_change < 0) {
-        SND_QueueSelectionEffect(0x206);
+        SND_QueueSelectionSE(0x206);
     }
     if (!(g_Battle.flags & BATTLE_STATE_DAMAGE_APPLIED)) {
         action_type = g_BattleActionType_nv;

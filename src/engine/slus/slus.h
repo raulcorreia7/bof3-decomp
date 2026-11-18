@@ -42,9 +42,9 @@
 #define MAP_ZONE_COUNT             666                  /* records in g_AreaEncounterZones */
 #define MAP_ZONE_LIST_COUNT        200                  /* lists in g_EncounterZones, one per map index */
 #define MAP_ZONE_SIZE              0x08
-/* The tone a cue reader looked up last: D_8018B40C is the tone's offset inside
+/* The tone a record reader looked up last: D_8018B40C is the tone's offset inside
  * the VAB header at `vab_header` (a word of g_SndBankHeaders). */
-#define CUE_TONE(vab_header)       ((VagAtr*)(D_8018B40C + (vab_header)))
+#define SE_TONE(vab_header)        ((VagAtr*)(D_8018B40C + (vab_header)))
 #define g_SceneRecord              (*(RecordKey*)&g_ScenarioState)
 #define g_CurrentActor             ((u8*)g_CurrentActor)
 
@@ -79,80 +79,80 @@
     *record = word;                                                                                   \
     func_801576FC((u8*)MAP_BUNDLE_BASE + g_AreaMapBundle.object_list_28 * 4 + (word & HALF_MASK) * 4)
 
-/* One alias arm of a cue reader: the tone table and the cue table of the bank `alias`. */
-#define SLUS_CUE_ALIAS_ARM(alias, tones, cues)   \
-    case alias:                                  \
-        D_8018B314 = CUE_TONE(tones)->min;       \
-        D_8018B320 = CUE_TONE(tones)->shift;     \
-        D_8018B32C = CUE_TONE(tones)->pan;       \
-        D_8018B324 = CUE_TONE(tones)->vol;       \
-        D_8018B328 = CUE_TONE(tones)->vol;       \
-        D_8018B318 = (cues)[D_8018B404 * 4 + 3]; \
+/* One alias arm of a record reader: the tone table and the record table of the bank `alias`. */
+#define SLUS_SE_ALIAS_ARM(alias, tones, se_records)    \
+    case alias:                                        \
+        D_8018B314 = SE_TONE(tones)->min;              \
+        D_8018B320 = SE_TONE(tones)->shift;            \
+        D_8018B32C = SE_TONE(tones)->pan;              \
+        D_8018B324 = SE_TONE(tones)->vol;              \
+        D_8018B328 = SE_TONE(tones)->vol;              \
+        D_8018B318 = (se_records)[D_8018B404 * 4 + 3]; \
         break;
 
-/* Bank cue reader: loads cue D_8018B404 of the bank's cue table into voice slot 0 and fills one more slot per layer on the next voices (wrapping at 24). The head is the one body of banks 0 to 6; the alias switch that follows lets another bank supply the tone and voice. */
-#define SLUS_READ_BANK_CUE_HEAD(bank, cues, tones)                                                            \
-    s32 cue;                                                                                                  \
+/* Bank record reader: loads record D_8018B404 of the bank's record table into voice slot 0 and fills one more slot per layer on the next voices (wrapping at 24). The head is the one body of banks 0 to 6; the alias switch that follows lets another bank supply the tone and voice. */
+#define SLUS_READ_BANK_SE_HEAD(bank, se_records, tones)                                                       \
+    s32 record;                                                                                               \
     s16 program;                                                                                              \
     s16 tone;                                                                                                 \
     s16 voice;                                                                                                \
                                                                                                               \
     D_8018B30C = (bank);                                                                                      \
-    cue        = D_8018B404 * 4;                                                                              \
-    D_8018B3E0 = (cues)[cue];                                                                                 \
-    program    = (cues)[cue + 1] & EMI_CUE_PROGRAM_MASK;                                                      \
+    record     = D_8018B404 * 4;                                                                              \
+    D_8018B3E0 = (se_records)[record];                                                                        \
+    program    = (se_records)[record + 1] & EMI_SE_PROGRAM_MASK;                                              \
     D_8018B308 = program;                                                                                     \
-    D_8018B3F4 = (cues)[cue + 1] & EMI_SE_USE_SE_VOLUME_FLAG;                                                 \
-    tone       = (cues)[cue + 2] >> 4;                                                                        \
+    D_8018B3F4 = (se_records)[record + 1] & EMI_SE_USE_VOLUME_FLAG;                                           \
+    tone       = (se_records)[record + 2] >> 4;                                                               \
     D_8018B310 = tone;                                                                                        \
-    D_8018B3E8 = (cues)[cue + 2] & EMI_CUE_COMPARE_MASK;                                                      \
+    D_8018B3E8 = (se_records)[record + 2] & EMI_SE_COMPARE_MASK;                                              \
     D_8018B40C = g_VabProgramOffsets[program] + VAB_TONE_TABLE + g_VabToneOffsets[tone];                      \
-    D_8018B314 = CUE_TONE((tones))->min;                                                                      \
-    D_8018B320 = CUE_TONE((tones))->shift;                                                                    \
-    D_8018B32C = CUE_TONE((tones))->pan;                                                                      \
-    D_8018B324 = CUE_TONE((tones))->vol;                                                                      \
-    D_8018B328 = CUE_TONE((tones))->vol;                                                                      \
-    voice      = (cues)[cue + 3] & EMI_CUE_VOICE_MASK;                                                        \
+    D_8018B314 = SE_TONE((tones))->min;                                                                       \
+    D_8018B320 = SE_TONE((tones))->shift;                                                                     \
+    D_8018B32C = SE_TONE((tones))->pan;                                                                       \
+    D_8018B324 = SE_TONE((tones))->vol;                                                                       \
+    D_8018B328 = SE_TONE((tones))->vol;                                                                       \
+    voice      = (se_records)[record + 3] & EMI_SE_VOICE_MASK;                                                \
     D_8018B318 = voice;                                                                                       \
-    D_8018B3E4 = (cues)[cue + 3] & EMI_CUE_LAYER_MASK;                                                        \
+    D_8018B3E4 = (se_records)[record + 3] & EMI_SE_LAYER_MASK;                                                \
     if (D_8018B3E4 != 0) {                                                                                    \
         D_8018B3E4 = D_8018B3E4 >> 5;                                                                         \
         switch (D_8018B3E4) {                                                                                 \
             case 3:                                                                                           \
-                D_8018B380 = (cues)[D_8018B404 * 4 + 1] & EMI_CUE_PROGRAM_MASK;                               \
+                D_8018B380 = (se_records)[D_8018B404 * 4 + 1] & EMI_SE_PROGRAM_MASK;                          \
                 D_8018B388 = D_8018B310 + D_8018B3E4;                                                         \
                 D_8018B38C = D_8018B314;                                                                      \
                 D_8018B398 = D_8018B320;                                                                      \
                 D_8018B40C = g_VabProgramOffsets[D_8018B380] + VAB_TONE_TABLE + g_VabToneOffsets[D_8018B388]; \
-                D_8018B39C = CUE_TONE((tones))->vol;                                                          \
-                D_8018B3A0 = CUE_TONE((tones))->vol;                                                          \
-                D_8018B3A4 = CUE_TONE((tones))->pan;                                                          \
+                D_8018B39C = SE_TONE((tones))->vol;                                                           \
+                D_8018B3A0 = SE_TONE((tones))->vol;                                                           \
+                D_8018B3A4 = SE_TONE((tones))->pan;                                                           \
                 D_8018B390 = D_8018B318 + 3;                                                                  \
                 if (D_8018B390 >= 24) {                                                                       \
                     D_8018B390 = D_8018B318 + 3 - 24;                                                         \
                 }                                                                                             \
             case 2:                                                                                           \
-                D_8018B358 = (cues)[D_8018B404 * 4 + 1] & EMI_CUE_PROGRAM_MASK;                               \
+                D_8018B358 = (se_records)[D_8018B404 * 4 + 1] & EMI_SE_PROGRAM_MASK;                          \
                 D_8018B360 = D_8018B310 + D_8018B3E4;                                                         \
                 D_8018B364 = D_8018B314;                                                                      \
                 D_8018B370 = D_8018B320;                                                                      \
                 D_8018B40C = g_VabProgramOffsets[D_8018B358] + VAB_TONE_TABLE + g_VabToneOffsets[D_8018B360]; \
-                D_8018B374 = CUE_TONE((tones))->vol;                                                          \
-                D_8018B378 = CUE_TONE((tones))->vol;                                                          \
-                D_8018B37C = CUE_TONE((tones))->pan;                                                          \
+                D_8018B374 = SE_TONE((tones))->vol;                                                           \
+                D_8018B378 = SE_TONE((tones))->vol;                                                           \
+                D_8018B37C = SE_TONE((tones))->pan;                                                           \
                 D_8018B368 = D_8018B318 + 2;                                                                  \
                 if (D_8018B368 >= 24) {                                                                       \
                     D_8018B368 = D_8018B318 + 2 - 24;                                                         \
                 }                                                                                             \
             case 1:                                                                                           \
-                D_8018B330 = (cues)[D_8018B404 * 4 + 1] & EMI_CUE_PROGRAM_MASK;                               \
+                D_8018B330 = (se_records)[D_8018B404 * 4 + 1] & EMI_SE_PROGRAM_MASK;                          \
                 D_8018B338 = D_8018B310 + D_8018B3E4;                                                         \
                 D_8018B33C = D_8018B314;                                                                      \
                 D_8018B348 = D_8018B320;                                                                      \
                 D_8018B40C = g_VabProgramOffsets[D_8018B330] + VAB_TONE_TABLE + g_VabToneOffsets[D_8018B338]; \
-                D_8018B34C = CUE_TONE((tones))->vol;                                                          \
-                D_8018B350 = CUE_TONE((tones))->vol;                                                          \
-                D_8018B354 = CUE_TONE((tones))->pan;                                                          \
+                D_8018B34C = SE_TONE((tones))->vol;                                                           \
+                D_8018B350 = SE_TONE((tones))->vol;                                                           \
+                D_8018B354 = SE_TONE((tones))->pan;                                                           \
                 D_8018B340 = D_8018B318 + 1;                                                                  \
                 if (D_8018B340 >= 24) {                                                                       \
                     D_8018B340 = D_8018B318 + 1 - 24;                                                         \
@@ -161,16 +161,16 @@
         }                                                                                                     \
     }
 
-/* The cue reader of banks 0, 4, 5 and 6, whose alias banks are 1 to 3. */
-#define SLUS_READ_BANK_CUE(bank, cues, tones)                            \
-    SLUS_READ_BANK_CUE_HEAD(bank, cues, tones)                           \
-    if (D_8018B3E0 != 0) {                                               \
-        D_8018B30C = D_8018B3E0 & EMI_CUE_ALIAS_MASK;                    \
-        switch (D_8018B30C) {                                            \
-            SLUS_CUE_ALIAS_ARM(1, g_SndBankHeaders[1], g_SndBankCues[1]) \
-            SLUS_CUE_ALIAS_ARM(2, g_SndBankHeaders[2], g_SndBankCues[2]) \
-            SLUS_CUE_ALIAS_ARM(3, g_SndBankHeaders[3], g_SndBankCues[3]) \
-        }                                                                \
+/* The record reader of banks 0, 4, 5 and 6, whose alias banks are 1 to 3. */
+#define SLUS_READ_BANK_SE(bank, se_records, tones)                    \
+    SLUS_READ_BANK_SE_HEAD(bank, se_records, tones)                   \
+    if (D_8018B3E0 != 0) {                                            \
+        D_8018B30C = D_8018B3E0 & EMI_SE_ALIAS_MASK;                  \
+        switch (D_8018B30C) {                                         \
+            SLUS_SE_ALIAS_ARM(1, g_SndBankHeaders[1], g_SndBankSe[1]) \
+            SLUS_SE_ALIAS_ARM(2, g_SndBankHeaders[2], g_SndBankSe[2]) \
+            SLUS_SE_ALIAS_ARM(3, g_SndBankHeaders[3], g_SndBankSe[3]) \
+        }                                                             \
     }
 
 /* Types. */
@@ -476,8 +476,8 @@ extern s32                   D_80146518[];
 extern u32                   g_EmiSlotSectors[];
 extern EMIBank               g_EmiBanks[7];
 extern volatile EMIAudioLink D_80146780[];
-/* FAKE: SND_SetBankLayout stores the bank records, headers and cue tables through their own symbols;
- * the g_EmiBanks, g_SndBankHeaders and g_SndBankCues views share one base register and shrink it. */
+/* FAKE: SND_SetBankLayout stores the bank records, headers and SE tables through their own symbols;
+ * the g_EmiBanks, g_SndBankHeaders and g_SndBankSe views share one base register and shrink it. */
 extern u8*                   D_80146784;
 extern u32                   D_80146788[];
 extern s16                   D_8014678C;
@@ -580,7 +580,7 @@ extern s32                   g_AreaGridActors[];
 extern u8                    D_80148331[];
 extern u8                    D_80148332[];
 extern u8                    D_8014865B;
-extern u8                    g_SndBankCues[7][124];
+extern u8                    g_SndBankSe[7][124];
 extern u16                   D_80148A04;
 extern u16                   D_80148A06;
 extern u16                   D_80148A0C;
@@ -1218,19 +1218,19 @@ s32                               Game_IsScriptVarEqual(u8* operand);
 s32                               Game_IncScriptVar(u8* operand);
 s32                               func_8015BABC(void);
 /* func_8015E994 */
-void                              SND_ReadCueBank0(void);
+void                              SND_ReadSeBank0(void);
 /* func_8015EFAC */
-void                              SND_ReadCueBank1(void);
+void                              SND_ReadSeBank1(void);
 /* func_8015F5C8 */
-void                              SND_ReadCueBank2(void);
+void                              SND_ReadSeBank2(void);
 /* func_8015FBE4 */
-void                              SND_ReadCueBank3(void);
+void                              SND_ReadSeBank3(void);
 /* func_80160200 */
-void                              SND_ReadCueBank4(void);
+void                              SND_ReadSeBank4(void);
 /* func_8016081C */
-void                              SND_ReadCueBank5(void);
+void                              SND_ReadSeBank5(void);
 /* func_80160E38 */
-void                              SND_ReadCueBank6(void);
+void                              SND_ReadSeBank6(void);
 extern void                       func_80161454(u32 index);
 void                              func_80163230(void);
 void                              func_80163698(void);
@@ -1255,7 +1255,7 @@ extern s32                        func_801F2C04(void);
 /* Pause or replay the sequence player for the selected sound entry. */
 static inline void Snd_ToggleSequencePlayer(void (*action)(short, short), s32 cue_id) {
     if ((cue_id & BYTE_MASK) != 0xFF) {
-        action(g_SelectionEffectVoices[g_SelectionCues[(cue_id & BYTE_MASK) * 4]], g_SelectionSequences[(cue_id & BYTE_MASK) * 4]);
+        action(g_SelectionEffectVoices[g_SelectionSepSlots[(cue_id & BYTE_MASK) * 4]], g_SelectionSequences[(cue_id & BYTE_MASK) * 4]);
     }
 }
 
@@ -1303,13 +1303,13 @@ void EMI_LoadVabHeader(void);
 
 void EMI_LoadVabBody(void);
 
-void EMI_LoadSoundCues(void);
+void EMI_LoadSE(void);
 
 void EMI_LoadSequence(void);
 
 s32 EMI_NextEntry(u8 slot);
 
-extern u32 g_SndCueReaders[7];
+extern u32 g_SndSeReaders[7];
 
 void EMI_Update(void);
 

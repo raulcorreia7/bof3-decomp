@@ -313,7 +313,7 @@ typedef struct BattleMessagePanelSteps {
 
 extern BattleEventSteps         g_BattleEvents;
 /* D_801D0C98 */
-extern u8                       s_BattleCueIds[];
+extern u8                       s_BattleSeIds[];
 extern DropChances              g_BattleDropChances;
 /* D_801D0CC0 */
 extern BattleEffectModes        g_BattleEffectModes;

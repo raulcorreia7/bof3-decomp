@@ -37,10 +37,10 @@ enum WellMode {
     WELL_MODE_FAIL         = 0x16,
 };
 
-/* Sound cues of the well minigame (bank 2). */
-#define WELL_CUE_LOWER_END_READY  EMI_CUE_ID(SND_BANK_AREA, 0)
-#define WELL_CUE_LOWER_END_REPEAT EMI_CUE_ID(SND_BANK_AREA, 1)
-#define WELL_CUE_SWISH            EMI_CUE_ID(SND_BANK_AREA, 2)
+/* Sound SE of the well minigame (bank 2). */
+#define WELL_CUE_LOWER_END_READY  EMI_SE_ID(SND_BANK_AREA, 0)
+#define WELL_CUE_LOWER_END_REPEAT EMI_SE_ID(SND_BANK_AREA, 1)
+#define WELL_CUE_SWISH            EMI_SE_ID(SND_BANK_AREA, 2)
 
 extern u8  D_80145E97;
 extern u8  D_80145EDA;

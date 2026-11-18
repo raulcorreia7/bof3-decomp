@@ -5,8 +5,8 @@ MATCH void func_801F2CAC(void) {
     if (SYS_TestFlag(g_SceneEventFlags, COORD_FRAC(g_Task->pos.x)) != 0) {
         g_Task->timer = 0;
         g_Task->header.step++;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x02));
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x01));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x02));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x01));
     }
     func_801F3070();
 }

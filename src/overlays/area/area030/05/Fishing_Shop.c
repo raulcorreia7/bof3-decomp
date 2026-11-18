@@ -87,13 +87,13 @@ MATCH void Fishing_ShopChooseItem(void) {
         if ((s8)s_ListCursor < 0) {
             s_ListCursor = s_ShopItemCount - 1;
         }
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     } else if ((r & PADLdown) != 0) {
         s_ListCursor += 1;
         if ((s8)s_ListCursor >= s_ShopItemCount) {
             s_ListCursor = 0;
         }
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     if ((g_InputPressed & g_InputMasks[FISHING_INPUT_CAST]) != 0) {
         if (Fishing_ShopTradeBlocked(s_ListCursor, 1) == 0) {
@@ -101,23 +101,23 @@ MATCH void Fishing_ShopChooseItem(void) {
                     Item_Count(D_801E2F7D[D_801E3134[g_GameEntryFacing][(s8)s_ListCursor] << 3], D_801E2F7C[D_801E3134[g_GameEntryFacing][(s8)s_ListCursor]].cost_00, 1);
             if (total >= 99) {
                 s_ListCursor |= 0x80;
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
                 s_ListItemId = 0;
                 s_Step       = 3;
             } else {
                 s_ListCursor |= 0x40;
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
                 s_Step += 1;
             }
         } else {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
         }
         goto tail; /* skips the cancel branch: the confirm path shares the tail */
     }
     if ((g_InputPressed & g_InputMasks[FISHING_INPUT_CANCEL]) != 0) {
         s_ShopDeclined = 1;
         s_ListCursor |= 0x80;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         s_ShopMode += 1;
     }
 tail:
@@ -176,16 +176,16 @@ MATCH void Fishing_ShopChooseQuantity(void) {
         s_ListItemId = s_ListItemId - 1;
     }
     if ((s8)s_ListItemId != (s8)s2) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     if (g_InputPressed & g_InputMasks[FISHING_INPUT_CAST]) {
         s_ShopDeclined = 0;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
         s_Step = s_Step + 1;
     } else if (g_InputPressed & g_InputMasks[FISHING_INPUT_CANCEL]) {
         s_ListItemId = 1;
         s_ListCursor &= 0xBF;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         s_Step = s_Step - 1;
     }
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
@@ -204,16 +204,16 @@ MATCH void Fishing_ShopConfirm(void) {
     pad = &g_InputPressed;
     if (INPUT_REPEATED(*pad, (PADLright | PADLleft)) & (PADLright | PADLleft)) {
         s_ShopDeclined ^= 1;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     } else if (*pad & g_InputMasks[FISHING_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         s_Step -= 1;
     } else if (*pad & g_InputMasks[FISHING_INPUT_CAST]) {
         if (s_ShopDeclined != 0) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
             s_Step -= 1;
         } else {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 5));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 5));
             s_ListCursor &= 0xBF;
             Item_Add(D_801E2F7D[D_801E3134[g_GameEntryFacing][(s8)s_ListCursor] * 8], D_801E2F7C[D_801E3134[g_GameEntryFacing][(s8)s_ListCursor]].cost_00, s_ListItemId, 0);
             Fishing_ShopTakeTradeItems();
@@ -246,7 +246,7 @@ MATCH void Fishing_ShopTooGreedy(void) {
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     if ((g_InputPressed & (g_InputMasks[FISHING_INPUT_CAST] | g_InputMasks[FISHING_INPUT_CANCEL])) != 0) {
         s_ListItemId = 1;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         s_Step = 0;
         s_ListCursor &= 0x7F;
         Fishing_ShopDrawTradeList(0);
@@ -269,11 +269,11 @@ MATCH void Fishing_ShopConfirmAllInput(void) {
     keys = &g_InputPressed;
     if ((INPUT_REPEATED(*keys, (PADLright | PADLleft)) & (PADLright | PADLleft)) != 0) {
         s_ShopDeclined ^= 1;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     } else {
         if ((*keys & g_InputMasks[FISHING_INPUT_CANCEL]) != 0) {
             s_ShopDeclined = 1;
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
             {
                 u8 work = s_ShopMode - 1;
                 u8 sel  = s_ListCursor & 0x7F;
@@ -287,7 +287,7 @@ MATCH void Fishing_ShopConfirmAllInput(void) {
                 UI_SetMode(0);
                 s_Step += 1;
             } else {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
                 {
                     u8 work = s_ShopMode - 1;
                     u8 sel  = s_ListCursor & 0x7F;

@@ -2,5 +2,5 @@
 
 MATCH void func_801F4554(void) {
     SYS_ClearFlag(g_SceneFlags, 60);
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 3));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
 }

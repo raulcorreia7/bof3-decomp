@@ -272,7 +272,7 @@ MATCH void func_801F7FF0(void) {
     if (g_UiWindowEffectBusy == 0) {
         bgm = &g_SndBGMId;
         row = *bgm * 4;
-        SND_StopSequence(g_SelectionCues[row], g_SelectionSequences[row]);
+        SND_StopSequence(g_SelectionSepSlots[row], g_SelectionSequences[row]);
         stage                    = &D_80146873;
         *bgm                     = 0xFF;
         g_AreaDrawFlags          = 0;
@@ -473,7 +473,7 @@ MATCH void func_801F8664(void) {
     s8* state;
 
     if ((g_InputPressed & PADRdown) || D_801F9DD8 != 0) {
-        SND_StartDecrescendo(g_SelectionCues[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4], 100, 16);
+        SND_StartDecrescendo(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4], 100, 16);
         UI_SetMode(UI_MODE_LONG_FADE_OUT);
         state = &g_ScenarioState.state_04;
         (*state)++;
@@ -488,7 +488,7 @@ MATCH void func_801F8710(void) {
 
     if (g_UiWindowEffectBusy == 0) {
         bgm = &g_SndBGMId;
-        SND_StopSequence(g_SelectionCues[*bgm * 4], g_SelectionSequences[*bgm * 4]);
+        SND_StopSequence(g_SelectionSepSlots[*bgm * 4], g_SelectionSequences[*bgm * 4]);
         *bgm = GAME_NONE;
         SND_SetBankLayout(0);
         g_AreaDrawFlags = 0;

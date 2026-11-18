@@ -11,7 +11,7 @@ MATCH void func_801F2F5C(void) {
     quad->height += 64;
     quad->angle += 2;
     if (timer == 15) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 2));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 2));
     }
     func_801F358C(quad);
     /* kept: the group header types the family's three-argument form, so this image's no-argument step keeps the cast. */

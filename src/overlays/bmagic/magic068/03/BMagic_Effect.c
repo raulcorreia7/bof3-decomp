@@ -286,7 +286,7 @@ MATCH void func_801EF7C4(void) {
     g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
     g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x02000000;
     Battle_ProjectRange();
-    SND_QueueSelectionEffect(0x100);
+    SND_QueueSelectionSE(0x100);
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0xF;
     g_Task->timer        = 3;
@@ -309,10 +309,10 @@ MATCH void func_801EF908(void) {
     if (--g_Task->unk_09 == 0) {
         g_Task->unk_09 = 0xF;
         if (--g_Task->timer != 0) {
-            SND_QueueSelectionEffect(0x100);
+            SND_QueueSelectionSE(0x100);
             g_Task->header.step -= 1;
         } else {
-            SND_QueueSelectionEffect(0x101);
+            SND_QueueSelectionSE(0x101);
             g_Task->param.unk_0B = 0xC;
             g_Task->header.step += 1;
         }

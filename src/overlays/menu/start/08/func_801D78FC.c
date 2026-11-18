@@ -36,14 +36,14 @@ MATCH void func_801D78FC(void) {
     buttons = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
     if (D_801ED648 != 2) {
         if (buttons & PADLleft) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
             panel->unk_09 = 0x32;
             if ((s8)--panel->unk_0B < 0) {
                 panel->unk_0B = 3;
             }
             D_8014857C = s_SkillOrderCursors[g_PartyCursor][D_8014857B];
         } else if (buttons & PADLright) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
             panel->unk_09 = 0x31;
             if (++panel->unk_0B >= 4) {
                 panel->unk_0B = 0;
@@ -60,31 +60,31 @@ MATCH void func_801D78FC(void) {
         panel->unk_0C = old_cursor + 1;
     }
     if (old_cursor != panel->unk_0C) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     s_SkillOrderCursors[g_PartyCursor][D_8014857B] = D_8014857C;
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         ability_id = Party_GetAbilities(panel->unk_0A, panel->unk_0B, 0)[panel->unk_0C];
         if (ability_id == 0) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
             return;
         }
         if (D_801ED648 == 0) {
             if (func_801AF5B0(panel->unk_08, panel->unk_0A, ability_id) == 0) {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
                 return;
             }
             if (g_Abilities[ability_id].targeting_flags & ABILITY_TARGET_FLAG_ALL) {
                 result     = func_801E7D20(g_CharSlot[g_PartyFieldOrder[panel->unk_0A]], 0, Party_GetAbilities(panel->unk_0A, panel->unk_0B, 0)[panel->unk_0C], 0);
                 D_801ED654 = result;
                 if (result == 1 || result == 5) {
-                    SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 9));
+                    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 9));
                     return;
                 }
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
                 return;
             }
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
             for (i = 0; i < Party_CountOrder(PARTY_ORDER_FIELD); i++) {
                 panel                         = &g_MenuPanelTasks[MENU_START_PANEL_ITEMS + i];
                 panel->unk_0A                 = i;
@@ -109,11 +109,11 @@ MATCH void func_801D78FC(void) {
             D_8014857D = D_8014857C;
             D_80148651 += 2;
         } else {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
             return;
         }
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_8014857C = 0xFF;
         D_8014857D = 0xFF;
         D_80148651--;

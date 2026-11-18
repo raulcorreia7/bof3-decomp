@@ -42,7 +42,7 @@ NON_MATCHING void Battle_ChooseAbility(void) {
     trigger    = INPUT_GetRepeatedButtons((s32)(g_InputPressed & (INPUT_DIRECTIONAL | PADL1 | PADR1)));
     if ((g_BattleActorTurn->action_flags.value & (BATTLER_ACTION_DRAGON_FORM | BATTLER_ACTION_DRAGON_FORM_CONTROLLED)) != (u32)BATTLER_ACTION_DRAGON_FORM) {
         if ((trigger & PADLleft) != 0) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
             g_MenuPanelTasks[16].unk_09 = 0x32u;
             cursor                      = g_MenuPanelTasks[16].unk_0B - 1;
             g_MenuPanelTasks[16].unk_0B = cursor;
@@ -50,7 +50,7 @@ NON_MATCHING void Battle_ChooseAbility(void) {
                 g_MenuPanelTasks[16].unk_0B = 3u;
             }
         } else if ((trigger & PADLright) != 0) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
             g_MenuPanelTasks[16].unk_09 = 0x31u;
             cursor                      = g_MenuPanelTasks[16].unk_0B + 1;
             g_MenuPanelTasks[16].unk_0B = cursor;
@@ -100,7 +100,7 @@ NON_MATCHING void Battle_ChooseAbility(void) {
         }
     }
     if (cursor != sel->cursor_index) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     message                    = (u8*)&D_80148656;
     /* The group index/cursor pair sits 0xB bytes into the same scratch block. */
@@ -121,7 +121,7 @@ NON_MATCHING void Battle_ChooseAbility(void) {
         ((u8*)D_801454F4)[g_MenuPanelTasks[16].unk_0A * 3] = group->index;
         D_801454F5[g_MenuPanelTasks[16].unk_0A * 3]        = g_MenuPanelTasks[16].u.addr.unk_10;
         D_801454F6[g_MenuPanelTasks[16].unk_0A * 3]        = group->cursor;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         *(volatile u8*)&g_Battle.ui_step += 1;
         return;
     }
@@ -129,10 +129,10 @@ NON_MATCHING void Battle_ChooseAbility(void) {
         BattleTurn* turn;
 
         if ((Battle_IsAbilityLocked() & BYTE_MASK) != 0) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
             return;
         }
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
         ((u8*)D_801454F4)[g_MenuPanelTasks[16].unk_0A * 3] = group->index;
         D_801454F5[g_MenuPanelTasks[16].unk_0A * 3]        = g_MenuPanelTasks[16].u.addr.unk_10;
         D_801454F6[g_MenuPanelTasks[16].unk_0A * 3]        = group->cursor;

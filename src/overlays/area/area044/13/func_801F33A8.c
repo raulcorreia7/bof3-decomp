@@ -21,7 +21,7 @@ MATCH s32 func_801F33A8(s32 x, s32 y) {
         return 0;
     }
     SYS_ToggleFlag(g_SceneEventFlags, D_801F3FC7[i * 5]);
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0));
     Game_SetScriptActive();
     next_mode              = D_801F3FC8[i * 5];
     g_SceneEventState.step = 0;

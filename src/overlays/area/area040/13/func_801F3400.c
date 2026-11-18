@@ -37,7 +37,7 @@ MATCH s32 func_801F3400(s32 x, s32 y) {
             Area_ClearCellPalette(cell_x, cell_y);
         }
         func_801F372C(x, y);
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 5));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 5));
         return 0;
     }
     if ((func_801F3570() & BYTE_MASK) != 0) {

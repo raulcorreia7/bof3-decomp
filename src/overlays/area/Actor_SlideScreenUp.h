@@ -1,4 +1,4 @@
-/* Scrolls the actor screen origin up by 0x20 and cues 0x201 when it reaches zero. */
+/* Scrolls the actor screen origin up by 0x20 and SEs 0x201 when it reaches zero. */
 /* func_801F3064 */
 MATCH void Actor_SlideScreenUp(void) {
     Actor* work;
@@ -7,7 +7,7 @@ MATCH void Actor_SlideScreenUp(void) {
     work->screen_y += 0x20;
     if ((s16)work->screen_y >= 0) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 1));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 1));
         }
         g_Task->header.step = 1;
     }

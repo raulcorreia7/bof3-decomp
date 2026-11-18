@@ -49,7 +49,7 @@ MATCH u8 Menu_SwapPartyMembers(void) {
     if (g_Characters[g_CharSlot[reserve]].party_flags & 0x2) {
         return reserve;
     }
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
     for (i = 0; i < Party_CountOrder(PARTY_ORDER_FIELD); i++) {
         if (g_PartyFieldOrder[i] == member) {
             g_PartyFieldOrder[i] = reserve;

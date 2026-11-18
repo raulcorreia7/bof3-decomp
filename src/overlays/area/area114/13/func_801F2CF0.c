@@ -15,7 +15,7 @@ MATCH void func_801F2CF0(void) {
             break;
         case 5:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
                 Game_ClearScriptActive();
                 g_SceneEventMode = 0;
                 g_SceneEventStep = 0;

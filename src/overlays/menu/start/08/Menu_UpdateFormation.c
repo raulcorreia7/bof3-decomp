@@ -66,7 +66,7 @@ NON_MATCHING void Menu_UpdateFormation(void) {
     if (g_InputMasks[MENU_INPUT_CONFIRM] & g_InputPressed) {
         *(u8*)(&D_801485DC) = 0;
         if (g_FormationCursorColumn != 0) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
             g_FormationPickColumn = 0x7F;
             g_FormationPickRow    = 0x7F;
             g_FormationColumn     = (s8)(u8)g_FormationCursorColumn;
@@ -74,11 +74,11 @@ NON_MATCHING void Menu_UpdateFormation(void) {
             D_801ED660            = (u8)g_FormationCursorColumn;
             D_801ED664            = g_FormationCursorRow;
         } else if (g_FormationPickColumn == 0x7F) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
             g_FormationPickColumn = (s8)(u8)g_FormationCursorColumn;
             g_FormationPickRow    = (s8)g_FormationCursorRow;
         } else {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
             Menu_SwapBytes4(&g_PartyBattleOrder[(s8)g_FormationCursorRow], &g_PartyBattleOrder[g_FormationPickRow]);
             if ((s8)g_FormationCursorRow != g_FormationPickRow) {
                 D_801ED660 = (u8)(s8)g_FormationCursorRow;
@@ -87,7 +87,7 @@ NON_MATCHING void Menu_UpdateFormation(void) {
             goto block_20; /* retail branch */
         }
     } else if (g_InputMasks[MENU_INPUT_CANCEL] & g_InputPressed) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         *(u8*)(&D_801485DC)         = 0;
         g_MenuPanelTasks[20].active = 0;
         if (g_FormationPickColumn != 0x7F) {
@@ -97,7 +97,7 @@ NON_MATCHING void Menu_UpdateFormation(void) {
         } else if (D_80148660 != 1) {
             D_80148654       = 0;
             g_PartyFormation = ((u8)g_FormationRow * 2) + ((u8)g_FormationColumn - 1);
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 2));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
             val7 = 0;
             val3 = 0 << 0x18;
             do {
@@ -162,7 +162,7 @@ NON_MATCHING void Menu_UpdateFormation(void) {
         } while (*(((s8)g_FormationCursorRow * 3) + g_FormationCells + g_FormationCursorColumn) == 0);
     }
     if (((val4 >> 0x18) != g_FormationCursorColumn) || ((s8)val11 != (s8)g_FormationCursorRow)) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
     g_PartyFormation = ((u8)g_FormationColumn + ((u8)g_FormationRow * 2)) - 1;
 }

@@ -47,7 +47,7 @@ void        Battle_FadePoisonedBattler(u32 battler_index);
 /* func_800AF8F0 */
 void        Battle_SetCellPaletteStp(BattleSpriteCell* record);
 /* func_800AFC98 */
-void        Battle_PlayActiveBattlerCue(s32 effect_0, s32 effect_1);
+void        Battle_PlayActiveBattlerSE(s32 effect_0, s32 effect_1);
 /* func_800AFD9C */
 void        Battle_CenterCamera(void);
 u8          func_800AFF98(void);
@@ -75,7 +75,7 @@ void        func_801DAAE4(void);
 /* func_801DC044 */
 s16         Battle_CalcDamage(u8 attacker_slot, u8 target_slot, u16 element_id);
 void        func_801DD14C(u8 battler_index);
-void        Battle_PlayEffectCue(u32 effect_index);
+void        Battle_PlayEffectSE(u32 effect_index);
 void        func_801DDAB4(u32 status);
 u8          func_801DDF50(u16 entry_id, u32 table_kind);
 void        func_801DDFEC(u32 battler_index);
@@ -96,7 +96,7 @@ void        func_801E4F64(void);
 void        func_801E5288(void);
 void        func_801E52E8(void);
 /* func_801E52F0 */
-void        Battle_PlayEnemyCue(u16 cue_id);
+void        Battle_PlayEnemySE(u16 se_id);
 /* func_801E590C */
 u32         Battle_AllocEffect(u32 mode, u32 step_index);
 /* func_801E5988 */

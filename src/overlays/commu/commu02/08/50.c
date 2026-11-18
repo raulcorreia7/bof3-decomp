@@ -27,7 +27,7 @@ MATCH void func_801D0CC8(void) {
         i--;
     }
     D_801DB0CC = g_SndBGMId;
-    cues       = g_SelectionCues + g_SndBGMId * 4;
+    cues       = g_SelectionSepSlots + g_SndBGMId * 4;
     sequences  = g_SelectionSequences + g_SndBGMId * 4;
     SND_StopSequence(*cues, *sequences);
     SND_RequestBGM(BGM_COMMU02);
@@ -52,7 +52,7 @@ MATCH void func_801D0DE0(void) {
 
     if (D_801F294E == 0) {
         D_801DB0C4 = 4;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
         D_801F294E += 1;
         return;
     }

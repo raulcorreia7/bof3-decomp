@@ -31,27 +31,27 @@ NON_MATCHING void func_801D8390(void) {
     g_MenuPanelTasks[16].flags                             = 0xFF;
     count                                                  = Party_CountOrder(PARTY_ORDER_FIELD);
     if (pad & PADLup) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
         g_MenuPanelTasks[16].unk_0A -= 1;
         if ((s8)g_MenuPanelTasks[16].unk_0A < 0) {
             g_MenuPanelTasks[16].unk_0A = count - 1;
         }
     } else if (pad & PADLdown) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
         g_MenuPanelTasks[16].unk_0A += 1;
         if ((s32)(count & BYTE_MASK) - 1 < (s32)(u8)g_MenuPanelTasks[16].unk_0A) {
             g_MenuPanelTasks[16].unk_0A = 0;
         }
     }
     if (pad & PADLleft) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         slot[9] = 0x32;
         slot[0xB] -= 1;
         if ((s8)slot[0xB] < 0) {
             slot[0xB] = 3;
         }
     } else if (pad & PADLright) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         slot[9] = 0x31;
         slot[0xB] += 1;
         if ((u8)slot[0xB] >= 4) {
@@ -60,7 +60,7 @@ NON_MATCHING void func_801D8390(void) {
     }
     D_80148656 = slot[0xA];
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
         state                       = &D_801485DC;
         *state                      = 0;
         g_MenuPanelTasks[18].panel  = 6;
@@ -72,7 +72,7 @@ NON_MATCHING void func_801D8390(void) {
         g_MenuPanelTasks[18].unk_0B = 0;
         g_MenuStep.state += 1;
     } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_801485DC = 0;
         g_MenuStep.sub_step -= 5;
     }

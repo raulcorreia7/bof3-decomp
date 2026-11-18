@@ -9,7 +9,7 @@ MATCH void func_801F2C7C(void) {
     switch (*state) {
         case 0:
             g_ScriptVars[0] = 0xA;
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x0D));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x0D));
             *state = 1;
             break;
 
@@ -21,7 +21,7 @@ MATCH void func_801F2C7C(void) {
                 }
                 D_801490E4[0] = 0;
                 if (Item_Add(ITEM_CATEGORY_ITEM, ITEM_FLOWER_JEWEL, 1, 0) & BYTE_MASK) {
-                    SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x06));
+                    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x06));
                     Message_Request(MSG_SYSTEM_FOUND_ITEM);
                     SYS_SetFlag(g_SceneEventFlags, 104);
                 } else {

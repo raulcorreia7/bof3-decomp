@@ -76,7 +76,7 @@ MATCH void func_801D0E28(void) {
         if ((held & PADRdown) != 0) {
             if (g_SndBGMId != BGM_NONE) {
                 bgm_offset = g_SndBGMId * 4;
-                SND_StopSequence(*(g_SelectionCues + bgm_offset), *(g_SelectionSequences + bgm_offset));
+                SND_StopSequence(*(g_SelectionSepSlots + bgm_offset), *(g_SelectionSequences + bgm_offset));
             }
             cue = D_801D1918[D_801D1940];
             if (g_SndBGMId == cue) {
@@ -113,7 +113,7 @@ MATCH void func_801D1094(void) {
     if (g_SndBGMId != BGM_NONE) {
         if (g_SndBGMId != D_801D1944) {
             bgm_offset = g_SndBGMId * 4;
-            SND_StopSequence(*(g_SelectionCues + bgm_offset), *(g_SelectionSequences + bgm_offset));
+            SND_StopSequence(*(g_SelectionSepSlots + bgm_offset), *(g_SelectionSequences + bgm_offset));
         }
     }
     SND_RequestBGM(D_801D1944);

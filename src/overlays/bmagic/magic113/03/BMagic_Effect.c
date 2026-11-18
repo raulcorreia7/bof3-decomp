@@ -69,7 +69,7 @@ MATCH void func_801EEE24(void) {
         g_BattleEffects[slot].pos.x            = g_Task->pos.x;
         g_BattleEffects[slot].pos.y            = g_Task->pos.y;
         COORD_INT(g_BattleEffects[slot].pos.z) = COORD_INT(g_Task->pos.z);
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         g_Task->header.mode += 1;
     }
 }
@@ -91,7 +91,7 @@ MATCH void func_801EF0F0(void) {
 
     if (g_Task->param.unk_0B == 4) {
         MAGIC113_SPAWN_EFFECT(2);
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x02));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
         g_SndVoiceTargetVolume[20] = 0x7F;
         g_SndVoiceVolume[20]       = 0;
     }
@@ -344,7 +344,7 @@ MATCH void func_801F01B8(void) {
 
 MATCH void func_801F0218(void) {
     if (g_BattleEffectBattler->param.unk_0B == 0x84) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x03));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x03));
         g_Task->header.step += 1;
     }
 }
@@ -464,7 +464,7 @@ MATCH void func_801F08B4(void) {
     g_Task->unk_09     = 0;
     g_Task->header.step += 1;
     if (g_Task->param.unk_0B == 0) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
     }
     Actor_SelectScript(g_Task->param.unk_0B);
 }
@@ -485,10 +485,10 @@ MATCH void func_801F0A80(void) {
         Area_AddGridActor();
         if (g_Task->param.unk_0B == 0) {
             if (g_Task->unk_09 == 1) {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x04));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x04));
                 return;
             }
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0x00));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
         }
     } else {
         Area_AddGridActor();

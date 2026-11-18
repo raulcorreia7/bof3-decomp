@@ -57,7 +57,7 @@ MATCH void func_801EECF8(void) {
             g_Task->param.unk_0B += 1;
         }
     }
-    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
 }
 
 #include "overlays/bmagic/Effect_StartOnZeroTick.h"
@@ -154,8 +154,8 @@ MATCH void func_801EF1C8(void) {
         }
         i++;
     } while (i < 0x5C);
-    SND_QueueSelectionEffect(0x101);
-    SND_QueueSelectionEffect(0x102);
+    SND_QueueSelectionSE(0x101);
+    SND_QueueSelectionSE(0x102);
     g_Task->header.step++;
 }
 

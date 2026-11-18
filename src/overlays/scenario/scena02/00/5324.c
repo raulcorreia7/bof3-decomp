@@ -103,19 +103,19 @@ MATCH void func_801FC7E4(void) {
 MATCH void func_801FC9CC(void) {
     if (g_PartyFieldOrder[0] == 0 || g_PartyFieldOrder[0] == 3) {
         if ((u32)((u16)D_80145EC6 - 0x44) < 2 && D_80145ECA == 0x3F && D_80145EDB == 0x42 && D_80145E98 == 1) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x0B));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x0B));
             g_ScenarioState.step_05  = 0x1E;
             g_ScenarioState.state_04 = 0x1A;
         }
         if (D_80145EC6 == 0x46) {
             if (D_80145ECA == 0x3E && D_80145EDB == 0x45 && D_80145E98 == 7) {
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x0B));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x0B));
                 g_ScenarioState.step_05  = 0x1E;
                 g_ScenarioState.state_04 = 0x1A;
             }
         }
         if (D_80145EC6 == 0x44 && D_80145ECA == 0x3E && D_80145EDB == 0x43 && D_80145E98 == 3) {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0x0B));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x0B));
             g_ScenarioState.step_05  = 0x1E;
             g_ScenarioState.state_04 = 0x1A;
         }
@@ -137,7 +137,7 @@ MATCH void func_801FCB94(void) {
     g_ScriptVars[2]         = 0;
     g_ScriptVars[3]         = 0;
     g_ScenarioState.step_05 = 0;
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 2));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 2));
 }
 
 MATCH void func_801FCBDC(s32 delta) {
@@ -303,7 +303,7 @@ MATCH void func_801FD450(void) {
     Game_SetScriptActive();
     g_ScenarioState.step_05  = 0xF;
     g_ScenarioState.state_04 = 0x10;
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
 }
 
 MATCH void func_801FD490(void) {
@@ -347,7 +347,7 @@ MATCH void func_801FD5FC(void) {
     g_ScenarioState.step_05 = 10;
     SCRIPT_VARS_CLEAR_ALL();
     g_ScenarioState.state_04 = 25;
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
 }
 
 MATCH void func_801FD65C(void) {

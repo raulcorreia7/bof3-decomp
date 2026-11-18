@@ -13,14 +13,14 @@ MATCH void func_801D1D60(void) {
     D_80148628 = D_80148334 + ((1 - *toggle) * 32) + 0xDE;
     D_8014862A = D_80148336 + 5;
     if (*pad & (PADLright | PADLleft)) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
         *toggle ^= 1;
     }
     if (*pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (*toggle != 0) {
             u32* zenny;
 
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
             zenny = &g_Zenny;
             *zenny -= g_ShopItemPrice * g_ShopItemCount;
             Item_Add(g_ShopItemCategory, g_ShopItemId, g_ShopItemCount, 0);
@@ -36,12 +36,12 @@ MATCH void func_801D1D60(void) {
             }
             return;
         }
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_80148652 -= 2;
         return;
     }
     if (*pad & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_80148652 -= 2;
     }
 }

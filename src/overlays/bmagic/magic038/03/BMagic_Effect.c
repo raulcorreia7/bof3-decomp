@@ -45,7 +45,7 @@ MATCH void func_801EEC70(void) {
     }
     *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW)) = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
     g_GfxPalettePending                                             = 1;
-    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
 }
 
 MATCH void func_801EEE14(void) {
@@ -54,7 +54,7 @@ MATCH void func_801EEE14(void) {
     PartyMember* work;
 
     if (g_Task->param.unk_0B == 0) {
-        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 1));
         if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
             for (i = 0; i < 8; i++) {
                 if (!Battle_SlotIsBlocked((u8)(i + BATTLE_PARTY_CHARACTERS_COUNT))) {

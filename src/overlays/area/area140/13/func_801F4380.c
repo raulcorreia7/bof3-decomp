@@ -64,7 +64,7 @@ NON_MATCHING u8 func_801F4380(s32 x, s32 y) {
             g_SpawnedActors[actor_slot].link         = flag;
         }
     }
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 4));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 4));
     return 1;
 }
 #else

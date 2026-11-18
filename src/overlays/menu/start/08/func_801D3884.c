@@ -15,7 +15,7 @@ MATCH void func_801D3884(void) {
     trigger                                                     = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C             = 0xFF;
     if (trigger & PADLleft) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.tabs = 0x32;
         step_down                                            = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A - 1;
         g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A      = step_down;
@@ -26,7 +26,7 @@ MATCH void func_801D3884(void) {
         goto store_selection;
     }
     if (trigger & PADLright) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.tabs = 0x31;
         step_up                                              = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A + 1;
         g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A      = step_up;
@@ -38,7 +38,7 @@ MATCH void func_801D3884(void) {
         g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B = s_ChoiceMenuValues[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A];
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
         g_MenuPanelTasks[14].panel  = 6;
         g_MenuPanelTasks[14].mode   = 0xF;
         g_MenuPanelTasks[14].active = 1;
@@ -54,7 +54,7 @@ MATCH void func_801D3884(void) {
         return;
     }
     if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         counter = &g_MenuStep.sub_step;
         *counter -= 3;
     }

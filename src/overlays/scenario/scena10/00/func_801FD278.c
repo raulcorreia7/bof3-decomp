@@ -59,7 +59,7 @@ MATCH void func_801FD5C0(Actor* actor) {
                 /* FAKE: retail passes the bit index unmasked, as s32. */
                 ((void (*)(void*, s32))SYS_SetFlag)(g_SceneFlags, SCENE_TRIGGER_FLAG_BASE + D_801FE894[i].flag);
                 Message_Request(MSG_SYSTEM_FOUND_ITEM);
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
                 actor->unk_7E++;
                 Game_SetScriptActive();
             } else {

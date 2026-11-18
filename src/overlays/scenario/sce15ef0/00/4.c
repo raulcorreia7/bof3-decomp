@@ -30,7 +30,7 @@ MATCH void func_801D0CEC(void) {
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->timer = 60;
         g_Task->header.mode += 1;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 13));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 13));
     }
 }
 
@@ -81,7 +81,7 @@ MATCH void func_801D101C(void) {
     if (TIMER_EXPIRED(g_Task->timer)) {
         g_Task->timer = 60;
         g_Task->header.mode += 1;
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 14));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 14));
     }
 }
 

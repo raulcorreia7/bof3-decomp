@@ -78,7 +78,7 @@ MATCH void func_801EEF08(void) {
         } while (i < 3);
         Battle_SelectActiveBattlerScript(4, 0);
         BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
-        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
         g_Task->unk_09 = 8;
         g_Task->header.mode += 1;
     }
@@ -180,7 +180,7 @@ MATCH void func_801EF788(void) {
         next           = timer - 1;
         g_Task->unk_09 = next;
         if (!(next & BYTE_MASK)) {
-            Battle_PlayActiveBattlerCue(2, 5);
+            Battle_PlayActiveBattlerSE(2, 5);
         }
     }
     if (Actor_StepAnimOnce() & BYTE_MASK) {

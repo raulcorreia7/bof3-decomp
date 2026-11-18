@@ -1,10 +1,10 @@
 #include "battle_15.h"
 
-/* Cue id table: seven cue ids per battle-event flag bit 7. */
+/* Cue id table: seven SE ids per battle-event flag bit 7. */
 /* Player cue index tables. */
 /* Enemy cue rows: one 0x118-byte row per enemy slot, cue index at +0. */
 
-/* Queues the current battler's battle cue id from the event flag row.
+/* Queues the current battler's battle SE id from the event flag row.
  */
 MATCH void func_800AB834(void) {
     u8 row;

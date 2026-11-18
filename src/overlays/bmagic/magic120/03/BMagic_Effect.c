@@ -135,7 +135,7 @@ MATCH void func_801EF0D8(void) {
         g_Task->timer                = 1;
         g_Task->unk_04               = 16;
         g_Task->header.step += 1;
-        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
+        SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
 }
 

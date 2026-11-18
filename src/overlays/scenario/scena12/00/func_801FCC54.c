@@ -26,7 +26,7 @@ MATCH s32 func_801FCCBC(void) {
 }
 
 MATCH s32 func_801FCD38(void) {
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 9));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 9));
     return -1;
 }
 
@@ -39,7 +39,7 @@ MATCH s32 func_801FCD58(void) {
         g_ScenarioState.step_05  = 0;
         g_ScenarioState.state_04 = 7;
         Area_SetCellPalette(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 3));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
         return 1;
     }
     return -1;

@@ -42,7 +42,7 @@ MATCH void func_8019CCB8(void) {
                 g_Task->script = (u8*)BATTLE_SCRIPT_TABLE; /* the same buffer */
                 func_8019D648();
                 func_8019D9C0();
-                SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 14));
+                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 14));
                 g_Task->header.mode = 3;
                 goto block_9;
             }

@@ -48,7 +48,7 @@ MATCH void func_801F3CD0(void) {
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
             SYS_SetFlag(g_SceneEventFlags, 0x98);
             Game_ClearScriptActive();
             g_SceneEventState.mode      = 0;

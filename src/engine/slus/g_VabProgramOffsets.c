@@ -55,9 +55,9 @@ u16 D_80182308[16] = {
 
 u32 D_80182328 = 0;
 
-u32 g_SndCueReaders[7] = {
-    (u32)SND_ReadCueBank0, (u32)SND_ReadCueBank1, (u32)SND_ReadCueBank2, (u32)SND_ReadCueBank3,
-    (u32)SND_ReadCueBank4, (u32)SND_ReadCueBank5, (u32)SND_ReadCueBank6,
+u32 g_SndSeReaders[7] = {
+    (u32)SND_ReadSeBank0, (u32)SND_ReadSeBank1, (u32)SND_ReadSeBank2, (u32)SND_ReadSeBank3,
+    (u32)SND_ReadSeBank4, (u32)SND_ReadSeBank5, (u32)SND_ReadSeBank6,
 };
 
 u32 g_SndBankSpuAddress[3][7] = {
@@ -275,7 +275,7 @@ u32 g_XACues[3] = {
 u32 g_EmiEntryTypes[11] = {
     (u32)EMI_LoadToRam, (u32)EMI_LoadCompressed, (u32)EMI_LoadCompressed,  (u32)EMI_LoadToVram,
     (u32)EMI_ReadToc,     (u32)EMI_ReadToc,      (u32)EMI_LoadVabHeader, (u32)EMI_LoadVabBody,
-    (u32)EMI_LoadSoundCues, (u32)EMI_LoadSequence, (u32)EMI_LoadSequence,
+    (u32)EMI_LoadSE, (u32)EMI_LoadSequence, (u32)EMI_LoadSequence,
 };
 
 u32 g_XAStates[55] = {

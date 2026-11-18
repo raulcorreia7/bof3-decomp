@@ -20,7 +20,7 @@ NON_MATCHING void func_801EED18(void) {
     g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
     g_Task->pos.y.fixed = g_AreaScrollTargetY;
-    SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 0));
+    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
     slot                               = Battle_AllocEffect(1, 0x61) & BYTE_MASK;
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].target.party = g_Task;
@@ -121,9 +121,9 @@ MATCH void func_801EF294(void) {
                 }
             }
             if (g_Task->timer == 2) {
-                SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 1));
+                SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 1));
             }
-            SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_COMMON, 2));
+            SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 2));
             work         = g_Task;
             work->unk_09 = 4;
             work->unk_0C = 0x800;

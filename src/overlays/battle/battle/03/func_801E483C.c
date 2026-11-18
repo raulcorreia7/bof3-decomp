@@ -4,10 +4,10 @@ MATCH void func_801E483C(void) {
     volatile u8*          global;
     volatile PartyMember* work;
 
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 4));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 4));
     global = (u8*)(PARTY_STATE_PTR);
     if (global[0x62EAu] != 0u) {
-        Battle_PlayEnemyCue(*(u16*)((*(u32*)(((u32)g_BattleCurrentEnemy + 0xE8u)) + 6u)));
+        Battle_PlayEnemySE(*(u16*)((*(u32*)(((u32)g_BattleCurrentEnemy + 0xE8u)) + 6u)));
     }
     GFX_FreePaletteFadeTarget((void*)g_Task);
     GFX_AllocPaletteFade((void*)g_Task, 255, 255, 255, 0);

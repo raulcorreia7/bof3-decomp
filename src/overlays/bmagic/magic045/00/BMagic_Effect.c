@@ -101,7 +101,7 @@ MATCH void func_801EF118(void) {
     if (func_800AF66C(*selected, 0x8000)) {
         BATTLE_RAISE_STATE(BATTLE_STATE_DAMAGE_APPLIED);
         Battle_MarkDamaged(g_Battle.target_selector);
-        SND_QueueSelectionEffect(EMI_CUE_ID(SND_BANK_AREA, 0x03));
+        SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_AREA, 0x03));
         g_Task->header.flags |= 0x20;
         g_Task->unk_5C = 1;
         g_Task->unk_5D = 0;

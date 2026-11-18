@@ -42,7 +42,7 @@ NON_MATCHING s32 func_801F3350(s32 x, s32 y) {
         return 0;
     }
     SYS_ToggleFlag(g_SceneEventFlags, D_801F3CEF[i * 4]);
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 0));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0));
     func_8019ABB0(0xF);
     return 1;
 }

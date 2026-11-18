@@ -16,12 +16,12 @@ MATCH void func_801E1494(void) {
     if (work->chr.hp <= value) {
         work->chr.status = STATUS_KO;
         work->chr.hp     = 0;
-        Battle_PlayEffectCue(1);
+        Battle_PlayEffectSE(1);
     } else {
         if (value >= 0) {
-            Battle_PlayEffectCue(0);
+            Battle_PlayEffectSE(0);
         } else {
-            SND_QueueSelectionEffect(0x206);
+            SND_QueueSelectionSE(0x206);
         }
         entry         = g_Game.current;
         amount        = entry->chr.hp - entry->u.turn.hp_change;

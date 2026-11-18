@@ -7,7 +7,7 @@ MATCH void func_800C1AB4(void) {
     timer                          = ((PartyMember*)g_Task)->unk_0C - 1;
     ((PartyMember*)g_Task)->unk_0C = timer;
     if (timer == 0) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_ENEMY, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_ENEMY, 1));
         ((PartyMember*)g_Task)->header.mode += 1;
     }
     saved_work             = ((PartyMember*)g_Task);

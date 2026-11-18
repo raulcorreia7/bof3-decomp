@@ -16,7 +16,7 @@ MATCH u8 func_801F4F60(s32 x, s32 y) {
         return 0;
     }
     SYS_ToggleFlag(g_SceneEventFlags, D_801F63CC[i].flag);
-    SND_PlaySE(EMI_CUE_ID(SND_BANK_AREA, 6));
+    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 6));
     actor_slot = Actor_FindFreeSpawned();
     if (actor_slot != GAME_NONE) {
         SYS_SetFlag(g_SceneEventFlags, 0x1C);

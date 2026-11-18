@@ -5,7 +5,7 @@
  * record's byte (doubled, tagged 0x600) to the selection-voice step.
  */
 /* func_800AFC98 */
-MATCH void Battle_PlayActiveBattlerCue(s32 effect_0, s32 effect_1) {
+MATCH void Battle_PlayActiveBattlerSE(s32 effect_0, s32 effect_1) {
     u32 kind;
 
     /* FAKE: pins the tested byte copy. */
@@ -22,14 +22,14 @@ MATCH void Battle_PlayActiveBattlerCue(s32 effect_0, s32 effect_1) {
         g_GameState = &g_Game.members[kind];
         test        = sel & BYTE_MASK;
         if (test != 0) {
-            Battle_PlayEffectCue((effect_0 + 1) & BYTE_MASK);
+            Battle_PlayEffectSE((effect_0 + 1) & BYTE_MASK);
         }
         if ((u8)other != 0u) {
-            Battle_PlayEffectCue((u8)other);
+            Battle_PlayEffectSE((u8)other);
         }
     } else if (BATTLE_IS_SCRIPTED()) {
-        Battle_PlayEnemyCue(*ENEMY_COMBATANT(kind).unk_E8);
+        Battle_PlayEnemySE(*ENEMY_COMBATANT(kind).unk_E8);
     } else {
-        SND_QueueSelectionEffect((ENEMY_COMBATANT(kind).type * 2u) | 0x600u);
+        SND_QueueSelectionSE((ENEMY_COMBATANT(kind).type * 2u) | 0x600u);
     }
 }

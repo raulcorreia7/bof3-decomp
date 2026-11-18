@@ -122,7 +122,7 @@ typedef struct Weapon {
     u8         type;    /* ItemType; every weapon row is ITEM_TYPE_WEAPON */
     u8         element; /* ElementFlags */
     u8         weight;
-    u8         sound; /* cue-table index in battle/battle/15 func_800AB834 and func_800AB910 */
+    u8         sound; /* SE-table index in battle/battle/15 func_800AB834 and func_800AB910 */
     u8         power;
     u8         unk_13;      /* no reader */
     u16        description; /* Item_GetDescription, category ITEM_CATEGORY_WEAPON */

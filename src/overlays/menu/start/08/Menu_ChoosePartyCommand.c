@@ -19,7 +19,7 @@ MATCH void Menu_ChoosePartyCommand(void) {
     pad                         = &g_InputPressed;
     g_MenuPanelTasks[18].unk_0B = 0xFF;
     if (INPUT_REPEATED(*pad, (PADLright | PADLleft)) & (PADLright | PADLleft)) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 1));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         g_MenuPartyCommand ^= 1;
     }
     if (*pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
@@ -28,11 +28,11 @@ MATCH void Menu_ChoosePartyCommand(void) {
         } else if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) {
             Menu_OpenPartyChange(*pad);
         } else {
-            SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 7));
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
             return;
         }
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 2));
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 4));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
         D_80148652                                       = 0;
         D_80148654                                       = 5;
@@ -43,8 +43,8 @@ MATCH void Menu_ChoosePartyCommand(void) {
         return;
     }
     if (*pad & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 2));
-        SND_PlaySE(EMI_CUE_ID(SND_BANK_COMMON, 6));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
         g_BattlePanelMode                                    = 1;
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active     = 0;
