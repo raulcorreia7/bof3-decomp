@@ -545,7 +545,7 @@ segments:
       - [0x182C0, c, Actor_SpawnSceneActor]
       - [0x18498, c, func_801ADC98]
       - [0x184F4, c, func_801ADCF4]
-      - [0x185D4, c, Char_GetExp]
+      - [0x185D4, c, Char_ApplyLevelUps]
       - [0x18A14, c, func_801AE214]
       - [0x18AB0, c, func_801AE2B0]
       - [0x18BF0, c, UI_DrawWindow]

@@ -1,8 +1,8 @@
 #include "battle_15.h"
 
-/* func_8009F60C */
-MATCH void Battle_ApplyJolt(void) {
+/* func_8009F4BC */
+MATCH void Battle_CastFlare(void) {
     g_Battle.action_type = BATTLE_ACTION_ABILITY;
-    g_Battle.action_id   = ABILITY_JOLT;
+    g_Battle.action_id   = ABILITY_FLARE;
     Battle_ApplyAbilityDamage();
 }

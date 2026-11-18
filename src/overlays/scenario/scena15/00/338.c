@@ -25,7 +25,7 @@ MATCH void func_801F6FCC(void) {
     if (g_FrameCount & 0x1) {
         Area_AddSpark();
     }
-    Scene_GetZFixed();
+    Scene_DrawSparks();
     g_Task->timer = (g_Task)->timer + 4;
     if (g_Task->timer == 0) {
         g_Task->timer       = 32;
@@ -38,7 +38,7 @@ MATCH void func_801F7078(void) {
     if (g_FrameCount & 0x1) {
         Area_AddSpark();
     }
-    Scene_GetZFixed();
+    Scene_DrawSparks();
     if (g_ScriptVars[0] == 0x1F) {
         g_Task->timer       = 252;
         g_Task->header.mode = (g_Task)->header.mode + 1;
@@ -47,7 +47,7 @@ MATCH void func_801F7078(void) {
 
 MATCH void func_801F7100(void) {
     Scene_DrawLightPillar(g_Task->timer);
-    Scene_GetZFixed();
+    Scene_DrawSparks();
     g_Task->timer = (g_Task)->timer - 4;
     if (g_Task->timer == 0) {
         g_Task->header.mode = (g_Task)->header.mode + 1;
@@ -55,7 +55,7 @@ MATCH void func_801F7100(void) {
 }
 
 MATCH void func_801F717C(void) {
-    if (!(Scene_GetZFixed() & BYTE_MASK)) {
+    if (!(Scene_DrawSparks() & BYTE_MASK)) {
         Actor_Clear();
     }
 }
@@ -141,7 +141,7 @@ MATCH void func_801F752C(AreaSpark* spark) {
 #include "shared/Area_AddSpark.h"
 
 /* func_801F7748 */
-MATCH bool Scene_GetZFixed(void) {
+MATCH bool Scene_DrawSparks(void) {
     AreaSpark* spark;
     u8         i;
     bool       alive;

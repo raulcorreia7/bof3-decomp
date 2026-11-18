@@ -122,7 +122,7 @@ void  Area_MoveActorRoute(void* sub, s32 route);
 u8    func_801ABD68(s32 pos_x, s32 pos_y, s32 step_count, void* deltas);
 /* func_801AC1DC */
 void  func_801AC1DC(s32* out, u8 selector);
-void  Char_GetExp(s32 char_id);
+void  Char_ApplyLevelUps(s32 char_id);
 /* func_801AE214 */
 void  func_801AE214(s32 line_x, s32 line_y, s32 line_length, s32 line_mode);
 /* func_801AE3F0 */

@@ -18,7 +18,7 @@ MATCH void Game_ReturnFromMenu(void) {
         D_80148661 = 0u;
     }
     g_EmiStreamFlags = 0x20;
-    EMI_GetArchiveId(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
+    EMI_LoadFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
     while (EMI_IsReady() == 0) {
         SYS_ThreadWait(1u);
     }

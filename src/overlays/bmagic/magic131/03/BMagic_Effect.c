@@ -160,9 +160,9 @@ MATCH void func_801EF1C0(void) {
         }
     } else {
         if (g_Battle.scroll_dir & 0x2) {
-            EMI_GetArchiveId(g_EmiLoadedCharacterIndex & 0x7F, 2);
+            EMI_LoadFamilyArchive(g_EmiLoadedCharacterIndex & 0x7F, 2);
         } else {
-            EMI_GetArchiveId(g_EmiLoadedCharacterIndex & 0x7F, 1);
+            EMI_LoadFamilyArchive(g_EmiLoadedCharacterIndex & 0x7F, 1);
         }
     }
     g_Task->header.mode += 1;

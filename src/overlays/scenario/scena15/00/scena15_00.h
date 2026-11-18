@@ -50,7 +50,7 @@ void            func_801F752C(AreaSpark* spark);
 /* func_801F75D8 */
 void            Area_AddSpark(void);
 /* func_801F7748 */
-bool            Scene_GetZFixed(void);
+bool            Scene_DrawSparks(void);
 void            func_801F79C4(void);
 void            func_801F9500(WorldPos* pos, s32* vx);
 void            func_801F97CC(WorldPos* pos, s32* arg);

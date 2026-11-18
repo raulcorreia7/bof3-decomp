@@ -353,23 +353,23 @@ Battle_InflictConfusion = { addr = 0x8009E824, type = "func", source = "Adds STA
 Battle_ReviveQuarterHp = { addr = 0x8009E844, type = "func", source = "Revives a KO party target on a random roll with a quarter of its max HP." }
 Battle_ReviveFullHp = { addr = 0x8009E98C, type = "func", source = "Revives a KO party target with a 10000 point heal." }
 Battle_InflictSilence = { addr = 0x8009F258, type = "func", source = "Adds STATUS_SILENCED to the battle action target through Battle_InflictStatus." }
-Battle_ApplyQuake = { addr = 0x8009F278, type = "func", source = "The Dynamite effect: sets the battle action to the Quake ability and applies its damage; the retail description reads Earthquake attack vs all targets." }
-Battle_ApplyTyphoon = { addr = 0x8009F2B0, type = "func", source = "The Weather Vane effect: sets the battle action to the Typhoon ability and applies its damage; the retail description reads Wind attack vs all targets." }
-Battle_ApplyLightning = { addr = 0x8009F2E8, type = "func", source = "The Taser and Royal Sword effect: sets the battle action to the Lightning ability and applies its damage; the retail description reads Electric attack vs all targets." }
+Battle_CastQuake = { addr = 0x8009F278, type = "func", source = "The Dynamite effect: sets the battle action to the Quake ability and applies its damage; the retail description reads Earthquake attack vs all targets." }
+Battle_CastTyphoon = { addr = 0x8009F2B0, type = "func", source = "The Weather Vane effect: sets the battle action to the Typhoon ability and applies its damage; the retail description reads Wind attack vs all targets." }
+Battle_CastLightning = { addr = 0x8009F2E8, type = "func", source = "The Taser and Royal Sword effect: sets the battle action to the Lightning ability and applies its damage; the retail description reads Electric attack vs all targets." }
 Battle_HalveDamage = { addr = 0x8009F320, type = "func", source = "sets the damage-halved action flag on the current target" }
-Battle_ApplyMight = { addr = 0x8009F3DC, type = "func", source = "Sets the battle action to the Might ability, then applies the ability's target and stat rescale through func_800A403C." }
-Battle_ApplyInferno = { addr = 0x8009F414, type = "func", source = "Sets the battle action to the Inferno ability and applies its ability damage." }
-Battle_ApplyBlizzard = { addr = 0x8009F44C, type = "func", source = "The Icicle effect: sets the battle action to the Blizzard ability and applies its damage; the retail description reads Frost attack vs all targets." }
-Battle_ApplySirocco = { addr = 0x8009F484, type = "func", source = "The Napalm effect: sets the battle action to the Sirocco ability and applies its damage; the retail description reads Flame wind attack vs all targets." }
-Battle_ApplyFlare = { addr = 0x8009F4BC, type = "func", source = "Sets the battle action to the Flare ability and applies its ability damage." }
-Battle_ApplyProtect = { addr = 0x8009F4F4, type = "func", source = "Sets the battle action to the Protect ability, then applies the ability's target and stat rescale through func_800A403C." }
-Battle_ApplyWeaken = { addr = 0x8009F52C, type = "func", source = "Sets the battle action to the Weaken ability, then applies the ability's target and stat rescale through func_800A403C." }
-Battle_ApplyFireblast = { addr = 0x8009F564, type = "func", source = "Sets the battle action to the Fireblast ability and applies its ability damage." }
-Battle_ApplyCyclone = { addr = 0x8009F59C, type = "func", source = "The WindCutter use effect: sets the battle action to the Cyclone ability and applies its damage; the weapon's description reads Property Wind." }
-Battle_ApplySilence = { addr = 0x8009F5D4, type = "func", source = "The LacquerStaff use effect: sets the battle action to the Silence ability and inflicts STATUS_SILENCED." }
-Battle_ApplyJolt = { addr = 0x8009F60C, type = "func", source = "The Thunder Rod use effect: sets the battle action to the Jolt ability and applies its damage; the weapon's description reads Property Electric." }
-Battle_ApplySimoon = { addr = 0x8009F67C, type = "func", source = "The Brass Claws use effect: sets the battle action to the Simoon ability and applies its damage." }
-Battle_ApplyBarrier = { addr = 0x8009F6B4, type = "func", source = "Sets the battle action to the Barrier ability and raises the damage-halved flag through Battle_HalveDamage." }
+Battle_CastMight = { addr = 0x8009F3DC, type = "func", source = "Sets the battle action to the Might ability, then applies the ability's target and stat rescale through func_800A403C." }
+Battle_CastInferno = { addr = 0x8009F414, type = "func", source = "Sets the battle action to the Inferno ability and applies its ability damage." }
+Battle_CastBlizzard = { addr = 0x8009F44C, type = "func", source = "The Icicle effect: sets the battle action to the Blizzard ability and applies its damage; the retail description reads Frost attack vs all targets." }
+Battle_CastSirocco = { addr = 0x8009F484, type = "func", source = "The Napalm effect: sets the battle action to the Sirocco ability and applies its damage; the retail description reads Flame wind attack vs all targets." }
+Battle_CastFlare = { addr = 0x8009F4BC, type = "func", source = "Sets the battle action to the Flare ability and applies its ability damage." }
+Battle_CastProtect = { addr = 0x8009F4F4, type = "func", source = "Sets the battle action to the Protect ability, then applies the ability's target and stat rescale through func_800A403C." }
+Battle_CastWeaken = { addr = 0x8009F52C, type = "func", source = "Sets the battle action to the Weaken ability, then applies the ability's target and stat rescale through func_800A403C." }
+Battle_CastFireblast = { addr = 0x8009F564, type = "func", source = "Sets the battle action to the Fireblast ability and applies its ability damage." }
+Battle_CastCyclone = { addr = 0x8009F59C, type = "func", source = "The WindCutter use effect: sets the battle action to the Cyclone ability and applies its damage; the weapon's description reads Property Wind." }
+Battle_CastSilence = { addr = 0x8009F5D4, type = "func", source = "The LacquerStaff use effect: sets the battle action to the Silence ability and inflicts STATUS_SILENCED." }
+Battle_CastJolt = { addr = 0x8009F60C, type = "func", source = "The Thunder Rod use effect: sets the battle action to the Jolt ability and applies its damage; the weapon's description reads Property Electric." }
+Battle_CastSimoon = { addr = 0x8009F67C, type = "func", source = "The Brass Claws use effect: sets the battle action to the Simoon ability and applies its damage." }
+Battle_CastBarrier = { addr = 0x8009F6B4, type = "func", source = "Sets the battle action to the Barrier ability and raises the damage-halved flag through Battle_HalveDamage." }
 Battle_ThirdHpDamage = { addr = 0x8009F7EC, type = "func", source = "Stores Battle_RollHpDamage(3) as the action target's hp change: a third of the attacker's hp, scaled by the random percent and the element resistance." }
 Battle_FullHpDamage = { addr = 0x8009F814, type = "func", source = "Stores Battle_RollHpDamage(1) as the action target's hp change: the attacker's whole hp, scaled by the random percent and the element resistance." }
 Battle_HalfHpDamage = { addr = 0x8009F83C, type = "func", source = "Stores Battle_RollHpDamage(2) as the action target's hp change: half the attacker's hp, scaled by the random percent and the element resistance." }
@@ -380,7 +380,7 @@ Battle_Heal1Hp = { addr = 0x8009FE70, type = "func", source = "The Jellyfish and
 Battle_Heal80Hp = { addr = 0x8009FE84, type = "func", source = "The Bass, Sea Bass and Black Bass effect: sets the action target's hp change to -80; the retail description reads Restores 80HP." }
 Battle_Heal240Hp = { addr = 0x8009FE98, type = "func", source = "The Barandy and Spearfish effect: sets the action target's hp change to -240; the retail description reads Restores 240HP." }
 Battle_Heal5Ap = { addr = 0x8009FEAC, type = "func", source = "The RainbowTrout and Sea Bream effect: sets the action target's ap change to -5; the retail description reads Restores 5AP." }
-Battle_ApplyMyollnir = { addr = 0x8009FF7C, type = "func", source = "The Devilfish effect: sets the battle action to the Myollnir ability and applies its damage; the retail description reads Electric attack vs one target." }
+Battle_CastMyollnir = { addr = 0x8009FF7C, type = "func", source = "The Devilfish effect: sets the battle action to the Myollnir ability and applies its damage; the retail description reads Electric attack vs one target." }
 Battle_FullRestore = { addr = 0x8009FFB4, type = "func", source = "The Moon Tears and Whale effect: cures the ailment mask 0xBFC and heals to full; the retail description reads Restores party's HP and status." }
 Battle_Heal5Hp = { addr = 0x8009FFE4, type = "func", source = "The Shaly Seed, Berries and Horseradish effect: sets the action target's hp change to -5; the retail description reads Restores 5HP." }
 Battle_DoubleRewards = { addr = 0x800A07D0, type = "func", source = "The Ivory Dice effect: doubles the target enemy's zenny and exp, each capped at 0xFFFF; the retail description reads Mystery effect if used on enemies." }
@@ -388,7 +388,7 @@ Battle_StopTurns = { addr = 0x800A0920, type = "func", source = "The Hourglass e
 Battle_GrantReprisal = { addr = 0x800A1414, type = "func", source = "sets the reprisal damage flag on the active battler" }
 Battle_GrantAlwaysHits = { addr = 0x800A1704, type = "func", source = "sets the always-hits action flag on the active battler" }
 Battle_GrantDamageImmunity = { addr = 0x800A1A30, type = "func", source = "sets the damage-immune damage flag on the active battler" }
-Battle_ApplyDeath = { addr = 0x800A2404, type = "func", source = "The Belladonna effect: sets the battle action to the Death ability and applies its damage; the retail description reads Destroy one target." }
+Battle_CastDeath = { addr = 0x800A2404, type = "func", source = "The Belladonna effect: sets the battle action to the Death ability and applies its damage; the retail description reads Destroy one target." }
 Battle_GetActionId = { addr = 0x800A2880, type = "func", source = "the body returns g_Battle.action_id" }
 Battle_GetFireResistance = { addr = 0x800A2AE0, type = "func", source = "the body returns g_Game.members[battler_index].chr.stats.resistances[0]" }
 Battle_CalcHeal = { addr = 0x800A30E8, type = "func", source = "Computes the heal an action gives: the ability's power row scaled by the rate byte and the target's holy resistance, returned as a negative hp change." }
@@ -3425,7 +3425,7 @@ FieldAction_ShowFind = { addr = 0x801AD90C, type = "func", source = "Shows the z
 FieldAction_WaitMessageFade = { addr = 0x801AD9C4, type = "func", source = "Waits for the find message to close, then starts the fade." }
 FieldAction_Fade = { addr = 0x801AD9F0, type = "func", source = "Brightens the actor's tint back, then ends the field action." }
 Actor_SpawnSceneActor = { addr = 0x801ADAC0, type = "func", source = "spawns the type-0x19 scene actor at the task position with its selection from func_801ADC98 and links it to the task" }
-Char_GetExp = { addr = 0x801ADDD4, type = "func", source = "the body returns g_LevelGrowth[(u8)char_id][new_level].exp" }
+Char_ApplyLevelUps = { addr = 0x801ADDD4, type = "func", source = "Raises the character to the level its exp reaches: adds each gained level's growth to the base stats (capped at 999), grants its abilities and rebuilds the stats." }
 UI_DrawWindow = { addr = 0x801AE3F0, type = "func", source = "Draws a window from x with a left cap and a body stretched to width, height rows tall, with the palette column of the style argument; flags 0x80 and 0x20 trim the top and the bottom." }
 UI_DrawWindowOutline = { addr = 0x801AED54, type = "func", source = "Draws the four edges and the cut corners of a rectangle through GFX_DrawLine in the colour row of g_WindowStyle; the high nibble of the flag byte picks the cut corners." }
 GFX_DrawLine = { addr = 0x801AF0F4, type = "func", source = "Queues a draw mode and one semi-transparent LINE_F2 between two points." }
@@ -5164,7 +5164,7 @@ Scene_InitTaskArea = { addr = 0x801F6F7C, type = "func", source = "sets the task
 Scene_DrawLightPillar = { addr = 0x801F71B0, type = "func", source = "pillar of light with a fade: twin of Area_DrawLightPillar; callers fade it in, hold at 0xFF, and out" }
 Area_ClearWorkColumn = { addr = 0x801F75AC, type = "func", source = "Clears one byte of each row in the actor window." }
 Area_AddSpark = { addr = 0x801F75D8, type = "func", source = "Adds one falling spark to the first free row of the 128-spark work table: marks it active, sets its fall speed and places it around the work position at a random angle and radius." }
-Scene_GetZFixed = { addr = 0x801F7748, type = "func", source = "the body returns g_Task->pos.z.fixed" }
+Scene_DrawSparks = { addr = 0x801F7748, type = "func", source = "Falls and draws every active light pillar spark, retiring one below the task; returns whether any remain." }
 Scene_ClearActor = { addr = 0x801F9000, type = "func", source = "clears the current actor" }
 Scene_SpawnActor = { addr = 0x801FA854, type = "func", source = "Claims a free actor slot and seeds its type, camera angles, scene step and layer; returns whether a slot was free; one role shared by scena14 and scena15." }
 Scene_DispatchActor = { addr = 0x801FDD80, type = "func", source = "dispatches a scenario actor to its callback handler" }
@@ -7988,7 +7988,7 @@ EMI_LoadPartyArchives = { addr = 0x80166E88, type = "func", source = "Arms the o
 EMI_LoadPartyCode = { addr = 0x80166F3C, type = "func", source = "Loads the party archive of the PLP family." }
 EMI_LoadParty = { addr = 0x80166F84, type = "func", source = "Loads the party archive of a family." }
 EMI_FindPartyArchive = { addr = 0x80166FF8, type = "func", source = "Finds the archive of the current party." }
-EMI_GetArchiveId = { addr = 0x8016728C, type = "func", source = "Maps a content family and index to a loader slot and starts its stream." }
+EMI_LoadFamilyArchive = { addr = 0x8016728C, type = "func", source = "Maps a content family and index to a loader slot and starts its stream." }
 Area_DispatchScene = { addr = 0x80167344, type = "func", source = "Dispatches the area scene." }
 Area_InitScene = { addr = 0x801673AC, type = "func", source = "Sets up the area scene." }
 Area_StepSceneTimer = { addr = 0x80167800, type = "func", source = "Ticks the scene timer and runs Area_ResetScene on expiry." }

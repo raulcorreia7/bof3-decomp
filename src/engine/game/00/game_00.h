@@ -1586,7 +1586,7 @@ static inline void GameRunMapLoadHandshake(void) {
     SYS_ThreadWait(1U);
     SYS_ThreadWait(1U);
     g_EmiStreamFlags = 0x20;
-    EMI_GetArchiveId(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
+    EMI_LoadFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
     while (EMI_IsReady() == 0) {
         SYS_ThreadWait(1U);
     }

@@ -28,7 +28,7 @@ MATCH void Menu_OpenMaster(void) {
             return;
         case 3:
             g_EmiStreamFlags = 0x20;
-            EMI_GetArchiveId(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
+            EMI_LoadFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
             g_SceneEventStep = g_SceneEventStep + 1;
             return;
         case 4:

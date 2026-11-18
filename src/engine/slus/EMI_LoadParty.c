@@ -1,7 +1,7 @@
 #include "engine/slus/slus.h"
 
 /* Loads the party's character data for the three members: finds their archive index with EMI_FindPartyArchive
- * and streams it through EMI_GetArchiveId unless it is already loaded (g_EmiLoadedCharacterIndex). Family 0
+ * and streams it through EMI_LoadFamilyArchive unless it is already loaded (g_EmiLoadedCharacterIndex). Family 0
  * is the PLxxx bank (the loaded index carries EMI_LOADED_PL); the other families compare the plain index.
  */
 MATCH void EMI_LoadParty(u8 member_a, u8 member_b, u8 member_c, u8 family) {
@@ -20,5 +20,5 @@ MATCH void EMI_LoadParty(u8 member_a, u8 member_b, u8 member_c, u8 family) {
         return;
     }
 rearm:
-    EMI_GetArchiveId(slot, family);
+    EMI_LoadFamilyArchive(slot, family);
 }
