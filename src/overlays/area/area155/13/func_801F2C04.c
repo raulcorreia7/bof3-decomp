@@ -12,12 +12,12 @@ MATCH void func_801F2C04(void) {
         D_801490E4[0] = 0;
         if (Item_Add(ITEM_CATEGORY_WEAPON, WEAPON_HOMING_BOMB, 1, 0) & BYTE_MASK) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x06));
-            g_MessageRequest = MSG_011;
+            g_MessageRequest = MSG_AREA155_ROBOT_GIVES_ITEM;
         } else {
-            g_MessageRequest = MSG_010;
+            g_MessageRequest = MSG_AREA155_010;
         }
     } else {
-        g_MessageRequest = MSG_010;
+        g_MessageRequest = MSG_AREA155_010;
     }
     SYS_SetFlag(D_80144EF0, 1);
 }

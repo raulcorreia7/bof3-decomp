@@ -7,7 +7,7 @@ MATCH void func_801F2CDC(void) {
     switch (*state) {
         case 0:
             Game_SetScriptActive();
-            MESSAGE_START_WAIT(MSG_002);
+            MESSAGE_START_WAIT(MSG_AREA187_ASK_READY_TO_GO);
             *state = (u8)*state + 1;
             break;
 

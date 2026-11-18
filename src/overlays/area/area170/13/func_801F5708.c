@@ -12,7 +12,7 @@ MATCH void func_801F5708(void) {
     } else {
         SYS_SetFlag(g_SceneEventFlags, 121);
         Actor_SelectScript(1);
-        Message_StartAreaMessage(MSG_034);
+        Message_StartAreaMessage(MSG_AREA170_FOUND_HE_SHELLS);
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         goto done;
     }

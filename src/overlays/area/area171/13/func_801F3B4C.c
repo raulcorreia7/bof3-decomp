@@ -22,7 +22,7 @@ MATCH void func_801F3B4C(void) {
             break;
         case 2:
             if (!WINDOW_EFFECT_BUSY()) {
-                MESSAGE_START_WAIT(MSG_001);
+                MESSAGE_START_WAIT(MSG_AREA171_PARTY_HEALED);
                 g_SceneEventState.step = 3;
             }
             break;
@@ -43,7 +43,7 @@ MATCH void func_801F3B4C(void) {
             }
             break;
         case 20:
-            MESSAGE_START_WAIT(MSG_002);
+            MESSAGE_START_WAIT(MSG_AREA171_PLANT_BLOCKS_ENTRANCE);
             g_SceneEventState.step = 0x15;
             break;
         case 21:

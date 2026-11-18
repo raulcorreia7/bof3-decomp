@@ -51,7 +51,7 @@ MATCH void func_801F2C38(void) {
                     from++;
                     dst += 0x20;
                 }
-                Message_StartAreaMessage(MSG_022);
+                Message_StartAreaMessage(MSG_AREA151_TARGET_FISH_NOTICE);
             }
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             LOBU(g_SceneEventStep)++;

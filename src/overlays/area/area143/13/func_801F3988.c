@@ -8,7 +8,7 @@ MATCH void func_801F3988(void) {
     } else if (D_80145548 != 0x3FFFF) {
         message = 0x53;
     } else {
-        g_MessageRequest = MSG_082;
+        g_MessageRequest = MSG_AREA143_MASTER_TEACH_READY;
         return;
     }
     g_MessageRequest = message;

@@ -3,7 +3,7 @@
 MATCH void func_801F33C8(void) {
     switch (g_SceneEventState.step) {
         case 0:
-            MESSAGE_START_WAIT(MSG_109);
+            MESSAGE_START_WAIT(MSG_AREA191_ASK_BREAK_CAMP);
             g_SceneEventState.step = 1;
             break;
         case 2:

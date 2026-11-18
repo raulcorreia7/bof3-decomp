@@ -5,7 +5,7 @@ MATCH void func_801F2EA0(void) {
         case 0:
             break;
         case 10:
-            MESSAGE_START_WAIT(MSG_028);
+            MESSAGE_START_WAIT(MSG_AREA193_ASK_LEAVE_DESERT);
             g_SceneEventState.step = 0xB;
             break;
         case 12:
