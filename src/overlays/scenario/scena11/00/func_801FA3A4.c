@@ -51,7 +51,7 @@ MATCH void func_801FA3A4(void) {
         case 8:
             if (g_UiWindowEffectBusy == 0) {
                 g_AreaDrawFlags = 0;
-                SCENARIO_MESSAGE_WAIT(MSG_063, 9);
+                SCENARIO_MESSAGE_WAIT(MSG_SCENA11_063, 9);
             }
             break;
         case 9:

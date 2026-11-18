@@ -105,7 +105,7 @@ NON_MATCHING void func_801FB270(void) {
             }
             g_AreaDrawFlags = 0;
             SND_PauseBGM(0x6C);
-            Message_StartAreaMessage(MSG_018);
+            Message_StartAreaMessage(MSG_SCENA08_018);
             g_GameStateIndex        = 2;
             g_ScenarioState.step_05 = 11;
             break;

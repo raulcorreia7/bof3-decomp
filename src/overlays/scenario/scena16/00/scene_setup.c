@@ -524,7 +524,7 @@ MATCH void func_801F7CC4(void) {
             if (WINDOW_EFFECT_BUSY()) {
                 return;
             }
-            Message_StartAreaMessage(MSG_001);
+            Message_StartAreaMessage(MSG_SCENA16_001);
             {
                 /* Case-local pointer: keeps this increment in its own register pair,
                  * so cases 0 and 2 cross-jump into one shared tail. */
@@ -548,7 +548,7 @@ MATCH void func_801F7CC4(void) {
             if (g_ScriptVars[0] != 3u) {
                 return;
             }
-            Message_StartAreaMessage(MSG_002);
+            Message_StartAreaMessage(MSG_SCENA16_002);
             {
                 /* Same case-local shape as case 0; the shared tail follows. */
                 u8* next_state;

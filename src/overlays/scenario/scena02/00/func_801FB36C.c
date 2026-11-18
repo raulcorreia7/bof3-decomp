@@ -10,7 +10,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801FB36C(void) {
     switch (g_ScenarioState.step_05) {
         case 0:
-            SCENARIO_MESSAGE_WAIT(MSG_101, 1);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA02_101, 1);
             break;
         case 1:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -47,11 +47,11 @@ MATCH void func_801FB36C(void) {
                         SYS_SetFlag(g_SceneFlags, 0x25);
                         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
                     } else {
-                        SCENARIO_MESSAGE_WAIT(MSG_109, 3);
+                        SCENARIO_MESSAGE_WAIT(MSG_SCENA02_109, 3);
                     }
                     break;
                 case 0xF:
-                    SCENARIO_MESSAGE_WAIT(MSG_108, 4);
+                    SCENARIO_MESSAGE_WAIT(MSG_SCENA02_108, 4);
                     break;
             }
             break;
@@ -77,11 +77,11 @@ MATCH void func_801FB36C(void) {
                         SYS_SetFlag(g_SceneFlags, 0x25);
                         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
                     } else {
-                        SCENARIO_MESSAGE_WAIT(MSG_109, 0xD);
+                        SCENARIO_MESSAGE_WAIT(MSG_SCENA02_109, 0xD);
                     }
                     break;
                 case 0xF:
-                    SCENARIO_MESSAGE_WAIT(MSG_108, 4);
+                    SCENARIO_MESSAGE_WAIT(MSG_SCENA02_108, 4);
                     break;
             }
             break;
@@ -122,13 +122,13 @@ MATCH void func_801FB36C(void) {
                         SYS_SetFlag(g_SceneFlags, 0x25);
                         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
                     } else {
-                        Message_StartAreaMessage(MSG_109);
+                        Message_StartAreaMessage(MSG_SCENA02_109);
                         *state                  = GAME_REQUEST_MESSAGE;
                         g_ScenarioState.step_05 = 0xD;
                     }
                     break;
                 case 0xF:
-                    Message_StartAreaMessage(MSG_108);
+                    Message_StartAreaMessage(MSG_SCENA02_108);
                     *state                  = GAME_REQUEST_MESSAGE;
                     g_ScenarioState.step_05 = 4;
                     break;

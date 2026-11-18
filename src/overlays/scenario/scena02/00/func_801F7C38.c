@@ -113,7 +113,7 @@ MATCH void func_801F7C38(void) {
                 break;
             }
             SND_PlayBGM(0x11, 0x64, 8);
-            SCENARIO_MESSAGE_WAIT(MSG_010, 0x23);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA02_010, 0x23);
             break;
         case 35:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {

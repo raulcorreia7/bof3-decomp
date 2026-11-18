@@ -43,7 +43,7 @@ MATCH void func_801FC6B4(void) {
         case 4:
             if (!WINDOW_EFFECT_BUSY()) {
                 SND_PlayBGM(27, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
-                SCENARIO_MESSAGE_WAIT(MSG_010, 5);
+                SCENARIO_MESSAGE_WAIT(MSG_SCENA01_010, 5);
             }
             break;
         case 5:

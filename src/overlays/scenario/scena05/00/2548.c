@@ -53,7 +53,7 @@ MATCH void func_801F92EC(void) {
     state = &g_ScenarioState.step_05;
     switch (*state) {
         case 0:
-            MESSAGE_START_WAIT(MSG_000);
+            MESSAGE_START_WAIT(MSG_SCENA05_000);
             *state = 1;
             return;
         case 1:

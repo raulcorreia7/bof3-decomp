@@ -23,7 +23,7 @@ MATCH void func_801F90C0(void) {
             Game_RequestAreaChange(AREA_ID_RHAPALA_DOCK, TO_COORD(46), TO_COORD(46), AREA_ENTRY_MAP_LOADING | FACING_DOWN_RIGHT);
             break;
         case 2:
-            SCENARIO_MESSAGE_WAIT(MSG_056, 3);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA06_056, 3);
             break;
         case 3:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {

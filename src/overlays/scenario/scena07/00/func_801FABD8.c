@@ -11,7 +11,7 @@ MATCH void func_801FABD8(void) {
 
     switch (g_ScenarioState.step_05) {
         case 0:
-            Message_StartAreaMessage(0x11);
+            Message_StartAreaMessage(MSG_SCENA07_017);
             g_GameStateIndex        = GAME_REQUEST_MESSAGE;
             g_ScenarioState.step_05 = 1;
             break;

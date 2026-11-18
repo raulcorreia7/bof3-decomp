@@ -19,7 +19,7 @@ MATCH void func_801F23A4(void) {
             break;
         case 1:
             if ((SND_IsXAIdle() & BYTE_MASK) != 0) {
-                MESSAGE_START_WAIT(MSG_673);
+                MESSAGE_START_WAIT(MSG_AREA175_SEE_YOU_LATER_END);
                 *variant += 1;
             }
             break;

@@ -12,10 +12,10 @@ MATCH void func_801F96E0(void) {
             }
             switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {
                 case 1:
-                    Message_StartAreaMessage(MSG_035);
+                    Message_StartAreaMessage(MSG_SCENA05_035);
                     break;
                 case 2:
-                    Message_StartAreaMessage(MSG_036);
+                    Message_StartAreaMessage(MSG_SCENA05_036);
                     break;
                 default:
                     return;
@@ -35,7 +35,7 @@ MATCH void func_801F96E0(void) {
             }
             break;
         case 2:
-            SCENARIO_MESSAGE_WAIT(MSG_037, 3);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA05_037, 3);
             break;
         case 3:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {

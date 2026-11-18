@@ -11,6 +11,6 @@ MATCH void func_800C19C0(void) {
     g_Task->unk_03      = 0;
     if (g_Battle.encounter == 0x19) {
         g_MenuPanelMode = 2;
-        Message_StartAreaMessage(MSG_032);
+        Message_StartAreaMessage(MSG_BOSS025_032);
     }
 }

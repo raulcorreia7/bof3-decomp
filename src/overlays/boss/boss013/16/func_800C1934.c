@@ -9,7 +9,7 @@ MATCH void func_800C1934(void) {
     if ((g_Battle.boss_flags & 0x1) && !(g_Battle.boss_flags & 0x2)) {
         g_Battle.action_type = 0;
         g_MenuPanelMode      = 2;
-        Message_StartAreaMessage(MSG_038);
+        Message_StartAreaMessage(MSG_BOSS013_038);
         g_Battle.boss_flags |= 2;
     }
     flags = &g_Battle.boss_flags;
@@ -21,6 +21,6 @@ MATCH void func_800C1934(void) {
     }
     g_Battle.action_type = 3;
     g_MenuPanelMode      = 2;
-    Message_StartAreaMessage(MSG_041);
+    Message_StartAreaMessage(MSG_BOSS013_041);
     *flags |= 0x20;
 }

@@ -21,12 +21,12 @@ MATCH void func_801FB1B4(void) {
             g_ScenarioState.step_05  = 0;
             break;
         case 4:
-            Message_StartAreaMessage(MSG_001);
+            Message_StartAreaMessage(MSG_SCENA13_001);
             g_GameStateIndex        = 2;
             g_ScenarioState.step_05 = 6;
             break;
         case 5:
-            Message_StartAreaMessage(MSG_078);
+            Message_StartAreaMessage(MSG_SCENA13_078);
             g_GameStateIndex        = 2;
             g_ScenarioState.step_05 = 6;
             break;

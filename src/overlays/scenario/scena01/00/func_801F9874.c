@@ -11,10 +11,10 @@ MATCH void func_801F9874(void) {
     switch (g_ScenarioState.step_05) {
         case 0:
             if (g_Game.members[0].chr.character_id != CHAR_ID_REI) {
-                SCENARIO_MESSAGE_WAIT(MSG_007, 1);
+                SCENARIO_MESSAGE_WAIT(MSG_SCENA01_007, 1);
             } else {
                 Scene_SetupParty(0);
-                SCENARIO_MESSAGE_WAIT(MSG_008, 2);
+                SCENARIO_MESSAGE_WAIT(MSG_SCENA01_008, 2);
             }
             break;
         case 1:

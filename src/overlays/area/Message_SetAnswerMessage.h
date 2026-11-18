@@ -2,19 +2,19 @@
 MATCH void Message_SetAnswerMessage(void) {
     switch (g_MessageChoice) {
         case 0:
-            g_MessageRequest = MSG_250;
+            g_MessageRequest = MSG_AREA175_HELP_WHICH_JOBS;
             break;
         case 1:
-            g_MessageRequest = MSG_251;
+            g_MessageRequest = MSG_AREA175_HELP_ASSIGN_JOBS;
             break;
         case 2:
-            g_MessageRequest = MSG_252;
+            g_MessageRequest = MSG_AREA175_HELP_ABILITIES;
             break;
         case 3:
-            g_MessageRequest = MSG_253;
+            g_MessageRequest = MSG_AREA175_HELP_HOUSING;
             break;
         case 4:
-            g_MessageRequest = MSG_249;
+            g_MessageRequest = MSG_AREA175_HELP_UP_TO_YOU;
             break;
     }
 }

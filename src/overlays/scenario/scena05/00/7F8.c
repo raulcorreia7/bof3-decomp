@@ -187,7 +187,7 @@ MATCH void func_801F8430(void) {
     step = &g_ScenarioState.step_05;
     switch (*step) {
         case 0:
-            MESSAGE_START_WAIT(MSG_005);
+            MESSAGE_START_WAIT(MSG_SCENA05_005);
             *step = 1;
             break;
         case 1:

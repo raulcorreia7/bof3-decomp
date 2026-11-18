@@ -10,7 +10,7 @@ MATCH void func_801FB014(void) {
 
     switch (g_ScenarioState.step_05) {
         case 0:
-            SCENARIO_MESSAGE_WAIT(MSG_012, 1);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA06_012, 1);
             break;
         case 1:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {

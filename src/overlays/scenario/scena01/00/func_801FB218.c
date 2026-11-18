@@ -11,7 +11,7 @@ MATCH void func_801FB218(void) {
     switch (g_ScenarioState.step_05) {
         case 0:
             g_ScriptVars[0] = 0xA;
-            SCENARIO_MESSAGE_WAIT(MSG_024, 1);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA01_024, 1);
             break;
         case 1:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {

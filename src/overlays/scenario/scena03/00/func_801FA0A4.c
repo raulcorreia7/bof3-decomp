@@ -24,7 +24,7 @@ MATCH void func_801FA0A4(void) {
 
         case 2:
             if (g_UiWindowEffectBusy == 0) {
-                Message_StartAreaMessage(MSG_032);
+                Message_StartAreaMessage(MSG_SCENA03_032);
                 g_GameStateIndex        = 2;
                 g_AreaDrawFlags         = 0;
                 g_ScenarioState.step_05 = 3;

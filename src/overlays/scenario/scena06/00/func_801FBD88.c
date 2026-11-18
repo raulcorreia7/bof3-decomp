@@ -9,7 +9,7 @@ NON_MATCHING void func_801FBD88(void) {
     switch (g_ScenarioState.step_05) {
         case 0:
             if (!WINDOW_EFFECT_BUSY()) {
-                MESSAGE_START_WAIT(MSG_000);
+                MESSAGE_START_WAIT(MSG_SCENA06_000);
                 Area_StartScrollRoute(0);
                 Scene_SetupParty(0);
                 g_ScenarioState.step_05 = 1;
@@ -85,7 +85,7 @@ NON_MATCHING void func_801FBD88(void) {
             if (!WINDOW_EFFECT_BUSY()) {
                 g_AreaDrawFlags = 0;
                 g_ScriptVars[0] = 0x17;
-                SCENARIO_MESSAGE_WAIT(MSG_020, 0xA);
+                SCENARIO_MESSAGE_WAIT(MSG_SCENA06_020, 0xA);
                 SND_FadeOutSequence(0, 1, 4, 0x1E);
             }
             break;

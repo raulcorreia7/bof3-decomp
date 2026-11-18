@@ -21,7 +21,7 @@ MATCH void func_801D0C98(void) {
     u8* state = &g_GameStateIndex;
 
     if (*state != GAME_REQUEST_MESSAGE) {
-        Message_StartAreaMessage(MSG_096);
+        Message_StartAreaMessage(MSG_AREA175_PICK_ITEM);
         *state = GAME_REQUEST_MESSAGE;
         D_801F294D += 1;
     }
@@ -51,7 +51,7 @@ MATCH void func_801D11DC(void) {
     UI_DrawWindowOutline(0x16, 0x14 - (D_801D1774 * 12), 0x113, 0xF, 0);
     if (g_MenuPanelTasks[0].state == 0) {
         Menu_ResetPanelTasks();
-        MESSAGE_START_WAIT(MSG_095);
+        MESSAGE_START_WAIT(MSG_AREA175_SEE_YOU_LATER);
         D_801F294C += 1;
     }
 }
@@ -89,7 +89,7 @@ MATCH void func_801D12C8(void) {
 
     /* The copy shop handles the unsellable rows like the vital items. */
     if (flags & ITEM_UNSELLABLE) {
-        Message_StartAreaMessage(MSG_235);
+        Message_StartAreaMessage(MSG_AREA175_COPY_CANNOT_HELP);
         D_801F294D = 6;
     } else {
         record = Item_GetRecord(g_FairyJobs[g_SceneEventState.selection].unk_03, g_FairyJobs[g_SceneEventState.selection].record_state);
@@ -97,7 +97,7 @@ MATCH void func_801D12C8(void) {
             g_TextVariables[0][i] = record[i];
         }
         g_TextVariables[0][ITEM_NAME_LENGTH] = 0;
-        Message_StartAreaMessage(MSG_097);
+        Message_StartAreaMessage(MSG_AREA175_CONFIRM_ITEM);
         D_801D1774 = 0;
         D_801F294D += 1;
     }
@@ -125,7 +125,7 @@ MATCH void func_801D1628(void) {
     u8* state = &g_GameStateIndex;
 
     if (*state != GAME_REQUEST_MESSAGE) {
-        Message_StartAreaMessage(MSG_099);
+        Message_StartAreaMessage(MSG_AREA175_ASK_CHOOSE_OTHER);
         *state = GAME_REQUEST_MESSAGE;
     }
 }

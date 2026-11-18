@@ -11,10 +11,10 @@ MATCH void Shop_PickMember(void) {
 
     func_801DF6A8();
     if (D_801E6254 == GAME_NONE) {
-        UI_DrawText(26, 20, 0, TEXT_LENGTH_MAX, Message_GetText(MSG_096));
+        UI_DrawText(26, 20, 0, TEXT_LENGTH_MAX, Message_GetText(MSG_AREA175_PICK_ITEM));
     } else {
         Message_SetVariable(0, 5, g_Characters[MEM_PTR(u8, g_CharSlot)[D_801E6254]].name);
-        UI_DrawText(26, 20, 0, TEXT_LENGTH_MAX, Message_GetText(MSG_097));
+        UI_DrawText(26, 20, 0, TEXT_LENGTH_MAX, Message_GetText(MSG_AREA175_CONFIRM_ITEM));
     }
     buttons    = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
     count      = Party_CountOrder(PARTY_ORDER_FIELD);

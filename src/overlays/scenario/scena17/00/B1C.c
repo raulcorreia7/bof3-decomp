@@ -492,7 +492,7 @@ MATCH void func_801F8710(void) {
         *bgm = GAME_NONE;
         SND_SetBankLayout(0);
         g_AreaDrawFlags = 0;
-        MESSAGE_START_WAIT(MSG_001);
+        MESSAGE_START_WAIT(MSG_SCENA17_001);
         state = &g_ScenarioState.state_04;
         (*state)++;
     }

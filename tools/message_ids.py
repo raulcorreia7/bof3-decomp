@@ -16,8 +16,9 @@ stays in the header after its last literal is rewritten. MESSAGE_NONE (0xFFFF)
 keeps its name.
 
 Ids of a module listed in include/msg/messages.def (the archive is a folder of the file's
-path, e.g. area037) use MSG_<ARCHIVE>_<TAG> from the enum in include/msg/message_ids.h; all
-other ids stay flat MSG_nnn in include/menu/message_ids.h until their module is converted.
+path, e.g. area037) use MSG_<ARCHIVE>_<TAG> from the enum in include/msg/message_ids.h; the
+commu, shop, start, plchar and Fairy_* files use the AREA175 bank. All other ids stay flat MSG_nnn
+in include/menu/message_ids.h until their module is converted.
 
     tools/message_ids.py            write the flat header
     tools/message_ids.py --check    exit 1 when the header is stale or a module id has no line
@@ -115,11 +116,31 @@ def tag_name(section: str, value: int, tag: str | None) -> str:
     return f"MSG_{section.upper()}_{tag or f'{value:03d}'}"
 
 
+# Modules with no archive of their own read the faerie village bank (AREA175): the commu
+# overlays, the shop and start menus, plchar and the shared Fairy_* answer headers.
+FAERIE_BANK = "area175"
+FAERIE_FILES = ("Message_SetAnswerMessage.h",)
+
+
+def faerie_bank(path: Path) -> bool:
+    parts = path.parts
+    return (
+        path.name.startswith("Fairy")
+        or path.name in FAERIE_FILES
+        or any(part.startswith("commu") or part in ("shop", "plchar") for part in parts)
+        or any(
+            a == "menu" and b == "start" for a, b in zip(parts, parts[1:], strict=False)
+        )
+    )
+
+
 def module_of(path: Path, tags: Tags) -> str | None:
-    """The tagged archive that is a folder of `path`, if any."""
+    """The tagged archive that is a folder of `path`, or the bank its module shares."""
     for part in path.parts:
         if part in tags and part != SYSTEM:
             return part
+    if FAERIE_BANK in tags and faerie_bank(path):
+        return FAERIE_BANK
     return None
 
 
@@ -234,11 +255,12 @@ def render(ids: Ids, width: int) -> str:
         "#define MENU_MESSAGE_IDS_H",
         "",
         '#include "msg/message_ids.h"',
-        "",
     ]
-    lines += [
+    defines = [
         f"#define {name(None, v, width, {})} {v}" for v in sorted(ids.get(None, {}))
     ]
+    if defines:
+        lines += ["", *defines]
     lines += ["", "#endif", ""]
     return "\n".join(lines)
 
