@@ -3232,9 +3232,12 @@ g_Fairies = { addr = 0x801F2700, alias = true, source = "the fairy roster: the c
 g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
 func_801D0C50 = { addr = 0x801D0C50, type = "func", source = "Entry of the commu02 scene: dispatches on the step byte D_801F294C through g_Commu02Event0Steps." }
 FairyCasino_DrawFramePiece = { addr = 0x801D2EDC, type = "func", source = "draws one piece of the casino frame from the uv and width/height rows of D_801DAC60" }
+FairyCasino_DrawFrame = { addr = 0x801D2FA4, type = "func", source = "draws the casino window frame: the grey background draw mode, then the nine frame pieces of the zenny window at (x, y)" }
+FairyCasino_DrawNumbers = { addr = 0x801D448C, type = "func", source = "draws the Numbers game display by phase: the base windows, the picked row of D_801DB080 sliding in over them, then the windows retracting" }
 Fairy_EndCommuScene = { addr = 0x801D5A9C, type = "func", source = "Last slot of g_Commu02Event2Steps; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE, which hands the village on to its next step." }
 Menu_StartFairyEventMessage = { addr = 0x801D5D98, type = "func", source = "starts area message 0xEE and advances the event step once" }
 Menu_ConfirmFairy = { addr = 0x801D5E30, type = "func", source = "confirm and cancel cues set the list offset and the selected job row" }
+Menu_SelectMember = { addr = 0x801D6E70, type = "func", source = "the party-member pick step: confirm stores the 0xF1 handshake byte and advances, cancel returns to step 8, the pad moves the cursor over the joined characters and the display redraws" }
 Menu_StartFairyEndMessage = { addr = 0x801D7DD4, type = "func", source = "starts area message 0xF6 when the sub-step is zero" }
 Fairy_EndCommuSceneEvent3 = { addr = 0x801D7E30, type = "func", source = "Last slot of g_Commu02Event3Steps; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE; same bytes as Fairy_EndCommuScene." }
 Fairy_CountFairies = { addr = 0x801D7E64, type = "func", source = "Returns the number of fairy rows of g_FairyJobs whose active byte is nonzero, out of 60." }

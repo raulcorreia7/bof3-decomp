@@ -10,7 +10,6 @@ void func_801D4910(s32 x, s32 y);
 void func_801D4EA4(s32 left, s32 top, s32 icon_row, s32 raised);
 void func_801D8058(s32 left, s32 top);
 void func_801D2908(s16 x, s16 y, u8 mode);
-void func_801D2FA4(s16 x, s16 y);
 void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
 
 INCLUDE_ASM(func_801D1394);
@@ -601,10 +600,9 @@ MATCH void FairyCasino_DrawFramePiece(s32 x, s32 y, s32 index) {
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D2FA4(s16 x, s16 y) {
+/* func_801D2FA4 */
+MATCH void FairyCasino_DrawFrame(s16 x, s16 y) {
     s32 i;
-    s32 off;
     s32 tpage;
     s16 y2;
 
@@ -614,37 +612,28 @@ NON_MATCHING void func_801D2FA4(s16 x, s16 y) {
         tpage = 0x1D;
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-    GFX_AddPrim(GFX_LAYER_UI, 0xC);
-    FairyCasino_DrawFramePiece(x, (s16)y, 0);
-    off = 0x20;
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
+    FairyCasino_DrawFramePiece(x, y, 0);
     for (i = 0; i < 6; i++) {
-        FairyCasino_DrawFramePiece((s16)(x + off), (s16)y, 1);
-        off += 8;
+        FairyCasino_DrawFramePiece((s16)(x + 0x20 + 8 * i), y, 1);
     }
-    FairyCasino_DrawFramePiece((s16)(x + 0x50), (s16)y, 2);
-    FairyCasino_DrawFramePiece((s16)(x + 0x68), (s16)y, 3);
-    off = 0x18;
+    FairyCasino_DrawFramePiece((s16)(x + 0x50), y, 2);
+    FairyCasino_DrawFramePiece((s16)(x + 0x68), y, 3);
     for (i = 0; i < 2; i++) {
-        FairyCasino_DrawFramePiece(x, (s16)(y + off), 4);
-        FairyCasino_DrawFramePiece((s16)(x + 0x68), (s16)(y + off), 5);
-        off += 6;
+        FairyCasino_DrawFramePiece(x, (s16)(y + 0x18 + 6 * i), 4);
+        FairyCasino_DrawFramePiece((s16)(x + 0x68), (s16)(y + 0x18 + 6 * i), 5);
     }
     y2 = y + 0x23;
     FairyCasino_DrawFramePiece(x, y2, 6);
-    off = 8;
     for (i = 0; i < 12; i++) {
-        FairyCasino_DrawFramePiece((s16)(x + off), y2, 7);
-        off += 8;
+        FairyCasino_DrawFramePiece((s16)(x + 8 + 8 * i), y2, 7);
     }
     FairyCasino_DrawFramePiece((s16)(x + 0x68), (s16)(y + 0x23), 8);
 }
-#else
-INCLUDE_ASM(func_801D2FA4);
-#endif
 
 MATCH void func_801D3184(s32 x, s32 y) {
     UI_DrawWindow(x + 1, y + 1, 0x6A, 0x28, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
-    func_801D2FA4(x, y);
+    FairyCasino_DrawFrame(x, y);
     UI_DrawText(x + 0x24, y + 7, 0, 4, D_801DACA8);
     sprintf(g_UiFormatBuffer, D_801D0C04, g_Zenny);
     y = (s16)(y + 0x18);
@@ -656,12 +645,12 @@ MATCH void func_801D3184(s32 x, s32 y) {
 NON_MATCHING void func_801D32A0(s32 x, s32 y, u8 mode) {
     s32 x2;
     s32 y2;
-    u8* buf;
-    s16 ox;
+    s32 ox;
     s32 oy;
+    u8* buf;
 
     UI_DrawWindow(x + 1, y + 1, 0x6A, 0x28, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
-    func_801D2FA4(x, y);
+    FairyCasino_DrawFrame(x, y);
     UI_DrawText(x + 0x2C, y + 7, 0, 3, D_801DACB0);
     x2 = x;
     y2 = y;
@@ -669,36 +658,36 @@ NON_MATCHING void func_801D32A0(s32 x, s32 y, u8 mode) {
         case 2:
             if (D_801DB07C < 10) {
                 sprintf(buf = g_UiFormatBuffer, D_801D0C08, D_801DB07C);
-                ox = x + 0x3E;
+                ox = (s16)(x + 0x3E);
             } else {
                 sprintf(buf = g_UiFormatBuffer, D_801D0C04, D_801DB07C);
-                ox = x + 0x16;
+                ox = (s16)(x + 0x16);
             }
             oy = y + 0x18;
             break;
         case 3:
             if (D_801DB07C < 100) {
                 sprintf(buf = g_UiFormatBuffer, D_801D0C10, D_801DB07C);
-                ox = x + 0x36;
+                ox = (s16)(x + 0x36);
             } else {
                 sprintf(buf = g_UiFormatBuffer, D_801D0C04, D_801DB07C);
-                ox = x + 0x16;
+                ox = (s16)(x + 0x16);
             }
             oy = y + 0x18;
             break;
         case 4:
             if (D_801DB07C < 1000) {
                 sprintf(buf = g_UiFormatBuffer, D_801D0C18, D_801DB07C);
-                ox = x + 0x2E;
+                ox = (s16)(x + 0x2E);
             } else {
                 sprintf(buf = g_UiFormatBuffer, D_801D0C04, D_801DB07C);
-                ox = x + 0x16;
+                ox = (s16)(x + 0x16);
             }
             oy = y + 0x18;
             break;
         default:
             sprintf(buf = g_UiFormatBuffer, D_801D0C04, D_801DB07C);
-            ox = x2 + 0x16;
+            ox = (s16)(x2 + 0x16);
             oy = y2 + 0x18;
             break;
     }
@@ -1056,54 +1045,63 @@ MATCH void func_801D437C(void) {
     func_801D32A0(0xCC, 0x3C, 0);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D448C(void) {
-    s32 selected;
-    s8  value;
+/* func_801D448C */
+MATCH void FairyCasino_DrawNumbers(void) {
+    s32 pick;
+    u8  selected;
+    s32 row;
+    s32 right_x;
+    s32 mid_x;
+    s32 top_y;
 
-    selected = (s8)D_801DB0B4;
-    if (selected == 8) {
+    FAKE_STACK_PADS(u32, 6); /* FAKE: retail reserves 0x18 unused stack bytes. */
+
+    pick     = (s8)D_801DB0B4;
+    selected = pick;
+    if (pick == 8) {
         selected = 7;
     }
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         if (D_801F294E == 0) {
             D_801DB0C4 = 0;
-            func_801D4F88(104, 64, 1);
-            func_801D4EA4(104, 120, (u8)selected, 0);
-            func_801D4AE0(16, 24, 1);
-            func_801D3184(204, 16);
-            func_801D32A0(204, 60, 0);
+            func_801D4F88(0x68, 0x40, 1);
+            func_801D4EA4(0x68, 0x78, selected, 0);
+            func_801D4AE0(0x10, 0x18, 1);
+            func_801D3184(0xCC, 0x10);
+            func_801D32A0(0xCC, 0x3C, 0);
             D_801F294E += 1;
         } else if (D_801F294E == 1) {
-            value      = D_801DB0C4 + 1;
-            D_801DB0C4 = value;
-            selected   = (u8)selected * 5;
-            func_801D2CF8(168 - ((u8)value * 16), 120 - ((u8)value * 14), D_801DB080[selected + 5]);
-            func_801D2CF8(136 - ((u8)D_801DB0C4 * 8), 120 - ((u8)D_801DB0C4 * 14), D_801DB080[selected + 4]);
-            func_801D2CF8(104, 120 - ((u8)D_801DB0C4 * 14), D_801DB080[selected + 3]);
-            func_801D2CF8(168 - ((u8)D_801DB0C4 * 16), 64, D_801DB080[selected + 2]);
-            func_801D2CF8(136 - ((u8)D_801DB0C4 * 8), 64, D_801DB080[selected + 1]);
-            func_801D2CF8(104, 64, D_801DB080[selected]);
-            func_801D4AE0(16, 24, 1);
-            func_801D3184(204, 16);
-            func_801D32A0(204, 60, 0);
+            D_801DB0C4 += 1;
+            row = selected * 4;
+            row += selected;
+            right_x = 0xA8;
+            mid_x   = 0x88;
+            top_y   = 0x78;
+            func_801D2CF8(right_x - (u8)D_801DB0C4 * 16, top_y - (u8)D_801DB0C4 * 14, D_801DB080[row + 5]);
+            func_801D2CF8(mid_x - D_801DB0C4 * 8, top_y - D_801DB0C4 * 14, D_801DB080[row + 4]);
+            func_801D2CF8(0x68, top_y - D_801DB0C4 * 14, D_801DB080[row + 3]);
+            func_801D2CF8(right_x - D_801DB0C4 * 16, 0x40, D_801DB080[2]);
+            func_801D2CF8(mid_x - D_801DB0C4 * 8, 0x40, D_801DB080[1]);
+            func_801D2CF8(0x68, 0x40, D_801DB080[0]);
+            func_801D4AE0(0x10, 0x18, 1);
+            func_801D3184(0xCC, 0x10);
+            func_801D32A0(0xCC, 0x3C, 0);
             if (D_801DB0C4 == 4) {
                 if (D_801F294F == 0) {
                     D_801F294D = 0;
                     D_801F294E = 0;
                 } else {
-                    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
+                    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
                     D_801DB0C4 = 0;
                     D_801F294E = 2;
                 }
             }
         } else {
-            value      = D_801DB0C4 + 1;
-            D_801DB0C4 = value;
-            func_801D4AE0(16 - ((u8)value * 30), 24, 0);
-            func_801D3184(204 + ((u8)D_801DB0C4 * 30), 16);
-            func_801D32A0(204 + ((u8)D_801DB0C4 * 30), 60, 0);
-            func_801D2CF8(104, 64 - ((u8)D_801DB0C4 * 30), 0xFF);
+            D_801DB0C4 += 1;
+            func_801D4AE0(0x10 - (u8)D_801DB0C4 * 30, 0x18, 0);
+            func_801D3184(0xCC + D_801DB0C4 * 30, 0x10);
+            func_801D32A0(0xCC + D_801DB0C4 * 30, 0x3C, 0);
+            func_801D2CF8(0x68, 0x40 - D_801DB0C4 * 30, GAME_NONE);
             if (D_801DB0C4 == 5) {
                 D_801F294C = 2;
                 D_801F294D = 0;
@@ -1112,16 +1110,13 @@ NON_MATCHING void func_801D448C(void) {
             }
         }
     } else {
-        func_801D4F88(104, 64, 1);
-        func_801D4EA4(104, 120, (u8)selected, 0);
-        func_801D4AE0(16, 24, 1);
-        func_801D3184(204, 16);
-        func_801D32A0(204, 60, 0);
+        func_801D4F88(0x68, 0x40, 1);
+        func_801D4EA4(0x68, 0x78, selected, 0);
+        func_801D4AE0(0x10, 0x18, 1);
+        func_801D3184(0xCC, 0x10);
+        func_801D32A0(0xCC, 0x3C, 0);
     }
 }
-#else
-INCLUDE_ASM(func_801D448C);
-#endif
 
 MATCH void func_801D4840(void) {
     s32 bgm_offset;
@@ -1805,12 +1800,58 @@ MATCH void func_801D6D18(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D6E70(void) {
+/* func_801D6E70 */
+MATCH void Menu_SelectMember(void) {
+    u16* pad;
+    u16  pressed;
+    u16  repeated;
+    s32  limit;
+    s16  last;
+    s8   value;
+
+    pad     = &g_InputPressed;
+    pressed = *pad;
+    if ((pressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
+        D_801DB0C8 = 0xF1;
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x04));
+        D_801DB0B8 = 0;
+        D_801F294D += 1;
+    } else if ((pressed & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x06));
+        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
+        D_801DB0C4 = 0;
+        D_801F294D = 8;
+    } else {
+        limit    = func_801D92B0() - 1;
+        repeated = INPUT_GetRepeatedButtons(*pad & INPUT_DIRECTIONAL);
+        last     = limit;
+        if (repeated != 0) {
+            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
+        }
+        if ((repeated & (PADLleft | PADLright)) != 0) {
+            value = D_801DB0B4;
+            D_801DB0B4 ^= 1;
+            if ((s8)D_801DB0B4 > (u8)last) {
+                D_801DB0B4 = value;
+            }
+        } else if ((repeated & PADLup) != 0) {
+            value      = D_801DB0B4 - 2;
+            D_801DB0B4 = value;
+            if (value < 0) {
+                D_801DB0B4 = limit & (value | ~1);
+            }
+        } else if ((repeated & PADLdown) != 0) {
+            value      = D_801DB0B4 + 2;
+            D_801DB0B4 = value;
+            if (value > ((u8)last & (value | 0xFE))) {
+                D_801DB0B4 = value & 1;
+            }
+        }
+    }
+    func_801D9210();
+    func_801D9348(((D_801DB0B4 & 1) * 0x88) + 0x20, ((((s32)(D_801DB0B4 << 0x18) >> 0x19) * 0x38) + 0x2B) & HALF_MASK, 1, 6);
+    func_801D812C();
 }
-#else
-INCLUDE_ASM(func_801D6E70);
-#endif
 
 MATCH void func_801D708C(void) {
     u16 cue;
