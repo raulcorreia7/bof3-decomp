@@ -2105,23 +2105,29 @@ NON_MATCHING void func_801D8058(s32 left, s32 top) {
     s32 i;
     s32 count;
     s32 x;
-    s32 base_x;
+    s32 y;
+    s16 base_x;
+    s32 grid_x;
     s32 y_fixed;
+    s32 n;
 
     x      = left;
+    y      = top;
     base_x = x;
-    UI_DrawWindow(x, top, 172, 26, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
-    func_801D7EF0((s16)x, (s16)top);
+    i      = 0;
+    UI_DrawWindow(base_x, y, 172, 26, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
+    grid_x = x << 16;
+    func_801D7EF0(grid_x >> 16, y);
     count = Fairy_CountFairies() & BYTE_MASK;
     if (count > 0) {
-        y_fixed = (top + 9) << 16;
-        x       = 7;
-        i       = 0;
-        while (i < count) {
-            func_801D875C((s16)(base_x + x), (s16)(y_fixed >> 16), 1);
+        y_fixed = (y + 9) << 16;
+        n       = count;
+        grid_x  = 7;
+        do {
+            func_801D875C((s16)(base_x + grid_x), y_fixed >> 16, 1);
             i++;
-            x += 8;
-        }
+            grid_x += 8;
+        } while (i < n);
     }
 }
 #else
