@@ -110,6 +110,6 @@ s32         LZ77_DecodeStep(void);
 /* func_80166E88 */
 void        EMI_LoadPartyArchives(u8 member_a, u8 member_b, u8 member_c, u8 family);
 /* func_8016728C */
-void        EMI_GetArchiveId(u8 index, u8 family);
+void        EMI_LoadFamilyArchive(u8 index, u8 family);
 
 #endif

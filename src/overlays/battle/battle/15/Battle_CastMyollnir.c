@@ -1,8 +1,8 @@
 #include "battle_15.h"
 
-/* func_8009F44C */
-MATCH void Battle_ApplyBlizzard(void) {
+/* func_8009FF7C */
+MATCH void Battle_CastMyollnir(void) {
     g_Battle.action_type = BATTLE_ACTION_ABILITY;
-    g_Battle.action_id   = ABILITY_BLIZZARD;
+    g_Battle.action_id   = ABILITY_MYOLLNIR;
     Battle_ApplyAbilityDamage();
 }

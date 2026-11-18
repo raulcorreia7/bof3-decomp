@@ -565,7 +565,7 @@ segments:
       - [0xD0F3C, c, EMI_LoadPartyCode]
       - [0xD0F84, c, EMI_LoadParty]
       - [0xD0FF8, c, EMI_FindPartyArchive]
-      - [0xD128C, c, EMI_GetArchiveId]
+      - [0xD128C, c, EMI_LoadFamilyArchive]
       - [0xD1344, c, Area_DispatchScene]
       - [0xD13AC, c, Area_InitScene]
       - [0xD1428, c, func_80167428]

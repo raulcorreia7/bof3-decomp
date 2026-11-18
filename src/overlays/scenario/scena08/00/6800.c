@@ -78,7 +78,7 @@ INCLUDE_ASM(func_801FD704);
 
 MATCH void func_801FDF84(void) {
     g_Characters[CHAR_INDEX_REI].exp += 10000;
-    Char_GetExp(CHAR_INDEX_REI);
+    Char_ApplyLevelUps(CHAR_INDEX_REI);
     g_Characters[CHAR_INDEX_REI].equip.weapon = WEAPON_MOON_SWORD;
     g_Characters[CHAR_INDEX_REI].equip.shield = ARMOR_STEEL_GAUNTLETS;
     g_Characters[CHAR_INDEX_REI].equip.helmet = ARMOR_BANDANA;

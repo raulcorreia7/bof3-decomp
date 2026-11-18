@@ -19,7 +19,7 @@
 /* The block at its retail address; an image header declares g_WindowStyle. */
 #define CHARACTER_BLOCK                                                                   ((CharacterRoster*)&g_WindowStyle)
 
-/* Char_GetExp applies the six stat gains and learns both abilities. */
+/* Char_ApplyLevelUps applies the six stat gains and learns both abilities. */
 #define LEVEL(exp, hp, ap, power, defense, agility, intelligence, ability, extra_ability) {(exp), (hp), (ap), ((power) << 4) | (defense), ((agility) << 4) | (intelligence), (ability), (extra_ability)}
 
 /* The character sprites container loaded at 0x8003B800 (PLxxx archives;
@@ -297,7 +297,7 @@ typedef struct LevelGrowth {
     u8  power_defense;
     u8  agility_intelligence;
     u8  ability;
-    u8  extra_ability; /* Char_GetExp learns both ability bytes through Char_AddAbility */
+    u8  extra_ability; /* Char_ApplyLevelUps learns both ability bytes through Char_AddAbility */
 } LevelGrowth;
 
 ASSERT_OFFSET(LevelGrowth, exp, 0x00);

@@ -59,7 +59,7 @@ NON_MATCHING void func_801D0F2C(u8 start) {
         if (D_801EBA44[start].exp[i] != 0) {
             g_Characters[i].exp = D_801EBA44[start].exp[i];
         }
-        Char_GetExp((u8)i);
+        Char_ApplyLevelUps((u8)i);
     }
     Char_RebuildPartyStats();
     g_Zenny = D_801EBA44[start].zenny;

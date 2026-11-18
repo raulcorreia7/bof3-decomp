@@ -644,38 +644,38 @@ void        func_8009F1BC(void);
 /* func_8009F258 */
 void        Battle_InflictSilence(void);
 /* func_8009F278 */
-void        Battle_ApplyQuake(void);
+void        Battle_CastQuake(void);
 /* func_8009F2B0 */
-void        Battle_ApplyTyphoon(void);
+void        Battle_CastTyphoon(void);
 /* func_8009F2E8 */
-void        Battle_ApplyLightning(void);
+void        Battle_CastLightning(void);
 /* func_8009F3DC */
-void        Battle_ApplyMight(void);
+void        Battle_CastMight(void);
 /* func_8009F414 */
-void        Battle_ApplyInferno(void);
+void        Battle_CastInferno(void);
 /* func_8009F44C */
-void        Battle_ApplyBlizzard(void);
+void        Battle_CastBlizzard(void);
 /* func_8009F484 */
-void        Battle_ApplySirocco(void);
+void        Battle_CastSirocco(void);
 /* func_8009F4BC */
-void        Battle_ApplyFlare(void);
+void        Battle_CastFlare(void);
 /* func_8009F4F4 */
-void        Battle_ApplyProtect(void);
+void        Battle_CastProtect(void);
 /* func_8009F52C */
-void        Battle_ApplyWeaken(void);
+void        Battle_CastWeaken(void);
 /* func_8009F564 */
-void        Battle_ApplyFireblast(void);
+void        Battle_CastFireblast(void);
 /* func_8009F59C */
-void        Battle_ApplyCyclone(void);
+void        Battle_CastCyclone(void);
 /* func_8009F5D4 */
-void        Battle_ApplySilence(void);
+void        Battle_CastSilence(void);
 /* func_8009F60C */
-void        Battle_ApplyJolt(void);
+void        Battle_CastJolt(void);
 void        func_8009F644(void);
 /* func_8009F67C */
-void        Battle_ApplySimoon(void);
+void        Battle_CastSimoon(void);
 /* func_8009F6B4 */
-void        Battle_ApplyBarrier(void);
+void        Battle_CastBarrier(void);
 void        func_8009F758(void);
 /* func_8009F7EC */
 void        Battle_ThirdHpDamage(void);
@@ -707,7 +707,7 @@ void        Battle_Heal5Ap(void);
 void        func_8009FED0(void);
 void        func_8009FEF4(void);
 /* func_8009FF7C */
-void        Battle_ApplyMyollnir(void);
+void        Battle_CastMyollnir(void);
 /* func_8009FFB4 */
 void        Battle_FullRestore(void);
 /* func_8009FFE4 */
@@ -748,7 +748,7 @@ void        func_800A21D0(void);
 void        func_800A22CC(void);
 void        func_800A23CC(void);
 /* func_800A2404 */
-void        Battle_ApplyDeath(void);
+void        Battle_CastDeath(void);
 void        func_800A243C(void);
 void        func_800A250C(void);
 void        func_800A2560(void);

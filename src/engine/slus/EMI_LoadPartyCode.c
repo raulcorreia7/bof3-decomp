@@ -8,6 +8,6 @@ MATCH void EMI_LoadPartyCode(u8 member_a, u8 member_b, u8 member_c) {
 
     slot = EMI_FindPartyArchive(member_a, member_b, member_c);
     if ((g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) != slot) {
-        EMI_GetArchiveId(slot, EMI_FAMILY_PLP);
+        EMI_LoadFamilyArchive(slot, EMI_FAMILY_PLP);
     }
 }

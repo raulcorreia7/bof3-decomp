@@ -6,7 +6,7 @@ MATCH void Fairy_ReloadPartySprites(void) {
     u8 variant;
 
     g_EmiStreamFlags = 0x20;
-    EMI_GetArchiveId(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
+    EMI_LoadFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
     variant                     = g_SceneEventState.step;
     variant                     = variant + 1;
     MEM_PTR(u8, 0x801448ECu)[0] = variant;
