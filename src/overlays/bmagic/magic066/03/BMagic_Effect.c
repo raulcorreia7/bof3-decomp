@@ -263,6 +263,78 @@ MATCH void func_801EF930(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EF984(void) {
+    u32 tpage;
+    u32 i;
+    u32 j;
+    u32 k;
+    s32 x;
+    s32 y;
+    s32 z;
+
+    if (GetGraphType() == 1) {
+        tpage = 0xA5;
+    } else if (GetGraphType() == 2) {
+        tpage = 0xA5;
+    } else {
+        tpage = 0x35;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(3, 0xC);
+
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 8; j++) {
+            if (func_801DB524((u8)(j + 3)) == 0) {
+                g_Task->param.unk_0B = i;
+                g_Task->timer        = j;
+                x                    = g_BattleEnemyBattlers[j].pos.x.fixed + D_801F008C[i];
+                y                    = g_BattleEnemyBattlers[j].pos.y.fixed + D_801F0090[i];
+                z                    = g_BattleEnemyBattlers[j].pos.z.fixed + D_801F0094[i];
+                g_Task->pos.x.fixed  = x;
+                g_Task->pos.y.fixed  = y;
+                g_Task->pos.z.fixed  = z;
+                func_801EFFB0();
+                func_801EFCC8();
+                PopMatrix();
+            }
+        }
+    }
+
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
+            if (func_801DB524((u8)j) == 0) {
+                g_Task->param.unk_0B = i;
+                g_Task->timer        = j;
+                x                    = g_Game.members[j].pos.x.fixed + D_801F008C[i];
+                y                    = g_Game.members[j].pos.y.fixed + D_801F0090[i];
+                z                    = g_Game.members[j].pos.z.fixed + D_801F0094[i];
+                g_Task->pos.x.fixed  = x;
+                g_Task->pos.y.fixed  = y;
+                g_Task->pos.z.fixed  = z;
+                func_801EFFB0();
+                func_801EFCC8();
+                PopMatrix();
+            }
+        }
+    }
+
+    for (i = 0; i < 4; i++) {
+        if (i * 3 < g_Task->unk_09) {
+            D_801F00B0[i] = D_801F00B0[i] + 1;
+        }
+        if (g_Task->header.step == 1) {
+            D_801F00B0[i] = D_801F00B0[i] & 0xF;
+        }
+    }
+
+    if (GetGraphType() == 1) {
+        tpage = 0x25;
+    } else if (GetGraphType() == 2) {
+        tpage = 0x25;
+    } else {
+        tpage = 0x15;
+    }
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    GFX_AddPrim(3, 0xC);
 }
 #else
 INCLUDE_ASM(func_801EF984);
