@@ -10,6 +10,6 @@ MATCH void func_801F4350(void) {
         g_ScenarioState.state_04 = 0xD;
         g_ScenarioState.step_05  = 8;
     } else {
-        g_MessageRequest = MSG_053;
+        g_MessageRequest = MSG_AREA120_DECLINE_TAKE_TIME;
     }
 }

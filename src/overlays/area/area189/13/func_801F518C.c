@@ -41,12 +41,12 @@ MATCH void func_801F518C(void) {
             x = g_Task->pos.x.fixed + g_Task->vx * g_Task->timer;
             y = g_Task->pos.y.fixed + g_Task->vy * g_Task->timer;
             if ((u32)((x >> 24) - 0x10) < 5 && (y >> 24) >= 0x18) {
-                Message_StartAreaMessage(MSG_002);
+                Message_StartAreaMessage(MSG_AREA189_ASK_RETURN_BASE_CAMP);
                 *state = GAME_REQUEST_MESSAGE;
                 func_801F5D20();
                 return;
             } else if (SYS_TestFlag(D_80144EF8, 4) && (u32)((x >> 24) - 0x15) < 5 && (y >> 24) < 0xF) {
-                MESSAGE_START_WAIT(MSG_003);
+                MESSAGE_START_WAIT(MSG_AREA189_ASK_RETURN_OASIS);
                 func_801F5D20();
                 return;
             }

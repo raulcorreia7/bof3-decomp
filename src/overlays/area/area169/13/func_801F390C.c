@@ -19,7 +19,7 @@ MATCH void func_801F390C(void) {
             return;
         case 2:
             if (WINDOW_EFFECT_IDLE()) {
-                MESSAGE_START_WAIT(MSG_001);
+                MESSAGE_START_WAIT(MSG_AREA169_PARTY_HEALED);
                 *state = 3;
             }
             return;

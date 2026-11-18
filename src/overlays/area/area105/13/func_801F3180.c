@@ -6,7 +6,7 @@ MATCH void func_801F3180(void) {
     state = &g_SceneEventState.step;
     switch (*state) {
         case 0:
-            MESSAGE_START_WAIT(MSG_001);
+            MESSAGE_START_WAIT(MSG_AREA105_TIDE_BLOCKS_PATH);
             *state = 1;
             return;
         case 1:

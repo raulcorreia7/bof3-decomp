@@ -7,7 +7,7 @@ MATCH void func_801F3264(void) {
         g_Task->tint.bytes.rgb.g += 6;
         g_Task->tint.bytes.rgb.b += 6;
     } else {
-        MESSAGE_START_WAIT(MSG_031);
+        MESSAGE_START_WAIT(MSG_AREA175_ASK_REPLAY_SCENE);
         g_Task->header.mode = 2;
     }
     Area_DrawScreenTint();
