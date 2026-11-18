@@ -22,6 +22,7 @@
 #define MSG_012 12
 #define MSG_013 13
 #define MSG_014 14
+#define MSG_015 15
 #define MSG_016 16
 #define MSG_017 17
 #define MSG_018 18
@@ -33,6 +34,7 @@
 #define MSG_024 24
 #define MSG_025 25
 #define MSG_026 26
+#define MSG_027 27
 #define MSG_028 28
 #define MSG_029 29
 #define MSG_031 31

@@ -4,8 +4,7 @@
 NON_MATCHING s32 func_801F3C44(s32 x, s32 y) {
     /* FAKE: the first distance check uses the x argument saved in t2. */
     FAKE_REG(s32, target_x, "t2");
-    /* FAKE: retail keeps the party count in v0 for the initial branch. */
-    FAKE_REG(s32, count, "v0");
+    s32 count;
     s32 i;
     s32 dx;
     s32 dy;
