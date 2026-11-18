@@ -24,7 +24,7 @@ MATCH void func_801B85C0(void) {
             Actor_RequestScript(g_Task->direction);
             return;
         }
-        func_801C24D0();
+        Area_RunWalk();
     }
     g_Task->timer = (g_Task->timer - 1);
     Actor_UpdateMovement();

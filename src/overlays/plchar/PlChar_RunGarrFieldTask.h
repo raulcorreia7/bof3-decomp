@@ -17,7 +17,7 @@ s32 PlChar_FollowerInReach(u8 index);
             Actor_RequestScript(g_Task->direction + 8);                                                            \
             g_GameState->u.field.counter.unsigned_value = 2;                                                       \
             g_GameFlags |= 0x1000;                                                                                 \
-            func_801C24D0();                                                                                       \
+            Area_RunWalk();                                                                                        \
             g_Task->timer--;                                                                                       \
             Actor_UpdateMovement();                                                                                \
             g_GameState->u.field.mode.unsigned_value = 1;                                                          \

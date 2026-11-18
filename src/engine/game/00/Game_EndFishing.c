@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801984E8(void) {
+/* func_801984E8 */
+MATCH void Game_EndFishing(void) {
     RECT rect;
     s32* ptr_503C = &D_8014503C;
 

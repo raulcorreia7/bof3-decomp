@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH bool func_801BF11C(void) {
+/* func_801BF11C */
+MATCH bool Battle_WalkMembersIn(void) {
     PartyMember* work;
     s32          i;
     s32          j;

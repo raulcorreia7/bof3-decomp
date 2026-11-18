@@ -80,7 +80,7 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
             D_80146260 = 0u;
             Scene_SetupParty((u32)(entry_facing & 0x7Fu));
             g_Game.walk_flags &= ~AREA_WALK_ACCEPT_LOCK;
-            func_80199440();
+            Party_RunFrame();
         }
     } else if ((g_Game.flags & 0x800u) == 0) {
         if ((world_flags & 0x80u) != 0)

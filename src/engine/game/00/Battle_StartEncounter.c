@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode) {
+/* func_801BFE34 */
+MATCH void Battle_StartEncounter(s32 origin_x, s32 origin_y, s32 scroll_mode) {
     s32 offset;
     s32 kind;
     s32 count;
@@ -8,9 +9,9 @@ MATCH void func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode) {
     u8  key;
     u8* record;
 
-    mode                = D_801CD78D[(work_mode & BYTE_MASK) * 4];
-    g_EncounterOriginX  = work_kind;
-    g_EncounterOriginY  = work_index;
+    mode                = D_801CD78D[(scroll_mode & BYTE_MASK) * 4];
+    g_EncounterOriginX  = origin_x;
+    g_EncounterOriginY  = origin_y;
     g_Battle.scroll_dir = mode;
     count               = 0;
     if (count < g_Game.party_size) {
@@ -29,7 +30,7 @@ MATCH void func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode) {
                     break;
             }
             kind &= BYTE_MASK;
-            func_801BF5A8(g_EncounterOriginX, g_EncounterOriginY, kind);
+            Battle_SetEncounterSpot(g_EncounterOriginX, g_EncounterOriginY, kind);
             kind <<= 3;
             *(s32*)((u8*)g_EncounterParty + kind)       = g_Task->pos.x.fixed;
             *(s32*)((u8*)&g_EncounterParty[0].y + kind) = g_Task->pos.y.fixed;

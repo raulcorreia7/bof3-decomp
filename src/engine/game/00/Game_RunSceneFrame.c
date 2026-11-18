@@ -1,7 +1,8 @@
 #include "game_00.h"
 
-MATCH void func_80199308(void) {
-    func_80199440();
+/* func_80199308 */
+MATCH void Game_RunSceneFrame(void) {
+    Party_RunFrame();
     Area_UpdateCamera();
     func_80167910();
     Area_UpdateParty();

@@ -4,7 +4,7 @@
     if ((g_GameAreaId != AREA_ID_STEEL_BEACH_MAP) || !(PROBE(g_Task->pos.x.fixed, g_Task->pos.y.fixed, Actor_FindInRange(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1) & 0xFF) & 0xFF)) { \
         return 0;                                                                                                                                                                        \
     }                                                                                                                                                                                    \
-    func_801C24D0();                                                                                                                                                                     \
+    Area_RunWalk();                                                                                                                                                                      \
     g_Task->timer -= 1;                                                                                                                                                                  \
     Actor_UpdateMovement();                                                                                                                                                              \
     g_Game.current->u.field.mode.value = 1;                                                                                                                                              \

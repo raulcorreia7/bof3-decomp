@@ -7,7 +7,7 @@ MATCH void func_801C4D58(void) {
     s32    doubled;
 
     g_Game.current->u.field.counter.value = (g_Task->voice_flags.raw + 2);
-    func_801C2538();
+    Area_SetWalkVelocity();
     work          = g_Task;
     doubled       = work->timer * 2;
     work->timer   = (doubled * (work->voice_flags.raw + 1));

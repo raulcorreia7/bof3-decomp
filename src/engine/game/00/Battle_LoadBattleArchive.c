@@ -8,7 +8,7 @@ MATCH void Battle_LoadBattleArchive(void) {
 
     Party_BuildBattlers(PARTY_ORDER_BATTLE);
     Battle_PlaceMembers();
-    func_801A06D8();
+    Actor_RunInteractions();
     Area_RunLoadingFrame();
     if ((g_Battle.outcome.options & BATTLE_OPT_KEEP_BGM) == 0) {
         if (g_SndBGMId != GAME_NONE) {

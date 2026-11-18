@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801985C8(void) {
+/* func_801985C8 */
+MATCH void Game_ReturnFromFishing(void) {
     u8 selection;
 
     g_EmiStreamFlags = 0x20;

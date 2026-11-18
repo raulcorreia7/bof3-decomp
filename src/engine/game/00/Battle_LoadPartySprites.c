@@ -13,7 +13,7 @@ MATCH void Battle_LoadPartySprites(void) {
     s32           span;
 
     ready = Battle_LoadPartyScripts();
-    func_801A06D8();
+    Actor_RunInteractions();
     Area_RunLoadingFrame();
     if (ready != 0) {
         SND_SetBankLayout(1);

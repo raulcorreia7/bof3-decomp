@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801C2710(void) {
+/* func_801C2710 */
+MATCH void Area_UpdateWalkScroll(void) {
     u8* work;
     u8* state;
     s32 product;

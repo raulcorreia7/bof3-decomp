@@ -75,7 +75,7 @@ MATCH void func_801BC000(void) {
                     if (!(g_Characters[g_Game.current->character_index].status & STATUS_CONFUSED)) {
                         g_Game.current->u.field.step.value = 0;
                     }
-                    func_801C2538();
+                    Area_SetWalkVelocity();
                     func_801C4C48();
                     Actor_RequestScript((g_Task->direction + 8) & BYTE_MASK);
                     if (g_Game.current->chr.character_id == CHAR_ID_GARR) {

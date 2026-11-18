@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH u32 func_801A06D8(void) {
+/* func_801A06D8 */
+MATCH u32 Actor_RunInteractions(void) {
     Actor* row;
     u32    result;
     u8     i;

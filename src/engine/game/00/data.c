@@ -31,19 +31,19 @@ Callback g_GameMenuSteps[3] = {Game_LoadMenu, Game_UpdateMenuFrame, Game_ReturnF
 
 u8 s_DirectionJitters[4] = {0xFF, 0x00, 0x01, 0x00};
 
-Callback g_GameBattleSteps[8] = {func_80197A60, Battle_LoadPartySprites, func_80197C1C, Battle_LoadBattleArchive, func_80197E54, func_801D1014, func_80197EFC, func_80197F48};
+Callback g_GameBattleSteps[8] = {Battle_TurnToEncounter, Battle_LoadPartySprites, Battle_WalkToEncounter, Battle_LoadBattleArchive, Battle_BeginEntrance, func_801D1014, Game_ScrollToParty, Game_ReturnFromBattle};
 
 Step2 s_BattleScrollCellSteps[4] = {{4, 0}, {0, 4}, {-4, 0}, {0, -4}};
 
 Callback g_GameShopSteps[3] = {Game_LoadShopOverlay, func_80199398, Game_ReturnFromShop};
 
-Callback g_GameFishingSteps[4] = {func_801984E8, func_801E0BD0, func_801985C8, func_801E0C20};
+Callback g_GameFishingSteps[4] = {Game_EndFishing, func_801E0BD0, Game_ReturnFromFishing, func_801E0C20};
 
 Callback g_MenuAbilityOpen[3] = {Game_LoadAbilityMenu, Game_UpdateAbilityMenuFrame, Game_ReturnFromAbilityMenu};
 
 Callback g_GameShisuSteps[3] = {Game_LoadShisu, Game_UpdateShisuFrame, Game_ReturnFromShisu};
 
-Callback g_GameSceneCameraSteps[3] = {func_80198B00, func_80198B44, func_80198B6C};
+Callback g_GameSceneCameraSteps[3] = {Game_RunScene, Game_OrbitSceneCamera, Game_EndSceneCamera};
 
 u8 s_MenuLine1Run[12] = {0x00, 0x00, 0x0B, 0x01, 0x00, 0x14, 0x02, 0x00, 0x0C, 0x00, 0x00, 0xFF};
 
@@ -2187,7 +2187,7 @@ Callback D_801CD118[2] = {func_801B2AB4, func_801B2B6C};
 
 Callback D_801CD120[4] = {func_801B2DDC, func_801B2FC8, func_801B315C, func_801B31F0};
 
-Callback g_AreaClimbSteps[4] = {func_801B32A4, Area_ClimbMount, func_801B3488, Area_ClimbDismount};
+Callback g_AreaClimbSteps[4] = {Area_GrabLadder, Area_ClimbMount, Area_ClimbLadder, Area_ClimbDismount};
 
 Callback g_AreaClimbMountSteps[5] = {func_801B3314, func_801B3388, func_801B33C4, func_801B3400, func_801B343C};
 
@@ -2261,7 +2261,7 @@ Callback D_801CD404[15] = {func_801BBE98, func_801BBFB4, func_801B69C0, func_801
 
 Callback D_801CD440[2] = {func_801BC000, Area_StepSceneTimer};
 
-Callback D_801CD448[4] = {func_801B32A4, Area_ClimbMount, func_801BD83C, Area_ClimbDismount};
+Callback D_801CD448[4] = {Area_GrabLadder, Area_ClimbMount, func_801BD83C, Area_ClimbDismount};
 
 Step2 s_CameraScrollDeltas[CAMERA_DIR_COUNT] = {
     {-CAMERA_SCROLL_STEP, 0},

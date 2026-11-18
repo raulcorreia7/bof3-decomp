@@ -1,11 +1,12 @@
 #include "game_00.h"
 
-MATCH void func_80197E54(void) {
+/* func_80197E54 */
+MATCH void Battle_BeginEntrance(void) {
     u8   local_ready;
     u16* state;
 
-    local_ready = func_801BF78C();
-    func_801A06D8();
+    local_ready = Battle_IsPartyInPlace();
+    Actor_RunInteractions();
     Area_RunLoadingFrame();
     if (EMI_IsReady() && local_ready) {
         g_AreaCameraStep             = 0;
