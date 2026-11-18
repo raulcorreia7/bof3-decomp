@@ -68,7 +68,7 @@ MATCH void func_801F7F08(void) {
                 g_GameStateIndex        = 2;
                 g_ScenarioState.step_05 = 2;
             } else {
-                Message_StartAreaMessage(MSG_066);
+                Message_StartAreaMessage(MSG_SCENA11_066);
                 g_GameStateIndex        = 2;
                 g_ScenarioState.step_05 = 6;
             }
@@ -86,7 +86,7 @@ MATCH void func_801F7F08(void) {
                 break;
             }
             SND_PlaySE(0x106);
-            Message_StartAreaMessage(MSG_000);
+            Message_StartAreaMessage(MSG_SCENA11_000);
             g_GameStateIndex        = 2;
             g_ScenarioState.step_05 = 0x15;
             break;

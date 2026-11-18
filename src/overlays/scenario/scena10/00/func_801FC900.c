@@ -9,7 +9,7 @@ MATCH void func_801FC900(void) {
 
     switch (g_ScenarioState.step_05) {
         case 0:
-            Message_StartAreaMessage(MSG_002);
+            Message_StartAreaMessage(MSG_SCENA10_002);
             g_GameStateIndex        = 2;
             g_ScenarioState.step_05 = 1;
             break;

@@ -10,7 +10,7 @@ MATCH void func_801D61C0(void) {
 
     if (SYS_TestFlag(g_SceneEventFlags, 119) != 0) {
         g_MenuStep.sub_step = 6;
-        Message_StartAreaMessage(MSG_239);
+        Message_StartAreaMessage(MSG_AREA175_PICK_NICKNAME_TARGET);
         return;
     }
     if (g_ScenarioState.scenario_id != 0xE || SYS_TestFlag(*g_SceneFlags, 5) == 0) {

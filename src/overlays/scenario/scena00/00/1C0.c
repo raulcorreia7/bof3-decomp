@@ -1222,7 +1222,7 @@ MATCH void func_801F9BE4(void) {
                 break;
             }
             SsSetMVol(0, 0);
-            MESSAGE_START_WAIT(MSG_016);
+            MESSAGE_START_WAIT(MSG_SCENA00_016);
             SND_PlayBGM(6, 0x5A, 8);
             g_ScenarioState.timer_06 = 0;
             g_ScenarioState.step_05  = 1;
@@ -1261,7 +1261,7 @@ MATCH void func_801F9BE4(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            SCENARIO_MESSAGE_WAIT(MSG_017, 4);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA00_017, 4);
             break;
 
         case 4:
@@ -1370,7 +1370,7 @@ MATCH void func_801FA27C(void) {
             if (WINDOW_EFFECT_BUSY()) {
                 break;
             }
-            SCENARIO_MESSAGE_WAIT(MSG_001, 1);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA00_001, 1);
             break;
 
         case 1:
@@ -1384,14 +1384,14 @@ MATCH void func_801FA27C(void) {
             if (g_ScriptVarsReq.byte != 3) {
                 break;
             }
-            SCENARIO_MESSAGE_WAIT(MSG_002, 3);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA00_002, 3);
             break;
 
         case 3:
             if (g_ScriptVarsReq.byte != 4) {
                 break;
             }
-            MESSAGE_START_WAIT(MSG_003);
+            MESSAGE_START_WAIT(MSG_SCENA00_003);
             g_ScenarioState.timer_06 = 304;
             g_ScenarioState.step_05  = 4;
             break;
@@ -1472,7 +1472,7 @@ MATCH void func_801FA27C(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            MESSAGE_START_WAIT(MSG_004);
+            MESSAGE_START_WAIT(MSG_SCENA00_004);
             SND_FadeOutBGM(2, 0x64, 0x20);
             g_ScenarioState.step_05 = 0xA;
             break;
@@ -1851,7 +1851,7 @@ MATCH void func_801FB204(void) {
 
         case 3:
             g_GameFlags |= 0x180;
-            SCENARIO_MESSAGE_WAIT(MSG_014, 4);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA00_014, 4);
             break;
 
         case 4:

@@ -9,7 +9,7 @@ MATCH void FairySinger_AnswerHearSong(void) {
         MESSAGE_REQUEST_CLEAR();
         D_801F2944 = 1;
     } else {
-        g_MessageRequest                   = MSG_673;
+        g_MessageRequest                   = MSG_AREA175_SEE_YOU_LATER_END;
         g_ScriptWorkRecord->callback_index = GAME_NONE;
     }
 }

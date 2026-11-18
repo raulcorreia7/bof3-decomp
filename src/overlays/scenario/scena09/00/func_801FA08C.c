@@ -129,7 +129,7 @@ MATCH void func_801FA8B8(void) {
             D_80146258 ^= 8;
             goto clear_script_state;
         case 20:
-            SCENARIO_MESSAGE_WAIT(MSG_075, 0x15);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA09_075, 0x15);
             break;
         case 21:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -148,7 +148,7 @@ MATCH void func_801FA8B8(void) {
             SYS_SetFlag(g_SceneFlags, 0x2C);
             goto clear_script_state;
         case 30:
-            SCENARIO_MESSAGE_WAIT(MSG_076, 0x1F);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA09_076, 0x1F);
             break;
         case 31:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {

@@ -48,7 +48,7 @@ MATCH void func_801F8CE4(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            SCENARIO_MESSAGE_WAIT(MSG_020, 0xD);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA14_020, 0xD);
             break;
         case 13:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -83,7 +83,7 @@ MATCH void func_801F8CE4(void) {
                 break;
             }
             func_801F924C();
-            MESSAGE_START_WAIT(MSG_001);
+            MESSAGE_START_WAIT(MSG_SCENA14_001);
             g_SpawnedActors[D_801FC4C0].header.mode = 2;
             g_ScenarioState.step_05                 = 0x11;
             break;
@@ -113,7 +113,7 @@ MATCH void func_801F8CE4(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            SCENARIO_MESSAGE_WAIT(MSG_002, 0x15);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA14_002, 0x15);
             break;
         case 21:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {

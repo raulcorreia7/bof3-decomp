@@ -12,7 +12,7 @@ MATCH void func_801F16F8(void) {
             variant = &g_SceneEventState.step;
             *variant += 1;
         } else {
-            Message_StartAreaMessage(MSG_248);
+            Message_StartAreaMessage(MSG_AREA175_ASK_HELP_TOPIC);
             *state = GAME_REQUEST_MESSAGE;
         }
     }

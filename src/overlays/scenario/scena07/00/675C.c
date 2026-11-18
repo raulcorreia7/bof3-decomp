@@ -101,7 +101,7 @@ MATCH s32 func_801FD67C(s32 x, s32 y) {
         }
     }
     if ((g_GameAreaId == AREA_ID_ANGEL_TOWER_GARR_FIGHT) && (y == 0x1C8000) && ((u32)((x >> 16) - 0x25) < 2U) && (SYS_TestFlag(g_SceneFlags, 9) == 0)) {
-        Message_StartAreaMessage(MSG_002);
+        Message_StartAreaMessage(MSG_SCENA07_002);
         g_GameStateIndex         = 2;
         g_ScenarioState.state_04 = 6;
         g_ScenarioState.step_05  = 5;
@@ -115,7 +115,7 @@ MATCH s32 func_801FD67C(s32 x, s32 y) {
         g_ScratchPad.cells.bytes[0] = facing;
         if (((u32)facing >= 2U) && (facing != 2) && ((y >> 16) >= 0x1E)) {
             Game_SetScriptActive();
-            Message_StartAreaMessage(MSG_001);
+            Message_StartAreaMessage(MSG_SCENA07_001);
             g_GameStateIndex         = 2;
             g_ScenarioState.state_04 = 8;
             g_ScenarioState.step_05  = 0;

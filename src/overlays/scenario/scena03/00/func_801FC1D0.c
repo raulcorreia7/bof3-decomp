@@ -105,7 +105,7 @@ MATCH s32 func_801FC5A4(void) {
 
 MATCH void func_801FC5FC(void) {
     Item_VitalAdd(VITAL_ITEM_FLIER);
-    MESSAGE_START_WAIT(MSG_047);
+    MESSAGE_START_WAIT(MSG_SCENA03_047);
     SND_PauseBGM(g_SndBGMId);
     SND_StartXAStream(2, 1);
     while (!(SND_IsXAIdle() & BYTE_MASK)) {
@@ -196,7 +196,7 @@ MATCH s8 func_801FC944(s32 entry_x, s32 entry_y) {
             if (((entry_x >> 0x10) - 32) < 4U) {
                 g_ScenarioState.state_04 = 4;
                 g_ScenarioState.step_05  = 5;
-                return Scene_ShowMessage(MSG_051);
+                return Scene_ShowMessage(MSG_SCENA03_051);
             }
             return 0;
         }
@@ -226,7 +226,7 @@ MATCH s8 func_801FC9DC(s32 entry_x, s32 entry_y) {
             block_9:
                 g_ScenarioState.state_04 = 5;
                 g_ScenarioState.step_05  = 0;
-                return Scene_ShowMessage(MSG_018);
+                return Scene_ShowMessage(MSG_SCENA03_018);
             }
             /* Duplicate return node #11. Try simplifying control flow for better match */
             return 0;
@@ -243,7 +243,7 @@ MATCH s8 func_801FCAB8(s32 entry_x, s32 entry_y) {
             if (((entry_y >> 0x10) - 52) < 2U) {
                 g_ScenarioState.state_04 = 5;
                 g_ScenarioState.step_05  = 0x10;
-                return Scene_ShowMessage(MSG_031);
+                return Scene_ShowMessage(MSG_SCENA03_031);
             }
         }
     }
@@ -264,7 +264,7 @@ MATCH s8 func_801FCB4C(s32 entry_x, s32 entry_y) {
         g_ScriptVars[1]          = 1;
         g_ScenarioState.state_04 = 6;
         g_ScenarioState.step_05  = 5;
-        return Scene_ShowMessage(MSG_012);
+        return Scene_ShowMessage(MSG_SCENA03_012);
     }
     if (g_GameCellType == 3 && entry_y == TO_COORD(11) + COORD_HALF && ((entry_x >> 16) - 5) < 2U) {
         if (SYS_TestFlag(g_SceneFlags, 0x1C) == 0) {
@@ -275,7 +275,7 @@ MATCH s8 func_801FCB4C(s32 entry_x, s32 entry_y) {
         } else {
             g_ScenarioState.step_05  = 0xD;
             g_ScenarioState.state_04 = 6;
-            return Scene_ShowMessage(MSG_017);
+            return Scene_ShowMessage(MSG_SCENA03_017);
         }
     }
     return 0;
@@ -321,7 +321,7 @@ MATCH s32 func_801FCDB4(s32 entry_x, s32 entry_y) {
 }
 
 MATCH void func_801FCE18(void) {
-    MESSAGE_START_WAIT(MSG_025);
+    MESSAGE_START_WAIT(MSG_SCENA03_025);
     Game_SetScriptActive();
     g_ScenarioState.timer_06 = 30;
     g_ScenarioState.state_04 = 7;

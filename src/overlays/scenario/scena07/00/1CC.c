@@ -1018,7 +1018,7 @@ MATCH void func_801FA698(void) {
 NON_MATCHING void func_801FA6B4(void) {
     switch (g_ScenarioState.step_05) {
         case 0:
-            SCENARIO_MESSAGE_WAIT(MSG_013, 1);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA07_013, 1);
             break;
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -1051,7 +1051,7 @@ NON_MATCHING void func_801FA6B4(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            SCENARIO_MESSAGE_WAIT(MSG_026, 6);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA07_026, 6);
             break;
         case 6:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -1069,7 +1069,7 @@ NON_MATCHING void func_801FA6B4(void) {
             }
             break;
         case 10:
-            SCENARIO_MESSAGE_WAIT(MSG_041, 11);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA07_041, 11);
             break;
         case 11:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -1085,7 +1085,7 @@ NON_MATCHING void func_801FA6B4(void) {
             }
             break;
         case 20:
-            SCENARIO_MESSAGE_WAIT(MSG_041, 21);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA07_041, 21);
             break;
         case 21:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -1101,7 +1101,7 @@ NON_MATCHING void func_801FA6B4(void) {
             }
             break;
         case 30:
-            SCENARIO_MESSAGE_WAIT(MSG_019, 31);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA07_019, 31);
             break;
         case 31:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -1129,7 +1129,7 @@ MATCH void func_801FAA70(void) {
     switch (*step) {
         case 0:
             if (g_UiWindowEffectBusy == 0) {
-                MESSAGE_START_WAIT(MSG_001);
+                MESSAGE_START_WAIT(MSG_SCENA07_001);
                 *step = 1;
             }
             break;

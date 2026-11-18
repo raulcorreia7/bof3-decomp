@@ -114,7 +114,7 @@ MATCH void func_801D1774(void) {
     }
     func_801D3184(0x26, 0x10);
     func_801D32A0(0xA8, 0x10, 0);
-    MESSAGE_START_WAIT(MSG_115);
+    MESSAGE_START_WAIT(MSG_AREA175_ASK_HIGH_OR_LOW);
     D_801F294E += 1;
 }
 
@@ -321,10 +321,10 @@ MATCH void func_801D2078(void) {
     if (D_801DB0C4 == 4) {
         if (D_801DB0C0 != 0) {
             D_801DB07C = 0;
-            Message_StartAreaMessage(MSG_116);
+            Message_StartAreaMessage(MSG_AREA175_HIGH_LOW_LOST);
         } else {
             D_801DB07C = (D_801DB07C * D_801DAC34[D_801448F2][(s8)D_801DB0BC - 1] + 50) / 100;
-            Message_StartAreaMessage(MSG_118);
+            Message_StartAreaMessage(MSG_AREA175_HIGH_LOW_WON);
         }
         g_GameStateIndex = GAME_REQUEST_MESSAGE;
         D_801F294D += 1;
@@ -338,11 +338,11 @@ MATCH void func_801D21FC(void) {
 
     if (*state != GAME_REQUEST_MESSAGE) {
         if (D_801DB07C >= 0x2710) {
-            Message_StartAreaMessage(MSG_121);
+            Message_StartAreaMessage(MSG_AREA175_CANNOT_PAY_BET);
             *state = GAME_REQUEST_MESSAGE;
             D_801F294D += 1;
         } else {
-            Message_StartAreaMessage(MSG_120);
+            Message_StartAreaMessage(MSG_AREA175_HIGH_LOW_START);
             *state     = GAME_REQUEST_MESSAGE;
             D_801F294D = 3;
         }
@@ -356,7 +356,7 @@ MATCH void func_801D22A4(void) {
 
     if (*state != GAME_REQUEST_MESSAGE) {
         Party_AddZenny(D_801DB07C, 0);
-        Message_StartAreaMessage(MSG_117);
+        Message_StartAreaMessage(MSG_AREA175_ASK_PLAY_AGAIN_HIGH_LOW);
         D_801DB07C = 0;
         *state     = GAME_REQUEST_MESSAGE;
     }
@@ -391,7 +391,7 @@ MATCH void func_801D2320(void) {
             func_801D32A0(0x6E - D_801DB0C4 * x2_delta, 0x74 - D_801DB0C4 * y2_delta, 0);
         }
         if (D_801DB0C4 == 0) {
-            Message_StartAreaMessage(MSG_113);
+            Message_StartAreaMessage(MSG_AREA175_ASK_HOW_MUCH_BET);
             *state     = GAME_REQUEST_MESSAGE;
             D_801DB07C = 0;
             D_801DB0B4 = 0;
@@ -568,7 +568,7 @@ MATCH void func_801D2CF8(s32 x, s32 y, s32 icon) {
 
 MATCH void func_801D2E10(void) {
     SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
-    MESSAGE_START_WAIT(MSG_114);
+    MESSAGE_START_WAIT(MSG_AREA175_DECLINE_HIGH_LOW);
     D_801F294D = 0;
     D_801F294C++;
 }
@@ -733,7 +733,7 @@ MATCH void func_801D35E0(void) {
 MATCH void func_801D364C(void) {
     if (EMI_IsReady() != 0) {
         SND_PlayBGM(BGM_COMMU02, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
-        MESSAGE_START_WAIT(MSG_127);
+        MESSAGE_START_WAIT(MSG_AREA175_NUMBERS_START);
         D_801F294D += 1;
     }
 }
@@ -834,7 +834,7 @@ MATCH void func_801D39A4(void) {
 }
 
 MATCH void func_801D3B04(void) {
-    MESSAGE_START_WAIT(MSG_128);
+    MESSAGE_START_WAIT(MSG_AREA175_ASK_NUMBER_GUESS);
     D_801F294D++;
     func_801D4AE0(16, 24, 0);
     func_801D4F88(104, 64, 0);
@@ -939,7 +939,7 @@ NON_MATCHING void func_801D3E44(void) {
     if (same_count == 3) {
         sprintf((char*)g_TextVariables[0], D_801D0C20, selected + 1);
         sprintf((char*)&g_TextVariables[0][0x20], D_801D0C20, pair_count);
-        Message_StartAreaMessage(0x81);
+        Message_StartAreaMessage(MSG_AREA175_SHOW_HITS_BLOWS);
         D_801F294D++;
     } else {
         sprintf((char*)g_TextVariables[0], D_801D0C20, selected + 1);
@@ -960,7 +960,7 @@ NON_MATCHING void func_801D3E44(void) {
             i++;
         } while (i < 12);
         g_TextVariables[0][0x2C] = 0;
-        Message_StartAreaMessage(0x82);
+        Message_StartAreaMessage(MSG_AREA175_NUMBERS_WON_PRIZE);
     }
     D_801F294D       = 7;
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
@@ -1001,7 +1001,7 @@ MATCH void func_801D4158(void) {
             } while (i < 3);
             D_801F294D = 1;
         } else {
-            Message_StartAreaMessage(MSG_133);
+            Message_StartAreaMessage(MSG_AREA175_NUMBERS_SHOW_ANSWER);
             *state = 2;
             D_801F294D += 1;
         }
@@ -1021,7 +1021,7 @@ MATCH void func_801D42B4(void) {
 
     state = &g_GameStateIndex;
     if (*state != GAME_REQUEST_MESSAGE) {
-        Message_StartAreaMessage(MSG_134);
+        Message_StartAreaMessage(MSG_AREA175_ASK_PLAY_AGAIN_NUMBERS);
         *state     = GAME_REQUEST_MESSAGE;
         D_801F294D = 8;
     }
@@ -1044,7 +1044,7 @@ MATCH void func_801D437C(void) {
     if (*state != GAME_REQUEST_MESSAGE) {
         idx = ((s8)D_801DB0B4 * 3 + (s8)D_801DB0B8) * 2 + D_801448F2 * 48;
         if (!(u8)Item_Add(D_801DAD00[0][idx + 1], D_801DAD00[0][idx], 1, 0)) {
-            Message_StartAreaMessage(MSG_131);
+            Message_StartAreaMessage(MSG_AREA175_ITEMS_FULL_DISCARD);
             *state = GAME_REQUEST_MESSAGE;
         }
         D_801F294D = 6;
@@ -1423,7 +1423,7 @@ MATCH void func_801D5978(void) {
 
 MATCH void func_801D5A48(void) {
     if (g_UiWindowEffectBusy == 0) {
-        MESSAGE_START_WAIT(MSG_226);
+        MESSAGE_START_WAIT(MSG_AREA175_CANNOT_HELP);
         D_801F294D = 0;
         D_801F294C += 1;
     }
@@ -1498,7 +1498,7 @@ MATCH void Menu_StartFairyEventMessage(void) {
     u8* state = &g_GameStateIndex;
 
     if (*state != GAME_REQUEST_MESSAGE) {
-        Message_StartAreaMessage(MSG_238);
+        Message_StartAreaMessage(MSG_AREA175_ASK_NICKNAME_WHO);
         *state = GAME_REQUEST_MESSAGE;
         D_801F294C += 1;
     }
@@ -1642,7 +1642,7 @@ MATCH void func_801D6448(void) {
     for (i = 0; i < 6; i++) {
         g_TextVariables[0][i] = D_801DB080[i];
     }
-    MESSAGE_START_WAIT(MSG_243);
+    MESSAGE_START_WAIT(MSG_AREA175_CONFIRM_NICKNAME);
     D_801F294E++;
     func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 0);
 }
@@ -1731,10 +1731,10 @@ MATCH void func_801D68AC(void) {
                     D_801DB080[i] = g_Fairies[Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK][i];
                 }
             }
-            MESSAGE_START_WAIT(MSG_244);
+            MESSAGE_START_WAIT(MSG_AREA175_ASK_LIKE_NICKNAME);
             D_801F294E += 1;
         } else {
-            MESSAGE_START_WAIT(MSG_247);
+            MESSAGE_START_WAIT(MSG_AREA175_BYE_SEE_YOU);
             D_801F294C = 4;
             D_801F294D = 0;
         }
@@ -1771,7 +1771,7 @@ MATCH void func_801D6BE4(void) {
     func_801D830C(0x20 - ((u8)D_801DB0C4 * 0x1E), 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 0);
     func_801D8058(0x4A, 0x64 - ((u8)D_801DB0C4 * 0x1E));
     if ((u8)D_801DB0C4 == 4) {
-        MESSAGE_START_WAIT(MSG_247);
+        MESSAGE_START_WAIT(MSG_AREA175_BYE_SEE_YOU);
         D_801F294C = 4;
         D_801F294D = 0;
     }
@@ -1911,7 +1911,7 @@ MATCH void func_801D74B0(void) {
     for (i = 0; i < 6; i++) {
         g_TextVariables[0][i] = D_801DB080[i];
     }
-    MESSAGE_START_WAIT(MSG_243);
+    MESSAGE_START_WAIT(MSG_AREA175_CONFIRM_NICKNAME);
     D_801F294E++;
     func_801D90D8(0x20, 0x2B, Party_GetJoinedCharacter(D_801DB0B4) & BYTE_MASK, 0);
 }
@@ -2000,10 +2000,10 @@ MATCH void func_801D7934(void) {
                     D_801DB080[i] = D_801DB058[Party_GetJoinedCharacter(D_801DB0B4) & BYTE_MASK][i];
                 }
             }
-            MESSAGE_START_WAIT(MSG_244);
+            MESSAGE_START_WAIT(MSG_AREA175_ASK_LIKE_NICKNAME);
             D_801F294E += 1;
         } else {
-            MESSAGE_START_WAIT(MSG_247);
+            MESSAGE_START_WAIT(MSG_AREA175_BYE_SEE_YOU);
             D_801F294C = 4;
             D_801F294D = 0;
         }
@@ -2051,7 +2051,7 @@ MATCH void func_801D7C6C(void) {
         }
     }
     if (D_801DB0C4 == 4) {
-        MESSAGE_START_WAIT(MSG_247);
+        MESSAGE_START_WAIT(MSG_AREA175_BYE_SEE_YOU);
         D_801F294C = 4;
         D_801F294D = 0;
     }
@@ -2062,7 +2062,7 @@ MATCH void Menu_StartFairyEndMessage(void) {
     u8* state = &g_GameStateIndex;
 
     if (*state != GAME_REQUEST_MESSAGE && D_801F294D == 0) {
-        Message_StartAreaMessage(MSG_246);
+        Message_StartAreaMessage(MSG_AREA175_ASK_KEEP_NICKNAMING);
         *state = GAME_REQUEST_MESSAGE;
     }
 }
@@ -2884,7 +2884,7 @@ MATCH void func_801DA7A4(void) {
     for (i = 0; i < 5; i++) {
         g_Characters[Party_GetJoinedCharacter(D_801DB0B4)].name[i] = D_801DB080[i];
     }
-    MESSAGE_START_WAIT(MSG_245);
+    MESSAGE_START_WAIT(MSG_AREA175_NICKNAME_REMINDER);
     D_801F294C = 3;
     D_801F294D = 0;
     D_801F294E = 0;
@@ -2919,7 +2919,7 @@ MATCH void func_801DA8E8(void) {
             jobs[Fairy_FindActiveJob(D_801DB0B4)][i] = *src;
         }
     }
-    MESSAGE_START_WAIT(MSG_245);
+    MESSAGE_START_WAIT(MSG_AREA175_NICKNAME_REMINDER);
     D_801F294C = 3;
     D_801F294D = 0;
     D_801F294E = 0;

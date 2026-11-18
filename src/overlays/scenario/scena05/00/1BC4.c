@@ -10,7 +10,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 NON_MATCHING void func_801F87C4(void) {
     switch (g_ScenarioState.step_05) {
         case 0:
-            SCENARIO_MESSAGE_WAIT(MSG_013, 1);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA05_013, 1);
             break;
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -43,7 +43,7 @@ NON_MATCHING void func_801F87C4(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            SCENARIO_MESSAGE_WAIT(MSG_026, 6);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA05_026, 6);
             break;
         case 6:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -61,7 +61,7 @@ NON_MATCHING void func_801F87C4(void) {
             }
             break;
         case 10:
-            SCENARIO_MESSAGE_WAIT(MSG_041, 11);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA05_041, 11);
             break;
         case 11:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -77,7 +77,7 @@ NON_MATCHING void func_801F87C4(void) {
             }
             break;
         case 20:
-            SCENARIO_MESSAGE_WAIT(MSG_041, 21);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA05_041, 21);
             break;
         case 21:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -93,7 +93,7 @@ NON_MATCHING void func_801F87C4(void) {
             }
             break;
         case 30:
-            SCENARIO_MESSAGE_WAIT(MSG_019, 31);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA05_019, 31);
             break;
         case 31:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -125,7 +125,7 @@ MATCH void func_801F8C1C(void) {
     state = &g_ScenarioState.step_05;
     switch (*state) {
         case 0:
-            MESSAGE_START_WAIT(MSG_038);
+            MESSAGE_START_WAIT(MSG_SCENA05_038);
             *state = 1;
             return;
         case 1:

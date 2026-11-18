@@ -114,7 +114,7 @@ NON_MATCHING void func_801F8680(void) {
                 *timer = *timer - 1;
                 break;
             }
-            SCENARIO_MESSAGE_WAIT(MSG_013, 10);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA04_013, 10);
             break;
         }
         case 10:
@@ -138,7 +138,7 @@ NON_MATCHING void func_801F8680(void) {
                 *timer = *timer - 1;
                 break;
             }
-            SCENARIO_MESSAGE_WAIT(MSG_014, 13);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA04_014, 13);
             break;
         }
         case 13:

@@ -144,7 +144,7 @@ MATCH void func_801F9184(void) {
             break;
 
         case 11:
-            Message_StartAreaMessage(MSG_004);
+            Message_StartAreaMessage(MSG_SCENA11_004);
             g_GameStateIndex        = 2;
             g_ScenarioState.step_05 = 0xC;
             break;
@@ -218,7 +218,7 @@ MATCH void func_801F9184(void) {
                 break;
             }
             *claimed = 0;
-            Message_StartAreaMessage(MSG_026);
+            Message_StartAreaMessage(MSG_SCENA11_026);
             g_GameStateIndex        = 2;
             g_ScenarioState.step_05 = 0x10;
             break;

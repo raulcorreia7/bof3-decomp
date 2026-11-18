@@ -21,10 +21,10 @@ NON_MATCHING void func_801F98A4(void) {
             }
             if (g_ScriptVars[0] == 1) {
                 g_ScriptVars[0] = 0;
-                SCENARIO_MESSAGE_WAIT(MSG_034, 1);
+                SCENARIO_MESSAGE_WAIT(MSG_SCENA05_034, 1);
             } else {
                 g_ScriptVars[0] = 0;
-                SCENARIO_MESSAGE_WAIT(MSG_032, 2);
+                SCENARIO_MESSAGE_WAIT(MSG_SCENA05_032, 2);
             }
             break;
         case 1:
@@ -32,7 +32,7 @@ NON_MATCHING void func_801F98A4(void) {
             if (*mode == 2) {
                 break;
             }
-            Message_StartAreaMessage(MSG_032);
+            Message_StartAreaMessage(MSG_SCENA05_032);
             *mode                   = 2;
             g_ScenarioState.step_05 = 2;
             break;

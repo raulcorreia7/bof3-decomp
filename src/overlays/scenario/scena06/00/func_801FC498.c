@@ -31,7 +31,7 @@ MATCH void func_801FC498(void) {
             } else {
                 strncpy((char*)g_TextVariables[0], (char*)Item_GetRecord(ITEM_CATEGORY_WEAPON, (u8)(*stored + 1)), ITEM_NAME_LENGTH);
                 g_TextVariables[0][ITEM_NAME_LENGTH] = 0;
-                MESSAGE_START_WAIT(MSG_148);
+                MESSAGE_START_WAIT(MSG_SCENA06_148);
                 SYS_SetFlag(g_SceneFlags, 0x22);
                 SND_PlaySE(0x106);
                 g_ScenarioState.step_05 = 0x15;
@@ -61,7 +61,7 @@ MATCH void func_801FC498(void) {
             } else {
                 strncpy((char*)g_TextVariables[1], (char*)Item_GetRecord(ITEM_CATEGORY_ARMOR, (u8)(*stored + 1)), ITEM_NAME_LENGTH);
                 g_TextVariables[1][ITEM_NAME_LENGTH] = 0;
-                MESSAGE_START_WAIT(MSG_149);
+                MESSAGE_START_WAIT(MSG_SCENA06_149);
                 SYS_SetFlag(g_SceneFlags, 0x23);
                 SND_PlaySE(0x106);
                 g_ScenarioState.step_05 = 0x15;
