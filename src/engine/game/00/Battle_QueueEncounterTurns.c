@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801BEDD0(void) {
+/* func_801BEDD0 */
+MATCH void Battle_QueueEncounterTurns(void) {
     s32 index;
     u8* work;
     s32 count;

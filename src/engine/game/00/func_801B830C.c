@@ -9,7 +9,7 @@ MATCH void func_801B830C(void) {
         if (step == 3) {
             g_GameStateIndex = GAME_REQUEST_AREA_CHANGE;
         }
-        func_801C24D0();
+        Area_RunWalk();
     }
     g_Task->timer = g_Task->timer - 1;
     Actor_UpdateMovement();

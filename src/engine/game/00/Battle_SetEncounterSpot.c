@@ -1,7 +1,8 @@
 #include "game_00.h"
 
+/* func_801BF5A8 */
 #ifdef NON_MATCHING
-NON_MATCHING void func_801BF5A8(s32 x, s32 y, s32 party_slot) {
+NON_MATCHING void Battle_SetEncounterSpot(s32 x, s32 y, s32 party_slot) {
     u8                    base;
     s32                   off;
     s32                   x_start = x;
@@ -30,5 +31,5 @@ NON_MATCHING void func_801BF5A8(s32 x, s32 y, s32 party_slot) {
     COORD_INT(g_Task->pos.z) = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
 }
 #else
-INCLUDE_ASM(func_801BF5A8);
+INCLUDE_ASM(Battle_SetEncounterSpot);
 #endif

@@ -32,7 +32,7 @@ MATCH void func_801B9210(void) {
             g_Task->timer = 0;
             Actor_ClearVelocity();
         } else {
-            func_801C24D0();
+            Area_RunWalk();
             g_Task->timer--;
             Actor_Move();
         }

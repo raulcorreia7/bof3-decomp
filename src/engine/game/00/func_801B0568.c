@@ -73,7 +73,7 @@ MATCH void func_801B0568(void) {
             }
             g_Task->param.unk_0B = 0;
             func_801B0C88();
-            func_801C24D0();
+            Area_RunWalk();
             func_801C4C48();
             g_Task->param.unk_0B = 0;
             if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) {

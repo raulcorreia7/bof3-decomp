@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801BFAC4(void) {
+/* func_801BFAC4 */
+MATCH void Battle_RunPartyAnims(void) {
     u8* work;
     s32 i;
 

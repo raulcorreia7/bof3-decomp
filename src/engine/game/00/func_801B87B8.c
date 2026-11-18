@@ -47,7 +47,7 @@ MATCH void func_801B87B8(void) {
                 break;
         }
         Actor_RequestScript((g_Task->param.unk_0B + 8) & BYTE_MASK);
-        func_801C24D0();
+        Area_RunWalk();
     }
     g_Task->timer -= 1;
     Actor_UpdateMovement();

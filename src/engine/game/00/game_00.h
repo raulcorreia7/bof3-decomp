@@ -577,13 +577,18 @@ void    Game_LoadMenu(void);
 void    Game_ReturnFromMenu(void);
 void    func_801979D4(void);
 void    Game_UpdateBattle(void);
-void    func_80197A60(void);
+/* func_80197A60 */
+void    Battle_TurnToEncounter(void);
 void    Battle_LoadPartySprites(void);
-void    func_80197C1C(void);
+/* func_80197C1C */
+void    Battle_WalkToEncounter(void);
 void    Battle_LoadBattleArchive(void);
-void    func_80197E54(void);
-void    func_80197EFC(void);
-void    func_80197F48(void);
+/* func_80197E54 */
+void    Battle_BeginEntrance(void);
+/* func_80197EFC */
+void    Game_ScrollToParty(void);
+/* func_80197F48 */
+void    Game_ReturnFromBattle(void);
 void    Game_UpdateCameraLook(void);
 void    func_801981B4(void);
 /* func_801981D4 */
@@ -592,8 +597,10 @@ void    Game_UpdateShop(void);
 void    Game_LoadShopOverlay(void);
 void    Game_ReturnFromShop(void);
 void    Game_UpdateFishing(void);
-void    func_801984E8(void);
-void    func_801985C8(void);
+/* func_801984E8 */
+void    Game_EndFishing(void);
+/* func_801985C8 */
+void    Game_ReturnFromFishing(void);
 void    Game_UpdateAbilityMenu(void);
 void    Game_LoadAbilityMenu(void);
 void    Game_ReturnFromAbilityMenu(void);
@@ -601,19 +608,24 @@ void    Game_UpdateShisu(void);
 void    Game_LoadShisu(void);
 void    Game_ReturnFromShisu(void);
 void    Game_UpdateSceneCamera(void);
-void    func_80198B00(void);
-void    func_80198B44(void);
-void    func_80198B6C(void);
+/* func_80198B00 */
+void    Game_RunScene(void);
+/* func_80198B44 */
+void    Game_OrbitSceneCamera(void);
+/* func_80198B6C */
+void    Game_EndSceneCamera(void);
 void    func_80198BC4(u32 wait_steps);
 void    func_80198C38(u8 wait_steps);
 /* func_80198CAC */
 void    Game_UpdateClock(void);
 void    func_80198F1C(void);
-void    func_801990D0(void);
+/* func_801990D0 */
+void    Game_EaseCameraToRest(void);
 void    Area_RunFrame(void);
 void    func_80199230(void);
 void    Area_RunLoadingFrame(void);
-void    func_80199308(void);
+/* func_80199308 */
+void    Game_RunSceneFrame(void);
 /* func_80199368 */
 void    Game_UpdateMenuFrame(void);
 void    func_80199398(void);
@@ -748,7 +760,8 @@ void    func_801A02E8(void);
 u8      func_801A0348(s16 map_x, s16 map_y);
 void    func_801A0380(s16 x, s16 y, u16 kind);
 u8*     func_801A0490(s32 map_x, s32 map_y, s32 table_index);
-u32     func_801A06D8(void);
+/* func_801A06D8 */
+u32     Actor_RunInteractions(void);
 void    func_801A0AE4(Actor* record);
 void    func_801A0CFC(Actor* entity);
 void    func_801A0F24(Actor* record);
@@ -937,7 +950,8 @@ void  func_801B315C(void);
 void  func_801B31F0(void);
 /* func_801B3260 */
 void  Area_Climb(void);
-void  func_801B32A4(void);
+/* func_801B32A4 */
+void  Area_GrabLadder(void);
 /* func_801B32D0 */
 void  Area_ClimbMount(void);
 void  func_801B3314(void);
@@ -945,7 +959,8 @@ void  func_801B3388(void);
 void  func_801B33C4(void);
 void  func_801B3400(void);
 void  func_801B343C(void);
-void  func_801B3488(void);
+/* func_801B3488 */
+void  Area_ClimbLadder(void);
 /* func_801B3540 */
 void  Area_ClimbDismount(void);
 void  func_801B3584(void);
@@ -1087,17 +1102,24 @@ void  func_801BE710(GameReset* record);
 void  Party_SwapMembers(u32 slot_a, u32 slot_b, u32 skip_state);
 void  Party_SwapBattlerRows(s32 slot_a, s32 slot_b, s32 skip_state);
 void  func_801BEBB0(void);
-void  func_801BEDD0(void);
+/* func_801BEDD0 */
+void  Battle_QueueEncounterTurns(void);
 /* func_801BEE5C */
 bool  Battle_LoadPartyScripts(void);
-bool  func_801BF11C(void);
+/* func_801BF11C */
+bool  Battle_WalkMembersIn(void);
 /* func_801BF448 */
 void  Battle_PlaceMembers(void);
-void  func_801BF5A8(s32 x, s32 y, s32 party_slot);
-bool  func_801BF78C(void);
-void  func_801BF8E0(void);
-void  func_801BFAC4(void);
-void  func_801BFB34(void);
+/* func_801BF5A8 */
+void  Battle_SetEncounterSpot(s32 x, s32 y, s32 party_slot);
+/* func_801BF78C */
+bool  Battle_IsPartyInPlace(void);
+/* func_801BF8E0 */
+void  Battle_ScrollToLeader(void);
+/* func_801BFAC4 */
+void  Battle_RunPartyAnims(void);
+/* func_801BFB34 */
+void  Battle_PlaceFieldMembers(void);
 void  func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode);
 void  func_801C05AC(void);
 void  func_801C0758(s32 x, s32 y, u8 kind);

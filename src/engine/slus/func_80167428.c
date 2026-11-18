@@ -105,7 +105,7 @@ NON_MATCHING void func_80167428(void) {
                 val5 = 3;
             }
             FIELD(s8, g_Game.current, 0x11Cu) = val5;
-            func_801C24D0();
+            Area_RunWalk();
             func_801C4C48();
             tmp11                  = g_Task;
             FIELD(u8, tmp11, 0x9u) = (u8)(FIELD(u8, tmp11, 0x9u) - 1);

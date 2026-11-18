@@ -13,6 +13,6 @@ MATCH void func_801C4C48(void) {
     Area_ReadStepHeight(x, y, work->direction);
     if ((SP_REF(u8, 0x0u) == 0) && ((Area_ReadHeight(x, y) - COORD_INT(g_Task->pos.z)) >= 0x80)) {
         g_Game.current->u.field.counter.unsigned_value = (u8)(g_Game.current->u.field.counter.unsigned_value - 1);
-        func_801C24D0();
+        Area_RunWalk();
     }
 }

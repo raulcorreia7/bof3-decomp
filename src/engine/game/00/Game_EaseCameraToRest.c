@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801990D0(void) {
+/* func_801990D0 */
+MATCH void Game_EaseCameraToRest(void) {
     s16* pos_x;
     u16* mirror_x;
     s16* pos_y;

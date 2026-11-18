@@ -99,7 +99,7 @@ NON_MATCHING void func_801F4B4C(s32 input) {
             block_46:
                 g_Task->header.step = 0;
             } else {
-                func_801C24D0();
+                Area_RunWalk();
                 func_801C4C48();
                 moving_task        = g_Task;
                 moving_task->timer = (u8)(moving_task->timer - 1);

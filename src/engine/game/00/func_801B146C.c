@@ -92,7 +92,7 @@ MATCH void func_801B146C(void) {
         world_flags = g_AreaWalkFlags;
         if (world_flags & 0x20) {
             g_Game.walk_flags = world_flags ^ 0x20;
-            func_801C24D0();
+            Area_RunWalk();
             work_j        = g_Task;
             work_j->timer = (work_j->timer - 1);
             Actor_UpdateMovement();

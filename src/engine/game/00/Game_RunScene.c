@@ -1,8 +1,9 @@
 #include "game_00.h"
 
-MATCH void func_80198B00(void) {
+/* func_80198B00 */
+MATCH void Game_RunScene(void) {
     Area_DispatchScene();
-    func_80199308();
+    Game_RunSceneFrame();
     if (g_GameStateIndex == GAME_REQUEST_IDLE) {
         g_GameEntryState = GAME_MODE_FIELD;
     }

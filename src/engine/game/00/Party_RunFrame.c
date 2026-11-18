@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_80199440(void) {
+/* func_80199440 */
+MATCH void Party_RunFrame(void) {
     func_801C0A68();
     if (((g_GameFlags | g_AreaWalkFlags) & BIT(0)) == 0) {
         g_GameState = g_Game.members;

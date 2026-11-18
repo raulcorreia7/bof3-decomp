@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_80197F48(void) {
+/* func_80197F48 */
+MATCH void Game_ReturnFromBattle(void) {
     u8  changed;
     u8* flags;
     u8* sel;
@@ -10,7 +11,7 @@ MATCH void func_80197F48(void) {
     if (g_AreaCameraMoving == 0 && EMI_IsReady() != 0) {
         g_AreaDrawMode = GFX_LAYER_FIELD_SCENE;
         Party_BuildBattlers(PARTY_ORDER_FIELD);
-        func_801BFB34();
+        Battle_PlaceFieldMembers();
         flags            = &g_Battle.outcome.options;
         g_EncounterSteps = 0;
         if ((*flags & 0x2) == 0) {
@@ -31,8 +32,8 @@ MATCH void func_80197F48(void) {
         func_801C2018();
         changed = 1;
     }
-    func_801BFAC4();
-    func_801A06D8();
+    Battle_RunPartyAnims();
+    Actor_RunInteractions();
     Area_RunLoadingFrame();
     if (changed != 0) {
         g_GameEntryState    = GAME_MODE_FIELD;

@@ -218,7 +218,7 @@ void  func_801C1E3C(s32 step_index);
 /* func_801C2438 */
 void  func_801C2438(void);
 /* func_801C24D0 */
-void  func_801C24D0(void);
+void  Area_RunWalk(void);
 void  func_801C2538(void);
 void  func_801C2710(void);
 /* func_801C29A0 */

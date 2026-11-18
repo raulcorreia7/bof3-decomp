@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH void func_801C2538(void) {
+/* func_801C2538 */
+MATCH void Area_SetWalkVelocity(void) {
     u8  rate;
     u32 step;
     s32 high;

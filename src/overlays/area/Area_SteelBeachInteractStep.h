@@ -21,7 +21,7 @@
     if (PROBE(x, y, (u8)slot) == 0) {                                          \
         return;                                                                \
     }                                                                          \
-    func_801C24D0();                                                           \
+    Area_RunWalk();                                                            \
     g_Task->timer -= 1;                                                        \
     Actor_UpdateMovement();                                                    \
     g_Game.current->u.field.mode.value = 1;                                    \

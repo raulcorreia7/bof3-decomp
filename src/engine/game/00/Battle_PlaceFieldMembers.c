@@ -2,8 +2,9 @@
 
 #define SCRATCH ((s32*)&g_ScratchPad)
 
+/* func_801BFB34 */
 #ifdef NON_MATCHING
-NON_MATCHING void func_801BFB34(void) {
+NON_MATCHING void Battle_PlaceFieldMembers(void) {
     PartyMember* member;
     s32          i;
     s32          j;
@@ -75,9 +76,9 @@ NON_MATCHING void func_801BFB34(void) {
         }
     } else {
         Scene_SetupParty(g_Game.battle_order);
-        func_80199440();
+        Party_RunFrame();
     }
 }
 #else
-INCLUDE_ASM(func_801BFB34);
+INCLUDE_ASM(Battle_PlaceFieldMembers);
 #endif

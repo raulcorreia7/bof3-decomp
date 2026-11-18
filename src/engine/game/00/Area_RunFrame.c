@@ -3,8 +3,8 @@
 MATCH void Area_RunFrame(void) {
     func_801C57F4();
     func_8015A7E8();
-    func_80199440();
-    func_801A06D8();
+    Party_RunFrame();
+    Actor_RunInteractions();
     Area_UpdateCamera();
     Area_UpdateParty();
     func_801BDAB8();
