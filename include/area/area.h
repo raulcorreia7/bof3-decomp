@@ -248,8 +248,9 @@ typedef enum FieldTaskMode {
 /* One +0x24 cell record: four signed corner heights, loaded as s8 by
  * `@0x801530D0`, `@0x8015684C` and `@0x80157CE4`.
  */
-typedef struct AreaCellCorners {
-    s8 corner_height[4];
+typedef union AreaCellCorners {
+    s8  corner_height[4];
+    u16 corner_pair[2]; /* the heights in pairs, as halfwords */
 } AreaCellCorners;
 
 ASSERT_SIZE(AreaCellCorners, AREA_MAP_CELL_RECORD_SIZE);

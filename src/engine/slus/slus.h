@@ -1138,7 +1138,7 @@ extern void                       Area_RequestCellRows(AreaCell* entry);
 extern void                       Area_FreeCellPrimRow(u16 row_id);
 void                              Area_DrawPartQuads(ScenePart* parts, s32 shift_x, s32 shift_y);
 void                              func_8015642C(u8* obj, s32 x, s32 y);
-void                              func_8015684C(u8* record, s32 cell_x, s32 cell_y);
+void                              func_8015684C(u32* record, s32 cell_x, s32 cell_y);
 void                              func_801569B8(u8* record, s32 cell_x, s32 cell_y);
 void                              Area_DrawPartAnimation(ScenePart* parts, s32 origin_x, s32 origin_y);
 void                              Area_DrawCellAtPoint(u8* unit, s32 x, s32 y);
