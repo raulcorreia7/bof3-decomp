@@ -28,9 +28,9 @@ MATCH void func_801D130C(void) {
         dst += 1;
     } while (i < 31);
 
-    D_800396C0                    = 0;
-    D_800396FE                    = 0;
-    FISHING_STATE->saved_index_0B = FISHING_STATE->saved_value_27;
+    D_800396C0                 = 0;
+    D_800396FE                 = 0;
+    FISHING_STATE->saved_index = FISHING_STATE->saved_value_27;
     FISHING_STATE->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     FISHING_STATE->saved_value_27 = 0x7B;
     FISHING_STATE->unk_5C         = 1;
@@ -39,6 +39,6 @@ MATCH void func_801D130C(void) {
     FISHING_STATE->tint_5F        = -0x40;
     state_work                    = FISHING_STATE;
     g_GfxPalettePending           = 1;
-    state_work->sub_index_03      = (state_work->sub_index_03 + 1);
+    state_work->sub_index         = (state_work->sub_index + 1);
     Area_AddActor();
 }

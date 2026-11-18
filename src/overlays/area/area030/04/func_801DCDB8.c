@@ -18,7 +18,7 @@ MATCH void func_801DCDB8(void) {
         D_801442AC = 0xFFFF;
         /* FAKE: volatile access gives retail's register-address RMW; plain u8 pointer stayed at 76.5%. */
         *FAKE_VOLATILE_PTR(u8, &D_80144287) |= 0x80;
-        FISHING_STATE->sub_index_03 -= 1;
+        FISHING_STATE->sub_index -= 1;
         FISHING_STATE->flag_04 = 0;
         return;
     }

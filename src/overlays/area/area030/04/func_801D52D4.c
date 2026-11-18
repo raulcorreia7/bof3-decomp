@@ -15,13 +15,13 @@ MATCH void func_801D52D4(void) {
     }
     func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
 
-    g_Task->direction      = FACING_UP_LEFT;
-    work                   = FISHING_STATE;
-    work->step_index_0A    = 0;
-    stepped                = FISHING_STATE;
-    work->bounce_3C.unk_3C = 0;
-    work->step_14          = 0;
-    work->step_limit_20    = 0;
-    stepped->step_timer_09 = 4;
-    g_Task->header.mode    = (u8)(g_Task->header.mode + 1);
+    g_Task->direction   = FACING_UP_LEFT;
+    work                = FISHING_STATE;
+    work->step_index    = 0;
+    stepped             = FISHING_STATE;
+    work->bounce.unk_3C = 0;
+    work->step_14       = 0;
+    work->step_limit    = 0;
+    stepped->step_timer = 4;
+    g_Task->header.mode = (u8)(g_Task->header.mode + 1);
 }

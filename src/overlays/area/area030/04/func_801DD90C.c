@@ -5,7 +5,7 @@
 MATCH void func_801DD90C(void) {
     if (D_80144281 == 0) {
         D_8014403D += 1;
-        FISHING_STATE->mode_index_02 = 1;
-        FISHING_STATE->sub_index_03  = 0;
+        FISHING_STATE->mode_index = 1;
+        FISHING_STATE->sub_index  = 0;
     }
 }

@@ -33,5 +33,5 @@ MATCH void func_801D29BC(void) {
 
     func_801D2AE0();
 
-    FISHING_STATE->handler_index_01 += 1;
+    FISHING_STATE->handler_index += 1;
 }

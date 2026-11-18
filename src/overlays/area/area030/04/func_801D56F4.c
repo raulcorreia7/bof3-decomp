@@ -10,5 +10,5 @@ MATCH void func_801D56F4(void) {
         return;
     }
     record = FISHING_STATE;
-    D_801E1FBC[record->mode_index_02]();
+    D_801E1FBC[record->mode_index]();
 }

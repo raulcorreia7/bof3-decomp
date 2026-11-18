@@ -11,7 +11,7 @@ MATCH u8* Fishing_DrawSprite(s32 icon_index, s32 layer, s16 sprite_x, s16 sprite
     SetSprt(sprite);
     setRGB0(sprite, 128, 128, 128);
     setXY0(sprite, sprite_x, sprite_y);
-    sprite->clut = getClut(D_801E2424[icon_index & BYTE_MASK].unk_00, D_801E2424[icon_index & BYTE_MASK].unk_04);
+    sprite->clut = getClut(D_801E2424[icon_index & BYTE_MASK].clut_x, D_801E2424[icon_index & BYTE_MASK].clut_y);
     setWH(sprite, D_801E2424[icon_index & BYTE_MASK].width, D_801E2424[icon_index & BYTE_MASK].height);
     setUV0(sprite, D_801E2424[icon_index & BYTE_MASK].u, D_801E2424[icon_index & BYTE_MASK].v);
     GFX_AddPrim((u8)layer, sizeof(SPRT));

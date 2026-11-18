@@ -12,7 +12,7 @@ MATCH void func_801D7B64(void) {
 
     buffer = g_UiFormatBuffer;
     record = FISHING_STATE;
-    TEXT_Format(buffer, D_801D0C04, record->bounce_3C.half.key_3E + 1);
+    TEXT_Format(buffer, D_801D0C04, record->bounce.half.key + 1);
 
     if (buffer[0] == ' ') {
         buffer[0] = STRING_SPACE;

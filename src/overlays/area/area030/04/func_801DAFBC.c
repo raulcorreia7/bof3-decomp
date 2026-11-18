@@ -8,8 +8,8 @@ MATCH void func_801DAFBC(void) {
         SND_PlayBGM(0x29, 0x64, 8);
         func_801DDE94(2);
         D_8014420D += 1;
-        FISHING_STATE->step_timer_09 = 0;
-        FISHING_STATE->sub_index_03 += 1;
+        FISHING_STATE->step_timer = 0;
+        FISHING_STATE->sub_index += 1;
     }
     Actor_StepAnimLoop();
 }

@@ -17,14 +17,14 @@ MATCH void func_801D0CDC(void) {
     panel                  = FISHING_STATE;
     panel->counter_48      = 0;
     blank                  = FISHING_STATE;
-    panel->origin_x_2E     = 0x39;
-    panel->origin_y_30     = 0xC8;
+    panel->origin_x        = 0x39;
+    panel->origin_y        = 0xC8;
     blank->unk_5C          = 0;
     FISHING_STATE->tint_5D = 0;
     FISHING_STATE->tint_5E = 0;
     FISHING_STATE->tint_5F = 0;
 
-    state                   = FISHING_STATE;
-    state->cursor_10        = 0xF0;
-    state->handler_index_01 = (state->handler_index_01 + 1);
+    state                = FISHING_STATE;
+    state->cursor_10     = 0xF0;
+    state->handler_index = (state->handler_index + 1);
 }

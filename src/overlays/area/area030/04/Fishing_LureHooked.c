@@ -13,10 +13,10 @@ MATCH void Fishing_LureHooked(void) {
         Actor_RequestScript(3);
     }
 
-    work                        = FISHING_STATE;
-    work->motion_34.unk_34      = g_Actors[g_FishingHookedFish].pos.x.fixed;
-    work->y_38.pos_y            = g_Actors[g_FishingHookedFish].pos.y.fixed;
-    work->bounce_3C.half.key_3E = COORD_INT(g_Actors[g_FishingHookedFish].pos.z);
+    work                  = FISHING_STATE;
+    work->motion.unk_34   = g_Actors[g_FishingHookedFish].pos.x.fixed;
+    work->y_38.pos_y      = g_Actors[g_FishingHookedFish].pos.y.fixed;
+    work->bounce.half.key = COORD_INT(g_Actors[g_FishingHookedFish].pos.z);
 
     Actor_StepAnimLoop();
     func_801E084C();

@@ -1,13 +1,13 @@
 #include "area030_04.h"
 
 /* Panel cursor fields of the scratchpad work record. */
-#define FISHING_CURSOR_TIMER    (FISHING_STATE->step_timer_09)
-#define FISHING_CURSOR_ROW_Y    (FISHING_STATE->origin_x_2E)
-#define FISHING_CURSOR_ITEM_PTR (FISHING_STATE->item_50.pointer)
+#define FISHING_CURSOR_TIMER    (FISHING_STATE->step_timer)
+#define FISHING_CURSOR_ROW_Y    (FISHING_STATE->origin_x)
+#define FISHING_CURSOR_ITEM_PTR (FISHING_STATE->item.pointer)
 #define FISHING_CURSOR_COUNT    (FISHING_STATE->counter_49)
 #define FISHING_CURSOR_CATEGORY (FISHING_STATE->row_4B)
-#define FISHING_CURSOR_FLAG     (FISHING_STATE->step_index_0A)
-#define FISHING_CURSOR_STEP     (FISHING_STATE->handler_index_01)
+#define FISHING_CURSOR_FLAG     (FISHING_STATE->step_index)
+#define FISHING_CURSOR_STEP     (FISHING_STATE->handler_index)
 
 /* Ticks the AREA030 panel item cursor: counts the entry timer down and draws the shrinking row, or on expiry
  * skips a two-byte item code, advances the item pointer and entry count, clamps the count to the category table and
@@ -20,8 +20,8 @@ MATCH void func_801D3A54(void) {
     u8*           item_next;
 
     work = FISHING_STATE;
-    work->step_timer_09 -= 1;
-    work->origin_x_2E -= 2;
+    work->step_timer -= 1;
+    work->origin_x -= 2;
     if (FISHING_CURSOR_TIMER == 0) {
         item = (u8*)FISHING_CURSOR_ITEM_PTR;
         if (*item == 0x12 || *item == 0x15) {

@@ -18,11 +18,11 @@ MATCH void Fishing_CatchRecord(void) {
 
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
 
-        record                = FISHING_STATE;
-        record->step_timer_09 = 8;
+        record             = FISHING_STATE;
+        record->step_timer = 8;
 
-        record               = FISHING_STATE;
-        record->sub_index_03 = (record->sub_index_03 + 1);
+        record            = FISHING_STATE;
+        record->sub_index = (record->sub_index + 1);
     }
 
     Actor_StepAnimLoop();

@@ -20,11 +20,11 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
 
     UI_DrawWindow(panel_x & HALF_MASK, panel_y & HALF_MASK, 242, 159, UI_WINDOW_OPEN_ALL, (s32)g_WindowStyle);
     if (FISHING_STATE->counter_08 != 0) {
-        if (FISHING_STATE->step_timer_09 == 0) {
-            health = FISHING_STATE->bounce_3C.half.unk_3C;
-            if (FISHING_STATE->bounce_3C.half.key_3E != health) {
-                FISHING_STATE->step_limit_20         = (s32)(health * 9);
-                FISHING_STATE->bounce_3C.half.key_3E = (s16)FISHING_STATE->bounce_3C.half.unk_3C;
+        if (FISHING_STATE->step_timer == 0) {
+            health = FISHING_STATE->bounce.half.unk_3C;
+            if (FISHING_STATE->bounce.half.key != health) {
+                FISHING_STATE->step_limit      = (s32)(health * 9);
+                FISHING_STATE->bounce.half.key = (s16)FISHING_STATE->bounce.half.unk_3C;
             }
             if ((s8)FISHING_STATE->counter_08 > 0) {
                 scroll_pos             = FISHING_STATE->step_14 - 1;
@@ -33,19 +33,19 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
                     FISHING_STATE->step_14 = 0x35;
                 }
             }
-            FISHING_STATE->step_timer_09 = (u8)(FISHING_STATE->step_timer_09 + 1);
-            FISHING_STATE->step_index_0A = (u8)(FISHING_STATE->step_index_0A + 1);
+            FISHING_STATE->step_timer = (u8)(FISHING_STATE->step_timer + 1);
+            FISHING_STATE->step_index = (u8)(FISHING_STATE->step_index + 1);
         }
-        if (FISHING_STATE->step_index_0A == 0) {
+        if (FISHING_STATE->step_index == 0) {
             scroll_pos = FISHING_STATE->step_14;
-            if (scroll_pos == FISHING_STATE->step_limit_20) {
-                FISHING_STATE->step_timer_09         = 0U;
+            if (scroll_pos == FISHING_STATE->step_limit) {
+                FISHING_STATE->step_timer            = 0U;
                 FISHING_STATE->counter_08            = 0U;
                 member                               = Actor_FindFreeSpawned() & BYTE_MASK;
                 g_SpawnedActors[member].header.flags = 1;
                 g_SpawnedActors[member].type         = 0x1A;
                 g_SpawnedActors[member].header.mode  = 0x10;
-                g_SpawnedActors[member].header.step  = (u8)FISHING_STATE->bounce_3C.half.key_3E;
+                g_SpawnedActors[member].header.step  = (u8)FISHING_STATE->bounce.half.key;
             } else {
                 scroll_pos = scroll_pos - 1;
                 if ((s8)FISHING_STATE->counter_08 > 0) {
@@ -54,12 +54,12 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
                         FISHING_STATE->step_14 = 0x35;
                     }
                 }
-                FISHING_STATE->step_index_0A = (u8)(FISHING_STATE->step_index_0A + 1);
+                FISHING_STATE->step_index = (u8)(FISHING_STATE->step_index + 1);
             }
         } else {
-            FISHING_STATE->step_index_0A = (u8)(FISHING_STATE->step_index_0A + 1);
-            if (FISHING_STATE->step_index_0A == 4) {
-                FISHING_STATE->step_index_0A = 0U;
+            FISHING_STATE->step_index = (u8)(FISHING_STATE->step_index + 1);
+            if (FISHING_STATE->step_index == 4) {
+                FISHING_STATE->step_index = 0U;
                 if ((s8)FISHING_STATE->counter_08 < 0) {
                     scroll_pos             = FISHING_STATE->step_14 + 1;
                     FISHING_STATE->step_14 = scroll_pos;
@@ -70,7 +70,7 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
             }
         }
     }
-    bar_slot = (u8)FISHING_STATE->step_index_0A;
+    bar_slot = (u8)FISHING_STATE->step_index;
     bar_y    = panel_y + 25;
     if (bar_slot != 0) {
         if (FISHING_STATE->counter_08 == 1) {
@@ -101,7 +101,7 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
     }
     UI_DrawWindow(panel_x & HALF_MASK, (panel_y + 6) & HALF_MASK, 242, 14, 0, (s32)g_WindowStyle);
     UI_DrawWindow(panel_x & HALF_MASK, (panel_y + 148) & HALF_MASK, 242, 11, UI_WINDOW_OPEN_BOTTOM_LEFT | UI_WINDOW_OPEN_BOTTOM_RIGHT, (s32)g_WindowStyle);
-    health = FISHING_STATE->bounce_3C.half.unk_3C;
+    health = FISHING_STATE->bounce.half.unk_3C;
     UI_DrawText((s16)(panel_x + 61), (s16)(panel_y + 6), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801E2114[health]));
     func_801D7784((u16)panel_x, (u16)panel_y);
     text = (u8*)g_UiFormatBuffer;

@@ -15,25 +15,25 @@ MATCH void func_801D5B70(void) {
         FishingState* record;
         FishingState* retired;
 
-        record                 = FISHING_STATE;
-        record->counter_48     = 0;
-        retired                = FISHING_STATE;
-        record->origin_x_2E    = 0xE8;
-        record->origin_y_30    = 0xC2;
-        retired->step_timer_09 = 0;
+        record              = FISHING_STATE;
+        record->counter_48  = 0;
+        retired             = FISHING_STATE;
+        record->origin_x    = 0xE8;
+        record->origin_y    = 0xC2;
+        retired->step_timer = 0;
     }
 
-    FISHING_STATE->step_index_0A = 0;
-    FISHING_STATE->tint_5D       = 0;
-    FISHING_STATE->tint_5E       = 0;
-    FISHING_STATE->tint_5F       = 0;
+    FISHING_STATE->step_index = 0;
+    FISHING_STATE->tint_5D    = 0;
+    FISHING_STATE->tint_5E    = 0;
+    FISHING_STATE->tint_5F    = 0;
 
     Actor_SelectScript(0xA);
 
     {
         FishingState* record;
 
-        record               = FISHING_STATE;
-        record->sub_index_03 = (record->sub_index_03 - 1);
+        record            = FISHING_STATE;
+        record->sub_index = (record->sub_index - 1);
     }
 }

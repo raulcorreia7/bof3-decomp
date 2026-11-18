@@ -27,12 +27,12 @@ MATCH void func_801D6414(void) {
 
     FISHING_STATE->tint_5F = 0;
 
-    tail                = FISHING_STATE;
-    tail->step_timer_09 = 0x40;
+    tail             = FISHING_STATE;
+    tail->step_timer = 0x40;
 
-    FISHING_STATE->cue_index_06 = 0;
+    FISHING_STATE->cue_index = 0;
     Actor_SelectScript(3);
 
-    tail               = FISHING_STATE;
-    tail->sub_index_03 = (tail->sub_index_03 + 1);
+    tail            = FISHING_STATE;
+    tail->sub_index = (tail->sub_index + 1);
 }

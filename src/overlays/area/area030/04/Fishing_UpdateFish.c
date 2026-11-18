@@ -34,7 +34,7 @@ MATCH void Fishing_UpdateFish(void) {
 
         record = FISHING_STATE;
         if ((record->flags & ACTOR_FLAG_SEMI_TRANSPARENT) != 0) {
-            s16 value = record->bounce_3C.half.key_3E;
+            s16 value = record->bounce.half.key;
 
             if (value > 0) {
                 record->tint_5D = base;

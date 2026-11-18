@@ -30,35 +30,35 @@ MATCH void Fishing_LureFly(void) {
     if (current_y == target_y) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 1));
         work_b                    = (FishingState*)g_Task;
-        work_b->step_timer_09     = 0;
+        work_b->step_timer        = 0;
         work_c                    = (FishingState*)g_Task;
         FIELD(s32, work_b, 0x3Cu) = 0;
         work_b->step_14           = 0;
-        work_b->step_limit_20     = 0;
-        work_c->step_index_0A     = 0;
+        work_b->step_limit        = 0;
+        work_c->step_index        = 0;
         if (g_AreaCameraMoving == 0) {
-            work_c                   = (FishingState*)g_Task;
-            g_AreaCameraStep         = 0;
-            work_c->cursor_10        = 0;
-            work_c->handler_index_01 = (work_c->handler_index_01 + 1);
+            work_c                = (FishingState*)g_Task;
+            g_AreaCameraStep      = 0;
+            work_c->cursor_10     = 0;
+            work_c->handler_index = (work_c->handler_index + 1);
         }
         Actor_SelectScript(4U);
     } else {
-        row = work_a->cue_index_06 * 8;
+        row = work_a->cue_index * 8;
         if (current_y == (target_y + *(s32*)((u8*)&D_801E1D58 + row))) {
-            work_a->step_limit_20 = *(s32*)((u8*)&D_801E1D5C + row);
+            work_a->step_limit = *(s32*)((u8*)&D_801E1D5C + row);
         }
         work_d          = (FishingState*)g_Task;
-        step            = work_d->step_14 + work_d->step_limit_20;
+        step            = work_d->step_14 + work_d->step_limit;
         work_d->step_14 = step;
-        if (((work_d->cursor_10 + D_801E1D58[work_d->cue_index_06].offset_00) < work_d->y_38.pos_y) && (step < 0)) {
-            work_d->step_14       = 0;
-            work_d->step_limit_20 = 0;
+        if (((work_d->cursor_10 + D_801E1D58[work_d->cue_index].height_offset) < work_d->y_38.pos_y) && (step < 0)) {
+            work_d->step_14    = 0;
+            work_d->step_limit = 0;
         }
-        work_e                   = (FishingState*)g_Task;
-        work_e->motion_34.unk_34 = (work_e->motion_34.unk_34 + work_e->pos_x_0C);
-        work_e->y_38.pos_y       = (work_e->y_38.pos_y - 0x4000);
-        work_e->bounce_3C.unk_3C = (work_e->bounce_3C.unk_3C + work_e->step_14);
+        work_e                = (FishingState*)g_Task;
+        work_e->motion.unk_34 = (work_e->motion.unk_34 + work_e->pos_x);
+        work_e->y_38.pos_y    = (work_e->y_38.pos_y - 0x4000);
+        work_e->bounce.unk_3C = (work_e->bounce.unk_3C + work_e->step_14);
         if (work_e->y_38.pos_y == TO_COORD(60)) {
             g_AreaCameraStep = 0x40;
         }

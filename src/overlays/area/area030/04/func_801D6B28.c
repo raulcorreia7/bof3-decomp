@@ -19,11 +19,11 @@ MATCH void func_801D6B28(s8 panel_kind) {
         s32           value;
 
         work   = (FishingState*)g_Task;
-        value  = work->pos_x_0C;
+        value  = work->pos_x;
         left_x = (value < 57) ? 57 : ((value >= 122) ? 121 : value);
 
-        shown          = (FishingState*)g_Task;
-        work->pos_x_0C = left_x;
+        shown       = (FishingState*)g_Task;
+        work->pos_x = left_x;
 
         value   = shown->cursor_10;
         right_x = (value < 65) ? 65 : ((value >= 149) ? 148 : value);
@@ -31,10 +31,10 @@ MATCH void func_801D6B28(s8 panel_kind) {
         pair             = (FishingState*)g_Task;
         shown->cursor_10 = right_x;
 
-        if ((pair->cursor_10 < pair->pos_x_0C) || (pair->pos_x_0C + 0x20 < pair->cursor_10)) {
-            Fishing_DrawReelCursor(pair->pos_x_0C, 0xB3, 0x20u, ((pair->cue_index_06 & 0x7u) << 1), 1u, 1);
+        if ((pair->cursor_10 < pair->pos_x) || (pair->pos_x + 0x20 < pair->cursor_10)) {
+            Fishing_DrawReelCursor(pair->pos_x, 0xB3, 0x20u, ((pair->cue_index & 0x7u) << 1), 1u, 1);
         } else {
-            Fishing_DrawReelCursor(pair->pos_x_0C, 0xB3, 0x20u, ((pair->cue_index_06 & 0x7u) << 1), 1u, 0);
+            Fishing_DrawReelCursor(pair->pos_x, 0xB3, 0x20u, ((pair->cue_index & 0x7u) << 1), 1u, 0);
         }
     }
 

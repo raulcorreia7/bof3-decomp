@@ -18,9 +18,9 @@ MATCH void func_801DBFC8(void) {
     Fishing_DrawIconRow(8, FISHING_CATCH_ROW_Y, 67);
 
     if (g_InputPressed != 0) {
-        FISHING_STATE->cue_index_06 = 0;
-        work                        = FISHING_STATE;
-        work->sub_index_03          = (work->sub_index_03 + 1);
+        FISHING_STATE->cue_index = 0;
+        work                     = FISHING_STATE;
+        work->sub_index          = (work->sub_index + 1);
     }
     Actor_StepAnimLoop();
     Fishing_DrawDimScreen();

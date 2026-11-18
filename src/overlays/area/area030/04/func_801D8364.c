@@ -3,7 +3,7 @@
 /* Draws the area-030 accessory rows: the accessory icons of every
  * slot with their count text and the frame behind them. */
 /* RESIDUAL: 47.01%; retail frame 0x78, current frame 0x70, and the
- * call sequence differ. FISHING_STATE->y_38.half.slot is the typed s16 at
+ * call sequence differ. FISHING_STATE->y_38.slot.slot is the typed s16 at
  * offset 0x3A. resume: reproduce the retail control-flow and frame shape. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
@@ -24,14 +24,14 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
     u8* text;
 
     UI_DrawWindow(panel_x, (panel_y + 1) & HALF_MASK, 139, 158, UI_WINDOW_OPEN_TOP_LEFT, (s32)g_WindowStyle);
-    if (FISHING_STATE->step_index_0A != 0) {
-        FISHING_STATE->step_index_0A = (u8)(FISHING_STATE->step_index_0A - 1);
-        max_count                    = 0xA;
-        max_rows                     = (u8)(FISHING_STATE->y_38.pos_y - 1);
+    if (FISHING_STATE->step_index != 0) {
+        FISHING_STATE->step_index = (u8)(FISHING_STATE->step_index - 1);
+        max_count                 = 0xA;
+        max_rows                  = (u8)(FISHING_STATE->y_38.pos_y - 1);
         if (FISHING_STATE->counter_08 != 0) {
-            offset_y = (s16)(25 - (FISHING_STATE->step_index_0A * 4));
+            offset_y = (s16)(25 - (FISHING_STATE->step_index * 4));
         } else {
-            offset_y = (s16)(25 - ((3 - FISHING_STATE->step_index_0A) * 4));
+            offset_y = (s16)(25 - ((3 - FISHING_STATE->step_index) * 4));
         }
     } else {
         max_count = 9;
@@ -72,7 +72,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
                 }
             drawn: /* the count text is drawn once, from either path */
                 if (FISHING_STATE->step_14 == index) {
-                    FISHING_STATE->y_38.half.slot = (s16)slot;
+                    FISHING_STATE->y_38.slot.slot = (s16)slot;
                 }
                 bar_y += 13;
                 row_y += 13;
@@ -104,11 +104,11 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
     } else {
         index -= 9;
         text_y = (s16)(114 - (index * 6));
-        if (FISHING_STATE->step_index_0A != 0) {
+        if (FISHING_STATE->step_index != 0) {
             if (FISHING_STATE->counter_08 != 0) {
-                text_y = (s16)(text_y + (FISHING_STATE->step_index_0A * 2));
+                text_y = (s16)(text_y + (FISHING_STATE->step_index * 2));
             } else {
-                text_y = (s16)(text_y - (FISHING_STATE->step_index_0A * 2));
+                text_y = (s16)(text_y - (FISHING_STATE->step_index * 2));
             }
         }
     }

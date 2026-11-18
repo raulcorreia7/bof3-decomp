@@ -11,7 +11,7 @@ MATCH void func_801D54F8(void) {
     mask = 0;
     if (D_80145E93[0] >= 3u) {
         record = FISHING_STATE;
-        mask   = BIT(record->cue_index_06) & BYTE_MASK;
+        mask   = BIT(record->cue_index) & BYTE_MASK;
     }
     func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
     func_801D72E4(39, 64);

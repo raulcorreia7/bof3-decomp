@@ -12,29 +12,29 @@ MATCH void Fishing_CastGaugeSweep(void) {
     s32           speed;
 
     work  = (FishingState*)g_Task;
-    speed = work->step_delta_18;
+    speed = work->step_delta;
     if (speed != 0) {
         switch (g_FishingRodRow->cast_sweep_direction) {
             case 0:
-                work->pos_x_0C = work->pos_x_0C + speed;
-                if ((s32)work->step_delta_18 > 0 && work->pos_x_0C >= 0xFF) {
-                    work->pos_x_0C      = 0xFF;
-                    work->step_delta_18 = -work->step_delta_18;
+                work->pos_x = work->pos_x + speed;
+                if ((s32)work->step_delta > 0 && work->pos_x >= 0xFF) {
+                    work->pos_x      = 0xFF;
+                    work->step_delta = -work->step_delta;
                 } else {
                     back = (FishingState*)g_Task;
-                    if ((s32)back->step_delta_18 < 0 && back->pos_x_0C <= 0) {
-                        back->pos_x_0C      = 0;
-                        back->step_delta_18 = -back->step_delta_18;
+                    if ((s32)back->step_delta < 0 && back->pos_x <= 0) {
+                        back->pos_x      = 0;
+                        back->step_delta = -back->step_delta;
                     }
                 }
                 break;
             case 1:
-                if (work->pos_x_0C == GAME_NONE) {
-                    work->pos_x_0C = 0;
+                if (work->pos_x == GAME_NONE) {
+                    work->pos_x = 0;
                 } else {
-                    work->pos_x_0C = work->pos_x_0C + speed;
-                    if (work->pos_x_0C >= 0x100) {
-                        work->pos_x_0C = 0xFF;
+                    work->pos_x = work->pos_x + speed;
+                    if (work->pos_x >= 0x100) {
+                        work->pos_x = 0xFF;
                     }
                 }
                 break;
@@ -47,15 +47,15 @@ MATCH void Fishing_CastGaugeSweep(void) {
                 } else {
                     work->cursor_10 = work->cursor_10 + speed;
                 }
-                fresh           = (FishingState*)g_Task;
-                fresh->pos_x_0C = fresh->pos_x_0C + fresh->cursor_10;
+                fresh        = (FishingState*)g_Task;
+                fresh->pos_x = fresh->pos_x + fresh->cursor_10;
                 if (fresh->cursor_10 > 0) {
-                    if (fresh->pos_x_0C >= 0xFF) {
-                        fresh->pos_x_0C  = 0xFF;
+                    if (fresh->pos_x >= 0xFF) {
+                        fresh->pos_x     = 0xFF;
                         fresh->cursor_10 = -fresh->cursor_10;
                     }
-                } else if (fresh->pos_x_0C <= 0) {
-                    fresh->pos_x_0C  = 0;
+                } else if (fresh->pos_x <= 0) {
+                    fresh->pos_x     = 0;
                     fresh->cursor_10 = 0;
                 }
                 break;
@@ -63,10 +63,10 @@ MATCH void Fishing_CastGaugeSweep(void) {
     }
     Fishing_SetDrawMode(0, 2);
     Fishing_DrawSprite(16, 2, 135, 180);
-    Fishing_DrawGaugeFill(136, 203, ((FISHING_STATE->pos_x_0C * 96) / 255), 2);
+    Fishing_DrawGaugeFill(136, 203, ((FISHING_STATE->pos_x * 96) / 255), 2);
     if (D_80145E92[0] == 3) {
-        FISHING_STATE->origin_x_2E = 0xB8;
-        FISHING_STATE->origin_y_30 = 0xD1;
-        FISHING_STATE->handler_index_01 += 1;
+        FISHING_STATE->origin_x = 0xB8;
+        FISHING_STATE->origin_y = 0xD1;
+        FISHING_STATE->handler_index += 1;
     }
 }

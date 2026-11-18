@@ -14,19 +14,19 @@ MATCH void func_801D39B8(void) {
     record         = FISHING_STATE;
     table          = g_FishingPromptSets;
     column         = record->column;
-    row            = table[record->cue_index_06];
+    row            = table[record->cue_index];
     record->row_4B = row[column];
 
     panel             = FISHING_STATE;
     value             = D_801E1E7C[panel->row_4B * 3];
     panel->counter_49 = 0;
 
-    state                = FISHING_STATE;
-    panel->flags_58      = 0;
-    panel->item_50.word  = value;
-    state->step_timer_09 = 4;
+    state             = FISHING_STATE;
+    panel->flags_58   = 0;
+    panel->item.raw   = value;
+    state->step_timer = 4;
 
-    panel                   = FISHING_STATE;
-    panel->origin_x_2E      = 0x125;
-    panel->handler_index_01 = (panel->handler_index_01 + 1);
+    panel                = FISHING_STATE;
+    panel->origin_x      = 0x125;
+    panel->handler_index = (panel->handler_index + 1);
 }

@@ -16,6 +16,6 @@ MATCH void func_801DC74C(void) {
         } else {
             Actor_SelectScript(0xB);
         }
-        FISHING_STATE->sub_index_03 = 1;
+        FISHING_STATE->sub_index = 1;
     }
 }

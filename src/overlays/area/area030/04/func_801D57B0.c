@@ -29,18 +29,18 @@ MATCH void func_801D57B0(void) {
     FISHING_STATE->state_29     = 1;
     FISHING_STATE->state_2A     = 0;
 
-    panel                = FISHING_STATE;
-    panel->counter_48    = 0;
-    other                = FISHING_STATE;
-    panel->origin_x_2E   = 0x5E;
-    panel->origin_y_30   = 0xC2;
-    other->step_timer_09 = 0;
+    panel             = FISHING_STATE;
+    panel->counter_48 = 0;
+    other             = FISHING_STATE;
+    panel->origin_x   = 0x5E;
+    panel->origin_y   = 0xC2;
+    other->step_timer = 0;
 
-    FISHING_STATE->step_index_0A = 0;
-    FISHING_STATE->tint_5D       = 0;
-    FISHING_STATE->tint_5E       = 0;
-    FISHING_STATE->tint_5F       = 0;
+    FISHING_STATE->step_index = 0;
+    FISHING_STATE->tint_5D    = 0;
+    FISHING_STATE->tint_5E    = 0;
+    FISHING_STATE->tint_5F    = 0;
 
-    work               = FISHING_STATE;
-    work->sub_index_03 = (work->sub_index_03 + 1);
+    work            = FISHING_STATE;
+    work->sub_index = (work->sub_index + 1);
 }

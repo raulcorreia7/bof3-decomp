@@ -8,8 +8,8 @@ MATCH void Fishing_LureSettle(void) {
 
     if (Actor_StepAnimOnce() != 0u) {
         Actor_SelectScript(3);
-        record                   = FISHING_STATE;
-        record->handler_index_01 = (record->handler_index_01 + 1);
+        record                = FISHING_STATE;
+        record->handler_index = (record->handler_index + 1);
     }
 
     Area_AddGridActor();

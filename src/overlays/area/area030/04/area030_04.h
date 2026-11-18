@@ -67,7 +67,7 @@ typedef union FishingMotion {
 
     struct {
         s16 unk_34;
-        s16 cursor_36; /* the accessory selection row cursor */
+        s16 cursor; /* the accessory selection row cursor */
     } half;
 } FishingMotion;
 
@@ -78,7 +78,7 @@ typedef union FishingBounce {
 
     struct {
         u16 unk_3C;
-        s16 key_3E;
+        s16 key;
     } half;
 } FishingBounce;
 
@@ -87,7 +87,7 @@ typedef union FishingBounce {
  * it keeps. */
 typedef union FishingStateSlotLow {
     u8  unk_38; /* the byte at 0x38 */
-    s16 pos_low_38;
+    s16 pos_low;
 } FishingStateSlotLow;
 
 typedef struct FishingStateSlot {
@@ -105,16 +105,16 @@ ASSERT_SIZE(FishingStateSlot, 4);
  * stores the accessory slot of the selected row in the 0x3A halfword. */
 typedef union FishingStateY {
     s32              pos_y;
-    FishingStateSlot half;
+    FishingStateSlot slot;
 } FishingStateY;
 
 ASSERT_SIZE(FishingStateY, 4);
 
 /* One cue row of D_801E1D58: the 16.16 fixed-point height offset and the
- * per-step delta; four rows, indexed by cue_index_06 (Fishing_LureFly). */
+ * per-step delta; four rows, indexed by cue_index (Fishing_LureFly). */
 typedef struct FishingCueStep {
-    s32 offset_00;
-    s32 step_04;
+    s32 height_offset;
+    s32 step_delta;
 } FishingCueStep;
 
 ASSERT_SIZE(FishingCueStep, 0x08);
@@ -123,14 +123,14 @@ ASSERT_SIZE(FishingCueStep, 0x08);
  * words and dereferenced as bytes. */
 typedef union FishingItemPointer {
     u8* pointer;
-    s32 word;
+    s32 raw;
 } FishingItemPointer;
 
 /* One fishing animation step: the animation func_8014D8D4 plays (bit 7 ends
  * the sequence), the next step index and the x/y deltas applied to the rod
  * position. D_801E207D..F are byte views of the following rows of D_801E207C. */
 typedef struct FishingAnimationStep {
-    s8 anim_id;
+    s8 animation_id;
     u8 next_step;
     s8 delta_x;
     s8 delta_y;
@@ -141,23 +141,23 @@ ASSERT_SIZE(FishingAnimationStep, 0x4);
 /* Scratchpad work area behind g_Task; widths follow the retail accesses. */
 typedef struct FishingState {
     u8                            flags;
-    u8                            handler_index_01;
-    u8                            mode_index_02;
-    u8                            sub_index_03;
+    u8                            handler_index;
+    u8                            mode_index;
+    u8                            sub_index;
     u8                            flag_04;
     u8                            pad_05[0x1];
-    u8                            cue_index_06;
+    u8                            cue_index;
     u8                            counter_07;
     u8                            counter_08;
-    u8                            step_timer_09;
-    u8                            step_index_0A;
-    u8                            saved_index_0B;
-    s32                           pos_x_0C;
+    u8                            step_timer;
+    u8                            step_index;
+    u8                            saved_index;
+    s32                           pos_x;
     s32                           cursor_10; /* the icon cursor; it steps by 8 and stops at 0xAE */
     s32                           step_14;
-    u32                           step_delta_18;
+    u32                           step_delta;
     u32                           unk_1C;
-    u32                           step_limit_20;
+    u32                           step_limit;
     u8                            active_flags;
     u8                            saved_25; /* a value copied in from the entry table */
     u8                            saved_26; /* a value copied in from the entry table */
@@ -167,12 +167,12 @@ typedef struct FishingState {
     u8                            state_2A;
     u8                            pad_2B[0x1];
     u16                           unk_2C;
-    u16                           origin_x_2E; /* the panel's screen origin x */
-    u16                           origin_y_30; /* the panel's screen origin y */
+    u16                           origin_x; /* the panel's screen origin x */
+    u16                           origin_y; /* the panel's screen origin y */
     u8                            pad_32[0x2];
-    /* 0x34 */ FishingMotion      motion_34;
+    /* 0x34 */ FishingMotion      motion;
     /* 0x38 */ FishingStateY      y_38;
-    /* 0x3C */ FishingBounce      bounce_3C;
+    /* 0x3C */ FishingBounce      bounce;
     /* 0x40 */ u32                unk_40;
     u32                           unk_44;
     u8                            counter_48;
@@ -180,8 +180,8 @@ typedef struct FishingState {
     u8                            column; /* the table column the row is read from */
     u8                            row_4B; /* the table row the entry comes from */
     u8                            pad_4C[0x4];
-    /* 0x50 */ FishingItemPointer item_50;
-    /* 0x54 */ FishingItemPointer text_54;
+    /* 0x50 */ FishingItemPointer item;
+    /* 0x54 */ FishingItemPointer text;
     u16                           flags_58;
     u16                           unk_5A;
     u8                            unk_5C;
@@ -195,21 +195,21 @@ typedef struct FishingState {
 } FishingState;
 
 ASSERT_OFFSET(FishingState, y_38, 0x38);
-STATIC_ASSERT(FishingState_slot_3A, DECOMP_OFFSETOF(FishingState, y_38.half.slot) == 0x3A);
+STATIC_ASSERT(FishingState_slot_3A, DECOMP_OFFSETOF(FishingState, y_38.slot.slot) == 0x3A);
 
 /* The 0x24-byte fishing scene cue rows at g_FishingSpecies, indexed by the work's
- * cue_index_06 and selected by the g_FishingPromptSets queue table. value_00 is the
- * scene id func_8014DD3C resolves; count_0A limits the spawn facing. The rest
- * is not modelled. */
+ * cue_index and selected by the g_FishingPromptSets queue table. scene_id is
+ * the scene func_8014DD3C resolves; count limits the spawn facing. The rest is
+ * not modelled. */
 typedef struct FishingSceneCue {
-    u16 value_00;
+    u16 scene_id;
     u8  pad_02[8];
-    u8  count_0A;
+    u8  count;
     u8  pad_0B[0x19];
 } FishingSceneCue;
 
-ASSERT_OFFSET(FishingSceneCue, value_00, 0x00);
-ASSERT_OFFSET(FishingSceneCue, count_0A, 0x0A);
+ASSERT_OFFSET(FishingSceneCue, scene_id, 0x00);
+ASSERT_OFFSET(FishingSceneCue, count, 0x0A);
 ASSERT_SIZE(FishingSceneCue, 0x24);
 
 /* The world panel's selection state word at the head of each 0x98-byte field
@@ -220,11 +220,11 @@ typedef struct FishingSelectionState {
     u8  pad[0x94];
 } FishingSelectionState;
 
-/* One 0x10-byte panel icon row from D_801E2424: the CLUT x and y (unk_00 and
- * unk_04), the quad size and the U/V origin Fishing_DrawSprite copies into a sprite. */
+/* One 0x10-byte panel icon row from D_801E2424: the CLUT origin, the quad
+ * size and the U/V origin Fishing_DrawSprite copies into a sprite. */
 typedef struct PanelIcon {
-    s32 unk_00;
-    s32 unk_04;
+    s32 clut_x;
+    s32 clut_y;
     u16 width;  /* 0x08 */
     u16 height; /* 0x0A */
     u8  u;      /* 0x0C */
@@ -784,7 +784,7 @@ static inline void WorldAdvanceFishingSubState(u8 subState) {
         SND_PlayBGM(0x28, 0x64, 8);
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
         func_801DDE94(subState);
-        FISHING_STATE->sub_index_03 += 1;
+        FISHING_STATE->sub_index += 1;
     }
     Actor_StepAnimLoop();
 }
@@ -799,7 +799,7 @@ static inline void FishingDrawCue(u8 accessoryCue) {
     mask = 0;
     if (D_80145E93[0] >= 3u) {
         record = FISHING_STATE;
-        mask   = BIT(record->cue_index_06) & BYTE_MASK;
+        mask   = BIT(record->cue_index) & BYTE_MASK;
     }
     func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
     func_801D88E0(FISHING_EQUIP_PANEL_X, FISHING_PANEL_CONTENT_Y);
