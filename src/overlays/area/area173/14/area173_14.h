@@ -6,6 +6,15 @@
 
 #include "overlays/area/world04.h"
 #include "area/spad.h"
+#include <string.h>
+
+/* The map bundle header bytes this overlay reads by their own addresses. */
+extern u8  D_80104001;
+extern u16 D_80104002;
+
+/* The cell code tables the map update copies: two 6-byte runs in the
+ * D_801F2C04 data block. */
+extern u8 D_801F2C04[];
 
 /* The work origin offset, step and threshold this overlay advances. */
 #define AREA_ORIGIN_OFFSET       0x30

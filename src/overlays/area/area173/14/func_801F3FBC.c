@@ -6,12 +6,12 @@ NON_MATCHING void func_801F3FBC(s32 mode, s32 value) {
     s32       tpage;
     s32       i;
     s32       j;
-    s32       factor;
+    s8        factor;
     long      p;
     long      flag;
 
     factor        = D_801F530C[mode];
-    D_1F800034[0] = ((COORD_INT(g_Task->pos.x) - 0x80) << 7) + mode * 0xC0 - 0x40 - g_Task->screen_y * (s8)factor;
+    D_1F800034[0] = ((COORD_INT(g_Task->pos.x) - 0x80) << 7) + mode * 0xC0 - 0x40 - g_Task->screen_y * factor;
     D_1F800036    = ((COORD_INT(g_Task->pos.y) - 0x80) << 7) - 0x40;
 
     i = 0;

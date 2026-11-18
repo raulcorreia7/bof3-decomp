@@ -6421,6 +6421,8 @@ Area_InitSpin = { addr = 0x801F3E90, type = "func", source = "Starts one spin-ef
 
 ["emi/world04/area173/14"]
 D_1F800034_U16 = { addr = 0x1F800034, type = "u16", source = "The projected screen coordinates at 0x1F800034 read as unsigned halfwords x and y, the output RotTransPers writes.", alias = true }
+D_80104001 = { addr = 0x80104001, type = "u8", source = "the map bundle height byte, g_AreaMapBundle+0x1", alias = true }
+D_80104002 = { addr = 0x80104002, type = "u16", source = "the map bundle cell-grid offset halfword, g_AreaMapBundle+0x2", alias = true }
 jtbl_801F2C14 = { addr = 0x801F2C14, type = "Callback", size = 0x34, source = "The switch table of func_801F4C84: 13 jump targets of its jr dispatch." }
 Actor_SlideScreenX = { addr = 0x801F4458, type = "func", source = "Adds ACTOR_SCREEN_X_STEP to the screen origin of the work record and, once it reaches ACTOR_SCREEN_X_THRESHOLD, adds 1 to the step (byte 0x02); runs Area_Update." }
 Actor_SlideScreenDown16 = { addr = 0x801F4570, type = "func", source = "Subtracts 0x10 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays SE EMI_SE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
