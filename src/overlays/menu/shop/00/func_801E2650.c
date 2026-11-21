@@ -5,8 +5,8 @@ MATCH void func_801E2650(void) {
     s32 offset;
 
     panel                     = (u8*)g_MenuPanelTasks;
-    D_80148331                = 7;
-    D_80148332                = 0;
+    g_MenuPanelTasks[0].panel = 7;
+    g_MenuPanelTasks[0].mode  = 0;
     g_MenuPanelTasks[0].state = 2;
     panel[0]                  = 1;
     D_80148334                = 0x14;
