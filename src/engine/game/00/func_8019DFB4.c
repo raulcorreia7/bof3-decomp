@@ -65,7 +65,7 @@ loop_1: /* scan the world-id table down from index 8 */
     } else {
         active = 0;
     }
-    Actor_SelectScript(active);
+    Script_Select(active);
     ACTOR_CLEAR_TINT();
     g_Task->timer       = 16;
     g_Task->unk_0A      = 8;

@@ -21,7 +21,7 @@ MATCH void func_801B85C0(void) {
             g_Task->unk_03 = 0;
             g_Task->timer  = 0;
             g_Task->unk_0A = 0;
-            Actor_RequestScript(g_Task->direction);
+            Script_Request(g_Task->direction);
             return;
         }
         Area_RunWalk();

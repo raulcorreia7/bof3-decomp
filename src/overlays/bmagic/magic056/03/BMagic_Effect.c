@@ -322,9 +322,9 @@ MATCH void func_801F023C(void) {
         if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
             task = g_Task;
             TASK_SET(&g_Game.members[g_Battle.active_battler]);
-            Actor_SelectScript(g_Task->facing + 16);
+            Script_Select(g_Task->facing + 16);
             TASK_SET(task);
-            Actor_SelectScript(task->facing + 16);
+            Script_Select(task->facing + 16);
         } else {
             func_801E257C(g_Battle.active_battler, 4);
         }
@@ -369,9 +369,9 @@ MATCH void func_801F04EC(void) {
         if (g_Battle.active_battler < 3) {
             member = &g_Game.members[g_Battle.active_battler];
             g_Task = member;
-            Actor_SelectScript(member->facing + 0x1C);
+            Script_Select(member->facing + 0x1C);
             g_Task = work;
-            Actor_SelectScript(work->facing + 0x1C);
+            Script_Select(work->facing + 0x1C);
         } else {
             func_801E257C(g_Battle.active_battler, 4);
         }

@@ -8,7 +8,7 @@ MATCH void Battle_RequestEnemyScript(u32 script_index) {
     switch (g_Task->facing) {
         case 0: {
             s32 index = script_index & BYTE_MASK;
-            Actor_RequestScript(ENEMY_SCRIPT_PTR(index)[0] & 0x7F);
+            Script_Request(ENEMY_SCRIPT_PTR(index)[0] & 0x7F);
             if (ENEMY_SCRIPT_PTR(index)[0] & 0x80u) {
                 g_Task->unk_2A = 1u;
             } else {
@@ -18,7 +18,7 @@ MATCH void Battle_RequestEnemyScript(u32 script_index) {
         }
         case 1: {
             s32 index = script_index & BYTE_MASK;
-            Actor_RequestScript(ENEMY_SCRIPT_PTR(index)[0] & 0x7F);
+            Script_Request(ENEMY_SCRIPT_PTR(index)[0] & 0x7F);
             if (ENEMY_SCRIPT_PTR(index)[0] & 0x80u) {
                 g_Task->unk_2A = 0u;
             } else {
@@ -28,7 +28,7 @@ MATCH void Battle_RequestEnemyScript(u32 script_index) {
         }
         case 2: {
             s32 index = script_index & BYTE_MASK;
-            Actor_RequestScript(ENEMY_SCRIPT_PTR(index)[1] & 0x7F);
+            Script_Request(ENEMY_SCRIPT_PTR(index)[1] & 0x7F);
             if (ENEMY_SCRIPT_PTR(index)[1] & 0x80u) {
                 g_Task->unk_2A = 1u;
             } else {
@@ -38,7 +38,7 @@ MATCH void Battle_RequestEnemyScript(u32 script_index) {
         }
         case 3: {
             s32 index = script_index & BYTE_MASK;
-            Actor_RequestScript(ENEMY_SCRIPT_PTR(index)[1] & 0x7F);
+            Script_Request(ENEMY_SCRIPT_PTR(index)[1] & 0x7F);
             if (ENEMY_SCRIPT_PTR(index)[1] & 0x80u) {
                 /* FAKE: non-volatile store fills merged-tail delay slot. */
                 g_Task->unk_2A = 0u;

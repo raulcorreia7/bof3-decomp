@@ -56,7 +56,7 @@ MATCH void func_801FBB1C(void) {
             break;
         case 5:
             if (g_ScriptVars[0] == 6) {
-                if (Area_TurnCameraX(-0x50, -2) == 0) {
+                if (Camera_TurnX(-0x50, -2) == 0) {
                     g_ScenarioState.step_05 = 6;
                 }
             }

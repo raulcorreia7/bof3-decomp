@@ -51,7 +51,7 @@ MATCH void func_8019A3FC(void) {
         work->timer              = 16;
     }
 
-    ((void (*)(u8, Actor*))Actor_SelectScript)(s_SceneHandlerIds[g_Task->unk_06], other);
+    ((void (*)(u8, Actor*))Script_Select)(s_SceneHandlerIds[g_Task->unk_06], other);
 
     g_Task->header.mode = 1;
 }

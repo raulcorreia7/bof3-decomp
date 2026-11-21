@@ -1,7 +1,7 @@
 #include "engine/game/00/game_00.h"
 
 MATCH void Area_RunLoadingFrame(void) {
-    Area_UpdateCamera();
+    Camera_Update();
     Area_UpdateParty();
     func_801BDAB8();
     func_801A0514();

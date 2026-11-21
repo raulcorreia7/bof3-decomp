@@ -195,15 +195,15 @@ MATCH void func_801EF488(void) {
                 prev                              = g_Task;
                 battler                           = &g_Game.members[slot];
                 g_Task                            = battler;
-                Actor_SelectScript((battler->facing + 4) & BYTE_MASK);
+                Script_Select((battler->facing + 4) & BYTE_MASK);
                 if (g_Game.members[slot].chr.status & 0x2080) {
-                    Actor_SelectScript((g_Task->facing + 0x18) & BYTE_MASK);
+                    Script_Select((g_Task->facing + 0x18) & BYTE_MASK);
                 }
                 if (g_Game.members[slot].chr.status & 0x800) {
-                    Actor_SelectScript((g_Task->facing + 0x30) & BYTE_MASK);
+                    Script_Select((g_Task->facing + 0x30) & BYTE_MASK);
                 }
                 if (Battle_SlotIsBlocked(slot) & BYTE_MASK) {
-                    Actor_SelectScript((g_Task->facing + 0x1C) & BYTE_MASK);
+                    Script_Select((g_Task->facing + 0x1C) & BYTE_MASK);
                 }
                 i++;
                 g_Task = prev;
@@ -276,7 +276,7 @@ MATCH void func_801EF7FC(void) {
     g_Task->unk_29       = 2;
     g_Task->unk_2C.value = 0;
     g_Task->unk_2B       = 0;
-    Actor_SelectScript(0);
+    Script_Select(0);
     SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x01));
     g_Task->unk_09 = 0x10;
     g_Task->header.step += 1;
@@ -330,7 +330,7 @@ MATCH void func_801EFBF8(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
-        Actor_SelectScript(1U);
+        Script_Select(1U);
         g_Task->unk_09 = 0x29;
         g_Task->header.step += 1;
     }

@@ -18,7 +18,7 @@ MATCH void func_8019C794(void) {
     if (func_8019CAB4() != 0) {
         code = 0x4F;
     report:
-        Actor_SelectScript(code);
+        Script_Select(code);
         g_Task->header.mode += 1;
     } else if ((g_Task->unk_0A & 0x1) == 0) {
         index = Actor_FindFreeSpawned();

@@ -15,7 +15,7 @@ MATCH void func_800C1D24(void) {
         Area_SelectSceneRecord(0x5F);
         g_BattleCurrentEnemy->script = &D_800C21A0;
         g_Task->unk_2A               = 0;
-        Actor_SelectScript(0U);
+        Script_Select(0U);
         g_Task->header.step += 1;
     }
     Actor_StepAnimLoop();

@@ -12,10 +12,10 @@ MATCH void func_801F3344(void) {
     if ((g_ScriptVars[3] & 0x80u) != 0u) {
         s->header.mode = 0x0E;
     } else if (g_ScriptVars[2] == 2) {
-        Actor_SelectScript(3);
+        Script_Select(3);
         s->header.mode = 3;
     } else if (g_ScriptVars[2] == 5) {
-        Actor_SelectScript(3);
+        Script_Select(3);
         s->header.mode = 0x0A;
     }
     g_Task = s;

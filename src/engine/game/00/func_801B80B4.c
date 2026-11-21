@@ -15,7 +15,7 @@ MATCH void func_801B80B4(void) {
         next_step = g_Task->unk_0A;
         next_step += 1;
     }
-    Actor_RequestScript(next_step);
+    Script_Request(next_step);
     if (g_Task->unk_0A == 4) {
         if (g_Task->unk_05 == 0) {
             g_AreaWalkFlags &= ~AREA_WALK_ENTRY_ACTIVE;

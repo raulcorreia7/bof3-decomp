@@ -35,10 +35,10 @@ NON_MATCHING void func_801F30E0(void) {
     scratch  = SP_PTR(s16, 0u);
     *scratch = work->unk_03;
     Actor_SpawnFromRecord(D_801F3D4C + work->param.unk_0B * 17);
-    Actor_BeginScript(D_801F3D70[index * 3 + 1], D_801F3D70[index * 3 + 2]);
+    Script_Begin(D_801F3D70[index * 3 + 1], D_801F3D70[index * 3 + 2]);
     *scratch = work->unk_04;
     Actor_SpawnFromRecord(D_801F3D4C + work->param.unk_0B * 17);
-    Actor_BeginScript(D_801F3D70[index * 3 + 1], D_801F3D70[index * 3 + 2]);
+    Script_Begin(D_801F3D70[index * 3 + 1], D_801F3D70[index * 3 + 2]);
     TASK_SET(work);
 
     g_Actors[work->unk_03].pos.x.fixed -= ONE;

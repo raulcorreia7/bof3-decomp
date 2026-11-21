@@ -47,7 +47,7 @@ MATCH s32 Area_BuildEncounter(u8 work_mode, s32 work_index) {
         }
     }
     PushMatrix();
-    Area_SetEncounterCamera(D_801CD8C8);
+    Camera_SetEncounter(D_801CD8C8);
     i = 0;
 loop_16:
     if ((i & BYTE_MASK) < (Party_CountOrder(PARTY_ORDER_BATTLE) & BYTE_MASK)) {

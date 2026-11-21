@@ -23,6 +23,6 @@ MATCH void func_8019E95C(void) {
     work->vz                 = 64;
     other->tint.bytes.rgb.g  = 0;
     g_Task->tint.bytes.rgb.b = 0;
-    Actor_SelectScript(0);
+    Script_Select(0);
     g_Task->header.step = (g_Task->header.step + 1);
 }

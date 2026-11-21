@@ -29,7 +29,7 @@ MATCH void func_801D5A48(void) {
     tail->pos_x      = 0;
     tail->step_delta = 4;
     tail->cue_index  = 0;
-    Actor_SelectScript(0);
+    Script_Select(0);
 
     tail            = FISHING_STATE;
     tail->sub_index = (tail->sub_index + 1);

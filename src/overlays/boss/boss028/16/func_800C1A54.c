@@ -4,7 +4,7 @@
 MATCH void func_800C1A54(void) {
     u8* value = (u8*)&g_Battle.target_selector;
 
-    Actor_SelectScript(2);
+    Script_Select(2);
     *value = 0x80;
     Battle_MarkDamaged(0x80);
     g_Task->header.step++;

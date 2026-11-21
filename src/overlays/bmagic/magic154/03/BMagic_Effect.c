@@ -115,7 +115,7 @@ MATCH void func_801EF1EC(void) {
         g_Task->unk_24       = 4;
         g_Task->unk_2C.value = 0;
         g_Task->unk_2B       = 0;
-        Actor_SelectScript(0U);
+        Script_Select(0U);
         Actor_StepAnimLoop();
         g_Task->unk_09 = 0;
         g_Task->header.step += 1;

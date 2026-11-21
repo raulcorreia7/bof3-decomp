@@ -63,7 +63,7 @@ MATCH void func_801FA1F0(void) {
             break;
         case 18:
             if (g_ScriptVars[0] == 0x17) {
-                if (Area_TurnCameraZ(0x5A, 2) == 0) {
+                if (Camera_TurnZ(0x5A, 2) == 0) {
                     g_ScenarioState.step_05 = 0x13;
                     g_ScriptVars[3]         = 0;
                 }
@@ -78,7 +78,7 @@ MATCH void func_801FA1F0(void) {
             break;
         case 20:
             if (g_ScriptVars[0] == 0x18) {
-                if (Area_TurnCameraZ(0x28, -2) == 0) {
+                if (Camera_TurnZ(0x28, -2) == 0) {
                     g_ScenarioState.step_05 = 0x15;
                 }
             }

@@ -56,11 +56,11 @@ MATCH void Fishing_LureFloat(void) {
     FISHING_STATE->tint_5F = FISHING_STATE->tint_5D;
     cursor                 = FISHING_STATE->cursor_10;
     if (cursor > 0) {
-        Actor_RequestScript(2);
+        Script_Request(2);
     } else if (cursor < 0) {
-        Actor_RequestScript(0);
+        Script_Request(0);
     } else {
-        Actor_RequestScript(3);
+        Script_Request(3);
     }
     Actor_StepAnimLoop();
     FISHING_STATE->counter_48 = 2;

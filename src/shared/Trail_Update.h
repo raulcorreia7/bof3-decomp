@@ -21,9 +21,9 @@ MATCH void Trail_Update(Trail* trail) {
     trail->point[0].pos.vx = g_Task->pos.x.fixed;
     trail->point[0].pos.vy = g_Task->pos.y.fixed;
     trail->point[0].pos.vz = g_Task->pos.z.fixed;
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     for (i = 0; i < 32; i++) {
-        Area_ProjectPoint(&trail->point[i].pos.vx, &trail->point[i].screen);
+        Camera_ProjectPoint(&trail->point[i].pos.vx, &trail->point[i].screen);
         size[0] = size[1] = trail->width;
         Game_ProjectWorldPoint(&trail->point[i], size, scale);
         trail->point[i].width = scale[0];

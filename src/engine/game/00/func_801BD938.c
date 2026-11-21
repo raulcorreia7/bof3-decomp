@@ -28,7 +28,7 @@ MATCH bool func_801BD938(void) {
     }
     if (slot == (RANDOM_MASK(1) + 1)) {
         g_Game.current->u.field.mode.unsigned_value = 9;
-        Actor_RequestScript(g_Task->direction);
+        Script_Request(g_Task->direction);
         g_Task->timer       = 2;
         g_Task->header.mode = 6;
         ACTOR_CLEAR_STEP();

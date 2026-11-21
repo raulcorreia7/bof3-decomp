@@ -28,7 +28,7 @@ MATCH void func_801F7424(Actor* actor) {
     poly = (POLY_F3*)g_GfxPrimCursor;
     SetPolyF3(poly);
     SetSemiTrans(poly, 1);
-    Area_ProjectPoint(&actor->unk_18, POLY_XY(poly, 0));
+    Camera_ProjectPoint(&actor->unk_18, POLY_XY(poly, 0));
     poly->x1 = poly->x0 + D_801FE38C[actor->unk_04].dx1;
     poly->y1 = poly->y0 + D_801FE38C[actor->unk_04].dy1;
     poly->x2 = poly->x0 + D_801FE38C[actor->unk_04].dx2;
@@ -55,7 +55,7 @@ MATCH s32 func_801F75BC(void) {
     u8             life;
     s32            alive;
 
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     alive = 0;
     row   = (SparkParticle*)(MEM_PTR(u8, AREA_WORK + 0x800) + g_Task->unk_06 * 0x500);
     for (i = 0; i < SCENE_SPARK_COUNT; row++, i++) {

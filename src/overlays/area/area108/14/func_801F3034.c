@@ -5,7 +5,7 @@ MATCH s32 func_801F3034(void) {
     u8  i;
     s32 result;
 
-    Area_SetCameraMatrix(scratch);
+    Camera_SetMatrix(scratch);
 
     result     = 0;
     D_801F63EC = MEM_PTR(u8, AREA_WORK);

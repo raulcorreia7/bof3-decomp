@@ -37,7 +37,7 @@ NON_MATCHING void func_801FA24C(void) {
             }
             break;
         case 1:
-            if (g_ScriptVars[0] == 3 && Area_TurnCameraX(-0x5A, -2) == 0) {
+            if (g_ScriptVars[0] == 3 && Camera_TurnX(-0x5A, -2) == 0) {
                 g_ScenarioState.step_05 = 2;
             }
             break;
@@ -61,7 +61,7 @@ NON_MATCHING void func_801FA24C(void) {
             }
             break;
         case 4:
-            if (Area_TurnCameraX(-0x3C, 2) == 0) {
+            if (Camera_TurnX(-0x3C, 2) == 0) {
                 g_ScenarioState.step_05 = 5;
             }
             break;

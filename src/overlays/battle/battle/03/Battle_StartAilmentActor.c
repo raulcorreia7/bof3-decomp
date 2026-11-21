@@ -31,7 +31,7 @@ MATCH void Battle_StartAilmentActor(void) {
         work->unk_0C         = 0;
         work->timer          = 60;
         func_801E8DD8();
-        Actor_SelectScript(s_BattleBattlerStepIds[index]);
+        Script_Select(s_BattleBattlerStepIds[index]);
         work              = g_Task;
         work->header.mode = (work->header.mode) + 2;
     }

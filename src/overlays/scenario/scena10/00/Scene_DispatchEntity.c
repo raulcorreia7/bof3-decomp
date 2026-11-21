@@ -18,7 +18,7 @@ MATCH void func_801F6FAC(void) {
     g_Task->timer            = 0;
     g_Task->unk_0A           = 0x1E;
     g_Task->draw_layer       = 1;
-    Actor_SelectScript((u8)(g_Task->unk_06 - 0x4E));
+    Script_Select((u8)(g_Task->unk_06 - 0x4E));
     g_Task->header.mode = 1;
 }
 
@@ -150,7 +150,7 @@ MATCH void func_801F7590(void) {
         g_Task->header.step &= 7;
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 6));
         g_Task->unk_06 = (g_Task->header.step & 7) + 0x4E;
-        Actor_SelectScript(g_Task->unk_06 - 0x4E);
+        Script_Select(g_Task->unk_06 - 0x4E);
     }
     if (g_InputPressed & PADRleft) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 9));

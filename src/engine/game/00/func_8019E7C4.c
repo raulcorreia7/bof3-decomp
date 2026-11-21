@@ -19,7 +19,7 @@ MATCH void func_8019E7C4(void) {
     other->tint.bytes.rgb.g = 0;
 
     g_Task->tint.bytes.rgb.b = 0;
-    Actor_SelectScript(9);
+    Script_Select(9);
 
     g_Task->header.step = (g_Task->header.step + 1);
 }

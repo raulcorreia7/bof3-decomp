@@ -4,5 +4,5 @@ MATCH void func_801F446C(void) {
     g_ScriptState->flags |= 0x40;
     g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
     g_Task->header.flags |= 0x10;
-    Actor_SelectScript(0xAU);
+    Script_Select(0xAU);
 }

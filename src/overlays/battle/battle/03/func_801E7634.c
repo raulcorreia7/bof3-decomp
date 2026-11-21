@@ -13,7 +13,7 @@ MATCH void func_801E7634(void) {
         saved       = g_Task;
         g_Task      = g_BattleEffectBattler;
         g_GameState = &g_Game.members[g_BattleEffectBattler->slot];
-        Actor_SelectScript((g_BattleEffectBattler->facing + 4) & BYTE_MASK);
+        Script_Select((g_BattleEffectBattler->facing + 4) & BYTE_MASK);
         GFX_FreePaletteFadeTarget(&g_Game.members[g_Task->slot]);
         GFX_LoadPalette((g_Task->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0);
         func_801DDAB4(g_Game.members[g_Task->slot].chr.status);

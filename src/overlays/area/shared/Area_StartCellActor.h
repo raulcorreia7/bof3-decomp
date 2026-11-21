@@ -16,5 +16,5 @@
     row_offset                                           = g_Task->param.unk_0B * 4;                          \
     map_offset                                           = CELL_Y[row_offset] * g_AreaMapBundle.width;        \
     *(g_AreaCellCodes + map_offset + CELL_X[row_offset]) = 0xA0;                                              \
-    Actor_SelectScript(0);                                                                                    \
+    Script_Select(0);                                                                                         \
     g_Task->header.mode = 1;

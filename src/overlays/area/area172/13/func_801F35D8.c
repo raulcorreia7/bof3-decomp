@@ -8,11 +8,11 @@ MATCH void func_801F35D8(void) {
     u8      remaining;
 
     PushMatrix();
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     pos[0] = g_Task->pos.x.fixed;
     pos[1] = g_Task->pos.y.fixed;
     pos[2] = g_Task->pos.z.fixed;
-    Area_ProjectPoint(pos, &screen);
+    Camera_ProjectPoint(pos, &screen);
     PopMatrix();
     work           = g_Task;
     work->screen_x = screen.vx;

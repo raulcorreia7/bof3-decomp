@@ -643,7 +643,7 @@ MATCH void func_801F8360(void) {
         SetPolyG3(prim);
         PushMatrix();
         Actor_BuildTransformMatrix(&matrix);
-        Area_ApplyCameraMatrix(&matrix);
+        Camera_ApplyMatrix(&matrix);
         if (i & 0x1) {
             RotTransPers3(&v[0], &v[1], &v[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
         } else {
@@ -704,7 +704,7 @@ MATCH void Scene_DrawTriangle(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
     SetPolyG3(prim);
     PushMatrix();
     Actor_BuildTransformMatrix(&matrix);
-    Area_ApplyCameraMatrix(&matrix);
+    Camera_ApplyMatrix(&matrix);
     RotTransPers3(&v[0], &v[1], &v[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
     setRGB0(prim, SCN_TRI_SHADE_V0, SCN_TRI_SHADE_V0, SCN_TRI_SHADE_V0);
     setRGB1(prim, SCN_TRI_SHADE_V1, SCN_TRI_SHADE_V1, SCN_TRI_SHADE_V1);
@@ -826,7 +826,7 @@ MATCH void func_801F8AB8(void) {
     point[0] = work->pos.x;
     point[1] = work->pos.y;
     point[2] = work->pos.z.fixed;
-    Area_ProjectPoint(point, screen);
+    Camera_ProjectPoint(point, screen);
 
     current                               = SCN_EFFECT;
     FAKE_VOLATILE(u16, current->origin.x) = (u16)screen->vx;
@@ -1971,7 +1971,7 @@ MATCH void func_801FB744(void) {
     state = &g_ScenarioState.step_05;
     switch (*state) {
         case 0:
-            if (Area_StepCameraAngle(0x2D, 0xA) == 0) {
+            if (Camera_StepAngle(0x2D, 0xA) == 0) {
                 g_ScenarioState.timer_06 = 50;
                 *state                   = 1;
             }
@@ -1997,7 +1997,7 @@ MATCH void func_801FB744(void) {
         }
 
         case 2:
-            if (Area_StepCameraAngle(0xF, 0xA) == 0) {
+            if (Camera_StepAngle(0xF, 0xA) == 0) {
                 *state          = 3;
                 g_ScriptVars[2] = 4;
             }
@@ -2106,7 +2106,7 @@ MATCH void func_801FB924(void) {
                 if (D_801FCA64[index * 2] != 0) {
                     TASK_SET((u8*)g_Actors);
                     D_80146890 = D_801FCA65[index * 2];
-                    Actor_RequestScript(D_80146890);
+                    Script_Request(D_80146890);
                 }
             } else {
                 g_ScriptVarsReq.byte++;
@@ -2145,7 +2145,7 @@ MATCH void func_801FB924(void) {
             if ((g_FrameCount & 0x3) == 0) {
                 TASK_SET((u8*)g_Actors);
                 D_80146890 = (D_80146890 + 1) & 0x3;
-                Actor_RequestScript(D_80146890);
+                Script_Request(D_80146890);
             }
             SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 4));
             if (g_ScriptVars[2] == 0x15) {

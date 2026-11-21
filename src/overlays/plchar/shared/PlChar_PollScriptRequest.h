@@ -2,7 +2,7 @@
 MATCH void PlChar_PollScriptRequest(void) {
     if (g_Task->option_flags != 0) {
         if (Actor_StepAnimOnce() & BYTE_MASK) {
-            Actor_RequestScript(g_Task->direction);
+            Script_Request(g_Task->direction);
             g_Task->option_flags = 0;
         }
     } else if ((Actor_StepAnimOnce() & BYTE_MASK) && (g_SpawnedActors[g_Task->param.actor_slot].header.flags == 0)) {

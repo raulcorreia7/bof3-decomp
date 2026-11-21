@@ -8,22 +8,22 @@ MATCH void func_800C243C(void) {
             Area_SelectSceneRecord(0xF9);
             g_Task->unk_24 &= 0xFE;
             if (g_Battle.boss_flags & 0x40) {
-                Actor_SelectScript(1);
+                Script_Select(1);
             } else {
-                Actor_BeginScript(5, 4);
+                Script_Begin(5, 4);
             }
             g_Task->unk_2A = 1;
         }
         Battle_ShowActorEntry(1);
         TASK_SET(func_800AC754(1));
         Area_SelectSceneRecord(0xEF);
-        Actor_SelectScript(0);
+        Script_Select(0);
         g_Task->unk_58 = g_BattleEnemyBattlers[1].unk_58;
         g_Task->unk_5A = g_BattleEnemyBattlers[1].unk_5A;
         Battle_ShowActorEntry(0);
         TASK_SET(func_800AC754(0));
         Area_SelectSceneRecord(0xEE);
-        Actor_SelectScript(0);
+        Script_Select(0);
         g_Task->unk_58 = g_BattleEnemyBattlers[0].unk_58;
         g_Task->unk_5A = g_BattleEnemyBattlers[0].unk_5A;
     }

@@ -6,7 +6,7 @@ MATCH void PlChar_AdvanceScript(void) {
     if (g_Task->param.unk_0B != 0) {
         if (g_Task->param.unk_0B == 1) {
             if (Actor_StepAnimOnce() & BYTE_MASK) {
-                Actor_SelectScript(g_Task->direction);
+                Script_Select(g_Task->direction);
                 g_Task->param.unk_0B = 2;
             }
         } else {

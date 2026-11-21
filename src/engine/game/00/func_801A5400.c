@@ -54,7 +54,7 @@ MATCH void func_801A5400(u8* script) {
         g_Task->tint.bytes.flags = data[0x3] & 0xF;
         bits_record              = g_Task;
         bits_record->mirror      = (bits_record->option_flags >> ACTOR_OPT_NO_SCRIPT_START) & 0x1;
-        Actor_SelectScript(g_Task->direction);
+        Script_Select(g_Task->direction);
         cell_record_a = g_Task;
         Area_SetCellCode(COORD_INT(cell_record_a->pos.x), COORD_INT(cell_record_a->pos.y), 0x10);
         cell_record_b = g_Task;

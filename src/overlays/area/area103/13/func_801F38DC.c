@@ -10,7 +10,7 @@ MATCH void func_801F38DC(void) {
     POLY_FT4* prim;
     u16       angle;
 
-    Area_SetCameraMatrix(camera);
+    Camera_SetMatrix(camera);
     angle = (u16)g_Task->gravity;
     org   = *(VECTOR*)&g_Task->vx;
     pt[0] = org.vx + (rcos(angle) << 5);
@@ -19,12 +19,12 @@ MATCH void func_801F38DC(void) {
     if (pt[2] < g_Task->vz) {
         pt[2] = g_Task->vz;
     }
-    Area_ProjectPoint(pt, &a);
+    Camera_ProjectPoint(pt, &a);
     pt[2] = org.vz;
     if (g_Task->unk_1C < pt[2]) {
         pt[2] = g_Task->unk_1C;
     }
-    Area_ProjectPoint(pt, &b);
+    Camera_ProjectPoint(pt, &b);
     while (org.vz < g_Task->unk_1C + TO_COORD(256)) {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
@@ -41,12 +41,12 @@ MATCH void func_801F38DC(void) {
         if (pt[2] < g_Task->vz) {
             pt[2] = g_Task->vz;
         }
-        Area_ProjectPoint(pt, &a);
+        Camera_ProjectPoint(pt, &a);
         pt[2] = org.vz;
         if (g_Task->unk_1C < pt[2]) {
             pt[2] = g_Task->unk_1C;
         }
-        Area_ProjectPoint(pt, &b);
+        Camera_ProjectPoint(pt, &b);
         prim->x2 = a.vx;
         prim->y2 = a.vy;
         prim->x3 = b.vx;

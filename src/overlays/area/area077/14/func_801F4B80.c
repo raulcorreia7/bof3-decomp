@@ -26,14 +26,14 @@ NON_MATCHING void func_801F4B80(void) {
     second.vy = second.vy - 0x8000 + (noise << 8);
 
     PushMatrix();
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     line = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(line);
     SetSemiTrans(line, 0);
-    Area_ProjectPoint(&first.vx, &screen);
+    Camera_ProjectPoint(&first.vx, &screen);
     line->x0 = screen.vx;
     line->y0 = screen.vy;
-    Area_ProjectPoint(&second.vx, &screen);
+    Camera_ProjectPoint(&second.vx, &screen);
     line->x1 = screen.vx;
     line->y1 = screen.vy;
     setRGB0(line, 0xC0, 0xC0, 0xC0);
