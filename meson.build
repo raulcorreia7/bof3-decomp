@@ -13,7 +13,6 @@ project('rebof3', version: '0.1.0', meson_version: '>=1.3.0')
 # Without the extracted disc or the compiler toolchain, setup still works and offers
 # only the targets that need neither.
 
-# --- Options and tools: what setup found, and the programs the build runs.
 
 fs = import('fs')
 root = meson.project_source_root()
@@ -66,7 +65,6 @@ if not have_game
   message('Disc-free build: no game images. Missing: ' + ', '.join(reasons) + '. To enable the game build, follow README.md, then run: meson setup --reconfigure build/meson')
 endif
 
-# --- Graph: the split targets, their link scripts and their object rows.
 
 # One unit per image: its retail identity, its symbol maps and its rows in link order. A
 # draft row is a source with a NON_MATCHING function, compiled again for the report.
@@ -129,7 +127,6 @@ if have_game
   endforeach
 endif
 
-# --- Compile: the flags, the header probes and one compile per source.
 
 unit_objs = []
 all_objs = []
@@ -273,7 +270,6 @@ if have_compiler
   endforeach
 endif
 
-# --- Link: one symbol pass for every image, then each image and its binary.
 
 image_bins = []
 checksums = []
@@ -347,7 +343,6 @@ if have_game
   endforeach
 endif
 
-# --- Checks: what a push needs, and every image again its retail SHA-1.
 
 # The rows of tools/gate.txt that name a Meson target run as that target, with no base ref.
 foreach row : fs.read(tools / 'gate.txt').split('\n')
@@ -390,7 +385,6 @@ if have_game
     depends: image_bins)
 endif
 
-# --- Reports: the text the tools read back, and the progress and Rizin files.
 
 if have_game
   check_sums = configuration_data()
