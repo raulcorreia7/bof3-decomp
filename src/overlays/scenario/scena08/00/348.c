@@ -388,10 +388,10 @@ MATCH s32 func_801F7E14(void) {
             pos = billboard->pos;
             pos.vz <<= 8;
             func_801F77B4(billboard);
-            billboard->pos.vx += FIELD(s32, billboard, 0x14);
-            billboard->pos.vy += FIELD(s32, billboard, 0x18);
-            billboard->pos.vz += FIELD(s32, billboard, 0x1C);
-            FIELD(s32, billboard, 0x1C) += 0x200;
+            billboard->pos.vx += ((VECTOR*)billboard->unk_14)->vx;
+            billboard->pos.vy += ((VECTOR*)billboard->unk_14)->vy;
+            billboard->pos.vz += ((VECTOR*)billboard->unk_14)->vz;
+            ((VECTOR*)billboard->unk_14)->vz += 0x200;
             billboard->size += 0x200;
             billboard->unk_00[1]--;
         }
