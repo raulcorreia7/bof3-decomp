@@ -30,7 +30,7 @@ MATCH void func_801D8DC8(void) {
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = panel->pos.x + START_LIST_CURSOR_X;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y  = panel->pos.y + ((panel->unk_0B - panel->unk_0A) * START_LIST_ROW_HEIGHT + START_LIST_FIRST_ROW_Y);
-    buttons                                          = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown | PADL1 | PADR1));
+    buttons                                          = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown | PADL1 | PADR1));
     old                                              = panel->unk_0B;
     if (buttons & PADLup) {
         if (old != 0) {
@@ -74,7 +74,7 @@ MATCH void func_801D8DC8(void) {
     if (old != panel->unk_0B) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_80148597                                       = 1;
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 0;

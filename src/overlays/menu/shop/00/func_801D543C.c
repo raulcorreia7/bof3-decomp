@@ -86,8 +86,8 @@ MATCH void func_801D543C(void) {
         MENU_DRAW_HEADER();
         UI_DrawText(28, 22, 0, TEXT_LENGTH_MAX, Message_GetText(resource + 0x85));
     }
-    if ((g_InputPressed != 0) || (((g_SaveCardStatus == SAVE_WRITE_STATUS_CREATED) || (g_SaveCardStatus == SAVE_WRITE_STATUS_SAVED)) &&
-                                  (timer_p = &D_80148654, next = *timer_p - 1, *timer_p = next, ((next & BYTE_MASK) == 0)))) {
+    if ((g_PadStates[0].pressed != 0) || (((g_SaveCardStatus == SAVE_WRITE_STATUS_CREATED) || (g_SaveCardStatus == SAVE_WRITE_STATUS_SAVED)) &&
+                                          (timer_p = &D_80148654, next = *timer_p - 1, *timer_p = next, ((next & BYTE_MASK) == 0)))) {
         D_80148654 = 0;
         if ((g_SaveCardStatus != SAVE_WRITE_STATUS_SAVED) && (g_SaveCardStatus != SAVE_WRITE_STATUS_CREATED)) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));

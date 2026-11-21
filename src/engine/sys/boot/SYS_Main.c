@@ -30,7 +30,7 @@ MATCH void SYS_Main(void) {
         ClearOTagR((u_long*)(work + 0x70), 8);
         SYS_PrepareFrame();
 
-        if ((g_InputHeld & (PADselect | PADstart)) == (PADselect | PADstart)) {
+        if ((g_PadStates[0].held & (PADselect | PADstart)) == (PADselect | PADstart)) {
             if (g_SysResetHoldFrames == 60) {
                 if (EMI_IsReady() != 0) {
                     g_SysResetHoldFrames = 0;

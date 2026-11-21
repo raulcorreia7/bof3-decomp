@@ -2075,7 +2075,7 @@ MATCH void func_801FB924(void) {
             u16 buttons;
 
             counter = &g_ScenarioState.timer_06;
-            buttons = g_InputPressed;
+            buttons = g_PadStates[0].pressed;
             (*counter)--;
             if ((buttons & INPUT_DIRECTIONAL) != 0 || *counter == 0) {
                 g_ScriptVars[1]      = 0;
@@ -2097,7 +2097,7 @@ MATCH void func_801FB924(void) {
                 D_80147BEC[0] = 0;
                 D_80147BF0[0] = 0;
             }
-            counter = &g_InputPressed;
+            counter = &g_PadStates[0].pressed;
             if ((*counter & INPUT_DIRECTIONAL) != 0) {
                 g_ScriptVarsReq.byte = 0;
                 g_ScriptVars[1]++;
@@ -2188,7 +2188,7 @@ MATCH void func_801FB924(void) {
 MATCH void func_801FBE88(void) {
     u16* pad;
 
-    pad           = &g_InputPressed;
+    pad           = &g_PadStates[0].pressed;
     D_1F800010    = (s16*)(((AreaLoad*)g_AreaLoads[g_GameAreaId])->unk_0C + 0x12);
     D_1F800010[0] = 0;
     if ((*pad & PADLright) != 0u) {

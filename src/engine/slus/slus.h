@@ -407,8 +407,6 @@ extern u32*                  D_801459D0[];
 extern void*                 D_801459F8;
 extern u32                   D_801459FC;
 extern u16                   D_80145A54[];
-extern u16                   D_80145AA6;
-extern u16                   D_80145AAE;
 /* Pad repeat decoder state words; shop also reads them (func_801D5D98). */
 /* Text cursor cells: the draw-text entry seeds them and the line printer
  * computes with them. */

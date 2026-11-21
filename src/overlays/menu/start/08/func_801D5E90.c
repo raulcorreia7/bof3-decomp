@@ -18,7 +18,7 @@ NON_MATCHING void func_801D5E90(void) {
     D_80148628                                                  = panel->pos.x + 7;
     D_8014862A                                                  = panel->pos.y + ((panel->unk_0B - panel->unk_0A) * 13 + 0x1A);
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(panel->unk_08, panel->flags);
-    buttons                                                     = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
+    buttons                                                     = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     func_801D6FBC();
     old = panel->unk_0B;
     if (buttons & PADLup) {
@@ -74,7 +74,7 @@ NON_MATCHING void func_801D5E90(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     if ((s16)panel->u.addr.unk_10 == 0) {
-        pad = g_InputPressed;
+        pad = g_PadStates[0].pressed;
         if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
             if (panel->flags != 0) {
                 SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));

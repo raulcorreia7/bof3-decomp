@@ -20,7 +20,7 @@ MATCH void func_801B87B8(void) {
             work->direction = (work->direction + 1);
             func_801B9598();
         }
-        switch (g_InputHeld & INPUT_DIRECTIONAL) {
+        switch (g_PadStates[0].held & INPUT_DIRECTIONAL) {
             case PADLup:
                 g_Task->param.unk_0B = 0;
                 break;

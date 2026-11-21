@@ -21,7 +21,7 @@ NON_MATCHING void func_801F2C6C(void) {
     if (g_GameEntryState == 3) {
         return;
     }
-    if ((g_InputPressed & g_InputMasks[FIELD_INPUT_MENU]) != 0) {
+    if ((g_PadStates[0].pressed & g_InputMasks[FIELD_INPUT_MENU]) != 0) {
         return;
     }
 

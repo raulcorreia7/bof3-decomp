@@ -87,8 +87,8 @@ MATCH void func_801EEF4C(void) {
 
     func_801F07B0(4);
     func_801F03F0(g_Task->param.unk_0B);
-    if (g_InputPressed & (PADRup | PADRdown | PADRleft | PADRright)) {
-        if (g_InputPressed != D_801F0A98[g_Task->param.unk_0B]) {
+    if (g_PadStates[0].pressed & (PADRup | PADRdown | PADRleft | PADRright)) {
+        if (g_PadStates[0].pressed != D_801F0A98[g_Task->param.unk_0B]) {
             g_Task->unk_09      = 6;
             g_Task->header.mode = 5;
         } else {

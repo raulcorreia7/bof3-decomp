@@ -9,7 +9,7 @@ MATCH void func_801D26A8(void) {
     Message_SetVariable(0, 0xC, block);
     D_80148340 = 0x4D;
     D_80148624 = 0;
-    if (g_InputPressed != 0) {
+    if (g_PadStates[0].pressed != 0) {
         i = 0;
         while (i < Party_CountOrder(PARTY_ORDER_FIELD)) {
             if (i == LOB(D_80148656)) {

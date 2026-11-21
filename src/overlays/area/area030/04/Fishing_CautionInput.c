@@ -5,7 +5,7 @@
 /* func_801DA498 */
 MATCH void Fishing_CautionInput(void) {
     Fishing_DrawCautionBox(68, 78);
-    if (g_InputPressed & (g_InputMasks[FISHING_INPUT_CAST] | g_InputMasks[FISHING_INPUT_CANCEL])) {
+    if (g_PadStates[0].pressed & (g_InputMasks[FISHING_INPUT_CAST] | g_InputMasks[FISHING_INPUT_CANCEL])) {
         FISHING_STATE->sub_index += 1;
     }
     Fishing_DrawDimScreen();

@@ -1,7 +1,7 @@
 #include "area135_14.h"
 
 MATCH void func_801F460C(void) {
-    if (COORD_INT(g_Task->pos.x) >= 6 && (g_InputHeld & PADRdown)) {
+    if (COORD_INT(g_Task->pos.x) >= 6 && (g_PadStates[0].held & PADRdown)) {
         g_Task->direction    = FACING_LEFT;
         g_ScriptState->steps = 2;
         Area_MoveActorRoute(g_ScriptState, g_Task->direction);

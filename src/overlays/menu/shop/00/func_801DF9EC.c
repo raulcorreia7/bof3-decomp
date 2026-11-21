@@ -19,7 +19,7 @@ NON_MATCHING void func_801DF9EC(void) {
         g_MenuPanelTasks[21].active = 0;
     }
 
-    pressed = &g_InputPressed;
+    pressed = &g_PadStates[0].pressed;
     input   = INPUT_GetRepeatedButtons(*pressed & 0xA000);
     if (input & 0xA000) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));

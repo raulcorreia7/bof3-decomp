@@ -78,7 +78,7 @@ extern u16 g_WellSwishButtons;
         g_WellLowerTimer    = 0;                        \
         g_WellLowerCount    = g_WellPressCount;         \
         g_Task->header.mode = WELL_MODE_LOWER_DONE;     \
-    } else if (g_InputPressed == PADRup) {              \
+    } else if (g_PadStates[0].pressed == PADRup) {      \
         g_WellIdleFrames = 0;                           \
         g_WellPressCount += 1;                          \
         g_Task->header.mode = (press_mode);             \

@@ -22,7 +22,7 @@ NON_MATCHING void Battle_ReadCommandMenu(void) {
     u8           var_v0_215;
 
     state = &g_Battle.row_cursor;
-    pad   = &g_InputPressed;
+    pad   = &g_PadStates[0].pressed;
     if (*state != 0) {
         --*state;
     }
@@ -59,7 +59,7 @@ NON_MATCHING void Battle_ReadCommandMenu(void) {
         g_Battle.phase.sub_step = g_Battle.panel_slot;
         return;
     }
-    if (g_InputHeld & PADselect) {
+    if (g_PadStates[0].held & PADselect) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
         *(u8*)(&D_8014837B) = 2;
         D_80148357          = 2;
@@ -71,7 +71,7 @@ NON_MATCHING void Battle_ReadCommandMenu(void) {
         return;
     }
     var_s0 = 5;
-    if (g_InputHeld & (INPUT_DIRECTIONAL | PADL1 | PADR1)) {
+    if (g_PadStates[0].held & (INPUT_DIRECTIONAL | PADL1 | PADR1)) {
         var_s5     = pad - 4;
         var_s6     = &D_8014837B;
         var_s6     = &D_8014837B;

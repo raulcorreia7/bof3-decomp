@@ -7,11 +7,11 @@ MATCH void func_801EF348(void) {
     u8 j;
 
     if ((g_Battle.outcome.result & 0x20) != 0) {
-        if (g_InputPressed == 0) {
+        if (g_PadStates[0].pressed == 0) {
             return;
         }
     }
-    if (g_InputHeld == 0) {
+    if (g_PadStates[0].held == 0) {
         return;
     }
     for (i = 0; i < g_Battle.party_count; i++) {

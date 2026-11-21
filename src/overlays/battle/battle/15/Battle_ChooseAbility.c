@@ -39,7 +39,7 @@ NON_MATCHING void Battle_ChooseAbility(void) {
     D_801485DC = 1u;
     D_801485E0 = g_MenuPanelTasks[16].pos.x + 7u;
     D_801485E2 = g_MenuPanelTasks[16].pos.y + ((g_MenuPanelTasks[16].unk_0C - sel->scroll_base) * 13 + 0x1A);
-    trigger    = INPUT_GetRepeatedButtons((s32)(g_InputPressed & (INPUT_DIRECTIONAL | PADL1 | PADR1)));
+    trigger    = INPUT_GetRepeatedButtons((s32)(g_PadStates[0].pressed & (INPUT_DIRECTIONAL | PADL1 | PADR1)));
     if ((g_BattleActorTurn->action_flags.value & (BATTLER_ACTION_DRAGON_FORM | BATTLER_ACTION_DRAGON_FORM_CONTROLLED)) != (u32)BATTLER_ACTION_DRAGON_FORM) {
         if ((trigger & PADLleft) != 0) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
@@ -114,7 +114,7 @@ NON_MATCHING void Battle_ChooseAbility(void) {
     if (g_MenuPanelTasks[16].u.addr.unk_12 != 0) {
         return;
     }
-    if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
+    if ((g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
         g_BattleChoicePhase                                = 1u;
         D_801485DC                                         = 0u;
         D_801EB5B1[ring_index * 8]                         = 1u;
@@ -125,7 +125,7 @@ NON_MATCHING void Battle_ChooseAbility(void) {
         *(volatile u8*)&g_Battle.ui_step += 1;
         return;
     }
-    if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
+    if ((g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
         BattleTurn* turn;
 
         if ((Battle_IsAbilityLocked() & BYTE_MASK) != 0) {

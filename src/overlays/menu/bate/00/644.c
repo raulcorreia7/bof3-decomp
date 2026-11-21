@@ -28,7 +28,7 @@ MATCH void func_801D1244(void) {
     g_MenuPanelTasks[4].pos.y        = g_MenuPanelTasks[0].pos.y + (row_offset * 13 + 26);
     g_MenuPanelTasks[2].u.message.id = Item_GetDescription(category, g_MenuPanelTasks[0].flags);
     g_MenuPanelTasks[3].u.message.id = 221;
-    buttons                          = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
+    buttons                          = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     func_801D1FA0();
     old_cursor = g_MenuPanelTasks[0].unk_0B;
     if (buttons & PADLup) {
@@ -74,7 +74,7 @@ MATCH void func_801D1244(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     if ((s16)g_MenuPanelTasks[0].u.addr.unk_10 == 0) {
-        pad = g_InputPressed;
+        pad = g_PadStates[0].pressed;
         if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
             if (g_MenuPanelTasks[0].flags != 0) {
                 SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
@@ -322,12 +322,12 @@ NON_MATCHING void func_801D2190(void) {
         tally[*selected] += D_801D8778[*selected];
         value   = tally[*selected];
         maximum = D_801D8EE8[*selected];
-        if ((u32)value < (u32)maximum && LOBU(g_InputPressed) == 0) {
+        if ((u32)value < (u32)maximum && LOBU(g_PadStates[0].pressed) == 0) {
             return;
         }
         tally[*selected] = maximum;
         *selected        = LOBU(*selected) + 1;
-    } else if (LOBU(g_InputPressed) != 0) {
+    } else if (LOBU(g_PadStates[0].pressed) != 0) {
         UI_SetMode(UI_MODE_FAST_FADE_OUT);
         D_80148651++;
     }

@@ -12,7 +12,7 @@ MATCH void func_801D3884(void) {
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 0x2A;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + 7;
-    trigger                                                     = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
+    trigger                                                     = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C             = 0xFF;
     if (trigger & PADLleft) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
@@ -37,7 +37,7 @@ MATCH void func_801D3884(void) {
         /* Shared tail of both step directions. */
         g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B = s_ChoiceMenuValues[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A];
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
         g_MenuPanelTasks[14].panel  = 6;
         g_MenuPanelTasks[14].mode   = 0xF;
@@ -53,7 +53,7 @@ MATCH void func_801D3884(void) {
         *state += 1;
         return;
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         counter = &g_MenuStep.sub_step;
         *counter -= 3;

@@ -17,7 +17,7 @@ MATCH void func_801D4564(void) {
     span                                                        = (D_80148510 - g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 0xD + 0x1A;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + span;
     panel                                                       = &D_80148504;
-    pressed                                                     = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown | PADL1 | PADR1));
+    pressed                                                     = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLup | PADLdown | PADL1 | PADR1));
     cursor                                                      = D_80148510;
     if (pressed & PADLup) {
         if (cursor != 0) {
@@ -63,7 +63,7 @@ MATCH void func_801D4564(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     if (panel->confirm_timer == 0) {
-        if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+        if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
             state_counter       = &D_80148651;
             panel->group        = 0;

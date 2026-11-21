@@ -2,7 +2,7 @@
 
 MATCH void func_800A493C(void) {
     u8*  state     = &g_Battle.row_cursor;
-    u16* pad_state = &g_InputPressed;
+    u16* pad_state = &g_PadStates[0].pressed;
     s32  trigger;
     u16  held;
 

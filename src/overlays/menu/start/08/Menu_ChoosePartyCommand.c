@@ -16,7 +16,7 @@ MATCH void Menu_ChoosePartyCommand(void) {
     } else {
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
     }
-    pad                         = &g_InputPressed;
+    pad                         = &g_PadStates[0].pressed;
     g_MenuPanelTasks[18].unk_0B = 0xFF;
     if (INPUT_REPEATED(*pad, (PADLright | PADLleft)) & (PADLright | PADLleft)) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));

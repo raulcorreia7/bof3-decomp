@@ -28,7 +28,7 @@ MATCH void func_801F3254(void) {
             break;
         case 2:
             if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-                input                        = &g_InputHeld;
+                input                        = &g_PadStates[0].held;
                 held                         = *input;
                 g_ScratchPad.cells.halves[0] = held;
                 *input                       = held & 0xFFF;

@@ -7,7 +7,7 @@ MATCH void Battle_HoldMessagePanel(void) {
     s8  next;
 
     Battle_DrawMessagePanel();
-    if (((D_801EB5B0[D_801EBF04 * 8] & 0x1) != 0) && (g_InputPressed != 0) && ((Battle_AdvanceMessage() & BYTE_MASK) != 0)) {
+    if (((D_801EB5B0[D_801EBF04 * 8] & 0x1) != 0) && (g_PadStates[0].pressed != 0) && ((Battle_AdvanceMessage() & BYTE_MASK) != 0)) {
         g_MenuCurrentPanel->state = 3;
     }
     offset = D_801EBF04 * 8;

@@ -12,7 +12,7 @@
     x    = g_Task->pos.x.fixed + g_FacingSteps[g_Task->direction].x * 2;       \
     y    = g_Task->pos.y.fixed + g_FacingStepY[g_Task->direction * 2] * 2;     \
     slot = Actor_FindInRange(x, y, 1);                                         \
-    if (g_InputHeld & g_InputMasks[FIELD_INPUT_RUN]) {                         \
+    if (g_PadStates[0].held & g_InputMasks[FIELD_INPUT_RUN]) {                 \
         if (g_Task->direction == (g_Actors[(u8)slot].direction & 0x7)) {       \
             g_Actors[(u8)slot].interaction_flags |= ACTOR_INTERACTION_PENDING; \
             return;                                                            \

@@ -13,7 +13,7 @@ NON_MATCHING void func_801D40D8(void) {
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x1A;
     label                                                       = &D_8014865B;
     *flag                                                       = 1;
-    pad                                                         = &g_InputPressed;
+    pad                                                         = &g_PadStates[0].pressed;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.x + ((1 - *label) << 5) + 0xDE;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y + 5;
     records                                                     = D_801C893C;

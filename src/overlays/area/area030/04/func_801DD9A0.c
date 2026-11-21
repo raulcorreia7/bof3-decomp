@@ -16,7 +16,7 @@ MATCH void func_801DD9A0(void) {
     LINE_F2* line;
 
     if (g_AreaCameraMoving == 0) {
-        if (((PADRup & g_InputHeld) || (g_AreaScrollTargetY == TO_COORD(21))) && (D_80144125 == 0)) {
+        if (((PADRup & g_PadStates[0].held) || (g_AreaScrollTargetY == TO_COORD(21))) && (D_80144125 == 0)) {
             g_AreaCameraStep         = 0x40;
             g_AreaScrollTargetY      = TO_COORD(60);
             FISHING_STATE->sub_index = 1;

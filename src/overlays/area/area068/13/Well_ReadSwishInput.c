@@ -5,9 +5,10 @@ MATCH void Well_ReadSwishInput(void) {
     Actor* work;
     u16*   input;
 
-    if (g_InputPressed == PADLup || g_InputPressed == PADLdown || g_InputPressed == PADLright || g_InputPressed == PADLleft || g_InputPressed == (PADLup | PADLright) ||
-        g_InputPressed == (PADLdown | PADLright) || g_InputPressed == (PADLup | PADLleft) || g_InputPressed == (PADLdown | PADLleft)) {
-        input              = &g_InputPressed;
+    if (g_PadStates[0].pressed == PADLup || g_PadStates[0].pressed == PADLdown || g_PadStates[0].pressed == PADLright || g_PadStates[0].pressed == PADLleft ||
+        g_PadStates[0].pressed == (PADLup | PADLright) || g_PadStates[0].pressed == (PADLdown | PADLright) || g_PadStates[0].pressed == (PADLup | PADLleft) ||
+        g_PadStates[0].pressed == (PADLdown | PADLleft)) {
+        input              = &g_PadStates[0].pressed;
         g_WellSwishButtons = *input;
         SND_PlaySE(WELL_CUE_SWISH);
         switch (*input) {

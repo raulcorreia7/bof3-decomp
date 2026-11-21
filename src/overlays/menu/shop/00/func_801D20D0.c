@@ -22,7 +22,7 @@ NON_MATCHING void func_801D20D0(void) {
     FAKE_ORDER_FENCE();
     D_80148606 = g_MenuPanelTasks[idx].pos.y;
     count      = Party_CountOrder(PARTY_ORDER_FIELD);
-    buttons    = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
+    buttons    = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     old        = *cursor;
     if (buttons & PADLup) {
         if ((s8)(*cursor = old - 1) < 0) {
@@ -37,7 +37,7 @@ NON_MATCHING void func_801D20D0(void) {
     if ((s8)old != (s8)*cursor) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if ((Item_GetEquipability(g_ShopItemCategory, g_ShopItemId) >> g_CharSlot[g_PartyFieldOrder[(s8)*cursor]]) & 1) {
             for (i = 0; i < (u8)Party_CountOrder(PARTY_ORDER_FIELD); i++) {
                 if (i == (s8)D_80148656) {
@@ -61,7 +61,7 @@ NON_MATCHING void func_801D20D0(void) {
         } else {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
         }
-    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_80148600 = 0;
         D_80148652 -= 4;

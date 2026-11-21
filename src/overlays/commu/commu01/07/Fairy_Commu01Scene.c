@@ -24,7 +24,7 @@ MATCH void func_801D0CAC(void) {
     u8* counter;
     u8  mode;
 
-    pad = g_InputPressed;
+    pad = g_PadStates[0].pressed;
     if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
         counter    = (u8*)&g_SceneEventState.step;
         D_801D4E0C = 0xFFFF;
@@ -89,7 +89,7 @@ MATCH void func_801D0EBC(void) {
     s8   col;
     s8   line;
 
-    pad_word = &g_InputPressed;
+    pad_word = &g_PadStates[0].pressed;
     pad      = *pad_word;
     if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
@@ -148,7 +148,7 @@ MATCH void func_801D1158(void) {
     s8  line;
     s32 line_inset;
 
-    pad       = g_InputPressed;
+    pad       = g_PadStates[0].pressed;
     committed = 0;
     if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
@@ -198,11 +198,11 @@ MATCH void func_801D1364(void) {
     s32 room;
     u16 buttons;
 
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_801D4E0C = 181;
         D_801F294C--;
-    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
         row = D_801D4E24;
         if (row != 0) {
@@ -223,7 +223,7 @@ MATCH void func_801D1364(void) {
             D_801F294D = 2;
         }
     } else {
-        buttons = INPUT_REPEATED(g_InputPressed, (PADLright | PADLleft));
+        buttons = INPUT_REPEATED(g_PadStates[0].pressed, (PADLright | PADLleft));
         old_row = D_801D4E24;
         count   = Fairy_GetJobActive(g_SceneEventState.selection);
         if (buttons & PADLleft) {
@@ -262,10 +262,10 @@ MATCH void func_801D1630(void) {
     u8* selection;
 
     result = 0;
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         func_801D47C4();
         func_801D49C4();
-    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         result = func_801D482C(1);
         if (result & BYTE_MASK) {
             D_801D4E0C = 181;
@@ -298,7 +298,7 @@ MATCH void func_801D1778(void) {
     s16 x;
     s16 y;
 
-    pad = g_InputPressed;
+    pad = g_PadStates[0].pressed;
     if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         func_801D49C4();
@@ -365,7 +365,7 @@ MATCH void func_801D1A94(void) {
     s16 x;
     s16 y;
 
-    pad = g_InputPressed;
+    pad = g_PadStates[0].pressed;
     if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_801D4E1C = 0xFF;
@@ -428,7 +428,7 @@ MATCH void func_801D1E48(void) {
     s16 x;
     s16 y;
 
-    pad = g_InputPressed;
+    pad = g_PadStates[0].pressed;
     if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_801D4E0C = 0x45;
@@ -474,7 +474,7 @@ MATCH void func_801D2110(void) {
     s16 x;
     s16 y;
 
-    pad   = g_InputPressed;
+    pad   = g_PadStates[0].pressed;
     stale = 0;
     if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (D_801D4E18 != 0) {
@@ -846,7 +846,7 @@ MATCH u8 func_801D3AA0(u8 type, u8 index) {
 MATCH void func_801D3B0C(u8* row) {
     s32 direction;
 
-    direction = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown | PADLleft | PADLright));
+    direction = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown | PADLleft | PADLright));
     if (direction & PADLup) {
         switch (D_801D4DFC) {
             case 0:

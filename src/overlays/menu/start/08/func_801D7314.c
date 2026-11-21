@@ -14,7 +14,7 @@ MATCH void func_801D7314(void) {
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.x + (s8)D_801ED648 * 0x30;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.y + 4;
     g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B          = 0xFF;
-    buttons                                                     = INPUT_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
+    buttons                                                     = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLright | PADLleft));
     old                                                         = D_801ED648;
     if (buttons & PADLleft) {
         D_801ED648 = old - 1;
@@ -31,7 +31,7 @@ MATCH void func_801D7314(void) {
     if ((s8)old != (s8)D_801ED648) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B = D_801ED648;
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
         if (D_801ED648 == 1) {
@@ -56,7 +56,7 @@ MATCH void func_801D7314(void) {
 
             *last = *last + 1;
         }
-    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         u8* step = &D_80148651;
 
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));

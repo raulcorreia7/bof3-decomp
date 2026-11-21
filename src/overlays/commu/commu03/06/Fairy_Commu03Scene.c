@@ -58,7 +58,7 @@ MATCH void func_801D0E28(void) {
 
     index   = g_SceneEventSelection;
     count   = D_801457AB[(g_FairyJobs[index].type - 1) << 3];
-    pad     = &g_InputPressed;
+    pad     = &g_PadStates[0].pressed;
     buttons = INPUT_REPEATED(*pad, PADLleft | PADLright);
     if (buttons != 0) {
         if ((buttons & PADLright) != 0) {

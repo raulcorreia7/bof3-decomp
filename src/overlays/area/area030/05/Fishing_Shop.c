@@ -81,7 +81,7 @@ MATCH void Fishing_ShopChooseItem(void) {
     s32 r;
     u8  total;
 
-    r = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
+    r = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLup | PADLdown));
     if ((r & PADLup) != 0) {
         s_ListCursor -= 1;
         if ((s8)s_ListCursor < 0) {
@@ -95,7 +95,7 @@ MATCH void Fishing_ShopChooseItem(void) {
         }
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    if ((g_InputPressed & g_InputMasks[FISHING_INPUT_CAST]) != 0) {
+    if ((g_PadStates[0].pressed & g_InputMasks[FISHING_INPUT_CAST]) != 0) {
         if (Fishing_ShopTradeBlocked(s_ListCursor, 1) == 0) {
             total = Item_Count(D_801E2F7D[D_801E3134[g_GameEntryFacing][(s8)s_ListCursor] << 3], D_801E2F7C[D_801E3134[g_GameEntryFacing][(s8)s_ListCursor]].cost[0], 0) +
                     Item_Count(D_801E2F7D[D_801E3134[g_GameEntryFacing][(s8)s_ListCursor] << 3], D_801E2F7C[D_801E3134[g_GameEntryFacing][(s8)s_ListCursor]].cost[0], 1);
@@ -114,7 +114,7 @@ MATCH void Fishing_ShopChooseItem(void) {
         }
         goto tail; /* skips the cancel branch: the confirm path shares the tail */
     }
-    if ((g_InputPressed & g_InputMasks[FISHING_INPUT_CANCEL]) != 0) {
+    if ((g_PadStates[0].pressed & g_InputMasks[FISHING_INPUT_CANCEL]) != 0) {
         s_ShopDeclined = 1;
         s_ListCursor |= 0x80;
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
@@ -137,7 +137,7 @@ MATCH void Fishing_ShopChooseQuantity(void) {
     u8  s3;
 
     s0 = 0;
-    switch (INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL) & HALF_MASK) {
+    switch (INPUT_GetRepeatedButtons(g_PadStates[0].pressed & INPUT_DIRECTIONAL) & HALF_MASK) {
         case PADLright:
             s0 = 1;
             break;
@@ -178,11 +178,11 @@ MATCH void Fishing_ShopChooseQuantity(void) {
     if ((s8)s_ListItemId != (s8)s2) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    if (g_InputPressed & g_InputMasks[FISHING_INPUT_CAST]) {
+    if (g_PadStates[0].pressed & g_InputMasks[FISHING_INPUT_CAST]) {
         s_ShopDeclined = 0;
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
         s_Step = s_Step + 1;
-    } else if (g_InputPressed & g_InputMasks[FISHING_INPUT_CANCEL]) {
+    } else if (g_PadStates[0].pressed & g_InputMasks[FISHING_INPUT_CANCEL]) {
         s_ListItemId = 1;
         s_ListCursor &= 0xBF;
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
@@ -201,7 +201,7 @@ MATCH void Fishing_ShopConfirm(void) {
     u8*  src;
     u16* pad;
 
-    pad = &g_InputPressed;
+    pad = &g_PadStates[0].pressed;
     if (INPUT_REPEATED(*pad, (PADLright | PADLleft)) & (PADLright | PADLleft)) {
         s_ShopDeclined ^= 1;
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
@@ -244,7 +244,7 @@ MATCH void Fishing_ShopConfirm(void) {
 /* func_800F5AD8 */
 MATCH void Fishing_ShopTooGreedy(void) {
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
-    if ((g_InputPressed & (g_InputMasks[FISHING_INPUT_CAST] | g_InputMasks[FISHING_INPUT_CANCEL])) != 0) {
+    if ((g_PadStates[0].pressed & (g_InputMasks[FISHING_INPUT_CAST] | g_InputMasks[FISHING_INPUT_CANCEL])) != 0) {
         s_ListItemId = 1;
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         s_Step = 0;
@@ -266,7 +266,7 @@ MATCH void Fishing_ShopConfirmAll(void) {
 MATCH void Fishing_ShopConfirmAllInput(void) {
     u16* keys;
 
-    keys = &g_InputPressed;
+    keys = &g_PadStates[0].pressed;
     if ((INPUT_REPEATED(*keys, (PADLright | PADLleft)) & (PADLright | PADLleft)) != 0) {
         s_ShopDeclined ^= 1;
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));

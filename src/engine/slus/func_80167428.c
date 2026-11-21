@@ -25,7 +25,7 @@ NON_MATCHING void func_80167428(void) {
     PartyMember* player;
     Actor*       actor;
 
-    if (g_InputPressed & PADstart) {
+    if (g_PadStates[0].pressed & PADstart) {
         g_AreaCameraStep    = 0x20;
         player              = g_Game.current;
         tmp3                = player->pos.x.fixed;

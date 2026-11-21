@@ -34,7 +34,7 @@ extern u16 D_801492DC;
 extern SVECTOR  D_801492E0;
 /* The 16 x 16 block table the height query maps a cell to. */
 extern u8       D_801F6138[];
-/* The key-state word and its mask partner (gameui.h names it g_InputPressed). */
+/* The key-state word and its mask partner (gameui.h names it g_PadStates[0].pressed). */
 /* The state handler banks the step dispatchers index. */
 extern Callback D_801F6238[];
 extern s8       D_801F6284[];

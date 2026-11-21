@@ -36,7 +36,7 @@
     count   = *counter;                                            \
     count--;                                                       \
     *counter = count;                                              \
-    if (count == 0 || g_InputPressed != 0) {                       \
+    if (count == 0 || g_PadStates[0].pressed != 0) {               \
         *counter = (frame);                                        \
         *cursor_byte += 1;                                         \
         if (*cursor_byte == (palette_index & BYTE_MASK)) {         \

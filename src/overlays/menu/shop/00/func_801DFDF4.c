@@ -12,7 +12,7 @@ MATCH void func_801DFDF4(void) {
     FAKE_REG(u8, two, "v1");
 
     toggle     = &D_8014865B;
-    pad        = &g_InputPressed;
+    pad        = &g_PadStates[0].pressed;
     D_80148340 = 0x36;
     D_80148624 = 1;
     side       = 1 - *toggle;

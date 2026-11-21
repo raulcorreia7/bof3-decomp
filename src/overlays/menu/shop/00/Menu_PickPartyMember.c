@@ -16,7 +16,7 @@ MATCH void Menu_PickPartyMember(void) {
         Message_SetVariable(0, 5, g_Characters[MEM_PTR(u8, g_CharSlot)[D_801E6254]].name);
         UI_DrawText(26, 20, 0, TEXT_LENGTH_MAX, Message_GetText(MSG_AREA175_CONFIRM_ITEM));
     }
-    buttons    = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
+    buttons    = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
     count      = Party_CountOrder(PARTY_ORDER_FIELD);
     side       = (u8*)&D_80148658;
     prev_side  = *side;
@@ -62,7 +62,7 @@ MATCH void Menu_PickPartyMember(void) {
     if (prev_side != D_80148658 || prev_index != D_80148659) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         s8* cursor;
         u8  chosen_side;
         u8  chosen_index;
@@ -83,7 +83,7 @@ MATCH void Menu_PickPartyMember(void) {
         D_8014865D = 0x7F;
         return;
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         s8* cursor;
 
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));

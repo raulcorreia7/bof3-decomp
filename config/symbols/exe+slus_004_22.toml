@@ -116,8 +116,7 @@ g_GfxPalettePending = { addr = 0x80145988, source = "Palette upload pending flag
 g_GfxPrimCursor = { addr = 0x8014598C, size = 0x4, source = "Label primitive context." }
 g_Scripts = { addr = 0x801459F0, type = "u32", source = "Pointer to the active script table: Actor_BeginScript hands a record of it to Actor_SeekScript." }
 g_GfxTransferCount = { addr = 0x80145A00, source = "Count of queued VRAM transfers: Actor_SelectSprite appends and GFX_UpdateTransferQueue drains it." }
-g_InputHeld = { addr = 0x80145AA4, source = "Buttons held this frame." }
-g_InputPressed = { addr = 0x80145AA8, source = "Buttons pressed this frame." }
+g_PadStates = { addr = 0x80145AA4, type = "PadState", size = 0x10, source = "The two pads' state records that SYS_UpdateKeyState publishes from PadRead(0): held now, held last frame and newly pressed buttons." }
 g_InputMasks = { addr = 0x80145AB4, type = "u16", source = "Button masks of the controller." }
 g_InputRepeatDelay = { addr = 0x80145AC6, source = "INPUT_GetRepeatedButtons reloads and decrements the repeat countdown" }
 g_InputRepeatButtons = { addr = 0x80145AC8, source = "INPUT_GetRepeatedButtons snapshots held buttons and tests them on repeat" }

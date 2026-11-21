@@ -16,7 +16,7 @@ NON_MATCHING void func_801E0BAC(void) {
     D_80148628 = (s16)D_801483C4;
     D_80148340 = *(s16*)&g_Abilities[D_8014546C[D_801483CB]].description;
     D_8014862A = D_801483C6 + (((D_801483CB - D_801483CA) * 0xD) + 0x1A);
-    pad        = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown | PADL1 | PADR1));
+    pad        = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown | PADL1 | PADR1));
     old        = D_801483CB;
     if (pad & PADLup) {
         if (old != 0) {
@@ -66,7 +66,7 @@ NON_MATCHING void func_801E0BAC(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     if (D_801483CD == 0) {
-        if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
             if (cursor_ptr[1] == GAME_NONE) {
                 if (D_8014546C[cursor_ptr[0]] != 0) {
                     SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
@@ -84,7 +84,7 @@ NON_MATCHING void func_801E0BAC(void) {
             cursor_ptr[1]             = 0xFFU;
             return;
         }
-        if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+        if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
             if (cursor_ptr[1] == GAME_NONE) {
                 D_801483EF = 0xFF;

@@ -64,7 +64,7 @@ MATCH void func_801EEE84(void) {
     } else {
         func_801EF2DC();
     }
-    if (g_InputPressed != 0) {
+    if (g_PadStates[0].pressed != 0) {
         g_Task->param.unk_0B = 0x83;
         g_Task->header.mode++;
     }

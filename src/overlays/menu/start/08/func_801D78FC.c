@@ -33,7 +33,7 @@ MATCH void func_801D78FC(void) {
     } else {
         D_80148624 = 0;
     }
-    buttons = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
+    buttons = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
     if (D_801ED648 != 2) {
         if (buttons & PADLleft) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
@@ -63,7 +63,7 @@ MATCH void func_801D78FC(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     s_SkillOrderCursors[g_PartyCursor][D_8014857B] = D_8014857C;
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         ability_id = Party_GetAbilities(panel->unk_0A, panel->unk_0B, 0)[panel->unk_0C];
         if (ability_id == 0) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
@@ -112,7 +112,7 @@ MATCH void func_801D78FC(void) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
             return;
         }
-    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_8014857C = 0xFF;
         D_8014857D = 0xFF;

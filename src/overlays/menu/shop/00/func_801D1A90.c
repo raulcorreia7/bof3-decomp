@@ -23,7 +23,7 @@ NON_MATCHING void func_801D1A90(void) {
     D_80148628    = panel[-1].pos.x + 4;
     D_8014862A    = panel[-1].pos.y + 0x33;
     D_80148340    = g_ShopItemCount != 0 ? 0x48 : 0x4E;
-    buttons       = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
+    buttons       = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
     cursor        = g_ShopItemCount;
     if (buttons & PADLleft) {
         g_ShopItemCount = cursor - 1;
@@ -53,7 +53,7 @@ NON_MATCHING void func_801D1A90(void) {
     if (cursor != g_ShopItemCount) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (g_ShopItemCount != 0) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
             D_8014865B = 1;
@@ -61,7 +61,7 @@ NON_MATCHING void func_801D1A90(void) {
         } else {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
         }
-    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         (*(s8*)&g_MenuStep.state)--;
     }

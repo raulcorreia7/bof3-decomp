@@ -13,13 +13,13 @@ MATCH void func_801D3D84(void) {
         Menu_DrawZennyWindow(MENU_ZENNY_WINDOW_X, MENU_ZENNY_WINDOW_Y, 0, g_Zenny);
     }
     prev = D_801E60F0;
-    if (g_InputPressed & PADLup) {
+    if (g_PadStates[0].pressed & PADLup) {
         mode       = prev - 1;
         D_801E60F0 = mode;
         if ((s8)mode < 0) {
             D_801E60F0 = 2;
         }
-    } else if (g_InputPressed & PADLdown) {
+    } else if (g_PadStates[0].pressed & PADLdown) {
         mode       = prev + 1;
         D_801E60F0 = mode;
         if (mode >= 3) {
@@ -29,7 +29,7 @@ MATCH void func_801D3D84(void) {
     if (prev != D_801E60F0) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         mode       = D_801E60F0;
         D_80148654 = 0;
         D_801E60F4 = 0;
@@ -50,7 +50,7 @@ MATCH void func_801D3D84(void) {
         D_80148652 += 2;
         return;
     }
-    if ((g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) == 0) {
+    if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) == 0) {
         return;
     }
     SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));

@@ -15,7 +15,7 @@ NON_MATCHING void func_801E4744(void) {
     s32 input;
 
     func_801E7000();
-    input    = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADL2 | PADR1 | PADR2));
+    input    = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADL2 | PADR1 | PADR2));
     row_base = D_801ECDBC + (s8)D_801ED7E4 * 0xC;
     cell     = D_801ED7E8 * 0x60 + row_base + (s8)D_801ED7E0;
     if (input & PADLup) {
@@ -69,7 +69,7 @@ NON_MATCHING void func_801E4744(void) {
             } while (*(page + (s8)D_801ED7E0) == 0);
         }
     }
-    if (g_InputPressed & PADRdown) {
+    if (g_PadStates[0].pressed & PADRdown) {
         row_base = D_801ECDBC + (s8)D_801ED7E4 * 0xC;
         cell     = D_801ED7E8 * 0x60 + row_base + (s8)D_801ED7E0;
         switch (*cell) {
@@ -95,7 +95,7 @@ NON_MATCHING void func_801E4744(void) {
                 g_GameEntrySubstate = 1;
                 break;
             case NAME_ENTRY_START:
-                g_InputPressed |= PADstart;
+                g_PadStates[0].pressed |= PADstart;
                 break;
             default:
                 D_801ED105 = 0;
@@ -107,12 +107,12 @@ NON_MATCHING void func_801E4744(void) {
                 break;
         }
     }
-    if ((g_InputPressed & PADRright) || (input & (PADR1 | PADR2))) {
+    if ((g_PadStates[0].pressed & PADRright) || (input & (PADR1 | PADR2))) {
         if (D_801ED7DC < 4) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
             D_801ED7DC += 1;
         }
-    } else if (g_InputPressed & PADRleft) {
+    } else if (g_PadStates[0].pressed & PADRleft) {
         if (D_801ED7DC != 0) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
             D_801ED7DC -= 1;
@@ -128,7 +128,7 @@ NON_MATCHING void func_801E4744(void) {
             D_801ED7DC -= 1;
         }
     } else {
-        if (g_InputPressed & PADRup) {
+        if (g_PadStates[0].pressed & PADRup) {
             D_801ED105 = 0;
             cell_index = D_801ED7DC & BYTE_MASK;
             if (cell_index != 0 && (s_CampMenuState[cell_index] == 0xFF || s_CampMenuState[cell_index] == 0)) {
@@ -138,7 +138,7 @@ NON_MATCHING void func_801E4744(void) {
             s_CampMenuState[D_801ED7DC] = 0xFF;
             return;
         }
-        if (g_InputPressed & PADstart) {
+        if (g_PadStates[0].pressed & PADstart) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 5));
             count = 5;
             for (slot = 4; slot >= 0; slot--) {

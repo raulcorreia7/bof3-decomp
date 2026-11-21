@@ -14,7 +14,7 @@ MATCH void func_801E5738(void) {
     MENU_DRAW_HEADER();
     UI_DrawText(28, 21, 0, TEXT_LENGTH_MAX, Message_GetText(0xAC));
     SAVE_DrawSlots(SAVE_SLOTS_X, SAVE_SLOTS_Y, 1U);
-    pressed  = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
+    pressed  = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     prev_row = g_SaveSlotFirst;
     if (pressed & PADLup) {
         row             = prev_row - 1;
@@ -33,7 +33,7 @@ MATCH void func_801E5738(void) {
     if (prev_row != g_SaveSlotFirst) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (*(&g_SaveSlots[0].card_index + (g_SaveSlotFirst * SHOP_ROW_STRIDE)) != GAME_NONE) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
             D_8014865B = 1;
@@ -43,7 +43,7 @@ MATCH void func_801E5738(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
         return;
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         g_MenuStartStep = 0xC;
     }

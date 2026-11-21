@@ -39,7 +39,7 @@ NON_MATCHING void Menu_UpdatePartyChange(void) {
         id = 0x61;
     }
     D_801484CC = id;
-    input      = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
+    input      = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
     count      = Party_CountOrder(PARTY_ORDER_FIELD);
     old_side   = *(u8*)D_80148658;
     old_row    = *(u8*)&D_80148659;
@@ -73,7 +73,7 @@ NON_MATCHING void Menu_UpdatePartyChange(void) {
     if (old_side != *(u8*)D_80148658 || old_row != *(u8*)&D_80148659) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         s8* face = (s8*)&D_8014865A;
 
         if (*face == 0x7F) {
@@ -89,7 +89,7 @@ NON_MATCHING void Menu_UpdatePartyChange(void) {
         D_8014865D = 0x7F;
         return;
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         s8* face;
 
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));

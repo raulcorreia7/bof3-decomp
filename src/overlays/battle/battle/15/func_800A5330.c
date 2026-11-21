@@ -37,7 +37,7 @@ NON_MATCHING void func_800A5330(void) {
         func_801DE60C(0, 1, 1, 0, GAME_NONE, Message_GetText(BLANK_TEXT));
     }
 
-    if (g_InputPressed & g_InputMasks[BATTLE_INPUT_CANCEL]) {
+    if (g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CANCEL]) {
         if (g_Battle.gene_count != 0) {
             g_Battle.gene_count--;
             gene                                                           = g_Battle.genes[g_Battle.gene_count];
@@ -54,7 +54,7 @@ NON_MATCHING void func_800A5330(void) {
         return;
     }
 
-    if (g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
         if (g_Battle.cursor.gene.row != -1) {
             cell = &D_800B7070[g_Battle.cursor.gene.row][g_Battle.cursor.gene.column];
             if (*cell == 0) {
@@ -99,7 +99,7 @@ NON_MATCHING void func_800A5330(void) {
     }
     D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = Message_GetText(text_id);
 
-    buttons = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
+    buttons = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
     if ((buttons & PADLup) && g_Battle.cursor.gene.row >= 0) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         g_Battle.cursor.gene.row--;

@@ -9,7 +9,7 @@
 MATCH void Battle_DrawEntrances(void) {
     u8 panel_index;
 
-    if ((g_InputHeld & PADselect) == 0) {
+    if ((g_PadStates[0].held & PADselect) == 0) {
         /* FAKE: the address-held counter; `g_Battle.phase.sub_step += 1` scores 93.44%. */
         u8* count;
 

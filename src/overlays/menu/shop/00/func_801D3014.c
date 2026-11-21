@@ -12,7 +12,7 @@ MATCH void func_801D3014(void) {
     D_80148340 = 0x52;
     toggle     = &D_8014865B;
     D_80148624 = 1;
-    pad        = &g_InputPressed;
+    pad        = &g_PadStates[0].pressed;
     D_80148628 = D_80148334 + (1 - *toggle) * 32 + 0xDE;
     D_8014862A = D_80148336 + 5;
     if (*pad & (PADLright | PADLleft)) {

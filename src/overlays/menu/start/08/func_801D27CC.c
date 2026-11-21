@@ -11,7 +11,7 @@ MATCH void func_801D27CC(void) {
     Message_SetVariable(0, 5, g_CharSlot[g_PartyFieldOrder[D_80148656]] * 0xA4 + records);
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x12;
     if (D_80148654 == 0) {
-        if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+        if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
             func_801D2C7C();

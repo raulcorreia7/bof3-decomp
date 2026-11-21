@@ -7,7 +7,7 @@ MATCH void func_801D1D60(void) {
 
     Message_SetVariable(0, 12, Item_GetRecord(g_ShopItemCategory, g_ShopItemId));
     toggle     = &D_8014865B;
-    pad        = &g_InputPressed;
+    pad        = &g_PadStates[0].pressed;
     D_80148340 = 0x49;
     D_80148624 = 1;
     D_80148628 = D_80148334 + ((1 - *toggle) * 32) + 0xDE;

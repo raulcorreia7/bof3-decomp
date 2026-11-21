@@ -13,7 +13,7 @@ MATCH void func_801E09F4(void) {
     D_80148628 = D_801483E8 + 5;
     sum        = (D_801483EE << 4) + 0x1A;
     D_8014862A = D_801483EA + sum;
-    buttons    = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
+    buttons    = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     if (buttons & PADLup) {
         u8 next;
 
@@ -33,7 +33,7 @@ MATCH void func_801E09F4(void) {
             D_801483EE = 0;
         }
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
         raw = D_801483EE & BYTE_MASK;
         if (raw == 0) {
@@ -46,7 +46,7 @@ MATCH void func_801E09F4(void) {
         Menu_RunAbilityStockSort(raw);
         return;
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         flag2                = &g_MenuStep.sub_step;

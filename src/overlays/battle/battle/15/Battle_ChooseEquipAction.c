@@ -17,7 +17,7 @@ NON_MATCHING void Battle_ChooseEquipAction(void) {
     }
     panel  = (u8*)&D_8014862F;
     *panel = 0xFFu;
-    held   = g_InputPressed;
+    held   = g_PadStates[0].pressed;
     if ((held & (PADLright | PADLleft)) != 0u) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         D_8014862E ^= 1u;

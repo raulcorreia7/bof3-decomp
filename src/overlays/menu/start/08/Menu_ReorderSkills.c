@@ -27,7 +27,7 @@ MATCH void Menu_ReorderSkills(void) {
     pick                                                        = index + g_MenuPanelTasks[16].unk_0C;
     type                                                        = *pick;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = g_Abilities[type].description;
-    buttons                                                     = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown | PADL1 | PADR1));
+    buttons                                                     = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLup | PADLdown | PADL1 | PADR1));
     value                                                       = g_MenuPanelTasks[16].unk_0C;
     if (buttons & PADLup) {
         if (value != 0) {
@@ -44,7 +44,7 @@ MATCH void Menu_ReorderSkills(void) {
     if (value != rec->cursor) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (rec->swap_cursor == GAME_NONE) {
             if (*(Party_GetAbilities(rec->party_slot, rec->ability_group, 0) + rec->cursor)) {
                 SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
@@ -58,7 +58,7 @@ MATCH void Menu_ReorderSkills(void) {
             Menu_SwapBytes3(cursor, Party_GetAbilities(rec->party_slot, rec->ability_group, 0) + rec->cursor);
             rec->swap_cursor = 0xFF;
         }
-    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         if (rec->swap_cursor == GAME_NONE) {
             D_80148652 -= 1;

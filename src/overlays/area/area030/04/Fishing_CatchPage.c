@@ -17,7 +17,7 @@ MATCH void Fishing_CatchPage(void) {
     Fishing_DrawRank(FISHING_CATCH_RANK_X, FISHING_CATCH_RANK_Y);
     func_801E1C7C();
 
-    if (g_InputPressed & (PADRup | PADRdown)) {
+    if (g_PadStates[0].pressed & (PADRup | PADRdown)) {
         g_FishingNewRecord         = 0;
         FISHING_STATE->saved_index = 0;
         /* pond record +6 (fish id), read through the table base: the

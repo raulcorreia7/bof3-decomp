@@ -56,13 +56,13 @@ NON_MATCHING void func_801D0D4C(void) {
             break;
     }
     total = counts[0] + counts[1] + counts[2];
-    if (g_InputPressed & PADRright) {
+    if (g_PadStates[0].pressed & PADRright) {
         counts[4] += 1;
         if ((s8)counts[4] >= total) {
             counts[4] = 0;
         }
     }
-    if (g_InputPressed & PADLleft) {
+    if (g_PadStates[0].pressed & PADLleft) {
         counts[4] -= 1;
         if ((s8)counts[4] < 0) {
             counts[4] = total - 1;
@@ -70,7 +70,7 @@ NON_MATCHING void func_801D0D4C(void) {
     }
     TEXT_Format(g_UiFormatBuffer, D_801D0C04, (s8)counts[4] + 1, total);
     UI_DrawGlyphString(0xEE, 0x2C, 0, g_UiFormatBuffer);
-    if (g_InputPressed & (g_InputMasks[INPUT_SLOT_CONFIRM] | g_InputMasks[INPUT_SLOT_CANCEL])) {
+    if (g_PadStates[0].pressed & (g_InputMasks[INPUT_SLOT_CONFIRM] | g_InputMasks[INPUT_SLOT_CANCEL])) {
         D_801F294C += 1;
     }
 }

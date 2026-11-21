@@ -15,7 +15,7 @@ NON_MATCHING void func_801DA9DC(void) {
         FISHING_STATE->cue_index = 0;
         func_801DDE94(1);
     }
-    if ((g_InputPressed & PADRup) && (D_80144199 == 0)) {
+    if ((g_PadStates[0].pressed & PADRup) && (D_80144199 == 0)) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
         FISHING_STATE->sub_index       = (u8)(FISHING_STATE->sub_index + 1);
         D_801440B1                     = 0;
@@ -55,19 +55,19 @@ box_16:
     D_801E31FC = D_801E31F8;
     if (g_SpawnedActors[0].link == 0) {
         limit = 6;
-        if (g_InputHeld & PADLleft) {
+        if (g_PadStates[0].held & PADLleft) {
             g_SpawnedActors[0].scene_step = -ONE;
             g_SpawnedActors[0].selection  = ONE;
             g_SpawnedActors[0].unk_14     = g_FishingLureRow->unk_08;
             D_801E31F8                    = 1;
         } else {
             limit = 5;
-            if (g_InputHeld & PADLright) {
+            if (g_PadStates[0].held & PADLright) {
                 g_SpawnedActors[0].scene_step = ONE;
                 g_SpawnedActors[0].selection  = ONE;
                 D_801E31F8                    = 1;
                 g_SpawnedActors[0].unk_14     = g_FishingLureRow->unk_08;
-            } else if (g_InputHeld & PADRdown) {
+            } else if (g_PadStates[0].held & PADRdown) {
                 g_SpawnedActors[0].scene_step = 0;
                 if (SP_REF(u8, 0x0) != 0) {
                     limit                        = 4;

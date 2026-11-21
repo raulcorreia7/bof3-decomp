@@ -712,7 +712,7 @@ typedef struct GameState {
     /* 0x3C6 */ u8           unk_3C6[2];
     /* 0x3C8 */ u16          flags;
     /* 0x3CA */ u16          walk_flags;
-    /* 0x3CC */ u16          input; /* field pad state: g_InputHeld, directions swapped while the lead is confused */
+    /* 0x3CC */ u16          input; /* field pad state: g_PadStates[0].held, directions swapped while the lead is confused */
     /* 0x3CE */ u8           unk_3CE[0x19];
     /* 0x3E7 */ u8           unk_3E7; /* bit 0: the base point stands inside a flagged rectangle */
     /* 0x3E8 */ u8           unk_3E8[0x28];
