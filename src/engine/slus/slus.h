@@ -324,19 +324,6 @@ typedef struct {
 
 ASSERT_SIZE(WindowTextRow, 0x06);
 
-/* A tile rectangle of a map and what the field code reads once the party stands in it.
- * func_801A0490 and func_801B3C3C compare the four corners as unsigned bytes against (x, y);
- * `rate` indexes the D_801CD1B8 pair table (Area_RollEncounterThreshold), `kind` is returned by func_801A0348, and
- * func_801A0380 uses `seed` directly when `pick` is 0, else `seed` indexes the D_80181E40 picker. */
-typedef struct {
-    Cell2 min;
-    Cell2 max;
-    u8    rate;
-    u8    kind;
-    u8    seed;
-    u8    pick;
-} EncounterZone;
-
 ASSERT_OFFSET(EncounterZone, min, 0x00);
 ASSERT_OFFSET(EncounterZone, max, 0x02);
 

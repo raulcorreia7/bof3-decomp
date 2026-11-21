@@ -6,8 +6,8 @@
 
 #include "overlays/area/worlds/world00.h"
 
-extern u8  D_80146871;
-extern u8* g_EncounterZones[];
+extern u8             D_80146871;
+extern EncounterZone* g_EncounterZones[]; /* the exe declares the lists const; these writers patch a rate */
 /* Step tables the step bytes select. */
 extern void (*D_801F40F0[])(void);
 

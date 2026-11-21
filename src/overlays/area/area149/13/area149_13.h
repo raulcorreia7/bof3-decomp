@@ -15,7 +15,7 @@ extern u8       D_80146158;
 /* The integer half of the focus x, stepped by the scene trigger. */
 extern u16      D_80147A8E;
 /* The mirror the scroll step reads. */
-extern s16      g_ScrollHeight;
+extern s16      g_ScrollHeight; /* the exe declares it as an array; the scalar keeps these bytes */
 /* The scenario flag bytes the trigger tests. */
 extern u8       D_80144EF8[];
 /* The camera focus halfword the scroll step samples and the trigger clears. */

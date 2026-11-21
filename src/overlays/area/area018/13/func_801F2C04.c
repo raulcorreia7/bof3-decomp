@@ -2,8 +2,8 @@
 
 MATCH s32 func_801F2C04(void) {
     if (g_ScenarioState.scenario_id == 8) {
-        g_EncounterZones[g_GameAreaId][4] = 0;
+        g_EncounterZones[g_GameAreaId][0].rate = 0;
     } else {
-        g_EncounterZones[g_GameAreaId][4] = 2;
+        g_EncounterZones[g_GameAreaId][0].rate = 2;
     }
 }

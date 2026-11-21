@@ -7,6 +7,6 @@
 #include "overlays/area/worlds/world00.h"
 
 /* D_80181164 */
-extern u8* g_EncounterZones[];
+extern EncounterZone* g_EncounterZones[]; /* the exe declares the lists const; these writers patch a rate */
 
 #endif

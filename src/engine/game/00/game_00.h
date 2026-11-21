@@ -311,7 +311,7 @@ extern s8                   D_80143F4E; /* 0x80143F4E */
 extern u8                   D_80143F51;
 extern s32                  D_80143F5C;
 extern s32                  D_80143F84;
-extern s16                  g_ScrollHeight;
+extern s16                  g_ScrollHeight; /* the exe declares it as an array; the scalar keeps these bytes */
 extern u8                   D_80143FBC;
 extern u8                   D_80143FBD;
 extern u8                   D_80143FBF;
@@ -387,15 +387,15 @@ extern s32                  D_80147CBC[];
 extern s32                  D_80147CC0[];
 extern s32                  D_80147CC4[];
 extern u16                  D_801481D8;
-extern Pos3                 D_801481E8;   /* scene angle, 16.16 fixed point */
-extern Pos3                 D_801481F8;   /* per-frame step of D_801481E8 */
-extern s16                  D_8014820C;   /* 0x8014820C */
-extern s8                   D_80148654;   /* 0x80148654 */
-extern s8                   D_80148656;   /* 0x80148656 */
-extern s8                   D_801490E0;   /* 0x801490E0 */
-extern u8                   D_801581E0[]; /* 0x801581E0 */
-extern u8*                  g_EncounterZones[];
-extern Offset2              g_FacingOffsets[]; /* 0x80181AC0 */
+extern Pos3                 D_801481E8;         /* scene angle, 16.16 fixed point */
+extern Pos3                 D_801481F8;         /* per-frame step of D_801481E8 */
+extern s16                  D_8014820C;         /* 0x8014820C */
+extern s8                   D_80148654;         /* 0x80148654 */
+extern s8                   D_80148656;         /* 0x80148656 */
+extern s8                   D_801490E0;         /* 0x801490E0 */
+extern u8                   D_801581E0[];       /* 0x801581E0 */
+extern u8*                  g_EncounterZones[]; /* the exe declares it as const EncounterZone lists; these units walk the bytes */
+extern Offset2              g_FacingOffsets[];  /* 0x80181AC0 */
 extern s8                   D_80181B00[];
 extern s8                   D_80181B01[];
 extern u8                   D_80181B1C[];   /* 0x80181B1C */
