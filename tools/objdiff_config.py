@@ -341,6 +341,60 @@ def _base_object(project: Project, source: Path, relative: Path) -> Path:
     return project.build_dir / source_object(relative, draft=bool(draft))
 
 
+def _game_unit(
+    project: Project,
+    target_id: str,
+    source: Path,
+    asm: Path,
+    category: str,
+    readable: dict[str, int],
+) -> dict[str, Any]:
+    """Return the unit of one C source and assemble its target object."""
+    relative = source.relative_to(project.root / SRC)
+    base = _base_object(project, source, relative)
+    if not base.is_file():
+        raise SystemExit(
+            f"missing {base}; build the images first, and if {source} gained "
+            "its NON_MATCHING marker since the last configure, run `meson setup "
+            "--reconfigure` so Meson builds its draft object"
+        )
+    broken = base.stat().st_size == 0
+    unlifted = False
+    if not broken and category != HAND_CATEGORY:
+        base, unlifted = project.report_base(base)
+    target_object = project.build_dir / "objdiff/target" / relative.with_suffix(".o")
+    project.assemble(asm, target_object, readable)
+    complete = (
+        project.hand_complete(source)
+        if category == HAND_CATEGORY
+        else project.marked(source) and not project.drafted(source)
+    )
+    metadata = {
+        "complete": complete and not broken and not unlifted,
+        "source_path": str(relative),
+        "progress_categories": [category],
+    }
+    return _unit(
+        project,
+        f"{target_id}/{source.stem}",
+        target_object,
+        None if broken or category == HAND_CATEGORY else base,
+        metadata,
+    )
+
+
+def _claimed_functions(sources: list[Path]) -> set[str]:
+    """The ``func_<ADDRESS>`` names the C sources mention."""
+    return {
+        f"func_{match}"
+        for source in sources
+        for match in re.findall(
+            r"\bfunc_([0-9A-Fa-f]{8})\b",
+            source.read_text(encoding="utf-8", errors="replace"),
+        )
+    }
+
+
 def _game_units(
     project: Project,
     target: dict[str, Any],
@@ -369,54 +423,12 @@ def _game_units(
         if not asm:
             skipped += 1
             continue
-        relative = source.relative_to(project.root / SRC)
-        base = _base_object(project, source, relative)
-        if not base.is_file():
-            raise SystemExit(
-                f"missing {base}; build the images first, and if {source} gained "
-                "its NON_MATCHING marker since the last configure, run `meson setup "
-                "--reconfigure` so Meson builds its draft object"
-            )
-        broken = base.stat().st_size == 0
-        unlifted = False
-        if not broken and category != HAND_CATEGORY:
-            base, unlifted = project.report_base(base)
-        target_object = (
-            project.build_dir / "objdiff/target" / relative.with_suffix(".o")
-        )
-        project.assemble(asm, target_object, readable)
-        complete = (
-            project.hand_complete(source)
-            if category == HAND_CATEGORY
-            else project.marked(source) and not project.drafted(source)
-        )
-        metadata = {
-            "complete": complete and not broken and not unlifted,
-            "source_path": str(relative),
-            "progress_categories": [category],
-        }
-        units.append(
-            _unit(
-                project,
-                f"{target_id}/{source.stem}",
-                target_object,
-                None if broken or category == HAND_CATEGORY else base,
-                metadata,
-            )
-        )
-    claimed = {
-        f"func_{match}"
-        for source in sources
-        for match in re.findall(
-            r"\bfunc_([0-9A-Fa-f]{8})\b",
-            source.read_text(encoding="utf-8", errors="replace"),
-        )
-    }
+        units.append(_game_unit(project, target_id, source, asm, category, readable))
     units.extend(
         _unlifted_units(
             project,
             target,
-            {source.stem for source in sources} | claimed,
+            {source.stem for source in sources} | _claimed_functions(sources),
             library_ids,
         )
     )
@@ -744,6 +756,30 @@ def _demote(project_file: Path, names: dict[str, str]) -> None:
     project_file.write_text(json.dumps(project, indent=2) + "\n", encoding="utf-8")
 
 
+def _generate_report(tool: str, project_dir: Path, report_path: Path) -> dict[str, Any]:
+    """Run objdiff over the project and return the report it wrote."""
+    try:
+        result = subprocess.run(
+            [
+                tool,
+                "report",
+                "generate",
+                "-p",
+                str(project_dir),
+                "-o",
+                str(report_path),
+            ],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    except OSError as err:
+        raise SystemExit(f"objdiff-cli failed to start: {err}") from None
+    if result.returncode:
+        raise SystemExit(result.stderr.strip() or result.stdout.strip())
+    return json.loads(report_path.read_text(encoding="utf-8"))
+
+
 def report(root: Path | None, build_dir: Path) -> int:
     """Run objdiff's report step and stamp the report with its provenance.
 
@@ -767,36 +803,13 @@ def report(root: Path | None, build_dir: Path) -> int:
         raise SystemExit(
             "no working objdiff-cli on PATH; install it as docs/toolchain.md#matching-tools says"
         )
+    tool = found.stdout.strip()
     project_dir = build_dir.resolve()
-
-    def generate() -> dict[str, Any]:
-        """Run objdiff over the project and return the report it wrote."""
-        try:
-            result = subprocess.run(
-                [
-                    found.stdout.strip(),
-                    "report",
-                    "generate",
-                    "-p",
-                    str(project_dir),
-                    "-o",
-                    str(report_path),
-                ],
-                capture_output=True,
-                text=True,
-                check=False,
-            )
-        except OSError as err:
-            raise SystemExit(f"objdiff-cli failed to start: {err}") from None
-        if result.returncode:
-            raise SystemExit(result.stderr.strip() or result.stdout.strip())
-        return json.loads(report_path.read_text(encoding="utf-8"))
-
-    data = generate()
+    data = _generate_report(tool, project_dir, report_path)
     unproven = _unproven(data)
     if unproven:
         _demote(project_dir / "objdiff.json", unproven)
-        data = generate()
+        data = _generate_report(tool, project_dir, report_path)
         for name, functions in unproven.items():
             sys.stderr.write(f"report: {name} is not complete: {functions}\n")
         sys.stderr.write(
@@ -808,8 +821,7 @@ def report(root: Path | None, build_dir: Path) -> int:
     data["provenance"] = {"commit": sha, "date": date}
     # objdiff drops unknown unit metadata, so the SDK library, member and linkage are
     # stamped here from the sidecar `generate` wrote.
-    sdk_path = build_dir.resolve() / "sdk.json"
-    sdk_info = json.loads(sdk_path.read_text(encoding="utf-8"))
+    sdk_info = json.loads((project_dir / "sdk.json").read_text(encoding="utf-8"))
     for unit in data.get("units", []):
         if unit["name"] in sdk_info:
             unit.setdefault("metadata", {})["sdk"] = sdk_info[unit["name"]]
