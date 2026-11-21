@@ -159,8 +159,8 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
         }
     }
     mesh_task = g_Task;
-    move.x    = mesh_task->unk_2E.value - mesh_task->unk_09;
-    move.y    = (mesh_task->unk_30.value - mesh_task->unk_09) + (g_GfxBufferIndex * SCREEN_HEIGHT);
+    move.x    = mesh_task->screen_x.value - mesh_task->unk_09;
+    move.y    = (mesh_task->screen_y.value - mesh_task->unk_09) + (g_GfxBufferIndex * SCREEN_HEIGHT);
     diameter  = mesh_task->unk_09 * 2;
     move.h = move.w = diameter;
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &move, 0x340, 0x100);
@@ -206,28 +206,28 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
                 first  = next_column;
                 second = quad;
             }
-            quad_x0           = quad_task->unk_2E.value + D_801EF9F8[first].x;
+            quad_x0           = quad_task->screen_x.value + D_801EF9F8[first].x;
             poly_gt4->x0      = quad_x0;
             poly_f4->x0       = quad_x0;
-            quad_y0           = quad_task->unk_30.value + D_801EF9F8[first].y;
+            quad_y0           = quad_task->screen_y.value + D_801EF9F8[first].y;
             poly_gt4->y0      = quad_y0;
             poly_f4->y0       = quad_y0;
-            quad_x1           = quad_task->unk_2E.value + D_801EF9F8[second].x;
+            quad_x1           = quad_task->screen_x.value + D_801EF9F8[second].x;
             poly_gt4->x1      = quad_x1;
             poly_f4->x1       = quad_x1;
-            quad_y1           = quad_task->unk_30.value + D_801EF9F8[second].y;
+            quad_y1           = quad_task->screen_y.value + D_801EF9F8[second].y;
             poly_gt4->y1      = quad_y1;
             poly_f4->y1       = quad_y1;
-            quad_x2           = quad_task->unk_2E.value + D_801EFA78[first].x;
+            quad_x2           = quad_task->screen_x.value + D_801EFA78[first].x;
             poly_gt4->x2      = quad_x2;
             poly_f4->x2       = quad_x2;
-            quad_y2           = quad_task->unk_30.value + D_801EFA78[first].y;
+            quad_y2           = quad_task->screen_y.value + D_801EFA78[first].y;
             poly_gt4->y2      = quad_y2;
             poly_f4->y2       = quad_y2;
-            quad_x3           = quad_task->unk_2E.value + D_801EFA78[second].x;
+            quad_x3           = quad_task->screen_x.value + D_801EFA78[second].x;
             poly_gt4->x3      = quad_x3;
             poly_f4->x3       = quad_x3;
-            quad_y3           = quad_task->unk_30.value + D_801EFA78[second].y;
+            quad_y3           = quad_task->screen_y.value + D_801EFA78[second].y;
             poly_gt4->y3      = quad_y3;
             poly_f4->y3       = quad_y3;
             outer_vertex      = first + outer_row_offset;

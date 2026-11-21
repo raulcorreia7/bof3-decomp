@@ -263,8 +263,8 @@ NON_MATCHING void func_801EF9E0(void) {
     for (; i < 8; i++) {
         phase     = i << 9;
         params[0] = (rand() & 3) + 4 + (g_Task->param.unk_0B << 1);
-        params[3] = g_Task->unk_2E.value + FIXED_MUL(rsin(phase), params[0]);
-        params[4] = g_Task->unk_30.value + FIXED_MUL(rcos(phase), params[0]);
+        params[3] = g_Task->screen_x.value + FIXED_MUL(rsin(phase), params[0]);
+        params[4] = g_Task->screen_y.value + FIXED_MUL(rcos(phase), params[0]);
 
         prim = GFX_CURSOR(POLY_G3);
         SetPolyG3(prim);

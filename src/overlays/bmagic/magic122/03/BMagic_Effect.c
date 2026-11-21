@@ -242,8 +242,8 @@ NON_MATCHING void func_801EFBA8(void) {
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
     GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(DR_MODE));
-    g_ScratchPad.cells.halves[4] = g_Task->unk_2E.value;
-    g_ScratchPad.cells.halves[5] = g_Task->unk_30.value;
+    g_ScratchPad.cells.halves[4] = g_Task->screen_x.value;
+    g_ScratchPad.cells.halves[5] = g_Task->screen_y.value;
     g_ScratchPad.cells.halves[1] = g_Task->unk_14;
     iteration                    = 1;
     if (iteration < g_Task->timer + 1) {

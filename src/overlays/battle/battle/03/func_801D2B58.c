@@ -49,10 +49,10 @@ NON_MATCHING void func_801D2B58(void) {
             actor         = (PartyMember*)D_8014637C;
             index         = g_Game.members[id].chr.character_id * 8 + actor->facing * 2;
             dx            = g_BattlePanelOffsets[index];
-            ACTIVE_X      = actor->unk_2E.value + dx;
+            ACTIVE_X      = actor->screen_x.value + dx;
             index         = actor->facing * 2 + g_Game.members[id].chr.character_id * 8;
             dy            = D_801EB0B1[index];
-            ACTIVE_Y      = actor->unk_30.value + dy;
+            ACTIVE_Y      = actor->screen_y.value + dy;
             ACTIVE_DEPTH  = actor->depth;
             stats         = (Stats*)((u8*)&g_Game.members[id] + 0x90);
         } else {
@@ -61,9 +61,9 @@ NON_MATCHING void func_801D2B58(void) {
             enemy         = id - 3;
             dx            = g_BattleEnemyBattlers[enemy].panel_offset_x;
             actor         = (PartyMember*)D_8014637C;
-            ACTIVE_X      = actor->unk_2E.value + dx;
+            ACTIVE_X      = actor->screen_x.value + dx;
             dy            = g_BattleEnemyBattlers[enemy].panel_offset_y;
-            ACTIVE_Y      = actor->unk_30.value + dy;
+            ACTIVE_Y      = actor->screen_y.value + dy;
             ACTIVE_DEPTH  = actor->depth;
             stats         = (Stats*)&g_BattleEnemyBattlers[enemy].stats;
         }
@@ -76,10 +76,10 @@ NON_MATCHING void func_801D2B58(void) {
             actor         = g_BattleSelectedActor;
             index         = g_Game.members[id].chr.character_id * 8 + actor->facing * 2;
             dx            = g_BattlePanelOffsets[index];
-            TARGET_X      = actor->unk_2E.value + dx;
+            TARGET_X      = actor->screen_x.value + dx;
             index         = actor->facing * 2 + g_Game.members[id].chr.character_id * 8;
             dy            = D_801EB0B1[index];
-            TARGET_Y      = actor->unk_30.value + dy;
+            TARGET_Y      = actor->screen_y.value + dy;
             TARGET_DEPTH  = actor->depth;
         } else {
             TARGET_STATE  = g_BattleEnemies + id * 0x118;
@@ -87,9 +87,9 @@ NON_MATCHING void func_801D2B58(void) {
             enemy         = id - 3;
             dx            = g_BattleEnemyBattlers[enemy].panel_offset_x;
             actor         = g_BattleSelectedActor;
-            TARGET_X      = actor->unk_2E.value + dx;
+            TARGET_X      = actor->screen_x.value + dx;
             dy            = g_BattleEnemyBattlers[enemy].panel_offset_y;
-            TARGET_Y      = actor->unk_30.value + dy;
+            TARGET_Y      = actor->screen_y.value + dy;
             TARGET_DEPTH  = actor->depth;
         }
         g_Battle.phase.sub_step++;
