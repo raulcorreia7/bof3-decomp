@@ -35,10 +35,10 @@ from pathlib import Path
 from bof3.adapters.cli import run_main
 from bof3.adapters.config import read_symbols
 from bof3.adapters.match import run_match
+from bof3.core.paths import ROOT
 from bof3.source.ctext import mask
 from bof3.source.index import Func, find, load_index
 
-ROOT = Path(__file__).resolve().parent.parent
 SHAPES = ("call-seq", "store-seq", "spad", "dispatch", "straight", "branch")
 SPAD = "0x1F800044"
 ARGS = ("a0", "a1", "a2", "a3")

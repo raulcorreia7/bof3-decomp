@@ -14,11 +14,9 @@ import argparse
 import collections
 import json
 import sys
-from pathlib import Path
 
+from bof3.core.paths import ROOT
 from bof3.source import ctext, decls
-
-ROOT = Path(__file__).resolve().parent.parent
 
 
 def load_tree() -> decls.Tree:

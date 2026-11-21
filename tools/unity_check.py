@@ -21,7 +21,8 @@ import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+from bof3.core.paths import ROOT
+
 GCC = os.environ.get("PSX_GCC") or str(ROOT / "toolchains/gcc-2.7.2-psx/gcc")
 GCC_DIR = os.path.dirname(os.path.realpath(GCC))
 ASM_DIR = re.compile(r'-DASM_DIR=\\?"([^"\\]+)\\?"')

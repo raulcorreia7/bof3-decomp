@@ -17,11 +17,10 @@ from pathlib import Path
 
 from bof3.adapters.cli import run_main
 from bof3.core import disc
-from bof3.core.paths import BUILD
+from bof3.core.paths import BUILD, ROOT
 from bof3.emi.catalog import materialize_reviewed_targets
 from bof3.resolve import load_target_manifests
 
-ROOT = Path(__file__).resolve().parents[1]
 MEDIA = ROOT / "inputs/external"
 MISSING = f"""setup: retail media is missing. The build reads your own copy of the US disc.
 setup: dump your own disc and put the two-track CUE/BIN set (Redump, 'Breath of Fire III (USA)') in {MEDIA}/,

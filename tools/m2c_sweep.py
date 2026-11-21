@@ -36,9 +36,9 @@ from pathlib import Path
 import m2ctx
 import try_body
 from bof3.adapters.cli import run_main
+from bof3.core.paths import ROOT
 from bof3.source.index import Func, find, load_index
 
-ROOT = Path(__file__).resolve().parent.parent
 WORK = "build/m2c_sweep"
 SAMPLE_SEED = 1
 JOBS = 8

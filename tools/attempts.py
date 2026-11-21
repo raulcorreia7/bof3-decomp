@@ -25,8 +25,8 @@ from bof3.adapters.attempts import PATH as ROW_PATH
 from bof3.adapters.attempts import read_lines, write_lines
 from bof3.attempts import Attempt, insert, score
 from bof3.attempts import sort as sort_lines
+from bof3.core.paths import ROOT
 
-ROOT = Path(__file__).resolve().parent.parent
 PATH = ROOT / ROW_PATH
 REF = re.compile(r"^[^@\s]+@0x[0-9A-F]{8}$")
 

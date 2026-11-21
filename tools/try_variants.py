@@ -19,8 +19,7 @@ import sys
 from pathlib import Path
 
 from bof3.adapters.match import run_match
-
-ROOT = Path(__file__).resolve().parent.parent
+from bof3.core.paths import ROOT
 
 
 def function_span(source, name):

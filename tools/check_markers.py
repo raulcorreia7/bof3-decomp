@@ -37,10 +37,9 @@ from bof3.adapters.attempts import PATH as ROW_PATH
 from bof3.adapters.attempts import read_lines, read_text
 from bof3.adapters.config import read_symbols
 from bof3.attempts import function_of, validate
+from bof3.core.paths import ROOT
 from bof3.resolve.ids import asm_dir
 from check_names import added_lines
-
-ROOT = Path(__file__).resolve().parent.parent
 
 MARKERS = ("MATCH", "NON_MATCHING", "HAND_ASM")
 DRAFT_MARKERS = ("NON_MATCHING", "HAND_ASM")

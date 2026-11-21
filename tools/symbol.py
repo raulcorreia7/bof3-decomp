@@ -161,13 +161,13 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from bof3.adapters.cli import run_main
+from bof3.core.paths import ROOT
 from bof3.link import symbols
 from bof3.resolve.ids import source_folder
 from bof3.source import asmtext, ctext, symtab
 from bof3.status import claims
 from bof3.symbols import TABLE, parse
 
-ROOT = Path(__file__).resolve().parent.parent
 SYMBOLS = ROOT / TABLE
 RESIDENT = ("exe/slus_004_22", "emi/etc/game/00")
 DEFAULT_SCOPE = ("src", "include", "config", "docs", "asm")

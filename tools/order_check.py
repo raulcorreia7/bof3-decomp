@@ -25,9 +25,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from bof3.adapters.git import changed_files, ls_files, merge_base
+from bof3.core.paths import ROOT
 from bof3.symbols import TABLE as SYMBOLS
-
-ROOT = Path(__file__).resolve().parent.parent
 
 ADDR_NAME = re.compile(r"\b(?:func|D|jtbl|jpt|L|s_gap)_([0-9A-Fa-f]{6,8})\b")
 ADDR_COMMENT = re.compile(

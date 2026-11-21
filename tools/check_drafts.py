@@ -25,8 +25,8 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from bof3.adapters.git import git, merge_base
+from bof3.core.paths import ROOT
 
-ROOT = Path(__file__).resolve().parent.parent
 BUILD = ROOT / "build/meson"
 GCC = ROOT / "toolchains/gcc-2.7.2-psx/gcc"
 DRAFT = re.compile(r"^NON_MATCHING\b", re.MULTILINE)

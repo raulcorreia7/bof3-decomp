@@ -13,12 +13,10 @@ differing hunk with both sides in full (`R` retail, `C` candidate), then a last 
 
 import argparse
 import difflib
-from pathlib import Path
 
 from bof3.adapters.match import run_match
+from bof3.core.paths import ROOT
 from bof3.match import side_by_side
-
-ROOT = Path(__file__).resolve().parent.parent
 
 
 def main():

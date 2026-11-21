@@ -41,10 +41,10 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from bof3.adapters.git import changed_files, git, merge_base
+from bof3.core.paths import ROOT
 from bof3.source.ctext import mask
 from bof3.symbols import TABLE, parse
 
-ROOT = Path(__file__).resolve().parent.parent
 CLANG = os.environ.get("CHECK_KEPT_CLANG", "clang")
 CLANG_FLAGS = [
     "--target=mipsel-unknown-elf",

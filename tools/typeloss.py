@@ -21,9 +21,9 @@ import collections
 import re
 import subprocess
 from collections.abc import Iterator
-from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+from bof3.core.paths import ROOT
+
 PROTO = re.compile(
     r"^\s*(?:static\s+)?([A-Za-z_][\w\s\*]*?[\s\*])([A-Za-z_]\w*)\s*\(([^()]*)\)\s*;",
     re.M,

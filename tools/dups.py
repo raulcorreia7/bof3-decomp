@@ -23,13 +23,12 @@ import itertools
 import json
 import sys
 from collections.abc import Callable
-from pathlib import Path
 
 from bof3.adapters.cli import run_main
+from bof3.core.paths import ROOT
 from bof3.source.index import CACHE, Func, load_index, opcode_string
 from bof3.source.remap import diff_count
 
-ROOT = Path(__file__).resolve().parent.parent
 PLACEHOLDER = ("func_", "D_", "jtbl_")
 THRESHOLD = 0.9
 MIN_WORDS = 6

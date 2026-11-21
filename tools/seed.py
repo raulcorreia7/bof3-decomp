@@ -35,12 +35,12 @@ import template_diff
 import template_try
 import try_body
 from bof3.adapters.cli import run_main
+from bof3.core.paths import ROOT
 from bof3.source import hints
 from bof3.source.ctext import read
 from bof3.source.index import Func, find, load_index
 from bof3.source.remap import declaration
 
-ROOT = Path(__file__).resolve().parent.parent
 TWINS = 3
 CALLERS = 30
 JAL = re.compile(r"^\s*/\*.*?\*/\s+jal\s+(\w+)", re.M)

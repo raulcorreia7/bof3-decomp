@@ -50,9 +50,9 @@ from pathlib import Path
 
 from bof3.adapters.git import git
 from bof3.adapters.git import merge_base as branch_point
+from bof3.core.paths import ROOT
 from bof3.source.ctext import mask
 
-ROOT = Path(__file__).resolve().parent.parent
 METRICS = ("addr", "names", "casts", "harmful", "notes", "twins", "pasted")
 GATED = ("casts", "harmful", "pasted", "addr", "names")
 PER_FUNCTION = ("addr", "names")

@@ -33,8 +33,8 @@ import gen_body
 from bof3.adapters.attempts import PATH as ROW_PATH
 from bof3.adapters.attempts import read_lines
 from bof3.attempts import parse
+from bof3.core.paths import ROOT
 
-ROOT = Path(__file__).resolve().parent.parent
 ROUTES = ("template0", "generator", "template", "plain")
 GENERATED = ("call-seq", "store-seq", "spad", "dispatch", "straight")
 EDITS = 3  # template_diff.py takes up to this many edits

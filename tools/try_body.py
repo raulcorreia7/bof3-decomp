@@ -30,11 +30,11 @@ from pathlib import Path
 
 from bof3.adapters.cli import run_main
 from bof3.adapters.match import run_match
+from bof3.core.paths import ROOT
 from bof3.source.ctext import read
 from bof3.source.index import Func, find, load_index
 from bof3.source.remap import declaration, diff_count
 
-ROOT = Path(__file__).resolve().parent.parent
 QUOTED = re.compile(r'^\s*#\s*include\s+"([^"]+)"', re.M)
 DECL = re.compile(r"^@decl\s+(.*)$", re.M)
 SEEN = "build/try_body_seen.json"
