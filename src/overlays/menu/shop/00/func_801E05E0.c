@@ -13,7 +13,7 @@ MATCH void func_801E05E0(void) {
     u8  new_scroll;
     u8  old;
 
-    D_80148340 = MEM(s16, D_801CA71E + (D_8014546C[D_801483CB] * 0x14));
+    D_80148340 = *(s16*)&g_Abilities[D_8014546C[D_801483CB]].description;
     D_80148624 = 1;
     D_80148628 = D_801483C4 + 7;
     cursor_y   = ((D_801483CB - D_801483CA) * 0xD) + 0x1A;

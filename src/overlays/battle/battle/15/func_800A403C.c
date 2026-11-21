@@ -1,8 +1,5 @@
 #include "battle_15.h"
 
-/* Selection-kind flag table: the signed byte at +3 of each 0x14-byte record. */
-extern s8 D_801CA71B[];
-
 MATCH u8 func_800A403C(u8 battler_index) {
     u16 index;
     u8  saved;
@@ -13,7 +10,8 @@ MATCH u8 func_800A403C(u8 battler_index) {
         return 1;
     }
     index = g_BattleActionId;
-    Battle_SetTarget(D_801CA71B[index * 0x14], saved);
+    /* kept: the volatile table read changes the retail register schedule. */
+    Battle_SetTarget((s8)((Ability*)g_Abilities)[index].power, saved);
     Battle_RescaleStats(g_Battle.target);
     return 0;
 }

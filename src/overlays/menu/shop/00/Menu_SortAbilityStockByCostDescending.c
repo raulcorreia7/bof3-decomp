@@ -1,6 +1,6 @@
 #include "shop_00.h"
 
-/* Item table: 0x14-byte records; byte 0 is the sort key. Indexed at each use
+/* The ability cost is the sort key. Indexed at each use
  * so the symbol address rematerializes per access (no held base pointer).
  */
 
@@ -19,7 +19,7 @@ MATCH void Menu_SortAbilityStockByCostDescending(void) {
             cur = *row;
             if (cur != 0) {
                 nxt = *(row + 1);
-                if ((nxt != 0) && (D_801CA71A[cur].unk_00 < D_801CA71A[nxt].unk_00)) {
+                if ((nxt != 0) && (g_Abilities[cur].cost < g_Abilities[nxt].cost)) {
                     Menu_SwapBytes6(row, row + 1);
                 }
             }

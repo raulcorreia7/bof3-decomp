@@ -1,9 +1,6 @@
 #include "start_08.h"
 
-/* Item table (0x14-byte records) the sort compares through; the type is
- * shared with etc/shop/00 in include/menu/item.h. */
-
-/* Bubble-sorts the nine-entry item-id list the battle selection resolves by item-table byte 0,
+/* Bubble-sorts the nine-entry item-id list the battle selection resolves by ability cost,
  * after Menu_PackSkills has moved the empty entries to the end.
  */
 /* func_801D9548 */
@@ -23,7 +20,7 @@ MATCH void Menu_SortSkillsAscending(void) {
             cur = *row;
             if (cur != 0) {
                 nxt = *(row + 1);
-                if ((nxt != 0) && (D_801CA71A[cur].unk_00 > D_801CA71A[nxt].unk_00)) {
+                if ((nxt != 0) && (g_Abilities[cur].cost > g_Abilities[nxt].cost)) {
                     Menu_SwapBytes3(row, row + 1);
                 }
             }

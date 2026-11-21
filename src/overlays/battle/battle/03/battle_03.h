@@ -211,7 +211,6 @@ extern u8* volatile D_80150000[];
 extern BGMTrack            g_BGMTracks[BGM_TRACK_COUNT];
 extern u8*                 D_801C893C[];
 extern u8*                 D_801C8950[];
-extern volatile u8         D_801CA718[][20];
 /* D_801D0C04 */
 extern BattleModes         g_BattlePhases;
 /* D_801D0C1C */

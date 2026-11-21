@@ -5,7 +5,7 @@ MATCH void Battle_SetCommandId(void) {
     u16 kind;
 
     kind = g_BattleActorTurn->command.id;
-    if ((D_801CA718[kind * 0x14] & ABILITY_TARGET_FLAG_OPPONENT) != 0) {
+    if ((g_Abilities[kind].targeting_flags & ABILITY_TARGET_FLAG_OPPONENT) != 0) {
         g_BattleActorTurn->command.target = Battle_TargetNext(3);
         g_Battle.ui_mode                  = 1u;
     } else {

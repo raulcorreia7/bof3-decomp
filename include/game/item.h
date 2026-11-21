@@ -603,30 +603,15 @@ typedef enum VitalItemId {
 /* The five equipment tables; counts are owned by game/records.h. Read through
  * the record types above so the offsets stay declared in one place. */
 /* D_801C8964 */
-extern volatile Item      g_Items[];
-/* The two cells the retail materializes by symbol in each equipment table: the
- * row's flags byte and its price halfword. The record types above hold them at
- * their offsets, but a reader that walks a table by the cell's own symbol
- * needs the cell named; the row's stride is the record's stride.
- *
- * The offsets are Item.flags and .price, Weapon.flags and .price,
- * Armor.flags and .price, and Accessory.flags and .price. */
-extern u8                 D_801C8970[]; /* the item row's flags byte */
-extern u8                 D_801C8974;   /* the item row's price halfword */
+extern Item               g_Items[];
 /* D_801C8FDC */
 extern volatile VitalItem g_VitalItems[];
 /* D_801C90DC */
 extern Weapon             g_Weapons[];
-extern u8                 D_801C90E9[]; /* the weapon row's flags byte */
-extern u8                 D_801C90F2;   /* the weapon row's price halfword */
 /* D_801C98A4 */
 extern Armor              g_Armors[];
-extern u8                 D_801C98B1[]; /* the armor row's flags byte */
-extern u8                 D_801C98B8;   /* the armor row's price halfword */
 /* D_801C9E7C */
-extern volatile Accessory g_Accessories[];
-extern u8                 D_801C9E89[]; /* the accessory row's flags byte */
-extern u8                 D_801C9E8E;   /* the accessory row's price halfword */
+extern Accessory          g_Accessories[];
 
 /* Resolves one GAME.EMI equipment record from its category and key: the
  * category selects the item, weapon, armor, accessory or vital-item table above,

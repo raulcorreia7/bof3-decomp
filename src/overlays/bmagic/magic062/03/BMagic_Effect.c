@@ -115,7 +115,7 @@ NON_MATCHING void func_801EF2F0(s32 stat) {
     g_Battle.target_record->hp_change    = 0;
     g_Battle.target_record->ap_change    = 0;
     g_Battle.target_record->target_flags = 0;
-    change                               = D_801CA71B[g_Battle.action_id * BATTLE_TYPE_STRIDE];
+    change                               = g_Abilities[g_Battle.action_id].power;
     value                                = ((s8*)g_Battle.target_record)[0x14 + (u8)stat];
     delta                                = value + (s8)change;
     if (delta > 100) {
