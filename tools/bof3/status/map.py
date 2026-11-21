@@ -58,7 +58,7 @@ class TargetMap:
         return tuple(unit for unit in self.units if unit.is_game_function)
 
 
-def bare_kind(kind: str) -> str:
+def bare_type(kind: str) -> str:
     return kind.removeprefix(".")
 
 
@@ -160,7 +160,7 @@ def units_from_layout(
     for boundary in layout.boundaries:
         end = boundary.file_end if boundary.file_end is not None else payload_length
         name = boundary.name or (
-            f"{boundary.file_start:X}" if bare_kind(boundary.kind) == "c" else ""
+            f"{boundary.file_start:X}" if bare_type(boundary.kind) == "c" else ""
         )
         unit = Unit(
             name=name,
@@ -177,7 +177,7 @@ def units_from_layout(
 
 def merged_functions(unit: Unit) -> tuple[Unit, ...]:
     """Split a merged translation-unit file into one `Unit` per function it holds."""
-    if bare_kind(unit.kind) != "c" or unit.source is None:
+    if bare_type(unit.kind) != "c" or unit.source is None:
         return (unit,)
     text = unit.source.read_text(encoding="utf-8", errors="replace")
     end = unit.vaddr + unit.size

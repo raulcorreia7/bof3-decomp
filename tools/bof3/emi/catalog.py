@@ -37,11 +37,11 @@ def _split_id(identifier: str) -> tuple[str, int]:
     return archive.upper(), int(match.group("slot"))
 
 
-def _payload_kind(entry_type: int, kind: str) -> str:
-    """Map the registry kind `bof3 emi extract -J` writes to what the callers ask."""
-    if kind in {"texture", "palette"}:
+def _payload_type(entry_type: int, asset_type: str) -> str:
+    """Map the registry asset type `bof3 emi extract -J` writes to what the callers ask."""
+    if asset_type in {"texture", "palette"}:
         return "image"
-    if kind.startswith("audio-"):
+    if asset_type.startswith("audio-"):
         return "audio"
     return "ram" if entry_type == 0 else "unresolved"
 
@@ -74,7 +74,7 @@ def entry_for(root: Path, identifier: str) -> dict[str, Any]:
         "payload_path": payload,
         "load_address": load_address,
         "size": size,
-        "payload_kind": _payload_kind(entry_type, raw["kind"]),
+        "payload_type": _payload_type(entry_type, raw["asset_type"]),
     }
 
 
@@ -122,7 +122,7 @@ def verify_companion_relations(root: Path) -> list[dict[str, Any]]:
                 raise ValueError(
                     f"caller disc load address mismatch: {manifest.id.value}"
                 )
-            if target["payload_kind"] != "ram":
+            if target["payload_type"] != "ram":
                 raise ValueError(
                     f"companion is not a RAM payload: {companion.target.value}"
                 )
