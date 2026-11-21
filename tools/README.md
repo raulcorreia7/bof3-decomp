@@ -255,5 +255,8 @@ Meson, setup or another tool calls these. A contributor does not run them.
 ## Layout
 
 One flat file per task: `tools/<name>.py`, in snake case, with verbs as sub-commands. Shared logic
-lives in the `tools/bof3/` package, and the tests are in `tools/tests/`. A command with no arguments
-that every contributor runs is also a Meson run target.
+lives in the `tools/bof3/` package, and the tests are in `tools/tests/`. The package is pure and typed:
+it raises `bof3.errors.Bof3Error` and never prints, exits or starts a process. The only code that
+reads files, runs Git or `match.sh`, or exits is `tools/bof3/adapters/` and each tool's `main`,
+which parses its arguments, calls the package, prints and returns the exit code. A command with no
+arguments that every contributor runs is also a Meson run target.
