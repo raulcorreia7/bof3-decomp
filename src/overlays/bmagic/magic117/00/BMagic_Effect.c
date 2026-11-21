@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/func_801EEC24.h"
+#include "overlays/bmagic/shared/func_801EEC24.h"
 
 MATCH void func_801EEC90(void) {
     PartyMember** actor;
@@ -52,7 +52,7 @@ MATCH void func_801EF000(void) {
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
-#include "overlays/bmagic/Effect_StartPaletteFade.h"
+#include "overlays/bmagic/shared/Effect_StartPaletteFade.h"
 
 MATCH void func_801EF0F8(void) {
     g_PaletteFades[g_Task->param.unk_0B].offset.r--;

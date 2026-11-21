@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
 MATCH void func_801EECB0(void) {
     u8* text;
@@ -180,7 +180,7 @@ MATCH void func_801EF938(void) {
 }
 
 /* func_801EF9F0 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EFA34(void) {
     BMagicEffectSteps handlers;
@@ -334,7 +334,7 @@ MATCH void func_801EFF94(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_StepOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_StepOnZeroTick.h"
 
 MATCH void func_801F00E8(void) {
     u8 count;
@@ -362,7 +362,7 @@ MATCH void func_801F013C(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 MATCH void func_801F026C(void) {
     POLY_F4* prim;
@@ -612,11 +612,11 @@ MATCH void func_801F129C(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_Wait.h"
+#include "overlays/bmagic/shared/Effect_Wait.h"
 
-#include "overlays/bmagic/Effect_CountDownByTwoAndFinish.h"
+#include "overlays/bmagic/shared/Effect_CountDownByTwoAndFinish.h"
 
-#include "overlays/bmagic/Effect_SetActorMatrixQuarterRoll.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrixQuarterRoll.h"
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F14D0(s32 band_height, s16 radius, u16 jitter_mask) {

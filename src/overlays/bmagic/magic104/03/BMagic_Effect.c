@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/func_801EEC14.h"
+#include "overlays/bmagic/shared/func_801EEC14.h"
 
 MATCH void func_801EEC80(void) {
     u8  slot;
@@ -86,7 +86,7 @@ MATCH void func_801EF03C(void) {
 }
 
 /* func_801EF09C */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF0E0(void) {
     SYS_DISPATCH_BYTE(D_801F08F0, g_Task->header.step);

@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
 MATCH void func_801EEC70(void) {
     PartyMember* task;
@@ -59,10 +59,10 @@ MATCH void func_801EEDB8(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_PlayOnIdleTick.h"
+#include "overlays/bmagic/shared/Effect_PlayOnIdleTick.h"
 
 /* func_801EEEBC */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF00(void) {
     SYS_DISPATCH_BYTE(D_801F006C, g_Task->header.step);
@@ -223,7 +223,7 @@ MATCH void func_801EF158(void) {
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_FOREGROUND, tpage);
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 MATCH void func_801EF834(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 7), 2, g_Task);

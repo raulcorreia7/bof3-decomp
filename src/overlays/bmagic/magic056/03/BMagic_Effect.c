@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
 /* Starts the effect: centres the camera, queues a copy of the acting battler as effect
  * 0x55 in mode 3, sets STP on colours 1 to 15 of the first two palettes of work row 26
@@ -88,13 +88,13 @@ MATCH s32 func_801EEF3C(void) {
 #include "shared/Effect_StartPlaying.h"
 
 /* func_801EF1B0 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF1F4(void) {
     BMAGIC_DISPATCH_AND_DRAW(D_801F0754, BMagic_DrawDome);
 }
 
-#include "overlays/bmagic/Effect_CopyBattlerCoords.h"
+#include "overlays/bmagic/shared/Effect_CopyBattlerCoords.h"
 
 MATCH void func_801EF2DC(void) {
     u8 counter;
@@ -123,7 +123,7 @@ MATCH void func_801EF37C(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 /* func_801EF4C0 */
 MATCH void BMagic_DrawDome(void) {
@@ -214,9 +214,9 @@ MATCH void func_801EFB38(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountUpAndStepAt30.h"
+#include "overlays/bmagic/shared/Effect_CountUpAndStepAt30.h"
 
-#include "overlays/bmagic/Effect_CountDownTimerCapped.h"
+#include "overlays/bmagic/shared/Effect_CountDownTimerCapped.h"
 
 /* Draws the glow disc of sixteen shaded triangles round the effect point; the radius
  * follows byte 0x09 (a wider rule from step 2 on) and the centre colour the effect timer. */
@@ -266,7 +266,7 @@ MATCH void func_801EFFE8(void) {
     g_Task->header.step++;
 }
 
-#include "overlays/bmagic/Effect_PrimeTintOnScriptReady.h"
+#include "overlays/bmagic/shared/Effect_PrimeTintOnScriptReady.h"
 
 MATCH void func_801F00C8(void) {
     PartyMember* work;

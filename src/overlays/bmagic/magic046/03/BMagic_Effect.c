@@ -55,10 +55,10 @@ MATCH void func_801EED28(void) {
     g_Task->header.mode += 1;
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEF70 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEFB4(void) {
     /* Retail dispatches a stack copy of the handlers. */
@@ -108,9 +108,9 @@ MATCH void func_801EF090(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_TickOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_TickOnZeroTick.h"
 
-#include "overlays/bmagic/Effect_DispatchStep.h"
+#include "overlays/bmagic/shared/Effect_DispatchStep.h"
 
 MATCH void func_801EF250(void) {
     g_Task                           = g_BattleEffectBattler;
@@ -121,7 +121,7 @@ MATCH void func_801EF250(void) {
     g_Task->header.step = 1;
 }
 
-#include "overlays/bmagic/Effect_AddActor.h"
+#include "overlays/bmagic/shared/Effect_AddActor.h"
 
 MATCH void func_801EF304(void) {
     Effect_Reset();
@@ -303,4 +303,4 @@ MATCH void func_801EFC48(void) {
 }
 
 /* func_801EFED0 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"

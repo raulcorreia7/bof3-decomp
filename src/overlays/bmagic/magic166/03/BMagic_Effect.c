@@ -24,12 +24,12 @@ MATCH void func_801EEC04(void) {
     }
 }
 
-#include "overlays/bmagic/func_801EED04.h"
+#include "overlays/bmagic/shared/func_801EED04.h"
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEEF0 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF34(void) {
     BMAGIC_DISPATCH_AND_DRAW_IN_OWN_MATRIX(D_801EF71C, func_801EF284, func_801EF380);
@@ -89,7 +89,7 @@ MATCH void func_801EF138(void) {
     }
 }
 
-#include "overlays/bmagic/BMagic_SetupEffectMatrix.h"
+#include "overlays/bmagic/shared/BMagic_SetupEffectMatrix.h"
 
 MATCH void func_801EF284(void) {
     BMAGIC_SETUP_EFFECT_MATRIX();
@@ -139,4 +139,4 @@ MATCH void func_801EF380(void) {
 }
 
 /* func_801EF69C */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"

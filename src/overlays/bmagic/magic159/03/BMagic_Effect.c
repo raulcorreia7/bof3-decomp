@@ -36,10 +36,10 @@ MATCH void func_801EEC5C(void) {
     SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEDE4 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEE28(void) {
     SYS_DISPATCH_BYTE(D_801EF424, g_Task->header.step);

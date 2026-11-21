@@ -39,10 +39,10 @@ MATCH void func_801EEC5C(void) {
     SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEDF0 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEE34(void) {
     SYS_DISPATCH_BYTE(D_801F0990, g_Task->header.step);
@@ -179,7 +179,7 @@ MATCH void func_801EF3D8(void) {
 }
 
 /* func_801EF484 */
-#include "overlays/bmagic/Effect_EndTrail.h"
+#include "overlays/bmagic/shared/Effect_EndTrail.h"
 
 /* Draws the trail as a ribbon of POLY_G4 quads two units wide either side of each segment heading, from the first
  * recorded point to the effect timer, the shade falling by 12 per segment. */
@@ -331,10 +331,10 @@ MATCH void func_801EFA34(void) {
 }
 
 /* func_801F02B0 */
-#include "overlays/bmagic/Effect_RecordTrail.h"
+#include "overlays/bmagic/shared/Effect_RecordTrail.h"
 
 /* func_801F03A0 */
-#include "overlays/bmagic/Effect_ClearTrail.h"
+#include "overlays/bmagic/shared/Effect_ClearTrail.h"
 
 MATCH void func_801F0488(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
@@ -386,7 +386,7 @@ MATCH void func_801F06B0(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_TickOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_TickOnTimerZero.h"
 
 MATCH void func_801F075C(void) {
     POLY_G3* prim;

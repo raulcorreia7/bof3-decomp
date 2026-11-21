@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
 MATCH void func_801EEC70(void) {
     PartyMember* work;
@@ -41,12 +41,12 @@ MATCH void func_801EEC70(void) {
     SND_QueueSelectionSE(0x101);
 }
 
-#include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_RequestTargetOnTimerZero.h"
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEED4 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF18(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
@@ -106,7 +106,7 @@ MATCH void func_801EF10C(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountDownTimerStep.h"
+#include "overlays/bmagic/shared/Effect_CountDownTimerStep.h"
 
 MATCH void func_801EF1E0(void) {
     g_Task->unk_5D -= 8;
@@ -155,7 +155,7 @@ MATCH void Effect_CountDownTimerStep2(void) {
     BMAGIC_COUNT_DOWN_TIMER_STEP();
 }
 
-#include "overlays/bmagic/Effect_CountDownAndFinish.h"
+#include "overlays/bmagic/shared/Effect_CountDownAndFinish.h"
 
 MATCH void func_801EF4D4(void) {
     POLY_G3* prim;

@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 /* func_801EEC10 */
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
 MATCH void func_801EEC70(void) {
     PartyMember* work;
@@ -70,10 +70,10 @@ MATCH void func_801EEDF8(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEF08 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF4C(void) {
     SYS_DISPATCH_BYTE(D_801EFAF0, g_Task->header.step);
@@ -109,7 +109,7 @@ MATCH void func_801EEFDC(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountUpTimerByTwoAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpTimerByTwoAndStep.h"
 
 MATCH void func_801EF138(void) {
     PartyMember* work;

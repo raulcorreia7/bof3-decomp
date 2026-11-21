@@ -142,9 +142,9 @@ MATCH void func_801EF3A0(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountDownAndMarkDamaged.h"
+#include "overlays/bmagic/shared/Effect_CountDownAndMarkDamaged.h"
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 MATCH void func_801EF4F0(void) {
     POLY_G3* prim;
@@ -179,7 +179,7 @@ MATCH void func_801EF4F0(void) {
 }
 
 /* func_801EF75C */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF7A0(void) {
     SYS_DISPATCH_BYTE(D_801F0BAC, g_Task->header.step);
@@ -430,7 +430,7 @@ MATCH void func_801F0764(void) {
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256));
 }
 
-#include "overlays/bmagic/Effect_CountDownTimerStep.h"
+#include "overlays/bmagic/shared/Effect_CountDownTimerStep.h"
 
 MATCH void func_801F08B4(void) {
     PartyMember* task;

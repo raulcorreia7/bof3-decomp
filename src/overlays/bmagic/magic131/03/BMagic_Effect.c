@@ -213,10 +213,10 @@ MATCH void func_801EF488(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_StartOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_StartOnZeroTick.h"
 
 /* func_801EF668 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 INCLUDE_ASM(func_801EF6AC);
 
@@ -453,9 +453,9 @@ MATCH void func_801F0100(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_ClearTimerNextStep.h"
+#include "overlays/bmagic/shared/Effect_ClearTimerNextStep.h"
 
-#include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpByTwoAndStep.h"
 
 MATCH void func_801F01F8(void) {
     if ((BATTLE_ACTIVE_WORK->unk_09 == 0) && (EMI_IsReady() != 0)) {
@@ -464,11 +464,11 @@ MATCH void func_801F01F8(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountDownAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountDownAndStep.h"
 
-#include "overlays/bmagic/Effect_TickOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_TickOnTimerZero.h"
 
-#include "overlays/bmagic/Effect_DrawFullScreenQuad.h"
+#include "overlays/bmagic/shared/Effect_DrawFullScreenQuad.h"
 
 MATCH void func_801F030C(void) {
     POLY_F4* prim;
@@ -524,7 +524,7 @@ MATCH void func_801F058C(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F06B4(void) {

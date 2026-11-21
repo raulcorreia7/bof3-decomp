@@ -41,10 +41,10 @@ MATCH void func_801EEC5C(void) {
     SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEE00 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEE44(void) {
     SYS_DISPATCH_BYTE(D_801F0A1C, g_Task->header.step);
@@ -180,7 +180,7 @@ MATCH void func_801EF320(void) {
 }
 
 /* func_801EF478 */
-#include "overlays/bmagic/Effect_EndTrail.h"
+#include "overlays/bmagic/shared/Effect_EndTrail.h"
 
 MATCH void func_801EF4E0(void) {
     POLY_G4* prim;
@@ -325,10 +325,10 @@ MATCH void func_801EFA4C(void) {
 }
 
 /* func_801F02A0 */
-#include "overlays/bmagic/Effect_RecordTrail.h"
+#include "overlays/bmagic/shared/Effect_RecordTrail.h"
 
 /* func_801F0390 */
-#include "overlays/bmagic/Effect_ClearTrail.h"
+#include "overlays/bmagic/shared/Effect_ClearTrail.h"
 
 MATCH void func_801F0478(void) {
     SYS_DISPATCH_BYTE(D_801F0A2C, g_Task->header.step);

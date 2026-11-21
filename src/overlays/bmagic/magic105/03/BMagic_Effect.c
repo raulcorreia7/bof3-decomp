@@ -61,10 +61,10 @@ MATCH void func_801EED1C(void) {
     g_Task->header.mode++;
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEF78 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEFBC(void) {
     Magic105Steps handlers;
@@ -130,7 +130,7 @@ MATCH void func_801EF250(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_TickOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_TickOnZeroTick.h"
 
 MATCH void func_801EF2F0(void) {
     SVECTOR pos;
@@ -255,7 +255,7 @@ MATCH void func_801EFB68(void) {
 }
 
 /* func_801EFC8C */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 MATCH void func_801EFCF0(void) {
     SPRT*        prim;

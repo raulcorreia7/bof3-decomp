@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
 MATCH void func_801EEC70(void) {
     u32  slot;
@@ -42,12 +42,12 @@ MATCH void func_801EEC70(void) {
     g_Task->header.mode += 1;
 }
 
-#include "overlays/bmagic/Effect_Hit.h"
+#include "overlays/bmagic/shared/Effect_Hit.h"
 
 #include "shared/Effect_StartPlaying.h"
 
 /* func_801EEEC8 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF0C(void) {
     BMAGIC_DISPATCH_AND_DRAW(D_801F07A0, func_801EF1D8);
@@ -92,7 +92,7 @@ MATCH void func_801EF094(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 /* Draws an eight-band textured dome: band 24 down to 17 is a ring of 32 semi-transparent GT4 quads between the
  * radii and heights that rcos and rsin of the band give for the scratch radius word 0, each quad placed in its area
@@ -339,9 +339,9 @@ MATCH void func_801F03A4(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountUpAndStepAt30.h"
+#include "overlays/bmagic/shared/Effect_CountUpAndStepAt30.h"
 
-#include "overlays/bmagic/Effect_CountDownTimerCapped.h"
+#include "overlays/bmagic/shared/Effect_CountDownTimerCapped.h"
 
 MATCH void func_801F04E0(void) {
     POLY_G3* prim;

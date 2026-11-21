@@ -62,10 +62,10 @@ MATCH void func_801EEC5C(void) {
     g_Task->header.mode++;
 }
 
-#include "overlays/bmagic/Effect_PlayOnIdleTick.h"
+#include "overlays/bmagic/shared/Effect_PlayOnIdleTick.h"
 
 /* func_801EEE5C */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEEA0(void) {
     SYS_DISPATCH_BYTE(D_801F02D0, g_Task->header.step);
@@ -140,11 +140,11 @@ MATCH void func_801EF158(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountUpTimerCallSelector.h"
+#include "overlays/bmagic/shared/Effect_CountUpTimerCallSelector.h"
 
-#include "overlays/bmagic/Effect_CountUpAndStepAt120.h"
+#include "overlays/bmagic/shared/Effect_CountUpAndStepAt120.h"
 
-#include "overlays/bmagic/Effect_CountUpAndFinishAt136.h"
+#include "overlays/bmagic/shared/Effect_CountUpAndFinishAt136.h"
 
 MATCH void func_801EF324(void) {
     POLY_GT4* prim;

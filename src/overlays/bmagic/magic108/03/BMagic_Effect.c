@@ -24,7 +24,7 @@ MATCH void func_801EEC5C(void) {
     g_Task->header.mode += 1;
 }
 
-#include "overlays/bmagic/Effect_PlayOnIdleTick.h"
+#include "overlays/bmagic/shared/Effect_PlayOnIdleTick.h"
 
 MATCH void func_801EED7C(void) {
     SYS_DISPATCH_BYTE(D_801EFC9C, g_Task->header.mode);
@@ -93,7 +93,7 @@ MATCH void func_801EF020(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_AdvanceOnTick.h"
+#include "overlays/bmagic/shared/Effect_AdvanceOnTick.h"
 
 MATCH void func_801EF0E0(void) {
     u8 timer;

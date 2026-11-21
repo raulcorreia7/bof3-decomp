@@ -27,10 +27,10 @@ MATCH void func_801EEC90(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEE04 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEE48(void) {
     BMagicEffectSteps handlers;
@@ -151,7 +151,7 @@ MATCH void func_801EF298(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_TickOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_TickOnTimerZero.h"
 
 MATCH void func_801EF478(void) {
     POLY_G4* prim;
@@ -391,7 +391,7 @@ MATCH void func_801F05F4(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_NextStepOnLastTick.h"
+#include "overlays/bmagic/shared/Effect_NextStepOnLastTick.h"
 
 MATCH void Effect_TickOnTimerZero3(void) {
     PartyMember* work;
@@ -399,7 +399,7 @@ MATCH void Effect_TickOnTimerZero3(void) {
     BMAGIC_TICK_ON_TIMER_ZERO(EFFECT_TIMER_TICK);
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 MATCH void func_801F0790(void) {
     POLY_G3* prim;

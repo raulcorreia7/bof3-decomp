@@ -165,10 +165,10 @@ MATCH void func_801EEF8C(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EF2D8 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF31C(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
@@ -209,7 +209,7 @@ MATCH void func_801EF578(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountUpAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpAndStep.h"
 
 MATCH void func_801EF628(void) {
     if (g_BattleEffectBattler->param.unk_0B < 2U) {
@@ -383,7 +383,7 @@ MATCH void BMagic_SetScaleX(void) {
 }
 
 /* func_801F02D4 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 /* func_801F0338 */
-#include "overlays/bmagic/Actor_Clear.h"
+#include "overlays/bmagic/shared/Actor_Clear.h"

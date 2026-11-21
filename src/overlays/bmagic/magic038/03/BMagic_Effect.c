@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
 MATCH void func_801EEC70(void) {
     u16          i;
@@ -90,10 +90,10 @@ MATCH void func_801EEE14(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_StartOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_StartOnZeroTick.h"
 
 /* func_801EF0D0 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF114(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
@@ -211,12 +211,12 @@ MATCH void func_801EF710(void) {
     g_Task->header.step += 1;
 }
 
-#include "overlays/bmagic/Effect_TickDownAndClear.h"
+#include "overlays/bmagic/shared/Effect_TickDownAndClear.h"
 
 MATCH void func_801EF8B8(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 11), 2, g_Task);
 }
 
-#include "overlays/bmagic/Effect_QueueEntry.h"
+#include "overlays/bmagic/shared/Effect_QueueEntry.h"
 
-#include "overlays/bmagic/Effect_TickOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_TickOnZeroTick.h"

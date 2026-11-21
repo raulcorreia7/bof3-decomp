@@ -87,10 +87,10 @@ MATCH void func_801EEDAC(void) {
     g_Task->header.mode++;
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EF0C4 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF108(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 2), 2, g_Task);
@@ -296,7 +296,7 @@ INCLUDE_ASM(func_801EF9E0);
 #endif
 
 /* func_801EFCA0 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 /* func_801EFD04 */
-#include "overlays/bmagic/Actor_Clear.h"
+#include "overlays/bmagic/shared/Actor_Clear.h"

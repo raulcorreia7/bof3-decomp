@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/Effect_RunSlots.h"
+#include "overlays/bmagic/shared/Effect_RunSlots.h"
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EED18(void) {
@@ -40,12 +40,12 @@ NON_MATCHING void func_801EED18(void) {
 INCLUDE_ASM(func_801EED18);
 #endif
 
-#include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_RequestTargetOnTimerZero.h"
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEF78 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEFBC(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
@@ -195,7 +195,7 @@ MATCH void func_801EF6B8(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_StepWhileTickUnderThree.h"
+#include "overlays/bmagic/shared/Effect_StepWhileTickUnderThree.h"
 
 MATCH void func_801EF8CC(void) {
     s8 count;
@@ -210,7 +210,7 @@ MATCH void func_801EF8CC(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetActiveActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActiveActorMatrix.h"
 
 MATCH void func_801EF9F0(void) {
     POLY_G3* prim;
@@ -238,7 +238,7 @@ MATCH void func_801EF9F0(void) {
     }
 }
 
-#include "overlays/bmagic/BMagic_DarkRingQuads.h"
+#include "overlays/bmagic/shared/BMagic_DarkRingQuads.h"
 
 /* func_801EFC40 */
 MATCH void BMagic_DrawDarkRing(void) {
@@ -307,7 +307,7 @@ MATCH void func_801F01C8(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 /* Draw the magic220 glow as a textured diamond around the effect, its shade set by the timer. */
 MATCH void func_801F0334(void) {
@@ -338,7 +338,7 @@ MATCH void func_801F0334(void) {
 }
 
 /* func_801F0628 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 /* func_801F068C */
-#include "overlays/bmagic/Actor_Clear.h"
+#include "overlays/bmagic/shared/Actor_Clear.h"

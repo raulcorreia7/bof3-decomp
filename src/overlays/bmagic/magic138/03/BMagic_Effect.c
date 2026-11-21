@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
 MATCH void func_801EEC88(void) {
     PartyMember* work;
@@ -76,7 +76,7 @@ MATCH void func_801EEED8(void) {
 }
 
 /* func_801EEF60 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEFA4(void) {
     Magic138Steps handlers;
@@ -209,4 +209,4 @@ MATCH void func_801EF6A4(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_TickDownAndClear.h"
+#include "overlays/bmagic/shared/Effect_TickDownAndClear.h"

@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
 MATCH void func_801EEC70(void) {
     u32          slot;
@@ -90,10 +90,10 @@ MATCH void func_801EEEC8(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_PlayOnIdleTick.h"
+#include "overlays/bmagic/shared/Effect_PlayOnIdleTick.h"
 
 /* func_801EF010 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 /* func_801EF054 */
 MATCH void BMagic_UpdateWhelpBreath(void) {
@@ -150,11 +150,11 @@ MATCH void func_801EF270(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountUpTimerCallSelector.h"
+#include "overlays/bmagic/shared/Effect_CountUpTimerCallSelector.h"
 
-#include "overlays/bmagic/Effect_CountUpAndStepAt120.h"
+#include "overlays/bmagic/shared/Effect_CountUpAndStepAt120.h"
 
-#include "overlays/bmagic/Effect_CountUpAndFinishAt136.h"
+#include "overlays/bmagic/shared/Effect_CountUpAndFinishAt136.h"
 
 MATCH void BMagic_DrawWhelpBreath(void) {
     POLY_GT4* prim;
@@ -243,7 +243,7 @@ MATCH void BMagic_DrawWhelpBreath(void) {
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
 }
 
-#include "overlays/bmagic/BMagic_RunStep.h"
+#include "overlays/bmagic/shared/BMagic_RunStep.h"
 
 MATCH void func_801EFDD4(void) {
     PartyMember* work;
@@ -513,4 +513,4 @@ MATCH void func_801F0974(void) {
     GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(POLY_G3));
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"

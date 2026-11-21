@@ -4,14 +4,14 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/Effect_RunSlotsWithSetup.h"
+#include "overlays/bmagic/shared/Effect_RunSlotsWithSetup.h"
 
-#include "overlays/bmagic/func_801EED04.h"
+#include "overlays/bmagic/shared/func_801EED04.h"
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEEF0 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF34(void) {
     BMAGIC_DISPATCH_AND_DRAW_IN_OWN_MATRIX(D_801EF788, func_801EF2F0, func_801EF3EC);
@@ -86,7 +86,7 @@ MATCH void func_801EF1C8(void) {
     }
 }
 
-#include "overlays/bmagic/BMagic_SetupEffectMatrix.h"
+#include "overlays/bmagic/shared/BMagic_SetupEffectMatrix.h"
 
 MATCH void func_801EF2F0(void) {
     BMAGIC_SETUP_EFFECT_MATRIX();
@@ -134,4 +134,4 @@ MATCH void func_801EF3EC(void) {
 }
 
 /* func_801EF708 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"

@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/func_801EEC24.h"
+#include "overlays/bmagic/shared/func_801EEC24.h"
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EEC90(void) {
@@ -53,7 +53,7 @@ MATCH void func_801EF1CC(void) {
 }
 
 /* func_801EF20C */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF250(void) {
     Magic065TaskSteps handlers;
@@ -65,7 +65,7 @@ MATCH void func_801EF250(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetDuration.h"
+#include "overlays/bmagic/shared/Effect_SetDuration.h"
 
 MATCH void func_801EF328(void) {
     u8 timer;

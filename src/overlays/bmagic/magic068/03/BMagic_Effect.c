@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/func_801EEC18.h"
+#include "overlays/bmagic/shared/func_801EEC18.h"
 
 MATCH void func_801EEC88(void) {
     u32          slot;
@@ -274,7 +274,7 @@ MATCH void func_801EF55C(void) {
 }
 
 /* func_801EF73C */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF780(void) {
     SYS_DISPATCH_TASK(g_BMagicEffectModes + 1, 2, g_Task);
@@ -348,4 +348,4 @@ MATCH void func_801EFA48(void) {
     GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_FT4));
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"

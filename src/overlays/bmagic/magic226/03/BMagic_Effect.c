@@ -5,7 +5,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/Effect_RunSlots.h"
+#include "overlays/bmagic/shared/Effect_RunSlots.h"
 
 MATCH void func_801EED18(void) {
     u16* dst;
@@ -50,12 +50,12 @@ MATCH void func_801EED18(void) {
     g_GfxPalettePending                                               = 1;
 }
 
-#include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_RequestTargetOnTimerZero.h"
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EF004 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF048(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
@@ -172,7 +172,7 @@ MATCH void Effect_SwingCameraAngle(void) {
     BMAGIC_SWING_CAMERA(60);
 }
 
-#include "overlays/bmagic/Effect_StartTint.h"
+#include "overlays/bmagic/shared/Effect_StartTint.h"
 
 MATCH void func_801EF698(void) {
     u8 timer_next;
@@ -190,12 +190,12 @@ MATCH void func_801EF698(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetActiveActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActiveActorMatrix.h"
 
 /* func_801EF814 */
-#include "overlays/bmagic/Effect_DrawShadedDisc.h"
+#include "overlays/bmagic/shared/Effect_DrawShadedDisc.h"
 
-#include "overlays/bmagic/BMagic_DrawDarkRing.h"
+#include "overlays/bmagic/shared/BMagic_DrawDarkRing.h"
 
 MATCH void func_801EFD84(void) {
     SYS_DISPATCH_TASK(D_801F0C60, 1, g_Task);
@@ -358,7 +358,7 @@ MATCH void func_801F068C(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 MATCH void func_801F07D4(void) {
     POLY_G4* prim;
@@ -411,7 +411,7 @@ MATCH void func_801F07D4(void) {
 }
 
 /* func_801F0B8C */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 /* func_801F0BF0 */
-#include "overlays/bmagic/Actor_Clear.h"
+#include "overlays/bmagic/shared/Actor_Clear.h"

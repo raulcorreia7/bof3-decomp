@@ -37,10 +37,10 @@ MATCH void func_801EEC5C(void) {
     SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEE18 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEE5C(void) {
     BMAGIC_DISPATCH_AND_DRAW(D_801EF774, func_801EF250);
@@ -113,7 +113,7 @@ MATCH void func_801EF0F0(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 MATCH void func_801EF250(void) {
     POLY_FT4* poly;

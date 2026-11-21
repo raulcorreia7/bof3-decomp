@@ -113,7 +113,7 @@ MATCH void func_801EF060(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountDownAndMarkDamaged.h"
+#include "overlays/bmagic/shared/Effect_CountDownAndMarkDamaged.h"
 
 MATCH void func_801EF128(void) {
     s32 values[8];
@@ -261,7 +261,7 @@ MATCH void func_801EF6A8(void) {
 }
 
 /* func_801EF774 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF7B8(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 3), 2, g_Task);

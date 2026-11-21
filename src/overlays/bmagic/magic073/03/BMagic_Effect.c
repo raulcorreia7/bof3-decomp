@@ -1,6 +1,6 @@
 #include "magic073_03.h"
-#include "overlays/bmagic/Effect_LaunchSparkleBurst.h"
-#include "overlays/bmagic/Effect_SpawnTargetFades.h"
+#include "overlays/bmagic/shared/Effect_LaunchSparkleBurst.h"
+#include "overlays/bmagic/shared/Effect_SpawnTargetFades.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -42,7 +42,7 @@ MATCH void func_801EEF50(void) {
 }
 
 /* func_801EEFB0 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEFF4(void) {
     BMagicEffectSteps handlers;
@@ -60,12 +60,12 @@ MATCH void func_801EF06C(void) {
     EFFECT_LAUNCH_SPARKLE_BURST();
 }
 
-#include "overlays/bmagic/Effect_ReplaceSlotPaletteFade.h"
+#include "overlays/bmagic/shared/Effect_ReplaceSlotPaletteFade.h"
 
-#include "overlays/bmagic/Effect_FadePaletteIn.h"
+#include "overlays/bmagic/shared/Effect_FadePaletteIn.h"
 
 /* func_801EF4E4 */
-#include "overlays/bmagic/Effect_NextStepUnderTickLimit.h"
+#include "overlays/bmagic/shared/Effect_NextStepUnderTickLimit.h"
 
 MATCH void func_801EF52C(void) {
     u8           unk04;
@@ -88,7 +88,7 @@ MATCH void func_801EF52C(void) {
 }
 
 /* func_801EF6B8 */
-#include "overlays/bmagic/Effect_EndRecovery.h"
+#include "overlays/bmagic/shared/Effect_EndRecovery.h"
 
 MATCH void func_801EF724(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 1, D_801F21F0);
@@ -110,7 +110,7 @@ MATCH void func_801EF768(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_LaunchSparkle.h"
+#include "overlays/bmagic/shared/Effect_LaunchSparkle.h"
 
 MATCH void func_801EFA64(void) {
     s32 wave;
@@ -127,14 +127,14 @@ MATCH void func_801EFB14(void) {
     BMAGIC_SWAY_EFFECT_WORK(D_801F21F0, func_801F0454)
 }
 
-#include "overlays/bmagic/Effect_DrawSparkleRays.h"
+#include "overlays/bmagic/shared/Effect_DrawSparkleRays.h"
 
-#include "overlays/bmagic/Effect_DrawSparkleWedges.h"
+#include "overlays/bmagic/shared/Effect_DrawSparkleWedges.h"
 
-#include "overlays/bmagic/Effect_DrawSparkleDisc.h"
+#include "overlays/bmagic/shared/Effect_DrawSparkleDisc.h"
 
 /* func_801F03E8 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 MATCH void func_801F0454(void) {
     D_801F21F0->header.flags = 0;

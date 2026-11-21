@@ -8,7 +8,7 @@ MATCH void func_801EEC04(void) {
     BMagic_DispatchTaskPair(func_801EEC5C, func_801EEF38);
 }
 
-#include "overlays/bmagic/BMagic_SpawnAtTargets.h"
+#include "overlays/bmagic/shared/BMagic_SpawnAtTargets.h"
 
 MATCH void func_801EEC5C(void) {
     u32          i;
@@ -18,10 +18,10 @@ MATCH void func_801EEC5C(void) {
     BMAGIC_SPAWN_AT_TARGETS(14);
 }
 
-#include "overlays/bmagic/Effect_StartOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_StartOnZeroTick.h"
 
 /* func_801EEF84 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEFC8(void) {
     SYS_DISPATCH_BYTE((g_BMagicEffectModes + 1), g_Task->header.step);
@@ -44,7 +44,7 @@ MATCH void func_801EEFC8(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountDownAndPickRandom.h"
+#include "overlays/bmagic/shared/Effect_CountDownAndPickRandom.h"
 
 /* Counts up and, at sixteen, swaps the target battler's palette fade for a
  * black one. */
@@ -71,11 +71,11 @@ MATCH void func_801EF1B4(void) {
 }
 
 /* func_801EF334 */
-#include "overlays/bmagic/Effect_ReleaseTarget.h"
+#include "overlays/bmagic/shared/Effect_ReleaseTarget.h"
 
-#include "overlays/bmagic/Effect_CountDownByTwoAndFinish.h"
+#include "overlays/bmagic/shared/Effect_CountDownByTwoAndFinish.h"
 
-#include "overlays/bmagic/Effect_SetActorMatrixRolled.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrixRolled.h"
 
 /* Draws seventeen steps of four projected POLY_G4 bands like func_801EF5C4 of magic097 with wider band offsets: each
  * step 0x40 deeper than the last, the bands swaying with the effect ticker, their radius jittering by jitter_mask and
@@ -241,7 +241,7 @@ MATCH void func_801EFE24(void) {
     }
 }
 
-#include "overlays/bmagic/BMagic_DrawFlickerRing.h"
+#include "overlays/bmagic/shared/BMagic_DrawFlickerRing.h"
 
 MATCH void func_801F00C4(void) {
     POLY_G3* prim;

@@ -55,12 +55,12 @@ MATCH void func_801EED18(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_RequestTargetOnTimerZero.h"
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEF80 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEFC4(void) {
     SYS_DISPATCH_BYTE(D_801F05B8, g_Task->header.step);
@@ -110,7 +110,7 @@ MATCH void func_801EF058(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountUpTimerByTwoAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpTimerByTwoAndStep.h"
 
 MATCH void func_801EF3DC(void) {
     PartyMember* battler;
@@ -392,7 +392,7 @@ MATCH void func_801F030C(void) {
 }
 
 /* func_801F0500 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 /* func_801F0564 */
-#include "overlays/bmagic/Actor_Clear.h"
+#include "overlays/bmagic/shared/Actor_Clear.h"

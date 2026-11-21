@@ -4,8 +4,8 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/Effect_DispatchMode.h"
-#include "overlays/bmagic/Effect_CopyActiveBattlerToSlot.h"
+#include "overlays/bmagic/shared/Effect_DispatchMode.h"
+#include "overlays/bmagic/shared/Effect_CopyActiveBattlerToSlot.h"
 
 /* Start the magic020 effect: four copies of the caster in mode 1 (arg 4 down to 1), one more
  * in mode 0, then the caster sprite cell, and Battle_PlayActiveBattlerSE(2, 0) for a party caster. */
@@ -102,7 +102,7 @@ MATCH void func_801EF2A8(void) {
 #include "shared/Effect_PlayOnce.h"
 
 /* func_801EF398 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF3DC(void) {
     Magic020Steps handlers = D_801EEC1C;
@@ -251,7 +251,7 @@ MATCH void func_801EFAD4(void) {
     Effect_Reset();
 }
 
-#include "overlays/bmagic/BMagic_RunEffectStep.h"
+#include "overlays/bmagic/shared/BMagic_RunEffectStep.h"
 
 MATCH void func_801EFAF4(void) {
     BMAGIC_RUN_EFFECT_STEP(func_801EFBA0, func_801EFD10);

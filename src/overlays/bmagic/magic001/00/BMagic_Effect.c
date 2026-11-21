@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
 MATCH void func_801EECC4(void) {
     BattleEffect* slot;
@@ -54,7 +54,7 @@ MATCH void func_801EEF34(void) {
 #include "shared/Effect_StartPlaying.h"
 
 /* func_801EEFD8 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF01C(void) {
     Magic001Steps handlers;
@@ -198,7 +198,7 @@ MATCH void func_801EF5CC(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_RampTintAndFinish.h"
+#include "overlays/bmagic/shared/Effect_RampTintAndFinish.h"
 
 MATCH void func_801EF688(void) {
     EFFECT_RAMP_TINT_AND_FINISH();
@@ -358,7 +358,7 @@ MATCH void func_801EFE38(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_PrimeTintOnScriptReady.h"
+#include "overlays/bmagic/shared/Effect_PrimeTintOnScriptReady.h"
 
 MATCH void func_801EFFCC(void) {
     PartyMember* work;

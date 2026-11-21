@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
 MATCH void func_801EEC94(void) {
     u8   i;
@@ -47,9 +47,9 @@ MATCH void func_801EEC94(void) {
     SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
 }
 
-#include "overlays/bmagic/Effect_NextStepOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_NextStepOnZeroTick.h"
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 MATCH s32 func_801EEF3C(void) {
     switch (g_Battle.action_id) {
@@ -62,7 +62,7 @@ MATCH s32 func_801EEF3C(void) {
 }
 
 /* func_801EEF64 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEFA8(void) {
     BMagicEffectSteps handlers;
@@ -225,7 +225,7 @@ MATCH void func_801EF758(void) {
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_G4));
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 /* Draw the magic039 flame as 64 shaded quads round the effect, each with a random wobble in its
  * height and outer radius, dark at the base and tinted at the top by the colour row it picks. */

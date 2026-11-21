@@ -43,10 +43,10 @@ MATCH void func_801EEC5C(void) {
     SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEE38 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEE7C(void) {
     SYS_DISPATCH_BYTE(D_801F0B7C, g_Task->header.step);
@@ -177,7 +177,7 @@ MATCH void func_801EF430(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_TickOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_TickOnTimerZero.h"
 
 MATCH void func_801EF518(void) {
     D_801F0B90[g_Task->header.step]();
@@ -224,7 +224,7 @@ MATCH void func_801EF650(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_TickOnTimerNegative.h"
+#include "overlays/bmagic/shared/Effect_TickOnTimerNegative.h"
 
 MATCH void func_801EF7CC(void) {
     POLY_G3* prim;

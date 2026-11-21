@@ -129,7 +129,7 @@ MATCH void func_801EF3F0(void) {
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
 }
 
-#include "overlays/bmagic/Effect_RestorePaletteAndReleaseActive.h"
+#include "overlays/bmagic/shared/Effect_RestorePaletteAndReleaseActive.h"
 
 MATCH void func_801EF6AC(void) {
     EFFECT_RESTORE_PALETTE_AND_RELEASE_ACTIVE();
@@ -191,7 +191,7 @@ MATCH void func_801EFA74(void) {
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
-#include "overlays/bmagic/Effect_CopyActiveBattlerToSlot.h"
+#include "overlays/bmagic/shared/Effect_CopyActiveBattlerToSlot.h"
 
 MATCH void func_801EFAD4(void) {
     BattleEffect* slot;
@@ -305,14 +305,14 @@ MATCH void func_801F0018(void) {
     g_Task->header.mode++;
 }
 
-#include "overlays/bmagic/Effect_StartOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_StartOnZeroTick.h"
 
 MATCH u32 func_801F0230(void) {
     return LOHU(g_Battle.action_id) == 7 ? 7 : 0xFF;
 }
 
 /* func_801F0250 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801F0294(void) {
     BMagicEffectSteps handlers;
@@ -524,7 +524,7 @@ MATCH void func_801F0B44(void) {
     Effect_Reset();
 }
 
-#include "overlays/bmagic/Effect_DrawScreenFade.h"
+#include "overlays/bmagic/shared/Effect_DrawScreenFade.h"
 
 MATCH void func_801F0DA8(void) {
     BMagicEffectSteps handlers;
@@ -628,7 +628,7 @@ MATCH void func_801F1294(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetDuration.h"
+#include "overlays/bmagic/shared/Effect_SetDuration.h"
 
 MATCH void func_801F1384(void) {
     u8 timer;

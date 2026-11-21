@@ -112,7 +112,7 @@ MATCH void func_801EF070(void) {
 }
 
 /* func_801EF210 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF254(void) {
     BMagicEffectSteps handlers;
@@ -186,7 +186,7 @@ MATCH void func_801EF4FC(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_NextStepUnderTickLimit.h"
+#include "overlays/bmagic/shared/Effect_NextStepUnderTickLimit.h"
 
 /* Darkens the palette fade row the effect timer indexes and, when its wait runs out, frees the battler byte 0x04
  * names and tells the battle UI. */
@@ -226,7 +226,7 @@ MATCH void func_801EF860(void) {
     SYS_DISPATCH_TASK(D_801F0420, 1, g_Task);
 }
 
-#include "overlays/bmagic/Effect_DrawRings.h"
+#include "overlays/bmagic/shared/Effect_DrawRings.h"
 
 MATCH void func_801EFA18(void) {
     s32  phase;
@@ -307,12 +307,12 @@ MATCH void func_801EFCF4(void) {
     }
 }
 
-#include "overlays/bmagic/BMagic_DrawRingTriangles.h"
+#include "overlays/bmagic/shared/BMagic_DrawRingTriangles.h"
 
-#include "overlays/bmagic/BMagic_DrawRingQuads.h"
+#include "overlays/bmagic/shared/BMagic_DrawRingQuads.h"
 
 /* func_801F0368 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 /* func_801F03CC */
-#include "overlays/bmagic/Actor_Clear.h"
+#include "overlays/bmagic/shared/Actor_Clear.h"

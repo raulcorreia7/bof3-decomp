@@ -70,12 +70,12 @@ MATCH void func_801EED18(void) {
     g_GfxPalettePending                                               = 1;
 }
 
-#include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_RequestTargetOnTimerZero.h"
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EF064 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF0A8(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
@@ -230,12 +230,12 @@ MATCH void func_801EF6D8(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetActiveActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActiveActorMatrix.h"
 
 /* func_801EF7E0 */
-#include "overlays/bmagic/Effect_DrawShadedDisc.h"
+#include "overlays/bmagic/shared/Effect_DrawShadedDisc.h"
 
-#include "overlays/bmagic/BMagic_DrawDarkRing.h"
+#include "overlays/bmagic/shared/BMagic_DrawDarkRing.h"
 
 MATCH void func_801EFD50(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 6), 1, g_Task);
@@ -301,7 +301,7 @@ MATCH void func_801F0018(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 MATCH void func_801F01C0(void) {
     POLY_FT4* prim;
@@ -331,7 +331,7 @@ MATCH void func_801F01C0(void) {
 }
 
 /* func_801F0494 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 /* func_801F04F8 */
-#include "overlays/bmagic/Actor_Clear.h"
+#include "overlays/bmagic/shared/Actor_Clear.h"

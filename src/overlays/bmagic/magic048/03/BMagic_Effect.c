@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
 MATCH void func_801EEC70(void) {
     PartyMember* work;
@@ -30,12 +30,12 @@ MATCH void func_801EEC70(void) {
     } while (i < 12);
 }
 
-#include "overlays/bmagic/Effect_CountDownTimerQueueEffect.h"
+#include "overlays/bmagic/shared/Effect_CountDownTimerQueueEffect.h"
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEE70 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEEB4(void) {
     SYS_DISPATCH_BYTE(D_801EF81C, g_Task->header.step);

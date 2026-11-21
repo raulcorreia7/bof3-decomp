@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/func_801EEC18.h"
+#include "overlays/bmagic/shared/func_801EEC18.h"
 
 MATCH void func_801EEC88(void) {
     u8            slot;
@@ -56,7 +56,7 @@ MATCH void func_801EEEF4(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_RequestTargetOnTimerZero.h"
 
 MATCH void func_801EF0A4(void) {
     if (g_Task->param.unk_0B == 0xFF) {
@@ -68,7 +68,7 @@ MATCH void func_801EF0A4(void) {
 }
 
 /* func_801EF114 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF158(void) {
     D_801EFD5C[g_Task->header.step]();

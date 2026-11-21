@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
 MATCH void func_801EEC70(void) {
     u8           i;
@@ -37,12 +37,12 @@ MATCH void func_801EEC70(void) {
     Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
 }
 
-#include "overlays/bmagic/Effect_NextStepOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_NextStepOnZeroTick.h"
 
 #include "shared/Effect_PlayOnce.h"
 
 /* func_801EEE2C */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEE70(void) {
     SYS_DISPATCH_BYTE(D_801EF418, g_Task->header.step);
@@ -75,11 +75,11 @@ MATCH void func_801EEEE8(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountUpTimersByTwoNextStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpTimersByTwoNextStep.h"
 
 /* func_801EF0A0 */
 MATCH void Effect_CountDownTimer(void) {
     BMagic_CountDownEffectTimer(1);
 }
 
-#include "overlays/bmagic/Effect_DrawTexturedQuad.h"
+#include "overlays/bmagic/shared/Effect_DrawTexturedQuad.h"

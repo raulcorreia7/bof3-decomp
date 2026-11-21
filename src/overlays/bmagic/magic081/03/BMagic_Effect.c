@@ -103,7 +103,7 @@ MATCH void func_801EEF88(void) {
 }
 
 /* func_801EF014 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF058(void) {
     Magic081Steps handlers;
@@ -155,7 +155,7 @@ MATCH void func_801EF18C(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_TickOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_TickOnZeroTick.h"
 
 MATCH void func_801EF2F0(void) {
     if (g_Battle.flags & BATTLE_STATE_EFFECT_PLAYING) {
@@ -261,4 +261,4 @@ MATCH void func_801EF6A0(void) {
 }
 
 /* func_801EFA20 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"

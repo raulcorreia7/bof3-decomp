@@ -68,7 +68,7 @@ MATCH void func_801EEEDC(void) {
 }
 
 /* func_801EEF30 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF74(void) {
     Magic058Steps handlers;
@@ -133,7 +133,7 @@ MATCH void func_801EF080(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_TickDownAndClear.h"
+#include "overlays/bmagic/shared/Effect_TickDownAndClear.h"
 
 MATCH void func_801EF36C(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 1, g_Task);
@@ -199,7 +199,7 @@ MATCH void func_801EF61C(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 MATCH void func_801EF74C(void) {
     POLY_G4* prim;
@@ -295,7 +295,7 @@ MATCH s32 func_801EFDD4(void* battler) {
 }
 
 /* func_801EFE38 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 /* func_801EFE9C */
-#include "overlays/bmagic/Actor_Clear.h"
+#include "overlays/bmagic/shared/Actor_Clear.h"

@@ -29,7 +29,7 @@ MATCH void func_801EEC5C(void) {
     g_Task->header.mode += 1;
 }
 
-#include "overlays/bmagic/Effect_PlayOnIdleTick.h"
+#include "overlays/bmagic/shared/Effect_PlayOnIdleTick.h"
 
 MATCH void func_801EEDA0(void) {
     SYS_DISPATCH_BYTE(D_801F048C, g_Task->header.mode);
@@ -62,7 +62,7 @@ MATCH void func_801EEEA0(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_AdvanceOnTick.h"
+#include "overlays/bmagic/shared/Effect_AdvanceOnTick.h"
 
 MATCH void func_801EEF5C(void) {
     PartyMember* active;
@@ -224,7 +224,7 @@ MATCH void func_801EF544(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrixQuarterRoll.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrixQuarterRoll.h"
 
 MATCH void func_801EFAE0(void) {
     POLY_G4* prim;

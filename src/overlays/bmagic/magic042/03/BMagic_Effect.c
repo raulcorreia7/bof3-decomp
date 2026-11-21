@@ -24,10 +24,10 @@ MATCH void func_801EEC70(void) {
     SND_QueueSelectionSE(0x100);
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEDA4 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEDE8(void) {
     Magic042Steps handlers;
@@ -110,7 +110,7 @@ MATCH void func_801EF118(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_OffsetByTargetPose.h"
+#include "overlays/bmagic/shared/Effect_OffsetByTargetPose.h"
 
 MATCH void func_801EF1B0(void) {
     PartyMember* work;
@@ -188,7 +188,7 @@ MATCH void func_801EF71C(u8 start, u16 radius) {
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
 }
 
-#include "overlays/bmagic/Effect_DrawGlowFan.h"
+#include "overlays/bmagic/shared/Effect_DrawGlowFan.h"
 
 MATCH void func_801EF920(void) {
     POLY_G3* poly;

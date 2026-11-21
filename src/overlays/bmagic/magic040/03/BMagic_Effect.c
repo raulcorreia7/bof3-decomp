@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
 MATCH void func_801EEC80(void) {
     PartyMember* battler;
@@ -69,10 +69,10 @@ MATCH void func_801EEDFC(void) {
     g_Task->header.mode += 1;
 }
 
-#include "overlays/bmagic/Effect_StartOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_StartOnZeroTick.h"
 
 /* func_801EEF48 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF8C(void) {
     Magic040Steps handlers = D_801EEC10;
@@ -98,9 +98,9 @@ MATCH void func_801EF074(void) {
     g_Task->header.step += 1;
 }
 
-#include "overlays/bmagic/Effect_CountUpTimersAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpTimersAndStep.h"
 
-#include "overlays/bmagic/Effect_CountUpAndStepAt32.h"
+#include "overlays/bmagic/shared/Effect_CountUpAndStepAt32.h"
 
 /* func_801EF1D0 */
 MATCH void Effect_CountDownTimer(void) {
@@ -142,7 +142,7 @@ MATCH void func_801EF388(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_OffsetByTargetPose.h"
+#include "overlays/bmagic/shared/Effect_OffsetByTargetPose.h"
 
 MATCH void func_801EF430(void* task) {
     PartyMember* work;
@@ -176,7 +176,7 @@ MATCH void func_801EF600(u8 start, u16 radius) {
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
 }
 
-#include "overlays/bmagic/Effect_DrawGlowFan.h"
+#include "overlays/bmagic/shared/Effect_DrawGlowFan.h"
 
 MATCH void func_801EF7FC(void) {
     POLY_G3* poly;

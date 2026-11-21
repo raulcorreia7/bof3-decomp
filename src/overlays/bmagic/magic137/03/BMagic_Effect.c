@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EEC7C(void) {
@@ -53,7 +53,7 @@ NON_MATCHING void func_801EEC7C(void) {
 INCLUDE_ASM(func_801EEC7C);
 #endif
 
-#include "overlays/bmagic/Effect_CountDownTimerCallSelector.h"
+#include "overlays/bmagic/shared/Effect_CountDownTimerCallSelector.h"
 
 MATCH void func_801EEF64(void) {
     if (g_Task->param.phase == 0) {
@@ -65,7 +65,7 @@ MATCH void func_801EEF64(void) {
 }
 
 /* func_801EEFD4 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF018(void) {
     SYS_DISPATCH_BYTE(D_801F0104, g_Task->header.step);
@@ -130,9 +130,9 @@ MATCH void func_801EF21C(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_Drift.h"
+#include "overlays/bmagic/shared/Effect_Drift.h"
 
-#include "overlays/bmagic/Effect_SetFacingMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetFacingMatrix.h"
 
 MATCH void func_801EF4C4(void) {
     POLY_GT4* prim;
@@ -209,13 +209,13 @@ MATCH void func_801EFC58(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_ArmCounterNextStep.h"
+#include "overlays/bmagic/shared/Effect_ArmCounterNextStep.h"
 
-#include "overlays/bmagic/Effect_CountUpAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpAndStep.h"
 
-#include "overlays/bmagic/Effect_CountDownAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountDownAndStep.h"
 
-#include "overlays/bmagic/Effect_TickOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_TickOnTimerZero.h"
 
 MATCH void func_801EFDF8(void) {
     POLY_G4* prim;
@@ -239,7 +239,7 @@ MATCH void func_801EFDF8(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
 }
 
-#include "overlays/bmagic/Effect_DispatchStep.h"
+#include "overlays/bmagic/shared/Effect_DispatchStep.h"
 
 MATCH void func_801F001C(void) {
     g_Task->param.phase = 0;
@@ -250,7 +250,7 @@ MATCH void func_801F001C(void) {
     g_Task->header.step++;
 }
 
-#include "overlays/bmagic/Effect_AddActor.h"
+#include "overlays/bmagic/shared/Effect_AddActor.h"
 
 MATCH void func_801F00D8(void) {
     Effect_Reset();

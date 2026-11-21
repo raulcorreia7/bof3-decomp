@@ -60,10 +60,10 @@ MATCH void func_801EECF8(void) {
     SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
 }
 
-#include "overlays/bmagic/Effect_StartOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_StartOnZeroTick.h"
 
 /* func_801EEF30 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF74(void) {
     Magic063Steps handlers;
@@ -159,7 +159,7 @@ MATCH void func_801EF1C8(void) {
     g_Task->header.step++;
 }
 
-#include "overlays/bmagic/Effect_EndOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_EndOnZeroTick.h"
 
 MATCH void func_801EF340(void) {
     SYS_DISPATCH_TASK(g_BMagicEffectModes + 1, 1, g_BMagicOrbit);
@@ -175,7 +175,7 @@ MATCH void func_801EF384(void) {
 }
 
 /* func_801EF40C */
-#include "overlays/bmagic/Effect_StartOrbit.h"
+#include "overlays/bmagic/shared/Effect_StartOrbit.h"
 
 MATCH void func_801EF5CC(void) {
     s32 threshold;
@@ -197,7 +197,7 @@ MATCH void func_801EF5CC(void) {
 }
 
 /* func_801EF704 */
-#include "overlays/bmagic/Effect_StepOrbit.h"
+#include "overlays/bmagic/shared/Effect_StepOrbit.h"
 
 MATCH void func_801EF880(void) {
     BMAGIC_ORBIT_BATTLER_AND_CLEAR(func_801F03B0);
