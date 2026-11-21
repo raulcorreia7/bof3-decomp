@@ -15,7 +15,7 @@ two targets is two unrelated functions. Progress: [live status](https://raulcorr
 
 Linux x86_64; on Windows use WSL2. You need `git`, `curl`, `tar`, `unzip`, `7z`, Python 3.12 or
 later, [`uv`](https://docs.astral.sh/uv/), Rust with a C compiler, Meson 1.3 or later, Ninja,
-`clang-format` 23.1.3 and [`dprint`](https://dprint.dev/) 0.64.3. `tools/setup.sh` downloads GCC
+`clang-format` 23.1.5 and [`dprint`](https://dprint.dev/) 0.64.3. `tools/setup.sh` downloads GCC
 2.7.2 PSX, maspsx, MIPS binutils and PsyQ 3.7 and checks each by SHA-256. Versions and install
 commands: [toolchain: host tools](docs/toolchain.md#host-tools).
 

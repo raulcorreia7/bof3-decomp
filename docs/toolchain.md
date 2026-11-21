@@ -14,7 +14,7 @@ checkout, and `tools/setup.sh` checks the SHA-256 of every compiler download.
 | [`uv`](https://docs.astral.sh/uv/)                           | Creates the `.venv` Python environment             | its installer or a system package                                | `tools/setup.sh`       |
 | `cargo` 1.99 or later, a C compiler                          | Build the disc extractor                           | [rustup](https://rustup.rs/), system package                     | extracting the disc    |
 | Meson 1.3 or later, Ninja                                    | Build and check the images                         | system package or `uv tool install meson ninja`                  | every build            |
-| `clang-format`                                               | Formats C; CI pins 23.1.3                          | system package or `uv tool install clang-format`                 | `format`               |
+| `clang-format`                                               | Formats C; CI pins 23.1.5                          | system package or `uv tool install clang-format`                 | `format`               |
 | [`dprint`](https://github.com/dprint/dprint/releases/latest) | Formats Markdown, JSON and TOML                    | release binary on `PATH`; it needs no Node runtime               | `format`               |
 | `shellcheck`                                                 | Lints the shell scripts; CI pins 0.11.0.1          | system package or `uv tool install shellcheck-py`                | CI shell lint          |
 | Ruff, pytest                                                 | Lint Python; run the tool tests                    | `tools/setup.sh --dev`                                           | `format`, `meson test` |
