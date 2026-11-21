@@ -4,15 +4,15 @@
 #include "types.h"
 
 /* The area functions the resident tables and the area images call. */
-void Message_RunAreaMessage(void);
+void UI_MessageRunArea(void);
 /* func_80150224 */
-void Message_StartAreaMessage(s32 message_index);
+void UI_MessageStartArea(s32 message_index);
 /* func_80150284 */
-void Message_Request(s32 request_id);
+void UI_MessageRequest(s32 request_id);
 /* func_801502D0 */
-u8*  Message_GetText(u32 resource_id);
+u8*  UI_MessageGetText(u32 resource_id);
 /* func_8016620C */
-void Message_SetVariable(u8 slot, u8 length, const u8* text);
+void UI_MessageSetVariable(u8 slot, u8 length, const u8* text);
 
 #endif
 
@@ -21,15 +21,15 @@ void Message_SetVariable(u8 slot, u8 length, const u8* text);
 #define OVERLAY_UI_MESSAGE_H_LOCAL
 
 /* func_801507BC */
-extern void Message_DispatchState(void);
+extern void UI_MessageDispatchState(void);
 /* func_8015083C */
-void        Message_RunScript(void);
-void        Message_DispatchAnswerStep(void);
+void        UI_MessageRunScript(void);
+void        UI_MessageDispatchAnswerStep(void);
 /* func_8015142C */
-void        Message_RestartRequest(void);
-void        Message_StartRequest(void);
+void        UI_MessageRestartRequest(void);
+void        UI_MessageStartRequest(void);
 /* func_801518F4 */
-void        Message_DispatchChoiceMode(void);
-void        Message_DispatchStep(void);
+void        UI_MessageDispatchChoiceMode(void);
+void        UI_MessageDispatchStep(void);
 
 #endif

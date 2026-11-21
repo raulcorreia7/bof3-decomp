@@ -162,7 +162,7 @@ MATCH void func_801F363C(void) {
     u8* previous;
 
     MESSAGE_REQUEST_CLEAR();
-    if (g_MessageChoice == 1) {
+    if (g_UiMessageChoice == 1) {
         previous = (u8*)g_Task;
         g_Task   = g_Game.members;
         Script_Select(0x80);
@@ -170,7 +170,7 @@ MATCH void func_801F363C(void) {
     }
 }
 
-#include "overlays/area/shared/Message_Clear.h"
+#include "overlays/area/shared/UI_MessageClear.h"
 
 MATCH void func_801F36E4(void) {
     SYS_DISPATCH_BYTE(D_801F4900, g_Task->unk_04);

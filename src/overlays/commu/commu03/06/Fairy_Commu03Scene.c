@@ -173,9 +173,9 @@ NON_MATCHING void func_801D1250(s32 scene, s32 mode) {
 
     text_offset = (u16*)((u8*)AREA_MESSAGE_TABLE + D_800104E2);
     if (g_SndBGMId == D_801D1918[D_801D1940]) {
-        UI_DrawText(left + 0x14, top + 0x17, 2, 0xFF, (u8*)AREA_MESSAGE_TABLE + *text_offset);
+        UI_TextDraw(left + 0x14, top + 0x17, 2, 0xFF, (u8*)AREA_MESSAGE_TABLE + *text_offset);
     } else {
-        UI_DrawText(left + 0x14, top + 0x17, 0, 0xFF, (u8*)AREA_MESSAGE_TABLE + *text_offset);
+        UI_TextDraw(left + 0x14, top + 0x17, 0, 0xFF, (u8*)AREA_MESSAGE_TABLE + *text_offset);
     }
 
     func_801AE3F0(left + 0x48, top + 0x3C, 0x7C, 0xE, 1, g_WindowStyle);
@@ -187,10 +187,10 @@ NON_MATCHING void func_801D1250(s32 scene, s32 mode) {
         func_801D1714(left + 0x10, top + 0x40, 0, D_801D1908);
     }
     func_801D1714(left + 0x20, top + 0x54, 0, D_801D190C);
-    UI_DrawTextString(left + 0x44, top + 0x54, 0, 3, D_801D18F4);
-    UI_DrawTextString(left + 0x5C, top + 0x54, 3, 1, D_801D18F8);
-    UI_DrawTextString(left + 0x94, top + 0x54, 0, 3, D_801D18F4);
-    UI_DrawTextString(left + 0xAC, top + 0x54, 3, 1, D_801D18FC);
+    UI_TextDrawString(left + 0x44, top + 0x54, 0, 3, D_801D18F4);
+    UI_TextDrawString(left + 0x5C, top + 0x54, 3, 1, D_801D18F8);
+    UI_TextDrawString(left + 0x94, top + 0x54, 0, 3, D_801D18F4);
+    UI_TextDrawString(left + 0xAC, top + 0x54, 3, 1, D_801D18FC);
 
     left_sum  = 0;
     right_sum = 0;

@@ -9,7 +9,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801D0C04(void) {
     g_Commu04Steps[D_801F294C]();
     if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-        Menu_UpdatePanelTasks();
+        UI_PanelUpdateTasks();
     }
 }
 
@@ -21,7 +21,7 @@ MATCH void func_801D0C98(void) {
     u8* state = &g_GameStateIndex;
 
     if (*state != GAME_REQUEST_MESSAGE) {
-        Message_StartAreaMessage(MSG_AREA175_PICK_ITEM);
+        UI_MessageStartArea(MSG_AREA175_PICK_ITEM);
         *state = GAME_REQUEST_MESSAGE;
         D_801F294D += 1;
     }
@@ -29,7 +29,7 @@ MATCH void func_801D0C98(void) {
 
 MATCH void func_801D0CF4(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-        Menu_ResetPanelTasks();
+        UI_PanelResetTasks();
         func_801D16A4();
         D_801D1774 = 4;
         D_801F294D += 1;
@@ -41,8 +41,8 @@ NON_MATCHING void func_801D0D4C(void) {
     if (D_801D1774 != 0) {
         D_801D1774--;
     }
-    UI_DrawWindow(0x14, (0x12 - (D_801D1774 * 12)) & 0xFFFE, 0x118, 0x13, 0xF2, g_WindowStyle);
-    UI_DrawWindowOutline(0x16, 0x14 - (D_801D1774 * 12), 0x113, 0xF, 0);
+    UI_WindowDraw(0x14, (0x12 - (D_801D1774 * 12)) & 0xFFFE, 0x118, 0x13, 0xF2, g_WindowStyle);
+    UI_WindowDrawOutline(0x16, 0x14 - (D_801D1774 * 12), 0x113, 0xF, 0);
 }
 #else
 INCLUDE_ASM(func_801D0D4C);
@@ -52,10 +52,10 @@ MATCH void func_801D11DC(void) {
     if (D_801D1774 < 4U) {
         D_801D1774 += 1;
     }
-    UI_DrawWindow(0x14, (0x12 - (D_801D1774 * 12)) & 0xFFFE, 0x118, 0x13, UI_WINDOW_OPEN_ALL | UI_WINDOW_STYLE_TRANSLUCENT, g_WindowStyle);
-    UI_DrawWindowOutline(0x16, 0x14 - (D_801D1774 * 12), 0x113, 0xF, 0);
-    if (g_MenuPanelTasks[0].state == 0) {
-        Menu_ResetPanelTasks();
+    UI_WindowDraw(0x14, (0x12 - (D_801D1774 * 12)) & 0xFFFE, 0x118, 0x13, UI_WINDOW_OPEN_ALL | UI_WINDOW_STYLE_TRANSLUCENT, g_WindowStyle);
+    UI_WindowDrawOutline(0x16, 0x14 - (D_801D1774 * 12), 0x113, 0xF, 0);
+    if (g_UiPanelTasks[0].state == 0) {
+        UI_PanelResetTasks();
         MESSAGE_START_WAIT(MSG_AREA175_SEE_YOU_LATER);
         D_801F294C += 1;
     }
@@ -69,13 +69,13 @@ MATCH void func_801D12C8(void) {
     if (D_801D1774 < 4U) {
         D_801D1774 += 1;
     }
-    UI_DrawWindow(0x14, (0x12 - (D_801D1774 * 12)) & 0xFFFE, 0x118, 0x13, UI_WINDOW_OPEN_ALL | UI_WINDOW_STYLE_TRANSLUCENT, g_WindowStyle);
-    UI_DrawWindowOutline(0x16, 0x14 - (D_801D1774 * 12), 0x113, 0xF, 0);
-    if (g_MenuPanelTasks[0].state != 0) {
+    UI_WindowDraw(0x14, (0x12 - (D_801D1774 * 12)) & 0xFFFE, 0x118, 0x13, UI_WINDOW_OPEN_ALL | UI_WINDOW_STYLE_TRANSLUCENT, g_WindowStyle);
+    UI_WindowDrawOutline(0x16, 0x14 - (D_801D1774 * 12), 0x113, 0xF, 0);
+    if (g_UiPanelTasks[0].state != 0) {
         return;
     }
 
-    Menu_ResetPanelTasks();
+    UI_PanelResetTasks();
     /* kept: retail indexes g_FairyJobs by the selection at every use; a FairyJob local shrinks the image by 0x50 bytes. */
     switch (g_FairyJobs[g_SceneEventState.selection].unk_03 & 0xF) {
         case ITEM_CATEGORY_ITEM:
@@ -94,7 +94,7 @@ MATCH void func_801D12C8(void) {
 
     /* The copy shop handles the unsellable rows like the vital items. */
     if (flags & ITEM_UNSELLABLE) {
-        Message_StartAreaMessage(MSG_AREA175_COPY_CANNOT_HELP);
+        UI_MessageStartArea(MSG_AREA175_COPY_CANNOT_HELP);
         D_801F294D = 6;
     } else {
         record = Item_GetRecord(g_FairyJobs[g_SceneEventState.selection].unk_03, g_FairyJobs[g_SceneEventState.selection].record_state);
@@ -102,7 +102,7 @@ MATCH void func_801D12C8(void) {
             g_TextVariables[0][i] = record[i];
         }
         g_TextVariables[0][ITEM_NAME_LENGTH] = 0;
-        Message_StartAreaMessage(MSG_AREA175_CONFIRM_ITEM);
+        UI_MessageStartArea(MSG_AREA175_CONFIRM_ITEM);
         D_801D1774 = 0;
         D_801F294D += 1;
     }
@@ -130,7 +130,7 @@ MATCH void func_801D1628(void) {
     u8* state = &g_GameStateIndex;
 
     if (*state != GAME_REQUEST_MESSAGE) {
-        Message_StartAreaMessage(MSG_AREA175_ASK_CHOOSE_OTHER);
+        UI_MessageStartArea(MSG_AREA175_ASK_CHOOSE_OTHER);
         *state = GAME_REQUEST_MESSAGE;
     }
 }
@@ -138,23 +138,23 @@ MATCH void func_801D1628(void) {
 #include "overlays/commu/shared/Fairy_EndCommuScene.h"
 
 MATCH void func_801D16A4(void) {
-    g_MenuPanelTasks[0].panel      = 2;
-    g_MenuPanelTasks[0].mode       = 0;
-    g_MenuPanelTasks[0].state      = 2;
-    g_MenuPanelTasks[0].active     = 1;
-    LOH(g_MenuPanelTasks[0].pos.x) = -0xAA;
-    g_MenuPanelTasks[0].pos.y      = 0x3E;
-    g_MenuPanelTasks[0].unk_0A     = 0;
-    g_MenuPanelTasks[0].unk_0B     = 0;
-    g_MenuPanelTasks[0].unk_0C     = 0;
-    g_MenuPanelTasks[0].flags      = 0xFF;
-    g_MenuPanelTasks[0].unk_08     = 0;
-    g_MenuPanelTasks[0].unk_09     = 0;
-    g_MenuPanelTasks[0].u.grow.w   = 0;
-    g_MenuPanelTasks[0].u.grow.h   = 0;
+    g_UiPanelTasks[0].panel      = 2;
+    g_UiPanelTasks[0].mode       = 0;
+    g_UiPanelTasks[0].state      = 2;
+    g_UiPanelTasks[0].active     = 1;
+    LOH(g_UiPanelTasks[0].pos.x) = -0xAA;
+    g_UiPanelTasks[0].pos.y      = 0x3E;
+    g_UiPanelTasks[0].unk_0A     = 0;
+    g_UiPanelTasks[0].unk_0B     = 0;
+    g_UiPanelTasks[0].unk_0C     = 0;
+    g_UiPanelTasks[0].flags      = 0xFF;
+    g_UiPanelTasks[0].unk_08     = 0;
+    g_UiPanelTasks[0].unk_09     = 0;
+    g_UiPanelTasks[0].u.grow.w   = 0;
+    g_UiPanelTasks[0].u.grow.h   = 0;
 
-    g_MenuPanelTasks[1].panel  = 2;
-    g_MenuPanelTasks[1].mode   = 1;
-    g_MenuPanelTasks[1].state  = 0;
-    g_MenuPanelTasks[1].active = 0;
+    g_UiPanelTasks[1].panel  = 2;
+    g_UiPanelTasks[1].mode   = 1;
+    g_UiPanelTasks[1].state  = 0;
+    g_UiPanelTasks[1].active = 0;
 }

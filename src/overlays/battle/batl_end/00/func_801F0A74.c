@@ -9,12 +9,12 @@ MATCH void func_801F0A74(s16 x, s16 y, u8 clut, u8 category, u8 item, u8 amount,
     if (amount == 0) {
         return;
     }
-    UI_DrawIcon((u16)x, (u16)(y + 2), D_801F0CD4[Item_GetIcon(category, item) & BYTE_MASK], shade);
+    UI_IconDraw((u16)x, (u16)(y + 2), D_801F0CD4[Item_GetIcon(category, item) & BYTE_MASK], shade);
     record = Item_GetRecord(category, item);
-    UI_DrawText(x + 10, y, clut, Game_ReadCommand(record) & BYTE_MASK, record);
+    UI_TextDraw(x + 10, y, clut, Game_ReadCommand(record) & BYTE_MASK, record);
     if (amount < 2) {
         return;
     }
-    TEXT_Format(g_UiFormatBuffer, D_801EEC50, amount);
-    UI_DrawGlyphString(x + 109, y + 2, clut, g_UiFormatBuffer);
+    TEXT_Format(g_UiTextFormatBuffer, D_801EEC50, amount);
+    UI_TextDrawGlyphString(x + 109, y + 2, clut, g_UiTextFormatBuffer);
 }

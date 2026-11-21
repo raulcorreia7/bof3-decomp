@@ -4,7 +4,7 @@ MATCH void func_801D9428(u8 index) {
     volatile u8*  state8;
     volatile u16* state16;
 
-    Menu_OpenPanelTask(4, 3);
+    UI_PanelOpenTask(4, 3);
     state8          = (u8*)(PARTY_STATE_PTR);
     state16         = BATTLE_GLOBAL_RAM_U16;
     state8[0x83C2]  = 3;

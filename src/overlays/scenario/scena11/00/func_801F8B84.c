@@ -58,7 +58,7 @@ MATCH void func_801F8B84(void) {
             if (g_GameStateIndex == 2) {
                 break;
             }
-            UI_SetMode(0xD);
+            UI_ModeSet(0xD);
             SND_FadeOutSequence(0, 0, 4, 0x1E);
             g_ScenarioState.step_05 = 0xB;
             break;
@@ -171,7 +171,7 @@ MATCH void func_801F8B84(void) {
             SND_FadeOutSequence(0, 1, 4, 0x1E);
             *progress               = 0;
             g_ScenarioState.step_05 = 0x2B;
-            UI_SetMode(0xD);
+            UI_ModeSet(0xD);
             break;
         }
         case 43:
@@ -182,7 +182,7 @@ MATCH void func_801F8B84(void) {
             g_ScenarioState.step_05 = 0x2C;
             break;
         case 44:
-            Message_StartAreaMessage(MSG_SCENA11_064);
+            UI_MessageStartArea(MSG_SCENA11_064);
             g_GameStateIndex        = 2;
             g_ScenarioState.step_05 = 0x2D;
             break;

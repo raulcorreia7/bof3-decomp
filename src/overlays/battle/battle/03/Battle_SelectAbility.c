@@ -39,7 +39,7 @@ MATCH void Battle_SelectAbility(void) {
     }
     if ((flag & STATUS_SILENCED) != 0 && (D_801CA71C[*(u16*)&g_Battle.action_id].mask & 0x400)) {
         Battle_OpenPanel();
-        Battle_QueueEvent(2, 0, 0, 45, Message_GetText(0x37));
+        Battle_QueueEvent(2, 0, 0, 45, UI_MessageGetText(0x37));
         g_Battle.phase.step     = 0;
         g_Battle.phase.sub_step = 0;
         return;
@@ -56,7 +56,7 @@ MATCH void Battle_SelectAbility(void) {
     }
     if (row < D_801463C8) {
         Battle_OpenPanel();
-        Battle_QueueEvent(2, 0, 0, 45, Message_GetText(0x36));
+        Battle_QueueEvent(2, 0, 0, 45, UI_MessageGetText(0x36));
         g_Battle.phase.step     = 0;
         g_Battle.phase.sub_step = 0;
         return;

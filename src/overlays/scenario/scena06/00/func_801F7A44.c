@@ -36,7 +36,7 @@ MATCH void func_801F7A44(void) {
             break;
         case 4:
             if (g_ScenarioState.timer_06-- == 0) {
-                UI_SetMode(UI_MODE_SLOW_FADE_IN);
+                UI_ModeSet(UI_MODE_SLOW_FADE_IN);
                 g_AreaDrawFlags         = AREA_DRAW_ALL_FLAGS;
                 g_ScenarioState.step_05 = 7;
             }

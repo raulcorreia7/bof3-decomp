@@ -10,11 +10,11 @@ MATCH void func_800B0410(void) {
             panel->x.signed_value += 0x20;
             return;
         }
-        Menu_ClearPanel();
+        UI_PanelClear();
         return;
     }
     if (panel->x.signed_value < -0xBD) {
-        Menu_ClearPanel();
+        UI_PanelClear();
         return;
     }
     panel->x.signed_value -= 0x20;

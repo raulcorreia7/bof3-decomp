@@ -60,7 +60,7 @@ Battle_Unequip = { addr = 0x8009AC18, type = "func", source = "Removes the equip
 Battle_InitItemPanel = { addr = 0x8009AF84, type = "func", source = "Initializes the choice panel for an item command." }
 Battle_InitEquipChangePanel = { addr = 0x8009B03C, type = "func", source = "Sets up the equipment panel for the change flow: panel mode 2, the six worn items of s_BattleEquipment as the list, the scroll and cursor fields." }
 Battle_InitEquipUsePanel = { addr = 0x8009B160, type = "func", source = "Sets up the equipment panel for the use flow: panel mode 3 with the six worn items of s_BattleEquipment as the list." }
-Battle_ClearMenuPanels = { addr = 0x8009B20C, type = "func", source = "Clears menu panel tasks 16 through 19 with Menu_ClearPanel." }
+Battle_ClearMenuPanels = { addr = 0x8009B20C, type = "func", source = "Clears menu panel tasks 16 through 19 with UI_PanelClear." }
 Battle_RunEscapeCommand = { addr = 0x8009B274, type = "func", source = "Runs the Escape command: calls the step its ui_step selects. Entry 6 of the battle command sub-steps." }
 Battle_TryEscape = { addr = 0x8009B2B0, type = "func", source = "Counts an escape attempt and rolls it against the agility of the party and the enemies; sets ui_step." }
 Battle_StartEscapeScroll = { addr = 0x8009B488, type = "func", source = "Starts the scroll after the escape roll: clears the event slot, loads the battle SE archive, applies the scroll delta to the area target cell, sets the camera height step and resets the party command modes." }
@@ -191,10 +191,10 @@ Battle_CenterCamera = { addr = 0x800AFD9C, type = "func", source = "Centres the 
 Battle_SelectStepRule = { addr = 0x800AFF98, type = "func", source = "existing proposal: selects a battle step rule for a player battler" }
 Battle_DrawCommandList = { addr = 0x800B1728, type = "func", source = "Draws the battle command list." }
 Battle_DrawTitledFrame = { addr = 0x800B1A74, type = "func", source = "Draws a bordered battle panel with a title." }
-Menu_DrawPanelCursor = { addr = 0x800B20D4, type = "func", source = "Draws the front-end panel cursor at the task root x and y through Menu_DrawCursorSprite." }
+UI_CursorDrawPanel = { addr = 0x800B20D4, type = "func", source = "Draws the front-end panel cursor at the task root x and y through UI_CursorDraw." }
 Battle_DrawInventoryPanel = { addr = 0x800B2104, type = "func", source = "runs the panel state handler and draws the inventory window" }
-Menu_SetPosX_800B23F8 = { addr = 0x800B23F8, type = "func", source = "same body as emi/etc/shisu/00@0x801D32E0 Menu_SetPosX" }
-Menu_SlidePanelLeft = { addr = 0x800B254C, type = "func", source = "Slides the menu panel to the left." }
+Menu_SetPosX_800B23F8 = { addr = 0x800B23F8, type = "func", source = "same body as emi/etc/shisu/00@0x801D32E0 UI_PanelSetPosX" }
+UI_PanelSlideLeft = { addr = 0x800B254C, type = "func", source = "Slides the menu panel to the left." }
 Menu_DrawInventoryWindow = { addr = 0x800B25C0, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
 Menu_DrawPanelIcon = { addr = 0x800B326C, type = "func", source = "Draws one MenuIconPrim from uv/clut." }
 Menu_DrawEquipChoiceWindow = { addr = 0x800B3AE8, type = "func", source = "Draws the equip list: gathers the inventory rows of the equipment slot's category (unk_09) that the party member can equip, armor only of the slot's type, into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts, then draws them with the category title, the choice count and the scroll bar." }

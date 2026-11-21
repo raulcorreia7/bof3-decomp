@@ -6,7 +6,7 @@ MATCH void func_800A493C(void) {
     s32  trigger;
     u16  held;
 
-    g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = Message_GetText(*state + 0x42);
+    g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = UI_MessageGetText(*state + 0x42);
     trigger                                         = INPUT_REPEATED(*pad_state, (PADLright | PADLdown | PADLleft));
     held                                            = *pad_state;
     if (held & g_InputMasks[BATTLE_INPUT_CANCEL]) {

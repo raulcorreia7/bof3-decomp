@@ -8,7 +8,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x0, .data, g_AreaModuleId]
-      - [0x4, .rodata, Message_SetAnswerMessage]
+      - [0x4, .rodata, UI_MessageAnswerSet]
   # Placement: a source shared with the earlier segment must claim its sections first.
   - name: main
     type: code
@@ -63,7 +63,7 @@ segments:
       - [0x11B8, c, FairyNickname_AnswerLikeNickname]
       - [0x11DC, c, FairyNickname_AnswerKeepMakingNicknames]
       - [0x1228, c, Fairy_AnswerKnowsWhatToDo]
-      - [0x1250, c, Message_SetAnswerMessage]
+      - [0x1250, c, UI_MessageAnswerSet]
       - [0x12B4, c, FairySinger_AnswerHearSong]
       - [0x132C, c, func_801F3F2C]
       - [0x13BC, c, Area_QueueSelectEffect]

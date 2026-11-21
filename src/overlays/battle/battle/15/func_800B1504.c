@@ -5,10 +5,10 @@ MATCH void func_800B1504(void) {
     s16            x;
 
     Battle_DrawCommandList();
-    task = g_MenuCurrentPanel;
+    task = g_UiPanelCurrent;
     x    = task->pos.x;
     if (x >= 347) {
-        Menu_ClearPanel();
+        UI_PanelClear();
     } else {
         task->pos.x = x + 32;
     }

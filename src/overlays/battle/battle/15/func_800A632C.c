@@ -8,7 +8,7 @@ MATCH void func_800A632C(void) {
     u8*           page_counter;
     u16*          effect_flag;
 
-    value                                           = Message_GetText(0x62);
+    value                                           = UI_MessageGetText(0x62);
     g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = value;
     pad_state                                       = &g_PadStates[0].pressed;
     decoded                                         = INPUT_REPEATED(*pad_state, (PADLright | PADLleft));
@@ -35,5 +35,5 @@ MATCH void func_800A632C(void) {
     }
     /* Retail passes the unmasked 32-bit cursor expression; the shared u16
      * prototype would add a truncation the original does not have. */
-    ((void (*)(s32, s32, s32))Menu_DrawCursorSprite)((D_801463B4 * 0x22) + 0xD5, 0x18, 0);
+    ((void (*)(s32, s32, s32))UI_CursorDraw)((D_801463B4 * 0x22) + 0xD5, 0x18, 0);
 }

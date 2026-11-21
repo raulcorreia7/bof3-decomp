@@ -10,7 +10,7 @@ MATCH void func_801D76B8(void) {
     WinDrawCueText(28, 21, (u16)((s8)*cursor + 0x65));
     Menu_DrawInoculationWindow(D_80148656, 152, 63, 0, 0xFF);
     Menu_DrawCursorFrame(17, ((s8)D_80148656 * 0x36 + 0x3E) & 0xFFFE, 128, 52, 0, 6);
-    Menu_DrawCursorSprite(155, (s8)*cursor * 0xD + 0x44, 0);
+    UI_CursorDraw(155, (s8)*cursor * 0xD + 0x44, 0);
     input = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     if (input & PADLdown) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));

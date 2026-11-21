@@ -1,0 +1,6 @@
+#include "area049_14.h"
+
+/* func_801F2C54 */
+MATCH void UI_MessageAnswerSet(void) {
+    g_UiMessageRequest = D_801F5CD8[g_UiMessageChoice];
+}

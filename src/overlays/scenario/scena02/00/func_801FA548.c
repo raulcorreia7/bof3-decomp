@@ -56,7 +56,7 @@ MATCH void func_801FA548(void) {
         case 15:
             if (g_ScriptVars[0] == 0x19) {
                 SND_PlaySE(0x201);
-                UI_SetMode(0xF);
+                UI_ModeSet(0xF);
                 g_ScenarioState.step_05 = 0x10;
             }
             break;
@@ -70,7 +70,7 @@ MATCH void func_801FA548(void) {
         case 17:
             if (g_ScriptVars[0] == 0x1B) {
                 g_AreaDrawFlags = 0x1F;
-                UI_SetMode(0x10);
+                UI_ModeSet(0x10);
                 g_ScenarioState.step_05 = 0x12;
                 func_801BFE34(0x1C0000, 0x5B0000, 0xC);
                 g_ScriptVars[0] = 0x1C;
@@ -92,7 +92,7 @@ MATCH void func_801FA548(void) {
             break;
         case 20:
             if (g_ScriptVars[0] == 0x2B) {
-                UI_SetMode(0xD);
+                UI_ModeSet(0xD);
                 g_ScenarioState.step_05 = 0x15;
             }
             break;
@@ -120,7 +120,7 @@ MATCH void func_801FA548(void) {
             break;
         case 25:
             if (g_ScriptVars[0] == 1) {
-                UI_SetMode(0xD);
+                UI_ModeSet(0xD);
                 g_ScenarioState.step_05 = 0x1A;
             }
             break;

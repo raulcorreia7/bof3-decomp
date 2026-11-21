@@ -31,7 +31,7 @@ NON_MATCHING void func_801F9880(void) {
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
-            UI_SetMode(5);
+            UI_ModeSet(5);
             g_AreaDrawFlags         = AREA_DRAW_ALL_FLAGS;
             g_ScenarioState.step_05 = 4;
             break;

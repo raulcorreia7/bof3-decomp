@@ -4,7 +4,7 @@
 MATCH void Battle_ShowEnemyPanel(void) {
     MenuPanelTask* panel;
 
-    panel = g_MenuCurrentPanel;
+    panel = g_UiPanelCurrent;
     Battle_DrawEnemyNamePanel((s16)panel->pos.x, (s16)panel->pos.y, panel->unk_0A);
     if (g_Battle.selection_latch != 0u) {
         if (g_BattleActorTurn->command.target == BATTLE_PANEL_TASK->selection.slot) {

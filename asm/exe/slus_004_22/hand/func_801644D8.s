@@ -1,12 +1,12 @@
-/* UI_DrawIconCell - handwritten original (assembly-match, Main-approved).
+/* UI_IconDrawCell - handwritten original (assembly-match, Main-approved).
  * handwritten sprite-quad emitter, called from the battle and shop overlays;
  * the body is included verbatim from the original image (0x2ec bytes).
  * SDK call targets (numeric, as in func_801642F4): SetDrawMode=0x8017C2D8,
  * SetPolyFT4=0x8017A9B8.
  */
-.globl UI_DrawIconCell
-.type UI_DrawIconCell, @function
-UI_DrawIconCell:
+.globl UI_IconDrawCell
+.type UI_IconDrawCell, @function
+UI_IconDrawCell:
 
     /* CE4D8 801644D8 B0FFBD27 */  addiu      $sp, $sp, -0x50
     /* CE4DC 801644DC 4800B6AF */  sw         $s6, 0x48($sp)
@@ -202,4 +202,4 @@ UI_DrawIconCell:
     /* CE7B8 801647B8 5000BD27 */  addiu      $sp, $sp, 0x50
     /* CE7BC 801647BC 0800E003 */  jr         $ra
     /* CE7C0 801647C0 00000000 */   nop
-.size UI_DrawIconCell, . - UI_DrawIconCell
+.size UI_IconDrawCell, . - UI_IconDrawCell

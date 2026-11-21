@@ -14,7 +14,7 @@ MATCH void func_801F8538(void) {
             break;
         case 1:
             if (g_ScriptVars[0] == 0x21) {
-                UI_SetMode(UI_MODE_LONG_FADE_OUT);
+                UI_ModeSet(UI_MODE_LONG_FADE_OUT);
                 g_ScenarioState.step_05 = 2;
             }
             break;

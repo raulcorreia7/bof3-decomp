@@ -49,7 +49,7 @@ MATCH void func_801F7F08(void) {
             g_GameState = &g_Game.members[0];
             func_801C308C(0);
             Char_LoseHP(1, 6);
-            Message_Request(MSG_SYSTEM_STUNG_BY_CATERPILLAR);
+            UI_MessageRequest(MSG_SYSTEM_STUNG_BY_CATERPILLAR);
             g_GameStateIndex        = 2;
             g_ScenarioState.step_05 = 2;
             break;
@@ -64,11 +64,11 @@ MATCH void func_801F7F08(void) {
                 name = Item_GetRecord(ITEM_CATEGORY_ITEM, ITEM_SHALY_SEED);
                 strncpy((char*)g_TextVariables[0], (char*)name, 12);
                 D_801490E4[0] = 0;
-                Message_Request(MSG_SYSTEM_FOUND_ITEM_NO_ROOM);
+                UI_MessageRequest(MSG_SYSTEM_FOUND_ITEM_NO_ROOM);
                 g_GameStateIndex        = 2;
                 g_ScenarioState.step_05 = 2;
             } else {
-                Message_StartAreaMessage(MSG_SCENA11_066);
+                UI_MessageStartArea(MSG_SCENA11_066);
                 g_GameStateIndex        = 2;
                 g_ScenarioState.step_05 = 6;
             }
@@ -86,7 +86,7 @@ MATCH void func_801F7F08(void) {
                 break;
             }
             SND_PlaySE(0x106);
-            Message_StartAreaMessage(MSG_SCENA11_000);
+            UI_MessageStartArea(MSG_SCENA11_000);
             g_GameStateIndex        = 2;
             g_ScenarioState.step_05 = 0x15;
             break;

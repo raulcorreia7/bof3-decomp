@@ -11,7 +11,7 @@ MATCH void func_801D446C(void) {
         g_InputRepeatButtons = 0;
         g_InputRepeatDelay   = 0;
         if (D_8014865C != -1) {
-            Message_Request(MSG_SYSTEM_ASK_SAVE_MORNING);
+            UI_MessageRequest(MSG_SYSTEM_ASK_SAVE_MORNING);
         }
         for (i = 0; i < 4; i++) {
             if (D_801E6100[i] != 0) {

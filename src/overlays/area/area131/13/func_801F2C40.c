@@ -1,7 +1,7 @@
 #include "area131_13.h"
 
 MATCH void func_801F2C40(void) {
-    if (g_MessageChoice == 0) {
+    if (g_UiMessageChoice == 0) {
         Game_SetScriptActive();
         g_ScenarioState.state_04                = 7;
         g_ScenarioState.step_05                 = 10;
@@ -10,8 +10,8 @@ MATCH void func_801F2C40(void) {
         ((u8*)g_ScriptWorkRecord)[0x78]         = 2;
         ((u8*)g_ScriptWorkRecord)[0x77]         = 4;
         *(u16*)((u8*)g_ScriptWorkRecord + 0x7E) = 0;
-        g_MessageRequest                        = MSG_AREA131_ASK_DESTINATION;
+        g_UiMessageRequest                      = MSG_AREA131_ASK_DESTINATION;
     } else {
-        g_MessageRequest = MESSAGE_NONE;
+        g_UiMessageRequest = MESSAGE_NONE;
     }
 }

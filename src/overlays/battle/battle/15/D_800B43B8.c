@@ -625,7 +625,7 @@ static u8 s_gap_800B6D81_0 = 0x00;
 static u8 s_gap_800B6D81_1 = 0x00;
 static u8 s_gap_800B6D81_2 = 0x80;
 
-/* Ability-panel glyph runs: x, y, glyph triples read by UI_DrawSpriteRun and
+/* Ability-panel glyph runs: x, y, glyph triples read by UI_SpriteDrawRun and
  * ending in a 0xFF glyph. func_800B2C90 picks the flag variants by
  * task->unk_09. */
 /* D_800B6D84 */
@@ -649,7 +649,7 @@ static u8 s_gap_800B6DD2_1 = 0x00;
 u8 s_BattlePanelUnselectedMarker[6] = {0x00, 0x00, 0x30, 0x00, 0x00, 0xFF};
 static u8 s_gap_800B6DDA_0 = 0x00;
 static u8 s_gap_800B6DDA_1 = 0x00;
-/* Panel value glyph run passed to UI_DrawSpriteRun by func_800B3324. */
+/* Panel value glyph run passed to UI_SpriteDrawRun by func_800B3324. */
 /* D_800B6DDC */
 u8 s_BattlePanelValueRun[42] = {0x00, 0x00, 0x0B, 0x01, 0x00, 0x0C, 0x04, 0x00, 0x01, 0x05, 0x00,
                                 0x01, 0x06, 0x00, 0x01, 0x07, 0x00, 0x01, 0x08, 0x00, 0x01, 0x09,
@@ -657,7 +657,7 @@ u8 s_BattlePanelValueRun[42] = {0x00, 0x00, 0x0B, 0x01, 0x00, 0x0C, 0x04, 0x00, 
                                 0x0E, 0x00, 0x0A, 0x0F, 0x00, 0x03, 0x00, 0x00, 0xFF};
 static u8 s_gap_800B6E06_0 = 0x00;
 static u8 s_gap_800B6E06_1 = 0x00;
-Callback D_800B6E08[6] = {Menu_DrawPanelCursor, Battle_DrawInventoryPanel, func_800B2258, func_800B232C, func_800B2478, func_800B258C};
+Callback D_800B6E08[6] = {UI_CursorDrawPanel, Battle_DrawInventoryPanel, func_800B2258, func_800B232C, func_800B2478, func_800B258C};
 Callback D_800B6E20[5] = {func_800B20CC, func_800B2158, func_800B2198, func_800B21D8, func_800B2218};
 Callback D_800B6E34[3] = {func_800B20CC, func_800B22AC, func_800B22EC};
 Callback D_800B6E40[4] = {func_800B20CC, func_800B23B8, Menu_SetPosX_800B23F8, func_800B2438};

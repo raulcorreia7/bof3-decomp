@@ -26,23 +26,23 @@ MATCH void Battle_SelectEquipRow(void) {
     } else {
         D_801485DC = 0;
     }
-    g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = Message_GetText(D_8014862E == 0 ? 0x30 : 0x32);
+    g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = UI_MessageGetText(D_8014862E == 0 ? 0x30 : 0x32);
     input                                           = &g_PadStates[0].pressed;
     trigger                                         = INPUT_REPEATED(*input, (PADLup | PADLdown));
     held                                            = *input;
     if ((held & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
-        g_BattlePanelMode          = 1;
-        g_BattleChoicePhase        = 3;
-        g_BattleSelectionHead      = 1;
-        D_80148594                 = 0;
-        D_80148624                 = 0;
-        D_801483C0                 = 1;
-        D_801485DC                 = 0;
-        g_Battle.ui_step           = 1;
-        g_Battle.ui_mode           = 0;
-        g_MenuPanelTasks[16].pos.x = D_80148598;
-        g_MenuPanelTasks[16].pos.y = D_8014859A;
+        g_BattlePanelMode        = 1;
+        g_BattleChoicePhase      = 3;
+        g_BattleSelectionHead    = 1;
+        D_80148594               = 0;
+        D_80148624               = 0;
+        D_801483C0               = 1;
+        D_801485DC               = 0;
+        g_Battle.ui_step         = 1;
+        g_Battle.ui_mode         = 0;
+        g_UiPanelTasks[16].pos.x = D_80148598;
+        g_UiPanelTasks[16].pos.y = D_8014859A;
         return;
     }
     if ((held & PADRleft) != 0u) {

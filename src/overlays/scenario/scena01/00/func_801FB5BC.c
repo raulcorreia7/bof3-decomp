@@ -82,7 +82,7 @@ MATCH void func_801FB5BC(void) {
             break;
         case 16:
             if (g_ScriptVars[0] == 0x19) {
-                UI_SetMode(UI_MODE_LONG_FADE_OUT);
+                UI_ModeSet(UI_MODE_LONG_FADE_OUT);
                 g_ScenarioState.step_05 = 0x11;
             }
             break;

@@ -7,7 +7,7 @@ NON_MATCHING void Battle_ChooseEquipAction(void) {
     u8* panel;
     u16 held;
     state                                           = (u8*)&D_8014862E;
-    g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = Message_GetText((*state) == 0u ? 0x2Fu : 0x31u);
+    g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = UI_MessageGetText((*state) == 0u ? 0x2Fu : 0x31u);
     if (D_80148627 == 0u) {
         D_801485DC = 1u;
         D_801485E0 = D_80148628 + (6 * (8 * (*state)));

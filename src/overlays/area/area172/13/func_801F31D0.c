@@ -19,7 +19,7 @@ MATCH void func_801F31D0(void) {
         spin++;
     }
     if (--g_Task->timer == 0) {
-        UI_SetMode(8);
+        UI_ModeSet(8);
         g_Task->header.mode++;
     }
 }

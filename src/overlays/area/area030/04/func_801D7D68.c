@@ -6,7 +6,7 @@
 MATCH void func_801D7D68(s16 x, s16 y, u8 column_mode) {
     s32 i;
 
-    UI_DrawWindow((x + 2), (y + 2), 40, 16, 0, g_WindowStyle);
+    UI_WindowDraw((x + 2), (y + 2), 40, 16, 0, g_WindowStyle);
     Fishing_SetDrawMode(8, 1);
     Fishing_DrawSprite((u8)(column_mode * 4 + 0x1D), 1, x, y);
     Fishing_DrawSprite((u8)(column_mode * 4 + 0x1E), 1, x, y + 16);

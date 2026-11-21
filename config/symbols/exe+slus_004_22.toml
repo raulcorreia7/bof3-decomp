@@ -39,7 +39,7 @@ g_UiTitleFadePhase = { addr = 0x80143C31, source = "Phase of the title fade: 1 w
 g_UiTitleChoicePhase = { addr = 0x80143C32, source = "Phase of the title choices: 0 at the start, 1 once the title fade ends (Title_AdvanceFade) and 0 again when the game starts; nonzero draws the choice panels." }
 g_UiTitleInputGate = { addr = 0x80143C33, source = "Gate of the title start button: 1 from the title screen start until the button is accepted or the game starts, then 0." }
 g_UiWindowEffectBusy = { addr = 0x80143C40, source = "Tells whether a window effect is running." }
-g_UiLocalMode = { addr = 0x80143C90, source = "Set by UI_SetMode, which arms UI_DispatchLocalMode." }
+g_UiModeLocal = { addr = 0x80143C90, source = "Set by UI_ModeSet, which arms UI_ModeDispatchLocal." }
 g_SysCurrentThread = { addr = 0x80143D40, type = "Thread", source = "The thread record the scheduler runs now." }
 g_GfxBufferIndex = { addr = 0x80143D44, source = "Index of the frame buffer being drawn." }
 g_GfxBuffers = { addr = 0x80143D48, source = "SYS_InitRuntime initializes the display frames and SYS_Main selects one by g_GfxBufferIndex" }
@@ -82,7 +82,7 @@ g_SaveEntryFacing = { addr = 0x801448FF, type = "u8", source = "Facing of the pa
 g_SaveEntryX = { addr = 0x80144900, type = "u32", source = "X position of the party where the game was saved, restored by Game_NewGame." }
 g_SaveEntryY = { addr = 0x80144904, type = "u32", source = "Y position of the party where the game was saved, restored by Game_NewGame." }
 g_SndMono = { addr = 0x80144951, type = "u8", source = "SAVE_RunLoadVerify selects SsSetStereo for 0 and SsSetMono otherwise; SND_SetCDVolume halves the CD mix for nonzero" }
-g_WindowStyle = { addr = 0x80144952, type = "u8", source = "The last argument of UI_DrawWindow and Menu_DrawHeaderBar in the menu and battle overlays; SYS_StartFrontend zeroes it at boot; the head of the CharacterRoster view." }
+g_WindowStyle = { addr = 0x80144952, type = "u8", source = "The last argument of UI_WindowDraw and Menu_DrawHeaderBar in the menu and battle overlays; SYS_StartFrontend zeroes it at boot; the head of the CharacterRoster view." }
 g_AutoRun = { addr = 0x80144956, source = "Auto Run option: 1 walks by default and runs while the run button is held, 0 the reverse (func_801B0C88, func_80167428; the option panel of func_801E26A8 lists it)" }
 g_Characters = { addr = 0x80144968, size = 0x520, source = "The characters." }
 g_SceneFlagWords = { addr = 0x80144E88, type = "u8", source = "Scene flag words, one per scenario." }
@@ -121,7 +121,7 @@ g_InputPressed = { addr = 0x80145AA8, type = "u16", alias = true, source = "g_Pa
 g_InputMasks = { addr = 0x80145AB4, type = "u16", source = "Button masks of the controller." }
 g_InputRepeatDelay = { addr = 0x80145AC6, source = "INPUT_GetRepeatedButtons reloads and decrements the repeat countdown" }
 g_InputRepeatButtons = { addr = 0x80145AC8, source = "INPUT_GetRepeatedButtons snapshots held buttons and tests them on repeat" }
-g_UiFormatBuffer = { addr = 0x80145AD4, source = "Buffer for formatted UI text." }
+g_UiTextFormatBuffer = { addr = 0x80145AD4, source = "Buffer for formatted UI text." }
 g_PaletteFades = { addr = 0x80145BD4, type = "PaletteFade", size = 0x180, source = "Palette fade table: one PaletteFade row per fading target, claimed by GFX_AllocPaletteFade and released by GFX_FreePaletteFade." }
 g_PaletteCells = { addr = 0x80145D54, source = "The palette cell map read by GFX_FindPaletteCell and GFX_MarkPaletteCells (wiki formats/graphics.md)." }
 g_PaletteAnimations = { addr = 0x80145D94, source = "The palette animation slots GFX_StartPaletteAnimation and GFX_StepPaletteAnimation read (wiki formats/graphics.md)." }
@@ -228,7 +228,7 @@ g_AreaGridActors = { addr = 0x8014828C, source = "The grid actors queued for the
 g_AreaDrawState = { addr = 0x8014832C, size = 0x4, alias = true, source = "Area draw counts." }
 g_AreaGridActorCount = { addr = 0x8014832D, source = "Number of grid actors in the queue." }
 g_AreaDrawFlags = { addr = 0x8014832E, source = "Flags that select the area draw passes." }
-g_MenuPanelTasks = { addr = 0x80148330, source = "The menu panel tasks." }
+g_UiPanelTasks = { addr = 0x80148330, source = "The menu panel tasks." }
 g_BattleMessageState = { addr = 0x801483C3, type = "u8", source = "State of the battle message window." }
 g_BattleChoicePanel = { addr = 0x80148570, source = "The battle choice panel." }
 g_BattleChoicePhase = { addr = 0x80148573, type = "u8", source = "Phase of the battle choice panel." }
@@ -236,8 +236,8 @@ g_BattleListCursor = { addr = 0x8014859F, type = "u8", source = "Cursor row of t
 g_BattlePanelMode = { addr = 0x801485BB, type = "u8", source = "Current battle panel mode." }
 g_BattleItemRow = { addr = 0x801485C2, type = "u8", source = "Selected row of the battle item panel." }
 g_BattleTargetCursorCol = { addr = 0x801485C8, type = "s16", source = "Target cursor column of the battle." }
-g_MenuCurrentPanel = { addr = 0x80148648, source = "The current menu panel." }
-g_MenuPanelMode = { addr = 0x8014864C, type = "u8", source = "Mode of the menu panel tasks." }
+g_UiPanelCurrent = { addr = 0x80148648, source = "The current menu panel." }
+g_UiPanelMode = { addr = 0x8014864C, type = "u8", source = "Mode of the menu panel tasks." }
 g_MenuStep = { addr = 0x80148650, size = 3, source = "The menu step record: step, sub-step and state bytes that the menu, shop and start overlays dispatch on." }
 D_80148650 = { addr = 0x80148650, alias = true, source = "Byte of g_MenuStep read as a symbol of its own." }
 D_80148651 = { addr = 0x80148651, alias = true, source = "Byte of g_MenuStep read as a symbol of its own." }
@@ -250,17 +250,17 @@ g_SndVabIds = { addr = 0x80148FB0, type = "s8", size = 0x7, source = "SND_Init s
 g_SelectionEffectVoices = { addr = 0x80148FC0, type = "s8", source = "Voices of the selection sound effects." }
 g_SndVoiceVolume = { addr = 0x80148FC8, type = "s8", size = 0x18, source = "SND_StartVolumeSweep passes [voice] to SsUtAutoVol as the start level and stores the target back" }
 g_SndVoiceTargetVolume = { addr = 0x80148FF8, type = "u8", size = 0x18, source = "SND_StartVolumeSweep passes [voice] as the end level; SND_DecreaseVoiceTargetVolume lowers it clamped at zero" }
-g_MessageState = { addr = 0x801490A0, source = "State of the message window." }
+g_UiMessageState = { addr = 0x801490A0, source = "State of the message window." }
 g_UiWindowStep = { addr = 0x801490A1, type = "u8", source = "Step of the window script." }
-g_MessageChoiceMode = { addr = 0x801490A2, source = "Mode of the message choice." }
-g_MessageChoiceStep = { addr = 0x801490A3, source = "Step of the message choice." }
+g_UiMessageChoiceMode = { addr = 0x801490A2, source = "Mode of the message choice." }
+g_UiMessageChoiceStep = { addr = 0x801490A3, source = "Step of the message choice." }
 g_UiWindowChannel = { addr = 0x801490A4, type = "u16", source = "The window channel record." }
-g_MessageStateTimer = { addr = 0x801490A6, source = "Timer of the message state." }
-g_MessageRequest = { addr = 0x801490A8, type = "u16", source = "Message requested by the answer step." }
-g_MessageChoiceTimer = { addr = 0x801490AA, source = "Timer of the message choice." }
-g_MessageScript = { addr = 0x801490AC, source = "The message script being shown." }
-g_MessageWindow = { addr = 0x801490BC, source = "MenuState block the text, panel and cue handlers share: text_x/text_y cursor, origin_x/origin_y window origin, selection_index choice; UI_DrawGlyph draws at its text_x/text_y" }
-g_MessageChoice = { addr = 0x801490C7, source = "The player's choice in the message window." }
+g_UiMessageStateTimer = { addr = 0x801490A6, source = "Timer of the message state." }
+g_UiMessageRequest = { addr = 0x801490A8, type = "u16", source = "Message requested by the answer step." }
+g_UiMessageChoiceTimer = { addr = 0x801490AA, source = "Timer of the message choice." }
+g_UiMessageScript = { addr = 0x801490AC, source = "The message script being shown." }
+g_UiMessageWindow = { addr = 0x801490BC, source = "MenuState block the text, panel and cue handlers share: text_x/text_y cursor, origin_x/origin_y window origin, selection_index choice; UI_TextDrawGlyph draws at its text_x/text_y" }
+g_UiMessageChoice = { addr = 0x801490C7, source = "The player's choice in the message window." }
 g_TextVariables = { addr = 0x801490D8, type = "u8", size = 0x200, source = "Text variables." }
 g_AreaCameraAngle = { addr = 0x801492D8, size = 0x8, source = "Angle of the area camera." }
 g_AreaPreviousCameraAngle = { addr = 0x801492E0, type = "SVECTOR", size = 0x8, source = "The previous frame camera angle copied from g_AreaCameraAngle when it changes." }
@@ -295,16 +295,16 @@ g_LogoExePath = { addr = 0x80149800, size = 0x14, source = "SYS_StartLogo passes
 D_80149814 = { addr = 0x80149814, size = 0x184, source = "The 51 name cells of the executable's export strings, starting at 0x80149814; D_8017F470 holds their pointers." }
 jtbl_80149998 = { addr = 0x80149998, type = "Callback", source = "The switch table of Area_BuildClut: the jump targets of its jr dispatch." }
 D_80149998 = { addr = 0x80149998, size = 0x178, alias = true, source = "View of a record member; the row names the address the link reads, not a second object." }
-g_UiLocalModes = { addr = 0x801499AC, size = 0x54, alias = true, source = "Local UI mode handlers." }
-jtbl_80149A00 = { addr = 0x80149A00, type = "Callback", source = "The switch table of UI_DrawMessageScript: the jump targets of its jr dispatch." }
-g_MessageStateSteps = { addr = 0x80149A5C, size = 0x20, alias = true, source = "Message state handlers." }
-g_MessageChoiceModes = { addr = 0x80149AB4, size = 0x18, alias = true, source = "Message choice handlers." }
-g_MessageSteps = { addr = 0x80149ACC, size = 0x40, alias = true, source = "Message answer step handlers." }
-g_MessagePanelModes = { addr = 0x80149B30, source = "Handlers of the three message panel modes: window, answer list, preset answer list." }
-g_MessageWindowSteps = { addr = 0x80149B3C, source = "Steps of the plain message panel: open, grow, draw, shrink, close." }
-g_MessageChoiceSteps = { addr = 0x80149B50, source = "Steps of the answer list panel: open, grow, draw, shrink, release." }
-g_MessagePresetSteps = { addr = 0x80149B64, source = "Steps of the preset answer list panel: open, grow, draw, shrink, release." }
-jtbl_80149B78 = { addr = 0x80149B78, type = "Callback", source = "The switch table of UI_DrawTextAt: the jump targets of its jr dispatch." }
+g_UiModeLocals = { addr = 0x801499AC, size = 0x54, alias = true, source = "Local UI mode handlers." }
+jtbl_80149A00 = { addr = 0x80149A00, type = "Callback", source = "The switch table of UI_MessageDrawScript: the jump targets of its jr dispatch." }
+g_UiMessageStateSteps = { addr = 0x80149A5C, size = 0x20, alias = true, source = "Message state handlers." }
+g_UiMessageChoiceModes = { addr = 0x80149AB4, size = 0x18, alias = true, source = "Message choice handlers." }
+g_UiMessageSteps = { addr = 0x80149ACC, size = 0x40, alias = true, source = "Message answer step handlers." }
+g_UiMessagePanelModes = { addr = 0x80149B30, source = "Handlers of the three message panel modes: window, answer list, preset answer list." }
+g_UiMessageWindowSteps = { addr = 0x80149B3C, source = "Steps of the plain message panel: open, grow, draw, shrink, close." }
+g_UiMessageChoiceSteps = { addr = 0x80149B50, source = "Steps of the answer list panel: open, grow, draw, shrink, release." }
+g_UiMessagePresetSteps = { addr = 0x80149B64, source = "Steps of the preset answer list panel: open, grow, draw, shrink, release." }
+jtbl_80149B78 = { addr = 0x80149B78, type = "Callback", source = "The switch table of UI_TextDrawAt: the jump targets of its jr dispatch." }
 jtbl_80149C00 = { addr = 0x80149C00, type = "Callback", source = "The switch table of Script_ReadValue: the jump targets of its jr dispatch." }
 g_CdSteps = { addr = 0x80149C3C, alias = true, source = "CD step handlers of the EMI loader." }
 g_EmiRingSteps = { addr = 0x80149C60, alias = true, source = "EMI_UpdateStream copies it" }
@@ -394,9 +394,9 @@ GFX_ExpandRgb555 = { addr = 0x8014E7F8, type = "func", source = "Expands RGB555 
 GFX_DecodeLzss = { addr = 0x8014E8FC, type = "func", source = "Decodes an LZSS stream and uploads it." }
 SYS_StartFrontend = { addr = 0x8014EA80, type = "func", source = "Starts the frontend." }
 SYS_EnterFrontend = { addr = 0x8014EC64, type = "func", source = "Loads the frontend overlay." }
-UI_SetMode = { addr = 0x8014ECAC, type = "func", source = "Sets the UI mode." }
-UI_SetModeWait = { addr = 0x8014ECEC, type = "func", source = "Sets the UI mode and waits for the window effect." }
-UI_DispatchLocalMode = { addr = 0x8014ED6C, type = "func", source = "Runs the handler of the current UI mode." }
+UI_ModeSet = { addr = 0x8014ECAC, type = "func", source = "Sets the UI mode." }
+UI_ModeSetWait = { addr = 0x8014ECEC, type = "func", source = "Sets the UI mode and waits for the window effect." }
+UI_ModeDispatchLocal = { addr = 0x8014ED6C, type = "func", source = "Runs the handler of the current UI mode." }
 GFX_FadeToBlack = { addr = 0x8014EDF0, type = "func", source = "Fades the screen to black at the normal speed (scheduler thread)." }
 GFX_FadeFromBlack = { addr = 0x8014EE18, type = "func", source = "Fades the screen back in from black at the normal speed (scheduler thread)." }
 GFX_FadeToBlackFast = { addr = 0x8014EE40, type = "func", source = "Fades the screen to black at the fast speed (scheduler thread)." }
@@ -419,46 +419,46 @@ GFX_SpinToBlack = { addr = 0x8014F460, type = "func", source = "Screen effect 20
 GFX_RunBlackFade = { addr = 0x8014F514, type = "func", source = "Fades the screen to black." }
 GFX_RunWhiteFade = { addr = 0x8014F5F0, type = "func", source = "Fades the screen to white." }
 GFX_UpdateScreenFade = { addr = 0x8014F704, type = "func", source = "Draws one step of a screen fade." }
-UI_DrawText = { addr = 0x8014F800, type = "func", source = "Draws a text record." }
-UI_DrawTextGlyphs = { addr = 0x8014F84C, type = "func", source = "Draws a text record's control bytes and glyphs through the shared sprite cursor." }
-UI_AddTextDrawMode = { addr = 0x8014FC00, type = "func", source = "Adds the draw mode used by the text and glyph renderers." }
-UI_DrawTextString = { addr = 0x8014FC90, type = "func", source = "Draws a glyph string." }
-UI_DrawAsciiString = { addr = 0x8014FF0C, type = "func", source = "Draws an ASCII string." }
-UI_DrawGlyphString = { addr = 0x80150098, type = "func", source = "Draws a glyph string." }
+UI_TextDraw = { addr = 0x8014F800, type = "func", source = "Draws a text record." }
+UI_TextDrawGlyphs = { addr = 0x8014F84C, type = "func", source = "Draws a text record's control bytes and glyphs through the shared sprite cursor." }
+UI_TextAddDrawMode = { addr = 0x8014FC00, type = "func", source = "Adds the draw mode used by the text and glyph renderers." }
+UI_TextDrawString = { addr = 0x8014FC90, type = "func", source = "Draws a glyph string." }
+UI_TextDrawAscii = { addr = 0x8014FF0C, type = "func", source = "Draws an ASCII string." }
+UI_TextDrawGlyphString = { addr = 0x80150098, type = "func", source = "Draws a glyph string." }
 SYS_CopyString = { addr = 0x801501E4, type = "func", source = "Bounded NUL-terminated copy - battle copies item and character names through it." }
-Message_StartAreaMessage = { addr = 0x80150224, type = "func", source = "Resolves the area message bank index into the shared handle pair - Fairy_GrantGift/RollReward call it." }
-Message_Request = { addr = 0x80150284, type = "func", source = "Resolves an area resource into the shared handle pair and resets the front-end state." }
-Message_GetText = { addr = 0x801502D0, type = "func", source = "Returns the text of a resource id." }
-UI_ResetMessage = { addr = 0x80150304, type = "func", source = "Resets the front-end selection state and requests menu 0 mode 0." }
-UI_UpdateLayout = { addr = 0x801503E0, type = "func", source = "Rebuilds the layout of the message window." }
-UI_DrawMessageScript = { addr = 0x80150470, type = "func", source = "Draws a message script." }
-Message_DispatchState = { addr = 0x801507BC, type = "func", source = "Runs the handler of the message window state." }
-Message_RunScript = { addr = 0x8015083C, type = "func", source = "Runs the message script at the cursor until an opcode ends the step, and sets the next message state." }
-UI_TickChoiceTimer = { addr = 0x80150E14, type = "func", source = "Counts the message state timer down and clears the state at zero." }
-UI_UpdateChoiceInput = { addr = 0x80151210, type = "func", source = "Handles the choice input and moves the choice cursor." }
-Message_DispatchAnswerStep = { addr = 0x8015136C, type = "func", source = "Runs the current answer step of the message." }
-Message_RestartRequest = { addr = 0x8015142C, type = "func", source = "Entry 6 of the message state table D_80149A7C, after Message_DispatchAnswerStep: when the first menu panel task is in state 2, sets g_MessageStateTimer to 0x10, restarts the request with Message_StartRequest and toggles FRONTEND_FLAG_SELECTION in g_UiWindowChannel." }
-Message_StartRequest = { addr = 0x801514D0, type = "func", source = "Starts the requested message." }
-UI_ClosePanel = { addr = 0x801515A8, type = "func", source = "Clears the panel index - arms panel 1 mode 0 and advances the front-end step." }
-UI_ScrollChoice = { addr = 0x80151628, type = "func", source = "Moves the choice cursor." }
-Message_DispatchChoiceMode = { addr = 0x801518F4, type = "func", source = "Runs the handler of the message choice mode." }
-UI_UpdateChoice = { addr = 0x8015196C, type = "func", source = "Runs the current message choice step." }
-UI_NextChoice = { addr = 0x801519F8, type = "func", source = "Moves the message choice list one entry on: advances g_MessageChoiceStep when the scroll countdown reaches -2, else steps the countdown by -2. Called by UI_UpdateChoice." }
-UI_PrevChoice = { addr = 0x80151A48, type = "func", source = "Moves the message choice list one entry back: lowers g_MessageChoiceStep when the scroll countdown reaches 2, else steps the countdown by 2. Called by UI_UpdateChoice." }
-UI_DrawGlyph = { addr = 0x80151E24, type = "func", source = "Draws one text glyph." }
-Message_DispatchStep = { addr = 0x801522F8, type = "func", source = "Runs a step of the message answer table." }
-Message_SetAnswerMessage5 = { addr = 0x80152510, type = "func", source = "Sets the message that answers the menu choice." }
-Message_SetAnswerMessage6 = { addr = 0x8015253C, type = "func", source = "Sets the message that answers the menu choice." }
-Message_SetAnswerMessage7 = { addr = 0x80152568, type = "func", source = "Sets the message that answers the menu choice." }
-Message_SetAnswerMessage8 = { addr = 0x80152594, type = "func", source = "Sets the message that answers the menu choice." }
-Message_SetAnswerMessage9 = { addr = 0x801525C0, type = "func", source = "Sets the message that answers the menu choice." }
-Message_SetAnswerMessage10 = { addr = 0x801525EC, type = "func", source = "Sets the message that answers the menu choice." }
-Message_SetAnswerMessage11 = { addr = 0x80152618, type = "func", source = "Sets the message that answers the menu choice." }
-Message_SetAnswerMessage12 = { addr = 0x80152644, type = "func", source = "Sets the message that answers the menu choice." }
-Message_SetAnswerMessage13 = { addr = 0x80152670, type = "func", source = "Sets the message that answers the menu choice." }
-Message_SetAnswerMessage14 = { addr = 0x8015269C, type = "func", source = "Sets the message that answers the menu choice." }
-Message_SetAnswerMessage15 = { addr = 0x801526C8, type = "func", source = "Sets the message that answers the menu choice." }
-UI_DrawWaitMarker = { addr = 0x801526F4, type = "func", source = "Draws the message wait marker." }
+UI_MessageStartArea = { addr = 0x80150224, type = "func", source = "Resolves the area message bank index into the shared handle pair - Fairy_GrantGift/RollReward call it." }
+UI_MessageRequest = { addr = 0x80150284, type = "func", source = "Resolves an area resource into the shared handle pair and resets the front-end state." }
+UI_MessageGetText = { addr = 0x801502D0, type = "func", source = "Returns the text of a resource id." }
+UI_MessageReset = { addr = 0x80150304, type = "func", source = "Resets the front-end selection state and requests menu 0 mode 0." }
+UI_MessageUpdateLayout = { addr = 0x801503E0, type = "func", source = "Rebuilds the layout of the message window." }
+UI_MessageDrawScript = { addr = 0x80150470, type = "func", source = "Draws a message script." }
+UI_MessageDispatchState = { addr = 0x801507BC, type = "func", source = "Runs the handler of the message window state." }
+UI_MessageRunScript = { addr = 0x8015083C, type = "func", source = "Runs the message script at the cursor until an opcode ends the step, and sets the next message state." }
+UI_MessageTickChoiceTimer = { addr = 0x80150E14, type = "func", source = "Counts the message state timer down and clears the state at zero." }
+UI_MessageUpdateChoiceInput = { addr = 0x80151210, type = "func", source = "Handles the choice input and moves the choice cursor." }
+UI_MessageDispatchAnswerStep = { addr = 0x8015136C, type = "func", source = "Runs the current answer step of the message." }
+UI_MessageRestartRequest = { addr = 0x8015142C, type = "func", source = "Entry 6 of the message state table D_80149A7C, after UI_MessageDispatchAnswerStep: when the first menu panel task is in state 2, sets g_UiMessageStateTimer to 0x10, restarts the request with UI_MessageStartRequest and toggles FRONTEND_FLAG_SELECTION in g_UiWindowChannel." }
+UI_MessageStartRequest = { addr = 0x801514D0, type = "func", source = "Starts the requested message." }
+UI_MessageClosePanel = { addr = 0x801515A8, type = "func", source = "Clears the panel index - arms panel 1 mode 0 and advances the front-end step." }
+UI_MessageScrollChoice = { addr = 0x80151628, type = "func", source = "Moves the choice cursor." }
+UI_MessageDispatchChoiceMode = { addr = 0x801518F4, type = "func", source = "Runs the handler of the message choice mode." }
+UI_MessageUpdateChoice = { addr = 0x8015196C, type = "func", source = "Runs the current message choice step." }
+UI_MessageNextChoice = { addr = 0x801519F8, type = "func", source = "Moves the message choice list one entry on: advances g_UiMessageChoiceStep when the scroll countdown reaches -2, else steps the countdown by -2. Called by UI_MessageUpdateChoice." }
+UI_MessagePrevChoice = { addr = 0x80151A48, type = "func", source = "Moves the message choice list one entry back: lowers g_UiMessageChoiceStep when the scroll countdown reaches 2, else steps the countdown by 2. Called by UI_MessageUpdateChoice." }
+UI_TextDrawGlyph = { addr = 0x80151E24, type = "func", source = "Draws one text glyph." }
+UI_MessageDispatchStep = { addr = 0x801522F8, type = "func", source = "Runs a step of the message answer table." }
+UI_MessageAnswerSet5 = { addr = 0x80152510, type = "func", source = "Sets the message that answers the menu choice." }
+UI_MessageAnswerSet6 = { addr = 0x8015253C, type = "func", source = "Sets the message that answers the menu choice." }
+UI_MessageAnswerSet7 = { addr = 0x80152568, type = "func", source = "Sets the message that answers the menu choice." }
+UI_MessageAnswerSet8 = { addr = 0x80152594, type = "func", source = "Sets the message that answers the menu choice." }
+UI_MessageAnswerSet9 = { addr = 0x801525C0, type = "func", source = "Sets the message that answers the menu choice." }
+UI_MessageAnswerSet10 = { addr = 0x801525EC, type = "func", source = "Sets the message that answers the menu choice." }
+UI_MessageAnswerSet11 = { addr = 0x80152618, type = "func", source = "Sets the message that answers the menu choice." }
+UI_MessageAnswerSet12 = { addr = 0x80152644, type = "func", source = "Sets the message that answers the menu choice." }
+UI_MessageAnswerSet13 = { addr = 0x80152670, type = "func", source = "Sets the message that answers the menu choice." }
+UI_MessageAnswerSet14 = { addr = 0x8015269C, type = "func", source = "Sets the message that answers the menu choice." }
+UI_MessageAnswerSet15 = { addr = 0x801526C8, type = "func", source = "Sets the message that answers the menu choice." }
+UI_MessageDrawWaitMarker = { addr = 0x801526F4, type = "func", source = "Draws the message wait marker." }
 Camera_Update = { addr = 0x801527E4, type = "func", source = "Steps the area camera." }
 Area_LoadCellColumnPrev = { addr = 0x80152C9C, type = "func", source = "Streams the cell column before the first one when the camera passes -0x200." }
 Area_LoadCellColumnNext = { addr = 0x80152D9C, type = "func", source = "Streams the cell column past the last one into the ring when the camera passes +0x200." }
@@ -511,33 +511,33 @@ Area_RunBundleRecords = { addr = 0x801584A4, type = "func", source = "Runs the r
 Area_AnimateClut = { addr = 0x80158550, type = "func", source = "Copies the current frame of an area CLUT animation into the palette." }
 Area_DrawGouraudQuad = { addr = 0x8015864C, type = "func", source = "Draws a Gouraud-shaded quadrangle from the record when inside the draw area." }
 Area_IndexCells = { addr = 0x80158B24, type = "func", source = "Maps the area map records to cells." }
-Menu_UpdatePanelTasks = { addr = 0x80158C80, type = "func", source = "Runs the menu panel tasks." }
-Menu_OpenPanelTask = { addr = 0x80158DB8, type = "func", source = "Arms a menu panel task." }
-Menu_ClearPanel = { addr = 0x80158E20, type = "func", source = "existing proposal: clears the menu panel" }
-Menu_ResetPanelTasks = { addr = 0x80158E50, type = "func", source = "SYS_StartFrontend clears the 22 g_MenuPanelTasks slots and g_MenuPanelMode" }
-Menu_UpdateMessagePanel = { addr = 0x80158F80, type = "func", source = "Panel handler 0 of g_MenuPanels, the message window panel: runs the handler of its mode from its table." }
-Menu_UpdateMessageWindow = { addr = 0x80158FE0, type = "func", source = "Mode 0 of the message panel, the plain window: runs the step of its state from its table." }
-Menu_OpenMessagePanel = { addr = 0x80159050, type = "func", source = "State 0 of the plain message panel: arms the size, the slide targets and the grow steps from the origin tables." }
-Menu_GrowMessagePanel = { addr = 0x8015920C, type = "func", source = "State 1 of every message panel mode: grows the box toward its size and draws it." }
-Menu_DrawMessagePanel = { addr = 0x80159510, type = "func", source = "State 2 of the plain message panel: draws the box and updates the layout." }
-Menu_ShrinkMessagePanel = { addr = 0x80159580, type = "func", source = "State 3 of every message panel mode: shrinks the box toward its centre and draws it." }
-Menu_ClosePanel = { addr = 0x801598B8, type = "func", source = "Clears the menu panel mode and resets the panel task when the layout update finishes." }
-Menu_UpdateMessageChoice = { addr = 0x801598F4, type = "func", source = "Mode 1 of the message panel, the answer list laid out from the message text: runs the step of its state from its table." }
-Menu_OpenMessageChoice = { addr = 0x80159964, type = "func", source = "State 0 of the answer list panel: lays out the rows from the message text and steps the panel." }
-Menu_DrawMessageChoice = { addr = 0x8015999C, type = "func", source = "State 2 of the answer list panel: draws the box, the text rows and the cursor." }
-Menu_ReleaseMessagePanel = { addr = 0x80159A00, type = "func", source = "State 4 of the answer list panels: clears the panel task." }
-Menu_UpdateMessagePreset = { addr = 0x80159A20, type = "func", source = "Mode 2 of the message panel, the answer list at a preset position: runs the step of its state from its table." }
-Menu_OpenMessagePreset = { addr = 0x80159A90, type = "func", source = "State 0 of the preset answer list panel: sets the position from the preset table and the grow steps." }
-Menu_DrawMessagePreset = { addr = 0x80159B38, type = "func", source = "State 2 of the preset answer list panel: draws the box, the rows and the cursor." }
-UI_DrawPanelBox = { addr = 0x80159B9C, type = "func", source = "Draws a window panel box at x, y of w by h tiles: a dark translucent tile, the window texture in the current style over it, a grey outline and a darker line outside each edge." }
-UI_DrawBoxOutline = { addr = 0x80159FA0, type = "func", source = "Draws the grey outline of the box at x, y of width by height: a closed line strip one pixel outside it, then its left edge again as a line." }
-Menu_DrawMessagePresetRows = { addr = 0x8015A098, type = "func", source = "Draws the text rows of the preset answer list panel at the preset row positions." }
-UI_DrawTextRows = { addr = 0x8015A170, type = "func", source = "Draws each row of the message window up to g_MessageWindow.last_row through UI_DrawTextAt, carrying the text cursor from row to row." }
-Menu_DrawMessagePresetCursor = { addr = 0x8015A1D8, type = "func", source = "Draws the cursor beside the selected row of the preset answer list panel." }
-Menu_DrawMessageChoiceCursor = { addr = 0x8015A264, type = "func", source = "Draws the cursor beside the selected row of the answer list panel." }
-UI_DrawLine = { addr = 0x8015A2B0, type = "func", source = "Draws a line." }
-UI_DrawTextAt = { addr = 0x8015A344, type = "func", source = "Draws message text at a position." }
-Menu_LayoutMessageChoice = { addr = 0x8015A554, type = "func", source = "Counts the rows of the message text and sizes the answer list panel from them." }
+UI_PanelUpdateTasks = { addr = 0x80158C80, type = "func", source = "Runs the menu panel tasks." }
+UI_PanelOpenTask = { addr = 0x80158DB8, type = "func", source = "Arms a menu panel task." }
+UI_PanelClear = { addr = 0x80158E20, type = "func", source = "existing proposal: clears the menu panel" }
+UI_PanelResetTasks = { addr = 0x80158E50, type = "func", source = "SYS_StartFrontend clears the 22 g_UiPanelTasks slots and g_UiPanelMode" }
+UI_MessageUpdatePanel = { addr = 0x80158F80, type = "func", source = "Panel handler 0 of g_UiPanels, the message window panel: runs the handler of its mode from its table." }
+UI_MessageUpdateWindow = { addr = 0x80158FE0, type = "func", source = "Mode 0 of the message panel, the plain window: runs the step of its state from its table." }
+UI_MessageOpenPanel = { addr = 0x80159050, type = "func", source = "State 0 of the plain message panel: arms the size, the slide targets and the grow steps from the origin tables." }
+UI_MessageGrowPanel = { addr = 0x8015920C, type = "func", source = "State 1 of every message panel mode: grows the box toward its size and draws it." }
+UI_MessageDrawPanel = { addr = 0x80159510, type = "func", source = "State 2 of the plain message panel: draws the box and updates the layout." }
+UI_MessageShrinkPanel = { addr = 0x80159580, type = "func", source = "State 3 of every message panel mode: shrinks the box toward its centre and draws it." }
+UI_PanelClose = { addr = 0x801598B8, type = "func", source = "Clears the menu panel mode and resets the panel task when the layout update finishes." }
+UI_MessageUpdateChoicePanel = { addr = 0x801598F4, type = "func", source = "Mode 1 of the message panel, the answer list laid out from the message text: runs the step of its state from its table." }
+UI_MessageOpenChoicePanel = { addr = 0x80159964, type = "func", source = "State 0 of the answer list panel: lays out the rows from the message text and steps the panel." }
+UI_MessageDrawChoicePanel = { addr = 0x8015999C, type = "func", source = "State 2 of the answer list panel: draws the box, the text rows and the cursor." }
+UI_MessageReleasePanel = { addr = 0x80159A00, type = "func", source = "State 4 of the answer list panels: clears the panel task." }
+UI_MessageUpdatePresetPanel = { addr = 0x80159A20, type = "func", source = "Mode 2 of the message panel, the answer list at a preset position: runs the step of its state from its table." }
+UI_MessageOpenPresetPanel = { addr = 0x80159A90, type = "func", source = "State 0 of the preset answer list panel: sets the position from the preset table and the grow steps." }
+UI_MessageDrawPresetPanel = { addr = 0x80159B38, type = "func", source = "State 2 of the preset answer list panel: draws the box, the rows and the cursor." }
+UI_WindowDrawPanelBox = { addr = 0x80159B9C, type = "func", source = "Draws a window panel box at x, y of w by h tiles: a dark translucent tile, the window texture in the current style over it, a grey outline and a darker line outside each edge." }
+UI_WindowDrawBoxOutline = { addr = 0x80159FA0, type = "func", source = "Draws the grey outline of the box at x, y of width by height: a closed line strip one pixel outside it, then its left edge again as a line." }
+UI_MessageDrawPresetRows = { addr = 0x8015A098, type = "func", source = "Draws the text rows of the preset answer list panel at the preset row positions." }
+UI_MessageDrawTextRows = { addr = 0x8015A170, type = "func", source = "Draws each row of the message window up to g_UiMessageWindow.last_row through UI_TextDrawAt, carrying the text cursor from row to row." }
+UI_MessageDrawPresetCursor = { addr = 0x8015A1D8, type = "func", source = "Draws the cursor beside the selected row of the preset answer list panel." }
+UI_MessageDrawChoiceCursor = { addr = 0x8015A264, type = "func", source = "Draws the cursor beside the selected row of the answer list panel." }
+UI_WindowDrawLine = { addr = 0x8015A2B0, type = "func", source = "Draws a line." }
+UI_TextDrawAt = { addr = 0x8015A344, type = "func", source = "Draws message text at a position." }
+UI_MessageLayoutChoicePanel = { addr = 0x8015A554, type = "func", source = "Counts the rows of the message text and sizes the answer list panel from them." }
 Area_UpdateParty = { addr = 0x8015A758, type = "func", source = "Runs the party in the area." }
 Actor_ProjectForDraw = { addr = 0x8015A944, type = "func", source = "Sets the actor draw layer, projects its position, and registers it when on screen." }
 SYS_InitScratchpad = { addr = 0x8015AC8C, type = "func", source = "comment: initializes the scratch work record for a new panel: marks it active, sets the mode (+0x24) and state (+0x48) bytes, seeds the +0x40/+0x44 scroll pair " }
@@ -682,8 +682,8 @@ SND_FadeCDVolume = { addr = 0x80163F50, type = "func", source = "Steps the latch
 LZ77_DecodeBegin = { addr = 0x80164028, type = "func", source = "Starts decoding an EMI entry." }
 LZ77_DecodeStep = { addr = 0x80164064, type = "func", source = "Decodes one step of the EMI stream." }
 func_801642D0 = { addr = 0x801642D0, type = "func", source = "The restore tail of the handwritten dispatcher func_801642CC: it restores $s0-$s7 from the $t0 context base and returns." }
-UI_DrawIconCell = { addr = 0x801644D8, type = "func", source = "Draws one indexed icon cell as a textured quad with its selected texture page and palette." }
-Menu_DrawCursorSprite = { addr = 0x801647C4, type = "func", source = "Draws the menu cursor sprite." }
+UI_IconDrawCell = { addr = 0x801644D8, type = "func", source = "Draws one indexed icon cell as a textured quad with its selected texture page and palette." }
+UI_CursorDraw = { addr = 0x801647C4, type = "func", source = "Draws the menu cursor sprite." }
 Char_ApplyMaster = { addr = 0x801648A0, type = "func", source = "Applies the character's master bonuses." }
 Char_RebuildStats = { addr = 0x80164A44, type = "func", source = "Rebuilds the stats of a character from base, fatigue and equipment." }
 Char_PreviewEquip = { addr = 0x80164D2C, type = "func", source = "Copies a party record, puts item_id in its equipment slot, rebuilds the stats and returns the four stat values with up/down flags; the equip stat windows of the start and shop menus call it." }
@@ -707,12 +707,12 @@ Item_GetIcon = { addr = 0x80165E04, type = "func", source = "Returns the item ic
 Item_GetEquipability = { addr = 0x80165EC0, type = "func", source = "Returns which characters can equip an item." }
 Item_GetFlags = { addr = 0x80165F68, type = "func", source = "Returns the flags of an item." }
 Item_GetPower = { addr = 0x80166034, type = "func", source = "Returns the power of a weapon or armor." }
-UI_ClearFormatBuffer = { addr = 0x801660B0, type = "func", source = "Clears the UI format buffer." }
+UI_TextClearFormatBuffer = { addr = 0x801660B0, type = "func", source = "Clears the UI format buffer." }
 Char_GetAbilityElement = { addr = 0x801660DC, type = "func", source = "Returns the element of an ability." }
 Item_VitalHas = { addr = 0x80166140, type = "func", source = "Tells whether a vital item is held." }
 Item_VitalAdd = { addr = 0x80166180, type = "func", source = "Adds a vital item." }
 Item_VitalRemove = { addr = 0x801661C4, type = "func", source = "Removes a vital item." }
-Message_SetVariable = { addr = 0x8016620C, type = "func", source = "Sets a text variable." }
+UI_MessageSetVariable = { addr = 0x8016620C, type = "func", source = "Sets a text variable." }
 Item_Count = { addr = 0x8016628C, type = "func", source = "Counts an item in the inventory or equipment." }
 Item_CountHeld = { addr = 0x80166438, type = "func", source = "Counts the items held in a category." }
 Party_CountAbilities = { addr = 0x801664A0, type = "func", source = "Counts the non-zero entries of the selected ability panel." }
@@ -1262,7 +1262,7 @@ g_SpriteSizes = { addr = 0x8017F53C, source = "Sprite cell sizes by shape." }
 g_SpriteCellRotations = { addr = 0x8017F55C, source = "Sprite cell rotations by shape." }
 g_NumberRowShades = { addr = 0x8017F580, source = "Shades of the number font rows." }
 g_TextRowShades = { addr = 0x8017F5A0, source = "Shades of the window font rows." }
-g_TextRowOffsets = { addr = 0x8017F620, source = "UI_DrawGlyph takes the per-row pixel offset of the window text" }
+g_TextRowOffsets = { addr = 0x8017F620, source = "UI_TextDrawGlyph takes the per-row pixel offset of the window text" }
 g_AnswerMessages = { addr = 0x8017F628, source = "Messages that answer menu choices." }
 g_SpriteCellPartCounts = { addr = 0x8017F79C, source = "Sprite part counts by cell." }
 g_SpriteCellTopV = { addr = 0x8017F894, source = "Top texture coordinates of the sprite cells." }
@@ -1272,7 +1272,7 @@ g_SpriteCellRightU = { addr = 0x8017F8C8, source = "Right texture coordinates of
 g_SpriteCellCluts = { addr = 0x8017F8D4, source = "CLUTs of the sprite cells." }
 g_BundleOpcodes = { addr = 0x8017F8F0, source = "Handlers of the area bundle opcodes." }
 g_BundleRecordOpcodes = { addr = 0x8017F8FC, source = "Handlers of the area bundle records." }
-g_MenuPanelOrigins = { addr = 0x8017F90C, source = "Origins of the menu panels." }
+g_UiPanelOrigins = { addr = 0x8017F90C, source = "Origins of the menu panels." }
 g_AreaLoads = { addr = 0x8017F974, source = "Pointers to the 200 AreaLoad records, indexed by area id." }
 g_AreaEncounterZones = { addr = 0x8017FC94, source = "The area encounter zones." }
 g_EncounterZones = { addr = 0x80181164, source = "Encounter zone lists, one per map." }

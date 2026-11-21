@@ -8,7 +8,7 @@ segments:
     section_order: [.data, .text, .rodata, .bss]
     subsegments:
       - [0x0, .data, D_801F2C00]
-      - [0x8, c, Message_ClearOnCancel]
+      - [0x8, c, UI_MessageClearOnCancel]
       - [0x3C, c, func_801F2C3C]
       - [0x80, c, func_801F2C80]
       - [0xBC, c, func_801F2CBC]

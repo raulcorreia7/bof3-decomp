@@ -22,8 +22,8 @@ MATCH void func_801D8D70(s32 x, s32 y) {
     panel_x = x;
     panel_y = y;
     palette = &g_WindowStyle;
-    UI_DrawWindow(panel_x, ((y + 2)), FISHING_PANEL_WIDTH, 58, UI_WINDOW_OPEN_TOP_LEFT, *palette);
-    UI_DrawWindow(panel_x, ((y + 66)), FISHING_PANEL_WIDTH, 92, UI_WINDOW_OPEN_TOP_LEFT, *palette);
+    UI_WindowDraw(panel_x, ((y + 2)), FISHING_PANEL_WIDTH, 58, UI_WINDOW_OPEN_TOP_LEFT, *palette);
+    UI_WindowDraw(panel_x, ((y + 66)), FISHING_PANEL_WIDTH, 92, UI_WINDOW_OPEN_TOP_LEFT, *palette);
     Fishing_SetDrawMode(9, 1);
     Fishing_DrawSprite(37, 1, panel_x, panel_y);
     for (i = 0; i < FISHING_ICON_ROW_COUNT; i++) {

@@ -10,7 +10,7 @@ MATCH void func_800A5A18(void) {
     flag = &D_80148624;
     if ((*flag & 0x1) == 0) {
         *flag = 0;
-        Menu_OpenPanelTask(0x13, 5);
+        UI_PanelOpenTask(0x13, 5);
         D_801485DE = 3;
         D_801485E0 = 0x15B;
         D_801485DF = 0;
@@ -18,7 +18,7 @@ MATCH void func_800A5A18(void) {
         /* FAKE: statement boundary keeps the retail register order and schedule. */
         FAKE_ORDER_LOCK(D_801485EC = 0);
         D_801485EE                                      = 0;
-        g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = Message_GetText(0x63);
+        g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = UI_MessageGetText(0x63);
         count                                           = g_BattleUIState + 1;
         state                                           = &g_Battle.row_cursor;
         *state |= 0x80;

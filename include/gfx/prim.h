@@ -40,7 +40,7 @@ ASSERT_SIZE(UvRect, 0x4);
 #define GFX_SET_DRAW_MODE(tpage)     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, (tpage), 0)
 
 /* Draw one cue record's text at (x, y): the resource is the text bank. */
-#define WinDrawCueText(x, y, cue)    UI_DrawText((x), (y), 0, 0xFF, Message_GetText(cue))
+#define WinDrawCueText(x, y, cue)    UI_TextDraw((x), (y), 0, 0xFF, UI_MessageGetText(cue))
 /* Fixed-address accessor global. */
 #define g_GraphicsPaletteDst         MEM_PTR(volatile u16, 0x80037800u)
 
@@ -93,7 +93,7 @@ ASSERT_SIZE(UvRect, 0x4);
 /* D_8014598C */
 extern u8* g_GfxPrimCursor;
 /* D_80145AD4 */
-extern u8  g_UiFormatBuffer[];
+extern u8  g_UiTextFormatBuffer[];
 
 /* Queue a draw-mode primitive for the texture page at order-table slot 1: the
  * default texture window. */

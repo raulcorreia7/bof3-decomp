@@ -4,7 +4,7 @@ MATCH u8* func_801D9274(const u8* name, u8 mode) {
     s32 resource;
 
     if (mode != 0) {
-        Message_SetVariable(0, 0xC, name);
+        UI_MessageSetVariable(0, 0xC, name);
     }
     switch (mode) {
         case 0:
@@ -27,5 +27,5 @@ MATCH u8* func_801D9274(const u8* name, u8 mode) {
             resource = 0x3A;
             break;
     }
-    return Message_GetText(resource);
+    return UI_MessageGetText(resource);
 }

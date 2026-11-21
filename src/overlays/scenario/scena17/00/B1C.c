@@ -72,7 +72,7 @@ MATCH void func_801F7924(void) {
         Area_InitMapRenderer();
         g_AreaSceneMode = 4;
         SND_RequestBGM(0x96);
-        UI_SetMode(UI_MODE_FADE_IN);
+        UI_ModeSet(UI_MODE_FADE_IN);
         func_801F88CC(0, 0x80);
         step = &g_ScenarioState.state_04;
         *step += 1;
@@ -259,7 +259,7 @@ MATCH void func_801F7F94(void) {
     count  = *timer - 1;
     *timer = count;
     if (count == 0) {
-        UI_SetMode(UI_MODE_LONG_FADE_OUT);
+        UI_ModeSet(UI_MODE_LONG_FADE_OUT);
         g_ScenarioState.state_04 = g_ScenarioState.state_04 + 1;
     }
 }
@@ -305,7 +305,7 @@ MATCH void Scene_WaitEndingXA(void) {
 
     ready = Scene_UpdateEndingRoll();
     if ((u8)SND_IsXAIdle() && ready) {
-        UI_SetMode(UI_MODE_LONG_FADE_OUT);
+        UI_ModeSet(UI_MODE_LONG_FADE_OUT);
         step  = &g_ScenarioState.state_04;
         *step = *step + 1;
     }
@@ -335,7 +335,7 @@ MATCH void func_801F81F8(void) {
     g_AreaScrollTargetX = TO_COORD(37) + COORD_HALF;
     g_AreaScrollTargetY = TO_COORD(27);
     Area_InitMapRenderer();
-    UI_SetMode(UI_MODE_FADE_IN);
+    UI_ModeSet(UI_MODE_FADE_IN);
     SYS_ThreadWait(1);
     g_AreaDrawFlags = 0x1F;
     SND_PlayBGM(0xA0, 0x64, 0x8);
@@ -474,7 +474,7 @@ MATCH void func_801F8664(void) {
 
     if ((g_PadStates[0].pressed & PADRdown) || D_801F9DD8 != 0) {
         SND_StartDecrescendo(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4], 100, 16);
-        UI_SetMode(UI_MODE_LONG_FADE_OUT);
+        UI_ModeSet(UI_MODE_LONG_FADE_OUT);
         state = &g_ScenarioState.state_04;
         (*state)++;
     }
@@ -795,7 +795,7 @@ MATCH bool Scene_UpdateEndingRoll(void) {
 MATCH void Scene_RunSaveMenu(void) {
     g_GameEntrySubstate = 0;
     SYS_ClearCurrentThread();
-    Menu_ResetPanelTasks();
+    UI_PanelResetTasks();
     while (1) {
         SYS_DISPATCH_BYTE(D_801F9DBC, g_GameEntrySubstate);
         SYS_ThreadWait(1);
@@ -839,7 +839,7 @@ MATCH void Scene_EnterSaveMenu(void) {
 
 /* func_801F9654 */
 MATCH void Scene_UpdateSaveMenu(void) {
-    Menu_UpdatePanelTasks();
+    UI_PanelUpdateTasks();
     Shop_DispatchStep();
 }
 

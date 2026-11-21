@@ -40,7 +40,7 @@ MATCH void func_801F8CE4(void) {
             if (g_ScriptVars[3] != 0x18) {
                 break;
             }
-            UI_SetMode(0);
+            UI_ModeSet(0);
             g_ScenarioState.step_05 = 0xC;
             break;
         case 12:
@@ -75,7 +75,7 @@ MATCH void func_801F8CE4(void) {
             }
             func_801F924C();
             g_AreaDrawFlags = 0x1F;
-            UI_SetMode(1);
+            UI_ModeSet(1);
             g_ScenarioState.step_05 = 0x10;
             break;
         case 16:
@@ -103,7 +103,7 @@ MATCH void func_801F8CE4(void) {
         case 19:
             g_ScenarioState.timer_06--;
             if (g_ScenarioState.timer_06 == 0) {
-                UI_SetMode(0);
+                UI_ModeSet(0);
                 g_ScenarioState.step_05 = 0x14;
             }
             func_801F924C();
@@ -133,7 +133,7 @@ MATCH void func_801F8CE4(void) {
             if (g_UiWindowEffectBusy) {
                 break;
             }
-            UI_SetMode(1);
+            UI_ModeSet(1);
             g_AreaDrawFlags = 0x1F;
             SND_RequestBGM(0x8C);
             g_ScenarioState.step_05 = 0x18;

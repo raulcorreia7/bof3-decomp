@@ -93,7 +93,7 @@ MATCH void func_801FA8B8(void) {
             }
             *g_ScriptVars = 0;
             Scene_SetupParty(9);
-            UI_SetMode(4);
+            UI_ModeSet(4);
             g_ScenarioState.step_05 = 5;
             break;
         case 5:
@@ -110,7 +110,7 @@ MATCH void func_801FA8B8(void) {
             if (*g_ScriptVars != 1) {
                 break;
             }
-            UI_SetMode(5);
+            UI_ModeSet(5);
             g_AreaDrawFlags = 0x1F;
             SND_PlaySE(0x20C);
             g_ScenarioState.step_05 = 7;
@@ -172,7 +172,7 @@ MATCH void func_801FAC88(void) {
             break;
         case 1:
             if (g_ScriptVars[0] == 0x0F) {
-                UI_SetMode(UI_MODE_LONG_FADE_OUT);
+                UI_ModeSet(UI_MODE_LONG_FADE_OUT);
                 Char_RebuildPartyStats();
                 SND_StartXAStream(0, 1);
                 g_ScenarioState.step_05 = 2;

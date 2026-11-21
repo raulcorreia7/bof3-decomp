@@ -23,7 +23,7 @@ MATCH void func_801F9384(void) {
 
         case 1:
             if (g_UiWindowChannel & 2) {
-                Message_StartAreaMessage(MSG_SCENA05_032);
+                UI_MessageStartArea(MSG_SCENA05_032);
                 g_GameStateIndex        = 2;
                 g_ScenarioState.step_05 = 2;
             }
@@ -83,7 +83,7 @@ MATCH void func_801F9384(void) {
 
         case 15:
             if (g_UiWindowChannel & 2) {
-                Message_StartAreaMessage(MSG_SCENA05_031);
+                UI_MessageStartArea(MSG_SCENA05_031);
                 g_GameStateIndex        = 2;
                 g_ScenarioState.step_05 = 0x11;
             }

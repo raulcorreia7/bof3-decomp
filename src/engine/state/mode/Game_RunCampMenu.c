@@ -6,12 +6,12 @@ MATCH void Game_RunCampMenu(void) {
     g_GameEntryState    = 0u;
     g_GameEntrySubstate = 0u;
     SYS_ClearCurrentThread();
-    Menu_ResetPanelTasks();
+    UI_PanelResetTasks();
 
     while (1) {
         callbacks = g_GameCampMenuLoad;
         SYS_ThreadWait(1u);
         callbacks[g_GameEntryState]();
-        Menu_UpdatePanelTasks();
+        UI_PanelUpdateTasks();
     }
 }

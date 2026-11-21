@@ -68,11 +68,11 @@ MATCH s32 Menu_DrawNameEntryControls(u8 page, s32 x, s32 y) {
 
     /* The window. */
     GFX_AddDitheredDrawMode(GFX_LAYER_UI, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
-    UI_DrawWindow(x + CONTROLS_WINDOW_INSET, y + CONTROLS_WINDOW_INSET, CONTROLS_WINDOW_WIDTH, CONTROLS_WINDOW_HEIGHT, 0, g_WindowStyle);
+    UI_WindowDraw(x + CONTROLS_WINDOW_INSET, y + CONTROLS_WINDOW_INSET, CONTROLS_WINDOW_WIDTH, CONTROLS_WINDOW_HEIGHT, 0, g_WindowStyle);
 
     /* The panel sprite. */
     GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, CONTROLS_SPRITE_TPAGE_X, CONTROLS_SPRITE_TPAGE_Y));
-    rect   = UI_GetSpriteRect(CONTROLS_SPRITE_ID, 1);
+    rect   = UI_SpriteGetRect(CONTROLS_SPRITE_ID, 1);
     sprite = GFX_CURSOR(SPRT);
     SetSprt(sprite);
     SetSemiTrans(sprite, 0);
@@ -85,7 +85,7 @@ MATCH s32 Menu_DrawNameEntryControls(u8 page, s32 x, s32 y) {
 
     /* The command labels. */
     for (row = 0; row < NAME_ENTRY_COMMAND_COUNT; row++) {
-        UI_DrawTextString(x + CONTROLS_LABEL_X, top + row * CONTROLS_ROW_HEIGHT + CONTROLS_ROW_Y, 0, CONTROLS_LABEL_LENGTH, g_NameEntryCommandLabels[row]);
+        UI_TextDrawString(x + CONTROLS_LABEL_X, top + row * CONTROLS_ROW_HEIGHT + CONTROLS_ROW_Y, 0, CONTROLS_LABEL_LENGTH, g_NameEntryCommandLabels[row]);
     }
 
     /* The footer icons, on the row after the last label (row is NAME_ENTRY_COMMAND_COUNT here). */
@@ -99,7 +99,7 @@ MATCH s32 Menu_DrawNameEntryControls(u8 page, s32 x, s32 y) {
     /* The dot grid. */
     for (row = 0; row < CONTROLS_DOT_ROWS; row++) {
         for (column = 0; column < CONTROLS_DOT_COLUMNS; column++) {
-            UI_DrawTextString(left + column * CONTROLS_DOT_STEP + CONTROLS_DOT_X, top + row * CONTROLS_ROW_HEIGHT + CONTROLS_ROW_Y, 0, 1, g_NameEntryGridDot);
+            UI_TextDrawString(left + column * CONTROLS_DOT_STEP + CONTROLS_DOT_X, top + row * CONTROLS_ROW_HEIGHT + CONTROLS_ROW_Y, 0, 1, g_NameEntryGridDot);
         }
     }
 

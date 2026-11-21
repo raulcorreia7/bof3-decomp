@@ -12,8 +12,8 @@ MATCH u8 func_800C2138(u32 mode) {
         case BOSS_EVENT_ACTION_START:
             if ((g_Battle.active_battler == 0) && (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) && !(g_Battle.boss_flags & 0x1)) {
                 g_Battle.action_type = BATTLE_ACTION_NONE;
-                g_MenuPanelMode      = 2;
-                Message_StartAreaMessage(MSG_BOSS013_039);
+                g_UiPanelMode        = 2;
+                UI_MessageStartArea(MSG_BOSS013_039);
             }
             break;
         case BOSS_EVENT_TURN_END:
@@ -23,7 +23,7 @@ MATCH u8 func_800C2138(u32 mode) {
             }
             func_801D9484();
             SYS_CopyString(*g_TextVariables, g_Characters[D_80181B11].name, 8);
-            func_801DE560(2, 0, 0, 0x2D, Message_GetText(0x25U));
+            func_801DE560(2, 0, 0, 0x2D, UI_MessageGetText(0x25U));
             D_800C26E0 = 0;
             TASK_SET(&D_801EB860);
             g_BattleCurrentEnemy = (EnemyBattler*)&D_801EB860;

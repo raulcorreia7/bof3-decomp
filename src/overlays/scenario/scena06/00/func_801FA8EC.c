@@ -9,9 +9,9 @@ MATCH void func_801FA8EC(void) {
         case 0:
             g_ScenarioState.step_05 = 1;
             if (!SYS_TestFlag(g_SceneFlags, 39)) {
-                Message_StartAreaMessage(MSG_SCENA06_008);
+                UI_MessageStartArea(MSG_SCENA06_008);
             } else {
-                Message_StartAreaMessage(MSG_SCENA06_010);
+                UI_MessageStartArea(MSG_SCENA06_010);
             }
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             break;
@@ -28,9 +28,9 @@ MATCH void func_801FA8EC(void) {
             break;
         case 5:
             if (SYS_TestFlag(g_SceneFlags, 39)) {
-                Message_StartAreaMessage(MSG_SCENA06_010);
+                UI_MessageStartArea(MSG_SCENA06_010);
             } else if (SYS_TestFlag(g_SceneFlags, 37)) {
-                Message_StartAreaMessage(MSG_SCENA06_008);
+                UI_MessageStartArea(MSG_SCENA06_008);
             } else {
                 SCENARIO_MESSAGE_WAIT(MSG_SCENA06_009, 6);
                 break;

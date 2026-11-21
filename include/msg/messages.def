@@ -1,7 +1,7 @@
 /* The message ids by name: DEFINE_MESSAGE(ARCHIVE, id, TAG) names message `id` of the message
  * table in the EMI archive ARCHIVE as MSG_<ARCHIVE>_<TAG>; a message with no tag yet is
  * named by its number, DEFINE_MESSAGE(AREA037, 0x007, 007). SYSTEM holds the ids
- * Message_Request reads from the system table (ETC/FIRST.EMI entry 11), valid in every area;
+ * UI_MessageRequest reads from the system table (ETC/FIRST.EMI entry 11), valid in every area;
  * every other id is read from the area table (entry 11 of the area's archive). A bank several archives share (AREA175..185) is
  * listed once per archive, the same lines repeated.
  * The TAG is 2-4 words that describe the message; the text itself is never tracked (extract it

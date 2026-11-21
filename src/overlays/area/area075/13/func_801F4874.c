@@ -15,18 +15,18 @@ NON_MATCHING void func_801F4874(void) {
     blink = (abs(D_801F58CA - D_801F58CC) >= 0x97) << 1;
     if ((D_801F58C6 & 1) == 0) {
         func_801F4A50(0x18, 0x20, 0x54, 0x11, 0);
-        buffer = g_UiFormatBuffer;
+        buffer = g_UiTextFormatBuffer;
         format = (char*)D_801F2C94;
         sprintf((char*)buffer, format, (u8)(D_801F58CA / 100), (u8)(D_801F58CA % 100));
         buffer[2] = 0x3E;
         if (shown) {
-            UI_DrawText(0x2A, 0x22, blink, 6, buffer);
+            UI_TextDraw(0x2A, 0x22, blink, 6, buffer);
         }
         func_801F4A50(0x90, 0x20, 0x54, 0x11, 0);
         sprintf((char*)buffer, format, (u8)(D_801F58CC / 100), (u8)(D_801F58CC % 100));
         buffer[2] = 0x3E;
         if (shown) {
-            UI_DrawText(0xA2, 0x22, blink, 6, buffer);
+            UI_TextDraw(0xA2, 0x22, blink, 6, buffer);
         }
     }
 }

@@ -10,7 +10,7 @@ MATCH void func_800C19C0(void) {
     g_Task->header.step = 0;
     g_Task->unk_03      = 0;
     if (g_Battle.encounter == 0x19) {
-        g_MenuPanelMode = 2;
-        Message_StartAreaMessage(MSG_BOSS025_032);
+        g_UiPanelMode = 2;
+        UI_MessageStartArea(MSG_BOSS025_032);
     }
 }

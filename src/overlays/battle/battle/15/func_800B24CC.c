@@ -1,7 +1,7 @@
 #include "battle_15.h"
 
 MATCH void func_800B24CC(void) {
-    MenuPanelTask* task = g_MenuCurrentPanel;
+    MenuPanelTask* task = g_UiPanelCurrent;
     s16            value;
 
     value       = task->pos.x + 0x20;

@@ -7,7 +7,7 @@ MATCH void Master_StartFarewell(void) {
     if (*state == GAME_REQUEST_MESSAGE) {
         return;
     }
-    Message_StartAreaMessage((s16)(g_MenuMasterMessageIds[g_SceneEventState.selection] + MASTER_MESSAGE_FAREWELL));
+    UI_MessageStartArea((s16)(g_MenuMasterMessageIds[g_SceneEventState.selection] + MASTER_MESSAGE_FAREWELL));
     *state              = GAME_REQUEST_MESSAGE;
     g_MenuMasterStep    = 6;
     g_MenuMasterSubStep = 0;

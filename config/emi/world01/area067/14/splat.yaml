@@ -27,7 +27,7 @@ segments:
       - [0xED8, c, func_801F3AD8]
       - [0x1154, c, func_801F3D54]
       - [0x1204, c, func_801F3E04]
-      - [0x1250, c, Message_SetAnswerMessage]
+      - [0x1250, c, UI_MessageAnswerSet]
       - [0x127C, c, func_801F3E7C]
       - [0x12C4, c, func_801F3EC4]
       - [0x12E4, c, func_801F3EE4]

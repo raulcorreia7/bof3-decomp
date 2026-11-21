@@ -29,7 +29,7 @@ MATCH u8 func_801D54F8(void) {
             Battle_SetTextPartyName(last_index);
             event_id = 0x2Bu;
         }
-        text = Message_GetText(event_id);
+        text = UI_MessageGetText(event_id);
         Battle_QueueEvent(2u, 0u, 0u, 45u, text);
         return true;
     }

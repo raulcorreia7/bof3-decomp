@@ -4,7 +4,7 @@ jtbl_80195830 = { addr = 0x80195830, type = "Callback", source = "The switch tab
 jtbl_80195864 = { addr = 0x80195864, type = "Callback", source = "The switch table of func_801A4400: the jump targets of its jr dispatch." }
 jtbl_80195894 = { addr = 0x80195894, type = "Callback", source = "The switch table of func_801A44A4: the jump targets of its jr dispatch." }
 jtbl_80195954 = { addr = 0x80195954, type = "Callback", source = "The switch table of func_801A4BF8: the jump targets of its jr dispatch." }
-jtbl_80195990 = { addr = 0x80195990, type = "Callback", source = "The switch table of Menu_OpenMaster: the jump targets of its jr dispatch." }
+jtbl_80195990 = { addr = 0x80195990, type = "Callback", source = "The switch table of UI_PanelOpenMaster: the jump targets of its jr dispatch." }
 jtbl_801959A8 = { addr = 0x801959A8, type = "Callback", source = "The switch table of func_801A7E54: the jump targets of its jr dispatch." }
 jtbl_801959C0 = { addr = 0x801959C0, type = "Callback", source = "The switch table of func_801A7E54: the jump targets of its jr dispatch." }
 jtbl_801959D8 = { addr = 0x801959D8, type = "Callback", source = "The switch table of Scene_RunInn: the jump targets of its jr dispatch." }
@@ -25,7 +25,7 @@ jtbl_80195F24 = { addr = 0x80195F24, type = "Callback", source = "The switch tab
 g_AreaActionFadeSteps = { addr = 0x80195F44, source = "The fading field action's step table." }
 jtbl_80195F5C = { addr = 0x80195F5C, type = "Callback", source = "The switch table of AreaAction_RollFade: the jump targets of its jr dispatch." }
 jtbl_80195F7C = { addr = 0x80195F7C, type = "Callback", source = "The switch table of Item_PassesTest: the jump targets of its jr dispatch." }
-g_UiAbilityRowFormat = { addr = 0x80195F98, source = "The %2d format UI_DrawAbilityRow prints the cost with." }
+g_UiListAbilityRowFormat = { addr = 0x80195F98, source = "The %2d format UI_ListDrawAbilityRow prints the cost with." }
 jtbl_80195F9C = { addr = 0x80195F9C, type = "Callback", source = "The switch table of func_801B0E44: the jump targets of its jr dispatch." }
 g_GameRewardZennyFormat = { addr = 0x80195FBC, source = "The %d format Game_RewardZenny prints the amount with." }
 jtbl_80195FC0 = { addr = 0x80195FC0, type = "Callback", source = "The switch table of func_801BC4D0: the jump targets of its jr dispatch." }
@@ -46,7 +46,7 @@ GFX_UpdatePaletteAnimations = { addr = 0x80196C8C, type = "func", source = "Step
 GFX_StartPaletteAnimation = { addr = 0x80196CF0, type = "func", source = "Claims a free palette animation slot of g_PaletteAnimations for an owner and its source colour table." }
 GFX_StepPaletteAnimation = { addr = 0x80196D84, type = "func", source = "Advances the animation entry of one g_PaletteAnimations palette slot and copies its colours through GFX_CopyPaletteAnimationColors." }
 GFX_CopyPaletteAnimationColors = { addr = 0x80196E74, type = "func", source = "Copies the colours of one palette animation entry into g_GraphicsPaletteDst, with the divisor and stride read from s_PaletteSlotDivisors and s_PaletteSlotStrides, and sets g_GfxPalettePending." }
-Game_RunCampMenu = { addr = 0x80196F78, type = "func", source = "Thread body that never returns: waits a frame, runs the g_GameCampMenuLoad handler of the current step, then Menu_UpdatePanelTasks." }
+Game_RunCampMenu = { addr = 0x80196F78, type = "func", source = "Thread body that never returns: waits a frame, runs the g_GameCampMenuLoad handler of the current step, then UI_PanelUpdateTasks." }
 Game_LoadCampMenu = { addr = 0x80196FFC, type = "func", source = "Camp menu step 0: loads the menu overlay slot 0x268, resets the palette and advances the camp menu step." }
 Game_RunMain = { addr = 0x80197068, type = "func", source = "Thread body that never returns: runs the g_GameModes handler the game state index selects, updates the clock and waits a frame." }
 Game_NewGame = { addr = 0x801970EC, type = "func", source = "Game state loop step 0: clears the new-game flags, resets g_GameAreaId and builds the party battlers for a new game." }
@@ -73,19 +73,19 @@ Game_RunScene = { addr = 0x80198B00, type = "func", source = "Step 0 of g_GameSc
 Game_OrbitSceneCamera = { addr = 0x80198B44, type = "func", source = "Step 1 of g_GameSceneCameraSteps: runs the camera orbit driver while the view button is held." }
 Game_EndSceneCamera = { addr = 0x80198B6C, type = "func", source = "Step 2 of g_GameSceneCameraSteps: eases the camera back and, once the angle reaches its rest pitch and yaw, restarts the step sequence. Mirrors Game_EndCameraLook." }
 Area_WaitWindowEffect = { addr = 0x80198BC4, type = "func", source = "Runs area frames until the window effect is idle." }
-Menu_WaitWindowEffect = { addr = 0x80198C38, type = "func", source = "Runs menu frames until the window effect is idle; the menu twin of Area_WaitWindowEffect." }
+UI_WindowWaitEffect = { addr = 0x80198C38, type = "func", source = "Runs menu frames until the window effect is idle; the menu twin of Area_WaitWindowEffect." }
 Game_UpdateClock = { addr = 0x80198CAC, type = "func", source = "Advances the play clock by frame, second, minute and hour." }
 Game_EaseCameraToRest = { addr = 0x801990D0, type = "func", source = "Steps the camera pitch and its mirror toward the resting pitch and eases the yaw back, one frame at a time." }
 Area_RunFrame = { addr = 0x801991B8, type = "func", source = "Runs one field frame: Area_UpdateParty, Actor_DispatchAll and Area_DrawScene." }
 Area_RunLoadingFrame = { addr = 0x801992B8, type = "func", source = "runs one field update-and-draw frame (camera, party, actors, scene) in the overlay and archive wait loops" }
 Game_RunSceneFrame = { addr = 0x80199308, type = "func", source = "The scene-camera frame: the scenario update, the camera, the party, the actors and the scene draw, without the pad-driven walk." }
-Game_UpdateMenuFrame = { addr = 0x80199368, type = "func", source = "Middle entry of g_GameMenuSteps, between Game_LoadMenu and Game_ReturnFromMenu: each frame updates the scenario, dispatches the menu step and updates the panel tasks; Menu_WaitWindowEffect also calls it while a window effect is busy." }
+Game_UpdateMenuFrame = { addr = 0x80199368, type = "func", source = "Middle entry of g_GameMenuSteps, between Game_LoadMenu and Game_ReturnFromMenu: each frame updates the scenario, dispatches the menu step and updates the panel tasks; UI_WindowWaitEffect also calls it while a window effect is busy." }
 Game_UpdateAbilityMenuFrame = { addr = 0x801993F0, type = "func", source = "Middle entry of g_MenuAbilityOpen, between Game_LoadAbilityMenu and Game_ReturnFromAbilityMenu: runs the Bate (ability menu) entry func_801D0D9C and updates the panel tasks each frame." }
 Game_UpdateShisuFrame = { addr = 0x80199418, type = "func", source = "Middle entry of g_GameShisuSteps, between Game_LoadShisu and Game_ReturnFromShisu: runs the shisu screen entry func_801D0D80 and updates the panel tasks each frame." }
 Party_RunFrame = { addr = 0x80199440, type = "func", source = "Runs each party member's per-frame step: the leader's step handler, then the followers', skipping any member its hold bit pins." }
-Menu_DrawPanelCursor = { addr = 0x80199678, type = "func", source = "Draws the menu panel cursor at the x and y of the current task root through Menu_DrawCursorSprite." }
-Menu_SlidePanelLeft = { addr = 0x8019973C, type = "func", source = "Moves the master panel 0x20 pixels left and clamps its x at 0x98." }
-Menu_SetPosX = { addr = 0x8019982C, type = "func", source = "same body as emi/etc/shisu/00@0x801D32E0 Menu_SetPosX" }
+UI_CursorDrawPanel = { addr = 0x80199678, type = "func", source = "Draws the menu panel cursor at the x and y of the current task root through UI_CursorDraw." }
+UI_PanelSlideLeft = { addr = 0x8019973C, type = "func", source = "Moves the master panel 0x20 pixels left and clamps its x at 0x98." }
+UI_PanelSetPosX = { addr = 0x8019982C, type = "func", source = "same body as emi/etc/shisu/00@0x801D32E0 UI_PanelSetPosX" }
 Actor_DispatchAll = { addr = 0x8019A0E4, type = "func", source = "Runs g_ActorTypes[type] for each of the g_SpawnedActors entries whose header.flags is set." }
 WorldMap_FindRegion = { addr = 0x8019A194, type = "func", source = "Returns the index of the WorldMapRegion whose area id equals g_GameAreaId, or WORLD_MAP_REGION_COUNT (11) when none matches." }
 WorldMap_GetPoints = { addr = 0x8019A1D4, type = "func", source = "Returns map_points of the current world map region (g_WorldMapRegions indexed by WorldMap_FindRegion); func_801B690C searches those rows by actor cell." }
@@ -127,9 +127,9 @@ Game_CallScenario = { addr = 0x801A7A34, type = "func", source = "Calls entry_10
 Game_UpdateScene = { addr = 0x801A7BF0, type = "func", source = "Runs the g_SceneSteps callback selected by the scene state byte D_801448EA." }
 Scene_ResetEventState = { addr = 0x801A7C2C, type = "func", source = "Resets the scene state bytes and copies the 16-byte D_801C84AC table to g_SceneEventFlags." }
 Scene_UpdateEvent = { addr = 0x801A7CAC, type = "func", source = "Runs the g_SceneEvents callback selected by the scene event byte D_801448EB." }
-Menu_OpenMaster = { addr = 0x801A7CF0, type = "func", source = "Scene event 4: loads SISYOU with EMI_LoadArchive(EMI_SLOT_SISYOU) and runs the master menu through func_801D25D8." }
-Scene_RunInn = { addr = 0x801A802C, type = "func", source = "Scene event 10: calls UI_SetMode, plays an XA stream and sets g_GameEntryState to 7, the shop entry state." }
-Message_RunAreaMessage = { addr = 0x801A82F8, type = "func", source = "Starts area message 0xD8, waits until g_GameStateIndex leaves 2, then clears the script-active flag and the scene event byte D_801448EB." }
+UI_PanelOpenMaster = { addr = 0x801A7CF0, type = "func", source = "Scene event 4: loads SISYOU with EMI_LoadArchive(EMI_SLOT_SISYOU) and runs the master menu through func_801D25D8." }
+Scene_RunInn = { addr = 0x801A802C, type = "func", source = "Scene event 10: calls UI_ModeSet, plays an XA stream and sets g_GameEntryState to 7, the shop entry state." }
+UI_MessageRunArea = { addr = 0x801A82F8, type = "func", source = "Starts area message 0xD8, waits until g_GameStateIndex leaves 2, then clears the script-active flag and the scene event byte D_801448EB." }
 Scene_DispatchObject = { addr = 0x801A86D4, type = "func", source = "Runs the g_SceneObjects callback selected by unk_7A of the actor, with the actor and g_SceneEventFlags." }
 Game_CallArea = { addr = 0x801A8CB4, type = "func", source = "Finds the entry of g_GameAreaId in the 28-entry area handler table g_AreaHooks and calls its handler with the two coordinates; returns 0 when the area has none. Called by Game_CallScenario." }
 Script_Run = { addr = 0x801A8D38, type = "func", source = "Runs the actor script record at the cursor: flow ops first, then the group handler its high nibble selects; returns the facing selection." }
@@ -164,19 +164,20 @@ AreaAction_WaitMessageFade = { addr = 0x801AD9C4, type = "func", source = "Waits
 AreaAction_Fade = { addr = 0x801AD9F0, type = "func", source = "Brightens the actor's tint back, then ends the field action." }
 Actor_SpawnSceneActor = { addr = 0x801ADAC0, type = "func", source = "spawns the type-0x19 scene actor at the task position with its selection from func_801ADC98 and links it to the task" }
 Char_ApplyLevelUps = { addr = 0x801ADDD4, type = "func", source = "Raises the character to the level its exp reaches: adds each gained level's growth to the base stats (capped at 999), grants its abilities and rebuilds the stats." }
-UI_DrawWindow = { addr = 0x801AE3F0, type = "func", source = "Draws a window from x with a left cap and a body stretched to width, height rows tall, with the palette column of the style argument; flags 0x80 and 0x20 trim the top and the bottom." }
-UI_DrawIcon = { addr = 0x801AEA80, type = "func", source = "Draws one 8x8 icon sprite; callers pass item icon ids and ability element ids." }
-UI_DrawWindowFrame = { addr = 0x801AEBA0, type = "func", source = "Draws the four border lines of a window frame in the window style color; the header bar draws callers pass the inner rectangle." }
-UI_DrawWindowOutline = { addr = 0x801AED54, type = "func", source = "Draws the four edges and the cut corners of a rectangle through GFX_DrawLine in the colour row of g_WindowStyle; the high nibble of the flag byte picks the cut corners." }
+UI_CursorDrawName = { addr = 0x801AE214, type = "func", source = "The underline that marks the current letter of a name entry: a line at the cursor column, bright when the mode is 0 (the start menu and commu02 name entries call it)." }
+UI_WindowDraw = { addr = 0x801AE3F0, type = "func", source = "Draws a window from x with a left cap and a body stretched to width, height rows tall, with the palette column of the style argument; flags 0x80 and 0x20 trim the top and the bottom." }
+UI_IconDraw = { addr = 0x801AEA80, type = "func", source = "Draws one 8x8 icon sprite; callers pass item icon ids and ability element ids." }
+UI_WindowDrawFrame = { addr = 0x801AEBA0, type = "func", source = "Draws the four border lines of a window frame in the window style color; the header bar draws callers pass the inner rectangle." }
+UI_WindowDrawOutline = { addr = 0x801AED54, type = "func", source = "Draws the four edges and the cut corners of a rectangle through GFX_DrawLine in the colour row of g_WindowStyle; the high nibble of the flag byte picks the cut corners." }
 GFX_DrawLine = { addr = 0x801AF0F4, type = "func", source = "Queues a draw mode and one semi-transparent LINE_F2 between two points." }
 Game_ReadCommand = { addr = 0x801AF20C, type = "func", source = "comment: read the next command; every menu and battle draw reads its command stream through it" }
-UI_GetSpriteRect = { addr = 0x801AF270, type = "func", source = "Returns the rectangle of a sprite id from one of two rect tables." }
-UI_DrawSprite = { addr = 0x801AF2A0, type = "func", source = "Appends one SPRT at x, y with the rectangle of sprite_id; bit 2 of flags picks the CLUT." }
-UI_DrawSpriteRun = { addr = 0x801AF390, type = "func", source = "Draws the (x offset, y offset, sprite id) triples of record_table from base_x, base_y through UI_DrawSprite until the id 0xFF; bit 0 of flags picks the sprite page." }
+UI_SpriteGetRect = { addr = 0x801AF270, type = "func", source = "Returns the rectangle of a sprite id from one of two rect tables." }
+UI_SpriteDraw = { addr = 0x801AF2A0, type = "func", source = "Appends one SPRT at x, y with the rectangle of sprite_id; bit 2 of flags picks the CLUT." }
+UI_SpriteDrawRun = { addr = 0x801AF390, type = "func", source = "Draws the (x offset, y offset, sprite id) triples of record_table from base_x, base_y through UI_SpriteDraw until the id 0xFF; bit 0 of flags picks the sprite page." }
 Item_PassesTest = { addr = 0x801AF494, type = "func", source = "Tells whether an item passes the list's filter test: test 0 passes every item, 1 an item the field can use, 2 and 3 the item record flag bits, 4 an item the character can equip; the menu lists draw a failing item dimmed." }
-UI_DrawItemRow = { addr = 0x801AF800, type = "func", source = "Draws an item row: icon, name from the item record, and a count when it is two or more." }
-UI_DrawAbilityRow = { addr = 0x801AF930, type = "func", source = "Draws one row of an ability list: the element icon, the ability name from its text command stream and the cost as a two-digit number at the right, in the given text shade." }
-UI_DrawScrollbar = { addr = 0x801AFA1C, type = "func", source = "Draws a list scrollbar: a red mark per flagged row on the track and the thumb; menu list windows call it." }
+UI_ListDrawItemRow = { addr = 0x801AF800, type = "func", source = "Draws an item row: icon, name from the item record, and a count when it is two or more." }
+UI_ListDrawAbilityRow = { addr = 0x801AF930, type = "func", source = "Draws one row of an ability list: the element icon, the ability name from its text command stream and the cost as a two-digit number at the right, in the given text shade." }
+UI_ListDrawScrollbar = { addr = 0x801AFA1C, type = "func", source = "Draws a list scrollbar: a red mark per flagged row on the track and the thumb; menu list windows call it." }
 Camera_SetMatrix = { addr = 0x801AFE18, type = "func", source = "Sets the GTE rotation and translation from the camera angle, height and offsets, and returns out_matrix unchanged." }
 Camera_ProjectPoint = { addr = 0x801AFF04, type = "func", source = "Projects the 16.16 position pos through RotTransPers and writes the result to screen_xy." }
 MATH_SetIdentity = { addr = 0x801AFF64, type = "func", source = "Writes 4096 to the three diagonal cells of a 3x3 s16 matrix and 0 to the other six." }
@@ -281,11 +282,11 @@ s_MenuLine1Run = { addr = 0x801C7BBC, size = 0xC, source = "Sprite run of the fi
 s_MenuLine2Run = { addr = 0x801C7BC8, size = 0xC, source = "Sprite run of the second menu line, drawn by func_801999F8." }
 s_MenuLine1FlagRun = { addr = 0x801C7BD4, size = 0xC, source = "Sprite run of the first menu line that func_801999F8 draws when bit 2 of the task unk_10 is set." }
 s_MenuLine2FlagRun = { addr = 0x801C7BE0, size = 0xC, source = "Sprite run of the second menu line that func_801999F8 draws when bit 1 of the task unk_10 is set." }
-g_MenuPanelModes = { addr = 0x801C7BEC, size = 0x14, source = "5 handlers of the menu panel, called by func_80199558." }
-g_MenuPanelSteps = { addr = 0x801C7C00, size = 0xC, source = "3 handlers of the menu panel states, called by func_801995A4." }
+g_UiPanelModes = { addr = 0x801C7BEC, size = 0x14, source = "5 handlers of the menu panel, called by func_80199558." }
+g_UiPanelSteps = { addr = 0x801C7C00, size = 0xC, source = "3 handlers of the menu panel states, called by func_801995A4." }
 g_MenuOptionSteps = { addr = 0x801C7C0C, size = 0xC, source = "3 handlers of the menu option screen, called by func_801996A8." }
 g_MenuActionSteps = { addr = 0x801C7C18, size = 0xC, source = "3 handlers of the menu action screen, called by func_8019977C." }
-g_MenuTaskSteps = { addr = 0x801C7C24, size = 0x10, source = "4 handlers of the menu tasks, called by func_8019986C." }
+g_UiPanelTaskSteps = { addr = 0x801C7C24, size = 0x10, source = "4 handlers of the menu tasks, called by func_8019986C." }
 D_801C7C34 = { addr = 0x801C7C34, size = 0x28, source = "The five menu category names ITEM, WEAPON, ARMOR, OPTION and VITAL, padded to eight bytes; D_801C7C5C points at each row." }
 D_801C7C5C = { addr = 0x801C7C5C, size = 0x14, source = "Pointers to the five menu category names D_801C7C34, picked by func_801999F8 through the menu task's unk_0A." }
 g_ActorTypes = { addr = 0x801C7C70, size = 0x2EC, source = "187 actor handlers, indexed by the type of each active g_SpawnedActors entry by Actor_DispatchAll; they live in the resident image and in the shared, area and scenario windows." }
@@ -350,10 +351,10 @@ g_GameShopStock = { addr = 0x801CA28C, size = 0x398, source = "The ShopStock rec
 D_801CA624 = { addr = 0x801CA624, size = 0xE8, source = "232 zeroed bytes of GAME.EMI data; no matched code reads them." }
 g_Abilities = { addr = 0x801CA70C, size = 0x11D0, source = "The 228 Ability records of GAME.EMI." }
 g_LevelGrowth = { addr = 0x801CB8DC, size = 0x15A8, source = "The LevelGrowth records of GAME.EMI: 0x318 bytes per character, with the experience of each level at 8-byte stride." }
-D_801CCE84 = { addr = 0x801CCE84, size = 0xF8, source = "The 62 sprite UV rectangles UI_GetSpriteRect returns by sprite id, one per menu sprite." }
-D_801CCF7C = { addr = 0x801CCF7C, size = 0xD4, source = "The 53 sprite UV rectangles UI_GetSpriteRect returns by sprite id, one per battle sprite." }
-s_ItemSpriteIds = { addr = 0x801CD050, size = 0x10, source = "Sprite id indexed by the item icon; UI_DrawItemRow passes the entry to UI_DrawIcon." }
-s_ItemIconIds = { addr = 0x801CD060, size = 0xC, source = "Icon id by icon index; UI_DrawAbilityRow passes the entry to UI_DrawIcon." }
+D_801CCE84 = { addr = 0x801CCE84, size = 0xF8, source = "The 62 sprite UV rectangles UI_SpriteGetRect returns by sprite id, one per menu sprite." }
+D_801CCF7C = { addr = 0x801CCF7C, size = 0xD4, source = "The 53 sprite UV rectangles UI_SpriteGetRect returns by sprite id, one per battle sprite." }
+s_ItemSpriteIds = { addr = 0x801CD050, size = 0x10, source = "Sprite id indexed by the item icon; UI_ListDrawItemRow passes the entry to UI_IconDraw." }
+s_ItemIconIds = { addr = 0x801CD060, size = 0xC, source = "Icon id by icon index; UI_ListDrawAbilityRow passes the entry to UI_IconDraw." }
 s_RouteStepScratch = { addr = 0x801CD06C, size = 0x20, source = "Actor_RequestRoute splits each two-byte entry into a route step and the scratch byte at unk_2A" }
 s_EntityPlacementOffsets = { addr = 0x801CD08C, size = 0x20, source = "s8 x, y pairs that func_801B1E24 and func_801B21E8 search for an entity position." }
 D_801CD08D = { addr = 0x801CD08D, size = 0x1, alias = true, source = "The first byte of s_EntityPlacementOffsets, which func_801B1E24 and func_801B21E8 read as an array by entity index." }
@@ -440,7 +441,7 @@ Fairy_RunCommu02Scene = { addr = 0x801F1E74, type = "func", source = "Runs the c
 Fairy_RunCommu03Scene = { addr = 0x801F1F9C, type = "func", source = "Runs the commu03 scene's steps: g_FairyCommu03Steps indexed by g_SceneEventStep. Entry 24 of g_SceneEvents; the definition is in emi/etc/commu00/00." }
 Fairy_RunCommu04Scene = { addr = 0x801F2020, type = "func", source = "Runs the commu04 scene's steps: g_FairyCommu04Steps indexed by g_SceneEventStep. Entry 25 of g_SceneEvents; the definition is in emi/etc/commu00/00." }
 Fairy_RunCommu05Scene = { addr = 0x801F228C, type = "func", source = "Runs the commu05 scene's steps: g_FairyCommu05Steps indexed by g_SceneEventStep. Entry 26 of g_SceneEvents; the definition is in emi/etc/commu00/00." }
-Fishing_ShowLocation = { addr = 0x801F2C38, type = "func", source = "Prints the fish listed for the player position from g_FishingBestCatch with Message_StartAreaMessage, steps D_801448EC from 0 to 1, and clears it when the message closes." }
+Fishing_ShowLocation = { addr = 0x801F2C38, type = "func", source = "Prints the fish listed for the player position from g_FishingBestCatch with UI_MessageStartArea, steps D_801448EC from 0 to 1, and clears it when the message closes." }
 # Readable names live in the owning headers
 # (src/engine/game/00/game_00.h); a row exists only for a type:func
 # boundary or a sized data-table label.

@@ -1,5 +1,5 @@
 #include "battle_03.h"
 
 MATCH void func_801E925C(void) {
-    g_MenuCurrentPanel->state += 1;
+    g_UiPanelCurrent->state += 1;
 }

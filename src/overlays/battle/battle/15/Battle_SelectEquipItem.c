@@ -30,7 +30,7 @@ NON_MATCHING void Battle_SelectEquipItem(void) {
     if (D_8014862E == 0) {
         resource = 0x30;
     }
-    resource_id                                                       = Message_GetText(resource);
+    resource_id                                                       = UI_MessageGetText(resource);
     g_BattleMessages[((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK)].text = resource_id;
     pad_state                                                         = &g_PadStates[0].pressed;
     pad                                                               = INPUT_REPEATED(*pad_state, (PADLup | PADLdown));
@@ -54,7 +54,7 @@ NON_MATCHING void Battle_SelectEquipItem(void) {
             *(u16*)((u8*)D_80145FAA + FIELD(u8, g_BattleMessageSlot, 0x5u) * BATTLE_PARTY_STRIDE) = (u16)g_BattleTargetCursorCol;
             choice                                                                                = (u16)g_BattleTargetCursorCol;
             g_BattleActorTurn->command.id                                                         = choice;
-            resource_id                                                                           = Message_GetText(Item_GetDescription((s32)(choice >> 8), choice & BYTE_MASK) & HALF_MASK);
+            resource_id                                                                           = UI_MessageGetText(Item_GetDescription((s32)(choice >> 8), choice & BYTE_MASK) & HALF_MASK);
             BATTLE_SELECTION_RECORD_HANDLE((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK)              = resource_id;
             D_80148597                                                                            = 2;
             g_BattlePanelMode                                                                     = 1;

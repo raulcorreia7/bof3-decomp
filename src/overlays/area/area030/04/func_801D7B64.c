@@ -8,9 +8,9 @@ MATCH void func_801D7B64(void) {
 
     Fishing_SetDrawMode(0, 1);
     Fishing_DrawSprite(18, 1, 240, 66);
-    UI_DrawAsciiString(284, 69, 0, D_801D0C10);
+    UI_TextDrawAscii(284, 69, 0, D_801D0C10);
 
-    buffer = g_UiFormatBuffer;
+    buffer = g_UiTextFormatBuffer;
     record = FISHING_STATE;
     TEXT_Format(buffer, D_801D0C04, record->bounce.half.key + 1);
 
@@ -18,5 +18,5 @@ MATCH void func_801D7B64(void) {
         buffer[0] = STRING_SPACE;
     }
 
-    UI_DrawText(250, 69, 0, 2, buffer);
+    UI_TextDraw(250, 69, 0, 2, buffer);
 }

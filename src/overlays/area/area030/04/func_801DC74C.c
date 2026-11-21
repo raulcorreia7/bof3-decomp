@@ -10,7 +10,7 @@ MATCH void func_801DC74C(void) {
         g_AreaScrollTargetY = TO_COORD(60);
         Area_InitMapRenderer();
         func_801E0A30();
-        UI_SetMode(3);
+        UI_ModeSet(3);
         if (g_Game.current->chr.character_id == CHAR_ID_RYU_YOUNG) {
             Script_Begin(0xA, 2);
         } else {

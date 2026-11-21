@@ -1042,7 +1042,7 @@ NON_MATCHING void func_801FA6B4(void) {
             break;
         case 4:
             if (g_ScriptVars[0] == 0xA) {
-                UI_SetMode(0xD);
+                UI_ModeSet(0xD);
                 g_ScenarioState.step_05 = 5;
             }
             break;
@@ -1135,7 +1135,7 @@ MATCH void func_801FAA70(void) {
             break;
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                UI_SetMode(1);
+                UI_ModeSet(1);
                 g_AreaScrollTargetX = 0x2D8000;
                 g_AreaScrollTargetY = 0x5D0000;
                 Area_InitMapRenderer();

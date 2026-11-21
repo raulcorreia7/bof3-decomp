@@ -1151,7 +1151,7 @@ NON_MATCHING void func_801FABA0(void) {
             break;
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                UI_SetMode(5);
+                UI_ModeSet(5);
                 g_AreaDrawFlags         = 0x1F;
                 g_ScenarioState.step_05 = 2;
             }
@@ -1211,7 +1211,7 @@ NON_MATCHING void func_801FABA0(void) {
             break;
         case 8:
             if (g_ScriptVars[0] == 0x16) {
-                UI_SetMode(0xD);
+                UI_ModeSet(0xD);
                 g_ScenarioState.step_05 = 9;
             }
             break;

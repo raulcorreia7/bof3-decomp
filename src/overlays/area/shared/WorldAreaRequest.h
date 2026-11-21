@@ -8,9 +8,9 @@
 #define WORLD_SELECT_ANSWER_MESSAGE(selected, idle) \
     do {                                            \
         if (MENU_SELECTION_ARMED()) {               \
-            g_MessageRequest = (selected);          \
+            g_UiMessageRequest = (selected);        \
         } else {                                    \
-            g_MessageRequest = (idle);              \
+            g_UiMessageRequest = (idle);            \
         }                                           \
     } while (0)
 
@@ -18,8 +18,8 @@
  * reset sentinel. */
 #define WORLD_SELECT_ANSWER_MESSAGE_ON_VALUE(selection, value) \
     do {                                                       \
-        if (g_MessageChoice == (selection)) {                  \
-            g_MessageRequest = (value);                        \
+        if (g_UiMessageChoice == (selection)) {                \
+            g_UiMessageRequest = (value);                      \
         } else {                                               \
             MESSAGE_REQUEST_CLEAR();                           \
         }                                                      \
@@ -27,14 +27,14 @@
 
 /* Arm the message request and the master panel step: the message id and step 6
  * when the menu selection is set, the reset sentinel otherwise. */
-#define WORLD_ARM_ANSWER_MESSAGE(request) \
-    do {                                  \
-        if (MENU_SELECTION_ARMED()) {     \
-            g_MessageRequest = (request); \
-            g_MenuMasterStep = 6;         \
-        } else {                          \
-            MESSAGE_REQUEST_CLEAR();      \
-        }                                 \
+#define WORLD_ARM_ANSWER_MESSAGE(request)   \
+    do {                                    \
+        if (MENU_SELECTION_ARMED()) {       \
+            g_UiMessageRequest = (request); \
+            g_MenuMasterStep   = 6;         \
+        } else {                            \
+            MESSAGE_REQUEST_CLEAR();        \
+        }                                   \
     } while (0)
 
 /* Arm the message request: the idle id when the menu selection is clear, else
@@ -42,10 +42,10 @@
 #define WORLD_ARM_ANSWER_MESSAGE_IDLE(idle, selected) \
     do {                                              \
         if (MENU_SELECTION_IDLE()) {                  \
-            g_MessageRequest = (idle);                \
+            g_UiMessageRequest = (idle);              \
         } else {                                      \
-            g_MessageRequest = (selected);            \
-            g_MenuMasterStep = 6;                     \
+            g_UiMessageRequest = (selected);          \
+            g_MenuMasterStep   = 6;                   \
         }                                             \
     } while (0)
 

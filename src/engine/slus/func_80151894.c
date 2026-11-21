@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* counts g_MessageStateTimer down and, when it reaches zero, advances the mode byte,
+/* counts g_UiMessageStateTimer down and, when it reaches zero, advances the mode byte,
  * the entry index and bit 2 of g_UiWindowChannel.
  */
 MATCH void func_80151894(void) {
@@ -10,16 +10,16 @@ MATCH void func_80151894(void) {
     int flags;
     u8  advance;
 
-    value                  = g_MessageStateTimer[0];
-    g_MessageStateTimer[0] = value + 0xFF;
+    value                    = g_UiMessageStateTimer[0];
+    g_UiMessageStateTimer[0] = value + 0xFF;
     if (value == 0) {
-        advance = g_MenuPanelTasks[0].state + 1;
+        advance = g_UiPanelTasks[0].state + 1;
         index   = g_UiWindowStep + 1;
         mode    = advance;
         flags   = g_UiWindowChannel;
         flags |= FRONTEND_FLAG_SELECTION;
-        g_MenuPanelTasks[0].state = mode;
-        g_UiWindowStep            = index;
-        g_UiWindowChannel         = flags;
+        g_UiPanelTasks[0].state = mode;
+        g_UiWindowStep          = index;
+        g_UiWindowChannel       = flags;
     }
 }

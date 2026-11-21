@@ -27,7 +27,7 @@ MATCH void func_801FC21C(void) {
             break;
         case 11:
             if (g_ScriptVars[0] == 12) {
-                UI_SetMode(UI_MODE_FADE_OUT);
+                UI_ModeSet(UI_MODE_FADE_OUT);
                 g_ScenarioState.step_05 = 12;
             }
             break;
@@ -44,7 +44,7 @@ MATCH void func_801FC21C(void) {
             if (SND_IsXAIdle() != 0) {
                 SND_ResumeBGM(g_SndBGMId);
                 g_AreaDrawFlags = 0x1F;
-                UI_SetMode(UI_MODE_FADE_IN);
+                UI_ModeSet(UI_MODE_FADE_IN);
                 g_ScenarioState.step_05 = 14;
             }
             break;

@@ -9,8 +9,8 @@ MATCH void func_801EEC7C(void) {
     if (!WINDOW_EFFECT_IDLE()) {
         return;
     }
-    count                      = &g_BattlePartyCount;
-    g_MenuPanelTasks[0].active = 0;
+    count                    = &g_BattlePartyCount;
+    g_UiPanelTasks[0].active = 0;
     if (*count != 0) {
         TASK_SET(&g_Game.members[0]);
         Script_Request(g_Game.members[0].facing + 0x1C);
@@ -40,7 +40,7 @@ MATCH void func_801EEC7C(void) {
     }
     func_800ACF80();
     func_801E5A38();
-    UI_SetMode(UI_MODE_LONG_FADE_IN);
+    UI_ModeSet(UI_MODE_LONG_FADE_IN);
     step = &g_BattleUIStep;
     *step += 1;
 }

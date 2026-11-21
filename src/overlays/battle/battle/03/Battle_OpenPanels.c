@@ -16,21 +16,21 @@ MATCH void Battle_OpenPanels(void) {
 
     D_801EBF04               = 0;
     D_801EC328               = 0;
-    slot                     = Menu_OpenPanelTask(0x14, 3) & BYTE_MASK;
+    slot                     = UI_PanelOpenTask(0x14, 3) & BYTE_MASK;
     D_80148332[slot].mode_00 = 7;
     D_80148332[slot].x_02    = 0x14;
     D_80148332[slot].unk_01  = 0;
     D_80148332[slot].y_04    = -0x16;
     group                    = &g_Battle.outcome.surprise;
     if (*group == 1) {
-        Battle_AddMessage(2, 0x30, Message_GetText(BATTLE_TEXT_INITIATIVE_PARTY));
+        Battle_AddMessage(2, 0x30, UI_MessageGetText(BATTLE_TEXT_INITIATIVE_PARTY));
     }
     if (*group == 2) {
-        Battle_AddMessage(2, 0x30, Message_GetText(BATTLE_TEXT_INITIATIVE_OPPONENT));
+        Battle_AddMessage(2, 0x30, UI_MessageGetText(BATTLE_TEXT_INITIATIVE_OPPONENT));
     }
     for (battler = 0; battler < BATTLE_PARTY_CHARACTERS_COUNT; battler++) {
         if (ACTOR_IN_USE(g_Game.members[battler])) {
-            Menu_OpenPanelTask((battler + MENU_PANEL_BATTLER_FIRST) & BYTE_MASK, 3);
+            UI_PanelOpenTask((battler + MENU_PANEL_BATTLER_FIRST) & BYTE_MASK, 3);
             D_80148332[MENU_PANEL_BATTLER_FIRST + battler].mode_00 = 5;
             D_80148332[MENU_PANEL_BATTLER_FIRST + battler].unk_01  = 0;
             first                                                  = g_Game.members[battler].facing;

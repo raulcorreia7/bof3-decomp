@@ -5,6 +5,6 @@
 
 /* func_801E98F8 */
 MATCH void Menu_EquipmentPanel(void) {
-    g_MenuStartEquipmentSteps[g_MenuCurrentPanel->state]();
-    Menu_DrawEquipmentPanel(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, g_CharSlot[g_PartyFieldOrder[g_MenuCurrentPanel->unk_0A]]);
+    g_MenuStartEquipmentSteps[g_UiPanelCurrent->state]();
+    Menu_DrawEquipmentPanel(g_UiPanelCurrent->pos.x, g_UiPanelCurrent->pos.y, g_CharSlot[g_PartyFieldOrder[g_UiPanelCurrent->unk_0A]]);
 }

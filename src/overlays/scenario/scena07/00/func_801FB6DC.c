@@ -20,7 +20,7 @@ MATCH void func_801FB6DC(void) {
             break;
         case 2:
             if (g_ScriptVars[0] == 0x10) {
-                UI_SetMode(UI_MODE_FADE_OUT);
+                UI_ModeSet(UI_MODE_FADE_OUT);
                 g_ScenarioState.step_05 = 3;
             }
             break;
@@ -48,7 +48,7 @@ MATCH void func_801FB6DC(void) {
         case 5:
             if (g_UiWindowEffectBusy == 0) {
                 g_AreaDrawFlags = 0x1F;
-                UI_SetMode(UI_MODE_FADE_IN);
+                UI_ModeSet(UI_MODE_FADE_IN);
                 g_ScenarioState.step_05 = 6;
             }
             break;

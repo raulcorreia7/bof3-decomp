@@ -150,12 +150,12 @@ NON_MATCHING void func_801F8680(void) {
             g_AreaDrawFlags          = 0x1F;
             g_AreaCameraOffsetZ      = 0;
             g_AreaCameraRefreshCount = 2;
-            UI_SetMode(UI_MODE_FADE_IN);
+            UI_ModeSet(UI_MODE_FADE_IN);
             g_ScenarioState.step_05 = 0xE;
             break;
         case 14:
             if (g_ScriptVars[0] == 0x23) {
-                UI_SetMode(UI_MODE_FADE_OUT);
+                UI_ModeSet(UI_MODE_FADE_OUT);
                 g_ScenarioState.step_05 = 0xF;
             }
             break;
@@ -180,7 +180,7 @@ NON_MATCHING void func_801F8680(void) {
             SND_PlayBGM(0x30, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             g_ScriptVars[0]++;
             g_AreaDrawFlags = 0x1F;
-            UI_SetMode(UI_MODE_FADE_IN);
+            UI_ModeSet(UI_MODE_FADE_IN);
             g_ScenarioState.step_05 = 0x11;
             break;
         case 17:

@@ -19,7 +19,7 @@ MATCH void func_801D0DD8(void) {
 MATCH void Menu_ResetPanels(void) {
     u16* count;
 
-    Menu_ResetPanelTasks();
+    UI_PanelResetTasks();
     count = &g_GameEntrySubstate;
     *count += 1;
 }
@@ -36,7 +36,7 @@ MATCH void func_801D0E74(void) {
 MATCH void Menu_StartFadeIn(void) {
     u8* count;
 
-    UI_SetMode(UI_MODE_FAST_FADE_IN);
+    UI_ModeSet(UI_MODE_FAST_FADE_IN);
     count = &g_MenuStep.state;
     *count += 1;
 }
@@ -109,14 +109,14 @@ MATCH void func_801D1044(void) {
     } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x06));
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
-        g_MenuPanelTasks[0].state = 1;
-        D_80148357                = 1;
-        D_8014837B                = 1;
-        D_8014839F                = 1;
-        D_801483C0                = 0;
-        D_80148624                = 0;
-        D_80148654                = 5;
-        g_MenuStep.state          = 0;
+        g_UiPanelTasks[0].state = 1;
+        D_80148357              = 1;
+        D_8014837B              = 1;
+        D_8014839F              = 1;
+        D_801483C0              = 0;
+        D_80148624              = 0;
+        D_80148654              = 5;
+        g_MenuStep.state        = 0;
         g_MenuStep.sub_step += 1;
     }
 }

@@ -49,7 +49,7 @@
 
 /* Fixed retail addresses the units dereference. */
 #define SCENE_TABLE_BASE           0x800E3800u          /* scene table: a u32 count, then AreaActorDef entries */
-#define RESOURCE_TABLE_BASE        0x8001A000u          /* resource id table. @source: read:Message_GetText@0x801502D0 */
+#define RESOURCE_TABLE_BASE        0x8001A000u          /* resource id table. @source: read:UI_MessageGetText@0x801502D0 */
 #define RESOURCE_ID_GROUP_WORD(id) (((id) >> 12) & 0xC) /* byte offset of the group base word: id bits 14 and 15 times 4 */
 #define RESOURCE_ID_INDEX(id)      ((id) & 0x3FFF)      /* index into the group's u16 offset table */
 #define SLUS_LOAD_ADDRESS          0x80010000u          /* the main executable's link address */
@@ -71,22 +71,22 @@
  * Kept: as an inline the row literal folds into `addiu` where retail shifts
  * first (instruction 4 differs in 4 of 4 members); the member also returns from
  * inside. */
-#define SLUS_SELECT_ANSWER_MESSAGE(row, delay0, delay1)                               \
-    do {                                                                              \
-        u16 value;                                                                    \
-                                                                                      \
-        g_MessageRequest = g_AnswerMessages[(row) + g_MessageWindow.selection_index]; \
-        switch (g_MessageWindow.selection_index) {                                    \
-            case 0:                                                                   \
-                value = (delay0);                                                     \
-                break;                                                                \
-            case 1:                                                                   \
-                value = (delay1);                                                     \
-                break;                                                                \
-            default:                                                                  \
-                return;                                                               \
-        }                                                                             \
-        g_ScriptVars[0] = (u8)value;                                                  \
+#define SLUS_SELECT_ANSWER_MESSAGE(row, delay0, delay1)                                   \
+    do {                                                                                  \
+        u16 value;                                                                        \
+                                                                                          \
+        g_UiMessageRequest = g_AnswerMessages[(row) + g_UiMessageWindow.selection_index]; \
+        switch (g_UiMessageWindow.selection_index) {                                      \
+            case 0:                                                                       \
+                value = (delay0);                                                         \
+                break;                                                                    \
+            case 1:                                                                       \
+                value = (delay1);                                                         \
+                break;                                                                    \
+            default:                                                                      \
+                return;                                                                   \
+        }                                                                                 \
+        g_ScriptVars[0] = (u8)value;                                                      \
     } while (0)
 
 /* Force the word's top byte to the bundle tag and run its bundle-list entry. A
@@ -257,7 +257,7 @@ typedef struct SoundVoice {
     u8  pad_84[0x28]; /* +0x84 */
 } SoundVoice;
 
-/* Stack snapshots of the fixed dispatch tables the step handlers copy to the frame and index: Message_DispatchState/func_801510DC copy the eight-entry tables at g_MessageStateSteps/D_80149A7C, func_80151538/Message_DispatchChoiceMode the six-entry tables at D_80149A9C/g_MessageChoiceModes, func_8015196C/func_80151A98 build the two-entry tables on the stack, and g_MessageSteps is the sixteen-entry handler table Message_DispatchStep copies. */
+/* Stack snapshots of the fixed dispatch tables the step handlers copy to the frame and index: UI_MessageDispatchState/func_801510DC copy the eight-entry tables at g_UiMessageStateSteps/D_80149A7C, func_80151538/UI_MessageDispatchChoiceMode the six-entry tables at D_80149A9C/g_UiMessageChoiceModes, func_8015196C/func_80151A98 build the two-entry tables on the stack, and g_UiMessageSteps is the sixteen-entry handler table UI_MessageDispatchStep copies. */
 typedef struct {
     Callback steps[8];
 } MessageStateSteps;
@@ -312,7 +312,7 @@ ASSERT_SIZE(Rec_8017F5B4, 0x04);
 
 /* Row of the D_8017F960 panel table: tile column offset, tile row offset and
  * the row step multiplied by the panel index; read through the interior symbols
- * D_8017F962 and D_8017F964 by Menu_DrawMessagePresetRows and Menu_DrawMessagePresetCursor. */
+ * D_8017F962 and D_8017F964 by UI_MessageDrawPresetRows and UI_MessageDrawPresetCursor. */
 typedef struct {
     s16 col_offset;
     s16 row_offset;
@@ -340,7 +340,7 @@ typedef union RecordKey {
 } RecordKey;
 
 /* The six-byte panel row view that starts at row +2: its last halfword is the
- * next row's +0. Menu_DrawMessagePresetCursor indexes it by the selection byte. */
+ * next row's +0. UI_MessageDrawPresetCursor indexes it by the selection byte. */
 typedef struct PanelRowWindow {
     s16 row_offset;
     s16 scale;
@@ -563,24 +563,24 @@ extern u16                   D_80149010[];
 extern u16                   D_80149040[];
 extern u16                   D_80149070[];
 /* D_801490A3 */
-extern u8                    g_MessageChoiceStep;
+extern u8                    g_UiMessageChoiceStep;
 /* D_801490AC */
-extern u32                   g_MessageScript;
+extern u32                   g_UiMessageScript;
 extern u8*                   D_801490B0;
 
-/* The message window with the byte ahead of it: UI_DrawGlyph reads both through this one block. */
+/* The message window with the byte ahead of it: UI_TextDrawGlyph reads both through this one block. */
 typedef struct MessageWindowBlock {
     u8        row_offset_index; /* 0x00 - row of g_TextRowOffsets the glyph height uses */
     u8        pad_01[3];        /* 0x01-0x03 */
-    MenuState window;           /* 0x04 - g_MessageWindow */
+    MenuState window;           /* 0x04 - g_UiMessageWindow */
 } MessageWindowBlock;
 
-extern u8                          D_801490B8[]; /* base form: UI_DrawGlyph takes its address and reads [0] */
+extern u8                          D_801490B8[]; /* base form: UI_TextDrawGlyph takes its address and reads [0] */
 extern u8                          D_801490B9;
 extern s8                          D_801490BA[];
 extern u8                          D_801490BB[];
 /* D_801490BC */
-extern MenuState                   g_MessageWindow;
+extern MenuState                   g_UiMessageWindow;
 extern s16                         D_801490C8; /* cue counter; reads sign at the < 9 test and zero-extends elsewhere */
 extern s16                         D_801490CA;
 extern u8                          D_801490CE;
@@ -594,26 +594,26 @@ extern u8                          g_AreaCellPacketCount;
 /* D_80149340 */
 extern u8                          D_80149341;
 extern const char                  D_80149990[];
-extern const u32                   g_UiLocalModes[];
+extern const u32                   g_UiModeLocals[];
 /* D_80149A5C */
-extern const MessageStateSteps     g_MessageStateSteps;
+extern const MessageStateSteps     g_UiMessageStateSteps;
 extern const MessageStateSteps     D_80149A7C;
 extern const MessageChoiceSteps    D_80149A9C;
 /* D_80149AB4 */
-extern const MessageChoiceSteps    g_MessageChoiceModes;
+extern const MessageChoiceSteps    g_UiMessageChoiceModes;
 /* The 16-entry handler table (code addresses 0x80152370..0x801526C8, the step
- * handlers that follow Message_DispatchStep): the shared step byte's indices at and
+ * handlers that follow UI_MessageDispatchStep): the shared step byte's indices at and
  * above 0x80 dispatch through it. */
 /* D_80149ACC */
-extern const MessageSteps          g_MessageSteps;
+extern const MessageSteps          g_UiMessageSteps;
 /* D_80149B30 */
-extern const struct MenuPanelModes g_MessagePanelModes;
+extern const struct MenuPanelModes g_UiMessagePanelModes;
 /* D_80149B3C */
-extern const struct MenuPanelSteps g_MessageWindowSteps;
+extern const struct MenuPanelSteps g_UiMessageWindowSteps;
 /* D_80149B50 */
-extern const struct MenuPanelSteps g_MessageChoiceSteps;
+extern const struct MenuPanelSteps g_UiMessageChoiceSteps;
 /* D_80149B64 */
-extern const struct MenuPanelSteps g_MessagePresetSteps;
+extern const struct MenuPanelSteps g_UiMessagePresetSteps;
 extern const VECTOR                D_80149BF0;
 extern const u32                   g_CdSteps[];
 extern const EmiRingSteps          g_EmiRingSteps;
@@ -965,7 +965,7 @@ extern u8                   D_801F6870;
 extern u8                   D_801F6A20;
 extern u8                   D_801F6A68;
 extern u8                   D_801F6AD0;
-extern const MenuPanelFuncs g_MenuPanels;
+extern const MenuPanelFuncs g_UiPanels;
 
 /* Retail function prototypes (one declaration each). */
 s8                                func_8014DE78(void);
@@ -1000,17 +1000,17 @@ void                              func_801523D0(void);
 void                              func_80152420(void);
 void                              func_80152470(void);
 void                              func_801524C0(void);
-void                              Message_SetAnswerMessage5(void);
-void                              Message_SetAnswerMessage6(void);
-void                              Message_SetAnswerMessage7(void);
-void                              Message_SetAnswerMessage8(void);
-void                              Message_SetAnswerMessage9(void);
-void                              Message_SetAnswerMessage10(void);
-void                              Message_SetAnswerMessage11(void);
-void                              Message_SetAnswerMessage12(void);
-void                              Message_SetAnswerMessage13(void);
-void                              Message_SetAnswerMessage14(void);
-void                              Message_SetAnswerMessage15(void);
+void                              UI_MessageAnswerSet5(void);
+void                              UI_MessageAnswerSet6(void);
+void                              UI_MessageAnswerSet7(void);
+void                              UI_MessageAnswerSet8(void);
+void                              UI_MessageAnswerSet9(void);
+void                              UI_MessageAnswerSet10(void);
+void                              UI_MessageAnswerSet11(void);
+void                              UI_MessageAnswerSet12(void);
+void                              UI_MessageAnswerSet13(void);
+void                              UI_MessageAnswerSet14(void);
+void                              UI_MessageAnswerSet15(void);
 /* The cell record the tile-ring draw is working on. */
 extern s8*                        D_1F800010;
 void                              func_8015642C(u8* obj, s32 x, s32 y);
@@ -1050,8 +1050,8 @@ static inline void Snd_ToggleSequencePlayer(void (*action)(short, short), s32 cu
 static inline void Slus_DrawPanelBox(void) {
     MenuPanelTask* panel;
 
-    panel = g_MenuCurrentPanel;
-    UI_DrawPanelBox((s16)panel->pos.x >> 4, (s16)panel->pos.y >> 4, (u8)(panel->u.grow.w >> 4), (u8)(panel->u.grow.h >> 4));
+    panel = g_UiPanelCurrent;
+    UI_WindowDrawPanelBox((s16)panel->pos.x >> 4, (s16)panel->pos.y >> 4, (u8)(panel->u.grow.w >> 4), (u8)(panel->u.grow.h >> 4));
 }
 
 s32 SYS_LoadExe(const char* path);

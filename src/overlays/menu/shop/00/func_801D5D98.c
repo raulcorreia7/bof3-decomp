@@ -17,7 +17,7 @@ MATCH void func_801D5D98(void) {
             g_InputRepeatDelay   = 0;
             D_8014865B           = 0;
             *panel_state         = 0x14;
-            Message_Request(MSG_SYSTEM_ASK_WHAT_TO_DO);
+            UI_MessageRequest(MSG_SYSTEM_ASK_WHAT_TO_DO);
         } else {
             count      = D_80148651;
             D_80148654 = 0;

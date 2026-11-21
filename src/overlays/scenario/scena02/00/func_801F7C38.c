@@ -80,7 +80,7 @@ MATCH void func_801F7C38(void) {
             if (vars[0] == 0x64) {
                 vars[0]                 = 0;
                 g_ScenarioState.step_05 = 0x1F;
-                UI_SetMode(0xD);
+                UI_ModeSet(0xD);
                 Char_RebuildPartyStats();
                 SND_FadeOutSequence(0, 1, 4, 0x1E);
             } else if (vars[0] == 0x65) {
@@ -104,7 +104,7 @@ MATCH void func_801F7C38(void) {
             }
             break;
         case 33:
-            UI_SetMode(0xE);
+            UI_ModeSet(0xE);
             g_AreaDrawFlags         = 0x1F;
             g_ScenarioState.step_05 = 0x22;
             break;

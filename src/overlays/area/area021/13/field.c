@@ -3,5 +3,5 @@
 
 #include "func_801F2C08.c"
 #include "func_801F2C10.c"
-#include "Message_SetAnswerMessage.c"
+#include "UI_MessageAnswerSet.c"
 #include "func_801F2C98.c"

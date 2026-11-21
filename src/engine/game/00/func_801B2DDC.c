@@ -23,10 +23,10 @@ MATCH void func_801B2DDC(void) {
     if (((value & 0x8000) != 0) && ((type = FIELD(u8, sel, 0x6u)) != GAME_NONE)) {
         switch (type) {
             case 0:
-                Message_Request(value & 0xFFF);
+                UI_MessageRequest(value & 0xFFF);
                 break;
             case 1:
-                Message_StartAreaMessage(value & 0xFFF);
+                UI_MessageStartArea(value & 0xFFF);
                 break;
             case 2:
                 rec.callback_index = GAME_NONE;
@@ -37,7 +37,7 @@ MATCH void func_801B2DDC(void) {
                 Area_RunSetupRecords((u8*)entry);
                 result = rec.unk_7C;
                 if (result != 0xFFFF) {
-                    Message_StartAreaMessage(result & 0xFFF);
+                    UI_MessageStartArea(result & 0xFFF);
                 }
                 g_Game.current->u.field.type  = g_CurrentActor->callback_index;
                 state                         = g_Task;
@@ -46,7 +46,7 @@ MATCH void func_801B2DDC(void) {
         }
         g_Task->header.step++;
     } else {
-        Message_Request(MSG_SYSTEM_000);
+        UI_MessageRequest(MSG_SYSTEM_000);
     }
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
     g_Task->header.step++;

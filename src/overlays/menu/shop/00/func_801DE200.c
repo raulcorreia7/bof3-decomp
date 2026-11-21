@@ -92,5 +92,5 @@ MATCH void func_801DE200(void) {
     D_80148659 = 0;
     D_80148654 = 3;
     D_80148652 += 1;
-    UI_SetMode(2U);
+    UI_ModeSet(2U);
 }

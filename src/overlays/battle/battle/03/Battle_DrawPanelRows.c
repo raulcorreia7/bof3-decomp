@@ -24,7 +24,7 @@ MATCH void Battle_DrawPanelRows(s16 x, s16 y) {
                 shade = 0x40;
             }
             row_width = g_Battle.panel_widths[panel_index];
-            UI_DrawIconCell(panel_index, x + s_BattlePanelOffsets[panel_index][0] - (row_width >> 1), y + s_BattlePanelOffsets[panel_index][1] - (row_width >> 1), row_width + BATTLE_PANEL_SIZE,
+            UI_IconDrawCell(panel_index, x + s_BattlePanelOffsets[panel_index][0] - (row_width >> 1), y + s_BattlePanelOffsets[panel_index][1] - (row_width >> 1), row_width + BATTLE_PANEL_SIZE,
                             row_width + BATTLE_PANEL_SIZE, shade);
         }
     }
@@ -36,7 +36,7 @@ MATCH void Battle_DrawPanelRows(s16 x, s16 y) {
     }
     row_width = g_Battle.panel_widths[g_Battle.panel_slot];
     if (row_width == 0) {
-        UI_DrawIconCell(g_Battle.panel_slot, x + s_BattlePanelOffsets[g_Battle.panel_slot][0], y + s_BattlePanelOffsets[g_Battle.panel_slot][1], BATTLE_PANEL_SIZE, BATTLE_PANEL_SIZE, shade);
+        UI_IconDrawCell(g_Battle.panel_slot, x + s_BattlePanelOffsets[g_Battle.panel_slot][0], y + s_BattlePanelOffsets[g_Battle.panel_slot][1], BATTLE_PANEL_SIZE, BATTLE_PANEL_SIZE, shade);
     } else {
         func_801D7D10(g_Battle.panel_slot, (x + s_BattlePanelOffsets[g_Battle.panel_slot][0] - (row_width >> 1)), (y + s_BattlePanelOffsets[g_Battle.panel_slot][1] - (row_width >> 1)),
                       (u8)(row_width + BATTLE_PANEL_SIZE), (row_width + BATTLE_PANEL_SIZE), shade);

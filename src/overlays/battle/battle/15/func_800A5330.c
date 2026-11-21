@@ -29,12 +29,12 @@ NON_MATCHING void func_800A5330(void) {
     if (row != GAME_NONE) {
         col = g_Battle.cursor.gene.column;
         if (D_800B7070[row][col] != 0) {
-            func_801DE60C(0, 1, 1, 0, GAME_NONE, Message_GetText((u16)(col + (row * GENE_GRID_COLUMNS + GENE_NAME_TEXT))));
+            func_801DE60C(0, 1, 1, 0, GAME_NONE, UI_MessageGetText((u16)(col + (row * GENE_GRID_COLUMNS + GENE_NAME_TEXT))));
         } else {
-            func_801DE60C(0, 1, 1, 0, GAME_NONE, Message_GetText(BLANK_TEXT));
+            func_801DE60C(0, 1, 1, 0, GAME_NONE, UI_MessageGetText(BLANK_TEXT));
         }
     } else {
-        func_801DE60C(0, 1, 1, 0, GAME_NONE, Message_GetText(BLANK_TEXT));
+        func_801DE60C(0, 1, 1, 0, GAME_NONE, UI_MessageGetText(BLANK_TEXT));
     }
 
     if (g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CANCEL]) {
@@ -97,7 +97,7 @@ NON_MATCHING void func_800A5330(void) {
             text_id = BLANK_TEXT;
         }
     }
-    g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = Message_GetText(text_id);
+    g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = UI_MessageGetText(text_id);
 
     buttons = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
     if ((buttons & PADLup) && g_Battle.cursor.gene.row >= 0) {

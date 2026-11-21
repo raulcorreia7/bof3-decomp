@@ -132,7 +132,7 @@ extern const char g_MenuInventoryCountFormat[];
 void        Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle);
 void        Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
 /* func_801AF930 */
-void        UI_DrawAbilityRow(s32 x, s32 y, u8 shade, u8 element, u8* name, u8 cost, u8 flags);
+void        UI_ListDrawAbilityRow(s32 x, s32 y, u8 shade, u8 element, u8* name, u8 cost, u8 flags);
 /* func_801AF494 */
 extern void func_801D1D1C(void);
 extern void func_801D1E34(void);
@@ -150,7 +150,7 @@ static inline void Menu_SlidePanelUp(void) {
     MenuPanelTask* task;
     u16            y;
 
-    task        = g_MenuCurrentPanel;
+    task        = g_UiPanelCurrent;
     y           = task->pos.y - MENU_PANEL_STEP_Y;
     task->pos.y = y;
     if ((s16)y < MENU_PANEL_HIDDEN_Y) {

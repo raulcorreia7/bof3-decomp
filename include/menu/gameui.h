@@ -27,7 +27,7 @@ ASSERT_OFFSET(ScriptState, message_id, 0x08);
 ASSERT_OFFSET(ScriptState, cursor, 0x0A);
 ASSERT_SIZE(ScriptState, 0x0C);
 
-/* The front-end step record behind g_MessageState: func_8015102C walks the timer,
+/* The front-end step record behind g_UiMessageState: func_8015102C walks the timer,
  * phase, cursor and flag fields; the other units read only its first byte. */
 typedef struct MessageState {
     u8  state;        /* 0x00 */
@@ -101,10 +101,10 @@ typedef struct MessageTable {
 #define AREA_MESSAGE_TABLE            ((MessageTable*)0x80010000)
 #define MESSAGE_TABLE_TEXT(table, id) ((u8*)(table) + (table)->offsets[id])
 
-/* The most bytes of a text record UI_DrawText draws. */
+/* The most bytes of a text record UI_TextDraw draws. */
 #define TEXT_LENGTH_MAX               0xFF
 
-/* Sizes of the framed windows the menu overlays draw with UI_DrawWindow. */
+/* Sizes of the framed windows the menu overlays draw with UI_WindowDraw. */
 #define MENU_CHARACTER_WINDOW_WIDTH   125
 #define MENU_CHARACTER_WINDOW_HEIGHT  48
 #define MENU_EQUIP_STAT_WINDOW_WIDTH  108
@@ -142,19 +142,19 @@ typedef struct MessageTable {
 #define MENU_EXPERIENCE_VALUE_Y       0x1A
 
 /* The requested message id: 0xFFFF means no message. ResourceRequestMessage
- * stores a message index in the slot and Message_StartRequest reads the slot as that
- * index; the player's menu choice at g_MessageChoice decides the index. */
+ * stores a message index in the slot and UI_MessageStartRequest reads the slot as that
+ * index; the player's menu choice at g_UiMessageChoice decides the index. */
 #define MESSAGE_NONE                  0xFFFF
-#define MESSAGE_REQUEST_CLEAR()       (g_MessageRequest = MESSAGE_NONE)
+#define MESSAGE_REQUEST_CLEAR()       (g_UiMessageRequest = MESSAGE_NONE)
 
 /* The player's menu choice at 0x801490C7 (MenuState.selection_index): zero
  * while no answer is selected, nonzero once the player picks one. */
-/* An alias byte of g_MessageWindow.selection_index: the area overlays read it as a plain byte, and the
+/* An alias byte of g_UiMessageWindow.selection_index: the area overlays read it as a plain byte, and the
  * member access changes their code. */
 /* D_801490C7 */
-extern s8 g_MessageChoice;
-#define MENU_SELECTION_IDLE()  (g_MessageChoice == 0)
-#define MENU_SELECTION_ARMED() (g_MessageChoice != 0)
+extern s8 g_UiMessageChoice;
+#define MENU_SELECTION_IDLE()  (g_UiMessageChoice == 0)
+#define MENU_SELECTION_ARMED() (g_UiMessageChoice != 0)
 
 /* The window effect has finished (idle) or is still running (busy). */
 #define WINDOW_EFFECT_IDLE()   (g_UiWindowEffectBusy == 0)
@@ -217,7 +217,7 @@ typedef enum GameRequest {
 
 /* Open the area message `id` and park the game on its window until it closes. */
 #define MESSAGE_START_WAIT(id)              \
-    Message_StartAreaMessage(id);           \
+    UI_MessageStartArea(id);                \
     g_GameStateIndex = GAME_REQUEST_MESSAGE
 
 /* The rows of g_GameModes, the full-screen modes Game_RunMain runs. */
@@ -255,7 +255,7 @@ extern u8 g_GameRequestFlags;
 /* D_80143C40 */
 extern u16 g_UiWindowEffectBusy;
 
-/* The screen effects UI_SetMode starts, by index into g_UiLocalModes. Each
+/* The screen effects UI_ModeSet starts, by index into g_UiModeLocals. Each
  * effect comes as an out/in pair: out takes the screen to black or white, in
  * brings it back. The indexes not named here run camera spins and distance
  * resets. */
@@ -277,7 +277,7 @@ typedef enum UiMode {
 } UiMode;
 
 /* D_80143C90 */
-extern u16 g_UiLocalMode;
+extern u16 g_UiModeLocal;
 /* D_80143F1E */
 extern u8  g_GameEntryMode;
 /* D_80145024 */
@@ -346,19 +346,19 @@ extern u8           D_80148FE0[SND_VOICE_COUNT];
 /* D_80148FF8 */
 extern u8           g_SndVoiceTargetVolume[SND_VOICE_COUNT];
 /* D_801490A0 */
-extern MessageState g_MessageState;
+extern MessageState g_UiMessageState;
 /* D_801490A2 */
-extern u8           g_MessageChoiceMode;
+extern u8           g_UiMessageChoiceMode;
 /* Shared selection counter read by etc/game/00 and etc/shop/00. */
 /* D_801490A4 */
 extern volatile u16 g_UiWindowChannel;
 /* D_801490A6 */
-extern u8           g_MessageStateTimer[];
+extern u8           g_UiMessageStateTimer[];
 
 /* D_801490A8 */
-extern u16      g_MessageRequest;
+extern u16      g_UiMessageRequest;
 /* D_801490AA */
-extern u16      g_MessageChoiceTimer;
+extern u16      g_UiMessageChoiceTimer;
 extern u8       D_801490CF[];
 /* D_80181D98 */
 extern const u8 s_LoaderRecordBytes[168];

@@ -4,7 +4,7 @@
  * prompt page and frame state allow it: the accept cue steps the caret back,
  * right/left step the selected index with wraparound. */
 MATCH void func_801DD7CC(void) {
-    UI_DrawText(29, 20, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_HOW_TO_PAGE_HINT));
+    UI_TextDraw(29, 20, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_HOW_TO_PAGE_HINT));
     if ((D_80144281 == 0xE) && (D_80144288 == 0)) {
         if (g_PadStates[0].pressed & g_InputMasks[FISHING_INPUT_CANCEL]) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));

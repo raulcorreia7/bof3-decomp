@@ -4,7 +4,7 @@ MATCH void func_801E9788(void) {
     MenuPanelTask* task;
     u16            next;
 
-    task = g_MenuCurrentPanel;
+    task = g_UiPanelCurrent;
     next = task->pos.x - MENU_PANEL_STEP_X;
     /* FAKE: the do-while wall keeps the limit load after the x store. */
     FAKE_ORDER_LOCK(task->pos.x = next);

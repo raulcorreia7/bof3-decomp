@@ -6,7 +6,7 @@ MATCH void Scene_RunInn(void) {
     switch (g_SceneEventState.step) {
         case 0:
             Game_SetScriptActive();
-            UI_SetMode(0);
+            UI_ModeSet(0);
             g_SceneEventState.step = 1;
             break;
         case 1:
@@ -24,7 +24,7 @@ MATCH void Scene_RunInn(void) {
                 break;
             }
             SND_ResumeBGM(g_SndBGMId);
-            UI_SetMode(1);
+            UI_ModeSet(1);
             g_AreaDrawFlags        = AREA_DRAW_ALL_FLAGS;
             g_SceneEventState.step = 3;
             break;
@@ -73,7 +73,7 @@ MATCH void Scene_RunInn(void) {
             break;
         case 20:
             Game_SetScriptActive();
-            UI_SetMode(0);
+            UI_ModeSet(0);
             g_SceneEventState.step = 21;
             break;
         case 21:
@@ -91,7 +91,7 @@ MATCH void Scene_RunInn(void) {
                 break;
             }
             SND_ResumeBGM(g_SndBGMId);
-            UI_SetMode(1);
+            UI_ModeSet(1);
             g_AreaDrawFlags        = AREA_DRAW_ALL_FLAGS;
             g_SceneEventState.step = 23;
             break;

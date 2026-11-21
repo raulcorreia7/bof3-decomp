@@ -1,0 +1,16 @@
+#include "engine/slus/slus.h"
+
+/* walks the D_801490CF table's D_801490C6+1 entries through
+ * UI_TextDrawAt, passing 0x3A as the first argument and threading each returned
+ * cursor into the next call.
+ */
+/* func_8015A170 */
+MATCH void UI_MessageDrawTextRows(void) {
+    u8* cursor;
+    s32 i;
+
+    cursor = D_801490B0;
+    for (i = 0; i <= g_UiMessageWindow.last_row; i++) {
+        cursor = UI_TextDrawAt(0x3A, D_801490CF[i], cursor);
+    }
+}

@@ -3,13 +3,13 @@
 MATCH void func_801F3790(void) {
     s8 sel;
 
-    sel = g_MessageChoice;
+    sel = g_UiMessageChoice;
     if (sel == 0) {
         MESSAGE_REQUEST_CLEAR();
         g_SceneEventState.step = 0xF;
         D_801448EE             = 0x1E;
         g_ScriptVars[0]        = 0x14;
     } else {
-        g_MessageRequest = MSG_AREA075_FOREMAN_ASK_READY;
+        g_UiMessageRequest = MSG_AREA075_FOREMAN_ASK_READY;
     }
 }

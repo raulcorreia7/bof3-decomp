@@ -144,24 +144,24 @@ MATCH void func_801D2F68(void) {
 }
 
 MATCH void func_801D2F9C(void) {
-    SYS_DISPATCH_TASK(g_ShisuTaskSteps, 2, g_MenuCurrentPanel);
+    SYS_DISPATCH_TASK(g_ShisuTaskSteps, 2, g_UiPanelCurrent);
 }
 
 MATCH void func_801D2FE0(void) {
 }
 
-MATCH void Menu_DrawPanelCursor(void) {
-    Menu_DrawCursorSprite(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, 0);
+MATCH void UI_CursorDrawPanel(void) {
+    UI_CursorDraw(g_UiPanelCurrent->pos.x, g_UiPanelCurrent->pos.y, 0);
 }
 
 MATCH void func_801D3018(void) {
     s16 id;
 
-    g_ShisuTask1Steps[g_MenuCurrentPanel->state]();
-    Menu_DrawHeaderBar(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
-    id = (s16)g_MenuCurrentPanel->u.message.id;
+    g_ShisuTask1Steps[g_UiPanelCurrent->state]();
+    Menu_DrawHeaderBar(g_UiPanelCurrent->pos.x, g_UiPanelCurrent->pos.y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
+    id = (s16)g_UiPanelCurrent->u.message.id;
     if (id != 0) {
-        UI_DrawText((s16)(g_MenuCurrentPanel->pos.x + 7), (s16)(g_MenuCurrentPanel->pos.y + 3), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, id));
+        UI_TextDraw((s16)(g_UiPanelCurrent->pos.x + 7), (s16)(g_UiPanelCurrent->pos.y + 3), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, id));
     }
 }
 
@@ -172,18 +172,18 @@ MATCH void func_801D30E4(void) {
 MATCH void func_801D3124(void) {
     u16 next_pos;
 
-    next_pos                  = g_MenuCurrentPanel->pos.y + 0x10;
-    g_MenuCurrentPanel->pos.y = next_pos;
+    next_pos                = g_UiPanelCurrent->pos.y + 0x10;
+    g_UiPanelCurrent->pos.y = next_pos;
     if ((s16)next_pos >= 0x11) {
-        g_MenuCurrentPanel->pos.y = 16U;
-        g_MenuCurrentPanel->state = 0;
+        g_UiPanelCurrent->pos.y = 16U;
+        g_UiPanelCurrent->state = 0;
     }
 }
 
 /* func_801D3164 */
 MATCH void Shisu_UpdateCommandPanel(void) {
-    g_ShisuTask2Steps[g_MenuCurrentPanel->state]();
-    Menu_DrawCommandRow(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, g_MenuCurrentPanel->unk_0A, g_MenuCurrentPanel->unk_0B, 0);
+    g_ShisuTask2Steps[g_UiPanelCurrent->state]();
+    Menu_DrawCommandRow(g_UiPanelCurrent->pos.x, g_UiPanelCurrent->pos.y, g_UiPanelCurrent->unk_0A, g_UiPanelCurrent->unk_0B, 0);
 }
 
 MATCH void func_801D31CC(void) {
@@ -194,46 +194,46 @@ MATCH void func_801D31CC(void) {
 MATCH void Menu_AdvancePanelY(void) {
     u16 next_pos;
 
-    next_pos                  = g_MenuCurrentPanel->pos.y + 0x10;
-    g_MenuCurrentPanel->pos.y = next_pos;
+    next_pos                = g_UiPanelCurrent->pos.y + 0x10;
+    g_UiPanelCurrent->pos.y = next_pos;
     if ((s16)next_pos >= 0x27) {
-        g_MenuCurrentPanel->pos.y = 38U;
-        g_MenuCurrentPanel->state = 0;
+        g_UiPanelCurrent->pos.y = 38U;
+        g_UiPanelCurrent->state = 0;
     }
 }
 
 MATCH void func_801D324C(void) {
-    g_ShisuTask3Steps[g_MenuCurrentPanel->state]();
-    func_801D3320(g_MenuCurrentPanel);
+    g_ShisuTask3Steps[g_UiPanelCurrent->state]();
+    func_801D3320(g_UiPanelCurrent);
 }
 
 MATCH void func_801D32A0(void) {
     u16 x;
 
-    x                         = g_MenuCurrentPanel->pos.x - 0x20;
-    g_MenuCurrentPanel->pos.x = x;
+    x                       = g_UiPanelCurrent->pos.x - 0x20;
+    g_UiPanelCurrent->pos.x = x;
     if ((s16)x < -200) {
-        LOH(g_MenuCurrentPanel->pos.x) = -0xC8;
-        g_MenuCurrentPanel->state      = 0;
+        LOH(g_UiPanelCurrent->pos.x) = -0xC8;
+        g_UiPanelCurrent->state      = 0;
     }
 }
 
 /* func_801D32E0 */
-MATCH void Menu_SetPosX(void) {
+MATCH void UI_PanelSetPosX(void) {
     u16 next_pos;
 
-    next_pos                  = g_MenuCurrentPanel->pos.x + 0x20;
-    g_MenuCurrentPanel->pos.x = next_pos;
+    next_pos                = g_UiPanelCurrent->pos.x + 0x20;
+    g_UiPanelCurrent->pos.x = next_pos;
     if ((s16)next_pos >= 0x12) {
-        g_MenuCurrentPanel->pos.x = 17U;
-        g_MenuCurrentPanel->state = 0;
+        g_UiPanelCurrent->pos.x = 17U;
+        g_UiPanelCurrent->state = 0;
     }
 }
 
 MATCH void func_801D3320(MenuPanelTask* task) {
     u8 i;
 
-    UI_DrawWindow((u16)(task->pos.x + 3), (u16)(task->pos.y + 3), 0x95, 0xA0, 0, g_WindowStyle);
+    UI_WindowDraw((u16)(task->pos.x + 3), (u16)(task->pos.y + 3), 0x95, 0xA0, 0, g_WindowStyle);
     i = 0;
     do {
         u8 shade;
@@ -247,41 +247,41 @@ MATCH void func_801D3320(MenuPanelTask* task) {
             flag  = 1;
         }
         if (i != task->unk_0A) {
-            UI_DrawItemRow((s16)(task->pos.x + 7), (s16)((u32)task->pos.y + (i * 13 + 0x1A)), shade, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], flag);
+            UI_ListDrawItemRow((s16)(task->pos.x + 7), (s16)((u32)task->pos.y + (i * 13 + 0x1A)), shade, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], flag);
         } else {
             if (MEM_PTR(u8, task->item_table)[i] != 0) {
-                UI_DrawItemRow((s16)(task->pos.x + 7), (s16)((u32)task->pos.y + (i * 13 + 0x1A)), 7, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], 1);
+                UI_ListDrawItemRow((s16)(task->pos.x + 7), (s16)((u32)task->pos.y + (i * 13 + 0x1A)), 7, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], 1);
             }
-            UI_DrawItemRow((s16)(task->pos.x + 7), (s16)(task->pos.y + i * 13 + 0x18), shade, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], flag);
+            UI_ListDrawItemRow((s16)(task->pos.x + 7), (s16)(task->pos.y + i * 13 + 0x18), shade, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], flag);
         }
         i++;
     } while (i < 4);
-    UI_DrawText((s16)(task->pos.x + 0x4E - strlen((char*)D_801D979C) * 4), (s16)(task->pos.y + 7), 0, MENU_LABEL_LENGTH, D_801D979C);
-    UI_DrawSpriteRun((s16)task->pos.x, (s16)task->pos.y, D_801D9780, UI_SPRITE_ALT_PAGE);
-    UI_DrawSpriteRun((s16)task->pos.x, (s16)task->pos.y, D_801D978C, UI_SPRITE_ALT_PAGE);
+    UI_TextDraw((s16)(task->pos.x + 0x4E - strlen((char*)D_801D979C) * 4), (s16)(task->pos.y + 7), 0, MENU_LABEL_LENGTH, D_801D979C);
+    UI_SpriteDrawRun((s16)task->pos.x, (s16)task->pos.y, D_801D9780, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDrawRun((s16)task->pos.x, (s16)task->pos.y, D_801D978C, UI_SPRITE_ALT_PAGE);
     i = 0;
     do {
-        UI_DrawSprite((s16)(task->pos.x + (i + 5) * 8), (s16)task->pos.y, 1, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw((s16)(task->pos.x + (i + 5) * 8), (s16)task->pos.y, 1, UI_SPRITE_ALT_PAGE);
         i++;
     } while (i < 0xA);
     i = 0;
     do {
-        UI_DrawSprite((s16)task->pos.x, (s16)(task->pos.y + (i + 3) * 8), 4, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw((s16)task->pos.x, (s16)(task->pos.y + (i + 3) * 8), 4, UI_SPRITE_ALT_PAGE);
         i++;
     } while (i < 0x11);
-    UI_DrawSprite((s16)(task->pos.x + 0x90), (s16)(task->pos.y + 0x18), 0x20, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw((s16)(task->pos.x + 0x90), (s16)(task->pos.y + 0x18), 0x20, UI_SPRITE_ALT_PAGE);
     i = 0;
     do {
-        UI_DrawSprite((s16)(task->pos.x + 0x90), (s16)(task->pos.y + (i + 4) * 8), 0x21, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw((s16)(task->pos.x + 0x90), (s16)(task->pos.y + (i + 4) * 8), 0x21, UI_SPRITE_ALT_PAGE);
         i++;
     } while (i < 0xF);
-    UI_DrawSprite((s16)task->pos.x, (s16)(task->pos.y + 0xA0), 5, UI_SPRITE_ALT_PAGE);
-    UI_DrawSprite((s16)(task->pos.x + 0x90), (s16)(task->pos.y + 0x98), 0x22, UI_SPRITE_ALT_PAGE);
-    UI_DrawSprite((s16)(task->pos.x + 8), (s16)task->pos.y, 0x32, UI_SPRITE_ALT_PAGE);
-    UI_DrawSprite((s16)(task->pos.x + 0x90), (s16)task->pos.y, 0x34, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw((s16)task->pos.x, (s16)(task->pos.y + 0xA0), 5, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw((s16)(task->pos.x + 0x90), (s16)(task->pos.y + 0x98), 0x22, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw((s16)(task->pos.x + 8), (s16)task->pos.y, 0x32, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw((s16)(task->pos.x + 0x90), (s16)task->pos.y, 0x34, UI_SPRITE_ALT_PAGE);
     i = 0;
     do {
-        UI_DrawSprite((s16)(task->pos.x + (i + 1) * 8), (s16)(task->pos.y + 0xA0), 6, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw((s16)(task->pos.x + (i + 1) * 8), (s16)(task->pos.y + 0xA0), 6, UI_SPRITE_ALT_PAGE);
         i++;
     } while (i < 0x11);
 }
@@ -298,7 +298,7 @@ MATCH void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shad
     s32        y;
 
     clut = (u8)shaded ? 7 : 0;
-    UI_DrawWindow(px + 3, py + 3, MENU_CHARACTER_WINDOW_WIDTH, MENU_CHARACTER_WINDOW_HEIGHT, (u8)shaded, CHARACTER_BLOCK->window_style);
+    UI_WindowDraw(px + 3, py + 3, MENU_CHARACTER_WINDOW_WIDTH, MENU_CHARACTER_WINDOW_HEIGHT, (u8)shaded, CHARACTER_BLOCK->window_style);
     x = px;
     y = py;
     /* FAKE: the order lock keeps the x and y copies below the window call. */
@@ -307,21 +307,21 @@ MATCH void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shad
         stats   = &records[character_index];
         Menu_DrawCharacterPortrait((px + 0x56) & HALF_MASK, (py + 2) & HALF_MASK, stats->character_id, (u8)shaded == 0 ? (stats->status >> 6) & 2 : 1);
         text_clut = clut & BYTE_MASK;
-        UI_DrawText(x + 20, y + 3, text_clut, CHARACTER_NAME_LENGTH, stats);
+        UI_TextDraw(x + 20, y + 3, text_clut, CHARACTER_NAME_LENGTH, stats);
     FAKE_ORDER_LOCK_END;
-    TEXT_Format(g_UiFormatBuffer, g_MenuStatFormat, stats->level);
+    TEXT_Format(g_UiTextFormatBuffer, g_MenuStatFormat, stats->level);
     text_y = (s16)(y + 0x17);
-    UI_DrawGlyphString(x + 22, text_y, text_clut, g_UiFormatBuffer);
+    UI_TextDrawGlyphString(x + 22, text_y, text_clut, g_UiTextFormatBuffer);
     if ((LOWU(stats->status) & (STATUS_CONFUSED | STATUS_POISONED)) == (STATUS_CONFUSED | STATUS_POISONED)) {
         if (g_FrameCount & 0x20) {
-            UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, MENU_LABEL_LENGTH, D_801D9B3C);
+            UI_TextDrawString(x + 46, text_y, text_clut != 0 ? text_clut : 1, MENU_LABEL_LENGTH, D_801D9B3C);
         } else {
-            UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, MENU_LABEL_LENGTH, D_801D9B44);
+            UI_TextDrawString(x + 46, text_y, text_clut != 0 ? text_clut : 1, MENU_LABEL_LENGTH, D_801D9B44);
         }
     } else if (stats->status & STATUS_POISONED) {
-        UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, MENU_LABEL_LENGTH, D_801D9B3C);
+        UI_TextDrawString(x + 46, text_y, text_clut != 0 ? text_clut : 1, MENU_LABEL_LENGTH, D_801D9B3C);
     } else if (stats->status & STATUS_CONFUSED) {
-        UI_DrawTextString(x + 46, text_y, text_clut != 0 ? text_clut : 1, MENU_LABEL_LENGTH, D_801D9B44);
+        UI_TextDrawString(x + 46, text_y, text_clut != 0 ? text_clut : 1, MENU_LABEL_LENGTH, D_801D9B44);
     }
     if (stats->hp < (u32)(stats->stats.max_hp >> 2)) {
         stats->status |= STATUS_LOW_HP;
@@ -338,15 +338,15 @@ MATCH void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shad
     } else {
         clut = 7;
     }
-    TEXT_Format(g_UiFormatBuffer, g_MenuCurrentValueFormat, stats->hp);
-    UI_DrawGlyphString(x + 22, y + 31, clut, g_UiFormatBuffer);
+    TEXT_Format(g_UiTextFormatBuffer, g_MenuCurrentValueFormat, stats->hp);
+    UI_TextDrawGlyphString(x + 22, y + 31, clut, g_UiTextFormatBuffer);
     if ((u8)shaded == 0) {
         clut = (stats->fatigue != 0) * 4;
     } else {
         clut = 7;
     }
-    TEXT_Format(g_UiFormatBuffer, g_MenuMaxValueFormat, stats->stats.max_hp);
-    UI_DrawGlyphString(x + 22, y + 31, clut, g_UiFormatBuffer);
+    TEXT_Format(g_UiTextFormatBuffer, g_MenuMaxValueFormat, stats->stats.max_hp);
+    UI_TextDrawGlyphString(x + 22, y + 31, clut, g_UiTextFormatBuffer);
     clut = (u8)shaded ? 7 : 0;
     if ((u8)shaded == 0) {
         if (stats->ap < (u32)(stats->stats.max_ap >> 2)) {
@@ -358,12 +358,12 @@ MATCH void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shad
     } else {
         clut = 7;
     }
-    TEXT_Format(g_UiFormatBuffer, g_MenuCurrentValueFormat, stats->ap);
-    UI_DrawGlyphString(x + 22, y + 39, clut, g_UiFormatBuffer);
+    TEXT_Format(g_UiTextFormatBuffer, g_MenuCurrentValueFormat, stats->ap);
+    UI_TextDrawGlyphString(x + 22, y + 39, clut, g_UiTextFormatBuffer);
     clut = (u8)shaded ? 7 : 0;
-    TEXT_Format(g_UiFormatBuffer, g_MenuMaxValueFormat, stats->stats.max_ap);
-    UI_DrawGlyphString(x + 22, y + 39, clut, g_UiFormatBuffer);
-    UI_DrawSpriteRun(x, y, D_801D97A4, 0);
+    TEXT_Format(g_UiTextFormatBuffer, g_MenuMaxValueFormat, stats->stats.max_ap);
+    UI_TextDrawGlyphString(x + 22, y + 39, clut, g_UiTextFormatBuffer);
+    UI_SpriteDrawRun(x, y, D_801D97A4, 0);
     Menu_DrawExperienceLine(x + 0x14, y + 0x12, character_index, stats->level, stats->exp);
     /* FAKE: dead stores keep px and py the CSE heads of their x and y copies. */
     px = 0;
@@ -383,23 +383,23 @@ MATCH void func_801D4158(s16 x, s16 y, u8 index, u8 flag) {
      * the saved registers that no statement in the body uses. */
     FAKE_STACK_PADS(u8, 24);
 
-    UI_DrawWindow((u16)(x + 3), (u16)(y + 3), 0x65, 0x25, 0, CHARACTER_BLOCK->window_style);
+    UI_WindowDraw((u16)(x + 3), (u16)(y + 3), 0x65, 0x25, 0, CHARACTER_BLOCK->window_style);
     character = (Character*)CHARACTER_BLOCK->records[index];
     text_x    = x;
     label_x   = text_x + 0x26;
-    UI_DrawText((flag == 0) ? text_x + 0x2C : label_x, (s16)(y + 7), 0, TEXT_LENGTH_MAX, (flag == 0) ? (u8*)&g_MenuLabelEquip[8] : (u8*)&g_MenuLabelEquip[0xC]);
+    UI_TextDraw((flag == 0) ? text_x + 0x2C : label_x, (s16)(y + 7), 0, TEXT_LENGTH_MAX, (flag == 0) ? (u8*)&g_MenuLabelEquip[8] : (u8*)&g_MenuLabelEquip[0xC]);
     if (flag == 0) {
         exp_value = character->exp;
     } else {
         exp_value = Char_GetExpForLevel(index, (character->level + 1) & 0xFF);
     }
     if (exp_value != -1) {
-        sprintf(g_UiFormatBuffer, &g_MenuStatFormat[0x14], exp_value);
+        sprintf(g_UiTextFormatBuffer, &g_MenuStatFormat[0x14], exp_value);
     } else {
-        sprintf(g_UiFormatBuffer, &g_MenuStatFormat[0x18]);
+        sprintf(g_UiTextFormatBuffer, &g_MenuStatFormat[0x18]);
     }
-    UI_DrawAsciiString((s16)(x + 0x15), (s16)(y + 0x1A), 0, g_UiFormatBuffer);
-    UI_DrawSpriteRun(x, y, &g_MenuInventoryTab1OnSprites[0x24], UI_SPRITE_ALT_PAGE);
+    UI_TextDrawAscii((s16)(x + 0x15), (s16)(y + 0x1A), 0, g_UiTextFormatBuffer);
+    UI_SpriteDrawRun(x, y, &g_MenuInventoryTab1OnSprites[0x24], UI_SPRITE_ALT_PAGE);
 }
 
 #include "overlays/menu/shared/Menu_DrawCursorFrame.h"
@@ -573,7 +573,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     setWH(window, 256, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
-    UI_DrawWindowFrame(inner, y + 2, width - 4, height - 4, 0);
+    UI_WindowDrawFrame(inner, y + 2, width - 4, height - 4, 0);
 }
 #else
 INCLUDE_ASM(Menu_DrawHeaderBar);
@@ -608,7 +608,7 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
     u8       flags;
     u8       n;
 
-    UI_DrawWindow((panel->pos.x + 3) & HALF_MASK, (panel->pos.y + 3) & HALF_MASK, 154, 160, 0, g_WindowStyle);
+    UI_WindowDraw((panel->pos.x + 3) & HALF_MASK, (panel->pos.y + 3) & HALF_MASK, 154, 160, 0, g_WindowStyle);
     n    = 0;
     list = Party_GetAbilities(panel->group, panel->group_first, 0);
     y    = panel->pos.y;
@@ -624,11 +624,11 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
             count   = Char_GetAbilityCost(g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], *list, 0);
             if (n == panel->drawn_cursor || n == panel->group_cursor) {
                 if (shade != UI_TEXT_DIM) {
-                    UI_DrawAbilityRow((s16)(panel->pos.x + 7), (s16)(y + 0x1A), UI_TEXT_DIM, level, (u8*)ability, count, 1);
+                    UI_ListDrawAbilityRow((s16)(panel->pos.x + 7), (s16)(y + 0x1A), UI_TEXT_DIM, level, (u8*)ability, count, 1);
                 }
-                UI_DrawAbilityRow((s16)(panel->pos.x + 7), (s16)(y + 0x18), shade, level, (u8*)ability, count, locked);
+                UI_ListDrawAbilityRow((s16)(panel->pos.x + 7), (s16)(y + 0x18), shade, level, (u8*)ability, count, locked);
             } else {
-                UI_DrawAbilityRow((s16)(panel->pos.x + 7), (s16)(y + 0x1A), shade, level, (u8*)ability, count, locked);
+                UI_ListDrawAbilityRow((s16)(panel->pos.x + 7), (s16)(y + 0x1A), shade, level, (u8*)ability, count, locked);
             }
         }
         n++;
@@ -636,9 +636,9 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
         list++;
     } while (n < 10);
     x = panel->pos.x + 0x4E;
-    UI_DrawText((x - strlen(D_801D9EA4[panel->group_first]) * 4), (panel->pos.y + 7), 0, MENU_LABEL_LENGTH, D_801D9EA4[panel->group_first]);
-    UI_DrawSpriteRun(panel->pos.x, panel->pos.y, (FIELD(u8, panel, 0x9u) & MENU_LIST_FLAG_TAB_2) ? g_MenuListTab2OnSprites : g_MenuListTab2OffSprites, UI_SPRITE_ALT_PAGE);
-    UI_DrawSpriteRun(panel->pos.x, panel->pos.y, (FIELD(u8, panel, 0x9u) & MENU_LIST_FLAG_TAB_1) ? D_801D999C : D_801D9990, UI_SPRITE_ALT_PAGE);
+    UI_TextDraw((x - strlen(D_801D9EA4[panel->group_first]) * 4), (panel->pos.y + 7), 0, MENU_LABEL_LENGTH, D_801D9EA4[panel->group_first]);
+    UI_SpriteDrawRun(panel->pos.x, panel->pos.y, (FIELD(u8, panel, 0x9u) & MENU_LIST_FLAG_TAB_2) ? g_MenuListTab2OnSprites : g_MenuListTab2OffSprites, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDrawRun(panel->pos.x, panel->pos.y, (FIELD(u8, panel, 0x9u) & MENU_LIST_FLAG_TAB_1) ? D_801D999C : D_801D9990, UI_SPRITE_ALT_PAGE);
     flags = FIELD(u8, panel, 0x9u);
     if (!(flags & MENU_LIST_FRAME_MASK)) {
         FIELD(u8, panel, 0x9u) = 0;
@@ -646,23 +646,23 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
         FIELD(u8, panel, 0x9u) = flags - MENU_LIST_FRAME_STEP;
     }
     for (n = 0; n < 10; n++) {
-        UI_DrawSprite(panel->pos.x + (n + 5) * 8, panel->pos.y, 1, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw(panel->pos.x + (n + 5) * 8, panel->pos.y, 1, UI_SPRITE_ALT_PAGE);
     }
     for (n = 0; n < 17; n++) {
-        UI_DrawSprite(panel->pos.x, panel->pos.y + (n + 3) * 8, 4, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw(panel->pos.x, panel->pos.y + (n + 3) * 8, 4, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite(panel->pos.x + 144, panel->pos.y + 24, 0x20, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw(panel->pos.x + 144, panel->pos.y + 24, 0x20, UI_SPRITE_ALT_PAGE);
     for (n = 0; n < 15; n++) {
-        UI_DrawSprite(panel->pos.x + 144, panel->pos.y + (n + 4) * 8, 0x21, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw(panel->pos.x + 144, panel->pos.y + (n + 4) * 8, 0x21, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite(panel->pos.x, panel->pos.y + 160, 5, UI_SPRITE_ALT_PAGE);
-    UI_DrawSprite(panel->pos.x + 144, panel->pos.y + 152, 0x22, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw(panel->pos.x, panel->pos.y + 160, 5, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw(panel->pos.x + 144, panel->pos.y + 152, 0x22, UI_SPRITE_ALT_PAGE);
     if ((s16)panel->unk_10 != 0) {
-        UI_DrawSprite(panel->pos.x + 8, panel->pos.y, 0x32, UI_SPRITE_ALT_PAGE);
-        UI_DrawSprite(panel->pos.x + 144, panel->pos.y, 0x34, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw(panel->pos.x + 8, panel->pos.y, 0x32, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw(panel->pos.x + 144, panel->pos.y, 0x34, UI_SPRITE_ALT_PAGE);
     }
     for (n = 0; n < 17; n++) {
-        UI_DrawSprite(panel->pos.x + (n + 1) * 8, panel->pos.y + 160, 6, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw(panel->pos.x + (n + 1) * 8, panel->pos.y + 160, 6, UI_SPRITE_ALT_PAGE);
     }
 }
 

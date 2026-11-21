@@ -9,8 +9,8 @@
 #include "sys/exe.h"
 #include "battle/functions.h"
 
-/* Reloads g_MenuCurrentPanel on every use, like the panel functions do. */
-#define BATTLE_PANEL_TASK ((BattlePanelTask*)g_MenuCurrentPanel)
+/* Reloads g_UiPanelCurrent on every use, like the panel functions do. */
+#define BATTLE_PANEL_TASK ((BattlePanelTask*)g_UiPanelCurrent)
 
 /* The battle system as the two battle overlays implement it. A battle keeps a
  * 0x140-byte local work row per party member and a 0x118-byte enemy row
@@ -75,7 +75,7 @@ typedef struct BattleEventSlot {
     u8  group;      /* 0x03 event pass: group 0 before group 1 */
     u8* payload;    /* 0x04 the event's data pointer */
     u16 timer;      /* 0x08 counts down; 0xFF means no countdown */
-    u8  text_style; /* 0x0A text style argument UI_DrawText draws the payload with */
+    u8  text_style; /* 0x0A text style argument UI_TextDraw draws the payload with */
     u8  pad_0B;     /* 0x0B */
 } BattleEventSlot;
 

@@ -13,16 +13,16 @@ MATCH void func_801D1B60(void) {
     u8   value;
 
     Menu_DrawClutStrip(D_80144953);
-    saved_work                 = TASK_BYTES;
-    g_MenuPanelTasks[9].unk_0A = (s8)D_80148655;
-    type                       = D_801EC38C[(s8)D_80148655];
+    saved_work               = TASK_BYTES;
+    g_UiPanelTasks[9].unk_0A = (s8)D_80148655;
+    type                     = D_801EC38C[(s8)D_80148655];
     TASK_SET(g_Game.members);
-    g_MenuPanelTasks[10].u.addr.unk_10 = (s16)type;
+    g_UiPanelTasks[10].u.addr.unk_10 = (s16)type;
     if ((D_8014504A == 0 && ((g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) || g_GameAreaId == AREA_ID_DESERT_OF_DEATH_MAP) && (func_801B6470(type) & BYTE_MASK)) ||
         (D_8014504A != 0 && (func_801D2190() & BYTE_MASK))) {
-        g_MenuPanelTasks[9].unk_0C = 0;
+        g_UiPanelTasks[9].unk_0C = 0;
     } else {
-        g_MenuPanelTasks[9].unk_0C = 1;
+        g_UiPanelTasks[9].unk_0C = 1;
     }
     TASK_SET(saved_work);
     input = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLright | PADLleft));
@@ -55,7 +55,7 @@ MATCH void func_801D1B60(void) {
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         selection = (s8*)&D_80148655;
         if (*selection == 6) {
-            if (g_MenuPanelTasks[9].unk_0C == 0) {
+            if (g_UiPanelTasks[9].unk_0C == 0) {
                 func_801D21F4();
                 D_8014869C = 1;
                 /* FAKE: retail takes the step counter's address before the increment. */
@@ -67,22 +67,22 @@ MATCH void func_801D1B60(void) {
             return;
         }
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
-        D_80148654                 = 5;
-        g_MenuPanelTasks[7].state  = 1;
-        g_MenuPanelTasks[8].state  = 1;
-        g_MenuPanelTasks[9].state  = 1;
-        g_MenuPanelTasks[10].state = 1;
+        D_80148654               = 5;
+        g_UiPanelTasks[7].state  = 1;
+        g_UiPanelTasks[8].state  = 1;
+        g_UiPanelTasks[9].state  = 1;
+        g_UiPanelTasks[10].state = 1;
         if (*selection == 0) {
             for (i = 0; i < (Party_CountOrder(PARTY_ORDER_FIELD) & BYTE_MASK); i++) {
-                g_MenuPanelTasks[i + 4].state = 1;
+                g_UiPanelTasks[i + 4].state = 1;
             }
         } else if ((s8)D_80148655 == 5) {
             for (i = 0; i < (Party_CountOrder(PARTY_ORDER_FIELD) & BYTE_MASK); i++) {
-                g_MenuPanelTasks[i + 4].state = 7;
+                g_UiPanelTasks[i + 4].state = 7;
             }
         } else {
             for (i = 0; i < (Party_CountOrder(PARTY_ORDER_FIELD) & BYTE_MASK); i++) {
-                g_MenuPanelTasks[i + 4].state = 2;
+                g_UiPanelTasks[i + 4].state = 2;
             }
         }
         {

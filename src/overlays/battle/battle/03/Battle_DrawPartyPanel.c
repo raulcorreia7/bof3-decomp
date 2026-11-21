@@ -54,10 +54,10 @@ NON_MATCHING void Battle_DrawPartyPanel(s32 x, s32 y) {
             var_s1 = (var_s0 + MENU_PANEL_BATTLER_FIRST) * 0x24;
             func_801D9E9C((s16)var_s2, var_s7, (u16)((u8*)&D_8014833B)[var_s1], (u16)((u8*)&D_8014833D)[var_s1], 0);
             if (*(u16*)((u8*)D_80145F22 + (var_s0 * BATTLE_PARTY_STRIDE)) != 0) {
-                Battle_DrawPanelLine((s16)var_s2, var_s7, (s16)(var_s4 + (g_MenuPanelTasks[var_s0 + MENU_PANEL_BATTLER_FIRST].unk_0C + 0x14)), var_s7, 0x64U, 0U, 0xC8U);
+                Battle_DrawPanelLine((s16)var_s2, var_s7, (s16)(var_s4 + (g_UiPanelTasks[var_s0 + MENU_PANEL_BATTLER_FIRST].unk_0C + 0x14)), var_s7, 0x64U, 0U, 0xC8U);
                 temp_v0_153 = ((u8*)&D_8014833E)[var_s1];
                 if (temp_v0_153 != 0) {
-                    temp_a2_160 = g_MenuPanelTasks[var_s0 + MENU_PANEL_BATTLER_FIRST].unk_0C;
+                    temp_a2_160 = g_UiPanelTasks[var_s0 + MENU_PANEL_BATTLER_FIRST].unk_0C;
                     Battle_DrawPanelLine((s16)(var_s4 + (temp_a2_160 + 0x14)), var_s7, (s16)(temp_v0_153 + (temp_a2_160 + var_s3)), var_s7, 0xC8U, 0U, 0U);
                 }
             }
@@ -71,7 +71,7 @@ NON_MATCHING void Battle_DrawPartyPanel(s32 x, s32 y) {
             var_s0      = temp_v0_199 * 4;
             var_s0      = temp_v0_199 * 5;
             var_s0      = temp_v0_199 * BATTLE_PARTY_STRIDE;
-            UI_DrawTextString((s16)(var_s4 + 6), (s16)(var_s6 + 5), var_a2_187, 5U, var_s0 + D_80145F04);
+            UI_TextDrawString((s16)(var_s4 + 6), (s16)(var_s6 + 5), var_a2_187, 5U, var_s0 + D_80145F04);
             func_801DA078((var_s4 + 0x3A) & HALF_MASK, (var_s6 + 6) & HALF_MASK, 1);
             func_801DA078((var_s4 + 4) & HALF_MASK, (s16)var_s7, 0);
             temp_v1_221 = *(u16*)(D_80145F10 + var_s0);

@@ -8,10 +8,10 @@ MATCH s32 func_801F2C04(void) {
     } else if (D_801454EC < 6) {
         request = 3;
     } else {
-        request          = 2;
-        g_MessageRequest = request;
+        request            = 2;
+        g_UiMessageRequest = request;
         return;
     }
-    g_MessageRequest = request;
-    g_MenuMasterStep = 6;
+    g_UiMessageRequest = request;
+    g_MenuMasterStep   = 6;
 }

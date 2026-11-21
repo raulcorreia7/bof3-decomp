@@ -54,6 +54,6 @@ MATCH void func_801D10AC(u32 message_id) {
     Menu_DrawHeaderBar(MASTER_MENU_FRAME_X, MASTER_MENU_FRAME_Y, MASTER_MENU_FRAME_WIDTH, MASTER_MENU_FRAME_HEIGHT, g_WindowStyle);
     /* MESSAGE_TABLE_TEXT here changes the stock-row loop's register allocation. */
     i = (s32)&AREA_MESSAGE_TABLE->offsets[message_id & HALF_MASK];
-    UI_DrawText(MASTER_MENU_TEXT_X, MASTER_MENU_TEXT_Y, 0, TEXT_LENGTH_MAX, (u8*)(MEM(u16, i) + (u32)AREA_MESSAGE_TABLE));
-    Menu_DrawCursorSprite((g_MenuMasterBannerLock << 5) + 243, 21, 0);
+    UI_TextDraw(MASTER_MENU_TEXT_X, MASTER_MENU_TEXT_Y, 0, TEXT_LENGTH_MAX, (u8*)(MEM(u16, i) + (u32)AREA_MESSAGE_TABLE));
+    UI_CursorDraw((g_MenuMasterBannerLock << 5) + 243, 21, 0);
 }

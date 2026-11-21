@@ -5,7 +5,7 @@
  * state halfword `g_PadStates[0].pressed`; returns 0 otherwise. */
 MATCH s32 func_801DDF7C(u16 request) {
     if ((g_PadStates[0].pressed & request) != 0) {
-        UI_SetMode(2);
+        UI_ModeSet(2);
         FISHING_STATE->mode_index = 8;
         FISHING_STATE->sub_index  = 0;
         return 1;

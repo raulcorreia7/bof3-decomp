@@ -37,7 +37,7 @@ MATCH void func_801F88DC(void) {
             if (g_ScenarioState.timer_06 != 0) {
                 break;
             }
-            UI_SetMode(1);
+            UI_ModeSet(1);
             g_AreaDrawFlags         = 0x1F;
             g_ScenarioState.step_05 = 4;
             g_ScriptVars[0]++;
@@ -68,7 +68,7 @@ MATCH void func_801F88DC(void) {
             if (g_ScriptVars[0] != 0x24) {
                 break;
             }
-            UI_SetMode(0);
+            UI_ModeSet(0);
             g_ScenarioState.step_05 = 8;
             break;
         case 8:
@@ -106,7 +106,7 @@ MATCH void func_801F88DC(void) {
                 break;
             }
             g_AreaDrawFlags = 0x1F;
-            UI_SetMode(1);
+            UI_ModeSet(1);
             g_ScenarioState.step_05 = 12;
             break;
         case 12:

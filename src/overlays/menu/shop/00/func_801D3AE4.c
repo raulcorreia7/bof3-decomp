@@ -17,7 +17,7 @@ MATCH void func_801D3AE4(void) {
         D_8014865B = 1;
         D_80148652 = next + 1;
         if (D_8014865C != -1) {
-            Message_Request(MSG_SYSTEM_ASK_WHAT_TO_DO_ALT);
+            UI_MessageRequest(MSG_SYSTEM_ASK_WHAT_TO_DO_ALT);
         }
     }
 }

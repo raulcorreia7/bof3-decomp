@@ -3,19 +3,19 @@
 MATCH void func_801D667C(void) {
     MenuPanelTask* panel;
 
-    panel         = &g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION];
+    panel         = &g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION];
     panel->panel  = 6;
     panel->mode   = MENU_START_MODE_MESSAGE;
     panel->state  = 2;
     panel->active = 1;
     panel++;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.x        = 20;
-    D_801484C2                                                  = -0x14;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
-    panel->panel                                                = 6;
-    panel->mode                                                 = MENU_START_MODE_COMMANDS;
-    panel->state                                                = 2;
-    panel->active                                               = 1;
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.x        = 20;
+    D_801484C2                                                = -0x14;
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
+    panel->panel                                              = 6;
+    panel->mode                                               = MENU_START_MODE_COMMANDS;
+    panel->state                                              = 2;
+    panel->active                                             = 1;
     panel++;
     D_801484E6    = -0x14;
     D_801484E4    = 0x40;

@@ -104,7 +104,7 @@ NON_MATCHING void func_801FB788(void) {
             break;
         case 21:
             if (g_ScriptVars[0] == 3) {
-                UI_SetMode(0);
+                UI_ModeSet(0);
                 g_ScenarioState.step_05 = 0x16;
             }
             break;
@@ -130,7 +130,7 @@ NON_MATCHING void func_801FB788(void) {
         case 25:
             if (!WINDOW_EFFECT_BUSY()) {
                 g_AreaDrawFlags = 0x1F;
-                UI_SetMode(1);
+                UI_ModeSet(1);
                 g_AreaCameraOffsetZ      = 0x5DC;
                 g_AreaCameraRefreshCount = 2;
                 g_ScenarioState.step_05  = 0x1A;
@@ -203,7 +203,7 @@ NON_MATCHING void func_801FB788(void) {
         case 51:
             if (g_ScriptVars[0] == 1) {
                 g_AreaDrawFlags = 0x1F;
-                UI_SetMode(1);
+                UI_ModeSet(1);
                 g_ScenarioState.step_05 = 0x34;
             }
             break;

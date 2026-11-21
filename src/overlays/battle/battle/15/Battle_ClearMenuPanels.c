@@ -7,11 +7,11 @@ MATCH void Battle_ClearMenuPanels(void) {
     u8* ptr;
 
     i    = 0x10;
-    base = (u8*)g_MenuPanelTasks;
+    base = (u8*)g_UiPanelTasks;
     do {
-        ptr                = (u8*)(i * 0x24u + (u32)base);
-        g_MenuCurrentPanel = (MenuPanelTask*)ptr;
+        ptr              = (u8*)(i * 0x24u + (u32)base);
+        g_UiPanelCurrent = (MenuPanelTask*)ptr;
         i += 1;
-        Menu_ClearPanel();
+        UI_PanelClear();
     } while (i < 20);
 }

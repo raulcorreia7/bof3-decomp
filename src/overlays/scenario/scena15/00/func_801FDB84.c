@@ -49,9 +49,9 @@ MATCH void Scene_ShowEntityMessage(void* entity) {
 
     message = D_801FE71C[((Actor*)entity)->callback_index];
     if (g_GameAreaId == AREA_ID_DESERT_CAMP_SECOND) {
-        Message_StartAreaMessage(func_801F326C(message));
+        UI_MessageStartArea(func_801F326C(message));
     } else {
-        Message_StartAreaMessage(func_801F37AC(message));
+        UI_MessageStartArea(func_801F37AC(message));
     }
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
 }

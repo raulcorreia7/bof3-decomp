@@ -11,41 +11,41 @@ MATCH void func_801D3D00(void) {
     u32              span;
 
     Menu_DrawClutStrip(D_80144953);
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(D_8014850E, D_801C893C[D_8014850E][g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
-    g_MenuPanelTasks[14].unk_0C                                 = 0;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;
-    span                                                        = (D_80148510 - g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 0xD + 0x1A;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + span;
-    panel                                                       = &D_80148504;
-    pressed                                                     = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLup | PADLdown | PADL1 | PADR1));
-    cursor                                                      = D_80148510;
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(D_8014850E, D_801C893C[D_8014850E][g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
+    g_UiPanelTasks[14].unk_0C                                 = 0;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;
+    span                                                      = (D_80148510 - g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 0xD + 0x1A;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.y + span;
+    panel                                                     = &D_80148504;
+    pressed                                                   = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLup | PADLdown | PADL1 | PADR1));
+    cursor                                                    = D_80148510;
     if (pressed & PADLup) {
         if (cursor != 0) {
             D_80148510 = cursor - 1;
         }
-        if ((u32)D_80148510 < (u32)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) {
-            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.scroll = 0xF0;
+        if ((u32)D_80148510 < (u32)g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) {
+            g_UiPanelTasks[MENU_START_PANEL_ITEMS].u.list.scroll = 0xF0;
         }
     } else if (pressed & PADLdown) {
         if ((u32)cursor < 0x7FU) {
             D_80148510 = cursor + 1;
         }
-        if (D_80148510 >= g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B + 9) {
-            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.scroll = 0x10;
+        if (D_80148510 >= g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B + 9) {
+            g_UiPanelTasks[MENU_START_PANEL_ITEMS].u.list.scroll = 0x10;
         }
     } else if (pressed & PADL1) {
         if ((D_8014850F & BYTE_MASK) == 0) {
             D_80148510 = 0;
         } else if ((u32)(D_8014850F & BYTE_MASK) < 9U) {
-            D_80148510                                      = cursor - D_8014850F;
-            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B = 0;
+            D_80148510                                    = cursor - D_8014850F;
+            g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B = 0;
         } else {
             D_80148510 = cursor - 9;
             D_8014850F = D_8014850F - 9;
         }
     } else if (pressed & PADR1) {
-        page_start        = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
+        page_start        = g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
         page_start_masked = page_start & BYTE_MASK;
         if (page_start_masked == 0x77) {
             D_80148510 = 0x7F;

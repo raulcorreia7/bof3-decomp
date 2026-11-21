@@ -19,7 +19,7 @@ segments:
       - [0x85C, c, func_801F345C]
       - [0x968, c, Actor_AdvanceTimer]
       - [0x9B8, c, func_801F35B8]
-      - [0xA34, c, Message_ClearRequest]
+      - [0xA34, c, UI_MessageClearRequest]
       - [0xA74, c, func_801F3674]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data

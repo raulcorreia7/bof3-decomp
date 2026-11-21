@@ -10,7 +10,7 @@ MATCH void Game_UpdateField(void) {
         case GAME_REQUEST_IDLE:
             break;
         case GAME_REQUEST_MENU:
-            UI_SetMode(2);
+            UI_ModeSet(2);
             Area_WaitWindowEffect(0);
             g_GameEntryState    = GAME_MODE_MENU;
             g_GameEntrySubstate = 0;
@@ -42,7 +42,7 @@ MATCH void Game_UpdateField(void) {
                 SND_StartDecrescendo(g_SelectionSepSlots[selection * 4], g_SelectionSequences[selection * 4], 100, 16);
             }
             if (g_GameEntryMode != GAME_NONE) {
-                UI_SetMode(g_GameEntryMode);
+                UI_ModeSet(g_GameEntryMode);
                 Area_WaitWindowEffect(0);
             }
             selection = g_SndBGMId;

@@ -2,6 +2,6 @@
 
 /* func_801E8D60 */
 MATCH void Menu_CharacterPanel(void) {
-    g_MenuStartCharacterSteps[g_MenuCurrentPanel->state]();
-    Menu_DrawCharacterPanel(g_MenuCurrentPanel);
+    g_MenuStartCharacterSteps[g_UiPanelCurrent->state]();
+    Menu_DrawCharacterPanel(g_UiPanelCurrent);
 }

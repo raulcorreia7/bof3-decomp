@@ -62,7 +62,7 @@ MATCH void func_801FA3D0(void) {
             if (g_ScriptVars[0] != 0x14) {
                 break;
             }
-            UI_SetMode(0xD);
+            UI_ModeSet(0xD);
             SYS_SetFlag(g_SceneFlags, 32);
             g_ScenarioState.step_05 = 17;
             break;
@@ -91,7 +91,7 @@ MATCH void func_801FA3D0(void) {
             if (g_ScriptVars[0] != 2) {
                 break;
             }
-            UI_SetMode(0xD);
+            UI_ModeSet(0xD);
             SYS_SetFlag(g_SceneFlags, 32);
             g_ScenarioState.step_05 = 22;
             break;

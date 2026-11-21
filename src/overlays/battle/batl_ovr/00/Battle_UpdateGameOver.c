@@ -12,7 +12,7 @@ MATCH void Battle_UpdateGameOver(void) {
         GFX_FreePaletteFadeTarget(row);
         GFX_FreePaletteFadeTarget(row + BATTLE_PARTY_STRIDE);
         GFX_FreePaletteFadeTarget(row + 0x280);
-        Menu_ResetPanelTasks();
+        UI_PanelResetTasks();
         g_Battle.outcome.event_flags = 0;
         g_Battle.outcome.options     = 0;
         g_Battle.encounter           = 0;

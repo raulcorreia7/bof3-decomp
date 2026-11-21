@@ -6,20 +6,20 @@ MATCH void func_800ADE6C(void) {
     BattleSlot*  row;
     s32          slot;
 
-    if ((g_MenuPanelTasks[19].active & 0x1) == 0) {
+    if ((g_UiPanelTasks[19].active & 0x1) == 0) {
         BATTLE_WORK->header.mode = 2;
         BATTLE_WORK->header.step = 0;
         return;
     }
-    if ((s16)g_MenuPanelTasks[19].u.addr.unk_1E != (s16)g_MenuPanelTasks[19].u.battle.row_base) {
+    if ((s16)g_UiPanelTasks[19].u.addr.unk_1E != (s16)g_UiPanelTasks[19].u.battle.row_base) {
         BATTLE_WORK->header.mode = 0;
         return;
     }
     work                 = BATTLE_WORK;
-    work->screen_x.value = g_MenuPanelTasks[19].pos.x + (work->timer * 0x16 + 0x44);
-    work->screen_y.value = g_MenuPanelTasks[19].pos.y + (work->unk_09 * 0x20 + 0x22);
+    work->screen_x.value = g_UiPanelTasks[19].pos.x + (work->timer * 0x16 + 0x44);
+    work->screen_y.value = g_UiPanelTasks[19].pos.y + (work->unk_09 * 0x20 + 0x22);
     rows                 = D_80145518;
-    row                  = &rows[(s16)g_MenuPanelTasks[19].u.battle.row_base + work->unk_09];
+    row                  = &rows[(s16)g_UiPanelTasks[19].u.battle.row_base + work->unk_09];
     slot                 = (&row->slot_00)[work->timer];
     if (slot != GAME_NONE) {
         Script_Request(slot);

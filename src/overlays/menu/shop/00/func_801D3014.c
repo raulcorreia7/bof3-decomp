@@ -8,7 +8,7 @@ MATCH void func_801D3014(void) {
     u8*  counter;
     u32* wallet;
 
-    Message_SetVariable(0, 12, Item_GetRecord(g_ShopItemCategory, g_ShopItemId));
+    UI_MessageSetVariable(0, 12, Item_GetRecord(g_ShopItemCategory, g_ShopItemId));
     D_80148340 = 0x52;
     toggle     = &D_8014865B;
     D_80148624 = 1;

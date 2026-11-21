@@ -3,13 +3,13 @@
 MATCH void func_801F2C1C(void) {
     Actor* work;
 
-    work             = g_ScriptWorkRecord;
-    g_MessageRequest = MESSAGE_NONE;
-    work->unk_18     = D_801F3DF0[g_MessageChoice].unk_0;
+    work               = g_ScriptWorkRecord;
+    g_UiMessageRequest = MESSAGE_NONE;
+    work->unk_18       = D_801F3DF0[g_UiMessageChoice].unk_0;
     FAKE_BARRIER(); /* FAKE: re-reads the choice for the second byte. */
-    work->unk_1C = D_801F3DF0[g_MessageChoice].unk_1;
+    work->unk_1C = D_801F3DF0[g_UiMessageChoice].unk_1;
     FAKE_BARRIER(); /* FAKE: re-reads the choice for the dispatch. */
-    switch (g_MessageChoice) {
+    switch (g_UiMessageChoice) {
         case 0:
         case 1:
             break;

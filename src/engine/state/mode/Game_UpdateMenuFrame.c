@@ -4,5 +4,5 @@
 MATCH void Game_UpdateMenuFrame(void) {
     Game_UpdateScenario();
     Menu_DispatchStep();
-    Menu_UpdatePanelTasks();
+    UI_PanelUpdateTasks();
 }

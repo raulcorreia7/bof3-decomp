@@ -84,7 +84,7 @@ set_result_1:
     result = 1;
 
 tail:
-    Message_StartAreaMessage(message);
+    UI_MessageStartArea(message);
     g_GameStateIndex = 2;
     return result;
 }

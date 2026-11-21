@@ -28,6 +28,6 @@ MATCH void Battle_AnimateMenuRows(void) {
         }
         i += 1;
     } while ((i & BYTE_MASK) < 7u);
-    task = g_MenuCurrentPanel;
+    task = g_UiPanelCurrent;
     Battle_DrawPanelRows(task->pos.x, task->pos.y);
 }

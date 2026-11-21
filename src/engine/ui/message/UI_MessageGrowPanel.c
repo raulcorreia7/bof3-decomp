@@ -1,0 +1,77 @@
+#include "engine/slus/slus.h"
+
+/* advances the panel's two scroll axes toward the pending values,
+ * taking the axis target from the mode-keyed D_8017F9xx tables on expiry and
+ * committing the panel position to the window driver.
+ */
+/* func_8015920C */
+MATCH void UI_MessageGrowPanel(void) {
+    MenuPanelTask* panel;
+    u16            next_x;
+    u16            next_y;
+    u8             advanced;
+
+    panel = g_UiPanelCurrent;
+
+    panel->u.grow.w = panel->u.grow.w + panel->u.grow.step_x;
+    panel->pos.x -= (s16)panel->u.grow.step_x / 2;
+
+    advanced = 0;
+    if (panel->unk_0A < ((s16)panel->u.grow.w >> 4)) {
+        switch (panel->mode) {
+            case 0:
+                if (panel->flags & 0x2) {
+                    next_x = g_UiPanelOrigins[16 + D_801490CE * 2] * 0x10;
+                } else {
+                    next_x = g_UiPanelOrigins[D_801490CE * 2] * 0x10;
+                }
+                panel->pos.x = next_x;
+                break;
+            case 1:
+                panel->pos.x = panel->u.grow.target_x * 16;
+                break;
+            default:
+                g_UiPanelCurrent->pos.x = D_8017F944[D_801490CE][0] * 16;
+                break;
+        }
+        advanced++;
+        g_UiPanelCurrent->u.grow.w = (g_UiPanelCurrent->unk_0A * 0x10);
+    }
+
+    panel = g_UiPanelCurrent;
+
+    panel->u.grow.h = panel->u.grow.h + panel->u.grow.step_y;
+    panel->pos.y -= (s16)panel->u.grow.step_y / 2;
+
+    if (panel->unk_0B < ((s16)panel->u.grow.h >> 4)) {
+        switch (panel->mode) {
+            case 0:
+                if (panel->flags & 0x2) {
+                    next_y = g_UiPanelOrigins[17 + D_801490CE * 2] * 0x10;
+                } else {
+                    next_y = g_UiPanelOrigins[1 + D_801490CE * 2] * 0x10;
+                }
+                panel->pos.y = next_y;
+                break;
+            case 1:
+                panel->pos.y = panel->u.grow.target_y * 16;
+                break;
+            default:
+                g_UiPanelCurrent->pos.y = D_8017F944[D_801490CE][1] * 16;
+                break;
+        }
+        advanced++;
+        g_UiPanelCurrent->u.grow.h = (g_UiPanelCurrent->unk_0B * 0x10);
+    }
+
+    if ((g_UiPanelCurrent->flags & 0x1) == 0) {
+        u32 width  = (g_UiPanelCurrent->u.grow.w >> 4) & BYTE_MASK;
+        u32 height = (g_UiPanelCurrent->u.grow.h >> 4) & BYTE_MASK;
+
+        UI_WindowDrawBoxOutline((s16)g_UiPanelCurrent->pos.x >> 4, (s16)g_UiPanelCurrent->pos.y >> 4, width, height);
+    }
+
+    if ((advanced & BYTE_MASK) == 2) {
+        g_UiPanelCurrent->state += 1;
+    }
+}

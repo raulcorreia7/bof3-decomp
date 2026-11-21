@@ -17,14 +17,14 @@ MATCH void func_801F38DC(void) {
         case 1:
             request = &g_GameStateIndex;
             if (*request == GAME_REQUEST_IDLE) {
-                Message_StartAreaMessage(MSG_AREA037_GAME_READY);
+                UI_MessageStartArea(MSG_AREA037_GAME_READY);
                 *request = GAME_REQUEST_MESSAGE;
                 *state   = *state + 1;
             }
             break;
         case 2:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                UI_SetMode(1);
+                UI_ModeSet(1);
                 g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
                 *state          = *state + 1;
             }

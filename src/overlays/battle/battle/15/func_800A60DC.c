@@ -12,7 +12,7 @@ MATCH void func_800A60DC(void) {
     u16  cursor_total;
     u8   state;
     u8*  resource;
-    resource                                        = Message_GetText(0x61);
+    resource                                        = UI_MessageGetText(0x61);
     pad_state                                       = &g_PadStates[0].pressed;
     g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = resource;
     input                                           = INPUT_REPEATED(*pad_state, (PADLup | PADLdown | PADL1 | PADR1));

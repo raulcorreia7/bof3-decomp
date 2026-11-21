@@ -25,7 +25,7 @@ segments:
       - [0xA8C, c, func_801F368C]
       - [0xAF0, c, func_801F36F0]
       - [0xB68, c, func_801F3768]
-      - [0xDE0, c, Message_ShowParty]
+      - [0xDE0, c, UI_MessageShowParty]
       - [0xEA4, c, func_801F3AA4]
       - [0xF68, c, func_801F3B68]
       - [0x102C, c, func_801F3C2C]

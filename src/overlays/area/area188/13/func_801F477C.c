@@ -6,14 +6,14 @@
 MATCH void func_801F477C(void) {
     Actor* work;
 
-    work             = g_ScriptWorkRecord;
-    g_MessageRequest = MESSAGE_NONE;
-    work->unk_18     = D_801F688C[g_MessageChoice * 2];
+    work               = g_ScriptWorkRecord;
+    g_UiMessageRequest = MESSAGE_NONE;
+    work->unk_18       = D_801F688C[g_UiMessageChoice * 2];
     FAKE_BARRIER(); /* FAKE: retail reads the choice again for the second row. */
-    work->unk_1C = D_801F688D[g_MessageChoice * 2];
+    work->unk_1C = D_801F688D[g_UiMessageChoice * 2];
     FAKE_BARRIER(); /* FAKE: retail reads the choice again for the comparison. */
 
-    if (g_ScenarioState.scenario_id < 0xD && g_MessageChoice == 1) {
+    if (g_ScenarioState.scenario_id < 0xD && g_UiMessageChoice == 1) {
         D_8014865F = 0;
         Game_SetScriptActive();
         g_ScenarioState.step_05  = 0x14;

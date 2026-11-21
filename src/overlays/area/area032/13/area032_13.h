@@ -18,7 +18,7 @@ void func_801F30EC(void);
 /* func_801F35B4 */
 void func_801F363C(void);
 /* func_801F36A0 */
-void Message_Clear(void);
+void UI_MessageClear(void);
 void func_801F36E4(void);
 void func_801F3728(void);
 void func_801F378C(void);
