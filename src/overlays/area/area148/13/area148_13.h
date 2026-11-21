@@ -25,6 +25,8 @@ extern Offset2 g_FacingOffsets[];
 /* The state handler tables the dispatchers index. */
 extern u8      D_801F4FC4[];
 /* The four scratch vectors RotTransPers4 projects. */
+/* g_ScratchPadVectors */
+extern SVECTOR g_ScratchPadVectors[];
 
 /* The part words Area_Update passes to Area_ApplyTileToQuad, one per unk_32 row;
  * the two low bytes of the first word scale the two floor-part quads it draws. */
