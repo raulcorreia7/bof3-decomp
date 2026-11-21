@@ -19,7 +19,8 @@ typedef struct AreaSpark {
 
 #define AREA_SPARK_COUNT 128
 
-/* One spark of the area and scenario effect tables (area098, scena07, scena08): kind selects the per-frame handler. */
+/* One spark of a scene effect table: kind selects the per-frame handler. Used by the
+ * area098 table (16 slots at AREA_WORK, 0x1C bytes each) and the scena07 and scena08 tables. */
 typedef struct FallingSpark {
     u8  active;      /* 0x00 - 0 marks a free slot */
     u8  kind;        /* 0x01 - selects the per-frame handler */
