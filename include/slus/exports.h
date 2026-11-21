@@ -89,6 +89,7 @@ extern s32          D_80143EFC;
 extern u16          g_GameEntryAreaId;
 /* D_80143F1C */
 extern u8           g_GameEntryFacing;
+extern u8           g_GameRequestKind;
 /* 0x80144xxx: party and menu state. */
 extern u16          D_80143F20;
 

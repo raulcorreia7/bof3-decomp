@@ -173,7 +173,6 @@ ASSERT_SIZE(SceneSampleEffect, 0x10E0);
 /* One row of the per-slot effect arrays. */
 
 extern s16* volatile D_1F800010;
-extern u8                g_GameRequestKind;
 extern AreaScroll        D_80143F84;
 /* D_801448FC */
 /* D_801448FF */
