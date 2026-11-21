@@ -4,8 +4,6 @@ from __future__ import annotations
 
 import json
 
-import chunks
-import classify
 import dups
 import m2c_sweep
 import quality
@@ -127,62 +125,6 @@ def test_diff_rows_name_the_three_kinds():
     assert rows[0]["target"] == "addiu a0,a0,2"
     assert rows[1]["template_offset"] is None
     assert rows[1]["target_offset"] == 8
-
-
-def test_chunk_rows_are_jsonl(tmp_path):
-    path = tmp_path / "chunks.jsonl"
-    rows = [
-        {
-            "weight": 6,
-            "insns": 3,
-            "funcs": 3,
-            "images": 2,
-            "lifted": 1,
-            "members": ["a:F+0x0[ASM]", "b:G+0x4[C]"],
-        }
-    ]
-    chunks.write_rows(str(path), rows)
-    assert [json.loads(line) for line in path.read_text().splitlines()] == rows
-
-
-def test_classify_rows_counts_the_kinds():
-    rows = [
-        {
-            "weight": 6,
-            "insns": 3,
-            "funcs": 2,
-            "images": 2,
-            "members": ["a:F+0x0[ASM]", "b:G+0x4[C]"],
-        },
-        {
-            "weight": 3,
-            "insns": 3,
-            "funcs": 2,
-            "images": 2,
-            "members": ["a:H+0x0[ASM]", "b:I+0x4[C]"],
-        },
-    ]
-    kinds = {
-        ("a", "F"): "asm",
-        ("b", "G"): "pasted",
-        ("a", "H"): "asm",
-        ("b", "I"): "shared",
-    }
-    kept = classify.classify_rows(
-        rows, lambda image, name, status: kinds[(image, name)]
-    )
-    assert kept == [
-        {
-            "weight": 6,
-            "insns": 3,
-            "funcs": 2,
-            "images": 2,
-            "asm": 1,
-            "pasted": 1,
-            "shared": 0,
-            "members": ["a:F+0x0[ASM]", "b:G+0x4[C]"],
-        }
-    ]
 
 
 def test_results_jsonl_names_the_swept_functions(tmp_path):

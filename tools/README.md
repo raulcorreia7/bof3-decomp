@@ -29,15 +29,12 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Print assembly, attempts and C file      | `tools/match_context.sh <target>@0x<ADDR>`                               | same                                                      |
 | Add an attempts row at its place         | `tools/attempts.py add --function <target>@0x<ADDR> --tried TEXT`        | `tools/attempts.py sort`                                  |
 | Try one C body for an assembly function  | `tools/try_body.py <target>@<func> body.c`                               | [try body](#try-body)                                     |
-| Put a body in a function's draft block   | `tools/draft_swap.py <target>@0x<ADDR> body.c`                           | [try body](#try-body)                                     |
 | Draft open functions with m2c, keep exact | `tools/m2c_sweep.py --sample 200`, `tools/m2c_sweep.py --image <image>` | [m2c sweep](#m2c-sweep)                                   |
 | Write the seed bundle of one function    | `tools/seed.py <target>@<func>`                                          | [m2c sweep](#m2c-sweep)                                   |
 | Measure shapes, write bodies for them | `tools/gen_body.py shapes`, `tools/gen_body.py call-seq`                  | [body generators](#body-generators)                       |
 | Find twins in one image                  | `bin/coddog match <target> <func> -t 0.95`                               | [coddog](../docs/toolchain.md#coddog)                     |
 | Find alike functions across images       | `tools/dups.py near`                                                     | [duplicates](#duplicates-and-names)                       |
 | List same-name groups and split names    | `tools/dups.py shared-names`, `tools/dups.py split-names`                | same                                                      |
-| Find repeated instruction runs in functions | `tools/chunks.py -w 24 -o chunks.jsonl`                               | [duplicates](#duplicates-and-names)                       |
-| Mark each run asm, shared or pasted      | `tools/classify.py chunks.jsonl out.jsonl`                               | same                                                      |
 | Find repeated C bodies in the source     | `ripwire src --clones`                                                   | same                                                      |
 | Rename a function or global everywhere   | `tools/symbol.py rename OLD NEW` (an address name: `--image <target> --local`); its layout rows and unit file follow | [rename steps](../docs/naming.md#rename-steps)  |
 | Rename parameters                        | `tools/symbol.py params <func> old=new ...`                              | same                                                      |
@@ -104,17 +101,7 @@ A line `@decl <declaration>` in the body file (an `extern`, a prototype or a `#d
 the body and added to the image header, the first include of the C file, unless an include of that
 file already declares the name. Output: `EXACT`, `FAIL` with the first difference, or `SKIP`.
 
-`draft_swap.py` puts a body in the function's draft block without compiling it:
 
-```sh
-tools/draft_swap.py <target>@0x<ADDR> body.c
-```
-
-It replaces everything between `#ifdef NON_MATCHING` and that block's `#else`, which keeps
-`INCLUDE_ASM(<func>);` in the open build; a function still held by a bare `INCLUDE_ASM` gets the
-block around it. The old body is saved under `work/<image>/<ADDR>/before.c` (`before-2.c` and so
-on when the name is taken) and its path prints; the rest of the file does not change. The new body
-carries its status marker like any draft (`include/match/match.h`, `tools/check_markers.py`).
 
 ## Match tools
 
@@ -167,13 +154,7 @@ each assembly function (`--threshold` is the least opcode similarity, 0.9 by def
 and `diff_count`, the instructions that differ (jump targets ignored), cheapest first. `shared-names`
 lists one name that several bodies use, worst first. `split-names` lists byte-equal bodies that carry
 several names. All print tab-separated rows, or one JSON object per line with `--jsonl`.
-`chunks.py` finds instruction runs (immediates masked) that recur in three or more functions and
-writes JSON Lines with each group's `members`; `classify.py` reads and writes that form and
-marks each member asm, shared (a header body or a call) or pasted, so the rows left are the copies to
-fold. `ripwire src --clones` lists token-normalized duplicate C bodies.
-`dup_decls.py` lists an `extern` declaration written the same way in three or more headers,
-widest first: a repeated declaration is a seam whose text belongs at the declaration's owner
-(`--min` changes the count, `--json` prints one row per seam).
+`ripwire src --clones` lists token-normalized duplicate C bodies.
 
 ## Lookup
 
@@ -219,7 +200,7 @@ other metrics. `--queue --jsonl` writes the same rows as objects. A commit messa
 
 ## Pre-push
 
-`pre_push.sh [BASE_REF]` (Meson target `pre-push`) runs the 17 checks below, one line each, and keeps
+`pre_push.sh [BASE_REF]` (Meson target `pre-push`) runs the 18 checks below, one line each, and keeps
 the logs in `build/pre-push/`. CI runs it too. `BASE_REF` defaults to the newest of `public/main`,
 `origin/main` and `main`.
 
@@ -227,7 +208,6 @@ the logs in `build/pre-push/`. CI runs it too. `BASE_REF` defaults to the newest
 | --------------- | --------------------------------------------------------------------------------------- | ---------- |
 | `check`         | an image differs from its retail SHA-1                                                  | disc       |
 | `check-headers` | a public header does not compile alone                                                  | compiler   |
-| `check-unity` | two files of one image declare a type, prototype or macro differently | compiler   |
 | `check-plain`   | a source does not build as plain C                                                      | compiler   |
 | `check-tree`    | an added line has a register pin, decompiler local, stack name, task offset, m2c macro, raw address, duplicate prototype, wrong header guard or shared body; a prototype differs from its definition without a `sig-kept:` note; a tracked file is game data or over 1 MiB, a relative include or import, or an enum member | none |
 | `externs`       | a `.c` file gains an `extern` line                                                      | none       |
@@ -241,6 +221,7 @@ the logs in `build/pre-push/`. CI runs it too. `BASE_REF` defaults to the newest
 | `addrs`         | a symbol address that `config/symbols.toml` records on `main` is gone                   | none       |
 | `kept`          | a named helper, define, global, type, member or function is lost or degraded            | none       |
 | `quality`       | a touched file gains casts, fake helpers, `func_`/`D_` names or pasted bodies           | none       |
+| `order`         | declarations or symbols in a changed file are out of their recorded order               | none       |
 | `message-ids`   | `include/menu/message_ids.h` is stale, or a message id has no line in `include/msg/messages.def` | none       |
 | `subsystems`    | never fails; writes the debt table to `build/subsystems.md`                             | none       |
 

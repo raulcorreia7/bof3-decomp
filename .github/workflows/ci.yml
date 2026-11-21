@@ -17,8 +17,7 @@ permissions:
 
 concurrency:
   group: ci-${{ github.ref }}
-  # A newer commit replaces the run for the same branch; `verify-main.sh` runs the byte-exact check
-  # on main and reverts a merge that fails it, so a cancelled push run loses nothing.
+  # A newer commit replaces the run for the same branch; the byte-exact check runs locally before a push.
   cancel-in-progress: true
 
 jobs:
