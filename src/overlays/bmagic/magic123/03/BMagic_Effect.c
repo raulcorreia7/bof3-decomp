@@ -247,53 +247,62 @@ NON_MATCHING void func_801EF750(void) {
 INCLUDE_ASM(func_801EF750);
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF9E0(void) {
+/* Draws the eight-spark fan around the task screen position, turned by the step timer. */
+MATCH void func_801EF9E0(void) {
     POLY_G3* prim;
     s16*     params;
     s32      angle;
     s32      i;
     s32      phase;
+    s32      k;
     u8       shade;
 
-    i         = 0;
-    params    = g_ScratchPad.cells.halves;
-    params[7] = g_Task->unk_09;
-    shade     = 0x20;
-    for (; i < 8; i++) {
-        phase     = i << 9;
-        params[0] = (rand() & 3) + 4 + (g_Task->param.unk_0B << 1);
-        params[3] = g_Task->screen_x.value + FIXED_MUL(rsin(phase), params[0]);
-        params[4] = g_Task->screen_y.value + FIXED_MUL(rcos(phase), params[0]);
+    i                            = 0;
+    g_ScratchPad.cells.halves[0] = (g_Task->param.unk_0B << 1) + 4;
+    g_ScratchPad.cells.halves[7] = g_Task->timer;
+    params                       = g_ScratchPad.cells.halves;
+    shade                        = 0x20;
+draw:
+    phase     = i << 9;
+    params[0] = (g_Task->param.unk_0B << 1) + 4 + (rand() & 3);
+    params[3] = g_Task->screen_x.value + FIXED_MUL(rsin(phase), params[0]);
+    params[4] = g_Task->screen_y.value + FIXED_MUL(rcos(phase), params[0]);
 
-        prim = GFX_CURSOR(POLY_G3);
-        SetPolyG3(prim);
-        SetSemiTrans(prim, 1);
+    prim = GFX_CURSOR(POLY_G3);
+    SetPolyG3(prim);
+    SetSemiTrans(prim, 1);
 
-        angle     = ((i * 2) + g_Task->unk_09) & 0xF;
-        params[2] = angle << 8;
-        prim->x0  = params[3] + FIXED_MUL(rsin(params[2]), params[7]);
-        prim->y0  = params[4] + FIXED_MUL(rcos(params[2]), params[7]);
+    k         = i * 2;
+    angle     = (k + g_Task->unk_09) & 0xF;
+    params[2] = angle << 8;
+    prim->x0  = params[3] + FIXED_MUL(rsin(params[2]), params[7]);
+    prim->y0  = params[4] + FIXED_MUL(rcos(params[2]), params[7]);
 
-        angle     = (g_Task->unk_09 + 5 + (i * 2)) & 0xF;
-        params[2] = angle << 8;
-        prim->x1  = params[3] + FIXED_MUL(rsin(params[2]), params[7]);
-        prim->y1  = params[4] + FIXED_MUL(rcos(params[2]), params[7]);
+    angle     = (k + 5 + g_Task->unk_09) & 0xF;
+    params[2] = angle << 8;
+    prim->x1  = params[3] + FIXED_MUL(rsin(params[2]), params[7]);
+    prim->y1  = params[4] + FIXED_MUL(rcos(params[2]), params[7]);
 
-        angle     = (g_Task->unk_09 + 10 + (i * 2)) & 0xF;
-        params[2] = angle << 8;
-        prim->x2  = params[3] + FIXED_MUL(rsin(params[2]), params[7]);
-        prim->y2  = params[4] + FIXED_MUL(rcos(params[2]), params[7]);
+    k         = (k + 10 + g_Task->unk_09) & 0xF;
+    params[2] = k << 8;
+    prim->x2  = params[3] + FIXED_MUL(rsin(params[2]), params[7]);
+    prim->y2  = params[4] + FIXED_MUL(rcos(params[2]), params[7]);
 
-        setRGB0(prim, shade, shade, 0xC0);
-        setRGB1(prim, 0xC0, 0xC0, 0xC0);
-        setRGB2(prim, shade, shade, 0xC0);
-        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G3));
+    prim->r0 = shade;
+    prim->g0 = shade;
+    prim->b0 = 0xC0;
+    prim->r1 = 0xC0;
+    prim->g1 = 0xC0;
+    prim->b1 = 0xC0;
+    prim->r2 = shade;
+    prim->g2 = shade;
+    prim->b2 = 0xC0;
+    GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G3));
+    i++;
+    if (i < 8) {
+        goto draw;
     }
 }
-#else
-INCLUDE_ASM(func_801EF9E0);
-#endif
 
 /* func_801EFCA0 */
 #include "overlays/bmagic/shared/BMagic_AllocEffect.h"

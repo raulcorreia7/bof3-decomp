@@ -56,19 +56,18 @@ MATCH void func_801EEDEC(void) {
     SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EEF64(void) {
-    s32 form;
+/* Loads the archive of the current dragon form once the step timer runs out. */
+MATCH void func_801EEF64(void) {
     u32 archive;
     u8  timer;
 
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        form    = g_Battle.dragon_form;
-        archive = EMI_SLOT_KAIZAR_N;
-        switch (form) {
-            case 6: /* Form 6 keeps the default archive; the arm keeps retail's range guard. */
+        switch (g_Battle.dragon_form) {
+            case 6:
+            default:
+                archive = EMI_SLOT_KAIZAR_N;
                 break;
             case 7:
                 archive = EMI_SLOT_KAIZAR_F;
@@ -81,9 +80,6 @@ NON_MATCHING void func_801EEF64(void) {
         g_Task->header.mode += 1;
     }
 }
-#else
-INCLUDE_ASM(func_801EEF64);
-#endif
 
 MATCH void func_801EF000(void) {
     u16          i;

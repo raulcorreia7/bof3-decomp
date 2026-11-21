@@ -56,8 +56,8 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     prim->u3   = 2;
     prim->v3   = bottom_v;
     prim->y0 += 2;
-    prim->v0 += 2;
     prim->y2 -= 3;
+    prim->v0 += 2;
     prim->v2 -= 3;
     prim->clut  = GetClut(clut_x, STAGE_PALETTE_Y + 1);
     width1      = width + 1;
@@ -118,10 +118,10 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     prim->v3 = bottom_v;
     setRGB0(prim, 172, 172, 172);
     prim->y1 += 2;
-    prim->y3 -= 3;
     prim->y2 -= 1;
-    prim->v1 += 2;
+    prim->y3 -= 3;
     prim->v2 -= 1;
+    prim->v1 += 2;
     prim->v3 -= 3;
     prim->clut  = GetClut(clut_x, STAGE_PALETTE_Y + 1);
     prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);

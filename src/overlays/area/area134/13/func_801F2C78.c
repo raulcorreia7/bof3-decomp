@@ -17,16 +17,19 @@ NON_MATCHING void func_801F2C78(void) {
     if (D_80146866 == 0x80) {
         g_Task->header.mode = 0x17;
     }
-    if (D_80146865 == 4) {
-        g_Task->header.mode = 4;
-    } else if (D_80146865 < 5) {
-        if (D_80146865 == 3) {
+    switch (D_80146865) {
+        case 0xFF:
+            func_80196070();
+            break;
+        case 5:
+            g_Task->header.mode = 2;
+            break;
+        case 4:
+            g_Task->header.mode = 4;
+            break;
+        case 3:
             g_Task->header.mode = 6;
-        }
-    } else if (D_80146865 == 5) {
-        g_Task->header.mode = 2;
-    } else if (D_80146865 == 0xFF) {
-        func_80196070();
+            break;
     }
 }
 #else
