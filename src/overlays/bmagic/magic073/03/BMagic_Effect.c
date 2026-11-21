@@ -1,4 +1,5 @@
 #include "magic073_03.h"
+
 #include "overlays/bmagic/shared/Effect_LaunchSparkleBurst.h"
 #include "overlays/bmagic/shared/Effect_SpawnTargetFades.h"
 
@@ -94,57 +95,3 @@ MATCH void func_801EF768(void) {
 }
 
 #include "overlays/bmagic/shared/Effect_LaunchSparkle.h"
-
-MATCH void func_801EFA64(void) {
-    s32 wave;
-    u16 phase;
-    u8  tick;
-
-    BMAGIC_SWAY_ADVANCE_WORK(D_801F21F0)
-}
-
-MATCH void func_801EFB14(void) {
-    u16 phase;
-    u8  timer;
-
-    BMAGIC_SWAY_EFFECT_WORK(D_801F21F0, func_801F0454)
-}
-
-#include "overlays/bmagic/shared/Effect_DrawSparkleRays.h"
-
-#include "overlays/bmagic/shared/Effect_DrawSparkleWedges.h"
-
-#include "overlays/bmagic/shared/Effect_DrawSparkleDisc.h"
-
-/* func_801F03E8 */
-#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
-
-MATCH void func_801F0454(void) {
-    D_801F21F0->header.flags = 0;
-    D_801F21F0->header.mode  = 0;
-    D_801F21F0->header.step  = 0;
-    D_801F21F0->unk_03       = 0;
-    D_801F21F0->unk_04       = 0;
-}
-
-MATCH u8 func_801F04A4(void) {
-    s32 i;
-    s32 count;
-
-    count = 0;
-    i     = 0;
-    do {
-        if (!(Battle_SlotIsBlocked((i + 3) & BYTE_MASK) & BYTE_MASK) && g_BattleEnemyBattlers[(i & BYTE_MASK) + 3].header.mode == 6) {
-            count++;
-        }
-        i++;
-    } while ((u32)(i & BYTE_MASK) < 8);
-    i = 0;
-    do {
-        if (!(Battle_SlotIsBlocked(i & BYTE_MASK) & BYTE_MASK) && g_Game.members[i & BYTE_MASK].header.mode == 6) {
-            count++;
-        }
-        i++;
-    } while ((u32)(i & BYTE_MASK) < 3);
-    return count;
-}
