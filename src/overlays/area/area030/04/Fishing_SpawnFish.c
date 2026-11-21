@@ -98,7 +98,7 @@ NON_MATCHING void Fishing_SpawnFish(void) {
                 row_offset += FISHING_ROW_STRIDE;
                 g_Task->unk_03 = 0;
                 row_index += 1;
-                g_Task->move_kind = 0;
+                g_Task->move_mode = 0;
                 count -= 1;
                 g_Task->tint.bytes.flags = 0;
             } while ((s32)count > 0);

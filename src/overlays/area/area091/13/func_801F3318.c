@@ -27,7 +27,7 @@ NON_MATCHING void func_801F3318(void) {
         g_Task->unk_0A = 2;
         if (++g_Task->param.unk_0B == 0x10) {
             g_Task->unk_0A = 0x1E;
-            g_Task->move_kind++;
+            g_Task->move_mode++;
         }
     }
     g_GfxPalettePending++;

@@ -20,7 +20,7 @@ NON_MATCHING s32 func_800AEEC8(s32 arg0, u8 arg1) {
     }
     slot                               = Battle_AllocEffect(1, 0x48);
     status                             = 1;
-    g_BattleEffects[slot].move_kind    = mode;
+    g_BattleEffects[slot].move_mode    = mode;
     g_BattleEffects[slot].arg.unk_09   = status;
     g_BattleEffects[slot].target.party = g_Task;
     g_BattleEffects[slot].unk_0A       = 0;

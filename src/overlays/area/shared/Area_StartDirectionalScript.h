@@ -2,7 +2,7 @@
 MATCH void Area_StartDirectionalScript(Actor* actor) {
     u8 direction;
 
-    g_ScriptState->move_kind = 1;
+    g_ScriptState->move_mode = 1;
     direction                = g_Task->direction & 7;
     g_ScriptState->flags |= 0x40;
     g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;

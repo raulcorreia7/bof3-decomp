@@ -120,7 +120,7 @@ MATCH u8 Actor_RunControlOps(void* sub, s32 target, u8 value) {
         case 0xE8:
             next_cursor_e8   = state->cursor + 1;
             state->cursor    = next_cursor_e8;
-            state->move_kind = *(target_bytes + (next_cursor_e8 & HALF_MASK));
+            state->move_mode = *(target_bytes + (next_cursor_e8 & HALF_MASK));
             if (Actor_GetOwner() == 2) {
                 selection = 0;
                 goto block_29; /* every command that keeps the selection shares the return */

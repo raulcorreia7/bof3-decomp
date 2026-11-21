@@ -23,7 +23,7 @@ NON_MATCHING void func_801F49EC(void) {
         g_Task->vz = 0;
     }
     work = g_Task;
-    work->move_kind += 1;
+    work->move_mode += 1;
     g_ScriptState->cursor -= 2;
 }
 #else

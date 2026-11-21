@@ -78,7 +78,7 @@ box_16:
                     limit                        = 3;
                     g_SpawnedActors[0].selection = ONE;
                     D_801E31F8                   = 1;
-                    g_SpawnedActors[0].unk_14    = g_FishingLureRow->move_kind;
+                    g_SpawnedActors[0].unk_14    = g_FishingLureRow->move_mode;
                 }
             } else {
                 limit = 4;

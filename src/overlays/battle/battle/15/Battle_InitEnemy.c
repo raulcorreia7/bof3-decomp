@@ -24,7 +24,7 @@ NON_MATCHING void Battle_InitEnemy(s32 enemy_slot, u16 enemy_index, s32 x, s32 y
     }
     ((EnemyBattler*)g_Task)->header.mode = 0;
     enemy                                = (EnemyBattler*)g_Task;
-    enemy->move_kind                     = 0;
+    enemy->move_mode                     = 0;
     enemy->unk_03                        = 0;
     enemy->header.step                   = 0;
     ((EnemyBattler*)g_Task)->unk_29      = 4;

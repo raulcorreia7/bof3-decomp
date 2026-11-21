@@ -28,7 +28,7 @@ NON_MATCHING void func_801F2FD4(void) {
     }
     check = g_Task;
     if (check->unk_0A == 0) {
-        check->move_kind = 0;
+        check->move_mode = 0;
     } else {
         g_Game.current->u.field.unk_122 -= 2;
     }

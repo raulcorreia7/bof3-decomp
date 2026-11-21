@@ -11,7 +11,7 @@ typedef struct ScriptState {
     u8  unk_01;
     u8  count;
     u8  script_index; /* 0x03 the row of the area script table to run */
-    u8  move_kind;    /* 0x04 the kind of move the script starts; 0 for none */
+    u8  move_mode;    /* 0x04 the kind of move the script starts; 0 for none */
     u8  direction;    /* 0x05 the facing the script runs under */
     u8  pad_06;
     u8  steps;      /* 0x07 the frames or half cells the started move runs for */
@@ -19,7 +19,7 @@ typedef struct ScriptState {
     u16 cursor;
 } ScriptState;
 
-ASSERT_OFFSET(ScriptState, move_kind, 0x04);
+ASSERT_OFFSET(ScriptState, move_mode, 0x04);
 ASSERT_OFFSET(ScriptState, direction, 0x05);
 ASSERT_OFFSET(ScriptState, steps, 0x07);
 ASSERT_OFFSET(ScriptState, message_id, 0x08);

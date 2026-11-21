@@ -14,7 +14,7 @@ MATCH void func_801AC768(ScriptState* cursor_state, s32 mode_byte, s32 value_18,
         if (slot->header.mode == 7) {
             slot->unk_18 = value_18 & BYTE_MASK;
             slot->unk_1C = value_1C & BYTE_MASK;
-            if (cursor_state->move_kind != 0) {
+            if (cursor_state->move_mode != 0) {
                 func_801AC0A0(extra_value);
             }
             goto advance; /* share the caller step advance */
@@ -28,7 +28,7 @@ MATCH void func_801AC768(ScriptState* cursor_state, s32 mode_byte, s32 value_18,
             slot                = g_Task;
             slot->unk_18        = value_18 & BYTE_MASK;
             slot->unk_1C        = value_1C & BYTE_MASK;
-            if (cursor_state->move_kind != 0) {
+            if (cursor_state->move_mode != 0) {
                 func_801AC0A0(extra_value);
                 cursor_state->steps = 1;
             }
