@@ -1,6 +1,8 @@
 #include "game_00.h"
 
-MATCH void func_801AEBA0(s16 frame_x, s16 frame_y, s16 frame_width, s16 frame_height, s32 mode_pair_flag) {
+/* func_801AEBA0 */
+/* Draws the border lines of a window frame in the window style color. */
+MATCH void UI_DrawWindowFrame(s16 frame_x, s16 frame_y, s16 frame_width, s16 frame_height, s32 mode_pair_flag) {
     s16 x;
     s16 far_x;
     u16 color;

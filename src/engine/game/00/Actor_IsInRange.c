@@ -1,6 +1,7 @@
 #include "game_00.h"
 
 /* func_801BDD58 */
+/* Returns whether a point lies within reach of an actor record. */
 #ifdef NON_MATCHING
 NON_MATCHING u8 Actor_IsInRange(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* record) {
     /* FAKE: plain C gives the record t0 and pos_x a0; 46 rows measured without the pins. */

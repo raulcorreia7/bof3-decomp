@@ -1,6 +1,7 @@
 #include "game_00.h"
 
 /* func_801AEA80 */
+/* Draws one 8x8 icon sprite at a screen position. */
 MATCH void UI_DrawIcon(s32 sprite_x, s32 sprite_y, s32 icon_id, s32 dimmed) {
     SPRT_8* sprite;
     s16     clut;

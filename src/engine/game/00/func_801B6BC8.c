@@ -43,7 +43,7 @@ MATCH void func_801B6BC8(void) {
         flags = g_GameState->u.field.flags;
         if (flags & 0x2) {
             g_Task->direction = sel;
-            func_801C2438();
+            Actor_SetSemiTransparent();
             g_Task->tint.steps.delta.r = -0x40;
             g_Task->tint.steps.delta.g = -0x40;
             g_Task->tint.steps.delta.b = -0x40;
@@ -54,7 +54,7 @@ MATCH void func_801B6BC8(void) {
         }
         if (flags & 0x4) {
             g_Task->direction = sel;
-            func_801C2438();
+            Actor_SetSemiTransparent();
             g_Task->tint.bytes.flags = 1;
             Actor_RequestScript(g_Task->direction);
             g_Task->unk_03 = 5;

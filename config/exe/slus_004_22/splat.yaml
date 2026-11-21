@@ -32,7 +32,7 @@ segments:
       # Keep split: 20-entry compiler jump table; type the adjacent VECTOR in C.
       - {start: 0xB3BA0, type: data, name: D_80149BA0, linker_section_order: .rodata}
       - [0xB3BF0, .rodata, data_80149BF0]
-      - [0xB3C00, .rodata, func_8015B870]
+      - [0xB3C00, .rodata, Script_ReadValue]
       - [0xB3C3C, .rodata, data_80149C3C]
       - [0xB3C78, .rodata, data_80149C78]
       - [0xB3C90, .rodata, Char_ApplyMaster]
@@ -381,7 +381,7 @@ segments:
       - [0xC57C4, c, Game_IsScenarioAtMost]
       - [0xC57F0, c, func_8015B7F0]
       - [0xC583C, c, func_8015B83C]
-      - [0xC5870, c, func_8015B870]
+      - [0xC5870, c, Script_ReadValue]
       - [0xC598C, c, Game_IsScriptVar0Equal]
       - [0xC59B4, c, Game_IsScriptVar1Equal]
       - [0xC59DC, c, Game_IsScriptVar2Equal]

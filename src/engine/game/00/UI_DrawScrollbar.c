@@ -1,6 +1,7 @@
 #include "game_00.h"
 
 /* func_801AFA1C */
+/* Draws a list scrollbar with its row marks and thumb. */
 #ifdef NON_MATCHING
 NON_MATCHING void UI_DrawScrollbar(u8* marks, u8 thumb_top, s16 x, s16 y, u8 thumb_size, u8 total, u8 track_size) {
     s32       i;

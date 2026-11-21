@@ -32,7 +32,7 @@
 #define GAME_WORK_AREA_PTR     (*(volatile Actor**)&g_CurrentActor)
 
 /* NOTE: retail reads the window style byte at 0x80144952 signed (`lb`) in func_8019986C and
- * func_801AEBA0 and unsigned (`lbu`) in func_801999F8 and UI_DrawWindowOutline, so exports.h keeps u8 and only
+ * UI_DrawWindowFrame and unsigned (`lbu`) in func_801999F8 and UI_DrawWindowOutline, so exports.h keeps u8 and only
  * the signed readers view it as s8. */
 #define GAME_WINDOW_STYLE      (*(s8*)&g_WindowStyle)
 
@@ -558,7 +558,8 @@ void func_80117610(void);
 void func_80117A30(void);
 void func_80117BF4(void);
 void func_8015A7E8(void);
-s32  func_8015B870(u32 kind);
+/* func_8015B870 */
+s32  Script_ReadValue(u32 kind);
 void Party_ShowBattlers(void);
 s8   Actor_Run(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 landing_flags);
 /* The retail callers pass the id unnarrowed; the shared prototype narrows it. */

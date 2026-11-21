@@ -1,6 +1,8 @@
 #include "game_00.h"
 
-MATCH void func_801C2438(void) {
+/* func_801C2438 */
+/* Makes the current actor semi-transparent. */
+MATCH void Actor_SetSemiTransparent(void) {
     Actor* work;
     u16*   table;
     u16    value;

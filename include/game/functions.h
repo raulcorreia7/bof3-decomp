@@ -132,8 +132,9 @@ void  UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 frame_flags, u8 pal
 /* UI_DrawIcon */
 /* func_801AEA80 */
 void  UI_DrawIcon(s32 sprite_x, s32 sprite_y, s32 icon_id, s32 dimmed);
+/* UI_DrawWindowFrame */
 /* func_801AEBA0 */
-void  func_801AEBA0(s16 frame_x, s16 frame_y, s16 frame_width, s16 frame_height, s32 mode_pair_flag);
+void  UI_DrawWindowFrame(s16 frame_x, s16 frame_y, s16 frame_width, s16 frame_height, s32 mode_pair_flag);
 /* func_801AED54 */
 void  UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
 /* Game_ReadCommand */
@@ -221,8 +222,9 @@ void  Party_RemoveMember(s32 character_id);
 void  Scene_RunScenario(s32 step_index);
 /* func_801C1E3C */
 void  func_801C1E3C(s32 step_index);
+/* Actor_SetSemiTransparent */
 /* func_801C2438 */
-void  func_801C2438(void);
+void  Actor_SetSemiTransparent(void);
 /* func_801C24D0 */
 void  Area_RunWalk(void);
 void  func_801C2538(void);

@@ -43,15 +43,15 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                         break;
                     case 4:
                         left = base[state->cursor + 1];
-                        if (func_8015B870(base[state->cursor + 2]) == left)
+                        if (Script_ReadValue(base[state->cursor + 2]) == left)
                             state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
                         else
                             state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
                         state->cursor = func_801AC8F0(state, (u8)state->cursor, base);
                         break;
                     case 5:
-                        left = func_8015B870(base[state->cursor + 1]);
-                        if (func_8015B870(base[state->cursor + 2]) == left)
+                        left = Script_ReadValue(base[state->cursor + 1]);
+                        if (Script_ReadValue(base[state->cursor + 2]) == left)
                             state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
                         else
                             state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
@@ -59,15 +59,15 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                         break;
                     case 6:
                         left = base[state->cursor + 1];
-                        if (func_8015B870(base[state->cursor + 2]) < left)
+                        if (Script_ReadValue(base[state->cursor + 2]) < left)
                             state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
                         else
                             state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
                         state->cursor = func_801AC8F0(state, (u8)state->cursor, base);
                         break;
                     case 7:
-                        left = func_8015B870(base[state->cursor + 1]);
-                        if (func_8015B870(base[state->cursor + 2]) < left)
+                        left = Script_ReadValue(base[state->cursor + 1]);
+                        if (Script_ReadValue(base[state->cursor + 2]) < left)
                             state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
                         else
                             state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
@@ -75,15 +75,15 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                         break;
                     case 8:
                         left = base[state->cursor + 1];
-                        if ((func_8015B870(base[state->cursor + 2]) & left) != 0)
+                        if ((Script_ReadValue(base[state->cursor + 2]) & left) != 0)
                             state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
                         else
                             state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
                         state->cursor = func_801AC8F0(state, (u8)state->cursor, base);
                         break;
                     case 9:
-                        left = func_8015B870(base[state->cursor + 1]);
-                        if ((func_8015B870(base[state->cursor + 2]) & left) != 0)
+                        left = Script_ReadValue(base[state->cursor + 1]);
+                        if ((Script_ReadValue(base[state->cursor + 2]) & left) != 0)
                             state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
                         else
                             state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));

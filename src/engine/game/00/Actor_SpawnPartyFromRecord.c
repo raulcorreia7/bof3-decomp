@@ -1,6 +1,7 @@
 #include "game_00.h"
 
 /* func_801A65A0 */
+/* Spawns a party member actor from a scene script record. */
 MATCH void Actor_SpawnPartyFromRecord(u8* script) {
     s16*   counter = (s16*)&g_ScratchPad;
     s16    slot;

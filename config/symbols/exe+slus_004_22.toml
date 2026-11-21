@@ -301,7 +301,7 @@ g_MessageWindowSteps = { addr = 0x80149B3C, source = "Steps of the plain message
 g_MessageChoiceSteps = { addr = 0x80149B50, source = "Steps of the answer list panel: open, grow, draw, shrink, release." }
 g_MessagePresetSteps = { addr = 0x80149B64, source = "Steps of the preset answer list panel: open, grow, draw, shrink, release." }
 jtbl_80149B78 = { addr = 0x80149B78, type = "Callback", source = "The switch table of UI_DrawTextAt: the jump targets of its jr dispatch." }
-jtbl_80149C00 = { addr = 0x80149C00, type = "Callback", source = "The switch table of func_8015B870: the jump targets of its jr dispatch." }
+jtbl_80149C00 = { addr = 0x80149C00, type = "Callback", source = "The switch table of Script_ReadValue: the jump targets of its jr dispatch." }
 g_EmiCdSteps = { addr = 0x80149C3C, alias = true, source = "CD step handlers of the EMI loader." }
 g_EmiRingSteps = { addr = 0x80149C60, alias = true, source = "EMI_UpdateStream copies it" }
 jtbl_80149C90 = { addr = 0x80149C90, type = "Callback", source = "The switch table of Char_ApplyMaster: the jump targets of its jr dispatch." }
@@ -552,6 +552,7 @@ Game_TestEventFlag = { addr = 0x8015B764, type = "func", source = "Tests a scene
 Game_HasVitalItem = { addr = 0x8015B798, type = "func", source = "Tests whether a vital item is held." }
 Game_IsScenarioAtMost = { addr = 0x8015B7C4, type = "func", source = "Tests whether the scenario is at least a value." }
 func_8015B83C = { addr = 0x8015B83C, type = "func", source = "Entry of the script condition table data_8018214C: tests bit **cursor of the D_80145548 mask, whose owner is not proven." }
+Script_ReadValue = { addr = 0x8015B870, type = "func", source = "Reads the state value a script condition names by kind id; func_801A8F94 compares two of them or one against a byte." }
 Game_IsScriptVar0Equal = { addr = 0x8015B98C, type = "func", source = "Tests whether a script variable equals a value." }
 Game_IsScriptVar1Equal = { addr = 0x8015B9B4, type = "func", source = "Tests whether a script variable equals a value." }
 Game_IsScriptVar2Equal = { addr = 0x8015B9DC, type = "func", source = "Tests whether a script variable equals a value." }
