@@ -1,21 +1,22 @@
 #include "game_00.h"
 
-MATCH void func_801AEA80(s32 sprite_x, s32 sprite_y, s32 texture_index, s32 shade_mode) {
+/* func_801AEA80 */
+MATCH void UI_DrawIcon(s32 sprite_x, s32 sprite_y, s32 icon_id, s32 dimmed) {
     SPRT_8* sprite;
     s16     clut;
 
     GFX_AddDrawMode(getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
     sprite = (SPRT_8*)g_GfxPrimCursor;
     SetSprt8(sprite);
-    if ((shade_mode & BYTE_MASK) == 0) {
+    if ((dimmed & BYTE_MASK) == 0) {
         setRGB0(sprite, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     } else {
         setRGB0(sprite, 64, 64, 64);
     }
 
     setXY0(sprite, sprite_x, sprite_y);
-    setUV0(sprite, (((texture_index & BYTE_MASK) * 8) + 56), 248);
-    switch (texture_index & BYTE_MASK) {
+    setUV0(sprite, (((icon_id & BYTE_MASK) * 8) + 56), 248);
+    switch (icon_id & BYTE_MASK) {
         case 1:
         case 3:
         case 0xF:

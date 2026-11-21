@@ -608,7 +608,7 @@ MATCH void Fishing_ShopDrawQuantityWindow(u16 x, u16 y) {
 MATCH void Fishing_ShopDrawItemIcon(s32 x, s32 y, s32 item_id, s32 category, u8 selected) {
     item_id &= BYTE_MASK;
     if (item_id != ITEM_NOTHING) {
-        func_801AEA80((u16)x, (u16)y, s_ShopItemIcons[Item_GetIcon(category & BYTE_MASK, item_id) & BYTE_MASK], selected);
+        UI_DrawIcon((u16)x, (u16)y, s_ShopItemIcons[Item_GetIcon(category & BYTE_MASK, item_id) & BYTE_MASK], selected);
     }
 }
 

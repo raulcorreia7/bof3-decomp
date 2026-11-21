@@ -65,5 +65,5 @@ MATCH void func_801E112C(MenuPanelTask* task) {
         UI_DrawSprite(task->pos.x + (i + 11) * 8, task->pos.y + 144, 0x1C, UI_SPRITE_ALT_PAGE);
     }
     UI_DrawSprite(task->pos.x + 136, task->pos.y + 144, 0x1D, UI_SPRITE_ALT_PAGE);
-    func_801AFA1C(D_8014546C, task->unk_0A, task->pos.x + 0x90, task->pos.y + 0x18, 9, 0x80, 0x74);
+    UI_DrawScrollbar(D_8014546C, task->unk_0A, task->pos.x + 0x90, task->pos.y + 0x18, 9, 0x80, 0x74);
 }

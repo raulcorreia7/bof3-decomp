@@ -15,7 +15,8 @@ extern Actor D_80143F48;
 extern u8    D_80143FBC;
 /* The four party work rows, and the shadow record each party row owns: 0x10
  * bytes, its flag byte first. */
-extern Actor D_80147A58[];
+/* D_80147A58 */
+extern Actor g_PartyActors[];
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 

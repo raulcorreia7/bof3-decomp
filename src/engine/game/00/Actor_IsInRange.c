@@ -1,7 +1,8 @@
 #include "game_00.h"
 
+/* func_801BDD58 */
 #ifdef NON_MATCHING
-NON_MATCHING u8 func_801BDD58(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* record) {
+NON_MATCHING u8 Actor_IsInRange(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* record) {
     /* FAKE: plain C gives the record t0 and pos_x a0; 46 rows measured without the pins. */
     FAKE_REG(s32, px, "t0");
     FAKE_REG(Actor*, rec, "a0");
@@ -39,5 +40,5 @@ NON_MATCHING u8 func_801BDD58(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* rec
     return 0;
 }
 #else
-INCLUDE_ASM(func_801BDD58);
+INCLUDE_ASM(Actor_IsInRange);
 #endif

@@ -27,7 +27,7 @@ MATCH VECTOR* func_801ABF30(VECTOR* out, s32 sel, s32 selector_kind) {
         }
         work = &g_Actors[count];
     } else {
-        work = &D_80147A58[key];
+        work = &g_PartyActors[key];
     }
     g_Task = work;
     /* FAKE: keeps the scratchpad store ahead of the call-argument setup. */

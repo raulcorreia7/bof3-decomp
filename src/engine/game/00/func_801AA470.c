@@ -46,7 +46,7 @@ NON_MATCHING u8 func_801AA470(void* sub, s32 target, u8 value) {
             return value;
         case 0xD4:
             index  = &D_1F800001;
-            tmp    = -(g_CurrentActor - D_80147A58) >> 3;
+            tmp    = -(g_CurrentActor - g_PartyActors) >> 3;
             *index = tmp;
             if ((u8)tmp >= 5U) {
                 *index = 4;
@@ -73,7 +73,7 @@ NON_MATCHING u8 func_801AA470(void* sub, s32 target, u8 value) {
             FIELD(u16, sub, 0xAu) += 7;
             goto done;
         case 0xD5:
-            tmp             = -(g_CurrentActor - D_80147A58) >> 3;
+            tmp             = -(g_CurrentActor - g_PartyActors) >> 3;
             SP_REF(s8, 0x1) = tmp;
             tmp &= BYTE_MASK;
             if ((u32)tmp < 4U && (D_80147CBA[tmp * 0x10] + D_80147CB9[tmp * 0x10]) != 0) {
@@ -82,7 +82,7 @@ NON_MATCHING u8 func_801AA470(void* sub, s32 target, u8 value) {
             return value;
         case 0xD6:
             index  = &D_1F800001;
-            tmp    = -(g_CurrentActor - D_80147A58) >> 3;
+            tmp    = -(g_CurrentActor - g_PartyActors) >> 3;
             *index = tmp;
             if (tmp & 0x80) {
                 *index = 4;

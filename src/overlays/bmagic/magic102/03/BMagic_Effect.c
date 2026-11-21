@@ -56,8 +56,8 @@ MATCH void func_801EEC80(void) {
         }
     }
     for (i = 0; i < 4; i++) {
-        if (D_80147A58[i].header.flags) {
-            D_801F0F10[i] = COORD_INT(D_80147A58[i].pos.z) - Area_SampleHeight(D_80147A58[i].pos.x.fixed, D_80147A58[i].pos.y.fixed);
+        if (g_PartyActors[i].header.flags) {
+            D_801F0F10[i] = COORD_INT(g_PartyActors[i].pos.z) - Area_SampleHeight(g_PartyActors[i].pos.x.fixed, g_PartyActors[i].pos.y.fixed);
         }
     }
     for (i = 0; i < ACTOR_SLOT_COUNT; i++) {
@@ -192,8 +192,8 @@ MATCH void func_801EF2B8(void) {
         }
     }
     for (i = 0; i < 4; i++) {
-        if (D_80147A58[i].header.flags) {
-            COORD_INT(D_80147A58[i].pos.z) = D_801F0F10[i] + Area_SampleHeight(D_80147A58[i].pos.x.fixed, D_80147A58[i].pos.y.fixed);
+        if (g_PartyActors[i].header.flags) {
+            COORD_INT(g_PartyActors[i].pos.z) = D_801F0F10[i] + Area_SampleHeight(g_PartyActors[i].pos.x.fixed, g_PartyActors[i].pos.y.fixed);
         }
     }
     for (i = 0; i < 20; i++) {

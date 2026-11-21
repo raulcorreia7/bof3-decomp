@@ -44,11 +44,11 @@ MATCH void func_801999F8(MenuPanelTask* task) {
             }
             if (slot == task->flags || slot == task->unk_0C) {
                 if (flip8 != 7) {
-                    func_801AF800((task->pos.x + 7), (s16)(y + 0x1A), 7, task->unk_0A, *src, shade, 1);
+                    UI_DrawItemRow((task->pos.x + 7), (s16)(y + 0x1A), 7, task->unk_0A, *src, shade, 1);
                 }
-                func_801AF800((task->pos.x + 7), (s16)(y + 0x18), flip8, task->unk_0A, *src, shade, visible);
+                UI_DrawItemRow((task->pos.x + 7), (s16)(y + 0x18), flip8, task->unk_0A, *src, shade, visible);
             } else {
-                func_801AF800((task->pos.x + 7), (s16)(y + 0x1A), flip8, task->unk_0A, *src, shade, visible);
+                UI_DrawItemRow((task->pos.x + 7), (s16)(y + 0x1A), flip8, task->unk_0A, *src, shade, visible);
             }
         }
         src++;
@@ -92,5 +92,5 @@ MATCH void func_801999F8(MenuPanelTask* task) {
         UI_DrawSprite((task->pos.x + (i + 11) * 8), (task->pos.y + 144), 0x1C, UI_SPRITE_ALT_PAGE);
     }
     UI_DrawSprite((task->pos.x + 136), (task->pos.y + 144), 0x1D, UI_SPRITE_ALT_PAGE);
-    func_801AFA1C(D_801C893C[task->unk_0A], task->unk_0B, (task->pos.x + 0x90), (task->pos.y + 0x18), 9, (task->unk_0A != 4) ? 0x80 : 0x20, 0x74);
+    UI_DrawScrollbar(D_801C893C[task->unk_0A], task->unk_0B, (task->pos.x + 0x90), (task->pos.y + 0x18), 9, (task->unk_0A != 4) ? 0x80 : 0x20, 0x74);
 }

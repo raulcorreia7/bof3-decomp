@@ -371,7 +371,7 @@ extern s32                  D_801468C4;
  * The member form shares one slot offset between the stores and shortens each function by 0x34 bytes. */
 extern u8                   D_801468FF;
 extern u8                   D_80146900[ENTITY_MAX][ACTOR_SIZE]; /* 0x80146900 */
-/* FAKE: column views of g_Actors for func_801A65A0 and func_801A68C0, the only forms that match them. */
+/* FAKE: column views of g_Actors for Actor_SpawnPartyFromRecord and func_801A68C0, the only forms that match them. */
 extern u16                  D_80146904[ENTITY_MAX][ACTOR_SIZE / 2];       /* Actor.unk_7C */
 extern s32                  g_ActorWalkDestX[ENTITY_MAX][ACTOR_SIZE / 4]; /* Actor.walk_dest_x */
 extern s32                  g_ActorWalkDestY[ENTITY_MAX][ACTOR_SIZE / 4]; /* Actor.walk_dest_y */
@@ -379,7 +379,8 @@ extern s32                  D_80146910[ENTITY_MAX][ACTOR_SIZE / 4];       /* Act
 extern u16                  D_80146914;
 extern u16                  D_80146918[][ACTOR_SIZE / 2];
 extern u8                   D_8014691C[ENTITY_MAX][ACTOR_SIZE]; /* 0x8014691C */
-extern Actor                D_80147A58[];
+/* D_80147A58 */
+extern Actor                g_PartyActors[];
 extern u8                   D_80147CB8[]; /* 0x80147CB8 */
 extern s8                   D_80147CB9[]; /* 0x80147CB9 */
 extern s8                   D_80147CBA[]; /* 0x80147CBA */

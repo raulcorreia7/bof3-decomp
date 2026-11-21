@@ -186,17 +186,17 @@ s32 PlChar_ProbeCellSpawn(s16 x, s16 y);
 s32 PlChar_ProbeCellSpawn(s16 x, s16 y);
 
 /* Probes the cell one facing step (doubled) from the indexed route record for a party member. */
-#define PLCHAR_PROBE_FACING_FOLLOWER(index)                                                                                \
-    {                                                                                                                      \
-        s32 i;                                                                                                             \
-        s32 x = g_SpawnedActors[index].pos.x.fixed + g_FacingSteps[g_Task->direction].x * 2;                               \
-        s32 y = g_SpawnedActors[index].pos.y.fixed + g_FacingSteps[g_Task->direction].y * 2;                               \
-        for (i = 1; i < g_PartySize; i++) {                                                                                \
-            if (func_801BDD58(x, y, COORD_INT(g_SpawnedActors[index].pos.z), 1, (Actor*)&g_Game.members[i]) & BYTE_MASK) { \
-                return 1;                                                                                                  \
-            }                                                                                                              \
-        }                                                                                                                  \
-        return 0;                                                                                                          \
+#define PLCHAR_PROBE_FACING_FOLLOWER(index)                                                                                  \
+    {                                                                                                                        \
+        s32 i;                                                                                                               \
+        s32 x = g_SpawnedActors[index].pos.x.fixed + g_FacingSteps[g_Task->direction].x * 2;                                 \
+        s32 y = g_SpawnedActors[index].pos.y.fixed + g_FacingSteps[g_Task->direction].y * 2;                                 \
+        for (i = 1; i < g_PartySize; i++) {                                                                                  \
+            if (Actor_IsInRange(x, y, COORD_INT(g_SpawnedActors[index].pos.z), 1, (Actor*)&g_Game.members[i]) & BYTE_MASK) { \
+                return 1;                                                                                                    \
+            }                                                                                                                \
+        }                                                                                                                    \
+        return 0;                                                                                                            \
     }
 
 /* The retail caller passes the cue word unmasked (the delay slot holds the

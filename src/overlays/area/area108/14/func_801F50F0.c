@@ -10,8 +10,8 @@ NON_MATCHING void func_801F50F0(void) {
     switch (g_SceneEventState.step) {
         case 0:
             if (--LOHU(D_801448EE) == 0) {
-                g_AreaScrollTargetX = D_80147A58[1].pos.x.fixed;
-                g_AreaScrollTargetY = D_80147A58[1].pos.y.fixed;
+                g_AreaScrollTargetX = g_PartyActors[1].pos.x.fixed;
+                g_AreaScrollTargetY = g_PartyActors[1].pos.y.fixed;
                 g_AreaCameraStep    = g_RouteSpeedScale[3] * 8;
                 g_SceneEventState.step++;
             }
@@ -99,15 +99,15 @@ NON_MATCHING void func_801F50F0(void) {
                         track++;
                     } while (i < D_801F6298);
                 }
-                D_80147A58[0].tint.bytes.rgb.r -= 4;
-                D_80147A58[0].tint.bytes.rgb.g -= 4;
-                D_80147A58[0].tint.bytes.rgb.b -= 4;
+                g_PartyActors[0].tint.bytes.rgb.r -= 4;
+                g_PartyActors[0].tint.bytes.rgb.g -= 4;
+                g_PartyActors[0].tint.bytes.rgb.b -= 4;
             } else {
                 SYS_SetFlag(g_SceneEventFlags, 0x1D);
                 Area_SetCellPalette(0x20, 0x2F);
-                D_80147A58[0].header.flags = 0;
-                *timer                     = 0x1E;
-                g_SceneEventState.step     = 9;
+                g_PartyActors[0].header.flags = 0;
+                *timer                        = 0x1E;
+                g_SceneEventState.step        = 9;
             }
         } break;
         case 9:
