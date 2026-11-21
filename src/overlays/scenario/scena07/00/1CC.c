@@ -319,8 +319,8 @@ NON_MATCHING void func_801F7BE0(void) {
     buffer->pos.vx      = g_Task->pos.x.fixed;
     D_801FDFC0          = buffer;
     buffer->pos.vy      = g_Task->pos.y.fixed;
-    buffer->angle       = 0x800;
     buffer->pos.vz      = g_Task->pos.z.fixed + TO_COORD(0x200);
+    buffer->angle       = 0x800;
     func_801F90F4(MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424));
     g_Task->vx = 0x28;
     g_Task->header.step++;

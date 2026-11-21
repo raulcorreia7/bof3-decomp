@@ -3,8 +3,7 @@
 /* Ends the battle selection: hands the chosen slot to the sound request, clears it, then copies the battler
  * work rows and resets the effect slots. */
 /* func_8009AC18 */
-#ifdef NON_MATCHING
-NON_MATCHING bool Battle_Unequip(void) {
+MATCH bool Battle_Unequip(void) {
     u8* slots[6];
     u8* row;
     u8* cell;
@@ -58,7 +57,7 @@ NON_MATCHING bool Battle_Unequip(void) {
         do {
             row_offset = (u8)i * BATTLE_PARTY_STRIDE;
             if (ACTOR_IN_USE(g_Game.members[(u8)i])) {
-                memcpy(dst_base + row_offset, src_base + row_offset, 0x20);
+                memcpy((u8*)(row_offset + (u32)dst_base), (u8*)(row_offset + (u32)src_base), 0x20);
             }
             i++;
         } while ((u8)i < 3);
@@ -73,6 +72,3 @@ NON_MATCHING bool Battle_Unequip(void) {
     }
     return 1;
 }
-#else
-INCLUDE_ASM(Battle_Unequip);
-#endif
