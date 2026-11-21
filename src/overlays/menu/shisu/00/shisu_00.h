@@ -96,7 +96,8 @@ extern u8       g_MenuLabelAgility[];
 extern u8       g_MenuEquipRowIcons[];
 /* D_801D9B64 */
 extern u8       g_MenuLabelEquip[];
-extern u8       D_801D9EF0[7];
+extern u8       D_801D9EF0[3];
+extern u8       D_801D9EF4[3];
 extern u8       g_MenuPortraitAtlas[];
 extern u32      g_ShisuScales[];
 extern u8       D_801D9BA8[];
@@ -192,9 +193,7 @@ extern s32              D_801DA038;
 extern s32              D_801DA03C;
 extern s32              D_801DA040;
 extern s32              D_801DA044;
-extern u8               g_ShisuBaseR;
-extern u8               g_ShisuBaseG;
-extern u8               g_ShisuBaseB;
+extern u8               g_ShisuBase[3];
 extern u8               D_801DA04E;
 extern s32              D_801DA084;
 extern s32              g_ShisuBaseScale;
@@ -202,8 +201,9 @@ extern u8               D_801DA0C0;
 extern u8               D_801DA0C6;
 extern s32              D_801DA0FC;
 extern u32              g_ShisuToppingScale;
-/* kept: the tint bytes stay separate globals; one array shares their base register and leaves
-   func_801D2ADC eight bytes short. */
+/* kept: func_801D2ADC reads the tint bytes as three globals; one array shares their base register
+   and leaves it eight bytes short. */
+extern u8               g_ShisuTopping[3];
 extern u8               g_ShisuToppingR;
 extern u8               g_ShisuToppingG;
 extern u8               g_ShisuToppingB;
