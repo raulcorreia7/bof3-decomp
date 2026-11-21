@@ -1,11 +1,8 @@
-#ifndef SYS_BOOT_H
-#define SYS_BOOT_H
+#ifndef OVERLAY_SYS_BOOT_H
+#define OVERLAY_SYS_BOOT_H
 
 #include "types.h"
 #include "common/callback.h"
-
-/* func_8014BA04 */
-void        SYS_ClearCurrentThread(void);
 /* func_8014AEE0 */
 void        SYS_StartLogo(void);
 /* func_8014AFC0 */
@@ -36,10 +33,13 @@ void        SYS_ThreadExit(void);
 void        SYS_ThreadClose(s32 thread_index);
 /* func_8014B954 */
 extern void SYS_ThreadReplace(Callback entry);
-void        SYS_Main(void);
-void        SYS_InitRuntime(void);
-void        SYS_InitHardware(void);
-void        SYS_InitDisplay(void);
-void        SYS_ResetDisplayFrame(u8* work);
+
+/* func_8014BA04 */
+void SYS_ClearCurrentThread(void);
+void SYS_Main(void);
+void SYS_InitRuntime(void);
+void SYS_InitHardware(void);
+void SYS_InitDisplay(void);
+void SYS_ResetDisplayFrame(u8* work);
 
 #endif

@@ -1,5 +1,5 @@
-#ifndef GFX_FADE_H
-#define GFX_FADE_H
+#ifndef OVERLAY_GFX_FADE_H
+#define OVERLAY_GFX_FADE_H
 
 #include "types.h"
 

@@ -1,5 +1,5 @@
-#ifndef EMI_LOADER_H
-#define EMI_LOADER_H
+#ifndef OVERLAY_EMI_LOADER_H
+#define OVERLAY_EMI_LOADER_H
 
 #include "types.h"
 #include "sys/cd_format.h"
@@ -42,6 +42,7 @@ void    EMI_CdPause(void);
 void    EMI_CdOnPause(void);
 /* func_8016305C */
 void    EMI_UpdateStream(void);
+void    func_80163230(void);
 /* func_80163238 */
 void    EMI_DecompressSector(void);
 /* func_8016327C */
@@ -50,7 +51,6 @@ void    EMI_CopySectorToScratchpad(void);
 void    EMI_UploadSectorImage(void);
 /* func_80163418 */
 void    EMI_UploadVabBody(void);
-void    func_80163230(void);
 void    EMI_ReadToc(void);
 void    EMI_LoadToRam(void);
 void    EMI_LoadCompressed(void);

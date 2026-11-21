@@ -1,5 +1,5 @@
-#ifndef INPUT_PAD_H
-#define INPUT_PAD_H
+#ifndef OVERLAY_INPUT_PAD_H
+#define OVERLAY_INPUT_PAD_H
 
 #include "types.h"
 

@@ -1,5 +1,5 @@
-#ifndef SYS_FLAGS_H
-#define SYS_FLAGS_H
+#ifndef OVERLAY_SYS_FLAGS_H
+#define OVERLAY_SYS_FLAGS_H
 
 #include "types.h"
 

@@ -1,5 +1,5 @@
-#ifndef SOUND_XA_H
-#define SOUND_XA_H
+#ifndef OVERLAY_SOUND_XA_H
+#define OVERLAY_SOUND_XA_H
 
 #include "types.h"
 

@@ -1,10 +1,7 @@
-#ifndef SOUND_SOUND_H
-#define SOUND_SOUND_H
+#ifndef OVERLAY_SOUND_SOUND_H
+#define OVERLAY_SOUND_SOUND_H
 
 #include "types.h"
-
-/* func_8015D104 */
-void        SND_DecreaseVoiceTargetVolume(s32 slot, s32 amount);
 /* The executable's sound functions, in address order. */
 /* func_8015CD00 */
 void        SND_Init(void);
@@ -12,6 +9,9 @@ void        SND_Init(void);
 extern void SND_Start(void);
 /* func_8015CEBC */
 void        SND_Exit(void);
+
+/* func_8015D104 */
+void        SND_DecreaseVoiceTargetVolume(s32 slot, s32 amount);
 void        SND_StartVolumeSweep(s32 voice);
 /* func_8015D300 */
 void        SND_PlaySequence(u16 sep_slot, s32 sequence, s32 left_volume, s32 right_volume);
@@ -35,6 +35,21 @@ extern void SND_QueueSelectionSE(s32 se_id);
 void        SND_QueueSeVolume(s32 se_id, s32 left_index, s32 right_index);
 /* func_8015DF18 */
 void        SND_PlaySE(u16 se_id);
+/* func_8015E994 */
+void        SND_ReadSeBank0(void);
+/* func_8015EFAC */
+void        SND_ReadSeBank1(void);
+/* func_8015F5C8 */
+void        SND_ReadSeBank2(void);
+/* func_8015FBE4 */
+void        SND_ReadSeBank3(void);
+/* func_80160200 */
+void        SND_ReadSeBank4(void);
+/* func_8016081C */
+void        SND_ReadSeBank5(void);
+/* func_80160E38 */
+void        SND_ReadSeBank6(void);
+extern void func_80161454(u32 index);
 /* func_80161808 */
 void        SND_SetBankLayout(u32 layout);
 /* func_80161B24 */
@@ -51,21 +66,6 @@ void        SND_PauseBGM(s32 cue_id);
 void        SND_ResumeBGM(s32 cue_id);
 /* func_80161DC8 */
 void        SND_InstallSequenceFuncs(void);
-/* func_8015E994 */
-void        SND_ReadSeBank0(void);
-/* func_8015EFAC */
-void        SND_ReadSeBank1(void);
-/* func_8015F5C8 */
-void        SND_ReadSeBank2(void);
-/* func_8015FBE4 */
-void        SND_ReadSeBank3(void);
-/* func_80160200 */
-void        SND_ReadSeBank4(void);
-/* func_8016081C */
-void        SND_ReadSeBank5(void);
-/* func_80160E38 */
-void        SND_ReadSeBank6(void);
-extern void func_80161454(u32 index);
 void        SND_UpdateVoiceStatus(void);
 
 #endif
