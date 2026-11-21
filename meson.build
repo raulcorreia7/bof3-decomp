@@ -353,6 +353,10 @@ foreach row : fs.read(tools / 'gate.txt').split('\n')
 endforeach
 format_sh = find_program(tools / 'format.sh')
 run_target('format', command: [format_sh])
+# Rebuild the disc from the built images and compare it with config/disc.toml (needs the disc; not a push check).
+if have_game
+  run_target('disc', command: [venv_python, tools / 'disc.py', 'rebuild'], depends: image_bins)
+endif
 # Every check a push needs, one line each (tools/gate.txt, tools/pre_push.sh).
 run_target('pre-push', command: [tools / 'pre_push.sh'])
 

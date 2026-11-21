@@ -90,7 +90,7 @@ typedef enum EMISlotId {
     EMI_SLOT_ENDKANJI   = EMI_DIR_ETC + 12,
     EMI_SLOT_FIRST      = EMI_DIR_ETC + 13,
     EMI_SLOT_GAME       = EMI_DIR_ETC + 14,
-    EMI_SLOT_MTEST      = EMI_DIR_ETC + 15,
+    EMI_SLOT_MTEST      = EMI_DIR_ETC + 15, /* MTEST, RTEST: unreferenced; their 2,404 B entry is data, not code */
     EMI_SLOT_RTEST      = EMI_DIR_ETC + 16,
     EMI_SLOT_SHISU      = EMI_DIR_ETC + 17,
     EMI_SLOT_SHOP       = EMI_DIR_ETC + 18,

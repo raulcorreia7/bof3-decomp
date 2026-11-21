@@ -80,6 +80,7 @@ def images(root: Path) -> dict[str, tuple[str, set[str]]]:
                 continue
             other, stem = os.path.split(os.path.normpath(os.path.join(folder, name)))
             found.setdefault(other, (layout, set()))[1].add(stem)
+            found[other][1].update(included(root, other, {stem}))
         names = home | found.get(folder, (layout, set()))[1]
         found[folder] = (layout, names | included(root, folder, home))
     return found
