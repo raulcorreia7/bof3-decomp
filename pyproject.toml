@@ -29,6 +29,7 @@ python-downloads = "manual"
 [tool.pytest.ini_options]
 pythonpath = ["tools"]
 testpaths = ["tools/tests"]
+markers = ["slow: tests that compile or decode real payloads; Meson runs them as `tools-slow`"]
 
 [tool.ruff]
 target-version = "py312"

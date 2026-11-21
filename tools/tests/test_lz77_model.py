@@ -30,7 +30,10 @@ WINDOWS = (0x400, 0x3F5, 301, 272)
 STATES: set[int] = set()
 CC = shutil.which("cc") or shutil.which("gcc") or shutil.which("clang")
 
-pytestmark = pytest.mark.skipif(CC is None, reason="no host C compiler")
+pytestmark = [
+    pytest.mark.slow,
+    pytest.mark.skipif(CC is None, reason="no host C compiler"),
+]
 
 
 def reference_decode(payload: bytes) -> bytes:

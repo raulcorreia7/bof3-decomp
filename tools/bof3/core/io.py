@@ -69,10 +69,3 @@ def write_atomic(path: Path, data: str | bytes) -> None:
     except BaseException:
         temporary.unlink(missing_ok=True)
         raise
-
-
-def write_json(
-    path: Path, payload: dict[str, Any], *, sort_keys: bool = True, indent: int = 2
-) -> None:
-    """Write ``payload`` to ``path`` as an indented JSON document."""
-    write_atomic(path, json.dumps(payload, indent=indent, sort_keys=sort_keys) + "\n")

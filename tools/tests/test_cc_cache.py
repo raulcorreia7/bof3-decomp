@@ -10,9 +10,13 @@ import pytest
 
 import cc
 
-pytestmark = pytest.mark.skipif(
-    not os.path.isfile(cc.GCC), reason="the GCC 2.7.2 PSX toolchain is not installed"
-)
+pytestmark = [
+    pytest.mark.slow,
+    pytest.mark.skipif(
+        not os.path.isfile(cc.GCC),
+        reason="the GCC 2.7.2 PSX toolchain is not installed",
+    ),
+]
 
 
 def key(tmp_path: Path, *flags: str) -> str | None:

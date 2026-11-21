@@ -3817,10 +3817,6 @@ def _signed16(value: int) -> int:
     return value - 0x10000 if value & 0x8000 else value
 
 
-def _signed32(value: int) -> int:
-    return value - 0x100000000 if value & 0x80000000 else value
-
-
 def _reg_name(number: int) -> str:
     return REG_NAMES[number] if 0 <= number < len(REG_NAMES) else f"r{number}"
 

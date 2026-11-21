@@ -123,7 +123,7 @@ check: the local `check` on every touched image is the proof.
 | `report`          | Write `build/report.json`, the input of the status site. Needs `objdiff-cli`.                                                                                                                                                                                                                                |
 | `rz+<image>.rzdb` | The Rizin project that `bin/rz` opens.                                                                                                                                                                                                                                                                       |
 
-`meson test -C build/meson` runs the Python tool tests (`tools/setup.sh --dev`). To start over,
+`meson test -C build/meson` runs the Python tool tests (`tools` and `tools-slow`, side by side) (`tools/setup.sh --dev`). To start over,
 delete `build/meson` and run `meson setup build/meson`; the extracted disc stays in `build/disc`.
 
 | Tool                                | Does                                                                                 |

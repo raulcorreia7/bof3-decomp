@@ -729,16 +729,6 @@ def _call_registers(insns: list[Insn], index: int) -> list[int]:
     return sorted(found)
 
 
-def v0_writes(function: Function) -> list[tuple[str, str]]:
-    """Return every instruction that writes v0, in order."""
-    writes: list[tuple[str, str]] = []
-    for insn in function.insns:
-        dest, _ = read_write(insn.mnemonic, operands(insn.operands))
-        if dest == 2:
-            writes.append((insn.mnemonic, insn.operands))
-    return writes
-
-
 def return_writes(function: Function) -> list[tuple[str, str]]:
     """Return the writes of v0 that reach a ``jr ra``: the function's returned values.
 
@@ -900,10 +890,3 @@ def return_width(function: Function) -> tuple[int, bool | None] | None:
         if found is not None:
             return found
     return None
-
-
-def _write_width(insn: Insn) -> tuple[int, bool | None] | None:
-    dest, _ = read_write(insn.mnemonic, operands(insn.operands))
-    if dest != 2:
-        return None
-    return width_of(insn.mnemonic, insn.operands)

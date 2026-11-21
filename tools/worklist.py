@@ -52,13 +52,6 @@ class Row:
     hint: str
 
 
-def _score(score: object) -> str:
-    """A percent number, or a string that states its own unit."""
-    if score is None:
-        return ""
-    return f"{score:g}%" if isinstance(score, (int, float)) else str(score)
-
-
 def attempts(path: Path = ROOT / ROW_PATH) -> dict[str, str]:
     """Return the recorded attempts for each function."""
     result: dict[str, list[str]] = {}

@@ -43,12 +43,17 @@ def test_headers_exist() -> None:
 
 
 def test_records_are_defined() -> None:
-    for row in CELLS:
-        for name in spans(row[2]):
-            if re.fullmatch(r"[A-Z][A-Za-z0-9]+", name):
-                found = subprocess.run(
-                    ["git", "grep", "-qw", name, "--", "include", "src"],
-                    cwd=ROOT,
-                    check=False,
-                )
-                assert found.returncode == 0, name
+    names = {
+        n
+        for row in CELLS
+        for n in spans(row[2])
+        if re.fullmatch(r"[A-Z][A-Za-z0-9]+", n)
+    }
+    found = subprocess.run(
+        ["git", "grep", "-ohwE", "|".join(sorted(names)), "--", "include", "src"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    ).stdout.split()
+    assert not names - set(found)

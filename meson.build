@@ -365,8 +365,9 @@ run_target('pre-push', command: [tools / 'pre_push.sh'])
 if fs.exists(root / '.venv/bin/pytest')
   # The suite compiles the hand-asm C models natively, which can pass Meson's 30 s default
   # on a slow CI runner.
-  test('tools', find_program(root / '.venv/bin/pytest'), args: ['-q'],
-    workdir: root, timeout: 120)
+  pytest = find_program(root / '.venv/bin/pytest')
+  test('tools', pytest, args: ['-q', '-m', 'not slow'], workdir: root, timeout: 120)
+  test('tools-slow', pytest, args: ['-q', '-m', 'slow'], workdir: root, timeout: 120)
 else
   # `meson test` with no test defined exits 0, so a missing pytest must fail it.
   message('Tool tests cannot run: pytest is missing. Run tools/setup.sh --dev, then meson setup --reconfigure build/meson')
