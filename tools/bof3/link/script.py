@@ -70,8 +70,7 @@ def kept(
             reachable or entries_for_key, key=lambda entry: starts[entry.line]
         )
 
-    # Splat can put a placed table in a jtbl object instead of the function's
-    # object. Its dedicated output section still identifies it by address.
+    # A placed table may sit in a jtbl object; its output section still names it by address.
     for key, address in placements.items():
         if key not in keep or starts[keep[key].line] > address:
             located = [
@@ -174,11 +173,7 @@ class Prepared:
 
 
 def prepare_link(root: Path, target: str) -> Prepared:
-    """Prune and place one target's inputs from Splat's linker script, which it only reads.
-
-    Placement wrappers go under ``build/p2/<target>/placements``. The result is
-    the same on every run while Splat's output, the sources and the config stay as they are.
-    """
+    """Prune and place one target's inputs from Splat's linker script, which it only reads."""
     root = Path(root).resolve()
     target = normalize_target_id(target).value
     manifest_path = root / CONFIG / target / "target.toml"

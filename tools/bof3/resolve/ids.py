@@ -81,13 +81,7 @@ _SERIAL_RE = re.compile(r"^(?P<name>[a-z]+)_\d{3}_\d{2}$")
 
 
 def shipped_disc_id(target: TargetId) -> str:
-    """Return the disc spelling of a canonical target id.
-
-    The executable name follows its serial, and an executable without one lives
-    in its own folder: ``exe/slus_004_22`` -> ``SLUS_004.22``,
-    ``exe/logo`` -> ``LOGO/LOGO.EXE``. An EMI entry is the archive path:
-    ``emi/etc/game/00`` -> ``BIN/ETC/GAME.EMI#0``.
-    """
+    """Return the disc spelling of a canonical target id."""
     if target.kind == "executable":
         name = target.value.split("/", 1)[1]
         serial = _SERIAL_RE.fullmatch(name)
@@ -115,12 +109,7 @@ _SOURCE_ROOTS = {
 
 
 def source_folder(target: str) -> str:
-    """Return the folder under ``src/`` that holds a target's sources.
-
-    The folder is a root plus the id's tail: ``emi/world02/area078/13`` ->
-    ``overlays/area/area078/13``; ``emi/etc/game/00`` -> ``engine/game/00``;
-    ``exe/slus_004_22`` -> ``engine/slus`` (the serial is dropped); ``exe/logo`` -> ``logo``.
-    """
+    """Return the folder under ``src/`` that holds a target's sources."""
     parts = target.split("/")
     if parts[0] == "exe":
         serial = _SERIAL_RE.fullmatch(parts[1])
@@ -134,11 +123,7 @@ def source_folder(target: str) -> str:
 
 
 def asm_dir(source: str | Path, root: str | Path) -> str | None:
-    """Return the `ASM_DIR` of a source under `src/`: its image folder, or its hand folder.
-
-    The image follows from the source folder: `src/engine/slus`, `src/logo`, and
-    `.../<archive>/<slot>/<file>` for the one `emi/<family>/<archive>/<slot>` under `config/`.
-    """
+    """Return the `ASM_DIR` of a source under `src/`: its image folder, or its hand folder."""
     parts = os.path.relpath(os.path.abspath(source), root).split(os.sep)
     if parts[0] != "src":
         return None
@@ -159,11 +144,7 @@ def asm_dir(source: str | Path, root: str | Path) -> str | None:
 
 
 def image_header(target: str) -> str:
-    """Return the target's own header file name: ``battle_03.h``, ``slus.h``.
-
-    The name is the archive and slot of the id: ``emi/battle/battle/03`` -> ``battle_03.h``;
-    ``emi/etc/shop/00`` -> ``shop_00.h``; ``exe/slus_004_22`` -> ``slus.h``; ``exe/logo`` -> ``logo.h``.
-    """
+    """Return the target's own header file name: ``battle_03.h``, ``slus.h``."""
     parts = target.split("/")
     if parts[0] == "exe":
         serial = _SERIAL_RE.fullmatch(parts[1])

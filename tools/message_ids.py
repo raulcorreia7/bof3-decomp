@@ -267,7 +267,8 @@ def rewrite_text(
     text: str, names: dict[int, str], system_names: dict[int, str] | None = None
 ) -> str:
     """Rewrite the literal ids and flat MSG_nnn names in `text`: Message_Request ids to
-    `system_names`, the others to `names`; a value with no entry stays as written."""
+    `system_names`, the others to `names`; a value with no entry stays as written.
+    """
     masked_text = masked(text)
     system = system_starts(masked_text) if system_names is not None else set()
     new = text

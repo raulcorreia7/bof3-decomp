@@ -33,12 +33,7 @@ _DEFINITION = re.compile(
 
 
 def function_name(source: Path) -> str:
-    """Return the draft's function name, else the first matched definition.
-
-    A shared-body member holds an ``#include`` of the header that defines it; the header counts.
-
-    A `MATCH INCLUDE_ASM(name)` unit names its function in the macro.
-    """
+    """Return the draft's function name, else the first matched definition."""
     text = source_text(source)
     draft = _DRAFT.search(text)
     if draft is not None:

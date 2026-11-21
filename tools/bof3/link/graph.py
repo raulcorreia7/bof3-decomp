@@ -1,9 +1,4 @@
-"""The Meson build graph of one target: its objects, how each is made, and its link script.
-
-A Meson ``custom_target`` output cannot hold ``/``, so an object ``build/src/a/b.c.o`` is
-named ``src+a+b.c.o`` in the build directory. :func:`object_name` is the one place that
-spells this; the link script and the graph rows both use it.
-"""
+"""The Meson build graph of one target: its objects, how each is made, and its link script."""
 
 from __future__ import annotations
 
@@ -39,10 +34,7 @@ def object_name(root: Path, path: str) -> str:
 
 
 def source_object(relative: Path, *, draft: bool = False) -> str:
-    """Return the flat name of the object compiled from ``src/<relative>``.
-
-    A draft is the same source compiled with ``-DNON_MATCHING``, for the progress report.
-    """
+    """Return the flat name of the object compiled from ``src/<relative>``."""
     return flat(f"{BUILD}/{'draft' if draft else 'src'}/{relative.as_posix()}.o")
 
 
@@ -57,11 +49,7 @@ def link_script(root: Path, text: str) -> str:
 
 
 def rows(root: Path, target: str, objects: tuple[str, ...]) -> list[Row]:
-    """Return how to build each object of one target.
-
-    ``c`` compiles a source, ``s`` assembles one, and ``b`` wraps a binary asset. A
-    prebuilt PsyQ object has no row: the link script names it by path.
-    """
+    """Return how to build each object of one target."""
     result: list[Row] = []
     for obj in objects:
         stem = obj.removesuffix(".o")

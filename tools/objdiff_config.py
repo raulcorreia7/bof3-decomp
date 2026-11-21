@@ -107,11 +107,7 @@ class Project:
         output: Path,
         readable: dict[str, int] | None = None,
     ) -> Path:
-        """Assemble one unit's split asm, reusing an object that is already current.
-
-        ``readable`` maps the readable data names the image links against to their
-        addresses; a reference to one resolves as the compiled base's constant does.
-        """
+        """Assemble one unit's split asm, reusing an object that is already current."""
         output.parent.mkdir(parents=True, exist_ok=True)
         inputs = [*sources, *symbol_files(self.root)]
         if output.is_file() and all(
@@ -208,12 +204,7 @@ class Project:
         return _unique(found), GAME_CATEGORY
 
     def report_base(self, base: Path) -> tuple[Path, bool]:
-        """Return the object the report compares and whether it holds ``INCLUDE_ASM`` bodies.
-
-        The compiled object assembles the same split assembly as the target for an
-        ``INCLUDE_ASM`` function, so those bytes would score 100%. The report copy
-        overwrites each such body; an object without one is used as built.
-        """
+        """Return the object the report compares and whether it holds ``INCLUDE_ASM`` bodies."""
         output = self.build_dir / "objdiff/base" / base.name
         if output.is_file() and base.stat().st_mtime <= output.stat().st_mtime:
             return output, True
@@ -242,11 +233,7 @@ class Project:
 
 
 def _unlifted_ranges(data: bytes, suffix: str, path: Path) -> list[tuple[int, int]]:
-    """Return the file offset and size of every body the object marks with ``suffix``.
-
-    The object is ELF32 little-endian MIPS. A marker is a defined symbol named
-    ``<function><suffix>`` whose value and size span the function in its section.
-    """
+    """Return the file offset and size of every body the object marks with ``suffix``."""
     if data[:5] != b"\x7fELF\x01" or data[5] != 1:
         raise SystemExit(f"{path} is not an ELF32 little-endian object")
     fields = ELF_HEADER.unpack_from(data)
@@ -468,11 +455,7 @@ def _unlifted_units(
 
 
 def _readable_data(root: Path, target: str) -> dict[str, int]:
-    """Return ``name -> address`` for the readable data rows an image links against.
-
-    A name with a row of a function type is left to the link: a call against an absolute
-    address would not encode as one. A name whose owners give two addresses is left out.
-    """
+    """Return ``name -> address`` for the readable data rows an image links against."""
     table = symbols.load(root)
     found: dict[str, set[int]] = {}
     for owner in symbols.link_owners(root, target):
@@ -704,11 +687,7 @@ def _commit(root: Path) -> str:
 def _image_counts(
     image_ids: list[str], units: list[dict[str, Any]]
 ) -> list[dict[str, Any]]:
-    """Return every image's unit count, the images with no units included.
-
-    A unit is named ``<image>/<source stem>``, so the image is the longest id
-    the name starts with.
-    """
+    """Return every image's unit count, the images with no units included."""
     names = sorted(image_ids)
     counts = dict.fromkeys(names, 0)
     for unit in units:
@@ -725,11 +704,7 @@ def _image_counts(
 
 
 def _unproven(data: dict[str, Any]) -> dict[str, str]:
-    """Return each unit marked complete that holds a function objdiff scores under 100%.
-
-    A ``MATCH`` marker is a claim; the report counts a unit complete only when every
-    function in it is 100% as well. The value lists the unit's functions under 100%.
-    """
+    """Return each unit marked complete that holds a function objdiff scores under 100%."""
     found: dict[str, str] = {}
     for unit in data.get("units", []):
         if not unit.get("metadata", {}).get("complete"):
@@ -778,16 +753,7 @@ def _generate_report(tool: str, project_dir: Path, report_path: Path) -> dict[st
 
 
 def report(root: Path | None, build_dir: Path) -> int:
-    """Run objdiff's report step and stamp the report with its provenance.
-
-    ``objdiff-cli report generate`` writes ``build/report.json``: its version,
-    the progress categories and one unit per source file. The status site
-    reads that file as its only input, so three top-level fields are added and
-    the objdiff ones are left as written. ``provenance`` names the commit and
-    UTC date that produced the report; ``images`` lists every image the layout
-    names with its unit count, so the image with no units is counted instead
-    of absent. ``quality`` holds the debt totals of ``tools/quality.py``.
-    """
+    """Run objdiff's report step and stamp the report with its provenance."""
     base = root.resolve() if root is not None else ROOT
     report_path = base / REPORT
     found = subprocess.run(

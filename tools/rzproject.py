@@ -68,11 +68,7 @@ def read_rows(root: Path, manifest: TargetManifest) -> list[symbols.Entry]:
 def read_maps(
     root: Path, targets: tuple[str, ...], spans: list[tuple[int, int]]
 ) -> list[symbols.MapSymbol]:
-    """Return the map symbols inside the mapped images' ``spans`` (start, end).
-
-    Every mapped image with a linker map adds its symbols; a fixed address outside the spans
-    names bytes this project does not hold. A missing map is reported on stderr: that project holds rows and layouts only.
-    """
+    """Return the map symbols inside the mapped images' ``spans`` (start, end)."""
     found: list[symbols.MapSymbol] = []
     for target in targets:
         path = root / MAP_DIR / f"{target.replace('/', '+')}.map"
@@ -255,13 +251,7 @@ def _fix_fields(block: str) -> str:
 
 
 def types_only(text: str) -> str:
-    """Keep top-level typedef, struct, union and enum declarations only.
-
-    Rizin's ``to`` stops the script at the first function prototype it cannot
-    parse, so the preprocessed chain is reduced to the declarations it needs
-    for ``tp``/``ts``/``tt``: no callables, no data objects and no repeated or
-    builtin typedef names.
-    """
+    """Keep top-level typedef, struct, union and enum declarations only."""
     blocks: list[str] = []
     current: list[str] = []
     depth = 0
@@ -379,10 +369,7 @@ def write_function_commands(
     functions: list[tuple[str, int, int]],
     mapped: list[symbols.MapSymbol],
 ) -> list[str]:
-    """Write Rizin function analysis commands; return the name flags to set after FLIRT.
-
-    FLIRT renames a matched function, so the game name goes in a flag of its own afterwards.
-    """
+    """Write Rizin function analysis commands; return the name flags to set after FLIRT."""
     names = {row.addr: row.name for row in rows if row.type == "func"}
     defined: set[int] = set()
     owners: dict[str, int] = {}
@@ -427,12 +414,7 @@ def write_function_commands(
 
 
 def unique_flags(lines: list[str]) -> list[str]:
-    """Keep one flag per name and address.
-
-    Rizin refuses a second flag of one name. The resident executable's rows arrive once per
-    mapped target and again from the function list, so the same flag repeats and is dropped;
-    one name at another address (a shared body, a local label) takes its address as a suffix.
-    """
+    """Keep one flag per name and address."""
     seen: dict[str, int] = {}
     kept: list[str] = []
     for line in lines:
@@ -453,12 +435,7 @@ def unique_flags(lines: list[str]) -> list[str]:
 
 
 def map_flags(mapped: list[symbols.MapSymbol]) -> list[str]:
-    """Return the commands that flag every map symbol, one flagspace per name at an address.
-
-    Rizin keeps one flag per address in a flagspace, and a row or layout name may already hold
-    that address, so the map names live in ``bof3_map`` and a second name at an address goes to
-    ``bof3_alias``.
-    """
+    """Return the commands that flag every map symbol, one flagspace per name at an address."""
     lines = ["fs bof3_map"]
     aliases: list[str] = []
     placed: set[int] = set()

@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from bof3.adapters.git import git
-from bof3.symbols import SPLIT, TABLE, parse
+from bof3.symbols import SPLIT, parse
 
 _TITLE = re.compile(r'^\["([^"]+)"\]', re.MULTILINE)
 
@@ -22,12 +22,9 @@ def symbol_files(root: Path) -> list[Path]:
 
 
 def symbols_text(root: Path, rev: str | None = None) -> str:
-    """The symbol tables as one TOML text: every file of `config/symbols/`, or at `rev` a base that still has `config/symbols.toml`."""
+    """The symbol tables as one TOML text: the files of `config/symbols/`, at `rev` if given."""
     if rev is None:
         return "".join(p.read_text(encoding="utf-8") for p in symbol_files(root))
-    whole = git("show", f"{rev}:{TABLE}", root=root, check=False)
-    if whole:
-        return whole
     names = git("ls-tree", "--name-only", rev, f"{SPLIT}/", root=root).split()
     return "".join(git("show", f"{rev}:{name}", root=root) for name in names)
 

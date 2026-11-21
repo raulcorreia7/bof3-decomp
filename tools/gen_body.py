@@ -85,17 +85,7 @@ STORE = {"sb": "u8", "sh": "u16", "sw": "u32"}
 
 @dataclass
 class Lift:
-    """What one function does, in program order.
-
-    ``events`` are ``("call", name, args, id)`` and ``("store", width, target, value)``. A target
-    is ``("g", symbol)``, ``("gi", symbol, index)`` (a table element) or ``("m", offset)`` (a member
-    of the work pointer's pointee). Values and arguments are expressions: ``("c", n)``,
-    ``("sym", name)``, ``("g", symbol, width, signed)``, ``("gi", symbol, index, width, signed)``,
-    ``("m", offset, width, signed)``, ``("add", expr, n)``, ``("bin", op, expr, expr or n)``,
-    ``("arg", reg)`` and ``("ret", call id)`` (the value a call returned). A call carries its
-    arguments in order, the fifth on from the stack. ``flags`` holds ``branch``, ``jalr``,
-    ``spad``, ``load`` and ``other`` (an instruction the lifter cannot express).
-    """
+    """What one function does, in program order."""
 
     events: list[tuple] = field(default_factory=list)
     flags: set[str] = field(default_factory=set)
@@ -489,11 +479,7 @@ class Tree:
     def members(
         self, type_name: str, files: list[str]
     ) -> dict[int, list[tuple[str, int]]]:
-        """Return ``{offset: [(member path, width)]}`` of a work struct.
-
-        Nested structs and unions are flattened into dotted paths (``header.step``,
-        ``pos.x.fixed``), so a union offers every width it holds, first declared first.
-        """
+        """Return ``{offset: [(member path, width)]}`` of a work struct."""
         found = self.flatten(type_name, files)
         out: dict[int, list[tuple[str, int]]] = {}
         for where, path, width in found[2] if found else []:
@@ -868,10 +854,7 @@ WIDTH = {"u8": 1, "u16": 2, "u32": 4}
 
 
 def rets_used(events: list[tuple], inline: bool = False) -> set[int]:
-    """Return the ids of the calls whose result an event reads.
-
-    With ``inline`` the ones read once, by the next event, are left out: they need no local.
-    """
+    """Return the ids of the calls whose result an event reads."""
     counts: collections.Counter = collections.Counter()
     first: dict[int, int] = {}
     for i, event in enumerate(events):
@@ -1110,11 +1093,7 @@ def apply(items: list[Item], tree: Tree, shared: str | None) -> list[str]:
 
 
 def run(rows: list[Func], tree: Tree, dry: bool) -> None:
-    """Write each body, run match.sh, keep the exact ones and restore the rest.
-
-    Twins with one body at one address share ``<func>.h``. Twins at several addresses need one
-    game name first, so they are reported as ``TWIN`` and left alone.
-    """
+    """Write each body, run match.sh, keep the exact ones and restore the rest."""
     names, items = Names(), []
     for f in rows:
         try:

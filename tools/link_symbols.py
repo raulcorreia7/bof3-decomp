@@ -121,12 +121,7 @@ def _job(job: tuple[str, str, str]) -> tuple[str, str, str]:
 
 
 def build_all(root: Path, build: Path, targets: list[str]) -> int:
-    """Write ``<image>.syms.ld`` into ``build`` for each target whose inputs changed.
-
-    One process handles every image, so a build starts no Python per image; a stamp per
-    image skips what did not change. An image that cannot be resolved gets a script of
-    ``ASSERT(0, ...)`` lines, so its own link fails with the message and no other image waits.
-    """
+    """Write ``<image>.syms.ld`` into ``build`` for each target whose inputs changed."""
     from concurrent.futures import ProcessPoolExecutor
     from multiprocessing import get_context
 

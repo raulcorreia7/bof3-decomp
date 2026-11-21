@@ -66,11 +66,7 @@ class _CompanionOverlay:
 
 @dataclass(frozen=True)
 class CopyOverlay:
-    """A disc entry whose payload is this target's payload, byte for byte.
-
-    A copy reuses the declaring target's sources and link; it owns no source
-    directory of its own. See docs/toolchain.md#copy-targets.
-    """
+    """A disc entry whose payload is this target's payload, byte for byte."""
 
     target: TargetId
     disc_id: str
@@ -504,13 +500,7 @@ def _validate_section_placements(root: Path, manifest: TargetManifest) -> None:
 
 
 def load_target_manifest(path: Path, *, root: Path, target: str) -> TargetManifest:
-    """Parse one target's optional ``target.toml`` and validate it against the tree.
-
-    The target id comes from the caller (its ``config/<target>/`` folder); the
-    layout and the derived fields come from that folder's ``splat.yaml``. An
-    absent manifest means the defaults: no placements, copies, companions or
-    PsyQ evidence.
-    """
+    """Parse one target's optional ``target.toml`` and validate it against the tree."""
     target_id = normalize_target_id(target)
     manifest = _parse_target_manifest(Path(path), target_id)
     _validate_section_placements(Path(root), manifest)

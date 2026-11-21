@@ -243,11 +243,7 @@ def check_sorted_items(
 
 
 def check_prototypes(path: str, lines: list[str], dupes=frozenset()) -> list[Finding]:
-    """Prototype runs are in address order.
-
-    A prototype with an unnamed parameter, or one declared in another header, is left where it is:
-    moving it would make check-names or check-tree read a pre-existing debt as a new line.
-    """
+    """Prototype runs are in address order."""
     regions = item_regions(lines, lambda i: bool(PROTOTYPE.match(lines[i])))
 
     def anchor(span: tuple[int, int]) -> bool:
@@ -263,11 +259,7 @@ def check_prototypes(path: str, lines: list[str], dupes=frozenset()) -> list[Fin
 
 
 def check_externs(path: str, lines: list[str], dupes=frozenset()) -> list[Finding]:
-    """Extern declarations are in address order within a section.
-
-    An `extern` function prototype is anchored like a plain prototype: moving one that check-names
-    or check-tree would read as a new declaration fails those checks on pre-existing debt.
-    """
+    """Extern declarations are in address order within a section."""
     regions = item_regions(lines, lambda i: bool(EXTERN.match(lines[i])))
 
     def anchor(span: tuple[int, int]) -> bool:

@@ -123,11 +123,7 @@ def bodies(text: str) -> Iterator[tuple[str, str]]:
 
 
 def macro_body(body: str) -> bool:
-    """Return whether ``body`` is local declarations and one statement-macro call.
-
-    That is the shared form docs/conventions.md prescribes, so its copies are neither pasted nor
-    twins.
-    """
+    """Return whether ``body`` is local declarations and one statement-macro call."""
     steps = [s.strip() for s in body.split(";") if s.strip()]
     rest = [s for s in steps if not DECL.fullmatch(s)]
     return len(rest) == 1 and bool(MACRO_CALL.fullmatch(rest[0]))
@@ -137,11 +133,7 @@ ADDR_TOKEN = re.compile(r"\b(?:D|func|jtbl)_[0-9A-F]{8}\b")
 
 
 def shape(name: str, body: str) -> str:
-    """Return the body with its own name, address names and spacing removed, the key twins share.
-
-    Two copies that differ only in the ``D_<ADDR>`` or ``func_<ADDR>`` they name (each image's own
-    table) share a key, the way ripwire's type-2 clones do.
-    """
+    """Return the body with its own name, address names and spacing removed, the key twins share."""
     body = ADDR_TOKEN.sub("$A", body.replace(name, "@"))
     return re.sub(r"\s+", " ", body).strip()
 
@@ -221,7 +213,8 @@ def merge_base(base: str, to: str) -> str:
 
 def touched(base: str, to: str) -> set[str]:
     """Return the paths that differ between ``base`` and ``to``; a renamed file lists both paths,
-    so its metrics move with it."""
+    so its metrics move with it.
+    """
     return set(
         git(
             "diff",
@@ -256,7 +249,8 @@ def worse(
     gate: Iterable[str] = TOTALS,
 ) -> list[str]:
     """Return one line per touched file whose gated metric rose, for each metric whose total
-    over the touched files rose; a body moved between touched files nets to zero."""
+    over the touched files rose; a body moved between touched files nets to zero.
+    """
     paths = sorted(set(changed) & (old.keys() | new.keys()))
     lines = []
     for metric in gate:
@@ -275,7 +269,8 @@ def functions(
     files: dict[str, str], paths: Iterable[str]
 ) -> dict[tuple[str, str], tuple[int, str, bool]]:
     """Return ``(path, name) -> (placeholder tokens, body shape, is func_<ADDR>)`` for the ``MATCH``
-    functions in ``paths``; a name repeated in one file keeps the worst copy."""
+    functions in ``paths``; a name repeated in one file keeps the worst copy.
+    """
     out: dict[tuple[str, str], tuple[int, str, bool]] = {}
     for path in sorted(set(paths) & files.keys()):
         for name, body in bodies(mask(files[path])):
@@ -291,7 +286,8 @@ def functions(
 def unnamed(body: str) -> int:
     """Return the unnamed accesses in ``body``: placeholder tokens, raw width casts and constant
     indexes into a byte-pointer local, so a byte view turned into an ``unk_<OFF>`` member keeps
-    the count."""
+    the count.
+    """
     views = sum(
         len(re.findall(rf"\b{name}\s*\[\s*(?:0x[0-9A-Fa-f]+|[0-9]+)\s*\]", body))
         for name in set(BYTE_LOCAL.findall(body))
@@ -305,14 +301,7 @@ def ratchet(
     changed: Iterable[str],
     gate: Iterable[str] = PER_FUNCTION,
 ) -> list[str]:
-    """Return one line per function that got worse in the touched files.
-
-    Functions are keyed by file and name. ``names`` compares a function present in both
-    revisions in the same file, or a real-named body that moved to another file. An address
-    name is file-scoped, since overlays reuse addresses: a moved ``func_<ADDR>`` is a new body.
-    ``addr`` flags a ``func_<ADDR>`` function whose body was matched under a real name before.
-    A new ``MATCH`` body is exempt.
-    """
+    """Return one line per function that got worse in the touched files."""
     changed = list(changed)
     before, after = functions(old, changed), functions(new, changed)
     named = {sh for _, sh, addr in before.values() if not addr}

@@ -1,9 +1,4 @@
-"""Facts in one function's assembly that point at its C form.
-
-Each detector returns Markdown lines for ``seed.py``'s ``hints.md``; every line names the
-``docs/matching.md#tactics-for-gcc-272`` row it maps to. A detector reads the parsed instructions
-only, so the same code runs on a split ``.s`` file and on a matched function's words.
-"""
+"""Facts in one function's assembly that point at its C form."""
 
 from __future__ import annotations
 

@@ -1,10 +1,4 @@
-"""Declarations, definitions and calls of the C tree, and the problems they show.
-
-``Tree`` reads every tracked C file once: each prototype and definition with its types, each
-call, and which file includes which. ``problems`` compares them and returns one row per
-disagreement: a prototype that differs from its definition, a call that no declaration
-covers, a cast that a missing prototype forced.
-"""
+"""Declarations, definitions and calls of the C tree, and the problems they show."""
 
 from __future__ import annotations
 
@@ -323,13 +317,7 @@ def problems(tree: Tree) -> list[Problem]:
 
 
 def signature_rows(tree: Tree) -> list[Problem]:
-    """Return the prototypes that are neither their owner's signature nor its non-prototype form.
-
-    A prototype has an owner when a definition of the name is in a unit that sees it, in the same
-    image, or in the engine. It is fine when it has the owner's return type and parameter types,
-    or has no parameter list (``T name();``) with the owner's return type, or carries a
-    ``sig-kept:`` comment on the line above or on its own line.
-    """
+    """Return the prototypes that are neither their owner's signature nor its non-prototype form."""
     views = tree.views()
     rows: list[Problem] = []
     for name, found in tree.decls.items():

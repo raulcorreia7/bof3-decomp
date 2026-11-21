@@ -1,8 +1,4 @@
-"""Binary-map facts for one target: its reviewed units, spans and sources.
-
-Joins `bof3.resolve.layout`'s parsed `splat.yaml` units with the target's
-authored sources and payload view.
-"""
+"""Binary-map facts for one target: its reviewed units, spans and sources."""
 
 from __future__ import annotations
 

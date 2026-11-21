@@ -16,8 +16,7 @@ from bof3.resolve.ids import source_folder
 
 _RAW_FUNCTION = re.compile(r"func_[0-9A-F]{8}\Z")
 _MIXED_CASE_RAW_FUNCTION = re.compile(r"func_[0-9A-Fa-f]{8}\Z")
-#: The row that holds a PS-X EXE's file header. The text, and so ``load_address``,
-#: starts ``psx_exe.HEADER_SIZE`` bytes after it.
+#: The row that holds a PS-X EXE's file header; the text starts ``psx_exe.HEADER_SIZE`` bytes after it.
 PSX_EXE_HEADER_NAME = "psx_exe_header"
 
 
@@ -35,19 +34,12 @@ class LayoutBoundary:
         return self.kind in {"c", "asm"}
 
 
-#: libyaml's C loader parses the same documents several times faster than the
-#: pure-Python SafeLoader; PyYAML exports it only when it was built with libyaml.
-#: Never the unsafe ``Loader``.
+#: libyaml's C loader when PyYAML has it: several times faster than SafeLoader.
 YAML_LOADER = getattr(yaml, "CSafeLoader", yaml.SafeLoader)
 
 
 def read_splat(splat_path: Path) -> tuple[str, Any]:
-    """Return one Splat layout's text and parsed document.
-
-    Process-local memo keyed on the file's stamp: every reader of the same
-    layout parses it once, and an edited layout changes the stamp and is
-    reparsed. The returned document is shared, so callers only read it.
-    """
+    """Return one Splat layout's text and parsed document."""
     return file_memo(
         "splat-read", [splat_path], None, lambda: _parse_splat_text(splat_path)
     )
@@ -71,11 +63,7 @@ def target_of(splat_path: Path) -> str | None:
 
 
 def derived_options(target: str) -> dict[str, Any]:
-    """Return the Splat options every target shares, filled in from its id.
-
-    ``emi/<kind>/<name>`` targets name their images ``<kind>_<name>``; an ``exe`` target
-    uses its last path part. The sources are in ``src/`` + ``source_folder(target)``.
-    """
+    """Return the Splat options every target shares, filled in from its id."""
     parts = target.split("/")
     rest = parts[-1:] if parts[0] == "exe" else parts[1:]
     return {
@@ -105,13 +93,7 @@ EXECUTABLE = "exe/slus_004_22"
 
 
 def complete(document: dict[str, Any], target: str) -> None:
-    """Fill a reduced ``splat.yaml`` document with what its id derives.
-
-    The file holds ``sha1``, ``segments``, the options that differ for this image
-    and, when it differs from the default, ``symbol_owners``: the targets whose
-    symbol rows Splat reads. The default is the executable and the target itself
-    (the target alone for an ``exe`` target).
-    """
+    """Fill a reduced ``splat.yaml`` document with what its id derives."""
     options = derived_options(target)
     options.update(document.get("options") or {})
     document["options"] = options
@@ -132,11 +114,7 @@ class SplatFacts:
 
 
 def splat_facts(splat_path: Path) -> SplatFacts:
-    """Return the load address and the payload and source paths of one layout.
-
-    The first segment that carries a ``vram`` starts the image; Splat's
-    ``target_path`` and ``src_path`` options name the payload and source folder.
-    """
+    """Return the load address and the payload and source paths of one layout."""
     _text, document = read_splat(splat_path)
     if not isinstance(document, dict):
         raise ValueError(f"invalid Splat document in {splat_path}")
@@ -247,7 +225,6 @@ def _parse_splat_layout(splat_path: Path, load_address: int) -> ReviewedLayout:
             raise ValueError(f"unsupported Splat segment in {splat_path}: {segment!r}")
         subsegments = segment.get("subsegments")
         if subsegments is None:
-            # A segment without subsegments is one row of the segment's own type.
             segment_start = _integer(segment.get("start", 0), field="segment start")
             subsegments = [
                 [segment_start, segment.get("type"), segment.get("name", "")]

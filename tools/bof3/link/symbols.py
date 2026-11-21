@@ -1,25 +1,4 @@
-"""Symbols: the one tracked table, the files generated from it, and link-time resolution.
-
-``config/symbols/<image>.toml`` is the only hand-kept symbol file. One table per target holds that
-target's rows, one row per name:
-
-    ["exe/slus_004_22"]
-    SND_PlaySE = { addr = 0x8015DF18, type = "func", source = "..." }
-
-A row takes ``addr`` (required), ``type`` and ``size`` (Splat attributes), ``source`` (what the symbol is or does),
-and ``alias`` (a name only the link reads; Splat never sees it, and it may sit inside another
-row). :func:`generate` writes two files per target
-into ``build/symbols``: ``<target>.splat`` for Splat and ``<target>.link`` for the link.
-
-An image's objects name two kinds of external symbols. An address name (``D_80140000``,
-``func_8014AA04``, ``jtbl_8014AA04``, or the same behind an upper-case prefix such as
-``SCENA16_D_80010004``) spells its address. A readable name (``g_Zenny``) takes its address from a
-row of a map the image can see. :func:`resolve` answers for one image from its objects; a name
-that cannot be resolved for certain is an error that names the row and the fix.
-
-:func:`target_rows` is the one function that reads a target's rows from the table;
-:func:`read_map` is the one parser of an image's ``-Map`` file.
-"""
+"""Symbols: the one tracked table, the files generated from it, and link-time resolution."""
 
 from __future__ import annotations
 
@@ -90,11 +69,7 @@ def splat_owners(root: Path, target: str) -> list[str]:
 
 
 def link_owners(root: Path, target: str) -> list[str]:
-    """Return the targets whose rows an image may link against.
-
-    The image itself, the resident images ``config/link.toml`` shows to it, then the maps Splat
-    reads for it (twin overlays share names).
-    """
+    """Return the targets whose rows an image may link against."""
     import tomllib
 
     link = tomllib.loads((root / CONFIG / "link.toml").read_text(encoding="utf-8"))
@@ -137,19 +112,12 @@ def load(root: Path) -> dict[str, list[Entry]]:
 
 
 def target_rows(root: Path, target: str) -> list[Entry]:
-    """Return one target's own rows, sorted by address.
-
-    Every reader of the table goes through this function, so the file format is a detail of
-    this module.
-    """
+    """Return one target's own rows, sorted by address."""
     return sorted(load(root).get(target, ()), key=lambda e: e.addr)
 
 
 def generate(root: Path) -> None:
-    """Write ``build/symbols/<target>.splat`` and ``.link`` for every target.
-
-    A file is written only when its bytes change, so editing one row touches one target's files.
-    """
+    """Write ``build/symbols/<target>.splat`` and ``.link`` for every target."""
     from bof3.link.inputs import write_if_changed
 
     tables = load(root)
@@ -169,12 +137,7 @@ def generate(root: Path) -> None:
 
 
 def imported_map(root: Path, target: str) -> str:
-    """Return the Splat map text a target imports from its other owners.
-
-    A twin overlay may name a function that the target also defines elsewhere; Splat 0.50 keeps
-    both addresses and the link then finds two. The target's own address wins, so an owner's
-    row is dropped when the target holds a row of the same name at another address.
-    """
+    """Return the Splat map text a target imports from its other owners."""
     tables = load(root)
     own = {e.name: e.addr for e in tables.get(target, ())}
     lines = []
@@ -244,12 +207,7 @@ _PLACED = (".text", ".data", ".rodata", ".sdata", ".bss", ".sbss", ".rdata")
 
 
 def read_map(path: Path) -> list[MapSymbol]:
-    """Return the symbols a linker map lists under placed input sections.
-
-    A symbol runs to the next symbol of its input section, or to the section's end.
-    A fixed-address assignment (``D_80123456 = 0x80123456``, from the symbol tables) is a symbol
-    of unknown size; other linker-script assignments and discarded sections are skipped.
-    """
+    """Return the symbols a linker map lists under placed input sections."""
     symbols: list[MapSymbol] = []
     section = ""
     pending = ""
@@ -310,12 +268,7 @@ def resolve(
     *,
     partial: bool = False,
 ) -> dict[str, int]:
-    """Return ``name -> address`` for every undefined name an image's objects need.
-
-    ``script_names`` are names the link scripts already define; ``assigned`` are the
-    ``name = address`` rows among them, which must agree with the maps. A ``partial`` link
-    leaves a name with no address to the caller.
-    """
+    """Return ``name -> address`` for every undefined name an image's objects need."""
     table = read_maps(root, maps)
     result: dict[str, int] = {}
     problems: list[str] = []
@@ -388,11 +341,7 @@ def render(symbols: dict[str, int], checks: Sequence[str] = ()) -> str:
 def own_checks(
     root: Path, target: str, maps: list[str], defined: frozenset[str]
 ) -> list[str]:
-    """Return one ``ASSERT`` per row of the image's own table that its objects define.
-
-    The linker proves the row's address against the address the image gave the symbol; a
-    wrong row fails the link, and :func:`explain` then names both addresses.
-    """
+    """Return one ``ASSERT`` per row of the image's own table that its objects define."""
     table = read_maps(root, maps)
     return [
         f'ASSERT({name} == 0x{addr:08X}, "{SPLIT} [{target}] {name}: the row says '
@@ -404,10 +353,7 @@ def own_checks(
 
 
 def explain(root: Path, target: str, map_path: Path) -> list[str]:
-    """Return a message per row of ``target``'s table that the linked image places elsewhere.
-
-    ``map_path`` is the ``-Map`` file ld writes even when an ``ASSERT`` fails the link.
-    """
+    """Return a message per row of ``target``'s table that the linked image places elsewhere."""
     own = read_maps(root, [link_map(target)])
     try:
         mapped = read_map(map_path)

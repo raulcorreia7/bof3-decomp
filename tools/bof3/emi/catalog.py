@@ -106,10 +106,7 @@ def _relation_entry(
 
 
 def verify_companion_relations(root: Path) -> list[dict[str, Any]]:
-    """Return declared companion calls whose disc identity and call bytes agree.
-
-    It establishes that the bytes match, not the ABI or ownership.
-    """
+    """Return declared companion calls whose disc identity and call bytes agree."""
     relations: list[dict[str, Any]] = []
     for manifest in load_target_manifests(root).values():
         for companion in manifest.companions:
@@ -163,12 +160,7 @@ def verify_companion_relations(root: Path) -> list[dict[str, Any]]:
 
 
 def verify_copy_relations(root: Path) -> list[dict[str, Any]]:
-    """Return declared copies whose disc payload agrees with their source.
-
-    The disc entry a copy names must carry the source's payload bytes at the
-    pinned base and size; a matching identity alone never makes a program a
-    copy. Copy targets and their config are specified in docs/toolchain.md#copy-targets.
-    """
+    """Return declared copies whose disc payload agrees with their source."""
     relations: list[dict[str, Any]] = []
     for manifest in load_target_manifests(root).values():
         if not manifest.copies:

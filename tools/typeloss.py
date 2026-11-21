@@ -145,11 +145,7 @@ def strength(params: str) -> int:
 
 
 def scan(rev: str) -> tuple[dict[str, set[tuple[str, str]]], dict[str, set[str]]]:
-    """Return the prototypes and externs of ``rev`` by name.
-
-    An address name is unique only per image, so ``func_<ADDR>`` and ``D_<ADDR>`` are keyed by its folder: the same
-    address in another image is another function, and a rename must not read as a lost type.
-    """
+    """Return the prototypes and externs of ``rev`` by name."""
     protos: dict[str, set[tuple[str, str]]] = collections.defaultdict(set)
     externs: dict[str, set[str]] = collections.defaultdict(set)
     for path, text in sources(rev):

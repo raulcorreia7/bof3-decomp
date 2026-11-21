@@ -9,4 +9,3 @@ ASM = "asm"  # authored assembly
 SPLIT_ASM = "build/asm"  # splat output
 CONFIG = "config"
 TOOLCHAINS = "toolchains"
-INPUTS = "inputs"

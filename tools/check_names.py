@@ -38,7 +38,6 @@ from bof3.adapters.git import changed_files, git, ls_files, ok
 from bof3.diff import added_lines as added_diff_lines
 from bof3.diff import renames
 from bof3.resolve.layout import target_of
-from bof3.symbols import TABLE
 
 BASELINE = Path("config/address_names.txt")
 ROOTS = ("include", "src")
@@ -155,7 +154,7 @@ def layout_images(ref: str | None) -> list[str]:
 
 def added_symbol_images(ref: str) -> set[str]:
     """The images whose table a change gives a new row."""
-    diff = git("diff", "-U0", f"{ref}...HEAD", "--", TABLE, SPLIT, check=False)
+    diff = git("diff", "-U0", f"{ref}...HEAD", "--", SPLIT, check=False)
     added = {
         match.group(1)
         for row in diff.splitlines()

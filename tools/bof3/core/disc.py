@@ -1,10 +1,4 @@
-"""The disc manifest, ``config/disc.toml``: the version, the tracks and every file of the disc.
-
-The manifest holds paths, sizes and hashes, never game data. Setup and ``tools/disc.py`` read
-it to refuse a wrong dump and to name each extracted file that differs. The retail SHA-1 of
-every code image lives in the build config (``config/<target>/splat.yaml``), the file the
-build's ``check`` reads, and is not repeated here.
-"""
+"""The disc manifest, ``config/disc.toml``: the version, the tracks and every file of the disc."""
 
 from __future__ import annotations
 

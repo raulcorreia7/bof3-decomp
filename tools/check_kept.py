@@ -123,9 +123,6 @@ class Entities:
     record_sizes: dict[str, int] = field(default_factory=dict)
 
 
-# --- Text -----------------------------------------------------------------------------------
-
-
 def defines_in(text: str) -> dict[str, str]:
     """Every `#define` in one file, guards excepted: name -> normalized value."""
     found = {}
@@ -146,9 +143,6 @@ def defines_in(text: str) -> dict[str, str]:
             continue  # an include guard
         found[name] = value
     return found
-
-
-# --- Clang ----------------------------------------------------------------------------------
 
 
 def walk_decls(tree: dict, wanted: set[str]):
@@ -309,9 +303,6 @@ def run_clang(tree: Path, unit: str, wanted: set[str]) -> Entities:
     return found
 
 
-# --- Revisions ------------------------------------------------------------------------------
-
-
 def extract(rev: str, into: Path) -> None:
     archive = subprocess.run(
         ["git", "archive", rev, "src", "include"],
@@ -424,9 +415,6 @@ def addresses(
                 if not row.get("alias"):
                     by_addr[(target, row["addr"])] = name
     return by_name, by_addr
-
-
-# --- Comparison -----------------------------------------------------------------------------
 
 
 @dataclass

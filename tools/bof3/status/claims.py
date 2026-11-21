@@ -1,11 +1,4 @@
-"""What an authored file claims about the unit it is named for.
-
-A `MATCH`/`NON_MATCHING` marker is a claim, not proof; one naming another
-address is `foreign` and the claim is withheld. A marker line names its
-function by ``func_ADDR`` or by the name it defines (``MATCH void
-UI_UpdateStartButton(void)``), which ``names`` (the image's symbol rows,
-name -> address) resolves; without the row a renamed function is unnamed.
-"""
+"""What an authored file claims about the unit it is named for."""
 
 from __future__ import annotations
 
@@ -19,8 +12,7 @@ from types import MappingProxyType
 MATCH = "MATCH"
 NON_MATCHING = "NON_MATCHING"
 
-# Horizontal-only leading whitespace: `\s*` can match on a blank line above the
-# marker, so `read`'s line slice would begin there and miss the named address.
+# Horizontal-only leading whitespace, so a blank line above the marker is not part of it.
 MARKER_RE = re.compile(rf"^[ \t]*({MATCH}|{NON_MATCHING})\b", re.MULTILINE)
 FUNC_RE = re.compile(r"\bfunc_([0-9A-Fa-f]{8})\b")
 #: The name a marker line defines: the first identifier followed by `(`.
@@ -71,11 +63,7 @@ def _closure(path: Path) -> list[Path]:
 
 
 def source_text(path: Path) -> str:
-    """Return the file's text followed by the text of every header it includes, once each.
-
-    A shared-body member holds only ``#include "family/Name.h"``; the marker and the
-    definition live in that header.
-    """
+    """Return the file's text followed by the text of every header it includes, once each."""
     return "\n".join(_own(current)[0] for current in _closure(path))
 
 

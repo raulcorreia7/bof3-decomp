@@ -1,10 +1,4 @@
-"""Align a template's instructions with a target's and turn the differences into C edits.
-
-A template is a matched function whose code looks like an assembly function's. When only a
-relocation symbol (``%hi/%lo(D_x)``, ``jal func_x``) or one immediate differs, the template's C
-works for the target after a rename or a new literal. This module reads both sides symbolically:
-the template from its object's relocations, the target from its assembly listing.
-"""
+"""Align a template's instructions with a target's and turn the differences into C edits."""
 
 from __future__ import annotations
 
@@ -36,11 +30,7 @@ _NUMBER = re.compile(r"\b(0[xX][0-9a-fA-F]+|\d+)([uUlL]*)\b")
 
 @dataclass(frozen=True, slots=True)
 class Insn:
-    """One instruction: its word and the symbol it relocates against.
-
-    ``sym`` is None without a relocation and ``""`` for a local one (a section, a label);
-    ``addend`` is the offset added to the symbol of a low-half or gp-relative use.
-    """
+    """One instruction: its word and the symbol it relocates against."""
 
     word: int
     sym: str | None = None
@@ -89,10 +79,7 @@ def diff_count(template: tuple[int, ...], target: tuple[int, ...]) -> int:
 
 
 def template_insns(text: str, name: str, count: int) -> list[Insn]:
-    """Pick ``count`` instructions of function ``name`` from ``objdump -dr`` of an object.
-
-    objdump prints each relocation under its instruction; its offset is from the section start.
-    """
+    """Pick ``count`` instructions of function ``name`` from ``objdump -dr`` of an object."""
     words: list[tuple[int, int]] = []
     relocs: dict[int, tuple[str, str]] = {}
     start = None
@@ -147,11 +134,7 @@ def target_insns(words: tuple[int, ...], listing: list[str]) -> list[Insn]:
 def align(
     template: list[Insn], target: list[Insn], linked: tuple[int, ...]
 ) -> Plan | None:
-    """Compare two equal-length instruction lists; None when the lengths differ.
-
-    ``linked`` holds the template's words as linked in its image: where they equal the
-    target's, the symbols name one address and the instruction needs no edit beyond the name.
-    """
+    """Compare two equal-length instruction lists; None when the lengths differ."""
     if len(template) != len(target) or len(linked) != len(target):
         return None
     plan = Plan()
@@ -206,10 +189,7 @@ def _signed(value: int) -> int:
 
 
 def substitute_literals(body: str, pairs: list[tuple[int, int]]) -> str | None:
-    """Replace each template literal by the target's; None unless each is found exactly once.
-
-    A literal may be the signed immediate, the unsigned one, or the negated one (a subtraction).
-    """
+    """Replace each template literal by the target's; None unless each is found exactly once."""
     spans: list[tuple[int, int, str]] = []
     targets: dict[int, set[int]] = {}
     for want, got in pairs:
@@ -318,10 +298,7 @@ def object_insns(root: Path, obj: str, name: str, count: int) -> list[Insn] | No
 def macro_edits(
     body: str, pairs: list[tuple[int, int]], texts: list[str]
 ) -> tuple[list[tuple[int, int]], list[str]]:
-    """Explain literals that the template writes as a numeric macro of its own image.
-
-    Return the pairs still to substitute and one ``#define`` per macro, valued as the target.
-    """
+    """Explain literals that the template writes as a numeric macro of its own image."""
     defines = numeric_defines(texts)
     words = re.findall(r"\b[A-Za-z_]\w*\b", mask(body))
     left, out = list(pairs), []
