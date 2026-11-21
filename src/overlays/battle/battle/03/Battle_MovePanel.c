@@ -16,9 +16,9 @@ MATCH void Battle_MovePanel(void) {
     index        = panel->unk_0A;
     b0           = g_Game.members[index].facing;
     b1           = g_Game.members[index].chr.character_id;
-    panel->pos.x = g_Game.members[index].unk_2E.signed_value + *(s8*)&g_BattlePanelOffsets[b1 * 8 + b0 * 2] + (b0 == 0 || b0 == 3 ? D_801EAEA4[0] : D_801EAEA4[2]);
+    panel->pos.x = g_Game.members[index].screen_x.signed_value + *(s8*)&g_BattlePanelOffsets[b1 * 8 + b0 * 2] + (b0 == 0 || b0 == 3 ? D_801EAEA4[0] : D_801EAEA4[2]);
 
-    *(s16*)&g_MenuCurrentPanel->pos.y = g_Game.members[g_MenuCurrentPanel->unk_0A].unk_30.value + g_BattlePanelOffsets[b1 * 8 + b0 * 2 + 1] + 12;
+    *(s16*)&g_MenuCurrentPanel->pos.y = g_Game.members[g_MenuCurrentPanel->unk_0A].screen_y.value + g_BattlePanelOffsets[b1 * 8 + b0 * 2 + 1] + 12;
 
     if (g_Battle.selection_latch != 0) {
         flags = g_BattleActorTurn->command.target;

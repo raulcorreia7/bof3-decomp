@@ -254,8 +254,8 @@ MATCH void func_801EFD5C(void) {
     g_ScratchPad.cells.halves[0] = 40;
     g_ScratchPad.cells.halves[1] = g_Task->unk_09;
     g_ScratchPad.cells.halves[2] = g_Task->timer * 8;
-    g_ScratchPad.cells.halves[6] = g_Task->unk_2E.value;
-    g_ScratchPad.cells.halves[7] = g_Task->unk_30.value;
+    g_ScratchPad.cells.halves[6] = g_Task->screen_x.value;
+    g_ScratchPad.cells.halves[7] = g_Task->screen_y.value;
     tpage                        = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
@@ -391,8 +391,8 @@ MATCH void func_801F06AC(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     g_ScratchPad.cells.halves[2] = 0;
     g_ScratchPad.cells.halves[0] = 24;
-    g_ScratchPad.cells.halves[6] = g_Task->unk_2E.value;
-    g_ScratchPad.cells.halves[7] = g_Task->unk_30.value;
+    g_ScratchPad.cells.halves[6] = g_Task->screen_x.value;
+    g_ScratchPad.cells.halves[7] = g_Task->screen_y.value;
     g_ScratchPad.cells.halves[3] = g_Task->unk_09 * D_801F1298[g_Task->param.unk_0B].r;
     g_ScratchPad.cells.halves[4] = g_Task->unk_09;
     g_ScratchPad.cells.halves[5] = g_Task->unk_09 * D_801F1298[g_Task->param.unk_0B].b;

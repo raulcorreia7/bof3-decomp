@@ -22,8 +22,8 @@ extern s16 D_1F800008[];
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);                                                                                \
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);                                                                                     \
     GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(DR_MODE));                                                                                   \
-    g_ScratchPad.cells.halves[4] = g_Task->unk_2E.value;                                                                                        \
-    g_ScratchPad.cells.halves[5] = g_Task->unk_30.value;                                                                                        \
+    g_ScratchPad.cells.halves[4] = g_Task->screen_x.value;                                                                                      \
+    g_ScratchPad.cells.halves[5] = g_Task->screen_y.value;                                                                                      \
     for (i = 0; i < (COUNT) + 1; i++) {                                                                                                         \
         g_ScratchPad.cells.halves[4] += FIXED_MUL(rsin(g_Task->unk_14), 12);                                                                    \
         g_ScratchPad.cells.halves[5] += FIXED_MUL(rcos(g_Task->unk_14), 12);                                                                    \

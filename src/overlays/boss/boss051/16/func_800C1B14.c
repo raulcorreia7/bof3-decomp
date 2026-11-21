@@ -18,8 +18,8 @@ MATCH void func_800C1B14(void) {
 
     work         = g_Task;
     work->unk_29 = 2;
-    work->unk_2E.value += 0x30;
-    work->unk_30.value -= 0x10;
+    work->screen_x.value += 0x30;
+    work->screen_y.value -= 0x10;
 
     Actor_SelectScript(2);
     TASK_SET(saved);

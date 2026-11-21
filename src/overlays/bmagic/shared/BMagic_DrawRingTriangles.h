@@ -6,8 +6,8 @@ MATCH void BMagic_DrawRingTriangles(void) {
     s16      x;
     s16      y;
 
-    x                            = g_Task->unk_2E.value;
-    y                            = g_Task->unk_30.value;
+    x                            = g_Task->screen_x.value;
+    y                            = g_Task->screen_y.value;
     g_ScratchPad.cells.halves[0] = 8;
     g_ScratchPad.cells.halves[3] = g_Task->unk_09 * 12;
     g_ScratchPad.cells.halves[4] = (s8)g_Task->unk_5D * g_Task->unk_09;

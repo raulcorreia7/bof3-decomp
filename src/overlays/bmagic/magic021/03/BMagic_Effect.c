@@ -211,8 +211,8 @@ MATCH void func_801EF7FC(void) {
     green_edge                   = g_Task->timer * 8;
     blue                         = g_Task->timer * 4;
     g_ScratchPad.cells.halves[0] = g_Task->unk_09 * 2;
-    g_ScratchPad.cells.halves[4] = g_Task->unk_2E.value;
-    g_ScratchPad.cells.halves[5] = g_Task->unk_30.value;
+    g_ScratchPad.cells.halves[4] = g_Task->screen_x.value;
+    g_ScratchPad.cells.halves[5] = g_Task->screen_y.value;
     i                            = 0;
     do {
         prim = (POLY_G3*)g_GfxPrimCursor;
@@ -251,8 +251,8 @@ MATCH void func_801EFA48(void) {
     blue                         = g_Task->timer * 4;
     g_ScratchPad.cells.halves[0] = g_Task->unk_09 * 2;
     g_ScratchPad.cells.halves[1] = g_Task->unk_09 * 3;
-    g_ScratchPad.cells.halves[4] = g_Task->unk_2E.value;
-    g_ScratchPad.cells.halves[5] = g_Task->unk_30.value;
+    g_ScratchPad.cells.halves[4] = g_Task->screen_x.value;
+    g_ScratchPad.cells.halves[5] = g_Task->screen_y.value;
     do {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);

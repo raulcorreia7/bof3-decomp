@@ -13,8 +13,8 @@ MATCH void func_800AD5C8(void) {
         base  = (u16*)(&D_80148628);
         do {
             if (g_Battle.genes[i] == count) {
-                work->unk_2E.value = base[0] + (i * 0x18 + 0x41);
-                work->unk_30.value = base[1] + 0x12;
+                work->screen_x.value = base[0] + (i * 0x18 + 0x41);
+                work->screen_y.value = base[1] + 0x12;
                 return;
             }
             i++;

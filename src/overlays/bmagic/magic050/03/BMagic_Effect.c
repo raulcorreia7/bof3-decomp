@@ -225,7 +225,7 @@ MATCH void func_801EF898(void) {
         prim = (TILE_1*)g_GfxPrimCursor;
         SetTile1(prim);
         SetSemiTrans(prim, 1);
-        setXY0(prim, g_Task->unk_2E.value + FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.words[0]), g_Task->unk_30.value + FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.words[0]));
+        setXY0(prim, g_Task->screen_x.value + FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.words[0]), g_Task->screen_y.value + FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.words[0]));
         if (g_Battle.action_id == 50) {
             setRGB0(prim, g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[3]);
         } else {

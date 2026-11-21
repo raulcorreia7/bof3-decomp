@@ -237,15 +237,15 @@ MATCH void func_801F0260(void) {
         Battle_ProjectRange();
         work = g_Task;
         if (work->param.unk_0B == 1) {
-            x = work->unk_2E.value - MAGIC092_STEP_X;
-            y = work->unk_30.value;
+            x = work->screen_x.value - MAGIC092_STEP_X;
+            y = work->screen_y.value;
         } else {
-            x = work->unk_2E.value + MAGIC092_STEP_X;
-            y = work->unk_30.value;
+            x = work->screen_x.value + MAGIC092_STEP_X;
+            y = work->screen_y.value;
         }
         y -= MAGIC092_RISE_Y;
-        work->unk_2E.value = x;
-        work->unk_30.value = y;
+        work->screen_x.value = x;
+        work->screen_y.value = y;
         func_801F04BC();
     }
 }
@@ -275,14 +275,14 @@ MATCH void func_801F04BC(void) {
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
         prim = GFX_BeginPolyG3(1);
-        setXY0(prim, g_Task->unk_2E.value, g_Task->unk_30.value);
+        setXY0(prim, g_Task->screen_x.value, g_Task->screen_y.value);
         angle    = i << 9;
-        prim->x1 = g_Task->unk_2E.value + FIXED_MUL(rsin(angle), g_ScratchPad.cells.halves[0]);
-        prim->y1 = g_Task->unk_30.value + FIXED_MUL(rcos(angle), g_ScratchPad.cells.halves[0]);
+        prim->x1 = g_Task->screen_x.value + FIXED_MUL(rsin(angle), g_ScratchPad.cells.halves[0]);
+        prim->y1 = g_Task->screen_y.value + FIXED_MUL(rcos(angle), g_ScratchPad.cells.halves[0]);
         i++;
         angle    = i << 9;
-        prim->x2 = g_Task->unk_2E.value + FIXED_MUL(rsin(angle), g_ScratchPad.cells.halves[0]);
-        prim->y2 = g_Task->unk_30.value + FIXED_MUL(rcos(angle), g_ScratchPad.cells.halves[0]);
+        prim->x2 = g_Task->screen_x.value + FIXED_MUL(rsin(angle), g_ScratchPad.cells.halves[0]);
+        prim->y2 = g_Task->screen_y.value + FIXED_MUL(rcos(angle), g_ScratchPad.cells.halves[0]);
         setRGB0(prim, g_ScratchPad.cells.halves[7], g_ScratchPad.cells.halves[7] / 5, g_ScratchPad.cells.halves[7] / 5);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);

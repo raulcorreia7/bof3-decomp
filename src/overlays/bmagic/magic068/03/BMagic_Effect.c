@@ -339,8 +339,8 @@ MATCH void func_801EFA48(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
-    setXY4(prim, g_Task->unk_2E.value - 12, g_Task->unk_30.value - 12, g_Task->unk_2E.value + 12, g_Task->unk_30.value - 12, g_Task->unk_2E.value - 12, g_Task->unk_30.value + 12,
-           g_Task->unk_2E.value + 12, g_Task->unk_30.value + 12);
+    setXY4(prim, g_Task->screen_x.value - 12, g_Task->screen_y.value - 12, g_Task->screen_x.value + 12, g_Task->screen_y.value - 12, g_Task->screen_x.value - 12, g_Task->screen_y.value + 12,
+           g_Task->screen_x.value + 12, g_Task->screen_y.value + 12);
     setRGB0(prim, 128, 128, 128);
     prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     prim->clut  = GetClut(0, 480);

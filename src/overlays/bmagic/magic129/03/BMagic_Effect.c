@@ -89,16 +89,16 @@ MATCH void func_801EF058(void) {
         }
         g_Task->pos.x.fixed += TO_COORD(1);
         Battle_ProjectRange();
-        D_1F800008[2]       = g_Task->unk_2E.value;
-        D_1F800008[3]       = g_Task->unk_30.value;
+        D_1F800008[2]       = g_Task->screen_x.value;
+        D_1F800008[3]       = g_Task->screen_y.value;
         g_Task->pos.x.fixed = g_BattleEnemyBattlers[g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT].pos.x.fixed;
         g_Task->pos.y.fixed = g_BattleEnemyBattlers[g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT].pos.y.fixed;
         g_Task->pos.z.fixed = g_BattleEnemyBattlers[g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT].pos.z.fixed;
         g_Task->pos.x.fixed -= TO_COORD(1);
         g_Task->pos.z.fixed += TO_COORD(0x360);
         Battle_ProjectRange();
-        D_1F800008[0]  = g_Task->unk_2E.value;
-        D_1F800008[1]  = g_Task->unk_30.value;
+        D_1F800008[0]  = g_Task->screen_x.value;
+        D_1F800008[1]  = g_Task->screen_y.value;
         g_Task->unk_0C = (D_1F800008[2] - D_1F800008[0]) / 16;
         g_Task->unk_10 = (D_1F800008[3] - D_1F800008[1]) / 16;
         g_Task->unk_14 = ratan2(D_1F800008[2] - D_1F800008[0], D_1F800008[3] - D_1F800008[1]) & ANGLE_MASK;
@@ -171,15 +171,15 @@ MATCH void func_801EF54C(void) {
     red                          = power * 12;
     green                        = power * 6;
     blue                         = grey;
-    g_ScratchPad.cells.halves[4] = g_Task->unk_2E.value;
-    g_ScratchPad.cells.halves[5] = g_Task->unk_30.value;
+    g_ScratchPad.cells.halves[4] = g_Task->screen_x.value;
+    g_ScratchPad.cells.halves[5] = g_Task->screen_y.value;
     for (i = 1; i < g_Task->timer + 1; i++) {
         g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[1];
         g_ScratchPad.cells.halves[1] = FIXED_MUL(rsin(i << 7), 32) + 8;
         g_ScratchPad.cells.halves[6] = g_ScratchPad.cells.halves[4];
         g_ScratchPad.cells.halves[7] = g_ScratchPad.cells.halves[5];
-        g_ScratchPad.cells.halves[4] = g_Task->unk_2E.value + g_Task->unk_0C * i;
-        g_ScratchPad.cells.halves[5] = g_Task->unk_30.value + g_Task->unk_10 * i;
+        g_ScratchPad.cells.halves[4] = g_Task->screen_x.value + g_Task->unk_0C * i;
+        g_ScratchPad.cells.halves[5] = g_Task->screen_y.value + g_Task->unk_10 * i;
         angle                        = (g_Task->unk_14 + 0x400) & ANGLE_MASK;
         sway                         = FIXED_MUL(rsin(i << 7), 48);
         sway                         = FIXED_MUL(rsin(((i + g_Task->param.unk_0B) & 0x3F) << 6), sway);
@@ -369,8 +369,8 @@ MATCH void func_801F030C(void) {
     s32      b;
     u8       i;
 
-    g_ScratchPadVectors[0].vx = g_Task->unk_2E.value + ((rsin(0) * 32) >> 12);
-    g_ScratchPadVectors[0].vy = g_Task->unk_30.value + ((rcos(0) * 32) >> 12);
+    g_ScratchPadVectors[0].vx = g_Task->screen_x.value + ((rsin(0) * 32) >> 12);
+    g_ScratchPadVectors[0].vy = g_Task->screen_y.value + ((rcos(0) * 32) >> 12);
     r                         = (s8)g_Task->unk_5D * g_Task->timer;
     g                         = (s8)g_Task->unk_5E * g_Task->timer;
     b                         = (s8)g_Task->unk_5F * g_Task->timer;
@@ -381,8 +381,8 @@ MATCH void func_801F030C(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        setXY3(prim, g_Task->unk_2E.value, g_Task->unk_30.value, edge->vx, edge->vy, edge->vx = g_Task->unk_2E.value + ((rsin(i << 9) * radius) >> 12),
-               edge->vy = g_Task->unk_30.value + ((rcos(i << 9) * radius) >> 12));
+        setXY3(prim, g_Task->screen_x.value, g_Task->screen_y.value, edge->vx, edge->vy, edge->vx = g_Task->screen_x.value + ((rsin(i << 9) * radius) >> 12),
+               edge->vy = g_Task->screen_y.value + ((rcos(i << 9) * radius) >> 12));
         setRGB0(prim, r, g, b);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);

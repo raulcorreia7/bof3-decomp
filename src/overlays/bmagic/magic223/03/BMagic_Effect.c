@@ -150,8 +150,8 @@ MATCH void func_801EF47C(void) {
         *angle_cell = phase;
         phase += ANGLE_90;
         *angle_cell = phase + D_801EFC50[g_Task->facing];
-        g_Task->unk_2E.value += (rsin(*angle_cell) * 72) >> 0xC;
-        g_Task->unk_30.value += (rcos(*angle_cell) * 72) >> 0xC;
+        g_Task->screen_x.value += (rsin(*angle_cell) * 72) >> 0xC;
+        g_Task->screen_y.value += (rcos(*angle_cell) * 72) >> 0xC;
         g_Task->unk_14 = D_801EFC50[g_Task->facing];
         if (LOHU(g_Battle.action_id) == ABILITY_TEMPEST) {
             g_Task->param.unk_0B = 0;
@@ -168,9 +168,9 @@ MATCH void func_801EF628(void) {
     s32 offset;
     u8  timer;
 
-    g_Task->unk_2E.value += (rsin(g_Task->unk_14) * 8) >> 0xC;
+    g_Task->screen_x.value += (rsin(g_Task->unk_14) * 8) >> 0xC;
     offset = (rcos(g_Task->unk_14) * 8) >> 0xC;
-    g_Task->unk_30.value += offset;
+    g_Task->screen_y.value += offset;
     g_Task->unk_09 += 1;
     timer         = g_Task->timer + 4;
     g_Task->timer = timer;
@@ -182,9 +182,9 @@ MATCH void func_801EF628(void) {
 MATCH void func_801EF6E0(void) {
     s32 cosine;
 
-    g_Task->unk_2E.value += (rsin(g_Task->unk_14) * 0x18) >> 0xC;
+    g_Task->screen_x.value += (rsin(g_Task->unk_14) * 0x18) >> 0xC;
     cosine = rcos(g_Task->unk_14);
-    g_Task->unk_30.value += FIXED_MUL(cosine, 0x18);
+    g_Task->screen_y.value += FIXED_MUL(cosine, 0x18);
     g_Task->unk_09 += 1;
     if (g_Task->unk_09 == 0x14) {
         g_BattleEffectBattler->param.unk_0B -= 1;
@@ -204,17 +204,17 @@ MATCH void func_801EF7A8(void) {
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
     g_ScratchPad.cells.words[1] = g_Task->unk_14 + 0xF78;
-    setXY0(prim, g_Task->unk_2E.value + FIXED_MUL(rsin(g_ScratchPad.cells.words[1]), g_ScratchPad.cells.words[0]),
-           g_Task->unk_30.value + FIXED_MUL(rcos(g_ScratchPad.cells.words[1]), g_ScratchPad.cells.words[0]));
+    setXY0(prim, g_Task->screen_x.value + FIXED_MUL(rsin(g_ScratchPad.cells.words[1]), g_ScratchPad.cells.words[0]),
+           g_Task->screen_y.value + FIXED_MUL(rcos(g_ScratchPad.cells.words[1]), g_ScratchPad.cells.words[0]));
     g_ScratchPad.cells.words[1] = g_Task->unk_14 + 0x888;
-    prim->x1                    = g_Task->unk_2E.value + FIXED_MUL(rsin(g_ScratchPad.cells.words[1]), g_ScratchPad.cells.words[0]);
-    prim->y1                    = g_Task->unk_30.value + FIXED_MUL(rcos(g_ScratchPad.cells.words[1]), g_ScratchPad.cells.words[0]);
+    prim->x1                    = g_Task->screen_x.value + FIXED_MUL(rsin(g_ScratchPad.cells.words[1]), g_ScratchPad.cells.words[0]);
+    prim->y1                    = g_Task->screen_y.value + FIXED_MUL(rcos(g_ScratchPad.cells.words[1]), g_ScratchPad.cells.words[0]);
     g_ScratchPad.cells.words[1] = g_Task->unk_14 + 0x88;
-    prim->x2                    = g_Task->unk_2E.value + FIXED_MUL(rsin(g_ScratchPad.cells.words[1]), g_ScratchPad.cells.words[0]);
-    prim->y2                    = g_Task->unk_30.value + FIXED_MUL(rcos(g_ScratchPad.cells.words[1]), g_ScratchPad.cells.words[0]);
+    prim->x2                    = g_Task->screen_x.value + FIXED_MUL(rsin(g_ScratchPad.cells.words[1]), g_ScratchPad.cells.words[0]);
+    prim->y2                    = g_Task->screen_y.value + FIXED_MUL(rcos(g_ScratchPad.cells.words[1]), g_ScratchPad.cells.words[0]);
     g_ScratchPad.cells.words[1] = g_Task->unk_14 + 0x773;
-    prim->x3                    = g_Task->unk_2E.value + FIXED_MUL(rsin(g_ScratchPad.cells.words[1]), g_ScratchPad.cells.words[0]);
-    prim->y3                    = g_Task->unk_30.value + FIXED_MUL(rcos(g_ScratchPad.cells.words[1]), g_ScratchPad.cells.words[0]);
+    prim->x3                    = g_Task->screen_x.value + FIXED_MUL(rsin(g_ScratchPad.cells.words[1]), g_ScratchPad.cells.words[0]);
+    prim->y3                    = g_Task->screen_y.value + FIXED_MUL(rcos(g_ScratchPad.cells.words[1]), g_ScratchPad.cells.words[0]);
     prim->tpage                 = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 832, 256);
     prim->clut                  = GetClut(g_Task->param.unk_0B, 506);
     setUV4(prim, 8, (g_Task->unk_09 & 3) * 32 + 8, 0x98, (g_Task->unk_09 & 3) * 32 + 8, 8, (g_Task->unk_09 & 3) * 32 + 0x28, 0x98, (g_Task->unk_09 & 3) * 32 + 0x28);

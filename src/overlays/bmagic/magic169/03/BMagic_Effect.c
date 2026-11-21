@@ -99,8 +99,8 @@ MATCH void func_801EF070(void) {
     shade  = &D_1F800006;
     prim   = (POLY_FT4*)g_GfxPrimCursor;
     *shade = g_Task->unk_09 * 8;
-    x      = g_Task->unk_2E.value;
-    y      = g_Task->unk_30.value;
+    x      = g_Task->screen_x.value;
+    y      = g_Task->screen_y.value;
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
     setXY4(prim, x - 0x38, y - 0x60, x + 0x38, y - 0x60, x - 0x38, y, x + 0x38, y);

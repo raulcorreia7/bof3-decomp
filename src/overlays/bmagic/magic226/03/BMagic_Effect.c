@@ -289,10 +289,10 @@ MATCH void func_801F01B8(void) {
     prim                         = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
-    setXY4(prim, g_Task->unk_2E.value + FIXED_MUL(rcos(512), g_ScratchPad.cells.halves[0]), g_Task->unk_30.value + FIXED_MUL(rsin(512), g_ScratchPad.cells.halves[0]),
-           g_Task->unk_2E.value + FIXED_MUL(rcos(1536), g_ScratchPad.cells.halves[0]), g_Task->unk_30.value + FIXED_MUL(rsin(1536), g_ScratchPad.cells.halves[0]),
-           g_Task->unk_2E.value + FIXED_MUL(rcos(3584), g_ScratchPad.cells.halves[0]), g_Task->unk_30.value + FIXED_MUL(rsin(3584), g_ScratchPad.cells.halves[0]),
-           g_Task->unk_2E.value + FIXED_MUL(rcos(2560), g_ScratchPad.cells.halves[0]), g_Task->unk_30.value + FIXED_MUL(rsin(2560), g_ScratchPad.cells.halves[0]));
+    setXY4(prim, g_Task->screen_x.value + FIXED_MUL(rcos(512), g_ScratchPad.cells.halves[0]), g_Task->screen_y.value + FIXED_MUL(rsin(512), g_ScratchPad.cells.halves[0]),
+           g_Task->screen_x.value + FIXED_MUL(rcos(1536), g_ScratchPad.cells.halves[0]), g_Task->screen_y.value + FIXED_MUL(rsin(1536), g_ScratchPad.cells.halves[0]),
+           g_Task->screen_x.value + FIXED_MUL(rcos(3584), g_ScratchPad.cells.halves[0]), g_Task->screen_y.value + FIXED_MUL(rsin(3584), g_ScratchPad.cells.halves[0]),
+           g_Task->screen_x.value + FIXED_MUL(rcos(2560), g_ScratchPad.cells.halves[0]), g_Task->screen_y.value + FIXED_MUL(rsin(2560), g_ScratchPad.cells.halves[0]));
     prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 832, 256);
     prim->clut  = GetClut(0, 482);
     setUVWH(prim, 0, 128, 32, 32);

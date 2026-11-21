@@ -12,8 +12,8 @@ MATCH void Effect_LaunchSparkle(void) {
         EFFECT_SPARKLE_TASK->pos.x  = battler->pos.x;
         EFFECT_SPARKLE_TASK->pos.y  = battler->pos.y;
         EFFECT_SPARKLE_TASK->pos.z  = battler->pos.z;
-        EFFECT_SPARKLE_TASK->unk_20 = battler->unk_2E.value;
-        EFFECT_SPARKLE_TASK->unk_22 = battler->unk_30.value;
+        EFFECT_SPARKLE_TASK->unk_20 = battler->screen_x.value;
+        EFFECT_SPARKLE_TASK->unk_22 = battler->screen_y.value;
         if (EFFECT_SPARKLE_OFFSET().vx < 0) {
             EFFECT_SPARKLE_TASK->unk_20 += EFFECT_SPARKLE_OFFSET().vx - RANDOM_MASK(7);
         } else {

@@ -9,8 +9,8 @@ MATCH void func_801F4098(void) {
 
     TASK_SET(&g_Game.members[2]);
     index     = g_PartyFieldOrder[2];
-    y         = g_Game.members[2].unk_30.signed_value;
-    x         = g_Game.members[2].unk_2E.signed_value;
+    y         = g_Game.members[2].screen_y.signed_value;
+    x         = g_Game.members[2].screen_x.signed_value;
     selection = D_801F4644[index];
     result    = Actor_SpawnHelper(3, 0, selection, x, y, g_Game.members[2].pos.z.fixed);
     if ((u8)result != GAME_NONE) {

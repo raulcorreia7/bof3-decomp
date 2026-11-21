@@ -25,17 +25,17 @@ MATCH void func_801EEC80(void) {
     SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     g_Task->unk_09 = 2;
     work           = g_Task;
-    rect.x         = work->unk_2E.value - work->unk_09;
-    rect.y         = work->unk_30.value - work->unk_09 + g_GfxBufferIndex * 240;
+    rect.x         = work->screen_x.value - work->unk_09;
+    rect.y         = work->screen_y.value - work->unk_09 + g_GfxBufferIndex * 240;
     rect.h = rect.w = work->unk_09 * 2;
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, 0x340, 0x100);
     GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(DR_MOVE));
     if (g_Battle.target_selector & 0x40) {
-        g_Task->unk_2E.value = D_801EF9D8[g_Battle.scroll_dir].x;
-        g_Task->unk_30.value = D_801EF9D8[g_Battle.scroll_dir].y;
+        g_Task->screen_x.value = D_801EF9D8[g_Battle.scroll_dir].x;
+        g_Task->screen_y.value = D_801EF9D8[g_Battle.scroll_dir].y;
     } else {
-        g_Task->unk_2E.value = D_801EF9D8[g_Battle.scroll_dir ^ 2].x;
-        g_Task->unk_30.value = D_801EF9D8[g_Battle.scroll_dir ^ 2].y;
+        g_Task->screen_x.value = D_801EF9D8[g_Battle.scroll_dir ^ 2].x;
+        g_Task->screen_y.value = D_801EF9D8[g_Battle.scroll_dir ^ 2].y;
     }
     g_Task->unk_64 = 0;
     g_Task->header.mode += 1;

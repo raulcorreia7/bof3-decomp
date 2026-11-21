@@ -186,17 +186,17 @@ MATCH void func_801EF79C(u8 unused, s32 semi) {
     SetPolyFT4(prim);
     SetSemiTrans(prim, trans);
     g_ScratchPad.cells.words[2] = ((g_Task->timer + 13) & 0xF) << 8;
-    setXY0(prim, g_Task->unk_2E.value + FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]),
-           g_Task->unk_30.value + FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]));
+    setXY0(prim, g_Task->screen_x.value + FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]),
+           g_Task->screen_y.value + FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]));
     g_ScratchPad.cells.words[2] = ((g_Task->timer + 11) & 0xF) << 8;
-    prim->x1                    = g_Task->unk_2E.value + FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
-    prim->y1                    = g_Task->unk_30.value + FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
+    prim->x1                    = g_Task->screen_x.value + FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
+    prim->y1                    = g_Task->screen_y.value + FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
     g_ScratchPad.cells.words[2] = ((g_Task->timer + 3) & 0xF) << 8;
-    prim->x2                    = g_Task->unk_2E.value + FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
-    prim->y2                    = g_Task->unk_30.value + FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
+    prim->x2                    = g_Task->screen_x.value + FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
+    prim->y2                    = g_Task->screen_y.value + FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
     g_ScratchPad.cells.words[2] = ((g_Task->timer + 5) & 0xF) << 8;
-    prim->x3                    = g_Task->unk_2E.value + FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
-    prim->y3                    = g_Task->unk_30.value + FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
+    prim->x3                    = g_Task->screen_x.value + FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
+    prim->y3                    = g_Task->screen_y.value + FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
     prim->tpage                 = GetTPage(TPAGE_DEPTH_8BIT, trans, 832, 256);
     prim->clut                  = GetClut(0, 506);
     setUV4(prim, g_Task->param.unk_0B << 5, 0, (g_Task->param.unk_0B << 5) + 31, 0, g_Task->param.unk_0B << 5, 64, (g_Task->param.unk_0B << 5) + 31, 64);

@@ -205,9 +205,9 @@ typedef struct BattleEffect {
     u8                  unk_28;
     u8                  unk_29; /* +0x29 func_801DE1D4 stores an action step here */
     u8                  pad_2A[4];
-    s16                 unk_2E;
-    s16                 unk_30;
-    u16                 unk_32;
+    s16                 screen_x;
+    s16                 screen_y;
+    u16                 depth;
     WorldPos            pos; /* +0x34 x, y and z; bmagic stores the z span halfword (+0x3E) */
     u8                  pad_40[8];
     u8                  unk_48;
@@ -226,9 +226,9 @@ typedef struct BattleEffect {
 
 ASSERT_OFFSET(BattleEffect, unk_07, 0x07);
 ASSERT_OFFSET(BattleEffect, unk_08, 0x08);
-ASSERT_OFFSET(BattleEffect, unk_2E, 0x2E);
-ASSERT_OFFSET(BattleEffect, unk_30, 0x30);
-ASSERT_OFFSET(BattleEffect, unk_32, 0x32);
+ASSERT_OFFSET(BattleEffect, screen_x, 0x2E);
+ASSERT_OFFSET(BattleEffect, screen_y, 0x30);
+ASSERT_OFFSET(BattleEffect, depth, 0x32);
 ASSERT_SIZE(BattleEffect, 0x78);
 
 /* Battle effect work records (stride 0x78). */
@@ -373,10 +373,10 @@ typedef struct EnemyBattler {
     u8                  pad_2A[0x1];
     u8                  unk_2B; /* +0x2B cleared when the slot is armed */
     u8                  pad_2C[0x2];
-    s16                 unk_2E; /* +0x2E cleared when the slot is armed */
-    s16                 unk_30; /* +0x30 cleared when the slot is armed */
-    s16                 unk_32; /* +0x32 cleared when the slot is armed */
-    WorldPos            pos;    /* +0x34 the enemy's x, y and z; the slot setup stores the vertical span in z */
+    s16                 screen_x; /* +0x2E cleared when the slot is armed */
+    s16                 screen_y; /* +0x30 cleared when the slot is armed */
+    s16                 depth;    /* +0x32 cleared when the slot is armed */
+    WorldPos            pos;      /* +0x34 the enemy's x, y and z; the slot setup stores the vertical span in z */
     u8                  pad_40[0x8];
     u8                  unk_48; /* +0x48 cleared when the slot is armed */
     u8                  pad_49[0x2];
@@ -433,9 +433,9 @@ ASSERT_OFFSET(EnemyBattler, unk_20, 0x20);
 ASSERT_OFFSET(EnemyBattler, unk_24, 0x24);
 ASSERT_OFFSET(EnemyBattler, unk_29, 0x29);
 ASSERT_OFFSET(EnemyBattler, unk_2B, 0x2B);
-ASSERT_OFFSET(EnemyBattler, unk_2E, 0x2E);
-ASSERT_OFFSET(EnemyBattler, unk_30, 0x30);
-ASSERT_OFFSET(EnemyBattler, unk_32, 0x32);
+ASSERT_OFFSET(EnemyBattler, screen_x, 0x2E);
+ASSERT_OFFSET(EnemyBattler, screen_y, 0x30);
+ASSERT_OFFSET(EnemyBattler, depth, 0x32);
 ASSERT_OFFSET(EnemyBattler, pos, 0x34);
 ASSERT_OFFSET(EnemyBattler, unk_48, 0x48);
 ASSERT_OFFSET(EnemyBattler, unk_4B, 0x4B);
@@ -559,13 +559,13 @@ typedef struct PartyMember {
     u8                  unk_26;
     u8                  unk_27;
     u8                  unk_28;
-    s8                  unk_29; /* +0x29 the byte both overlays read */
-    s8                  unk_2A; /* +0x2A the byte both overlays read */
-    s8                  unk_2B; /* +0x2B the byte both overlays read */
-    ScreenCoord         unk_2C; /* +0x2C the halfword both overlays read */
-    ScreenCoord         unk_2E; /* +0x2E the field overlays read it signed */
-    ScreenCoord         unk_30; /* +0x30 the field overlays read it signed */
-    u16                 depth;  /* +0x32 depth halfword; func_800AB910 calls it off_z */
+    s8                  unk_29;   /* +0x29 the byte both overlays read */
+    s8                  unk_2A;   /* +0x2A the byte both overlays read */
+    s8                  unk_2B;   /* +0x2B the byte both overlays read */
+    ScreenCoord         unk_2C;   /* +0x2C the halfword both overlays read */
+    ScreenCoord         screen_x; /* +0x2E the field overlays read it signed */
+    ScreenCoord         screen_y; /* +0x30 the field overlays read it signed */
+    u16                 depth;    /* +0x32 depth halfword; func_800AB910 calls it off_z */
     WorldPos            pos;
     SpriteScale         scale;  /* +0x40 16.16, 0x10000 at setup */
     u8                  unk_48; /* +0x48 battle/battle/03's cell; battle/battle/15 leaves it padded */
