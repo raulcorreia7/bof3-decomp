@@ -59,11 +59,11 @@ extern u16 D_80145A54[];
 /* The area overlay code base (AreaHandlerRecord.code_base), the engine's AREA_CODE_BASE. */
 #define AREA_CODE_BASE ((0x800Fu << 16) | 0x5000u)
 
-s32  func_801F66D0(s16 cell_x, s16 cell_y);
-void func_801F656C(void);
-
 void func_801F4608(s32 input);
 void func_801F5BB0(s32 actor);
+
+void func_801F656C(void);
+s32  func_801F66D0(s16 cell_x, s16 cell_y);
 
 extern const BGMTrack g_BGMTracks[BGM_TRACK_COUNT];
 
