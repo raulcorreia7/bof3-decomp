@@ -8,13 +8,7 @@ segments:
     section_order: [.data, .text, .rodata, .bss]
     subsegments:
       - [0x0, .data, g_AreaModuleId]
-      - [0x4, c, Area_EnterWyndiaTeleporter]
-      - [0x30, c, Actor_RunAreaStep]
-      - [0x64, c, Area_TestStepTrigger]
-      - [0x118, c, func_801F2D18]
-      - [0x15C, c, Actor_SnapToGround]
-      - [0x1A8, c, Area_DrawLinkedLightPillar]
-      - [0x1F0, c, Area_DrawLightPillar]
+      - [0x4, c, area036_13]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
     type: code

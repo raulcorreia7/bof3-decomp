@@ -8,10 +8,7 @@ segments:
     section_order: [.data, .text, .rodata, .bss]
     subsegments:
       - [0x0, .data, g_AreaModuleId]
-      - [0x4, c, func_801F2C04]
-      - [0x44, c, func_801F2C44]
-      - [0x84, c, func_801F2C84]
-      - [0xB0, c, func_801F2CB0]
+      - [0x4, c, area005_13]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
     type: code
