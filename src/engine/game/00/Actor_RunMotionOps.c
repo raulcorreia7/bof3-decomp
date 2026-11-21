@@ -28,6 +28,7 @@ typedef enum ActorScriptMotion {
 /* Entity spawn counter cell in scratchpad (signed 16-bit slot index). */
 /* The entry cell at 0x1F800002 is stored through D_1F800002 and read back signed. */
 /* func_801A9DE8 */
+/* Runs one motion opcode. */
 MATCH u8 Actor_RunMotionOps(GameCursorState* state, const u8* table, u8 value) {
     u8 byte;
     u8 result;

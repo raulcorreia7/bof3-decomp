@@ -18,6 +18,7 @@ typedef enum ActorScriptSound {
 } ActorScriptSound;
 
 /* func_801A96E4 */
+/* Runs one sound opcode. */
 MATCH void Actor_RunSoundOps(ScriptState* state, u8* base) {
     switch (*(base + state->cursor)) {
         case ACTOR_SCRIPT_SOUND_PLAY_SE:

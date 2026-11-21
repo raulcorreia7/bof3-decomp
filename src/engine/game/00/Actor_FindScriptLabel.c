@@ -1,6 +1,7 @@
 #include "game_00.h"
 
 /* func_801AC8F0 */
+/* Seeks the label record the cursor refers to and returns its offset. */
 MATCH u16 Actor_FindScriptLabel(ScriptState* state, u8 wanted_id, u8* base) {
     s32 offset = 0;
     u16 cursor;
@@ -30,7 +31,7 @@ loop:
             offset += 4;
         }
     } else {
-        offset += s_ScriptOpcodeOffsets[opcode & BYTE_MASK];
+        offset += s_ActorScriptLengths[opcode & BYTE_MASK];
     }
     if (base[(u16)offset] != 0x0A || base[(u16)offset + 1] != wanted_id) {
         /* not the wanted id pair yet: keep seeking */
