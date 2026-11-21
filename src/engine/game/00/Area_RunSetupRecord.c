@@ -16,14 +16,14 @@ typedef enum AreaSetupType {
     AREA_SETUP_TYPE_PARTY_ENTITY           = 0xB, /* party work row placed by the area cell table */
     AREA_SETUP_TYPE_SCROLL_ROUTE           = 0xC, /* start a scroll route */
     AREA_SETUP_TYPE_ENTITY_CALLBACK        = 0xD, /* set the current entity callback */
-    AREA_SETUP_TYPE_SCENE_OBJECT           = 0xE, /* Actor_Create: a staged scene object */
+    AREA_SETUP_TYPE_ACTOR           = 0xE, /* Actor_Create: a staged scene object */
 } AreaSetupType;
 
 /* func_801A4BF8 */
 /* Runs one setup record of type 0x0 to 0xE; returns the next record. */
 MATCH u8* Area_RunSetupRecord(u8* script) {
     switch (script[0] >> 4) {
-        case AREA_SETUP_TYPE_SCENE_OBJECT:
+        case AREA_SETUP_TYPE_ACTOR:
             Actor_Create(script);
             break;
         case AREA_SETUP_TYPE_ENTITY_CALLBACK:
