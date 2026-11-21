@@ -28,12 +28,11 @@ NON_MATCHING void func_801F46C8(s32 turn, s32 count, s32 angle, s32 height) {
     SetTransMatrix(&matrix);
 
     for (i = turn; i < count; i++) {
-        g_ScratchPadVectors[2].vx = 0;
-        g_ScratchPadVectors[3].vx = 0;
-        g_ScratchPadVectors[2].vy = D_801F5764[i + 20].y * height;
-        g_ScratchPadVectors[3].vy = D_801F5764[i + 21].y * height;
-        g_ScratchPadVectors[2].vz = -D_801F5764[i + 20].x * 48;
-        g_ScratchPadVectors[3].vz = -D_801F5764[i + 21].x * 48;
+        g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx = 0;
+        g_ScratchPadVectors[2].vy                             = D_801F5764[i + 20].y * height;
+        g_ScratchPadVectors[3].vy                             = D_801F5764[i + 21].y * height;
+        g_ScratchPadVectors[2].vz                             = -D_801F5764[i + 20].x * 48;
+        g_ScratchPadVectors[3].vz                             = -D_801F5764[i + 21].x * 48;
 
         j    = 0;
         side = -1;
