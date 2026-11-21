@@ -11,7 +11,7 @@ extern Callback D_800C1AAC[];
 extern Callback D_800C1AF4[];
 
 /* The mode handler sets the image installs into the battle hooks; the
- * addresses are in [emi/boss/boss017/16] of config/symbols.toml. */
+ * addresses are in config/symbols/emi+boss+boss017+16.toml. */
 
 /* The enemy-work mode dispatch each installer publishes at unk_E4. */
 void func_800C1964(s32 mode);

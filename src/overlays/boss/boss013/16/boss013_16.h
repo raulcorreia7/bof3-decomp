@@ -31,7 +31,7 @@ extern u8          D_80181B11;
 extern PartyMember D_801EB860;
 
 /* The mode handler sets the image installs into the battle hooks; the
- * addresses are in [emi/boss/boss013/16] of config/symbols.toml. */
+ * addresses are in config/symbols/emi+boss+boss013+16.toml. */
 
 u8   func_800C2138(u32 mode);
 void func_800C2348(void);

@@ -6,7 +6,7 @@
 /*
  * Include PsyQ headers for type definitions only (SVECTOR, RECT, etc.).
  * PsyQ function declarations in these headers are tolerated; the
- * config/symbols.toml rows provide the original-binary addresses at link time.
+ * config/symbols/<image>.toml rows provide the original-binary addresses at link time.
  * This header includes no game header except types.h.
  */
 #include "types.h"

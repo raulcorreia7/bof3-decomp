@@ -9,7 +9,7 @@
 #define g_SceneFlags ((void*)g_SceneFlags)
 
 /* The mode handler sets the image installs into the battle hooks; the
- * addresses are in [emi/boss/boss018/16] of config/symbols.toml. */
+ * addresses are in config/symbols/emi+boss+boss018+16.toml. */
 
 extern u8       D_800C2C38[];
 extern u8       D_800C2C44[];
