@@ -2,7 +2,7 @@
 """Fail when a function that is lifted MATCH C at the merge base is not MATCH C at HEAD.
 
 A function counts as MATCH C in an image when a `MATCH` definition reaches the image's sources:
-a file in the image's folder under `src/` or a file such a file includes by path (function files,
+a file in the image's folder under `src/` (or in an engine module folder) or a file such a file includes by path (function files,
 shared headers). Its address comes from `config/symbols/<image>.toml` by name; a `func_<ADDR>`
 name carries it. The comparison is per image by address, so a rename, a fold into a shared
 header, a regrouping and a move all pass; an `INCLUDE_ASM` or a `NON_MATCHING` draft in its place fails.
@@ -33,6 +33,7 @@ from bof3.symbols import parse
 DEFINITION = re.compile(r"^MATCH\b[^;{}]*?\b(\w+)\s*\(", re.M)
 INCLUDE = re.compile(r'^\s*#\s*include\s+"([^"]+)"', re.M)
 ADDRESS_NAME = re.compile(r"func_([0-9A-Fa-f]{8})$")
+ENGINE_IMAGES = ("exe/slus_004_22", "emi/etc/game/00")
 REMOVED = re.compile(r"^Match-Removed:\s*(\S+@0x[0-9A-Fa-f]+)", re.M)
 
 
@@ -82,8 +83,11 @@ def lifted(root: Path, rev: str) -> dict[str, str]:
 
     owned: dict[str, set[str]] = {}
     for path in text:
-        image = next((i for h, i in homes.items() if path.startswith(h)), None)
-        if image:
+        images = [i for h, i in homes.items() if path.startswith(h)]
+        if not images and path.startswith("src/engine/"):
+            # a module folder holds files of both engine images
+            images = [i for i in ENGINE_IMAGES if i in tables]
+        for image in images:
             for file in reached(path):
                 owned.setdefault(file, set()).add(image)
     for path, body in text.items():
