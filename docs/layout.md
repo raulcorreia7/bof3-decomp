@@ -96,16 +96,21 @@ A `.c` file holds several functions only where one `c` row of its image's `splat
 
 An image's text run is one translation unit: `<archive>_<slot>.c` in the image folder (for example
 `src/overlays/area/area157/13/area157_13.c`) holds the image header include and one
-`#include "Name.c"` per function file, in link order. The function files stay as they are, so
-matching and review work per function, and the image's `splat.yaml` holds one `c` row for the run
-(`[0x4, c, area157_13]`). `tools/check_sources.py` counts a source that a row's unit includes as named.
+`#include "Name.c"` per function file, in link order. A shared body is included by its own path
+(`#include "shared/Area_RoundSpriteCoordinate.h"`), so the image keeps no thin wrapper: an edit to
+the body reaches the executable and every overlay that includes it. The function files stay as they
+are, so matching and review work per function, and the image's `splat.yaml` holds one `c` row for
+the run (`[0x4, c, area157_13]`). `tools/check_sources.py` counts a source that a row's unit includes
+as named.
 
 To convert an image:
 
 1. Check that the `c` rows of one segment are contiguous and every function is matched (no
    `NON_MATCHING`, no `INCLUDE_ASM`, no file-scope `static`).
-2. Write `<archive>_<slot>.c` from the rows in order, and replace those rows by the one row at the
-   first offset.
+2. Write `<archive>_<slot>.c` from the rows in order, include each shared body in place of its thin
+   wrapper and delete the wrapper, then replace those rows by the one row at the first offset. A
+   per-unit switch (`FAKE_DECL_TASK_VOLATILE`) applies to the whole unit, so every function of the
+   run must take it or none.
 3. Run `meson setup --reconfigure build/meson`, then `ninja -C build/meson check-<image>` and the
    full `pre-push`.
 
