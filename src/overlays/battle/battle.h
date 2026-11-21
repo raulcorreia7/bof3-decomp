@@ -99,6 +99,8 @@ extern volatile BattleSelectionType D_801CA71C[];
 extern s8                           g_BattlePanelOffsets[];
 extern BattleTurn*                  g_BattleActorTurn;
 extern BattleEventSlot              g_BattleEventSlots[8];
+/* A byte view of g_BattleEventSlots: func_801DE60C reaches every field by byte offset. */
+extern u8                           g_BattleEventSlotBytes[];
 extern u8                           D_801EB5A8;
 /* D_801EBF08 */
 extern u8*                          g_BattleMessageSlot;

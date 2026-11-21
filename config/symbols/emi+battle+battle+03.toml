@@ -236,6 +236,10 @@ g_BattleActorTurn = { addr = 0x801EB4D8, source = "the acting party battler's Ba
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleCurrentEnemy = { addr = 0x801EB4E8, size = 0x4, source = "Enemy whose battle script is running." }
 g_BattleEventSlots = { addr = 0x801EB4F0, type = "BattleEventSlot", size = 0x60, source = "Twelve-byte slots of the queued battle events; Battle_UpdateEvents runs the slot of each active event." }
+g_BattleEventSlotBytes = { addr = 0x801EB4F0, alias = true, source = "g_BattleEventSlots as bytes: func_801DE60C indexes it by byte offset." }
+D_801EB4FA = { addr = 0x801EB4FA, alias = true, source = "BattleEventSlot.text_style of the first slot of g_BattleEventSlots." }
+D_801EB4F4 = { addr = 0x801EB4F4, alias = true, source = "BattleEventSlot.payload of the first slot of g_BattleEventSlots." }
+D_801EB4F1 = { addr = 0x801EB4F1, alias = true, source = "BattleEventSlot.event_type of the first slot of g_BattleEventSlots." }
 g_BattleMessages = { addr = 0x801EB5B0, type = "BattleMessageSlot", size = 0x80, source = "The 16-row message ring: Battle_AddMessage fills the row at D_801EC328 and the message panels read the row at D_801EBF04." }
 g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_CHARACTERS_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
 g_BattleMessageSlot = { addr = 0x801EBF08, size = 0x4, source = "Pointer to the battler row that the battle messages name; Battle_NextCommandMember sets it to the acting party battler." }
