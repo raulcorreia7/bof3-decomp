@@ -492,35 +492,23 @@ def apply_rename(
             lock.unlink(missing_ok=True)
 
 
-def rename(args: argparse.Namespace) -> int:
-    """Rename one symbol across the scope, its layout rows and the symbol table."""
-    old, new = args.old, args.new
-    offset_rename = bool(OFFSET_NAME.fullmatch(old))
-    if not re.fullmatch(r"[A-Za-z_]\w*", new) and not (
-        offset_rename and OFFSET_NAME.fullmatch(new)
-    ):
-        raise SystemExit(f"symbol: {new} is not an identifier")
-    address = LAYOUT_ADDRESS.match(old)
-    text = SYMBOLS.read_text(encoding="utf-8")
-    images = args.image or ([] if address else tables_with(text, old))
-    if not images:
-        raise SystemExit(
-            f"symbol: give --image for {old}; no table has a row of that name"
-        )
+def _rename_scope(
+    args: argparse.Namespace, old: str, address: re.Match | None, images: list[str]
+) -> list[str]:
+    """The paths a rename may touch."""
     if args.local:
-        scope = local_scope(images)
-    elif args.scope:
-        scope = args.scope
-    elif address and any(i not in RESIDENT for i in images):
+        return local_scope(images)
+    if args.scope:
+        return args.scope
+    if address and any(i not in RESIDENT for i in images):
         raise SystemExit(
             f"symbol: {old} is unique only inside its image. Add --local, or --scope PATH..."
         )
-    else:
-        scope = list(DEFAULT_SCOPE)
-    rows = [row for image in images for row in layout_rows(image, old)]
-    files = grep_files(old, scope)
-    if not files and not rows:
-        raise SystemExit(f"symbol: {old} does not occur under {' '.join(scope)}")
+    return list(DEFAULT_SCOPE)
+
+
+def _require_rows_in_scope(rows: list[RowRef], scope: list[str], old: str) -> None:
+    """Reject a layout row or its source file that lies outside the scope."""
     outside = [row for row in rows if not under_scope(row.splat, scope)]
     if outside:
         raise SystemExit(
@@ -537,99 +525,136 @@ def rename(args: argparse.Namespace) -> int:
             f"symbol: {outside[0].source.relative_to(ROOT)} is named {old}; "
             "add its folder to --scope"
         )
-    # A unit that still holds the old name renames the code itself; one that does not is a
-    # repair of the row and file left behind when the symbol was named elsewhere.
-    units = [row for row in rows if row.kind in UNIT_KINDS]
-    live = any(old in unit_definitions(row.source) for row in units)
-    if not units:
-        for row in rows:
-            if row.source.is_file():
-                body = row.source.read_text(encoding="utf-8", errors="replace")
-                live = live or bool(re.search(r"\b" + re.escape(old) + r"\b", body))
-    repair = bool(rows) and not live
+
+
+def _old_name_is_live(old: str, rows: list[RowRef], units: list[RowRef]) -> bool:
+    """Whether the code still holds the old name, as a unit definition or in a source file."""
+    if any(old in unit_definitions(row.source) for row in units):
+        return True
+    if units:
+        return False
+    pattern = re.compile(r"\b" + re.escape(old) + r"\b")
+    return any(
+        pattern.search(row.source.read_text(encoding="utf-8", errors="replace"))
+        for row in rows
+        if row.source.is_file()
+    )
+
+
+def _reject_clash(
+    text: str,
+    old: str,
+    new: str,
+    images: list[str],
+    scope: list[str],
+    address: re.Match | None,
+) -> None:
+    """Stop when the new name is already in use, unless it is the same address's own row."""
     if symbols.ADDRESS_NAME.fullmatch(new):
         use = address_clash(new, images)
         clash = [use] if use else []
     else:
         clash = grep_files(new, scope)
-    if clash and not repair:
-        document = tomllib.loads(text)
-        allowed = bool(address) and any(
-            isinstance(document.get(image, {}).get(new), dict)
-            and int(document[image][new].get("addr", -1)) == int(address["addr"], 16)
-            for image in images
+    if not clash:
+        return
+    document = tomllib.loads(text)
+    allowed = bool(address) and any(
+        isinstance(document.get(image, {}).get(new), dict)
+        and int(document[image][new].get("addr", -1)) == int(address["addr"], 16)
+        for image in images
+    )
+    if not allowed:
+        raise SystemExit(
+            f"symbol: {new} already occurs in {clash[0]}; pick another name"
         )
-        if not allowed:
-            raise SystemExit(
-                f"symbol: {new} already occurs in {clash[0]}; pick another name"
-            )
-    if args.dry_run:
-        planned = set(files)
-        planned.update(row.splat.relative_to(ROOT).as_posix() for row in rows)
-        print("\n".join(sorted(planned)))
-        return 0
-    if address:
-        addr = int(address["addr"], 16)
-        kind = args.type or ("func" if old.startswith("func_") else None)
-        row = (
-            symtab.format_row(
-                new,
-                addr,
-                type=kind,
-                size=int(args.size, 0) if args.size else None,
-                source=args.source,
-            )
-            if args.source
-            else None
+
+
+def _name_address(
+    text: str,
+    old: str,
+    new: str,
+    images: list[str],
+    address: re.Match,
+    args: argparse.Namespace,
+) -> str:
+    """The symbol table with the address name replaced by ``new`` in every image."""
+    addr = int(address["addr"], 16)
+    kind = args.type or ("func" if old.startswith("func_") else None)
+    row = (
+        symtab.format_row(
+            new,
+            addr,
+            type=kind,
+            size=int(args.size, 0) if args.size else None,
+            source=args.source,
         )
-        document = tomllib.loads(text)
-        for image in images:
-            named = document.get(image, {}).get(new)
-            if isinstance(named, dict):
-                found = int(named.get("addr", -1))
-                if found != addr:
-                    raise SystemExit(
-                        f"symbol: [{image}] {new} is 0x{found:08X}, not 0x{addr:08X}"
-                    )
-                text = symtab.remove_row(text, image, old) or text
-                continue
-            if row is None:
+        if args.source
+        else None
+    )
+    document = tomllib.loads(text)
+    for image in images:
+        named = document.get(image, {}).get(new)
+        if isinstance(named, dict):
+            found = int(named.get("addr", -1))
+            if found != addr:
                 raise SystemExit(
-                    f"symbol: naming {old} needs --source, a description of the symbol"
+                    f"symbol: [{image}] {new} is 0x{found:08X}, not 0x{addr:08X}"
                 )
-            # A row already keyed with the address name would be rewritten by the source
-            # substitution below and repeat the new key.
             text = symtab.remove_row(text, image, old) or text
-            text = symtab.add_row(text, image, new, row, addr)
-    elif not repair:
-        for image in images:
-            text = symtab.rename_row(text, image, old, new) or text
-    if repair:
-        table = tomllib.loads(text)
-        if units:
-            for row in units:
-                if new in unit_definitions(row.source):
-                    continue
-                if offset_rename and new == f"{row.start:X}":
-                    continue
-                raise SystemExit(
-                    f"symbol: {row.source.relative_to(ROOT)} does not define {new}; "
-                    "rename the function first"
-                )
-        else:
-            for row in rows:
-                named = table.get(row.image, {}).get(new)
-                if not (
-                    isinstance(named, dict)
-                    and int(named.get("addr", -1)) == row.address
-                ):
-                    raise SystemExit(
-                        f"symbol: [{row.image}] has no {new} at 0x{row.address:08X}; "
-                        "add the row first"
-                    )
-    pattern = re.compile(r"\b" + re.escape(old) + r"\b")
+            continue
+        if row is None:
+            raise SystemExit(
+                f"symbol: naming {old} needs --source, a description of the symbol"
+            )
+        # A row already keyed with the address name would be rewritten by the source
+        # substitution below and repeat the new key.
+        text = symtab.remove_row(text, image, old) or text
+        text = symtab.add_row(text, image, new, row, addr)
+    return text
+
+
+def _verify_repair(
+    text: str,
+    rows: list[RowRef],
+    units: list[RowRef],
+    new: str,
+    offset_rename: bool,
+) -> None:
+    """Check that a repair finds the new name already defined in the code or table."""
+    if units:
+        for row in units:
+            if new in unit_definitions(row.source):
+                continue
+            if offset_rename and new == f"{row.start:X}":
+                continue
+            raise SystemExit(
+                f"symbol: {row.source.relative_to(ROOT)} does not define {new}; "
+                "rename the function first"
+            )
+        return
+    table = tomllib.loads(text)
+    for row in rows:
+        named = table.get(row.image, {}).get(new)
+        if not (isinstance(named, dict) and int(named.get("addr", -1)) == row.address):
+            raise SystemExit(
+                f"symbol: [{row.image}] has no {new} at 0x{row.address:08X}; "
+                "add the row first"
+            )
+
+
+def _rename_edits(
+    text: str,
+    files: list[str],
+    rows: list[RowRef],
+    old: str,
+    new: str,
+    address: re.Match | None,
+    repair: bool,
+) -> dict[Path, str]:
+    """The new contents of every file the rename rewrites."""
     edits = {SYMBOLS: text}
     if not repair:
+        pattern = re.compile(r"\b" + re.escape(old) + r"\b")
         for name in files:
             path = ROOT / name
             contents = edits.get(path)
@@ -644,6 +669,13 @@ def rename(args: argparse.Namespace) -> int:
         if contents is None:
             contents = row.splat.read_text(encoding="utf-8")
         edits[row.splat] = rename_layout_row(contents, row, new)
+    return edits
+
+
+def _rename_moves(
+    rows: list[RowRef], files: list[str], old: str, new: str, scope: list[str]
+) -> list[tuple[str, str]]:
+    """The ``old.c`` to ``new.c`` file moves the rename needs."""
     moves: list[tuple[str, str]] = []
 
     def add_move(path: Path) -> None:
@@ -662,11 +694,54 @@ def rename(args: argparse.Namespace) -> int:
         path = ROOT / name
         if path.name == f"{old}.c":
             add_move(path)
-    # The edits are the files the scope allows; --local and --scope limit the check with them.
-    check_scope = scope
+    return moves
+
+
+def rename(args: argparse.Namespace) -> int:
+    """Rename one symbol across the scope, its layout rows and the symbol table."""
+    old, new = args.old, args.new
+    offset_rename = bool(OFFSET_NAME.fullmatch(old))
+    if not re.fullmatch(r"[A-Za-z_]\w*", new) and not (
+        offset_rename and OFFSET_NAME.fullmatch(new)
+    ):
+        raise SystemExit(f"symbol: {new} is not an identifier")
+    address = LAYOUT_ADDRESS.match(old)
+    text = SYMBOLS.read_text(encoding="utf-8")
+    images = args.image or ([] if address else tables_with(text, old))
+    if not images:
+        raise SystemExit(
+            f"symbol: give --image for {old}; no table has a row of that name"
+        )
+    scope = _rename_scope(args, old, address, images)
+    rows = [row for image in images for row in layout_rows(image, old)]
+    files = grep_files(old, scope)
+    if not files and not rows:
+        raise SystemExit(f"symbol: {old} does not occur under {' '.join(scope)}")
+    _require_rows_in_scope(rows, scope, old)
+    # A unit that still holds the old name renames the code itself; one that does not is a
+    # repair of the row and file left behind when the symbol was named elsewhere.
+    units = [row for row in rows if row.kind in UNIT_KINDS]
+    repair = bool(rows) and not _old_name_is_live(old, rows, units)
     if not repair:
-        check_rename(old, edits, check_scope, bool(address))
-    apply_rename(edits, moves, old, check_scope, bool(address), verify=not repair)
+        _reject_clash(text, old, new, images, scope, address)
+    if args.dry_run:
+        planned = set(files)
+        planned.update(row.splat.relative_to(ROOT).as_posix() for row in rows)
+        print("\n".join(sorted(planned)))
+        return 0
+    if address:
+        text = _name_address(text, old, new, images, address, args)
+    elif not repair:
+        for image in images:
+            text = symtab.rename_row(text, image, old, new) or text
+    if repair:
+        _verify_repair(text, rows, units, new, offset_rename)
+    edits = _rename_edits(text, files, rows, old, new, address, repair)
+    moves = _rename_moves(rows, files, old, new, scope)
+    # The edits are the files the scope allows; --local and --scope limit the check with them.
+    if not repair:
+        check_rename(old, edits, scope, bool(address))
+    apply_rename(edits, moves, old, scope, bool(address), verify=not repair)
     print(f"renamed {old} -> {new} in {len(edits)} files")
     return 0
 
