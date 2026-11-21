@@ -1,6 +1,6 @@
 #!/bin/sh
 # Format the C, Python, TOML and Markdown sources, or with --check only verify them.
-# CLANG_FORMAT, RUFF and DPRINT name the tools when they are not on PATH.
+# CLANG_FORMAT, RUFF, PYRIGHT and DPRINT name the tools when they are not on PATH.
 set -eu
 cd "$(dirname "$0")/.."
 
@@ -47,8 +47,8 @@ find src include -name '*.[ch]' ! -path 'include/psyq/*' ! -name 'D_*.c' ! -name
 "$ruff" format -q ${check:+--check} tools
 if [ -n "$check" ]; then
 	"$ruff" check -q tools
-	pyright=.venv/bin/pyright
-	[ -x "$pyright" ] || pyright=$(command -v pyright || true)
+	pyright=${PYRIGHT:-.venv/bin/pyright}
+	[ -x "$pyright" ] || pyright=$(command -v "${PYRIGHT:-pyright}" || true)
 	[ -n "$pyright" ] || { echo "format: no pyright; Pyright comes with tools/setup.sh --dev" >&2; exit 1; }
 	"$pyright" -p pyproject.toml >/dev/null || { "$pyright" -p pyproject.toml; exit 1; }
 fi

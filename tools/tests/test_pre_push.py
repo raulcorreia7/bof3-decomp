@@ -62,6 +62,7 @@ def env(tmp_path: Path) -> dict[str, str]:
         "PATH": f"{tmp_path / 'stubs'}:{os.environ['PATH']}",
         "CLANG_FORMAT": "true",
         "RUFF": "true",
+        "PYRIGHT": "true",
         "DPRINT": "true",
     }
 
