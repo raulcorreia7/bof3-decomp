@@ -10,7 +10,6 @@
 void func_801F358C(void);
 
 /* g_ScratchPadVectors */
-extern SVECTOR g_ScratchPadVectors[];
 
 /* The arrow cell of each torch gauge state. */
 extern TorchGaugeCells D_801F2C04;

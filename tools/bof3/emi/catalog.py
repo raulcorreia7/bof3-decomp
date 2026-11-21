@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 from bof3.core.binio import u32
-from bof3.core.hashing import file_sha256
+from bof3.core.hashing import file_digest
 from bof3.core.io import read_json
 from bof3.core.paths import BUILD
 from bof3.resolve import load_target_manifests, normalize_target_id
@@ -113,7 +113,8 @@ def verify_companion_relations(root: Path) -> list[dict[str, Any]]:
             caller = entry_for(root, manifest.disc_id)
             target = entry_for(root, companion.disc_id)
             if (
-                file_sha256(Path(target["payload_path"])) != companion.payload_sha256
+                file_digest(Path(target["payload_path"]), "sha256")
+                != companion.payload_sha256
                 or int(target["load_address"]) != companion.load_address
                 or int(target["size"]) != companion.size
             ):
@@ -166,10 +167,10 @@ def verify_copy_relations(root: Path) -> list[dict[str, Any]]:
         if not manifest.copies:
             continue
         source = entry_for(root, manifest.disc_id)
-        source_hash = file_sha256(Path(source["payload_path"]))
+        source_hash = file_digest(Path(source["payload_path"]), "sha256")
         for copy in manifest.copies:
             entry = entry_for(root, copy.disc_id)
-            digest = file_sha256(Path(entry["payload_path"]))
+            digest = file_digest(Path(entry["payload_path"]), "sha256")
             if digest != copy.payload_sha256 or digest != source_hash:
                 raise ValueError(
                     f"copy payload differs from its source: {copy.disc_id}"
