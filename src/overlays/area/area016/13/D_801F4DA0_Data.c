@@ -166,7 +166,7 @@ u8 D_801F50E4[28] = {
 
 /* Step handlers. */
 Callback D_801F5100[5] = {
-    func_801F3060, func_801F30EC, func_801F3224, func_801F32A0, Actor_ZoomOut,
+    func_801F3060, func_801F30EC, func_801F3224, Area_RequestRestartOnEntryChange, Actor_ZoomOut,
 };
 
 Callback D_801F5114[2] = {
@@ -178,7 +178,7 @@ Callback D_801F511C[4] = {
     Actor_SlideScreenLeft,
     Actor_SlideScreenX,
     Area_Update,
-    func_801F3608,
+    Area_SlideHudBannerLeft,
 };
 
 Callback D_801F512C[4] = {

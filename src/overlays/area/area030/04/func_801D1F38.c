@@ -28,6 +28,6 @@ MATCH void func_801D1F38(void) {
 
     count = elapsed;
     if (count != 0) {
-        func_801D2034((g_SpawnedActors[0].unk_2E + 0xA), (g_SpawnedActors[0].unk_30 - 0x18), 2, (u8)count);
+        func_801D2034((g_SpawnedActors[0].screen_x + 0xA), (g_SpawnedActors[0].screen_y - 0x18), 2, (u8)count);
     }
 }

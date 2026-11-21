@@ -12,30 +12,24 @@
 
 /* One 0x28-byte row of the particle table at AREA_WORK; a row is free while life is 0. */
 typedef struct SceneParticle {
-    VECTOR pos;    /* +0x00 */
-    s32    vx;     /* +0x10 */
-    s32    vy;     /* +0x14 */
-    s32    vz;     /* +0x18 */
-    s32    unk_1C; /* +0x1C */
-    s32    unk_20; /* +0x20 */
-    u8     unk_24; /* +0x24 */
-    u8     life;   /* +0x25 */
-    u8     pad[2]; /* +0x26 */
+    VECTOR pos;      /* +0x00 */
+    VECTOR velocity; /* +0x10 */
+    s32    unk_20;   /* +0x20 */
+    u8     unk_24;   /* +0x24 */
+    u8     life;     /* +0x25 */
+    u8     pad[2];   /* +0x26 */
 } SceneParticle;
 
-ASSERT_OFFSET(SceneParticle, vx, 0x10);
+ASSERT_OFFSET(SceneParticle, velocity, 0x10);
 ASSERT_OFFSET(SceneParticle, life, 0x25);
 ASSERT_SIZE(SceneParticle, 0x28);
 
 /* One 0x18-byte cross-section of the vertical box the scene's step draws: its corner point, a
  * spare word, then the two half extents the four corners add to the point's y and z. */
 typedef struct SceneBoxEdge {
-    s32 x;      /* 0x00 */
-    s32 y;      /* 0x04 */
-    s32 z;      /* 0x08 */
-    s32 unk_0C; /* 0x0C */
-    s32 half_y; /* 0x10 */
-    s32 half_z; /* 0x14 */
+    VECTOR pos;    /* 0x00 */
+    s32    half_y; /* 0x10 */
+    s32    half_z; /* 0x14 */
 } SceneBoxEdge;
 
 /* The box func_801F7084 stamps the eight corners of: one cross-section at the actor's velocity
@@ -56,10 +50,7 @@ typedef VECTOR ScenePathPoint;
 
 /* The work area: the area focus point, then the path points. */
 typedef struct ScenePath {
-    s32            x;      /* 0x00 */
-    s32            y;      /* 0x04 */
-    s32            z;      /* 0x08 */
-    s32            unk_0C; /* 0x0C */
+    VECTOR         focus; /* 0x00 */
     ScenePathPoint points[8];
 } ScenePath;
 

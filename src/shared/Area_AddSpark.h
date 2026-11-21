@@ -21,9 +21,9 @@ MATCH void Area_AddSpark(void) {
             radius = 0;
         }
         angle             = RANDOM_MASK(0xFFF);
-        spark->pos.x      = g_Task->pos.x.fixed + ((radius * rcos(angle)) >> 4);
-        spark->pos.y      = g_Task->pos.y.fixed + ((radius * rsin(angle)) >> 4);
-        spark->pos.z      = g_Task->pos.z.fixed + ((s16)g_Task->screen_y << 16);
+        spark->pos.vx     = g_Task->pos.x.fixed + ((radius * rcos(angle)) >> 4);
+        spark->pos.vy     = g_Task->pos.y.fixed + ((radius * rsin(angle)) >> 4);
+        spark->pos.vz     = g_Task->pos.z.fixed + ((s16)g_Task->screen_y << 16);
         spark->fall_speed = RANDOM_MASK(0xFFF) + 0x1000;
         return;
     }

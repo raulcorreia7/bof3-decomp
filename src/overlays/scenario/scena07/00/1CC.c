@@ -189,12 +189,12 @@ MATCH void func_801F7638(void) {
 
     g_Task->pos.z.fixed = TO_COORD(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
     burst               = SCENA07_BURST_RECORD;
-    burst->x            = g_Task->pos.x.fixed;
+    burst->pos.vx       = g_Task->pos.x.fixed;
     y                   = g_Task->pos.y.fixed;
     D_801FDFBC          = burst;
     /* FAKE: the order lock keeps the y store after the pointer store; 33 of 38 instructions otherwise. */
-    FAKE_ORDER_LOCK(burst->y = y);
-    burst->z      = g_Task->pos.z.fixed;
+    FAKE_ORDER_LOCK(burst->pos.vy = y);
+    burst->pos.vz = g_Task->pos.z.fixed;
     burst->unk_10 = 0;
     g_Task->timer = 0;
     g_Task->vx    = 95;
@@ -224,9 +224,9 @@ MATCH void func_801F77AC(void) {
 }
 
 MATCH void func_801F7810(void) {
-    D_801FDFBC->z += 0x1000000;
+    D_801FDFBC->pos.vz += 0x1000000;
     func_801F97E0(D_801FDFBC);
-    if (D_801FDFBC->z > 0xFFFFFFF) {
+    if (D_801FDFBC->pos.vz > 0xFFFFFFF) {
         func_80196070();
     }
 }
@@ -421,7 +421,7 @@ MATCH void func_801F81B4(void) {
 #include "shared/GFX_DrawProjectedDisc.h"
 
 MATCH void func_801F81D4(FallingSpark* spark) {
-    GFX_DRAW_PROJECTED_DISC(&spark->x, spark->fade, 0x20, 1);
+    GFX_DRAW_PROJECTED_DISC(&spark->pos.vx, spark->header.shade, 0x20, 1);
 }
 
 MATCH void func_801F8358(void) {
@@ -431,7 +431,7 @@ MATCH void func_801F8358(void) {
     spark = MEM_PTR(FallingSpark, AREA_WORK);
     i     = 0;
     do {
-        spark->active = 0;
+        spark->header.active = 0;
         i++;
         spark++;
     } while (i < 8);
@@ -445,7 +445,7 @@ MATCH FallingSpark* func_801F8394(void) {
 
     spark = MEM_PTR(FallingSpark, AREA_WORK);
     for (i = 0; i < 8; i++) {
-        if (spark->active == 0) {
+        if (spark->header.active == 0) {
             return spark;
         }
         spark++;
@@ -461,18 +461,18 @@ MATCH void func_801F8478(FallingSpark* spark) {
     u16 pitch;
     s16 radius;
 
-    spark->active      = 1;
-    spark->kind        = 0;
-    spark->life        = 8;
-    spark->fade        = 0;
-    spark->speed       = 0;
-    spark->life_reload = 1;
-    yaw                = rand() & 0x7FF;
-    pitch              = rand() & 0xFFF;
-    radius             = ((rand() % 2) << 12) | (rand() & 0xFFF);
-    spark->x           = g_Task->pos.x.fixed + ((radius * ((rsin(yaw) * rcos(pitch)) >> 12)) >> 8);
-    spark->y           = g_Task->pos.y.fixed + ((radius * ((rsin(yaw) * rsin(pitch)) >> 12)) >> 8);
-    spark->z           = g_Task->pos.z.fixed + radius * rcos(yaw) + TO_COORD(512);
+    spark->header.active = 1;
+    spark->header.type   = 0;
+    spark->header.life   = 8;
+    spark->header.shade  = 0;
+    spark->speed         = 0;
+    spark->life_reload   = 1;
+    yaw                  = rand() & 0x7FF;
+    pitch                = rand() & 0xFFF;
+    radius               = ((rand() % 2) << 12) | (rand() & 0xFFF);
+    spark->pos.vx        = g_Task->pos.x.fixed + ((radius * ((rsin(yaw) * rcos(pitch)) >> 12)) >> 8);
+    spark->pos.vy        = g_Task->pos.y.fixed + ((radius * ((rsin(yaw) * rsin(pitch)) >> 12)) >> 8);
+    spark->pos.vz        = g_Task->pos.z.fixed + radius * rcos(yaw) + TO_COORD(512);
 }
 
 MATCH u8 func_801F85D8(void) {
@@ -487,8 +487,8 @@ MATCH u8 func_801F85D8(void) {
     spark = MEM_PTR(FallingSpark, AREA_WORK);
     i     = 0;
     do {
-        if (spark->active != 0) {
-            D_801FDDF0[spark->kind](spark);
+        if (spark->header.active != 0) {
+            D_801FDDF0[spark->header.type](spark);
             active = 1;
             func_801F81D4(spark);
         }
@@ -501,11 +501,11 @@ MATCH u8 func_801F85D8(void) {
 MATCH void func_801F86BC(FallingSpark* spark) {
     u8 next;
 
-    spark->fade += 6;
-    if (--spark->life == 0) {
-        next        = spark->kind + 1;
-        spark->life = spark->life_reload;
-        spark->kind = next;
+    spark->header.shade += 6;
+    if (--spark->header.life == 0) {
+        next               = spark->header.type + 1;
+        spark->header.life = spark->life_reload;
+        spark->header.type = next;
         if (D_801FDFC4 == 0) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x00));
             D_801FDFC4 = 1;
@@ -525,14 +525,14 @@ MATCH void func_801F8764(FallingSpark* spark) {
         }
         D_801FDFC8 = 1;
     }
-    life         = spark->life - 1;
-    spark->life  = life;
-    speed        = spark->speed + TO_COORD(4);
-    spark->speed = speed;
-    spark->z += speed;
-    spark->fade += 6;
+    life               = spark->header.life - 1;
+    spark->header.life = life;
+    speed              = spark->speed + TO_COORD(4);
+    spark->speed       = speed;
+    spark->pos.vz += speed;
+    spark->header.shade += 6;
     if (life == 0) {
-        spark->active = 0;
+        spark->header.active = 0;
     }
 }
 
@@ -592,9 +592,9 @@ MATCH void func_801F90F4(Scena07BurstBuffer* buffer) {
             }
             buffer->shade[0][i] = ((light & 0xF00) >> 5) + 7;
         }
-        pos[0] = buffer->x + (dir[0] << 5);
-        pos[1] = buffer->y + (dir[1] << 5);
-        pos[2] = buffer->z + (dir[2] << 13);
+        pos[0] = buffer->pos.vx + (dir[0] << 5);
+        pos[1] = buffer->pos.vy + (dir[1] << 5);
+        pos[2] = buffer->pos.vz + (dir[2] << 13);
         Area_ProjectPoint(pos, &buffer->points[0][i]);
         for (row = 1; row < 8; row++) {
             buffer->points[row][i] = buffer->points[0][i];

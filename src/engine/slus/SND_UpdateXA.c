@@ -8,7 +8,7 @@ MATCH void SND_UpdateXA(void) {
     s8* mode;
 
     mode = &g_EmiServiceState;
-    ((void (*)(void))g_XAStates[*mode])();
+    g_XAStates[*mode]();
     D_8014681C++;
 
     if (D_8014682C != 0 && *mode < SND_XA_STATE_PAUSE) {

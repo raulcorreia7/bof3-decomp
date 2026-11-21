@@ -69,10 +69,10 @@ extern BattleEffect D_801F0B38[];
 #define BMAGIC_EFFECT_SLOTS D_801F0B38
 #define BMAGIC_EFFECT_COUNT 32
 
-void func_801F0164(s32 arg0);
+void func_801F0164(s32 index);
 
 void func_801F0078(void);
-void func_801F0550(s32 arg0);
-void func_801F07B0(s32 arg0);
+void func_801F0550(s32 value);
+void func_801F07B0(s32 index);
 
 #endif

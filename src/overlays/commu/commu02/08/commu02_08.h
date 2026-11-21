@@ -120,36 +120,36 @@ extern u8  D_801F2944;
 extern u8  D_801F2945;
 extern u8  D_801F294F;
 
-void func_801D2E10(void);
-void func_801D2E60(s16 x, s16 y);
-/* func_801D7EA0 */
-u8   Fairy_FindActiveJob(u8);
-
-u8 Party_GetJoinedCharacter(u8);
-
-s8 func_801DA114();
-
-void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
-void func_801D32A0(s32 x, s32 y, u8 mode);
-void func_801D4EA4(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
-void func_801DA8E8(void);
-
 void func_801D2794(s32 count, s32 shown, s32 chosen);
 void func_801D2870(void);
 void func_801D2AC4(s16 x, s16 y, s32 column, s32 style);
+
+u8 Party_GetJoinedCharacter(u8);
+
 void func_801D2CF8(s32 x, s32 y, s32 icon);
+
+void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
+void func_801D2E10(void);
+void func_801D2E60(s16 x, s16 y);
 void func_801D3184(s32 x, s32 y);
+
+void func_801D32A0(s32 x, s32 y, u8 mode);
 void func_801D4AE0(s16 x, s16 y, u8 flag);
+void func_801D4EA4(s32 left, s32 top, s32 icon_row, s32 raised);
 void func_801D4F88(s32 x, s32 y, s32 show_values);
 void func_801D5B2C(void);
+/* func_801D7EA0 */
+u8   Fairy_FindActiveJob(u8);
 void func_801D8058(s32 left, s32 top);
+s8   func_801DA114();
+void func_801DA8E8(void);
 void func_801D830C(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 /* The area text bank indexes of the tables the fairy name halves come from. */
 #define FAIRY_NAME_FIRST_HALF_INDEX  496
 #define FAIRY_NAME_SECOND_HALF_INDEX 560
 /* func_801D8968 */
 void Fairy_GenerateName(void);
-void func_801D90D8(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+void func_801D90D8(s32 x, s32 y, s32 character, s32 frame_mode);
 void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg, s32 cursor_row_arg);
 void func_801D97C8(s32 unused, s32 x, s32 y);
 void func_801D9B80(s32 x, s32 y, s32 width, s32 height);

@@ -25,7 +25,7 @@ MATCH void func_801D0CC0(void) {
 
     screen_x         = g_Task->screen_x + 0x20;
     g_Task->screen_x = screen_x;
-    func_801D147C(&g_Task->unk_64, (s16)screen_x, 6);
+    GFX_DrawColorFan(&g_Task->unk_64, (s16)screen_x, 6);
     mode          = g_Task->timer - 1;
     g_Task->timer = mode;
     if (!(mode & BYTE_MASK)) {
@@ -37,7 +37,7 @@ MATCH void func_801D0CC0(void) {
 MATCH void func_801D0D54(void) {
     u8 mode;
 
-    func_801D147C(&g_Task->unk_64, (s16)g_Task->screen_x, 6);
+    GFX_DrawColorFan(&g_Task->unk_64, (s16)g_Task->screen_x, 6);
     mode          = g_Task->timer - 1;
     g_Task->timer = mode;
     if (!(mode & BYTE_MASK)) {
@@ -53,7 +53,7 @@ MATCH void func_801D0DD8(void) {
 
     g_Task->unk_6C += TO_COORD(12);
     g_Task->screen_x -= 6;
-    func_801D147C(&g_Task->unk_64, (s16)g_Task->screen_x, 6);
+    GFX_DrawColorFan(&g_Task->unk_64, (s16)g_Task->screen_x, 6);
     timer         = g_Task->timer - 1;
     g_Task->timer = timer;
     if ((timer & BYTE_MASK) == 0) {
@@ -204,7 +204,9 @@ MATCH void func_801D13F4(void) {
     }
 }
 
-MATCH void func_801D147C(s32* pos, s16 origin, s32 flags) {
+/* Draws a fan of colored triangles. */
+/* func_801D147C */
+MATCH void GFX_DrawColorFan(s32* pos, s16 origin, s32 flags) {
     DVECTOR  screen;
     DVECTOR  point;
     DVECTOR  size;

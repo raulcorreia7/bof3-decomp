@@ -21,15 +21,15 @@ extern PartyMemberMessages g_PartyMemberMessages[7];
 extern Callback            D_801F4A80[];
 /* The two-byte step table the falling path indexes. */
 extern s8                  D_801F4A88[];
+s32                        func_801F2FC4(void);
+void                       func_801F30E4(void);
+void                       func_801F3110(u16 start, u16 end, Pos3* from, Pos3* to);
+s32                        func_801F3368(void);
+
+void func_801F3474(void);
 
 /* The image's step passes. */
-void func_801F3768(s32 arg0, s32 arg1);
-void func_801F30E4(void);
-void func_801F3474(void);
-void func_801F3110(u16 start, u16 end, Pos3* from, Pos3* to);
-
-s32 func_801F2FC4(void);
-s32 func_801F3368(void);
+void func_801F3768(s32 x, s32 y);
 
 /* The seeded sparks' launch speed, lifetime and shade; the dropped rows fall
  * twice as fast. */
@@ -49,18 +49,12 @@ void func_801F2E74(SparkParticle* spark);
 
 /* One dropped spark: it falls and bounces like an SparkParticle. */
 typedef struct AreaDropParticle {
-    u8   active; /* 0x00 - 0 marks a free row */
-    u8   unk_01; /* 0x01 */
-    u8   life;   /* 0x02 - frames left */
-    u8   shade;  /* 0x03 */
-    s32  vx;     /* 0x04 */
-    s32  vy;     /* 0x08 */
-    s32  vz;     /* 0x0C */
-    u8   pad_10[4];
-    Pos3 pos; /* 0x14 */
-    u8   pad_20[4];
+    EffectSlotHeader header;
+    VECTOR           velocity; /* 0x04 */
+    VECTOR           pos;      /* 0x14 */
 } AreaDropParticle;
 
+ASSERT_OFFSET(AreaDropParticle, velocity, 0x04);
 ASSERT_OFFSET(AreaDropParticle, pos, 0x14);
 ASSERT_SIZE(AreaDropParticle, 0x24);
 

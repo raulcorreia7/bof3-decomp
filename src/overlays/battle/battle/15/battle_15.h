@@ -177,7 +177,7 @@ typedef struct BattleEventPacket {
     u8  effect_kind; /* +0x01 the kind Battle_ApplyEnemyEvent switches on to pick the record update */
     u8  selector;    /* +0x02 the bits that select the cells the packet updates */
     u8  value;       /* +0x03 the value the selected cells take */
-    u8  unk_04;      /* +0x04 the byte copied to the work row's +0x7E */
+    u8  choice_ai;   /* +0x04 the byte copied to the work row's +0x7E */
     u8  pad_05;
     s16 panel_id;  /* +0x06 the panel id; Battle_ApplyEnemyEvent stores it in the panel-owner table */
     u8  unk_08[8]; /* +0x08 the eight bytes copied to the work row's +0x8C */
@@ -187,7 +187,7 @@ ASSERT_OFFSET(BattleEventPacket, kind, 0x00);
 ASSERT_OFFSET(BattleEventPacket, effect_kind, 0x01);
 ASSERT_OFFSET(BattleEventPacket, selector, 0x02);
 ASSERT_OFFSET(BattleEventPacket, value, 0x03);
-ASSERT_OFFSET(BattleEventPacket, unk_04, 0x04);
+ASSERT_OFFSET(BattleEventPacket, choice_ai, 0x04);
 ASSERT_OFFSET(BattleEventPacket, panel_id, 0x06);
 ASSERT_OFFSET(BattleEventPacket, unk_08, 0x08);
 ASSERT_SIZE(BattleEventPacket, 0x10);
@@ -585,176 +585,6 @@ void        Battle_CancelExamine(void);
 void        Battle_GrantAlwaysHits(void);
 void        Battle_GrantDamageImmunity(void);
 void        Battle_GrantReprisal(void);
-/* func_8009DA94 */
-void        Battle_DealNoDamage(void);
-void        func_8009DAB4(void);
-void        func_8009DBA4(void);
-void        func_8009DC6C(void);
-/* func_8009DD20 */
-void        Battle_CurePoison(void);
-void        func_8009DD50(void);
-/* func_8009DE50 */
-void        Battle_Heal20Hp(void);
-/* func_8009DE64 */
-void        Battle_Heal40Hp(void);
-/* func_8009DE78 */
-void        Battle_Heal100Hp(void);
-/* func_8009DF70 */
-void        Battle_CureStatusChance(void);
-void        func_8009DFBC(void);
-/* func_8009DFEC */
-void        Battle_CureBlindness(void);
-/* func_8009E01C */
-void        Battle_CurePetrification(void);
-/* func_8009E04C */
-void        Battle_CureAilments(void);
-/* func_8009E07C */
-void        Battle_ReviveOneHp(void);
-void        func_8009E184(void);
-void        func_8009E1E0(void);
-/* func_8009E200 */
-void        Battle_Heal20Ap(void);
-/* func_8009E224 */
-void        Battle_Heal100Ap(void);
-/* func_8009E248 */
-void        Battle_DrainHp(void);
-void        func_8009E7C4(void);
-void        func_8009E7E4(void);
-/* func_8009E804 */
-void        Battle_InflictSleep(void);
-/* func_8009E824 */
-void        Battle_InflictConfusion(void);
-/* func_8009E844 */
-void        Battle_ReviveQuarterHp(void);
-/* func_8009E98C */
-void        Battle_ReviveFullHp(void);
-void        func_8009EA30(void);
-void        func_8009EA8C(void);
-void        func_8009EACC(void);
-void        func_8009EB28(void);
-void        func_8009EC48(void);
-void        func_8009EDB4(void);
-void        func_8009EECC(void);
-void        func_8009EF08(void);
-void        func_8009EF28(void);
-void        func_8009EFB8(void);
-void        func_8009F010(void);
-void        func_8009F0A4(void);
-void        func_8009F1BC(void);
-/* func_8009F258 */
-void        Battle_InflictSilence(void);
-/* func_8009F278 */
-void        Battle_CastQuake(void);
-/* func_8009F2B0 */
-void        Battle_CastTyphoon(void);
-/* func_8009F2E8 */
-void        Battle_CastLightning(void);
-/* func_8009F3DC */
-void        Battle_CastMight(void);
-/* func_8009F414 */
-void        Battle_CastInferno(void);
-/* func_8009F44C */
-void        Battle_CastBlizzard(void);
-/* func_8009F484 */
-void        Battle_CastSirocco(void);
-/* func_8009F4BC */
-void        Battle_CastFlare(void);
-/* func_8009F4F4 */
-void        Battle_CastProtect(void);
-/* func_8009F52C */
-void        Battle_CastWeaken(void);
-/* func_8009F564 */
-void        Battle_CastFireblast(void);
-/* func_8009F59C */
-void        Battle_CastCyclone(void);
-/* func_8009F5D4 */
-void        Battle_CastSilence(void);
-/* func_8009F60C */
-void        Battle_CastJolt(void);
-void        func_8009F644(void);
-/* func_8009F67C */
-void        Battle_CastSimoon(void);
-/* func_8009F6B4 */
-void        Battle_CastBarrier(void);
-void        func_8009F758(void);
-/* func_8009F7EC */
-void        Battle_ThirdHpDamage(void);
-/* func_8009F814 */
-void        Battle_FullHpDamage(void);
-/* func_8009F83C */
-void        Battle_HalfHpDamage(void);
-/* func_8009F864 */
-void        Battle_InflictParalysis(void);
-void        func_8009F884(void);
-/* func_8009F978 */
-void        Battle_InflictBlindness(void);
-/* func_8009F998 */
-void        Battle_InflictPoison(void);
-void        func_8009F9B8(void);
-void        func_8009F9E0(void);
-void        func_8009FA20(void);
-void        func_8009FAE4(void);
-void        func_8009FB38(void);
-void        func_8009FE10(void);
-/* func_8009FE70 */
-void        Battle_Heal1Hp(void);
-/* func_8009FE84 */
-void        Battle_Heal80Hp(void);
-/* func_8009FE98 */
-void        Battle_Heal240Hp(void);
-/* func_8009FEAC */
-void        Battle_Heal5Ap(void);
-void        func_8009FED0(void);
-void        func_8009FEF4(void);
-/* func_8009FF7C */
-void        Battle_CastMyollnir(void);
-/* func_8009FFB4 */
-void        Battle_FullRestore(void);
-/* func_8009FFE4 */
-void        Battle_Heal5Hp(void);
-void        func_8009FFF8(void);
-void        func_800A0000(void);
-void        func_800A0188(void);
-void        func_800A0244(void);
-void        func_800A02E8(void);
-void        func_800A042C(void);
-void        func_800A0564(void);
-void        func_800A0660(void);
-/* func_800A07D0 */
-void        Battle_DoubleRewards(void);
-void        func_800A0898(void);
-/* func_800A0920 */
-void        Battle_StopTurns(void);
-void        func_800A0A04(void);
-void        func_800A0A40(void);
-void        func_800A0B2C(void);
-void        func_800A0BF4(void);
-void        func_800A0C44(void);
-void        func_800A0C68(void);
-void        func_800A0D64(void);
-void        func_800A0E68(void);
-void        func_800A0EC4(void);
-void        func_800A14B4(void);
-void        func_800A15DC(void);
-void        func_800A17A4(void);
-void        func_800A1978(void);
-void        func_800A1AD0(void);
-void        func_800A1B38(void);
-void        func_800A1BE4(void);
-void        func_800A1CB4(void);
-void        func_800A1D84(void);
-void        func_800A2120(void);
-void        func_800A21D0(void);
-void        func_800A22CC(void);
-void        func_800A23CC(void);
-/* func_800A2404 */
-void        Battle_CastDeath(void);
-void        func_800A243C(void);
-void        func_800A250C(void);
-void        func_800A2560(void);
-void        func_800A2598(void);
-void        func_800A2668(void);
-void        func_800A26F0(void);
 void        func_80098388(void);
 void        func_800983C4(void);
 /* func_80098408 */
@@ -826,17 +656,187 @@ void        Battle_ScaleEnemyStat(void* battler, s32 rate_type, s32 rate_percent
 void        func_8009CF80(u8* record, s32 index, s32 new_value);
 /* func_8009CFEC */
 void        Battle_MergeEnemyPanels(void);
-void        Battle_ApplyAbilityDamage(void);
+/* func_8009DA94 */
+void        Battle_DealNoDamage(void);
+void        func_8009DAB4(void);
+void        func_8009DBA4(void);
+void        func_8009DC6C(void);
+/* func_8009DD20 */
+void        Battle_CurePoison(void);
+void        func_8009DD50(void);
 /* func_8009DE18 */
 extern void Battle_ApplyHeal(void);
+/* func_8009DE50 */
+void        Battle_Heal20Hp(void);
+/* func_8009DE64 */
+void        Battle_Heal40Hp(void);
+/* func_8009DE78 */
+void        Battle_Heal100Hp(void);
 /* func_8009DE8C */
 void        Battle_HealFullHp(void);
+/* func_8009DF70 */
+void        Battle_CureStatusChance(void);
+void        func_8009DFBC(void);
+/* func_8009DFEC */
+void        Battle_CureBlindness(void);
+/* func_8009E01C */
+void        Battle_CurePetrification(void);
+/* func_8009E04C */
+void        Battle_CureAilments(void);
+/* func_8009E07C */
+void        Battle_ReviveOneHp(void);
+void        func_8009E184(void);
+void        func_8009E1E0(void);
+/* func_8009E200 */
+void        Battle_Heal20Ap(void);
+/* func_8009E224 */
+void        Battle_Heal100Ap(void);
+/* func_8009E248 */
+void        Battle_DrainHp(void);
 /* func_8009E500 */
 extern void Battle_DrainAp(void);
+void        func_8009E7C4(void);
+void        func_8009E7E4(void);
+/* func_8009E804 */
+void        Battle_InflictSleep(void);
+/* func_8009E824 */
+void        Battle_InflictConfusion(void);
+/* func_8009E844 */
+void        Battle_ReviveQuarterHp(void);
+/* func_8009E98C */
+void        Battle_ReviveFullHp(void);
+void        func_8009EA30(void);
+void        func_8009EA8C(void);
+void        func_8009EACC(void);
+void        func_8009EB28(void);
+void        func_8009EC48(void);
+void        func_8009EDB4(void);
+void        func_8009EECC(void);
+void        func_8009EF08(void);
+void        func_8009EF28(void);
+void        func_8009EFB8(void);
+void        func_8009F010(void);
+void        func_8009F0A4(void);
+void        func_8009F1BC(void);
+/* func_8009F258 */
+void        Battle_InflictSilence(void);
+/* func_8009F278 */
+void        Battle_CastQuake(void);
+/* func_8009F2B0 */
+void        Battle_CastTyphoon(void);
+/* func_8009F2E8 */
+void        Battle_CastLightning(void);
 /* func_8009F320 */
 void        Battle_HalveDamage(void);
+/* func_8009F3DC */
+void        Battle_CastMight(void);
+/* func_8009F414 */
+void        Battle_CastInferno(void);
+/* func_8009F44C */
+void        Battle_CastBlizzard(void);
+/* func_8009F484 */
+void        Battle_CastSirocco(void);
+/* func_8009F4BC */
+void        Battle_CastFlare(void);
+/* func_8009F4F4 */
+void        Battle_CastProtect(void);
+/* func_8009F52C */
+void        Battle_CastWeaken(void);
+/* func_8009F564 */
+void        Battle_CastFireblast(void);
+/* func_8009F59C */
+void        Battle_CastCyclone(void);
+/* func_8009F5D4 */
+void        Battle_CastSilence(void);
+/* func_8009F60C */
+void        Battle_CastJolt(void);
+void        func_8009F644(void);
+/* func_8009F67C */
+void        Battle_CastSimoon(void);
+/* func_8009F6B4 */
+void        Battle_CastBarrier(void);
 void        func_8009F6EC(void);
+void        func_8009F758(void);
+/* func_8009F7EC */
+void        Battle_ThirdHpDamage(void);
+/* func_8009F814 */
+void        Battle_FullHpDamage(void);
+/* func_8009F83C */
+void        Battle_HalfHpDamage(void);
+/* func_8009F864 */
+void        Battle_InflictParalysis(void);
+void        func_8009F884(void);
+/* func_8009F978 */
+void        Battle_InflictBlindness(void);
+/* func_8009F998 */
+void        Battle_InflictPoison(void);
+void        func_8009F9B8(void);
+void        func_8009F9E0(void);
+void        func_8009FA20(void);
+void        func_8009FAE4(void);
+void        func_8009FB38(void);
+void        func_8009FE10(void);
+/* func_8009FE70 */
+void        Battle_Heal1Hp(void);
+/* func_8009FE84 */
+void        Battle_Heal80Hp(void);
+/* func_8009FE98 */
+void        Battle_Heal240Hp(void);
+/* func_8009FEAC */
+void        Battle_Heal5Ap(void);
+void        func_8009FED0(void);
+void        func_8009FEF4(void);
+/* func_8009FF7C */
+void        Battle_CastMyollnir(void);
+/* func_8009FFB4 */
+void        Battle_FullRestore(void);
+/* func_8009FFE4 */
+void        Battle_Heal5Hp(void);
+void        func_8009FFF8(void);
+void        func_800A0000(void);
+void        func_800A0188(void);
+void        func_800A0244(void);
+void        func_800A02E8(void);
 extern void func_800A0378(void);
+void        func_800A042C(void);
+void        func_800A0564(void);
+void        func_800A0660(void);
+/* func_800A07D0 */
+void        Battle_DoubleRewards(void);
+void        func_800A0898(void);
+/* func_800A0920 */
+void        Battle_StopTurns(void);
+void        func_800A0A04(void);
+void        func_800A0A40(void);
+void        func_800A0B2C(void);
+void        func_800A0BF4(void);
+void        func_800A0C44(void);
+void        func_800A0C68(void);
+void        func_800A0D64(void);
+void        func_800A0E68(void);
+void        func_800A0EC4(void);
+void        func_800A14B4(void);
+void        func_800A15DC(void);
+void        func_800A17A4(void);
+void        func_800A1978(void);
+void        func_800A1AD0(void);
+void        func_800A1B38(void);
+void        func_800A1BE4(void);
+void        func_800A1CB4(void);
+void        func_800A1D84(void);
+void        func_800A2120(void);
+void        func_800A21D0(void);
+void        func_800A22CC(void);
+void        func_800A23CC(void);
+/* func_800A2404 */
+void        Battle_CastDeath(void);
+void        Battle_ApplyAbilityDamage(void);
+void        func_800A243C(void);
+void        func_800A250C(void);
+void        func_800A2560(void);
+void        func_800A2598(void);
+void        func_800A2668(void);
+void        func_800A26F0(void);
 s16         Battle_GetActionId(u8 unused, u8 battler_index, u16 base_value, u8 element_flag);
 s16         Battle_GetFireResistance(u8 battler_index, u16 element_mask);
 s16         func_800A2EF0(u8 battler_index, u16 element_mask);

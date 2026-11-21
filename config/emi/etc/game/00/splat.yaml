@@ -268,7 +268,7 @@ segments:
       - [0x3F3C, c, Menu_SlidePanelLeft]
       - [0x3F7C, c, func_8019977C]
       - [0x3FEC, c, func_801997EC]
-      - [0x402C, c, func_8019982C]
+      - [0x402C, c, Menu_SetPosX]
       - [0x406C, c, func_8019986C]
       - [0x4138, c, func_80199938]
       - [0x4178, c, func_80199978]

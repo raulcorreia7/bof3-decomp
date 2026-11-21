@@ -59,7 +59,7 @@ Callback g_MenuPanelSteps[3] = {func_8019959C, func_801995F8, func_80199638};
 
 Callback g_MenuOptionSteps[3] = {func_8019959C, func_801996FC, Menu_SlidePanelLeft};
 
-Callback g_MenuActionSteps[3] = {func_8019959C, func_801997EC, func_8019982C};
+Callback g_MenuActionSteps[3] = {func_8019959C, func_801997EC, Menu_SetPosX};
 
 Callback g_MenuTaskSteps[4] = {func_8019959C, func_80199938, func_80199978, func_801999B8};
 

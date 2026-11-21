@@ -7,7 +7,7 @@ MATCH void Area_DrawSparkCell(AreaSpark* spark) {
     TILE_1* tile;
     u8      shade;
 
-    Area_ProjectPoint(&spark->pos.x, &screen);
+    Area_ProjectPoint(&spark->pos.vx, &screen);
     tile = (TILE_1*)g_GfxPrimCursor;
     SetTile1(tile);
     SetSemiTrans(tile, 0);
@@ -16,5 +16,5 @@ MATCH void Area_DrawSparkCell(AreaSpark* spark) {
     tile->b0 = shade;
     tile->g0 = shade;
     tile->r0 = shade;
-    Area_AddCellPrim(spark->pos.x, spark->pos.y, 0, sizeof(TILE_1));
+    Area_AddCellPrim(spark->pos.vx, spark->pos.vy, 0, sizeof(TILE_1));
 }

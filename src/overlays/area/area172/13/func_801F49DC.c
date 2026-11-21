@@ -8,8 +8,8 @@ MATCH void func_801F49DC(void) {
         g_SpawnedActors[actor_index].header.flags = ACTOR_FLAG_IN_USE;
         g_SpawnedActors[actor_index].type         = 0x92;
         g_SpawnedActors[actor_index].unk_29       = 4;
-        g_SpawnedActors[actor_index].unk_2E       = 0;
-        g_SpawnedActors[actor_index].unk_30       = 0;
+        g_SpawnedActors[actor_index].screen_x     = 0;
+        g_SpawnedActors[actor_index].screen_y     = 0;
         g_SpawnedActors[actor_index].link         = g_CurrentActor - g_Actors;
     }
 }

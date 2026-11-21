@@ -44,6 +44,7 @@ typedef enum XAState {
     SND_XA_STATE_PAUSE         = 6,
     SND_XA_STATE_PAUSE_RESULT  = 7,
     SND_XA_STATE_WAIT_SYNC     = 8,
+    SND_XA_STATE_COUNT         = 9,
 } XAState;
 
 /* The area message table offset the HUD value text reads (AREA_MESSAGE_TABLE slot 4). */
@@ -266,10 +267,6 @@ extern const u8       g_MenuPanelOrigins[32];
 extern s32            g_FacingStepY[];
 /* D_80183224 */
 extern char           g_EmiHeaderTag[12];
-extern u8             D_80183298;
-extern u8             D_801832C4;
-extern u8             D_801839C4;
-extern u8             D_801839EC;
 extern u8             D_801839F4;
 extern u8             D_801839F8;
 extern u8             D_80183A00;

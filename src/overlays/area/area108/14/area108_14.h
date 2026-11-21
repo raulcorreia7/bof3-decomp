@@ -78,13 +78,13 @@ extern Pos2 D_801F63DC[];
 /* The stage quad's tile, palette and luminance word: the timer's top bits raise its luminance. */
 #define AREA108_QUAD_WORD ((0x2510u << 16) | 0x0100u)
 
-void func_801F55F0(u8 raise);
+s32 func_801F3034(void);
 
-s32  func_801F3034(void);
 void func_801F34B8(void);
+void func_801F4160(s32 step, s32 shade);
 
-void func_801F4160(s32 arg0, s32 arg1);
 u8   func_801F4F60(s32 x, s32 y);
+void func_801F55F0(u8 raise);
 
 extern AreaPosEntry D_801F637C[];
 

@@ -86,7 +86,7 @@ extern PartyMemberMessages g_PartyMemberMessages[2];
 void func_801F3954(s32 frame);
 void func_801F3FBC(s32 mode, s32 value);
 
-void func_801F3060(s32 arg0, s32 arg1);
+void func_801F3060(s32 index, s32 flag);
 void func_801F3324(s32 source_y, s32 dest_y);
 
 /* Steps the cycling frame timer and copies the frame row at table offset to dest_y every sixth tick. */

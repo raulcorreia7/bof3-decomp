@@ -21,26 +21,8 @@ typedef union ScenarioCallbacks {
 
 ASSERT_SIZE(ScenarioCallbacks, 0x40);
 
-/* 16 handlers at 0x801F8538. func_801F6C90 and func_801F7144 select from
- * entries 5 and 8; func_801F8358 calls entries 13-15 as (record, state). */
-static ScenarioCallbacks D_801F8538 = {{
-    func_801F6C90,
-    (Callback)func_801F8358,
-    (Callback)func_801F83A0,
-    (Callback)func_801F83A8,
-    0,
-    func_801F6CCC,
-    func_801F6D90,
-    func_801F7144,
-    func_801F7180,
-    func_801F7188,
-    func_801F7230,
-    func_801F7790,
-    func_801F7CC4,
-    (Callback)func_801F8398,
-    Scene_ClearParty,
-    func_801F8530,
-}};
+/* Declared here for the handlers below; defined at its address after them. */
+static ScenarioCallbacks D_801F8538;
 
 MATCH void func_801F6C90(void) {
     s8 mode;
@@ -188,7 +170,7 @@ MATCH void func_801F7188(void) {
     if (WINDOW_EFFECT_IDLE()) {
         SCENA16_D_80143C30 = 0u;
         g_AreaDrawFlags    = 0u;
-        func_801F845C();
+        Scene_RestorePalette();
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 19));
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 20));
         sel_ptr   = &g_SndBGMId;
@@ -443,7 +425,7 @@ MATCH void func_801F7790(void) {
             UI_DrawText(72, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
             timer = &g_ScenarioState.timer_06;
             if (++*timer == 32u) {
-                func_801F845C();
+                Scene_RestorePalette();
                 *timer                  = 0x7Fu;
                 g_ScenarioState.step_05 = (g_ScenarioState.step_05 + 1u);
                 break;
@@ -471,7 +453,7 @@ MATCH void func_801F7790(void) {
                 GFX_CopyPaletteCapped((u8)*timer);
                 break;
             }
-            func_801F845C();
+            Scene_RestorePalette();
             *timer                  = 0x1Eu;
             g_ScenarioState.step_05 = (g_ScenarioState.step_05 + 1u);
             break;
@@ -577,7 +559,7 @@ MATCH void func_801F7CC4(void) {
                 if (*progress < 32u) {
                     GFX_CopyPaletteCapped((*progress & BYTE_MASK));
                 } else if (*progress == 32u) {
-                    func_801F845C();
+                    Scene_RestorePalette();
                 } else if (*progress > 159u) {
                     u16 inverted;
 
@@ -585,7 +567,7 @@ MATCH void func_801F7CC4(void) {
                     GFX_CopyPaletteCapped((inverted & BYTE_MASK));
                 }
             } else if (*progress == 191u) {
-                func_801F845C();
+                Scene_RestorePalette();
             }
 
             timer = &g_ScenarioState.timer_06;
@@ -722,7 +704,9 @@ MATCH s32 func_801F83A8(void) {
 
 #include "overlays/scenario/shared/GFX_CopyPaletteCapped.h"
 
-MATCH void func_801F845C(void) {
+/* Restores the scene palette. */
+/* func_801F845C */
+MATCH void Scene_RestorePalette(void) {
     s32 i;
 
     i = 0;
@@ -737,3 +721,24 @@ MATCH void func_801F845C(void) {
 
 MATCH void func_801F8530(void) {
 }
+
+/* 16 handlers at 0x801F8538. func_801F6C90 and func_801F7144 select from
+ * entries 5 and 8; func_801F8358 calls entries 13-15 as (record, state). */
+static ScenarioCallbacks D_801F8538 = {{
+    func_801F6C90,
+    (Callback)func_801F8358,
+    (Callback)func_801F83A0,
+    (Callback)func_801F83A8,
+    0,
+    func_801F6CCC,
+    func_801F6D90,
+    func_801F7144,
+    func_801F7180,
+    func_801F7188,
+    func_801F7230,
+    func_801F7790,
+    func_801F7CC4,
+    (Callback)func_801F8398,
+    Scene_ClearParty,
+    func_801F8530,
+}};

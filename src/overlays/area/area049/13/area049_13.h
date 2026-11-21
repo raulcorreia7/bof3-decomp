@@ -33,10 +33,10 @@ extern AreaSprite* D_801181DC;
 extern u16         D_1F800034_U16[2];
 
 void func_801170D8(AreaSprite* sprite);
-u8   func_80117410(void);
-u8   func_80117900(void);
-
 void func_801172D0(void);
-void func_80117E78(s32 arg0, s32 arg1);
+u8   func_80117410(void);
+
+u8   func_80117900(void);
+void func_80117E78(s32 brightness, s32 unused);
 
 #endif

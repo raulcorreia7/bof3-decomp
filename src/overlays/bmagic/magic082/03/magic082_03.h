@@ -16,7 +16,8 @@ void            func_801EFA00(void);
 
 void func_801F03E0(void);
 
-void func_801F0A84(s32 radius);
+/* func_801F0A84 */
+void BMagic_SetXFixed(s32 radius);
 s32  func_801EF3A0(void);
 
 /* battle/battle/15: the target selector of each effect side, and the test of a selector against the target. */

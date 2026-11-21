@@ -1,6 +1,8 @@
 #include "area174_13.h"
 
-MATCH void func_801F3CE4(void) {
+/* Frees the area palette when the area changes. */
+/* func_801F3CE4 */
+MATCH void Area_FreePaletteOnChange(void) {
     if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {
         GFX_FreePaletteSlotOwner(g_Task);
     } else {

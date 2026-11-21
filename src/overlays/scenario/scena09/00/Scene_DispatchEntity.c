@@ -44,7 +44,7 @@ MATCH void Scene_ClearWorkRows(void) {
 
     row = (SparkParticle*)(MEM_PTR(u8, AREA_WORK + 0x800) + g_Task->unk_06 * 0x500);
     for (i = 0; i < SCENE_SPARK_COUNT; i++, row++) {
-        row->active = 0;
+        row->header.active = 0;
     }
 }
 
@@ -59,19 +59,19 @@ MATCH s32 func_801F75BC(void) {
     alive = 0;
     row   = (SparkParticle*)(MEM_PTR(u8, AREA_WORK + 0x800) + g_Task->unk_06 * 0x500);
     for (i = 0; i < SCENE_SPARK_COUNT; row++, i++) {
-        if (row->active == 0) {
+        if (row->header.active == 0) {
             continue;
         }
-        row->pos.x += row->velocity.vx;
-        row->pos.y += row->velocity.vy;
-        row->pos.z += row->velocity.vz;
+        row->pos.vx += row->velocity.vx;
+        row->pos.vy += row->velocity.vy;
+        row->pos.vz += row->velocity.vz;
         row->velocity.vz -= 0x40000;
-        row->shade -= 4;
-        row->frame = rand() & 7;
-        life       = row->life - 1;
-        row->life  = life;
+        row->header.shade -= 4;
+        row->frame       = rand() & 7;
+        life             = row->header.life - 1;
+        row->header.life = life;
         if (life == 0) {
-            row->active = 0;
+            row->header.active = 0;
         }
         func_801F7424(row);
         alive = 1;
@@ -90,27 +90,27 @@ MATCH void func_801F76D0(void) {
     i     = 0;
     do {
         if (g_Task->unk_06 == 0) {
-            spark->pos.x       = ((rand() & 0x1FF) << 8) + 0x120000;
-            spark->pos.y       = ((rand() & 0x1FF) << 8) + 0x2E8000;
-            spark->pos.z       = TO_COORD(2112) - ((spark->pos.x - 0x120000) << 7);
-            spark->velocity.vx = (spark->pos.x - 0x130000) >> 4;
-            spark->velocity.vy = (spark->pos.y - 0x2F8000) >> 4;
+            spark->pos.vx      = ((rand() & 0x1FF) << 8) + 0x120000;
+            spark->pos.vy      = ((rand() & 0x1FF) << 8) + 0x2E8000;
+            spark->pos.vz      = TO_COORD(2112) - ((spark->pos.vx - 0x120000) << 7);
+            spark->velocity.vx = (spark->pos.vx - 0x130000) >> 4;
+            spark->velocity.vy = (spark->pos.vy - 0x2F8000) >> 4;
             spark->velocity.vz = (-(rand() & 0xFF)) << 5;
             spark->velocity.vx -= 0x800;
         } else {
-            spark->pos.x       = ((rand() & 0x1FF) << 8) + 0x78000;
-            spark->pos.y       = ((rand() & 0x1FF) << 8) + 0x318000;
-            spark->pos.z       = TO_COORD(2112) - ((spark->pos.y - 0x318000) << 7);
-            spark->velocity.vx = (spark->pos.x - 0x88000) >> 4;
-            spark->velocity.vy = (spark->pos.y - 0x328000) >> 4;
+            spark->pos.vx      = ((rand() & 0x1FF) << 8) + 0x78000;
+            spark->pos.vy      = ((rand() & 0x1FF) << 8) + 0x318000;
+            spark->pos.vz      = TO_COORD(2112) - ((spark->pos.vy - 0x318000) << 7);
+            spark->velocity.vx = (spark->pos.vx - 0x88000) >> 4;
+            spark->velocity.vy = (spark->pos.vy - 0x328000) >> 4;
             spark->velocity.vz = (-(rand() & 0xFF)) << 5;
             spark->velocity.vy = -0x800;
         }
-        spark->active = 1;
-        spark->life   = 0x18;
-        spark->unk_01 = 0;
-        spark->shade  = 0x60;
-        spark->frame  = rand() & 7;
+        spark->header.active = 1;
+        spark->header.life   = 0x18;
+        spark->header.type   = 0;
+        spark->header.shade  = 0x60;
+        spark->frame         = rand() & 7;
         spark++;
         i++;
     } while (i < 32);

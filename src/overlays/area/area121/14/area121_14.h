@@ -30,23 +30,23 @@ extern Callback        D_801F6870[];
 extern Callback        D_801F6894[];
 extern Callback        D_801F689C[];
 
-/* func_801F35D0 */
-void Area_Update(void);
-void func_801F5380(void);
-void func_801F595C(s32 value, s32 flag);
-void func_801F5B90(void);
-
 /* sig-kept: the retail walk step tests the result unextended; the engine's s8 return adds an sll/sra. */
 s32 func_801A79A4(s32 handler_x, s32 handler_y);
 
-u8 func_801F5028(s32 x, s32 y, u8 dir);
+/* func_801F35D0 */
+void Area_Update(void);
+u8   func_801F5028(s32 x, s32 y, u8 dir);
+void func_801F5380(void);
+void func_801F595C(s32 value, s32 flag);
+
+void func_801F5B90(void);
 
 void func_801F5C7C(void);
 
 #define AREA_TURN_SYNC func_801F5C7C
 
 void func_801F4B4C(s32 input);
-void func_801F60F4(void* arg0);
+void func_801F60F4(void* actor);
 
 extern u8 D_801F68B8[];
 

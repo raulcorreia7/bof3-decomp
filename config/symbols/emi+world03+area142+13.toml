@@ -1,2 +1,3 @@
 ["emi/world03/area142/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Effect_ClearTimerNextStep = { addr = 0x801F2C60, type = "func", source = "same body as emi/bmagic/magic060/00@0x801F0000 Effect_ClearTimerNextStep" }

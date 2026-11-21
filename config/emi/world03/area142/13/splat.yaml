@@ -9,7 +9,7 @@ segments:
     subsegments:
       - [0x0, .data, g_AreaModuleId]
       - [0x4, c, func_801F2C04]
-      - [0x60, c, func_801F2C60]
+      - [0x60, c, Effect_ClearTimerNextStep]
       - [0x90, c, func_801F2C90]
       - [0xB0, c, func_801F2CB0]
       - [0x518, c, func_801F3118]

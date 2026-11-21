@@ -11,9 +11,9 @@ MATCH u8 Area_StepSparks(void) {
     i     = 0;
     do {
         if (spark->active != 0) {
-            spark->pos.z -= spark->fall_speed << 8;
+            spark->pos.vz -= spark->fall_speed << 8;
             Area_DrawSparkCell(spark);
-            if (spark->pos.z < g_Task->pos.z.fixed) {
+            if (spark->pos.vz < g_Task->pos.z.fixed) {
                 spark->active = 0;
             }
             alive = true;
