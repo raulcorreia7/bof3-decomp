@@ -44,6 +44,8 @@ markers = ["slow: tests that compile or decode real payloads; Meson runs them as
 target-version = "py312"
 # The tools run from tools/, so its modules are first-party.
 src = ["tools"]
+# The bof3-tools submodule has its own checks.
+extend-exclude = ["tools/bof3-tools"]
 
 [tool.ruff.lint]
 # Real defects and import order. The pinned ruff's default set is F and a few E; these add bugbear,
