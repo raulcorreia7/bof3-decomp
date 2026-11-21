@@ -186,6 +186,40 @@ def gcc_arguments(plan):
     return gcc_args
 
 
+def _translate(plan: dict, asm: str) -> str | None:
+    """Return the assembly after maspsx and the placeholder rewrite, or None on failure."""
+    masp = [f"--aspsx-version={plan['version']}"]
+    if plan["div"]:
+        masp.append("--expand-div")
+    with open(asm, "rb") as fin:
+        text = maspsx(masp, fin.read().decode("utf-8"))
+    if text is None:
+        return None
+    from psxdecomp.dmpsx import UnknownPlaceholder, rewrite_text
+
+    try:
+        return rewrite_text(text)[0]
+    except UnknownPlaceholder as exc:
+        print(f"cc: {plan['source']}: {exc}", file=sys.stderr)
+        return None
+
+
+def _dependencies(plan: dict, gcc_args: list, env: dict, asm: str) -> list[str] | None:
+    """Return the headers and split assembly the source includes, or None on failure."""
+    scan = run(
+        [GCC, "-MM", *gcc_args, plan["source"]],
+        env=env,
+        stdout=subprocess.PIPE,
+        text=True,
+    )
+    if scan.returncode:
+        return None
+    deps = scan.stdout.split(":", 1)[1].replace("\\\n", " ").split()
+    with open(asm, encoding="utf-8", errors="replace") as handle:
+        deps += ASM_INCLUDE.findall(handle.read())
+    return deps
+
+
 def compile_one(plan, gcc_args, env, tmp):
     """Run the four stages; return the exit status and the dependency paths."""
     source, output = plan["source"], plan["output"]
@@ -193,19 +227,8 @@ def compile_one(plan, gcc_args, env, tmp):
     asm = f"{tmp}/cc1.s"
     if run([GCC, *gcc_args, "-S", "-o", asm, source], env=env).returncode:
         return 1, None
-    masp = [f"--aspsx-version={plan['version']}"]
-    if plan["div"]:
-        masp.append("--expand-div")
-    with open(asm, "rb") as fin:
-        text = maspsx(masp, fin.read().decode("utf-8"))
+    text = _translate(plan, asm)
     if text is None:
-        return 1, None
-    from psxdecomp.dmpsx import UnknownPlaceholder, rewrite_text
-
-    try:
-        text = rewrite_text(text)[0]
-    except UnknownPlaceholder as exc:
-        print(f"cc: {source}: {exc}", file=sys.stderr)
         return 1, None
     translated = f"{tmp}/masp.s"
     with open(translated, "w", encoding="utf-8") as out:
@@ -214,14 +237,9 @@ def compile_one(plan, gcc_args, env, tmp):
         return 1, None
     if not plan["depfile"]:
         return 0, None
-    scan = run(
-        [GCC, "-MM", *gcc_args, source], env=env, stdout=subprocess.PIPE, text=True
-    )
-    if scan.returncode:
+    deps = _dependencies(plan, gcc_args, env, asm)
+    if deps is None:
         return 1, None
-    deps = scan.stdout.split(":", 1)[1].replace("\\\n", " ").split()
-    with open(asm, encoding="utf-8", errors="replace") as handle:
-        deps += ASM_INCLUDE.findall(handle.read())
     return 0, deps
 
 
@@ -343,6 +361,21 @@ def cached_compile(plan, gcc_args, env, tmp, build_dir):
         return status
 
 
+def compiler_env(tmp: str) -> dict[str, str]:
+    """Return the environment that makes GCC find its stages and the SDK tools."""
+    env = dict(
+        os.environ,
+        LC_ALL="C",
+        TMPDIR=tmp,
+        GCC_EXEC_PREFIX=GCC_DIR + "/",
+        COMPILER_PATH=GCC_DIR,
+    )
+    env["PATH"] = (
+        f"{GCC_DIR}:{ROOT}/toolchains/psn00b_toolchain/bin:{env.get('PATH', '')}"
+    )
+    return env
+
+
 def main(argv):
     if not argv or argv[0] in ("-h", "--help"):
         print(__doc__)
@@ -361,16 +394,7 @@ def main(argv):
             plan["depfile"] = os.path.join(build_dir, plan["depfile"])
         os.chdir(ROOT)
     tmp = tempfile.mkdtemp(prefix="bof3-cc-")
-    env = dict(
-        os.environ,
-        LC_ALL="C",
-        TMPDIR=tmp,
-        GCC_EXEC_PREFIX=GCC_DIR + "/",
-        COMPILER_PATH=GCC_DIR,
-    )
-    env["PATH"] = (
-        f"{GCC_DIR}:{ROOT}/toolchains/psn00b_toolchain/bin:{env.get('PATH', '')}"
-    )
+    env = compiler_env(tmp)
     stderr = os.dup(2)
     try:
         if empty:
