@@ -154,3 +154,30 @@ def test_renamed_file_gaining_a_local_fails(tmp_path: Path) -> None:
     output = result.stdout + result.stderr
     assert result.returncode == 1, output
     assert "decompiler local" in output and "var_s1" in output, output
+
+
+MOVED_LITERAL = '#include "battle_03.h"\nMATCH void func_801D9C80(void) {\n    g_Task->pos.z.fixed = 0x04000000;\n}\n'
+
+
+def test_literal_moved_to_another_file_passes(tmp_path: Path) -> None:
+    result = run_tree(
+        tmp_path,
+        {"src/overlays/test/arc/00/a.c": MOVED_LITERAL},
+        {"src/overlays/test/arc/00/b.c": MOVED_LITERAL},
+        removed=("src/overlays/test/arc/00/a.c",),
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+
+
+def test_new_literal_in_another_file_fails(tmp_path: Path) -> None:
+    result = run_tree(
+        tmp_path,
+        {"src/overlays/test/arc/00/a.c": MOVED_LITERAL},
+        {
+            "src/overlays/test/arc/00/b.c": MOVED_LITERAL.replace(
+                "0x04000000", "0x05000000"
+            )
+        },
+        removed=("src/overlays/test/arc/00/a.c",),
+    )
+    assert result.returncode == 1 and "raw address" in result.stdout + result.stderr
