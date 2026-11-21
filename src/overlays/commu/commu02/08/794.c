@@ -1400,8 +1400,8 @@ MATCH void func_801D5B2C(void) {
     s32 j;
 
     g_UiTextFormatBuffer[0] = 0x2A;
-    i                   = 1;
-    src                 = (u8*)AREA_MESSAGE_TABLE + MEM(u16, (u32)AREA_MESSAGE_TABLE + (256 + D_801DB0AD) * 2);
+    i                       = 1;
+    src                     = (u8*)AREA_MESSAGE_TABLE + MEM(u16, (u32)AREA_MESSAGE_TABLE + (256 + D_801DB0AD) * 2);
     while (*src != STRING_END) {
         g_UiTextFormatBuffer[i] = *src;
         i++;
