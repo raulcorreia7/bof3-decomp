@@ -110,7 +110,7 @@ typedef union FishingStateY {
 
 ASSERT_SIZE(FishingStateY, 4);
 
-/* One cue row of D_801E1D58: the 16.16 fixed-point height offset and the
+/* One cue row of g_FishingLureFlyCueSteps: the 16.16 fixed-point height offset and the
  * per-step delta; four rows, indexed by cue_index (Fishing_LureFly). */
 typedef struct FishingCueStep {
     s32 height_offset;
@@ -381,9 +381,11 @@ extern Callback              g_FishingCastGaugeSteps[];
 extern Callback              g_FishingLureSteps[];
 extern u8                    D_801E1D38[];
 extern u8                    D_801E1D3C[];
-extern FishingCueStep        D_801E1D58[];
+/* D_801E1D58 */
+extern FishingCueStep        g_FishingLureFlyCueSteps[];
 extern s32                   D_801E1D5C;
-extern Callback              D_801E1D78[];
+/* D_801E1D78 */
+extern Callback              g_FishingActorRunHandlers[];
 /* D_801E1D80 */
 extern Callback              g_FishingReelGaugeSteps[];
 extern Callback              D_801E1D8C[];
@@ -557,7 +559,8 @@ void Fishing_PromptSlideIn(void);
 void func_801D36F8(void);
 void func_801D3824(void);
 void func_801D3898(void);
-void func_801D3908(void);
+/* func_801D3908 */
+void Fishing_DrawPanelHeader(void);
 /* func_801D3938 */
 void Fishing_PromptSlideOut(void);
 void func_801D39B8(void);

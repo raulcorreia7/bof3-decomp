@@ -45,13 +45,13 @@ MATCH void Fishing_LureFly(void) {
         Script_Select(4U);
     } else {
         row = work_a->cue_index * 8;
-        if (current_y == (target_y + *(s32*)((u8*)&D_801E1D58 + row))) {
+        if (current_y == (target_y + *(s32*)((u8*)&g_FishingLureFlyCueSteps + row))) {
             work_a->step_limit = *(s32*)((u8*)&D_801E1D5C + row);
         }
         work_d          = (FishingState*)g_Task;
         step            = work_d->step_14 + work_d->step_limit;
         work_d->step_14 = step;
-        if (((work_d->cursor_10 + D_801E1D58[work_d->cue_index].height_offset) < work_d->y_38.pos_y) && (step < 0)) {
+        if (((work_d->cursor_10 + g_FishingLureFlyCueSteps[work_d->cue_index].height_offset) < work_d->y_38.pos_y) && (step < 0)) {
             work_d->step_14    = 0;
             work_d->step_limit = 0;
         }

@@ -103,13 +103,13 @@ u8 D_801E1D38[32] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0x28, 0x00, 0x00, 0x00, 0xFE, 0xFF,
 };
 /* The cue row is a 16.16 fixed-point offset and step; four rows. */
-FishingCueStep D_801E1D58[4] = {
+FishingCueStep g_FishingLureFlyCueSteps[4] = {
     {0x40000, -0x30000},
     {0x40000, -0x30000},
     {0xa8000, -0x8000},
     {0xd8000, -0x8000},
 };
-Callback D_801E1D78[2] = {
+Callback g_FishingActorRunHandlers[2] = {
     (Callback)func_801D29BC,
     (Callback)func_801D2AE0,
 };
@@ -157,7 +157,7 @@ u8 g_FishingPromptSets[9][4] = {
     {0x0A, 0xFF, 0xFF, 0x00}, {0x0C, 0x0B, 0x02, 0x01}, {0x0D, 0xFF, 0xFF, 0x00}, {0x0E, 0xFF, 0xFF, 0x00},
 };
 Callback g_FishingPromptSteps[13] = {
-    (Callback)func_801D0C90,          (Callback)func_801D3650, (Callback)Fishing_PromptSlideIn, (Callback)func_801D36F8, (Callback)func_801D3824, (Callback)func_801D3898, (Callback)func_801D3908,
+    (Callback)func_801D0C90,          (Callback)func_801D3650, (Callback)Fishing_PromptSlideIn, (Callback)func_801D36F8, (Callback)func_801D3824, (Callback)func_801D3898, (Callback)Fishing_DrawPanelHeader,
     (Callback)Fishing_PromptSlideOut, (Callback)func_801D39B8, (Callback)func_801D3A54,         (Callback)func_801D3C74, (Callback)func_801D3F40, (Callback)func_801D41E4,
 };
 Callback g_FishingSteps[17] = {
