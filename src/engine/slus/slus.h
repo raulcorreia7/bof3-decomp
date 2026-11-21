@@ -61,7 +61,6 @@
 #define COPY_KERNEL_ENTRY          ((u32) & D_8016432C) /* resume entry of the stream copy kernel */
 #define MAP_ZONE_COUNT             666                  /* records in g_AreaEncounterZones */
 #define MAP_ZONE_LIST_COUNT        200                  /* lists in g_EncounterZones, one per map index */
-#define MAP_ZONE_SIZE              0x08
 /* The tone a record reader looked up last: D_8018B40C is the tone's offset inside
  * the VAB header at `vab_header` (a word of g_SndBankHeaders). */
 #define SE_TONE(vab_header)        ((VagAtr*)(D_8018B40C + (vab_header)))
@@ -321,11 +320,6 @@ typedef struct {
 } WindowTextRow;
 
 ASSERT_SIZE(WindowTextRow, 0x06);
-
-ASSERT_OFFSET(EncounterZone, min, 0x00);
-ASSERT_OFFSET(EncounterZone, max, 0x02);
-
-ASSERT_SIZE(EncounterZone, MAP_ZONE_SIZE);
 
 /* The bank records at g_EmiBanks seen from its second symbol, 0x80146780 (EMIBank + 4):
  * EMI_LoadVabHeader and SND_SetBankLayout reach it through this symbol and a typed

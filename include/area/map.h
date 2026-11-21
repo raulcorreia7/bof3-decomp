@@ -262,4 +262,8 @@ typedef struct {
     u8    pick;
 } EncounterZone;
 
+ASSERT_OFFSET(EncounterZone, min, 0x00);
+ASSERT_OFFSET(EncounterZone, max, 0x02);
+ASSERT_SIZE(EncounterZone, 0x08);
+
 #endif
