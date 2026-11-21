@@ -496,10 +496,7 @@ MATCH void func_801D23A0(void) {
     mode         = actor->timer - 1;
     actor->timer = mode;
     if (!(mode & BYTE_MASK)) {
-        rect.x = 832;
-        rect.y = 256;
-        rect.w = D_801D393C[D_801D40AC].w;
-        rect.h = D_801D393C[D_801D40AC].h;
+        setRECT(&rect, 832, 256, D_801D393C[D_801D40AC].w, D_801D393C[D_801D40AC].h);
         StoreImage(&rect, (u32*)AREA_WORK);
         D_801D40B0    = AREA_WORK;
         D_801D40B4    = AREA_WORK + 0x5A00;
@@ -782,10 +779,7 @@ MATCH void func_801D2FD8(void) {
     mode         = actor->timer - 1;
     actor->timer = mode;
     if (!(mode & BYTE_MASK)) {
-        rect.x = 832;
-        rect.y = 256;
-        rect.w = D_801D393C[D_801D40AC].w;
-        rect.h = D_801D393C[D_801D40AC].h;
+        setRECT(&rect, 832, 256, D_801D393C[D_801D40AC].w, D_801D393C[D_801D40AC].h);
         StoreImage(&rect, (u32*)AREA_WORK);
         D_801D40B0    = AREA_WORK;
         D_801D40B4    = AREA_WORK + 0x5A00;

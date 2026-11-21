@@ -38,10 +38,7 @@ MATCH void func_801F77B4(void) {
         Camera_Update();
         func_801A0514();
         Area_DrawScene();
-        rect.x = 0;
-        rect.y = g_GfxBufferIndex * SCREEN_HEIGHT;
-        rect.w = SCREEN_WIDTH;
-        rect.h = SCREEN_HEIGHT;
+        setRECT(&rect, 0, g_GfxBufferIndex * SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT);
         SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, 0x2C0, 0);
         GFX_AddPrim(GFX_LAYER_SCENE_BACK, sizeof(DR_MOVE));
     }

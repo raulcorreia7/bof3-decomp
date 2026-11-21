@@ -6,10 +6,7 @@ MATCH void func_801F2F84(void) {
 
     actor->timer--;
     if (actor->timer == 0) {
-        rect.x = 832;
-        rect.y = 256;
-        rect.w = D_801F43BC;
-        rect.h = D_801F43BE;
+        setRECT(&rect, 832, 256, D_801F43BC, D_801F43BE);
         StoreImage(&rect, (u32*)AREA_WORK);
         g_Task->header.mode++;
     }
