@@ -155,9 +155,9 @@ def test_tracked_headers_skip_vendored_psyq(tmp_path: Path, monkeypatch) -> None
 
     monkeypatch.setattr(order_check, "ROOT", tmp_path)
     monkeypatch.setattr(
-        order_check.subprocess,
-        "check_output",
-        lambda *a, **k: "include/psyq/a.h\ninclude/x.h\nsrc/y.c\n",
+        order_check,
+        "ls_files",
+        lambda *a, **k: ["include/psyq/a.h", "include/x.h", "src/y.c"],
     )
     headers, data = order_check.tracked()
     assert headers == ["include/x.h"]
