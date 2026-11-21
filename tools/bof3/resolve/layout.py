@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import os
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -27,7 +28,10 @@ class LayoutBoundary:
     virtual_start: int
     virtual_end: int | None
     kind: str
+    #: The row's name without its folder.
     name: str | None
+    #: The folder a row names its file in, relative to the image folder: ``../sound/``.
+    folder: str = ""
 
     @property
     def is_function(self) -> bool:
@@ -111,6 +115,8 @@ class SplatFacts:
     load_address: int
     binary: str
     source_dir: str
+    #: Sources outside ``source_dir`` that ``c`` rows name, relative to the repository.
+    outside: tuple[str, ...] = ()
 
 
 def splat_facts(splat_path: Path) -> SplatFacts:
@@ -140,7 +146,22 @@ def splat_facts(splat_path: Path) -> SplatFacts:
         raise ValueError(
             f"Splat options name no target_path and src_path in {splat_path}"
         )
-    return SplatFacts(load_address, binary, source_dir)
+    return SplatFacts(load_address, binary, source_dir, outside_sources(document))
+
+
+def outside_sources(document: dict[str, Any]) -> tuple[str, ...]:
+    """Return the files ``c`` rows name outside the image folder, such as ``../sound/SND_Init``."""
+    source_dir = document["options"]["src_path"]
+    found: list[str] = []
+    for segment in document.get("segments", []):
+        rows = (
+            segment.get("subsegments") or [] if isinstance(segment, dict) else [segment]
+        )
+        for row in rows:
+            parsed = _row(row)
+            if parsed and parsed[1] == "c" and parsed[2] and "/" in parsed[2]:
+                found.append(os.path.normpath(f"{source_dir}/{parsed[2]}.c"))
+    return tuple(found)
 
 
 @dataclass(frozen=True)
@@ -248,8 +269,17 @@ def _parse_splat_layout(splat_path: Path, load_address: int) -> ReviewedLayout:
         virtual_end = (
             virtual_start + file_end - file_start if file_end is not None else None
         )
+        folder, _, stem = (name or "").rpartition("/")
         boundaries.append(
-            LayoutBoundary(file_start, file_end, virtual_start, virtual_end, kind, name)
+            LayoutBoundary(
+                file_start,
+                file_end,
+                virtual_start,
+                virtual_end,
+                kind,
+                stem if name is not None else None,
+                f"{folder}/" if folder else "",
+            )
         )
     return ReviewedLayout(
         tuple(boundaries), load_address, hashlib.sha256(text.encode()).hexdigest(), base

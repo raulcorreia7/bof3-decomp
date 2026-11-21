@@ -39,14 +39,15 @@ byte-identical image, so a path answers which binary and which function a source
 
 ### Tree
 
-| Path                                                 | Holds                                                                                           |
-| ---------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `src/engine/<name>/`, `src/engine/<archive>/<slot>/` | code every overlay calls: the executable (`slus`) and `game/00`, which holds the record tables  |
-| `src/logo/`                                          | the logo player, a separate executable with its own address space                               |
-| `src/overlays/<group>/<archive>/<slot>/`             | one overlay image: its disc archive and slot, in the group that loads it                        |
-| `src/overlays/<group>/<group>.h`                     | the group header                                                                                |
-| `src/overlays/<group>/shared/<Name>.h`               | a body or header shared by images of one group; `area/worlds/world0N.h` holds the world headers |
-| `src/shared/<Name>.h`                                | a body or header shared by images of several groups                                             |
+| Path                                      | Holds                                                                                           |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `src/engine/<system>/`                    | code every overlay calls, one folder per system, from the executable (`slus`) and `game/00`     |
+| `src/engine/slus/`, `src/engine/game/00/` | what has no system yet: unnamed `func_` files, data files and the image header                  |
+| `src/logo/`                               | the logo player, a separate executable with its own address space                               |
+| `src/overlays/<group>/<archive>/<slot>/`  | one overlay image: its disc archive and slot, in the group that loads it                        |
+| `src/overlays/<group>/<group>.h`          | the group header                                                                                |
+| `src/overlays/<group>/shared/<Name>.h`    | a body or header shared by images of one group; `area/worlds/world0N.h` holds the world headers |
+| `src/shared/<Name>.h`                     | a body or header shared by images of several groups                                             |
 
 A shared body sits at the lowest folder that holds every image that includes it: the image folder, then
 `overlays/<group>/shared/Name.h`, then `shared/Name.h`.
@@ -58,9 +59,14 @@ The glosses are in [naming: disc words](naming.md#disc-words).
 Id to path: `emi/<family>/<archive>/<slot>` lives in `src/<root>/<archive>/<slot>`, where `<root>` is
 `overlays/<family>` unless the `source_folder` table in `tools/bof3/resolve/ids.py` names another;
 `exe/slus_004_22` is `src/engine/slus` and `exe/logo` is `src/logo`.
+An engine image takes its files from several folders: a `c` row names a file outside the image folder
+by its path from that folder (`[0xC6D00, c, ../sound/SND_Init]`; `../../sound/SND_Init` in `game/00`).
+A system folder holds the files of both engine images, and the row says which image links a file.
+A file moves into its system folder when its name has a system prefix; the build reads the row.
 `config/` and `build/asm/` follow the id, which is the disc path; `src/` follows what the code does.
 
-The path tells the build which image a source belongs to; the build needs no source list.
+The path tells the build which image a source belongs to, except in an engine system folder, where the
+image's `c` row does; the build needs no source list.
 
 ### Numbered leaves
 

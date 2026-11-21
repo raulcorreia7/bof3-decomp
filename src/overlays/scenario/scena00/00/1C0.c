@@ -606,12 +606,7 @@ MATCH void func_801F82B4(void) {
 
 MATCH void func_801F8360(void) {
     MATRIX       matrix;
-    SVECTOR      v0;
-    SVECTOR      v1;
-    SVECTOR      v2;
-    SVECTOR      v3;
-    SVECTOR      v4;
-    SVECTOR      v5;
+    SVECTOR      v[6];
     long         depth;
     long         flag;
     s32          angle;
@@ -631,16 +626,16 @@ MATCH void func_801F8360(void) {
     v2x = (u32)(size * rcos(angle)) >> 8;
     v2y = (u32)(size * rsin(angle)) >> 8;
 
-    setVector(&v0, 0, 0, 0);
-    setVector(&v1, size << 4, 0, 0);
-    setVector(&v2, v2x, v2y, 0);
+    setVector(&v[0], 0, 0, 0);
+    setVector(&v[1], size << 4, 0, 0);
+    setVector(&v[2], v2x, v2y, 0);
 
     v2x = (u32)(size * rcos(172)) >> 8;
     v2y = (u32)(size * rsin(172)) >> 8;
 
-    setVector(&v3, 0, 0, 0);
-    setVector(&v4, size << 4, 0, 0);
-    setVector(&v5, v2x, v2y, 0);
+    setVector(&v[3], 0, 0, 0);
+    setVector(&v[4], size << 4, 0, 0);
+    setVector(&v[5], v2x, v2y, 0);
 
     i = 0;
     do {
@@ -650,9 +645,9 @@ MATCH void func_801F8360(void) {
         Actor_BuildTransformMatrix(&matrix);
         Area_ApplyCameraMatrix(&matrix);
         if (i & 0x1) {
-            RotTransPers3(&v0, &v1, &v2, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+            RotTransPers3(&v[0], &v[1], &v[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
         } else {
-            RotTransPers3(&v3, &v4, &v5, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+            RotTransPers3(&v[3], &v[4], &v[5], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
         }
         shade = -(g_Task->timer << 1);
         setRGB0(prim, g_Task->tint.bytes.rgb.r, g_Task->tint.bytes.rgb.g, g_Task->tint.bytes.rgb.b);
@@ -682,9 +677,7 @@ ASSERT_OFFSET(SceneRotation, angle, 0x00);
 /* func_801F85A8 */
 MATCH void Scene_DrawTriangle(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
     MATRIX        matrix;
-    SVECTOR       v0;
-    SVECTOR       v1;
-    SVECTOR       v2;
+    SVECTOR       v[3];
     SceneRotation saved;
     long          depth;
     long          flag;
@@ -704,15 +697,15 @@ MATCH void Scene_DrawTriangle(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
 
     prim = (POLY_G3*)g_GfxPrimCursor;
 
-    setVector(&v0, 0, 0, 0);
-    setVector(&v1, size << 4, 0, 0);
-    setVector(&v2, v2x, v2y, 0);
+    setVector(&v[0], 0, 0, 0);
+    setVector(&v[1], size << 4, 0, 0);
+    setVector(&v[2], v2x, v2y, 0);
 
     SetPolyG3(prim);
     PushMatrix();
     Actor_BuildTransformMatrix(&matrix);
     Area_ApplyCameraMatrix(&matrix);
-    RotTransPers3(&v0, &v1, &v2, (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
+    RotTransPers3(&v[0], &v[1], &v[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
     setRGB0(prim, SCN_TRI_SHADE_V0, SCN_TRI_SHADE_V0, SCN_TRI_SHADE_V0);
     setRGB1(prim, SCN_TRI_SHADE_V1, SCN_TRI_SHADE_V1, SCN_TRI_SHADE_V1);
     setRGB2(prim, SCN_TRI_SHADE_V2, SCN_TRI_SHADE_V2, SCN_TRI_SHADE_V2);

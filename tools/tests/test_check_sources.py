@@ -47,3 +47,19 @@ def test_a_source_a_unit_includes_counts_as_named(tmp_path: Path) -> None:
             {"arc_00", "first", "second"},
         )
     }
+
+
+def test_a_row_names_a_source_in_another_folder(tmp_path: Path) -> None:
+    layout = tmp_path / "config/exe/slus_004_22/splat.yaml"
+    layout.parent.mkdir(parents=True)
+    layout.write_text(
+        "options:\n  src_path: src/engine/slus\n"
+        "segments:\n"
+        "  - type: code\n"
+        "    start: 0\n"
+        "    subsegments:\n"
+        "      - [0x0, c, ../sound/SND_Init]\n"
+    )
+    found = images(tmp_path)
+    assert found["engine/sound"] == ("config/exe/slus_004_22/splat.yaml", {"SND_Init"})
+    assert orphans(["src/engine/sound/SND_Init.c"], found) == []

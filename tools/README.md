@@ -171,7 +171,8 @@ never fails. `report` stores the totals under `quality` in `report.json`.
 ## Pre-push
 
 `pre_push.sh [BASE_REF]` (Meson target `pre-push`) runs the checks in `tools/gate.txt`, one line each,
-and keeps the logs in `build/pre-push/`. CI runs it too. `BASE_REF` defaults to the newest of
+and keeps the logs in `build/pre-push/`. CI runs it too. Commit first: the checks compare commits, so
+a tree with uncommitted changes fails before any check runs. `BASE_REF` defaults to the newest of
 `public/main`, `origin/main` and `main`. This table lists what fails each check.
 
 | Check           | Fails when                                                                              | Needs      |

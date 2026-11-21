@@ -289,6 +289,7 @@ def _target_rows(root: Path) -> list[dict[str, Any]]:
             "kind": manifest.kind,
             "binary": manifest.binary,
             "source_dir": manifest.source_dir,
+            "outside_sources": manifest.outside_sources,
             "load_address": manifest.load_address,
         }
         for manifest in load_target_manifests(root).values()
@@ -394,7 +395,12 @@ def _game_units(
     """Return one target's game units and its C sources with no split asm target."""
     target_id = str(target["id"])
     source_dir = project.root / str(target["source_dir"])
-    sources = sorted(source_dir.glob("*.c"))
+    sources = sorted(
+        [
+            *source_dir.glob("*.c"),
+            *(project.root / path for path in target["outside_sources"]),
+        ]
+    )
     readable = _readable_data(project.root, target_id)
     asm_dir = project.root / SPLIT / target_id
     if not asm_dir.is_dir() and any(

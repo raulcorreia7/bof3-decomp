@@ -58,7 +58,7 @@ def rows(root: Path, target: str, objects: tuple[str, ...]) -> list[Row]:
         name = object_name(root, obj)
         if obj.startswith(f"{BUILD}/src/") and obj.endswith(".c.o"):
             source = stem.removeprefix(BUILD + "/")
-            result.append(("c", name, source, asm_dir(root / source, root)))
+            result.append(("c", name, source, asm_dir(root / source, root, target)))
         elif obj.startswith(f"{BUILD}/{ASM}/") and obj.endswith(".s.o"):
             result.append(("s", name, stem))
         elif obj.startswith(f"{BUILD}/p2/") and obj.endswith(".s.o"):

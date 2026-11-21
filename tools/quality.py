@@ -58,6 +58,7 @@ GATED = ("casts", "harmful", "pasted", "addr", "names")
 PER_FUNCTION = ("addr", "names")
 TOTALS = ("casts", "harmful", "pasted")
 SUBSYSTEMS = (
+    ("Sound", "src/engine/sound"),
     ("Executable", "src/engine/slus"),
     ("Game", "src/engine/game"),
     ("Logo", "src/logo"),

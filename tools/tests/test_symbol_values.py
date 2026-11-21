@@ -124,7 +124,7 @@ def repo(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     patch(
         monkeypatch,
         "_layer_manifests",
-        lambda _ctx: {"exe/a": SimpleNamespace(source_dir="src/a")},
+        lambda _ctx: {"exe/a": SimpleNamespace(source_dir="src/a", outside_sources=())},
     )
     return tmp_path
 
