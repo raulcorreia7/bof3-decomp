@@ -117,6 +117,7 @@ g_GfxPrimCursor = { addr = 0x8014598C, size = 0x4, source = "Label primitive con
 g_Scripts = { addr = 0x801459F0, type = "u32", source = "Pointer to the active script table: Script_Begin hands a record of it to Script_Seek." }
 g_GfxTransferCount = { addr = 0x80145A00, source = "Count of queued VRAM transfers: Actor_SelectSprite appends and GFX_UpdateTransferQueue drains it." }
 g_PadStates = { addr = 0x80145AA4, type = "PadState", size = 0x10, source = "The two pads' state records that SYS_UpdateKeyState publishes from PadRead(0): held now, held last frame and newly pressed buttons." }
+g_InputPressed = { addr = 0x80145AA8, type = "u16", alias = true, source = "g_PadStates[0].pressed, the buttons newly pressed this frame." }
 g_InputMasks = { addr = 0x80145AB4, type = "u16", source = "Button masks of the controller." }
 g_InputRepeatDelay = { addr = 0x80145AC6, source = "INPUT_GetRepeatedButtons reloads and decrements the repeat countdown" }
 g_InputRepeatButtons = { addr = 0x80145AC8, source = "INPUT_GetRepeatedButtons snapshots held buttons and tests them on repeat" }
