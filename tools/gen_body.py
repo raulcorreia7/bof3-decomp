@@ -28,13 +28,13 @@ import argparse
 import collections
 import os
 import re
-import subprocess
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 
 from bof3.adapters.cli import run_main
 from bof3.adapters.config import read_symbols
+from bof3.adapters.match import run_match
 from bof3.source.ctext import mask
 from bof3.source.index import Func, find, load_index
 
@@ -1098,18 +1098,10 @@ def apply(items: list[Item], tree: Tree, shared: str | None) -> list[str]:
     out = []
     for item in items:
         f = item.func
-        result = subprocess.run(
-            ["sh", "tools/match.sh", f.image, f.name],
-            cwd=ROOT,
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-        if result.returncode:
+        result = run_match(ROOT, f.image, f.name)
+        if not result.exact:
             restore(saved)
-            lines = (result.stdout + result.stderr).strip().splitlines()
-            errors = [x for x in lines if re.search(r"\.[ch]:\d+: (?!warning)", x)]
-            tail = " | ".join(x.strip() for x in (errors or lines)[:2])
+            tail = " | ".join(x.strip() for x in result.errors()[:2])
             return [f"FAIL {f.ref} {f.name}: {tail[:200]}"]
         out.append(f"EXACT {f.ref} {f.name} in {f.src}")
     return out

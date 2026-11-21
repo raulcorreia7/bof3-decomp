@@ -24,13 +24,12 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import os
 import re
-import subprocess
 import sys
 from pathlib import Path
 
 from bof3.adapters.cli import run_main
+from bof3.adapters.match import run_match
 from bof3.source.ctext import read
 from bof3.source.index import Func, find, load_index
 from bof3.source.remap import declaration, diff_count
@@ -175,16 +174,8 @@ def match(ref: str, root: Path = ROOT) -> tuple[bool, str]:
     """Run ``tools/match.sh`` on one function; return (exact, last lines)."""
     target, _, name = ref.partition("@")
     (root / CAND).unlink(missing_ok=True)
-    result = subprocess.run(
-        ["sh", "tools/match.sh", target, name],
-        cwd=root,
-        env={**os.environ, "MATCH_CAND_OUT": str(root / CAND)},
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-    tail = (result.stdout + result.stderr).strip().splitlines()[-3:]
-    return result.returncode == 0, " | ".join(x.strip() for x in tail)[:230]
+    result = run_match(root, target, name, cand_out=root / CAND)
+    return result.exact, " | ".join(x.strip() for x in result.tail(3))[:230]
 
 
 def attempt(root: Path, func: Func, text: str) -> tuple[str, str]:
