@@ -66,15 +66,15 @@ NON_MATCHING void func_801EEF64(void) {
     g_Task->unk_09 = timer;
     if (timer == 0) {
         form    = g_Battle.dragon_form;
-        archive = 0x124;
+        archive = EMI_SLOT_KAIZAR_N;
         switch (form) {
             case 6: /* Form 6 keeps the default archive; the arm keeps retail's range guard. */
                 break;
             case 7:
-                archive = 0x123;
+                archive = EMI_SLOT_KAIZAR_F;
                 break;
             case 8:
-                archive = 0x122;
+                archive = EMI_SLOT_KAIZAR_D;
                 break;
         }
         EMI_LoadArchive(archive);
@@ -143,19 +143,19 @@ MATCH void func_801EF1C0(void) {
     }
     if (found) {
         if (g_EmiLoadedCharacterIndex == 7) {
-            EMI_LoadArchive((g_Battle.scroll_dir & 0x2) ? 0x205 : 0x201);
+            EMI_LoadArchive((g_Battle.scroll_dir & 0x2) ? EMI_SLOT_BRTU247 : EMI_SLOT_BRTD247);
         }
         if (g_EmiLoadedCharacterIndex == 0xD) {
-            EMI_LoadArchive((g_Battle.scroll_dir & 0x2) ? 0x206 : 0x202);
+            EMI_LoadArchive((g_Battle.scroll_dir & 0x2) ? EMI_SLOT_BRTU457 : EMI_SLOT_BRTD457);
         }
         if (g_EmiLoadedCharacterIndex == 0xE) {
-            EMI_LoadArchive((g_Battle.scroll_dir & 0x2) ? 0x207 : 0x203);
+            EMI_LoadArchive((g_Battle.scroll_dir & 0x2) ? EMI_SLOT_BRTU467 : EMI_SLOT_BRTD467);
         }
         if (g_EmiLoadedCharacterIndex == 0xF) {
             if (g_Battle.scroll_dir & 0x2) {
-                EMI_LoadArchive(0x208);
+                EMI_LoadArchive(EMI_SLOT_BRTU478);
             } else {
-                EMI_LoadArchive(0x204);
+                EMI_LoadArchive(EMI_SLOT_BRTD478);
             }
         }
     } else {

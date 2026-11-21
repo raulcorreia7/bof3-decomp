@@ -18,7 +18,7 @@ extern u16 D_801F43FC[];
 extern u8  D_801F4400[];
 /* The world slot counter and its active-step byte. */
 /* The request selector and the bytes the cancel path sets. */
-/* The area kind byte the request selector reads. */
+/* The area type byte the request selector reads. */
 extern u8  D_801FD288;
 
 /* The map marker the room layout steps draw. */

@@ -10,7 +10,7 @@ MATCH void func_801F38DC(void) {
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 SYS_SetFlag(state + 0x63C, 114);
                 Game_RequestAreaChange(AREA_ID_WYNDIA_LOWER, TO_COORD_HALF(44), TO_COORD(39), FACING_UP);
-                g_GameRequestKind = 0xFE;
+                g_GameRequestType = 0xFE;
                 *state            = *state + 1;
             }
             break;

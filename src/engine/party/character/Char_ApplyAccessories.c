@@ -1,26 +1,26 @@
 #include "engine/slus/slus.h"
 
-/* applies the per-kind adjustments for the two equipped accessories:
- * a stat delta from the kind table, then the kind's own counter updates, until two
- * kinds have been handled.
+/* applies the per-type adjustments for the two equipped accessories:
+ * a stat delta from the type table, then the type's own counter updates, until two
+ * types have been handled.
  */
 MATCH void Char_ApplyAccessories(Character* character) {
-    u8     kinds[2];
+    u8     types[2];
     Stats* stats;
-    u8*    kind;
+    u8*    type;
     s32    n;
     u16*   pair;
     u8*    counter;
     s32    delta;
 
     stats    = &character->stats;
-    kinds[0] = character->equip.accessories[0];
-    kind     = kinds;
-    kinds[1] = character->equip.accessories[1];
+    types[0] = character->equip.accessories[0];
+    type     = types;
+    types[1] = character->equip.accessories[1];
     n        = 0;
     do {
-        Char_AddStat(&stats->agility, -g_Accessories[*kind].weight);
-        switch (*kind) {
+        Char_AddStat(&stats->agility, -g_Accessories[*type].weight);
+        switch (*type) {
             case ACCESSORY_TITAN_BELT:
                 pair = &stats->power;
                 goto block_pair;
@@ -94,6 +94,6 @@ MATCH void Char_ApplyAccessories(Character* character) {
                 break;
         }
         n++;
-        kind++;
+        type++;
     } while ((n & BYTE_MASK) < 2U);
 }

@@ -1,6 +1,6 @@
 /* Draws the experience progress line of a character from x, y: its x extent is the exp between the current and next level scaled over the level-growth span, red, one semi-transparent line primitive. */
 /* func_801D4730 (bate), func_801D56D8 (shisu), func_801DA1D8 (shop) */
-MATCH void Menu_DrawExperienceLine(u16 x, u16 y, u8 kind, u8 level, u32 exp) {
+MATCH void Menu_DrawExperienceLine(u16 x, u16 y, u8 type, u8 level, u32 exp) {
     LINE_F2* line;
     s16      x0;
     s32      first;
@@ -11,8 +11,8 @@ MATCH void Menu_DrawExperienceLine(u16 x, u16 y, u8 kind, u8 level, u32 exp) {
     SetSemiTrans(line, 0);
     x0 = x;
     setXY0(line, x0, y);
-    first  = Char_GetExpForLevel(kind, level);
-    second = Char_GetExpForLevel(kind, (u8)(level + 1));
+    first  = Char_GetExpForLevel(type, level);
+    second = Char_GetExpForLevel(type, (u8)(level + 1));
     if (second != first) {
         line->x1 = x + (exp - first) * 57 / (second - first);
     } else {

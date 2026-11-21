@@ -3,7 +3,7 @@
 /* Row field outside this target's include chain: the enemy action id halfword
  * at +0x74 of the 0x118-byte rows indexed by (slot - 3). */
 
-/* Non-volatile alias for the selection-kind byte at 0x80146375. Reading it
+/* Non-volatile alias for the selection-type byte at 0x80146375. Reading it
  * through the target's volatile g_Battle.action_type makes the compiler materialize
  * the zero-extension of every byte load (`andi rX,rX,0xFF`), which retail does
  * not carry; this distinct, non-volatile symbol keeps the retail `lbu` shape.

@@ -1,7 +1,7 @@
 #ifndef BMAGIC_SPAWN_AT_TARGETS_H
 #define BMAGIC_SPAWN_AT_TARGETS_H
 
-/* Clears the effect count, then spawns one effect of kind PART at each target the target check passes on the
+/* Clears the effect count, then spawns one effect of type PART at each target the target check passes on the
  * selected side (the enemies when target selector bit 0x40 is set, else the party), each one 10 ticks after
  * the last, and moves the effect onto the last one spawned. A statement macro: the member declares u32 i,
  * u32 slot and PartyMember* work. */

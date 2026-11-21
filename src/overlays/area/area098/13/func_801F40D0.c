@@ -12,7 +12,7 @@ MATCH void func_801F40D0(s32 unused) {
     do {
         if (slot->active == 0) {
             slot->active     = 1;
-            slot->kind       = 0;
+            slot->type       = 0;
             slot->life       = 8;
             angle            = rand() & 0xFFF;
             speed            = ((rand() & 0xFFF) << 5) + 0x10000;

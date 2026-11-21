@@ -16,7 +16,7 @@ MATCH void func_800A0D64(void) {
     index                             = g_Battle.action_id;
     /* kept: the volatile table read changes the retail register schedule. */
     base_value                        = ((Ability*)g_Abilities)[index].power;
-    g_Battle.target_record->hp_change = Battle_GetActionId(g_BattleActiveBattler_nv, g_BattleTarget_nv, base_value, 0);
+    g_Battle.target_record->hp_change = Battle_RollActionDamage(g_BattleActiveBattler_nv, g_BattleTarget_nv, base_value, 0);
     /* FAKE: keeps the record store ahead of the selector read. */
     FAKE_BARRIER();
     battler = g_BattleTarget_nv;

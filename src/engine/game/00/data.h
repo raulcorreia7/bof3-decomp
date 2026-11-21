@@ -89,7 +89,7 @@ ASSERT_SIZE(PartySlot, 0x4);
  * area id at +0x18 matches the current world state. Each row carries the five
  * actor steps the region runs (the party's cell walk, the exit-cell entry, the
  * bird flock, the region script and the cloud draw) and +0x14 points to the
- * region's map points, four-byte rows (x, y, area id, kind) that func_801B690C
+ * region's map points, four-byte rows (x, y, area id, type) that func_801B690C
  * searches for the actor cell; Fishing_ShowLocation walks the same rows. The
  * only reader of the member is WorldMap_GetPoints; the rows are written by the
  * data initialiser only. */

@@ -41,7 +41,7 @@ MATCH void Fishing_ShowLocation(void) {
                     row++;
                 }
                 for (index = 0; index < 2; index++) {
-                    if (row->kind == D_801F4F30[index].kind) {
+                    if (row->type == D_801F4F30[index].type) {
                         break;
                     }
                 }

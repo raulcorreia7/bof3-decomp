@@ -4,7 +4,7 @@ MATCH void func_801BD83C(void) {
     s32 alt;
     s32 diff;
     s32 result;
-    s32 kind;
+    s32 type;
     u16 screen_y;
     u8  mode;
     s32 offset;
@@ -26,8 +26,8 @@ MATCH void func_801BD83C(void) {
         alt    = COORD_INT(g_Task->pos.z);
         result = ((s16)screen_y < alt) * 2;
     }
-    kind = result & BYTE_MASK;
-    switch (kind) {
+    type = result & BYTE_MASK;
+    switch (type) {
         case 0:
             func_801C5558();
             break;

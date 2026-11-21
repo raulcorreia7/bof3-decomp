@@ -20,7 +20,7 @@ func_801D0D80 = { addr = 0x801D0D80, type = "func", source = "Entry of the Shisu
 Menu_SetState = { addr = 0x801D18E4, type = "func", source = "the body stores into g_MenuStep.state" }
 Menu_DrawPanelCursor = { addr = 0x801D2FE8, type = "func", source = "Draws the menu panel cursor at the x and y of the current task root through Menu_DrawCursorSprite." }
 Shisu_UpdateCommandPanel = { addr = 0x801D3164, type = "func", source = "Entry at 0x801D9754 of the shisu step table: runs the g_ShisuTask2Steps handler of the panel state and draws the command row, like Menu_CommandsPanel in the start menu." }
-Menu_SetPosY = { addr = 0x801D320C, type = "func", source = "the body stores into g_MenuCurrentPanel->pos.y" }
+Menu_AdvancePanelY = { addr = 0x801D320C, type = "func", source = "the body stores into g_MenuCurrentPanel->pos.y" }
 Menu_SetPosX = { addr = 0x801D32E0, type = "func", source = "the body stores into g_MenuCurrentPanel->pos.x" }
 Menu_DrawCharacterWindow = { addr = 0x801D376C, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
 Menu_DrawStatPanel = { addr = 0x801D3BD4, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intelligence and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }

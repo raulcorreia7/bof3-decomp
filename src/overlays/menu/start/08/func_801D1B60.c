@@ -8,17 +8,17 @@ MATCH void func_801D1B60(void) {
     s8*  selection;
     s32  input;
     u16  i;
-    u8   kind;
+    u8   type;
     u16  total;
     u8   value;
 
     Menu_DrawClutStrip(D_80144953);
     saved_work                 = TASK_BYTES;
     g_MenuPanelTasks[9].unk_0A = (s8)D_80148655;
-    kind                       = D_801EC38C[(s8)D_80148655];
+    type                       = D_801EC38C[(s8)D_80148655];
     TASK_SET(g_Game.members);
-    g_MenuPanelTasks[10].u.addr.unk_10 = (s16)kind;
-    if ((D_8014504A == 0 && ((g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) || g_GameAreaId == AREA_ID_DESERT_OF_DEATH_MAP) && (func_801B6470(kind) & BYTE_MASK)) ||
+    g_MenuPanelTasks[10].u.addr.unk_10 = (s16)type;
+    if ((D_8014504A == 0 && ((g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) || g_GameAreaId == AREA_ID_DESERT_OF_DEATH_MAP) && (func_801B6470(type) & BYTE_MASK)) ||
         (D_8014504A != 0 && (func_801D2190() & BYTE_MASK))) {
         g_MenuPanelTasks[9].unk_0C = 0;
     } else {

@@ -46,11 +46,8 @@ segments:
       - [0x16A4, c, func_801F42A4]
       - [0x1724, c, func_801F4324]
       - [0x17A4, c, func_801F43A4]
-      - [0x1824, c, func_801F4424]
-      - [0x18A4, c, func_801F44A4]
-      - [0x1924, c, func_801F4524]
-      - [0x1954, c, func_801F4554]
-      - [0x1984, c, func_801F4584]
+      - [0x1824, c, area_801f4424]
+      - [0x1924, c, area_801f4524]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
     type: code

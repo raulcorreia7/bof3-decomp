@@ -4,7 +4,7 @@ MATCH void func_800A042C(void) {
     u8  battler;
     u16 value;
     u8  battler_index;
-    u8  selection_kind;
+    u8  selection_type;
     /* FAKE: the retail enemy row index is in v0 and the offset chain in v1. */
     FAKE_REG(u32, enemy_index, "v0");
 
@@ -32,6 +32,6 @@ MATCH void func_800A042C(void) {
                 break;
         }
     battler_index                     = g_Battle.active_battler;
-    selection_kind                    = g_Battle.target;
-    g_Battle.target_record->hp_change = Battle_CalcDamage(battler_index, selection_kind, 0xFFFFU);
+    selection_type                    = g_Battle.target;
+    g_Battle.target_record->hp_change = Battle_CalcDamage(battler_index, selection_type, 0xFFFFU);
 }

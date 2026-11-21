@@ -30,7 +30,7 @@ void func_800AF0F8(s32 pos_x, s32 pos_y, s32* values, u8* base, u8 count, u8 siz
 extern u8 D_801F0E74[][4][3];
 extern u8 D_801F0EA4[][4][3];
 
-/* One RGB row per effect kind, scaled by the effect timer. */
+/* One RGB row per effect type, scaled by the effect timer. */
 extern u8 D_801F0ED4[][3];
 extern u8 D_801F0EE0[][3];
 

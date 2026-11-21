@@ -68,7 +68,7 @@ MATCH void func_801F9338(void) {
                 SYS_SetFlag(g_SceneFlags, 1);
                 Game_RequestAreaChange(AREA_ID_WYNDIA_WORLD_MAP, TO_COORD(0x28), TO_COORD(0x35), 0x86);
                 g_GamePrevSelection     = 0x2F;
-                g_GameRequestKind       = 0xFF;
+                g_GameRequestType       = 0xFF;
                 g_ScenarioState.step_05 = 5;
             }
             break;
@@ -104,7 +104,7 @@ MATCH void func_801F9338(void) {
                 SYS_SetFlag(g_SceneFlags, 2);
                 g_GameFlags |= 0x80;
                 Game_RequestAreaChange(AREA_ID_WYNDIA_CASTLE, TO_COORD(0x29), TO_COORD(0x27), 5);
-                g_GameRequestKind        = 0xFF;
+                g_GameRequestType        = 0xFF;
                 g_GameEntryMode          = 0;
                 g_ScenarioState.state_04 = 3;
                 g_ScenarioState.step_05  = 0;

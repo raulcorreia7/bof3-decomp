@@ -9,7 +9,7 @@ MATCH void Battle_PlaceEnemyPanel(void) {
     BattlePanelTask* panel;
     u8               row;
     s32              base;
-    u8               kind;
+    u8               type;
     s32              adj;
     u16              y;
     u8               slot;
@@ -17,8 +17,8 @@ MATCH void Battle_PlaceEnemyPanel(void) {
     panel          = BATTLE_PANEL_TASK;
     row            = panel->selection.slot - 3;
     base           = g_BattleEnemyBattlers[row].screen_x + g_BattleEnemyBattlers[row].panel_offset_x;
-    kind           = g_BattleEnemyBattlers[row].unk_08;
-    adj            = ((kind == 0) || (kind == 3)) ? D_801EAEA4[0] : D_801EAEA4[2];
+    type           = g_BattleEnemyBattlers[row].unk_08;
+    adj            = ((type == 0) || (type == 3)) ? D_801EAEA4[0] : D_801EAEA4[2];
     panel->x.value = base + adj;
     /* FAKE: retail keeps the second row scan after the x store. */
     FAKE_BARRIER();

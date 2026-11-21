@@ -51,7 +51,7 @@ MATCH void func_801B146C(void) {
                 Actor_RequestRoute(g_Task->direction);
                 Game_RequestAreaChange(g_GameEntryAreaId, g_GameEntryPosX, g_GameEntryPosY, g_GameEntryFacing);
                 g_GameEntryMode   = 0;
-                g_GameRequestKind = 0xC;
+                g_GameRequestType = 0xC;
                 return;
             }
             if (g_Game.walk_flags & 0x2000) {

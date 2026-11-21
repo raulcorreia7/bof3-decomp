@@ -9,7 +9,7 @@ MATCH void func_801F41D8(void) {
     u32          index;
     s32          i;
     u8           bounds;
-    u8           kind;
+    u8           type;
 
     g_GameFlags &= 0xDFFF;
     saved = (PartyMember*)g_Task;
@@ -48,12 +48,12 @@ MATCH void func_801F41D8(void) {
                     func_801C2710();
                 }
             } else {
-                kind = D_801F558C[bounds * 6 + 4];
+                type = D_801F558C[bounds * 6 + 4];
                 if (SYS_TestFlag(g_SceneEventFlags, D_801F5591[bounds * 6]) != 0) {
-                    kind ^= 4;
+                    type ^= 4;
                 }
-                if (((PartyMember*)g_Task)->facing != kind) {
-                    ((PartyMember*)g_Task)->facing = kind;
+                if (((PartyMember*)g_Task)->facing != type) {
+                    ((PartyMember*)g_Task)->facing = type;
                     ((PartyMember*)g_Task)->unk_0C = -((PartyMember*)g_Task)->unk_0C;
                     ((PartyMember*)g_Task)->unk_10 = -((PartyMember*)g_Task)->unk_10;
                     ((PartyMember*)g_Task)->unk_14 = -((PartyMember*)g_Task)->unk_14;

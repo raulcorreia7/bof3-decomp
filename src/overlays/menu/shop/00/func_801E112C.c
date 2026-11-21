@@ -12,20 +12,20 @@ MATCH void func_801E112C(MenuPanelTask* task) {
     s32      mask;
     s32      level;
     s32      title_x;
-    u8*      kinds;
+    u8*      types;
     Ability* ability;
 
     UI_DrawWindow((task->pos.x + 3) & HALF_MASK, (task->pos.y + 3) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_WINDOW_HEIGHT, 0, CHARACTER_BLOCK->window_style);
     /* The ability stock begins 0xB1A bytes past the window style the panel block opens with. */
-    kinds = MEM_PTR(u8, CHARACTER_BLOCK) + 0xB1A + (func_801AFD10(&task->unk_0A, &row_offset, &count, MEM_PTR(u8, &task->flags)) & BYTE_MASK);
+    types = MEM_PTR(u8, CHARACTER_BLOCK) + 0xB1A + (func_801AFD10(&task->unk_0A, &row_offset, &count, MEM_PTR(u8, &task->flags)) & BYTE_MASK);
     y     = task->pos.y + (s8)row_offset;
     for (i = 0; i < count + 9; i++) {
-        if (*kinds != 0) {
-            ability = (Ability*)&g_Abilities[*kinds];
+        if (*types != 0) {
+            ability = (Ability*)&g_Abilities[*types];
             mask    = ((u32)task->flags >> 4) ^ 0xF;
             mask    = (mask != 0) ? -1 : 0;
             offset  = count & mask;
-            level   = Char_GetAbilityElement(*kinds);
+            level   = Char_GetAbilityElement(*types);
             shade   = (task->unk_0A + i == task->unk_0C + offset) * 2;
             if (task->unk_0A + i == task->unk_0B + offset || task->unk_0A + i == task->unk_0C + offset) {
                 UI_DrawAbilityRow((s16)(task->pos.x + 7), (s16)(y + 0x1A), UI_TEXT_DIM, level, ability, ability->cost, 1);
@@ -34,7 +34,7 @@ MATCH void func_801E112C(MenuPanelTask* task) {
                 UI_DrawAbilityRow((s16)(task->pos.x + 7), (s16)(y + 0x1A), 0, level, ability, ability->cost, 0);
             }
         }
-        kinds++;
+        types++;
         y += 13;
     }
     UI_DrawWindow((task->pos.x + 3) & HALF_MASK, (task->pos.y + 3) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_TOP_HEIGHT, task->unk_09, CHARACTER_BLOCK->window_style);

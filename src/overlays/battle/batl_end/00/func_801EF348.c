@@ -55,7 +55,7 @@ MATCH void func_801EF348(void) {
         }
     }
     g_EmiStreamFlags |= 0x20;
-    EMI_LoadArchive(g_GameAreaId + 0x2AB);
+    EMI_LoadArchive(g_GameAreaId + EMI_SLOT_AREA);
     {
         /* Base held once for the read-modify-write, as in retail. */
         u8* counter = (u8*)&g_Battle.ui_mode;

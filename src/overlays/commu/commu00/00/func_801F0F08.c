@@ -1,6 +1,6 @@
 #include "commu00_00.h"
 
-MATCH void func_801F0F08(u8 source_index, u8 task_index, u8 record_kind_index) {
+MATCH void func_801F0F08(u8 source_index, u8 task_index, u8 record_type_index) {
     u32 elapsed;
     u32 bucket;
 
@@ -15,5 +15,5 @@ MATCH void func_801F0F08(u8 source_index, u8 task_index, u8 record_kind_index) {
         bucket = 2;
     }
 
-    g_Actors[task_index].unk_7C = D_801F2930[bucket][D_801F2928[record_kind_index]];
+    g_Actors[task_index].unk_7C = D_801F2930[bucket][D_801F2928[record_type_index]];
 }

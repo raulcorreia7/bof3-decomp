@@ -61,8 +61,8 @@ s32         Party_AddZenny(s32 amount, s32 skip_earned);
 /* func_801666C8 */
 s32         Item_GetDescription(s32 category, s32 item_id);
 /* func_80166A10 */
-u8          Char_GetAbilityCost(u8 character_index, u8 ability_kind, u8 mode);
-/* func_80166AE4: kind table for (source slot, group, table kind) */
+u8          Char_GetAbilityCost(u8 character_index, u8 ability_type, u8 mode);
+/* func_80166AE4: type table for (source slot, group, table type) */
 u8*         Party_GetAbilities(u32 formation_index, u32 ability_type, u32 mode);
 /* func_80166B94 */
 u8*         Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode);

@@ -1,6 +1,6 @@
 #include "battle_03.h"
 
-/* primes the active work area's sprite kind, counts the shared panel
+/* primes the active work area's sprite type, counts the shared panel
  * timer down and raises its pending bit on expiry, then queues the work area's
  * step and closes the sequence.
  */

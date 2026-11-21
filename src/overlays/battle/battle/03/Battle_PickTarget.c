@@ -3,26 +3,26 @@
 /* func_801D3844 */
 MATCH u8 Battle_PickTarget(void) {
     u16* state;
-    u8   kind;
+    u8   type;
     u8   targeting_flags;
-    u16  selected_kind;
+    u16  selected_type;
 
     state = (u16*)&g_Battle.action_id;
 
     if (*state == ABILITY_RECALL) {
-        kind = g_BattleRecallAbilities[RANDOM_MASK(0x1Fu)];
+        type = g_BattleRecallAbilities[RANDOM_MASK(0x1Fu)];
     } else {
-        kind = 0u;
+        type = 0u;
     }
 
     if ((*state == ABILITY_MAGIC_SHUFFLE) || (*state == ABILITY_TRUMP)) {
-        kind = g_BattleMagicShuffleAbilities[RANDOM_MASK(0x1Fu)];
+        type = g_BattleMagicShuffleAbilities[RANDOM_MASK(0x1Fu)];
     }
 
-    targeting_flags                                   = g_Abilities[kind].targeting_flags;
-    selected_kind                                     = kind;
-    g_Battle.action_id                                = selected_kind;
-    *(u16*)(((*(volatile u8**)&g_Battle.action) + 2)) = selected_kind;
+    targeting_flags                                   = g_Abilities[type].targeting_flags;
+    selected_type                                     = type;
+    g_Battle.action_id                                = selected_type;
+    *(u16*)(((*(volatile u8**)&g_Battle.action) + 2)) = selected_type;
 
     if (targeting_flags & ABILITY_TARGET_FLAG_ALL) {
         if (targeting_flags & ABILITY_TARGET_FLAG_BOTH_SIDES) {

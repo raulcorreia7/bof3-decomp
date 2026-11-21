@@ -1,6 +1,6 @@
 #include "area151_13.h"
 
-/* Counts down how long the HUD banner is held. */
+/* Counts how long the HUD banner has been held. */
 /* func_801F3798 */
 MATCH void Area_CountHudBannerHold(void) {
     Actor* scratch;

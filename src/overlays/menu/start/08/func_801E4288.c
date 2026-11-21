@@ -1,6 +1,6 @@
 #include "start_08.h"
 
-/* sig-kept: the retail caller passes the tile and kind as words. */
+/* sig-kept: the retail caller passes the tile and type as words. */
 #define func_801E7720 ((void (*)(s32, u8))func_801E7720)
 
 void Menu_DrawBackdrop(void);

@@ -11,7 +11,7 @@ extern Magic068Steps D_801EEC04;
 extern s8            D_801EFC9F[];
 extern u16           D_801EFCA4[][3];
 
-void func_801DE8C0(s8 index, s8 record_kind, u8* text);
+void func_801DE8C0(s8 index, s8 record_type, u8* text);
 
 void func_801EF55C(void);
 

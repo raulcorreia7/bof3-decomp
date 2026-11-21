@@ -7,16 +7,16 @@ NON_MATCHING s32 func_800A8F58(void) {
     u32 off;
     s32 count;
     u8  i;
-    s32 kind;
+    s32 type;
 
     count = 0;
-    kind  = FIELD(u8, g_Game.current, 0x82u);
-    if (kind != 0x3F) {
-        if (kind < 0x40) {
-            if (kind != 0x1B) {
+    type  = FIELD(u8, g_Game.current, 0x82u);
+    if (type != 0x3F) {
+        if (type < 0x40) {
+            if (type != 0x1B) {
                 return 0;
             }
-        } else if (kind != 0x44) {
+        } else if (type != 0x44) {
             return 0;
         }
     }

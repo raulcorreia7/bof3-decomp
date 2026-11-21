@@ -2,7 +2,7 @@
 
 MATCH void Party_BuildBattlers(u32 order) {
     s32          i;
-    u8           kind;
+    u8           type;
     u8*          entry_table;
     Character*   record_base;
     PartyMember* battler;
@@ -20,11 +20,11 @@ MATCH void Party_BuildBattlers(u32 order) {
         g_Task->unk_48                    = 0;
         g_Task->scale.x                   = 65536;
         g_Task->scale.y                   = 65536;
-        kind                              = g_CharSlot[*((entry_table + ((order & BYTE_MASK) * 3)) + i)];
-        g_Game.members[i].character_index = kind;
+        type                              = g_CharSlot[*((entry_table + ((order & BYTE_MASK) * 3)) + i)];
+        g_Game.members[i].character_index = type;
         /* g_Characters is the 0xA4-byte character-record table; g_PartyFieldOrder is at +0x5F2. */
         record_base                       = (Character*)(g_PartyFieldOrder - 0x5F2);
-        g_BattlePartyBattlers[i].chr      = record_base[kind];
+        g_BattlePartyBattlers[i].chr      = record_base[type];
         g_BattlePartyBattlers[i].status.field.flags.unsigned_value &= 0xFE;
         if ((order & BYTE_MASK) != 0) {
             if ((g_Characters[g_Game.members[i].character_index].status & STATUS_POISONED) != 0) {

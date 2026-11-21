@@ -57,7 +57,7 @@ extern u8 D_80181B01[];
 extern u8 D_801F4A6C[];
 extern u8 D_801F4A6D[];
 
-/* The eight trigger rows: cell x, cell y, facing, effect flag, spawn flag and spawn kind. */
+/* The eight trigger rows: cell x, cell y, facing, effect flag, spawn flag and spawn type. */
 extern u8 D_801F4A84[];
 extern u8 D_801F4A85[];
 extern u8 D_801F4A86[];
@@ -65,7 +65,7 @@ extern u8 D_801F4A87[];
 extern u8 D_801F4A88[];
 extern u8 D_801F4A89[];
 
-/* The two projected-position limits of the party proximity check, by spawn kind. */
+/* The two projected-position limits of the party proximity check, by spawn type. */
 extern u16 D_801F4AB4[];
 extern u16 D_801F4AB6[];
 

@@ -1,12 +1,12 @@
 #include "battle_15.h"
 
-/* @returns 1 if the value at the kind_index row in D_80145FAA equals 0xE or
+/* @returns 1 if the value at the type_index row in D_80145FAA equals 0xE or
  * 0x128.
  */
-MATCH bool func_800AB4BC(s32 kind_index) {
+MATCH bool func_800AB4BC(s32 type_index) {
     u16 value;
 
-    value = g_Game.members[kind_index & BYTE_MASK].u.turn.command.id;
+    value = g_Game.members[type_index & BYTE_MASK].u.turn.command.id;
     if (value != 0xE)
         return value == 0x128;
     return 1;

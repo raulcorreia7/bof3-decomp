@@ -1,0 +1,25 @@
+#include "plp278_00.h"
+
+#if BOF3_USE_ASM
+__asm__(".include \"include/match/macro.inc\"\n");
+#endif
+
+MATCH void func_801CFA64(void) {
+    SYS_DISPATCH_TASK(D_801CFCEC, 2, g_Task);
+}
+
+#include "overlays/plchar/shared/PlChar_ClaimHelperSlotStep.h"
+
+MATCH void func_801CFAA8(void) {
+    PlChar_ClaimHelperSlotStep();
+}
+
+#include "overlays/plchar/shared/PlChar_ClearModeIfSlotFree.h"
+
+MATCH void func_801CFC2C(void) {
+    D_801CFCF4[g_Task->unk_2C]();
+}
+
+MATCH void func_801CFC70(void) {
+    D_801CFD00[g_Task->unk_2C]();
+}

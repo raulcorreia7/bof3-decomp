@@ -9,7 +9,7 @@ MATCH void func_8009F0A4(void) {
     /* FAKE: pin the delta counter to retail a1. */
     FAKE_REG(u16, delta_raw, "a1");
     u8            battler_index;
-    u8            selection_kind;
+    u8            selection_type;
     s16           result;
     volatile u16* counter;
     /* FAKE: pin the counter sample to retail v0. */
@@ -43,9 +43,9 @@ MATCH void func_8009F0A4(void) {
     *counter  = 0;
     Char_AddStat(counter, action + delta_raw);
     battler_index  = g_Battle.active_battler;
-    selection_kind = g_Battle.target;
+    selection_type = g_Battle.target;
     /* FAKE: keeps the 0xFFFF load in the jal delay slot. */
     FAKE_BARRIER();
-    result                            = Battle_CalcDamage(battler_index, selection_kind, BATTLE_ELEMENT_FROM_WEAPON);
+    result                            = Battle_CalcDamage(battler_index, selection_type, BATTLE_ELEMENT_FROM_WEAPON);
     g_Battle.target_record->hp_change = result;
 }

@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 /* Overlay head .data, 0x801D0CB8..0x801D0F0C: the drop chances and the
- * queued-slot dispatch tables (mode, kind and sub-kind handlers). */
+ * queued-slot dispatch tables (mode, type and sub-type handlers). */
 
 /* In-overlay dispatch targets (split assembly units). */
 

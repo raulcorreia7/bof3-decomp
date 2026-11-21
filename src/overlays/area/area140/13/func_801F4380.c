@@ -6,7 +6,7 @@ NON_MATCHING u8 func_801F4380(s32 x, s32 y) {
     s32 base;
     s32 table_offset;
     u8  flag;
-    u8  kind;
+    u8  type;
     u8  count;
     s32 j;
     u8  actor_slot;
@@ -26,12 +26,12 @@ NON_MATCHING u8 func_801F4380(s32 x, s32 y) {
     if (SYS_TestFlag(g_SceneEventFlags, flag) != 0) {
         return 0;
     }
-    kind = D_801F4A89[base];
-    if (kind != 0) {
+    type = D_801F4A89[base];
+    if (type != 0) {
         count = D_80146254;
         if (count > 0) {
-            limit_y = D_801F4AB6[kind * 2];
-            limit_x = D_801F4AB4[kind * 2];
+            limit_y = D_801F4AB6[type * 2];
+            limit_x = D_801F4AB4[type * 2];
             for (j = 0; j < count; j++) {
                 PartyMember* member;
                 s32          product_x;

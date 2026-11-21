@@ -45,7 +45,7 @@ void func_801F3594(s16 x0, s16 y0, s16 x1, s16 y1, s16 x2, s16 y2, s16 x3, s16 y
 void func_801F3698(s16 x0, s16 y0, s16 x1, s16 y1, u16 x2, u16 y2, u8 r, u8 g, u8 b, u8 semi_trans);
 void func_801F3774(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b, u8 semi_trans);
 void func_801F3838(u16 line_index);
-void func_801F388C(s32 x, s32 y, s8 kind);
+void func_801F388C(s32 x, s32 y, s8 type);
 void func_801F4640(s32 sample_height);
 
 #endif

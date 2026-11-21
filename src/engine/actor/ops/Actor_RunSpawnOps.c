@@ -7,8 +7,8 @@
 /* Runs one helper-spawn opcode. */
 /* Opcodes 0x90 to 0x9F of the actor script: spawn a helper actor. */
 typedef enum ActorScriptSpawn {
-    ACTOR_SCRIPT_SPAWN_CLAIM_AT_SCREEN_FIRST = 0x90, /* args: [dx] [dy]; Actor_ClaimSlot at the screen position; 0x91 to 0x95 pick the next kinds */
-    ACTOR_SCRIPT_SPAWN_AT_ACTOR_FIRST        = 0x98, /* args: [dx] [dy]; Actor_SpawnHelper at the actor; 0x99 to 0x9D pick the next kinds */
+    ACTOR_SCRIPT_SPAWN_CLAIM_AT_SCREEN_FIRST = 0x90, /* args: [dx] [dy]; Actor_ClaimSlot at the screen position; 0x91 to 0x95 pick the next types */
+    ACTOR_SCRIPT_SPAWN_AT_ACTOR_FIRST        = 0x98, /* args: [dx] [dy]; Actor_SpawnHelper at the actor; 0x99 to 0x9D pick the next types */
     ACTOR_SCRIPT_SPAWN_WAIT_ALIVE            = 0x9F, /* hold the cursor while the spawned actor is in use */
 } ActorScriptSpawn;
 

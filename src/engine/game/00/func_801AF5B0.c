@@ -1,10 +1,10 @@
 #include "game_00.h"
 
 #ifdef NON_MATCHING
-NON_MATCHING u8 func_801AF5B0(s32 item_category, s32 character_index, s32 ability_kind) {
+NON_MATCHING u8 func_801AF5B0(s32 item_category, s32 character_index, s32 ability_type) {
     FAKE_REG(s32, ch, "s1");
     /* FAKE: pin the argument roles to retail s1, s2 and s3. */
-    FAKE_REG(s32, kind, "s2");
+    FAKE_REG(s32, type, "s2");
     FAKE_REG(const u8*, ability, "s3");
     s32 category;
     s32 mapped_character;
@@ -14,11 +14,11 @@ NON_MATCHING u8 func_801AF5B0(s32 item_category, s32 character_index, s32 abilit
     u32 learned_level;
 
     ch   = character_index;
-    kind = ability_kind;
-    if ((u8)kind == 0u) {
+    type = ability_type;
+    if ((u8)type == 0u) {
         return 0;
     }
-    ability  = (const u8*)&g_Abilities[(u8)kind];
+    ability  = (const u8*)&g_Abilities[(u8)type];
     category = item_category & BYTE_MASK;
     if (category == 1) {
         goto case_1;
@@ -33,7 +33,7 @@ NON_MATCHING u8 func_801AF5B0(s32 item_category, s32 character_index, s32 abilit
 case_1:
     mapped_character = g_CharSlot[g_PartyFieldOrder[(u8)ch]];
     character_offset = (u32)mapped_character * PARTY_RECORD_STRIDE;
-    required_level   = Char_GetAbilityCost((u8)mapped_character, (u8)kind, 0u) & BYTE_MASK;
+    required_level   = Char_GetAbilityCost((u8)mapped_character, (u8)type, 0u) & BYTE_MASK;
     learned_level    = g_Characters[mapped_character].ap;
     if (learned_level < required_level)
         return 0;
@@ -42,7 +42,7 @@ case_1:
     return 0;
 case_2:
     character_offset = (u32)(u8)ch * BATTLE_PARTY_STRIDE;
-    required_level   = Char_GetAbilityCost((u8)ch, (u8)kind, 1u) & BYTE_MASK;
+    required_level   = Char_GetAbilityCost((u8)ch, (u8)type, 1u) & BYTE_MASK;
     learned_level    = *(const u16*)(D_80145F1A + character_offset);
     if (learned_level < required_level)
         return 0;
@@ -50,15 +50,15 @@ case_2:
         return 0;
     if ((*(const u16*)(D_80145F10 + character_offset) & 0x10u) != 0u && (*(const u16*)(ability + 0x10) & 0x400u) != 0u)
         return 0;
-    if ((u8)kind == ABILITY_DISEMBOWEL && g_Game.members[(u8)ch].chr.fatigue >= 5u)
+    if ((u8)type == ABILITY_DISEMBOWEL && g_Game.members[(u8)ch].chr.fatigue >= 5u)
         return 0;
-    if ((u8)kind == ABILITY_BONEBREAK && *(u32*)&g_GameBonebreakTimer != 0u)
+    if ((u8)type == ABILITY_BONEBREAK && *(u32*)&g_GameBonebreakTimer != 0u)
         return 0;
-    if ((u8)kind == ABILITY_CELERITY && *(u32*)&g_GameCelerityTimer != 0u)
+    if ((u8)type == ABILITY_CELERITY && *(u32*)&g_GameCelerityTimer != 0u)
         return 0;
-    if ((u8)kind == ABILITY_TRUMP && g_Game.members[(u8)ch].chr.ap != 0u)
+    if ((u8)type == ABILITY_TRUMP && g_Game.members[(u8)ch].chr.ap != 0u)
         return 0;
-    if ((u8)kind == ABILITY_ACCESSION && g_Battle.encounter == 37u)
+    if ((u8)type == ABILITY_ACCESSION && g_Battle.encounter == 37u)
         return 0;
     return 1;
 }

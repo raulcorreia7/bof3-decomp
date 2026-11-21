@@ -12,16 +12,16 @@ MATCH void Area_CyclePalette(void) {
     s32  select;
     s32  i;
     u32  tag;
-    u32  kind;
+    u32  type;
 
     record = (u32*)MAP_BUNDLE_BASE + g_AreaMapBundle.record_list_offset;
     while (*record != 0) {
         header = *record;
-        kind   = header >> 24;
+        type   = header >> 24;
         tag    = 0x80;
         /* FAKE: retail reloads the 0x80 tag each record. */
         FAKE_OPAQUE(tag);
-        if (kind == tag) {
+        if (type == tag) {
             select = (g_FrameCount % (header & BYTE_MASK)) + 1;
             src    = record + 1;
             do {

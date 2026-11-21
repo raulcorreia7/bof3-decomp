@@ -1,10 +1,10 @@
 #include "game_00.h"
 
 MATCH s8 func_801A8B84(s32 handler_x, s32 handler_y) {
-    s32 kind;
+    s32 type;
 
-    kind = LOHU(g_GameAreaId);
-    switch (kind) {
+    type = LOHU(g_GameAreaId);
+    switch (type) {
         case AREA_ID_MOMO_TOWER_FIRST_FLOOR:
             return func_801F3400();
         case AREA_ID_MOMO_TOWER_TOP:

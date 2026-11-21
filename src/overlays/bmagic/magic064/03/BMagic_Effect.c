@@ -158,14 +158,14 @@ MATCH void func_801EF2A4(void) {
     func_801F0EEC(2, 1, battler->unk_09);
     g_Task = battler;
     if (g_BattleEffectBattler->unk_2C.value == 0) {
-        value = 0x242;
+        value = EMI_SLOT_RTU00;
         if (g_BattleEffectBattler->facing < 2U) {
-            value = 0x240;
+            value = EMI_SLOT_RTD00;
         }
     } else {
-        value = 0x243;
+        value = EMI_SLOT_RTU01;
         if (g_BattleEffectBattler->facing < 2U) {
-            value = 0x241;
+            value = EMI_SLOT_RTD01;
         }
     }
     EMI_LoadArchive(value);

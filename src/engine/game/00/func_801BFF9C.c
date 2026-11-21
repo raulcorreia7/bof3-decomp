@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
+MATCH void func_801BFF9C(u32 work_type, u32 work_index, u32 work_mode) {
     Character* rec;
     u8         count;
     s32        i;
@@ -13,7 +13,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
     FAKE_REG(u8*, feed, "t1"); /* FAKE: record base reloads into t1. */
     u8* mask;
     FAKE_REG(u32, addr, "v0"); /* FAKE: work base staged in v0. */
-    u8  kind;
+    u8  type;
     s32 koff; /* FAKE: retail scales the record index before the base add. */
     /* FAKE: retail holds the three arguments in s7/fp/s6. */
     s32 z;
@@ -21,7 +21,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
     s32 x;
     s32 y;
 
-    x = work_kind;
+    x = work_type;
     y = work_index;
     z = work_mode;
     g_GameFlags &= 0xEFFF;
@@ -95,12 +95,12 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
                     g_Task->pos.x.fixed                       = 0;
                     g_Task->pos.y.fixed                       = 0;
                     g_Task->pos.z.fixed                       = 0;
-                    kind                                      = g_CharSlot[*order];
+                    type                                      = g_CharSlot[*order];
                     feed                                      = D_80145F04;
                     dst                                       = feed + off;
-                    koff                                      = (kind & BYTE_MASK) * PARTY_RECORD_STRIDE;
+                    koff                                      = (type & BYTE_MASK) * PARTY_RECORD_STRIDE;
                     rec                                       = (Character*)(koff + (u32)base);
-                    (&g_Game.members[0].character_index)[off] = kind;
+                    (&g_Game.members[0].character_index)[off] = type;
                     *(Character*)dst                          = *rec;
                     if (!(g_Task->active_flags & 0x1)) {
                         Party_LoadMemberSprite(*order, i & BYTE_MASK);

@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/bmagic/shared/Effect_RunSlotsWithSetup.h"
 
 /* Clears the effect slot table and spawns one effect 0x27 at each selectable battler, the enemies
- * (raised by the enemy kind's height) when the target selector holds 0x40 and the party otherwise,
+ * (raised by the enemy type's height) when the target selector holds 0x40 and the party otherwise,
  * each starting 8 frames after the one before by slot; then sets STP on colours 1 to 15 of work
  * palette row 26 from arena row 0. */
 MATCH void func_801EED04(void) {

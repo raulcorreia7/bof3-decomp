@@ -3,7 +3,7 @@
 /* Current battler slot index (local slots 0-2, enemy slots from 3). */
 
 /* clears paired local/enemy flag bits and associated countdown bytes
- * for the current battler, except under two specific global mode/kind
+ * for the current battler, except under two specific global mode/type
  * combinations.
  */
 MATCH void func_801D4850(void) {

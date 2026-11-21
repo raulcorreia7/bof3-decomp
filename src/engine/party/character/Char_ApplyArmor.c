@@ -4,21 +4,21 @@
  * block, then applies the item's own resistance and stat bonuses.
  */
 MATCH void Char_ApplyArmor(Character* character) {
-    u8     kind_bytes[3];
-    u8*    kind;
+    u8     type_bytes[3];
+    u8*    type;
     Stats* stats;
     u8     i;
 
     stats         = &character->stats;
-    kind_bytes[0] = character->equip.shield;
-    kind          = kind_bytes;
-    kind_bytes[1] = character->equip.helmet;
+    type_bytes[0] = character->equip.shield;
+    type          = type_bytes;
+    type_bytes[1] = character->equip.helmet;
     i             = 0;
-    kind_bytes[2] = character->equip.armor;
+    type_bytes[2] = character->equip.armor;
     do {
-        Char_AddStat(&stats->defense, g_Armors[*kind].power);
-        Char_AddStat(&stats->agility, -g_Armors[*kind].weight);
-        switch (*kind) {
+        Char_AddStat(&stats->defense, g_Armors[*type].power);
+        Char_AddStat(&stats->agility, -g_Armors[*type].weight);
+        switch (*type) {
             case ARMOR_ASBESTOS_ARMOR:
                 Char_AddResistance(&stats->resistances[RES_INDEX_FIRE], 2);
                 break;
@@ -101,6 +101,6 @@ MATCH void Char_ApplyArmor(Character* character) {
                 break;
         }
         i++;
-        kind++;
+        type++;
     } while (i < 3);
 }

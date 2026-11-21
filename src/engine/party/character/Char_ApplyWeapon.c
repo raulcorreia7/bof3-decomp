@@ -1,19 +1,19 @@
 #include "engine/slus/slus.h"
 
-/* adds to the character's power and agility by the kind-selected bytes of the 0x18-stride table
+/* adds to the character's power and agility by the type-selected bytes of the 0x18-stride table
  * Weapon.power and .weight, then by the weapon's own bonus to the stat block.
  */
 MATCH void Char_ApplyWeapon(Character* character) {
     Character* record;
     Stats*     stats;
-    u8         kind;
+    u8         type;
 
     record = character;
-    kind   = record->equip.weapon;
-    Char_AddStat(&record->stats.power, g_Weapons[kind].power);
-    Char_AddStat(&record->stats.agility, -g_Weapons[kind].weight);
+    type   = record->equip.weapon;
+    Char_AddStat(&record->stats.power, g_Weapons[type].power);
+    Char_AddStat(&record->stats.agility, -g_Weapons[type].weight);
     stats = &record->stats;
-    switch (kind - WEAPON_DEADLY_BLADE) {
+    switch (type - WEAPON_DEADLY_BLADE) {
         case 0:
             Char_AddPercent(&stats->critical_chance, 8);
             break;

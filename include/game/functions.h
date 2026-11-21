@@ -151,7 +151,7 @@ s32   func_801AF390(s16 x, s16 y, u8* table, s32 flags);
 void  UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
 bool  Item_PassesTest(u8 test, u8 character_id, u8 category, u8 item_id);
 /* func_801AF5B0 */
-u8    func_801AF5B0(s32 item_category, s32 character_index, s32 ability_kind);
+u8    func_801AF5B0(s32 item_category, s32 character_index, s32 ability_type);
 /* func_801AF800 */
 void  UI_DrawItemRow(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
 /* func_801AFA1C */
@@ -203,7 +203,7 @@ s8    Game_GetPartySize(s32 pos_x, s32 pos_y, s32 range_mode);
 /* func_801BE1B0 */
 s32   Scene_SetupParty(u32 scene);
 /* func_801BFE34 */
-void  func_801BFE34(s32 work_kind, s32 work_index, s32 work_mode);
+void  func_801BFE34(s32 work_type, s32 work_index, s32 work_mode);
 /* func_801C1254 */
 void  Party_LoadMemberSprite(s32 character_id, s32 party_slot);
 /* func_801C1400 */

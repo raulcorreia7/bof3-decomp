@@ -49,21 +49,21 @@ typedef struct WorldMapMarker {
 ASSERT_SIZE(WorldMapMarker, 4);
 
 /* One 4-byte world map point: the cell x and y, then the destination area id
- * (func_801B690C stores it in g_GameEntryAreaId) and the location kind (the
+ * (func_801B690C stores it in g_GameEntryAreaId) and the location type (the
  * Fishing_ShowLocation tables select their message set by it). */
 typedef struct WorldMapPoint {
     u8 x;       /* 0x00 */
     u8 y;       /* 0x01 */
     u8 area_id; /* 0x02 */
-    u8 kind;    /* 0x03 */
+    u8 type;    /* 0x03 */
 } WorldMapPoint;
 
 ASSERT_SIZE(WorldMapPoint, 4);
 
-/* One fishing location row: the location kind a WorldMapPoint carries, then the five fish ids
+/* One fishing location row: the location type a WorldMapPoint carries, then the five fish ids
  * the location lists on the Fishing_ShowLocation message. */
 typedef struct FishingLocationRow {
-    u8 kind;       /* 0x00 */
+    u8 type;       /* 0x00 */
     u8 fish_id[5]; /* 0x01 */
 } FishingLocationRow;
 
@@ -160,8 +160,8 @@ extern u8       D_801F5364[];
 
 extern Callback D_801F5804[];
 
-/* Ask Actor_ClaimSlot what the party battler in `slot` finds at its position: aim the task at the battler, look the party slot's selection up in `table`, run the probe of `kind`, and store a found result in the battler's unk_0B. */
-static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
+/* Ask Actor_ClaimSlot what the party battler in `slot` finds at its position: aim the task at the battler, look the party slot's selection up in `table`, run the probe of `type`, and store a found result in the battler's unk_0B. */
+static inline void Area_ProbeParty(s32 slot, const u8* table, s32 type) {
     PartyMember* battler;
     u8           index;
     s16          y;
@@ -174,7 +174,7 @@ static inline void Area_ProbeParty(s32 slot, const u8* table, s32 kind) {
     y         = g_Game.members[slot].screen_y.signed_value;
     x         = g_Game.members[slot].screen_x.signed_value;
     selection = table[index];
-    result    = Actor_ClaimSlot(kind, 0, selection, x, y);
+    result    = Actor_ClaimSlot(type, 0, selection, x, y);
     if ((u8)result != GAME_NONE) {
         battler               = (PartyMember*)g_Task;
         battler->param.unk_0B = (u8)result;

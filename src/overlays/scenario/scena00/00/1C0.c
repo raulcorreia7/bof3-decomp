@@ -1294,7 +1294,7 @@ MATCH void func_801F9BE4(void) {
                 break;
             }
             Game_RequestAreaChange(AREA_ID_TITLE_INTRO, TO_COORD(7), TO_COORD(20), FACING_UP_LEFT);
-            g_GameRequestKind = 0xFF;
+            g_GameRequestType = 0xFF;
             SND_FadeOutBGM(6, 0x5A, 0x40);
             g_ScenarioState.state_04 = 3;
             g_ScenarioState.step_05  = 0;
@@ -1667,7 +1667,7 @@ MATCH void func_801FA7D8(void) {
             }
             SYS_SetFlag(g_SceneFlags, 4u);
             Game_RequestAreaChange(AREA_ID_DAUNA_MINE_WHELP, TO_COORD(99), TO_COORD(17), FACING_RIGHT);
-            g_GameRequestKind       = 9u;
+            g_GameRequestType       = 9u;
             g_GameEntryMode         = 0xFFu;
             g_ScenarioState.step_05 = 0xBu;
             return;

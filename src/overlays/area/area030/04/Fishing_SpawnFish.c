@@ -1,12 +1,12 @@
 #include "area030_04.h"
 
-/* The kind tables read through a non-const view so the base is rebuilt at
+/* The type tables read through a non-const view so the base is rebuilt at
  * every access, the way retail materializes it. */
-#define KIND_TABLE            MEM_PTR(s8, 0x801E2AD6u)
+#define FISH_TYPES            MEM_PTR(s8, 0x801E2AD6u)
 #define LIMIT_TABLE           MEM_PTR(s8, 0x801E2AD7u)
 #define COUNT_TABLE           MEM_PTR(u8, 0x801E2DF4u)
 
-/* The spawn column count, the kind row stride and the state row stride. */
+/* The spawn column count, the type row stride and the state row stride. */
 #define FISHING_SPAWN_COLUMNS 0x17
 #define FISHING_TYPE_STRIDE   0x24
 #define FISHING_ROW_STRIDE    0x98
@@ -17,12 +17,12 @@
 #define ROW_VALUE2            FISHING_ROW->ext.fishing.stamina
 
 /* Spawns the area-030 state rows for the active spawn columns, rolling and clamping each row's hit value into
- * the kind table words. */
+ * the type table words. */
 /* func_801DE1C0 */
 #ifdef NON_MATCHING
 NON_MATCHING void Fishing_SpawnFish(void) {
     s16 hit_value;
-    s32 kind_offset;
+    s32 type_offset;
     s32 steps;
     s32 walk;
     s32 walk_limit;
@@ -35,7 +35,7 @@ NON_MATCHING void Fishing_SpawnFish(void) {
     u8* cur;
     u8* limits;
     u8* row;
-    u8  kind;
+    u8  type;
     u8  limit;
     u8  count;
     u8  column;
@@ -61,7 +61,7 @@ NON_MATCHING void Fishing_SpawnFish(void) {
                 roll_masked = roll & HALF_MASK;
                 if (limit < roll_masked) {
                     roll = roll - (limit >> 1);
-                    goto loop_4; /* retry the roll store after subtracting the kind's half limit */
+                    goto loop_4; /* retry the roll store after subtracting the type's half limit */
                 }
                 half    = limit >> 1;
                 clamped = roll;
@@ -70,13 +70,13 @@ NON_MATCHING void Fishing_SpawnFish(void) {
                 }
                 ROW_ROLL    = clamped;
                 cur         = g_Task;
-                kind_offset = FIELD(u8, cur, 0x6u) * FISHING_TYPE_STRIDE;
-                hit_value   = (KIND_TABLE[kind_offset] * ((s32)(ROW_ROLL * 0xA) / (s32)LIMIT_TABLE[kind_offset])) / 10;
+                type_offset = FIELD(u8, cur, 0x6u) * FISHING_TYPE_STRIDE;
+                hit_value   = (FISH_TYPES[type_offset] * ((s32)(ROW_ROLL * 0xA) / (s32)LIMIT_TABLE[type_offset])) / 10;
                 ROW_VALUE   = hit_value;
                 ROW_VALUE2  = hit_value;
-                kind        = FIELD(u8, cur, 0x6u);
-                if (kind != 0x15) {
-                    limits = MEM_PTR(u8, D_801E2AD7) + (kind * FISHING_TYPE_STRIDE);
+                type        = FIELD(u8, cur, 0x6u);
+                if (type != 0x15) {
+                    limits = MEM_PTR(u8, D_801E2AD7) + (type * FISHING_TYPE_STRIDE);
                     if (ROW_ROLL == *limits) {
                         steps = (*limits / 10) & BYTE_MASK;
                         walk  = 0;

@@ -26,7 +26,7 @@
  * (0x801E5824) through the handler table at 0x801D0CC0.
  *
  * One hit is Battle_CalcDamage (0x801DC044): the attacker's element or the
- * weapon's, weapon-vs-enemy-kind doubling, status reactions, the eight random
+ * weapon's, weapon-vs-enemy-type doubling, status reactions, the eight random
  * percentages at 0x801D0C7C and a +/-9999 clamp. Battle_ApplyDamage (0x801DBB78)
  * stores the result and the HP/AP change.
  *

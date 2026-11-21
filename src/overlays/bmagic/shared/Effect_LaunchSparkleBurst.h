@@ -1,6 +1,6 @@
 /* When the effect timer runs out, moves the effect onto the battler that slot byte 0x04 names (party slots first, then
- * enemy slots), projects the battle range and launches the sparkles of the kind g_BattleEffectBattler names: the kind's
- * count from EFFECT_SPARKLE_COUNTS, each group of four held back by the kind's EFFECT_SPARKLE_DELAYS step more. */
+ * enemy slots), projects the battle range and launches the sparkles of the type g_BattleEffectBattler names: the type's
+ * count from EFFECT_SPARKLE_COUNTS, each group of four held back by the type's EFFECT_SPARKLE_DELAYS step more. */
 /* func_801EF06C (magic073), func_801EF058 (magic074) */
 /* The statements of the burst; each member declares PartyMember* battler, u8 slot and u8 index, count and i. */
 #define EFFECT_LAUNCH_SPARKLE_BURST()                                                                                        \

@@ -1,5 +1,5 @@
 /* Menu_DrawAbilityList: the ability list panel of the shop (0x801DCE5C) and bate (0x801D73B4) overlays. The including image
- * supplies g_MenuAbilityListNames and the four g_MenuListTab*Sprites runs. */
+ * supplies g_MenuAbilityListNames and the four g_MenuListTab1/2 On/Off Sprites runs. */
 /* func_801AF930 is defined in engine/game/00 with s32 coordinates and a u8* command stream; the
  * bate and shop headers keep their s16 and volatile Ability* shape because that shape is what
  * the callers' bytes need, and shisu passes the stream as (u8*)ability. */

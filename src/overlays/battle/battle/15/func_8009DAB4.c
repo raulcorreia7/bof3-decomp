@@ -1,7 +1,7 @@
 #include "battle_15.h"
 
 /* FAKE: the call arguments are read into locals first and the barrier keeps the
- * kind-0xFFFF materialization out of the load-delay path, so it lands in the
+ * type-0xFFFF materialization out of the load-delay path, so it lands in the
  * jal delay slot as retail has it.
  */
 MATCH void func_8009DAB4(void) {
@@ -10,7 +10,7 @@ MATCH void func_8009DAB4(void) {
     u8  battler;
     u16 value;
     u8  battler_index;
-    u8  selection_kind;
+    u8  selection_type;
     s16 res;
 
     battler = LOBU(g_Battle.active_battler);
@@ -36,7 +36,7 @@ MATCH void func_8009DAB4(void) {
             }
         }
     battler_index                     = g_Battle.active_battler;
-    selection_kind                    = g_Battle.target;
-    res                               = Battle_CalcDamage(battler_index, selection_kind, BATTLE_ELEMENT_FROM_WEAPON);
+    selection_type                    = g_Battle.target;
+    res                               = Battle_CalcDamage(battler_index, selection_type, BATTLE_ELEMENT_FROM_WEAPON);
     g_Battle.target_record->hp_change = res;
 }

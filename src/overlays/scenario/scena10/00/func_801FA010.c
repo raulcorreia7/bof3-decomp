@@ -112,7 +112,7 @@ NON_MATCHING void func_801FA010(void) {
         case 21:
             if (g_GameStateIndex == 0) {
                 Game_RequestAreaChange(0x58, 0x280000, 0x220000, 1);
-                g_GameRequestKind       = GAME_NONE;
+                g_GameRequestType       = GAME_NONE;
                 g_GameEntryMode         = GAME_NONE;
                 g_ScenarioState.step_05 = 23;
             }

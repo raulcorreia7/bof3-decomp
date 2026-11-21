@@ -58,7 +58,7 @@ MATCH void func_801D177C(void) {
         u8* row1;
 
         j    = 0;
-        row0 = s_SkillOrderKinds[i];
+        row0 = s_SkillOrderTypes[i];
         row1 = s_SkillOrderGroups[i];
         for (; j < 6; j++) {
             row0[j] = 0;

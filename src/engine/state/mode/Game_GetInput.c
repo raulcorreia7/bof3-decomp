@@ -2,10 +2,10 @@
 
 /* func_801B59B4 */
 MATCH bool Game_GetInput(void) {
-    s32 kind;
+    s32 type;
 
-    kind = g_Game.input & INPUT_DIRECTIONAL;
-    switch (kind) {
+    type = g_Game.input & INPUT_DIRECTIONAL;
+    switch (type) {
         case PADLup:
             g_Task->direction = FACING_UP_LEFT;
             break;

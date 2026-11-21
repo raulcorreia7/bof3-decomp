@@ -11,7 +11,7 @@ typedef struct ScriptState {
     u8  unk_01;
     u8  count;
     u8  script_index; /* 0x03 the row of the area script table to run */
-    u8  move_mode;    /* 0x04 the kind of move the script starts; 0 for none */
+    u8  move_mode;    /* 0x04 the type of move the script starts; 0 for none */
     u8  direction;    /* 0x05 the facing the script runs under */
     u8  pad_06;
     u8  steps;      /* 0x07 the frames or half cells the started move runs for */

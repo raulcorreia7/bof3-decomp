@@ -6,6 +6,6 @@ MATCH void func_801F31C0(void) {
         g_AreaDrawFlags        = 0;
         g_SceneEventState.step = 0x14;
     } else {
-        g_GameRequestKind = 1;
+        g_GameRequestType = 1;
     }
 }

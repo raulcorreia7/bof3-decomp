@@ -437,7 +437,7 @@ MATCH void func_801F84F4(void) {
         *timer          = 30;
         D_801F9DD8      = 0;
         g_ScenarioState.state_04 += 1;
-        EMI_LoadArchive(0x260);
+        EMI_LoadArchive(EMI_SLOT_ENDKANJI);
         func_801F8FAC(0xE0, 0xBE, 0x80, 1);
     } else {
         func_801F8FAC(0xE0, 0xBE, value, 1);

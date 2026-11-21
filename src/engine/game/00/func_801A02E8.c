@@ -7,11 +7,11 @@ MATCH void func_801A02E8(void) {
     seed = (u16*)&g_GameEntryAreaId;
     for (i = 0; i < 11; i++) {
         if (*seed == D_801C8384[i]) {
-            g_GameRequestKind = 11;
+            g_GameRequestType = 11;
             return;
         }
     }
     if (i == 11) {
-        g_GameRequestKind = 1;
+        g_GameRequestType = 1;
     }
 }

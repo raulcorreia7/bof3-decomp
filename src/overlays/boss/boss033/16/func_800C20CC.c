@@ -2,7 +2,7 @@
 
 /* Copies the battle work record into a queued slot and arms the active actor. */
 MATCH void func_800C20CC(void) {
-    u8*              kind;
+    u8*              type;
     u8*              work;
     BattleWorkImage* slot;
     u32              index;
@@ -26,19 +26,19 @@ MATCH void func_800C20CC(void) {
             work[0xB]--;
         }
     }
-    kind = (u8*)&g_Battle.target_selector;
-    if (*kind < 3) {
-        func_800AF2B4(&g_Game.members[*kind], 0x50);
-        if (func_800AF5FC(&g_Game.members[*kind], 0x10000) != 0) {
+    type = (u8*)&g_Battle.target_selector;
+    if (*type < 3) {
+        func_800AF2B4(&g_Game.members[*type], 0x50);
+        if (func_800AF5FC(&g_Game.members[*type], 0x10000) != 0) {
             Actor_SelectScript(5);
-            Battle_MarkDamaged(*kind);
+            Battle_MarkDamaged(*type);
             ((PartyMember*)g_Task)->header.step++;
         }
     } else {
-        func_800AF2B4(&g_BattleEnemies[*kind * 0x118], 0x50);
-        if (func_800AF5FC(&g_BattleEnemies[*kind * 0x118], 0x10000) != 0) {
+        func_800AF2B4(&g_BattleEnemies[*type * 0x118], 0x50);
+        if (func_800AF5FC(&g_BattleEnemies[*type * 0x118], 0x10000) != 0) {
             Actor_SelectScript(5);
-            Battle_MarkDamaged(*kind);
+            Battle_MarkDamaged(*type);
             ((PartyMember*)g_Task)->header.step++;
         }
     }

@@ -21,15 +21,15 @@ MATCH void Area_DrawCellSides(u8* record, s32 cell_x, s32 cell_y) {
     u8*             prim;
     s32             count;
     s32             side;
-    s32             kind;
+    s32             type;
 
-    kind = (u32)(record[3] - 63) >> 1;
-    if (kind < 4) {
+    type = (u32)(record[3] - 63) >> 1;
+    if (type < 4) {
         count = 1;
-        side  = kind;
+        side  = type;
     } else {
         count = 2;
-        side  = (kind - 4) * 2;
+        side  = (type - 4) * 2;
     }
     row     = (MapCellHeights*)(MAP_BUNDLE_BASE + 0x30) + cell_y * g_AreaMapBundle.width;
     cell    = (MapCellHeights*)(cell_x * 4 + (u32)row);

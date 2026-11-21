@@ -13,8 +13,8 @@ MATCH void func_801B3768(void) {
     u32    high;
     u8     selector;
     u8*    row;
-    u8     kind;
-    u8     current_kind;
+    u8     type;
+    u8     current_type;
     u8     actor_slot;
     u32*   spawn_count;
 
@@ -27,9 +27,9 @@ MATCH void func_801B3768(void) {
         low      = selector;
         if (low == GAME_NONE) {
             Game_RewardZenny((high & BYTE_MASK) * 0x28);
-            current_kind = g_Actors[g_Game.current->status.field.slot].unk_05;
-            if (current_kind != low) {
-                SYS_SetFlag(D_80144FC4, current_kind);
+            current_type = g_Actors[g_Game.current->status.field.slot].unk_05;
+            if (current_type != low) {
+                SYS_SetFlag(D_80144FC4, current_type);
             }
             D_80145038 += 1;
         } else {
@@ -42,9 +42,9 @@ MATCH void func_801B3768(void) {
             } while ((index & BYTE_MASK) < 0xCU);
             D_801490E4[0] = 0;
             if (Item_Add(selector, high & BYTE_MASK, 1, 0) & BYTE_MASK) {
-                kind = g_Actors[g_Game.current->status.field.slot].unk_05;
-                if (kind != GAME_NONE) {
-                    SYS_SetFlag(D_80144FC4, kind);
+                type = g_Actors[g_Game.current->status.field.slot].unk_05;
+                if (type != GAME_NONE) {
+                    SYS_SetFlag(D_80144FC4, type);
                 }
                 SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
                 Message_Request(GAME_TEXT_SEARCH_FOUND);

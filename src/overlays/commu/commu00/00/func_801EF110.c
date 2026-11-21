@@ -6,7 +6,7 @@ MATCH void func_801EF110(s32 battle_count) {
     s32 i;
     s32 j;
     s32 doubled_battle_count;
-    s32 kind;
+    s32 type;
     s32 term;
     s32 value;
     s32 result;
@@ -15,13 +15,13 @@ MATCH void func_801EF110(s32 battle_count) {
     if ((u16)dec != 0u) {
         doubled_battle_count = (battle_count & BYTE_MASK) * 2;
         total                = 0;
-        /* FAKE: the local copy of the compared kind is required; the bare
+        /* FAKE: the local copy of the compared type is required; the bare
          * literal measures 98.46. */
-        kind                 = FAIRY_JOB_HUNT;
+        type                 = FAIRY_JOB_HUNT;
         j                    = 0;
         i                    = 0;
         do {
-            if ((g_FairyJobs[i].active != 0) && (g_FairyJobs[i].type == kind)) {
+            if ((g_FairyJobs[i].active != 0) && (g_FairyJobs[i].type == type)) {
                 term = *(g_Fairies[0] + 5 + j) + 3;
                 total += term;
             }

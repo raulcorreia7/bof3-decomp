@@ -88,7 +88,7 @@ MATCH void func_801F7BA0(void) {
                     g_GameEntryMode = 0xFF;
                 }
                 SYS_SetFlag(g_SceneEventFlags, 0x8A);
-                g_GameRequestKind        = GAME_NONE;
+                g_GameRequestType        = GAME_NONE;
                 g_GamePrevSelection      = GAME_NONE;
                 g_ScenarioState.state_04 = 0;
                 g_ScenarioState.step_05  = 0;

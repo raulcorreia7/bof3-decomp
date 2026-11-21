@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void func_801C0758(s32 x, s32 y, u8 kind) {
+MATCH void func_801C0758(s32 x, s32 y, u8 type) {
     s32  count;
     s32  index;
     s32  tab;
@@ -10,7 +10,7 @@ MATCH void func_801C0758(s32 x, s32 y, u8 kind) {
 
     count = 0;
     if (count < g_Game.party_size) {
-        tab   = (kind * 4) & 0x3F8;
+        tab   = (type * 4) & 0x3F8;
         y_ptr = &D_80145EC8;
         x_ptr = y_ptr - 1;
         index = 0;
@@ -28,7 +28,7 @@ MATCH void func_801C0758(s32 x, s32 y, u8 kind) {
                 out_y  = y - FIELD(s32, &D_801CD480, tab);
                 *y_ptr = out_y;
             }
-            (&g_Game.members[0].facing)[index]                     = kind;
+            (&g_Game.members[0].facing)[index]                     = type;
             FIELD(s16, &COORD_INT(g_Game.members[0].pos.z), index) = Area_ReadHeight(*x_ptr, *y_ptr);
             if (count != 0) {
                 ((u8*)&g_Game.members[0])[index] |= 0x40;

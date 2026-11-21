@@ -30,16 +30,16 @@ MATCH void func_801A0514(void) {
             block_7:
                 {
                     Actor* scratch;
-                    s32    kind;
+                    s32    type;
                     scratch = g_Task;
-                    kind    = scratch->unk_06;
-                    if (kind == 10) {
+                    type    = scratch->unk_06;
+                    if (type == 10) {
                         index += 1;
                         Actor_ProjectForDraw();
                         next_u8 = index & BYTE_MASK;
                     } else {
                         Area_AddGridActor();
-                        goto block_10; /* the kind is not 10, step the slot */
+                        goto block_10; /* the type is not 10, step the slot */
                     }
                 }
             } else {

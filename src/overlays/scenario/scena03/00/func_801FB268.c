@@ -33,7 +33,7 @@ NON_MATCHING void func_801FB268(void) {
             break;
         case 2:
             Game_RequestAreaChange(0x63, 0x68000, 0x230000, 1);
-            g_GameRequestKind       = 0xFF;
+            g_GameRequestType       = 0xFF;
             g_GameEntryMode         = 0xFF;
             g_ScenarioState.step_05 = 3;
             break;

@@ -44,20 +44,20 @@
  * receives. No generic entry carries this contract. */
 typedef void (*BattlePanelTaskCallback)(s32 panel_arg0, s32 panel_arg1, s32 panel_arg2, s32 panel_arg3, s32 panel_arg4, s32 panel_arg5, s32 panel_arg6, u8* selector);
 
-/* The panel task's kind byte (+0x02) selects one of these eight update
+/* The panel task's type byte (+0x02) selects one of these eight update
  * routines; Battle_UpdatePanel copies the table and dispatches. */
 typedef struct {
     Callback modes[8];
 } BattlePanelModes;
 
-/* The queued slot's kind (+0x05) selects one of these eight handlers in slot
+/* The queued slot's type (+0x05) selects one of these eight handlers in slot
  * mode 3 (`g_BattleEffectModes` row 3); Battle_RunBossEffect copies the
  * table and dispatches. */
 typedef struct {
     Callback steps[8];
 } BattleBossEffectSteps;
 
-/* The queued slot's kind (+0x05) selects one of these 110 handlers in slot
+/* The queued slot's type (+0x05) selects one of these 110 handlers in slot
  * mode 1 (`g_BattleEffectModes` row 1); Battle_RunMagicEffect copies the
  * table and dispatches. */
 typedef struct {
@@ -145,7 +145,7 @@ typedef struct BattleRank {
     u16 index;
 } BattleRank;
 
-/* The queued slot's kind (+0x05) selects one of these 19 handlers in slot mode
+/* The queued slot's type (+0x05) selects one of these 19 handlers in slot mode
  * 0 (`g_BattleEffectModes` row 0); Battle_RunBattlerEffect copies the table
  * and dispatches. */
 typedef struct {
@@ -387,7 +387,7 @@ extern u16                      D_801EAE50[];
 extern u16                      D_801EAE52[];
 /* D_801EAE94 */
 extern u8                       s_BattlePanelOffsets[][2];
-extern s8                       D_801EAEA4[]; /* panel x offsets: [0] for kinds 0 and 3, [2] otherwise */
+extern s8                       D_801EAEA4[]; /* panel x offsets: [0] for types 0 and 3, [2] otherwise */
 extern volatile u32             D_801EAEB0[]; /* panel icon blit table */
 extern BattlePanelFrame         D_801EAEE8[];
 extern u8                       D_801EAF27[];
@@ -510,7 +510,7 @@ u16                func_800A2AE0(u8 arg0);
 void               Battle_AddStatus(u32 battler_index, u32 status_mask);
 /* func_800A36F0 */
 void               Battle_CureStatus(u32 battler_index, u32 status_mask);
-u8                 func_800A3DF8(u32 battler_index, u32 selection_kind);
+u8                 func_800A3DF8(u32 battler_index, u32 selection_type);
 s32                func_800A8F58(void);
 s32                func_800AA368(void);
 void               func_800AB0B8(u32 arg0, u8 arg1, u8* arg2);
@@ -746,9 +746,9 @@ extern void        func_801DE698(void);
 extern void        func_801DE754(void);
 void               func_801DE7FC(void);
 void               func_801DE804(void);
-u8                 func_801DE858(s8 event_kind);
+u8                 func_801DE858(s8 event_type);
 /* func_801DE8C0 */
-void               Battle_AddMessage(s8 index, s8 record_kind, u8* text);
+void               Battle_AddMessage(s8 index, s8 record_type, u8* text);
 u8                 func_801DE92C(void);
 void               Battle_SetTextPartyName(u32 party_slot);
 void               Battle_SetTextEnemyName(u32 enemy_index);
@@ -766,7 +766,7 @@ u8                 Battle_IsEnemyBlocked(void);
 u8                 Battle_IsEnemyBlockedOnce(void);
 void               Battle_OpenPanel(void);
 void               Battle_GetTurnCursor(u32 battler_index);
-void               Battle_QueueEvent(u8 event_kind, u8 event_value, u8 group, u8 timer, u8* payload);
+void               Battle_QueueEvent(u8 event_type, u8 event_value, u8 group, u8 timer, u8* payload);
 void               func_801DEEB4(void);
 void               func_801DEF0C(void);
 extern void        func_801DEFDC(void);
@@ -1143,7 +1143,7 @@ static inline void BattleSetEnding(u32 value) {
 }
 
 /* Draw the battle panel frame, its two glyphs and the horizontal rails. */
-static inline void BattleDrawPanelFrame(s32 x, s32 y, s32 kind, s32 glyph0, s32 glyph1, s32 width) {
+static inline void BattleDrawPanelFrame(s32 x, s32 y, s32 type, s32 glyph0, s32 glyph1, s32 width) {
     u16 color;
     u8  r;
     u8  g;
@@ -1155,7 +1155,7 @@ static inline void BattleDrawPanelFrame(s32 x, s32 y, s32 kind, s32 glyph0, s32 
     r     = PSX_COLOR_R(color) << 3;
     g     = PSX_COLOR_G(color) << 3;
     b     = PSX_COLOR_B(color) << 3;
-    Battle_DrawWindowTile((s16)x, (s16)(y + 2), kind, 1);
+    Battle_DrawWindowTile((s16)x, (s16)(y + 2), type, 1);
     Battle_DrawPanelShape((s16)x, (s16)y, glyph0, 1);
     Battle_DrawPanelShape((s16)x, (s16)(y + 0x11), glyph1, 1);
     Battle_DrawPanelLine((s16)(x + 2), (s16)(y + 2), (s16)(x + width), (s16)(y + 2), r, g, b);

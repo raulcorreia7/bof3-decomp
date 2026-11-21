@@ -2,7 +2,7 @@
 
 /* func_801C1254 */
 /* Loads the party member's field sprite into the work record: the character sprites section, sprite page, sheet row,
- * CLUT selector (party_slot + 0x78), palette kind and the slot's palette. */
+ * CLUT selector (party_slot + 0x78), palette type and the slot's palette. */
 MATCH void Party_LoadMemberSprite(s32 character_id, s32 party_slot) {
     Actor*    work;
     const u8* base;

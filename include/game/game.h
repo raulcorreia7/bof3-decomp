@@ -279,7 +279,7 @@ extern Callback           D_801CD1B0[2];
 extern u8                 s_EncounterStepThresholds[16];
 extern u8                 D_801CD1B9[];
 /* D_801CD1C8 */
-extern u8                 s_MenuBattlerKinds[4];
+extern u8                 s_MenuBattlerTypes[4];
 /* D_801CD1CC */
 extern u8                 s_RouteSlotAlternates[12];
 extern Callback           D_801CD1D8[19];
@@ -287,7 +287,7 @@ extern u8                 D_801CD226[];
 /* D_801CD29C */
 extern u8                 s_AreaScenePositions[8];
 /* D_801CD2A4 */
-extern u8                 s_AreaCellKinds[12];
+extern u8                 s_AreaCellTypes[12];
 extern Callback           D_801CD2B0[9];
 extern Callback           D_801CD2D4[6];
 extern Callback           D_801CD2EC[2];

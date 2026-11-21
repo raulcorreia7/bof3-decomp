@@ -22,9 +22,9 @@ MATCH u8 Menu_SwapPartyMembers(void) {
                 s_SkillOrderCursors[D_80148658[5]][i] = tmp;
             }
             for (i = 0; i < 6; i++) {
-                tmp                                  = s_SkillOrderKinds[D_80148658[1]][i];
-                s_SkillOrderKinds[D_80148658[1]][i]  = s_SkillOrderKinds[D_80148658[5]][i];
-                s_SkillOrderKinds[D_80148658[5]][i]  = tmp;
+                tmp                                  = s_SkillOrderTypes[D_80148658[1]][i];
+                s_SkillOrderTypes[D_80148658[1]][i]  = s_SkillOrderTypes[D_80148658[5]][i];
+                s_SkillOrderTypes[D_80148658[5]][i]  = tmp;
                 tmp                                  = s_SkillOrderGroups[D_80148658[1]][i];
                 s_SkillOrderGroups[D_80148658[1]][i] = s_SkillOrderGroups[D_80148658[5]][i];
                 s_SkillOrderGroups[D_80148658[5]][i] = tmp;
@@ -68,7 +68,7 @@ MATCH u8 Menu_SwapPartyMembers(void) {
         s_SkillOrderCursors[row][i] = 0;
     }
     for (i = 0; i < 6; i++) {
-        s_SkillOrderKinds[row][i]  = 0;
+        s_SkillOrderTypes[row][i]  = 0;
         s_SkillOrderGroups[row][i] = 0;
     }
     return 0xFF;

@@ -7,23 +7,23 @@ NON_MATCHING void Battle_StartDamageNumber(void) {
     PartyMember*  source;
     u8            digits;
     s32           divisor;
-    u8            kind;
+    u8            type;
     s8            offset;
 
     slot   = D_801EC2E0;
     source = slot->target.party;
-    kind   = source->slot;
-    if (kind < 3) {
+    type   = source->slot;
+    if (type < 3) {
         COORD_INT(slot->pos.x) = source->screen_x.value + (s8)g_BattlePanelOffsets[(source->facing * 2) + (source->unk_2C.value * 8)];
         source                 = slot->target.party;
         offset                 = (g_BattlePanelOffsets + 1)[(source->facing * 2) + (source->unk_2C.value * 8)];
     } else {
-        kind -= 3;
-        COORD_INT(slot->pos.x) = source->screen_x.value + g_BattleEnemyBattlers[kind].panel_offset_x;
+        type -= 3;
+        COORD_INT(slot->pos.x) = source->screen_x.value + g_BattleEnemyBattlers[type].panel_offset_x;
         source                 = slot->target.party;
-        kind                   = source->slot;
-        kind -= 3;
-        offset = g_BattleEnemyBattlers[kind].panel_offset_y;
+        type                   = source->slot;
+        type -= 3;
+        offset = g_BattleEnemyBattlers[type].panel_offset_y;
     }
     COORD_INT(slot->pos.y) = source->screen_y.value + offset;
     divisor                = 0x64;
@@ -40,11 +40,11 @@ loop:
             goto loop; /* back to the shorter divisor */
         }
     }
-    kind = slot->target.party->slot;
-    if (kind < 3) {
-        g_Game.members[kind].u.turn.damage_flags.value |= BATTLER_DAMAGE_NUMBER;
+    type = slot->target.party->slot;
+    if (type < 3) {
+        g_Game.members[type].u.turn.damage_flags.value |= BATTLER_DAMAGE_NUMBER;
     } else {
-        ENEMY_COMBATANT(kind).turn.damage_flags.value |= 0x80;
+        ENEMY_COMBATANT(type).turn.damage_flags.value |= 0x80;
     }
     slot->unk_0A     = digits;
     slot->arg.unk_09 = 8;

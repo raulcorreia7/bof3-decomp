@@ -1,6 +1,6 @@
 /* Drops every live spark by its fall speed, draws it and frees it below the work floor; returns whether any spark was
  * live. */
-/* Scene_DrawSparkCell (scena01), func_801F3AAC (area082) */
+/* Area_StepSparks (scena01 and area082) */
 MATCH u8 Area_StepSparks(void) {
     AreaSpark* spark;
     u8         i;

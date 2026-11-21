@@ -87,7 +87,7 @@ void Fishing_ShopDrawQuantity(void);
 /* func_800F6EE0 */
 void Fishing_ShopDrawQuantityWindow(u16 x, u16 y);
 /* func_800F7094 */
-void Fishing_ShopDrawItemIcon(s32 x, s32 y, s32 kind, s32 value, u8 selected);
+void Fishing_ShopDrawItemIcon(s32 x, s32 y, s32 type, s32 value, u8 selected);
 /* func_800F7100 */
 void Fishing_ShopTakeTradeItems(void);
 /* func_801D799C */

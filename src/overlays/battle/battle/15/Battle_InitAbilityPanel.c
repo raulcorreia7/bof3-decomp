@@ -4,13 +4,13 @@
  * (g_BattleChoicePanel, 0x80148570): word-sized cursor coordinates and
  * ring state sit beside byte-sized panel fields. */
 typedef struct BattleSelectionInit {
-    volatile u8  selection_kind;  /* +0x00 */
+    volatile u8  selection_type;  /* +0x00 */
     volatile u8  panel_rows;      /* +0x01 */
-    volatile u8  primary_kind;    /* +0x02 */
+    volatile u8  primary_type;    /* +0x02 */
     volatile u8  primary_state;   /* +0x03 */
     volatile u16 scroll_base_x;   /* +0x04 */
     volatile u16 scroll_base_y;   /* +0x06 */
-    volatile u8  panel_kind;      /* +0x08 */
+    volatile u8  panel_type;      /* +0x08 */
     volatile u8  panel_row_count; /* +0x09 */
     volatile u8  group_index;     /* +0x0A */
     volatile u8  page_base;       /* +0x0B */
@@ -33,7 +33,7 @@ MATCH void Battle_InitAbilityPanel(void) {
     u8                   tail_byte;
 
     init_work                                     = (BattleSelectionInit*)g_BattleChoicePanel;
-    init_work->selection_kind                     = 1u;
+    init_work->selection_type                     = 1u;
     g_BattleChoicePanel[1]                        = 8u;
     g_BattleChoicePanel[2]                        = 2u;
     g_BattleChoicePanel[3]                        = 2u;

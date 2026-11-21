@@ -8,7 +8,7 @@ MATCH s32 Area_BuildEncounter(u8 work_mode, s32 work_index) {
     s32             x;
     s32             y;
     s32             reach;
-    u8              kind;
+    u8              type;
     u8              slot;
     s32             off;
     EncounterEnemy* entry;
@@ -51,10 +51,10 @@ MATCH s32 Area_BuildEncounter(u8 work_mode, s32 work_index) {
     i = 0;
 loop_16:
     if ((i & BYTE_MASK) < (Party_CountOrder(PARTY_ORDER_BATTLE) & BYTE_MASK)) {
-        kind = g_PartyBattleOrder[i & BYTE_MASK];
+        type = g_PartyBattleOrder[i & BYTE_MASK];
         x    = g_EncounterParty[i & BYTE_MASK].x.fixed;
         y    = g_EncounterParty[i & BYTE_MASK].y.fixed;
-        if ((kind == 2) || (kind == 6)) {
+        if ((type == 2) || (type == 6)) {
             reach = 1;
         } else {
             reach = 0;

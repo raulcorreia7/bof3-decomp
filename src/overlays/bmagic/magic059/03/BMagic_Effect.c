@@ -32,7 +32,7 @@ NON_MATCHING void func_801EED0C(void) {
     u16*          palette_dst;
     u32           i;
     u8            slot;
-    u8            kind;
+    u8            type;
     u8            phase;
     s32           speed;
 
@@ -48,42 +48,42 @@ NON_MATCHING void func_801EED0C(void) {
     g_BattleEffects[slot].target.party = g_Task;
     g_Task->param.unk_0B++;
 
-    kind  = 3;
+    type  = 3;
     speed = 0x80;
     for (i = 0; i < 8; i++) {
         slot                 = BMagic_AllocEffect();
         effect               = &D_801F0694[slot];
         effect->header.mode  = 0;
         effect->arg.unk_09   = i << 3;
-        effect->unk_0B       = kind;
+        effect->unk_0B       = type;
         effect->unk_0C       = speed;
         effect->pos.x.fixed  = 0x800000;
         effect->target.party = g_Task;
         g_Task->param.unk_0B++;
     }
 
-    kind  = 2;
+    type  = 2;
     speed = 0xC0;
     for (i = 0, phase = 2; i < 8; i++, phase += 8) {
         slot                 = BMagic_AllocEffect();
         effect               = &D_801F0694[slot];
         effect->header.mode  = 0;
         effect->arg.unk_09   = phase;
-        effect->unk_0B       = kind;
+        effect->unk_0B       = type;
         effect->unk_0C       = speed;
         effect->pos.x.fixed  = 0x400000;
         effect->target.party = g_Task;
         g_Task->param.unk_0B++;
     }
 
-    kind  = 1;
+    type  = 1;
     speed = 0x100;
     for (i = 0, phase = 4; i < 8; i++, phase += 8) {
         slot                 = BMagic_AllocEffect();
         effect               = &D_801F0694[slot];
         effect->header.mode  = 0;
         effect->arg.unk_09   = phase;
-        effect->unk_0B       = kind;
+        effect->unk_0B       = type;
         effect->unk_0C       = speed;
         effect->pos.x.fixed  = 0;
         effect->target.party = g_Task;

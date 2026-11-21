@@ -3,7 +3,7 @@
 /* func_801C6BB4 */
 MATCH bool Area_PlaceEncounterEnemies(void) {
     EncounterEnemy* entry;
-    Enemy*          kind;
+    Enemy*          type;
     s16             index;
     s16             i;
     s16             slot;
@@ -20,7 +20,7 @@ MATCH bool Area_PlaceEncounterEnemies(void) {
             slot = D_801CD8C4 + ((D_801CD8C0 * (D_801CD8C0 - 1)) >> 1);
             y    = s_EncounterEnemyOffsets[slot].y;
             x    = s_EncounterEnemyOffsets[slot].x + TO_COORD(5);
-            kind = ENCOUNTER_ENEMIES + entry->id;
+            type = ENCOUNTER_ENEMIES + entry->id;
             while (i != 0) {
                 tmp = x;
                 x   = y;
@@ -30,7 +30,7 @@ MATCH bool Area_PlaceEncounterEnemies(void) {
             for (i = 0; i < ENTITY_SPAWN_SEARCH_COUNT; i++) {
                 entry->pos.x = g_EncounterOriginX + x + (s_EncounterSpawnOffsets[i].dx << 15);
                 entry->pos.y = g_EncounterOriginY + y + (s_EncounterSpawnOffsets[i].dy << 15);
-                if ((func_801C7518(entry->pos.x, entry->pos.y, kind->reach) & BYTE_MASK) && (func_801C6EE0((u8)index, entry->pos.x, entry->pos.y, kind->reach) & BYTE_MASK)) {
+                if ((func_801C7518(entry->pos.x, entry->pos.y, type->reach) & BYTE_MASK) && (func_801C6EE0((u8)index, entry->pos.x, entry->pos.y, type->reach) & BYTE_MASK)) {
                     D_801CD8C4++;
                     break;
                 }

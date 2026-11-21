@@ -8,7 +8,7 @@ MATCH s32 func_800AA8FC(void) {
     s32 off;
     s32 result;
     u32 flags;
-    u16 kind;
+    u16 type;
     u8  slot;
 
     result = 0;
@@ -19,12 +19,12 @@ MATCH s32 func_800AA8FC(void) {
             flags = g_Game.members[slot].u.turn.damage_flags.value;
             if (flags & 0x8) {
                 if ((func_800AA874((u8)g_Battle.action->unk_02) & BYTE_MASK) == 0) {
-                    kind = g_Battle.action->unk_02;
-                    if (D_801CA71C[kind].mask & 0x200) {
-                        Char_AddAbility(kind, slot, 0, 1);
+                    type = g_Battle.action->unk_02;
+                    if (D_801CA71C[type].mask & 0x200) {
+                        Char_AddAbility(type, slot, 0, 1);
                         Char_AddAbility(g_Battle.action->unk_02, (&g_Game.members[0].character_index)[off], 0, 0);
-                        kind = g_Battle.action->unk_02;
-                        BIT_ARRAY_SET(g_LearnedAbilities, kind);
+                        type = g_Battle.action->unk_02;
+                        BIT_ARRAY_SET(g_LearnedAbilities, type);
                     }
                     result = 1;
                 }

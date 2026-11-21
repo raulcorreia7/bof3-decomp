@@ -22,7 +22,7 @@ MATCH void func_801F88DC(void) {
             }
             SYS_SetFlag(g_SceneFlags, 0xA);
             Game_RequestAreaChange(AREA_ID_OASIS, TO_COORD_HALF(21), TO_COORD(35), FACING_RIGHT);
-            g_GameRequestKind       = GAME_NONE;
+            g_GameRequestType       = GAME_NONE;
             g_GameEntryMode         = 4;
             g_ScenarioState.step_05 = 2;
             break;
@@ -97,7 +97,7 @@ MATCH void func_801F88DC(void) {
             g_ScriptVars[0] = 0;
             SYS_SetFlag(g_SceneFlags, 0xC);
             Game_RequestAreaChange(AREA_ID_OASIS, TO_COORD(60), TO_COORD(57), FACING_UP);
-            g_GameRequestKind       = GAME_NONE;
+            g_GameRequestType       = GAME_NONE;
             g_GameEntryMode         = GAME_NONE;
             g_ScenarioState.step_05 = 11;
             break;

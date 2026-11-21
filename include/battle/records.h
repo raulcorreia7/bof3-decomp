@@ -51,7 +51,7 @@
  * byte itself, so the macro expands where it is used. */
 #define BATTLE_ACTIVE_PARTY          (g_Game.members[g_Battle.active_battler])
 
-/* The action a battler has queued: whom it targets, what kind it is (examine 0, attack 1, defend 2, ability 4, item 5)
+/* The action a battler has queued: whom it targets, what type it is (examine 0, attack 1, defend 2, ability 4, item 5)
  * and the ability or item id. */
 typedef enum BattleCommandType {
     BATTLE_COMMAND_EXAMINE = 0,
@@ -78,7 +78,7 @@ typedef struct BattleWorkImage {
 
 ASSERT_SIZE(BattleWorkImage, 0x74);
 
-/* Record behind the g_Battle.action cell; +0x01 is the action kind and +0x02 the action id. */
+/* Record behind the g_Battle.action cell; +0x01 is the action type and +0x02 the action id. */
 typedef struct BattleAction {
     u8  pad_00[1];
     u8  type; /* +0x01 mirrors g_Battle.action_type */
@@ -465,7 +465,7 @@ static inline void EnemyBattler_SetScript(EnemyBattler* enemy, u8* script, Enemy
     enemy->unk_E8 = steps;
 }
 
-/* The kind walk: `D_8014833A[i]` is the owner table's record `i` seen at +0x07
+/* The type walk: `D_8014833A[i]` is the owner table's record `i` seen at +0x07
  * (0x8014833A = 0x80148333 + 7, stride 0x24). Kept as its own name because the
  * units index it as an array; battle/battle/03 (func_801DA69C) names both walks. */
 typedef struct BattleOwner {
@@ -510,7 +510,7 @@ typedef struct FieldMode {
     u8           pad_02[2];
     PanelCounter counter; /* 0x04 panel step counter */
     u8           pad_05;
-    u8           type;    /* 0x06 record kind */
+    u8           type;    /* 0x06 record type */
     u8           wait;    /* 0x07 shared wait countdown */
     u16          value;   /* 0x08 copied into the record's 0x7C */
     u16          unk_122; /* 0x0A lowered by 2 per step; @source: write:func_801F3B9C@0x801F3B9C */
@@ -744,7 +744,7 @@ extern u8           g_PartySize;
 extern u16          g_GameFlags;
 extern u8           D_80145E98;
 extern u16          g_AreaWalkFlags;
-/* The mode byte of each 0x24-byte owner record; the kind byte sits at +0x07. */
+/* The mode byte of each 0x24-byte owner record; the type byte sits at +0x07. */
 extern u8           D_80148333[];
 extern BattleOwner  D_8014833A[];
 
@@ -759,7 +759,7 @@ typedef struct BattleRange {
 ASSERT_OFFSET(BattleRange, unk3E, 0x3E);
 ASSERT_SIZE(BattleRange, 0x40);
 
-/* Shared battle RAM layout: work-record bases and strides, call tables, ring and kind records
+/* Shared battle RAM layout: work-record bases and strides, call tables, ring and type records
  * (@source: wiki:data/battle#where-the-records-are) */
 
 /* retail addresses */
@@ -1086,7 +1086,7 @@ extern BattleOutcome g_BattleOutcome;
 /* FAKE: g_Battle.outcome.result as a plain byte; the functions that set a bit in it (boss endings, func_801E51DC) match only with this base. */
 extern u8 g_BattleResult;
 
-/* The kind of command the active battler runs; 2 and 3 are enemy AI states with no name yet. */
+/* The type of command the active battler runs; 2 and 3 are enemy AI states with no name yet. */
 enum {
     BATTLE_ACTION_NONE    = 0,
     BATTLE_ACTION_ATTACK  = 1, /* a plain attack: Battle_ApplyDamage */

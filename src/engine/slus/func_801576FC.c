@@ -19,7 +19,7 @@ typedef union AreaPatchWord {
 } AreaPatchWord;
 
 /* Applies a cell patch list: each patch stores a record word, a cell word or a cell code for (column, row), picked
- * by the list's condition, and the first two kinds upload the record to the cell's primitive. */
+ * by the list's condition, and the first two types upload the record to the cell's primitive. */
 MATCH void func_801576FC(u8* record) {
     AreaPatchWord* list = (AreaPatchWord*)record;
     AreaPatchWord* entry;
@@ -35,7 +35,7 @@ MATCH void func_801576FC(u8* record) {
     s32            count;
     s32            row;
     s32            column;
-    s32            kind;
+    s32            type;
     s32            id;
     s32            size;
     s32            grid_off;
@@ -72,10 +72,10 @@ MATCH void func_801576FC(u8* record) {
                 *slot = entry[cond + 1].word;
                 i++;
             case 1:
-                kind = (entry->word >> 20) & 0xF;
+                type = (entry->word >> 20) & 0xF;
                 id   = Area_GetCellId(column, row);
                 if (id != 0) {
-                    switch (kind) {
+                    switch (type) {
                         case 0:
                             prim = &g_AreaCellPrims[id][g_GfxBufferIndex];
                             break;
