@@ -1,0 +1,17 @@
+/* area095's code in link order: one translation unit for the whole .text run. */
+#include "area095_13.h"
+
+#include "func_801F2C04.c"
+#include "func_801F2C48.c"
+#include "func_801F2D3C.c"
+#include "func_801F2DF4.c"
+#include "func_801F2EC0.c"
+#include "func_801F2F3C.c"
+#include "func_801F30E8.c"
+#include "func_801F31F8.c"
+#include "func_801F336C.c"
+#include "overlays/area/shared/Area_StartDirectionalScript.h"
+#include "func_801F351C.c"
+#include "func_801F35A4.c"
+#include "overlays/area/shared/Area_FlipStoredActorFacingX.h"
+#include "overlays/area/shared/Area_UpdateCameraHeight.h"

@@ -17,6 +17,9 @@
 #include "common/util.h"
 #include "area/effects.h"
 
+/* Y focus of the area. */
+extern s32 g_AreaFocusY;
+
 /* One cell of a payload's data tables: `offset` is the table's byte offset and
  * `index` the byte offset of the row. */
 #define AREA_PAYLOAD_FIELD(payload, type, offset, index) (*(type*)&(payload)[(offset) + (index)])

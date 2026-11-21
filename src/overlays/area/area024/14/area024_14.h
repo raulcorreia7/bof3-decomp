@@ -33,7 +33,8 @@ typedef struct AreaTransform {
 
 ASSERT_SIZE(AreaTransform, 0x18);
 
-extern volatile u8 D_80147A58;
+/* D_80147A58 */
+extern volatile u8 g_PartyActors;
 extern VECTOR      D_801F2C04;
 extern Callback    D_801F4214[];
 

@@ -233,7 +233,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x_arg, s32 y_arg, s32 width, s32 height
     setWH(window, 256, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
-    func_801AEBA0(inner, y_arg + 2, width - 4, height - 4, 0);
+    UI_DrawWindowFrame(inner, y_arg + 2, width - 4, height - 4, 0);
 }
 #else
 INCLUDE_ASM(Menu_DrawHeaderBar);

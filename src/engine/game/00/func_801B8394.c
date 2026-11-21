@@ -15,7 +15,7 @@ MATCH void func_801B8394(void) {
     g_Game.current->u.field.counter.unsigned_value = 2;
     Actor_RequestScript(g_Task->direction + 8);
     if (g_Task->unk_05 != 0) {
-        func_801C2438();
+        Actor_SetSemiTransparent();
         g_Task->tint.steps.delta.r = -0x80;
         g_Task->tint.steps.delta.g = -0x80;
         g_Task->tint.steps.delta.b = -0x80;

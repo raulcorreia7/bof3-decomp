@@ -8,20 +8,20 @@ image id such as `emi/battle/battle/03`; equal addresses in different targets ar
 `pyproject.toml` and `uv.lock` pin the Python packages, each `third_party/` gitlink pins its
 checkout, and `tools/setup.sh` checks the SHA-256 of every compiler download.
 
-| Tool                                                         | Purpose                                            | Install                                                          | Needed by              |
-| ------------------------------------------------------------ | -------------------------------------------------- | ---------------------------------------------------------------- | ---------------------- |
-| `git`, `curl`, `tar`, `sha256sum`, `unzip`, `7z`             | Fetch and unpack the toolchain and the SDK         | system package                                                   | `tools/setup.sh`       |
-| [`uv`](https://docs.astral.sh/uv/)                           | Creates the `.venv` Python environment             | its installer or a system package                                | `tools/setup.sh`       |
-| `cargo` 1.99 or later, a C compiler                          | Build the disc extractor                           | [rustup](https://rustup.rs/), system package                     | extracting the disc    |
-| Meson 1.3 or later, Ninja                                    | Build and check the images                         | system package or `uv tool install meson ninja`                  | every build            |
-| `clang-format`                                               | Formats C; CI pins 23.1.5                          | system package or `uv tool install clang-format`                 | `format`               |
-| [`dprint`](https://github.com/dprint/dprint/releases/latest) | Formats Markdown, JSON and TOML                    | release binary on `PATH`; it needs no Node runtime               | `format`               |
-| `shellcheck`                                                 | Lints the shell scripts; CI pins 0.11.0.1          | system package or `uv tool install shellcheck-py`                | CI shell lint          |
-| Ruff, pytest                                                 | Lint Python; run the tool tests                    | `tools/setup.sh --dev`                                           | `format`, `meson test` |
-| `splat64[mips]`, `spimdisasm`                                | Split and disassembly                              | `tools/setup.sh`                                                 | game build             |
-| `maspsx`                                                     | ASPSX emulation                                    | `third_party/` submodule, set up by `tools/setup.sh`             | game build             |
-| `decomp-permuter`, `asm-differ`, `m2c`                       | Permuter, differ, decompiler                       | `third_party/` submodules, set up by `tools/setup.sh --matching` | matching               |
-| `coddog`, `objdiff-cli`, `rizin`                             | Twin search, function diff and report, disassembly | [matching tools](#matching-tools)                                | matching, analysis     |
+| Tool                                                         | Purpose                                             | Install                                                          | Needed by              |
+| ------------------------------------------------------------ | --------------------------------------------------- | ---------------------------------------------------------------- | ---------------------- |
+| `git`, `curl`, `tar`, `sha256sum`, `unzip`, `7z`             | Fetch and unpack the toolchain and the SDK          | system package                                                   | `tools/setup.sh`       |
+| [`uv`](https://docs.astral.sh/uv/)                           | Creates the `.venv` Python environment              | its installer or a system package                                | `tools/setup.sh`       |
+| `cargo` 1.99 or later, a C compiler                          | Build the disc extractor                            | [rustup](https://rustup.rs/), system package                     | extracting the disc    |
+| Meson 1.3 or later, Ninja                                    | Build and check the images                          | system package or `uv tool install meson ninja`                  | every build            |
+| `clang-format`                                               | Formats C; pinned 23.1.5 by `pyproject.toml`        | `tools/setup.sh --dev`                                           | `format`               |
+| [`dprint`](https://github.com/dprint/dprint/releases/latest) | Formats Markdown, JSON and TOML                     | release binary on `PATH`; it needs no Node runtime               | `format`               |
+| `shellcheck`                                                 | Lints the shell scripts; pinned by `pyproject.toml` | `tools/setup.sh --dev`                                           | CI shell lint          |
+| Ruff, pytest                                                 | Lint Python; run the tool tests                     | `tools/setup.sh --dev`                                           | `format`, `meson test` |
+| `splat64[mips]`, `spimdisasm`                                | Split and disassembly                               | `tools/setup.sh`                                                 | game build             |
+| `maspsx`                                                     | ASPSX emulation                                     | `third_party/` submodule, set up by `tools/setup.sh`             | game build             |
+| `decomp-permuter`, `asm-differ`, `m2c`                       | Permuter, differ, decompiler                        | `third_party/` submodules, set up by `tools/setup.sh --matching` | matching               |
+| `coddog`, `objdiff-cli`, `rizin`                             | Twin search, function diff and report, disassembly  | [matching tools](#matching-tools)                                | matching, analysis     |
 
 ## Setup
 
@@ -112,7 +112,7 @@ look as if it dropped what newer commits added. CI has no disc and runs no byte 
 | `check-unity`     | Parse every image's sources as one unit, to find a type, prototype or macro that two files declare differently. A check, never linked.                                                                         |
 | `check-plain`     | Compile every C source as plain C, without `MATCHING`, so no source depends on a matching helper.                                                                                                              |
 | `check-tree`      | Reject what [pre-push](../tools/README.md#pre-push) lists for it.                                                                                                                                              |
-| `include-asm`     | Reject more `INCLUDE_ASM` lines than at the [base ref](#commands), in total or in any one image. An image is keyed by the last two folders of its source directory (`game/00`; `slus` and `logo` stand alone). |
+| `check-asm`       | Reject more `INCLUDE_ASM` lines than at the [base ref](#commands), in total or in any one image. An image is keyed by the last two folders of its source directory (`game/00`; `slus` and `logo` stand alone). |
 | `format`          | Format C, Python, TOML and Markdown.                                                                                                                                                                           |
 | `format-check`    | The same steps in check mode; no file changes.                                                                                                                                                                 |
 | `report`          | Write `build/report.json`, the input of the status site. Needs `objdiff-cli`.                                                                                                                                  |

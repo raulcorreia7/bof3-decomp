@@ -25,7 +25,7 @@ MEDIA = ROOT / "inputs/external"
 MISSING = f"""setup: retail media is missing. The build reads your own copy of the US disc.
 setup: dump your own disc and put the two-track CUE/BIN set (Redump, 'Breath of Fire III (USA)') in {MEDIA}/,
 setup: then run tools/setup.sh again.
-setup: until then the disc-free checks work: meson setup build/meson && meson compile -C build/meson check-tree include-asm"""
+setup: until then the disc-free checks work: meson setup build/meson && meson compile -C build/meson check-tree check-asm"""
 
 
 def find_media() -> tuple[Path, list[Path]]:

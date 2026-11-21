@@ -10,13 +10,13 @@ MATCH void func_801FC100(void) {
     for (i = 0; i < 3; i++) {
         g_ScratchPad.cells.halves[0] = Actor_FindFreeField();
         if (g_ScratchPad.cells.halves[0] != GAME_NONE) {
-            func_801A4D54(&D_801FE694[i * 17]);
+            Actor_SpawnFromRecord(&D_801FE694[i * 17]);
         }
     }
     for (i = 0; i < 2; i++) {
         g_ScratchPad.cells.halves[0] = Actor_FindFreeField();
         if (g_ScratchPad.cells.halves[0] != GAME_NONE) {
-            func_801A65A0(&D_801FE6C8[i * 16]);
+            Actor_SpawnPartyFromRecord(&D_801FE6C8[i * 16]);
         }
     }
 }

@@ -16,16 +16,11 @@
 
 /* The party position in 16.16 fixed point. */
 
-/* The field focus point the work position copies. */
-/* D_80147A90 */
-extern s32     g_AreaFocusY;
 /* The facing routes the projection reads, one Offset2 per spawn index. */
 /* D_80181AC0 */
 extern Offset2 g_FacingOffsets[];
 /* The state handler tables the dispatchers index. */
 extern u8      D_801F4FC4[];
-/* The four scratch vectors RotTransPers4 projects. */
-/* g_ScratchPadVectors */
 
 /* The part words Area_Update passes to Area_ApplyTileToQuad, one per unk_32 row;
  * the two low bytes of the first word scale the two floor-part quads it draws. */
@@ -56,12 +51,11 @@ void func_801F37B8(s32 mode, s32 value);
 /* func_801F4544 */
 void Area_SampleForwardHeight(void);
 void func_801F45C8(void);
+void func_801F4614(void);
 void func_801F4798(void* first, void* second);
+void func_801F4A50(s16 x0, s16 y0, s16 radius0, u16 angle0, s16 x1, s16 y1, s16 radius1, u16 angle1);
 /* The ring the line's far end joins and the quad between its ends. */
 void func_801F4DF0(s32 x, s32 y, s16 radius, u16 angle);
-void func_801F4A50(s16 x0, s16 y0, s16 radius0, u16 angle0, s16 x1, s16 y1, s16 radius1, u16 angle1);
-
-void func_801F4614(void);
 
 extern SceneTrigger D_801F615C[];
 

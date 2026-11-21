@@ -9,7 +9,7 @@ MATCH void Area_UpdateParty(void) {
     for (index = 0; index < 4; index++) {
         u8* work;
 
-        work   = (u8*)&D_80147A58[index * ACTOR_SIZE];
+        work   = (u8*)&g_PartyActors[index * ACTOR_SIZE];
         g_Task = work;
 
         if (((work[0] & 0x1u) != 0u) && ((work[0] & 0x40u) == 0u)) {

@@ -48,7 +48,6 @@ ASSERT_OFFSET(Scena03Quad, angle, 0x4C);
 ASSERT_OFFSET(Scena03Quad, length, 0x52);
 ASSERT_SIZE(Scena03Quad, 0x54);
 
-/* g_ScratchPadVectors */
 extern s8       D_80144EA0;
 extern u8       D_801468E4[];
 extern s16      D_801492DA;

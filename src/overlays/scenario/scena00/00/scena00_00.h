@@ -173,7 +173,6 @@ ASSERT_SIZE(SceneSampleEffect, 0x10E0);
 /* One row of the per-slot effect arrays. */
 
 extern s16* volatile D_1F800010;
-extern u8                g_GameRequestKind;
 extern AreaScroll        D_80143F84;
 /* D_801448FC */
 /* D_801448FF */
@@ -185,7 +184,8 @@ extern s32               D_801468A0;
 extern s32               D_801468A4;
 extern s32               D_801469EC;
 extern s32               D_801469F0;
-extern u8                D_80147A58[];
+/* D_80147A58 */
+extern u8                g_PartyActors[];
 extern u16               D_80147A86;
 extern u16               D_80147A88;
 /* One s32; the array form is kept because the scalar form changes the bytes of 8.c. */

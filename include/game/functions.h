@@ -90,9 +90,11 @@ void  func_801A3D1C(void* unused);
 void  Area_RunSetupStream(u8* cursor);
 /* func_801A4BC0 */
 void  Area_SetCellCode(s32 column, s32 row, u8 code);
+/* Actor_SpawnFromRecord */
 /* func_801A4D54 */
-void  func_801A4D54(u8* script);
-void  func_801A65A0(u8* script);
+void  Actor_SpawnFromRecord(u8* script);
+/* func_801A65A0 */
+void  Actor_SpawnPartyFromRecord(u8* script);
 void  func_801A6C98(u8* record);
 /* func_801A7330 */
 void  func_801A7330(const volatile u8* data);
@@ -127,10 +129,12 @@ void  Char_ApplyLevelUps(s32 char_id);
 void  func_801AE214(s32 line_x, s32 line_y, s32 line_length, s32 line_mode);
 /* func_801AE3F0 */
 void  UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 frame_flags, u8 palette);
+/* UI_DrawIcon */
 /* func_801AEA80 */
-void  func_801AEA80(s32 sprite_x, s32 sprite_y, s32 texture_index, s32 shade_mode);
+void  UI_DrawIcon(s32 sprite_x, s32 sprite_y, s32 icon_id, s32 dimmed);
+/* UI_DrawWindowFrame */
 /* func_801AEBA0 */
-void  func_801AEBA0(s16 frame_x, s16 frame_y, s16 frame_width, s16 frame_height, s32 mode_pair_flag);
+void  UI_DrawWindowFrame(s16 frame_x, s16 frame_y, s16 frame_width, s16 frame_height, s32 mode_pair_flag);
 /* func_801AED54 */
 void  UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
 /* Game_ReadCommand */
@@ -148,8 +152,10 @@ void  UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags)
 bool  Item_PassesTest(u8 test, u8 character_id, u8 category, u8 item_id);
 /* func_801AF5B0 */
 u8    func_801AF5B0(s32 item_category, s32 character_index, s32 ability_kind);
-void  func_801AF800(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
-void  func_801AFA1C(u8* marks, u8 thumb_top, s16 x, s16 y, u8 thumb_size, u8 total, u8 track_size);
+/* func_801AF800 */
+void  UI_DrawItemRow(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
+/* func_801AFA1C */
+void  UI_DrawScrollbar(u8* marks, u8 thumb_top, s16 x, s16 y, u8 thumb_size, u8 total, u8 track_size);
 /* func_801AFD10 */
 s32   func_801AFD10(u8* column_counter, u8* row_offset, u8* row_flag, u8* position);
 /* func_801AFE18 */
@@ -184,8 +190,9 @@ void  func_801BDAB8(void);
 /* func_801BDB7C */
 u8    Party_CountOrder(u8 order);
 u8    Party_CountOrder(u8 mode);
+/* Actor_IsInRange */
 /* func_801BDD58 */
-u8    func_801BDD58(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* record);
+u8    Actor_IsInRange(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* record);
 /* Actor_FindInRange */
 /* func_801BDE14 */
 s8    Actor_FindInRange(s32 pos_x, s32 pos_y, s32 range_mode);
@@ -215,8 +222,9 @@ void  Party_RemoveMember(s32 character_id);
 void  Scene_RunScenario(s32 step_index);
 /* func_801C1E3C */
 void  func_801C1E3C(s32 step_index);
+/* Actor_SetSemiTransparent */
 /* func_801C2438 */
-void  func_801C2438(void);
+void  Actor_SetSemiTransparent(void);
 /* func_801C24D0 */
 void  Area_RunWalk(void);
 void  func_801C2538(void);

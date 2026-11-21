@@ -423,7 +423,6 @@ extern u32                   D_80143EA0;
 extern u32                   D_80143EA4;
 extern u8                    D_80143F48[];
 extern s16                   g_ScrollHeight[]; /* low half (+2) of the big-endian 0x80143F84 scroll word */
-extern volatile u8           g_SndMono;
 extern s32                   D_80144967;
 /* Retail data D_80145000-D_80146FFF (one declaration each). */
 extern s32                   D_80145030;
@@ -559,7 +558,9 @@ extern u8                    D_80146856;
 extern volatile u32          D_80146858;
 extern volatile u32          D_8014685C;
 /* Retail data D_80147000-D_8014FFFF (one declaration each). */
-extern u8                    D_80147A58[];
+/* D_80147A58 */
+/* The four party actor rows after g_Actors. */
+extern u8                    g_PartyActors[];
 extern u8                    D_80147ACC[];
 extern PanelSortItem         D_80147CFC[];
 extern PanelSortItem         D_80147D08[]; /* == &D_80147CFC[1] */

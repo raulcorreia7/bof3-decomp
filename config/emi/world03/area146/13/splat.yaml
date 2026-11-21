@@ -8,15 +8,7 @@ segments:
     section_order: [.data, .text, .rodata, .bss]
     subsegments:
       - [0x0, .data, g_AreaModuleId]
-      - [0x4, c, func_801F2C04]
-      - [0x34, c, Actor_RunAreaStep]
-      - [0x68, c, func_801F2C68]
-      - [0x9C, c, func_801F2C9C]
-      - [0x150, c, func_801F2D50]
-      - [0x190, c, func_801F2D90]
-      - [0x1D4, c, Actor_SnapToGround]
-      - [0x220, c, Area_DrawActorLightPillar]
-      - [0x268, c, Area_DrawLightPillar]
+      - [0x4, c, area146_13]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
     type: code

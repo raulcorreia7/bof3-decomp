@@ -180,7 +180,7 @@ MATCH void func_801FD000(void) {
         g_ScratchPad.cells.halves[0] = Actor_FindFreeField();
         if (g_ScratchPad.cells.halves[0] != GAME_NONE) {
             idx = i;
-            func_801A4D54(&D_801FDE8C[idx * 17]);
+            Actor_SpawnFromRecord(&D_801FDE8C[idx * 17]);
             g_Task->pos.z.part.integer = 0xA00;
             if (D_801FDF7C[idx] != 0) {
                 g_CurrentActor->timer_75 = D_801FDF7C[idx];

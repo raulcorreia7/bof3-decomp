@@ -10,7 +10,7 @@ MATCH void func_8015A7E8(void) {
     u32 off;
     u8  ctrl;
 
-    rec = (u8*)D_80147A58;
+    rec = (u8*)g_PartyActors;
     i   = 0;
     for (base = rec; (i & BYTE_MASK) < 4; i++, rec += ACTOR_SIZE) {
         g_Task         = rec;

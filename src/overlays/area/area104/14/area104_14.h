@@ -9,8 +9,6 @@
 
 void func_801F358C(void);
 
-/* g_ScratchPadVectors */
-
 /* The arrow cell of each torch gauge state. */
 extern TorchGaugeCells D_801F2C04;
 extern u8              D_801F2C08[];
@@ -48,7 +46,6 @@ void func_801F5738(void);
 
 extern WorldMapMarker D_801F6AF8[6];
 #define AREA_HUD_MASK_TABLE D_801F6AF8
-extern s8 g_GameRequestKind;
 
 /* sig-kept: the retail walk step tests the result unextended; the engine's s8 return adds an sll/sra. */
 s32 func_801A79A4(s32 handler_x, s32 handler_y);

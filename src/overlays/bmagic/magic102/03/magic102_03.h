@@ -24,7 +24,8 @@ extern Magic010Steps D_801EEC04;
 #define EFFECT_TICK_LIMIT     0x10
 
 /* The four field actor rows that follow g_Actors. */
-extern Actor D_80147A58[4];
+/* D_80147A58 */
+extern Actor g_PartyActors[4];
 /* The target cell offset of each facing: a signed x and y byte at facing * 2. */
 extern s8    D_801F0C94[8];
 /* Per facing pair (D_801F0CBC >> 1): the divisor of the rise at each step from the target cell. */

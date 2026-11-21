@@ -32,10 +32,10 @@ MATCH void func_801F6EB4(void) {
     g_Actors[g_Task->unk_04].header.flags = 1;
     work                                  = (u8*)g_Task;
     *scratch                              = work[3];
-    func_801A65A0(data);
+    Actor_SpawnPartyFromRecord(data);
     Actor_BeginScript(0x61, 0xC);
     *scratch = work[4];
-    func_801A65A0(data);
+    Actor_SpawnPartyFromRecord(data);
     Actor_BeginScript(0x61, 0xC);
     TASK_SET(work);
 

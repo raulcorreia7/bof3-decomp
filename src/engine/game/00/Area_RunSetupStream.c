@@ -7,9 +7,9 @@ MATCH void Area_RunSetupStream(u8* cursor) {
     g_ScratchPad.cells.halves[0] = 0;
     g_ScratchPad.cells.halves[1] = 0;
     do {
-        D_80147A58[(s16)g_ScratchPad.cells.halves[1]].header.flags = 0;
-        index                                                      = (s16)g_ScratchPad.cells.halves[1] + 1;
-        g_ScratchPad.cells.halves[1]                               = index;
+        g_PartyActors[(s16)g_ScratchPad.cells.halves[1]].header.flags = 0;
+        index                                                         = (s16)g_ScratchPad.cells.halves[1] + 1;
+        g_ScratchPad.cells.halves[1]                                  = index;
     } while (index < 4);
     Area_SetScenarioId(cursor);
     if (g_ScratchPad.cells.halves[0] < ENTITY_MAX) {

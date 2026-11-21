@@ -82,7 +82,7 @@ NON_MATCHING void func_801B21E8(void) {
                 g_Game.current->character_index = (u8)g_CharSlot[g_Game.current->chr.character_id];
                 g_PartyFieldOrder[val4]         = g_Game.current->chr.character_id;
                 if (val4 != 0) {
-                    func_801C2438();
+                    Actor_SetSemiTransparent();
                     tmp6                     = g_Task;
                     *(u8*)(tmp6)             = (u8)(*(u8*)(tmp6) & 0xBF);
                     g_Task->tint.steps.flags = 1;

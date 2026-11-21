@@ -19,6 +19,34 @@ typedef struct AreaSpark {
 
 #define AREA_SPARK_COUNT 128
 
+/* One spark of a scene effect table: kind selects the per-frame handler. Used by the
+ * area098 table (16 slots at AREA_WORK, 0x1C bytes each) and the scena07 and scena08 tables. */
+typedef struct FallingSpark {
+    u8  active;      /* 0x00 - 0 marks a free slot */
+    u8  kind;        /* 0x01 - selects the per-frame handler */
+    u8  life;        /* 0x02 - frames left */
+    u8  fade;        /* 0x03 - shade added per frame */
+    u8  life_reload; /* 0x04 - frames loaded into life when it runs out */
+    u8  pad_05[3];
+    s32 speed;  /* 0x08 - vertical speed */
+    s32 x;      /* 0x0C */
+    s32 y;      /* 0x10 */
+    s32 z;      /* 0x14 */
+    s32 unk_18; /* 0x18 */
+} FallingSpark;
+
+ASSERT_OFFSET(FallingSpark, active, 0x00);
+ASSERT_OFFSET(FallingSpark, kind, 0x01);
+ASSERT_OFFSET(FallingSpark, life, 0x02);
+ASSERT_OFFSET(FallingSpark, fade, 0x03);
+ASSERT_OFFSET(FallingSpark, life_reload, 0x04);
+ASSERT_OFFSET(FallingSpark, speed, 0x08);
+ASSERT_OFFSET(FallingSpark, x, 0x0C);
+ASSERT_OFFSET(FallingSpark, y, 0x10);
+ASSERT_OFFSET(FallingSpark, z, 0x14);
+ASSERT_OFFSET(FallingSpark, unk_18, 0x18);
+ASSERT_SIZE(FallingSpark, 0x1C);
+
 ASSERT_OFFSET(AreaSpark, active, 0x00);
 ASSERT_OFFSET(AreaSpark, unk_01, 0x01);
 ASSERT_OFFSET(AreaSpark, fall_speed, 0x02);
