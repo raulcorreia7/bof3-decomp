@@ -16,7 +16,7 @@ typedef enum AreaSetupType {
     AREA_SETUP_TYPE_PARTY_ENTITY           = 0xB, /* party work row placed by the area cell table */
     AREA_SETUP_TYPE_SCROLL_ROUTE           = 0xC, /* start a scroll route */
     AREA_SETUP_TYPE_ENTITY_CALLBACK        = 0xD, /* set the current entity callback */
-    AREA_SETUP_TYPE_ACTOR           = 0xE, /* Actor_Create: a staged scene object */
+    AREA_SETUP_TYPE_ACTOR                  = 0xE, /* Actor_Create: a staged scene object */
 } AreaSetupType;
 
 /* func_801A4BF8 */
