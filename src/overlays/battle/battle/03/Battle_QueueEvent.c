@@ -7,17 +7,15 @@ MATCH void Battle_QueueEvent(u8 event_type, u8 event_value, u8 group, u8 timer, 
 
     index = 2u;
     while (index < 8u) {
-        value = D_801EB4F0[index][0];
+        value = g_BattleEventSlots[index].active;
         if (value == 0u) {
-            D_801EB4F0[index][0]  = value | 0x1u;
-            D_801EB4F1[index][0]  = event_type;
-            /* slot+2 byte; battle_03.h declares D_801EB4F2 as a scalar, so reach it
-             * as the last byte of the previous stride row */
-            D_801EB4F3[index][-1] = event_value;
-            D_801EB4F3[index][0]  = group;
-            D_801EB4F8[index][0]  = timer;
-            D_801EB4F4[index][0]  = payload;
-            D_801EB4FA[index][0]  = 0u;
+            g_BattleEventSlots[index].active     = value | 0x1u;
+            g_BattleEventSlots[index].event_type = event_type;
+            g_BattleEventSlots[index].value      = event_value;
+            g_BattleEventSlots[index].group      = group;
+            g_BattleEventSlots[index].timer      = timer;
+            g_BattleEventSlots[index].payload    = payload;
+            g_BattleEventSlots[index].text_style = 0u;
             return;
         }
         index += 1u;

@@ -8,11 +8,11 @@ MATCH void func_800A632C(void) {
     u8*           page_counter;
     u16*          effect_flag;
 
-    value                                    = Message_GetText(0x62);
-    D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = value;
-    pad_state                                = &g_PadStates[0].pressed;
-    decoded                                  = INPUT_REPEATED(*pad_state, (PADLright | PADLleft));
-    pad                                      = *pad_state;
+    value                                           = Message_GetText(0x62);
+    g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = value;
+    pad_state                                       = &g_PadStates[0].pressed;
+    decoded                                         = INPUT_REPEATED(*pad_state, (PADLright | PADLleft));
+    pad                                             = *pad_state;
     if ((pad & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         page_counter = (u8*)&g_Battle.ui_mode;

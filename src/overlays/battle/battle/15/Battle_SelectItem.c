@@ -84,8 +84,8 @@ MATCH void Battle_SelectItem(void) {
     if (old_cursor != panel->group_cursor) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    handle                                   = Message_GetText(Item_GetDescription(g_MenuPanelTasks[16].unk_0A, D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C]) & HALF_MASK);
-    D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = handle;
+    handle = Message_GetText(Item_GetDescription(g_MenuPanelTasks[16].unk_0A, D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C]) & HALF_MASK);
+    g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = handle;
     if (((MenuChoicePanel*)g_BattleChoicePanel)->confirm_timer != 0) {
         return;
     }
@@ -103,13 +103,13 @@ MATCH void Battle_SelectItem(void) {
         return;
     }
     if ((g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
-        g_BattleChoicePhase                      = 1u;
-        D_801485DC                               = 0u;
-        D_801EB5B1[((D_801EC328 - 1) & 0xF) * 8] = 1u;
-        D_801454FD                               = g_MenuPanelTasks[16].unk_0A;
-        D_801454FE                               = g_MenuPanelTasks[16].unk_0B;
-        D_801454FF                               = g_MenuPanelTasks[16].unk_0C;
-        g_BattleMessageSlot[0x119]               = 0u;
+        g_BattleChoicePhase                                    = 1u;
+        D_801485DC                                             = 0u;
+        g_BattleMessages[((D_801EC328 - 1) & 0xF)].record_type = 1u;
+        D_801454FD                                             = g_MenuPanelTasks[16].unk_0A;
+        D_801454FE                                             = g_MenuPanelTasks[16].unk_0B;
+        D_801454FF                                             = g_MenuPanelTasks[16].unk_0C;
+        g_BattleMessageSlot[0x119]                             = 0u;
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         *(u8*)&g_Battle.ui_step += 1u;
         return;

@@ -17,10 +17,10 @@ MATCH void func_800A5A18(void) {
         D_801485E2 = 0x3F;
         /* FAKE: statement boundary keeps the retail register order and schedule. */
         FAKE_ORDER_LOCK(D_801485EC = 0);
-        D_801485EE                               = 0;
-        D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = Message_GetText(0x63);
-        count                                    = g_BattleUIState + 1;
-        state                                    = &g_Battle.row_cursor;
+        D_801485EE                                      = 0;
+        g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = Message_GetText(0x63);
+        count                                           = g_BattleUIState + 1;
+        state                                           = &g_Battle.row_cursor;
         *state |= 0x80;
         g_BattleUIState = count;
     }

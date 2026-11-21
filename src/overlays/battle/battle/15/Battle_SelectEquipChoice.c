@@ -68,9 +68,9 @@ NON_MATCHING void Battle_SelectEquipChoice(void) {
     if (g_BattleListCursor != FIELD(u8, row_base, 0xBu)) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    choice                                   = D_801485A1;
-    D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = Message_GetText(Item_GetDescription((s32)D_8014859C, (s32)choice) & HALF_MASK);
-    row_base                                 = &g_PadStates[0].pressed;
+    choice                                          = D_801485A1;
+    g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = Message_GetText(Item_GetDescription((s32)D_8014859C, (s32)choice) & HALF_MASK);
+    row_base                                        = &g_PadStates[0].pressed;
     if (g_InputMasks[BATTLE_INPUT_CANCEL] & *row_base) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         goto block_33; /* shared scroll/confirm join */

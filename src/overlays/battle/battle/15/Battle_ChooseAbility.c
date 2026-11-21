@@ -102,22 +102,22 @@ NON_MATCHING void Battle_ChooseAbility(void) {
     if (cursor != sel->cursor_index) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    message                    = (u8*)&D_80148656;
+    message                           = (u8*)&D_80148656;
     /* The group index/cursor pair sits 0xB bytes into the same scratch block. */
-    sel                        = (BattleSelectionScratch*)((u8*)sel + 0xB);
-    group                      = (BattleSelectionGroup*)sel;
-    entry                      = Party_GetAbilities(message[0], group->index, 1);
-    type                       = entry[group->cursor];
-    handle                     = Message_GetText(*(u16*)(D_801CA71E + type * 0x14));
-    ring_index                 = (D_801EC328 - 1) & 0xF;
-    D_801EB5B4[ring_index * 2] = handle;
+    sel                               = (BattleSelectionScratch*)((u8*)sel + 0xB);
+    group                             = (BattleSelectionGroup*)sel;
+    entry                             = Party_GetAbilities(message[0], group->index, 1);
+    type                              = entry[group->cursor];
+    handle                            = Message_GetText(*(u16*)(D_801CA71E + type * 0x14));
+    ring_index                        = (D_801EC328 - 1) & 0xF;
+    g_BattleMessages[ring_index].text = handle;
     if (g_MenuPanelTasks[16].u.addr.unk_12 != 0) {
         return;
     }
     if ((g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
         g_BattleChoicePhase                                = 1u;
         D_801485DC                                         = 0u;
-        D_801EB5B1[ring_index * 8]                         = 1u;
+        g_BattleMessages[ring_index].record_type           = 1u;
         ((u8*)D_801454F4)[g_MenuPanelTasks[16].unk_0A * 3] = group->index;
         D_801454F5[g_MenuPanelTasks[16].unk_0A * 3]        = g_MenuPanelTasks[16].u.addr.unk_10;
         D_801454F6[g_MenuPanelTasks[16].unk_0A * 3]        = group->cursor;
