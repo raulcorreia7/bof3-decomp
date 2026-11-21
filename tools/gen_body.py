@@ -893,53 +893,57 @@ def call_at(events: list[tuple], ident: int) -> int:
     return next(i for i, e in enumerate(events) if e[0] == "call" and e[3] == ident)
 
 
+def _call_text(event: tuple, ctx: dict) -> str:
+    """Write a call event as a C call statement."""
+    args = []
+    for i, a in enumerate(event[2]):
+        if i < 4 and a == ("arg", ARGS[i]):
+            if any(b != ("arg", ARGS[j]) for j, b in enumerate(event[2]) if j > i):
+                raise Unsupported("argument registers skip one")
+            break
+        args.append(render(a, ctx))
+    return f"{event[1]}({', '.join(args)});"
+
+
+def _store_text(event: tuple, ctx: dict) -> str:
+    """Write a store event as a C assignment, increment or compound assignment."""
+    _, kind, target, value = event
+    if target[0] == "g":
+        left = global_text(target[1], ctx, WIDTH[kind])
+    elif target[0] == "gi":
+        left = element(target[1], target[2], WIDTH[kind], ctx)
+    else:
+        left = member(target[1], WIDTH[kind], ctx)
+    if value[0] == "add" and value[1][0] == target[0] and value[1][1] == target[1]:
+        step = value[2]
+        if step == 1:
+            return f"{left}++;"
+        return f"{left}--;" if step == -1 else f"{left} += {step};"
+    if (
+        value[0] == "bin"
+        and value[1] in ("&", "|", "^", "<<", ">>")
+        and isinstance(value[3], int)
+        and render(value[2], ctx) == left
+    ):
+        return f"{left} {value[1]}= {number(value[3])};"
+    return f"{left} = {render(value, ctx)};"
+
+
 def statements(lifted: Lift, ctx: dict) -> list[str]:
     """Write the events of a straight-line function as C statements."""
     out, used = [], rets_used(lifted.events, inline=True)
     ctx = {**ctx, "inline": {}}
     for e in lifted.events:
-        if e[0] == "call":
-            args = []
-            for i, a in enumerate(e[2]):
-                if i < 4 and a == ("arg", ARGS[i]):
-                    if any(b != ("arg", ARGS[j]) for j, b in enumerate(e[2]) if j > i):
-                        raise Unsupported("argument registers skip one")
-                    break
-                args.append(render(a, ctx))
-            call = f"{e[1]}({', '.join(args)});"
-            if e[3] in used:
-                out.append(f"r{e[3]} = {call}")
-            elif e[3] in rets_used(lifted.events):
-                ctx["inline"][e[3]] = call.removesuffix(";")
-            else:
-                out.append(call)
+        if e[0] != "call":
+            out.append(_store_text(e, ctx))
             continue
-        _, kind, target, value = e
-        left = (
-            global_text(target[1], ctx, WIDTH[kind])
-            if target[0] == "g"
-            else element(target[1], target[2], WIDTH[kind], ctx)
-            if target[0] == "gi"
-            else member(target[1], WIDTH[kind], ctx)
-        )
-        if value[0] == "add" and value[1][0] == target[0] and value[1][1] == target[1]:
-            step = value[2]
-            out.append(
-                f"{left}++;"
-                if step == 1
-                else f"{left}--;"
-                if step == -1
-                else f"{left} += {step};"
-            )
-        elif (
-            value[0] == "bin"
-            and value[1] in ("&", "|", "^", "<<", ">>")
-            and isinstance(value[3], int)
-            and render(value[2], ctx) == left
-        ):
-            out.append(f"{left} {value[1]}= {number(value[3])};")
+        call = _call_text(e, ctx)
+        if e[3] in used:
+            out.append(f"r{e[3]} = {call}")
+        elif e[3] in rets_used(lifted.events):
+            ctx["inline"][e[3]] = call.removesuffix(";")
         else:
-            out.append(f"{left} = {render(value, ctx)};")
+            out.append(call)
     return out
 
 
