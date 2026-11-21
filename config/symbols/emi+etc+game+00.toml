@@ -105,9 +105,9 @@ Area_SkipSetupIfChain = { addr = 0x801A4844, type = "func", source = "Steps over
 Actor_SetOptionFlags = { addr = 0x801A4990, type = "func", source = "the body stores into g_Task->option_flags" }
 Actor_ResetMotion = { addr = 0x801A4AA8, type = "func", source = "Clears a spawned actor's scale, roll and animation callback state." }
 Area_SetCellCode = { addr = 0x801A4BC0, type = "func", source = "Writes the g_AreaCellCodes byte of the cell at (column, row); Area_GetCellCode reads the same index." }
-Area_RunSetupRecord = { addr = 0x801A4BF8, type = "func", source = "Runs one setup stream record of kind 0x0 to 0xE and returns the next record." }
-Area_SetupScrollRoute = { addr = 0x801A72B0, type = "func", source = "Setup stream kind 0xC: starts the scroll route its byte 1 selects." }
-Area_SetEntityCallback = { addr = 0x801A72E8, type = "func", source = "Setup stream kind 0xD: sets the current entity's callback index, or its word 0x7C when byte 1 is zero." }
+Area_RunSetupRecord = { addr = 0x801A4BF8, type = "func", source = "Runs one setup stream record of type 0x0 to 0xE and returns the next record." }
+Area_SetupScrollRoute = { addr = 0x801A72B0, type = "func", source = "Setup stream type 0xC: starts the scroll route its byte 1 selects." }
+Area_SetEntityCallback = { addr = 0x801A72E8, type = "func", source = "Setup stream type 0xD: sets the current entity's callback index, or its word 0x7C when byte 1 is zero." }
 Scene_Start = { addr = 0x801A7704, type = "func", source = "Scenario start: loads the overlay of g_ScenarioState.scenario_id, waits for its SCENA payload, then dispatches the scenario entry." }
 Scene_LoadOverlay = { addr = 0x801A7804, type = "func", source = "Streams the overlay slot 661 + scenario id and waits for the loader; Scene_Start calls it before the scenario handler runs." }
 Game_UpdateScenario = { addr = 0x801A782C, type = "func", source = "Calls entry_00 of the g_ScenarioHandlers handler table of the active scenario, then Game_UpdateScene." }
