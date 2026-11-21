@@ -7,7 +7,7 @@ MATCH void Battle_LoadBattleArchive(void) {
     u32  i;
 
     Party_BuildBattlers(PARTY_ORDER_BATTLE);
-    Battle_PlaceMembers();
+    Game_BattlePlaceMembers();
     Actor_RunInteractions();
     Area_RunLoadingFrame();
     if ((g_Battle.outcome.options & BATTLE_OPT_KEEP_BGM) == 0) {

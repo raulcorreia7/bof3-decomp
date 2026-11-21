@@ -14,7 +14,7 @@ MATCH void func_801DD664(void) {
         return;
     }
 
-    if ((g_InputPressed & PADLright) != 0) {
+    if ((g_PadStates[0].pressed & PADLright) != 0) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
         index      = D_801442BE + 1;
         D_801442BC = index;
@@ -26,7 +26,7 @@ MATCH void func_801DD664(void) {
         return;
     }
 
-    if ((g_InputPressed & PADLleft) != 0) {
+    if ((g_PadStates[0].pressed & PADLleft) != 0) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
         index      = D_801442BE - 1;
         D_801442BC = index;
@@ -38,7 +38,7 @@ MATCH void func_801DD664(void) {
         return;
     }
 
-    if ((g_InputPressed & g_InputMasks[FISHING_INPUT_CANCEL]) != 0) {
+    if ((g_PadStates[0].pressed & g_InputMasks[FISHING_INPUT_CANCEL]) != 0) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         FISHING_STATE->flag_04   = 0;
         FISHING_STATE->sub_index = (FISHING_STATE->sub_index - 1);

@@ -9,7 +9,7 @@ MATCH void func_801DCDB8(void) {
     s32  input;
     u16  value;
 
-    pad_state = &g_InputPressed;
+    pad_state = &g_PadStates[0].pressed;
     input     = INPUT_REPEATED(*pad_state, (PADLup | PADLdown));
     pad       = *pad_state;
 

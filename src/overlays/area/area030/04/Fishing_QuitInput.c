@@ -10,7 +10,7 @@ MATCH void Fishing_QuitInput(void) {
     u16*          pad;
     FishingState* work;
 
-    pad = &g_InputPressed;
+    pad = &g_PadStates[0].pressed;
     Fishing_DrawPromptBox(108, 86);
 
     if ((*pad & (PADLup | PADLdown)) != 0) {

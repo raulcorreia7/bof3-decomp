@@ -223,7 +223,7 @@ MATCH void func_801EF44C(void) {
 
 MATCH void func_801EF4A8(void) {
     func_801EF55C();
-    if (g_InputPressed != 0) {
+    if (g_PadStates[0].pressed != 0) {
         g_Task->header.mode = 4;
     }
 }

@@ -37,7 +37,7 @@ MATCH void func_801F9DF4(void) {
             g_ScenarioState.step_05 = 2;
             break;
         case 2:
-            Battle_StartScripted(25);
+            Game_BattleStartScripted(25);
             g_ScenarioState.step_05 = 3;
             break;
         case 4:
@@ -72,7 +72,7 @@ MATCH void func_801F9DF4(void) {
             if (g_ScriptVars[0] != 3) {
                 break;
             }
-            Battle_StartScripted(26);
+            Game_BattleStartScripted(26);
             g_ScenarioState.step_05 = 13;
             break;
         case 13:

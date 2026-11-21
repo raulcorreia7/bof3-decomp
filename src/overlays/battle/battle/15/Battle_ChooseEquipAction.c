@@ -6,8 +6,8 @@ NON_MATCHING void Battle_ChooseEquipAction(void) {
     u8* state;
     u8* panel;
     u16 held;
-    state                                    = (u8*)&D_8014862E;
-    D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = UI_MessageGetText((*state) == 0u ? 0x2Fu : 0x31u);
+    state                                           = (u8*)&D_8014862E;
+    g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = UI_MessageGetText((*state) == 0u ? 0x2Fu : 0x31u);
     if (D_80148627 == 0u) {
         D_801485DC = 1u;
         D_801485E0 = D_80148628 + (6 * (8 * (*state)));
@@ -17,7 +17,7 @@ NON_MATCHING void Battle_ChooseEquipAction(void) {
     }
     panel  = (u8*)&D_8014862F;
     *panel = 0xFFu;
-    held   = g_InputPressed;
+    held   = g_PadStates[0].pressed;
     if ((held & (PADLright | PADLleft)) != 0u) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         D_8014862E ^= 1u;

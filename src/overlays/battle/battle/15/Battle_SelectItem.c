@@ -29,7 +29,7 @@ MATCH void Battle_SelectItem(void) {
         D_801485E2 = (g_UiPanelTasks[16].pos.y + ((g_UiPanelTasks[16].unk_0C - g_UiPanelTasks[16].unk_0B) * 0xD + 0x1A));
     }
     panel   = (MenuChoicePanel*)g_BattleChoicePanel;
-    trigger = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
+    trigger = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if ((trigger & PADLleft) != 0) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         g_UiPanelTasks[16].u.message.id = 0x32;
@@ -84,8 +84,8 @@ MATCH void Battle_SelectItem(void) {
     if (old_cursor != panel->group_cursor) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    handle                                   = UI_MessageGetText(Item_GetDescription(g_UiPanelTasks[16].unk_0A, D_801C893C[g_UiPanelTasks[16].unk_0A][g_UiPanelTasks[16].unk_0C]) & HALF_MASK);
-    D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = handle;
+    handle                                          = UI_MessageGetText(Item_GetDescription(g_UiPanelTasks[16].unk_0A, D_801C893C[g_UiPanelTasks[16].unk_0A][g_UiPanelTasks[16].unk_0C]) & HALF_MASK);
+    g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = handle;
     if (((MenuChoicePanel*)g_BattleChoicePanel)->confirm_timer != 0) {
         return;
     }
@@ -102,19 +102,19 @@ MATCH void Battle_SelectItem(void) {
         D_8014862A       = (g_UiPanelTasks[16].pos.y - 0x16);
         return;
     }
-    if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
-        g_BattleChoicePhase                      = 1u;
-        D_801485DC                               = 0u;
-        D_801EB5B1[((D_801EC328 - 1) & 0xF) * 8] = 1u;
-        D_801454FD                               = g_UiPanelTasks[16].unk_0A;
-        D_801454FE                               = g_UiPanelTasks[16].unk_0B;
-        D_801454FF                               = g_UiPanelTasks[16].unk_0C;
-        g_BattleMessageSlot[0x119]               = 0u;
+    if ((g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
+        g_BattleChoicePhase                                    = 1u;
+        D_801485DC                                             = 0u;
+        g_BattleMessages[((D_801EC328 - 1) & 0xF)].record_type = 1u;
+        D_801454FD                                             = g_UiPanelTasks[16].unk_0A;
+        D_801454FE                                             = g_UiPanelTasks[16].unk_0B;
+        D_801454FF                                             = g_UiPanelTasks[16].unk_0C;
+        g_BattleMessageSlot[0x119]                             = 0u;
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         *(u8*)&g_Battle.ui_step += 1u;
         return;
     }
-    if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
+    if ((g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
         value                         = D_801C893C[g_UiPanelTasks[16].unk_0A][g_UiPanelTasks[16].unk_0C] + (g_UiPanelTasks[16].unk_0A << 8);
         g_BattleActorTurn->command.id = value;
         if ((Item_PassesTest(g_UiPanelTasks[16].unk_08, CHAR_ID_RYU_YOUNG, ((MenuChoicePanel*)g_BattleChoicePanel)->group, value) & BYTE_MASK) == 0) {

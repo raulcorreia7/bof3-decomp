@@ -9,14 +9,14 @@ NON_MATCHING void func_801EF140(void) {
     s32 height;
 
     height = 0;
-    if (g_InputPressed == 0) {
+    if (g_PadStates[0].pressed == 0) {
         return;
     }
     func_801DE9A8((g_Battle.row_cursor - 1) & BYTE_MASK);
     D_801463B2 = g_Characters[g_Battle.cursor.gene.column].level;
     D_801463B4 = g_Characters[g_Battle.cursor.gene.column].level + func_801EF928(g_Battle.cursor.gene.column, 0);
     sprintf((char*)D_801490F8, D_801EEC04, D_801463B4);
-    D_801EB4F4 = UI_MessageGetText(7);
+    g_BattleEventSlots[0].payload = UI_MessageGetText(7);
     for (i = 1; i < 7; i++) {
         if (func_801EF928(g_Battle.cursor.gene.column, (u8)i) != 0) {
             height += 0x10;

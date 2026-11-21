@@ -14,12 +14,12 @@ MATCH void SYS_UpdateKeyState(void) {
     u16*          second;
 
     pad   = PadRead(0);
-    first = &D_80145AA6;
+    first = &g_PadStates[0].previous;
     /* FAKE: keeps the record base in one register. */
     FAKE_OPAQUE(first);
     old_first = first[-1];
     first[-1] = pad;
-    second    = &D_80145AAE;
+    second    = &g_PadStates[1].previous;
     /* FAKE: keeps the record base in one register. */
     FAKE_OPAQUE(second);
     old_second = second[-1];

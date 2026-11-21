@@ -1,7 +1,7 @@
 #include "engine/game/00/game_00.h"
 
 /* func_801BF78C */
-MATCH bool Battle_IsPartyInPlace(void) {
+MATCH bool Game_BattleIsPartyInPlace(void) {
     u8* work;
     s32 off;
     s32 i;

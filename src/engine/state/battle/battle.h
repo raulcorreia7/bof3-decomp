@@ -4,7 +4,7 @@
 #include "types.h"
 
 /* func_801C7A54 */
-void Battle_StartScripted(u8 mode_byte);
+void Game_BattleStartScripted(u8 mode_byte);
 
 #endif
 
@@ -13,30 +13,30 @@ void Battle_StartScripted(u8 mode_byte);
 #define OVERLAY_STATE_BATTLE_H_LOCAL
 
 /* func_80197A60 */
-void Battle_TurnToEncounter(void);
+void Game_BattleTurnToEncounter(void);
 void Battle_LoadPartySprites(void);
 /* func_80197C1C */
-void Battle_WalkToEncounter(void);
+void Game_BattleWalkToEncounter(void);
 void Battle_LoadBattleArchive(void);
 /* func_80197E54 */
-void Battle_BeginEntrance(void);
+void Game_BattleBeginEntrance(void);
 /* func_801BEDD0 */
-void Battle_QueueEncounterTurns(void);
+void Game_BattleQueueEncounterTurns(void);
 /* func_801BEE5C */
-bool Battle_LoadPartyScripts(void);
+bool Game_BattleLoadPartyScripts(void);
 /* func_801BF11C */
-bool Battle_WalkMembersIn(void);
+bool Game_BattleWalkMembersIn(void);
 /* func_801BF448 */
-void Battle_PlaceMembers(void);
+void Game_BattlePlaceMembers(void);
 /* func_801BF5A8 */
-void Battle_SetEncounterSpot(s32 x, s32 y, s32 party_slot);
+void Game_BattleSetEncounterSpot(s32 x, s32 y, s32 party_slot);
 /* func_801BF78C */
-bool Battle_IsPartyInPlace(void);
+bool Game_BattleIsPartyInPlace(void);
 /* func_801BF8E0 */
-void Battle_ScrollToLeader(void);
+void Game_BattleScrollToLeader(void);
 /* func_801BFAC4 */
-void Battle_RunPartyAnims(void);
+void Game_BattleRunPartyAnims(void);
 /* func_801BFB34 */
-void Battle_PlaceFieldMembers(void);
+void Game_BattlePlaceFieldMembers(void);
 
 #endif

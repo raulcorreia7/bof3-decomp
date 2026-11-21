@@ -23,7 +23,7 @@ MATCH void func_801FA08C(void) {
             }
             break;
         case 5:
-            if (!(g_InputPressed & g_InputMasks[INPUT_SLOT_MENU]) && g_GameStateIndex == GAME_REQUEST_IDLE) {
+            if (!(g_PadStates[0].pressed & g_InputMasks[INPUT_SLOT_MENU]) && g_GameStateIndex == GAME_REQUEST_IDLE) {
                 *g_ScriptVars = 0;
                 *step         = 6;
                 Game_RequestAreaChange(0x76, 0x490000, 0x188000, 0x81);

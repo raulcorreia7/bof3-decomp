@@ -162,7 +162,7 @@ MATCH void func_801FB66C(void) {
                 break;
             }
             SND_PlaySE(0x209);
-            Battle_StartScripted(0x15);
+            Game_BattleStartScripted(0x15);
             g_ScenarioState.step_05 = 25;
             break;
         case 25:

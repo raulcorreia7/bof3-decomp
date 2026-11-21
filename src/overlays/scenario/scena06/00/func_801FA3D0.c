@@ -34,7 +34,7 @@ MATCH void func_801FA3D0(void) {
             if (g_ScriptVars[0] != 0xF) {
                 break;
             }
-            Battle_StartScripted(27);
+            Game_BattleStartScripted(27);
             g_ScenarioState.step_05 = 6;
             break;
         case 7:

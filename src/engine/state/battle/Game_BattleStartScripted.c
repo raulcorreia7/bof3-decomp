@@ -1,6 +1,6 @@
 #include "engine/game/00/game_00.h"
 
-MATCH void Battle_StartScripted(u8 mode_byte) {
+MATCH void Game_BattleStartScripted(u8 mode_byte) {
     u8 seed;
 
     g_Battle.encounter = mode_byte;

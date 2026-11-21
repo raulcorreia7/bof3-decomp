@@ -12,7 +12,7 @@ MATCH void func_801D4E74(void) {
     MENU_DRAW_HEADER();
     WinDrawCueText(MENU_PROMPT_X, MENU_PROMPT_Y, 0x9D);
     SAVE_DrawSlots(SAVE_SLOTS_X, SAVE_SLOTS_Y, 1);
-    buttons = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
+    buttons = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLup | PADLdown));
     prev    = g_SaveSlotFirst;
     if ((buttons & PADLup) != 0) {
         index           = prev - 1;
@@ -30,7 +30,7 @@ MATCH void func_801D4E74(void) {
     if (prev != g_SaveSlotFirst) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
-    if ((g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
+    if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
         if (g_SaveSlots[g_SaveSlotFirst].card_index == GAME_NONE) {
             if (D_801E60FC != 0) {
@@ -45,7 +45,7 @@ MATCH void func_801D4E74(void) {
             D_8014865B = 0;
             D_80148652 = D_80148652 + 1;
         }
-    } else if ((g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
+    } else if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_80148652 = 0xB;
     }

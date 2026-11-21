@@ -1,7 +1,7 @@
 #include "engine/game/00/game_00.h"
 
 /* func_801BEDD0 */
-MATCH void Battle_QueueEncounterTurns(void) {
+MATCH void Game_BattleQueueEncounterTurns(void) {
     s32 index;
     u8* work;
     s32 count;

@@ -15,7 +15,7 @@ MATCH void func_801FC900(void) {
             break;
 
         case 1:
-            if (g_GameStateIndex != 2 && g_InputHeld != 0) {
+            if (g_GameStateIndex != 2 && g_PadStates[0].held != 0) {
                 Scene_SetupParty(0);
                 g_ScenarioState.timer_06 = 0x1E;
                 g_ScenarioState.step_05  = 2;

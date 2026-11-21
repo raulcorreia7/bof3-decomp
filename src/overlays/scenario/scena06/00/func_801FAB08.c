@@ -105,7 +105,7 @@ NON_MATCHING void func_801FAB08(void) {
                 break;
             }
             func_801BFE34(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed, 0x16);
-            Battle_StartScripted(0x16);
+            Game_BattleStartScripted(0x16);
             g_ScenarioState.step_05 = 11;
             break;
         case 11:

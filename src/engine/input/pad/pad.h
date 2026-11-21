@@ -9,8 +9,21 @@
 #define INPUT_ACTION_BUTTONS             (PADRup | PADRdown | PADRleft | PADRright | PADL1 | PADL2 | PADR1 | PADR2 | PADstart | PADselect)
 #define INPUT_REPEATED(pressed, buttons) (INPUT_GetRepeatedButtons((pressed) & (buttons)))
 
-/* D_80145AA4 */
-extern u16 g_InputHeld;
+/* One pad's button record: SYS_UpdateKeyState stores the PadRead(0) half of the pad each frame. */
+typedef struct PadState {
+    u16 held;     /* 0x00 buttons held this frame */
+    u16 previous; /* 0x02 buttons held last frame */
+    u16 pressed;  /* 0x04 buttons newly pressed this frame */
+    u16 pad_06;   /* 0x06 */
+} PadState;
+
+ASSERT_OFFSET(PadState, held, 0x00);
+ASSERT_OFFSET(PadState, previous, 0x02);
+ASSERT_OFFSET(PadState, pressed, 0x04);
+ASSERT_SIZE(PadState, 0x08);
+
+/* D_80145AA4: pad 1, then pad 2 */
+extern PadState g_PadStates[2];
 
 /* Pad masks, one slot per game action. The config screen remaps the six
  * labelled Speak, Move, Action, Menu, View and Change; Confirm and Cancel are
@@ -58,8 +71,6 @@ typedef enum InputSlot {
 extern u16 g_InputMasks[INPUT_SLOT_COUNT];
 /* func_8014E640 */
 s32        INPUT_GetRepeatedButtons(s32 button_mask);
-/* D_80145AA8 */
-extern u16 g_InputPressed;
 extern u16 g_InputRepeatDelay;
 extern u16 g_InputRepeatButtons;
 

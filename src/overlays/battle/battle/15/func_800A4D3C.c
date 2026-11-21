@@ -15,7 +15,7 @@ MATCH void func_800A4D3C(void) {
     if (D_801485BC != 0x5B) {
         return;
     }
-    padp  = &g_InputPressed;
+    padp  = &g_PadStates[0].pressed;
     input = INPUT_REPEATED(*padp, (PADLup | PADLdown | PADL1 | PADR1));
     pad   = *padp;
     if (pad & g_InputMasks[BATTLE_INPUT_CANCEL]) {
@@ -32,7 +32,7 @@ MATCH void func_800A4D3C(void) {
         }
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
     }
-    if (g_InputPressed & PADRleft) {
+    if (g_PadStates[0].pressed & PADRleft) {
         if (g_BattleTargetRows[g_BattleTargetCursorCol + D_801485CA].gate_03 != GAME_NONE) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
             g_Battle.ui_step = 6;

@@ -13,8 +13,8 @@ MATCH void Battle_StartEscapeScroll(void) {
     u8           state;
     volatile u8* phase;
 
-    index                 = 2;
-    g_BattleEventSlots[0] = 0;
+    index                        = 2;
+    g_BattleEventSlots[0].active = 0;
     func_801DE560(1, 0, 0, 60, (u8*)&D_801EB082);
     g_BattleMessageState = 1;
     speed_offset         = g_Battle.scroll_dir * index;

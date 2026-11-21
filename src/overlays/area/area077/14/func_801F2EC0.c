@@ -25,14 +25,14 @@ MATCH void func_801F2EC0(void) {
     } while (i < 2);
 
     func_801F36E8(130, 10);
-    if ((g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0) {
+    if ((g_PadStates[0].pressed & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0) {
         if ((COORD_INT(g_Task->pos.x) == 8) && ((u32)(g_Task->screen_x - 0x1C) < 9)) {
             SYS_SetFlag(g_SceneFlags, 0x26);
         } else {
             SYS_ClearFlag(g_SceneFlags, 0x26);
         }
         g_Task->header.mode = 3;
-    } else if ((g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) != 0) {
+    } else if ((g_PadStates[0].pressed & g_InputMasks[INPUT_SLOT_CANCEL]) != 0) {
         g_Task->header.mode = 3;
     }
 }

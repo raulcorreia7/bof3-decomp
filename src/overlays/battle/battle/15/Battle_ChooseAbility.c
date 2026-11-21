@@ -39,7 +39,7 @@ NON_MATCHING void Battle_ChooseAbility(void) {
     D_801485DC = 1u;
     D_801485E0 = g_UiPanelTasks[16].pos.x + 7u;
     D_801485E2 = g_UiPanelTasks[16].pos.y + ((g_UiPanelTasks[16].unk_0C - sel->scroll_base) * 13 + 0x1A);
-    trigger    = INPUT_GetRepeatedButtons((s32)(g_InputPressed & (INPUT_DIRECTIONAL | PADL1 | PADR1)));
+    trigger    = INPUT_GetRepeatedButtons((s32)(g_PadStates[0].pressed & (INPUT_DIRECTIONAL | PADL1 | PADR1)));
     if ((g_BattleActorTurn->action_flags.value & (BATTLER_ACTION_DRAGON_FORM | BATTLER_ACTION_DRAGON_FORM_CONTROLLED)) != (u32)BATTLER_ACTION_DRAGON_FORM) {
         if ((trigger & PADLleft) != 0) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
@@ -102,22 +102,22 @@ NON_MATCHING void Battle_ChooseAbility(void) {
     if (cursor != sel->cursor_index) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    message                    = (u8*)&D_80148656;
+    message                           = (u8*)&D_80148656;
     /* The group index/cursor pair sits 0xB bytes into the same scratch block. */
-    sel                        = (BattleSelectionScratch*)((u8*)sel + 0xB);
-    group                      = (BattleSelectionGroup*)sel;
-    entry                      = Party_GetAbilities(message[0], group->index, 1);
-    type                       = entry[group->cursor];
-    handle                     = UI_MessageGetText(*(u16*)(D_801CA71E + type * 0x14));
-    ring_index                 = (D_801EC328 - 1) & 0xF;
-    D_801EB5B4[ring_index * 2] = handle;
+    sel                               = (BattleSelectionScratch*)((u8*)sel + 0xB);
+    group                             = (BattleSelectionGroup*)sel;
+    entry                             = Party_GetAbilities(message[0], group->index, 1);
+    type                              = entry[group->cursor];
+    handle                            = UI_MessageGetText(*(u16*)(D_801CA71E + type * 0x14));
+    ring_index                        = (D_801EC328 - 1) & 0xF;
+    g_BattleMessages[ring_index].text = handle;
     if (g_UiPanelTasks[16].u.addr.unk_12 != 0) {
         return;
     }
-    if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
+    if ((g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
         g_BattleChoicePhase                              = 1u;
         D_801485DC                                       = 0u;
-        D_801EB5B1[ring_index * 8]                       = 1u;
+        g_BattleMessages[ring_index].record_type         = 1u;
         ((u8*)D_801454F4)[g_UiPanelTasks[16].unk_0A * 3] = group->index;
         D_801454F5[g_UiPanelTasks[16].unk_0A * 3]        = g_UiPanelTasks[16].u.addr.unk_10;
         D_801454F6[g_UiPanelTasks[16].unk_0A * 3]        = group->cursor;
@@ -125,7 +125,7 @@ NON_MATCHING void Battle_ChooseAbility(void) {
         *(volatile u8*)&g_Battle.ui_step += 1;
         return;
     }
-    if ((g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
+    if ((g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
         BattleTurn* turn;
 
         if ((Battle_IsAbilityLocked() & BYTE_MASK) != 0) {

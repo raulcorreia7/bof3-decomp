@@ -88,7 +88,7 @@ MATCH void func_801F529C(void) {
             }
             break;
         case 22:
-            if (g_InputHeld & PADRdown) {
+            if (g_PadStates[0].held & PADRdown) {
                 func_801F61A8(140);
                 g_SpawnedActors[g_SceneActorSlot].header.mode = 3;
                 SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 9));
@@ -105,12 +105,12 @@ MATCH void func_801F529C(void) {
             }
             break;
         case 24:
-            if (g_InputPressed & PADRdown) {
+            if (g_PadStates[0].pressed & PADRdown) {
                 g_SceneEventState.step = 25;
             }
             break;
         case 25:
-            if (g_InputHeld & PADRdown) {
+            if (g_PadStates[0].held & PADRdown) {
                 func_801F61A8(142);
                 g_SpawnedActors[g_SceneActorSlot].header.mode = 3;
                 SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 9));

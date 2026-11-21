@@ -5,7 +5,7 @@ MATCH void Well_LowerCount(void) {
     Actor* work;
     u8     step;
 
-    if (g_InputPressed == PADRup) {
+    if (g_PadStates[0].pressed == PADRup) {
         g_WellPressCount++;
     }
     g_WellIdleFrames++;

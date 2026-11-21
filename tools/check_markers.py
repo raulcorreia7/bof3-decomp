@@ -5,8 +5,8 @@ The rule is in include/match/match.h: every lifted function starts its definitio
 marker. ``MATCH`` marks a body that compiles in the default build. ``NON_MATCHING`` marks a
 draft, which must sit under ``#ifdef NON_MATCHING`` with its ``INCLUDE_ASM`` in the ``#else``.
 ``HAND_ASM`` marks the C equivalent of a function the original programmer wrote in assembly. It
-sits under ``#ifdef NON_MATCHING`` like a draft, is required for every function in
-``asm/*/hand/`` and is allowed nowhere else; ``--diff`` lets that switch land in a file that holds one.
+sits under ``#if HAND_ASM_MODEL`` (the model builds under ``NON_MATCHING`` or ``BOF3_PORT``), is
+required for every function in ``asm/*/hand/`` and is allowed nowhere else.
 ``--diff REF`` lets a new draft land when ``config/attempts.jsonl`` holds an object for its function
 (``<image>@0x<ADDR>``), so every unmatched function keeps its closest draft with its record.
 Every row of that file is one JSON object per line with exactly ``function``, ``tried``,
@@ -41,7 +41,6 @@ from bof3.resolve.ids import asm_dir
 from check_names import added_lines
 
 MARKERS = ("MATCH", "NON_MATCHING", "HAND_ASM")
-DRAFT_MARKERS = ("NON_MATCHING", "HAND_ASM")
 TOKEN = re.compile(
     r"""
       (?P<comment>/\*.*?\*/|//[^\n]*)
@@ -68,8 +67,12 @@ class Violation:
         return f"{self.path}:{self.line}: {self.name}: {self.problem}"
 
 
-def _in_draft(stack: list[tuple[str, bool]]) -> bool:
-    return any(guard == "draft" and not in_else for guard, in_else in stack)
+def _switch(stack: list[tuple[str, bool]]) -> str:
+    """The open switch the next token sits in: ``draft``, ``hand`` or ``plain``."""
+    for guard, in_else in stack:
+        if guard and not in_else:
+            return guard
+    return "plain"
 
 
 Head = list[tuple[str, int, str]]
@@ -87,10 +90,12 @@ def _definition_problem(head: Head, markers: Head) -> str | None:
     marker, _, guard = head[0]
     if marker not in MARKERS:
         return "the marker must be the first token of the definition"
-    if marker in DRAFT_MARKERS and guard != "draft":
+    if marker == "NON_MATCHING" and guard != "draft":
         return f"{marker} outside `#ifdef NON_MATCHING`"
-    if marker == "MATCH" and guard == "draft":
-        return "MATCH inside `#ifdef NON_MATCHING`"
+    if marker == "HAND_ASM" and guard != "hand":
+        return "HAND_ASM outside `#if HAND_ASM_MODEL`"
+    if marker == "MATCH" and guard != "plain":
+        return "MATCH inside a draft switch"
     return None
 
 
@@ -130,7 +135,8 @@ def _apply_directive(directive: str, stack: list[tuple[str, bool]]) -> None:
         is_draft = (word == "ifdef" and rest.strip() == "NON_MATCHING") or (
             word == "if" and NON_MATCHING_GUARD.fullmatch(rest.strip())
         )
-        stack.append(("draft" if is_draft else "", False))
+        is_hand = word == "if" and rest.strip() == "HAND_ASM_MODEL"
+        stack.append(("draft" if is_draft else "hand" if is_hand else "", False))
     elif word in ("else", "elif") and stack:
         stack[-1] = (stack[-1][0], True)
     elif word == "endif" and stack:
@@ -170,7 +176,7 @@ class _Scanner:
 
     def head_token(self, tok: str, line: int) -> None:
         """A token at the top level: a head token, or the `{`, `;` or `}` that ends it."""
-        draft = "draft" if _in_draft(self.stack) else "plain"
+        draft = _switch(self.stack)
         if tok == "{":
             if self.head and (self.head[-1][0] == ")" or self.kr_params):
                 self.judge(True, line)
@@ -285,15 +291,6 @@ def tracked_hand_files() -> list[str]:
     return out.split()
 
 
-def has_hand_asm(path: str) -> bool:
-    """True when the file defines a HAND_ASM function, whose model stays under the draft switch."""
-    try:
-        text = Path(path).read_text(encoding="utf-8", errors="ignore")
-    except OSError:
-        return False
-    return re.search(r"^HAND_ASM\s", text, re.M) is not None
-
-
 def draft_ref(path: str, text: str, root: Path | None = None) -> str | None:
     """The attempts key ``<image>@0x<ADDR>`` of the draft that `text` starts, or None."""
     root = root or ROOT
@@ -345,8 +342,6 @@ def main(argv: list[str]) -> int:
         bad, known = 0, attempted()
         for path, line, text in added_lines(argv[1]):
             if re.match(r"\s*#\s*if(?:def)?\s+NON_MATCHING\b", text):
-                if has_hand_asm(path):
-                    continue
                 rest = "\n".join(Path(path).read_text().splitlines()[line:])
                 ref = draft_ref(path, rest)
                 if ref in known:

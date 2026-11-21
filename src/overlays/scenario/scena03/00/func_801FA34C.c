@@ -43,7 +43,7 @@ NON_MATCHING void func_801FA34C(void) {
                 break;
             }
             UI_CursorDraw(0xD2, 0x3C, 0);
-            if (g_InputPressed == 0) {
+            if (g_PadStates[0].pressed == 0) {
                 break;
             }
             g_ScriptVars[0]         = 0x29;

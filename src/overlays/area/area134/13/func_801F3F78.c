@@ -29,7 +29,7 @@ MATCH void func_801F3F78(void) {
         g_Task->header.mode = 3;
         return;
     }
-    if (g_InputHeld == (PADLup | PADLright) || g_InputHeld == (PADLright | PADLdown) || g_InputHeld == PADLright) {
+    if (g_PadStates[0].held == (PADLup | PADLright) || g_PadStates[0].held == (PADLright | PADLdown) || g_PadStates[0].held == PADLright) {
         p   = &g_ScriptVars[2];
         val = *p;
         *p  = val + 1;

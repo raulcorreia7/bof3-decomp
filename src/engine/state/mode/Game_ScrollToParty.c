@@ -4,8 +4,8 @@
 MATCH void Game_ScrollToParty(void) {
     u16* state;
 
-    Battle_ScrollToLeader();
-    Battle_RunPartyAnims();
+    Game_BattleScrollToLeader();
+    Game_BattleRunPartyAnims();
     Actor_RunInteractions();
     Area_RunLoadingFrame();
     state = &g_GameEntrySubstate;

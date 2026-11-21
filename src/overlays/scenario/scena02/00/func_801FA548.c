@@ -78,7 +78,7 @@ MATCH void func_801FA548(void) {
             break;
         case 18:
             if (g_ScriptVars[0] == 0x1D) {
-                Battle_StartScripted(0xC);
+                Game_BattleStartScripted(0xC);
                 g_ScenarioState.step_05 = 0x13;
             }
             break;

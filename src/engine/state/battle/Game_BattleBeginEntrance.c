@@ -1,11 +1,11 @@
 #include "engine/game/00/game_00.h"
 
 /* func_80197E54 */
-MATCH void Battle_BeginEntrance(void) {
+MATCH void Game_BattleBeginEntrance(void) {
     u8   local_ready;
     u16* state;
 
-    local_ready = Battle_IsPartyInPlace();
+    local_ready = Game_BattleIsPartyInPlace();
     Actor_RunInteractions();
     Area_RunLoadingFrame();
     if (EMI_IsReady() && local_ready) {

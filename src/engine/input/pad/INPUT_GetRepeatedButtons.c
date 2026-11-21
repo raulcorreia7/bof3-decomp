@@ -10,18 +10,18 @@ MATCH s32 INPUT_GetRepeatedButtons(s32 button_mask) {
 
     if (button_mask & HALF_MASK) {
         g_InputRepeatDelay   = 12;
-        g_InputRepeatButtons = g_InputHeld;
-        return g_InputHeld;
+        g_InputRepeatButtons = g_PadStates[0].held;
+        return g_PadStates[0].held;
     }
 
     repeat_mask = g_InputRepeatButtons;
-    if (repeat_mask & g_InputHeld) {
+    if (repeat_mask & g_PadStates[0].held) {
         counter            = g_InputRepeatDelay - 1;
         g_InputRepeatDelay = counter;
         if ((counter << 16) == 0) {
             g_InputRepeatDelay   = 3;
-            g_InputRepeatButtons = g_InputHeld;
-            return g_InputHeld;
+            g_InputRepeatButtons = g_PadStates[0].held;
+            return g_PadStates[0].held;
         }
     }
 

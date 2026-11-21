@@ -29,7 +29,7 @@ MATCH void func_801F40C0(void) {
             break;
         case 2:
             if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-                held                                            = &g_InputHeld;
+                held                                            = &g_PadStates[0].held;
                 input                                           = *held;
                 low_buttons                                     = input & 0x0FFF;
                 ((Area140InputSnapshot*)&g_ScratchPad)->buttons = input;

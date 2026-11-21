@@ -36,7 +36,7 @@
     count   = *counter;                                            \
     count--;                                                       \
     *counter = count;                                              \
-    if (count == 0 || g_InputPressed != 0) {                       \
+    if (count == 0 || g_PadStates[0].pressed != 0) {               \
         *counter = (frame);                                        \
         *cursor_byte += 1;                                         \
         if (*cursor_byte == (palette_index & BYTE_MASK)) {         \
@@ -105,8 +105,6 @@ enum {
 extern u8          g_SaveBuffer[];
 extern u8          D_80143BB4;
 extern u16         D_80144948;
-extern u8          D_80148331;
-extern u8          D_80148332;
 extern s16         D_80148340;
 extern u8          D_80148355;
 extern u8          D_8014835F;

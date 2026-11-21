@@ -2,15 +2,13 @@
 
 /* func_801DE8C0 */
 MATCH void Battle_AddMessage(s8 index, s8 record_type, u8* text) {
-    u8  i;
-    int off;
+    u8 i;
 
-    i                 = D_801EC328;
-    D_801EB5B0[i * 8] = index;
-    i                 = D_801EC328;
-    D_801EB5B1[i * 8] = record_type;
-    i                 = D_801EC328;
-    off               = (int)(u8)i * 2;
-    D_801EB5B4[off]   = text;
-    D_801EC328        = (i + 1u) & 0xFu;
+    i                               = D_801EC328;
+    g_BattleMessages[i].flags       = index;
+    i                               = D_801EC328;
+    g_BattleMessages[i].record_type = record_type;
+    i                               = D_801EC328;
+    g_BattleMessages[i].text        = text;
+    D_801EC328                      = (i + 1u) & 0xFu;
 }

@@ -10,6 +10,7 @@ typedef uint32_t u32;
 typedef int32_t  s32;
 
 #define HAND_ASM
+#define HAND_ASM_MODEL 1
 #define INCLUDE_ASM(name)
 
 #include "sys/lz77.h"

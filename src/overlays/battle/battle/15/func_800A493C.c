@@ -2,13 +2,13 @@
 
 MATCH void func_800A493C(void) {
     u8*  state     = &g_Battle.row_cursor;
-    u16* pad_state = &g_InputPressed;
+    u16* pad_state = &g_PadStates[0].pressed;
     s32  trigger;
     u16  held;
 
-    D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = UI_MessageGetText(*state + 0x42);
-    trigger                                  = INPUT_REPEATED(*pad_state, (PADLright | PADLdown | PADLleft));
-    held                                     = *pad_state;
+    g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = UI_MessageGetText(*state + 0x42);
+    trigger                                         = INPUT_REPEATED(*pad_state, (PADLright | PADLdown | PADLleft));
+    held                                            = *pad_state;
     if (held & g_InputMasks[BATTLE_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         g_Battle.ui_mode += 2;

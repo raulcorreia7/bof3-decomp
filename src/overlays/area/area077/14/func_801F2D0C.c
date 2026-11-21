@@ -32,7 +32,7 @@ MATCH void func_801F2D0C(void) {
     func_801F36E8(130, 10);
     if (LOW(g_Task->screen_y) == 0x180200) { /* screen_y 512 with the counter at 24 */
         g_Task->header.mode++;
-    } else if (((g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) != 0) || ((g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0)) {
+    } else if (((g_PadStates[0].pressed & g_InputMasks[INPUT_SLOT_CANCEL]) != 0) || ((g_PadStates[0].pressed & g_InputMasks[INPUT_SLOT_CONFIRM]) != 0)) {
         g_Task->header.mode = 3;
     }
 }

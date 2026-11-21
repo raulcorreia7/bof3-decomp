@@ -12,5 +12,5 @@ MATCH void Battle_SlideOutMessagePanel(void) {
         g_UiPanelCurrent->pos.y = y - 8;
     }
     func_801D7EB0((s16)g_UiPanelCurrent->pos.x, (s16)g_UiPanelCurrent->pos.y);
-    UI_TextDraw((g_UiPanelCurrent->pos.x + 4), (g_UiPanelCurrent->pos.y + 3), 0, TEXT_LENGTH_MAX, D_801EB5B4[((D_801EBF04 - 1) & 0xF) * 2]);
+    UI_TextDraw((g_UiPanelCurrent->pos.x + 4), (g_UiPanelCurrent->pos.y + 3), 0, TEXT_LENGTH_MAX, g_BattleMessages[((D_801EBF04 - 1) & 0xF)].text);
 }

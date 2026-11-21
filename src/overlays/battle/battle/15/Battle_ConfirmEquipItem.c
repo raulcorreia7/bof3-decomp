@@ -8,7 +8,7 @@ MATCH void Battle_ConfirmEquipItem(void) {
 
     BATTLE_ACTIVE_ROW->header.mode = 2;
     g_Battle.command_count += 1u;
-    D_801EB5B1[((D_801EC328 - 1) & 0xF) * 8] = 1u;
+    g_BattleMessages[((D_801EC328 - 1) & 0xF)].record_type = 1u;
     Battle_ClearMenuPanels();
     g_Battle.phase.step     = 1;
     g_Battle.phase.sub_step = 0;

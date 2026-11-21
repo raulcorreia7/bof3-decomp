@@ -1,7 +1,7 @@
 #include "engine/game/00/game_00.h"
 
 /* func_801BF8E0 */
-MATCH void Battle_ScrollToLeader(void) {
+MATCH void Game_BattleScrollToLeader(void) {
     s32 count;
     s32 limit;
     s32 tmp;

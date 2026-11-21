@@ -132,7 +132,7 @@ MATCH void func_801D11F4(void) {
     u8   cur;
     u16  buttons;
 
-    input   = &g_InputPressed;
+    input   = &g_PadStates[0].pressed;
     buttons = INPUT_REPEATED(*input, INPUT_DIRECTIONAL);
     if (buttons & (PADLright | PADLleft)) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));

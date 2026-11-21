@@ -34,7 +34,7 @@ MATCH void func_801D28D0(void) {
         row_offset     = ((initial_cursor - initial_first) * 0xD) + 0x1B;
         D_8014862A     = panel->pos.y + row_offset;
     }
-    buttons = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
+    buttons = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if (buttons & PADLleft) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         D_8014843C = 0x32;
@@ -94,7 +94,7 @@ MATCH void func_801D28D0(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     if (panel->confirm_timer == 0) {
-        if ((g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
+        if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
             selected_item      = (g_ShopItemId = D_801C893C[panel->group][panel->group_cursor]);
             g_ShopItemCategory = panel->group;
             D_80148628         = panel->pos.x + 7;
@@ -114,7 +114,7 @@ MATCH void func_801D28D0(void) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
             return;
         }
-        if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+        if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
             D_8014842F = 1;
             D_80148654 = 7;

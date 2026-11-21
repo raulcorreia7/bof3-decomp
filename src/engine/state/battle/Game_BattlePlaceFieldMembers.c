@@ -4,7 +4,7 @@
 
 /* func_801BFB34 */
 #ifdef NON_MATCHING
-NON_MATCHING void Battle_PlaceFieldMembers(void) {
+NON_MATCHING void Game_BattlePlaceFieldMembers(void) {
     PartyMember* member;
     s32          i;
     s32          j;
@@ -80,5 +80,5 @@ NON_MATCHING void Battle_PlaceFieldMembers(void) {
     }
 }
 #else
-INCLUDE_ASM(Battle_PlaceFieldMembers);
+INCLUDE_ASM(Game_BattlePlaceFieldMembers);
 #endif

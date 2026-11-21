@@ -72,6 +72,7 @@ Engine modules (`src/engine/<module>`):
 | party, characters, items        | `Party_ Char_ Item_` | `party/*`                          |
 | game loop and modes             | `Game_`              | `state/mode`, `state/progress`     |
 | scene host                      | `Scene_`             | `state/scene`                      |
+| field to battle hand-over       | `Game_`              | `state/battle`                     |
 | text, fonts, glyphs             | `UI_`                | `ui/text`                          |
 | windows, frames, boxes, lines   | `UI_`                | `ui/window`                        |
 | sprites, icons, cursors         | `UI_`                | `ui/sprite`                        |

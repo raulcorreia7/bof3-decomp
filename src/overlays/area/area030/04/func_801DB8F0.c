@@ -8,7 +8,7 @@
 MATCH void func_801DB8F0(void) {
     s32 offset;
 
-    if ((g_InputPressed & PADRdown) != 0) {
+    if ((g_PadStates[0].pressed & PADRdown) != 0) {
         FISHING_STATE->step_timer = g_Actors[g_FishingHookedFish].roll_90;
     } else {
         FISHING_STATE->step_timer = (FISHING_STATE->step_timer + 1);

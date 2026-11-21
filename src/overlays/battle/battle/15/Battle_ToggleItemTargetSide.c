@@ -4,7 +4,7 @@
 MATCH void Battle_ToggleItemTargetSide(void) {
     u16 held;
 
-    held = g_InputPressed;
+    held = g_PadStates[0].pressed;
     if ((held & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
         g_Battle.ui_mode = 3u;
         return;

@@ -70,7 +70,7 @@ class TargetId:
     shipped: str
 
     @property
-    def kind(self) -> str:
+    def type(self) -> str:
         return "executable" if self.value.startswith("exe/") else "emi"
 
     def __str__(self) -> str:
@@ -82,7 +82,7 @@ _SERIAL_RE = re.compile(r"^(?P<name>[a-z]+)_\d{3}_\d{2}$")
 
 def shipped_disc_id(target: TargetId) -> str:
     """Return the disc spelling of a canonical target id."""
-    if target.kind == "executable":
+    if target.type == "executable":
         name = target.value.split("/", 1)[1]
         serial = _SERIAL_RE.fullmatch(name)
         if serial is not None:

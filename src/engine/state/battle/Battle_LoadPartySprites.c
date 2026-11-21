@@ -12,7 +12,7 @@ MATCH void Battle_LoadPartySprites(void) {
     s8            dy;
     s32           span;
 
-    ready = Battle_LoadPartyScripts();
+    ready = Game_BattleLoadPartyScripts();
     Actor_RunInteractions();
     Area_RunLoadingFrame();
     if (ready != 0) {

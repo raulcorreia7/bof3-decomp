@@ -286,7 +286,7 @@ def _target_rows(root: Path) -> list[dict[str, Any]]:
     return [
         {
             "id": manifest.id.value,
-            "kind": manifest.kind,
+            "type": manifest.type,
             "binary": manifest.binary,
             "source_dir": manifest.source_dir,
             "outside_sources": manifest.outside_sources,
@@ -573,7 +573,7 @@ def _sdk_linkage(
     if not row.get("object"):
         return "assembly"
     offset = address - int(binary.target["load_address"])
-    if str(binary.target.get("kind")) == "executable":
+    if str(binary.target.get("type")) == "executable":
         offset += 0x800
     return "split-assembly" if offset in split else "object"
 
@@ -595,7 +595,7 @@ def _sdk_unit(
     address = int(str(row["id"]).rsplit("@", 1)[1], 16)
     size = int(str(row["size"]), 0)
     offset = address - int(binary.target["load_address"])
-    if str(binary.target.get("kind")) == "executable":
+    if str(binary.target.get("type")) == "executable":
         offset += 0x800
     if size <= 0 or offset < 0 or offset + size > len(binary.data):
         return None

@@ -173,7 +173,7 @@ MATCH void func_801F4B58(void) {
                 u16* input;
                 u16  held;
 
-                input           = &g_InputHeld;
+                input           = &g_PadStates[0].held;
                 held            = *input;
                 SP_REF(u16, 0u) = held;
                 *input          = held & 0xFFF;

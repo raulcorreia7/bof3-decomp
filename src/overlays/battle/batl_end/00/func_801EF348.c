@@ -7,11 +7,11 @@ MATCH void func_801EF348(void) {
     u8 j;
 
     if ((g_Battle.outcome.result & 0x20) != 0) {
-        if (g_InputPressed == 0) {
+        if (g_PadStates[0].pressed == 0) {
             return;
         }
     }
-    if (g_InputHeld == 0) {
+    if (g_PadStates[0].held == 0) {
         return;
     }
     for (i = 0; i < g_Battle.party_count; i++) {
@@ -27,7 +27,7 @@ MATCH void func_801EF348(void) {
     D_80148356 = 5;
     D_80148357 = 0;
     sprintf(g_TextVariables, D_801EEC04, g_Battle.outcome.reward_zenny);
-    D_801EB4F4 = UI_MessageGetText(6);
+    g_BattleEventSlots[0].payload = UI_MessageGetText(6);
     if ((u32)g_Battle.outcome.reward_zenny < 30) {
         D_801463B0 = 1;
     } else {

@@ -19,7 +19,7 @@ MATCH void Title_UpdateStartButton(void) {
     /* FAKE: block boundary after the base setup keeps the field addresses off the gate base. */
     FAKE_ORDER_FENCE();
     if (*front_gate != 0u) {
-        if ((g_InputPressed & INPUT_START) != 0u) {
+        if ((g_PadStates[0].pressed & INPUT_START) != 0u) {
             if (EMI_IsReady()) {
                 if (WINDOW_EFFECT_IDLE()) {
                     if (*busy == 0u) {

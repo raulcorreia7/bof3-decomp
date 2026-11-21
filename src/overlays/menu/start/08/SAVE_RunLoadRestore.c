@@ -52,7 +52,7 @@ MATCH void SAVE_RunLoadRestore(void) {
         g_MenuStartStep     = 0;
     }
     if (WINDOW_EFFECT_BUSY()) {
-        if (g_InputHeld & PADstart) {
+        if (g_PadStates[0].held & PADstart) {
             D_801ED18C = 1;
         }
         Menu_DrawClutStrip(D_80144953);
