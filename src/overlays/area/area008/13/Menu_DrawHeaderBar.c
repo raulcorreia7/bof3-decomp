@@ -11,12 +11,12 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     u8        bottom_v;
     s32       bottom_row;
     s32       bottom_y;
+    u16       odd_u;
     s32       width1;
     u16       width1_u;
     s32       half;
     u16       half_u;
     s32       odd;
-    u16       odd_u;
     s32       mid_x;
     s32       uv_end;
 
@@ -45,7 +45,6 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     prim->v0 = 0;
     prim->u2 = 0;
     prim->v1 = 0;
-    prim->v2 = 0;
     setRGB0(prim, 172, 172, 172);
     bottom_row = height + 1;
     bottom_v   = bottom_row;
@@ -83,10 +82,10 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     PSX_SET_SEMI_TRANSPARENT(prim);
-    prim->y0 = top;
     mid_x    = x + half;
     uv_end   = half + odd + 2;
     prim->x0 = mid_x + 2;
+    prim->y0 = top;
     prim->x1 = mid_x + uv_end;
     prim->y1 = top;
     prim->x2 = mid_x + 2;
