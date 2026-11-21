@@ -74,7 +74,7 @@ MATCH void func_801EEEE0(void) {
 MATCH void func_801EEF24(void) {
     SYS_DISPATCH_BYTE(D_801EF9C4, g_BMagicOrbit->header.step);
     if (g_BMagicOrbit->header.flags != 0 && g_BMagicOrbit->header.step != 0) {
-        func_801EF52C();
+        Effect_SetOrbitModelMatrix();
         func_801EF5F4();
         PopMatrix();
     }
@@ -109,22 +109,8 @@ MATCH void func_801EF418(void) {
     BMAGIC_ORBIT_BATTLER_AND_CLEAR(func_801EF970);
 }
 
-MATCH void func_801EF52C(void) {
-    SVECTOR pos;
-    SVECTOR rot;
-    MATRIX  matrix;
-    long    flags;
-    s32     off;
-
-    PushMatrix();
-    rot.vx = 0;
-    rot.vy = 0;
-    off    = g_BMagicOrbit->angle + 0x800;
-    rot.vz = ((g_BMagicOrbit->unk_03 << 7) - off) & ANGLE_MASK;
-    setVector(&pos, (g_BMagicOrbit->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (g_BMagicOrbit->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_BMagicOrbit->pos.z) / 2);
-    RotTransMatrix(&pos, matrix, &flags);
-    Camera_SetModelMatrix(&rot, &matrix);
-}
+/* func_801EF52C */
+#include "overlays/bmagic/shared/Effect_SetOrbitModelMatrix.h"
 
 MATCH void func_801EF5F4(void) {
     POLY_G3* prim;

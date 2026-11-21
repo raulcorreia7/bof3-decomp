@@ -32,7 +32,8 @@ extern s16 D_801F0434[];
 extern u8  D_801F043C[];
 void       func_801EECF8(void);
 void       func_801EF340(void);
-void       func_801EF994(void);
+/* func_801EF994 */
+void       Effect_SetOrbitModelMatrix(void);
 void       func_801EFA5C(void);
 void       func_801F03B0(void);
 
