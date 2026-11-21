@@ -4,7 +4,7 @@
 MATCH void func_800C18E4(void) {
     EnemyBattler* work;
 
-    Actor_RequestScript(1);
+    Script_Request(1);
     ((Actor*)g_Task)->mirror = 1;
     Actor_StepAnimOnce();
     Battle_DefeatEnemy();

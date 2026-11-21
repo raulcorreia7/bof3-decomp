@@ -4,10 +4,10 @@ MATCH void PlChar_AdvanceFacingTurn(void) {
     if (g_Task->direction == g_Task->unk_03) {
         switch (g_Task->direction) {
             case FACING_DOWN:
-                Actor_RequestScript(0x41);
+                Script_Request(0x41);
                 break;
             case FACING_RIGHT:
-                Actor_RequestScript(0x40);
+                Script_Request(0x40);
                 break;
         }
         g_Task->header.step++;
@@ -17,7 +17,7 @@ MATCH void PlChar_AdvanceFacingTurn(void) {
             g_Task->timer     = 2;
             g_Task->direction = g_Task->direction + g_Task->param.turn_step;
             g_Task->direction &= 7;
-            Actor_RequestScript(g_Task->direction);
+            Script_Request(g_Task->direction);
         }
     }
 }

@@ -13,8 +13,8 @@ NON_MATCHING void func_801F2F50(Pos3* pos, s16 radius_a, s16 radius_b, u16 angle
     s32      frame_parity;
     s16      i;
 
-    Area_SetCameraMatrix(&camera);
-    Area_ProjectPoint((s32*)pos, &screen);
+    Camera_SetMatrix(&camera);
+    Camera_ProjectPoint((s32*)pos, &screen);
     size.vx = radius_a;
     size.vy = radius_b;
     Game_ProjectWorldPoint(pos, &size, &scale);

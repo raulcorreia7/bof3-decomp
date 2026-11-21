@@ -11,7 +11,7 @@ static inline void Area_DrawSpinTriangleOn(const SpinEffect* spin, u32 order) {
 
     SetPolyG3(primitive);
     PSX_SET_SEMI_TRANSPARENT(primitive);
-    Area_ProjectPoint(&work->origin.x, POLY_XY(primitive, 0));
+    Camera_ProjectPoint(&work->origin.x, POLY_XY(primitive, 0));
 
     point[0] = ((rcos(work->spin_angle) * work->vertex_a.vx - rsin(work->spin_angle) * work->vertex_a.vy) >> 8) * work->scale;
     point[1] = ((rsin(work->spin_angle) * work->vertex_a.vx + rcos(work->spin_angle) * work->vertex_a.vy) >> 8) * work->scale;
@@ -19,7 +19,7 @@ static inline void Area_DrawSpinTriangleOn(const SpinEffect* spin, u32 order) {
     point[0] += work->origin.x;
     point[1] += work->origin.y;
     point[2] += work->origin.z;
-    Area_ProjectPoint(point, POLY_XY(primitive, 1));
+    Camera_ProjectPoint(point, POLY_XY(primitive, 1));
 
     point[0] = ((rcos(work->spin_angle) * work->vertex_b.vx - rsin(work->spin_angle) * work->vertex_b.vy) >> 8) * work->scale;
     point[1] = ((rsin(work->spin_angle) * work->vertex_b.vx + rcos(work->spin_angle) * work->vertex_b.vy) >> 8) * work->scale;
@@ -27,7 +27,7 @@ static inline void Area_DrawSpinTriangleOn(const SpinEffect* spin, u32 order) {
     point[0] += work->origin.x;
     point[1] += work->origin.y;
     point[2] += work->origin.z;
-    Area_ProjectPoint(point, POLY_XY(primitive, 2));
+    Camera_ProjectPoint(point, POLY_XY(primitive, 2));
 
     fade = work->fade;
     tmp  = fade;

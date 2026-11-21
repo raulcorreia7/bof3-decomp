@@ -10,19 +10,19 @@ MATCH void func_801F2C48(void) {
     quad       = (AreaRippleQuad*)&g_Task->vx;
     D_801F53A0 = TO_COORD(28);
     D_801F53A4 = TO_COORD(24);
-    Area_SetCameraMatrix(scratch);
+    Camera_SetMatrix(scratch);
 
     pos[0] = g_Actors[0].pos.x.fixed;
     pos[1] = g_Actors[0].pos.y.fixed;
     pos[2] = g_Actors[0].pos.z.fixed;
-    Area_ProjectPoint(pos, &screen);
+    Camera_ProjectPoint(pos, &screen);
     quad->x = screen.vx;
     quad->y = screen.vy;
 
     pos[0] = g_Actors[1].pos.x.fixed;
     pos[1] = g_Actors[1].pos.y.fixed;
     pos[2] = g_Actors[1].pos.z.fixed;
-    Area_ProjectPoint(pos, &screen);
+    Camera_ProjectPoint(pos, &screen);
     quad->x += screen.vx;
     quad->y += screen.vy;
     quad->radius = 0;

@@ -20,7 +20,7 @@ MATCH void func_800C1F88(void) {
             offset            = (g_Battle.scroll_dir ^ 0x2) * 2;
         }
         work->pos.y.fixed = g_AreaScrollTargetY + ((s8*)g_BattleScrollDeltas)[offset + 1];
-        Actor_SelectScript(4);
+        Script_Select(4);
         ((PartyMember*)g_Task)->header.step++;
     }
     Actor_StepAnimOnce();

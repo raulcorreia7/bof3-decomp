@@ -10,7 +10,7 @@ MATCH u8 Area_UpdateShots(void) {
     u8        life;
 
     active = 0;
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     shot = MEM_PTR(AreaShot, AREA_WORK);
     i    = 0;
     do {

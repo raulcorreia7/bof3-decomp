@@ -6,14 +6,14 @@ MATCH bool func_801C4EC4(void) {
     g_Task->unk_0A = (g_Task->unk_0A - 1);
     count          = g_Task->unk_0A;
     if (count == 0) {
-        Actor_RequestScript(g_Task->direction == FACING_RIGHT ? 0x37 : 0x34);
+        Script_Request(g_Task->direction == FACING_RIGHT ? 0x37 : 0x34);
         g_Task->direction ^= 4;
         return true;
     }
     if (g_Task->direction == FACING_RIGHT) {
-        Actor_RequestScript((7 - count));
+        Script_Request((7 - count));
     } else {
-        Actor_RequestScript((count + 1));
+        Script_Request((count + 1));
     }
     g_Task->timer = 1;
     return false;

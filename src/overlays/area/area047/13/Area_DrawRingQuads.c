@@ -12,7 +12,7 @@ MATCH void Area_DrawRingQuads(AreaRingRow* row) {
     u16      next;
     u16      other;
 
-    Area_ProjectPoint((s32*)row, &screen);
+    Camera_ProjectPoint((s32*)row, &screen);
     pass = 0;
     do {
         row_size = row->size;

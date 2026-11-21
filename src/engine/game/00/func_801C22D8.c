@@ -31,5 +31,5 @@ MATCH void func_801C22D8(void) {
             g_Task->direction = FACING_UP;
         }
     }
-    Actor_RequestScript(g_Task->direction);
+    Script_Request(g_Task->direction);
 }

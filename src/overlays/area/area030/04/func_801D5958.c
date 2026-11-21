@@ -20,7 +20,7 @@ MATCH void func_801D5958(void) {
         }
 
         next = FISHING_STATE;
-        Actor_SelectScript(D_801E1FE8[next->step_index * 2]);
+        Script_Select(D_801E1FE8[next->step_index * 2]);
 
         cur             = FISHING_STATE;
         cur->step_timer = D_801E1FE9[cur->step_index * 2];

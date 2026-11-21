@@ -30,14 +30,14 @@ MATCH void func_800C20CC(void) {
     if (*type < 3) {
         func_800AF2B4(&g_Game.members[*type], 0x50);
         if (func_800AF5FC(&g_Game.members[*type], 0x10000) != 0) {
-            Actor_SelectScript(5);
+            Script_Select(5);
             Battle_MarkDamaged(*type);
             ((PartyMember*)g_Task)->header.step++;
         }
     } else {
         func_800AF2B4(&g_BattleEnemies[*type * 0x118], 0x50);
         if (func_800AF5FC(&g_BattleEnemies[*type * 0x118], 0x10000) != 0) {
-            Actor_SelectScript(5);
+            Script_Select(5);
             Battle_MarkDamaged(*type);
             ((PartyMember*)g_Task)->header.step++;
         }

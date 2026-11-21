@@ -45,7 +45,7 @@ NON_MATCHING void func_801F2DCC(void) {
                 if (SYS_TestFlag(&g_Scenario2Flags[0x90], D_801F5C0D[bounds * 6]) != 0) {
                     ((PartyMember*)g_Task)->facing ^= 4;
                 }
-                Actor_RequestScript(((PartyMember*)g_Task)->facing);
+                Script_Request(((PartyMember*)g_Task)->facing);
                 goto next_record;
             }
             if (((PartyMember*)g_Task)->unk_09 == 0) {

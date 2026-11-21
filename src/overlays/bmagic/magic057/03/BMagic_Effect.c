@@ -31,7 +31,7 @@ MATCH void func_801EED98(void) {
     SND_QueueSelectionSE(0x102);
     work   = g_Task;
     g_Task = D_801EC2E0->target.party;
-    Actor_SelectScript(3U);
+    Script_Select(3U);
     g_Task                             = work;
     slot                               = Battle_AllocEffect(1, 65) & BYTE_MASK;
     g_BattleEffects[slot].header.mode  = 1;
@@ -147,7 +147,7 @@ NON_MATCHING void func_801EF134(void) {
     g_Task->unk_2A             = 0;
     g_Task->unk_29             = 4;
     g_Task->unk_2C.value       = 0;
-    Actor_SelectScript(0);
+    Script_Select(0);
     g_Task->unk_09 = 3;
     g_Task->header.step += 1;
 }
@@ -299,7 +299,7 @@ MATCH void func_801EF900(void) {
     g_Task->unk_2A         = 0;
     g_Task->unk_29         = 4;
     g_Task->unk_2C.value   = 0;
-    Actor_SelectScript(0U);
+    Script_Select(0U);
     g_Task->header.step += 1;
 }
 

@@ -33,7 +33,7 @@ MATCH void func_801F3628(void) {
                 g_GameState->u.field.counter.unsigned_value = 2;
                 ((PartyMember*)g_Task)->unk_09              = 0;
                 ((PartyMember*)g_Task)->facing              = D_801F3B9C[bounds].unk_04;
-                Actor_RequestScript(((PartyMember*)g_Task)->facing);
+                Script_Request(((PartyMember*)g_Task)->facing);
                 goto next_record;
             }
             if (((PartyMember*)g_Task)->unk_09 == 0) {

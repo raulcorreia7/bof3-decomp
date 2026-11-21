@@ -17,7 +17,7 @@ MATCH void func_8019DC6C(void) {
     GameSpawnState* state;
     s32             i;
 
-    Area_SetCameraMatrix(scratch);
+    Camera_SetMatrix(scratch);
     state = MEM_PTR(GameSpawnState, 0x800E4D40u);
     rec   = MEM_PTR(GameSpawn, 0x800E4D44u);
     i     = 0;

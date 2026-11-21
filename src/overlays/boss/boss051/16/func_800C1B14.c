@@ -21,6 +21,6 @@ MATCH void func_800C1B14(void) {
     work->screen_x.value += 0x30;
     work->screen_y.value -= 0x10;
 
-    Actor_SelectScript(2);
+    Script_Select(2);
     TASK_SET(saved);
 }

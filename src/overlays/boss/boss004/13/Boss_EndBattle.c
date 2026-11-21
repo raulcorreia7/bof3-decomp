@@ -12,7 +12,7 @@ MATCH void Boss_EndBattle(void) {
     Area_SelectSceneRecord(0x5F);
     g_Task->unk_48 = 0;
     g_Task->unk_2A = 1;
-    Actor_SelectScript(1);
+    Script_Select(1);
     g_Task->unk_58 = g_BattleEnemyBattlers[0].unk_58;
     g_Task->unk_5A = g_BattleEnemyBattlers[0].unk_5A;
     Battle_ShowActorEntry(1);
@@ -21,7 +21,7 @@ MATCH void Boss_EndBattle(void) {
     Area_SelectSceneRecord(0x5F);
     g_Task->unk_48 = 0;
     g_Task->unk_2A = 1;
-    Actor_SelectScript(1);
+    Script_Select(1);
     g_Task->unk_58 = g_BattleEnemyBattlers[1].unk_58;
     g_Task->unk_5A = g_BattleEnemyBattlers[1].unk_5A;
 }

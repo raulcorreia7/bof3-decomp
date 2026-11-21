@@ -130,7 +130,7 @@ MATCH void func_801EF04C(void) {
     g_Task->unk_29       = 3;
     g_Task->unk_2C.value = 0;
     g_Task->unk_2B       = 0;
-    Actor_SelectScript((g_Battle.target_selector - 3) & 1);
+    Script_Select((g_Battle.target_selector - 3) & 1);
     g_Task->unk_09 = 3;
     g_Task->header.step += 1;
 }
@@ -196,7 +196,7 @@ MATCH void func_801EF5D0(void) {
     work->unk_2B       = 0;
     work->unk_2C.value = 0;
     g_Task->unk_2A     = 0;
-    Actor_SelectScript(5);
+    Script_Select(5);
     SND_PlaySE((g_Task->timer & 0x1) | 0x100);
     g_Task->header.step += 1;
 }

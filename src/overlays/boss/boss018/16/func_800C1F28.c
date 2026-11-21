@@ -1,7 +1,7 @@
 #include "boss018_16.h"
 
 MATCH void func_800C1F28(void) {
-    Actor_SelectScript(4);
+    Script_Select(4);
     Battle_DefeatEnemy();
     if (((PartyMember*)g_Task)->slot == 4) {
         func_800C29AC(1, 2);

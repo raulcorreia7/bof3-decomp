@@ -25,7 +25,7 @@ MATCH void func_801F82D8(s32 slot) {
     other->tint.bytes.rgb.g = 0;
 
     g_Task->tint.bytes.rgb.b = 0;
-    Actor_SelectScript(0xE);
+    Script_Select(0xE);
 
     g_Task->header.mode = 3;
     g_Task->header.step = 1;

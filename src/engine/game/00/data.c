@@ -448,11 +448,11 @@ Callback D_801C88FC[2] = {func_801ACA14, func_801ACAC0};
 
 Callback D_801C8904[2] = {func_801ACC08, func_801ACCD8};
 
-FieldActionCallback g_FieldActions[11] = {
-    (FieldActionCallback)FieldAction_RunSteps, (FieldActionCallback)FieldAction_RunReact, (FieldActionCallback)FieldAction_None,
-    (FieldActionCallback)FieldAction_RunAltSteps, (FieldActionCallback)FieldAction_NoneAlt, (FieldActionCallback)FieldAction_RunFadeSteps,
-    (FieldActionCallback)FieldAction_RunAltSteps, (FieldActionCallback)FieldAction_RunSteps, (FieldActionCallback)FieldAction_RunReact,
-    (FieldActionCallback)FieldAction_RunSteps, (FieldActionCallback)FieldAction_NoneAlt};
+AreaActionCallback g_AreaActions[11] = {
+    (AreaActionCallback)AreaAction_RunSteps, (AreaActionCallback)AreaAction_RunReact, (AreaActionCallback)AreaAction_None,
+    (AreaActionCallback)AreaAction_RunAltSteps, (AreaActionCallback)AreaAction_NoneAlt, (AreaActionCallback)AreaAction_RunFadeSteps,
+    (AreaActionCallback)AreaAction_RunAltSteps, (AreaActionCallback)AreaAction_RunSteps, (AreaActionCallback)AreaAction_RunReact,
+    (AreaActionCallback)AreaAction_RunSteps, (AreaActionCallback)AreaAction_NoneAlt};
 
 u8 g_FindZenny[4] = {0x00, 0x00, 0x01, 0x0A};
 

@@ -15,7 +15,7 @@ MATCH void func_801EEC80(void) {
     func_801EEFF4();
     saved_work = g_Task;
     g_Task     = D_801EC2E0->target.party;
-    Actor_SelectScript(1U);
+    Script_Select(1U);
     g_Task = saved_work;
     saved_work->header.mode += 1;
 }
@@ -69,15 +69,15 @@ MATCH void func_801EEE7C(BMagicStreakSegment* segment) {
     point[0] = segment->head.vx + 0x1000;
     point[1] = segment->head.vy;
     point[2] = segment->head.vz;
-    Area_ProjectPoint(point, POLY_XY(prim, 0));
+    Camera_ProjectPoint(point, POLY_XY(prim, 0));
     point[0] = segment->head.vx - 0x1000;
-    Area_ProjectPoint(point, POLY_XY(prim, 1));
+    Camera_ProjectPoint(point, POLY_XY(prim, 1));
     point[0] = segment->tail.vx + 0x1000;
     point[1] = segment->tail.vy;
     point[2] = segment->tail.vz;
-    Area_ProjectPoint(point, POLY_XY(prim, 2));
+    Camera_ProjectPoint(point, POLY_XY(prim, 2));
     point[0] = segment->tail.vx - 0x1000;
-    Area_ProjectPoint(point, POLY_XY(prim, 3));
+    Camera_ProjectPoint(point, POLY_XY(prim, 3));
     setRGB0(prim, prim->r1 = segment->head_color.r, prim->g1 = segment->head_color.g, prim->b1 = segment->head_color.b);
     setRGB2(prim, prim->r3 = segment->tail_color.r, prim->g3 = segment->tail_color.g, prim->b3 = segment->tail_color.b);
     GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));

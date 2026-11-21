@@ -5,7 +5,7 @@ MATCH void func_801F4E64(s32* center, s32 radius) {
     s32 i;
     s32 index;
 
-    Area_SetCameraMatrix(scratch);
+    Camera_SetMatrix(scratch);
     i = 0;
     do {
         index = i & BYTE_MASK;

@@ -2,10 +2,10 @@
 
 char D_80195F0C[4] = "%d";
 
-FieldActionAltSteps g_FieldActionAltSteps = {
-    FieldAction_RollAltStep,
-    FieldAction_FindSmall,
-    FieldAction_FindLarge,
-    FieldAction_End,
-    FieldAction_WaitMessage,
+AreaActionAltSteps g_AreaActionAltSteps = {
+    AreaAction_RollAltStep,
+    AreaAction_FindSmall,
+    AreaAction_FindLarge,
+    AreaAction_End,
+    AreaAction_WaitMessage,
 };

@@ -22,10 +22,10 @@ MATCH void func_801F33F0(void) {
         if ((g_Task)->script_pc < 5u) {
             D_80146876[0] = 0xFF;
         }
-        Actor_SelectScript(2);
+        Script_Select(2);
         s->header.mode = 7;
     } else if (e->script_pc == 8 && e->unk_4A == 1) {
-        Actor_SelectScript(4);
+        Script_Select(4);
         s->header.mode = 4;
     }
     g_Task = s;

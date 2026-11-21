@@ -29,5 +29,5 @@ MATCH void func_801D6598(void) {
 
     tail            = FISHING_STATE;
     tail->sub_index = (tail->sub_index + 1);
-    Actor_SelectScript(3);
+    Script_Select(3);
 }

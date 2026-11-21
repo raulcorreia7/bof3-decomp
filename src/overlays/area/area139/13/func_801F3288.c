@@ -11,12 +11,12 @@ MATCH void func_801F3288(s32* first, s32* second) {
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     line = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(line);
     SetSemiTrans(line, 0);
-    Area_ProjectPoint(first, (DVECTOR*)&line->x0);
-    Area_ProjectPoint(second, (DVECTOR*)&line->x1);
+    Camera_ProjectPoint(first, (DVECTOR*)&line->x0);
+    Camera_ProjectPoint(second, (DVECTOR*)&line->x1);
     setRGB0(line, D_801F442C[g_Task->unk_06 * 3], D_801F442D[g_Task->unk_06 * 3], D_801F442E[g_Task->unk_06 * 3]);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(LINE_F2));
     angle   = ratan2(line->y1 - line->y0, line->x1 - line->x0);

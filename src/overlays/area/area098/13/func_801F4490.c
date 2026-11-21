@@ -16,13 +16,13 @@ MATCH void func_801F4490(WorldPos* pos, s32 orange_radius, s32 black_radius) {
 
     tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100);
     GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, tpage);
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     vertex.vx = pos->x.fixed + (orange_radius << 4);
     vertex.vy = pos->y.fixed;
     vertex.vz = pos->z.fixed;
-    Area_ProjectPoint(&vertex.vx, &inner);
+    Camera_ProjectPoint(&vertex.vx, &inner);
     vertex.vx = pos->x.fixed + (black_radius << 4);
-    Area_ProjectPoint(&vertex.vx, &outer);
+    Camera_ProjectPoint(&vertex.vx, &outer);
     turn = 0;
     i    = 0;
     do {
@@ -35,10 +35,10 @@ MATCH void func_801F4490(WorldPos* pos, s32 orange_radius, s32 black_radius) {
         angle     = turn;
         vertex.vx = pos->x.fixed + ((orange_radius * rcos(angle)) >> 8);
         vertex.vy = pos->y.fixed + ((orange_radius * rsin(angle)) >> 8);
-        Area_ProjectPoint(&vertex.vx, &inner);
+        Camera_ProjectPoint(&vertex.vx, &inner);
         vertex.vx = pos->x.fixed + ((black_radius * rcos(angle)) >> 8);
         vertex.vy = pos->y.fixed + ((black_radius * rsin(angle)) >> 8);
-        Area_ProjectPoint(&vertex.vx, &outer);
+        Camera_ProjectPoint(&vertex.vx, &outer);
         prim->x2 = inner.vx;
         prim->y2 = inner.vy;
         prim->x3 = outer.vx;

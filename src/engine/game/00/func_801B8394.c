@@ -13,7 +13,7 @@ MATCH void func_801B8394(void) {
     g_Task->timer                                  = 0;
     COORD_INT(g_Task->pos.z)                       = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     g_Game.current->u.field.counter.unsigned_value = 2;
-    Actor_RequestScript(g_Task->direction + 8);
+    Script_Request(g_Task->direction + 8);
     if (g_Task->unk_05 != 0) {
         Actor_SetSemiTransparent();
         g_Task->tint.steps.delta.r = -0x80;

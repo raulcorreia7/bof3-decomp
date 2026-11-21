@@ -4,7 +4,7 @@
  * palette, sets the state bytes, advances the sub-state and the scratchpad step
  * byte, then runs the shared world update. */
 MATCH void func_801DDDBC(void) {
-    Actor_RequestScript(9);
+    Script_Request(9);
     SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 4));
     D_80144125 = 7;
     D_8014419E = 3;

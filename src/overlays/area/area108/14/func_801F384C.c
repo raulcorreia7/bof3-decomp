@@ -4,7 +4,7 @@ MATCH void func_801F384C(void) {
     u16 y;
     u8  timer;
 
-    Area_ProjectPoint(&g_Task->pos.x.fixed, (DVECTOR*)D_1F800034);
+    Camera_ProjectPoint(&g_Task->pos.x.fixed, (DVECTOR*)D_1F800034);
     g_Task->screen_x = D_1F800034[0];
     y                = D_1F800034[1];
     g_Task->screen_y = y;

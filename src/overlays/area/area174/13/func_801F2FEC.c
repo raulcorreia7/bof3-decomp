@@ -16,10 +16,10 @@ NON_MATCHING void func_801F2FEC(s32* pos, s16 radius_a, s16 radius_b, u16 angle_
     GFX_SET_DRAW_MODE(tpage);
     Area_AddCellPrim(pos[0], pos[1], 0, 0xC);
 
-    Area_ProjectPoint((s32*)pos, &screen);
+    Camera_ProjectPoint((s32*)pos, &screen);
     size.vx = radius_a;
     size.vy = radius_b;
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     Game_ProjectWorldPoint(pos, &size, &scale);
     scale.vx += g_FrameCount & 1;
     scale.vy += g_FrameCount & 1;

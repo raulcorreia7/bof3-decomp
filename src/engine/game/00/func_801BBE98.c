@@ -32,7 +32,7 @@ MATCH void func_801BBE98(void) {
     g_Game.current->u.field.mode.value    = 0;
     g_Game.current->u.field.step.value    = 0;
 
-    Actor_SelectScript(g_Task->direction);
+    Script_Select(g_Task->direction);
 
     work = g_Task;
     work->header.mode++;

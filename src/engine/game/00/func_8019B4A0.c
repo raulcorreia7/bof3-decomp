@@ -45,7 +45,7 @@ MATCH void func_8019B4A0(void) {
                     g_Task->unk_1C = 0;
                 }
                 g_Task->gravity = 0;
-                Actor_SelectScript(1);
+                Script_Select(1);
                 g_Task->timer       = 0;
                 g_Task->header.mode = g_Task->header.mode + 1;
             } else {

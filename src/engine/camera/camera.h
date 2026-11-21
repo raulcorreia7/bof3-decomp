@@ -4,22 +4,22 @@
 #include "types.h"
 #include "psx/psyq.h"
 /* func_801527E4 */
-extern void Area_UpdateCamera(void);
+extern void Camera_Update(void);
 /* func_8015B4B0 */
-void        Area_ApplyCameraMatrix(void* matrix);
+void        Camera_ApplyMatrix(void* matrix);
 /* func_8015BC14 */
-u8          Area_StepCameraX(s16 target, s8 step);
+u8          Camera_StepX(s16 target, s8 step);
 /* func_8015BD14 */
-u8          Area_StepCameraY(s16 target, s8 step);
+u8          Camera_StepY(s16 target, s8 step);
 /* func_8015BE10 */
-u8          Area_StepCameraZ(s16 target, s8 step);
+u8          Camera_StepZ(s16 target, s8 step);
 /* func_8015BEA0 */
-bool        Area_StepCameraAngle(s16 degrees, s8 duration);
+bool        Camera_StepAngle(s16 degrees, s8 duration);
 
 /* func_801AFE18 */
-void* Area_SetCameraMatrix(void* out_matrix);
+void* Camera_SetMatrix(void* out_matrix);
 /* func_801AFF04 */
-void  Area_ProjectPoint(s32* pos, DVECTOR* screen_xy);
+void  Camera_ProjectPoint(s32* pos, DVECTOR* screen_xy);
 
 #endif
 
@@ -28,6 +28,6 @@ void  Area_ProjectPoint(s32* pos, DVECTOR* screen_xy);
 #define OVERLAY_CAMERA_H_LOCAL
 
 /* func_801C7244 */
-void Area_SetEncounterCamera(s32 mode);
+void Camera_SetEncounter(s32 mode);
 
 #endif

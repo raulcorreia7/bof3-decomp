@@ -245,10 +245,10 @@ NON_MATCHING void func_801F78B0(void) {
     g_Task->pos.z.fixed = TO_COORD(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
     buffer              = MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424);
     D_801FDFC0          = buffer;
-    buffer->x           = g_Task->pos.x.fixed;
-    buffer->y           = g_Task->pos.y.fixed;
+    buffer->pos.vx      = g_Task->pos.x.fixed;
+    buffer->pos.vy      = g_Task->pos.y.fixed;
     buffer->angle       = 0;
-    buffer->z           = g_Task->pos.z.fixed + TO_COORD(0x200);
+    buffer->pos.vz      = g_Task->pos.z.fixed + TO_COORD(0x200);
     func_801F90F4(MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424));
     g_Task->vx = 0x28;
     g_Task->header.step++;
@@ -316,11 +316,11 @@ NON_MATCHING void func_801F7BE0(void) {
     g_Task->pos.y.fixed = g_Game.members[0].pos.y.fixed;
     g_Task->pos.z.fixed = TO_COORD(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
     buffer              = MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424);
-    buffer->x           = g_Task->pos.x.fixed;
+    buffer->pos.vx      = g_Task->pos.x.fixed;
     D_801FDFC0          = buffer;
-    buffer->y           = g_Task->pos.y.fixed;
+    buffer->pos.vy      = g_Task->pos.y.fixed;
     buffer->angle       = 0x800;
-    buffer->z           = g_Task->pos.z.fixed + TO_COORD(0x200);
+    buffer->pos.vz      = g_Task->pos.z.fixed + TO_COORD(0x200);
     func_801F90F4(MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424));
     g_Task->vx = 0x28;
     g_Task->header.step++;
@@ -483,7 +483,7 @@ MATCH u8 func_801F85D8(void) {
 
     active = 0;
     GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
-    Area_SetCameraMatrix(&matrix);
+    Camera_SetMatrix(&matrix);
     spark = MEM_PTR(FallingSpark, AREA_WORK);
     i     = 0;
     do {
@@ -572,7 +572,7 @@ MATCH void func_801F90F4(Scena07BurstBuffer* buffer) {
     s8     row;
     s32    light;
 
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     buffer->unk_514 = 0;
     buffer->unk_518 = 0x1000;
     buffer->unk_51C = 0x1000;
@@ -595,7 +595,7 @@ MATCH void func_801F90F4(Scena07BurstBuffer* buffer) {
         pos[0] = buffer->pos.vx + (dir[0] << 5);
         pos[1] = buffer->pos.vy + (dir[1] << 5);
         pos[2] = buffer->pos.vz + (dir[2] << 13);
-        Area_ProjectPoint(pos, &buffer->points[0][i]);
+        Camera_ProjectPoint(pos, &buffer->points[0][i]);
         for (row = 1; row < 8; row++) {
             buffer->points[row][i] = buffer->points[0][i];
             buffer->shade[row][i]  = buffer->shade[0][i];
@@ -623,7 +623,7 @@ NON_MATCHING void func_801F9330(Scena07BurstBuffer* buffer) {
         }
     }
 
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     phase = 0;
     for (i = 0; i < 32; i++) {
         dir[0] = (rsin(buffer->angle) * rcos(phase)) >> 12;
@@ -639,10 +639,10 @@ NON_MATCHING void func_801F9330(Scena07BurstBuffer* buffer) {
             }
             buffer->shade[0][i] = ((light & 0xF00) >> 5) + 7;
         }
-        pos[0] = buffer->x + (dir[0] << 5);
-        pos[1] = buffer->y + (dir[1] << 5);
-        pos[2] = buffer->z + (dir[2] << 13);
-        Area_ProjectPoint(pos, &buffer->points[0][i]);
+        pos[0] = buffer->pos.vx + (dir[0] << 5);
+        pos[1] = buffer->pos.vy + (dir[1] << 5);
+        pos[2] = buffer->pos.vz + (dir[2] << 13);
+        Camera_ProjectPoint(pos, &buffer->points[0][i]);
         phase += 0x80;
     }
 
@@ -689,7 +689,7 @@ MATCH s32 func_801F9A80(SceneEffectRow* row) {
     point[0] = row->x;
     point[1] = row->y;
     point[2] = row->unk_C + (row->unk_14 << 8);
-    Area_ProjectPoint(point, &screen);
+    Camera_ProjectPoint(point, &screen);
     poly->x0 = screen.vx - 1;
     poly->y0 = screen.vy;
     poly->x1 = screen.vx + 1;
@@ -702,7 +702,7 @@ MATCH s32 func_801F9A80(SceneEffectRow* row) {
         point[2] = row->unk_1C;
         landed   = 1;
     }
-    Area_ProjectPoint(point, &screen);
+    Camera_ProjectPoint(point, &screen);
     poly->x2 = screen.vx - 1;
     poly->y2 = screen.vy;
     poly->x3 = screen.vx + 1;
@@ -724,13 +724,13 @@ MATCH void func_801F9BDC(SceneEffectRow* row) {
     pos[0] = row->x;
     pos[1] = row->y;
     pos[2] = Area_SampleHeight(row->x, row->y) << 16;
-    Area_ProjectPoint(pos, &center);
+    Camera_ProjectPoint(pos, &center);
     angle  = 0;
     i      = 0;
     pos[0] = row->x + (rcos(0) << 2);
     pos[1] = row->y + (rsin(0) << 2);
     pos[2] = Area_SampleHeight(row->x, row->y) << 16;
-    Area_ProjectPoint(pos, &edge);
+    Camera_ProjectPoint(pos, &edge);
     do {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
@@ -744,7 +744,7 @@ MATCH void func_801F9BDC(SceneEffectRow* row) {
         pos[1]   = row->y + (rsin(angle) << 2);
         i++;
         pos[2] = Area_SampleHeight(row->x, row->y) << 16;
-        Area_ProjectPoint(pos, &edge);
+        Camera_ProjectPoint(pos, &edge);
         prim->x2 = edge.vx;
         prim->y2 = edge.vy;
         setRGB0(prim, 64, 64, 64);
@@ -814,7 +814,7 @@ NON_MATCHING u8 func_801F9EFC(void) {
     tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage & HALF_MASK, NULL);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
-    Area_SetCameraMatrix(&matrix);
+    Camera_SetMatrix(&matrix);
     row = (SceneEffectRow*)(AREA_WORK + 0x95C);
     for (i = 0; i < 64; i++, row++) {
         if (row->active != 0) {
@@ -963,14 +963,14 @@ MATCH void func_801FA38C(void) {
     s16*     vertex;
     s16*     depth;
 
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     screen = MEM_PTR(DVECTOR, AREA_WORK + 0x206C);
     vertex = MEM_PTR(s16, AREA_WORK + 0x115C);
     for (i = 0, depth = MEM_PTR(s16, AREA_WORK + 0x1160); i < 482; i++) {
         pos[0] = g_Task->pos.x.fixed + (vertex[0] << 5);
         pos[1] = g_Task->pos.y.fixed + (depth[-1] << 5);
         pos[2] = g_Task->pos.z.fixed + (depth[0] << 13) + TO_COORD(0x200);
-        Area_ProjectPoint(pos, screen);
+        Camera_ProjectPoint(pos, screen);
         vertex += 4;
         depth += 4;
         screen++;

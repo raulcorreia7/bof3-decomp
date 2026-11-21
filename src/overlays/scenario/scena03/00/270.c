@@ -33,10 +33,10 @@ MATCH void func_801F6EB4(void) {
     work                                  = (u8*)g_Task;
     *scratch                              = work[3];
     Actor_SpawnPartyFromRecord(data);
-    Actor_BeginScript(0x61, 0xC);
+    Script_Begin(0x61, 0xC);
     *scratch = work[4];
     Actor_SpawnPartyFromRecord(data);
-    Actor_BeginScript(0x61, 0xC);
+    Script_Begin(0x61, 0xC);
     TASK_SET(work);
 
     g_Actors[work[3]].pos.x.fixed += ONE;
@@ -313,7 +313,7 @@ MATCH void func_801F8170(s32* vertices) {
     MATRIX camera;
 
     GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     func_801F8200(vertices, 0, 1, 2);
     func_801F8200(vertices, 0, 3, 2);
 }
@@ -328,9 +328,9 @@ MATCH void func_801F8200(s32* vertices, s32 v0, s32 v1, s32 v2) {
     point_1   = (s32*)((u8*)vertices + (((u8)v1 << 4) + 0xC));
     point_2   = (s32*)((u8*)vertices + (((u8)v2 << 4) + 0xC));
     primitive = GFX_BeginPolyG3(1);
-    Area_ProjectPoint(point_0, (DVECTOR*)&primitive->x0);
-    Area_ProjectPoint(point_1, (DVECTOR*)&primitive->x1);
-    Area_ProjectPoint(point_2, (DVECTOR*)&primitive->x2);
+    Camera_ProjectPoint(point_0, (DVECTOR*)&primitive->x0);
+    Camera_ProjectPoint(point_1, (DVECTOR*)&primitive->x1);
+    Camera_ProjectPoint(point_2, (DVECTOR*)&primitive->x2);
     setRGB0(primitive, 0x40, 0x40, 0x40);
     setRGB1(primitive, 0, 0, 0);
     setRGB2(primitive, 0x80, 0x80, 0x80);
@@ -478,7 +478,7 @@ MATCH void func_801F88FC(Scena03Line* line) {
     rot.vx = (rsin(line->yaw) * rcos(line->pitch)) >> 8;
     rot.vy = (rsin(line->yaw) * rsin(line->pitch)) >> 8;
     rot.vz = rcos(line->yaw) << 4;
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     do {
         primitive = (LINE_G2*)g_GfxPrimCursor;
         SetLineG2(primitive);
@@ -488,14 +488,14 @@ MATCH void func_801F88FC(Scena03Line* line) {
         point.vx = g_Game.members[0].pos.x.fixed + ((scale * rot.vx) >> 8);
         point.vy = g_Game.members[0].pos.y.fixed + ((scale * rot.vy) >> 8);
         point.vz = g_Game.members[0].pos.z.fixed + (scale * rot.vz);
-        Area_ProjectPoint(&point.vx, (DVECTOR*)&primitive->x0);
+        Camera_ProjectPoint(&point.vx, (DVECTOR*)&primitive->x0);
         setRGB0(primitive, (line->start_scale * line->color.r) >> 8, (line->start_scale * line->color.g) >> 8, (line->start_scale * line->color.b) >> 8);
 
         scale    = (line->radius * line->end_scale) >> 8;
         point.vx = g_Game.members[0].pos.x.fixed + ((scale * rot.vx) >> 8);
         point.vy = g_Game.members[0].pos.y.fixed + ((scale * rot.vy) >> 8);
         point.vz = g_Game.members[0].pos.z.fixed + (scale * rot.vz);
-        Area_ProjectPoint(&point.vx, (DVECTOR*)&primitive->x1);
+        Camera_ProjectPoint(&point.vx, (DVECTOR*)&primitive->x1);
         setRGB1(primitive, (line->end_scale * line->color.r) >> 8, (line->end_scale * line->color.g) >> 8, (line->end_scale * line->color.b) >> 8);
         GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_G2));
 

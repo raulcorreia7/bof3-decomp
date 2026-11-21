@@ -96,7 +96,7 @@ box_16:
                 }
             }
         }
-        Actor_RequestScript(limit);
+        Script_Request(limit);
     }
     func_801DDD4C();
     g_AreaScrollTargetY = (u32)g_SpawnedActors[0].pos.y.fixed;

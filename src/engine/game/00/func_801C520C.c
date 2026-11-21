@@ -28,7 +28,7 @@ MATCH s32 func_801C520C(void) {
             transitionId = 0x3E;
         }
         done = 1;
-        Actor_RequestScript(transitionId);
+        Script_Request(transitionId);
     }
     if ((g_Task->unk_05 == 0) && !((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
         Area_AdvanceScroll(COORD_INT(g_Task->pos.z));

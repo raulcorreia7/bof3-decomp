@@ -28,9 +28,9 @@ MATCH s32 func_801C4FE0(void) {
     } else {
         COORD_INT(g_Task->pos.z) = Area_ReadHeight(x, y) - D_80181B70[g_Game.current->chr.character_id];
         if (g_Task->direction == FACING_LEFT) {
-            Actor_RequestScript(0x3C);
+            Script_Request(0x3C);
         } else {
-            Actor_RequestScript(0x3D);
+            Script_Request(0x3D);
         }
         moved = 1;
     }

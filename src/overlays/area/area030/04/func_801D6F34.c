@@ -16,7 +16,7 @@ MATCH void func_801D6F34(void) {
             FISHING_STATE->pos_x       = 0x6A;
             FISHING_STATE->cursor_10   = 0x6A;
         }
-        Actor_RequestScript(D_801E20CC[FISHING_STATE->step_index].animation_id & 0x7F);
+        Script_Request(D_801E20CC[FISHING_STATE->step_index].animation_id & 0x7F);
         if ((D_801E20CC[FISHING_STATE->step_index].animation_id & 0x7F) == 9) {
             slot = Actor_FindFreeSpawned();
             if (slot != GAME_NONE) {

@@ -48,7 +48,7 @@ extern u8          D_801FE874[];
  * span up to D_801FE8F4. */
 typedef struct SceneTriggerRow {
     u8  flag;   /* +0x0 - flag bit index, offset by SCENE_TRIGGER_FLAG_BASE, in g_SceneFlags */
-    u8  script; /* +0x1 - Actor_SelectScript selector */
+    u8  script; /* +0x1 - Script_Select selector */
     u16 x;      /* +0x2 - cell x, compared with the work record's pos.x integer */
     u16 y;      /* +0x4 - cell y, compared with the work record's pos.y integer */
 } SceneTriggerRow;

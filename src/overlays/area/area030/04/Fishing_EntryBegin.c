@@ -25,9 +25,9 @@ MATCH void Fishing_EntryBegin(void) {
     FISHING_STATE->bounce.half.key = distance;
     flag                           = panel[0x79];
     if (flag == 0) {
-        Actor_BeginScript(0xA, 2);
+        Script_Begin(0xA, 2);
     } else {
-        Actor_SelectScript(0xB);
+        Script_Select(0xB);
     }
 
     work            = FISHING_STATE;

@@ -34,7 +34,7 @@ MATCH u8 Boss_RunBattleEvent(u32 mode) {
             if (!(g_Battle.outcome.result & 4) && (g_Battle.boss_flags & 0x10)) {
                 g_Battle.boss_flags &= 0xEF;
                 SP_REF(PartyMember*, 0x44u) = (PartyMember*)D_801EB748;
-                Actor_RequestScript(0xC);
+                Script_Request(0xC);
                 g_Battle.boss_flags |= 8;
             }
             break;

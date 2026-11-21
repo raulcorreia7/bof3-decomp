@@ -59,7 +59,7 @@ MATCH void func_801B3768(void) {
         if (!(g_Actors[actor_slot].param.unk_0B & 0x1)) {
             saved_work = g_Task;
             g_Task     = &g_Actors[actor_slot];
-            Actor_SelectScript(1U);
+            Script_Select(1U);
             g_Task = saved_work;
         }
     }
