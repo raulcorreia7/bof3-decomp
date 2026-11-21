@@ -157,7 +157,6 @@ import shutil
 import subprocess
 import sys
 import tempfile
-import tomllib
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -165,9 +164,10 @@ from bof3.link import symbols
 from bof3.resolve.ids import source_folder
 from bof3.source import asmtext, ctext, symtab
 from bof3.status import claims
+from bof3.symbols import TABLE, parse
 
 ROOT = Path(__file__).resolve().parent.parent
-SYMBOLS = ROOT / "config/symbols.toml"
+SYMBOLS = ROOT / TABLE
 RESIDENT = ("exe/slus_004_22", "emi/etc/game/00")
 DEFAULT_SCOPE = ("src", "include", "config", "docs", "asm")
 
@@ -557,7 +557,7 @@ def _reject_clash(
         clash = grep_files(new, scope)
     if not clash:
         return
-    document = tomllib.loads(text)
+    document = parse(text)
     allowed = bool(address) and any(
         isinstance(document.get(image, {}).get(new), dict)
         and int(document[image][new].get("addr", -1)) == int(address["addr"], 16)
@@ -591,7 +591,7 @@ def _name_address(
         if args.source
         else None
     )
-    document = tomllib.loads(text)
+    document = parse(text)
     for image in images:
         named = document.get(image, {}).get(new)
         if isinstance(named, dict):
@@ -632,7 +632,7 @@ def _verify_repair(
                 "rename the function first"
             )
         return
-    table = tomllib.loads(text)
+    table = parse(text)
     for row in rows:
         named = table.get(row.image, {}).get(new)
         if not (isinstance(named, dict) and int(named.get("addr", -1)) == row.address):
@@ -1290,7 +1290,7 @@ def locate(layout: Layout, offset: int, prefix: str = "") -> list[tuple[str, int
 
 def symbol_tables() -> dict[str, dict[str, dict]]:
     """Load config/symbols.toml as image table -> name -> row."""
-    return tomllib.loads(SYMBOLS.read_text(encoding="utf-8"))
+    return parse(SYMBOLS.read_text(encoding="utf-8"))
 
 
 def table_rows(data: dict[str, dict[str, dict]], table: str) -> list[Row]:

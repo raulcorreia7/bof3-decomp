@@ -33,7 +33,7 @@ import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from bof3.link.symbols import read_text
+from bof3.adapters.config import read_symbols
 from bof3.source.ctext import mask
 from bof3.source.index import Func, find, load_index
 
@@ -670,7 +670,7 @@ class Names:
     ADDRESS = re.compile(r"^(?:func|D|jtbl)_([0-9A-F]{8})$")
 
     def __init__(self, root: Path = ROOT) -> None:
-        table = read_text((root / "config/symbols.toml").read_text(encoding="utf-8"))
+        table = read_symbols(root)
         self.by_image: dict[str, dict[int, str]] = {}
         self.spans: dict[str, list[tuple[int, int, str]]] = {}
         for image, rows in table.items():

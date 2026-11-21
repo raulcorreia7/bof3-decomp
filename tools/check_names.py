@@ -32,9 +32,9 @@ from __future__ import annotations
 import re
 import subprocess
 import sys
-import tomllib
 from pathlib import Path
 
+from bof3.adapters.config import read_symbols
 from bof3.resolve.layout import target_of
 
 BASELINE = Path("config/address_names.txt")
@@ -172,7 +172,7 @@ def added_symbol_images(ref: str) -> set[str]:
     }
     if not added or not Path("config/symbols.toml").is_file():
         return set()
-    tables = tomllib.loads(Path("config/symbols.toml").read_text(encoding="utf-8"))
+    tables = read_symbols(Path())
     return {
         image
         for image, rows in tables.items()

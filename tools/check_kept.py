@@ -40,11 +40,10 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from bof3.link.symbols import read_text
 from bof3.source.ctext import mask
+from bof3.symbols import TABLE, parse
 
 ROOT = Path(__file__).resolve().parent.parent
-SYMBOLS = "config/symbols.toml"
 CLANG = os.environ.get("CHECK_KEPT_CLANG", "clang")
 CLANG_FLAGS = [
     "--target=mipsel-unknown-elf",
@@ -421,10 +420,10 @@ def read_tree(tree: Path) -> tuple[dict[str, set[str]], dict[str, str]]:
 def addresses(
     rev: str,
 ) -> tuple[dict[str, set[tuple[str, int]]], dict[tuple[str, int], str]]:
-    text = subprocess.check_output(["git", "show", f"{rev}:{SYMBOLS}"], cwd=ROOT)
+    text = subprocess.check_output(["git", "show", f"{rev}:{TABLE}"], cwd=ROOT)
     by_name: dict[str, set[tuple[str, int]]] = defaultdict(set)
     by_addr: dict[tuple[str, int], str] = {}
-    for target, rows in read_text(text.decode()).items():
+    for target, rows in parse(text.decode()).items():
         for name, row in rows.items():
             if isinstance(row, dict) and "addr" in row:
                 by_name[name].add((target, row["addr"]))

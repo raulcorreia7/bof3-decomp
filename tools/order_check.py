@@ -25,8 +25,9 @@ import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from bof3.symbols import TABLE as SYMBOLS
+
 ROOT = Path(__file__).resolve().parent.parent
-SYMBOLS = "config/symbols.toml"
 
 ADDR_NAME = re.compile(r"\b(?:func|D|jtbl|jpt|L|s_gap)_([0-9A-Fa-f]{6,8})\b")
 ADDR_COMMENT = re.compile(

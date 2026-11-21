@@ -31,10 +31,10 @@ import json
 import re
 import subprocess
 import sys
-import tomllib
 from dataclasses import dataclass
 from pathlib import Path
 
+from bof3.adapters.config import read_symbols
 from bof3.resolve.ids import asm_dir
 from check_names import added_lines
 
@@ -305,7 +305,7 @@ def draft_ref(path: str, text: str, root: Path | None = None) -> str | None:
     name, image = found.group(1), folder.removeprefix("asm/")
     if m := re.fullmatch(r"func_([0-9A-Fa-f]{8})", name):
         return f"{image}@0x{m.group(1).upper()}"
-    symbols = tomllib.loads((root / "config/symbols.toml").read_text(encoding="utf-8"))
+    symbols = read_symbols(root)
     addr = symbols.get(image, {}).get(name, {}).get("addr")
     return f"{image}@0x{addr:08X}" if addr is not None else None
 

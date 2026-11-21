@@ -13,15 +13,13 @@ Usage: python3 tools/check_addrs.py REF [HEAD]
 import subprocess
 import sys
 
-from bof3.link.symbols import read_text
-
-SYMBOLS = "config/symbols.toml"
+from bof3.symbols import TABLE, parse
 
 
 def addresses(rev):
-    text = subprocess.check_output(["git", "show", f"{rev}:{SYMBOLS}"])
+    text = subprocess.check_output(["git", "show", f"{rev}:{TABLE}"])
     found = {}
-    for target, rows in read_text(text.decode()).items():
+    for target, rows in parse(text.decode()).items():
         for name, row in rows.items():
             if isinstance(row, dict) and "addr" in row:
                 found[(target, row["addr"])] = name

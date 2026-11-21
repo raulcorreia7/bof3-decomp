@@ -22,11 +22,11 @@ import re
 import struct
 import subprocess
 import sys
-import tomllib
 from dataclasses import dataclass
 from pathlib import Path
 
 import m2ctx
+from bof3.adapters.config import read_link
 from bof3.core.io import write_atomic
 from bof3.core.psx_exe import HEADER_SIZE
 from bof3.core.psx_exe import read as read_exe
@@ -95,7 +95,7 @@ def mapped_targets(
     root: Path, manifests: dict[str, TargetManifest], manifest: TargetManifest
 ) -> tuple[str, ...]:
     """Return the target and resident images visible to it."""
-    link = tomllib.loads((root / "config/link.toml").read_text(encoding="utf-8"))
+    link = read_link(root)
     visible = manifest.id.value
     if manifest.kind == "emi":
         visible = "emi"
