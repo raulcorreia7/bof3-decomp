@@ -89,7 +89,7 @@ MATCH void func_801F7050(void) {
 
 MATCH void func_801F70F8(void) {
     Trail_Update(SCENA07_TRAIL);
-    func_801F8BE8(SCENA07_TRAIL);
+    Trail_Draw(SCENA07_TRAIL);
     g_Task->pos.x.fixed -= TO_COORD(1);
     g_Task->pos.y.fixed += 0; /* FAKE: retail reloads and stores y with no change. */
     g_Task->pos.z.fixed += g_Task->vz;
@@ -104,7 +104,7 @@ MATCH void func_801F70F8(void) {
 
 MATCH void func_801F71C0(void) {
     Trail_Update(SCENA07_TRAIL);
-    func_801F8BE8(SCENA07_TRAIL);
+    Trail_Draw(SCENA07_TRAIL);
     if (--g_Task->timer == 0) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
         g_Task->timer = 32;
@@ -374,7 +374,7 @@ MATCH void func_801F7E68(void) {
 
 MATCH void func_801F7EF8(void) {
     Trail_Update(SCENA07_TRAIL);
-    func_801F8BE8(SCENA07_TRAIL);
+    Trail_Draw(SCENA07_TRAIL);
     g_Task->pos.x.fixed += g_Task->vx;
     g_Task->pos.y.fixed += g_Task->vy;
     g_Task->pos.z.fixed += g_Task->vz;
@@ -386,7 +386,7 @@ MATCH void func_801F7EF8(void) {
 
 MATCH void func_801F7FA4(void) {
     Trail_Update(SCENA07_TRAIL);
-    func_801F8BE8(SCENA07_TRAIL);
+    Trail_Draw(SCENA07_TRAIL);
     if (--g_Task->timer == 0) {
         if (g_Task->unk_06 == 0) {
             Actor_Clear();
@@ -551,13 +551,7 @@ MATCH void func_801F8804(u8 shade) {
 
 #include "shared/Trail_Update.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F8BE8(void* table) {
-    (void)table;
-}
-#else
-INCLUDE_ASM(func_801F8BE8);
-#endif
+#include "shared/Trail_Draw.h"
 
 #include "shared/MATH_AverageAngle.h"
 
