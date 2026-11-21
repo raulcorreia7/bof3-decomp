@@ -93,14 +93,14 @@ typedef struct ShopSelection {
 
 ASSERT_OFFSET(ShopSelection, unk_34, 0x34);
 
-/* The shop menu's save results g_SaveCardStatus holds beyond the CardEvent codes 0 to 4; the start menu gives 5 to 8 other meanings. */
+/* The save menu results g_SaveCardStatus holds beyond the CardEvent codes 0 to 4. */
 enum {
-    SHOP_SAVE_STATUS_NO_FILE       = 5,  /* GAME_TEXT_NO_SAVE_FILE */
-    SHOP_SAVE_STATUS_WRITE_FAILED  = 6,  /* the write ended in a card error */
-    SHOP_SAVE_STATUS_FORMAT_FAILED = 7,  /* the card format failed */
-    SHOP_SAVE_STATUS_SAVED         = 8,  /* GAME_TEXT_SAVE_COMPLETE */
-    SHOP_SAVE_STATUS_FORMATTED     = 9,  /* GAME_TEXT_INIT_COMPLETE */
-    SHOP_SAVE_STATUS_CREATED       = 10, /* a new file was saved */
+    SAVE_STATUS_NO_FILE       = 5,  /* GAME_TEXT_NO_SAVE_FILE */
+    SAVE_STATUS_WRITE_FAILED  = 6,  /* the write ended in a card error */
+    SAVE_STATUS_FORMAT_FAILED = 7,  /* the card format failed */
+    SAVE_STATUS_SAVED         = 8,  /* GAME_TEXT_SAVE_COMPLETE */
+    SAVE_STATUS_FORMATTED     = 9,  /* GAME_TEXT_INIT_COMPLETE */
+    SAVE_STATUS_CREATED       = 10, /* a new file was saved */
 };
 
 /* D_801E60EC: the save message shown during the timed wait, named for the step it precedes. */

@@ -142,12 +142,12 @@ typedef union CampMenuStepCounter {
 ASSERT_OFFSET(CampMenuStepCounter, rows, 0);
 ASSERT_SIZE(CampMenuStepCounter, 2);
 
-/* The start menu's load results g_SaveCardStatus holds beyond the CardEvent codes 0 to 4; the shop menu gives 5 to 10 other meanings. */
+/* The save menu results g_SaveCardStatus holds beyond the CardEvent codes 0 to 4. */
 enum {
-    START_SAVE_STATUS_LOADED       = 5, /* the load verified; the slots show */
-    START_SAVE_STATUS_NO_FILE      = 6, /* the card directory has no save file */
-    START_SAVE_STATUS_BAD_CHECKSUM = 7, /* the loaded file failed its checksum */
-    START_SAVE_STATUS_NO_CARD      = 8, /* neither port holds a usable card */
+    SAVE_STATUS_LOADED       = 5, /* the load verified; the slots show */
+    SAVE_STATUS_NO_FILE      = 6, /* the card directory has no save file */
+    SAVE_STATUS_BAD_CHECKSUM = 7, /* the loaded file failed its checksum */
+    SAVE_STATUS_NO_CARD      = 8, /* neither port holds a usable card */
 };
 
 typedef struct {
