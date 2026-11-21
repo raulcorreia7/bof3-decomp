@@ -44,6 +44,7 @@ def make_repo(tmp_path: Path, base: str) -> Path:
     (repo / "config/symbols.toml").write_text("")
     (repo / "docs/subsystems.md").write_text(SUBSYSTEMS)
     (repo / "include/thing.h").write_text(base)
+    (repo / ".gitignore").write_text("__pycache__/\nbuild/\n")
     stubs = tmp_path / "stubs"
     stubs.mkdir()
     for name in ("ninja", "meson"):
@@ -114,6 +115,15 @@ def test_a_branch_that_really_drops_a_type_still_fails(tmp_path: Path) -> None:
     result = pre_push(repo, tmp_path)
     assert "FAIL  typeloss" in result.stdout
     assert (repo / "build/pre-push/typeloss.rc").read_text().strip() == "1"
+
+
+def test_uncommitted_work_fails_instead_of_passing_unchecked(tmp_path: Path) -> None:
+    repo = make_repo(tmp_path, TYPED)
+    (repo / "include/thing.h").write_text(WEAK)
+
+    result = pre_push(repo, tmp_path)
+    assert result.returncode == 1
+    assert "uncommitted changes" in result.stderr
 
 
 def test_readme_table_matches_gate() -> None:
