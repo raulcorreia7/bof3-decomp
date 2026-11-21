@@ -489,6 +489,9 @@ void func_801CFF20(void);
 void func_801F2C14(void);
 void Fishing_ShowLocation(void);
 void func_801F2C3C(void);
+
+/* The area functions the resident tables and the area images call. */
+void func_801F3224(void);
 void func_801F32C0(void);
 void func_801F341C(void);
 void func_801F34A0();
@@ -505,9 +508,6 @@ void func_801F4C84(void);
 void func_801F4D80(void);
 void func_801F512C(void);
 void func_801F52F8(void);
-
-/* The area functions the resident tables and the area images call. */
-void func_801F3224(void);
 void Actor_NextStep(void);
 void func_801F3608(void);
 void func_801F37B4(void);

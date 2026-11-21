@@ -249,6 +249,8 @@ ASSERT_OFFSET(AreaLoad, unk_3C, 0x3C);
 ASSERT_OFFSET(AreaLoad, callback, 0x40);
 ASSERT_SIZE(AreaLoad, GAME_TABLE_ENTRY_SIZE);
 
+#define MAP_ZONE_SIZE 0x08
+
 /* A tile rectangle of a map and what the field code reads once the party stands in it.
  * Area_FindEncounterZoneOf and Area_FindEncounterZone compare the four corners as unsigned bytes against (x, y);
  * `rate` indexes the D_801CD1B8 pair table (Area_RollEncounterThreshold), `type` is returned by func_801A0348, and
@@ -264,6 +266,6 @@ typedef struct {
 
 ASSERT_OFFSET(EncounterZone, min, 0x00);
 ASSERT_OFFSET(EncounterZone, max, 0x02);
-ASSERT_SIZE(EncounterZone, 0x08);
+ASSERT_SIZE(EncounterZone, MAP_ZONE_SIZE);
 
 #endif
