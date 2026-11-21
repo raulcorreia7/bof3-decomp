@@ -3,8 +3,8 @@ jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x18, source = "T
 jtbl_801F2C1C = { addr = 0x801F2C1C, type = "Callback", size = 0x28, source = "The switch table of func_801F50F0: 10 jump targets of its jr dispatch." }
 Area_DrawScreenTint = { addr = 0x801F3BA0, type = "func", source = "Draws a semi-transparent tile over the whole screen in the colour of the task tint." }
 GFX_DrawShadedDisc = { addr = 0x801F3D90, type = "func", source = "Fans 32 POLY_G3 around (x, y), each spanning 128 of the 4096-step angle and reaching radius through rcos and rsin; the centre vertex uses center_shade, the rim vertices rim_shade." }
-Message_ClearRequest = { addr = 0x801F4320, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_INN, g_SceneEventStep to 0 and g_SceneEventSelection to AREA_RESET_VARIANT." }
-Message_Clear = { addr = 0x801F4360, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_INN, g_SceneEventStep to 5 and g_SceneEventSelection to 0xFF." }
+UI_MessageClearRequest = { addr = 0x801F4320, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_INN, g_SceneEventStep to 0 and g_SceneEventSelection to AREA_RESET_VARIANT." }
+UI_MessageClear = { addr = 0x801F4360, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_INN, g_SceneEventStep to 5 and g_SceneEventSelection to 0xFF." }
 Area_ReserveActorSlot = { addr = 0x801F4D60, type = "func", source = "finds a free actor slot or backs up the script" }
 Area_PauseBGM = { addr = 0x801F4EBC, type = "func", source = "pauses the BGM" }
 Area_ResumeBGM = { addr = 0x801F4EE4, type = "func", source = "resumes the BGM" }

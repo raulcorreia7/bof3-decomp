@@ -4,7 +4,7 @@ MATCH void func_801F3B4C(void) {
     switch (g_SceneEventState.step) {
         case 0:
             if (g_GameCellType == 3) {
-                UI_SetMode(UI_MODE_WHITE_OUT);
+                UI_ModeSet(UI_MODE_WHITE_OUT);
                 g_SceneEventState.step = 1;
             } else {
                 Game_ClearScriptActive();
@@ -16,7 +16,7 @@ MATCH void func_801F3B4C(void) {
             if (!WINDOW_EFFECT_BUSY()) {
                 SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 2));
                 Char_RebuildPartyStats();
-                UI_SetMode(UI_MODE_WHITE_IN);
+                UI_ModeSet(UI_MODE_WHITE_IN);
                 g_SceneEventState.step = 2;
             }
             break;

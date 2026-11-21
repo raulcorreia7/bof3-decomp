@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801F8F18(void) {
     switch (g_ScenarioState.step_05) {
         case 0:
-            UI_SetMode(UI_MODE_LONG_FADE_OUT);
+            UI_ModeSet(UI_MODE_LONG_FADE_OUT);
             g_ScenarioState.step_05 = 1;
             break;
         case 1:
@@ -19,7 +19,7 @@ MATCH void func_801F8F18(void) {
             break;
         case 2:
             if (g_ScriptVars[0] == 0x0C) {
-                UI_SetMode(UI_MODE_LONG_FADE_OUT);
+                UI_ModeSet(UI_MODE_LONG_FADE_OUT);
                 Char_RebuildPartyStats();
                 g_ScenarioState.step_05 = 3;
                 SYS_SetFlag(g_SceneFlags, 0x11);

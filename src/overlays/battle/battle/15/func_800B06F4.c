@@ -15,22 +15,22 @@ MATCH void func_800B06F4(s16 x, s16 y, u8 width, u8 height) {
 
     for (i = 1; i < height - 1; i++) {
         for (j = 1; j < width - 1; j++) {
-            UI_DrawSprite(x + j * BATTLE_PANEL_STEP, y + i * BATTLE_PANEL_STEP, 0x25, UI_SPRITE_ALT_PAGE);
+            UI_SpriteDraw(x + j * BATTLE_PANEL_STEP, y + i * BATTLE_PANEL_STEP, 0x25, UI_SPRITE_ALT_PAGE);
         }
     }
     for (i = 2; i < width - 2; i++) {
         px = x + i * BATTLE_PANEL_STEP;
-        UI_DrawSprite(px, y, 0x24, UI_SPRITE_ALT_PAGE);
-        UI_DrawSprite(px, y + (height - 1) * BATTLE_PANEL_STEP, 0x28, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw(px, y, 0x24, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw(px, y + (height - 1) * BATTLE_PANEL_STEP, 0x28, UI_SPRITE_ALT_PAGE);
     }
     for (i = 2; i < height - 2; i++) {
         px = y + i * BATTLE_PANEL_STEP;
-        UI_DrawSprite(x, px, 0x2A, UI_SPRITE_ALT_PAGE);
-        UI_DrawSprite(x + (width - 1) * BATTLE_PANEL_STEP, px, 0x2B, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw(x, px, 0x2A, UI_SPRITE_ALT_PAGE);
+        UI_SpriteDraw(x + (width - 1) * BATTLE_PANEL_STEP, px, 0x2B, UI_SPRITE_ALT_PAGE);
     }
-    UI_DrawSprite(x, y, 0x23, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw(x, y, 0x23, UI_SPRITE_ALT_PAGE);
     px = x + (width - 2) * BATTLE_PANEL_STEP;
-    UI_DrawSprite(px, y, 0x26, UI_SPRITE_ALT_PAGE);
-    UI_DrawSprite(x, y + (height - 2) * BATTLE_PANEL_STEP, 0x27, UI_SPRITE_ALT_PAGE);
-    UI_DrawSprite(px, y + (height - 2) * BATTLE_PANEL_STEP, 0x29, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw(px, y, 0x26, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw(x, y + (height - 2) * BATTLE_PANEL_STEP, 0x27, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw(px, y + (height - 2) * BATTLE_PANEL_STEP, 0x29, UI_SPRITE_ALT_PAGE);
 }

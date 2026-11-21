@@ -41,7 +41,7 @@ MATCH void func_801F518C(void) {
             x = g_Task->pos.x.fixed + g_Task->vx * g_Task->timer;
             y = g_Task->pos.y.fixed + g_Task->vy * g_Task->timer;
             if ((u32)((x >> 24) - 0x10) < 5 && (y >> 24) >= 0x18) {
-                Message_StartAreaMessage(MSG_AREA189_ASK_RETURN_BASE_CAMP);
+                UI_MessageStartArea(MSG_AREA189_ASK_RETURN_BASE_CAMP);
                 *state = GAME_REQUEST_MESSAGE;
                 func_801F5D20();
                 return;

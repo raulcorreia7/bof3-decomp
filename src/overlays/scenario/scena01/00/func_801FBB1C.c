@@ -27,7 +27,7 @@ MATCH void func_801FBB1C(void) {
             break;
         case 2:
             if (g_ScriptVars[0] == 2) {
-                UI_SetMode(UI_MODE_LONG_FADE_IN);
+                UI_ModeSet(UI_MODE_LONG_FADE_IN);
                 g_AreaDrawFlags         = 0x1F;
                 g_ScenarioState.step_05 = 3;
             }
@@ -63,7 +63,7 @@ MATCH void func_801FBB1C(void) {
             break;
         case 6:
             if (g_ScriptVars[0] == 8) {
-                UI_SetMode(UI_MODE_LONG_FADE_OUT);
+                UI_ModeSet(UI_MODE_LONG_FADE_OUT);
                 g_ScenarioState.step_05 = 7;
             }
             break;

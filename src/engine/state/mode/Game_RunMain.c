@@ -14,7 +14,7 @@ MATCH void Game_RunMain(void) {
     GAME_SEL_STATE->state    = 0u;
     GAME_SEL_STATE->substate = 0u;
     SYS_ClearCurrentThread();
-    Menu_ResetPanelTasks();
+    UI_PanelResetTasks();
 
     while (1) {
         callbacks = g_GameModes;

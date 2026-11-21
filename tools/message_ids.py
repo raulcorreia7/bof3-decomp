@@ -4,11 +4,11 @@
 A message id is an index into the area message table (include/menu/gameui.h). The
 scan recognises the id argument of every call, macro and write that carries one:
 
-    Message_StartAreaMessage, Message_Request, Scene_ShowMessage,
+    UI_MessageStartArea, UI_MessageRequest, Scene_ShowMessage,
     MESSAGE_START_WAIT, SCENARIO_MESSAGE_WAIT, SCENA14_START_AREA_MESSAGE,
     WORLD_ARM_ANSWER_MESSAGE, WORLD_ARM_ANSWER_MESSAGE_IDLE,
     MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, ...),
-    func_801D0DD4, func_801D10AC, and `g_MessageRequest = <id>`.
+    func_801D0DD4, func_801D10AC, and `g_UiMessageRequest = <id>`.
 
 Comments and string literals are ignored. The distinct values become one numbered
 define each, in decimal, sorted; uses of the names are collected too, so a value
@@ -45,8 +45,8 @@ SUFFIXES = (".c", ".h", ".inc")
 NUMBER = r"(?:0[xX][0-9A-Fa-f]+|\d+)[uUlL]*"
 MESSAGE_NONE = 0xFFFF
 FIRST_ARG = (
-    "Message_StartAreaMessage",
-    "Message_Request",
+    "UI_MessageStartArea",
+    "UI_MessageRequest",
     "Scene_ShowMessage",
     "MESSAGE_START_WAIT",
     "SCENARIO_MESSAGE_WAIT",
@@ -68,7 +68,7 @@ IDLE_RE = re.compile(
 TEXT_RE = re.compile(
     r"\bMESSAGE_TABLE_TEXT\s*\(\s*AREA_MESSAGE_TABLE\s*,\s*(" + NUMBER + r")\s*\)"
 )
-WRITE_RE = re.compile(r"\bg_MessageRequest\s*=\s*(" + NUMBER + r")\s*;")
+WRITE_RE = re.compile(r"\bg_UiMessageRequest\s*=\s*(" + NUMBER + r")\s*;")
 NAME_RE = re.compile(r"\bMSG_(\d+)\b")
 MASK_RE = re.compile(
     r"/\*.*?\*/|//[^\n]*|\"(?:\\.|[^\"\\\n])*\"|'(?:\\.|[^'\\\n])*'", re.DOTALL
@@ -87,7 +87,7 @@ DEF_RE = re.compile(
     r"\bDEFINE_MESSAGE\s*\(\s*(\w+)\s*,\s*(" + NUMBER + r")\s*,\s*(\w+)\s*\)"
 )
 SYSTEM = "system"
-SYSTEM_CALL_RE = re.compile(r"\bMessage_Request\s*\(\s*")
+SYSTEM_CALL_RE = re.compile(r"\bUI_MessageRequest\s*\(\s*")
 Tags = dict[str, dict[int, str]]
 TAG_NAMES: dict[str, tuple[str, int]] = {}
 TAG_NAMES_SECTIONS: set[str] = set()
@@ -118,7 +118,7 @@ def tag_name(section: str, value: int, tag: str | None) -> str:
 # Modules with no archive of their own read the faerie village bank (AREA175): the commu
 # overlays, the shop and start menus, plchar and the shared Fairy_* answer headers.
 FAERIE_BANK = "area175"
-FAERIE_FILES = ("Message_SetAnswerMessage.h",)
+FAERIE_FILES = ("UI_MessageAnswerSet.h",)
 
 
 def faerie_bank(path: Path) -> bool:
@@ -144,7 +144,7 @@ def module_of(path: Path, tags: Tags) -> str | None:
 
 
 def system_starts(text: str) -> set[int]:
-    """Offsets of the id argument of every Message_Request: the system table, not the area's."""
+    """Offsets of the id argument of every UI_MessageRequest: the system table, not the area's."""
     if SYSTEM not in TAG_NAMES_SECTIONS:
         return set()
     return {match.end() for match in SYSTEM_CALL_RE.finditer(text)}
@@ -266,7 +266,7 @@ def render(ids: Ids, width: int) -> str:
 def rewrite_text(
     text: str, names: dict[int, str], system_names: dict[int, str] | None = None
 ) -> str:
-    """Rewrite the literal ids and flat MSG_nnn names in `text`: Message_Request ids to
+    """Rewrite the literal ids and flat MSG_nnn names in `text`: UI_MessageRequest ids to
     `system_names`, the others to `names`; a value with no entry stays as written.
     """
     masked_text = masked(text)
@@ -283,7 +283,7 @@ def rewrite_text(
 
 
 def rewrite() -> int:
-    """Rewrite the sites of every tagged module and every Message_Request to their names."""
+    """Rewrite the sites of every tagged module and every UI_MessageRequest to their names."""
     tags = load_tags()
     ids, width = scan(tags)
     absent = missing(ids, tags)

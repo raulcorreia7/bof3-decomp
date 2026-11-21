@@ -25,7 +25,7 @@ MATCH void func_801FC488(void) {
             break;
         case 4:
             if (g_ScriptVars[0] == 7) {
-                UI_SetMode(UI_MODE_LONG_FADE_OUT);
+                UI_ModeSet(UI_MODE_LONG_FADE_OUT);
                 g_ScenarioState.step_05 = 5;
             }
             break;
@@ -41,7 +41,7 @@ MATCH void func_801FC488(void) {
             break;
         case 7:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                UI_SetMode(UI_MODE_LONG_FADE_IN);
+                UI_ModeSet(UI_MODE_LONG_FADE_IN);
                 g_AreaDrawFlags         = AREA_DRAW_ALL_FLAGS;
                 g_ScenarioState.step_05 = 8;
             }

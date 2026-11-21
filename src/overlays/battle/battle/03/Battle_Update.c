@@ -4,7 +4,7 @@
 MATCH void Battle_Update(void) {
     s32 status = g_Battle.flags;
 
-    if (!(status & BATTLE_STATE_WINDOW_BUSY) && ((g_MenuPanelTasks[0].active == 0) || (g_Battle.phase.mode == BATTLE_MODE_RESULT)) &&
+    if (!(status & BATTLE_STATE_WINDOW_BUSY) && ((g_UiPanelTasks[0].active == 0) || (g_Battle.phase.mode == BATTLE_MODE_RESULT)) &&
         ((g_Battle.outcome.event_flags & 0x2) == 0 || (g_Battle.phase.mode == BATTLE_MODE_RESULT))) {
         Battle_DispatchMode();
     }
@@ -24,6 +24,6 @@ MATCH void Battle_Update(void) {
     Actor_DispatchAll();
     GFX_UpdatePaletteAnimations();
     func_8019625C();
-    Menu_UpdatePanelTasks();
+    UI_PanelUpdateTasks();
     Area_DrawScene();
 }

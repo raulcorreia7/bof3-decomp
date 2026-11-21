@@ -14,7 +14,7 @@ MATCH void func_801FAC54(void) {
             Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_HOUSE_BALIO_SUNDER, TO_COORD(0x20), TO_COORD(0x11), AREA_ENTRY_MAP_LOADING);
             break;
         case 11:
-            UI_SetMode(5);
+            UI_ModeSet(5);
             g_AreaDrawFlags         = 0x1F;
             g_ScenarioState.step_05 = 0xC;
             break;

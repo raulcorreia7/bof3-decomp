@@ -14,7 +14,7 @@ MATCH void func_801F4B80(void) {
         case 1:
             state = &g_GameStateIndex;
             if (*state != GAME_REQUEST_MESSAGE) {
-                Message_StartAreaMessage(MSG_AREA188_ID_REJECTED);
+                UI_MessageStartArea(MSG_AREA188_ID_REJECTED);
                 *state                 = GAME_REQUEST_MESSAGE;
                 g_SceneEventState.step = 2;
             }
@@ -30,7 +30,7 @@ MATCH void func_801F4B80(void) {
         case 10:
             state = &g_GameStateIndex;
             if (*state != GAME_REQUEST_MESSAGE) {
-                Message_StartAreaMessage(MSG_AREA188_ID_ACCEPTED);
+                UI_MessageStartArea(MSG_AREA188_ID_ACCEPTED);
                 *state = GAME_REQUEST_MESSAGE;
                 SYS_ToggleFlag(g_SceneEventFlags, 0x69);
                 g_SceneEventState.step = 0xB;

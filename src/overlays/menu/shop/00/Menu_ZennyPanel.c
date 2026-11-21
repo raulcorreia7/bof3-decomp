@@ -2,6 +2,6 @@
 
 /* func_801E2AB0 */
 MATCH void Menu_ZennyPanel(void) {
-    g_ShopZennySteps[g_MenuCurrentPanel->state]();
-    Menu_DrawZennyWindow(g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, 0, g_Zenny);
+    g_ShopZennySteps[g_UiPanelCurrent->state]();
+    Menu_DrawZennyWindow(g_UiPanelCurrent->pos.x, g_UiPanelCurrent->pos.y, 0, g_Zenny);
 }

@@ -25,7 +25,7 @@
 #include "FairyNickname_AnswerLikeNickname.c"
 #include "FairyNickname_AnswerKeepMakingNicknames.c"
 #include "Fairy_AnswerKnowsWhatToDo.c"
-#include "Message_SetAnswerMessage.c"
+#include "UI_MessageAnswerSet.c"
 #include "FairySinger_AnswerHearSong.c"
 #include "func_801F32D8.c"
 #include "Area_QueueSelectEffect.c"

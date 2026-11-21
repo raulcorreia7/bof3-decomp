@@ -28,7 +28,7 @@ MATCH void func_801FB0F0(void) {
             break;
         case 5:
             if (g_ScriptVars[0] == 1) {
-                UI_SetMode(UI_MODE_SLOW_FADE_IN);
+                UI_ModeSet(UI_MODE_SLOW_FADE_IN);
                 g_AreaDrawFlags         = AREA_DRAW_ALL_FLAGS;
                 g_ScenarioState.step_05 = 6;
             }

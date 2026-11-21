@@ -27,15 +27,15 @@ Unknown keeps the address name (`func_<ADDR>`, `D_<ADDR>`, `unk_<OFF>`).
 
 The test: [natural names](../../../../docs/naming.md#functions).
 
-| Don't (mechanical)                                                | Do (natural), when the users show it                              | Why                                                                 |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `Effect_CopyBattlerCoordsSetTimers`                               | `Effect_StartAtTarget`                                            | names the purpose, not the two stores                               |
-| `Area_ClearSceneFlag46AndResetMode`                               | `Area_EndCutscene`                                                | no flag number, no `And`                                            |
-| `Battle_FindSelectableSlotForward`                                | `Battle_TargetNext` (and `Battle_TargetPrev`)                     | the cursor moving to the next enemy; a family puts the object first |
-| `Message_OpenWindow`, `Message_CloseWindow`, `Message_DrawWindow` | `Message_WindowOpen`, `Message_WindowClose`, `Message_WindowDraw` | three on one object sort as a family, under the subject's tag       |
-| `g_ShopSelectStep`                                                | `g_ShopSelectedItem`                                              | the item, not a step of the code                                    |
-| `unk_01`, `state_02`, `step_01` (task header)                     | `mode`, `step`, with `flags` at 0x00                              | the era names for the first three bytes of every task record        |
-| `Struct_801E3C40`, `Record3`                                      | `ShopStock`, `MasterSkill`, `EncounterTable`                      | a type is a game noun                                               |
+| Don't (mechanical)                                                      | Do (natural), when the users show it                                    | Why                                                                 |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `Effect_CopyBattlerCoordsSetTimers`                                     | `Effect_StartAtTarget`                                                  | names the purpose, not the two stores                               |
+| `Area_ClearSceneFlag46AndResetMode`                                     | `Area_EndCutscene`                                                      | no flag number, no `And`                                            |
+| `Battle_FindSelectableSlotForward`                                      | `Battle_TargetNext` (and `Battle_TargetPrev`)                           | the cursor moving to the next enemy; a family puts the object first |
+| `UI_MessageOpenWindow`, `UI_MessageCloseWindow`, `UI_MessageDrawWindow` | `UI_MessageWindowOpen`, `UI_MessageWindowClose`, `UI_MessageWindowDraw` | three on one object sort as a family, under the subject's tag       |
+| `g_ShopSelectStep`                                                      | `g_ShopSelectedItem`                                                    | the item, not a step of the code                                    |
+| `unk_01`, `state_02`, `step_01` (task header)                           | `mode`, `step`, with `flags` at 0x00                                    | the era names for the first three bytes of every task record        |
+| `Struct_801E3C40`, `Record3`                                            | `ShopStock`, `MasterSkill`, `EncounterTable`                            | a type is a game noun                                               |
 
 The right column shows the form, not facts: every name still needs its evidence (step 3). When the
 evidence shows only the mechanics, use the plainest game verb from the

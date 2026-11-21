@@ -23,7 +23,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
     u8* cursor;
     u8* text;
 
-    UI_DrawWindow(panel_x, (panel_y + 1) & HALF_MASK, 139, 158, UI_WINDOW_OPEN_TOP_LEFT, (s32)g_WindowStyle);
+    UI_WindowDraw(panel_x, (panel_y + 1) & HALF_MASK, 139, 158, UI_WINDOW_OPEN_TOP_LEFT, (s32)g_WindowStyle);
     if (FISHING_STATE->step_index != 0) {
         FISHING_STATE->step_index = (u8)(FISHING_STATE->step_index - 1);
         max_count                 = 0xA;
@@ -41,7 +41,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
     slot   = 0;
     row    = 0;
     index  = 0;
-    text   = g_UiFormatBuffer;
+    text   = g_UiTextFormatBuffer;
     cursor = g_InventoryIds[3];
     bar_x  = (s16)(panel_x + 5);
     text_y = 0;
@@ -53,22 +53,22 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
                 if (*D_80145E94 == 2) {
                     if (FISHING_STATE->counter_07 & 1) {
                         if (FISHING_STATE->step_14 == index) {
-                            UI_DrawText(bar_x, bar_y, UI_TEXT_DIM, ITEM_NAME_LENGTH, (&g_Accessories[accessory]));
-                            UI_DrawText(bar_x, (s16)(text_y + row_y), 0, ITEM_NAME_LENGTH, (&g_Accessories[*cursor]));
+                            UI_TextDraw(bar_x, bar_y, UI_TEXT_DIM, ITEM_NAME_LENGTH, (&g_Accessories[accessory]));
+                            UI_TextDraw(bar_x, (s16)(text_y + row_y), 0, ITEM_NAME_LENGTH, (&g_Accessories[*cursor]));
                             if (g_InventoryCounts[3][slot] >= 2U) {
                                 TEXT_Format(text, D_801D0C14, g_InventoryCounts[3][slot]);
                                 text_x = (s16)(panel_x + 104);
-                                UI_DrawGlyphString(text_x, (s16)(text_y + (row_y + 4)), UI_TEXT_DIM, text);
+                                UI_TextDrawGlyphString(text_x, (s16)(text_y + (row_y + 4)), UI_TEXT_DIM, text);
                                 goto drawn; /* joins the shared count-text draw */
                             }
                         }
                     }
                 }
-                UI_DrawText(bar_x, bar_y, 0, ITEM_NAME_LENGTH, (&g_Accessories[*cursor]));
+                UI_TextDraw(bar_x, bar_y, 0, ITEM_NAME_LENGTH, (&g_Accessories[*cursor]));
                 if (g_InventoryCounts[3][slot] >= 2U) {
                     TEXT_Format(text, D_801D0C14, g_InventoryCounts[3][slot]);
                     text_x = (s16)(panel_x + 104);
-                    UI_DrawGlyphString(text_x, (s16)(text_y + (row_y + 2)), 0U, text);
+                    UI_TextDrawGlyphString(text_x, (s16)(text_y + (row_y + 2)), 0U, text);
                 }
             drawn: /* the count text is drawn once, from either path */
                 if (FISHING_STATE->step_14 == index) {
@@ -113,7 +113,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
         }
     }
     func_801D8248((s16)(panel_x + 128), (s16)(panel_y + (text_y & BYTE_MASK)), 114 & 0xFE);
-    UI_DrawText((s16)(panel_x + 55), (s16)(panel_y + 7), 0, 4U, (&D_801E21D0));
+    UI_TextDraw((s16)(panel_x + 55), (s16)(panel_y + 7), 0, 4U, (&D_801E21D0));
 }
 #else
 INCLUDE_ASM(func_801D8364);

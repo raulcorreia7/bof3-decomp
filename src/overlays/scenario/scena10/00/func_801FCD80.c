@@ -41,7 +41,7 @@ NON_MATCHING void func_801FCD80(void) {
             func_801C1E3C(3);
             break;
         case 5:
-            Message_StartAreaMessage(MSG_SCENA10_058);
+            UI_MessageStartArea(MSG_SCENA10_058);
             g_GameStateIndex        = GAME_REQUEST_MESSAGE;
             g_ScenarioState.step_05 = 0xB;
             break;

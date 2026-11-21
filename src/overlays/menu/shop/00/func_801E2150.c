@@ -66,11 +66,11 @@ MATCH void func_801E2150(void) {
         } else if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
-            g_MenuPanelTasks[0].state = 1;
-            D_80148357                = 1;
-            D_80148624                = 0;
-            D_80148654                = 0xA;
-            D_80148652                = 0;
+            g_UiPanelTasks[0].state = 1;
+            D_80148357              = 1;
+            D_80148624              = 0;
+            D_80148654              = 0xA;
+            D_80148652              = 0;
             D_80148651 += 1;
         }
     }

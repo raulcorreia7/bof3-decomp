@@ -64,7 +64,7 @@ MATCH void func_801F2EA0(void) {
 
                 g_ScriptVars[0] = 1;
                 SND_StartBGM(0x95, 100, 0x10);
-                UI_SetMode(UI_MODE_FADE_IN);
+                UI_ModeSet(UI_MODE_FADE_IN);
                 flags           = &g_Scenario2Flags[0x60];
                 g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
                 SYS_ClearFlag(flags, 3);

@@ -236,7 +236,7 @@ NON_MATCHING void func_801F9834(void) {
                 break;
             }
             SND_FadeOutSequence(0, 1, 4, 0x1E);
-            UI_SetMode(0xD);
+            UI_ModeSet(0xD);
             g_ScenarioState.step_05 = 0x14;
             break;
         case 20:
@@ -280,7 +280,7 @@ MATCH u16 func_801FA904(u8* tags, u16* messages) {
     for (i = 0; i < PARTY_MEMBER_MESSAGE_COUNT; i++) {
         for (j = 0; j < g_PartySize; j++) {
             if (g_Game.members[j].chr.character_id == tags[i]) {
-                Message_StartAreaMessage((s16)messages[i]);
+                UI_MessageStartArea((s16)messages[i]);
                 FAKE_ORDER_LOCK(g_GameStateIndex = GAME_REQUEST_MESSAGE); /* FAKE: keeps the state store before the return value's reload. */
                 return messages[i];
             }
@@ -300,9 +300,9 @@ MATCH void func_801FB374(void) {
  * for the second desert camp, func_801F37AC otherwise) maps it to a message index. */
 #define SCENA14_START_AREA_MESSAGE(message)                 \
     if (LOHU(g_GameAreaId) == AREA_ID_DESERT_CAMP_SECOND) { \
-        Message_StartAreaMessage(func_801F326C(message));   \
+        UI_MessageStartArea(func_801F326C(message));        \
     } else {                                                \
-        Message_StartAreaMessage(func_801F37AC(message));   \
+        UI_MessageStartArea(func_801F37AC(message));        \
     }                                                       \
     g_GameStateIndex = GAME_REQUEST_MESSAGE
 

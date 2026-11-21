@@ -18,7 +18,7 @@ MATCH void Menu_DrawInoculationWindow(u8 slot, s32 x, s32 y, s32 style, u8 curso
     s32 i;
 
     enabled = style & BYTE_MASK;
-    UI_DrawWindow(x + 3, y + 3, 158, 112, 0, enabled);
+    UI_WindowDraw(x + 3, y + 3, 158, 112, 0, enabled);
     Menu_DrawPanelFrame(x, y, 18, 13);
     item  = g_Game.members[slot].character_index;
     value = g_Characters[item].level * 10;
@@ -36,13 +36,13 @@ MATCH void Menu_DrawInoculationWindow(u8 slot, s32 x, s32 y, s32 style, u8 curso
     gx  = xpos + 8;
     do {
         if (((((u8*)&g_Characters[0].inoculations)[rec] >> (u8)i) & 0x1) || (u8)i == cursor) {
-            UI_DrawText(gx, row_y, UI_TEXT_HIGHLIGHT, TEXT_LENGTH_MAX, Message_GetText((i & BYTE_MASK) + 0xDE));
+            UI_TextDraw(gx, row_y, UI_TEXT_HIGHLIGHT, TEXT_LENGTH_MAX, UI_MessageGetText((i & BYTE_MASK) + 0xDE));
         } else {
-            UI_DrawText(gx, row_y, sel & BYTE_MASK, TEXT_LENGTH_MAX, Message_GetText((i & BYTE_MASK) + 0xDE));
+            UI_TextDraw(gx, row_y, sel & BYTE_MASK, TEXT_LENGTH_MAX, UI_MessageGetText((i & BYTE_MASK) + 0xDE));
         }
-        TEXT_Format(g_UiFormatBuffer, D_801D0CDC, value & HALF_MASK);
-        g_UiFormatBuffer[3] = 0x60;
-        UI_DrawAsciiString((xpos + 112), row_y, sel & BYTE_MASK, g_UiFormatBuffer);
+        TEXT_Format(g_UiTextFormatBuffer, D_801D0CDC, value & HALF_MASK);
+        g_UiTextFormatBuffer[3] = 0x60;
+        UI_TextDrawAscii((xpos + 112), row_y, sel & BYTE_MASK, g_UiTextFormatBuffer);
         i++;
         row_y += 0xD;
     } while ((u8)i < 8);

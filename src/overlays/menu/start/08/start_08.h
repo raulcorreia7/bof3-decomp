@@ -60,7 +60,7 @@
         MenuPanelTask* panel;                            \
         u16            next;                             \
                                                          \
-        panel        = g_MenuCurrentPanel;               \
+        panel        = g_UiPanelCurrent;                 \
         next         = panel->pos.x + MENU_PANEL_STEP_X; \
         panel->pos.x = next;                             \
         if ((s16)next >= 17) {                           \
@@ -226,7 +226,7 @@ extern s8              D_801484E3;
 extern s16             D_801484E4;
 extern s16             D_801484E6;
 extern u8              D_801484EB;
-/* The start-menu panel: slot 13 of g_MenuPanelTasks (0x80148504), the shared
+/* The start-menu panel: slot 13 of g_UiPanelTasks (0x80148504), the shared
  * choice-list view. The retail addresses the cells one by one, so they keep
  * their own symbols below; each is the cell the shared record names. */
 extern u8*             D_80148500;
@@ -367,9 +367,9 @@ extern Callback D_801EC53C[];
 extern Callback D_801EC578[];
 extern Callback D_801EC58C[];
 /* Panel and caption resources. A glyph row is a run of 3-byte records
- * {s8 dx, s8 dy, u8 glyph} in 8-pixel units that UI_DrawSpriteRun draws until
+ * {s8 dx, s8 dy, u8 glyph} in 8-pixel units that UI_SpriteDrawRun draws until
  * glyph 0xFF; g_MenuCaptionRight packs several such runs and the label
- * strings in one row. The icon and portrait rows are UI_DrawText glyph
+ * strings in one row. The icon and portrait rows are UI_TextDraw glyph
  * strings and an atlas of s16 cells followed by label strings. Both stay byte
  * arrays: a row's size includes alignment padding past its payload (44 bytes
  * for a 42-byte run, 688 for a 687-byte bank), and a typed record array would
@@ -759,7 +759,7 @@ extern s32  func_801EFCA8(char* prefix, u8 length);
 static inline void Menu_SlidePanelIn(void) {
     MenuPanelTask* task;
 
-    task = g_MenuCurrentPanel;
+    task = g_UiPanelCurrent;
     task->pos.x += MENU_PANEL_STEP_X;
     if ((s16)task->pos.x >= 321) {
         task->pos.x = 320;
@@ -771,7 +771,7 @@ static inline void Menu_SlidePanelIn(void) {
 static inline void MenuRetreatPanelXToMinus200(void) {
     MenuPanelTask* task;
 
-    task = g_MenuCurrentPanel;
+    task = g_UiPanelCurrent;
     task->pos.x -= MENU_PANEL_STEP_X;
     if ((s16)task->pos.x < -200) {
         LOH(task->pos.x) = -200;
@@ -785,7 +785,7 @@ static inline void MenuAdvancePanelYField6(void) {
     u8*            bytes;
     u16            next;
 
-    panel        = g_MenuCurrentPanel;
+    panel        = g_UiPanelCurrent;
     bytes        = (u8*)panel;
     next         = panel->pos.y + MENU_PANEL_STEP_Y;
     panel->pos.y = next;
@@ -904,7 +904,7 @@ static inline Character* Start_PickPartyRecord(s32 character_index, s32 record_i
 void Menu_DrawCharacterPortrait(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 shade_mode);
 
 /* func_801AF930 */
-void UI_DrawAbilityRow(s32 x, s32 y, u8 shade, u8 element, u8* name, u8 cost, u8 flags);
+void UI_ListDrawAbilityRow(s32 x, s32 y, u8 shade, u8 element, u8* name, u8 cost, u8 flags);
 
 void func_801D49F8(s32 step_index);
 
@@ -930,7 +930,7 @@ void func_801E7720(s16 tile_x, s8 tile_type);
 
 /* Step the master panel up 16 pixels and stop it at y 62. The member declares task. */
 #define MENU_STEP_PANEL_UP()          \
-    task = g_MenuCurrentPanel;        \
+    task = g_UiPanelCurrent;          \
     task->pos.y -= MENU_PANEL_STEP_Y; \
     if ((s16)task->pos.y < 63) {      \
         task->pos.y = 62;             \
@@ -939,7 +939,7 @@ void func_801E7720(s16 tile_x, s8 tile_type);
 
 /* Step the master panel right 32 pixels and stop it at x 45. The member declares task. */
 #define MENU_STEP_PANEL_RIGHT()       \
-    task = g_MenuCurrentPanel;        \
+    task = g_UiPanelCurrent;          \
     task->pos.x += MENU_PANEL_STEP_X; \
     if ((s16)task->pos.x >= 46) {     \
         task->pos.x = 45;             \

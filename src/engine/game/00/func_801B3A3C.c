@@ -12,7 +12,7 @@ MATCH void func_801B3A3C(void) {
     if (g_GameStateIndex != GAME_REQUEST_IDLE) {
         return;
     }
-    if (g_MessageRequest == 3u) {
+    if (g_UiMessageRequest == 3u) {
         off = g_Game.current->status.field.slot * ACTOR_SIZE;
         if (!(FIELD(u8, D_80146893, off) & 0x1u)) {
             saved = g_Task;

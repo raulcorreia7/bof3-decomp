@@ -98,9 +98,9 @@ NON_MATCHING void func_801DC93C(void) {
         if (row_mod == frame_now) {
             message_id = FISHING_MESSAGE_HOW_TO_FISH;
         block_39:
-            UI_DrawText(29, 20, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, message_id));
+            UI_TextDraw(29, 20, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, message_id));
         }
-        Menu_DrawCursorSprite((D_80144286 * 48) + 88, 46U, 0);
+        UI_CursorDraw((D_80144286 * 48) + 88, 46U, 0);
     }
 }
 #else

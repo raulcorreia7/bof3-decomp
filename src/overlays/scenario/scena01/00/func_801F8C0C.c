@@ -35,14 +35,14 @@ MATCH void func_801F8C0C(void) {
             break;
         case 3:
             if (g_ScriptVars[0] == 1) {
-                UI_SetMode(0xF);
+                UI_ModeSet(0xF);
                 SND_PlaySE(0x201);
                 g_ScenarioState.step_05 = 4;
             }
             break;
         case 4:
             if (WINDOW_EFFECT_IDLE()) {
-                UI_SetMode(0x10);
+                UI_ModeSet(0x10);
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].header.flags = 0;
                 g_ScenarioState.step_05                                   = 8;
             }

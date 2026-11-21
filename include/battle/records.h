@@ -313,7 +313,7 @@ ASSERT_OFFSET(BattlePanelByteCells, scale, 0x12);
 ASSERT_OFFSET(BattlePanelByteCells, rows, 0x14);
 ASSERT_SIZE(BattlePanelByteCells, BATTLE_PANEL_BYTE_CELLS_SIZE);
 
-/* The battle panel task at 0x80148648 (g_MenuCurrentPanel).
+/* The battle panel task at 0x80148648 (g_UiPanelCurrent).
  *
  * Both battle overlays read that one root through their own BattlePanelTask
  * declaration, and the shared MenuPanelTask in include/menu/panel.h holds the

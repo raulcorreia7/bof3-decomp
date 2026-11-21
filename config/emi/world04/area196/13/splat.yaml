@@ -18,7 +18,7 @@ segments:
       - [0x430, c, Game_SetCurrentActor]
       - [0xC50, c, func_801F3850]
       - [0xCC0, c, func_801F38C0]
-      - [0x1390, c, Message_ShowParty]
+      - [0x1390, c, UI_MessageShowParty]
       - [0x1454, c, func_801F4054]
       - [0x1518, c, func_801F4118]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.

@@ -6,17 +6,17 @@ MATCH void func_801FBC88(void) {
 
     for (i = 0; i < PARTY_SLOT_COUNT; i++) {
         if (g_PartyFieldOrder[i] == CHAR_ID_GARR) {
-            Message_StartAreaMessage(MSG_SCENA06_022);
+            UI_MessageStartArea(MSG_SCENA06_022);
         }
     }
     for (i = 0; i < PARTY_SLOT_COUNT; i++) {
         if (g_PartyFieldOrder[i] == CHAR_ID_NINA_YOUNG) {
-            Message_StartAreaMessage(MSG_SCENA06_021);
+            UI_MessageStartArea(MSG_SCENA06_021);
         }
     }
     for (i = 0; i < PARTY_SLOT_COUNT; i++) {
         if (g_PartyFieldOrder[i] == CHAR_ID_MOMO) {
-            Message_StartAreaMessage(MSG_SCENA06_020);
+            UI_MessageStartArea(MSG_SCENA06_020);
         }
     }
     g_GameStateIndex        = 2;

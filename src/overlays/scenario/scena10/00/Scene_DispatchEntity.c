@@ -49,7 +49,7 @@ NON_MATCHING void func_801F7068(void) {
             count++;
         }
         if ((g_Task->option_flags & (1 << i)) == 0) {
-            UI_DrawBoxOutline(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)width, (u8)height);
+            UI_WindowDrawBoxOutline(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)width, (u8)height);
         }
         i++;
     }
@@ -68,7 +68,7 @@ MATCH void func_801F719C(void) {
     i = 0;
     do {
         if (((g_Task->option_flags >> i) & 1) == 0) {
-            UI_DrawPanelBox(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)D_801FE7CC[i].w, (u8)D_801FE7CC[i].h);
+            UI_WindowDrawPanelBox(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)D_801FE7CC[i].w, (u8)D_801FE7CC[i].h);
         }
         i++;
     } while (i < 3);
@@ -79,10 +79,10 @@ MATCH void func_801F719C(void) {
         Area_AddActor();
     }
     if (((g_Task->option_flags >> 1) & 1) == 0) {
-        sprintf((char*)g_UiFormatBuffer, D_801F6C04, Item_GetRecord(ITEM_CATEGORY_ITEM, g_Task->unk_06));
-        UI_DrawText((s16)((u16)D_801FE7CC[1].x + 4), (s16)((u16)D_801FE7CC[1].y + 2), 0, 8, g_UiFormatBuffer);
-        sprintf((char*)g_UiFormatBuffer, D_801F6C08, (u16)Item_Count(ITEM_CATEGORY_ITEM, g_Task->unk_06, 0));
-        UI_DrawText((s16)((u16)D_801FE7CC[1].x + 0x48), (s16)((u16)D_801FE7CC[1].y + 2), 0, 2, g_UiFormatBuffer);
+        sprintf((char*)g_UiTextFormatBuffer, D_801F6C04, Item_GetRecord(ITEM_CATEGORY_ITEM, g_Task->unk_06));
+        UI_TextDraw((s16)((u16)D_801FE7CC[1].x + 4), (s16)((u16)D_801FE7CC[1].y + 2), 0, 8, g_UiTextFormatBuffer);
+        sprintf((char*)g_UiTextFormatBuffer, D_801F6C08, (u16)Item_Count(ITEM_CATEGORY_ITEM, g_Task->unk_06, 0));
+        UI_TextDraw((s16)((u16)D_801FE7CC[1].x + 0x48), (s16)((u16)D_801FE7CC[1].y + 2), 0, 2, g_UiTextFormatBuffer);
     }
     func_801F781C((u16)D_801FE7CC[2].x + 1, (u16)D_801FE7CC[2].y + 1, 0x80, 0x68);
     if (g_Task->unk_0A != 0) {
@@ -111,7 +111,7 @@ NON_MATCHING void func_801F73EC(void) {
             height = limit;
         }
         if (((g_Task->option_flags >> i) & 1) == 0) {
-            UI_DrawBoxOutline(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)width, (u8)height);
+            UI_WindowDrawBoxOutline(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)width, (u8)height);
         }
         i++;
     } while (i < 3);
@@ -176,7 +176,7 @@ MATCH void func_801F7758(void) {
     Scena10Rect* rect;
 
     rect = &D_801FE7CC[2];
-    UI_DrawPanelBox(rect->x, rect->y, (u8)rect->w, (u8)rect->h);
+    UI_WindowDrawPanelBox(rect->x, rect->y, (u8)rect->w, (u8)rect->h);
     func_801F781C((u16)rect->x + 1, (u16)rect->y + 1, 128, 104);
     if (g_Task->unk_0A != 0) {
         g_Task->unk_0A--;
@@ -241,7 +241,7 @@ MATCH void func_801F7AD4(void) {
     u8           i;
 
     rect = &D_801FE7CC[4];
-    UI_DrawWindow(rect->x, rect->y, rect->w, rect->h, 0, g_WindowStyle);
+    UI_WindowDraw(rect->x, rect->y, rect->w, rect->h, 0, g_WindowStyle);
     x = rect->x + 8;
     y = rect->y + 4;
     i = 0;
@@ -249,9 +249,9 @@ MATCH void func_801F7AD4(void) {
         record = Item_GetRecord(ITEM_CATEGORY_ITEM, (u8)(i + ITEM_PART_A));
         count  = (u8)Item_Count(ITEM_CATEGORY_ITEM, (u8)(i + ITEM_PART_A), 0);
         color  = -(count == 0) & 7;
-        UI_DrawText(x, y, color, (u8)Game_ReadCommand(record), record);
-        sprintf((char*)g_UiFormatBuffer, D_801F6C10, count);
-        UI_DrawGlyphString(x + 0x5A, y + 3, color, g_UiFormatBuffer);
+        UI_TextDraw(x, y, color, (u8)Game_ReadCommand(record), record);
+        sprintf((char*)g_UiTextFormatBuffer, D_801F6C10, count);
+        UI_TextDrawGlyphString(x + 0x5A, y + 3, color, g_UiTextFormatBuffer);
         i++;
         y += 0xF;
     } while (i < 8);
@@ -276,15 +276,15 @@ MATCH void func_801F7C34(void) {
 
 /* Draw the "Choose parts" window with its item list and cursor, then place and step the cursor actor. */
 MATCH void func_801F7DDC(void) {
-    UI_DrawWindow(D_801FE7CC[3].x, D_801FE7CC[3].y, D_801FE7CC[3].w, D_801FE7CC[3].h, UI_WINDOW_STYLE_TRANSLUCENT, g_WindowStyle);
-    sprintf(g_UiFormatBuffer, D_801F6C04, D_801FE874);
-    UI_DrawText((u16)D_801FE7CC[3].x + 8, D_801FE7CC[3].y + 2, 0, ITEM_NAME_LENGTH, g_UiFormatBuffer);
+    UI_WindowDraw(D_801FE7CC[3].x, D_801FE7CC[3].y, D_801FE7CC[3].w, D_801FE7CC[3].h, UI_WINDOW_STYLE_TRANSLUCENT, g_WindowStyle);
+    sprintf(g_UiTextFormatBuffer, D_801F6C04, D_801FE874);
+    UI_TextDraw((u16)D_801FE7CC[3].x + 8, D_801FE7CC[3].y + 2, 0, ITEM_NAME_LENGTH, g_UiTextFormatBuffer);
     func_801F7AD4();
-    Menu_DrawCursorSprite(D_801FE808[0], (u16)(D_801FE808[1] + (g_Task->header.step & 7) * 15), 0);
+    UI_CursorDraw(D_801FE808[0], (u16)(D_801FE808[1] + (g_Task->header.step & 7) * 15), 0);
     func_801F7C34();
     g_Task->screen_x = D_801FE7CC[5].x + D_801FE804[0];
     g_Task->screen_y = D_801FE7CC[5].y + D_801FE804[1];
-    UI_DrawPanelBox(D_801FE7CC[5].x, D_801FE7CC[5].y, (u8)D_801FE7CC[5].w, (u8)D_801FE7CC[5].h);
+    UI_WindowDrawPanelBox(D_801FE7CC[5].x, D_801FE7CC[5].y, (u8)D_801FE7CC[5].w, (u8)D_801FE7CC[5].h);
     Actor_StepAnimLoop();
     Area_AddActor();
 }
@@ -473,7 +473,7 @@ NON_MATCHING void func_801F86D8(void) {
             }
             *g_ScriptVars = 0;
             Scene_SetupParty(9);
-            UI_SetMode(4);
+            UI_ModeSet(4);
             g_ScenarioState.step_05 = 5;
             break;
         case 5:
@@ -490,7 +490,7 @@ NON_MATCHING void func_801F86D8(void) {
             if (*g_ScriptVars != 1) {
                 break;
             }
-            UI_SetMode(5);
+            UI_ModeSet(5);
             g_AreaDrawFlags = 0x1F;
             SND_PlaySE(0x20C);
             g_ScenarioState.step_05 = 7;

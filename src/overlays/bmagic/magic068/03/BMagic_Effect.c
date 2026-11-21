@@ -168,19 +168,19 @@ MATCH void func_801EED50(void) {
             score = 100;
         }
         if (score > 90 && score <= 100) {
-            func_801DE8C0(1, 60, Message_GetText(0x3C));
+            func_801DE8C0(1, 60, UI_MessageGetText(0x3C));
         }
         if (score > 70 && score <= 90) {
-            func_801DE8C0(1, 60, Message_GetText(0x3D));
+            func_801DE8C0(1, 60, UI_MessageGetText(0x3D));
         }
         if (score > 50 && score <= 70) {
-            func_801DE8C0(1, 60, Message_GetText(0x3E));
+            func_801DE8C0(1, 60, UI_MessageGetText(0x3E));
         }
         if (score > 30 && score <= 50) {
-            func_801DE8C0(1, 60, Message_GetText(0x3F));
+            func_801DE8C0(1, 60, UI_MessageGetText(0x3F));
         }
         if (score <= 30) {
-            func_801DE8C0(1, 60, Message_GetText(0x40));
+            func_801DE8C0(1, 60, UI_MessageGetText(0x40));
         }
         for (i = 0; i < 8; i++) {
             if (Battle_SlotIsBlocked((u8)(i + 3)) == 0) {

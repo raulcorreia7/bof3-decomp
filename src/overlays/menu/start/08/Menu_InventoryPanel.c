@@ -2,6 +2,6 @@
 
 /* func_801E9F5C */
 MATCH void Menu_InventoryPanel(void) {
-    g_MenuStartInventorySteps[g_MenuCurrentPanel->state]();
-    Menu_DrawInventoryWindow(g_MenuCurrentPanel);
+    g_MenuStartInventorySteps[g_UiPanelCurrent->state]();
+    Menu_DrawInventoryWindow(g_UiPanelCurrent);
 }

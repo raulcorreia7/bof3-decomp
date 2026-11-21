@@ -69,7 +69,7 @@ MATCH void func_801FD0DC(void) {
             break;
         }
         case 20:
-            Message_Request(MSG_SYSTEM_NOTHING_FOUND);
+            UI_MessageRequest(MSG_SYSTEM_NOTHING_FOUND);
             g_GameStateIndex        = GAME_REQUEST_MESSAGE;
             g_ScenarioState.step_05 = 0x15;
             break;

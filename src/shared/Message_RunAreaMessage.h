@@ -1,12 +1,12 @@
 /* Starts message AREA_MESSAGE_REQUEST and waits for the message screen to close. */
-MATCH void Message_RunAreaMessage(void) {
+MATCH void UI_MessageRunArea(void) {
     s8* state;
 
     state = &g_SceneEventState.step;
     switch (*state) {
         case 0:
             Game_SetScriptActive();
-            Message_StartAreaMessage(AREA_MESSAGE_REQUEST);
+            UI_MessageStartArea(AREA_MESSAGE_REQUEST);
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             *state           = (u8)*state + 1;
             return;

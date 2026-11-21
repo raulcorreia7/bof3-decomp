@@ -11,14 +11,14 @@ MATCH void Menu_DrawZennyWindow(s32 panel_x, s32 panel_y, s32 panel_type, s32 ca
     base_x   = panel_x;
     base_y   = y;
     scaled_y = y << 16;
-    UI_DrawWindow(panel_x + 3, y + 3, MENU_ZENNY_WINDOW_WIDTH, MENU_ZENNY_WINDOW_HEIGHT, 0, g_WindowStyle);
-    TEXT_Format(g_UiFormatBuffer, g_MenuZennyFormat, caption_value);
+    UI_WindowDraw(panel_x + 3, y + 3, MENU_ZENNY_WINDOW_WIDTH, MENU_ZENNY_WINDOW_HEIGHT, 0, g_WindowStyle);
+    TEXT_Format(g_UiTextFormatBuffer, g_MenuZennyFormat, caption_value);
     y += 4;
-    UI_DrawAsciiString((s16)(panel_x + 20), y, 0, g_UiFormatBuffer);
-    UI_DrawText(panel_x + 76, y, 0, TEXT_LENGTH_MAX, g_MenuCaptionIcon);
-    UI_DrawSpriteRun((s16)panel_x, (s16)(scaled_y >> 16), g_MenuCaptionLeft, 0);
+    UI_TextDrawAscii((s16)(panel_x + 20), y, 0, g_UiTextFormatBuffer);
+    UI_TextDraw(panel_x + 76, y, 0, TEXT_LENGTH_MAX, g_MenuCaptionIcon);
+    UI_SpriteDrawRun((s16)panel_x, (s16)(scaled_y >> 16), g_MenuCaptionLeft, 0);
     for (i = 0; i < 11; i++) {
-        UI_DrawSpriteRun((s16)(base_x + (i * 8)), (s16)(scaled_y >> 16), g_MenuCaptionMiddle, 0);
+        UI_SpriteDrawRun((s16)(base_x + (i * 8)), (s16)(scaled_y >> 16), g_MenuCaptionMiddle, 0);
     }
-    UI_DrawSpriteRun(base_x, base_y, g_MenuCaptionRight, 0);
+    UI_SpriteDrawRun(base_x, base_y, g_MenuCaptionRight, 0);
 }

@@ -1,5 +1,5 @@
 ["emi/scenario/scena10/00"]
-UI_DrawPanelBox = { addr = 0x80159B9C, type = "func", source = "Draws a window panel box at x, y of w by h tiles: a dark translucent tile, the window texture in the current style over it, a grey outline and a darker line outside each edge. The resident image owns the body." }
+UI_WindowDrawPanelBox = { addr = 0x80159B9C, type = "func", source = "Draws a window panel box at x, y of w by h tiles: a dark translucent tile, the window texture in the current style over it, a grey outline and a darker line outside each edge. The resident image owns the body." }
 jtbl_801F6C18 = { addr = 0x801F6C18, type = "Callback", source = "The switch table of func_801F86D8: the jump targets of its jr dispatch." }
 jtbl_801F6C50 = { addr = 0x801F6C50, type = "Callback", source = "The switch table of func_801F8C00: the jump targets of its jr dispatch." }
 jtbl_801F6CB8 = { addr = 0x801F6CB8, type = "Callback", source = "The switch table of func_801F95B8: the jump targets of its jr dispatch." }

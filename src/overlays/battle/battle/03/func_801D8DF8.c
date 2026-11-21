@@ -47,7 +47,7 @@ NON_MATCHING void func_801D8DF8(s32 panel_x, s32 panel_y, u32 index) {
         status_mode = (panel_status & 0xBFC) != 0;
     }
     battler_index = index & BYTE_MASK;
-    UI_DrawTextString((panel_x + 4), (panel_y + 2), status_mode, CHARACTER_NAME_LENGTH, (const u8*)&g_Game.members[battler_index].chr);
+    UI_TextDrawString((panel_x + 4), (panel_y + 2), status_mode, CHARACTER_NAME_LENGTH, (const u8*)&g_Game.members[battler_index].chr);
     bar_status = g_Game.members[battler_index].chr.status;
     if (bar_status & 0x4000) {
         status_mode = 2;
@@ -63,11 +63,11 @@ NON_MATCHING void func_801D8DF8(s32 panel_x, s32 panel_y, u32 index) {
     color_byte = color_b;
     func_801D94D4((s16)(panel_x + 0x14), hp_text_y, status_mode, (u8)g_Game.members[battler_index].chr.hp);
     status_mode = ((u8)g_Game.members[battler_index].chr.status >> 0xD) & 0x2;
-    TEXT_FormatLiteral(g_UiFormatBuffer, D_801D0C6C);
+    TEXT_FormatLiteral(g_UiTextFormatBuffer, D_801D0C6C);
     status_label_y <<= 0x10;
     status_text_y = status_label_y >> 0x10;
     status_value  = status_mode & BYTE_MASK;
-    UI_DrawGlyphString((panel_x + 40), status_text_y, status_value, (u8*)g_UiFormatBuffer);
+    UI_TextDrawGlyphString((panel_x + 40), status_text_y, status_value, (u8*)g_UiTextFormatBuffer);
     func_801D94D4((s16)(panel_x + 0x30), hp_text_y, status_value, (u8)g_Game.members[battler_index].chr.stats.max_hp);
     panel_left_x <<= 0x10;
     panel_left_x = panel_left_x >> 0x10;

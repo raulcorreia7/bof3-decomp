@@ -19,7 +19,7 @@ MATCH void func_801D0DD8(void) {
 MATCH void Menu_ResetPanels(void) {
     u16* count;
 
-    Menu_ResetPanelTasks();
+    UI_PanelResetTasks();
     count = &g_GameEntrySubstate;
     *count += 1;
 }
@@ -36,7 +36,7 @@ MATCH void func_801D0E74(void) {
 MATCH void Menu_StartFadeIn(void) {
     u8* count;
 
-    UI_SetMode(UI_MODE_FAST_FADE_IN);
+    UI_ModeSet(UI_MODE_FAST_FADE_IN);
     count = &g_MenuStep.state;
     *count += 1;
 }

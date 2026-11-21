@@ -4,7 +4,7 @@
 MATCH void Game_RewardZenny(s32 zenny) {
     SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
     TEXT_Format(g_TextVariables[0], g_GameRewardZennyFormat, zenny);
-    Message_Request(MSG_SYSTEM_FOUND_ZENNY);
+    UI_MessageRequest(MSG_SYSTEM_FOUND_ZENNY);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
     Party_AddZenny(zenny, 0);
 }

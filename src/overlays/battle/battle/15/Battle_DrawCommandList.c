@@ -15,15 +15,15 @@ MATCH void Battle_DrawCommandList(void) {
     u8  slot_c;
     u8  sum;
 
-    Battle_DrawTitledFrame((s16)g_MenuCurrentPanel->pos.x, g_MenuCurrentPanel->pos.y, g_MenuCurrentPanel->unk_08, g_MenuCurrentPanel->unk_09, 1);
+    Battle_DrawTitledFrame((s16)g_UiPanelCurrent->pos.x, g_UiPanelCurrent->pos.y, g_UiPanelCurrent->unk_08, g_UiPanelCurrent->unk_09, 1);
     for (i = 0; (i & BYTE_MASK) < 12U; i++) {
         D_800B70B8[i & BYTE_MASK] = D_80145518[i & BYTE_MASK].gate_03 + 1;
     }
-    UI_DrawScrollbar(D_800B70B8, ((BattlePanelByteCells*)(void*)g_MenuCurrentPanel)->scale, (g_MenuCurrentPanel->pos.x + 0x80), (g_MenuCurrentPanel->pos.y + 0x18), 3,
-                     ((BattlePanelByteCells*)(void*)g_MenuCurrentPanel)->rows, 0x5C);
+    UI_ListDrawScrollbar(D_800B70B8, ((BattlePanelByteCells*)(void*)g_UiPanelCurrent)->scale, (g_UiPanelCurrent->pos.x + 0x80), (g_UiPanelCurrent->pos.y + 0x18), 3,
+                         ((BattlePanelByteCells*)(void*)g_UiPanelCurrent)->rows, 0x5C);
     for (i = 0; (i & BYTE_MASK) < 3U; i++) {
         row    = i & BYTE_MASK;
-        entry  = (s16)g_MenuCurrentPanel->u.battle.row_base + row;
+        entry  = (s16)g_UiPanelCurrent->u.battle.row_base + row;
         slot_a = D_80145518[entry].gate_03;
         if (slot_a != GAME_NONE) {
             slot_b = D_80145518[entry].slot_01;
@@ -40,15 +40,15 @@ MATCH void Battle_DrawCommandList(void) {
             if (g_Game.members[BATTLE_ACTIVE_ROW->slot].chr.ap < sum) {
                 clut = 7;
             }
-            func_800B1DAC((g_MenuCurrentPanel->pos.x + 0x10), (g_MenuCurrentPanel->pos.y + (line_y + 0x18)), slot_a & 0x1F);
+            func_800B1DAC((g_UiPanelCurrent->pos.x + 0x10), (g_UiPanelCurrent->pos.y + (line_y + 0x18)), slot_a & 0x1F);
             line_y += 0x2D;
-            UI_DrawTextString((g_MenuCurrentPanel->pos.x + 16), (g_MenuCurrentPanel->pos.y + line_y), clut, TEXT_LENGTH_MAX,
-                              Message_GetText(((u8*)&D_800B4C90)[D_80145518[(s16)g_MenuCurrentPanel->u.battle.row_base + row].gate_03 & 0x1F]));
-            TEXT_Format(g_UiFormatBuffer, D_80096A2C, sum & BYTE_MASK);
-            UI_DrawGlyphString((g_MenuCurrentPanel->pos.x + 88), (g_MenuCurrentPanel->pos.y + line_y), clut, g_UiFormatBuffer);
+            UI_TextDrawString((g_UiPanelCurrent->pos.x + 16), (g_UiPanelCurrent->pos.y + line_y), clut, TEXT_LENGTH_MAX,
+                              UI_MessageGetText(((u8*)&D_800B4C90)[D_80145518[(s16)g_UiPanelCurrent->u.battle.row_base + row].gate_03 & 0x1F]));
+            TEXT_Format(g_UiTextFormatBuffer, D_80096A2C, sum & BYTE_MASK);
+            UI_TextDrawGlyphString((g_UiPanelCurrent->pos.x + 88), (g_UiPanelCurrent->pos.y + line_y), clut, g_UiTextFormatBuffer);
         }
     }
     if ((*(u8*)&g_Battle.ui_step != 6) || (*(u8*)&g_Battle.ui_mode != 5)) {
-        Menu_DrawCursorSprite((g_MenuCurrentPanel->pos.x + 7) & HALF_MASK, (g_MenuCurrentPanel->pos.y + 0x20 + *(s16*)&g_MenuCurrentPanel->u.battle.cursor * 32) & HALF_MASK, 0);
+        UI_CursorDraw((g_UiPanelCurrent->pos.x + 7) & HALF_MASK, (g_UiPanelCurrent->pos.y + 0x20 + *(s16*)&g_UiPanelCurrent->u.battle.cursor * 32) & HALF_MASK, 0);
     }
 }

@@ -14,7 +14,7 @@ MATCH void func_801FA1F0(void) {
             break;
         case 1:
             if (g_ScriptVars[0] == 1) {
-                UI_SetMode(UI_MODE_FADE_IN);
+                UI_ModeSet(UI_MODE_FADE_IN);
                 g_AreaDrawFlags         = 0x1F;
                 g_ScenarioState.step_05 = 2;
             }

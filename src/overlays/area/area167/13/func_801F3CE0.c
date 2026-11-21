@@ -4,9 +4,9 @@ MATCH void func_801F3CE0(void) {
     s8 variant;
 
     MESSAGE_REQUEST_CLEAR();
-    if (g_MessageChoice != 2) {
+    if (g_UiMessageChoice != 2) {
         variant = 2;
-        if (g_MessageChoice == 0) {
+        if (g_UiMessageChoice == 0) {
             variant = 1;
         }
         g_ScriptVars[2] = variant;

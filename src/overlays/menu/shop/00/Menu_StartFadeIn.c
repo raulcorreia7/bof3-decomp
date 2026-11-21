@@ -1,6 +1,6 @@
 #include "shop_00.h"
 
-/* File-local declaration: UI_SetMode is the game UI mode setter owned by
+/* File-local declaration: UI_ModeSet is the game UI mode setter owned by
  * the game UI contract (include/menu/gameui.h) and is not declared by
  * shop_00.h. */
 
@@ -10,7 +10,7 @@ MATCH void Menu_StartFadeIn(void) {
     u8           count;
 
     if (WINDOW_EFFECT_IDLE()) {
-        UI_SetMode(UI_MODE_FAST_FADE_IN);
+        UI_ModeSet(UI_MODE_FAST_FADE_IN);
         counter  = &g_MenuStep.state;
         count    = *counter;
         *counter = count + 1;

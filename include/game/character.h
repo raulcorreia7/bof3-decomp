@@ -265,7 +265,7 @@ STATIC_ASSERT(Character_base_reprisal_chance, DECOMP_OFFSETOF(Character, base.re
  * Reader: `emi/etc/shop/00@0x801E1710` loads the style byte through the
  * base register, then adds 0x90 (0x16 plus the skill-ability offset) to it. */
 typedef struct CharacterRoster {
-    u8 window_style; /* 0x00: the last argument of UI_DrawWindow */
+    u8 window_style; /* 0x00: the last argument of UI_WindowDraw */
     u8 pad_01[0x15];
     u8 records[8][PARTY_RECORD_STRIDE]; /* 0x16: the Character rows */
 } CharacterRoster;

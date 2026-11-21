@@ -33,7 +33,7 @@ MATCH void Title_StartFade(void) { /* func_801D0DF0 */
     *timer_ptr = timer;
 
     if ((timer << 0x10) == 0) {
-        UI_SetMode(UI_MODE_FADE_OUT);
+        UI_ModeSet(UI_MODE_FADE_OUT);
         SND_StartSelectionEffect();
         g_UiTitleState = g_UiTitleState + 1u;
     }
@@ -77,7 +77,7 @@ MATCH void Title_WaitInput(void) { /* func_801D0F00 */
         u8  sel;
         u16 bank;
         g_ScenarioState.state_04 = 1u;
-        UI_SetMode(UI_MODE_SLOW_FADE_OUT);
+        UI_ModeSet(UI_MODE_SLOW_FADE_OUT);
         sel  = g_SndBGMId;
         bank = D_80143F20;
         SND_FadeOutBGM(sel, bank, 8);

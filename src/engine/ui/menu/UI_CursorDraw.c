@@ -1,0 +1,19 @@
+#include "engine/slus/slus.h"
+
+/* draws the front-end panel cursor at (x - 0x16, y + 2) as a 0x18 x 0xC textured sprite with the
+ * 0x7802 CLUT: the draw mode and a 12-byte primitive first, then the Sprt and its 0x14-byte slot.
+ */
+MATCH void UI_CursorDraw(u16 x, u16 y, s32 unused) {
+    SPRT* sprite;
+
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), (RECT*)0);
+    GFX_AddPrim(GFX_LAYER_TOP, sizeof(DR_MODE));
+    sprite = (SPRT*)g_GfxPrimCursor;
+    SetSprt(sprite);
+    setXY0(sprite, x - 22, y + 2);
+    setUV0(sprite, 204, 156);
+    setWH(sprite, 24, 12);
+    setRGB0(sprite, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
+    sprite->clut = 0x7802;
+    GFX_AddPrim(GFX_LAYER_TOP, sizeof(SPRT));
+}

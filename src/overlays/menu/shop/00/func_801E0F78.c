@@ -21,32 +21,32 @@ NON_MATCHING void func_801E0F78(void) {
     active      = 1;
     panel_y     = -0x14;
 
-    g_MenuPanelTasks[0].panel   = handler;
-    g_MenuPanelTasks[0].mode    = 0;
-    g_MenuPanelTasks[0].state   = panel_state;
-    g_MenuPanelTasks[0].active  = active;
-    g_MenuPanelTasks[0].pos.x   = 0x14;
-    g_MenuPanelTasks[1].unk_0B  = 0xFF;
-    g_MenuPanelTasks[1].pos.x   = 0x70;
-    g_MenuPanelTasks[0].pos.y   = panel_y;
-    g_MenuPanelTasks[1].pos.y   = panel_y;
-    D_8014833A[0].type          = 0;
-    g_MenuPanelTasks[1].panel   = handler;
-    g_MenuPanelTasks[1].mode    = panel_state;
-    g_MenuPanelTasks[1].state   = panel_state;
-    g_MenuPanelTasks[1].active  = active;
-    g_MenuPanelTasks[1].unk_0A  = 4;
-    g_MenuPanelTasks[21].panel  = handler;
-    g_MenuPanelTasks[21].mode   = 3;
-    g_MenuPanelTasks[21].unk_0A = 4;
-    g_MenuPanelTasks[21].active = 0;
+    g_UiPanelTasks[0].panel   = handler;
+    g_UiPanelTasks[0].mode    = 0;
+    g_UiPanelTasks[0].state   = panel_state;
+    g_UiPanelTasks[0].active  = active;
+    g_UiPanelTasks[0].pos.x   = 0x14;
+    g_UiPanelTasks[1].unk_0B  = 0xFF;
+    g_UiPanelTasks[1].pos.x   = 0x70;
+    g_UiPanelTasks[0].pos.y   = panel_y;
+    g_UiPanelTasks[1].pos.y   = panel_y;
+    D_8014833A[0].type        = 0;
+    g_UiPanelTasks[1].panel   = handler;
+    g_UiPanelTasks[1].mode    = panel_state;
+    g_UiPanelTasks[1].state   = panel_state;
+    g_UiPanelTasks[1].active  = active;
+    g_UiPanelTasks[1].unk_0A  = 4;
+    g_UiPanelTasks[21].panel  = handler;
+    g_UiPanelTasks[21].mode   = 3;
+    g_UiPanelTasks[21].unk_0A = 4;
+    g_UiPanelTasks[21].active = 0;
     if (!(Item_VitalHas(VITAL_ITEM_FOUNTAIN_PEN) & BYTE_MASK)) {
-        g_MenuPanelTasks[6].mode   = 0x12;
-        g_MenuPanelTasks[6].pos.x  = BATTLE_PARTY_STRIDE;
-        g_MenuPanelTasks[6].panel  = handler;
-        g_MenuPanelTasks[6].state  = panel_state;
-        g_MenuPanelTasks[6].active = active;
-        g_MenuPanelTasks[6].pos.y  = 0x26;
+        g_UiPanelTasks[6].mode   = 0x12;
+        g_UiPanelTasks[6].pos.x  = BATTLE_PARTY_STRIDE;
+        g_UiPanelTasks[6].panel  = handler;
+        g_UiPanelTasks[6].state  = panel_state;
+        g_UiPanelTasks[6].active = active;
+        g_UiPanelTasks[6].pos.y  = 0x26;
     }
 }
 #else

@@ -9,7 +9,7 @@ MATCH void Fishing_DrawCautionBox(s32 x, s32 y) {
     s32 i;
 
     panel_x = x;
-    UI_DrawWindow(panel_x, ((y + 1)), 179, 66, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
+    UI_WindowDraw(panel_x, ((y + 1)), 179, 66, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
     Fishing_SetDrawMode(9, 1);
     Fishing_DrawSprite(37, 1, sx, sy);
     for (i = 0; i < 15; i++) {
@@ -24,6 +24,6 @@ MATCH void Fishing_DrawCautionBox(s32 x, s32 y) {
         Fishing_DrawSprite(49, 1, (sx + 8 + i * 8), (sy + 64));
     }
     Fishing_DrawSprite(50, 1, (sx + 176), (sy + 64));
-    UI_DrawText((sx + 62), (sy + 6), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_CAUTION));
-    UI_DrawText((sx + 6), (sy + 25), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_TOO_MANY_ITEMS));
+    UI_TextDraw((sx + 62), (sy + 6), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_CAUTION));
+    UI_TextDraw((sx + 6), (sy + 25), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_TOO_MANY_ITEMS));
 }

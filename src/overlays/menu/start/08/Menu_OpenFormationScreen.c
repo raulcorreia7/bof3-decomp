@@ -12,13 +12,13 @@ MATCH void Menu_OpenFormationScreen(void) {
     i      = 0;
     record++;
     record--;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].panel        = 6;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].mode         = MENU_START_MODE_MESSAGE;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].state        = 2;
-    record[0]                                                   = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.x        = 20;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y        = 16;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].panel        = 6;
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].mode         = MENU_START_MODE_MESSAGE;
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].state        = 2;
+    record[0]                                                 = 1;
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.x        = 20;
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y        = 16;
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
     while (i < 2) {
         /* FAKE: retail adds the row offset and `rows` in this operand order; plain forms swap it. */
         panel = (MenuPanelTask*)(i * sizeof(MenuPanelTask) + (u32)rows);
@@ -31,7 +31,7 @@ MATCH void Menu_OpenFormationScreen(void) {
 
     i = 0;
     while (i < (u8)Party_CountOrder(PARTY_ORDER_FIELD)) {
-        panel         = &g_MenuPanelTasks[i + 4];
+        panel         = &g_UiPanelTasks[i + 4];
         panel->unk_0A = i;
         panel->panel  = 6;
         panel->mode   = 0;

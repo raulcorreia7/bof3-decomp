@@ -2,8 +2,8 @@
 
 /*
  * small lookup tables read by the sprite, menu and step-table code
- * (func_8014CF9C, Area_AddGridActor, func_8014EA80, func_8014FC90, UI_DrawGlyph,
- * func_801523D0..Message_SetAnswerMessage15).
+ * (func_8014CF9C, Area_AddGridActor, func_8014EA80, func_8014FC90, UI_TextDrawGlyph,
+ * func_801523D0..UI_MessageAnswerSet15).
  */
 
 /* Sprite cell sizes (width, height) in pixels: width 8 * ((i & 3) + 1), height 8 * ((i >> 2) + 1). */

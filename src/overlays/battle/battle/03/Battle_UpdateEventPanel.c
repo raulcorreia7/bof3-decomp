@@ -6,8 +6,8 @@ MATCH void Battle_UpdateEventPanel(void) {
     u8                    index;
 
     handlers = g_BattleEventPanelSteps;
-    handlers.steps[g_MenuCurrentPanel->state]();
-    func_801D7EB0((s16)g_MenuCurrentPanel->pos.x, (s16)g_MenuCurrentPanel->pos.y);
+    handlers.steps[g_UiPanelCurrent->state]();
+    func_801D7EB0((s16)g_UiPanelCurrent->pos.x, (s16)g_UiPanelCurrent->pos.y);
     index = BATTLE_PANEL_TASK->selection.slot;
-    UI_DrawText((g_MenuCurrentPanel->pos.x + 4), (g_MenuCurrentPanel->pos.y + 3), D_801EB4FA[index][0], TEXT_LENGTH_MAX, (u8*)D_801EB4F4[index][0]);
+    UI_TextDraw((g_UiPanelCurrent->pos.x + 4), (g_UiPanelCurrent->pos.y + 3), D_801EB4FA[index][0], TEXT_LENGTH_MAX, (u8*)D_801EB4F4[index][0]);
 }

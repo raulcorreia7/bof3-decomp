@@ -100,7 +100,7 @@ MATCH void func_801DE944(void) {
         g_AreaScrollTargetY = g_Game.members[0].pos.y.fixed;
         Area_InitMapRenderer();
     }
-    UI_SetMode(UI_MODE_FAST_FADE_IN);
+    UI_ModeSet(UI_MODE_FAST_FADE_IN);
     step = &g_MenuStep.state;
     (*step)++;
 }

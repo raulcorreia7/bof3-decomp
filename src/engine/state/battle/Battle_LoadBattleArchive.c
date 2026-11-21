@@ -30,7 +30,7 @@ MATCH void Battle_LoadBattleArchive(void) {
         arg = 7;
     }
     EMI_LoadArchive(arg);
-    Menu_ResetPanelTasks();
+    UI_PanelResetTasks();
     state                        = &g_GameEntrySubstate;
     counter                      = *state;
     g_Battle.outcome.event_flags = 0;

@@ -21,7 +21,7 @@ MATCH void func_801F2C38(void) {
                         break;
                     }
                 }
-                Message_StartAreaMessage((s16)D_801F5338[index][g_ScenarioState.scenario_id]);
+                UI_MessageStartArea((s16)D_801F5338[index][g_ScenarioState.scenario_id]);
             } else {
                 blank = 0x5C;
                 slot  = 0;
@@ -51,7 +51,7 @@ MATCH void func_801F2C38(void) {
                     from++;
                     dst += 0x20;
                 }
-                Message_StartAreaMessage(MSG_AREA151_TARGET_FISH_NOTICE);
+                UI_MessageStartArea(MSG_AREA151_TARGET_FISH_NOTICE);
             }
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             LOBU(g_SceneEventStep)++;

@@ -29,7 +29,7 @@ NON_MATCHING void func_801FA010(void) {
                     message_index           = 0x26;
                     g_ScenarioState.step_05 = 2;
                 }
-                Message_StartAreaMessage(message_index);
+                UI_MessageStartArea(message_index);
                 g_GameStateIndex = 2;
             }
             break;
@@ -97,7 +97,7 @@ NON_MATCHING void func_801FA010(void) {
             SYS_SetFlag(g_SceneFlags, 13);
             goto clear_script;
         case 10:
-            UI_SetMode(0);
+            UI_ModeSet(0);
             g_ScenarioState.step_05 = 21;
             break;
         case 20:
@@ -120,14 +120,14 @@ NON_MATCHING void func_801FA010(void) {
         case 22:
             if (g_GameStateIndex == 0) {
                 g_AreaDrawFlags = 0x1F;
-                UI_SetMode(0xB);
+                UI_ModeSet(0xB);
                 g_ScenarioState.step_05 = 24;
             }
             break;
         case 23:
             if (g_GameStateIndex == 0) {
                 g_AreaDrawFlags = 0x1F;
-                UI_SetMode(0xB);
+                UI_ModeSet(0xB);
                 g_ScenarioState.step_05 = 24;
             }
             break;

@@ -22,12 +22,12 @@ MATCH void Fishing_DrawHud(s16 panel_x, s16 panel_y) {
     }
 
     CLAMP_MIN(value, 0);
-    TEXT_Format(g_UiFormatBuffer, D_801D0C04, value);
+    TEXT_Format(g_UiTextFormatBuffer, D_801D0C04, value);
 
     if (value >= 0x32 && D_80145E92[0] == 0x4 && (g_FrameCount & 4) != 0) {
-        UI_DrawAsciiString((panel_x + 240), (panel_y + 26), UI_TEXT_HIGHLIGHT, g_UiFormatBuffer);
+        UI_TextDrawAscii((panel_x + 240), (panel_y + 26), UI_TEXT_HIGHLIGHT, g_UiTextFormatBuffer);
     } else {
-        UI_DrawAsciiString((panel_x + 240), (panel_y + 26), 0, g_UiFormatBuffer);
+        UI_TextDrawAscii((panel_x + 240), (panel_y + 26), 0, g_UiTextFormatBuffer);
     }
     Fishing_DrawDepthGauge(panel_x, panel_y);
 }

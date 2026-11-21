@@ -11,7 +11,7 @@ NON_MATCHING void func_801F9498(void) {
 
     switch (g_ScenarioState.step_05) {
         case 0:
-            Message_StartAreaMessage(0xA);
+            UI_MessageStartArea(0xA);
             g_GameStateIndex        = GAME_REQUEST_MESSAGE;
             g_ScenarioState.step_05 = 1;
             break;
@@ -23,27 +23,27 @@ NON_MATCHING void func_801F9498(void) {
             }
             break;
         case 2:
-            Message_StartAreaMessage(0xB);
+            UI_MessageStartArea(0xB);
             g_GameStateIndex        = GAME_REQUEST_MESSAGE;
             g_ScenarioState.step_05 = 1;
             break;
         case 3:
-            Message_StartAreaMessage(0xD);
+            UI_MessageStartArea(0xD);
             g_GameStateIndex        = GAME_REQUEST_MESSAGE;
             g_ScenarioState.step_05 = 1;
             break;
         case 5:
-            Message_StartAreaMessage(0xC);
+            UI_MessageStartArea(0xC);
             g_GameStateIndex        = GAME_REQUEST_MESSAGE;
             g_ScenarioState.step_05 = 1;
             break;
         case 6:
-            Message_StartAreaMessage(0xF);
+            UI_MessageStartArea(0xF);
             g_GameStateIndex        = GAME_REQUEST_MESSAGE;
             g_ScenarioState.step_05 = 1;
             break;
         case 7:
-            Message_StartAreaMessage(0x2B);
+            UI_MessageStartArea(0x2B);
             g_GameStateIndex        = GAME_REQUEST_MESSAGE;
             g_ScenarioState.step_05 = 8;
             break;
@@ -122,7 +122,7 @@ NON_MATCHING void func_801F9498(void) {
             break;
         case 31:
             if (g_ScriptVars[0] == 1) {
-                UI_SetMode(0);
+                UI_ModeSet(0);
                 g_ScenarioState.step_05 = 0x20;
             }
             break;
@@ -150,7 +150,7 @@ NON_MATCHING void func_801F9498(void) {
             if (g_SpawnedActors[g_ScriptVars[3]].header.flags == 0) {
                 g_ScriptVars[3] = 0;
                 g_ScriptVars[0] = 1;
-                UI_SetMode(5);
+                UI_ModeSet(5);
                 g_AreaDrawFlags         = 0x1F;
                 g_ScenarioState.step_05 = 0x23;
             }
@@ -185,7 +185,7 @@ NON_MATCHING void func_801F9498(void) {
             break;
         case 41:
             if (g_ScriptVars[0] == 1) {
-                UI_SetMode(4);
+                UI_ModeSet(4);
                 g_ScenarioState.step_05 = 0x2A;
             }
             break;
@@ -213,7 +213,7 @@ NON_MATCHING void func_801F9498(void) {
             if (g_SpawnedActors[g_ScriptVars[3]].header.flags == 0) {
                 g_ScriptVars[3] = 0;
                 g_ScriptVars[0] = 1;
-                UI_SetMode(5);
+                UI_ModeSet(5);
                 g_AreaDrawFlags         = 0x1F;
                 g_ScenarioState.step_05 = 0x2D;
             }
@@ -243,7 +243,7 @@ NON_MATCHING void func_801F9498(void) {
             }
             break;
         case 50:
-            Message_StartAreaMessage(0x2B);
+            UI_MessageStartArea(0x2B);
             g_GameStateIndex        = GAME_REQUEST_MESSAGE;
             g_ScenarioState.step_05 = 0x33;
             break;
@@ -265,7 +265,7 @@ NON_MATCHING void func_801F9498(void) {
             }
             break;
         case 53:
-            UI_SetMode(0);
+            UI_ModeSet(0);
             g_ScenarioState.step_05 = 0x36;
             break;
         case 54:
@@ -277,7 +277,7 @@ NON_MATCHING void func_801F9498(void) {
             }
             break;
         case 55:
-            UI_SetMode(5);
+            UI_ModeSet(5);
             g_AreaDrawFlags         = 0x1F;
             g_ScenarioState.step_05 = 0x38;
             break;
@@ -309,7 +309,7 @@ NON_MATCHING void func_801F9498(void) {
         case 100:
             game_state_index = &g_GameStateIndex;
             if (*game_state_index != GAME_REQUEST_MESSAGE) {
-                Message_StartAreaMessage(0x1B);
+                UI_MessageStartArea(0x1B);
                 *game_state_index       = GAME_REQUEST_MESSAGE;
                 g_ScenarioState.step_05 = 0x65;
             }
@@ -319,7 +319,7 @@ NON_MATCHING void func_801F9498(void) {
             if (script_vars[0] == 0x64) {
                 script_vars[0]          = 0;
                 g_ScenarioState.step_05 = 0x66;
-                UI_SetMode(0xD);
+                UI_ModeSet(0xD);
                 func_801C16B8();
                 SND_FadeOutSequence(0, 0, 4, 0x1E);
             } else if (script_vars[0] == 0x65) {
@@ -342,7 +342,7 @@ NON_MATCHING void func_801F9498(void) {
             }
             break;
         case 104:
-            UI_SetMode(0xE);
+            UI_ModeSet(0xE);
             g_AreaDrawFlags         = 0x1F;
             g_ScenarioState.step_05 = 0x69;
             break;

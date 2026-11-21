@@ -13,7 +13,7 @@
 #define AREA_RESET_VARIANT       0xFF
 #define g_MenuMasterSubStep      (*(s8*)&g_MenuMasterSubStep)
 
-#include "overlays/area/shared/Message_SelectAnswerValue.h"
+#include "overlays/area/shared/UI_MessageAnswerSelectValue.h"
 
 /* func_800F500C */
 void Fishing_ShopRun(void);
@@ -22,7 +22,7 @@ void Fishing_SetDrawMode(s32 graphic, s32 layer);
 /* func_801E0DCC */
 u8*  Fishing_DrawSprite(s32 icon_index, s32 layer, s16 sprite_x, s16 sprite_y);
 /* func_801F2C4C */
-void Message_SelectAnswerValue(void);
+void UI_MessageAnswerSelectValue(void);
 void func_801F2D1C(void);
 void func_801F3060(void);
 void func_801F3360(void);

@@ -15,7 +15,7 @@ MATCH void Game_ReturnFromFishing(void) {
     if (selection != GAME_NONE && g_GamePrevSelection != selection) {
         SND_StartDecrescendo(g_SelectionSepSlots[selection * 4], g_SelectionSequences[selection * 4], 100, 16);
     }
-    UI_SetMode(0);
+    UI_ModeSet(0);
     while (WINDOW_EFFECT_BUSY()) {
         func_801E0C40();
         SYS_ThreadWait(1);

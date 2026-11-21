@@ -1,4 +1,4 @@
 ["emi/world03/area117/13"]
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x18, source = "The switch table of func_801F4048: 6 jump targets of its jr dispatch." }
-Message_ClearRequest = { addr = 0x801F3FB0, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_INN, g_SceneEventStep to 0 and g_SceneEventSelection to AREA_RESET_VARIANT." }
-Message_Clear = { addr = 0x801F40CC, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_INN, g_SceneEventStep to 5 and g_SceneEventSelection to 0xFF." }
+UI_MessageClearRequest = { addr = 0x801F3FB0, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_INN, g_SceneEventStep to 0 and g_SceneEventSelection to AREA_RESET_VARIANT." }
+UI_MessageClear = { addr = 0x801F40CC, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_INN, g_SceneEventStep to 5 and g_SceneEventSelection to 0xFF." }

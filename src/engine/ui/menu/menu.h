@@ -3,20 +3,20 @@
 
 #include "types.h"
 /* func_80158C80 */
-void Menu_UpdatePanelTasks(void);
+void UI_PanelUpdateTasks(void);
 /* func_80158DB8 */
-u8   Menu_OpenPanelTask(u8 panel_index, u8 step_index);
+u8   UI_PanelOpenTask(u8 panel_index, u8 step_index);
 /* func_80158E20 */
-void Menu_ClearPanel(void);
+void UI_PanelClear(void);
 /* func_80158E50 */
-void Menu_ResetPanelTasks(void);
+void UI_PanelResetTasks(void);
 /* func_801647C4 */
-void Menu_DrawCursorSprite(u16 x, u16 y, s32 unused);
+void UI_CursorDraw(u16 x, u16 y, s32 unused);
 
 /* func_80199678 */
-void Menu_DrawPanelCursor(void);
+void UI_CursorDrawPanel(void);
 /* func_8019973C */
-void Menu_SlidePanelLeft(void);
+void UI_PanelSlideLeft(void);
 
 #endif
 
@@ -25,45 +25,45 @@ void Menu_SlidePanelLeft(void);
 #define OVERLAY_UI_MENU_H_LOCAL
 
 /* func_80198C38 */
-void        Menu_WaitWindowEffect(u8 wait_steps);
+void        UI_WindowWaitEffect(u8 wait_steps);
 /* func_8019982C */
-void        Menu_SetPosX(void);
-void        Menu_OpenMaster(void);
+void        UI_PanelSetPosX(void);
+void        UI_PanelOpenMaster(void);
 /* func_80158F80 */
-void        Message_UpdatePanel(void);
+void        UI_MessageUpdatePanel(void);
 /* func_80158FE0 */
-void        Message_UpdateWindow(void);
+void        UI_MessageUpdateWindow(void);
 /* func_80159050 */
-void        Message_OpenPanel(void);
+void        UI_MessageOpenPanel(void);
 /* func_8015920C */
-void        Message_GrowPanel(void);
+void        UI_MessageGrowPanel(void);
 /* func_80159510 */
-void        Message_DrawPanel(void);
+void        UI_MessageDrawPanel(void);
 /* func_80159580 */
-void        Message_ShrinkPanel(void);
-void        Menu_ClosePanel(void);
+void        UI_MessageShrinkPanel(void);
+void        UI_PanelClose(void);
 /* func_801598F4 */
-void        Message_UpdateChoicePanel(void);
+void        UI_MessageUpdateChoicePanel(void);
 /* func_80159964 */
-void        Message_OpenChoicePanel(void);
+void        UI_MessageOpenChoicePanel(void);
 /* func_8015999C */
-void        Message_DrawChoicePanel(void);
+void        UI_MessageDrawChoicePanel(void);
 /* func_80159A00 */
-void        Message_ReleasePanel(void);
+void        UI_MessageReleasePanel(void);
 /* func_80159A20 */
-void        Message_UpdatePresetPanel(void);
+void        UI_MessageUpdatePresetPanel(void);
 /* func_80159A90 */
-void        Message_OpenPresetPanel(void);
+void        UI_MessageOpenPresetPanel(void);
 /* func_80159B38 */
-void        Message_DrawPresetPanel(void);
+void        UI_MessageDrawPresetPanel(void);
 /* func_80159FA0 */
 /* func_8015A098 */
-extern void Message_DrawPresetRows(void);
+extern void UI_MessageDrawPresetRows(void);
 /* func_8015A1D8 */
-extern void Message_DrawPresetCursor(void);
+extern void UI_MessageDrawPresetCursor(void);
 /* func_8015A264 */
-extern void Message_DrawChoiceCursor(void);
+extern void UI_MessageDrawChoiceCursor(void);
 /* func_8015A554 */
-void        Message_LayoutChoicePanel(void);
+void        UI_MessageLayoutChoicePanel(void);
 
 #endif

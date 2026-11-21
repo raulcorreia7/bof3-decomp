@@ -23,7 +23,7 @@ MATCH void Battle_FailEscape(void) {
             i++;
         }
         func_801D9484();
-        func_801DE560(2, 0, 0, 45, Message_GetText(0xF));
+        func_801DE560(2, 0, 0, 45, UI_MessageGetText(0xF));
         g_BattleMode    = BATTLE_MODE_TURNS;
         g_BattleStep    = 0;
         g_BattleSubStep = 0;

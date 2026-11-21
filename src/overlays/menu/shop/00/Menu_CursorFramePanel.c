@@ -5,7 +5,7 @@
 
 /* func_801E2BC4 */
 MATCH void Menu_CursorFramePanel(void) {
-    MenuPanelTask* panel = g_MenuCurrentPanel;
+    MenuPanelTask* panel = g_UiPanelCurrent;
     u8*            bytes = (u8*)panel;
 
     Menu_DrawCursorFrame(panel->pos.x, panel->pos.y, D_801E5DD8[bytes[0xA]], 52, bytes[0xB], 6);

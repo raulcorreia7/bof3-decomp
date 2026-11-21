@@ -18,7 +18,7 @@ MATCH void Fairy_RollExploreReward(void) {
     edp   = &g_SceneEventState.selection;
     state = g_FairyJobs[*edp].record_state;
     if (state == 3) {
-        Message_StartAreaMessage(MSG_AREA175_EXPLORE_FOUND_NOTHING);
+        UI_MessageStartArea(MSG_AREA175_EXPLORE_FOUND_NOTHING);
         g_FairyJobs[*edp].progress_anchor = g_BattleCount;
         /* FAKE: retail keeps this arm's anchor stamp in place; the barrier
          * stops the cross-jump that merges it into the state-2 tail. */
@@ -48,7 +48,7 @@ MATCH void Fairy_RollExploreReward(void) {
         high   = D_801F2619[offset];
         low    = g_FairyExploreRewards[offset];
         if (!(Item_Add(high, low, 1, 0) & BYTE_MASK)) {
-            Message_StartAreaMessage(MSG_AREA175_EXPLORE_ITEMS_FULL);
+            UI_MessageStartArea(MSG_AREA175_EXPLORE_ITEMS_FULL);
             /* The item pair was rejected: skip the refresh tail. */
             goto done;
         }
@@ -57,7 +57,7 @@ MATCH void Fairy_RollExploreReward(void) {
             g_TextVariables[0][i] = src[i];
         }
         D_801490E4[0] = 0;
-        Message_StartAreaMessage(MSG_AREA175_EXPLORE_FOUND_ITEM);
+        UI_MessageStartArea(MSG_AREA175_EXPLORE_FOUND_ITEM);
         edp_tail                                                   = &g_SceneEventState.selection;
         g_FairyJobs[*edp_tail].progress_anchor                     = g_BattleCount;
         /* FAKE: retail reloads the index through the materialized pointer. */

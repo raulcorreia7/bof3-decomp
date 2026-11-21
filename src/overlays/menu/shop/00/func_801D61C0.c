@@ -10,7 +10,7 @@ MATCH void func_801D61C0(void) {
 
     if (SYS_TestFlag(g_SceneEventFlags, 119) != 0) {
         g_MenuStep.sub_step = 6;
-        Message_StartAreaMessage(MSG_AREA175_PICK_NICKNAME_TARGET);
+        UI_MessageStartArea(MSG_AREA175_PICK_NICKNAME_TARGET);
         return;
     }
     if (g_ScenarioState.scenario_id != 0xE || SYS_TestFlag(*g_SceneFlags, 5) == 0) {
@@ -29,7 +29,7 @@ MATCH void func_801D61C0(void) {
         next = i + 1;
         i    = next;
     } while (next < 4);
-    UI_SetMode(UI_MODE_FADE_OUT);
+    UI_ModeSet(UI_MODE_FADE_OUT);
     {
         u8* state;
 

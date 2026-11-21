@@ -7,8 +7,8 @@ MATCH void Game_ReturnFromMenu(void) {
     u8* pending;
 
     Game_UpdateMenuFrame();
-    UI_SetMode(2u);
-    Menu_WaitWindowEffect(0u);
+    UI_ModeSet(2u);
+    UI_WindowWaitEffect(0u);
     SYS_ThreadWait(1u);
     if (D_80148661 != 0u) {
         EMI_LoadPartyArchives(g_PartyFieldOrder[0], g_PartyFieldOrder[1], g_PartyFieldOrder[2], 0u);
@@ -29,7 +29,7 @@ MATCH void Game_ReturnFromMenu(void) {
         }
         func_801F03D0();
     }
-    UI_SetMode(3u);
+    UI_ModeSet(3u);
     Area_WaitWindowEffect(1u);
     if ((D_80143F20 == 0x6Eu) && !(SND_TestEffectVoicesBusy(&sep_index, &seq_index) & BYTE_MASK)) {
         SND_FadeInSequence(sep_index, seq_index, 0x14, 0x10);
@@ -58,7 +58,7 @@ MATCH void Game_ReturnFromMenu(void) {
     } else {
         g_GameStateIndex = GAME_REQUEST_IDLE;
     }
-    Menu_ResetPanelTasks();
+    UI_PanelResetTasks();
     g_GameEntryState    = GAME_MODE_FIELD;
     g_GameEntrySubstate = 0u;
 }

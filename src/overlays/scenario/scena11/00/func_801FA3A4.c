@@ -44,7 +44,7 @@ MATCH void func_801FA3A4(void) {
             break;
         case 7:
             if (g_ScriptVars[0] == 0xF) {
-                UI_SetMode(4);
+                UI_ModeSet(4);
                 g_ScenarioState.step_05 = 8;
             }
             break;

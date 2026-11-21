@@ -40,7 +40,7 @@ MATCH u8 func_801D5BC0(void) {
 
     if (count != 0u) {
         Battle_OpenPanel();
-        Battle_QueueEvent(2u, 0u, 0u, 45u, Message_GetText(0x18u));
+        Battle_QueueEvent(2u, 0u, 0u, 45u, UI_MessageGetText(0x18u));
         return true;
     }
 

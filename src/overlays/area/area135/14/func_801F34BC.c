@@ -16,7 +16,7 @@ MATCH void func_801F34BC(void) {
         x        = D_801F6210 + ((0xC8 - sample_w) / 2);
         sample_h = step * 6;
         y        = D_801F6212 + ((0x30 - sample_h) >> 1);
-        UI_DrawBoxOutline(x, y, sample_w, sample_h);
+        UI_WindowDrawBoxOutline(x, y, sample_w, sample_h);
     }
     if (g_Task->timer == 8) {
         g_Task->header.mode = 2;

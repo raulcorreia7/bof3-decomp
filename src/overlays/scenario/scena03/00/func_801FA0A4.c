@@ -16,7 +16,7 @@ MATCH void func_801FA0A4(void) {
 
         case 1:
             if (g_ScriptVars[0] == 4) {
-                UI_SetMode(0);
+                UI_ModeSet(0);
                 g_ScenarioState.timer_06 = 60;
                 g_ScenarioState.step_05  = 2;
             }
@@ -24,7 +24,7 @@ MATCH void func_801FA0A4(void) {
 
         case 2:
             if (g_UiWindowEffectBusy == 0) {
-                Message_StartAreaMessage(MSG_SCENA03_032);
+                UI_MessageStartArea(MSG_SCENA03_032);
                 g_GameStateIndex        = 2;
                 g_AreaDrawFlags         = 0;
                 g_ScenarioState.step_05 = 3;
@@ -48,7 +48,7 @@ MATCH void func_801FA0A4(void) {
             break;
 
         case 5:
-            if (g_GameStateIndex == 2 && g_MessageRequest == 0x33) {
+            if (g_GameStateIndex == 2 && g_UiMessageRequest == 0x33) {
                 g_ScenarioState.step_05 = 10;
             }
             break;

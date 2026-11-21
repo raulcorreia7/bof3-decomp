@@ -18,7 +18,7 @@ MATCH void func_801FC898(void) {
             if (vars[0] == 0x64) {
                 vars[0]         = 0;
                 g_ScriptVars[2] = 5;
-                UI_SetMode(UI_MODE_LONG_FADE_OUT);
+                UI_ModeSet(UI_MODE_LONG_FADE_OUT);
                 g_ScenarioState.step_05 = 0x14;
             }
             if (vars[0] == 0x65) {

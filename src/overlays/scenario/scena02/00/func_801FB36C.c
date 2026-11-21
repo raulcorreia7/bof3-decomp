@@ -122,13 +122,13 @@ MATCH void func_801FB36C(void) {
                         SYS_SetFlag(g_SceneFlags, 0x25);
                         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
                     } else {
-                        Message_StartAreaMessage(MSG_SCENA02_109);
+                        UI_MessageStartArea(MSG_SCENA02_109);
                         *state                  = GAME_REQUEST_MESSAGE;
                         g_ScenarioState.step_05 = 0xD;
                     }
                     break;
                 case 0xF:
-                    Message_StartAreaMessage(MSG_SCENA02_108);
+                    UI_MessageStartArea(MSG_SCENA02_108);
                     *state                  = GAME_REQUEST_MESSAGE;
                     g_ScenarioState.step_05 = 4;
                     break;

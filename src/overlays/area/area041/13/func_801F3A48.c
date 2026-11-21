@@ -4,7 +4,7 @@ MATCH void func_801F3A48(void) {
     s32 sel;
     u8  value;
 
-    sel = g_MessageChoice;
+    sel = g_UiMessageChoice;
     MESSAGE_REQUEST_CLEAR();
     if (sel == 0) {
         Scene_SetupParty(1);

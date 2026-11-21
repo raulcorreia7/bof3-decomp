@@ -8,7 +8,7 @@ MATCH void func_801F07E0(void) {
     u8* text;
 
     y = 0x2C;
-    func_801F039C(0x14, 0x28, 0x118, g_MenuCurrentPanel->unk_09);
+    func_801F039C(0x14, 0x28, 0x118, g_UiPanelCurrent->unk_09);
     /* FAKE: keep the row coordinate live across the panel call. */
     FAKE_USE(y);
     if (g_Battle.party_count != 0) {
@@ -16,15 +16,15 @@ MATCH void func_801F07E0(void) {
         buffer = (u8*)g_TextVariables[2];
         do {
             text = g_Game.members[i].chr.name;
-            UI_DrawText(0x19, y, 0, 5, text);
+            UI_TextDraw(0x19, y, 0, 5, text);
             if (g_Game.members[i].chr.level != 0x63) {
                 sprintf((char*)buffer, D_801EEC44, Char_GetExpToNextLevel(i));
-                UI_DrawAsciiString(0x50, y, 0, buffer);
-                UI_DrawText(0x85, y, 0, TEXT_LENGTH_MAX, Message_GetText(0x15));
+                UI_TextDrawAscii(0x50, y, 0, buffer);
+                UI_TextDraw(0x85, y, 0, TEXT_LENGTH_MAX, UI_MessageGetText(0x15));
                 sprintf((char*)buffer, D_801EEC48, g_Game.members[i].chr.level + 1);
-                UI_DrawAsciiString(0x118, y, 0, buffer);
+                UI_TextDrawAscii(0x118, y, 0, buffer);
             } else {
-                UI_DrawText(0x55, y, 0, TEXT_LENGTH_MAX, Message_GetText(0x41));
+                UI_TextDraw(0x55, y, 0, TEXT_LENGTH_MAX, UI_MessageGetText(0x41));
             }
             i++;
             y += 0x10;

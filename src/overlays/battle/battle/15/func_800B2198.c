@@ -3,7 +3,7 @@
 MATCH void func_800B2198(void) {
     MenuPanelTask* task;
 
-    task = g_MenuCurrentPanel;
+    task = g_UiPanelCurrent;
     task->pos.x += 32;
     if ((s16)task->pos.x >= 84) {
         task->pos.x = 82;

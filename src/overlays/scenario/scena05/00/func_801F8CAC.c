@@ -12,7 +12,7 @@ MATCH void func_801F8CAC(void) {
             g_ScenarioState.step_05 = 1;
             SYS_SetFlag(g_SceneFlags, 0xB);
             g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
-            UI_SetMode(UI_MODE_LONG_FADE_OUT);
+            UI_ModeSet(UI_MODE_LONG_FADE_OUT);
             break;
         case 1:
             if (g_UiWindowEffectBusy == 0) {

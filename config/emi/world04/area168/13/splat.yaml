@@ -34,7 +34,7 @@ segments:
       - [0x1A34, c, func_801F4634]
       - [0x1AF8, c, func_801F46F8]
       - [0x1B64, c, func_801F4764]
-      - [0x1C08, c, Message_ClearRequest]
+      - [0x1C08, c, UI_MessageClearRequest]
       - [0x1C48, c, func_801F4848]
       - [0x1CB4, c, func_801F48B4]
       - [0x1D20, c, func_801F4920]

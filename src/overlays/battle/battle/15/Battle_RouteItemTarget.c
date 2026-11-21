@@ -4,7 +4,7 @@
 MATCH void Battle_RouteItemTarget(void) {
     u32 flags;
 
-    flags = Item_GetFlags(g_MenuPanelTasks[16].unk_0A, D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C]);
+    flags = Item_GetFlags(g_UiPanelTasks[16].unk_0A, D_801C893C[g_UiPanelTasks[16].unk_0A][g_UiPanelTasks[16].unk_0C]);
     if ((flags & ITEM_SHOW_ANIMATION) != 0u) {
         if ((flags & ITEM_STORY_ITEM) != 0u) {
             g_Battle.ui_step = 5u;

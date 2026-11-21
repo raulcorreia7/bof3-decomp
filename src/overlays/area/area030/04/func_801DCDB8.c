@@ -36,9 +36,9 @@ MATCH void func_801DCDB8(void) {
     }
 
     if (!(D_80144287 & 0x1)) {
-        UI_DrawText(29, 20, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_EQUIP_ROD));
+        UI_TextDraw(29, 20, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_EQUIP_ROD));
     } else {
-        UI_DrawText(29, 20, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_EQUIP_LURE));
+        UI_TextDraw(29, 20, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_EQUIP_LURE));
     }
 
     if (!(D_80144287 & 0x80)) {
@@ -51,5 +51,5 @@ MATCH void func_801DCDB8(void) {
         }
         D_801442AC = value;
     }
-    Menu_DrawCursorSprite(28, (D_80144287 & 0x1) * 16 + 88, 0);
+    UI_CursorDraw(28, (D_80144287 & 0x1) * 16 + 88, 0);
 }

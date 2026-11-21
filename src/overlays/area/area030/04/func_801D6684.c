@@ -62,7 +62,7 @@ NON_MATCHING void func_801D6684(void) {
                 if ((u32)((FIELD(u8, spad1, 0x9u) % 12) & BYTE_MASK) < 0xAU) {
                     x = x_fixed >> 0x10;
                     if (col == (page & BYTE_MASK)) {
-                        UI_DrawText((s16)x, (s16)(y_other >> 0x10), type, 1U, ((type * 2) + &D_801E2070));
+                        UI_TextDraw((s16)x, (s16)(y_other >> 0x10), type, 1U, ((type * 2) + &D_801E2070));
                     } else {
                         goto block_17; /* shared cell/row draw join */
                     }
@@ -78,7 +78,7 @@ NON_MATCHING void func_801D6684(void) {
                 y     = y_sel >> 0x10;
                 color = (7 - cell) & BYTE_MASK;
             block_19:
-                UI_DrawTextString((s16)x, (s16)y, color, 1, (u32)((type * 2) + &D_801E2070));
+                UI_TextDrawString((s16)x, (s16)y, color, 1, (u32)((type * 2) + &D_801E2070));
             }
             x_fixed += TO_COORD(12);
             col += 1;

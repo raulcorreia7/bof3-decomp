@@ -1,6 +1,6 @@
 #include "battle_15.h"
 
-/* D_80148572, D_8014857D and D_80148574 stay address symbols: a g_MenuPanelTasks[16] view changes the code. */
+/* D_80148572, D_8014857D and D_80148574 stay address symbols: a g_UiPanelTasks[16] view changes the code. */
 MATCH void func_800A8360(void) {
     volatile u8* work;
     volatile u8* work_base;
@@ -18,14 +18,14 @@ MATCH void func_800A8360(void) {
         g_BattleChoicePhase = 2u;
         D_8014857D          = 0xFFu;
     FAKE_ORDER_LOCK_END;
-    D_80148574                        = -0xAA;
-    g_MenuPanelTasks[16].panel        = eight;
-    g_MenuPanelTasks[16].unk_0A       = 0u;
-    g_MenuPanelTasks[16].unk_0B       = 0u;
-    g_MenuPanelTasks[16].unk_0C       = 0u;
-    g_MenuPanelTasks[16].unk_09       = 0u;
-    g_MenuPanelTasks[16].u.message.id = 0;
-    g_MenuPanelTasks[16].pos.y        = 63u;
+    D_80148574                      = -0xAA;
+    g_UiPanelTasks[16].panel        = eight;
+    g_UiPanelTasks[16].unk_0A       = 0u;
+    g_UiPanelTasks[16].unk_0B       = 0u;
+    g_UiPanelTasks[16].unk_0C       = 0u;
+    g_UiPanelTasks[16].unk_09       = 0u;
+    g_UiPanelTasks[16].u.message.id = 0;
+    g_UiPanelTasks[16].pos.y        = 63u;
     work += 0x6C;
     *work      = 0u;
     D_801485DD = eight;

@@ -22,7 +22,7 @@ segments:
       - [0x658, c, func_801F3258]
       - [0x9B0, c, MATH_AverageAngle]
       - [0xA00, c, GFX_DrawFan]
-      - [0xB64, c, Message_ClearOnCancel]
+      - [0xB64, c, UI_MessageClearOnCancel]
       - [0xB98, c, Fishing_ShowLocation]
       - [0xE50, c, func_801F3A50]
       - [0xFC4, c, func_801F3BC4]

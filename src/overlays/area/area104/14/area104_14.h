@@ -39,7 +39,7 @@ void func_801F564C(void);
 void func_801F5738(void);
 
 #define AREA_TURN_SYNC       func_801F5738
-#define AREA_MESSAGE_REQUEST 4 /* the message Message_RunAreaMessage starts */
+#define AREA_MESSAGE_REQUEST 4 /* the message UI_MessageRunArea starts */
 
 /* The value of area update step in the shared Area_Update body. */
 

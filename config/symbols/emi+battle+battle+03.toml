@@ -88,13 +88,13 @@ Battle_DrawPartyPanel = { addr = 0x801D750C, type = "func", source = "Draws the 
 Battle_DrawPanelRows = { addr = 0x801D7A40, type = "func", source = "Draws the queued battle panel rows." }
 Battle_DrawEnemyNamePanel = { addr = 0x801D8AE4, type = "func", source = "Draws the 0x4B-pixel name panel of enemy slot minus 3 at (x, y) in the window style colour, with the enemy name text when func_801DA69C allows it and an icon in place when its unk_7F is 1." }
 Battle_OpenPartyPanel = { addr = 0x801D9304, type = "func", source = "Opens panel task 1 for the party list: sizes it from the party count through D_801EAF27 and places it at x 0xF0. Called by Battle_OpenPanels." }
-Battle_OpenPanel = { addr = 0x801D9484, type = "func", source = "writes g_MenuPanelTasks through Menu_OpenPanelTask from every battle end and ability path" }
+Battle_OpenPanel = { addr = 0x801D9484, type = "func", source = "writes g_UiPanelTasks through UI_PanelOpenTask from every battle end and ability path" }
 Battle_DrawNumber = { addr = 0x801D9684, type = "func", source = "Draws a number with digit sprites." }
 Battle_DrawDimOverlay = { addr = 0x801D9900, type = "func", source = "Draws a semi-transparent dark grey tile of 960x240 on the font texture page; called by Battle_DrawEntrances." }
 Battle_DrawPanelShape = { addr = 0x801D9AB4, type = "func", source = "draws a semi-transparent quad from the four-point shape table D_801EAD30, tinted from the window palette by shade" }
 Battle_DrawWindowTile = { addr = 0x801D9C80, type = "func", source = "draws one shaded TILE at x/y from the window template and style palette" }
 Battle_DrawTileSprite = { addr = 0x801DA14C, type = "func", source = "Draws the battle tile sprite." }
-Battle_DrawLine = { addr = 0x801DA408, type = "func", source = "Queues one flat-coloured LINE_F2 from (x0, y0) to (x1, y1) in the given r, g, b; draws the panel edges in func_801D8690 and func_801D8DF8 (UI_DrawLine is the grey-level resident variant)." }
+Battle_DrawLine = { addr = 0x801DA408, type = "func", source = "Queues one flat-coloured LINE_F2 from (x0, y0) to (x1, y1) in the given r, g, b; draws the panel edges in func_801D8690 and func_801D8DF8 (UI_WindowDrawLine is the grey-level resident variant)." }
 Battle_DrawPanelLine = { addr = 0x801DA5A8, type = "func", source = "draws one semi-transparent coloured line of a battle panel frame with the font texture page" }
 Battle_BuildTurnOrder = { addr = 0x801DAAE4, type = "func", source = "Builds the turn order: ranks every active battler by agility, command and a random value, sorts the BattleRank rows high to low and writes the battler indexes into g_BattleTurnOrder." }
 Battle_SlotIsBlocked = { addr = 0x801DB524, type = "func", source = "Tells whether a battler slot can not be selected." }
@@ -239,7 +239,7 @@ g_BattleEventSlots = { addr = 0x801EB4F0, source = "Twelve-byte slots of the que
 D_801EB4F0 = { addr = 0x801EB4F0, alias = true, source = "Battle event slots." }
 D_801EB4F1 = { addr = 0x801EB4F1, alias = true, source = "Event type of each battle event slot, stored when func_801DE560 queues the event." }
 D_801EB4F4 = { addr = 0x801EB4F4, alias = true, source = "Message text pointer of each battle event slot, drawn by the battle event panels." }
-D_801EB4FA = { addr = 0x801EB4FA, alias = true, source = "Text style argument of each battle event slot, zeroed when queued and passed to UI_DrawText by the event panels." }
+D_801EB4FA = { addr = 0x801EB4FA, alias = true, source = "Text style argument of each battle event slot, zeroed when queued and passed to UI_TextDraw by the event panels." }
 g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_CHARACTERS_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
 g_BattleMessageSlot = { addr = 0x801EBF08, size = 0x4, source = "Pointer to the battler row that the battle messages name; Battle_NextCommandMember sets it to the acting party battler." }
 s_BattleBattlerTemplates = { addr = 0x801EBF20, type = "PartyMember", size = 0x3C0, source = "Work row templates of the party battlers: Battle_StartFormRestore copies row n into g_Game.members[n], and bit 0 of a row's first byte marks it active for func_801E7B34." }

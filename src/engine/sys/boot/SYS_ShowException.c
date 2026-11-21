@@ -52,9 +52,9 @@ MATCH void SYS_ShowException(void) {
         SYS_PrepareFrame();
 
         for (i = 0; i < 18; i++) {
-            UI_DrawGlyphString(x_label, y, 0, (void*)D_8017F470[i]);
-            TEXT_Format(g_UiFormatBuffer, D_80149990, saved_context[i + 2]);
-            UI_DrawGlyphString(x_value, y, 0, (void*)g_UiFormatBuffer);
+            UI_TextDrawGlyphString(x_label, y, 0, (void*)D_8017F470[i]);
+            TEXT_Format(g_UiTextFormatBuffer, D_80149990, saved_context[i + 2]);
+            UI_TextDrawGlyphString(x_value, y, 0, (void*)g_UiTextFormatBuffer);
             y += 8;
         }
 
@@ -63,19 +63,19 @@ MATCH void SYS_ShowException(void) {
         x_value = 0xC8;
 
         for (i = 18; i < 37; i++) {
-            UI_DrawGlyphString(x_label, y, 0, (void*)D_8017F470[i]);
-            TEXT_Format(g_UiFormatBuffer, D_80149990, saved_context[i + 2]);
-            UI_DrawGlyphString(x_value, y, 0, (void*)g_UiFormatBuffer);
+            UI_TextDrawGlyphString(x_label, y, 0, (void*)D_8017F470[i]);
+            TEXT_Format(g_UiTextFormatBuffer, D_80149990, saved_context[i + 2]);
+            UI_TextDrawGlyphString(x_value, y, 0, (void*)g_UiTextFormatBuffer);
             y += 8;
         }
 
-        UI_DrawGlyphString(20, 20, 0, (void*)g_ExceptionTitle);
-        UI_DrawGlyphString(100, 20, UI_TEXT_HIGHLIGHT, *(void* const*)((const u8*)g_ExceptionCauseNames + (exception_code & CAUSE_EXCMASK)));
+        UI_TextDrawGlyphString(20, 20, 0, (void*)g_ExceptionTitle);
+        UI_TextDrawGlyphString(100, 20, UI_TEXT_HIGHLIGHT, *(void* const*)((const u8*)g_ExceptionCauseNames + (exception_code & CAUSE_EXCMASK)));
 
-        TEXT_Format(g_UiFormatBuffer, D_80149990, exception_pc);
-        UI_DrawGlyphString(70, 36, 3, (void*)g_UiFormatBuffer);
-        TEXT_Format(g_UiFormatBuffer, D_80149990, exception_pc[0]);
-        UI_DrawGlyphString(142, 36, 4, (void*)g_UiFormatBuffer);
+        TEXT_Format(g_UiTextFormatBuffer, D_80149990, exception_pc);
+        UI_TextDrawGlyphString(70, 36, 3, (void*)g_UiTextFormatBuffer);
+        TEXT_Format(g_UiTextFormatBuffer, D_80149990, exception_pc[0]);
+        UI_TextDrawGlyphString(142, 36, 4, (void*)g_UiTextFormatBuffer);
 
         DrawSync(0);
         SYS_LinkOt();

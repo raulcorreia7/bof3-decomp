@@ -24,8 +24,8 @@ MATCH void Menu_DrawEquipmentPanel(s16 x, s16 y, u8 record_index) {
 
     Menu_DrawFilledPanel(x, y, MENU_EQUIPMENT_PANEL_WIDTH, MENU_EQUIPMENT_PANEL_HEIGHT);
     record = &g_Characters[record_index];
-    UI_DrawText((s16)(x + MENU_EQUIPMENT_CAPTION_X), (s16)(y + MENU_EQUIPMENT_CAPTION_Y), 0, TEXT_LENGTH_MAX, g_MenuLabelEquip);
-    UI_DrawIconCell(0, (s32)(u16)(x + MENU_EQUIPMENT_EMBLEM_X), (s32)(u16)(y + MENU_EQUIPMENT_EMBLEM_Y), MENU_EQUIPMENT_EMBLEM_SIZE, MENU_EQUIPMENT_EMBLEM_SIZE, GFX_COLOR_NEUTRAL);
+    UI_TextDraw((s16)(x + MENU_EQUIPMENT_CAPTION_X), (s16)(y + MENU_EQUIPMENT_CAPTION_Y), 0, TEXT_LENGTH_MAX, g_MenuLabelEquip);
+    UI_IconDrawCell(0, (s32)(u16)(x + MENU_EQUIPMENT_EMBLEM_X), (s32)(u16)(y + MENU_EQUIPMENT_EMBLEM_Y), MENU_EQUIPMENT_EMBLEM_SIZE, MENU_EQUIPMENT_EMBLEM_SIZE, GFX_COLOR_NEUTRAL);
 
     items[0] = &g_Weapons[record->equip.weapon];
     items[1] = &g_Armors[record->equip.shield];
@@ -36,7 +36,7 @@ MATCH void Menu_DrawEquipmentPanel(s16 x, s16 y, u8 record_index) {
 
     for (row = 0; row < MENU_EQUIPMENT_ROW_COUNT; row++) {
         row_y = (u16)(y + (row * MENU_EQUIPMENT_ROW_HEIGHT + MENU_EQUIPMENT_FIRST_ROW_Y));
-        UI_DrawIcon((s32)(u16)(x + MENU_EQUIPMENT_ROW_ICON_X), (s32)(u16)(row_y + MENU_EQUIPMENT_ROW_ICON_DY), g_MenuEquipRowIcons[row], 0);
-        UI_DrawText((s16)(x + MENU_EQUIPMENT_ROW_NAME_X), (s16)row_y, 0, Game_ReadCommand((u8*)items[row]) & BYTE_MASK, (u8*)items[row]);
+        UI_IconDraw((s32)(u16)(x + MENU_EQUIPMENT_ROW_ICON_X), (s32)(u16)(row_y + MENU_EQUIPMENT_ROW_ICON_DY), g_MenuEquipRowIcons[row], 0);
+        UI_TextDraw((s16)(x + MENU_EQUIPMENT_ROW_NAME_X), (s16)row_y, 0, Game_ReadCommand((u8*)items[row]) & BYTE_MASK, (u8*)items[row]);
     }
 }

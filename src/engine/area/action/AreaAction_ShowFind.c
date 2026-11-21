@@ -10,7 +10,7 @@ MATCH void AreaAction_ShowFind(void) {
         msgId = g_FindZenny[spad->unk_04];
         if (msgId != 0) {
             TEXT_Format(&g_TextVariables[0], D_80195F0C, msgId);
-            Message_Request(MSG_SYSTEM_FOUND_ZENNY);
+            UI_MessageRequest(MSG_SYSTEM_FOUND_ZENNY);
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             g_Task->unk_04   = 4U;
             return;

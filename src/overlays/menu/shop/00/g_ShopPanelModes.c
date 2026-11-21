@@ -5,7 +5,7 @@ Callback g_ShopPanelModes[SHOP_MODE_COUNT] = {
     Menu_MessagePanel,
     Menu_ZennyPanel,
     Menu_CommandsPanel,
-    Menu_DrawPanelCursor,
+    UI_CursorDrawPanel,
     Menu_CursorFramePanel,
     Menu_EquipStatPanel,
     Menu_EquipmentPanel,

@@ -43,7 +43,7 @@ segments:
       - [0x1970, c, Actor_SlideScreenDown16]
       - [0x19E0, c, Area_Update]
       - [0x1CB0, c, func_801F48B0]
-      - [0x1CC4, c, Message_ShowParty]
+      - [0x1CC4, c, UI_MessageShowParty]
       - [0x1D88, c, func_801F4988]
       - [0x1E4C, c, func_801F4A4C]
       - [0x1E9C, c, func_801F4A9C]

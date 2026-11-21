@@ -7,6 +7,6 @@ MATCH void func_80199398(void) {
     func_801A0514();
     Actor_DispatchAll();
     Area_DrawScene();
-    Menu_UpdatePanelTasks();
+    UI_PanelUpdateTasks();
     Shop_DispatchStep();
 }

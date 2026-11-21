@@ -1,28 +1,28 @@
 #include "slus.h"
 
-const struct MenuPanelModes g_MessagePanelModes = {{
-    Message_UpdateWindow,
-    Message_UpdateChoicePanel,
-    Message_UpdatePresetPanel,
+const struct MenuPanelModes g_UiMessagePanelModes = {{
+    UI_MessageUpdateWindow,
+    UI_MessageUpdateChoicePanel,
+    UI_MessageUpdatePresetPanel,
 }};
-const struct MenuPanelSteps g_MessageWindowSteps = {{
-    Message_OpenPanel,
-    Message_GrowPanel,
-    Message_DrawPanel,
-    Message_ShrinkPanel,
-    Menu_ClosePanel,
+const struct MenuPanelSteps g_UiMessageWindowSteps = {{
+    UI_MessageOpenPanel,
+    UI_MessageGrowPanel,
+    UI_MessageDrawPanel,
+    UI_MessageShrinkPanel,
+    UI_PanelClose,
 }};
-const struct MenuPanelSteps g_MessageChoiceSteps = {{
-    Message_OpenChoicePanel,
-    Message_GrowPanel,
-    Message_DrawChoicePanel,
-    Message_ShrinkPanel,
-    Message_ReleasePanel,
+const struct MenuPanelSteps g_UiMessageChoiceSteps = {{
+    UI_MessageOpenChoicePanel,
+    UI_MessageGrowPanel,
+    UI_MessageDrawChoicePanel,
+    UI_MessageShrinkPanel,
+    UI_MessageReleasePanel,
 }};
-const struct MenuPanelSteps g_MessagePresetSteps = {{
-    Message_OpenPresetPanel,
-    Message_GrowPanel,
-    Message_DrawPresetPanel,
-    Message_ShrinkPanel,
-    Message_ReleasePanel,
+const struct MenuPanelSteps g_UiMessagePresetSteps = {{
+    UI_MessageOpenPresetPanel,
+    UI_MessageGrowPanel,
+    UI_MessageDrawPresetPanel,
+    UI_MessageShrinkPanel,
+    UI_MessageReleasePanel,
 }};

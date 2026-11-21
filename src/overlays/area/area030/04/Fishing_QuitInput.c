@@ -30,8 +30,8 @@ MATCH void Fishing_QuitInput(void) {
         work->sub_index = (work->sub_index + 1);
     }
 
-    Menu_DrawCursorSprite(112, (130 - FISHING_STATE->cue_index * 16) & 0xFFFE, 0);
+    UI_CursorDraw(112, (130 - FISHING_STATE->cue_index * 16) & 0xFFFE, 0);
     Fishing_DrawDimScreen();
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
-    UI_DrawText(29, 21, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_QUIT_PROMPT));
+    UI_TextDraw(29, 21, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_QUIT_PROMPT));
 }

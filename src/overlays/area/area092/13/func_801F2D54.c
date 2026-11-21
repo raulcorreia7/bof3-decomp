@@ -3,8 +3,8 @@
 MATCH void func_801F2D54(void) {
     s8 choice;
 
-    choice           = g_MessageChoice;
-    g_MessageRequest = D_801F41C0[choice];
+    choice             = g_UiMessageChoice;
+    g_UiMessageRequest = D_801F41C0[choice];
     if (choice == 0) {
         Game_SetScriptActive();
         g_ScenarioState.step_05  = 0x28;

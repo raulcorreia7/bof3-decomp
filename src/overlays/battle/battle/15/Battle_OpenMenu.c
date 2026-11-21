@@ -16,7 +16,7 @@ MATCH void Battle_OpenMenu(void) {
     u8(*flags)[6];
     u32 shifted_mask;
 
-    Menu_OpenPanelTask(0x15, 5);
+    UI_PanelOpenTask(0x15, 5);
     menu_id    = 0x11;
     D_80148628 = 0x142;
     D_80148626 = 0;
@@ -25,7 +25,7 @@ MATCH void Battle_OpenMenu(void) {
     D_8014862E = 0;
     /* FAKE: hold second argument. */
     FAKE_BARRIER();
-    Menu_OpenPanelTask(menu_id, 5);
+    UI_PanelOpenTask(menu_id, 5);
     D_80148596 = 1;
     D_80148597 = 0;
     SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));

@@ -1,6 +1,6 @@
 ["emi/world03/area151/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
+UI_MessageClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
 WorldMap_StartScene = { addr = 0x801F2FD0, type = "func", source = "Sets active_flags to 0x80, looks up scene record 0x1D1, sets byte 0x29 to 5, clears bytes 0x2A and 0x5D to 0x5F and sets header.mode (byte 0x01) to 1." }
 Area_RequestRestartOnEntryChange = { addr = 0x801F3210, type = "func", source = "same body as emi/world00/area033/13@0x801F31D4 Area_RequestRestartOnEntryChange" }
 Actor_ZoomOut = { addr = 0x801F32D0, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it clears byte 0x48 and sets header.mode (byte 0x01) to 1." }

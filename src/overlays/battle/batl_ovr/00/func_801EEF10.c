@@ -35,7 +35,7 @@ NON_MATCHING void func_801EEF10(void) {
             mirror[i] = value;
         }
         g_GfxPalettePending = 1;
-        UI_SetMode(UI_MODE_LONG_FADE_OUT);
+        UI_ModeSet(UI_MODE_LONG_FADE_OUT);
         step = &g_BattleUIStep;
         (*step)++;
     }

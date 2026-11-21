@@ -12,11 +12,11 @@ MATCH void func_801F5708(void) {
     } else {
         SYS_SetFlag(g_SceneEventFlags, 121);
         Script_Select(1);
-        Message_StartAreaMessage(MSG_AREA170_FOUND_HE_SHELLS);
+        UI_MessageStartArea(MSG_AREA170_FOUND_HE_SHELLS);
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         goto done;
     }
-    Message_Request(request);
+    UI_MessageRequest(request);
 done:
     Scene_SetupParty(13);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;

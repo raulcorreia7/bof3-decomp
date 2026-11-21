@@ -41,7 +41,7 @@ MATCH void func_801FA6BC(void) {
             break;
         case 5:
             if (g_ScriptVars[0] == 0x23) {
-                Message_StartAreaMessage((s16)func_801FD278());
+                UI_MessageStartArea((s16)func_801FD278());
                 g_GameStateIndex        = 2;
                 g_ScenarioState.step_05 = 6;
             }

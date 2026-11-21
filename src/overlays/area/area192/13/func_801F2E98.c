@@ -8,7 +8,7 @@ MATCH void func_801F2E98(void) {
             break;
         case 2:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                UI_SetMode(UI_MODE_FADE_OUT);
+                UI_ModeSet(UI_MODE_FADE_OUT);
                 g_SceneEventState.step = 3;
             }
             break;

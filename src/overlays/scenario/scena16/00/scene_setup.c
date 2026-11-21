@@ -200,7 +200,7 @@ MATCH void func_801F7230(void) {
             u16 flags;
 
             if (WINDOW_EFFECT_IDLE()) {
-                UI_SetMode(UI_MODE_FADE_IN);
+                UI_ModeSet(UI_MODE_FADE_IN);
                 SsSetMVol(0, 0);
                 SND_PlayBGM(6u, 0x50, 8);
                 next  = &g_ScenarioState.step_05;
@@ -214,7 +214,7 @@ MATCH void func_801F7230(void) {
         }
 
         case 1:
-            UI_DrawText(122, 100, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010020));
+            UI_TextDraw(122, 100, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010020));
             if (WINDOW_EFFECT_IDLE()) {
                 g_ScenarioState.timer_06 = 0u;
                 g_ScenarioState.step_05  = (g_ScenarioState.step_05 + 1u);
@@ -226,9 +226,9 @@ MATCH void func_801F7230(void) {
 
             *timer = (*timer + 1u);
             SsSetMVol((s16)*timer, (s16)*timer);
-            UI_DrawText(122, 100, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010020));
+            UI_TextDraw(122, 100, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010020));
             if (*timer == 127u) {
-                UI_SetMode(UI_MODE_FADE_OUT);
+                UI_ModeSet(UI_MODE_FADE_OUT);
                 *timer                  = 0u;
                 g_ScenarioState.step_05 = (g_ScenarioState.step_05 + 1u);
             }
@@ -237,13 +237,13 @@ MATCH void func_801F7230(void) {
 
         case 3:
             if (WINDOW_EFFECT_BUSY()) {
-                UI_DrawText(122, 100, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010020));
+                UI_TextDraw(122, 100, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010020));
                 break;
             }
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             Game_SetScriptActive();
             Party_HideBattlers();
-            UI_SetMode(UI_MODE_FADE_IN);
+            UI_ModeSet(UI_MODE_FADE_IN);
             g_ScriptVars[3]          = 1u;
             g_ScenarioState.timer_06 = 0u;
             g_ScenarioState.step_05  = (g_ScenarioState.step_05 + 1u);
@@ -253,7 +253,7 @@ MATCH void func_801F7230(void) {
             u8* next;
 
             if (g_ScriptVars[3] == 0x54u) {
-                UI_SetMode(UI_MODE_FADE_OUT);
+                UI_ModeSet(UI_MODE_FADE_OUT);
                 next  = &g_ScenarioState.step_05;
                 *next = (*next + 1u);
             }
@@ -265,7 +265,7 @@ MATCH void func_801F7230(void) {
 
             if (WINDOW_EFFECT_IDLE()) {
                 g_AreaDrawFlags = 0u;
-                UI_SetMode(UI_MODE_FADE_IN);
+                UI_ModeSet(UI_MODE_FADE_IN);
                 next  = &g_ScenarioState.step_05;
                 *next = (*next + 1u);
             }
@@ -273,7 +273,7 @@ MATCH void func_801F7230(void) {
         }
 
         case 6:
-            UI_DrawText(80, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010022));
+            UI_TextDraw(80, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010022));
             if (WINDOW_EFFECT_IDLE()) {
                 g_ScenarioState.timer_06 = 0x7Fu;
                 g_ScenarioState.step_05  = (g_ScenarioState.step_05 + 1u);
@@ -283,10 +283,10 @@ MATCH void func_801F7230(void) {
         case 7: {
             u16* timer = &g_ScenarioState.timer_06;
 
-            UI_DrawText(80, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010022));
+            UI_TextDraw(80, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010022));
             *timer = (*timer - 1u);
             if (*timer == 0u) {
-                UI_SetMode(UI_MODE_FADE_OUT);
+                UI_ModeSet(UI_MODE_FADE_OUT);
                 g_ScenarioState.step_05 = (g_ScenarioState.step_05 + 1u);
             }
             break;
@@ -296,7 +296,7 @@ MATCH void func_801F7230(void) {
             u8* next;
 
             if (WINDOW_EFFECT_BUSY()) {
-                UI_DrawText(80, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010022));
+                UI_TextDraw(80, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010022));
                 break;
             }
             Game_RequestAreaChange(AREA_ID_DAUNA_MINE_INTRO, TO_COORD(68), TO_COORD(8), FACING_DOWN);
@@ -363,14 +363,14 @@ MATCH void func_801F7790(void) {
     switch (g_ScenarioState.step_05) {
         case 0:
             if (WINDOW_EFFECT_IDLE()) {
-                UI_SetMode(UI_MODE_FADE_IN);
+                UI_ModeSet(UI_MODE_FADE_IN);
                 state  = &g_ScenarioState.step_05;
                 *state = (*state + 1u);
             }
             break;
 
         case 1:
-            UI_DrawText(80, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010004));
+            UI_TextDraw(80, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010004));
             if (WINDOW_EFFECT_IDLE()) {
                 g_ScenarioState.timer_06 = 0x7Fu;
                 g_ScenarioState.step_05  = (g_ScenarioState.step_05 + 1u);
@@ -379,10 +379,10 @@ MATCH void func_801F7790(void) {
 
         case 2: {
             u16* timer;
-            UI_DrawText(80, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010004));
+            UI_TextDraw(80, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010004));
             timer = &g_ScenarioState.timer_06;
             if (--*timer == 0u) {
-                UI_SetMode(UI_MODE_FADE_OUT);
+                UI_ModeSet(UI_MODE_FADE_OUT);
                 g_ScenarioState.step_05 = (g_ScenarioState.step_05 + 1u);
             }
             break;
@@ -390,11 +390,11 @@ MATCH void func_801F7790(void) {
 
         case 3:
             if (WINDOW_EFFECT_BUSY()) {
-                UI_DrawText(80, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010004));
+                UI_TextDraw(80, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010004));
                 break;
             }
 
-            UI_SetMode(UI_MODE_FADE_IN);
+            UI_ModeSet(UI_MODE_FADE_IN);
             g_ScriptVars[2]             = 0x30u;
             g_AreaDrawFlags             = AREA_DRAW_ALL_FLAGS;
             object_index                = Actor_FindFreeSpawned();
@@ -422,7 +422,7 @@ MATCH void func_801F7790(void) {
 
         case 5: {
             u16* timer;
-            UI_DrawText(72, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
+            UI_TextDraw(72, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
             timer = &g_ScenarioState.timer_06;
             if (++*timer == 32u) {
                 Scene_RestorePalette();
@@ -436,7 +436,7 @@ MATCH void func_801F7790(void) {
 
         case 6: {
             u16* timer;
-            UI_DrawText(72, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
+            UI_TextDraw(72, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
             timer = &g_ScenarioState.timer_06;
             if (--*timer == 0u) {
                 g_ScenarioState.step_05 = (g_ScenarioState.step_05 + 1u);
@@ -449,7 +449,7 @@ MATCH void func_801F7790(void) {
             u16* timer;
             timer = &g_ScenarioState.timer_06;
             if (--*timer != 0u) {
-                UI_DrawText(72, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
+                UI_TextDraw(72, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
                 GFX_CopyPaletteCapped((u8)*timer);
                 break;
             }
@@ -506,7 +506,7 @@ MATCH void func_801F7CC4(void) {
             if (WINDOW_EFFECT_BUSY()) {
                 return;
             }
-            Message_StartAreaMessage(MSG_SCENA16_001);
+            UI_MessageStartArea(MSG_SCENA16_001);
             {
                 /* Case-local pointer: keeps this increment in its own register pair,
                  * so cases 0 and 2 cross-jump into one shared tail. */
@@ -530,7 +530,7 @@ MATCH void func_801F7CC4(void) {
             if (g_ScriptVars[0] != 3u) {
                 return;
             }
-            Message_StartAreaMessage(MSG_SCENA16_002);
+            UI_MessageStartArea(MSG_SCENA16_002);
             {
                 /* Same case-local shape as case 0; the shared tail follows. */
                 u8* next_state;
@@ -555,7 +555,7 @@ MATCH void func_801F7CC4(void) {
             progress  = (u16*)g_ScratchPad.cells.bytes;
             *progress = (0x130u - g_ScenarioState.timer_06);
             if (*progress < 191u) {
-                UI_DrawText(72, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
+                UI_TextDraw(72, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
                 if (*progress < 32u) {
                     GFX_CopyPaletteCapped((*progress & BYTE_MASK));
                 } else if (*progress == 32u) {
@@ -633,7 +633,7 @@ MATCH void func_801F7CC4(void) {
 
         case 8:
             if (g_ScriptVars[0] == 0x0Bu) {
-                UI_SetMode(UI_MODE_FADE_OUT);
+                UI_ModeSet(UI_MODE_FADE_OUT);
                 g_ScenarioState.timer_06 = 0u;
                 g_ScenarioState.step_05  = (g_ScenarioState.step_05 + 1u);
             }
@@ -644,14 +644,14 @@ MATCH void func_801F7CC4(void) {
                 return;
             }
             g_AreaDrawFlags = 0u;
-            UI_SetMode(UI_MODE_FADE_IN);
+            UI_ModeSet(UI_MODE_FADE_IN);
             SND_FadeOutBGM(2u, 0x6E, 0x20);
             state  = &g_ScenarioState.step_05;
             *state = (*state + 1u);
             break;
 
         case 10:
-            UI_DrawText(70, 100, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010008));
+            UI_TextDraw(70, 100, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010008));
             if (WINDOW_EFFECT_IDLE()) {
                 g_ScenarioState.timer_06 = 0x7Fu;
                 g_ScenarioState.step_05  = (g_ScenarioState.step_05 + 1u);
@@ -661,13 +661,13 @@ MATCH void func_801F7CC4(void) {
         case 11: {
             u16* timer;
 
-            UI_DrawText(70, 100, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010008));
+            UI_TextDraw(70, 100, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010008));
             timer  = &g_ScenarioState.timer_06;
             *timer = (*timer - 1u);
             if (*timer != 0u) {
                 return;
             }
-            UI_SetMode(UI_MODE_FADE_OUT);
+            UI_ModeSet(UI_MODE_FADE_OUT);
             g_ScenarioState.step_05 = (g_ScenarioState.step_05 + 1u);
             break;
         }
@@ -677,7 +677,7 @@ MATCH void func_801F7CC4(void) {
                 g_ScenarioState.state_04 = 1;
                 g_ScenarioState.step_05  = 0u;
             } else {
-                UI_DrawText(70, 100, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010008));
+                UI_TextDraw(70, 100, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010008));
             }
             break;
     }

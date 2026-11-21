@@ -28,5 +28,5 @@ MATCH void func_801D8450(u32 panel_index) {
     Battle_DrawPanelLine((x + 2), (y + 3), (x + 2), (y + 0x10), r, g, b);
     func_801DA4B4((x + 0x25), (y + 2), (x + 0x25), (y + 0x10), r, g, b);
     func_801DA4B4((x + 2), (y + 0x10), (x + 0x25), (y + 0x10), r, g, b);
-    UI_DrawText((x + 8), (y + 3), 0, 8, (u8*)(D_801EAEB0 + index * 2u));
+    UI_TextDraw((x + 8), (y + 3), 0, 8, (u8*)(D_801EAEB0 + index * 2u));
 }
