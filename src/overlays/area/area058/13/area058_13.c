@@ -1,0 +1,4 @@
+/* area058's code in link order: one translation unit for the whole .text run. */
+#include "area058_13.h"
+
+#include "func_801F2C04.c"
