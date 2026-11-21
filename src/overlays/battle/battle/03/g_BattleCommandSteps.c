@@ -554,7 +554,6 @@ u8 D_801EB5A8 = 0;
 /* 0x801EB5AC */
 static u8 s_gap_801EB5AC[4] = {0};
 
-/* 0x801EB5B0 */
 BattleMessageSlot g_BattleMessages[16] = {0};
 
 /* 0x801EB630 */
