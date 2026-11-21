@@ -10,7 +10,6 @@
 #include "area/spad.h"
 #include <rand.h>
 
-/* g_ScratchPadVectors */
 extern u8       D_801F64D8[];
 extern u8       D_801F64E8[];
 extern u8       D_801F64E9[]; /* the y byte of each D_801F64E8 row */

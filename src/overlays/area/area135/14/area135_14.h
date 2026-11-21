@@ -31,8 +31,6 @@ extern Actor D_80147A58[];
 /* The field mode bytes the height steps test. */
 /* The shared camera-position words the view step copies. */
 /* The camera seed halfword the request step stores. */
-/* The field focus point the camera step copies. */
-/* D_80147A90 */
 extern u8   D_80147AAC[];
 /* The scaled grid position and size the step checks compare against. */
 extern u8   D_80147C29;

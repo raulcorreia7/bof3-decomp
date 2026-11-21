@@ -9,7 +9,6 @@
 /* The area flag word the gate reads. */
 
 /* The scene bytes and route fields the state passes write. */
-/* D_80147A90 */
 
 /* The image's state pass. */
 void func_801F2E58(s32 state);
