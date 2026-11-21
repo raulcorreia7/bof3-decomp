@@ -4,7 +4,7 @@
 /* The world00/area015/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world00.h"
+#include "overlays/area/worlds/world00.h"
 
 extern u8  D_80146871;
 extern u8* g_EncounterZones[];

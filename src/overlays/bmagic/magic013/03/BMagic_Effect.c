@@ -51,7 +51,7 @@ MATCH void func_801EED28(void) {
     g_Task->header.mode += 1;
 }
 
-#include "overlays/bmagic/Effect_Pause.h"
+#include "overlays/bmagic/shared/Effect_Pause.h"
 
 MATCH void func_801EEEA0(void) {
     u8*          selector;
@@ -71,10 +71,10 @@ MATCH void func_801EEEA0(void) {
     g_Task->header.mode += 1;
 }
 
-#include "overlays/bmagic/Effect_StartOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_StartOnZeroTick.h"
 
 /* func_801EEFD0 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF014(void) {
     SYS_DISPATCH_BYTE(D_801F03C0, g_Task->header.step);
@@ -106,7 +106,7 @@ MATCH void func_801EF0A4(void) {
     g_Task->header.step += 1;
 }
 
-#include "overlays/bmagic/Effect_CountUpWorkByteAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpWorkByteAndStep.h"
 
 MATCH void func_801EF1F0(void) {
     s32 i;
@@ -343,4 +343,4 @@ MATCH void func_801F0164(void) {
 }
 
 /* func_801F0358 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"

@@ -34,7 +34,7 @@ MATCH void func_801EEEAC(void) {
 }
 
 /* func_801EEFF8 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF03C(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 2, g_Task);
@@ -151,7 +151,7 @@ MATCH void func_801EF4B8(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_TickDownAndClear.h"
+#include "overlays/bmagic/shared/Effect_TickDownAndClear.h"
 
 MATCH void func_801EF6A4(void) {
     VECTOR pos;

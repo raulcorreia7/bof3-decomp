@@ -118,7 +118,7 @@ MATCH void func_801EF070(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 /* Draws a six-row ring of semi-transparent gouraud line quads around the effect, eight steps per
  * turn: row r runs from radius 0x100 - 41r (plus the row table) at z -(72r + table) to the next row,

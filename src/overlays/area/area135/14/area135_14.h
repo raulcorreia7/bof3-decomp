@@ -5,7 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "sys/actor.h"
-#include "overlays/area/world03.h"
+#include "overlays/area/worlds/world03.h"
 #include "area/spad.h"
 #include "scenario/party.h"
 

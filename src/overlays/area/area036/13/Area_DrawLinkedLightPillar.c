@@ -1,3 +1,3 @@
 #include "area036_13.h"
 
-#include "overlays/area/Area_DrawLinkedLightPillar.h"
+#include "overlays/area/shared/Area_DrawLinkedLightPillar.h"

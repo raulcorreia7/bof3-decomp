@@ -5,7 +5,7 @@
  * id and the four functions in address order. Only this image includes the
  * file. */
 
-#include "overlays/area/world00.h"
+#include "overlays/area/worlds/world00.h"
 
 /* Resets the destination state the scratchpad work pointer selects. */
 void func_801F2CD8(void);

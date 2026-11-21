@@ -1,4 +1,4 @@
-#include "overlays/area/WorldMap_AdvanceWhenPartyNear.h"
+#include "overlays/area/shared/WorldMap_AdvanceWhenPartyNear.h"
 
 /* Advances the actor state when the party stands in the actor's cell, then runs the area update. */
 /* func_801F2DB8 (area158), func_801F2DB8 (area160), func_801F2DB8 (area161), func_801F2DB8 (area162), func_801F2DB8

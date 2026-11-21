@@ -1,6 +1,6 @@
 #include "scena05_00.h"
 #include "area/map.h"
-#include "overlays/area/Actor_SeedPartySlot.h"
+#include "overlays/area/shared/Actor_SeedPartySlot.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -71,7 +71,7 @@ MATCH void func_801FC808(void) {
 
 /* Give the lead party member a field actor of type 6: claim a free slot and seed its row from the member. */
 MATCH void func_801FC8A0(s32 variant){ACTOR_SEED_PARTY_SLOT(0, D_801FD5C0, 6, variant + 112)}
-#include "overlays/scenario/Scene_DispatchActor.h"
+#include "overlays/scenario/shared/Scene_DispatchActor.h"
 
 MATCH void func_801FCA98(void) {
 }
@@ -267,7 +267,7 @@ MATCH void Party_JoinGarr(void) {
     Party_JoinMember(CHAR_ID_GARR);
 }
 
-#include "overlays/scenario/Scene_JoinNina.h"
+#include "overlays/scenario/shared/Scene_JoinNina.h"
 
 MATCH void Scene_JoinNina2(void) {
     SCENE_JOIN_NINA();
@@ -280,11 +280,11 @@ MATCH void Scene_RemoveMomoNina(void) {
     Party_LoadPalettes();
 }
 
-#include "overlays/scenario/Scene_RemoveNina.h"
+#include "overlays/scenario/shared/Scene_RemoveNina.h"
 
-#include "overlays/scenario/Scene_RemoveMomo.h"
+#include "overlays/scenario/shared/Scene_RemoveMomo.h"
 
-#include "overlays/scenario/Scene_RemovePeco.h"
+#include "overlays/scenario/shared/Scene_RemovePeco.h"
 
 /* func_801FD580 */
 MATCH void Scene_RemoveRyuYoung(void) {

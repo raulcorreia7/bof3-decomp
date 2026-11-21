@@ -4,7 +4,7 @@
 /* The world00/area036/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world00.h"
+#include "overlays/area/worlds/world00.h"
 
 /* Step tables the step bytes selects. */
 extern void (*D_801F3304[])(void);

@@ -5,7 +5,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/Effect_DispatchMode.h"
+#include "overlays/bmagic/shared/Effect_DispatchMode.h"
 
 MATCH void func_801EEC94(void) {
     PartyMember* actor;
@@ -53,10 +53,10 @@ MATCH void func_801EEC94(void) {
     SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
 }
 
-#include "overlays/bmagic/Effect_ReplacePaletteFade.h"
+#include "overlays/bmagic/shared/Effect_ReplacePaletteFade.h"
 
 /* func_801EEF68 */
-#include "overlays/bmagic/Effect_BrightenPalette.h"
+#include "overlays/bmagic/shared/Effect_BrightenPalette.h"
 
 /* func_801EF078 */
 MATCH void Effect_NextStep(void) {
@@ -131,10 +131,10 @@ NON_MATCHING void func_801EF2F0(s32 stat) {
 INCLUDE_ASM(func_801EF2F0);
 #endif
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 /* func_801EF4C4 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF508(void) {
     SYS_DISPATCH_BYTE(D_801F0C18, g_Task->header.step);
@@ -146,11 +146,11 @@ MATCH void func_801EF508(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountUpAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpAndStep.h"
 
-#include "overlays/bmagic/Effect_StepWhileTickUnderThree.h"
+#include "overlays/bmagic/shared/Effect_StepWhileTickUnderThree.h"
 
-#include "overlays/bmagic/Effect_TickOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_TickOnTimerZero.h"
 
 MATCH void func_801EF678(void) {
     POLY_G3* prim;
@@ -230,9 +230,9 @@ MATCH void func_801EFBBC(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 5), 2, g_Task);
 }
 
-#include "overlays/bmagic/Effect_CountDownAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountDownAndStep.h"
 
-#include "overlays/bmagic/Effect_LaunchFromRing.h"
+#include "overlays/bmagic/shared/Effect_LaunchFromRing.h"
 
 MATCH void func_801EFD80(void) {
     s32          timer;

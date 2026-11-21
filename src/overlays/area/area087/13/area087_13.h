@@ -4,7 +4,7 @@
 /* The world02/area087/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world02.h"
+#include "overlays/area/worlds/world02.h"
 #include "area/spad.h"
 
 /* g_ScratchPadVectors */
@@ -43,6 +43,6 @@ extern u8  D_801F5718[28];
 extern u8  D_801F5719[]; /* the record-selector byte at +1 */
 extern u8  D_801F5728[]; /* the "Manillo" text at +0x10 */
 
-#include "overlays/area/world_cloud.h"
+#include "overlays/area/shared/world_cloud.h"
 
 #endif

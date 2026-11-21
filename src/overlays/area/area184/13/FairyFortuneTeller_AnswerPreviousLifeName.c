@@ -1,3 +1,3 @@
 #include "area184_13.h"
 
-#include "overlays/area/FairyFortuneTeller_AnswerPreviousLifeName.h"
+#include "overlays/area/shared/FairyFortuneTeller_AnswerPreviousLifeName.h"

@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/func_801EEC20.h"
+#include "overlays/bmagic/shared/func_801EEC20.h"
 
 MATCH void func_801EECA4(void) {
     PartyMember* actor;
@@ -78,7 +78,7 @@ MATCH void func_801EEFA0(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_Pause.h"
+#include "overlays/bmagic/shared/Effect_Pause.h"
 
 MATCH void func_801EF0A8(void) {
     PartyMember* actor;
@@ -121,7 +121,7 @@ MATCH void func_801EF1AC(void) {
     g_Task->header.mode++;
 }
 
-#include "overlays/bmagic/Effect_StartOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_StartOnZeroTick.h"
 
 MATCH s32 func_801EF34C(void) {
     s32 result;
@@ -155,21 +155,21 @@ MATCH s32 func_801EF34C(void) {
     return result;
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 /* func_801EF4E0 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF524(void) {
     SYS_DISPATCH_BYTE(D_801F0030, g_Task->header.step);
     BMAGIC_DRAW_IF_ALIVE(func_801EF68C);
 }
 
-#include "overlays/bmagic/Effect_CountUpAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpAndStep.h"
 
-#include "overlays/bmagic/Effect_StepWhileTickUnderTwo.h"
+#include "overlays/bmagic/shared/Effect_StepWhileTickUnderTwo.h"
 
-#include "overlays/bmagic/Effect_TickOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_TickOnTimerZero.h"
 
 MATCH void func_801EF68C(void) {
     POLY_G3* prim;
@@ -215,9 +215,9 @@ MATCH void func_801EF900(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountDownTimerStep.h"
+#include "overlays/bmagic/shared/Effect_CountDownTimerStep.h"
 
-#include "overlays/bmagic/Effect_CountUpAndStepAt32.h"
+#include "overlays/bmagic/shared/Effect_CountUpAndStepAt32.h"
 
 MATCH void func_801EFA2C(void) {
     u8 timer_next;

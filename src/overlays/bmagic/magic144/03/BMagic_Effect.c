@@ -54,10 +54,10 @@ MATCH void func_801EED04(void) {
     g_Task->header.mode += 1;
 }
 
-#include "overlays/bmagic/Effect_StartOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_StartOnZeroTick.h"
 
 /* func_801EEE9C */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEEE0(void) {
     BMAGIC_DISPATCH_AND_DRAW(D_801F04D4, func_801EF294);
@@ -100,7 +100,7 @@ MATCH void func_801EF078(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_StepOnOwnTickFlag.h"
+#include "overlays/bmagic/shared/Effect_StepOnOwnTickFlag.h"
 
 MATCH void func_801EF154(void) {
     u8 count;
@@ -117,7 +117,7 @@ MATCH void func_801EF154(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 MATCH void func_801EF294(void) {
     POLY_G3* prim;
@@ -169,15 +169,15 @@ MATCH void func_801EF554(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_StartAtTarget.h"
+#include "overlays/bmagic/shared/Effect_StartAtTarget.h"
 
 MATCH void func_801EF654(void) {
     EFFECT_ADVANCE_AT_COUNT(4, 0x11);
 }
 
-#include "overlays/bmagic/Effect_CountUpAndMarkBattler.h"
+#include "overlays/bmagic/shared/Effect_CountUpAndMarkBattler.h"
 
-#include "overlays/bmagic/Effect_CountDownByTwoFinishAtOne.h"
+#include "overlays/bmagic/shared/Effect_CountDownByTwoFinishAtOne.h"
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EF818(void) {
@@ -209,15 +209,15 @@ MATCH void func_801EFF74(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_AppearAtTarget.h"
+#include "overlays/bmagic/shared/Effect_AppearAtTarget.h"
 
 MATCH void func_801F00A0(void) {
     EFFECT_ADVANCE_AT_COUNT(2, 0x10);
 }
 
-#include "overlays/bmagic/Effect_StepOnTickFlag.h"
+#include "overlays/bmagic/shared/Effect_StepOnTickFlag.h"
 
-#include "overlays/bmagic/Effect_TickCounter.h"
+#include "overlays/bmagic/shared/Effect_TickCounter.h"
 
 MATCH void func_801F01D0(void) {
     POLY_G3* prim;
@@ -244,4 +244,4 @@ MATCH void func_801F01D0(void) {
 }
 
 /* func_801F046C */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"

@@ -1,5 +1,5 @@
 #include "area103_13.h"
-#include "overlays/area/Area_DrawRingColumn.h"
+#include "overlays/area/shared/Area_DrawRingColumn.h"
 
 MATCH void func_801F38DC(void) {
     VECTOR    org;

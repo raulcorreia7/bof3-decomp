@@ -1,5 +1,5 @@
 #include "area038_13.h"
-#include "overlays/area/Actor_SeedPartySlot.h"
+#include "overlays/area/shared/Actor_SeedPartySlot.h"
 
 MATCH void func_801F2C94(void) {
     if (g_PartyFieldOrder[1] != 0) {

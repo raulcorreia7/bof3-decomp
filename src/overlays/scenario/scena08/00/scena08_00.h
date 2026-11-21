@@ -8,7 +8,7 @@
 #include "engine/game/00/game_00.h"
 #include "area/effects.h"
 #include "area/spad.h"
-#include "overlays/area/AreaSprite.h"
+#include "overlays/area/shared/AreaSprite.h"
 #define SCRATCH_ROW_STRIDE 0x28
 #define SCRATCH_ROW_OFFSET 0x00
 

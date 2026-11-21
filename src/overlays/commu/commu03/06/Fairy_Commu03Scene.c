@@ -144,7 +144,7 @@ MATCH void func_801D1184(void) {
     }
 }
 
-#include "overlays/commu/Fairy_EndCommuScene.h"
+#include "overlays/commu/shared/Fairy_EndCommuScene.h"
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D1250(s32 scene, s32 mode) {

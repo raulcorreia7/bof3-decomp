@@ -4,8 +4,8 @@
 /* The world01/area049/13 overlay's local declarations. Only this image
  * includes the file. */
 
-#include "overlays/area/world01.h"
-#include "overlays/area/AreaSprite.h"
+#include "overlays/area/worlds/world01.h"
+#include "overlays/area/shared/AreaSprite.h"
 #include "overlays/scenario/scenario.h"
 
 /* The work-window byte offset and row stride this overlay scans. */

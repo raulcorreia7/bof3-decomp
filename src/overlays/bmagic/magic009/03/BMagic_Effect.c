@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/func_801EEC28.h"
+#include "overlays/bmagic/shared/func_801EEC28.h"
 
 MATCH void func_801EEC98(void) {
     BattleEffect* slot;
@@ -84,9 +84,9 @@ MATCH void func_801EEF08(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountDownTimerNextStep.h"
+#include "overlays/bmagic/shared/Effect_CountDownTimerNextStep.h"
 
-#include "overlays/bmagic/Effect_NextStepOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_NextStepOnZeroTick.h"
 
 MATCH void func_801EF09C(void) {
     u16* battle_flags;
@@ -98,7 +98,7 @@ MATCH void func_801EF09C(void) {
 }
 
 /* func_801EF0DC */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF120(void) {
     SYS_DISPATCH_BYTE(D_801EF8A4, g_Task->header.step);
@@ -130,7 +130,7 @@ MATCH void func_801EF198(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountUpTimersByTwoNextStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpTimersByTwoNextStep.h"
 
 /* func_801EF340 */
 MATCH void Effect_CountDownTimer(void) {
@@ -169,7 +169,7 @@ MATCH void func_801EF6B0(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetDuration.h"
+#include "overlays/bmagic/shared/Effect_SetDuration.h"
 
 MATCH void func_801EF788(void) {
     u8 timer;

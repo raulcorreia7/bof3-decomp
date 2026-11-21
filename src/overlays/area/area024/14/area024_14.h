@@ -6,8 +6,8 @@
  * file. */
 
 #include "common/vector.h"
-#include "overlays/area/AreaSprite.h"
-#include "overlays/area/world00.h"
+#include "overlays/area/shared/AreaSprite.h"
+#include "overlays/area/worlds/world00.h"
 #include "area/effects.h"
 
 #define WORLD00_AREA024_WORK_BASE      MEM_PTR(volatile AreaSprite, AREA_WORK)

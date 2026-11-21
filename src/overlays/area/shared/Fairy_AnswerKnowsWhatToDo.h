@@ -1,4 +1,4 @@
-#include "overlays/area/WorldAreaRequest.h"
+#include "overlays/area/shared/WorldAreaRequest.h"
 
 /* func_801F3E28, func_801F31D4 */
 MATCH void Fairy_AnswerKnowsWhatToDo(void) {

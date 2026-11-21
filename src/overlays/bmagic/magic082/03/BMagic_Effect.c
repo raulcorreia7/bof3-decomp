@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/Effect_DispatchMode.h"
+#include "overlays/bmagic/shared/Effect_DispatchMode.h"
 
 MATCH void func_801EEC94(void) {
     u8           i;
@@ -61,9 +61,9 @@ MATCH void func_801EEC94(void) {
     SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
 }
 
-#include "overlays/bmagic/Effect_ReplacePaletteFade.h"
+#include "overlays/bmagic/shared/Effect_ReplacePaletteFade.h"
 
-#include "overlays/bmagic/Effect_BrightenPalette.h"
+#include "overlays/bmagic/shared/Effect_BrightenPalette.h"
 
 /* func_801EF0C4 */
 MATCH void Effect_NextStep(void) {
@@ -103,7 +103,7 @@ MATCH void func_801EF10C(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_StartOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_StartOnZeroTick.h"
 
 MATCH s32 func_801EF3A0(void) {
     s32 result;
@@ -151,10 +151,10 @@ MATCH s32 func_801EF3A0(void) {
     return result;
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 /* func_801EF56C */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF5B0(void) {
     SYS_DISPATCH_BYTE(D_801F0D1C, g_Task->header.step);
@@ -166,11 +166,11 @@ MATCH void func_801EF5B0(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountUpAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpAndStep.h"
 
-#include "overlays/bmagic/Effect_StepWhileTickUnderThree.h"
+#include "overlays/bmagic/shared/Effect_StepWhileTickUnderThree.h"
 
-#include "overlays/bmagic/Effect_TickOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_TickOnTimerZero.h"
 
 /* Draw the magic082 disc as a fan of sixteen shaded triangles, grey at the centre and tinted
  * at the rim by the colour row the effect picks, both scaled by the effect timer byte. */
@@ -264,9 +264,9 @@ MATCH void func_801EFD30(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 5), 2, g_Task);
 }
 
-#include "overlays/bmagic/Effect_CountDownAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountDownAndStep.h"
 
-#include "overlays/bmagic/Effect_LaunchFromRing.h"
+#include "overlays/bmagic/shared/Effect_LaunchFromRing.h"
 
 MATCH void func_801EFEF4(void) {
     s32          timer;

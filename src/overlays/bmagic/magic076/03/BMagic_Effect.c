@@ -62,9 +62,9 @@ MATCH void func_801EED48(void) {
 }
 
 /* func_801EEF5C */
-#include "overlays/bmagic/Effect_PreparePalette.h"
+#include "overlays/bmagic/shared/Effect_PreparePalette.h"
 
-#include "overlays/bmagic/Effect_BrightenPalette.h"
+#include "overlays/bmagic/shared/Effect_BrightenPalette.h"
 
 /* func_801EF11C */
 MATCH void Effect_NextStep(void) {
@@ -81,7 +81,7 @@ MATCH void Effect_DarkenPalette(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* Whether the queued action is an ability other than Raise Dead (the spell or the skill). */
 MATCH u8 func_801EF2E8(void) {
@@ -100,7 +100,7 @@ MATCH u8 func_801EF2E8(void) {
 }
 
 /* func_801EF330 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF374(void) {
     SYS_DISPATCH_BYTE(D_801F048C, g_Task->header.step);
@@ -152,9 +152,9 @@ MATCH void func_801EF4A8(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountDownAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountDownAndStep.h"
 
-#include "overlays/bmagic/Effect_TickOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_TickOnTimerZero.h"
 
 MATCH void func_801EF698(void) {
     POLY_FT4* prim;
@@ -194,7 +194,7 @@ MATCH void func_801EF8A8(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 6), 1, g_Task);
 }
 
-#include "overlays/bmagic/Effect_DrawRings.h"
+#include "overlays/bmagic/shared/Effect_DrawRings.h"
 
 MATCH void func_801EFA60(void) {
     s16* angle;
@@ -278,12 +278,12 @@ MATCH void func_801EFD60(void) {
     }
 }
 
-#include "overlays/bmagic/BMagic_DrawRingTriangles.h"
+#include "overlays/bmagic/shared/BMagic_DrawRingTriangles.h"
 
-#include "overlays/bmagic/BMagic_DrawRingQuads.h"
+#include "overlays/bmagic/shared/BMagic_DrawRingQuads.h"
 
 /* func_801F03D4 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 /* func_801F0438 */
-#include "overlays/bmagic/Actor_Clear.h"
+#include "overlays/bmagic/shared/Actor_Clear.h"

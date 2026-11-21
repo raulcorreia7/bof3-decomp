@@ -16,7 +16,7 @@ MATCH u16 func_801FD3C0(void) {
     SCENA10_PARTY_LOOKUP(3, D_801FE970, D_801FE974, 0xFFFF);
 }
 
-#include "overlays/scenario/Scene_DispatchActor.h"
+#include "overlays/scenario/shared/Scene_DispatchActor.h"
 
 MATCH void func_801FD4A4(void) {
     Game_SetScriptActive();
@@ -315,7 +315,7 @@ MATCH void func_801FE438(void) {
     }
 }
 
-#include "overlays/scenario/Scene_RebuildRyuGarrParty.h"
+#include "overlays/scenario/shared/Scene_RebuildRyuGarrParty.h"
 
 MATCH void func_801FE5B0(void) {
     g_Characters[g_CharSlot[5]].party_flags &= 254;
@@ -323,7 +323,7 @@ MATCH void func_801FE5B0(void) {
     Party_LoadPalettes();
 }
 
-#include "overlays/scenario/Scene_RemoveMomo.h"
+#include "overlays/scenario/shared/Scene_RemoveMomo.h"
 
 MATCH void func_801FE63C(void) {
     u8 ids[PARTY_SLOT_COUNT];
@@ -340,4 +340,4 @@ MATCH void func_801FE63C(void) {
     Party_LoadPalettes();
 }
 
-#include "overlays/scenario/Scene_StashPartyExceptRyuAdult.h"
+#include "overlays/scenario/shared/Scene_StashPartyExceptRyuAdult.h"

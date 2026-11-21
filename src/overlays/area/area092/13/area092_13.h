@@ -4,7 +4,7 @@
 /* The world02/area092/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world02.h"
+#include "overlays/area/worlds/world02.h"
 #include "area/spad.h"
 
 extern u8  D_801F3A88[];

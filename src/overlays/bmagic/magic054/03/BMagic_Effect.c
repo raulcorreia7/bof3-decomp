@@ -18,14 +18,14 @@ NON_MATCHING void func_801EEC98(void) {
 INCLUDE_ASM(func_801EEC98);
 #endif
 
-#include "overlays/bmagic/Effect_Hit.h"
+#include "overlays/bmagic/shared/Effect_Hit.h"
 
 #include "shared/Effect_StartPlaying.h"
 
-#include "overlays/bmagic/Effect_CountDownAndMarkDamaged.h"
+#include "overlays/bmagic/shared/Effect_CountDownAndMarkDamaged.h"
 
 /* func_801EF158 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF19C(void) {
     BMagicEffectSteps handlers;
@@ -112,4 +112,4 @@ MATCH void func_801EF534(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_TickDownAndClear.h"
+#include "overlays/bmagic/shared/Effect_TickDownAndClear.h"

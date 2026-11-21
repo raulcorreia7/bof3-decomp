@@ -5,7 +5,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
 MATCH void func_801EEC70(void) {
     u32  slot;
@@ -45,12 +45,12 @@ MATCH void func_801EEC70(void) {
     *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW))   = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
 }
 
-#include "overlays/bmagic/Effect_CountDownTimerQueueEffect.h"
+#include "overlays/bmagic/shared/Effect_CountDownTimerQueueEffect.h"
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEEE0 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF24(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
@@ -146,7 +146,7 @@ MATCH void func_801EF324(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_StartTint.h"
+#include "overlays/bmagic/shared/Effect_StartTint.h"
 
 MATCH void func_801EF4F0(void) {
     g_Task->unk_5D -= 0x10;
@@ -194,11 +194,11 @@ MATCH void func_801EF6C8(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountDownAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountDownAndStep.h"
 
-#include "overlays/bmagic/Effect_TickOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_TickOnTimerZero.h"
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 MATCH void func_801EF87C(void) {
     POLY_G3* prim;
@@ -226,7 +226,7 @@ MATCH void func_801EF87C(void) {
     }
 }
 
-#include "overlays/bmagic/BMagic_DarkRingQuads.h"
+#include "overlays/bmagic/shared/BMagic_DarkRingQuads.h"
 
 /* func_801EFACC */
 MATCH void BMagic_DrawDarkRing(void) {
@@ -355,7 +355,7 @@ MATCH void func_801F0584(void) {
     g_Task->header.step += 1;
 }
 
-#include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpByTwoAndStep.h"
 
 MATCH void func_801F066C(void) {
     u8 timer;

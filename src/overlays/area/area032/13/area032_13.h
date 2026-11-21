@@ -3,7 +3,7 @@
 
 /* The area032 world overlay's local declarations: the sprite and scratch views,
  * its handler table and prototypes. Only this image includes the file. */
-#include "overlays/area/world00.h"
+#include "overlays/area/worlds/world00.h"
 #include "area/spad.h"
 
 /* g_ScratchPadVectors */

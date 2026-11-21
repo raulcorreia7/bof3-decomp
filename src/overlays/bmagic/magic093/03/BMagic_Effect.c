@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/Effect_RunSlotsWithSetup.h"
+#include "overlays/bmagic/shared/Effect_RunSlotsWithSetup.h"
 
 MATCH void func_801EED04(void) {
     PartyMember* owner;
@@ -79,7 +79,7 @@ MATCH void func_801EF02C(void) {
 }
 
 /* func_801EF080 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF0C4(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 2, g_Task);
@@ -204,7 +204,7 @@ MATCH void func_801EF750(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 MATCH void func_801EF85C(void) {
     POLY_G3* prim;
@@ -415,10 +415,10 @@ MATCH void func_801F01F0(void) {
 }
 
 /* func_801F05BC */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 /* func_801F0620 */
-#include "overlays/bmagic/Actor_Clear.h"
+#include "overlays/bmagic/shared/Actor_Clear.h"
 
 MATCH void func_801F0670(void) {
     s32 count;

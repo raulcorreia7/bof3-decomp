@@ -4,7 +4,7 @@
 /* The world01/area059/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world01.h"
+#include "overlays/area/worlds/world01.h"
 
 /* The script copy points at an Actor row of g_Actors; the shared declaration
  * is a byte cursor, so this image views it as the record it addresses. */

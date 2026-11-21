@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/func_801EEC18.h"
+#include "overlays/bmagic/shared/func_801EEC18.h"
 
 MATCH void func_801EEC88(void) {
     PartyMember* actor;
@@ -63,7 +63,7 @@ MATCH void func_801EEF98(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_BrightenPalette.h"
+#include "overlays/bmagic/shared/Effect_BrightenPalette.h"
 
 MATCH void func_801EF0EC(void) {
     if (g_Task->param.unk_0B == 9) {
@@ -76,9 +76,9 @@ MATCH void func_801EF0EC(void) {
 }
 
 /* func_801EF16C */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
-#include "overlays/bmagic/Effect_SetActorMatrixRolled.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrixRolled.h"
 
 MATCH void func_801EF264(void) {
     D_801F09A0[g_Task->header.step]();
@@ -104,7 +104,7 @@ MATCH void func_801EF374(void) {
     BattleEffectTimerStep();
 }
 
-#include "overlays/bmagic/Effect_Wait.h"
+#include "overlays/bmagic/shared/Effect_Wait.h"
 
 MATCH void func_801EF44C(void) {
     PartyMember* work;

@@ -53,10 +53,10 @@ MATCH void func_801EEC5C(void) {
     g_Task->header.mode += 1;
 }
 
-#include "overlays/bmagic/Effect_PlayOnIdleTick.h"
+#include "overlays/bmagic/shared/Effect_PlayOnIdleTick.h"
 
 /* func_801EEE68 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void BMagic_UpdateDragonBreath(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 2, g_Task);
@@ -139,7 +139,7 @@ MATCH void func_801EF268(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountUpWorkByteAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpWorkByteAndStep.h"
 
 MATCH void func_801EF324(void) {
     PartyMember* work;

@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/Effect_RunSlots.h"
+#include "overlays/bmagic/shared/Effect_RunSlots.h"
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EED18(void) {
@@ -67,7 +67,7 @@ NON_MATCHING void func_801EED18(void) {
 INCLUDE_ASM(func_801EED18);
 #endif
 
-#include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_RequestTargetOnTimerZero.h"
 
 /* When the effect ticker is zero, marks the hit applied and the effect playing, tells the battle UI and
  * runs the effect player's follow-up. */
@@ -82,7 +82,7 @@ MATCH void func_801EEFB4(void) {
 }
 
 /* func_801EF00C */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF050(void) {
     SYS_DISPATCH_TASK(g_BMagicEffectModes + 1, 2, g_Task);
@@ -91,13 +91,13 @@ MATCH void func_801EF050(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_ArmCounterNextStep.h"
+#include "overlays/bmagic/shared/Effect_ArmCounterNextStep.h"
 
-#include "overlays/bmagic/Effect_CountUpAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpAndStep.h"
 
-#include "overlays/bmagic/Effect_StepWhileTickUnderTwo.h"
+#include "overlays/bmagic/shared/Effect_StepWhileTickUnderTwo.h"
 
-#include "overlays/bmagic/Effect_TickOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_TickOnTimerZero.h"
 
 MATCH void func_801EF1E8(void) {
     POLY_G4* prim;
@@ -223,7 +223,7 @@ MATCH void func_801EF7A8(void) {
 }
 
 /* func_801EFB78 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 /* func_801EFBDC */
-#include "overlays/bmagic/Actor_Clear.h"
+#include "overlays/bmagic/shared/Actor_Clear.h"

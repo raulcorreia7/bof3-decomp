@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/Effect_DispatchMode.h"
+#include "overlays/bmagic/shared/Effect_DispatchMode.h"
 
 MATCH void func_801EEC94(void) {
     PartyMember* actor;
@@ -51,7 +51,7 @@ MATCH void func_801EEE44(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_BrightenPalette.h"
+#include "overlays/bmagic/shared/Effect_BrightenPalette.h"
 
 MATCH void func_801EEFF0(void) {
     PartyMember* work;
@@ -76,12 +76,12 @@ MATCH void func_801EF024(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_PlayOnIdleTick.h"
+#include "overlays/bmagic/shared/Effect_PlayOnIdleTick.h"
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 /* func_801EF278 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF2BC(void) {
     SYS_DISPATCH_BYTE(D_801F0360, g_Task->header.step);
@@ -155,7 +155,7 @@ MATCH void func_801EF70C(void) {
     BMAGIC_DRAW_IF_ALIVE(func_801EF9E0);
 }
 
-#include "overlays/bmagic/Effect_CountUpAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpAndStep.h"
 
 MATCH void func_801EF7D4(void) {
     u8 count;
@@ -179,7 +179,7 @@ MATCH void func_801EF850(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountDownTickerAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountDownTickerAndStep.h"
 
 MATCH void func_801EF8EC(void) {
     g_Task->unk_09 -= 1;
@@ -288,7 +288,7 @@ MATCH void func_801F0038(void) {
     BMAGIC_DISPATCH_AND_DRAW(D_801F0384, func_801F01A8);
 }
 
-#include "overlays/bmagic/Effect_NextStepOnLastTick.h"
+#include "overlays/bmagic/shared/Effect_NextStepOnLastTick.h"
 
 MATCH void func_801F0100(void) {
     u8 count;

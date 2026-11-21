@@ -4,9 +4,9 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/func_801EEC14.h"
+#include "overlays/bmagic/shared/func_801EEC14.h"
 
-#include "overlays/bmagic/Effect_StartPaletteFade.h"
+#include "overlays/bmagic/shared/Effect_StartPaletteFade.h"
 
 /* Raises the red, green and blue offsets of the palette fade row the byte at +0x0B names by one per
  * frame and advances header.mode (byte 0x01) at sixteen. */

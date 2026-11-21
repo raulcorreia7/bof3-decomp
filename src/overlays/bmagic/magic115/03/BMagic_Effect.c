@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/func_801EEC14.h"
+#include "overlays/bmagic/shared/func_801EEC14.h"
 
 MATCH void func_801EEC80(void) {
     PartyMember* actor;
@@ -57,10 +57,10 @@ MATCH void func_801EEEB0(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EF054 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF098(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
@@ -154,7 +154,7 @@ MATCH void func_801EF49C(void) {
     g_Task->header.step += 1;
 }
 
-#include "overlays/bmagic/Effect_TickDownAndClear.h"
+#include "overlays/bmagic/shared/Effect_TickDownAndClear.h"
 
 MATCH void func_801EF5F8(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;

@@ -6,7 +6,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/scenario/Scene_DispatchEntity.h"
+#include "overlays/scenario/shared/Scene_DispatchEntity.h"
 
 /* func_801F6F7C */
 MATCH void Scene_InitTaskArea(void) {
@@ -577,7 +577,7 @@ MATCH void func_801F8AA0(void) {
     }
 }
 
-#include "overlays/scenario/Scene_AdvanceBandMotion.h"
+#include "overlays/scenario/shared/Scene_AdvanceBandMotion.h"
 
 MATCH void func_801F8BC4(void) {
     SCENE_ADVANCE_BAND_MOTION(+, func_801F9020);
@@ -964,7 +964,7 @@ MATCH void func_801FA6BC(u8 point) {
     g_ScenarioState.step_05  = 0;
 }
 
-#include "overlays/scenario/Scene_SpawnActor.h"
+#include "overlays/scenario/shared/Scene_SpawnActor.h"
 
 MATCH bool Scene_SpawnActor(u8 type, s16 angle_x, s16 angle_y, s16 angle_z, u8 layer, s32 scene_step){SCENE_SPAWN_ACTOR(D_801FE748)}
 

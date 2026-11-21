@@ -60,7 +60,7 @@ MATCH void func_801EEDD8(void) {
     SND_QueueSelectionSE(0x100);
 }
 
-#include "overlays/bmagic/Effect_RequestTargetOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_RequestTargetOnTimerZero.h"
 
 MATCH void func_801EEFF0(void) {
     u8 timer_next;
@@ -74,7 +74,7 @@ MATCH void func_801EEFF0(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 MATCH void func_801EF0B0(void) {
     POLY_G3* poly;
@@ -105,7 +105,7 @@ MATCH void func_801EF268(void) {
 }
 
 /* func_801EF270 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF2B4(void) {
     u8           slot;
@@ -301,7 +301,7 @@ MATCH void func_801F05B4(void) {
 }
 
 /* func_801F0828 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 /* func_801F088C */
-#include "overlays/bmagic/Actor_Clear.h"
+#include "overlays/bmagic/shared/Actor_Clear.h"

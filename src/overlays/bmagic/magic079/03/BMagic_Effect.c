@@ -27,10 +27,10 @@ MATCH void func_801EEC5C(void) {
     g_Task->header.mode = g_Task->header.mode + 1;
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EED98 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEDDC(void) {
     BMAGIC_DISPATCH_AND_DRAW(D_801F02B4, func_801EF458);
@@ -181,7 +181,7 @@ MATCH void func_801EF348(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EF458(void) {
@@ -206,7 +206,7 @@ MATCH void func_801EFC74(void) {
     g_Task->header.step = g_Task->header.step + 1;
 }
 
-#include "overlays/bmagic/Effect_CountUpAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpAndStep.h"
 
 MATCH void func_801EFD2C(void) {
     g_Task->timer -= 1;

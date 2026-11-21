@@ -1,3 +1,3 @@
 #include "boss042_16.h"
 
-#include "overlays/boss/Boss_ChooseBattleEnding.h"
+#include "overlays/boss/shared/Boss_ChooseBattleEnding.h"

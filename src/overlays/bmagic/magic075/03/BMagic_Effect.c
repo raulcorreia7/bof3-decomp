@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
 MATCH void func_801EEC70(void) {
     PartyMember* actor;
@@ -64,7 +64,7 @@ MATCH void func_801EEEB0(void) {
 }
 
 /* func_801EEFF4 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF038(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;

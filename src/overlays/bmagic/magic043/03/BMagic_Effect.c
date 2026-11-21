@@ -135,10 +135,10 @@ MATCH void func_801EF0B4(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EF360 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF3A4(void) {
     BMAGIC_DISPATCH_AND_DRAW_IN_OWN_MATRIX(D_801EFC8C, func_801EF72C, func_801EF7F8);
@@ -257,4 +257,4 @@ INCLUDE_ASM(func_801EF7F8);
 #endif
 
 /* func_801EFC24 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"

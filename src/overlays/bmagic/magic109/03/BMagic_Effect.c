@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/func_801EEC14.h"
+#include "overlays/bmagic/shared/func_801EEC14.h"
 
 MATCH void func_801EEC80(void) {
     RECT         rect;

@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/func_801EEC20.h"
+#include "overlays/bmagic/shared/func_801EEC20.h"
 
 MATCH void func_801EECA4(void) {
     D_801EFA9C.origin.vx = D_801EC2E0->target.party->pos.x.fixed + 0x14000;

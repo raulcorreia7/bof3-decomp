@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/Effect_DispatchMode.h"
+#include "overlays/bmagic/shared/Effect_DispatchMode.h"
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EECB0(void) {
@@ -73,7 +73,7 @@ MATCH void func_801EEEB4(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_NextStepOnWorkLastTick.h"
+#include "overlays/bmagic/shared/Effect_NextStepOnWorkLastTick.h"
 
 MATCH void func_801EEFF8(void) {
     g_PaletteFades[g_Task->unk_09].offset.r -= 2;
@@ -86,10 +86,10 @@ MATCH void func_801EEFF8(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EF190 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF1D4(void) {
     Magic041Steps handlers;
@@ -165,13 +165,13 @@ MATCH void func_801EF484(void) {
     g_Task->header.step = g_Task->header.step + 1;
 }
 
-#include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpByTwoAndStep.h"
 
-#include "overlays/bmagic/Effect_NextStepOnLastTick.h"
+#include "overlays/bmagic/shared/Effect_NextStepOnLastTick.h"
 
-#include "overlays/bmagic/Effect_TickOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_TickOnTimerZero.h"
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EF670(void) {

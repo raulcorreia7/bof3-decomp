@@ -62,7 +62,7 @@ MATCH void func_801EECE4(void) {
     SND_QueueSelectionSE(0x101);
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 MATCH void func_801EEEE0(void) {
     BMagicOrbit* work;
@@ -81,7 +81,7 @@ MATCH void func_801EEF24(void) {
 }
 
 /* func_801EEFAC */
-#include "overlays/bmagic/Effect_StartOrbit.h"
+#include "overlays/bmagic/shared/Effect_StartOrbit.h"
 
 MATCH void func_801EF16C(void) {
     s32 threshold;
@@ -103,7 +103,7 @@ MATCH void func_801EF16C(void) {
 }
 
 /* func_801EF29C */
-#include "overlays/bmagic/Effect_StepOrbit.h"
+#include "overlays/bmagic/shared/Effect_StepOrbit.h"
 
 MATCH void func_801EF418(void) {
     BMAGIC_ORBIT_BATTLER_AND_CLEAR(func_801EF970);

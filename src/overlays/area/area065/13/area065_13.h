@@ -4,7 +4,7 @@
 /* The world01/area065/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world01.h"
+#include "overlays/area/worlds/world01.h"
 #include "area/spad.h"
 
 extern u8 D_801F4DB4[];
@@ -35,6 +35,6 @@ extern u8            D_801F5268[]; /* the "Manillo" text at +0x10 */
 void func_801F40FC(s16 x, s16 y);
 void Area_Update(void);
 
-#include "overlays/area/world_cloud.h"
+#include "overlays/area/shared/world_cloud.h"
 
 #endif

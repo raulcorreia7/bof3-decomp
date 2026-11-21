@@ -76,10 +76,10 @@ MATCH void func_801EED04(void) {
     g_Task->header.mode += 1;
 }
 
-#include "overlays/bmagic/Effect_StartOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_StartOnZeroTick.h"
 
 /* func_801EF000 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF044(void) {
     BMAGIC_DISPATCH_AND_DRAW(D_801F07C0, func_801EF580);
@@ -134,7 +134,7 @@ MATCH void func_801EF1F0(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_StepOnOwnTickFlag.h"
+#include "overlays/bmagic/shared/Effect_StepOnOwnTickFlag.h"
 
 MATCH void func_801EF388(void) {
     u8 count;
@@ -158,7 +158,7 @@ MATCH void func_801EF388(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 MATCH void func_801EF580(void) {
     POLY_G3* prim;
@@ -210,15 +210,15 @@ MATCH void func_801EF840(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_StartAtTarget.h"
+#include "overlays/bmagic/shared/Effect_StartAtTarget.h"
 
 MATCH void func_801EF940(void) {
     EFFECT_ADVANCE_AT_COUNT(4, 0x11);
 }
 
-#include "overlays/bmagic/Effect_CountUpAndMarkBattler.h"
+#include "overlays/bmagic/shared/Effect_CountUpAndMarkBattler.h"
 
-#include "overlays/bmagic/Effect_CountDownByTwoFinishAtOne.h"
+#include "overlays/bmagic/shared/Effect_CountDownByTwoFinishAtOne.h"
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EFB04(void) {
@@ -250,15 +250,15 @@ MATCH void func_801F0260(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_AppearAtTarget.h"
+#include "overlays/bmagic/shared/Effect_AppearAtTarget.h"
 
 MATCH void func_801F038C(void) {
     EFFECT_ADVANCE_AT_COUNT(2, 0x10);
 }
 
-#include "overlays/bmagic/Effect_StepOnTickFlag.h"
+#include "overlays/bmagic/shared/Effect_StepOnTickFlag.h"
 
-#include "overlays/bmagic/Effect_TickCounter.h"
+#include "overlays/bmagic/shared/Effect_TickCounter.h"
 
 /* Draws the glow fan at the effect point: eight triangles of a radius 64 to 79 picked
  * once, red at the centre with a fifth of it in green and blue, redrawing the blend
@@ -291,4 +291,4 @@ MATCH void func_801F04BC(void) {
 }
 
 /* func_801F0758 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"

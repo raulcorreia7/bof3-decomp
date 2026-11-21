@@ -4,9 +4,9 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
-#include "overlays/bmagic/Effect_CopyActiveBattlerToSlot.h"
+#include "overlays/bmagic/shared/Effect_CopyActiveBattlerToSlot.h"
 
 MATCH void func_801EEC7C(void) {
     PartyMember* work;
@@ -54,7 +54,7 @@ MATCH void func_801EEF44(void) {
 #include "shared/Effect_StartPlaying.h"
 
 /* func_801EEFF8 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF03C(void) {
     Magic111Steps handlers;
@@ -111,11 +111,11 @@ MATCH void func_801EF1D4(void) {
     g_Task->header.step += 1;
 }
 
-#include "overlays/bmagic/Effect_CountUpAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpAndStep.h"
 
-#include "overlays/bmagic/Effect_CountDownAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountDownAndStep.h"
 
-#include "overlays/bmagic/Effect_TickOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_TickOnTimerZero.h"
 
 /* Draws a full-screen semi-transparent glow quad: each corner takes its colour from the sines of two angles that
  * follow the effect counters 0x0C and 0x10, scaled by the effect tick. */
@@ -175,7 +175,7 @@ MATCH void func_801EF870(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpByTwoAndStep.h"
 
 MATCH void Effect_TickOnTimerZero2(void) {
     PartyMember* work;
@@ -183,7 +183,7 @@ MATCH void Effect_TickOnTimerZero2(void) {
     BMAGIC_TICK_ON_TIMER_ZERO(2);
 }
 
-#include "overlays/bmagic/Effect_DrawFullScreenQuad.h"
+#include "overlays/bmagic/shared/Effect_DrawFullScreenQuad.h"
 
 MATCH void func_801EF970(void) {
     POLY_F4* prim;

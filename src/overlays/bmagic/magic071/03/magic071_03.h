@@ -6,7 +6,7 @@
 /* The sparkle kind this image spawns: it picks the count, delay, rise and colours. */
 #define EFFECT_SPARKLE_KIND 1
 
-#include "overlays/bmagic/sparkle.h"
+#include "overlays/bmagic/shared/sparkle.h"
 
 extern void (*D_801F01B0[])(void);
 

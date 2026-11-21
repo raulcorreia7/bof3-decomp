@@ -1,3 +1,3 @@
 #include "boss001_13.h"
 
-#include "overlays/boss/Boss_InstallBattleHooks.h"
+#include "overlays/boss/shared/Boss_InstallBattleHooks.h"

@@ -8,39 +8,39 @@ MATCH void func_801CE404(void) {
     D_801CFEDC[g_Task->header.step]();
 }
 
-#include "overlays/plchar/PlChar_StartTurnGarr.h"
+#include "overlays/plchar/shared/PlChar_StartTurnGarr.h"
 
-#include "overlays/plchar/PlChar_RunStepScriptGarr.h"
+#include "overlays/plchar/shared/PlChar_RunStepScriptGarr.h"
 
 MATCH void func_801CE610(void) {
     SYS_DISPATCH_TASK(D_801CFEE8, 2, g_Task);
 }
 
 /* func_801CE654 */
-#include "overlays/plchar/PlChar_RunGarrFieldTask.h"
+#include "overlays/plchar/shared/PlChar_RunGarrFieldTask.h"
 
 MATCH void PlChar_RunGarrFieldTask(void) {
     PLCHAR_RUN_GARR_FIELD_TASK(func_801CEAE0);
 }
 
-#include "overlays/plchar/PlChar_TickPauseTimer.h"
+#include "overlays/plchar/shared/PlChar_TickPauseTimer.h"
 
 /* func_801CE8AC */
-#include "overlays/plchar/PlChar_FindGarrActorSlot.h"
+#include "overlays/plchar/shared/PlChar_FindGarrActorSlot.h"
 
-#include "overlays/plchar/PlChar_FollowerInReach.h"
+#include "overlays/plchar/shared/PlChar_FollowerInReach.h"
 
-#include "overlays/plchar/PlChar_ProbeFacingFollower.h"
+#include "overlays/plchar/shared/PlChar_ProbeFacingFollower.h"
 
 MATCH void func_801CEBFC(void) {
     SYS_DISPATCH_TASK(D_801CFEF0, 2, g_Task);
 }
 
-#include "overlays/plchar/PlChar_StartTurn.h"
+#include "overlays/plchar/shared/PlChar_StartTurn.h"
 
 /* Runs one route step script: facing 5 requests script 0x41 and facing 3 requests 0x40,
  * the reverse of the script ids in CHAR_RUN_STEP_SCRIPT (plchar.h). */
-#include "overlays/plchar/PlChar_AdvanceFacingTurn.h"
+#include "overlays/plchar/shared/PlChar_AdvanceFacingTurn.h"
 
 MATCH void func_801CEE08(void) {
     SYS_DISPATCH_TASK(D_801CFEFC, 2, g_Task);
@@ -50,34 +50,34 @@ MATCH void func_801CEE4C(void) {
     CHAR_START_FREE_FACING;
 }
 
-#include "overlays/plchar/PlChar_ClaimLinkSlot.h"
+#include "overlays/plchar/shared/PlChar_ClaimLinkSlot.h"
 
-#include "overlays/plchar/PlChar_PollScriptRequest.h"
+#include "overlays/plchar/shared/PlChar_PollScriptRequest.h"
 
 MATCH void func_801CF1F8(void) {
     SYS_DISPATCH_TASK(D_801CFF08, 2, g_Task);
 }
 
-#include "overlays/plchar/PlChar_StartNearestFacingTurn.h"
+#include "overlays/plchar/shared/PlChar_StartNearestFacingTurn.h"
 
-#include "overlays/plchar/PlChar_RunStepScript.h"
+#include "overlays/plchar/shared/PlChar_RunStepScript.h"
 
 MATCH void func_801CF42C(void) {
     SYS_DISPATCH_TASK(D_801CFF14, 2, g_Task);
 }
 
-#include "overlays/plchar/PlChar_WalkStep.h"
+#include "overlays/plchar/shared/PlChar_WalkStep.h"
 
-#include "overlays/plchar/Char_RunFacingProbe.h"
+#include "overlays/plchar/shared/Char_RunFacingProbe.h"
 
 MATCH void func_801CF7BC(void){CHAR_RUN_FACING_PROBE()}
-#include "overlays/plchar/PlChar_AdvanceScript.h"
+#include "overlays/plchar/shared/PlChar_AdvanceScript.h"
 
-#include "overlays/plchar/PlChar_ProbeCellSpawn.h"
+#include "overlays/plchar/shared/PlChar_ProbeCellSpawn.h"
 
-#include "overlays/plchar/PlChar_SpawnActor.h"
+#include "overlays/plchar/shared/PlChar_SpawnActor.h"
 
-#include "overlays/plchar/PlChar_ProbeFacingCell.h"
+#include "overlays/plchar/shared/PlChar_ProbeFacingCell.h"
 
 MATCH void func_801CFE54(void) {
     D_801CFF20[g_Task->unk_2C]();

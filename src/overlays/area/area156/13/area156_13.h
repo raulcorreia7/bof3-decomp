@@ -4,7 +4,7 @@
 /* The world04/area156/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world04.h"
+#include "overlays/area/worlds/world04.h"
 
 extern s32 g_AreaFocusY;
 extern s32 D_80147A6C;

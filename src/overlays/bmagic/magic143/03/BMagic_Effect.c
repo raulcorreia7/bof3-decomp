@@ -28,10 +28,10 @@ MATCH void func_801EEC5C(void) {
     g_Task->header.mode += 1;
 }
 
-#include "overlays/bmagic/Effect_StartOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_StartOnZeroTick.h"
 
 /* func_801EED70 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEDB4(void) {
     SYS_DISPATCH_BYTE((g_BMagicEffectModes + 1), g_Task->header.step);
@@ -92,9 +92,9 @@ MATCH void func_801EF054(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountDownByTwoAndFinish.h"
+#include "overlays/bmagic/shared/Effect_CountDownByTwoAndFinish.h"
 
-#include "overlays/bmagic/Effect_SetActorMatrixRolled.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrixRolled.h"
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EF23C(s32 band_height, u16 radius, u16 jitter_mask) {

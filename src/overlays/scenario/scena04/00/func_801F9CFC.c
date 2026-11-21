@@ -12,7 +12,7 @@ MATCH void func_801F9CFC(void) {
     g_AreaCameraHeight += offset * 4;
 }
 
-#include "overlays/scenario/Scene_DispatchActor.h"
+#include "overlays/scenario/shared/Scene_DispatchActor.h"
 
 MATCH s32 func_801F9D88(void* entity, void* flags) {
     SYS_SetFlag(flags, 0);
@@ -71,9 +71,9 @@ MATCH s8 func_801F9DF4(s32 x, s32 y) {
     return 0;
 }
 
-#include "overlays/scenario/Scene_ShowMessage.h"
+#include "overlays/scenario/shared/Scene_ShowMessage.h"
 
-#include "overlays/scenario/Scene_DispatchByPosition.h"
+#include "overlays/scenario/shared/Scene_DispatchByPosition.h"
 
 MATCH void func_801FA074(void) {
     Game_SetScriptActive();
@@ -95,7 +95,7 @@ MATCH void func_801FA0B4(void) {
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
 }
 
-#include "overlays/scenario/Scene_SetPartyRyuYoungNinaYoungMomo.h"
+#include "overlays/scenario/shared/Scene_SetPartyRyuYoungNinaYoungMomo.h"
 
 MATCH void func_801FA178(void) {
 }

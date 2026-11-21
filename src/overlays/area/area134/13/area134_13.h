@@ -5,7 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "common/vector.h"
-#include "overlays/area/world03.h"
+#include "overlays/area/worlds/world03.h"
 #include "area/spad.h"
 
 /* The row count this overlay clears. */

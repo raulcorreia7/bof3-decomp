@@ -6,7 +6,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/scenario/Scene_DispatchEntity.h"
+#include "overlays/scenario/shared/Scene_DispatchEntity.h"
 
 MATCH void func_801F6E10(void) {
     SYS_DISPATCH_TASK(D_801FDD3C, 2, g_Task);
@@ -453,7 +453,7 @@ MATCH FallingSpark* func_801F8394(void) {
     return NULL;
 }
 
-#include "overlays/scenario/Scene_InitSpark.h"
+#include "overlays/scenario/shared/Scene_InitSpark.h"
 
 /* Starts a spark row at a random point of a sphere around the actor, raised 512 units. */
 MATCH void func_801F8478(FallingSpark* spark) {
@@ -513,7 +513,7 @@ MATCH void func_801F86BC(FallingSpark* spark) {
     }
 }
 
-#include "overlays/scenario/Actor_Wait.h"
+#include "overlays/scenario/shared/Actor_Wait.h"
 
 MATCH void func_801F8764(FallingSpark* spark) {
     u8  life;

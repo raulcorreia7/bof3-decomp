@@ -43,10 +43,10 @@ MATCH void func_801EEC5C(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_StartOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_StartOnZeroTick.h"
 
 /* func_801EEEA4 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEEE8(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
@@ -142,7 +142,7 @@ MATCH void func_801EF2B0(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_TickDownAndClear.h"
+#include "overlays/bmagic/shared/Effect_TickDownAndClear.h"
 
 MATCH void func_801EF40C(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;

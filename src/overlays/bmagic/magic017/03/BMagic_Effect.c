@@ -4,9 +4,9 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
-#include "overlays/bmagic/Effect_CopyActiveBattlerToSlot.h"
+#include "overlays/bmagic/shared/Effect_CopyActiveBattlerToSlot.h"
 
 MATCH void func_801EEC98(void) {
     PartyMember* work;
@@ -40,7 +40,7 @@ MATCH void func_801EEC98(void) {
     SND_QueueSelectionSE(0x100);
 }
 
-#include "overlays/bmagic/Effect_ReleaseActiveBattlerOnTickerZero.h"
+#include "overlays/bmagic/shared/Effect_ReleaseActiveBattlerOnTickerZero.h"
 
 MATCH void func_801EEFD8(void) {
     u16* flags;
@@ -51,7 +51,7 @@ MATCH void func_801EEFD8(void) {
 }
 
 /* func_801EF014 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF058(void) {
     Magic017Steps handlers;

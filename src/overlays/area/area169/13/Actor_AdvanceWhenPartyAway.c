@@ -1,3 +1,3 @@
 #include "area169_13.h"
 
-#include "overlays/area/Actor_AdvanceWhenPartyAway.h"
+#include "overlays/area/shared/Actor_AdvanceWhenPartyAway.h"

@@ -4,7 +4,7 @@
 /* The world04/area199/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world04.h"
+#include "overlays/area/worlds/world04.h"
 #include "area/spad.h"
 
 /* The shade fan's triangle count: one triangle per 64-unit angle step. */

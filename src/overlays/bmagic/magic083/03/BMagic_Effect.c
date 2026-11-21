@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/Effect_RunSlotsWithSetup.h"
+#include "overlays/bmagic/shared/Effect_RunSlotsWithSetup.h"
 
 /* Clears the effect slot table, then spawns one effect on each selectable battler of the targeted side at its position, and copies the first 32 colours of palette row 26 back from the arena. */
 MATCH void func_801EED04(void) {
@@ -68,7 +68,7 @@ MATCH void func_801EED04(void) {
     SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
 }
 
-#include "overlays/bmagic/Effect_StartOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_StartOnZeroTick.h"
 
 MATCH s32 func_801EF0CC(void) {
     if (g_Battle.action_type != BATTLE_ACTION_ABILITY && g_Battle.action_id == 0x136) {
@@ -78,7 +78,7 @@ MATCH s32 func_801EF0CC(void) {
 }
 
 /* func_801EF108 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF14C(void) {
     SYS_DISPATCH_BYTE(D_801F0EF0, g_Task->header.step);
@@ -142,7 +142,7 @@ MATCH void func_801EF2F8(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_StepOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_StepOnZeroTick.h"
 
 MATCH void func_801EF55C(void) {
     PartyMember* battler;
@@ -169,9 +169,9 @@ MATCH void func_801EF55C(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_TickOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_TickOnZeroTick.h"
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 MATCH void func_801EF844(void) {
     POLY_G3* poly;
@@ -259,7 +259,7 @@ MATCH void func_801EFE98(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 7), 2, g_Task);
 }
 
-#include "overlays/bmagic/Effect_LaunchFromRing.h"
+#include "overlays/bmagic/shared/Effect_LaunchFromRing.h"
 
 MATCH void func_801F0010(void) {
     s32          timer;
@@ -487,7 +487,7 @@ MATCH void BMagic_SetXFixed(s32 radius) {
 }
 
 /* func_801F0DC0 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 /* func_801F0E24 */
-#include "overlays/bmagic/Actor_Clear.h"
+#include "overlays/bmagic/shared/Actor_Clear.h"

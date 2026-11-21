@@ -4,9 +4,9 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/func_801EEC24.h"
+#include "overlays/bmagic/shared/func_801EEC24.h"
 
-#include "overlays/bmagic/Effect_CopyActiveBattlerToSlot.h"
+#include "overlays/bmagic/shared/Effect_CopyActiveBattlerToSlot.h"
 
 MATCH void func_801EEC90(void) {
     PartyMember* work;
@@ -75,10 +75,10 @@ MATCH void func_801EEFE0(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EF0C0 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF104(void) {
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
@@ -166,7 +166,7 @@ MATCH void func_801EF4B4(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetDuration.h"
+#include "overlays/bmagic/shared/Effect_SetDuration.h"
 
 MATCH void func_801EF58C(void) {
     u8 timer;

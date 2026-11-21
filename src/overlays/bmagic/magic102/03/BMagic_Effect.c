@@ -6,7 +6,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/func_801EEC14.h"
+#include "overlays/bmagic/shared/func_801EEC14.h"
 
 /* The effect's start: the caster's facing picks the target cell, every battler,
  * field actor and actor slot stores its height over the ground, the parts of the

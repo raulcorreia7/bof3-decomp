@@ -4,7 +4,7 @@
 /* The world01/area053/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world01.h"
+#include "overlays/area/worlds/world01.h"
 
 #define AREA_SELECTION_FIRST  D_801F363C
 #define AREA_SELECTION_SECOND D_801F363D

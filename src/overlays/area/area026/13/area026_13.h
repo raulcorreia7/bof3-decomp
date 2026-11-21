@@ -5,7 +5,7 @@
  * record, its handler table and prototypes. Only this image includes the
  * file. */
 
-#include "overlays/area/world00.h"
+#include "overlays/area/worlds/world00.h"
 
 extern u8 D_801F341C[6336];
 extern u8 D_801F4CE4;

@@ -17,7 +17,7 @@ MATCH void func_801FD35C(void) {
     }
 }
 
-#include "overlays/scenario/Scene_DispatchActor.h"
+#include "overlays/scenario/shared/Scene_DispatchActor.h"
 
 MATCH void func_801FD3FC(Actor* actor) {
     SYS_SetFlag(g_SceneFlags, 10);
@@ -161,7 +161,7 @@ MATCH bool func_801FDA34(void) {
     return 0;
 }
 
-#include "overlays/scenario/Scene_DispatchByPosition.h"
+#include "overlays/scenario/shared/Scene_DispatchByPosition.h"
 
 MATCH void func_801FDAFC(void) {
     Game_SetScriptActive();
@@ -169,7 +169,7 @@ MATCH void func_801FDAFC(void) {
     g_ScenarioState.step_05  = 0xA;
 }
 
-#include "overlays/scenario/Scene_SetPartyRyuYoungNinaYoungMomo.h"
+#include "overlays/scenario/shared/Scene_SetPartyRyuYoungNinaYoungMomo.h"
 
 MATCH void Scene_SetPartyRyuYoungNinaYoungGarr(void) {
     SCENE_SET_PARTY_NO_RESTAGE(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR);

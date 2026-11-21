@@ -137,7 +137,7 @@ MATCH void func_801EF118(void) {
 }
 
 /* func_801EF1E0 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF224(void) {
     SYS_DISPATCH_BYTE(D_801F0670, g_Task->header.step);
@@ -310,10 +310,10 @@ MATCH void func_801F01A4(void) {
 }
 
 /* func_801F0490 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 /* func_801F04F4 */
-#include "overlays/bmagic/Actor_Clear.h"
+#include "overlays/bmagic/shared/Actor_Clear.h"
 
 /* Sets the effect height to the mean z of the unblocked battlers on the side opposite the active battler. */
 MATCH void func_801F0544(void) {

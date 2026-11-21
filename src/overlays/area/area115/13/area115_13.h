@@ -6,7 +6,7 @@
 
 #include "common/vector.h"
 #include "sys/actor.h"
-#include "overlays/area/world03.h"
+#include "overlays/area/worlds/world03.h"
 #include "area/spad.h"
 #include <rand.h>
 
@@ -34,6 +34,6 @@ void Area_Update(void);
 
 /* The value of area update step in the shared Area_Update body. */
 
-#include "overlays/area/world_cloud.h"
+#include "overlays/area/shared/world_cloud.h"
 
 #endif

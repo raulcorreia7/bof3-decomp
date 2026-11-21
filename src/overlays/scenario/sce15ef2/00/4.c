@@ -64,7 +64,7 @@ MATCH void func_801D0DA4(void) {
     SYS_DISPATCH_TASK(D_801D1B2C, 1, g_Task);
 }
 
-#include "overlays/scenario/Scene_EndScan.h"
+#include "overlays/scenario/shared/Scene_EndScan.h"
 
 MATCH void func_801D0E30(void) {
     u8 timer;
@@ -204,13 +204,13 @@ MATCH void func_801D1218(WorldPos* pos, s16 y, s32 mode) {
     } while ((i & BYTE_MASK) < 32U);
 }
 
-#include "overlays/scenario/Scene_DrawScanBar.h"
+#include "overlays/scenario/shared/Scene_DrawScanBar.h"
 
-#include "overlays/scenario/Scene_ClearScanBars.h"
+#include "overlays/scenario/shared/Scene_ClearScanBars.h"
 
-#include "overlays/scenario/Scene_ClaimScanBar.h"
+#include "overlays/scenario/shared/Scene_ClaimScanBar.h"
 
-#include "overlays/scenario/Scene_UpdateScanBars.h"
+#include "overlays/scenario/shared/Scene_UpdateScanBars.h"
 
 MATCH void func_801D17A0(s16 half_width, s16 half_height, u8 shade) {
     POLY_G3* prim;
@@ -251,4 +251,4 @@ MATCH void func_801D17A0(s16 half_width, s16 half_height, u8 shade) {
     } while (i < 0x20);
 }
 
-#include "overlays/scenario/Scene_DrawRedGradient.h"
+#include "overlays/scenario/shared/Scene_DrawRedGradient.h"

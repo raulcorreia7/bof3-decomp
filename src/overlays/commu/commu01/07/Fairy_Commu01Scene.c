@@ -1,5 +1,5 @@
 #include "commu01_07.h"
-#include "overlays/commu/Commu_CursorTriangle.h"
+#include "overlays/commu/shared/Commu_CursorTriangle.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -549,7 +549,7 @@ MATCH void func_801D2110(void) {
     }
 }
 
-#include "overlays/commu/Commu_CellGrid.h"
+#include "overlays/commu/shared/Commu_CellGrid.h"
 
 MATCH void func_801D273C(s16 x, s16 y) {
     s32 i;

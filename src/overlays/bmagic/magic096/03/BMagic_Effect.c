@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
 MATCH void func_801EEC84(void) {
     u16* dst;
@@ -46,10 +46,10 @@ MATCH void func_801EEDD8(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEEA0 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEEE4(void) {
     Magic096Steps handlers = D_801EEC10;
@@ -140,11 +140,11 @@ MATCH void func_801EF2CC(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountDownTickerAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountDownTickerAndStep.h"
 
-#include "overlays/bmagic/Effect_CountDownTimerStep.h"
+#include "overlays/bmagic/shared/Effect_CountDownTimerStep.h"
 
-#include "overlays/bmagic/Effect_CountDownAndFinish.h"
+#include "overlays/bmagic/shared/Effect_CountDownAndFinish.h"
 
 MATCH void func_801EF43C(void) {
     SVECTOR pos;
@@ -219,7 +219,7 @@ MATCH void func_801EF4FC(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 MATCH void func_801EFB3C(void) {
     POLY_G3* prim;

@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 /* func_801EFF44 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EFF88(void) {
     SYS_DISPATCH_BYTE(D_801F0BBC, g_Task->header.step);
@@ -14,7 +14,7 @@ MATCH void func_801EFF88(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_ClearTimerNextStep.h"
+#include "overlays/bmagic/shared/Effect_ClearTimerNextStep.h"
 
 MATCH void func_801F0030(void) {
     u8 count;
@@ -36,7 +36,7 @@ MATCH void func_801F0090(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_TickOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_TickOnTimerZero.h"
 
 /* The shade the screen tile fades to. */
 #define SCREEN_SHADE g_ScratchPad.cells.words[1]

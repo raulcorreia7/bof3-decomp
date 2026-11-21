@@ -4,7 +4,7 @@
 /* The world01/area043/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 #include "game/spawn.h"
-#include "overlays/area/world01.h"
+#include "overlays/area/worlds/world01.h"
 #include "area/spad.h"
 
 /* func_8019651C */

@@ -1,3 +1,3 @@
 #include "area065_13.h"
 
-#include "overlays/area/Actor_SetScreenOrigin.h"
+#include "overlays/area/shared/Actor_SetScreenOrigin.h"

@@ -1,3 +1,3 @@
 #include "area115_13.h"
 
-#include "overlays/area/Area_NarrowActorOrClear.h"
+#include "overlays/area/shared/Area_NarrowActorOrClear.h"

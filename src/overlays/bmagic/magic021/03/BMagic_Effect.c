@@ -63,12 +63,12 @@ MATCH void func_801EED30(void) {
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
 }
 
-#include "overlays/bmagic/Effect_ReleaseActiveBattlerOnTickerZero.h"
+#include "overlays/bmagic/shared/Effect_ReleaseActiveBattlerOnTickerZero.h"
 
 #include "shared/Effect_StartPlaying.h"
 
 /* func_801EEFDC */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF020(void) {
     BMagicEffectSteps handlers;
@@ -80,7 +80,7 @@ MATCH void func_801EF020(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetDuration.h"
+#include "overlays/bmagic/shared/Effect_SetDuration.h"
 
 MATCH void func_801EF104(void) {
     PartyMember* work;
@@ -134,7 +134,7 @@ MATCH void func_801EF328(void) {
     Effect_Reset();
 }
 
-#include "overlays/bmagic/Effect_DrawScreenFade.h"
+#include "overlays/bmagic/shared/Effect_DrawScreenFade.h"
 
 MATCH void func_801EF534(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 1, g_Task);
@@ -179,7 +179,7 @@ MATCH void func_801EF600(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountUpByTwoAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpByTwoAndStep.h"
 
 MATCH void func_801EF7A0(void) {
     PartyMember* work;
@@ -276,7 +276,7 @@ MATCH void func_801EFA48(void) {
 }
 
 /* func_801EFD4C */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 /* func_801EFDB0 */
-#include "overlays/bmagic/Actor_Clear.h"
+#include "overlays/bmagic/shared/Actor_Clear.h"

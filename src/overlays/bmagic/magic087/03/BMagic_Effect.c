@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/Effect_RunSlotsWithSetup.h"
+#include "overlays/bmagic/shared/Effect_RunSlotsWithSetup.h"
 
 /* Clears the effect slot table and spawns one effect 0x27 at each selectable battler, the enemies
  * (raised by the enemy kind's height) when the target selector holds 0x40 and the party otherwise,
@@ -54,10 +54,10 @@ MATCH void func_801EED04(void) {
     g_Task->header.mode += 1;
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EF0A8 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF0EC(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 2, g_Task);
@@ -403,4 +403,4 @@ MATCH void func_801F0014(void) {
 }
 
 /* func_801F04A4 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"

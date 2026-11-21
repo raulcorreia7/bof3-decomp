@@ -720,7 +720,7 @@ MATCH s32 func_801F83A8(void) {
     return 0;
 }
 
-#include "overlays/scenario/GFX_CopyPaletteCapped.h"
+#include "overlays/scenario/shared/GFX_CopyPaletteCapped.h"
 
 MATCH void func_801F845C(void) {
     s32 i;
@@ -733,7 +733,7 @@ MATCH void func_801F845C(void) {
     SCENA16_D_80145988 = (SCENA16_D_80145988 + 1u);
 }
 
-#include "overlays/scenario/Scene_ClearParty.h"
+#include "overlays/scenario/shared/Scene_ClearParty.h"
 
 MATCH void func_801F8530(void) {
 }

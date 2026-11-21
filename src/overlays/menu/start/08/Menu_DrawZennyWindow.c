@@ -1,3 +1,3 @@
 #include "start_08.h"
 
-#include "overlays/menu/Menu_DrawZennyWindow.h"
+#include "overlays/menu/shared/Menu_DrawZennyWindow.h"

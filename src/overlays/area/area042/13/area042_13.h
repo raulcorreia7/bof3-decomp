@@ -4,7 +4,7 @@
 /* The world01/area042/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world01.h"
+#include "overlays/area/worlds/world01.h"
 #include "area/spad.h"
 
 void func_801F37A8(s32 depth, s32 color);

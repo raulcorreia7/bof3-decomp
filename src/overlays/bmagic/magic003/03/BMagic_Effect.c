@@ -352,9 +352,9 @@ MATCH void func_801EF9FC(void) {
 }
 
 /* func_801EFA9C */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
-#include "overlays/bmagic/BMagic_RunEffectStep.h"
+#include "overlays/bmagic/shared/BMagic_RunEffectStep.h"
 
 MATCH void func_801EFAE0(void) {
     BMAGIC_RUN_EFFECT_STEP(func_801EFB8C, func_801EFCF8);
@@ -404,7 +404,7 @@ MATCH void func_801EFCF8(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CopyActiveBattlerToSlot.h"
+#include "overlays/bmagic/shared/Effect_CopyActiveBattlerToSlot.h"
 
 MATCH void func_801EFD4C(void) {
     BattleEffect* image;
@@ -583,7 +583,7 @@ MATCH void func_801F07B0(s32 index) {
 }
 
 /* func_801F09C4 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 /* func_801F0A28 */
-#include "overlays/bmagic/Actor_Clear.h"
+#include "overlays/bmagic/shared/Actor_Clear.h"

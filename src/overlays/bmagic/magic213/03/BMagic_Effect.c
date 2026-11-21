@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/Effect_RunSlotsWithSetup.h"
+#include "overlays/bmagic/shared/Effect_RunSlotsWithSetup.h"
 
 MATCH void func_801EED04(void) {
     PartyMember* work;
@@ -51,10 +51,10 @@ MATCH void func_801EED04(void) {
     SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
 }
 
-#include "overlays/bmagic/Effect_StartOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_StartOnZeroTick.h"
 
 /* func_801EEFC0 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF004(void) {
     SYS_DISPATCH_TASK(D_801EF8A4, 2, g_Task);
@@ -119,7 +119,7 @@ MATCH void func_801EF348(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_TickOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_TickOnZeroTick.h"
 
 MATCH void func_801EF4E0(void) {
     SYS_DISPATCH_TASK(D_801EF8B4, 1, g_Task);
@@ -177,7 +177,7 @@ MATCH void func_801EF7A0(void) {
 }
 
 /* func_801EF7EC */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 /* func_801EF850 */
-#include "overlays/bmagic/Actor_Clear.h"
+#include "overlays/bmagic/shared/Actor_Clear.h"

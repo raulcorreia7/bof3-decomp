@@ -1,3 +1,3 @@
 #include "area085_13.h"
 
-#include "overlays/area/Actor_FreePalette.h"
+#include "overlays/area/shared/Actor_FreePalette.h"

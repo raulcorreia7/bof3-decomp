@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/Effect_DispatchMode.h"
+#include "overlays/bmagic/shared/Effect_DispatchMode.h"
 
 /* Copies the selected battler's pose into the effect, spawns one battle effect
  * at that position and eight more in a four-column grid, and queues the
@@ -50,11 +50,11 @@ MATCH void func_801EEC94(void) {
 }
 
 /* func_801EEE88 */
-#include "overlays/bmagic/Effect_PreparePalette.h"
+#include "overlays/bmagic/shared/Effect_PreparePalette.h"
 
-#include "overlays/bmagic/Effect_BrightenPalette.h"
+#include "overlays/bmagic/shared/Effect_BrightenPalette.h"
 
-#include "overlays/bmagic/Effect_Pause.h"
+#include "overlays/bmagic/shared/Effect_Pause.h"
 
 /* Darkens the palette fade row the effect timer indexes and, when its red reaches zero, releases the selected
  * battler's fades and advances the mode. */
@@ -72,12 +72,12 @@ MATCH void func_801EF080(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 /* func_801EF2D8 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF31C(void) {
     SYS_DISPATCH_BYTE(D_801F08B8, g_Task->header.step);
@@ -90,11 +90,11 @@ MATCH void func_801EF31C(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountUpAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpAndStep.h"
 
-#include "overlays/bmagic/Effect_StepWhileTickUnderTwo.h"
+#include "overlays/bmagic/shared/Effect_StepWhileTickUnderTwo.h"
 
-#include "overlays/bmagic/Effect_TickOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_TickOnTimerZero.h"
 
 MATCH void func_801EF4B0(void) {
     POLY_G3* poly;

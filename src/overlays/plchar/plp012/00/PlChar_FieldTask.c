@@ -8,61 +8,61 @@ MATCH void func_801CE404(void) {
     D_801CFD80[g_Task->header.step]();
 }
 
-#include "overlays/plchar/func_801CE448.h"
+#include "overlays/plchar/shared/func_801CE448.h"
 
-#include "overlays/plchar/func_801CE628.h"
+#include "overlays/plchar/shared/func_801CE628.h"
 
 MATCH void func_801CE72C(void) {
     SYS_DISPATCH_TASK(D_801CFD8C, 2, g_Task);
 }
 
-#include "overlays/plchar/func_801CE770.h"
+#include "overlays/plchar/shared/func_801CE770.h"
 
-#include "overlays/plchar/Char_RunFacingProbe.h"
+#include "overlays/plchar/shared/Char_RunFacingProbe.h"
 
 MATCH void func_801CEA94(void){CHAR_RUN_FACING_PROBE()}
-#include "overlays/plchar/PlChar_AdvanceScript.h"
+#include "overlays/plchar/shared/PlChar_AdvanceScript.h"
 
-#include "overlays/plchar/PlChar_ProbeCellSpawn.h"
+#include "overlays/plchar/shared/PlChar_ProbeCellSpawn.h"
 
-#include "overlays/plchar/PlChar_SpawnActor.h"
+#include "overlays/plchar/shared/PlChar_SpawnActor.h"
 
-#include "overlays/plchar/PlChar_ProbeFacingCell.h"
+#include "overlays/plchar/shared/PlChar_ProbeFacingCell.h"
 
 MATCH void func_801CF12C(void) {
     SYS_DISPATCH_TASK(D_801CFD98, 2, g_Task);
 }
 
-#include "overlays/plchar/PlChar_StartTurn.h"
+#include "overlays/plchar/shared/PlChar_StartTurn.h"
 
-#include "overlays/plchar/PlChar_RunStepScript.h"
+#include "overlays/plchar/shared/PlChar_RunStepScript.h"
 
 MATCH void func_801CF338(void) {
     SYS_DISPATCH_TASK(D_801CFDA4, 2, g_Task);
 }
 
-#include "overlays/plchar/PlChar_ClaimHelperSlotStep.h"
+#include "overlays/plchar/shared/PlChar_ClaimHelperSlotStep.h"
 
 MATCH void func_801CF37C(void) {
     PlChar_ClaimHelperSlotStep();
 }
 
-#include "overlays/plchar/PlChar_ClearModeIfSlotFree.h"
+#include "overlays/plchar/shared/PlChar_ClearModeIfSlotFree.h"
 
 MATCH void func_801CF500(void) {
     SYS_DISPATCH_TASK(D_801CFDAC, 2, g_Task);
 }
 
-#include "overlays/plchar/PlChar_StartTurnGarr.h"
+#include "overlays/plchar/shared/PlChar_StartTurnGarr.h"
 
-#include "overlays/plchar/PlChar_RunStepScriptGarr.h"
+#include "overlays/plchar/shared/PlChar_RunStepScriptGarr.h"
 
 MATCH void func_801CF70C(void) {
     SYS_DISPATCH_TASK(D_801CFDB8, 2, g_Task);
 }
 
 /* func_801CF750 */
-#include "overlays/plchar/PlChar_RunGarrFieldTask.h"
+#include "overlays/plchar/shared/PlChar_RunGarrFieldTask.h"
 
 MATCH void PlChar_RunGarrFieldTask(void) {
     PLCHAR_RUN_GARR_FIELD_TASK(func_801CFBDC);
@@ -80,12 +80,12 @@ MATCH void func_801CF938(void) {
 }
 
 /* func_801CF9A8 */
-#include "overlays/plchar/PlChar_FindGarrActorSlot.h"
+#include "overlays/plchar/shared/PlChar_FindGarrActorSlot.h"
 
 /* func_801CFB0C */
-#include "overlays/plchar/PlChar_FollowerInReach.h"
+#include "overlays/plchar/shared/PlChar_FollowerInReach.h"
 
-#include "overlays/plchar/PlChar_ProbeFacingFollower.h"
+#include "overlays/plchar/shared/PlChar_ProbeFacingFollower.h"
 
 MATCH void func_801CFCF8(void) {
     D_801CFDC0[g_Task->unk_2C]();

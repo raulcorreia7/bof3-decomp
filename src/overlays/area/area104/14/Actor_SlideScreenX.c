@@ -1,3 +1,3 @@
 #include "area104_14.h"
 
-#include "overlays/area/Actor_SlideScreenX.h"
+#include "overlays/area/shared/Actor_SlideScreenX.h"

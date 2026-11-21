@@ -1,3 +1,3 @@
 #include "area176_13.h"
 
-#include "overlays/area/FairyCasino_AnswerPlayGames.h"
+#include "overlays/area/shared/FairyCasino_AnswerPlayGames.h"

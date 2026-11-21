@@ -53,10 +53,10 @@ MATCH void func_801EECE4(void) {
     g_GfxPalettePending = 1;
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEED0 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF14(void) {
     SYS_DISPATCH_BYTE(D_801F1268, g_Task->header.step);
@@ -69,7 +69,7 @@ MATCH void func_801EEF14(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CopyBattlerCoords.h"
+#include "overlays/bmagic/shared/Effect_CopyBattlerCoords.h"
 
 MATCH void func_801EF00C(void) {
     g_Task->unk_09 += 2;
@@ -79,11 +79,11 @@ MATCH void func_801EF00C(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_StepWhileTickUnderTwo.h"
+#include "overlays/bmagic/shared/Effect_StepWhileTickUnderTwo.h"
 
-#include "overlays/bmagic/Effect_TickOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_TickOnTimerZero.h"
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 /* The glow ring scratch: the inner and outer radius and the inner-edge colour, then the quad corners (g_ScratchPadVectors). */
 #define GLOW_RING_INNER g_ScratchPad.cells.halves[0]
@@ -230,7 +230,7 @@ MATCH void func_801EFB74(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountUpTimersAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpTimersAndStep.h"
 
 MATCH void func_801EFC94(void) {
     u8 timer;
@@ -380,7 +380,7 @@ MATCH void func_801F0494(void) {
     g_Task->header.step += 1;
 }
 
-#include "overlays/bmagic/Effect_TickOnTimerNegative.h"
+#include "overlays/bmagic/shared/Effect_TickOnTimerNegative.h"
 
 MATCH void func_801F06AC(void) {
     POLY_G3* prim;
@@ -542,7 +542,7 @@ MATCH void BMagic_DrawMote(void) {
 }
 
 /* func_801F1110 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 MATCH void func_801F116C(void) {
     D_801F22BC->header.flags = 0;

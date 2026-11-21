@@ -88,7 +88,7 @@ MATCH void func_801FDF84(void) {
     Char_RestoreAP(CHAR_INDEX_REI, 0, 0);
 }
 
-#include "overlays/scenario/Scene_DispatchActor.h"
+#include "overlays/scenario/shared/Scene_DispatchActor.h"
 
 MATCH void func_801FE058(void) {
     g_ScriptVars[0] = 0;
@@ -187,7 +187,7 @@ MATCH void func_801FE760(void) {
     Party_LoadPalettes();
 }
 
-#include "overlays/scenario/Scene_SetPartyRyuAdultGarrNinaAdult.h"
+#include "overlays/scenario/shared/Scene_SetPartyRyuAdultGarrNinaAdult.h"
 
 MATCH void func_801FE800(void) {
     g_Game.party_size = 0;

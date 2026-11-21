@@ -49,10 +49,10 @@ MATCH void func_801EECFC(void) {
     g_Task->header.mode += 1;
 }
 
-#include "overlays/bmagic/Effect_PlayOnIdleTick.h"
+#include "overlays/bmagic/shared/Effect_PlayOnIdleTick.h"
 
 /* func_801EEEE4 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF28(void) {
     s32 tpage;
@@ -94,7 +94,7 @@ MATCH void func_801EF08C(void) {
     g_Task->unk_09 = count + 1;
 }
 
-#include "overlays/bmagic/Effect_CountDownAndStep.h"
+#include "overlays/bmagic/shared/Effect_CountDownAndStep.h"
 
 MATCH void func_801EF12C(void) {
     s32 angle;
@@ -331,4 +331,4 @@ NON_MATCHING void func_801F02FC(void) {
 INCLUDE_ASM(func_801F02FC);
 #endif
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"

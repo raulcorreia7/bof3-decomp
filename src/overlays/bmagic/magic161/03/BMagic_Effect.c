@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
 MATCH void func_801EEC84(void) {
     BattleEffect* slot;
@@ -68,7 +68,7 @@ MATCH void func_801EEF80(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetDuration.h"
+#include "overlays/bmagic/shared/Effect_SetDuration.h"
 
 MATCH void func_801EF06C(void) {
     u8 count;
@@ -97,7 +97,7 @@ MATCH void func_801EF0E8(void) {
     Actor_StepAnimOnce();
 }
 
-#include "overlays/bmagic/Effect_LowerTickerStepOnReady.h"
+#include "overlays/bmagic/shared/Effect_LowerTickerStepOnReady.h"
 
 MATCH void func_801EF1BC(void) {
     Effect_Reset();

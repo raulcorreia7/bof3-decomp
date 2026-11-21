@@ -60,7 +60,7 @@ MATCH void func_801EEE68(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountDownTimerNextStep.h"
+#include "overlays/bmagic/shared/Effect_CountDownTimerNextStep.h"
 
 MATCH void func_801EEF20(void) {
     u8 timer;
@@ -72,9 +72,9 @@ MATCH void func_801EEF20(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 MATCH void func_801EF07C(void) {
     POLY_G3* prim;
@@ -111,7 +111,7 @@ MATCH void func_801EF07C(void) {
 }
 
 /* func_801EF310 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF354(void) {
     BMAGIC_DISPATCH_AND_DRAW_IN_OWN_MATRIX(D_801EFCE8, func_801EF78C, func_801EF88C);

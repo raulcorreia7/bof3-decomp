@@ -84,10 +84,10 @@ MATCH void func_801EEF54(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EF024 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF068(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
@@ -214,7 +214,7 @@ MATCH void func_801EF5DC(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetActiveActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActiveActorMatrix.h"
 
 MATCH void func_801EF71C(void) {
     POLY_G3* prim;
@@ -243,7 +243,7 @@ MATCH void func_801EF71C(void) {
 }
 
 /* func_801EF934 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 /* func_801EF998 */
-#include "overlays/bmagic/Actor_Clear.h"
+#include "overlays/bmagic/shared/Actor_Clear.h"

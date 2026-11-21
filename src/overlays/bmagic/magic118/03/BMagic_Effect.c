@@ -66,11 +66,11 @@ MATCH void BMagic_ApplyBurnDamage(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_NextStepOnWorkLastTick.h"
+#include "overlays/bmagic/shared/Effect_NextStepOnWorkLastTick.h"
 
-#include "overlays/bmagic/Effect_CountDownTimerNextStep.h"
+#include "overlays/bmagic/shared/Effect_CountDownTimerNextStep.h"
 
-#include "overlays/bmagic/Effect_MarkDamagedOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
 /* func_801EEF6C */
 MATCH void BMagic_UpdateBurnSprites(void) {
@@ -190,7 +190,7 @@ MATCH void BMagic_DrawBurnSprites(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 /* The dark ring scratch: the inner and outer radius and the inner-edge shade, then the quad corners
  * (g_ScratchPadVectors). */

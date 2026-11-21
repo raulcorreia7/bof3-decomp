@@ -4,9 +4,9 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/func_801EEC28.h"
+#include "overlays/bmagic/shared/func_801EEC28.h"
 
-#include "overlays/bmagic/Effect_CopyActiveBattlerToSlot.h"
+#include "overlays/bmagic/shared/Effect_CopyActiveBattlerToSlot.h"
 
 MATCH void func_801EEC98(void) {
     PartyMember* battler;
@@ -189,10 +189,10 @@ MATCH void func_801EF490(void) {
 }
 
 /* func_801EF6E0 */
-#include "overlays/bmagic/Effect_DrawScreenFade.h"
+#include "overlays/bmagic/shared/Effect_DrawScreenFade.h"
 
 /* func_801EF8CC */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF910(void) {
     Magic004TaskSteps handlers;
@@ -204,7 +204,7 @@ MATCH void func_801EF910(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_SetDuration.h"
+#include "overlays/bmagic/shared/Effect_SetDuration.h"
 
 MATCH void func_801EF9E8(void) {
     u8 counter;
@@ -222,16 +222,16 @@ MATCH void func_801EF9E8(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_LowerTickerStepOnReady.h"
+#include "overlays/bmagic/shared/Effect_LowerTickerStepOnReady.h"
 
 MATCH void func_801EFAD4(void) {
     Effect_Reset();
 }
 
 /* func_801EFAF4 */
-#include "overlays/bmagic/BMagic_RunStep.h"
+#include "overlays/bmagic/shared/BMagic_RunStep.h"
 
-#include "overlays/bmagic/Effect_StepWhileTickUnderTwo.h"
+#include "overlays/bmagic/shared/Effect_StepWhileTickUnderTwo.h"
 
 MATCH void func_801EFBEC(void) {
     PartyMember* work;

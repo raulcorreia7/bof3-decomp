@@ -1,3 +1,3 @@
 #include "area045_13.h"
 
-#include "overlays/area/Area_DrawHudValue.h"
+#include "overlays/area/shared/Area_DrawHudValue.h"

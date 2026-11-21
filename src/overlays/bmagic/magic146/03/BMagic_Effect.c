@@ -75,12 +75,12 @@ MATCH void func_801EED18(void) {
     g_GfxPalettePending                                                  = 1;
 }
 
-#include "overlays/bmagic/Effect_NextStepOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_NextStepOnZeroTick.h"
 
 #include "shared/Effect_PlayOnce.h"
 
 /* func_801EF04C */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF090(void) {
     SYS_DISPATCH_TASK(D_801EF9B8, 2, g_Task);
@@ -120,7 +120,7 @@ MATCH void func_801EF0D4(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_EndOnZeroTick.h"
+#include "overlays/bmagic/shared/Effect_EndOnZeroTick.h"
 
 MATCH void func_801EF2FC(void) {
     SYS_DISPATCH_TASK(D_801EF9C0, 1, g_Task);
@@ -155,7 +155,7 @@ MATCH void func_801EF3B8(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_CountUpTimersByTwoNextStep.h"
+#include "overlays/bmagic/shared/Effect_CountUpTimersByTwoNextStep.h"
 
 MATCH void func_801EF58C(void) {
     PartyMember* work;
@@ -174,10 +174,10 @@ MATCH void func_801EF58C(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_DrawTexturedQuad.h"
+#include "overlays/bmagic/shared/Effect_DrawTexturedQuad.h"
 
 /* func_801EF900 */
-#include "overlays/bmagic/BMagic_AllocEffect.h"
+#include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
 /* func_801EF964 */
-#include "overlays/bmagic/Actor_Clear.h"
+#include "overlays/bmagic/shared/Actor_Clear.h"

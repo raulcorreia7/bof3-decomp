@@ -5,7 +5,7 @@
  * the scratch position view and the work state handler table. Only this image
  * includes the file. */
 
-#include "overlays/area/world00.h"
+#include "overlays/area/worlds/world00.h"
 #include "area/spad.h"
 
 #define WORLD_POSITION_RING_ENTRY_COUNT 32u

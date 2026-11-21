@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/Effect_DrawActor.h"
+#include "overlays/bmagic/shared/Effect_DrawActor.h"
 
 MATCH void func_801EECCC(void) {
     u32          i;
@@ -44,22 +44,22 @@ MATCH void func_801EECCC(void) {
     g_Task->header.mode += 1;
 }
 
-#include "overlays/bmagic/func_801EEE3C.h"
+#include "overlays/bmagic/shared/func_801EEE3C.h"
 
-#include "overlays/bmagic/Effect_DecayTimersAndPlay.h"
+#include "overlays/bmagic/shared/Effect_DecayTimersAndPlay.h"
 
-#include "overlays/bmagic/func_801EEF74.h"
+#include "overlays/bmagic/shared/func_801EEF74.h"
 
 /* func_801EEFFC */
-#include "overlays/bmagic/Effect_FollowTarget.h"
+#include "overlays/bmagic/shared/Effect_FollowTarget.h"
 
-#include "overlays/bmagic/func_801EF09C.h"
+#include "overlays/bmagic/shared/func_801EF09C.h"
 
-#include "overlays/bmagic/func_801EF124.h"
+#include "overlays/bmagic/shared/func_801EF124.h"
 
-#include "overlays/bmagic/func_801EF1B8.h"
+#include "overlays/bmagic/shared/func_801EF1B8.h"
 
-#include "overlays/bmagic/func_801EF240.h"
+#include "overlays/bmagic/shared/func_801EF240.h"
 
 MATCH void func_801EF240(void) {
     POLY_GT4* prim;
@@ -74,8 +74,8 @@ MATCH void func_801EF240(void) {
     BMAGIC_DRAW_RING_BAND(2);
 }
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
-#include "overlays/bmagic/func_801EF7B0.h"
+#include "overlays/bmagic/shared/func_801EF7B0.h"
 
-#include "overlays/bmagic/func_801EF9E4.h"
+#include "overlays/bmagic/shared/func_801EF9E4.h"

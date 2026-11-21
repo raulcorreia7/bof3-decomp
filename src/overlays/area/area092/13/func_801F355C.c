@@ -1,5 +1,5 @@
 #include "area092_13.h"
-#include "overlays/area/Actor_SeedPartySlot.h"
+#include "overlays/area/shared/Actor_SeedPartySlot.h"
 
 /* Give the first party member a field actor: claim a free slot and seed its row from the member. */
 MATCH void func_801F355C(void) {

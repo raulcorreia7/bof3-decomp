@@ -1,6 +1,6 @@
 #include "area049_13.h"
 #include "area/spad.h"
-#include "overlays/area/AreaSprite.h"
+#include "overlays/area/shared/AreaSprite.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -248,7 +248,7 @@ MATCH void func_80117864(void* arg0) {
     p->unk_0C = v;
 }
 
-#include "overlays/area/Area_FindFreeWorkRow.h"
+#include "overlays/area/shared/Area_FindFreeWorkRow.h"
 
 MATCH u8 func_80117900(void) {
     u8          scratch[32];

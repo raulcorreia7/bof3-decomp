@@ -10,7 +10,7 @@ MATCH void func_801EECA0(void) {
     SYS_DISPATCH_TASK(table.steps, 1, g_Task);
 }
 
-#include "overlays/bmagic/Effect_CopyActiveBattlerToSlot.h"
+#include "overlays/bmagic/shared/Effect_CopyActiveBattlerToSlot.h"
 
 MATCH void func_801EED0C(void) {
     PartyMember* work;
@@ -53,7 +53,7 @@ MATCH void func_801EED0C(void) {
     Battle_SetCellPaletteStp(g_Task);
 }
 
-#include "overlays/bmagic/Effect_RestorePaletteAndReleaseActive.h"
+#include "overlays/bmagic/shared/Effect_RestorePaletteAndReleaseActive.h"
 
 MATCH void func_801EF150(void) {
     EFFECT_RESTORE_PALETTE_AND_RELEASE_ACTIVE();
@@ -161,7 +161,7 @@ MATCH void Effect_StartPlaying4(void) {
 }
 
 /* func_801EF9E4 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EFA28(void) {
     Magic015SecondSteps handlers = D_801EEC34;
@@ -349,7 +349,7 @@ MATCH void func_801F0248(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_TickDownAndClear.h"
+#include "overlays/bmagic/shared/Effect_TickDownAndClear.h"
 
 MATCH void func_801F0334(void) {
     Callback handlers[7];
@@ -526,7 +526,7 @@ MATCH void func_801F0A94(void) {
     EFFECT_APPEAR_AT_BATTLER();
 }
 
-#include "overlays/bmagic/Effect_RampTintAndFinish.h"
+#include "overlays/bmagic/shared/Effect_RampTintAndFinish.h"
 
 MATCH void func_801F0B8C(void) {
     EFFECT_RAMP_TINT_AND_FINISH();

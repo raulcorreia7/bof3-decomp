@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 /* func_801EEC7C */
-#include "overlays/bmagic/BMagic_DispatchMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
 MATCH void func_801EECDC(void) {
     g_Task->header.mode += 1;
@@ -467,7 +467,7 @@ MATCH void func_801F0D64(void) {
     SYS_DISPATCH_TASK(g_BMagicEffectModes, 2, g_Task);
 }
 
-#include "overlays/bmagic/Effect_ClearTimerNextStep.h"
+#include "overlays/bmagic/shared/Effect_ClearTimerNextStep.h"
 
 MATCH void func_801F0DD8(void) {
     PartyMember* work;

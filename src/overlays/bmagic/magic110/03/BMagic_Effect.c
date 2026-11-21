@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/Effect_DispatchMode.h"
+#include "overlays/bmagic/shared/Effect_DispatchMode.h"
 
 MATCH void func_801EEC94(void) {
     PartyMember* work;
@@ -140,7 +140,7 @@ MATCH void func_801EF148(void) {
 }
 
 /* func_801EF3F8 */
-#include "overlays/bmagic/BMagic_DispatchEffectMode.h"
+#include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF43C(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
@@ -151,7 +151,7 @@ MATCH void func_801EF43C(void) {
     g_Scripts = AREA_SCRIPT_TABLE;
 }
 
-#include "overlays/bmagic/Effect_CountDownTimerStep.h"
+#include "overlays/bmagic/shared/Effect_CountDownTimerStep.h"
 
 MATCH void func_801EF528(void) {
     PartyMember* work;
@@ -255,11 +255,11 @@ MATCH void func_801EF8C0(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_StepWhileTickUnderThree.h"
+#include "overlays/bmagic/shared/Effect_StepWhileTickUnderThree.h"
 
-#include "overlays/bmagic/Effect_TickOnTimerZero.h"
+#include "overlays/bmagic/shared/Effect_TickOnTimerZero.h"
 
-#include "overlays/bmagic/Effect_SetActorMatrix.h"
+#include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 MATCH void func_801EFA48(void) {
     POLY_G3* prim;
@@ -287,7 +287,7 @@ MATCH void func_801EFA48(void) {
     }
 }
 
-#include "overlays/bmagic/BMagic_DarkRingQuads.h"
+#include "overlays/bmagic/shared/BMagic_DarkRingQuads.h"
 
 /* func_801EFC98 */
 MATCH void BMagic_DrawDarkRing(void) {
