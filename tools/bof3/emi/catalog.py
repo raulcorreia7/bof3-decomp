@@ -18,7 +18,6 @@ if TYPE_CHECKING:
     from bof3.resolve.manifests import _CompanionOverlay
 
 TARGET_RE = re.compile(r"^(?P<archive>.+?)(?:\.EMI)?#(?P<slot>\d+)$", re.IGNORECASE)
-AUDIO_TYPES = {6, 7, 8, 10}
 
 
 def _split_id(identifier: str) -> tuple[str, int]:
@@ -38,17 +37,12 @@ def _split_id(identifier: str) -> tuple[str, int]:
     return archive.upper(), int(match.group("slot"))
 
 
-def _payload_kind(entry_type: int, load_address: int, size: int) -> str:
-    if entry_type == 3:
+def _payload_kind(entry_type: int, kind: str) -> str:
+    """Map the registry kind `bof3 emi extract -J` writes to what the callers ask."""
+    if kind in {"texture", "palette"}:
         return "image"
-    if entry_type in AUDIO_TYPES:
+    if kind.startswith("audio-"):
         return "audio"
-    if (
-        entry_type == 0
-        and 0x80033000 <= load_address <= 0x8003AFFF
-        and size in {0x40, 0x200, 0x400, 0x1000}
-    ):
-        return "image"
     return "ram" if entry_type == 0 else "unresolved"
 
 
@@ -80,7 +74,7 @@ def entry_for(root: Path, identifier: str) -> dict[str, Any]:
         "payload_path": payload,
         "load_address": load_address,
         "size": size,
-        "payload_kind": _payload_kind(entry_type, load_address, size),
+        "payload_kind": _payload_kind(entry_type, raw["kind"]),
     }
 
 

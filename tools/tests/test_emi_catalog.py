@@ -12,7 +12,13 @@ def archive(root: Path) -> Path:
         json.dumps(
             {
                 "entries": [
-                    {"index": 3, "name": "3.bin", "type": 0, "ram_ptr": 0x80010000}
+                    {
+                        "index": 3,
+                        "name": "3.bin",
+                        "type": 0,
+                        "kind": "code",
+                        "ram_ptr": 0x80010000,
+                    }
                 ]
             }
         )

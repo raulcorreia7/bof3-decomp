@@ -8,7 +8,14 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import NamedTuple
 
-from bof3.adapters.config import read_symbols, symbol_files
+from bof3.adapters.config import (
+    has_splat,
+    read_lines,
+    read_link,
+    read_symbols,
+    splat_targets,
+    symbol_files,
+)
 from bof3.core.cache import file_memo
 from bof3.core.paths import BUILD, CONFIG
 from bof3.symbols import SPLIT, Entry, LinkError, overlaps, table_entries
@@ -70,9 +77,7 @@ def splat_owners(root: Path, target: str) -> list[str]:
 
 def link_owners(root: Path, target: str) -> list[str]:
     """Return the targets whose rows an image may link against."""
-    import tomllib
-
-    link = tomllib.loads((root / CONFIG / "link.toml").read_text(encoding="utf-8"))
+    link = read_link(root)
     kind = target.split("/", 1)[0]
     order = [target]
     for entry in link.get("resident", ()):
@@ -92,7 +97,7 @@ def load(root: Path) -> dict[str, list[Entry]]:
         tables: dict[str, list[Entry]] = {}
         problems: list[str] = []
         for target, rows in document.items():
-            if not (root / CONFIG / target / "splat.yaml").is_file():
+            if not has_splat(root, target):
                 raise LinkError(
                     f"{SPLIT}: [{target}] names no target. Use a folder id under config/ "
                     "that holds a splat.yaml."
@@ -121,8 +126,7 @@ def generate(root: Path) -> None:
     from bof3.link.inputs import write_if_changed
 
     tables = load(root)
-    for yaml_path in sorted((root / CONFIG).rglob("splat.yaml")):
-        target = yaml_path.parent.relative_to(root / CONFIG).as_posix()
+    for target in splat_targets(root):
         ordered = sorted(tables.get(target, ()), key=lambda e: e.addr)
         splat = [
             f"{e.name} = 0x{e.addr:08X};"
@@ -220,7 +224,7 @@ def read_map(path: Path) -> list[MapSymbol]:
             symbols.append(MapSymbol(name, address, top - address, section == ".text"))
         names.clear()
 
-    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+    for line in read_lines(path, "replace"):
         wrapped = _MAP_SECTION.match(line)
         if wrapped is not None:
             pending = wrapped[1]
@@ -252,7 +256,7 @@ def read_maps(root: Path, maps: list[str]) -> dict[str, dict[int, str]]:
     table: dict[str, dict[int, str]] = {}
     for relative in maps:
         owner = Path(relative).stem.replace("+", "/")
-        for line in (root / relative).read_text(encoding="utf-8").splitlines():
+        for line in read_lines(root / relative):
             name, _, value = line.partition(" ")
             table.setdefault(name, {}).setdefault(int(value, 16), owner)
     return table

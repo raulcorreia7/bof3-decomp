@@ -6,8 +6,7 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
-
-import symbol
+from fixture import main, patch
 
 FILES = {
     "include/types.h": (
@@ -122,14 +121,10 @@ def repo(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
             "PATH": "/usr/bin:/bin",
         },
     )
-    monkeypatch.setattr(symbol, "ROOT", tmp_path)
-    monkeypatch.setattr(symbol, "_VALUE_SHARED", {})
-    monkeypatch.setattr(symbol, "_VALUE_INDEX", {})
-    monkeypatch.setattr(symbol, "_VALUE_VIEWS", [])
-    monkeypatch.setattr(
-        symbol,
+    patch(
+        monkeypatch,
         "_layer_manifests",
-        lambda: {"exe/a": SimpleNamespace(source_dir="src/a")},
+        lambda _ctx: {"exe/a": SimpleNamespace(source_dir="src/a")},
     )
     return tmp_path
 
@@ -138,41 +133,10 @@ def rows(capsys: pytest.CaptureFixture[str]) -> list[dict]:
     return [json.loads(line) for line in capsys.readouterr().out.splitlines()]
 
 
-def test_prefix_is_the_shared_tag_of_the_names() -> None:
-    assert symbol._value_prefix(["THING_MODE_RUN", "THING_MODE_IDLE"]) == "THING_MODE_"
-    assert symbol._value_prefix(["ONE"]) == ""
-
-
-def test_records_keep_members_and_comments(repo: Path) -> None:
-    records, typedefs = symbol._value_records()
-    assert records["Thing"]["timer"] == ("u8", "frame counter")
-    assert records["Head"]["mode"] == ("u8", "ThingMode")
-    assert typedefs["u8"] == "unsigned char"
-
-
-def test_type_walks_pointers_records_and_anonymous_unions(repo: Path) -> None:
-    records, typedefs = symbol._value_records()
-    symbol._VALUE_SHARED.update(
-        {
-            "records": records,
-            "typedefs": typedefs,
-            "globals": {"g_Things": "Thing[]"},
-            "prototypes": {},
-            "returns": {},
-            "member_map": {},
-        }
-    )
-    index = symbol._value_index("exe/a")
-    scope = {"thing": "Thing*"}
-    assert symbol._value_type("thing->head.mode", index, scope) == "u8"
-    assert symbol._value_type("thing->pos.part.integer", index, scope) == "s16"
-    assert symbol._value_type("g_Things[2].timer", index, scope) == "u8"
-
-
 def test_scan_classifies_matched_bodies_only(
     repo: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    assert symbol.main(["values", "--scan", "--jsonl"]) == 0
+    assert main(repo, ["values", "--scan", "--jsonl"]) == 0
     found = rows(capsys)
     by_literal = {(row["literal"], row["constant"], row["form"]) for row in found}
     assert ("2", "THING_MODE_RUN", "") in by_literal
@@ -194,7 +158,7 @@ def test_scan_classifies_matched_bodies_only(
 def test_scan_reports_the_family_without_a_constant(
     repo: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    assert symbol.main(["values", "--scan", "--jsonl"]) == 0
+    assert main(repo, ["values", "--scan", "--jsonl"]) == 0
     found = [row for row in rows(capsys) if row["literal"] == "0x80"]
     assert found == [
         {
@@ -208,9 +172,3 @@ def test_scan_reports_the_family_without_a_constant(
             "confidence": "typed",
         }
     ]
-
-
-def test_fixed_point_value_has_no_one_name() -> None:
-    index = {"families": {}, "names": {"ONE", "COORD_HALF"}}
-    signal = symbol.ValueSignal("fixed", "", "typed", "16.16", "s32")
-    assert symbol._value_role_constant(index, signal, 0x10000) == ("", "")

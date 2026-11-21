@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from bof3.adapters.git import git
+from bof3.core.paths import CONFIG
 from bof3.symbols import SPLIT, parse
 
 _TITLE = re.compile(r'^\["([^"]+)"\]', re.MULTILINE)
@@ -62,3 +63,20 @@ def read_symbols(root: Path) -> dict[str, Any]:
 
 def read_link(root: Path) -> dict[str, Any]:
     return tomllib.loads((root / "config/link.toml").read_text(encoding="utf-8"))
+
+
+def read_lines(path: Path, errors: str = "strict") -> list[str]:
+    return path.read_text(encoding="utf-8", errors=errors).splitlines()
+
+
+def has_splat(root: Path, target: str) -> bool:
+    return (root / CONFIG / target / "splat.yaml").is_file()
+
+
+def splat_targets(root: Path) -> list[str]:
+    """The targets that have a ``splat.yaml``, sorted by path."""
+    folder = root / CONFIG
+    return [
+        p.parent.relative_to(folder).as_posix()
+        for p in sorted(folder.rglob("splat.yaml"))
+    ]
