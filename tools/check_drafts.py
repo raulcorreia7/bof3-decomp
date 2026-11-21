@@ -24,17 +24,13 @@ import tempfile
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+from bof3.adapters.git import git, merge_base
+from bof3.core.paths import ROOT
+
 BUILD = ROOT / "build/meson"
 GCC = ROOT / "toolchains/gcc-2.7.2-psx/gcc"
 DRAFT = re.compile(r"^NON_MATCHING\b", re.MULTILINE)
 DROP = {"--empty-on-failure", "-MMD", "-MP"}
-
-
-def git(*args: str) -> str:
-    return subprocess.run(
-        ["git", *args], cwd=ROOT, capture_output=True, text=True, check=True
-    ).stdout
 
 
 def base_ref() -> str:
@@ -49,8 +45,17 @@ def base_ref() -> str:
 
 
 def changed_drafts(ref: str) -> list[str]:
-    base = git("merge-base", ref, "HEAD").strip()
-    names = git("diff", "--name-only", "--diff-filter=ACMR", base, "HEAD", "--", "src")
+    base = merge_base(ref, root=ROOT)
+    names = git(
+        "diff",
+        "--name-only",
+        "--diff-filter=ACMR",
+        base,
+        "HEAD",
+        "--",
+        "src",
+        root=ROOT,
+    )
     drafts = []
     for name in names.splitlines():
         path = ROOT / name

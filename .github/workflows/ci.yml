@@ -120,7 +120,7 @@ jobs:
       - name: Shell lint
         run: git ls-files 'tools/*.sh' | xargs shellcheck --severity=warning
       # dprint/check above covers Markdown, TOML and JSON; DPRINT=true makes format-check skip the second run.
-      # format.sh --check also runs `ruff check` on tools/ (ruff is pinned in pyproject.toml).
+      # format.sh --check also runs `ruff check` and `pyright` (tools/bof3) on tools/ (both are pinned in pyproject.toml).
       # check-headers, check-tree, include-asm, format-check (ruff included), meson test, typeloss.
       - if: steps.changes.outputs.code == 'true'
         run: meson setup build/meson

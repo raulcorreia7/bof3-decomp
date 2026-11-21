@@ -61,6 +61,9 @@ fi
 
 step() { printf 'setup: %s\n' "$*"; }
 
+# The merge driver `.gitattributes` names for config/symbols.toml.
+git config merge.symbols.driver 'python3 tools/merge_symbols.py %O %A %B'
+
 # Submodules: a clone made without --recursive has them empty.
 modules="third_party/maspsx"
 [ -n "$payloads" ] && modules="$modules tools/bof3-tools"

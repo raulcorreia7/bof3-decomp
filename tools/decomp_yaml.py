@@ -16,9 +16,8 @@ import argparse
 from pathlib import Path
 
 from bof3.core.io import write_atomic
+from bof3.core.paths import ROOT
 from bof3.resolve import load_target_manifests
-
-ROOT = Path(__file__).resolve().parent.parent
 
 
 def render(root: Path, only: list[str]) -> str:

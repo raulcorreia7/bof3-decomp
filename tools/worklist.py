@@ -30,8 +30,11 @@ from pathlib import Path
 
 import dups
 import gen_body
+from bof3.adapters.attempts import PATH as ROW_PATH
+from bof3.adapters.attempts import read_lines
+from bof3.attempts import parse
+from bof3.core.paths import ROOT
 
-ROOT = Path(__file__).resolve().parent.parent
 ROUTES = ("template0", "generator", "template", "plain")
 GENERATED = ("call-seq", "store-seq", "spad", "dispatch", "straight")
 EDITS = 3  # template_diff.py takes up to this many edits
@@ -56,19 +59,12 @@ def _score(score: object) -> str:
     return f"{score:g}%" if isinstance(score, (int, float)) else str(score)
 
 
-def attempts(path: Path = ROOT / "config/attempts.jsonl") -> dict[str, str]:
+def attempts(path: Path = ROOT / ROW_PATH) -> dict[str, str]:
     """Return the recorded attempts for each function."""
     result: dict[str, list[str]] = {}
-    for line in path.read_text(encoding="utf-8").splitlines():
-        if not line.strip():
-            continue
-        row = json.loads(line)
-        note = "; ".join(
-            part
-            for part in (row["tried"], row["first_diff"], _score(row["score"]))
-            if part
-        )
-        result.setdefault(row["function"], []).append(note or "attempt recorded")
+    for line in read_lines(path):
+        row = parse(line)
+        result.setdefault(row.function, []).append(row.note)
     return {ref: " | ".join(notes) for ref, notes in result.items()}
 
 

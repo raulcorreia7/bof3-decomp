@@ -24,17 +24,18 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import os
 import re
-import subprocess
 import sys
 from pathlib import Path
+from typing import NamedTuple
 
+from bof3.adapters.cli import run_main
+from bof3.adapters.match import run_match
+from bof3.core.paths import ROOT
 from bof3.source.ctext import read
 from bof3.source.index import Func, find, load_index
 from bof3.source.remap import declaration, diff_count
 
-ROOT = Path(__file__).resolve().parent.parent
 QUOTED = re.compile(r'^\s*#\s*include\s+"([^"]+)"', re.M)
 DECL = re.compile(r"^@decl\s+(.*)$", re.M)
 SEEN = "build/try_body_seen.json"
@@ -174,16 +175,8 @@ def match(ref: str, root: Path = ROOT) -> tuple[bool, str]:
     """Run ``tools/match.sh`` on one function; return (exact, last lines)."""
     target, _, name = ref.partition("@")
     (root / CAND).unlink(missing_ok=True)
-    result = subprocess.run(
-        ["sh", "tools/match.sh", target, name],
-        cwd=root,
-        env={**os.environ, "MATCH_CAND_OUT": str(root / CAND)},
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-    tail = (result.stdout + result.stderr).strip().splitlines()[-3:]
-    return result.returncode == 0, " | ".join(x.strip() for x in tail)[:230]
+    result = run_match(root, target, name, cand_out=root / CAND)
+    return result.exact, " | ".join(x.strip() for x in result.tail(3))[:230]
 
 
 def attempt(root: Path, func: Func, text: str) -> tuple[str, str]:
@@ -192,7 +185,15 @@ def attempt(root: Path, func: Func, text: str) -> tuple[str, str]:
     return status, detail
 
 
-def trial(root: Path, func: Func, text: str) -> tuple[str, str, int | None]:
+class Trial(NamedTuple):
+    """The outcome of one body: its status, a detail line and the differing instructions."""
+
+    status: str
+    detail: str
+    diff: int | None
+
+
+def trial(root: Path, func: Func, text: str) -> Trial:
     """Try the body; return (status, detail, differing instructions or None).
 
     A failed body is recorded per function; the same body again returns ``REPEAT``.
@@ -201,7 +202,7 @@ def trial(root: Path, func: Func, text: str) -> tuple[str, str, int | None]:
     seen = load_seen(root)
     old = seen.get(ref, {}).get(key)
     if old:
-        return "REPEAT", f"{old['status']} {old['detail']}".strip(), old["diff"]
+        return Trial("REPEAT", f"{old['status']} {old['detail']}".strip(), old["diff"])
     status, detail, diff = _trial(root, func, text)
     if status == "FAIL":
         seen.setdefault(ref, {})[key] = {
@@ -210,18 +211,18 @@ def trial(root: Path, func: Func, text: str) -> tuple[str, str, int | None]:
             "diff": diff,
         }
         save_seen(root, seen)
-    return status, detail, diff
+    return Trial(status, detail, diff)
 
 
-def _trial(root: Path, func: Func, text: str) -> tuple[str, str, int | None]:
+def _trial(root: Path, func: Func, text: str) -> Trial:
     body, decls = split_decls(text)
     if func.status != "ASM" or not func.src:
-        return "SKIP", "not an INCLUDE_ASM function", None
+        return Trial("SKIP", "not an INCLUDE_ASM function", None)
     marker = f"INCLUDE_ASM({func.name});"
     path = root / func.src
     original = read(root, func.src)
     if marker not in original:
-        return "SKIP", "already has a body", None
+        return Trial("SKIP", "already has a body", None)
     touched = {path: original}
     header = image_header(root, func.src)
     missing = [d for d in decls if not declares(root, func.src, declared_name(d) or "")]
@@ -239,9 +240,11 @@ def _trial(root: Path, func: Func, text: str) -> tuple[str, str, int | None]:
         raise
     diff = None if exact else candidate_diff(root, func)
     if exact:
-        return "EXACT", func.src, 0
+        return Trial("EXACT", func.src, 0)
     restore(touched)
-    return "FAIL", (f"{diff} differing; " if diff is not None else "") + detail, diff
+    return Trial(
+        "FAIL", (f"{diff} differing; " if diff is not None else "") + detail, diff
+    )
 
 
 def restore(touched: dict[Path, str]) -> None:
@@ -282,4 +285,4 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(run_main(main))

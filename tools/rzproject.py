@@ -22,12 +22,13 @@ import re
 import struct
 import subprocess
 import sys
-import tomllib
 from dataclasses import dataclass
 from pathlib import Path
 
 import m2ctx
+from bof3.adapters.config import read_link
 from bof3.core.io import write_atomic
+from bof3.core.paths import ROOT
 from bof3.core.psx_exe import HEADER_SIZE
 from bof3.core.psx_exe import read as read_exe
 from bof3.link import symbols
@@ -36,7 +37,6 @@ from bof3.resolve.ids import image_header
 from bof3.resolve.layout import parse_splat_layout
 from bof3.resolve.manifests import TargetManifest
 
-ROOT = Path(__file__).resolve().parent.parent
 RIZIN = ROOT / "toolchains/rizin/bin/rizin"
 RZ_SIGN = ROOT / "toolchains/rizin/bin/rz-sign"
 WIDTH = {"u8": 1, "s8": 1, "u16": 2, "s16": 2, "u32": 4, "s32": 4}
@@ -95,7 +95,7 @@ def mapped_targets(
     root: Path, manifests: dict[str, TargetManifest], manifest: TargetManifest
 ) -> tuple[str, ...]:
     """Return the target and resident images visible to it."""
-    link = tomllib.loads((root / "config/link.toml").read_text(encoding="utf-8"))
+    link = read_link(root)
     visible = manifest.id.value
     if manifest.kind == "emi":
         visible = "emi"

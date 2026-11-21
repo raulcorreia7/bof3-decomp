@@ -15,11 +15,11 @@ line is `best (N, tag)`. Run `check-<image>` on a match.
 
 import argparse
 import re
-import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+from bof3.adapters.match import run_match
+from bof3.core.paths import ROOT
 
 
 def function_span(source, name):
@@ -50,16 +50,9 @@ def main():
     try:
         for tag, text in variants.items():
             path.write_text(base[:start] + text.rstrip("\n") + "\n" + base[end:])
-            lines = subprocess.run(
-                ["sh", str(ROOT / "tools/match.sh"), "--diff", args.function],
-                check=False,
-                cwd=ROOT,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                text=True,
-            ).stdout.splitlines()
-            differing = [line for line in lines if line.startswith("!")]
-            if any(line.startswith("match: ") for line in lines):
+            result = run_match(ROOT, "--diff", args.function, merged=True)
+            lines, differing = result.lines, result.differing
+            if result.matched:
                 print(tag, "=> MATCH")
                 sys.exit(0)
             if not differing:

@@ -171,3 +171,21 @@ def test_imported_map_keeps_the_targets_own_address(
     monkeypatch.setattr(symbols, "splat_owners", lambda _root, _t: ["exe/a", "exe/b"])
     assert symbols.imported_map(root, "exe/a") == "Other = 0x00000094;\n"
     assert symbols.imported_map(root, "exe/b") == "Own = 0x00000020;\n"
+
+
+def test_merge_driver_unions_rows_in_address_order(tmp_path) -> None:
+    import merge_symbols
+
+    def write(name: str, *rows: str) -> str:
+        path = tmp_path / name
+        path.write_text('["a/00"]\n' + "".join(f"{row}\n" for row in rows))
+        return str(path)
+
+    one, two, three = (
+        f"{n} = {{ addr = 0x{a} }}"
+        for n, a in (("One", "10"), ("Two", "20"), ("Three", "30"))
+    )
+    base = write("base", one)
+    ours = write("ours", one, three)
+    assert merge_symbols.main(base, ours, write("theirs", one, two)) == 0
+    assert (tmp_path / "ours").read_text() == f'["a/00"]\n{one}\n{two}\n{three}\n'

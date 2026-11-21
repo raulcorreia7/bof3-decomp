@@ -349,13 +349,16 @@ endif
 
 # --- Checks: what a push needs, and every image again its retail SHA-1.
 
-run_target('check-tree', command: [tools / 'check_tree.sh'])
-run_target('include-asm', command: [tools / 'check_asm.sh'])
-run_target('check-plain', command: [tools / 'check_plain.sh', bld / 'plain-flags.txt'])
+# The rows of tools/gate.txt that name a Meson target run as that target, with no base ref.
+foreach row : fs.read(tools / 'gate.txt').split('\n')
+  field = row.split('|')
+  if field.length() == 5 and field[3] != ''
+    run_target(field[3], command: [sh, '-c', 'cd "$MESON_SOURCE_ROOT" && ' + field[4]], env: {'bld': bld, 'ref': ''})
+  endif
+endforeach
 format_sh = find_program(tools / 'format.sh')
 run_target('format', command: [format_sh])
-run_target('format-check', command: [format_sh, '--check'])
-# Every check a push needs, one line each (see tools/pre_push.sh).
+# Every check a push needs, one line each (tools/gate.txt, tools/pre_push.sh).
 run_target('pre-push', command: [tools / 'pre_push.sh'])
 
 # pytest is in the dev group: tools/setup.sh --dev installs it.

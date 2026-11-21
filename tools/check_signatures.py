@@ -12,11 +12,8 @@ Usage: python3 tools/check_signatures.py
 
 from __future__ import annotations
 
-from pathlib import Path
-
+from bof3.core.paths import ROOT
 from bof3.source import ctext, decls
-
-ROOT = Path(__file__).resolve().parent.parent
 
 
 def main() -> int:

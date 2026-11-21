@@ -19,7 +19,8 @@ import sys
 import tempfile
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+from bof3.core.paths import ROOT
+
 # Same order as the build: src/ is searched before include/.
 # The context must read like the build's: the PSX compiler's preprocessor predefines
 # LANGUAGE_C, which hides the register names in <asm.h> (`fp` is `$30` otherwise, and

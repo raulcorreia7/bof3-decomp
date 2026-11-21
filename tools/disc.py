@@ -18,9 +18,10 @@ import sys
 import tempfile
 from pathlib import Path
 
+from bof3.adapters.cli import run_main
 from bof3.core import disc
+from bof3.core.paths import ROOT
 
-ROOT = Path(__file__).resolve().parents[1]
 SERIAL = re.compile(r"cdrom:\\?([A-Z]{4})_(\d{3})\.(\d{2})", re.I)
 REGIONS = {
     "SLUS": "NTSC-U",
@@ -144,4 +145,4 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(run_main(main))

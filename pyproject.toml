@@ -19,7 +19,7 @@ Homepage = "https://github.com/raulcorreia7/bof3-decomp"
 Issues = "https://github.com/raulcorreia7/bof3-decomp/issues"
 
 [dependency-groups]
-dev = ["pytest>=8.0", "ruff==0.17.6"]
+dev = ["pyright==1.1.414", "pytest>=8.0", "ruff==0.17.6"]
 matching = ["colorama>=0.4.6", "levenshtein>=0.27.0", "rapidfuzz>=3.14.0", "toml>=0.10.2", "watchdog>=6.0.0"]
 
 [tool.uv]
@@ -39,6 +39,14 @@ src = ["tools"]
 # Real defects and import order. The pinned ruff's default set is F and a few E; these add bugbear,
 # pyupgrade, an explicit subprocess `check`, context-managed files and unused `noqa`.
 select = ["E4", "E7", "E9", "F", "B", "I", "UP", "PLW1510", "SIM115", "RUF100"]
+
+[tool.pyright]
+# The pure core, tools/bof3, stays clean under the basic rule set; the stubs for yaml are not installed.
+include = ["tools/bof3"]
+pythonVersion = "3.12"
+typeCheckingMode = "basic"
+reportMissingModuleSource = false
+extraPaths = ["tools"]
 
 [tool.ruff.format]
 quote-style = "double"

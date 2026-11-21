@@ -10,6 +10,8 @@ from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any, TypeGuard
 
+from bof3.core.paths import ROOT
+
 
 @dataclass(frozen=True)
 class RepoLayout:
@@ -20,7 +22,7 @@ class RepoLayout:
 
 def repo_layout(root: Path | None = None) -> RepoLayout:
     """Return the repository root."""
-    return RepoLayout((root or Path(__file__).resolve().parents[3]).resolve())
+    return RepoLayout((root or ROOT).resolve())
 
 
 def read_json(path: Path) -> dict[str, Any]:

@@ -30,12 +30,15 @@ Usage: python3 tools/check_names.py [--write]    (--write rewrites the baseline 
 from __future__ import annotations
 
 import re
-import subprocess
 import sys
-import tomllib
 from pathlib import Path
 
+from bof3.adapters.config import read_symbols
+from bof3.adapters.git import changed_files, git, ls_files, ok
+from bof3.diff import added_lines as added_diff_lines
+from bof3.diff import renames
 from bof3.resolve.layout import target_of
+from bof3.symbols import TABLE
 
 BASELINE = Path("config/address_names.txt")
 ROOTS = ("include", "src")
@@ -140,12 +143,7 @@ def layout_images(ref: str | None) -> list[str]:
             for path in Path("config").rglob("splat.yaml")
             if target_of(path)
         )
-    changed = subprocess.run(
-        ["git", "diff", "--name-only", f"{ref}...HEAD", "--", "config"],
-        check=False,
-        capture_output=True,
-        text=True,
-    ).stdout.split()
+    changed = changed_files(f"{ref}...HEAD", "--", "config")
     images = {
         name[len("config/") : -len("/splat.yaml")]
         for name in changed
@@ -157,12 +155,7 @@ def layout_images(ref: str | None) -> list[str]:
 
 def added_symbol_images(ref: str) -> set[str]:
     """The images whose table a change gives a new row."""
-    diff = subprocess.run(
-        ["git", "diff", "-U0", f"{ref}...HEAD", "--", "config/symbols.toml"],
-        check=False,
-        capture_output=True,
-        text=True,
-    ).stdout
+    diff = git("diff", "-U0", f"{ref}...HEAD", "--", TABLE, check=False)
     added = {
         match.group(1)
         for row in diff.splitlines()
@@ -172,7 +165,7 @@ def added_symbol_images(ref: str) -> set[str]:
     }
     if not added or not Path("config/symbols.toml").is_file():
         return set()
-    tables = tomllib.loads(Path("config/symbols.toml").read_text(encoding="utf-8"))
+    tables = read_symbols(Path())
     return {
         image
         for image, rows in tables.items()
@@ -266,12 +259,7 @@ def rejected_names(text: str) -> set[str]:
 
 def in_ref(ref: str, name: str) -> bool:
     """Whether ``name`` occurs as a word in the tracked tree at ``ref``."""
-    found = subprocess.run(
-        ["git", "grep", "-q", "-w", "-F", "-e", name, ref, "--", "."],
-        check=False,
-        capture_output=True,
-    )
-    return found.returncode == 0
+    return ok("grep", "-q", "-w", "-F", "-e", name, ref, "--", ".")
 
 
 def unnamed_parameters(text: str) -> set[str]:
@@ -311,70 +299,26 @@ def macro_counts(text: str) -> dict[str, int]:
 
 def changed_paths(ref: str) -> list[str]:
     """The paths under include/ or src/ a change adds, changes or renames; deleted paths add no name."""
-    out = subprocess.run(
-        [
-            "git",
-            "diff",
-            "--name-only",
-            "--diff-filter=d",
-            f"{ref}...HEAD",
-            "--",
-            *ROOTS,
-        ],
-        check=False,
-        capture_output=True,
-        text=True,
-    ).stdout
-    return [path for path in out.split() if path]
+    return changed_files("--diff-filter=d", f"{ref}...HEAD", "--", *ROOTS)
 
 
 def renamed_from(ref: str) -> dict[str, str]:
     """Maps each path under include/ or src/ that a change renames to its path at ``ref``."""
-    out = subprocess.run(
-        ["git", "diff", "--name-status", "-M", f"{ref}...HEAD", "--", *ROOTS],
-        check=False,
-        capture_output=True,
-        text=True,
-    ).stdout
-    moved: dict[str, str] = {}
-    for line in out.splitlines():
-        fields = line.split("\t")
-        if fields[0].startswith("R") and len(fields) == 3:
-            moved[fields[2]] = fields[1]
-    return moved
+    return renames(
+        git("diff", "--name-status", "-M", f"{ref}...HEAD", "--", *ROOTS, check=False)
+    )
 
 
 def base_text(ref: str, path: str) -> str:
     """The file at ``path`` as it is in the base revision; empty when new."""
-    result = subprocess.run(
-        ["git", "show", f"{ref}:{path}"],
-        check=False,
-        capture_output=True,
-        text=True,
-    )
-    return result.stdout if result.returncode == 0 else ""
+    return git("show", f"{ref}:{path}", check=False)
 
 
 def added_lines(ref: str):
     """Yield (path, line, text) for each line a change adds under include/ or src/."""
-    diff = subprocess.run(
-        ["git", "diff", "-U0", f"{ref}...HEAD", "--", *ROOTS],
-        check=False,
-        capture_output=True,
-        text=True,
-    ).stdout
-    path, line = "", 0
-    for row in diff.splitlines():
-        if row.startswith("+++ b/"):
-            path = row[6:]
-        elif row.startswith("@@"):
-            m = re.search(r"\+(\d+)", row)
-            line = int(m.group(1)) if m else 0
-        elif row.startswith("+") and not row.startswith("+++"):
-            yield path, line, row[1:]
-            line += 1
-        elif row.startswith(" "):
-            line += 1
+    yield from added_diff_lines(
+        git("diff", "-U0", f"{ref}...HEAD", "--", *ROOTS, check=False)
+    )
 
 
 def offenders(text: str) -> set[str]:
@@ -398,12 +342,7 @@ def moved_paths() -> dict[str, str]:
     """Map each path a staged or unstaged rename moved to the path that holds it now."""
     moved: dict[str, str] = {}
     for staged in ([], ["--cached"]):
-        out = subprocess.run(
-            ["git", "diff", "--name-status", "-M", "-z", *staged],
-            check=False,
-            capture_output=True,
-            text=True,
-        ).stdout
+        out = git("diff", "--name-status", "-M", "-z", *staged, check=False)
         fields = out.split("\0")
         index = 0
         while index < len(fields) and fields[index]:
@@ -426,10 +365,7 @@ def worktree_text(path: str) -> str:
         path = moved[path]
     if Path(path).is_file():
         return Path(path).read_text(encoding="utf-8", errors="replace")
-    result = subprocess.run(
-        ["git", "show", f"HEAD:{path}"], check=False, capture_output=True, text=True
-    )
-    return result.stdout if result.returncode == 0 else ""
+    return git("show", f"HEAD:{path}", check=False)
 
 
 def fold_moves(new: set[str], gone: set[str]) -> tuple[set[str], set[str]]:
@@ -448,9 +384,7 @@ def fold_moves(new: set[str], gone: set[str]) -> tuple[set[str], set[str]]:
 
 
 def tree_entries() -> set[str]:
-    files = subprocess.run(
-        ["git", "ls-files", *ROOTS], capture_output=True, text=True, check=True
-    ).stdout.split()
+    files = ls_files(*ROOTS)
     entries = set()
     for path in files:
         if path.endswith(SUFFIXES):

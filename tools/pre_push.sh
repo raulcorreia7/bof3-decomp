@@ -3,8 +3,7 @@
 #
 #   tools/pre_push.sh [BASE_REF]          or    meson compile -C build/meson pre-push
 #
-# Checks: check (only with a disc), check-plain (only with the compiler), check-headers, check-tree, externs, include-asm, markers, drafts, names, addrs, kept, format-check,
-# order (declarations and symbols stay in order), meson test, typeloss, quality (no touched file gets worse), message-ids (the generated message-id header is current), subsystems (writes the debt table to build/subsystems.md; never fails). BASE_REF is what the work is compared with; it defaults to the newest of
+# The checks are the rows of tools/gate.txt, described in tools/README.md#pre-push. BASE_REF is what the work is compared with; it defaults to the newest of
 # public/main, origin/main and main; comparisons use the merge base with HEAD. Each log is
 # build/pre-push/<check>.log. Format first with `meson compile -C build/meson format`.
 set -u
@@ -29,64 +28,36 @@ fi
 base=$(git merge-base "$ref" HEAD 2>/dev/null) || base=$ref
 
 status=0
-# Each check runs as a background job and writes its exit code beside its log. The Ninja
-# targets (check, check-headers) run one after the other because two Ninja runs must not share
-# a build directory; every other check is independent and runs at the same time.
-job() {
-	name=$1
-	shift
-	(
-		"$@" >"$logs/$name.log" 2>&1
-		echo $? >"$logs/$name.rc"
-	) &
-}
+# tools/gate.txt lists the checks. A chain check runs after the one before it; a par check runs
+# beside the rest. Each writes its exit code beside its log.
+export ref base bld
 rm -f "$logs"/*.rc
-names=""
-start() {
-	names="$names $1"
-	job "$@"
-}
-
-targets=$(ninja -C "$bld" -t targets all 2>/dev/null)
 have_check=false
-if printf '%s\n' "$targets" | grep -q '^check:'; then
-	have_check=true
-fi
-build_chain() {
-	if $have_check; then
-		meson compile -C "$bld" check >"$logs/check.log" 2>&1
-		echo $? >"$logs/check.rc"
+ninja -C "$bld" -t targets all 2>/dev/null | grep -q '^check:' && have_check=true
+have_compiler=false
+[ -x toolchains/gcc-2.7.2-psx/gcc ] && have_compiler=true
+names=""
+chain=""
+while IFS='|' read -r name needs run _ cmd; do
+	case $name in '' | '#'*) continue ;; esac
+	case $needs in
+	disc) $have_check || { echo "skip  $name (no disc: Meson offers no check target)"; continue; } ;;
+	compiler) $have_compiler || { echo "skip  $name (no toolchains/gcc-2.7.2-psx)"; continue; } ;;
+	esac
+	names="$names $name"
+	if [ "$run" = chain ]; then
+		chain="$chain$name|$cmd
+"
+	else
+		(sh -c "$cmd" </dev/null >"$logs/$name.log" 2>&1; echo $? >"$logs/$name.rc") &
 	fi
-	meson compile -C "$bld" check-headers >"$logs/check-headers.log" 2>&1
-	echo $? >"$logs/check-headers.rc"
-}
-if $have_check; then
-	names="$names check"
-else
-	echo "skip  check (no disc: Meson offers no check target)"
-fi
-names="$names check-headers"
-build_chain &
-if [ -x toolchains/gcc-2.7.2-psx/gcc ]; then
-	start check-plain tools/check_plain.sh "$bld/plain-flags.txt"
-else
-	echo "skip  check-plain (no toolchains/gcc-2.7.2-psx)"
-fi
-start check-tree tools/check_tree.sh "$ref"
-start externs tools/check_externs.sh "$ref"
-start include-asm tools/check_asm.sh "$ref"
-start format-check tools/format.sh --check
-start test meson test -C "$bld" --no-rebuild --print-errorlogs
-start typeloss python3 tools/typeloss.py "$base" HEAD
-start markers python3 tools/check_markers.py --diff "$ref"
-start drafts python3 tools/check_drafts.py "$ref"
-start names python3 tools/check_names.py --diff "$ref"
-start addrs python3 tools/check_addrs.py "$ref" HEAD
-start kept python3 tools/check_kept.py "$ref" HEAD
-start quality python3 tools/quality.py --diff "$ref"
-start order python3 tools/order_check.py --diff "$ref"
-start message-ids python3 tools/message_ids.py --check
-start subsystems python3 tools/quality.py --markdown
+done <tools/gate.txt
+(
+	printf '%s' "$chain" | while IFS='|' read -r name cmd; do
+		sh -c "$cmd" </dev/null >"$logs/$name.log" 2>&1
+		echo $? >"$logs/$name.rc"
+	done
+) &
 wait
 
 for name in $names; do

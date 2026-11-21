@@ -19,10 +19,10 @@ import sys
 from pathlib import Path
 
 from bof3.core.io import write_atomic
+from bof3.core.paths import ROOT
 from bof3.resolve.ids import asm_dir
 from bof3.status.claims import source_text
 
-ROOT = Path(__file__).resolve().parent.parent
 # The permuter's MIPS flags (its MIPS_SETTINGS). A set objdump_command replaces its default arguments.
 OBJDUMP_ARGUMENTS = ["-drz", "-m", "mips:4300"]
 _DRAFT = re.compile(r"^NON_MATCHING\s+.*?\b([A-Za-z_]\w*)\s*\(", re.M)

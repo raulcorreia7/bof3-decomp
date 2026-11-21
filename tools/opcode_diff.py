@@ -13,36 +13,10 @@ differing hunk with both sides in full (`R` retail, `C` candidate), then a last 
 
 import argparse
 import difflib
-import re
-import subprocess
-from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-DIFF_LINE = re.compile(r"^[! ] ?[0-9A-F]{8}:")
-DIFF_CONTINUATION = re.compile(r"^[! ]\s+\|")
-INSTRUCTION = re.compile(r"\s*([0-9A-F]{8}):\s+[0-9a-f]{8}\s+(\S+)\s*(.*)")
-
-
-def side_by_side(function):
-    """Return the (retail, candidate) instruction lists of `match.sh --diff`."""
-    output = subprocess.run(
-        ["sh", str(ROOT / "tools/match.sh"), "--diff", function],
-        check=False,
-        cwd=ROOT,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        text=True,
-    ).stdout
-    retail, candidate = [], []
-    for line in output.splitlines():
-        if not (DIFF_LINE.match(line) or DIFF_CONTINUATION.match(line)):
-            continue
-        left, _, right = line[2:].partition("|")
-        for text, instructions in ((left, retail), (right, candidate)):
-            found = INSTRUCTION.match(text)
-            if found:
-                instructions.append((found[1], found[2], found[3].strip()))
-    return retail, candidate
+from bof3.adapters.match import run_match
+from bof3.core.paths import ROOT
+from bof3.match import side_by_side
 
 
 def main():
@@ -50,7 +24,9 @@ def main():
     parser.add_argument("function", help="TARGET@0xADDRESS")
     parser.add_argument("context", nargs="?", type=int, default=0)
     args = parser.parse_args()
-    retail, candidate = side_by_side(args.function)
+    retail, candidate = side_by_side(
+        run_match(ROOT, "--diff", args.function, merged=True)
+    )
     matcher = difflib.SequenceMatcher(
         None, [i[1] for i in retail], [i[1] for i in candidate], autojunk=False
     )

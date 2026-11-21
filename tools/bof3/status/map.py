@@ -106,7 +106,6 @@ def load_target(root: Path, manifest: TargetManifest) -> TargetMap:
             source_dir,
             binary_path,
             splat_path,
-            (),
             0,
             0,
             manifest_error(error),

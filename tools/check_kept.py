@@ -40,11 +40,11 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from bof3.link.symbols import read_text
+from bof3.adapters.git import changed_files, git, merge_base
+from bof3.core.paths import ROOT
 from bof3.source.ctext import mask
+from bof3.symbols import TABLE, parse
 
-ROOT = Path(__file__).resolve().parent.parent
-SYMBOLS = "config/symbols.toml"
 CLANG = os.environ.get("CHECK_KEPT_CLANG", "clang")
 CLANG_FLAGS = [
     "--target=mipsel-unknown-elf",
@@ -315,10 +315,6 @@ def run_clang(tree: Path, unit: str, wanted: set[str]) -> Entities:
 # --- Revisions ------------------------------------------------------------------------------
 
 
-def git(*args: str) -> str:
-    return subprocess.check_output(["git", *args], cwd=ROOT, text=True)
-
-
 def extract(rev: str, into: Path) -> None:
     archive = subprocess.run(
         ["git", "archive", rev, "src", "include"],
@@ -421,10 +417,10 @@ def read_tree(tree: Path) -> tuple[dict[str, set[str]], dict[str, str]]:
 def addresses(
     rev: str,
 ) -> tuple[dict[str, set[tuple[str, int]]], dict[tuple[str, int], str]]:
-    text = subprocess.check_output(["git", "show", f"{rev}:{SYMBOLS}"], cwd=ROOT)
+    text = git("show", f"{rev}:{TABLE}", root=ROOT)
     by_name: dict[str, set[tuple[str, int]]] = defaultdict(set)
     by_addr: dict[tuple[str, int], str] = {}
-    for target, rows in read_text(text.decode()).items():
+    for target, rows in parse(text).items():
         for name, row in rows.items():
             if isinstance(row, dict) and "addr" in row:
                 by_name[name].add((target, row["addr"]))
@@ -600,7 +596,9 @@ def compare(before: Snapshot, after: Snapshot, removed: set[str]) -> list[str]:
 
 
 def removals(base: str, head: str) -> set[str]:
-    return set(KEPT_REMOVED.findall(git("log", "--format=%B", f"{base}..{head}")))
+    return set(
+        KEPT_REMOVED.findall(git("log", "--format=%B", f"{base}..{head}", root=ROOT))
+    )
 
 
 def record_files(tree: Path, names: set[str]) -> set[str]:
@@ -635,11 +633,9 @@ def main(argv: list[str]) -> int:
         print(f"check-kept: skipped, no {CLANG} on PATH")
         return 0
     ref, head = argv[1], argv[2] if len(argv) == 3 else "HEAD"
-    base = git("merge-base", ref, head).strip()
+    base = merge_base(ref, head, root=ROOT)
     changed = [
-        p
-        for p in git("diff", "--no-renames", "--name-only", base, head).split()
-        if tracked(p)
+        p for p in changed_files("--no-renames", base, head, root=ROOT) if tracked(p)
     ]
     if not changed:
         print(f"check-kept: no source changed against {ref}")

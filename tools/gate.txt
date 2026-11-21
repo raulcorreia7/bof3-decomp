@@ -1,0 +1,24 @@
+# The push checks, one per line: name | needs | run | meson target | command
+# needs: disc, compiler or none. run: chain (one after the other; two Ninja runs must not share a
+# build directory) or par (at the same time as the rest). The command runs with sh from the
+# repository root; $ref is the base ref, $base its merge base with HEAD, $bld the Meson build
+# folder. A Meson target of the same name runs the command with $ref empty.
+# tools/pre_push.sh and meson.build read this file; the table in tools/README.md#pre-push is tested against it.
+check|disc|chain||meson compile -C $bld check
+check-headers|compiler|chain||meson compile -C $bld check-headers
+check-plain|compiler|par|check-plain|tools/check_plain.sh $bld/plain-flags.txt
+check-tree|none|par|check-tree|tools/check_tree.sh $ref
+externs|none|par||tools/check_externs.sh $ref
+include-asm|none|par|include-asm|tools/check_asm.sh $ref
+format-check|none|par|format-check|tools/format.sh --check
+test|none|par||meson test -C $bld --no-rebuild --print-errorlogs
+typeloss|none|par||python3 tools/typeloss.py $base HEAD
+markers|none|par||python3 tools/check_markers.py --diff $ref
+drafts|compiler|par||python3 tools/check_drafts.py $ref
+names|none|par||python3 tools/check_names.py --diff $ref
+addrs|none|par||python3 tools/check_addrs.py $ref HEAD
+kept|none|par||python3 tools/check_kept.py $ref HEAD
+quality|none|par||python3 tools/quality.py --diff $ref
+order|none|par||python3 tools/order_check.py --diff $ref
+message-ids|none|par||python3 tools/message_ids.py --check
+subsystems|none|par||python3 tools/quality.py --markdown

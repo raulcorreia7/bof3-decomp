@@ -32,12 +32,12 @@ from pathlib import Path
 from typing import Any
 
 import quality
+from bof3.core.paths import ROOT
 from bof3.link import symbols
 from bof3.link.graph import source_object
 from bof3.resolve import load_target_manifests
 from bof3.status.claims import DRAFT_RE, source_text
 
-ROOT = Path(__file__).resolve().parent.parent
 #: The source and split-assembly folders, and the report the status site reads.
 SRC = "src"
 ASM = "asm"

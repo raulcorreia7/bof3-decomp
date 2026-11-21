@@ -20,13 +20,13 @@ from __future__ import annotations
 
 import argparse
 import re
-import subprocess
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-SYMBOLS = "config/symbols.toml"
+from bof3.adapters.git import changed_files, ls_files, merge_base
+from bof3.core.paths import ROOT
+from bof3.symbols import TABLE as SYMBOLS
 
 ADDR_NAME = re.compile(r"\b(?:func|D|jtbl|jpt|L|s_gap)_([0-9A-Fa-f]{6,8})\b")
 ADDR_COMMENT = re.compile(
@@ -472,10 +472,7 @@ def check_data_file(path: str, lines: list[str]) -> list[Finding]:
 
 
 def tracked() -> tuple[list[str], list[str]]:
-    out = subprocess.check_output(
-        ["git", "ls-files", "include", "src"], cwd=ROOT, text=True
-    )
-    paths = out.split("\n")
+    paths = ls_files("include", "src", root=ROOT)
     headers = [
         f for f in paths if f.endswith(".h") and not f.startswith("include/psyq/")
     ]
@@ -484,25 +481,16 @@ def tracked() -> tuple[list[str], list[str]]:
 
 
 def changed(ref: str) -> tuple[list[str], list[str]]:
-    base = subprocess.check_output(
-        ["git", "merge-base", ref, "HEAD"], cwd=ROOT, text=True
-    ).strip()
-    out = subprocess.check_output(
-        [
-            "git",
-            "diff",
-            "--name-only",
-            "--diff-filter=ACMR",
-            f"{base}...HEAD",
-            "--",
-            "include",
-            "src",
-            SYMBOLS,
-        ],
-        cwd=ROOT,
-        text=True,
+    base = merge_base(ref, root=ROOT)
+    paths = changed_files(
+        "--diff-filter=ACMR",
+        f"{base}...HEAD",
+        "--",
+        "include",
+        "src",
+        SYMBOLS,
+        root=ROOT,
     )
-    paths = out.split("\n")
     return (
         [f for f in paths if f.endswith(".h") and not f.startswith("include/psyq/")],
         [f for f in paths if f.endswith(".c")],

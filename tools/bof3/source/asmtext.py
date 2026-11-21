@@ -337,9 +337,7 @@ def _operand_value(text: str) -> Value | None:
     return None
 
 
-def _plus(value: Value | None, delta: int) -> Value | None:
-    if value is None:
-        return None
+def _plus(value: Value, delta: int) -> Value:
     if value.kind == "imm":
         return Value("imm", number=value.number + delta)
     if value.kind == "sym":
@@ -348,7 +346,7 @@ def _plus(value: Value | None, delta: int) -> Value | None:
         return Value("arg", offset=value.offset + delta, argument=value.argument)
     if value.kind == "stack":
         return Value("stack", offset=value.offset + delta, number=value.number)
-    return None
+    return value
 
 
 def _arg_use(facts: Facts, register_number: int) -> ArgUse:
@@ -367,9 +365,9 @@ def decode(
     address to ``(table, name, offset)`` so arithmetic on a constant base resolves to a symbol.
     """
     facts = Facts()
-    values: dict[int, Value] = {}
+    values: dict[int | None, Value] = {}
     known: set[int] = set()
-    pending_narrow: dict[int, tuple[int, int]] = {}
+    pending_narrow: dict[int | None, tuple[int, int | None]] = {}
     frame = 0
     frame_seen = False
     seen: set[tuple[str, str]] = set()
@@ -591,7 +589,9 @@ def _arg_value(number: int) -> Value:
     return Value("arg", argument=number - ARG_REGISTERS[0])
 
 
-def _reg_value(values: dict[int, Value], number: int | None, known) -> Value | None:
+def _reg_value(
+    values: dict[int | None, Value], number: int | None, known
+) -> Value | None:
     """Return a register's value, reading an argument register or zero as what it supplies."""
     if number is None:
         return None
@@ -603,7 +603,7 @@ def _reg_value(values: dict[int, Value], number: int | None, known) -> Value | N
     return value
 
 
-def narrow_sign(shift: int) -> str:
+def narrow_sign(shift: int | None) -> str:
     """Return the type a sign-extending shift amounts to: 24 is a byte and 16 a halfword."""
     return "s8" if shift == 24 else "s16"
 
@@ -634,7 +634,7 @@ def _record_memory(
     facts: Facts,
     insn: Insn,
     part: tuple[str, int],
-    values: dict[int, Value],
+    values: dict[int | None, Value],
     symbols: dict[str, tuple[str, int]],
     owner,
     frame: int,

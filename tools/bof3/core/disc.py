@@ -15,6 +15,8 @@ import zlib
 from dataclasses import dataclass
 from pathlib import Path
 
+from bof3.errors import MissingInputError
+
 MANIFEST = "config/disc.toml"
 MEDIA = "inputs/external"
 EXTRACTED = "build/disc"
@@ -55,7 +57,7 @@ def load_manifest(root: Path) -> dict:
     """Read ``config/disc.toml``."""
     path = root / MANIFEST
     if not path.is_file():
-        raise SystemExit(f"disc: {MANIFEST} is missing; restore it with git")
+        raise MissingInputError(f"disc: {MANIFEST} is missing; restore it with git")
     with path.open("rb") as stream:
         return tomllib.load(stream)
 

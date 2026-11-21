@@ -28,16 +28,18 @@ import argparse
 import collections
 import os
 import re
-import subprocess
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
+from typing import NamedTuple
 
-from bof3.link.symbols import read_text
+from bof3.adapters.cli import run_main
+from bof3.adapters.config import read_symbols
+from bof3.adapters.match import run_match
+from bof3.core.paths import ROOT
 from bof3.source.ctext import mask
 from bof3.source.index import Func, find, load_index
 
-ROOT = Path(__file__).resolve().parent.parent
 SHAPES = ("call-seq", "store-seq", "spad", "dispatch", "straight", "branch")
 SPAD = "0x1F800044"
 ARGS = ("a0", "a1", "a2", "a3")
@@ -421,9 +423,17 @@ def lifted_function(f: Func, root: Path = ROOT) -> Lift:
     return lift(instructions(path.read_text(encoding="utf-8")))
 
 
-def measure(funcs: list[Func]) -> list[tuple[str, Func, int]]:
+class Measured(NamedTuple):
+    """One function with the shape of its assembly and its size."""
+
+    shape: str
+    func: Func
+    words: int
+
+
+def measure(funcs: list[Func]) -> list[Measured]:
     """Return ``(shape, function, words)`` for each function."""
-    return [(classify(lifted_function(f)), f, len(f.words)) for f in funcs]
+    return [Measured(classify(lifted_function(f)), f, len(f.words)) for f in funcs]
 
 
 class Tree:
@@ -670,7 +680,7 @@ class Names:
     ADDRESS = re.compile(r"^(?:func|D|jtbl)_([0-9A-F]{8})$")
 
     def __init__(self, root: Path = ROOT) -> None:
-        table = read_text((root / "config/symbols.toml").read_text(encoding="utf-8"))
+        table = read_symbols(root)
         self.by_image: dict[str, dict[int, str]] = {}
         self.spans: dict[str, list[tuple[int, int, str]]] = {}
         for image, rows in table.items():
@@ -1097,18 +1107,10 @@ def apply(items: list[Item], tree: Tree, shared: str | None) -> list[str]:
     out = []
     for item in items:
         f = item.func
-        result = subprocess.run(
-            ["sh", "tools/match.sh", f.image, f.name],
-            cwd=ROOT,
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-        if result.returncode:
+        result = run_match(ROOT, f.image, f.name)
+        if not result.exact:
             restore(saved)
-            lines = (result.stdout + result.stderr).strip().splitlines()
-            errors = [x for x in lines if re.search(r"\.[ch]:\d+: (?!warning)", x)]
-            tail = " | ".join(x.strip() for x in (errors or lines)[:2])
+            tail = " | ".join(x.strip() for x in result.errors()[:2])
             return [f"FAIL {f.ref} {f.name}: {tail[:200]}"]
         out.append(f"EXACT {f.ref} {f.name} in {f.src}")
     return out
@@ -1203,4 +1205,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(run_main(main))

@@ -10,18 +10,16 @@ merge base with HEAD, so rows that landed on REF after the branch point are not 
 Usage: python3 tools/check_addrs.py REF [HEAD]
 """
 
-import subprocess
 import sys
 
-from bof3.link.symbols import read_text
-
-SYMBOLS = "config/symbols.toml"
+from bof3.adapters.git import git, merge_base
+from bof3.symbols import TABLE, parse
 
 
 def addresses(rev):
-    text = subprocess.check_output(["git", "show", f"{rev}:{SYMBOLS}"])
+    text = git("show", f"{rev}:{TABLE}")
     found = {}
-    for target, rows in read_text(text.decode()).items():
+    for target, rows in parse(text).items():
         for name, row in rows.items():
             if isinstance(row, dict) and "addr" in row:
                 found[(target, row["addr"])] = name
@@ -36,7 +34,7 @@ def main(argv):
         print(__doc__.strip(), file=sys.stderr)
         return 2
     ref, head = argv[1], argv[2] if len(argv) == 3 else "HEAD"
-    base = subprocess.check_output(["git", "merge-base", ref, head], text=True).strip()
+    base = merge_base(ref, head)
     before, after = addresses(base), addresses(head)
     lost = sorted(key for key in before if key not in after)
     for target, addr in lost:

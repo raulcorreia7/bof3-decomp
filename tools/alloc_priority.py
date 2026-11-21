@@ -20,7 +20,8 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+from bof3.core.paths import ROOT
+
 SAVED_REGISTERS = {
     16: "s0",
     17: "s1",

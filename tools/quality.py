@@ -48,9 +48,11 @@ import subprocess
 from collections.abc import Iterable, Iterator
 from pathlib import Path
 
+from bof3.adapters.git import git
+from bof3.adapters.git import merge_base as branch_point
+from bof3.core.paths import ROOT
 from bof3.source.ctext import mask
 
-ROOT = Path(__file__).resolve().parent.parent
 METRICS = ("addr", "names", "casts", "harmful", "notes", "twins", "pasted")
 GATED = ("casts", "harmful", "pasted", "addr", "names")
 PER_FUNCTION = ("addr", "names")
@@ -222,21 +224,22 @@ def rev_files(rev: str) -> dict[str, str]:
 
 def merge_base(base: str, to: str) -> str:
     """Return the commit ``to`` branched from ``base`` at, or ``base`` when there is none."""
-    out = subprocess.run(
-        ["git", "merge-base", base, "HEAD" if to == "WORK" else to],
-        cwd=ROOT, capture_output=True, text=True, check=False,
-    )  # fmt: skip
-    return out.stdout.strip() if out.returncode == 0 and out.stdout.strip() else base
+    return branch_point(base, "HEAD" if to == "WORK" else to, root=ROOT, fallback=base)
 
 
 def touched(base: str, to: str) -> set[str]:
     """Return the paths that differ between ``base`` and ``to``; a renamed file lists both paths,
     so its metrics move with it."""
-    cmd = ["git", "diff", "--name-only", "--no-renames", base] + (
-        [] if to == "WORK" else [to]
+    return set(
+        git(
+            "diff",
+            "--name-only",
+            "--no-renames",
+            base,
+            *([] if to == "WORK" else [to]),
+            root=ROOT,
+        ).split()
     )
-    out = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, check=True)
-    return set(out.stdout.split())
 
 
 ALLOWED = re.compile(r"^Quality-Allowed:\s*(\S+)\s+(\w+)", re.M)
@@ -244,11 +247,14 @@ ALLOWED = re.compile(r"^Quality-Allowed:\s*(\S+)\s+(\w+)", re.M)
 
 def allowed(base: str, to: str) -> set[tuple[str, str]]:
     """Return the ``(path, metric)`` pairs that commits between ``base`` and ``to`` accept."""
-    out = subprocess.run(
-        ["git", "log", "--format=%B", f"{base}..{'HEAD' if to == 'WORK' else to}"],
-        cwd=ROOT, capture_output=True, text=True, check=False,
-    )  # fmt: skip
-    return set(ALLOWED.findall(out.stdout))
+    log = git(
+        "log",
+        "--format=%B",
+        f"{base}..{'HEAD' if to == 'WORK' else to}",
+        root=ROOT,
+        check=False,
+    )
+    return set(ALLOWED.findall(log))
 
 
 def worse(

@@ -35,7 +35,8 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+from bof3.core.paths import ROOT
+
 HEADER = ROOT / "include/menu/message_ids.h"
 DEF = ROOT / "include/msg/messages.def"
 SOURCES = ROOT / "src"
