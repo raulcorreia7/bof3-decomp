@@ -1994,10 +1994,8 @@ def _matches_type(name: str, family: str, wanted: str | None) -> bool:
     return family.endswith("_") and family[:-1] == wanted
 
 
-def _named_values(
-    headers: list[str], wanted: int, kind: str | None
-) -> list[NamedValue]:
-    """Return every enum member and numeric macro with ``wanted`` among the headers."""
+def _read_header_values(headers: list[str]) -> tuple[list, list]:
+    """Return the enums and numeric macros of the headers, each with its header."""
     enums = []
     defines = []
     for header in headers:
@@ -2011,6 +2009,33 @@ def _named_values(
         defines.extend(
             (header, name, body, line) for name, body, line in _define_values(text)
         )
+    return enums, defines
+
+
+def _resolve_enum(members: list, values: dict[str, int]) -> bool:
+    """Evaluate one enum's members into ``values``; True when any was added."""
+    changed = False
+    previous: int | None = -1
+    for name, body, _ in members:
+        if name in values:
+            previous = values[name]
+            continue
+        value = (
+            _c_expression(body, values)
+            if body is not None
+            else (previous + 1 if previous is not None else None)
+        )
+        if value is not None:
+            values[name] = value
+            previous = value
+            changed = True
+        else:
+            previous = None
+    return changed
+
+
+def _resolve_values(enums: list, defines: list) -> dict[str, int]:
+    """Evaluate every macro and enum member whose expression resolves."""
     values: dict[str, int] = {}
     for _ in range(5):
         changed = False
@@ -2022,24 +2047,18 @@ def _named_values(
                 values[name] = value
                 changed = True
         for _, _, members in enums:
-            previous: int | None = -1
-            for name, body, _ in members:
-                if name in values:
-                    previous = values[name]
-                    continue
-                value = (
-                    _c_expression(body, values)
-                    if body is not None
-                    else (previous + 1 if previous is not None else None)
-                )
-                if value is not None:
-                    values[name] = value
-                    previous = value
-                    changed = True
-                else:
-                    previous = None
+            changed = _resolve_enum(members, values) or changed
         if not changed:
             break
+    return values
+
+
+def _named_values(
+    headers: list[str], wanted: int, kind: str | None
+) -> list[NamedValue]:
+    """Return every enum member and numeric macro with ``wanted`` among the headers."""
+    enums, defines = _read_header_values(headers)
+    values = _resolve_values(enums, defines)
     found: list[NamedValue] = []
     for header, family, members in enums:
         for name, _, line in members:
