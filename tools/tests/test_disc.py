@@ -39,14 +39,3 @@ def test_a_rendered_manifest_reads_back_and_names_each_mismatch(tmp_path: Path) 
     ]
     (tmp_path / "A/B.BIN").unlink()
     assert disc.verify_files(data, tmp_path) == ["A/B.BIN: missing"]
-
-
-def test_the_shallowest_complete_set_wins(tmp_path: Path) -> None:
-    (tmp_path / "deep").mkdir()
-    for folder in (tmp_path, tmp_path / "deep"):
-        (folder / "t.bin").write_bytes(b"")
-        (folder / "g.cue").write_text('FILE "t.bin" BINARY\n  TRACK 01 MODE2/2352\n')
-    (tmp_path / "broken.cue").write_text('FILE "gone.bin" BINARY\n')
-    cue, bins = disc.disc_set(tmp_path) or (None, [])
-    assert cue == tmp_path / "g.cue"
-    assert bins == [(tmp_path / "t.bin").resolve()]

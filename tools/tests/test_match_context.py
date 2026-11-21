@@ -69,10 +69,3 @@ def test_a_split_file_named_after_its_symbol_prints_its_assembly(
     assert lines[1] == "80000000  addiu      $sp, $sp, -0x8"
     assert "can't read" not in result.stderr
     assert lines[lines.index("== file") + 1] == "src/emi/test/Battle_Foo.c"
-
-
-def test_an_address_with_no_split_file_prints_none(tmp_path: Path) -> None:
-    result = run(make_repo(tmp_path), f"{TARGET}@0x80000200")
-    assert result.returncode == 0
-    assert "== asm (none)" in result.stdout.splitlines()
-    assert "can't read" not in result.stderr

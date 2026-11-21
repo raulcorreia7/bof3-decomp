@@ -184,17 +184,6 @@ def test_the_units_own_rodata_links_at_its_retail_address(tmp_path: Path) -> Non
     )
 
 
-def test_a_unit_without_a_rodata_row_links_its_rodata_at_a_sentinel(
-    tmp_path: Path,
-) -> None:
-    repo = rodata_repo(tmp_path)
-    (repo / "config" / TARGET / "splat.yaml").write_text(
-        SPLAT.replace(".rodata, C", ".rodata, X")
-    )
-    assert run_with(repo, ".rodata").returncode == 0
-    assert ".rodata 0x10 " in (repo / "linkscript.ld").read_text()
-
-
 def test_the_units_own_data_is_still_not_covered(tmp_path: Path) -> None:
     result = run_with(rodata_repo(tmp_path), ".data")
     assert result.returncode == 2

@@ -7,7 +7,7 @@ import collections
 import re
 from dataclasses import dataclass
 
-from bof3.adapters.config import read_symbols
+from bof3.adapters.config import manifest_layout, read_symbols
 from bof3.source import asmtext
 from bof3.symbols.accesses import _normalized_type
 from bof3.symbols.context import RESIDENT, Context
@@ -375,12 +375,10 @@ def _extent_ladders(
 
 def _manifest_layout(ctx: Context, manifest):
     """The splat layout of an image manifest, or None when it cannot be read."""
-    from bof3.resolve.layout import parse_splat_layout
-
     if manifest is None:
         return None
     try:
-        return parse_splat_layout(ctx.root / manifest.splat, manifest.load_address)
+        return manifest_layout(ctx.root, manifest)
     except (OSError, ValueError):
         return None
 

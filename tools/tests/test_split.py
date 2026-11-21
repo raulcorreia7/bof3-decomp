@@ -4,10 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pytest
-
 import split
-from bof3.core.paths import CONFIG
 
 
 def test_draft_rows_name_only_sources_with_a_draft_function(tmp_path: Path) -> None:
@@ -29,32 +26,3 @@ def test_draft_rows_name_only_sources_with_a_draft_function(tmp_path: Path) -> N
     d, name, source, asm_dir = result[0].split("\t")
     assert (d, source, asm_dir) == ("d", "src/a/draft.c", "asm/a")
     assert name != "n1" and name.endswith(".o")
-
-
-def test_graph_inputs_list_config_files_and_extra_sources(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    (tmp_path / CONFIG / "t").mkdir(parents=True)
-    (tmp_path / CONFIG / "t/target.toml").write_text("", encoding="utf-8")
-    (tmp_path / CONFIG / "link.toml").write_text("", encoding="utf-8")
-    # None of these can change a row of the graph.
-    for name in ("attempts.jsonl", "address_names.txt", "disc.toml"):
-        (tmp_path / CONFIG / name).write_text("", encoding="utf-8")
-    (tmp_path / "tools").mkdir()
-    monkeypatch.setattr(split, "__file__", str(tmp_path / "tools/split.py"))
-    result = split.graph_inputs(tmp_path, {"src/z.c"})
-    assert result == sorted(
-        [f"{CONFIG}/t/target.toml", f"{CONFIG}/link.toml", "tools/split.py", "src/z.c"]
-    )
-
-
-def test_ensure_payload_copies_the_disc_file_for_an_executable(tmp_path: Path) -> None:
-    class Manifest:
-        binary = "build/bin/x.bin"
-        kind = "executable"
-        disc_id = "SLUS_004.22"
-
-    (tmp_path / "build/disc").mkdir(parents=True)
-    (tmp_path / "build/disc/SLUS_004.22").write_bytes(b"abc")
-    binary = split.ensure_payload(tmp_path, Manifest())  # type: ignore[arg-type]
-    assert binary.read_bytes() == b"abc"

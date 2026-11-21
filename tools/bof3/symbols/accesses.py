@@ -9,7 +9,7 @@ from bof3.adapters.config import read_symbols
 from bof3.errors import SymbolError
 from bof3.source import ctext
 from bof3.symbols.context import Context, Table
-from bof3.symbols.headers import _match_brace
+from bof3.symbols.headers import record_blocks, source_files
 from bof3.symbols.layers import LAYER_RESIDENT, _layer_manifests, _layer_tree
 from bof3.symbols.mips import (
     MIPS_READ,
@@ -64,10 +64,7 @@ def _c_member_uses(
     found: dict[str, list[tuple[str, int, str]]] = collections.defaultdict(list)
     if not names:
         return found
-    for path in ctext.tracked_c(ctx.root):
-        if path.startswith("include/psyq/"):
-            continue
-        text = ctext.read(ctx.root, path)
+    for path, text in source_files(ctx, headers=False):
         masked = ctext.mask(text)
         for number, line in enumerate(masked.split("\n"), 1):
             for match in pattern.finditer(line):
@@ -414,7 +411,6 @@ def _access_cells(row: dict) -> list[str]:
     ]
 
 
-RECORD_HEAD = re.compile(r"(?m)\b(?:typedef\s+)?(?:struct|union)\s*(?:(\w+)\s*)?\{")
 TYPEDEF_RECORD = re.compile(r"(?m)^\s*typedef\s+(?:struct|union)\s+(\w+)\s+(\w+)\s*;")
 
 
@@ -425,20 +421,10 @@ def _record_definitions(
     counts: dict[str, int] = collections.Counter()
     header: dict[str, str] = {}
     names: set[str] = set()
-    for path in ctext.tracked_c(ctx.root):
-        if not path.endswith(".h"):
-            continue
-        text = ctext.read(ctx.root, path)
+    for path, text in source_files(ctx, psyq=True):
         masked = ctext.mask(text)
-        for match in RECORD_HEAD.finditer(masked):
-            opening = match.end() - 1
-            closing = _match_brace(masked, opening)
-            if closing < 0:
-                continue
-            tag = match.group(1) or ""
-            tail = re.match(r"\s*(\w+)\s*;", masked[closing + 1 :])
-            alias = tail.group(1) if tail else ""
-            for name in {part for part in (tag, alias) if part}:
+        for _opening, _closing, found in record_blocks(masked):
+            for name in found:
                 counts[name] += 1
                 header.setdefault(name, path)
                 names.add(name)

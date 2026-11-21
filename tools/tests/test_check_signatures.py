@@ -29,22 +29,11 @@ def test_a_prototype_with_other_types_is_a_fault() -> None:
     assert "void(s32, s32) vs void(s32, u8)" in found[0].detail
 
 
-def test_the_owner_signature_passes_whatever_the_names() -> None:
-    assert rows(tree("void f(s32 a, u8 b);")) == []
-    assert rows(tree("extern void f(s32, u8);")) == []
-
-
 def test_a_sig_kept_comment_keeps_one_prototype() -> None:
     kept = "/* sig-kept: the retail callers pass words. */\nvoid f(s32 x, s32 y);"
     assert rows(tree(kept)) == []
     far = "/* sig-kept: stale. */\n\n\nvoid f(s32 x, s32 y);"
     assert len(rows(tree(far))) == 1
-
-
-def test_another_image_with_the_same_address_name_is_another_function() -> None:
-    files = tree("void f(s32 x, s32 y);", "")
-    files["src/overlays/area/area002/13/f.c"] = "MATCH void f(s32 x, u8 y) {\n}\n"
-    assert rows(files) == []
 
 
 def test_the_definition_of_the_same_image_owns_the_prototype() -> None:

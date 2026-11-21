@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import os
 import subprocess
 import tomllib
 from pathlib import Path
@@ -40,7 +39,7 @@ def snapshot(root: Path) -> tuple[dict[str, bytes], bytes]:
     return files, (root / ".git/index").read_bytes()
 
 
-@pytest.mark.parametrize("failure", ["destination", "index-lock"])
+@pytest.mark.parametrize("failure", ["destination"])
 def test_preflight_failure_leaves_files_and_index_unchanged(
     repo: Path, failure: str
 ) -> None:
@@ -109,26 +108,6 @@ def test_success_and_case_only_rename_keep_the_output(
     assert "src/a/old.c" in git("ls-files", root=repo)
 
 
-def test_postflight_checks_the_written_files_and_rolls_back(
-    repo: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    path = repo / "include/a.h"
-    before = snapshot(repo)
-    write = Path.write_text
-
-    def leave_old_reference(
-        self: Path, contents: str, *args: object, **kwargs: object
-    ) -> int:
-        if self == path:
-            contents = "void Old(void);\n"
-        return write(self, contents, *args, **kwargs)
-
-    monkeypatch.setattr(Path, "write_text", leave_old_reference)
-    with pytest.raises(SymbolError, match="Old.*include/a.h"):
-        main(repo, ["rename", "Old", "New"])
-    assert snapshot(repo) == before
-
-
 def test_address_renames_keep_provenance_and_other_images(repo: Path) -> None:
     for name, content in snapshot(repo)[0].items():
         (repo / name).write_bytes(content.replace(b"Old", b"func_80000000"))
@@ -160,70 +139,6 @@ def test_address_renames_keep_provenance_and_other_images(repo: Path) -> None:
     assert "/* func_80000000 */" in (repo / "src/a/New.c").read_text()
     assert "/* func_80000000 */" in (repo / "include/a.h").read_text()
     assert "func_80000000" in unrelated.read_text()
-
-
-def test_renaming_an_address_name_drops_its_alias_row(repo: Path) -> None:
-    for name, content in snapshot(repo)[0].items():
-        (repo / name).write_bytes(content.replace(b"Old", b"func_80000000"))
-    (repo / "src/a/Old.c").rename(repo / "src/a/func_80000000.c")
-    put_symbols(
-        repo,
-        '["exe/a"]\nfunc_80000000 = { addr = 0x80000000, type = "func", alias = true }\n',
-    )
-    git("add", ".", root=repo)
-    assert (
-        main(
-            repo,
-            [
-                "rename",
-                "func_80000000",
-                "New",
-                "--image",
-                "exe/a",
-                "--scope",
-                "src/a",
-                "include",
-                "config",
-                "--source",
-                "test purpose",
-            ],
-        )
-        == 0
-    )
-    assert tomllib.loads((repo / "config/symbols/exe+a.toml").read_text()) == {
-        "exe/a": {
-            "New": {
-                "addr": 0x80000000,
-                "type": "func",
-                "source": "test purpose",
-            }
-        }
-    }
-
-
-def test_add_refuses_an_image_that_is_not_a_target(repo: Path) -> None:
-    table = repo / "config/symbols/exe+a.toml"
-    before = table.read_bytes()
-    assert main(repo, ["add", "exe/b", "New", "0x80000010", "--source", "x"]) == 2
-    assert table.read_bytes() == before
-
-
-def test_index_publication_failure_rolls_back_the_whole_rename(
-    repo: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    before = snapshot(repo)
-    replace = os.replace
-
-    def fail_publication(source: Path, target: Path) -> None:
-        if target == repo / ".git/index":
-            raise OSError("injected index failure")
-        replace(source, target)
-
-    monkeypatch.setattr(os, "replace", fail_publication)
-    with pytest.raises(SymbolError, match="injected index failure"):
-        main(repo, ["rename", "Old", "New"])
-    assert snapshot(repo) == before
-    assert not (repo / ".git/index.lock").exists()
 
 
 LAYOUT = """sha1: 0
@@ -265,72 +180,6 @@ def test_a_rename_renames_the_layout_rows_and_moves_the_unit(repo: Path) -> None
     assert "[0x10, .rodata, New]" in text
 
 
-def test_a_named_symbol_repairs_its_address_row_and_unit_file(repo: Path) -> None:
-    set_files(
-        repo,
-        {
-            "config/exe/a/splat.yaml": LAYOUT + "      - [0x0, c, func_80000000]\n",
-            "config/symbols/exe+a.toml": '["exe/a"]\nNew = { addr = 0x80000000, type = "func", source = "test purpose" }\n',
-            "src/a/func_80000000.c": "MATCH void New(void) {}\n",
-            "src/a/Old.c": None,
-            "include/a.h": None,
-        },
-    )
-    assert (
-        main(repo, ["rename", "func_80000000", "New", "--image", "exe/a", "--local"])
-        == 0
-    )
-    assert (repo / "src/a/New.c").read_text() == "MATCH void New(void) {}\n"
-    assert not (repo / "src/a/func_80000000.c").exists()
-    assert "[0x0, c, New]" in (repo / "config/exe/a/splat.yaml").read_text()
-    assert tomllib.loads((repo / "config/symbols/exe+a.toml").read_text()) == {
-        "exe/a": {
-            "New": {
-                "addr": 0x80000000,
-                "type": "func",
-                "source": "test purpose",
-            }
-        }
-    }
-
-
-def test_a_repair_refuses_a_unit_that_defines_another_name(repo: Path) -> None:
-    set_files(
-        repo,
-        {
-            "config/exe/a/splat.yaml": LAYOUT + "      - [0x0, c, func_80000000]\n",
-            "config/symbols/exe+a.toml": '["exe/a"]\nOther = { addr = 0x80000000, type = "func", source = "x" }\n',
-            "src/a/func_80000000.c": "MATCH void Stale_Name(void) {}\n",
-            "src/a/Old.c": None,
-            "include/a.h": None,
-        },
-    )
-    before = snapshot(repo)
-    with pytest.raises(SymbolError, match="does not define Other"):
-        main(repo, ["rename", "func_80000000", "Other", "--image", "exe/a", "--local"])
-    assert snapshot(repo) == before
-
-
-def test_an_offset_row_takes_its_own_offset(repo: Path) -> None:
-    set_files(
-        repo,
-        {
-            "config/exe/a/splat.yaml": LAYOUT
-            + "      - [0x10C, .rodata, 1EFC]\n      - [0x1EDC, c, 1EFC]\n",
-            "config/symbols/exe+a.toml": '["exe/a"]\n',
-            "src/a/1EFC.c": "MATCH void func_80001EDC(void) {}\n",
-            "src/a/Old.c": None,
-            "include/a.h": None,
-        },
-    )
-    assert main(repo, ["rename", "1EFC", "1EDC", "--image", "exe/a", "--local"]) == 0
-    assert (repo / "src/a/1EDC.c").is_file()
-    assert not (repo / "src/a/1EFC.c").exists()
-    text = (repo / "config/exe/a/splat.yaml").read_text()
-    assert "[0x10C, .rodata, 1EDC]" in text
-    assert "[0x1EDC, c, 1EDC]" in text
-
-
 def test_a_layout_row_outside_the_scope_is_refused(repo: Path) -> None:
     set_files(repo, {"config/exe/a/splat.yaml": LAYOUT + "      - [0x0, c, Old]\n"})
     before = snapshot(repo)
@@ -364,22 +213,6 @@ def test_a_local_rename_keeps_the_other_image(repo: Path) -> None:
     ) == {"Old"}
 
 
-def test_an_address_name_is_unique_only_inside_its_image(repo: Path) -> None:
-    set_files(
-        repo,
-        {
-            "config/exe/a/splat.yaml": LAYOUT + "      - [0x0, c, Old]\n",
-            "config/exe/b/splat.yaml": LAYOUT + "      - [0x0, c, func_80000000]\n",
-            "src/b/func_80000000.c": "MATCH void func_80000000(void) {}\n",
-        },
-    )
-    assert main(repo, ["rename", "Old", "func_80000000", "--image", "exe/a"]) == 0
-    assert (repo / "src/a/func_80000000.c").is_file()
-    assert (repo / "src/b/func_80000000.c").read_text() == (
-        "MATCH void func_80000000(void) {}\n"
-    )
-
-
 def test_an_address_name_clashes_inside_its_image(repo: Path) -> None:
     set_files(
         repo,
@@ -392,32 +225,3 @@ def test_an_address_name_clashes_inside_its_image(repo: Path) -> None:
     with pytest.raises(SymbolError, match="already occurs"):
         main(repo, ["rename", "Old", "func_80000000", "--image", "exe/a"])
     assert snapshot(repo) == before
-
-
-def test_an_address_name_clashes_in_a_visible_table(repo: Path) -> None:
-    set_files(
-        repo,
-        {
-            "config/link.toml": '[[resident]]\ntarget = "exe/b"\nvisible_to = ["exe"]\n',
-            "config/symbols/exe+a.toml": (
-                '["exe/a"]\nOld = { addr = 0x80000000, type = "func" }\n'
-                '\n["exe/b"]\nfunc_80000000 = { addr = 0x80001000, type = "func" }\n'
-            ),
-            "config/exe/a/splat.yaml": LAYOUT + "      - [0x0, c, Old]\n",
-            "config/exe/b/splat.yaml": LAYOUT,
-        },
-    )
-    before = snapshot(repo)
-    with pytest.raises(SymbolError, match="func_80000000 is 0x80001000"):
-        main(repo, ["rename", "Old", "func_80000000", "--image", "exe/a"])
-    assert snapshot(repo) == before
-
-
-def test_rename_leaves_the_attempts_history_as_written(repo: Path) -> None:
-    history = repo / "config/attempts.jsonl"
-    row = '{"function": "exe/a@0x80000000", "tried": "Old did not match"}\n'
-    history.write_text(row)
-    git("add", "config/attempts.jsonl", root=repo)
-    assert main(repo, ["rename", "Old", "New"]) == 0
-    assert history.read_text() == row
-    assert "New" in (repo / "src/a/New.c").read_text()

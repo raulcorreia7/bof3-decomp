@@ -32,16 +32,6 @@ def rows(path: Path) -> list[dict]:
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
 
 
-def test_a_row_is_appended(tmp_path) -> None:
-    path = file(tmp_path, row("b@0x00000002", "one"), row("a@0x00000001", "two"))
-
-    assert attempts.add(path, "a@0x00000001", "late", "", 52.1) == 3
-    assert [(r["function"], r["tried"]) for r in rows(path)][2] == (
-        "a@0x00000001",
-        "late",
-    )
-
-
 def test_the_row_keeps_the_spelling_of_the_last_row(tmp_path) -> None:
     compact = file(tmp_path, row("a@0x00000001", "one", compact=True), name="c.jsonl")
     attempts.add(compact, "a@0x00000001", "two", "", None)

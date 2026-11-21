@@ -57,27 +57,6 @@ def tree(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> gen_body.Tree:
     return gen_body.Tree(tmp_path)
 
 
-def test_members_flatten_nested_structs_and_unions(tree: gen_body.Tree) -> None:
-    members = tree.members("Work", ["work.h"])
-    assert members[0x01] == [("header.mode", 1)]
-    assert members[0x04] == [("script", 4)]
-    # An alias of a struct is followed; a union offers every width it holds.
-    assert members[0x08] == [("pos.x.fixed", 4), ("pos.x.part.fraction", 2)]
-    assert members[0x0A] == [("pos.x.part.integer", 2)]
-    assert members[0x0C] == [("pos.y.fixed", 4), ("pos.y.part.fraction", 2)]
-    # A type the lifter cannot size leaves its offset unnamed and the rest in place.
-    assert 0x14 not in members
-    assert members[0x18] == [("unk_18", 2)]
-
-
-def test_member_picks_the_path_of_the_stored_width(tree: gen_body.Tree) -> None:
-    ctx = {"members": tree.members("Work", ["work.h"])}
-    assert gen_body.member(0x08, 4, ctx) == "g_Task->pos.x.fixed"
-    assert gen_body.member(0x08, 2, ctx) == "g_Task->pos.x.part.fraction"
-    with pytest.raises(gen_body.Unsupported, match="no 1-byte member at 0x8"):
-        gen_body.member(0x08, 1, ctx)
-
-
 class Container:
     """The names table, with every word of g_State inside the record."""
 

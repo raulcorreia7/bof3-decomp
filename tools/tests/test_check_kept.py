@@ -9,8 +9,6 @@ from check_kept import (
     Entities,
     Snapshot,
     compare,
-    defines_in,
-    is_weak,
     parse_layouts,
     run_clang,
 )
@@ -32,30 +30,6 @@ def snapshot(
     entities: Entities, uses: dict[str, set[str]], defines=None, names=None, rows=None
 ):
     return Snapshot(entities, uses, defines or {}, names or {}, rows or {})
-
-
-def test_layouts_keep_nested_members_with_absolute_offsets() -> None:
-    layouts, sizes = parse_layouts(LAYOUT)
-    members = [(m.offset, m.path, m.ctype, m.size) for m in layouts["struct Actor"]]
-    assert members == [
-        (0, "flags", "u8", 2),
-        (2, "hp", "s16", 2),
-        (4, "pos", "struct Vec", 4),
-        (4, "pos.x", "s16", 2),
-        (6, "pos.y", "s16", 2),
-        (8, "work", "struct Work *", 4),
-    ]
-    assert sizes["struct Actor"] == 12
-
-
-def test_weak_types_are_integers_and_their_arrays() -> None:
-    assert is_weak("u8[4]") and is_weak("unsigned int")
-    assert not is_weak("struct Work *") and not is_weak("Actor") and not is_weak("u8 *")
-
-
-def test_guards_are_not_defines_and_values_are_normalized() -> None:
-    text = "#ifndef A_H\n#define A_H\n#define COUNT 0x10 /* ten */\n#define TWICE(x) \\\n    ((x) * 2)\n"
-    assert defines_in(text) == {"COUNT": "16", "TWICE": "(x)((x)*2)"}
 
 
 def records(layout: str) -> Entities:

@@ -300,176 +300,162 @@ def main(argv: list[str] | None = None, ctx: Context | None = None) -> int:
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
     verbs = parser.add_subparsers(dest="verb", required=True)
-    one = verbs.add_parser("add", help="add a symbols.toml row")
-    one.add_argument("image")
-    one.add_argument("name")
-    one.add_argument("addr")
-    one.add_argument("--source", help="a description of the symbol")
-    one.add_argument("--type")
-    one.add_argument("--size")
-    one.add_argument("--alias", action="store_true")
-    one.set_defaults(run=_add)
-    two = verbs.add_parser("rename", help="rename a function or global")
-    two.add_argument("old")
-    two.add_argument("new")
-    two.add_argument(
+
+    def verb(name: str, help: str, epilog: str | None = None):
+        extra = (
+            {"epilog": epilog, "formatter_class": argparse.RawDescriptionHelpFormatter}
+            if epilog
+            else {}
+        )
+        return verbs.add_parser(name, help=help, **extra)
+
+    def jsonl(sub: argparse.ArgumentParser) -> None:
+        sub.add_argument(
+            "--jsonl", action="store_true", help="one JSON object per line"
+        )
+
+    sub = verb("add", "add a symbols.toml row")
+    sub.add_argument("image")
+    sub.add_argument("name")
+    sub.add_argument("addr")
+    sub.add_argument("--source", help="a description of the symbol")
+    sub.add_argument("--type")
+    sub.add_argument("--size")
+    sub.add_argument("--alias", action="store_true")
+    sub.set_defaults(run=_add)
+    sub = verb("rename", "rename a function or global")
+    sub.add_argument("old")
+    sub.add_argument("new")
+    sub.add_argument(
         "--image",
         action="append",
         help="a symbols.toml table, such as emi/battle/battle/03; repeat it per image "
         "(default for a named symbol: every table that has it)",
     )
-    two.add_argument(
+    sub.add_argument(
         "--local",
         action="store_true",
         help="only this image's src/ and config/ folders",
     )
-    two.add_argument("--scope", nargs="+", help="only these paths")
-    two.add_argument("--source", help="a description (required for an address name)")
-    two.add_argument("--type")
-    two.add_argument("--size")
-    two.add_argument(
+    sub.add_argument("--scope", nargs="+", help="only these paths")
+    sub.add_argument("--source", help="a description (required for an address name)")
+    sub.add_argument("--type")
+    sub.add_argument("--size")
+    sub.add_argument(
         "--dry-run", action="store_true", help="list the files; change nothing"
     )
-    two.set_defaults(run=_rename)
-    three = verbs.add_parser("params", help="rename parameters of one function")
-    three.add_argument("func")
-    three.add_argument("pairs", nargs="+", metavar="OLD=NEW")
-    three.set_defaults(run=_params)
-    four = verbs.add_parser("refs", help="rank address-named units by references")
-    four.add_argument("dirs", nargs="*")
-    four.add_argument("--jsonl", action="store_true", help="one JSON object per line")
-    four.set_defaults(run=_table_verb(lambda ctx, a: refs(ctx, a.dirs or ["src"])))
-    check_parser = verbs.add_parser("check", help="report symbol-table problems")
-    check_parser.set_defaults(run=_check)
-    five = verbs.add_parser(
+    sub.set_defaults(run=_rename)
+    sub = verb("params", "rename parameters of one function")
+    sub.add_argument("func")
+    sub.add_argument("pairs", nargs="+", metavar="OLD=NEW")
+    sub.set_defaults(run=_params)
+    sub = verb("refs", "rank address-named units by references")
+    sub.add_argument("dirs", nargs="*")
+    jsonl(sub)
+    sub.set_defaults(run=_table_verb(lambda ctx, a: refs(ctx, a.dirs or ["src"])))
+    verb("check", "report symbol-table problems").set_defaults(run=_check)
+    sub = verb(
         "at",
-        help="show the symbol and member at an address",
-        epilog="Example: tools/symbol.py at exe/slus_004_22 0x8014630C",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
+        "show the symbol and member at an address",
+        "Example: tools/symbol.py at exe/slus_004_22 0x8014630C",
     )
-    five.add_argument("image", nargs="?", help="a symbols.toml table")
-    five.add_argument("addresses", nargs="*", metavar="0xADDR")
-    five.add_argument(
+    sub.add_argument("image", nargs="?", help="a symbols.toml table")
+    sub.add_argument("addresses", nargs="*", metavar="0xADDR")
+    sub.add_argument(
         "--diff",
         nargs="?",
         const="public/main",
         metavar="BASE",
         help="read the D_ addresses the branch adds (default base: public/main)",
     )
-    five.set_defaults(run=_at)
-    six = verbs.add_parser(
+    sub.set_defaults(run=_at)
+    sub = verb(
         "member",
-        help="show the member at a byte offset of a record",
-        epilog="Example: tools/symbol.py member Actor 0xB",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
+        "show the member at a byte offset of a record",
+        "Example: tools/symbol.py member Actor 0xB",
     )
-    six.add_argument("type", help="a C record type")
-    six.add_argument("offset", help="a byte offset, such as 0x44")
-    six.set_defaults(run=_member)
-    seven = verbs.add_parser(
+    sub.add_argument("type", help="a C record type")
+    sub.add_argument("offset", help="a byte offset, such as 0x44")
+    sub.set_defaults(run=_member)
+    sub = verb(
         "uses",
-        help="list every reference to a symbol",
-        epilog=(
-            "Examples: tools/symbol.py uses g_Battle\n"
-            "          tools/symbol.py uses exe/slus_004_22@0x8014630C"
-        ),
-        formatter_class=argparse.RawDescriptionHelpFormatter,
+        "list every reference to a symbol",
+        "Examples: tools/symbol.py uses g_Battle\n"
+        "          tools/symbol.py uses exe/slus_004_22@0x8014630C",
     )
-    seven.add_argument("symbol", help="a name, or IMAGE@0xADDR")
-    seven.set_defaults(run=_uses)
-    eight = verbs.add_parser(
+    sub.add_argument("symbol", help="a name, or IMAGE@0xADDR")
+    sub.set_defaults(run=_uses)
+    sub = verb(
         "value",
-        help="find enum members and macros with one value",
-        epilog=(
-            "Example: tools/symbol.py value 0x3A --image emi/battle/battle/03 --type ENEMY_ID"
-        ),
-        formatter_class=argparse.RawDescriptionHelpFormatter,
+        "find enum members and macros with one value",
+        "Example: tools/symbol.py value 0x3A --image emi/battle/battle/03 --type ENEMY_ID",
     )
-    eight.add_argument("number", help="a hexadecimal value, such as 0x3A")
-    eight.add_argument(
+    sub.add_argument("number", help="a hexadecimal value, such as 0x3A")
+    sub.add_argument(
         "--image", help="a symbols.toml table; scan the headers its sources include"
     )
-    eight.add_argument("--type", help="an enum name or a name prefix")
-    eight.set_defaults(run=_value)
-    nine = verbs.add_parser(
+    sub.add_argument("--type", help="an enum name or a name prefix")
+    sub.set_defaults(run=_value)
+    sub = verb(
         "layers",
-        help="print the call-graph layer of every function",
-        epilog="Example: tools/symbol.py layers --jsonl",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
+        "print the call-graph layer of every function",
+        "Example: tools/symbol.py layers --jsonl",
     )
-    nine.add_argument("--jsonl", action="store_true", help="one JSON object per line")
-    nine.set_defaults(run=_table_verb(lambda ctx, a: layers(ctx)))
-    ten = verbs.add_parser(
+    jsonl(sub)
+    sub.set_defaults(run=_table_verb(lambda ctx, a: layers(ctx)))
+    sub = verb(
         "accesses",
-        help="list the reads and writes of a record or global",
-        epilog="Example: tools/symbol.py accesses PartyMember --jsonl",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
+        "list the reads and writes of a record or global",
+        "Example: tools/symbol.py accesses PartyMember --jsonl",
     )
-    ten.add_argument(
+    sub.add_argument(
         "name", help="a record type or a config/symbols/<image>.toml global"
     )
-    ten.add_argument("--jsonl", action="store_true", help="one JSON object per line")
-    ten.set_defaults(run=_table_verb(lambda ctx, a: accesses(ctx, a.name)))
-    eleven = verbs.add_parser(
+    jsonl(sub)
+    sub.set_defaults(run=_table_verb(lambda ctx, a: accesses(ctx, a.name)))
+    sub = verb(
         "records",
-        help="summarise every record and its accesses",
-        epilog="Example: tools/symbol.py records --jsonl",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
+        "summarise every record and its accesses",
+        "Example: tools/symbol.py records --jsonl",
     )
-    eleven.add_argument("--jsonl", action="store_true", help="one JSON object per line")
-    eleven.set_defaults(run=_table_verb(lambda ctx, a: records(ctx)))
-    twelve = verbs.add_parser(
+    jsonl(sub)
+    sub.set_defaults(run=_table_verb(lambda ctx, a: records(ctx)))
+    sub = verb(
         "values",
-        help="scan matched bodies for literals whose role is declared",
-        epilog=(
-            "Example: tools/symbol.py values --scan --jsonl > values.jsonl\n"
-            "         tools/symbol.py values --scan"
-        ),
-        formatter_class=argparse.RawDescriptionHelpFormatter,
+        "scan matched bodies for literals whose role is declared",
+        "Example: tools/symbol.py values --scan --jsonl > values.jsonl\n"
+        "         tools/symbol.py values --scan",
     )
-    twelve.add_argument(
+    sub.add_argument(
         "--scan", action="store_true", help="scan the matched bodies (the only mode)"
     )
-    twelve.add_argument("--jsonl", action="store_true", help="one JSON object per line")
-    twelve.set_defaults(run=_values)
-    thirteen = verbs.add_parser(
+    jsonl(sub)
+    sub.set_defaults(run=_values)
+    sub = verb(
         "signatures",
-        help="print the signature the bytes prove for each function",
-        epilog=(
-            "Example: tools/symbol.py signatures Battle_Update\n"
-            "         tools/symbol.py signatures --all --jsonl > signatures.jsonl"
-        ),
-        formatter_class=argparse.RawDescriptionHelpFormatter,
+        "print the signature the bytes prove for each function",
+        "Example: tools/symbol.py signatures Battle_Update\n"
+        "         tools/symbol.py signatures --all --jsonl > signatures.jsonl",
     )
-    thirteen.add_argument("function", nargs="?", help="one function name")
-    thirteen.add_argument(
-        "--all", action="store_true", help="every function of every image"
-    )
-    thirteen.add_argument(
-        "--jsonl", action="store_true", help="one JSON object per line"
-    )
-    thirteen.set_defaults(run=_table_verb(lambda ctx, a: signatures(ctx, a.function)))
-    fourteen = verbs.add_parser(
+    sub.add_argument("function", nargs="?", help="one function name")
+    sub.add_argument("--all", action="store_true", help="every function of every image")
+    jsonl(sub)
+    sub.set_defaults(run=_table_verb(lambda ctx, a: signatures(ctx, a.function)))
+    sub = verb(
         "extents",
-        help="print each global's extent and the accesses beyond it",
-        epilog="Example: tools/symbol.py extents emi/battle/battle/03 --jsonl",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
+        "print each global's extent and the accesses beyond it",
+        "Example: tools/symbol.py extents emi/battle/battle/03 --jsonl",
     )
-    fourteen.add_argument("image", nargs="?", help="a symbols.toml table")
-    fourteen.add_argument(
-        "--jsonl", action="store_true", help="one JSON object per line"
-    )
-    fourteen.set_defaults(run=_table_verb(lambda ctx, a: extents(ctx, a.image)))
-    fifteen = verbs.add_parser(
+    sub.add_argument("image", nargs="?", help="a symbols.toml table")
+    jsonl(sub)
+    sub.set_defaults(run=_table_verb(lambda ctx, a: extents(ctx, a.image)))
+    sub = verb(
         "homes",
-        help="print each function's, global's and file's home from the graph",
-        epilog="Example: tools/symbol.py homes --jsonl > homes.jsonl",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
+        "print each function's, global's and file's home from the graph",
+        "Example: tools/symbol.py homes --jsonl > homes.jsonl",
     )
-    fifteen.add_argument(
-        "--jsonl", action="store_true", help="one JSON object per line"
-    )
-    fifteen.set_defaults(run=_table_verb(lambda ctx, a: homes(ctx)))
+    jsonl(sub)
+    sub.set_defaults(run=_table_verb(lambda ctx, a: homes(ctx)))
     args = parser.parse_args(argv)
     if args.verb == "add" and not args.source and not args.alias:
         parser.error("add needs --source (a description) or --alias")

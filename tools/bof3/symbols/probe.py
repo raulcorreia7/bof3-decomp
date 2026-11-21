@@ -112,38 +112,39 @@ def _sized_member(member: Member, later: list[Member], size: int) -> Member:
     return Member(member.offset, member.path, member.ctype, length)
 
 
+def _block_members(lines: list[str]) -> tuple[list[Member], int | None]:
+    """Return the members of one record dump and its size (None when the dump has none)."""
+    members: list[Member] = []
+    stack: list[str] = []
+    for line in lines[1:]:
+        found = LAYOUT_SIZE.search(line)
+        if found:
+            return members, int(found.group(1))
+        match = LAYOUT_MEMBER.match(line)
+        if match:
+            offset, indent, ctype, name = match.groups()
+            stack = stack[: len(indent) // 2 - 1]
+            members.append(
+                Member(int(offset), ".".join([*stack, name]), ctype.strip(), 0)
+            )
+            stack.append(name)
+    return members, None
+
+
 def parse_probe(text: str) -> Layout | None:
     """Read the layout from the ``struct __probe`` block of a clang record dump."""
     for block in text.split("*** Dumping AST Record Layout")[1:]:
         lines = block.strip("\n").split("\n")
-        if not lines or not PROBE_HEAD.match(lines[0]):
+        if not PROBE_HEAD.match(lines[0]):
             continue
-        members: list[Member] = []
-        stack: list[tuple[int, str]] = []
-        size = None
-        for line in lines[1:]:
-            found = LAYOUT_SIZE.search(line)
-            if found:
-                size = int(found.group(1))
-                break
-            match = LAYOUT_MEMBER.match(line)
-            if not match:
-                continue
-            offset, indent, ctype, name = match.groups()
-            depth = len(indent) // 2
-            stack = stack[: depth - 1]
-            path = ".".join([part for _, part in stack] + [name])
-            stack.append((depth, name))
-            members.append(Member(int(offset), path, ctype.strip(), 0))
+        members, size = _block_members(lines)
         if size is None:
             continue
-        inner = []
-        for member in members:
-            if member.path == "x":
-                continue
-            if member.path.startswith("x."):
-                member = Member(member.offset, member.path[2:], member.ctype, 0)
-            inner.append(member)
+        inner = [
+            Member(m.offset, m.path.removeprefix("x."), m.ctype, 0)
+            for m in members
+            if m.path != "x"
+        ]
         for index, member in enumerate(inner):
             inner[index] = _sized_member(member, inner[index + 1 :], size)
         return Layout(size, tuple(inner), bool(inner))

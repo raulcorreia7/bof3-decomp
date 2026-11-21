@@ -8,7 +8,7 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
-from bof3.adapters.config import read_symbols
+from bof3.adapters.config import manifest_layout, read_symbols
 from bof3.errors import SymbolError
 from bof3.source import ctext
 from bof3.source.decls import Decl
@@ -89,12 +89,10 @@ def _index_nodes(ctx: Context, manifests: dict) -> list[LayerNode] | None:
 
 def _splat_nodes(ctx: Context, manifests: dict) -> list[LayerNode]:
     """Return every split function without a build, with its bytes hashed for copies."""
-    from bof3.resolve.layout import parse_splat_layout
-
     nodes = []
     seen = set()
     for image, manifest in manifests.items():
-        layout = parse_splat_layout(ctx.root / manifest.splat, manifest.load_address)
+        layout = manifest_layout(ctx.root, manifest)
         payload_path = ctx.root / manifest.binary
         try:
             payload = payload_path.read_bytes()
@@ -396,19 +394,42 @@ def _call_names(
 
 def _layer_layouts(ctx: Context, manifests: dict) -> tuple[dict, dict]:
     """Return each target's reviewed layout and retail payload."""
-    from bof3.resolve.layout import parse_splat_layout
-
     layouts = {}
     payloads = {}
     for image, manifest in manifests.items():
-        layouts[image] = parse_splat_layout(
-            ctx.root / manifest.splat, manifest.load_address
-        )
+        layouts[image] = manifest_layout(ctx.root, manifest)
         try:
             payloads[image] = (ctx.root / manifest.binary).read_bytes()
         except OSError:
             payloads[image] = b""
     return layouts, payloads
+
+
+def table_inputs(ctx: Context, tree, known: set[str], manifests: dict):
+    """The tables of the sources, the names that look like tables, and the symbol rows."""
+    tables, names = _layer_tables(tree, known, manifests)
+    symbols = read_symbols(ctx.root)
+    for rows in symbols.values():
+        for name, row in rows.items():
+            if isinstance(row, dict) and _looks_like_table(row):
+                names.add(name)
+    return tables, names, symbols
+
+
+def table_resolver(tables, symbols, layouts, payloads, by_address):
+    """Return a lookup of the function names a table holds, from the source or the retail bytes."""
+    cache: dict[tuple[str, str], list[str]] = {}
+
+    def resolve_table(image: str, name: str) -> list[str]:
+        if (image, name) not in cache:
+            cache[image, name] = _table_entries(
+                tables, image, name
+            ) or _retail_table_entries(
+                image, name, symbols, layouts, payloads, by_address
+            )
+        return cache[image, name]
+
+    return resolve_table
 
 
 def _looks_like_table(row: dict) -> bool:
@@ -564,12 +585,7 @@ def layers(ctx: Context) -> Table:
     for call in tree.calls:
         calls_by_file[call.file].append(call)
     known = {node.name for node in nodes}
-    tables, table_names = _layer_tables(tree, known, manifests)
-    symbols = read_symbols(ctx.root)
-    for rows in symbols.values():
-        for name, row in rows.items():
-            if isinstance(row, dict) and _looks_like_table(row):
-                table_names.add(name)
+    tables, table_names, symbols = table_inputs(ctx, tree, known, manifests)
     layouts, payloads = _layer_layouts(ctx, manifests)
     by_image: dict[str, dict[str, int]] = collections.defaultdict(dict)
     by_name: dict[str, list[int]] = collections.defaultdict(list)
@@ -578,19 +594,7 @@ def layers(ctx: Context) -> Table:
         by_image[node.image][node.name] = index
         by_name[node.name].append(index)
         by_address[node.addr].append(node)
-    table_cache: dict[tuple[str, str], list[str]] = {}
-
-    def resolve_table(image: str, name: str) -> list[str]:
-        key = (image, name)
-        if key in table_cache:
-            return table_cache[key]
-        found = _table_entries(tables, image, name)
-        if not found:
-            found = _retail_table_entries(
-                image, name, symbols, layouts, payloads, by_address
-            )
-        table_cache[key] = found
-        return found
+    resolve_table = table_resolver(tables, symbols, layouts, payloads, by_address)
 
     edges = [set() for _ in nodes]
     for index, node in enumerate(nodes):

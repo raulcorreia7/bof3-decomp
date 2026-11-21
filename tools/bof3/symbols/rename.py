@@ -9,7 +9,7 @@ import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 
-from bof3.adapters.config import symbol_edits, symbols_text
+from bof3.adapters.config import image_layout, symbol_edits, symbols_text
 from bof3.errors import RenameError
 from bof3.link import symbols
 from bof3.resolve.ids import source_folder
@@ -87,15 +87,10 @@ class RowRef:
 
 def layout_rows(ctx: Context, image: str, name: str) -> list[RowRef]:
     """Return the layout rows of one image that name ``name``."""
+    layout = image_layout(ctx.root, image)
+    if layout is None:
+        return []
     splat = ctx.root / "config" / image / "splat.yaml"
-    if not splat.is_file():
-        return []
-    try:
-        from bof3.resolve.layout import parse_splat_layout, splat_facts
-
-        layout = parse_splat_layout(splat, splat_facts(splat).load_address)
-    except (OSError, ValueError, ImportError):
-        return []
     return [
         RowRef(
             image,
@@ -137,20 +132,30 @@ def link_owners(ctx: Context, image: str) -> list[str]:
         return [image]
 
 
+def _file_naming(ctx: Context, name: str, image: str) -> str | None:
+    """The first file of the image's folders that uses ``name`` outside comments and strings."""
+    pattern = re.compile(r"\b" + re.escape(name) + r"\b")
+    own = [f"src/{source_folder(image)}", f"config/{image}"]
+    for path in grep_files(ctx, name, [f for f in own if (ctx.root / f).is_dir()]):
+        text = (ctx.root / path).read_text(encoding="utf-8", errors="replace")
+        if pattern.search(ctext.mask(text)):
+            return path
+    return None
+
+
 def address_clash(ctx: Context, name: str, images: list[str]) -> str | None:
     """Why an address name cannot be used again, or None when its address is free."""
-    pattern = re.compile(r"\b" + re.escape(name) + r"\b")
     address = symbols.address_of(name)
     for image in images:
-        own = [f"src/{source_folder(image)}", f"config/{image}"]
-        for path in grep_files(ctx, name, [f for f in own if (ctx.root / f).is_dir()]):
-            text = (ctx.root / path).read_text(encoding="utf-8", errors="replace")
-            if pattern.search(ctext.mask(text)):
-                return path
-        for owner in link_owners(ctx, image):
-            for row in symbols.target_rows(ctx.root, owner):
-                if row.name == name and row.addr != address:
-                    return f"[{owner}] {name} is 0x{row.addr:08X}"
+        other = (
+            f"[{owner}] {name} is 0x{row.addr:08X}"
+            for owner in link_owners(ctx, image)
+            for row in symbols.target_rows(ctx.root, owner)
+            if row.name == name and row.addr != address
+        )
+        found = _file_naming(ctx, name, image) or next(other, None)
+        if found:
+            return found
     return None
 
 
@@ -234,6 +239,29 @@ def check_rename(
             )
 
 
+def _stage(
+    ctx: Context,
+    edits: dict[Path, str],
+    moves: list[tuple[str, str]],
+    scratch: Path,
+    env: dict,
+) -> dict[Path, Path]:
+    """Back up each edited file and dry-run each move; return the backups."""
+    backups = {}
+    for number, path in enumerate(edits):
+        writable = os.access(path, os.W_OK) and os.access(path.parent, os.W_OK)
+        if path.is_symlink() or not path.is_file() or not writable:
+            raise RenameError(f"symbol: cannot rewrite {path.relative_to(ctx.root)}")
+        backups[path] = Path(shutil.copy2(path, scratch / str(number)))
+    for source, target in moves:
+        if not os.access((ctx.root / source).parent, os.W_OK):
+            raise RenameError(f"symbol: cannot move {source}")
+        if os.path.lexists(ctx.root / target):
+            raise RenameError(f"symbol: destination already exists: {target}")
+        ctx.git("mv", "-n", "--", source, target, env=env)
+    return backups
+
+
 def apply_rename(
     ctx: Context,
     edits: dict[Path, str],
@@ -255,30 +283,10 @@ def apply_rename(
         with tempfile.TemporaryDirectory(
             prefix=".symbol-rename-", dir=ctx.root
         ) as folder:
-            scratch = Path(folder)
-            private_index = scratch / "index"
+            private_index = Path(folder) / "index"
             shutil.copy2(index, private_index)
             env = dict(os.environ, GIT_INDEX_FILE=str(private_index))
-            backups = {}
-            for number, path in enumerate(edits):
-                if (
-                    path.is_symlink()
-                    or not path.is_file()
-                    or not os.access(path, os.W_OK)
-                    or not os.access(path.parent, os.W_OK)
-                ):
-                    raise RenameError(
-                        f"symbol: cannot rewrite {path.relative_to(ctx.root)}"
-                    )
-                backup = scratch / str(number)
-                shutil.copy2(path, backup)
-                backups[path] = backup
-            for source, target in moves:
-                if not os.access((ctx.root / source).parent, os.W_OK):
-                    raise RenameError(f"symbol: cannot move {source}")
-                if os.path.lexists(ctx.root / target):
-                    raise RenameError(f"symbol: destination already exists: {target}")
-                ctx.git("mv", "-n", "--", source, target, env=env)
+            backups = _stage(ctx, edits, moves, Path(folder), env)
             try:
                 for path, contents in edits.items():
                     path.write_text(contents, encoding="utf-8")

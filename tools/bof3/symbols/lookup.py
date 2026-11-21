@@ -12,7 +12,7 @@ import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 
-from bof3.adapters.config import read_symbols
+from bof3.adapters.config import image_layout, read_symbols
 from bof3.errors import SymbolError
 from bof3.resolve.ids import source_folder
 from bof3.source import ctext
@@ -49,21 +49,12 @@ def splat_spans(ctx: Context, table: str) -> dict[int, int]:
     """Return the size of each subsegment the target's layout starts."""
     if table in ctx.spans:
         return ctx.spans[table]
-    spans: dict[int, int] = {}
-    path = ctx.root / "config" / table / "splat.yaml"
-    if path.is_file():
-        try:
-            from bof3.resolve.layout import parse_splat_layout, splat_facts
-
-            facts = splat_facts(path)
-            layout = parse_splat_layout(path, facts.load_address)
-            for boundary in layout.boundaries:
-                if boundary.virtual_end is not None:
-                    spans[boundary.virtual_start] = (
-                        boundary.virtual_end - boundary.virtual_start
-                    )
-        except (OSError, ValueError, ImportError):
-            pass
+    layout = image_layout(ctx.root, table)
+    spans = {
+        b.virtual_start: b.virtual_end - b.virtual_start
+        for b in (layout.boundaries if layout else ())
+        if b.virtual_end is not None
+    }
     ctx.spans[table] = spans
     return spans
 
@@ -73,21 +64,14 @@ def table_range(ctx: Context, table: str) -> tuple[int, int] | None:
     if table in ctx.ranges:
         return ctx.ranges[table]
     result = None
-    path = ctx.root / "config" / table / "splat.yaml"
-    if path.is_file():
-        try:
-            from bof3.resolve.layout import parse_splat_layout, splat_facts
-
-            layout = parse_splat_layout(path, splat_facts(path).load_address)
-            ends = [
-                boundary.virtual_end
-                for boundary in layout.boundaries
-                if boundary.virtual_end is not None
-            ]
-            if layout.boundaries and ends:
-                result = (layout.boundaries[0].virtual_start, max(ends))
-        except (OSError, ValueError, ImportError):
-            pass
+    layout = image_layout(ctx.root, table)
+    ends = [
+        b.virtual_end
+        for b in (layout.boundaries if layout else ())
+        if b.virtual_end is not None
+    ]
+    if layout and ends:
+        result = (layout.boundaries[0].virtual_start, max(ends))
     ctx.ranges[table] = result
     return result
 

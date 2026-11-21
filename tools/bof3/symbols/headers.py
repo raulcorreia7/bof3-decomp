@@ -110,6 +110,34 @@ def _value_headers(ctx: Context, image: str | None) -> list[str]:
     return sorted(name for name in seen if name.endswith(".h"))
 
 
+RECORD_HEAD = re.compile(r"(?m)\b(?:typedef\s+)?(?:struct|union)\s*(?:(\w+)\s*)?\{")
+
+
+def source_files(ctx: Context, *, headers: bool = True, psyq: bool = False):
+    """Yield ``(path, text)`` of each tracked header (or C file) outside the SDK headers."""
+    for path in ctext.tracked_c(ctx.root):
+        if (headers and not path.endswith(".h")) or (
+            not psyq and path.startswith("include/psyq/")
+        ):
+            continue
+        yield path, ctext.read(ctx.root, path)
+
+
+def record_blocks(masked: str):
+    """Yield ``(opening, closing, names)`` of each struct or union body: its tag and alias."""
+    for match in RECORD_HEAD.finditer(masked):
+        opening = match.end() - 1
+        closing = _match_brace(masked, opening)
+        if closing < 0:
+            continue
+        tail = re.match(r"\s*(\w+)\s*;", masked[closing + 1 :])
+        yield (
+            opening,
+            closing,
+            {n for n in (match.group(1), tail and tail.group(1)) if n},
+        )
+
+
 def _match_brace(text: str, opening: int) -> int:
     """Return the index of the brace that closes the one at ``opening``."""
     depth = 0

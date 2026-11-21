@@ -54,65 +54,42 @@ class Entry(NamedTuple):
         return " ".join(p for p in parts if p)
 
 
-def _row_error(target: str, name: str, problem: str, fix: str) -> LinkError:
-    return LinkError(f"{SPLIT} [{target}] {name}: {problem}. {fix}")
-
-
 def _entry(target: str, name: str, value: object) -> Entry:
+    def bad(problem: str, fix: str) -> LinkError:
+        return LinkError(f"{SPLIT} [{target}] {name}: {problem}. {fix}")
+
     if not _NAME.match(name):
-        raise _row_error(
-            target, name, "the name is not a C identifier", "Rename the row."
-        )
+        raise bad("the name is not a C identifier", "Rename the row.")
     if not isinstance(value, dict):
-        raise _row_error(
-            target,
-            name,
-            "the row is not an inline table",
-            f"Write `{name} = {{ addr = 0x... }}`.",
+        raise bad(
+            "the row is not an inline table", f"Write `{name} = {{ addr = 0x... }}`."
         )
     unknown = sorted(set(value) - set(_KEYS))
     if unknown:
-        raise _row_error(
-            target, name, f"unknown key {unknown[0]!r}", f"Use only {', '.join(_KEYS)}."
-        )
+        raise bad(f"unknown key {unknown[0]!r}", f"Use only {', '.join(_KEYS)}.")
     addr = value.get("addr")
     if (
         not isinstance(addr, int)
         or isinstance(addr, bool)
         or not 0 <= addr <= 0xFFFFFFFF
     ):
-        raise _row_error(
-            target,
-            name,
-            "`addr` is missing or not a 32-bit integer",
-            "Write `addr = 0x8015DF18`.",
+        raise bad(
+            "`addr` is missing or not a 32-bit integer", "Write `addr = 0x8015DF18`."
         )
     size = value.get("size", 0)
     if not isinstance(size, int) or isinstance(size, bool) or size < 0:
-        raise _row_error(
-            target, name, "`size` is not a byte count", "Write `size = 0x10`."
-        )
+        raise bad("`size` is not a byte count", "Write `size = 0x10`.")
     type_ = value.get("type", "")
     if not isinstance(type_, str) or (type_ and not _TYPE.match(type_)):
-        raise _row_error(
-            target,
-            name,
-            "`type` is not one word",
-            'Write `type = "func"` or a C type name.',
-        )
+        raise bad("`type` is not one word", 'Write `type = "func"` or a C type name.')
     source = value.get("source", "")
     if not isinstance(source, str) or '"' in source or "\n" in source:
-        raise _row_error(
-            target,
-            name,
-            "`source` is not a one-line string without quotes",
-            "Reword the evidence.",
+        raise bad(
+            "`source` is not a one-line string without quotes", "Reword the evidence."
         )
     alias = value.get("alias", False)
     if not isinstance(alias, bool):
-        raise _row_error(
-            target, name, "`alias` is not true or false", "Write `alias = true`."
-        )
+        raise bad("`alias` is not true or false", "Write `alias = true`.")
     return Entry(name, addr, type_, size, source, alias)
 
 

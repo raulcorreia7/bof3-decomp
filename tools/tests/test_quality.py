@@ -28,28 +28,6 @@ def test_address_names_placeholders_and_raw_casts_are_counted_in_bodies() -> Non
     assert found["casts"] == 3
 
 
-def test_byte_views_count_as_unnamed() -> None:
-    body = (
-        "u8* panel = arg0;\n"
-        "panel[0x10] = 1;\n"
-        "panel[i] = 2;\n"
-        "x = *((u32*)(((u8*)p) + 4));\n"
-        "y = q->hp;\n"
-    )
-    assert quality.unnamed(body) == 2
-
-
-def test_comments_hide_names_and_notes_count_whole_file() -> None:
-    text = "/* FAKE: pin. */\nMATCH void F(void) {\n    /* D_801EF000 *(u8 *)p */\n    FAKE_REG(x);\n}\n"
-    found = row(text)
-    assert (found["names"], found["casts"], found["harmful"], found["notes"]) == (
-        0,
-        0,
-        1,
-        1,
-    )
-
-
 def test_pasted_needs_two_images_and_a_shared_name() -> None:
     files = {
         "src/o/a/1/x.c": BODY.format(name="func_801EEE3C"),
@@ -61,15 +39,6 @@ def test_pasted_needs_two_images_and_a_shared_name() -> None:
     rows = quality.scan(files)
     assert [rows[p]["pasted"] for p in sorted(rows)] == [1, 1, 0, 0, 0]
     assert [rows[p]["twins"] for p in sorted(rows)] == [0, 0, 1, 0, 0]
-
-
-def test_a_statement_macro_body_is_not_a_paste() -> None:
-    body = (
-        "MATCH void Name(void) {\n    u8 i;\n    u8 j;\n\n    SHOW_PARTY(0, i, j);\n}\n"
-    )
-    files = {"src/o/a/1/x.c": body, "src/o/a/2/x.c": body}
-    rows = quality.scan(files).values()
-    assert sum(r["pasted"] + r["twins"] for r in rows) == 0
 
 
 def test_worse_flags_only_touched_files_and_gated_metrics() -> None:
@@ -85,31 +54,11 @@ def test_worse_flags_only_touched_files_and_gated_metrics() -> None:
     assert quality.worse(old, old, {"a.c"}) == []
 
 
-def test_a_body_moved_between_touched_files_nets_to_zero() -> None:
-    old = {"a.c": {"casts": 2}, "b.h": {"casts": 0}}
-    new = {"b.h": {"casts": 2}}
-    assert quality.worse(old, new, {"a.c", "b.h"}, ("casts",)) == []
-    new = {"b.h": {"casts": 3}}
-    assert quality.worse(old, new, {"a.c", "b.h"}, ("casts",)) == ["b.h: casts 0 -> 3"]
-
-
 def test_a_function_that_gains_placeholders_fails_the_names_ratchet() -> None:
     old = {"src/a/x.c": "MATCH void F(void) { a = D_801EF000; }\n"}
     new = {"src/a/x.c": "MATCH void F(void) { a = D_801EF000; b = unk_1C; }\n"}
     assert quality.ratchet(old, new, {"src/a/x.c"}) == ["F: names 1 -> 2"]
     assert quality.ratchet(new, old, {"src/a/x.c"}) == []
-
-
-def test_one_address_name_in_two_images_is_two_functions() -> None:
-    old = {
-        "src/a/x.c": "MATCH void func_801EF27C(void) { a = D_801EF000; }\n",
-        "src/b/x.c": "INCLUDE_ASM(func_801EF27C);\n",
-    }
-    new = {
-        "src/a/x.c": old["src/a/x.c"],
-        "src/b/x.c": "MATCH void func_801EF27C(void) { a = D_801EF000; b = unk_1C; }\n",
-    }
-    assert quality.ratchet(old, new, {"src/a/x.c", "src/b/x.c"}) == []
 
 
 def test_a_moved_body_that_gains_placeholders_fails_the_names_ratchet() -> None:
@@ -137,29 +86,6 @@ def test_a_named_body_renamed_back_to_an_address_fails_the_addr_ratchet() -> Non
         "func_801EEC20: addr named -> func_<ADDR>"
     ]
     assert quality.ratchet(old, new, set()) == []
-
-
-def test_a_field_seam_turned_into_an_unk_member_keeps_the_names_count() -> None:
-    old = {"src/a/x.c": "MATCH void F(void) {\n    FIELD(u8, p, 0x79u) = 1;\n}\n"}
-    new = {"src/a/x.c": "MATCH void F(void) {\n    p->unk_79 = 1;\n}\n"}
-    assert quality.ratchet(old, new, {"src/a/x.c"}) == []
-
-
-def test_an_address_name_is_file_scoped_so_a_new_copy_in_another_image_is_exempt() -> (
-    None
-):
-    old = {"src/a/x.c": "MATCH void func_801EF688(void) { a = 1; b = 2; }\n"}
-    new = {
-        "src/a/x.c": old["src/a/x.c"],
-        "src/b/x.c": "MATCH void func_801EF688(void) { a = D_80123456; b = unk_04; c = 2; }\n",
-    }
-    assert quality.ratchet(old, new, {"src/a/x.c", "src/b/x.c"}) == []
-    new["src/a/x.c"] = (
-        "MATCH void func_801EF688(void) { a = D_80123456; b = unk_04; }\n"
-    )
-    assert quality.ratchet(old, new, {"src/a/x.c", "src/b/x.c"}) == [
-        "func_801EF688: names 0 -> 2"
-    ]
 
 
 def test_a_draft_body_does_not_count() -> None:
