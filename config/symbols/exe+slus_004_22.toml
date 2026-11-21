@@ -1067,7 +1067,7 @@ RotMatrixX = { addr = 0x80179C58, type = "func", source = "LIBGTE.LIB 416 bytes"
 RotMatrixY = { addr = 0x80179DF8, type = "func", source = "LIBGTE.LIB 416 bytes" }
 RotMatrixZ = { addr = 0x80179F98, type = "func", source = "LIBGTE.LIB 416 bytes" }
 ratan2 = { addr = 0x8017A138, type = "func", source = "LIBGTE.LIB 384 bytes" }
-_patch_gte = { addr = 0x8017A2B8, type = "func", source = "LIBGTE.LIB 160 bytes" }
+_patch_gte = { addr = 0x8017A2B8, type = "func", size = 0xA0, source = "LIBGTE.LIB 160 bytes" }
 LoadTPage = { addr = 0x8017A358, type = "func", source = "LIBGPU.LIB 712 bytes" }
 LoadClut = { addr = 0x8017A444, type = "func", source = "LIBGPU.LIB 712 bytes" }
 LoadClut2 = { addr = 0x8017A4AC, type = "func", source = "LIBGPU.LIB 712 bytes" }

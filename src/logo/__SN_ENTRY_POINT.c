@@ -2,7 +2,7 @@
 
 /* HAND_ASM: the C runtime entry runs with no frame, sets `$gp` and tail-jumps to Logo_Main;
  * C89 cannot set `$gp` or end a function in a frameless jump. */
-#ifdef NON_MATCHING
+#if HAND_ASM_MODEL
 /* clears the BSS words from jtbl_801EB430 up to D_801ECEC0, then runs the logo player. */
 HAND_ASM void __SN_ENTRY_POINT(void) {
     u32* word;

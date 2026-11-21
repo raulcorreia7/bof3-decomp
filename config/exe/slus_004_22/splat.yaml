@@ -627,8 +627,6 @@ segments:
       - [0xE3F98, o, toolchains/psyq/3.7/libgte/fgo_06]
       - [0xE4138, o, toolchains/psyq/3.7/libgte/ratan]
       - [0xE42B8, asm, _patch_gte]
-      - {start: 0xE4320, type: bin, name: post_emi_gap_0xe4320, linker_section_order: .text}
-      - {start: 0xE4328, type: bin, name: sdk_patchgte_text, linker_section_order: .text}
       - [0xE4358, o, toolchains/psyq/3.7/libgpu/ext]
       - [0xE4620, o, toolchains/psyq/3.7/libgpu/prim]
       - [0xE4F0C, asm, ResetGraph]

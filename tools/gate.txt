@@ -6,6 +6,7 @@
 # tools/pre_push.sh and meson.build read this file; the table in tools/README.md#pre-push is tested against it.
 check|disc|chain||meson compile -C $bld check
 check-headers|compiler|chain||meson compile -C $bld check-headers
+objdiff|disc|chain||meson compile -C $bld objdiff.json && python3 tools/objdiff_config.py generate --root . --build-dir $bld
 check-plain|compiler|par|check-plain|tools/check_plain.sh $bld/plain-flags.txt
 check-tree|none|par|check-tree|tools/check_tree.sh $ref
 externs|none|par||tools/check_externs.sh $ref

@@ -105,7 +105,7 @@ take no `FAKE:` note ([helpers](conventions.md#helpers)).
 | `HAND_ASM`     | the original was hand-written assembly; this C is equivalent | same shape; the `INCLUDE_ASM` is the original    | done, counted apart |
 
 `tools/check_markers.py` requires `HAND_ASM` on every function in `asm/<target>/hand/` and allows
-it nowhere else. A `HAND_ASM` body has the same inputs, outputs and effects as the assembly and
+it nowhere else. Its model sits under `#if HAND_ASM_MODEL` (true under `NON_MATCHING` or `BOF3_PORT`), never `#ifdef NON_MATCHING`. A `HAND_ASM` body has the same inputs, outputs and effects as the assembly and
 keeps a short note with the reason C89 cannot express it.
 
 The build passes the image's asm folder as `-DASM_DIR="build/asm/<target>"` (`asm/<target>/hand` for

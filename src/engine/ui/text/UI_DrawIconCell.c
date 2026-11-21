@@ -2,7 +2,7 @@
 
 /* HAND_ASM: a sprite-quad emitter whose prologue, saved registers and frame the compiler profiles
  * do not reproduce. See docs/toolchain.md#compiler-chain. */
-#ifdef NON_MATCHING
+#if HAND_ASM_MODEL
 /* The 16x16 icon cell at index in the sprite sheet, drawn as a textured quad at (x, y) with the
  * given width, height and shade; the clut row comes from a per-index table. */
 HAND_ASM void UI_DrawIconCell(s32 index, s32 x, s32 y, s32 width, s32 height, s32 shade) {

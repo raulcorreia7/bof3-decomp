@@ -1,7 +1,7 @@
 #include "engine/slus/slus.h"
 
 /* The kernel's low-memory block starts at 0x100: its exception handler
- * (func_8017A328) reads the +0x08 pointer from it, and the word at +0x10 is the
+ * (the stub that ends _patch_gte) reads the +0x08 pointer from it, and the word at +0x10 is the
  * base of a run of 0xC0-byte work blocks. Holding that base in a local is what
  * leaves 0x10 as the load displacement (the retail shape); a folded constant
  * address does not match. */
