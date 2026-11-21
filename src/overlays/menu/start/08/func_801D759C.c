@@ -32,7 +32,7 @@ NON_MATCHING void func_801D759C(void) {
     }
     Message_SetVariable(0, 5, (u8*)&g_Characters[g_CharSlot[g_PartyFieldOrder[D_8014857A]]]);
     D_801484CC = 0x2F;
-    input      = INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
+    input      = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & INPUT_DIRECTIONAL);
     D_8014857C = 0xFF;
     D_8014857D = 0xFF;
     task       = &g_MenuPanelTasks[16];
@@ -79,11 +79,11 @@ NON_MATCHING void func_801D759C(void) {
     }
     chosen  = &g_PartyCursor;
     *chosen = task->unk_0A;
-    if ((g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
+    if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
         D_8014857C = s_SkillOrderCursors[*chosen][D_8014857B];
         D_80148651++;
-    } else if ((g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
+    } else if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_801485DC = 0;
         D_80148651--;

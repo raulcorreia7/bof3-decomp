@@ -33,7 +33,7 @@ MATCH void func_801D163C(void) {
         D_8014862A                  = (u16)D_80148456 + g_ShopStockIndex * 0xD + 0xA;
         D_80148644                  = D_8018E7CC;
     }
-    input = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
+    input = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     old   = g_ShopStockIndex;
     if (input & PADLup) {
         if ((g_ShopStockIndex = old - 1) < 0) {
@@ -48,7 +48,7 @@ MATCH void func_801D163C(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     D_8014845C = g_ShopStockIndex;
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         pick               = D_8018E7CC + g_ShopStockIndex * 2;
         g_ShopItemCategory = pick[1];
         g_ShopItemId       = pick[2];
@@ -74,7 +74,7 @@ MATCH void func_801D163C(void) {
         } else {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
         }
-    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         for (i = 0; i < (u8)Party_CountOrder(PARTY_ORDER_FIELD); i++) {
             g_MenuPanelTasks[i + 3].state = 1;

@@ -26,7 +26,7 @@ NON_MATCHING void func_801D8390(void) {
     D_80148628  = D_80148574 + 0x2A;
     D_8014862A  = D_80148576 + 7;
     slot        = (u8*)base + 0xA4;
-    pad         = INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
+    pad         = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & INPUT_DIRECTIONAL);
     D_8014857D  = 0xFF;
     count       = Party_CountOrder(PARTY_ORDER_FIELD);
     if (pad & PADLup) {
@@ -58,7 +58,7 @@ NON_MATCHING void func_801D8390(void) {
         }
     }
     D_80148656 = slot[0xA];
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
         D_801485DC      = 0;
         D_801485B9      = 6;
@@ -69,7 +69,7 @@ NON_MATCHING void func_801D8390(void) {
         g_BattleItemRow = (slot[0xB] == 3) ? 6 : 5;
         D_801485C3      = 0;
         D_80148652++;
-    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_801485DC = 0;
         D_80148651 -= 5;

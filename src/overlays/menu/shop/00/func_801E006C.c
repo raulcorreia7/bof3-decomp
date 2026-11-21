@@ -15,7 +15,7 @@ MATCH void func_801E006C(void) {
     } else {
         D_80148624 = 0;
     }
-    input = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
+    input = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
     if (input & PADLleft) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         D_801483A9 = 0x32;
@@ -33,7 +33,7 @@ MATCH void func_801E006C(void) {
     }
     D_80148382 = D_801E6264[D_801E625C];
     D_801483A6 = D_801E6264[D_801E625C];
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
         input                = 1;
@@ -54,7 +54,7 @@ MATCH void func_801E006C(void) {
         (*((s8*)(&g_MenuStep.state)))++;
         return;
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_8014837B = 1;
         D_8014839F = 1;

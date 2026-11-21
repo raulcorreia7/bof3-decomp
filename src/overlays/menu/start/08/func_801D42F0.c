@@ -22,7 +22,7 @@ MATCH void func_801D42F0(void) {
     sel                                                         = &D_80148656;
     D_801485E2                                                  = *sel * 0x36 + 0x3E;
     count                                                       = Party_CountOrder(PARTY_ORDER_FIELD);
-    input                                                       = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
+    input                                                       = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     old                                                         = *sel;
     if (input & PADLup) {
         *sel = old - 1;
@@ -40,7 +40,7 @@ MATCH void func_801D42F0(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
 
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         result = func_801E8C9C(g_CharSlot[g_PartyFieldOrder[*current]], *items, 0) & BYTE_MASK;
         if ((result == 0) || (result == 4)) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
@@ -53,7 +53,7 @@ MATCH void func_801D42F0(void) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
             return;
         }
-    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
     } else {
         return;

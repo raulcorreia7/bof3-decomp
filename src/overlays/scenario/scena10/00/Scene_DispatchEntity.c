@@ -87,7 +87,7 @@ MATCH void func_801F719C(void) {
     func_801F781C((u16)D_801FE7CC[2].x + 1, (u16)D_801FE7CC[2].y + 1, 0x80, 0x68);
     if (g_Task->unk_0A != 0) {
         g_Task->unk_0A--;
-    } else if (g_InputHeld != 0) {
+    } else if (g_PadStates[0].held != 0) {
         g_Task->header.mode = 3;
     }
 }
@@ -141,8 +141,8 @@ MATCH void func_801F755C(void) {
 /* Item panel step: move the cursor, switch panel, or move one of the selected item into the stock at D_80144908. */
 MATCH void func_801F7590(void) {
     func_801F7DDC();
-    if (g_InputPressed & (PADLup | PADLdown)) {
-        if (g_InputPressed & PADLup) {
+    if (g_PadStates[0].pressed & (PADLup | PADLdown)) {
+        if (g_PadStates[0].pressed & PADLup) {
             g_Task->header.step--;
         } else {
             g_Task->header.step++;
@@ -152,14 +152,14 @@ MATCH void func_801F7590(void) {
         g_Task->unk_06 = (g_Task->header.step & 7) + 0x4E;
         Script_Select(g_Task->unk_06 - 0x4E);
     }
-    if (g_InputPressed & PADRleft) {
+    if (g_PadStates[0].pressed & PADRleft) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 9));
         g_Task->unk_0A      = 20;
         g_Task->header.mode = 2;
-    } else if (g_InputPressed & PADRup) {
+    } else if (g_PadStates[0].pressed & PADRup) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 12));
         g_Task->header.mode = 3;
-    } else if (g_InputPressed & PADRdown) {
+    } else if (g_PadStates[0].pressed & PADRdown) {
         if (Item_Count(ITEM_CATEGORY_ITEM, g_Task->unk_06, 0) & 0xFFFF) {
             if (D_80144908[g_Task->header.step] < 100) {
                 D_80144908[g_Task->header.step]++;
@@ -180,7 +180,7 @@ MATCH void func_801F7758(void) {
     func_801F781C((u16)rect->x + 1, (u16)rect->y + 1, 128, 104);
     if (g_Task->unk_0A != 0) {
         g_Task->unk_0A--;
-    } else if (g_InputPressed != 0) {
+    } else if (g_PadStates[0].pressed != 0) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 12));
         g_Task->header.mode = 1;
     }

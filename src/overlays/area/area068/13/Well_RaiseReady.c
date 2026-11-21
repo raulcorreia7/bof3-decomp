@@ -6,7 +6,7 @@ MATCH void Well_RaiseReady(void) {
 
     if (--g_WellRaiseTimer == 0) {
         g_Task->header.mode = WELL_MODE_RAISE_CHECK;
-    } else if (g_InputPressed == PADRdown) {
+    } else if (g_PadStates[0].pressed == PADRdown) {
         g_WellIdleFrames = 0;
         g_WellPressCount += 1;
         g_Task->header.mode = WELL_MODE_RAISE_COUNT;

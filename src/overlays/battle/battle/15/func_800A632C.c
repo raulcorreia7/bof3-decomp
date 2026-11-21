@@ -10,7 +10,7 @@ MATCH void func_800A632C(void) {
 
     value                                    = Message_GetText(0x62);
     D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = value;
-    pad_state                                = &g_InputPressed;
+    pad_state                                = &g_PadStates[0].pressed;
     decoded                                  = INPUT_REPEATED(*pad_state, (PADLright | PADLleft));
     pad                                      = *pad_state;
     if ((pad & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0) {

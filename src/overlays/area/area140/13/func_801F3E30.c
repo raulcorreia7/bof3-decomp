@@ -27,7 +27,7 @@ NON_MATCHING void func_801F3E30(void) {
             Script_DispatchSelector(g_Task->direction);
         }
         index = (g_Task->direction & 0x7) >> 1;
-        if ((g_InputPressed & g_InputMasks[INPUT_SLOT_ACTION]) != 0) {
+        if ((g_PadStates[0].pressed & g_InputMasks[INPUT_SLOT_ACTION]) != 0) {
             g_ScriptState->flags |= 0x40;
             g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
             Script_Select(D_801F4A6C[index * 2]);

@@ -551,7 +551,7 @@ it, and a site where a convenience macro would move the bytes keeps its form wit
 #define INPUT_DIRECTIONAL       (PADLup | PADLright | PADLdown | PADLleft)
 
 trigger = INPUT_REPEATED(held, INPUT_DIRECTIONAL);
-input   = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown | PADL1 | PADR1));
+input   = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown | PADL1 | PADR1));
 CdControl(CdlSetloc, (u8*)&loc, NULL);
 DrawSync(0);
 ```

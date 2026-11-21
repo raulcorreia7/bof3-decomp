@@ -63,7 +63,7 @@ NON_MATCHING void Menu_UpdateFormation(void) {
         val0 = 0x3B;
     }
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = val0;
-    if (g_InputMasks[MENU_INPUT_CONFIRM] & g_InputPressed) {
+    if (g_InputMasks[MENU_INPUT_CONFIRM] & g_PadStates[0].pressed) {
         *(u8*)(&D_801485DC) = 0;
         if (g_FormationCursorColumn != 0) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
@@ -86,7 +86,7 @@ NON_MATCHING void Menu_UpdateFormation(void) {
             }
             goto block_20; /* retail branch */
         }
-    } else if (g_InputMasks[MENU_INPUT_CANCEL] & g_InputPressed) {
+    } else if (g_InputMasks[MENU_INPUT_CANCEL] & g_PadStates[0].pressed) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         *(u8*)(&D_801485DC)         = 0;
         g_MenuPanelTasks[20].active = 0;
@@ -121,7 +121,7 @@ NON_MATCHING void Menu_UpdateFormation(void) {
             g_GameEntrySubstate += 1;
         }
     }
-    tmp0 = INPUT_GetRepeatedButtons(g_InputPressed & (PADLup | PADLdown));
+    tmp0 = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLup | PADLdown));
     if (tmp0 & PADLup) {
         val1 = -1;
     }
@@ -141,7 +141,7 @@ NON_MATCHING void Menu_UpdateFormation(void) {
     } while (*(((s8)g_FormationCursorRow * 3) + g_FormationCells + g_FormationCursorColumn) == 0);
     val4 = 0 << 0x18;
     if (g_FormationPickColumn != 0) {
-        tmp1 = INPUT_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
+        tmp1 = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLright | PADLleft));
         if (tmp1 & PADLleft) {
             val2 = -1;
         }

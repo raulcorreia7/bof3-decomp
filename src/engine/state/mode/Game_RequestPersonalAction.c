@@ -9,7 +9,7 @@ MATCH bool Game_RequestPersonalAction(void) {
         return 0;
     if (type == CHAR_ID_RYU_PAJAMAS || type == CHAR_ID_WHELP)
         return 0;
-    if (!(g_InputPressed & g_InputMasks[FIELD_INPUT_PERSONAL_ACTION]))
+    if (!(g_PadStates[0].pressed & g_InputMasks[FIELD_INPUT_PERSONAL_ACTION]))
         return 0;
     if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP)
         return 0;

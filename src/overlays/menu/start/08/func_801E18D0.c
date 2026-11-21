@@ -12,7 +12,7 @@ MATCH void func_801E18D0(void) {
     func_801E26A8(0x1C, 0x40);
     func_801E2668(0xFF, 0x70, 0x26);
     Menu_DrawCursorSprite((((s8)D_80148655 * 0x30) + 0x76) & 0xFFFE, 42, 0);
-    pressed = INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
+    pressed = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & INPUT_DIRECTIONAL);
     if (pressed & (PADLright | PADLleft)) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         /* Retail reads this byte signed for the toggle test. */
@@ -34,7 +34,7 @@ MATCH void func_801E18D0(void) {
         D_80148652 += 1;
         return;
     }
-    if (g_InputPressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[INPUT_SLOT_CONFIRM]) {
         s8* mode = (s8*)&D_80148655;
 
         if (*mode == 0) {
@@ -66,11 +66,11 @@ MATCH void func_801E18D0(void) {
         return;
     }
     if (g_GameEntryState == 2) {
-        if (g_InputPressed & PADstart) {
+        if (g_PadStates[0].pressed & PADstart) {
             /* Both arms converge on the shared advance block. */
             goto advance;
         }
-    } else if (g_InputPressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
+    } else if (g_PadStates[0].pressed & g_InputMasks[INPUT_SLOT_CANCEL]) {
         goto advance; /* Shared advance block, as in retail. */
     }
     return;

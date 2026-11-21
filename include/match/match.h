@@ -200,7 +200,7 @@
  *   NON_MATCHING  a C draft under `#ifdef NON_MATCHING`; the split assembly in
  *                 the `#else` builds until the draft matches.
  *   HAND_ASM      the original was hand-written assembly; this C, under
- *                 `#ifdef NON_MATCHING`, is its equivalent (same inputs, outputs
+ *                 `#if HAND_ASM_MODEL`, is its equivalent (same inputs, outputs
  *                 and effects) and the `#else` assembly stays the build path.
  *                 Every function in `asm/<target>/hand/` has one. It counts
  *                 separately from C matches and is not debt.
@@ -221,6 +221,13 @@
 
 #ifndef HAND_ASM
 #define HAND_ASM
+#endif
+
+/* 1 where a HAND_ASM model builds: the draft build and the port. */
+#if defined(NON_MATCHING) || defined(BOF3_PORT)
+#define HAND_ASM_MODEL 1
+#else
+#define HAND_ASM_MODEL 0
 #endif
 
 #ifdef NON_MATCHING

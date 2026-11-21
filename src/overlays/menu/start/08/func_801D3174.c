@@ -30,7 +30,7 @@ MATCH void func_801D3174(void) {
     base  = step;
     base -= 8;
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(D_8014850E, D_801C893C[D_8014850E][g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
-    pad                                                         = g_InputPressed;
+    pad                                                         = g_PadStates[0].pressed;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;
     offset                                                      = (D_80148510 - g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 13 + 0x1A;
@@ -113,7 +113,7 @@ MATCH void func_801D3174(void) {
     if (((MenuChoicePanel*)base)->confirm_timer != 0) {
         return;
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (*row != 0) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
             if (D_801ED618 == 0) {
@@ -161,7 +161,7 @@ MATCH void func_801D3174(void) {
         fail:
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
         }
-    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         count = &g_MenuStep.sub_step;
         *count -= 1;

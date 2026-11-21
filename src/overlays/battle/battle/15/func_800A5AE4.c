@@ -29,7 +29,7 @@ MATCH void func_800A5AE4(void) {
         return;
     }
 
-    pad_state = &g_InputPressed;
+    pad_state = &g_PadStates[0].pressed;
     input     = INPUT_REPEATED(*pad_state, (PADLup | PADLdown | PADL1 | PADR1));
     pad_bits  = *pad_state;
 

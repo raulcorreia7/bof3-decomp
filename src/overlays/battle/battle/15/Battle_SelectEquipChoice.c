@@ -19,7 +19,7 @@ NON_MATCHING void Battle_SelectEquipChoice(void) {
     } else {
         D_801485DC = 0;
     }
-    row_base = &g_InputPressed;
+    row_base = &g_PadStates[0].pressed;
     INPUT_REPEATED(*row_base, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     pad      = INPUT_REPEATED(*row_base, (PADLup | PADLdown | PADL1 | PADR1));
     row_base = (u16*)&D_80148594;
@@ -70,7 +70,7 @@ NON_MATCHING void Battle_SelectEquipChoice(void) {
     }
     choice                                   = D_801485A1;
     D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = Message_GetText(Item_GetDescription((s32)D_8014859C, (s32)choice) & HALF_MASK);
-    row_base                                 = &g_InputPressed;
+    row_base                                 = &g_PadStates[0].pressed;
     if (g_InputMasks[BATTLE_INPUT_CANCEL] & *row_base) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         goto block_33; /* shared scroll/confirm join */

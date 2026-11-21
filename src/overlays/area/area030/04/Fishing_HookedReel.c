@@ -31,8 +31,8 @@ MATCH void Fishing_HookedReel(void) {
         FISHING_STATE->sub_index = 3;
         return;
     }
-    if (g_InputHeld & (PADLleft | PADLdown)) {
-        if (g_InputPressed & (PADLleft | PADLdown)) {
+    if (g_PadStates[0].held & (PADLleft | PADLdown)) {
+        if (g_PadStates[0].pressed & (PADLleft | PADLdown)) {
             D_801E31F8                = 2;
             FISHING_STATE->step_timer = 8;
             D_8014421C                = g_FishingRodRow->cursor_left_speed;
@@ -50,13 +50,13 @@ MATCH void Fishing_HookedReel(void) {
             D_801E31F8 = 0;
             Script_Request(7);
         }
-        if (g_InputPressed & PADRdown) {
+        if (g_PadStates[0].pressed & PADRdown) {
             D_801468A4[g_FishingHookedFish].state = (s8)(D_801468A4[g_FishingHookedFish].state - (g_FishingRodRow->reel_cursor_size + 2));
             Script_Request(7);
             func_801DB04C();
             goto counted_again;
         }
-        if (g_InputHeld & PADRdown) {
+        if (g_PadStates[0].held & PADRdown) {
             func_801DB0AC();
             func_801DB04C();
             Actor_StepAnimLoop();
@@ -64,7 +64,7 @@ MATCH void Fishing_HookedReel(void) {
             counter = &D_80144216;
             *counter += 1;
         }
-    } else if (g_InputHeld & (PADLup | PADLright)) {
+    } else if (g_PadStates[0].held & (PADLup | PADLright)) {
         s32* word = (s32*)((u8*)D_801468A4 + g_FishingHookedFish * sizeof(FishingSelectionState));
 
         D_801E31F8 = 0;
@@ -72,8 +72,8 @@ MATCH void Fishing_HookedReel(void) {
         *word      = 0;
         Script_Request(0);
         D_80144216 -= 1;
-    } else if (g_InputHeld & PADRdown) {
-        if (g_InputPressed & PADRdown) {
+    } else if (g_PadStates[0].held & PADRdown) {
+        if (g_PadStates[0].pressed & PADRdown) {
             D_801468A4[g_FishingHookedFish].state = (s8)(D_801468A4[g_FishingHookedFish].state - (g_FishingRodRow->reel_cursor_size + 2));
         } else {
             func_801DB0AC();

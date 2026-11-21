@@ -21,7 +21,7 @@ NON_MATCHING void func_801E206C(void) {
     }
     func_801E2D84(0xA8, 0x62);
     Menu_DrawCursorSprite(0xB0, (((s8)D_80148655 - 8) * 0x12 + 0x6A) & 0xFFFE, 0);
-    sel = g_InputPressed & (PADRup | PADRdown | PADRleft | PADRright | PADL1 | PADR1);
+    sel = g_PadStates[0].pressed & (PADRup | PADRdown | PADRleft | PADRright | PADL1 | PADR1);
     if (sel != 0) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
         g_InputMasks[INPUT_SLOT_SPEAK] &= ~(PADL2 | PADR2);
@@ -51,7 +51,7 @@ NON_MATCHING void func_801E206C(void) {
         g_InputMasks[INPUT_SLOT_SPEAK] |= PADL2 | PADR2;
         g_InputMasks[INPUT_SLOT_CONFIRM] |= PADL2 | PADR2;
     }
-    sel  = g_InputPressed;
+    sel  = g_PadStates[0].pressed;
     keys = INPUT_GetRepeatedButtons(sel & INPUT_DIRECTIONAL);
     if (keys & PADLup) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));

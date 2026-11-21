@@ -20,7 +20,7 @@ MATCH void func_801E032C(void) {
     } else {
         D_80148624 = 0;
     }
-    input    = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
+    input    = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
     cursor   = &D_801483A7;
     previous = *cursor;
     if (input & PADLup) {
@@ -42,7 +42,7 @@ MATCH void func_801E032C(void) {
     }
     D_801483A8 = 0xFF;
     cell       = (u8*)&g_Characters[D_801483A6] + DECOMP_OFFSETOF(Character, abilities.skill) + *index;
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         u8* step;
 
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
@@ -51,7 +51,7 @@ MATCH void func_801E032C(void) {
         (*step)++;
         return;
     }
-    if (g_InputPressed & PADRleft) {
+    if (g_PadStates[0].pressed & PADRleft) {
         if (*cell != 0) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
             Char_AddAbility(*cell, 0, 1, 0);
@@ -61,7 +61,7 @@ MATCH void func_801E032C(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
         return;
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         u8* step;
 
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));

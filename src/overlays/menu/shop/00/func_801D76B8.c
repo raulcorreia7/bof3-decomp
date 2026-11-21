@@ -11,7 +11,7 @@ MATCH void func_801D76B8(void) {
     Menu_DrawInoculationWindow(D_80148656, 152, 63, 0, 0xFF);
     Menu_DrawCursorFrame(17, ((s8)D_80148656 * 0x36 + 0x3E) & 0xFFFE, 128, 52, 0, 6);
     Menu_DrawCursorSprite(155, (s8)*cursor * 0xD + 0x44, 0);
-    input = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
+    input = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     if (input & PADLdown) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
         (*cursor)++;
@@ -25,7 +25,7 @@ MATCH void func_801D76B8(void) {
             *(s8*)&D_8014865D = 7;
         }
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         id = g_Game.members[(s8)D_80148656].character_index;
         if (g_Zenny < (g_Characters[id].level * 10)) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
@@ -39,7 +39,7 @@ MATCH void func_801D76B8(void) {
             D_80148651 += 1;
         }
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         (*(s8*)&D_80148651)--;
     }

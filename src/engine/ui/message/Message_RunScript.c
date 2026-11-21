@@ -143,7 +143,7 @@ NON_MATCHING void Message_RunScript(void) {
                 /* fallthrough */
             default:
                 if (!(g_UiWindowChannel & FRONTEND_FLAG_NO_INPUT_WAIT)) {
-                    if (g_InputMasks[MESSAGE_INPUT_SPEED_UP] & g_InputHeld) {
+                    if (g_InputMasks[MESSAGE_INPUT_SPEED_UP] & g_PadStates[0].held) {
                         chan[2] = STEP_TABLE[D_80144950 * 4];
                     } else {
                         chan[2] = STEP_TABLE[D_80144950 * 4 + 1];

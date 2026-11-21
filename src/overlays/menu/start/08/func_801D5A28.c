@@ -16,7 +16,7 @@ MATCH void func_801D5A28(void) {
     task->active = 1;
     task->pos.x  = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 6;
     task->pos.y  = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + (*group * 0xD + 0x57);
-    buttons      = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
+    buttons      = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
     task         = &g_MenuPanelTasks[MENU_START_PANEL_ITEMS];
     task->flags  = 1;
     task->unk_0B = 0xFF;
@@ -79,7 +79,7 @@ MATCH void func_801D5A28(void) {
             break;
     }
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(group_index, *choice);
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         u8* step;
 
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
@@ -89,7 +89,7 @@ MATCH void func_801D5A28(void) {
         (*step)++;
         return;
     }
-    if (g_InputPressed & PADRleft) {
+    if (g_PadStates[0].pressed & PADRleft) {
         if (task->unk_0A != 0 && *choice != 0) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
             Item_Add(group_index, *choice, 1, 0);
@@ -100,7 +100,7 @@ MATCH void func_801D5A28(void) {
         }
         return;
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
         D_8014852B   = 3;

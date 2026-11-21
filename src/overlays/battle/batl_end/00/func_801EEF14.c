@@ -3,7 +3,7 @@
 /* Adds the battle's reward experience a step at a time; a held input pays the rest
  * at once, and either branch clears the amount and advances the UI state. */
 MATCH void func_801EEF14(void) {
-    if (g_InputHeld != 0 && EMI_IsReady()) {
+    if (g_PadStates[0].held != 0 && EMI_IsReady()) {
         func_801DD59C(g_Battle.outcome.reward_exp);
         g_Battle.outcome.reward_exp = 0;
         g_Battle.ui_mode += 1;

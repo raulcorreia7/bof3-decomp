@@ -26,7 +26,7 @@ MATCH void func_801D2564(void) {
     D_801485E2 = g_MenuPanelTasks[selection_index + 4].pos.y;
     Message_SetVariable(0U, 5U, g_CharSlot[g_PartyFieldOrder[selection_index]] * 0xA4 + panel_data);
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x12;
-    input                                                       = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
+    input                                                       = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     count                                                       = Party_CountOrder(PARTY_ORDER_FIELD);
     old_selection                                               = *selection;
     if ((input & PADLup) != 0) {
@@ -45,7 +45,7 @@ MATCH void func_801D2564(void) {
     if (old_selection != D_80148656) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    pad_state   = &g_InputPressed;
+    pad_state   = &g_PadStates[0].pressed;
     pad_buttons = *pad_state;
     if (pad_buttons & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));

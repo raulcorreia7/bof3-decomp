@@ -1,7 +1,7 @@
 #include "shop_00.h"
 
 MATCH void func_801D12FC(void) {
-    u16* pad  = &g_InputPressed;
+    u16* pad  = &g_PadStates[0].pressed;
     s8*  mode = (s8*)&D_801E6040;
 
     D_80148624 = 1;

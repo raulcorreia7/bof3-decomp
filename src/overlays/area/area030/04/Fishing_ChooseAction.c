@@ -6,7 +6,7 @@
  *           on the lure/rod and the area query. */
 /* func_801D9E40 */
 MATCH void Fishing_ChooseAction(void) {
-    switch (g_InputPressed & (PADRup | PADRdown | PADRleft | PADL1)) {
+    switch (g_PadStates[0].pressed & (PADRup | PADRdown | PADRleft | PADL1)) {
         case PADRup:
             D_80144125 = 7;
             D_8014403D = 4;

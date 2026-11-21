@@ -12,7 +12,7 @@ MATCH void func_801E5320(void) {
     func_801E14A8(0x62, 0x4C, D_801ED870, g_SaveCardPort, 0);
     prev      = g_SaveCardPort;
     prev_byte = prev;
-    if ((g_InputPressed & (PADLup | PADLdown)) != 0) {
+    if ((g_PadStates[0].pressed & (PADLup | PADLdown)) != 0) {
         if (prev == D_801ED7F4) {
             g_SaveCardPort = D_801ED7F8;
         } else {
@@ -22,7 +22,7 @@ MATCH void func_801E5320(void) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         }
     }
-    pad = &g_InputPressed;
+    pad = &g_PadStates[0].pressed;
     if ((*pad & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
         g_MenuStartTimer      = 2;

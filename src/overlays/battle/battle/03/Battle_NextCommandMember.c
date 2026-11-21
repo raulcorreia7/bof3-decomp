@@ -14,7 +14,7 @@ NON_MATCHING void Battle_NextCommandMember(void) {
     if (EMI_IsReady() != 0) {
         cursor = &g_Battle.command_count;
         if (*cursor == 0)
-            g_InputHeld = 0;
+            g_PadStates[0].held = 0;
         if (*cursor < 3) {
             slot = cursor;
             for (; *slot < BATTLE_PARTY_CHARACTERS_COUNT; ((u8*)slot)[0] += 1) {

@@ -19,7 +19,7 @@ MATCH void func_801D8188(void) {
     sel                                                         = 1 - *toggle;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = bar + (sel << 5) + 0xDE;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y + 5;
-    key                                                         = &g_InputPressed;
+    key                                                         = &g_PadStates[0].pressed;
     slot -= 180;
     if (*key & (PADLright | PADLleft)) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));

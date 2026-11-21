@@ -16,7 +16,7 @@ MATCH void func_801D3A98(void) {
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = task->pos.x + 5;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = task->pos.y + (task->unk_0B * 16 + 26);
 
-    input = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
+    input = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     if (input & PADLup) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
         if ((s8)--task->unk_0B < 0) {
@@ -30,7 +30,7 @@ MATCH void func_801D3A98(void) {
         }
     }
 
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
         rows  = D_801EC3E0;
         entry = (rows + task->unk_0A * 6 + task->unk_0B)[1];
@@ -43,7 +43,7 @@ MATCH void func_801D3A98(void) {
         /* g_MenuStep.state through g_MenuStep.sub_step: retail keeps the symbol-relative
          * address in a register for the read-modify-write. */
         (&g_MenuStep.sub_step)[1]++;
-    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         task->active = 0;
         (&g_MenuStep.sub_step)[1]--;

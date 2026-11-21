@@ -14,7 +14,7 @@ MATCH void func_801D10AC(u32 message_id) {
     u8* entryp;
     u16 y;
 
-    padp = &g_InputPressed;
+    padp = &g_PadStates[0].pressed;
     trig = INPUT_REPEATED(*padp, (PADLright | PADLleft));
     pad  = *padp;
 

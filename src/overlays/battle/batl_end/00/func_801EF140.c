@@ -9,7 +9,7 @@ NON_MATCHING void func_801EF140(void) {
     s32 height;
 
     height = 0;
-    if (g_InputPressed == 0) {
+    if (g_PadStates[0].pressed == 0) {
         return;
     }
     func_801DE9A8((g_Battle.row_cursor - 1) & BYTE_MASK);

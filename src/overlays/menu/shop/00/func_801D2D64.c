@@ -15,7 +15,7 @@ MATCH void func_801D2D64(void) {
     D_801484A3 = g_ShopItemId;
     D_801484A4 = g_ShopItemCount;
     D_801484A5 = D_801E606C;
-    input      = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
+    input      = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
     previous   = g_ShopItemCount;
     if (input & PADLleft) {
         g_ShopItemCount -= 1;
@@ -45,13 +45,13 @@ MATCH void func_801D2D64(void) {
     if (previous != g_ShopItemCount) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
         D_8014865B = 1;
         D_80148652 += 1;
         return;
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         (*(s8*)&D_80148652)--;
     }

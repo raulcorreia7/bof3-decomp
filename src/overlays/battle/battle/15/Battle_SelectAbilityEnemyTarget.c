@@ -7,7 +7,7 @@ MATCH void Battle_SelectAbilityEnemyTarget(void) {
     u8* message;
     u8* entry;
 
-    held = g_InputPressed;
+    held = g_PadStates[0].pressed;
     if ((held & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
         g_Battle.ui_mode = 4u;
         return;

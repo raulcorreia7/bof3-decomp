@@ -26,16 +26,16 @@ MATCH void func_801F9A44(void) {
             angle_cell                    = &D_80147B5C;
             angle                         = *angle_cell;
             LOH(g_ScratchPad.cells.bytes) = angle & 0xFFF;
-            if (g_InputHeld & PADLright) {
+            if (g_PadStates[0].held & PADLright) {
                 angle += 0x10;
                 *angle_cell = angle;
                 func_801F9E70(angle & 0xFFF);
-            } else if (g_InputHeld & PADLleft) {
+            } else if (g_PadStates[0].held & PADLleft) {
                 angle -= 0x10;
                 *angle_cell = angle;
                 func_801F9E70(angle & 0xFFF);
             }
-            if (g_InputPressed & PADRdown) {
+            if (g_PadStates[0].pressed & PADRdown) {
                 g_ScenarioState.step_05 = 3;
             }
             break;

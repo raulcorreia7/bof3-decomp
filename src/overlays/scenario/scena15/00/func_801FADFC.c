@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801FADFC(void) {
     switch (g_ScenarioState.step_05) {
         case 0:
-            if (g_InputHeld != 0) {
+            if (g_PadStates[0].held != 0) {
                 g_ScriptVars[0]         = 2;
                 g_ScenarioState.step_05 = 1;
             }

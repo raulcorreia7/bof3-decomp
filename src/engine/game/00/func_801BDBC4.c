@@ -27,8 +27,8 @@ MATCH void func_801BDBC4(void) {
         found = 1;
     }
     if (found != 0) {
-        g_Game.input = (g_InputHeld & INPUT_ACTION_BUTTONS) | (((g_InputHeld & (PADLup | PADLright)) << 2) | ((g_InputHeld & (PADLdown | PADLleft)) >> 2));
+        g_Game.input = (g_PadStates[0].held & INPUT_ACTION_BUTTONS) | (((g_PadStates[0].held & (PADLup | PADLright)) << 2) | ((g_PadStates[0].held & (PADLdown | PADLleft)) >> 2));
     } else {
-        g_Game.input = g_InputHeld;
+        g_Game.input = g_PadStates[0].held;
     }
 }

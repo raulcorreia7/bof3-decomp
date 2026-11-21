@@ -27,7 +27,7 @@ MATCH void Battle_SelectEquipRow(void) {
         D_801485DC = 0;
     }
     D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = Message_GetText(D_8014862E == 0 ? 0x30 : 0x32);
-    input                                    = &g_InputPressed;
+    input                                    = &g_PadStates[0].pressed;
     trigger                                  = INPUT_REPEATED(*input, (PADLup | PADLdown));
     held                                     = *input;
     if ((held & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {

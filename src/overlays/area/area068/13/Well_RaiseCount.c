@@ -5,7 +5,7 @@ MATCH s32 Well_RaiseCount(void) {
     Actor* work;
     u8     step;
 
-    if (g_InputPressed == PADRdown) {
+    if (g_PadStates[0].pressed == PADRdown) {
         g_WellPressCount++;
     }
     g_WellIdleFrames++;

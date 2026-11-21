@@ -8,11 +8,11 @@
 MATCH void func_801DDEEC(void) {
     FishingState* record;
 
-    if (g_InputPressed & PADLdown) {
+    if (g_PadStates[0].pressed & PADLdown) {
         record                      = FISHING_STATE;
         WORLD00_FISHING_DRAW_ENABLE = 1;
         record->step_index          = 8;
-    } else if (g_InputHeld & PADLdown) {
+    } else if (g_PadStates[0].held & PADLdown) {
         record = FISHING_STATE;
         if (record->step_index != 0) {
             record->step_index -= 1;

@@ -13,7 +13,7 @@ MATCH void func_801D7444(void) {
     Menu_DrawInoculationWindow(*cursor, 152, 63, 0, 0xFF);
     Menu_DrawCursorFrame(17, ((s8)*cursor * 0x36 + 0x3E) & 0xFFFE, 128, 52, 1, 6);
 
-    input = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
+    input = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     if (input & PADLdown) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
         index   = *cursor + 1;
@@ -33,7 +33,7 @@ MATCH void func_801D7444(void) {
             *prev = count - 1;
         }
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (g_Characters[g_Game.members[(s8)D_80148656].character_index].inoculations != 0) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
             D_8014865B = 1;
@@ -46,7 +46,7 @@ MATCH void func_801D7444(void) {
             D_80148651 += 1;
         }
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_8014865B = 0xF;
         D_80148651 = 6;

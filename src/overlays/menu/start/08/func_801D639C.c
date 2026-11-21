@@ -46,7 +46,7 @@ MATCH void func_801D639C(void) {
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 6;
     g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)(g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + (g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A * 0xD + 0x57));
-    input                                                       = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
+    input                                                       = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     if (input & PADLdown) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         next_slot                                       = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A + 1;
@@ -63,7 +63,7 @@ MATCH void func_801D639C(void) {
         }
     }
     slot_flag = func_801D70EC() & BYTE_MASK;
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (slot_flag != 0) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
             Item_Add(group_index, *choice, 1, 0);
@@ -74,7 +74,7 @@ MATCH void func_801D639C(void) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
         }
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 1;
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active       = 0;

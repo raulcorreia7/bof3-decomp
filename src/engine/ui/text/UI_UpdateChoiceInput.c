@@ -7,7 +7,7 @@
 MATCH void UI_UpdateChoiceInput(void) {
     s32 action;
 
-    if ((g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
+    if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
         u8* step;
 
         D_80148357                = 3;
@@ -16,14 +16,14 @@ MATCH void UI_UpdateChoiceInput(void) {
         *step                     = *step + 1;
         return;
     }
-    if ((g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
+    if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
         u8* step;
 
         step  = &g_UiWindowStep;
         *step = *step + 2;
         return;
     }
-    action = INPUT_GetRepeatedButtons(g_InputPressed);
+    action = INPUT_GetRepeatedButtons(g_PadStates[0].pressed);
     if ((action & PADLup) != 0) {
         u8* index;
 

@@ -6,7 +6,7 @@ MATCH void func_801E441C(void) {
     Menu_DrawBackdrop();
     func_801E6D88(0);
     if (g_UiWindowChannel & FRONTEND_FLAG_CONFIRM) {
-        if ((D_801ED86C != 0) && (g_InputPressed & (PADLup | PADLdown))) {
+        if ((D_801ED86C != 0) && (g_PadStates[0].pressed & (PADLup | PADLdown))) {
             D_801ED7EC ^= 1;
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         }
@@ -25,7 +25,7 @@ MATCH void func_801E441C(void) {
                 D_801ED868 = 0x80;
             }
         }
-        if ((g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) || (g_InputPressed & PADstart)) {
+        if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) || (g_PadStates[0].pressed & PADstart)) {
             UI_SetMode(UI_MODE_FADE_OUT);
             g_MenuStartStep += 1;
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 5));

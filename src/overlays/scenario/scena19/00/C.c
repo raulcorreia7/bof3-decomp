@@ -29,7 +29,7 @@ MATCH void func_801F6CA4(void) {
     SpawnedActor* slot;
     s32           index;
 
-    if (g_InputPressed & PADR1) {
+    if (g_PadStates[0].pressed & PADR1) {
         index = Actor_FindFreeSpawned();
         if (index != GAME_NONE) {
             slot               = &g_SpawnedActors[index];

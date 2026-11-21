@@ -8,7 +8,7 @@ MATCH void UI_ScrollChoice(void) {
     s32           action;
     s8            cursor;
 
-    pad = &g_InputPressed;
+    pad = &g_PadStates[0].pressed;
     if ((*pad & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
         u8* step;
 

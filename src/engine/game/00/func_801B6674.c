@@ -15,7 +15,7 @@ NON_MATCHING bool func_801B6674(void) {
     if (!(status & AREA_LOAD_FLAG_WORLD_MAP)) {
         return 0;
     }
-    if (g_InputPressed & g_InputMasks[WORLD_INPUT_ENTER]) {
+    if (g_PadStates[0].pressed & g_InputMasks[WORLD_INPUT_ENTER]) {
         if ((cell_code & BYTE_MASK) == 0xAE) {
             g_SceneEventState.mode = 0x37;
             ACTOR_CLEAR_STEP();
@@ -36,7 +36,7 @@ NON_MATCHING bool func_801B6674(void) {
         Game_RequestAreaChange(entry_area, entry_pos_x, entry_pos_y, entry_facing);
         return 1;
     }
-    if (g_InputPressed & PADselect) {
+    if (g_PadStates[0].pressed & PADselect) {
         counter = &D_801454F2;
         *counter += 1;
         if ((u8)*counter < 3) {
@@ -45,7 +45,7 @@ NON_MATCHING bool func_801B6674(void) {
         *counter = 0;
         return 0;
     }
-    if (g_InputPressed & PADstart) {
+    if (g_PadStates[0].pressed & PADstart) {
         if ((func_801B6470(cell_code, status) & BYTE_MASK) == 0) {
             return 0;
         }
@@ -64,7 +64,7 @@ NON_MATCHING bool func_801B6674(void) {
         Game_RequestAreaChange(entry_area, entry_pos_x, entry_pos_y, entry_facing);
         return 1;
     }
-    if ((g_InputPressed & g_InputMasks[WORLD_INPUT_LOCATION_GUIDE]) && ((u8)(cell_code + 0x60) < 2)) {
+    if ((g_PadStates[0].pressed & g_InputMasks[WORLD_INPUT_LOCATION_GUIDE]) && ((u8)(cell_code + 0x60) < 2)) {
         g_SceneEventState.mode = 0x1B;
         if (!(status & AREA_LOAD_FLAG_NO_ACTOR_SCRIPT)) {
             Actor_RequestRoute(g_Task->direction);

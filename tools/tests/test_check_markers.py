@@ -47,12 +47,12 @@ def test_a_draft_needs_its_ifdef_and_a_match_may_not_sit_in_it() -> None:
         "NON_MATCHING outside `#ifdef NON_MATCHING`"
     ]
     assert problems(draft.replace("NON_MATCHING void", "MATCH void")) == [
-        "MATCH inside `#ifdef NON_MATCHING`"
+        "MATCH inside a draft switch"
     ]
 
 
 DRAFT = (
-    "#ifdef NON_MATCHING\nHAND_ASM void f(void) {\n}\n#else\nINCLUDE_ASM(f);\n#endif\n"
+    "#if HAND_ASM_MODEL\nHAND_ASM void f(void) {\n}\n#else\nINCLUDE_ASM(f);\n#endif\n"
 )
 
 
@@ -62,6 +62,9 @@ def test_every_hand_file_needs_hand_asm_and_nothing_else_may_have_it() -> None:
     assert [
         v.problem for v in check_hand_units(hand, {"a.c": "INCLUDE_ASM(f);\n"})
     ] == ["hand-written assembly without HAND_ASM"]
+    assert problems(DRAFT.replace("#if HAND_ASM_MODEL", "#ifdef NON_MATCHING")) == [
+        "HAND_ASM outside `#if HAND_ASM_MODEL`"
+    ]
     other = DRAFT.replace("f(", "g(")
     assert [v.problem for v in check_hand_units(hand, {"a.c": DRAFT + other})] == [
         "HAND_ASM on a function with no asm/*/hand/ file"

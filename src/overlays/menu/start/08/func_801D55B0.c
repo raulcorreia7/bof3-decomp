@@ -17,7 +17,7 @@ NON_MATCHING void func_801D55B0(void) {
     cursor_task->pos.x  = g_MenuPanelTasks[4].pos.x;
     sel                 = &cursor_task[MENU_START_PANEL_ITEMS - MENU_START_PANEL_CURSOR_FRAME].unk_0C;
     cursor_task->pos.y  = *sel * 0x36 + 0x3E;
-    pressed             = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
+    pressed             = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     old                 = *sel;
     count               = Party_CountOrder(PARTY_ORDER_FIELD);
     if (pressed & PADLup) {
@@ -45,7 +45,7 @@ NON_MATCHING void func_801D55B0(void) {
     Message_SetVariable(0, 5, g_Characters[g_CharSlot[g_PartyFieldOrder[D_80148510]]].name);
     g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = D_801EC448[(s8)D_801ED620];
     g_MenuPanelTasks[MENU_START_PANEL_ITEMS].flags              = (u8)D_801EC450[(s8)D_801ED620];
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
         if ((s8)D_801ED620 == 0) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
@@ -80,7 +80,7 @@ NON_MATCHING void func_801D55B0(void) {
         } else {
             func_801D6E6C();
         }
-    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         cursor_task->active = 0;
         D_80148654          = 0;

@@ -45,13 +45,13 @@ NON_MATCHING void func_801F4B4C(s32 input) {
         return;
     }
     saved_facing = g_Task->direction;
-    if ((!(Actor_TurnByPad() & 0xFF) && !(g_InputHeld & g_InputMasks[WORLD_INPUT_RUN])) || (task = g_Task, (task->param.unk_0B == 0x40))) {
+    if ((!(Actor_TurnByPad() & 0xFF) && !(g_PadStates[0].held & g_InputMasks[WORLD_INPUT_RUN])) || (task = g_Task, (task->param.unk_0B == 0x40))) {
         g_Task->direction                  = saved_facing;
         g_Game.current->u.field.mode.value = 0;
         Actor_StopMoving();
         goto block_45;
     }
-    if (g_InputHeld & g_InputMasks[WORLD_INPUT_RUN]) {
+    if (g_PadStates[0].held & g_InputMasks[WORLD_INPUT_RUN]) {
         task->direction = saved_facing;
     }
     current_facing  = g_Task->direction;

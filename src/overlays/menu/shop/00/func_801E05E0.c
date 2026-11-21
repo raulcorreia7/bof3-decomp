@@ -18,7 +18,7 @@ MATCH void func_801E05E0(void) {
     D_80148628 = D_801483C4 + 7;
     cursor_y   = ((D_801483CB - D_801483CA) * 0xD) + 0x1A;
     D_8014862A = cursor_y + D_801483C6;
-    pad        = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown | PADL1 | PADR1));
+    pad        = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown | PADL1 | PADR1));
     old        = D_801483CB;
     if (pad & PADLup) {
         if (old != 0) {
@@ -68,7 +68,7 @@ MATCH void func_801E05E0(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     if (D_801483CD == 0) {
-        if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+        if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
             item_ptr = (u8*)&g_Characters[D_801483A6] + DECOMP_OFFSETOF(Character, abilities.skill) + D_801483A7;
             slot     = D_8014546C[*cursor_ptr];
             if ((slot != 0) || (*item_ptr != 0)) {
@@ -82,7 +82,7 @@ MATCH void func_801E05E0(void) {
             return;
         }
         cue = 0x106;
-        if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+        if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         block_32:
             SND_PlaySE(cue);
             g_MenuStep.state -= 1;

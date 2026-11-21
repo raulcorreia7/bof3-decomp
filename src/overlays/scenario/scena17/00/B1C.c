@@ -449,7 +449,7 @@ MATCH void func_801F8594(void) {
     u8* timer;
     u8* count;
 
-    if (g_InputPressed & PADRdown) {
+    if (g_PadStates[0].pressed & PADRdown) {
         D_801F9DD8 = 1;
     }
     if (EMI_IsReady() != 0) {
@@ -472,7 +472,7 @@ MATCH void func_801F8594(void) {
 MATCH void func_801F8664(void) {
     s8* state;
 
-    if ((g_InputPressed & PADRdown) || D_801F9DD8 != 0) {
+    if ((g_PadStates[0].pressed & PADRdown) || D_801F9DD8 != 0) {
         SND_StartDecrescendo(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4], 100, 16);
         UI_SetMode(UI_MODE_LONG_FADE_OUT);
         state = &g_ScenarioState.state_04;

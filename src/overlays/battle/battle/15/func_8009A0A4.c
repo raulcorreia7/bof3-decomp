@@ -7,15 +7,15 @@ MATCH void func_8009A0A4(void) {
     u8           value;
 
     type_index = g_Game.members[BATTLE_ACTIVE_ROW->slot].u.turn.command.id;
-    if (g_InputPressed & g_InputMasks[BATTLE_INPUT_CANCEL]) {
+    if (g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CANCEL]) {
         g_Battle.ui_mode = 4;
         return;
     }
-    if (g_InputPressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
         g_Battle.ui_mode = 3;
         return;
     }
-    buttons = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
+    buttons = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
     if (buttons & (PADLup | PADLdown)) {
         if (Item_GetFlags(type_index >> 8, type_index & BYTE_MASK) & ITEM_USABLE_MENU) {
             if (func_8009AF7C() & BYTE_MASK) {

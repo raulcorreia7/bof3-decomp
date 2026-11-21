@@ -1,7 +1,7 @@
 #include "area189_13.h"
 
 MATCH bool func_801F5EA8(void) {
-    if ((g_InputPressed & g_InputMasks[FIELD_INPUT_MENU]) == 0) {
+    if ((g_PadStates[0].pressed & g_InputMasks[FIELD_INPUT_MENU]) == 0) {
         return 0;
     }
     if (g_Game.flags & GAME_FLAG_MENU_LOCK) {

@@ -20,7 +20,7 @@ NON_MATCHING void func_801EEF10(void) {
     }
     func_801EF47C(*fade);
 
-    if (g_InputHeld != 0) {
+    if (g_PadStates[0].held != 0) {
         for (i = 0; i < AREA_PALETTE_COLORS; i++) {
             color                    = g_BattleEffectPalette[i];
             gray                     = (PSX_COLOR_R(color) + PSX_COLOR_G(color) + PSX_COLOR_B(color)) / 3U;

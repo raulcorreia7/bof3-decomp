@@ -32,7 +32,7 @@ NON_MATCHING void Battle_SelectEquipItem(void) {
     }
     resource_id                                                = Message_GetText(resource);
     D_801EB5B4[((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK) * 2] = resource_id;
-    pad_state                                                  = &g_InputPressed;
+    pad_state                                                  = &g_PadStates[0].pressed;
     pad                                                        = INPUT_REPEATED(*pad_state, (PADLup | PADLdown));
     keys                                                       = *pad_state;
     if (keys & g_InputMasks[BATTLE_INPUT_CANCEL]) {

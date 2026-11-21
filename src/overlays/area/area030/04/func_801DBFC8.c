@@ -17,7 +17,7 @@ MATCH void func_801DBFC8(void) {
     Fishing_DrawRank(FISHING_CATCH_RANK_X, FISHING_CATCH_RANK_Y);
     Fishing_DrawIconRow(8, FISHING_CATCH_ROW_Y, 67);
 
-    if (g_InputPressed != 0) {
+    if (g_PadStates[0].pressed != 0) {
         FISHING_STATE->cue_index = 0;
         work                     = FISHING_STATE;
         work->sub_index          = (work->sub_index + 1);

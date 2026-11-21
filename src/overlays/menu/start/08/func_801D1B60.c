@@ -25,7 +25,7 @@ MATCH void func_801D1B60(void) {
         g_MenuPanelTasks[9].unk_0C = 1;
     }
     TASK_SET(saved_work);
-    input = INPUT_GetRepeatedButtons(g_InputPressed & (PADLright | PADLleft));
+    input = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLright | PADLleft));
     if (input & PADLleft) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         D_80148654 = 0;
@@ -42,7 +42,7 @@ MATCH void func_801D1B60(void) {
             D_80148655 = 0;
         }
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         func_801D21F4();
         step     = &D_80148651;
         counter  = &g_GameEntrySubstate;
@@ -52,7 +52,7 @@ MATCH void func_801D1B60(void) {
         *counter = total;
         return;
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         selection = (s8*)&D_80148655;
         if (*selection == 6) {
             if (g_MenuPanelTasks[9].unk_0C == 0) {

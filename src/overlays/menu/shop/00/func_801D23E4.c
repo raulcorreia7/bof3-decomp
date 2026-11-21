@@ -16,7 +16,7 @@ MATCH void func_801D23E4(void) {
     paged      = D_801E6054 - 1;
     row_y      = (index + paged) * 0xD + 0x1A;
     D_8014862A = D_8014840E + row_y;
-    input      = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown));
+    input      = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     if (index - 1 == 4) {
         D_80148340 = 0x4C;
         if (input & (PADLup | PADLdown)) {
@@ -27,13 +27,13 @@ MATCH void func_801D23E4(void) {
         Message_SetVariable(0, 0xC, Item_GetRecord(g_ShopItemCategory, g_ShopItemId));
         D_80148340 = 0x3A;
     }
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
         cursor = &D_80148656;
         Shop_Equip(g_CharSlot[g_PartyFieldOrder[(s8)*cursor]], (selection + (D_801E6054 + 0xFF)) & BYTE_MASK, g_ShopItemId);
         Char_RebuildStats(&g_Characters[g_CharSlot[g_PartyFieldOrder[(s8)*cursor]]]);
         D_80148652 += 1;
-    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         for (index = 0; index < Party_CountOrder(PARTY_ORDER_FIELD); index++) {
             if (index == (s8)D_80148656) {

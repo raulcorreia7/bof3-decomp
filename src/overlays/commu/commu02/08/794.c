@@ -168,7 +168,7 @@ NON_MATCHING void func_801D1A50(void) {
 
     FAKE_STACK_PADS(u8, 1); /* FAKE: retail reserves 8 unused stack bytes. */
 
-    input    = &g_InputPressed;
+    input    = &g_PadStates[0].pressed;
     repeated = INPUT_GetRepeatedButtons(*input & 0xA000);
     if (repeated != 0) {
         if ((s8)D_801DB0B4 < 8) {
@@ -850,7 +850,7 @@ MATCH void func_801D3C30(void) {
     u8   val;
     u16* pad;
 
-    pad     = &g_InputPressed;
+    pad     = &g_PadStates[0].pressed;
     buttons = INPUT_GetRepeatedButtons(*pad & 0xF000);
     if (buttons != 0) {
         SND_PlaySE(0x100);
@@ -1379,7 +1379,7 @@ MATCH void func_801D5788(void) {
     GFX_AddPrim(GFX_LAYER_TOP, sizeof(TILE));
     n          = D_801DB0C4;
     D_801DB0C4 = n + 1;
-    if (g_InputHeld != 0) {
+    if (g_PadStates[0].held != 0) {
         D_801DB0C4 = n + 3;
     }
     if (D_801DB0C4 >= 0xC8) {
@@ -1389,7 +1389,7 @@ MATCH void func_801D5788(void) {
 
 MATCH void func_801D5924(void) {
     func_801D5B2C();
-    if (g_InputPressed != 0) {
+    if (g_PadStates[0].pressed != 0) {
         UI_SetMode(0U);
         D_801F294D += 1;
     }
@@ -1532,16 +1532,16 @@ MATCH void func_801D5E94(void) {
 MATCH void func_801D5F7C(void) {
     s32 pressed;
 
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         D_801DB0C8 = 0xF1;
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x04));
         D_801DB0B8 = 0;
         D_801F294D += 1;
-    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x06));
         D_801F294D = 8;
     } else {
-        pressed = INPUT_GetRepeatedButtons(g_InputPressed & (PADLleft | PADLright));
+        pressed = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLleft | PADLright));
         if (pressed & HALF_MASK) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
         }
@@ -1566,7 +1566,7 @@ MATCH void func_801D5F7C(void) {
 MATCH void func_801D6124(void) {
     u16 cue;
 
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (D_801DB0B8 == 1) {
             cue = 0x104;
             goto play_cue;
@@ -1576,13 +1576,13 @@ MATCH void func_801D6124(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
         D_801DB0C4 = 0;
         D_801F294D += 1;
-    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         cue = 0x106;
     play_cue:
         D_801DB0C8 = 0xF0;
         SND_PlaySE(cue);
         D_801F294D -= 1;
-    } else if (INPUT_GetRepeatedButtons(g_InputPressed & (PADLleft | PADLright)) & HALF_MASK) {
+    } else if (INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLleft | PADLright)) & HALF_MASK) {
         D_801DB0B8 ^= 1;
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
     }
@@ -1809,7 +1809,7 @@ MATCH void Fairy_SelectMember(void) {
     s16  last;
     s8   value;
 
-    pad     = &g_InputPressed;
+    pad     = &g_PadStates[0].pressed;
     pressed = *pad;
     if ((pressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
         D_801DB0C8 = 0xF1;
@@ -1856,7 +1856,7 @@ MATCH void Fairy_SelectMember(void) {
 MATCH void func_801D708C(void) {
     u16 cue;
 
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (D_801DB0B8 == 1) {
             cue = 0x104;
             goto play_cue;
@@ -1866,13 +1866,13 @@ MATCH void func_801D708C(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
         D_801DB0C4 = 0;
         D_801F294D += 1;
-    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         cue = 0x106;
     play_cue:
         D_801DB0C8 = 0xF0;
         SND_PlaySE(cue);
         D_801F294D -= 1;
-    } else if (INPUT_GetRepeatedButtons(g_InputPressed & (PADLleft | PADLright)) & HALF_MASK) {
+    } else if (INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLleft | PADLright)) & HALF_MASK) {
         D_801DB0B8 ^= 1;
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
     }
@@ -2780,7 +2780,7 @@ NON_MATCHING s8 func_801DA114(void) {
     s32 count;
     u16 pad;
 
-    pressed = INPUT_GetRepeatedButtons(g_InputPressed & (INPUT_DIRECTIONAL | PADL1 | PADL2 | PADR1 | PADR2));
+    pressed = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (INPUT_DIRECTIONAL | PADL1 | PADL2 | PADR1 | PADR2));
     cell    = D_801DAAAC + D_801DAAA8 * 96 + (s8)D_801DB0D8 * 12 + (s8)D_801DB0D4;
     if (pressed & 0x1000) {
         SND_PlaySE(0x100);
@@ -2830,7 +2830,7 @@ NON_MATCHING s8 func_801DA114(void) {
         }
     }
 
-    pad = g_InputPressed;
+    pad = g_PadStates[0].pressed;
     if (pad & 0x40) {
         cell = D_801DAAAC + D_801DAAA8 * 96 + (s8)D_801DB0D8 * 12 + (s8)D_801DB0D4;
         switch (*cell) {
@@ -2854,7 +2854,7 @@ NON_MATCHING s8 func_801DA114(void) {
                 D_801F294E += 1;
                 return 0;
             case 4:
-                g_InputPressed = pad | 0x800;
+                g_PadStates[0].pressed = pad | 0x800;
                 break;
             default:
                 SND_PlaySE(0x103);
@@ -2866,7 +2866,7 @@ NON_MATCHING s8 func_801DA114(void) {
         }
     }
 
-    if ((g_InputPressed & PADRright) || (pressed & (PADR1 | PADR2))) {
+    if ((g_PadStates[0].pressed & PADRright) || (pressed & (PADR1 | PADR2))) {
         if (D_801DB0D0 >= 4) {
             return 0;
         }
@@ -2874,7 +2874,7 @@ NON_MATCHING s8 func_801DA114(void) {
         D_801DB0D0 += 1;
         return 0;
     }
-    if ((g_InputPressed & PADRleft) || (pressed & PADL1) || (pressed & PADL2)) {
+    if ((g_PadStates[0].pressed & PADRleft) || (pressed & PADL1) || (pressed & PADL2)) {
         if (D_801DB0D0 == 0) {
             return 0;
         }
@@ -2882,7 +2882,7 @@ NON_MATCHING s8 func_801DA114(void) {
         D_801DB0D0 -= 1;
         return 0;
     }
-    if (g_InputPressed & PADRup) {
+    if (g_PadStates[0].pressed & PADRup) {
         u8 slot = D_801DB0D0;
 
         if (slot != 0 && (D_801DB080[slot] == 0xFF || D_801DB080[slot] == 0)) {
@@ -2892,7 +2892,7 @@ NON_MATCHING s8 func_801DA114(void) {
         D_801DB080[D_801DB0D0] = 0xFF;
         return 0;
     }
-    if (g_InputPressed & PADstart) {
+    if (g_PadStates[0].pressed & PADstart) {
         SND_PlaySE(0x104);
         count = 5;
         for (i = 4; (s8)i >= 0 && D_801DB080[(s8)i] == 0xFF; i--) {

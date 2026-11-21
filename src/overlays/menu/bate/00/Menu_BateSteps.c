@@ -83,7 +83,7 @@ MATCH void func_801D1044(void) {
     D_801483C0 = 1;
     D_801483C4 = D_80148358 + 6;
     D_801483C6 = D_8014835A + (D_8014835E * 13 + 0x57);
-    pressed    = INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL) & (PADLup | PADLdown);
+    pressed    = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & INPUT_DIRECTIONAL) & (PADLup | PADLdown);
     D_8014835F = 0xFF;
     D_80148361 = 1;
     if (pressed != 0) {
@@ -100,13 +100,13 @@ MATCH void func_801D1044(void) {
     }
     D_80148388 = Item_GetDescription(category, *item);
     D_801483AC = 0xDC;
-    if (g_InputPressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
+    if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x03));
         step       = &g_MenuStep.state;
         D_8014833B = D_8014833A->type;
         D_8014835F = D_8014835E;
         (*step)++;
-    } else if (g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) {
+    } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x06));
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
         *D_80148333      = 1;
