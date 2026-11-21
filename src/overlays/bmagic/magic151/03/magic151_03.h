@@ -5,8 +5,6 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-/* g_ScratchPadVectors */
-extern SVECTOR     g_ScratchPadVectors[];
 extern u8          D_800B4C90[];
 extern u8          D_80149298[];
 extern PartyMember s_BattleBattlerTemplates[BATTLE_PARTY_CHARACTERS_COUNT];

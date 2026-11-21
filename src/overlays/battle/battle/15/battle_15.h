@@ -242,7 +242,7 @@ typedef struct BattleTemplateStats {
 
 /* The same cell read without the reload is g_BattleWorkCell: Battle_CureStatus's
  * save/restore keeps the plain word. A second name is the only form that keeps
- * the retail `lui`/`sw` pairs; the address is an `alias:true` row of the image's table in config/symbols.toml. */
+ * the retail `lui`/`sw` pairs; the address is an `alias:true` row of the image's table in config/symbols/<image>.toml. */
 extern u32 g_BattleWorkCell;
 
 #define BATTLE_EFFECT_STEP_COUNT 3
@@ -466,7 +466,7 @@ extern volatile u8                       g_BattleUIStep;
 extern BattleSelectionState      D_801462F0_state;
 /* FAKE: g_Battle.active_battler as a global of its own; the sites that use it match only with a separate symbol. */
 extern volatile u8               g_BattleActiveBattler;
-/* Per-access views of a symbol at the same address, named by an `alias = true` row in config/symbols.toml (this image's
+/* Per-access views of a symbol at the same address, named by an `alias = true` row in config/symbols/<image>.toml (this image's
  * table or battle/battle/03's). Units that need retail's separate %hi/%lo pair for one cell use them; a cast of the
  * canonical symbol merges the pair and changes the bytes. */
 extern u8                        g_BattleActiveBattler_nv;

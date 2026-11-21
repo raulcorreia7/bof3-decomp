@@ -19,8 +19,6 @@
  * table, in retail address order, in D_801F4DA0_Data.c. */
 
 /* Data, in address order. */
-/* g_ScratchPadVectors */
-extern SVECTOR       g_ScratchPadVectors[];
 /* The steppers that must reload the cell after every store select the
  * volatile declaration. */
 extern WorldMapKey   D_801F4D7C[9];

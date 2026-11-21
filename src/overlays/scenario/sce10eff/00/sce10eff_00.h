@@ -75,8 +75,6 @@ ASSERT_SIZE(SceneBandEffect, 0x40);
 extern s32              D_1F800004;
 extern s32              D_1F800008;
 extern s32              D_1F80000C;
-/* g_ScratchPadVectors */
-extern SVECTOR          g_ScratchPadVectors[];
 extern Callback         D_801D2708[SCN_EFFECT_STATE_STEP_COUNT];
 extern Callback         D_801D2714[];
 extern Callback         D_801D2724[];

@@ -208,7 +208,7 @@ extern u8               g_ShisuToppingR;
 extern u8               g_ShisuToppingG;
 extern u8               g_ShisuToppingB;
 
-/* The clut strip tables of this overlay, bound in config/symbols.toml. */
+/* The clut strip tables of this overlay, bound in config/symbols/<image>.toml. */
 extern UvRect g_MenuClutStripCells[];
 extern u8     g_MenuClutStripEntries[];
 extern u8     g_MenuClutStripPalettes[];

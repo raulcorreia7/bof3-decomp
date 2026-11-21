@@ -28,7 +28,7 @@ extern volatile u16 D_801463BE;
 /* D_801EB630 */
 
 /* The three battle hooks the image installs; the addresses are in
- * [emi/boss/boss001/13] of config/symbols.toml. */
+ * config/symbols/emi+boss+boss001+13.toml. */
 
 /* The enemy-work mode dispatch each installer publishes at unk_E4. */
 void func_800C1E00(s32 mode);

@@ -44,6 +44,5 @@ extern u8 D_801F4E50[];
 
 extern CellBlock D_801F47D4[];
 /* The primitive rows one cell id selects, two per row. */
-extern POLY_FT4  g_AreaCellPrims[][2];
 
 #endif

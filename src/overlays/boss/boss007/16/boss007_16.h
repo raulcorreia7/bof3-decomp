@@ -20,7 +20,7 @@ extern s32      D_80149298;
  * overlay only clears the halfword at +0x4. */
 
 /* The mode handler sets the image installs into the battle hooks; the
- * addresses are in [emi/boss/boss007/16] of config/symbols.toml. */
+ * addresses are in config/symbols/emi+boss+boss007+16.toml. */
 
 /* The enemy-work mode dispatch each installer publishes at unk_E4. */
 void func_800C18BC(s32 mode);

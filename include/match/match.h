@@ -162,11 +162,11 @@
 
 /*
  * Unmatched code/data inclusion for C source. `ASM_DIR` is the image's one asm folder, passed as
- * `-DASM_DIR="asm/<target>"` (or its `hand` subfolder for authored assembly).
+ * `-DASM_DIR="build/asm/<target>"` (or its `hand` subfolder for authored assembly).
  */
 #if defined(MATCHING) && !defined(M2CTX) && !defined(PERMUTER)
 #ifndef ASM_DIR
-#error "INCLUDE_ASM needs -DASM_DIR=\"asm/<target>\" from the build"
+#error "INCLUDE_ASM needs -DASM_DIR=\"build/asm/<target>\" from the build"
 #endif
 #ifndef INCLUDE_ASM
 #define INCLUDE_ASM(NAME)                                \

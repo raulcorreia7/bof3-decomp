@@ -7,7 +7,7 @@
 #include "overlays/boss/boss.h"
 
 /* The mode handler sets the image installs into the battle hooks; the
- * addresses are in [emi/boss/boss022/13] of config/symbols.toml. */
+ * addresses are in config/symbols/emi+boss+boss022+13.toml. */
 
 extern u8       D_800C1B18[];
 extern u16      D_800C1B24[];
