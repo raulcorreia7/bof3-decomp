@@ -29,14 +29,14 @@ g_GameEntrySubstate = { addr = 0x80143B92, source = "Stage within the current ga
 g_GameStateIndex = { addr = 0x80143BB0, source = "Game request code that picks the next game state." }
 g_UiTitleState = { addr = 0x80143C10, source = "Index into s_TitleSteps of the title screen state that runs each frame; each state adds 1 when it is done, and the start button sets it to 2 below state 3 or to 7." }
 g_UiTitleSubstate = { addr = 0x80143C12, source = "Substate of the title screen state, cleared to 0 when the title screen starts." }
-g_UiTitleTimer = { addr = 0x80143C20, source = "Frame countdown of the title screen states: Game_WaitTitleFade arms it to 360 and Game_AdvanceTitleFade to 900, and the state advances when it reaches 0." }
+g_UiTitleTimer = { addr = 0x80143C20, source = "Frame countdown of the title screen states: Title_WaitFade arms it to 360 and Title_AdvanceFade to 900, and the state advances when it reaches 0." }
 g_UiTitleBannerScroll = { addr = 0x80143C22, source = "Horizontal scroll of the title banner: starts at 200 and the banner draw adds 2 each frame." }
 g_UiTitleBannerAlpha = { addr = 0x80143C24, source = "Alpha of the title banner, cleared to 0 when the title screen starts." }
 g_UiTitlePrimaryAlpha = { addr = 0x80143C26, source = "Alpha of the primary title choice labels, raised by 4 per frame up to 128 while the choices are open." }
 g_UiTitleSecondaryAlpha = { addr = 0x80143C28, source = "Alpha of the secondary title choice panels, raised by 2 per frame up to 128 while the choices are open." }
 g_UiPopupRequest = { addr = 0x80143C30, source = "Window popup request flags: the title draw clears its low byte, and the title start button acts when WIN_POPUP_PENDING_MASK shows WIN_POPUP_PENDING_OPEN." }
-g_UiTitleFadePhase = { addr = 0x80143C31, source = "Phase of the title fade: 1 when the title screen starts, 2 when the fade is done (Game_WaitTitleFade waits for it), 3 once the choices open, 0 when the game starts." }
-g_UiTitleChoicePhase = { addr = 0x80143C32, source = "Phase of the title choices: 0 at the start, 1 once the title fade ends (Game_AdvanceTitleFade) and 0 again when the game starts; nonzero draws the choice panels." }
+g_UiTitleFadePhase = { addr = 0x80143C31, source = "Phase of the title fade: 1 when the title screen starts, 2 when the fade is done (Title_WaitFade waits for it), 3 once the choices open, 0 when the game starts." }
+g_UiTitleChoicePhase = { addr = 0x80143C32, source = "Phase of the title choices: 0 at the start, 1 once the title fade ends (Title_AdvanceFade) and 0 again when the game starts; nonzero draws the choice panels." }
 g_UiTitleInputGate = { addr = 0x80143C33, source = "Gate of the title start button: 1 from the title screen start until the button is accepted or the game starts, then 0." }
 g_UiWindowEffectBusy = { addr = 0x80143C40, source = "Tells whether a window effect is running." }
 g_UiLocalMode = { addr = 0x80143C90, source = "Set by UI_SetMode, which arms UI_DispatchLocalMode." }

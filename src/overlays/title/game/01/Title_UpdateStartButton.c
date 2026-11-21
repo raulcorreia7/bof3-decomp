@@ -2,7 +2,7 @@
 
 /* Runs before the main GAME.EMI entry-1 state handler each frame and redirects
  * early start-button transitions into either state 2 or state 7. */
-MATCH void UI_UpdateStartButton(void) {
+MATCH void Title_UpdateStartButton(void) {
     /* The original keeps &g_UiTitleInputGate in s0 and reaches the nearby
      * front-state fields as negative byte offsets off that single base, not as
      * standalone globals:

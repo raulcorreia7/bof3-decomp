@@ -16,9 +16,9 @@ segments:
     section_order: [.text, .data, .rodata, .bss]
     subsegments:
       - [0x4, c, frontend]
-      - [0x15C, c, Game_WaitTitleFade]
+      - [0x15C, c, Title_WaitFade]
       - [0x194, c, title_selection]
-      - [0x44C, c, UI_UpdateStartButton]
+      - [0x44C, c, Title_UpdateStartButton]
       - [0x534, c, title_draw]
       - [0x104C, .data, frontend]
       - [0x106C, .rodata, title_draw]

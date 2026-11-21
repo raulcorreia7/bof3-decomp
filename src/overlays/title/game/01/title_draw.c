@@ -62,7 +62,7 @@ MATCH void SND_StopSelectionEffect(void) { /* func_801D1184 */
  * state, then draws the active frontend prompt and selection marker.
  */
 /* func_801D11E4 */
-MATCH void UI_DrawChoicePrompt(void) { /* func_801D11E4 */
+MATCH void Title_DrawChoicePrompt(void) { /* func_801D11E4 */
     if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE && g_GameEntryState == 2u && g_UiWindowEffectBusy == 0u) {
         LOBU(g_UiPopupRequest) = 0u;
     }
@@ -78,7 +78,7 @@ MATCH void UI_DrawChoicePrompt(void) { /* func_801D11E4 */
  * selection marker. When the popup is open, it pulses the active marker.
  */
 /* func_801D12CC */
-MATCH void UI_DrawChoicePanels(u8 selected, u8 alpha) { /* func_801D12CC */
+MATCH void Title_DrawChoicePanels(u8 selected, u8 alpha) { /* func_801D12CC */
     u8* primitive;
     s32 tpage;
     s32 pulse;
@@ -121,7 +121,7 @@ MATCH void UI_DrawChoicePanels(u8 selected, u8 alpha) { /* func_801D12CC */
  * selection and alpha controls.
  */
 /* func_801D150C */
-MATCH void UI_DrawLabelPair(s16 x, s16 y, u8 selected, u8 alpha) { /* func_801D150C */
+MATCH void Title_DrawLabelPair(s16 x, s16 y, u8 selected, u8 alpha) { /* func_801D150C */
     u8* primitive;
     s32 tpage;
 
@@ -148,7 +148,7 @@ MATCH void UI_DrawLabelPair(s16 x, s16 y, u8 selected, u8 alpha) { /* func_801D1
  * and applies the supplied selection and alpha controls to both primitives.
  */
 /* func_801D16DC */
-MATCH void UI_DrawIconPair(s16 x, s16 y, u8 selected, u8 alpha) { /* func_801D16DC */
+MATCH void Title_DrawIconPair(s16 x, s16 y, u8 selected, u8 alpha) { /* func_801D16DC */
     u8* primitive;
     s32 tpage;
 
@@ -196,7 +196,7 @@ MATCH void GFX_SetPrimitiveAlpha(u8* primitive, u8 alpha) { /* func_801D18E8 */
 }
 
 /* func_801D18F8 */
-MATCH void UI_UpdateBannerFade(void) { /* func_801D18F8 */
+MATCH void Title_UpdateBannerFade(void) { /* func_801D18F8 */
     volatile GameUIBannerState* state;
     volatile u16*               alpha;
     volatile u8*                phase_addr;
@@ -286,7 +286,7 @@ MATCH void UI_UpdateBannerFade(void) { /* func_801D18F8 */
  * phase when both channels saturate and draws the visible menu/window layers.
  */
 /* func_801D1B00 */
-MATCH void UI_UpdateWindowFade(void) { /* func_801D1B00 */
+MATCH void Title_UpdateWindowFade(void) { /* func_801D1B00 */
     /* FAKE: volatile u8 alias emits ephemeral lbu reads. */
     u8* phase;
     u8  p;
@@ -327,10 +327,10 @@ MATCH void UI_UpdateWindowFade(void) { /* func_801D1B00 */
     }
 
     if (g_UiTitleChoicePhase != 0u) {
-        UI_DrawChoicePanels(secondary_active, LOBU(g_UiTitleSecondaryAlpha));
+        Title_DrawChoicePanels(secondary_active, LOBU(g_UiTitleSecondaryAlpha));
         /* FAKE: second read addressed off the primary word so the secondary
          * address is not shared across the call. */
-        UI_DrawIconPair(26, 24, secondary_active, FIELD(u8, &g_UiTitlePrimaryAlpha, 2));
-        UI_DrawLabelPair(-6, 28, primary_active, LOBU(g_UiTitlePrimaryAlpha));
+        Title_DrawIconPair(26, 24, secondary_active, FIELD(u8, &g_UiTitlePrimaryAlpha, 2));
+        Title_DrawLabelPair(-6, 28, primary_active, LOBU(g_UiTitlePrimaryAlpha));
     }
 }

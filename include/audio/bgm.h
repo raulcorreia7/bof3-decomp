@@ -10,7 +10,7 @@
 /* Selection ids and the SND_PlayBGM arguments the screens share. The ids are
  * named for the screen that starts them; the retail track names are unknown. */
 #define BGM_NONE              0xFF /* g_SndBGMId while no track is active */
-#define BGM_TITLE             0x8D /* Game_BeginTitle */
+#define BGM_TITLE             0x8D /* Title_Begin */
 #define BGM_COMMU02           0x94 /* the commu02 overlay's own track */
 #define BGM_CUE_LEVEL_DEFAULT 100
 #define BGM_CUE_SHAPE_DEFAULT 8

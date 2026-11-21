@@ -3,7 +3,7 @@
 /* At fade phase `2`, the handler arms a 360-tick delay and advances the
  * frontend state.
  */
-MATCH void Game_WaitTitleFade(void) {
+MATCH void Title_WaitFade(void) {
     if (LOBU(g_UiTitleFadePhase) == 2u) {
         u16 state;
         u16 timer;

@@ -4,7 +4,7 @@
  * `3`, opens the window phase, rearms 900 ticks, and advances the state.
  */
 /* func_801D0D94 */
-MATCH void Game_AdvanceTitleFade(void) { /* func_801D0D94 */
+MATCH void Title_AdvanceFade(void) { /* func_801D0D94 */
     u16* timer_ptr;
     u16  timer;
 
@@ -24,7 +24,7 @@ MATCH void Game_AdvanceTitleFade(void) { /* func_801D0D94 */
  * `0`, opens selection FX, and advances the title state.
  */
 /* func_801D0DF0 */
-MATCH void Game_StartTitleFade(void) { /* func_801D0DF0 */
+MATCH void Title_StartFade(void) { /* func_801D0DF0 */
     volatile u16* timer_ptr;
     u16           timer;
 
@@ -43,7 +43,7 @@ MATCH void Game_StartTitleFade(void) { /* func_801D0DF0 */
  * phases and EXE flags, installs the next callback, and advances the state.
  */
 /* func_801D0E54 */
-MATCH void Game_StartSelectedGame(void) { /* func_801D0E54 */
+MATCH void Title_StartSelectedGame(void) { /* func_801D0E54 */
     if (WINDOW_EFFECT_IDLE()) {
         g_UiTitleFadePhase   = 0u;
         g_UiTitleChoicePhase = 0u;
@@ -67,7 +67,7 @@ MATCH void Game_StartSelectedGame(void) { /* func_801D0E54 */
  * advances.
  */
 /* func_801D0F00 */
-MATCH void UI_WaitTitleInput(void) { /* func_801D0F00 */
+MATCH void Title_WaitInput(void) { /* func_801D0F00 */
     if (D_80143B40 == 0u) {
         g_UiTitleState = 0u;
         return;
@@ -83,7 +83,7 @@ MATCH void UI_WaitTitleInput(void) { /* func_801D0F00 */
         SND_FadeOutBGM(sel, bank, 8);
         g_UiTitleState = g_UiTitleState + 1u;
     }
-    UI_DrawChoicePrompt();
+    Title_DrawChoicePrompt();
 }
 
 /* While the EXE gate is active, the handler updates the frontend prompt.
@@ -91,19 +91,19 @@ MATCH void UI_WaitTitleInput(void) { /* func_801D0F00 */
  * zero.
  */
 /* func_801D0FB8 */
-MATCH void UI_UpdateChoicePrompt(void) { /* func_801D0FB8 */
+MATCH void Title_UpdateChoicePrompt(void) { /* func_801D0FB8 */
     if (D_80143B40 == 0u) {
         g_EmiLoadedCharacterIndex = 0xFFu;
         g_UiTitleState            = 0u;
     } else {
-        UI_DrawChoicePrompt();
+        Title_DrawChoicePrompt();
     }
 }
 
 /* Closes the current selection FX, restores layout bank 0, installs the
  * alternate frontend callback loop, then exits the active scheduler thread. */
 /* func_801D1000 */
-MATCH void Game_LeaveTitle(void) { /* func_801D1000 */
+MATCH void Title_Leave(void) { /* func_801D1000 */
     if (WINDOW_EFFECT_BUSY()) {
         return;
     }

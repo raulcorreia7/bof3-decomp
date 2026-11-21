@@ -1489,7 +1489,7 @@ MATCH void func_801D5D5C(void) {
 }
 
 /* func_801D5D98 */
-MATCH void Menu_StartFairyEventMessage(void) {
+MATCH void Fairy_StartEventMessage(void) {
     u8* state = &g_GameStateIndex;
 
     if (*state != GAME_REQUEST_MESSAGE) {
@@ -1504,7 +1504,7 @@ MATCH void func_801D5DF4(void) {
 }
 
 /* func_801D5E30 */
-MATCH void Menu_ConfirmFairy(void) {
+MATCH void Fairy_Confirm(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
         D_801DB0C4 = 4;
@@ -1801,7 +1801,7 @@ MATCH void func_801D6D18(void) {
 }
 
 /* func_801D6E70 */
-MATCH void Menu_SelectMember(void) {
+MATCH void Fairy_SelectMember(void) {
     u16* pad;
     u16  pressed;
     u16  repeated;
@@ -2099,7 +2099,7 @@ MATCH void func_801D7C6C(void) {
 }
 
 /* func_801D7DD4 */
-MATCH void Menu_StartFairyEndMessage(void) {
+MATCH void Fairy_StartEndMessage(void) {
     u8* state = &g_GameStateIndex;
 
     if (*state != GAME_REQUEST_MESSAGE && D_801F294D == 0) {
