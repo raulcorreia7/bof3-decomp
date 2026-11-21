@@ -54,7 +54,6 @@ MATCH s32 Area_GetVx(s32 x, s32 y) {
     if (func_8019C4F0(next_x, next_y) & BYTE_MASK) {
         return 1;
     }
-/* Shared zero return for both miss paths. */
 fail:
     return 0;
 }

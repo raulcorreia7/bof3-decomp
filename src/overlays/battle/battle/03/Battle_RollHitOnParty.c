@@ -24,20 +24,16 @@ MATCH u32 Battle_RollHitOnParty(s16 damage, u32 battler_index, u32 target_index)
     if (BATTLER_IS_PLAYER(battler_index)) {
         flags = g_Game.members[battler_index].chr.status;
     } else {
-        /* enemy rows share the flag test below */
         goto enemy;
     }
 
 have_flags:
     if ((flags & STATUS_BLIND) == 0u) {
-        /* no suppression flag: keep the damage value */
         goto after_enemy;
     }
     if (RANDOM_MASK(2u) == 0u) {
-        /* random pass: keep the damage value */
         goto after_enemy;
     }
-    /* failures fall through to the shared clear */
     goto clear;
 
 enemy:
