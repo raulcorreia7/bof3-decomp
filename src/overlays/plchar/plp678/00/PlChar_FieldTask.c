@@ -27,7 +27,7 @@ MATCH void func_801CE674(void) {
 
 /* func_801CE6B8 */
 MATCH void PlChar_FaceFreeDirection(void) {
-    CHAR_FACE_FREE_DIRECTION(func_801CF1A4, func_801CF348);
+    CHAR_FACE_FREE_DIRECTION(func_801CF1A4, PlChar_ProbeFacingClearance);
 }
 
 #include "overlays/plchar/shared/PlChar_RunPersonalAction.h"
@@ -50,7 +50,7 @@ MATCH void func_801CEF20(void) {
 }
 
 MATCH void func_801CEF64(void) {
-    CHAR_START_FACING_TURN(func_801CF348);
+    CHAR_START_FACING_TURN(PlChar_ProbeFacingClearance);
 }
 
 #include "overlays/plchar/shared/PlChar_ReleaseSpawnedActor.h"
@@ -60,13 +60,8 @@ MATCH void func_801CEF64(void) {
 #include "overlays/plchar/shared/Char_ProbeFacingBlocked.h"
 CHAR_DEFINE_PROBE_FACING_BLOCKED(func_801CF1A4);
 
-MATCH void func_801CF348(void) {
-    s16 dist;
-    s32 x;
-    s32 y;
-
-    CHAR_PROBE_FACING_CLEARANCE(dist, x, y)
-}
+/* func_801CF348 */
+#include "overlays/plchar/shared/PlChar_ProbeFacingClearance.h"
 
 MATCH void func_801CF4AC(void) {
     SYS_DISPATCH_TASK(D_801D0598, 2, g_Task);
@@ -105,23 +100,8 @@ MATCH void func_801D0314(void) {
     SYS_DISPATCH_TASK(D_801D05BC, 2, g_Task);
 }
 
-MATCH void func_801D0358(void) {
-    u8 slot;
-
-    if (!(g_Task->direction & 1)) {
-        g_Task->direction = (g_Task->direction - 1) & 7;
-    }
-    slot                     = func_8019601C();
-    g_Task->param.actor_slot = slot;
-    if (g_Task->param.actor_slot != GAME_NONE) {
-        g_SpawnedActors[g_Task->param.actor_slot].header.flags = 1;
-        g_SpawnedActors[g_Task->param.actor_slot].type         = 0x1B;
-    }
-    Actor_RequestScript((g_Task->direction >> 1) + 0x42);
-    /* FAKE: retail reads SND_PlaySE as void(s32). */
-    ((void (*)(s32))SND_PlaySE)(g_Task->unk_2C + 0x100);
-    g_Task->header.step++;
-}
+/* func_801D0358 */
+#include "overlays/plchar/shared/PlChar_StartSpawnedActorTurn.h"
 
 #include "overlays/plchar/shared/PlChar_ClearModeIfSlotFree.h"
 
