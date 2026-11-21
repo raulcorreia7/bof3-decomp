@@ -33,7 +33,6 @@ extern Actor D_80147A58[];
 /* The camera seed halfword the request step stores. */
 /* The field focus point the camera step copies. */
 /* D_80147A90 */
-extern s32  g_AreaFocusY;
 extern u8   D_80147AAC[];
 /* The scaled grid position and size the step checks compare against. */
 extern u8   D_80147C29;

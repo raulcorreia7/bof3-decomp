@@ -48,13 +48,11 @@ extern PartyMember* D_80146250;
 extern Actor D_80147A58[];
 
 /* The area focus x and the work word the stage route reads. */
-extern s32 D_80147A8C;
 
 extern s8           D_80147CB9[];
 extern s8           D_80147CBA[];
 extern s32          D_80147CC4[];
 extern SceneTrigger D_801F5CC0[];
-extern s32          g_AreaFocusY;
 extern s32          D_80147AC4;
 /* The shared route steps the stage table indexes. */
 extern s8           D_80181B00[];

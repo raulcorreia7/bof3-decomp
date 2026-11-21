@@ -16,7 +16,6 @@ extern u8       D_80146158;
 extern u16      D_80147A8E;
 /* The field focus point the work position copies. */
 /* D_80147A90 */
-extern s32      g_AreaFocusY;
 /* The mirror the scroll step reads. */
 extern s16      g_ScrollHeight;
 /* The scenario flag bytes the trigger tests. */
