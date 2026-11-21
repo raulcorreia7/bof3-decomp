@@ -75,141 +75,140 @@ def _in_draft(stack: list[tuple[str, bool]]) -> bool:
     return any(guard == "draft" and not in_else for guard, in_else in stack)
 
 
+Head = list[tuple[str, int, str]]
+ATTEMPT_COMMENT = re.compile(
+    r"\b(?:NON_?MATCHING(?:\s|:)|first diff(?:erence|ering)?|\btried\b)", re.I
+)
+NON_MATCHING_GUARD = re.compile(r"defined\s*\(?\s*NON_MATCHING\s*\)?")
+
+
+def _head_violation(
+    path: str, head: Head, is_definition: bool, line: int
+) -> Violation | None:
+    """The marker problem of one declaration or definition head, or None when it is fine."""
+    markers = [t for t in head if t[0] in MARKERS]
+    if not markers and (not is_definition or any(t[0] == "inline" for t in head)):
+        return None  # `static inline` helpers are not lifted functions
+    first = head[0] if head else ("", line, "plain")
+    where = markers[0][1] if markers else first[1]
+    if not is_definition:
+        return Violation(
+            path,
+            where,
+            _head_text(head),
+            "marker on something that is not a function definition",
+        )
+    name = _function_name(head)
+    if len(markers) != 1:
+        kind = "no marker" if not markers else f"{len(markers)} markers"
+        problem = f"{kind}; a definition needs exactly one"
+    elif head[0][0] not in MARKERS:
+        problem = "the marker must be the first token of the definition"
+    elif head[0][0] in DRAFT_MARKERS and head[0][2] != "draft":
+        problem = f"{head[0][0]} outside `#ifdef NON_MATCHING`"
+    elif head[0][0] == "MATCH" and head[0][2] == "draft":
+        problem = "MATCH inside `#ifdef NON_MATCHING`"
+    else:
+        return None
+    return Violation(path, where, name, problem)
+
+
+def _comment_problem(comment: str, after: str) -> str | None:
+    """Why a comment does not belong in the source, or None."""
+    if re.match(r"[ \t]*\n[ \t]*INCLUDE_ASM\s*\(", after):
+        return "comment above INCLUDE_ASM; record attempts in config/attempts.jsonl"
+    if ATTEMPT_COMMENT.search(comment):
+        return "attempt note belongs in config/attempts.jsonl"
+    return None
+
+
+def _apply_directive(directive: str, stack: list[tuple[str, bool]]) -> None:
+    """Track the `#if` nesting and which branches are the draft switch."""
+    parsed = re.match(r"\s*#\s*(\w*)\s*(.*)", directive.replace("\\\n", " "), re.DOTALL)
+    word, rest = parsed.groups() if parsed else ("", "")
+    if word in ("if", "ifdef", "ifndef"):
+        is_draft = (word == "ifdef" and rest.strip() == "NON_MATCHING") or (
+            word == "if" and NON_MATCHING_GUARD.fullmatch(rest.strip())
+        )
+        stack.append(("draft" if is_draft else "", False))
+    elif word in ("else", "elif") and stack:
+        stack[-1] = (stack[-1][0], True)
+    elif word == "endif" and stack:
+        stack.pop()
+
+
+class _Scanner:
+    """Walks the tokens of one file and collects the definition heads it finds."""
+
+    def __init__(self, path: str) -> None:
+        self.path = path
+        self.found: list[Violation] = []
+        self.stack: list[tuple[str, bool]] = []
+        self.head: Head = []
+        self.depth = 0
+        self.body_is_function = False
+        self.kr_params = False
+
+    def reset_head(self) -> None:
+        self.head.clear()
+        self.kr_params = False
+
+    def judge(self, is_definition: bool, line: int) -> None:
+        violation = _head_violation(self.path, self.head, is_definition, line)
+        if violation:
+            self.found.append(violation)
+
+    def body_token(self, tok: str) -> None:
+        """A token inside a braced body: track where the body ends."""
+        if tok == "{":
+            self.depth += 1
+        elif tok == "}":
+            self.depth -= 1
+            if self.depth == 0 and self.body_is_function:
+                self.body_is_function = False
+                self.reset_head()
+
+    def head_token(self, tok: str, line: int) -> None:
+        """A token at the top level: a head token, or the `{`, `;` or `}` that ends it."""
+        draft = "draft" if _in_draft(self.stack) else "plain"
+        if tok == "{":
+            if self.head and (self.head[-1][0] == ")" or self.kr_params):
+                self.judge(True, line)
+                self.body_is_function = True
+            self.depth = 1
+        elif tok == ";":
+            if _starts_kr_params(self.head):
+                self.head.append((tok, line, draft))
+                self.kr_params = True
+                return
+            self.judge(False, line)
+            self.reset_head()
+        elif tok == "}":
+            self.reset_head()
+        else:
+            self.head.append((tok, line, draft))
+
+
 def check_text(text: str, path: str = "<text>") -> list[Violation]:
-    found: list[Violation] = []
-    stack: list[tuple[str, bool]] = []
-    head: list[tuple[str, int, str]] = []  # (token, line, draft-state at the token)
-    depth = 0
+    scan = _Scanner(path)
     line = 1
-    body_is_function = False
-    kr_params = False
-
-    def draft() -> str:
-        return "draft" if _in_draft(stack) else "plain"
-
-    def judge_head(is_definition: bool) -> None:
-        markers = [t for t in head if t[0] in MARKERS]
-        if is_definition and not markers and any(t[0] == "inline" for t in head):
-            return  # `static inline` helpers are not lifted functions
-        if not markers and not is_definition:
-            return
-        first = head[0] if head else ("", line, "plain")
-        name = _function_name(head) if is_definition else "(not a definition)"
-        where = markers[0][1] if markers else first[1]
-        if not is_definition:
-            found.append(
-                Violation(
-                    path,
-                    where,
-                    _head_text(head),
-                    "marker on something that is not a function definition",
-                )
-            )
-            return
-        if len(markers) != 1:
-            kind = "no marker" if not markers else f"{len(markers)} markers"
-            found.append(
-                Violation(path, where, name, f"{kind}; a definition needs exactly one")
-            )
-        elif head[0][0] not in MARKERS:
-            found.append(
-                Violation(
-                    path,
-                    where,
-                    name,
-                    "the marker must be the first token of the definition",
-                )
-            )
-        elif head[0][0] in DRAFT_MARKERS and head[0][2] != "draft":
-            found.append(
-                Violation(
-                    path, where, name, f"{head[0][0]} outside `#ifdef NON_MATCHING`"
-                )
-            )
-        elif head[0][0] == "MATCH" and head[0][2] == "draft":
-            found.append(
-                Violation(path, where, name, "MATCH inside `#ifdef NON_MATCHING`")
-            )
-
     for m in TOKEN.finditer(text):
         kind, tok = m.lastgroup, m.group()
         tok_line = line
         line += tok.count("\n")
         if kind == "comment":
-            if re.match(r"[ \t]*\n[ \t]*INCLUDE_ASM\s*\(", text[m.end() :]):
-                found.append(
-                    Violation(
-                        path,
-                        tok_line,
-                        "comment",
-                        "comment above INCLUDE_ASM; record attempts in config/attempts.jsonl",
-                    )
-                )
-            elif re.search(
-                r"\b(?:NON_?MATCHING(?:\s|:)|first diff(?:erence|ering)?|\btried\b)",
-                tok,
-                re.I,
-            ):
-                found.append(
-                    Violation(
-                        path,
-                        tok_line,
-                        "comment",
-                        "attempt note belongs in config/attempts.jsonl",
-                    )
-                )
+            problem = _comment_problem(tok, text[m.end() :])
+            if problem:
+                scan.found.append(Violation(path, tok_line, "comment", problem))
+        elif kind == "directive":
+            _apply_directive(tok, scan.stack)
+        elif kind in ("string", "char", "number", "space"):
             continue
-        if kind in ("string", "char", "number", "space"):
-            continue
-        if kind == "directive":
-            parsed = re.match(
-                r"\s*#\s*(\w*)\s*(.*)", tok.replace("\\\n", " "), re.DOTALL
-            )
-            word, rest = parsed.groups() if parsed else ("", "")
-            if word in ("if", "ifdef", "ifndef"):
-                is_draft = (word == "ifdef" and rest.strip() == "NON_MATCHING") or (
-                    word == "if"
-                    and re.fullmatch(
-                        r"defined\s*\(?\s*NON_MATCHING\s*\)?", rest.strip()
-                    )
-                )
-                stack.append(("draft" if is_draft else "", False))
-            elif word in ("else", "elif") and stack:
-                stack[-1] = (stack[-1][0], True)
-            elif word == "endif" and stack:
-                stack.pop()
-            continue
-        if depth > 0:
-            if tok == "{":
-                depth += 1
-            elif tok == "}":
-                depth -= 1
-                if depth == 0 and body_is_function:
-                    head.clear()
-                    body_is_function = False
-                    kr_params = False
-            continue
-        if tok == "{":
-            if head and (head[-1][0] == ")" or kr_params):
-                judge_head(True)
-                body_is_function = True
-            depth = 1
-            continue
-        if tok == ";":
-            if _starts_kr_params(head):
-                head.append((tok, tok_line, draft()))
-                kr_params = True
-                continue
-            judge_head(False)
-            head.clear()
-            kr_params = False
-            continue
-        if tok == "}":
-            head.clear()
-            kr_params = False
-            continue
-        head.append((tok, tok_line, draft()))
-    return found
+        elif scan.depth > 0:
+            scan.body_token(tok)
+        else:
+            scan.head_token(tok, tok_line)
+    return scan.found
 
 
 def _starts_kr_params(head: list[tuple[str, int, str]]) -> bool:
