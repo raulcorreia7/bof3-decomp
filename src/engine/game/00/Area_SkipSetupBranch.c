@@ -1,13 +1,15 @@
 #include "game_00.h"
 
-MATCH u8* func_801A44A4(u8* script) {
+/* func_801A44A4 */
+/* Steps over a control record without running it. */
+MATCH u8* Area_SkipSetupBranch(u8* script) {
     switch (script[0]) {
         case 0xF0:
         case 0xF1:
-            script = func_801A4798(script);
+            script = Area_SkipSetupIf(script);
             break;
         case 0xF4:
-            script = func_801A4844(script);
+            script = Area_SkipSetupIfChain(script);
             break;
         case 0xF9:
             script++;

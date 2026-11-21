@@ -1,6 +1,8 @@
 #include "game_00.h"
 
-MATCH u8* func_801A4798(u8* script) {
+/* func_801A4798 */
+/* Steps over a 0xF0 or 0xF1 block. */
+MATCH u8* Area_SkipSetupIf(u8* script) {
     u8 value;
 
     /* The barrier keeps the +3 cursor bump below the callee-save stores.
@@ -15,7 +17,7 @@ MATCH u8* func_801A4798(u8* script) {
     while (value != 0xFE) {
         if (value >= 0xF0) {
             if (value < 0xFD) {
-                script = func_801A44A4(script);
+                script = Area_SkipSetupBranch(script);
             }
             if (*script == 0xFD) {
                 script++;

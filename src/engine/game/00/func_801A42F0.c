@@ -6,7 +6,7 @@ MATCH u8* func_801A42F0(u8* cursor, s8* flag, u8* counter) {
     value = *cursor;
     if (value >= 0xF0) {
         if (value < 0xFD) {
-            cursor = func_801A4400(cursor);
+            cursor = Area_RunSetupBranch(cursor);
         } else if (value == 0xFE) {
             *counter -= 1;
         } else {
@@ -16,7 +16,7 @@ MATCH u8* func_801A42F0(u8* cursor, s8* flag, u8* counter) {
             cursor += 1;
         }
     } else {
-        cursor = func_801A4BF8(cursor);
+        cursor = Area_RunSetupRecord(cursor);
     }
     return cursor;
 }

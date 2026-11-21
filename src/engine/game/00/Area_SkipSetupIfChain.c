@@ -1,6 +1,8 @@
 #include "game_00.h"
 
-MATCH u8* func_801A4844(u8* script) {
+/* func_801A4844 */
+/* Steps over a 0xF4 chain. */
+MATCH u8* Area_SkipSetupIfChain(u8* script) {
     u8* cursor;
     u8  opcode;
     u8  active;
@@ -36,7 +38,7 @@ MATCH u8* func_801A4844(u8* script) {
                 case 0x4:
                 case 0x9:
                 case 0xA:
-                    cursor = func_801A44A4(cursor);
+                    cursor = Area_SkipSetupBranch(cursor);
                     break;
             }
         } else {

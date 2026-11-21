@@ -1,6 +1,8 @@
 #include "game_00.h"
 
-MATCH u8* func_801A4518(u8* script) {
+/* func_801A4518 */
+/* Runs the branch of the first holding test of a 0xF4 chain. */
+MATCH u8* Area_RunSetupIfChain(u8* script) {
     ScriptOpCallback* handler;
     s8                flag;
     s32               lead;

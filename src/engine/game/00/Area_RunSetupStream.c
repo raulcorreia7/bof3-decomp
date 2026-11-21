@@ -11,7 +11,7 @@ MATCH void Area_RunSetupStream(u8* cursor) {
         index                                                      = (s16)g_ScratchPad.cells.halves[1] + 1;
         g_ScratchPad.cells.halves[1]                               = index;
     } while (index < 4);
-    Area_SetScenarioId(cursor);
+    Area_RunSetupRecords(cursor);
     if (g_ScratchPad.cells.halves[0] < ENTITY_MAX) {
         do {
             g_Actors[g_ScratchPad.cells.halves[0]].header.flags = 0;

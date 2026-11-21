@@ -1,6 +1,8 @@
 #include "game_00.h"
 
-MATCH void func_801A3FC0(u8* cursor) {
+/* func_801A3FC0 */
+/* Runs a 0xF0 block when the area test holds. */
+MATCH void Area_RunSetupIf(u8* cursor) {
     u8 flag;
     u8 count;
 

@@ -14,7 +14,7 @@ MATCH u8* func_801A4640(u8* cursor) {
                 case 0x4:
                 case 0x9:
                 case 0xA:
-                    cursor = func_801A4400(cursor);
+                    cursor = Area_RunSetupBranch(cursor);
                     break;
                 case 0x6:
                     cursor += 2;
@@ -28,7 +28,7 @@ MATCH u8* func_801A4640(u8* cursor) {
                     break;
             }
         } else {
-            cursor = func_801A4BF8(cursor);
+            cursor = Area_RunSetupRecord(cursor);
         }
     }
     return cursor;

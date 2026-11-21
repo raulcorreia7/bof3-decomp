@@ -29,7 +29,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x58, .data, D_80195858]
-      - [0x64, .rodata, func_801A4400]
+      - [0x64, .rodata, Area_RunSetupBranch]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_4
     type: code
@@ -39,7 +39,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x90, .data, D_80195890]
-      - [0x94, .rodata, func_801A44A4]
+      - [0x94, .rodata, Area_SkipSetupBranch]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_5
     type: code
@@ -69,7 +69,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x120, .data, D_80195920]
-      - [0x124, .rodata, func_801A4844]
+      - [0x124, .rodata, Area_SkipSetupIfChain]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_8
     type: code
@@ -79,7 +79,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x150, .data, D_80195950]
-      - [0x154, .rodata, func_801A4BF8]
+      - [0x154, .rodata, Area_RunSetupRecord]
       - [0x190, .rodata, Menu_OpenMaster]
       - [0x1A8, .rodata, func_801A7E54]
       - [0x1D8, .rodata, Scene_StartShopSave]
@@ -440,24 +440,24 @@ segments:
       - [0xE37C, c, func_801A3B7C]
       - [0xE51C, c, func_801A3D1C]
       - [0xE650, c, Area_RunSetupStream]
-      - [0xE73C, c, Area_SetScenarioId]
-      - [0xE7C0, c, func_801A3FC0]
-      - [0xE958, c, func_801A4158]
+      - [0xE73C, c, Area_RunSetupRecords]
+      - [0xE7C0, c, Area_RunSetupIf]
+      - [0xE958, c, Area_RunSetupIfNot]
       - [0xEAF0, c, func_801A42F0]
       - [0xEB74, c, func_801A4374]
-      - [0xEC00, c, func_801A4400]
-      - [0xECA4, c, func_801A44A4]
-      - [0xED18, c, func_801A4518]
+      - [0xEC00, c, Area_RunSetupBranch]
+      - [0xECA4, c, Area_SkipSetupBranch]
+      - [0xED18, c, Area_RunSetupIfChain]
       - [0xEE40, c, func_801A4640]
       - [0xEEE8, c, func_801A46E8]
-      - [0xEF98, c, func_801A4798]
-      - [0xF044, c, func_801A4844]
+      - [0xEF98, c, Area_SkipSetupIf]
+      - [0xF044, c, Area_SkipSetupIfChain]
       - [0xF114, c, func_801A4914]
       - [0xF190, c, Actor_SetOptionFlags]
       - [0xF2A8, c, Actor_ResetMotion]
       - [0xF380, c, func_801A4B80]
       - [0xF3C0, c, Area_SetCellCode]
-      - [0xF3F8, c, func_801A4BF8]
+      - [0xF3F8, c, Area_RunSetupRecord]
       - [0xF554, c, func_801A4D54]
       - [0xF8C0, c, func_801A50C0]
       - [0xFC00, c, func_801A5400]
@@ -469,8 +469,8 @@ segments:
       - [0x110C0, c, func_801A68C0]
       - [0x11498, c, func_801A6C98]
       - [0x11758, c, func_801A6F58]
-      - [0x11AB0, c, func_801A72B0]
-      - [0x11AE8, c, func_801A72E8]
+      - [0x11AB0, c, Area_SetupScrollRoute]
+      - [0x11AE8, c, Area_SetEntityCallback]
       - [0x11B30, c, func_801A7330]
       - [0x11F04, c, Scene_Start]
       - [0x12004, c, Scene_LoadOverlay]

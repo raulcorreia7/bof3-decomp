@@ -807,25 +807,33 @@ void    func_801A386C(void);
 bool    func_801A3AC8(Actor* record);
 void    func_801A3B7C(Actor* entity);
 /* func_801A3F3C */
-void    Area_SetScenarioId(u8* script);
-void    func_801A3FC0(u8* cursor);
-void    func_801A4158(u8* cursor);
+void    Area_RunSetupRecords(u8* script);
+/* func_801A3FC0 */
+void    Area_RunSetupIf(u8* cursor);
+/* func_801A4158 */
+void    Area_RunSetupIfNot(u8* cursor);
 u8*     func_801A42F0(u8* cursor, s8* flag, u8* counter);
 u8*     func_801A4374(u8* cursor, s8* flag, u8* counter);
-u8*     func_801A4400(u8* script);
-u8*     func_801A44A4(u8* script);
-u8*     func_801A4518(u8* script);
+/* func_801A4400 */
+u8*     Area_RunSetupBranch(u8* script);
+/* func_801A44A4 */
+u8*     Area_SkipSetupBranch(u8* script);
+/* func_801A4518 */
+u8*     Area_RunSetupIfChain(u8* script);
 u8*     func_801A4640(u8* cursor);
 u8*     func_801A46E8(u8* cursor);
-u8*     func_801A4798(u8* script);
-u8*     func_801A4844(u8* script);
+/* func_801A4798 */
+u8*     Area_SkipSetupIf(u8* script);
+/* func_801A4844 */
+u8*     Area_SkipSetupIfChain(u8* script);
 void    func_801A4914(void);
 /* func_801A4990 */
 void    Actor_SetOptionFlags(u8* script);
 /* func_801A4AA8 */
 void    Actor_ResetMotion(void);
 void    func_801A4B80(s32 index);
-u8*     func_801A4BF8(u8* script);
+/* func_801A4BF8 */
+u8*     Area_RunSetupRecord(u8* script);
 void    func_801A50C0(u8* script);
 void    func_801A5400(u8* script);
 void    func_801A57F0(u8* script);
@@ -834,8 +842,10 @@ void    func_801A5EFC(u8* script);
 void    func_801A623C(u8* script);
 void    func_801A68C0(u8* script);
 void    func_801A6F58(u8* script);
-void    func_801A72B0(void* packed_selector);
-void    func_801A72E8(void* selector);
+/* func_801A72B0 */
+void    Area_SetupScrollRoute(void* packed_selector);
+/* func_801A72E8 */
+void    Area_SetEntityCallback(void* selector);
 s8      Area_IsStepBlocked(s32 handler_x, s32 handler_y);
 s8      func_801A79A4(s32 handler_x, s32 handler_y);
 void    func_801A7CE8(void);

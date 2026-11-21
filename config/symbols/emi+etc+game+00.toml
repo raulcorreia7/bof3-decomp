@@ -93,11 +93,21 @@ Game_DispatchFadeWhite = { addr = 0x801A3594, type = "func", source = "calls the
 Game_StartFadeWhite = { addr = 0x801A35D8, type = "func", source = "Step 0 of the D_801C8434 table, followed by func_801A3648: starts a white palette fade (GFX_AllocPaletteFade 0x1F, 0x1F, 0x1F) on the running task and clears ACTOR_FLAG_HIDDEN." }
 Game_DispatchFadeBlack = { addr = 0x801A37D4, type = "func", source = "calls the fade-to-black step selected by the step byte" }
 Game_StartFadeBlack = { addr = 0x801A3818, type = "func", source = "Step 0 of the D_801C843C table, followed by func_801A386C: starts a black palette fade (GFX_AllocPaletteFade 0, 0, 0) on the running task." }
-Area_RunSetupStream = { addr = 0x801A3E50, type = "func", source = "Runs the area setup stream of an AreaLoad handler: clears the four D_80147A58 rows, runs Area_SetScenarioId over the stream and clears the unused g_Actors entries." }
-Area_SetScenarioId = { addr = 0x801A3F3C, type = "func", source = "the body stores into g_ScenarioState.scenario_id" }
+Area_RunSetupStream = { addr = 0x801A3E50, type = "func", source = "Runs the area setup stream of an AreaLoad handler: clears the four D_80147A58 rows, runs Area_RunSetupRecords over the stream and clears the unused g_Actors entries." }
+Area_RunSetupRecords = { addr = 0x801A3F3C, type = "func", source = "the body stores into g_ScenarioState.scenario_id" }
+Area_RunSetupIf = { addr = 0x801A3FC0, type = "func", source = "Setup stream 0xF0: runs the records up to 0xFE when the area test holds, else its other branch." }
+Area_RunSetupIfNot = { addr = 0x801A4158, type = "func", source = "Setup stream 0xF1: runs the records up to 0xFE when the area test fails, else its other branch." }
+Area_RunSetupBranch = { addr = 0x801A4400, type = "func", source = "Runs one setup stream control record 0xF0 to 0xFA: conditional blocks and the scenario id store." }
+Area_SkipSetupBranch = { addr = 0x801A44A4, type = "func", source = "Steps over a setup stream control record without running it." }
+Area_RunSetupIfChain = { addr = 0x801A4518, type = "func", source = "Setup stream 0xF4: runs the branch of the first area test that holds; 0xF6 starts the next test, 0xF7 the default, 0xF5 ends." }
+Area_SkipSetupIf = { addr = 0x801A4798, type = "func", source = "Steps over a 0xF0 or 0xF1 setup block." }
+Area_SkipSetupIfChain = { addr = 0x801A4844, type = "func", source = "Steps over a 0xF4 setup chain." }
 Actor_SetOptionFlags = { addr = 0x801A4990, type = "func", source = "the body stores into g_Task->option_flags" }
 Actor_ResetMotion = { addr = 0x801A4AA8, type = "func", source = "Clears a spawned actor's scale, roll and animation callback state." }
 Area_SetCellCode = { addr = 0x801A4BC0, type = "func", source = "Writes the g_AreaCellCodes byte of the cell at (column, row); Area_GetCellCode reads the same index." }
+Area_RunSetupRecord = { addr = 0x801A4BF8, type = "func", source = "Runs one setup stream record of kind 0x0 to 0xE and returns the next record." }
+Area_SetupScrollRoute = { addr = 0x801A72B0, type = "func", source = "Setup stream kind 0xC: starts the scroll route its byte 1 selects." }
+Area_SetEntityCallback = { addr = 0x801A72E8, type = "func", source = "Setup stream kind 0xD: sets the current entity's callback index, or its word 0x7C when byte 1 is zero." }
 Scene_Start = { addr = 0x801A7704, type = "func", source = "Scenario start: loads the overlay of g_ScenarioState.scenario_id, waits for its SCENA payload, then dispatches the scenario entry." }
 Scene_LoadOverlay = { addr = 0x801A7804, type = "func", source = "Streams the overlay slot 661 + scenario id and waits for the loader; Scene_Start calls it before the scenario handler runs." }
 Game_UpdateScenario = { addr = 0x801A782C, type = "func", source = "Calls entry_00 of the g_ScenarioHandlers handler table of the active scenario, then Game_UpdateScene." }
