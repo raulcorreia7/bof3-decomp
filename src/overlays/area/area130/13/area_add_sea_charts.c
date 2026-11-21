@@ -1,0 +1,7 @@
+#include "func_801F3A7C.c"
+#include "func_801F3AFC.c"
+#include "func_801F3B7C.c"
+#include "func_801F3BFC.c"
+#include "Item_AddSeaCharts.c"
+#include "func_801F3C9C.c"
+#include "func_801F3CD0.c"
