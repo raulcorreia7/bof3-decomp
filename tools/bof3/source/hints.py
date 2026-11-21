@@ -468,6 +468,16 @@ def _symbol_address(ctx: Context, name: str) -> int | None:
     return None
 
 
+def _symbol_operand_address(
+    ctx: Context, operand: str, tags: str | None = None
+) -> int | None:
+    """The address of the symbol an operand names, or None; ``tags`` limits it to those prefixes."""
+    symbol = _symbol(operand)
+    if not symbol or (tags and not re.search(tags, symbol)):
+        return None
+    return _symbol_address(ctx, symbol)
+
+
 def _addresses(insns: list[Insn], ctx: Context) -> set[int]:
     """The addresses the detectors can name."""
     found = {int(text, 16) for insn in insns for text in SCRATCH.findall(insn.text)}
@@ -477,21 +487,17 @@ def _addresses(insns: list[Insn], ctx: Context) -> set[int]:
             value = _number(insn.args[1])
             if value is not None and 0x8000 <= value <= 0xFFFF:
                 pending[insn.args[0]] = value << 16
-            symbol = _symbol(insn.args[1])
-            if symbol:
-                address = _symbol_address(ctx, symbol)
-                if address is not None:
-                    found.add(address)
+            address = _symbol_operand_address(ctx, insn.args[1])
+            if address is not None:
+                found.add(address)
         if len(insn.args) >= 3 and insn.args[1] in pending:
             value = _number(insn.args[2])
             if value is not None:
                 found.add(pending[insn.args[1]] + value)
         for arg in insn.args:
-            symbol = _symbol(arg)
-            if symbol and re.search(r"^(D_|g_|jtbl_|s_)", symbol):
-                address = _symbol_address(ctx, symbol)
-                if address is not None:
-                    found.add(address)
+            address = _symbol_operand_address(ctx, arg, r"^(D_|g_|jtbl_|s_)")
+            if address is not None:
+                found.add(address)
     return found
 
 
