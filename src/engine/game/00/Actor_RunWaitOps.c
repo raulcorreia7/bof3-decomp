@@ -95,7 +95,7 @@ NON_MATCHING u8 Actor_RunWaitOps(void* sub, s32 target, u8 value) {
             FIELD(u16, sub, 0xAu) += 7;
             goto done;
         case ACTOR_SCRIPT_WAIT_WAIT_PARTY_SLOT_MOVE:
-            tmp             = -(g_CurrentActor - D_80147A58) >> 3;
+            tmp             = -(g_CurrentActor - g_PartyActors) >> 3;
             SP_REF(s8, 0x1) = tmp;
             tmp &= BYTE_MASK;
             if ((u32)tmp < 4U && (D_80147CBA[tmp * 0x10] + D_80147CB9[tmp * 0x10]) != 0) {
