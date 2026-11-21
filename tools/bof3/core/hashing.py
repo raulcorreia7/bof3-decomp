@@ -10,10 +10,7 @@ def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
-def file_sha256(path: Path) -> str:
-    """Stream ``path`` through SHA-256 and return the bare hex digest."""
-    digest = hashlib.sha256()
+def file_digest(path: Path, algorithm: str) -> str:
+    """The hex digest of the file at ``path``."""
     with path.open("rb") as stream:
-        for chunk in iter(lambda: stream.read(1 << 20), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+        return hashlib.file_digest(stream, algorithm).hexdigest()

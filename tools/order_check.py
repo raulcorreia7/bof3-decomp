@@ -242,6 +242,14 @@ def check_sorted_items(
     return findings
 
 
+def _anchor(lines: list[str], dupes, span: tuple[int, int]) -> bool:
+    line = lines[span[1] - 1]
+    if UNNAMED_PARAM.search(line):
+        return True
+    name = DECL_FUNC_NAME.search(line)
+    return bool(name and name.group(1) in dupes)
+
+
 def check_prototypes(path: str, lines: list[str], dupes=frozenset()) -> list[Finding]:
     """Prototype runs are in address order.
 
@@ -249,38 +257,26 @@ def check_prototypes(path: str, lines: list[str], dupes=frozenset()) -> list[Fin
     moving it would make check-names or check-tree read a pre-existing debt as a new line.
     """
     regions = item_regions(lines, lambda i: bool(PROTOTYPE.match(lines[i])))
-
-    def anchor(span: tuple[int, int]) -> bool:
-        line = lines[span[1] - 1]
-        if UNNAMED_PARAM.search(line):
-            return True
-        name = DECL_FUNC_NAME.search(line)
-        return bool(name and name.group(1) in dupes)
-
     return check_sorted_items(
-        path, lines, regions, "prototypes", "prototypes out of address order", anchor
+        path,
+        lines,
+        regions,
+        "prototypes",
+        "prototypes out of address order",
+        lambda span: _anchor(lines, dupes, span),
     )
 
 
 def check_externs(path: str, lines: list[str], dupes=frozenset()) -> list[Finding]:
-    """Extern declarations are in address order within a section.
-
-    An `extern` function prototype is anchored like a plain prototype: moving one that check-names
-    or check-tree would read as a new declaration fails those checks on pre-existing debt.
-    """
+    """Extern declarations are in address order within a section; an `extern` prototype is anchored like a plain one."""
     regions = item_regions(lines, lambda i: bool(EXTERN.match(lines[i])))
-
-    def anchor(span: tuple[int, int]) -> bool:
-        line = lines[span[1] - 1]
-        if "(" not in line:
-            return False
-        if UNNAMED_PARAM.search(line):
-            return True
-        name = DECL_FUNC_NAME.search(line)
-        return bool(name and name.group(1) in dupes)
-
     return check_sorted_items(
-        path, lines, regions, "externs", "externs out of address order", anchor
+        path,
+        lines,
+        regions,
+        "externs",
+        "externs out of address order",
+        lambda span: "(" in lines[span[1] - 1] and _anchor(lines, dupes, span),
     )
 
 
