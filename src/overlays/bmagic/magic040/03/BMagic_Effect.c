@@ -147,7 +147,7 @@ MATCH void func_801EF388(void) {
 MATCH void func_801EF430(void* task) {
     PartyMember* work;
     u32          slot;
-    u8           kind;
+    u8           type;
 
     EFFECT_OFFSET_BY_TARGET_POSE(D_801EFD24, D_801EFCCC, D_801EFC74);
 }

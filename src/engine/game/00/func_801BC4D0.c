@@ -2,13 +2,13 @@
 
 MATCH s32 func_801BC4D0(void) {
     u8  saved;
-    s32 kind;
+    s32 type;
     u8  rate;
     s32 result;
 
     FAKE_STACK_PADS(u8, 0x20); /* FAKE: retail frame reserves 32 unused bytes. */
     saved = g_Task->direction;
-    kind  = func_801B9598();
+    type  = func_801B9598();
     if ((g_Task->direction == FACING_UP_RIGHT) || (g_Task->direction == FACING_DOWN_LEFT)) {
         g_Task->timer = 32;
     } else {
@@ -23,7 +23,7 @@ MATCH s32 func_801BC4D0(void) {
         SP_REF(s32, 0x8) = g_Task->pos.x.fixed + g_FacingOffsets[g_Task->direction].x * rate * g_Task->timer * 2;
         SP_REF(s32, 0xC) = g_Task->pos.y.fixed + g_FacingOffsets[g_Task->direction].y * rate * g_Task->timer * 2;
     }
-    switch (kind & BYTE_MASK) {
+    switch (type & BYTE_MASK) {
         case 0:
         case 2:
         case 4:

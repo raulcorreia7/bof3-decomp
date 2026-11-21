@@ -41,7 +41,7 @@ MATCH void func_801F2C6C(void) {
                     row++;
                 }
                 for (index = 0; index < 2; index++) {
-                    if (row->kind == D_801F525C[index].kind) {
+                    if (row->type == D_801F525C[index].type) {
                         break;
                     }
                 }

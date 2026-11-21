@@ -29,7 +29,7 @@ MATCH void func_801FBA70(void) {
         case 1:
             if (g_ScriptVars[0] == 0x1) {
                 Game_RequestAreaChange(AREA_ID_CAMP_BEFORE_ANGEL_TOWER, TO_COORD_HALF(61), TO_COORD_HALF(13), AREA_ENTRY_MAP_LOADING | FACING_RIGHT);
-                g_GameRequestKind       = 0xFF;
+                g_GameRequestType       = 0xFF;
                 g_GamePrevSelection     = GAME_NONE;
                 g_ScenarioState.step_05 = 2;
             }

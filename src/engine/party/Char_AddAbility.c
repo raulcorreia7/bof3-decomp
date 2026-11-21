@@ -6,14 +6,14 @@ MATCH s32 Char_AddAbility(s32 ability_id, s32 character_index, s32 to_stock, s32
     u8* table;
     s32 limit;
     s32 index;
-    s32 kind;
+    s32 type;
 
-    kind = ability_id & BYTE_MASK;
-    if (kind == 0)
+    type = ability_id & BYTE_MASK;
+    if (type == 0)
         return 0;
     if ((to_stock & BYTE_MASK) == 0) {
         limit = 10;
-        table = Char_GetAbilities(character_index, kind, mode);
+        table = Char_GetAbilities(character_index, type, mode);
     } else {
         limit = 128;
         table = D_8014546C;

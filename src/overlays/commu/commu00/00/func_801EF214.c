@@ -10,16 +10,16 @@ MATCH void func_801EF214(void) {
     s32 weight_off;
     s16 wait;
     u8* level;
-    s32 kind;
+    s32 type;
 
     total = 0;
     count = 0;
     if (D_801455C4 < 7) {
         room     = 0;
-        kind     = 4;
+        type     = 4;
         room_off = 0;
         for (; room < 8; room++, room_off += 8) {
-            if (g_FairyRooms[room_off] == kind && D_801457A9[room_off] != 0) {
+            if (g_FairyRooms[room_off] == type && D_801457A9[room_off] != 0) {
                 room_next  = room + 1;
                 weight_off = 0;
                 for (rec_off = 0; rec_off < 480; rec_off += 8) {

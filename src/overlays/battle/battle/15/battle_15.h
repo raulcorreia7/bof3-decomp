@@ -33,11 +33,11 @@
 #define BATTLE_LOCK_RAM_BASE           D_80150000
 
 /* Entry table at D_8014688E with its parallel id byte table at D_8014691A:
- * thirty records of stride 0x98, kind 7 marks a live entry
+ * thirty records of stride 0x98, type 7 marks a live entry
  * (Battle_FindActorEntry, func_800AC7D0). */
 #define BATTLE_ENTRY_STRIDE            0x98
 #define BATTLE_ENTRY_COUNT             30
-/* The kind byte of a live entry; the other kinds are unproven. */
+/* The type byte of a live entry; the other types are unproven. */
 #define BATTLE_ENTRY_TYPE              7
 
 /* The hit-chance formula's quantities, in percentage points: the threshold is
@@ -166,15 +166,15 @@ typedef struct BattleTaskModes {
 } BattleTaskModes;
 
 /* One battle event packet (0x10 bytes) of the event table at 0x800E407C: the
- * table holds four packets per enemy kind record, at the kind record's +0x34.
+ * table holds four packets per enemy type record, at the type record's +0x34.
  *
  * Evidence: the retail reads the packet's +0x00 with `lbu` and switches on it
  * (Battle_TriggerEnemyEvents), its +0x01 with `lbu` and switches on it (Battle_ApplyEnemyEvent),
  * its +0x02 and +0x03 with `lbu`, its +0x04 with `lbu`, its +0x06 with `lh`
  * and its +0x08..+0x0F with `lbu` (Battle_ApplyEnemyEvent). */
 typedef struct BattleEventPacket {
-    u8  kind;        /* +0x00 the kind Battle_TriggerEnemyEvents switches on to pick the trigger test */
-    u8  effect_kind; /* +0x01 the kind Battle_ApplyEnemyEvent switches on to pick the record update */
+    u8  type;        /* +0x00 the type Battle_TriggerEnemyEvents switches on to pick the trigger test */
+    u8  effect_type; /* +0x01 the type Battle_ApplyEnemyEvent switches on to pick the record update */
     u8  selector;    /* +0x02 the bits that select the cells the packet updates */
     u8  value;       /* +0x03 the value the selected cells take */
     u8  choice_ai;   /* +0x04 the byte copied to the work row's +0x7E */
@@ -183,8 +183,8 @@ typedef struct BattleEventPacket {
     u8  unk_08[8]; /* +0x08 the eight bytes copied to the work row's +0x8C */
 } BattleEventPacket;
 
-ASSERT_OFFSET(BattleEventPacket, kind, 0x00);
-ASSERT_OFFSET(BattleEventPacket, effect_kind, 0x01);
+ASSERT_OFFSET(BattleEventPacket, type, 0x00);
+ASSERT_OFFSET(BattleEventPacket, effect_type, 0x01);
 ASSERT_OFFSET(BattleEventPacket, selector, 0x02);
 ASSERT_OFFSET(BattleEventPacket, value, 0x03);
 ASSERT_OFFSET(BattleEventPacket, choice_ai, 0x04);
@@ -192,8 +192,8 @@ ASSERT_OFFSET(BattleEventPacket, panel_id, 0x06);
 ASSERT_OFFSET(BattleEventPacket, unk_08, 0x08);
 ASSERT_SIZE(BattleEventPacket, 0x10);
 
-/* What makes an event packet trigger (BattleEventPacket.kind). The once-only kinds trigger at most once per
- * battle; the REPEAT kinds trigger at every hit. */
+/* What makes an event packet trigger (BattleEventPacket.type). The once-only types trigger at most once per
+ * battle; the REPEAT types trigger at every hit. */
 typedef enum BattleEventTrigger {
     BATTLE_EVENT_HIT_FIRE             = 0,
     BATTLE_EVENT_HIT_FROST            = 1,
@@ -844,8 +844,8 @@ u8          func_800A36BC(s32 battler_index, s32 compare_value);
 /* func_800A36F0 */
 u16         Battle_CureStatus(u8 battler_index, u16 status_mask);
 extern void Battle_AddStatClamped(s16 delta, u8 battler_index);
-u8          Battle_PickAbility(u8 battler_index, u8 selection_kind);
-u8          func_800A3C9C(u8 battler_index, u8 selection_kind);
+u8          Battle_PickAbility(u8 battler_index, u8 selection_type);
+u8          func_800A3C9C(u8 battler_index, u8 selection_type);
 void        Battle_MarkDamageApplied(void);
 u8          func_800A403C(u8 battler_index);
 /* func_800A41D8 */
@@ -912,7 +912,7 @@ void        func_800A8D3C(void);
 extern u32  func_800AA874(u32 bit_index);
 bool        func_800AA8A4(s32 battler_index);
 bool        func_800AB470(u8 battler_index);
-bool        func_800AB4BC(s32 kind_index);
+bool        func_800AB4BC(s32 type_index);
 void        func_800AB570(s32 battler_index);
 u8          func_800AB68C(u8 excluded_slot);
 /* func_800ABBE0 */
@@ -1005,7 +1005,7 @@ s16         func_801DE0F8(s32 base, s32 percent);
 /* Multiplies its inputs and divides by 100. */
 s16         func_801DE144(s32 amount, s32 percent);
 /* func_801DE8C0 */
-void        Battle_AddMessage(u32 index, u32 record_kind, u8* text);
+void        Battle_AddMessage(u32 index, u32 record_type, u8* text);
 /* PsyQ SDK primitive setup helpers called by this target.
  * SetSprt8 / SetSemiTrans are declared by <libgpu.h> (via common.h);
  * GFX_AddPrim is a game primitive-append helper declared by gfx/prim.h. */
@@ -1034,7 +1034,7 @@ void        Battle_InitEquipUsePanel(void);
 extern void Battle_ApplyEnemyEvent(EnemyBattler* work_arg, BattleEventPacket* event);
 extern u8   Battle_EnemyEventTriggered(volatile EnemyBattler* enemy, s32 bit_index);
 extern void Battle_SetEnemyEventTriggered(EnemyBattler* enemy, s32 bit, u8 set);
-extern u8   func_800A3B6C(u8 battler_index, u8 selection_kind, u16 input_mask);
+extern u8   func_800A3B6C(u8 battler_index, u8 selection_type, u16 input_mask);
 bool        func_800A4FD8(void);
 bool        func_800A5D00(void);
 u8          func_800A6C2C(void);
@@ -1064,14 +1064,14 @@ static inline void BattleApplyHalfDamage(s32 anim) {
 /* Fill the 3x3 slot grid from the queued-slot allocator, then raise the panel.
  * The trailing values differ per member, so each member writes them; the loop
  * is the shared helper. */
-static inline void BattleFillEffectGrid(s32 kind) {
+static inline void BattleFillEffectGrid(s32 type) {
     s32 offset;
     s32 slot;
     s32 row;
 
     for (row = 0; (u32)(row & BYTE_MASK) < 3U; row++) {
         for (slot = 0; (u32)(slot & BYTE_MASK) < 3U; slot++) {
-            offset                             = Battle_AllocEffect(0, kind) & BYTE_MASK;
+            offset                             = Battle_AllocEffect(0, type) & BYTE_MASK;
             g_BattleEffects[offset].unk_0A     = slot;
             g_BattleEffects[offset].arg.unk_09 = row;
         }
@@ -1128,7 +1128,7 @@ static inline void BattleResetSelectionState(void) {
  * u16 load widened to the signed /5 dividend emits a redundant `andi 0xFFFF`
  * zero-extend the original bytes do not have.
  */
-static inline u8 BattleRollHitChance(u8 selection_kind, s16 (*hit_rate)(s32, s32)) {
+static inline u8 BattleRollHitChance(u8 selection_type, s16 (*hit_rate)(s32, s32)) {
     s32 rate;
     s32 threshold;
     s32 rollSeed;
@@ -1143,7 +1143,7 @@ static inline u8 BattleRollHitChance(u8 selection_kind, s16 (*hit_rate)(s32, s32
     rate = *(u16*)&D_801EC2F2;
     rate = BATTLE_HIT_RATE_BASE - (rate / 5);
     CLAMP_MIN(rate, BATTLE_HIT_RATE_MIN);
-    temp = hit_rate((s32)(selection_kind & BYTE_MASK), (s32)(D_801CA71C[g_Battle.action_id].mask & ELEM_ALL));
+    temp = hit_rate((s32)(selection_type & BYTE_MASK), (s32)(D_801CA71C[g_Battle.action_id].mask & ELEM_ALL));
     if (temp == -1) {
         ret = 0;
     } else {

@@ -59,7 +59,7 @@ g_GameEntryAreaId = { addr = 0x80143F10, source = "The area id Game_RequestAreaC
 g_GameEntryPosX = { addr = 0x80143F14, source = "Entry x position of the game." }
 g_GameEntryPosY = { addr = 0x80143F18, source = "Entry y position of the game." }
 g_GameEntryFacing = { addr = 0x80143F1C, source = "The entry facing Game_RequestAreaChange stores beside the entry position." }
-g_GameRequestKind = { addr = 0x80143F1D, source = "Kind of the game request." }
+g_GameRequestType = { addr = 0x80143F1D, source = "Type of the game request." }
 g_GameEntryMode = { addr = 0x80143F1E, source = "Entry mode of the field: Game_UpdateAreaLoad sets it to 10, 20 or 0 and Game_UpdateField tests it against GAME_NONE." }
 g_GamePrevSelection = { addr = 0x80143F1F, source = "The previous game selection." }
 g_EncounterSteps = { addr = 0x80143F22, source = "Steps walked since the last encounter: Area_WalkStep and func_801B146C add 1 per step (2 when direction is 2 or 6), func_80197F48 and func_801984E8 reset it, and Area_CanStartEncounter starts a fight once it reaches the threshold Area_RollEncounterThreshold stores in D_80145FB8." }
@@ -94,7 +94,7 @@ g_PartyMenuFlags = { addr = 0x80144F59, size = 0x1, source = "Menu flags of the 
 g_PartyFieldOrder = { addr = 0x80144F5A, size = 0x3, source = "Party order in the field." }
 g_PartyBattleOrder = { addr = 0x80144F5D, size = 0x3, source = "Party order in battle." }
 g_LearnedAbilities = { addr = 0x80144F80, size = 0x20, source = "One bit per ability id, set once the party has learned it: the sisyou master lesson tests and sets it before Char_AddAbility, and battle/15 sets it when a party member learns an enemy skill." }
-g_IdentifiedEnemies = { addr = 0x80144FA0, size = 0x20, source = "One bit per enemy kind byte (256 bits): Identify sets the bit of the targeted enemy and the identified test reads it." }
+g_IdentifiedEnemies = { addr = 0x80144FA0, size = 0x20, source = "One bit per enemy type byte (256 bits): Identify sets the bit of the targeted enemy and the identified test reads it." }
 g_PlayClock = { addr = 0x80144FC0, size = 0x4, source = "Play time." }
 g_FishingBestCatch = { addr = 0x80144FE4, size = 0x20, source = "Best catch of each fish." }
 g_EmiLoadedCharacterIndex = { addr = 0x80145024, source = "Index of the last loaded EMI character." }
@@ -560,7 +560,7 @@ Game_HasVitalItem = { addr = 0x8015B798, type = "func", source = "Tests whether 
 Game_IsScenarioAtMost = { addr = 0x8015B7C4, type = "func", source = "Tests whether the scenario is at least a value." }
 Game_HasPartyFlag = { addr = 0x8015B7F0, type = "func", source = "Script condition (table g_AreaScriptTests): bit 0 of party_flags of the character the record byte names." }
 func_8015B83C = { addr = 0x8015B83C, type = "func", source = "Entry of the script condition table data_8018214C: tests bit **cursor of the D_80145548 mask, whose owner is not proven." }
-Script_ReadValue = { addr = 0x8015B870, type = "func", source = "Reads the state value a script condition names by kind id; func_801A8F94 compares two of them or one against a byte." }
+Script_ReadValue = { addr = 0x8015B870, type = "func", source = "Reads the state value a script condition names by type id; func_801A8F94 compares two of them or one against a byte." }
 Game_IsScriptVar0Equal = { addr = 0x8015B98C, type = "func", source = "Tests whether a script variable equals a value." }
 Game_IsScriptVar1Equal = { addr = 0x8015B9B4, type = "func", source = "Tests whether a script variable equals a value." }
 Game_IsScriptVar2Equal = { addr = 0x8015B9DC, type = "func", source = "Tests whether a script variable equals a value." }
@@ -581,7 +581,7 @@ Game_ClearScriptActive = { addr = 0x8015C058, type = "func", source = "Marks the
 Game_SetScriptActive = { addr = 0x8015C088, type = "func", source = "Marks the script as active." }
 Party_ShowBattlers = { addr = 0x8015C0B8, type = "func", source = "Shows the party battlers." }
 Party_HideBattlers = { addr = 0x8015C100, type = "func", source = "Hides the party battlers." }
-Actor_GetOwner = { addr = 0x8015C148, type = "func", source = "Returns the kind of the current task." }
+Actor_GetOwner = { addr = 0x8015C148, type = "func", source = "Returns the type of the current task." }
 Actor_Run = { addr = 0x8015C264, type = "func", source = "Runs the handler of the actor." }
 Actor_InitMovement = { addr = 0x8015C2D4, type = "func", source = "Seeds the hold counter and velocity dividers from the handler entry - or publishes the direction into the scroll globals." }
 Actor_StepMovement = { addr = 0x8015C540, type = "func", source = "Moves the actor and requests the next script at the end of the route." }
@@ -723,8 +723,8 @@ Item_GetDescription = { addr = 0x801666C8, type = "func", source = "Returns the 
 Party_AddMember = { addr = 0x801667A4, type = "func", source = "Appends a character to the field and battle order arrays - replacing a free field slot after three." }
 Item_CanEquip = { addr = 0x80166904, type = "func", source = "Returns whether the character with equip bit bit can equip the item in the slot role: the item icon selects the equip slot, its equipability byte must have the bit." }
 Char_GetAbilityCost = { addr = 0x80166A10, type = "func", source = "Returns the AP cost of an ability." }
-Party_GetAbilities = { addr = 0x80166AE4, type = "func", source = "Resolves the party record a slot kind points at and returns its ability panel." }
-Char_GetAbilities = { addr = 0x80166B94, type = "func", source = "Resolves the character record and returns the panel its ability-kind record selects." }
+Party_GetAbilities = { addr = 0x80166AE4, type = "func", source = "Resolves the party record a slot type points at and returns its ability panel." }
+Char_GetAbilities = { addr = 0x80166B94, type = "func", source = "Resolves the character record and returns the panel its ability-type record selects." }
 GFX_LoadPalette = { addr = 0x80166C48, type = "func", source = "Stages a palette." }
 Area_GetCellCode = { addr = 0x80166CB0, type = "func", source = "Returns the code of an area cell." }
 Party_ClearBattlerState = { addr = 0x80166CEC, type = "func", source = "Clears the state of a party battler." }

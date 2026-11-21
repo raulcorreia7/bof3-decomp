@@ -11,7 +11,7 @@ NON_MATCHING s32 Scene_SetupParty(u32 scene) {
     u8*  ids;
     u8   command;
     s32  cmds;
-    u32  kind;
+    u32  type;
     s32  count;
     s32  size;
     s32  i;
@@ -21,9 +21,9 @@ NON_MATCHING s32 Scene_SetupParty(u32 scene) {
     ids     = lists[(u8)scene];
     cmds    = *ids++;
     command = cmds;
-    kind    = command & 0xC0;
+    type    = command & 0xC0;
     count   = cmds & 0xF;
-    if (kind == 0) {
+    if (type == 0) {
         size = g_Game.party_size;
         if (size != count)
             return 1;
@@ -68,7 +68,7 @@ NON_MATCHING s32 Scene_SetupParty(u32 scene) {
             }
         }
         ids += count;
-    } else if (kind == 0x80) {
+    } else if (type == 0x80) {
         if (g_Game.party_size < (u32)count)
             return 1;
     }

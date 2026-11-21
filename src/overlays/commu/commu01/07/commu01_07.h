@@ -30,7 +30,7 @@ ASSERT_OFFSET(CommuSelectionPair, count, 0x0);
 ASSERT_OFFSET(CommuSelectionPair, value, 0x1);
 ASSERT_SIZE(CommuSelectionPair, 0x2);
 
-/* A commu kind's entry rows: the name run its first row reads and how many rows it has. */
+/* A commu type's entry rows: the name run its first row reads and how many rows it has. */
 typedef struct CommuTypeRows {
     u8 first;
     u8 count;
@@ -43,7 +43,7 @@ ASSERT_SIZE(CommuTypeRows, 0x2);
 extern u16            D_80010000[];
 extern s8             D_801455C2;
 extern u8             D_801455C9[];
-/* The commu request slot run's byte columns: the kind grid line, the cursor box
+/* The commu request slot run's byte columns: the type grid line, the cursor box
  * row and the byte the commit clears, each at the run's eight-byte row stride. */
 extern u8             D_801457A9[][8];
 extern u8             D_801457AA[][8];
@@ -65,7 +65,7 @@ extern Callback       g_Commu01Step2Sub1Steps[COMMU01_STEP2_SUB1_COUNT];
 extern u8             D_801D4C04[12];
 extern u16            D_801D4C10[4];
 extern u8             D_801D4C18[12][2];
-/* The channel each commu record kind blinks. */
+/* The channel each commu record type blinks. */
 extern u8             D_801D4C20[];
 extern CommuCellFrame D_801D4C44[COMMU_CELL_FRAME_COUNT];
 extern u8             D_801D4CD4[];
@@ -120,8 +120,8 @@ void func_801D3B0C(u8* row);
 void func_801D3EFC(s16 x, s16 y, u8 ordinal);
 void func_801D4030(s16 x, s16 y, u8 piece);
 void func_801D4178(s16 x, s16 y, u8 mode);
-s16  func_801D44E0(s16 x, s16 y, u8 kind, u8 mode);
-void func_801D4694(s16* out_x, s16* out_y, s32 kind, s32 ordinal);
+s16  func_801D44E0(s16 x, s16 y, u8 type, u8 mode);
+void func_801D4694(s16* out_x, s16* out_y, s32 type, s32 ordinal);
 void func_801D47C4(void);
 s32  func_801D482C(s32 ordinal_offset);
 void func_801D49C4(void);

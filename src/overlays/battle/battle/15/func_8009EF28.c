@@ -14,16 +14,16 @@ MATCH void func_8009EF28(void) {
     BattleTurn* record;
     u16         updated;
     u8          battler_index;
-    u8          selection_kind;
+    u8          selection_type;
 
     if (RANDOM_MASK(0x7F) < 0x20) {
         battler_index                     = g_BattleActiveBattler;
         half                              = (volatile u16*)&g_Battle.flags;
         flag_value                        = *half;
-        selection_kind                    = g_Battle.target;
+        selection_type                    = g_Battle.target;
         updated                           = flag_value | BATTLE_STATE_CRITICAL;
         *(u16*)half                       = updated;
-        g_Battle.target_record->hp_change = Battle_CalcDamage(battler_index, selection_kind, BATTLE_ELEMENT_FROM_WEAPON);
+        g_Battle.target_record->hp_change = Battle_CalcDamage(battler_index, selection_type, BATTLE_ELEMENT_FROM_WEAPON);
         return;
     }
     record               = g_Battle.target_record;

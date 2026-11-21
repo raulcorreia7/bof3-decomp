@@ -14,7 +14,7 @@
         }                                                               \
     }
 
-/* walks the four battle event packets of the current enemy kind and
+/* walks the four battle event packets of the current enemy type and
  * triggers the ones whose condition holds, then hands the frame to the
  * event dispatcher.
  */
@@ -25,7 +25,7 @@ MATCH void Battle_TriggerEnemyEvents(void) {
 
     for (i = 0; i < ENEMY_AI_COUNT; i++) {
         packet = &BATTLE_ENEMY_EVENTS[g_BattleCurrentEnemy->type].packets[i];
-        switch (packet->kind) {
+        switch (packet->type) {
             case BATTLE_EVENT_HIT_FIRE:
                 BATTLE_TRIGGER_ENEMY_EVENT_ONCE(Battle_ActionHasElement(ELEM_FIRE));
                 break;

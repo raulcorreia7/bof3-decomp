@@ -27,11 +27,11 @@ typedef enum ItemFlags {
     ITEM_USABLE_MENU          = 1 << 7,
 } ItemFlags;
 
-/* The kind byte at +0x0D of an item row and +0x0E of the three equipment rows (Item_GetIcon): the
+/* The type byte at +0x0D of an item row and +0x0E of the three equipment rows (Item_GetIcon): the
  * weapon, armor and accessory tables hold what the row is, and the low nibble is the icon index
  * the item list draws. Armor rows hold their slot's type (2 shield, 3 helmet, 4 body); accessory
- * rows hold 5 accessory, 10 lure or 11 rod. Kind 0 is a plain item and the empty first row of
- * every table. Kinds 6 to 9 hold no record. */
+ * rows hold 5 accessory, 10 lure or 11 rod. Type 0 is a plain item and the empty first row of
+ * every table. Types 6 to 9 hold no record. */
 typedef enum ItemType {
     ITEM_TYPE_ITEM         = 0,
     ITEM_TYPE_WEAPON       = 1,
@@ -45,10 +45,10 @@ typedef enum ItemType {
     ITEM_TYPE_UNUSED       = 12,
 } ItemType;
 
-/* The equipment slot that holds an item of kind ITEM_TYPE_WEAPON..ITEM_TYPE_ACCESSORY. */
-#define EQUIP_SLOT_OF_TYPE(kind) ((kind) - 1)
+/* The equipment slot that holds an item of type ITEM_TYPE_WEAPON..ITEM_TYPE_ACCESSORY. */
+#define EQUIP_SLOT_OF_TYPE(type) ((type) - 1)
 
-/* The two accessory kinds that are fishing gear: ITEM_TYPE_FISHING_LURE and ITEM_TYPE_FISHING_ROD. */
+/* The two accessory types that are fishing gear: ITEM_TYPE_FISHING_LURE and ITEM_TYPE_FISHING_ROD. */
 #define ITEM_FISHING_GEAR_COUNT  2U
 
 /* The item type that fits equipment slot EQUIP_SLOT_WEAPON..EQUIP_SLOT_ACCESSORY_1. */
@@ -144,7 +144,7 @@ ASSERT_SIZE(Weapon, WEAPON_STRIDE);
 
 typedef struct Armor {
     ItemHeader header;
-    u8         type; /* ItemType: shield, helmet or body; the empty row is kind 0 */
+    u8         type; /* ItemType: shield, helmet or body; the empty row is type 0 */
     u8         weight;
     u8         power;
     u8         unk_11;      /* no reader */

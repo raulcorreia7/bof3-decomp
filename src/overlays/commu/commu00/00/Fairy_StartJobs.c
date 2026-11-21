@@ -3,17 +3,17 @@
 MATCH void Fairy_StartJobs(void) {
     s32 record;
     s32 task;
-    u8  kind;
+    u8  type;
     u8  variant;
     u16 label;
     u16 scene;
-    u8* kinds;
+    u8* types;
 
     record = 7;
-    kinds  = (u8*)D_801F24FC_Data.variant_counter + 7;
+    types  = (u8*)D_801F24FC_Data.variant_counter + 7;
     while (record >= 0) {
-        *kinds = 0;
-        kinds--;
+        *types = 0;
+        types--;
         record--;
     }
 
@@ -24,15 +24,15 @@ MATCH void Fairy_StartJobs(void) {
             continue;
         }
 
-        kind = g_FairyJobs[record].type;
-        if (kind == FAIRY_JOB_IDLE) {
+        type = g_FairyJobs[record].type;
+        if (type == FAIRY_JOB_IDLE) {
             func_801F0BF4(task);
             func_801F0718(record, task);
             task++;
-        } else if (kind < FAIRY_JOB_HUNT) {
+        } else if (type < FAIRY_JOB_HUNT) {
             Fairy_SpawnWorker(record, task);
             task++;
-        } else if (kind == FAIRY_JOB_CLEAR) {
+        } else if (type == FAIRY_JOB_CLEAR) {
             if (g_GameAreaId >= AREA_ID_FAIRY_VILLAGE_182) {
                 label = 0xCD;
             } else {
@@ -46,7 +46,7 @@ MATCH void Fairy_StartJobs(void) {
             g_Actors[task].unk_7C = label;
             func_801F0718(record, task);
             task++;
-        } else if (kind == FAIRY_JOB_BUILD) {
+        } else if (type == FAIRY_JOB_BUILD) {
             scene = g_GameAreaId;
             if (scene == AREA_ID_FAIRY_VILLAGE_DOLPHIN || scene == AREA_ID_FAIRY_VILLAGE_178 || scene == AREA_ID_FAIRY_VILLAGE_181 || scene == AREA_ID_FAIRY_VILLAGE_185) {
                 label = 0xCE;

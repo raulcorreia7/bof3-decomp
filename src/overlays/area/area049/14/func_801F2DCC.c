@@ -7,7 +7,7 @@ NON_MATCHING void func_801F2DCC(void) {
     u32          index;
     s32          i;
     u8           bounds;
-    u8           kind;
+    u8           type;
     u16          one;
 
     if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE && g_GameAreaId != g_GameEntryAreaId) {
@@ -54,12 +54,12 @@ NON_MATCHING void func_801F2DCC(void) {
                     func_801C2710();
                 }
             } else {
-                kind = D_801F5C08[bounds * 6 + 4];
+                type = D_801F5C08[bounds * 6 + 4];
                 if (SYS_TestFlag(&g_Scenario2Flags[0x90], D_801F5C0D[bounds * 6]) != 0) {
-                    kind ^= 4;
+                    type ^= 4;
                 }
-                if (((PartyMember*)g_Task)->facing != kind) {
-                    ((PartyMember*)g_Task)->facing = kind;
+                if (((PartyMember*)g_Task)->facing != type) {
+                    ((PartyMember*)g_Task)->facing = type;
                     ((PartyMember*)g_Task)->unk_0C = -((PartyMember*)g_Task)->unk_0C;
                     ((PartyMember*)g_Task)->unk_10 = -((PartyMember*)g_Task)->unk_10;
                     ((PartyMember*)g_Task)->unk_14 = -((PartyMember*)g_Task)->unk_14;

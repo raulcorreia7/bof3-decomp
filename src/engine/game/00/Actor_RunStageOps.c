@@ -13,11 +13,11 @@ typedef enum ActorScriptStage {
     ACTOR_SCRIPT_STAGE_CLEAR_SCRIPT_ACTIVE = 0x81, /* clear GAME_FLAG_SCRIPT_ACTIVE */
     ACTOR_SCRIPT_STAGE_FADE_WHITE          = 0x82, /* set ACTOR_INTERACTION_FADE_WHITE on the cursor */
     ACTOR_SCRIPT_STAGE_FADE_BLACK          = 0x83, /* set ACTOR_INTERACTION_FADE_BLACK on the cursor */
-    ACTOR_SCRIPT_STAGE_SET_TARGET_POS      = 0x84, /* args: [sel] [kind]; set SCRATCH_WORK to a position */
+    ACTOR_SCRIPT_STAGE_SET_TARGET_POS      = 0x84, /* args: [sel] [type]; set SCRATCH_WORK to a position */
     ACTOR_SCRIPT_STAGE_CAMERA_SCROLL       = 0x85, /* advance the camera scroll to the held cell, ramp height */
     ACTOR_SCRIPT_STAGE_SET_RECORD_INDEX    = 0x86, /* args: [index]; pick the actor/game record, halt cursor */
-    ACTOR_SCRIPT_STAGE_TINT_DARK           = 0x87, /* tint-darken handler for the actor kind (D_801C8904) */
-    ACTOR_SCRIPT_STAGE_TINT_LIGHT          = 0x88, /* tint-lighten handler for the actor kind (D_801C88FC) */
+    ACTOR_SCRIPT_STAGE_TINT_DARK           = 0x87, /* tint-darken handler for the actor type (D_801C8904) */
+    ACTOR_SCRIPT_STAGE_TINT_LIGHT          = 0x88, /* tint-lighten handler for the actor type (D_801C88FC) */
     ACTOR_SCRIPT_STAGE_START_XA            = 0x89, /* args: [xa_id_u16]; SND_StartXAStream */
     ACTOR_SCRIPT_STAGE_SOUND_STUB          = 0x8A, /* args: [id_u16]; the empty sound stub func_80164020 */
     ACTOR_SCRIPT_STAGE_WAIT_XA_IDLE        = 0x8B, /* wait while the XA stream is not idle */

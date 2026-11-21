@@ -26,18 +26,18 @@ typedef struct Magic073Steps {
 
 extern Magic073Steps D_801EEC1C;
 
-/* The sparkle record being updated, its launch offset row and the shortest rise per kind. */
+/* The sparkle record being updated, its launch offset row and the shortest rise per type. */
 #define EFFECT_SPARKLE_TASK    D_801F21F0
 #define EFFECT_SPARKLE_OFFSETS D_801F05A4
 #define EFFECT_SPARKLE_RISE    D_801F0664
 extern Pos2 D_801F05A4[];
 extern u8   D_801F0664[];
-/* The sparkle count of each kind, and the launch delay step between its groups of four. */
+/* The sparkle count of each type, and the launch delay step between its groups of four. */
 #define EFFECT_SPARKLE_COUNTS D_801F065C
 #define EFFECT_SPARKLE_DELAYS D_801F0660
 extern u8 D_801F065C[];
 extern u8 D_801F0660[];
-/* The colour rows of each kind. */
+/* The colour rows of each type. */
 #define EFFECT_SPARKLE_COLORS D_801F0644
 extern u8 D_801F0644[][4][3];
 

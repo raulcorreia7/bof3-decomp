@@ -1,6 +1,6 @@
 #include "battle_15.h"
 
-/* reports whether the current character may select the kind stored in
+/* reports whether the current character may select the type stored in
  * the active selection-scratch entry.
  */
 /* func_80097574 */

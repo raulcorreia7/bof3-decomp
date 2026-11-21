@@ -12,21 +12,21 @@ extern BMagicEffect D_801F01B0[];
 #define BMAGIC_EFFECT_SLOTS D_801F01B0
 #define BMAGIC_EFFECT_COUNT 128
 
-/* The sparkle kind this image spawns: it picks the count and the launch delay. */
-#define EFFECT_SPARKLE_KIND 4
+/* The sparkle type this image spawns: it picks the count and the launch delay. */
+#define EFFECT_SPARKLE_TYPE 4
 
-/* The number of sparkles each kind spawns. */
+/* The number of sparkles each type spawns. */
 extern u8 D_801F0194[];
-/* The launch delay between each group of four sparkles, per kind. */
+/* The launch delay between each group of four sparkles, per type. */
 extern u8 D_801F019C[];
-/* The colour rows of each kind. */
+/* The colour rows of each type. */
 #define EFFECT_SPARKLE_COLORS D_801F0158
 extern BMagicEffectSteps D_801EEC04;
 
 extern BMagicTaskSteps D_801EEC1C;
 extern u8              D_801F0158[][4][3];
 
-/* The sparkle record being updated, its launch offset row and the shortest rise per kind. */
+/* The sparkle record being updated, its launch offset row and the shortest rise per type. */
 #define EFFECT_SPARKLE_TASK    D_801F17B0
 #define EFFECT_SPARKLE_OFFSETS D_801F00B8
 #define EFFECT_SPARKLE_RISE    D_801F01A4

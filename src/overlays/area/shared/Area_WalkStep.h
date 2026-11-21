@@ -10,7 +10,7 @@
         if ((Area_GetCellCode((s32)COORD_INT(g_Task->pos.x), (s32)COORD_INT(g_Task->pos.y)) & 0xFF) == 0xAF) {              \
             Game_RequestAreaChange(g_GameEntryAreaId, g_GameEntryPosX, g_GameEntryPosY, g_GameEntryFacing);                 \
             g_GameEntryMode   = 0;                                                                                          \
-            g_GameRequestKind = 0xC;                                                                                        \
+            g_GameRequestType = 0xC;                                                                                        \
             return;                                                                                                         \
         }                                                                                                                   \
         if ((Area_GetCellCode((s32)COORD_INT(g_Task->pos.x), (s32)COORD_INT(g_Task->pos.y)) & 0xFF) == 0xC0) {              \

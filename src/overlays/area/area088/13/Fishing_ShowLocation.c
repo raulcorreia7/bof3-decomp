@@ -42,7 +42,7 @@ MATCH void Fishing_ShowLocation(void) {
                     row++;
                 }
                 for (offset = 0, index = 0; index < 3; index++, offset += 12) {
-                    if (row->kind == D_801F6170[offset]) {
+                    if (row->type == D_801F6170[offset]) {
                         break;
                     }
                 }

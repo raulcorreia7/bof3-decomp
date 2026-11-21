@@ -3,7 +3,7 @@
 /* Scratchpad spill slot for the incoming work pointer while the call runs. */
 #define SAVE_SLOT SP_REF(Actor*, 0x10u)
 
-MATCH VECTOR* func_801ABF30(VECTOR* out, s32 sel, s32 selector_kind) {
+MATCH VECTOR* func_801ABF30(VECTOR* out, s32 sel, s32 selector_type) {
     Actor* work;
     Actor* cur;
     VECTOR buf;
@@ -32,7 +32,7 @@ MATCH VECTOR* func_801ABF30(VECTOR* out, s32 sel, s32 selector_kind) {
     g_Task = work;
     /* FAKE: keeps the scratchpad store ahead of the call-argument setup. */
     FAKE_BARRIER();
-    func_801AC1DC((s32*)&buf.vx, selector_kind);
+    func_801AC1DC((s32*)&buf.vx, selector_type);
     cur = g_Task;
     buf.vx += cur->pos.x.fixed;
     buf.vy += cur->pos.y.fixed;

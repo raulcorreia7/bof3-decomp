@@ -64,7 +64,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
                 row->party_order[col] = 0xB;
             } else {
                 name_index = slot & HALF_MASK;
-                goto store_row; /* the kind-4 arm reaches the same store with its own index */
+                goto store_row; /* the type-4 arm reaches the same store with its own index */
             }
         } else {
         store_row:

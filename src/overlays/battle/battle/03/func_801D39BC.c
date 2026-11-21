@@ -1,6 +1,6 @@
 #include "battle_03.h"
 
-/* once the overlay loader is ready, starts the selection sound from the pending slot's kind byte and the
+/* once the overlay loader is ready, starts the selection sound from the pending slot's type byte and the
  * panel record, arms the panel state bytes and clears the scene stage counter.
  */
 MATCH void func_801D39BC(void) {

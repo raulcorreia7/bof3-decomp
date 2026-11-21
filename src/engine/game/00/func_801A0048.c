@@ -20,7 +20,7 @@ NON_MATCHING bool func_801A0048(s32 cell_x, s32 cell_y) {
     s32              y;
     u16              index;
     u8               n;
-    u8               kind;
+    u8               type;
     u8               reread;
 
     /* FAKE: retail reserves eight bytes in this frame. */
@@ -91,14 +91,14 @@ found:
         g_GameEntryPosX   = hi & mask;
         mid <<= 8;
         g_GameEntryPosY = mid & mask;
-        kind            = base[8];
+        type            = base[8];
     } else {
         g_GameEntryAreaId = entry->key;
         g_GameEntryPosX   = ((u32)entry->index << 8) & mask;
         g_GameEntryPosY   = ((u32)entry->alt << 8) & mask;
-        kind              = entry->kind;
+        type              = entry->type;
     }
-    g_GameEntryFacing = kind;
+    g_GameEntryFacing = type;
     reread            = g_GameEntryFacing;
     SP_REF(s8, 0x01u) = (s8)((reread >> 4) & 7);
     g_GameEntryFacing = reread & 0x8F;

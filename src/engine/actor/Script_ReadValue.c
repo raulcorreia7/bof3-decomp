@@ -16,14 +16,14 @@
 #define SCRIPT_VALUE_ALWAYS_ONE       13
 #define SCRIPT_VALUE_SCENE_RECORD_ALT 14
 
-/* returns the game-state word that `kind` selects: the scenario state for kinds 0 and 14, then route,
- * map-record, flag and counter globals in kind order, the staged scratchpad word at 0x58 for kind 10, overlay words
+/* returns the game-state word that `type` selects: the scenario state for types 0 and 14, then route,
+ * map-record, flag and counter globals in type order, the staged scratchpad word at 0x58 for type 10, overlay words
  * for 11-13 and 0xFF otherwise.
  */
 /* func_8015B870 */
-/* Returns the state value a script condition selects by kind. */
-MATCH s32 Script_ReadValue(u32 kind) {
-    switch (kind & BYTE_MASK) {
+/* Returns the state value a script condition selects by type. */
+MATCH s32 Script_ReadValue(u32 type) {
+    switch (type & BYTE_MASK) {
         case SCRIPT_VALUE_SCENE_RECORD:
         case SCRIPT_VALUE_SCENE_RECORD_ALT:
             return g_SceneRecord.sbyte;

@@ -24,7 +24,7 @@ MATCH bool Party_CanSwitchLeader(void) {
         if (D_80145E91[offset] == 2) {
             key_offset = offset;
             for (; j < 3; j++) {
-                if (D_80145E92[key_offset] == s_MenuBattlerKinds[j]) {
+                if (D_80145E92[key_offset] == s_MenuBattlerTypes[j]) {
                     break;
                 }
             }

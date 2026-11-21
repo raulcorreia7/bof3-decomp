@@ -3,7 +3,7 @@
 MATCH s8 func_801A7AD8(u8* entry, u8 count, u8 x, u8 y) {
     s32 i;
     s32 j;
-    s32 kind;
+    s32 type;
     u16 key;
 
     for (i = 0; i < count; i++, entry += 5) {
@@ -17,7 +17,7 @@ MATCH s8 func_801A7AD8(u8* entry, u8 count, u8 x, u8 y) {
                     continue;
                 }
                 if (y == entry[2] + j) {
-                    /* Own branch to the kind test: jump2 would merge a continue. */
+                    /* Own branch to the type test: jump2 would merge a continue. */
                     goto found;
                 }
                 continue;
@@ -26,10 +26,10 @@ MATCH s8 func_801A7AD8(u8* entry, u8 count, u8 x, u8 y) {
                 continue;
             }
         found:
-            kind = entry[3] & 0xF;
+            type = entry[3] & 0xF;
             /* The literal address reloads the work-row byte on every test;
              * the g_Game.members[0].facing symbol is hoisted out of the loops by loop.c. */
-            if (kind == 8 || kind == MEM(u8, 0x80145E98u)) {
+            if (type == 8 || type == MEM(u8, 0x80145E98u)) {
                 return i;
             }
             break;

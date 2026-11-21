@@ -17,7 +17,7 @@
 
 /* The selection byte that arms the area request. */
 /* The area state byte and the frame flags it is tested against. */
-/* The staged cue rows' fields: the allocation flags, kind, layer, step and
+/* The staged cue rows' fields: the allocation flags, type, layer, step and
  * distance halfword, indexed by the row stride the spawn pass allocates. */
 /* The payload's data after the last function; the per-state handler tables
  * start at 0x130. */

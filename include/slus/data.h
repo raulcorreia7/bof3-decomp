@@ -45,7 +45,7 @@ extern u8          g_PartyMenuFlags;
 extern u8          g_PartyBattleOrder[PARTY_SLOT_COUNT];
 /* One bit per ability id: set once a party member has learned the ability, from a master or by watching an enemy. */
 extern u32         g_LearnedAbilities[BIT_ARRAY_WORDS(BYTE_VALUE_COUNT)];
-/* One bit per enemy kind byte: set once Identify has examined that kind. */
+/* One bit per enemy type byte: set once Identify has examined that type. */
 extern u32         g_IdentifiedEnemies[BIT_ARRAY_WORDS(BYTE_VALUE_COUNT)];
 extern u32         D_80145040;
 extern u32         D_80145044;

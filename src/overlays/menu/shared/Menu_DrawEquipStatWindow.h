@@ -1,6 +1,6 @@
-/* The stat window of the equip screen: the power, defense and agility a party member would have with item_id, an item of item_kind (the shop and equip lists pass the item's type), coloured by Char_PreviewEquip as higher or lower, beside the portrait. When the member cannot equip the item the window is shaded and shows the current stats. */
+/* The stat window of the equip screen: the power, defense and agility a party member would have with item_id, an item of item_type (the shop and equip lists pass the item's type), coloured by Char_PreviewEquip as higher or lower, beside the portrait. When the member cannot equip the item the window is shaded and shows the current stats. */
 /* func_801DEEE8 (start), func_801DB9F0 (shop), func_801D5F48 (bate), func_801D6EF0 (shisu) */
-MATCH void Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 item_kind, u8 item_id) {
+MATCH void Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 item_type, u8 item_id) {
     Character* character;
     u8         flags[EQUIP_PREVIEW_STAT_COUNT];
     u16        values[EQUIP_PREVIEW_STAT_COUNT];
@@ -11,7 +11,7 @@ MATCH void Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 item_ki
 
     character = &g_Characters[character_index];
     clut      = 0;
-    switch (item_kind) {
+    switch (item_type) {
         case ITEM_TYPE_ITEM:
         case ITEM_TYPE_UNUSED:
         default:
@@ -34,7 +34,7 @@ MATCH void Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 item_ki
     shaded = ((Item_GetEquipability(category, item_id) >> character_index) ^ 1) & 1;
     UI_DrawWindow((x + MENU_EQUIP_STAT_INSET) & HALF_MASK, (y + MENU_EQUIP_STAT_INSET) & HALF_MASK, MENU_EQUIP_STAT_WINDOW_WIDTH, MENU_EQUIP_STAT_WINDOW_HEIGHT, shaded, g_WindowStyle);
     if (shaded == 0) {
-        Char_PreviewEquip(character_index, EQUIP_SLOT_OF_TYPE(item_kind), item_id, flags, values);
+        Char_PreviewEquip(character_index, EQUIP_SLOT_OF_TYPE(item_type), item_id, flags, values);
         /* The agility row takes the place of the intelligence entry. */
         values[EQUIP_STAT_ROW_AGILITY] = values[EQUIP_PREVIEW_AGILITY];
         flags[EQUIP_STAT_ROW_AGILITY]  = flags[EQUIP_PREVIEW_AGILITY];

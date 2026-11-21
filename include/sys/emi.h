@@ -23,9 +23,9 @@
 #define EMI_HEADER_FILL           0x2e   /* fill from the TOC end up to EMI_SECTOR_SIZE */
 #define EMI_PAYLOAD_FILL          0x5f   /* fill from a payload end to the next EMI_SECTOR_SIZE boundary */
 
-/* Entry slots inside one archive (disc names; @source: wiki:formats/emi). The archive kinds BENEMY, BGM,
+/* Entry slots inside one archive (disc names; @source: wiki:formats/emi). The archive types BENEMY, BGM,
  * BPLCHAR and PLCHAR start with the same three entries: the VAB header, the SE table or the sequence
- * (slot 1, by kind) and the VAB body. The bank selectors are the load_arg of the VAB entries. */
+ * (slot 1, by type) and the VAB body. The bank selectors are the load_arg of the VAB entries. */
 typedef enum EMISoundSlot {
     EMI_SOUND_SLOT_VAB_HEADER = 0,
     EMI_SOUND_SLOT_SE         = 1, /* BENEMY, BPLCHAR and PLCHAR: the SE table */

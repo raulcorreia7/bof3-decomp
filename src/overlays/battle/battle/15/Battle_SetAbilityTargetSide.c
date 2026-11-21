@@ -2,10 +2,10 @@
 
 /* func_80097D58 */
 MATCH void Battle_SetAbilityTargetSide(void) {
-    u16 kind;
+    u16 type;
 
-    kind = g_BattleActorTurn->command.id;
-    if ((g_Abilities[kind].targeting_flags & ABILITY_TARGET_FLAG_OPPONENT) != 0) {
+    type = g_BattleActorTurn->command.id;
+    if ((g_Abilities[type].targeting_flags & ABILITY_TARGET_FLAG_OPPONENT) != 0) {
         g_BattleActorTurn->command.target = BATTLE_TARGET_ENEMY_SIDE;
     } else {
         g_BattleActorTurn->command.target = BATTLE_TARGET_PARTY_SIDE;

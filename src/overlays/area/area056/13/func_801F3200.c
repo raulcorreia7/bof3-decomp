@@ -3,10 +3,10 @@
 /* The cell's palette step: clears the pending message, plays the change sound, and applies the
  * cell palette once the counter byte has run to 0x7F. */
 MATCH void func_801F3200(void) {
-    u8* kind;
+    u8* type;
 
     MESSAGE_REQUEST_CLEAR();
-    kind = D_80145E92;
+    type = D_80145E92;
     if (g_MessageChoice != 0) {
         return;
     }
@@ -17,7 +17,7 @@ MATCH void func_801F3200(void) {
     }
 
     D_80145E91[0] = 2;
-    *kind         = 7;
+    *type         = 7;
     D_80145E93[0] = 0;
     Area_SetCellPalette(D_80145EC6, D_80145ECA);
 }

@@ -1,7 +1,7 @@
 #include "battle_15.h"
 
 /* applies one battle event packet to the current enemy work row,
- * dispatches the per-kind record updates, then copies the packet's eight tail
+ * dispatches the per-type record updates, then copies the packet's eight tail
  * bytes.
  */
 /* func_8009C994 */
@@ -14,7 +14,7 @@ MATCH void Battle_ApplyEnemyEvent(EnemyBattler* work_arg, BattleEventPacket* eve
     u8            i;
 
     work = (EnemyBattler*)(void*)work_arg;
-    switch (event->effect_kind) {
+    switch (event->effect_type) {
         case 0:
             break;
         case 1:

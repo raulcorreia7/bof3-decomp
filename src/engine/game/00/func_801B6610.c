@@ -11,7 +11,7 @@ MATCH bool func_801B6610(s16 map_x, s16 map_y) {
     sentinel = 0xFF;
     value &= BYTE_MASK;
     do {
-        entry = s_AreaCellKinds[index];
+        entry = s_AreaCellTypes[index];
         if (entry == sentinel)
             return 0;
         index += 1;

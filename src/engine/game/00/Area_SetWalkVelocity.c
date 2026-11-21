@@ -9,7 +9,7 @@ MATCH void Area_SetWalkVelocity(void) {
     s32 pos_y;
     s16 result;
 
-    /* Step size from route kind; rate from the shared selector bundle. */
+    /* Step size from route type; rate from the shared selector bundle. */
     rate = g_RouteSpeedScale[g_Game.current->u.field.counter.unsigned_value];
     if ((g_Task->direction == FACING_UP_RIGHT) || (g_Task->direction == FACING_DOWN_LEFT)) {
         step          = 0x20;

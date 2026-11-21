@@ -141,7 +141,7 @@ typedef struct {
     u16 alt;   /* 0x06 */
     u8  mode;  /* 0x08 */
     u8  span;  /* 0x09 */
-    u8  kind;  /* 0x0A */
+    u8  type;  /* 0x0A */
     u8  pad;   /* 0x0B */
 } GameLocale;
 
@@ -549,7 +549,7 @@ void func_80117A30(void);
 void func_80117BF4(void);
 void func_8015A7E8(void);
 /* func_8015B870 */
-s32  Script_ReadValue(u32 kind);
+s32  Script_ReadValue(u32 type);
 void Party_ShowBattlers(void);
 s8   Actor_Run(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 landing_flags);
 /* The retail callers pass the id unnarrowed; the shared prototype narrows it. */
@@ -754,7 +754,7 @@ void    func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_facing);
 void    func_8019FF88(s32 entry_mode, s32 entry_index, s32 entry_flags);
 void    func_801A02E8(void);
 u8      func_801A0348(s16 map_x, s16 map_y);
-void    func_801A0380(s16 x, s16 y, u16 kind);
+void    func_801A0380(s16 x, s16 y, u16 type);
 /* func_801A0490 */
 u8*     Area_FindEncounterZoneOf(s32 map_x, s32 map_y, s32 table_index);
 /* func_801A06D8 */
@@ -881,7 +881,7 @@ s32     Actor_RunSpawnOps(ScriptState* state, u8* table, s32 value);
 /* func_801ABA24 */
 u8      Actor_RunFaceOps(void* sub, s32 target, u8 value);
 void    func_801ABEE0(void);
-VECTOR* func_801ABF30(VECTOR* out, s32 sel, s32 selector_kind);
+VECTOR* func_801ABF30(VECTOR* out, s32 sel, s32 selector_type);
 void    func_801AC0A0(s8 tuning_delta);
 bool    func_801AC33C(s32 ease_in, s32 distance);
 void    func_801AC768(ScriptState* cursor_state, s32 mode_byte, s32 value_18, s32 value_1C, s32 extra_value);
@@ -1143,9 +1143,9 @@ void  Battle_ScrollToLeader(void);
 void  Battle_RunPartyAnims(void);
 /* func_801BFB34 */
 void  Battle_PlaceFieldMembers(void);
-void  func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode);
+void  func_801BFF9C(u32 work_type, u32 work_index, u32 work_mode);
 void  func_801C05AC(void);
-void  func_801C0758(s32 x, s32 y, u8 kind);
+void  func_801C0758(s32 x, s32 y, u8 type);
 s32   func_801C090C(s32 anchor_x, s32 anchor_y, s32 anchor_index);
 void  func_801C0A68(void);
 void  func_801C0AB4(void);
@@ -1706,7 +1706,7 @@ static inline void FieldAction_Roll(s32 actor_slot) {
 /* func_801A20F8 */
 s32 Area_IsCellBlocked(s16 cell_x, s16 cell_y);
 
-s32 func_801B1B2C(s32 x, s32 y, s32 probe_kind, s32 flags);
+s32 func_801B1B2C(s32 x, s32 y, s32 probe_type, s32 flags);
 
 s32 func_801B1C18(s32 x, s32 y, s32 mode);
 

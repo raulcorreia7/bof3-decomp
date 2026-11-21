@@ -75,7 +75,7 @@ MATCH void func_801D0E80(void) {
     SYS_DISPATCH_BYTE(D_801D4BE4, D_801F294D);
 }
 
-/* Moves the ordinal of the selected record kind and draws its cell. */
+/* Moves the ordinal of the selected record type and draws its cell. */
 MATCH void func_801D0EBC(void) {
     u16  pad;
     u16* pad_word;
@@ -285,13 +285,13 @@ MATCH void func_801D1630(void) {
     }
 }
 
-/* Moves the request row between kinds and draws the chosen kind. */
+/* Moves the request row between types and draws the chosen type. */
 MATCH void func_801D1778(void) {
     u16 pad;
     s32 direction;
     u8  row;
     u8* cursor;
-    u8  kind;
+    u8  type;
     u8  next;
     s32 rooms_offset;
     s8  srow;
@@ -305,8 +305,8 @@ MATCH void func_801D1778(void) {
         D_801F294D = 0;
     } else if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
         srow = D_801D4E28;
-        kind = D_801D4C04[srow];
-        if (kind == 0xFF) {
+        type = D_801D4C04[srow];
+        if (type == 0xFF) {
             func_801D4B58();
         } else {
             rooms_offset = (g_SceneEventState.selection - 1) * 8;
@@ -353,7 +353,7 @@ MATCH void func_801D1778(void) {
     Menu_DrawCursorSprite((u16)((52 * ((*cursor - 1) % 4) + 0x44) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E28 * 16), 0);
 }
 
-/* Moves the request line inside the chosen kind and draws its grid. */
+/* Moves the request line inside the chosen type and draws its grid. */
 MATCH void func_801D1A94(void) {
     u16 pad;
     s32 direction;
@@ -420,7 +420,7 @@ MATCH void func_801D1A94(void) {
     }
 }
 
-/* Toggles the request pair and draws both kind grids. */
+/* Toggles the request pair and draws both type grids. */
 MATCH void func_801D1E48(void) {
     u16 pad;
     s32 direction;
@@ -459,7 +459,7 @@ MATCH void func_801D1E48(void) {
     }
 }
 
-/* Commits the request pair the pad input selects, then redraws both kind grids. */
+/* Commits the request pair the pad input selects, then redraws both type grids. */
 MATCH void func_801D2110(void) {
     u16 pad;
     u32 anchor;
@@ -567,7 +567,7 @@ MATCH void func_801D28A4(s16 x, s16 y, u8 slot, s32 selected) {
     s8    row;
     s32   index;
     u8    sel;
-    u8    kind;
+    u8    type;
 
     /* The window style leads the shared block; the five-byte name rows sit 0xE96 above it. */
     block = &g_WindowStyle;
@@ -596,29 +596,29 @@ MATCH void func_801D28A4(s16 x, s16 y, u8 slot, s32 selected) {
     } else {
         row = D_801D4E28;
         if (row == 0) {
-            kind = 0;
+            type = 0;
         } else if (row > 8) {
-            kind = row - 8;
+            type = row - 8;
         } else {
             index = row - 1;
-            kind  = g_FairyRooms[index * 8];
+            type  = g_FairyRooms[index * 8];
         }
-        if (D_801D4C20[kind] == 0) {
+        if (D_801D4C20[type] == 0) {
             func_801D2D98((s16)(x + 6), (s16)(y + 0x12), g_Fairies[slot][5] * 12, 0, 1);
         } else {
             func_801D2D98((s16)(x + 6), (s16)(y + 0x12), g_Fairies[slot][5] * 12, 0, 0);
         }
-        if (D_801D4C20[kind] == 1) {
+        if (D_801D4C20[type] == 1) {
             func_801D2D98((s16)(x + 6), (s16)(y + 0x16), g_Fairies[slot][6] * 12, 1, 1);
         } else {
             func_801D2D98((s16)(x + 6), (s16)(y + 0x16), g_Fairies[slot][6] * 12, 1, 0);
         }
-        if (D_801D4C20[kind] == 2) {
+        if (D_801D4C20[type] == 2) {
             func_801D2D98((s16)(x + 6), (s16)(y + 0x1A), g_Fairies[slot][7] * 12, 2, 1);
         } else {
             func_801D2D98((s16)(x + 6), (s16)(y + 0x1A), g_Fairies[slot][7] * 12, 2, 0);
         }
-        if (D_801D4C20[kind] == 3) {
+        if (D_801D4C20[type] == 3) {
             func_801D2D98((s16)(x + 6), (s16)(y + 0x1E), g_Fairies[slot][8] * 12, 3, 1);
         } else {
             func_801D2D98((s16)(x + 6), (s16)(y + 0x1E), g_Fairies[slot][8] * 12, 3, 0);
@@ -953,7 +953,7 @@ MATCH void func_801D3B0C(u8* row) {
     }
 }
 
-/* Draws one kind icon of the entry list. */
+/* Draws one type icon of the entry list. */
 MATCH void func_801D3EFC(s16 x, s16 y, u8 ordinal) {
     s32      page;
     SPRT_16* sprite;
@@ -1072,15 +1072,15 @@ MATCH s32 func_801D4474(void) {
     return (s16)val;
 }
 
-/* Draws the panel of one commu kind and returns its top. */
-MATCH s16 func_801D44E0(s16 x, s16 y, u8 kind, u8 mode) {
+/* Draws the panel of one commu type and returns its top. */
+MATCH s16 func_801D44E0(s16 x, s16 y, u8 type, u8 mode) {
     s32 i;
     s32 height;
     s32 bottom;
     u16 span;
     u8  rows;
 
-    rows   = D_801D4DD4[kind].count;
+    rows   = D_801D4DD4[type].count;
     height = rows << 4;
     span   = height;
     bottom = span + 4;
@@ -1093,17 +1093,17 @@ MATCH s16 func_801D44E0(s16 x, s16 y, u8 kind, u8 mode) {
     UI_DrawWindow((u16)x, (u16)y, 0x50, height | 1, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
     func_801D42DC((s16)x, (s16)(y - 1), span & 0xF0);
     i = 0;
-    if (i < D_801D4DD4[kind].count) {
+    if (i < D_801D4DD4[type].count) {
         do {
-            UI_DrawText((s16)(x + 8), (s16)(y + 2 + i * 16), (mode * 7) & BYTE_MASK, 8, &D_801D4D34[0x50 + (D_801D4DD4[kind].first + i) * 8]);
+            UI_DrawText((s16)(x + 8), (s16)(y + 2 + i * 16), (mode * 7) & BYTE_MASK, 8, &D_801D4D34[0x50 + (D_801D4DD4[type].first + i) * 8]);
             i++;
-        } while (i < D_801D4DD4[kind].count);
+        } while (i < D_801D4DD4[type].count);
     }
     return y;
 }
 
 /* Writes the screen origin of one entry-grid slot through the two pointers. */
-MATCH void func_801D4694(s16* out_x, s16* out_y, s32 kind, s32 ordinal) {
+MATCH void func_801D4694(s16* out_x, s16* out_y, s32 type, s32 ordinal) {
     s32 base;
     s32 row;
     s32 slot;
@@ -1114,12 +1114,12 @@ MATCH void func_801D4694(s16* out_x, s16* out_y, s32 kind, s32 ordinal) {
     u8  slots;
 
     slot = 0;
-    kind &= BYTE_MASK;
-    base  = kind - 1;
+    type &= BYTE_MASK;
+    base  = type - 1;
     x     = base % 4 * 52 + 0x20;
     row   = base >> 2;
     y     = row * 61 + 0x6B;
-    slots = Fairy_GetJobActive(kind);
+    slots = Fairy_GetJobActive(type);
     switch (slots) {
         case 2:
             slot = 2;
@@ -1193,7 +1193,7 @@ MATCH void func_801D49C4(void) {
     u32 row;
     u8  room_type;
     s32 room_offset;
-    u8  kind_index;
+    u8  type_index;
     u16 text_id;
     u16 room_text_id;
 
@@ -1209,11 +1209,11 @@ MATCH void func_801D49C4(void) {
         if (room_type == 0) {
             room_text_id = 0x6A;
         } else {
-            kind_index = (room_type - 4) & BYTE_MASK;
-            if (kind_index == 0) {
+            type_index = (room_type - 4) & BYTE_MASK;
+            if (type_index == 0) {
                 room_text_id = g_FairyRooms[room_offset + 1] + 0x4A;
             } else {
-                room_text_id = text_ids[kind_index - 1];
+                room_text_id = text_ids[type_index - 1];
             }
         }
         text_id = room_text_id;

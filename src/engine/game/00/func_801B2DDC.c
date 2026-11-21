@@ -9,7 +9,7 @@ MATCH void func_801B2DDC(void) {
     u32*   list;
     u32    entry;
     s16    value;
-    u8     kind;
+    u8     type;
     u16    result;
 
     sel = func_801B5C54();
@@ -20,8 +20,8 @@ MATCH void func_801B2DDC(void) {
         Actor_RequestScript(((work->direction >> 1) + 0x10));
     }
     value = FIELD(s16, sel, 0x4u);
-    if (((value & 0x8000) != 0) && ((kind = FIELD(u8, sel, 0x6u)) != GAME_NONE)) {
-        switch (kind) {
+    if (((value & 0x8000) != 0) && ((type = FIELD(u8, sel, 0x6u)) != GAME_NONE)) {
+        switch (type) {
             case 0:
                 Message_Request(value & 0xFFF);
                 break;

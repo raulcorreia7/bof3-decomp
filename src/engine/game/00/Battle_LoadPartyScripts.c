@@ -8,7 +8,7 @@ MATCH bool Battle_LoadPartyScripts(void) {
     s32 initial_count;
     s32 phase2_count;
     s32 index;
-    s32 kind;
+    s32 type;
     u8  sel;
     s32 scan;
     u16 flags;
@@ -48,8 +48,8 @@ found:
         rec            = (u8*)g_Game.members + off;
         g_Game.current = rec;
         TASK_SET(rec);
-        kind  = rec[0x13C];
-        flags = g_Characters[kind].status;
+        type  = rec[0x13C];
+        flags = g_Characters[type].status;
         if ((flags & 0x4000) != 0) {
             Actor_StageScript(rec[0x4B], 0, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0xA00);
             g_Task->param.unk_0B = 0;

@@ -426,7 +426,7 @@ Callback g_MenuStartEquipmentSteps[MENU_START_PANEL6_STATE_COUNT] = {Menu_PanelI
 Callback g_MenuStartPanel7Steps[MENU_START_PANEL7_STATE_COUNT] = {Menu_PanelIdle, func_801E9A70, func_801E9AB0};
 Callback g_MenuStartPanel8Steps[MENU_START_PANEL8_STATE_COUNT] = {Menu_PanelIdle, func_801E9B6C, func_801E9BAC};
 Callback g_MenuStartMessageSteps[MENU_START_PANEL9_STATE_COUNT] = {Menu_PanelIdle, func_801E9D18, func_801E9D58};
-/* The width and height of the frame the cursor-frame panel draws, by its frame kind (panel task byte 0x0A). */
+/* The width and height of the frame the cursor-frame panel draws, by its frame type (panel task byte 0x0A). */
 CursorFrameSize g_MenuStartCursorFrames[4] = {{0x0110, 0x34}, {0x80, 0x34}, {0x44, 0x34}, {0x80, 0x30}};
 Callback g_MenuStartPanel11Steps[MENU_START_PANEL11_STATE_COUNT] = {Menu_PanelIdle, func_801E9EAC, func_801E9F04};
 Callback g_MenuStartInventorySteps[MENU_START_PANEL12_STATE_COUNT] = {Menu_PanelIdle, func_801E9FB0, func_801E9FF0, func_801EA030, Menu_SlidePanelLeft};
@@ -1115,7 +1115,7 @@ u8 s_SkillOrderGroups[4][6] = {
     {0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
     {0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
 };
-u8 s_SkillOrderKinds[3][6] = {
+u8 s_SkillOrderTypes[3][6] = {
     {0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
     {0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
     {0x00, 0x00, 0x00, 0x00, 0x00, 0x00},

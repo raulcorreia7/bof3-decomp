@@ -3,7 +3,7 @@
 /* The high nibble of a setup stream record selects its handler; 0xF0 and above are control records. */
 typedef enum AreaSetupType {
     AREA_SETUP_TYPE_ENTITY                 = 0x0, /* map entity: scene record, cell position, mode, step */
-    AREA_SETUP_TYPE_ENTITY_1               = 0x1, /* map entity with the extra fields of kind 0 */
+    AREA_SETUP_TYPE_ENTITY_1               = 0x1, /* map entity with the extra fields of type 0 */
     AREA_SETUP_TYPE_ENTITY_2               = 0x2, /* map entity with two extra bytes */
     AREA_SETUP_TYPE_ENTITY_VOICED          = 0x3, /* map entity with voice flags */
     AREA_SETUP_TYPE_ENTITY_4               = 0x4, /* map entity with a byte for the shadow table */

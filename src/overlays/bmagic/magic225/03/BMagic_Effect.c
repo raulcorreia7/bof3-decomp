@@ -86,8 +86,8 @@ MATCH void func_801EEE8C(void) {
     }
 }
 
-/* Spawn three effects on each unblocked battler of the selected side: kind j + 4 where
- * Battle_CanTarget accepts the battler for selector j, kind 8 otherwise. */
+/* Spawn three effects on each unblocked battler of the selected side: type j + 4 where
+ * Battle_CanTarget accepts the battler for selector j, type 8 otherwise. */
 MATCH void func_801EEF8C(void) {
     s32 i;
     s32 j;

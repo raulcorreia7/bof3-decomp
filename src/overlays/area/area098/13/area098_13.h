@@ -33,7 +33,7 @@ extern void (*D_801F5FBC[])(void* slot);
 /* One of the slots at AREA_WORK, 0x38 bytes each: a streak drawn between two points. */
 typedef struct AreaStreakSlot {
     u8     active;     /* 0x00 - 0 marks a free slot */
-    u8     kind;       /* 0x01 */
+    u8     type;       /* 0x01 */
     u8     life;       /* 0x02 */
     u8     head_shade; /* 0x03 - shade at the first point */
     u8     tail_shade; /* 0x04 - shade at the second point */

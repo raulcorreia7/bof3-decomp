@@ -3,8 +3,8 @@
 
 /* The bmagic/magic072/03 overlay. Only this image includes the file. */
 
-/* The sparkle kind this image spawns: it picks the count, delay, rise and colours. */
-#define EFFECT_SPARKLE_KIND 2
+/* The sparkle type this image spawns: it picks the count, delay, rise and colours. */
+#define EFFECT_SPARKLE_TYPE 2
 
 #include "overlays/bmagic/shared/sparkle.h"
 

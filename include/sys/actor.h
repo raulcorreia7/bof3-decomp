@@ -203,7 +203,7 @@ typedef struct Actor {
     u8              sheet_row;         /* 0x26 - sprite: sheet row in the page; Party_RemoveMember stores other values */
     u8              clut_select;       /* 0x27 - sprite: CLUT selector (Area_BuildClut); battle number actors keep the
                                 *        value they draw here */
-    u8              palette_8bit;      /* 0x28 - sprite: palette kind, nonzero draws 8-bit (Area_BuildClut) */
+    u8              palette_8bit;      /* 0x28 - sprite: palette type, nonzero draws 8-bit (Area_BuildClut) */
     u8              draw_layer;        /* 0x29 - the ordering-table layer GFX_AddPrim files its primitives in */
     u8              mirror;            /* 0x2A - sprite: mirror flag, 0 or 1 (Area_DrawObjectSprite) */
     u8              unk_2B;            /* 0x2B */

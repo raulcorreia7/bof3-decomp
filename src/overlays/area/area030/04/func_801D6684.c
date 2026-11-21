@@ -5,7 +5,7 @@
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D6684(void) {
     s32*  word_ptr;
-    s32   kind;
+    s32   type;
     s32   x;
     s32   y;
     s32   color;
@@ -55,14 +55,14 @@ NON_MATCHING void func_801D6684(void) {
         cell_ptr = cell_table;
     loop_11:
         cell = *cell_ptr;
-        kind = cell & BYTE_MASK;
-        if (kind != GAME_NONE) {
+        type = cell & BYTE_MASK;
+        if (type != GAME_NONE) {
             spad1 = g_Task;
             if (row == FIELD(u8, spad1, 0xBu)) {
                 if ((u32)((FIELD(u8, spad1, 0x9u) % 12) & BYTE_MASK) < 0xAU) {
                     x = x_fixed >> 0x10;
                     if (col == (page & BYTE_MASK)) {
-                        UI_DrawText((s16)x, (s16)(y_other >> 0x10), kind, 1U, ((kind * 2) + &D_801E2070));
+                        UI_DrawText((s16)x, (s16)(y_other >> 0x10), type, 1U, ((type * 2) + &D_801E2070));
                     } else {
                         goto block_17; /* shared cell/row draw join */
                     }
@@ -78,7 +78,7 @@ NON_MATCHING void func_801D6684(void) {
                 y     = y_sel >> 0x10;
                 color = (7 - cell) & BYTE_MASK;
             block_19:
-                UI_DrawTextString((s16)x, (s16)y, color, 1, (u32)((kind * 2) + &D_801E2070));
+                UI_DrawTextString((s16)x, (s16)y, color, 1, (u32)((type * 2) + &D_801E2070));
             }
             x_fixed += TO_COORD(12);
             col += 1;

@@ -2,12 +2,12 @@
 
 /* func_801B5EBC */
 MATCH bool Game_RequestPersonalAction(void) {
-    u8 kind;
+    u8 type;
 
-    kind = g_Game.current->chr.character_id;
-    if (kind == CHAR_ID_GARR || kind == CHAR_ID_REI)
+    type = g_Game.current->chr.character_id;
+    if (type == CHAR_ID_GARR || type == CHAR_ID_REI)
         return 0;
-    if (kind == CHAR_ID_RYU_PAJAMAS || kind == CHAR_ID_WHELP)
+    if (type == CHAR_ID_RYU_PAJAMAS || type == CHAR_ID_WHELP)
         return 0;
     if (!(g_InputPressed & g_InputMasks[FIELD_INPUT_PERSONAL_ACTION]))
         return 0;

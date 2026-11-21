@@ -15,7 +15,7 @@ MATCH u8 func_801F42E8(void) {
         if (slot->active != 0) {
             drawn = 1;
             func_801F4220(slot);
-            switch (slot->kind) {
+            switch (slot->type) {
                 case 0:
                     slot->head.vx += slot->vel[0];
                     slot->head.vy += slot->vel[1];
@@ -23,7 +23,7 @@ MATCH u8 func_801F42E8(void) {
                     slot->head_shade -= 10;
                     if (--slot->life == 0) {
                         slot->life = 8;
-                        slot->kind++;
+                        slot->type++;
                     }
                     break;
                 case 1:

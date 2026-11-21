@@ -6,7 +6,7 @@ MATCH void func_8009EC48(void) {
     u16           saved;
     u32           slot;
     u8            slot_arg;
-    u8            kind_arg;
+    u8            type_arg;
 
     slot = (*(u8*)&g_Battle.active_battler);
     if (BATTLER_IS_PLAYER(slot)) {
@@ -22,8 +22,8 @@ MATCH void func_8009EC48(void) {
     *p_flag    = flag | BATTLE_STATE_CRITICAL;
     /* FAKE: statement boundary keeps the retail register order and schedule. */
     FAKE_ORDER_LOCK(slot_arg = g_BattleActiveBattler);
-    kind_arg                          = g_BattleTarget;
-    g_Battle.target_record->hp_change = Battle_CalcDamage(slot_arg, kind_arg, BATTLE_ELEMENT_FROM_WEAPON);
+    type_arg                          = g_BattleTarget;
+    g_Battle.target_record->hp_change = Battle_CalcDamage(slot_arg, type_arg, BATTLE_ELEMENT_FROM_WEAPON);
     slot                              = (*(u8*)&g_Battle.active_battler);
     if (BATTLER_IS_PLAYER(slot)) {
         g_Game.members[slot].chr.status |= saved;

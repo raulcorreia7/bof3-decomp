@@ -2,11 +2,11 @@
 
 MATCH void func_8009A0A4(void) {
     s32          buttons;
-    u16          kind_index;
+    u16          type_index;
     volatile u8* dest;
     u8           value;
 
-    kind_index = g_Game.members[BATTLE_ACTIVE_ROW->slot].u.turn.command.id;
+    type_index = g_Game.members[BATTLE_ACTIVE_ROW->slot].u.turn.command.id;
     if (g_InputPressed & g_InputMasks[BATTLE_INPUT_CANCEL]) {
         g_Battle.ui_mode = 4;
         return;
@@ -17,7 +17,7 @@ MATCH void func_8009A0A4(void) {
     }
     buttons = INPUT_REPEATED(g_InputPressed, INPUT_DIRECTIONAL);
     if (buttons & (PADLup | PADLdown)) {
-        if (Item_GetFlags(kind_index >> 8, kind_index & BYTE_MASK) & ITEM_USABLE_MENU) {
+        if (Item_GetFlags(type_index >> 8, type_index & BYTE_MASK) & ITEM_USABLE_MENU) {
             if (func_8009AF7C() & BYTE_MASK) {
                 g_BattleActorTurn->command.target = 0;
             } else {

@@ -2,7 +2,7 @@
 
 /* Refreshes the AREA030 HUD panel state, clamps the two tracked x
  * positions into their visible ranges, then routes the two marker helpers. */
-MATCH void func_801D6B28(s8 panel_kind) {
+MATCH void func_801D6B28(s8 panel_type) {
     s32 left_x;
     s32 right_x;
 
@@ -38,7 +38,7 @@ MATCH void func_801D6B28(s8 panel_kind) {
         }
     }
 
-    if ((panel_kind & BYTE_MASK) == 0) {
+    if ((panel_type & BYTE_MASK) == 0) {
         Fishing_DrawFishArrow(*(s16*)(TASK_BYTES + 0x10u), 0xB3, 0, 1u);
     } else {
         Fishing_DrawFishArrow(*(s16*)(TASK_BYTES + 0x10u), 0xB3, 1, 1u);

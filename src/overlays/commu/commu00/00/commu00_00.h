@@ -78,9 +78,9 @@
 /* The loaded work-area pointer; the pointee is the unit's Actor. */
 #define FAIRY_VILLAGE_ACTIVE_UI               D_801F2948
 
-/* The kind table read without volatile semantics: the cell is declared
+/* The type table read without volatile semantics: the cell is declared
  * volatile for its other users, so the units that walk it take a plain view. */
-/* Byte at the start of each 8-byte record-kind entry. */
+/* Byte at the start of each 8-byte record-type entry. */
 #define VILLAGE_ROOM_SUBTYPE(index)           (D_801457A9[(index) * 8])
 /* Unsigned view: the cell is declared s8, but the original reads and writes it
  * unsigned (lbu/sb). */
@@ -273,15 +273,15 @@ void func_801F0718(u8 source_index, u8 task_index);
 /* func_801F08D8 */
 void Fairy_SpawnWorker(u8 source_index, u8 task_index);
 void func_801F0BF4(u8 task_index);
-void func_801F0C6C(u8 task_index, u8 record_kind_index);
-void func_801F0D3C(u8 task_index, u8 record_kind_index);
-void func_801F0E1C(u8 task_index, u8 record_kind_index);
+void func_801F0C6C(u8 task_index, u8 record_type_index);
+void func_801F0D3C(u8 task_index, u8 record_type_index);
+void func_801F0E1C(u8 task_index, u8 record_type_index);
 void func_801F0EC8(u8 task_index);
-void func_801F0F08(u8 source_index, u8 task_index, u8 record_kind_index);
-void func_801F0FBC(u8 source_index, u8 task_index, u8 record_kind_index);
-void func_801F1064(u8 task_index, u8 record_kind_index);
-void func_801F1110(u8 task_index, u8 record_kind_index);
-void func_801F1204(u8 task_index, u8 record_kind_index);
+void func_801F0F08(u8 source_index, u8 task_index, u8 record_type_index);
+void func_801F0FBC(u8 source_index, u8 task_index, u8 record_type_index);
+void func_801F1064(u8 task_index, u8 record_type_index);
+void func_801F1110(u8 task_index, u8 record_type_index);
+void func_801F1204(u8 task_index, u8 record_type_index);
 void func_801F1254(u8 task_index);
 s32  func_801F1294(u8* active_ui);
 s32  func_801F12C8(volatile Actor* slot);

@@ -4,7 +4,7 @@
 MATCH s16 Battle_RollHpDamage(s32 divisor) {
     u32 mode;
     u16 base;
-    u16 kind_mask;
+    u16 type_mask;
     s32 mod;
     u16 element_mask;
     u32 battler;
@@ -15,10 +15,10 @@ MATCH s16 Battle_RollHpDamage(s32 divisor) {
     } else {
         base = ENEMY_COMBATANT(mode).hp;
     }
-    kind_mask    = D_801CA71C[g_Battle.action_id].mask;
+    type_mask    = D_801CA71C[g_Battle.action_id].mask;
     mod          = 100;
-    element_mask = kind_mask & ELEM_ALL;
-    if ((kind_mask & (ELEM_FIRE | ELEM_FROST | ELEM_ELECTRIC | ELEM_EARTH | ELEM_WIND)) != 0u) {
+    element_mask = type_mask & ELEM_ALL;
+    if ((type_mask & (ELEM_FIRE | ELEM_FROST | ELEM_ELECTRIC | ELEM_EARTH | ELEM_WIND)) != 0u) {
         mod = Battle_GetFireResistance((*(u8*)&g_Battle.target), element_mask);
     }
     mod     = (((base / divisor) * D_800B498C[RANDOM_MASK(7)]) * mod) / 10000;

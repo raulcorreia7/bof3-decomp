@@ -30,7 +30,7 @@ NON_MATCHING void Battle_RunEnemyEvents(void) {
         enemy = &g_BattleEnemyBattlers[row];
         for (i = 0; i < ENEMY_AI_COUNT; i++) {
             packet = &BATTLE_ENEMY_EVENTS[enemy->type].packets[i];
-            switch (packet->kind) {
+            switch (packet->type) {
                 case 11:
                     BATTLE_UPDATE_ENEMY_EVENT(enemy->hp <= enemy->stats.max_hp / 4);
                     break;

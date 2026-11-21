@@ -2,10 +2,10 @@
 
 /* func_80097778 */
 MATCH void Battle_SetCommandId(void) {
-    u16 kind;
+    u16 type;
 
-    kind = g_BattleActorTurn->command.id;
-    if ((g_Abilities[kind].targeting_flags & ABILITY_TARGET_FLAG_OPPONENT) != 0) {
+    type = g_BattleActorTurn->command.id;
+    if ((g_Abilities[type].targeting_flags & ABILITY_TARGET_FLAG_OPPONENT) != 0) {
         g_BattleActorTurn->command.target = Battle_TargetNext(3);
         g_Battle.ui_mode                  = 1u;
     } else {

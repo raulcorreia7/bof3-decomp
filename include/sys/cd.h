@@ -36,7 +36,7 @@ extern volatile u32 g_EmiRequestedSlotId;
 /* Disc/read-side helpers. */
 /* Loads the archive of the requested BGM selection when it differs from the active one, then starts its cue. */
 /* EXE-side stream entry points. */
-/* Starts the key-based CD request for one XA stream file; the key is the file kind in bits 12 and up and an
+/* Starts the key-based CD request for one XA stream file; the key is the file type in bits 12 and up and an
  * entry count below. Every caller also passes a second word that the loader never reads. */
 /* Arms the loader for a character's family key (three party bytes plus the form flag) and waits for the stream. */
 

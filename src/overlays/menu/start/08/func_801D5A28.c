@@ -83,7 +83,7 @@ MATCH void func_801D5A28(void) {
         u8* step;
 
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
-        D_80148533 = s_SkillOrderKinds[D_80148510][D_8014850E];
+        D_80148533 = s_SkillOrderTypes[D_80148510][D_8014850E];
         step       = &D_80148651;
         D_8014850F = D_8014850E;
         (*step)++;

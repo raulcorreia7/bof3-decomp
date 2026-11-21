@@ -63,7 +63,7 @@ NON_MATCHING void func_801D5E90(void) {
     cursor = &panel->unk_0B;
     if (group < 4) {
         s_SkillOrderGroups[D_80148510][group] = panel->unk_0A;
-        s_SkillOrderKinds[D_80148510][group]  = panel->unk_0B;
+        s_SkillOrderTypes[D_80148510][group]  = panel->unk_0B;
     } else {
         *(&D_801ED8BD + D_80148510 * 6) = panel->unk_0A;
         *(&D_801ED8BC + D_80148510 * 6) = panel->unk_0A;

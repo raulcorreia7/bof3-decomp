@@ -1,6 +1,6 @@
 /* Draw the caption string, its icon and the glyph rows.toml. */
 /* func_801D484C (bate), func_801D57F4 (shisu), func_801DA2F4 (shop), func_801DD7EC (start) */
-MATCH void Menu_DrawZennyWindow(s32 panel_x, s32 panel_y, s32 panel_kind, s32 caption_value) {
+MATCH void Menu_DrawZennyWindow(s32 panel_x, s32 panel_y, s32 panel_type, s32 caption_value) {
     s16 y;
     s16 base_x;
     s16 base_y;

@@ -21,7 +21,7 @@ extern s16               D_1F800004;
 extern Magic076MainSteps D_801EEC04;
 extern Magic076Steps     D_801EEC1C;
 extern Callback          D_801F048C[];
-/* The number of effects each kind spawns. */
+/* The number of effects each type spawns. */
 extern u8                D_801F049C[];
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
 extern BattleEffect      D_801F04A4[];

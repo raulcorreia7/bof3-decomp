@@ -6,13 +6,13 @@ MATCH void Battle_ScaleEnemyStat(void* battler, s32 rate_type, s32 rate_percent)
     u32           cap;
     u32           value;
     u8            percent;
-    u8            kind;
+    u8            type;
     s32           scale;
 
     enemy   = (EnemyBattler*)battler;
-    kind    = rate_type & BYTE_MASK;
+    type    = rate_type & BYTE_MASK;
     percent = rate_percent & BYTE_MASK;
-    switch (kind) {
+    switch (type) {
         case 0:
             scale = percent * 100;
             value = enemy->hp * scale / 1000;

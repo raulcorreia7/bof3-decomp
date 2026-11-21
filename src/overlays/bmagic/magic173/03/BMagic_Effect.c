@@ -60,7 +60,7 @@ MATCH void func_801EEE34(void) {
 MATCH void func_801EEEEC(void) {
     PartyMember* target;
     u8           battler;
-    u8           kind;
+    u8           type;
     PartyMember* work;
 
     target         = g_Battle.selected_actor;
@@ -71,8 +71,8 @@ MATCH void func_801EEEEC(void) {
         g_Task->unk_10 = 0;
         g_Task->unk_14 = 0xC00000;
     } else {
-        kind = g_BattleEnemyBattlers[battler - BATTLE_PARTY_CHARACTERS_COUNT].enemy_id.byte.type;
-        switch (kind) {
+        type = g_BattleEnemyBattlers[battler - BATTLE_PARTY_CHARACTERS_COUNT].enemy_id.byte.type;
+        switch (type) {
             case 0x61:
                 g_Task->unk_0C = 0x38000;
                 g_Task->unk_10 = 0;

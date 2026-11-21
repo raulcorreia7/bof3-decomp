@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 /* computes one hit's damage: the element id defaults to the attacker's weapon,
- * then the weapon-vs-enemy-kind doubling, status reactions, the random spread and the
+ * then the weapon-vs-enemy-type doubling, status reactions, the random spread and the
  * +/-9999 clamp.
  */
 /* func_801DC044 */

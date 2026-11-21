@@ -601,7 +601,7 @@ void func_801D6598(void);
 void func_801D6684(void);
 void func_801D69E8(void);
 void func_801D6A2C(void);
-void func_801D6B28(s8 panel_kind);
+void func_801D6B28(s8 panel_type);
 void func_801D6CB0(void);
 void func_801D6EC4(void);
 void func_801D6F08(void);

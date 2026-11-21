@@ -1,11 +1,11 @@
 /* Spawns and links a field actor; verify changes in plp016, plp026, plp034, plp056, plp267, plp349, plp467, plp567 and plp678. */
-MATCH void PlChar_SpawnLinkedActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y, s32 cell_code) {
+MATCH void PlChar_SpawnLinkedActor(s32 spawn_type, s32 spawn_x, s32 spawn_y, s32 cell_code) {
     /* FAKE: plain C was 0xE4; retail keeps x in s3. */
     FAKE_REG(s32, x, "s3");
     /* FAKE: plain C was 0xE4; retail keeps y in s4. */
     FAKE_REG(s32, y, "s4");
-    /* FAKE: plain C was 0xE4; retail keeps kind in s2. */
-    FAKE_REG(s32, kind, "s2");
+    /* FAKE: plain C was 0xE4; retail keeps type in s2. */
+    FAKE_REG(s32, type, "s2");
     /* FAKE: plain C was 0xE4; retail keeps one in s1. */
     FAKE_REG(s32, one, "s1");
     /* FAKE: plain C was 0xE4; retail shifts x into v0. */
@@ -15,7 +15,7 @@ MATCH void PlChar_SpawnLinkedActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y, s32
 
     x    = spawn_x;
     y    = spawn_y;
-    kind = spawn_kind;
+    type = spawn_type;
     slot = Actor_FindFreeSpawned();
     if (slot != GAME_NONE) {
         /* FAKE: plain C was 0xE4; retail computes the slot stride first. */
@@ -30,7 +30,7 @@ MATCH void PlChar_SpawnLinkedActor(s32 spawn_kind, s32 spawn_x, s32 spawn_y, s32
         g_SpawnedActors[slot].pos.x.fixed      = x_word;
         y_word                                 = y << 16;
         g_SpawnedActors[slot].header.flags     = one;
-        g_SpawnedActors[slot].header.mode      = kind;
+        g_SpawnedActors[slot].header.mode      = type;
         g_SpawnedActors[slot].pos.y.fixed      = y_word;
         COORD_INT(g_SpawnedActors[slot].pos.z) = Area_SampleHeight(g_SpawnedActors[slot].pos.x.fixed, y_word) + 0x200;
         g_SpawnedActors[slot].link             = one;

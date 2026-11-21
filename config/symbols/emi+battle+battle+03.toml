@@ -31,9 +31,9 @@ s_BattleSeIds = { addr = 0x801D0C98, source = "Picks a random battle SE id for t
 jtbl_801D0CA0 = { addr = 0x801D0CA0, type = "Callback", source = "The switch table of func_801DEFE4: the jump targets of its jr dispatch." }
 g_BattleDropChances = { addr = 0x801D0CB8, source = "Enemy item drop chances." }
 g_BattleEffectModes = { addr = 0x801D0CC0, source = "Battle effect mode handlers, indexed by the slot mode." }
-g_BattleBattlerEffectSteps = { addr = 0x801D0CD0, source = "Battle effect handlers for the battler effects (damage number, pose, ghost, form change), one per slot kind." }
-g_BattleMagicEffectSteps = { addr = 0x801D0D1C, source = "Battle effect handlers for the magic effects the bmagic overlays queue, one per slot kind." }
-g_BattleBossEffectSteps = { addr = 0x801D0ED4, source = "Battle effect handlers for the boss effects the boss overlays queue, one per slot kind." }
+g_BattleBattlerEffectSteps = { addr = 0x801D0CD0, source = "Battle effect handlers for the battler effects (damage number, pose, ghost, form change), one per slot type." }
+g_BattleMagicEffectSteps = { addr = 0x801D0D1C, source = "Battle effect handlers for the magic effects the bmagic overlays queue, one per slot type." }
+g_BattleBossEffectSteps = { addr = 0x801D0ED4, source = "Battle effect handlers for the boss effects the boss overlays queue, one per slot type." }
 g_BattleDamageNumberSteps = { addr = 0x801D0EF4, source = "The damage number effect's five step routines" }
 jtbl_801D0F0C = { addr = 0x801D0F0C, type = "Callback", source = "The switch table of func_801E5CA4: the jump targets of its jr dispatch." }
 g_BattleScreenFlashSteps = { addr = 0x801D0F20, source = "The screen flash effect's three step routines" }
@@ -118,7 +118,7 @@ Battle_GetTurnCursor = { addr = 0x801DDFEC, type = "func", source = "the body re
 Battle_SetSlotPending = { addr = 0x801DE190, type = "func", source = "Marks a battler action as pending." }
 Battle_ClearSlotPending = { addr = 0x801DE1B0, type = "func", source = "Clears a battler's pending action." }
 Battle_UpdateEvents = { addr = 0x801DE43C, type = "func", source = "Clears g_BattleEventFlags, then over two passes (group 0, then 1) walks the 8 twelve-byte g_BattleEventSlots and calls handlers[unk_01] for each slot whose unk_00 is set, unk_03 equals the pass and whose unk_01 bit is clear in g_BattleEventFlags, after storing the slot index in the scratchpad." }
-Battle_QueueEvent = { addr = 0x801DE560, type = "func", source = "takes the event kind, value, group, timer and payload and appends them to g_BattleEventSlots" }
+Battle_QueueEvent = { addr = 0x801DE560, type = "func", source = "takes the event type, value, group, timer and payload and appends them to g_BattleEventSlots" }
 Battle_AddMessage = { addr = 0x801DE8C0, type = "func", source = "Appends a record to the battle selection ring." }
 Battle_SetTextActionName = { addr = 0x801DE94C, type = "func", source = "Copies an action name into the message staging area." }
 Battle_SetTextPartyName = { addr = 0x801DE9A8, type = "func", source = "Sets the party battler name for battle messages." }
@@ -136,7 +136,7 @@ Battle_PickLowestHpTarget = { addr = 0x801E2CA4, type = "func", source = "Return
 Battle_PickFormationTarget = { addr = 0x801E2E30, type = "func", source = "Picks a random live target by formation weight." }
 Battle_IsEnemyBlocked = { addr = 0x801E30F8, type = "func", source = "returns 1 while the current enemy is paralyzed, sleeping or suppressed, else steps its animation loop" }
 Battle_IsEnemyBlockedOnce = { addr = 0x801E3160, type = "func", source = "the enemy form of func_801DEE4C: status and suppression checks, then one animation step" }
-Battle_PlayEnemySE = { addr = 0x801E52F0, type = "func", source = "Plays the SE id through SND_PlaySE unless it is the 0xFFFF none value; the callers pass the enemy SE words EnemyBattler.unk_E8 in scripted battles, where other battles play SE 0x600 + kind * 2 instead." }
+Battle_PlayEnemySE = { addr = 0x801E52F0, type = "func", source = "Plays the SE id through SND_PlaySE unless it is the 0xFFFF none value; the callers pass the enemy SE words EnemyBattler.unk_E8 in scripted battles, where other battles play SE 0x600 + type * 2 instead." }
 Battle_RollEnemyDrops = { addr = 0x801E531C, type = "func", source = "Rolls and collects item drops from a defeated enemy." }
 Battle_DefeatEnemy = { addr = 0x801E54EC, type = "func", source = "Defeats an enemy and collects its rewards." }
 Battle_TriggerCritical = { addr = 0x801E5704, type = "func", source = "When the current enemy has ENEMY_EVENT_CRITICAL and a random bit is set, raises BATTLE_STATE_CRITICAL and allocates battle effect 2; called by func_801E3B04 and the boss028, boss033, boss051 and boss055 handlers." }
@@ -237,7 +237,7 @@ g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running e
 g_BattleCurrentEnemy = { addr = 0x801EB4E8, size = 0x4, source = "Enemy whose battle script is running." }
 g_BattleEventSlots = { addr = 0x801EB4F0, source = "Twelve-byte slots of the queued battle events; Battle_UpdateEvents runs the slot of each active event." }
 D_801EB4F0 = { addr = 0x801EB4F0, alias = true, source = "Battle event slots." }
-D_801EB4F1 = { addr = 0x801EB4F1, alias = true, source = "Event kind of each battle event slot, stored when func_801DE560 queues the event." }
+D_801EB4F1 = { addr = 0x801EB4F1, alias = true, source = "Event type of each battle event slot, stored when func_801DE560 queues the event." }
 D_801EB4F4 = { addr = 0x801EB4F4, alias = true, source = "Message text pointer of each battle event slot, drawn by the battle event panels." }
 D_801EB4FA = { addr = 0x801EB4FA, alias = true, source = "Text style argument of each battle event slot, zeroed when queued and passed to UI_DrawText by the event panels." }
 g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_CHARACTERS_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }

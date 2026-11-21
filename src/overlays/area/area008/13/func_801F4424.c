@@ -3,7 +3,7 @@
 /* Retail passes no mode argument (the etc/game/00 revision ignores it), so the
  * callee is declared arg-less. */
 
-/* Entry table at 0x80143FC8 with its byte-field views: flag at `+0x00`, kind at
+/* Entry table at 0x80143FC8 with its byte-field views: flag at `+0x00`, type at
  * `+0x05`, derived byte at `+0x0B`, stride 0x74. */
 
 /* Scratchpad byte cell that holds the staged slot index; the shipped code takes

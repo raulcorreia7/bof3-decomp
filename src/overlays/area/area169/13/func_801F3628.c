@@ -6,7 +6,7 @@ MATCH void func_801F3628(void) {
     u32          index;
     s32          i;
     u8           bounds;
-    u8           kind;
+    u8           type;
 
     g_GameFlags &= 0xDFFF;
     saved = (PartyMember*)g_Task;
@@ -42,9 +42,9 @@ MATCH void func_801F3628(void) {
                     func_801C2710();
                 }
             } else {
-                kind = D_801F3B9C[bounds].unk_04;
-                if (((PartyMember*)g_Task)->facing != kind) {
-                    ((PartyMember*)g_Task)->facing = kind;
+                type = D_801F3B9C[bounds].unk_04;
+                if (((PartyMember*)g_Task)->facing != type) {
+                    ((PartyMember*)g_Task)->facing = type;
                     ((PartyMember*)g_Task)->unk_0C = -((PartyMember*)g_Task)->unk_0C;
                     ((PartyMember*)g_Task)->unk_10 = -((PartyMember*)g_Task)->unk_10;
                     ((PartyMember*)g_Task)->unk_14 = -((PartyMember*)g_Task)->unk_14;

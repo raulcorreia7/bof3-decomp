@@ -23,7 +23,7 @@ MATCH void Game_UpdateAreaLoad(void) {
         return;
     }
 
-    ui_mode = g_GameRequestKind;
+    ui_mode = g_GameRequestType;
     if ((u8)(ui_mode + 2u) >= 2u) {
         UI_SetMode(ui_mode);
         Area_WaitWindowEffect(1u);

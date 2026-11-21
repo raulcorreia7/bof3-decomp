@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void func_801A0380(s16 x, s16 y, u16 kind) {
+MATCH void func_801A0380(s16 x, s16 y, u16 type) {
     u8* cursor;
     u8* entry;
     s32 done;
@@ -16,7 +16,7 @@ MATCH void func_801A0380(s16 x, s16 y, u16 kind) {
     if (g_Game.flags & 0x80) {
         result = g_SndBGMId;
     } else {
-        record = Area_FindEncounterZoneOf(x, y, kind);
+        record = Area_FindEncounterZoneOf(x, y, type);
         if (record[7] == 0) {
             result = record[6];
         } else {

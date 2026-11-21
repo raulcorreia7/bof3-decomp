@@ -103,7 +103,7 @@ ASSERT_SIZE(MenuChoicePanel, MENU_CHOICE_PANEL_SIZE);
 
 /* What a list panel lists: the shop's item list reads a price discount (and
  * dims the whole list when it is set), the ability lists read whose abilities
- * and which kind (Party_GetAbilities' arguments). */
+ * and which type (Party_GetAbilities' arguments). */
 typedef union MenuListParams {
     struct {
         u8 dimmed;        /* non-zero draws every row greyed out */

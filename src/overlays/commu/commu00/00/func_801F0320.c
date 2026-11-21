@@ -8,12 +8,12 @@ MATCH void func_801F0320(void) {
     s32 i;
     u8* new_var;
     u8* new_var2;
-    u8  kind;
-    s32 kind_10;
-    s32 kind_11;
+    u8  type;
+    s32 type_10;
+    s32 type_11;
 
-    kind_10    = FAIRY_JOB_CLEAR;
-    kind_11    = FAIRY_JOB_BUILD;
+    type_10    = FAIRY_JOB_CLEAR;
+    type_11    = FAIRY_JOB_BUILD;
     sum_10     = &D_801455C5;
     sum_11     = sum_10 + 1;
     *sum_10    = 0;
@@ -23,10 +23,10 @@ MATCH void func_801F0320(void) {
 
     for (i = 0; i < FAIRY_VILLAGE_COUNT; i++) {
         if (g_FairyJobs[i].active != 0) {
-            kind = g_FairyJobs[i].type;
-            if (kind == kind_10) {
+            type = g_FairyJobs[i].type;
+            if (type == type_10) {
                 *new_var += D_801F2706[i][0];
-            } else if (kind == kind_11) {
+            } else if (type == type_11) {
                 *new_var2 += D_801F2706[i][0];
             }
         }

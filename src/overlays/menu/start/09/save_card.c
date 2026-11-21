@@ -245,7 +245,7 @@ MATCH s32 SAVE_FormatCard(void) { /* func_801EF200 */
     return -1;
 }
 
-/* Builds the card file header for the selected save kind: title and icon frames. */
+/* Builds the card file header for the selected save type: title and icon frames. */
 
 /* func_801EF27C */
 MATCH void SAVE_BuildFileHeader(s8 block_entry, s8 type, char* title) { /* func_801EF27C */

@@ -75,9 +75,9 @@ Battle_RunEnemyEvents = { addr = 0x8009BFC4, type = "func", source = "Runs the e
 Battle_EnemyEventTriggered = { addr = 0x8009C868, type = "func", source = "Tells whether the event packet at an index has already been triggered for the enemy." }
 Battle_SetEnemyEventTriggered = { addr = 0x8009C87C, type = "func", source = "Sets or clears the triggered bit of an event packet index for the enemy." }
 Battle_ActionHasElement = { addr = 0x8009C8AC, type = "func", source = "Tells whether the running ability or the attacker's weapon carries any element of the mask and the current enemy took a nonzero hp change." }
-Battle_ApplyEnemyEvent = { addr = 0x8009C994, type = "func", source = "Applies one enemy event packet to the enemy battler: sets its event flags, status, record cells, panel or skills by the packet's effect kind." }
+Battle_ApplyEnemyEvent = { addr = 0x8009C994, type = "func", source = "Applies one enemy event packet to the enemy battler: sets its event flags, status, record cells, panel or skills by the packet's effect type." }
 Battle_ScaleEnemyStat = { addr = 0x8009CCBC, type = "func", source = "Scales one of an enemy's seven stat fields by a percentage (the enemy event of type 3): hit points and magic points stay within their maximums, the other fields cap at 999." }
-Battle_MergeEnemyPanels = { addr = 0x8009CFEC, type = "func", source = "Removes the entries of the enemy panel list D_801ED9B0 that repeat an enemy kind and panel id, keeping the first; called after the enemy events trigger." }
+Battle_MergeEnemyPanels = { addr = 0x8009CFEC, type = "func", source = "Removes the entries of the enemy panel list D_801ED9B0 that repeat an enemy type and panel id, keeping the first; called after the enemy events trigger." }
 Battle_DealNoDamage = { addr = 0x8009DA94, type = "func", source = "Marks the damage applied and changes nothing else." }
 Battle_ApplyAbilityDamage = { addr = 0x8009DCC8, type = "func", source = "reads the ability row and stores the computed hp_change into g_Battle.target_record" }
 Battle_CurePoison = { addr = 0x8009DD20, type = "func", source = "Cures STATUS_POISONED on the action target and marks the damage applied." }
@@ -142,7 +142,7 @@ Battle_CalcHeal = { addr = 0x800A30E8, type = "func", source = "Computes the hea
 Battle_AddStatus = { addr = 0x800A31E0, type = "func", source = "Adds the status bits of the mask to one battler (players below 3, enemies from 3): each bit goes into g_Battle.pending_status unless the battler already has it or a blocking status, then the merged word is stored back and published." }
 Battle_CureStatus = { addr = 0x800A36F0, type = "func", source = "Cures the status bits of the mask on one battler: clears them from its status word, restores a confused battler's position and publishes the new status through the work cell." }
 Battle_AddStatClamped = { addr = 0x800A39B4, type = "func", source = "the body stores into g_Battle.target_record" }
-Battle_PickAbility = { addr = 0x800A3A10, type = "func", source = "picks an ability for the battler and selection kind, using g_Abilities and rand" }
+Battle_PickAbility = { addr = 0x800A3A10, type = "func", source = "picks an ability for the battler and selection type, using g_Abilities and rand" }
 Battle_MarkDamageApplied = { addr = 0x800A3F28, type = "func", source = "existing bottom-up proposal: ORs BATTLE_STATE_DAMAGE_APPLIED into g_Battle.state and marks the damage row" }
 Battle_InflictStatus = { addr = 0x800A41D8, type = "func", source = "Marks the battle damage applied, then adds the given status mask to the action target through Battle_AddStatus unless the ability picker still holds the action." }
 Battle_RollHpDamage = { addr = 0x800A4294, type = "func", source = "Rolls the damage of the active battler's hp divided by the divisor, scaled by the random percent table D_800B498C and the target's resistance to the action's element; 0 when the target is damage-immune." }
@@ -171,8 +171,8 @@ Battle_FindActorEntry = { addr = 0x800AC754, type = "func", source = "existing p
 Battle_ShowActorEntry = { addr = 0x800AC844, type = "func", source = "Clears the hidden flag of the actor entry entry_id, which draws the battler again." }
 Battle_CopyActorEntry = { addr = 0x800AC870, type = "func", source = "Copies a record into the actor entry entry_id: mode 0 copies its state fields and marks the entry, mode 1 copies its position." }
 Actor_Clear = { addr = 0x800ACFF4, type = "func", source = "Clears an actor record." }
-Battle_IsEnemyDefeated = { addr = 0x800AD044, type = "func", source = "Tests the bit of an enemy kind in the bit set D_80144F60 that Battle_DefeatEnemy fills; Battle_InitEnemy stores the result in the battler's unk_7F, which the enemy name panel reads." }
-Battle_SetEnemyDefeated = { addr = 0x800AD074, type = "func", source = "Sets the bit of an enemy kind in the bit set D_80144F60; Battle_DefeatEnemy calls it and Battle_IsEnemyDefeated reads it." }
+Battle_IsEnemyDefeated = { addr = 0x800AD044, type = "func", source = "Tests the bit of an enemy type in the bit set D_80144F60 that Battle_DefeatEnemy fills; Battle_InitEnemy stores the result in the battler's unk_7F, which the enemy name panel reads." }
+Battle_SetEnemyDefeated = { addr = 0x800AD074, type = "func", source = "Sets the bit of an enemy type in the bit set D_80144F60; Battle_DefeatEnemy calls it and Battle_IsEnemyDefeated reads it." }
 Battle_LoadSelectionEffect = { addr = 0x800AE1F8, type = "func", source = "Loads the effect module of a battle selection: the row of g_BattleSelections that the action selects gives the EMI slot, which the loader streams in." }
 Battle_AllocActionEffect = { addr = 0x800AE260, type = "func", source = "sets the action id, allocates a battle action effect from the action table and stores its target" }
 Battle_StartScreenFade = { addr = 0x800AE390, type = "func", source = "same body as emi/battle/battle/03@0x801E6990 Battle_StartScreenFade" }
@@ -245,7 +245,7 @@ s_BattlePanelEquipLabel = { addr = 0x800B6F40, source = "Label for the equip ent
 s_BattleEquipment = { addr = 0x800B6F50, source = "The six equipment item ids of the battle panel character: weapon, shield, helmet, armor and two accessories." }
 g_MenuEquipChoiceIds = { addr = 0x800B6F70, source = "the item ids of the equip list: the inventory rows the party member can equip in the chosen slot, then zeros" }
 g_MenuEquipChoiceCounts = { addr = 0x800B6FF0, source = "the held counts of the g_MenuEquipChoiceIds rows" }
-g_BattleEnemyEvents = { addr = 0x800E407C, source = "The event packets of each enemy kind record of the encounter block, one 0x88-byte record per kind; Battle_TriggerEnemyEvents walks them." }
+g_BattleEnemyEvents = { addr = 0x800E407C, source = "The event packets of each enemy type record of the encounter block, one 0x88-byte record per type; Battle_TriggerEnemyEvents walks them." }
 D_801454F4 = { addr = 0x801454F4, source = "Group index of each battle selection row, 3 bytes per row, row number D_8014857A." }
 D_80145F04 = { addr = 0x80145F04, source = "The battle panel records, stride 0x140, one per party slot: Battle_RescaleStats and the battle overlays read a member's stats, name and command state from a row." }
 D_80145F2A = { addr = 0x80145F2A, size = 0x2, source = "Halfword cell written by func_800A4458 and read by func_8009F010" }

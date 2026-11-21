@@ -4,11 +4,11 @@ MATCH void func_800C1B14(void) {
     PartyMember* saved;
     PartyMember* battler;
     PartyMember* work;
-    u8           kind;
+    u8           type;
 
     g_Task->header.mode += 1;
-    kind           = g_BattleEnemyBattlers[0].type;
-    g_Task->unk_09 = ENCOUNTER_ENEMIES[kind].unk_84[2];
+    type           = g_BattleEnemyBattlers[0].type;
+    g_Task->unk_09 = ENCOUNTER_ENEMIES[type].unk_84[2];
     g_Task->timer  = 45;
 
     battler = g_BattleEffectBattler;

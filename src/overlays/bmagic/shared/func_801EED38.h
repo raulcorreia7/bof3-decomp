@@ -1,4 +1,4 @@
-/* Clears the sparkle pool, copies the facing and position of the selected battler into the effect, and spawns the sparkles of EFFECT_SPARKLE_KIND, each group of four with a longer launch delay. */
+/* Clears the sparkle pool, copies the facing and position of the selected battler into the effect, and spawns the sparkles of EFFECT_SPARKLE_TYPE, each group of four with a longer launch delay. */
 /* func_801EED38 (magic070), func_801EED38 (magic071), func_801EED38 (magic072) */
 MATCH void func_801EED38(void) {
     PartyMember* battler;
@@ -11,7 +11,7 @@ MATCH void func_801EED38(void) {
         D_801F01B4[i].header.mode  = 0;
         D_801F01B4[i].header.step  = 0;
     }
-    g_Task->unk_04 = EFFECT_SPARKLE_KIND;
+    g_Task->unk_04 = EFFECT_SPARKLE_TYPE;
     battler        = g_Battle.selected_actor;
     g_Task->facing = battler->facing;
     g_Task->pos.x  = battler->pos.x;

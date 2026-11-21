@@ -5,7 +5,7 @@
  */
 
 /* runs the queued step: while not retreating and the enemy's spin flag is set it clears the gate and arms
- * the retreat; otherwise it re-arms the gate from the kind and flag records and reseeds the step and tint fields.
+ * the retreat; otherwise it re-arms the gate from the type and flag records and reseeds the step and tint fields.
  */
 MATCH void func_801E020C(void) {
     PartyMember* work;

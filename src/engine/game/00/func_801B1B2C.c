@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH s32 func_801B1B2C(s32 x, s32 y, s32 probe_kind, s32 flags) {
+MATCH s32 func_801B1B2C(s32 x, s32 y, s32 probe_type, s32 flags) {
     s16    value;
     s32    mode;
     s32    px;

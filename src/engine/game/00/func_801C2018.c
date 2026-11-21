@@ -2,16 +2,16 @@
 
 MATCH void func_801C2018(void) {
     s32 selected_record_count;
-    s32 kind_10_count;
-    s32 record_kind_11;
-    s32 record_kind_10;
+    s32 type_10_count;
+    s32 record_type_11;
+    s32 record_type_10;
     s32 counter_threshold;
     s32 record_byte_offset;
     u8* input_bits;
     s32 bit_index;
     u8* status_byte_ptr;
     u8* counter_word;
-    u8  record_kind;
+    u8  record_type;
     u8  selector_thresholds[10];
     u8* party_state;
     u8* gate_byte_ptr;
@@ -26,26 +26,26 @@ MATCH void func_801C2018(void) {
         bit_index     = 246;
         gate_byte_ptr = &D_801455C3;
         if (*gate_byte_ptr != 0) {
-            record_kind_10 = 0xA;
-            record_kind_11 = 0xB;
+            record_type_10 = 0xA;
+            record_type_11 = 0xB;
             counter_word   = gate_byte_ptr - 0x1B;
         loop_7:
             /* Retail passes the full s32 selector despite the helpers' u8 prototypes. */
             if (((s32 (*)(void*, s32))SYS_TestFlag)(&g_SceneEventFlags, bit_index) == 0) {
-                kind_10_count         = 0;
+                type_10_count         = 0;
                 selected_record_count = 0;
                 for (record_byte_offset = 0; record_byte_offset < FAIRY_JOB_COUNT * FAIRY_JOB_STRIDE; record_byte_offset += FAIRY_JOB_STRIDE) {
                     if (((u8*)g_FairyJobs)[record_byte_offset] != 0) {
-                        record_kind = ((u8*)g_FairyJobs)[record_byte_offset + 1];
-                        if (record_kind == record_kind_10) {
-                            kind_10_count += 1;
-                        } else if (record_kind == record_kind_11) {
+                        record_type = ((u8*)g_FairyJobs)[record_byte_offset + 1];
+                        if (record_type == record_type_10) {
+                            type_10_count += 1;
+                        } else if (record_type == record_type_11) {
                             selected_record_count += 1;
                         }
                     }
                 }
                 if ((bit_index == 246) || (bit_index == 249) || (bit_index == 252)) {
-                    selected_record_count = kind_10_count;
+                    selected_record_count = type_10_count;
                 }
                 if ((u8)selected_record_count != 0) {
                     *(u32*)counter_word = (*(u32*)counter_word + 1);

@@ -28,7 +28,7 @@ NON_MATCHING void Battle_ChooseAbility(void) {
     s32                     trigger;
     s32                     ring_index;
     u8*                     handle;
-    u8                      kind;
+    u8                      type;
     s32                     cursor;
 
     phase = (u8*)&g_BattleChoicePhase;
@@ -107,8 +107,8 @@ NON_MATCHING void Battle_ChooseAbility(void) {
     sel                        = (BattleSelectionScratch*)((u8*)sel + 0xB);
     group                      = (BattleSelectionGroup*)sel;
     entry                      = Party_GetAbilities(message[0], group->index, 1);
-    kind                       = entry[group->cursor];
-    handle                     = Message_GetText(*(u16*)(D_801CA71E + kind * 0x14));
+    type                       = entry[group->cursor];
+    handle                     = Message_GetText(*(u16*)(D_801CA71E + type * 0x14));
     ring_index                 = (D_801EC328 - 1) & 0xF;
     D_801EB5B4[ring_index * 2] = handle;
     if (g_MenuPanelTasks[16].u.addr.unk_12 != 0) {
@@ -137,9 +137,9 @@ NON_MATCHING void Battle_ChooseAbility(void) {
         D_801454F5[g_MenuPanelTasks[16].unk_0A * 3]        = g_MenuPanelTasks[16].u.addr.unk_10;
         D_801454F6[g_MenuPanelTasks[16].unk_0A * 3]        = group->cursor;
         entry                                              = Party_GetAbilities(message[0], group->index, 1);
-        kind                                               = entry[group->cursor];
+        type                                               = entry[group->cursor];
         turn                                               = g_BattleActorTurn;
-        turn->command.id                                   = kind;
+        turn->command.id                                   = type;
         g_BattleChoicePhase                                = 1u;
         D_801485DC                                         = 0u;
         if (turn->command.id == 0x97u) {

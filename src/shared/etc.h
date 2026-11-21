@@ -124,7 +124,7 @@ extern void Menu_DrawItemRow(s32 x0, s32 y0, s32 item, s32 selection);
 /* func_801D95F4 */
 void        Menu_DrawEquipment(s32 origin_x, s32 origin_y, s32 index, s32 selection);
 /* func_801DA2F4 */
-void        Menu_DrawZennyWindow(s32 panel_x, s32 panel_y, s32 panel_kind, s32 caption_value);
+void        Menu_DrawZennyWindow(s32 panel_x, s32 panel_y, s32 panel_type, s32 caption_value);
 /* func_801DA678 */
 u8          Menu_ChooseYesNo(void);
 /* func_801D504C */

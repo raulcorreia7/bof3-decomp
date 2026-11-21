@@ -60,7 +60,7 @@ MATCH void func_801F8CE4(void) {
             SYS_SetFlag(g_SceneEventFlags, 0x46);
             Game_RequestAreaChange(AREA_ID_CAER_XHAN_LIFT_RIDE, TO_COORD(28), TO_COORD(12), AREA_ENTRY_MAP_LOADING | FACING_UP_LEFT);
             g_GameEntryMode         = GAME_NONE;
-            g_GameRequestKind       = GAME_NONE;
+            g_GameRequestType       = GAME_NONE;
             g_GamePrevSelection     = 0x27;
             g_ScenarioState.step_05 = 0xF;
             break;
@@ -125,7 +125,7 @@ MATCH void func_801F8CE4(void) {
             g_ScriptVars[3] = 0x20;
             Game_RequestAreaChange(AREA_ID_MYRIA_STATION_WORKERS, TO_COORD(40), TO_COORD(99), 0x8A);
             g_GameEntryMode         = GAME_NONE;
-            g_GameRequestKind       = GAME_NONE;
+            g_GameRequestType       = GAME_NONE;
             g_GamePrevSelection     = GAME_NONE;
             g_ScenarioState.step_05 = 0x17;
             break;

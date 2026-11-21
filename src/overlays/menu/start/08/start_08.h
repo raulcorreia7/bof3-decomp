@@ -502,7 +502,7 @@ extern u8              s_ChoiceMenuCursors[12];
 extern u8              g_SndMono_nv;
 extern u8              s_SkillOrderCursors[4][4];
 extern u8              s_SkillOrderGroups[4][6];
-extern u8              s_SkillOrderKinds[3][6];
+extern u8              s_SkillOrderTypes[3][6];
 extern Callback        g_MenuCampSubSteps[5];
 extern Callback        g_MenuCampSteps[5];
 /* D_801ED05C */
@@ -598,7 +598,7 @@ extern void func_801DC150(s16 x, s16 y, u8 index, u8 flag);
 void        Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle);
 extern void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
 void        Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shaded, s32 unused);
-void        Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 item_kind, u8 item_id);
+void        Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 item_type, u8 item_id);
 void        Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height);
 /* func_801DFBF4 */
 extern void Menu_DrawInventoryWindow(MenuPanelTask* task);
@@ -613,7 +613,7 @@ void        func_801E18D0(void);
 void        func_801E1C20(void);
 void        func_801E206C(void);
 void        func_801E2408(void);
-extern void func_801E2668(s32 icon_kind, s32 icon_x, s32 icon_y);
+extern void func_801E2668(s32 icon_type, s32 icon_x, s32 icon_y);
 extern void func_801E26A8(s32 x, s32 y);
 void        Menu_DrawConfigRow(s32 x, s32 y, s32 option_index, s32 select_step);
 u8*         Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, s32 glyph_left, s32 glyph_right);
@@ -926,7 +926,7 @@ void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 
 /* func_801E7608 */
 void Menu_DrawBackdrop(void);
-void func_801E7720(s16 tile_x, s8 tile_kind);
+void func_801E7720(s16 tile_x, s8 tile_type);
 
 /* Step the master panel up 16 pixels and stop it at y 62. The member declares task. */
 #define MENU_STEP_PANEL_UP()          \

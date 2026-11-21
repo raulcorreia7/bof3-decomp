@@ -1,4 +1,4 @@
-/* Probes the route cell the character stands in: builds the 16.16 position from the work origin and the route velocity table, asks the resident record probe for a nearby field record and checks the cell and its two +1 neighbours for map kind 0xF2. Returns nonzero when any probe hits. */
+/* Probes the route cell the character stands in: builds the 16.16 position from the work origin and the route velocity table, asks the resident record probe for a nearby field record and checks the cell and its two +1 neighbours for map type 0xF2. Returns nonzero when any probe hits. */
 MATCH s32 PlChar_ProbeFacingCell(void) {
     FAKE_REG(s32, found, "v0");
     FAKE_REG(s32, hit, "s1");

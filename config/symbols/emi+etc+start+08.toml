@@ -180,7 +180,7 @@ g_NameEntryCommandLabels = { addr = 0x801ED1B8, source = "the name entry screen'
 g_NameEntryGridDot = { addr = 0x801ED1D4, source = "the dot string the name entry control window repeats in its 5x3 grid beside the command labels" }
 s_PanelIconSelectors = { addr = 0x801ED1D8, source = "func_801E7210 reads the three selector bytes per panel slot from this table" }
 s_PanelIconValues = { addr = 0x801ED1F0, source = "func_801E7210 fills the panel icon bytes from this value table" }
-g_SaveRecordTypeCommands = { addr = 0x801ED2D4, source = "func_801E8C9C picks the record-kind handler through this table" }
+g_SaveRecordTypeCommands = { addr = 0x801ED2D4, source = "func_801E8C9C picks the record-type handler through this table" }
 g_MenuStartPanelModes = { addr = 0x801ED330, source = "the MenuStart panel handlers, indexed by the panel task mode; the dispatcher of each is one entry" }
 g_MenuStartCharacterSteps = { addr = 0x801ED384, source = "the state handlers of panel mode 0, indexed by the panel task state" }
 g_MenuStartZennySteps = { addr = 0x801ED3B0, source = "the state handlers of panel mode 1, indexed by the panel task state" }
@@ -192,7 +192,7 @@ g_MenuStartEquipmentSteps = { addr = 0x801ED3FC, source = "the state handlers of
 g_MenuStartPanel7Steps = { addr = 0x801ED408, source = "the state handlers of panel mode 7, indexed by the panel task state" }
 g_MenuStartPanel8Steps = { addr = 0x801ED414, source = "the state handlers of panel mode 8, indexed by the panel task state" }
 g_MenuStartMessageSteps = { addr = 0x801ED420, source = "the state handlers of panel mode 9, indexed by the panel task state" }
-g_MenuStartCursorFrames = { addr = 0x801ED42C, size = 0x10, source = "The width and height of the frame the cursor-frame panel draws, indexed by the panel's frame kind" }
+g_MenuStartCursorFrames = { addr = 0x801ED42C, size = 0x10, source = "The width and height of the frame the cursor-frame panel draws, indexed by the panel's frame type" }
 g_MenuStartPanel11Steps = { addr = 0x801ED43C, source = "the state handlers of panel mode 11, indexed by the panel task state" }
 g_MenuStartInventorySteps = { addr = 0x801ED448, source = "the state handlers of panel mode 12, indexed by the panel task state" }
 g_MenuStartCommandsSteps = { addr = 0x801ED45C, source = "the state handlers of panel mode 13, indexed by the panel task state" }
@@ -225,7 +225,7 @@ s_ChoiceMenuValues = { addr = 0x801ED894, source = "Value of the choice menu per
 s_ChoiceMenuCursors = { addr = 0x801ED89C, source = "Cursor of the choice menu per party slot, saved by func_801D3174." }
 s_SkillOrderCursors = { addr = 0x801ED8A8, source = "Skill order cursor per party slot and column, saved by Menu_ReorderSkills; Menu_SwapPartyMembers swaps the rows." }
 s_SkillOrderGroups = { addr = 0x801ED8B8, source = "The six skill order group bytes of each party slot, cleared by func_801D177C and swapped by Menu_SwapPartyMembers." }
-s_SkillOrderKinds = { addr = 0x801ED8D0, source = "The six skill order kind bytes of each party slot, cleared by func_801D177C and swapped by Menu_SwapPartyMembers." }
+s_SkillOrderTypes = { addr = 0x801ED8D0, source = "The six skill order type bytes of each party slot, cleared by func_801D177C and swapped by Menu_SwapPartyMembers." }
 SAVE_AccessFile = { addr = 0x801EEC30, type = "func", source = "Reads or writes the save file on the memory card: waits out the card status, loads the directory, opens the save file and transfers it through SAVE_TransferFile (body in start/09)." }
 func_801EFCA8 = { addr = 0x801EFCA8, type = "func", source = "The save-directory scan SAVE_ScanDirectory, which counts the save files whose name starts with the prefix; start/09 holds its body." }
 # START.EMI entry 9, streamed with entry 8 (boot-slice-1018 report, stage 5).

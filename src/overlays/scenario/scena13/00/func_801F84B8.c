@@ -37,7 +37,7 @@ MATCH void func_801F84B8(void) {
                 g_ScriptVars[0] = 0;
                 SYS_SetFlag(g_SceneFlags, 0);
                 func_8019FA28(0x7E, 0x4E0000, 0x2C8000, 1);
-                g_GameRequestKind       = 0xFF;
+                g_GameRequestType       = 0xFF;
                 g_GameEntryMode         = 0xFF;
                 g_ScenarioState.step_05 = 4;
             }
