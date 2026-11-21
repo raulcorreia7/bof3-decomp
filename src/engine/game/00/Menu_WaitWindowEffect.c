@@ -1,6 +1,8 @@
 #include "game_00.h"
 
-MATCH void func_80198C38(u8 wait_steps) {
+/* func_80198C38 */
+/* Runs menu frames until the window effect is idle. */
+MATCH void Menu_WaitWindowEffect(u8 wait_steps) {
     do {
         SYS_ThreadWait(1);
         if (WINDOW_EFFECT_IDLE() && wait_steps == 0) {

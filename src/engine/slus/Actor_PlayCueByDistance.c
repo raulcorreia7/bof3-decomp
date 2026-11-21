@@ -1,6 +1,8 @@
 #include "engine/slus/slus.h"
 
-MATCH void func_8015D820(u16 cue_id, u16 index) {
+/* func_8015D820 */
+/* Plays a cue when the point is within a range band of the actor. */
+MATCH void Actor_PlayCueByDistance(u16 cue_id, u16 index) {
     if (D_80145EC6 <= COORD_INT(g_Actors[index].pos.x) + 22 && D_80145EC6 >= COORD_INT(g_Actors[index].pos.x) - 22 && D_80145ECA <= COORD_INT(g_Actors[index].pos.y) + 22 &&
         D_80145ECA >= COORD_INT(g_Actors[index].pos.y) - 22) {
         D_8018B3D8 = D_80182308[0];

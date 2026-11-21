@@ -1,6 +1,8 @@
 #include "game_00.h"
 
-MATCH void func_80198BC4(u32 wait_steps) {
+/* func_80198BC4 */
+/* Runs area frames until the window effect is idle. */
+MATCH void Area_WaitWindowEffect(u32 wait_steps) {
     u8 force_update;
 
     force_update = wait_steps;

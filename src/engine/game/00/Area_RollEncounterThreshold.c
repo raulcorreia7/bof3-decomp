@@ -17,7 +17,7 @@ MATCH void Area_RollEncounterThreshold(u32 keep_armed) {
         D_80145FB8 = 0;
         return;
     }
-    entry = func_801B3C3C(D_80145EC6, D_80145ECA);
+    entry = Area_FindEncounterZone(D_80145EC6, D_80145ECA);
     total = s_EncounterStepThresholds[entry[4] * 2];
     if (total == 0) {
         D_80145FB8 = 0;

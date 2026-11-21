@@ -1,6 +1,8 @@
 #include "game_00.h"
 
-MATCH u8* func_801B3C3C(s32 bounds_x, s32 bounds_y) {
+/* func_801B3C3C */
+/* Returns the encounter zone entry of the current area that contains the cell. */
+MATCH u8* Area_FindEncounterZone(s32 bounds_x, s32 bounds_y) {
     s32 x;
     s32 y;
     u8* entry;

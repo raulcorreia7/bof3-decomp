@@ -1,6 +1,8 @@
 #include "game_00.h"
 
-MATCH void func_801C3598(void) {
+/* func_801C3598 */
+/* Counts down the confusion of the active character and clears it at zero. */
+MATCH void Party_TickConfusion(void) {
     u8 index;
 
     index = g_Game.current->character_index;

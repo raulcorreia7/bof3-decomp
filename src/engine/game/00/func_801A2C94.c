@@ -37,6 +37,6 @@ MATCH u8 func_801A2C94(Actor* actor) {
         goto block_11; /* the two records share the exit */
     }
 block_11:
-    func_801A2C10(entity);
+    Actor_TurnRandom(entity);
     return func_801A2A04(entity) & BYTE_MASK;
 }

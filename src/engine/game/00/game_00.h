@@ -562,7 +562,8 @@ void Party_ShowBattlers(void);
 s8   Actor_Run(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 landing_flags);
 /* The retail callers pass the id unnarrowed; the shared prototype narrows it. */
 #define Actor_SpawnHelper ((s32 (*)())Actor_SpawnHelper)
-void func_8015D820(u16 cue_id, u16 index);
+/* func_8015D820 */
+void Actor_PlayCueByDistance(u16 cue_id, u16 index);
 void func_80164020();
 void Party_ResetBattlers(void);
 void Party_ClearActiveBattlers(void);
@@ -614,8 +615,10 @@ void    Game_RunScene(void);
 void    Game_OrbitSceneCamera(void);
 /* func_80198B6C */
 void    Game_EndSceneCamera(void);
-void    func_80198BC4(u32 wait_steps);
-void    func_80198C38(u8 wait_steps);
+/* func_80198BC4 */
+void    Area_WaitWindowEffect(u32 wait_steps);
+/* func_80198C38 */
+void    Menu_WaitWindowEffect(u8 wait_steps);
 /* func_80198CAC */
 void    Game_UpdateClock(void);
 void    func_80198F1C(void);
@@ -759,7 +762,8 @@ void    func_8019FF88(s32 entry_mode, s32 entry_index, s32 entry_flags);
 void    func_801A02E8(void);
 u8      func_801A0348(s16 map_x, s16 map_y);
 void    func_801A0380(s16 x, s16 y, u16 kind);
-u8*     func_801A0490(s32 map_x, s32 map_y, s32 table_index);
+/* func_801A0490 */
+u8*     Area_FindEncounterZoneOf(s32 map_x, s32 map_y, s32 table_index);
 /* func_801A06D8 */
 u32     Actor_RunInteractions(void);
 void    func_801A0AE4(Actor* record);
@@ -789,7 +793,8 @@ void    func_801A2788(s32 step_index);
 void    func_801A27C4(Actor* entity);
 u8      func_801A2A04(Actor* entity);
 void    func_801A2AE4(Actor* entity, u8 route_flag);
-u8      func_801A2C10(void* record);
+/* func_801A2C10 */
+u8      Actor_TurnRandom(void* record);
 u8      func_801A2C94(Actor* actor);
 u8      func_801A2DB4(Actor* entity);
 u8      func_801A2ED4(Actor* entity, u8 route_step);
@@ -972,7 +977,8 @@ void  func_801B371C(void);
 void  func_801B3768(void);
 void  func_801B3A3C(void);
 void  func_801B3BFC(void);
-u8*   func_801B3C3C(s32 bounds_x, s32 bounds_y);
+/* func_801B3C3C */
+u8*   Area_FindEncounterZone(s32 bounds_x, s32 bounds_y);
 void  Area_RollEncounterThreshold(u32 keep_armed);
 s32   Area_CanStartEncounter(void);
 s32   func_801B4150(void);
@@ -985,9 +991,12 @@ bool  func_801B544C(void);
 bool  Party_CanSwitchLeader(void);
 /* func_801B5684 */
 bool  Game_RequestLeaderSwitch(void);
-bool  func_801B5758(void);
-bool  func_801B5884(void);
-bool  func_801B5910(void);
+/* func_801B5758 */
+bool  Game_RequestFieldMenu(void);
+/* func_801B5884 */
+bool  Game_RequestCameraLook(void);
+/* func_801B5910 */
+bool  Game_RequestSceneCamera(void);
 /* func_801B5AE4 */
 s8    Game_FindRockAhead(s32 route_index, s32 route_flags);
 /* func_801B5BDC */

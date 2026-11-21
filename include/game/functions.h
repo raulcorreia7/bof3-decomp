@@ -227,8 +227,9 @@ bool  func_801C29A0(s8 tuning_delta);
 void  func_801C2BEC(void);
 /* func_801C329C */
 void  func_801C329C(void);
+/* Party_TickConfusion */
 /* func_801C3598 */
-void  func_801C3598(void);
+void  Party_TickConfusion(void);
 /* func_801C4C48 */
 void  func_801C4C48(void);
 /* Area_SetFacingOffsetX */

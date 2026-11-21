@@ -2,7 +2,9 @@
 
 /* returns 1 when the first byte of the record at cursor equals g_GameCellType.
  */
-MATCH s32 func_8015B6D0(u8** cursor) {
+/* func_8015B6D0 */
+/* Script condition: the record byte equals the current cell type. */
+MATCH s32 Game_IsCellTypeEqual(u8** cursor) {
     u8 result; /* the record byte, then the verdict */
 
     result = **cursor;

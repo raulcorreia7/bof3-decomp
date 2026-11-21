@@ -47,7 +47,7 @@ MATCH void func_801A96E4(ScriptState* state, u8* base) {
             state->cursor += 4;
             break;
         case 0xBD:
-            func_8015D820(*(base + state->cursor + 2) | (*(base + state->cursor + 1) << 8), *(base + state->cursor + 3));
+            Actor_PlayCueByDistance(*(base + state->cursor + 2) | (*(base + state->cursor + 1) << 8), *(base + state->cursor + 3));
             state->cursor += 3;
             break;
         case 0xBE:

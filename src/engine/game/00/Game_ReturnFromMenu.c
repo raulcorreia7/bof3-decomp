@@ -8,7 +8,7 @@ MATCH void Game_ReturnFromMenu(void) {
 
     Game_UpdateMenuFrame();
     UI_SetMode(2u);
-    func_80198C38(0u);
+    Menu_WaitWindowEffect(0u);
     SYS_ThreadWait(1u);
     if (D_80148661 != 0u) {
         EMI_LoadPartyArchives(g_PartyFieldOrder[0], g_PartyFieldOrder[1], g_PartyFieldOrder[2], 0u);
@@ -30,7 +30,7 @@ MATCH void Game_ReturnFromMenu(void) {
         func_801F03D0();
     }
     UI_SetMode(3u);
-    func_80198BC4(1u);
+    Area_WaitWindowEffect(1u);
     if ((D_80143F20 == 0x6Eu) && !(SND_TestEffectVoicesBusy(&sep_index, &seq_index) & BYTE_MASK)) {
         SND_FadeInSequence(sep_index, seq_index, 0x14, 0x10);
     }

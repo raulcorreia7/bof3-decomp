@@ -325,7 +325,7 @@ typedef struct {
 ASSERT_SIZE(WindowTextRow, 0x06);
 
 /* A tile rectangle of a map and what the field code reads once the party stands in it.
- * func_801A0490 and func_801B3C3C compare the four corners as unsigned bytes against (x, y);
+ * Area_FindEncounterZoneOf and Area_FindEncounterZone compare the four corners as unsigned bytes against (x, y);
  * `rate` indexes the D_801CD1B8 pair table (Area_RollEncounterThreshold), `kind` is returned by func_801A0348, and
  * func_801A0380 uses `seed` directly when `pick` is 0, else `seed` indexes the D_80181E40 picker. */
 typedef struct {
@@ -1197,15 +1197,19 @@ void                              func_8015B2AC(s16* out, s32* in);
 s32                               Game_IsScenarioEqual(u8** cursor);
 s32                               Game_IsAreaEqual(u8** cursor);
 s32                               Game_TestSceneFlag(u8** cursor);
-s32                               func_8015B6A8(u8** cursor);
-s32                               func_8015B6D0(u8** cursor);
-s32                               func_8015B6F8(u8** cursor);
+/* func_8015B6A8 */
+s32                               Game_IsScenarioStateEqual(u8** cursor);
+/* func_8015B6D0 */
+s32                               Game_IsCellTypeEqual(u8** cursor);
+/* func_8015B6F8 */
+s32                               Game_TestScenarioFlag(u8** cursor);
 /* func_8015B73C */
 s32                               Game_IsLeaderEqual(u8** cursor);
 s32                               Game_TestEventFlag(u8** cursor);
 s32                               Game_HasVitalItem(u8** cursor);
 s32                               Game_IsScenarioAtMost(u8** cursor);
-s32                               func_8015B7F0(u8** cursor);
+/* func_8015B7F0 */
+s32                               Game_HasPartyFlag(u8** cursor);
 s32                               func_8015B83C(u8** cursor);
 s32                               Game_IsScriptVar0Equal(u8** cursor);
 s32                               Game_IsScriptVar1Equal(u8** cursor);
@@ -1214,7 +1218,8 @@ s32                               Game_IsScriptVar3Equal(u8** cursor);
 s32                               Game_SetScriptVar(u8* operand);
 s32                               Game_IsScriptVarEqual(u8* operand);
 s32                               Game_IncScriptVar(u8* operand);
-s32                               func_8015BABC(void);
+/* func_8015BABC */
+s32                               Game_TestNever(void);
 /* func_8015E994 */
 void                              SND_ReadSeBank0(void);
 /* func_8015EFAC */

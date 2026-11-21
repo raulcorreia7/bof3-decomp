@@ -1,6 +1,8 @@
 #include "game_00.h"
 
-MATCH u8 func_801A2C10(void* record) {
+/* func_801A2C10 */
+/* Turns the current actor to a random odd facing. */
+MATCH u8 Actor_TurnRandom(void* record) {
     u8  value;
     s16 next;
 

@@ -3,7 +3,9 @@
 /* reports bit 0 of the +0x6F flag of the 0xA4-stride record selected by
  * the byte at *cursor.
  */
-MATCH s32 func_8015B7F0(u8** cursor) {
+/* func_8015B7F0 */
+/* Script condition: the named character has the party flag set. */
+MATCH s32 Game_HasPartyFlag(u8** cursor) {
     s16 flags;
 
     flags = g_Characters[**cursor].party_flags;

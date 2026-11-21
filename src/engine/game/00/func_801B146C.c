@@ -36,7 +36,7 @@ MATCH void func_801B146C(void) {
     if (!(g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP)) {
         func_801C3828();
     }
-    func_801C3598();
+    Party_TickConfusion();
     func_801C2BEC();
     if (!(func_801C3790(0) & BYTE_MASK) && !(func_801C37DC(0) & BYTE_MASK) && !(func_801C2AAC() & BYTE_MASK)) {
         if (func_801C2B4C() & BYTE_MASK) {

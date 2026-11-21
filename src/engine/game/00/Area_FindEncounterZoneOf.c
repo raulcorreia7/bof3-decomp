@@ -1,6 +1,8 @@
 #include "game_00.h"
 
-MATCH u8* func_801A0490(s32 map_x, s32 map_y, s32 table_index) {
+/* func_801A0490 */
+/* Returns the encounter zone entry of an area table index that contains the cell. */
+MATCH u8* Area_FindEncounterZoneOf(s32 map_x, s32 map_y, s32 table_index) {
     s32 x;
     s32 y;
     u8* entry;

@@ -1,6 +1,8 @@
 #include "game_00.h"
 
-MATCH bool func_801B5910(void) {
+/* func_801B5910 */
+/* Starts the scene camera state unless the area load flags forbid it; true when requested. */
+MATCH bool Game_RequestSceneCamera(void) {
     if (!(g_Game.flags & 0x2000)) {
         if (!(g_GameRequestFlags & (AREA_LOAD_FLAG_WORLD_MAP | AREA_LOAD_FLAG_FISHING | AREA_LOAD_FLAG_NO_ACTOR_SCRIPT | AREA_LOAD_FLAG_SHOP)) && (g_InputPressed & PADstart)) {
             Actor_RequestRoute(g_Task->direction);

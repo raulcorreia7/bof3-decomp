@@ -1,6 +1,8 @@
 #include "game_00.h"
 
-MATCH bool func_801B5758(void) {
+/* func_801B5758 */
+/* Opens the field menu on the menu button; true when requested. */
+MATCH bool Game_RequestFieldMenu(void) {
     if (g_InputPressed & g_InputMasks[FIELD_INPUT_MENU]) {
         if (!(g_Game.flags & GAME_FLAG_MENU_LOCK)) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 5));
