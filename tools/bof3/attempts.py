@@ -1,4 +1,4 @@
-"""The rows of ``config/attempts.jsonl``: parse, order, insert and validate. Pure; the caller does the I/O."""
+"""The rows of ``config/attempts.jsonl``: parse, spell and validate. Pure."""
 
 from __future__ import annotations
 
@@ -63,43 +63,9 @@ def spelling(row: Attempt, like: str | None) -> str:
     return json.dumps(asdict(row))
 
 
-def place(lines: list[str], function: str) -> int:
-    """The index a row for ``function`` goes to: after its last row, else its sorted place."""
-    last = None
-    for index, line in enumerate(lines):
-        other = function_of(line)
-        if other == function:
-            last = index
-        elif last is None and other > function:
-            return index
-    return len(lines) if last is None else last + 1
-
-
-def insert(lines: list[str], row: Attempt) -> int:
-    """Insert ``row`` into ``lines`` at its place and return its 1-based line."""
-    index = place(lines, row.function)
-    like = lines[index - 1] if index else (lines[0] if lines else None)
-    lines.insert(index, spelling(row, like))
-    return index + 1
-
-
-def sort(lines: list[str]) -> list[str]:
-    """``lines`` in ``function`` order, each function's rows in the order they hold, without repeats."""
-    seen: set[str] = set()
-    kept: list[str] = []
-    for line in sorted(lines, key=function_of):
-        row = json.dumps(json.loads(line), sort_keys=True)
-        if row not in seen:
-            seen.add(row)
-            kept.append(line)
-    return kept
-
-
 def validate(text: str, label: str) -> list[str]:
-    """Each row outside the schema or the order, as ``label:line: problem``."""
+    """Each row outside the schema, as ``label:line: problem``."""
     found: list[str] = []
-    previous = ""
-    ordered = True
     for number, line in enumerate(text.splitlines(), 1):
         if not line.strip():
             continue
@@ -112,11 +78,4 @@ def validate(text: str, label: str) -> list[str]:
             keys = tuple(row) if isinstance(row, dict) else (type(row).__name__,)
             found.append(f"{label}:{number}: keys {list(keys)} instead of {list(KEYS)}")
             continue
-        if ordered and row["function"] < previous:
-            found.append(
-                f"{label}:{number}: {row['function']} sorts before {previous}; "
-                "keep the rows in function order with tools/attempts.py sort"
-            )
-            ordered = False
-        previous = row["function"]
     return found

@@ -55,8 +55,8 @@ BIOS or SDK payload.
 The game is not in this repository. Dump your own US disc (a Redump-verified CUE sheet and two BIN
 tracks); setup checks each track against [`config/disc.toml`](#disc-manifest) and never uploads it.
 
-Without a disc (`tools/setup.sh --dev --no-payloads --no-sdk`) you can edit code and docs, and run `format`,
-`format-check`, `check-tree`, `externs`, `include-asm`, `markers`, `drafts`, `names`, `addrs`, `kept`, `check-headers`, `typeloss`, `quality` and `meson test`. You cannot build an
+Without a disc (`tools/setup.sh --dev --no-payloads --no-sdk`) you can edit code and docs, and run `format` and
+every [pre-push](../tools/README.md#pre-push) check whose Needs is not `disc`. You cannot build an
 image, check bytes, read the split assembly, write the report or use `bin/rz` and `bin/coddog`:
 all of them need the extracted retail data. Matching a function needs the disc.
 
@@ -116,7 +116,7 @@ check: the local `check` on every touched image is the proof.
 | `check-headers`   | Compile every public header on its own.                                                                                                                                                                                                                                                                      |
 | `check-unity`     | Parse every image's sources as one unit, to find a type, prototype or macro that two files declare differently. A check, never linked.                                                                                                                                                                       |
 | `check-plain`     | Compile every C source as plain C, without `MATCHING`, so no source depends on a matching helper.                                                                                                                                                                                                            |
-| `check-tree`      | Reject tracked retail data, files over 1 MiB (`config/symbols.toml`: 4 MiB) struct members of enum type, and a prototype that differs from its definition without a `sig-kept:` note.                                                                                                                        |
+| `check-tree`      | Reject what [pre-push](../tools/README.md#pre-push) lists for it.                                                                                                                                                                                                                                            |
 | `include-asm`     | Reject more `INCLUDE_ASM` lines than at the [base ref](#commands), in total or in any one image. An image is keyed by the last two folders of its source directory (`game/00`; `slus` and `logo` stand alone), so a lost match hidden by a new one elsewhere still fails and the key survives a folder move. |
 | `format`          | Format C, Python, TOML and Markdown.                                                                                                                                                                                                                                                                         |
 | `format-check`    | The same steps in check mode; no file changes.                                                                                                                                                                                                                                                               |
@@ -206,9 +206,8 @@ UTF-8, no trailing spaces, a fixed key order, and the row order the file keeps. 
 quoting. `config/attempts.jsonl` holds the failed attempts and `config/sdk/library-units.jsonl` the
 SDK units. An attempts row carries exactly `function`, `tried`, `first_diff`, `score`, in that
 order: `tools/worklist.py` reads those keys directly, and `tools/check_markers.py` fails on another
-key set or another order. The rows stay in `function` order, with each function's rows in the order
-they were tried, so two branches that add rows merge cleanly: `tools/attempts.py add` writes a row
-at its place and `tools/attempts.py sort` restores the order after a merge interleaved rows. The
+key set or another order. The file is append-only: `tools/attempts.py add` appends a row and
+nothing edits a row. The
 build graph that `tools/split.py` prints for `meson.build` is the
 exception: it stays tab-separated, because Meson has no JSON parser and it is a pipe, not a file.
 

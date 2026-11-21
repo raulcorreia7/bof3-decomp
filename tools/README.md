@@ -27,7 +27,7 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Rank the values that live across a call  | `tools/alloc_priority.py <file.c> <func>`                                | same                                                      |
 | Try several full bodies, stop at a match | `tools/try_variants.py <target>@0x<ADDR> <file.c> variants.py`           | same                                                      |
 | Print assembly, attempts and C file      | `tools/match_context.sh <target>@0x<ADDR>`                               | same                                                      |
-| Add an attempts row at its place         | `tools/attempts.py add --function <target>@0x<ADDR> --tried TEXT`        | `tools/attempts.py sort`                                  |
+| Append an attempts row                   | `tools/attempts.py add --function <target>@0x<ADDR> --tried TEXT`        | `--help`                                                  |
 | Try one C body for an assembly function  | `tools/try_body.py <target>@<func> body.c`                               | [try body](#try-body)                                     |
 | Draft open functions with m2c, keep exact | `tools/m2c_sweep.py --sample 200`, `tools/m2c_sweep.py --image <image>` | [m2c sweep](#m2c-sweep)                                   |
 | Write the seed bundle of one function    | `tools/seed.py <target>@<func>`                                          | [m2c sweep](#m2c-sweep)                                   |
@@ -200,9 +200,9 @@ other metrics. `--queue --jsonl` writes the same rows as objects. A commit messa
 
 ## Pre-push
 
-`pre_push.sh [BASE_REF]` (Meson target `pre-push`) runs the 18 checks below, one line each, and keeps
-the logs in `build/pre-push/`. CI runs it too. `BASE_REF` defaults to the newest of `public/main`,
-`origin/main` and `main`.
+`pre_push.sh [BASE_REF]` (Meson target `pre-push`) runs the checks in `tools/gate.txt`, one line each,
+and keeps the logs in `build/pre-push/`. CI runs it too. `BASE_REF` defaults to the newest of
+`public/main`, `origin/main` and `main`. This table lists what fails each check.
 
 | Check           | Fails when                                                                              | Needs      |
 | --------------- | --------------------------------------------------------------------------------------- | ---------- |
@@ -212,10 +212,10 @@ the logs in `build/pre-push/`. CI runs it too. `BASE_REF` defaults to the newest
 | `check-tree`    | an added line has a register pin, decompiler local, stack name, task offset, m2c macro, raw address, duplicate prototype, wrong header guard or shared body; a prototype differs from its definition without a `sig-kept:` note; a tracked file is game data or over 1 MiB, a relative include or import, or an enum member | none |
 | `externs`       | a `.c` file gains an `extern` line                                                      | none       |
 | `include-asm`   | there are more `INCLUDE_ASM` lines than at the base ref, in total or in one image       | none       |
-| `format-check`  | C, Python, TOML or Markdown differs from the formatter                                  | the tools  |
-| `meson test`    | a tool test fails                                                                       | Python     |
+| `format-check`  | C, Python, TOML or Markdown differs from the formatter                                  | none       |
+| `test`          | a tool test fails                                                                       | none       |
 | `typeloss`      | a rename, move or retype weakens a type                                                 | none       |
-| `markers`       | a definition in `src/` lacks exactly one status marker, a change adds a `NON_MATCHING` draft with no `config/attempts.jsonl` object, or an `attempts.jsonl` row carries other keys, another key order, or sorts before the row above it | none |
+| `markers`       | a definition in `src/` lacks exactly one status marker, a change adds a `NON_MATCHING` draft with no `config/attempts.jsonl` object, or an `attempts.jsonl` row carries other keys or another key order | none |
 | `drafts`        | a `.c` file the change touches holds a `NON_MATCHING` draft that does not compile with `-DNON_MATCHING` | compiler   |
 | `names`         | a new name carries an 8-digit address, a listed legacy one is gone, an added line names a parameter `argN`, or a changed image keeps an address-named layout row for a named symbol | none |
 | `addrs`         | a symbol address that `config/symbols.toml` records on `main` is gone                   | none       |

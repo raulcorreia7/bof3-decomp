@@ -11,8 +11,7 @@ sits under ``#ifdef NON_MATCHING`` like a draft, is required for every function 
 (``<image>@0x<ADDR>``), so every unmatched function keeps its closest draft with its record.
 Every row of that file is one JSON object per line with exactly ``function``, ``tried``,
 ``first_diff``, ``score``, in that order, which are the keys ``tools/worklist.py`` reads; a row
-with other keys or another order fails here. The rows stay in ``function`` order, added with
-``tools/attempts.py add``, so a row that sorts before the row above it fails as well.
+with other keys or another order fails here. The file is append-only: ``tools/attempts.py add``.
 Status markers never take a ``FAKE:`` note.
 The one exception is a ``static inline`` helper in a header, which is not a lifted function. PsyQ
 stubs such as ``__main`` carry ``MATCH`` like any other definition.

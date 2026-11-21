@@ -114,3 +114,21 @@ def test_a_branch_that_really_drops_a_type_still_fails(tmp_path: Path) -> None:
     result = pre_push(repo, tmp_path)
     assert "FAIL  typeloss" in result.stdout
     assert (repo / "build/pre-push/typeloss.rc").read_text().strip() == "1"
+
+
+def test_readme_table_matches_gate() -> None:
+    gate = [
+        row.split("|")
+        for row in (TOOLS / "gate.txt").read_text().splitlines()
+        if row and not row.startswith("#")
+    ]
+    section = (
+        (TOOLS / "README.md").read_text().split("## Pre-push")[1].split("\n## ")[0]
+    )
+    cells = [
+        [c.strip().strip("`") for c in ln.split("|")]
+        for ln in section.splitlines()
+        if ln.startswith("| `")
+    ]
+    rows = [[c[1], c[3]] for c in cells]
+    assert rows == [[name, needs] for name, needs, *_ in gate]
