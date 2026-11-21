@@ -143,7 +143,9 @@ header. `<module>.c` includes the module's function files in link order, with th
 between them (`src/engine/gfx/fade/fade.c`); one `c` row at the first offset names it, and the unit
 may include files of other module folders by their path from `src/`. `<module>.h` holds the public
 prototypes, the types the module owns and its globals as `extern`; the image header and the `include/slus`
-headers include it. A module whose functions are not contiguous in link order stays one unit per function
+headers include it. A prototype that only the executable and `game/00` sources saw stays out of the overlays'
+view in a second block of the header, behind `ENGINE_LOCAL_DECLS`: an overlay that calls the function without
+a prototype compiles the call differently. A module whose functions are not contiguous in link order stays one unit per function
 file, or joins its neighbour where the bytes need it (`emi/loader/emi.c` holds the CD drive states of
 `cd/drive`, which interleave with the loader). A function with `INCLUDE_ASM` stays out of a unit: the
 split assembly is named for the row. `game/00` is never one unit: `"%d"` is pooled twice in its
@@ -328,6 +330,7 @@ merge, and the macro is not a setting to move into a header.
 | `SCRIPT_VARS_VOLATILE`                        | `include/game/script.h` | `volatile u8 g_ScriptVars`                            |
 | `FAKE_DECL_GRAPHICS_PALETTE_PENDING_VOLATILE` | `include/slus/data.h`   | `volatile u8 g_GfxPalettePending`                     |
 | `FAKE_DECL_GAME_SCRATCH_BASE_SCALAR`          | `include/game/spawn.h`  | `u8 g_ScratchPad[]` in place of the `ScratchPad` view |
+| `ENGINE_LOCAL_DECLS`                          | engine module headers   | the prototypes only the executable and `game/00` see  |
 
 ## Unit files
 
