@@ -4,7 +4,7 @@
 /* The world03/area133/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world03.h"
+#include "overlays/area/worlds/world03.h"
 
 /* The per-choice script entry bytes the confirm step copies into the work record. */
 typedef struct MessageChoiceEntry {

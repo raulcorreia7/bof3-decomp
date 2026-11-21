@@ -170,7 +170,7 @@ MATCH void func_801F363C(void) {
     }
 }
 
-#include "overlays/area/Message_Clear.h"
+#include "overlays/area/shared/Message_Clear.h"
 
 MATCH void func_801F36E4(void) {
     SYS_DISPATCH_BYTE(D_801F4900, g_Task->unk_04);

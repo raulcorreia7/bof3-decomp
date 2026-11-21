@@ -1,4 +1,4 @@
-#include "overlays/area/WorldAreaRequest.h"
+#include "overlays/area/shared/WorldAreaRequest.h"
 
 /* func_801F3B74, func_801F2F20 */
 MATCH void FairyCasino_AnswerNumbersRulesUnderstood(void) {

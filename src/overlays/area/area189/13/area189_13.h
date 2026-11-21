@@ -4,7 +4,7 @@
 /* The world04/area189/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world04.h"
+#include "overlays/area/worlds/world04.h"
 #include "area/spad.h"
 /* The per-buffer ordering-table heads, one 8-byte entry per slot. */
 extern u32* D_80143534[][2];

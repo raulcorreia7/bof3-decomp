@@ -3,8 +3,8 @@
 
 #include "menu/gameui.h"
 #include "overlays/area/area.h"
-#include "overlays/area/Message_ShowParty.h"
-#include "overlays/area/WorldAreaRequest.h"
+#include "overlays/area/shared/Message_ShowParty.h"
+#include "overlays/area/shared/WorldAreaRequest.h"
 
 /* The variant byte the cancel path stores in the game-overlay state. */
 #define AREA_RESET_VARIANT    0xFF

@@ -2,7 +2,7 @@
 #define WORLD00_FAMILY_H
 
 #include "overlays/area/area.h"
-#include "overlays/area/WorldAreaRequest.h"
+#include "overlays/area/shared/WorldAreaRequest.h"
 
 /* The work origin offset, step and threshold this overlay advances. */
 #define AREA_ORIGIN_OFFSET       0x2E
@@ -13,7 +13,7 @@
 #define AREA_RESET_VARIANT       0xFF
 #define g_MenuMasterSubStep      (*(s8*)&g_MenuMasterSubStep)
 
-#include "overlays/area/Message_SelectAnswerValue.h"
+#include "overlays/area/shared/Message_SelectAnswerValue.h"
 
 /* func_800F500C */
 void Fishing_ShopRun(void);

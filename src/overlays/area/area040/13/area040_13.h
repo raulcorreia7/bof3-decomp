@@ -5,7 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "game/spawn.h"
-#include "overlays/area/world01.h"
+#include "overlays/area/worlds/world01.h"
 #include "area/spad.h"
 
 /* The bundle record's command tag: the high byte of its first word. The

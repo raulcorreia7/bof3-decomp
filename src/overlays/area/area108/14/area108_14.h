@@ -5,8 +5,8 @@
  * and its data. Only this image includes the file. */
 
 #include "common/vector.h"
-#include "overlays/area/AreaSprite.h"
-#include "overlays/area/world02.h"
+#include "overlays/area/shared/AreaSprite.h"
+#include "overlays/area/worlds/world02.h"
 #include "area/spad.h"
 #include <rand.h>
 

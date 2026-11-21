@@ -4,11 +4,11 @@
 /* The world04/area188/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world04.h"
+#include "overlays/area/worlds/world04.h"
 #include "area/spad.h"
 
 #include "area/effects.h"
-#include "overlays/area/Area_DrawDimQuad.h"
+#include "overlays/area/shared/Area_DrawDimQuad.h"
 
 /* The shop panel byte the confirmed answer clears. */
 extern u8 D_8014865F;

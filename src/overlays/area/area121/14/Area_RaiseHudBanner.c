@@ -1,3 +1,3 @@
 #include "area121_14.h"
 
-#include "overlays/area/Area_RaiseHudBanner.h"
+#include "overlays/area/shared/Area_RaiseHudBanner.h"

@@ -4,7 +4,7 @@
 /* The world04/area152/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world04.h"
+#include "overlays/area/worlds/world04.h"
 #include "area/spad.h"
 #include "common/util.h"
 
@@ -24,7 +24,7 @@
 extern u8 D_801F4C3C[];
 #define AREA_HUD_SPRITE_CELLS (D_801F4C3C + 0x158)
 
-#include "overlays/area/WorldMapMessage.h"
+#include "overlays/area/shared/WorldMapMessage.h"
 
 #define WORLD_MAP_MESSAGE_ROWS 3
 /* The message rows inside the payload data. */
@@ -41,6 +41,6 @@ void func_801F338C(void);
 
 void func_801F3550(void);
 
-#include "overlays/area/world_cloud.h"
+#include "overlays/area/shared/world_cloud.h"
 
 #endif

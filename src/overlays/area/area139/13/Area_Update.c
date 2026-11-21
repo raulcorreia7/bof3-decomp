@@ -1,5 +1,5 @@
 #include "area139_13.h"
-#include "overlays/area/Area_FloorQuad.h"
+#include "overlays/area/shared/Area_FloorQuad.h"
 
 /* Draws the area139 floor quad: the cell primitive, the four corner vectors the GTE projects and
  * the tile words, then the next frame's cell primitive. */

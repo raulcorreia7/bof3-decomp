@@ -5,7 +5,7 @@
  * reset sentinel and the work state handler table. Only this image includes
  * the file. */
 
-#include "overlays/area/world00.h"
+#include "overlays/area/worlds/world00.h"
 #include "area/spad.h"
 
 /* Reset sentinel stored to g_MessageRequest by the request handlers. */

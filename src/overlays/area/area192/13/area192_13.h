@@ -4,7 +4,7 @@
 /* The world04/area192/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world04.h"
+#include "overlays/area/worlds/world04.h"
 /* The area counter and the area flag store the selection pass reads. */
 extern u8 D_80144F56;
 

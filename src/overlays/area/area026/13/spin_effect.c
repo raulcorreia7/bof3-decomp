@@ -388,9 +388,9 @@ MATCH void Scene_GiveEgg(void) {
     SYS_SetFlag(g_SceneFlags, 51u);
 }
 
-#include "overlays/area/Area_SubCameraOffsetY20.h"
+#include "overlays/area/shared/Area_SubCameraOffsetY20.h"
 
-#include "overlays/area/Area_AddCameraOffsetY20.h"
+#include "overlays/area/shared/Area_AddCameraOffsetY20.h"
 
 MATCH void func_801F3280(void) {
     g_AreaCameraOffsetY      = 0;

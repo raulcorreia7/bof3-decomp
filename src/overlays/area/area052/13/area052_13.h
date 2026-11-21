@@ -4,7 +4,7 @@
 /* The world01/area052/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world01.h"
+#include "overlays/area/worlds/world01.h"
 #include "area/spad.h"
 
 /* The work-window byte offset and row stride this overlay scans. */

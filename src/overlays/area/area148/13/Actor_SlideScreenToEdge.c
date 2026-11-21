@@ -1,3 +1,3 @@
 #include "area148_13.h"
 
-#include "overlays/area/Actor_SlideScreenToEdge.h"
+#include "overlays/area/shared/Actor_SlideScreenToEdge.h"

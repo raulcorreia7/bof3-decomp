@@ -1,6 +1,6 @@
 #include "area166_13.h"
 
-#include "overlays/area/Area_FloorQuad.h"
+#include "overlays/area/shared/Area_FloorQuad.h"
 
 /* func_801F30D4 */
 MATCH void Area_Update(void) {

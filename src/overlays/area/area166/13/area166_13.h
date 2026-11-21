@@ -4,7 +4,7 @@
 /* The world04/area166/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world04.h"
+#include "overlays/area/worlds/world04.h"
 #include "area/spad.h"
 
 /* The party position in 16.16 fixed point. */

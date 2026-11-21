@@ -4,7 +4,7 @@
 /* The world00/area033/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world00.h"
+#include "overlays/area/worlds/world00.h"
 #include "sys/scene.h"
 #include "gfx/prim.h"
 #include "area/spad.h"
@@ -16,7 +16,7 @@ extern u8 D_8014496D;
 /* The tile map scan: four byte records per work row, the map offset and code. */
 extern u8 D_801F4CB0[];
 
-#include "overlays/area/WorldMapMessage.h"
+#include "overlays/area/shared/WorldMapMessage.h"
 
 #define WORLD_MAP_MESSAGE_ROWS 6
 extern WorldMapMessageRow D_801F4EA4[WORLD_MAP_MESSAGE_ROWS];
@@ -48,7 +48,7 @@ void func_801F35C0(void);
 
 void func_801F3FF8(s16 x, s16 y);
 
-#include "overlays/area/world_cloud.h"
+#include "overlays/area/shared/world_cloud.h"
 
 void func_801A4BC0(s32 column, s32 row, s32 code);
 

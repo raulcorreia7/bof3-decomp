@@ -4,7 +4,7 @@
 /* The world03/area151/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world03.h"
+#include "overlays/area/worlds/world03.h"
 #include "area/spad.h"
 
 #define D_801F4D04            (D_801F4CE8 + 0x1Cu)
@@ -50,6 +50,6 @@ void Area_Update(void);
 extern WorldMapMarker D_801F54C0[6];
 #define AREA_HUD_MASK_TABLE D_801F54C0
 
-#include "overlays/area/world_cloud.h"
+#include "overlays/area/shared/world_cloud.h"
 
 #endif

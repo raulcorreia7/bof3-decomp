@@ -1,5 +1,5 @@
 #include "area104_14.h"
-#include "overlays/area/world_cloud.h"
+#include "overlays/area/shared/world_cloud.h"
 
 #define WORLD_CLOUD_BRIGHT_PART_WORD ((0xBB28u << 16) | 0xA100u)
 #define WORLD_CLOUD_DIM_PART_WORD    ((0xBB50u << 16) | 0x9100u)

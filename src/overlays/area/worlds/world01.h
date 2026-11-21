@@ -3,7 +3,7 @@
 
 #include "menu/gameui.h"
 #include "overlays/area/area.h"
-#include "overlays/area/WorldAreaRequest.h"
+#include "overlays/area/shared/WorldAreaRequest.h"
 
 /* The work origin offset, step and threshold this overlay advances. */
 #define AREA_ORIGIN_OFFSET       0x2E

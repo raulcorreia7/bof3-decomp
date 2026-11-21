@@ -1,3 +1,3 @@
 #include "area180_13.h"
 
-#include "overlays/area/Fairy_AnswerReplayScene.h"
+#include "overlays/area/shared/Fairy_AnswerReplayScene.h"

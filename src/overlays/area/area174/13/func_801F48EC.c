@@ -1,5 +1,5 @@
 #include "area174_13.h"
-#include "overlays/area/Actor_RunScriptRowStep.h"
+#include "overlays/area/shared/Actor_RunScriptRowStep.h"
 
 MATCH void func_801F48EC(void) {
     u8* bank;

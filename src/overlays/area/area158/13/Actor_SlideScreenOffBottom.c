@@ -1,3 +1,3 @@
 #include "area158_13.h"
 
-#include "overlays/area/Actor_SlideScreenOffBottom.h"
+#include "overlays/area/shared/Actor_SlideScreenOffBottom.h"

@@ -5,7 +5,7 @@
  * route-velocity tables, script state and handlers. Only this image includes
  * the file. */
 
-#include "overlays/area/world00.h"
+#include "overlays/area/worlds/world00.h"
 #include "area/fishing.h"
 #include "area/spad.h"
 #include "game/item.h"

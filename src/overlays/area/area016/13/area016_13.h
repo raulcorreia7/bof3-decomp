@@ -5,7 +5,7 @@
  * marker tables, and the handlers its units share. Only this image includes
  * the file. */
 
-#include "overlays/area/world00.h"
+#include "overlays/area/worlds/world00.h"
 #include "area/spad.h"
 #include "common/util.h"
 

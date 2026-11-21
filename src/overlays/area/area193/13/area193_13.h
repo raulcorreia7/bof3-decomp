@@ -4,7 +4,7 @@
 /* The world04/area193/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world04.h"
+#include "overlays/area/worlds/world04.h"
 
 /* FAKE: the call passes the count as s32, the width the real prototype (u8) lacks. */
 #define Item_Add ((bool (*)(s32, s32, s32, s32))Item_Add)

@@ -5,7 +5,7 @@
  * payload prologue and the area data symbols. Only this image includes the
  * file. */
 
-#include "overlays/area/world00.h"
+#include "overlays/area/worlds/world00.h"
 #include <stdio.h>
 #include "menu/draw.h"
 

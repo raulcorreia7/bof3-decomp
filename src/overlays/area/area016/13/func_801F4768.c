@@ -1,5 +1,5 @@
 #include "area016_13.h"
-#include "overlays/area/world_cloud.h"
+#include "overlays/area/shared/world_cloud.h"
 
 /* FAKE: the vertex stores cast to s16 inline to keep retail's add order. CLEANUP: name the vertex fields. */
 MATCH void func_801F4768(void) {

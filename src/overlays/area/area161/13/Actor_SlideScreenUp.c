@@ -1,3 +1,3 @@
 #include "area161_13.h"
 
-#include "overlays/area/Actor_SlideScreenUp.h"
+#include "overlays/area/shared/Actor_SlideScreenUp.h"

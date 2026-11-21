@@ -1,6 +1,6 @@
 #include "area174_13.h"
 
-#include "overlays/area/func_801F2C48.h"
+#include "overlays/area/shared/func_801F2C48.h"
 
 MATCH void func_801F3490(void) {
     Actor* work;

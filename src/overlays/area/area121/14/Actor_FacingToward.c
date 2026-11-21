@@ -1,3 +1,3 @@
 #include "area121_14.h"
 
-#include "overlays/area/Actor_FacingToward.h"
+#include "overlays/area/shared/Actor_FacingToward.h"

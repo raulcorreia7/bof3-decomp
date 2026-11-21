@@ -1,3 +1,3 @@
 #include "area188_13.h"
 
-#include "overlays/area/Area_ClaimSpawnSlot.h"
+#include "overlays/area/shared/Area_ClaimSpawnSlot.h"

@@ -1,3 +1,3 @@
 #include "area185_13.h"
 
-#include "overlays/area/FairyCopyShop_AnswerGiveItem.h"
+#include "overlays/area/shared/FairyCopyShop_AnswerGiveItem.h"

@@ -4,7 +4,7 @@
 /* The world00/area037/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world00.h"
+#include "overlays/area/worlds/world00.h"
 #include "area/spad.h"
 
 /* The owner is src/engine/game/00/game_00.h; that header is not visible to this

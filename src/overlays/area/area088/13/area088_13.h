@@ -4,7 +4,7 @@
 /* The world02/area088/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-#include "overlays/area/world02.h"
+#include "overlays/area/worlds/world02.h"
 #include "area/spad.h"
 
 /* g_ScratchPadVectors */
@@ -58,6 +58,6 @@ void func_801F3258(u8* window);
 
 extern u8 D_801F6171[];
 
-#include "overlays/area/world_cloud.h"
+#include "overlays/area/shared/world_cloud.h"
 
 #endif
