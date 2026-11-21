@@ -154,28 +154,31 @@ def image_of(path: str) -> str:
     return path.rsplit("/", 1)[0] if "/" in path else "."
 
 
+def _file_row(
+    path: str, text: str, seen: dict[str, list[tuple[str, str]]]
+) -> dict[str, int]:
+    """Return the metrics of one file; its function shapes are added to ``seen``."""
+    clean = strip_comments(text)
+    row = dict.fromkeys(METRICS, 0)
+    row["funcs"] = 0
+    row["lines"] = 0
+    row["notes"] = len(NOTE.findall(text))
+    for name, body in bodies(clean):
+        row["funcs"] += 1
+        row["lines"] += body.count("\n")
+        row["addr"] += bool(ADDR_NAME.fullmatch(name))
+        row["names"] += len(PLACEHOLDER.findall(body))
+        row["casts"] += sum(bool(RAW_CAST.search(line)) for line in body.split("\n"))
+        row["harmful"] += len(HARMFUL.findall(body))
+        if path.endswith(".c") and body.count(";") >= 2 and not macro_body(body):
+            seen[shape(name, body)].append((path, name))
+    return row
+
+
 def scan(files: dict[str, str]) -> dict[str, dict[str, int]]:
     """Return the metrics of each file in ``files`` (path to text)."""
-    rows: dict[str, dict[str, int]] = {}
     seen: dict[str, list[tuple[str, str]]] = collections.defaultdict(list)
-    for path, text in files.items():
-        clean = strip_comments(text)
-        row = dict.fromkeys(METRICS, 0)
-        row["funcs"] = 0
-        row["lines"] = 0
-        row["notes"] = len(NOTE.findall(text))
-        for name, body in bodies(clean):
-            row["funcs"] += 1
-            row["lines"] += body.count("\n")
-            row["addr"] += bool(ADDR_NAME.fullmatch(name))
-            row["names"] += len(PLACEHOLDER.findall(body))
-            row["casts"] += sum(
-                bool(RAW_CAST.search(line)) for line in body.split("\n")
-            )
-            row["harmful"] += len(HARMFUL.findall(body))
-            if path.endswith(".c") and body.count(";") >= 2 and not macro_body(body):
-                seen[shape(name, body)].append((path, name))
-        rows[path] = row
+    rows = {path: _file_row(path, text, seen) for path, text in files.items()}
     for members in seen.values():
         if len({image_of(p) for p, _ in members}) < 2:
             continue
@@ -444,8 +447,8 @@ def table(rows: dict[str, dict[str, int]], limit: int, label: str) -> str:
     return "\n".join(out)
 
 
-def main(argv: list[str] | None = None) -> int:
-    """Run one report, queue or gate."""
+def build_parser() -> argparse.ArgumentParser:
+    """Return the command-line parser."""
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
@@ -471,34 +474,43 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--gate", default=",".join(GATED), help="metrics the gate checks"
     )
+    return parser
+
+
+def run_gate(args: argparse.Namespace, parser: argparse.ArgumentParser) -> int:
+    """Fail when a file touched since ``--diff`` got worse on a gated metric."""
+    gate = [m for m in args.gate.split(",") if m]
+    bad = [m for m in gate if m not in METRICS]
+    if bad:
+        parser.error(f"unknown metric: {', '.join(bad)}")
+    base = merge_base(args.diff, args.to)
+    old_files, new_files = rev_files(base), rev_files(args.to)
+    changed = touched(base, args.to)
+    accepted = allowed(base, args.to)
+    # The metrics are counted once per revision; the gate reads them per metric.
+    old_rows, new_rows = scan(old_files), scan(new_files)
+    found = []
+    for metric in gate:
+        left = {p for p in changed if (p, metric) not in accepted}
+        if metric in PER_FUNCTION:
+            found += ratchet(old_files, new_files, left, [metric])
+        else:
+            found += worse(old_rows, new_rows, left, [metric])
+    for line in found:
+        print(line)
+    if found:
+        print(f"quality: {len(found)} touched-file metrics rose against {args.diff}")
+        return 1
+    print(f"quality: no touched file got worse against {args.diff}")
+    return 0
+
+
+def main(argv: list[str] | None = None) -> int:
+    """Run one report, queue or gate."""
+    parser = build_parser()
     args = parser.parse_args(argv)
     if args.diff:
-        gate = [m for m in args.gate.split(",") if m]
-        bad = [m for m in gate if m not in METRICS]
-        if bad:
-            parser.error(f"unknown metric: {', '.join(bad)}")
-        base = merge_base(args.diff, args.to)
-        old_files, new_files = rev_files(base), rev_files(args.to)
-        changed = touched(base, args.to)
-        accepted = allowed(base, args.to)
-        # The metrics are counted once per revision; the gate reads them per metric.
-        old_rows, new_rows = scan(old_files), scan(new_files)
-        found = []
-        for metric in gate:
-            left = {p for p in changed if (p, metric) not in accepted}
-            if metric in PER_FUNCTION:
-                found += ratchet(old_files, new_files, left, [metric])
-            else:
-                found += worse(old_rows, new_rows, left, [metric])
-        for line in found:
-            print(line)
-        if found:
-            print(
-                f"quality: {len(found)} touched-file metrics rose against {args.diff}"
-            )
-            return 1
-        print(f"quality: no touched file got worse against {args.diff}")
-        return 0
+        return run_gate(args, parser)
     rows = scan(rev_files("WORK"))
     if args.markdown:
         target = SUBSYSTEMS_DOC if args.update else ROOT / "build" / "subsystems.md"
