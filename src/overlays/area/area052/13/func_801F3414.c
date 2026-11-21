@@ -19,6 +19,6 @@ MATCH void func_801F3414(void) {
         Area_SetCellCode(COORD_INT(x), COORD_INT(y), 0x11);
         g_Task->direction = FACING_DOWN;
         Area_MoveActorRoute(g_ScriptState, 5);
-        g_ScriptState->unk_07 = 2;
+        g_ScriptState->steps = 2;
     }
 }

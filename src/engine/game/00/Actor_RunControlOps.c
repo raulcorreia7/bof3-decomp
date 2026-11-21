@@ -34,25 +34,25 @@ MATCH u8 Actor_RunControlOps(void* sub, s32 target, u8 value) {
     selection    = value;
     switch (opcode) {
         case 0xE1:
-            state->unk_05 = g_Task->direction;
+            state->direction = g_Task->direction;
             Actor_DispatchSelectorScript((target_bytes + state->cursor)[1]);
-            state->unk_08 = (target_bytes + state->cursor)[2];
+            state->message_id = (target_bytes + state->cursor)[2];
             func_801A17A0((u8*)state);
             state->flags  = ((state->flags & ~ACTOR_INTERACTION_SCRIPT_REQUEST) | ACTOR_INTERACTION_SCRIPT_PENDING);
             state->cursor = (state->cursor + 2);
             return 0xFFU;
         case 0xE0:
-            state->unk_05 = g_Task->direction;
-            state->flags  = (state->flags | ACTOR_INTERACTION_MOVING);
-            selection     = g_Game.members[0].facing ^ 0x4;
+            state->direction = g_Task->direction;
+            state->flags     = (state->flags | ACTOR_INTERACTION_MOVING);
+            selection        = g_Game.members[0].facing ^ 0x4;
             Actor_DispatchSelectorScript(selection);
             goto block_5; /* E0 and E3 share the operand-read tail */
         case 0xE3:
-            state->unk_05 = (g_Task->direction & 0x7);
+            state->direction = (g_Task->direction & 0x7);
         block_5:
-            next_cursor_e0e3 = state->cursor + 1;
-            state->cursor    = next_cursor_e0e3;
-            state->unk_08    = *(target_bytes + (next_cursor_e0e3 & HALF_MASK));
+            next_cursor_e0e3  = state->cursor + 1;
+            state->cursor     = next_cursor_e0e3;
+            state->message_id = *(target_bytes + (next_cursor_e0e3 & HALF_MASK));
             func_801A17A0((u8*)state);
             state_flags   = state->flags;
             updated_flags = state_flags & ~ACTOR_INTERACTION_SCRIPT_REQUEST;
@@ -64,14 +64,14 @@ MATCH u8 Actor_RunControlOps(void* sub, s32 target, u8 value) {
             }
             goto block_29; /* every command that keeps the selection shares the return */
         case 0xE2:
-            target_entry_e2 = target_bytes + state->cursor;
+            target_entry_e2   = target_bytes + state->cursor;
             /* FAKE: retain the second 16-bit load at sub+0xA. */
-            next_cursor_e2  = *FAKE_VOLATILE_PTR(u16, &state->cursor);
-            high_byte       = target_entry_e2[1];
-            low_byte        = target_entry_e2[2];
-            next_cursor_e2  = (next_cursor_e2 + 2);
-            state->cursor   = next_cursor_e2;
-            state->unk_08   = (low_byte | (high_byte << 8));
+            next_cursor_e2    = *FAKE_VOLATILE_PTR(u16, &state->cursor);
+            high_byte         = target_entry_e2[1];
+            low_byte          = target_entry_e2[2];
+            next_cursor_e2    = (next_cursor_e2 + 2);
+            state->cursor     = next_cursor_e2;
+            state->message_id = (low_byte | (high_byte << 8));
             goto block_29; /* every command that keeps the selection shares the return */
         case 0xE6:
             g_Task->header.flags = 0;
@@ -85,7 +85,7 @@ MATCH u8 Actor_RunControlOps(void* sub, s32 target, u8 value) {
             next_cursor_e7 = state->cursor + 1;
             state->cursor  = next_cursor_e7;
             func_801A2788(*(target_bytes + (next_cursor_e7 & HALF_MASK)));
-            state->unk_07 = 0;
+            state->steps = 0;
             return 0xFFU;
         case 0xE9:
             target_entry_e9 = target_bytes + state->cursor;
@@ -118,9 +118,9 @@ MATCH u8 Actor_RunControlOps(void* sub, s32 target, u8 value) {
             spad_work_ee->option_flags = (spad_work_ee->option_flags ^ ACTOR_OPT_WAIT_STREAM);
             goto block_29; /* every command that keeps the selection shares the return */
         case 0xE8:
-            next_cursor_e8 = state->cursor + 1;
-            state->cursor  = next_cursor_e8;
-            state->unk_04  = *(target_bytes + (next_cursor_e8 & HALF_MASK));
+            next_cursor_e8   = state->cursor + 1;
+            state->cursor    = next_cursor_e8;
+            state->move_kind = *(target_bytes + (next_cursor_e8 & HALF_MASK));
             if (Actor_GetOwner() == 2) {
                 selection = 0;
                 goto block_29; /* every command that keeps the selection shares the return */

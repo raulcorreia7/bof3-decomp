@@ -21,7 +21,7 @@ NON_MATCHING void func_801EEC7C(void) {
     index                               = Battle_AllocEffect(1, 0x4B);
     g_BattleEffects[index].header.mode  = 0;
     g_BattleEffects[index].target.party = g_Task;
-    g_BattleEffects[index].unk_08       = g_BattleEffectBattler->facing;
+    g_BattleEffects[index].message_id   = g_BattleEffectBattler->facing;
 
     g_Task->param.unk_0B += 1;
     index                               = Battle_AllocEffect(1, 0x4B);

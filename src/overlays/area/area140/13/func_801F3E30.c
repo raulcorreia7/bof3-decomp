@@ -18,7 +18,7 @@ NON_MATCHING void func_801F3E30(void) {
             if (g_Game.members[0].u.field.mode.unsigned_value == 1) {
                 if ((func_801F4058(x, y) & BYTE_MASK) == 0) {
                     if (((u16)(x - 0x44) < 0xD) && ((u16)(y - 6) < 0xB)) {
-                        g_ScriptState->unk_07 = 2;
+                        g_ScriptState->steps = 2;
                         Area_MoveActorRoute(g_ScriptState, g_Task->direction);
                     }
                 }

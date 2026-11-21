@@ -3,11 +3,11 @@
 MATCH void func_801F4C18(void) {
     Actor* work;
 
-    g_Task->direction     = FACING_LEFT;
-    g_ScriptState->unk_07 = ((s32)(g_Task->pos.x.fixed + 0xFFE38000) >> 0xF);
-    if ((s8)g_ScriptState->unk_07 < 0) {
+    g_Task->direction    = FACING_LEFT;
+    g_ScriptState->steps = ((s32)(g_Task->pos.x.fixed + 0xFFE38000) >> 0xF);
+    if ((s8)g_ScriptState->steps < 0) {
         g_Task->direction ^= 4;
-        g_ScriptState->unk_07 = -g_ScriptState->unk_07;
+        g_ScriptState->steps = -g_ScriptState->steps;
     }
     Area_MoveActorRoute(g_ScriptState, g_Task->direction);
     work = g_Task;

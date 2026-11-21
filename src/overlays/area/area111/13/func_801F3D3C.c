@@ -20,7 +20,7 @@ MATCH void func_801F3D3C(void) {
     dx = target_x.fixed - g_Task->pos.x.fixed;
     dy = target_y.fixed - g_Task->pos.y.fixed;
     dz = Area_SampleHeight(target_x.fixed, target_y.fixed) - LOHU(g_Task->pos.z.part.integer);
-    if (g_ScriptState->unk_04 != 0) {
+    if (g_ScriptState->move_kind != 0) {
         frames        = 32;
         g_Task->timer = 32;
         g_Task->vx    = dx / frames;

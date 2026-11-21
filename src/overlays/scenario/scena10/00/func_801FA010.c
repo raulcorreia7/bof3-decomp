@@ -47,7 +47,7 @@ NON_MATCHING void func_801FA010(void) {
                     g_SpawnedActors[slot].header.flags = 1;
                     g_SpawnedActors[slot].type         = 0x5E;
                     g_SpawnedActors[slot].unk_06       = 0x4E;
-                    g_SpawnedActors[slot].unk_07       = 3;
+                    g_SpawnedActors[slot].steps        = 3;
                     g_ScenarioState.step_05            = 4;
                 }
             }
@@ -81,7 +81,7 @@ NON_MATCHING void func_801FA010(void) {
                     g_SpawnedActors[slot].header.flags = 1;
                     g_SpawnedActors[slot].type         = 0x5D;
                     g_SpawnedActors[slot].unk_06       = 0x4E;
-                    g_SpawnedActors[slot].unk_07       = 3;
+                    g_SpawnedActors[slot].steps        = 3;
                     g_ScenarioState.step_05            = 9;
                 }
             }

@@ -47,13 +47,13 @@ NON_MATCHING void Fishing_SpawnFish(void) {
         if ((s32)count > 0) {
             row_offset = row_index * FISHING_ROW_STRIDE;
             do {
-                row            = &g_Actors[row_offset];
-                g_Task         = row;
-                g_CurrentActor = row;
-                *row           = 0x21;
-                g_Task->unk_05 = row_index;
-                g_Task->unk_06 = column;
-                roll           = RANDOM_MASK(0xFF);
+                row               = &g_Actors[row_offset];
+                g_Task            = row;
+                g_CurrentActor    = row;
+                *row              = 0x21;
+                g_Task->direction = row_index;
+                g_Task->unk_06    = column;
+                roll              = RANDOM_MASK(0xFF);
             loop_4:
                 ROW_ROLL    = roll;
                 roll        = ROW_ROLL;
@@ -98,7 +98,7 @@ NON_MATCHING void Fishing_SpawnFish(void) {
                 row_offset += FISHING_ROW_STRIDE;
                 g_Task->unk_03 = 0;
                 row_index += 1;
-                g_Task->unk_04 = 0;
+                g_Task->move_kind = 0;
                 count -= 1;
                 g_Task->tint.bytes.flags = 0;
             } while ((s32)count > 0);

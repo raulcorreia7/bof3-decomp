@@ -11,9 +11,9 @@ NON_MATCHING void func_801F3354(void) {
         COORD_INT(g_Task->pos.z) = height;
         g_Task->vz               = 0;
         g_Task->gravity          = 0;
-        g_Task->unk_04           = 2;
+        g_Task->move_kind        = 2;
     }
-    if ((g_Task->unk_05 == 0) && (((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE)) == 0)) {
+    if ((g_Task->direction == 0) && (((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE)) == 0)) {
         Area_AdvanceScroll(COORD_INT(g_Task->pos.z));
     }
     g_Game.current->u.field.unk_122 -= 2;

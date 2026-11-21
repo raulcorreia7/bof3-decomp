@@ -31,7 +31,7 @@ NON_MATCHING void func_801F3A14(s32 x, s32 y) {
     Area_SetCellCode(column, row, 0x11);
     g_Task->direction = FACING_RIGHT;
     Area_MoveActorRoute(g_ScriptState, 3);
-    g_ScriptState->unk_07 = 2;
+    g_ScriptState->steps = 2;
 }
 #else
 INCLUDE_ASM(func_801F3A14);

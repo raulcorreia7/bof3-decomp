@@ -35,7 +35,7 @@ NON_MATCHING void Menu_UpdateFormation(void) {
         *(u8*)(&D_801485DC)                                    = 1;
         D_801485E2                                             = D_801EC4D0[tmp2].unk_02;
         g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 0;
-        g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0A = D_801EC4D0[tmp2].unk_04 + 1;
+        g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0A = D_801EC4D0[tmp2].move_kind + 1;
     }
     tmp3                            = ((s8)g_FormationCursorRow * 3) + g_FormationCursorColumn;
     g_MenuPanelTasks[20].pos.x      = D_801EC4D0[tmp3].unk_00;
@@ -43,7 +43,7 @@ NON_MATCHING void Menu_UpdateFormation(void) {
     g_MenuPanelTasks[20].pos.y      = D_801EC4D0[tmp3].unk_02;
     val8                            = 0;
     g_MenuPanelTasks[20].unk_0B     = 1;
-    g_MenuPanelTasks[20].unk_0A     = D_801EC4D0[tmp3].unk_04 + 1;
+    g_MenuPanelTasks[20].unk_0A     = D_801EC4D0[tmp3].move_kind + 1;
     val5                            = 0 << 0x18;
     do {
         g_MenuPanelTasks[(val5 >> 0x18) + 0xC].unk_0C = 0;

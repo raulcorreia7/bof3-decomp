@@ -13,5 +13,5 @@ MATCH void func_801F43B0(void) {
     func_801A4BC0(COORD_INT(x), COORD_INT(y), 0x11);
     g_Task->direction = FACING_LEFT;
     Area_MoveActorRoute(g_ScriptState, 7);
-    g_ScriptState->unk_07 = 2;
+    g_ScriptState->steps = 2;
 }

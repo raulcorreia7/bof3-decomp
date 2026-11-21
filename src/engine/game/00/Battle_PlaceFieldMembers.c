@@ -68,7 +68,7 @@ NON_MATCHING void Battle_PlaceFieldMembers(void) {
             g_Task->direction              = s_RouteIndexByMode[g_Battle.scroll_dir];
             ((PartyMember*)g_Task)->unk_29 = 6;
             if (i != 0) {
-                ((PartyMember*)g_Task)->unk_07 = 0;
+                ((PartyMember*)g_Task)->steps  = 0;
                 ((PartyMember*)g_Task)->pad_06 = ((PartyMember*)g_Task)->slot - 1;
             }
             func_801C3204();

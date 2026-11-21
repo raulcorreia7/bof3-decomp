@@ -33,7 +33,7 @@ NON_MATCHING void func_801F3460(void) {
         offset += 4;
     }
     if (offset != 0) {
-        g_ScriptState->unk_07 = offset + 1;
+        g_ScriptState->steps = offset + 1;
     }
     g_Task->vz = 0;
     func_801F4604(x, y, 0);

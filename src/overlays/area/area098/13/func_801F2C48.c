@@ -21,7 +21,7 @@ NON_MATCHING void func_801F2C48(void) {
         actor->header.flags = 1;
         actor->header.mode  = 2;
         actor->header.step  = 0;
-        actor->unk_05       = ACTOR_TYPE_FACING_PROBE;
+        actor->direction    = ACTOR_TYPE_FACING_PROBE;
         actor->pos.x.fixed  = g_Game.members[g_Task->option_flags].pos.x.fixed;
         actor->pos.y.fixed  = g_Game.members[g_Task->option_flags].pos.y.fixed;
         actor->pos.z.fixed  = g_Game.members[g_Task->option_flags].pos.z.fixed;

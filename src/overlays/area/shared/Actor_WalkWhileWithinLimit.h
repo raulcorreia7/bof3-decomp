@@ -2,7 +2,7 @@
  * facing-5 y step is at most the limit the scene selects from `limits`. */
 static inline void Area_WalkWhileWithinLimit(const u8* limits) {
     if ((u32)(g_Task->pos.y.fixed + g_FacingSteps[g_Task->direction & 7].y) <= (u32)(limits[g_SceneEventState.selection] << 16)) {
-        g_ScriptState->unk_07 = 1;
+        g_ScriptState->steps = 1;
         Area_MoveActorRoute(g_ScriptState, 5);
         g_ScriptState->cursor -= 2;
     }

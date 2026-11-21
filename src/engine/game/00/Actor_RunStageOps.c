@@ -26,7 +26,7 @@ typedef enum ActorScriptStage {
 
 /* func_801AB458 */
 #ifdef NON_MATCHING
-NON_MATCHING u8 Actor_RunStageOps(GameCursorState* state, const u8* table, u8 value) {
+NON_MATCHING u8 Actor_RunStageOps(ScriptState* state, const u8* table, u8 value) {
     u8    byte;
     u8    flag;
     u8    slot;
@@ -40,7 +40,7 @@ NON_MATCHING u8 Actor_RunStageOps(GameCursorState* state, const u8* table, u8 va
     void* entry;
     u32*  list;
 
-    byte = table[state->index];
+    byte = table[state->cursor];
     switch (byte) {
         case ACTOR_SCRIPT_STAGE_SET_SCRIPT_ACTIVE: {
             (*(volatile u16*)&g_Game.flags) |= GAME_FLAG_SCRIPT_ACTIVE;
@@ -59,12 +59,12 @@ NON_MATCHING u8 Actor_RunStageOps(GameCursorState* state, const u8* table, u8 va
         case ACTOR_SCRIPT_STAGE_SET_TARGET_POS: {
             volatile Actor* work;
 
-            func_801ABF30(buf, table[state->index + 1], table[state->index + 2]);
+            func_801ABF30(buf, table[state->cursor + 1], table[state->cursor + 2]);
             work              = SCRATCH_WORK;
             work->pos.x.fixed = buf[0];
             work->pos.y.fixed = buf[1];
             work->pos.z       = buf[2];
-            state->index += 2;
+            state->cursor += 2;
             break;
         }
         case ACTOR_SCRIPT_STAGE_CAMERA_SCROLL: {
@@ -92,11 +92,11 @@ NON_MATCHING u8 Actor_RunStageOps(GameCursorState* state, const u8* table, u8 va
                 } else {
                     g_AreaCameraHeightStep = (s16)(((s16)span - (s32)g_AreaCameraHeight) / (step * 4));
                 }
-                state->index--;
+                state->cursor--;
                 break;
             }
             if (g_AreaCameraMoving != 0) {
-                state->index--;
+                state->cursor--;
                 break;
             }
             span = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
@@ -106,13 +106,13 @@ NON_MATCHING u8 Actor_RunStageOps(GameCursorState* state, const u8* table, u8 va
         case ACTOR_SCRIPT_STAGE_SET_RECORD_INDEX:
             if (Actor_GetOwner() == 1) {
                 entry                         = g_AreaLoads[g_GameAreaId];
-                byte                          = table[state->index + 1];
+                byte                          = table[state->cursor + 1];
                 list                          = *(u32**)((u8*)entry + 0x18);
                 g_Game.current->u.field.index = list[byte];
             } else {
-                state->unk_03 = table[state->index + 1];
+                state->unk_03 = table[state->cursor + 1];
             }
-            state->index = 0xFFFF;
+            state->cursor = 0xFFFF;
             break;
         case ACTOR_SCRIPT_STAGE_TINT_DARK:
             func_801ACBC4();
@@ -121,27 +121,27 @@ NON_MATCHING u8 Actor_RunStageOps(GameCursorState* state, const u8* table, u8 va
             func_801AC9D0();
             break;
         case ACTOR_SCRIPT_STAGE_START_XA:
-            SND_StartXAStream((table[state->index + 1] << 8) | table[state->index + 2], 1);
-            state->index += 2;
+            SND_StartXAStream((table[state->cursor + 1] << 8) | table[state->cursor + 2], 1);
+            state->cursor += 2;
             break;
         case ACTOR_SCRIPT_STAGE_SOUND_STUB:
-            func_80164020((table[state->index + 1] << 8) | table[state->index + 2], 1);
-            state->index += 2;
+            func_80164020((table[state->cursor + 1] << 8) | table[state->cursor + 2], 1);
+            state->cursor += 2;
             break;
         case ACTOR_SCRIPT_STAGE_WAIT_XA_IDLE:
             if ((SND_IsXAIdle() & BYTE_MASK) != 0) {
                 break;
             }
-            state->index--;
+            state->cursor--;
             break;
         case ACTOR_SCRIPT_STAGE_SPAWN_HELPER: {
             volatile Actor* work;
 
-            flag               = table[state->index + 1];
+            flag               = table[state->cursor + 1];
             slot               = g_Game.current->chr.character_id;
             work               = SCRATCH_WORK;
             work->param.unk_0B = Actor_SpawnHelper(flag - 0x90, -((flag ^ 0x94) == 0) & 0xA, D_80181B28[g_CharSlot[slot]], work->pos.x.fixed, work->pos.y.fixed, work->pos.z.fixed);
-            state->index += 1;
+            state->cursor += 1;
             break;
         }
         default:

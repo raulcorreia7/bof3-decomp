@@ -1,7 +1,7 @@
 #include "area103_13.h"
 
 MATCH void func_801F560C(void) {
-    g_ScriptState->unk_08 = Area_FindTaggedPartySlot() + 2;
+    g_ScriptState->message_id = Area_FindTaggedPartySlot() + 2;
     func_801A17A0((u8*)g_ScriptState);
     g_ScriptState->flags &= 0xEF;
     if (g_Task->option_flags & ACTOR_OPT_NO_SCRIPT_START) {

@@ -7,22 +7,22 @@
 
 /* Script interpreter state; the same 12-byte record in each handler. */
 typedef struct ScriptState {
-    u8  flags;
+    u8  flags; /* GameCursorFlags */
     u8  unk_01;
     u8  count;
     u8  script_index; /* 0x03 the row of the area script table to run */
-    u8  unk_04;       /* 0x04 */
-    u8  unk_05;       /* 0x05 */
+    u8  move_kind;    /* 0x04 the kind of move the script starts; 0 for none */
+    u8  direction;    /* 0x05 the facing the script runs under */
     u8  pad_06;
-    u8  unk_07;
-    s16 unk_08; /* 0x08 */
+    u8  steps;      /* 0x07 the frames or half cells the started move runs for */
+    s16 message_id; /* 0x08 the message or scenario the script opens; 0xFFFF for none */
     u16 cursor;
 } ScriptState;
 
-ASSERT_OFFSET(ScriptState, unk_04, 0x04);
-ASSERT_OFFSET(ScriptState, unk_05, 0x05);
-ASSERT_OFFSET(ScriptState, unk_07, 0x07);
-ASSERT_OFFSET(ScriptState, unk_08, 0x08);
+ASSERT_OFFSET(ScriptState, move_kind, 0x04);
+ASSERT_OFFSET(ScriptState, direction, 0x05);
+ASSERT_OFFSET(ScriptState, steps, 0x07);
+ASSERT_OFFSET(ScriptState, message_id, 0x08);
 ASSERT_OFFSET(ScriptState, cursor, 0x0A);
 ASSERT_SIZE(ScriptState, 0x0C);
 

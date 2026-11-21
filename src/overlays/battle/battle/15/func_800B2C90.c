@@ -31,7 +31,7 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
         index = 0;
         do {
             if (*kinds != 0) {
-                has_icon = (func_801AF5B0(task->unk_08, D_80148656, *kinds) & BYTE_MASK) == 0;
+                has_icon = (func_801AF5B0(task->message_id, D_80148656, *kinds) & BYTE_MASK) == 0;
                 icon     = (u16)(-has_icon & 7);
                 if (index == task->flags) {
                     icon = 2;

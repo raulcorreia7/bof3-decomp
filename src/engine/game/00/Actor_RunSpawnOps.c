@@ -11,16 +11,16 @@ typedef enum ActorScriptSpawn {
     ACTOR_SCRIPT_SPAWN_WAIT_ALIVE            = 0x9F, /* hold the cursor while the spawned actor is in use */
 } ActorScriptSpawn;
 
-MATCH s32 Actor_RunSpawnOps(GameCursorState* state, u8* table, s32 value) {
-    switch (table[state->index]) {
+MATCH s32 Actor_RunSpawnOps(ScriptState* state, u8* table, s32 value) {
+    switch (table[state->cursor]) {
         case ACTOR_SCRIPT_SPAWN_CLAIM_AT_SCREEN_FIRST:
         case 0x91:
         case 0x92:
         case 0x93:
         case 0x94:
         case 0x95:
-            g_Task->param.unk_0B = Actor_ClaimSlot(table[state->index] - 0x90, (s8)table[state->index + 1], (s8)table[state->index + 2], (s16)g_Task->screen_x, (s16)g_Task->screen_y);
-            state->index += 2;
+            g_Task->param.unk_0B = Actor_ClaimSlot(table[state->cursor] - 0x90, (s8)table[state->cursor + 1], (s8)table[state->cursor + 2], (s16)g_Task->screen_x, (s16)g_Task->screen_y);
+            state->cursor += 2;
             break;
         case ACTOR_SCRIPT_SPAWN_AT_ACTOR_FIRST:
         case 0x99:
@@ -29,12 +29,12 @@ MATCH s32 Actor_RunSpawnOps(GameCursorState* state, u8* table, s32 value) {
         case 0x9C:
         case 0x9D:
             g_Task->param.unk_0B =
-                Actor_SpawnHelper(table[state->index] - 0x98, (s8)table[state->index + 1], (s8)table[state->index + 2], g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->pos.z.fixed);
-            state->index += 2;
+                Actor_SpawnHelper(table[state->cursor] - 0x98, (s8)table[state->cursor + 1], (s8)table[state->cursor + 2], g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->pos.z.fixed);
+            state->cursor += 2;
             break;
         case ACTOR_SCRIPT_SPAWN_WAIT_ALIVE:
             if (ACTOR_IN_USE(g_SpawnedActors[g_Task->param.actor_slot])) {
-                state->index -= 1;
+                state->cursor -= 1;
             }
             break;
         default:

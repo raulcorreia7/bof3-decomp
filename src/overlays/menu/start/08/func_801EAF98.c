@@ -41,7 +41,7 @@ loop_6:
         goto loop_6; /* retail branch */
     }
     UI_DrawWindow((val0->pos.x + 3) & HALF_MASK, (val0->pos.y + 3) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_WINDOW_HEIGHT, 0, (s32)g_WindowStyle);
-    val4 = func_801AFD10(&val0->unk_0A, &stack_20, &stack_21, &val0->unk_08);
+    val4 = func_801AFD10(&val0->unk_0A, &stack_20, &stack_21, &val0->message_id);
     val5 = val4 & BYTE_MASK;
     val1 = (s8)stack_20 + (val0->pos.y + 0x1A);
     if (val5 < (val5 + (stack_21 + 9))) {

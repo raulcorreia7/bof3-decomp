@@ -18,7 +18,7 @@ MATCH u8 Actor_RunScript(void* sub, s32 target) {
             value = ((u8*)target)[((ScriptState*)sub)->cursor];
             sel   = (u8)(value - 0x10) >> 3;
             value &= 7;
-            ((ScriptState*)sub)->unk_07 = value;
+            ((ScriptState*)sub)->steps = value;
             if (value != 0) {
                 if (Actor_GetOwner() != 2) {
                     Area_MoveActorRoute(sub, sel);

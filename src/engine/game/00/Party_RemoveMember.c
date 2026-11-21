@@ -87,7 +87,7 @@ NON_MATCHING void Party_RemoveMember(s32 character_id) {
                     wsrc += 4;
                     wdst += 4;
                 } while (wsrc != wend);
-                g_Task->unk_05                            = (u8)slot;
+                g_Task->direction                         = (u8)slot;
                 g_Task->unk_26                            = (u8)frac;
                 g_Task->unk_27                            = (u8)code;
                 g_Task->unk_4B                            = 0xFF;

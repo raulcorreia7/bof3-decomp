@@ -28,7 +28,7 @@ NON_MATCHING void func_801F3140(s8 span) {
             g_SpawnedActors[slot2].unk_2C           = 0x2C0;
             g_SpawnedActors[slot2].layer            = 1;
             g_SpawnedActors[slot2].unk_06           = 0;
-            g_SpawnedActors[slot2].unk_07           = 0;
+            g_SpawnedActors[slot2].steps            = 0;
             g_SpawnedActors[slot2].unk_29           = 6;
         }
     }

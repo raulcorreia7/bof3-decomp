@@ -32,7 +32,7 @@ NON_MATCHING void func_801F3BC0(void) {
         offset += 4;
     }
     if (offset) {
-        g_ScriptState->unk_07 = offset + 1;
+        g_ScriptState->steps = offset + 1;
         Area_SetFacingOffsetX(g_Task->direction);
         g_AreaCameraHeightStep = 0;
         g_ScriptState->flags |= 0x40;
