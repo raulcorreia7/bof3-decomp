@@ -2,6 +2,7 @@
 #define OVERLAY_FIELD_CAMERA_H
 
 #include "types.h"
+#include "psx/psyq.h"
 /* func_801527E4 */
 extern void Area_UpdateCamera(void);
 /* func_8015B4B0 */

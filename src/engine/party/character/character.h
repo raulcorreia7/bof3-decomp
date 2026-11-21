@@ -2,6 +2,7 @@
 #define OVERLAY_PARTY_CHARACTER_H
 
 #include "types.h"
+#include "game/character.h"
 
 void Char_ApplyLevelUps(s32 char_id);
 void Char_RebuildPartyStats(void);

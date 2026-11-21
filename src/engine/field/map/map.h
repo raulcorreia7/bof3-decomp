@@ -2,6 +2,8 @@
 #define OVERLAY_FIELD_MAP_H
 
 #include "types.h"
+#include "psx/psyq.h"
+#include "slus/part.h"
 
 /* One status sprite cell: the size index selects a width and height row from D_8017F53C. */
 typedef struct SpriteCell {

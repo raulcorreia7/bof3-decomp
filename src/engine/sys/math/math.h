@@ -2,6 +2,7 @@
 #define OVERLAY_SYS_MATH_H
 
 #include "types.h"
+#include "psx/psyq.h"
 
 /* func_801AFF64 */
 void MATH_SetIdentity(MATRIX* matrix);

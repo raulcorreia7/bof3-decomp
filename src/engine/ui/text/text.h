@@ -2,6 +2,7 @@
 #define OVERLAY_UI_TEXT_H
 
 #include "types.h"
+
 /* The executable's window and menu text functions, in address order. */
 /* func_8014ECAC */
 void        UI_SetMode(u16 local_mode);
@@ -35,39 +36,38 @@ void        UI_ScrollChoice(void);
 void        UI_UpdateChoice(void);
 /* func_801526F4 */
 extern void UI_DrawWaitMarker(s16 x, s16 y);
-
-/* func_801AE3F0 */
-void UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 frame_flags, u8 palette);
-/* UI_DrawIcon */
-/* func_801AEA80 */
-void UI_DrawIcon(s32 sprite_x, s32 sprite_y, s32 icon_id, s32 dimmed);
-/* UI_DrawWindowFrame */
-/* func_801AEBA0 */
-void UI_DrawWindowFrame(s16 frame_x, s16 frame_y, s16 frame_width, s16 frame_height, s32 mode_pair_flag);
-/* func_801AED54 */
-void UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
-/* UI_GetSpriteRect */
-/* func_801AF270 */
-u8*  UI_GetSpriteRect(u8 sprite_id, u8 flags);
-/* func_801AF2A0 */
-void UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
-/* func_801AF390 */
-void UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
-/* func_801AF800 */
-void UI_DrawItemRow(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
-/* func_801AFA1C */
-void UI_DrawScrollbar(u8* marks, u8 thumb_top, s16 x, s16 y, u8 thumb_size, u8 total, u8 track_size);
-void UI_DrawBoxOutline(s32 x, s32 y, u8 width, u8 height);
 /* UI_DrawIconCell */
 /* func_801644D8 */
-void UI_DrawIconCell(s32 index, s32 x, s32 y, s32 width, s32 height, s32 shade);
+void        UI_DrawIconCell(s32 index, s32 x, s32 y, s32 width, s32 height, s32 shade);
+/* func_801AE3F0 */
+void        UI_DrawWindow(u16 x, u16 y, u16 width, u16 height, s32 frame_flags, u8 palette);
+/* UI_DrawIcon */
+/* func_801AEA80 */
+void        UI_DrawIcon(s32 sprite_x, s32 sprite_y, s32 icon_id, s32 dimmed);
+/* UI_DrawWindowFrame */
+/* func_801AEBA0 */
+void        UI_DrawWindowFrame(s16 frame_x, s16 frame_y, s16 frame_width, s16 frame_height, s32 mode_pair_flag);
+/* func_801AED54 */
+void        UI_DrawWindowOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
+/* UI_GetSpriteRect */
+/* func_801AF270 */
+u8*         UI_GetSpriteRect(u8 sprite_id, u8 flags);
+/* func_801AF2A0 */
+void        UI_DrawSprite(s16 x, s16 y, u8 sprite_id, u8 flags);
+/* func_801AF390 */
+void        UI_DrawSpriteRun(s16 base_x, s16 base_y, const u8* record_table, u8 flags);
+/* func_801AF800 */
+void        UI_DrawItemRow(s16 record_x, s32 record_y, u8 text_shade, u8 category, s32 item_id, s32 quantity, s32 sprite_flag);
+/* func_801AFA1C */
+void        UI_DrawScrollbar(u8* marks, u8 thumb_top, s16 x, s16 y, u8 thumb_size, u8 total, u8 track_size);
+void        UI_DrawBoxOutline(s32 x, s32 y, u8 width, u8 height);
 
 #endif
-
 /* Declarations of the executable and game/00 sources: an overlay that calls these without a prototype compiles the call differently, so they are visible only after ENGINE_LOCAL_DECLS. */
-#if defined(ENGINE_LOCAL_DECLS) && !defined(OVERLAY_UI_TEXT_H_LOCAL)
-#define OVERLAY_UI_TEXT_H_LOCAL
 
+#if defined(ENGINE_LOCAL_DECLS) && !defined(OVERLAY_UI_TEXT_H_LOCAL)
+
+#define OVERLAY_UI_TEXT_H_LOCAL
 /* func_801519F8 */
 void        UI_NextChoice(void);
 /* func_80151A48 */

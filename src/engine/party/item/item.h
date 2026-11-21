@@ -2,6 +2,7 @@
 #define OVERLAY_PARTY_ITEM_H
 
 #include "types.h"
+#include "game/item.h"
 
 bool Item_PassesTest(u8 test, u8 character_id, u8 category, u8 item_id);
 /* func_801650B4 */
