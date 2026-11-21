@@ -1,0 +1,10 @@
+#include "boss050_16.h"
+
+#include "func_800C1810.c"
+#include "func_800C1854.c"
+#include "func_800C18B8.c"
+#include "func_800C18F0.c"
+#include "func_800C18F8.c"
+#include "func_800C1900.c"
+#include "overlays/boss/shared/Boss_InstallBattleHooks.h"
+#include "Boss_RunBattleEvent.c"

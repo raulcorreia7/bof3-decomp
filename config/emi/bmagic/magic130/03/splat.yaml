@@ -9,6 +9,8 @@ segments:
     subsegments:
       - [0x0, bin, D_801EEC00]
       - [0x10, c, BMagic_Effect]
+      - [0x20C, c, bmagic_effect_request_target_on_timer_zero]
+      - [0x318, c, bmagic_effect_count_down_timer_step]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
     type: code

@@ -1,14 +1,5 @@
-/* boss054's code in link order: one translation unit for the whole .text run. */
 #include "boss054_16.h"
 
-#include "func_800C1838.c"
-#include "func_800C187C.c"
-#include "func_800C18E0.c"
-#include "func_800C1918.c"
-#include "func_800C1920.c"
-#include "func_800C1928.c"
-#include "overlays/boss/shared/Boss_InstallBattleHooks.h"
-#include "Boss_RunBattleEvent.c"
 #include "Boss_ChooseBattleEnding.c"
 #include "Boss_EndBattle.c"
 #include "func_800C19C4.c"

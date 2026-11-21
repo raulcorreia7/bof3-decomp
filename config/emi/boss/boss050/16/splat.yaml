@@ -12,7 +12,8 @@ segments:
     section_order: [.data, .text, .rodata, .bss]
     subsegments:
       - [0x0, bin, D_800C1800]
-      - [0x10, c, battle]
+      - [0x10, c, boss_install_battle_hooks]
+      - [0x148, c, battle]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
     type: code
