@@ -370,9 +370,9 @@ MATCH void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shad
     py = 0;
 }
 
-#include "overlays/menu/Menu_DrawStatPanel.h"
+#include "overlays/menu/shared/Menu_DrawStatPanel.h"
 
-#include "overlays/menu/Shop_DrawEquipment.h"
+#include "overlays/menu/shared/Shop_DrawEquipment.h"
 
 MATCH void func_801D4158(s16 x, s16 y, u8 index, u8 flag) {
     Character* character;
@@ -402,42 +402,42 @@ MATCH void func_801D4158(s16 x, s16 y, u8 index, u8 flag) {
     UI_DrawSpriteRun(x, y, &g_MenuInventoryTab1OnSprites[0x24], UI_SPRITE_ALT_PAGE);
 }
 
-#include "overlays/menu/Menu_DrawCursorFrame.h"
+#include "overlays/menu/shared/Menu_DrawCursorFrame.h"
 
 #include "shared/Menu_DrawPortrait.h"
 
 #include "shared/Menu_DrawCharacterPortrait.h"
 
-#include "overlays/menu/Menu_DrawTintedLine.h"
+#include "overlays/menu/shared/Menu_DrawTintedLine.h"
 
-#include "overlays/menu/Menu_DrawItemRow.h"
+#include "overlays/menu/shared/Menu_DrawItemRow.h"
 
-#include "overlays/menu/Menu_DrawEquipment.h"
+#include "overlays/menu/shared/Menu_DrawEquipment.h"
 
-#include "overlays/menu/Menu_DrawFormationPreview.h"
+#include "overlays/menu/shared/Menu_DrawFormationPreview.h"
 
-#include "overlays/menu/Menu_DrawIcon.h"
+#include "overlays/menu/shared/Menu_DrawIcon.h"
 
 /* func_801D5620 */
 MATCH void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color) {
     MenuDrawPanelIcon(x, y, u, v, clut, color);
 }
 
-#include "overlays/menu/Menu_DrawExperienceLine.h"
+#include "overlays/menu/shared/Menu_DrawExperienceLine.h"
 
-#include "overlays/menu/Menu_DrawZennyWindow.h"
+#include "overlays/menu/shared/Menu_DrawZennyWindow.h"
 
-#include "overlays/menu/Menu_DrawPlayTimeWindow.h"
+#include "overlays/menu/shared/Menu_DrawPlayTimeWindow.h"
 
-#include "overlays/menu/Menu_ChooseYesNo.h"
+#include "overlays/menu/shared/Menu_ChooseYesNo.h"
 
-#include "overlays/menu/Menu_DrawCommandRow.h"
+#include "overlays/menu/shared/Menu_DrawCommandRow.h"
 
-#include "overlays/menu/Item_GetPrice.h"
+#include "overlays/menu/shared/Item_GetPrice.h"
 
-#include "overlays/menu/Char_GetExpForLevel.h"
+#include "overlays/menu/shared/Char_GetExpForLevel.h"
 
-#include "overlays/menu/Char_GetExpProgress.h"
+#include "overlays/menu/shared/Char_GetExpProgress.h"
 
 #ifdef NON_MATCHING
 NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style) {
@@ -578,22 +578,22 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
 INCLUDE_ASM(Menu_DrawHeaderBar);
 #endif
 
-#include "overlays/menu/Menu_DrawEquipCompareWindow.h"
+#include "overlays/menu/shared/Menu_DrawEquipCompareWindow.h"
 
-#include "overlays/menu/Menu_DrawRowIcons.h"
+#include "overlays/menu/shared/Menu_DrawRowIcons.h"
 
-#include "overlays/menu/Menu_DrawEquipStatWindow.h"
+#include "overlays/menu/shared/Menu_DrawEquipStatWindow.h"
 
 const char g_MenuInventoryCountFormat[8] = "%3d/%3d";
 const u8   D_801D0D48[4]                 = {0, 0, 0, 0};
 
-#include "overlays/menu/Menu_DrawClutStrip.h"
+#include "overlays/menu/shared/Menu_DrawClutStrip.h"
 
-#include "overlays/menu/Menu_DrawFilledPanel.h"
+#include "overlays/menu/shared/Menu_DrawFilledPanel.h"
 
-#include "overlays/menu/Menu_DrawWindowFrame.h"
+#include "overlays/menu/shared/Menu_DrawWindowFrame.h"
 
-#include "overlays/menu/Menu_DrawInventoryWindow.h"
+#include "overlays/menu/shared/Menu_DrawInventoryWindow.h"
 
 MATCH void func_801D835C(MenuChoicePanel* panel) {
     Ability* ability;
@@ -665,11 +665,11 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
     }
 }
 
-#include "overlays/menu/Menu_DrawPanelFrame.h"
+#include "overlays/menu/shared/Menu_DrawPanelFrame.h"
 
 /* func_801D8A78 */
-#include "overlays/menu/Menu_DrawEquipChoiceWindow.h"
+#include "overlays/menu/shared/Menu_DrawEquipChoiceWindow.h"
 
-#include "overlays/menu/SAVE_DrawSlotRow.h"
+#include "overlays/menu/shared/SAVE_DrawSlotRow.h"
 
-#include "overlays/menu/SAVE_DrawPortTabs.h"
+#include "overlays/menu/shared/SAVE_DrawPortTabs.h"
