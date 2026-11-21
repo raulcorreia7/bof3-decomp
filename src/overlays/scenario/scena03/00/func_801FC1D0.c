@@ -68,7 +68,7 @@ MATCH void func_801FC410(void) {
     SCENA03_NUDGE_SCROLL(D_801FD008, 1);
 }
 
-#include "overlays/scenario/Scene_DispatchActor.h"
+#include "overlays/scenario/shared/Scene_DispatchActor.h"
 
 MATCH void func_801FC4AC(void* entity, void* bits) {
     Game_SetScriptActive();
@@ -281,7 +281,7 @@ MATCH s8 func_801FCB4C(s32 entry_x, s32 entry_y) {
     return 0;
 }
 
-#include "overlays/scenario/Scene_ShowMessage.h"
+#include "overlays/scenario/shared/Scene_ShowMessage.h"
 
 MATCH s32 func_801FCCDC(s32 x, s32 y) {
     if (MEM(u16, GAME_AREA_ID_ADDR) == AREA_ID_MOUNT_BOUMORE_SECOND) {
@@ -345,4 +345,4 @@ MATCH void Party_JoinNinaYoung(void) {
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
 }
 
-#include "overlays/scenario/Scene_RemoveNina.h"
+#include "overlays/scenario/shared/Scene_RemoveNina.h"

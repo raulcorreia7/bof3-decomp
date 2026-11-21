@@ -313,4 +313,4 @@ MATCH void Party_JoinRei(void) {
     Party_JoinMember(CHAR_ID_REI);
 }
 
-#include "overlays/scenario/Scene_RemoveRei.h"
+#include "overlays/scenario/shared/Scene_RemoveRei.h"

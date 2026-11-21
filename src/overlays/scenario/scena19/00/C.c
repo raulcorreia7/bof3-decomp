@@ -39,7 +39,7 @@ MATCH void func_801F6CA4(void) {
     }
 }
 
-#include "overlays/scenario/Scene_DispatchActor.h"
+#include "overlays/scenario/shared/Scene_DispatchActor.h"
 
 MATCH void func_801F6D50(void) {
 }
@@ -52,7 +52,7 @@ MATCH s32 func_801F6D60(void) {
     return 0;
 }
 
-#include "overlays/scenario/Scene_SetPartyRyuYoungTeepoRei.h"
+#include "overlays/scenario/shared/Scene_SetPartyRyuYoungTeepoRei.h"
 
 MATCH void func_801F6DB4(void) {
 }

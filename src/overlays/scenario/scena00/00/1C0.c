@@ -2382,4 +2382,4 @@ MATCH s32 func_801FC8F4(void) {
     return 0;
 }
 
-#include "overlays/scenario/Scene_ClearParty.h"
+#include "overlays/scenario/shared/Scene_ClearParty.h"

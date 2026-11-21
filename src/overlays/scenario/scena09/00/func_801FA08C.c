@@ -259,7 +259,7 @@ MATCH void func_801FC590(void) {
 MATCH void func_801FC5DC(void) {
 }
 
-#include "overlays/scenario/Scene_DispatchActor.h"
+#include "overlays/scenario/shared/Scene_DispatchActor.h"
 
 MATCH void func_801FC624(void) {
 }
@@ -666,11 +666,11 @@ MATCH void Scene_JoinGarrWithAdultNina(void) {
     Party_LoadPalettes();
 }
 
-#include "overlays/scenario/Scene_JoinAdultNinaMomo.h"
+#include "overlays/scenario/shared/Scene_JoinAdultNinaMomo.h"
 
-#include "overlays/scenario/Scene_JoinMomo.h"
+#include "overlays/scenario/shared/Scene_JoinMomo.h"
 
-#include "overlays/scenario/Scene_JoinAdultNina.h"
+#include "overlays/scenario/shared/Scene_JoinAdultNina.h"
 
 MATCH void func_801FDE50(void) {
     Party_BuildBattlers(PARTY_ORDER_FIELD);
@@ -678,9 +678,9 @@ MATCH void func_801FDE50(void) {
     Party_LoadPalettes();
 }
 
-#include "overlays/scenario/Scene_JoinMomoPeco.h"
+#include "overlays/scenario/shared/Scene_JoinMomoPeco.h"
 
-#include "overlays/scenario/Scene_JoinPeco.h"
+#include "overlays/scenario/shared/Scene_JoinPeco.h"
 
 /* func_801FDF10 */
 MATCH void Scene_JoinMomoWithPeco(void) {
@@ -690,7 +690,7 @@ MATCH void Scene_JoinMomoWithPeco(void) {
     Party_LoadPalettes();
 }
 
-#include "overlays/scenario/Scene_RebuildRyuGarrParty.h"
+#include "overlays/scenario/shared/Scene_RebuildRyuGarrParty.h"
 
 /* func_801FE014 */
 MATCH void Scene_JoinAdultNinaWithRei(void) {
@@ -725,7 +725,7 @@ MATCH void Scene_JoinRyuAdult(void) {
     Party_LoadPalettes();
 }
 
-#include "overlays/scenario/Scene_RemoveRei.h"
+#include "overlays/scenario/shared/Scene_RemoveRei.h"
 
 /* func_801FE154 */
 MATCH void Scene_RemoveReiGarr(void) {
@@ -734,7 +734,7 @@ MATCH void Scene_RemoveReiGarr(void) {
     Party_LoadPalettes();
 }
 
-#include "overlays/scenario/Scene_RemoveGarr.h"
+#include "overlays/scenario/shared/Scene_RemoveGarr.h"
 
 /* func_801FE1AC */
 MATCH void Scene_RemoveGarrAdultNina(void) {
@@ -750,13 +750,13 @@ MATCH void Scene_RemoveReiAdultNina(void) {
     Party_LoadPalettes();
 }
 
-#include "overlays/scenario/Scene_RemoveAdultNina.h"
+#include "overlays/scenario/shared/Scene_RemoveAdultNina.h"
 
-#include "overlays/scenario/Scene_StashPartyExceptRyuAdult.h"
+#include "overlays/scenario/shared/Scene_StashPartyExceptRyuAdult.h"
 
-#include "overlays/scenario/Scene_RemoveMomo.h"
+#include "overlays/scenario/shared/Scene_RemoveMomo.h"
 
-#include "overlays/scenario/Scene_RemovePeco.h"
+#include "overlays/scenario/shared/Scene_RemovePeco.h"
 
 /* func_801FE35C */
 MATCH void Scene_RemoveRyuAdult(void) {

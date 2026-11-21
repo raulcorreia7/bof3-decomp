@@ -5,7 +5,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/scenario/Scene_DispatchActor.h"
+#include "overlays/scenario/shared/Scene_DispatchActor.h"
 
 MATCH void func_801FCE10(void) {
 }
@@ -483,7 +483,7 @@ MATCH void Party_JoinPeco(void) {
     Party_JoinMember(CHAR_ID_PECO);
 }
 
-#include "overlays/scenario/Scene_JoinNina.h"
+#include "overlays/scenario/shared/Scene_JoinNina.h"
 
 MATCH void func_801FE198(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR, 0U);
@@ -523,9 +523,9 @@ MATCH void Scene_RemoveRyuPeco(void) {
     Party_LoadPalettes();
 }
 
-#include "overlays/scenario/Scene_RemoveGarr.h"
+#include "overlays/scenario/shared/Scene_RemoveGarr.h"
 
-#include "overlays/scenario/Scene_RemovePeco.h"
+#include "overlays/scenario/shared/Scene_RemovePeco.h"
 
 /* func_801FE334 */
 MATCH void Scene_RemovePecoGarr(void) {
@@ -534,7 +534,7 @@ MATCH void Scene_RemovePecoGarr(void) {
     Party_LoadPalettes();
 }
 
-#include "overlays/scenario/Scene_RemoveMomo.h"
+#include "overlays/scenario/shared/Scene_RemoveMomo.h"
 
 /* func_801FE38C */
 MATCH void Scene_RemoveMomoPeco(void) {

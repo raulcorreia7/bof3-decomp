@@ -41,7 +41,7 @@ MATCH s32 func_801FDC6C(s32 x, s32 y, s32 unk_06, s32 unk_07, u8 link) {
     return 0;
 }
 
-#include "overlays/scenario/Scene_DispatchActor.h"
+#include "overlays/scenario/shared/Scene_DispatchActor.h"
 
 /* func_801FDDC0 */
 MATCH void Scene_ShowEntityMessage(void* entity) {
@@ -212,7 +212,7 @@ MATCH void Scene_SetPartyRyuAdultNinaAdultGarr(void) {
     SCENE_SET_PARTY(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_GARR);
 }
 
-#include "overlays/scenario/Scene_SetPartyRyuAdultNinaAdultRei.h"
+#include "overlays/scenario/shared/Scene_SetPartyRyuAdultNinaAdultRei.h"
 
 MATCH void func_801FE574(void) {
 }

@@ -6,7 +6,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/scenario/Scene_DispatchEntity.h"
+#include "overlays/scenario/shared/Scene_DispatchEntity.h"
 
 MATCH void func_801F6F8C(void) {
     Actor* work;
@@ -646,7 +646,7 @@ MATCH FallingSpark* func_801F8B14(void) {
     return NULL;
 }
 
-#include "overlays/scenario/Scene_InitSpark.h"
+#include "overlays/scenario/shared/Scene_InitSpark.h"
 
 MATCH u8 func_801F8BF8(void) {
     u8            i;
@@ -680,7 +680,7 @@ MATCH void func_801F8CDC(FallingSpark* spark) {
     }
 }
 
-#include "overlays/scenario/Actor_Wait.h"
+#include "overlays/scenario/shared/Actor_Wait.h"
 
 MATCH void func_801F8D4C(FallingSpark* spark) {
     u8  life;

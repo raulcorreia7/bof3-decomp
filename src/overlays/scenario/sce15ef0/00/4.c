@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/scenario/Scene_DispatchEntity.h"
+#include "overlays/scenario/shared/Scene_DispatchEntity.h"
 
 MATCH void func_801D0C48(void) {
     g_Task->pos.x.fixed      = TO_COORD(48) + COORD_HALF;

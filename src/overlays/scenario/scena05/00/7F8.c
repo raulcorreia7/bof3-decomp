@@ -6,7 +6,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/scenario/Scene_DispatchEntity.h"
+#include "overlays/scenario/shared/Scene_DispatchEntity.h"
 
 MATCH void func_801F743C(void) {
     Actor* actor;

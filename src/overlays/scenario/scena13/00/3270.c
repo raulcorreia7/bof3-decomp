@@ -79,7 +79,7 @@ NON_MATCHING void func_801FAFA0(s32 message, s32 frames) {
 INCLUDE_ASM(func_801FAFA0);
 #endif
 
-#include "overlays/scenario/GFX_CopyPaletteCapped.h"
+#include "overlays/scenario/shared/GFX_CopyPaletteCapped.h"
 
 /* func_801FB164 */
 MATCH void Scene_RestorePalette(void) {

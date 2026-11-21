@@ -294,7 +294,7 @@ INCLUDE_ASM(func_801FA9C8);
 MATCH void func_801FB374(void) {
 }
 
-#include "overlays/scenario/Scene_DispatchActor.h"
+#include "overlays/scenario/shared/Scene_DispatchActor.h"
 
 /* Starts the area message `message`: the area overlay's own lookup (func_801F326C
  * for the second desert camp, func_801F37AC otherwise) maps it to a message index. */
@@ -534,7 +534,7 @@ MATCH void Scene_SetPartyRyuAdultGarrPeco(void) {
     SCENE_SET_PARTY(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_PECO);
 }
 
-#include "overlays/scenario/Scene_SetPartyRyuAdultGarrNinaAdult.h"
+#include "overlays/scenario/shared/Scene_SetPartyRyuAdultGarrNinaAdult.h"
 
 MATCH void func_801FC0C8(void) {
     EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, *D_80144908, 0U);
@@ -569,7 +569,7 @@ MATCH void func_801FC1E8(void) {
     Party_LoadPalettes();
 }
 
-#include "overlays/scenario/Scene_SetPartyRyuAdultNinaAdultRei.h"
+#include "overlays/scenario/shared/Scene_SetPartyRyuAdultNinaAdultRei.h"
 
 MATCH void func_801FC280(void) {
     u8 slot;

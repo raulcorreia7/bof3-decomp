@@ -517,7 +517,7 @@ MATCH void func_801F8844(void) {
     SYS_ThreadReplace(Scene_RunSaveMenu);
 }
 
-#include "overlays/scenario/Scene_DispatchActor.h"
+#include "overlays/scenario/shared/Scene_DispatchActor.h"
 
 MATCH s32 func_801F88BC(void) {
     return 0;
@@ -857,7 +857,7 @@ MATCH s32 func_801F96CC(void) {
     return 0;
 }
 
-#include "overlays/scenario/Scene_SetPartyRyuYoungTeepoRei.h"
+#include "overlays/scenario/shared/Scene_SetPartyRyuYoungTeepoRei.h"
 
 MATCH void func_801F9720(void) {
 }

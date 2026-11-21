@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/scenario/Scene_DispatchEntity.h"
+#include "overlays/scenario/shared/Scene_DispatchEntity.h"
 
 MATCH void func_801D0C48(void) {
     u8* work;
@@ -220,7 +220,7 @@ MATCH void func_801D1588(void) {
     SYS_DISPATCH_TASK(D_801D280C, 1, g_Task);
 }
 
-#include "overlays/scenario/Scene_EndScan.h"
+#include "overlays/scenario/shared/Scene_EndScan.h"
 
 MATCH void func_801D1614(void) {
     if (g_Task->timer == 0) {
@@ -336,7 +336,7 @@ MATCH void func_801D19A0(void){AREA_SEED_SPARK_EMITTERS(D_801D27B0)}
 /* func_801D1A60 */
 #include "shared/Area_StepSparkEmitters.h"
 
-#include "overlays/scenario/Scene_DrawRedGradient.h"
+#include "overlays/scenario/shared/Scene_DrawRedGradient.h"
 
 MATCH void func_801D1D20(WorldPos* pos, s32* step, u8 red, u8 green) {
     FAKE_STACK_PADS(u8, 0x10); /* FAKE: retain the retail frame and projected-point spacing. */
@@ -482,10 +482,10 @@ MATCH void Scene_DrawRedFade(u8 red) {
     GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
 }
 
-#include "overlays/scenario/Scene_DrawScanBar.h"
+#include "overlays/scenario/shared/Scene_DrawScanBar.h"
 
-#include "overlays/scenario/Scene_ClearScanBars.h"
+#include "overlays/scenario/shared/Scene_ClearScanBars.h"
 
-#include "overlays/scenario/Scene_ClaimScanBar.h"
+#include "overlays/scenario/shared/Scene_ClaimScanBar.h"
 
-#include "overlays/scenario/Scene_UpdateScanBars.h"
+#include "overlays/scenario/shared/Scene_UpdateScanBars.h"

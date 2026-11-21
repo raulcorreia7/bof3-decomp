@@ -59,7 +59,7 @@ MATCH void func_801F7960(void) {
     g_GfxPalettePending = 1;
 }
 
-#include "overlays/scenario/Scene_SpawnActor.h"
+#include "overlays/scenario/shared/Scene_SpawnActor.h"
 
 MATCH bool Scene_SpawnActor(u8 type, s16 angle_x, s16 angle_y, s16 angle_z, u8 layer, s32 scene_step){SCENE_SPAWN_ACTOR(D_801FC4C0)}
 
