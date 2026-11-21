@@ -11,4 +11,3 @@
 ## Checks
 
 - [ ] `meson compile -C build/meson pre-push` passes.
-- [ ] Optional: every image builds byte-identical.
