@@ -9,7 +9,7 @@ that crosses a call, highest priority first: the priority
 the uses, the live length, the register it got (`s0`..`s8`, or STACK) and the instruction that
 first sets it. Use it to see which value should take which saved register.
 
-    tools/alloc_priority.py src/engine/field/Area_DrawCellRing.c Area_DrawCellRing
+    tools/alloc_priority.py src/engine/field/map/Area_DrawCellRing.c Area_DrawCellRing
 """
 
 import argparse

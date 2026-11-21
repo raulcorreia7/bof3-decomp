@@ -62,10 +62,12 @@ Id to path: `emi/<family>/<archive>/<slot>` lives in `src/<root>/<archive>/<slot
 An engine image takes its files from several folders: a `c` row names a file outside the image folder
 by its path from that folder (`[0xC6D00, c, ../sound/SND_Init]`; `../../sound/SND_Init` in `game/00`).
 A system folder holds the files of both engine images, and the row says which image links a file.
-A named file lives in the folder of its system prefix: `engine/sys` (`SYS_`, `MATH_`, `INPUT_`), `cd`
-(`EMI_`, `LZ77_`), `gfx`, `sound`, `sdk` (PsyQ library members), `actor` (`Actor_`, `Script_`), `field`
-(`Area_`, `WorldMap_`, `FieldAction_`), `ui` (`UI_`, `Message_`, `Menu_`), `party` (`Party_`, `Char_`,
-`Item_`) and `state` (`Game_`, `Scene_`, `Battle_`). A file keeps its image folder until it is named.
+A named file lives in the module folder of its name prefix: `sys` (boot, flags, math), `input/pad`, `cd`
+(drive, `lz77`), `emi/loader`, `gfx` (palette, fade, prim), `sound` (seq, vab, xa, se), `sdk` (PsyQ
+members), `actor` (ops, script, motion, task), `field` (map, camera, collision, encounter, action,
+world), `ui` (text, message, message_answers, menu), `party` and `state` (mode, progress, scene,
+battle). The module boundaries are designed, not proven by the bytes, except `ui/message_answers` and
+`actor/ops`. A file keeps its image folder until it is named.
 `config/` and `build/asm/` follow the id, which is the disc path; `src/` follows what the code does.
 
 The path tells the build which image a source belongs to, except in an engine system folder, where the

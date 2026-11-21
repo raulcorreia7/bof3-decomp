@@ -20,8 +20,8 @@ import pytest
 ROOT = Path(__file__).resolve().parents[2]
 HOST = ROOT / "tools/tests/host/lz77"
 UNITS = [
-    ROOT / "src/engine/cd/LZ77_DecodeBegin.c",
-    ROOT / "src/engine/cd/LZ77_DecodeStep.c",
+    ROOT / "src/engine/cd/lz77/LZ77_DecodeBegin.c",
+    ROOT / "src/engine/cd/lz77/LZ77_DecodeStep.c",
     ROOT / "src/engine/slus/func_801642F4.c",
 ]
 # The longest literal run is 271 bytes and a resumed run is copied without a limit check, so a

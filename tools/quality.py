@@ -59,7 +59,9 @@ PER_FUNCTION = ("addr", "names")
 TOTALS = ("casts", "harmful", "pasted")
 SUBSYSTEMS = (
     ("System", "src/engine/sys"),
+    ("Input", "src/engine/input"),
     ("Disc", "src/engine/cd"),
+    ("EMI", "src/engine/emi"),
     ("Graphics", "src/engine/gfx"),
     ("Sound", "src/engine/sound"),
     ("SDK", "src/engine/sdk"),

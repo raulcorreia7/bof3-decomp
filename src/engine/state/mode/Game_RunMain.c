@@ -1,0 +1,25 @@
+#include "engine/game/00/game_00.h"
+
+struct GameSelState {
+    u8           pad[0x3B90];
+    volatile u16 state;
+    volatile u16 substate;
+};
+
+#define GAME_SEL_STATE ((volatile struct GameSelState*)&D_80140000)
+
+MATCH void Game_RunMain(void) {
+    const Callback* callbacks;
+
+    GAME_SEL_STATE->state    = 0u;
+    GAME_SEL_STATE->substate = 0u;
+    SYS_ClearCurrentThread();
+    Menu_ResetPanelTasks();
+
+    while (1) {
+        callbacks = g_GameModes;
+        callbacks[GAME_SEL_STATE->state]();
+        Game_UpdateClock();
+        SYS_ThreadWait(1u);
+    }
+}

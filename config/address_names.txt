@@ -3,9 +3,9 @@ include/slus/exports.h	g_ExceptionTitle
 include/slus/exports.h	g_ExceptionCauseNames
 include/slus/exports.h	g_LogoExePath
 include/sys/loader_tail.h	ScriptRefList
-src/engine/sys/SYS_ShowException.c	g_ExceptionTitle
-src/engine/sys/SYS_ShowException.c	g_ExceptionCauseNames
-src/engine/sys/SYS_StartLogo.c	g_LogoExePath
+src/engine/sys/boot/SYS_ShowException.c	g_ExceptionTitle
+src/engine/sys/boot/SYS_ShowException.c	g_ExceptionCauseNames
+src/engine/sys/boot/SYS_StartLogo.c	g_LogoExePath
 src/engine/slus/data_80149800.c	g_LogoExePath
 src/engine/slus/data_8017F53C.c	Rec_8017F5B4
 src/engine/slus/data_80181CA8.c	ScriptRefList
