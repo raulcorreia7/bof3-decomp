@@ -409,8 +409,12 @@ extern FieldActionAltSteps  g_FieldActionAltSteps; /* 0x80195F10 */
 /* D_80195F44 */
 extern FieldActionFadeSteps g_FieldActionFadeSteps; /* 0x80195F44 */
 extern char                 D_80195F90[];
-extern char                 D_80195F98[]; /* 0x80195F98 */
-extern char                 D_80195FBC[]; /* 0x80195FBC */
+/* The format that prints an ability row's cost. */
+/* D_80195F98 */
+extern char                 g_UiAbilityRowFormat[]; /* 0x80195F98 */
+/* The format that prints the zenny reward. */
+/* D_80195FBC */
+extern char                 g_GameRewardZennyFormat[]; /* 0x80195FBC */
 extern CellPaletteIndices   D_80195FEC;
 extern CellEffects          D_80195FF8;
 extern PaletteColors        D_80196014;

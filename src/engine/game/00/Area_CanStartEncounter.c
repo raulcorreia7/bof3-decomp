@@ -29,7 +29,7 @@ MATCH s32 Area_CanStartEncounter(void) {
     if (g_Game.members[0].status.field.flags.unsigned_value & AREA_LOAD_FLAG_WORLD_MAP) {
         return 0;
     }
-    if (!(g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) && D_80143EFC >= 0xF1) {
+    if (!(g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) && g_SysDrawTime >= 0xF1) {
         return 0;
     }
     for (i = 0; i < g_Game.party_size; i++) {

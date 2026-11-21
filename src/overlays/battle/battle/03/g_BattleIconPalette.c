@@ -15,7 +15,8 @@ char D_801D0C70[] = ":";
 
 char D_801D0C74[] = "%4d";
 
-s8 D_801D0C78[] = "%3d";
+/* The format that prints a battle number. */
+s8 g_BattleNumberFormat[] = "%3d";
 
 DamageSpread g_BattleDamageSpread = {
     {50, 50, 50, 50, 60, 60, 60, 70},

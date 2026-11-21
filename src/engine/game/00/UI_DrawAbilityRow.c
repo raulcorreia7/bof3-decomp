@@ -11,6 +11,6 @@ MATCH void UI_DrawAbilityRow(s32 x, s32 y, u8 shade, u8 element, u8* name, u8 co
     count = Game_ReadCommand(name) & BYTE_MASK;
     UI_DrawText((x + 10), y, shade, count, name);
     buffer = g_UiFormatBuffer;
-    TEXT_Format(buffer, D_80195F98, cost);
+    TEXT_Format(buffer, g_UiAbilityRowFormat, cost);
     UI_DrawGlyphString((x + 109), y2, shade, buffer);
 }

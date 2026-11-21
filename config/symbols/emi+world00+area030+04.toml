@@ -6,6 +6,7 @@ g_FishingLure = { addr = 0x80145026, source = "accessory id of the equipped lure
 g_FishingLureQty = { addr = 0x80145027, source = "number of equipped lures held" }
 g_FishingRod = { addr = 0x80145028, source = "accessory id of the equipped rod; its row is the 0x0A-byte entry of the rod table that g_FishingRodRow points at" }
 jtbl_801D0C1C = { addr = 0x801D0C1C, type = "Callback", source = "The switch table of func_801DECDC: the jump targets of its jr dispatch." }
+g_FishingCatchRowFormat = { addr = 0x801D0C38, source = "The %3d format Fishing_DrawCatchRow prints the count and score with." }
 g_FishingRankIcons = { addr = 0x801D0C3C, source = "13 rank rows (Novice through THE FISH) that Fishing_DrawRank indexes by rank: icon id, x offset and the two plus-mark flags" }
 Fishing_DrawHud = { addr = 0x801D159C, type = "func", source = "draws the fishing HUD: the cast and line panel with the lure's distance from the shore in two digits (flashing at 50 or more while reeling) and the depth gauge" }
 Fishing_DrawIcon = { addr = 0x801D18CC, type = "func", source = "draws an 8x8 fishing icon sprite (SPRT_8) at the given position" }

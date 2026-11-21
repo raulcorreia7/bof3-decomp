@@ -960,7 +960,9 @@ extern s32          D_801459E8;
 /* Pointer to the active animation-stream bank (area, battle or battle magic). */
 /* D_801459F0 */
 extern volatile u32 g_Scripts;
-extern u8           D_80145A00;
+/* Count of queued VRAM transfers. */
+/* D_80145A00 */
+extern u8           g_GfxTransferCount;
 extern s32          D_80145A04;
 extern u8           D_80146229;
 extern u16          D_8014622A;

@@ -14,7 +14,7 @@ MATCH void GFX_UpdateTransferQueue(void) {
     s32  i;
 
     i = 0;
-    if (D_80145A00 != 0) {
+    if (g_GfxTransferCount != 0) {
         table1 = D_80145A54;
         table2 = &D_80145A54[20];
         do {
@@ -32,7 +32,7 @@ MATCH void GFX_UpdateTransferQueue(void) {
                 LoadImage(&rect, (u_long*)(record + 2));
             }
             i++;
-        } while ((u8)i < D_80145A00);
+        } while ((u8)i < g_GfxTransferCount);
     }
-    D_80145A00 = 0;
+    g_GfxTransferCount = 0;
 }

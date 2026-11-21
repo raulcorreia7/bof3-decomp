@@ -6,7 +6,7 @@
 #include "func_801F2C78.c"
 #include "func_801F2CA8.c"
 #include "func_801F2CEC.c"
-#include "func_801F2D30.c"
+#include "Area_EnterWyndiaTeleporter.c"
 #include "overlays/area/shared/Actor_RunAreaStep.h"
 #include "func_801F2D90.c"
 #include "func_801F2E08.c"

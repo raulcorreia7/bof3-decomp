@@ -54,14 +54,14 @@ MATCH void Fishing_DrawCatchRow(s32 item, s32 count, s32 column) {
     UI_DrawText(112, 69 - ((u8)column * 20), 0, 15, g_UiFormatBuffer);
 
     if ((item & BYTE_MASK) != GAME_NONE) {
-        TEXT_Format(g_UiFormatBuffer, D_801D0C38, count & BYTE_MASK);
+        TEXT_Format(g_UiFormatBuffer, g_FishingCatchRowFormat, count & BYTE_MASK);
         for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
             if (g_UiFormatBuffer[i] == ' ') {
                 g_UiFormatBuffer[i] = STRING_SPACE;
             }
         }
         UI_DrawText(47 - ((u8)column * 25), 115, 0, 3, g_UiFormatBuffer);
-        TEXT_Format(g_UiFormatBuffer, D_801D0C38, Fishing_CatchScore(item & BYTE_MASK, count & BYTE_MASK) & HALF_MASK);
+        TEXT_Format(g_UiFormatBuffer, g_FishingCatchRowFormat, Fishing_CatchScore(item & BYTE_MASK, count & BYTE_MASK) & HALF_MASK);
         for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
             if (g_UiFormatBuffer[i] == ' ') {
                 g_UiFormatBuffer[i] = STRING_SPACE;

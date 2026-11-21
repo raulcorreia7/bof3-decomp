@@ -25,7 +25,9 @@ jtbl_80195F24 = { addr = 0x80195F24, type = "Callback", source = "The switch tab
 g_FieldActionFadeSteps = { addr = 0x80195F44, source = "The fading field action's step table." }
 jtbl_80195F5C = { addr = 0x80195F5C, type = "Callback", source = "The switch table of FieldAction_RollFade: the jump targets of its jr dispatch." }
 jtbl_80195F7C = { addr = 0x80195F7C, type = "Callback", source = "The switch table of Item_PassesTest: the jump targets of its jr dispatch." }
+g_UiAbilityRowFormat = { addr = 0x80195F98, source = "The %2d format UI_DrawAbilityRow prints the cost with." }
 jtbl_80195F9C = { addr = 0x80195F9C, type = "Callback", source = "The switch table of func_801B0E44: the jump targets of its jr dispatch." }
+g_GameRewardZennyFormat = { addr = 0x80195FBC, source = "The %d format Game_RewardZenny prints the amount with." }
 jtbl_80195FC0 = { addr = 0x80195FC0, type = "Callback", source = "The switch table of func_801BC4D0: the jump targets of its jr dispatch." }
 s_FairyConstructionThresholds = { addr = 0x80195FE0, source = "Row of s8 thresholds func_801C2018 indexes by bit_index - 0xF6 to decide when the fairy village construction stage is reached." }
 Actor_FindFreeSpawned = { addr = 0x8019601C, type = "func", source = "Returns the index of the first g_SpawnedActors entry whose header.flags is 0, or 0xFF when all ACTOR_SLOT_COUNT are in use (the other array is searched by Actor_FindFreeField)." }
@@ -36,13 +38,13 @@ Actor_Create = { addr = 0x8019615C, type = "func", source = "Claims a free g_Spa
 GFX_AllocPaletteFade = { addr = 0x8019651C, type = "func", source = "Claims the first free of the 32 g_PaletteFades entries for a target, fills its red, green and blue offsets and table index from the target, marks the palette cells it fades and returns its index, or 0xFF when all are active." }
 GFX_FreePaletteFade = { addr = 0x80196670, type = "func", source = "Releases one g_PaletteFades entry: frees its palette cells and restores the saved byte of its target." }
 GFX_FreePaletteFadeTarget = { addr = 0x80196718, type = "func", source = "Releases every g_PaletteFades entry whose target is the given target." }
-GFX_MarkPaletteCells = { addr = 0x80196784, type = "func", source = "Marks the D_80145D54 palette cells a fade owns for a palette kind and a value, so no other fade uses them." }
-GFX_FindFreePaletteCell = { addr = 0x801968BC, type = "func", source = "Returns the index of the first free palette cell run of D_80145D54 for the requested palette kind, or 0xFF; records its row and column for GFX_MarkPaletteCells, which claims it." }
-GFX_FindPaletteCell = { addr = 0x80196B20, type = "func", source = "Returns the index of the palette cell of D_80145D54 that holds the given value." }
+GFX_MarkPaletteCells = { addr = 0x80196784, type = "func", source = "Marks the g_PaletteCells palette cells a fade owns for a palette kind and a value, so no other fade uses them." }
+GFX_FindFreePaletteCell = { addr = 0x801968BC, type = "func", source = "Returns the index of the first free palette cell run of g_PaletteCells for the requested palette kind, or 0xFF; records its row and column for GFX_MarkPaletteCells, which claims it." }
+GFX_FindPaletteCell = { addr = 0x80196B20, type = "func", source = "Returns the index of the palette cell of g_PaletteCells that holds the given value." }
 GFX_UploadPaletteRows = { addr = 0x80196B9C, type = "func", source = "Copies the palette rows of a PaletteFade entry into g_GraphicsPaletteDst, with the colour count, divisor and stride read from the s_PaletteFadeColorCounts, s_PaletteFadeRowDivisors and s_PaletteFadeStrides rows." }
-GFX_UpdatePaletteAnimations = { addr = 0x80196C8C, type = "func", source = "Steps every active palette animation slot of D_80145D94 through GFX_StepPaletteAnimation." }
-GFX_StartPaletteAnimation = { addr = 0x80196CF0, type = "func", source = "Claims a free palette animation slot of D_80145D94 for an owner and its source colour table." }
-GFX_StepPaletteAnimation = { addr = 0x80196D84, type = "func", source = "Advances the animation entry of one D_80145D94 palette slot and copies its colours through GFX_CopyPaletteAnimationColors." }
+GFX_UpdatePaletteAnimations = { addr = 0x80196C8C, type = "func", source = "Steps every active palette animation slot of g_PaletteAnimations through GFX_StepPaletteAnimation." }
+GFX_StartPaletteAnimation = { addr = 0x80196CF0, type = "func", source = "Claims a free palette animation slot of g_PaletteAnimations for an owner and its source colour table." }
+GFX_StepPaletteAnimation = { addr = 0x80196D84, type = "func", source = "Advances the animation entry of one g_PaletteAnimations palette slot and copies its colours through GFX_CopyPaletteAnimationColors." }
 GFX_CopyPaletteAnimationColors = { addr = 0x80196E74, type = "func", source = "Copies the colours of one palette animation entry into g_GraphicsPaletteDst, with the divisor and stride read from s_PaletteSlotDivisors and s_PaletteSlotStrides, and sets g_GfxPalettePending." }
 Game_RunCampMenu = { addr = 0x80196F78, type = "func", source = "Thread body that never returns: waits a frame, runs the g_GameCampMenuLoad handler of the current step, then Menu_UpdatePanelTasks." }
 Game_LoadCampMenu = { addr = 0x80196FFC, type = "func", source = "Camp menu step 0: loads the menu overlay slot 0x268, resets the palette and advances the camp menu step." }

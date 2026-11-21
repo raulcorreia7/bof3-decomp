@@ -7,7 +7,7 @@ MATCH u8 GFX_FindPaletteCell(u8 value) {
 
     for (row = 0u; row < 4u; row++) {
         column = 0u;
-        entry  = D_80145D54[row];
+        entry  = g_PaletteCells[row];
         do {
             if (entry[column] == value) {
                 ((u8*)&g_ScratchPad)[0] = row;

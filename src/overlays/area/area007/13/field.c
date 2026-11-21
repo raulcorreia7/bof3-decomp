@@ -6,7 +6,7 @@
 #include "func_801F2C44.c"
 #include "func_801F2C64.c"
 #include "func_801F2C84.c"
-#include "func_801F2EFC.c"
+#include "Area_StopSequence.c"
 #include "overlays/area/shared/Area_SubCameraOffsetY10.h"
 #include "overlays/area/shared/Area_AddCameraOffsetY10.h"
 #include "overlays/area/shared/Area_ResetCameraOffsetY.h"
