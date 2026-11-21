@@ -11,7 +11,7 @@ MATCH void func_8019C954(void) {
     record               = (Actor*)&g_SpawnedActors[index];
     g_Task->unk_2C       = record->unk_2C;
     g_Task->clut_select  = 0x7B;
-    g_Task->palette_kind = PALETTE_TYPE_CELLS_2;
+    g_Task->palette_8bit = PALETTE_TYPE_CELLS_2;
     g_Task->sheet_page   = 0x1D;
     g_Task->sheet_row    = 0;
     g_Task->unk_4C       = record->unk_4C;

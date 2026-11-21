@@ -47,7 +47,7 @@ NON_MATCHING void Party_SwapBattlerRows(s32 slot_a, s32 slot_b, s32 skip_state) 
     val_b                                                               = FIELD(volatile u8, &g_Game.members[0].u.turn.command.target, off_a);
     FIELD(volatile u8, &g_Game.members[0].u.turn.command.target, off_a) = FIELD(volatile u8, &g_Game.members[0].u.turn.command.target, off_b);
     FIELD(volatile u8, &g_Game.members[0].u.turn.command.target, off_b) = val_b;
-    FIELD(volatile u8, &g_Game.members[0].script_record, off_a)         = 0xFF;
+    FIELD(volatile u8, &g_Game.members[0].unk_4B, off_a)                = 0xFF;
     FIELD(volatile u8, &g_Game.members[0].script_record, off_b)         = 0xFF;
 }
 #else

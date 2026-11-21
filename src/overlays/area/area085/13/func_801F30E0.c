@@ -22,7 +22,7 @@ NON_MATCHING void func_801F30E0(void) {
     g_Actors[g_Task->unk_04].header.flags = 1;
     work                                  = g_Task;
     if (work->param.unk_0B != 0) {
-        selector = g_Game.members[0].script_record;
+        selector = g_Game.members[0].unk_4B;
     } else {
         selector = g_Actors[2].script_record;
     }

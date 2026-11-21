@@ -74,7 +74,7 @@ MATCH void Area_DrawObjectSprite(void) {
                 clip_y = 0;
             }
             page_offset = 0;
-            if (g_Task->palette_kind != PALETTE_TYPE_CELL) {
+            if (g_Task->palette_8bit != PALETTE_TYPE_CELL) {
                 page_offset = -1;
                 if (cell->u >= 0x28) {
                     page_offset = cell->u >= 0xA1;
@@ -142,7 +142,7 @@ MATCH void Area_DrawObjectSprite(void) {
             tint        = g_Task->tint.bytes.rgb.b - 0x80;
             prim->b0    = tint;
             /* The page is assigned inside the macro: retail computes it once in each branch. */
-            tpage       = getTPage(g_Task->palette_kind ? 1 : 0, g_Task->tint.bytes.flags, (page % 16) << 6, ((page = g_Task->sheet_page + page_offset) / 16) << 8);
+            tpage       = getTPage(g_Task->palette_8bit ? 1 : 0, g_Task->tint.bytes.flags, (page % 16) << 6, ((page = g_Task->sheet_page + page_offset) / 16) << 8);
             prim->tpage = tpage;
             prim->clut  = clut;
             SetSemiTrans(prim, (g_Task->header.flags & ACTOR_FLAG_SEMI_TRANSPARENT) != 0);

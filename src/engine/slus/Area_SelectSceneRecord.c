@@ -30,7 +30,7 @@ MATCH bool Area_SelectSceneRecord(s32 wanted_id) {
                 g_Task->sheet_row    = D_801459F4[i * 8 + 5];
                 g_Task->clut_select  = *(u16*)(D_801459F4 + i * 8 + 2);
                 palette_offset       = id * 2;
-                g_Task->palette_kind = D_801459F4[i * 8 + 6];
+                g_Task->palette_8bit = D_801459F4[i * 8 + 6];
                 g_Task->unk_2C       = D_801459F4[i * 8 + 7];
                 g_Task->voice_flags.raw &= mask;
                 /* FAKE: non-const byte view of the flag table; a const read lets the address loads fold. */

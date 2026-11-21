@@ -9,7 +9,7 @@ MATCH void Area_BuildClut(u16* dst) {
     u32 sel;
 
     base = ((g_Task->active_flags & 0x4) != 0) ? STAGE_PALETTE_Y + 16 : STAGE_PALETTE_Y;
-    switch (g_Task->palette_kind) {
+    switch (g_Task->palette_8bit) {
         case PALETTE_TYPE_CELL:
             sel  = g_Task->clut_select;
             *dst = (((base + (sel >> 4)) << 6) | (sel & 0xF));

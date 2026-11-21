@@ -415,7 +415,7 @@ NON_MATCHING void func_801F05FC(void) {
     work->unk_48        = 2;
     work->scale.x       = 0x18000;
     work->scale.y       = 0x28000;
-    g_Task->clut_select = g_BattleEffectBattler->clut_select;
+    g_Task->clut_select = g_BattleEffectBattler->unk_27;
     SND_QueueSelectionSE(0x100);
     g_Task->unk_09 = 0x20;
     g_Task->header.step += 1;

@@ -133,12 +133,12 @@ NON_MATCHING void func_801EF134(void) {
 
     g_Task->unk_14             = -0x20;
     g_Task->unk_20             = -1;
-    g_Task->sheet_page         = 0x1D;
+    g_Task->unk_25             = 0x1D;
     g_Task->pos.z.part.integer = (u16)g_Task->pos.z.part.integer + 0x600;
-    g_Task->sheet_row          = 0;
+    g_Task->unk_26             = 0;
     g_Task->unk_48             = 1;
-    g_Task->clut_select        = 0xA0;
-    g_Task->palette_kind       = 0;
+    g_Task->unk_27             = 0xA0;
+    g_Task->unk_28             = 0;
     g_Task->unk_24             = 4;
     g_Task->unk_5D             = 0;
     g_Task->unk_5E             = 0;
