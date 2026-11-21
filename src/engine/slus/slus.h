@@ -702,7 +702,7 @@ extern u32                         g_SndBankSpuAddress[3][7];
 extern u32                         g_SndBankHeaderSize[3][7];
 /* D_801823F0 */
 extern u32                         g_SndBankSequenceSize[3][7];
-extern DiscLba                     g_EmiSlotLbas[];
+extern DiscLba                     g_EmiSlotLbas[EMI_SLOT_COUNT + 1];
 /* D_80183230 */
 extern u32                         g_XAStreamSlots[3];
 /* D_8018323C */
